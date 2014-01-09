@@ -14469,23 +14469,20 @@ msgstr ""
 msgid ""
 "You are now a registered user on %s, the online development environment for "
 "Open Source projects."
-msgstr ""
+msgstr "Сега сте регистриран потребител на %s, online средата за разработване на проекти с Отворен Код."
 
 #: www/account/first.php:33
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "As a registered user, you can participate fully in the activities on the "
 "site. You may now post messages to the project message forums, post bugs for "
 "software in %s, sign on as a project developer, or even start your own "
 "project."
 msgstr ""
-"<p>Сега сте регистриран потребител на %1$s, online средата за разработване "
-"на проекти с Отворен Код.</p><p>Като регистриран потребител вие можете да "
-"участвате във всички активности на сайта. Можете да изпращате съобщения във "
-"форумите на проектите, да изпращате бъгове за софтура в %1$s, да се "
-"записвате като разработчик по проект, и дори да създадете свои собствени "
-"проекти.</p><p>Приятна работа със сайта, и ви молим за препоръки по това как "
-"можем да подобрим %1$s.</p><p>--екипът на %1$s.</p>"
+"Като регистриран потребител вие можете да участвате във всички активности на "
+"сайта. Можете да изпращате съобщения във форумите на проектите, да изпращате "
+"бъгове за софтура в %s, да се записвате като разработчик по проект, и дори "
+"да създадете свои собствени проекти."
 
 #: www/account/index.php:101 www/admin/groupedit.php:74
 #: www/admin/useredit.php:110
@@ -18978,25 +18975,28 @@ msgstr "Изберете обява за видите по-подробно оп
 msgid ""
 "The %s Project Help Wanted board is for non-commercial, project volunteer "
 "openings. Commercial use is prohibited."
-msgstr ""
+msgstr "Таблото за обяви на %s е за некомерсиално ползване."
 
 #: www/people/index.php:65
 msgid ""
 "Project listings remain live for two weeks, or until closed by the poster, "
 "whichever comes first. (Project administrators may always re-post expired "
 "openings.)"
-msgstr ""
+msgstr "Максималното време на престой на обява е две седмици. Потребителят, "
+"който я е публикувал може да я премахне преждевременно. (Администраторите "
+"на проекти могат винаги да публикуват отново изтекли обяви.)"
 
 #: www/people/index.php:69
 msgid ""
 "Browse through the category menu to find projects looking for your help."
-msgstr ""
+msgstr "През списъка от категории можете да стигнете до проекти, които се нуждаят от помощ."
 
 #: www/people/index.php:73
 msgid ""
 "If you're a project admin, log in and submit help wanted requests through "
 "your project administration page."
-msgstr ""
+msgstr "Ако сте администратор на проект, можете да публикувате обява "
+"от страницата за администриране на проекта."
 
 #: www/people/index.php:77
 msgid ""
@@ -22123,22 +22123,24 @@ msgstr "Нямате отворени задачи."
 
 #: www/survey/admin/index.php:58
 msgid "It's simple to create a survey."
-msgstr ""
+msgstr "Създаването на проучване става по следния начин."
 
 #: www/survey/admin/index.php:62
 msgid "Create questions and comments using the forms above."
-msgstr ""
+msgstr "Създайте въпросите и обясненията кум тях."
 
 #: www/survey/admin/index.php:65
 msgid ""
 "Create a survey, listing the questions in order (choose from <strong>your</"
 "strong> list of questions)."
-msgstr ""
+msgstr "Create a survey, listing the questions in "
+"order (choose from <strong>your</strong> list of questions)."
 
 #: www/survey/admin/index.php:68
 #, php-format
 msgid "Link to the survey using this format: %s where XX is the survey number"
-msgstr ""
+msgstr "Проучването ще може да се достъпи чрез следния URL: %s, където XX е "
+"идентификатора на проучването"
 
 #: www/survey/admin/index.php:73
 #, php-format
@@ -23713,24 +23715,6 @@ msgstr ""
 #~ msgid "Project: %1$s"
 #~ msgstr "Общо за целия проект"
 
-#~ msgid ""
-#~ "<p>The %1$s Project Help Wanted board is for non-commercial, project "
-#~ "volunteer openings. Commercial use is prohibited.</p><p>Project listings "
-#~ "remain live for two weeks, or until closed by the poster, whichever comes "
-#~ "first. (Project administrators may always re-post expired openings.)</"
-#~ "p><p>Browse through the category menu to find projects looking for your "
-#~ "help.</p><p>If you're a project admin, log in and submit help wanted "
-#~ "requests through your project administration page.</p><p>To suggest new "
-#~ "job categories, submit a request via the support manager.</p>"
-#~ msgstr ""
-#~ "<p>Таблото за обяви на %1$s е за некомерсиално ползване.</"
-#~ "p><p>Максималното време на престой на обява е две седмици. Потребителят, "
-#~ "който я е публикувал може да я премахне преждевременно. (Администраторите "
-#~ "на проекти могат винаги да публикуват отново изтекли обяви.)</p><p>През "
-#~ "списъка от категории можете да стигнете до проекти, които се нуждаят от "
-#~ "помощ.</p><p>Ако сте администратор на проект, можете да публикувате обява "
-#~ "от страницата за администриране на проекта.</p>"
-
 #~ msgid "Descriptive Group Name"
 #~ msgstr "Име на проекта"
 
@@ -23843,18 +23827,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Use Task Manager"
 #~ msgstr "Управление на задачи"
-
-#~ msgid ""
-#~ "<p>It's simple to create a survey.<ol><li>Create questions and comments "
-#~ "using the forms above.</li><li>Create a survey, listing the questions in "
-#~ "order (choose from <strong>your</strong> list of questions).</li><li>Link "
-#~ "to the survey using this format: %1$s where XX is the survey number"
-#~ msgstr ""
-#~ "<p>Създаването на проучване става по следния начин:<ol><li>Създайте "
-#~ "въпросите и обясненията кум тях.</li><li>Създайте проучване, като "
-#~ "подредите въпросите от вашия списък в желания ред.</li></ol><br /"
-#~ "><p>Проучването ще може да се достъпи чрез следния URL: %1$s, където XX е "
-#~ "идентификатора на проучването"
 
 #, fuzzy
 #~ msgid "Group name is already exists"

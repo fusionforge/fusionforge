@@ -15132,14 +15132,13 @@ msgid "You have registered the %1$s account on %2$s."
 msgstr ""
 
 #: www/account/register.php:118
-#, fuzzy
 msgid ""
 "A confirmation email is being sent to verify the submitted email address. "
 "Visiting the link sent in this email will activate the account."
 msgstr ""
-"<p>Congratulazioni. Ti sei registrato su %1$s.</p><p> Ti verrà inviata una "
+"Ti verrà inviata una "
 "email di conferma per verificare il tuo indirizzo email. Visita il link "
-"indicato nella email per attivare il tuo account.</p>"
+"indicato nella email per attivare il tuo account."
 
 #: www/account/register.php:121
 #, php-format

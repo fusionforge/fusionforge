@@ -4252,22 +4252,22 @@ msgstr "无法增加数据库分类"
 #: common/include/SCMPlugin.class.php:145
 #, fuzzy
 msgid "Unimplemented SCM plugin."
-msgstr "<p>未实现的源代码控制（SCM）插件。</p>"
+msgstr "未实现的源代码控制（SCM）插件。"
 
 #: common/include/SCMPlugin.class.php:149
 #, fuzzy
 msgid "Instructions for anonymous access for unimplemented SCM plugin."
-msgstr "<p>匿名访问未实现的源代码控制（SCM）插件说明。</p>"
+msgstr "匿名访问未实现的源代码控制（SCM）插件说明。"
 
 #: common/include/SCMPlugin.class.php:153
 #, fuzzy
 msgid "Instructions for read-write access for unimplemented SCM plugin."
-msgstr "<p>读写访问未实现的源代码控制（SCM）插件说明。</p>"
+msgstr "读写访问未实现的源代码控制（SCM）插件说明。"
 
 #: common/include/SCMPlugin.class.php:157
 #, fuzzy
 msgid "Instructions for snapshot access for unimplemented SCM plugin."
-msgstr "<p>快照访问（snapshot access）未实现的源代码控制（SCM）插件说明。</p>"
+msgstr "快照访问（snapshot access）未实现的源代码控制（SCM）插件说明。"
 
 #: common/include/SCMPlugin.class.php:162
 #: common/include/SCMPlugin.class.php:176
@@ -4278,7 +4278,7 @@ msgstr "存储库浏览"
 #: common/include/SCMPlugin.class.php:178
 #, fuzzy
 msgid "Browsing the SCM tree is not yet implemented for this SCM plugin."
-msgstr "<p>此源代码控制（SCM）插件未实现浏览源代码树的功能。</p>"
+msgstr "此源代码控制（SCM）插件未实现浏览源代码树的功能。"
 
 #: common/include/SCMPlugin.class.php:168
 msgid "Not implemented yet"
@@ -4294,7 +4294,7 @@ msgstr "存储库使用统计"
 #: common/include/SCMPlugin.class.php:187
 #, fuzzy
 msgid "Not implemented for this SCM plugin yet."
-msgstr "<p>未对此源代码控制（SCM）插件实现。</p>"
+msgstr "未对此源代码控制（SCM）插件实现。"
 
 #: common/include/SCMPlugin.class.php:226
 msgid "Repository History"
@@ -14746,12 +14746,9 @@ msgid ""
 "the server in your ~/.ssh/authorized_keys file. This is done by a cron job, "
 "so it may not happen immediately.  Please allow for a one hour delay."
 msgstr ""
-"<p>为了避免必须每次输入您的 CVS/SSH 开发人员帐号的密码，您可以在这里上传您的"
+"为了避免必须每次输入您的 CVS/SSH 开发人员帐号的密码，您可以在这里上传您的"
 "公钥，而它们将被放置在 CVS 服务器中您的 ~/.ssh/authorized_keys 文件中。此文件"
-"不会立即更新，请在一个小时后才尝试登录。</p><p>为了产生这个公钥，执行这个程"
-"序 'ssh-keygen' (您可以使用protocol 1 或 2 两者其中之一)，这个 public key 将"
-"被放置在 '~/.ssh/identity.pub' (protocol 1) 与 '~/.ssh/id_dsa.pub' 或 '~/."
-"ssh/id_rsa.pub' (protocol 2)。关于公钥请阅读SSH说明书来获取更进一步信息。</p>"
+"不会立即更新，请在一个小时后才尝试登录。"
 
 #: www/account/editsshkeys.php:75
 msgid ""
@@ -15080,7 +15077,7 @@ msgid ""
 "A confirmation email is being sent to verify the submitted email address. "
 "Visiting the link sent in this email will activate the account."
 msgstr ""
-"<p>恭喜。您已经在 %1$s 上成功注册。 <p> 一封确认email已经发送到您的email信"
+"一封确认email已经发送到您的email信"
 "箱，以确保您email信箱的正确性。点击email中的链接就可以启动您的帐号。"
 
 #: www/account/register.php:121
@@ -15192,7 +15189,7 @@ msgid ""
 "In order to complete your registration, login now. Your account will then be "
 "activated for normal logins."
 msgstr ""
-"<p>为了完成注册，请现在就登录。然后您的帐号就会启动成正常的登录模式。</p>"
+"为了完成注册，请现在就登录。然后您的帐号就会启动成正常的登录模式。"
 
 #: www/activity/index.php:102
 msgid "Forum Post"
@@ -19641,7 +19638,7 @@ msgid ""
 "the general public."
 msgstr ""
 "您可以通过这个表单更改一个现有的任务。请注意隐藏项目仍然能够被项目成员查看"
-"到，虽然不是被完全公开。<p>"
+"到，虽然不是被完全公开。"
 
 #: www/pm/admin/index.php:323 www/pm/index.php:99
 msgid "Subproject Name"
@@ -21075,8 +21072,7 @@ msgid ""
 "If you would like to contribute to this project by becoming a member, "
 "contact one of the project admins, designated in bold text below."
 msgstr ""
-"<p>如果您希望加入这个项目，请联络任何一个管理员，也就是下面呈现粗体的成员"
-"<br><br>"
+"如果您希望加入这个项目，请联络任何一个管理员，也就是下面呈现粗体的成员"
 
 #: www/project/memberlist.php:49
 #, fuzzy
@@ -21311,9 +21307,9 @@ msgid ""
 "You can choose among different SCM for your project, but just one (or none "
 "at all). Please select the SCM system you want to use."
 msgstr ""
-"<h3>5. SCM</h3><p>您为您的项目能在不同的SCM之中选择，但是只能选择一个。请选择"
+"您为您的项目能在不同的SCM之中选择，但是只能选择一个。请选择"
 "您要使用的SCM系统。</p> <p><strong>一旦项目被注册你将不能够改变它！</"
-"strong></p>"
+"strong>"
 
 #: www/register/index.php:249 www/register/index.php:251
 #, fuzzy

@@ -14781,23 +14781,18 @@ msgid ""
 msgstr ""
 
 #: www/account/first.php:33
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "As a registered user, you can participate fully in the activities on the "
 "site. You may now post messages to the project message forums, post bugs for "
 "software in %s, sign on as a project developer, or even start your own "
 "project."
 msgstr ""
-"<p>Orain %1$s -ean erregistratutako erabiltzailea zara, kode irekiko \"on "
-"line\" proiektuak garatzeko webgunekoa.</p><p>Erregistratutako erabiltzaile "
-"bezela, atari honetako ekintza guztietan parte hartzeko aukera duzu. "
-"Gainera, orain mezuak bidaltzeko baimena daukazu proiektuen eztabaida "
-"guneetara, kode akatsak bidali ditzakezu %1$s -era, proiektu garatzaile "
-"bezela erregistratu, edota zure intereseko proiektua ere sustatu dezakezu. </"
-"p><p>Ondorengo lt;a href=\"/docs/site/\"><strong>dokumentazioa</strong></a> "
-"irakurtzeko beta hartu behar duzu %1$s.</p><p> egitasmoari etekina "
-"ateratzeko. Webgune honetaz goza ezazu, eta mesedez hobekuntzak egiteko "
-"azalpenak bidali iezazkiguzu. %1$s.</p><p>-- %1$s.</p> lantaldea"
+"Erregistratutako erabiltzaile bezela, atari honetako ekintza guztietan parte "
+"hartzeko aukera duzu. Gainera, orain mezuak bidaltzeko baimena daukazu "
+"proiektuen eztabaida guneetara, kode akatsak bidali ditzakezu %s -era, "
+"proiektu garatzaile bezela erregistratu, edota zure intereseko proiektua ere "
+"sustatu dezakezu."
 
 #: www/account/index.php:101 www/admin/groupedit.php:74
 #: www/admin/useredit.php:110
@@ -15076,14 +15071,13 @@ msgid "You have registered the %1$s account on %2$s."
 msgstr ""
 
 #: www/account/register.php:118
-#, fuzzy
 msgid ""
 "A confirmation email is being sent to verify the submitted email address. "
 "Visiting the link sent in this email will activate the account."
 msgstr ""
-"<p>Zorionak.%1$s.</p><p>Ahora recibirá un correo de confirmación para "
+"Ahora recibirá un correo de confirmación para "
 "verificar su cuenta de correo. Visitando el enlace que le hemos enviado le "
-"activará la cuenta.</p>"
+"activará la cuenta."
 
 #: www/account/register.php:121
 #, php-format
@@ -24027,15 +24021,6 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #, fuzzy
 #~ msgid "%1$s to %2$s"
 #~ msgstr "Mesedez %1$s sartu %2$s -ra"
-
-#, fuzzy
-#~ msgid ""
-#~ "If you would like to contribute to this project by becoming a developer, "
-#~ "contact one of the project admins, designated in bold text below."
-#~ msgstr ""
-#~ "<p>Proiektu honetan lagundu nahi baduzu eta lankidea izan, proiektuaren "
-#~ "administrari batekin harremanetan jarri, berako testuan letra lodiz ageri "
-#~ "dira.</p><br /><br />"
 
 #~ msgid "Error: That snippet doesn't exist."
 #~ msgstr "Akatsa - Ebakin hau ez da existitzen."

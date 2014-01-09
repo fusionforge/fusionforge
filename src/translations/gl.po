@@ -14091,9 +14091,8 @@ msgid ""
 "You have a personal repository for this project, accessible through SSH with "
 "the following method. Enter your site password when prompted."
 msgstr ""
-"<p><strong>Acceso para desenvolvedores ao Subversion mediante DAV</strong></"
-"p><p> Só os desenvolvedores do proxecto poden acceder á árbore SVN por este "
-"método. Introduza o seu contrasinal cando se lle solicite.</p>"
+"Só os desenvolvedores do proxecto poden acceder á árbore SVN por este "
+"método. Introduza o seu contrasinal cando se lle solicite."
 
 #: plugins/scmgit/common/GitPlugin.class.php:265
 msgid "Request a personal repository"
@@ -14237,13 +14236,10 @@ msgid "Use Mercurial as Source Code Management tool. Offer DAV or SSH access."
 msgstr ""
 
 #: plugins/scmhg/common/HgPlugin.class.php:61
-#, fuzzy
 msgid ""
 "Another short Introduction can be found at <a href=\"http://hginit.com/"
 "\">http://hginit.com/</a>"
 msgstr ""
-"<p>Hai dispoñíbel documentación de Subversion (ás veces chámaselle \"SVN\") "
-"<a href=\"http://svnbook.red-bean.com/\">aquí</a>.</p>"
 
 #: plugins/scmhg/common/HgPlugin.class.php:67
 #, fuzzy
@@ -14256,9 +14252,9 @@ msgid ""
 "This project's Mercurial repository can be checked out through anonymous "
 "access with the following command:"
 msgstr ""
-"<p><strong>Acceso anónimo vía Subversion</strong></p><p> Pódese descargar o "
+"Pódese descargar o "
 "repositorio SVN deste proxecto a través de acceso anónimo coas seguintes "
-"ordes.</p>"
+"ordes."
 
 #: plugins/scmhg/common/HgPlugin.class.php:77
 #: plugins/scmsvn/common/SVNPlugin.class.php:120
@@ -14271,13 +14267,8 @@ msgid ""
 msgstr ""
 
 #: plugins/scmhg/common/HgPlugin.class.php:97
-#, fuzzy
 msgid "Read/write access to Mercurial tree is allowed for authenticated users."
 msgstr ""
-"<p><strong>Acceso para desenvolvedores ao Subversion mediante SSH</strong></"
-"p><p> Só os desenvolvedores do proxecto poden acceder á árbore SVN por este "
-"método. Ten que ter instalado SSH na máquina cliente. Introduza o seu "
-"contrasinal cando se lle solicite.</p>"
 
 #: plugins/scmhg/common/HgPlugin.class.php:109
 #: plugins/scmhg/common/HgPlugin.class.php:138
@@ -14887,16 +14878,11 @@ msgid ""
 "the server in your ~/.ssh/authorized_keys file. This is done by a cron job, "
 "so it may not happen immediately.  Please allow for a one hour delay."
 msgstr ""
-"<p>Para evitar ter que escribir o seu contrasinal cada vez que accede coa "
+"Para evitar ter que escribir o seu contrasinal cada vez que accede coa "
 "súa conta de desenvolvedor de CVS/SSH, pode cargar a(s) súa(s) chave(s) "
 "pública(s) aquí e colocaranse no servidor de CVS no seu ficheiro ~/.ssh/"
 "authorized_keys. Isto realízase cunha tarefa programada, polo que non "
-"ocorrerá de inmediato, podendo demorar ata unha hora.</p><p>Para xerar unha "
-"chave pública, ten que executar o programa 'ssh-keygen' (pode empregar tanto "
-"o protocolo 1 como o 2). A chave pública colocarase en '~/.ssh/identity."
-"pub' (protocolo 1) e '~/.ssh/id_dsa.pub' ou '~/.ssh/id_rsa.pub' (protocolo "
-"2). Lea a documentación de ssh para unha obter máis información sobre o "
-"emprego das chaves.</p> "
+"ocorrerá de inmediato, podendo demorar ata unha hora."
 
 #: www/account/editsshkeys.php:75
 msgid ""
@@ -15247,9 +15233,9 @@ msgid ""
 "A confirmation email is being sent to verify the submitted email address. "
 "Visiting the link sent in this email will activate the account."
 msgstr ""
-"<p>Parabéns. Rexistrouse en %1$s. <p> Agora recibirá un correo de "
+"Agora recibirá un correo de "
 "confirmación para verificar o seu enderezo de correo. Visite a ligazón que "
-"se lle envía no correo para activar a súa conta. "
+"se lle envía no correo para activar a súa conta."
 
 #: www/account/register.php:121
 #, php-format
@@ -19406,10 +19392,8 @@ msgid ""
 "Now you can edit/change the list of skills attached to this posting. "
 "Developers will be able to match their skills with your requirements."
 msgstr ""
-"<p>Agora pode editar/cambiar a lista de habelencias anexa a esta mensaxe. Os "
+"Agora pode editar/cambiar a lista de habelencias anexa a esta mensaxe. Os "
 "desenvolvedores poderán comparar as súas habelencias cos seus requirimentos."
-"</p><p>Todas as publicacións péchanse automaticamente despois de dúas "
-"semanas.</p>"
 
 #: www/people/editjob.php:159
 msgid "All postings are automatically closed after two weeks."
@@ -19954,9 +19938,8 @@ msgstr "Non existe tal publicación para este proxecto."
 #, fuzzy
 msgid "You may add new Subprojects using the “Add a Subproject” link above."
 msgstr ""
-"<h2>Non se atoparon proxectos</h2><p>Non se atopou ningún para este grupo. "
-"Pode engadir novos proxectos usando a ligazón \"Engadir un proxecto\" de "
-"arriba.</p>"
+"Non se atopou ningún para este grupo. Pode engadir novos proxectos usando a "
+"ligazón “Engadir un proxecto” de arriba."
 
 #: www/pm/admin/index.php:435
 #, fuzzy
@@ -20562,8 +20545,8 @@ msgid ""
 "Note that same task can be assigned to several technicians. Such task will "
 "be counted for each of them."
 msgstr ""
-"<p>Teña en conta que a mesma tarefa pode estar asignada a varios técnicos. "
-"Esa tarefa contarase para cada un deles.</p>"
+"Teña en conta que a mesma tarefa pode estar asignada a varios técnicos. "
+"Esa tarefa contarase para cada un deles."
 
 #: www/pm/task.php:69
 #, fuzzy
@@ -23597,31 +23580,8 @@ msgstr "Non se introduciu un nome de usuario"
 #~ msgstr "Administración do rexistro "
 
 #, fuzzy
-#~ msgid ""
-#~ "Only project developers can access the Mercurial tree via this method. "
-#~ "Enter your site password when prompted."
-#~ msgstr ""
-#~ "<p><strong>Acceso para desenvolvedores ao Subversion mediante DAV</"
-#~ "strong></p><p> Só os desenvolvedores do proxecto poden acceder á árbore "
-#~ "SVN por este método. Introduza o seu contrasinal cando se lle solicite.</"
-#~ "p>"
-
-#, fuzzy
 #~ msgid "Substitute <em>developername</em> with the proper values."
 #~ msgstr "Substitúa <em>nome_do_desenvolvedor</em> co valor axeitado."
-
-#, fuzzy
-#~ msgid ""
-#~ "Only project developers can access the Mercurial tree via this method. "
-#~ "SSH must be installed on your client machine. Substitute "
-#~ "<em>developername</em> with the proper value. Enter your site password "
-#~ "when prompted."
-#~ msgstr ""
-#~ "<p><strong>Acceso para desenvolvedores ao Subversion mediante SSH</"
-#~ "strong></p><p> Só os desenvolvedores do proxecto poden acceder á árbore "
-#~ "SVN por este método. Ten que ter instalado SSH na máquina cliente. "
-#~ "Substitúa <em>nome_do_desenvolvedor</em> co valor axeitado. Introduza o "
-#~ "seu contrasinal cando se lle solicite.</p>"
 
 #~ msgid "Account Maintenance"
 #~ msgstr "Mantemento da conta "
@@ -25575,171 +25535,6 @@ msgstr "Non se introduciu un nome de usuario"
 
 #~ msgid "Displaying %1$s per page. Projects sorted by alphabetical order."
 #~ msgstr "Mostrando %1$s por páxina. Proxectos ordenados alfabeticamente."
-
-#, fuzzy
-#~ msgid ""
-#~ "Only project developers can access the Bazaar branches via this method. "
-#~ "Enter your site password when prompted."
-#~ msgstr ""
-#~ "<p><strong>Acceso para desenvolvedores ao Subversion mediante SSH</"
-#~ "strong></p><p> Só os desenvolvedores do proxecto poden acceder á árbore "
-#~ "SVN por este método. Ten que ter instalado SSH na máquina cliente. "
-#~ "Introduza o seu contrasinal cando se lle solicite.</p>"
-
-#, fuzzy
-#~ msgid ""
-#~ "Only project developers can access the Bazaar branches via this method. "
-#~ "Substitute "
-#~ msgstr ""
-#~ "<p><strong>Acceso por SSH a Bazaar para desenvolvedores</strong></p><p>Só "
-#~ "os desenvolvedores do proxecto poden acceder ás ramas de Bazaar por este "
-#~ "método. Ten que ter instalado SSH na máquina cliente. Substitúa "
-#~ "<em>nome_do_desenvolvedor</em> polos valores axeitados. Introduza o seu "
-#~ "contrasinal cando se lle solicite.</p>"
-
-#, fuzzy
-#~ msgid "Bazaar Repository Browser"
-#~ msgstr "Historial do repositorio"
-
-#, fuzzy
-#~ msgid ""
-#~ "Browsing the Bazaar tree gives you a view into the current status of this "
-#~ "project's code. You may also view the complete histories of any file in "
-#~ "the repository."
-#~ msgstr ""
-#~ "A navegación pola árbore de ClearCase permite unha ollada fantástica ao "
-#~ "estado actual do código do proxecto. Tamén pode ver o historial completo "
-#~ "de calquera ficheiro do repositorio."
-
-#, fuzzy
-#~ msgid "Browse Bazaar Repository"
-#~ msgstr "Navegar polo repositorio CVS"
-
-#~ msgid ""
-#~ "Browsing the ClearCase tree gives you a great view into the current "
-#~ "status of this project's code. You may also view the complete histories "
-#~ "of any file in the repository."
-#~ msgstr ""
-#~ "A navegación pola árbore de ClearCase permite unha ollada fantástica ao "
-#~ "estado actual do código do proxecto. Tamén pode ver o historial completo "
-#~ "de calquera ficheiro do repositorio."
-
-#~ msgid "<a href=\"%1$s\">Browse</a> CCase tree"
-#~ msgstr "<a href=\"%1$s\">Navegar</a> pola árbore de CCase"
-
-#, fuzzy
-#~ msgid ""
-#~ "<p><strong>Developer CPOLD Access via SSH</strong></p><p>Only project "
-#~ "developers can access the CPOLD tree via this method. SSH must be "
-#~ "installed on your client machine. Enter your site password when prompted."
-#~ "</p>"
-#~ msgstr ""
-#~ "<p><strong>Acceso para desenvolvedores ao Subversion mediante SSH</"
-#~ "strong></p><p> Só os desenvolvedores do proxecto poden acceder á árbore "
-#~ "SVN por este método. Ten que ter instalado SSH na máquina cliente. "
-#~ "Introduza o seu contrasinal cando se lle solicite.</p>"
-
-#, fuzzy
-#~ msgid ""
-#~ "<p><strong>Developer CPOLD Access via SSH</strong></p><p>Only project "
-#~ "developers can access the CPOLD tree via this method. SSH must be "
-#~ "installed on your client machine. Substitute <em>developername</em> with "
-#~ "the proper value. Enter your site password when prompted.</p>"
-#~ msgstr ""
-#~ "<p><strong>Acceso ao CVS mediante SSH</strong></p><p> Só os "
-#~ "desenvolvedores do proxecto poden acceder á árbore CVS por este método. "
-#~ "Ten que ter instalado SSH na máquina cliente. Substitúa "
-#~ "<em>nome_do_módulo</em> polo valor axeitado. Introduza o seu contrasinal "
-#~ "cando se lle solicite.</p>"
-
-#, fuzzy
-#~ msgid ""
-#~ "Only project developers can access the CVS tree via this method. SSH must "
-#~ "be installed on your client machine. Substitute <em>modulename</em> with "
-#~ "the proper values. Enter your site password when prompted."
-#~ msgstr ""
-#~ "<p><strong>Acceso ao CVS mediante SSH</strong></p><p> Só os "
-#~ "desenvolvedores do proxecto poden acceder á árbore CVS por este método. "
-#~ "Ten que ter instalado SSH na máquina cliente. Substitúa "
-#~ "<em>nome_do_módulo</em> polo valor axeitado. Introduza o seu contrasinal "
-#~ "cando se lle solicite.</p>"
-
-#, fuzzy
-#~ msgid ""
-#~ "Only project developers can access the CVS tree via this method. SSH must "
-#~ "be installed on your client machine. Substitute <em>modulename</em> and "
-#~ msgstr ""
-#~ "<p><strong>Acceso ao CVS mediante SSH</strong></p><p> Só os "
-#~ "desenvolvedores do proxecto poden acceder á árbore CVS por este método. "
-#~ "Ten que ter instalado SSH na máquina cliente. Substitúa "
-#~ "<em>nome_do_módulo</em> e <em>nome_do_desenvolvedor</em> polos valores "
-#~ "axeitados. Introduza o seu contrasinal cando se lle solicite.</p>"
-
-#, fuzzy
-#~ msgid "CVS Repository Browser"
-#~ msgstr "Repositorio de SCM "
-
-#~ msgid "Browse CVS Repository"
-#~ msgstr "Navegar polo repositorio CVS"
-
-#, fuzzy
-#~ msgid "Darcs Repository Browser"
-#~ msgstr "Historial do repositorio"
-
-#, fuzzy
-#~ msgid "Browse Darcs Repository "
-#~ msgstr "Navegar polo repositorio CVS"
-
-#, fuzzy
-#~ msgid "Repository name: "
-#~ msgstr "Historial do repositorio"
-
-#, fuzzy
-#~ msgid ""
-#~ "Only project developers can access the SVN tree via this method. SSH must "
-#~ "be installed on your client machine. Enter your site password when "
-#~ "prompted."
-#~ msgstr ""
-#~ "<p><strong>Acceso para desenvolvedores ao Subversion mediante SSH</"
-#~ "strong></p><p> Só os desenvolvedores do proxecto poden acceder á árbore "
-#~ "SVN por este método. Ten que ter instalado SSH na máquina cliente. "
-#~ "Introduza o seu contrasinal cando se lle solicite.</p>"
-
-#, fuzzy
-#~ msgid ""
-#~ "Only project developers can access the SVN tree via this method. SSH must "
-#~ "be installed on your client machine. Substitute <em>developername</em> "
-#~ msgstr ""
-#~ "<p><strong>Acceso para desenvolvedores ao Subversion mediante SSH</"
-#~ "strong></p><p> Só os desenvolvedores do proxecto poden acceder á árbore "
-#~ "SVN por este método. Ten que ter instalado SSH na máquina cliente. "
-#~ "Substitúa <em>nome_do_desenvolvedor</em> co valor axeitado. Introduza o "
-#~ "seu contrasinal cando se lle solicite.</p>"
-
-#, fuzzy
-#~ msgid "Only project developers can access the SVN tree via this method. "
-#~ msgstr ""
-#~ "<p><strong>Acceso para desenvolvedores ao Subversion mediante DAV</"
-#~ "strong></p><p> Só os desenvolvedores do proxecto poden acceder á árbore "
-#~ "SVN por este método. Substitúa <em>nome_do_desenvolvedor</em> co valor "
-#~ "axeitado. Introduza o seu contrasinal cando se lle solicite.</p>"
-
-#, fuzzy
-#~ msgid "Subversion Repository Browser"
-#~ msgstr "Navegar polo repositorio Subversion"
-
-#, fuzzy
-#~ msgid ""
-#~ "Browsing the Subversion tree gives you a view into the current status of "
-#~ "this project's code. You may also view the complete histories of any file "
-#~ "in the repository."
-#~ msgstr ""
-#~ "A navegación pola árbore de ClearCase permite unha ollada fantástica ao "
-#~ "estado actual do código do proxecto. Tamén pode ver o historial completo "
-#~ "de calquera ficheiro do repositorio."
-
-#~ msgid "Browse Subversion Repository"
-#~ msgstr "Navegar polo repositorio Subversion"
 
 #, fuzzy
 #~ msgid "Project:"

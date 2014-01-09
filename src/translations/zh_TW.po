@@ -14774,13 +14774,9 @@ msgid ""
 "the server in your ~/.ssh/authorized_keys file. This is done by a cron job, "
 "so it may not happen immediately.  Please allow for a one hour delay."
 msgstr ""
-"<p>為了避免必須每次輸入您的 CVS/SSH 開發人員帳號的密碼，您可以在這裏上傳您的 "
+"為了避免必須每次輸入您的 CVS/SSH 開發人員帳號的密碼，您可以在這裏上傳您的 "
 "public key(s)，而它們將被放置在 CVS 伺服器中您的 ~/.ssh/authorized_keys 檔案"
-"中。這將被安排在工作排程，所以它不會立即發生，請在一個小時後才嘗試登入。</"
-"p><p>為了產生這個 public key，執行這個程式 'ssh-keygen' (您可以使用protocol "
-"1 或 2 兩者其中之一)，這個 public key 將被放置在 '~/.ssh/identity."
-"pub' (protocol 1) 與 '~/.ssh/id_dsa.pub' 或 '~/.ssh/id_rsa.pub' (protocol "
-"2)。關於共用認證Keys請閱讀SSH說明書來獲取更進一步資訊。</p>"
+"中。這將被安排在工作排程，所以它不會立即發生，請在一個小時後才嘗試登入。"
 
 #: www/account/editsshkeys.php:75
 msgid ""
@@ -14829,7 +14825,7 @@ msgstr ""
 "p><p>做為一個註冊會員，您可以參與整個網站的所有活動。您可以在專案討論版上貼出"
 "新的消息，可以報告在 %1$s 當中軟體的Bug，可以申請成為某個專案的開發者，甚至建"
 "立一個您自己的專案。</p><p>享用這個網站，也請給我們一些回饋資訊，以便我們能共"
-"同使 %1$s 變得更好。</p><p>--%1$s 團隊。</p>"
+"同使 %1$s 變得更好。"
 
 #: www/account/index.php:101 www/admin/groupedit.php:74
 #: www/admin/useredit.php:110
@@ -15108,7 +15104,7 @@ msgid ""
 "A confirmation email is being sent to verify the submitted email address. "
 "Visiting the link sent in this email will activate the account."
 msgstr ""
-"<p>恭喜。您已經在 %1$s 上成功註冊。 <p> 一封確認email已經發送到您的email信"
+"一封確認email已經發送到您的email信"
 "箱，以確保您email信箱的正確性。點擊email中的連結就可以啟動您的帳號。"
 
 #: www/account/register.php:121
@@ -21096,8 +21092,7 @@ msgid ""
 "If you would like to contribute to this project by becoming a member, "
 "contact one of the project admins, designated in bold text below."
 msgstr ""
-"<p>如果您希望加入這個專案，請聯絡任何一個管理員，也就是下面呈現粗體的成員"
-"<br><br>"
+"如果您希望加入這個專案，請聯絡任何一個管理員，也就是下面呈現粗體的成員"
 
 #: www/project/memberlist.php:49
 #, fuzzy
@@ -21328,9 +21323,9 @@ msgid ""
 "You can choose among different SCM for your project, but just one (or none "
 "at all). Please select the SCM system you want to use."
 msgstr ""
-"<h3>5. 原始碼版本管理系統</h3><p>您可以選擇使用不同的原始碼版本管理系統，但是"
+"您可以選擇使用不同的原始碼版本管理系統，但是"
 "只能選擇一個。請選擇您要使用的原始碼版本管理系統。</p> <p><strong>一旦專案被"
-"註冊你將不能夠改變它！</strong></p>"
+"註冊你將不能夠改變它！</strong>"
 
 #: www/register/index.php:249 www/register/index.php:251
 #, fuzzy

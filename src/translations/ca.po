@@ -24160,15 +24160,6 @@ msgstr "Nom d'usuari"
 #~ msgstr "%1$s inici de sessió %2$s"
 
 #, fuzzy
-#~ msgid ""
-#~ "If you would like to contribute to this project by becoming a developer, "
-#~ "contact one of the project admins, designated in bold text below."
-#~ msgstr ""
-#~ "<p>Si us agradaria contribuir a aquest projecte convertint-vos en "
-#~ "desenvolupador, contacteu un dels administradors de projecte, designats "
-#~ "en negreta més avall.</p>"
-
-#, fuzzy
 #~ msgid "Error: That snippet doesn't exist."
 #~ msgstr "Error - Aquest fragment de codi no existeix."
 

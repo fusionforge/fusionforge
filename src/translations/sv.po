@@ -15024,7 +15024,7 @@ msgid ""
 "A confirmation email is being sent to verify the submitted email address. "
 "Visiting the link sent in this email will activate the account."
 msgstr ""
-"<p>Gratulerar. Du har registrerat dig på %1$s.  <p> Du får nu ett "
+"Du får nu ett "
 "bekräftelsebrev för att säkerställa att din e-postadress är riktig. Följ "
 "länken i detta e-postbrev för att bekräfta ditt nya konto."
 

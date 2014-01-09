@@ -14044,9 +14044,8 @@ msgid ""
 "You have a personal repository for this project, accessible through SSH with "
 "the following method. Enter your site password when prompted."
 msgstr ""
-"<p><strong>Subversion Entwicklerzugang über DAV</strong></"
-"p><p>Ausschliesslich Projektentwickler können mit dieser Methode auf den SVN "
-"- Baum zugreifen. Geben Sie nach der Aufforderung Ihr Site-Passwort ein.</p>"
+"Ausschliesslich Projektentwickler können mit dieser Methode auf den SVN "
+"- Baum zugreifen. Geben Sie nach der Aufforderung Ihr Site-Passwort ein."
 
 #: plugins/scmgit/common/GitPlugin.class.php:265
 msgid "Request a personal repository"

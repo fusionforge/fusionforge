@@ -14797,22 +14797,17 @@ msgid "Add a new ssh key"
 msgstr "Voeg een nieuwe taak toe"
 
 #: www/account/editsshkeys.php:74
-#, fuzzy
 msgid ""
 "To avoid having to type your password every time for your CVS/SSH developer "
 "account, you may upload your public key(s) here and they will be placed on "
 "the server in your ~/.ssh/authorized_keys file. This is done by a cron job, "
 "so it may not happen immediately.  Please allow for a one hour delay."
 msgstr ""
-"<p>Om te voorkomen dat je iedere keer je wachtwoord moet intypen voor je CVS/"
+"Om te voorkomen dat je iedere keer je wachtwoord moet intypen voor je CVS/"
 "SSH ontwikkelaars account, kun je hier je public key(s) uploaden zodat ze  "
 "op de CVS server in je ~/.ssh/authorized_keys file geplaatst worden. Dit "
 "wordt gedaan door een cron job, dus het gebeurt waarschijnlijk niet meteen.  "
-"Wacht in ieder geval een uur.</p><p>Om een public key te genereren kun je "
-"het programma 'ssh-keygen' gebruiken (je kunt zowel protocol 1 als 2 "
-"gebruiken). De public key zal worden geplaatst in '~/.ssh/identity."
-"pub' (protocol 1) en '~/.ssh/id_dsa.pub' of '~/.ssh/id_rsa.pub' (protocol "
-"2). Lees de ssh documentatie voor verdere informatie over key sharing.</p>"
+"Wacht in ieder geval een uur."
 
 #: www/account/editsshkeys.php:75
 msgid ""
@@ -15147,12 +15142,11 @@ msgid "You have registered the %1$s account on %2$s."
 msgstr ""
 
 #: www/account/register.php:118
-#, fuzzy
 msgid ""
 "A confirmation email is being sent to verify the submitted email address. "
 "Visiting the link sent in this email will activate the account."
 msgstr ""
-"<p>Gefeliciteerd. Je bent met succes geregistreerd op %1$s.  <p> Ter "
+"Ter "
 "verificatie van het e-mail adres wordt er nu een bevestiging per e-mail "
 "opgestuurd. Klik op de link in de e-mail om je account te activeren."
 
@@ -21471,15 +21465,13 @@ msgid "search engines throughout the site."
 msgstr ""
 
 #: www/register/index.php:246
-#, fuzzy
 msgid ""
 "You can choose among different SCM for your project, but just one (or none "
 "at all). Please select the SCM system you want to use."
 msgstr ""
-"<h3>5. SCM</h3><p>Je kunt uit verschillende SCM vormen voor je project "
+"Je kunt uit verschillende SCM vormen voor je project "
 "kiezen, maar je mag er niet meer dan één selecteren. Kies dus zorgvuldig het "
-"SCM systeem dat je wilt gebruiken.</p> <p><strong>Je kunt je keuze niet meer "
-"wijzigen nadat je project is aangemeld!</strong></p>"
+"SCM systeem dat je wilt gebruiken."
 
 #: www/register/index.php:249 www/register/index.php:251
 #, fuzzy

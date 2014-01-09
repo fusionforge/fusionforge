@@ -12934,9 +12934,9 @@ msgid ""
 "This project's Bazaar repository can be checked out through anonymous access "
 "with the following command."
 msgstr ""
-"<p><strong>Anonimowy dostęp do Subversion</strong></p><p>Zawartość "
+"Zawartość "
 "repozytorium SVN tego projektu można pobrać poprzez anonimowy dostęp za "
-"pomocą następującego polecenia.</p>"
+"pomocą następującego polecenia."
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:101
 #: plugins/scmbzr/common/BzrPlugin.class.php:113
@@ -13124,9 +13124,6 @@ msgstr ""
 #, fuzzy, php-format
 msgid "This project's CPOLD repository can be accessep anonymously at %s."
 msgstr ""
-"<p><strong>Anonimowy dostęp do Subversion</strong></p><p>Zawartość "
-"repozytorium SVN tego projektu można pobrać poprzez anonimowy dostęp za "
-"pomocą następującego polecenia.</p>"
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:80
 msgid "Anonymous CVS Access"
@@ -13210,9 +13207,6 @@ msgid ""
 "This project's Darcs repository can be checked out through anonymous access "
 "with the following command."
 msgstr ""
-"<p><strong>Anonimowy dostęp do Subversion</strong></p><p>Zawartość "
-"repozytorium SVN tego projektu można pobrać poprzez anonimowy dostęp za "
-"pomocą następującego polecenia.</p>"
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:194
 #, fuzzy
@@ -13257,17 +13251,8 @@ msgid_plural ""
 "This project's Git repositories can be checked out through anonymous access "
 "with the following commands."
 msgstr[0] ""
-"<p><strong>Anonimowy dostęp do Subversion</strong></p><p>Zawartość "
-"repozytorium SVN tego projektu można pobrać poprzez anonimowy dostęp za "
-"pomocą następującego polecenia.</p>"
 msgstr[1] ""
-"<p><strong>Anonimowy dostęp do Subversion</strong></p><p>Zawartość "
-"repozytorium SVN tego projektu można pobrać poprzez anonimowy dostęp za "
-"pomocą następującego polecenia.</p>"
 msgstr[2] ""
-"<p><strong>Anonimowy dostęp do Subversion</strong></p><p>Zawartość "
-"repozytorium SVN tego projektu można pobrać poprzez anonimowy dostęp za "
-"pomocą następującego polecenia.</p>"
 
 #: plugins/scmgit/common/GitPlugin.class.php:126
 #, fuzzy
@@ -13343,10 +13328,6 @@ msgid ""
 "You have a personal repository for this project, accessible through SSH with "
 "the following method. Enter your site password when prompted."
 msgstr ""
-"<p><strong>Dostęp deweloperów do repozytorium Subversion poprzez DAV</"
-"strong></p><p>Ta metoda dostępu do repozytorium zarezerwowana jest wyłącznie "
-"dla członków projektu. Gdy pojawi się prośba o hasło, to podaj te używane na "
-"stronie.</p>"
 
 #: plugins/scmgit/common/GitPlugin.class.php:265
 msgid "Request a personal repository"
@@ -13377,10 +13358,6 @@ msgid ""
 "project's code. You may also view the complete histories of any file in the "
 "repository."
 msgstr ""
-"<strong>Przeglądanie zawartości Subversion</strong><p>Funkcjonalność "
-"przeglądania zawartości repozytorium SVN zapewnia wgląd w aktualny stan kodu "
-"projektu. Można także wyświetlić pełną historię każdego z pliku w "
-"repozytorium.</p>"
 
 #: plugins/scmgit/common/GitPlugin.class.php:340
 #, fuzzy
@@ -13496,8 +13473,6 @@ msgid ""
 "Another short Introduction can be found at <a href=\"http://hginit.com/"
 "\">http://hginit.com/</a>"
 msgstr ""
-"<p>Dokumentacja Subversion (czasem określanego jako \"SVN\") dostępna jest "
-"<a href=\"http://svnbook.red-bean.com/\">tutaj</a>.</p>"
 
 #: plugins/scmhg/common/HgPlugin.class.php:67
 msgid "Anonymous Mercurial Access"
@@ -13509,9 +13484,6 @@ msgid ""
 "This project's Mercurial repository can be checked out through anonymous "
 "access with the following command:"
 msgstr ""
-"<p><strong>Anonimowy dostęp do Subversion</strong></p><p>Zawartość "
-"repozytorium SVN tego projektu można pobrać poprzez anonimowy dostęp za "
-"pomocą następującego polecenia.</p>"
 
 #: plugins/scmhg/common/HgPlugin.class.php:77
 #: plugins/scmsvn/common/SVNPlugin.class.php:120
@@ -13528,11 +13500,6 @@ msgstr ""
 #, fuzzy
 msgid "Read/write access to Mercurial tree is allowed for authenticated users."
 msgstr ""
-"<p><strong>Dostęp deweloperów do repozytorium Subversion poprzez SSH</"
-"strong></p><p>Ta metoda dostępu do repozytorium zarezerwowana jest wyłącznie "
-"dla członków projektu. Klient SSH musi być zainstalowany na twoim "
-"komputerze. Gdy pojawi się prośba o hasło, to podaj te używane na stronie.</"
-"p>"
 
 #: plugins/scmhg/common/HgPlugin.class.php:109
 #: plugins/scmhg/common/HgPlugin.class.php:138
@@ -13559,10 +13526,6 @@ msgid ""
 "project's code. You may also view the complete histories of any file in the "
 "repository."
 msgstr ""
-"<strong>Przeglądanie zawartości Subversion</strong><p>Funkcjonalność "
-"przeglądania zawartości repozytorium SVN zapewnia wgląd w aktualny stan kodu "
-"projektu. Można także wyświetlić pełną historię każdego z pliku w "
-"repozytorium.</p>"
 
 #: plugins/scmhg/common/HgPlugin.class.php:162
 #, fuzzy

@@ -13754,9 +13754,9 @@ msgid ""
 "This project's Bazaar repository can be checked out through anonymous access "
 "with the following command."
 msgstr ""
-"<p><strong>Анонимный доступ к репозиторию</strong></p><p>Этот проект "
+"Этот проект "
 "позволяет создать вам локальную копию репозитория, для вашего дальнейшего "
-"пользования файлами анонимно, воспользуйтесь следующими командами.</p>"
+"пользования файлами анонимно, воспользуйтесь следующими командами."
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:101
 #: plugins/scmbzr/common/BzrPlugin.class.php:113
@@ -13950,9 +13950,9 @@ msgstr "Включить анонимный доступ"
 #, fuzzy, php-format
 msgid "This project's CPOLD repository can be accessep anonymously at %s."
 msgstr ""
-"<p><strong>Анонимный доступ к репозиторию</strong></p><p>Этот проект "
+"Этот проект "
 "позволяет создать вам локальную копию репозитория, для вашего дальнейшего "
-"пользования файлами анонимно, воспользуйтесь следующими командами.</p>"
+"пользования файлами анонимно, воспользуйтесь следующими командами."
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:80
 #, fuzzy
@@ -13967,11 +13967,11 @@ msgid ""
 "must be specified as the <em>modulename</em>. When prompted for a password "
 "for <em>anonymous</em>, simply press the Enter key."
 msgstr ""
-"<p><strong>Анонимный доступ к репозиторию </strong></p><p>Этот проект имеет "
+"Этот проект имеет "
 "открытый анонимный доступ к репозиторию. Укажите название модуля заменив в "
 "строке ввода на нужный Вам модуль, который вы желаете создать в Вашей "
 "локальной базе репозитория <em>название модуля</em>. Когда клиентская "
-"программа откроет окно ввода пароля<em>anonymous</em>, просто нажмите Ок.</p>"
+"программа откроет окно ввода пароля<em>anonymous</em>, просто нажмите Ок."
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:86
 #: plugins/scmcvs/common/CVSPlugin.class.php:111
@@ -14048,9 +14048,9 @@ msgid ""
 "This project's Darcs repository can be checked out through anonymous access "
 "with the following command."
 msgstr ""
-"<p><strong>Анонимный доступ к репозиторию</strong></p><p>Этот проект "
+"Этот проект "
 "позволяет создать вам локальную копию репозитория, для вашего дальнейшего "
-"пользования файлами анонимно, воспользуйтесь следующими командами.</p>"
+"пользования файлами анонимно, воспользуйтесь следующими командами."
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:194
 #, fuzzy
@@ -14096,17 +14096,8 @@ msgid_plural ""
 "This project's Git repositories can be checked out through anonymous access "
 "with the following commands."
 msgstr[0] ""
-"<p><strong>Анонимный доступ к репозиторию</strong></p><p>Этот проект "
-"позволяет создать вам локальную копию репозитория, для вашего дальнейшего "
-"пользования файлами анонимно, воспользуйтесь следующими командами.</p>"
 msgstr[1] ""
-"<p><strong>Анонимный доступ к репозиторию</strong></p><p>Этот проект "
-"позволяет создать вам локальную копию репозитория, для вашего дальнейшего "
-"пользования файлами анонимно, воспользуйтесь следующими командами.</p>"
 msgstr[2] ""
-"<p><strong>Анонимный доступ к репозиторию</strong></p><p>Этот проект "
-"позволяет создать вам локальную копию репозитория, для вашего дальнейшего "
-"пользования файлами анонимно, воспользуйтесь следующими командами.</p>"
 
 #: plugins/scmgit/common/GitPlugin.class.php:126
 #, fuzzy
@@ -14176,10 +14167,6 @@ msgid ""
 "You have a personal repository for this project, accessible through SSH with "
 "the following method. Enter your site password when prompted."
 msgstr ""
-"<p><strong>Доступ разработчика к репозиторию через DAV</strong></p><p>Только "
-"разработчики имеют доступ к репозиторию SVN используя DAV.  Укажите заменив "
-"<em>ник разработчика</em> соответственно. При запросе, введите Ваш пароль "
-"доступа к сайту.</p>"
 
 #: plugins/scmgit/common/GitPlugin.class.php:265
 msgid "Request a personal repository"
@@ -14329,8 +14316,6 @@ msgid ""
 "Another short Introduction can be found at <a href=\"http://hginit.com/"
 "\">http://hginit.com/</a>"
 msgstr ""
-"<p>Документация по устройству репозитория (чаще называется \"SVN\") <a href="
-"\"http://svnbook.red-bean.com/\"> доступна тут </a></p>"
 
 #: plugins/scmhg/common/HgPlugin.class.php:67
 #, fuzzy
@@ -14343,9 +14328,9 @@ msgid ""
 "This project's Mercurial repository can be checked out through anonymous "
 "access with the following command:"
 msgstr ""
-"<p><strong>Анонимный доступ к репозиторию</strong></p><p>Этот проект "
+"Этот проект "
 "позволяет создать вам локальную копию репозитория, для вашего дальнейшего "
-"пользования файлами анонимно, воспользуйтесь следующими командами.</p>"
+"пользования файлами анонимно, воспользуйтесь следующими командами."
 
 #: plugins/scmhg/common/HgPlugin.class.php:77
 #: plugins/scmsvn/common/SVNPlugin.class.php:120
@@ -14362,13 +14347,6 @@ msgstr ""
 #, fuzzy
 msgid "Read/write access to Mercurial tree is allowed for authenticated users."
 msgstr ""
-"<p><strong>Доступ разработчика к репозиторию по протоколу SSH</strong></"
-"p><p>Только разработчики имеют доступ к репозиторию SVN используя SSH. "
-"Клиент (рекомендуемый: TortoiseSVN) должен быть установлен на компьютере "
-"разработчика. Укажите в поле адреса: <strong>SVN+SSH://</strong> "
-"<em>НИК_РАЗРАБОТЧИКА</i> а так-же в строке замените: /<strong>svn</strong>/ "
-"на /<strong>svnroot</strong>/ соответственно! При запросе пароля, введите "
-"Ваш пароль доступа к сайту.</p>"
 
 #: plugins/scmhg/common/HgPlugin.class.php:109
 #: plugins/scmhg/common/HgPlugin.class.php:138
@@ -14543,9 +14521,6 @@ msgid ""
 "This project's SVN repository can be checked out through anonymous access "
 "with the following command(s)."
 msgstr ""
-"<p><strong>Анонимный доступ к репозиторию</strong></p><p>Этот проект "
-"позволяет создать вам локальную копию репозитория, для вашего дальнейшего "
-"пользования файлами анонимно, воспользуйтесь следующими командами.</p>"
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:149
 #: plugins/scmsvn/common/SVNPlugin.class.php:176
@@ -14823,9 +14798,6 @@ msgid ""
 "An email has been sent to the new address. Follow the instructions in the "
 "email to complete the email change."
 msgstr ""
-"<p>Укажите новый емайл адрес на который Вы хотите переправлять Вашу "
-"корреспонденцию. Следуйте инструкциям для завершения смены емайл адреса. </"
-"p><a href=\"/\">[ Home ]</a>"
 
 #: www/account/change_email.php:76
 msgid "Email change"
@@ -14983,14 +14955,10 @@ msgid ""
 "the server in your ~/.ssh/authorized_keys file. This is done by a cron job, "
 "so it may not happen immediately.  Please allow for a one hour delay."
 msgstr ""
-"<p>Для отключения многократного повторного запроса пароля при обращении к "
+"Для отключения многократного повторного запроса пароля при обращении к "
 "репозиторию, Вы можете загрузить Ваши ключи общего доступа на сервер в "
 "каталог  ~/.ssh/authorized_keys файл. Изменения вступят в силу несколько "
-"позже, в течении нескоьких часов.</p><p>Для создания общего ключа, "
-"воспользуйтесь программой 'ssh-keygen' (в случае использования обоих "
-"протоколов 1 или 2). Ключ общего доступа для 1 протокола '~/.ssh/identity."
-"pub' для протокола 2 '~/.ssh/id_dsa.pub' или '~/.ssh/id_rsa.pub' . Прочтите "
-"документацию по использованию и работе с ключами открытого доступа SSH.</p>"
+"позже, в течении нескоьких часов."
 
 #: www/account/editsshkeys.php:75
 msgid ""
@@ -15302,9 +15270,6 @@ msgid ""
 "Your email confirmation has been resent. Visit the link in this email to "
 "complete the registration process."
 msgstr ""
-"<p>Укажите новый емайл адрес на который Вы хотите переправлять Вашу "
-"корреспонденцию. Следуйте инструкциям для завершения смены емайл адреса. </"
-"p><a href=\"/\">[ Home ]</a>"
 
 #: www/account/pending-resend.php:56
 #, fuzzy
@@ -15352,7 +15317,7 @@ msgid ""
 "A confirmation email is being sent to verify the submitted email address. "
 "Visiting the link sent in this email will activate the account."
 msgstr ""
-"<p>Поздравляем, Вы зарегистрировались на %1$s.  <p> Сейчас Вам будет выслано "
+"Сейчас Вам будет выслано "
 "подтверждающее письмо для проверки адреса электронной почты. Для активации "
 "учётной записи посетите ссылку, присланную в письме."
 
@@ -15468,8 +15433,7 @@ msgid ""
 "In order to complete your registration, login now. Your account will then be "
 "activated for normal logins."
 msgstr ""
-"<p>Для полного завершения этапа регистрации войдите в Вашу учетную запись.</"
-"p>"
+"Для полного завершения этапа регистрации войдите в Вашу учетную запись."
 
 #: www/activity/index.php:102
 msgid "Forum Post"
@@ -19719,7 +19683,7 @@ msgstr "Добавить этот навык"
 #: www/people/editprofile.php:314
 msgid "Edit/Delete Your Skills"
 msgstr ""
-"<strong>Имеющиеся уровни навыков:</strong><p>Информацию о Ваших имеющихся "
+"Информацию о Ваших имеющихся "
 "навыках в базе, Вы можете измеять или удалять."
 
 #: www/people/helpwanted-latest.php:36
@@ -20071,9 +20035,9 @@ msgstr "Для проекта нет сообщений"
 #, fuzzy
 msgid "You may add new Subprojects using the “Add a Subproject” link above."
 msgstr ""
-"<h2>Проектов не найдено</h2><p>Не найдено для этой группы. Вы модете "
+"Не найдено для этой группы. Вы модете "
 "добавить новый проект воспользовавшись \"Добавить проект\" в выделенной выше "
-"ссылке.</p>"
+"ссылке."
 
 #: www/pm/admin/index.php:435
 #, fuzzy
@@ -20677,8 +20641,8 @@ msgid ""
 "Note that same task can be assigned to several technicians. Such task will "
 "be counted for each of them."
 msgstr ""
-"<p>Отметьте, что та же самая задача может быть назначена на несколько "
-"техников. Такая задача будет подсчитана для каждого из них.</p>"
+"Отметьте, что та же самая задача может быть назначена на несколько "
+"техников. Такая задача будет подсчитана для каждого из них."
 
 #: www/pm/task.php:69
 #, fuzzy
@@ -20932,11 +20896,15 @@ msgid "Edit Trove Categorization"
 msgstr "Редактировать категорию хранилища"
 
 #: www/project/admin/group_trove.php:79
+#, fuzzy
 msgid ""
 "Select up to three locations for this project in each of the Trove root "
 "categories. If the project does not require any or all of these locations, "
 "simply select “None Selected”."
 msgstr ""
+"Выбирете до трех "
+"местоположений для этого проекта в каждой из категорий корня каталога. Если "
+"они не требуюся, то просто выберите \"Не выбрано\"."
 
 #: www/project/admin/group_trove.php:80
 #, fuzzy
@@ -20946,13 +20914,11 @@ msgid ""
 "a parent category will result in only the more specific categorization being "
 "accepted."
 msgstr ""
-"<h3>Установить категории в каталоге проектов</h3><p>Выбирете до трех "
-"местоположений для этого проекта в каждой из категорий корня каталога. Если "
-"они не требуюся, то просто выберите \"Не выбрано\".</p><p>ВНИМАНИЕ: Проекты "
+"ВНИМАНИЕ: Проекты "
 "должны быть категоризированы как можно точнее. Если выбрана одновременно "
 "классификация и в специфичной категории каталога, и в её более общей "
 "родительской категории, то в результате будет добавлена только специфичная "
-"категория</p>."
+"категория."
 
 #: www/project/admin/group_trove.php:121
 msgid "Update All Category Changes"
@@ -21736,10 +21702,10 @@ msgid ""
 "You can choose among different SCM for your project, but just one (or none "
 "at all). Please select the SCM system you want to use."
 msgstr ""
-"<h3>5. SCM</h3><p>Вы можете выбрать один из двух типов системы управления "
+"Вы можете выбрать один из двух типов системы управления "
 "версиями <strong>SCM</strong> для Вашего проекта: <strong>svn</strong> или "
 "<strong>cvs</strong> (рекомендуется SVN). Пожалуйста выберите систему SCM, "
-"которую Вы хотите использовать.</p>"
+"которую Вы хотите использовать."
 
 #: www/register/index.php:249 www/register/index.php:251
 #, fuzzy
