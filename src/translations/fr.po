@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-09 12:27+0100\n"
+"POT-Creation-Date: 2014-01-09 15:19+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -271,6 +271,7 @@ msgstr "Dossier"
 #: common/tracker/include/ArtifactHtml.class.php:112
 #: common/tracker/include/ArtifactHtml.class.php:220
 #: common/tracker/include/ArtifactTypeHtml.class.php:438
+#: common/tracker/views/form-addextrafieldoption.php:43
 #: common/tracker/views/form-adminroadmap.php:70
 #: common/tracker/views/form-adminroadmap.php:193
 #: common/tracker/views/form-updateextrafield.php:42
@@ -1237,7 +1238,7 @@ msgstr "Dernière date"
 #: common/include/Group.class.php:793
 #: common/tracker/ArtifactExtraField.class.php:328
 #: common/tracker/include/ArtifactTypeHtml.class.php:331
-#: common/tracker/views/form-addextrafieldoption.php:107
+#: common/tracker/views/form-addextrafieldoption.php:109
 #: common/tracker/views/form-addextrafield.php:131
 #: common/tracker/views/form-updateextrafieldelement.php:63
 #: common/widget/Widget_ProjectLatestDocuments.class.php:76
@@ -1661,7 +1662,7 @@ msgstr "Date de début"
 #: common/tracker/include/build_submission_form.php:106
 #: common/tracker/views/form-addcanned.php:69
 #: common/tracker/views/form-addcanned.php:74
-#: common/tracker/views/form-addextrafieldoption.php:101
+#: common/tracker/views/form-addextrafieldoption.php:103
 #: common/tracker/views/form-addextrafield.php:114
 #: common/tracker/views/form-addextrafield.php:118
 #: common/tracker/views/form-addextrafield.php:123
@@ -5014,7 +5015,7 @@ msgstr "Texte libre pour la page de navigation"
 #: common/tracker/include/build_submission_form.php:54
 #: common/tracker/include/build_submission_form.php:118
 #: common/tracker/views/form-addcanned.php:78
-#: common/tracker/views/form-addextrafieldoption.php:110
+#: common/tracker/views/form-addextrafieldoption.php:112
 #: common/tracker/views/form-addextrafield.php:146
 #: common/tracker/views/form-adminroadmap.php:234
 #: common/tracker/views/form-clonetracker.php:59
@@ -5143,7 +5144,7 @@ msgstr "Supprimer irrémédiablement cet outil de suivi."
 #: common/tracker/actions/admin-updates.php:493
 #: common/tracker/actions/admin-updates.php:517
 #: common/tracker/actions/admin-updates.php:572
-#: common/tracker/views/form-addextrafieldoption.php:30
+#: common/tracker/views/form-addextrafieldoption.php:31
 #: common/tracker/views/form-deleteextrafieldelement.php:34
 #: common/tracker/views/form-updateextrafieldelement.php:33
 #: common/tracker/views/form-updateextrafield.php:36
@@ -6536,47 +6537,51 @@ msgstr ""
 msgid "Message Body"
 msgstr "Corps du message"
 
-#: common/tracker/views/form-addextrafieldoption.php:35
+#: common/tracker/views/form-addextrafieldoption.php:36
 #, php-format
 msgid "Add/Update Custom Field Elements in %s"
 msgstr "Ajouter/modifier des champs supplémentaires pour %s"
 
-#: common/tracker/views/form-addextrafieldoption.php:45
+#: common/tracker/views/form-addextrafieldoption.php:43
+msgid "Custom field name"
+msgstr "Nom du champ supplémentaire"
+
+#: common/tracker/views/form-addextrafieldoption.php:47
 #: common/tracker/views/form-adminroadmap.php:402
 #: common/tracker/views/form-customizelist.php:98
 msgid "Current / New positions"
 msgstr "Postes courants et nouveaux"
 
-#: common/tracker/views/form-addextrafieldoption.php:46
+#: common/tracker/views/form-addextrafieldoption.php:48
 #: common/tracker/views/form-adminroadmap.php:403
 #: common/tracker/views/form-customizelist.php:99
 msgid "Up/Down positions"
 msgstr "Monter/descendre les positions"
 
-#: common/tracker/views/form-addextrafieldoption.php:47
+#: common/tracker/views/form-addextrafieldoption.php:49
 #: common/tracker/views/form-addextrafield.php:44
 msgid "Elements Defined"
 msgstr "Éléments définis"
 
-#: common/tracker/views/form-addextrafieldoption.php:49
+#: common/tracker/views/form-addextrafieldoption.php:51
 msgid "Mapping"
 msgstr ""
 
-#: common/tracker/views/form-addextrafieldoption.php:82
+#: common/tracker/views/form-addextrafieldoption.php:84
 #: common/tracker/views/form-adminroadmap.php:412
 #: common/tracker/views/form-customizelist.php:108
 msgid "Reorder"
 msgstr "Réordonner"
 
-#: common/tracker/views/form-addextrafieldoption.php:87
+#: common/tracker/views/form-addextrafieldoption.php:89
 msgid "Alphabetical order"
 msgstr "Ordre alphabétique"
 
-#: common/tracker/views/form-addextrafieldoption.php:95
+#: common/tracker/views/form-addextrafieldoption.php:97
 msgid "You have not defined any elements"
 msgstr "Vous n'avez pas défini d'élément."
 
-#: common/tracker/views/form-addextrafieldoption.php:101
+#: common/tracker/views/form-addextrafieldoption.php:103
 msgid "Add New Element"
 msgstr "Ajouter un nouvel élément"
 
@@ -8650,8 +8655,9 @@ msgstr "Astuces"
 msgid ""
 "You can create boxes like the ones on the right site of summary page, by "
 "inserting the following sentences in the content:"
-msgstr "Vous pouvez créer des boîtes comme celles de la page de "
-"résumé, en vous inspirant dans le contenu des exemples suivants :"
+msgstr ""
+"Vous pouvez créer des boîtes comme celles de la page de résumé, en vous "
+"inspirant dans le contenu des exemples suivants :"
 
 #: plugins/blocks/www/index.php:328
 msgid ": will create the top part of the box using Hello as title."
@@ -8677,9 +8683,10 @@ msgstr ": pied-de-page après un texte."
 msgid ""
 "You can create as many boxes as you want, but a boxTop has to be closed by a "
 "boxBottom and a boxHeader has to be closed by a boxFooter."
-msgstr "Vous pouvez créer autant de boîtes que vous souhaitez, mais à "
-"chaque boxTop doit correspondre un boxBottom, et à chaque boxHeader "
-"doit correspondre un boxFooter."
+msgstr ""
+"Vous pouvez créer autant de boîtes que vous souhaitez, mais à chaque boxTop "
+"doit correspondre un boxBottom, et à chaque boxHeader doit correspondre un "
+"boxFooter."
 
 #: plugins/blocks/www/index.php:356
 msgid "Block configuration saved"
@@ -27731,7 +27738,6 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 
 #~ msgid "Subproject Name:"
 #~ msgstr "Nom du sous-projet :"
-
 
 #~ msgid ""
 #~ "Only project developers can access the Subversion tree via this method."

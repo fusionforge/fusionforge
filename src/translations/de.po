@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-09 12:27+0100\n"
+"POT-Creation-Date: 2014-01-09 15:02+0100\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -282,6 +282,7 @@ msgstr ""
 #: common/tracker/include/ArtifactHtml.class.php:112
 #: common/tracker/include/ArtifactHtml.class.php:220
 #: common/tracker/include/ArtifactTypeHtml.class.php:438
+#: common/tracker/views/form-addextrafieldoption.php:43
 #: common/tracker/views/form-adminroadmap.php:70
 #: common/tracker/views/form-adminroadmap.php:193
 #: common/tracker/views/form-updateextrafield.php:42
@@ -1301,7 +1302,7 @@ msgstr "Nachname:"
 #: common/include/Group.class.php:793
 #: common/tracker/ArtifactExtraField.class.php:328
 #: common/tracker/include/ArtifactTypeHtml.class.php:331
-#: common/tracker/views/form-addextrafieldoption.php:107
+#: common/tracker/views/form-addextrafieldoption.php:109
 #: common/tracker/views/form-addextrafield.php:131
 #: common/tracker/views/form-updateextrafieldelement.php:63
 #: common/widget/Widget_ProjectLatestDocuments.class.php:76
@@ -1738,7 +1739,7 @@ msgstr "Startdatum"
 #: common/tracker/include/build_submission_form.php:106
 #: common/tracker/views/form-addcanned.php:69
 #: common/tracker/views/form-addcanned.php:74
-#: common/tracker/views/form-addextrafieldoption.php:101
+#: common/tracker/views/form-addextrafieldoption.php:103
 #: common/tracker/views/form-addextrafield.php:114
 #: common/tracker/views/form-addextrafield.php:118
 #: common/tracker/views/form-addextrafield.php:123
@@ -5225,7 +5226,7 @@ msgstr "Freitext für die »Durchsuche Objekte« Seite"
 #: common/tracker/include/build_submission_form.php:54
 #: common/tracker/include/build_submission_form.php:118
 #: common/tracker/views/form-addcanned.php:78
-#: common/tracker/views/form-addextrafieldoption.php:110
+#: common/tracker/views/form-addextrafieldoption.php:112
 #: common/tracker/views/form-addextrafield.php:146
 #: common/tracker/views/form-adminroadmap.php:234
 #: common/tracker/views/form-clonetracker.php:59
@@ -5356,7 +5357,7 @@ msgstr "Diesen Tracker dauerhaft löschen."
 #: common/tracker/actions/admin-updates.php:493
 #: common/tracker/actions/admin-updates.php:517
 #: common/tracker/actions/admin-updates.php:572
-#: common/tracker/views/form-addextrafieldoption.php:30
+#: common/tracker/views/form-addextrafieldoption.php:31
 #: common/tracker/views/form-deleteextrafieldelement.php:34
 #: common/tracker/views/form-updateextrafieldelement.php:33
 #: common/tracker/views/form-updateextrafield.php:36
@@ -6799,47 +6800,51 @@ msgstr ""
 msgid "Message Body"
 msgstr "Nachrichtenrumpf"
 
-#: common/tracker/views/form-addextrafieldoption.php:35
+#: common/tracker/views/form-addextrafieldoption.php:36
 #, fuzzy, php-format
 msgid "Add/Update Custom Field Elements in %s"
 msgstr "Benutzerdefinierte Feldelemente in %s hinzufügen/aktualisieren"
 
-#: common/tracker/views/form-addextrafieldoption.php:45
+#: common/tracker/views/form-addextrafieldoption.php:43
+msgid "Custom field name"
+msgstr "Extrafeldname"
+
+#: common/tracker/views/form-addextrafieldoption.php:47
 #: common/tracker/views/form-adminroadmap.php:402
 #: common/tracker/views/form-customizelist.php:98
 msgid "Current / New positions"
 msgstr "Aktuelle / Neue Positionen"
 
-#: common/tracker/views/form-addextrafieldoption.php:46
+#: common/tracker/views/form-addextrafieldoption.php:48
 #: common/tracker/views/form-adminroadmap.php:403
 #: common/tracker/views/form-customizelist.php:99
 msgid "Up/Down positions"
 msgstr "Positionen Hoch/Runter"
 
-#: common/tracker/views/form-addextrafieldoption.php:47
+#: common/tracker/views/form-addextrafieldoption.php:49
 #: common/tracker/views/form-addextrafield.php:44
 msgid "Elements Defined"
 msgstr "Elemente definiert"
 
-#: common/tracker/views/form-addextrafieldoption.php:49
+#: common/tracker/views/form-addextrafieldoption.php:51
 msgid "Mapping"
 msgstr ""
 
-#: common/tracker/views/form-addextrafieldoption.php:82
+#: common/tracker/views/form-addextrafieldoption.php:84
 #: common/tracker/views/form-adminroadmap.php:412
 #: common/tracker/views/form-customizelist.php:108
 msgid "Reorder"
 msgstr "Erneut bestellen"
 
-#: common/tracker/views/form-addextrafieldoption.php:87
+#: common/tracker/views/form-addextrafieldoption.php:89
 msgid "Alphabetical order"
 msgstr "Alphabetische Reihenfolge"
 
-#: common/tracker/views/form-addextrafieldoption.php:95
+#: common/tracker/views/form-addextrafieldoption.php:97
 msgid "You have not defined any elements"
 msgstr "Sie haben keine Elemente definiert"
 
-#: common/tracker/views/form-addextrafieldoption.php:101
+#: common/tracker/views/form-addextrafieldoption.php:103
 msgid "Add New Element"
 msgstr "Neues Element hinzufügen"
 
@@ -11004,7 +11009,6 @@ msgstr ""
 
 #: plugins/hudson/include/hudson_Widget_JobTestResults.class.php:96
 #: plugins/hudson/include/hudson_Widget_JobTestTrend.class.php:91
-#, fuzzy
 msgid "No test found for this job."
 msgstr ""
 
@@ -14044,8 +14048,8 @@ msgid ""
 "You have a personal repository for this project, accessible through SSH with "
 "the following method. Enter your site password when prompted."
 msgstr ""
-"Ausschliesslich Projektentwickler können mit dieser Methode auf den SVN "
-"- Baum zugreifen. Geben Sie nach der Aufforderung Ihr Site-Passwort ein."
+"Ausschliesslich Projektentwickler können mit dieser Methode auf den SVN - "
+"Baum zugreifen. Geben Sie nach der Aufforderung Ihr Site-Passwort ein."
 
 #: plugins/scmgit/common/GitPlugin.class.php:265
 msgid "Request a personal repository"
@@ -22426,24 +22430,26 @@ msgstr "Fehler - war die URL und Form falsch?"
 msgid ""
 "The purpose of this archive is to let you share your code snippets, scripts, "
 "and functions with the Open Source Software Community."
-msgstr "Zweck dieses Archivs ist, Ihnen zu ermöglichen, Code Schnipsel "
-"Scripte und Funktionen mit der Open Source Software Community zu teilen."
+msgstr ""
+"Zweck dieses Archivs ist, Ihnen zu ermöglichen, Code Schnipsel Scripte und "
+"Funktionen mit der Open Source Software Community zu teilen."
 
 #: www/snippet/index.php:52
 msgid ""
 "You can create a “new snippet”, then post additional versions of that "
 "snippet quickly and easily."
-msgstr "Sie können einen »neuen Schnipsel« erzeugen und dann schnell und "
-"einfach zusätzliche Versionen des Schnipsels bereitstellen."
+msgstr ""
+"Sie können einen »neuen Schnipsel« erzeugen und dann schnell und einfach "
+"zusätzliche Versionen des Schnipsels bereitstellen."
 
 #: www/snippet/index.php:54
 msgid ""
 "Once you have snippets posted, you can then create a “Package” of snippets. "
 "That package can contain multiple, specific versions of other snippets."
-msgstr "Sobald "
-"Sie Schnipsel gepostet haben, können Sie anschliessend ein Schnipsel "
-"»Paket« erzeugen. Dieses Paket kann eine Reihe unterschiedlicher "
-"Versionen Ihrer Schnipsel enthalten."
+msgstr ""
+"Sobald Sie Schnipsel gepostet haben, können Sie anschliessend ein Schnipsel "
+"»Paket« erzeugen. Dieses Paket kann eine Reihe unterschiedlicher Versionen "
+"Ihrer Schnipsel enthalten."
 
 #: www/snippet/index.php:56
 msgid "Browse Snippets"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-09 12:27+0100\n"
+"POT-Creation-Date: 2014-01-09 15:02+0100\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -282,6 +282,7 @@ msgstr "Име на форума"
 #: common/tracker/include/ArtifactHtml.class.php:112
 #: common/tracker/include/ArtifactHtml.class.php:220
 #: common/tracker/include/ArtifactTypeHtml.class.php:438
+#: common/tracker/views/form-addextrafieldoption.php:43
 #: common/tracker/views/form-adminroadmap.php:70
 #: common/tracker/views/form-adminroadmap.php:193
 #: common/tracker/views/form-updateextrafield.php:42
@@ -1293,7 +1294,7 @@ msgstr "Фамилия:"
 #: common/include/Group.class.php:793
 #: common/tracker/ArtifactExtraField.class.php:328
 #: common/tracker/include/ArtifactTypeHtml.class.php:331
-#: common/tracker/views/form-addextrafieldoption.php:107
+#: common/tracker/views/form-addextrafieldoption.php:109
 #: common/tracker/views/form-addextrafield.php:131
 #: common/tracker/views/form-updateextrafieldelement.php:63
 #: common/widget/Widget_ProjectLatestDocuments.class.php:76
@@ -1729,7 +1730,7 @@ msgstr ""
 #: common/tracker/include/build_submission_form.php:106
 #: common/tracker/views/form-addcanned.php:69
 #: common/tracker/views/form-addcanned.php:74
-#: common/tracker/views/form-addextrafieldoption.php:101
+#: common/tracker/views/form-addextrafieldoption.php:103
 #: common/tracker/views/form-addextrafield.php:114
 #: common/tracker/views/form-addextrafield.php:118
 #: common/tracker/views/form-addextrafield.php:123
@@ -5097,7 +5098,7 @@ msgstr ""
 #: common/tracker/include/build_submission_form.php:54
 #: common/tracker/include/build_submission_form.php:118
 #: common/tracker/views/form-addcanned.php:78
-#: common/tracker/views/form-addextrafieldoption.php:110
+#: common/tracker/views/form-addextrafieldoption.php:112
 #: common/tracker/views/form-addextrafield.php:146
 #: common/tracker/views/form-adminroadmap.php:234
 #: common/tracker/views/form-clonetracker.php:59
@@ -5224,7 +5225,7 @@ msgstr ""
 #: common/tracker/actions/admin-updates.php:493
 #: common/tracker/actions/admin-updates.php:517
 #: common/tracker/actions/admin-updates.php:572
-#: common/tracker/views/form-addextrafieldoption.php:30
+#: common/tracker/views/form-addextrafieldoption.php:31
 #: common/tracker/views/form-deleteextrafieldelement.php:34
 #: common/tracker/views/form-updateextrafieldelement.php:33
 #: common/tracker/views/form-updateextrafield.php:36
@@ -6628,49 +6629,54 @@ msgstr ""
 msgid "Message Body"
 msgstr ""
 
-#: common/tracker/views/form-addextrafieldoption.php:35
+#: common/tracker/views/form-addextrafieldoption.php:36
 #, php-format
 msgid "Add/Update Custom Field Elements in %s"
 msgstr ""
 
-#: common/tracker/views/form-addextrafieldoption.php:45
+#: common/tracker/views/form-addextrafieldoption.php:43
+#, fuzzy
+msgid "Custom field name"
+msgstr "Файл"
+
+#: common/tracker/views/form-addextrafieldoption.php:47
 #: common/tracker/views/form-adminroadmap.php:402
 #: common/tracker/views/form-customizelist.php:98
 #, fuzzy
 msgid "Current / New positions"
 msgstr "Версия"
 
-#: common/tracker/views/form-addextrafieldoption.php:46
+#: common/tracker/views/form-addextrafieldoption.php:48
 #: common/tracker/views/form-adminroadmap.php:403
 #: common/tracker/views/form-customizelist.php:99
 msgid "Up/Down positions"
 msgstr ""
 
-#: common/tracker/views/form-addextrafieldoption.php:47
+#: common/tracker/views/form-addextrafieldoption.php:49
 #: common/tracker/views/form-addextrafield.php:44
 msgid "Elements Defined"
 msgstr ""
 
-#: common/tracker/views/form-addextrafieldoption.php:49
+#: common/tracker/views/form-addextrafieldoption.php:51
 msgid "Mapping"
 msgstr ""
 
-#: common/tracker/views/form-addextrafieldoption.php:82
+#: common/tracker/views/form-addextrafieldoption.php:84
 #: common/tracker/views/form-adminroadmap.php:412
 #: common/tracker/views/form-customizelist.php:108
 #, fuzzy
 msgid "Reorder"
 msgstr "Премахване"
 
-#: common/tracker/views/form-addextrafieldoption.php:87
+#: common/tracker/views/form-addextrafieldoption.php:89
 msgid "Alphabetical order"
 msgstr ""
 
-#: common/tracker/views/form-addextrafieldoption.php:95
+#: common/tracker/views/form-addextrafieldoption.php:97
 msgid "You have not defined any elements"
 msgstr ""
 
-#: common/tracker/views/form-addextrafieldoption.php:101
+#: common/tracker/views/form-addextrafieldoption.php:103
 msgid "Add New Element"
 msgstr ""
 
@@ -14469,7 +14475,9 @@ msgstr ""
 msgid ""
 "You are now a registered user on %s, the online development environment for "
 "Open Source projects."
-msgstr "Сега сте регистриран потребител на %s, online средата за разработване на проекти с Отворен Код."
+msgstr ""
+"Сега сте регистриран потребител на %s, online средата за разработване на "
+"проекти с Отворен Код."
 
 #: www/account/first.php:33
 #, php-format
@@ -18982,21 +18990,25 @@ msgid ""
 "Project listings remain live for two weeks, or until closed by the poster, "
 "whichever comes first. (Project administrators may always re-post expired "
 "openings.)"
-msgstr "Максималното време на престой на обява е две седмици. Потребителят, "
-"който я е публикувал може да я премахне преждевременно. (Администраторите "
-"на проекти могат винаги да публикуват отново изтекли обяви.)"
+msgstr ""
+"Максималното време на престой на обява е две седмици. Потребителят, който я "
+"е публикувал може да я премахне преждевременно. (Администраторите на проекти "
+"могат винаги да публикуват отново изтекли обяви.)"
 
 #: www/people/index.php:69
 msgid ""
 "Browse through the category menu to find projects looking for your help."
-msgstr "През списъка от категории можете да стигнете до проекти, които се нуждаят от помощ."
+msgstr ""
+"През списъка от категории можете да стигнете до проекти, които се нуждаят от "
+"помощ."
 
 #: www/people/index.php:73
 msgid ""
 "If you're a project admin, log in and submit help wanted requests through "
 "your project administration page."
-msgstr "Ако сте администратор на проект, можете да публикувате обява "
-"от страницата за администриране на проекта."
+msgstr ""
+"Ако сте администратор на проект, можете да публикувате обява от страницата "
+"за администриране на проекта."
 
 #: www/people/index.php:77
 msgid ""
@@ -22133,13 +22145,15 @@ msgstr "Създайте въпросите и обясненията кум т�
 msgid ""
 "Create a survey, listing the questions in order (choose from <strong>your</"
 "strong> list of questions)."
-msgstr "Create a survey, listing the questions in "
-"order (choose from <strong>your</strong> list of questions)."
+msgstr ""
+"Create a survey, listing the questions in order (choose from <strong>your</"
+"strong> list of questions)."
 
 #: www/survey/admin/index.php:68
 #, php-format
 msgid "Link to the survey using this format: %s where XX is the survey number"
-msgstr "Проучването ще може да се достъпи чрез следния URL: %s, където XX е "
+msgstr ""
+"Проучването ще може да се достъпи чрез следния URL: %s, където XX е "
 "идентификатора на проучването"
 
 #: www/survey/admin/index.php:73
@@ -22885,10 +22899,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Project full name"
 #~ msgstr "Проекти на потребителя"
-
-#, fuzzy
-#~ msgid "Delete Custom Field"
-#~ msgstr "Файл"
 
 #, fuzzy
 #~ msgid "Release name"

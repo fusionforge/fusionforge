@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-09 12:27+0100\n"
+"POT-Creation-Date: 2014-01-09 15:02+0100\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -285,6 +285,7 @@ msgstr "Имя файла"
 #: common/tracker/include/ArtifactHtml.class.php:112
 #: common/tracker/include/ArtifactHtml.class.php:220
 #: common/tracker/include/ArtifactTypeHtml.class.php:438
+#: common/tracker/views/form-addextrafieldoption.php:43
 #: common/tracker/views/form-adminroadmap.php:70
 #: common/tracker/views/form-adminroadmap.php:193
 #: common/tracker/views/form-updateextrafield.php:42
@@ -1315,7 +1316,7 @@ msgstr "Фамилия:"
 #: common/include/Group.class.php:793
 #: common/tracker/ArtifactExtraField.class.php:328
 #: common/tracker/include/ArtifactTypeHtml.class.php:331
-#: common/tracker/views/form-addextrafieldoption.php:107
+#: common/tracker/views/form-addextrafieldoption.php:109
 #: common/tracker/views/form-addextrafield.php:131
 #: common/tracker/views/form-updateextrafieldelement.php:63
 #: common/widget/Widget_ProjectLatestDocuments.class.php:76
@@ -1757,7 +1758,7 @@ msgstr "Начальная дата"
 #: common/tracker/include/build_submission_form.php:106
 #: common/tracker/views/form-addcanned.php:69
 #: common/tracker/views/form-addcanned.php:74
-#: common/tracker/views/form-addextrafieldoption.php:101
+#: common/tracker/views/form-addextrafieldoption.php:103
 #: common/tracker/views/form-addextrafield.php:114
 #: common/tracker/views/form-addextrafield.php:118
 #: common/tracker/views/form-addextrafield.php:123
@@ -5252,7 +5253,7 @@ msgstr ""
 #: common/tracker/include/build_submission_form.php:54
 #: common/tracker/include/build_submission_form.php:118
 #: common/tracker/views/form-addcanned.php:78
-#: common/tracker/views/form-addextrafieldoption.php:110
+#: common/tracker/views/form-addextrafieldoption.php:112
 #: common/tracker/views/form-addextrafield.php:146
 #: common/tracker/views/form-adminroadmap.php:234
 #: common/tracker/views/form-clonetracker.php:59
@@ -5387,7 +5388,7 @@ msgstr "Полностью удалить трекер."
 #: common/tracker/actions/admin-updates.php:493
 #: common/tracker/actions/admin-updates.php:517
 #: common/tracker/actions/admin-updates.php:572
-#: common/tracker/views/form-addextrafieldoption.php:30
+#: common/tracker/views/form-addextrafieldoption.php:31
 #: common/tracker/views/form-deleteextrafieldelement.php:34
 #: common/tracker/views/form-updateextrafieldelement.php:33
 #: common/tracker/views/form-updateextrafield.php:36
@@ -6830,49 +6831,54 @@ msgstr ""
 msgid "Message Body"
 msgstr "Содержимое письма"
 
-#: common/tracker/views/form-addextrafieldoption.php:35
+#: common/tracker/views/form-addextrafieldoption.php:36
 #, php-format
 msgid "Add/Update Custom Field Elements in %s"
 msgstr "Добавить/Изменить поля в элементах %s"
 
-#: common/tracker/views/form-addextrafieldoption.php:45
+#: common/tracker/views/form-addextrafieldoption.php:43
+#, fuzzy
+msgid "Custom field name"
+msgstr "Название нового поля"
+
+#: common/tracker/views/form-addextrafieldoption.php:47
 #: common/tracker/views/form-adminroadmap.php:402
 #: common/tracker/views/form-customizelist.php:98
 #, fuzzy
 msgid "Current / New positions"
 msgstr "Текущая версия"
 
-#: common/tracker/views/form-addextrafieldoption.php:46
+#: common/tracker/views/form-addextrafieldoption.php:48
 #: common/tracker/views/form-adminroadmap.php:403
 #: common/tracker/views/form-customizelist.php:99
 msgid "Up/Down positions"
 msgstr ""
 
-#: common/tracker/views/form-addextrafieldoption.php:47
+#: common/tracker/views/form-addextrafieldoption.php:49
 #: common/tracker/views/form-addextrafield.php:44
 msgid "Elements Defined"
 msgstr "Элементы объявлены"
 
-#: common/tracker/views/form-addextrafieldoption.php:49
+#: common/tracker/views/form-addextrafieldoption.php:51
 msgid "Mapping"
 msgstr ""
 
-#: common/tracker/views/form-addextrafieldoption.php:82
+#: common/tracker/views/form-addextrafieldoption.php:84
 #: common/tracker/views/form-adminroadmap.php:412
 #: common/tracker/views/form-customizelist.php:108
 #, fuzzy
 msgid "Reorder"
 msgstr "Удалить"
 
-#: common/tracker/views/form-addextrafieldoption.php:87
+#: common/tracker/views/form-addextrafieldoption.php:89
 msgid "Alphabetical order"
 msgstr ""
 
-#: common/tracker/views/form-addextrafieldoption.php:95
+#: common/tracker/views/form-addextrafieldoption.php:97
 msgid "You have not defined any elements"
 msgstr "Вы не указали элементы"
 
-#: common/tracker/views/form-addextrafieldoption.php:101
+#: common/tracker/views/form-addextrafieldoption.php:103
 msgid "Add New Element"
 msgstr "Добавить новый элемент"
 
@@ -11093,7 +11099,6 @@ msgstr ""
 
 #: plugins/hudson/include/hudson_Widget_JobTestResults.class.php:96
 #: plugins/hudson/include/hudson_Widget_JobTestTrend.class.php:91
-#, fuzzy
 msgid "No test found for this job."
 msgstr ""
 
@@ -13754,9 +13759,9 @@ msgid ""
 "This project's Bazaar repository can be checked out through anonymous access "
 "with the following command."
 msgstr ""
-"Этот проект "
-"позволяет создать вам локальную копию репозитория, для вашего дальнейшего "
-"пользования файлами анонимно, воспользуйтесь следующими командами."
+"Этот проект позволяет создать вам локальную копию репозитория, для вашего "
+"дальнейшего пользования файлами анонимно, воспользуйтесь следующими "
+"командами."
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:101
 #: plugins/scmbzr/common/BzrPlugin.class.php:113
@@ -13950,9 +13955,9 @@ msgstr "Включить анонимный доступ"
 #, fuzzy, php-format
 msgid "This project's CPOLD repository can be accessep anonymously at %s."
 msgstr ""
-"Этот проект "
-"позволяет создать вам локальную копию репозитория, для вашего дальнейшего "
-"пользования файлами анонимно, воспользуйтесь следующими командами."
+"Этот проект позволяет создать вам локальную копию репозитория, для вашего "
+"дальнейшего пользования файлами анонимно, воспользуйтесь следующими "
+"командами."
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:80
 #, fuzzy
@@ -13967,11 +13972,11 @@ msgid ""
 "must be specified as the <em>modulename</em>. When prompted for a password "
 "for <em>anonymous</em>, simply press the Enter key."
 msgstr ""
-"Этот проект имеет "
-"открытый анонимный доступ к репозиторию. Укажите название модуля заменив в "
-"строке ввода на нужный Вам модуль, который вы желаете создать в Вашей "
-"локальной базе репозитория <em>название модуля</em>. Когда клиентская "
-"программа откроет окно ввода пароля<em>anonymous</em>, просто нажмите Ок."
+"Этот проект имеет открытый анонимный доступ к репозиторию. Укажите название "
+"модуля заменив в строке ввода на нужный Вам модуль, который вы желаете "
+"создать в Вашей локальной базе репозитория <em>название модуля</em>. Когда "
+"клиентская программа откроет окно ввода пароля<em>anonymous</em>, просто "
+"нажмите Ок."
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:86
 #: plugins/scmcvs/common/CVSPlugin.class.php:111
@@ -14048,9 +14053,9 @@ msgid ""
 "This project's Darcs repository can be checked out through anonymous access "
 "with the following command."
 msgstr ""
-"Этот проект "
-"позволяет создать вам локальную копию репозитория, для вашего дальнейшего "
-"пользования файлами анонимно, воспользуйтесь следующими командами."
+"Этот проект позволяет создать вам локальную копию репозитория, для вашего "
+"дальнейшего пользования файлами анонимно, воспользуйтесь следующими "
+"командами."
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:194
 #, fuzzy
@@ -14088,7 +14093,6 @@ msgstr[1] ""
 msgstr[2] ""
 
 #: plugins/scmgit/common/GitPlugin.class.php:106
-#, fuzzy
 msgid ""
 "This project's Git repository can be checked out through anonymous access "
 "with the following command."
@@ -14162,7 +14166,6 @@ msgid "Access to your personal repository"
 msgstr ""
 
 #: plugins/scmgit/common/GitPlugin.class.php:257
-#, fuzzy
 msgid ""
 "You have a personal repository for this project, accessible through SSH with "
 "the following method. Enter your site password when prompted."
@@ -14311,7 +14314,6 @@ msgid "Use Mercurial as Source Code Management tool. Offer DAV or SSH access."
 msgstr ""
 
 #: plugins/scmhg/common/HgPlugin.class.php:61
-#, fuzzy
 msgid ""
 "Another short Introduction can be found at <a href=\"http://hginit.com/"
 "\">http://hginit.com/</a>"
@@ -14328,9 +14330,9 @@ msgid ""
 "This project's Mercurial repository can be checked out through anonymous "
 "access with the following command:"
 msgstr ""
-"Этот проект "
-"позволяет создать вам локальную копию репозитория, для вашего дальнейшего "
-"пользования файлами анонимно, воспользуйтесь следующими командами."
+"Этот проект позволяет создать вам локальную копию репозитория, для вашего "
+"дальнейшего пользования файлами анонимно, воспользуйтесь следующими "
+"командами."
 
 #: plugins/scmhg/common/HgPlugin.class.php:77
 #: plugins/scmsvn/common/SVNPlugin.class.php:120
@@ -14344,7 +14346,6 @@ msgid ""
 msgstr ""
 
 #: plugins/scmhg/common/HgPlugin.class.php:97
-#, fuzzy
 msgid "Read/write access to Mercurial tree is allowed for authenticated users."
 msgstr ""
 
@@ -14516,7 +14517,6 @@ msgid "Anonymous Subversion Access"
 msgstr "Включить анонимный доступ"
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:110
-#, fuzzy
 msgid ""
 "This project's SVN repository can be checked out through anonymous access "
 "with the following command(s)."
@@ -14793,7 +14793,6 @@ msgid "Email Change Confirmation"
 msgstr "Подтверждение изменения электронного адреса"
 
 #: www/account/change_email.php:69
-#, fuzzy
 msgid ""
 "An email has been sent to the new address. Follow the instructions in the "
 "email to complete the email change."
@@ -15265,7 +15264,6 @@ msgid "Pending Account"
 msgstr "Регистрация"
 
 #: www/account/pending-resend.php:46
-#, fuzzy
 msgid ""
 "Your email confirmation has been resent. Visit the link in this email to "
 "complete the registration process."
@@ -15317,9 +15315,9 @@ msgid ""
 "A confirmation email is being sent to verify the submitted email address. "
 "Visiting the link sent in this email will activate the account."
 msgstr ""
-"Сейчас Вам будет выслано "
-"подтверждающее письмо для проверки адреса электронной почты. Для активации "
-"учётной записи посетите ссылку, присланную в письме."
+"Сейчас Вам будет выслано подтверждающее письмо для проверки адреса "
+"электронной почты. Для активации учётной записи посетите ссылку, присланную "
+"в письме."
 
 #: www/account/register.php:121
 #, php-format
@@ -16525,7 +16523,7 @@ msgid "No user found."
 msgstr "Ничего не найдено"
 
 #: www/admin/search.php:144
-#, fuzzy, php-format
+#, php-format
 msgid "Project search with criteria <em>%s</em>: %d match"
 msgid_plural "Project search with criteria <em>%s</em>: %d matches"
 msgstr[0] ""
@@ -19683,8 +19681,7 @@ msgstr "Добавить этот навык"
 #: www/people/editprofile.php:314
 msgid "Edit/Delete Your Skills"
 msgstr ""
-"Информацию о Ваших имеющихся "
-"навыках в базе, Вы можете измеять или удалять."
+"Информацию о Ваших имеющихся навыках в базе, Вы можете измеять или удалять."
 
 #: www/people/helpwanted-latest.php:36
 msgid "Help Wanted Latest Posts"
@@ -20035,9 +20032,8 @@ msgstr "Для проекта нет сообщений"
 #, fuzzy
 msgid "You may add new Subprojects using the “Add a Subproject” link above."
 msgstr ""
-"Не найдено для этой группы. Вы модете "
-"добавить новый проект воспользовавшись \"Добавить проект\" в выделенной выше "
-"ссылке."
+"Не найдено для этой группы. Вы модете добавить новый проект воспользовавшись "
+"\"Добавить проект\" в выделенной выше ссылке."
 
 #: www/pm/admin/index.php:435
 #, fuzzy
@@ -20641,8 +20637,8 @@ msgid ""
 "Note that same task can be assigned to several technicians. Such task will "
 "be counted for each of them."
 msgstr ""
-"Отметьте, что та же самая задача может быть назначена на несколько "
-"техников. Такая задача будет подсчитана для каждого из них."
+"Отметьте, что та же самая задача может быть назначена на несколько техников. "
+"Такая задача будет подсчитана для каждого из них."
 
 #: www/pm/task.php:69
 #, fuzzy
@@ -20902,9 +20898,8 @@ msgid ""
 "categories. If the project does not require any or all of these locations, "
 "simply select “None Selected”."
 msgstr ""
-"Выбирете до трех "
-"местоположений для этого проекта в каждой из категорий корня каталога. Если "
-"они не требуюся, то просто выберите “Не выбрано”."
+"Выбирете до трех местоположений для этого проекта в каждой из категорий "
+"корня каталога. Если они не требуюся, то просто выберите “Не выбрано”."
 
 #: www/project/admin/group_trove.php:80
 #, fuzzy
@@ -20914,11 +20909,10 @@ msgid ""
 "a parent category will result in only the more specific categorization being "
 "accepted."
 msgstr ""
-"ВНИМАНИЕ: Проекты "
-"должны быть категоризированы как можно точнее. Если выбрана одновременно "
-"классификация и в специфичной категории каталога, и в её более общей "
-"родительской категории, то в результате будет добавлена только специфичная "
-"категория."
+"ВНИМАНИЕ: Проекты должны быть категоризированы как можно точнее. Если "
+"выбрана одновременно классификация и в специфичной категории каталога, и в "
+"её более общей родительской категории, то в результате будет добавлена "
+"только специфичная категория."
 
 #: www/project/admin/group_trove.php:121
 msgid "Update All Category Changes"
@@ -21702,8 +21696,8 @@ msgid ""
 "You can choose among different SCM for your project, but just one (or none "
 "at all). Please select the SCM system you want to use."
 msgstr ""
-"Вы можете выбрать один из двух типов системы управления "
-"версиями <strong>SCM</strong> для Вашего проекта: <strong>svn</strong> или "
+"Вы можете выбрать один из двух типов системы управления версиями "
+"<strong>SCM</strong> для Вашего проекта: <strong>svn</strong> или "
 "<strong>cvs</strong> (рекомендуется SVN). Пожалуйста выберите систему SCM, "
 "которую Вы хотите использовать."
 

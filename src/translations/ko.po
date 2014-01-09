@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-09 12:27+0100\n"
+"POT-Creation-Date: 2014-01-09 15:02+0100\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -282,6 +282,7 @@ msgstr "파일 이름"
 #: common/tracker/include/ArtifactHtml.class.php:112
 #: common/tracker/include/ArtifactHtml.class.php:220
 #: common/tracker/include/ArtifactTypeHtml.class.php:438
+#: common/tracker/views/form-addextrafieldoption.php:43
 #: common/tracker/views/form-adminroadmap.php:70
 #: common/tracker/views/form-adminroadmap.php:193
 #: common/tracker/views/form-updateextrafield.php:42
@@ -1292,7 +1293,7 @@ msgstr ""
 #: common/include/Group.class.php:793
 #: common/tracker/ArtifactExtraField.class.php:328
 #: common/tracker/include/ArtifactTypeHtml.class.php:331
-#: common/tracker/views/form-addextrafieldoption.php:107
+#: common/tracker/views/form-addextrafieldoption.php:109
 #: common/tracker/views/form-addextrafield.php:131
 #: common/tracker/views/form-updateextrafieldelement.php:63
 #: common/widget/Widget_ProjectLatestDocuments.class.php:76
@@ -1732,7 +1733,7 @@ msgstr ""
 #: common/tracker/include/build_submission_form.php:106
 #: common/tracker/views/form-addcanned.php:69
 #: common/tracker/views/form-addcanned.php:74
-#: common/tracker/views/form-addextrafieldoption.php:101
+#: common/tracker/views/form-addextrafieldoption.php:103
 #: common/tracker/views/form-addextrafield.php:114
 #: common/tracker/views/form-addextrafield.php:118
 #: common/tracker/views/form-addextrafield.php:123
@@ -5127,7 +5128,7 @@ msgstr ""
 #: common/tracker/include/build_submission_form.php:54
 #: common/tracker/include/build_submission_form.php:118
 #: common/tracker/views/form-addcanned.php:78
-#: common/tracker/views/form-addextrafieldoption.php:110
+#: common/tracker/views/form-addextrafieldoption.php:112
 #: common/tracker/views/form-addextrafield.php:146
 #: common/tracker/views/form-adminroadmap.php:234
 #: common/tracker/views/form-clonetracker.php:59
@@ -5255,7 +5256,7 @@ msgstr ""
 #: common/tracker/actions/admin-updates.php:493
 #: common/tracker/actions/admin-updates.php:517
 #: common/tracker/actions/admin-updates.php:572
-#: common/tracker/views/form-addextrafieldoption.php:30
+#: common/tracker/views/form-addextrafieldoption.php:31
 #: common/tracker/views/form-deleteextrafieldelement.php:34
 #: common/tracker/views/form-updateextrafieldelement.php:33
 #: common/tracker/views/form-updateextrafield.php:36
@@ -6662,48 +6663,53 @@ msgstr ""
 msgid "Message Body"
 msgstr "본문"
 
-#: common/tracker/views/form-addextrafieldoption.php:35
+#: common/tracker/views/form-addextrafieldoption.php:36
 #, php-format
 msgid "Add/Update Custom Field Elements in %s"
 msgstr ""
 
-#: common/tracker/views/form-addextrafieldoption.php:45
+#: common/tracker/views/form-addextrafieldoption.php:43
+#, fuzzy
+msgid "Custom field name"
+msgstr "파일 삭제하기"
+
+#: common/tracker/views/form-addextrafieldoption.php:47
 #: common/tracker/views/form-adminroadmap.php:402
 #: common/tracker/views/form-customizelist.php:98
 msgid "Current / New positions"
 msgstr ""
 
-#: common/tracker/views/form-addextrafieldoption.php:46
+#: common/tracker/views/form-addextrafieldoption.php:48
 #: common/tracker/views/form-adminroadmap.php:403
 #: common/tracker/views/form-customizelist.php:99
 msgid "Up/Down positions"
 msgstr ""
 
-#: common/tracker/views/form-addextrafieldoption.php:47
+#: common/tracker/views/form-addextrafieldoption.php:49
 #: common/tracker/views/form-addextrafield.php:44
 msgid "Elements Defined"
 msgstr ""
 
-#: common/tracker/views/form-addextrafieldoption.php:49
+#: common/tracker/views/form-addextrafieldoption.php:51
 msgid "Mapping"
 msgstr ""
 
-#: common/tracker/views/form-addextrafieldoption.php:82
+#: common/tracker/views/form-addextrafieldoption.php:84
 #: common/tracker/views/form-adminroadmap.php:412
 #: common/tracker/views/form-customizelist.php:108
 #, fuzzy
 msgid "Reorder"
 msgstr "보고서"
 
-#: common/tracker/views/form-addextrafieldoption.php:87
+#: common/tracker/views/form-addextrafieldoption.php:89
 msgid "Alphabetical order"
 msgstr ""
 
-#: common/tracker/views/form-addextrafieldoption.php:95
+#: common/tracker/views/form-addextrafieldoption.php:97
 msgid "You have not defined any elements"
 msgstr ""
 
-#: common/tracker/views/form-addextrafieldoption.php:101
+#: common/tracker/views/form-addextrafieldoption.php:103
 msgid "Add New Element"
 msgstr ""
 
@@ -23079,10 +23085,6 @@ msgstr "사용자ID"
 #~ "트 관리자가 작성한 미리 준비한 의견들의 목록을 표시합니다.<br /><br />프로"
 #~ "젝트 관리자는 '(관리)' 링크를 클릭하여 미리 준비한 의견을 작성할 수 있습니"
 #~ "다."
-
-#, fuzzy
-#~ msgid "Delete Custom Field"
-#~ msgstr "파일 삭제하기"
 
 #, fuzzy
 #~ msgid "Release name"
