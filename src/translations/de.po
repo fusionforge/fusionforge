@@ -16597,8 +16597,8 @@ msgid ""
 "Unix status updated mirroring web status, unless it has value “No Unix "
 "account (N)”"
 msgstr ""
-"Der Unix Status ist gleich dem Web-Status, außer er hat den Wert 'Kein Unix "
-"Account (N)'"
+"Der Unix Status ist gleich dem Web-Status, außer er hat den Wert »Kein Unix "
+"Account (N)«"
 
 #: www/admin/useredit.php:253
 #, fuzzy
@@ -22426,28 +22426,32 @@ msgstr "Fehler - war die URL und Form falsch?"
 msgid ""
 "The purpose of this archive is to let you share your code snippets, scripts, "
 "and functions with the Open Source Software Community."
-msgstr ""
+msgstr "Zweck dieses Archivs ist, Ihnen zu ermöglichen, Code Schnipsel "
+"Scripte und Funktionen mit der Open Source Software Community zu teilen."
 
 #: www/snippet/index.php:52
 msgid ""
 "You can create a “new snippet”, then post additional versions of that "
 "snippet quickly and easily."
-msgstr ""
+msgstr "Sie können einen »neuen Schnipsel« erzeugen und dann schnell und "
+"einfach zusätzliche Versionen des Schnipsels bereitstellen."
 
 #: www/snippet/index.php:54
 msgid ""
 "Once you have snippets posted, you can then create a “Package” of snippets. "
 "That package can contain multiple, specific versions of other snippets."
-msgstr ""
+msgstr "Sobald "
+"Sie Schnipsel gepostet haben, können Sie anschliessend ein Schnipsel "
+"»Paket« erzeugen. Dieses Paket kann eine Reihe unterschiedlicher "
+"Versionen Ihrer Schnipsel enthalten."
 
 #: www/snippet/index.php:56
-#, fuzzy
 msgid "Browse Snippets"
-msgstr "Schnipsel"
+msgstr "Durchsuche Schnipsel"
 
 #: www/snippet/index.php:58
 msgid "You can browse the snippet library quickly:"
-msgstr ""
+msgstr "Sie können die Schnipsel-Bibliothek schnell durchsuchen:"
 
 #: www/snippet/index.php:64
 msgid "Browse by Language"
@@ -22642,7 +22646,7 @@ msgid "Register Date:"
 msgstr "Registrierungsdatum:"
 
 #: www/softwaremap/tag_cloud.php:86
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "More than <strong>%1$s</strong> projects have <strong>%2$s</strong> as tag."
 msgstr ""
@@ -23704,12 +23708,6 @@ msgstr "Kein Benutzername angegeben"
 
 #~ msgid "Missing Password Or Users Name"
 #~ msgstr "Fehlendes Passwort oder Benutzername"
-
-#~ msgid "Free form text for the \"submit new item\" page"
-#~ msgstr "Freitext für die \"Neues Objekt vorschlagen\" Seite"
-
-#~ msgid "Free form text for the \"browse items\" page"
-#~ msgstr "Freitext für die \"Durchsuche Objekte\" Seite"
 
 #, fuzzy
 #~ msgid "Error getting forum"
@@ -24994,10 +24992,6 @@ msgstr "Kein Benutzername angegeben"
 #, fuzzy
 #~ msgid "Error Getting Forum"
 #~ msgstr "Fehler beim Suchen des Forums"
-
-#, fuzzy
-#~ msgid "You can't %1$s \\\"None\\\"!"
-#~ msgstr "Sie können nicht %1$s \\\"None\\\"!"
 
 #~ msgid "Existing Responses:"
 #~ msgstr "Existierende Antworten:"
@@ -26966,26 +26960,6 @@ msgstr "Kein Benutzername angegeben"
 #~ "die Erzeugung eines Virtual Hosts planen. Dies wird mit den Projekt-"
 #~ "Webservern synchronisiert werde - so daß <em>yourhost.org</em> das "
 #~ "Material unter <em>%4$s.%5$s</em> anzeigt."
-
-#, fuzzy
-#~ msgid ""
-#~ "<p>The purpose of this archive is to let you share your code snippets, "
-#~ "scripts,\tand functions with the Open Source Software Community.</"
-#~ "p><p>You can create a \"new snippet\", then post additional versions of "
-#~ "that snippet quickly and easily.</p><p>Once you have snippets posted, you "
-#~ "can then create a \"Package\" of snippets. That package can contain "
-#~ "multiple, specific versions of other snippets.</p><p>&nbsp;</p><h3>Browse "
-#~ "Snippets</h3>\t<p>You can browse the snippet library quickly:</p>"
-#~ msgstr ""
-#~ "<p>Der Zweck dieses Archivs ist, Ihnen zu ermöglichen, Code Schnipsel "
-#~ "Scripte und Funktionen mit der Open Source Software Community zu teilen.</"
-#~ "p><p>Sie können einen \"neuen Schnipsel\" erzeugen und dann schnell und "
-#~ "einfach zusätzliche Versionen des Schnipsels bereitstellen.</p><p>Sobald "
-#~ "Sie Schnipsel gepostet haben, können Sie anschliessend ein Schnipsel "
-#~ "\"Paket\" erzeugen. Dieses Paket kann eine Reihe unterschiedlicher "
-#~ "Versionen Ihrer Schnipsel enthalten.</p><p>&nbsp;</p><h3>Durchsuche "
-#~ "Schnipsel</h3>\t<p>Sie können die Schnipsel-Bibliothek schnell "
-#~ "durchsuchen:</p>"
 
 #, fuzzy
 #~ msgid ""

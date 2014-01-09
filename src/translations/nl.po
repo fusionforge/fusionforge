@@ -19127,7 +19127,7 @@ msgstr "Categorie toegevoegd"
 #: www/people/admin/index.php:68
 #, fuzzy
 msgid "Skill Inserted"
-msgstr "Enquête\ttoegevoegd"
+msgstr "toegevoegd"
 
 #: www/people/admin/index.php:90
 #, fuzzy
@@ -19641,7 +19641,7 @@ msgstr "Voeg een nieuwe taak toe"
 
 #: www/pm/add_task.php:81
 msgid "Task Details"
-msgstr "Taak \tDetails"
+msgstr "Taak Details"
 
 #: www/pm/add_task.php:88 www/pm/add_task.php:149 www/pm/mod_task.php:197
 #: www/pm/mod_task.php:212 www/pm/mod_task.php:267
@@ -19968,7 +19968,7 @@ msgstr "Taaksamenvatting"
 #: www/pm/calendar.php:143
 #, fuzzy, php-format
 msgid "Task %d begins"
-msgstr "Taak \tDetails"
+msgstr "Taak Details"
 
 #: www/pm/calendar.php:144
 #, fuzzy, php-format
@@ -25746,9 +25746,6 @@ msgstr "Gebruikersnaam"
 
 #~ msgid "Project Statistical Comparisons"
 #~ msgstr "Statistische vergelijking van projecten"
-
-#~ msgid "Survey Inserted"
-#~ msgstr "Enquête\ttoegevoegd"
 
 #~ msgid "Edit Survey"
 #~ msgstr "Bewerk enquête"

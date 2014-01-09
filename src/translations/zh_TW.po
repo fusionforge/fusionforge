@@ -25753,9 +25753,6 @@ msgstr "帳號"
 #~ msgid "Value"
 #~ msgstr "舊值"
 
-#~ msgid "Group Unix Name:"
-#~ msgstr "Group\tUnix名稱："
-
 #~ msgid "Group List"
 #~ msgstr "群組清單"
 

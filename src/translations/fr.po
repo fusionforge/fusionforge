@@ -24343,9 +24343,6 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #~ msgid "Error Getting Forum"
 #~ msgstr "Erreur lors de l'accès à un forum"
 
-#~ msgid "You can't %1$s \\\"None\\\"!"
-#~ msgstr "L'action « %1$s » ne s'applique pas."
-
 #~ msgid "Existing Responses:"
 #~ msgstr "Réponses existantes :"
 
@@ -26287,13 +26284,6 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #~ msgid "could Not Get ArtifactTypeFactoryHtml"
 #~ msgstr "Erreur lors de la création de l'objet ArtifactTypeFactory."
 
-#~ msgid ""
-#~ "This project has not yet categorized itself in the <a href=\"%s\">Trove "
-#~ "Software Map</a>."
-#~ msgstr ""
-#~ "Ce projet n'a pas encore été classé dans l'<a href=\\\"%s\\\">arbre des\n"
-#~ "projets</a>."
-
 #~ msgid "That Trove category does not exist."
 #~ msgstr "Cette catégorie n'existe pas."
 
@@ -27219,18 +27209,6 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 
 #~ msgid "Name of Survey"
 #~ msgstr "Nom du sondage"
-
-#~ msgid ""
-#~ "List question numbers, in desired order, separated by commas. "
-#~ "<strong>Refer to your list of questions</strong> so you can view\tthe "
-#~ "question id's. Do <strong>not</strong> include spaces or end your list "
-#~ "with a comma.<br /> Ex: 1,2,3,4,5,6,7"
-#~ msgstr ""
-#~ "Listez les numéros des questions, dans l'ordre souhaité, séparés par des "
-#~ "virgules. <strong>Référez-vous à votre liste de questions</strong> pour "
-#~ "en visualiser les identifiants. <strong>N'incluez pas</strong> d'espaces "
-#~ "dans votre liste, et ne la terminez pas par une virgule.<br>Exemple : "
-#~ "« 1,2,3,4,5,6,7 »."
 
 #~ msgid "%1$s survey found"
 #~ msgid_plural "%1$s surveys found"

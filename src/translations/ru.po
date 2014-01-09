@@ -20904,7 +20904,7 @@ msgid ""
 msgstr ""
 "Выбирете до трех "
 "местоположений для этого проекта в каждой из категорий корня каталога. Если "
-"они не требуюся, то просто выберите \"Не выбрано\"."
+"они не требуюся, то просто выберите “Не выбрано”."
 
 #: www/project/admin/group_trove.php:80
 #, fuzzy
@@ -24925,9 +24925,6 @@ msgstr "Имя участника обязательно"
 #~ msgid "Error Getting Forum"
 #~ msgstr "Ошибка доступа к форуму"
 
-#~ msgid "You can't %1$s \\\"None\\\"!"
-#~ msgstr "Вам нельзя %1$s \\\"делать\\\"!"
-
 #~ msgid "Existing Responses:"
 #~ msgstr "Существующие отзывы:"
 
@@ -26658,18 +26655,6 @@ msgstr "Имя участника обязательно"
 
 #~ msgid "Question insert failed"
 #~ msgstr "Ошибка вставки вопроса"
-
-#~ msgid ""
-#~ "List question numbers, in desired order, separated by commas. "
-#~ "<strong>Refer to your list of questions</strong> so you can view the "
-#~ "question id's. Do <strong>not</strong> include spaces or end your list "
-#~ "with a comma. <br />Ex: 1,2,3,4,5,6,7"
-#~ msgstr ""
-#~ "Перечень вопросов по номерам, в желаемом порядке, разделение запятыми. "
-#~ "<strong>Укажите на Ваш лист вопросов</strong> так Вы можете видеть "
-#~ "идетификаторы вопросов. Использование<strong> пробелов или перевода "
-#~ "строки недопустимо,</strong>следуйте как указано. <br />Например: "
-#~ "1,2,3,4,5,6,7"
 
 #~ msgid "Show Existing Questions"
 #~ msgstr "Показать лист вопросов"

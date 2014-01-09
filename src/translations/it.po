@@ -25095,12 +25095,6 @@ msgstr "Non è stato inserito alcun file"
 #~ msgstr "Impossibile completare l'operazione"
 
 #, fuzzy
-#~ msgid ""
-#~ "This project has not yet categorized itself in the <a href=\"%s\">Trove "
-#~ "Software Map</a>."
-#~ msgstr "Questo progetto non è ancora stato categorizzato nella"
-
-#, fuzzy
 #~ msgid "That Trove category does not exist."
 #~ msgstr "La categoria Trove richiesta non è valida"
 
