@@ -137,7 +137,11 @@ if ($rows > 0) {
 		<?php echo _('Text Field Size/Text Area Rows'); ?>
 			<input type="text" name="attribute1" value="20" size="2" maxlength="2" /><br />
 		<?php echo _('Text Field Maxlength/Text Area Columns'); ?>
-			<input type="text" name="attribute2" value="80" size="2" maxlength="2" />
+			<input type="text" name="attribute2" value="80" size="2" maxlength="2" /><br />
+		<?php echo _('Use the default none value'); ?>
+			<input type="checkbox" name="attribute3" /><br />
+		<?php echo _('Set specific label for the none value'); ?>
+			<input type="text" name="attribute4" size="30" placeholder="none" /><br />
 		</p>
 		<p>
 		<div class="warning"><?php echo _('Warning: this add new custom field') ?></div>
