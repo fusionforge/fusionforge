@@ -36,11 +36,11 @@
 		$title = sprintf(_('Add/Update Custom Field Elements in %s'), $ath->getName());
 		$ath->adminHeader(array('title'=>$title));
 
+		echo '<h2>'._('Custom field name')._(': ').$ac->getName().'</h2>';
 		$rows=count($efearr);
 		if ($rows > 0) {
 
 			?>
-			<h2><?php echo _('Custom field name')._(': ').$ac->getName() ?></h2>
 			<form action="<?php echo 'index.php?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;boxid='.$boxid; ?>" method="post">
 			<?php
 			$title_arr=array();
@@ -94,7 +94,7 @@
 			<?php
 
 		} else {
-			echo "\n<strong>"._('You have not defined any elements')."</strong>";
+			echo "\n<strong>"._('You have not defined any elements.')."</strong>";
 		}
 		?>
 		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;boxid='.$boxid.'&amp;atid='.$ath->getID(); ?>" method="post">

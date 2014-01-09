@@ -3,6 +3,7 @@
  * Tracker Facility
  *
  * Copyright 2010 (c) FusionForge Team
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -45,6 +46,7 @@ if (!$ac || !is_object($ac)) {
 		$ath->adminHeader(array('title'=>$title));
 
 ?>
+			<h2><?php echo _('Custom field name')._(': ').$ac->getName() ?></h2>
 			<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post">
 			<input type="hidden" name="update_opt" value="y" />
 			<input type="hidden" name="id" value="<?php echo $ao->getID(); ?>" />
@@ -64,7 +66,7 @@ if (!$ac || !is_object($ac)) {
 			<?php echo $ath->statusBox('status_id',$ao->getStatusID(),false,false); ?>
 			<?php } ?>
 
-			<div class="warning"><?php echo _('It is not recommended that you change the custom field name because other things are dependent upon it. When you change the custom field name, all related items will be changed to the new name') ?>
+			<div class="warning"><?php echo _('It is not recommended that you change the custom field name because other things are dependent upon it. When you change the custom field name, all related items will be changed to the new name.') ?>
 			</div>
 			<p>
 			<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
