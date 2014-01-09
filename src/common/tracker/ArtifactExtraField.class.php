@@ -4,6 +4,7 @@
  *
  * Copyright 2004, Anthony J. Pugliese
  * Copyright 2009, Roland Mas
+ * Copyright 2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -95,14 +96,16 @@ class ArtifactExtraField extends Error {
 	 * @param	int	$attribute2	For text (maxlength) and textarea (cols)
 	 * @param	int	$is_required	True or false whether this is a required field or not.
 	 * @param	string	$alias		Alias for this extra field (optional)
+	 * @param	int	$show100	True or false whether the 100 value is displayed or not
+	 * @param	string	$show100label	The label used for the 100 value if displayed
 	 * @return	bool	true on success / false on failure.
 	 */
-	function create($name,$field_type,$attribute1,$attribute2,$is_required=0,$alias='') {
+	function create($name, $field_type, $attribute1, $attribute2, $is_required = 0, $alias = '', $show100 = true, $show100label = 'none') {
 		//
 		//	data validation
 		//
 		if (!$name) {
-			$this->setError(_('a field name is required'));
+			$this->setError(_('A field name is required'));
 			return false;
 		}
 		if (!$field_type) {
@@ -150,15 +153,17 @@ class ArtifactExtraField extends Error {
 		}
 
 		db_begin();
-		$result = db_query_params ('INSERT INTO artifact_extra_field_list (group_artifact_id,field_name,field_type,attribute1,attribute2,is_required,alias)
-			VALUES ($1,$2,$3,$4,$5,$6,$7)',
+		$result = db_query_params ('INSERT INTO artifact_extra_field_list (group_artifact_id, field_name, field_type, attribute1, attribute2, is_required, alias, show100, show100label)
+			VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)',
 					   array ($this->ArtifactType->getID(),
 						  htmlspecialchars($name),
 						  $field_type,
 						  $attribute1,
 						  $attribute2,
 						  $is_required,
-						  $alias));
+						  $alias,
+						  $show100,
+						  $show100label));
 
 		if ($result && db_affected_rows($result) > 0) {
 			$this->clearError();
@@ -282,6 +287,24 @@ class ArtifactExtraField extends Error {
 	 */
 	function getAttribute2() {
 		return $this->data_array['attribute2'];
+	}
+
+	/**
+	 * getShow100 - get the show100 field.
+	 *
+	 * @return	int	The show100 attribute.
+	 */
+	function getShow100() {
+		return $this->data_array['show100'];
+	}
+
+	/**
+	 * getShow100label - get the show100label field.
+	 *
+	 * @return	int	The show100label attribute.
+	 */
+	function getShow100label() {
+		return $this->data_array['show100label'];
 	}
 
 	/**

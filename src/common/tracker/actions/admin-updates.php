@@ -4,7 +4,7 @@
  *
  * Copyright 2010 (c) FusionForge Team
  * Copyright 2010 (c) Franck Villaume - Capgemini
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -39,6 +39,8 @@ if (getStringFromRequest('add_extrafield')) {
 	$attribute2 = getStringFromRequest('attribute2');
 	$is_required = getStringFromRequest('is_required');
 	$alias = getStringFromRequest('alias');
+	$hide100 = getStringFromRequest('hide100');
+	$show100label = getStringFromRequest('show100label');
 
 	$ab = new ArtifactExtraField($ath);
 
@@ -47,7 +49,12 @@ if (getStringFromRequest('add_extrafield')) {
 //	} elseif ($ab->isError())
 //		$error_msg .= $ab->getErrorMessage();
 	} else {
-		if (!$ab->create($name,$field_type,$attribute1,$attribute2,$is_required,$alias)) {
+		if ($hide100) {
+			$show100 = 0;
+		} else {
+			$show100 = 1;
+		}
+		if (!$ab->create($name, $field_type, $attribute1, $attribute2, $is_required, $alias, $show100, $show100label)) {
 			$error_msg .= _('Error inserting a custom field')._(': ').$ab->getErrorMessage();
 			$ab->clearError();
 		} else {

@@ -240,15 +240,15 @@ class ArtifactTypeHtml extends ArtifactType {
 				$selected[$efarr[$i]['extra_field_id']] = '';
 
 			if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_SELECT) {
-				$str = $this->renderSelect($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$show_100,$text_100,$show_any,$text_any);
+				$str = $this->renderSelect($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['show100'],$efarr[$i]['show100label'],$show_any,$text_any);
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) {
 
-				$str = $this->renderCheckbox($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$show_100,$text_100);
+				$str = $this->renderCheckbox($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['show100'],$efarr[$i]['show100label']);
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RADIO) {
 
-				$str = $this->renderRadio($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$show_100,$text_100,$show_any,$text_any);
+				$str = $this->renderRadio($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['show100'],$efarr[$i]['show100label'],$show_any,$text_any);
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_TEXT ||
 					$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_INTEGER) {
@@ -267,7 +267,7 @@ class ArtifactTypeHtml extends ArtifactType {
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT) {
 
-				$str = $this->renderMultiSelectBox ($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$show_100,$text_100);
+				$str = $this->renderMultiSelectBox ($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['show100'],$efarr[$i]['show100label']);
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 

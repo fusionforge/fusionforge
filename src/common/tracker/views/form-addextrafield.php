@@ -121,7 +121,7 @@ if ($rows > 0) {
 
 		<p>
 		<strong><?php  echo _('Type of custom field')._(':'); ?></strong><br />
-		<input type="radio" name="field_type" value="1" /> <?php echo _('Select Box'); ?><br />
+		<input type="radio" name="field_type" value="1" required="required" /> <?php echo _('Select Box'); ?><br />
 		<input type="radio" name="field_type" value="2" /> <?php echo _('Check Box'); ?><br />
 		<input type="radio" name="field_type" value="3" /> <?php echo _('Radio Buttons'); ?><br />
 		<input type="radio" name="field_type" value="4" /> <?php echo _('Text Field'); ?><br />
@@ -138,10 +138,10 @@ if ($rows > 0) {
 			<input type="text" name="attribute1" value="20" size="2" maxlength="2" /><br />
 		<?php echo _('Text Field Maxlength/Text Area Columns'); ?>
 			<input type="text" name="attribute2" value="80" size="2" maxlength="2" /><br />
-		<?php echo _('Use the default none value'); ?>
-			<input type="checkbox" name="attribute3" /><br />
-		<?php echo _('Set specific label for the none value'); ?>
-			<input type="text" name="attribute4" size="30" placeholder="none" /><br />
+		<?php echo _('Hide the default none value'); ?>
+			<input type="checkbox" name="hide100" /><br />
+		<?php echo _('Label for the none value'); ?>
+			<input type="text" name="show100label" size="30" value="<?php echo _('none') ?>" /><br />
 		</p>
 		<p>
 		<div class="warning"><?php echo _('Warning: this add new custom field') ?></div>
