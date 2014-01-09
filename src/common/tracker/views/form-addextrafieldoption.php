@@ -3,6 +3,7 @@
  * Tracker Facility
  *
  * Copyright 2010 (c) FusionForge Team
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -39,6 +40,7 @@
 		if ($rows > 0) {
 
 			?>
+			<h2><?php echo _('Custom field name')._(': ').$ac->getName() ?></h2>
 			<form action="<?php echo 'index.php?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;boxid='.$boxid; ?>" method="post">
 			<?php
 			$title_arr=array();
