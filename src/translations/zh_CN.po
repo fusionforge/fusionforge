@@ -8309,9 +8309,9 @@ msgid ", part of "
 msgstr ""
 
 #: plugins/admssw/common/RDFedFRSPackage.class.php:94
-#, fuzzy, php-format
+#, php-format
 msgid "%1$s release series of project %2$s"
-msgstr "SCM Repository"
+msgstr ""
 
 #: plugins/admssw/include/admsswPlugin.class.php:138
 msgid "ADMS.SW meta-data"
@@ -8322,9 +8322,9 @@ msgid "ADMS.SW RDF meta-data about forge projects."
 msgstr ""
 
 #: plugins/admssw/include/admsswPlugin.class.php:150
-#, fuzzy, php-format
+#, php-format
 msgid "Preview <a href=\"%s\">ADMS.SW meta-data</a> about the project"
-msgstr "以下是这个项目能够提供的工作列表"
+msgstr ""
 
 #: plugins/admssw/include/admsswPlugin.class.php:631
 msgid ""
@@ -8336,7 +8336,7 @@ msgstr ""
 #: www/softwaremap/full_list.php:70
 #, fuzzy, php-format
 msgid "<strong>%d</strong> projects in result set."
-msgstr "找到 <strong>%1$s</strong> 个项目"
+msgstr "找到 <strong>%d</strong> 个项目"
 
 #: plugins/admssw/include/admsswPlugin.class.php:645
 #: plugins/admssw/www/projectturtle.php:52 plugins/admssw/www/trove.php:46
@@ -8406,9 +8406,8 @@ msgid "ADMS.SW meta-data index of public projects"
 msgstr ""
 
 #: plugins/admssw/www/projectturtle.php:44
-#, fuzzy
 msgid "ADMS.SW project meta-data preview"
-msgstr "项目页面浏览排行榜"
+msgstr ""
 
 #: plugins/admssw/www/projectturtle.php:48 plugins/admssw/www/trove.php:42
 #, php-format

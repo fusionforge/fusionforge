@@ -8329,9 +8329,9 @@ msgid "ADMS.SW RDF meta-data about forge projects."
 msgstr ""
 
 #: plugins/admssw/include/admsswPlugin.class.php:150
-#, fuzzy, php-format
+#, php-format
 msgid "Preview <a href=\"%s\">ADMS.SW meta-data</a> about the project"
-msgstr "Aquí hi ha una llista de posicions disponibles per a aquest projecte."
+msgstr ""
 
 #: plugins/admssw/include/admsswPlugin.class.php:631
 msgid ""
@@ -8413,9 +8413,8 @@ msgid "ADMS.SW meta-data index of public projects"
 msgstr ""
 
 #: plugins/admssw/www/projectturtle.php:44
-#, fuzzy
 msgid "ADMS.SW project meta-data preview"
-msgstr "Màxim nombre de visites a pàgines de projecte"
+msgstr ""
 
 #: plugins/admssw/www/projectturtle.php:48 plugins/admssw/www/trove.php:42
 #, php-format

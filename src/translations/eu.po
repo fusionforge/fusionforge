@@ -8321,9 +8321,9 @@ msgid ", part of "
 msgstr ""
 
 #: plugins/admssw/common/RDFedFRSPackage.class.php:94
-#, fuzzy, php-format
+#, php-format
 msgid "%1$s release series of project %2$s"
-msgstr "SCM errepositorioa"
+msgstr ""
 
 #: plugins/admssw/include/admsswPlugin.class.php:138
 msgid "ADMS.SW meta-data"
@@ -8334,9 +8334,9 @@ msgid "ADMS.SW RDF meta-data about forge projects."
 msgstr ""
 
 #: plugins/admssw/include/admsswPlugin.class.php:150
-#, fuzzy, php-format
+#, php-format
 msgid "Preview <a href=\"%s\">ADMS.SW meta-data</a> about the project"
-msgstr "Hemen proiektu honetan eskuragarri dauden posizioen zerrenda dago"
+msgstr ""
 
 #: plugins/admssw/include/admsswPlugin.class.php:631
 msgid ""
@@ -8418,9 +8418,8 @@ msgid "ADMS.SW meta-data index of public projects"
 msgstr ""
 
 #: plugins/admssw/www/projectturtle.php:44
-#, fuzzy
 msgid "ADMS.SW project meta-data preview"
-msgstr "Gehien ikusitako proiektuak - %1$s logoko botoiaren neurketen arabera"
+msgstr ""
 
 #: plugins/admssw/www/projectturtle.php:48 plugins/admssw/www/trove.php:42
 #, php-format

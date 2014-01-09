@@ -8391,9 +8391,9 @@ msgid ", part of "
 msgstr ""
 
 #: plugins/admssw/common/RDFedFRSPackage.class.php:94
-#, fuzzy, php-format
+#, php-format
 msgid "%1$s release series of project %2$s"
-msgstr "SCM репозиторий"
+msgstr ""
 
 #: plugins/admssw/include/admsswPlugin.class.php:138
 msgid "ADMS.SW meta-data"

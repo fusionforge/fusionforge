@@ -8425,11 +8425,8 @@ msgid "ADMS.SW meta-data index of public projects"
 msgstr ""
 
 #: plugins/admssw/www/projectturtle.php:44
-#, fuzzy
 msgid "ADMS.SW project meta-data preview"
 msgstr ""
-"Hoogste aantal paginabezoeken per project (gemeten als klikken op het  %1$s "
-"'button' logo)"
 
 #: plugins/admssw/www/projectturtle.php:48 plugins/admssw/www/trove.php:42
 #, php-format

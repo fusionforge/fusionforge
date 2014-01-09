@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-09 15:02+0100\n"
+"POT-Creation-Date: 2014-01-09 18:28+0100\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -844,6 +844,8 @@ msgid ""
 "Refers to the relatively brief title of the document (e.g. How to use the "
 "download server)."
 msgstr ""
+"Si riferisce al nome breve del titolo del documento (ad esempio, come usare "
+"il server per i file)."
 
 #: common/docman/views/addfile.php:92 common/docman/views/addfile.php:108
 #: common/docman/views/addfile.php:110 common/docman/views/editfile.php:42
@@ -907,7 +909,7 @@ msgstr "Descrizione"
 
 #: common/docman/views/addfile.php:92
 msgid "A brief description to be placed just under the title."
-msgstr ""
+msgstr "Una descrizione breve da visualizzare sotto il titolo."
 
 #: common/docman/views/addfile.php:94 common/docman/views/editfile.php:47
 msgid "Both fields are used by the document search engine."
@@ -2577,9 +2579,8 @@ msgstr "Da"
 
 #: common/forum/ForumHTML.class.php:266
 #: plugins/forumml/www/forumml_utils.php:556 www/forum/message.php:123
-#, fuzzy
 msgid "Reply"
-msgstr "rispondi"
+msgstr "Rispondi"
 
 #: common/forum/ForumHTML.class.php:311
 msgid "Current File"
@@ -3555,7 +3556,7 @@ msgstr ""
 
 #: common/include/Group.class.php:2672
 msgid "There is no administrator to send the mail to."
-msgstr ""
+msgstr "Puoi inviare un commento agli amministratori."
 
 #: common/include/Group.class.php:2680 common/include/Group.class.php:2691
 #: common/include/Group.class.php:2698 common/include/Group.class.php:2704
@@ -3571,7 +3572,7 @@ msgstr "Descrizione inserita"
 #: common/include/Group.class.php:2689
 #, fuzzy
 msgid "Please visit the following URL to approve or reject this project"
-msgstr "Visita il seguente URL per completare il cambio di indirizzo email:"
+msgstr "Collegati all'URL per approvare o rifiutare il progetto."
 
 #: common/include/Group.class.php:2701
 #, php-format
@@ -3960,24 +3961,23 @@ msgid "Show source"
 msgstr "Visualizza sorgente"
 
 #: common/include/Plugin.class.php:192
-#, fuzzy
 msgid ""
 "Soft link to www could not be created. Check the write permissions for "
 "apache in fusionforge www/plugins dir or create the link manually."
 msgstr ""
 "Non è stato possibile creare un softlink alla cartella www. Controlla i "
-"permessi per apache in fusionforge/www/plugins oppure creare il link "
+"permessi per apache fusionforge www/plugins oppure creare il link "
 "manualmente."
 
 #: common/include/Plugin.class.php:204 common/include/Plugin.class.php:221
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Config file could not be linked to %s. Check the write permissions for "
 "apache in /etc/fusionforge/plugins or create the link manually."
 msgstr ""
-"Non è stato possibile collegare il file di configurazione a etc/fusionforge/"
-"plugins/%s. Controlla i permessi di scrittura per apache in /etc/fusionforge/"
-"plugins oppure crea il link manualmente."
+"Non è stato possibile collegare il file di configurazione a %s. Controlla i "
+"permessi di scrittura per apache in /etc/fusionforge/plugins oppure crea il "
+"link manualmente."
 
 #: common/include/Plugin.class.php:250 common/include/Plugin.class.php:309
 #: www/admin/pluginman.php:279
@@ -3987,7 +3987,7 @@ msgstr ""
 #: common/include/Plugin.class.php:281 common/include/Plugin.class.php:330
 #, php-format
 msgid "Use %s"
-msgstr ""
+msgstr "Usa %s"
 
 #: common/include/Plugin.class.php:348
 #, fuzzy
@@ -6648,9 +6648,8 @@ msgid "Global administration for trackers. Create, clone, workflow, fields ..."
 msgstr ""
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:57
-#, fuzzy
 msgid "Browse this tracker."
-msgstr "Consulta le attività"
+msgstr ""
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:58
 #, fuzzy
@@ -6787,7 +6786,7 @@ msgstr "Utente non valido"
 #: common/tracker/Roadmap.class.php:103
 #, fuzzy, php-format
 msgid "“%s” roadmap already exists"
-msgstr "Il nome è specificato già usato da un altro utente."
+msgstr "La query esiste già"
 
 #: common/tracker/views/form-addcanned.php:27
 #, fuzzy, php-format
@@ -7184,9 +7183,8 @@ msgid ""
 "projet with default values and set permissions propertly so you can access "
 "them."
 msgstr ""
-"Seleziona il tracker da copiare. L'amministratore del sito dovrà impostare i "
-"tracker con valori di default e impostare i privilegi in modo tale che tu "
-"possa accedervi."
+"L'amministratore del sito dovrà impostare i tracker con valori di default e "
+"impostare i privilegi in modo tale che tu possa accedervi."
 
 #: common/tracker/views/form-clonetracker.php:54
 msgid "Choose the template tracker to clone."
@@ -7981,15 +7979,14 @@ msgid "View project <a href=\"%s\">Statistics</a>"
 msgstr ""
 
 #: common/widget/Widget_ProjectInfo.class.php:86
-#, fuzzy, php-format
+#, php-format
 msgid " or <a href=\"%s\">Activity</a>"
-msgstr "Potresti inviare messaggi se tu fossi %1$s collegato %2$s"
+msgstr ""
 
 #: common/widget/Widget_ProjectInfo.class.php:88
-#, fuzzy, php-format
+#, php-format
 msgid "View list of <a href=\"%s\">RSS feeds</a> available for this project."
 msgstr ""
-"Di seguito è elencato un elenco di posizioni disponibili per il progetto."
 
 #: common/widget/Widget_ProjectInfo.class.php:105
 #, fuzzy, php-format
@@ -8002,9 +7999,8 @@ msgstr[0] "AIUTO RICHIESTO: Questo progetto sta cercando"
 msgstr[1] "AIUTO RICHIESTO: Questo progetto sta cercando"
 
 #: common/widget/Widget_ProjectInfo.class.php:131
-#, fuzzy
 msgid "Some infos about the project."
-msgstr "Top %1$s project"
+msgstr ""
 
 #: common/widget/Widget_ProjectLatestDocuments.class.php:38
 msgid "5 Latest Published Documents"
@@ -8392,10 +8388,9 @@ msgid "ADMS.SW RDF meta-data about forge projects."
 msgstr ""
 
 #: plugins/admssw/include/admsswPlugin.class.php:150
-#, fuzzy, php-format
+#, php-format
 msgid "Preview <a href=\"%s\">ADMS.SW meta-data</a> about the project"
 msgstr ""
-"Di seguito è elencato un elenco di posizioni disponibili per il progetto."
 
 #: plugins/admssw/include/admsswPlugin.class.php:631
 msgid ""
@@ -8407,7 +8402,7 @@ msgstr ""
 #: www/softwaremap/full_list.php:70
 #, fuzzy, php-format
 msgid "<strong>%d</strong> projects in result set."
-msgstr "<strong>%1$s</strong> progetti."
+msgstr "<strong>%d</strong> progetti."
 
 #: plugins/admssw/include/admsswPlugin.class.php:645
 #: plugins/admssw/www/projectturtle.php:52 plugins/admssw/www/trove.php:46
@@ -8477,9 +8472,8 @@ msgid "ADMS.SW meta-data index of public projects"
 msgstr ""
 
 #: plugins/admssw/www/projectturtle.php:44
-#, fuzzy
 msgid "ADMS.SW project meta-data preview"
-msgstr "Pagine più visitate, sul numero di visualizzazione del logo %1$s"
+msgstr ""
 
 #: plugins/admssw/www/projectturtle.php:48 plugins/admssw/www/trove.php:42
 #, php-format
@@ -10507,7 +10501,7 @@ msgstr ""
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:46
 #, fuzzy
 msgid "Edit this link"
-msgstr "Modifica la tabella %1$ss"
+msgstr "Modifica un messaggio"
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:82
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:115
@@ -13052,9 +13046,8 @@ msgid "The label has been added to the project."
 msgstr "Sei già un membro di questo progetto."
 
 #: plugins/projectlabels/www/index.php:75
-#, fuzzy
 msgid "No such project."
-msgstr "Top %1$s project"
+msgstr ""
 
 #: plugins/projectlabels/www/index.php:86
 #, php-format
@@ -14363,9 +14356,8 @@ msgid "Unable to retrieve data"
 msgstr "Impossibile inserire un database già attivo"
 
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:96
-#, fuzzy
 msgid "Related SVN commits"
-msgstr "Commit"
+msgstr ""
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:108
 msgid "Anonymous Subversion Access"
@@ -14795,7 +14787,6 @@ msgid "Add a new ssh key"
 msgstr "Aggiungi un nuovo task"
 
 #: www/account/editsshkeys.php:74
-#, fuzzy
 msgid ""
 "To avoid having to type your password every time for your CVS/SSH developer "
 "account, you may upload your public key(s) here and they will be placed on "
@@ -15273,9 +15264,8 @@ msgid "FRS Release"
 msgstr "Rilasci file"
 
 #: www/activity/index.php:124
-#, fuzzy
 msgid "New Documents"
-msgstr "Aggiungi un progetto"
+msgstr ""
 
 #: www/activity/index.php:126
 #, fuzzy
@@ -15508,9 +15498,8 @@ msgid "Pending reason:"
 msgstr "Ragioni per l'attesa:"
 
 #: www/admin/approve-pending.php:215
-#, fuzzy
 msgid "Based on template project"
-msgstr "Errore nella creazione  del progetto"
+msgstr ""
 
 #: www/admin/approve-pending.php:230
 msgid "Approve All On This Page"
@@ -16381,11 +16370,11 @@ msgstr "Nome breve (no spazi, tipo Unix)"
 
 #: www/admin/trove/trove_cat_add.php:112
 msgid "New category full name (maximum length is 80 chars)"
-msgstr "Nome completo nuova categoria (VARCHAR 80)"
+msgstr "Nome completo (massimo 80 caratteri)"
 
 #: www/admin/trove/trove_cat_add.php:114
 msgid "New category description (maximum length is 255 chars)"
-msgstr "Descrizione nuova categoria (VARCHAR 255)"
+msgstr "Descrizione nuova categoria (massimo 255 caratteri)"
 
 #: www/admin/trove/trove_cat_edit.php:47
 msgid "Error: a category cannot be the same as its own parent: "
@@ -16415,11 +16404,11 @@ msgstr "Nome breve (no spazi, tipo Unix)"
 
 #: www/admin/trove/trove_cat_edit.php:144
 msgid "Category full name (maximum length is 80 chars)"
-msgstr "Nome completo (VARCHAR 80)"
+msgstr "Nome completo (massimo 80 caratteri)"
 
 #: www/admin/trove/trove_cat_edit.php:147
 msgid "Category description (maximum length is 255 chars)"
-msgstr "Descrizione nuova categoria (VARCHAR 255)"
+msgstr "Descrizione nuova categoria (massimo 255 caratteri)"
 
 #: www/admin/trove/trove_cat_list.php:74
 msgid "Browse Trove Tree"
@@ -17430,15 +17419,13 @@ msgid "Edit Releases"
 msgstr "Modifica rilasci"
 
 #: www/frs/admin/editrelease.php:220
-#, fuzzy
 msgid "Edit Release"
-msgstr "Modifica rilasci"
+msgstr "Modifica rilascio"
 
 #: www/frs/admin/editrelease.php:226 www/frs/admin/editrelease.php:349
 #: www/frs/admin/qrs.php:183
-#, fuzzy
 msgid "Release Date"
-msgstr "Data rilascio"
+msgstr "Data di rilascio"
 
 #: www/frs/admin/editrelease.php:230 www/frs/admin/qrs.php:175
 #: www/frs/admin/showreleases.php:100
@@ -17494,13 +17481,12 @@ msgid "Submit/Refresh"
 msgstr "Invia/aggiorna"
 
 #: www/frs/admin/editrelease.php:288
-#, fuzzy
 msgid "Add Files To This Release"
-msgstr "Fase 3: Modifica i file in questo rilascio"
+msgstr "Aggiungi file a questo rilascio"
 
 #: www/frs/admin/editrelease.php:289
 msgid "Now, choose a file to upload into the system."
-msgstr ""
+msgstr "Adesso, scegli un file da inviare."
 
 #: www/frs/admin/editrelease.php:298 www/frs/admin/qrs.php:200
 #, php-format
@@ -17536,9 +17522,8 @@ msgstr ""
 "compariranno sul sommario dei download."
 
 #: www/frs/admin/editrelease.php:349
-#, fuzzy
 msgid "Processor"
-msgstr "Tipo processore"
+msgstr "Processore"
 
 #: www/frs/admin/editrelease.php:371
 msgid "Update/Refresh"
@@ -17573,15 +17558,16 @@ msgid "Click here to %1$s quick-release a file %2$s"
 msgstr "Clicca qui per %1$s rilasciare un file %2$s"
 
 #: www/frs/admin/index.php:127
-#, fuzzy
 msgid "Packages"
-msgstr "Pacchetto"
+msgstr "Pacchetti"
 
 #: www/frs/admin/index.php:128
 msgid ""
 "You can use packages to group different file releases together, or use them "
 "however you like."
 msgstr ""
+"Si possono utilizzare i pacchetti per raggruppare insieme i file dei vari "
+"rilasci, oppure in qualunque modo ti sia comodo."
 
 #: www/frs/admin/index.php:129
 #, fuzzy
@@ -17589,38 +17575,37 @@ msgid "An example of packages:"
 msgstr "Aggiungi frammenti ai package"
 
 #: www/frs/admin/index.php:131
-#, fuzzy
 msgid "Your Packages:"
-msgstr "Pacchetto:"
+msgstr "I tuoi pacchetti:"
 
 #: www/frs/admin/index.php:133
 msgid "Define your packages"
-msgstr ""
+msgstr "Definisci i tuoi pacchetti"
 
 #: www/frs/admin/index.php:134
-#, fuzzy
 msgid "Create new releases of packages"
-msgstr "Clicca qui per creare una nuova release."
+msgstr "Crea una nuova release dei pacchetti"
 
 #: www/frs/admin/index.php:136
-#, fuzzy
 msgid "Releases of Packages"
-msgstr "Note di rilascio"
+msgstr "Rilasci dei pacchetti"
 
 #: www/frs/admin/index.php:137
 msgid "A release of a package can contain multiple files."
-msgstr ""
+msgstr "Un rilascio di un pacchetto può contenere diversi file."
 
 #: www/frs/admin/index.php:138
-#, fuzzy
 msgid "Examples of Releases"
-msgstr "Ultimi rilasci"
+msgstr "Esempi di rilasci"
 
 #: www/frs/admin/index.php:140
+#, fuzzy
 msgid ""
 "You can create new releases of packages by clicking on <strong>Add/Edit "
 "Releases</strong> next to your package name"
 msgstr ""
+"Puoi creare nuovi rilasci dei pacchetti cliccando sul pulsante <strong>Crea/"
+"modifica rilasci</strong> vicino al nome del package interessato."
 
 #: www/frs/admin/index.php:155 www/frs/admin/showreleases.php:99
 #, fuzzy
@@ -19226,7 +19211,7 @@ msgstr ""
 #: www/people/editjob.php:134
 #, fuzzy, php-format
 msgid "Job skill delete failed: %s"
-msgstr "Rimozione competenza posizione fallita - project_id errato"
+msgstr "Rimozione competenza posizione fallita"
 
 #: www/people/editjob.php:136
 msgid "Job skill deleted successfully"
@@ -19237,9 +19222,9 @@ msgid "Job skill delete failed - wrong project_id"
 msgstr "Rimozione competenza posizione fallita - project_id errato"
 
 #: www/people/editjob.php:152
-#, fuzzy, php-format
+#, php-format
 msgid "Posting fetch failed: %s"
-msgstr "Posting Failed"
+msgstr ""
 
 #: www/people/editjob.php:153
 #, fuzzy
@@ -19277,9 +19262,9 @@ msgid "User updated successfully"
 msgstr "Aggiornamento utente eseguito"
 
 #: www/people/editprofile.php:99
-#, fuzzy, php-format
+#, php-format
 msgid "Failed to add the skill %s"
-msgstr "Aggiunta competenza fallita"
+msgstr "Aggiunta competenza fallita %s"
 
 #: www/people/editprofile.php:101
 msgid "Skill added successfully"
@@ -19436,7 +19421,7 @@ msgstr "Tutti i campi sono richiesti!"
 #: www/people/editprofile.php:295 www/people/skills_utils.php:170
 #, fuzzy
 msgid "Title (max 100 characters)"
-msgstr "Parole chiave (massimo 255 caratteri)"
+msgstr "Parole chiave (massimo 100 caratteri)"
 
 #: www/people/editprofile.php:302 www/people/skills_utils.php:177
 msgid "Keywords (max 255 characters)"
@@ -19473,6 +19458,8 @@ msgid ""
 "The %s Project Help Wanted board is for non-commercial, project volunteer "
 "openings. Commercial use is prohibited."
 msgstr ""
+"I progetti in ricerca di aiuto di %s sono disponibile per progetti non "
+"commerciali. Non è consentito un uso commerciale."
 
 #: www/people/index.php:65
 msgid ""
@@ -19480,22 +19467,29 @@ msgid ""
 "whichever comes first. (Project administrators may always re-post expired "
 "openings.)"
 msgstr ""
+"'elenco dei progetti rimane attivo per due settimane oppure finché ne viene "
+"chiusa la posizione. Gli amministratori di progetto possono ri-postare "
+"posizioni scadute."
 
 #: www/people/index.php:69
 msgid ""
 "Browse through the category menu to find projects looking for your help."
-msgstr ""
+msgstr "Consulta i menu di categoria per trovare i progetti in cerca di aiuto."
 
 #: www/people/index.php:73
 msgid ""
 "If you're a project admin, log in and submit help wanted requests through "
 "your project administration page."
 msgstr ""
+"Se sei un amministratore di progetto, fai il login e inserisci le tue "
+"richieste d'aiuto tramite la tua pagina di amminstrazione progetto."
 
 #: www/people/index.php:77
 msgid ""
 "To suggest new job categories, submit a request via the support manager."
 msgstr ""
+"Per suggerire ulteriori categorie, sottoponi una richiesta tramite il "
+"support manager."
 
 #: www/people/index.php:82
 msgid "Last posts"
@@ -21314,13 +21308,10 @@ msgid "Approval Error: %s"
 msgstr "Approvazione Progetto:"
 
 #: www/register/index.php:159
-#, fuzzy
 msgid ""
 "Your project has been automatically approved. You should receive an email "
 "containing further information shortly."
 msgstr ""
-"Il progetto è stato sottoposto agli amministratori di %1$s. Entro 72 ore "
-"riceverai notifica della loro decisione e ulteriori istruzioni."
 
 #: www/register/index.php:178
 msgid ""
@@ -22499,8 +22490,8 @@ msgstr "%1$s aperti / %2$s totali"
 #, fuzzy, php-format
 msgid "<strong>%d</strong> project in result set."
 msgid_plural "<strong>%d</strong> projects in result set."
-msgstr[0] "<strong>%1$s</strong> progetti."
-msgstr[1] "<strong>%1$s</strong> progetti."
+msgstr[0] "<strong>%d</strong> progetti."
+msgstr[1] "<strong>%d</strong> progetti."
 
 #: www/softwaremap/tag_cloud.php:98
 #, php-format
@@ -22682,9 +22673,8 @@ msgid "Subdomain"
 msgstr "Sottodominio"
 
 #: www/stats/site_stats_utils.php:282
-#, fuzzy
 msgid "Checkouts"
-msgstr "Check Box"
+msgstr ""
 
 #: www/stats/site_stats_utils.php:330
 msgid "Query returned no valid data."
@@ -22727,9 +22717,8 @@ msgid "Page view: no graph to display."
 msgstr ""
 
 #: www/stats/site_stats_utils.php:587
-#, fuzzy
 msgid "New users"
-msgstr "Aggiungi utente"
+msgstr "Nuovi utenti"
 
 #: www/stats/site_stats_utils.php:588
 #, fuzzy
@@ -22752,22 +22741,25 @@ msgstr "Non hai scelto una licenza"
 
 #: www/survey/admin/index.php:58
 msgid "It's simple to create a survey."
-msgstr ""
+msgstr "È semplice aggiungere un sondaggio."
 
 #: www/survey/admin/index.php:62
 msgid "Create questions and comments using the forms above."
-msgstr ""
+msgstr "Crea domande e commenti utilizzando il modulo qui sopra."
 
 #: www/survey/admin/index.php:65
 msgid ""
 "Create a survey, listing the questions in order (choose from <strong>your</"
 "strong> list of questions)."
 msgstr ""
+"Crea un sondaggio, elenca le domande (seleziona dal <strong>tuo</strong> "
+"elenco di domande)."
 
 #: www/survey/admin/index.php:68
 #, php-format
 msgid "Link to the survey using this format: %s where XX is the survey number"
 msgstr ""
+"Linka al sondaggio usando il formato: %s dove XX è il numero del sondaggio"
 
 #: www/survey/admin/index.php:73
 #, php-format
@@ -22997,9 +22989,8 @@ msgstr "Risultati con grafico e commenti"
 
 #: www/survey/include/SurveyHTML.class.php:380
 #: www/survey/include/SurveyHTML.class.php:457
-#, fuzzy
 msgid "CSV"
-msgstr "CVS"
+msgstr ""
 
 #: www/survey/include/SurveyHTML.class.php:479
 msgid "Error: you cannot vote for inactive survey"
@@ -23014,16 +23005,16 @@ msgid "No Votes"
 msgstr "Nessun voto"
 
 #: www/survey/include/SurveyHTML.class.php:698
-#, php-format
+#, fuzzy, php-format
 msgid "View All %s Comment"
 msgid_plural "View All %s Comments"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Visualizza commenti"
+msgstr[1] "Visualizza commenti"
 
 #: www/survey/index.php:46
 #, fuzzy, php-format
 msgid "Surveys for %s"
-msgstr "Sorgente di %1$s"
+msgstr "Sorgente di %s"
 
 #: www/survey/index.php:58
 #, fuzzy
@@ -23035,6 +23026,8 @@ msgid ""
 "The information collected in these surveys will never be sold to third "
 "parties or used to solicit you to purchase any goods or services."
 msgstr ""
+"Le informazioni raccolte in questi sondaggi non saranno mai vendute a terze "
+"parti oppure utilizzate per sollecitare l'acquisto di prodotti o servizi."
 
 #: www/survey/privacy.php:44
 msgid ""
@@ -23042,24 +23035,33 @@ msgid ""
 "developers being surveyed. That profile will help visitors to the site "
 "understand the quality of a given project."
 msgstr ""
+"Questa informazione viene raccolta per costruire un profilo dei progetti e "
+"degli sviluppatori. Questo profilo darà la possibilità ai visitatori del "
+"sito di percepire la qualità di un determinato progetto."
 
 #: www/survey/privacy.php:47
 msgid ""
 "The ID's of those who answer surveys are suppressed and not viewable by "
 "project administrators or the public or third parties."
 msgstr ""
+"Non è possibile per gli amministratori dei progetti vedere quali ripsoste "
+"sono state date dei singoli partecipanti."
 
 #: www/survey/privacy.php:50
 msgid ""
 "The information gathered is used only in aggregate form, not to single out "
 "specific users or developers."
 msgstr ""
+"Le informazioni raccolte vengono usate solo in modalità aggregata e non per "
+"visualizzare dati su singoli utenti o sviluppatori."
 
 #: www/survey/privacy.php:53
 msgid ""
 "If any changes are made to this policy, it will affect only future data that "
 "is collected and the user will of course have the ability to 'opt-out'."
 msgstr ""
+"Se in futuro questa policy dovesse cambiare, riguarderà comunque solo dati "
+"futuri, mai quelli inseriti prima."
 
 #: www/survey/rating_resp.php:59
 msgid "Vote registered"

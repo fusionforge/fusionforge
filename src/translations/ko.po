@@ -8158,9 +8158,9 @@ msgid ", part of "
 msgstr ""
 
 #: plugins/admssw/common/RDFedFRSPackage.class.php:94
-#, fuzzy, php-format
+#, php-format
 msgid "%1$s release series of project %2$s"
-msgstr "SCM 저장소"
+msgstr ""
 
 #: plugins/admssw/include/admsswPlugin.class.php:138
 msgid "ADMS.SW meta-data"
@@ -8253,9 +8253,8 @@ msgid "ADMS.SW meta-data index of public projects"
 msgstr ""
 
 #: plugins/admssw/www/projectturtle.php:44
-#, fuzzy
 msgid "ADMS.SW project meta-data preview"
-msgstr "페이지뷰가 많은 프로젝트 - %1$s 버튼 로고를 클릭한 횟수로 측정됨"
+msgstr ""
 
 #: plugins/admssw/www/projectturtle.php:48 plugins/admssw/www/trove.php:42
 #, php-format
