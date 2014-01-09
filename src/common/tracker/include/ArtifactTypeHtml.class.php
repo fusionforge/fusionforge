@@ -147,12 +147,12 @@ class ArtifactTypeHtml extends ArtifactType {
 	 * renderExtraFields - ???
 	 *
 	 * @param	array	$selected
-	 * @param	bool	$show_100
-	 * @param	string	$text_100
+	 * @param	bool	$show_100		Display the specific '100' value. Default is false.
+	 * @param	string	$text_100		Label displayed for the '100' value. Default is 'none'
 	 * @param	bool	$show_any
 	 * @param	string	$text_any
 	 * @param	array	$types
-	 * @param	bool	$status_show_100
+	 * @param	bool	$status_show_100	Force display of the '100' value if needed. Default is false.
 	 * @param	string	$mode
 	 */
 	function renderExtraFields($selected = array(),
@@ -238,6 +238,10 @@ class ArtifactTypeHtml extends ArtifactType {
 
 			if (!isset($selected[$efarr[$i]['extra_field_id']]))
 				$selected[$efarr[$i]['extra_field_id']] = '';
+
+			if ($status_show_100) {
+				$efarr[$i]['show100'] = $status_show_100;
+			}
 
 			if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_SELECT) {
 				$str = $this->renderSelect($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['show100'],$efarr[$i]['show100label'],$show_any,$text_any);
