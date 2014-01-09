@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-08 17:37+0100\n"
+"POT-Creation-Date: 2014-01-09 12:27+0100\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -232,11 +232,11 @@ msgstr "Fitxeroaren izena"
 #: common/forum/ForumHTML.class.php:587 common/forum/ForumHTML.class.php:590
 #: common/forum/ForumMessage.class.php:666 common/frs/FRSFile.class.php:187
 #: common/frs/FRSFile.class.php:440 common/include/Error.class.php:206
-#: common/include/exit.php:80 common/include/Group.class.php:2632
-#: common/include/Group.class.php:2633 common/include/Group.class.php:2634
-#: common/include/Group.class.php:2686 common/include/Group.class.php:2687
-#: common/include/Group.class.php:2690 common/include/Group.class.php:2694
-#: common/include/Group.class.php:2704 common/include/Group.class.php:2705
+#: common/include/exit.php:80 common/include/Group.class.php:2627
+#: common/include/Group.class.php:2628 common/include/Group.class.php:2629
+#: common/include/Group.class.php:2681 common/include/Group.class.php:2682
+#: common/include/Group.class.php:2685 common/include/Group.class.php:2689
+#: common/include/Group.class.php:2699 common/include/Group.class.php:2700
 #: common/include/GroupJoinRequest.class.php:298
 #: common/include/Navigation.class.php:60 common/include/User.class.php:350
 #: common/include/User.class.php:436 common/include/User.class.php:1410
@@ -627,7 +627,7 @@ msgstr "Deskribapena:"
 
 #: common/docman/Document.class.php:953
 #: common/docman/DocumentGroup.class.php:731
-#: common/include/Group.class.php:2690 common/tracker/actions/browse.php:201
+#: common/include/Group.class.php:2685 common/tracker/actions/browse.php:201
 #: common/tracker/actions/query.php:202 common/tracker/actions/query.php:346
 msgid "Submitter"
 msgstr "Nork bidalia"
@@ -3398,20 +3398,20 @@ msgstr "Rola: %s"
 msgid "Wrong destination role"
 msgstr ""
 
-#: common/include/Group.class.php:2291
+#: common/include/Group.class.php:2286
 msgid "Group already active"
 msgstr "Taldea dagoeneko aktibo dago"
 
-#: common/include/Group.class.php:2531
+#: common/include/Group.class.php:2526
 #, fuzzy
 msgid "Approved"
 msgstr "Onartu"
 
-#: common/include/Group.class.php:2554 common/include/Group.class.php:2624
+#: common/include/Group.class.php:2549 common/include/Group.class.php:2619
 msgid "Group does not have any administrators."
 msgstr "Taldeak ez du administratzailerik."
 
-#: common/include/Group.class.php:2562
+#: common/include/Group.class.php:2557
 #, fuzzy, php-format
 msgid ""
 "Your project registration for %4$s has been approved.\n"
@@ -3494,62 +3494,62 @@ msgstr ""
 "\n"
 "-- %7$s taldea"
 
-#: common/include/Group.class.php:2598
+#: common/include/Group.class.php:2593
 #, php-format
 msgid "%s Project Approved"
 msgstr "%s -ek onartutako proiektua"
 
-#: common/include/Group.class.php:2631
+#: common/include/Group.class.php:2626
 #, php-format
 msgid "Your project registration for %s has been denied."
 msgstr "Zure egitasmoa %s -n erregistratzeko egin duzun eskaera ukatu da."
 
-#: common/include/Group.class.php:2632 common/include/Group.class.php:2686
-#: common/include/Group.class.php:2704 www/register/index.php:183
+#: common/include/Group.class.php:2627 common/include/Group.class.php:2681
+#: common/include/Group.class.php:2699 www/register/index.php:183
 #: www/register/index.php:189
 msgid "Project Full Name"
 msgstr "Egitasmoaren izen osoa"
 
-#: common/include/Group.class.php:2633 plugins/projectlabels/www/index.php:172
+#: common/include/Group.class.php:2628 plugins/projectlabels/www/index.php:172
 #: www/admin/approve-pending.php:190 www/admin/database.php:155
 #: www/admin/groupedit.php:170 www/admin/vhost.php:118
 #: www/register/index.php:214
 msgid "Project Unix Name"
 msgstr "Egitasmoaren Unix izena"
 
-#: common/include/Group.class.php:2634
+#: common/include/Group.class.php:2629
 msgid "Reasons for negative decision"
 msgstr "Ukatzearen arrazoiak hauek dira"
 
-#: common/include/Group.class.php:2646
+#: common/include/Group.class.php:2641
 #, php-format
 msgid "%s Project Denied"
 msgstr "%s -ek egitasmoa ukatu du"
 
-#: common/include/Group.class.php:2670
+#: common/include/Group.class.php:2665
 msgid "Could not find user who has submitted the project."
 msgstr ""
 
-#: common/include/Group.class.php:2677
+#: common/include/Group.class.php:2672
 msgid "There is no administrator to send the mail to."
 msgstr ""
 
-#: common/include/Group.class.php:2685 common/include/Group.class.php:2696
-#: common/include/Group.class.php:2703 common/include/Group.class.php:2709
+#: common/include/Group.class.php:2680 common/include/Group.class.php:2691
+#: common/include/Group.class.php:2698 common/include/Group.class.php:2704
 #, php-format
 msgid "New %s Project Submitted"
 msgstr "%s -en egitasmoa onartzeke dago."
 
-#: common/include/Group.class.php:2687 common/include/Group.class.php:2705
+#: common/include/Group.class.php:2682 common/include/Group.class.php:2700
 #: www/admin/approve-pending.php:192
 msgid "Submitted Description"
 msgstr "Emandako deskribapena"
 
-#: common/include/Group.class.php:2694
+#: common/include/Group.class.php:2689
 msgid "Please visit the following URL to approve or reject this project"
 msgstr ""
 
-#: common/include/Group.class.php:2706
+#: common/include/Group.class.php:2701
 #, php-format
 msgid ""
 "The %s admin team will now examine your project submission. You will be "
@@ -3558,42 +3558,42 @@ msgstr ""
 "%s administratzeko taldeak zure proposamena aztertuko du orain. Erabakiaren "
 "berri emango zaizu."
 
-#: common/include/Group.class.php:2724
+#: common/include/Group.class.php:2719
 #, fuzzy
 msgid "Group name is too short"
 msgstr "Galdera motzegia da"
 
-#: common/include/Group.class.php:2727
+#: common/include/Group.class.php:2722
 #, fuzzy
 msgid "Group name is too long"
 msgstr "Taldearen izena (editatzeko sakatu)"
 
-#: common/include/Group.class.php:2730
+#: common/include/Group.class.php:2725
 #, fuzzy
 msgid "Group name already taken"
 msgstr "Unix izen hau hartua dago"
 
-#: common/include/Group.class.php:2811
+#: common/include/Group.class.php:2806
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group Unix Status: %s"
 msgstr "Errorea: Ezin da talde egoera aldatu: %s"
 
-#: common/include/Group.class.php:2875
+#: common/include/Group.class.php:2870
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr "Errorea: Ezin da talde egoera aldatu: %s"
 
-#: common/include/Group.class.php:2893
+#: common/include/Group.class.php:2888
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
 msgstr "Errorea: Ezin da talde egoera aldatu: %s"
 
-#: common/include/Group.class.php:2911
+#: common/include/Group.class.php:2906
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
 msgstr "Errorea: Ezin da talde egoera aldatu: %s"
 
-#: common/include/Group.class.php:2929
+#: common/include/Group.class.php:2924
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr "Errorea: Ezin dira talde baimenak aldatu: %s"
@@ -9729,7 +9729,7 @@ msgstr "Kate hutsak"
 #: plugins/forumml/www/message.php:209
 #, fuzzy
 msgid "Search result for "
-msgstr "Bilaketa emaitzak <em>%1$s</em> renttzat"
+msgstr "Bilaketa emaitzak renttzat"
 
 #: plugins/forumml/www/message.php:209
 #, fuzzy
@@ -10975,7 +10975,7 @@ msgstr ""
 #: plugins/hudson/include/hudson_Widget_JobTestTrend.class.php:91
 #, fuzzy
 msgid "No test found for this job."
-msgstr "Ez da ezer aurkitu <em>%1$s</em> -entzat"
+msgstr ""
 
 #: plugins/hudson/include/hudson_Widget_JobTestTrend.class.php:45
 #: plugins/hudson/include/hudson_Widget_JobTestTrend.class.php:86
@@ -23778,28 +23778,6 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #, fuzzy
 #~ msgid "Post date"
 #~ msgstr "Zerrenda Gehitua"
-
-#, fuzzy
-#~ msgid "No matches found for %1$s"
-#~ msgstr "Ez da ezer aurkitu <em>%1$s</em> -entzat"
-
-#, fuzzy
-#~ msgid "Search results for %1$s"
-#~ msgstr "Bilaketa emaitzak <em>%1$s</em> renttzat"
-
-#~ msgid "Search results for <em>%1$s</em>"
-#~ msgstr "Bilaketa emaitzak <em>%1$s</em> renttzat"
-
-#~ msgid "No matches found for <em>%1$s</em>"
-#~ msgstr "Ez da ezer aurkitu <em>%1$s</em> -entzat"
-
-#, fuzzy
-#~ msgid "No matches found for <em>%s</em>"
-#~ msgstr "Ez da ezer aurkitu <em>%1$s</em> -entzat"
-
-#, fuzzy
-#~ msgid "Search results for “%1$s”"
-#~ msgstr "Bilaketa emaitzak <em>%1$s</em> renttzat"
 
 #~ msgid "Error creating group object"
 #~ msgstr "Akatsa taldea sortzen"

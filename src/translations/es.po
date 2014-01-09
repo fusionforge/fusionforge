@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-08 17:37+0100\n"
+"POT-Creation-Date: 2014-01-09 12:27+0100\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -221,11 +221,11 @@ msgstr ""
 #: common/forum/ForumHTML.class.php:587 common/forum/ForumHTML.class.php:590
 #: common/forum/ForumMessage.class.php:666 common/frs/FRSFile.class.php:187
 #: common/frs/FRSFile.class.php:440 common/include/Error.class.php:206
-#: common/include/exit.php:80 common/include/Group.class.php:2632
-#: common/include/Group.class.php:2633 common/include/Group.class.php:2634
-#: common/include/Group.class.php:2686 common/include/Group.class.php:2687
-#: common/include/Group.class.php:2690 common/include/Group.class.php:2694
-#: common/include/Group.class.php:2704 common/include/Group.class.php:2705
+#: common/include/exit.php:80 common/include/Group.class.php:2627
+#: common/include/Group.class.php:2628 common/include/Group.class.php:2629
+#: common/include/Group.class.php:2681 common/include/Group.class.php:2682
+#: common/include/Group.class.php:2685 common/include/Group.class.php:2689
+#: common/include/Group.class.php:2699 common/include/Group.class.php:2700
 #: common/include/GroupJoinRequest.class.php:298
 #: common/include/Navigation.class.php:60 common/include/User.class.php:350
 #: common/include/User.class.php:436 common/include/User.class.php:1410
@@ -604,7 +604,7 @@ msgstr "Descripción del documento:"
 
 #: common/docman/Document.class.php:953
 #: common/docman/DocumentGroup.class.php:731
-#: common/include/Group.class.php:2690 common/tracker/actions/browse.php:201
+#: common/include/Group.class.php:2685 common/tracker/actions/browse.php:201
 #: common/tracker/actions/query.php:202 common/tracker/actions/query.php:346
 msgid "Submitter"
 msgstr "Enviado por"
@@ -3324,20 +3324,20 @@ msgstr "Rol: %s"
 msgid "Wrong destination role"
 msgstr "Rol de destino incorrecto"
 
-#: common/include/Group.class.php:2291
+#: common/include/Group.class.php:2286
 msgid "Group already active"
 msgstr "La cuenta está activa todavía."
 
-#: common/include/Group.class.php:2531
+#: common/include/Group.class.php:2526
 #, fuzzy
 msgid "Approved"
 msgstr "Aprobar"
 
-#: common/include/Group.class.php:2554 common/include/Group.class.php:2624
+#: common/include/Group.class.php:2549 common/include/Group.class.php:2619
 msgid "Group does not have any administrators."
 msgstr "El grupo no tiene administradores."
 
-#: common/include/Group.class.php:2562
+#: common/include/Group.class.php:2557
 #, php-format
 msgid ""
 "Your project registration for %4$s has been approved.\n"
@@ -3412,62 +3412,62 @@ msgstr ""
 "\n"
 "-- El equipo de %4$s"
 
-#: common/include/Group.class.php:2598
+#: common/include/Group.class.php:2593
 #, php-format
 msgid "%s Project Approved"
 msgstr "Proyecto aprobado %s"
 
-#: common/include/Group.class.php:2631
+#: common/include/Group.class.php:2626
 #, php-format
 msgid "Your project registration for %s has been denied."
 msgstr "El registro de su proyecto en %s ha sido denegado."
 
-#: common/include/Group.class.php:2632 common/include/Group.class.php:2686
-#: common/include/Group.class.php:2704 www/register/index.php:183
+#: common/include/Group.class.php:2627 common/include/Group.class.php:2681
+#: common/include/Group.class.php:2699 www/register/index.php:183
 #: www/register/index.php:189
 msgid "Project Full Name"
 msgstr "Nombre completo del proyecto"
 
-#: common/include/Group.class.php:2633 plugins/projectlabels/www/index.php:172
+#: common/include/Group.class.php:2628 plugins/projectlabels/www/index.php:172
 #: www/admin/approve-pending.php:190 www/admin/database.php:155
 #: www/admin/groupedit.php:170 www/admin/vhost.php:118
 #: www/register/index.php:214
 msgid "Project Unix Name"
 msgstr "Nombre Proyecto Unix"
 
-#: common/include/Group.class.php:2634
+#: common/include/Group.class.php:2629
 msgid "Reasons for negative decision"
 msgstr "Las razones para la denegación son"
 
-#: common/include/Group.class.php:2646
+#: common/include/Group.class.php:2641
 #, php-format
 msgid "%s Project Denied"
 msgstr "Proyecto denegado %s"
 
-#: common/include/Group.class.php:2670
+#: common/include/Group.class.php:2665
 msgid "Could not find user who has submitted the project."
 msgstr "No se pudo encontrar al usuario que creó el proyecto."
 
-#: common/include/Group.class.php:2677
+#: common/include/Group.class.php:2672
 msgid "There is no administrator to send the mail to."
 msgstr "No hay administrador a quien mandar el correo electrónico."
 
-#: common/include/Group.class.php:2685 common/include/Group.class.php:2696
-#: common/include/Group.class.php:2703 common/include/Group.class.php:2709
+#: common/include/Group.class.php:2680 common/include/Group.class.php:2691
+#: common/include/Group.class.php:2698 common/include/Group.class.php:2704
 #, php-format
 msgid "New %s Project Submitted"
 msgstr "Petición de nuevo proyecto en %s"
 
-#: common/include/Group.class.php:2687 common/include/Group.class.php:2705
+#: common/include/Group.class.php:2682 common/include/Group.class.php:2700
 #: www/admin/approve-pending.php:192
 msgid "Submitted Description"
 msgstr "Descripción Proporcionada"
 
-#: common/include/Group.class.php:2694
+#: common/include/Group.class.php:2689
 msgid "Please visit the following URL to approve or reject this project"
 msgstr "Visite la siguiente direccion para aprobar o rechazar este proyecto"
 
-#: common/include/Group.class.php:2706
+#: common/include/Group.class.php:2701
 #, php-format
 msgid ""
 "The %s admin team will now examine your project submission. You will be "
@@ -3476,39 +3476,39 @@ msgstr ""
 "El equipo de administración de %s examinará ahora su envío. Se le notificará "
 "su decisión."
 
-#: common/include/Group.class.php:2724
+#: common/include/Group.class.php:2719
 msgid "Group name is too short"
 msgstr "El nombre del proyecto es demasiado corto"
 
-#: common/include/Group.class.php:2727
+#: common/include/Group.class.php:2722
 msgid "Group name is too long"
 msgstr "Nombre de proyecto demasiado largo"
 
-#: common/include/Group.class.php:2730
+#: common/include/Group.class.php:2725
 msgid "Group name already taken"
 msgstr "Nombre de proyecto no disponible"
 
-#: common/include/Group.class.php:2811
+#: common/include/Group.class.php:2806
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group Unix Status: %s"
 msgstr "Error: No se pudo cambiar el estado del grupo: %s"
 
-#: common/include/Group.class.php:2875
+#: common/include/Group.class.php:2870
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr "Error - No puedo actualizar el estado del Grupo DocmanCreateOnline: %s"
 
-#: common/include/Group.class.php:2893
+#: common/include/Group.class.php:2888
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
 msgstr "Error - No puedo actaulizar Estado de Grupo UseWebdab: %s"
 
-#: common/include/Group.class.php:2911
+#: common/include/Group.class.php:2906
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
 msgstr "Error - No puedo actualizar estado grupo UseDocmanSearch: %s"
 
-#: common/include/Group.class.php:2929
+#: common/include/Group.class.php:2924
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr "Error - No puedo actualizar Grupo force_docman_reindex %s"
@@ -23581,36 +23581,6 @@ msgstr "No ha proporcionado el nombre de usuario"
 #~ msgid "Post date"
 #~ msgstr "Fecha de publicación"
 
-#~ msgid "No matches found for %1$s"
-#~ msgstr "Ninguna coincidencia encontrada para <em>%1$s</em>"
-
-#~ msgid "Search results for %1$s"
-#~ msgstr "Resultados de la búsqueda de <em>%1$s</em>"
-
-#~ msgid "Search results for <em>%1$s</em>"
-#~ msgstr "Resultados para <em>%1$s</em>"
-
-#~ msgid "No matches found for <em>%1$s</em>"
-#~ msgstr "Ninguna coincidencia encontrada para <em>%1$s</em>"
-
-#, fuzzy
-#~ msgid "No matches found for “%1$s”"
-#~ msgstr "Ninguna coincidencia encontrada para <em>%1$s</em>"
-
-#~ msgid ""
-#~ "No matches found for <em>%s</em> - No sections available (check your "
-#~ "permissions)"
-#~ msgstr ""
-#~ "No coincidencias para <em>%s</em> - No hay secciones disponibles "
-#~ "(verifica tus permisos)"
-
-#~ msgid "No matches found for <em>%s</em>"
-#~ msgstr "Ninguna coincidencia encontrada para <em>%s</em>"
-
-#, fuzzy
-#~ msgid "Search results for “%1$s”"
-#~ msgstr "Resultados de la búsqueda de <em>%1$s</em>"
-
 #~ msgid ""
 #~ "Error: Please check \"I'm Sure\" to confirm or return to previous page to "
 #~ "cancel."
@@ -25873,10 +25843,6 @@ msgstr "No ha proporcionado el nombre de usuario"
 #~ "título."
 
 #, fuzzy
-#~ msgid "OR choose one form FTP %1$s."
-#~ msgstr "Ninguna coincidencia encontrada para <em>%1$s</em>"
-
-#, fuzzy
 #~ msgid ""
 #~ "<strong>Document Title</strong>:  Refers to the relatively brief title of "
 #~ "the document (e.g. How to use the download server)<br /"
@@ -26100,10 +26066,6 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, fuzzy
 #~ msgid "No Existing Tasks Found"
 #~ msgstr "No hay Tareas coincidentes"
-
-#, fuzzy
-#~ msgid "No matches found for <em>%s</em> "
-#~ msgstr "Ninguna coincidencia encontrada para <em>%1$s</em>"
 
 #, fuzzy
 #~ msgid "Confirm Has"

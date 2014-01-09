@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-08 17:37+0100\n"
+"POT-Creation-Date: 2014-01-09 12:27+0100\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -229,11 +229,11 @@ msgstr ""
 #: common/forum/ForumHTML.class.php:587 common/forum/ForumHTML.class.php:590
 #: common/forum/ForumMessage.class.php:666 common/frs/FRSFile.class.php:187
 #: common/frs/FRSFile.class.php:440 common/include/Error.class.php:206
-#: common/include/exit.php:80 common/include/Group.class.php:2632
-#: common/include/Group.class.php:2633 common/include/Group.class.php:2634
-#: common/include/Group.class.php:2686 common/include/Group.class.php:2687
-#: common/include/Group.class.php:2690 common/include/Group.class.php:2694
-#: common/include/Group.class.php:2704 common/include/Group.class.php:2705
+#: common/include/exit.php:80 common/include/Group.class.php:2627
+#: common/include/Group.class.php:2628 common/include/Group.class.php:2629
+#: common/include/Group.class.php:2681 common/include/Group.class.php:2682
+#: common/include/Group.class.php:2685 common/include/Group.class.php:2689
+#: common/include/Group.class.php:2699 common/include/Group.class.php:2700
 #: common/include/GroupJoinRequest.class.php:298
 #: common/include/Navigation.class.php:60 common/include/User.class.php:350
 #: common/include/User.class.php:436 common/include/User.class.php:1410
@@ -619,7 +619,7 @@ msgstr "Rollenbeschreibung:"
 
 #: common/docman/Document.class.php:953
 #: common/docman/DocumentGroup.class.php:731
-#: common/include/Group.class.php:2690 common/tracker/actions/browse.php:201
+#: common/include/Group.class.php:2685 common/tracker/actions/browse.php:201
 #: common/tracker/actions/query.php:202 common/tracker/actions/query.php:346
 msgid "Submitter"
 msgstr "Sender"
@@ -3411,20 +3411,20 @@ msgstr "Rolle: %s"
 msgid "Wrong destination role"
 msgstr ""
 
-#: common/include/Group.class.php:2291
+#: common/include/Group.class.php:2286
 msgid "Group already active"
 msgstr "Diese Gruppe ist bereits aktiv."
 
-#: common/include/Group.class.php:2531
+#: common/include/Group.class.php:2526
 #, fuzzy
 msgid "Approved"
 msgstr "Genehmigen"
 
-#: common/include/Group.class.php:2554 common/include/Group.class.php:2624
+#: common/include/Group.class.php:2549 common/include/Group.class.php:2619
 msgid "Group does not have any administrators."
 msgstr "Diese Gruppe besitzt keinen Administrator."
 
-#: common/include/Group.class.php:2562
+#: common/include/Group.class.php:2557
 #, php-format
 msgid ""
 "Your project registration for %4$s has been approved.\n"
@@ -3494,65 +3494,65 @@ msgstr ""
 "\n"
 "-- Die %4$s Mannschaft"
 
-#: common/include/Group.class.php:2598
+#: common/include/Group.class.php:2593
 #, php-format
 msgid "%s Project Approved"
 msgstr "%s Projekt genehmigt"
 
-#: common/include/Group.class.php:2631
+#: common/include/Group.class.php:2626
 #, php-format
 msgid "Your project registration for %s has been denied."
 msgstr "Ihre Projekt-Registrierung für %s wurde verweigert."
 
-#: common/include/Group.class.php:2632 common/include/Group.class.php:2686
-#: common/include/Group.class.php:2704 www/register/index.php:183
+#: common/include/Group.class.php:2627 common/include/Group.class.php:2681
+#: common/include/Group.class.php:2699 www/register/index.php:183
 #: www/register/index.php:189
 msgid "Project Full Name"
 msgstr "Vollständiger Projekt-Name"
 
-#: common/include/Group.class.php:2633 plugins/projectlabels/www/index.php:172
+#: common/include/Group.class.php:2628 plugins/projectlabels/www/index.php:172
 #: www/admin/approve-pending.php:190 www/admin/database.php:155
 #: www/admin/groupedit.php:170 www/admin/vhost.php:118
 #: www/register/index.php:214
 msgid "Project Unix Name"
 msgstr "Unix-Name des Projektes"
 
-#: common/include/Group.class.php:2634
+#: common/include/Group.class.php:2629
 msgid "Reasons for negative decision"
 msgstr "Gründe für die negative Entscheidung"
 
-#: common/include/Group.class.php:2646
+#: common/include/Group.class.php:2641
 #, php-format
 msgid "%s Project Denied"
 msgstr "%s Projekt abgelehnt"
 
-#: common/include/Group.class.php:2670
+#: common/include/Group.class.php:2665
 msgid "Could not find user who has submitted the project."
 msgstr "Der Nutzer, der das Projekt anlegte, konnte nicht gefunden werden."
 
-#: common/include/Group.class.php:2677
+#: common/include/Group.class.php:2672
 msgid "There is no administrator to send the mail to."
 msgstr ""
 "Konnte keinen Administrator finden, dem die Mail zugesandt werden kann."
 
-#: common/include/Group.class.php:2685 common/include/Group.class.php:2696
-#: common/include/Group.class.php:2703 common/include/Group.class.php:2709
+#: common/include/Group.class.php:2680 common/include/Group.class.php:2691
+#: common/include/Group.class.php:2698 common/include/Group.class.php:2704
 #, php-format
 msgid "New %s Project Submitted"
 msgstr "Neues %s Projekt vorgeschlagen"
 
-#: common/include/Group.class.php:2687 common/include/Group.class.php:2705
+#: common/include/Group.class.php:2682 common/include/Group.class.php:2700
 #: www/admin/approve-pending.php:192
 msgid "Submitted Description"
 msgstr "Eingegebene Beschreibung"
 
-#: common/include/Group.class.php:2694
+#: common/include/Group.class.php:2689
 #, fuzzy
 msgid "Please visit the following URL to approve or reject this project"
 msgstr ""
 "Bitte besuchen Sie den folgenden Link, um die Änderung zu vervollständigen"
 
-#: common/include/Group.class.php:2706
+#: common/include/Group.class.php:2701
 #, php-format
 msgid ""
 "The %s admin team will now examine your project submission. You will be "
@@ -3561,39 +3561,39 @@ msgstr ""
 "Das %s-Admin-Team wird jetzt Ihre Projekt-Anmeldung überprüfen. Sie werden "
 "über deren Entscheidung benachrichtigt."
 
-#: common/include/Group.class.php:2724
+#: common/include/Group.class.php:2719
 msgid "Group name is too short"
 msgstr "Der Gruppenname ist zu kurz"
 
-#: common/include/Group.class.php:2727
+#: common/include/Group.class.php:2722
 msgid "Group name is too long"
 msgstr "Der Gruppenname ist zu lang"
 
-#: common/include/Group.class.php:2730
+#: common/include/Group.class.php:2725
 msgid "Group name already taken"
 msgstr "Der Gruppenname wird bereits verwendet"
 
-#: common/include/Group.class.php:2811
+#: common/include/Group.class.php:2806
 #, php-format
 msgid "Error: Cannot Update Group Unix Status: %s"
 msgstr "Fehler: Konnte den Unix Gruppen Status nicht aktualisieren: %s"
 
-#: common/include/Group.class.php:2875
+#: common/include/Group.class.php:2870
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr "Fehler - Konnte den Unix Gruppen Status nicht aktualisieren: %s"
 
-#: common/include/Group.class.php:2893
+#: common/include/Group.class.php:2888
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
 msgstr "Fehler - Konnte den Unix Gruppen Status nicht aktualisieren: %s"
 
-#: common/include/Group.class.php:2911
+#: common/include/Group.class.php:2906
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
 msgstr "Fehler - Konnte den Unix Gruppen Status nicht aktualisieren: %s"
 
-#: common/include/Group.class.php:2929
+#: common/include/Group.class.php:2924
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr "Fehler - Konnte den Unix Gruppen Status nicht aktualisieren: %s"
@@ -9750,9 +9750,8 @@ msgid "Empty archives"
 msgstr "Leere Strings"
 
 #: plugins/forumml/www/message.php:209
-#, fuzzy
 msgid "Search result for "
-msgstr "Suchergebnisse für<em>%1$s</em>"
+msgstr "Suchergebnisse für "
 
 #: plugins/forumml/www/message.php:209
 #, fuzzy
@@ -11007,7 +11006,7 @@ msgstr ""
 #: plugins/hudson/include/hudson_Widget_JobTestTrend.class.php:91
 #, fuzzy
 msgid "No test found for this job."
-msgstr "Keine Treffer für <em>%1$s</em> gefunden"
+msgstr ""
 
 #: plugins/hudson/include/hudson_Widget_JobTestTrend.class.php:45
 #: plugins/hudson/include/hudson_Widget_JobTestTrend.class.php:86
@@ -17036,7 +17035,7 @@ msgstr ""
 "%s Daten wurden im RSS 2.0 Format exportiert. Viele der exportierten URLs "
 "beherrschen auch accept form/get data um die Ausgabe individuell anzupassen. "
 "Alle Informationen, die von diesen Seiten stammen, werden in Echtzeit "
-"generiert. "
+"generiert."
 
 #: www/export/rss_project.php:81
 msgid ""
@@ -17532,7 +17531,7 @@ msgstr ""
 #: www/frs/admin/editrelease.php:298 www/frs/admin/qrs.php:200
 #, php-format
 msgid "Alternatively, you can use FTP to upload a new file at %s."
-msgstr "Alternativkönnen Sie FTP benutzen, um eine Datei auf %s hochzuladen"
+msgstr "Alternativkönnen Sie FTP benutzen, um eine Datei auf %s hochzuladen."
 
 #: www/frs/admin/editrelease.php:322 www/frs/admin/editrelease.php:350
 #: www/frs/admin/qrs.php:224

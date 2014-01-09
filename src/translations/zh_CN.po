@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-08 17:37+0100\n"
+"POT-Creation-Date: 2014-01-09 12:27+0100\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -232,11 +232,11 @@ msgstr "文件名"
 #: common/forum/ForumHTML.class.php:587 common/forum/ForumHTML.class.php:590
 #: common/forum/ForumMessage.class.php:666 common/frs/FRSFile.class.php:187
 #: common/frs/FRSFile.class.php:440 common/include/Error.class.php:206
-#: common/include/exit.php:80 common/include/Group.class.php:2632
-#: common/include/Group.class.php:2633 common/include/Group.class.php:2634
-#: common/include/Group.class.php:2686 common/include/Group.class.php:2687
-#: common/include/Group.class.php:2690 common/include/Group.class.php:2694
-#: common/include/Group.class.php:2704 common/include/Group.class.php:2705
+#: common/include/exit.php:80 common/include/Group.class.php:2627
+#: common/include/Group.class.php:2628 common/include/Group.class.php:2629
+#: common/include/Group.class.php:2681 common/include/Group.class.php:2682
+#: common/include/Group.class.php:2685 common/include/Group.class.php:2689
+#: common/include/Group.class.php:2699 common/include/Group.class.php:2700
 #: common/include/GroupJoinRequest.class.php:298
 #: common/include/Navigation.class.php:60 common/include/User.class.php:350
 #: common/include/User.class.php:436 common/include/User.class.php:1410
@@ -628,7 +628,7 @@ msgstr "说明："
 
 #: common/docman/Document.class.php:953
 #: common/docman/DocumentGroup.class.php:731
-#: common/include/Group.class.php:2690 common/tracker/actions/browse.php:201
+#: common/include/Group.class.php:2685 common/tracker/actions/browse.php:201
 #: common/tracker/actions/query.php:202 common/tracker/actions/query.php:346
 msgid "Submitter"
 msgstr "发表人"
@@ -3419,21 +3419,21 @@ msgstr "角色:%s"
 msgid "Wrong destination role"
 msgstr ""
 
-#: common/include/Group.class.php:2291
+#: common/include/Group.class.php:2286
 #, fuzzy
 msgid "Group already active"
 msgstr "组已被激活"
 
-#: common/include/Group.class.php:2531
+#: common/include/Group.class.php:2526
 #, fuzzy
 msgid "Approved"
 msgstr "批准"
 
-#: common/include/Group.class.php:2554 common/include/Group.class.php:2624
+#: common/include/Group.class.php:2549 common/include/Group.class.php:2619
 msgid "Group does not have any administrators."
 msgstr "组没有任何管理员"
 
-#: common/include/Group.class.php:2562
+#: common/include/Group.class.php:2557
 #, php-format
 msgid ""
 "Your project registration for %4$s has been approved.\n"
@@ -3478,24 +3478,24 @@ msgstr ""
 "再选择左边菜单的'项目管理'.享用这个系统的同时请告诉其他人%4$s。如果有需要请与"
 "我们联系，我们乐于提供帮助。-- %4$s的成员"
 
-#: common/include/Group.class.php:2598
+#: common/include/Group.class.php:2593
 #, php-format
 msgid "%s Project Approved"
 msgstr "%s 项目通过审核了"
 
-#: common/include/Group.class.php:2631
+#: common/include/Group.class.php:2626
 #, php-format
 msgid "Your project registration for %s has been denied."
 msgstr "您在 %s 的项目注册被取消了"
 
-#: common/include/Group.class.php:2632 common/include/Group.class.php:2686
-#: common/include/Group.class.php:2704 www/register/index.php:183
+#: common/include/Group.class.php:2627 common/include/Group.class.php:2681
+#: common/include/Group.class.php:2699 www/register/index.php:183
 #: www/register/index.php:189
 #, fuzzy
 msgid "Project Full Name"
 msgstr "新项目名称"
 
-#: common/include/Group.class.php:2633 plugins/projectlabels/www/index.php:172
+#: common/include/Group.class.php:2628 plugins/projectlabels/www/index.php:172
 #: www/admin/approve-pending.php:190 www/admin/database.php:155
 #: www/admin/groupedit.php:170 www/admin/vhost.php:118
 #: www/register/index.php:214
@@ -3503,80 +3503,80 @@ msgstr "新项目名称"
 msgid "Project Unix Name"
 msgstr "新项目名称"
 
-#: common/include/Group.class.php:2634
+#: common/include/Group.class.php:2629
 msgid "Reasons for negative decision"
 msgstr "原因"
 
-#: common/include/Group.class.php:2646
+#: common/include/Group.class.php:2641
 #, php-format
 msgid "%s Project Denied"
 msgstr "%s 项目被取消了"
 
-#: common/include/Group.class.php:2670
+#: common/include/Group.class.php:2665
 msgid "Could not find user who has submitted the project."
 msgstr "无法找到提交项目的用户。"
 
-#: common/include/Group.class.php:2677
+#: common/include/Group.class.php:2672
 #, fuzzy
 msgid "There is no administrator to send the mail to."
 msgstr "没有发送邮件的管理员"
 
-#: common/include/Group.class.php:2685 common/include/Group.class.php:2696
-#: common/include/Group.class.php:2703 common/include/Group.class.php:2709
+#: common/include/Group.class.php:2680 common/include/Group.class.php:2691
+#: common/include/Group.class.php:2698 common/include/Group.class.php:2704
 #, php-format
 msgid "New %s Project Submitted"
 msgstr "新项目 %s 已提交"
 
-#: common/include/Group.class.php:2687 common/include/Group.class.php:2705
+#: common/include/Group.class.php:2682 common/include/Group.class.php:2700
 #: www/admin/approve-pending.php:192
 msgid "Submitted Description"
 msgstr "已提交的说明"
 
-#: common/include/Group.class.php:2694
+#: common/include/Group.class.php:2689
 #, fuzzy
 msgid "Please visit the following URL to approve or reject this project"
 msgstr " 请点击这个网址来完成email信箱的改变："
 
-#: common/include/Group.class.php:2706
+#: common/include/Group.class.php:2701
 #, php-format
 msgid ""
 "The %s admin team will now examine your project submission. You will be "
 "notified of their decision."
 msgstr "%s 的管理团队会尽快审核您注册的项目，通过审核与否您都会收到通知。"
 
-#: common/include/Group.class.php:2724
+#: common/include/Group.class.php:2719
 msgid "Group name is too short"
 msgstr "群组名称太短"
 
-#: common/include/Group.class.php:2727
+#: common/include/Group.class.php:2722
 msgid "Group name is too long"
 msgstr "群组名称太长"
 
-#: common/include/Group.class.php:2730
+#: common/include/Group.class.php:2725
 msgid "Group name already taken"
 msgstr "群组名称已经有人使用"
 
-#: common/include/Group.class.php:2811
+#: common/include/Group.class.php:2806
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group Unix Status: %s"
 msgstr "错误: 数据库: 不能更改组状态: %s"
 
-#: common/include/Group.class.php:2875
+#: common/include/Group.class.php:2870
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr "错误 - 不能更新组的Unix状态: %s"
 
-#: common/include/Group.class.php:2893
+#: common/include/Group.class.php:2888
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
 msgstr "错误 - 不能更新组的Unix状态: %s"
 
-#: common/include/Group.class.php:2911
+#: common/include/Group.class.php:2906
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
 msgstr "错误 - 不能更新组的Unix状态: %s"
 
-#: common/include/Group.class.php:2929
+#: common/include/Group.class.php:2924
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr "错误 - 不能更新组的Unix状态: %s"
@@ -9721,7 +9721,7 @@ msgstr "新闻存档"
 #: plugins/forumml/www/message.php:209
 #, fuzzy
 msgid "Search result for "
-msgstr "<em>%1$s</em> 的搜索结果"
+msgstr "的搜索结果"
 
 #: plugins/forumml/www/message.php:209
 #, fuzzy
@@ -10149,7 +10149,7 @@ msgstr "找不到关于 “%s” 的资料"
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:111
 #, fuzzy, php-format
 msgid "Search results for “%s”"
-msgstr "<em>%1$s</em> 的搜索结果"
+msgstr "的搜索结果"
 
 #: plugins/globalsearch/www/index.php:166 www/admin/grouplist.php:67
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:45
@@ -10976,7 +10976,7 @@ msgstr ""
 #: plugins/hudson/include/hudson_Widget_JobTestTrend.class.php:91
 #, fuzzy
 msgid "No test found for this job."
-msgstr "找不到关于 <em>%1$s</em> 的资料"
+msgstr ""
 
 #: plugins/hudson/include/hudson_Widget_JobTestTrend.class.php:45
 #: plugins/hudson/include/hudson_Widget_JobTestTrend.class.php:86
@@ -16257,8 +16257,8 @@ msgstr "管理搜索结果."
 #, fuzzy, php-format
 msgid "User search with criteria <em>%1$s</em>: %2$s match"
 msgid_plural "User search with criteria <em>%1$s</em>: %2$s matches"
-msgstr[0] "依照条件搜索用户"
-msgstr[1] "依照条件搜索用户"
+msgstr[0] ""
+msgstr[1] ""
 
 #: www/admin/search.php:74 www/admin/unsubscribe.php:113
 #: www/admin/useredit.php:148 www/include/user_profile.php:92
@@ -23717,30 +23717,6 @@ msgstr "帐号"
 #~ msgid "Post date"
 #~ msgstr "张贴日期"
 
-#, fuzzy
-#~ msgid "No matches found for %1$s"
-#~ msgstr "找不到关于 <em>%1$s</em> 的资料"
-
-#, fuzzy
-#~ msgid "Search results for %1$s"
-#~ msgstr "<em>%1$s</em> 的搜索结果"
-
-#~ msgid "Search results for <em>%1$s</em>"
-#~ msgstr "<em>%1$s</em> 的搜索结果"
-
-#~ msgid "No matches found for <em>%1$s</em>"
-#~ msgstr "找不到关于 <em>%1$s</em> 的资料"
-
-#, fuzzy
-#~ msgid ""
-#~ "No matches found for <em>%s</em> - No sections available (check your "
-#~ "permissions)"
-#~ msgstr "未发现符合项目 - 没有部份提供(检查您的权限)"
-
-#, fuzzy
-#~ msgid "No matches found for <em>%s</em>"
-#~ msgstr "找不到关于 <em>%1$s</em> 的资料"
-
 #~ msgid "Error creating group object"
 #~ msgstr "创建群组对象时发生错误"
 
@@ -25539,10 +25515,6 @@ msgstr "帐号"
 #~ "务器）<br /><strong>说明：</strong>放在该标题下的简单说明。"
 
 #, fuzzy
-#~ msgid "OR choose one form FTP %1$s."
-#~ msgstr "找不到关于 <em>%1$s</em> 的资料"
-
-#, fuzzy
 #~ msgid ""
 #~ "<strong>Document Title</strong>:  Refers to the relatively brief title of "
 #~ "the document (e.g. How to use the download server)<br /"
@@ -25756,10 +25728,6 @@ msgstr "帐号"
 #, fuzzy
 #~ msgid "No Existing Tasks Found"
 #~ msgstr "没有发现符合的任务"
-
-#, fuzzy
-#~ msgid "No matches found for <em>%s</em> "
-#~ msgstr "找不到关于 <em>%1$s</em> 的资料"
 
 #, fuzzy
 #~ msgid "Confirm Has"
