@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-09 15:02+0100\n"
+"POT-Creation-Date: 2014-01-09 16:07+0100\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -20,9 +20,8 @@ msgstr ""
 
 #: common/account/actions/addsshkey.php:35
 #: common/account/actions/addsshkey.php:50
-#, fuzzy
 msgid "SSH Key added successfully."
-msgstr "Benutzer erfolgreich hinzugefügt"
+msgstr "SSH-Schlüssel erfolgreich hinzugefügt."
 
 #: common/account/actions/addsshkey.php:40
 #: common/docman/actions/addfile.php:124 common/docman/actions/addfile.php:160
@@ -837,6 +836,8 @@ msgid ""
 "Refers to the relatively brief title of the document (e.g. How to use the "
 "download server)."
 msgstr ""
+"Verweist auf den relativ kurz gefassten Titel des Dokumentes (z.B. Wie "
+"benutzt man den Download-Server)."
 
 #: common/docman/views/addfile.php:92 common/docman/views/addfile.php:108
 #: common/docman/views/addfile.php:110 common/docman/views/editfile.php:42
@@ -2786,9 +2787,8 @@ msgid "File cannot be moved to the permanent location"
 msgstr "Datei kann nicht zum aktuellen Ort verschoben werden"
 
 #: common/frs/FRSFile.class.php:206 common/frs/FRSRelease.class.php:158
-#, fuzzy
 msgid "Error Adding Release: "
-msgstr "Fehler beim Hinzufügen der Datenbank"
+msgstr ""
 
 #: common/frs/FRSFile.class.php:232
 msgid "Invalid file_id"
@@ -2824,9 +2824,8 @@ msgid "Error Adding Package: Name Already Exists"
 msgstr "Ein solches Element existiert bereits"
 
 #: common/frs/FRSPackage.class.php:165
-#, fuzzy
 msgid "Error Adding Package: "
-msgstr "Fehler beim Hinzufügen der Datenbank"
+msgstr ""
 
 #: common/frs/FRSPackage.class.php:205
 msgid "Invalid package_id"
@@ -3060,9 +3059,8 @@ msgid "No database installation scripts found."
 msgstr ""
 
 #: common/include/DatabaseInstaller.class.php:137
-#, fuzzy
 msgid "Database initialisation error:"
-msgstr "Datenbankmanipulation"
+msgstr ""
 
 #: common/include/Error.class.php:106
 msgid "No Error"
@@ -3325,29 +3323,24 @@ msgid "Error Deleting Tags: "
 msgstr "Fehler beim Löschen eines Elements"
 
 #: common/include/Group.class.php:1788
-#, fuzzy
 msgid "Error Deleting Project History: "
-msgstr "Fehler bei der Aktualisierung der Projekt- Informationen: %s"
+msgstr ""
 
 #: common/include/Group.class.php:1799
-#, fuzzy
 msgid "Error Deleting Project Plugins: "
-msgstr "Fehler beim Erstellen des Mitarbeiter-Objektes: %s"
+msgstr ""
 
 #: common/include/Group.class.php:1810
-#, fuzzy
 msgid "Error Deleting SCM Statistics: "
-msgstr "Fehler beim Aufruf der Liste"
+msgstr ""
 
 #: common/include/Group.class.php:1826
-#, fuzzy
 msgid "Could not properly delete the survey"
-msgstr "Die Mailingliste konnte nicht ordnungsgemäß gelöscht werden"
+msgstr ""
 
 #: common/include/Group.class.php:1842
-#, fuzzy
 msgid "Could not properly delete the survey questions"
-msgstr "Die Mailingliste konnte nicht ordnungsgemäß gelöscht werden"
+msgstr ""
 
 #: common/include/Group.class.php:1860
 #: plugins/mailman/include/mailmanPlugin.class.php:199
@@ -3355,19 +3348,16 @@ msgid "Could not properly delete the mailing list"
 msgstr "Die Mailingliste konnte nicht ordnungsgemäß gelöscht werden"
 
 #: common/include/Group.class.php:1872 common/include/Group.class.php:1880
-#, fuzzy
 msgid "Error Deleting Trove: "
-msgstr "Fehler beim Erstellen einer Gruppe"
+msgstr ""
 
 #: common/include/Group.class.php:1891
-#, fuzzy
 msgid "Error Deleting Counters: "
-msgstr "Fehler beim Erstellen einer Forennachricht:"
+msgstr ""
 
 #: common/include/Group.class.php:1901 common/include/Group.class.php:1910
-#, fuzzy
 msgid "Error Deleting Project:"
-msgstr "Fehler beim Erstellen des Mitarbeiter-Objektes: %s"
+msgstr ""
 
 #: common/include/Group.class.php:1982
 msgid "User is not active. Only active users can be added."
@@ -3879,9 +3869,8 @@ msgid "Mailing Lists"
 msgstr "Mailinglisten"
 
 #: common/include/Navigation.class.php:474
-#, fuzzy
 msgid "Project Management."
-msgstr "Projektname"
+msgstr ""
 
 #: common/include/Navigation.class.php:488
 #: common/reporting/report_utils.php:140 common/reporting/report_utils.php:665
@@ -4004,9 +3993,9 @@ msgid "%s (global role)"
 msgstr ""
 
 #: common/include/RBAC.php:813
-#, fuzzy, php-format
+#, php-format
 msgid "%s (in project %s)"
-msgstr "%1$s Projekte"
+msgstr ""
 
 #: common/include/RBAC.php:1115
 #, fuzzy
@@ -4457,9 +4446,8 @@ msgid "Insert Error"
 msgstr "Fehler einfügen"
 
 #: common/include/User.class.php:443
-#, fuzzy
 msgid "Could Not Get User Id: "
-msgstr "Konnte die Rolle nicht bekommen"
+msgstr ""
 
 #: common/include/User.class.php:477
 #, fuzzy, php-format
@@ -5332,7 +5320,7 @@ msgstr "Benutze vorgespeicherte Antwort"
 
 #: common/tracker/actions/admin-tracker.php:66
 msgid "Create/change generic response messages for the tracker."
-msgstr "Allgemeine Antwort-Nachrichten für den Tracker anlegen/ändern."
+msgstr "Allgemeine Antworten für den Tracker hinzufügen/ändern."
 
 #: common/tracker/actions/admin-tracker.php:70
 #, fuzzy
@@ -7726,7 +7714,6 @@ msgid "Leave project"
 msgstr ""
 
 #: common/widget/Widget_MyProjects.class.php:96
-#, fuzzy
 msgid "Private project"
 msgstr "Private Projekte"
 
@@ -7980,9 +7967,8 @@ msgstr[1] ""
 "einige unterschiedliche Positionen</a> zu besetzen."
 
 #: common/widget/Widget_ProjectInfo.class.php:131
-#, fuzzy
 msgid "Some infos about the project."
-msgstr "Top %1$s Projekt"
+msgstr ""
 
 #: common/widget/Widget_ProjectLatestDocuments.class.php:38
 msgid "5 Latest Published Documents"
@@ -8378,11 +8364,9 @@ msgid "ADMS.SW RDF meta-data about forge projects."
 msgstr ""
 
 #: plugins/admssw/include/admsswPlugin.class.php:150
-#, fuzzy, php-format
+#, php-format
 msgid "Preview <a href=\"%s\">ADMS.SW meta-data</a> about the project"
 msgstr ""
-"Betrachte Liste der <a href=\"%1$s\">RSS feeds</a> die für dieses Projekt "
-"verfügbar sind."
 
 #: plugins/admssw/include/admsswPlugin.class.php:631
 msgid ""
@@ -8394,7 +8378,7 @@ msgstr ""
 #: www/softwaremap/full_list.php:70
 #, fuzzy, php-format
 msgid "<strong>%d</strong> projects in result set."
-msgstr "<strong>%d</strong> Projekt in der Ergebnisliste."
+msgstr "<strong>%d</strong> Projekte in der Ergebnisliste."
 
 #: plugins/admssw/include/admsswPlugin.class.php:645
 #: plugins/admssw/www/projectturtle.php:52 plugins/admssw/www/trove.php:46
@@ -8654,7 +8638,7 @@ msgstr "Kann neuen Tab-Eintrag nicht einfügen: %s"
 #: plugins/authopenid/www/index.php:67
 #, fuzzy
 msgid "Identity successfully added"
-msgstr "%1$s erfolgreich hinzugefügt."
+msgstr "erfolgreich hinzugefügt."
 
 #: plugins/authopenid/www/index.php:81
 msgid "Error: Missing URL for the new identity"
@@ -8677,7 +8661,7 @@ msgstr "Kann Tab-Eintrag nicht löschen: %s"
 #: plugins/authopenid/www/index.php:117 plugins/authwebid/www/index.php:82
 #, fuzzy
 msgid "Identity successfully deleted"
-msgstr "%1$s erfolgreich gelöscht."
+msgstr "erfolgreich gelöscht."
 
 #: plugins/authopenid/www/index.php:122
 #, fuzzy, php-format
@@ -9461,12 +9445,12 @@ msgstr "Diff zu"
 #: plugins/extsubproj/actions/addExtSubProj.php:31
 #, fuzzy
 msgid "Failed to add subproject."
-msgstr "Neues Projekt hinzufügen"
+msgstr "Neues Unterprojekt hinzufügen."
 
 #: plugins/extsubproj/actions/addExtSubProj.php:35
 #, fuzzy
 msgid "Subproject successfully added."
-msgstr "%1$s erfolgreich gelöscht."
+msgstr "Unterprojekt erfolgreich gelöscht."
 
 #: plugins/extsubproj/actions/delExtSubProj.php:30
 #, fuzzy
@@ -9474,9 +9458,8 @@ msgid "Failed to delete subproject."
 msgstr "Löschung sämtlicher Qualifikationen fehlgeschlagen"
 
 #: plugins/extsubproj/actions/delExtSubProj.php:34 www/pm/admin/index.php:156
-#, fuzzy
 msgid "Subproject successfully deleted."
-msgstr "%1$s erfolgreich gelöscht."
+msgstr "Unterprojekt erfolgreich gelöscht."
 
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:67
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:76
@@ -9509,9 +9492,8 @@ msgid "Displays links to external subprojects of the project"
 msgstr "Unten ist eine Liste mit allen Dateien des Projektes."
 
 #: plugins/extsubproj/include/extsubproj_Widget_SubProjects.class.php:51
-#, fuzzy
 msgid "Subprojects"
-msgstr "Unterprojekt"
+msgstr "Unterprojekten"
 
 #: plugins/extsubproj/view/admin/viewGlobalConfiguration.php:30
 #: plugins/mantisbt/view/admin/viewConfiguration.php:54
@@ -9522,9 +9504,8 @@ msgid "Manage configuration"
 msgstr "Bestätigung der EMail-Änderung"
 
 #: plugins/extsubproj/view/admin/viewProjectConfiguration.php:32
-#, fuzzy
 msgid "Subproject URL"
-msgstr "Unterprojekt"
+msgstr "Unterprojekt URL"
 
 #: plugins/extsubproj/view/admin/viewProjectConfiguration.php:41
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:227
@@ -9589,7 +9570,7 @@ msgstr "Diese Liste hinzufügen"
 #: plugins/mailman/www/mailman_utils.php:117
 #, fuzzy
 msgid "Archives"
-msgstr "%1$s Archive"
+msgstr "Archive"
 
 #: plugins/forumml/www/forumml_utils.php:143
 #: plugins/forumml/www/forumml_utils.php:147
@@ -9699,7 +9680,7 @@ msgstr "Starten Sie eine neue Diskussion"
 #: plugins/forumml/www/index.php:102
 #, fuzzy
 msgid "Browse Archives"
-msgstr "%1$s Archive"
+msgstr "Archive"
 
 #: plugins/forumml/www/index.php:103
 #, fuzzy
@@ -9825,7 +9806,7 @@ msgstr ""
 #: plugins/globaldashboard/www/admin/delete_account.php:39
 #, fuzzy
 msgid "Remote Account successfully deleted"
-msgstr "%1$s erfolgreich gelöscht."
+msgstr "erfolgreich gelöscht."
 
 #: plugins/globaldashboard/www/admin/delete_account.php:41
 #, fuzzy
@@ -9946,7 +9927,7 @@ msgstr "Filter Entfernen"
 #: plugins/globaldashboard/www/admin/manage_accounts.php:80
 #, fuzzy
 msgid "User account URL"
-msgstr "%1$s Account-Registrierung"
+msgstr "Account-Registrierung"
 
 #: plugins/globaldashboard/www/admin/manage_accounts.php:80
 #: plugins/mantisbt/view/admin/viewVersion.php:53 www/admin/pluginman.php:138
@@ -9968,7 +9949,7 @@ msgstr ""
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:32
 #, fuzzy
 msgid "Create a new associated forge below"
-msgstr "Erzeuge unten eine neue verwandte Forge %1$s:"
+msgstr "Erzeuge unten eine neue verwandte Forge"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:37
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:97
@@ -10402,7 +10383,7 @@ msgstr "Dokument erfolgreich übermittelt"
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:45
 #, fuzzy
 msgid "Headermenu Link Order successfully validated"
-msgstr "%1$s erfolgreich hinzugefügt."
+msgstr "erfolgreich hinzugefügt."
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:46
 msgid "Error in Outermenu Link Order validation"
@@ -10905,7 +10886,7 @@ msgstr "Bearbeiten Sie dieses Kennzeichen"
 #: plugins/hudson/include/hudsonViews.class.php:372
 #, fuzzy, php-format
 msgid "Are you sure you want to delete Job %s from project %s?"
-msgstr "Sind Sie sicher, dass Sie %1$s löschen wollen?"
+msgstr "Sind Sie sicher, dass Sie %s löschen wollen?"
 
 #: plugins/hudson/include/hudsonViews.class.php:373
 #, fuzzy
@@ -11230,7 +11211,7 @@ msgid ""
 msgstr ""
 "Sie können die Listen von hier aus administrieren. Bitte bedenken Sie, dass "
 "private Listen immernoch von Mitgliedern Ihres Projektes angeschaut werden "
-"können, die aber nicht in %1$s aufgelistet sind."
+"können, die aber nicht in %s aufgelistet sind."
 
 #: plugins/mailman/www/admin/index.php:219 www/mail/admin/index.php:257
 msgid "Add Mailing List"
@@ -12739,8 +12720,9 @@ msgstr "Name"
 
 #: plugins/projectimport/common/UploadedFiles.class.php:167
 #: plugins/projectimport/www/index.php:585
+#, fuzzy
 msgid "type"
-msgstr ""
+msgstr "Typ"
 
 #: plugins/projectimport/common/UploadedFiles.class.php:168
 #, fuzzy
@@ -12838,14 +12820,12 @@ msgid "Select existing user"
 msgstr ""
 
 #: plugins/projectimport/www/index.php:329
-#, fuzzy
 msgid "to be added to project"
-msgstr "Kennzeichen zum projekt hinzufügen"
+msgstr ""
 
 #: plugins/projectimport/www/index.php:342
-#, fuzzy
 msgid "need to add to project"
-msgstr "Kennzeichen zum projekt hinzufügen"
+msgstr ""
 
 #: plugins/projectimport/www/index.php:381
 msgid "Failed to find existing users matching some imported users."
@@ -12915,7 +12895,7 @@ msgstr ""
 #: plugins/projectimport/www/index.php:483
 #, fuzzy, php-format
 msgid "Failed to find mapped user “%s”"
-msgstr "Nutzer %s finden fehlgeschlagen."
+msgstr "Nutzer “%s” finden fehlgeschlagen."
 
 #: plugins/projectimport/www/index.php:564
 #, fuzzy
@@ -12970,9 +12950,8 @@ msgid "Missing require to use this plugin. You need arc/ARC2.php"
 msgstr ""
 
 #: plugins/projectimport/www/projectsimport.php:264
-#, fuzzy
 msgid "Failed to create project"
-msgstr "Außerstande ein ArtifactCanned Objekt anzulegen"
+msgstr ""
 
 #: plugins/projectimport/www/projectsimport.php:270
 #, fuzzy
@@ -12985,9 +12964,8 @@ msgid "Users importer"
 msgstr "Benutzerzeitauswertung"
 
 #: plugins/projectimport/www/usersimport.php:220
-#, fuzzy
 msgid "Failed to create user"
-msgstr "Hinzufügen der Qualifikationen fehlgeschlagen"
+msgstr ""
 
 #: plugins/projectimport/www/usersimport.php:223
 #, fuzzy
@@ -13033,9 +13011,8 @@ msgid "The label has been added to the project."
 msgstr "Das Kennzeichen ist dem Projekt zugeordnet worden."
 
 #: plugins/projectlabels/www/index.php:75
-#, fuzzy
 msgid "No such project."
-msgstr "Top %1$s Projekt"
+msgstr ""
 
 #: plugins/projectlabels/www/index.php:86
 #, php-format
@@ -13204,9 +13181,8 @@ msgid "Project Hierarchy"
 msgstr "Projektname"
 
 #: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:92
-#, fuzzy
 msgid "Hierarchy Admin"
-msgstr "Technik &-Administration"
+msgstr ""
 
 #: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:92
 #: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:610
@@ -13692,7 +13668,7 @@ msgstr ""
 #: plugins/scmsvn/common/SVNPlugin.class.php:141
 #: plugins/scmsvn/common/SVNPlugin.class.php:166
 msgid "SSH must be installed on your client machine."
-msgstr ""
+msgstr "SSH muss auf Ihrem Client-Rechner installiert sein."
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:108
 #: plugins/scmbzr/common/BzrPlugin.class.php:122
@@ -14220,12 +14196,10 @@ msgid ""
 msgstr ""
 
 #: plugins/scmhg/common/HgPlugin.class.php:97
-#, fuzzy
 msgid "Read/write access to Mercurial tree is allowed for authenticated users."
 msgstr ""
 "Ausschliesslich Projektentwickler können mit dieser Methode auf den "
-"Mercurial - Baum zugreifen. SSH muss auf Ihrem Client-Rechner installiert "
-"sein. Geben Sie nach der Aufforderung Ihr Site-Passwort ein:"
+"Mercurial - Baum zugreifen."
 
 #: plugins/scmhg/common/HgPlugin.class.php:109
 #: plugins/scmhg/common/HgPlugin.class.php:138
@@ -14404,9 +14378,8 @@ msgid "Developer Subversion Access via DAV"
 msgstr "Subversion Entwicklerzugang über DAV"
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:648
-#, fuzzy
 msgid "Subversion Commits"
-msgstr "Subversion Repository Browser"
+msgstr ""
 
 #: plugins/soapadmin/include/soapadminPlugin.class.php:138
 #, fuzzy
@@ -14476,9 +14449,8 @@ msgid "Is Active"
 msgstr "Ist Aktiv"
 
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:58
-#, fuzzy
 msgid "Add a new webanalytics reference"
-msgstr "Neue Qualifikation hinzufügen"
+msgstr ""
 
 #: plugins/wiki/common/wikiconfig.class.php:39
 msgid ""
@@ -14694,10 +14666,13 @@ msgstr ""
 "möglich ist."
 
 #: www/account/change_email.php:80
+#, fuzzy
 msgid ""
 "Submitting the form below will mail a confirmation URL to the new email "
 "address. Visiting this link will complete the email change."
 msgstr ""
+"Eine E-Mail wurde an die neue Adresse gesandt. Bitte folgenden Sie den "
+"Anleitungen in der Mail um Ihre E-Mail-Änderung abzuschliessen."
 
 #: www/account/change_email.php:86
 msgid "New Email Address"
@@ -14816,7 +14791,6 @@ msgid "Add a new ssh key"
 msgstr "Füge neuen Auftrag hinzu"
 
 #: www/account/editsshkeys.php:74
-#, fuzzy
 msgid ""
 "To avoid having to type your password every time for your CVS/SSH developer "
 "account, you may upload your public key(s) here and they will be placed on "
@@ -15053,16 +15027,22 @@ msgid ""
 "Someone (presumably you) on the %s site requested a password change through "
 "email verification."
 msgstr ""
+"Jemand (vermutlich Sie) hat auf der %s Site einen Passwortwechsel per Email-"
+"Überprüfung angefordert."
 
 #: www/account/lostpw.php:59
 msgid "If this was not you, ignore this message and nothing will happen."
 msgstr ""
+"Falls Sie das nicht waren, ignorieren Sie diese Nachricht und nichts wird "
+"passieren."
 
 #: www/account/lostpw.php:62
 msgid ""
 "If you requested this verification, visit the following URL to change your "
 "password:"
 msgstr ""
+"Falls Sie diese Überprüfung angefordert haben, besuchen Sie den folgenden "
+"Link, um Ihr Passwort zu ändern:"
 
 #: www/account/lostpw.php:72
 #, fuzzy
@@ -15094,10 +15074,11 @@ msgid ""
 "account. Visiting the URL will allow you to change your password online and "
 "login."
 msgstr ""
-"Klicken Sie auf »Send Lost PW Hash« unten um einen Link per E-Mail an Ihre "
-"gespeicherte Mailadresse zu erhalten. Dieser Link beinhaltet einen 128-bit "
-"Bestätigungs-Hash für Ihren Account. Wenn Sie den Link anklicken, erhalten "
-"Sie die Gelegenheit Ihr Passwort Online zu ändern und einzuloggen."
+"Klicken Sie auf »Sende vergessenen Passwort-Hash« unten um einen Link per E-"
+"Mail an Ihre gespeicherte Mailadresse zu erhalten. Dieser Link beinhaltet "
+"einen 128-bit Bestätigungs-Hash für Ihren Account. Wenn Sie den Link "
+"anklicken, erhalten Sie die Gelegenheit Ihr Passwort Online zu ändern und "
+"einzuloggen."
 
 #: www/account/lostpw.php:95
 msgid "Send Lost PW Hash"
@@ -15228,7 +15209,8 @@ msgstr ""
 #, php-format
 msgid "Do you accept the <a href=\"%s\">terms of use</a> for this site?"
 msgstr ""
-"Akzeptieren Sie Sie die <a href=\"%s\">Nutzungsbedingungen</a>für diese Site?"
+"Akzeptieren Sie Sie die <a href=\"%s\">Nutzungsbedingungen</a> für diese "
+"Site?"
 
 #: www/account/register.php:267
 msgid "Activate this user immediately"
@@ -15884,7 +15866,7 @@ msgstr "Benutzerverwaltung"
 #: www/admin/index.php:50
 #, fuzzy, php-format
 msgid "Active site users: <strong>%d</strong>"
-msgstr "Aktive Seitenbenutzer: <strong>%1$s</strong>"
+msgstr "Aktive Seitenbenutzer: <strong>%d</strong>"
 
 #: www/admin/index.php:53
 msgid "Display Full User List/Edit Users"
@@ -15954,7 +15936,8 @@ msgstr "Zeige Projekte, die anfangen mit :"
 
 #: www/admin/index.php:151
 msgid "Search <em>(groupid, project Unix name, project full name)</em>"
-msgstr "Suchen <em>(Gruppen-ID, Unix-Projekt-Name, vollständiger Name)</em>"
+msgstr ""
+"Suchen <em>(Gruppen-ID, Unix-Projekt-Name, vollständiger Projektname)</em>"
 
 #: www/admin/index.php:158
 msgid "Register New Project"
@@ -17523,13 +17506,12 @@ msgid "Submit/Refresh"
 msgstr "Freigeben/Aktualisieren"
 
 #: www/frs/admin/editrelease.php:288
-#, fuzzy
 msgid "Add Files To This Release"
-msgstr "Schritt 3: Ändere Dateien in dieser Version"
+msgstr "Dateien zu dieser Version hinzufügen"
 
 #: www/frs/admin/editrelease.php:289
 msgid "Now, choose a file to upload into the system."
-msgstr ""
+msgstr "Wählen Sie nun eine Datei, zum Hochladen ins System."
 
 #: www/frs/admin/editrelease.php:298 www/frs/admin/qrs.php:200
 #, php-format
@@ -17617,7 +17599,6 @@ msgstr ""
 "zusammenzufassen oder Sie nutzen sie wie Sie möchten."
 
 #: www/frs/admin/index.php:129
-#, fuzzy
 msgid "An example of packages:"
 msgstr "Ein Beispiel für Pakete:"
 
@@ -18012,6 +17993,8 @@ msgid ""
 "This has the added benefit of enabling an admin to turn a support request "
 "into a bug."
 msgstr ""
+"Dies hat den Vorteil, daß ein Administrator bevollmächtigt wird, eine "
+"Support-Anfrage in einen Bug umzuwandeln."
 
 #: www/include/html.php:401
 msgid ""
@@ -18309,7 +18292,7 @@ msgstr "für"
 
 #: www/include/trove.php:231
 msgid "None Selected"
-msgstr "Keine Auswahl getroffen"
+msgstr "Keine Ausgewählt"
 
 #: www/include/trove.php:274
 msgid "This project has not yet categorized itself in the"
@@ -19103,7 +19086,7 @@ msgstr "Es wurden keine abgelehnten Elemente für diese Woche gefunden."
 msgid ""
 "These items were rejected this past week or were not intended for front page "
 "(total: %d)."
-msgstr "Diese Elemente wurden vergangene Woche abgelehnt(Total: %d)"
+msgstr "Diese Elemente wurden vergangene Woche abgelehnt (Total: %d)."
 
 #: www/news/admin/news_admin_utils.php:130
 msgid "No approved items found for this week."
@@ -19334,7 +19317,7 @@ msgstr ""
 #: www/people/editjob.php:134
 #, fuzzy, php-format
 msgid "Job skill delete failed: %s"
-msgstr "Job Qualifikation-Löschung fehlgeschlagen - Falsche Projekt_ID"
+msgstr "Job Qualifikation-Löschung fehlgeschlagen"
 
 #: www/people/editjob.php:136
 msgid "Job skill deleted successfully"
@@ -19581,6 +19564,8 @@ msgid ""
 "The %s Project Help Wanted board is for non-commercial, project volunteer "
 "openings. Commercial use is prohibited."
 msgstr ""
+"Das %s Projekthilfe-Gesucht Brett ist für nicht-kommerzielle, Freiwillige "
+"Projekt Eröffungen. Kommerzieller Gebrauch ist verboten."
 
 #: www/people/index.php:65
 msgid ""
@@ -19588,22 +19573,30 @@ msgid ""
 "whichever comes first. (Project administrators may always re-post expired "
 "openings.)"
 msgstr ""
+"Projekt Auflistungen bleiben 2 Wochen lang live oder bis sie vom Eröffner "
+"geschlossen werden. (Projekt Administratoren können immer Neuigkeiten zu "
+"geschlossenen Eröffungen schreiben.)"
 
 #: www/people/index.php:69
 msgid ""
 "Browse through the category menu to find projects looking for your help."
 msgstr ""
+"Durchsuchen Sie das Kategoriemenü, um Projekte zu finden, die nach Hilfe "
+"suchen."
 
 #: www/people/index.php:73
 msgid ""
 "If you're a project admin, log in and submit help wanted requests through "
 "your project administration page."
 msgstr ""
+"Falls Sie ein Projektadministrator sind, loggen Sie sich ein und schreiben "
+"Hilfegesuche mithilfe der Administrationsseite."
 
 #: www/people/index.php:77
 msgid ""
 "To suggest new job categories, submit a request via the support manager."
 msgstr ""
+"Um neue Jobkateforien vorzuschlagen, schreibe eine Bitte via Support-Manager."
 
 #: www/people/index.php:82
 msgid "Last posts"
@@ -19780,9 +19773,8 @@ msgid "Category Updated"
 msgstr "Kategorie aktualisiert"
 
 #: www/pm/admin/index.php:141
-#, fuzzy
 msgid "Subproject Updated successfully"
-msgstr "Aktualisierung erfolgreich"
+msgstr "Unterprojekt Aktualisierung erfolgreich"
 
 #: www/pm/admin/index.php:179
 #, fuzzy, php-format
@@ -19804,9 +19796,9 @@ msgstr ""
 "Kategorien, die Sie einmal hinzufügen, können nicht mehr gelöscht werden"
 
 #: www/pm/admin/index.php:243
-#, fuzzy, php-format
+#, php-format
 msgid "Modify a Category in: %s"
-msgstr "Ändere Kategorie in"
+msgstr "Ändere Kategorie in: %s"
 
 #: www/pm/admin/index.php:253
 msgid ""
@@ -19819,23 +19811,21 @@ msgstr ""
 "verwandten Elemente diesen neuen Namen erhalten."
 
 #: www/pm/admin/index.php:277
-#, fuzzy
 msgid "Add a new subproject"
-msgstr "Neues Projekt hinzufügen"
+msgstr "Neues Unterprojekt hinzufügen"
 
 #: www/pm/admin/index.php:280
-#, fuzzy
 msgid ""
 "Add a new subproject to the Tasks. <strong>This is different than adding a "
 "task to a subproject.</strong>"
 msgstr ""
-"Neues Projekt zum Projekt/Auftrags-Manager hinzufügen. <strong>Dies ist "
-"unterschiedlich, als einen Auftrag zu einem Projekt hinzuzufügen.</strong>"
+"Neues Unterprojekt zum Projekt/Auftrags-Manager hinzufügen. <strong>Dies ist "
+"unterschiedlich, als einen Auftrag zu einem Unterprojekt hinzuzufügen.</"
+"strong>"
 
 #: www/pm/admin/index.php:286
-#, fuzzy
 msgid "New Subproject Name"
-msgstr "Name des Unterprojektes"
+msgstr "Name des neues Unterprojekt"
 
 #: www/pm/admin/index.php:288 www/pm/admin/index.php:327
 #, fuzzy
@@ -19857,25 +19847,23 @@ msgid "Change Tasks Status"
 msgstr "Auftragsstatus"
 
 #: www/pm/admin/index.php:313
-#, fuzzy
 msgid ""
 "You can modify an existing subproject using this form. Please note that "
 "private subprojects can still be viewed by members of your project, but not "
 "the general public."
 msgstr ""
-"Sie können ein existierendes Projekt ändern, indem Sie diese Form benutzen. "
-"Bitte bedenken Sie, dass private Projekte immernoch von Mitgliedern Ihres "
-"Projektes angesehen werden können. Die Allgemeinheit kann diese aber nicht "
-"sehen."
+"Sie können ein existierendes Unterprojekt ändern, indem Sie diese Form "
+"benutzen. Bitte bedenken Sie, dass private Projekte immernoch von "
+"Mitgliedern Ihres Projektes angesehen werden können. Die Allgemeinheit kann "
+"diese aber nicht sehen."
 
 #: www/pm/admin/index.php:323 www/pm/index.php:99
 msgid "Subproject Name"
 msgstr "Name des Unterprojektes"
 
 #: www/pm/admin/index.php:372 www/pm/admin/index.php:394
-#, fuzzy
 msgid "Permanently delete this subproject and all its data"
-msgstr "Das Unterprojekt und all seine Daten dauerhaft löschen."
+msgstr "Das Unterprojekt und all seine Daten dauerhaft löschen"
 
 #: www/pm/admin/index.php:379
 msgid ""
@@ -19891,34 +19879,30 @@ msgid "Tasks Administration"
 msgstr "Administration"
 
 #: www/pm/admin/index.php:421
-#, fuzzy
 msgid "Add a Subproject"
-msgstr "Neues Projekt hinzufügen"
+msgstr "Unterprojekt hinzufügen"
 
 #: www/pm/admin/index.php:422
-#, fuzzy
 msgid ""
 "Add a subproject, which can contain a set of tasks. This is different than "
 "creating a new task."
 msgstr ""
-"Füge neues Projekt hinzu, welches weitere Aufträge enthalten kann. Dies ist "
-"unterschiedlich, als neuen Auftrag zu erstellen."
+"Füge neues Unterprojekt hinzu, welches weitere Aufträge enthalten kann. Dies "
+"ist unterschiedlich, als neuen Auftrag zu erstellen."
 
 #: www/pm/admin/index.php:430
-#, fuzzy
 msgid "No Subprojects Found in this Project"
-msgstr "Kein solches Posting für dieses Projekt"
+msgstr "Kein Unterprojekt für dieses Projekt"
 
 #: www/pm/admin/index.php:431
 msgid "You may add new Subprojects using the “Add a Subproject” link above."
 msgstr ""
-"Sie können neue Projekte hinzufügen, indem Sie den »Projekt hinzufügen« Link "
-"oben nutzen."
+"Sie können neue Unterprojekte hinzufügen, indem Sie den »Unterprojekt "
+"hinzufügen« Link oben nutzen."
 
 #: www/pm/admin/index.php:435
-#, fuzzy
 msgid "Edit/Update Subproject"
-msgstr "Ändere/Aktualisiere Projekt"
+msgstr "Ändere/Aktualisiere Unterprojekt"
 
 #: www/pm/browse_task.php:89
 msgid "Browse tasks"
@@ -20164,9 +20148,8 @@ msgid "Field Name"
 msgstr "Dateiname"
 
 #: www/pm/csv.php:109
-#, fuzzy
 msgid "this is the ID in database"
-msgstr "Kann Kennzeichen nicht löschen: %s"
+msgstr ""
 
 #: www/pm/csv.php:113
 msgid ""
@@ -20406,9 +20389,9 @@ msgid "No Changes Have Been Made"
 msgstr "Es wurden keine Änderungen gemacht"
 
 #: www/pm/index.php:56
-#, fuzzy, php-format
+#, php-format
 msgid "Subprojects for %s"
-msgstr "Quelle von %1$s"
+msgstr "Unterprojekte für %s"
 
 #: www/pm/index.php:61
 msgid "No Subprojects Found"
@@ -20825,7 +20808,7 @@ msgstr "Allgemeine Projektinformation"
 #: www/project/admin/index.php:123
 #, fuzzy
 msgid "Group shell (SSH) server:"
-msgstr "Gruppen Shell (SSH) Server: "
+msgstr "Gruppen Shell (SSH) Server:"
 
 #: www/project/admin/index.php:124
 #, fuzzy
@@ -21099,7 +21082,7 @@ msgstr ""
 #: www/project/admin/tools.php:108
 #, fuzzy, php-format
 msgid "Tools for %s"
-msgstr "Foren für %1$s"
+msgstr "Foren für %s"
 
 #: www/project/admin/tools.php:115
 #, fuzzy
@@ -21729,7 +21712,6 @@ msgstr ""
 "erstellen."
 
 #: www/reporting/rebuild.php:53
-#, fuzzy
 msgid ""
 "If you are sure you want to rebuild all the reporting tables, check the “I "
 "am Sure” box and click the button below."
@@ -22254,7 +22236,7 @@ msgstr "Fehler - Schnipsel Paket existiert nicht"
 
 #: www/snippet/addversion.php:154 www/snippet/package.php:75
 msgid "Error doing snippet package version insert"
-msgstr "FEHLER BEIM EINFÜGEN VON SCHNIPSEL PAKET VERSION!"
+msgstr "Fehler beim einfügen von Schnipsel Paket Version!"
 
 #: www/snippet/addversion.php:155
 msgid "New snippet package"
@@ -22916,22 +22898,26 @@ msgstr "Projekt-Administrator"
 
 #: www/survey/admin/index.php:58
 msgid "It's simple to create a survey."
-msgstr ""
+msgstr "Es ist einfach eine Umfrage zu erstellen."
 
 #: www/survey/admin/index.php:62
 msgid "Create questions and comments using the forms above."
-msgstr ""
+msgstr "Erstellen Sie Fragen und Kommentare, indem Sie die Formulare benutzen."
 
 #: www/survey/admin/index.php:65
 msgid ""
 "Create a survey, listing the questions in order (choose from <strong>your</"
 "strong> list of questions)."
 msgstr ""
+"Erstellen Sie eine Umfrage, die Fragen nach Reihenfolge aufgelistet (wählen "
+"Sie aus<strong>Ihrer</strong> Fragenliste)."
 
 #: www/survey/admin/index.php:68
 #, php-format
 msgid "Link to the survey using this format: %s where XX is the survey number"
 msgstr ""
+"Verlinken Sie die Umfrage, indem Sie dieses Format benutzen: %s, wobei XX "
+"die Umfragenummer ist"
 
 #: www/survey/admin/index.php:73
 #, php-format
@@ -23198,6 +23184,8 @@ msgid ""
 "The information collected in these surveys will never be sold to third "
 "parties or used to solicit you to purchase any goods or services."
 msgstr ""
+"Die Informationen, die in diesen Umfragen gesammelt werden, werden weder an "
+"dritte Personen verkauft noch werden Ihnen Waren oder Leistungen anbeworben."
 
 #: www/survey/privacy.php:44
 msgid ""
@@ -23205,24 +23193,36 @@ msgid ""
 "developers being surveyed. That profile will help visitors to the site "
 "understand the quality of a given project."
 msgstr ""
+"Diese Informationen werden gesammelt, um ein Profil der Projekte und "
+"Entwickler zu entwerfen, die an der Umfrage teilgenommen haben. Das Profil "
+"wird den Besuchern dieser Seite helfen, die Qualität eines Projektes zu "
+"verstehen."
 
 #: www/survey/privacy.php:47
 msgid ""
 "The ID's of those who answer surveys are suppressed and not viewable by "
 "project administrators or the public or third parties."
 msgstr ""
+"Die ID's derjenigen, die an der Umfrage teilgenommen haben, werden "
+"unterdrückt und sind für Projektadministratoren, die Öffentlichkeit oder "
+"dritte Personen nicht einsehbar."
 
 #: www/survey/privacy.php:50
 msgid ""
 "The information gathered is used only in aggregate form, not to single out "
 "specific users or developers."
 msgstr ""
+"Die gesammelten Informationen wird nur in Gesamtform genutzt und nicht um "
+"besondere Benutzer oder Entwickler auszuwählen."
 
 #: www/survey/privacy.php:53
 msgid ""
 "If any changes are made to this policy, it will affect only future data that "
 "is collected and the user will of course have the ability to 'opt-out'."
 msgstr ""
+"Wenn sich etwas an dieser Verfahrensweise ändert, wird dies nur Auswirkungen "
+"auf zukünftig gesammelte Daten haben und der Benutzer wird natürlich die "
+"Möglichkeit zum Ausloggen haben."
 
 #: www/survey/rating_resp.php:59
 msgid "Vote registered"
