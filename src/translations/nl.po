@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-09 15:02+0100\n"
+"POT-Creation-Date: 2014-01-09 17:53+0100\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -615,7 +615,7 @@ msgstr "Documenttitel"
 #: common/docman/Document.class.php:952
 #, fuzzy
 msgid "Document description"
-msgstr "Omschrijving:"
+msgstr "Bekijk documentatie"
 
 #: common/docman/Document.class.php:953
 #: common/docman/DocumentGroup.class.php:731
@@ -836,6 +836,8 @@ msgid ""
 "Refers to the relatively brief title of the document (e.g. How to use the "
 "download server)."
 msgstr ""
+"Verwijst naar de verkorte titel van het document (b.v. Het gebruik van de "
+"download server)."
 
 #: common/docman/views/addfile.php:92 common/docman/views/addfile.php:108
 #: common/docman/views/addfile.php:110 common/docman/views/editfile.php:42
@@ -899,7 +901,7 @@ msgstr "Omschrijving"
 
 #: common/docman/views/addfile.php:92
 msgid "A brief description to be placed just under the title."
-msgstr ""
+msgstr "Een korte omschrijving die vlak onder de titel komt."
 
 #: common/docman/views/addfile.php:94 common/docman/views/editfile.php:47
 msgid "Both fields are used by the document search engine."
@@ -2087,9 +2089,8 @@ msgid "Your search did not match any documents."
 msgstr "Je monitort nu geen forums."
 
 #: common/docman/views/search.php:154 common/docman/views/tree.php:64
-#, fuzzy
 msgid "Browse document manager for this project."
-msgstr "Geen."
+msgstr ""
 
 #: common/docman/views/search.php:162
 msgid "Your search is empty."
@@ -2105,7 +2106,7 @@ msgstr ""
 #: www/forum/admin/monitor.php:41
 #, fuzzy
 msgid "Could Not Get Forum Object"
-msgstr "Kan parent niet aanpassen"
+msgstr "Kon de gevraagde bewerking niet uitvoeren"
 
 #: common/forum/AttachManager.class.php:150
 #: common/forum/ForumAdmin.class.php:69 common/forum/ForumAdmin.class.php:334
@@ -2562,9 +2563,8 @@ msgstr "Door"
 
 #: common/forum/ForumHTML.class.php:266
 #: plugins/forumml/www/forumml_utils.php:556 www/forum/message.php:123
-#, fuzzy
 msgid "Reply"
-msgstr "antwoord"
+msgstr "Antwoord"
 
 #: common/forum/ForumHTML.class.php:311
 msgid "Current File"
@@ -3274,9 +3274,8 @@ msgid "Could not properly delete the forum:"
 msgstr "Kon de gevraagde bewerking niet uitvoeren"
 
 #: common/include/Group.class.php:1703
-#, fuzzy
 msgid "Could not properly delete the ProjectGroup:"
-msgstr "Kan parent niet aanpassen"
+msgstr ""
 
 #: common/include/Group.class.php:1714
 #, fuzzy
@@ -3637,14 +3636,14 @@ msgstr "Verzoek om deel te mogen nemen aan project %1$s"
 #, fuzzy, php-format
 msgid "Your request to join the %s project was denied by an administrator."
 msgstr ""
-"Je verzoek om aan het %1$s project te worden toegevoegd is door de beheerder "
+"Je verzoek om aan het %s project te worden toegevoegd is door de beheerder "
 "afgewezen."
 
 #: common/include/GroupJoinRequest.class.php:274
 #, fuzzy, php-format
 msgid "Your request to join the %s project was granted by an administrator."
 msgstr ""
-"Je verzoek om aan het %1$s project te worden toegevoegd is door de beheerder "
+"Je verzoek om aan het %s project te worden toegevoegd is door de beheerder "
 "afgewezen."
 
 #: common/include/GroupJoinRequest.class.php:287
@@ -3994,7 +3993,7 @@ msgstr ""
 #: common/include/RBAC.php:813
 #, fuzzy, php-format
 msgid "%s (in project %s)"
-msgstr "%1$s projecten"
+msgstr "%s projecten"
 
 #: common/include/RBAC.php:1115
 #, fuzzy
@@ -4391,9 +4390,9 @@ msgid "File %1$s cannot be moved to the permanent location: %2$s."
 msgstr "Bestand kan niet verplaatst worden naar de permanente locatie"
 
 #: common/include/Storage.class.php:70
-#, fuzzy, php-format
+#, php-format
 msgid "Not a File %1$s or not a directory %2$s."
-msgstr "Bestand kan niet verplaatst worden naar de permanente locatie"
+msgstr ""
 
 #: common/include/User.class.php:246
 #, fuzzy
@@ -4530,9 +4529,8 @@ msgid "Could Not Delete From filemodule_monitor:"
 msgstr "Kon de gevraagde bewerking niet uitvoeren"
 
 #: common/include/User.class.php:639
-#, fuzzy
 msgid "Error: Cannot Update User Object:"
-msgstr "Kan parent niet aanpassen"
+msgstr ""
 
 #: common/include/User.class.php:733
 #, fuzzy
@@ -4544,9 +4542,8 @@ msgid "Error: You cannot set pending status if user is suspend or active"
 msgstr ""
 
 #: common/include/User.class.php:746
-#, fuzzy
 msgid "Error: Cannot Update User Status:"
-msgstr "Kan parent niet aanpassen"
+msgstr ""
 
 #: common/include/User.class.php:939 common/include/User.class.php:991
 #, fuzzy
@@ -4559,23 +4556,20 @@ msgid "Error: Invalid Shell %s"
 msgstr "Ongeldige Shell %s"
 
 #: common/include/User.class.php:1107
-#, fuzzy
 msgid "Error: Cannot Update User Unix Shell:"
-msgstr "Kan parent niet aanpassen"
+msgstr ""
 
 #: common/include/User.class.php:1253
 msgid "SSH Key already in use"
 msgstr ""
 
 #: common/include/User.class.php:1261
-#, fuzzy
 msgid "Error - Could Not Add User SSH Key:"
-msgstr "Kan parent niet aanpassen"
+msgstr ""
 
 #: common/include/User.class.php:1278
-#, fuzzy
 msgid "Error: Cannot Update User SSH Keys"
-msgstr "Kan parent niet aanpassen"
+msgstr ""
 
 #: common/include/User.class.php:1424 common/include/User.class.php:1460
 #: common/include/User.class.php:1484
@@ -5846,14 +5840,12 @@ msgid "Changes"
 msgstr "Wijzingen"
 
 #: common/tracker/actions/format_csv.php:53 www/pm/format_csv.php:48
-#, fuzzy
 msgid "Update CSV Format"
-msgstr "Aanpassen"
+msgstr ""
 
 #: common/tracker/actions/format_csv.php:62 www/pm/format_csv.php:58
-#, fuzzy
 msgid "CSV Format"
-msgstr "Aanpassen"
+msgstr ""
 
 #: common/tracker/actions/format_csv.php:69
 #: common/tracker/actions/format_csv.php:87 www/pm/format_csv.php:71
@@ -6089,9 +6081,8 @@ msgstr "Verwijderen van item niet gelukt"
 
 #: common/tracker/actions/taskmgr.php:59 www/pm/admin/index.php:304
 #: www/pm/admin/index.php:365
-#, fuzzy
 msgid "Could Not Get ProjectGroup"
-msgstr "Kan parent niet aanpassen"
+msgstr ""
 
 #: common/tracker/actions/taskmgr.php:66 www/pm/browse_task.php:43
 #: www/pm/downloadcsv.php:96 www/pm/ganttpage.php:60
@@ -6164,9 +6155,8 @@ msgstr ""
 #: common/tracker/actions/tracker.php:127
 #: common/tracker/actions/tracker.php:354
 #: common/tracker/actions/tracker.php:383
-#, fuzzy
 msgid "Could Not Create File Object"
-msgstr "Kan parent niet aanpassen"
+msgstr ""
 
 #: common/tracker/actions/tracker.php:135
 msgid "Could Not Attach File to Item: "
@@ -6178,9 +6168,9 @@ msgid "Updated Successfully"
 msgstr "Wijziging doorgevoerd"
 
 #: common/tracker/actions/tracker.php:266
-#, fuzzy, php-format
+#, php-format
 msgid "Could not get Project Task for %d"
-msgstr "Kan parent niet aanpassen"
+msgstr ""
 
 #: common/tracker/actions/tracker.php:292
 #: common/tracker/actions/tracker.php:311
@@ -6332,9 +6322,8 @@ msgid "Removal of old artifact_extra_field_data failed: "
 msgstr ""
 
 #: common/tracker/Artifact.class.php:1169
-#, fuzzy
 msgid "Could Not Create Canned Response Object"
-msgstr "Kan parent niet aanpassen"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:1182
 #, fuzzy
@@ -6471,9 +6460,8 @@ msgid "Invalid ArtifactHistory ID"
 msgstr "Ongeldig ID"
 
 #: common/tracker/ArtifactMessage.class.php:89
-#, fuzzy
 msgid "Error: Logged In User Bug Could Not Get User Object"
-msgstr "Kan parent niet aanpassen"
+msgstr ""
 
 #: common/tracker/ArtifactMessage.class.php:92
 msgid "Logged In: YES"
@@ -7445,7 +7433,7 @@ msgstr ""
 #: common/widget/Widget_MyAdmin.class.php:90
 #, fuzzy
 msgid "Site News Approval"
-msgstr "%1$s project goedgekeurd"
+msgstr "%s project goedgekeurd"
 
 #: common/widget/Widget_MyArtifacts.class.php:52
 msgid "My Artifacts"
@@ -7969,7 +7957,7 @@ msgstr[1] "HULP GEVRAAGD: Dit project zoekt nog"
 #: common/widget/Widget_ProjectInfo.class.php:131
 #, fuzzy
 msgid "Some infos about the project."
-msgstr "Meest actieve %1$s project"
+msgstr "Meest actieve %s project"
 
 #: common/widget/Widget_ProjectLatestDocuments.class.php:38
 msgid "5 Latest Published Documents"
@@ -8340,9 +8328,9 @@ msgid ", part of "
 msgstr ""
 
 #: plugins/admssw/common/RDFedFRSPackage.class.php:94
-#, fuzzy, php-format
+#, php-format
 msgid "%1$s release series of project %2$s"
-msgstr "SCM repository"
+msgstr ""
 
 #: plugins/admssw/include/admsswPlugin.class.php:138
 msgid "ADMS.SW meta-data"
@@ -8353,9 +8341,9 @@ msgid "ADMS.SW RDF meta-data about forge projects."
 msgstr ""
 
 #: plugins/admssw/include/admsswPlugin.class.php:150
-#, fuzzy, php-format
+#, php-format
 msgid "Preview <a href=\"%s\">ADMS.SW meta-data</a> about the project"
-msgstr "Hier is een lijst met openstaande functies voor dit project."
+msgstr ""
 
 #: plugins/admssw/include/admsswPlugin.class.php:631
 msgid ""
@@ -8365,9 +8353,9 @@ msgstr ""
 
 #: plugins/admssw/include/admsswPlugin.class.php:634
 #: www/softwaremap/full_list.php:70
-#, fuzzy, php-format
+#, php-format
 msgid "<strong>%d</strong> projects in result set."
-msgstr "<strong>%1$s</strong> projecten in resultaatset."
+msgstr "<strong>%d</strong> projecten in resultaatset."
 
 #: plugins/admssw/include/admsswPlugin.class.php:645
 #: plugins/admssw/www/projectturtle.php:52 plugins/admssw/www/trove.php:46
@@ -10188,7 +10176,7 @@ msgstr "Niets passends gevonden voor “%s”"
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:111
 #, php-format
 msgid "Search results for “%s”"
-msgstr "Zoekresulten voor <em>%s</em>"
+msgstr "Zoekresulten voor “%s”"
 
 #: plugins/globalsearch/www/index.php:166 www/admin/grouplist.php:67
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:45
@@ -11379,7 +11367,7 @@ msgstr "Ontbrekende parameters"
 #: plugins/mantisbt/action/deleteCategory.php:40
 #, fuzzy, php-format
 msgid "Category %s deleted successfully."
-msgstr "JOB skill Vacature-vaardigheid verwijderd"
+msgstr "Job skill Vacature-vaardigheid verwijderd"
 
 #: plugins/mantisbt/action/deleteCategory.php:43
 #, fuzzy
@@ -11389,12 +11377,12 @@ msgstr "Ontbrekende parameters"
 #: plugins/mantisbt/action/deleteNote.php:39
 #, fuzzy
 msgid "Note deleted successfully"
-msgstr "JOB skill Vacature-vaardigheid verwijderd"
+msgstr "Job skill Vacature-vaardigheid verwijderd"
 
 #: plugins/mantisbt/action/deleteVersion.php:44
 #, fuzzy
 msgid "Version deleted successfully."
-msgstr "JOB skill Vacature-vaardigheid verwijderd"
+msgstr "Job skill Vacature-vaardigheid verwijderd"
 
 #: plugins/mantisbt/action/deleteVersion.php:47
 #, fuzzy
@@ -11529,9 +11517,8 @@ msgid "View all tickets."
 msgstr "Toevoegen nieuwe codefragment bundel"
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:404
-#, fuzzy
 msgid "Statistics"
-msgstr "Gebruik statistieken"
+msgstr "Statistieken"
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:406
 msgid "Manage versions, categories and general configuration."
@@ -13049,9 +13036,8 @@ msgid "The label has been added to the project."
 msgstr ""
 
 #: plugins/projectlabels/www/index.php:75
-#, fuzzy
 msgid "No such project."
-msgstr "Meest actieve %1$s project"
+msgstr ""
 
 #: plugins/projectlabels/www/index.php:86
 #, php-format
@@ -13670,9 +13656,9 @@ msgstr ""
 #: plugins/scmhg/common/HgPlugin.class.php:122
 #: plugins/scmsvn/common/SVNPlugin.class.php:136
 #: plugins/scmsvn/common/SVNPlugin.class.php:161
-#, fuzzy, php-format
+#, php-format
 msgid "Developer %s Access via SSH"
-msgstr "Ontwikkelaars (test)"
+msgstr ""
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:104
 #: plugins/scmbzr/common/BzrPlugin.class.php:116
@@ -14482,9 +14468,8 @@ msgid "Wiki"
 msgstr ""
 
 #: plugins/wiki/common/WikiHtmlSearchRenderer.class.php:50
-#, fuzzy
 msgid "Page"
-msgstr "Hoofdpagina"
+msgstr "Pagina"
 
 #: plugins/wiki/common/WikiPlugin.class.php:74
 #, fuzzy
@@ -14729,7 +14714,8 @@ msgstr ""
 #, fuzzy, php-format
 msgid "You should now <a href=\"%s\">Return to User Prefs</a>."
 msgstr ""
-"Je dient nu %1$s terug te gaan naar \"Account voorkeursinstellingen\" %2$s."
+"Je dient nu terug te gaan naar <a href=\"%s\">Account voorkeursinstellingen</"
+"a>."
 
 #: www/account/change_pw.php:87 www/account/index.php:151
 #: www/admin/userlist.php:140
@@ -15365,8 +15351,8 @@ msgid ""
 "You can't delete the license %s since it is currently referenced in a "
 "project."
 msgstr ""
-"Je kunt de %1$s licentie niet verwijderen omdat er nog een verwijzing "
-"aanhangt in een project."
+"Je kunt de %s licentie niet verwijderen omdat er nog een verwijzing aanhangt "
+"in een project."
 
 #: www/admin/admin_table.php:135
 #, php-format
@@ -15950,7 +15936,6 @@ msgid "Pending projects (new project approval)"
 msgstr "Geen goed te keuren projecten in de pijpleiding"
 
 #: www/admin/index.php:161
-#, fuzzy
 msgid "Projects with status"
 msgstr "Groepen met status"
 
@@ -16219,9 +16204,8 @@ msgid "Plugin %s updated Successfully"
 msgstr ""
 
 #: www/admin/pluginman.php:75 www/admin/pluginman.php:111
-#, fuzzy
 msgid "Could not get plugin object"
-msgstr "Kan parent niet aanpassen"
+msgstr ""
 
 #: www/admin/pluginman.php:95
 #, fuzzy
@@ -16271,7 +16255,7 @@ msgstr "Gebruiker toevoegen"
 #: www/admin/pluginman.php:246
 #, fuzzy, php-format
 msgid "%d projects"
-msgstr "%1$s projecten"
+msgstr "%s projecten"
 
 #: www/admin/pluginman.php:257
 msgid "Inactive"
@@ -16389,14 +16373,12 @@ msgid "New category short name (no spaces, Unix-like)"
 msgstr "Nieuwe categorie - verkorte naam (geen spaties, Unix stijl)"
 
 #: www/admin/trove/trove_cat_add.php:112
-#, fuzzy
 msgid "New category full name (maximum length is 80 chars)"
-msgstr "Nieuwe categorie - volledige naam (VARCHAR 80)"
+msgstr "Nieuwe categorie - volledige naam (max 80 karakters)"
 
 #: www/admin/trove/trove_cat_add.php:114
-#, fuzzy
 msgid "New category description (maximum length is 255 chars)"
-msgstr "Nieuwe categorie - beschrijving (VARCHAR 255)"
+msgstr "Nieuwe categorie - beschrijving (max 255 karakters)"
 
 #: www/admin/trove/trove_cat_edit.php:47
 msgid "Error: a category cannot be the same as its own parent: "
@@ -16425,11 +16407,11 @@ msgstr "Nieuwe categorie - verkorte naam (geen spaties, Unix stijl)"
 
 #: www/admin/trove/trove_cat_edit.php:144
 msgid "Category full name (maximum length is 80 chars)"
-msgstr "Nieuwe categorie - volledige naam (VARCHAR 80)"
+msgstr "Nieuwe categorie - volledige naam (max 80 karakters)"
 
 #: www/admin/trove/trove_cat_edit.php:147
 msgid "Category description (maximum length is 255 chars)"
-msgstr "Nieuwe categorie - beschrijving (VARCHAR 255)"
+msgstr "Nieuwe categorie - beschrijving (max 255 karakters)"
 
 #: www/admin/trove/trove_cat_list.php:74
 msgid "Browse Trove Tree"
@@ -17335,7 +17317,7 @@ msgstr "Forum monitoring geactiveerd"
 
 #: www/forum/myforums.php:58
 msgid "You have no monitored forums"
-msgstr ""
+msgstr "Je monitort nu geen forums"
 
 #: www/forum/myforums.php:70
 #, fuzzy
@@ -17453,9 +17435,8 @@ msgstr "Release datum"
 #: www/frs/admin/editrelease.php:230 www/frs/admin/qrs.php:175
 #: www/frs/admin/showreleases.php:100
 #: www/search/include/renderers/FrsHtmlSearchRenderer.class.php:48
-#, fuzzy
 msgid "Release Name"
-msgstr "Opleveringsnaam:"
+msgstr "Releasenaam"
 
 #: www/frs/admin/editrelease.php:231 www/frs/admin/index.php:179
 #: www/frs/admin/index.php:207 www/frs/admin/qrs.php:178
@@ -17505,20 +17486,19 @@ msgid "Submit/Refresh"
 msgstr "Toevoegen/vernieuwen"
 
 #: www/frs/admin/editrelease.php:288
-#, fuzzy
 msgid "Add Files To This Release"
-msgstr "Step 3: Bestanden aanpassen in deze release"
+msgstr "Voeg bestanden toe aan deze release"
 
 #: www/frs/admin/editrelease.php:289
 msgid "Now, choose a file to upload into the system."
-msgstr ""
+msgstr "Kies nu een bestand om te uploaden naar het systeem."
 
 #: www/frs/admin/editrelease.php:298 www/frs/admin/qrs.php:200
-#, fuzzy, php-format
+#, php-format
 msgid "Alternatively, you can use FTP to upload a new file at %s."
 msgstr ""
 "Als alternatief kun je FTP gebruiken voor het uploaden van een nieuw bestand "
-"naar %1$s"
+"naar %s."
 
 #: www/frs/admin/editrelease.php:322 www/frs/admin/editrelease.php:350
 #: www/frs/admin/qrs.php:224
@@ -17586,57 +17566,54 @@ msgid "Click here to %1$s quick-release a file %2$s"
 msgstr "Klik hier om een bestand te %1$s quick-releasen %2$s"
 
 #: www/frs/admin/index.php:127
-#, fuzzy
 msgid "Packages"
-msgstr "Bundel"
+msgstr "Bundels"
 
 #: www/frs/admin/index.php:128
 msgid ""
 "You can use packages to group different file releases together, or use them "
 "however you like."
 msgstr ""
+"Je kunt bundels gebruiken om verschillende bestanden te groeperen en "
+"gezamelijk uit te leveren."
 
 #: www/frs/admin/index.php:129
-#, fuzzy
 msgid "An example of packages:"
-msgstr "Voeg codefragmenten aan bundel toe"
+msgstr "Een voorbeeld van bundels:"
 
 #: www/frs/admin/index.php:131
-#, fuzzy
 msgid "Your Packages:"
-msgstr "Bundel:"
+msgstr "Uw bundels:"
 
 #: www/frs/admin/index.php:133
 msgid "Define your packages"
-msgstr ""
+msgstr "Definieer uw bundels"
 
 #: www/frs/admin/index.php:134
-#, fuzzy
 msgid "Create new releases of packages"
-msgstr "Klik hier om een nieuwe release aan te maken."
+msgstr "Creëer een nieuwe versie van een Bundel"
 
 #: www/frs/admin/index.php:136
-#, fuzzy
 msgid "Releases of Packages"
-msgstr "Release Notes"
+msgstr "Versies van Bundels"
 
 #: www/frs/admin/index.php:137
 msgid "A release of a package can contain multiple files."
-msgstr ""
+msgstr "Een versie van een bundel kan meerdere bestanden bevatten."
 
 #: www/frs/admin/index.php:138
-#, fuzzy
 msgid "Examples of Releases"
-msgstr "Meest recente release-versies"
+msgstr "Voorbeelden van versies"
 
 #: www/frs/admin/index.php:140
 msgid ""
 "You can create new releases of packages by clicking on <strong>Add/Edit "
 "Releases</strong> next to your package name"
 msgstr ""
+"Je kunt een nieuwe versie van een bundel aanmaken door te klikken op "
+"<strong>Add Publicatie/Edit Publicaties</strong> naast de naam van de bundel."
 
 #: www/frs/admin/index.php:155 www/frs/admin/showreleases.php:99
-#, fuzzy
 msgid "Package name"
 msgstr "Bundelnaam"
 
@@ -17955,14 +17932,12 @@ msgstr ""
 "14 dagen) krijgt het item de status “Verwijderd”."
 
 #: www/include/html.php:389
-#, fuzzy
 msgid "Tracker category"
-msgstr "Tracker item"
+msgstr ""
 
 #: www/include/html.php:391
-#, fuzzy
 msgid "Tracker group"
-msgstr "Tracker"
+msgstr ""
 
 #: www/include/html.php:393
 msgid ""
@@ -18071,9 +18046,8 @@ msgid ""
 msgstr ""
 
 #: www/include/html.php:560
-#, fuzzy
 msgid "Error: uneven row counts"
-msgstr "Fout - geen versies gevonden"
+msgstr ""
 
 #: www/include/html.php:820
 msgid "Lowest"
@@ -18086,12 +18060,12 @@ msgstr "Hoogste"
 #: www/include/html.php:908
 #, fuzzy, php-format
 msgid "Project access problem: %s"
-msgstr "Projectbeheer: %1$s"
+msgstr "Projectbeheer: %s"
 
 #: www/include/html.php:910
 #, fuzzy, php-format
 msgid "Project Problem: %s"
-msgstr "Projectbeheer: %1$s"
+msgstr "Projectbeheer: %s"
 
 #: www/include/html.php:979
 msgid "My Personal Page"
@@ -18775,7 +18749,7 @@ msgstr ""
 #: www/mail/index.php:97
 #, fuzzy, php-format
 msgid "%s Archives"
-msgstr "%1$s archieven"
+msgstr "%s archieven"
 
 #: www/mail/index.php:100
 msgid "Subscribe/Unsubscribe/Preferences"
@@ -19229,7 +19203,7 @@ msgstr ""
 #: www/people/editjob.php:114
 #, fuzzy, php-format
 msgid "Job skill update failed: %s"
-msgstr "JOB skill Aanpassen vacature-vaardigheid niet gelukt"
+msgstr "Job skill Aanpassen vacature-vaardigheid niet gelukt"
 
 #: www/people/editjob.php:116
 msgid "Job skill updated successfully"
@@ -19246,7 +19220,7 @@ msgstr ""
 #: www/people/editjob.php:134
 #, fuzzy, php-format
 msgid "Job skill delete failed: %s"
-msgstr "Verwijderen vacature-vaardigheid niet gelukt - verkeerd project ID"
+msgstr "Verwijderen vacature-vaardigheid niet gelukt"
 
 #: www/people/editjob.php:136
 msgid "Job skill deleted successfully"
@@ -19297,9 +19271,9 @@ msgid "User updated successfully"
 msgstr "Gebruiker aangepast"
 
 #: www/people/editprofile.php:99
-#, fuzzy, php-format
+#, php-format
 msgid "Failed to add the skill %s"
-msgstr "Toevoegen van vaardigheden niet gelukt."
+msgstr "Toevoegen van vaardigheden niet gelukt %s"
 
 #: www/people/editprofile.php:101
 msgid "Skill added successfully"
@@ -19367,16 +19341,16 @@ msgid "No skills selected to delete."
 msgstr "Geen vaardigheden geselecteerd om te verwijderen."
 
 #: www/people/editprofile.php:186
-#, fuzzy, php-format
+#, php-format
 msgid "Failed to delete any skills: %s"
-msgstr "Verwijderen van vaardigheden niet gelukt."
+msgstr "Verwijderen van vaardigheden niet gelukt: %s"
 
 #: www/people/editprofile.php:188
 #, fuzzy
 msgid "Skill deleted successfully"
 msgid_plural "Skills deleted successfully"
-msgstr[0] "JOB skill Vacature-vaardigheid verwijderd"
-msgstr[1] "JOB skill Vacature-vaardigheid verwijderd"
+msgstr[0] "Job skill Vacature-vaardigheid verwijderd"
+msgstr[1] "Job skill Vacature-vaardigheid verwijderd"
 
 #: www/people/editprofile.php:197
 msgid "Confirm skill delete"
@@ -19492,6 +19466,8 @@ msgid ""
 "The %s Project Help Wanted board is for non-commercial, project volunteer "
 "openings. Commercial use is prohibited."
 msgstr ""
+"De %s Projecthulp Gevraagd pagina is voor niet-commerciële, vrijwillige "
+"project vacatures. Commercieel gebruik is niet toegestaan."
 
 #: www/people/index.php:65
 msgid ""
@@ -19499,22 +19475,31 @@ msgid ""
 "whichever comes first. (Project administrators may always re-post expired "
 "openings.)"
 msgstr ""
+"Project vacatures zullen 2 weken blijven staan, tenzij ze eerder worden "
+"gesloten door de indiener. (Project beheerders kunnen vervallen vacatures "
+"altijd opnieuw indienen.)"
 
 #: www/people/index.php:69
 msgid ""
 "Browse through the category menu to find projects looking for your help."
 msgstr ""
+"Blader door het categorie menu om naar projecten te zoeken die je hulp "
+"kunnen gebruiken."
 
 #: www/people/index.php:73
 msgid ""
 "If you're a project admin, log in and submit help wanted requests through "
 "your project administration page."
 msgstr ""
+"Als je een project beheerder bent, log dan in, en dien Hulp Gevraagd "
+"verzoeken via de project beheer pagina in."
 
 #: www/people/index.php:77
 msgid ""
 "To suggest new job categories, submit a request via the support manager."
 msgstr ""
+"Om nieuwe vacature categorieën in te dienen moet je een verzoek aan de "
+"vacature beheerder doen."
 
 #: www/people/index.php:82
 msgid "Last posts"
@@ -20441,14 +20426,12 @@ msgstr "Meest actieve projecten"
 
 #: www/pm/task.php:104 www/pm/task.php:171 www/pm/task.php:306
 #: www/pm/task.php:328 www/pm/task.php:345 www/pm/task.php:377
-#, fuzzy
 msgid "Could Not Get ProjectTask"
-msgstr "Kan parent niet aanpassen"
+msgstr ""
 
 #: www/pm/task.php:122
-#, fuzzy
 msgid "Could Not Get Empty ProjectTask"
-msgstr "Kan parent niet aanpassen"
+msgstr ""
 
 #: www/pm/task.php:130 www/pm/task.php:179
 msgid "Illegal format for hours: must be an integer or a float number."
@@ -21326,9 +21309,9 @@ msgstr ""
 "je een beslissing over de aanvraag, en verdere instructies."
 
 #: www/register/index.php:143 www/register/index.php:162
-#, php-format
+#, fuzzy, php-format
 msgid "Thank you for choosing %s."
-msgstr ""
+msgstr "Bedankt voor het veranderen van %s."
 
 #: www/register/index.php:156
 #, fuzzy, php-format
@@ -21336,13 +21319,10 @@ msgid "Approval Error: %s"
 msgstr "Groep goedgekeurd:"
 
 #: www/register/index.php:159
-#, fuzzy
 msgid ""
 "Your project has been automatically approved. You should receive an email "
 "containing further information shortly."
 msgstr ""
-"Je projectaanvraag is ingediend bij de  %1$s beheerder. Binnen 72 uur "
-"ontvang je een beslissing over de aanvraag, en verdere instructies."
 
 #: www/register/index.php:178
 msgid ""
@@ -21432,7 +21412,7 @@ msgstr ""
 #: www/register/index.php:222
 #, fuzzy
 msgid "must be a valid Unix username;"
-msgstr "Ongeldige unix naam"
+msgstr "Ongeldige Unix naam"
 
 #: www/register/index.php:223
 msgid "cannot match one of our reserved domains;"
@@ -21912,7 +21892,7 @@ msgstr ""
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:200
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:226
 msgid "No sections available (check your permissions)"
-msgstr "geen secties beschikbaar (controleer je rechten)"
+msgstr "Geen secties beschikbaar (controleer je rechten)"
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:346
 msgid "with all words"
@@ -21991,9 +21971,9 @@ msgid "touser"
 msgstr "Totaal aantal uren"
 
 #: www/sendmessage.php:50
-#, fuzzy, php-format
+#, php-format
 msgid "You can only send to addresses @<em>%s</em>."
-msgstr "Niets passends gevonden voor <em>%s</em>"
+msgstr ""
 
 #: www/sendmessage.php:76
 msgid "Body"
@@ -22533,8 +22513,8 @@ msgstr "%1$s open /%2$s totaal"
 #, fuzzy, php-format
 msgid "<strong>%d</strong> project in result set."
 msgid_plural "<strong>%d</strong> projects in result set."
-msgstr[0] "<strong>%1$s</strong> projecten in resultaatset."
-msgstr[1] "<strong>%1$s</strong> projecten in resultaatset."
+msgstr[0] "<strong>%d</strong> projecten in resultaatset."
+msgstr[1] "<strong>%d</strong> projecten in resultaatset."
 
 #: www/softwaremap/tag_cloud.php:98
 #, php-format
@@ -22797,11 +22777,13 @@ msgid ""
 "Create a survey, listing the questions in order (choose from <strong>your</"
 "strong> list of questions)."
 msgstr ""
+"Maak een enquête aan door de vragen in de gewenste volgorde in te voeren "
+"(kies uit <strong>je eigen</strong> vragenlijst)."
 
 #: www/survey/admin/index.php:68
 #, php-format
 msgid "Link to the survey using this format: %s where XX is the survey number"
-msgstr ""
+msgstr "Link de enquête volgens dit format: %s waarbij XX het enquêtenummer is"
 
 #: www/survey/admin/index.php:73
 #, php-format
@@ -23031,9 +23013,8 @@ msgstr "Resultaten met grafieken en toelichting"
 
 #: www/survey/include/SurveyHTML.class.php:380
 #: www/survey/include/SurveyHTML.class.php:457
-#, fuzzy
 msgid "CSV"
-msgstr "CVS"
+msgstr ""
 
 #: www/survey/include/SurveyHTML.class.php:479
 msgid "Error: you cannot vote for inactive survey"
@@ -23062,15 +23043,17 @@ msgid "Surveys for %s"
 msgstr ""
 
 #: www/survey/index.php:58
-#, fuzzy
 msgid "Select a survey to vote"
-msgstr "Zoeken in"
+msgstr ""
 
 #: www/survey/privacy.php:41
 msgid ""
 "The information collected in these surveys will never be sold to third "
 "parties or used to solicit you to purchase any goods or services."
 msgstr ""
+"De informatie die met deze enquête verzameld wordt zal nooit verkocht worden "
+"aan derde partijen, noch gebruikt om je aan te sporen goederen of diensten "
+"aan te schaffen."
 
 #: www/survey/privacy.php:44
 msgid ""
@@ -23078,24 +23061,36 @@ msgid ""
 "developers being surveyed. That profile will help visitors to the site "
 "understand the quality of a given project."
 msgstr ""
+"Deze informatie zal uitsluitend gebruikt worden om een profiel op te bouwen "
+"van de projecten en ontwikkelaars die ondervraagd worden. Dit profiel zal "
+"andere bezoekers helpen om een beeld te vormen van de kwaliteit van een "
+"bepaald project."
 
 #: www/survey/privacy.php:47
 msgid ""
 "The ID's of those who answer surveys are suppressed and not viewable by "
 "project administrators or the public or third parties."
 msgstr ""
+"De ID's van degenen die een enquête beantwoorden zullen niet worden "
+"doorgegeven aan het publiek, derde partijen, noch aan de projectbeheerders."
 
 #: www/survey/privacy.php:50
 msgid ""
 "The information gathered is used only in aggregate form, not to single out "
 "specific users or developers."
 msgstr ""
+"De verzamelde informatie zal alleen in een geaggregeerde vorm beschikbaar "
+"zijn en kan niet gebruikt worden om individuele gegevens van ontwikkelaars "
+"af te leiden."
 
 #: www/survey/privacy.php:53
 msgid ""
 "If any changes are made to this policy, it will affect only future data that "
 "is collected and the user will of course have the ability to 'opt-out'."
 msgstr ""
+"Indien er enige veranderingen in deze regels zullen komen, zullen deze "
+"nimmer met terugwerkende kracht zijn, en de gebruikers zal de gelegenheid "
+"tot 'opt-out' worden geboden."
 
 #: www/survey/rating_resp.php:59
 msgid "Vote registered"
@@ -23164,7 +23159,7 @@ msgstr ""
 #: www/top/index.php:29
 #, fuzzy, php-format
 msgid "Top %s Projects"
-msgstr "Meest actieve %1$s project"
+msgstr "Meest actieve %s project"
 
 #: www/top/index.php:32
 #, php-format
@@ -23202,9 +23197,8 @@ msgid "View Other Top Categories"
 msgstr "Bekijk andere hoogste categorieën"
 
 #: www/top/mostactive.php:52
-#, fuzzy
 msgid "Project name"
-msgstr "Nieuwe projectnaam"
+msgstr "Projectnaam"
 
 #: www/top/mostactive.php:52
 #, fuzzy
@@ -23379,9 +23373,8 @@ msgid "No data for this release"
 msgstr "Geen rapportagedata gevonden"
 
 #: www/tracker/roadmap.php:538
-#, fuzzy
 msgid "Unknown"
-msgstr "Unix account status"
+msgstr ""
 
 #: www/trove/index.php:46
 #, fuzzy
@@ -23684,10 +23677,6 @@ msgstr "Gebruikersnaam"
 #~ "\n"
 #~ "Reden van afwijzing:\n"
 #~ "\n"
-
-#, fuzzy
-#~ msgid "Could Not Create File Object: "
-#~ msgstr "Kan parent niet aanpassen"
 
 #, fuzzy
 #~ msgid "Content:"
@@ -24266,26 +24255,6 @@ msgstr "Gebruikersnaam"
 #, fuzzy
 #~ msgid "Error: That snippet doesn't exist."
 #~ msgstr "Fout - Dat codefragment bestaat niet."
-
-#, fuzzy
-#~ msgid "Error - Could Not Update User Unix Status: "
-#~ msgstr "Kan parent niet aanpassen"
-
-#, fuzzy
-#~ msgid "Error - Could Not Update User Email: "
-#~ msgstr "Kan parent niet aanpassen"
-
-#, fuzzy
-#~ msgid "Error - Could Not Update User Email And Hash: "
-#~ msgstr "Kan parent niet aanpassen"
-
-#, fuzzy
-#~ msgid "Error - Could Not Update real name of user : "
-#~ msgstr "Kan parent niet aanpassen"
-
-#, fuzzy
-#~ msgid "Error - Could Not Delete User SSH Key:"
-#~ msgstr "Kan parent niet aanpassen"
 
 #~ msgid "%1$s Project Denied"
 #~ msgstr "%1$s Project afgewezen"
@@ -25355,10 +25324,6 @@ msgstr "Gebruikersnaam"
 #~ msgstr "Meest gevraagde downloads in de laatste 7 dagen"
 
 #, fuzzy
-#~ msgid "Could Not Get Artifact Object"
-#~ msgstr "Kan parent niet aanpassen"
-
-#, fuzzy
 #~ msgid "Error: could Not Get ArtifactTypeFactoryHtml"
 #~ msgstr "Kon de gevraagde bewerking niet uitvoeren"
 
@@ -25795,10 +25760,6 @@ msgstr "Gebruikersnaam"
 #~ msgstr "Dit project heeft geen openbare documenten"
 
 #, fuzzy
-#~ msgid "Not Object: ProjectGroup: %d"
-#~ msgstr "Kan parent niet aanpassen"
-
-#, fuzzy
 #~ msgid "Webcalendar"
 #~ msgstr "Kalenders"
 
@@ -26009,10 +25970,6 @@ msgstr "Gebruikersnaam"
 #, fuzzy
 #~ msgid "Error getting member object"
 #~ msgstr "Fout bij aanmaken groep object"
-
-#, fuzzy
-#~ msgid "Could Not Get Group"
-#~ msgstr "Kan parent niet aanpassen"
 
 #~ msgid "PAGE NOT FOUND"
 #~ msgstr "PAGINA NIET GEVONDEN"
@@ -26350,18 +26307,6 @@ msgstr "Gebruikersnaam"
 
 #~ msgid "Group Change History"
 #~ msgstr "Groepswijzigingen geschiedenis"
-
-#, fuzzy
-#~ msgid "Could not create object in update: %s."
-#~ msgstr "Kan parent niet aanpassen"
-
-#, fuzzy
-#~ msgid "Could not create object update database: %s."
-#~ msgstr "Kan parent niet aanpassen"
-
-#, fuzzy
-#~ msgid "Group:"
-#~ msgstr "Groep"
 
 #~ msgid "Developer Info"
 #~ msgstr "Ontwikkelaars info"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-09 15:02+0100\n"
+"POT-Creation-Date: 2014-01-09 16:39+0100\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -5495,11 +5495,11 @@ msgid "Default"
 msgstr "Defecto"
 
 #: common/tracker/actions/browse.php:437
-#, fuzzy, php-format
+#, php-format
 msgid "Viewing only opened records by default, use “%1$s” or “%2$s” to change."
 msgstr ""
-"Ver solamente registros abiertos por defecto, usar 'Busquedas avanzadas' o "
-"'Filtrado y Ordenado Simple' para cambiarlo."
+"Ver solamente registros abiertos por defecto, usar “%1$s” o '“%2$s”' para "
+"cambiarlo."
 
 #: common/tracker/actions/browse.php:538 www/pm/browse_task.php:207
 msgid "Check all"
@@ -7422,9 +7422,8 @@ msgid "Documents Manager"
 msgstr "Gestor de documentos"
 
 #: common/widget/Widget_MyMonitoredDocuments.class.php:107
-#, fuzzy
 msgid "List documents that you are currently monitoring, by project."
-msgstr "Listado de peticiones enviados o asignados a ti por el proyecto. "
+msgstr "Lista documentos que esta monitorizando actualmente en el proyecto."
 
 #: common/widget/Widget_MyMonitoredDocuments.class.php:109
 #: common/widget/Widget_MyMonitoredForums.class.php:144
@@ -8754,6 +8753,8 @@ msgid ""
 "You can create boxes like the ones on the right site of summary page, by "
 "inserting the following sentences in the content:"
 msgstr ""
+"Puedes crear cajas como las que se pueden ver a la derecha en la páginade "
+"sumario a través de la inserción de las siguientes frases en el contenido:"
 
 #: plugins/blocks/www/index.php:328
 msgid ": will create the top part of the box using Hello as title."
@@ -10163,9 +10164,8 @@ msgstr ""
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:109
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:74
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:41
-#, fuzzy
 msgid "Desactivate this link"
-msgstr "Visitar este enlace"
+msgstr "Desactivar este enlace"
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:78
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:111
@@ -10178,25 +10178,22 @@ msgstr ""
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:112
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:77
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:44
-#, fuzzy
 msgid "Activate this link"
-msgstr "Visitar este enlace"
+msgstr "Activar este enlace"
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:81
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:114
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:79
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:46
-#, fuzzy
 msgid "Edit this link"
-msgstr "Visitar este enlace"
+msgstr "Editar este enlace"
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:82
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:115
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:80
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:47
-#, fuzzy
 msgid "Delete this link"
-msgstr "Borrar esta tarea"
+msgstr "Borrar este enlace"
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:87
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:120
@@ -11729,9 +11726,9 @@ msgid "Image size is %dx%d pixels, expected %dx%d instead"
 msgstr "El tamaño de Imagen es %dx%d pixels, se esperaba %dx%d"
 
 #: plugins/mediawiki/www/plugin_admin.php:46
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot copy file to target directory %s"
-msgstr "No puedo copiar el fichero al directorio destino"
+msgstr "No puedo copiar el fichero al directorio destino %s"
 
 #: plugins/mediawiki/www/plugin_admin.php:49
 msgid "Cannot overwrite existing file"
@@ -11775,9 +11772,8 @@ msgstr ""
 "<a href=\"%s\">Descargar</a> el ultimo volcado XML creado (backup) aqui."
 
 #: plugins/mediawiki/www/plugin_admin.php:173
-#, fuzzy
 msgid "This project's wiki logo : $wgLogo"
-msgstr "Las listas de correo de este proyecto"
+msgstr ""
 
 #: plugins/mediawiki/www/plugin_admin.php:176
 msgid "Current logo:"
@@ -12003,9 +11999,8 @@ msgid "Get Request Token"
 msgstr "Obtener Token Pedido"
 
 #: plugins/oauthconsumer/www/get_access_token.php:131
-#, fuzzy
 msgid "Error in curl : "
-msgstr "Error en PTF:"
+msgstr "Error en curl: "
 
 #: plugins/oauthconsumer/www/get_access_token.php:138
 #, fuzzy
@@ -13489,7 +13484,7 @@ msgstr "Nombre repositorio: "
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:631
 #, fuzzy
 msgid "Clone"
-msgstr "Clonar: "
+msgstr "Clonar"
 
 #: plugins/scmgit/common/GitPlugin.class.php:101
 #, fuzzy
@@ -13774,12 +13769,8 @@ msgid ""
 msgstr ""
 
 #: plugins/scmhg/common/HgPlugin.class.php:97
-#, fuzzy
 msgid "Read/write access to Mercurial tree is allowed for authenticated users."
 msgstr ""
-"Solo los desarrolladores del proyecto acceden al arbol SVN con este metodo. "
-"El SSH debe de estar instalado en el cliente. Introduzca su contraseña del "
-"sitio cuando sea requerida."
 
 #: plugins/scmhg/common/HgPlugin.class.php:109
 #: plugins/scmhg/common/HgPlugin.class.php:138
@@ -15946,7 +15937,7 @@ msgstr "Nombre completo de la nueva categoría (80 carácteres)"
 
 #: www/admin/trove/trove_cat_add.php:114
 msgid "New category description (maximum length is 255 chars)"
-msgstr "Descripción de la Nueva Categoría (255 carácteres)"
+msgstr "Descripción de la nueva categoría (255 carácteres)"
 
 #: www/admin/trove/trove_cat_edit.php:47
 msgid "Error: a category cannot be the same as its own parent: "
@@ -17554,9 +17545,8 @@ msgstr ""
 "puedes recibir emails por otras razones.!"
 
 #: www/include/html.php:560
-#, fuzzy
 msgid "Error: uneven row counts"
-msgstr "Error: No se han encontrado versiones"
+msgstr ""
 
 #: www/include/html.php:820
 msgid "Lowest"
@@ -17817,9 +17807,8 @@ msgid "Monitor this Diary"
 msgstr "Monitorizar este Diario"
 
 #: www/include/user_home.php:102
-#, fuzzy
 msgid "This user is a member of the following projects:"
-msgstr "Este desarrollador es miembro de los proyectos:"
+msgstr "Este desarrollador es miembro de los siguientes proyectos:"
 
 #: www/include/user_home.php:156
 msgid ""
@@ -19715,7 +19704,7 @@ msgstr "Error en PTF: "
 #: www/pm/ganttpage.php:250
 #, fuzzy
 msgid "task summary"
-msgstr "Descripción de la Tarea"
+msgstr "Resumen de la Tarea"
 
 #: www/pm/ganttpage.php:251
 #, fuzzy
@@ -20081,9 +20070,8 @@ msgid "Error: file must be > 20 bytes and < 256000 bytes in length"
 msgstr "Error: un fichero debe de ser > 20 bytes y < 256000 bytes de tamaño"
 
 #: www/project/admin/editimages.php:99
-#, fuzzy
 msgid "Error: Cannot store multimedia file: "
-msgstr "Error: No puedo almacenar fichero multimedia"
+msgstr "Error: No puedo almacenar fichero multimedia: "
 
 #: www/project/admin/editimages.php:101
 msgid "Multimedia File Uploaded"
@@ -20094,9 +20082,8 @@ msgid "Both file name and description are required"
 msgstr "Tanto el nombre como la descripción son necesarios"
 
 #: www/project/admin/editimages.php:137
-#, fuzzy
 msgid "Error: Cannot delete multimedia file: "
-msgstr "Error: No puedo borrar fichero multimedia"
+msgstr "Error: No puedo borrar fichero multimedia: "
 
 #: www/project/admin/editimages.php:139
 msgid "Multimedia File Deleted"
@@ -22002,7 +21989,7 @@ msgstr "es_ES"
 #: www/softwaremap/full_list.php:68 www/softwaremap/trove_list.php:266
 #, php-format
 msgid "More than <strong>%d</strong> projects in result set."
-msgstr ""
+msgstr "Más <strong>%d</strong>proyectos en esta categoría."
 
 #: www/softwaremap/full_list.php:122
 msgid "Register Date:"
@@ -22021,8 +22008,8 @@ msgstr ""
 #, php-format
 msgid "<strong>%d</strong> project in result set."
 msgid_plural "<strong>%d</strong> projects in result set."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "<strong>%d</strong> proyecto en en conjunto de resultados."
+msgstr[1] "<strong>%d</strong> proyectos en conjunto de resultados."
 
 #: www/softwaremap/tag_cloud.php:98
 #, php-format
