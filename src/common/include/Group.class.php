@@ -2228,22 +2228,29 @@ class Group extends Error {
 		/*
 			Activate member(s) of the project
 		*/
+		
+		global $SYS;
 
 		$members = $this->getUsers (true);
 
 		foreach ($members as $member) {
-			$roles = array();
-			foreach (RBACEngine::getInstance()->getAvailableRolesForUser ($member) as $role) {
-				if ($role->getHomeProject() && $role->getHomeProject()->getID() == $this->getID()) {
-					$roles[] = $role;
-				}
-			}
-			foreach ($roles as $role) {
-				if (!$this->addUser($member->getUnixName(),$role->getID())) {
-					return false;
-				}
-			}
+			$user_id = $member->getID();
 
+			if (!$SYS->sysCheckCreateGroup($this->getID())){
+				$this->setError($SYS->getErrorMessage());
+				db_rollback();
+				return false;
+			}
+			if (!$SYS->sysCheckCreateUser($user_id)) {
+				$this->setError($SYS->getErrorMessage());
+				db_rollback();
+				return false;
+			}
+			if (!$SYS->sysGroupCheckUser($this->getID(),$user_id)) {
+				$this->setError($SYS->getErrorMessage());
+				db_rollback();
+				return false;
+			}
 		}
 
 		return true;
