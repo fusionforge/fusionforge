@@ -1036,7 +1036,7 @@ msgstr ""
 #: common/docman/views/additem.php:61 common/docman/views/additem.php:85
 #, fuzzy
 msgid "Inject Tree"
-msgstr "Brak wydań"
+msgstr ""
 
 #: common/docman/views/additem.php:84
 msgid "Upload archive:"
@@ -2280,7 +2280,7 @@ msgstr ""
 #: www/frs/admin/editrelease.php:348 www/frs/reporting/downloads.php:197
 #, fuzzy
 msgid "Release"
-msgstr "Brak wydań"
+msgstr ""
 
 #: common/forum/ForumAdmin.class.php:360 common/forum/ForumHTML.class.php:328
 #: common/forum/ForumHTML.class.php:545
@@ -2743,7 +2743,7 @@ msgstr ""
 #: common/frs/FRSFile.class.php:206 common/frs/FRSRelease.class.php:158
 #, fuzzy
 msgid "Error Adding Release: "
-msgstr "Brak wydań"
+msgstr ""
 
 #: common/frs/FRSFile.class.php:232
 #, fuzzy
@@ -3373,7 +3373,7 @@ msgstr ""
 #: common/include/Group.class.php:2600
 #, fuzzy, php-format
 msgid "%s Project Approved"
-msgstr "Brak wydań"
+msgstr ""
 
 #: common/include/Group.class.php:2633
 #, php-format
@@ -3385,7 +3385,7 @@ msgstr ""
 #: www/register/index.php:189
 #, fuzzy
 msgid "Project Full Name"
-msgstr "Brak wydań"
+msgstr ""
 
 #: common/include/Group.class.php:2635 plugins/projectlabels/www/index.php:172
 #: www/admin/approve-pending.php:190 www/admin/database.php:155
@@ -3393,7 +3393,7 @@ msgstr "Brak wydań"
 #: www/register/index.php:214
 #, fuzzy
 msgid "Project Unix Name"
-msgstr "Brak wydań"
+msgstr ""
 
 #: common/include/Group.class.php:2636
 msgid "Reasons for negative decision"
@@ -3402,7 +3402,7 @@ msgstr ""
 #: common/include/Group.class.php:2648
 #, fuzzy, php-format
 msgid "%s Project Denied"
-msgstr "Brak wydań"
+msgstr ""
 
 #: common/include/Group.class.php:2672
 msgid "Could not find user who has submitted the project."
@@ -3666,7 +3666,7 @@ msgstr ""
 #: common/include/Navigation.class.php:266
 #, fuzzy
 msgid "Project Openings"
-msgstr "Brak wydań"
+msgstr ""
 
 #: common/include/Navigation.class.php:268
 msgid "Hiring Market Place."
@@ -3710,7 +3710,7 @@ msgstr ""
 #: www/admin/useredit.php:307
 #, fuzzy
 msgid "Project Admin"
-msgstr "Brak wydań"
+msgstr ""
 
 #: common/include/Navigation.class.php:414 www/activity/index.php:95
 #: www/activity/index.php:179 www/activity/index.php:265
@@ -3751,7 +3751,7 @@ msgstr ""
 #: common/include/Navigation.class.php:474
 #, fuzzy
 msgid "Project Management."
-msgstr "Brak wydań"
+msgstr ""
 
 #: common/include/Navigation.class.php:488
 #: common/reporting/report_utils.php:140 common/reporting/report_utils.php:665
@@ -3830,7 +3830,7 @@ msgstr ""
 #: common/include/Plugin.class.php:348
 #, fuzzy
 msgid "No description available."
-msgstr "Brak wydań"
+msgstr ""
 
 #: common/include/PluginManager.class.php:226
 msgid ""
@@ -4063,7 +4063,7 @@ msgstr ""
 #: common/include/rbac_texts.php:149
 #, fuzzy
 msgid "Project visibility"
-msgstr "Brak wydań"
+msgstr ""
 
 #: common/include/rbac_texts.php:152
 msgid "Trackers administration"
@@ -4353,7 +4353,7 @@ msgstr "Zmień Hasło"
 #: common/include/User.class.php:733
 #, fuzzy
 msgid "Error: Invalid status value"
-msgstr "Brak wydań"
+msgstr ""
 
 #: common/include/User.class.php:737
 msgid "Error: You cannot set pending status if user is suspend or active"
@@ -4511,7 +4511,7 @@ msgstr ""
 #: plugins/mailman/include/MailmanList.class.php:163
 #, fuzzy
 msgid "Error Creating mailing list"
-msgstr "Brak wydań"
+msgstr ""
 
 #: common/mail/MailingList.class.php:189
 #, php-format
@@ -4545,7 +4545,7 @@ msgstr ""
 #: plugins/mailman/include/MailmanListFactory.class.php:112
 #, fuzzy
 msgid "Error Getting mailing list"
-msgstr "Brak wydań"
+msgstr ""
 
 #: common/mail/MailingListFactory.class.php:62
 #, php-format
@@ -4738,7 +4738,7 @@ msgstr ""
 #: common/reporting/report_utils.php:310
 #, fuzzy
 msgid "Tracker Activity"
-msgstr "Brak wydań"
+msgstr ""
 
 #: common/reporting/report_utils.php:381
 msgid "Per assignee"
@@ -5941,7 +5941,7 @@ msgstr ""
 #: common/tracker/actions/tracker.php:388
 #, fuzzy
 msgid "File Delete"
-msgstr "Brak wydań"
+msgstr ""
 
 #: common/tracker/actions/tracker.php:391
 msgid "File Delete: Successful"
@@ -5993,7 +5993,7 @@ msgstr ""
 #: common/tracker/Artifact.class.php:229
 #, fuzzy
 msgid "Error remapping status"
-msgstr "Brak wydań"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:300
 #, fuzzy
@@ -6013,7 +6013,7 @@ msgstr "Szukaj w dokumentach"
 #: common/tracker/Artifact.class.php:535
 #, fuzzy
 msgid "Error deleting message: "
-msgstr "Brak wydań"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:543
 #, fuzzy
@@ -6071,7 +6071,7 @@ msgstr ""
 #: common/tracker/Artifact.class.php:1230
 #, fuzzy
 msgid "Error updating assigned_to in artifact: "
-msgstr "Brak wydań"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:1305
 #: common/tracker/Artifact.class.php:1315
@@ -6643,7 +6643,7 @@ msgstr ""
 #: common/tracker/views/form-addextrafield.php:154
 #, fuzzy
 msgid "Edit template"
-msgstr "Brak wydań"
+msgstr ""
 
 #: common/tracker/views/form-addextrafield.php:155
 msgid "Delete template"
@@ -6779,7 +6779,7 @@ msgstr "Szukaj w dokumentach"
 #: common/tracker/views/form-adminroadmap.php:475
 #, fuzzy
 msgid "Manage releases"
-msgstr "Brak wydań"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:395
 #, php-format
@@ -7370,7 +7370,7 @@ msgstr "Nazwa nowej grupy"
 #: common/widget/Widget_MyProjects.class.php:109
 #, fuzzy
 msgid "MyProjects"
-msgstr "Brak wydań"
+msgstr ""
 
 #: common/widget/Widget_MyProjects.class.php:110
 #, fuzzy
@@ -7548,7 +7548,7 @@ msgstr ""
 #: www/project/admin/project_admin_utils.php:48
 #, fuzzy
 msgid "Project Information"
-msgstr "Brak wydań"
+msgstr ""
 
 #: common/widget/Widget_ProjectInfo.class.php:45
 #: www/project/admin/index.php:162 www/softwaremap/tag_cloud.php:144
@@ -8578,7 +8578,7 @@ msgstr ""
 #: plugins/compactpreview/www/project.php:34
 #, fuzzy
 msgid "OSLC Project Compact Preview"
-msgstr "Brak wydań"
+msgstr ""
 
 #: plugins/compactpreview/www/user.php:34
 msgid "OSLC Compact preview of user"
@@ -9076,7 +9076,7 @@ msgstr ""
 #: plugins/extsubproj/include/extsubproj_Widget_SubProjects.class.php:31
 #, fuzzy
 msgid "Project external subprojects"
-msgstr "Brak wydań"
+msgstr ""
 
 #: plugins/extsubproj/include/extsubproj_Widget_SubProjects.class.php:35
 #, fuzzy
@@ -9152,7 +9152,7 @@ msgstr "Zamieść nową dokumentację"
 #: plugins/forumml/include/forummlPlugin.class.php:108
 #, fuzzy
 msgid "This project's mailing lists"
-msgstr "Brak wydań"
+msgstr ""
 
 #: plugins/forumml/include/forummlPlugin.class.php:157
 msgid "This List"
@@ -9462,7 +9462,7 @@ msgstr ""
 #: plugins/globaldashboard/www/admin/manage_accounts.php:178
 #, fuzzy
 msgid "Projects discovery method"
-msgstr "Brak wydań"
+msgstr ""
 
 #: plugins/globaldashboard/www/admin/edit_account_page.php:203
 #: plugins/globaldashboard/www/admin/manage_accounts.php:189
@@ -10044,7 +10044,7 @@ msgstr ""
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:54
 #, fuzzy
 msgid "Manage available tabs"
-msgstr "Brak wydań"
+msgstr ""
 
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:64
 #, fuzzy
@@ -10697,7 +10697,7 @@ msgstr ""
 #: plugins/mailman/www/index.php:39 www/mail/index.php:53
 #, fuzzy, php-format
 msgid "Mailing Lists for %s"
-msgstr "Brak wydań"
+msgstr ""
 
 #: plugins/mailman/www/index.php:55 www/mail/index.php:68
 #, fuzzy, php-format
@@ -11059,7 +11059,7 @@ msgstr ""
 #: plugins/mantisbt/view/viewIssue.php:59
 #, fuzzy
 msgid "Reproducibility"
-msgstr "Brak wydań"
+msgstr ""
 
 #: plugins/mantisbt/view/addIssue.php:72
 #: plugins/mantisbt/view/editIssue.php:89
@@ -11087,7 +11087,7 @@ msgstr ""
 #: plugins/mantisbt/view/viewIssue.php:116
 #, fuzzy
 msgid "Additional Informations"
-msgstr "Brak wydań"
+msgstr ""
 
 #: plugins/mantisbt/view/addOrEditNote.php:52
 msgid "Modify note"
@@ -11259,7 +11259,7 @@ msgstr ""
 #: plugins/mantisbt/view/inituser.php:53
 #, fuzzy
 msgid "Use global forge configuration."
-msgstr "Brak wydań"
+msgstr ""
 
 #: plugins/mantisbt/view/inituser.php:57
 msgid "If your user does NOT exist in MantisBT, do you want to create it ?"
@@ -11462,7 +11462,7 @@ msgstr ""
 #: plugins/projectimport/www/projectsimport.php:274
 #, fuzzy
 msgid "Project Summary"
-msgstr "Brak wydań"
+msgstr ""
 
 #: plugins/mediawiki/www/frame.php:29
 msgid "wiki"
@@ -11539,7 +11539,7 @@ msgstr ""
 #: plugins/mediawiki/www/plugin_admin.php:173
 #, fuzzy
 msgid "This project's wiki logo : $wgLogo"
-msgstr "Brak wydań"
+msgstr ""
 
 #: plugins/mediawiki/www/plugin_admin.php:176
 msgid "Current logo:"
@@ -11609,7 +11609,7 @@ msgstr ""
 #: plugins/message/www/index.php:63
 #, fuzzy
 msgid "Global Message Administration"
-msgstr "Brak wydań"
+msgstr ""
 
 #: plugins/message/www/index.php:65
 msgid ""
@@ -11689,7 +11689,7 @@ msgstr ""
 #: plugins/oauthconsumer/www/callback.php:77
 #, fuzzy
 msgid "Access Token Secret: "
-msgstr "Brak wydań"
+msgstr ""
 
 #: plugins/oauthconsumer/www/callback.php:83
 #: plugins/oauthconsumer/www/index.php:87
@@ -11755,7 +11755,7 @@ msgstr ""
 #: plugins/oauthconsumer/www/get_access_token.php:82
 #, fuzzy
 msgid "Get Request Token"
-msgstr "Brak wydań"
+msgstr ""
 
 #: plugins/oauthconsumer/www/get_access_token.php:131
 #, fuzzy
@@ -11765,7 +11765,7 @@ msgstr "Szukaj w dokumentach"
 #: plugins/oauthconsumer/www/get_access_token.php:138
 #, fuzzy
 msgid "New request token received!"
-msgstr "Brak wydań"
+msgstr ""
 
 #: plugins/oauthconsumer/www/get_access_token.php:139
 msgid "Request Token Key"
@@ -11774,7 +11774,7 @@ msgstr ""
 #: plugins/oauthconsumer/www/get_access_token.php:140
 #, fuzzy
 msgid "Request Token Secret"
-msgstr "Brak wydań"
+msgstr ""
 
 #: plugins/oauthconsumer/www/get_access_token.php:159
 msgid "Step 2: "
@@ -11908,7 +11908,7 @@ msgstr ""
 #: plugins/oauthprovider/www/access_tokens.php:112
 #, fuzzy
 msgid "No access tokens were found!"
-msgstr "Brak wydań"
+msgstr ""
 
 #: plugins/oauthprovider/www/authorize.php:55
 msgid "Pending authorization requests via OAuth"
@@ -12000,7 +12000,7 @@ msgstr ""
 #: plugins/oauthprovider/www/request_tokens.php:118
 #, fuzzy
 msgid "No request tokens were found!"
-msgstr "Brak wydań"
+msgstr ""
 
 #: plugins/oauthprovider/www/token_deny.php:57
 #, fuzzy
@@ -12064,7 +12064,7 @@ msgstr "Zgłoś chęć dołączenia do projektu %1$s"
 #: plugins/projectimport/common/ProjectImportPlugin.class.php:183
 #, fuzzy
 msgid "Project import plugin"
-msgstr "Brak wydań"
+msgstr ""
 
 #: plugins/projectimport/common/ProjectImportPlugin.class.php:183
 msgid "Import users"
@@ -12154,7 +12154,7 @@ msgstr ""
 #: plugins/projectimport/www/projectsimport.php:85
 #, fuzzy
 msgid "Project importer"
-msgstr "Brak wydań"
+msgstr ""
 
 #: plugins/projectimport/www/index.php:176
 #: plugins/projectimport/www/usersimport.php:195
@@ -12336,7 +12336,7 @@ msgstr ""
 #: plugins/projectlabels/common/ProjectLabelsPlugin.class.php:17
 #, fuzzy
 msgid "Project labels plugin"
-msgstr "Brak wydań"
+msgstr ""
 
 #: plugins/projectlabels/www/index.php:25
 #, php-format
@@ -12459,7 +12459,7 @@ msgstr ""
 #: plugins/projectlabels/www/index.php:201
 #, fuzzy
 msgid "Project of the month!"
-msgstr "Brak wydań"
+msgstr ""
 
 #: plugins/projectlabels/www/index.php:203
 msgid "Add label"
@@ -12529,7 +12529,7 @@ msgstr ""
 #: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:31
 #, fuzzy
 msgid "Project Hierarchy"
-msgstr "Brak wydań"
+msgstr ""
 
 #: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:92
 msgid "Hierarchy Admin"
@@ -12668,7 +12668,7 @@ msgstr ""
 #: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:33
 #, fuzzy
 msgid "Manage project configuration"
-msgstr "Brak wydań"
+msgstr ""
 
 #: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:39
 msgid "Enable visibily in hierarchy tree."
@@ -12848,7 +12848,7 @@ msgstr ""
 #: plugins/quota_management/www/quota_project.php:139
 #, fuzzy
 msgid "FTP project directory"
-msgstr "Brak wydań"
+msgstr ""
 
 #: plugins/quota_management/www/quota_project.php:145
 msgid "CVS project directory"
@@ -13781,7 +13781,7 @@ msgstr "Nie znaleziono żadnych dokumentów"
 #: plugins/wiki/common/WikiPlugin.class.php:91
 #, fuzzy
 msgid "This project's wiki"
-msgstr "Brak wydań"
+msgstr ""
 
 #: plugins/wiki/common/WikiPlugin.class.php:209
 msgid "List of active wikis in Forge"
@@ -14651,7 +14651,7 @@ msgstr ""
 #: www/admin/approve-pending.php:135
 #, fuzzy
 msgid "Edit Project Details"
-msgstr "Brak wydań"
+msgstr ""
 
 #: www/admin/approve-pending.php:136 www/admin/approve-pending.php:138
 #: www/admin/approve-pending.php:150
@@ -14696,7 +14696,7 @@ msgstr ""
 #: www/admin/approve-pending.php:169
 #, fuzzy
 msgid "Project details :"
-msgstr "Brak wydań"
+msgstr ""
 
 #: www/admin/approve-pending.php:177 www/admin/groupedit.php:183
 msgid "Home Box:"
@@ -14990,7 +14990,7 @@ msgstr ""
 #: www/register/index.php:236 www/register/index.php:238
 #, fuzzy
 msgid "Unix Name"
-msgstr "Brak wydań"
+msgstr ""
 
 #: www/admin/grouplist.php:71
 msgid "Public?"
@@ -15021,7 +15021,7 @@ msgstr ""
 #: www/admin/grouplist.php:104
 #, fuzzy
 msgid "Order by public visibility."
-msgstr "Brak wydań"
+msgstr ""
 
 #: www/admin/grouplist.php:105
 msgid "Order by licence type."
@@ -15409,7 +15409,7 @@ msgstr ""
 #: www/admin/pluginman.php:140
 #, fuzzy
 msgid "Projects Using it"
-msgstr "Brak wydań"
+msgstr ""
 
 #: www/admin/pluginman.php:141
 msgid "Global Administration View"
@@ -15506,7 +15506,7 @@ msgstr "Nazwa wydania:"
 #: www/admin/search.php:96
 #, fuzzy
 msgid "No user found."
-msgstr "Brak wydań"
+msgstr ""
 
 #: www/admin/search.php:144
 #, php-format
@@ -15724,7 +15724,7 @@ msgstr ""
 #: www/admin/useredit.php:253
 #, fuzzy
 msgid "Projects Membership"
-msgstr "Brak wydań"
+msgstr ""
 
 #: www/admin/useredit.php:263 www/admin/useredit.php:293
 msgid "Unix name"
@@ -16135,7 +16135,7 @@ msgstr ""
 #: www/export/rss_project.php:104
 #, fuzzy
 msgid "Project Releases"
-msgstr "Brak wydań"
+msgstr ""
 
 #: www/export/rss_project.php:110
 #, fuzzy
@@ -16267,7 +16267,7 @@ msgstr "Forum"
 #: www/forum/new.php:72 www/forum/save.php:58 www/frs/monitor.php:71
 #, fuzzy
 msgid "Project ID"
-msgstr "Brak wydań"
+msgstr ""
 
 #: www/forum/admin/pendingmsgdetail.php:42
 msgid "Message ID"
@@ -16512,7 +16512,7 @@ msgstr ""
 #: www/frs/admin/editrelease.php:220
 #, fuzzy
 msgid "Edit Release"
-msgstr "Brak wydań"
+msgstr ""
 
 #: www/frs/admin/editrelease.php:226 www/frs/admin/editrelease.php:349
 #: www/frs/admin/qrs.php:183
@@ -17100,7 +17100,7 @@ msgstr ""
 #: www/include/html.php:910
 #, fuzzy, php-format
 msgid "Project Problem: %s"
-msgstr "Brak wydań"
+msgstr ""
 
 #: www/include/html.php:979
 msgid "My Personal Page"
@@ -17252,7 +17252,7 @@ msgstr[2] "Szukaj w dokumentach"
 #: www/include/project_home.php:36
 #, fuzzy
 msgid "Project Home"
-msgstr "Brak wydań"
+msgstr ""
 
 #: www/include/project_home.php:72
 msgid "Select new widgets to display on the project home page."
@@ -17754,7 +17754,7 @@ msgstr ""
 #: www/mail/admin/index.php:213
 #, fuzzy, php-format
 msgid "Update Mailing List %s"
-msgstr "Brak wydań"
+msgstr ""
 
 #: www/mail/admin/index.php:243 www/project/admin/tools.php:324
 msgid "Mailing Lists Admin"
@@ -17939,7 +17939,7 @@ msgstr ""
 #: www/new/index.php:67
 #, fuzzy
 msgid "No new releases found"
-msgstr "Brak wydań"
+msgstr ""
 
 #: www/new/index.php:91
 msgid "Released by:"
@@ -18142,7 +18142,7 @@ msgstr "Nazwa wydania:"
 #: www/people/admin/index.php:149
 #, fuzzy
 msgid "People Administration"
-msgstr "Brak wydań"
+msgstr ""
 
 #: www/people/createjob.php:44
 msgid ""
@@ -19589,7 +19589,7 @@ msgstr ""
 #: www/project/admin/history.php:40
 #, fuzzy, php-format
 msgid "Project History of %s"
-msgstr "Brak wydań"
+msgstr ""
 
 #: www/project/admin/index.php:108 www/project/admin/tools.php:103
 msgid "Project information updated"
@@ -19598,7 +19598,7 @@ msgstr ""
 #: www/project/admin/index.php:112
 #, fuzzy, php-format
 msgid "Project Information for %s"
-msgstr "Brak wydań"
+msgstr ""
 
 #: www/project/admin/index.php:119
 msgid "Misc. Project Information"
@@ -19627,7 +19627,7 @@ msgstr ""
 #: www/project/admin/index.php:150
 #, fuzzy
 msgid "Project tags"
-msgstr "Brak wydań"
+msgstr ""
 
 #: www/project/admin/index.php:152
 msgid "Add tags (use comma as separator): "
@@ -19845,7 +19845,7 @@ msgstr ""
 #: www/project/admin/tools.php:152
 #, fuzzy
 msgid "Use Project Activity"
-msgstr "Brak wydań"
+msgstr ""
 
 #: www/project/admin/tools.php:165
 msgid "Use Forums"
@@ -20111,7 +20111,7 @@ msgstr[1] ""
 #: www/project/stats/index.php:95
 #, fuzzy, php-format
 msgid "Project Statistics for %s"
-msgstr "Brak wydań"
+msgstr ""
 
 #: www/project/stats/index.php:105 www/reporting/projectact.php:70
 #: www/reporting/siteact.php:70 www/reporting/useract.php:85
@@ -20276,7 +20276,7 @@ msgstr ""
 #: www/register/index.php:265
 #, fuzzy
 msgid "Project template"
-msgstr "Brak wydań"
+msgstr ""
 
 #: www/register/index.php:272
 #, php-format
@@ -20722,7 +20722,7 @@ msgstr ""
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:54
 #, fuzzy
 msgid "Project Search"
-msgstr "Brak wydań"
+msgstr ""
 
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:53
 msgid "Completed"
@@ -21207,7 +21207,7 @@ msgstr ""
 #: www/snippet/submit.php:59
 #, fuzzy
 msgid "Error doing snippet insert"
-msgstr "Brak wydań"
+msgstr ""
 
 #: www/snippet/submit.php:61 www/snippet/submit.php:76
 msgid "Snippet Added Successfully."
@@ -22012,7 +22012,7 @@ msgstr ""
 #: www/tracker/roadmap.php:238
 #, fuzzy, php-format
 msgid "release %s is not available"
-msgstr "Brak wydań"
+msgstr ""
 
 #: www/tracker/roadmap.php:409
 msgid "Display options"
@@ -22039,7 +22039,7 @@ msgstr ""
 #: www/tracker/roadmap.php:452
 #, fuzzy
 msgid "No release available"
-msgstr "Brak wydań"
+msgstr ""
 
 #: www/tracker/roadmap.php:471
 msgid "Display as text"
@@ -22106,10 +22106,6 @@ msgstr ""
 #~ msgstr "Musisz podać nazwisko"
 
 #, fuzzy
-#~ msgid "News Administration"
-#~ msgstr "Brak wydań"
-
-#, fuzzy
 #~ msgid "No project found."
 #~ msgstr "Nie znaleziono żadnych dokumentów"
 
@@ -22151,16 +22147,8 @@ msgstr ""
 #~ msgstr "Lista zmian"
 
 #, fuzzy
-#~ msgid "Project tree"
-#~ msgstr "Brak wydań"
-
-#, fuzzy
 #~ msgid "No documents"
 #~ msgstr "Szukaj w dokumentach"
-
-#, fuzzy
-#~ msgid "Mailing Lists Administration"
-#~ msgstr "Brak wydań"
 
 #, fuzzy
 #~ msgid "Last modified"
@@ -22175,20 +22163,12 @@ msgstr ""
 #~ msgstr "Dodaj Grupę Dokumentów"
 
 #, fuzzy
-#~ msgid "File-Release"
-#~ msgstr "Brak wydań"
-
-#, fuzzy
 #~ msgid "No Forums Found for %1$s"
 #~ msgstr "Nie znaleziono żadnych dokumentów"
 
 #, fuzzy
 #~ msgid "Error getting forum"
 #~ msgstr "Szukaj w dokumentach"
-
-#, fuzzy
-#~ msgid "Project summary"
-#~ msgstr "Brak wydań"
 
 #, fuzzy
 #~ msgid "Edit Ticket: "
@@ -22380,10 +22360,6 @@ msgstr ""
 #~ msgstr "Przeglądaj Repozytorium Subversion"
 
 #, fuzzy
-#~ msgid "Project:"
-#~ msgstr "Brak wydań"
-
-#, fuzzy
 #~ msgid "Directory:"
 #~ msgstr "Imię:"
 
@@ -22421,10 +22397,6 @@ msgstr ""
 #~ msgstr "Szukaj w dokumentach"
 
 #, fuzzy
-#~ msgid "Inject a Tree"
-#~ msgstr "Brak wydań"
-
-#, fuzzy
 #~ msgid "Documents folder:"
 #~ msgstr "Nie znaleziono żadnych dokumentów"
 
@@ -22434,10 +22406,6 @@ msgstr ""
 
 #~ msgid "Search in documents"
 #~ msgstr "Szukaj w dokumentach"
-
-#, fuzzy
-#~ msgid "Error creating ForumMessage:"
-#~ msgstr "Brak wydań"
 
 #~ msgid "Changes:"
 #~ msgstr "Zmiany:"
@@ -22449,14 +22417,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Diretory"
 #~ msgstr "Imię:"
-
-#, fuzzy
-#~ msgid "Project GroupMenu Admin"
-#~ msgstr "Brak wydań"
-
-#, fuzzy
-#~ msgid "Project groupmenu Admin"
-#~ msgstr "Brak wydań"
 
 #, fuzzy
 #~ msgid "Add a new link"
@@ -22500,10 +22460,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Name:"
 #~ msgstr "Nazwisko:"
-
-#, fuzzy
-#~ msgid "Projects importer"
-#~ msgstr "Brak wydań"
 
 #, fuzzy
 #~ msgid "Document Edit"
