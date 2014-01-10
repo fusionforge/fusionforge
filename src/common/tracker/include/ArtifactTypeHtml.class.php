@@ -200,7 +200,7 @@ class ArtifactTypeHtml extends ArtifactType {
 					$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_STATUS ||
 					$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT) {
 					if ($value == 100) {
-						$value = 'None';
+						$value = $efarr[$i]['show100label'];
 					} else {
 						$arr = $this->getExtraFieldElements($efarr[$i]['extra_field_id']);
 
