@@ -118,7 +118,7 @@ class ArtifactQuery extends Error {
 	 * create - create a row in the table that stores a saved query for
 	 * a tracker.
 	 *
-	 * @param	$name
+	 * @param	string		$name
 	 * @param	$status
 	 * @param	$assignee
 	 * @param	$moddaterange
@@ -127,8 +127,8 @@ class ArtifactQuery extends Error {
 	 * @param	$extra_fields
 	 * @param	int		$opendaterange
 	 * @param	int		$closedaterange
-	 * @param	$summary
-	 * @param	$description
+	 * @param	string		$summary
+	 * @param	string		$description
 	 * @param	$followups
 	 * @param	int		$query_type
 	 * @param	array		$query_options
@@ -208,7 +208,7 @@ class ArtifactQuery extends Error {
 	/**
 	 * fetchData - re-fetch the data for this ArtifactQuery from the database.
 	 *
-	 * @param	int	$id ID of saved query.
+	 * @param	int	$id	ID of saved query.
 	 * @return	boolean	success.
 	 */
 	function fetchData($id) {
@@ -246,8 +246,22 @@ class ArtifactQuery extends Error {
 	}
 
 	/**
+	 * insertElements - ???
 	 *
-	 *
+	 * @param	int		$id
+	 * @param	$status
+	 * @param	$submitter
+	 * @param	$assignee
+	 * @param	$moddaterange
+	 * @param	$sort_col
+	 * @param	$sort_ord
+	 * @param	$extra_fields
+	 * @param	$opendaterange
+	 * @param	$closedaterange
+	 * @param	string		$summary
+	 * @param	string		$description
+	 * @param	$followups
+	 * @return	boolean		True/false on success or not.
 	 */
 	function insertElements($id,$status,$submitter,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange,$closedaterange,$summary,$description,$followups) {
 		$res = db_query_params ('DELETE FROM artifact_query_fields WHERE artifact_query_id=$1',
@@ -711,11 +725,11 @@ class ArtifactQuery extends Error {
 	 * @param	string		$opendaterange
 	 * @param	string		$closedaterange
 	 * @param	$summary
-	 * @param	 $description
+	 * @param	$description
 	 * @param	$followups
 	 * @param	int		$query_type	Id of the saved query
 	 * @param	array		$query_options
-	 * @param	string	$submitter
+	 * @param	string		$submitter
 	 * @return	bool		success.
 	 */
 	function update($name,$status,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange='',$closedaterange='',
