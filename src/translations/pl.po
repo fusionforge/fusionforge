@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-10 18:07+0100\n"
+"POT-Creation-Date: 2014-01-10 19:30+0100\n"
 "PO-Revision-Date: 2009-10-06 16:20+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1041,9 +1041,8 @@ msgid "Disable Webdav Interface"
 msgstr ""
 
 #: common/docman/views/editdocgroup.php:59
-#, fuzzy
 msgid "Folder Name"
-msgstr "Nazwa Pliku"
+msgstr ""
 
 #: common/docman/views/editdocgroup.php:62
 #, fuzzy
@@ -1459,7 +1458,7 @@ msgstr ""
 #: common/docman/views/listtrashfile.php:209
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:88
 msgid "No documents."
-msgstr ""
+msgstr "Nie znaleziono żadnych dokumentów."
 
 #: common/docman/views/listtrashfile.php:93
 msgid "Delete permanently all documents and folders with deleted status."
@@ -2920,9 +2919,9 @@ msgstr ""
 
 #: common/include/Error.class.php:208 common/include/exit.php:80
 #: common/include/exit.php:85
-#, fuzzy, php-format
+#, php-format
 msgid "Missing Required Parameters"
-msgstr "Nazwa Pliku"
+msgstr ""
 
 #: common/include/exit.php:33
 msgid "Exiting with error"
@@ -3940,9 +3939,8 @@ msgid "Trackers administration"
 msgstr ""
 
 #: common/include/rbac_texts.php:160
-#, fuzzy
 msgid "Default for new trackers"
-msgstr "Aby utworzyć nowe wydanie kliknij tutaj."
+msgstr ""
 
 #: common/include/rbac_texts.php:161
 msgid "Default for new task managers"
@@ -3953,14 +3951,12 @@ msgid "Default for new forums"
 msgstr ""
 
 #: common/include/rbac_texts.php:165
-#, fuzzy
 msgid "Documentation manager"
-msgstr "Przeglądaj dokumentację"
+msgstr ""
 
 #: common/include/Role.class.php:82
-#, fuzzy
 msgid "Cannot set a role name to empty"
-msgstr "Aby utworzyć nowe wydanie kliknij tutaj."
+msgstr ""
 
 #: common/include/Role.class.php:91 common/include/Role.class.php:99
 #: common/include/Role.class.php:181 common/include/Role.class.php:189
@@ -4786,9 +4782,8 @@ msgid "Manage your roadmaps."
 msgstr ""
 
 #: common/tracker/actions/admin-ind.php:129
-#, fuzzy
 msgid "Create a new tracker"
-msgstr "Aby utworzyć nowe wydanie kliknij tutaj."
+msgstr ""
 
 #: common/tracker/actions/admin-ind.php:130
 msgid ""
@@ -4897,9 +4892,8 @@ msgid "New Tracker"
 msgstr ""
 
 #: common/tracker/actions/admin-tracker.php:36
-#, fuzzy
 msgid "Create a new tracker."
-msgstr "Aby utworzyć nowe wydanie kliknij tutaj."
+msgstr ""
 
 #: common/tracker/actions/admin-tracker.php:40
 #: common/tracker/include/ArtifactTypeHtml.class.php:109
@@ -6461,9 +6455,8 @@ msgid "Could Not Get ArtifactTypeFactoryHtml"
 msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:70
-#, fuzzy
 msgid "Cannot create or rename roadmap"
-msgstr "Aby utworzyć nowe wydanie kliknij tutaj."
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:70
 msgid "name is empty"
@@ -6484,19 +6477,16 @@ msgid "Roadmap %s renamed to %s"
 msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:91
-#, fuzzy
 msgid "Cannot rename roadmap: "
-msgstr "Aby utworzyć nowe wydanie kliknij tutaj."
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:98
-#, fuzzy
 msgid "Cannot set roadmap: "
-msgstr "Aby utworzyć nowe wydanie kliknij tutaj."
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:122
-#, fuzzy
 msgid "Cannot set roadmap state: "
-msgstr "Aby utworzyć nowe wydanie kliknij tutaj."
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:126
 msgid "Cannot set default value: "
@@ -6543,9 +6533,8 @@ msgid "Yes"
 msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:184
-#, fuzzy
 msgid "Create a new roadmap"
-msgstr "Aby utworzyć nowe wydanie kliknij tutaj."
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:187
 msgid "Update roadmap"
@@ -7059,9 +7048,8 @@ msgstr ""
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:136
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:212
 #: common/widget/Widget_ProjectLatestDocuments.class.php:135
-#, fuzzy
 msgid "Documents Manager"
-msgstr "Przeglądaj dokumentację"
+msgstr ""
 
 #: common/widget/Widget_MyMonitoredDocuments.class.php:107
 msgid "List documents that you are currently monitoring, by project."
@@ -7216,9 +7204,8 @@ msgid "any status [AN]"
 msgstr ""
 
 #: common/widget/Widget_MySurveys.class.php:161
-#, fuzzy
 msgid "Display surveys:"
-msgstr "Nazwa Pliku"
+msgstr ""
 
 #: common/widget/Widget_MyTasks.class.php:124
 msgid "No task yet"
@@ -7313,9 +7300,8 @@ msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:196
 #: common/widget/Widget_ProjectLatestDocuments.class.php:123
-#, fuzzy
 msgid "Browse Documents Manager"
-msgstr "Przeglądaj dokumentację"
+msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:216
 msgid ""
@@ -7915,9 +7901,8 @@ msgid ""
 msgstr ""
 
 #: plugins/authbuiltin/www/post-login.php:115
-#, fuzzy
 msgid "Resend Confirmation Email"
-msgstr "Zarejestruj"
+msgstr ""
 
 #: plugins/authbuiltin/www/post-login.php:117
 #, php-format
@@ -8003,9 +7988,8 @@ msgid "Cannot insert new identity: %s"
 msgstr ""
 
 #: plugins/authopenid/www/index.php:67
-#, fuzzy
 msgid "Identity successfully added"
-msgstr "Pomyślnie Zmieniono Hasło"
+msgstr ""
 
 #: plugins/authopenid/www/index.php:81
 msgid "Error: Missing URL for the new identity"
@@ -8026,9 +8010,8 @@ msgid "Cannot delete identity: %s"
 msgstr ""
 
 #: plugins/authopenid/www/index.php:117 plugins/authwebid/www/index.php:82
-#, fuzzy
 msgid "Identity successfully deleted"
-msgstr "Pomyślnie Zmieniono Hasło"
+msgstr ""
 
 #: plugins/authopenid/www/index.php:122
 #, php-format
@@ -8537,9 +8520,8 @@ msgid "No legal structures currently defined."
 msgstr ""
 
 #: plugins/contribtracker/www/global_admin.php:288
-#, fuzzy
 msgid "Register new actor"
-msgstr "Zarejestruj"
+msgstr ""
 
 #: plugins/contribtracker/www/global_admin.php:293
 msgid "No legal structures yet, cannot define actors without them."
@@ -8562,9 +8544,8 @@ msgid "No roles currently defined."
 msgstr ""
 
 #: plugins/contribtracker/www/global_admin.php:368
-#, fuzzy
 msgid "Register new role"
-msgstr "Zarejestruj"
+msgstr ""
 
 #: plugins/contribtracker/www/global_admin.php:375
 msgid "Register a new role"
@@ -9227,9 +9208,8 @@ msgid "Action"
 msgstr ""
 
 #: plugins/globaldashboard/www/admin/manage_accounts.php:113
-#, fuzzy
 msgid "Create a new remote account"
-msgstr "Aby utworzyć nowe wydanie kliknij tutaj."
+msgstr ""
 
 #: plugins/globaldashboard/www/help.php:52
 msgid "Global Dashboard Help"
@@ -9555,9 +9535,8 @@ msgid "No link to update or name missing."
 msgstr ""
 
 #: plugins/headermenu/common/headermenuPlugin.class.php:32
-#, fuzzy
 msgid "Menu Tabs Manager"
-msgstr "Przeglądaj dokumentację"
+msgstr ""
 
 #: plugins/headermenu/common/headermenuPlugin.class.php:67
 #: plugins/headermenu/common/headermenuPlugin.class.php:427
@@ -9604,9 +9583,8 @@ msgstr ""
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:130
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:56
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:94
-#, fuzzy
 msgid "Displayed Name"
-msgstr "Nazwa Pliku"
+msgstr ""
 
 #: plugins/headermenu/view/admin/updateLinkValue.php:66
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:134
@@ -9761,9 +9739,8 @@ msgid "Manage available tabs"
 msgstr ""
 
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:64
-#, fuzzy
 msgid "displayed as iframe"
-msgstr "Nazwa Pliku"
+msgstr ""
 
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:90
 msgid "You can add your own tabs in the menu bar with the form below."
@@ -9964,9 +9941,8 @@ msgid "Hudson access"
 msgstr ""
 
 #: plugins/hudson/include/hudsonPlugin.class.php:349
-#, fuzzy
 msgid "Full access"
-msgstr "Nazwa Pliku"
+msgstr ""
 
 #: plugins/hudson/include/hudsonPluginDescriptor.class.php:26
 msgid "Continuous Integration"
@@ -10256,9 +10232,8 @@ msgid "Error On Query:"
 msgstr ""
 
 #: plugins/mailman/include/MailmanList.class.php:435
-#, fuzzy
 msgid "Missing params"
-msgstr "Nazwa Pliku"
+msgstr ""
 
 #: plugins/mailman/include/MailmanList.class.php:445
 msgid "Could Not Delete List: "
@@ -13187,9 +13162,8 @@ msgstr ""
 #: plugins/scmhook/common/scmhookPlugin.class.php:370
 #: plugins/scmhook/common/scmhookPlugin.class.php:431
 #: plugins/scmhook/common/scmhookPlugin.class.php:492
-#, fuzzy
 msgid "Hook Name"
-msgstr "Nazwa Pliku"
+msgstr ""
 
 #: plugins/scmhook/common/scmhookPlugin.class.php:326
 msgid "pre-revprop-change Hooks"
@@ -13951,9 +13925,8 @@ msgid "You can't register an account unless you accept the terms of use."
 msgstr ""
 
 #: www/account/register.php:100
-#, fuzzy
 msgid "Register Confirmation"
-msgstr "Zarejestruj"
+msgstr ""
 
 #: www/account/register.php:105
 msgid ""
@@ -14151,9 +14124,9 @@ msgid "Directory"
 msgstr "Imię:"
 
 #: www/admin/admin_table.php:41
-#, fuzzy, php-format
+#, php-format
 msgid "Create a new %s below:"
-msgstr "Aby utworzyć nowe wydanie kliknij tutaj."
+msgstr ""
 
 #: www/admin/admin_table.php:94 www/admin/admin_table.php:286
 #, php-format
@@ -15095,6 +15068,7 @@ msgid "Project search with criteria <em>%s</em>: %d match"
 msgid_plural "Project search with criteria <em>%s</em>: %d matches"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #: www/admin/search.php:149 www/register/index.php:188
 msgid "Full Name"
@@ -15710,9 +15684,8 @@ msgid "Project Releases"
 msgstr ""
 
 #: www/export/rss_project.php:110
-#, fuzzy
 msgid "Project Document Manager"
-msgstr "Przeglądaj dokumentację"
+msgstr ""
 
 #: www/export/rss_project.php:118
 msgid "Go back"
@@ -16227,9 +16200,8 @@ msgid "Define your packages"
 msgstr ""
 
 #: www/frs/admin/index.php:134
-#, fuzzy
 msgid "Create new releases of packages"
-msgstr "Aby utworzyć nowe wydanie kliknij tutaj."
+msgstr ""
 
 #: www/frs/admin/index.php:136
 msgid "Releases of Packages"
@@ -18518,9 +18490,8 @@ msgid "Record Layout"
 msgstr ""
 
 #: www/pm/csv.php:104
-#, fuzzy
 msgid "Field Name"
-msgstr "Nazwa Pliku"
+msgstr ""
 
 #: www/pm/csv.php:109
 msgid "this is the ID in database"
@@ -19650,9 +19621,8 @@ msgid ""
 msgstr ""
 
 #: www/register/index.php:136
-#, fuzzy
 msgid "Registration complete"
-msgstr "Zarejestruj"
+msgstr ""
 
 #: www/register/index.php:140
 #, php-format
@@ -21529,9 +21499,8 @@ msgid "Return to last release(s)"
 msgstr ""
 
 #: www/tracker/roadmap.php:435
-#, fuzzy
 msgid "Display graphs"
-msgstr "Nazwa Pliku"
+msgstr ""
 
 #: www/tracker/roadmap.php:437
 msgid "Only last"
