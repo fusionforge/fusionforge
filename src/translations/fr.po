@@ -2734,9 +2734,8 @@ msgid "Error On querying monitor count: "
 msgstr "Erreur lors de l'arrêt de la surveillance des annonces : "
 
 #: common/frs/FRSPackage.class.php:384
-#, fuzzy
 msgid "Error Updating Package: Name Already Exists"
-msgstr "Impossible d'ajouter la version : ce nom existe déjà"
+msgstr "Impossible de mettre à jour le paquet : ce nom existe déjà"
 
 #: common/frs/FRSPackage.class.php:403
 #, fuzzy
@@ -2744,14 +2743,12 @@ msgid "Error Updating Package: Couldn't fetch data"
 msgstr "Erreur lors de la mise à jour du nom du champ"
 
 #: common/frs/FRSPackage.class.php:413
-#, fuzzy
 msgid "Error Updating Package: Directory Already Exists"
-msgstr "Impossible d'ajouter la version : ce nom existe déjà"
+msgstr "Impossible de mettre à jour le paquet : ce répertoire existe déjà"
 
 #: common/frs/FRSPackage.class.php:418
-#, fuzzy
 msgid "Error Updating Package: Couldn't rename dir"
-msgstr "Impossible d'ajouter la version : ce nom existe déjà"
+msgstr "Impossible de mettre à jour le paquet : impossible de renommer le répertoire"
 
 #: common/frs/FRSPackage.class.php:476
 msgid "Release Error: "
@@ -2834,14 +2831,12 @@ msgid "Error Updating Release: Couldn't fetch data"
 msgstr "Erreur lors de la mise à jour du nom du champ"
 
 #: common/frs/FRSRelease.class.php:455
-#, fuzzy
 msgid "Error Updating Release: Directory Already Exists"
-msgstr "Impossible d'ajouter la version : ce nom existe déjà"
+msgstr "Impossible de mettre à jour la version : le répertoire existe déjà"
 
 #: common/frs/FRSRelease.class.php:460
-#, fuzzy
 msgid "Error Updating Release: Couldn't rename dir"
-msgstr "Impossible d'ajouter la version : ce nom existe déjà"
+msgstr "Impossible de mettre à jour la version : impossible de renommer le répertoire"
 
 #: common/frs/include/frs_utils.php:77
 msgid "View File Releases"
@@ -23409,14 +23404,8 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #~ msgid "Now Monitoring Artifact"
 #~ msgstr "Surveillance activée"
 
-#~ msgid "Artifact Monitoring Deactivated"
-#~ msgstr "Surveillance arrêtée"
-
 #~ msgid "Now Monitoring Tracker"
 #~ msgstr "Surveillance activée"
-
-#~ msgid "Tracker Monitoring Deactivated"
-#~ msgstr "Surveillance arrêtée"
 
 #~ msgid "Delete Custom Field Element"
 #~ msgstr "Supprimer un élément de champ supplémentaire"
@@ -23846,38 +23835,6 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #~ msgid "Error - Could Not Update User Object:"
 #~ msgstr "Erreur lors de la mise à jour de l'utilisateur :"
 
-#, fuzzy
-#~ msgid "Error - Could Not Update User Status:"
-#~ msgstr "Erreur lors de la mise à jour du statut de l'utilisateur :"
-
-#, fuzzy
-#~ msgid "Error - Could Not Update User Unix Status: "
-#~ msgstr "Erreur lors de la mise à jour du statut de l'utilisateur :"
-
-#, fuzzy
-#~ msgid "Error - Could Not Update User Email: "
-#~ msgstr "Erreur lors de la mise à jour du statut de l'utilisateur :"
-
-#, fuzzy
-#~ msgid "Error - Could Not Update User Email And Hash: "
-#~ msgstr "Erreur lors de la mise à jour du statut de l'utilisateur :"
-
-#, fuzzy
-#~ msgid "Error - Could Not Update real name of user : "
-#~ msgstr "Erreur lors de la mise à jour du statut de l'utilisateur :"
-
-#, fuzzy
-#~ msgid "Error - Could Not Update User Unix Shell:"
-#~ msgstr "Erreur lors de la mise à jour du shell Unix de l'utilisateur :"
-
-#, fuzzy
-#~ msgid "Error - Could Not Delete User SSH Key:"
-#~ msgstr "Erreur lors de la mise à jour des clefs SSH de l'utilisateur :"
-
-#, fuzzy
-#~ msgid "Error - Could Not Change User Password:"
-#~ msgstr "Erreur lors de la modification du mot de passe : "
-
 #~ msgid "%1$s Project Denied"
 #~ msgstr "%1$s - Projet refusé"
 
@@ -23988,15 +23945,8 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #~ msgid "Missing Parameters"
 #~ msgstr "Il manque des paramètres"
 
-#~ msgid "monitoring stopped."
-#~ msgstr "Surveillance arrêtée."
-
 #~ msgid "monitoring started"
 #~ msgstr "Surveillance démarrée"
-
-#, fuzzy
-#~ msgid "Monitoring stopped."
-#~ msgstr "Surveillance arrêtée"
 
 #~ msgid "Monitoring started."
 #~ msgstr "Suivi démarré."
@@ -24208,14 +24158,6 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 
 #~ msgid "Date not valid"
 #~ msgstr "Date non valide"
-
-#, fuzzy
-#~ msgid "Invalid ArtifactType"
-#~ msgstr "Numéro d'identifiant invalide"
-
-#, fuzzy
-#~ msgid "Invalid Group Object"
-#~ msgstr "Pas d'objet Group valide"
 
 #~ msgid "No Valid Artifact Type"
 #~ msgstr "Pas un Artifact Type valide"
@@ -27721,12 +27663,6 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #~ msgid "Custom Field Name:"
 #~ msgstr "Nom du champ supplémentaire :"
 
-#~ msgid "Artifact monitoring deactivated"
-#~ msgstr "Surveillance arrêtée"
-
-#~ msgid "Tracker monitoring deactivated"
-#~ msgstr "Surveillance arrêtée"
-
 #~ msgid "Tracker [#"
 #~ msgstr "Outil de suivi [#"
 
@@ -30306,21 +30242,6 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #~ "virtuel.  Cet hôte virtuel sera un alias pour le site web du projet, "
 #~ "c'est-à-dire que <em>votre.domaine.org</em> aura le même contenu que <em>"
 #~ "%1$s.%2$s</ em>."
-
-#~ msgid "ERROR - Could Not Update User Object:"
-#~ msgstr "Erreur lors de la mise à jour de l'utilisateur :"
-
-#~ msgid "ERROR - Could Not Update User Status:"
-#~ msgstr "Erreur lors de la mise à jour du statut de l'utilisateur :"
-
-#~ msgid "ERROR - Could Not Update User Unix Shell:"
-#~ msgstr "Erreur lors de la mise à jour du shell Unix de l'utilisateur :"
-
-#~ msgid "ERROR - Could Not Change User Password:"
-#~ msgstr "Erreur lors de la modification du mot de passe : "
-
-#~ msgid "Error:"
-#~ msgstr "Erreur :"
 
 #~ msgid "Invalid operation"
 #~ msgstr "Opération non valide"
