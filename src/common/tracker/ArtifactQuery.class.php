@@ -742,10 +742,6 @@ class ArtifactQuery extends Error {
 			$this->setError(_('Must Be Logged In'));
 			return false;
 		}
-		if (!$this->Exist(htmlspecialchars($name))) {
-			$this->setError(_('Query does not exist'));
-			return false;
-		}
 		if ($query_type>0 && !forge_check_perm ('tracker', $this->ArtifactType->getID(), 'manager')) {
 			$this->setError(_('You must have tracker admin rights to set or update a project level query.'));
 			return false;
