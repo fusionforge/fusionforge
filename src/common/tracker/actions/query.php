@@ -3,7 +3,7 @@
  * Copyright 2005 (c) GForge Group, LLC; Anthony J. Pugliese,
  * Copyright 2010 (c) Fusionforge Team
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -187,7 +187,7 @@ $query_type=$aq->getQueryType();
 //	creating a submitter box
 $submitter_box = $ath->submitterBox('_submitted_by[]',$_submitted_by,true,'none','-1',false,true);
 //	creating a custom technician box which includes "any" and "unassigned"
-$tech_box=$ath->technicianBox ('_assigned_to[]',$_assigned_to,true,'none','-1',false,true);
+$tech_box=$ath->technicianBox('_assigned_to[]',$_assigned_to,true,'none','-1',false,true);
 
 //
 //	custom order by arrays to build a pop-up box
@@ -299,7 +299,7 @@ echo '
 	echo '
 		</td>
 		<td class="top">
-		<input type="text" name="query_name" value="'.$aq->getName().'" size="20" maxlength="30" /></td>
+		<input type="text" name="query_name" value="'.$aq->getName().'" size="20" maxlength="30"  required="required" /></td>
 	</tr>
 </table>';
 
