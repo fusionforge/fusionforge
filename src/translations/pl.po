@@ -1990,7 +1990,7 @@ msgstr ""
 
 #: common/docman/views/search.php:154 common/docman/views/tree.php:64
 msgid "Browse document manager for this project."
-msgstr "Przeglądaj dokumentację"
+msgstr "Przeglądaj dokumentację."
 
 #: common/docman/views/search.php:162
 msgid "Your search is empty."
@@ -6315,9 +6315,8 @@ msgstr ""
 
 #: common/tracker/views/form-addextrafieldoption.php:39
 #: common/tracker/views/form-updateextrafieldelement.php:49
-#, fuzzy
 msgid "Custom field name"
-msgstr "Nazwa wydania:"
+msgstr ""
 
 #: common/tracker/views/form-addextrafieldoption.php:47
 #: common/tracker/views/form-adminroadmap.php:402
@@ -6623,9 +6622,8 @@ msgid "Enable"
 msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:488
-#, fuzzy
 msgid "Roadmap name"
-msgstr "Nazwa wydania:"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:503
 msgid "New Roadmap"
@@ -10017,9 +10015,8 @@ msgid "eg: http://myCIserver/hudson/job/myJob"
 msgstr ""
 
 #: plugins/hudson/include/hudsonViews.class.php:226
-#, fuzzy
 msgid "Job name:"
-msgstr "Nazwa wydania:"
+msgstr ""
 
 #: plugins/hudson/include/hudsonViews.class.php:230
 #, php-format
@@ -10842,9 +10839,8 @@ msgid "Manage categories"
 msgstr ""
 
 #: plugins/mantisbt/view/admin/viewCategorie.php:61
-#, fuzzy
 msgid "Rename"
-msgstr "Nazwa wydania:"
+msgstr ""
 
 #: plugins/mantisbt/view/admin/viewCategorie.php:75
 msgid "No Categories"
@@ -11546,9 +11542,8 @@ msgstr ""
 
 #: plugins/oauthprovider/www/access_tokens.php:54
 #: plugins/oauthprovider/www/request_tokens.php:54
-#, fuzzy
 msgid "Consumer name"
-msgstr "Nazwa wydania:"
+msgstr ""
 
 #: plugins/oauthprovider/www/access_tokens.php:55
 #: plugins/oauthprovider/www/consumer_manage.php:76
@@ -14402,9 +14397,8 @@ msgid "Add an already active database"
 msgstr ""
 
 #: www/admin/database.php:160
-#, fuzzy
 msgid "Database Name"
-msgstr "Nazwa wydania:"
+msgstr ""
 
 #: www/admin/globalroledelete.php:43
 msgid "You can only delete a global role from here."
@@ -14436,7 +14430,7 @@ msgstr ""
 
 #: www/admin/globalroleedit.php:108
 msgid "Wrong user name."
-msgstr "Nazwa wydania:"
+msgstr ""
 
 #: www/admin/globalroleedit.php:111
 msgid "Cannot add user to this type of role"
@@ -15087,9 +15081,8 @@ msgstr[1] ""
 #: www/project/admin/massadd.php:90 www/project/admin/massfinish.php:74
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:45
 #: www/top/topusers.php:64
-#, fuzzy
 msgid "Real Name"
-msgstr "Nazwa wydania:"
+msgstr ""
 
 #: www/admin/search.php:96
 msgid "No user found."
@@ -15829,9 +15822,8 @@ msgid "No Monitoring Users"
 msgstr ""
 
 #: www/forum/admin/monitor.php:61
-#, fuzzy
 msgid "Realname"
-msgstr "Nazwa wydania:"
+msgstr ""
 
 #: www/forum/admin/pendingmsgdetail.php:42 www/forum/monitor.php:82
 #: www/forum/new.php:72 www/forum/save.php:58
@@ -16092,7 +16084,6 @@ msgstr ""
 #: www/frs/admin/editrelease.php:230 www/frs/admin/qrs.php:175
 #: www/frs/admin/showreleases.php:100
 #: www/search/include/renderers/FrsHtmlSearchRenderer.class.php:48
-#, fuzzy
 msgid "Release Name"
 msgstr "Nazwa wydania"
 
@@ -16447,7 +16438,7 @@ msgstr "Uwagi oraz Lista Zmian Wydania"
 
 #: www/frs/shownotes.php:64
 msgid "Release Name:"
-msgstr "Nazwa wydania:"
+msgstr "Nazwa wydania"
 
 #: www/include/features_boxes.php:35
 msgid "Features Boxes"
@@ -17692,7 +17683,7 @@ msgstr ""
 #: www/people/admin/index.php:133
 #, fuzzy
 msgid "New Skill Name"
-msgstr "Nazwa wydania:"
+msgstr ""
 
 #: www/people/admin/index.php:149
 msgid "People Administration"
@@ -21836,20 +21827,8 @@ msgstr ""
 #~ msgstr "Uwagi:"
 
 #, fuzzy
-#~ msgid "Rename to:"
-#~ msgstr "Nazwa wydania:"
-
-#, fuzzy
 #~ msgid "Summary:"
 #~ msgstr "Kraj:"
-
-#, fuzzy
-#~ msgid "Roadmap: "
-#~ msgstr "Nazwa wydania:"
-
-#, fuzzy
-#~ msgid "Role name:"
-#~ msgstr "Nazwa wydania:"
 
 #, fuzzy
 #~ msgid "Invalid DocumentGroup ID"
