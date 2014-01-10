@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-10 17:43+0100\n"
+"POT-Creation-Date: 2014-01-10 18:02+0100\n"
 "PO-Revision-Date: 2009-10-06 16:20+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -504,9 +504,8 @@ msgstr "Opis dokumentu musi składać się z przynajmniej 5 znaków."
 
 #: common/docman/Document.class.php:141 common/docman/Document.class.php:149
 #: common/docman/Document.class.php:851
-#, fuzzy
 msgid "Document already published in this folder"
-msgstr "Zamieść nową dokumentację"
+msgstr ""
 
 #: common/docman/Document.class.php:198 common/docman/Document.class.php:205
 msgid "Error Adding Document:"
@@ -974,9 +973,8 @@ msgid "Document Manager Access Denied"
 msgstr ""
 
 #: common/docman/views/additem.php:56
-#, fuzzy
 msgid "Submit a new document in this folder."
-msgstr "Zamieść nową dokumentację"
+msgstr ""
 
 #: common/docman/views/additem.php:58
 msgid "Create a folder based on this name."
@@ -1399,9 +1397,8 @@ msgid "Enforce reservation"
 msgstr ""
 
 #: common/docman/views/listfile.php:338 common/docman/views/listfile.php:365
-#, fuzzy
 msgid "Release reservation"
-msgstr "Uwagi do wydania"
+msgstr ""
 
 #: common/docman/views/listfile.php:344
 msgid "Stop monitoring this document"
@@ -1874,9 +1871,8 @@ msgid "Refresh"
 msgstr "Odśwież"
 
 #: common/docman/views/reporting.php:105
-#, fuzzy
 msgid "There have been no viewed documents for this project yet."
-msgstr "Przeglądaj dokumentację"
+msgstr ""
 
 #: common/docman/views/reporting.php:116 common/docman/views/reporting.php:124
 #: common/reporting/report_utils.php:73 www/frs/reporting/downloads.php:135
@@ -2716,7 +2712,7 @@ msgstr ""
 
 #: common/frs/FRSPackage.class.php:476
 msgid "Release Error: "
-msgstr "Uwagi do wydania"
+msgstr ""
 
 #: common/frs/FRSPackage.class.php:486
 msgid "Package delete error: trying to delete root dir"
@@ -2797,7 +2793,7 @@ msgstr ""
 
 #: common/frs/include/frs_utils.php:77
 msgid "View File Releases"
-msgstr "Uwagi oraz Lista Zmian Wydania"
+msgstr ""
 
 #: common/frs/include/frs_utils.php:175 common/frs/include/frs_utils.php:197
 msgid "Error: group id required"
@@ -3305,9 +3301,8 @@ msgstr ""
 
 #: common/include/Group.class.php:2689 common/include/Group.class.php:2707
 #: www/admin/approve-pending.php:192
-#, fuzzy
 msgid "Submitted Description"
-msgstr "Zamieść nową dokumentację"
+msgstr ""
 
 #: common/include/Group.class.php:2696
 msgid "Please visit the following URL to approve or reject this project"
@@ -3464,9 +3459,8 @@ msgstr ""
 #: common/widget/Widget_MyMonitoredFp.class.php:119
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:168
 #: www/export/rss20_activity.php:142
-#, fuzzy
 msgid "File Release System"
-msgstr "Uwagi oraz Lista Zmian Wydania"
+msgstr ""
 
 #: common/include/group_section_texts.php:34
 #: common/include/Navigation.class.php:518 plugins/blocks/www/index.php:157
@@ -3855,9 +3849,8 @@ msgid "Tech & manager (no submitting)"
 msgstr ""
 
 #: common/include/rbac_texts.php:75 common/include/rbac_texts.php:105
-#, fuzzy
 msgid "Submit only"
-msgstr "Zamieść nową dokumentację"
+msgstr ""
 
 #: common/include/rbac_texts.php:76 common/include/rbac_texts.php:106
 msgid "Read & submit"
@@ -3910,9 +3903,8 @@ msgid "Commit access"
 msgstr ""
 
 #: common/include/rbac_texts.php:132
-#, fuzzy
 msgid "Submit documents"
-msgstr "Zamieść nową dokumentację"
+msgstr "Zamieść dokumentację"
 
 #: common/include/rbac_texts.php:133
 msgid "Approve documents"
@@ -6575,9 +6567,8 @@ msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:280
 #: common/tracker/views/form-adminroadmap.php:367
-#, fuzzy
 msgid "Release(s) order updated"
-msgstr "Uwagi do wydania"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:283
 #: common/tracker/views/form-adminroadmap.php:370
@@ -6971,9 +6962,8 @@ msgid "Assigned"
 msgstr ""
 
 #: common/widget/Widget_MyArtifacts.class.php:247
-#, fuzzy
 msgid "Submitted"
-msgstr "Zamieść nową dokumentację"
+msgstr ""
 
 #: common/widget/Widget_MyArtifacts.class.php:253
 msgid "Monitored"
@@ -8880,9 +8870,8 @@ msgid "HTML editor"
 msgstr ""
 
 #: plugins/forumml/include/ForumMLGroupSearchEngine.class.php:17
-#, fuzzy
 msgid "ForumML"
-msgstr "Forum"
+msgstr ""
 
 #: plugins/forumml/include/ForumMLHtmlSearchRenderer.class.php:62
 #: plugins/forumml/www/forumml_utils.php:55
@@ -8896,9 +8885,8 @@ msgstr ""
 #: plugins/forumml/include/ForumMLHtmlSearchRenderer.class.php:65
 #: plugins/forumml/www/forumml_utils.php:58
 #: plugins/forumml/www/forumml_utils.php:185
-#, fuzzy
 msgid "Submitted on"
-msgstr "Zamieść nową dokumentację"
+msgstr ""
 
 #: plugins/forumml/include/forummlPlugin.class.php:108
 msgid "This project's mailing lists"
@@ -9013,9 +9001,8 @@ msgid "Browse Archives"
 msgstr ""
 
 #: plugins/forumml/www/index.php:103
-#, fuzzy
 msgid "Submit a new thread"
-msgstr "Zamieść nową dokumentację"
+msgstr ""
 
 #: plugins/forumml/www/message.php:98 plugins/forumml/www/upload.php:51
 msgid "This list is not active"
@@ -10906,9 +10893,8 @@ msgstr ""
 
 #: plugins/mantisbt/view/editIssue.php:91
 #: plugins/mantisbt/view/viewIssue.php:60
-#, fuzzy
 msgid "Submit Date"
-msgstr "Zamieść nową dokumentację"
+msgstr ""
 
 #: plugins/mantisbt/view/editIssue.php:92
 #: plugins/mantisbt/view/viewIssue.php:61
@@ -16026,9 +16012,8 @@ msgid "Could Not Get FRS Package"
 msgstr ""
 
 #: www/frs/admin/deletepackage.php:57
-#, fuzzy
 msgid "Delete Package"
-msgstr "Uwagi do wydania"
+msgstr ""
 
 #: www/frs/admin/deletepackage.php:65
 msgid ""
@@ -16101,9 +16086,8 @@ msgstr ""
 
 #: www/frs/admin/editrelease.php:226 www/frs/admin/editrelease.php:349
 #: www/frs/admin/qrs.php:183
-#, fuzzy
 msgid "Release Date"
-msgstr "Uwagi do wydania"
+msgstr ""
 
 #: www/frs/admin/editrelease.php:230 www/frs/admin/qrs.php:175
 #: www/frs/admin/showreleases.php:100
@@ -16256,9 +16240,8 @@ msgid "Create new releases of packages"
 msgstr "Aby utworzyć nowe wydanie kliknij tutaj."
 
 #: www/frs/admin/index.php:136
-#, fuzzy
 msgid "Releases of Packages"
-msgstr "Uwagi do wydania"
+msgstr ""
 
 #: www/frs/admin/index.php:137
 msgid "A release of a package can contain multiple files."
@@ -17537,9 +17520,8 @@ msgid "Project Total:"
 msgstr ""
 
 #: www/new/index.php:121
-#, fuzzy
 msgid "Notes and Changes"
-msgstr "Uwagi oraz Lista Zmian Wydania"
+msgstr ""
 
 #: www/new/index.php:135
 msgid "Newer Releases"
@@ -19464,9 +19446,8 @@ msgid "Source Code Admin"
 msgstr ""
 
 #: www/project/admin/tools.php:342
-#, fuzzy
 msgid "File Release System Admin"
-msgstr "Uwagi oraz Lista Zmian Wydania"
+msgstr ""
 
 #: www/project/admin/users.php:102 www/project/admin/users.php:139
 #: www/project/admin/users.php:152
@@ -20249,9 +20230,8 @@ msgstr ""
 
 #: www/search/include/renderers/FrsHtmlSearchRenderer.class.php:50
 #: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:50
-#, fuzzy
 msgid "Post Date"
-msgstr "Zamieść nową dokumentację"
+msgstr ""
 
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:173
 #, php-format
@@ -21842,10 +21822,6 @@ msgstr ""
 #~ msgid "New directory"
 #~ msgstr "Imię:"
 
-#, fuzzy
-#~ msgid "Submit a new document."
-#~ msgstr "Zamieść nową dokumentację"
-
 #~ msgid "Search in documents"
 #~ msgstr "Szukaj w dokumentach"
 
@@ -21878,10 +21854,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Invalid DocumentGroup ID"
 #~ msgstr "Grupa dokumentów: Niepoprawny identyfikator grupy dokumentów"
-
-#, fuzzy
-#~ msgid "Add new documentation directory"
-#~ msgstr "Zamieść nową dokumentację"
 
 #, fuzzy
 #~ msgid "Commentary:"
