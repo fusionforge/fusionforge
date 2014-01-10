@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-10 18:02+0100\n"
+"POT-Creation-Date: 2014-01-10 18:10+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -343,30 +343,31 @@ msgstr ""
 #: www/forum/admin/pendingmsgdetail.php:59 www/forum/forum.php:92
 #: www/forum/forum.php:156 www/forum/message.php:126
 #: www/frs/admin/deletepackage.php:57 www/frs/admin/qrs.php:197
-#: www/include/features_boxes.php:150 www/include/features_boxes.php:159
-#: www/include/html.php:923 www/include/user_profile.php:87
-#: www/include/user_profile.php:92 www/include/user_profile.php:111
-#: www/new/index.php:98 www/news/submit.php:153 www/news/submit.php:155
-#: www/news/submit.php:158 www/people/admin/index.php:52
-#: www/people/admin/index.php:65 www/people/editprofile.php:233
-#: www/people/skills_utils.php:121 www/people/viewprofile.php:47
-#: www/pm/add_task.php:50 www/pm/add_task.php:63 www/pm/add_task.php:67
-#: www/pm/add_task.php:74 www/pm/add_task.php:81 www/pm/add_task.php:88
-#: www/pm/add_task.php:95 www/pm/add_task.php:110 www/pm/add_task.php:124
-#: www/pm/add_task.php:130 www/pm/add_task.php:149 www/pm/admin/index.php:98
-#: www/pm/admin/index.php:120 www/pm/admin/index.php:260
-#: www/pm/calendar.php:59 www/pm/detail_task.php:42 www/pm/detail_task.php:66
-#: www/pm/detail_task.php:71 www/pm/detail_task.php:86
-#: www/pm/detail_task.php:90 www/pm/detail_task.php:97
-#: www/pm/detail_task.php:104 www/pm/include/ProjectTaskHTML.class.php:141
-#: www/pm/mod_task.php:52 www/pm/mod_task.php:61 www/pm/mod_task.php:66
-#: www/pm/mod_task.php:78 www/pm/mod_task.php:83 www/pm/mod_task.php:97
-#: www/pm/mod_task.php:114 www/pm/mod_task.php:126 www/pm/mod_task.php:146
-#: www/pm/mod_task.php:160 www/pm/mod_task.php:173 www/pm/mod_task.php:183
-#: www/pm/mod_task.php:197 www/pm/mod_task.php:202 www/pm/mod_task.php:212
-#: www/pm/mod_task.php:323 www/pm/task.php:354
-#: www/project/admin/database.php:66 www/project/admin/roledelete.php:62
-#: www/register/index.php:188 www/reporting/timeadd.php:70
+#: www/frs/shownotes.php:64 www/include/features_boxes.php:150
+#: www/include/features_boxes.php:159 www/include/html.php:923
+#: www/include/user_profile.php:87 www/include/user_profile.php:92
+#: www/include/user_profile.php:111 www/new/index.php:98
+#: www/news/submit.php:153 www/news/submit.php:155 www/news/submit.php:158
+#: www/people/admin/index.php:52 www/people/admin/index.php:65
+#: www/people/editprofile.php:233 www/people/skills_utils.php:121
+#: www/people/viewprofile.php:47 www/pm/add_task.php:50 www/pm/add_task.php:63
+#: www/pm/add_task.php:67 www/pm/add_task.php:74 www/pm/add_task.php:81
+#: www/pm/add_task.php:88 www/pm/add_task.php:95 www/pm/add_task.php:110
+#: www/pm/add_task.php:124 www/pm/add_task.php:130 www/pm/add_task.php:149
+#: www/pm/admin/index.php:98 www/pm/admin/index.php:120
+#: www/pm/admin/index.php:260 www/pm/calendar.php:59 www/pm/detail_task.php:42
+#: www/pm/detail_task.php:66 www/pm/detail_task.php:71
+#: www/pm/detail_task.php:86 www/pm/detail_task.php:90
+#: www/pm/detail_task.php:97 www/pm/detail_task.php:104
+#: www/pm/include/ProjectTaskHTML.class.php:141 www/pm/mod_task.php:52
+#: www/pm/mod_task.php:61 www/pm/mod_task.php:66 www/pm/mod_task.php:78
+#: www/pm/mod_task.php:83 www/pm/mod_task.php:97 www/pm/mod_task.php:114
+#: www/pm/mod_task.php:126 www/pm/mod_task.php:146 www/pm/mod_task.php:160
+#: www/pm/mod_task.php:173 www/pm/mod_task.php:183 www/pm/mod_task.php:197
+#: www/pm/mod_task.php:202 www/pm/mod_task.php:212 www/pm/mod_task.php:323
+#: www/pm/task.php:354 www/project/admin/database.php:66
+#: www/project/admin/roledelete.php:62 www/register/index.php:188
+#: www/reporting/timeadd.php:70
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:101
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
@@ -15988,7 +15989,7 @@ msgid "Release Date"
 msgstr ""
 
 #: www/frs/admin/editrelease.php:230 www/frs/admin/qrs.php:175
-#: www/frs/admin/showreleases.php:100
+#: www/frs/admin/showreleases.php:100 www/frs/shownotes.php:64
 #: www/search/include/renderers/FrsHtmlSearchRenderer.class.php:48
 msgid "Release Name"
 msgstr ""
@@ -16335,10 +16336,6 @@ msgstr ""
 
 #: www/frs/shownotes.php:62
 msgid "File Release Notes and Changelog"
-msgstr ""
-
-#: www/frs/shownotes.php:64
-msgid "Release Name:"
 msgstr ""
 
 #: www/include/features_boxes.php:35
