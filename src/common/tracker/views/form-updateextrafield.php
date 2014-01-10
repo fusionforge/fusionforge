@@ -87,7 +87,7 @@ if (!$ac || !is_object($ac)) {
 	<p><input id="is_required" type="checkbox" name="is_required" <?php if ($ac->isRequired()) echo 'checked="checked"'; ?> />
 	<?php echo _('Field is mandatory')?></p>
 	<label for="is_required">
-	<p class="warning"><?php echo _('It is not recommended that you change the custom field name because other things are dependent upon it. When you change the custom field name, all related items will be changed to the new name') ?>
+	<p class="warning"><?php echo _('It is not recommended that you change the custom field name because other things are dependent upon it. When you change the custom field name, all related items will be changed to the new name.') ?>
 	</label>
 	</p>
 	<p>

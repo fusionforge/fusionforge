@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-09 15:02+0100\n"
+"POT-Creation-Date: 2014-01-10 11:01+0100\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -232,11 +232,11 @@ msgstr "文件名"
 #: common/forum/ForumHTML.class.php:587 common/forum/ForumHTML.class.php:590
 #: common/forum/ForumMessage.class.php:666 common/frs/FRSFile.class.php:187
 #: common/frs/FRSFile.class.php:440 common/include/Error.class.php:206
-#: common/include/exit.php:80 common/include/Group.class.php:2627
-#: common/include/Group.class.php:2628 common/include/Group.class.php:2629
-#: common/include/Group.class.php:2681 common/include/Group.class.php:2682
-#: common/include/Group.class.php:2685 common/include/Group.class.php:2689
-#: common/include/Group.class.php:2699 common/include/Group.class.php:2700
+#: common/include/exit.php:80 common/include/Group.class.php:2634
+#: common/include/Group.class.php:2635 common/include/Group.class.php:2636
+#: common/include/Group.class.php:2688 common/include/Group.class.php:2689
+#: common/include/Group.class.php:2692 common/include/Group.class.php:2696
+#: common/include/Group.class.php:2706 common/include/Group.class.php:2707
 #: common/include/GroupJoinRequest.class.php:298
 #: common/include/Navigation.class.php:60 common/include/User.class.php:350
 #: common/include/User.class.php:436 common/include/User.class.php:1410
@@ -285,9 +285,10 @@ msgstr "文件名"
 #: common/tracker/include/ArtifactHtml.class.php:112
 #: common/tracker/include/ArtifactHtml.class.php:220
 #: common/tracker/include/ArtifactTypeHtml.class.php:438
-#: common/tracker/views/form-addextrafieldoption.php:43
+#: common/tracker/views/form-addextrafieldoption.php:39
 #: common/tracker/views/form-adminroadmap.php:70
 #: common/tracker/views/form-adminroadmap.php:193
+#: common/tracker/views/form-updateextrafieldelement.php:49
 #: common/tracker/views/form-updateextrafield.php:42
 #: common/widget/Widget_ProjectInfo.class.php:45
 #: cronjobs/send_pending_items_mail.php:77
@@ -629,7 +630,7 @@ msgstr "说明："
 
 #: common/docman/Document.class.php:953
 #: common/docman/DocumentGroup.class.php:731
-#: common/include/Group.class.php:2685 common/tracker/actions/browse.php:201
+#: common/include/Group.class.php:2692 common/tracker/actions/browse.php:201
 #: common/tracker/actions/query.php:202 common/tracker/actions/query.php:346
 msgid "Submitter"
 msgstr "发表人"
@@ -1312,7 +1313,7 @@ msgstr "姓氏："
 #: common/tracker/include/ArtifactTypeHtml.class.php:331
 #: common/tracker/views/form-addextrafieldoption.php:109
 #: common/tracker/views/form-addextrafield.php:131
-#: common/tracker/views/form-updateextrafieldelement.php:63
+#: common/tracker/views/form-updateextrafieldelement.php:65
 #: common/widget/Widget_ProjectLatestDocuments.class.php:76
 #: cronjobs/send_pending_items_mail.php:80
 #: cronjobs/send_pending_items_mail.php:117
@@ -1760,7 +1761,7 @@ msgstr "开启日期"
 #: common/tracker/views/form-deleteextrafieldelement.php:61
 #: common/tracker/views/form-updatecanned.php:43
 #: common/tracker/views/form-updatecanned.php:48
-#: common/tracker/views/form-updateextrafieldelement.php:55
+#: common/tracker/views/form-updateextrafieldelement.php:57
 #: common/tracker/views/form-updateextrafield.php:49
 #: common/tracker/views/form-updateextrafield.php:83
 #: common/tracker/views/form-updatetracker.php:53
@@ -3420,21 +3421,21 @@ msgstr "角色:%s"
 msgid "Wrong destination role"
 msgstr ""
 
-#: common/include/Group.class.php:2286
+#: common/include/Group.class.php:2293
 #, fuzzy
 msgid "Group already active"
 msgstr "组已被激活"
 
-#: common/include/Group.class.php:2526
+#: common/include/Group.class.php:2533
 #, fuzzy
 msgid "Approved"
 msgstr "批准"
 
-#: common/include/Group.class.php:2549 common/include/Group.class.php:2619
+#: common/include/Group.class.php:2556 common/include/Group.class.php:2626
 msgid "Group does not have any administrators."
 msgstr "组没有任何管理员"
 
-#: common/include/Group.class.php:2557
+#: common/include/Group.class.php:2564
 #, php-format
 msgid ""
 "Your project registration for %4$s has been approved.\n"
@@ -3479,24 +3480,24 @@ msgstr ""
 "再选择左边菜单的'项目管理'.享用这个系统的同时请告诉其他人%4$s。如果有需要请与"
 "我们联系，我们乐于提供帮助。-- %4$s的成员"
 
-#: common/include/Group.class.php:2593
+#: common/include/Group.class.php:2600
 #, php-format
 msgid "%s Project Approved"
 msgstr "%s 项目通过审核了"
 
-#: common/include/Group.class.php:2626
+#: common/include/Group.class.php:2633
 #, php-format
 msgid "Your project registration for %s has been denied."
 msgstr "您在 %s 的项目注册被取消了"
 
-#: common/include/Group.class.php:2627 common/include/Group.class.php:2681
-#: common/include/Group.class.php:2699 www/register/index.php:183
+#: common/include/Group.class.php:2634 common/include/Group.class.php:2688
+#: common/include/Group.class.php:2706 www/register/index.php:183
 #: www/register/index.php:189
 #, fuzzy
 msgid "Project Full Name"
 msgstr "新项目名称"
 
-#: common/include/Group.class.php:2628 plugins/projectlabels/www/index.php:172
+#: common/include/Group.class.php:2635 plugins/projectlabels/www/index.php:172
 #: www/admin/approve-pending.php:190 www/admin/database.php:155
 #: www/admin/groupedit.php:170 www/admin/vhost.php:118
 #: www/register/index.php:214
@@ -3504,80 +3505,80 @@ msgstr "新项目名称"
 msgid "Project Unix Name"
 msgstr "新项目名称"
 
-#: common/include/Group.class.php:2629
+#: common/include/Group.class.php:2636
 msgid "Reasons for negative decision"
 msgstr "原因"
 
-#: common/include/Group.class.php:2641
+#: common/include/Group.class.php:2648
 #, php-format
 msgid "%s Project Denied"
 msgstr "%s 项目被取消了"
 
-#: common/include/Group.class.php:2665
+#: common/include/Group.class.php:2672
 msgid "Could not find user who has submitted the project."
 msgstr "无法找到提交项目的用户。"
 
-#: common/include/Group.class.php:2672
+#: common/include/Group.class.php:2679
 #, fuzzy
 msgid "There is no administrator to send the mail to."
 msgstr "没有发送邮件的管理员"
 
-#: common/include/Group.class.php:2680 common/include/Group.class.php:2691
-#: common/include/Group.class.php:2698 common/include/Group.class.php:2704
+#: common/include/Group.class.php:2687 common/include/Group.class.php:2698
+#: common/include/Group.class.php:2705 common/include/Group.class.php:2711
 #, php-format
 msgid "New %s Project Submitted"
 msgstr "新项目 %s 已提交"
 
-#: common/include/Group.class.php:2682 common/include/Group.class.php:2700
+#: common/include/Group.class.php:2689 common/include/Group.class.php:2707
 #: www/admin/approve-pending.php:192
 msgid "Submitted Description"
 msgstr "已提交的说明"
 
-#: common/include/Group.class.php:2689
+#: common/include/Group.class.php:2696
 #, fuzzy
 msgid "Please visit the following URL to approve or reject this project"
 msgstr " 请点击这个网址来完成email信箱的改变："
 
-#: common/include/Group.class.php:2701
+#: common/include/Group.class.php:2708
 #, php-format
 msgid ""
 "The %s admin team will now examine your project submission. You will be "
 "notified of their decision."
 msgstr "%s 的管理团队会尽快审核您注册的项目，通过审核与否您都会收到通知。"
 
-#: common/include/Group.class.php:2719
+#: common/include/Group.class.php:2726
 msgid "Group name is too short"
 msgstr "群组名称太短"
 
-#: common/include/Group.class.php:2722
+#: common/include/Group.class.php:2729
 msgid "Group name is too long"
 msgstr "群组名称太长"
 
-#: common/include/Group.class.php:2725
+#: common/include/Group.class.php:2732
 msgid "Group name already taken"
 msgstr "群组名称已经有人使用"
 
-#: common/include/Group.class.php:2806
+#: common/include/Group.class.php:2813
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group Unix Status: %s"
 msgstr "错误: 数据库: 不能更改组状态: %s"
 
-#: common/include/Group.class.php:2870
+#: common/include/Group.class.php:2877
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr "错误 - 不能更新组的Unix状态: %s"
 
-#: common/include/Group.class.php:2888
+#: common/include/Group.class.php:2895
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
 msgstr "错误 - 不能更新组的Unix状态: %s"
 
-#: common/include/Group.class.php:2906
+#: common/include/Group.class.php:2913
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
 msgstr "错误 - 不能更新组的Unix状态: %s"
 
-#: common/include/Group.class.php:2924
+#: common/include/Group.class.php:2931
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr "错误 - 不能更新组的Unix状态: %s"
@@ -5215,7 +5216,7 @@ msgstr ""
 #: common/tracker/views/form-edittemplate.php:24
 #: common/tracker/views/form-extrafieldcopy.php:94
 #: common/tracker/views/form-updatecanned.php:52
-#: common/tracker/views/form-updateextrafieldelement.php:70
+#: common/tracker/views/form-updateextrafieldelement.php:72
 #: common/tracker/views/form-updateextrafield.php:94
 #: common/tracker/views/form-updatetracker.php:81
 #: common/tracker/views/form-workflow.php:123
@@ -5344,7 +5345,7 @@ msgstr "永久地删除这个跟踪系统。"
 #: common/tracker/actions/admin-updates.php:572
 #: common/tracker/views/form-addextrafieldoption.php:31
 #: common/tracker/views/form-deleteextrafieldelement.php:34
-#: common/tracker/views/form-updateextrafieldelement.php:33
+#: common/tracker/views/form-updateextrafieldelement.php:34
 #: common/tracker/views/form-updateextrafield.php:36
 msgid "Unable to create ArtifactExtraField Object"
 msgstr ""
@@ -5399,7 +5400,7 @@ msgstr "订制栏位已更新"
 #: common/tracker/actions/admin-updates.php:259
 #: common/tracker/actions/admin-updates.php:578
 #: common/tracker/views/form-deleteextrafieldelement.php:41
-#: common/tracker/views/form-updateextrafieldelement.php:40
+#: common/tracker/views/form-updateextrafieldelement.php:41
 msgid "Unable to create ArtifactExtraFieldElement Object"
 msgstr ""
 
@@ -6781,7 +6782,8 @@ msgstr "预设回应消息主要部份"
 msgid "Add/Update Custom Field Elements in %s"
 msgstr ""
 
-#: common/tracker/views/form-addextrafieldoption.php:43
+#: common/tracker/views/form-addextrafieldoption.php:39
+#: common/tracker/views/form-updateextrafieldelement.php:49
 #, fuzzy
 msgid "Custom field name"
 msgstr "订制栏位名称"
@@ -6820,7 +6822,7 @@ msgid "Alphabetical order"
 msgstr ""
 
 #: common/tracker/views/form-addextrafieldoption.php:97
-msgid "You have not defined any elements"
+msgid "You have not defined any elements."
 msgstr "您没有定义任何的组成元件"
 
 #: common/tracker/views/form-addextrafieldoption.php:103
@@ -7175,7 +7177,7 @@ msgid "Delete a custom field element in: %s"
 msgstr "错误更新一个订制栏位名称"
 
 #: common/tracker/views/form-deleteextrafieldelement.php:61
-#: common/tracker/views/form-updateextrafieldelement.php:55
+#: common/tracker/views/form-updateextrafieldelement.php:57
 msgid "Element"
 msgstr "组成元件"
 
@@ -7236,17 +7238,17 @@ msgstr "到跟踪者与订制栏位"
 msgid "Modify Canned Responses In %s"
 msgstr "添加预设回应"
 
-#: common/tracker/views/form-updateextrafieldelement.php:44
+#: common/tracker/views/form-updateextrafieldelement.php:45
 #, fuzzy, php-format
 msgid "Update a custom field element in %s"
 msgstr "错误更新一个订制栏位名称"
 
-#: common/tracker/views/form-updateextrafieldelement.php:67
+#: common/tracker/views/form-updateextrafieldelement.php:69
 #: common/tracker/views/form-updateextrafield.php:90
 msgid ""
 "It is not recommended that you change the custom field name because other "
 "things are dependent upon it. When you change the custom field name, all "
-"related items will be changed to the new name"
+"related items will be changed to the new name."
 msgstr ""
 "不建议您改变订制栏位名称，因为它与其他部份有关联性。当您改变订制栏位名称，全"
 "部相关项目将被变更至新的订制栏位。"

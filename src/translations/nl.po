@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-09 17:53+0100\n"
+"POT-Creation-Date: 2014-01-10 11:01+0100\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -230,11 +230,11 @@ msgstr ""
 #: common/forum/ForumHTML.class.php:587 common/forum/ForumHTML.class.php:590
 #: common/forum/ForumMessage.class.php:666 common/frs/FRSFile.class.php:187
 #: common/frs/FRSFile.class.php:440 common/include/Error.class.php:206
-#: common/include/exit.php:80 common/include/Group.class.php:2627
-#: common/include/Group.class.php:2628 common/include/Group.class.php:2629
-#: common/include/Group.class.php:2681 common/include/Group.class.php:2682
-#: common/include/Group.class.php:2685 common/include/Group.class.php:2689
-#: common/include/Group.class.php:2699 common/include/Group.class.php:2700
+#: common/include/exit.php:80 common/include/Group.class.php:2634
+#: common/include/Group.class.php:2635 common/include/Group.class.php:2636
+#: common/include/Group.class.php:2688 common/include/Group.class.php:2689
+#: common/include/Group.class.php:2692 common/include/Group.class.php:2696
+#: common/include/Group.class.php:2706 common/include/Group.class.php:2707
 #: common/include/GroupJoinRequest.class.php:298
 #: common/include/Navigation.class.php:60 common/include/User.class.php:350
 #: common/include/User.class.php:436 common/include/User.class.php:1410
@@ -283,9 +283,10 @@ msgstr ""
 #: common/tracker/include/ArtifactHtml.class.php:112
 #: common/tracker/include/ArtifactHtml.class.php:220
 #: common/tracker/include/ArtifactTypeHtml.class.php:438
-#: common/tracker/views/form-addextrafieldoption.php:43
+#: common/tracker/views/form-addextrafieldoption.php:39
 #: common/tracker/views/form-adminroadmap.php:70
 #: common/tracker/views/form-adminroadmap.php:193
+#: common/tracker/views/form-updateextrafieldelement.php:49
 #: common/tracker/views/form-updateextrafield.php:42
 #: common/widget/Widget_ProjectInfo.class.php:45
 #: cronjobs/send_pending_items_mail.php:77
@@ -619,7 +620,7 @@ msgstr "Bekijk documentatie"
 
 #: common/docman/Document.class.php:953
 #: common/docman/DocumentGroup.class.php:731
-#: common/include/Group.class.php:2685 common/tracker/actions/browse.php:201
+#: common/include/Group.class.php:2692 common/tracker/actions/browse.php:201
 #: common/tracker/actions/query.php:202 common/tracker/actions/query.php:346
 msgid "Submitter"
 msgstr "Indiener"
@@ -1301,7 +1302,7 @@ msgstr "Achternaam:"
 #: common/tracker/include/ArtifactTypeHtml.class.php:331
 #: common/tracker/views/form-addextrafieldoption.php:109
 #: common/tracker/views/form-addextrafield.php:131
-#: common/tracker/views/form-updateextrafieldelement.php:63
+#: common/tracker/views/form-updateextrafieldelement.php:65
 #: common/widget/Widget_ProjectLatestDocuments.class.php:76
 #: cronjobs/send_pending_items_mail.php:80
 #: cronjobs/send_pending_items_mail.php:117
@@ -1748,7 +1749,7 @@ msgstr "Startdatum"
 #: common/tracker/views/form-deleteextrafieldelement.php:61
 #: common/tracker/views/form-updatecanned.php:43
 #: common/tracker/views/form-updatecanned.php:48
-#: common/tracker/views/form-updateextrafieldelement.php:55
+#: common/tracker/views/form-updateextrafieldelement.php:57
 #: common/tracker/views/form-updateextrafield.php:49
 #: common/tracker/views/form-updateextrafield.php:83
 #: common/tracker/views/form-updatetracker.php:53
@@ -3395,21 +3396,21 @@ msgstr "Rol"
 msgid "Wrong destination role"
 msgstr ""
 
-#: common/include/Group.class.php:2286
+#: common/include/Group.class.php:2293
 #, fuzzy
 msgid "Group already active"
 msgstr "Account is reeds actief."
 
-#: common/include/Group.class.php:2526
+#: common/include/Group.class.php:2533
 #, fuzzy
 msgid "Approved"
 msgstr "Goedgekeurd"
 
-#: common/include/Group.class.php:2549 common/include/Group.class.php:2619
+#: common/include/Group.class.php:2556 common/include/Group.class.php:2626
 msgid "Group does not have any administrators."
 msgstr ""
 
-#: common/include/Group.class.php:2557
+#: common/include/Group.class.php:2564
 #, fuzzy, php-format
 msgid ""
 "Your project registration for %4$s has been approved.\n"
@@ -3485,63 +3486,63 @@ msgstr ""
 "\n"
 "-- het %7$s team"
 
-#: common/include/Group.class.php:2593
+#: common/include/Group.class.php:2600
 #, php-format
 msgid "%s Project Approved"
 msgstr "%s project goedgekeurd"
 
-#: common/include/Group.class.php:2626
+#: common/include/Group.class.php:2633
 #, php-format
 msgid "Your project registration for %s has been denied."
 msgstr "Je project aanvraag voor %s is afgewezen."
 
-#: common/include/Group.class.php:2627 common/include/Group.class.php:2681
-#: common/include/Group.class.php:2699 www/register/index.php:183
+#: common/include/Group.class.php:2634 common/include/Group.class.php:2688
+#: common/include/Group.class.php:2706 www/register/index.php:183
 #: www/register/index.php:189
 msgid "Project Full Name"
 msgstr "Volledige project naam"
 
-#: common/include/Group.class.php:2628 plugins/projectlabels/www/index.php:172
+#: common/include/Group.class.php:2635 plugins/projectlabels/www/index.php:172
 #: www/admin/approve-pending.php:190 www/admin/database.php:155
 #: www/admin/groupedit.php:170 www/admin/vhost.php:118
 #: www/register/index.php:214
 msgid "Project Unix Name"
 msgstr "Unix project naam"
 
-#: common/include/Group.class.php:2629
+#: common/include/Group.class.php:2636
 msgid "Reasons for negative decision"
 msgstr "Reden van afwijzing"
 
-#: common/include/Group.class.php:2641
+#: common/include/Group.class.php:2648
 #, php-format
 msgid "%s Project Denied"
 msgstr "%s Project afgewezen"
 
-#: common/include/Group.class.php:2665
+#: common/include/Group.class.php:2672
 msgid "Could not find user who has submitted the project."
 msgstr ""
 
-#: common/include/Group.class.php:2672
+#: common/include/Group.class.php:2679
 msgid "There is no administrator to send the mail to."
 msgstr ""
 
-#: common/include/Group.class.php:2680 common/include/Group.class.php:2691
-#: common/include/Group.class.php:2698 common/include/Group.class.php:2704
+#: common/include/Group.class.php:2687 common/include/Group.class.php:2698
+#: common/include/Group.class.php:2705 common/include/Group.class.php:2711
 #, php-format
 msgid "New %s Project Submitted"
 msgstr "Nieuw %s project ingediend"
 
-#: common/include/Group.class.php:2682 common/include/Group.class.php:2700
+#: common/include/Group.class.php:2689 common/include/Group.class.php:2707
 #: www/admin/approve-pending.php:192
 msgid "Submitted Description"
 msgstr "Ingediende beschrijving"
 
-#: common/include/Group.class.php:2689
+#: common/include/Group.class.php:2696
 #, fuzzy
 msgid "Please visit the following URL to approve or reject this project"
 msgstr "Kies het volgende URL om de wijzging van je e-mail adres te voltooien:"
 
-#: common/include/Group.class.php:2701
+#: common/include/Group.class.php:2708
 #, php-format
 msgid ""
 "The %s admin team will now examine your project submission. You will be "
@@ -3550,42 +3551,42 @@ msgstr ""
 "De %s beheerder zal de projectaanvraag nu beoordelen. Je ontvangt bericht "
 "krijgen over de beslissing."
 
-#: common/include/Group.class.php:2719
+#: common/include/Group.class.php:2726
 #, fuzzy
 msgid "Group name is too short"
 msgstr "Vraag is te kort"
 
-#: common/include/Group.class.php:2722
+#: common/include/Group.class.php:2729
 #, fuzzy
 msgid "Group name is too long"
 msgstr "Groepsnaam (klik om te wijzigen)"
 
-#: common/include/Group.class.php:2725
+#: common/include/Group.class.php:2732
 #, fuzzy
 msgid "Group name already taken"
 msgstr "Unixnaam is al in gebruik"
 
-#: common/include/Group.class.php:2806
+#: common/include/Group.class.php:2813
 #, php-format
 msgid "Error: Cannot Update Group Unix Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2870
+#: common/include/Group.class.php:2877
 #, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2888
+#: common/include/Group.class.php:2895
 #, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2906
+#: common/include/Group.class.php:2913
 #, php-format
 msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2924
+#: common/include/Group.class.php:2931
 #, php-format
 msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr ""
@@ -5226,7 +5227,7 @@ msgstr ""
 #: common/tracker/views/form-edittemplate.php:24
 #: common/tracker/views/form-extrafieldcopy.php:94
 #: common/tracker/views/form-updatecanned.php:52
-#: common/tracker/views/form-updateextrafieldelement.php:70
+#: common/tracker/views/form-updateextrafieldelement.php:72
 #: common/tracker/views/form-updateextrafield.php:94
 #: common/tracker/views/form-updatetracker.php:81
 #: common/tracker/views/form-workflow.php:123
@@ -5356,7 +5357,7 @@ msgstr "Deze tracker onherroepelijk verwijderen."
 #: common/tracker/actions/admin-updates.php:572
 #: common/tracker/views/form-addextrafieldoption.php:31
 #: common/tracker/views/form-deleteextrafieldelement.php:34
-#: common/tracker/views/form-updateextrafieldelement.php:33
+#: common/tracker/views/form-updateextrafieldelement.php:34
 #: common/tracker/views/form-updateextrafield.php:36
 msgid "Unable to create ArtifactExtraField Object"
 msgstr ""
@@ -5411,7 +5412,7 @@ msgstr "Extra veld aangepast"
 #: common/tracker/actions/admin-updates.php:259
 #: common/tracker/actions/admin-updates.php:578
 #: common/tracker/views/form-deleteextrafieldelement.php:41
-#: common/tracker/views/form-updateextrafieldelement.php:40
+#: common/tracker/views/form-updateextrafieldelement.php:41
 msgid "Unable to create ArtifactExtraFieldElement Object"
 msgstr ""
 
@@ -6789,7 +6790,8 @@ msgstr "Berichttekst"
 msgid "Add/Update Custom Field Elements in %s"
 msgstr ""
 
-#: common/tracker/views/form-addextrafieldoption.php:43
+#: common/tracker/views/form-addextrafieldoption.php:39
+#: common/tracker/views/form-updateextrafieldelement.php:49
 msgid "Custom field name"
 msgstr "Extra veldnaam"
 
@@ -6827,8 +6829,8 @@ msgid "Alphabetical order"
 msgstr ""
 
 #: common/tracker/views/form-addextrafieldoption.php:97
-msgid "You have not defined any elements"
-msgstr "Je hebt geen enkel element gedefinieerd"
+msgid "You have not defined any elements."
+msgstr "Je hebt geen enkel element gedefinieerd."
 
 #: common/tracker/views/form-addextrafieldoption.php:103
 msgid "Add New Element"
@@ -7184,7 +7186,7 @@ msgid "Delete a custom field element in: %s"
 msgstr "Fout bij het invoegen van een extra veld naam"
 
 #: common/tracker/views/form-deleteextrafieldelement.php:61
-#: common/tracker/views/form-updateextrafieldelement.php:55
+#: common/tracker/views/form-updateextrafieldelement.php:57
 msgid "Element"
 msgstr "Element"
 
@@ -7250,21 +7252,21 @@ msgstr "Naar trackers en extra velden"
 msgid "Modify Canned Responses In %s"
 msgstr "Standaard antwoord invoegen"
 
-#: common/tracker/views/form-updateextrafieldelement.php:44
+#: common/tracker/views/form-updateextrafieldelement.php:45
 #, fuzzy, php-format
 msgid "Update a custom field element in %s"
 msgstr "Fout bij het invoegen van een extra veld naam"
 
-#: common/tracker/views/form-updateextrafieldelement.php:67
+#: common/tracker/views/form-updateextrafieldelement.php:69
 #: common/tracker/views/form-updateextrafield.php:90
 msgid ""
 "It is not recommended that you change the custom field name because other "
 "things are dependent upon it. When you change the custom field name, all "
-"related items will be changed to the new name"
+"related items will be changed to the new name."
 msgstr ""
 "Het is niet aanbevolen om de extra veldnaam te veranderen omdat er andere "
 "dingen aan gekoppeld zijn. Als je de extra veldnaam wijzigt zullen ook alle "
-"gerelateerde items naar de nieuwe naam worden omgezet"
+"gerelateerde items naar de nieuwe naam worden omgezet."
 
 #: common/tracker/views/form-updateextrafield.php:30
 #, fuzzy, php-format

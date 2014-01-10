@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-09 15:02+0100\n"
+"POT-Creation-Date: 2014-01-10 11:01+0100\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -231,11 +231,11 @@ msgstr ""
 #: common/forum/ForumHTML.class.php:587 common/forum/ForumHTML.class.php:590
 #: common/forum/ForumMessage.class.php:666 common/frs/FRSFile.class.php:187
 #: common/frs/FRSFile.class.php:440 common/include/Error.class.php:206
-#: common/include/exit.php:80 common/include/Group.class.php:2627
-#: common/include/Group.class.php:2628 common/include/Group.class.php:2629
-#: common/include/Group.class.php:2681 common/include/Group.class.php:2682
-#: common/include/Group.class.php:2685 common/include/Group.class.php:2689
-#: common/include/Group.class.php:2699 common/include/Group.class.php:2700
+#: common/include/exit.php:80 common/include/Group.class.php:2634
+#: common/include/Group.class.php:2635 common/include/Group.class.php:2636
+#: common/include/Group.class.php:2688 common/include/Group.class.php:2689
+#: common/include/Group.class.php:2692 common/include/Group.class.php:2696
+#: common/include/Group.class.php:2706 common/include/Group.class.php:2707
 #: common/include/GroupJoinRequest.class.php:298
 #: common/include/Navigation.class.php:60 common/include/User.class.php:350
 #: common/include/User.class.php:436 common/include/User.class.php:1410
@@ -284,9 +284,10 @@ msgstr ""
 #: common/tracker/include/ArtifactHtml.class.php:112
 #: common/tracker/include/ArtifactHtml.class.php:220
 #: common/tracker/include/ArtifactTypeHtml.class.php:438
-#: common/tracker/views/form-addextrafieldoption.php:43
+#: common/tracker/views/form-addextrafieldoption.php:39
 #: common/tracker/views/form-adminroadmap.php:70
 #: common/tracker/views/form-adminroadmap.php:193
+#: common/tracker/views/form-updateextrafieldelement.php:49
 #: common/tracker/views/form-updateextrafield.php:42
 #: common/widget/Widget_ProjectInfo.class.php:45
 #: cronjobs/send_pending_items_mail.php:77
@@ -623,7 +624,7 @@ msgstr "Descrición"
 
 #: common/docman/Document.class.php:953
 #: common/docman/DocumentGroup.class.php:731
-#: common/include/Group.class.php:2685 common/tracker/actions/browse.php:201
+#: common/include/Group.class.php:2692 common/tracker/actions/browse.php:201
 #: common/tracker/actions/query.php:202 common/tracker/actions/query.php:346
 msgid "Submitter"
 msgstr "Remitente"
@@ -1312,7 +1313,7 @@ msgstr "Apelidos"
 #: common/tracker/include/ArtifactTypeHtml.class.php:331
 #: common/tracker/views/form-addextrafieldoption.php:109
 #: common/tracker/views/form-addextrafield.php:131
-#: common/tracker/views/form-updateextrafieldelement.php:63
+#: common/tracker/views/form-updateextrafieldelement.php:65
 #: common/widget/Widget_ProjectLatestDocuments.class.php:76
 #: cronjobs/send_pending_items_mail.php:80
 #: cronjobs/send_pending_items_mail.php:117
@@ -1760,7 +1761,7 @@ msgstr "Data de comezo"
 #: common/tracker/views/form-deleteextrafieldelement.php:61
 #: common/tracker/views/form-updatecanned.php:43
 #: common/tracker/views/form-updatecanned.php:48
-#: common/tracker/views/form-updateextrafieldelement.php:55
+#: common/tracker/views/form-updateextrafieldelement.php:57
 #: common/tracker/views/form-updateextrafield.php:49
 #: common/tracker/views/form-updateextrafield.php:83
 #: common/tracker/views/form-updatetracker.php:53
@@ -3421,20 +3422,20 @@ msgstr "Rol: %s"
 msgid "Wrong destination role"
 msgstr ""
 
-#: common/include/Group.class.php:2286
+#: common/include/Group.class.php:2293
 msgid "Group already active"
 msgstr "Este grupo xa está activo"
 
-#: common/include/Group.class.php:2526
+#: common/include/Group.class.php:2533
 #, fuzzy
 msgid "Approved"
 msgstr "Aprobar/rexeitar "
 
-#: common/include/Group.class.php:2549 common/include/Group.class.php:2619
+#: common/include/Group.class.php:2556 common/include/Group.class.php:2626
 msgid "Group does not have any administrators."
 msgstr "O grupo non ten ningún administrador."
 
-#: common/include/Group.class.php:2557
+#: common/include/Group.class.php:2564
 #, php-format
 msgid ""
 "Your project registration for %4$s has been approved.\n"
@@ -3509,66 +3510,66 @@ msgstr ""
 "\n"
 "-- o equipo de %4$s"
 
-#: common/include/Group.class.php:2593
+#: common/include/Group.class.php:2600
 #, php-format
 msgid "%s Project Approved"
 msgstr "O proxecto %s foi aprobado "
 
-#: common/include/Group.class.php:2626
+#: common/include/Group.class.php:2633
 #, php-format
 msgid "Your project registration for %s has been denied."
 msgstr "O seu rexistro do proxecto en %s foi denegado."
 
-#: common/include/Group.class.php:2627 common/include/Group.class.php:2681
-#: common/include/Group.class.php:2699 www/register/index.php:183
+#: common/include/Group.class.php:2634 common/include/Group.class.php:2688
+#: common/include/Group.class.php:2706 www/register/index.php:183
 #: www/register/index.php:189
 msgid "Project Full Name"
 msgstr "Nome completo de proxecto"
 
-#: common/include/Group.class.php:2628 plugins/projectlabels/www/index.php:172
+#: common/include/Group.class.php:2635 plugins/projectlabels/www/index.php:172
 #: www/admin/approve-pending.php:190 www/admin/database.php:155
 #: www/admin/groupedit.php:170 www/admin/vhost.php:118
 #: www/register/index.php:214
 msgid "Project Unix Name"
 msgstr "Nome de Unix do proxecto"
 
-#: common/include/Group.class.php:2629
+#: common/include/Group.class.php:2636
 msgid "Reasons for negative decision"
 msgstr "Razóns para o denegar"
 
-#: common/include/Group.class.php:2641
+#: common/include/Group.class.php:2648
 #, php-format
 msgid "%s Project Denied"
 msgstr "O proxecto %s foi denegado"
 
-#: common/include/Group.class.php:2665
+#: common/include/Group.class.php:2672
 msgid "Could not find user who has submitted the project."
 msgstr "Non foi posíbel atopar o usuario que enviou o proxecto."
 
-#: common/include/Group.class.php:2672
+#: common/include/Group.class.php:2679
 #, fuzzy
 msgid "There is no administrator to send the mail to."
 msgstr "Non hai ningún administrador a quen enviarlle o correo."
 
-#: common/include/Group.class.php:2680 common/include/Group.class.php:2691
-#: common/include/Group.class.php:2698 common/include/Group.class.php:2704
+#: common/include/Group.class.php:2687 common/include/Group.class.php:2698
+#: common/include/Group.class.php:2705 common/include/Group.class.php:2711
 #, php-format
 msgid "New %s Project Submitted"
 msgstr "Novo proxecto %s enviado"
 
-#: common/include/Group.class.php:2682 common/include/Group.class.php:2700
+#: common/include/Group.class.php:2689 common/include/Group.class.php:2707
 #: www/admin/approve-pending.php:192
 msgid "Submitted Description"
 msgstr "Descrición proporcionada"
 
-#: common/include/Group.class.php:2689
+#: common/include/Group.class.php:2696
 #, fuzzy
 msgid "Please visit the following URL to approve or reject this project"
 msgstr ""
 "Por favor, visite o seguinte URL para completar o cambio de correo "
 "electrónico:"
 
-#: common/include/Group.class.php:2701
+#: common/include/Group.class.php:2708
 #, php-format
 msgid ""
 "The %s admin team will now examine your project submission. You will be "
@@ -3577,39 +3578,39 @@ msgstr ""
 "O equipo de administración de %s examinará o seu envío, e notificaráselle a "
 "súa decisión."
 
-#: common/include/Group.class.php:2719
+#: common/include/Group.class.php:2726
 msgid "Group name is too short"
 msgstr "O nome de grupo é demasiado corto"
 
-#: common/include/Group.class.php:2722
+#: common/include/Group.class.php:2729
 msgid "Group name is too long"
 msgstr "O nome de grupo é demasiado longo"
 
-#: common/include/Group.class.php:2725
+#: common/include/Group.class.php:2732
 msgid "Group name already taken"
 msgstr "O nome de grupo xa está en uso"
 
-#: common/include/Group.class.php:2806
+#: common/include/Group.class.php:2813
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group Unix Status: %s"
 msgstr "Erro: Non se puido cambiar o estado de grupo: %s"
 
-#: common/include/Group.class.php:2870
+#: common/include/Group.class.php:2877
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr "Erro - Non foi posíbel actualizar o estado Unix de grupo: %s"
 
-#: common/include/Group.class.php:2888
+#: common/include/Group.class.php:2895
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
 msgstr "Erro - Non foi posíbel actualizar o estado Unix de grupo: %s"
 
-#: common/include/Group.class.php:2906
+#: common/include/Group.class.php:2913
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
 msgstr "Erro - Non foi posíbel actualizar o estado Unix de grupo: %s"
 
-#: common/include/Group.class.php:2924
+#: common/include/Group.class.php:2931
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr "Erro - Non foi posíbel actualizar o estado Unix de grupo: %s"
@@ -5250,7 +5251,7 @@ msgstr "Texto de formulario libre para a páxina de \"navegar polos elementos\""
 #: common/tracker/views/form-edittemplate.php:24
 #: common/tracker/views/form-extrafieldcopy.php:94
 #: common/tracker/views/form-updatecanned.php:52
-#: common/tracker/views/form-updateextrafieldelement.php:70
+#: common/tracker/views/form-updateextrafieldelement.php:72
 #: common/tracker/views/form-updateextrafield.php:94
 #: common/tracker/views/form-updatetracker.php:81
 #: common/tracker/views/form-workflow.php:123
@@ -5382,7 +5383,7 @@ msgstr "Eliminar permanentemente este rexistro."
 #: common/tracker/actions/admin-updates.php:572
 #: common/tracker/views/form-addextrafieldoption.php:31
 #: common/tracker/views/form-deleteextrafieldelement.php:34
-#: common/tracker/views/form-updateextrafieldelement.php:33
+#: common/tracker/views/form-updateextrafieldelement.php:34
 #: common/tracker/views/form-updateextrafield.php:36
 msgid "Unable to create ArtifactExtraField Object"
 msgstr "Non se puido crear o obxecto ArtifactExtraField"
@@ -5434,7 +5435,7 @@ msgstr "Actualizouse o campo personalizado"
 #: common/tracker/actions/admin-updates.php:259
 #: common/tracker/actions/admin-updates.php:578
 #: common/tracker/views/form-deleteextrafieldelement.php:41
-#: common/tracker/views/form-updateextrafieldelement.php:40
+#: common/tracker/views/form-updateextrafieldelement.php:41
 msgid "Unable to create ArtifactExtraFieldElement Object"
 msgstr "non se puido crear o ArtifactExtraFieldElement"
 
@@ -6818,7 +6819,8 @@ msgstr "Corpo da mensaxe"
 msgid "Add/Update Custom Field Elements in %s"
 msgstr "Engadir / actualizar elementos de campo personalizado en %s"
 
-#: common/tracker/views/form-addextrafieldoption.php:43
+#: common/tracker/views/form-addextrafieldoption.php:39
+#: common/tracker/views/form-updateextrafieldelement.php:49
 msgid "Custom field name"
 msgstr "Nome de campo personalizado"
 
@@ -6854,8 +6856,8 @@ msgid "Alphabetical order"
 msgstr "Orde alfabética"
 
 #: common/tracker/views/form-addextrafieldoption.php:97
-msgid "You have not defined any elements"
-msgstr "Non definiu ningún elemento"
+msgid "You have not defined any elements."
+msgstr "Non definiu ningún elemento."
 
 #: common/tracker/views/form-addextrafieldoption.php:103
 msgid "Add New Element"
@@ -7222,7 +7224,7 @@ msgid "Delete a custom field element in: %s"
 msgstr "Modificar un elemento de campo personalizado en %s"
 
 #: common/tracker/views/form-deleteextrafieldelement.php:61
-#: common/tracker/views/form-updateextrafieldelement.php:55
+#: common/tracker/views/form-updateextrafieldelement.php:57
 msgid "Element"
 msgstr "Elemento"
 
@@ -7287,21 +7289,21 @@ msgstr "Aos rexistros e campos personalizados"
 msgid "Modify Canned Responses In %s"
 msgstr "Modificar as respostas prefixadas en %s"
 
-#: common/tracker/views/form-updateextrafieldelement.php:44
+#: common/tracker/views/form-updateextrafieldelement.php:45
 #, fuzzy, php-format
 msgid "Update a custom field element in %s"
 msgstr "Modificar un elemento de campo personalizado en %s"
 
-#: common/tracker/views/form-updateextrafieldelement.php:67
+#: common/tracker/views/form-updateextrafieldelement.php:69
 #: common/tracker/views/form-updateextrafield.php:90
 msgid ""
 "It is not recommended that you change the custom field name because other "
 "things are dependent upon it. When you change the custom field name, all "
-"related items will be changed to the new name"
+"related items will be changed to the new name."
 msgstr ""
 "Non se recomenda que cambie o nome do campo personalizado porque hai outras "
 "cousas que dependen del. Cando cambia o nome do campo personalizado, todos "
-"os elementos relacionados cambiaranse ao nome novo"
+"os elementos relacionados cambiaranse ao nome novo."
 
 #: common/tracker/views/form-updateextrafield.php:30
 #, php-format
