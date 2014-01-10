@@ -4,11 +4,26 @@
  *
  * RDF Parser for ARC2 to OSLC Core RDF JSON format
  *
- * Copyright (c) 2010 Olivier Berger, Institut Telecom
+ * Copyright (c) 2010-2014 Olivier Berger, Institut Mines-Telecom
  *
- * homepage: See http://oslc-tools.svn.sourceforge.net/viewvc/oslc-tools/language-libs/php/arc2-plugin/
- * license:
+ * license: This file is released under the dual Apache 2 + GNU GPL
+ * v2+ licnces (see the 2 first paragraphs below)
+ * ---------------
+ * This file is part of FusionForge. FusionForge is free software;
+ * you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the Licence, or (at your option)
+ * any later version.
  *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with FusionForge; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ * ---------------
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,6 +35,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * --------------
  *
  * class:    ARC2_OSLCCoreRDFJSONParserPlugin
  * author:   Olivier Berger
@@ -33,9 +49,6 @@
  * RDF content formatted along the OSLC (Open Services for Lifecycle
  * Collaboration) Core specs guidelines, which could be used in the
  * FusionForge project import plugin.
- *
- * The most up-to-date version is maintained in the frame of the OSLC
- * support Open Source project at http://oslc-tools.sourceforge.net/.
  *
  * $Id$
  *
