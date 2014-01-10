@@ -61,9 +61,8 @@ msgstr "Grupa dokumentów: Nazwa jest wymagana"
 #: common/docman/actions/updatewebdavinterface.php:27
 #: common/docman/actions/validatefile.php:40
 #: common/docman/views/addfile.php:53
-#, fuzzy
 msgid "Document Manager Action Denied."
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: common/docman/actions/addfile.php:75
 msgid "No valid folder was selected."
@@ -114,9 +113,8 @@ msgstr "Grupa dokumentów: Nazwa jest wymagana"
 #: common/docman/actions/reservefile.php:38
 #: common/docman/actions/trashfile.php:50
 #: common/docman/actions/validatefile.php:45
-#, fuzzy
 msgid "Document(s)"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: common/docman/actions/delfile.php:48
 #: common/docman/actions/monitordirectory.php:51
@@ -144,9 +142,8 @@ msgid "on project %s"
 msgstr "Zgłoś chęć dołączenia do projektu %1$s"
 
 #: common/docman/actions/editfile.php:69
-#, fuzzy
 msgid "No document found to update"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: common/docman/actions/editfile.php:89
 #, php-format
@@ -417,9 +414,8 @@ msgstr ""
 #: common/tracker/Artifact.class.php:628
 #: common/tracker/ArtifactType.class.php:555 www/developer/monitor.php:75
 #: www/frs/monitor.php:57 www/frs/monitor.php:58
-#, fuzzy
 msgid "Monitoring Stopped"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/docman/actions/monitordirectory.php:76
 #: common/docman/actions/monitorfile.php:80
@@ -532,24 +528,21 @@ msgid "Document already published in this folder"
 msgstr "Zamieść nową dokumentację"
 
 #: common/docman/Document.class.php:198 common/docman/Document.class.php:205
-#, fuzzy
 msgid "Error Adding Document:"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/docman/Document.class.php:198
 msgid "Not a file"
 msgstr ""
 
 #: common/docman/Document.class.php:214
-#, fuzzy
 msgid "Error fetching Document"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/docman/Document.class.php:225 common/docman/Document.class.php:890
 #: common/docman/Document.class.php:1106
-#, fuzzy
 msgid "Error updating document group:"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/docman/Document.class.php:252
 msgid "Document: Invalid docid"
@@ -571,24 +564,20 @@ msgid "Unable To Clear Monitor"
 msgstr ""
 
 #: common/docman/Document.class.php:678
-#, fuzzy
 msgid "Document lock failed"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: common/docman/Document.class.php:706
-#, fuzzy
 msgid "Document reservation failed"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: common/docman/Document.class.php:944 common/docman/views/additem.php:57
-#, fuzzy
 msgid "New Document"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/docman/Document.class.php:946
-#, fuzzy
 msgid "Updated document"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/docman/Document.class.php:946 common/docman/views/listfile.php:285
 #: common/widget/Widget_MyLatestSvnCommits.class.php:66
@@ -615,9 +604,8 @@ msgid "Document Title"
 msgstr ""
 
 #: common/docman/Document.class.php:952
-#, fuzzy
 msgid "Document description"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: common/docman/Document.class.php:953
 #: common/docman/DocumentGroup.class.php:731
@@ -637,9 +625,8 @@ msgid "Docman"
 msgstr ""
 
 #: common/docman/Document.class.php:1025
-#, fuzzy
 msgid "Error Deleting Document:"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/docman/Document.class.php:1101
 #: common/docman/DocumentGroup.class.php:879
@@ -653,9 +640,8 @@ msgstr "Nie znaleziono żadnych dokumentów"
 #: common/docman/DocumentGroup.class.php:67
 #: common/docman/views/listfile.php:173
 #: common/docman/views/listtrashfile.php:116
-#, fuzzy
 msgid "Document Folder"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: common/docman/DocumentGroup.class.php:101
 msgid "Name is required"
@@ -673,9 +659,8 @@ msgid "Folder name already exists"
 msgstr "Istnieje już użytkownik o takim loginie."
 
 #: common/docman/DocumentGroup.class.php:147
-#, fuzzy
 msgid "Error Adding Folder:"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/docman/DocumentGroup.class.php:241
 msgid "Unsupported injected file:"
@@ -708,9 +693,8 @@ msgid "New Folder"
 msgstr "Dodaj Grupę Dokumentów"
 
 #: common/docman/DocumentGroup.class.php:725
-#, fuzzy
 msgid "Updated folder by"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/docman/DocumentGroup.class.php:733
 #, fuzzy
@@ -744,9 +728,8 @@ msgstr ""
 
 #: common/docman/DocumentGroupFactory.class.php:86
 #: common/docman/DocumentGroupFactory.class.php:120
-#, fuzzy
 msgid "No Documents Folder Found"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: common/docman/DocumentManager.class.php:190
 msgid "Number of documents in this folder"
@@ -913,9 +896,8 @@ msgid "(at least %s characters)"
 msgstr ""
 
 #: common/docman/views/addfile.php:116
-#, fuzzy
 msgid "Type of Document"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: common/docman/views/addfile.php:118 common/docman/views/addfile.php:144
 #: common/docman/views/editfile.php:51
@@ -993,9 +975,8 @@ msgid "Documents folder that document belongs in"
 msgstr ""
 
 #: common/docman/views/addfile.php:204
-#, fuzzy
 msgid "Status of that document"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/docman/views/addfile.php:212 plugins/mantisbt/view/addIssue.php:148
 msgid "Mandatory fields"
@@ -1014,9 +995,8 @@ msgstr ""
 #: common/docman/views/pendingfiles.php:37
 #: common/docman/views/reporting.php:53 common/docman/views/search.php:34
 #: common/docman/views/tree.php:36 common/docman/views/views.php:25
-#, fuzzy
 msgid "Document Manager Access Denied"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: common/docman/views/additem.php:56
 #, fuzzy
@@ -1045,12 +1025,12 @@ msgstr ""
 #: common/docman/views/addsubdocgroup.php:56
 #, fuzzy
 msgid "Name of the document subfolder to create"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: common/docman/views/addsubdocgroup.php:59
 #, fuzzy
 msgid "Name of the document folder to create"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: common/docman/views/addsubdocgroup.php:63 www/admin/responses_admin.php:132
 #: www/project/admin/database.php:180 www/project/admin/vhost.php:122
@@ -1212,7 +1192,7 @@ msgstr "Edytuj grupę"
 #: common/docman/views/listfile.php:183
 #, fuzzy
 msgid "Add a new item in this folder"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/docman/views/listfile.php:190
 msgid "Download this folder as a ZIP"
@@ -1221,12 +1201,12 @@ msgstr ""
 #: common/docman/views/listfile.php:195
 #, fuzzy
 msgid "Stop monitoring this folder"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/docman/views/listfile.php:198
 #, fuzzy
 msgid "Start monitoring this folder"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/docman/views/listfile.php:218
 #: common/docman/views/listtrashfile.php:129
@@ -1363,7 +1343,7 @@ msgstr ""
 #: common/docman/views/pendingfiles.php:80
 #, fuzzy
 msgid "View this document"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/docman/views/listfile.php:257
 #: common/docman/views/listtrashfile.php:156
@@ -1433,7 +1413,7 @@ msgstr ""
 #: common/docman/views/listfile.php:277 common/docman/views/listfile.php:279
 #, fuzzy
 msgid "Reserved Document"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: common/docman/views/listfile.php:325 common/docman/views/listfile.php:336
 msgid "Move this document to trash"
@@ -1453,7 +1433,7 @@ msgstr ""
 #: common/docman/views/listfile.php:328
 #, fuzzy
 msgid "Reserve this document"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/docman/views/listfile.php:333
 msgid "Enforce reservation"
@@ -1467,12 +1447,12 @@ msgstr "Uwagi do wydania"
 #: common/docman/views/listfile.php:344
 #, fuzzy
 msgid "Stop monitoring this document"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/docman/views/listfile.php:347
 #, fuzzy
 msgid "Start monitoring this document"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/docman/views/listfile.php:358
 #: common/docman/views/listtrashfile.php:199
@@ -1489,7 +1469,7 @@ msgstr ""
 #: common/docman/views/listfile.php:362
 #, fuzzy
 msgid "Move to trash"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/docman/views/listfile.php:364
 msgid "Reserve for later edition"
@@ -1526,7 +1506,7 @@ msgstr ""
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:88
 #, fuzzy
 msgid "No documents."
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/docman/views/listtrashfile.php:93
 msgid "Delete permanently all documents and folders with deleted status."
@@ -1543,7 +1523,7 @@ msgstr ""
 #: common/docman/views/listtrashfile.php:191
 #, fuzzy
 msgid "Delete permanently this document."
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/docman/views/listtrashfile.php:202
 #: plugins/mailman/www/admin/deletelist.php:60 www/admin/groupdelete.php:61
@@ -1554,7 +1534,7 @@ msgstr ""
 #: common/docman/views/menu.php:44
 #, fuzzy
 msgid "View Documents"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/docman/views/menu.php:46
 msgid ""
@@ -1565,7 +1545,7 @@ msgstr ""
 #: common/docman/views/menu.php:49
 #, fuzzy
 msgid "Add new item"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/docman/views/menu.php:51
 msgid ""
@@ -1630,7 +1610,7 @@ msgstr ""
 #: common/docman/views/pendingfiles.php:42
 #, fuzzy
 msgid "No pending documents."
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/docman/views/pendingfiles.php:62
 msgid "Pending files"
@@ -1971,7 +1951,7 @@ msgstr ""
 #: common/docman/views/reporting.php:169 www/activity/index.php:317
 #, fuzzy
 msgid "Document"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: common/docman/views/reporting.php:169
 #: plugins/oauthprovider/www/access_tokens.php:58
@@ -2022,7 +2002,7 @@ msgstr ""
 #: common/docman/views/search.php:62
 #, fuzzy
 msgid "Searched words"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/docman/views/search.php:65
 #, fuzzy
@@ -2048,7 +2028,7 @@ msgstr ""
 #: common/docman/views/search.php:68
 #, fuzzy
 msgid "Inside documents"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: common/docman/views/search.php:75
 msgid "search into childs following project hierarchy"
@@ -2066,7 +2046,7 @@ msgstr ""
 #: common/docman/views/search.php:129
 #, fuzzy
 msgid "Your search did not match any documents."
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/docman/views/search.php:154 common/docman/views/tree.php:64
 #, fuzzy
@@ -2371,7 +2351,7 @@ msgstr ""
 #: common/forum/Forum.class.php:230
 #, fuzzy
 msgid "Error Adding Forum"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/forum/Forum.class.php:241 cronjobs/homedirs.php:156
 #: www/account/first.php:29
@@ -2429,7 +2409,7 @@ msgstr ""
 #: common/forum/Forum.class.php:664 common/forum/Forum.class.php:672
 #, fuzzy
 msgid "Error Deleting Forum"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/forum/ForumFactory.class.php:56 common/forum/ForumHTML.class.php:58
 #: common/include/rbac_texts.php:158 www/forum/forum.php:156
@@ -2449,7 +2429,7 @@ msgstr ""
 #: common/forum/ForumFactory.class.php:192
 #, fuzzy
 msgid "Thread not found"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: common/forum/ForumHTML.class.php:68 www/export/rssAboTask.php:171
 msgid "Posted by"
@@ -2707,7 +2687,7 @@ msgstr ""
 #: common/forum/ForumMessage.class.php:825
 #, fuzzy
 msgid "Message not found"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: common/forum/ForumMessageFactory.class.php:58
 #, fuzzy
@@ -2782,7 +2762,7 @@ msgstr "Istnieje już użytkownik o takim loginie."
 #: common/frs/FRSPackage.class.php:165
 #, fuzzy
 msgid "Error Adding Package: "
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/frs/FRSPackage.class.php:205
 #, fuzzy
@@ -2796,7 +2776,7 @@ msgstr ""
 #: common/frs/FRSPackage.class.php:323
 #, fuzzy
 msgid "Error On querying monitor count: "
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/frs/FRSPackage.class.php:384
 #, fuzzy
@@ -3131,7 +3111,7 @@ msgstr ""
 #: common/include/Group.class.php:380
 #, fuzzy, php-format
 msgid "Error: Cannot get group id: %s"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/include/Group.class.php:427 common/include/Group.class.php:510
 msgid "Could not get permission."
@@ -3140,7 +3120,7 @@ msgstr ""
 #: common/include/Group.class.php:448
 #, fuzzy, php-format
 msgid "Error: Cannot change group properties: %s"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/include/Group.class.php:529
 #, php-format
@@ -3276,7 +3256,7 @@ msgstr ""
 #: common/include/Group.class.php:1901 common/include/Group.class.php:1910
 #, fuzzy
 msgid "Error Deleting Project:"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/include/Group.class.php:1982
 msgid "User is not active. Only active users can be added."
@@ -3328,7 +3308,7 @@ msgstr ""
 #: common/include/Group.class.php:2533
 #, fuzzy
 msgid "Approved"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: common/include/Group.class.php:2556 common/include/Group.class.php:2626
 msgid "Group does not have any administrators."
@@ -3850,12 +3830,12 @@ msgstr ""
 #: common/include/RBAC.php:194
 #, fuzzy
 msgid "Cannot link to home project"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/include/RBAC.php:229
 #, fuzzy
 msgid "Cannot unlink from home project"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/include/RBAC.php:594
 msgid "UNKNOWN (internal error, report bug to FusionForge)"
@@ -4038,7 +4018,7 @@ msgstr "Zamieść nową dokumentację"
 #: common/include/rbac_texts.php:133
 #, fuzzy
 msgid "Approve documents"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: common/include/rbac_texts.php:134
 msgid "Doc manager administration"
@@ -4219,7 +4199,7 @@ msgstr ""
 #: common/include/Storage.class.php:56
 #, fuzzy
 msgid "Cannot create directory:"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/include/Storage.class.php:66
 #, php-format
@@ -4234,7 +4214,7 @@ msgstr ""
 #: common/include/User.class.php:246
 #, fuzzy
 msgid "User Not Found"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: common/include/User.class.php:306
 msgid "You must supply a theme"
@@ -6003,12 +5983,12 @@ msgstr "Niepoprawne hasło"
 #: common/tracker/Artifact.class.php:516
 #, fuzzy
 msgid "Error deleting extra field data: "
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:527
 #, fuzzy
 msgid "Error deleting file from db: "
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:535
 #, fuzzy
@@ -6018,17 +5998,17 @@ msgstr ""
 #: common/tracker/Artifact.class.php:543
 #, fuzzy
 msgid "Error deleting history: "
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:551
 #, fuzzy
 msgid "Error deleting monitor: "
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:559
 #, fuzzy
 msgid "Error deleting artifact: "
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:570 common/tracker/Artifact.class.php:580
 msgid "Error updating artifact counts: "
@@ -6344,7 +6324,7 @@ msgstr ""
 #: common/tracker/include/ArtifactTypeHtml.class.php:64
 #, fuzzy
 msgid "Add a new issue."
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:70
 msgid "Various graph about statistics."
@@ -6486,7 +6466,7 @@ msgstr "Przeglądaj Repozytorium Subversion"
 #: common/tracker/views/form-addcanned.php:63
 #, fuzzy
 msgid "Add New Canned Response"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/tracker/views/form-addcanned.php:65
 #: common/tracker/views/form-updatecanned.php:38
@@ -6670,7 +6650,7 @@ msgstr ""
 #: common/tracker/views/form-adminroadmap.php:80
 #, fuzzy
 msgid "Cannot create roadmap: "
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:88
 #, php-format
@@ -6755,7 +6735,7 @@ msgstr ""
 #: common/tracker/views/form-adminroadmap.php:221
 #, fuzzy
 msgid "Not used"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:252 www/tracker/roadmap.php:201
 #: www/tracker/roadmap.php:211 www/tracker/roadmap.php:223
@@ -6773,7 +6753,7 @@ msgstr "Uwagi do wydania"
 #: common/tracker/views/form-adminroadmap.php:370
 #, fuzzy
 msgid "Cannot modify release order: "
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:390
 #: common/tracker/views/form-adminroadmap.php:475
@@ -6876,7 +6856,7 @@ msgstr ""
 #: common/tracker/views/form-customizelist.php:123
 #, fuzzy
 msgid "Add New Field"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/tracker/views/form-deleteextrafieldelement.php:46
 #, php-format
@@ -7047,7 +7027,7 @@ msgstr ""
 #: common/widget/Widget.class.php:366
 #, fuzzy
 msgid "General"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: common/widget/WidgetLayoutManager.class.php:182
 #, php-format
@@ -7174,7 +7154,7 @@ msgstr "Zamieść nową dokumentację"
 #: common/widget/Widget_MyArtifacts.class.php:253
 #, fuzzy
 msgid "Monitored"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: common/widget/Widget_MyArtifacts.class.php:263
 #, fuzzy
@@ -7241,7 +7221,7 @@ msgstr ""
 #: common/widget/Widget_MyMonitoredDocuments.class.php:39
 #, fuzzy
 msgid "Monitored Documents"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: common/widget/Widget_MyMonitoredDocuments.class.php:47
 msgid "You are not monitoring any documents."
@@ -7320,7 +7300,7 @@ msgstr ""
 #: common/widget/Widget_MyMonitoredFp.class.php:55
 #, fuzzy
 msgid "You are not monitoring any files."
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/widget/Widget_MyMonitoredFp.class.php:55
 msgid ""
@@ -7462,7 +7442,7 @@ msgstr ""
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:42
 #, fuzzy
 msgid "Last 4 weeks Documents Manager Activity"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:88
 msgid "new files [F]"
@@ -7506,7 +7486,7 @@ msgstr ""
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:162
 #, fuzzy
 msgid "updated Files"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:137
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:153
@@ -8271,7 +8251,7 @@ msgstr ""
 #: plugins/authopenid/www/index.php:128 plugins/authopenid/www/index.php:134
 #, fuzzy
 msgid "Add new identity"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: plugins/authopenid/www/index.php:130
 msgid "You can add your own OpenID identities in the form below."
@@ -8305,7 +8285,7 @@ msgstr ""
 #: plugins/authwebid/www/post-login.php:85
 #, fuzzy, php-format
 msgid "Unknown user with identity “%s”"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: plugins/authwebid/include/AuthWebIDPlugin.class.php:82
 #, php-format
@@ -8321,7 +8301,7 @@ msgstr ""
 #: plugins/authwebid/include/AuthWebIDPlugin.class.php:273
 #, fuzzy, php-format
 msgid "Cannot bind new identity: %s"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: plugins/authwebid/include/AuthWebIDPlugin.class.php:288
 #, fuzzy
@@ -8356,7 +8336,7 @@ msgstr ""
 #: plugins/authwebid/www/index.php:95 plugins/authwebid/www/index.php:123
 #, fuzzy
 msgid "Bind a new WebID"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: plugins/authwebid/www/index.php:99
 msgid "You can add your own WebID identities in the form below."
@@ -8409,12 +8389,12 @@ msgstr ""
 #: plugins/blocks/common/blocksPlugin.class.php:52
 #, fuzzy
 msgid "Blocks"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: plugins/blocks/common/blocksPlugin.class.php:65
 #, fuzzy
 msgid "Blocks Admin"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: plugins/blocks/common/blocks_Widget_ProjectSummary.class.php:43
 msgid "Summary Page block of text"
@@ -8824,7 +8804,7 @@ msgstr ""
 #: plugins/contribtracker/www/global_admin.php:397
 #, fuzzy
 msgid "Role description"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: plugins/contribtracker/www/global_admin.php:389
 #, fuzzy
@@ -8871,7 +8851,7 @@ msgstr "Login:"
 #: plugins/contribtracker/www/global_admin.php:468
 #, fuzzy
 msgid "Actor description"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: plugins/contribtracker/www/global_admin.php:440
 #: plugins/contribtracker/www/global_admin.php:470
@@ -9702,14 +9682,14 @@ msgstr ""
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:112
 #, fuzzy, php-format
 msgid "No matches found for “%s”"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: plugins/globalsearch/www/index.php:162
 #: www/search/include/renderers/HtmlGroupSearchRenderer.class.php:69
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:111
 #, fuzzy, php-format
 msgid "Search results for “%s”"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: plugins/globalsearch/www/index.php:166 www/admin/grouplist.php:67
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:45
@@ -10018,7 +9998,7 @@ msgstr ""
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:89
 #, fuzzy
 msgid "Add new tab"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:127
 msgid ""
@@ -10062,7 +10042,7 @@ msgstr ""
 #: plugins/helloworld/include/helloworldPlugin.class.php:116
 #, fuzzy
 msgid "HelloWorld Admin"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: plugins/helloworld/include/HelloWorldPluginDescriptor.class.php:29
 msgid "HelloWorld"
@@ -10429,7 +10409,7 @@ msgstr ""
 #: plugins/hudson/include/hudson_Widget_JobTestTrend.class.php:93
 #, fuzzy
 msgid "Job not found."
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: plugins/hudson/include/hudson_Widget_JobLastArtifacts.class.php:47
 #, php-format
@@ -10487,7 +10467,7 @@ msgstr ""
 #: plugins/hudson/include/hudson_Widget_JobTestTrend.class.php:91
 #, fuzzy
 msgid "No test found for this job."
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: plugins/hudson/include/hudson_Widget_JobTestTrend.class.php:45
 #: plugins/hudson/include/hudson_Widget_JobTestTrend.class.php:86
@@ -10702,7 +10682,7 @@ msgstr ""
 #: plugins/mailman/www/index.php:55 www/mail/index.php:68
 #, fuzzy, php-format
 msgid "No Lists found for %s"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: plugins/mailman/www/index.php:56 www/mail/index.php:69
 msgid "Project administrators use the admin link to request mailing lists."
@@ -10870,7 +10850,7 @@ msgstr ""
 #: plugins/mantisbt/action/updateIssue.php:45
 #, fuzzy
 msgid "No type found."
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: plugins/mantisbt/action/updateuserConf.php:34
 msgid "MantisBT User configuration successfully updated."
@@ -10912,12 +10892,12 @@ msgstr ""
 #: plugins/projectimport/www/index.php:628 www/admin/search.php:176
 #, fuzzy
 msgid "No project found"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:245
 #, fuzzy
 msgid "No project found in MantisBT"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:251
 msgid "Cannot delete in database"
@@ -10966,7 +10946,7 @@ msgstr ""
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:595
 #, fuzzy
 msgid "MantisBT project not found"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:692
 msgid "Global MantisBT admin"
@@ -10987,7 +10967,7 @@ msgstr ""
 #: plugins/mantisbt/common/mantisbt_Widget_ProjectLastIssues.class.php:38
 #, fuzzy
 msgid "MantisBT description."
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: plugins/mantisbt/common/mantisbt_Widget_ProjectLastIssues.class.php:42
 msgid "Not yet implemented"
@@ -11101,12 +11081,12 @@ msgstr ""
 #: plugins/mantisbt/view/admin/addCategory.php:31
 #, fuzzy
 msgid "Add a new category"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: plugins/mantisbt/view/admin/addVersion.php:34
 #, fuzzy
 msgid "Add a new version"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: plugins/mantisbt/view/admin/editVersion.php:56
 msgid "Version Detail"
@@ -11326,7 +11306,7 @@ msgstr "Nazwisko:"
 #: plugins/mantisbt/view/viewIssues.php:495
 #, fuzzy
 msgid "Add a new ticket"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: plugins/mantisbt/view/viewNote.php:59
 #: plugins/quota_management/www/quota_admin.php:130
@@ -11336,7 +11316,7 @@ msgstr ""
 #: plugins/mantisbt/view/viewNote.php:70
 #, fuzzy
 msgid "No notes for this ticket"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: plugins/mantisbt/www/getAttachment.php:41 plugins/mantisbt/www/index.php:63
 #: plugins/quota_management/www/index.php:33 www/developer/index.php:41
@@ -11760,7 +11740,7 @@ msgstr ""
 #: plugins/oauthconsumer/www/get_access_token.php:131
 #, fuzzy
 msgid "Error in curl : "
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: plugins/oauthconsumer/www/get_access_token.php:138
 #, fuzzy
@@ -11855,7 +11835,7 @@ msgstr ""
 #: plugins/oauthconsumer/www/providers.php:69
 #, fuzzy
 msgid "Add a new OAuth provider"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: plugins/oauthconsumer/www/providers.php:108
 #, fuzzy
@@ -11952,7 +11932,7 @@ msgstr ""
 #: plugins/oauthprovider/www/consumer_update_page.php:84
 #, fuzzy
 msgid "Update Consumer"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: plugins/oauthprovider/www/consumer_manage.php:100
 #, fuzzy
@@ -12005,7 +11985,7 @@ msgstr ""
 #: plugins/oauthprovider/www/token_deny.php:57
 #, fuzzy
 msgid "Authorization Denied"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: plugins/oauthprovider/www/token_deny.php:59
 #, php-format
@@ -12025,7 +12005,7 @@ msgstr ""
 #: plugins/oslc/include/oslcPlugin.class.php:153
 #, fuzzy
 msgid "oslc Admin"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: plugins/phpcaptcha/common/phpcaptchaPlugin.class.php:45
 msgid "Wrong captcha code"
@@ -12606,7 +12586,7 @@ msgstr "Nazwa nowej grupy"
 #: plugins/projects-hierarchy/view/admin_project_link.php:51
 #, fuzzy
 msgid "Add new child"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: plugins/projects-hierarchy/view/admin_project_link.php:54
 msgid "Select a project: "
@@ -12642,7 +12622,7 @@ msgstr ""
 #: plugins/projects-hierarchy/view/admin_project_link.php:88
 #, fuzzy
 msgid "No pending requests"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:37
 msgid "Enable Tree in projects tab."
@@ -13687,7 +13667,7 @@ msgstr ""
 #: plugins/soapadmin/include/soapadminPlugin.class.php:148
 #, fuzzy
 msgid "SoapAdmin Admin"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: plugins/twitter/www/checks.php:99
 msgid "You have no Twitter Access Tokens registered in the database currently"
@@ -13745,7 +13725,7 @@ msgstr ""
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:58
 #, fuzzy
 msgid "Add a new webanalytics reference"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: plugins/wiki/common/wikiconfig.class.php:39
 msgid ""
@@ -13776,7 +13756,7 @@ msgstr ""
 #: plugins/wiki/common/WikiPlugin.class.php:74
 #, fuzzy
 msgid "Wiki Admin"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: plugins/wiki/common/WikiPlugin.class.php:91
 #, fuzzy
@@ -14058,7 +14038,7 @@ msgstr ""
 #: www/account/editsshkeys.php:73
 #, fuzzy
 msgid "Add a new ssh key"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: www/account/editsshkeys.php:74
 msgid ""
@@ -14467,7 +14447,7 @@ msgstr ""
 #: www/account/verify.php:57
 #, fuzzy
 msgid "Error while activating account"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: www/account/verify.php:66
 msgid "Verify"
@@ -14498,12 +14478,12 @@ msgstr ""
 #: www/activity/index.php:124
 #, fuzzy
 msgid "New Documents"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: www/activity/index.php:126
 #, fuzzy
 msgid "Updated Documents"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: www/activity/index.php:128
 #, fuzzy
@@ -15981,7 +15961,7 @@ msgstr ""
 #: www/docman/index.php:118
 #, fuzzy
 msgid "Documents for "
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: www/docman/view.php:60 www/docman/view.php:237
 msgid "Document is not available."
@@ -16006,7 +15986,7 @@ msgstr ""
 #: www/docman/view.php:139
 #, fuzzy
 msgid "No documents to backup."
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: www/docman/view.php:143
 msgid "ZIP extension is missing: no backup function"
@@ -16236,7 +16216,7 @@ msgstr ""
 #: www/forum/index.php:58
 #, fuzzy, php-format
 msgid "No Forums Found for %s"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: www/forum/admin/index.php:404
 #, php-format
@@ -16250,7 +16230,7 @@ msgstr ""
 #: www/forum/admin/monitor.php:56
 #, fuzzy
 msgid "No Monitoring Users"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: www/forum/admin/monitor.php:61
 #, fuzzy
@@ -16409,12 +16389,12 @@ msgstr ""
 #: www/forum/monitor.php:72
 #, fuzzy
 msgid "Forum Monitoring Deactivated"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: www/forum/monitor.php:78
 #, fuzzy
 msgid "Forum Monitoring Started"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: www/forum/myforums.php:58
 msgid "You have no monitored forums"
@@ -17082,7 +17062,7 @@ msgstr ""
 #: www/include/html.php:560
 #, fuzzy
 msgid "Error: uneven row counts"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: www/include/html.php:820
 msgid "Lowest"
@@ -17188,7 +17168,7 @@ msgstr ""
 #: www/include/Layout.class.php:135
 #, fuzzy
 msgid "Cannot find theme directory!"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: www/include/Layout.class.php:296
 msgid "en"
@@ -17245,9 +17225,9 @@ msgstr ""
 #, fuzzy, php-format
 msgid "%d new item"
 msgid_plural "%d new items"
-msgstr[0] "Szukaj w dokumentach"
-msgstr[1] "Szukaj w dokumentach"
-msgstr[2] "Szukaj w dokumentach"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #: www/include/project_home.php:36
 #, fuzzy
@@ -17789,7 +17769,7 @@ msgstr ""
 #: www/my/bookmark_add.php:27
 #, fuzzy
 msgid "Add a new Bookmark"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: www/my/bookmark_add.php:35
 #, php-format
@@ -17992,7 +17972,7 @@ msgstr ""
 #: www/news/admin/news_admin_utils.php:75
 #, fuzzy
 msgid "No pending items found."
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: www/news/admin/news_admin_utils.php:80
 #, php-format
@@ -18006,7 +17986,7 @@ msgstr ""
 #: www/news/admin/news_admin_utils.php:106
 #, fuzzy
 msgid "No rejected items found for this week."
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: www/news/admin/news_admin_utils.php:108
 #, php-format
@@ -18018,7 +17998,7 @@ msgstr ""
 #: www/news/admin/news_admin_utils.php:130
 #, fuzzy
 msgid "No approved items found for this week."
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: www/news/admin/news_admin_utils.php:132
 #, php-format
@@ -18032,7 +18012,7 @@ msgstr ""
 #: www/news/index.php:72
 #, fuzzy, php-format
 msgid "No News Found for %s"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: www/news/index.php:74 www/news/news_utils.php:117
 #: www/news/news_utils.php:248
@@ -18058,7 +18038,7 @@ msgstr ""
 #: www/news/news_utils.php:282
 #, fuzzy
 msgid "Not Found"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: www/news/submit.php:74
 msgid ""
@@ -18132,7 +18112,7 @@ msgstr ""
 #: www/people/admin/index.php:125
 #, fuzzy
 msgid "No Skills Found"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: www/people/admin/index.php:133
 #, fuzzy
@@ -18496,7 +18476,7 @@ msgstr ""
 #: www/people/people_utils.php:104
 #, fuzzy
 msgid "Error inserting into skill inventory: "
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: www/people/people_utils.php:107
 msgid "Added to skill inventory"
@@ -18532,7 +18512,7 @@ msgstr ""
 #: www/people/people_utils.php:212
 #, fuzzy
 msgid "Error inserting into job inventory: "
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: www/people/people_utils.php:215
 msgid "Added to job inventory"
@@ -19161,7 +19141,7 @@ msgstr ""
 #: www/pm/include/ProjectGroupHTML.class.php:57
 #, fuzzy
 msgid "General Admin"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: www/pm/include/ProjectGroupHTML.class.php:62
 #, fuzzy
@@ -19223,12 +19203,12 @@ msgstr ""
 #: www/pm/index.php:56
 #, fuzzy, php-format
 msgid "Subprojects for %s"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: www/pm/index.php:61
 #, fuzzy
 msgid "No Subprojects Found"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: www/pm/index.php:62
 msgid "No subprojects have been set up, or you cannot view them."
@@ -19486,7 +19466,7 @@ msgstr ""
 #: www/project/admin/editimages.php:99
 #, fuzzy
 msgid "Error: Cannot store multimedia file: "
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: www/project/admin/editimages.php:101
 msgid "Multimedia File Uploaded"
@@ -19499,7 +19479,7 @@ msgstr ""
 #: www/project/admin/editimages.php:137
 #, fuzzy
 msgid "Error: Cannot delete multimedia file: "
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: www/project/admin/editimages.php:139
 msgid "Multimedia File Deleted"
@@ -19512,7 +19492,7 @@ msgstr ""
 #: www/project/admin/editimages.php:161
 #, fuzzy
 msgid "Error: Cannot update multimedia file"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: www/project/admin/editimages.php:163
 msgid "Multimedia File Properties Updated"
@@ -19866,7 +19846,7 @@ msgstr ""
 #: www/project/admin/tools.php:217
 #, fuzzy
 msgid "Use Documents"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: www/project/admin/tools.php:230
 msgid "Use Surveys"
@@ -19903,7 +19883,7 @@ msgstr ""
 #: www/project/admin/tools.php:330
 #, fuzzy
 msgid "Documents Admin"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: www/project/admin/tools.php:333
 msgid "Survey Admin"
@@ -21126,7 +21106,7 @@ msgstr ""
 #: www/snippet/snippet_utils.php:27
 #, fuzzy
 msgid "Unix Admin"
-msgstr "Nie znaleziono żadnych dokumentów"
+msgstr ""
 
 #: www/snippet/snippet_utils.php:28
 msgid "HTML Manipulation"
@@ -21482,7 +21462,7 @@ msgstr ""
 #: www/stats/site_stats_utils.php:587
 #, fuzzy
 msgid "New users"
-msgstr "Szukaj w dokumentach"
+msgstr ""
 
 #: www/stats/site_stats_utils.php:588
 #, fuzzy
@@ -22106,10 +22086,6 @@ msgstr ""
 #~ msgstr "Musisz podać nazwisko"
 
 #, fuzzy
-#~ msgid "No project found."
-#~ msgstr "Nie znaleziono żadnych dokumentów"
-
-#, fuzzy
 #~ msgid ""
 #~ "Only project developers can access the Mercurial tree via this method. "
 #~ "Enter your site password when prompted."
@@ -22147,28 +22123,12 @@ msgstr ""
 #~ msgstr "Lista zmian"
 
 #, fuzzy
-#~ msgid "No documents"
-#~ msgstr "Szukaj w dokumentach"
-
-#, fuzzy
 #~ msgid "Last modified"
 #~ msgstr "Nazwisko:"
 
 #, fuzzy
-#~ msgid "New document"
-#~ msgstr "Szukaj w dokumentach"
-
-#, fuzzy
 #~ msgid "New folder"
 #~ msgstr "Dodaj Grupę Dokumentów"
-
-#, fuzzy
-#~ msgid "No Forums Found for %1$s"
-#~ msgstr "Nie znaleziono żadnych dokumentów"
-
-#, fuzzy
-#~ msgid "Error getting forum"
-#~ msgstr "Szukaj w dokumentach"
 
 #, fuzzy
 #~ msgid "Edit Ticket: "
@@ -22364,10 +22324,6 @@ msgstr ""
 #~ msgstr "Imię:"
 
 #, fuzzy
-#~ msgid "Document title:"
-#~ msgstr "Nie znaleziono żadnych dokumentów"
-
-#, fuzzy
 #~ msgid "Invalid Documents folder parent ID"
 #~ msgstr ""
 #~ "Grupa dokumentów: Niepoprawny identyfikator rodzica grupy dokumentów"
@@ -22377,28 +22333,8 @@ msgstr ""
 #~ msgstr "Imię:"
 
 #, fuzzy
-#~ msgid "no description"
-#~ msgstr "Nie znaleziono żadnych dokumentów"
-
-#, fuzzy
-#~ msgid "Document Title:"
-#~ msgstr "Nie znaleziono żadnych dokumentów"
-
-#, fuzzy
 #~ msgid "Submit a new document."
 #~ msgstr "Zamieść nową dokumentację"
-
-#, fuzzy
-#~ msgid "Add a new folder."
-#~ msgstr "Szukaj w dokumentach"
-
-#, fuzzy
-#~ msgid "Add a new document"
-#~ msgstr "Szukaj w dokumentach"
-
-#, fuzzy
-#~ msgid "Documents folder:"
-#~ msgstr "Nie znaleziono żadnych dokumentów"
 
 #, fuzzy
 #~ msgid "List files & Directories"
@@ -22411,16 +22347,8 @@ msgstr ""
 #~ msgstr "Zmiany:"
 
 #, fuzzy
-#~ msgid "Document Manager Action Denied"
-#~ msgstr "Nie znaleziono żadnych dokumentów"
-
-#, fuzzy
 #~ msgid "Diretory"
 #~ msgstr "Imię:"
-
-#, fuzzy
-#~ msgid "Add a new link"
-#~ msgstr "Szukaj w dokumentach"
 
 #~ msgid "Notes:"
 #~ msgstr "Uwagi:"
@@ -22446,10 +22374,6 @@ msgstr ""
 #~ msgstr "Nazwa wydania:"
 
 #, fuzzy
-#~ msgid "No Storage API Found"
-#~ msgstr "Nie znaleziono żadnych dokumentów"
-
-#, fuzzy
 #~ msgid "Name: "
 #~ msgstr "Nazwisko:"
 
@@ -22462,16 +22386,8 @@ msgstr ""
 #~ msgstr "Nazwisko:"
 
 #, fuzzy
-#~ msgid "Document Edit"
-#~ msgstr "Nie znaleziono żadnych dokumentów"
-
-#, fuzzy
 #~ msgid "DocumentGroup:"
 #~ msgstr "Dodaj Grupę Dokumentów"
-
-#, fuzzy
-#~ msgid "No Document Directory Found"
-#~ msgstr "Nie znaleziono żadnych dokumentów"
 
 #, fuzzy
 #~ msgid "Document Directory Updated successfully."
