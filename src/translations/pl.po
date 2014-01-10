@@ -21,9 +21,8 @@ msgstr ""
 
 #: common/account/actions/addsshkey.php:35
 #: common/account/actions/addsshkey.php:50
-#, fuzzy
 msgid "SSH Key added successfully."
-msgstr "Grupa dokumentów: Nazwa jest wymagana"
+msgstr ""
 
 #: common/account/actions/addsshkey.php:40
 #: common/docman/actions/addfile.php:124 common/docman/actions/addfile.php:160
@@ -35,9 +34,8 @@ msgid "Invalid file name."
 msgstr ""
 
 #: common/account/actions/deletesshkey.php:30
-#, fuzzy
 msgid "SSH Key deleted successfully."
-msgstr "Grupa dokumentów: Nazwa jest wymagana"
+msgstr ""
 
 #: common/docman/actions/addfile.php:58 common/docman/actions/addfile.php:65
 #: common/docman/actions/addsubdocgroup.php:48
@@ -81,9 +79,9 @@ msgid "Unknown type submission."
 msgstr ""
 
 #: common/docman/actions/addfile.php:193
-#, fuzzy, php-format
+#, php-format
 msgid "Document %s submitted successfully."
-msgstr "Grupa dokumentów: Nazwa jest wymagana"
+msgstr ""
 
 #: common/docman/actions/addfile.php:196
 #, php-format
@@ -92,19 +90,17 @@ msgid ""
 msgstr ""
 
 #: common/docman/actions/addsubdocgroup.php:63
-#, fuzzy
 msgid "Document subfolder successfully created."
-msgstr "Grupa dokumentów: Nazwa jest wymagana"
+msgstr ""
 
 #: common/docman/actions/addsubdocgroup.php:67
-#, fuzzy
 msgid "Document folder successfully created."
-msgstr "Grupa dokumentów: Nazwa jest wymagana"
+msgstr ""
 
 #: common/docman/actions/deldir.php:63
-#, fuzzy, php-format
+#, php-format
 msgid "Document folder %s deleted successfully."
-msgstr "Grupa dokumentów: Nazwa jest wymagana"
+msgstr ""
 
 #: common/docman/actions/delfile.php:36
 #: common/docman/actions/enforcereserve.php:36
@@ -127,19 +123,18 @@ msgid "No action to perform"
 msgstr ""
 
 #: common/docman/actions/delfile.php:52
-#, fuzzy
 msgid "deleted successfully."
-msgstr "Grupa dokumentów: Nazwa jest wymagana"
+msgstr ""
 
 #: common/docman/actions/editdocgroup.php:101
-#, fuzzy, php-format
+#, php-format
 msgid "Documents folder %s updated successfully"
-msgstr "Grupa dokumentów: Nazwa jest wymagana"
+msgstr ""
 
 #: common/docman/actions/editdocgroup.php:103
-#, fuzzy, php-format
+#, php-format
 msgid "on project %s"
-msgstr "Zgłoś chęć dołączenia do projektu %1$s"
+msgstr ""
 
 #: common/docman/actions/editfile.php:69
 msgid "No document found to update"
@@ -151,9 +146,9 @@ msgid "Invalid file attack attempt %s."
 msgstr ""
 
 #: common/docman/actions/editfile.php:112
-#, fuzzy, php-format
+#, php-format
 msgid "Document %s updated successfully."
-msgstr "Grupa dokumentów: Nazwa jest wymagana"
+msgstr ""
 
 #: common/docman/actions/emptytrash.php:38
 msgid "Unable to clean trash"
@@ -164,9 +159,8 @@ msgid "Emptied Trash successfully."
 msgstr ""
 
 #: common/docman/actions/enforcereserve.php:47
-#, fuzzy
 msgid "reservation enforced successfully."
-msgstr "Grupa dokumentów: Nazwa jest wymagana"
+msgstr ""
 
 #: common/docman/actions/forcereindexenginesearch.php:36
 msgid ""
@@ -174,15 +168,13 @@ msgid ""
 msgstr ""
 
 #: common/docman/actions/injectzip.php:49
-#, fuzzy
 msgid "Archive injected successfully."
-msgstr "Grupa dokumentów: Nazwa jest wymagana"
+msgstr ""
 
 #: common/docman/actions/monitordirectory.php:38
 #: common/docman/Document.class.php:950
 #: common/docman/DocumentGroup.class.php:729
 #: common/docman/views/reporting.php:169
-#, fuzzy
 msgid "Folder"
 msgstr "Nazwa Pliku"
 
@@ -423,59 +415,49 @@ msgid "Docman: monitoring action unknown."
 msgstr ""
 
 #: common/docman/actions/releasefile.php:49
-#, fuzzy
 msgid "released successfully."
-msgstr "Grupa dokumentów: Nazwa jest wymagana"
+msgstr ""
 
 #: common/docman/actions/reservefile.php:49
-#, fuzzy
 msgid "reserved successfully."
-msgstr "Grupa dokumentów: Nazwa jest wymagana"
+msgstr ""
 
 #: common/docman/actions/trashdir.php:99
-#, fuzzy, php-format
+#, php-format
 msgid "Documents folder %s moved to trash successfully."
-msgstr "Grupa dokumentów: Nazwa jest wymagana"
+msgstr ""
 
 #: common/docman/actions/trashfile.php:66
-#, fuzzy
 msgid "moved to trash successfully."
-msgstr "Grupa dokumentów: Nazwa jest wymagana"
+msgstr ""
 
 #: common/docman/actions/updatecreateonline.php:33
-#, fuzzy
 msgid "Create Online Documents Status updated successfully: Active."
-msgstr "Grupa dokumentów: Nazwa jest wymagana"
+msgstr ""
 
 #: common/docman/actions/updatecreateonline.php:36
-#, fuzzy
 msgid "Create Online Documents Status updated successfully: Off."
-msgstr "Grupa dokumentów: Nazwa jest wymagana"
+msgstr ""
 
 #: common/docman/actions/updateenginesearch.php:33
-#, fuzzy
 msgid "Search Engine Status updated successfully: Active."
-msgstr "Grupa dokumentów: Nazwa jest wymagana"
+msgstr ""
 
 #: common/docman/actions/updateenginesearch.php:36
-#, fuzzy
 msgid "Search Engine Status updated successfully: Off."
-msgstr "Grupa dokumentów: Nazwa jest wymagana"
+msgstr ""
 
 #: common/docman/actions/updatewebdavinterface.php:33
-#, fuzzy
 msgid "Webdav Interface updated successfully: Active."
-msgstr "Grupa dokumentów: Nazwa jest wymagana"
+msgstr ""
 
 #: common/docman/actions/updatewebdavinterface.php:36
-#, fuzzy
 msgid "Webdav Interface updated successfully: Off."
-msgstr "Grupa dokumentów: Nazwa jest wymagana"
+msgstr ""
 
 #: common/docman/actions/validatefile.php:61
-#, fuzzy
 msgid "activated successfully."
-msgstr "Grupa dokumentów: Nazwa jest wymagana"
+msgstr ""
 
 #: common/docman/Document.class.php:65
 #: common/docman/DocumentFactory.class.php:92
@@ -499,9 +481,8 @@ msgstr "Grupa dokumentów: Nazwa jest wymagana"
 #: common/tracker/ArtifactType.class.php:154
 #: common/tracker/ArtifactTypeFactory.class.php:59
 #: common/tracker/ArtifactTypes.class.php:54
-#, fuzzy
 msgid "No Valid Group Object"
-msgstr "Niepoprawne hasło"
+msgstr ""
 
 #: common/docman/Document.class.php:82
 #: common/docman/DocumentGroup.class.php:76 common/forum/Forum.class.php:139
@@ -654,9 +635,8 @@ msgid "Invalid Documents Folder parent ID"
 msgstr "Grupa dokumentów: Niepoprawny identyfikator rodzica grupy dokumentów"
 
 #: common/docman/DocumentGroup.class.php:131
-#, fuzzy
 msgid "Folder name already exists"
-msgstr "Istnieje już użytkownik o takim loginie."
+msgstr ""
 
 #: common/docman/DocumentGroup.class.php:147
 msgid "Error Adding Folder:"
@@ -672,9 +652,8 @@ msgid "Invalid Document Folder ID"
 msgstr "Grupa dokumentów: Niepoprawny identyfikator grupy dokumentów"
 
 #: common/docman/DocumentGroup.class.php:502
-#, fuzzy
 msgid "Documents Folder name already exists"
-msgstr "Istnieje już użytkownik o takim loginie."
+msgstr ""
 
 #: common/docman/DocumentGroup.class.php:525
 #, php-format
@@ -682,24 +661,21 @@ msgid "Error: %s"
 msgstr ""
 
 #: common/docman/DocumentGroup.class.php:676
-#, fuzzy
 msgid "Browse this folder"
-msgstr "Edytuj grupę"
+msgstr ""
 
 #: common/docman/DocumentGroup.class.php:723
 #: common/docman/views/additem.php:59
-#, fuzzy
 msgid "New Folder"
-msgstr "Dodaj Grupę Dokumentów"
+msgstr ""
 
 #: common/docman/DocumentGroup.class.php:725
 msgid "Updated folder by"
 msgstr ""
 
 #: common/docman/DocumentGroup.class.php:733
-#, fuzzy
 msgid "Updated by"
-msgstr "Aktualizuj hasło"
+msgstr ""
 
 #: common/docman/DocumentGroup.class.php:768
 msgid "Unable to extract ZIP file."
@@ -746,9 +722,8 @@ msgstr ""
 
 #: common/docman/DocumentManager.class.php:202
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:52
-#, fuzzy
 msgid "Created by"
-msgstr "Nazwa nowej grupy"
+msgstr ""
 
 #: common/docman/DocumentManager.class.php:206
 msgid "; "
@@ -1014,7 +989,6 @@ msgid ""
 msgstr ""
 
 #: common/docman/views/additem.php:61 common/docman/views/additem.php:85
-#, fuzzy
 msgid "Inject Tree"
 msgstr ""
 
@@ -1023,12 +997,10 @@ msgid "Upload archive:"
 msgstr ""
 
 #: common/docman/views/addsubdocgroup.php:56
-#, fuzzy
 msgid "Name of the document subfolder to create"
 msgstr ""
 
 #: common/docman/views/addsubdocgroup.php:59
-#, fuzzy
 msgid "Name of the document folder to create"
 msgstr ""
 
@@ -1120,9 +1092,8 @@ msgid ""
 msgstr ""
 
 #: common/docman/views/editfile.php:65
-#, fuzzy
 msgid "Folder that document belongs to:"
-msgstr "Edytuj grupę"
+msgstr ""
 
 #: common/docman/views/editfile.php:70 common/tracker/actions/browse.php:405
 #: common/tracker/actions/browse.php:563 common/tracker/actions/browse.php:749
@@ -1153,16 +1124,14 @@ msgstr ""
 
 #: common/docman/views/listfile.php:112
 #: common/docman/views/listtrashfile.php:73
-#, fuzzy
 msgid "Invalid folder"
-msgstr "Niepoprawne hasło"
+msgstr ""
 
 #: common/docman/views/listfile.php:158
 #: common/docman/views/listtrashfile.php:109
 #: common/docman/views/pendingfiles.php:55
-#, fuzzy
 msgid "Edit document dialog box"
-msgstr "Edytuj grupę"
+msgstr ""
 
 #: common/docman/views/listfile.php:169 www/export/rssAboTask.php:142
 #: www/pm/browse_task.php:384 www/pm/mod_task.php:66
@@ -1176,21 +1145,18 @@ msgstr ""
 #: common/docman/views/listfile.php:175 common/docman/views/listfile.php:206
 #: common/docman/views/listtrashfile.php:118
 #: common/docman/views/listtrashfile.php:123
-#, fuzzy
 msgid "Edit this folder"
-msgstr "Edytuj grupę"
+msgstr ""
 
 #: common/docman/views/listfile.php:176
 msgid "Move this folder and his content to trash"
 msgstr ""
 
 #: common/docman/views/listfile.php:178
-#, fuzzy
 msgid "Permanently delete this folder"
-msgstr "Edytuj grupę"
+msgstr ""
 
 #: common/docman/views/listfile.php:183
-#, fuzzy
 msgid "Add a new item in this folder"
 msgstr ""
 
@@ -1199,12 +1165,10 @@ msgid "Download this folder as a ZIP"
 msgstr ""
 
 #: common/docman/views/listfile.php:195
-#, fuzzy
 msgid "Stop monitoring this folder"
 msgstr ""
 
 #: common/docman/views/listfile.php:198
-#, fuzzy
 msgid "Start monitoring this folder"
 msgstr ""
 
@@ -1259,9 +1223,8 @@ msgstr ""
 #: common/docman/views/listfile.php:218
 #: common/docman/views/listtrashfile.php:129
 #: common/docman/views/pendingfiles.php:63
-#, fuzzy
 msgid "Last time"
-msgstr "Nazwisko:"
+msgstr ""
 
 #: common/docman/views/listfile.php:218
 #: common/docman/views/listtrashfile.php:129
@@ -1341,7 +1304,6 @@ msgstr ""
 #: common/docman/views/listfile.php:248
 #: common/docman/views/listtrashfile.php:147
 #: common/docman/views/pendingfiles.php:80
-#, fuzzy
 msgid "View this document"
 msgstr ""
 
@@ -1411,7 +1373,6 @@ msgid "Y-m-d H:i"
 msgstr ""
 
 #: common/docman/views/listfile.php:277 common/docman/views/listfile.php:279
-#, fuzzy
 msgid "Reserved Document"
 msgstr ""
 
@@ -1422,16 +1383,14 @@ msgstr ""
 #: common/docman/views/listfile.php:326 common/docman/views/listfile.php:337
 #: common/docman/views/listtrashfile.php:192
 #: common/docman/views/pendingfiles.php:127
-#, fuzzy
 msgid "Edit this document"
-msgstr "Edytuj grupę"
+msgstr ""
 
 #: common/docman/views/listfile.php:328
 msgid "Reserve this document for later edition"
 msgstr ""
 
 #: common/docman/views/listfile.php:328
-#, fuzzy
 msgid "Reserve this document"
 msgstr ""
 
@@ -1445,12 +1404,10 @@ msgid "Release reservation"
 msgstr "Uwagi do wydania"
 
 #: common/docman/views/listfile.php:344
-#, fuzzy
 msgid "Stop monitoring this document"
 msgstr ""
 
 #: common/docman/views/listfile.php:347
-#, fuzzy
 msgid "Start monitoring this document"
 msgstr ""
 
@@ -1467,7 +1424,6 @@ msgid "Mass actions for selected documents:"
 msgstr ""
 
 #: common/docman/views/listfile.php:362
-#, fuzzy
 msgid "Move to trash"
 msgstr ""
 
@@ -1504,7 +1460,6 @@ msgstr ""
 #: common/docman/views/listfile.php:376
 #: common/docman/views/listtrashfile.php:209
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:88
-#, fuzzy
 msgid "No documents."
 msgstr ""
 
@@ -1521,7 +1476,6 @@ msgid "Updated since less than 7 days"
 msgstr ""
 
 #: common/docman/views/listtrashfile.php:191
-#, fuzzy
 msgid "Delete permanently this document."
 msgstr ""
 
@@ -1532,7 +1486,6 @@ msgid "Permanently Delete"
 msgstr ""
 
 #: common/docman/views/menu.php:44
-#, fuzzy
 msgid "View Documents"
 msgstr ""
 
@@ -1543,7 +1496,6 @@ msgid ""
 msgstr ""
 
 #: common/docman/views/menu.php:49
-#, fuzzy
 msgid "Add new item"
 msgstr ""
 
@@ -1608,7 +1560,6 @@ msgid "Docman module administration."
 msgstr ""
 
 #: common/docman/views/pendingfiles.php:42
-#, fuzzy
 msgid "No pending documents."
 msgstr ""
 
@@ -1618,9 +1569,8 @@ msgstr ""
 
 #: common/docman/views/pendingfiles.php:128
 #: common/docman/views/pendingfiles.php:139
-#, fuzzy
 msgid "Activate in this folder"
-msgstr "Edytuj grupę"
+msgstr ""
 
 #: common/docman/views/pendingfiles.php:135
 msgid ""
@@ -1949,7 +1899,6 @@ msgid "Downloads"
 msgstr ""
 
 #: common/docman/views/reporting.php:169 www/activity/index.php:317
-#, fuzzy
 msgid "Document"
 msgstr ""
 
@@ -1991,16 +1940,14 @@ msgid "Date"
 msgstr ""
 
 #: common/docman/views/reporting.php:179
-#, fuzzy
 msgid "View user profile"
-msgstr "Nazwa nowej grupy"
+msgstr ""
 
 #: common/docman/views/search.php:61
 msgid "Query: "
 msgstr ""
 
 #: common/docman/views/search.php:62
-#, fuzzy
 msgid "Searched words"
 msgstr ""
 
@@ -2026,7 +1973,6 @@ msgid "Filename and contents are used to match searched words"
 msgstr ""
 
 #: common/docman/views/search.php:68
-#, fuzzy
 msgid "Inside documents"
 msgstr ""
 
@@ -2035,21 +1981,18 @@ msgid "search into childs following project hierarchy"
 msgstr ""
 
 #: common/docman/views/search.php:75 plugins/mantisbt/controler/filter.php:91
-#, fuzzy
 msgid "Include child projects"
-msgstr "Zgłoś chęć dołączenia do projektu %1$s"
+msgstr ""
 
 #: common/docman/views/search.php:126
 msgid "Database query error"
 msgstr ""
 
 #: common/docman/views/search.php:129
-#, fuzzy
 msgid "Your search did not match any documents."
 msgstr ""
 
 #: common/docman/views/search.php:154 common/docman/views/tree.php:64
-#, fuzzy
 msgid "Browse document manager for this project."
 msgstr "Przeglądaj dokumentację"
 
@@ -2141,9 +2084,8 @@ msgstr ""
 #: common/forum/AttachManager.class.php:181
 #: common/forum/AttachManager.class.php:267
 #: common/forum/AttachManager.class.php:323
-#, fuzzy
 msgid "Could not get message id"
-msgstr "Zmień Hasło"
+msgstr ""
 
 #: common/forum/AttachManager.class.php:197
 #: common/forum/AttachManager.class.php:287
@@ -2182,9 +2124,8 @@ msgid "Move Thread"
 msgstr ""
 
 #: common/forum/ForumAdmin.class.php:84 www/forum/admin/index.php:104
-#, fuzzy
 msgid "Add Forum"
-msgstr "Forum"
+msgstr ""
 
 #: common/forum/ForumAdmin.class.php:86 common/forum/ForumAdmin.class.php:98
 #: www/forum/admin/pending.php:46 www/forum/admin/pending.php:57
@@ -2204,21 +2145,20 @@ msgid "Forum Info Updated Successfully"
 msgstr ""
 
 #: common/forum/ForumAdmin.class.php:214
-#, fuzzy
 msgid "Forum added successfully"
-msgstr "Grupa dokumentów: Nazwa jest wymagana"
+msgstr ""
 
 #: common/forum/ForumAdmin.class.php:232 www/forum/admin/index.php:293
 msgid "Error Getting ForumMessage"
 msgstr ""
 
 #: common/forum/ForumAdmin.class.php:240
-#, fuzzy, php-format
+#, php-format
 msgid "%s message deleted"
 msgid_plural "%s messages deleted"
-msgstr[0] "Pomyślnie Zmieniono Hasło"
-msgstr[1] "Pomyślnie Zmieniono Hasło"
-msgstr[2] "Pomyślnie Zmieniono Hasło"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #: common/forum/ForumAdmin.class.php:261 www/reporting/timeadd.php:67
 #: www/survey/admin/question.php:78 www/tracker/admin/index.php:238
@@ -2258,7 +2198,6 @@ msgstr ""
 #: plugins/mantisbt/view/admin/editVersion.php:79
 #: plugins/mantisbt/view/roadmap.php:98 plugins/mantisbt/view/roadmap.php:147
 #: www/frs/admin/editrelease.php:348 www/frs/reporting/downloads.php:197
-#, fuzzy
 msgid "Release"
 msgstr ""
 
@@ -2349,7 +2288,6 @@ msgid "Mailing List exists with same name."
 msgstr ""
 
 #: common/forum/Forum.class.php:230
-#, fuzzy
 msgid "Error Adding Forum"
 msgstr ""
 
@@ -2360,9 +2298,8 @@ msgid "Welcome to %s"
 msgstr ""
 
 #: common/forum/Forum.class.php:265
-#, fuzzy
 msgid "Invalid forum group identifier."
-msgstr "Niepoprawne hasło"
+msgstr ""
 
 #: common/forum/Forum.class.php:439 common/forum/Forum.class.php:474
 #: common/frs/FRSPackage.class.php:274 common/frs/FRSPackage.class.php:306
@@ -2391,9 +2328,8 @@ msgstr ""
 #: plugins/mailman/include/MailmanList.class.php:372
 #: plugins/mailman/include/MailmanList.class.php:389
 #: www/pm/admin/index.php:120
-#, fuzzy
 msgid "Update failed"
-msgstr "Aktualizuj hasło"
+msgstr ""
 
 #: common/forum/Forum.class.php:621 common/frs/FRSPackage.class.php:466
 #: common/frs/FRSRelease.class.php:354 common/include/Group.class.php:1617
@@ -2407,7 +2343,6 @@ msgstr ""
 #: common/forum/Forum.class.php:632 common/forum/Forum.class.php:640
 #: common/forum/Forum.class.php:648 common/forum/Forum.class.php:656
 #: common/forum/Forum.class.php:664 common/forum/Forum.class.php:672
-#, fuzzy
 msgid "Error Deleting Forum"
 msgstr ""
 
@@ -2427,7 +2362,6 @@ msgid "Forum not found"
 msgstr ""
 
 #: common/forum/ForumFactory.class.php:192
-#, fuzzy
 msgid "Thread not found"
 msgstr ""
 
@@ -2470,9 +2404,8 @@ msgid "Latest News"
 msgstr ""
 
 #: common/forum/ForumHTML.class.php:106
-#, fuzzy
 msgid "View Forums"
-msgstr "Forum"
+msgstr ""
 
 #: common/forum/ForumHTML.class.php:111
 msgid "Discussion Forums:"
@@ -2491,9 +2424,8 @@ msgid "Start New Thread"
 msgstr ""
 
 #: common/forum/ForumHTML.class.php:180 common/forum/ForumMessage.class.php:60
-#, fuzzy
 msgid "Invalid Forum Object"
-msgstr "Niepoprawne hasło"
+msgstr ""
 
 #: common/forum/ForumHTML.class.php:203
 msgid "This is the content of the pending message"
@@ -2541,9 +2473,8 @@ msgid "Attachments"
 msgstr ""
 
 #: common/forum/ForumHTML.class.php:519
-#, fuzzy
 msgid "Edit Message"
-msgstr "Edytuj grupę"
+msgstr ""
 
 #: common/forum/ForumHTML.class.php:523 common/forum/ForumHTML.class.php:587
 #: plugins/forumml/www/index.php:110 www/admin/massmail.php:112
@@ -2642,16 +2573,14 @@ msgid "Error: a forum message must include a message body and a subject."
 msgstr ""
 
 #: common/forum/ForumMessage.class.php:373
-#, fuzzy
 msgid "Invalid ParentMessage Object"
-msgstr "Niepoprawne hasło"
+msgstr ""
 
 #: common/forum/ForumMessage.class.php:406
 #: common/forum/ForumMessage.class.php:424
 #: common/forum/ForumMessage.class.php:577
-#, fuzzy
 msgid "Invalid Message Id"
-msgstr "Niepoprawne hasło"
+msgstr ""
 
 #: common/forum/ForumMessage.class.php:658
 #, php-format
@@ -2685,14 +2614,12 @@ msgid ""
 msgstr ""
 
 #: common/forum/ForumMessage.class.php:825
-#, fuzzy
 msgid "Message not found"
 msgstr ""
 
 #: common/forum/ForumMessageFactory.class.php:58
-#, fuzzy
 msgid "Invalid group_form_id"
-msgstr "Niepoprawne hasło"
+msgstr ""
 
 #: common/frs/FRSFile.class.php:82 common/frs/FRSFile.class.php:398
 msgid "Invalid FRS Release Object"
@@ -2721,14 +2648,12 @@ msgid "File cannot be moved to the permanent location"
 msgstr ""
 
 #: common/frs/FRSFile.class.php:206 common/frs/FRSRelease.class.php:158
-#, fuzzy
 msgid "Error Adding Release: "
 msgstr ""
 
 #: common/frs/FRSFile.class.php:232
-#, fuzzy
 msgid "Invalid file_id"
-msgstr "Niepoprawne hasło"
+msgstr ""
 
 #: common/frs/FRSFile.class.php:416 common/frs/FRSPackage.class.php:396
 #: common/frs/FRSRelease.class.php:438 common/include/Error.class.php:167
@@ -2741,9 +2666,8 @@ msgstr ""
 
 #: common/frs/FRSFileProcessorType.class.php:61
 #: common/frs/FRSFileType.class.php:68
-#, fuzzy
 msgid "Invalid type_id"
-msgstr "Niepoprawne hasło"
+msgstr ""
 
 #: common/frs/FRSPackage.class.php:139 common/frs/FRSPackage.class.php:371
 #: common/frs/FRSRelease.class.php:121 common/frs/FRSRelease.class.php:399
@@ -2755,49 +2679,42 @@ msgid "Package Name can only be alphanumeric"
 msgstr ""
 
 #: common/frs/FRSPackage.class.php:154
-#, fuzzy
 msgid "Error Adding Package: Name Already Exists"
-msgstr "Istnieje już użytkownik o takim loginie."
+msgstr ""
 
 #: common/frs/FRSPackage.class.php:165
-#, fuzzy
 msgid "Error Adding Package: "
 msgstr ""
 
 #: common/frs/FRSPackage.class.php:205
-#, fuzzy
 msgid "Invalid package_id"
-msgstr "Niepoprawne hasło"
+msgstr ""
 
 #: common/frs/FRSPackage.class.php:291
 msgid "Unable to add monitor: "
 msgstr ""
 
 #: common/frs/FRSPackage.class.php:323
-#, fuzzy
 msgid "Error On querying monitor count: "
 msgstr ""
 
 #: common/frs/FRSPackage.class.php:384
-#, fuzzy
 msgid "Error Updating Package: Name Already Exists"
-msgstr "Istnieje już użytkownik o takim loginie."
+msgstr ""
 
 #: common/frs/FRSPackage.class.php:403
 msgid "Error Updating Package: Couldn't fetch data"
 msgstr ""
 
 #: common/frs/FRSPackage.class.php:413
-#, fuzzy
 msgid "Error Updating Package: Directory Already Exists"
-msgstr "Istnieje już użytkownik o takim loginie."
+msgstr ""
 
 #: common/frs/FRSPackage.class.php:418
 msgid "Error Updating Package: Couldn't rename dir"
 msgstr ""
 
 #: common/frs/FRSPackage.class.php:476
-#, fuzzy
 msgid "Release Error: "
 msgstr "Uwagi do wydania"
 
@@ -2806,27 +2723,24 @@ msgid "Package delete error: trying to delete root dir"
 msgstr ""
 
 #: common/frs/FRSPackage.class.php:515
-#, fuzzy
 msgid "No valid max release id"
-msgstr "Niepoprawne hasło"
+msgstr ""
 
 #: common/frs/FRSPackage.class.php:536
 msgid "Cannot open the file archive."
 msgstr ""
 
 #: common/frs/FRSRelease.class.php:83
-#, fuzzy
 msgid "Invalid FRS Package Object"
-msgstr "Niepoprawne hasło"
+msgstr ""
 
 #: common/frs/FRSRelease.class.php:143
 msgid "Error Adding Release: Name Already Exists"
 msgstr ""
 
 #: common/frs/FRSRelease.class.php:187
-#, fuzzy
 msgid "Invalid release_id"
-msgstr "Niepoprawne hasło"
+msgstr ""
 
 #: common/frs/FRSRelease.class.php:286
 #, php-format
@@ -2866,9 +2780,8 @@ msgid "Release delete error: trying to delete root dir"
 msgstr ""
 
 #: common/frs/FRSRelease.class.php:419
-#, fuzzy
 msgid "Error On Update: Name Already Exists"
-msgstr "Istnieje już użytkownik o takim loginie."
+msgstr ""
 
 #: common/frs/FRSRelease.class.php:445
 msgid "Error Updating Release: Couldn't fetch data"
@@ -2883,7 +2796,6 @@ msgid "Error Updating Release: Couldn't rename dir"
 msgstr ""
 
 #: common/frs/include/frs_utils.php:77
-#, fuzzy
 msgid "View File Releases"
 msgstr "Uwagi oraz Lista Zmian Wydania"
 
@@ -2925,9 +2837,8 @@ msgid "Failed to find user %s"
 msgstr ""
 
 #: common/import/import_users.php:414 www/admin/globalroleedit.php:103
-#, fuzzy
 msgid "User Added Successfully"
-msgstr "Grupa dokumentów: Nazwa jest wymagana"
+msgstr ""
 
 #: common/include/account.php:34
 msgid "Password must be at least 6 characters."
@@ -3083,9 +2994,8 @@ msgstr ""
 
 #: common/include/Group.class.php:318 common/include/Group.class.php:322
 #: common/include/User.class.php:346
-#, fuzzy
 msgid "Unix name already taken."
-msgstr "Istnieje już użytkownik o takim loginie."
+msgstr ""
 
 #: common/include/Group.class.php:325
 msgid ""
@@ -3109,7 +3019,7 @@ msgid "Error: Cannot create group: %s"
 msgstr ""
 
 #: common/include/Group.class.php:380
-#, fuzzy, php-format
+#, php-format
 msgid "Error: Cannot get group id: %s"
 msgstr ""
 
@@ -3118,7 +3028,7 @@ msgid "Could not get permission."
 msgstr ""
 
 #: common/include/Group.class.php:448
-#, fuzzy, php-format
+#, php-format
 msgid "Error: Cannot change group properties: %s"
 msgstr ""
 
@@ -3144,9 +3054,8 @@ msgid "Error updating project information in plugin_hook group_update"
 msgstr ""
 
 #: common/include/Group.class.php:743
-#, fuzzy
 msgid "Invalid Status Change From: "
-msgstr "Niepoprawne hasło"
+msgstr ""
 
 #: common/include/Group.class.php:743
 msgid " To: "
@@ -3254,7 +3163,6 @@ msgid "Error Deleting Counters: "
 msgstr ""
 
 #: common/include/Group.class.php:1901 common/include/Group.class.php:1910
-#, fuzzy
 msgid "Error Deleting Project:"
 msgstr ""
 
@@ -3268,14 +3176,13 @@ msgstr ""
 
 #: common/include/Group.class.php:2023 www/account/lostpw.php:44
 #: www/account/pending-resend.php:38 www/sendmessage.php:45 www/users:74
-#, fuzzy
 msgid "That user does not exist."
-msgstr "Istnieje już użytkownik o takim loginie."
+msgstr ""
 
 #: common/include/Group.class.php:2071 common/include/Group.class.php:2190
-#, fuzzy, php-format
+#, php-format
 msgid "Error: User not removed: %s"
-msgstr "Istnieje już użytkownik o takim loginie."
+msgstr ""
 
 #: common/include/Group.class.php:2093
 msgid "Error: artifact:"
@@ -3306,7 +3213,6 @@ msgid "Group already active"
 msgstr ""
 
 #: common/include/Group.class.php:2533
-#, fuzzy
 msgid "Approved"
 msgstr ""
 
@@ -3351,7 +3257,7 @@ msgid ""
 msgstr ""
 
 #: common/include/Group.class.php:2600
-#, fuzzy, php-format
+#, php-format
 msgid "%s Project Approved"
 msgstr ""
 
@@ -3363,7 +3269,6 @@ msgstr ""
 #: common/include/Group.class.php:2634 common/include/Group.class.php:2688
 #: common/include/Group.class.php:2706 www/register/index.php:183
 #: www/register/index.php:189
-#, fuzzy
 msgid "Project Full Name"
 msgstr ""
 
@@ -3371,7 +3276,6 @@ msgstr ""
 #: www/admin/approve-pending.php:190 www/admin/database.php:155
 #: www/admin/groupedit.php:170 www/admin/vhost.php:118
 #: www/register/index.php:214
-#, fuzzy
 msgid "Project Unix Name"
 msgstr ""
 
@@ -3380,7 +3284,7 @@ msgid "Reasons for negative decision"
 msgstr ""
 
 #: common/include/Group.class.php:2648
-#, fuzzy, php-format
+#, php-format
 msgid "%s Project Denied"
 msgstr ""
 
@@ -3394,9 +3298,9 @@ msgstr ""
 
 #: common/include/Group.class.php:2687 common/include/Group.class.php:2698
 #: common/include/Group.class.php:2705 common/include/Group.class.php:2711
-#, fuzzy, php-format
+#, php-format
 msgid "New %s Project Submitted"
-msgstr "Nazwa nowej grupy"
+msgstr ""
 
 #: common/include/Group.class.php:2689 common/include/Group.class.php:2707
 #: www/admin/approve-pending.php:192
@@ -3490,7 +3394,7 @@ msgstr "Uzasadnienie prośby przez użytkownika:"
 #: common/include/GroupJoinRequest.class.php:273
 #, php-format
 msgid "Request to Join Project %s"
-msgstr "Zgłoś chęć dołączenia do projektu %1$s"
+msgstr "Zgłoś chęć dołączenia do projektu %s"
 
 #: common/include/GroupJoinRequest.class.php:260
 #, php-format
@@ -3644,7 +3548,6 @@ msgid "Tooling library. Small coding tips."
 msgstr ""
 
 #: common/include/Navigation.class.php:266
-#, fuzzy
 msgid "Project Openings"
 msgstr ""
 
@@ -3688,7 +3591,6 @@ msgstr ""
 #: common/include/Navigation.class.php:398 www/admin/approve-pending.php:137
 #: www/admin/groupedit.php:99 www/admin/useredit.php:276
 #: www/admin/useredit.php:307
-#, fuzzy
 msgid "Project Admin"
 msgstr ""
 
@@ -3729,7 +3631,6 @@ msgid "Mailing Lists"
 msgstr ""
 
 #: common/include/Navigation.class.php:474
-#, fuzzy
 msgid "Project Management."
 msgstr ""
 
@@ -3808,7 +3709,6 @@ msgid "Use %s"
 msgstr ""
 
 #: common/include/Plugin.class.php:348
-#, fuzzy
 msgid "No description available."
 msgstr ""
 
@@ -3828,12 +3728,10 @@ msgid "Posted data is too large. %1$s exceeds the maximum size of %2$s"
 msgstr ""
 
 #: common/include/RBAC.php:194
-#, fuzzy
 msgid "Cannot link to home project"
 msgstr ""
 
 #: common/include/RBAC.php:229
-#, fuzzy
 msgid "Cannot unlink from home project"
 msgstr ""
 
@@ -3847,9 +3745,9 @@ msgid "%s (global role)"
 msgstr ""
 
 #: common/include/RBAC.php:813
-#, fuzzy, php-format
+#, php-format
 msgid "%s (in project %s)"
-msgstr "Zgłoś chęć dołączenia do projektu %1$s"
+msgstr ""
 
 #: common/include/RBAC.php:1115
 msgid "Anonymous/not logged in"
@@ -4016,7 +3914,6 @@ msgid "Submit documents"
 msgstr "Zamieść nową dokumentację"
 
 #: common/include/rbac_texts.php:133
-#, fuzzy
 msgid "Approve documents"
 msgstr ""
 
@@ -4041,7 +3938,6 @@ msgid "Forge statistics"
 msgstr ""
 
 #: common/include/rbac_texts.php:149
-#, fuzzy
 msgid "Project visibility"
 msgstr ""
 
@@ -4145,9 +4041,8 @@ msgstr ""
 
 #: common/include/SCMPlugin.class.php:340
 #: plugins/scmhg/common/HgPlugin.class.php:600
-#, fuzzy
 msgid "Add Repository"
-msgstr "Przeglądaj Repozytorium Subversion"
+msgstr ""
 
 #: common/include/session.php:189 plugins/authbuiltin/www/post-login.php:95
 #: plugins/authldap/www/post-login.php:88
@@ -4197,7 +4092,6 @@ msgid "No admin users ?"
 msgstr ""
 
 #: common/include/Storage.class.php:56
-#, fuzzy
 msgid "Cannot create directory:"
 msgstr ""
 
@@ -4212,7 +4106,6 @@ msgid "Not a File %1$s or not a directory %2$s."
 msgstr ""
 
 #: common/include/User.class.php:246
-#, fuzzy
 msgid "User Not Found"
 msgstr ""
 
@@ -4241,9 +4134,8 @@ msgid "Passwords do not match"
 msgstr "Podane hasła są różne."
 
 #: common/include/User.class.php:332
-#, fuzzy
 msgid "Invalid Password"
-msgstr "Niepoprawne hasło:"
+msgstr ""
 
 #: common/include/User.class.php:337
 msgid "Invalid Unix Name (must not contain uppercase characters)"
@@ -4267,9 +4159,8 @@ msgid "Insert Error"
 msgstr ""
 
 #: common/include/User.class.php:443
-#, fuzzy
 msgid "Could Not Get User Id: "
-msgstr "Zmień Hasło"
+msgstr ""
 
 #: common/include/User.class.php:477
 #, php-format
@@ -4326,12 +4217,10 @@ msgid "Could Not Delete From filemodule_monitor:"
 msgstr ""
 
 #: common/include/User.class.php:639
-#, fuzzy
 msgid "Error: Cannot Update User Object:"
-msgstr "Zmień Hasło"
+msgstr ""
 
 #: common/include/User.class.php:733
-#, fuzzy
 msgid "Error: Invalid status value"
 msgstr ""
 
@@ -4340,9 +4229,8 @@ msgid "Error: You cannot set pending status if user is suspend or active"
 msgstr ""
 
 #: common/include/User.class.php:746
-#, fuzzy
 msgid "Error: Cannot Update User Status:"
-msgstr "Zmień Hasło"
+msgstr ""
 
 #: common/include/User.class.php:939 common/include/User.class.php:991
 msgid "User with this email already exists."
@@ -4354,29 +4242,25 @@ msgid "Error: Invalid Shell %s"
 msgstr ""
 
 #: common/include/User.class.php:1107
-#, fuzzy
 msgid "Error: Cannot Update User Unix Shell:"
-msgstr "Zmień Hasło"
+msgstr ""
 
 #: common/include/User.class.php:1253
 msgid "SSH Key already in use"
 msgstr ""
 
 #: common/include/User.class.php:1261
-#, fuzzy
 msgid "Error - Could Not Add User SSH Key:"
-msgstr "Zmień Hasło"
+msgstr ""
 
 #: common/include/User.class.php:1278
-#, fuzzy
 msgid "Error: Cannot Update User SSH Keys"
-msgstr "Zmień Hasło"
+msgstr ""
 
 #: common/include/User.class.php:1424 common/include/User.class.php:1460
 #: common/include/User.class.php:1484
-#, fuzzy
 msgid "Error: Cannot Change User Password:"
-msgstr "Zmień Hasło"
+msgstr ""
 
 #: common/include/User.class.php:1740
 #, php-format
@@ -4489,7 +4373,6 @@ msgstr ""
 
 #: common/mail/MailingList.class.php:174
 #: plugins/mailman/include/MailmanList.class.php:163
-#, fuzzy
 msgid "Error Creating mailing list"
 msgstr ""
 
@@ -4523,7 +4406,6 @@ msgstr ""
 #: common/mail/MailingListFactory.class.php:103
 #: plugins/mailman/include/MailmanList.class.php:225
 #: plugins/mailman/include/MailmanListFactory.class.php:112
-#, fuzzy
 msgid "Error Getting mailing list"
 msgstr ""
 
@@ -4542,9 +4424,8 @@ msgid "Subproject Description Must Be At Least 10 Characters"
 msgstr "Opis dokumentu musi składać się z przynajmniej 5 znaków."
 
 #: common/pm/ProjectGroup.class.php:195
-#, fuzzy
 msgid "Invalid group_project_id"
-msgstr "Niepoprawne hasło"
+msgstr ""
 
 #: common/pm/ProjectGroupFactory.class.php:62
 #, php-format
@@ -4569,9 +4450,8 @@ msgid "hours"
 msgstr ""
 
 #: common/pm/ProjectTask.class.php:148 common/pm/ProjectTask.class.php:944
-#, fuzzy
 msgid "start date"
-msgstr "Nazwisko:"
+msgstr ""
 
 #: common/pm/ProjectTask.class.php:149 common/pm/ProjectTask.class.php:945
 msgid "end date"
@@ -4583,9 +4463,8 @@ msgid "category"
 msgstr ""
 
 #: common/pm/ProjectTask.class.php:235
-#, fuzzy
 msgid "Invalid Task ID"
-msgstr "Niepoprawne hasło"
+msgstr ""
 
 #: common/pm/ProjectTask.class.php:946
 msgid "status"
@@ -4716,7 +4595,6 @@ msgid "Total Still Open"
 msgstr ""
 
 #: common/reporting/report_utils.php:310
-#, fuzzy
 msgid "Tracker Activity"
 msgstr ""
 
@@ -4767,18 +4645,16 @@ msgid "Task open"
 msgstr ""
 
 #: common/reporting/report_utils.php:692
-#, fuzzy
 msgid "Task close"
-msgstr "Nazwisko:"
+msgstr ""
 
 #: common/reporting/report_utils.php:699
 msgid "Tracker items opened"
 msgstr ""
 
 #: common/reporting/report_utils.php:700
-#, fuzzy
 msgid "Tracker items closed"
-msgstr "Istnieje już użytkownik o takim loginie."
+msgstr ""
 
 #: common/reporting/report_utils.php:937
 msgid "Support Requests"
@@ -5071,9 +4947,8 @@ msgid "Customize display for the tracker."
 msgstr ""
 
 #: common/tracker/actions/admin-tracker.php:64
-#, fuzzy
 msgid "Manage Canned Responses"
-msgstr "Dodaj Grupę Dokumentów"
+msgstr ""
 
 #: common/tracker/actions/admin-tracker.php:66
 msgid "Create/change generic response messages for the tracker."
@@ -5267,9 +5142,8 @@ msgstr ""
 #: common/tracker/actions/browse.php:199 common/tracker/actions/browse.php:573
 #: common/tracker/actions/query.php:200
 #: common/tracker/views/form-customizelist.php:46
-#, fuzzy
 msgid "Last Modified Date"
-msgstr "Nazwisko:"
+msgstr ""
 
 #: common/tracker/actions/browse.php:200 common/tracker/actions/browse.php:561
 #: common/tracker/actions/query.php:201
@@ -5300,19 +5174,16 @@ msgid "Last 24 h"
 msgstr ""
 
 #: common/tracker/actions/browse.php:231 common/tracker/actions/query.php:232
-#, fuzzy
 msgid "Last 7 days"
-msgstr "Nazwisko:"
+msgstr ""
 
 #: common/tracker/actions/browse.php:232 common/tracker/actions/query.php:233
-#, fuzzy
 msgid "Last 2 weeks"
-msgstr "Nazwisko:"
+msgstr ""
 
 #: common/tracker/actions/browse.php:233 common/tracker/actions/query.php:234
-#, fuzzy
 msgid "Last month"
-msgstr "Nazwisko:"
+msgstr ""
 
 #: common/tracker/actions/browse.php:272
 #, php-format
@@ -5334,9 +5205,8 @@ msgid "Advanced queries"
 msgstr ""
 
 #: common/tracker/actions/browse.php:358 www/include/html.php:648
-#, fuzzy
 msgid "Select One"
-msgstr "Dodaj Grupę Dokumentów"
+msgstr ""
 
 #: common/tracker/actions/browse.php:365 www/frs/admin/index.php:210
 #: www/my/diary.php:209
@@ -5428,9 +5298,8 @@ msgstr ""
 
 #: common/tracker/actions/browse.php:714 common/tracker/actions/browse.php:758
 #: www/pm/browse_task.php:358 www/pm/browse_task.php:387
-#, fuzzy
 msgid "Mass Update"
-msgstr "Nazwisko:"
+msgstr ""
 
 #: common/tracker/actions/browse.php:718 www/pm/browse_task.php:363
 msgid ""
@@ -5472,9 +5341,8 @@ msgid "Export as a CSV file"
 msgstr ""
 
 #: common/tracker/actions/csv.php:85 www/pm/csv.php:82
-#, fuzzy
 msgid "Selected CSV Format:"
-msgstr "Aktualizuj hasło"
+msgstr ""
 
 #: common/tracker/actions/csv.php:87
 msgid "Download CSV file"
@@ -5509,9 +5377,8 @@ msgstr ""
 #: www/frs/admin/editrelease.php:385 www/pm/admin/index.php:384
 #: www/pm/deletetask.php:45 www/project/admin/roledelete.php:88
 #: www/reporting/rebuild.php:63
-#, fuzzy
 msgid "I am Sure"
-msgstr "Edytuj grupę"
+msgstr ""
 
 #: common/tracker/actions/detail.php:61
 #: common/tracker/actions/mod-limited.php:78 common/tracker/actions/mod.php:79
@@ -5577,14 +5444,12 @@ msgid "Changes"
 msgstr ""
 
 #: common/tracker/actions/format_csv.php:53 www/pm/format_csv.php:48
-#, fuzzy
 msgid "Update CSV Format"
-msgstr "Aktualizuj hasło"
+msgstr ""
 
 #: common/tracker/actions/format_csv.php:62 www/pm/format_csv.php:58
-#, fuzzy
 msgid "CSV Format"
-msgstr "Aktualizuj hasło"
+msgstr ""
 
 #: common/tracker/actions/format_csv.php:69
 #: common/tracker/actions/format_csv.php:87 www/pm/format_csv.php:71
@@ -5714,9 +5579,8 @@ msgid "Use Canned Response"
 msgstr ""
 
 #: common/tracker/actions/query.php:73
-#, fuzzy
 msgid "Query Successfully Created"
-msgstr "Pomyślnie Zmieniono Hasło"
+msgstr ""
 
 #: common/tracker/actions/query.php:122
 msgid "Query Updated"
@@ -5891,9 +5755,9 @@ msgid "Updated Successfully"
 msgstr ""
 
 #: common/tracker/actions/tracker.php:266
-#, fuzzy, php-format
+#, php-format
 msgid "Could not get Project Task for %d"
-msgstr "Zmień Hasło"
+msgstr ""
 
 #: common/tracker/actions/tracker.php:292
 #: common/tracker/actions/tracker.php:311
@@ -5919,7 +5783,6 @@ msgid "File Upload: Successful"
 msgstr ""
 
 #: common/tracker/actions/tracker.php:388
-#, fuzzy
 msgid "File Delete"
 msgstr ""
 
@@ -5950,9 +5813,8 @@ msgstr ""
 
 #: common/tracker/Artifact.class.php:142
 #: common/tracker/ArtifactExtraField.class.php:68
-#, fuzzy
 msgid "Invalid Artifact Type"
-msgstr "Niepoprawne hasło"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:154
 msgid "Only project members can view private artifact types"
@@ -5971,42 +5833,34 @@ msgid "Message Body Is Required"
 msgstr ""
 
 #: common/tracker/Artifact.class.php:229
-#, fuzzy
 msgid "Error remapping status"
 msgstr ""
 
 #: common/tracker/Artifact.class.php:300
-#, fuzzy
 msgid "Invalid Artifact ID"
-msgstr "Niepoprawne hasło"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:516
-#, fuzzy
 msgid "Error deleting extra field data: "
 msgstr ""
 
 #: common/tracker/Artifact.class.php:527
-#, fuzzy
 msgid "Error deleting file from db: "
 msgstr ""
 
 #: common/tracker/Artifact.class.php:535
-#, fuzzy
 msgid "Error deleting message: "
 msgstr ""
 
 #: common/tracker/Artifact.class.php:543
-#, fuzzy
 msgid "Error deleting history: "
 msgstr ""
 
 #: common/tracker/Artifact.class.php:551
-#, fuzzy
 msgid "Error deleting monitor: "
 msgstr ""
 
 #: common/tracker/Artifact.class.php:559
-#, fuzzy
 msgid "Error deleting artifact: "
 msgstr ""
 
@@ -6049,7 +5903,6 @@ msgid "Nothing Changed - Update Cancelled"
 msgstr ""
 
 #: common/tracker/Artifact.class.php:1230
-#, fuzzy
 msgid "Error updating assigned_to in artifact: "
 msgstr ""
 
@@ -6085,9 +5938,8 @@ msgid "This Tracker already uses custom statuses"
 msgstr ""
 
 #: common/tracker/ArtifactExtraField.class.php:234
-#, fuzzy
 msgid "Invalid ArtifactExtraField ID"
-msgstr "Niepoprawne hasło"
+msgstr ""
 
 #: common/tracker/ArtifactExtraField.class.php:322
 #: common/tracker/views/form-addextrafield.php:124
@@ -6158,19 +6010,16 @@ msgstr ""
 
 #: common/tracker/ArtifactHistory.class.php:53
 #: common/tracker/ArtifactMessage.class.php:53
-#, fuzzy
 msgid "Invalid Artifact"
-msgstr "Niepoprawne hasło"
+msgstr ""
 
 #: common/tracker/ArtifactHistory.class.php:82
-#, fuzzy
 msgid "Invalid ArtifactHistory ID"
-msgstr "Niepoprawne hasło"
+msgstr ""
 
 #: common/tracker/ArtifactMessage.class.php:89
-#, fuzzy
 msgid "Error: Logged In User Bug Could Not Get User Object"
-msgstr "Zmień Hasło"
+msgstr ""
 
 #: common/tracker/ArtifactMessage.class.php:92
 msgid "Logged In: YES"
@@ -6181,9 +6030,8 @@ msgid "Logged In: NO"
 msgstr ""
 
 #: common/tracker/ArtifactMessage.class.php:139
-#, fuzzy
 msgid "Invalid ArtifactMessage ID"
-msgstr "Niepoprawne hasło"
+msgstr ""
 
 #: common/tracker/ArtifactQuery.class.php:148
 #: common/tracker/ArtifactQuery.class.php:728
@@ -6202,19 +6050,16 @@ msgid ""
 msgstr ""
 
 #: common/tracker/ArtifactQuery.class.php:328
-#, fuzzy
 msgid "Invalid Last Modified Date Range"
-msgstr "Nazwisko:"
+msgstr ""
 
 #: common/tracker/ArtifactQuery.class.php:344
-#, fuzzy
 msgid "Invalid Open Date Range"
-msgstr "Niepoprawne hasło"
+msgstr ""
 
 #: common/tracker/ArtifactQuery.class.php:360
-#, fuzzy
 msgid "Invalid Close Date Range"
-msgstr "Niepoprawne hasło"
+msgstr ""
 
 #: common/tracker/ArtifactQuery.class.php:732
 msgid "Query does not exist"
@@ -6232,9 +6077,8 @@ msgid "E-mail address(es) appeared invalid"
 msgstr ""
 
 #: common/tracker/ArtifactType.class.php:979
-#, fuzzy
 msgid "Tracker name already used"
-msgstr "Istnieje już użytkownik o takim loginie."
+msgstr ""
 
 #: common/tracker/ArtifactTypeFactory.class.php:67
 #, php-format
@@ -6242,9 +6086,8 @@ msgid "%s does not use the Tracker tool"
 msgstr ""
 
 #: common/tracker/include/ArtifactHtml.class.php:46
-#, fuzzy
 msgid "Edit this message"
-msgstr "Edytuj grupę"
+msgstr ""
 
 #: common/tracker/include/ArtifactHtml.class.php:112
 msgid "Sender"
@@ -6275,9 +6118,9 @@ msgid "Backward Relations"
 msgstr ""
 
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:43
-#, fuzzy, php-format
+#, php-format
 msgid "Trackers for %s"
-msgstr "Istnieje już użytkownik o takim loginie."
+msgstr ""
 
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:47
 #: common/tracker/include/ArtifactTypeHtml.class.php:52
@@ -6322,7 +6165,6 @@ msgid "Download data from this tracker as csv file."
 msgstr ""
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:64
-#, fuzzy
 msgid "Add a new issue."
 msgstr ""
 
@@ -6436,14 +6278,13 @@ msgstr ""
 
 #: common/tracker/Roadmap.class.php:75
 #: common/tracker/RoadmapFactory.class.php:68
-#, fuzzy
 msgid "Invalid Group"
-msgstr "Niepoprawne hasło"
+msgstr ""
 
 #: common/tracker/Roadmap.class.php:103
-#, fuzzy, php-format
+#, php-format
 msgid "“%s” roadmap already exists"
-msgstr "Istnieje już użytkownik o takim loginie."
+msgstr ""
 
 #: common/tracker/views/form-addcanned.php:27
 #, php-format
@@ -6459,12 +6300,10 @@ msgid "Operation"
 msgstr ""
 
 #: common/tracker/views/form-addcanned.php:60
-#, fuzzy
 msgid "No Canned Responses set up in this Project"
-msgstr "Przeglądaj Repozytorium Subversion"
+msgstr ""
 
 #: common/tracker/views/form-addcanned.php:63
-#, fuzzy
 msgid "Add New Canned Response"
 msgstr ""
 
@@ -6621,7 +6460,6 @@ msgid "Custom Field Rendering Template"
 msgstr ""
 
 #: common/tracker/views/form-addextrafield.php:154
-#, fuzzy
 msgid "Edit template"
 msgstr ""
 
@@ -6648,7 +6486,6 @@ msgid "Roadmap %s created"
 msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:80
-#, fuzzy
 msgid "Cannot create roadmap: "
 msgstr ""
 
@@ -6686,15 +6523,13 @@ msgid "Roadmap %s is deleted"
 msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:144
-#, fuzzy
 msgid "Cannot delete roadmap: "
-msgstr "Dodaj Grupę Dokumentów"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:156
 #: common/tracker/views/form-adminroadmap.php:478
-#, fuzzy
 msgid "Delete roadmap"
-msgstr "Dodaj Grupę Dokumentów"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:160
 #, php-format
@@ -6724,16 +6559,14 @@ msgid "Create a new roadmap"
 msgstr "Aby utworzyć nowe wydanie kliknij tutaj."
 
 #: common/tracker/views/form-adminroadmap.php:187
-#, fuzzy
 msgid "Update roadmap"
-msgstr "Aktualizuj hasło"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:202 www/tracker/roadmap.php:257
 msgid "No trackers have been set up."
 msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:221
-#, fuzzy
 msgid "Not used"
 msgstr ""
 
@@ -6751,13 +6584,11 @@ msgstr "Uwagi do wydania"
 
 #: common/tracker/views/form-adminroadmap.php:283
 #: common/tracker/views/form-adminroadmap.php:370
-#, fuzzy
 msgid "Cannot modify release order: "
 msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:390
 #: common/tracker/views/form-adminroadmap.php:475
-#, fuzzy
 msgid "Manage releases"
 msgstr ""
 
@@ -6854,7 +6685,6 @@ msgid ""
 msgstr ""
 
 #: common/tracker/views/form-customizelist.php:123
-#, fuzzy
 msgid "Add New Field"
 msgstr ""
 
@@ -7025,7 +6855,6 @@ msgid "Preferences"
 msgstr ""
 
 #: common/widget/Widget.class.php:366
-#, fuzzy
 msgid "General"
 msgstr ""
 
@@ -7132,15 +6961,13 @@ msgstr ""
 
 #: common/widget/Widget_MyArtifacts.class.php:201
 #: common/widget/Widget_MyArtifacts.class.php:278
-#, fuzzy
 msgid "Browse Trackers List for this project"
-msgstr "Przeglądaj Repozytorium Subversion"
+msgstr ""
 
 #: common/widget/Widget_MyArtifacts.class.php:203
 #: common/widget/Widget_MyArtifacts.class.php:280
-#, fuzzy
 msgid "Browse this tracker for this project"
-msgstr "Przeglądaj Repozytorium Subversion"
+msgstr ""
 
 #: common/widget/Widget_MyArtifacts.class.php:241
 msgid "Assigned"
@@ -7152,14 +6979,12 @@ msgid "Submitted"
 msgstr "Zamieść nową dokumentację"
 
 #: common/widget/Widget_MyArtifacts.class.php:253
-#, fuzzy
 msgid "Monitored"
 msgstr ""
 
 #: common/widget/Widget_MyArtifacts.class.php:263
-#, fuzzy
 msgid "Browse this artefact"
-msgstr "Przeglądaj Repozytorium Subversion"
+msgstr ""
 
 #: common/widget/Widget_MyArtifacts.class.php:295
 msgid ""
@@ -7219,7 +7044,6 @@ msgid "List SVN commits you have done, by project."
 msgstr ""
 
 #: common/widget/Widget_MyMonitoredDocuments.class.php:39
-#, fuzzy
 msgid "Monitored Documents"
 msgstr ""
 
@@ -7298,7 +7122,6 @@ msgid "Monitored File Packages"
 msgstr ""
 
 #: common/widget/Widget_MyMonitoredFp.class.php:55
-#, fuzzy
 msgid "You are not monitoring any files."
 msgstr ""
 
@@ -7338,24 +7161,20 @@ msgid "Quit this project?"
 msgstr ""
 
 #: common/widget/Widget_MyProjects.class.php:88
-#, fuzzy
 msgid "Leave project"
-msgstr "Nazwa nowej grupy"
+msgstr ""
 
 #: common/widget/Widget_MyProjects.class.php:96
-#, fuzzy
 msgid "Private project"
-msgstr "Nazwa nowej grupy"
+msgstr ""
 
 #: common/widget/Widget_MyProjects.class.php:109
-#, fuzzy
 msgid "MyProjects"
 msgstr ""
 
 #: common/widget/Widget_MyProjects.class.php:110
-#, fuzzy
 msgid "My projects"
-msgstr "Zgłoś chęć dołączenia do projektu %1$s"
+msgstr ""
 
 #: common/widget/Widget_MyProjects.class.php:151
 msgid ""
@@ -7440,7 +7259,6 @@ msgid "Allow you to view the project description"
 msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:42
-#, fuzzy
 msgid "Last 4 weeks Documents Manager Activity"
 msgstr ""
 
@@ -7449,9 +7267,8 @@ msgid "new files [F]"
 msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:89
-#, fuzzy
 msgid "new directories [D]"
-msgstr "Edytuj grupę"
+msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:90
 msgid "updated files [U]"
@@ -7462,9 +7279,8 @@ msgid "new and update Files [FU]"
 msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:92
-#, fuzzy
 msgid "new files and directories [FD]"
-msgstr "Edytuj grupę"
+msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:93
 msgid "new and update files and directories [FUD]"
@@ -7484,16 +7300,14 @@ msgstr ""
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:131
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:145
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:162
-#, fuzzy
 msgid "updated Files"
 msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:137
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:153
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:163
-#, fuzzy
 msgid "new Directories"
-msgstr "Edytuj grupę"
+msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:167
 msgid "3 weeks ago"
@@ -7504,9 +7318,8 @@ msgid "2 weeks ago"
 msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:167
-#, fuzzy
 msgid "Last Week"
-msgstr "Nazwisko:"
+msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:167
 msgid "Current Week"
@@ -7526,7 +7339,6 @@ msgstr ""
 
 #: common/widget/Widget_ProjectInfo.class.php:32 www/include/user_home.php:88
 #: www/project/admin/project_admin_utils.php:48
-#, fuzzy
 msgid "Project Information"
 msgstr ""
 
@@ -7677,9 +7489,8 @@ msgid "List the project members."
 msgstr ""
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:35
-#, fuzzy
 msgid "Public Tools"
-msgstr "Nazwa nowej grupy"
+msgstr ""
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:48
 msgid "Home Page"
@@ -7738,9 +7549,8 @@ msgstr[1] ""
 msgstr[2] ""
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:154
-#, fuzzy
 msgid "There are no subprojects available"
-msgstr "Nazwa nowej grupy"
+msgstr ""
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:173
 msgid "surveys"
@@ -7946,9 +7756,9 @@ msgid ", part of "
 msgstr ""
 
 #: plugins/admssw/common/RDFedFRSPackage.class.php:94
-#, fuzzy, php-format
+#, php-format
 msgid "%1$s release series of project %2$s"
-msgstr "Zgłoś chęć dołączenia do projektu %1$s"
+msgstr ""
 
 #: plugins/admssw/include/admsswPlugin.class.php:138
 msgid "ADMS.SW meta-data"
@@ -8007,9 +7817,8 @@ msgid ""
 msgstr ""
 
 #: plugins/admssw/www/index.php:43
-#, fuzzy
 msgid "Public projects :"
-msgstr "Nazwa nowej grupy"
+msgstr ""
 
 #: plugins/admssw/www/index.php:46
 msgid "short index"
@@ -8073,9 +7882,8 @@ msgstr ""
 #: www/account/index.php:149 www/account/lostpw.php:89
 #: www/account/pending-resend.php:67 www/account/verify.php:78
 #: www/include/user_profile.php:87
-#, fuzzy
 msgid "Login Name"
-msgstr "Login"
+msgstr ""
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
 #: plugins/authldap/include/AuthLDAPPlugin.class.php:209
@@ -8100,9 +7908,8 @@ msgstr ""
 
 #: plugins/authbuiltin/www/post-login.php:106
 #: plugins/authldap/www/post-login.php:105
-#, fuzzy
 msgid "Your account does not exist."
-msgstr "Istnieje już użytkownik o takim loginie."
+msgstr ""
 
 #: plugins/authbuiltin/www/post-login.php:110
 #: plugins/authldap/www/post-login.php:109
@@ -8158,27 +7965,25 @@ msgid "Login via CAS"
 msgstr "Zaloguj z SSL"
 
 #: plugins/authcas/www/post-login.php:83
-#, fuzzy
 msgid "Your account "
-msgstr "Istnieje już użytkownik o takim loginie."
+msgstr ""
 
 #: plugins/authhttpd/include/AuthHTTPDPlugin.class.php:67
 msgid "Login via HTTP authentication"
 msgstr ""
 
 #: plugins/authldap/include/AuthLDAPPlugin.class.php:208
-#, fuzzy
 msgid "LDAP Login name:"
-msgstr "Login:"
+msgstr ""
 
 #: plugins/authldap/www/post-login.php:91
 msgid "LDAP server unreachable"
 msgstr ""
 
 #: plugins/authldap/www/post-login.php:113
-#, fuzzy, php-format
+#, php-format
 msgid "<a href=\"%1$s\">[Resend Confirmation Email]</a>"
-msgstr "Zarejestruj"
+msgstr ""
 
 #: plugins/authldap/www/post-login.php:115
 #, php-format
@@ -8240,9 +8045,9 @@ msgid "Identity successfully deleted"
 msgstr "Pomyślnie Zmieniono Hasło"
 
 #: plugins/authopenid/www/index.php:122
-#, fuzzy, php-format
+#, php-format
 msgid "Manage OpenID identities for user %s"
-msgstr "Zgłoś chęć dołączenia do projektu %1$s"
+msgstr ""
 
 #: plugins/authopenid/www/index.php:125
 msgid "My OpenID identities"
@@ -8283,7 +8088,7 @@ msgstr ""
 
 #: plugins/authopenid/www/post-login.php:105
 #: plugins/authwebid/www/post-login.php:85
-#, fuzzy, php-format
+#, php-format
 msgid "Unknown user with identity “%s”"
 msgstr ""
 
@@ -8299,14 +8104,13 @@ msgid ""
 msgstr ""
 
 #: plugins/authwebid/include/AuthWebIDPlugin.class.php:273
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot bind new identity: %s"
 msgstr ""
 
 #: plugins/authwebid/include/AuthWebIDPlugin.class.php:288
-#, fuzzy
 msgid "WebID already used"
-msgstr "Istnieje już użytkownik o takim loginie."
+msgstr ""
 
 #: plugins/authwebid/include/AuthWebIDPlugin.class.php:295
 msgid "WebID already pending binding"
@@ -8325,16 +8129,15 @@ msgid ""
 msgstr ""
 
 #: plugins/authwebid/www/index.php:89
-#, fuzzy, php-format
+#, php-format
 msgid "Manage WebID identities for user %1$s"
-msgstr "Zgłoś chęć dołączenia do projektu %1$s"
+msgstr ""
 
 #: plugins/authwebid/www/index.php:92
 msgid "My WebID identities"
 msgstr ""
 
 #: plugins/authwebid/www/index.php:95 plugins/authwebid/www/index.php:123
-#, fuzzy
 msgid "Bind a new WebID"
 msgstr ""
 
@@ -8387,12 +8190,10 @@ msgid ""
 msgstr ""
 
 #: plugins/blocks/common/blocksPlugin.class.php:52
-#, fuzzy
 msgid "Blocks"
 msgstr ""
 
 #: plugins/blocks/common/blocksPlugin.class.php:65
-#, fuzzy
 msgid "Blocks Admin"
 msgstr ""
 
@@ -8467,9 +8268,8 @@ msgid "Active"
 msgstr ""
 
 #: plugins/blocks/www/index.php:225
-#, fuzzy
 msgid "Configure"
-msgstr "Login:"
+msgstr ""
 
 #: plugins/blocks/www/index.php:229
 msgid "Save Blocks"
@@ -8556,7 +8356,6 @@ msgid "Compact preview of local project"
 msgstr ""
 
 #: plugins/compactpreview/www/project.php:34
-#, fuzzy
 msgid "OSLC Project Compact Preview"
 msgstr ""
 
@@ -8622,23 +8421,20 @@ msgid "[View All Contributions]"
 msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:175
-#, fuzzy
 msgid "Edit actors and roles"
-msgstr "Edytuj grupę"
+msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:175
-#, fuzzy
 msgid "Contribution tracker plugin"
-msgstr "Login:"
+msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:297
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:405
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:509
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:646
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:783
-#, fuzzy
 msgid "Object already exists"
-msgstr "Istnieje już użytkownik o takim loginie."
+msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:306
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:413
@@ -8710,9 +8506,8 @@ msgstr ""
 #: plugins/contribtracker/www/actor_logo.php:36
 #: plugins/contribtracker/www/actor_logo.php:41
 #: plugins/contribtracker/www/index.php:126
-#, fuzzy
 msgid "Invalid actor"
-msgstr "Niepoprawne hasło"
+msgstr ""
 
 #: plugins/contribtracker/www/global_admin.php:231
 msgid "Contribution tracker administration"
@@ -8723,7 +8518,6 @@ msgid "Existing actors"
 msgstr ""
 
 #: plugins/contribtracker/www/global_admin.php:239
-#, fuzzy
 msgid "Logo"
 msgstr "Zaloguj"
 
@@ -8802,14 +8596,12 @@ msgstr ""
 
 #: plugins/contribtracker/www/global_admin.php:380
 #: plugins/contribtracker/www/global_admin.php:397
-#, fuzzy
 msgid "Role description"
 msgstr ""
 
 #: plugins/contribtracker/www/global_admin.php:389
-#, fuzzy
 msgid "Edit a role"
-msgstr "Edytuj grupę"
+msgstr ""
 
 #: plugins/contribtracker/www/global_admin.php:405
 msgid "Register a new legal structure"
@@ -8817,9 +8609,8 @@ msgstr ""
 
 #: plugins/contribtracker/www/global_admin.php:409
 #: plugins/contribtracker/www/global_admin.php:424
-#, fuzzy
 msgid "Structure name"
-msgstr "Login:"
+msgstr ""
 
 #: plugins/contribtracker/www/global_admin.php:417
 msgid "Edit a legal structure"
@@ -8831,25 +8622,21 @@ msgstr ""
 
 #: plugins/contribtracker/www/global_admin.php:435
 #: plugins/contribtracker/www/global_admin.php:465
-#, fuzzy
 msgid "Actor name"
-msgstr "Login:"
+msgstr ""
 
 #: plugins/contribtracker/www/global_admin.php:436
 #: plugins/contribtracker/www/global_admin.php:466
-#, fuzzy
 msgid "Actor URL"
-msgstr "Login:"
+msgstr ""
 
 #: plugins/contribtracker/www/global_admin.php:437
 #: plugins/contribtracker/www/global_admin.php:467
-#, fuzzy
 msgid "Actor email"
-msgstr "Login:"
+msgstr ""
 
 #: plugins/contribtracker/www/global_admin.php:438
 #: plugins/contribtracker/www/global_admin.php:468
-#, fuzzy
 msgid "Actor description"
 msgstr ""
 
@@ -8860,9 +8647,8 @@ msgid "Actor logo (PNG, %d kB max)"
 msgstr ""
 
 #: plugins/contribtracker/www/global_admin.php:458
-#, fuzzy
 msgid "Edit an actor"
-msgstr "Edytuj grupę"
+msgstr ""
 
 #: plugins/contribtracker/www/index.php:51
 #: plugins/contribtracker/www/project_admin.php:221
@@ -8940,21 +8726,18 @@ msgstr ""
 
 #: plugins/contribtracker/www/project_admin.php:189
 #: plugins/contribtracker/www/project_admin.php:210
-#, fuzzy
 msgid "Contribution name"
-msgstr "Login:"
+msgstr ""
 
 #: plugins/contribtracker/www/project_admin.php:190
 #: plugins/contribtracker/www/project_admin.php:211
-#, fuzzy
 msgid "Contribution date"
-msgstr "Login:"
+msgstr ""
 
 #: plugins/contribtracker/www/project_admin.php:191
 #: plugins/contribtracker/www/project_admin.php:212
-#, fuzzy
 msgid "Contribution description"
-msgstr "Login:"
+msgstr ""
 
 #: plugins/contribtracker/www/project_admin.php:199
 msgid "Edit a contribution"
@@ -9025,24 +8808,21 @@ msgid "Failed to add subproject."
 msgstr ""
 
 #: plugins/extsubproj/actions/addExtSubProj.php:35
-#, fuzzy
 msgid "Subproject successfully added."
-msgstr "Pomyślnie Zmieniono Hasło"
+msgstr ""
 
 #: plugins/extsubproj/actions/delExtSubProj.php:30
 msgid "Failed to delete subproject."
 msgstr ""
 
 #: plugins/extsubproj/actions/delExtSubProj.php:34 www/pm/admin/index.php:156
-#, fuzzy
 msgid "Subproject successfully deleted."
-msgstr "Pomyślnie Zmieniono Hasło"
+msgstr ""
 
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:67
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:76
-#, fuzzy
 msgid "External subprojects admin"
-msgstr "Nazwa nowej grupy"
+msgstr ""
 
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:67
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:76
@@ -9054,14 +8834,12 @@ msgid "Site Global External subprojects Admin"
 msgstr ""
 
 #: plugins/extsubproj/include/extsubproj_Widget_SubProjects.class.php:31
-#, fuzzy
 msgid "Project external subprojects"
 msgstr ""
 
 #: plugins/extsubproj/include/extsubproj_Widget_SubProjects.class.php:35
-#, fuzzy
 msgid "Plugin (project)"
-msgstr "Zgłoś chęć dołączenia do projektu %1$s"
+msgstr ""
 
 #: plugins/extsubproj/include/extsubproj_Widget_SubProjects.class.php:39
 #, fuzzy
@@ -9069,9 +8847,8 @@ msgid "Displays links to external subprojects of the project"
 msgstr "Poniżej znajduje się lista wszystkich plików projektu."
 
 #: plugins/extsubproj/include/extsubproj_Widget_SubProjects.class.php:51
-#, fuzzy
 msgid "Subprojects"
-msgstr "Nazwa nowej grupy"
+msgstr ""
 
 #: plugins/extsubproj/view/admin/viewGlobalConfiguration.php:30
 #: plugins/mantisbt/view/admin/viewConfiguration.php:54
@@ -9081,9 +8858,8 @@ msgid "Manage configuration"
 msgstr ""
 
 #: plugins/extsubproj/view/admin/viewProjectConfiguration.php:32
-#, fuzzy
 msgid "Subproject URL"
-msgstr "Nazwa nowej grupy"
+msgstr ""
 
 #: plugins/extsubproj/view/admin/viewProjectConfiguration.php:41
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:227
@@ -9091,9 +8867,8 @@ msgid "delete"
 msgstr ""
 
 #: plugins/extsubproj/view/admin/viewProjectConfiguration.php:49
-#, fuzzy
 msgid "Manage project's external subprojects"
-msgstr "Zgłoś chęć dołączenia do projektu %1$s"
+msgstr ""
 
 #: plugins/extsubproj/view/admin/viewProjectConfiguration.php:56
 msgid "URL of the new subproject."
@@ -9130,7 +8905,6 @@ msgid "Submitted on"
 msgstr "Zamieść nową dokumentację"
 
 #: plugins/forumml/include/forummlPlugin.class.php:108
-#, fuzzy
 msgid "This project's mailing lists"
 msgstr ""
 
@@ -9155,9 +8929,8 @@ msgid "Next "
 msgstr ""
 
 #: plugins/forumml/www/forumml_utils.php:152
-#, fuzzy
 msgid "Last messages"
-msgstr "Nazwisko:"
+msgstr ""
 
 #: plugins/forumml/www/forumml_utils.php:168
 #: plugins/forumml/www/forumml_utils.php:239 www/forum/index.php:69
@@ -9166,9 +8939,8 @@ msgid "Threads"
 msgstr ""
 
 #: plugins/forumml/www/forumml_utils.php:184
-#, fuzzy
 msgid "Last updated"
-msgstr "Nazwisko:"
+msgstr ""
 
 #: plugins/forumml/www/forumml_utils.php:415
 msgid "On "
@@ -9197,18 +8969,16 @@ msgid "Erase"
 msgstr ""
 
 #: plugins/forumml/www/forumml_utils.php:726
-#, fuzzy
 msgid "Mail successfully sent "
-msgstr "Pomyślnie Zmieniono Hasło"
+msgstr ""
 
 #: plugins/forumml/www/forumml_utils.php:728
 msgid "Sending mail failed"
 msgstr ""
 
 #: plugins/forumml/www/index.php:54 plugins/forumml/www/message.php:90
-#, fuzzy
 msgid "No list specified"
-msgstr "Niepoprawne hasło"
+msgstr ""
 
 #: plugins/forumml/www/index.php:59 plugins/forumml/www/message.php:95
 #: plugins/forumml/www/upload.php:48
@@ -9239,9 +9009,8 @@ msgid "Mailing List"
 msgstr ""
 
 #: plugins/forumml/www/index.php:101
-#, fuzzy
 msgid "New Thread"
-msgstr "Dodaj Grupę Dokumentów"
+msgstr ""
 
 #: plugins/forumml/www/index.php:102
 msgid "Browse Archives"
@@ -9253,9 +9022,8 @@ msgid "Submit a new thread"
 msgstr "Zamieść nową dokumentację"
 
 #: plugins/forumml/www/message.php:98 plugins/forumml/www/upload.php:51
-#, fuzzy
 msgid "This list is not active"
-msgstr "Niepoprawne hasło"
+msgstr ""
 
 #: plugins/forumml/www/message.php:117
 msgid "Email succefully sent. It can take some time before being displayed"
@@ -9341,27 +9109,24 @@ msgid "Lists user projects hosted on remote forge systems"
 msgstr ""
 
 #: plugins/globaldashboard/include/globalDashboard_Widget_MyProjects.php:52
-#, fuzzy
 msgid "My remote projects"
-msgstr "Nazwa nowej grupy"
+msgstr ""
 
 #: plugins/globaldashboard/www/admin/add_account.php:41
 msgid "You can add remote accounts ONLY for yourself !!!"
 msgstr ""
 
 #: plugins/globaldashboard/www/admin/add_account.php:70
-#, fuzzy
 msgid "Remote Account successfully created"
-msgstr "Grupa dokumentów: Nazwa jest wymagana"
+msgstr ""
 
 #: plugins/globaldashboard/www/admin/delete_account.php:31
 msgid "You can remove only YOUR remote accounts !!!"
 msgstr ""
 
 #: plugins/globaldashboard/www/admin/delete_account.php:39
-#, fuzzy
 msgid "Remote Account successfully deleted"
-msgstr "Grupa dokumentów: Nazwa jest wymagana"
+msgstr ""
 
 #: plugins/globaldashboard/www/admin/delete_account.php:41
 msgid "Unable to delete remote account: "
@@ -9384,15 +9149,13 @@ msgstr ""
 #: www/project/memberlist.php:50
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:44
 #: www/stats/lastlogins.php:51 www/top/topusers.php:63
-#, fuzzy
 msgid "User Name"
-msgstr "Nazwisko:"
+msgstr ""
 
 #: plugins/globaldashboard/www/admin/edit_account_page.php:86
 #: plugins/globaldashboard/www/admin/manage_accounts.php:123
-#, fuzzy
 msgid "Account password"
-msgstr "Aktualizuj hasło"
+msgstr ""
 
 #: plugins/globaldashboard/www/admin/edit_account_page.php:92
 #: plugins/globaldashboard/www/admin/manage_accounts.php:129
@@ -9440,7 +9203,6 @@ msgstr ""
 
 #: plugins/globaldashboard/www/admin/edit_account_page.php:176
 #: plugins/globaldashboard/www/admin/manage_accounts.php:178
-#, fuzzy
 msgid "Projects discovery method"
 msgstr ""
 
@@ -9454,9 +9216,8 @@ msgid "You can edit only YOUR remote accounts !!!"
 msgstr ""
 
 #: plugins/globaldashboard/www/admin/edit_account.php:73
-#, fuzzy
 msgid "Remote Account successfully updated"
-msgstr "Grupa dokumentów: Nazwa jest wymagana"
+msgstr ""
 
 #: plugins/globaldashboard/www/admin/manage_accounts.php:54
 #: plugins/globaldashboard/www/index.php:38
@@ -9680,14 +9441,14 @@ msgstr ""
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:228
 #: www/search/include/renderers/HtmlSearchRenderer.class.php:100
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:112
-#, fuzzy, php-format
+#, php-format
 msgid "No matches found for “%s”"
 msgstr ""
 
 #: plugins/globalsearch/www/index.php:162
 #: www/search/include/renderers/HtmlGroupSearchRenderer.class.php:69
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:111
-#, fuzzy, php-format
+#, php-format
 msgid "Search results for “%s”"
 msgstr ""
 
@@ -9798,9 +9559,8 @@ msgstr ""
 
 #: plugins/headermenu/action/updateLinkStatus.php:37
 #: plugins/webanalytics/action/updateLinkStatus.php:32
-#, fuzzy
 msgid "Link Status updated"
-msgstr "Nazwisko:"
+msgstr ""
 
 #: plugins/headermenu/action/updateLinkStatus.php:43
 #: plugins/webanalytics/action/updateLinkStatus.php:38
@@ -9852,9 +9612,8 @@ msgstr ""
 
 #: plugins/headermenu/view/admin/updateLinkValue.php:58
 #: plugins/webanalytics/view/admin/updateLinkValue.php:34
-#, fuzzy
 msgid "Update this link"
-msgstr "Aktualizuj hasło"
+msgstr ""
 
 #: plugins/headermenu/view/admin/updateLinkValue.php:61
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:62
@@ -9895,14 +9654,12 @@ msgid "Cannot retrieve value for this link:"
 msgstr ""
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:44
-#, fuzzy
 msgid "Outermenu Link Order successfully validated"
-msgstr "Grupa dokumentów: Nazwa jest wymagana"
+msgstr ""
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:45
-#, fuzzy
 msgid "Headermenu Link Order successfully validated"
-msgstr "Pomyślnie Zmieniono Hasło"
+msgstr ""
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:46
 msgid "Error in Outermenu Link Order validation"
@@ -9956,25 +9713,22 @@ msgstr ""
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:112
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:77
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:44
-#, fuzzy
 msgid "Activate this link"
-msgstr "Edytuj grupę"
+msgstr ""
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:81
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:114
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:79
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:46
-#, fuzzy
 msgid "Edit this link"
-msgstr "Edytuj grupę"
+msgstr ""
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:82
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:115
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:80
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:47
-#, fuzzy
 msgid "Delete this link"
-msgstr "Edytuj grupę"
+msgstr ""
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:87
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:120
@@ -9996,7 +9750,6 @@ msgstr ""
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:126
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:89
-#, fuzzy
 msgid "Add new tab"
 msgstr ""
 
@@ -10013,16 +9766,14 @@ msgid "Just paste your code here..."
 msgstr ""
 
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:44
-#, fuzzy
 msgid "Link Order successfully validated"
-msgstr "Pomyślnie Zmieniono Hasło"
+msgstr ""
 
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:45
 msgid "Error in Link Order validation"
 msgstr ""
 
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:54
-#, fuzzy
 msgid "Manage available tabs"
 msgstr ""
 
@@ -10040,7 +9791,6 @@ msgid "View Personal HelloWorld"
 msgstr ""
 
 #: plugins/helloworld/include/helloworldPlugin.class.php:116
-#, fuzzy
 msgid "HelloWorld Admin"
 msgstr ""
 
@@ -10212,9 +9962,8 @@ msgstr ""
 #: plugins/hudson/include/hudsonPlugin.class.php:293
 #: plugins/hudson/include/hudsonViews.class.php:298
 #: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:84
-#, fuzzy
 msgid "Last Failure"
-msgstr "Aktualizuj hasło"
+msgstr ""
 
 #: plugins/hudson/include/hudsonPlugin.class.php:295
 #: plugins/hudson/include/hudson_Widget_JobLastArtifacts.class.php:95
@@ -10275,9 +10024,8 @@ msgstr ""
 
 #: plugins/hudson/include/hudsonViews.class.php:219
 #: plugins/hudson/include/hudsonViews.class.php:402
-#, fuzzy
 msgid "Job URL:"
-msgstr "Login:"
+msgstr ""
 
 #: plugins/hudson/include/hudsonViews.class.php:223
 #: plugins/hudson/include/hudsonViews.class.php:407
@@ -10307,9 +10055,8 @@ msgid "with (optional) token:"
 msgstr ""
 
 #: plugins/hudson/include/hudsonViews.class.php:268
-#, fuzzy
 msgid "Update job"
-msgstr "Aktualizuj hasło"
+msgstr ""
 
 #: plugins/hudson/include/hudsonViews.class.php:296 www/admin/cronman.php:43
 #: www/people/editjob.php:74 www/people/editjob.php:91
@@ -10360,9 +10107,8 @@ msgid "CVS commit will trigger a build"
 msgstr ""
 
 #: plugins/hudson/include/hudsonViews.class.php:366
-#, fuzzy
 msgid "Edit this job"
-msgstr "Edytuj grupę"
+msgstr ""
 
 #: plugins/hudson/include/hudsonViews.class.php:372
 #, php-format
@@ -10374,9 +10120,8 @@ msgid "Delete this job"
 msgstr ""
 
 #: plugins/hudson/include/hudsonViews.class.php:386
-#, fuzzy
 msgid "No Hudson jobs associated with this project."
-msgstr "Przeglądaj Repozytorium Subversion"
+msgstr ""
 
 #: plugins/hudson/include/hudsonViews.class.php:388
 msgid "To add a job, select the link just below."
@@ -10407,7 +10152,6 @@ msgstr ""
 #: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:96
 #: plugins/hudson/include/hudson_Widget_JobTestResults.class.php:98
 #: plugins/hudson/include/hudson_Widget_JobTestTrend.class.php:93
-#, fuzzy
 msgid "Job not found."
 msgstr ""
 
@@ -10465,7 +10209,6 @@ msgstr ""
 
 #: plugins/hudson/include/hudson_Widget_JobTestResults.class.php:96
 #: plugins/hudson/include/hudson_Widget_JobTestTrend.class.php:91
-#, fuzzy
 msgid "No test found for this job."
 msgstr ""
 
@@ -10536,9 +10279,8 @@ msgid "Missing params"
 msgstr "Nazwa Pliku"
 
 #: plugins/mailman/include/MailmanList.class.php:445
-#, fuzzy
 msgid "Could Not Delete List: "
-msgstr "Zmień Hasło"
+msgstr ""
 
 #: plugins/mailman/include/mailmanPlugin.class.php:136
 msgid "View Personal mailman"
@@ -10675,12 +10417,12 @@ msgid "Add Mailing List"
 msgstr ""
 
 #: plugins/mailman/www/index.php:39 www/mail/index.php:53
-#, fuzzy, php-format
+#, php-format
 msgid "Mailing Lists for %s"
 msgstr ""
 
 #: plugins/mailman/www/index.php:55 www/mail/index.php:68
-#, fuzzy, php-format
+#, php-format
 msgid "No Lists found for %s"
 msgstr ""
 
@@ -10757,9 +10499,8 @@ msgid "Administrate from Mailman"
 msgstr ""
 
 #: plugins/mantisbt/action/addCategory.php:42
-#, fuzzy
 msgid "Category added successfully"
-msgstr "Grupa dokumentów: Nazwa jest wymagana"
+msgstr ""
 
 #: plugins/mantisbt/action/addCategory.php:45
 #: plugins/mantisbt/action/renameCategory.php:50
@@ -10771,68 +10512,61 @@ msgid "Ticket "
 msgstr ""
 
 #: plugins/mantisbt/action/addNote.php:57
-#, fuzzy
 msgid "Note added successfully."
-msgstr "Grupa dokumentów: Nazwa jest wymagana"
+msgstr ""
 
 #: plugins/mantisbt/action/addVersion.php:73
 msgid "Missing version."
 msgstr ""
 
 #: plugins/mantisbt/action/deleteAttachment.php:36
-#, fuzzy
 msgid "Attachment deleted successfully."
-msgstr "Grupa dokumentów: Nazwa jest wymagana"
+msgstr ""
 
 #: plugins/mantisbt/action/deleteAttachment.php:43
 msgid "Missing Attachment ID to delete."
 msgstr ""
 
 #: plugins/mantisbt/action/deleteCategory.php:40
-#, fuzzy, php-format
+#, php-format
 msgid "Category %s deleted successfully."
-msgstr "Grupa dokumentów: Nazwa jest wymagana"
+msgstr ""
 
 #: plugins/mantisbt/action/deleteCategory.php:43
 msgid "Missing parameters to delete category."
 msgstr ""
 
 #: plugins/mantisbt/action/deleteNote.php:39
-#, fuzzy
 msgid "Note deleted successfully"
-msgstr "Grupa dokumentów: Nazwa jest wymagana"
+msgstr ""
 
 #: plugins/mantisbt/action/deleteVersion.php:44
-#, fuzzy
 msgid "Version deleted successfully."
-msgstr "Grupa dokumentów: Nazwa jest wymagana"
+msgstr ""
 
 #: plugins/mantisbt/action/deleteVersion.php:47
 msgid "Missing parameters to delete version."
 msgstr ""
 
 #: plugins/mantisbt/action/init.php:41
-#, fuzzy
 msgid "MantisBT plugin successfully initialized."
-msgstr "Pomyślnie Zmieniono Hasło"
+msgstr ""
 
 #: plugins/mantisbt/action/inituser.php:34
 msgid "Failed to initialize user."
 msgstr ""
 
 #: plugins/mantisbt/action/inituser.php:38
-#, fuzzy
 msgid "MantisBT User successfully initialized."
-msgstr "Pomyślnie Zmieniono Hasło"
+msgstr ""
 
 #: plugins/mantisbt/action/renameCategory.php:37
 msgid "No action, same category name."
 msgstr ""
 
 #: plugins/mantisbt/action/renameCategory.php:47
-#, fuzzy
 msgid "Category renamed successfully."
-msgstr "Grupa dokumentów: Nazwa jest wymagana"
+msgstr ""
 
 #: plugins/mantisbt/action/updateConf.php:39
 msgid "MantisBT configuration successfully updated."
@@ -10848,7 +10582,6 @@ msgid "MantisBT global configuration successfully updated."
 msgstr ""
 
 #: plugins/mantisbt/action/updateIssue.php:45
-#, fuzzy
 msgid "No type found."
 msgstr ""
 
@@ -10890,12 +10623,10 @@ msgstr ""
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:234
 #: plugins/projectimport/www/index.php:628 www/admin/search.php:176
-#, fuzzy
 msgid "No project found"
 msgstr ""
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:245
-#, fuzzy
 msgid "No project found in MantisBT"
 msgstr ""
 
@@ -10944,7 +10675,6 @@ msgid "MantisBT project not initialized, missing params"
 msgstr ""
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:595
-#, fuzzy
 msgid "MantisBT project not found"
 msgstr ""
 
@@ -10965,7 +10695,6 @@ msgid "MantisBT"
 msgstr ""
 
 #: plugins/mantisbt/common/mantisbt_Widget_ProjectLastIssues.class.php:38
-#, fuzzy
 msgid "MantisBT description."
 msgstr ""
 
@@ -11037,7 +10766,6 @@ msgstr ""
 #: plugins/mantisbt/view/addIssue.php:71
 #: plugins/mantisbt/view/editIssue.php:90
 #: plugins/mantisbt/view/viewIssue.php:59
-#, fuzzy
 msgid "Reproducibility"
 msgstr ""
 
@@ -11065,7 +10793,6 @@ msgstr ""
 #: plugins/mantisbt/view/addIssue.php:141
 #: plugins/mantisbt/view/editIssue.php:221
 #: plugins/mantisbt/view/viewIssue.php:116
-#, fuzzy
 msgid "Additional Informations"
 msgstr ""
 
@@ -11079,12 +10806,10 @@ msgid "Add note"
 msgstr ""
 
 #: plugins/mantisbt/view/admin/addCategory.php:31
-#, fuzzy
 msgid "Add a new category"
 msgstr ""
 
 #: plugins/mantisbt/view/admin/addVersion.php:34
-#, fuzzy
 msgid "Add a new version"
 msgstr ""
 
@@ -11179,9 +10904,8 @@ msgstr ""
 
 #: plugins/mantisbt/view/editIssue.php:84
 #: plugins/mantisbt/view/viewIssue.php:130
-#, fuzzy
 msgid "Edit ticket"
-msgstr "Edytuj grupę"
+msgstr ""
 
 #: plugins/mantisbt/view/editIssue.php:91
 #: plugins/mantisbt/view/viewIssue.php:60
@@ -11191,9 +10915,8 @@ msgstr "Zamieść nową dokumentację"
 
 #: plugins/mantisbt/view/editIssue.php:92
 #: plugins/mantisbt/view/viewIssue.php:61
-#, fuzzy
 msgid "Update Date"
-msgstr "Aktualizuj hasło"
+msgstr ""
 
 #: plugins/mantisbt/view/editIssue.php:126
 #: plugins/mantisbt/view/viewIssue.php:83
@@ -11237,7 +10960,6 @@ msgid "Initialize"
 msgstr ""
 
 #: plugins/mantisbt/view/inituser.php:53
-#, fuzzy
 msgid "Use global forge configuration."
 msgstr ""
 
@@ -11299,12 +11021,10 @@ msgid "No tickets to display"
 msgstr ""
 
 #: plugins/mantisbt/view/viewIssues.php:334
-#, fuzzy
 msgid "Last update"
-msgstr "Nazwisko:"
+msgstr ""
 
 #: plugins/mantisbt/view/viewIssues.php:495
-#, fuzzy
 msgid "Add a new ticket"
 msgstr ""
 
@@ -11314,7 +11034,6 @@ msgid "Modify"
 msgstr ""
 
 #: plugins/mantisbt/view/viewNote.php:70
-#, fuzzy
 msgid "No notes for this ticket"
 msgstr ""
 
@@ -11324,9 +11043,8 @@ msgid "Invalid User"
 msgstr ""
 
 #: plugins/mantisbt/www/getAttachment.php:45
-#, fuzzy
 msgid "Invalid User not active"
-msgstr "Niepoprawne hasło"
+msgstr ""
 
 #: plugins/mantisbt/www/getAttachment.php:63
 #: plugins/quota_management/www/index.php:60
@@ -11440,7 +11158,6 @@ msgstr ""
 #: plugins/mediawiki/mediawiki-skin/FusionForge.php:220
 #: plugins/projectimport/www/index.php:567
 #: plugins/projectimport/www/projectsimport.php:274
-#, fuzzy
 msgid "Project Summary"
 msgstr ""
 
@@ -11517,7 +11234,6 @@ msgid "<a href=\"%s\">Download</a> the nightly created XML dump (backup) here."
 msgstr ""
 
 #: plugins/mediawiki/www/plugin_admin.php:173
-#, fuzzy
 msgid "This project's wiki logo : $wgLogo"
 msgstr ""
 
@@ -11572,14 +11288,12 @@ msgid "Upload new logo"
 msgstr ""
 
 #: plugins/message/common/messagePlugin.class.php:47
-#, fuzzy
 msgid "Configure Global Message"
-msgstr "Login:"
+msgstr ""
 
 #: plugins/message/common/messagePlugin.class.php:51
-#, fuzzy
 msgid "Configure Message"
-msgstr "Login:"
+msgstr ""
 
 #: plugins/message/common/messagePlugin.class.php:58
 #: www/include/Layout.class.php:1328
@@ -11587,7 +11301,6 @@ msgid "Close"
 msgstr ""
 
 #: plugins/message/www/index.php:63
-#, fuzzy
 msgid "Global Message Administration"
 msgstr ""
 
@@ -11667,7 +11380,6 @@ msgid "Access Token Key: "
 msgstr ""
 
 #: plugins/oauthconsumer/www/callback.php:77
-#, fuzzy
 msgid "Access Token Secret: "
 msgstr ""
 
@@ -11733,17 +11445,14 @@ msgid "Step 1: "
 msgstr ""
 
 #: plugins/oauthconsumer/www/get_access_token.php:82
-#, fuzzy
 msgid "Get Request Token"
 msgstr ""
 
 #: plugins/oauthconsumer/www/get_access_token.php:131
-#, fuzzy
 msgid "Error in curl : "
 msgstr ""
 
 #: plugins/oauthconsumer/www/get_access_token.php:138
-#, fuzzy
 msgid "New request token received!"
 msgstr ""
 
@@ -11752,7 +11461,6 @@ msgid "Request Token Key"
 msgstr ""
 
 #: plugins/oauthconsumer/www/get_access_token.php:140
-#, fuzzy
 msgid "Request Token Secret"
 msgstr ""
 
@@ -11786,9 +11494,8 @@ msgid "Accessing resources with OAuth"
 msgstr ""
 
 #: plugins/oauthconsumer/www/index.php:17
-#, fuzzy
 msgid "Providers"
-msgstr "Aktualizuj hasło"
+msgstr ""
 
 #: plugins/oauthconsumer/www/index.php:49
 msgid "Resource URL"
@@ -11813,9 +11520,8 @@ msgid ""
 msgstr ""
 
 #: plugins/oauthconsumer/www/provider_edit.php:29
-#, fuzzy
 msgid "Edit OAuth Provider"
-msgstr "Edytuj grupę"
+msgstr ""
 
 #: plugins/oauthconsumer/www/provider_edit.php:49
 #: plugins/oauthconsumer/www/providers.php:14
@@ -11824,23 +11530,20 @@ msgid "Consumer Secret"
 msgstr ""
 
 #: plugins/oauthconsumer/www/provider_edit.php:69
-#, fuzzy
 msgid "Update Provider"
-msgstr "Aktualizuj hasło"
+msgstr ""
 
 #: plugins/oauthconsumer/www/providers.php:49
 msgid "There are currently no OAuth Providers registered in the database"
 msgstr ""
 
 #: plugins/oauthconsumer/www/providers.php:69
-#, fuzzy
 msgid "Add a new OAuth provider"
 msgstr ""
 
 #: plugins/oauthconsumer/www/providers.php:108
-#, fuzzy
 msgid "Add provider"
-msgstr "Edytuj grupę"
+msgstr ""
 
 #: plugins/oauthprovider/include/oauthprovider_plugin.php:167
 msgid "View Personal oauthprovider"
@@ -11886,7 +11589,6 @@ msgid "Authorized on"
 msgstr ""
 
 #: plugins/oauthprovider/www/access_tokens.php:112
-#, fuzzy
 msgid "No access tokens were found!"
 msgstr ""
 
@@ -11930,14 +11632,12 @@ msgstr ""
 #: plugins/oauthprovider/www/consumer_manage.php:94
 #: plugins/oauthprovider/www/consumer_update_page.php:49
 #: plugins/oauthprovider/www/consumer_update_page.php:84
-#, fuzzy
 msgid "Update Consumer"
 msgstr ""
 
 #: plugins/oauthprovider/www/consumer_manage.php:100
-#, fuzzy
 msgid "Delete Consumer"
-msgstr "Dodaj Grupę Dokumentów"
+msgstr ""
 
 #: plugins/oauthprovider/www/consumer.php:42
 msgid "OAuth consumers"
@@ -11978,12 +11678,10 @@ msgid "Authorized"
 msgstr ""
 
 #: plugins/oauthprovider/www/request_tokens.php:118
-#, fuzzy
 msgid "No request tokens were found!"
 msgstr ""
 
 #: plugins/oauthprovider/www/token_deny.php:57
-#, fuzzy
 msgid "Authorization Denied"
 msgstr ""
 
@@ -12003,7 +11701,6 @@ msgid "View Personal oslc"
 msgstr ""
 
 #: plugins/oslc/include/oslcPlugin.class.php:153
-#, fuzzy
 msgid "oslc Admin"
 msgstr ""
 
@@ -12036,13 +11733,11 @@ msgid "error: no supported provider for "
 msgstr ""
 
 #: plugins/projectimport/common/ProjectImportPlugin.class.php:171
-#, fuzzy
 msgid "Import projects"
-msgstr "Zgłoś chęć dołączenia do projektu %1$s"
+msgstr ""
 
 #: plugins/projectimport/common/ProjectImportPlugin.class.php:171
 #: plugins/projectimport/common/ProjectImportPlugin.class.php:183
-#, fuzzy
 msgid "Project import plugin"
 msgstr ""
 
@@ -12111,9 +11806,8 @@ msgid "Missing a temporary folder."
 msgstr ""
 
 #: plugins/projectimport/common/UploadedFiles.class.php:407
-#, fuzzy
 msgid "Failed to write file to disk."
-msgstr "Nazwa nowej grupy"
+msgstr ""
 
 #: plugins/projectimport/common/UploadedFiles.class.php:409
 msgid "File upload stopped by extension."
@@ -12132,7 +11826,6 @@ msgstr ""
 
 #: plugins/projectimport/www/index.php:163
 #: plugins/projectimport/www/projectsimport.php:85
-#, fuzzy
 msgid "Project importer"
 msgstr ""
 
@@ -12199,9 +11892,8 @@ msgid "Imported user email"
 msgstr ""
 
 #: plugins/projectimport/www/index.php:395
-#, fuzzy
 msgid "Initial role"
-msgstr "Edytuj grupę"
+msgstr ""
 
 #: plugins/projectimport/www/index.php:397
 msgid "Map to existing user (role)"
@@ -12216,18 +11908,16 @@ msgid "Matching new project members roles"
 msgstr ""
 
 #: plugins/projectimport/www/index.php:424
-#, fuzzy
 msgid "New project member"
-msgstr "Nazwa nowej grupy"
+msgstr ""
 
 #: plugins/projectimport/www/index.php:425
 msgid "Imported users mapped to it"
 msgstr ""
 
 #: plugins/projectimport/www/index.php:426
-#, fuzzy
 msgid "New role"
-msgstr "Dodaj Grupę Dokumentów"
+msgstr ""
 
 #: plugins/projectimport/www/index.php:472
 #, php-format
@@ -12242,9 +11932,8 @@ msgid "Failed to find mapped user “%s”"
 msgstr ""
 
 #: plugins/projectimport/www/index.php:564
-#, fuzzy
 msgid "Details of imported project: "
-msgstr "Nazwa nowej grupy"
+msgstr ""
 
 #: plugins/projectimport/www/index.php:578
 msgid "Project's spaces found"
@@ -12287,14 +11976,12 @@ msgid "Missing require to use this plugin. You need arc/ARC2.php"
 msgstr ""
 
 #: plugins/projectimport/www/projectsimport.php:264
-#, fuzzy
 msgid "Failed to create project"
-msgstr "Nazwa nowej grupy"
+msgstr ""
 
 #: plugins/projectimport/www/projectsimport.php:270
-#, fuzzy
 msgid "Created project"
-msgstr "Nazwa nowej grupy"
+msgstr ""
 
 #: plugins/projectimport/www/usersimport.php:72
 msgid "Users importer"
@@ -12314,7 +12001,6 @@ msgid "Project labels"
 msgstr ""
 
 #: plugins/projectlabels/common/ProjectLabelsPlugin.class.php:17
-#, fuzzy
 msgid "Project labels plugin"
 msgstr ""
 
@@ -12437,7 +12123,6 @@ msgid "potm"
 msgstr ""
 
 #: plugins/projectlabels/www/index.php:201
-#, fuzzy
 msgid "Project of the month!"
 msgstr ""
 
@@ -12450,9 +12135,8 @@ msgid "This project already has a parent"
 msgstr ""
 
 #: plugins/projects-hierarchy/actions/addChild.php:35
-#, fuzzy
 msgid "Successfully added child"
-msgstr "Pomyślnie Zmieniono Hasło"
+msgstr ""
 
 #: plugins/projects-hierarchy/actions/addChild.php:37
 msgid "Failed to add child"
@@ -12467,24 +12151,20 @@ msgid "Failed to update status of hierarchical browsing"
 msgstr ""
 
 #: plugins/projects-hierarchy/actions/removeChild.php:32
-#, fuzzy
 msgid "Successfully removed child"
-msgstr "Pomyślnie Zmieniono Hasło"
+msgstr ""
 
 #: plugins/projects-hierarchy/actions/removeChild.php:34
-#, fuzzy
 msgid "Failed to remove child"
-msgstr "Nazwa nowej grupy"
+msgstr ""
 
 #: plugins/projects-hierarchy/actions/removeParent.php:32
-#, fuzzy
 msgid "Successfully removed parent"
-msgstr "Pomyślnie Zmieniono Hasło"
+msgstr ""
 
 #: plugins/projects-hierarchy/actions/removeParent.php:34
-#, fuzzy
 msgid "Failed to remove parent"
-msgstr "Nazwa nowej grupy"
+msgstr ""
 
 #: plugins/projects-hierarchy/actions/updateGlobalConf.php:37
 msgid "Projects Hierarchy global configuration successfully updated."
@@ -12507,7 +12187,6 @@ msgid "Failed to do task."
 msgstr ""
 
 #: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:31
-#, fuzzy
 msgid "Project Hierarchy"
 msgstr ""
 
@@ -12570,21 +12249,18 @@ msgstr ""
 #: plugins/projects-hierarchy/view/admin_project_link.php:46
 #: plugins/projects-hierarchy/view/admin_project_link.php:68
 #: plugins/projects-hierarchy/view/admin_project_link.php:80
-#, fuzzy
 msgid "Browse this project"
-msgstr "Przeglądaj Repozytorium Subversion"
+msgstr ""
 
 #: plugins/projects-hierarchy/view/admin_project_link.php:37
 msgid "Remove child project"
 msgstr ""
 
 #: plugins/projects-hierarchy/view/admin_project_link.php:47
-#, fuzzy
 msgid "Remove parent project"
-msgstr "Nazwa nowej grupy"
+msgstr ""
 
 #: plugins/projects-hierarchy/view/admin_project_link.php:51
-#, fuzzy
 msgid "Add new child"
 msgstr ""
 
@@ -12593,9 +12269,8 @@ msgid "Select a project: "
 msgstr ""
 
 #: plugins/projects-hierarchy/view/admin_project_link.php:56
-#, fuzzy
 msgid "Add Child project"
-msgstr "Zgłoś chęć dołączenia do projektu %1$s"
+msgstr ""
 
 #: plugins/projects-hierarchy/view/admin_project_link.php:59
 msgid "No other project using project hierarchy plugin."
@@ -12606,9 +12281,8 @@ msgid "Pending hierarchy request"
 msgstr ""
 
 #: plugins/projects-hierarchy/view/admin_project_link.php:68
-#, fuzzy
 msgid "Validate parent"
-msgstr "Nazwa nowej grupy"
+msgstr ""
 
 #: plugins/projects-hierarchy/view/admin_project_link.php:70
 #: plugins/projects-hierarchy/view/admin_project_link.php:82
@@ -12620,7 +12294,6 @@ msgid "Validate child"
 msgstr ""
 
 #: plugins/projects-hierarchy/view/admin_project_link.php:88
-#, fuzzy
 msgid "No pending requests"
 msgstr ""
 
@@ -12646,7 +12319,6 @@ msgid "Cannot retrieve data from DB"
 msgstr ""
 
 #: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:33
-#, fuzzy
 msgid "Manage project configuration"
 msgstr ""
 
@@ -12695,9 +12367,8 @@ msgid "Linked projects"
 msgstr ""
 
 #: plugins/projects-hierarchy/view/home_project_link.php:37
-#, fuzzy
 msgid "Parent Project"
-msgstr "Nazwa nowej grupy"
+msgstr ""
 
 #: plugins/projects-hierarchy/view/home_project_link.php:37
 #: plugins/projects-hierarchy/view/home_project_link.php:47
@@ -12826,7 +12497,6 @@ msgid "With ftp and home quota control"
 msgstr ""
 
 #: plugins/quota_management/www/quota_project.php:139
-#, fuzzy
 msgid "FTP project directory"
 msgstr ""
 
@@ -13056,9 +12726,9 @@ msgstr "Można także wyświetlić pełną historię każdego z pliku w repozyto
 #: plugins/scmcvs/common/CVSPlugin.class.php:158
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:188
 #: plugins/scmsvn/common/SVNPlugin.class.php:205
-#, fuzzy, php-format
+#, php-format
 msgid "Browse %s Repository"
-msgstr "Przeglądaj Repozytorium Subversion"
+msgstr "Przeglądaj Repozytorium %s"
 
 #: plugins/scmccase/common/CCasePlugin.class.php:91
 msgid "ClearCase Access"
@@ -13157,9 +12827,8 @@ msgid "Invalid CVS repository : "
 msgstr ""
 
 #: plugins/scmcvs/www/acl.php:47
-#, fuzzy
 msgid "Invalid username : "
-msgstr "Niepoprawne hasło"
+msgstr ""
 
 #: plugins/scmcvs/www/acl.php:53
 #, php-format
@@ -13194,31 +12863,27 @@ msgid ""
 msgstr ""
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:194
-#, fuzzy
 msgid "No repositories to browse"
-msgstr "Przeglądaj Repozytorium Subversion"
+msgstr ""
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:624
 msgid "Repository to be created: "
 msgstr ""
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:628
-#, fuzzy
 msgid "Create new repository:"
-msgstr "Zgłoś chęć dołączenia do projektu %1$s"
+msgstr ""
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:629
 #: plugins/scmgit/common/GitPlugin.class.php:1092
 #: plugins/scmgit/common/GitPlugin.class.php:1116
 #: plugins/scmhg/common/HgPlugin.class.php:641
-#, fuzzy
 msgid "Repository name"
-msgstr "Login:"
+msgstr ""
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:631
-#, fuzzy
 msgid "Clone"
-msgstr "Telefon:"
+msgstr ""
 
 #: plugins/scmgit/common/GitPlugin.class.php:101
 msgid "Anonymous Access to the Git repository"
@@ -13239,12 +12904,11 @@ msgstr[1] ""
 msgstr[2] ""
 
 #: plugins/scmgit/common/GitPlugin.class.php:126
-#, fuzzy
 msgid "Developer's repository"
 msgid_plural "Developer's repositories"
-msgstr[0] "Przeglądaj Repozytorium Subversion"
-msgstr[1] "Przeglądaj Repozytorium Subversion"
-msgstr[2] "Przeglądaj Repozytorium Subversion"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #: plugins/scmgit/common/GitPlugin.class.php:131
 msgid ""
@@ -13260,9 +12924,8 @@ msgstr[2] ""
 #: plugins/scmgit/common/GitPlugin.class.php:140
 #: plugins/scmgit/common/GitPlugin.class.php:321
 #: plugins/scmgit/common/scmgit_Widget_MyRepositories.class.php:52
-#, fuzzy
 msgid "Browse Git Repository"
-msgstr "Przeglądaj Repozytorium Subversion"
+msgstr "Przeglądaj Repozytorium Git"
 
 #: plugins/scmgit/common/GitPlugin.class.php:165
 #: plugins/scmgit/common/GitPlugin.class.php:202
@@ -13342,14 +13005,12 @@ msgid ""
 msgstr ""
 
 #: plugins/scmgit/common/GitPlugin.class.php:340
-#, fuzzy
 msgid "Updates"
-msgstr "Aktualizuj hasło"
+msgstr ""
 
 #: plugins/scmgit/common/GitPlugin.class.php:966
-#, fuzzy
 msgid "Git Commits"
-msgstr "Przeglądaj Repozytorium Subversion"
+msgstr ""
 
 #: plugins/scmgit/common/GitPlugin.class.php:984
 msgid "Cannot create a secondary repository with the same name as the primary"
@@ -13357,52 +13018,50 @@ msgstr ""
 
 #: plugins/scmgit/common/GitPlugin.class.php:989
 #: plugins/scmhg/common/HgPlugin.class.php:550
-#, fuzzy
 msgid "This repository name is not valid"
-msgstr "Niepoprawne hasło"
+msgstr ""
 
 #: plugins/scmgit/common/GitPlugin.class.php:1002
 #: plugins/scmhg/common/HgPlugin.class.php:545
 #: plugins/scmhg/common/HgPlugin.class.php:561
-#, fuzzy, php-format
+#, php-format
 msgid "A repository %s already exists"
-msgstr "Istnieje już użytkownik o takim loginie."
+msgstr ""
 
 #: plugins/scmgit/common/GitPlugin.class.php:1027
 msgid "Invalid URL from which to clone"
 msgstr ""
 
 #: plugins/scmgit/common/GitPlugin.class.php:1036
-#, fuzzy, php-format
+#, php-format
 msgid "Clone of %s"
-msgstr "Telefon:"
+msgstr ""
 
 #: plugins/scmgit/common/GitPlugin.class.php:1086
-#, fuzzy, php-format
+#, php-format
 msgid "No extra Git repository for project %1$s"
-msgstr "Zgłoś chęć dołączenia do projektu %1$s"
+msgstr ""
 
 #: plugins/scmgit/common/GitPlugin.class.php:1088
-#, fuzzy, php-format
+#, php-format
 msgid "Extra Git repository for project %1$s"
 msgid_plural "Extra Git repositories for project %1$s"
-msgstr[0] "Zgłoś chęć dołączenia do projektu %1$s"
-msgstr[1] "Zgłoś chęć dołączenia do projektu %1$s"
-msgstr[2] "Zgłoś chęć dołączenia do projektu %1$s"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #: plugins/scmgit/common/GitPlugin.class.php:1092
-#, fuzzy
 msgid "Initial repository description"
-msgstr "Login:"
+msgstr ""
 
 #: plugins/scmgit/common/GitPlugin.class.php:1092
 msgid "Initial clone URL (if any)"
 msgstr ""
 
 #: plugins/scmgit/common/GitPlugin.class.php:1109
-#, fuzzy, php-format
+#, php-format
 msgid "Create new Git repository for project %1$s"
-msgstr "Zgłoś chęć dołączenia do projektu %1$s"
+msgstr ""
 
 #: plugins/scmgit/common/GitPlugin.class.php:1118
 msgid "Description:"
@@ -13424,9 +13083,8 @@ msgid ""
 msgstr ""
 
 #: plugins/scmgit/common/scmgit_Widget_MyRepositories.class.php:57
-#, fuzzy
 msgid "No personal git repository"
-msgstr "Przeglądaj Repozytorium Subversion"
+msgstr ""
 
 #: plugins/scmgit/www/index.php:44
 #, php-format
@@ -13467,7 +13125,6 @@ msgstr ""
 
 #: plugins/scmhg/common/HgPlugin.class.php:77
 #: plugins/scmsvn/common/SVNPlugin.class.php:120
-#, fuzzy
 msgid "The password is "
 msgstr "Hasło to 'anonsvn'"
 
@@ -13494,9 +13151,8 @@ msgstr ""
 "członków projektu."
 
 #: plugins/scmhg/common/HgPlugin.class.php:157
-#, fuzzy
 msgid "Hg Repository Browser"
-msgstr "Przeglądaj Repozytorium Subversion"
+msgstr ""
 
 #: plugins/scmhg/common/HgPlugin.class.php:159
 msgid ""
@@ -13506,19 +13162,18 @@ msgid ""
 msgstr ""
 
 #: plugins/scmhg/common/HgPlugin.class.php:162
-#, fuzzy
 msgid "Browse Hg Repository"
-msgstr "Przeglądaj Repozytorium Subversion"
+msgstr "Przeglądaj Repozytorium Hg"
 
 #: plugins/scmhg/common/HgPlugin.class.php:570
-#, fuzzy, php-format
+#, php-format
 msgid "Clone of %s repository"
-msgstr "Przeglądaj Repozytorium Subversion"
+msgstr ""
 
 #: plugins/scmhg/common/HgPlugin.class.php:633
-#, fuzzy, php-format
+#, php-format
 msgid "Create SCM repository for project %s"
-msgstr "Zgłoś chęć dołączenia do projektu %s"
+msgstr ""
 
 #: plugins/scmhg/common/HgPlugin.class.php:645
 msgid "Cloned from:"
@@ -13533,9 +13188,8 @@ msgid "Hooks management update process waiting ..."
 msgstr ""
 
 #: plugins/scmhook/common/scmhookPlugin.class.php:141
-#, fuzzy
 msgid "Enable Repository Hooks"
-msgstr "Przeglądaj Repozytorium Subversion"
+msgstr ""
 
 #: plugins/scmhook/common/scmhookPlugin.class.php:156
 msgid "SCM Type not supported yet by scmhook"
@@ -13656,16 +13310,14 @@ msgid "Developer Subversion Access via DAV"
 msgstr ""
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:648
-#, fuzzy
 msgid "Subversion Commits"
-msgstr "Przeglądaj Repozytorium Subversion"
+msgstr ""
 
 #: plugins/soapadmin/include/soapadminPlugin.class.php:138
 msgid "View Personal SoapAdmin"
 msgstr ""
 
 #: plugins/soapadmin/include/soapadminPlugin.class.php:148
-#, fuzzy
 msgid "SoapAdmin Admin"
 msgstr ""
 
@@ -13685,9 +13337,8 @@ msgid "Missing Link URL or name."
 msgstr ""
 
 #: plugins/webanalytics/action/updateLinkValue.php:33
-#, fuzzy
 msgid "Link updated"
-msgstr "Nazwisko:"
+msgstr ""
 
 #: plugins/webanalytics/common/webanalyticsPlugin.class.php:56
 msgid "Global WebAnalytics admin"
@@ -13723,7 +13374,6 @@ msgid "Is Active"
 msgstr ""
 
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:58
-#, fuzzy
 msgid "Add a new webanalytics reference"
 msgstr ""
 
@@ -13754,12 +13404,10 @@ msgid "Page"
 msgstr ""
 
 #: plugins/wiki/common/WikiPlugin.class.php:74
-#, fuzzy
 msgid "Wiki Admin"
 msgstr ""
 
 #: plugins/wiki/common/WikiPlugin.class.php:91
-#, fuzzy
 msgid "This project's wiki"
 msgstr ""
 
@@ -14036,7 +13684,6 @@ msgid "Delete this ssh key."
 msgstr ""
 
 #: www/account/editsshkeys.php:73
-#, fuzzy
 msgid "Add a new ssh key"
 msgstr ""
 
@@ -14091,9 +13738,8 @@ msgid "Updated"
 msgstr ""
 
 #: www/account/index.php:122 www/account/index.php:128
-#, fuzzy
 msgid "Account options"
-msgstr "Aktualizuj hasło"
+msgstr ""
 
 #: www/account/index.php:125 www/index.php:33
 msgid "Welcome"
@@ -14445,7 +14091,6 @@ msgid "Credentials you entered do not correspond to valid account."
 msgstr ""
 
 #: www/account/verify.php:57
-#, fuzzy
 msgid "Error while activating account"
 msgstr ""
 
@@ -14476,24 +14121,20 @@ msgid "FRS Release"
 msgstr ""
 
 #: www/activity/index.php:124
-#, fuzzy
 msgid "New Documents"
 msgstr ""
 
 #: www/activity/index.php:126
-#, fuzzy
 msgid "Updated Documents"
 msgstr ""
 
 #: www/activity/index.php:128
-#, fuzzy
 msgid "New Directories"
-msgstr "Edytuj grupę"
+msgstr ""
 
 #: www/activity/index.php:169
-#, fuzzy
 msgid "Invalid Data Passed to query"
-msgstr "Niepoprawne hasło"
+msgstr ""
 
 #: www/activity/index.php:198 www/activity/index.php:344
 msgid "No Activity Found"
@@ -14536,9 +14177,9 @@ msgid "Create a new %s below:"
 msgstr "Aby utworzyć nowe wydanie kliknij tutaj."
 
 #: www/admin/admin_table.php:94 www/admin/admin_table.php:286
-#, fuzzy, php-format
+#, php-format
 msgid "%s successfully added."
-msgstr "Pomyślnie Zmieniono Hasło"
+msgstr ""
 
 #: www/admin/admin_table.php:118
 #, php-format
@@ -14574,9 +14215,9 @@ msgid "Are you sure you want to delete this %s?"
 msgstr ""
 
 #: www/admin/admin_table.php:185
-#, fuzzy, php-format
+#, php-format
 msgid "%s successfully deleted."
-msgstr "Pomyślnie Zmieniono Hasło"
+msgstr ""
 
 #: www/admin/admin_table.php:207
 #, php-format
@@ -14584,14 +14225,14 @@ msgid "Modify the %s below:"
 msgstr ""
 
 #: www/admin/admin_table.php:263
-#, fuzzy, php-format
+#, php-format
 msgid "%s successfully modified."
-msgstr "Pomyślnie Zmieniono Hasło"
+msgstr ""
 
 #: www/admin/admin_table.php:358
-#, fuzzy, php-format
+#, php-format
 msgid "Edit the %ss Table"
-msgstr "Edytuj grupę"
+msgstr ""
 
 #: www/admin/approve-pending.php:46 www/project/admin/tools.php:34
 #: www/snapshots.php:39 www/tarballs.php:40
@@ -14599,14 +14240,14 @@ msgid "Error creating group"
 msgstr ""
 
 #: www/admin/approve-pending.php:54 www/register/index.php:148
-#, fuzzy, php-format
+#, php-format
 msgid "Approving Project: %s"
-msgstr "Zgłoś chęć dołączenia do projektu %1$s"
+msgstr ""
 
 #: www/admin/approve-pending.php:56
-#, fuzzy, php-format
+#, php-format
 msgid "Error when approving Project: %s"
-msgstr "Zgłoś chęć dołączenia do projektu %1$s"
+msgstr ""
 
 #: www/admin/approve-pending.php:87
 msgid "Error during group rejection: "
@@ -14629,7 +14270,6 @@ msgid "Pre-approval modifications :"
 msgstr ""
 
 #: www/admin/approve-pending.php:135
-#, fuzzy
 msgid "Edit Project Details"
 msgstr ""
 
@@ -14639,9 +14279,8 @@ msgid " or "
 msgstr ""
 
 #: www/admin/approve-pending.php:139
-#, fuzzy
 msgid "View/Edit Project Members"
-msgstr "Nazwa nowej grupy"
+msgstr ""
 
 #: www/admin/approve-pending.php:141
 msgid "Decision :"
@@ -14652,9 +14291,8 @@ msgid "Approve"
 msgstr ""
 
 #: www/admin/approve-pending.php:156
-#, fuzzy
 msgid "Rejection canned responses"
-msgstr "Dodaj Grupę Dokumentów"
+msgstr ""
 
 #: www/admin/approve-pending.php:157
 msgid "(manage responses)"
@@ -14674,7 +14312,6 @@ msgid "Reject"
 msgstr ""
 
 #: www/admin/approve-pending.php:169
-#, fuzzy
 msgid "Project details :"
 msgstr ""
 
@@ -14699,18 +14336,16 @@ msgid "Pending reason:"
 msgstr ""
 
 #: www/admin/approve-pending.php:215
-#, fuzzy
 msgid "Based on template project"
-msgstr "Nazwa nowej grupy"
+msgstr ""
 
 #: www/admin/approve-pending.php:230
 msgid "Approve All On This Page"
 msgstr ""
 
 #: www/admin/configman.php:69
-#, fuzzy
 msgid "Configuration Manager"
-msgstr "Login:"
+msgstr ""
 
 #: www/admin/configman.php:71
 #, php-format
@@ -14793,16 +14428,14 @@ msgid "You can only delete a global role from here."
 msgstr ""
 
 #: www/admin/globalroledelete.php:52 www/project/admin/roledelete.php:64
-#, fuzzy
 msgid "Successfully Deleted Role"
-msgstr "Pomyślnie Zmieniono Hasło"
+msgstr ""
 
 #: www/admin/globalroledelete.php:56
 msgid "Error: Please confirm the deletion of the role."
 msgstr ""
 
 #: www/admin/globalroleedit.php:75 www/project/admin/roleedit.php:86
-#, fuzzy
 msgid "Missing Role Name"
 msgstr "Nazwa Pliku"
 
@@ -14819,7 +14452,6 @@ msgid "Error while adding user to role"
 msgstr ""
 
 #: www/admin/globalroleedit.php:108
-#, fuzzy
 msgid "Wrong user name."
 msgstr "Nazwa wydania:"
 
@@ -14832,9 +14464,9 @@ msgid "Error: You did not tick the “really remove” box!"
 msgstr ""
 
 #: www/admin/globalroleedit.php:126
-#, fuzzy, php-format
+#, php-format
 msgid "User %s removed successfully"
-msgstr "Grupa dokumentów: Nazwa jest wymagana"
+msgstr ""
 
 #: www/admin/globalroleedit.php:130
 #, php-format
@@ -14879,14 +14511,12 @@ msgstr ""
 
 #: www/admin/globalroleedit.php:257 www/admin/globalroleedit.php:259
 #: www/project/admin/users.php:406
-#, fuzzy
 msgid "Delete role"
-msgstr "Dodaj Grupę Dokumentów"
+msgstr ""
 
 #: www/admin/globalroleedit.php:258
-#, fuzzy
 msgid "Really delete this role?"
-msgstr "Edytuj grupę"
+msgstr ""
 
 #: www/admin/groupdelete.php:47
 msgid "Project successfully deleted"
@@ -14968,7 +14598,6 @@ msgstr ""
 #: www/admin/grouplist.php:69 www/admin/search.php:148
 #: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:75
 #: www/register/index.php:236 www/register/index.php:238
-#, fuzzy
 msgid "Unix Name"
 msgstr ""
 
@@ -14982,9 +14611,8 @@ msgid "License"
 msgstr ""
 
 #: www/admin/grouplist.php:100
-#, fuzzy
 msgid "Order by project name."
-msgstr "Nazwa nowej grupy"
+msgstr ""
 
 #: www/admin/grouplist.php:101
 msgid "Order by register time."
@@ -14999,7 +14627,6 @@ msgid "Order by status."
 msgstr ""
 
 #: www/admin/grouplist.php:104
-#, fuzzy
 msgid "Order by public visibility."
 msgstr ""
 
@@ -15016,9 +14643,8 @@ msgid "Order by is the project a template."
 msgstr ""
 
 #: www/admin/grouplist.php:155
-#, fuzzy
 msgid "Click to edit this project."
-msgstr "Przeglądaj Repozytorium Subversion"
+msgstr ""
 
 #: www/admin/index.php:46
 msgid "User Maintenance"
@@ -15387,7 +15013,6 @@ msgid "Users Using it"
 msgstr ""
 
 #: www/admin/pluginman.php:140
-#, fuzzy
 msgid "Projects Using it"
 msgstr ""
 
@@ -15405,9 +15030,9 @@ msgid "%d users"
 msgstr ""
 
 #: www/admin/pluginman.php:246
-#, fuzzy, php-format
+#, php-format
 msgid "%d projects"
-msgstr "Zgłoś chęć dołączenia do projektu %1$s"
+msgstr ""
 
 #: www/admin/pluginman.php:257
 msgid "Inactive"
@@ -15484,7 +15109,6 @@ msgid "Real Name"
 msgstr "Nazwa wydania:"
 
 #: www/admin/search.php:96
-#, fuzzy
 msgid "No user found."
 msgstr ""
 
@@ -15656,9 +15280,8 @@ msgid ""
 msgstr ""
 
 #: www/admin/useredit.php:93
-#, fuzzy
 msgid "Added Successfully to project "
-msgstr "Pomyślnie Zmieniono Hasło"
+msgstr ""
 
 #: www/admin/useredit.php:117
 msgid "Site Admin: User Info"
@@ -15702,7 +15325,6 @@ msgid ""
 msgstr ""
 
 #: www/admin/useredit.php:253
-#, fuzzy
 msgid "Projects Membership"
 msgstr ""
 
@@ -15725,9 +15347,8 @@ msgid "Add membership to new projects"
 msgstr ""
 
 #: www/admin/useredit.php:295
-#, fuzzy
 msgid "Select role"
-msgstr "Dodaj Grupę Dokumentów"
+msgstr ""
 
 #: www/admin/userlist.php:63
 #, php-format
@@ -15773,23 +15394,21 @@ msgid "Users that use plugin"
 msgstr ""
 
 #: www/admin/userlist.php:180
-#, fuzzy, php-format
+#, php-format
 msgid "User list beginning with “%s” for all projects"
-msgstr "Przeglądaj Repozytorium Subversion"
+msgstr ""
 
 #: www/admin/userlist.php:182
-#, fuzzy
 msgid "User list for all projects"
-msgstr "Przeglądaj Repozytorium Subversion"
+msgstr ""
 
 #: www/admin/userlist.php:214
 msgid "User list for project: "
 msgstr ""
 
 #: www/admin/userlist.php:227
-#, fuzzy
 msgid "No user in this project"
-msgstr "Przeglądaj Repozytorium Subversion"
+msgstr ""
 
 #: www/admin/vhost.php:72
 msgid "Error adding VHOST: "
@@ -15927,9 +15546,8 @@ msgid "You will not receive any more emails from this user"
 msgstr ""
 
 #: www/developer/monitor.php:81
-#, fuzzy
 msgid "Error: Choose a User To Monitor First"
-msgstr "Istnieje już użytkownik o takim loginie."
+msgstr ""
 
 #: www/developer/rate.php:34
 msgid ""
@@ -15959,7 +15577,6 @@ msgid ""
 msgstr ""
 
 #: www/docman/index.php:118
-#, fuzzy
 msgid "Documents for "
 msgstr ""
 
@@ -15984,7 +15601,6 @@ msgid "Unable to download backup file"
 msgstr ""
 
 #: www/docman/view.php:139
-#, fuzzy
 msgid "No documents to backup."
 msgstr ""
 
@@ -16113,7 +15729,6 @@ msgid "Project News"
 msgstr ""
 
 #: www/export/rss_project.php:104
-#, fuzzy
 msgid "Project Releases"
 msgstr ""
 
@@ -16157,9 +15772,8 @@ msgid "Delete entire forum and all content"
 msgstr ""
 
 #: www/forum/admin/index.php:175
-#, fuzzy
 msgid "Permanently Delete Forum"
-msgstr "Edytuj grupę"
+msgstr ""
 
 #: www/forum/admin/index.php:177
 msgid ""
@@ -16214,7 +15828,7 @@ msgstr ""
 
 #: www/forum/admin/index.php:374 www/forum/admin/index.php:450
 #: www/forum/index.php:58
-#, fuzzy, php-format
+#, php-format
 msgid "No Forums Found for %s"
 msgstr ""
 
@@ -16228,7 +15842,6 @@ msgid "Monitoring Users"
 msgstr ""
 
 #: www/forum/admin/monitor.php:56
-#, fuzzy
 msgid "No Monitoring Users"
 msgstr ""
 
@@ -16239,13 +15852,11 @@ msgstr "Nazwa wydania:"
 
 #: www/forum/admin/pendingmsgdetail.php:42 www/forum/monitor.php:82
 #: www/forum/new.php:72 www/forum/save.php:58
-#, fuzzy
 msgid "Forum ID"
-msgstr "Forum"
+msgstr ""
 
 #: www/forum/admin/pendingmsgdetail.php:42 www/forum/monitor.php:82
 #: www/forum/new.php:72 www/forum/save.php:58 www/frs/monitor.php:71
-#, fuzzy
 msgid "Project ID"
 msgstr ""
 
@@ -16387,12 +15998,10 @@ msgid "Do you really want to unsubscribe ?"
 msgstr ""
 
 #: www/forum/monitor.php:72
-#, fuzzy
 msgid "Forum Monitoring Deactivated"
 msgstr ""
 
 #: www/forum/monitor.php:78
-#, fuzzy
 msgid "Forum Monitoring Started"
 msgstr ""
 
@@ -16490,7 +16099,6 @@ msgid "Edit Releases"
 msgstr ""
 
 #: www/frs/admin/editrelease.php:220
-#, fuzzy
 msgid "Edit Release"
 msgstr ""
 
@@ -17060,7 +16668,6 @@ msgid ""
 msgstr ""
 
 #: www/include/html.php:560
-#, fuzzy
 msgid "Error: uneven row counts"
 msgstr ""
 
@@ -17078,7 +16685,7 @@ msgid "Project access problem: %s"
 msgstr ""
 
 #: www/include/html.php:910
-#, fuzzy, php-format
+#, php-format
 msgid "Project Problem: %s"
 msgstr ""
 
@@ -17166,7 +16773,6 @@ msgid " Displaying %1$s per page. Projects sorted by alphabetical order."
 msgstr ""
 
 #: www/include/Layout.class.php:135
-#, fuzzy
 msgid "Cannot find theme directory!"
 msgstr ""
 
@@ -17222,7 +16828,7 @@ msgid "Collapse"
 msgstr ""
 
 #: www/include/my_utils.php:149
-#, fuzzy, php-format
+#, php-format
 msgid "%d new item"
 msgid_plural "%d new items"
 msgstr[0] ""
@@ -17230,7 +16836,6 @@ msgstr[1] ""
 msgstr[2] ""
 
 #: www/include/project_home.php:36
-#, fuzzy
 msgid "Project Home"
 msgstr ""
 
@@ -17710,9 +17315,8 @@ msgid "Mailing List Successfully deleted"
 msgstr ""
 
 #: www/mail/admin/deletelist.php:63
-#, fuzzy
 msgid "Permanently Delete Mailing List "
-msgstr "Edytuj grupę"
+msgstr ""
 
 #: www/mail/admin/deletelist.php:69
 #, php-format
@@ -17732,7 +17336,7 @@ msgid "Existing mailing lists"
 msgstr ""
 
 #: www/mail/admin/index.php:213
-#, fuzzy, php-format
+#, php-format
 msgid "Update Mailing List %s"
 msgstr ""
 
@@ -17767,7 +17371,6 @@ msgid "View Lists"
 msgstr ""
 
 #: www/my/bookmark_add.php:27
-#, fuzzy
 msgid "Add a new Bookmark"
 msgstr ""
 
@@ -17917,7 +17520,6 @@ msgid "New File Releases"
 msgstr ""
 
 #: www/new/index.php:67
-#, fuzzy
 msgid "No new releases found"
 msgstr ""
 
@@ -17970,7 +17572,6 @@ msgid "No Queued Items Found"
 msgstr ""
 
 #: www/news/admin/news_admin_utils.php:75
-#, fuzzy
 msgid "No pending items found."
 msgstr ""
 
@@ -17984,7 +17585,6 @@ msgid "Reject Selected"
 msgstr ""
 
 #: www/news/admin/news_admin_utils.php:106
-#, fuzzy
 msgid "No rejected items found for this week."
 msgstr ""
 
@@ -17996,7 +17596,6 @@ msgid ""
 msgstr ""
 
 #: www/news/admin/news_admin_utils.php:130
-#, fuzzy
 msgid "No approved items found for this week."
 msgstr ""
 
@@ -18010,7 +17609,7 @@ msgid "Choose a News item and you can browse, search, and post messages."
 msgstr ""
 
 #: www/news/index.php:72
-#, fuzzy, php-format
+#, php-format
 msgid "No News Found for %s"
 msgstr ""
 
@@ -18036,7 +17635,6 @@ msgid "Submit News"
 msgstr ""
 
 #: www/news/news_utils.php:282
-#, fuzzy
 msgid "Not Found"
 msgstr ""
 
@@ -18110,7 +17708,6 @@ msgid "Add/Change People Skills"
 msgstr ""
 
 #: www/people/admin/index.php:125
-#, fuzzy
 msgid "No Skills Found"
 msgstr ""
 
@@ -18120,7 +17717,6 @@ msgid "New Skill Name"
 msgstr "Nazwa wydania:"
 
 #: www/people/admin/index.php:149
-#, fuzzy
 msgid "People Administration"
 msgstr ""
 
@@ -18150,19 +17746,17 @@ msgid "Job insert failed: %s"
 msgstr ""
 
 #: www/people/editjob.php:65
-#, fuzzy
 msgid "Job inserted successfully"
-msgstr "Grupa dokumentów: Nazwa jest wymagana"
+msgstr ""
 
 #: www/people/editjob.php:80
-#, fuzzy, php-format
+#, php-format
 msgid "Job update failed: %s"
-msgstr "Aktualizuj hasło"
+msgstr ""
 
 #: www/people/editjob.php:82 www/people/editjob.php:96
-#, fuzzy
 msgid "Job updated successfully"
-msgstr "Grupa dokumentów: Nazwa jest wymagana"
+msgstr ""
 
 #: www/people/editjob.php:91 www/people/people_utils.php:127
 #: www/people/people_utils.php:157 www/people/people_utils.php:235
@@ -18187,14 +17781,13 @@ msgid "Job Inventory"
 msgstr ""
 
 #: www/people/editjob.php:114
-#, fuzzy, php-format
+#, php-format
 msgid "Job skill update failed: %s"
-msgstr "Aktualizuj hasło"
+msgstr ""
 
 #: www/people/editjob.php:116
-#, fuzzy
 msgid "Job skill updated successfully"
-msgstr "Grupa dokumentów: Nazwa jest wymagana"
+msgstr ""
 
 #: www/people/editjob.php:119
 msgid "Job skill update failed - wrong project_id"
@@ -18210,9 +17803,8 @@ msgid "Job skill delete failed: %s"
 msgstr ""
 
 #: www/people/editjob.php:136
-#, fuzzy
 msgid "Job skill deleted successfully"
-msgstr "Grupa dokumentów: Nazwa jest wymagana"
+msgstr ""
 
 #: www/people/editjob.php:139
 msgid "Job skill delete failed - wrong project_id"
@@ -18246,9 +17838,9 @@ msgid "Finished"
 msgstr ""
 
 #: www/people/editprofile.php:54
-#, fuzzy, php-format
+#, php-format
 msgid "User update failed: %s"
-msgstr "Aktualizuj hasło"
+msgstr ""
 
 #: www/people/editprofile.php:56
 msgid "User updated successfully"
@@ -18474,7 +18066,6 @@ msgid "Must select a skill ID"
 msgstr ""
 
 #: www/people/people_utils.php:104
-#, fuzzy
 msgid "Error inserting into skill inventory: "
 msgstr ""
 
@@ -18510,7 +18101,6 @@ msgid "Add Skill"
 msgstr ""
 
 #: www/people/people_utils.php:212
-#, fuzzy
 msgid "Error inserting into job inventory: "
 msgstr ""
 
@@ -18625,9 +18215,8 @@ msgid "Category Updated"
 msgstr ""
 
 #: www/pm/admin/index.php:141
-#, fuzzy
 msgid "Subproject Updated successfully"
-msgstr "Grupa dokumentów: Nazwa jest wymagana"
+msgstr ""
 
 #: www/pm/admin/index.php:179
 #, php-format
@@ -18670,9 +18259,8 @@ msgid ""
 msgstr ""
 
 #: www/pm/admin/index.php:286
-#, fuzzy
 msgid "New Subproject Name"
-msgstr "Nazwa nowej grupy"
+msgstr ""
 
 #: www/pm/admin/index.php:288 www/pm/admin/index.php:327
 #, fuzzy
@@ -18704,9 +18292,8 @@ msgid "Subproject Name"
 msgstr ""
 
 #: www/pm/admin/index.php:372 www/pm/admin/index.php:394
-#, fuzzy
 msgid "Permanently delete this subproject and all its data"
-msgstr "Edytuj grupę"
+msgstr ""
 
 #: www/pm/admin/index.php:379
 msgid ""
@@ -19055,9 +18642,9 @@ msgid "repetition of dependenton1"
 msgstr ""
 
 #: www/pm/deletetask.php:26
-#, fuzzy, php-format
+#, php-format
 msgid "Delete Task [T%s]"
-msgstr "Dodaj Grupę Dokumentów"
+msgstr ""
 
 #: www/pm/deletetask.php:37
 msgid "Are you sure you want to delete this task?"
@@ -19117,9 +18704,8 @@ msgid "task summary"
 msgstr "Kraj:"
 
 #: www/pm/ganttpage.php:251
-#, fuzzy
 msgid "start"
-msgstr "Nazwisko:"
+msgstr ""
 
 #: www/pm/ganttpage.php:252
 #, fuzzy
@@ -19139,14 +18725,12 @@ msgid "assignees"
 msgstr ""
 
 #: www/pm/include/ProjectGroupHTML.class.php:57
-#, fuzzy
 msgid "General Admin"
 msgstr ""
 
 #: www/pm/include/ProjectGroupHTML.class.php:62
-#, fuzzy
 msgid "View Subprojects"
-msgstr "Nazwa nowej grupy"
+msgstr ""
 
 #: www/pm/include/ProjectGroupHTML.class.php:71
 msgid "Add Task"
@@ -19201,12 +18785,11 @@ msgid "No Changes Have Been Made"
 msgstr ""
 
 #: www/pm/index.php:56
-#, fuzzy, php-format
+#, php-format
 msgid "Subprojects for %s"
 msgstr ""
 
 #: www/pm/index.php:61
-#, fuzzy
 msgid "No Subprojects Found"
 msgstr ""
 
@@ -19252,9 +18835,8 @@ msgid "Day"
 msgstr ""
 
 #: www/pm/postuploadcsv.php:117
-#, fuzzy
 msgid "Import was Successful"
-msgstr "Grupa dokumentów: Nazwa jest wymagana"
+msgstr ""
 
 #: www/pm/reporting/index.php:55
 msgid "Task Reporting System"
@@ -19464,7 +19046,6 @@ msgid "Error: file must be > 20 bytes and < 256000 bytes in length"
 msgstr ""
 
 #: www/project/admin/editimages.php:99
-#, fuzzy
 msgid "Error: Cannot store multimedia file: "
 msgstr ""
 
@@ -19477,7 +19058,6 @@ msgid "Both file name and description are required"
 msgstr ""
 
 #: www/project/admin/editimages.php:137
-#, fuzzy
 msgid "Error: Cannot delete multimedia file: "
 msgstr ""
 
@@ -19490,7 +19070,6 @@ msgid "File description is required"
 msgstr ""
 
 #: www/project/admin/editimages.php:161
-#, fuzzy
 msgid "Error: Cannot update multimedia file"
 msgstr ""
 
@@ -19567,7 +19146,7 @@ msgid "Update All Category Changes"
 msgstr ""
 
 #: www/project/admin/history.php:40
-#, fuzzy, php-format
+#, php-format
 msgid "Project History of %s"
 msgstr ""
 
@@ -19576,7 +19155,7 @@ msgid "Project information updated"
 msgstr ""
 
 #: www/project/admin/index.php:112
-#, fuzzy, php-format
+#, php-format
 msgid "Project Information for %s"
 msgstr ""
 
@@ -19605,7 +19184,6 @@ msgid "Maximum 255 characters, HTML will be stripped from this description"
 msgstr ""
 
 #: www/project/admin/index.php:150
-#, fuzzy
 msgid "Project tags"
 msgstr ""
 
@@ -19622,9 +19200,8 @@ msgid "Trove Categorization"
 msgstr ""
 
 #: www/project/admin/index.php:194
-#, fuzzy
 msgid "Edit Trove"
-msgstr "Edytuj grupę"
+msgstr ""
 
 #: www/project/admin/index.php:197
 msgid "Homepage Link"
@@ -19823,7 +19400,6 @@ msgid "Active Tools"
 msgstr ""
 
 #: www/project/admin/tools.php:152
-#, fuzzy
 msgid "Use Project Activity"
 msgstr ""
 
@@ -19844,7 +19420,6 @@ msgid "Use Tasks"
 msgstr ""
 
 #: www/project/admin/tools.php:217
-#, fuzzy
 msgid "Use Documents"
 msgstr ""
 
@@ -19881,7 +19456,6 @@ msgid "Forums Admin"
 msgstr ""
 
 #: www/project/admin/tools.php:330
-#, fuzzy
 msgid "Documents Admin"
 msgstr ""
 
@@ -20089,7 +19663,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: www/project/stats/index.php:95
-#, fuzzy, php-format
+#, php-format
 msgid "Project Statistics for %s"
 msgstr ""
 
@@ -20129,9 +19703,9 @@ msgid "Thank you for choosing %s."
 msgstr ""
 
 #: www/register/index.php:156
-#, fuzzy, php-format
+#, php-format
 msgid "Approval Error: %s"
-msgstr "Zgłoś chęć dołączenia do projektu %1$s"
+msgstr ""
 
 #: www/register/index.php:159
 msgid ""
@@ -20254,7 +19828,6 @@ msgid "No SCM"
 msgstr ""
 
 #: www/register/index.php:265
-#, fuzzy
 msgid "Project template"
 msgstr ""
 
@@ -20537,9 +20110,8 @@ msgid "Commits By User"
 msgstr ""
 
 #: www/scm/include/scm_utils.php:244
-#, fuzzy
 msgid "No commits during this period."
-msgstr "Przeglądaj Repozytorium Subversion"
+msgstr ""
 
 #: www/scm/include/viewvc_utils.php:98
 msgid ""
@@ -20554,9 +20126,9 @@ msgid ""
 msgstr ""
 
 #: www/scm/index.php:48
-#, fuzzy, php-format
+#, php-format
 msgid "Source Code Repository for %s"
-msgstr "Przeglądaj Repozytorium Subversion"
+msgstr ""
 
 #: www/scm/reporting/index.php:35
 msgid "SCM Repository Reporting"
@@ -20700,7 +20272,6 @@ msgid "People Search"
 msgstr ""
 
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:54
-#, fuzzy
 msgid "Project Search"
 msgstr ""
 
@@ -20786,9 +20357,8 @@ msgid "Error: Only the creator of a package version can add snippets to it."
 msgstr ""
 
 #: www/snippet/add_snippet_to_package.php:82 www/snippet/addversion.php:39
-#, fuzzy
 msgid "Error: snippet doesn't exist"
-msgstr "Istnieje już użytkownik o takim loginie."
+msgstr ""
 
 #: www/snippet/add_snippet_to_package.php:83
 #: www/snippet/add_snippet_to_package.php:97
@@ -21104,7 +20674,6 @@ msgid "Choose One"
 msgstr ""
 
 #: www/snippet/snippet_utils.php:27
-#, fuzzy
 msgid "Unix Admin"
 msgstr ""
 
@@ -21185,7 +20754,6 @@ msgid "Create A Package"
 msgstr ""
 
 #: www/snippet/submit.php:59
-#, fuzzy
 msgid "Error doing snippet insert"
 msgstr ""
 
@@ -21460,14 +21028,12 @@ msgid "Page view: no graph to display."
 msgstr ""
 
 #: www/stats/site_stats_utils.php:587
-#, fuzzy
 msgid "New users"
 msgstr ""
 
 #: www/stats/site_stats_utils.php:588
-#, fuzzy
 msgid "New projects"
-msgstr "Nazwa nowej grupy"
+msgstr ""
 
 #: www/stats/site_stats_utils.php:665
 msgid "New users, new projects: no graph to display."
@@ -21508,9 +21074,8 @@ msgid ""
 msgstr ""
 
 #: www/survey/admin/question.php:52
-#, fuzzy
 msgid "Edit a Question"
-msgstr "Edytuj grupę"
+msgstr ""
 
 #: www/survey/admin/question.php:52
 msgid "Add a Question"
@@ -21578,32 +21143,28 @@ msgid "Survey Added"
 msgstr ""
 
 #: www/survey/admin/survey.php:91
-#, fuzzy
 msgid "Edit a Survey"
-msgstr "Edytuj grupę"
+msgstr ""
 
 #: www/survey/admin/survey.php:91
 msgid "Add a Survey"
 msgstr ""
 
 #: www/survey/include/SurveyHTML.class.php:64
-#, fuzzy
 msgid "Add Survey"
-msgstr "Edytuj grupę"
+msgstr ""
 
 #: www/survey/include/SurveyHTML.class.php:65
-#, fuzzy
 msgid "Add Question"
-msgstr "Edytuj grupę"
+msgstr ""
 
 #: www/survey/include/SurveyHTML.class.php:66
 msgid "Show Results"
 msgstr ""
 
 #: www/survey/include/SurveyHTML.class.php:83
-#, fuzzy
 msgid "Views Surveys"
-msgstr "Nazwa nowej grupy"
+msgstr ""
 
 #: www/survey/include/SurveyHTML.class.php:113
 msgid "Add this Question"
@@ -21796,9 +21357,8 @@ msgid "Flag"
 msgstr ""
 
 #: www/survey/survey.php:51
-#, fuzzy
 msgid "Vote for Survey"
-msgstr "Edytuj grupę"
+msgstr ""
 
 #: www/survey/survey.php:55 www/survey/survey_resp.php:48
 msgid ""
@@ -21922,9 +21482,8 @@ msgid "Down %s"
 msgstr ""
 
 #: www/tracker/admin/index.php:99
-#, fuzzy
 msgid "Delete Layout Template"
-msgstr "Dodaj Grupę Dokumentów"
+msgstr ""
 
 #: www/tracker/admin/index.php:100
 msgid "You are about to delete your current Layout Template"
@@ -21939,9 +21498,8 @@ msgid "Layout Template Deleted"
 msgstr ""
 
 #: www/tracker/admin/index.php:176
-#, fuzzy
 msgid "Delete Canned Response"
-msgstr "Dodaj Grupę Dokumentów"
+msgstr ""
 
 #: www/tracker/admin/index.php:177
 msgid "You are about to delete your canned response"
@@ -21990,7 +21548,7 @@ msgid ""
 msgstr ""
 
 #: www/tracker/roadmap.php:238
-#, fuzzy, php-format
+#, php-format
 msgid "release %s is not available"
 msgstr ""
 
@@ -22017,7 +21575,6 @@ msgid "Only last"
 msgstr ""
 
 #: www/tracker/roadmap.php:452
-#, fuzzy
 msgid "No release available"
 msgstr ""
 
@@ -22070,14 +21627,6 @@ msgid "No User Name Provided"
 msgstr ""
 
 #, fuzzy
-#~ msgid "Site Admin: Successfully Changed User Password"
-#~ msgstr "Pomyślnie Zmieniono Hasło"
-
-#, fuzzy
-#~ msgid "Repository name:"
-#~ msgstr "Login:"
-
-#, fuzzy
 #~ msgid "You must supply a first name."
 #~ msgstr "Musisz podać imię"
 
@@ -22121,22 +21670,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Change PW"
 #~ msgstr "Lista zmian"
-
-#, fuzzy
-#~ msgid "Last modified"
-#~ msgstr "Nazwisko:"
-
-#, fuzzy
-#~ msgid "New folder"
-#~ msgstr "Dodaj Grupę Dokumentów"
-
-#, fuzzy
-#~ msgid "Edit Ticket: "
-#~ msgstr "Edytuj grupę"
-
-#, fuzzy
-#~ msgid "Target date"
-#~ msgstr "Nazwisko:"
 
 #~ msgid "Login name"
 #~ msgstr "Login"
@@ -22187,10 +21720,6 @@ msgstr ""
 #~ "się prośba o hasło, to podaj te używane na stronie.</p>"
 
 #, fuzzy
-#~ msgid "Bazaar Repository Browser"
-#~ msgstr "Przeglądaj Repozytorium Subversion"
-
-#, fuzzy
 #~ msgid ""
 #~ "Browsing the Bazaar tree gives you a view into the current status of this "
 #~ "project's code. You may also view the complete histories of any file in "
@@ -22200,10 +21729,6 @@ msgstr ""
 #~ "przeglądania zawartości repozytorium SVN zapewnia wgląd w aktualny stan "
 #~ "kodu projektu. Można także wyświetlić pełną historię każdego z pliku w "
 #~ "repozytorium.</p>"
-
-#, fuzzy
-#~ msgid "Browse Bazaar Repository"
-#~ msgstr "Przeglądaj Repozytorium Subversion"
 
 #, fuzzy
 #~ msgid ""
@@ -22258,14 +21783,6 @@ msgstr ""
 #~ "stronie.</p>"
 
 #, fuzzy
-#~ msgid "Browse Darcs Repository "
-#~ msgstr "Przeglądaj Repozytorium Subversion"
-
-#, fuzzy
-#~ msgid "Repository name: "
-#~ msgstr "Login:"
-
-#, fuzzy
 #~ msgid ""
 #~ "Only project developers can access the SVN tree via this method. SSH must "
 #~ "be installed on your client machine. Enter your site password when "
@@ -22302,10 +21819,6 @@ msgstr ""
 #~ "p>"
 
 #, fuzzy
-#~ msgid "Subversion Repository Browser"
-#~ msgstr "Przeglądaj Repozytorium Subversion"
-
-#, fuzzy
 #~ msgid ""
 #~ "Browsing the Subversion tree gives you a view into the current status of "
 #~ "this project's code. You may also view the complete histories of any file "
@@ -22336,10 +21849,6 @@ msgstr ""
 #~ msgid "Submit a new document."
 #~ msgstr "Zamieść nową dokumentację"
 
-#, fuzzy
-#~ msgid "List files & Directories"
-#~ msgstr "Edytuj grupę"
-
 #~ msgid "Search in documents"
 #~ msgstr "Szukaj w dokumentach"
 
@@ -22354,14 +21863,6 @@ msgstr ""
 #~ msgstr "Uwagi:"
 
 #, fuzzy
-#~ msgid "URL successfully changed"
-#~ msgstr "Pomyślnie Zmieniono Hasło"
-
-#, fuzzy
-#~ msgid "Type successfully changed"
-#~ msgstr "Pomyślnie Zmieniono Hasło"
-
-#, fuzzy
 #~ msgid "Rename to:"
 #~ msgstr "Nazwa wydania:"
 
@@ -22374,28 +21875,8 @@ msgstr ""
 #~ msgstr "Nazwa wydania:"
 
 #, fuzzy
-#~ msgid "Name: "
-#~ msgstr "Nazwisko:"
-
-#, fuzzy
 #~ msgid "Role name:"
 #~ msgstr "Nazwa wydania:"
-
-#, fuzzy
-#~ msgid "Name:"
-#~ msgstr "Nazwisko:"
-
-#, fuzzy
-#~ msgid "DocumentGroup:"
-#~ msgstr "Dodaj Grupę Dokumentów"
-
-#, fuzzy
-#~ msgid "Document Directory Updated successfully."
-#~ msgstr "Grupa dokumentów: Nazwa jest wymagana"
-
-#, fuzzy
-#~ msgid "Document Directory moved to trash successfully."
-#~ msgstr "Grupa dokumentów: Nazwa jest wymagana"
 
 #, fuzzy
 #~ msgid "Invalid DocumentGroup ID"
@@ -22437,7 +21918,3 @@ msgstr ""
 
 #~ msgid "Edit a group"
 #~ msgstr "Edytuj grupę"
-
-#, fuzzy
-#~ msgid "Add/Edit/Delete Document Groups"
-#~ msgstr "Dodaj Grupę Dokumentów"
