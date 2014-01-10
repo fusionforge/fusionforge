@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-10 15:07+0100\n"
+"POT-Creation-Date: 2014-01-10 17:43+0100\n"
 "PO-Revision-Date: 2009-10-06 16:20+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3038,6 +3038,7 @@ msgid "New Doc Address Appeared Invalid: %s"
 msgid_plural "New Doc Addresses Appeared Invalid: %s"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #: common/include/Group.class.php:631
 #, php-format
@@ -6034,8 +6035,8 @@ msgid "Invalid ArtifactMessage ID"
 msgstr ""
 
 #: common/tracker/ArtifactQuery.class.php:148
-#: common/tracker/ArtifactQuery.class.php:728
-#: common/tracker/ArtifactQuery.class.php:782
+#: common/tracker/ArtifactQuery.class.php:742
+#: common/tracker/ArtifactQuery.class.php:792
 msgid "Must Be Logged In"
 msgstr ""
 
@@ -6044,25 +6045,21 @@ msgid "Query already exists"
 msgstr ""
 
 #: common/tracker/ArtifactQuery.class.php:158
-#: common/tracker/ArtifactQuery.class.php:736
+#: common/tracker/ArtifactQuery.class.php:746
 msgid ""
 "You must have tracker admin rights to set or update a project level query."
 msgstr ""
 
-#: common/tracker/ArtifactQuery.class.php:328
+#: common/tracker/ArtifactQuery.class.php:342
 msgid "Invalid Last Modified Date Range"
 msgstr ""
 
-#: common/tracker/ArtifactQuery.class.php:344
+#: common/tracker/ArtifactQuery.class.php:358
 msgid "Invalid Open Date Range"
 msgstr ""
 
-#: common/tracker/ArtifactQuery.class.php:360
+#: common/tracker/ArtifactQuery.class.php:374
 msgid "Invalid Close Date Range"
-msgstr ""
-
-#: common/tracker/ArtifactQuery.class.php:732
-msgid "Query does not exist"
 msgstr ""
 
 #: common/tracker/ArtifactType.class.php:209
@@ -9335,6 +9332,7 @@ msgid "Associated forge"
 msgid_plural "Associated forges"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:206
 #: www/admin/admin_table.php:313
@@ -9347,7 +9345,7 @@ msgstr ""
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:226
 msgid "edit"
-msgstr ""
+msgstr "edytuj"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:246
 msgid "New"
@@ -14436,7 +14434,7 @@ msgstr ""
 
 #: www/admin/globalroleedit.php:75 www/project/admin/roleedit.php:86
 msgid "Missing Role Name"
-msgstr "Nazwa Pliku"
+msgstr ""
 
 #: www/admin/globalroleedit.php:82 www/project/admin/roleedit.php:93
 msgid "Successfully Created New Role"
@@ -16112,7 +16110,7 @@ msgstr "Uwagi do wydania"
 #: www/search/include/renderers/FrsHtmlSearchRenderer.class.php:48
 #, fuzzy
 msgid "Release Name"
-msgstr "Nazwa wydania:"
+msgstr "Nazwa wydania"
 
 #: www/frs/admin/editrelease.php:231 www/frs/admin/index.php:179
 #: www/frs/admin/index.php:207 www/frs/admin/qrs.php:178
@@ -17698,9 +17696,8 @@ msgid "No job categories"
 msgstr ""
 
 #: www/people/admin/index.php:99
-#, fuzzy
 msgid "New Category Name"
-msgstr "Imię:"
+msgstr ""
 
 #: www/people/admin/index.php:114
 msgid "Add/Change People Skills"
@@ -21608,6 +21605,7 @@ msgid_plural ""
 "Displaying %d projects per page. Projects sorted by activity ranking."
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #: www/trove/TroveCategory.class.php:63
 msgid "Invalid Trove Category"

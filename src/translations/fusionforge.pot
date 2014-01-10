@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-10 15:07+0100\n"
+"POT-Creation-Date: 2014-01-10 17:43+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -6001,8 +6001,8 @@ msgid "Invalid ArtifactMessage ID"
 msgstr ""
 
 #: common/tracker/ArtifactQuery.class.php:148
-#: common/tracker/ArtifactQuery.class.php:728
-#: common/tracker/ArtifactQuery.class.php:782
+#: common/tracker/ArtifactQuery.class.php:742
+#: common/tracker/ArtifactQuery.class.php:792
 msgid "Must Be Logged In"
 msgstr ""
 
@@ -6011,25 +6011,21 @@ msgid "Query already exists"
 msgstr ""
 
 #: common/tracker/ArtifactQuery.class.php:158
-#: common/tracker/ArtifactQuery.class.php:736
+#: common/tracker/ArtifactQuery.class.php:746
 msgid ""
 "You must have tracker admin rights to set or update a project level query."
 msgstr ""
 
-#: common/tracker/ArtifactQuery.class.php:328
+#: common/tracker/ArtifactQuery.class.php:342
 msgid "Invalid Last Modified Date Range"
 msgstr ""
 
-#: common/tracker/ArtifactQuery.class.php:344
+#: common/tracker/ArtifactQuery.class.php:358
 msgid "Invalid Open Date Range"
 msgstr ""
 
-#: common/tracker/ArtifactQuery.class.php:360
+#: common/tracker/ArtifactQuery.class.php:374
 msgid "Invalid Close Date Range"
-msgstr ""
-
-#: common/tracker/ArtifactQuery.class.php:732
-msgid "Query does not exist"
 msgstr ""
 
 #: common/tracker/ArtifactType.class.php:209

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-10 11:01+0100\n"
+"POT-Creation-Date: 2014-01-10 17:43+0100\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -6489,8 +6489,8 @@ msgid "Invalid ArtifactMessage ID"
 msgstr "ID baliogabea"
 
 #: common/tracker/ArtifactQuery.class.php:148
-#: common/tracker/ArtifactQuery.class.php:728
-#: common/tracker/ArtifactQuery.class.php:782
+#: common/tracker/ArtifactQuery.class.php:742
+#: common/tracker/ArtifactQuery.class.php:792
 #, fuzzy
 msgid "Must Be Logged In"
 msgstr "Lehenengo izenpetu behar duzu"
@@ -6500,29 +6500,25 @@ msgid "Query already exists"
 msgstr ""
 
 #: common/tracker/ArtifactQuery.class.php:158
-#: common/tracker/ArtifactQuery.class.php:736
+#: common/tracker/ArtifactQuery.class.php:746
 msgid ""
 "You must have tracker admin rights to set or update a project level query."
 msgstr ""
 
-#: common/tracker/ArtifactQuery.class.php:328
+#: common/tracker/ArtifactQuery.class.php:342
 #, fuzzy
 msgid "Invalid Last Modified Date Range"
 msgstr "Zerrenda Gehitua"
 
-#: common/tracker/ArtifactQuery.class.php:344
+#: common/tracker/ArtifactQuery.class.php:358
 #, fuzzy
 msgid "Invalid Open Date Range"
 msgstr "Parametro baliogabea"
 
-#: common/tracker/ArtifactQuery.class.php:360
+#: common/tracker/ArtifactQuery.class.php:374
 #, fuzzy
 msgid "Invalid Close Date Range"
 msgstr "Parametro baliogabea"
-
-#: common/tracker/ArtifactQuery.class.php:732
-msgid "Query does not exist"
-msgstr ""
 
 #: common/tracker/ArtifactType.class.php:209
 #: common/tracker/ArtifactType.class.php:968
