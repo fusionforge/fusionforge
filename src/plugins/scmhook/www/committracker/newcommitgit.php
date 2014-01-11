@@ -4,7 +4,7 @@
  *
  * Copyright Daniel A. Perez <danielperez.arg@gmail.com>
  * Copyright 2013, Franck Villaume - TrivialDev
- * Copyright 2013, Benoit Debaenst - TrivialDev
+ * Copyright 2014, Benoit Debaenst - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -59,8 +59,7 @@ if(is_array($SubmittedVars)) {
 		$i++;
 	}
 }
-var_dump($SubmittedVar);
-echo "inside newcommit ";
+
 /**
  * Checks if the commit it's possible and parse arguments
  * Checks if repository, group and user_name are right.
@@ -84,12 +83,11 @@ function parseConfig(&$Config)
 		$repos_path.='/';
 	}
 	$repo_root = substr($Repository,0,strrpos($Repository,"/") + 1); //we get the directory of the repository root (with trailing slash)
-
 	if(fileinode($repos_path) == fileinode($repo_root)) { // since the $repos_path is usually $sys_gitroot, and that one is a symlink, we check that the inode is the same for both
 		$GroupName = substr($Repository, strrpos($Repository,"/") + 1);
 		$Config['FileName'] = substr($Config['FileName'],strlen($Repository)); //get only the filename relative to the repo
 	} else {
-		$GroupName = $Repository;
+		$GroupName = trim(str_replace($repos_path,'',$repo_root),"/");
 		$Config['FileName'] = $Config['FileName'];
 	}
 
@@ -227,6 +225,8 @@ AND project_group_list.group_id=$2',
 	}
 	return $return;
 }
+
+
 
 if (isset($Configs) && is_array($Configs)) {
 	foreach ($Configs as $Config) {

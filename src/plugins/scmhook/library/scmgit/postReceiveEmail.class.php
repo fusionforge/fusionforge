@@ -43,7 +43,7 @@ class postReceiveEmail extends scmhook {
 		require_once $gfcommon.'mail/MailingList.class.php';
 		require_once $gfcommon.'mail/MailingListFactory.class.php';
 
-		if ($this->group->usesMail()) {
+		if ($this->group->usesMail() && forge_get_config('use_ssh','scmgit')) {
 			$mlFactory = new MailingListFactory($this->group);
 			$mlArray = $mlFactory->getMailingLists();
 			$mlCount = count($mlArray);
@@ -53,10 +53,13 @@ class postReceiveEmail extends scmhook {
 					return true;
 			}
 			$this->disabledMessage = _('Hook not available due to missing dependency : Project has no commit mailing-list: ').$this->group->getUnixName().'-commits';
-		} else {
+		} elseif (!$this->group->usesMail()) {
 			$this->disabledMessage = _('Hook not available due to missing dependency : Project not using mailing-list.');
-		}
-		return false;
+                } elseif (!forge_get_config('use_ssh','scm_git')) {
+                        $this->disabledMessage = _('Hook not available due to missing dependency : Forge not using ssh for git.');
+                }
+                return false;
+
 	}
 
 	function getDisabledMessage() {

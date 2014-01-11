@@ -44,11 +44,14 @@ class commitTracker extends scmhook {
 	}
 
 	function isAvailable() {
-		if ($this->group->usesTracker()) {
-			return true;
+		if (!$this->group->usesTracker()) {
+			$this->disabledMessage = _('Hook not available due to missing dependency : Project not using tracker.');
+			return false;
+		} elseif (!forge_get_config('use_ssh','scmgit')) {
+			$this->disabledMessage = _('Hook not available due to missing dependency : Forge not using ssh for git.');
+			return false;
 		}
-		$this->disabledMessage = _('Hook not available due to missing dependency : Project not using tracker.');
-		return false;
+		return true;
 	}
 
 	function getDisabledMessage() {
@@ -96,7 +99,7 @@ class commitTracker extends scmhook {
 			echo '<tr><td>';
 			echo '<h2>'._('Related GIT commits').'</h2>';
 
-			$title_arr = $this->getTitleArr();
+			$title_arr = $this->getTitleArr($group_id);
 			echo $GLOBALS['HTML']->listTableTop($title_arr);
 
 			for ($i=0; $i<$Rows; $i++) {
@@ -129,9 +132,10 @@ class commitTracker extends scmhook {
 	* @return   Array  The array containing the titles
 	*
 	*/
-	function getTitleArr() {
+	function getTitleArr($group_id) {
 		$title_arr=array();
-		$title_arr[]=_('Filename');
+//http://tiben.info/scm/browser.php?group_id=10
+		$title_arr[]=_('Filename (<a href="/scm/browser.php?group_id='.$group_id.'">Broswe</a>)');
 		$title_arr[]=_('Date');
 		$title_arr[]=_('Previous Version');
 		$title_arr[]=_('Current Version');
@@ -151,10 +155,7 @@ class commitTracker extends scmhook {
 	*
 	*/
 	function getFileLink($GroupName, $FileName, $LatestRevision) {
-		return util_make_link ('/scm/viewvc.php'.$FileName .
-				       '?root='.$GroupName.'&view=log&rev=' .
-				       $LatestRevision,
-				       $FileName) ;
+		return $FileName;
 	}
 
 	/**
@@ -168,9 +169,7 @@ class commitTracker extends scmhook {
 	*
 	*/
 	function getActualVersionLink($GroupName, $FileName, $Version) {
-		return util_make_link ('/scm/viewvc.php'.$FileName .
-				       '?root='.$GroupName.'&rev='.$Version,
-				       $Version);
+		return $Version;
 	}
 
 	/**
@@ -185,9 +184,6 @@ class commitTracker extends scmhook {
 	*
 	*/
 	function getDiffLink($GroupName, $FileName, $PrevVersion, $ActualVersion) {
-		return util_make_link ('/scm/viewvc.php'.$FileName .
-				       '?root='.$GroupName.'&r1='.$PrevVersion .
-				       '&r2='.$ActualVersion,
-				       _('Diff To').' '.$PrevVersion);
+		return $PrevVersion; 
 	}
 }

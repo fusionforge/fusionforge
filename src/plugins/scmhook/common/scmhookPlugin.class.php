@@ -129,12 +129,7 @@ class scmhookPlugin extends Plugin {
 	function displayScmHook($group_id, $scm) {
 		global $HTML;
 		use_javascript('/js/sortable.js');
-		# commenté pour cause d'erreur dans la page d'admin
-#[8] Undefined variable: HTML (/home/ben/trivialdev/repos/scmhook/tiben/src/plugins/scmhook/common/scmhookPlugin.class.php at 132)
-#does not end with </html> tag
-#does not end with </body> tag
-#The output has ended thus: cm_enable_anonymous" value="1" checked="checked" /><strong>Enable Anonymous Read Access</strong></p>
-		#echo $HTML->getJavascripts();
+		echo $HTML->getJavascripts();
 		$hooksAvailable = $this->getAvailableHooks($group_id);
 		$statusDeploy = $this->getStatusDeploy($group_id);
 		$hooksEnabled = $this->getEnabledHooks($group_id);

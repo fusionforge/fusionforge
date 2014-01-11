@@ -7,6 +7,7 @@
  * The rest Copyright 2004 (c) Francisco Gimeno <kikov @nospam@ kikov.org>
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2014, Benoit Debaenst - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -114,41 +115,30 @@ USAGE;
     exit;
 }
 
-$oldrev = $argv[1];
-$newrev = $argv[2];
-$refname = $argv[3];
-$hook_path=$argv[4];
-//$repository = $argv[1];
-//$revision   = $argv[2];
-$git_tracker_debug = 1;
-//cd /var/opt/fusionforge/chroot/scmrepos/git/projet02/projet02.git
-$repos_path=forge_get_config('repos_path','scmgit');
-//var_dump($repos_path);
-//var_dump($refname);
-//echo "hook path ::::: ";
-//var_dump($hook_path);
-chdir($hook_path.'/..');
-//git show --pretty=short bed85a02ce30d35e44bd2f6b1020aabe53b16ce5
-$UserName = trim(`git log -n 1 --format=%an $newrev`);
+$oldrev    = $argv[1];
+$newrev    = $argv[2];
+$refname   = $argv[3];
+$repo_path = substr_replace($argv[4],'',-6);
 
-//$UserName = trim(`svnlook author -r $revision $repository`); //username of author
-//$date    = trim(`svnlook date -r $revision $repository`); //date
-$date    = trim(`git log -n 1 --format=%ai $newrev`); //date
-$log     = trim(`git log -n 1 --format=%s $newrev`); // the log
-//echo $log;
-//var_dump($log);
-$changed = trim(`git log -n 1 --format=%b --name-only -p $newrev`); // the filenames
+$git_tracker_debug = 0;
+
+chdir($repo_path);
+
+$UserName = trim(`git log -n 1 --format=%an $newrev`);
+$date     = trim(`git log -n 1 --format=%ai $newrev`); //date
+$log      = trim(`git log -n 1 --format=%s $newrev`); // the log
+$changed  = trim(`git log -n 1 --format=%b --name-only -p $newrev`); // the filenames
 
 if (isset($git_tracker_debug) && $git_tracker_debug == 1) {
-$file=fopen("/tmp/debug.000","r+");
+	$file=fopen("/tmp/debug.post","a+");
 	fwrite($file,"Vars filled:\n");
-	//fwrite($file,"arg :  " . var_dump($argv) . " \n");
+	fwrite($file,"arg :  " . print_r($argv,true) . " \n");
 	fwrite($file,"rev :  " . $newrev . " \n");
 	fwrite($file,"username :  " . $UserName . " \n");
 	fwrite($file,"date :  " . $date . " \n");
 	fwrite($file,"log  :  " . $log . " \n");
 	fwrite($file,"changed :  " . $changed . " \n");
-fclose($file);
+	fclose($file);
 }
 
 $changed = explode("\n", $changed);
@@ -161,7 +151,6 @@ foreach ($changed as $onefile) {
 		$prev = 1;
 	}
 	while ( (!$exit) && ($actrev != 0 ) ) {
-//		$changed2 = trim(`svnlook changed -r $actrev $repository | sed 's/[A-Z]*   //'`);
 		$changed2 = trim(`git log -n 1 --format=%b --name-only -p $newrev`);
 		$changed2 = explode("\n", $changed2);
 		if ( in_array($onefile,$changed2) ) {
@@ -175,11 +164,8 @@ foreach ($changed as $onefile) {
 	}
 
 	$files[] = array(
-			//'name' => $repository . "/" . $onefile,
-			'name' => $hook_path . "/" . $onefile,
-			//'previous' => $prev,
+			'name' => $onefile,
 			'previous' => $oldrev,
-			//'actual' => $revision
 			'actual' => $newrev
 		);
 }
@@ -190,8 +176,8 @@ $snoopy = new Snoopy;
 
 $SubmitUrl = util_make_url('/plugins/scmhook/committracker/newcommitgit.php');
 
-$tasks_involved= getInvolvedTasks($log);
-$artifacts_involved= getInvolvedArtifacts($log);
+$tasks_involved = getInvolvedTasks($log);
+$artifacts_involved = getInvolvedArtifacts($log);
 if ((!is_array($tasks_involved) || count($tasks_involved) < 1) &&
 	(!is_array($artifacts_involved) || count($artifacts_involved) < 1)) {
 	//nothing to post
@@ -202,7 +188,7 @@ $i = 0;
 foreach ( $files as $onefile )
 {
 	$SubmitVars[$i]["UserName"]        = $UserName;
-	$SubmitVars[$i]["Repository"]      = $hook_path;
+	$SubmitVars[$i]["Repository"]      = $repo_path;
 	$SubmitVars[$i]["FileName"]        = $onefile['name'];
 	$SubmitVars[$i]["PrevVersion"]     = $onefile['previous'];
 	$SubmitVars[$i]["ActualVersion"]   = $onefile['actual'];
@@ -212,8 +198,7 @@ foreach ( $files as $onefile )
 	$SubmitVars[$i]["GitDate"]         = time();
 	$i++;
 }
+
 $vars['data'] = urlencode(serialize($SubmitVars));
-//var_dump($SubmitUrl);
-//var_dump($vars['data']);
 $snoopy->submit($SubmitUrl, $vars);
-?>
+
