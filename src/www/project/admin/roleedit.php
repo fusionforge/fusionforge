@@ -7,6 +7,7 @@
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * Copyright © 2011
  *	Thorsten Glaser <t.glaser@tarent.de>
+ * Copyright 2014, Stéphane-Eymeric Bredthauer
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -123,7 +124,7 @@ if ($role->getHomeProject() == NULL
 	echo '<p><strong>'._('Role Name').'</strong></p>' ;
 	echo $role->getDisplayableName ($group) ;
 } else {
-	echo '<p><strong>'._('Role Name').'</strong><br /><input type="text" name="role_name" value="'.$role->getName().'" /><br />' ;
+	echo '<p><strong>'._('Role Name').'</strong><br /><input type="text" name="role_name" value="'.$role->getName().'" required="required" /><br />' ;
 	echo '<input type="checkbox" name="public" value="1"' ;
 	if ($role->isPublic()) {
 		echo ' checked="checked"' ;

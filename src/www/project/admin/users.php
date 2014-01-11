@@ -7,6 +7,7 @@
  * Copyright © 2011
  *	Thorsten Glaser <t.glaser@tarent.de>
  * Copyright 2011, Roland Mas
+ * Copyright 2014, Stéphane-Eymeric Bredthauer
  * All rights reserved.
  * http://fusionforge.org
  *
@@ -272,7 +273,7 @@ project_admin_header(array('title'=>sprintf(_('Members of %s'), $group->getPubli
 			method="post">
 		<input type="hidden" name="submit" value="y" />
 		<div style="float:left;">
-			<input type="text" name="form_unix_name" size="16" value="" />
+			<input type="text" name="form_unix_name" size="16" value="" required="required" />
 		</div><div style="float:right;">
 			<?php echo role_box($group_id,'role_id'); ?>
 			<input type="submit" name="adduser" value="<?php echo _("Add Member") ?>" />
@@ -415,7 +416,7 @@ foreach ($roles as $r) {
 echo '<tr><td colspan="2">
 	<form action="roleedit.php?group_id='. $group_id .'" method="post">
 	<div style="float:left;">
-		<input type="text" name="role_name" size="10" value="" />
+		<input type="text" name="role_name" size="10" value="" required="required" />
 	</div><div style="float:right;">
 		<input type="submit" name="add" value="'._("Create Role").'" />
 	</div>
