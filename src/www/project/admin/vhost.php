@@ -4,6 +4,7 @@
  *
  * Portions Copyright 1999-2001 (c) VA Linux Systems
  * The rest Copyright 2002-2004 (c) GForge Team
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -118,7 +119,7 @@ print '</p>';
 <table>
 <tr>
 	<td> <?php echo _('New Virtual Host <em>(e.g. vhost.org)</em>') ?> </td>
-	<td> <input type="text" size="15" maxlength="255" name="vhost_name" /> </td>
+	<td> <input type="text" size="15" maxlength="255" name="vhost_name" required="required" /> </td>
 	<td> <input type="submit" value="<?php echo _('Create') ?>" /> </td>
 </tr>
 </table>
