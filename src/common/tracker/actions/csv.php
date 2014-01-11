@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (C) 2009 Alain Peyrat, Alcatel-Lucent
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -49,7 +49,6 @@
 global $ath;
 global $group_id;
 
-//pm_header(array('title'=>_('Upload data into the tasks.'),'group_project_id'=>$group_project_id));
 $ath->header(array('atid'=>$ath->getID(), 'title'=>$ath->getName()));
 
 $default = array('headers' => 1, 'sep' => ',');
@@ -79,7 +78,7 @@ $url_export = '/tracker/?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;f
 $format = $headers ? ' with headers' : ' without headers';
 $format .= " using '$sep' as separator.";
 ?>
-<p><?php echo _('This page allows you to export the items using a CSV (<a href="http://en.wikipedia.org/wiki/Comma-separated_values">Comma Separated Values</a>) File. This format can be used to view your entries using Microsoft Excel.'); ?></p>
+<p><?php echo _('This page allows you to export the items using a CSV (<a href="http://en.wikipedia.org/wiki/Comma-separated_values">Comma Separated Values</a>) File. This format can be used to view your entries using your favorite spreadsheet software.'); ?></p>
 <h2><?php echo _('Export as a CSV file'); ?></h2>
 
 <strong><?php echo _('Selected CSV Format:'); ?></strong> CSV<?php echo $format ?> <a href="<?php echo $url_set_format ?>">(Change)</a>
