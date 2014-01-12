@@ -525,6 +525,11 @@ function html_use_jquerysplitter() {
 	use_stylesheet('/scripts/jquery-splitter/css/jquery.splitter.css');
 }
 
+function html_use_jqueryautoheight() {
+	html_use_jquery();
+	use_javascript('/scripts/jquery-auto-height/jquery.iframe-auto-height.plugin.1.9.3.js');
+}
+
 /**
  * html_build_select_box_from_arrays() - Takes two arrays, with the first array being the "id" or value and the other
  * array being the text you want displayed.

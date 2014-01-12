@@ -4,7 +4,7 @@
  *
  * Copyright 2009, Roland Mas
  * Copyright 2009, Mehdi Dogguy <mehdi@debian.org>
- * Copyright 2012-2013, Franck Villaume - TrivialDev
+ * Copyright 2012-2014, Franck Villaume - TrivialDev
  * Copyright © 2013
  *	Thorsten Glaser <t.glaser@tarent.de>
  * http://fusionforge.org
@@ -294,6 +294,7 @@ class GitPlugin extends SCMPlugin {
 	}
 
 	function printBrowserPage($params) {
+		global $HTML;
 		$project = $this->checkParams($params);
 		if (!$project) {
 			return;
@@ -303,11 +304,16 @@ class GitPlugin extends SCMPlugin {
 			if ($params['user_id']) {
 				$user = user_get_object($params['user_id']);
 				echo $project->getUnixName().'/users/'.$user->getUnixName();
-				print '<iframe src="'.util_make_url("/plugins/scmgit/cgi-bin/gitweb.cgi?p=".$project->getUnixName().'/users/'.$user->getUnixName().'.git').'" frameborder="0" width=100% height=700></iframe>';
+				print '<iframe id="scm_iframe" src="'.util_make_url("/plugins/scmgit/cgi-bin/gitweb.cgi?p=".$project->getUnixName().'/users/'.$user->getUnixName().'.git').'" frameborder="0" width=100% height=700></iframe>';
 			} elseif ($this->browserDisplayable($project)) {
-				print '<iframe src="'.util_make_url("/plugins/scmgit/cgi-bin/gitweb.cgi?p=".$project->getUnixName().'/'.$project->getUnixName().'.git').'" frameborder="0" width=100% height=700></iframe>';
+				print '<iframe id="scm_iframe" src="'.util_make_url("/plugins/scmgit/cgi-bin/gitweb.cgi?p=".$project->getUnixName().'/'.$project->getUnixName().'.git').'" frameborder="0" width=100% height=700></iframe>';
 			}
 		}
+		html_use_jqueryautoheight();
+		echo $HTML->getJavascripts();
+		echo '<script type="text/javascript">//<![CDATA[
+			jQuery(\'#scm_iframe\').iframeAutoHeight({heightOffset: 50});
+			//]]></script>';
 	}
 
 	function getBrowserLinkBlock($project) {
