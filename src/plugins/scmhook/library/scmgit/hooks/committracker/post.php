@@ -19,7 +19,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+
  * You should have received a copy of the GNU General Public License along
  * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
@@ -36,23 +36,24 @@ require_once $gfcommon.'include/pre.php';
 require $gfplugins.'scmhook/library/scmgit/hooks/committracker/Snoopy.class.php';
 
 /**
- * It returns the usage and exit program
+ * usage - It returns the usage and exit program
  *
- * @param   string   $argv
+ * @param   string   $prog
  *
  */
-function usage( $argv ) {
-	echo "Usage: $argv[0] <Repository> <Revision> \n";
-	exit(0);
+function usage( $prog ) {
+	echo "Usage: $prog <oldrev> <newrev> <refname> <repo_path> \n";
+	echo "You must control parameters! \n";
+	exit(1);
 }
 
 /**
- * It returns a list of involved artifacts.
+ * getInvolvedArtifacts - It returns a list of involved artifacts.
  * An artifact is identified if [#(NUMBER)] if found.
  *
- * @param   string   $Log Log message to be parsed.
+ * @param	string	$Log	Log message to be parsed.
  *
- * @return  boot    Returns true if check passed.
+ * @return	string	$Result	Returns artifact.
  */
 function getInvolvedArtifacts($Log)
 {
@@ -65,12 +66,12 @@ function getInvolvedArtifacts($Log)
 }
 
 /**
- * It returns a list of involved artifacts.
- * An artifact is identified if [T(NUMBER)] is found.
+ * getInvolvedTasks - It returns a list of involved tasks.
+ * A task is identified if [T(NUMBER)] is found.
  *
- * @param   string   $Log Log message to be parsed.
+ * @param	string	$Log	Log message to be parsed.
  *
- * @return  boot    Returns true if check passed.
+ * @return	string	$Result	Returns task.
  */
 function getInvolvedTasks($Log)
 {
@@ -83,11 +84,11 @@ function getInvolvedTasks($Log)
 }
 
 /**
- * Parse input and get the Log message.
+ * getLog - Parse input and get the Log message.
  *
- * @param   string   $Input Input from stdin.
+ * @param	string	$Input	Input from stdin.
  *
- * @return  array    Array of lines of Log Message.
+ * @return	array	Array of lines of Log Message.
  */
 function getLog($Input)
 {
@@ -107,12 +108,7 @@ function getLog($Input)
 $files = array();
 
 if (count($argv) != 5) {
-    echo <<<USAGE
-Usage: $0 <repository> <revision>
-       This program should be automatically called by SVN
-USAGE;
-
-    exit;
+	usage("post.php");
 }
 
 $oldrev    = $argv[1];
@@ -125,9 +121,9 @@ $git_tracker_debug = 0;
 chdir($repo_path);
 
 $UserName = trim(`git log -n 1 --format=%an $newrev`);
-$date     = trim(`git log -n 1 --format=%ai $newrev`); //date
-$log      = trim(`git log -n 1 --format=%s $newrev`); // the log
-$changed  = trim(`git log -n 1 --format=%b --name-only -p $newrev`); // the filenames
+$date     = trim(`git log -n 1 --format=%ai $newrev`);
+$log      = trim(`git log -n 1 --format=%s $newrev`);
+$changed  = trim(`git log -n 1 --format=%b --name-only -p $newrev`);
 
 if (isset($git_tracker_debug) && $git_tracker_debug == 1) {
 	$file=fopen("/tmp/debug.post","a+");
@@ -178,6 +174,7 @@ $SubmitUrl = util_make_url('/plugins/scmhook/committracker/newcommitgit.php');
 
 $tasks_involved = getInvolvedTasks($log);
 $artifacts_involved = getInvolvedArtifacts($log);
+
 if ((!is_array($tasks_involved) || count($tasks_involved) < 1) &&
 	(!is_array($artifacts_involved) || count($artifacts_involved) < 1)) {
 	//nothing to post

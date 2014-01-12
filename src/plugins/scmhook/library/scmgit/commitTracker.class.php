@@ -5,7 +5,7 @@
  * Copyright 2005, Guillaume Smet <guillaume-gforge@smet.org>
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013, Benoit Debaenst - TrivialDev
+ * Copyright 2013-2014, Benoit Debaenst - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -40,7 +40,7 @@ class commitTracker extends scmhook {
 		$this->unixname = "committracker";
 		$this->needcopy = 0;
 		$this->command = '/usr/bin/php -d include_path='.ini_get('include_path').' '.forge_get_config('plugins_path').'/scmhook/library/'.
-				$this->label.'/hooks/'.$this->unixname.'/post.php "$1" "$2"';
+				$this->label.'/hooks/'.$this->unixname.'/post.php $PARAMS $SCRIPTPATH';
 	}
 
 	function isAvailable() {
@@ -85,10 +85,10 @@ class commitTracker extends scmhook {
 	}
 
 	/**
-	* It display a table with commit related to this tracker or task_extra_detail
+	* getCommitEntries - It display a table with commit related to this tracker or task_extra_detail
 	*
-	* @param   string   $Query Query to be executed to get the commit entries.
-	* @param   integer  $group_id Group_id of the actual Group_id
+	* @param	string	$DBResult	Result of the commit entries.
+	* @param	integer	$group_id	Group_id of the actual Group_id
 	*
 	*/
 	function getCommitEntries($DBResult, $group_id) {
@@ -127,14 +127,15 @@ class commitTracker extends scmhook {
 	}
 
 	/**
-	* Return an array with titles of Box to display the entries
+	* getTitleArr - Return an array with titles of Box to display the entries
 	*
-	* @return   Array  The array containing the titles
+	* @param	integer	$group_id	Group_id of the actual Group_id
+	*
+	* @return	Array	$title_arr	The array containing the titles
 	*
 	*/
 	function getTitleArr($group_id) {
 		$title_arr=array();
-//http://tiben.info/scm/browser.php?group_id=10
 		$title_arr[]=_('Filename (<a href="/scm/browser.php?group_id='.$group_id.'">Broswe</a>)');
 		$title_arr[]=_('Date');
 		$title_arr[]=_('Previous Version');
@@ -145,13 +146,13 @@ class commitTracker extends scmhook {
 	}
 
 	/**
-	* Return a link to the File in gitweb
+	* getFileLink - Return a link to the Filename
 	*
-	* @param    String  $GroupName is the Name of the project
-	* @param    String  $FileName  is the FileName ( with path )
-	* @param 	Int		$LatestRevision	is the last revision for the file
+	* @param	String	$GroupName	is the Name of the project
+	* @param	String	$FileName	is the FileName ( with path )
+	* @param 	Int	$LatestRevision	is the last revision for the file
 	*
-	* @return   String  The string containing a link to the File in the gitweb
+	* @return	String	$FileName	The string containing a link to the File in the gitwe
 	*
 	*/
 	function getFileLink($GroupName, $FileName, $LatestRevision) {
@@ -159,13 +160,13 @@ class commitTracker extends scmhook {
 	}
 
 	/**
-	* Return a link to the File in viewcvs in the specified Version
+	* getActualVersionLink - Return a link to the actual version File
 	*
-	* @param    String  $GroupName is the Name of the project
-	* @param    String  $FileName  is the FileName ( with path )
-	* @param    String  $Version   the version to retrieve
+	* @param	String	$GroupName	is the Name of the project
+	* @param	String	$FileName	is the FileName ( with path )
+	* @param	String	$Version	the version to retrieve
 	*
-	* @return   String  The string containing a link to the File in the viewcvs
+	* @return	String	$Version	The string containing a link to the actual version File
 	*
 	*/
 	function getActualVersionLink($GroupName, $FileName, $Version) {
@@ -173,14 +174,14 @@ class commitTracker extends scmhook {
 	}
 
 	/**
-	* Return a link to the diff between two versions of a File in viewcvs
+	* getDiffLink - Return a link to the old versions of a File
 	*
-	* @param    String  $GroupName is the Name of the project
-	* @param    String  $FileName  is the FileName ( with path )
-	* @param    String  $PrevVersion   First version to retrieve
-	* @param    String  $ActualVersion Second version to retrieve
+	* @param	String	$GroupName	is the Name of the project
+	* @param	String	$FileName	is the FileName ( with path )
+	* @param	String	$PrevVersion	First version to retrieve
+	* @param	String	$ActualVersion	Second version to retrieve
 	*
-	* @return   String  The string containing a link to the File in the cvsweb
+	* @return	String	$PrevVersion	The string containing the old version File
 	*
 	*/
 	function getDiffLink($GroupName, $FileName, $PrevVersion, $ActualVersion) {

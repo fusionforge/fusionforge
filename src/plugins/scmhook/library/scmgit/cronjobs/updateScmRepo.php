@@ -2,7 +2,7 @@
 /**
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013, Benoit Debaenst - Trivialdev
+ * Copyright 2013-2014, Benoit Debaenst - Trivialdev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -95,29 +95,31 @@ class ScmGitUpdateScmRepo {
 			if (count($newHooksPostReceive)) {
 				// prepare the post-receive
 				$file = fopen("/tmp/post-receive-$unixname.tmp", "w");
-                                fwrite($file, file_get_contents(dirname(__FILE__).'/../skel/post-receive/head'));
-                                $string = '';
-                                foreach($newHooksPostReceive as $newHookPostReceive) {
-                                        $string .= $newHookPostReceive->getHookCmd()."\n";
-                                }
-                                $string .= "\n";
-                                fwrite($file, $string);
-                                fclose($file);
-                                copy('/tmp/post-receive-'.$unixname.'.tmp', $gitdir_root.'/hooks/post-receive');
-                                chmod($gitdir_root.'/hooks/post-receive', 0755);
-                                unlink('/tmp/post-receive-'.$unixname.'.tmp');
-/*
-				copy($gitdir_root.'/config',$gitdir_root.'/config.backup');
-				$file = fopen("$gitdir_root/config", "a");
-				$string = "[hooks]\n";
-				$string .= "\tmailinglist = ".$unixname.'-commits@'.forge_get_config('lists_host')."\n";
-				$string .= "\temailprefix = \"[".$unixname.'-commits] "'."\n";
-				fwrite($file, $string);
-                                fclose($file);
+				fwrite($file, file_get_contents(dirname(__FILE__).'/../skel/post-receive/head'));
+				$string = '';
 
-				copy(dirname(__FILE__).'/../hooks/postreceiveemail/postreceiveemail', $gitdir_root.'/hooks/post-receive');
+				foreach($newHooksPostReceive as $newHookPostReceive) {
+					$string .= $newHookPostReceive->getHookCmd()."\n";
+				}
+
+				$string .= "\n";
+				fwrite($file, $string);
+				fclose($file);
+
+				copy('/tmp/post-receive-'.$unixname.'.tmp', $gitdir_root.'/hooks/post-receive');
 				chmod($gitdir_root.'/hooks/post-receive', 0755);
-*/
+				unlink('/tmp/post-receive-'.$unixname.'.tmp');
+
+				if (! preg_grep("/mailinglist/",file($gitdir_root.'/config'))) {
+					copy($gitdir_root.'/config',$gitdir_root.'/config.backup');
+					$file = fopen("$gitdir_root/config", "a");
+					$string = "[hooks]\n";
+					$string .= "\tmailinglist = ".$unixname.'-commits@'.forge_get_config('lists_host')."\n";
+					$string .= "\temailprefix = \"[".$unixname.'-commits] "'."\n";
+					fwrite($file, $string);
+					fclose($file);
+				}
+
 			} else {
 				@unlink($gitdir_root.'/hooks/post-receive');
 			}

@@ -35,7 +35,7 @@ class postReceiveEmail extends scmhook {
 		$this->label = "scmgit";
 		$this->unixname = "postreceiveemail";
 		$this->needcopy = 0;
-		$this->command = '/bin/sh '.forge_get_config('plugins_path').'/scmhook/library/'.$this->label.'/hooks/'.$this->unixname.'/postreceiveemail $*';
+		$this->command = '/bin/sh '.forge_get_config('plugins_path').'/scmhook/library/'.$this->label.'/hooks/'.$this->unixname.'/postreceiveemail <<eoc '."\n".'$PARAMS'."\n".'eoc';
 	}
 
 	function isAvailable() {
@@ -55,11 +55,10 @@ class postReceiveEmail extends scmhook {
 			$this->disabledMessage = _('Hook not available due to missing dependency: Project has no commit mailing-list: ').$this->group->getUnixName().'-commits';
 		} elseif (!$this->group->usesMail()) {
 			$this->disabledMessage = _('Hook not available due to missing dependency: Project not using mailing-list.');
-                } elseif (!forge_get_config('use_ssh','scm_git')) {
-                        $this->disabledMessage = _('Hook not available due to missing dependency: Forge not using SSH for Git.');
-                }
-                return false;
-
+		} elseif (!forge_get_config('use_ssh','scm_git')) {
+			$this->disabledMessage = _('Hook not available due to missing dependency: Forge not using SSH for Git.');
+		}
+		return false;
 	}
 
 	function getDisabledMessage() {
