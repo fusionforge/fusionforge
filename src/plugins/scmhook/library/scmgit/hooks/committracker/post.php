@@ -201,4 +201,4 @@ foreach ( $files as $onefile )
 
 $vars['data'] = urlencode(serialize($SubmitVars));
 $snoopy->submit($SubmitUrl, $vars);
-
+?>
