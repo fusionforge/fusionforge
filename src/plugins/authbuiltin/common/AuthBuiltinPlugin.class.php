@@ -3,6 +3,7 @@
  * FusionForge authentication management
  *
  * Copyright 2011, Roland Mas
+ * Copyright 2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -71,11 +72,11 @@ class AuthBuiltinPlugin extends ForgeAuthPlugin {
 <input type="hidden" name="return_to" value="' . htmlspecialchars(stripslashes($return_to)) . '" />
 <p>';
 		if (forge_get_config('require_unique_email')) {
-			$result .= _('Login name or email address');
+			$result .= _('Login name or email address')._(':');
 		} else {
 			$result .= _('Login Name')._(':');
 		}
-		$result .= '<br /><input type="text" name="form_loginname" value="' . htmlspecialchars(stripslashes($loginname)) . '" /></p><p>' . _('Password')._(':') . '<br /><input type="password" name="form_pw" /></p><p><input type="submit" name="login" value="' . _('Login') . '" />
+		$result .= '<br /><input type="text" name="form_loginname" value="' . htmlspecialchars(stripslashes($loginname)) . '" required="required" /></p><p>' . _('Password')._(':') . '<br /><input type="password" name="form_pw" /></p><p><input type="submit" name="login" value="' . _('Login') . '" />
 </p>
 </form>' ;
 
