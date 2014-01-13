@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-10 18:07+0100\n"
+"POT-Creation-Date: 2014-01-13 09:45+0100\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -360,7 +360,7 @@ msgstr "Имя файла"
 #: www/forum/forum.php:156 www/forum/message.php:126
 #: www/frs/admin/deletepackage.php:57 www/frs/admin/qrs.php:197
 #: www/frs/shownotes.php:64 www/include/features_boxes.php:150
-#: www/include/features_boxes.php:159 www/include/html.php:923
+#: www/include/features_boxes.php:159 www/include/html.php:928
 #: www/include/user_profile.php:87 www/include/user_profile.php:92
 #: www/include/user_profile.php:111 www/new/index.php:98
 #: www/news/submit.php:153 www/news/submit.php:155 www/news/submit.php:158
@@ -1074,7 +1074,7 @@ msgid "Name of the document folder to create"
 msgstr "Нет данных документа"
 
 #: common/docman/views/addsubdocgroup.php:63 www/admin/responses_admin.php:132
-#: www/project/admin/database.php:180 www/project/admin/vhost.php:122
+#: www/project/admin/database.php:180 www/project/admin/vhost.php:123
 msgid "Create"
 msgstr "Создать"
 
@@ -1295,6 +1295,7 @@ msgstr "Заголовок"
 #: plugins/forumml/include/ForumMLHtmlSearchRenderer.class.php:68
 #: plugins/forumml/www/forumml_utils.php:61
 #: plugins/forumml/www/forumml_utils.php:186
+#: plugins/scmhook/library/scmgit/commitTracker.class.php:143
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:138
 #: plugins/wiki/common/WikiHtmlSearchRenderer.class.php:50
 #: www/forum/forum.php:246 www/forum/message.php:160
@@ -1445,7 +1446,7 @@ msgstr ""
 #: www/export/rss20_docman.php:135 www/export/rss20_docman.php:137
 #: www/export/tracker.php:107 www/forum/index.php:90 www/forum/message.php:127
 #: www/forum/myforums.php:152 www/frs/index.php:175 www/frs/index.php:234
-#: www/include/html.php:1070 www/news/news_utils.php:149
+#: www/include/html.php:1075 www/news/news_utils.php:149
 #: www/news/news_utils.php:269 www/people/people_utils.php:423
 #: www/people/viewjob.php:77 www/pm/browse_task.php:262
 #: www/pm/browse_task.php:272 www/pm/include/ProjectTaskHTML.class.php:121
@@ -1781,8 +1782,9 @@ msgstr "Начальная дата"
 #: common/widget/Widget_Rss.class.php:95
 #: common/widget/Widget_Rss.class.php:101
 #: common/widget/Widget_Rss.class.php:112
-#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:76
-#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
+#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:75
+#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:77
+#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:79
 #: plugins/authldap/include/AuthLDAPPlugin.class.php:209
 #: plugins/blocks/common/blocks_Widget_ProjectSummary.class.php:55
 #: plugins/blocks/common/blocks_Widget_ProjectSummary.class.php:57
@@ -1842,7 +1844,7 @@ msgstr "Начальная дата"
 #: plugins/mailman/www/admin/index.php:147
 #: plugins/mailman/www/admin/index.php:153
 #: plugins/mailman/www/admin/index.php:186
-#: plugins/scmgit/common/GitPlugin.class.php:1116
+#: plugins/scmgit/common/GitPlugin.class.php:1122
 #: plugins/scmhg/common/HgPlugin.class.php:643
 #: plugins/scmsvn/common/SVNPlugin.class.php:242
 #: www/account/change_email.php:86 www/account/index.php:128
@@ -2032,6 +2034,7 @@ msgstr "Пользователь"
 #: plugins/contribtracker/www/index.php:42
 #: plugins/contribtracker/www/project_admin.php:289
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:109
+#: plugins/scmhook/library/scmgit/commitTracker.class.php:139
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:134
 #: plugins/wiki/common/WikiHtmlSearchRenderer.class.php:50
 #: www/admin/cronman.php:42 www/admin/massmail.php:137
@@ -2164,8 +2167,8 @@ msgstr "Невозможно получение группы проекта"
 #: plugins/oauthprovider/www/request_tokens.php:100
 #: plugins/oauthprovider/www/request_tokens.php:103
 #: plugins/oauthprovider/www/request_tokens.php:108
-#: plugins/scmgit/common/GitPlugin.class.php:1092
-#: plugins/scmgit/common/GitPlugin.class.php:1101
+#: plugins/scmgit/common/GitPlugin.class.php:1098
+#: plugins/scmgit/common/GitPlugin.class.php:1107
 #: www/admin/admin_table.php:163 www/admin/admin_table.php:331
 #: www/admin/responses_admin.php:46 www/admin/trove/trove_cat_edit.php:150
 #: www/admin/useredit.php:231 www/admin/userlist.php:134
@@ -2174,7 +2177,7 @@ msgstr "Невозможно получение группы проекта"
 #: www/frs/admin/index.php:185 www/frs/admin/showreleases.php:114
 #: www/news/admin/index.php:131 www/people/people_utils.php:179
 #: www/people/people_utils.php:323 www/people/skills_utils.php:46
-#: www/people/skills_utils.php:104 www/project/admin/vhost.php:145
+#: www/people/skills_utils.php:104 www/project/admin/vhost.php:146
 #: www/reporting/timeadd.php:163 www/snippet/detail.php:67
 #: www/survey/include/SurveyHTML.class.php:321 www/tracker/admin/index.php:103
 #: www/tracker/admin/index.php:180
@@ -2631,7 +2634,7 @@ msgstr "Тема"
 #: plugins/headermenu/view/admin/updateLinkValue.php:103
 #: plugins/oauthconsumer/www/provider_edit.php:30
 #: plugins/oauthprovider/www/consumer_update_page.php:50
-#: plugins/scmgit/common/GitPlugin.class.php:1122
+#: plugins/scmgit/common/GitPlugin.class.php:1128
 #: plugins/scmhg/common/HgPlugin.class.php:647
 #: plugins/webanalytics/view/admin/updateLinkValue.php:42
 #: www/admin/admin_table.php:59 www/admin/admin_table.php:166
@@ -3403,7 +3406,7 @@ msgstr "Ошибка базы данных назначения проекта %
 
 #: common/include/Group.class.php:2170 www/admin/globalroledelete.php:37
 #: www/admin/globalroleedit.php:42 www/project/admin/roledelete.php:46
-#: www/project/admin/roleedit.php:53
+#: www/project/admin/roleedit.php:54
 msgid "Could Not Get Role"
 msgstr "Ошибка, не указана роль"
 
@@ -3742,7 +3745,7 @@ msgid "Log Out"
 msgstr "Выход"
 
 #: common/include/Navigation.class.php:194 www/account/index.php:117
-#: www/include/html.php:995
+#: www/include/html.php:1000
 msgid "My Account"
 msgstr "Моя учетная запись"
 
@@ -3752,7 +3755,7 @@ msgid "Log In"
 msgstr "Вход"
 
 #: common/include/Navigation.class.php:206
-#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:85
+#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:86
 msgid "New Account"
 msgstr "Регистрация"
 
@@ -4870,6 +4873,7 @@ msgstr "Ежедневно"
 #: common/reporting/report_utils.php:55
 #: common/widget/Widget_ProjectLatestDocuments.class.php:102
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:79
+#: plugins/scmhook/library/scmgit/commitTracker.class.php:110
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:106
 #: www/my/dashboard.php:145 www/news/admin/news_admin_utils.php:43
 #: www/pm/detail_task.php:87 www/pm/detail_task.php:91
@@ -5276,7 +5280,7 @@ msgstr ""
 #: plugins/forumml/www/forumml_utils.php:596 plugins/forumml/www/index.php:126
 #: plugins/mantisbt/view/addIssue.php:146
 #: plugins/mantisbt/view/addOrEditNote.php:58
-#: plugins/scmgit/common/GitPlugin.class.php:1123
+#: plugins/scmgit/common/GitPlugin.class.php:1129
 #: plugins/scmhg/common/HgPlugin.class.php:648
 #: www/account/pending-resend.php:75 www/admin/admin_table.php:225
 #: www/admin/cronman.php:37 www/admin/globalroleedit.php:250
@@ -5289,7 +5293,7 @@ msgstr ""
 #: www/pm/admin/index.php:264 www/pm/admin/index.php:295 www/pm/csv.php:90
 #: www/pm/deletetask.php:51 www/pm/mod_task.php:54 www/pm/mod_task.php:254
 #: www/project/admin/editimages.php:235 www/project/admin/roledelete.php:93
-#: www/project/admin/roleedit.php:302 www/project/request.php:70
+#: www/project/admin/roleedit.php:303 www/project/request.php:70
 #: www/register/index.php:314 www/snippet/add_snippet_to_package.php:167
 #: www/snippet/addversion.php:109 www/snippet/addversion.php:228
 #: www/snippet/package.php:176 www/snippet/submit.php:144
@@ -5628,7 +5632,7 @@ msgstr "Изменение"
 msgid "Advanced queries"
 msgstr "Комбинированный поиск"
 
-#: common/tracker/actions/browse.php:358 www/include/html.php:648
+#: common/tracker/actions/browse.php:358 www/include/html.php:653
 #, fuzzy
 msgid "Select One"
 msgstr "Удалить файл"
@@ -5737,7 +5741,7 @@ msgstr ""
 
 #: common/tracker/actions/browse.php:735 common/tracker/actions/browse.php:746
 #: common/tracker/actions/browse.php:750 www/include/html.php:363
-#: www/include/html.php:614 www/include/html.php:818
+#: www/include/html.php:619 www/include/html.php:823
 #: www/pm/browse_task.php:355 www/pm/browse_task.php:370
 #: www/pm/browse_task.php:381
 msgid "No Change"
@@ -5757,24 +5761,25 @@ msgstr "Указанный ответ"
 msgid "No items found"
 msgstr "Не найдено"
 
-#: common/tracker/actions/csv.php:82
+#: common/tracker/actions/csv.php:81
 msgid ""
 "This page allows you to export the items using a CSV (<a href=\"http://en."
 "wikipedia.org/wiki/Comma-separated_values\">Comma Separated Values</a>) "
-"File. This format can be used to view your entries using Microsoft Excel."
+"File. This format can be used to view your entries using your favorite "
+"spreadsheet software."
 msgstr ""
 
-#: common/tracker/actions/csv.php:83
+#: common/tracker/actions/csv.php:82
 #, fuzzy
 msgid "Export as a CSV file"
 msgstr "Нет доступной статистики"
 
-#: common/tracker/actions/csv.php:85 www/pm/csv.php:82
+#: common/tracker/actions/csv.php:84 www/pm/csv.php:82
 #, fuzzy
 msgid "Selected CSV Format:"
 msgstr "Обновить"
 
-#: common/tracker/actions/csv.php:87
+#: common/tracker/actions/csv.php:86
 #, fuzzy
 msgid "Download CSV file"
 msgstr "Скачать базу данных CSV"
@@ -5913,8 +5918,8 @@ msgstr ""
 #: plugins/scmhg/common/HgPlugin.class.php:624 www/admin/pluginman.php:230
 #: www/admin/pluginman.php:249 www/admin/pluginman.php:261
 #: www/admin/pluginman.php:262 www/include/html.php:322
-#: www/include/html.php:554 www/include/html.php:645 www/include/html.php:668
-#: www/include/html.php:702 www/include/html.php:745 www/pm/format_csv.php:78
+#: www/include/html.php:559 www/include/html.php:650 www/include/html.php:673
+#: www/include/html.php:707 www/include/html.php:750 www/pm/format_csv.php:78
 #: www/pm/ganttpage.php:158 www/tracker/roadmap.php:440
 msgid "None"
 msgstr "Нет"
@@ -5969,7 +5974,7 @@ msgstr "Открыто"
 #: plugins/quota_management/www/quota_project.php:230
 #: plugins/scmcvs/common/CVSPlugin.class.php:195
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:230
-#: plugins/scmgit/common/GitPlugin.class.php:358
+#: plugins/scmgit/common/GitPlugin.class.php:364
 #: plugins/scmsvn/common/SVNPlugin.class.php:242 www/pm/index.php:102
 #: www/pm/mod_task.php:323 www/stats/site_stats_utils.php:265
 msgid "Total"
@@ -6724,7 +6729,7 @@ msgstr ""
 #: plugins/oauthprovider/www/consumer_update_page.php:54
 #: plugins/scmcvs/common/CVSPlugin.class.php:175
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:210
-#: plugins/scmgit/common/GitPlugin.class.php:338
+#: plugins/scmgit/common/GitPlugin.class.php:344
 #: plugins/scmsvn/common/SVNPlugin.class.php:222
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:32
 #: www/account/editsshkeys.php:51 www/account/index.php:307
@@ -7392,7 +7397,7 @@ msgstr "Неверные пределы"
 msgid "From Value"
 msgstr "Старое значение"
 
-#: common/tracker/views/form-workflow.php:121 www/project/admin/users.php:372
+#: common/tracker/views/form-workflow.php:121 www/project/admin/users.php:373
 msgid "Edit Roles"
 msgstr "Изменить роли"
 
@@ -8504,7 +8509,7 @@ msgstr ""
 msgid "SKOS meta-data for trove categories"
 msgstr ""
 
-#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:66
+#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:67
 #: plugins/authcas/include/AuthCASPlugin.class.php:88
 #: plugins/authhttpd/include/AuthHTTPDPlugin.class.php:61
 #: plugins/authldap/include/AuthLDAPPlugin.class.php:201
@@ -8513,13 +8518,13 @@ msgstr ""
 msgid "Cookies must be enabled past this point."
 msgstr "Cookie должны быть включены в вашем браузере."
 
-#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:74
+#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:75
 #: www/account/pending-resend.php:65 www/account/verify.php:76
 #, fuzzy
 msgid "Login name or email address"
 msgstr "Неверный емайл"
 
-#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:76
+#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:77
 #: www/account/index.php:149 www/account/lostpw.php:89
 #: www/account/pending-resend.php:67 www/account/verify.php:78
 #: www/include/user_profile.php:87
@@ -8527,23 +8532,23 @@ msgstr "Неверный емайл"
 msgid "Login Name"
 msgstr "Регистрационное имя"
 
-#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
+#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:79
 #: plugins/authldap/include/AuthLDAPPlugin.class.php:209
 #: www/account/verify.php:86
 msgid "Password"
 msgstr "Пароль"
 
-#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
+#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:79
 #: plugins/authldap/include/AuthLDAPPlugin.class.php:209
 #: www/account/verify.php:93 www/admin/userlist.php:80
 msgid "Login"
 msgstr "Вход"
 
-#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:82
+#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:83
 msgid "[Lost your password?]"
 msgstr "[Забыли пароль?]"
 
-#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:87
+#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:88
 #: www/account/pending-resend.php:53 www/account/register.php:281
 #, fuzzy
 msgid "Resend confirmation email to a pending account"
@@ -9088,7 +9093,7 @@ msgstr "Атрибуты"
 #: plugins/contribtracker/www/index.php:171
 #: plugins/oauthprovider/www/access_tokens.php:57
 #: plugins/oauthprovider/www/request_tokens.php:58
-#: www/project/admin/massfinish.php:76 www/project/admin/users.php:301
+#: www/project/admin/massfinish.php:76 www/project/admin/users.php:302
 msgid "Role"
 msgstr "Роль"
 
@@ -9300,9 +9305,9 @@ msgstr "Регистрация нового пользователя"
 #: plugins/contribtracker/www/global_admin.php:379
 #: plugins/contribtracker/www/global_admin.php:396
 #: www/admin/globalroleedit.php:204 www/admin/globalroleedit.php:211
-#: www/project/admin/roleedit.php:123 www/project/admin/roleedit.php:126
-#: www/project/admin/users.php:375 www/project/admin/users.php:435
-#: www/project/admin/users.php:459
+#: www/project/admin/roleedit.php:124 www/project/admin/roleedit.php:127
+#: www/project/admin/users.php:376 www/project/admin/users.php:436
+#: www/project/admin/users.php:460
 msgid "Role Name"
 msgstr "Название роли"
 
@@ -9523,16 +9528,19 @@ msgid "No commits have been made."
 msgstr "Репозиторий небыл обновлен."
 
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:110
+#: plugins/scmhook/library/scmgit/commitTracker.class.php:140
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:135
 msgid "Previous Version"
 msgstr "Предыдущая версия"
 
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:111
+#: plugins/scmhook/library/scmgit/commitTracker.class.php:141
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:136
 msgid "Current Version"
 msgstr "Текущая версия"
 
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:112
+#: plugins/scmhook/library/scmgit/commitTracker.class.php:142
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:137
 msgid "Log Message"
 msgstr "Лог сообщений"
@@ -9933,7 +9941,7 @@ msgstr "Опции учётной записи:"
 #: plugins/globaldashboard/www/admin/manage_accounts.php:116
 #: www/account/verify.php:38 www/admin/globalroleedit.php:151
 #: www/admin/search.php:73 www/admin/unsubscribe.php:112
-#: www/admin/useredit.php:139 www/project/admin/users.php:300
+#: www/admin/useredit.php:139 www/project/admin/users.php:301
 #: www/project/memberlist.php:50
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:44
 #: www/stats/lastlogins.php:51 www/top/topusers.php:63
@@ -10037,8 +10045,8 @@ msgstr "%1$s Регистрация учетной записи"
 #: plugins/globaldashboard/www/admin/manage_accounts.php:80
 #: plugins/mantisbt/view/admin/viewVersion.php:53 www/admin/pluginman.php:138
 #: www/people/people_utils.php:160 www/people/people_utils.php:300
-#: www/project/admin/users.php:302 www/project/admin/users.php:376
-#: www/project/admin/users.php:436 www/project/admin/users.php:460
+#: www/project/admin/users.php:303 www/project/admin/users.php:377
+#: www/project/admin/users.php:437 www/project/admin/users.php:461
 msgid "Action"
 msgstr "Действие"
 
@@ -11189,7 +11197,7 @@ msgstr "Просмотреть административного вебкале
 #: plugins/mailman/include/mailmanPlugin.class.php:153
 #: www/admin/globalroleedit.php:152 www/admin/globalroleedit.php:167
 #: www/admin/globalroleedit.php:177 www/my/rmproject.php:90
-#: www/project/admin/users.php:345
+#: www/project/admin/users.php:346
 msgid "Remove"
 msgstr "Удалить"
 
@@ -13992,7 +14000,7 @@ msgstr "Загрузить свежую CSV базу репозитория"
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:176
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:211
-#: plugins/scmgit/common/GitPlugin.class.php:339
+#: plugins/scmgit/common/GitPlugin.class.php:345
 #: plugins/scmsvn/common/SVNPlugin.class.php:223
 #: www/stats/site_stats_utils.php:284
 msgid "Adds"
@@ -14072,8 +14080,8 @@ msgid "Create new repository:"
 msgstr "Создать новый отзыв"
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:629
-#: plugins/scmgit/common/GitPlugin.class.php:1092
-#: plugins/scmgit/common/GitPlugin.class.php:1116
+#: plugins/scmgit/common/GitPlugin.class.php:1098
+#: plugins/scmgit/common/GitPlugin.class.php:1122
 #: plugins/scmhg/common/HgPlugin.class.php:641
 #, fuzzy
 msgid "Repository name"
@@ -14122,7 +14130,7 @@ msgstr[1] ""
 msgstr[2] ""
 
 #: plugins/scmgit/common/GitPlugin.class.php:140
-#: plugins/scmgit/common/GitPlugin.class.php:321
+#: plugins/scmgit/common/GitPlugin.class.php:327
 #: plugins/scmgit/common/scmgit_Widget_MyRepositories.class.php:52
 #, fuzzy
 msgid "Browse Git Repository"
@@ -14188,12 +14196,12 @@ msgstr ""
 msgid "<a href=\"%s\">Request a personal repository</a>."
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:315
+#: plugins/scmgit/common/GitPlugin.class.php:321
 #, fuzzy
 msgid "Git Repository Browser"
 msgstr "История репозитория"
 
-#: plugins/scmgit/common/GitPlugin.class.php:317
+#: plugins/scmgit/common/GitPlugin.class.php:323
 #, fuzzy
 msgid ""
 "Browsing the Git tree gives you a view into the current status of this "
@@ -14204,47 +14212,47 @@ msgstr ""
 "состояние кода проекта. Также Вы можете полностью просмотреть истории "
 "изменений любого файла в репозитории."
 
-#: plugins/scmgit/common/GitPlugin.class.php:340
+#: plugins/scmgit/common/GitPlugin.class.php:346
 msgid "Updates"
 msgstr "Обновления"
 
-#: plugins/scmgit/common/GitPlugin.class.php:966
+#: plugins/scmgit/common/GitPlugin.class.php:972
 #, fuzzy
 msgid "Git Commits"
 msgstr "Ссылки на схожие коммиты SVN"
 
-#: plugins/scmgit/common/GitPlugin.class.php:984
+#: plugins/scmgit/common/GitPlugin.class.php:990
 msgid "Cannot create a secondary repository with the same name as the primary"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:989
+#: plugins/scmgit/common/GitPlugin.class.php:995
 #: plugins/scmhg/common/HgPlugin.class.php:550
 #, fuzzy
 msgid "This repository name is not valid"
 msgstr "Неверное имя участника"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1002
+#: plugins/scmgit/common/GitPlugin.class.php:1008
 #: plugins/scmhg/common/HgPlugin.class.php:545
 #: plugins/scmhg/common/HgPlugin.class.php:561
 #, fuzzy, php-format
 msgid "A repository %s already exists"
 msgstr "Запрос уже существует"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1027
+#: plugins/scmgit/common/GitPlugin.class.php:1033
 msgid "Invalid URL from which to clone"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1036
+#: plugins/scmgit/common/GitPlugin.class.php:1042
 #, fuzzy, php-format
 msgid "Clone of %s"
 msgstr "Телефон:"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1086
+#: plugins/scmgit/common/GitPlugin.class.php:1092
 #, fuzzy, php-format
 msgid "No extra Git repository for project %1$s"
 msgstr "Статистика по базе данных проекта"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1088
+#: plugins/scmgit/common/GitPlugin.class.php:1094
 #, fuzzy, php-format
 msgid "Extra Git repository for project %1$s"
 msgid_plural "Extra Git repositories for project %1$s"
@@ -14252,25 +14260,25 @@ msgstr[0] "Статистика по базе данных проекта"
 msgstr[1] "Статистика по базе данных проекта"
 msgstr[2] "Статистика по базе данных проекта"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1092
+#: plugins/scmgit/common/GitPlugin.class.php:1098
 #, fuzzy
 msgid "Initial repository description"
 msgstr "Краткое описание"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1092
+#: plugins/scmgit/common/GitPlugin.class.php:1098
 msgid "Initial clone URL (if any)"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1109
+#: plugins/scmgit/common/GitPlugin.class.php:1115
 #, fuzzy, php-format
 msgid "Create new Git repository for project %1$s"
 msgstr "Статистика по базе данных проекта"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1118
+#: plugins/scmgit/common/GitPlugin.class.php:1124
 msgid "Description:"
 msgstr "Описание:"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1120
+#: plugins/scmgit/common/GitPlugin.class.php:1126
 msgid ""
 "Initial clone URL (or name of an existing repository in this project; leave "
 "empty to start with an empty repository):"
@@ -14444,6 +14452,39 @@ msgstr ""
 msgid "post-receive Hooks"
 msgstr ""
 
+#: plugins/scmhook/library/scmgit/commitTracker.class.php:36
+#: plugins/scmhook/library/scmsvn/commitTracker.class.php:35
+msgid "Every commit is pushed into related tracker or task."
+msgstr ""
+
+#: plugins/scmhook/library/scmgit/commitTracker.class.php:48
+msgid ""
+"Hook not available due to missing dependency : Project not using tracker."
+msgstr ""
+
+#: plugins/scmhook/library/scmgit/commitTracker.class.php:51
+#: plugins/scmhook/library/scmgit/postReceiveEmail.class.php:59
+msgid ""
+"Hook not available due to missing dependency : Forge not using ssh for git."
+msgstr ""
+
+#: plugins/scmhook/library/scmgit/commitTracker.class.php:68
+#: plugins/scmhook/library/scmgit/commitTracker.class.php:81
+#: plugins/scmhook/library/scmsvn/commitTracker.class.php:64
+#: plugins/scmhook/library/scmsvn/commitTracker.class.php:77
+#, fuzzy
+msgid "Unable to retrieve data"
+msgstr "Добавление к базе блокировано"
+
+#: plugins/scmhook/library/scmgit/commitTracker.class.php:100
+#, fuzzy
+msgid "Related GIT commits"
+msgstr "Ссылки на схожие коммиты SVN"
+
+#: plugins/scmhook/library/scmgit/commitTracker.class.php:138
+msgid "Filename (<a href=\"/scm/browser.php?group_id="
+msgstr ""
+
 #: plugins/scmhook/library/scmgit/postReceiveEmail.class.php:32
 #: plugins/scmhook/library/scmsvn/commitEmail.class.php:34
 #, fuzzy
@@ -14490,20 +14531,10 @@ msgstr ""
 msgid "Verify if commited files have svn:mimetype set up correctly."
 msgstr ""
 
-#: plugins/scmhook/library/scmsvn/commitTracker.class.php:35
-msgid "Every commit is pushed into related tracker or task."
-msgstr ""
-
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:49
 msgid ""
 "Hook not available due to missing dependency: Project not using tracker."
 msgstr ""
-
-#: plugins/scmhook/library/scmsvn/commitTracker.class.php:64
-#: plugins/scmhook/library/scmsvn/commitTracker.class.php:77
-#, fuzzy
-msgid "Unable to retrieve data"
-msgstr "Добавление к базе блокировано"
 
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:96
 #, fuzzy
@@ -15648,7 +15679,7 @@ msgid "Add this custom response to canned responses"
 msgstr "Дополнить заметкой существующие примечания"
 
 #: www/admin/approve-pending.php:164 www/admin/pending-news.php:144
-#: www/project/admin/users.php:248
+#: www/project/admin/users.php:249
 msgid "Reject"
 msgstr "Отвергнуть"
 
@@ -15782,17 +15813,17 @@ msgstr "Сообщение удалено"
 msgid "Error: Please confirm the deletion of the role."
 msgstr ""
 
-#: www/admin/globalroleedit.php:75 www/project/admin/roleedit.php:86
+#: www/admin/globalroleedit.php:75 www/project/admin/roleedit.php:87
 #, fuzzy
 msgid "Missing Role Name"
 msgstr "Неуказан параметр"
 
-#: www/admin/globalroleedit.php:82 www/project/admin/roleedit.php:93
+#: www/admin/globalroleedit.php:82 www/project/admin/roleedit.php:94
 #, fuzzy
 msgid "Successfully Created New Role"
 msgstr "Элемент успешно создан"
 
-#: www/admin/globalroleedit.php:91 www/project/admin/roleedit.php:102
+#: www/admin/globalroleedit.php:91 www/project/admin/roleedit.php:103
 #, fuzzy
 msgid "Successfully Updated Role"
 msgstr "Квоты успешно обновлены"
@@ -15854,20 +15885,20 @@ msgstr "Добавить участника"
 msgid "Public role (can be referenced by projects)"
 msgstr ""
 
-#: www/admin/globalroleedit.php:214 www/project/admin/roleedit.php:134
+#: www/admin/globalroleedit.php:214 www/project/admin/roleedit.php:135
 msgid "Section"
 msgstr "Секция"
 
-#: www/admin/globalroleedit.php:215 www/project/admin/roleedit.php:135
+#: www/admin/globalroleedit.php:215 www/project/admin/roleedit.php:136
 msgid "Subsection"
 msgstr "Подразделение"
 
-#: www/admin/globalroleedit.php:216 www/project/admin/roleedit.php:136
+#: www/admin/globalroleedit.php:216 www/project/admin/roleedit.php:137
 msgid "Setting"
 msgstr "Установка"
 
 #: www/admin/globalroleedit.php:257 www/admin/globalroleedit.php:259
-#: www/project/admin/users.php:406
+#: www/project/admin/users.php:407
 #, fuzzy
 msgid "Delete role"
 msgstr "Удалить файл"
@@ -16058,11 +16089,11 @@ msgstr "Управление пользователями"
 msgid "Global roles and permissions"
 msgstr "Ошибка создания доступа"
 
-#: www/admin/index.php:97 www/project/admin/roleedit.php:111
+#: www/admin/index.php:97 www/project/admin/roleedit.php:112
 msgid "Edit Role"
 msgstr "Изменить роль"
 
-#: www/admin/index.php:105 www/project/admin/users.php:420
+#: www/admin/index.php:105 www/project/admin/users.php:421
 #, fuzzy
 msgid "Create Role"
 msgstr "Создать"
@@ -16771,7 +16802,7 @@ msgstr "Уникальное имя (Unix)"
 
 #: www/admin/useredit.php:264 www/admin/useredit.php:294
 #: www/admin/vhost.php:173 www/project/admin/database.php:207
-#: www/project/admin/vhost.php:138
+#: www/project/admin/vhost.php:139
 msgid "Operations"
 msgstr "Операции"
 
@@ -16860,7 +16891,7 @@ msgid "Error adding VHOST: "
 msgstr "Ошибка добавления VHOST:"
 
 #: www/admin/vhost.php:74 www/admin/vhost.php:140
-#: www/project/admin/vhost.php:137
+#: www/project/admin/vhost.php:138
 msgid "Virtual Host"
 msgstr "Виртуальный хост"
 
@@ -18231,70 +18262,70 @@ msgstr ""
 "на Ваш емайл. И если Вы добавляете коментарии, вносите изменения, то их вы "
 "тоже будете получать на Ваш емайл!"
 
-#: www/include/html.php:560
+#: www/include/html.php:565
 #, fuzzy
 msgid "Error: uneven row counts"
 msgstr "Ошибка - версий не найдено"
 
-#: www/include/html.php:820
+#: www/include/html.php:825
 msgid "Lowest"
 msgstr "Низший"
 
-#: www/include/html.php:824
+#: www/include/html.php:829
 msgid "Highest"
 msgstr "Высший"
 
-#: www/include/html.php:908
+#: www/include/html.php:913
 #, fuzzy, php-format
 msgid "Project access problem: %s"
 msgstr "Использовано ресурсов проектом"
 
-#: www/include/html.php:910
+#: www/include/html.php:915
 #, fuzzy, php-format
 msgid "Project Problem: %s"
 msgstr "Управление проектом: %1$s"
 
-#: www/include/html.php:979
+#: www/include/html.php:984
 msgid "My Personal Page"
 msgstr "Моя страница"
 
-#: www/include/html.php:981
+#: www/include/html.php:986
 msgid ""
 "View your personal page, a selection of widgets to follow the informations "
 "from projects."
 msgstr ""
 
-#: www/include/html.php:984
+#: www/include/html.php:989
 #, fuzzy
 msgid "My Trackers Dashboard"
 msgstr "Трекер обновлен"
 
-#: www/include/html.php:986
+#: www/include/html.php:991
 #, fuzzy
 msgid "View your tasks and artifacts."
 msgstr "У Вас нет записей в дневнике"
 
-#: www/include/html.php:990 www/my/diary.php:166
+#: www/include/html.php:995 www/my/diary.php:166
 msgid "My Diary and Notes"
 msgstr "Мой журнал и заметки"
 
-#: www/include/html.php:992
+#: www/include/html.php:997
 msgid "Manage your diary. Add, modify or delete your notes."
 msgstr ""
 
-#: www/include/html.php:997
+#: www/include/html.php:1002
 msgid "Manage your account. Change your password, select your preferences."
 msgstr ""
 
-#: www/include/html.php:1001 www/register/index.php:174
+#: www/include/html.php:1006 www/register/index.php:174
 msgid "Register Project"
 msgstr "Регистрация проекта"
 
-#: www/include/html.php:1003
+#: www/include/html.php:1008
 msgid "Register a new project in forge, following the workflow."
 msgstr ""
 
-#: www/include/html.php:1052
+#: www/include/html.php:1057
 #, fuzzy, php-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
@@ -18302,7 +18333,7 @@ msgstr[0] "Последние месяцы"
 msgstr[1] "Последние месяцы"
 msgstr[2] "Последние месяцы"
 
-#: www/include/html.php:1056
+#: www/include/html.php:1061
 #, fuzzy, php-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
@@ -18310,7 +18341,7 @@ msgstr[0] "Последние месяцы"
 msgstr[1] "Последние месяцы"
 msgstr[2] "Последние месяцы"
 
-#: www/include/html.php:1060
+#: www/include/html.php:1065
 #, php-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
@@ -18318,7 +18349,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: www/include/html.php:1064
+#: www/include/html.php:1069
 #, php-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
@@ -18326,7 +18357,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: www/include/html.php:1068
+#: www/include/html.php:1073
 #, php-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
@@ -18334,7 +18365,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: www/include/html.php:1287
+#: www/include/html.php:1292
 #, php-format
 msgid " Displaying %1$s per page. Projects sorted by alphabetical order."
 msgstr ""
@@ -21000,7 +21031,7 @@ msgid "(send on all updates)"
 msgstr "(высылать при всех изменениях)"
 
 #: www/project/admin/massadd.php:67 www/project/admin/massfinish.php:62
-#: www/project/admin/users.php:283
+#: www/project/admin/users.php:284
 msgid "Add Users From List"
 msgstr "Добавить участника в проект, из списка"
 
@@ -21021,7 +21052,7 @@ msgstr ""
 "Выберите, <strong>первую букву</strong> в имени участника нажатием, для "
 "добаления."
 
-#: www/project/admin/massadd.php:87 www/project/admin/users.php:98
+#: www/project/admin/massadd.php:87 www/project/admin/users.php:99
 #, fuzzy
 msgid "No Matching Users Found"
 msgstr "Соответствий не найдено"
@@ -21176,11 +21207,11 @@ msgstr "Полностью удалить"
 msgid "You are about to permanently delete role %s"
 msgstr "Сейчас вы удалите этот документ безвозвратно."
 
-#: www/project/admin/roleedit.php:109
+#: www/project/admin/roleedit.php:110
 msgid "New Role"
 msgstr "Новая роль"
 
-#: www/project/admin/roleedit.php:113
+#: www/project/admin/roleedit.php:114
 #, fuzzy
 msgid ""
 "Use this page to edit the permissions attached to each role.  Note that each "
@@ -21193,7 +21224,7 @@ msgstr ""
 "Наблюдатель. Например, если Наблюдатель мог прочитать SVN репозиторий, так "
 "может любая другая роль в проекте."
 
-#: www/project/admin/roleedit.php:131
+#: www/project/admin/roleedit.php:132
 #, fuzzy
 msgid "Shared role (can be referenced by other projects)"
 msgstr "Выделенный объект не имеет пакетов"
@@ -21294,125 +21325,125 @@ msgstr "Источник из %1$s"
 msgid "File Release System Admin"
 msgstr "Система выпуска файла"
 
-#: www/project/admin/users.php:102 www/project/admin/users.php:139
-#: www/project/admin/users.php:152
+#: www/project/admin/users.php:103 www/project/admin/users.php:140
+#: www/project/admin/users.php:153
 #, fuzzy
 msgid "Role not selected"
 msgstr "Отклонить выбранные"
 
-#: www/project/admin/users.php:108 www/project/admin/users.php:165
+#: www/project/admin/users.php:109 www/project/admin/users.php:166
 #, fuzzy
 msgid "Member Added Successfully"
 msgstr "Вы добавили участника в проект"
 
-#: www/project/admin/users.php:132
+#: www/project/admin/users.php:133
 #, fuzzy
 msgid "Member Removed Successfully"
 msgstr "Участник успешно удален"
 
-#: www/project/admin/users.php:145
+#: www/project/admin/users.php:146
 #, fuzzy
 msgid "Member Updated Successfully"
 msgstr "Статусы участников обновлены"
 
-#: www/project/admin/users.php:161 www/project/admin/users.php:173
+#: www/project/admin/users.php:162 www/project/admin/users.php:174
 #, fuzzy
 msgid "Error Getting GroupJoinRequest"
 msgstr "Ошибка создания группы"
 
-#: www/project/admin/users.php:178
+#: www/project/admin/users.php:179
 #, fuzzy
 msgid "Rejected"
 msgstr "Отвергнуть"
 
-#: www/project/admin/users.php:189
+#: www/project/admin/users.php:190
 #, fuzzy
 msgid "Role linked successfully"
 msgstr "Удалено"
 
-#: www/project/admin/users.php:202
+#: www/project/admin/users.php:203
 #, fuzzy
 msgid "Role unlinked successfully"
 msgstr "Удалено"
 
-#: www/project/admin/users.php:212
+#: www/project/admin/users.php:213
 #, fuzzy, php-format
 msgid "Members of %s"
 msgstr "Участники"
 
-#: www/project/admin/users.php:224
+#: www/project/admin/users.php:225
 #, fuzzy
 msgid "Pending Membership Requests"
 msgstr "Ожидающие запросы"
 
-#: www/project/admin/users.php:246
+#: www/project/admin/users.php:247
 msgid "Accept"
 msgstr "Принять"
 
-#: www/project/admin/users.php:257 www/project/admin/users.php:259
-#: www/project/admin/users.php:278
+#: www/project/admin/users.php:258 www/project/admin/users.php:260
+#: www/project/admin/users.php:279
 #, fuzzy
 msgid "Add Member"
 msgstr "Участники"
 
-#: www/project/admin/users.php:289
+#: www/project/admin/users.php:290
 #, fuzzy
 msgid "Current Project Members"
 msgstr "Список участников проекта"
 
-#: www/project/admin/users.php:358
+#: www/project/admin/users.php:359
 msgid "Grant extra role"
 msgstr ""
 
-#: www/project/admin/users.php:398
+#: www/project/admin/users.php:399
 #, fuzzy
 msgid "Edit Permissions"
 msgstr "Изменить полномочия"
 
-#: www/project/admin/users.php:429
+#: www/project/admin/users.php:430
 msgid "Edit Observer"
 msgstr "Внешние участники"
 
-#: www/project/admin/users.php:433
+#: www/project/admin/users.php:434
 msgid "Currently used external roles"
 msgstr ""
 
-#: www/project/admin/users.php:448
+#: www/project/admin/users.php:449
 #, fuzzy
 msgid "Unlink Role"
 msgstr "Изменить роль"
 
-#: www/project/admin/users.php:457
+#: www/project/admin/users.php:458
 msgid "Available external roles"
 msgstr ""
 
-#: www/project/admin/users.php:478
+#: www/project/admin/users.php:479
 msgid "Link external role"
 msgstr ""
 
-#: www/project/admin/vhost.php:59
+#: www/project/admin/vhost.php:60
 msgid "Virtual Host scheduled for creation."
 msgstr "Создание виртуального хостинга поставлено в очередь."
 
-#: www/project/admin/vhost.php:65
+#: www/project/admin/vhost.php:66
 #, php-format
 msgid "Not a valid hostname - %s"
 msgstr "Неверное имя хоста - %s"
 
-#: www/project/admin/vhost.php:96
+#: www/project/admin/vhost.php:97
 msgid "VHOST deleted"
 msgstr "Виртуальный хотстинг удален"
 
-#: www/project/admin/vhost.php:103
+#: www/project/admin/vhost.php:104
 msgid "Virtual Host Management"
 msgstr "Управление виртуальным хостингом"
 
-#: www/project/admin/vhost.php:105
+#: www/project/admin/vhost.php:106
 #, fuzzy
 msgid "Add New Virtual Host"
 msgstr "Добавить виртуальный хост"
 
-#: www/project/admin/vhost.php:108
+#: www/project/admin/vhost.php:109
 #, php-format
 msgid ""
 "To add a new virtual host - simply point a <strong>CNAME</strong> for "
@@ -21420,7 +21451,7 @@ msgid ""
 "currently host mail (i.e. cannot be an MX) or DNS</strong>."
 msgstr ""
 
-#: www/project/admin/vhost.php:112
+#: www/project/admin/vhost.php:113
 #, php-format
 msgid ""
 "Clicking on “Create” will schedule the creation of the Virtual Host.  This "
@@ -21428,11 +21459,11 @@ msgid ""
 "will display the material at <em>%1$s.%2$s</em>."
 msgstr ""
 
-#: www/project/admin/vhost.php:120
+#: www/project/admin/vhost.php:121
 msgid "New Virtual Host <em>(e.g. vhost.org)</em>"
 msgstr "Имя нового виртуального хоста <em>(например: vhost.org)</em>"
 
-#: www/project/admin/vhost.php:154
+#: www/project/admin/vhost.php:155
 msgid "No VHOSTs defined"
 msgstr "Не указано имени виртуального хоста"
 

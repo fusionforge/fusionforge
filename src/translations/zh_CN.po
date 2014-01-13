@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-10 18:07+0100\n"
+"POT-Creation-Date: 2014-01-13 09:45+0100\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -360,7 +360,7 @@ msgstr "文件名"
 #: www/forum/forum.php:156 www/forum/message.php:126
 #: www/frs/admin/deletepackage.php:57 www/frs/admin/qrs.php:197
 #: www/frs/shownotes.php:64 www/include/features_boxes.php:150
-#: www/include/features_boxes.php:159 www/include/html.php:923
+#: www/include/features_boxes.php:159 www/include/html.php:928
 #: www/include/user_profile.php:87 www/include/user_profile.php:92
 #: www/include/user_profile.php:111 www/new/index.php:98
 #: www/news/submit.php:153 www/news/submit.php:155 www/news/submit.php:158
@@ -1071,7 +1071,7 @@ msgid "Name of the document folder to create"
 msgstr "无文件资料"
 
 #: common/docman/views/addsubdocgroup.php:63 www/admin/responses_admin.php:132
-#: www/project/admin/database.php:180 www/project/admin/vhost.php:122
+#: www/project/admin/database.php:180 www/project/admin/vhost.php:123
 msgid "Create"
 msgstr "创建"
 
@@ -1289,6 +1289,7 @@ msgstr "标题"
 #: plugins/forumml/include/ForumMLHtmlSearchRenderer.class.php:68
 #: plugins/forumml/www/forumml_utils.php:61
 #: plugins/forumml/www/forumml_utils.php:186
+#: plugins/scmhook/library/scmgit/commitTracker.class.php:143
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:138
 #: plugins/wiki/common/WikiHtmlSearchRenderer.class.php:50
 #: www/forum/forum.php:246 www/forum/message.php:160
@@ -1439,7 +1440,7 @@ msgstr ""
 #: www/export/rss20_docman.php:135 www/export/rss20_docman.php:137
 #: www/export/tracker.php:107 www/forum/index.php:90 www/forum/message.php:127
 #: www/forum/myforums.php:152 www/frs/index.php:175 www/frs/index.php:234
-#: www/include/html.php:1070 www/news/news_utils.php:149
+#: www/include/html.php:1075 www/news/news_utils.php:149
 #: www/news/news_utils.php:269 www/people/people_utils.php:423
 #: www/people/viewjob.php:77 www/pm/browse_task.php:262
 #: www/pm/browse_task.php:272 www/pm/include/ProjectTaskHTML.class.php:121
@@ -1775,8 +1776,9 @@ msgstr "开启日期"
 #: common/widget/Widget_Rss.class.php:95
 #: common/widget/Widget_Rss.class.php:101
 #: common/widget/Widget_Rss.class.php:112
-#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:76
-#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
+#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:75
+#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:77
+#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:79
 #: plugins/authldap/include/AuthLDAPPlugin.class.php:209
 #: plugins/blocks/common/blocks_Widget_ProjectSummary.class.php:55
 #: plugins/blocks/common/blocks_Widget_ProjectSummary.class.php:57
@@ -1836,7 +1838,7 @@ msgstr "开启日期"
 #: plugins/mailman/www/admin/index.php:147
 #: plugins/mailman/www/admin/index.php:153
 #: plugins/mailman/www/admin/index.php:186
-#: plugins/scmgit/common/GitPlugin.class.php:1116
+#: plugins/scmgit/common/GitPlugin.class.php:1122
 #: plugins/scmhg/common/HgPlugin.class.php:643
 #: plugins/scmsvn/common/SVNPlugin.class.php:242
 #: www/account/change_email.php:86 www/account/index.php:128
@@ -2026,6 +2028,7 @@ msgstr "用户"
 #: plugins/contribtracker/www/index.php:42
 #: plugins/contribtracker/www/project_admin.php:289
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:109
+#: plugins/scmhook/library/scmgit/commitTracker.class.php:139
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:134
 #: plugins/wiki/common/WikiHtmlSearchRenderer.class.php:50
 #: www/admin/cronman.php:42 www/admin/massmail.php:137
@@ -2157,8 +2160,8 @@ msgstr "无法更新上层文章"
 #: plugins/oauthprovider/www/request_tokens.php:100
 #: plugins/oauthprovider/www/request_tokens.php:103
 #: plugins/oauthprovider/www/request_tokens.php:108
-#: plugins/scmgit/common/GitPlugin.class.php:1092
-#: plugins/scmgit/common/GitPlugin.class.php:1101
+#: plugins/scmgit/common/GitPlugin.class.php:1098
+#: plugins/scmgit/common/GitPlugin.class.php:1107
 #: www/admin/admin_table.php:163 www/admin/admin_table.php:331
 #: www/admin/responses_admin.php:46 www/admin/trove/trove_cat_edit.php:150
 #: www/admin/useredit.php:231 www/admin/userlist.php:134
@@ -2167,7 +2170,7 @@ msgstr "无法更新上层文章"
 #: www/frs/admin/index.php:185 www/frs/admin/showreleases.php:114
 #: www/news/admin/index.php:131 www/people/people_utils.php:179
 #: www/people/people_utils.php:323 www/people/skills_utils.php:46
-#: www/people/skills_utils.php:104 www/project/admin/vhost.php:145
+#: www/people/skills_utils.php:104 www/project/admin/vhost.php:146
 #: www/reporting/timeadd.php:163 www/snippet/detail.php:67
 #: www/survey/include/SurveyHTML.class.php:321 www/tracker/admin/index.php:103
 #: www/tracker/admin/index.php:180
@@ -2627,7 +2630,7 @@ msgstr "主题"
 #: plugins/headermenu/view/admin/updateLinkValue.php:103
 #: plugins/oauthconsumer/www/provider_edit.php:30
 #: plugins/oauthprovider/www/consumer_update_page.php:50
-#: plugins/scmgit/common/GitPlugin.class.php:1122
+#: plugins/scmgit/common/GitPlugin.class.php:1128
 #: plugins/scmhg/common/HgPlugin.class.php:647
 #: plugins/webanalytics/view/admin/updateLinkValue.php:42
 #: www/admin/admin_table.php:59 www/admin/admin_table.php:166
@@ -3408,7 +3411,7 @@ msgstr "错误：数据库：项目被指定给　%d: %s"
 
 #: common/include/Group.class.php:2170 www/admin/globalroledelete.php:37
 #: www/admin/globalroleedit.php:42 www/project/admin/roledelete.php:46
-#: www/project/admin/roleedit.php:53
+#: www/project/admin/roleedit.php:54
 #, fuzzy
 msgid "Could Not Get Role"
 msgstr "不能获取角色信息"
@@ -3721,7 +3724,7 @@ msgid "Log Out"
 msgstr "注销"
 
 #: common/include/Navigation.class.php:194 www/account/index.php:117
-#: www/include/html.php:995
+#: www/include/html.php:1000
 msgid "My Account"
 msgstr "我的帐号"
 
@@ -3731,7 +3734,7 @@ msgid "Log In"
 msgstr "登录"
 
 #: common/include/Navigation.class.php:206
-#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:85
+#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:86
 msgid "New Account"
 msgstr "新帐号"
 
@@ -4839,6 +4842,7 @@ msgstr "每日"
 #: common/reporting/report_utils.php:55
 #: common/widget/Widget_ProjectLatestDocuments.class.php:102
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:79
+#: plugins/scmhook/library/scmgit/commitTracker.class.php:110
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:106
 #: www/my/dashboard.php:145 www/news/admin/news_admin_utils.php:43
 #: www/pm/detail_task.php:87 www/pm/detail_task.php:91
@@ -5231,7 +5235,7 @@ msgstr ""
 #: plugins/forumml/www/forumml_utils.php:596 plugins/forumml/www/index.php:126
 #: plugins/mantisbt/view/addIssue.php:146
 #: plugins/mantisbt/view/addOrEditNote.php:58
-#: plugins/scmgit/common/GitPlugin.class.php:1123
+#: plugins/scmgit/common/GitPlugin.class.php:1129
 #: plugins/scmhg/common/HgPlugin.class.php:648
 #: www/account/pending-resend.php:75 www/admin/admin_table.php:225
 #: www/admin/cronman.php:37 www/admin/globalroleedit.php:250
@@ -5244,7 +5248,7 @@ msgstr ""
 #: www/pm/admin/index.php:264 www/pm/admin/index.php:295 www/pm/csv.php:90
 #: www/pm/deletetask.php:51 www/pm/mod_task.php:54 www/pm/mod_task.php:254
 #: www/project/admin/editimages.php:235 www/project/admin/roledelete.php:93
-#: www/project/admin/roleedit.php:302 www/project/request.php:70
+#: www/project/admin/roleedit.php:303 www/project/request.php:70
 #: www/register/index.php:314 www/snippet/add_snippet_to_package.php:167
 #: www/snippet/addversion.php:109 www/snippet/addversion.php:228
 #: www/snippet/package.php:176 www/snippet/submit.php:144
@@ -5584,7 +5588,7 @@ msgstr "更新"
 msgid "Advanced queries"
 msgstr "高级搜索"
 
-#: common/tracker/actions/browse.php:358 www/include/html.php:648
+#: common/tracker/actions/browse.php:358 www/include/html.php:653
 #, fuzzy
 msgid "Select One"
 msgstr "删除文件"
@@ -5693,7 +5697,7 @@ msgstr ""
 
 #: common/tracker/actions/browse.php:735 common/tracker/actions/browse.php:746
 #: common/tracker/actions/browse.php:750 www/include/html.php:363
-#: www/include/html.php:614 www/include/html.php:818
+#: www/include/html.php:619 www/include/html.php:823
 #: www/pm/browse_task.php:355 www/pm/browse_task.php:370
 #: www/pm/browse_task.php:381
 msgid "No Change"
@@ -5713,24 +5717,25 @@ msgstr "预设回应"
 msgid "No items found"
 msgstr "没有任何项目"
 
-#: common/tracker/actions/csv.php:82
+#: common/tracker/actions/csv.php:81
 msgid ""
 "This page allows you to export the items using a CSV (<a href=\"http://en."
 "wikipedia.org/wiki/Comma-separated_values\">Comma Separated Values</a>) "
-"File. This format can be used to view your entries using Microsoft Excel."
+"File. This format can be used to view your entries using your favorite "
+"spreadsheet software."
 msgstr ""
 
-#: common/tracker/actions/csv.php:83
+#: common/tracker/actions/csv.php:82
 #, fuzzy
 msgid "Export as a CSV file"
 msgstr "没有统计信息"
 
-#: common/tracker/actions/csv.php:85 www/pm/csv.php:82
+#: common/tracker/actions/csv.php:84 www/pm/csv.php:82
 #, fuzzy
 msgid "Selected CSV Format:"
 msgstr "更新"
 
-#: common/tracker/actions/csv.php:87
+#: common/tracker/actions/csv.php:86
 #, fuzzy
 msgid "Download CSV file"
 msgstr "下载作为CSV"
@@ -5870,8 +5875,8 @@ msgstr ""
 #: plugins/scmhg/common/HgPlugin.class.php:624 www/admin/pluginman.php:230
 #: www/admin/pluginman.php:249 www/admin/pluginman.php:261
 #: www/admin/pluginman.php:262 www/include/html.php:322
-#: www/include/html.php:554 www/include/html.php:645 www/include/html.php:668
-#: www/include/html.php:702 www/include/html.php:745 www/pm/format_csv.php:78
+#: www/include/html.php:559 www/include/html.php:650 www/include/html.php:673
+#: www/include/html.php:707 www/include/html.php:750 www/pm/format_csv.php:78
 #: www/pm/ganttpage.php:158 www/tracker/roadmap.php:440
 msgid "None"
 msgstr "无"
@@ -5923,7 +5928,7 @@ msgstr "开启"
 #: plugins/quota_management/www/quota_project.php:230
 #: plugins/scmcvs/common/CVSPlugin.class.php:195
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:230
-#: plugins/scmgit/common/GitPlugin.class.php:358
+#: plugins/scmgit/common/GitPlugin.class.php:364
 #: plugins/scmsvn/common/SVNPlugin.class.php:242 www/pm/index.php:102
 #: www/pm/mod_task.php:323 www/stats/site_stats_utils.php:265
 msgid "Total"
@@ -6675,7 +6680,7 @@ msgstr ""
 #: plugins/oauthprovider/www/consumer_update_page.php:54
 #: plugins/scmcvs/common/CVSPlugin.class.php:175
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:210
-#: plugins/scmgit/common/GitPlugin.class.php:338
+#: plugins/scmgit/common/GitPlugin.class.php:344
 #: plugins/scmsvn/common/SVNPlugin.class.php:222
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:32
 #: www/account/editsshkeys.php:51 www/account/index.php:307
@@ -7329,7 +7334,7 @@ msgstr "无效参数"
 msgid "From Value"
 msgstr "旧值"
 
-#: common/tracker/views/form-workflow.php:121 www/project/admin/users.php:372
+#: common/tracker/views/form-workflow.php:121 www/project/admin/users.php:373
 msgid "Edit Roles"
 msgstr "编辑角色"
 
@@ -8419,7 +8424,7 @@ msgstr ""
 msgid "SKOS meta-data for trove categories"
 msgstr ""
 
-#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:66
+#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:67
 #: plugins/authcas/include/AuthCASPlugin.class.php:88
 #: plugins/authhttpd/include/AuthHTTPDPlugin.class.php:61
 #: plugins/authldap/include/AuthLDAPPlugin.class.php:201
@@ -8428,13 +8433,13 @@ msgstr ""
 msgid "Cookies must be enabled past this point."
 msgstr "为了登录，您必须启用Cookies功能"
 
-#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:74
+#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:75
 #: www/account/pending-resend.php:65 www/account/verify.php:76
 #, fuzzy
 msgid "Login name or email address"
 msgstr "无效的Email"
 
-#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:76
+#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:77
 #: www/account/index.php:149 www/account/lostpw.php:89
 #: www/account/pending-resend.php:67 www/account/verify.php:78
 #: www/include/user_profile.php:87
@@ -8442,24 +8447,24 @@ msgstr "无效的Email"
 msgid "Login Name"
 msgstr "用户名称"
 
-#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
+#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:79
 #: plugins/authldap/include/AuthLDAPPlugin.class.php:209
 #: www/account/verify.php:86
 #, fuzzy
 msgid "Password"
 msgstr "密码："
 
-#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
+#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:79
 #: plugins/authldap/include/AuthLDAPPlugin.class.php:209
 #: www/account/verify.php:93 www/admin/userlist.php:80
 msgid "Login"
 msgstr "登录"
 
-#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:82
+#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:83
 msgid "[Lost your password?]"
 msgstr "[忘了密码？]"
 
-#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:87
+#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:88
 #: www/account/pending-resend.php:53 www/account/register.php:281
 #, fuzzy
 msgid "Resend confirmation email to a pending account"
@@ -8975,7 +8980,7 @@ msgstr "属性"
 #: plugins/contribtracker/www/index.php:171
 #: plugins/oauthprovider/www/access_tokens.php:57
 #: plugins/oauthprovider/www/request_tokens.php:58
-#: www/project/admin/massfinish.php:76 www/project/admin/users.php:301
+#: www/project/admin/massfinish.php:76 www/project/admin/users.php:302
 msgid "Role"
 msgstr "角色"
 
@@ -9187,9 +9192,9 @@ msgstr "注册新用户"
 #: plugins/contribtracker/www/global_admin.php:379
 #: plugins/contribtracker/www/global_admin.php:396
 #: www/admin/globalroleedit.php:204 www/admin/globalroleedit.php:211
-#: www/project/admin/roleedit.php:123 www/project/admin/roleedit.php:126
-#: www/project/admin/users.php:375 www/project/admin/users.php:435
-#: www/project/admin/users.php:459
+#: www/project/admin/roleedit.php:124 www/project/admin/roleedit.php:127
+#: www/project/admin/users.php:376 www/project/admin/users.php:436
+#: www/project/admin/users.php:460
 msgid "Role Name"
 msgstr "角色名称"
 
@@ -9406,17 +9411,20 @@ msgid "No commits have been made."
 msgstr ""
 
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:110
+#: plugins/scmhook/library/scmgit/commitTracker.class.php:140
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:135
 msgid "Previous Version"
 msgstr ""
 
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:111
+#: plugins/scmhook/library/scmgit/commitTracker.class.php:141
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:136
 #, fuzzy
 msgid "Current Version"
 msgstr "版本"
 
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:112
+#: plugins/scmhook/library/scmgit/commitTracker.class.php:142
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:137
 msgid "Log Message"
 msgstr ""
@@ -9817,7 +9825,7 @@ msgstr "帐号信息"
 #: plugins/globaldashboard/www/admin/manage_accounts.php:116
 #: www/account/verify.php:38 www/admin/globalroleedit.php:151
 #: www/admin/search.php:73 www/admin/unsubscribe.php:112
-#: www/admin/useredit.php:139 www/project/admin/users.php:300
+#: www/admin/useredit.php:139 www/project/admin/users.php:301
 #: www/project/memberlist.php:50
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:44
 #: www/stats/lastlogins.php:51 www/top/topusers.php:63
@@ -9921,8 +9929,8 @@ msgstr "%1$s 帐号注册"
 #: plugins/globaldashboard/www/admin/manage_accounts.php:80
 #: plugins/mantisbt/view/admin/viewVersion.php:53 www/admin/pluginman.php:138
 #: www/people/people_utils.php:160 www/people/people_utils.php:300
-#: www/project/admin/users.php:302 www/project/admin/users.php:376
-#: www/project/admin/users.php:436 www/project/admin/users.php:460
+#: www/project/admin/users.php:303 www/project/admin/users.php:377
+#: www/project/admin/users.php:437 www/project/admin/users.php:461
 msgid "Action"
 msgstr "动作"
 
@@ -11069,7 +11077,7 @@ msgstr "虚拟主机管理"
 #: plugins/mailman/include/mailmanPlugin.class.php:153
 #: www/admin/globalroleedit.php:152 www/admin/globalroleedit.php:167
 #: www/admin/globalroleedit.php:177 www/my/rmproject.php:90
-#: www/project/admin/users.php:345
+#: www/project/admin/users.php:346
 msgid "Remove"
 msgstr "移除"
 
@@ -13835,7 +13843,7 @@ msgstr "下载您的每夜CVS Tree Tarball"
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:176
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:211
-#: plugins/scmgit/common/GitPlugin.class.php:339
+#: plugins/scmgit/common/GitPlugin.class.php:345
 #: plugins/scmsvn/common/SVNPlugin.class.php:223
 #: www/stats/site_stats_utils.php:284
 msgid "Adds"
@@ -13910,8 +13918,8 @@ msgid "Create new repository:"
 msgstr "创建新的回应："
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:629
-#: plugins/scmgit/common/GitPlugin.class.php:1092
-#: plugins/scmgit/common/GitPlugin.class.php:1116
+#: plugins/scmgit/common/GitPlugin.class.php:1098
+#: plugins/scmgit/common/GitPlugin.class.php:1122
 #: plugins/scmhg/common/HgPlugin.class.php:641
 #, fuzzy
 msgid "Repository name"
@@ -13952,7 +13960,7 @@ msgid_plural ""
 msgstr[0] ""
 
 #: plugins/scmgit/common/GitPlugin.class.php:140
-#: plugins/scmgit/common/GitPlugin.class.php:321
+#: plugins/scmgit/common/GitPlugin.class.php:327
 #: plugins/scmgit/common/scmgit_Widget_MyRepositories.class.php:52
 #, fuzzy
 msgid "Browse Git Repository"
@@ -14012,84 +14020,84 @@ msgstr ""
 msgid "<a href=\"%s\">Request a personal repository</a>."
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:315
+#: plugins/scmgit/common/GitPlugin.class.php:321
 #, fuzzy
 msgid "Git Repository Browser"
 msgstr "SCM Repository"
 
-#: plugins/scmgit/common/GitPlugin.class.php:317
+#: plugins/scmgit/common/GitPlugin.class.php:323
 msgid ""
 "Browsing the Git tree gives you a view into the current status of this "
 "project's code. You may also view the complete histories of any file in the "
 "repository."
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:340
+#: plugins/scmgit/common/GitPlugin.class.php:346
 #, fuzzy
 msgid "Updates"
 msgstr "更新"
 
-#: plugins/scmgit/common/GitPlugin.class.php:966
+#: plugins/scmgit/common/GitPlugin.class.php:972
 #, fuzzy
 msgid "Git Commits"
 msgstr "提交"
 
-#: plugins/scmgit/common/GitPlugin.class.php:984
+#: plugins/scmgit/common/GitPlugin.class.php:990
 msgid "Cannot create a secondary repository with the same name as the primary"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:989
+#: plugins/scmgit/common/GitPlugin.class.php:995
 #: plugins/scmhg/common/HgPlugin.class.php:550
 #, fuzzy
 msgid "This repository name is not valid"
 msgstr "不正确用户"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1002
+#: plugins/scmgit/common/GitPlugin.class.php:1008
 #: plugins/scmhg/common/HgPlugin.class.php:545
 #: plugins/scmhg/common/HgPlugin.class.php:561
 #, fuzzy, php-format
 msgid "A repository %s already exists"
 msgstr "查询已存在"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1027
+#: plugins/scmgit/common/GitPlugin.class.php:1033
 msgid "Invalid URL from which to clone"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1036
+#: plugins/scmgit/common/GitPlugin.class.php:1042
 #, fuzzy, php-format
 msgid "Clone of %s"
 msgstr "电话："
 
-#: plugins/scmgit/common/GitPlugin.class.php:1086
+#: plugins/scmgit/common/GitPlugin.class.php:1092
 #, fuzzy, php-format
 msgid "No extra Git repository for project %1$s"
 msgstr "项目数据库统计"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1088
+#: plugins/scmgit/common/GitPlugin.class.php:1094
 #, fuzzy, php-format
 msgid "Extra Git repository for project %1$s"
 msgid_plural "Extra Git repositories for project %1$s"
 msgstr[0] "项目数据库统计"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1092
+#: plugins/scmgit/common/GitPlugin.class.php:1098
 #, fuzzy
 msgid "Initial repository description"
 msgstr "简短说明"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1092
+#: plugins/scmgit/common/GitPlugin.class.php:1098
 msgid "Initial clone URL (if any)"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1109
+#: plugins/scmgit/common/GitPlugin.class.php:1115
 #, fuzzy, php-format
 msgid "Create new Git repository for project %1$s"
 msgstr "项目数据库统计"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1118
+#: plugins/scmgit/common/GitPlugin.class.php:1124
 msgid "Description:"
 msgstr "说明："
 
-#: plugins/scmgit/common/GitPlugin.class.php:1120
+#: plugins/scmgit/common/GitPlugin.class.php:1126
 msgid ""
 "Initial clone URL (or name of an existing repository in this project; leave "
 "empty to start with an empty repository):"
@@ -14256,6 +14264,39 @@ msgstr ""
 msgid "post-receive Hooks"
 msgstr ""
 
+#: plugins/scmhook/library/scmgit/commitTracker.class.php:36
+#: plugins/scmhook/library/scmsvn/commitTracker.class.php:35
+msgid "Every commit is pushed into related tracker or task."
+msgstr ""
+
+#: plugins/scmhook/library/scmgit/commitTracker.class.php:48
+msgid ""
+"Hook not available due to missing dependency : Project not using tracker."
+msgstr ""
+
+#: plugins/scmhook/library/scmgit/commitTracker.class.php:51
+#: plugins/scmhook/library/scmgit/postReceiveEmail.class.php:59
+msgid ""
+"Hook not available due to missing dependency : Forge not using ssh for git."
+msgstr ""
+
+#: plugins/scmhook/library/scmgit/commitTracker.class.php:68
+#: plugins/scmhook/library/scmgit/commitTracker.class.php:81
+#: plugins/scmhook/library/scmsvn/commitTracker.class.php:64
+#: plugins/scmhook/library/scmsvn/commitTracker.class.php:77
+#, fuzzy
+msgid "Unable to retrieve data"
+msgstr "无法添加已经启用的数据库"
+
+#: plugins/scmhook/library/scmgit/commitTracker.class.php:100
+#, fuzzy
+msgid "Related GIT commits"
+msgstr "提交"
+
+#: plugins/scmhook/library/scmgit/commitTracker.class.php:138
+msgid "Filename (<a href=\"/scm/browser.php?group_id="
+msgstr ""
+
 #: plugins/scmhook/library/scmgit/postReceiveEmail.class.php:32
 #: plugins/scmhook/library/scmsvn/commitEmail.class.php:34
 #, fuzzy
@@ -14302,20 +14343,10 @@ msgstr ""
 msgid "Verify if commited files have svn:mimetype set up correctly."
 msgstr ""
 
-#: plugins/scmhook/library/scmsvn/commitTracker.class.php:35
-msgid "Every commit is pushed into related tracker or task."
-msgstr ""
-
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:49
 msgid ""
 "Hook not available due to missing dependency: Project not using tracker."
 msgstr ""
-
-#: plugins/scmhook/library/scmsvn/commitTracker.class.php:64
-#: plugins/scmhook/library/scmsvn/commitTracker.class.php:77
-#, fuzzy
-msgid "Unable to retrieve data"
-msgstr "无法添加已经启用的数据库"
 
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:96
 #, fuzzy
@@ -15408,7 +15439,7 @@ msgid "Add this custom response to canned responses"
 msgstr ""
 
 #: www/admin/approve-pending.php:164 www/admin/pending-news.php:144
-#: www/project/admin/users.php:248
+#: www/project/admin/users.php:249
 msgid "Reject"
 msgstr "拒绝"
 
@@ -15543,17 +15574,17 @@ msgstr "成功删除"
 msgid "Error: Please confirm the deletion of the role."
 msgstr ""
 
-#: www/admin/globalroleedit.php:75 www/project/admin/roleedit.php:86
+#: www/admin/globalroleedit.php:75 www/project/admin/roleedit.php:87
 #, fuzzy
 msgid "Missing Role Name"
 msgstr "缺少参数"
 
-#: www/admin/globalroleedit.php:82 www/project/admin/roleedit.php:93
+#: www/admin/globalroleedit.php:82 www/project/admin/roleedit.php:94
 #, fuzzy
 msgid "Successfully Created New Role"
 msgstr "项目成功创造"
 
-#: www/admin/globalroleedit.php:91 www/project/admin/roleedit.php:102
+#: www/admin/globalroleedit.php:91 www/project/admin/roleedit.php:103
 #, fuzzy
 msgid "Successfully Updated Role"
 msgstr "成功添加"
@@ -15615,20 +15646,20 @@ msgstr "增加用户"
 msgid "Public role (can be referenced by projects)"
 msgstr ""
 
-#: www/admin/globalroleedit.php:214 www/project/admin/roleedit.php:134
+#: www/admin/globalroleedit.php:214 www/project/admin/roleedit.php:135
 msgid "Section"
 msgstr "区域"
 
-#: www/admin/globalroleedit.php:215 www/project/admin/roleedit.php:135
+#: www/admin/globalroleedit.php:215 www/project/admin/roleedit.php:136
 msgid "Subsection"
 msgstr "子区域"
 
-#: www/admin/globalroleedit.php:216 www/project/admin/roleedit.php:136
+#: www/admin/globalroleedit.php:216 www/project/admin/roleedit.php:137
 msgid "Setting"
 msgstr "设置"
 
 #: www/admin/globalroleedit.php:257 www/admin/globalroleedit.php:259
-#: www/project/admin/users.php:406
+#: www/project/admin/users.php:407
 #, fuzzy
 msgid "Delete role"
 msgstr "删除文件"
@@ -15819,11 +15850,11 @@ msgstr "用户维护"
 msgid "Global roles and permissions"
 msgstr "插入问题时发生错误"
 
-#: www/admin/index.php:97 www/project/admin/roleedit.php:111
+#: www/admin/index.php:97 www/project/admin/roleedit.php:112
 msgid "Edit Role"
 msgstr "编辑角色"
 
-#: www/admin/index.php:105 www/project/admin/users.php:420
+#: www/admin/index.php:105 www/project/admin/users.php:421
 #, fuzzy
 msgid "Create Role"
 msgstr "创建"
@@ -16513,7 +16544,7 @@ msgstr "Unix帐号"
 
 #: www/admin/useredit.php:264 www/admin/useredit.php:294
 #: www/admin/vhost.php:173 www/project/admin/database.php:207
-#: www/project/admin/vhost.php:138
+#: www/project/admin/vhost.php:139
 msgid "Operations"
 msgstr "动作"
 
@@ -16604,7 +16635,7 @@ msgid "Error adding VHOST: "
 msgstr "添加虚拟主机时发生错误："
 
 #: www/admin/vhost.php:74 www/admin/vhost.php:140
-#: www/project/admin/vhost.php:137
+#: www/project/admin/vhost.php:138
 msgid "Virtual Host"
 msgstr "虚拟主机"
 
@@ -17946,100 +17977,100 @@ msgid ""
 "also get emails for those reasons as well!"
 msgstr ""
 
-#: www/include/html.php:560
+#: www/include/html.php:565
 #, fuzzy
 msgid "Error: uneven row counts"
 msgstr "错误 - 未发现版本"
 
-#: www/include/html.php:820
+#: www/include/html.php:825
 msgid "Lowest"
 msgstr "最低"
 
-#: www/include/html.php:824
+#: www/include/html.php:829
 msgid "Highest"
 msgstr "最高"
 
-#: www/include/html.php:908
+#: www/include/html.php:913
 #, fuzzy, php-format
 msgid "Project access problem: %s"
 msgstr "项目管理：%1$s"
 
-#: www/include/html.php:910
+#: www/include/html.php:915
 #, fuzzy, php-format
 msgid "Project Problem: %s"
 msgstr "项目管理：%1$s"
 
-#: www/include/html.php:979
+#: www/include/html.php:984
 msgid "My Personal Page"
 msgstr "我的个人首页"
 
-#: www/include/html.php:981
+#: www/include/html.php:986
 msgid ""
 "View your personal page, a selection of widgets to follow the informations "
 "from projects."
 msgstr ""
 
-#: www/include/html.php:984
+#: www/include/html.php:989
 #, fuzzy
 msgid "My Trackers Dashboard"
 msgstr "跟踪更新"
 
-#: www/include/html.php:986
+#: www/include/html.php:991
 #, fuzzy
 msgid "View your tasks and artifacts."
 msgstr "您没有日记或笔记"
 
-#: www/include/html.php:990 www/my/diary.php:166
+#: www/include/html.php:995 www/my/diary.php:166
 msgid "My Diary and Notes"
 msgstr "我的日记和笔记"
 
-#: www/include/html.php:992
+#: www/include/html.php:997
 msgid "Manage your diary. Add, modify or delete your notes."
 msgstr ""
 
-#: www/include/html.php:997
+#: www/include/html.php:1002
 msgid "Manage your account. Change your password, select your preferences."
 msgstr ""
 
-#: www/include/html.php:1001 www/register/index.php:174
+#: www/include/html.php:1006 www/register/index.php:174
 msgid "Register Project"
 msgstr "注册项目"
 
-#: www/include/html.php:1003
+#: www/include/html.php:1008
 msgid "Register a new project in forge, following the workflow."
 msgstr ""
 
-#: www/include/html.php:1052
+#: www/include/html.php:1057
 #, fuzzy, php-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "上个月"
 
-#: www/include/html.php:1056
+#: www/include/html.php:1061
 #, fuzzy, php-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "上个月"
 
-#: www/include/html.php:1060
+#: www/include/html.php:1065
 #, php-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] ""
 
-#: www/include/html.php:1064
+#: www/include/html.php:1069
 #, php-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] ""
 
-#: www/include/html.php:1068
+#: www/include/html.php:1073
 #, php-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] ""
 
-#: www/include/html.php:1287
+#: www/include/html.php:1292
 #, php-format
 msgid " Displaying %1$s per page. Projects sorted by alphabetical order."
 msgstr ""
@@ -20633,7 +20664,7 @@ msgid "(send on all updates)"
 msgstr "(发送所有更新)"
 
 #: www/project/admin/massadd.php:67 www/project/admin/massfinish.php:62
-#: www/project/admin/users.php:283
+#: www/project/admin/users.php:284
 msgid "Add Users From List"
 msgstr "从列表添加用户"
 
@@ -20651,7 +20682,7 @@ msgid ""
 "to add."
 msgstr "选择你想要增加的人拥有Unix帐号的<strong>第一个字节</strong>。"
 
-#: www/project/admin/massadd.php:87 www/project/admin/users.php:98
+#: www/project/admin/massadd.php:87 www/project/admin/users.php:99
 #, fuzzy
 msgid "No Matching Users Found"
 msgstr "未发现符合的用户"
@@ -20797,11 +20828,11 @@ msgstr "永久的删除"
 msgid "You are about to permanently delete role %s"
 msgstr "你正要永久地删除这一份文件。"
 
-#: www/project/admin/roleedit.php:109
+#: www/project/admin/roleedit.php:110
 msgid "New Role"
 msgstr "新角色"
 
-#: www/project/admin/roleedit.php:113
+#: www/project/admin/roleedit.php:114
 #, fuzzy
 msgid ""
 "Use this page to edit the permissions attached to each role.  Note that each "
@@ -20812,7 +20843,7 @@ msgstr ""
 "通过这一页来编辑您的项目角色，每个用户至少可以像匿名者存取。例如，如果匿名者"
 "可以读取 CVS，那么这个项目的其他角色也可以"
 
-#: www/project/admin/roleedit.php:131
+#: www/project/admin/roleedit.php:132
 #, fuzzy
 msgid "Shared role (can be referenced by other projects)"
 msgstr "你已经是项目成员。"
@@ -20913,125 +20944,125 @@ msgstr "来源 IP"
 msgid "File Release System Admin"
 msgstr "使用文件发布系统"
 
-#: www/project/admin/users.php:102 www/project/admin/users.php:139
-#: www/project/admin/users.php:152
+#: www/project/admin/users.php:103 www/project/admin/users.php:140
+#: www/project/admin/users.php:153
 #, fuzzy
 msgid "Role not selected"
 msgstr "选择拒绝"
 
-#: www/project/admin/users.php:108 www/project/admin/users.php:165
+#: www/project/admin/users.php:109 www/project/admin/users.php:166
 #, fuzzy
 msgid "Member Added Successfully"
 msgstr "用户添加成功"
 
-#: www/project/admin/users.php:132
+#: www/project/admin/users.php:133
 #, fuzzy
 msgid "Member Removed Successfully"
 msgstr "用户删除成功"
 
-#: www/project/admin/users.php:145
+#: www/project/admin/users.php:146
 #, fuzzy
 msgid "Member Updated Successfully"
 msgstr "用户更新成功"
 
-#: www/project/admin/users.php:161 www/project/admin/users.php:173
+#: www/project/admin/users.php:162 www/project/admin/users.php:174
 #, fuzzy
 msgid "Error Getting GroupJoinRequest"
 msgstr "创建群组对象时发生错误"
 
-#: www/project/admin/users.php:178
+#: www/project/admin/users.php:179
 #, fuzzy
 msgid "Rejected"
 msgstr "拒绝"
 
-#: www/project/admin/users.php:189
+#: www/project/admin/users.php:190
 #, fuzzy
 msgid "Role linked successfully"
 msgstr "文件移除：成功"
 
-#: www/project/admin/users.php:202
+#: www/project/admin/users.php:203
 #, fuzzy
 msgid "Role unlinked successfully"
 msgstr "文件移除：成功"
 
-#: www/project/admin/users.php:212
+#: www/project/admin/users.php:213
 #, fuzzy, php-format
 msgid "Members of %s"
 msgstr "用户"
 
-#: www/project/admin/users.php:224
+#: www/project/admin/users.php:225
 #, fuzzy
 msgid "Pending Membership Requests"
 msgstr "未决定的请求"
 
-#: www/project/admin/users.php:246
+#: www/project/admin/users.php:247
 msgid "Accept"
 msgstr "接受"
 
-#: www/project/admin/users.php:257 www/project/admin/users.php:259
-#: www/project/admin/users.php:278
+#: www/project/admin/users.php:258 www/project/admin/users.php:260
+#: www/project/admin/users.php:279
 #, fuzzy
 msgid "Add Member"
 msgstr "用户"
 
-#: www/project/admin/users.php:289
+#: www/project/admin/users.php:290
 #, fuzzy
 msgid "Current Project Members"
 msgstr "项目成员列表"
 
-#: www/project/admin/users.php:358
+#: www/project/admin/users.php:359
 msgid "Grant extra role"
 msgstr ""
 
-#: www/project/admin/users.php:398
+#: www/project/admin/users.php:399
 #, fuzzy
 msgid "Edit Permissions"
 msgstr "更新许可权"
 
-#: www/project/admin/users.php:429
+#: www/project/admin/users.php:430
 msgid "Edit Observer"
 msgstr "编辑匿名者"
 
-#: www/project/admin/users.php:433
+#: www/project/admin/users.php:434
 msgid "Currently used external roles"
 msgstr ""
 
-#: www/project/admin/users.php:448
+#: www/project/admin/users.php:449
 #, fuzzy
 msgid "Unlink Role"
 msgstr "编辑角色"
 
-#: www/project/admin/users.php:457
+#: www/project/admin/users.php:458
 msgid "Available external roles"
 msgstr ""
 
-#: www/project/admin/users.php:478
+#: www/project/admin/users.php:479
 msgid "Link external role"
 msgstr ""
 
-#: www/project/admin/vhost.php:59
+#: www/project/admin/vhost.php:60
 msgid "Virtual Host scheduled for creation."
 msgstr "创建虚拟主机工作已经进入日程安排"
 
-#: www/project/admin/vhost.php:65
+#: www/project/admin/vhost.php:66
 #, php-format
 msgid "Not a valid hostname - %s"
 msgstr "错误的主机名称 - %s"
 
-#: www/project/admin/vhost.php:96
+#: www/project/admin/vhost.php:97
 msgid "VHOST deleted"
 msgstr "虚拟主机删除了"
 
-#: www/project/admin/vhost.php:103
+#: www/project/admin/vhost.php:104
 msgid "Virtual Host Management"
 msgstr "虚拟主机管理"
 
-#: www/project/admin/vhost.php:105
+#: www/project/admin/vhost.php:106
 #, fuzzy
 msgid "Add New Virtual Host"
 msgstr "添加虚拟主机"
 
-#: www/project/admin/vhost.php:108
+#: www/project/admin/vhost.php:109
 #, php-format
 msgid ""
 "To add a new virtual host - simply point a <strong>CNAME</strong> for "
@@ -21039,7 +21070,7 @@ msgid ""
 "currently host mail (i.e. cannot be an MX) or DNS</strong>."
 msgstr ""
 
-#: www/project/admin/vhost.php:112
+#: www/project/admin/vhost.php:113
 #, php-format
 msgid ""
 "Clicking on “Create” will schedule the creation of the Virtual Host.  This "
@@ -21047,11 +21078,11 @@ msgid ""
 "will display the material at <em>%1$s.%2$s</em>."
 msgstr ""
 
-#: www/project/admin/vhost.php:120
+#: www/project/admin/vhost.php:121
 msgid "New Virtual Host <em>(e.g. vhost.org)</em>"
 msgstr "添加虚拟主机 <em>(例如 vhost.org)</em>"
 
-#: www/project/admin/vhost.php:154
+#: www/project/admin/vhost.php:155
 msgid "No VHOSTs defined"
 msgstr "未定义任何虚拟主机"
 
