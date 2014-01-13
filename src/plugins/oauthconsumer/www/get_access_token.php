@@ -118,7 +118,7 @@ if(count($providers)>0)	{
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 
 		//workaround for untrusted security certificates
-		if($f_not_verify_ssl)	{
+		if($f_not_verify_ssl) {
 			curl_setopt ($curl, CURLOPT_SSL_VERIFYHOST, 0);
 			curl_setopt ($curl, CURLOPT_SSL_VERIFYPEER, 0);
 			session_set_cookie('NOT_VERIFY_SSL', 1, 0, '', '', false, true);
@@ -126,9 +126,8 @@ if(count($providers)>0)	{
 
 		$request_token_string = curl_exec ($curl);
 
-		if($request_token_string === false)
-		{
-			trigger_error(_('Error in curl : ').curl_error($curl), E_USER_WARNING);
+		if($request_token_string === false) {
+			trigger_error(_('Error in curl: ').curl_error($curl), E_USER_WARNING);
 		}
 		curl_close ($curl);
 		//print_r($request_token_string);

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-13 10:05+0100\n"
+"POT-Creation-Date: 2014-01-13 18:52+0100\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -332,8 +332,8 @@ msgstr "Име на форума"
 #: plugins/mantisbt/view/addAttachment.php:32
 #: plugins/mantisbt/view/editIssue.php:84
 #: plugins/mantisbt/view/roadmap.php:100 plugins/mantisbt/view/roadmap.php:149
+#: plugins/oauthconsumer/www/get_access_token.php:138
 #: plugins/oauthconsumer/www/get_access_token.php:139
-#: plugins/oauthconsumer/www/get_access_token.php:140
 #: plugins/projectimport/common/ProjectImporter.class.php:124
 #: plugins/projectlabels/www/index.php:172
 #: plugins/projects-hierarchy/view/home_project_link.php:37
@@ -11983,7 +11983,7 @@ msgstr ""
 
 #: plugins/oauthconsumer/www/access_tokens.php:34
 #: plugins/oauthconsumer/www/callback.php:82
-#: plugins/oauthconsumer/www/get_access_token.php:184
+#: plugins/oauthconsumer/www/get_access_token.php:183
 #: plugins/oauthconsumer/www/index.php:86
 #: plugins/oauthconsumer/www/provider_edit.php:78
 #: plugins/oauthconsumer/www/providers.php:13
@@ -12005,7 +12005,7 @@ msgstr ""
 
 #: plugins/oauthconsumer/www/callback.php:25
 #: plugins/oauthconsumer/www/get_access_token.php:85
-#: plugins/oauthconsumer/www/get_access_token.php:164
+#: plugins/oauthconsumer/www/get_access_token.php:163
 #: plugins/oauthconsumer/www/index.php:67 www/admin/responses_admin.php:90
 msgid "Go"
 msgstr "Давай"
@@ -12033,7 +12033,7 @@ msgid "Get Access tokens"
 msgstr ""
 
 #: plugins/oauthconsumer/www/callback.php:84
-#: plugins/oauthconsumer/www/get_access_token.php:185
+#: plugins/oauthconsumer/www/get_access_token.php:184
 #: plugins/oauthconsumer/www/index.php:40
 #: plugins/oauthconsumer/www/index.php:88
 #: plugins/oauthconsumer/www/provider_edit.php:80
@@ -12090,39 +12090,38 @@ msgstr ""
 msgid "Get Request Token"
 msgstr "Няма въпроси към това проучване"
 
-#: plugins/oauthconsumer/www/get_access_token.php:131
-#, fuzzy
-msgid "Error in curl : "
-msgstr "Грешка при добавянето на форум"
+#: plugins/oauthconsumer/www/get_access_token.php:130
+msgid "Error in curl: "
+msgstr ""
 
-#: plugins/oauthconsumer/www/get_access_token.php:138
+#: plugins/oauthconsumer/www/get_access_token.php:137
 #, fuzzy
 msgid "New request token received!"
 msgstr "Няма въпроси към това проучване"
 
-#: plugins/oauthconsumer/www/get_access_token.php:139
+#: plugins/oauthconsumer/www/get_access_token.php:138
 msgid "Request Token Key"
 msgstr ""
 
-#: plugins/oauthconsumer/www/get_access_token.php:140
+#: plugins/oauthconsumer/www/get_access_token.php:139
 #, fuzzy
 msgid "Request Token Secret"
 msgstr "Няма въпроси към това проучване"
 
-#: plugins/oauthconsumer/www/get_access_token.php:159
+#: plugins/oauthconsumer/www/get_access_token.php:158
 msgid "Step 2: "
 msgstr ""
 
-#: plugins/oauthconsumer/www/get_access_token.php:161
+#: plugins/oauthconsumer/www/get_access_token.php:160
 msgid "Authorize the Request Token (from "
 msgstr ""
 
-#: plugins/oauthconsumer/www/get_access_token.php:169
+#: plugins/oauthconsumer/www/get_access_token.php:168
 #, fuzzy
 msgid "Error in retrieving request token"
 msgstr "Грешка при получаването на "
 
-#: plugins/oauthconsumer/www/get_access_token.php:179
+#: plugins/oauthconsumer/www/get_access_token.php:178
 #: plugins/oauthconsumer/www/index.php:81
 msgid ""
 "There are no OAuth Providers registered in the database currently. Please "

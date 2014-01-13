@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-13 10:05+0100\n"
+"POT-Creation-Date: 2014-01-13 18:52+0100\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -324,8 +324,8 @@ msgstr ""
 #: plugins/mantisbt/view/addAttachment.php:32
 #: plugins/mantisbt/view/editIssue.php:84
 #: plugins/mantisbt/view/roadmap.php:100 plugins/mantisbt/view/roadmap.php:149
+#: plugins/oauthconsumer/www/get_access_token.php:138
 #: plugins/oauthconsumer/www/get_access_token.php:139
-#: plugins/oauthconsumer/www/get_access_token.php:140
 #: plugins/projectimport/common/ProjectImporter.class.php:124
 #: plugins/projectlabels/www/index.php:172
 #: plugins/projects-hierarchy/view/home_project_link.php:37
@@ -11897,7 +11897,7 @@ msgstr "No tiene un Token OAUth de Acceso registrado en la base de datos"
 
 #: plugins/oauthconsumer/www/access_tokens.php:34
 #: plugins/oauthconsumer/www/callback.php:82
-#: plugins/oauthconsumer/www/get_access_token.php:184
+#: plugins/oauthconsumer/www/get_access_token.php:183
 #: plugins/oauthconsumer/www/index.php:86
 #: plugins/oauthconsumer/www/provider_edit.php:78
 #: plugins/oauthconsumer/www/providers.php:13
@@ -11919,7 +11919,7 @@ msgstr "Intercambiar la peticion de token autorizado por un token de acceso"
 
 #: plugins/oauthconsumer/www/callback.php:25
 #: plugins/oauthconsumer/www/get_access_token.php:85
-#: plugins/oauthconsumer/www/get_access_token.php:164
+#: plugins/oauthconsumer/www/get_access_token.php:163
 #: plugins/oauthconsumer/www/index.php:67 www/admin/responses_admin.php:90
 msgid "Go"
 msgstr "Ir"
@@ -11948,7 +11948,7 @@ msgid "Get Access tokens"
 msgstr ""
 
 #: plugins/oauthconsumer/www/callback.php:84
-#: plugins/oauthconsumer/www/get_access_token.php:185
+#: plugins/oauthconsumer/www/get_access_token.php:184
 #: plugins/oauthconsumer/www/index.php:40
 #: plugins/oauthconsumer/www/index.php:88
 #: plugins/oauthconsumer/www/provider_edit.php:80
@@ -12004,39 +12004,39 @@ msgstr "Paso 1: "
 msgid "Get Request Token"
 msgstr "Obtener Token Pedido"
 
-#: plugins/oauthconsumer/www/get_access_token.php:131
-msgid "Error in curl : "
+#: plugins/oauthconsumer/www/get_access_token.php:130
+msgid "Error in curl: "
 msgstr "Error en curl: "
 
-#: plugins/oauthconsumer/www/get_access_token.php:138
+#: plugins/oauthconsumer/www/get_access_token.php:137
 #, fuzzy
 msgid "New request token received!"
 msgstr "Nueva peticion de  token recivida!"
 
-#: plugins/oauthconsumer/www/get_access_token.php:139
+#: plugins/oauthconsumer/www/get_access_token.php:138
 #, fuzzy
 msgid "Request Token Key"
 msgstr "Token Key Pedida : "
 
-#: plugins/oauthconsumer/www/get_access_token.php:140
+#: plugins/oauthconsumer/www/get_access_token.php:139
 #, fuzzy
 msgid "Request Token Secret"
 msgstr "Pedir Token URL"
 
-#: plugins/oauthconsumer/www/get_access_token.php:159
+#: plugins/oauthconsumer/www/get_access_token.php:158
 msgid "Step 2: "
 msgstr "Paso 2: "
 
-#: plugins/oauthconsumer/www/get_access_token.php:161
+#: plugins/oauthconsumer/www/get_access_token.php:160
 msgid "Authorize the Request Token (from "
 msgstr "Autorizar el Token Pedido (desde "
 
-#: plugins/oauthconsumer/www/get_access_token.php:169
+#: plugins/oauthconsumer/www/get_access_token.php:168
 #, fuzzy
 msgid "Error in retrieving request token"
 msgstr "Error insertado la pregunta"
 
-#: plugins/oauthconsumer/www/get_access_token.php:179
+#: plugins/oauthconsumer/www/get_access_token.php:178
 #: plugins/oauthconsumer/www/index.php:81
 msgid ""
 "There are no OAuth Providers registered in the database currently. Please "
