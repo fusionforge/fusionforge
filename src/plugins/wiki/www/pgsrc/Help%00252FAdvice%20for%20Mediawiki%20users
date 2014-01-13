@@ -1,4 +1,4 @@
-Date: Fri, 10 Sep 2012 13:46:13 +0000
+Date: Mon, 13 Jan 2014 13:36:51 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FAdvice%20for%20Mediawiki%20users;
@@ -15,6 +15,7 @@ and the wiki syntax of Phpwiki.
 Here are some differences between Mediawiki and Phpwiki:
 * Italics are ##//## (but you can also use ##''## like in Wikipedia)
 * Bold is ##~*~*## (you //cannot use// ##'''## like in Wikipedia)
+* Line break is ##~\~\## in Wikicreole, ##~<br />## in Mediawiki
 * There is **no automatic capitalisation** of first character of page name. Pages *<tt>~[~[foo~]~]</tt>* and *<tt>~[~[Foo~]~]</tt>* are different.
 * A space in a page name in not equivalent to an underscore. Pages *<tt>~[~[foo bar~]~]</tt>* and *<tt>~[~[foo_bar~]~]</tt>* are different. We recommend to use a space in the page names.
 * Many things that are built-in in Mediawiki use plug-ins in Phpwiki (table of contents, redirections, back links, etc.).
