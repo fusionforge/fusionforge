@@ -45,10 +45,10 @@ class commitTracker extends scmhook {
 
 	function isAvailable() {
 		if (!$this->group->usesTracker()) {
-			$this->disabledMessage = _('Hook not available due to missing dependency : Project not using tracker.');
+			$this->disabledMessage = _('Hook not available due to missing dependency: Project not using tracker.');
 			return false;
 		} elseif (!forge_get_config('use_ssh','scmgit')) {
-			$this->disabledMessage = _('Hook not available due to missing dependency : Forge not using ssh for git.');
+			$this->disabledMessage = _('Hook not available due to missing dependency: Forge not using SSH for Git.');
 			return false;
 		}
 		return true;

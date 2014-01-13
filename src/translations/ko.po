@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-13 09:45+0100\n"
+"POT-Creation-Date: 2014-01-13 10:05+0100\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -13944,14 +13944,15 @@ msgid "Every commit is pushed into related tracker or task."
 msgstr ""
 
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:48
+#: plugins/scmhook/library/scmsvn/commitTracker.class.php:49
 msgid ""
-"Hook not available due to missing dependency : Project not using tracker."
+"Hook not available due to missing dependency: Project not using tracker."
 msgstr ""
 
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:51
 #: plugins/scmhook/library/scmgit/postReceiveEmail.class.php:59
 msgid ""
-"Hook not available due to missing dependency : Forge not using ssh for git."
+"Hook not available due to missing dependency: Forge not using SSH for Git."
 msgstr ""
 
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:68
@@ -13979,7 +13980,7 @@ msgstr "다음은 이 프로젝트의 모든 파일 목록입니다."
 #: plugins/scmhook/library/scmhg/commitEmail.class.php:60
 #: plugins/scmhook/library/scmsvn/commitEmail.class.php:57
 msgid ""
-"Hook not available due to missing dependency : Project has no commit mailing-"
+"Hook not available due to missing dependency: Project has no commit mailing-"
 "list: "
 msgstr ""
 
@@ -13987,8 +13988,7 @@ msgstr ""
 #: plugins/scmhook/library/scmhg/commitEmail.class.php:62
 #: plugins/scmhook/library/scmsvn/commitEmail.class.php:59
 msgid ""
-"Hook not available due to missing dependency : Project not using mailing-"
-"list."
+"Hook not available due to missing dependency: Project not using mailing-list."
 msgstr ""
 
 #: plugins/scmhook/library/scmhg/commitEmail.class.php:36
@@ -14013,11 +14013,6 @@ msgstr ""
 
 #: plugins/scmhook/library/scmsvn/checkMimetype.class.php:30
 msgid "Verify if commited files have svn:mimetype set up correctly."
-msgstr ""
-
-#: plugins/scmhook/library/scmsvn/commitTracker.class.php:49
-msgid ""
-"Hook not available due to missing dependency: Project not using tracker."
 msgstr ""
 
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:96

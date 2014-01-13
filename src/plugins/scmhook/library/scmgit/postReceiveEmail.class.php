@@ -52,11 +52,11 @@ class postReceiveEmail extends scmhook {
 				if ($currentList->getListEmail() == $this->group->getUnixName().'-commits@'.forge_get_config('lists_host'))
 					return true;
 			}
-			$this->disabledMessage = _('Hook not available due to missing dependency : Project has no commit mailing-list: ').$this->group->getUnixName().'-commits';
+			$this->disabledMessage = _('Hook not available due to missing dependency: Project has no commit mailing-list: ').$this->group->getUnixName().'-commits';
 		} elseif (!$this->group->usesMail()) {
-			$this->disabledMessage = _('Hook not available due to missing dependency : Project not using mailing-list.');
+			$this->disabledMessage = _('Hook not available due to missing dependency: Project not using mailing-list.');
                 } elseif (!forge_get_config('use_ssh','scm_git')) {
-                        $this->disabledMessage = _('Hook not available due to missing dependency : Forge not using ssh for git.');
+                        $this->disabledMessage = _('Hook not available due to missing dependency: Forge not using SSH for Git.');
                 }
                 return false;
 

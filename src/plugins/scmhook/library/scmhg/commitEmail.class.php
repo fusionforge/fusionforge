@@ -57,9 +57,9 @@ class commitEmail extends scmhook {
 				if ($currentList->getListEmail() == $this->group->getUnixName().'-commits@'.forge_get_config('lists_host'))
 					return true;
 			}
-			$this->disabledMessage = _('Hook not available due to missing dependency : Project has no commit mailing-list: ').$this->group->getUnixName().'-commits';
+			$this->disabledMessage = _('Hook not available due to missing dependency: Project has no commit mailing-list: ').$this->group->getUnixName().'-commits';
 		} else {
-			$this->disabledMessage = _('Hook not available due to missing dependency : Project not using mailing-list.');
+			$this->disabledMessage = _('Hook not available due to missing dependency: Project not using mailing-list.');
 		}
 		return false;
 	}
