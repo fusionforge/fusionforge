@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-13 10:05+0100\n"
+"POT-Creation-Date: 2014-01-13 18:37+0100\n"
 "PO-Revision-Date: 2009-02-01 14:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -136,8 +136,9 @@ msgid "on project %s"
 msgstr ""
 
 #: common/docman/actions/editfile.php:69
+#, fuzzy
 msgid "No document found to update"
-msgstr ""
+msgstr "Nenhum Documento Encontrado"
 
 #: common/docman/actions/editfile.php:89
 #, php-format
@@ -491,7 +492,7 @@ msgstr "Nenhum Objeto de Grupo Válido"
 #: common/survey/SurveyQuestion.class.php:74
 #: plugins/mailman/include/MailmanList.class.php:102
 msgid "group_id in db result does not match Group Object"
-msgstr ""
+msgstr "Group_id no resultado do bd não confere com o Objeto Grupo"
 
 #: common/docman/Document.class.php:113 common/docman/Document.class.php:837
 #: common/pm/ProjectGroup.class.php:144 common/pm/ProjectGroup.class.php:316
@@ -584,8 +585,9 @@ msgid "Document Title"
 msgstr "Título do Documento"
 
 #: common/docman/Document.class.php:952
+#, fuzzy
 msgid "Document description"
-msgstr ""
+msgstr "Descrição"
 
 #: common/docman/Document.class.php:953
 #: common/docman/DocumentGroup.class.php:731
@@ -655,7 +657,7 @@ msgstr ""
 #: common/docman/DocumentGroup.class.php:525
 #, php-format
 msgid "Error: %s"
-msgstr ""
+msgstr "Erro: %s"
 
 #: common/docman/DocumentGroup.class.php:676
 msgid "Browse this folder"
@@ -671,8 +673,9 @@ msgid "Updated folder by"
 msgstr ""
 
 #: common/docman/DocumentGroup.class.php:733
+#, fuzzy
 msgid "Updated by"
-msgstr ""
+msgstr "Atualizado"
 
 #: common/docman/DocumentGroup.class.php:768
 msgid "Unable to extract ZIP file."
@@ -719,8 +722,9 @@ msgstr ""
 
 #: common/docman/DocumentManager.class.php:202
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:52
+#, fuzzy
 msgid "Created by"
-msgstr ""
+msgstr "Criar"
 
 #: common/docman/DocumentManager.class.php:206
 msgid "; "
@@ -863,9 +867,9 @@ msgstr ""
 #: common/docman/views/addfile.php:102 common/docman/views/addfile.php:103
 #: common/docman/views/addfile.php:110 common/docman/views/addfile.php:111
 #: common/docman/views/editfile.php:39 common/docman/views/editfile.php:43
-#, php-format
+#, fuzzy, php-format
 msgid "(at least %s characters)"
-msgstr ""
+msgstr "A senha precisa ter pelo menos 6 caracteres."
 
 #: common/docman/views/addfile.php:116
 msgid "Type of Document"
@@ -1087,7 +1091,7 @@ msgstr ""
 
 #: common/docman/views/editfile.php:65
 msgid "Folder that document belongs to:"
-msgstr ""
+msgstr "Grupo ao qual o documento pertence em:"
 
 #: common/docman/views/editfile.php:70 common/tracker/actions/browse.php:405
 #: common/tracker/actions/browse.php:563 common/tracker/actions/browse.php:749
@@ -11093,7 +11097,7 @@ msgstr ""
 #: plugins/mantisbt/www/getAttachment.php:41 plugins/mantisbt/www/index.php:63
 #: plugins/quota_management/www/index.php:33 www/developer/index.php:41
 msgid "Invalid User"
-msgstr ""
+msgstr "Usuário inválido"
 
 #: plugins/mantisbt/www/getAttachment.php:45
 msgid "Invalid User not active"
@@ -11502,9 +11506,8 @@ msgid "Get Request Token"
 msgstr ""
 
 #: plugins/oauthconsumer/www/get_access_token.php:131
-#, fuzzy
 msgid "Error in curl : "
-msgstr "Erro na inserção"
+msgstr ""
 
 #: plugins/oauthconsumer/www/get_access_token.php:138
 msgid "New request token received!"
@@ -12515,7 +12518,7 @@ msgstr ""
 
 #: plugins/quota_management/www/quota.php:183
 msgid "database"
-msgstr ""
+msgstr "banco de dados"
 
 #: plugins/quota_management/www/quota.php:195
 #: plugins/quota_management/www/quota.php:301
@@ -14294,7 +14297,7 @@ msgstr ""
 #: www/admin/admin_table.php:185
 #, fuzzy, php-format
 msgid "%s successfully deleted."
-msgstr "%s inserida com sucesso."
+msgstr ""
 
 #: www/admin/admin_table.php:207
 #, php-format
@@ -15502,7 +15505,7 @@ msgstr ""
 
 #: www/admin/vhost.php:72
 msgid "Error adding VHOST: "
-msgstr ""
+msgstr "Erro adicionando VHOST: "
 
 #: www/admin/vhost.php:74 www/admin/vhost.php:140
 #: www/project/admin/vhost.php:138
@@ -15523,7 +15526,7 @@ msgstr ""
 
 #: www/admin/vhost.php:100
 msgid "Error updating VHOST entry: "
-msgstr ""
+msgstr "Erro atualizando entrada VHOST: "
 
 #: www/admin/vhost.php:102
 msgid "Virtual Host entry updated."
@@ -17793,9 +17796,8 @@ msgid "News Added."
 msgstr "Notícia Adicionada."
 
 #: www/news/submit.php:115
-#, fuzzy
 msgid "Error: both subject and body are required."
-msgstr "ERRO - tanto o assunto quanto o corpo são necessários"
+msgstr "Erro - tanto o assunto quanto o corpo são necessários"
 
 #: www/news/submit.php:131
 msgid "Submit News for Project: "
@@ -17891,7 +17893,7 @@ msgstr "Erro inserindo"
 
 #: www/people/editjob.php:65
 msgid "Job inserted successfully"
-msgstr "TAREFA inserida com sucesso"
+msgstr "Tarefa inserida com sucesso"
 
 #: www/people/editjob.php:80
 #, fuzzy, php-format
@@ -17900,7 +17902,7 @@ msgstr "Atualização falhou"
 
 #: www/people/editjob.php:82 www/people/editjob.php:96
 msgid "Job updated successfully"
-msgstr "TRABALHO atualizado com sucesso"
+msgstr "Trabalho atualizado com sucesso"
 
 #: www/people/editjob.php:91 www/people/people_utils.php:127
 #: www/people/people_utils.php:157 www/people/people_utils.php:235
@@ -17918,41 +17920,41 @@ msgstr ""
 
 #: www/people/editjob.php:98
 msgid "Job update failed - wrong project_id"
-msgstr "Atualização do TRABALHO falhou - project_id incorreto"
+msgstr "Atualização do trabalho falhou - project_id incorreto"
 
 #: www/people/editjob.php:107
 msgid "Job Inventory"
 msgstr ""
 
 #: www/people/editjob.php:114
-#, fuzzy, php-format
+#, php-format
 msgid "Job skill update failed: %s"
-msgstr "Atualização de habilidade de TRABALHO falhou - project_id incorreto"
+msgstr "Atualização de habilidade de trabalho falhou: %s"
 
 #: www/people/editjob.php:116
 msgid "Job skill updated successfully"
-msgstr "Habilidade de TRABALHO atualizada com sucesso"
+msgstr "Habilidade de trabalho atualizada com sucesso"
 
 #: www/people/editjob.php:119
 msgid "Job skill update failed - wrong project_id"
-msgstr "Atualização de habilidade de TRABALHO falhou - project_id incorreto"
+msgstr "Atualização de habilidade de trabalho falhou - project_id incorreto"
 
 #: www/people/editjob.php:128
 msgid "Job ID"
 msgstr ""
 
 #: www/people/editjob.php:134
-#, fuzzy, php-format
+#, php-format
 msgid "Job skill delete failed: %s"
-msgstr "Deleção de habilidade de TRABALHO falhou - project_id incorreto"
+msgstr "Deleção de habilidade de trabalho falhou: %s"
 
 #: www/people/editjob.php:136
 msgid "Job skill deleted successfully"
-msgstr "Habilidade de TRABALHO apagada com sucesso"
+msgstr "Habilidade de trabalho apagada com sucesso"
 
 #: www/people/editjob.php:139
 msgid "Job skill delete failed - wrong project_id"
-msgstr "Deleção de habilidade de TRABALHO falhou - project_id incorreto"
+msgstr "Deleção de habilidade de trabalho falhou - project_id incorreto"
 
 #: www/people/editjob.php:152
 #, fuzzy, php-format
@@ -18218,9 +18220,8 @@ msgid "Must select a skill ID"
 msgstr "Precisa selecionar uma ID de habilidade"
 
 #: www/people/people_utils.php:104
-#, fuzzy
 msgid "Error inserting into skill inventory: "
-msgstr "ERRO inserindo no inventário de habilidades"
+msgstr "Erro inserindo no inventário de habilidades"
 
 #: www/people/people_utils.php:107
 msgid "Added to skill inventory"
@@ -18228,7 +18229,7 @@ msgstr "Adicionado ao inventário de habilidades"
 
 #: www/people/people_utils.php:110
 msgid "Error: skill already in your inventory"
-msgstr "ERRO - habilidade já presente no seu inventário"
+msgstr "Erro - habilidade já presente no seu inventário"
 
 #: www/people/people_utils.php:128 www/people/people_utils.php:158
 #: www/people/people_utils.php:236 www/people/people_utils.php:298
@@ -18254,19 +18255,16 @@ msgid "Add Skill"
 msgstr "Adicionar Habilidade"
 
 #: www/people/people_utils.php:212
-#, fuzzy
 msgid "Error inserting into job inventory: "
-msgstr "ERRO inserindo no inventário de habilidades"
+msgstr "Erro inserindo no inventário de habilidades: "
 
 #: www/people/people_utils.php:215
-#, fuzzy
 msgid "Added to job inventory"
 msgstr "Adicionado ao inventário de habilidades"
 
 #: www/people/people_utils.php:218
-#, fuzzy
 msgid "Error: job already in your inventory"
-msgstr "ERRO - habilidade já presente no seu inventário"
+msgstr "Erro - habilidade já presente no seu inventário"
 
 #: www/people/people_utils.php:273 www/people/people_utils.php:282
 msgid "Invalid ID"
@@ -19217,7 +19215,7 @@ msgstr ""
 
 #: www/project/admin/editimages.php:46
 msgid "Error: file must be > 20 bytes and < 256000 bytes in length"
-msgstr "ERRO - o arquivo precisa ter > 20 bytes e < 256000 bytes de tamanho"
+msgstr "Erro - o arquivo precisa ter > 20 bytes e < 256000 bytes de tamanho"
 
 #: www/project/admin/editimages.php:99
 msgid "Error: Cannot store multimedia file: "
@@ -20574,7 +20572,7 @@ msgstr "Erro - Aquele snippet já foi adicionado a esse pacote."
 #: www/snippet/add_snippet_to_package.php:108 www/snippet/addversion.php:71
 #: www/snippet/submit.php:74
 msgid "Error doing snippet version insert"
-msgstr "ERRO INSERINDO VERSÃO DE TRECHO DE CÓDIGO!"
+msgstr "Erro inserindo versão de trecho de código"
 
 #: www/snippet/add_snippet_to_package.php:110 www/snippet/addversion.php:74
 msgid "Snippet Version Added Successfully."
@@ -20639,7 +20637,7 @@ msgstr ""
 
 #: www/snippet/addversion.php:154 www/snippet/package.php:75
 msgid "Error doing snippet package version insert"
-msgstr "ERRO FAZENDO INSERÇÃO DE VERSÃO DE PACOTE DE TRECHOS!"
+msgstr "Erro fazendo inserção de versão de pacote de trechos"
 
 #: www/snippet/addversion.php:155
 msgid "New snippet package"
@@ -21970,12 +21968,6 @@ msgstr ""
 #~ "Nenhum tipo de habilidade no banco de dados - informe o administrador do "
 #~ "sistema"
 
-#~ msgid "JOB inserted successfully"
-#~ msgstr "TAREFA inserida com sucesso"
-
-#~ msgid "JOB updated successfully"
-#~ msgstr "TRABALHO atualizado com sucesso"
-
 #~ msgid "JOB update failed - wrong project_id"
 #~ msgstr "Atualização do TRABALHO falhou - project_id incorreto"
 
@@ -21984,9 +21976,6 @@ msgstr ""
 
 #~ msgid "JOB skill update failed - wrong project_id"
 #~ msgstr "Atualização de habilidade de TRABALHO falhou - project_id incorreto"
-
-#~ msgid "JOB skill deleted successfully"
-#~ msgstr "Habilidade de TRABALHO apagada com sucesso"
 
 #~ msgid "JOB skill delete failed - wrong project_id"
 #~ msgstr "Deleção de habilidade de TRABALHO falhou - project_id incorreto"
@@ -22286,12 +22275,6 @@ msgstr ""
 #~ msgid "You Can Only Save Your Place If You Are Logged In"
 #~ msgstr "Você Só Pode Salvar Seu Ambiente Se Estiver Logado"
 
-#~ msgid "ERROR doing insert"
-#~ msgstr "ERRO ao fazer a inserção"
-
-#~ msgid "ERROR - both subject and body are required"
-#~ msgstr "ERRO - tanto o assunto quanto o corpo são necessários"
-
 #~ msgid "Diary &amp; Notes"
 #~ msgstr "Notas &amp; Diário"
 
@@ -22407,17 +22390,11 @@ msgstr ""
 #~ msgid "Invalid confirmation hash"
 #~ msgstr "Hash de confirmação inválido"
 
-#~ msgid "ERROR"
-#~ msgstr "ERRO"
-
 #~ msgid "New Password (min. 6 chars)"
 #~ msgstr "Nova Senha (mín. 6 caracteres)"
 
 #~ msgid "Welcome to %1$s"
 #~ msgstr "Bem-vindo ao %1$s"
-
-#~ msgid "ERROR - file must be > 20 bytes and < 256000 bytes in length"
-#~ msgstr "ERRO - o arquivo precisa ter > 20 bytes e < 256000 bytes de tamanho"
 
 #~ msgid "Username"
 #~ msgstr "Nome do usuário"
@@ -22470,9 +22447,6 @@ msgstr ""
 #~ msgid "Project totals"
 #~ msgstr "Totais do projeto"
 
-#~ msgid "ERROR DOING SNIPPET VERSION INSERT!"
-#~ msgstr "ERRO INSERINDO VERSÃO DE TRECHO DE CÓDIGO!"
-
 #~ msgid "Package:"
 #~ msgstr "Pacote:"
 
@@ -22485,12 +22459,6 @@ msgstr ""
 #~ msgid "Paste the Code Here:"
 #~ msgstr "Cole o Código Aqui:"
 
-#~ msgid "ERROR DOING SNIPPET PACKAGE INSERT!"
-#~ msgstr "ERRO FAZENDO INSERÇÃO NO PACOTE DE TRECHOS!"
-
-#~ msgid "ERROR DOING SNIPPET PACKAGE VERSION INSERT!"
-#~ msgstr "ERRO FAZENDO INSERÇÃO DE VERSÃO DE PACOTE DE TRECHOS!"
-
 #~ msgid "Snippet Pacakge Version Added Successfully."
 #~ msgstr "Versão de Pacote de Trechos Adicionada Com Sucesso."
 
@@ -22499,9 +22467,6 @@ msgstr ""
 
 #~ msgid "Snippets In This Package:"
 #~ msgstr "Trechos Nesse Pacote:"
-
-#~ msgid "ERROR DOING SNIPPET INSERT!"
-#~ msgstr "ERRO FAZENDO A INSERÇÃO DE TRECHO!"
 
 #~ msgid "all"
 #~ msgstr "totos"
@@ -23021,9 +22986,6 @@ msgstr ""
 
 #~ msgid "Invalid full name"
 #~ msgstr "Nome completo inválido"
-
-#~ msgid "ERROR inserting into skill inventory"
-#~ msgstr "ERRO inserindo no inventário de habilidades"
 
 #~ msgid "No Forums Found For %1$s"
 #~ msgstr "Nenhum Fórum Encontrado Para %1$s"
