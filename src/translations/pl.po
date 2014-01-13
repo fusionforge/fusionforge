@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-13 10:05+0100\n"
+"POT-Creation-Date: 2014-01-13 11:08+0100\n"
 "PO-Revision-Date: 2009-10-06 16:20+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -8525,8 +8525,9 @@ msgid "No legal structures currently defined."
 msgstr ""
 
 #: plugins/contribtracker/www/global_admin.php:288
+#, fuzzy
 msgid "Register new actor"
-msgstr ""
+msgstr "Zarejestruj"
 
 #: plugins/contribtracker/www/global_admin.php:293
 msgid "No legal structures yet, cannot define actors without them."
@@ -8549,8 +8550,9 @@ msgid "No roles currently defined."
 msgstr ""
 
 #: plugins/contribtracker/www/global_admin.php:368
+#, fuzzy
 msgid "Register new role"
-msgstr ""
+msgstr "Zarejestruj"
 
 #: plugins/contribtracker/www/global_admin.php:375
 msgid "Register a new role"
@@ -19466,9 +19468,9 @@ msgid "Role unlinked successfully"
 msgstr ""
 
 #: www/project/admin/users.php:213
-#, fuzzy, php-format
+#, php-format
 msgid "Members of %s"
-msgstr "Użytkownik od:"
+msgstr ""
 
 #: www/project/admin/users.php:225
 msgid "Pending Membership Requests"
@@ -19480,9 +19482,8 @@ msgstr ""
 
 #: www/project/admin/users.php:258 www/project/admin/users.php:260
 #: www/project/admin/users.php:279
-#, fuzzy
 msgid "Add Member"
-msgstr "Użytkownik od:"
+msgstr ""
 
 #: www/project/admin/users.php:290
 msgid "Current Project Members"
@@ -19576,9 +19577,8 @@ msgid ""
 msgstr ""
 
 #: www/project/memberlist.php:49
-#, fuzzy
 msgid "Member"
-msgstr "Użytkownik od:"
+msgstr ""
 
 #: www/project/memberlist.php:51
 msgid "Role(s)/Position(s)"
