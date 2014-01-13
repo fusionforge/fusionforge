@@ -94,13 +94,13 @@ class Forum extends Error {
 	/**
 	 * Constructor.
 	 *
-	 * @param $Group
-	 * @param bool $group_forum_id
-	 * @param bool $arr
-	 * @internal param \The $object Group object to which this forum is associated.
-	 * @internal param \The $int group_forum_id.
-	 * @internal param \The $array associative array of data.
-	 * @return \Forum success.
+	 * @param	$Group
+	 * @param	bool	$group_forum_id
+	 * @param	bool	$arr
+	 * @internal	param	\The $object Group object to which this forum is associated.
+	 * @internal	param	\The $int group_forum_id.
+	 * @internal	param	\The $array associative array of data.
+	 * @return	\Forum	success.
 	 */
 	function __construct(&$Group, $group_forum_id = false, $arr = false, $is_news = false) {
 		$this->Error();
@@ -161,10 +161,10 @@ class Forum extends Error {
 	/**
 	 * create - use this function to create a new entry in the database.
 	 *
-	 * @param	string	$forum_name				The name of the forum.
-	 * @param	string	$description			The description of the forum.
-	 * @param	string	$send_all_posts_to		The email address to send all new posts to.
-	 * @param	int		$create_default_message	Pass (1) if a welcome message should be created (0) for no welcome message.
+	 * @param	string	$forum_name		The name of the forum.
+	 * @param	string	$description		The description of the forum.
+	 * @param	string	$send_all_posts_to	The email address to send all new posts to.
+	 * @param	int	$create_default_message	Pass (1) if a welcome message should be created (0) for no welcome message.
 	 * @return	bool	success.
 	 */
 	function create($forum_name, $description, $send_all_posts_to = '', $create_default_message = 1) {
@@ -465,7 +465,7 @@ class Forum extends Error {
 	/**
 	 * stopMonitor - Remove the current user from the list of people monitoring the forum.
 	 *
-	 * @param $u
+	 * @param	$u
 	 * @return	boolean	success.
 	 */
 	function stopMonitor($u = -1) {
