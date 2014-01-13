@@ -14307,7 +14307,7 @@ msgstr "無法新增已經啟用的資料庫"
 
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:100
 #, fuzzy
-msgid "Related GIT commits"
+msgid "Related Git commits"
 msgstr "相關的追蹤項"
 
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:138

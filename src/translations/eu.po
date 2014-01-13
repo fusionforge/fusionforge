@@ -14289,7 +14289,7 @@ msgstr "Ez da posible aktibatutako datu basea gehitzea"
 
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:100
 #, fuzzy
-msgid "Related GIT commits"
+msgid "Related Git commits"
 msgstr "Erlazionatuak dauden erregistroko elementuak"
 
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:138

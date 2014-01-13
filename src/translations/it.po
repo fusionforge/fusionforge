@@ -14327,7 +14327,7 @@ msgstr "Impossibile inserire un database già attivo"
 
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:100
 #, fuzzy
-msgid "Related GIT commits"
+msgid "Related Git commits"
 msgstr "Attività correlate"
 
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:138

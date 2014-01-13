@@ -97,7 +97,7 @@ class commitTracker extends scmhook {
 
 		if ($Rows > 0) {
 			echo '<tr><td>';
-			echo '<h2>'._('Related GIT commits').'</h2>';
+			echo '<h2>'._('Related Git commits').'</h2>';
 
 			$title_arr = $this->getTitleArr($group_id);
 			echo $GLOBALS['HTML']->listTableTop($title_arr);

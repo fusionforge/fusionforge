@@ -13962,7 +13962,7 @@ msgid "Unable to retrieve data"
 msgstr ""
 
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:100
-msgid "Related GIT commits"
+msgid "Related Git commits"
 msgstr ""
 
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:138

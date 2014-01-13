@@ -14325,7 +14325,7 @@ msgstr "Es war nicht möglich, die bereits aktive Datenbank einzufügen."
 
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:100
 #, fuzzy
-msgid "Related GIT commits"
+msgid "Related Git commits"
 msgstr "Verwandten Commits"
 
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:138

@@ -13764,9 +13764,8 @@ msgid "Unable to retrieve data"
 msgstr "Impossible d'insérer une base de données déjà active"
 
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:100
-#, fuzzy
-msgid "Related GIT commits"
-msgstr "Envois liés"
+msgid "Related Git commits"
+msgstr "Envois Git liés"
 
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:138
 msgid "Filename (<a href=\"/scm/browser.php?group_id="

@@ -13289,7 +13289,7 @@ msgstr ""
 
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:100
 #, fuzzy
-msgid "Related GIT commits"
+msgid "Related Git commits"
 msgstr "Ítens de Rastreamento Relacionados"
 
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:138

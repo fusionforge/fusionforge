@@ -14302,7 +14302,7 @@ msgstr "Incapaç d'inserir una base de dades ja activa."
 
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:100
 #, fuzzy
-msgid "Related GIT commits"
+msgid "Related Git commits"
 msgstr "Elements de rastreig relacionats"
 
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:138

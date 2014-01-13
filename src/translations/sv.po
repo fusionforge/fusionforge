@@ -14233,7 +14233,7 @@ msgstr "Kan inte lägga till en redan aktiv databas."
 
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:100
 #, fuzzy
-msgid "Related GIT commits"
+msgid "Related Git commits"
 msgstr "Relaterade poster i ordningslista"
 
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:138

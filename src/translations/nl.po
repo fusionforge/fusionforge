@@ -14317,7 +14317,7 @@ msgstr "Niet mogelijk om reeds actieve database toe te voegen."
 
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:100
 #, fuzzy
-msgid "Related GIT commits"
+msgid "Related Git commits"
 msgstr "Aan de tracker gerelateerde items"
 
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:138

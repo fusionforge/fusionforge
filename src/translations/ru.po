@@ -14478,7 +14478,7 @@ msgstr "Добавление к базе блокировано"
 
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:100
 #, fuzzy
-msgid "Related GIT commits"
+msgid "Related Git commits"
 msgstr "Ссылки на схожие коммиты SVN"
 
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:138

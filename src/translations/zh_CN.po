@@ -14290,7 +14290,7 @@ msgstr "无法添加已经启用的数据库"
 
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:100
 #, fuzzy
-msgid "Related GIT commits"
+msgid "Related Git commits"
 msgstr "提交"
 
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:138
