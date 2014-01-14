@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-13 18:52+0100\n"
+"POT-Creation-Date: 2014-01-14 12:24+0100\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -35,9 +35,8 @@ msgid "Invalid file name."
 msgstr "Ogiltigt fullständigt namn"
 
 #: common/account/actions/deletesshkey.php:30
-#, fuzzy
 msgid "SSH Key deleted successfully."
-msgstr "JOBB kompetens borttag lyckades"
+msgstr ""
 
 #: common/docman/actions/addfile.php:58 common/docman/actions/addfile.php:65
 #: common/docman/actions/addsubdocgroup.php:48
@@ -134,7 +133,7 @@ msgstr "Ingen data att rapportera"
 #: common/docman/actions/delfile.php:52
 #, fuzzy
 msgid "deleted successfully."
-msgstr "JOBB kompetens borttag lyckades"
+msgstr "borttag lyckades."
 
 #: common/docman/actions/editdocgroup.php:101
 #, fuzzy, php-format
@@ -181,9 +180,8 @@ msgid ""
 msgstr ""
 
 #: common/docman/actions/injectzip.php:49
-#, fuzzy
 msgid "Archive injected successfully."
-msgstr "JOBB infogning lyckades"
+msgstr ""
 
 #: common/docman/actions/monitordirectory.php:38
 #: common/docman/Document.class.php:950
@@ -588,14 +586,12 @@ msgid "Document reservation failed"
 msgstr "Visa Dokumentation"
 
 #: common/docman/Document.class.php:944 common/docman/views/additem.php:57
-#, fuzzy
 msgid "New Document"
-msgstr "Lägg till ett projekt"
+msgstr ""
 
 #: common/docman/Document.class.php:946
-#, fuzzy
 msgid "Updated document"
-msgstr "Lägg till ett projekt"
+msgstr ""
 
 #: common/docman/Document.class.php:946 common/docman/views/listfile.php:285
 #: common/widget/Widget_MyLatestSvnCommits.class.php:66
@@ -676,9 +672,8 @@ msgid "Invalid Documents Folder parent ID"
 msgstr "Dokumentgrupp: Ogiltigt dokumentgrupps-ID för föräldern"
 
 #: common/docman/DocumentGroup.class.php:131
-#, fuzzy
 msgid "Folder name already exists"
-msgstr "Det användarnamnet existerar redan."
+msgstr ""
 
 #: common/docman/DocumentGroup.class.php:147
 #, fuzzy
@@ -1046,9 +1041,8 @@ msgid ""
 msgstr ""
 
 #: common/docman/views/additem.php:61 common/docman/views/additem.php:85
-#, fuzzy
 msgid "Inject Tree"
-msgstr "Nytt projektnamn"
+msgstr ""
 
 #: common/docman/views/additem.php:84
 #, fuzzy
@@ -1281,7 +1275,7 @@ msgstr "Rubrik"
 #: plugins/forumml/include/ForumMLHtmlSearchRenderer.class.php:68
 #: plugins/forumml/www/forumml_utils.php:61
 #: plugins/forumml/www/forumml_utils.php:186
-#: plugins/scmhook/library/scmgit/commitTracker.class.php:143
+#: plugins/scmhook/library/scmgit/commitTracker.class.php:144
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:138
 #: plugins/wiki/common/WikiHtmlSearchRenderer.class.php:50
 #: www/forum/forum.php:246 www/forum/message.php:160
@@ -1545,9 +1539,8 @@ msgstr "Hämtat"
 #: common/docman/views/listfile.php:376
 #: common/docman/views/listtrashfile.php:209
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:88
-#, fuzzy
 msgid "No documents."
-msgstr "Lägg till ett projekt"
+msgstr ""
 
 #: common/docman/views/listtrashfile.php:93
 msgid "Delete permanently all documents and folders with deleted status."
@@ -1573,9 +1566,8 @@ msgid "Permanently Delete"
 msgstr ""
 
 #: common/docman/views/menu.php:44
-#, fuzzy
 msgid "View Documents"
-msgstr "Lägg till ett projekt"
+msgstr ""
 
 #: common/docman/views/menu.php:46
 msgid ""
@@ -2019,7 +2011,7 @@ msgstr ""
 #: plugins/contribtracker/www/index.php:42
 #: plugins/contribtracker/www/project_admin.php:289
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:109
-#: plugins/scmhook/library/scmgit/commitTracker.class.php:139
+#: plugins/scmhook/library/scmgit/commitTracker.class.php:140
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:134
 #: plugins/wiki/common/WikiHtmlSearchRenderer.class.php:50
 #: www/admin/cronman.php:42 www/admin/massmail.php:137
@@ -2112,9 +2104,8 @@ msgstr ""
 #: common/forum/AttachManager.class.php:144 www/forum/admin/index.php:326
 #: www/forum/admin/index.php:332 www/forum/admin/index.php:397
 #: www/forum/admin/monitor.php:41
-#, fuzzy
 msgid "Could Not Get Forum Object"
-msgstr "Kunde inte uppdatera förälder"
+msgstr ""
 
 #: common/forum/AttachManager.class.php:150
 #: common/forum/ForumAdmin.class.php:69 common/forum/ForumAdmin.class.php:334
@@ -2821,9 +2812,8 @@ msgid "Package Name can only be alphanumeric"
 msgstr "Paketnamn kan bara skrivas med alfanumeriska tecken"
 
 #: common/frs/FRSPackage.class.php:154
-#, fuzzy
 msgid "Error Adding Package: Name Already Exists"
-msgstr "Det användarnamnet existerar redan."
+msgstr ""
 
 #: common/frs/FRSPackage.class.php:165
 #, fuzzy
@@ -2841,29 +2831,24 @@ msgid "Unable to add monitor: "
 msgstr "Kunde inte lägga till bevakning"
 
 #: common/frs/FRSPackage.class.php:323
-#, fuzzy
 msgid "Error On querying monitor count: "
-msgstr "Fel vid skapande av gruppobjekt"
+msgstr ""
 
 #: common/frs/FRSPackage.class.php:384
-#, fuzzy
 msgid "Error Updating Package: Name Already Exists"
-msgstr "Det användarnamnet existerar redan."
+msgstr ""
 
 #: common/frs/FRSPackage.class.php:403
-#, fuzzy
 msgid "Error Updating Package: Couldn't fetch data"
-msgstr "Det användarnamnet existerar redan."
+msgstr ""
 
 #: common/frs/FRSPackage.class.php:413
-#, fuzzy
 msgid "Error Updating Package: Directory Already Exists"
-msgstr "Det användarnamnet existerar redan."
+msgstr ""
 
 #: common/frs/FRSPackage.class.php:418
-#, fuzzy
 msgid "Error Updating Package: Couldn't rename dir"
-msgstr "Det användarnamnet existerar redan."
+msgstr ""
 
 #: common/frs/FRSPackage.class.php:476
 #, fuzzy
@@ -2889,9 +2874,8 @@ msgid "Invalid FRS Package Object"
 msgstr "Ogiltig användare"
 
 #: common/frs/FRSRelease.class.php:143
-#, fuzzy
 msgid "Error Adding Release: Name Already Exists"
-msgstr "Det användarnamnet existerar redan."
+msgstr ""
 
 #: common/frs/FRSRelease.class.php:187
 #, fuzzy
@@ -2936,23 +2920,20 @@ msgid "Release delete error: trying to delete root dir"
 msgstr ""
 
 #: common/frs/FRSRelease.class.php:419
-#, fuzzy
 msgid "Error On Update: Name Already Exists"
-msgstr "Det användarnamnet existerar redan."
+msgstr ""
 
 #: common/frs/FRSRelease.class.php:445
 msgid "Error Updating Release: Couldn't fetch data"
 msgstr ""
 
 #: common/frs/FRSRelease.class.php:455
-#, fuzzy
 msgid "Error Updating Release: Directory Already Exists"
-msgstr "Det användarnamnet existerar redan."
+msgstr ""
 
 #: common/frs/FRSRelease.class.php:460
-#, fuzzy
 msgid "Error Updating Release: Couldn't rename dir"
-msgstr "Det användarnamnet existerar redan."
+msgstr ""
 
 #: common/frs/include/frs_utils.php:77
 #, fuzzy
@@ -2988,9 +2969,8 @@ msgstr "Måste välja en fil."
 
 #: common/frs/include/frs_utils.php:258 www/frs/admin/editrelease.php:181
 #: www/frs/admin/editrelease.php:198
-#, fuzzy
 msgid "Could Not Get FRSFile"
-msgstr "Kan inte slutföra operationen"
+msgstr ""
 
 #: common/import/import_users.php:402
 #, fuzzy, php-format
@@ -3019,9 +2999,8 @@ msgid "Illegal character in name."
 msgstr "Ogiltigt tecken i namnet."
 
 #: common/include/account.php:84
-#, fuzzy
 msgid "Name is reserved."
-msgstr "Namnet är reserverat för CVS."
+msgstr "Namnet är reserverat."
 
 #: common/include/account.php:89 common/include/account.php:93
 #: common/include/User.class.php:355
@@ -3194,9 +3173,9 @@ msgid "Error: Cannot create group: %s"
 msgstr "Fel vid skapande av gruppobjekt"
 
 #: common/include/Group.class.php:380
-#, fuzzy, php-format
+#, php-format
 msgid "Error: Cannot get group id: %s"
-msgstr "Kan inte lägga till databas post"
+msgstr ""
 
 #: common/include/Group.class.php:427 common/include/Group.class.php:510
 #, fuzzy
@@ -3204,9 +3183,9 @@ msgid "Could not get permission."
 msgstr "Fick ingen rättighet"
 
 #: common/include/Group.class.php:448
-#, fuzzy, php-format
+#, php-format
 msgid "Error: Cannot change group properties: %s"
-msgstr "Kan inte lägga till databas post"
+msgstr ""
 
 #: common/include/Group.class.php:529
 #, php-format
@@ -3275,14 +3254,12 @@ msgid "Could not properly delete the tracker:"
 msgstr ""
 
 #: common/include/Group.class.php:1687
-#, fuzzy
 msgid "Could not properly delete the forum:"
-msgstr "Kan inte slutföra operationen"
+msgstr ""
 
 #: common/include/Group.class.php:1703
-#, fuzzy
 msgid "Could not properly delete the ProjectGroup:"
-msgstr "Kunde inte uppdatera förälder"
+msgstr ""
 
 #: common/include/Group.class.php:1714
 #, fuzzy
@@ -3290,9 +3267,8 @@ msgid "Error FRS Packages: "
 msgstr "Fel vid tillägg i forum"
 
 #: common/include/Group.class.php:1722
-#, fuzzy
 msgid "Could not properly delete the FRSPackage:"
-msgstr "Kan inte slutföra operationen"
+msgstr ""
 
 #: common/include/Group.class.php:1733 common/include/Group.class.php:1748
 #, fuzzy
@@ -3300,9 +3276,9 @@ msgid "Error Deleting News: "
 msgstr "Fel vid tillägg i forum"
 
 #: common/include/Group.class.php:1741
-#, fuzzy, php-format
+#, php-format
 msgid "Could Not Delete News Forum: %d"
-msgstr "Kan inte slutföra operationen"
+msgstr ""
 
 #: common/include/Group.class.php:1759 common/include/Group.class.php:1767
 #, fuzzy
@@ -3320,9 +3296,8 @@ msgid "Error Deleting Project History: "
 msgstr "Resursgrupp information"
 
 #: common/include/Group.class.php:1799
-#, fuzzy
 msgid "Error Deleting Project Plugins: "
-msgstr "Fel vid skapande av gruppobjekt"
+msgstr ""
 
 #: common/include/Group.class.php:1810
 #, fuzzy
@@ -3343,28 +3318,24 @@ msgid "Could not properly delete the mailing list"
 msgstr ""
 
 #: common/include/Group.class.php:1872 common/include/Group.class.php:1880
-#, fuzzy
 msgid "Error Deleting Trove: "
-msgstr "Fel vid skapande av gruppobjekt"
+msgstr ""
 
 #: common/include/Group.class.php:1891
-#, fuzzy
 msgid "Error Deleting Counters: "
-msgstr "Fel vid skapande av gruppobjekt"
+msgstr ""
 
 #: common/include/Group.class.php:1901 common/include/Group.class.php:1910
-#, fuzzy
 msgid "Error Deleting Project:"
-msgstr "Fel vid skapande av gruppobjekt"
+msgstr ""
 
 #: common/include/Group.class.php:1982
 msgid "User is not active. Only active users can be added."
 msgstr ""
 
 #: common/include/Group.class.php:1994
-#, fuzzy
 msgid "Error Getting Role Object"
-msgstr "Fel vid skapande av gruppobjekt"
+msgstr ""
 
 #: common/include/Group.class.php:2023 www/account/lostpw.php:44
 #: www/account/pending-resend.php:38 www/sendmessage.php:45 www/users:74
@@ -3389,9 +3360,8 @@ msgstr ""
 #: common/include/Group.class.php:2170 www/admin/globalroledelete.php:37
 #: www/admin/globalroleedit.php:42 www/project/admin/roledelete.php:46
 #: www/project/admin/roleedit.php:54
-#, fuzzy
 msgid "Could Not Get Role"
-msgstr "Kan inte slutföra operationen"
+msgstr ""
 
 #: common/include/Group.class.php:2173
 #, fuzzy, php-format
@@ -3882,9 +3852,8 @@ msgid "Mailing Lists"
 msgstr "Sändlistor"
 
 #: common/include/Navigation.class.php:474
-#, fuzzy
 msgid "Project Management."
-msgstr "Nytt projektnamn"
+msgstr ""
 
 #: common/include/Navigation.class.php:488
 #: common/reporting/report_utils.php:140 common/reporting/report_utils.php:665
@@ -3908,9 +3877,8 @@ msgid "Online surveys, project needs your point of view."
 msgstr ""
 
 #: common/include/Navigation.class.php:519
-#, fuzzy
 msgid "Flash head line from the project."
-msgstr "Inga sådana poster i detta projekt"
+msgstr ""
 
 #: common/include/Navigation.class.php:533 common/include/rbac_texts.php:164
 #: common/widget/Widget_MyLatestSvnCommits.class.php:108
@@ -3983,14 +3951,12 @@ msgid "Posted data is too large. %1$s exceeds the maximum size of %2$s"
 msgstr ""
 
 #: common/include/RBAC.php:194
-#, fuzzy
 msgid "Cannot link to home project"
-msgstr "Inga sådana poster i detta projekt"
+msgstr ""
 
 #: common/include/RBAC.php:229
-#, fuzzy
 msgid "Cannot unlink from home project"
-msgstr "Inga sådana poster i detta projekt"
+msgstr ""
 
 #: common/include/RBAC.php:594
 msgid "UNKNOWN (internal error, report bug to FusionForge)"
@@ -4248,25 +4214,21 @@ msgid "Documentation manager"
 msgstr "Visa Dokumentation"
 
 #: common/include/Role.class.php:82
-#, fuzzy
 msgid "Cannot set a role name to empty"
-msgstr "Kan inte lägga till databas post"
+msgstr ""
 
 #: common/include/Role.class.php:91 common/include/Role.class.php:99
 #: common/include/Role.class.php:181 common/include/Role.class.php:189
-#, fuzzy
 msgid "Cannot create a role with this name (already used)"
-msgstr "Kan inte lägga till databas post"
+msgstr ""
 
 #: common/include/Role.class.php:172
-#, fuzzy
 msgid "Cannot create a role with an empty name"
-msgstr "Kan inte lägga till databas post"
+msgstr ""
 
 #: common/include/Role.class.php:305
-#, fuzzy
 msgid "Cannot remove a non empty role."
-msgstr "Kan inte lägga till databas post"
+msgstr ""
 
 #: common/include/SCMPlugin.class.php:145
 msgid "Unimplemented SCM plugin."
@@ -4459,9 +4421,8 @@ msgid "Insert Error"
 msgstr ""
 
 #: common/include/User.class.php:443
-#, fuzzy
 msgid "Could Not Get User Id: "
-msgstr "Kan inte slutföra operationen"
+msgstr ""
 
 #: common/include/User.class.php:477
 #, fuzzy, php-format
@@ -4518,29 +4479,24 @@ msgid "%s Account Registration"
 msgstr "%s Kontoregistrering"
 
 #: common/include/User.class.php:527
-#, fuzzy
 msgid "Could Not Delete From artifact_monitor:"
-msgstr "Kan inte slutföra operationen"
+msgstr ""
 
 #: common/include/User.class.php:534
-#, fuzzy
 msgid "Could Not Delete From artifact_type_monitor:"
-msgstr "Kan inte slutföra operationen"
+msgstr ""
 
 #: common/include/User.class.php:541
-#, fuzzy
 msgid "Could Not Delete From forum_monitored_forums:"
-msgstr "Kan inte slutföra operationen"
+msgstr ""
 
 #: common/include/User.class.php:548
-#, fuzzy
 msgid "Could Not Delete From filemodule_monitor:"
-msgstr "Kan inte slutföra operationen"
+msgstr ""
 
 #: common/include/User.class.php:639
-#, fuzzy
 msgid "Error: Cannot Update User Object:"
-msgstr "Kunde inte uppdatera förälder"
+msgstr ""
 
 #: common/include/User.class.php:733
 #, fuzzy
@@ -4552,14 +4508,12 @@ msgid "Error: You cannot set pending status if user is suspend or active"
 msgstr ""
 
 #: common/include/User.class.php:746
-#, fuzzy
 msgid "Error: Cannot Update User Status:"
-msgstr "Kunde inte uppdatera förälder"
+msgstr ""
 
 #: common/include/User.class.php:939 common/include/User.class.php:991
-#, fuzzy
 msgid "User with this email already exists."
-msgstr "Det användarnamnet existerar redan."
+msgstr ""
 
 #: common/include/User.class.php:1099
 #, fuzzy, php-format
@@ -4567,23 +4521,20 @@ msgid "Error: Invalid Shell %s"
 msgstr "Ogiltig Shell %s"
 
 #: common/include/User.class.php:1107
-#, fuzzy
 msgid "Error: Cannot Update User Unix Shell:"
-msgstr "Kunde inte uppdatera förälder"
+msgstr ""
 
 #: common/include/User.class.php:1253
 msgid "SSH Key already in use"
 msgstr ""
 
 #: common/include/User.class.php:1261
-#, fuzzy
 msgid "Error - Could Not Add User SSH Key:"
-msgstr "Kunde inte uppdatera förälder"
+msgstr ""
 
 #: common/include/User.class.php:1278
-#, fuzzy
 msgid "Error: Cannot Update User SSH Keys"
-msgstr "Kunde inte uppdatera förälder"
+msgstr ""
 
 #: common/include/User.class.php:1424 common/include/User.class.php:1460
 #: common/include/User.class.php:1484
@@ -4675,14 +4626,12 @@ msgid "TiB"
 msgstr ""
 
 #: common/include/utils.php:1305
-#, fuzzy
 msgid "Error: a mailing list with the same email address already exists."
-msgstr "Det användarnamnet existerar redan."
+msgstr ""
 
 #: common/include/utils.php:1323
-#, fuzzy
 msgid "Error: a forum with the same email address already exists."
-msgstr "Det användarnamnet existerar redan."
+msgstr ""
 
 #: common/mail/MailingList.class.php:126
 #: plugins/mailman/include/MailmanList.class.php:142
@@ -4986,9 +4935,8 @@ msgstr "%1$s frågor hittade"
 #: www/admin/database.php:61 www/admin/unsubscribe.php:73
 #: www/admin/useredit.php:43 www/admin/userlist.php:44
 #: www/docman/index.php:105
-#, fuzzy
 msgid "Could Not Get User"
-msgstr "Kan inte slutföra operationen"
+msgstr ""
 
 #: common/reporting/report_utils.php:691
 #, fuzzy
@@ -5133,9 +5081,8 @@ msgid "Please configure also the roles (by default, it's “No Access”)"
 msgstr ""
 
 #: common/tracker/actions/admin-ind.php:62 common/tracker/actions/ind.php:31
-#, fuzzy
 msgid "Could Not Get ArtifactTypeFactory"
-msgstr "Kan inte slutföra operationen"
+msgstr ""
 
 #: common/tracker/actions/admin-ind.php:90
 #, fuzzy
@@ -5373,9 +5320,8 @@ msgstr ""
 #: common/tracker/actions/admin-updates.php:124
 #: common/tracker/actions/admin-updates.php:146
 #: www/tracker/admin/index.php:187
-#, fuzzy
 msgid "Unable to create ArtifactCanned Object"
-msgstr "Fel vid skapande av gruppobjekt"
+msgstr ""
 
 #: common/tracker/actions/admin-updates.php:132
 msgid "Canned Response Inserted"
@@ -5464,9 +5410,8 @@ msgstr "Fil borttagen"
 #: common/tracker/actions/downloadcsv.php:38
 #: common/tracker/actions/taskmgr.php:142 www/pm/admin/index.php:405
 #: www/pm/index.php:46 www/pm/task.php:86 www/tracker/roadmap.php:333
-#, fuzzy
 msgid "Could Not Get Factory"
-msgstr "Kan inte slutföra operationen"
+msgstr ""
 
 #: common/tracker/actions/browse.php:184 common/tracker/actions/browse.php:306
 #: common/tracker/actions/browse.php:311 common/tracker/actions/query.php:340
@@ -5589,9 +5534,8 @@ msgid "Advanced queries"
 msgstr "Lägg till kategorier"
 
 #: common/tracker/actions/browse.php:358 www/include/html.php:653
-#, fuzzy
 msgid "Select One"
-msgstr "Ta bort fil"
+msgstr ""
 
 #: common/tracker/actions/browse.php:365 www/frs/admin/index.php:210
 #: www/my/diary.php:209
@@ -5740,9 +5684,8 @@ msgid "Download CSV file"
 msgstr "Hämta version"
 
 #: common/tracker/actions/deleteartifact.php:32
-#, fuzzy
 msgid "Delete artifact"
-msgstr "Ta bort fil"
+msgstr ""
 
 #: common/tracker/actions/deleteartifact.php:43
 #: common/tracker/views/form-deleteextrafieldelement.php:54
@@ -6079,9 +6022,8 @@ msgstr ""
 
 #: common/tracker/actions/taskmgr.php:59 www/pm/admin/index.php:304
 #: www/pm/admin/index.php:365
-#, fuzzy
 msgid "Could Not Get ProjectGroup"
-msgstr "Kunde inte uppdatera förälder"
+msgstr ""
 
 #: common/tracker/actions/taskmgr.php:66 www/pm/browse_task.php:43
 #: www/pm/downloadcsv.php:96 www/pm/ganttpage.php:60
@@ -6154,9 +6096,8 @@ msgstr ""
 #: common/tracker/actions/tracker.php:127
 #: common/tracker/actions/tracker.php:354
 #: common/tracker/actions/tracker.php:383
-#, fuzzy
 msgid "Could Not Create File Object"
-msgstr "Kunde inte uppdatera förälder"
+msgstr ""
 
 #: common/tracker/actions/tracker.php:135
 msgid "Could Not Attach File to Item: "
@@ -6168,9 +6109,9 @@ msgid "Updated Successfully"
 msgstr "Uppdatering lyckades"
 
 #: common/tracker/actions/tracker.php:266
-#, fuzzy, php-format
+#, php-format
 msgid "Could not get Project Task for %d"
-msgstr "Kunde inte uppdatera förälder"
+msgstr ""
 
 #: common/tracker/actions/tracker.php:292
 #: common/tracker/actions/tracker.php:311
@@ -6270,9 +6211,8 @@ msgid "Error deleting extra field data: "
 msgstr "Fel under aktiveringen av konto"
 
 #: common/tracker/Artifact.class.php:527
-#, fuzzy
 msgid "Error deleting file from db: "
-msgstr "Fel vid skapande av gruppobjekt"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:535
 #, fuzzy
@@ -6285,14 +6225,12 @@ msgid "Error deleting history: "
 msgstr "Resursgrupp information"
 
 #: common/tracker/Artifact.class.php:551
-#, fuzzy
 msgid "Error deleting monitor: "
-msgstr "Fel vid skapande av gruppobjekt"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:559
-#, fuzzy
 msgid "Error deleting artifact: "
-msgstr "Fel vid skapande av gruppobjekt"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:570 common/tracker/Artifact.class.php:580
 #, fuzzy
@@ -6308,9 +6246,8 @@ msgid "Invalid assigned person: must be a technician"
 msgstr ""
 
 #: common/tracker/Artifact.class.php:975
-#, fuzzy
 msgid "Could not move to new Artifact Type"
-msgstr "Kan inte slutföra operationen"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:987
 #, php-format
@@ -6322,9 +6259,8 @@ msgid "Removal of old artifact_extra_field_data failed: "
 msgstr ""
 
 #: common/tracker/Artifact.class.php:1169
-#, fuzzy
 msgid "Could Not Create Canned Response Object"
-msgstr "Kunde inte uppdatera förälder"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:1182
 #, fuzzy
@@ -6357,9 +6293,8 @@ msgstr "Konto borttaget"
 
 #: common/tracker/ArtifactExtraField.class.php:121
 #: common/tracker/ArtifactExtraField.class.php:389
-#, fuzzy
 msgid "Field name already exists"
-msgstr "Det användarnamnet existerar redan."
+msgstr ""
 
 #: common/tracker/ArtifactExtraField.class.php:126
 msgid "Invalid size/maxlength for text field"
@@ -6410,9 +6345,8 @@ msgstr ""
 
 #: common/tracker/ArtifactExtraField.class.php:329
 #: common/tracker/views/form-addextrafield.php:134
-#, fuzzy
 msgid "Relation between artifacts"
-msgstr "Ta bort fil"
+msgstr ""
 
 #: common/tracker/ArtifactExtraField.class.php:330
 msgid "Integer"
@@ -6439,9 +6373,8 @@ msgstr ""
 
 #: common/tracker/ArtifactExtraFieldElement.class.php:129
 #: common/tracker/ArtifactExtraFieldElement.class.php:249
-#, fuzzy
 msgid "Element name already exists"
-msgstr "Det användarnamnet existerar redan."
+msgstr ""
 
 #: common/tracker/ArtifactFile.class.php:125
 #, fuzzy
@@ -6460,9 +6393,8 @@ msgid "Invalid ArtifactHistory ID"
 msgstr "Ogiltigt ID"
 
 #: common/tracker/ArtifactMessage.class.php:89
-#, fuzzy
 msgid "Error: Logged In User Bug Could Not Get User Object"
-msgstr "Kunde inte uppdatera förälder"
+msgstr ""
 
 #: common/tracker/ArtifactMessage.class.php:92
 msgid "Logged In: YES"
@@ -6739,9 +6671,9 @@ msgid "Invalid Group"
 msgstr "Ogiltig användare"
 
 #: common/tracker/Roadmap.class.php:103
-#, fuzzy, php-format
+#, php-format
 msgid "“%s” roadmap already exists"
-msgstr "Det användarnamnet existerar redan."
+msgstr ""
 
 #: common/tracker/views/form-addcanned.php:27
 #, fuzzy, php-format
@@ -6931,14 +6863,12 @@ msgid "Delete template"
 msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:57 www/tracker/roadmap.php:175
-#, fuzzy
 msgid "Could Not Get ArtifactTypeFactoryHtml"
-msgstr "Kan inte slutföra operationen"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:70
-#, fuzzy
 msgid "Cannot create or rename roadmap"
-msgstr "Kan inte lägga till databas post"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:70
 #, fuzzy
@@ -6951,9 +6881,8 @@ msgid "Roadmap %s created"
 msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:80
-#, fuzzy
 msgid "Cannot create roadmap: "
-msgstr "Kan inte lägga till databas post"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:88
 #, php-format
@@ -6961,19 +6890,16 @@ msgid "Roadmap %s renamed to %s"
 msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:91
-#, fuzzy
 msgid "Cannot rename roadmap: "
-msgstr "Kan inte lägga till databas post"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:98
-#, fuzzy
 msgid "Cannot set roadmap: "
-msgstr "Kan inte lägga till databas post"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:122
-#, fuzzy
 msgid "Cannot set roadmap state: "
-msgstr "Kan inte lägga till databas post"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:126
 #, fuzzy
@@ -6991,9 +6917,8 @@ msgid "Roadmap %s is deleted"
 msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:144
-#, fuzzy
 msgid "Cannot delete roadmap: "
-msgstr "Kan inte lägga till databas post"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:156
 #: common/tracker/views/form-adminroadmap.php:478
@@ -7057,9 +6982,8 @@ msgstr "Utgåvans datum"
 
 #: common/tracker/views/form-adminroadmap.php:283
 #: common/tracker/views/form-adminroadmap.php:370
-#, fuzzy
 msgid "Cannot modify release order: "
-msgstr "Kan inte lägga till databas post"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:390
 #: common/tracker/views/form-adminroadmap.php:475
@@ -7081,9 +7005,8 @@ msgid "Auto order"
 msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:421
-#, fuzzy
 msgid "No tracker is selected for this roadmap"
-msgstr "Inga sådana poster i detta projekt"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:422
 #, php-format
@@ -7122,9 +7045,8 @@ msgid "New Roadmap"
 msgstr ""
 
 #: common/tracker/views/form-clonetracker.php:32
-#, fuzzy
 msgid "Unable to Create Template Group Object"
-msgstr "Fel vid skapande av gruppobjekt"
+msgstr ""
 
 #: common/tracker/views/form-clonetracker.php:51
 msgid ""
@@ -7450,9 +7372,8 @@ msgid "assigned to or submitted by or monitored by me [ASM]"
 msgstr ""
 
 #: common/widget/Widget_MyArtifacts.class.php:107
-#, fuzzy
 msgid "Display artifacts:"
-msgstr "Ta bort fil"
+msgstr ""
 
 #: common/widget/Widget_MyArtifacts.class.php:142
 #, fuzzy
@@ -7507,9 +7428,8 @@ msgid "You currently do not have any bookmarks saved"
 msgstr ""
 
 #: common/widget/Widget_MyBookmarks.class.php:54
-#, fuzzy
 msgid "Delete this bookmark?"
-msgstr "Ta bort fil"
+msgstr ""
 
 #: common/widget/Widget_MyBookmarks.class.php:59
 #, fuzzy
@@ -7817,9 +7737,8 @@ msgid "new and update files and directories [FUD]"
 msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:94
-#, fuzzy
 msgid "Display statistics:"
-msgstr "Ta bort fil"
+msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:126
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:144
@@ -7886,9 +7805,8 @@ msgstr "Uppgift"
 
 #: common/widget/Widget_ProjectInfo.class.php:49
 #: common/widget/Widget_ProjectInfo.class.php:52
-#, fuzzy
 msgid "No tag defined for this project"
-msgstr "Inga sådana poster i detta projekt"
+msgstr ""
 
 #: common/widget/Widget_ProjectInfo.class.php:65 www/admin/search.php:150
 #: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:324
@@ -8567,14 +8485,13 @@ msgstr ""
 
 #: plugins/authopenid/www/index.php:64
 #: plugins/authwebid/include/AuthWebIDPlugin.class.php:300
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot insert new identity: %s"
-msgstr "Kan inte lägga till databas post"
+msgstr ""
 
 #: plugins/authopenid/www/index.php:67
-#, fuzzy
 msgid "Identity successfully added"
-msgstr "JOBB infogning lyckades"
+msgstr ""
 
 #: plugins/authopenid/www/index.php:81
 msgid "Error: Missing URL for the new identity"
@@ -8590,14 +8507,13 @@ msgstr ""
 
 #: plugins/authopenid/www/index.php:114
 #: plugins/authwebid/include/AuthWebIDPlugin.class.php:317
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot delete identity: %s"
-msgstr "Kan inte lägga till databas post"
+msgstr ""
 
 #: plugins/authopenid/www/index.php:117 plugins/authwebid/www/index.php:82
-#, fuzzy
 msgid "Identity successfully deleted"
-msgstr "JOBB infogning lyckades"
+msgstr ""
 
 #: plugins/authopenid/www/index.php:122
 #, fuzzy, php-format
@@ -8609,9 +8525,8 @@ msgid "My OpenID identities"
 msgstr ""
 
 #: plugins/authopenid/www/index.php:128 plugins/authopenid/www/index.php:134
-#, fuzzy
 msgid "Add new identity"
-msgstr "Lägg till ett projekt"
+msgstr ""
 
 #: plugins/authopenid/www/index.php:130
 msgid "You can add your own OpenID identities in the form below."
@@ -8644,9 +8559,9 @@ msgstr ""
 
 #: plugins/authopenid/www/post-login.php:105
 #: plugins/authwebid/www/post-login.php:85
-#, fuzzy, php-format
+#, php-format
 msgid "Unknown user with identity “%s”"
-msgstr "Kan inte lägga till databas post"
+msgstr ""
 
 #: plugins/authwebid/include/AuthWebIDPlugin.class.php:82
 #, php-format
@@ -8660,9 +8575,9 @@ msgid ""
 msgstr ""
 
 #: plugins/authwebid/include/AuthWebIDPlugin.class.php:273
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot bind new identity: %s"
-msgstr "Kan inte lägga till databas post"
+msgstr ""
 
 #: plugins/authwebid/include/AuthWebIDPlugin.class.php:288
 #, fuzzy
@@ -8936,9 +8851,8 @@ msgid "Contribution tracker"
 msgstr "Bevakade forum"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:53
-#, fuzzy
 msgid "Follow the contributions by contributors to this project"
-msgstr "Inga sådana poster i detta projekt"
+msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:74
 msgid "Use the Contribution Tracker plugin"
@@ -8974,9 +8888,8 @@ msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:120
 #: plugins/contribtracker/www/index.php:115
-#, fuzzy
 msgid "No contributions have been recorded for this project yet."
-msgstr "Inga sådana poster i detta projekt"
+msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:134
 #: plugins/contribtracker/www/index.php:43
@@ -9010,9 +8923,8 @@ msgstr "Bevakade forum"
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:509
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:646
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:783
-#, fuzzy
 msgid "Object already exists"
-msgstr "Det användarnamnet existerar redan."
+msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:306
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:413
@@ -9021,16 +8933,16 @@ msgstr "Det användarnamnet existerar redan."
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:796
 #, fuzzy, php-format
 msgid "Could not create object in database: %s."
-msgstr "Kan inte lägga till databas post"
+msgstr "Kan inte lägga till databas post: %s."
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:314
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:421
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:530
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:665
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:804
-#, fuzzy, php-format
+#, php-format
 msgid "Could not get ID from object in database: %s."
-msgstr "Kan inte lägga till databas post"
+msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:326
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:433
@@ -9046,27 +8958,26 @@ msgstr "Den resurskategorin existerar inte"
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:558
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:691
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:833
-#, fuzzy, php-format
+#, php-format
 msgid "Could not update object in database: %s."
-msgstr "Kan inte lägga till databas post"
+msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:351
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:457
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:571
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:704
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:846
-#, fuzzy
 msgid "Cannot delete a non-existing object."
-msgstr "Kan inte lägga till databas post"
+msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:358
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:464
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:578
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:711
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:855
-#, fuzzy, php-format
+#, php-format
 msgid "Could not delete object in database: %s."
-msgstr "Kan inte lägga till databas post"
+msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:822
 msgid "Cannot currently move a participation across contributions."
@@ -9074,15 +8985,14 @@ msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:863
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:870
-#, fuzzy, php-format
+#, php-format
 msgid "Could not update indices in database: %s."
-msgstr "Kan inte lägga till databas post"
+msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:884
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:909
-#, fuzzy
 msgid "Cannot update a non-existing object."
-msgstr "Kan inte lägga till databas post"
+msgstr ""
 
 #: plugins/contribtracker/www/actor_logo.php:36
 #: plugins/contribtracker/www/actor_logo.php:41
@@ -9377,9 +9287,8 @@ msgid "Existing contributions"
 msgstr "Visa existerande frågor"
 
 #: plugins/contribtracker/www/project_admin.php:330
-#, fuzzy
 msgid "No contributions for this project yet."
-msgstr "Inga sådana poster i detta projekt"
+msgstr ""
 
 #: plugins/contribtracker/www/project_admin.php:336
 #, fuzzy
@@ -9395,20 +9304,20 @@ msgid "No commits have been made."
 msgstr ""
 
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:110
-#: plugins/scmhook/library/scmgit/commitTracker.class.php:140
+#: plugins/scmhook/library/scmgit/commitTracker.class.php:141
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:135
 msgid "Previous Version"
 msgstr ""
 
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:111
-#: plugins/scmhook/library/scmgit/commitTracker.class.php:141
+#: plugins/scmhook/library/scmgit/commitTracker.class.php:142
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:136
 #, fuzzy
 msgid "Current Version"
 msgstr "Version"
 
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:112
-#: plugins/scmhook/library/scmgit/commitTracker.class.php:142
+#: plugins/scmhook/library/scmgit/commitTracker.class.php:143
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:137
 msgid "Log Message"
 msgstr ""
@@ -9419,14 +9328,12 @@ msgid "Diff To"
 msgstr ""
 
 #: plugins/extsubproj/actions/addExtSubProj.php:31
-#, fuzzy
 msgid "Failed to add subproject."
-msgstr "Lägg till ett projekt"
+msgstr ""
 
 #: plugins/extsubproj/actions/addExtSubProj.php:35
-#, fuzzy
 msgid "Subproject successfully added."
-msgstr "JOBB infogning lyckades"
+msgstr ""
 
 #: plugins/extsubproj/actions/delExtSubProj.php:30
 #, fuzzy
@@ -9434,15 +9341,13 @@ msgid "Failed to delete subproject."
 msgstr "Misslyckdes att ta bort några kompetenser"
 
 #: plugins/extsubproj/actions/delExtSubProj.php:34 www/pm/admin/index.php:156
-#, fuzzy
 msgid "Subproject successfully deleted."
-msgstr "JOBB infogning lyckades"
+msgstr ""
 
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:67
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:76
-#, fuzzy
 msgid "External subprojects admin"
-msgstr "Nytt projektnamn"
+msgstr ""
 
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:67
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:76
@@ -9488,9 +9393,8 @@ msgstr "Rubrik:"
 
 #: plugins/extsubproj/view/admin/viewProjectConfiguration.php:41
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:227
-#, fuzzy
 msgid "delete"
-msgstr "Ta bort"
+msgstr "ta bort"
 
 #: plugins/extsubproj/view/admin/viewProjectConfiguration.php:49
 #, fuzzy
@@ -9498,9 +9402,8 @@ msgid "Manage project's external subprojects"
 msgstr "Statistik för projektdatabaser"
 
 #: plugins/extsubproj/view/admin/viewProjectConfiguration.php:56
-#, fuzzy
 msgid "URL of the new subproject."
-msgstr "Lägg till ett projekt"
+msgstr ""
 
 #: plugins/extsubproj/www/index.php:72 plugins/extsubproj/www/index.php:129
 #: plugins/projects-hierarchy/www/index.php:70
@@ -9607,9 +9510,8 @@ msgid "Erase"
 msgstr ""
 
 #: plugins/forumml/www/forumml_utils.php:726
-#, fuzzy
 msgid "Mail successfully sent "
-msgstr "JOBB infogning lyckades"
+msgstr ""
 
 #: plugins/forumml/www/forumml_utils.php:728
 #, fuzzy
@@ -9784,14 +9686,12 @@ msgid "You can remove only YOUR remote accounts !!!"
 msgstr ""
 
 #: plugins/globaldashboard/www/admin/delete_account.php:39
-#, fuzzy
 msgid "Remote Account successfully deleted"
-msgstr "JOBB infogning lyckades"
+msgstr ""
 
 #: plugins/globaldashboard/www/admin/delete_account.php:41
-#, fuzzy
 msgid "Unable to delete remote account: "
-msgstr "Fel vid skapande av gruppobjekt"
+msgstr ""
 
 #: plugins/globaldashboard/www/admin/edit_account_page.php:55
 #, fuzzy
@@ -9899,9 +9799,8 @@ msgid "Stored remote accounts"
 msgstr ""
 
 #: plugins/globaldashboard/www/admin/manage_accounts.php:80
-#, fuzzy
 msgid "Remote site"
-msgstr "Ta bort detta filter"
+msgstr ""
 
 #: plugins/globaldashboard/www/admin/manage_accounts.php:80
 #, fuzzy
@@ -9966,9 +9865,8 @@ msgid "Submit new associated forge"
 msgstr "Skicka ny dokumentation"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:71
-#, fuzzy
 msgid "Associated forge successfully added."
-msgstr "JOBB infogning lyckades"
+msgstr ""
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:94
 msgid "Are you sure you want to delete this associated forge?"
@@ -9990,9 +9888,8 @@ msgid "No"
 msgstr "Nej"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:121
-#, fuzzy
 msgid "Associated forge successfully deleted."
-msgstr "JOBB infogning lyckades"
+msgstr ""
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:144
 msgid "Modify the associated forge below"
@@ -10005,9 +9902,8 @@ msgid "Submit Changes"
 msgstr "Lämna in förändringar"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:188
-#, fuzzy
 msgid "Associated forge successfully modified."
-msgstr "JOBB infogning lyckades"
+msgstr ""
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:206
 msgid "Associated forge"
@@ -10138,14 +10034,13 @@ msgstr "Hittade inga forum för “%s”"
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:111
 #, php-format
 msgid "Search results for “%s”"
-msgstr "Hittade inga forum för %s"
+msgstr "Hittade inga forum för “%s”"
 
 #: plugins/globalsearch/www/index.php:166 www/admin/grouplist.php:67
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:45
 #: www/stats/site_stats_utils.php:227 www/top/toplist.php:53
-#, fuzzy
 msgid "Project Name"
-msgstr "Nytt projektnamn"
+msgstr "Projektnamn"
 
 #: plugins/globalsearch/www/index.php:170
 #, fuzzy
@@ -10295,9 +10190,8 @@ msgstr ""
 
 #: plugins/headermenu/common/headermenuPlugin.class.php:364
 #: plugins/headermenu/common/headermenuPlugin.class.php:379
-#, fuzzy
 msgid "Cannot retrieve the page"
-msgstr "Kan inte lägga till databas post"
+msgstr ""
 
 #: plugins/headermenu/common/headermenuPlugin.class.php:400
 #, fuzzy
@@ -10362,9 +10256,8 @@ msgid "Outermenu Link Order successfully validated"
 msgstr "Dokumentinlämning lyckades"
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:45
-#, fuzzy
 msgid "Headermenu Link Order successfully validated"
-msgstr "JOBB infogning lyckades"
+msgstr ""
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:46
 msgid "Error in Outermenu Link Order validation"
@@ -10436,9 +10329,8 @@ msgstr "Redigera en grupp"
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:115
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:80
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:47
-#, fuzzy
 msgid "Delete this link"
-msgstr "Ta bort fil"
+msgstr ""
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:87
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:120
@@ -10481,9 +10373,8 @@ msgid "Just paste your code here..."
 msgstr ""
 
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:44
-#, fuzzy
 msgid "Link Order successfully validated"
-msgstr "JOBB infogning lyckades"
+msgstr ""
 
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:45
 #, fuzzy
@@ -10701,9 +10592,8 @@ msgstr "Infogandet misslyckades"
 #: plugins/hudson/include/hudsonPlugin.class.php:295
 #: plugins/hudson/include/hudson_Widget_JobLastArtifacts.class.php:95
 #: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:86
-#, fuzzy
 msgid "No build found for this job."
-msgstr "Inga sådana poster i detta projekt"
+msgstr ""
 
 #: plugins/hudson/include/hudsonPlugin.class.php:300
 #: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:91
@@ -10855,9 +10745,8 @@ msgid "Are you sure you want to delete Job %s from project %s?"
 msgstr ""
 
 #: plugins/hudson/include/hudsonViews.class.php:373
-#, fuzzy
 msgid "Delete this job"
-msgstr "Ta bort fil"
+msgstr ""
 
 #: plugins/hudson/include/hudsonViews.class.php:386
 #, fuzzy
@@ -10900,14 +10789,13 @@ msgid "Job not found."
 msgstr "Hittade inte forum"
 
 #: plugins/hudson/include/hudson_Widget_JobLastArtifacts.class.php:47
-#, fuzzy, php-format
+#, php-format
 msgid "%s Last Artifacts"
-msgstr "Ta bort fil"
+msgstr ""
 
 #: plugins/hudson/include/hudson_Widget_JobLastArtifacts.class.php:49
-#, fuzzy
 msgid "Last Artifacts"
-msgstr "Ta bort fil"
+msgstr ""
 
 #: plugins/hudson/include/hudson_Widget_JobLastArtifacts.class.php:55
 msgid ""
@@ -11030,9 +10918,8 @@ msgid "Missing params"
 msgstr "Parameterar saknas"
 
 #: plugins/mailman/include/MailmanList.class.php:445
-#, fuzzy
 msgid "Could Not Delete List: "
-msgstr "Kan inte slutföra operationen"
+msgstr ""
 
 #: plugins/mailman/include/mailmanPlugin.class.php:136
 #, fuzzy
@@ -11304,9 +11191,9 @@ msgid "Missing Attachment ID to delete."
 msgstr "Parameterar saknas"
 
 #: plugins/mantisbt/action/deleteCategory.php:40
-#, fuzzy, php-format
+#, php-format
 msgid "Category %s deleted successfully."
-msgstr "JOBB kompetens borttag lyckades"
+msgstr ""
 
 #: plugins/mantisbt/action/deleteCategory.php:43
 #, fuzzy
@@ -11314,14 +11201,12 @@ msgid "Missing parameters to delete category."
 msgstr "Parameterar saknas"
 
 #: plugins/mantisbt/action/deleteNote.php:39
-#, fuzzy
 msgid "Note deleted successfully"
-msgstr "JOBB kompetens borttag lyckades"
+msgstr ""
 
 #: plugins/mantisbt/action/deleteVersion.php:44
-#, fuzzy
 msgid "Version deleted successfully."
-msgstr "JOBB kompetens borttag lyckades"
+msgstr ""
 
 #: plugins/mantisbt/action/deleteVersion.php:47
 #, fuzzy
@@ -11329,18 +11214,16 @@ msgid "Missing parameters to delete version."
 msgstr "Parameterar saknas"
 
 #: plugins/mantisbt/action/init.php:41
-#, fuzzy
 msgid "MantisBT plugin successfully initialized."
-msgstr "JOBB infogning lyckades"
+msgstr ""
 
 #: plugins/mantisbt/action/inituser.php:34
 msgid "Failed to initialize user."
 msgstr ""
 
 #: plugins/mantisbt/action/inituser.php:38
-#, fuzzy
 msgid "MantisBT User successfully initialized."
-msgstr "JOBB infogning lyckades"
+msgstr ""
 
 #: plugins/mantisbt/action/renameCategory.php:37
 #, fuzzy
@@ -11407,14 +11290,12 @@ msgid "MantisBT administration page"
 msgstr "Administration av undersökning"
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:188
-#, fuzzy
 msgid "Unable to create user in Mantisbt"
-msgstr "Fel vid skapande av gruppobjekt"
+msgstr ""
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:223
-#, fuzzy
 msgid "Unable to create project in Mantisbt"
-msgstr "Fel vid skapande av gruppobjekt"
+msgstr ""
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:234
 #: plugins/projectimport/www/index.php:628 www/admin/search.php:176
@@ -11423,14 +11304,12 @@ msgid "No project found"
 msgstr "Hittade inga projektgrupper"
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:245
-#, fuzzy
 msgid "No project found in MantisBT"
-msgstr "Inga sådana poster i detta projekt"
+msgstr ""
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:251
-#, fuzzy
 msgid "Cannot delete in database"
-msgstr "Kan inte lägga till databas post"
+msgstr ""
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:289
 #, fuzzy
@@ -11622,9 +11501,8 @@ msgid "Add note"
 msgstr "Lägg till uppgift"
 
 #: plugins/mantisbt/view/admin/addCategory.php:31
-#, fuzzy
 msgid "Add a new category"
-msgstr "Lägg till ett projekt"
+msgstr ""
 
 #: plugins/mantisbt/view/admin/addVersion.php:34
 #, fuzzy
@@ -11828,9 +11706,8 @@ msgid "No versions to display"
 msgstr "%1$s frågor hittade"
 
 #: plugins/mantisbt/view/viewAttachment.php:65
-#, fuzzy
 msgid "No attached files for this ticket"
-msgstr "Inga sådana poster i detta projekt"
+msgstr ""
 
 #: plugins/mantisbt/view/viewAttachment.php:78
 #: www/project/admin/editimages.php:256
@@ -11860,9 +11737,8 @@ msgid "Last update"
 msgstr "Mass uppdatering"
 
 #: plugins/mantisbt/view/viewIssues.php:495
-#, fuzzy
 msgid "Add a new ticket"
-msgstr "Lägg till ett projekt"
+msgstr ""
 
 #: plugins/mantisbt/view/viewNote.php:59
 #: plugins/quota_management/www/quota_admin.php:130
@@ -12048,9 +11924,8 @@ msgid "Cannot copy file to target directory %s"
 msgstr "Filen kan inte flyttas till den permanenta platsen"
 
 #: plugins/mediawiki/www/plugin_admin.php:49
-#, fuzzy
 msgid "Cannot overwrite existing file"
-msgstr "Kan inte lägga till databas post"
+msgstr ""
 
 #: plugins/mediawiki/www/plugin_admin.php:55
 #, fuzzy
@@ -12386,9 +12261,8 @@ msgid "POST data"
 msgstr ""
 
 #: plugins/oauthconsumer/www/index.php:77
-#, fuzzy
 msgid "No access tokens have been created for this provider"
-msgstr "Inga sådana poster i detta projekt"
+msgstr ""
 
 #: plugins/oauthconsumer/www/index.php:84
 msgid ""
@@ -12520,9 +12394,8 @@ msgstr ""
 #: plugins/oauthprovider/www/consumer_manage.php:94
 #: plugins/oauthprovider/www/consumer_update_page.php:49
 #: plugins/oauthprovider/www/consumer_update_page.php:84
-#, fuzzy
 msgid "Update Consumer"
-msgstr "Lägg till ett projekt"
+msgstr ""
 
 #: plugins/oauthprovider/www/consumer_manage.php:100
 #, fuzzy
@@ -12730,9 +12603,8 @@ msgstr ""
 
 #: plugins/projectimport/www/index.php:163
 #: plugins/projectimport/www/projectsimport.php:85
-#, fuzzy
 msgid "Project importer"
-msgstr "Nytt projektnamn"
+msgstr ""
 
 #: plugins/projectimport/www/index.php:176
 #: plugins/projectimport/www/usersimport.php:195
@@ -12763,14 +12635,12 @@ msgid "Select existing user"
 msgstr ""
 
 #: plugins/projectimport/www/index.php:329
-#, fuzzy
 msgid "to be added to project"
-msgstr "Lägg till ett projekt"
+msgstr ""
 
 #: plugins/projectimport/www/index.php:342
-#, fuzzy
 msgid "need to add to project"
-msgstr "Lägg till ett projekt"
+msgstr ""
 
 #: plugins/projectimport/www/index.php:381
 msgid "Failed to find existing users matching some imported users."
@@ -12817,9 +12687,8 @@ msgid "Matching new project members roles"
 msgstr "Projektmedlemslista"
 
 #: plugins/projectimport/www/index.php:424
-#, fuzzy
 msgid "New project member"
-msgstr "Nytt projektnamn"
+msgstr ""
 
 #: plugins/projectimport/www/index.php:425
 msgid "Imported users mapped to it"
@@ -12893,9 +12762,8 @@ msgid "Missing require to use this plugin. You need arc/ARC2.php"
 msgstr ""
 
 #: plugins/projectimport/www/projectsimport.php:264
-#, fuzzy
 msgid "Failed to create project"
-msgstr "Fel vid skapande av gruppobjekt"
+msgstr ""
 
 #: plugins/projectimport/www/projectsimport.php:270
 #, fuzzy
@@ -12950,9 +12818,9 @@ msgid "Project label deleted."
 msgstr "Projekt fillista"
 
 #: plugins/projectlabels/www/index.php:69
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot add label onto project: %s"
-msgstr "Kan inte lägga till databas post"
+msgstr ""
 
 #: plugins/projectlabels/www/index.php:72
 msgid "The label has been added to the project."
@@ -13019,9 +12887,8 @@ msgstr[0] "Denna utvecklare är medlem i följande grupper:"
 msgstr[1] "Denna utvecklare är medlem i följande grupper:"
 
 #: plugins/projectlabels/www/index.php:165
-#, fuzzy
 msgid "[Remove this label]"
-msgstr "Ta bort detta filter"
+msgstr ""
 
 #: plugins/projectlabels/www/index.php:168
 #, fuzzy
@@ -13029,18 +12896,16 @@ msgid "This label is not used on any group."
 msgstr "Denna utvecklare är inte medlem i någon grupp."
 
 #: plugins/projectlabels/www/index.php:175
-#, fuzzy
 msgid "Add label to project"
-msgstr "Lägg till ett projekt"
+msgstr ""
 
 #: plugins/projectlabels/www/index.php:180
 msgid "[Edit this label]"
 msgstr ""
 
 #: plugins/projectlabels/www/index.php:182
-#, fuzzy
 msgid "[Delete this label]"
-msgstr "Ta bort fil"
+msgstr ""
 
 #: plugins/projectlabels/www/index.php:190
 #, fuzzy
@@ -13061,9 +12926,8 @@ msgid "potm"
 msgstr "Rapport"
 
 #: plugins/projectlabels/www/index.php:201
-#, fuzzy
 msgid "Project of the month!"
-msgstr "Nytt projektnamn"
+msgstr ""
 
 #: plugins/projectlabels/www/index.php:203
 #, fuzzy
@@ -13076,9 +12940,8 @@ msgid "This project already has a parent"
 msgstr "Använd projekt-/uppgiftsansvarig"
 
 #: plugins/projects-hierarchy/actions/addChild.php:35
-#, fuzzy
 msgid "Successfully added child"
-msgstr "JOBB infogning lyckades"
+msgstr ""
 
 #: plugins/projects-hierarchy/actions/addChild.php:37
 #, fuzzy
@@ -13109,9 +12972,8 @@ msgid "Successfully removed parent"
 msgstr "Lyckades skapa post"
 
 #: plugins/projects-hierarchy/actions/removeParent.php:34
-#, fuzzy
 msgid "Failed to remove parent"
-msgstr "Fel vid skapande av gruppobjekt"
+msgstr ""
 
 #: plugins/projects-hierarchy/actions/updateGlobalConf.php:37
 msgid "Projects Hierarchy global configuration successfully updated."
@@ -13138,9 +13000,8 @@ msgid "Failed to do task."
 msgstr "Misslyckdes att lägga till kompetens"
 
 #: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:31
-#, fuzzy
 msgid "Project Hierarchy"
-msgstr "Nytt projektnamn"
+msgstr ""
 
 #: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:92
 #, fuzzy
@@ -13231,9 +13092,8 @@ msgid "Select a project: "
 msgstr "Främsta projekt"
 
 #: plugins/projects-hierarchy/view/admin_project_link.php:56
-#, fuzzy
 msgid "Add Child project"
-msgstr "Lägg till ett projekt"
+msgstr ""
 
 #: plugins/projects-hierarchy/view/admin_project_link.php:59
 msgid "No other project using project hierarchy plugin."
@@ -13370,9 +13230,8 @@ msgid "No ID specified"
 msgstr ""
 
 #: plugins/quota_management/www/index.php:81
-#, fuzzy
 msgid "You are not Admin of this project"
-msgstr "Inga sådana poster i detta projekt"
+msgstr ""
 
 #: plugins/quota_management/www/quota_admin.php:44
 msgid "Quota Manager Admin"
@@ -13997,9 +13856,9 @@ msgstr "Ogiltig användare"
 #: plugins/scmgit/common/GitPlugin.class.php:1008
 #: plugins/scmhg/common/HgPlugin.class.php:545
 #: plugins/scmhg/common/HgPlugin.class.php:561
-#, fuzzy, php-format
+#, php-format
 msgid "A repository %s already exists"
-msgstr "Det användarnamnet existerar redan."
+msgstr ""
 
 #: plugins/scmgit/common/GitPlugin.class.php:1033
 msgid "Invalid URL from which to clone"
@@ -14062,9 +13921,9 @@ msgid "No personal git repository"
 msgstr "Utvecklare (test)"
 
 #: plugins/scmgit/www/index.php:44
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot locate group for func=%s"
-msgstr "Fel vid skapande av gruppobjekt"
+msgstr ""
 
 #: plugins/scmgit/www/index.php:58
 msgid ""
@@ -14236,7 +14095,7 @@ msgstr "Kan inte lägga till en redan aktiv databas."
 msgid "Related Git commits"
 msgstr "Relaterade poster i ordningslista"
 
-#: plugins/scmhook/library/scmgit/commitTracker.class.php:138
+#: plugins/scmhook/library/scmgit/commitTracker.class.php:139
 msgid "Filename (<a href=\"/scm/browser.php?group_id="
 msgstr ""
 
@@ -14428,9 +14287,8 @@ msgid "R%d: %s"
 msgstr ""
 
 #: utils/fixscripts/populate_template_project.php:83
-#, fuzzy
 msgid "Error creating ArtifactTypes object"
-msgstr "Fel vid skapande av gruppobjekt"
+msgstr ""
 
 #: utils/fixscripts/populate_template_project.php:88
 #: utils/fixscripts/populate_template_project.php:94
@@ -14709,9 +14567,8 @@ msgid "ssh key is not deployed yet."
 msgstr ""
 
 #: www/account/editsshkeys.php:66
-#, fuzzy
 msgid "Delete this ssh key."
-msgstr "Ta bort fil"
+msgstr ""
 
 #: www/account/editsshkeys.php:73
 #, fuzzy
@@ -15182,14 +15039,12 @@ msgid "FRS Release"
 msgstr ""
 
 #: www/activity/index.php:124
-#, fuzzy
 msgid "New Documents"
-msgstr "Lägg till ett projekt"
+msgstr ""
 
 #: www/activity/index.php:126
-#, fuzzy
 msgid "Updated Documents"
-msgstr "Lägg till ett projekt"
+msgstr ""
 
 #: www/activity/index.php:128
 #, fuzzy
@@ -15236,9 +15091,8 @@ msgstr "Forum"
 #: www/activity/index.php:322
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:60
 #: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:52
-#, fuzzy
 msgid "Directory"
-msgstr "Nytt projektnamn"
+msgstr ""
 
 #: www/admin/admin_table.php:41
 #, fuzzy, php-format
@@ -15246,9 +15100,9 @@ msgid "Create a new %s below:"
 msgstr "Skapa ett paket"
 
 #: www/admin/admin_table.php:94 www/admin/admin_table.php:286
-#, fuzzy, php-format
+#, php-format
 msgid "%s successfully added."
-msgstr "JOBB infogning lyckades"
+msgstr ""
 
 #: www/admin/admin_table.php:118
 #, php-format
@@ -15284,9 +15138,9 @@ msgid "Are you sure you want to delete this %s?"
 msgstr "Fel, kunde inte ta bort prenumerant:"
 
 #: www/admin/admin_table.php:185
-#, fuzzy, php-format
+#, php-format
 msgid "%s successfully deleted."
-msgstr "JOBB infogning lyckades"
+msgstr ""
 
 #: www/admin/admin_table.php:207
 #, fuzzy, php-format
@@ -15410,9 +15264,8 @@ msgid "Pending reason:"
 msgstr "Väntande anledning:"
 
 #: www/admin/approve-pending.php:215
-#, fuzzy
 msgid "Based on template project"
-msgstr "Fel vid skapande av gruppobjekt"
+msgstr ""
 
 #: www/admin/approve-pending.php:230
 msgid "Approve All On This Page"
@@ -15560,9 +15413,8 @@ msgid "Error while removing user %s from role"
 msgstr "Fel under aktiveringen av konto"
 
 #: www/admin/globalroleedit.php:136
-#, fuzzy
 msgid "Cannot remove user from this type of role"
-msgstr "Kan inte lägga till databas post"
+msgstr ""
 
 #: www/admin/globalroleedit.php:145
 #, fuzzy
@@ -15601,9 +15453,8 @@ msgstr ""
 
 #: www/admin/globalroleedit.php:257 www/admin/globalroleedit.php:259
 #: www/project/admin/users.php:407
-#, fuzzy
 msgid "Delete role"
-msgstr "Ta bort fil"
+msgstr ""
 
 #: www/admin/globalroleedit.php:258
 #, fuzzy
@@ -15611,9 +15462,8 @@ msgid "Really delete this role?"
 msgstr "Relaterade poster i ordningslista"
 
 #: www/admin/groupdelete.php:47
-#, fuzzy
 msgid "Project successfully deleted"
-msgstr "JOBB infogning lyckades"
+msgstr ""
 
 #: www/admin/groupdelete.php:52
 msgid "Permanently and irretrievably delete project"
@@ -15709,9 +15559,8 @@ msgid "License"
 msgstr "Licens"
 
 #: www/admin/grouplist.php:100
-#, fuzzy
 msgid "Order by project name."
-msgstr "Nytt projektnamn"
+msgstr ""
 
 #: www/admin/grouplist.php:101
 msgid "Order by register time."
@@ -16109,9 +15958,8 @@ msgid "Plugin %s updated Successfully"
 msgstr ""
 
 #: www/admin/pluginman.php:75 www/admin/pluginman.php:111
-#, fuzzy
 msgid "Could not get plugin object"
-msgstr "Kunde inte uppdatera förälder"
+msgstr ""
 
 #: www/admin/pluginman.php:95
 msgid "Success, config not deleted"
@@ -16412,9 +16260,8 @@ msgid "Deleted (D)"
 msgstr "Raderad (D)"
 
 #: www/admin/useredit.php:52 www/admin/useredit.php:69
-#, fuzzy
 msgid "Could Not Complete Operation: "
-msgstr "Kan inte slutföra operationen"
+msgstr "Kan inte slutföra operationen: "
 
 #: www/admin/useredit.php:57
 msgid ""
@@ -16422,9 +16269,8 @@ msgid ""
 msgstr ""
 
 #: www/admin/useredit.php:93
-#, fuzzy
 msgid "Added Successfully to project "
-msgstr "Lägg till ett projekt"
+msgstr ""
 
 #: www/admin/useredit.php:117
 msgid "Site Admin: User Info"
@@ -16494,14 +16340,12 @@ msgid "This user is not a member of any project."
 msgstr "Denna utvecklare är inte medlem i någon grupp."
 
 #: www/admin/useredit.php:289
-#, fuzzy
 msgid "Add membership to new projects"
-msgstr "Lägg till ett projekt"
+msgstr ""
 
 #: www/admin/useredit.php:295
-#, fuzzy
 msgid "Select role"
-msgstr "Ta bort fil"
+msgstr ""
 
 #: www/admin/userlist.php:63
 #, php-format
@@ -16909,9 +16753,8 @@ msgid ""
 msgstr ""
 
 #: www/export/rss_project.php:88
-#, fuzzy
 msgid "Project News"
-msgstr "Nytt projektnamn"
+msgstr ""
 
 #: www/export/rss_project.php:104
 #, fuzzy
@@ -17235,9 +17078,8 @@ msgstr ""
 #: www/frs/admin/editrelease.php:56 www/frs/admin/index.php:70
 #: www/frs/admin/index.php:85 www/frs/admin/index.php:101
 #: www/frs/admin/qrs.php:86 www/frs/admin/showreleases.php:58
-#, fuzzy
 msgid "Could Not Get FRS Package"
-msgstr "Kan inte slutföra operationen"
+msgstr ""
 
 #: www/frs/admin/deletepackage.php:57
 #, fuzzy
@@ -17252,9 +17094,8 @@ msgstr ""
 
 #: www/frs/admin/deleterelease.php:57 www/frs/admin/editrelease.php:66
 #: www/frs/admin/qrs.php:95 www/frs/admin/showreleases.php:74
-#, fuzzy
 msgid "Could Not Get FRS Release"
-msgstr "Kan inte slutföra operationen"
+msgstr ""
 
 #: www/frs/admin/deleterelease.php:66 www/frs/admin/index.php:113
 msgid "Release Edit/File Releases"
@@ -17430,7 +17271,7 @@ msgstr "Uppdatera/Visa om"
 
 #: www/frs/admin/editrelease.php:385
 msgid "Delete File"
-msgstr "Ta bort fil"
+msgstr ""
 
 #: www/frs/admin/editrelease.php:394
 #, php-format
@@ -17764,9 +17605,8 @@ msgid "m/d"
 msgstr "m/d"
 
 #: www/include/features_boxes.php:193
-#, fuzzy
 msgid "All newest projects"
-msgstr "Lägg till ett projekt"
+msgstr ""
 
 #: www/include/features_boxes.php:247
 #, fuzzy
@@ -18059,9 +17899,8 @@ msgid "Spinner"
 msgstr ""
 
 #: www/include/Layout.class.php:1390
-#, fuzzy
 msgid "Browse per tags defined by the projects."
-msgstr "Inga sådana poster i detta projekt"
+msgstr ""
 
 #: www/include/Layout.class.php:1394 www/softwaremap/trove_list.php:85
 msgid "Project Tree"
@@ -18098,9 +17937,8 @@ msgstr[0] "Lägg till ny databas"
 msgstr[1] "Lägg till ny databas"
 
 #: www/include/project_home.php:36
-#, fuzzy
 msgid "Project Home"
-msgstr "Nytt projektnamn"
+msgstr ""
 
 #: www/include/project_home.php:72
 msgid "Select new widgets to display on the project home page."
@@ -18623,9 +18461,8 @@ msgid "Reset admin password"
 msgstr ""
 
 #: www/mail/index.php:47
-#, fuzzy
 msgid "Could Not Get MailingListFactory"
-msgstr "Kan inte slutföra operationen"
+msgstr ""
 
 #: www/mail/index.php:61
 #, php-format
@@ -19084,7 +18921,7 @@ msgstr ""
 #: www/people/editjob.php:114
 #, fuzzy, php-format
 msgid "Job skill update failed: %s"
-msgstr "JOBB kompetens uppdatering MISSLYCKADES"
+msgstr "Jobb kompetens uppdatering misslyckades"
 
 #: www/people/editjob.php:116
 msgid "Job skill updated successfully"
@@ -19228,8 +19065,8 @@ msgstr "Misslyckdes att ta bort några kompetenser"
 #, fuzzy
 msgid "Skill deleted successfully"
 msgid_plural "Skills deleted successfully"
-msgstr[0] "JOBB kompetens borttag lyckades"
-msgstr[1] "JOBB kompetens borttag lyckades"
+msgstr[0] "Jobb kompetens borttag lyckades"
+msgstr[1] "Jobb kompetens borttag lyckades"
 
 #: www/people/editprofile.php:197
 msgid "Confirm skill delete"
@@ -19453,9 +19290,8 @@ msgid "None Found"
 msgstr "Hittade ingen"
 
 #: www/people/viewjob.php:54
-#, fuzzy
 msgid "Posting fetch failed: No such posting for this project:"
-msgstr "Inga sådana poster i detta projekt"
+msgstr ""
 
 #: www/people/viewjob.php:55 www/people/viewjob.php:58
 msgid "View a Job"
@@ -19529,9 +19365,8 @@ msgstr "Beroende av uppgift"
 #: www/pm/admin/index.php:63 www/pm/admin/index.php:95
 #: www/pm/admin/index.php:115 www/pm/admin/index.php:172
 #: www/pm/admin/index.php:236 www/pm/admin/index.php:247
-#, fuzzy
 msgid "Unable to create ProjectCategory Object"
-msgstr "Fel vid skapande av gruppobjekt"
+msgstr ""
 
 #: www/pm/admin/index.php:80
 #, fuzzy
@@ -19664,9 +19499,8 @@ msgstr ""
 "inte samma sak som att skapa en ny uppgift."
 
 #: www/pm/admin/index.php:430
-#, fuzzy
 msgid "No Subprojects Found in this Project"
-msgstr "Inga sådana poster i detta projekt"
+msgstr ""
 
 #: www/pm/admin/index.php:431
 msgid "You may add new Subprojects using the “Add a Subproject” link above."
@@ -19800,14 +19634,12 @@ msgid "December"
 msgstr "December"
 
 #: www/pm/calendar.php:101
-#, fuzzy
 msgid "Error: Could Not Get Factory"
-msgstr "Kan inte slutföra operationen"
+msgstr ""
 
 #: www/pm/calendar.php:108
-#, fuzzy
 msgid "Error: Could Not Get ProjectTaskFactory"
-msgstr "Kan inte slutföra operationen"
+msgstr ""
 
 #: www/pm/calendar.php:125
 #, fuzzy
@@ -19919,9 +19751,8 @@ msgid "Field Name"
 msgstr "Filnamn"
 
 #: www/pm/csv.php:109
-#, fuzzy
 msgid "this is the ID in database"
-msgstr "Kan inte lägga till databas post"
+msgstr ""
 
 #: www/pm/csv.php:113
 msgid ""
@@ -20102,9 +19933,8 @@ msgid "General Admin"
 msgstr "Ordningslista admin"
 
 #: www/pm/include/ProjectGroupHTML.class.php:62
-#, fuzzy
 msgid "View Subprojects"
-msgstr "Nytt projektnamn"
+msgstr ""
 
 #: www/pm/include/ProjectGroupHTML.class.php:71
 #, fuzzy
@@ -20292,14 +20122,12 @@ msgstr "Främsta projekt"
 
 #: www/pm/task.php:104 www/pm/task.php:171 www/pm/task.php:306
 #: www/pm/task.php:328 www/pm/task.php:345 www/pm/task.php:377
-#, fuzzy
 msgid "Could Not Get ProjectTask"
-msgstr "Kunde inte uppdatera förälder"
+msgstr ""
 
 #: www/pm/task.php:122
-#, fuzzy
 msgid "Could Not Get Empty ProjectTask"
-msgstr "Kunde inte uppdatera förälder"
+msgstr ""
 
 #: www/pm/task.php:130 www/pm/task.php:179
 msgid "Illegal format for hours: must be an integer or a float number."
@@ -20438,9 +20266,8 @@ msgid "Error: file must be > 20 bytes and < 256000 bytes in length"
 msgstr "FEL - filen måste vara > 20 byte samt < 256000 byte lång"
 
 #: www/project/admin/editimages.php:99
-#, fuzzy
 msgid "Error: Cannot store multimedia file: "
-msgstr "Fel vid skapande av gruppobjekt"
+msgstr ""
 
 #: www/project/admin/editimages.php:101
 msgid "Multimedia File Uploaded"
@@ -20451,9 +20278,8 @@ msgid "Both file name and description are required"
 msgstr "Både filnamn och beskrivning krävs"
 
 #: www/project/admin/editimages.php:137
-#, fuzzy
 msgid "Error: Cannot delete multimedia file: "
-msgstr "Kan inte lägga till databas post"
+msgstr ""
 
 #: www/project/admin/editimages.php:139
 msgid "Multimedia File Deleted"
@@ -20942,9 +20768,8 @@ msgid "Member Updated Successfully"
 msgstr "Uppdatering av användare lyckades"
 
 #: www/project/admin/users.php:162 www/project/admin/users.php:174
-#, fuzzy
 msgid "Error Getting GroupJoinRequest"
-msgstr "Fel vid skapande av gruppobjekt"
+msgstr ""
 
 #: www/project/admin/users.php:179
 #, fuzzy
@@ -21271,9 +21096,8 @@ msgid "cannot match one of our reserved domains;"
 msgstr ""
 
 #: www/register/index.php:224
-#, fuzzy
 msgid "Unix name will never change for this project;"
-msgstr "Inga sådana poster i detta projekt"
+msgstr ""
 
 #: www/register/index.php:226
 msgid ""
@@ -21311,9 +21135,8 @@ msgid "No SCM"
 msgstr "SCM"
 
 #: www/register/index.php:265
-#, fuzzy
 msgid "Project template"
-msgstr "Nytt projektnamn"
+msgstr ""
 
 #: www/register/index.php:272
 #, php-format
@@ -21776,9 +21599,8 @@ msgid "People Search"
 msgstr "Sök"
 
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:54
-#, fuzzy
 msgid "Project Search"
-msgstr "Nytt projektnamn"
+msgstr ""
 
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:53
 msgid "Completed"
@@ -22581,7 +22403,7 @@ msgstr "Lägg till användare"
 #: www/stats/site_stats_utils.php:588
 #, fuzzy
 msgid "New projects"
-msgstr "Nytt projektnamn"
+msgstr "Nytt projekt"
 
 #: www/stats/site_stats_utils.php:665
 msgid "New users, new projects: no graph to display."
@@ -23011,9 +22833,8 @@ msgid "View Other Top Categories"
 msgstr "Se andra topkategorier"
 
 #: www/top/mostactive.php:52
-#, fuzzy
 msgid "Project name"
-msgstr "Nytt projektnamn"
+msgstr "Projektnamn"
 
 #: www/top/mostactive.php:52
 #, fuzzy
@@ -23147,9 +22968,8 @@ msgid "release %s is not available"
 msgstr "Information ej tillgänglig"
 
 #: www/tracker/roadmap.php:409
-#, fuzzy
 msgid "Display options"
-msgstr "Ta bort fil"
+msgstr ""
 
 #: www/tracker/roadmap.php:422
 #, fuzzy
@@ -23176,9 +22996,8 @@ msgid "No release available"
 msgstr "Ingen statistik tillgänglig"
 
 #: www/tracker/roadmap.php:471
-#, fuzzy
 msgid "Display as text"
-msgstr "Ta bort fil"
+msgstr ""
 
 #: www/tracker/roadmap.php:512
 #, fuzzy
@@ -23201,9 +23020,8 @@ msgid "Limiting View"
 msgstr "Webbplatsläsningar"
 
 #: www/trove/index.php:76
-#, fuzzy
 msgid "Remove Filter"
-msgstr "Ta bort detta filter"
+msgstr "Ta bort filter"
 
 #: www/trove/index.php:178
 #, php-format
@@ -23309,10 +23127,6 @@ msgstr "Användarenamn"
 #~ msgstr "Aktivera"
 
 #, fuzzy
-#~ msgid "[Delete]"
-#~ msgstr "Ta bort"
-
-#, fuzzy
 #~ msgid "[Suspend]"
 #~ msgstr "Suspendera"
 
@@ -23321,16 +23135,8 @@ msgstr "Användarenamn"
 #~ msgstr "Projekt admin"
 
 #, fuzzy
-#~ msgid "Project tree"
-#~ msgstr "Nytt projektnamn"
-
-#, fuzzy
 #~ msgid "Activity Ranking: %d"
 #~ msgstr "Aktivitet i procent:"
-
-#, fuzzy
-#~ msgid "No documents"
-#~ msgstr "Lägg till ett projekt"
 
 #, fuzzy
 #~ msgid "Mailing Lists Administration"
@@ -23339,10 +23145,6 @@ msgstr "Användarenamn"
 #, fuzzy
 #~ msgid "Last modified"
 #~ msgstr "Mass uppdatering"
-
-#, fuzzy
-#~ msgid "New document"
-#~ msgstr "Lägg till ett projekt"
 
 #, fuzzy
 #~ msgid "New folder"
@@ -23455,10 +23257,6 @@ msgstr "Användarenamn"
 #~ "\n"
 #~ "Skäl för avslag:\n"
 #~ "\n"
-
-#, fuzzy
-#~ msgid "Could Not Create File Object: "
-#~ msgstr "Kunde inte uppdatera förälder"
 
 #, fuzzy
 #~ msgid "Content:"
@@ -23842,10 +23640,6 @@ msgstr "Användarenamn"
 #~ msgid "Error getting new ForumMessage: "
 #~ msgstr "Fel vid tillägg i forum"
 
-#, fuzzy
-#~ msgid "Could not get ProjectTaskFactory"
-#~ msgstr "Kan inte slutföra operationen"
-
 #~ msgid "Mass update"
 #~ msgstr "Mass uppdatering"
 
@@ -23886,10 +23680,6 @@ msgstr "Användarenamn"
 
 #~ msgid "CVS"
 #~ msgstr "CVS"
-
-#, fuzzy
-#~ msgid "Could Not Get FRSRelease"
-#~ msgstr "Kan inte slutföra operationen"
 
 #, fuzzy
 #~ msgid "Confirm Deletion"
@@ -23962,10 +23752,6 @@ msgstr "Användarenamn"
 #~ msgstr "Fel - Välj först en användare att bevaka"
 
 #, fuzzy
-#~ msgid "Could Not Get FRSPackage"
-#~ msgstr "Kan inte slutföra operationen"
-
-#, fuzzy
 #~ msgid "%1$s to %2$s"
 #~ msgstr "Var vänlig %1$s logga in %2$s"
 
@@ -23981,26 +23767,6 @@ msgstr "Användarenamn"
 #, fuzzy
 #~ msgid "Error: That snippet doesn't exist."
 #~ msgstr "Fel - Det kodstycket existerar inte."
-
-#, fuzzy
-#~ msgid "Error - Could Not Update User Unix Status: "
-#~ msgstr "Kunde inte uppdatera förälder"
-
-#, fuzzy
-#~ msgid "Error - Could Not Update User Email: "
-#~ msgstr "Kunde inte uppdatera förälder"
-
-#, fuzzy
-#~ msgid "Error - Could Not Update User Email And Hash: "
-#~ msgstr "Kunde inte uppdatera förälder"
-
-#, fuzzy
-#~ msgid "Error - Could Not Update real name of user : "
-#~ msgstr "Kunde inte uppdatera förälder"
-
-#, fuzzy
-#~ msgid "Error - Could Not Delete User SSH Key:"
-#~ msgstr "Kunde inte uppdatera förälder"
 
 #~ msgid "%1$s Project Denied"
 #~ msgstr "%1$s projekt avslaget"
@@ -24041,13 +23807,6 @@ msgstr "Användarenamn"
 
 #~ msgid "You Have No Packages Defined"
 #~ msgstr "Du har inga definierade paket"
-
-#~ msgid "admin"
-#~ msgstr "admin"
-
-#, fuzzy
-#~ msgid "Projects Added (graph)"
-#~ msgstr "Nytt projektnamn"
 
 #, fuzzy
 #~ msgid "Submit changes"
@@ -24277,22 +24036,6 @@ msgstr "Användarenamn"
 #~ msgid "Monitoring started"
 #~ msgstr "Bevakning startad"
 
-#, fuzzy
-#~ msgid "Unix Project Name:"
-#~ msgstr "Nytt projektnamn"
-
-#, fuzzy
-#~ msgid "Project Unix Name:"
-#~ msgstr "Nytt projektnamn"
-
-#, fuzzy
-#~ msgid "Tracker:"
-#~ msgstr "Ordningslista"
-
-#, fuzzy
-#~ msgid "Type:"
-#~ msgstr "DB Typ"
-
 #~ msgid "User name:"
 #~ msgstr "Användarnamn:"
 
@@ -24467,10 +24210,6 @@ msgstr "Användarenamn"
 #~ msgstr "Projekt"
 
 #, fuzzy
-#~ msgid "Directory:"
-#~ msgstr "Nytt projektnamn"
-
-#, fuzzy
 #~ msgid "Document title:"
 #~ msgstr "Dokumentrubrik"
 
@@ -24487,10 +24226,6 @@ msgstr "Användarenamn"
 #~ msgstr "Dokumentgrupp: Ogiltigt dokumentgrupps-ID för föräldern"
 
 #, fuzzy
-#~ msgid "New directory"
-#~ msgstr "Nytt projektnamn"
-
-#, fuzzy
 #~ msgid "no description"
 #~ msgstr "Beskrivning:"
 
@@ -24505,14 +24240,6 @@ msgstr "Användarenamn"
 #, fuzzy
 #~ msgid "Add a new folder."
 #~ msgstr "Lägg till en ny kompetens"
-
-#, fuzzy
-#~ msgid "Add a new document"
-#~ msgstr "Lägg till ett projekt"
-
-#, fuzzy
-#~ msgid "Inject a Tree"
-#~ msgstr "Nytt projektnamn"
 
 #, fuzzy
 #~ msgid "Inject"
@@ -24553,10 +24280,6 @@ msgstr "Användarenamn"
 #, fuzzy
 #~ msgid "Relation"
 #~ msgstr "Lösning"
-
-#, fuzzy
-#~ msgid "Error creating ForumMessage:"
-#~ msgstr "Fel vid skapande av gruppobjekt"
 
 #, fuzzy
 #~ msgid "Tasks Admin"
@@ -24607,10 +24330,6 @@ msgstr "Användarenamn"
 #~ msgstr "alla"
 
 #, fuzzy
-#~ msgid "could Not Get ArtifactTypeFactoryHtml"
-#~ msgstr "Kan inte slutföra operationen"
-
-#, fuzzy
 #~ msgid ""
 #~ "This project has not yet categorized itself in the <a href=\"%s\">Trove "
 #~ "Software Map</a>."
@@ -24623,10 +24342,6 @@ msgstr "Användarenamn"
 #, fuzzy
 #~ msgid "Document Manager Action Denied"
 #~ msgstr "Visa Dokumentation"
-
-#, fuzzy
-#~ msgid "Diretory"
-#~ msgstr "Nytt projektnamn"
 
 #, fuzzy
 #~ msgid "Missing Link URL or Html Code."
@@ -24649,10 +24364,6 @@ msgstr "Användarenamn"
 #~ msgstr "Source IP"
 
 #, fuzzy
-#~ msgid "Add a new link"
-#~ msgstr "Lägg till ett projekt"
-
-#, fuzzy
 #~ msgid "Full Name:"
 #~ msgstr "Fullt namn"
 
@@ -24670,26 +24381,6 @@ msgstr "Användarenamn"
 #, fuzzy
 #~ msgid "Extra Tabs Admin"
 #~ msgstr "Ordningslista admin"
-
-#, fuzzy
-#~ msgid "Cannot insert new tab entry: %s"
-#~ msgstr "Kan inte lägga till databas post"
-
-#, fuzzy
-#~ msgid "Cannot delete tab entry: %s"
-#~ msgstr "Kan inte lägga till databas post"
-
-#, fuzzy
-#~ msgid "Tab successfully renamed"
-#~ msgstr "JOBB infogning lyckades"
-
-#, fuzzy
-#~ msgid "URL successfully changed"
-#~ msgstr "JOBB infogning lyckades"
-
-#, fuzzy
-#~ msgid "Type successfully changed"
-#~ msgstr "JOBB infogning lyckades"
 
 #, fuzzy
 #~ msgid "Nothing done"
@@ -24710,14 +24401,6 @@ msgstr "Användarenamn"
 #, fuzzy
 #~ msgid "Rename to:"
 #~ msgstr "Verkligt namn"
-
-#, fuzzy
-#~ msgid "Move or delete tab"
-#~ msgstr "Ta bort"
-
-#, fuzzy
-#~ msgid "Delete tab"
-#~ msgstr "Ta bort"
 
 #, fuzzy
 #~ msgid "Anonymous Git Access"
@@ -24762,14 +24445,6 @@ msgstr "Användarenamn"
 
 #~ msgid "Top Downloads in the Past 7 Days"
 #~ msgstr "Mest hämtat de senaste 7 dagarna"
-
-#, fuzzy
-#~ msgid "Could Not Get Artifact Object"
-#~ msgstr "Kunde inte uppdatera förälder"
-
-#, fuzzy
-#~ msgid "Error: could Not Get ArtifactTypeFactoryHtml"
-#~ msgstr "Kan inte slutföra operationen"
 
 #, fuzzy
 #~ msgid "Error: roadmap %s is not available"
@@ -24837,10 +24512,6 @@ msgstr "Användarenamn"
 #~ msgstr "Mina projekt"
 
 #, fuzzy
-#~ msgid "Could not update SSH authorized keys: %s"
-#~ msgstr "Kan inte lägga till databas post"
-
-#, fuzzy
 #~ msgid "Submitted by: %s"
 #~ msgstr "Inlämnare"
 
@@ -24881,10 +24552,6 @@ msgstr "Användarenamn"
 
 #~ msgid "Statistics for All Time"
 #~ msgstr "Statistik från första början"
-
-#, fuzzy
-#~ msgid "Projects importer"
-#~ msgstr "Nytt projektnamn"
 
 #, fuzzy
 #~ msgid "Document Edit"
@@ -25028,19 +24695,11 @@ msgstr "Användarenamn"
 #~ msgstr "Fel vid tillägg i forum"
 
 #, fuzzy
-#~ msgid "Error Getting Release"
-#~ msgstr "Fel vid skapande av gruppobjekt"
-
-#, fuzzy
 #~ msgid "Error Getting File"
 #~ msgstr "Fel vid hämtande av %1$s"
 
 #~ msgid "SUBMIT ONLY ONCE"
 #~ msgstr "LÄMNA ENDAST IN EN GÅNG"
-
-#, fuzzy
-#~ msgid "Could Not Get RoleObserver"
-#~ msgstr "Kan inte slutföra operationen"
 
 #, fuzzy
 #~ msgid "none"
@@ -25071,10 +24730,6 @@ msgstr "Användarenamn"
 #, fuzzy
 #~ msgid "Directory that document belongs in"
 #~ msgstr "Grupp som dokumentet hör till:"
-
-#, fuzzy
-#~ msgid "Directory Name"
-#~ msgstr "Nytt projektnamn"
 
 #~ msgid "Error - this news item was not found"
 #~ msgstr "Fel - hittade inte denna nyhetspost"
@@ -25153,10 +24808,6 @@ msgstr "Användarenamn"
 
 #~ msgid "This project has no visible documents"
 #~ msgstr "Detta projekt har inga synliga dokument"
-
-#, fuzzy
-#~ msgid "Not Object: ProjectGroup: %d"
-#~ msgstr "Kunde inte uppdatera förälder"
 
 #, fuzzy
 #~ msgid "Webcalendar"
@@ -25360,14 +25011,6 @@ msgstr "Användarenamn"
 #~ msgid "Confirm Has"
 #~ msgstr "Bekräfta"
 
-#, fuzzy
-#~ msgid "Error getting member object"
-#~ msgstr "Fel vid skapande av gruppobjekt"
-
-#, fuzzy
-#~ msgid "Could Not Get Group"
-#~ msgstr "Kunde inte uppdatera förälder"
-
 #~ msgid "PAGE NOT FOUND"
 #~ msgstr "SIDAN HITTADES INTE"
 
@@ -25379,10 +25022,6 @@ msgstr "Användarenamn"
 
 #~ msgid "Unix Group Name:"
 #~ msgstr "Unixgruppnamn:"
-
-#, fuzzy
-#~ msgid "File %s wrote successfully."
-#~ msgstr "JOBB infogning lyckades"
 
 #, fuzzy
 #~ msgid "Value"
@@ -25669,14 +25308,6 @@ msgstr "Användarenamn"
 
 #~ msgid "Group Change History"
 #~ msgstr "Grupp, ändringshistorik"
-
-#, fuzzy
-#~ msgid "Could not create object in update: %s."
-#~ msgstr "Kunde inte uppdatera förälder"
-
-#, fuzzy
-#~ msgid "Could not create object update database: %s."
-#~ msgstr "Kunde inte uppdatera förälder"
 
 #, fuzzy
 #~ msgid "Group:"

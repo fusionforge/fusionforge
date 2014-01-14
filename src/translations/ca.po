@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-13 18:52+0100\n"
+"POT-Creation-Date: 2014-01-14 12:06+0100\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1268,7 +1268,7 @@ msgstr "Títol"
 #: plugins/forumml/include/ForumMLHtmlSearchRenderer.class.php:68
 #: plugins/forumml/www/forumml_utils.php:61
 #: plugins/forumml/www/forumml_utils.php:186
-#: plugins/scmhook/library/scmgit/commitTracker.class.php:143
+#: plugins/scmhook/library/scmgit/commitTracker.class.php:144
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:138
 #: plugins/wiki/common/WikiHtmlSearchRenderer.class.php:50
 #: www/forum/forum.php:246 www/forum/message.php:160
@@ -2003,7 +2003,7 @@ msgstr "Usuari"
 #: plugins/contribtracker/www/index.php:42
 #: plugins/contribtracker/www/project_admin.php:289
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:109
-#: plugins/scmhook/library/scmgit/commitTracker.class.php:139
+#: plugins/scmhook/library/scmgit/commitTracker.class.php:140
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:134
 #: plugins/wiki/common/WikiHtmlSearchRenderer.class.php:50
 #: www/admin/cronman.php:42 www/admin/massmail.php:137
@@ -9416,20 +9416,20 @@ msgid "No commits have been made."
 msgstr ""
 
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:110
-#: plugins/scmhook/library/scmgit/commitTracker.class.php:140
+#: plugins/scmhook/library/scmgit/commitTracker.class.php:141
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:135
 msgid "Previous Version"
 msgstr ""
 
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:111
-#: plugins/scmhook/library/scmgit/commitTracker.class.php:141
+#: plugins/scmhook/library/scmgit/commitTracker.class.php:142
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:136
 #, fuzzy
 msgid "Current Version"
 msgstr "Versió"
 
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:112
-#: plugins/scmhook/library/scmgit/commitTracker.class.php:142
+#: plugins/scmhook/library/scmgit/commitTracker.class.php:143
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:137
 msgid "Log Message"
 msgstr ""
@@ -14305,7 +14305,7 @@ msgstr "Incapaç d'inserir una base de dades ja activa."
 msgid "Related Git commits"
 msgstr "Elements de rastreig relacionats"
 
-#: plugins/scmhook/library/scmgit/commitTracker.class.php:138
+#: plugins/scmhook/library/scmgit/commitTracker.class.php:139
 msgid "Filename (<a href=\"/scm/browser.php?group_id="
 msgstr ""
 
