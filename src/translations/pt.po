@@ -17798,7 +17798,7 @@ msgstr "Notícia Adicionada."
 
 #: www/news/submit.php:115
 msgid "Error: both subject and body are required."
-msgstr "Erro - tanto o assunto quanto o corpo são necessários"
+msgstr "Erro - tanto o assunto quanto o corpo são necessários."
 
 #: www/news/submit.php:131
 msgid "Submit News for Project: "
@@ -18222,7 +18222,7 @@ msgstr "Precisa selecionar uma ID de habilidade"
 
 #: www/people/people_utils.php:104
 msgid "Error inserting into skill inventory: "
-msgstr "Erro inserindo no inventário de habilidades"
+msgstr "Erro inserindo no inventário de habilidades: "
 
 #: www/people/people_utils.php:107
 msgid "Added to skill inventory"
