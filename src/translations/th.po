@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-14 12:26+0100\n"
+"POT-Creation-Date: 2014-01-14 17:42+0100\n"
 "PO-Revision-Date: 2013-06-03 17:16+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -2295,9 +2295,8 @@ msgstr "หมายเลขกลุ่มกระทู้ไม่ถูก
 #: common/forum/Forum.class.php:439 common/forum/Forum.class.php:474
 #: common/frs/FRSPackage.class.php:274 common/frs/FRSPackage.class.php:306
 #: common/tracker/ArtifactType.class.php:527
-#, fuzzy
 msgid "You can only monitor if you are logged in."
-msgstr "จะบันทึกได้ก็ต่อเมื่อได้กรอกข้อมูลเข้าใช้งานแล้วเท่านั้น"
+msgstr ""
 
 #: common/forum/Forum.class.php:507
 msgid "You can only save your place if you are logged in."
@@ -2354,9 +2353,8 @@ msgid "Forum not found"
 msgstr "หากระทู้ไม่เจอ"
 
 #: common/forum/ForumFactory.class.php:192
-#, fuzzy
 msgid "Thread not found"
-msgstr "หากระทู้ไม่เจอ"
+msgstr ""
 
 #: common/forum/ForumHTML.class.php:68 www/export/rssAboTask.php:171
 msgid "Posted by"
@@ -2417,9 +2415,8 @@ msgid "Start New Thread"
 msgstr ""
 
 #: common/forum/ForumHTML.class.php:180 common/forum/ForumMessage.class.php:60
-#, fuzzy
 msgid "Invalid Forum Object"
-msgstr "หมายเลขกลุ่มกระทู้ไม่ถูกต้อง"
+msgstr ""
 
 #: common/forum/ForumHTML.class.php:203
 msgid "This is the content of the pending message"
@@ -2608,9 +2605,8 @@ msgid ""
 msgstr ""
 
 #: common/forum/ForumMessage.class.php:825
-#, fuzzy
 msgid "Message not found"
-msgstr "หากระทู้ไม่เจอ"
+msgstr ""
 
 #: common/forum/ForumMessageFactory.class.php:58
 msgid "Invalid group_form_id"
@@ -17571,9 +17567,8 @@ msgid "Add/Change People Skills"
 msgstr ""
 
 #: www/people/admin/index.php:125
-#, fuzzy
 msgid "No Skills Found"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: www/people/admin/index.php:133
 msgid "New Skill Name"
@@ -18566,9 +18561,8 @@ msgid "start"
 msgstr ""
 
 #: www/pm/ganttpage.php:252
-#, fuzzy
 msgid "end"
-msgstr "th"
+msgstr ""
 
 #: www/pm/ganttpage.php:253
 msgid "dur."
