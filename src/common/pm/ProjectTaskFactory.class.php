@@ -52,8 +52,8 @@ class ProjectTaskFactory extends Error {
 	/**
 	 *  Constructor.
 	 *
-	 *	@param	ProjectGroup $ProjectGroup The ProjectGroup object to which this ProjectTask is associated.
-	 *	@return	boolean	success.
+	 * @param	ProjectGroup	$ProjectGroup	The ProjectGroup object to which this ProjectTask is associated.
+	 * @return	boolean		success.
 	 */
 	function ProjectTaskFactory(&$ProjectGroup) {
 		$this->Error();
@@ -75,14 +75,14 @@ class ProjectTaskFactory extends Error {
 	/**
 	 * setup - sets up limits and sorts before you call getTasks().
 	 *
-	 * @param  int       $offset        The offset - number of rows to skip.
-	 * @param  string    $order         The way to order - ASC or DESC.
-	 * @param  int       $max_rows      The max number of rows to return.
-	 * @param  string    $set           Whether to set these prefs into the user_prefs table - use "custom".
-	 * @param  int       $_assigned_to  Include this param if you want to limit to a certain assignee.
-	 * @param  int       $_status       Include this param if you want to limit to a certain category.
-	 * @param            $_category_id
-	 * @param  string    $_view
+	 * @param	int	$offset		The offset - number of rows to skip.
+	 * @param	string	$order		The way to order - ASC or DESC.
+	 * @param	int	$max_rows	The max number of rows to return.
+	 * @param	string	$set		Whether to set these prefs into the user_prefs table - use "custom".
+	 * @param	int	$_assigned_to	Include this param if you want to limit to a certain assignee.
+	 * @param	int	$_status	Include this param if you want to limit to a certain category.
+	 * @param	$_category_id
+	 * @param	string    $_view
 	 */
 	function setup($offset,$order,$max_rows,$set,$_assigned_to,$_status,$_category_id,$_view='') {
 //echo "<br />offset: $offset| order: $order|max_rows: $max_rows|_assigned_to: $_assigned_to|_status: $_status|_category_id: $_category_id +";
@@ -148,7 +148,7 @@ class ProjectTaskFactory extends Error {
 	/**
 	 * getTasks - get an array of ProjectTask objects.
 	 *
-	 * @return ProjectTask[] The array of ProjectTask objects.
+	 * @return	array	ProjectTask[]	The array of ProjectTask objects.
 	 */
 	function &getTasks() {
 		if ($this->project_tasks) {

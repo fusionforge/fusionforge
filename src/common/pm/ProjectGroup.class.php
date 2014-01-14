@@ -85,17 +85,17 @@ class ProjectGroup extends Error {
 	var $categories;
 	var $technicians;
 
-    /**
-     * Constructor.
-     *
-     * @param $Group
-     * @param bool $group_project_id
-     * @param bool $arr
-     * @internal param \The $object Group object to which this forum is associated.
-     * @internal param \The $int group_project_id.
-     * @internal param \The $array associative array of data.
-     * @return \ProjectGroup
-     */
+	/**
+	 * Constructor.
+	 *
+	 * @param	$Group
+	 * @param	bool	$group_project_id
+	 * @param	bool	$arr
+	 * @internal	param	\The $object Group object to which this forum is associated.
+	 * @internal	param	\The $int group_project_id.
+	 * @internal	param	\The $array associative array of data.
+	 * @return	\ProjectGroup
+	 */
 	function ProjectGroup(&$Group, $group_project_id = false, $arr = false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
@@ -135,7 +135,7 @@ class ProjectGroup extends Error {
 	 * create - create a new ProjectGroup in the database.
 	 *
 	 * @param	string	$project_name		The project name.
-	 * @param	string	$description		The project description.	 * @param	string	The email address to send new notifications to.
+	 * @param	string	$description		The project description.	 
 	 * @param	string	$send_all_posts_to	The email address to send new notifications to.
 	 * @return	bool	success.
 	 */
@@ -281,7 +281,7 @@ class ProjectGroup extends Error {
 	 *
 	 * @return	object	Database result set.
 	 */
-	function getCategories () {
+	function getCategories() {
 		if (!$this->categories) {
 			$this->categories = db_query_params('SELECT category_id,category_name FROM project_category WHERE group_project_id=$1',
 							    array($this->getID()));
@@ -353,7 +353,7 @@ class ProjectGroup extends Error {
 	/**
 	 * delete - delete this subproject and all its related data.
 	 *
-	 * @param	bool	$sure			I'm Sure.
+	 * @param	bool	$sure		I'm Sure.
 	 * @param	bool	$really_sure	I'm REALLY sure.
 	 * @return	bool	true/false;
 	 */
