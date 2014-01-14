@@ -288,7 +288,7 @@ class FRSPackage extends Error {
 							  user_getid()));
 
 			if (!$result) {
-				$this->setError(_('Unable to add monitor: ').db_error());
+				$this->setError(_('Unable To Add Monitor')._(': ').db_error());
 				return false;
 			}
 

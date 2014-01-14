@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-14 12:26+0100\n"
+"POT-Creation-Date: 2014-01-14 17:45+0100\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -227,12 +227,13 @@ msgstr ""
 #: common/forum/ForumHTML.class.php:523 common/forum/ForumHTML.class.php:527
 #: common/forum/ForumHTML.class.php:587 common/forum/ForumHTML.class.php:590
 #: common/forum/ForumMessage.class.php:666 common/frs/FRSFile.class.php:187
-#: common/frs/FRSFile.class.php:440 common/include/Error.class.php:206
-#: common/include/exit.php:80 common/include/Group.class.php:2634
-#: common/include/Group.class.php:2635 common/include/Group.class.php:2636
-#: common/include/Group.class.php:2688 common/include/Group.class.php:2689
-#: common/include/Group.class.php:2692 common/include/Group.class.php:2696
-#: common/include/Group.class.php:2706 common/include/Group.class.php:2707
+#: common/frs/FRSFile.class.php:440 common/frs/FRSPackage.class.php:291
+#: common/include/Error.class.php:206 common/include/exit.php:80
+#: common/include/Group.class.php:2634 common/include/Group.class.php:2635
+#: common/include/Group.class.php:2636 common/include/Group.class.php:2688
+#: common/include/Group.class.php:2689 common/include/Group.class.php:2692
+#: common/include/Group.class.php:2696 common/include/Group.class.php:2706
+#: common/include/Group.class.php:2707
 #: common/include/GroupJoinRequest.class.php:298
 #: common/include/Navigation.class.php:60 common/include/User.class.php:350
 #: common/include/User.class.php:436 common/include/User.class.php:1410
@@ -562,6 +563,7 @@ msgstr "Konnte Überwachung nicht hinzufügen"
 
 #: common/docman/Document.class.php:611
 #: common/docman/DocumentGroup.class.php:431 common/forum/Forum.class.php:457
+#: common/frs/FRSPackage.class.php:291
 msgid "Unable To Add Monitor"
 msgstr "Konnte Überwachung nicht hinzufügen"
 
@@ -2835,11 +2837,6 @@ msgstr ""
 #: common/frs/FRSPackage.class.php:205
 msgid "Invalid package_id"
 msgstr "Ungültiger package_id"
-
-#: common/frs/FRSPackage.class.php:291
-#, fuzzy
-msgid "Unable to add monitor: "
-msgstr "Konnte Überwachung nicht hinzufügen: "
 
 #: common/frs/FRSPackage.class.php:323
 #, fuzzy
