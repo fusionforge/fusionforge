@@ -66,14 +66,14 @@ class ProjectTask extends Error {
 	/**
 	 * Associative array of data from db.
 	 *
-	 * @var	 array   $data_array.
+	 * @var	 array	$data_array.
 	 */
 	var $data_array;
 
 	/**
 	 * The ProjectGroup object.
 	 *
-	 * @var	 ProjectGroup  $ProjectGroup.
+	 * @var	 ProjectGroup	$ProjectGroup.
 	 */
 	var $ProjectGroup;
 	var $dependon;
@@ -83,10 +83,10 @@ class ProjectTask extends Error {
 	/**
 	 *  ProjectTask - Constructor.
 	 *
-	 *	@param  object	   $ProjectGroup    The ProjectGroup object to which this ProjectTask is associated.
-	 *  @param  int|bool   $project_task_id The project_task_id.
-	 *  @param  array|bool $arr             The associative array of data.
-	 *	@return	boolean success.
+	 * @param	object	   	$ProjectGroup		The ProjectGroup object to which this ProjectTask is associated.
+	 * @param	int|bool	$project_task_id	The project_task_id.
+	 * @param	array|bool	$arr			The associative array of data.
+	 * @return	boolean		success.
 	 */
 	function ProjectTask(&$ProjectGroup, $project_task_id=false, $arr=false) {
 		$this->Error();
@@ -120,23 +120,23 @@ class ProjectTask extends Error {
 	}
 
 	/**
-	 *	create - create a new ProjectTask in the database.
+	 * create - create a new ProjectTask in the database.
 	 *
-	 *	@param	string	$summary          The summary of this task.
-	 *	@param	string	$details          The detailed description of this task.
-	 *	@param	int	    $priority         The Priority of this task.
-	 *	@param	int	    $hours            The Hours estimated to complete this task.
-	 *	@param	int	    $start_date       The (unix) start date of this task.
-	 *	@param	int	    $end_date         The (unix) end date of this task.
-	 *	@param	int	    $category_id      The category_id of this task.
-	 *	@param	int	    $percent_complete The percentage of completion in integer format of this task.
-	 *	@param	array	$assigned_arr     An array of user_id's that are assigned this task.
-	 *	@param	array	$depend_arr       An array of project_task_id's that this task depends on.
-	 *	@param	int	    $duration         The duration of the task in days.
-	 *	@param	int	    $parent_id        The id of the parent task, if any.
-	 *	@param	array	$importData       An array ('user' => user_id)
-	 *	@param	array	$importData       An array ('user' => user_id)
-	 *	@return	boolean success.
+	 * @param	string	$summary		The summary of this task.
+	 * @param	string	$details		The detailed description of this task.
+	 * @param	int	$priority		The Priority of this task.
+	 * @param	int	$hours			The Hours estimated to complete this task.
+	 * @param	int	$start_date		The (unix) start date of this task.
+	 * @param	int	$end_date		The (unix) end date of this task.
+	 * @param	int	$category_id		The category_id of this task.
+	 * @param	int	$percent_complete	The percentage of completion in integer format of this task.
+	 * @param	array	$assigned_arr		An array of user_id's that are assigned this task.
+	 * @param	array	$depend_arr		An array of project_task_id's that this task depends on.
+	 * @param	int	$duration		The duration of the task in days.
+	 * @param	int	$parent_id		The id of the parent task, if any.
+	 * @param	array	$importData		An array ('user' => user_id)
+	 * @param	array	$importData		An array ('user' => user_id)
+	 * @return	boolean	success.
 	 */
 	function create($summary,$details,$priority,$hours,$start_date,$end_date,
 			$category_id,$percent_complete,&$assigned_arr,&$depend_arr,$duration=0,$parent_id=0, $importData = array()) {
@@ -220,10 +220,10 @@ class ProjectTask extends Error {
 	}
 
 	/**
-	 *  fetchData - re-fetch the data for this ProjectTask from the database.
+	 * fetchData - re-fetch the data for this ProjectTask from the database.
 	 *
-	 *  @param  int	$project_task_id The project_task_id.
-	 *  @return	boolean	success.
+	 * @param	int	$project_task_id	The project_task_id.
+	 * @return	boolean	success.
 	 */
 	function fetchData($project_task_id) {
 		$res = db_query_params ('SELECT * FROM project_task_vw
@@ -241,170 +241,172 @@ class ProjectTask extends Error {
 	}
 
 	/**
-	 *	getProjectGroup - get the ProjectGroup object this ProjectTask is associated with.
+	 * getProjectGroup - get the ProjectGroup object this ProjectTask is associated with.
 	 *
-	 *	@return	ProjectGroup The ProjectGroup object.
+	 * @return	ProjectGroup	The ProjectGroup object.
 	 */
 	function &getProjectGroup() {
 		return $this->ProjectGroup;
 	}
 
 	/**
-	 *	getID - get this project_task_id.
+	 * getID - get this project_task_id.
 	 *
-	 *	@return	int	The project_task_id.
+	 * @return	int	The project_task_id.
 	 */
 	function getID() {
 		return $this->data_array['project_task_id'];
 	}
 
 	/**
-	 *	getSubmittedRealName - get the real name of the person who created this task.
+	 * getSubmittedRealName - get the real name of the person who created this task.
 	 *
-	 *	@return	string	The real name person who created this task.
+	 * @return	string	The real name person who created this task.
 	 */
 	function getSubmittedRealName() {
 		return $this->data_array['realname'];
 	}
 
 	/**
-	 *	getDuration - the duration of the task.
+	 * getDuration - the duration of the task.
 	 *
-	 *	@return	int	The number of days of duration.
+	 * @return	int	The number of days of duration.
 	 */
 	function getDuration() {
 		return $this->data_array['duration'];
 	}
 
 	/**
-	 *	getParentID - the task_id of the parent task, if any.
+	 * getParentID - the task_id of the parent task, if any.
 	 *
-	 *	@return	string	The real name person who created this task.
+	 * @return	string	The real name person who created this task.
 	 */
 	function getParentID() {
 		return $this->data_array['parent_id'];
 	}
 
 	/**
-	 *	getSubmittedUnixName - get the unix name of the person who created this task.
+	 * getSubmittedUnixName - get the unix name of the person who created this task.
 	 *
-	 *	@return	string	The unix name of the person who created this task.
+	 * @return	string	The unix name of the person who created this task.
 	 */
 	function getSubmittedUnixName() {
 		return $this->data_array['user_name'];
 	}
 
 	/**
-	 *	getSummary - get the subject/summary of this task.
+	 * getSummary - get the subject/summary of this task.
 	 *
-	 *	@return	string	The summary.
+	 * @return	string	The summary.
 	 */
 	function getSummary() {
 		return $this->data_array['summary'];
 	}
 
 	/**
-	 *	getDetails - get the body/details of this task.
+	 * getDetails - get the body/details of this task.
 	 *
-	 *	@return	string	The body/details.
+	 * @return	string	The body/details.
 	 */
 	function getDetails() {
 		return $this->data_array['details'];
 	}
 
 	/**
-	 *	getPercentComplete - an integer between 0 and 100.
+	 * getPercentComplete - an integer between 0 and 100.
 	 *
-	 *	@return	int	The percentage of completion of this task.
+	 * @return	int	The percentage of completion of this task.
 	 */
 	function getPercentComplete() {
 		return $this->data_array['percent_complete'];
 	}
 
 	/**
-	 *	getPriority - the priority, between 1 and 9 of this task.
+	 * getPriority - the priority, between 1 and 9 of this task.
 	 *
-	 *	@return	int	The priority.
+	 * @return	int	The priority.
 	 */
 	function getPriority() {
 		return $this->data_array['priority'];
 	}
 
 	/**
-	 *	getHours - the hours this task is expected to take.
+	 * getHours - the hours this task is expected to take.
 	 *
-	 *	@return	int	The hours.
+	 * @return	int	The hours.
 	 */
 	function getHours() {
 		return $this->data_array['hours'];
 	}
 
 	/**
-	 *	getStartDate - the unix time that this task will start.
+	 * getStartDate - the unix time that this task will start.
 	 *
-	 *	@return	int	The unix start time of this task.
+	 * @return	int	The unix start time of this task.
 	 */
 	function getStartDate() {
 		return $this->data_array['start_date'];
 	}
 
 	/**
-	 *	getEndDate - the unix time that this task will end.
+	 * getEndDate - the unix time that this task will end.
 	 *
-	 *	@return	int	The unix end time of this task.
+	 * @return	int	The unix end time of this task.
 	 */
 	function getEndDate() {
 		return $this->data_array['end_date'];
 	}
 
 	/**
-	 *	getStatusID - the integer of the status of this task.
+	 * getStatusID - the integer of the status of this task.
 	 *
-	 *	@return	int	the status_id.
+	 * @return	int	the status_id.
 	 */
 	function getStatusID() {
 		return $this->data_array['status_id'];
 	}
 
 	/**
-	 *	getStatusName - the string of the status of this task.
+	 * getStatusName - the string of the status of this task.
 	 *
-	 *	@return	string	the status_name.
+	 * @return	string	the status_name.
 	 */
 	function getStatusName() {
 		return $this->data_array['status_name'];
 	}
 
 	/**
-	 *	getCategoryID - the category_id of this task.
+	 * getCategoryID - the category_id of this task.
 	 *
-	 *	@return	int	the category_id.
+	 * @return	int	the category_id.
 	 */
 	function getCategoryID() {
 		return $this->data_array['category_id'];
 	}
 
 	/**
-	 *	getCategoryName - the category_name of this task.
+	 * getCategoryName - the category_name of this task.
 	 *
-	 *	@return	int	the category_name.
+	 * @return	int	the category_name.
 	 */
 	function getCategoryName() {
 		return $this->data_array['category_name'];
 	}
 
 	/**
-	 *	getLastModifiedDate - the last_modified_date of this task.
+	 * getLastModifiedDate - the last_modified_date of this task.
 	 *
-	 *	@return	int	the last_modified_date.
+	 * @return	int	the last_modified_date.
 	 */
 	function getLastModifiedDate() {
 		return $this->data_array['last_modified_date'];
 	}
 
 	/**
-	 *	setExternalID - set a row in project_task_external_order which stores
-	 *	an id, for example an ID generated by MS Project, which needs to be restored later
+	 * setExternalID - set a row in project_task_external_order which stores
+	 * an id, for example an ID generated by MS Project, which needs to be restored later
+	 *
+	 * @param	int	$id	An external ID from another tool
 	 */
 	function setExternalID($id) {
 		$res = db_query_params ('UPDATE project_task_external_order SET external_id=$1
@@ -419,18 +421,18 @@ class ProjectTask extends Error {
 	}
 
 	/**
-	 *	getExternalID - get the ID that MS Project uses to sort tasks
+	 * getExternalID - get the ID that MS Project uses to sort tasks
 	 *
-	 *	@return	int	the id.
+	 * @return	int	the id.
 	 */
 	function getExternalID() {
 		return $this->data_array['external_id'];
 	}
 
 	/**
-	 *	getRelatedArtifacts - Return a result set of artifacts which are related to this task.
+	 * getRelatedArtifacts - Return a result set of artifacts which are related to this task.
 	 *
-	 *	@return resource	Database result set.
+	 * @return	resource	Database result set.
 	 */
 	function getRelatedArtifacts() {
 		if (!$this->relatedartifacts) {
@@ -448,10 +450,10 @@ class ProjectTask extends Error {
 	}
 
 	/**
-	 *	addRelatedArtifacts - take an array of artifact_id's and build relationships.
+	 * addRelatedArtifacts - take an array of artifact_id's and build relationships.
 	 *
-	 *	@param	array	$art_array An array of artifact_id's to be attached to this task.
-	 *	@return	boolean	success.
+	 * @param	array	$art_array	An array of artifact_id's to be attached to this task.
+	 * @return	boolean	success.
 	 */
 	function addRelatedArtifacts($art_array) {
 		if (!forge_check_perm ('pm', $this->ProjectGroup->getID(), 'manager')) {
@@ -479,10 +481,10 @@ class ProjectTask extends Error {
 	}
 
 	/**
-	 *	removeRelatedArtifacts - take an array of artifact_id's and delete relationships.
+	 * removeRelatedArtifacts - take an array of artifact_id's and delete relationships.
 	 *
-	 *	@param	array	$art_array An array of artifact_id's to be removed from this task.
-	 *	@return	boolean	success.
+	 * @param	array	$art_array	An array of artifact_id's to be removed from this task.
+	 * @return	boolean	success.
 	 */
 	function removeRelatedArtifacts($art_array) {
 		if (!forge_check_perm ('pm', $this->ProjectGroup->getID(), 'manager')) {
@@ -505,10 +507,10 @@ class ProjectTask extends Error {
 	}
 
 	/**
-	 *  delete - delete this tracker and all its related data.
+	 * delete - delete this tracker and all its related data.
 	 *
-	 *  @param  bool	$sure I'm Sure.
-	 *  @return bool true/false;
+	 * @param	bool	$sure	I'm Sure.
+	 * @return	bool	true/false;
 	 */
 	function delete($sure) {
 		if (!$sure) {
@@ -576,10 +578,10 @@ class ProjectTask extends Error {
 	}
 
 	/**
-	 *	getOtherTasks - Return a result set of tasks in this subproject that do not equal
-	 *	the current task_id.
+	 * getOtherTasks - Return a result set of tasks in this subproject that do not equal
+	 * the current task_id.
 	 *
-	 *	@return resource	Database result set.
+	 * @return	resource	Database result set.
 	 */
 	function getOtherTasks () {
 		//
@@ -603,9 +605,9 @@ class ProjectTask extends Error {
 	}
 
 	/**
-	 *  getHistory - returns a result set of audit trail for this ProjectTask.
+	 * getHistory - returns a result set of audit trail for this ProjectTask.
 	 *
-	 *  @return resource	database result set.
+	 * @return	resource	database result set.
 	 */
 	function getHistory() {
 		return db_query_params ('SELECT *
@@ -616,10 +618,10 @@ class ProjectTask extends Error {
 	}
 
 	/**
-	 *  getMessages - get the list of messages attached to this ProjectTask.
+	 * getMessages - get the list of messages attached to this ProjectTask.
 	 *
-	 * @param bool $asc
-	 * @return resource	database result set.
+	 * @param	bool		$asc
+	 * @return	resource	database result set.
 	 */
 	function getMessages($asc=false) {
 		return db_query_params ('SELECT *
@@ -632,8 +634,8 @@ class ProjectTask extends Error {
 	/**
 	 * addMessage - Handle the addition of a followup message to this task.
 	 *
-	 * @param	string  $message    The message.
-	 * @param	array	$importData Specific data for import (user id and time)
+	 * @param	string	$message	The message.
+	 * @param	array	$importData	Specific data for import (user id and time)
 	 * @return	boolean	success.
 	 */
 	function addMessage($message, $importData = array()) {
@@ -677,10 +679,10 @@ class ProjectTask extends Error {
 	/**
 	 * addHistory - Handle the insertion of history for these parameters.
 	 *
-	 * @param	string  $field_name The field name.
-	 * @param	string  $old_value  The old value.
-	 * @param	array	$importData Specific data for import (user id and time)
-	 * @return bool
+	 * @param	string	$field_name	The field name.
+	 * @param	string	$old_value	The old value.
+	 * @param	array	$importData	Specific data for import (user id and time)
+	 * @return	bool
 	 */
 	function addHistory ($field_name,$old_value,$importData=array()) {
 		//Uses importData
@@ -711,8 +713,8 @@ class ProjectTask extends Error {
 	/**
 	 * checkCircular - recursive function calls itself to look at all tasks you are dependent on.
 	 *
-	 * @param	int	$depend_on_id The project_task_id you are dependent on.
-	 * @param	int	$original_id  The project_task_id you are checking circular dependencies for.
+	 * @param	int	$depend_on_id	The project_task_id you are dependent on.
+	 * @param	int	$original_id	The project_task_id you are checking circular dependencies for.
 	 * @return	boolean	success.
 	 */
 	function checkCircular($depend_on_id, $original_id) {
@@ -743,7 +745,7 @@ class ProjectTask extends Error {
 	/**
 	 * setDependentOn - takes an array of project_task_id's and builds dependencies.
 	 *
-	 * @param	array	$arr_ The array of project_task_id's.
+	 * @param	array	$arr_	The array of project_task_id's.
 	 * @return	boolean	success.
 	 */
 	function setDependentOn(&$arr_) {
@@ -800,10 +802,12 @@ class ProjectTask extends Error {
 	}
 
 	/**
-	 *	convertDependentOn - converts a regular array of dependencies, such
-	 *	as from a multiple-select-box to an associative array with default
-	 *	link types. Should be called from web code as part of the create/update calls.
-	 *  Here we are converting an array like array(1,5,9,77) to array(1=>SS,5=>SF,9=>FS,77=>SS)
+	 * convertDependentOn - converts a regular array of dependencies, such
+	 * as from a multiple-select-box to an associative array with default
+	 * link types. Should be called from web code as part of the create/update calls.
+	 * Here we are converting an array like array(1,5,9,77) to array(1=>SS,5=>SF,9=>FS,77=>SS)
+	 *
+	 * @param	array	$arr
 	 */
 	function &convertDependentOn($arr) {
 		$deps = $this->getDependentOn();
@@ -820,10 +824,10 @@ class ProjectTask extends Error {
 	}
 
 	/**
-	 *	getDependentOn - get an array of project_task_id's that you are dependent on.
+	 * getDependentOn - get an array of project_task_id's that you are dependent on.
 	 *
-	 *	@return	array	The array of project_task_id's in this format:
-	 *  array($id=>$link_type,id2=>link_type2).
+	 * @return	array	The array of project_task_id's in this format:
+	 *			array($id=>$link_type,id2=>link_type2).
 	 */
 	function getDependentOn() {
 		if (!$this->getID()) {
@@ -889,9 +893,9 @@ class ProjectTask extends Error {
 	}
 
 	/**
-	 *	getAssignedTo - get an array of user_id's that you are assigned to.
+	 * getAssignedTo - get an array of user_id's that you are assigned to.
 	 *
-	 *	@return	array	The array of user_id's.
+	 * @return	array	The array of user_id's.
 	 */
 	function getAssignedTo() {
 		if (!$this->getID()) {
@@ -905,23 +909,23 @@ class ProjectTask extends Error {
 	}
 
 	/**
-	 *	update - update this ProjectTask in the database.
+	 * update - update this ProjectTask in the database.
 	 *
-	 *	@param	string	$summary				The summary of this task.
-	 *	@param	string	$details				The detailed description of this task.
-	 *	@param	int		$priority				The Priority of this task.
-	 *	@param	int		$hours					The Hours estimated to complete this task.
-	 *	@param	int		$start_date				The (Unix) start date of this task.
-	 *	@param	int		$end_date				The (Unix) end date of this task.
-	 *	@param	int		$status_id				The status_id of this task.
-	 *	@param	int		$category_id			The category_id of this task.
-	 *	@param	int		$percent_complete		The percentage of completion in integer format of this task.
-	 *	@param	array	$assigned_arr			An array of user_id's that are assigned this task.
-	 *	@param	array	$depend_arr				An array of project_task_id's that this task depends on.
-	 *	@param	int		$new_group_project_id	The GroupProjectID of a new subproject that you want to move this Task to.
-	 *	@param	int		$duration				The duration of the task in days.
-	 *	@param	int		$parent_id				The id of the parent task, if any.
-	 *	@return	bool	success.
+	 * @param	string	$summary		The summary of this task.
+	 * @param	string	$details		The detailed description of this task.
+	 * @param	int	$priority		The Priority of this task.
+	 * @param	int	$hours			The Hours estimated to complete this task.
+	 * @param	int	$start_date		The (Unix) start date of this task.
+	 * @param	int	$end_date		The (Unix) end date of this task.
+	 * @param	int	$status_id		The status_id of this task.
+	 * @param	int	$category_id		The category_id of this task.
+	 * @param	int	$percent_complete	The percentage of completion in integer format of this task.
+	 * @param	array	$assigned_arr		An array of user_id's that are assigned this task.
+	 * @param	array	$depend_arr		An array of project_task_id's that this task depends on.
+	 * @param	int	$new_group_project_id	The GroupProjectID of a new subproject that you want to move this Task to.
+	 * @param	int	$duration		The duration of the task in days.
+	 * @param	int	$parent_id		The id of the parent task, if any.
+	 * @return	bool	success.
 	 */
 	function update($summary, $details, $priority, $hours, $start_date, $end_date,
 		$status_id, $category_id, $percent_complete, &$assigned_arr, &$depend_arr,
@@ -1144,11 +1148,11 @@ class ProjectTask extends Error {
 	}
 
 	/**
-	 *	sendNotice - contains the logic for sending email updates.
+	 * sendNotice - contains the logic for sending email updates.
 	 *
-	 *	@param	bool	$first
-	 *	@param	array	$arrChangedAndInNotice
-	 *	@return	bool	success.
+	 * @param	bool	$first
+	 * @param	array	$arrChangedAndInNotice
+	 * @return	bool	success.
 	 */
 	function sendNotice($first=false, $arrChangedAndInNotice=array()) {
 		global $send_task_email;
