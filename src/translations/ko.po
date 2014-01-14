@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-14 12:06+0100\n"
+"POT-Creation-Date: 2014-01-14 12:26+0100\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -9951,7 +9951,8 @@ msgstr "%1$s의 게시판"
 
 #: plugins/globalsearch/www/index.php:166 www/admin/grouplist.php:67
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:45
-#: www/stats/site_stats_utils.php:227 www/top/toplist.php:53
+#: www/stats/site_stats_utils.php:227 www/top/mostactive.php:52
+#: www/top/toplist.php:53
 #, fuzzy
 msgid "Project Name"
 msgstr "새 프로젝트 이름"
@@ -22535,11 +22536,6 @@ msgstr "매일 갱신됩니다."
 #: www/top/mostactive.php:50 www/top/toplist.php:52 www/top/topusers.php:59
 msgid "View Other Top Categories"
 msgstr "다른 통계 상황 보기"
-
-#: www/top/mostactive.php:52
-#, fuzzy
-msgid "Project name"
-msgstr "새 프로젝트 이름"
 
 #: www/top/mostactive.php:52
 #, fuzzy

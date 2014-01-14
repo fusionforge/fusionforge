@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-14 12:06+0100\n"
+"POT-Creation-Date: 2014-01-14 12:26+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -9815,7 +9815,8 @@ msgstr "Résultats de la recherche de « %s »"
 
 #: plugins/globalsearch/www/index.php:166 www/admin/grouplist.php:67
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:45
-#: www/stats/site_stats_utils.php:227 www/top/toplist.php:53
+#: www/stats/site_stats_utils.php:227 www/top/mostactive.php:52
+#: www/top/toplist.php:53
 msgid "Project Name"
 msgstr "Nom du projet"
 
@@ -22583,10 +22584,6 @@ msgstr "Mis à jour quotidiennement"
 #: www/top/mostactive.php:50 www/top/toplist.php:52 www/top/topusers.php:59
 msgid "View Other Top Categories"
 msgstr "Voir les autres catégories"
-
-#: www/top/mostactive.php:52
-msgid "Project name"
-msgstr "Nom du projet"
 
 #: www/top/mostactive.php:52
 msgid "Percentile"

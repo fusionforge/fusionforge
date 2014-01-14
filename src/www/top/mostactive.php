@@ -49,7 +49,7 @@ print '<p><em>('._('Updated Daily').')</em></p>
 
 <p>'.util_make_link ('/top/','['._('View Other Top Categories').']').'</p>';
 
-$arr=array(_('Rank'),_('Project name'),_('Percentile'));
+$arr=array(_('Rank'),_('Project Name'),_('Percentile'));
 
 echo $HTML->listTableTop($arr);
 

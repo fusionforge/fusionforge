@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-14 12:24+0100\n"
+"POT-Creation-Date: 2014-01-14 12:29+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -9397,7 +9397,8 @@ msgstr ""
 
 #: plugins/globalsearch/www/index.php:166 www/admin/grouplist.php:67
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:45
-#: www/stats/site_stats_utils.php:227 www/top/toplist.php:53
+#: www/stats/site_stats_utils.php:227 www/top/mostactive.php:52
+#: www/top/toplist.php:53
 msgid "Project Name"
 msgstr ""
 
@@ -21295,10 +21296,6 @@ msgstr ""
 
 #: www/top/mostactive.php:50 www/top/toplist.php:52 www/top/topusers.php:59
 msgid "View Other Top Categories"
-msgstr ""
-
-#: www/top/mostactive.php:52
-msgid "Project name"
 msgstr ""
 
 #: www/top/mostactive.php:52
