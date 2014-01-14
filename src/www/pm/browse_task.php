@@ -6,6 +6,7 @@
  * Copyright 2002 GForge, LLC, Tim Perdue
  * Copyright 2010, FusionForge Team
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -297,14 +298,14 @@ if ($rows < 1) {
 	*/
 	echo '<tr><td colspan="2">';
 	if ($offset > 0) {
-		echo util_make_link ('/pm/task.php?func=browse&amp;group_project_id='.$group_project_id.'&amp;group_id='.$group_id.'&amp;offset='.($offset-50),'<strong>← '._('previous').'</strong>');
+		echo util_make_link ('/pm/task.php?func=browse&amp;group_project_id='.$group_project_id.'&amp;group_id='.$group_id.'&amp;offset='.($offset-$paging),'<strong>← '._('previous').'</strong>');
 	} else {
 		echo '&nbsp;';
 	}
 	echo '</td><td>&nbsp;</td><td colspan="2">';
 
-	if ($rows==50) {
-		echo util_make_link ('/pm/task.php?func=browse&amp;group_project_id='.$group_project_id.'&amp;group_id='.$group_id.'&amp;offset='.($offset+50),'<strong>'._('next').' →</strong></a>');
+	if ($pg->getTotalCount() > $offset + $paging) {
+		echo util_make_link ('/pm/task.php?func=browse&amp;group_project_id='.$group_project_id.'&amp;group_id='.$group_id.'&amp;offset='.($offset+$paging),'<strong>'._('next').' →</strong></a>');
 	} else {
 		echo '&nbsp;';
 	}
