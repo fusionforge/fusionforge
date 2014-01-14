@@ -27,6 +27,10 @@
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'frs/FRSRelease.class.php';
 
+/**
+ * @param Group $Group
+ * @return array
+ */
 function get_frs_packages($Group) {
 	$ps = array();
 	$res = db_query_params ('SELECT * FROM frs_package WHERE group_id=$1',
@@ -83,16 +87,16 @@ class FRSPackage extends Error {
 	var $Group;
 
 	/**
-	* Constructor.
-	*
-	* @param	$Group
-	* @param	bool	$package_id
-	* @param	bool	$arr
-	* @internal	param	\The $object Group object to which this FRSPackage is associated.
-	* @internal	param	\The $int package_id.
-	* @internal	param	\The $array associative array of data.
-	* @return	\FRSPackage
-	*/
+	 * Constructor.
+	 *
+	 * @param	$Group
+	 * @param	bool	$package_id
+	 * @param	bool	$arr
+	 * @internal	param	\The $object Group object to which this FRSPackage is associated.
+	 * @internal	param	\The $int package_id.
+	 * @internal	param	\The $array associative array of data.
+	 * @return	\FRSPackage
+	 */
 	function __construct(&$Group, $package_id = false, $arr = false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
@@ -125,14 +129,14 @@ class FRSPackage extends Error {
 	}
 
 	/**
-	* create - create a new FRSPackage in the database.
-	*
-	* @param	$name
-	* @param	int	$is_public
-	* @internal	param	\The $string name of this package.
-	* @internal	param	\Whether $boolean it's public or not. 1=public 0=private.
-	* @return	boolean	success.
-	*/
+	 * create - create a new FRSPackage in the database.
+	 *
+	 * @param	$name
+	 * @param	int	$is_public
+	 * @internal	param	\The $string name of this package.
+	 * @internal	param	\Whether $boolean it's public or not. 1=public 0=private.
+	 * @return	boolean	success.
+	 */
 	function create($name, $is_public = 1) {
 
 		if (strlen($name) < 3) {
