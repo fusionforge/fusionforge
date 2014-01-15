@@ -210,5 +210,3 @@ $ok = `newaliases`;
 $err .= $ok;
 
 cron_entry(17,$err);
-
-?>
