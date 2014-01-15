@@ -50,16 +50,16 @@ class Survey extends Error {
 	var $Group;
 
 	/**
-	* Constructor.
-	*
-	* @param	$Group
-	* @param	bool	$survey_id
-	* @param	bool	$arr
-	* @internal	param	\The $object Group object to which this survey is associated.
-	* @internal	param	\The $int survey_id.
-	* @internal	param	\The $array associative array of data.
-	* @return	\Survey
-	*/
+	 * Constructor.
+	 *
+	 * @param	$Group
+	 * @param	bool	$survey_id
+	 * @param	bool	$arr
+	 * @internal	param	\The $object Group object to which this survey is associated.
+	 * @internal	param	\The $int survey_id.
+	 * @internal	param	\The $array associative array of data.
+	 * @return	\Survey
+	 */
 	function __construct(&$Group, $survey_id = false, $arr = false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
@@ -89,21 +89,21 @@ class Survey extends Error {
 	}
 
 	/**
-	* create - use this function to create a survey
-	*
-	* @param	$survey_title
-	* @param	$add_questions
-	* @param	int		$is_active
-	* @param	int		$is_result_public
-	* @param	Allow|int	$double_vote
-	* @internal	param		\The $string survey title
-	* @internal	param		array	$int The question numbers to be added
-	* @internal	param		$is_active 1: Active, 0: Inactive
-	* For future options
-	* @internal	param		$is_result_public 0: Admins Only, 1: Group Members, 2: FusionForge user, 3:voted user 4:Every body
-	* @internal	param		\Allow $double_vote double vote if it is 1
-	* @return	boolean		success.
-	*/
+	 * create - use this function to create a survey
+	 *
+	 * @param	$survey_title
+	 * @param	$add_questions
+	 * @param	int		$is_active
+	 * @param	int		$is_result_public
+	 * @param	Allow|int	$double_vote
+	 * @internal	param		\The $string survey title
+	 * @internal	param		array	$int The question numbers to be added
+	 * @internal	param		$is_active 1: Active, 0: Inactive
+	 * For future options
+	 * @internal	param		$is_result_public 0: Admins Only, 1: Group Members, 2: FusionForge user, 3:voted user 4:Every body
+	 * @internal	param		\Allow $double_vote double vote if it is 1
+	 * @return	boolean		success.
+	 */
 	function create($survey_title, $add_questions, $is_active = 0, $is_public = 1, $is_result_public = 0, $double_vote = 0) {
 		if (!$survey_title) {
 			$this->setError(_('Update Failed: Survey Title Required'));
@@ -136,22 +136,22 @@ class Survey extends Error {
 	}
 
 	/**
-	* update - use this function to update a survey
-	*
-	* @param	$survey_title
-	* @param	$add_questions
-	* @param	$del_questions
-	* @param	int		$is_active
-	* @param	int		$is_result_public
-	* @param	Allow|int	$double_vote
-	* @internal	param		\The $string survey title
-	* @internal	param		array $int The question numbers to be added
-	* @internal	param		array $int The question numbers to be deleted
-	* @internal	param		$is_active 1: Active, 0: Inactive
-	* @internal	param		$is_result_public 0: Admins Only, 1: Group Members, 2: FusionForge user, 3:voted user 4:Every body
-	* @internal	param		\Allow $double_vote double vote if it is 1
-	* @return	boolean		success.
-	*/
+	 * update - use this function to update a survey
+	 *
+	 * @param	$survey_title
+	 * @param	$add_questions
+	 * @param	$del_questions
+	 * @param	int		$is_active
+	 * @param	int		$is_result_public
+	 * @param	Allow|int	$double_vote
+	 * @internal	param		\The $string survey title
+	 * @internal	param		array $int The question numbers to be added
+	 * @internal	param		array $int The question numbers to be deleted
+	 * @internal	param		$is_active 1: Active, 0: Inactive
+	 * @internal	param		$is_result_public 0: Admins Only, 1: Group Members, 2: FusionForge user, 3:voted user 4:Every body
+	 * @internal	param		\Allow $double_vote double vote if it is 1
+	 * @return	boolean		success.
+	 */
 	function update($survey_title, &$add_questions, &$del_questions, $is_active = 0, $is_public = 1, $is_result_public = 0, $double_vote = 0) {
 		if (!$survey_title) {
 			$this->setError(_('Update Failed: Survey Title Required'));
@@ -303,7 +303,7 @@ class Survey extends Error {
 		return $this->data_array['survey_title'];
 	}
 
-        /**
+	/**
 	 * getQuestionString - Get the question string
 	 *
 	 * @return	string	the question
@@ -312,7 +312,7 @@ class Survey extends Error {
 		return $this->data_array['survey_questions'];
 	}
 
-        /**
+	/**
 	 * getNumberOfQuestion - Get the number of questions
 	 *
 	 * @return	int	the number questions
@@ -321,7 +321,7 @@ class Survey extends Error {
 		return count($this->getQuestionArray());
 	}
 
-        /**
+	/**
 	 * getNumberOfVotes - Get the number of votes
 	 *
 	 * @return	int	the number votes
@@ -442,7 +442,7 @@ class Survey extends Error {
 	 * private question string deal methods
 	 * TODO: Add a joint table for surveys and survey_questions.
 	 *       Deal with DBMS not comma separated string
-         ***************************************************************/
+     ***************************************************************/
 
 	/**
 	 * _fillSurveyQuestions - Get all Survey Questions using SurveyQuestionFactory
