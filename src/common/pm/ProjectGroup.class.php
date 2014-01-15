@@ -136,7 +136,7 @@ class ProjectGroup extends Error {
 	 * create - create a new ProjectGroup in the database.
 	 *
 	 * @param	string	$project_name		The project name.
-	 * @param	string	$description		The project description.	 
+	 * @param	string	$description		The project description.
 	 * @param	string	$send_all_posts_to	The email address to send new notifications to.
 	 * @return	bool	success.
 	 */
