@@ -5,6 +5,7 @@
  * Copyright 1999-2000, Tim Perdue/Sourceforge
  * Copyright 2002, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
+ * Copyright 2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -234,6 +235,19 @@ class ProjectGroup extends Error {
 	 */
 	function getTotalCount() {
 		return $this->data_array['count'];
+	}
+
+	/**
+	 * getCount - get the number of tasks item in this pm type
+	 *
+	 * @param	int	$status	the status id
+	 * @return	int	the count
+	 */
+	function getCount($status) {
+		$res = db_query_params('SELECT count(project_task_id) FROM project_task WHERE group_project_id = $1 AND status_id = $2',
+					array ($this->getID(), $status));
+		$arr = db_fetch_array($res);
+		return $arr[0];
 	}
 
 	/**
