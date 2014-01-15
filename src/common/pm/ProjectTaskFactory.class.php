@@ -31,14 +31,14 @@ class ProjectTaskFactory extends Error {
 	/**
 	 * The ProjectGroup object.
 	 *
-	 * @var	 object  $ProjectGroup.
+	 * @var	object	$ProjectGroup.
 	 */
 	var $ProjectGroup;
 
 	/**
 	 * The project_tasks array.
 	 *
-	 * @var  array  project_tasks.
+	 * @var	array	project_tasks.
 	 */
 	var $project_tasks;
 	var $order;

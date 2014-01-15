@@ -66,14 +66,14 @@ class ProjectTask extends Error {
 	/**
 	 * Associative array of data from db.
 	 *
-	 * @var	 array	$data_array.
+	 * @var	array	$data_array.
 	 */
 	var $data_array;
 
 	/**
 	 * The ProjectGroup object.
 	 *
-	 * @var	 ProjectGroup	$ProjectGroup.
+	 * @var	ProjectGroup	$ProjectGroup.
 	 */
 	var $ProjectGroup;
 	var $dependon;
