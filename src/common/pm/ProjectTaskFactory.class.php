@@ -5,6 +5,7 @@
  * Copyright 1999-2000, Tim Perdue/Sourceforge
  * Copyright 2002, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
+ * Copyright 2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -154,7 +155,7 @@ class ProjectTaskFactory extends Error {
 		if ($this->project_tasks) {
 			return $this->project_tasks;
 		}
-
+		$qpa = db_construct_qpa();
 		if ($this->order=='priority') {
 			$order = 'ORDER BY priority DESC' ;
 		} else {
@@ -165,32 +166,32 @@ class ProjectTaskFactory extends Error {
 			$tat = $this->assigned_to ;
 			if (! is_array ($tat))
 				$tat = array ($tat) ;
-
-			$result = db_query_params ('SELECT project_task_vw.*, project_task_external_order.external_id
-			FROM project_task_vw natural left join project_task_external_order, project_assigned_to
-			WHERE project_task_vw.project_task_id=project_assigned_to.project_task_id
-                          AND project_task_vw.group_project_id = $1
-                          AND project_assigned_to.assigned_to_id = ANY ($2)' . $order,
-						   array ($this->ProjectGroup->getID(),
-							  db_int_array_to_any_clause ($tat)),
-						   $this->max_rows,
-						   $this->offset) ;
+			$qpa = db_construct_qpa($qpa, 'SELECT project_task_vw.*, project_task_external_order.external_id
+							FROM project_task_vw natural left join project_task_external_order, project_assigned_to
+							WHERE project_task_vw.project_task_id = project_assigned_to.project_task_id ');
+			$qpa = db_construct_qpa($qpa, 'AND project_task_vw.group_project_id = $1 AND project_assigned_to.assigned_to_id = ANY ($2) ',
+							array ($this->ProjectGroup->getID(), db_int_array_to_any_clause ($tat)));
 		} else {
-			$result = db_query_params ('SELECT project_task_vw.*, project_task_external_order.external_id
-			FROM project_task_vw natural left join project_task_external_order
-			WHERE project_task_vw.group_project_id = $1' . $order,
-						   array ($this->ProjectGroup->getID()),
-						   $this->max_rows,
-						   $this->offset) ;
+			$qpa = db_construct_qpa($qpa, 'SELECT project_task_vw.*, project_task_external_order.external_id
+							FROM project_task_vw natural left join project_task_external_order ');
+			$qpa = db_construct_qpa($qpa, 'WHERE project_task_vw.group_project_id = $1 ',
+							array ($this->ProjectGroup->getID()));
 		}
 
-		$rows = db_numrows($result);
-		$this->fetched_rows=$rows;
+		if ($this->status != 100) {
+			$qpa = db_construct_qpa($qpa, ' AND project_task_vw.status_id = $1 ', array($this->status));
+		}
+
+		$qpa = db_construct_qpa($qpa, $order);
+		$result = db_query_qpa($qpa, $this->max_rows, $this->offset);
+
 		if (db_error()) {
 			$this->setError('Database Error: '.db_error());
 			return false;
 		}
 
+		$rows = db_numrows($result);
+		$this->fetched_rows = $rows;
 		$this->project_tasks = array();
 		while ($arr = db_fetch_array($result)) {
 			if ($this->status && ($this->status != 100)) {
