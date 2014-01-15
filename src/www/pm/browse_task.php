@@ -306,10 +306,6 @@ if ($rows < 1) {
 
 	// currently pm knows only 4 status_id : 100, 1, 2, 3 (any, open, closed, deleted)
 	switch ($_status) {
-		case 100: {
-			$totalTasks = $pg->getTotalCount();
-			break;
-		}
 		case 1: {
 			$totalTasks = $pg->getOpenCount();
 			break;
@@ -317,6 +313,10 @@ if ($rows < 1) {
 		case 2:
 		case 3: {
 			$totalTasks = $pg->getCount($_status);
+			break;
+		}
+		default: {
+			$totalTasks = $pg->getTotalCount();
 			break;
 		}
 	}
