@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-14 17:45+0100\n"
+"POT-Creation-Date: 2014-01-15 11:02+0100\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -229,7 +229,7 @@ msgstr ""
 #: common/forum/ForumHTML.class.php:523 common/forum/ForumHTML.class.php:527
 #: common/forum/ForumHTML.class.php:587 common/forum/ForumHTML.class.php:590
 #: common/forum/ForumMessage.class.php:666 common/frs/FRSFile.class.php:187
-#: common/frs/FRSFile.class.php:440 common/frs/FRSPackage.class.php:291
+#: common/frs/FRSFile.class.php:440 common/frs/FRSPackage.class.php:295
 #: common/include/Error.class.php:206 common/include/exit.php:80
 #: common/include/Group.class.php:2634 common/include/Group.class.php:2635
 #: common/include/Group.class.php:2636 common/include/Group.class.php:2688
@@ -490,7 +490,7 @@ msgstr "Wijziging doorgevoerd"
 #: common/docman/DocumentManager.class.php:56
 #: common/docman/include/DocumentGroupHTML.class.php:46
 #: common/forum/Forum.class.php:108 common/forum/ForumFactory.class.php:52
-#: common/frs/FRSFile.class.php:394 common/frs/FRSPackage.class.php:99
+#: common/frs/FRSFile.class.php:394 common/frs/FRSPackage.class.php:103
 #: common/include/GroupJoinRequest.class.php:65
 #: common/include/Permission.class.php:102
 #: common/mail/MailingList.class.php:65
@@ -510,7 +510,7 @@ msgstr "Geen geldig groep object"
 
 #: common/docman/Document.class.php:82
 #: common/docman/DocumentGroup.class.php:76 common/forum/Forum.class.php:139
-#: common/frs/FRSPackage.class.php:116 common/include/Error.class.php:184
+#: common/frs/FRSPackage.class.php:120 common/include/Error.class.php:184
 #: common/mail/MailingList.class.php:83 common/survey/Survey.class.php:83
 #: common/survey/SurveyQuestion.class.php:74
 #: plugins/mailman/include/MailmanList.class.php:102
@@ -564,7 +564,7 @@ msgstr "Kan geen monitor toevoegen"
 
 #: common/docman/Document.class.php:611
 #: common/docman/DocumentGroup.class.php:431 common/forum/Forum.class.php:457
-#: common/frs/FRSPackage.class.php:291
+#: common/frs/FRSPackage.class.php:295
 msgid "Unable To Add Monitor"
 msgstr "Kan geen monitor toevoegen"
 
@@ -1161,7 +1161,7 @@ msgstr "Groep waar document in thuis hoort"
 #: common/tracker/actions/mod-limited.php:128
 #: common/tracker/actions/mod.php:155 common/tracker/actions/query.php:340
 #: common/tracker/Artifact.class.php:937
-#: common/tracker/views/form-customizelist.php:39 www/pm/browse_task.php:380
+#: common/tracker/views/form-customizelist.php:39 www/pm/browse_task.php:381
 #: www/project/admin/database.php:204
 msgid "State"
 msgstr "Status"
@@ -1198,7 +1198,7 @@ msgid "Edit document dialog box"
 msgstr ""
 
 #: common/docman/views/listfile.php:169 www/export/rssAboTask.php:142
-#: www/pm/browse_task.php:384 www/pm/mod_task.php:66
+#: www/pm/browse_task.php:385 www/pm/mod_task.php:66
 msgid "Subproject"
 msgstr "Subproject"
 
@@ -1324,7 +1324,7 @@ msgstr "Achternaam:"
 #: www/frs/admin/index.php:156 www/my/dashboard.php:73
 #: www/news/admin/index.php:129 www/people/editjob.php:74
 #: www/people/editjob.php:166 www/people/viewjob.php:71
-#: www/pm/browse_task.php:158 www/pm/detail_task.php:153
+#: www/pm/browse_task.php:159 www/pm/detail_task.php:153
 #: www/pm/ganttpage.php:182 www/pm/include/ProjectTaskHTML.class.php:109
 #: www/pm/mod_task.php:202 www/pm/mod_task.php:217
 #: www/reporting/usersummary.php:105
@@ -1398,7 +1398,7 @@ msgstr ""
 #: common/docman/views/listtrashfile.php:170
 #: common/docman/views/pendingfiles.php:101
 #: common/docman/views/pendingfiles.php:103
-#: common/forum/ForumHTML.class.php:219 common/pm/ProjectTask.class.php:1211
+#: common/forum/ForumHTML.class.php:219 common/pm/ProjectTask.class.php:1215
 #: common/tracker/actions/browse.php:607 common/tracker/actions/browse.php:618
 #: common/tracker/actions/browse.php:638 common/tracker/actions/detail.php:70
 #: common/tracker/actions/downloadcsv.php:84
@@ -1433,8 +1433,8 @@ msgstr ""
 #: www/forum/myforums.php:152 www/frs/index.php:175 www/frs/index.php:234
 #: www/include/html.php:1075 www/news/news_utils.php:149
 #: www/news/news_utils.php:269 www/people/people_utils.php:423
-#: www/people/viewjob.php:77 www/pm/browse_task.php:262
-#: www/pm/browse_task.php:272 www/pm/include/ProjectTaskHTML.class.php:121
+#: www/people/viewjob.php:77 www/pm/browse_task.php:263
+#: www/pm/browse_task.php:273 www/pm/include/ProjectTaskHTML.class.php:121
 #: www/pm/include/ProjectTaskHTML.class.php:174
 #: www/pm/include/ProjectTaskHTML.class.php:235 www/pm/mod_task.php:312
 #: www/project/admin/project_admin_utils.php:180
@@ -1681,7 +1681,7 @@ msgstr ""
 #: www/activity/index.php:180 www/frs/reporting/downloads.php:109
 #: www/people/editprofile.php:278 www/people/skills_utils.php:50
 #: www/people/skills_utils.php:154 www/pm/add_task.php:95
-#: www/pm/browse_task.php:125 www/pm/browse_task.php:230
+#: www/pm/browse_task.php:126 www/pm/browse_task.php:231
 #: www/pm/detail_task.php:86 www/pm/ganttpage.php:166 www/pm/mod_task.php:146
 #: www/project/stats/index.php:107 www/reporting/groupadded.php:66
 #: www/reporting/groupcum.php:66 www/reporting/projectact.php:72
@@ -1941,7 +1941,7 @@ msgstr ""
 #: www/activity/index.php:181 www/frs/reporting/downloads.php:111
 #: www/people/editprofile.php:279 www/people/skills_utils.php:51
 #: www/people/skills_utils.php:155 www/pm/add_task.php:110
-#: www/pm/browse_task.php:126 www/pm/browse_task.php:232
+#: www/pm/browse_task.php:127 www/pm/browse_task.php:233
 #: www/pm/detail_task.php:90 www/pm/ganttpage.php:167 www/pm/mod_task.php:160
 #: www/project/stats/index.php:108 www/reporting/groupadded.php:67
 #: www/reporting/groupcum.php:67 www/reporting/projectact.php:73
@@ -2420,7 +2420,7 @@ msgid "Invalid forum group identifier."
 msgstr "Ongeldige gebruiker"
 
 #: common/forum/Forum.class.php:439 common/forum/Forum.class.php:474
-#: common/frs/FRSPackage.class.php:274 common/frs/FRSPackage.class.php:306
+#: common/frs/FRSPackage.class.php:278 common/frs/FRSPackage.class.php:310
 #: common/tracker/ArtifactType.class.php:527
 #, fuzzy
 msgid "You can only monitor if you are logged in."
@@ -2450,10 +2450,10 @@ msgstr "Je kunt je positie alleen opslaan als je bent ingelogd."
 msgid "Update failed"
 msgstr "Wijzigen mislukt"
 
-#: common/forum/Forum.class.php:621 common/frs/FRSPackage.class.php:466
+#: common/forum/Forum.class.php:621 common/frs/FRSPackage.class.php:470
 #: common/frs/FRSRelease.class.php:354 common/include/Group.class.php:1617
 #: common/mail/MailingList.class.php:398 common/pm/ProjectGroup.class.php:362
-#: common/pm/ProjectTask.class.php:515 common/tracker/Artifact.class.php:505
+#: common/pm/ProjectTask.class.php:517 common/tracker/Artifact.class.php:505
 #: common/tracker/ArtifactExtraField.class.php:431
 #: common/tracker/ArtifactType.class.php:796
 msgid "Please tick all checkboxes."
@@ -2505,7 +2505,7 @@ msgstr "Gepost door"
 #: plugins/mantisbt/view/editIssue.php:213
 #: plugins/mantisbt/view/viewIssue.php:108
 #: plugins/mantisbt/view/viewIssues.php:363 www/export/rssAboTask.php:143
-#: www/my/dashboard.php:67 www/my/diary.php:183 www/pm/browse_task.php:143
+#: www/my/dashboard.php:67 www/my/diary.php:183 www/pm/browse_task.php:144
 #: www/project/report/index.php:135
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:57
 #: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:48
@@ -2789,7 +2789,7 @@ msgstr "Fout bij toevoegen database"
 msgid "Invalid file_id"
 msgstr "Ongeldige file_id"
 
-#: common/frs/FRSFile.class.php:416 common/frs/FRSPackage.class.php:396
+#: common/frs/FRSFile.class.php:416 common/frs/FRSPackage.class.php:400
 #: common/frs/FRSRelease.class.php:438 common/include/Error.class.php:167
 #: common/mail/MailingList.class.php:265 common/pm/ProjectGroup.class.php:347
 #: www/admin/pending-news.php:76 www/admin/pending-news.php:86
@@ -2804,69 +2804,69 @@ msgstr "Fout bij bewerken:"
 msgid "Invalid type_id"
 msgstr "Ongeldige gebruiker"
 
-#: common/frs/FRSPackage.class.php:139 common/frs/FRSPackage.class.php:371
+#: common/frs/FRSPackage.class.php:143 common/frs/FRSPackage.class.php:375
 #: common/frs/FRSRelease.class.php:121 common/frs/FRSRelease.class.php:399
 msgid "FRSPackage Name Must Be At Least 3 Characters"
 msgstr "FRS packagenaam moet tenminste 3 tekens lang zijn"
 
-#: common/frs/FRSPackage.class.php:143
+#: common/frs/FRSPackage.class.php:147
 msgid "Package Name can only be alphanumeric"
 msgstr "Bundel naam moet volledig alfanumeriek zijn"
 
-#: common/frs/FRSPackage.class.php:154
+#: common/frs/FRSPackage.class.php:158
 #, fuzzy
 msgid "Error Adding Package: Name Already Exists"
 msgstr "De opgegeven gebruikersnaam bestaat al."
 
-#: common/frs/FRSPackage.class.php:165
+#: common/frs/FRSPackage.class.php:169
 #, fuzzy
 msgid "Error Adding Package: "
 msgstr "Fout bij toevoegen database"
 
-#: common/frs/FRSPackage.class.php:205
+#: common/frs/FRSPackage.class.php:209
 msgid "Invalid package_id"
 msgstr "Ongeldige package_id"
 
-#: common/frs/FRSPackage.class.php:323
+#: common/frs/FRSPackage.class.php:327
 #, fuzzy
 msgid "Error On querying monitor count: "
 msgstr "Fout bij aanmaken groep object"
 
-#: common/frs/FRSPackage.class.php:384
+#: common/frs/FRSPackage.class.php:388
 #, fuzzy
 msgid "Error Updating Package: Name Already Exists"
 msgstr "De opgegeven gebruikersnaam bestaat al."
 
-#: common/frs/FRSPackage.class.php:403
+#: common/frs/FRSPackage.class.php:407
 #, fuzzy
 msgid "Error Updating Package: Couldn't fetch data"
 msgstr "Fout bij het invoegen van een extra veld naam"
 
-#: common/frs/FRSPackage.class.php:413
+#: common/frs/FRSPackage.class.php:417
 #, fuzzy
 msgid "Error Updating Package: Directory Already Exists"
 msgstr "De opgegeven gebruikersnaam bestaat al."
 
-#: common/frs/FRSPackage.class.php:418
+#: common/frs/FRSPackage.class.php:422
 #, fuzzy
 msgid "Error Updating Package: Couldn't rename dir"
 msgstr "De opgegeven gebruikersnaam bestaat al."
 
-#: common/frs/FRSPackage.class.php:476
+#: common/frs/FRSPackage.class.php:480
 #, fuzzy
 msgid "Release Error: "
 msgstr "Opgeleverd door:"
 
-#: common/frs/FRSPackage.class.php:486
+#: common/frs/FRSPackage.class.php:490
 msgid "Package delete error: trying to delete root dir"
 msgstr ""
 
-#: common/frs/FRSPackage.class.php:515
+#: common/frs/FRSPackage.class.php:519
 #, fuzzy
 msgid "No valid max release id"
 msgstr "Ongeldige volledige naam"
 
-#: common/frs/FRSPackage.class.php:536
+#: common/frs/FRSPackage.class.php:540
 msgid "Cannot open the file archive."
 msgstr ""
 
@@ -3593,7 +3593,7 @@ msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr ""
 
 #: common/include/GroupJoinRequest.class.php:104
-#: common/pm/ProjectTask.class.php:152 common/pm/ProjectTask.class.php:949
+#: common/pm/ProjectTask.class.php:152 common/pm/ProjectTask.class.php:953
 msgid "Must include "
 msgstr ""
 
@@ -4770,7 +4770,7 @@ msgstr "Unix groepsnaam:"
 msgid "%s does not use the Project Management tool"
 msgstr ""
 
-#: common/pm/ProjectTask.class.php:144 common/pm/ProjectTask.class.php:941
+#: common/pm/ProjectTask.class.php:144 common/pm/ProjectTask.class.php:945
 #, fuzzy
 msgid "summary"
 msgstr "Samenvatting"
@@ -4780,27 +4780,27 @@ msgstr "Samenvatting"
 msgid "details"
 msgstr "Detail"
 
-#: common/pm/ProjectTask.class.php:146 common/pm/ProjectTask.class.php:942
+#: common/pm/ProjectTask.class.php:146 common/pm/ProjectTask.class.php:946
 #, fuzzy
 msgid "priority"
 msgstr "Prioriteit"
 
-#: common/pm/ProjectTask.class.php:147 common/pm/ProjectTask.class.php:943
+#: common/pm/ProjectTask.class.php:147 common/pm/ProjectTask.class.php:947
 #, fuzzy
 msgid "hours"
 msgstr "Uren"
 
-#: common/pm/ProjectTask.class.php:148 common/pm/ProjectTask.class.php:944
+#: common/pm/ProjectTask.class.php:148 common/pm/ProjectTask.class.php:948
 #, fuzzy
 msgid "start date"
 msgstr "Startdatum"
 
-#: common/pm/ProjectTask.class.php:149 common/pm/ProjectTask.class.php:945
+#: common/pm/ProjectTask.class.php:149 common/pm/ProjectTask.class.php:949
 #, fuzzy
 msgid "end date"
 msgstr "Datum toevoegen"
 
-#: common/pm/ProjectTask.class.php:150 common/pm/ProjectTask.class.php:947
+#: common/pm/ProjectTask.class.php:150 common/pm/ProjectTask.class.php:951
 #: www/pm/ganttpage.php:249
 #, fuzzy
 msgid "category"
@@ -4811,12 +4811,12 @@ msgstr "Categorie"
 msgid "Invalid Task ID"
 msgstr "Ongeldig ID"
 
-#: common/pm/ProjectTask.class.php:946
+#: common/pm/ProjectTask.class.php:950
 #, fuzzy
 msgid "status"
 msgstr "Statistieken"
 
-#: common/pm/ProjectTask.class.php:1223
+#: common/pm/ProjectTask.class.php:1227
 #, php-format
 msgid "[%1$s - %2$s] [Task #%3$d] "
 msgstr ""
@@ -5482,15 +5482,15 @@ msgstr "Kon de gevraagde bewerking niet uitvoeren"
 
 #: common/tracker/actions/browse.php:184 common/tracker/actions/browse.php:306
 #: common/tracker/actions/browse.php:311 common/tracker/actions/query.php:340
-#: www/pm/browse_task.php:105 www/pm/browse_task.php:116
-#: www/pm/browse_task.php:158 www/pm/ganttpage.php:152
+#: www/pm/browse_task.php:106 www/pm/browse_task.php:117
+#: www/pm/browse_task.php:159 www/pm/ganttpage.php:152
 #: www/pm/ganttpage.php:154 www/pm/ganttpage.php:156 www/pm/ganttpage.php:158
 #: www/reporting/usersummary.php:55
 msgid "Any"
 msgstr "Alle"
 
-#: common/tracker/actions/browse.php:189 www/pm/browse_task.php:107
-#: www/pm/browse_task.php:352 www/pm/ganttpage.php:154
+#: common/tracker/actions/browse.php:189 www/pm/browse_task.php:108
+#: www/pm/browse_task.php:353 www/pm/ganttpage.php:154
 msgid "Unassigned"
 msgstr "Niet toegewezen"
 
@@ -5513,8 +5513,8 @@ msgstr "ID"
 #: plugins/mantisbt/view/addIssue.php:73
 #: plugins/mantisbt/view/editIssue.php:128
 #: plugins/mantisbt/view/viewIssue.php:85 www/my/dashboard.php:76
-#: www/pm/add_task.php:67 www/pm/browse_task.php:128
-#: www/pm/browse_task.php:240 www/pm/browse_task.php:371
+#: www/pm/add_task.php:67 www/pm/browse_task.php:129
+#: www/pm/browse_task.php:241 www/pm/browse_task.php:372
 #: www/pm/detail_task.php:71 www/pm/mod_task.php:83
 msgid "Priority"
 msgstr "Prioriteit"
@@ -5544,7 +5544,7 @@ msgstr "Sluitingsdatum"
 
 #: common/tracker/actions/browse.php:202 common/tracker/actions/browse.php:402
 #: common/tracker/actions/query.php:203 common/tracker/actions/query.php:347
-#: www/pm/browse_task.php:157 www/pm/ganttpage.php:181
+#: www/pm/browse_task.php:158 www/pm/ganttpage.php:181
 msgid "Assignee"
 msgstr "Toegewezen aan"
 
@@ -5582,12 +5582,12 @@ msgstr "Laatste maand"
 msgid "Displaying results %1$d‒%2$d out of %3$d total."
 msgstr ""
 
-#: common/tracker/actions/browse.php:275 www/pm/browse_task.php:182
+#: common/tracker/actions/browse.php:275 www/pm/browse_task.php:183
 #, php-format
 msgid "Displaying %2$s results."
 msgstr ""
 
-#: common/tracker/actions/browse.php:277 www/pm/browse_task.php:184
+#: common/tracker/actions/browse.php:277 www/pm/browse_task.php:185
 #: www/top/topusers.php:67
 msgid "Change"
 msgstr "Wijzig"
@@ -5638,11 +5638,11 @@ msgstr ""
 msgid "Viewing only opened records by default, use “%1$s” or “%2$s” to change."
 msgstr ""
 
-#: common/tracker/actions/browse.php:538 www/pm/browse_task.php:207
+#: common/tracker/actions/browse.php:538 www/pm/browse_task.php:208
 msgid "Check all"
 msgstr "Alles controleren"
 
-#: common/tracker/actions/browse.php:540 www/pm/browse_task.php:209
+#: common/tracker/actions/browse.php:540 www/pm/browse_task.php:210
 msgid "Clear all"
 msgstr "Alles verwijderen"
 
@@ -5657,8 +5657,8 @@ msgstr "Alles verwijderen"
 #: plugins/mantisbt/view/addIssue.php:74
 #: plugins/mantisbt/view/editIssue.php:127
 #: plugins/mantisbt/view/viewIssue.php:84 www/my/dashboard.php:79
-#: www/pm/add_task.php:124 www/pm/browse_task.php:238
-#: www/pm/browse_task.php:378 www/pm/detail_task.php:128
+#: www/pm/add_task.php:124 www/pm/browse_task.php:239
+#: www/pm/browse_task.php:379 www/pm/detail_task.php:128
 #: www/pm/mod_task.php:173
 msgid "Assigned to"
 msgstr "Toegewezen aan"
@@ -5691,12 +5691,12 @@ msgid "* Denotes requests > %s Days Old"
 msgstr "* Geeft aan: verzoeken > %s dagen oud"
 
 #: common/tracker/actions/browse.php:714 common/tracker/actions/browse.php:758
-#: www/pm/browse_task.php:358 www/pm/browse_task.php:387
+#: www/pm/browse_task.php:359 www/pm/browse_task.php:388
 #, fuzzy
 msgid "Mass Update"
 msgstr "Alles bijwerken"
 
-#: common/tracker/actions/browse.php:718 www/pm/browse_task.php:363
+#: common/tracker/actions/browse.php:718 www/pm/browse_task.php:364
 msgid ""
 "If you wish to apply changes to all items selected above, use these controls "
 "to change their properties and click once on “Mass Update”."
@@ -5705,8 +5705,8 @@ msgstr ""
 #: common/tracker/actions/browse.php:735 common/tracker/actions/browse.php:746
 #: common/tracker/actions/browse.php:750 www/include/html.php:363
 #: www/include/html.php:619 www/include/html.php:823
-#: www/pm/browse_task.php:355 www/pm/browse_task.php:370
-#: www/pm/browse_task.php:381
+#: www/pm/browse_task.php:356 www/pm/browse_task.php:371
+#: www/pm/browse_task.php:382
 msgid "No Change"
 msgstr "Geen wijzigingen"
 
@@ -6088,7 +6088,7 @@ msgstr "Verwijderen van item niet gelukt"
 msgid "Could Not Get ProjectGroup"
 msgstr ""
 
-#: common/tracker/actions/taskmgr.php:66 www/pm/browse_task.php:43
+#: common/tracker/actions/taskmgr.php:66 www/pm/browse_task.php:44
 #: www/pm/downloadcsv.php:96 www/pm/ganttpage.php:60
 msgid "Could Not Get ProjectTaskFactory"
 msgstr ""
@@ -8260,14 +8260,14 @@ msgid "The task manager item #%s is pending"
 msgstr "Taakbeheerder item  #%s staat open"
 
 #: cronjobs/send_pending_items_mail.php:78 www/pm/add_task.php:74
-#: www/pm/browse_task.php:124 www/pm/browse_task.php:228
+#: www/pm/browse_task.php:125 www/pm/browse_task.php:229
 #: www/pm/detail_task.php:97 www/pm/ganttpage.php:165
 #: www/pm/include/ProjectTaskHTML.class.php:73 www/pm/mod_task.php:97
 msgid "Task Summary"
 msgstr "Taaksamenvatting"
 
 #: cronjobs/send_pending_items_mail.php:81 www/pm/add_task.php:63
-#: www/pm/browse_task.php:127 www/pm/browse_task.php:234
+#: www/pm/browse_task.php:128 www/pm/browse_task.php:235
 #: www/pm/detail_task.php:66 www/pm/ganttpage.php:168 www/pm/mod_task.php:78
 msgid "Percent Complete"
 msgstr "Percentage compleet"
@@ -11628,8 +11628,8 @@ msgstr ""
 #: www/people/editjob.php:52 www/people/editjob.php:74
 #: www/people/editjob.php:163 www/people/people_utils.php:351
 #: www/people/people_utils.php:407 www/pm/add_task.php:50
-#: www/pm/browse_task.php:159 www/pm/browse_task.php:236
-#: www/pm/browse_task.php:368 www/pm/detail_task.php:52
+#: www/pm/browse_task.php:160 www/pm/browse_task.php:237
+#: www/pm/browse_task.php:369 www/pm/detail_task.php:52
 #: www/pm/ganttpage.php:183 www/pm/mod_task.php:61 www/pm/mod_task.php:268
 #: www/reporting/timeadd.php:144 www/snippet/package.php:162
 #: www/snippet/snippet_utils.php:199 www/snippet/snippet_utils.php:231
@@ -19826,56 +19826,56 @@ msgstr ""
 msgid "Edit/Update Subproject"
 msgstr "Project aanpassen"
 
-#: www/pm/browse_task.php:89
+#: www/pm/browse_task.php:90
 msgid "Browse tasks"
 msgstr "Bladeren taken"
 
-#: www/pm/browse_task.php:123 www/pm/browse_task.php:226
+#: www/pm/browse_task.php:124 www/pm/browse_task.php:227
 #: www/pm/ganttpage.php:164 www/pm/include/ProjectTaskHTML.class.php:72
 msgid "Task Id"
 msgstr "Taak ID"
 
-#: www/pm/browse_task.php:144
+#: www/pm/browse_task.php:145
 msgid "Detailed"
 msgstr "Gedetailleerd"
 
-#: www/pm/browse_task.php:160 www/pm/ganttpage.php:184
+#: www/pm/browse_task.php:161 www/pm/ganttpage.php:184
 msgid "Sort On"
 msgstr "Sorteren op"
 
-#: www/pm/browse_task.php:161
+#: www/pm/browse_task.php:162
 msgid "Detail View"
 msgstr "Detailweergave"
 
-#: www/pm/browse_task.php:162 www/pm/ganttpage.php:185
+#: www/pm/browse_task.php:163 www/pm/ganttpage.php:185
 #: www/snippet/snippet_utils.php:130
 msgid "Browse"
 msgstr "Bladeren"
 
-#: www/pm/browse_task.php:169
+#: www/pm/browse_task.php:170
 msgid "No Matching Tasks found"
 msgstr "Geen overeenkomende taken gevonden"
 
-#: www/pm/browse_task.php:171
+#: www/pm/browse_task.php:172
 msgid "Add tasks using the link above"
 msgstr "Voeg taken toe met bovenstaande link"
 
-#: www/pm/browse_task.php:179
+#: www/pm/browse_task.php:180
 #, php-format
 msgid "Displaying results %1$d‒%2$d."
 msgstr ""
 
-#: www/pm/browse_task.php:300
+#: www/pm/browse_task.php:301
 #, fuzzy
 msgid "previous"
 msgstr "Vorige"
 
-#: www/pm/browse_task.php:307
+#: www/pm/browse_task.php:308
 #, fuzzy
 msgid "next"
 msgstr "volgende 50"
 
-#: www/pm/browse_task.php:319
+#: www/pm/browse_task.php:320
 msgid "* Denotes overdue tasks"
 msgstr "* Geeft taken die over tijd zijn aan"
 
