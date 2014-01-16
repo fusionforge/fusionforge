@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-15 11:02+0100\n"
+"POT-Creation-Date: 2014-01-16 15:52+0100\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -494,7 +494,7 @@ msgstr "Aktualisierung erfolgreich."
 #: common/include/Permission.class.php:102
 #: common/mail/MailingList.class.php:65
 #: common/mail/MailingListFactory.class.php:54
-#: common/pm/ProjectGroup.class.php:102
+#: common/pm/ProjectGroup.class.php:103
 #: common/pm/ProjectGroupFactory.class.php:54
 #: common/reporting/ReportPerGroupDocmanDownloads.class.php:69
 #: common/survey/Survey.class.php:66 common/survey/SurveyFactory.class.php:54
@@ -518,7 +518,7 @@ msgid "group_id in db result does not match Group Object"
 msgstr "Group_id Datenbank-Ergebnis stimmt nicht mit Gruppen-Objekt überein"
 
 #: common/docman/Document.class.php:113 common/docman/Document.class.php:837
-#: common/pm/ProjectGroup.class.php:144 common/pm/ProjectGroup.class.php:316
+#: common/pm/ProjectGroup.class.php:145 common/pm/ProjectGroup.class.php:338
 msgid "Title Must Be At Least 5 Characters"
 msgstr "Titel muß mindestens 5 Zeichen haben"
 
@@ -1436,8 +1436,8 @@ msgstr ""
 #: www/forum/myforums.php:152 www/frs/index.php:175 www/frs/index.php:234
 #: www/include/html.php:1075 www/news/news_utils.php:149
 #: www/news/news_utils.php:269 www/people/people_utils.php:423
-#: www/people/viewjob.php:77 www/pm/browse_task.php:263
-#: www/pm/browse_task.php:273 www/pm/include/ProjectTaskHTML.class.php:121
+#: www/people/viewjob.php:77 www/pm/browse_task.php:264
+#: www/pm/browse_task.php:274 www/pm/include/ProjectTaskHTML.class.php:121
 #: www/pm/include/ProjectTaskHTML.class.php:174
 #: www/pm/include/ProjectTaskHTML.class.php:235 www/pm/mod_task.php:312
 #: www/project/admin/project_admin_utils.php:180
@@ -1681,7 +1681,7 @@ msgstr ""
 #: www/activity/index.php:180 www/frs/reporting/downloads.php:109
 #: www/people/editprofile.php:278 www/people/skills_utils.php:50
 #: www/people/skills_utils.php:154 www/pm/add_task.php:95
-#: www/pm/browse_task.php:126 www/pm/browse_task.php:231
+#: www/pm/browse_task.php:126 www/pm/browse_task.php:232
 #: www/pm/detail_task.php:86 www/pm/ganttpage.php:166 www/pm/mod_task.php:146
 #: www/project/stats/index.php:107 www/reporting/groupadded.php:66
 #: www/reporting/groupcum.php:66 www/reporting/projectact.php:72
@@ -1941,7 +1941,7 @@ msgstr ""
 #: www/activity/index.php:181 www/frs/reporting/downloads.php:111
 #: www/people/editprofile.php:279 www/people/skills_utils.php:51
 #: www/people/skills_utils.php:155 www/pm/add_task.php:110
-#: www/pm/browse_task.php:127 www/pm/browse_task.php:233
+#: www/pm/browse_task.php:127 www/pm/browse_task.php:234
 #: www/pm/detail_task.php:90 www/pm/ganttpage.php:167 www/pm/mod_task.php:160
 #: www/project/stats/index.php:108 www/reporting/groupadded.php:67
 #: www/reporting/groupcum.php:67 www/reporting/projectact.php:73
@@ -2446,7 +2446,7 @@ msgstr "Update fehlgeschlagen"
 
 #: common/forum/Forum.class.php:621 common/frs/FRSPackage.class.php:470
 #: common/frs/FRSRelease.class.php:354 common/include/Group.class.php:1617
-#: common/mail/MailingList.class.php:398 common/pm/ProjectGroup.class.php:362
+#: common/mail/MailingList.class.php:398 common/pm/ProjectGroup.class.php:384
 #: common/pm/ProjectTask.class.php:517 common/tracker/Artifact.class.php:505
 #: common/tracker/ArtifactExtraField.class.php:431
 #: common/tracker/ArtifactType.class.php:796
@@ -2803,7 +2803,7 @@ msgstr "Ungültiger file_id"
 
 #: common/frs/FRSFile.class.php:416 common/frs/FRSPackage.class.php:400
 #: common/frs/FRSRelease.class.php:438 common/include/Error.class.php:167
-#: common/mail/MailingList.class.php:265 common/pm/ProjectGroup.class.php:347
+#: common/mail/MailingList.class.php:265 common/pm/ProjectGroup.class.php:369
 #: www/admin/pending-news.php:76 www/admin/pending-news.php:86
 #: www/admin/pending-news.php:106 www/news/admin/index.php:90
 #, php-format
@@ -4749,12 +4749,12 @@ msgstr ""
 msgid "ProjectCategory: name and assignee are Required"
 msgstr "Projekt Kategorie: Name und Bevollmächtigter werden benötigt"
 
-#: common/pm/ProjectGroup.class.php:148 common/pm/ProjectGroup.class.php:320
+#: common/pm/ProjectGroup.class.php:149 common/pm/ProjectGroup.class.php:342
 #, fuzzy
 msgid "Subproject Description Must Be At Least 10 Characters"
 msgstr "Dokumentenbeschreibung muß mindestens 10 Zeichen haben"
 
-#: common/pm/ProjectGroup.class.php:195
+#: common/pm/ProjectGroup.class.php:196
 msgid "Invalid group_project_id"
 msgstr "Ungültiges group_project_id"
 
@@ -5503,7 +5503,7 @@ msgstr "ID"
 #: plugins/mantisbt/view/editIssue.php:128
 #: plugins/mantisbt/view/viewIssue.php:85 www/my/dashboard.php:76
 #: www/pm/add_task.php:67 www/pm/browse_task.php:129
-#: www/pm/browse_task.php:241 www/pm/browse_task.php:372
+#: www/pm/browse_task.php:242 www/pm/browse_task.php:372
 #: www/pm/detail_task.php:71 www/pm/mod_task.php:83
 msgid "Priority"
 msgstr "Priorität"
@@ -5565,17 +5565,17 @@ msgstr "Letzte 2 Wochen"
 msgid "Last month"
 msgstr "Letzten Monat"
 
-#: common/tracker/actions/browse.php:272
+#: common/tracker/actions/browse.php:272 www/pm/browse_task.php:181
 #, php-format
 msgid "Displaying results %1$d‒%2$d out of %3$d total."
 msgstr ""
 
-#: common/tracker/actions/browse.php:275 www/pm/browse_task.php:183
+#: common/tracker/actions/browse.php:275 www/pm/browse_task.php:184
 #, php-format
 msgid "Displaying %2$s results."
 msgstr ""
 
-#: common/tracker/actions/browse.php:277 www/pm/browse_task.php:185
+#: common/tracker/actions/browse.php:277 www/pm/browse_task.php:186
 #: www/top/topusers.php:67
 msgid "Change"
 msgstr "Ändern"
@@ -5627,11 +5627,11 @@ msgstr ""
 "Standardmäßig nur geöffnete Aufzeichnungen ansehen, nutzen Sie »%1$s« oder "
 "»%2$s« um dies zu ändern."
 
-#: common/tracker/actions/browse.php:538 www/pm/browse_task.php:208
+#: common/tracker/actions/browse.php:538 www/pm/browse_task.php:209
 msgid "Check all"
 msgstr "Alle auswählen"
 
-#: common/tracker/actions/browse.php:540 www/pm/browse_task.php:210
+#: common/tracker/actions/browse.php:540 www/pm/browse_task.php:211
 msgid "Clear all"
 msgstr "Alle abwählen"
 
@@ -5646,7 +5646,7 @@ msgstr "Alle abwählen"
 #: plugins/mantisbt/view/addIssue.php:74
 #: plugins/mantisbt/view/editIssue.php:127
 #: plugins/mantisbt/view/viewIssue.php:84 www/my/dashboard.php:79
-#: www/pm/add_task.php:124 www/pm/browse_task.php:239
+#: www/pm/add_task.php:124 www/pm/browse_task.php:240
 #: www/pm/browse_task.php:379 www/pm/detail_task.php:128
 #: www/pm/mod_task.php:173
 msgid "Assigned to"
@@ -8279,14 +8279,14 @@ msgid "The task manager item #%s is pending"
 msgstr "Das Element des Auftrag-Managers #%s ist schwebend"
 
 #: cronjobs/send_pending_items_mail.php:78 www/pm/add_task.php:74
-#: www/pm/browse_task.php:125 www/pm/browse_task.php:229
+#: www/pm/browse_task.php:125 www/pm/browse_task.php:230
 #: www/pm/detail_task.php:97 www/pm/ganttpage.php:165
 #: www/pm/include/ProjectTaskHTML.class.php:73 www/pm/mod_task.php:97
 msgid "Task Summary"
 msgstr "Zusammenfassung des Auftrags"
 
 #: cronjobs/send_pending_items_mail.php:81 www/pm/add_task.php:63
-#: www/pm/browse_task.php:128 www/pm/browse_task.php:235
+#: www/pm/browse_task.php:128 www/pm/browse_task.php:236
 #: www/pm/detail_task.php:66 www/pm/ganttpage.php:168 www/pm/mod_task.php:78
 msgid "Percent Complete"
 msgstr "Prozent fertig"
@@ -11617,7 +11617,7 @@ msgstr ""
 #: www/people/editjob.php:52 www/people/editjob.php:74
 #: www/people/editjob.php:163 www/people/people_utils.php:351
 #: www/people/people_utils.php:407 www/pm/add_task.php:50
-#: www/pm/browse_task.php:160 www/pm/browse_task.php:237
+#: www/pm/browse_task.php:160 www/pm/browse_task.php:238
 #: www/pm/browse_task.php:369 www/pm/detail_task.php:52
 #: www/pm/ganttpage.php:183 www/pm/mod_task.php:61 www/pm/mod_task.php:268
 #: www/reporting/timeadd.php:144 www/snippet/package.php:162
@@ -19924,7 +19924,7 @@ msgstr "Ändere/Aktualisiere Unterprojekt"
 msgid "Browse tasks"
 msgstr "Aufträge durchsuchen"
 
-#: www/pm/browse_task.php:124 www/pm/browse_task.php:227
+#: www/pm/browse_task.php:124 www/pm/browse_task.php:228
 #: www/pm/ganttpage.php:164 www/pm/include/ProjectTaskHTML.class.php:72
 msgid "Task Id"
 msgstr "Auftrags-ID"
@@ -19946,20 +19946,15 @@ msgstr "Detailansicht"
 msgid "Browse"
 msgstr "Durchsuchen"
 
-#: www/pm/browse_task.php:170
+#: www/pm/browse_task.php:171
 msgid "No Matching Tasks found"
 msgstr "Keine übereinstimmenden Aufträge gefunden"
 
-#: www/pm/browse_task.php:172
+#: www/pm/browse_task.php:173
 msgid "Add tasks using the link above"
 msgstr "Fügen Sie Aufträge hinzu, indem Sie auf den obigen Link klicken"
 
-#: www/pm/browse_task.php:180
-#, php-format
-msgid "Displaying results %1$d‒%2$d."
-msgstr ""
-
-#: www/pm/browse_task.php:301
+#: www/pm/browse_task.php:302
 #, fuzzy
 msgid "previous"
 msgstr "Vorherige(r)"
@@ -20461,9 +20456,14 @@ msgstr "Woche"
 msgid "Day"
 msgstr "Tag"
 
+#: www/pm/postuploadcsv.php:113
+#, fuzzy
+msgid "Parameter error"
+msgstr "Datenbank Abfragefehler"
+
 #: www/pm/postuploadcsv.php:117
 #, fuzzy
-msgid "Import was Successful"
+msgid "Import was successful"
 msgstr "Erfolgreich aktualisiert"
 
 #: www/pm/reporting/index.php:55
@@ -28053,376 +28053,6 @@ msgstr "Kein Benutzername angegeben"
 
 #~ msgid "I am Sure."
 #~ msgstr "Ich bin sicher."
-
-#~ msgid "%s b"
-#~ msgstr "%s B"
-
-#~ msgid "%s k"
-#~ msgstr "%s k"
-
-#~ msgid "n/a"
-#~ msgstr "k.A."
-
-#~ msgid "Include of “%s” failed."
-#~ msgstr "Das Einfügen von »%s« ist fehlgeschlagen."
-
-#~ msgid "Are you sure?"
-#~ msgstr "Sind Sie sicher?"
-
-#~ msgid "Redirect to an external url"
-#~ msgstr "Weiterleitung zu einer externen Webseite"
-
-#~ msgid "Search string “%s” not found in content of page “%s”."
-#~ msgstr "Das Suchwort “%s” wurde nicht in der Seite “%s” gefunden."
-
-#~ msgid "The PhpWiki programming team"
-#~ msgstr "Das PhpWiki Programmierer-Team"
-
-#~ msgid "Currently not recommended!"
-#~ msgstr "Momentan nicht empfohlen!"
-
-#~ msgid "getfacl"
-#~ msgstr "getfacl"
-
-#~ msgid "optional label | http://www.example.com"
-#~ msgstr "optionaler Name | http://www.example.com"
-
-#~ msgid "Description: Provides a list of plugins on this wiki."
-#~ msgstr "Beschreibung: Liste aller Zusatzprogramme in diesem Wiki."
-
-#~ msgid "Example.jpg"
-#~ msgstr "Beispiel.jpg"
-
-#~ msgid "Embedded image"
-#~ msgstr "Bild einfügen"
-
-#~ msgid "mode"
-#~ msgstr "mode"
-
-#~ msgid "History of all major edits by %s to page %s."
-#~ msgstr "Verlaufsprotokoll aller großen Änderungen von %s der Seite %s."
-
-#~ msgid "History of major modifications for any page edited by %s."
-#~ msgstr ""
-#~ "Verlaufsprotokoll aller großen Änderungen aller Seiten, die von %s "
-#~ "bearbeitet wurden."
-
-#~ msgid "Automatically link headers at the top"
-#~ msgstr "Verlinke Überschriften mit Inhaltsverzeichnis"
-
-#~ msgid "Failed to set LDAP protocol version to 3"
-#~ msgstr "Fehler beim Setzen der LDAP Protokoll Version 3"
-
-#~ msgid "Rated by %d users | Average rating %.1f stars"
-#~ msgstr "Bewertet von %d Benutzern | Durchschnittswertung: %.1f Sterne"
-
-#~ msgid "%s prediction for you is %s stars"
-#~ msgstr "Die %s Vorraussage für dich sind %s Sterne"
-
-#~ msgid "%s prediction for you is %.1f stars"
-#~ msgstr "Die %s Vorraussage für dich sind %.lf Sterne"
-
-#~ msgid "regex"
-#~ msgstr "Regulärer Ausdruck"
-
-#~ msgid "Photos"
-#~ msgstr "Album"
-
-#~ msgid "GoodStyle"
-#~ msgstr "GuterStil"
-
-#~ msgid "OldTextFormattingRules"
-#~ msgstr "AlteTextFormatierungsRegeln"
-
-# OldTextFormattingRules AlteTextFormatierungsRegeln
-#~ msgid "Layout tables using grid-like \"ASCII art\"."
-#~ msgstr ""
-#~ "Formatiere Tabellen unter Verwendung gitter-ähnlicher ASCII Formatierung."
-
-#~ msgid "Ok"
-#~ msgstr "Ok"
-
-#~ msgid "AUTH_GROUP_FILE not defined"
-#~ msgstr "AUTH_GROUP_FILE nicht definiert"
-
-#~ msgid "timeout:"
-#~ msgstr "Zeitüberschreitung:"
-
-#~ msgid "Replaced link in %s."
-#~ msgstr "Link in %s ersetzt."
-
-#~ msgid "The PhpWiki Programming Team"
-#~ msgstr "Das PhpWiki Programmierer-Team"
-
-# voraussichtlich abgeschrieben??
-#~ msgid "';' and ':' are deprecated"
-#~ msgstr "Benutzung der Zeichen ';' und ':' sind nicht empfohlen"
-
-#~ msgid ""
-#~ "The admin password cannot be empty. Please update your config/config.ini"
-#~ msgstr ""
-#~ "Das Administrator Passwort darf nicht leer sein. Bitte setzen Sie es in "
-#~ "config/config.ini"
-
-#~ msgid ""
-#~ "Empty db_session_table. Turn USE_DB_SESSION off or define the table name."
-#~ msgstr ""
-#~ "Leerer db_session_table. Schalten Sie USE_DB_SESSION aus oder definieren "
-#~ "Sie diesen Tabellennamen."
-
-#~ msgid ""
-#~ "With external authentication all users which stored their Preferences. "
-#~ "Without external authentication all once signed-in users (from version "
-#~ "1.3.4 on)."
-#~ msgstr ""
-#~ "Mit externer Authentifizierung aller Benutzer, die sich für dieses Wiki "
-#~ "eingetragen haben. Ohne externer Authentifizierung aller Benutzer, die "
-#~ "sich irgendwann (ab Version 1.3.4) einmal angemeldet haben."
-
-#~ msgid "No opinion"
-#~ msgstr "Keine Bewertung"
-
-#~ msgid "(Not a WikiWord)"
-#~ msgstr "(Nicht ein WikiWort)"
-
-#~ msgid "Simple Plugin to load files up to server"
-#~ msgstr "Einfaches Zusatzprogramm um Dateien auf den Server hochzuladen"
-
-#~ msgid "You can use %s only with %s"
-#~ msgstr "Sie können %s nur mit %s nutzen"
-
-#~ msgid "browse pages in this wiki"
-#~ msgstr "um Seiten in diesem Wikis durchzugehen"
-
-#~ msgid "diff pages in this wiki"
-#~ msgstr "um Seiten innerhalb des Wikis zu vergleichen"
-
-#~ msgid "dump html pages from this wiki"
-#~ msgstr "um HTML Seiten dieses Wikis zu ziehen"
-
-#~ msgid "dump serial pages from this wiki"
-#~ msgstr "um serienmäßige Seiten dieses Wikis als Dateien zu speichern"
-
-#~ msgid "lock pages in this wiki"
-#~ msgstr "um Seiten in diesem Wiki zu sperren"
-
-#~ msgid "remove pages from this wiki"
-#~ msgstr "um Seiten aus diesem Wiki zu entfernen"
-
-#~ msgid "unlock pages in this wiki"
-#~ msgstr "um Seiten in diesem Wiki freizugeben"
-
-#~ msgid "upload a zip dump to this wiki"
-#~ msgstr "um ein Ziparchiv in dieses Wiki hochzuladen"
-
-#~ msgid ""
-#~ "(Automatically checking pages which have been deleted at least %s days.)"
-#~ msgstr ""
-#~ "(Prüfe Seiten automatisch, die in den letzten %s Tagen gelöscht wurden.)"
-
-#~ msgid "edit user preferences in this wiki"
-#~ msgstr "um Benutzer Einstellungen in diesem Wiki zu bearbeiten"
-
-#~ msgid "Default system theme:"
-#~ msgstr "Darstellung des Systems:"
-
-#~ msgid "Argument %s “%s” ignored"
-#~ msgstr "Argument %s »%s« ignoriert"
-
-#~ msgid "Lists nested too deep in SetHTMLOutputMode"
-#~ msgstr "Interner Fehler: Stackgrenze in SetHTMLOutputMode überschritten."
-
-#~ msgid "Included frame from %s"
-#~ msgstr "Eingebetteter Frame von %s"
-
-#~ msgid "%s bytes written\n"
-#~ msgstr "%s Bytes geschrieben\n"
-
-#~ msgid ""
-#~ "Copy your changes to the clipboard or to another temporary place (e.g. "
-#~ "text editor)."
-#~ msgstr ""
-#~ "Kopiere deine Veränderungen in die Zwischenablage oder an einen anderen "
-#~ "temporären Platz (z.B. in einen Texteditor)"
-
-#~ msgid ""
-#~ "%s of the page. You should now see the most current version of the page. "
-#~ "Your changes are no longer there."
-#~ msgstr ""
-#~ "%s von die Seite. Sie sollten jetzt die neueste Version der Seite sehen. "
-#~ "Die Änderungen sind verschwunden."
-
-#~ msgid ""
-#~ "Make changes to the file again. Paste your additions from the clipboard "
-#~ "(or text editor)."
-#~ msgstr ""
-#~ "Edieren Sie die Seite erneut. Kopieren Sie Ihre Veränderungen aus der "
-#~ "Zwischenablage (oder aus dem Texteditor)"
-
-#~ msgid "In order to recover from this situation, follow these steps:"
-#~ msgstr ""
-#~ "Um diese Situation zu korrigieren, folge bitte den folgenden Schritten:"
-
-#~ msgid "Server time:"
-#~ msgstr "Die Zeit des Servers:"
-
-#~ msgid "(last edited %s)"
-#~ msgstr "(letzte Änderung %s)"
-
-#~ msgid "version %s, saved %s."
-#~ msgstr "Version %s. %s gespeichert."
-
-#~ msgid "version %s, saved on %s."
-#~ msgstr "Version %s. am %s gespeichert."
-
-#~ msgid "(version %s, saved on %s)"
-#~ msgstr "(Version %s. zuletzt am %s gespeichert)"
-
-#~ msgid ""
-#~ "Use your browser's <strong>Back</strong> button to go back to the edit "
-#~ "page."
-#~ msgstr ""
-#~ "Benütze die <strong>Zurück</strong> Funktion deines Browsers um zur "
-#~ "Edierseite zu gelangen."
-
-#~ msgid "Press <strong>Save</strong> again."
-#~ msgstr "Drücke nochmal <strong>Speichern</strong>"
-
-#~ msgid "Problem while updating %s"
-#~ msgstr "Problem während des Edierens von %s"
-
-#~ msgid "Problem while editing %s"
-#~ msgstr "Problem beim Edieren von %s"
-
-#~ msgid "Required form variables are missing."
-#~ msgstr "Einige benötigte Form-Variablen fehlen."
-
-#~ msgid "Attempt to delete most recent revision of “%s”"
-#~ msgstr "Versuch die neueste Version von »%s« zu löschen"
-
-#~ msgid "Attempt to merge most recent revision of “%s”"
-#~ msgstr "Versuch die neueste Version von »%s« zu kombinieren"
-
-#~ msgid "failed for [%s]"
-#~ msgstr "FEHLER für [%s]"
-
-#~ msgid "Creating meta file for [%s]"
-#~ msgstr "Meta-Datei für [%s] wird erzeugt"
-
-#~ msgid "Unable to delete file, lock was not obtained."
-#~ msgstr "Konnte Datei nicht löschen. Datei ist anderweitig gesperrt."
-
-#~ msgid "unable to locate/open [%s], turning debug off"
-#~ msgstr "könnte [%s] nicht auffinden/öffnen, Debug wird abgeschaltet."
-
-#~ msgid "Preparing to execute [%s]"
-#~ msgstr "Ausfuhrung von [%s] vorbereitend"
-
-#~ msgid "Command failed [%s], Output:"
-#~ msgstr "Fehler bei Befehl: [%s], Ergebnis:"
-
-#~ msgid "Command failed [%s], Return value: %s"
-#~ msgstr "Fehler beim Befehl: [%s], Rückgabewert: %s"
-
-#~ msgid "Timeout while obtaining lock."
-#~ msgstr "Zeitüberschreitung beim Warten auf Aufhebung der Lesesperre."
-
-#~ msgid "Bad key in linktable: %s"
-#~ msgstr "Ungültiges Datenfeld in Links-Tabelle: %s"
-
-#~ msgid "Bad key %s in table"
-#~ msgstr "Ungültiges Datenfeld %s in Tabelle"
-
-#~ msgid "backlink entry missing for link %s"
-#~ msgstr "Es fehlt ein BackLink Datenfeld zu Link %s"
-
-#~ msgid "link entry missing for backlink %s"
-#~ msgstr "Es fehlt ein Link Datenfeld für den BackLink %s"
-
-#~ msgid "WARNING: database still locked"
-#~ msgstr "WARNUNG: Datenbank ist gesperrt"
-
-#~ msgid "Encryption and/or zip patches not supported."
-#~ msgstr "zip Verschlüsselung und/oder Patches noch nicht unterstützt."
-
-#~ msgid "Postponed CRC not yet supported."
-#~ msgstr "Nachträgliches CRC noch nicht unterstützt."
-
-#~ msgid "Compression method %s unsupported"
-#~ msgstr "Kompressionsmethode %s wird nicht unterstützt"
-
-#~ msgid "Uncompressed size mismatch"
-#~ msgstr "Größe der dekomprimierten Datei stimmt nicht"
-
-#~ msgid "Can't parse %s: (%s)"
-#~ msgstr "Konnte %s nicht analysieren: (%s)"
-
-#~ msgid "Please Sign In"
-#~ msgstr "Bitte melden Sie sich an:"
-
-#~ msgid "Your sysadmin has disallowed use of the UserPage plugin!"
-#~ msgstr ""
-#~ "Das Zusatzprogramm UserPage wurde von Ihrem Systemadministrator nicht "
-#~ "aktiviert!"
-
-#~ msgid "Before you can edit %s, you need to sign in."
-#~ msgstr "Bevor Sie %s edieren können, müssen Sie sich anmelden."
-
-#~ msgid "The name you use to sign in must be in WikiWord format."
-#~ msgstr "Ihr Benutzername zur Anmeldung muß ein WikiWort sein."
-
-#~ msgid "examples include: TomJefferson, AlexHamilton"
-#~ msgstr "Beispiele: HerrMustermann, UteUndUwe"
-
-#~ msgid ""
-#~ "Please enter your name as WordsStrungTogether (e.g. John Smith as "
-#~ "JohnSmith)."
-#~ msgstr ""
-#~ "Bitte geben Sie Ihren Namen als ZusammenGesetztesHauptWort ein. (z.B. "
-#~ "Hans Müller als HansMüller)."
-
-#~ msgid "PHP %s Warnings"
-#~ msgstr "PHP %s Warnungen"
-
-#~ msgid "To cancel press the \"Back\" button of your browser."
-#~ msgstr "Anderenfalls benütze die »Zurück« Funktion deines Browsers."
-
-#~ msgid "to do that"
-#~ msgstr "um das zu tun"
-
-#~ msgid "You can log in using any valid WikiWord as a user ID."
-#~ msgstr ""
-#~ "Sie können sich mit irgendeinem gültigen WikiWort als Benutzername "
-#~ "anmelden."
-
-#~ msgid "(Any password will work, except, of course for the admin user.)"
-#~ msgstr ""
-#~ "(Jedes Wort wird als Passwort akzeptiert, außer demjeingen für den "
-#~ "SystemAdministrator.)"
-
-#~ msgid "These links have no pages:"
-#~ msgstr "Diese Links haben noch leere Seiten"
-
-#~ msgid "All links resolved. No wanted pages."
-#~ msgstr "Alle Links sind verbunden. Es gibt keine leeren Seiten."
-
-#~ msgid "Click"
-#~ msgstr "Klicke"
-
-#~ msgid "Searching for \"%s\" ....."
-#~ msgstr "Suche nach \"%s\" ....."
-
-#~ msgid "MySQL error: %s"
-#~ msgstr "MySQL Fehler: %s"
-
-#~ msgid "%d pages match your query."
-#~ msgstr "%d Seiten wurden gefunden."
-
-#~ msgid "(first day for this Wiki)"
-#~ msgstr "(Erster Tag dieses Wikis)"
-
-#~ msgid "Inserting page %s, version %s from %s"
-#~ msgstr "Füge Seite %s ein, Version %s. vom %s"
 
 #~ msgid ""
 #~ "\n"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-15 11:02+0100\n"
+"POT-Creation-Date: 2014-01-16 15:52+0100\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -500,7 +500,7 @@ msgstr "更新成功"
 #: common/include/Permission.class.php:102
 #: common/mail/MailingList.class.php:65
 #: common/mail/MailingListFactory.class.php:54
-#: common/pm/ProjectGroup.class.php:102
+#: common/pm/ProjectGroup.class.php:103
 #: common/pm/ProjectGroupFactory.class.php:54
 #: common/reporting/ReportPerGroupDocmanDownloads.class.php:69
 #: common/survey/Survey.class.php:66 common/survey/SurveyFactory.class.php:54
@@ -524,7 +524,7 @@ msgid "group_id in db result does not match Group Object"
 msgstr "資料庫中的群組編號與群組物件不一致"
 
 #: common/docman/Document.class.php:113 common/docman/Document.class.php:837
-#: common/pm/ProjectGroup.class.php:144 common/pm/ProjectGroup.class.php:316
+#: common/pm/ProjectGroup.class.php:145 common/pm/ProjectGroup.class.php:338
 msgid "Title Must Be At Least 5 Characters"
 msgstr "標題必須至少5個字元"
 
@@ -1444,8 +1444,8 @@ msgstr ""
 #: www/forum/myforums.php:152 www/frs/index.php:175 www/frs/index.php:234
 #: www/include/html.php:1075 www/news/news_utils.php:149
 #: www/news/news_utils.php:269 www/people/people_utils.php:423
-#: www/people/viewjob.php:77 www/pm/browse_task.php:263
-#: www/pm/browse_task.php:273 www/pm/include/ProjectTaskHTML.class.php:121
+#: www/people/viewjob.php:77 www/pm/browse_task.php:264
+#: www/pm/browse_task.php:274 www/pm/include/ProjectTaskHTML.class.php:121
 #: www/pm/include/ProjectTaskHTML.class.php:174
 #: www/pm/include/ProjectTaskHTML.class.php:235 www/pm/mod_task.php:312
 #: www/project/admin/project_admin_utils.php:180
@@ -1693,7 +1693,7 @@ msgstr ""
 #: www/activity/index.php:180 www/frs/reporting/downloads.php:109
 #: www/people/editprofile.php:278 www/people/skills_utils.php:50
 #: www/people/skills_utils.php:154 www/pm/add_task.php:95
-#: www/pm/browse_task.php:126 www/pm/browse_task.php:231
+#: www/pm/browse_task.php:126 www/pm/browse_task.php:232
 #: www/pm/detail_task.php:86 www/pm/ganttpage.php:166 www/pm/mod_task.php:146
 #: www/project/stats/index.php:107 www/reporting/groupadded.php:66
 #: www/reporting/groupcum.php:66 www/reporting/projectact.php:72
@@ -1953,7 +1953,7 @@ msgstr ""
 #: www/activity/index.php:181 www/frs/reporting/downloads.php:111
 #: www/people/editprofile.php:279 www/people/skills_utils.php:51
 #: www/people/skills_utils.php:155 www/pm/add_task.php:110
-#: www/pm/browse_task.php:127 www/pm/browse_task.php:233
+#: www/pm/browse_task.php:127 www/pm/browse_task.php:234
 #: www/pm/detail_task.php:90 www/pm/ganttpage.php:167 www/pm/mod_task.php:160
 #: www/project/stats/index.php:108 www/reporting/groupadded.php:67
 #: www/reporting/groupcum.php:67 www/reporting/projectact.php:73
@@ -2464,7 +2464,7 @@ msgstr "更新錯誤"
 
 #: common/forum/Forum.class.php:621 common/frs/FRSPackage.class.php:470
 #: common/frs/FRSRelease.class.php:354 common/include/Group.class.php:1617
-#: common/mail/MailingList.class.php:398 common/pm/ProjectGroup.class.php:362
+#: common/mail/MailingList.class.php:398 common/pm/ProjectGroup.class.php:384
 #: common/pm/ProjectTask.class.php:517 common/tracker/Artifact.class.php:505
 #: common/tracker/ArtifactExtraField.class.php:431
 #: common/tracker/ArtifactType.class.php:796
@@ -2804,7 +2804,7 @@ msgstr "全名錯誤"
 
 #: common/frs/FRSFile.class.php:416 common/frs/FRSPackage.class.php:400
 #: common/frs/FRSRelease.class.php:438 common/include/Error.class.php:167
-#: common/mail/MailingList.class.php:265 common/pm/ProjectGroup.class.php:347
+#: common/mail/MailingList.class.php:265 common/pm/ProjectGroup.class.php:369
 #: www/admin/pending-news.php:76 www/admin/pending-news.php:86
 #: www/admin/pending-news.php:106 www/news/admin/index.php:90
 #, fuzzy, php-format
@@ -4759,12 +4759,12 @@ msgstr ""
 msgid "ProjectCategory: name and assignee are Required"
 msgstr "專案分類：需要名字和被指定人"
 
-#: common/pm/ProjectGroup.class.php:148 common/pm/ProjectGroup.class.php:320
+#: common/pm/ProjectGroup.class.php:149 common/pm/ProjectGroup.class.php:342
 #, fuzzy
 msgid "Subproject Description Must Be At Least 10 Characters"
 msgstr "文件說明必須至少10個字元"
 
-#: common/pm/ProjectGroup.class.php:195
+#: common/pm/ProjectGroup.class.php:196
 #, fuzzy
 msgid "Invalid group_project_id"
 msgstr "Unix群組名稱："
@@ -5513,7 +5513,7 @@ msgstr "編號"
 #: plugins/mantisbt/view/editIssue.php:128
 #: plugins/mantisbt/view/viewIssue.php:85 www/my/dashboard.php:76
 #: www/pm/add_task.php:67 www/pm/browse_task.php:129
-#: www/pm/browse_task.php:241 www/pm/browse_task.php:372
+#: www/pm/browse_task.php:242 www/pm/browse_task.php:372
 #: www/pm/detail_task.php:71 www/pm/mod_task.php:83
 msgid "Priority"
 msgstr "優先權"
@@ -5576,17 +5576,17 @@ msgstr "前兩星期"
 msgid "Last month"
 msgstr "上個月"
 
-#: common/tracker/actions/browse.php:272
+#: common/tracker/actions/browse.php:272 www/pm/browse_task.php:181
 #, php-format
 msgid "Displaying results %1$d‒%2$d out of %3$d total."
 msgstr ""
 
-#: common/tracker/actions/browse.php:275 www/pm/browse_task.php:183
+#: common/tracker/actions/browse.php:275 www/pm/browse_task.php:184
 #, php-format
 msgid "Displaying %2$s results."
 msgstr ""
 
-#: common/tracker/actions/browse.php:277 www/pm/browse_task.php:185
+#: common/tracker/actions/browse.php:277 www/pm/browse_task.php:186
 #: www/top/topusers.php:67
 msgid "Change"
 msgstr "更新"
@@ -5637,12 +5637,12 @@ msgstr ""
 msgid "Viewing only opened records by default, use “%1$s” or “%2$s” to change."
 msgstr ""
 
-#: common/tracker/actions/browse.php:538 www/pm/browse_task.php:208
+#: common/tracker/actions/browse.php:538 www/pm/browse_task.php:209
 #, fuzzy
 msgid "Check all"
 msgstr "全選"
 
-#: common/tracker/actions/browse.php:540 www/pm/browse_task.php:210
+#: common/tracker/actions/browse.php:540 www/pm/browse_task.php:211
 #, fuzzy
 msgid "Clear all"
 msgstr "全部清除"
@@ -5658,7 +5658,7 @@ msgstr "全部清除"
 #: plugins/mantisbt/view/addIssue.php:74
 #: plugins/mantisbt/view/editIssue.php:127
 #: plugins/mantisbt/view/viewIssue.php:84 www/my/dashboard.php:79
-#: www/pm/add_task.php:124 www/pm/browse_task.php:239
+#: www/pm/add_task.php:124 www/pm/browse_task.php:240
 #: www/pm/browse_task.php:379 www/pm/detail_task.php:128
 #: www/pm/mod_task.php:173
 #, fuzzy
@@ -8254,14 +8254,14 @@ msgid "The task manager item #%s is pending"
 msgstr "項目 #%s 是未決定"
 
 #: cronjobs/send_pending_items_mail.php:78 www/pm/add_task.php:74
-#: www/pm/browse_task.php:125 www/pm/browse_task.php:229
+#: www/pm/browse_task.php:125 www/pm/browse_task.php:230
 #: www/pm/detail_task.php:97 www/pm/ganttpage.php:165
 #: www/pm/include/ProjectTaskHTML.class.php:73 www/pm/mod_task.php:97
 msgid "Task Summary"
 msgstr "任務摘要"
 
 #: cronjobs/send_pending_items_mail.php:81 www/pm/add_task.php:63
-#: www/pm/browse_task.php:128 www/pm/browse_task.php:235
+#: www/pm/browse_task.php:128 www/pm/browse_task.php:236
 #: www/pm/detail_task.php:66 www/pm/ganttpage.php:168 www/pm/mod_task.php:78
 msgid "Percent Complete"
 msgstr "完成度百分比"
@@ -11618,7 +11618,7 @@ msgstr ""
 #: www/people/editjob.php:52 www/people/editjob.php:74
 #: www/people/editjob.php:163 www/people/people_utils.php:351
 #: www/people/people_utils.php:407 www/pm/add_task.php:50
-#: www/pm/browse_task.php:160 www/pm/browse_task.php:237
+#: www/pm/browse_task.php:160 www/pm/browse_task.php:238
 #: www/pm/browse_task.php:369 www/pm/detail_task.php:52
 #: www/pm/ganttpage.php:183 www/pm/mod_task.php:61 www/pm/mod_task.php:268
 #: www/reporting/timeadd.php:144 www/snippet/package.php:162
@@ -19733,7 +19733,7 @@ msgstr "編輯/更新專案"
 msgid "Browse tasks"
 msgstr "瀏覽任務"
 
-#: www/pm/browse_task.php:124 www/pm/browse_task.php:227
+#: www/pm/browse_task.php:124 www/pm/browse_task.php:228
 #: www/pm/ganttpage.php:164 www/pm/include/ProjectTaskHTML.class.php:72
 msgid "Task Id"
 msgstr "任務編號"
@@ -19755,20 +19755,15 @@ msgstr "詳細檢視"
 msgid "Browse"
 msgstr "瀏覽"
 
-#: www/pm/browse_task.php:170
+#: www/pm/browse_task.php:171
 msgid "No Matching Tasks found"
 msgstr "沒有發現符合的任務"
 
-#: www/pm/browse_task.php:172
+#: www/pm/browse_task.php:173
 msgid "Add tasks using the link above"
 msgstr "使用上面的連結增加任務"
 
-#: www/pm/browse_task.php:180
-#, php-format
-msgid "Displaying results %1$d‒%2$d."
-msgstr ""
-
-#: www/pm/browse_task.php:301
+#: www/pm/browse_task.php:302
 #, fuzzy
 msgid "previous"
 msgstr "上一個"
@@ -20266,9 +20261,14 @@ msgstr "週"
 msgid "Day"
 msgstr "日"
 
+#: www/pm/postuploadcsv.php:113
+#, fuzzy
+msgid "Parameter error"
+msgstr "版本"
+
 #: www/pm/postuploadcsv.php:117
 #, fuzzy
-msgid "Import was Successful"
+msgid "Import was successful"
 msgstr "更新成功"
 
 #: www/pm/reporting/index.php:55
