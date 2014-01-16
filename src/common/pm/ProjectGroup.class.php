@@ -238,14 +238,22 @@ class ProjectGroup extends Error {
 	}
 
 	/**
-	 * getCount - get the number of tasks item in this pm type
+	 * getCount - get the number of tasks item in this pm type per status and category
 	 *
-	 * @param	int	$status	the status id
+	 * @param	int	$status_id	the status id
+	 * @param	int	$category_id	the category id
 	 * @return	int	the count
 	 */
-	function getCount($status) {
-		$res = db_query_params('SELECT count(project_task_id) FROM project_task WHERE group_project_id = $1 AND status_id = $2',
-					array ($this->getID(), $status));
+	function getCount($status_id, $category_id) {
+		$qpa = db_construct_qpa();
+		$qpa = db_construct_qpa($qpa, 'SELECT count(project_task_id) FROM project_task WHERE group_project_id = $1', array($this->getID()));
+		if ($category_id) {
+			$qpa = db_construct_qpa($qpa, '  AND category_id = $1 ', array($category_id));
+		}
+		if ($status_id != 100) {
+			$qpa = db_construct_qpa($qpa, ' AND status_id = $1 ', array($status_id));
+		}
+		$res = db_query_qpa($qpa);
 		$arr = db_fetch_array($res);
 		return $arr[0];
 	}

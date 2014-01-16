@@ -303,24 +303,7 @@ if ($rows < 1) {
 		echo '&nbsp;';
 	}
 	echo '</td><td>&nbsp;</td><td colspan="2">';
-
-	// currently pm knows only 4 status_id : 100, 1, 2, 3 (any, open, closed, deleted)
-	switch ($_status) {
-		case 1: {
-			$totalTasks = $pg->getOpenCount();
-			break;
-		}
-		case 2:
-		case 3: {
-			$totalTasks = $pg->getCount($_status);
-			break;
-		}
-		default: {
-			$totalTasks = $pg->getTotalCount();
-			break;
-		}
-	}
-	if ($totalTasks > $offset + $paging) {
+	if ($pg->getCount($_status, $_category_id) > $offset + $paging) {
 		echo util_make_link ('/pm/task.php?func=browse&amp;group_project_id='.$group_project_id.'&amp;group_id='.$group_id.'&amp;offset='.($offset+$paging),'<strong>'._('next').' →</strong></a>');
 	} else {
 		echo '&nbsp;';
