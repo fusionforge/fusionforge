@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Copyright (C) 2009 Alain Peyrat, Alcatel-Lucent
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -18,7 +18,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-/*
+/**
  * Standard Alcatel-Lucent disclaimer for contributing to open source
  *
  * "The provided file ("Contribution") has not been tested and/or
@@ -110,11 +110,11 @@ if (isset($input_file) && isset($input_file['tmp_name']) &&
 		$res=&pm_import_tasks($group_project_id, $tasks);
 	}
 } else {
-	$res['errormessage'] = 'Parameter error';
+	$res['errormessage'] = _('Parameter error');
 }
 
-if ($res['success']) {
-	$feedback .= _('Import was Successful');
+if (isset($res['success'])) {
+	$feedback .= _('Import was successful');
 } else {
 	$error_msg .= $res['errormessage'];
 }
