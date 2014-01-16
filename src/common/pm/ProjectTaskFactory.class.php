@@ -182,6 +182,10 @@ class ProjectTaskFactory extends Error {
 			$qpa = db_construct_qpa($qpa, ' AND project_task_vw.status_id = $1 ', array($this->status));
 		}
 
+		if ($this->category) {
+			$qpa = db_construct_qpa($qpa, ' AND project_task_vw.category_id = $1 ', array($this->category));
+		}
+
 		$qpa = db_construct_qpa($qpa, $order);
 		$result = db_query_qpa($qpa, $this->max_rows, $this->offset);
 
@@ -194,10 +198,6 @@ class ProjectTaskFactory extends Error {
 		$this->fetched_rows = $rows;
 		$this->project_tasks = array();
 		while ($arr = db_fetch_array($result)) {
-			if ($this->category) {
-				if ($arr['category_id'] != $this->category)
-					continue ;
-			}
 			$this->project_tasks[] = new ProjectTask($this->ProjectGroup, $arr['project_task_id'], $arr);
 		}
 		return $this->project_tasks;
