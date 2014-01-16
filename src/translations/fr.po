@@ -6402,9 +6402,8 @@ msgid "Clone Tracker"
 msgstr "Cloner l'outil de suivi"
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:327
-#, fuzzy
 msgid "Task Id and Summary"
-msgstr "Résumé des tâches"
+msgstr ""
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:328
 msgid "Progress"
@@ -7993,7 +7992,7 @@ msgstr "La tâche #%s est en attente"
 #: www/pm/detail_task.php:97 www/pm/ganttpage.php:165
 #: www/pm/include/ProjectTaskHTML.class.php:73 www/pm/mod_task.php:97
 msgid "Task Summary"
-msgstr "Résumé des tâches"
+msgstr "Résumé de la tâche"
 
 #: cronjobs/send_pending_items_mail.php:81 www/pm/add_task.php:63
 #: www/pm/browse_task.php:128 www/pm/browse_task.php:236
@@ -19373,7 +19372,7 @@ msgstr "Calendrier"
 #: www/pm/calendar.php:140
 #, php-format
 msgid "Task summary: %s"
-msgstr "Résumé des tâches pour %s"
+msgstr "Résumé de la tâche : %s"
 
 #: www/pm/calendar.php:143
 #, php-format
