@@ -26,10 +26,10 @@
 /**
  * reports_quick_graph() - Show a quick graph of data.
  *
- * @param		string	$title		Graph title
- * @param		int		$qpa1		First query resource ID
- * @param		int		$qpa2		Second query resource ID
- * @param		string	$bar_colors	The bar colors
+ * @param	string	$title		Graph title
+ * @param	int	$qpa1		First query resource ID
+ * @param	int	$qpa2		Second query resource ID
+ * @param	string	$bar_colors	The bar colors
  */
 function reports_quick_graph($title, $qpa1, $qpa2, $bar_colors) {
 	$result1 = db_query_qpa($qpa1);
@@ -63,17 +63,17 @@ function reports_quick_graph($title, $qpa1, $qpa2, $bar_colors) {
 /**
  * reports_header() - Show the reports header
  *
- * @param		int		$group_id	The group ID
- * @param		array	$vals		Array of select box values
- * @param		string	$titles		The select box title
- * @param		string	$html		Any additional HTML
+ * @param	int	$group_id	The group ID
+ * @param	array	$vals		Array of select box values
+ * @param	string	$titles		The select box title
+ * @param	string	$html		Any additional HTML
  */
 function reports_header($group_id, $vals, $titles, $html='') {
 	global $what;
 	global $period;
 	global $span;
 
-	print '<form method="get" action="'.getStringFromServer('PHP_SELF').'#b">';
+	print '<form method="get" action="'.getStringFromServer('PHP_SELF').'">';
 
 	print $html;
 
