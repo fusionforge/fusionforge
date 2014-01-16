@@ -164,6 +164,7 @@ echo '	<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.
 	</tr></table></form>';
 
 $rows=count($pt_arr);
+$totalTasks = $pg->getCount($_status, $_category_id);
 if ($rows < 1) {
 
 	echo '
@@ -177,7 +178,7 @@ if ($rows < 1) {
 		echo '<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&amp;group_project_id='.$pg->getID().'&amp;offset='.$offset.'" method="post">'."\n";
 
 	}
-	printf('<p>' . _('Displaying results %1$d‒%2$d.'), $offset + 1, $offset + $rows);
+	printf('<p>' . _('Displaying results %1$d‒%2$d out of %3$d total.'), $offset + 1, $offset + $rows, $totalTasks);
 
 	if (session_loggedin()) {
 		printf(' ' . _('Displaying %2$s results.') . "\n\t<input " .
@@ -303,7 +304,7 @@ if ($rows < 1) {
 		echo '&nbsp;';
 	}
 	echo '</td><td>&nbsp;</td><td colspan="2">';
-	if ($pg->getCount($_status, $_category_id) > $offset + $paging) {
+	if ( $totalTasks > $offset + $paging) {
 		echo util_make_link ('/pm/task.php?func=browse&amp;group_project_id='.$group_project_id.'&amp;group_id='.$group_id.'&amp;offset='.($offset+$paging),'<strong>'._('next').' →</strong></a>');
 	} else {
 		echo '&nbsp;';
