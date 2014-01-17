@@ -61,7 +61,7 @@ class Parsedata {
 		}
 		// always parse title, description, filename and filetype
 		$data1 = utf8_decode("$title $description $filename $filetype");
-		// temporary file for treatement
+		// temporary file for treatment
 		$filename = tempnam(forge_get_config('data_path'), 'tmp');
 		$handle = fopen($filename, 'w');
 		fwrite($handle, $data1);
