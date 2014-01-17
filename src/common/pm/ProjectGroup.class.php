@@ -32,25 +32,25 @@ require_once $gfcommon.'include/Error.class.php';
  * @param	bool	$data
  * @return	object	the ProjectGroup object
  */
-	function &projectgroup_get_object($group_project_id, $data = false) {
-		global $PROJECTGROUP_OBJ;
-		if (!isset($PROJECTGROUP_OBJ["_".$group_project_id."_"])) {
-			if ($data) {
-				//the db result handle was passed in
-			} else {
-				$res = db_query_params('SELECT * FROM project_group_list_vw WHERE group_project_id=$1',
-							array($group_project_id));
-				if (db_numrows($res) <1 ) {
-					$PROJECTGROUP_OBJ["_".$group_project_id."_"]=false;
-					return false;
-				}
-				$data = db_fetch_array($res);
+function &projectgroup_get_object($group_project_id, $data = false) {
+	global $PROJECTGROUP_OBJ;
+	if (!isset($PROJECTGROUP_OBJ["_".$group_project_id."_"])) {
+		if ($data) {
+			//the db result handle was passed in
+		} else {
+			$res = db_query_params('SELECT * FROM project_group_list_vw WHERE group_project_id=$1',
+						array($group_project_id));
+			if (db_numrows($res) <1 ) {
+				$PROJECTGROUP_OBJ["_".$group_project_id."_"]=false;
+				return false;
 			}
-			$Group = group_get_object($data["group_id"]);
-			$PROJECTGROUP_OBJ["_".$group_project_id."_"]= new ProjectGroup($Group,$group_project_id,$data);
+			$data = db_fetch_array($res);
 		}
-		return $PROJECTGROUP_OBJ["_".$group_project_id."_"];
+		$Group = group_get_object($data["group_id"]);
+		$PROJECTGROUP_OBJ["_".$group_project_id."_"]= new ProjectGroup($Group,$group_project_id,$data);
 	}
+	return $PROJECTGROUP_OBJ["_".$group_project_id."_"];
+}
 
 function projectgroup_get_groupid($group_project_id) {
 	global $PROJECTGROUP_OBJ;

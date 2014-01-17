@@ -41,11 +41,11 @@ class ProjectCategory extends Error {
 	var $data_array;
 
 	/**
-	 *  ProjectCategory - constructor.
+	 * ProjectCategory - constructor.
 	 *
-	 *	@param	object	   $ProjectGroup ProjectGroup object.
-	 *  @param	array|bool $data (all fields from project_category) OR category_id from database.
-	 *  @return	boolean	success.
+	 * @param	object	   	$ProjectGroup	ProjectGroup object.
+	 * @param	array|bool	$data		(all fields from project_category) OR category_id from database.
+	 * @return	boolean		success.
 	 */
 	function ProjectCategory(&$ProjectGroup, $data=false) {
 		$this->Error();
@@ -83,8 +83,8 @@ class ProjectCategory extends Error {
 	/**
 	 * create - create a new item in the database.
 	 *
-	 * @param  string    $name Item name.
-	 * @return boolean success.
+	 * @param	string	$name	Item name.
+	 * @return	boolean	success.
 	 */
 	function create($name) {
 		//
@@ -123,10 +123,10 @@ class ProjectCategory extends Error {
 	}
 
 	/**
-	 *	fetchData() - re-fetch the data for this ProjectCategory from the database.
+	 * fetchData() - re-fetch the data for this ProjectCategory from the database.
 	 *
-	 *	@param	int	$id	ID of the category.
-	 *	@return	boolean	success.
+	 * @param	int	$id	ID of the category.
+	 * @return	boolean	success.
 	 */
 	function fetchData($id) {
 		$res = db_query_params ('SELECT * FROM project_category WHERE category_id=$1',
@@ -141,37 +141,37 @@ class ProjectCategory extends Error {
 	}
 
 	/**
-	 *	getProjectGroup - get the ProjectGroup Object this ProjectCategory is associated with.
+	 * getProjectGroup - get the ProjectGroup Object this ProjectCategory is associated with.
 	 *
-	 *	@return	object	ProjectGroup.
+	 * @return	object	ProjectGroup.
 	 */
 	function &getProjectGroup() {
 		return $this->ProjectGroup;
 	}
 
 	/**
-	 *	getID - get this ProjectCategory's ID.
+	 * getID - get this ProjectCategory's ID.
 	 *
-	 *	@return	int	The id #.
+	 * @return	int	The id #.
 	 */
 	function getID() {
 		return $this->data_array['category_id'];
 	}
 
 	/**
-	 *	getName - get the name.
+	 * getName - get the name.
 	 *
-	 *	@return	string	The name.
+	 * @return	string	The name.
 	 */
 	function getName() {
 		return $this->data_array['category_name'];
 	}
 
 	/**
-	 *  update - update a ProjectCategory.
+	 * update - update a ProjectCategory.
 	 *
-	 *  @param	string	$name Name of the category.
-	 *  @return	boolean success.
+	 * @param	string	$name	Name of the category.
+	 * @return	boolean	success.
 	 */
 	function update($name) {
 		if (!forge_check_perm ('pm_admin', $this->ProjectGroup->Group->getID())) {

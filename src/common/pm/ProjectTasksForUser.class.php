@@ -28,7 +28,7 @@ require_once $gfcommon.'include/Group.class.php';
 require_once $gfcommon.'include/Error.class.php';
 
 /**
-*	A class that manages the project tasks for a specific user
+* A class that manages the project tasks for a specific user
 */
 class ProjectTasksForUser extends Error {
 
@@ -38,10 +38,10 @@ class ProjectTasksForUser extends Error {
 	var $User;
 
 	/**
-	 * Creates a new ProjectTasksForUser object
+	 * ProjectTasksForUser - Creates a new ProjectTasksForUser object
 	 *
-	 * @param GFUser $user	the User object
-	 * @return bool
+	 * @param	GFUser	$user	the User object
+	 * @return	bool
 	 */
 	function ProjectTasksForUser(&$user) {
 		$this->User =& $user;
@@ -49,11 +49,11 @@ class ProjectTasksForUser extends Error {
 	}
 
 	/**
-	 * Gets a list of tasks for this user
+	 * getTasksFromSQLwithParams - Gets a list of tasks for this user
 	 *
-	 * @param string $sql The SQL query to use to fetch the tasks
-	 * @param array  $params
-	 * @return ProjectTask[] An array of ProjectTask objects
+	 * @param	string		$sql	The SQL query to use to fetch the tasks
+	 * @param	array		$params
+	 * @return	ProjectTask[]	An array of ProjectTask objects
 	 */
 	function &getTasksFromSQLwithParams ($sql, $params) {
 		$tasks = array();
@@ -69,9 +69,9 @@ class ProjectTasksForUser extends Error {
 	}
 
 	/**
-	*	Gets a list of tasks by group project name
+	* getTasksByGroupProjectName - Gets a list of tasks by group project name
 	*
-	* @return array An array of ProjectTask objects
+	* @return	array	An array of ProjectTask objects
 	*/
 	function &getTasksByGroupProjectName () {
 		return $this->getTasksFromSQLwithParams ('SELECT ptv.*,g.group_name,pgl.project_name

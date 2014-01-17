@@ -26,19 +26,19 @@
  */
 
 /**
- * pg_connectstring() - builds a postgres connection string.
+ * pg_connectstring - builds a postgres connection string.
  * Combines the supplied arguments into a valid, specific, postgresql
  * connection string. It only includes the host and port options
  * if specified. Without those options, it will use the unix domain
  * sockets to connect to the postgres server on the local machine.
  *
- * @author    Graham Batty graham@sandworm.ca
- * @param    string        $dbname   The database to connect to. Required.
- * @param    string        $user     The username used to connect. Required
- * @param    string        $password The password used to connect
- * @param    string        $host     The hostname to connect to, if not localhost
- * @param    string        $port     The port to connect to, if not 5432
- * @return    string        The connection string to pass to pg_connect()
+ * @author	Graham Batty graham@sandworm.ca
+ * @param	string	$dbname		The database to connect to. Required.
+ * @param	string	$user		The username used to connect. Required
+ * @param	string	$password	The password used to connect
+ * @param	string	$host		The hostname to connect to, if not localhost
+ * @param	string	$port		The port to connect to, if not 5432
+ * @return	string	The connection string to pass to pg_connect()
  * @date      2003-02-12
  */
 function pg_connectstring($dbname, $user, $password = "", $host = "", $port = "") {
@@ -61,7 +61,7 @@ function pg_connectstring($dbname, $user, $password = "", $host = "", $port = ""
 }
 
 /**
- *  db_connect() - Connect to the primary database
+ * db_connect - Connect to the primary database
  */
 function db_connect() {
 	global $gfconn,$sys_dbreaddb,$sys_dbreadhost;
@@ -108,7 +108,7 @@ function db_connect() {
 }
 
 /**
- *  db_connect_if_needed() - Set up the DB connection if it's unset
+ * db_connect_if_needed - Set up the DB connection if it's unset
  */
 function db_connect_if_needed() {
         global $gfconn;
@@ -150,13 +150,13 @@ function db_switcher($dbserver = NULL) {
 }
 
 /**
- *  db_query_from_file - Query the database, from a file.
+ * db_query_from_file - Query the database, from a file.
  *
- * @param string     $file     File that contains the SQL statements.
- * @param int        $limit    How many rows do you want returned.
- * @param int        $offset   Of matching rows, return only rows starting here.
- * @param int        $dbserver ability to spread load to multiple db servers.
- * @return int result set handle.
+ * @param	string	$file		File that contains the SQL statements.
+ * @param	int	$limit		How many rows do you want returned.
+ * @param	int	$offset		Of matching rows, return only rows starting here.
+ * @param	int	$dbserver	ability to spread load to multiple db servers.
+ * @return	int	result set handle.
  */
 function db_query_from_file($file, $limit = -1, $offset = 0, $dbserver = NULL) {
 	global $sysdebug_dbquery, $sysdebug_dberrors;
@@ -210,14 +210,14 @@ function db_query_from_file($file, $limit = -1, $offset = 0, $dbserver = NULL) {
 }
 
 /**
- * db_query_params() - Query the database, with parameters
+ * db_query_params - Query the database, with parameters
  *
- * @param string   $qstring  SQL statement.
- * @param array    $params   parameters
- * @param int      $limit    How many rows do you want returned.
- * @param int      $offset   Of matching rows, return only rows starting here.
- * @param int      $dbserver Ability to spread load to multiple db servers.
- * @return resource result set handle.
+ * @param	string		$qstring	SQL statement.
+ * @param	array		$params		parameters
+ * @param	int		$limit		How many rows do you want returned.
+ * @param	int		$offset		Of matching rows, return only rows starting here.
+ * @param	int		$dbserver	Ability to spread load to multiple db servers.
+ * @return	resource	result set handle.
  */
 function db_query_params($qstring, $params, $limit = -1, $offset = 0, $dbserver = NULL) {
 	global $sysdebug_dbquery, $sysdebug_dberrors;
@@ -260,11 +260,11 @@ function db_query_params($qstring, $params, $limit = -1, $offset = 0, $dbserver 
 }
 
 /**
- *  db_prepare() - Prepare an SQL query
+ * db_prepare - Prepare an SQL query
  *
- *  @param text SQL statement.
- *  @param text name of the prepared query
- *  @return int result set handle.
+ * @param	string	$qstring	SQL statement.
+ * @param	string	$qname		name of the prepared query
+ * @return	int	$dbserver	result set handle.
  */
 function db_prepare($qstring, $qname, $dbserver = NULL) {
 	global $sysdebug_dbquery, $sysdebug_dberrors;
@@ -294,12 +294,12 @@ function db_prepare($qstring, $qname, $dbserver = NULL) {
 }
 
 /**
- *  db_execute() - Execute a prepared statement, with parameters
+ * db_execute - Execute a prepared statement, with parameters
  *
- *  @param text name of the prepared query
- *  @param array parameters
- *  @param int ability to spread load to multiple db servers.
- *  @return int result set handle.
+ * @param	string	$name		the prepared query
+ * @param	array	$params		the parameters
+ * @param	int	$dbserver	ability to spread load to multiple db servers.
+ * @return	int	result set handle.
  */
 function db_execute($qname, $params, $dbserver = NULL) {
 	global $sysdebug_dbquery, $sysdebug_dberrors;
@@ -332,10 +332,11 @@ function db_execute($qname, $params, $dbserver = NULL) {
 }
 
 /**
- *  db_unprepare() - Deallocate a prepared SQL query
+ * db_unprepare - Deallocate a prepared SQL query
  *
- *  @param text name of the prepared query
- *  @return int result set handle.
+ * @param	string	$name		the prepared query
+ * @param	int	$dbserver	ability to spread load to multiple db servers.
+ * @return	int	result set handle.
  */
 function db_unprepare($name, $dbserver = NULL) {
 	global $sysdebug_dbquery, $sysdebug_dberrors;
@@ -365,33 +366,18 @@ function db_unprepare($name, $dbserver = NULL) {
 }
 
 /**
- *  db_query_qpa() - Query the database, with a query+params array
+ * db_query_qpa - Query the database, with a query+params array
  *
- * @param array $qpa      array(query, array(parameters...))
- * @param int   $limit    How many rows do you want returned.
- * @param int   $offset   Of matching rows, return only rows starting here.
- * @param int   $dbserver Ability to spread load to multiple db servers.
+ * @param	array	$qpa		array(query, array(parameters...))
+ * @param	int	$limit		How many rows do you want returned.
+ * @param	int	$offset		Of matching rows, return only rows starting here.
+ * @param	int	$dbserver	Ability to spread load to multiple db servers.
  * @return resource result set handle.
  */
 function db_query_qpa($qpa, $limit = -1, $offset = 0, $dbserver = NULL) {
 	$sql = $qpa[0];
 	$params = $qpa[1];
 	return db_query_params($sql, $params, $limit, $offset, $dbserver);
-}
-
-/**
- *  db_mquery() - Query the database.
- *
- * @deprecated since 4.8. Use db_query_params() instead!
- *
- * @param string $qstring  SQL statement.
- * @param int    $limit    How many rows do you want returned.
- * @param int    $offset   Of matching rows, return only rows starting here.
- * @param int    $dbserver Ability to spread load to multiple db servers.
- * @return int result set handle.
- */
-function db_mquery($qstring, $limit = -1, $offset = 0, $dbserver = NULL) {
-	return db_query($qstring, $limit, $offset, $dbserver);
 }
 
 /**
@@ -420,10 +406,10 @@ function db_next_result() {
 $_sys_db_transaction_level = 0;
 
 /**
- *    db_begin() - Begin a transaction.
+ * db_begin() - Begin a transaction.
  *
- * @param    int $dbserver Database server (SYS_DB_PRIMARY, SYS_DB_STATS, SYS_DB_TROVE, SYS_DB_SEARCH)
- * @return    bool true.
+ * @param	int	$dbserver	Database server (SYS_DB_PRIMARY, SYS_DB_STATS, SYS_DB_TROVE, SYS_DB_SEARCH)
+ * @return	bool	true.
  */
 function db_begin($dbserver = NULL) {
 	global $_sys_db_transaction_level;
@@ -439,10 +425,10 @@ function db_begin($dbserver = NULL) {
 }
 
 /**
- *    db_commit() - Commit a transaction.
+ * db_commit - Commit a transaction.
  *
- * @param    int    $dbserver Database server (SYS_DB_PRIMARY, SYS_DB_STATS, SYS_DB_TROVE, SYS_DB_SEARCH)
- * @return    bool true on success/false on failure.
+ * @param	int	$dbserver	Database server (SYS_DB_PRIMARY, SYS_DB_STATS, SYS_DB_TROVE, SYS_DB_SEARCH)
+ * @return	bool	true on success/false on failure.
  */
 function db_commit($dbserver = NULL) {
 	global $_sys_db_transaction_level;
@@ -464,10 +450,10 @@ function db_commit($dbserver = NULL) {
 }
 
 /**
- *    db_rollback() - Rollback a transaction.
+ * db_rollback - Rollback a transaction.
  *
- * @param    int    $dbserver Database server (SYS_DB_PRIMARY, SYS_DB_STATS, SYS_DB_TROVE, SYS_DB_SEARCH)
- * @return bool true on success/false on failure.
+ * @param	int	$dbserver	Database server (SYS_DB_PRIMARY, SYS_DB_STATS, SYS_DB_TROVE, SYS_DB_SEARCH)
+ * @return	bool	true on success/false on failure.
  */
 function db_rollback($dbserver = NULL) {
 	global $_sys_db_transaction_level;
@@ -489,10 +475,10 @@ function db_rollback($dbserver = NULL) {
 }
 
 /**
- *    db_numrows() - Returns the number of rows in this result set.
+ * db_numrows - Returns the number of rows in this result set.
  *
- * @param resource $qhandle Query result set handle.
- * @return int number of rows.
+ * @param	resource	$qhandle	Query result set handle.
+ * @return	int		number of rows.
  */
 
 function db_numrows($qhandle) {
@@ -500,44 +486,44 @@ function db_numrows($qhandle) {
 }
 
 /**
- *  db_free_result() - Frees a database result properly.
+ * db_free_result - Frees a database result properly.
  *
- * @param        int        $qhandle Query result set handle.
- * @return bool
+ * @param	int	$qhandle	Query result set handle.
+ * @return	bool
  */
 function db_free_result($qhandle) {
 	return @pg_free_result($qhandle);
 }
 
 /**
- *  db_result() - Returns a field from a result set.
+ * db_result - Returns a field from a result set.
  *
- * @param resource  $qhandle Query result set handle.
- * @param int       $row     Row number.
- * @param string    $field   Field name.
- * @return mixed contents of field from database.
+ * @param	resource	$qhandle	Query result set handle.
+ * @param	int		$row	Row number.
+ * @param	string		$field	Field name.
+ * @return	mixed		contents of field from database.
  */
 function db_result($qhandle, $row, $field) {
 	return @pg_fetch_result($qhandle, $row, $field);
 }
 
 /**
- *  db_result_seek() - Sets cursor location in a result set.
+ * db_result_seek - Sets cursor location in a result set.
  *
- *	@param		int		Query result set handle.
- *  @param		integer Row number.
- *	@return boolean True on success
+ * @param	int	Query result set handle.
+ * @param	int	Row number.
+ * @return	boolean	True on success
  */
 function db_result_seek($qhandle,$row) {
 	return @pg_result_seek($qhandle,$row);
 }
 
 /**
- *  db_result_reset() - Resets cursor location in a result set.
+ * db_result_reset - Resets cursor location in a result set.
  *
- *	@param		int		$qhandle	Query result set handle.
- *	@param		int		$row
- *	@return boolean True on success
+ * @param	int	$qhandle	Query result set handle.
+ * @param	int	$row
+ * @return	boolean	True on success
  */
  //TODO : remove the second param if no one uses it.
 function db_result_reset($qhandle, $row = 0) {
@@ -545,42 +531,42 @@ function db_result_reset($qhandle, $row = 0) {
 }
 
 /**
- *  db_numfields() - Returns the number of fields in this result set.
+ * db_numfields - Returns the number of fields in this result set.
  *
- * @param        int        $lhandle Query result set handle.
- * @return int
+ * @param	resource	$lhandle	Query result set handle.
+ * @return	int
  */
 function db_numfields($lhandle) {
 	return @pg_num_fields($lhandle);
 }
 
 /**
- *  db_fieldname() - Returns the name of a particular field in the result set
+ * db_fieldname - Returns the name of a particular field in the result set
  *
- * @param        int        $lhandle Query result set handle.
- * @param        int        $fnumber Column number.
- * @return text name of the field.
+ * @param	resource	$lhandle	Query result set handle.
+ * @param	int		$fnumber	Column number.
+ * @return	string	name of the field.
  */
 function db_fieldname($lhandle, $fnumber) {
 	return @pg_field_name($lhandle, $fnumber);
 }
 
 /**
- *  db_affected_rows() - Returns the number of rows changed in the last query.
+ * db_affected_rows - Returns the number of rows changed in the last query.
  *
- * @param        int        $qhandle Query result set handle.
- * @return int number of affected rows.
+ * @param	resource	$qhandle	Query result set handle.
+ * @return	int		number of affected rows.
  */
 function db_affected_rows($qhandle) {
 	return @pg_affected_rows($qhandle);
 }
 
 /**
- *  db_fetch_array() - Returns an associative array from
- *  the current row of this database result
+ * db_fetch_array() - Returns an associative array from
+ * the current row of this database result
  *
- * @param resource  $qhandle Query result set handle.
- * @param bool      $row
+ * @param	resource	$qhandle	Query result set handle.
+ * @param	bool		$row
  * @return array array of fieldname/value key pairs.
  */
 function db_fetch_array($qhandle, $row = false) {
@@ -588,25 +574,25 @@ function db_fetch_array($qhandle, $row = false) {
 }
 
 /**
- *  db_fetch_array_by_row() - Returns an associative array from
- *  the given row of this database result
+ * db_fetch_array_by_row - Returns an associative array from
+ * the given row of this database result
  *
- * @param        int        $qhandle Query result set handle.
- * @param        int        $row     Given row to fetch
- * @return array array of fieldname/value key pairs.
+ * @param	resource	$qhandle	Query result set handle.
+ * @param	int		$row		Given row to fetch
+ * @return	array		array of fieldname/value key pairs.
  */
 function db_fetch_array_by_row($qhandle, $row) {
 	return @pg_fetch_array($qhandle, $row);
 }
 
 /**
- *  db_insertid() - Returns the last primary key from an insert.
+ * db_insertid - Returns the last primary key from an insert.
  *
- * @param  int        $qhandle         Query result set handle.
- * @param  string     $table_name      Name of the table you inserted into.
- * @param  string     $pkey_field_name Field name of the primary key.
- * @param  string     $dbserver        Server to which original query was made
- * @return int id of the primary key or 0 on failure.
+ * @param	resource	$qhandle		Query result set handle.
+ * @param	string		$table_name		Name of the table you inserted into.
+ * @param	string		$pkey_field_name	Field name of the primary key.
+ * @param	string		$dbserver		Server to which original query was made
+ * @return	int		id of the primary key or 0 on failure.
  */
 function db_insertid($qhandle, $table_name, $pkey_field_name, $dbserver = NULL) {
 	$sql = "SELECT max($pkey_field_name) AS id FROM $table_name";
@@ -619,10 +605,10 @@ function db_insertid($qhandle, $table_name, $pkey_field_name, $dbserver = NULL) 
 }
 
 /**
- *  db_error() - Returns the last error from the database.
+ * db_error - Returns the last error from the database.
  *
- * @param int    $dbserver    Database server (SYS_DB_PRIMARY, SYS_DB_STATS, SYS_DB_TROVE, SYS_DB_SEARCH)
- * @return string error message.
+ * @param	int	$dbserver	Database server (SYS_DB_PRIMARY, SYS_DB_STATS, SYS_DB_TROVE, SYS_DB_SEARCH)
+ * @return	string	error message.
  */
 function db_error($dbserver = NULL) {
 	$dbconn = db_switcher($dbserver);
@@ -631,10 +617,10 @@ function db_error($dbserver = NULL) {
 }
 
 /**
- *    system_cleanup() - In the future, we may wish to do a number
- *    of cleanup functions at script termination.
+ * system_cleanup - In the future, we may wish to do a number
+ * of cleanup functions at script termination.
  *
- *    For now, we just abort any in-process transaction.
+ * For now, we just abort any in-process transaction.
  */
 function system_cleanup() {
 	global $_sys_db_transaction_level;
@@ -760,13 +746,13 @@ function db_string_array_to_any_clause($arr) {
 }
 
 /**
- * db_construct_qpa() - Constructs a query+params array to be used by db_query_qpa()
+ * db_construct_qpa - Constructs a query+params array to be used by db_query_qpa()
  * Can be called several times in a row to extend the query, until db_query_qpa will be finally invoked.
  *
- * @param array  $old_qpa    array(SQL query, array(parameters...), oldmax) of previous calls
- * @param string $new_sql    SQL instructions added to the query
- * @param array  $new_params new params matching the new query instructions
- * @return array  array(SQL query, array(parameters...), newmax)
+ * @param	array	$old_qpa	array(SQL query, array(parameters...), oldmax) of previous calls
+ * @param	string	$new_sql	SQL instructions added to the query
+ * @param	array	$new_params	new params matching the new query instructions
+ * @return	array	array(SQL query, array(parameters...), newmax)
  */
 function db_construct_qpa($old_qpa = array(), $new_sql = '', $new_params = array()) {
 
