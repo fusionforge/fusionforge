@@ -149,9 +149,9 @@ class CreateProject extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("Tracker created successfully"));
 
 		$this->init();
-		$this->assertTrue($this->isElementPresent("//a[.='Tracker']"));
-		$this->assertTrue($this->isElementPresent("//a[.='Forums']"));
-		$this->assertTrue($this->isElementPresent("//a[.='Tasks']"));
+		$this->assertTrue($this->isElementPresent("//a//*[normalize-space(.)='Tracker']"));
+		$this->assertTrue($this->isElementPresent("//a//*[normalize-space(.)='Forums']"));
+		$this->assertTrue($this->isElementPresent("//a//*[normalize-space(.)='Tasks']"));
 		$this->click("link=Tracker");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Tracker for ProjectA (projecta)"));
@@ -197,9 +197,9 @@ class CreateProject extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("This is the public description for ProjectA."));
 		$this->assertTrue($this->isTextPresent("This project has not yet categorized itself"));
-		$this->assertFalse($this->isElementPresent("//a[.='Tracker']"));
-		$this->assertFalse($this->isElementPresent("//a[.='Forums']"));
-		$this->assertFalse($this->isElementPresent("//a[.='Tasks']"));
+		$this->assertFalse($this->isElementPresent("//a//*[normalize-space(.)='Tracker']"));
+		$this->assertFalse($this->isElementPresent("//a//*[normalize-space(.)='Forums']"));
+		$this->assertFalse($this->isElementPresent("//a//*[normalize-space(.)='Tasks']"));
 	}
 
 	// Test removal of project.
