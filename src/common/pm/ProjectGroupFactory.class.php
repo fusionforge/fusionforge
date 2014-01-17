@@ -42,12 +42,12 @@ class ProjectGroupFactory extends Error {
 	 */
 	var $projectGroups;
 
-    /**
-     *  Constructor.
-     *
-     * @param    Group $Group The Group object to which this ProjectGroupFactory is associated.
-     * @return \ProjectGroupFactory
-     */
+	/**
+	 * Constructor.
+	 *
+	 * @param	Group	$Group	The Group object to which this ProjectGroupFactory is associated.
+	 * @return	\ProjectGroupFactory
+	*/
 	function __construct(&$Group) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
@@ -67,42 +67,42 @@ class ProjectGroupFactory extends Error {
 	}
 
 	/**
-	 *	getGroup - get the Group object this ProjectGroupFactory is associated with.
+	 * getGroup - get the Group object this ProjectGroupFactory is associated with.
 	 *
-	 *	@return	Group	The Group object.
+	 * @return	Group	The Group object.
 	 */
 	function &getGroup() {
 		return $this->Group;
 	}
 
 	function &getAllProjectGroupIds() {
-		$result = array () ;
-		$res = db_query_params ('SELECT * FROM project_group_list_vw WHERE group_id=$1 ORDER BY group_project_id',
-					array ($this->Group->getID())) ;
+		$result = array();
+		$res = db_query_params('SELECT group_project_id FROM project_group_list_vw WHERE group_id=$1 ORDER BY group_project_id',
+					array($this->Group->getID()));
 		if (!$res) {
-			return $result ;
+			return $result;
 		}
 		while ($arr = db_fetch_array($res)) {
-			$result[] = $arr['group_project_id'] ;
+			$result[] = $arr['group_project_id'];
 		}
-		return $result ;
+		return $result;
 	}
 
 	/**
-	 *	getProjectGroups - get an array of ProjectGroup objects.
+	 * getProjectGroups - get an array of ProjectGroup objects.
 	 *
-	 *	@return	array	ProjectGroups[]	The array of ProjectGroups.
+	 * @return	array	ProjectGroups[]	The array of ProjectGroups.
 	 */
 	function getProjectGroups() {
 		if ($this->projectGroups) {
 			return $this->projectGroups;
 		}
 
-		$this->projectGroups = array () ;
-		$ids = $this->getAllProjectGroupIds() ;
+		$this->projectGroups = array();
+		$ids = $this->getAllProjectGroupIds();
 
 		foreach ($ids as $id) {
-			if (forge_check_perm ('pm', $id, 'read')) {
+			if (forge_check_perm('pm', $id, 'read')) {
 				$this->projectGroups[] = new ProjectGroup($this->Group, $id);
 			}
 		}
