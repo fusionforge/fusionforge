@@ -272,7 +272,7 @@ class LDAP extends UNIX {
 	/**
 	 * sysCreateUser() - Create a user
 	 *
-	 * @param		int	The user ID of the user to create
+	 * @param	int	$user_id	The user ID of the user to create
 	 * @return	bool	 The return status of gfLdapcreate_user_from_object()
 	 *
 	 */
@@ -289,7 +289,7 @@ class LDAP extends UNIX {
 	/**
 	 * sysCheckCreateUser() - Check that a user has been created
 	 *
-	 * @param		int		The ID of the user to check
+	 * @param		int	$user_id	The ID of the user to check
 	 * @return bool	true on success/false on error
 	 *
 	 */
@@ -304,7 +304,7 @@ class LDAP extends UNIX {
 	/**
 	 * gfLdapcreate_user_from_object() - Create a user from information contained within an object
 	 *
-	 * @param		object	The user object
+	 * @param		object	$user	The user object
 	 * @return bool	true on success/false on error
 	 *
 	 */
@@ -392,7 +392,7 @@ class LDAP extends UNIX {
 	/**
 	 * sysRemoveUser() - Remove an LDAP user
 	 *
-	 * @param		int		The user ID of the user to remove
+	 * @param		int	$user_id	The user ID of the user to remove
 	 * @return bool	true on success/false on error
 	 *
 	 */
@@ -416,9 +416,9 @@ class LDAP extends UNIX {
 	/**
 	 * sysUserSetAttribute() - Set an attribute for a user
 	 *
-	 * @param		int		The user ID
-	 * @param		string	The attribute to set
-	 * @param		string	The new value of the attribute
+	 * @param		int		$user_id	The user ID
+	 * @param		string	$attr	The attribute to set
+	 * @param		string	$value	The new value of the attribute
 	 * @return bool	true on success/false on error
 	 *
 	 */

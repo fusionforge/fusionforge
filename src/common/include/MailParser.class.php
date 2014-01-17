@@ -72,7 +72,6 @@ class MailParser extends Error {
 			} else {
 				$body .= $lines[$i]."\r\n";
 			}
-
 		}
 		$this->body =& $body;
 		$this->headers =& $header;
@@ -130,8 +129,8 @@ class MailParser extends Error {
 	/*
 	 * Subject and From decode implementation of RFC 2047
 	 *
-	 * @param String one or more encoded strings
-	 * @return String strcat of all texts. Ignore all charsets
+	 * @param string one or more encoded strings
+	 * @return string strcat of all texts. Ignore all charsets
 	 */
 	function mime_header_decode_string($string) {
 
@@ -152,8 +151,8 @@ class MailParser extends Error {
 	/**
 	 * Mime header decoding
 	 *
-	 * @param String to decode
-	 * @return Decoded String Array. return['charset'] and retutn['text']
+	 * @param $string	String to decode
+	 * @return array	Decoded String Array. return['charset'] and retutn['text']
 	 *
 	 *# FIXME: Should we use imap_mime_headres_decode? It's too havey to install
 	 *  See http://us2.php.net/manual/en/function.imap-mime-header-decode.php

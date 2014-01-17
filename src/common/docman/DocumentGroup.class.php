@@ -399,7 +399,7 @@ class DocumentGroup extends Error {
 	/**
 	 * removeMonitoredBy - remove this document directory for a specific user id for monitoring.
 	 *
-	 * @param	int	User ID
+	 * @param	int	$userid	User ID
 	 * @return	boolean	true if success
 	 */
 	function removeMonitoredBy($userid) {

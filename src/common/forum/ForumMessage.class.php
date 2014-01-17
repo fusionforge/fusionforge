@@ -396,7 +396,7 @@ class ForumMessage extends Error {
 	/**
 	 *  fetchData - re-fetch the data for this forum_message from the database.
 	 *
-	 *  @param  int	 The message ID.
+	 *  @param  int	 $msg_id	The message ID.
 	 *  @return boolean	success.
 	 */
 	function fetchData($msg_id) {

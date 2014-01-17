@@ -328,9 +328,9 @@ class ProjectGroup extends Error {
 	/**
 	 * update - update a ProjectGroup in the database.
 	 *
-	 * @param	string	The project name.
-	 * @param	string	The project description.
-	 * @param	string	The email address to send new notifications to.
+	 * @param	string	$project_name	The project name.
+	 * @param	string	$description	The project description.
+	 * @param	string	$send_all_posts_to	The email address to send new notifications to.
 	 * @return	boolean	success.
 	 */
 	function update($project_name, $description, $send_all_posts_to = '') {

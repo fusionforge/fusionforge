@@ -283,7 +283,7 @@ function account_shellselects($current) {
 /**
  * account_user_homedir() - Returns full path of user home directory
  *
- * @param	string	The username
+ * @param	string	$user	The username
  * @return	string	home directory path
  */
 function account_user_homedir($user) {
@@ -294,7 +294,7 @@ function account_user_homedir($user) {
 /**
  * account_group_homedir() - Returns full path of group home directory
  *
- * @param	string	The group name
+ * @param	string	$group	The group name
  * @return	string	home directory path
  */
 function account_group_homedir($group) {

@@ -70,7 +70,8 @@ function htpasswd_apr1_md5($plainpasswd) {
 /**
  * is_utf8 - utf-8 detection
  *
- * @param	string	the string to analyze
+ * @param	string	$str the string to analyze
+ * @return bool
  *
  * From http://www.php.net/manual/en/function.mb-detect-encoding.php#85294
  */
@@ -584,7 +585,6 @@ function GraphResult($result, $title) {
  * @param	array	$name_string	An array of names
  * @param	array	$value_string	An array of values
  * @param	string	$title		The title of the graph
- * @return	string	html code
  *
  */
 function GraphIt($name_string, $value_string, $title) {

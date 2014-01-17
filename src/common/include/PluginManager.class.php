@@ -278,7 +278,7 @@ class PluginManager extends Error {
 	/**
 	 * CountHookListeners() - number of listeners on a particular hook
 	 *
-	 * @param	string	name of the hook
+	 * @param	string	$hookname	name of the hook
 	 * @return	int	nb of listeners for this hookname
 	 */
 	function CountHookListeners($hookname) {

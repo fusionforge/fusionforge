@@ -316,7 +316,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 
 	/**
 	 * doWeUseDocman - verify if this group_id is using docman and webdav extension
-	 * @param	int	group_id
+	 * @param	int	$group_id
 	 * @return	bool	true on success
 	 */
 	function doWeUseDocman($group_id) {
