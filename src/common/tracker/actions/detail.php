@@ -153,11 +153,11 @@ $nb = $count? ' ('.$count.')' : '';
 	<tr><td colspan="2">
 	<?php if (session_loggedin() && ($ah->getSubmittedBy() == user_getid())) { ?>
 		<strong><?php echo _('Attach Files')._(':'); ?></strong>  <?php echo('('._('max upload size: '.human_readable_bytes(util_get_maxuploadfilesize())).')') ?><br />
-		<input type="file" name="input_file0" size="30" /><br />
-		<input type="file" name="input_file1" size="30" /><br />
-		<input type="file" name="input_file2" size="30" /><br />
-		<input type="file" name="input_file3" size="30" /><br />
-		<input type="file" name="input_file4" size="30" /><br />
+		<input type="file" name="input_file0" /><br />
+		<input type="file" name="input_file1" /><br />
+		<input type="file" name="input_file2" /><br />
+		<input type="file" name="input_file3" /><br />
+		<input type="file" name="input_file4" /><br />
 	<?php } ?>
 	<h2><?php echo _('Attached Files')._(':'); ?></h2>
 <?php

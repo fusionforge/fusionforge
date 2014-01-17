@@ -220,7 +220,7 @@ if ($mode == "edit") {
 	<input type="hidden" name="id" value="'.$id.'" />
 
 	<strong>'._('Replace with new file (optional)')._(':').'</strong><br />
-	<input type="file" name="input_file" size="30" />
+	<input type="file" name="input_file" />
 	<p>
 
 	<strong>'._('Description')._(':').'</strong><br />

@@ -188,8 +188,7 @@ echo "</div>\n\n";
  action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$gid"; ?>">
 <h4><?php echo _("Upload a new logo") ?></h4>
 <p><?php echo _('The logo must be in PNG format and precisely 135x135 pixels in size.'); ?></p>
-<p><?php echo _('Upload a new file') ?>: <input type="file" name="userfile"
- size="30" /></p>
+<p><?php echo _('Upload a new file') ?>: <input type="file" name="userfile" /></p>
 	  <?php if (forge_get_config('use_manual_uploads')) {
              echo '<p>';
              printf(_('Alternatively, you can use a file you already uploaded (by SFTP or SCP) to the <a href="%2$s">project\'s incoming directory</a> (%1$s).'),

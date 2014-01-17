@@ -50,7 +50,7 @@ function artifact_submission_form($ath, $group) {
 		</td>
 	</tr>
 	<tr>
-		<td class="top"><strong><?php echo _('For project'); ?></strong><br /><?php echo $group->getPublicName(); ?></td>
+		<td class="top"><strong><?php echo _('For project')._(':'); ?></strong><br /><?php echo $group->getPublicName(); ?></td>
 		<td class="top"><input type="submit" name="submit" value="<?php echo _('Submit'); ?>" /></td>
 	</tr>
 
@@ -104,11 +104,11 @@ function artifact_submission_form($ath, $group) {
 		<a href="javascript:help_window(\''. util_make_url ('/help/tracker.php?helpname=attach_file') .'\')"><strong>(?)</strong></a>
 		<p>
 		<strong><?php echo _('Attach Files')._(':'); ?> </strong> <?php echo('('._('max upload size: '.human_readable_bytes(util_get_maxuploadfilesize())).')') ?><br />
-		<input type="file" name="input_file0" size="30" /><br />
-		<input type="file" name="input_file1" size="30" /><br />
-		<input type="file" name="input_file2" size="30" /><br />
-		<input type="file" name="input_file3" size="30" /><br />
-		<input type="file" name="input_file4" size="30" />
+		<input type="file" name="input_file0" /><br />
+		<input type="file" name="input_file1" /><br />
+		<input type="file" name="input_file2" /><br />
+		<input type="file" name="input_file3" /><br />
+		<input type="file" name="input_file4" />
 		</p>
 		</div>
 		</td>

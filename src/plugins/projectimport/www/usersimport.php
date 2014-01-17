@@ -119,7 +119,7 @@ class UsersImportPage extends FileManagerPage {
 		// finally, display the file upload form
 		echo '<fieldset><legend>Please upload a file :</legend>
 		       <p><center>
-                          <input type="file" id="uploaded_file" name="uploaded_file" tabindex="2" size="30" />
+                          <input type="file" id="uploaded_file" name="uploaded_file" tabindex="2" />
                        </center></p>
                     </fieldset>
                     <div style="text-align:center;">
