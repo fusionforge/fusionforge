@@ -381,17 +381,18 @@ class ArtifactExtraField extends Error {
 	/**
 	 * update - update a row in the table used to store box names
 	 * for a tracker.  This function is only to update rowsf
-	 * for boxes configured by
-	 * the admin.
+	 * for boxes configured by the admin.
 	 *
 	 * @param	string	$name		Name of the field.
 	 * @param	int	$attribute1	For text (size) and textarea (rows)
 	 * @param	int	$attribute2	For text (maxlength) and textarea (cols)
 	 * @param	int	$is_required	True or false whether this is a required field or not.
 	 * @param	string	$alias		Alias for this field
+	 * @param	int	$show100	True or false whether the 100 value is displayed or not
+	 * @param	string	$show100label	The label used for the 100 value if displayed
 	 * @return	bool	success.
 	 */
-	function update($name,$attribute1,$attribute2,$is_required=0,$alias="") {
+	function update($name, $attribute1, $attribute2, $is_required = 0, $alias = "", $show100 = true, $show100label = 'none') {
 		if (!forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
@@ -423,18 +424,22 @@ class ArtifactExtraField extends Error {
 		}
 
 		$result = db_query_params ('UPDATE artifact_extra_field_list
-			SET field_name=$1,
-			attribute1=$2,
-			attribute2=$3,
-			is_required=$4,
-			alias=$5
-			WHERE extra_field_id=$6
-			AND group_artifact_id=$7',
+			SET field_name = $1,
+			attribute1 = $2,
+			attribute2 = $3,
+			is_required = $4,
+			alias = $5,
+			show100 = $6,
+			show100label = $7
+			WHERE extra_field_id = $8
+			AND group_artifact_id = $9',
 					   array (htmlspecialchars($name),
 						  $attribute1,
 						  $attribute2,
 						  $is_required,
 						  $alias,
+						  $show100,
+						  $show100label,
 						  $this->getID(),
 						  $this->ArtifactType->getID())) ;
 		if ($result && db_affected_rows($result) > 0) {

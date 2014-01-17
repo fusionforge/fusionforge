@@ -76,6 +76,16 @@ if (!$ac || !is_object($ac)) {
 		<?php } else { ?>
 		<input type="hidden" name="attribute1" value="0" />
 		<input type="hidden" name="attribute2" value="0" />
+		<label for="hide100">
+		<b><?php echo _('Hide the default none value'); ?></b><br />
+		</label>
+		<input type="checkbox" name="hide100" <?php if (!$ac->getShow100()) { echo 'checked="checked" '; } ?>/>
+		</p>
+		<p>
+		<label for="show100label">
+		<b><?php echo _('Label for the none value'); ?></b><br />
+		<input type="text" name="show100label" size="30" value="<?php $ac->getShow100label() ?>" />
+		</p>
 		<?php } ?>
 	</p>
 	<p>

@@ -231,14 +231,21 @@ if (getStringFromRequest('add_extrafield')) {
 	$attribute2 = getStringFromRequest('attribute2');
 	$is_required = getStringFromRequest('is_required');
 	$alias = getStringFromRequest('alias');
+	$hide100 = getStringFromRequest('hide100');
+	$show100label = getStringFromRequest('show100label');
 
-	$ac = new ArtifactExtraField($ath,$id);
+	$ac = new ArtifactExtraField($ath, $id);
 	if (!$ac || !is_object($ac)) {
 		$error_msg .= _('Unable to create ArtifactExtraField Object');
 	} elseif ($ac->isError()) {
 		$error_msg .= $ac->getErrorMessage();
 	} else {
-		if (!$ac->update($name,$attribute1,$attribute2,$is_required,$alias)) {
+		if (strlen($hide100)) {
+			$show100 = 0;
+		} else {
+			$show100 = 1;
+		}
+		if (!$ac->update($name, $attribute1, $attribute2, $is_required, $alias, $show100, $show100label)) {
 			$error_msg .= _('Update failed')._(': ').$ac->getErrorMessage();
 			$ac->clearError();
 		} else {
