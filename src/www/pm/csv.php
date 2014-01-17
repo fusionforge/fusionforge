@@ -86,7 +86,7 @@ $format .= " using '$sep' as separator.";
 <h2><?php echo _('Import tasks using a CSV file'); ?></h2>
 <form enctype="multipart/form-data" method="post" action="<?php echo getStringFromServer('PHP_SELF')?>?group_project_id=<?php echo $group_project_id ?>&amp;group_id=<?php echo $group_id ?>&amp;func=postuploadcsv">
 <p><?php echo _('Choose a file in the proper .csv format for uploading.'); ?></p>
-<input type="file" name="userfile" required="required" size="30" />
+<input type="file" name="userfile" required="required" />
 <input type="submit" name="submit" value="<?php echo _('Submit'); ?>" />
 </form>
 
