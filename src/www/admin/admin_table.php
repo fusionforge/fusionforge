@@ -28,7 +28,6 @@
  * @param	$table		the table to act on
  * @param	$unit		the name of the "units" described by the table's records
  * @param	$primary_key	the primary key of the table
- * @return	string
  */
 function admin_table_add($table, $unit, $primary_key) {
 	// This query may return no rows, but the field names are needed.
@@ -68,7 +67,6 @@ function admin_table_add($table, $unit, $primary_key) {
  *
  * @param	$table	the table to act on
  * @param	$unit	the name of the "units" described by the table's records
- * @return	string
  */
 function admin_table_postadd($table, $unit) {
 	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
@@ -108,7 +106,6 @@ function admin_table_postadd($table, $unit) {
  * @param	$unit		the name of the "units" described by the table's records
  * @param	$primary_key	the primary key of the table
  * @param	$id		the id of the record to act on
- * @return	string
  */
 function admin_table_confirmdelete($table, $unit, $primary_key, $id) {
 	if ($unit == "processor") {
@@ -177,7 +174,6 @@ function admin_table_confirmdelete($table, $unit, $primary_key, $id) {
  * @param	$unit		the name of the "units" described by the table's records
  * @param	$primary_key	the primary key of the table
  * @param	$id		the id of the record to act on
- * @return	string
  */
 function admin_table_delete($table, $unit, $primary_key, $id) {
 	if (db_query_params("DELETE FROM $table WHERE $primary_key=$1", array($id))) {
@@ -196,7 +192,6 @@ function admin_table_delete($table, $unit, $primary_key, $id) {
  * @param	$unit		the name of the "units" described by the table's records
  * @param	$primary_key	the primary key of the table
  * @param	$id		the id of the record to act on
- * @return	string
  */
 function admin_table_edit($table, $unit, $primary_key, $id) {
 	$result = db_query_params("SELECT * FROM $table WHERE $primary_key=$1", array($id));
@@ -238,7 +233,6 @@ function admin_table_edit($table, $unit, $primary_key, $id) {
  * @param	$unit		the name of the "units" described by the table's records
  * @param	$primary_key	the primary key of the table
  * @param	$id		the id of the record to act on
- * @return	string
  */
 function admin_table_postedit($table, $unit, $primary_key, $id) {
 	global $_POST;
@@ -298,7 +292,6 @@ function admin_table_postedit($table, $unit, $primary_key, $id) {
  * @param	$table		the table to act on
  * @param	$unit		the name of the "units" described by the table's records
  * @param	$primary_key	the primary key of the table
- * @return	string
  */
 function admin_table_show($table, $unit, $primary_key) {
         global $HTML;
