@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-16 15:52+0100\n"
+"POT-Creation-Date: 2014-01-20 13:46+0100\n"
 "PO-Revision-Date: 2009-01-13 16:27+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1061,7 +1061,7 @@ msgstr ""
 #: plugins/contribtracker/www/global_admin.php:350
 #: plugins/contribtracker/www/project_admin.php:318
 #: plugins/globaldashboard/www/admin/manage_accounts.php:92
-#: plugins/oauthconsumer/www/providers.php:32 www/admin/admin_table.php:330
+#: plugins/oauthconsumer/www/providers.php:32 www/admin/admin_table.php:323
 #: www/admin/responses_admin.php:45 www/admin/responses_admin.php:92
 #: www/admin/trove/trove_cat_list.php:52 www/frs/admin/showreleases.php:111
 #: www/people/skills_utils.php:45 www/people/skills_utils.php:103
@@ -1597,7 +1597,7 @@ msgstr ""
 #: common/docman/views/reporting.php:92 common/docman/views/reporting.php:94
 #: common/forum/ForumHTML.class.php:85 common/frs/FRSRelease.class.php:294
 #: common/frs/FRSRelease.class.php:297 common/frs/FRSRelease.class.php:301
-#: common/include/utils.php:507 common/tracker/actions/admin-ind.php:139
+#: common/include/utils.php:508 common/tracker/actions/admin-ind.php:139
 #: common/tracker/actions/admin-ind.php:142
 #: common/tracker/actions/admin-ind.php:147
 #: common/tracker/actions/admin-ind.php:150
@@ -1637,6 +1637,7 @@ msgstr ""
 #: common/tracker/include/ArtifactTypeHtml.class.php:325
 #: common/tracker/include/ArtifactTypeHtml.class.php:371
 #: common/tracker/include/build_submission_form.php:45
+#: common/tracker/include/build_submission_form.php:53
 #: common/tracker/include/build_submission_form.php:62
 #: common/tracker/include/build_submission_form.php:66
 #: common/tracker/include/build_submission_form.php:72
@@ -2041,7 +2042,7 @@ msgstr ""
 #: plugins/oauthprovider/www/request_tokens.php:108
 #: plugins/scmgit/common/GitPlugin.class.php:1098
 #: plugins/scmgit/common/GitPlugin.class.php:1107
-#: www/admin/admin_table.php:163 www/admin/admin_table.php:331
+#: www/admin/admin_table.php:160 www/admin/admin_table.php:324
 #: www/admin/responses_admin.php:46 www/admin/trove/trove_cat_edit.php:150
 #: www/admin/useredit.php:231 www/admin/userlist.php:134
 #: www/admin/userlist.php:136 www/forum/admin/index.php:186
@@ -2066,7 +2067,7 @@ msgstr ""
 #: plugins/mantisbt/view/admin/addCategory.php:34
 #: plugins/mantisbt/view/admin/addVersion.php:47
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:64
-#: www/account/editsshkeys.php:84 www/admin/admin_table.php:55
+#: www/account/editsshkeys.php:84 www/admin/admin_table.php:54
 #: www/admin/database.php:165 www/admin/trove/trove_cat_add.php:116
 #: www/admin/trove/trove_cat_list.php:50 www/admin/trove/trove_cat_list.php:53
 #: www/pm/mod_task.php:289 www/reporting/timeadd.php:183
@@ -2389,7 +2390,7 @@ msgstr ""
 
 #: common/forum/ForumHTML.class.php:95
 #: common/widget/Widget_ProjectLatestNews.class.php:42
-#: www/export/projnews.php:72 www/index_std.php:100
+#: www/export/projnews.php:72 www/index_std.php:156
 msgid "Latest News"
 msgstr ""
 
@@ -2487,8 +2488,8 @@ msgstr ""
 #: plugins/scmgit/common/GitPlugin.class.php:1128
 #: plugins/scmhg/common/HgPlugin.class.php:647
 #: plugins/webanalytics/view/admin/updateLinkValue.php:42
-#: www/admin/admin_table.php:59 www/admin/admin_table.php:166
-#: www/admin/admin_table.php:227 www/forum/admin/index.php:414
+#: www/admin/admin_table.php:58 www/admin/admin_table.php:163
+#: www/admin/admin_table.php:222 www/forum/admin/index.php:414
 #: www/forum/monitor.php:65 www/my/rmproject.php:96
 #: www/people/editprofile.php:157 www/people/editprofile.php:215
 #: www/pm/mod_task.php:289 www/register/index.php:315
@@ -3459,7 +3460,7 @@ msgstr ""
 msgid "Error: file too large"
 msgstr ""
 
-#: common/include/MailParser.class.php:85
+#: common/include/MailParser.class.php:84
 msgid "Error - only text/plain supported at this time"
 msgstr ""
 
@@ -3619,7 +3620,7 @@ msgstr ""
 msgid "Docs"
 msgstr ""
 
-#: common/include/Navigation.class.php:489 www/index_std.php:18
+#: common/include/Navigation.class.php:489 www/index_std.php:40
 msgid "Document Management."
 msgstr ""
 
@@ -4250,11 +4251,11 @@ msgstr ""
 msgid "New %1$s User"
 msgstr ""
 
-#: common/include/utils.php:205 common/mail/Mail.class.php:38
+#: common/include/utils.php:206 common/mail/Mail.class.php:38
 msgid "UTF-8"
 msgstr ""
 
-#: common/include/utils.php:507
+#: common/include/utils.php:508
 msgid "Priority Colors"
 msgstr ""
 
@@ -4848,7 +4849,7 @@ msgstr ""
 #: plugins/mantisbt/view/addOrEditNote.php:58
 #: plugins/scmgit/common/GitPlugin.class.php:1129
 #: plugins/scmhg/common/HgPlugin.class.php:648
-#: www/account/pending-resend.php:75 www/admin/admin_table.php:225
+#: www/account/pending-resend.php:75 www/admin/admin_table.php:220
 #: www/admin/cronman.php:37 www/admin/globalroleedit.php:250
 #: www/admin/index.php:169 www/admin/pending-news.php:160
 #: www/forum/admin/index.php:413 www/include/vote_function.php:286
@@ -9281,7 +9282,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:206
-#: www/admin/admin_table.php:313
+#: www/admin/admin_table.php:306
 msgid "add new"
 msgstr ""
 
@@ -11191,7 +11192,7 @@ msgstr ""
 msgid "Upload a new file"
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:195
+#: plugins/mediawiki/www/plugin_admin.php:194
 #: www/frs/admin/editrelease.php:309 www/frs/admin/qrs.php:210
 #, php-format
 msgid ""
@@ -11199,24 +11200,24 @@ msgid ""
 "the <a href=\"%2$s\">project's incoming directory</a> (%1$s)."
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:197
+#: plugins/mediawiki/www/plugin_admin.php:196
 #: www/frs/admin/editrelease.php:311 www/frs/admin/qrs.php:212
 msgid ""
 "This direct <tt>sftp://</tt> link only works with some browsers, such as "
 "Konqueror."
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:200
+#: plugins/mediawiki/www/plugin_admin.php:199
 #: www/frs/admin/editrelease.php:300 www/frs/admin/editrelease.php:312
 #: www/frs/admin/qrs.php:213
 msgid "Choose an already uploaded file:"
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:208
+#: plugins/mediawiki/www/plugin_admin.php:207
 msgid "… or delete the currently uploaded logo and revert to the site default"
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:209
+#: plugins/mediawiki/www/plugin_admin.php:208
 msgid "Upload new logo"
 msgstr ""
 
@@ -14096,65 +14097,65 @@ msgstr ""
 msgid "Directory"
 msgstr ""
 
-#: www/admin/admin_table.php:41
+#: www/admin/admin_table.php:40
 #, fuzzy, php-format
 msgid "Create a new %s below:"
 msgstr "Developers"
 
-#: www/admin/admin_table.php:94 www/admin/admin_table.php:286
+#: www/admin/admin_table.php:92 www/admin/admin_table.php:280
 #, php-format
 msgid "%s successfully added."
 msgstr ""
 
-#: www/admin/admin_table.php:118
+#: www/admin/admin_table.php:115
 #, php-format
 msgid ""
 "You cannot delete the processor %s since it is currently referenced in a "
 "file release."
 msgstr ""
 
-#: www/admin/admin_table.php:127
+#: www/admin/admin_table.php:124
 #, php-format
 msgid ""
 "You can't delete the license %s since it is currently referenced in a "
 "project."
 msgstr ""
 
-#: www/admin/admin_table.php:135
+#: www/admin/admin_table.php:132
 #, php-format
 msgid ""
 "You cannot delete the language %s since it is currently referenced in a user "
 "profile."
 msgstr ""
 
-#: www/admin/admin_table.php:144
+#: www/admin/admin_table.php:141
 #, php-format
 msgid ""
 "You cannot delete the theme %s since it is currently referenced in a user "
 "profile."
 msgstr ""
 
-#: www/admin/admin_table.php:155
+#: www/admin/admin_table.php:152
 #, php-format
 msgid "Are you sure you want to delete this %s?"
 msgstr ""
 
-#: www/admin/admin_table.php:185
+#: www/admin/admin_table.php:181
 #, php-format
 msgid "%s successfully deleted."
 msgstr ""
 
-#: www/admin/admin_table.php:207
+#: www/admin/admin_table.php:202
 #, php-format
 msgid "Modify the %s below:"
 msgstr ""
 
-#: www/admin/admin_table.php:263
+#: www/admin/admin_table.php:257
 #, php-format
 msgid "%s successfully modified."
 msgstr ""
 
-#: www/admin/admin_table.php:358
+#: www/admin/admin_table.php:351
 #, php-format
 msgid "Edit the %ss Table"
 msgstr ""
@@ -16920,11 +16921,11 @@ msgstr ""
 msgid "Survey not found."
 msgstr ""
 
-#: www/index_std.php:9
+#: www/index_std.php:31
 msgid "FusionForge helps you manage the entire development life cycle"
 msgstr ""
 
-#: www/index_std.php:12
+#: www/index_std.php:34
 msgid ""
 "FusionForge has tools to help your team collaborate, like message forums and "
 "mailing lists; tools to create and control access to Source Code Management "
@@ -16933,275 +16934,430 @@ msgid ""
 "project."
 msgstr ""
 
-#: www/index_std.php:15
+#: www/index_std.php:37
 msgid "Additional Features:"
 msgstr ""
 
-#: www/index_std.php:17
+#: www/index_std.php:39
 msgid "Manage File Releases."
 msgstr ""
 
-#: www/index_std.php:19
+#: www/index_std.php:41
 msgid "News announcements."
 msgstr ""
 
-#: www/index_std.php:20
+#: www/index_std.php:42
 msgid "Surveys for users and admins."
 msgstr ""
 
-#: www/index_std.php:21
+#: www/index_std.php:43
 msgid ""
 "Issue tracking with \"unlimited\" numbers of categories, text fields, etc."
 msgstr ""
 
-#: www/index_std.php:22
+#: www/index_std.php:44
 msgid "Task management."
 msgstr ""
 
-#: www/index_std.php:23
+#: www/index_std.php:45
 msgid "Wiki (using MediaWiki or phpWiki)."
 msgstr ""
 
-#: www/index_std.php:24
+#: www/index_std.php:46
 msgid "A powerful plugin system to add new features."
 msgstr ""
 
-#: www/index_std.php:27
+#: www/index_std.php:48
+msgid "What's new in FusionForge 5.3"
+msgstr ""
+
+#: www/index_std.php:49
+msgid ""
+"Checkout the roadmap for closed issues (bugs, patches, features requests) "
+msgstr ""
+
+#: www/index_std.php:49
+msgid "here"
+msgstr ""
+
+#: www/index_std.php:50
+msgid "Standards features:"
+msgstr ""
+
+#: www/index_std.php:52
+msgid "Widget: MyArtifacts Enhancement : add monitored artifacts (TrivialDev)"
+msgstr ""
+
+#: www/index_std.php:53
+msgid ""
+"Trackers: Attachements moved to filesystem to allow larger attachments & "
+"reduce DB size (Alcatel-Lucent)"
+msgstr ""
+
+#: www/index_std.php:54
+msgid ""
+"Docman: Files moved to filesystem using the Storage generic class "
+"(TrivialDev)"
+msgstr ""
+
+#: www/index_std.php:55
+msgid "Users: notify admins when user has validated his account (TrivialDev)"
+msgstr ""
+
+#: www/index_std.php:56
+msgid "Allow project to disable the Project Activity (Alcatel-Lucent)"
+msgstr ""
+
+#: www/index_std.php:57
+msgid ""
+"User: account ssh key management: rewrite backend, add more informations "
+"such as fingerprint, deploy flag, easy delete (TrivialDev)"
+msgstr ""
+
+#: www/index_std.php:58
+msgid "Docman: Directory monitoring (TrivialDev)"
+msgstr ""
+
+#: www/index_std.php:59
+msgid "Activity: New Directory appears now in activity (TrivialDev)"
+msgstr ""
+
+#: www/index_std.php:60
+msgid ""
+"Docman: Display number of download per file, max upload size (TrivialDev)"
+msgstr ""
+
+#: www/index_std.php:61
+msgid ""
+"Widget: Project Document Activity : new or updates files, new directories, "
+"in the last 4 weeks (TrivialDev)"
+msgstr ""
+
+#: www/index_std.php:62
+msgid "Frs: Download statistics are available as graph now (TrivialDev)"
+msgstr ""
+
+#: www/index_std.php:63
+msgid ""
+"New SOAP services to handle adding/removing groups, users and tasks (patch "
+"by Pasquale Vitale)"
+msgstr ""
+
+#: www/index_std.php:64
+msgid "Docman: add report view as in FRS (TrivialDev)"
+msgstr ""
+
+#: www/index_std.php:65
+msgid "New javascript based graphics (bybye jpgraph) (TrivialDev)"
+msgstr ""
+
+#: www/index_std.php:67
+msgid "Plugins:"
+msgstr ""
+
+#: www/index_std.php:69
+msgid ""
+"headermenu: new plugin to handle links in headermenu, outermenu & groupmenu "
+"(TrivialDev)"
+msgstr ""
+
+#: www/index_std.php:70
+msgid ""
+"scmgit: add browsing capability for user personal repository (TrivialDev)"
+msgstr ""
+
+#: www/index_std.php:71
+msgid "scmgit: basic activity support (TrivialDev)"
+msgstr ""
+
+#: www/index_std.php:72
+msgid ""
+"scmgit: multiple repositories per project (developed for/sponsored by "
+"AdaCore)"
+msgstr ""
+
+#: www/index_std.php:73
+msgid ""
+"scmhg: merge patch from Denise Patzker: add http support, online browse, "
+"stats (TrivialDev)"
+msgstr ""
+
+#: www/index_std.php:74
+msgid ""
+"webanalytics: new plugin to add support for piwik or google analytics tool "
+"(TrivialDev)"
+msgstr ""
+
+#: www/index_std.php:75
+msgid ""
+"scmhook: Support added for pre-revprop-changehooks to change properties "
+"(Alcatel-Lucent)"
+msgstr ""
+
+#: www/index_std.php:76
+msgid "scmhook: Add commitEmail support for scmhg plugin (TrivialDev)"
+msgstr ""
+
+#: www/index_std.php:77
+msgid ""
+"new admssw plugin to provide ADMS.SW compatible RDF descriptions of projects"
+msgstr ""
+
+#: www/index_std.php:78
+msgid ""
+"blocks: improved with a new HTML widget for the project summary page "
+"(Alcatel-Lucent)"
+msgstr ""
+
+#: www/index_std.php:79
+msgid "svntracker : this plugin is superseed by scmhook"
+msgstr ""
+
+#: www/index_std.php:80
+msgid "svncommitemail : this plugin is superseed by scmhook"
+msgstr ""
+
+#: www/index_std.php:81
+msgid ""
+"new phpcaptcha plugin : enable a captcha in the register page. (TrivialDev)"
+msgstr ""
+
+#: www/index_std.php:83
 msgid "What's new in FusionForge 5.2"
 msgstr ""
 
-#: www/index_std.php:30
+#: www/index_std.php:86
 msgid "Docman: inject ZIP as a tree (Capgemini)"
 msgstr ""
 
-#: www/index_std.php:31
+#: www/index_std.php:87
 msgid ""
 "Widget: New User Widget: Last 5 documents published in my project (Capgemini)"
 msgstr ""
 
-#: www/index_std.php:32
+#: www/index_std.php:88
 msgid "Docman: mass action (Capgemini)"
 msgstr ""
 
-#: www/index_std.php:33
+#: www/index_std.php:89
 msgid ""
 "New Message plugin to display global messages like planned upgrade or "
 "outage\n"
 "  (Alcatel-Lucent)."
 msgstr ""
 
-#: www/index_std.php:35
+#: www/index_std.php:91
 msgid "Docman: complete rewritten of trash and pending view (Capgemini)"
 msgstr ""
 
-#: www/index_std.php:36
+#: www/index_std.php:92
 msgid ""
 "New Scmhook: complete library to handle hooks for any scm available in\n"
 "  fusionforge. Currently supporting post-commit and pre-commit hook.\n"
 "  scmsvn pre-commit and post-commit library is provided (Capgemini)"
 msgstr ""
 
-#: www/index_std.php:39
+#: www/index_std.php:95
 msgid ""
 "New Widget: smcgit personal URL of cloned repositories. Currently just\n"
 "  a list of URLs of your personal repository cloned from project you\n"
 "   belong. (Capgemini)"
 msgstr ""
 
-#: www/index_std.php:42
+#: www/index_std.php:98
 msgid ""
 "Docman: interaction with the projects-hierarchy plugin to enable "
 "hierarchical\n"
 "  browsing. (Capgemini)"
 msgstr ""
 
-#: www/index_std.php:44
+#: www/index_std.php:100
 msgid ""
 "Admin: User add membership to multiples projects in one shot (Capgemini)"
 msgstr ""
 
-#: www/index_std.php:45
+#: www/index_std.php:101
 msgid "New MoinMoinWiki plugin (AdaCore)"
 msgstr ""
 
-#: www/index_std.php:46
+#: www/index_std.php:102
 msgid ""
 "Trackers: New view to display roadmaps view for trackers (Alcatel-Lucent)"
 msgstr ""
 
-#: www/index_std.php:47
+#: www/index_std.php:103
 msgid ""
 "scmsvn: private project can now be browsed with viewvc using user rights "
 "management (TrivialDev)."
 msgstr ""
 
-#: www/index_std.php:48
+#: www/index_std.php:104
 msgid "scmsvn: basic activity support (TrivialDev)."
 msgstr ""
 
-#: www/index_std.php:51
+#: www/index_std.php:107
 msgid "What's new in FusionForge 5.1"
 msgstr ""
 
-#: www/index_std.php:53
+#: www/index_std.php:109
 msgid "New Funky Theme (Capgemini)."
 msgstr ""
 
-#: www/index_std.php:54
+#: www/index_std.php:110
 msgid ""
 "New UI and features for the document manager (download as ZIP, locking, "
 "referencing documents by URL) (Capgemini)."
 msgstr ""
 
-#: www/index_std.php:55
+#: www/index_std.php:111
 msgid ""
 "New progress bar displaying completion state of trackers using a custom "
 "status field."
 msgstr ""
 
-#: www/index_std.php:56
+#: www/index_std.php:112
 msgid "Improved sorting in trackers (Alcatel-Lucent)."
 msgstr ""
 
-#: www/index_std.php:57
+#: www/index_std.php:113
 msgid ""
 "More flexible and more powerful role-based access control system (Coclico)."
 msgstr ""
 
-#: www/index_std.php:58
+#: www/index_std.php:114
 msgid ""
 "New unobtrusive tooltip system based on jquery and tipsy to replace old help "
 "window (Alcatel-Lucent)"
 msgstr ""
 
-#: www/index_std.php:59
+#: www/index_std.php:115
 msgid ""
 "New plugins: Blocks, to add free HTML blocks on top of each tool of the "
 "project; Gravatar, to display user faces; OSLC, implementing the OSLC-CM API "
 "for tracker interoperability with external tools."
 msgstr ""
 
-#: www/index_std.php:60
+#: www/index_std.php:116
 msgid "scmgit plugin: Personal Git repositories for project members (AdaCore)."
 msgstr ""
 
-#: www/index_std.php:61
+#: www/index_std.php:117
 msgid ""
 "Template projects: there can be several of them, and users registering new "
 "projects can pick which template to clone from for their new projects "
 "(Coclico)."
 msgstr ""
 
-#: www/index_std.php:62
+#: www/index_std.php:118
 msgid "Simplified configuration system, using standard *.ini files."
 msgstr ""
 
-#: www/index_std.php:63
+#: www/index_std.php:119
 msgid "Reorganised, modular Apache configuration."
 msgstr ""
 
-#: www/index_std.php:64
+#: www/index_std.php:120
 msgid "RPM packages for Red Hat (and derived) distributions."
 msgstr ""
 
-#: www/index_std.php:67
+#: www/index_std.php:123
 msgid "What's new in FusionForge 5.0"
 msgstr ""
 
-#: www/index_std.php:69
+#: www/index_std.php:125
 msgid ""
 "Many improvements to the trackers: configurable display, workflow "
 "management, links between artifacts, better searches, and more"
 msgstr ""
 
-#: www/index_std.php:70
+#: www/index_std.php:126
 msgid "Rewritten SCM subsystem, with new plugins for Bazaar, Darcs and Git"
 msgstr ""
 
-#: www/index_std.php:71
+#: www/index_std.php:127
 msgid ""
 "New version of Mediawiki plugin, providing independent wikis for each project"
 msgstr ""
 
-#: www/index_std.php:72
+#: www/index_std.php:128
 msgid "Various new plugins: projectlabels, globalsearch, extratabs"
 msgstr ""
 
-#: www/index_std.php:73
+#: www/index_std.php:129
 msgid ""
 "An in-depth rewrite of the theme for better accessibility and XHTML "
 "conformance"
 msgstr ""
 
-#: www/index_std.php:76
+#: www/index_std.php:132
 msgid "What's new in FusionForge 4.8"
 msgstr ""
 
-#: www/index_std.php:78
+#: www/index_std.php:134
 msgid "New project classification by tags (tag cloud)."
 msgstr ""
 
-#: www/index_std.php:79
+#: www/index_std.php:135
 msgid "New reporting item for the File Release System: downloads per package."
 msgstr ""
 
-#: www/index_std.php:80
+#: www/index_std.php:136
 msgid "List of all projects added in Project List"
 msgstr ""
 
-#: www/index_std.php:81
+#: www/index_std.php:137
 msgid "New version of phpWiki plugin, using lastest svn code"
 msgstr ""
 
-#: www/index_std.php:84
+#: www/index_std.php:140
 msgid "What's new in FusionForge 4.7"
 msgstr ""
 
-#: www/index_std.php:86
+#: www/index_std.php:142
 msgid "A new name to avoid confusion with proprietary versions of GForge."
 msgstr ""
 
-#: www/index_std.php:87
+#: www/index_std.php:143
 msgid "Support for PHP5."
 msgstr ""
 
-#: www/index_std.php:88
+#: www/index_std.php:144
 msgid "Support for PostgreSQL 8.x."
 msgstr ""
 
-#: www/index_std.php:89
+#: www/index_std.php:145
 msgid "Translations are now managed by gettext."
 msgstr ""
 
-#: www/index_std.php:90
+#: www/index_std.php:146
 msgid "Support for several configurations running on the same code."
 msgstr ""
 
-#: www/index_std.php:91
+#: www/index_std.php:147
 msgid "Improved security, no need for PHP register_globals."
 msgstr ""
 
-#: www/index_std.php:92
+#: www/index_std.php:148
 msgid "Available as full install CD."
 msgstr ""
 
-#: www/index_std.php:93
+#: www/index_std.php:149
 msgid "New wiki plugins (using MediaWiki or phpWiki)."
 msgstr ""
 
-#: www/index_std.php:94
+#: www/index_std.php:150
 msgid "New online_help plugin."
 msgstr ""
 
-#: www/index_std.php:95
+#: www/index_std.php:151
 msgid "New phpwebcalendar plugin."
 msgstr ""
 
-#: www/index_std.php:96
+#: www/index_std.php:152
 msgid "New project hierarchy plugin."
 msgstr ""
 
-#: www/index_std.php:118
+#: www/index_std.php:174
 #, php-format
 msgid "This site is running %1$s version %2$s"
 msgstr ""
