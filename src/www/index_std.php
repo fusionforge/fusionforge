@@ -1,4 +1,26 @@
 <?php
+/**
+ * FusionForge Standard Index Page
+ *
+ * Copyright 1999-2013, Fusionforge Team
+ * Copyright 2014, Franck Villaume - TrivialDev
+ *
+ * This file is part of FusionForge. FusionForge is free software;
+ * you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the Licence, or (at your option)
+ * any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with FusionForge; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
+
 require_once $gfcommon.'include/FusionForge.class.php';
 ?>
 <!-- whole page table -->
@@ -23,7 +45,41 @@ require_once $gfcommon.'include/FusionForge.class.php';
 <li><?php print _('Wiki (using MediaWiki or phpWiki).'); ?></li>
 <li><?php print _('A powerful plugin system to add new features.'); ?></li>
 </ul>
-
+<h3><?php print _("What's new in FusionForge 5.3"); ?></h3>
+<p><?php print _('Checkout the roadmap for closed issues (bugs, patches, features requests) ') ?><a href="/tracker/roadmap.php?group_id=6&roadmap_id=1&release=5.3"><?php echo _('here') ?></a></p>
+<p><?php print _('Standards features:') ?></p>
+<ul>
+<li><?php print _('Widget: MyArtifacts Enhancement : add monitored artifacts (TrivialDev)'); ?></li>
+<li><?php print _('Trackers: Attachements moved to filesystem to allow larger attachments & reduce DB size (Alcatel-Lucent)'); ?></li>
+<li><?php print _('Docman: Files moved to filesystem using the Storage generic class (TrivialDev)'); ?></li>
+<li><?php print _('Users: notify admins when user has validated his account (TrivialDev)'); ?></li>
+<li><?php print _('Allow project to disable the Project Activity (Alcatel-Lucent)'); ?></li>
+<li><?php print _('User: account ssh key management: rewrite backend, add more informations such as fingerprint, deploy flag, easy delete (TrivialDev)'); ?></li>
+<li><?php print _('Docman: Directory monitoring (TrivialDev)'); ?></li>
+<li><?php print _('Activity: New Directory appears now in activity (TrivialDev)'); ?></li>
+<li><?php print _('Docman: Display number of download per file, max upload size (TrivialDev)'); ?></li>
+<li><?php print _('Widget: Project Document Activity : new or updates files, new directories, in the last 4 weeks (TrivialDev)'); ?></li>
+<li><?php print _('Frs: Download statistics are available as graph now (TrivialDev)'); ?></li>
+<li><?php print _('New SOAP services to handle adding/removing groups, users and tasks (patch by Pasquale Vitale)'); ?></li>
+<li><?php print _('Docman: add report view as in FRS (TrivialDev)'); ?></li>
+<li><?php print _('New javascript based graphics (bybye jpgraph) (TrivialDev)'); ?></li>
+</ul>
+<p><?php print _('Plugins:') ?></p>
+<ul>
+<li><?php print _('headermenu: new plugin to handle links in headermenu, outermenu & groupmenu (TrivialDev)'); ?></li>
+<li><?php print _('scmgit: add browsing capability for user personal repository (TrivialDev)'); ?></li>
+<li><?php print _('scmgit: basic activity support (TrivialDev)'); ?></li>
+<li><?php print _('scmgit: multiple repositories per project (developed for/sponsored by AdaCore)'); ?></li>
+<li><?php print _('scmhg: merge patch from Denise Patzker: add http support, online browse, stats (TrivialDev)'); ?></li>
+<li><?php print _('webanalytics: new plugin to add support for piwik or google analytics tool (TrivialDev)'); ?></li>
+<li><?php print _('scmhook: Support added for pre-revprop-changehooks to change properties (Alcatel-Lucent)'); ?></li>
+<li><?php print _('scmhook: Add commitEmail support for scmhg plugin (TrivialDev)'); ?></li>
+<li><?php print _('new admssw plugin to provide ADMS.SW compatible RDF descriptions of projects'); ?></li>
+<li><?php print _('blocks: improved with a new HTML widget for the project summary page (Alcatel-Lucent)'); ?></li>
+<li><?php print _('svntracker : this plugin is superseed by scmhook'); ?></li>
+<li><?php print _('svncommitemail : this plugin is superseed by scmhook'); ?></li>
+<li><?php print _('new phpcaptcha plugin : enable a captcha in the register page. (TrivialDev)'); ?></li>
+</ul>
 <h3><?php print _("What's new in FusionForge 5.2"); ?></h3>
 <ul>
 
