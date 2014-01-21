@@ -216,9 +216,8 @@ class Artifact extends Error {
 		if (!$priority) {
 			$priority=3;
 		}
-//		if (!$status_id) {
-			$status_id=1;		// on creation, status is set to "open"
-//		}
+		$status_id=1;		// on creation, status is set to "open"
+
 		//
 		//	They may be using an extra field "status" box so we have to remap
 		//	the status_id based on the extra field - this keeps the counters
@@ -1526,7 +1525,7 @@ class Artifact extends Error {
 					}
 					$this->extra_field_data[$arr['extra_field_id']][]=$arr['field_data'];
 				} else {
-					$this->extra_field_data[$arr['extra_field_id']]=$arr['field_data'];
+					$this->extra_field_data[$arr['extra_field_id']] = $arr['field_data'];
 				}
 			}
 		}
@@ -1551,10 +1550,10 @@ class Artifact extends Error {
 	/**
 	 * mailFollowupEx - send out an email update for this artifact.
 	 *
-	 * @param	time_t	Time of the change
-	 * @param	int	(1) initial/creation (2) update.
-	 * @param	array	Array of additional addresses to mail to.
-	 * @param	array	Array of fields changed in this update .
+	 * @param	time_t	$tm	Time of the change
+	 * @param	int	$type	(1) initial/creation (2) update
+	 * @param	array	$more_addresses	Array of additional addresses to mail to
+	 * @param	array	$changes	Array of fields changed in this update
 	 * @access	private
 	 * @return	boolean	success.
 	 */
@@ -1718,8 +1717,8 @@ class Artifact extends Error {
 
 		//now remove all duplicates from the email list
 		if (count($emails) > 0) {
-			$BCC=implode(',',array_unique($emails));
-			util_send_message('',$subject,$body,$from,$BCC,'',$extra_headers);
+			$bcc = implode(',',array_unique($emails));
+			util_send_message('', $subject, $body, $from, $bcc, '', $extra_headers);
 		}
 
 		$this->sendSubjectMsg = $subject;
@@ -1833,13 +1832,12 @@ class ArtifactComparator {
 			$aa=$a->getExtraFieldDataText();
 			$ba=$b->getExtraFieldDataText();
 			if(!isset($this->criterion) || empty($this->criterion)) {
-                                $criterion = 1;
+				$criterion = 1;
+			} else {
+				$criterion = $this->criterion;
 			}
-			else {
-                                $criterion = $this->criterion;
-			}
-                        $af=$aa[$criterion]['value'];
-                        $bf=$ba[$criterion]['value'];
+			$af=$aa[$criterion]['value'];
+			$bf=$ba[$criterion]['value'];
 			$namecmp = strcoll ($af,$bf) ;
 			if ($namecmp != 0) {
 				return $namecmp ;
