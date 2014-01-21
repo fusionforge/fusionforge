@@ -234,7 +234,7 @@ function session_login_valid_dbonly($loginname, $passwd, $allowpending) {
 		}
 		if (!$res || db_numrows($res) < 1) {
 			// No user by that name
-			$warning_msg = _('Invalid Password Or User Name');
+			$error_msg = _('Invalid Password Or User Name');
 			return false;
 		} else {
 			// There is a user with the provided user_name/email, but the MD5 passwds do not match
@@ -242,10 +242,10 @@ function session_login_valid_dbonly($loginname, $passwd, $allowpending) {
 			$usr = db_fetch_array($res);
 			$userstatus = $usr['status'] ;
 
-			if (crypt ($passwd, $usr['unix_pw']) != $usr['unix_pw']) {
+			if (crypt($passwd, $usr['unix_pw']) != $usr['unix_pw']) {
 				// Even the (crypt) unix_pw does not patch
 				// This one has clearly typed a bad passwd
-				$warning_msg = _('Invalid Password Or User Name');
+				$error_msg = _('Invalid Password Or User Name');
 				return false;
 			}
 			// User exists, (crypt) unix_pw matches
@@ -269,13 +269,13 @@ function session_login_valid_dbonly($loginname, $passwd, $allowpending) {
 				// It should work, except for status errors
 				$res = db_query_params ('UPDATE users SET unix_pw=$1 WHERE user_id=$2',
 							array (account_genunixpw($passwd),
-							       $usr['user_id'])) ;
+									$usr['user_id'])) ;
 				return session_check_credentials_in_database($loginname, $passwd, $allowpending) ;
 			} else {
 				// Invalidate (MD5) user_pw, refuse authentication
 				$res = db_query_params ('UPDATE users SET user_pw=$1 WHERE user_id=$2',
 							array ('OUT OF DATE',
-							       $usr['user_id'])) ;
+									 $usr['user_id'])) ;
 				$warning_msg =_('Invalid Password Or User Name');
 				return false;
 			}
@@ -519,7 +519,7 @@ function session_require_perm($section, $reference, $action = NULL, $reason = ''
  *	fails checks.
  *
  */
-function session_require_global_perm($section, $action=NULL, $reason='') {
+function session_require_global_perm($section, $action = NULL, $reason = '') {
 	if (!forge_check_global_perm($section, $action)) {
 		if (!$reason) {
 			$reason = sprintf(_('Permission denied. The %s administrators will have to grant you permission to view this page.'),
@@ -632,13 +632,13 @@ function session_set_admin() {
  */
 function session_getdata($user_id) {
 	return db_query_params('SELECT u.*, sl.language_id, sl.name,
-		    sl.filename, sl.classname, sl.language_code,
-		    t.dirname, t.fullname
+			sl.filename, sl.classname, sl.language_code,
+			t.dirname, t.fullname
 		FROM users u, supported_languages sl, themes t
 		WHERE u.language=sl.language_id
 		    AND u.theme_id=t.theme_id
 		    AND u.user_id=$1',
-	    array($user_id));
+		array($user_id));
 }
 
 /**
@@ -768,14 +768,19 @@ function session_set_for_authplugin($authpluginname) {
 //TODO - this should be generalized and used for pre.php,
 //SOAP, forum_gateway.php, tracker_gateway.php, etc to
 //setup languages
+
+/**
+ * @param $sessionKey
+ * @return bool
+ */
 function session_continue($sessionKey) {
 	global $session_ser;
 	$session_ser = $sessionKey;
 	session_set();
 	setup_gettext_from_context();
 	setup_tz_from_context();
-	$LUSER =& session_get_user();
-	if (!is_object($LUSER) || $LUSER->isError()) {
+	$user = session_get_user();
+	if (!is_object($user) || $user->isError()) {
 		return false;
 	}
 	return true;
