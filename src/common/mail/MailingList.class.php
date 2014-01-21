@@ -161,14 +161,17 @@ class MailingList extends Error {
 		$listPassword = substr(md5(time() . util_randbytes()), 0, 16);
 
 		db_begin();
-		$result = db_query_params ('INSERT INTO mail_group_list (group_id,list_name,is_public,password,list_admin,status,description) VALUES ($1,$2,$3,$4,$5,$6,$7)',
-					   array($this->Group->getID(),
-						  $realListName,
-						  $isPublic,
-						  $listPassword,
-						  $creator_id,
-						  MAIL__MAILING_LIST_IS_REQUESTED,
-						  $description)) ;
+		$result = db_query_params('INSERT INTO mail_group_list
+					(group_id, list_name, is_public, password, list_admin, status, description)
+					VALUES ($1,$2,$3,$4,$5,$6,$7)',
+			array(
+				$this->Group->getID(),
+				$realListName,
+				$isPublic,
+				$listPassword,
+				$creator_id,
+				MAIL__MAILING_LIST_IS_REQUESTED,
+				$description));
 
 		if (!$result) {
 			$this->setError(_('Error Creating mailing list')._(': ').db_error());
