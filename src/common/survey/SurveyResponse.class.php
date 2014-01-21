@@ -40,15 +40,15 @@ class SurveyResponse extends Error {
 	var $Group;
 
 	/**
-	* Constructor.
-	*
-	* @param	$Group
-	* @param	bool	$arr
-	* @internal	param	\The $object Group object to which this Survey Response is associated.
-	* @internal	param	\The $int question_id.
-	* @internal	param	\The $array associative array of data.
-	* @return	\SurveyResponse
-	*/
+	 * Constructor.
+	 *
+	 * @param	$Group
+	 * @param	bool	$arr
+	 * @internal	param	\The $object Group object to which this Survey Response is associated.
+	 * @internal	param	\The $int question_id.
+	 * @internal	param	\The $array associative array of data.
+	 * @return	\SurveyResponse
+	 */
 	function __construct(&$Group, $arr=false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
@@ -67,22 +67,22 @@ class SurveyResponse extends Error {
 	}
 
 	/**
-	* create - use this function to create a survey response
-	*
-	* @param	$user_id
-	* @param	$survey_id
-	* @param	$question_id
-	* @param	$response
-	* @internal	param		\The $string question
-	* @internal	param		\The $int question type
-	*				1: Radio Buttons 1-5
-	*				2: Text Area
-	*				3: Radio Buttons Yes/No
-	*				4: Comment Only
-	*				5: Text Field
-	*				6: None
-	* @return	boolean		success.
-	*/
+	 * create - use this function to create a survey response
+	 *
+	 * @param	$user_id
+	 * @param	$survey_id
+	 * @param	$question_id
+	 * @param	$response
+	 * @internal	param		\The $string question
+	 * @internal	param		\The $int question type
+	 *				1: Radio Buttons 1-5
+	 *				2: Text Area
+	 *				3: Radio Buttons Yes/No
+	 *				4: Comment Only
+	 *				5: Text Field
+	 *				6: None
+	 * @return	boolean		success.
+	 */
 	function create($user_id, $survey_id, $question_id, $response) {
 		$res = db_query_params ('INSERT INTO survey_responses (user_id,group_id,survey_id,question_id,response,post_date) VALUES ($1,$2,$3,$4,$5,$6)',
 					array ($user_id,
