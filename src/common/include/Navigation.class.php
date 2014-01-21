@@ -4,6 +4,7 @@
  *
  * Copyright 2009 - 2010, Olaf Lenz
  * Copyright 2011-2012, Franck Villaume - TrivialDev
+ * Copyright 2014, Stéphane-Eymeric Bredthauer
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -167,7 +168,7 @@ class Navigation extends Error {
 			$res .= '<input type="hidden" value="'.$value.'" name="'.$name.'" />' . "\n";
 		}
 		$res .= '<input type="text" size="12" id="searchBox-words" name="words" value="'
-			. $defaultWords . '" />' . "\n";
+			. $defaultWords . '" required="required" />' . "\n";
 		$res .= '<input type="submit" name="Search" value="'._('Search').'" />' . "\n";
 
 		if (isset($group_id) && $group_id) {
