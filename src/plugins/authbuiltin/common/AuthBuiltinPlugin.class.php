@@ -76,7 +76,7 @@ class AuthBuiltinPlugin extends ForgeAuthPlugin {
 		} else {
 			$result .= _('Login Name')._(':');
 		}
-		$result .= '<br /><input type="text" name="form_loginname" value="' . htmlspecialchars(stripslashes($loginname)) . '" required="required" /></p><p>' . _('Password')._(':') . '<br /><input type="password" name="form_pw" /></p><p><input type="submit" name="login" value="' . _('Login') . '" />
+		$result .= '<br /><input type="text" name="form_loginname" value="' . htmlspecialchars(stripslashes($loginname)) . '" required="required" /></p><p>' . _('Password')._(':') . '<br /><input type="password" name="form_pw" required="required" /></p><p><input type="submit" name="login" value="' . _('Login') . '" />
 </p>
 </form>' ;
 
