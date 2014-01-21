@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-20 13:46+0100\n"
+"POT-Creation-Date: 2014-01-21 14:51+0100\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -20,9 +20,8 @@ msgstr ""
 
 #: common/account/actions/addsshkey.php:35
 #: common/account/actions/addsshkey.php:50
-#, fuzzy
 msgid "SSH Key added successfully."
-msgstr "Обновено успешно"
+msgstr ""
 
 #: common/account/actions/addsshkey.php:40
 #: common/docman/actions/addfile.php:124 common/docman/actions/addfile.php:160
@@ -34,9 +33,8 @@ msgid "Invalid file name."
 msgstr ""
 
 #: common/account/actions/deletesshkey.php:30
-#, fuzzy
 msgid "SSH Key deleted successfully."
-msgstr "Създадено успешно"
+msgstr ""
 
 #: common/docman/actions/addfile.php:58 common/docman/actions/addfile.php:65
 #: common/docman/actions/addsubdocgroup.php:48
@@ -60,14 +58,12 @@ msgstr "Създадено успешно"
 #: common/docman/actions/updatewebdavinterface.php:27
 #: common/docman/actions/validatefile.php:40
 #: common/docman/views/addfile.php:53
-#, fuzzy
 msgid "Document Manager Action Denied."
-msgstr "Преглед на документите"
+msgstr ""
 
 #: common/docman/actions/addfile.php:75
-#, fuzzy
 msgid "No valid folder was selected."
-msgstr "Невалиден проект"
+msgstr ""
 
 #: common/docman/actions/addfile.php:93 common/docman/actions/addfile.php:106
 msgid "Error getting blank document."
@@ -84,28 +80,26 @@ msgstr ""
 #: common/docman/actions/addfile.php:193
 #, fuzzy, php-format
 msgid "Document %s submitted successfully."
-msgstr "Документът е добавен успешно"
+msgstr "Документът е добавен успешно."
 
 #: common/docman/actions/addfile.php:196
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Document %s has been successfully uploaded and is waiting to be approved."
-msgstr "Документът е добавен успешно"
+msgstr ""
 
 #: common/docman/actions/addsubdocgroup.php:63
-#, fuzzy
 msgid "Document subfolder successfully created."
-msgstr "Документът е добавен успешно"
+msgstr ""
 
 #: common/docman/actions/addsubdocgroup.php:67
-#, fuzzy
 msgid "Document folder successfully created."
-msgstr "Документът е добавен успешно"
+msgstr ""
 
 #: common/docman/actions/deldir.php:63
-#, fuzzy, php-format
+#, php-format
 msgid "Document folder %s deleted successfully."
-msgstr "Документът е добавен успешно"
+msgstr ""
 
 #: common/docman/actions/delfile.php:36
 #: common/docman/actions/enforcereserve.php:36
@@ -124,29 +118,26 @@ msgstr ""
 #: common/docman/actions/monitorfile.php:72
 #: common/docman/actions/trashfile.php:62
 #: common/docman/actions/validatefile.php:57 www/docman/view.php:249
-#, fuzzy
 msgid "No action to perform"
-msgstr "Преглед на документите"
+msgstr ""
 
 #: common/docman/actions/delfile.php:52
-#, fuzzy
 msgid "deleted successfully."
-msgstr "Създадено успешно"
+msgstr ""
 
 #: common/docman/actions/editdocgroup.php:101
-#, fuzzy, php-format
+#, php-format
 msgid "Documents folder %s updated successfully"
-msgstr "Документът е добавен успешно"
+msgstr ""
 
 #: common/docman/actions/editdocgroup.php:103
-#, fuzzy, php-format
+#, php-format
 msgid "on project %s"
-msgstr "Общо за целия проект"
+msgstr ""
 
 #: common/docman/actions/editfile.php:69
-#, fuzzy
 msgid "No document found to update"
-msgstr "Няма намерени документи"
+msgstr ""
 
 #: common/docman/actions/editfile.php:89
 #, php-format
@@ -154,23 +145,21 @@ msgid "Invalid file attack attempt %s."
 msgstr ""
 
 #: common/docman/actions/editfile.php:112
-#, fuzzy, php-format
+#, php-format
 msgid "Document %s updated successfully."
-msgstr "Обновено успешно"
+msgstr ""
 
 #: common/docman/actions/emptytrash.php:38
 msgid "Unable to clean trash"
 msgstr ""
 
 #: common/docman/actions/emptytrash.php:42
-#, fuzzy
 msgid "Emptied Trash successfully."
-msgstr "Обновено успешно"
+msgstr ""
 
 #: common/docman/actions/enforcereserve.php:47
-#, fuzzy
 msgid "reservation enforced successfully."
-msgstr "Обновено успешно"
+msgstr ""
 
 #: common/docman/actions/forcereindexenginesearch.php:36
 msgid ""
@@ -178,9 +167,8 @@ msgid ""
 msgstr ""
 
 #: common/docman/actions/injectzip.php:49
-#, fuzzy
 msgid "Archive injected successfully."
-msgstr "Форумът е създаден успешно"
+msgstr ""
 
 #: common/docman/actions/monitordirectory.php:38
 #: common/docman/Document.class.php:950
@@ -188,7 +176,7 @@ msgstr "Форумът е създаден успешно"
 #: common/docman/views/reporting.php:169
 #, fuzzy
 msgid "Folder"
-msgstr "Име на форума"
+msgstr "Добавяне на бележка"
 
 #: common/docman/actions/monitordirectory.php:43
 #: common/docman/actions/monitorfile.php:44
@@ -411,9 +399,8 @@ msgstr ""
 #: common/tracker/Artifact.class.php:618
 #: common/tracker/ArtifactType.class.php:545 www/frs/monitor.php:65
 #: www/frs/monitor.php:66
-#, fuzzy
 msgid "Monitoring Started"
-msgstr "Наблюдавани Форуми"
+msgstr ""
 
 #: common/docman/actions/monitordirectory.php:72
 #: common/docman/actions/monitorfile.php:76
@@ -421,9 +408,8 @@ msgstr "Наблюдавани Форуми"
 #: common/tracker/Artifact.class.php:628
 #: common/tracker/ArtifactType.class.php:555 www/developer/monitor.php:75
 #: www/frs/monitor.php:57 www/frs/monitor.php:58
-#, fuzzy
 msgid "Monitoring Stopped"
-msgstr "Наблюдавани Форуми"
+msgstr ""
 
 #: common/docman/actions/monitordirectory.php:76
 #: common/docman/actions/monitorfile.php:80
@@ -431,59 +417,49 @@ msgid "Docman: monitoring action unknown."
 msgstr ""
 
 #: common/docman/actions/releasefile.php:49
-#, fuzzy
 msgid "released successfully."
-msgstr "Създадено успешно"
+msgstr ""
 
 #: common/docman/actions/reservefile.php:49
-#, fuzzy
 msgid "reserved successfully."
-msgstr "Документът е добавен успешно"
+msgstr ""
 
 #: common/docman/actions/trashdir.php:99
-#, fuzzy, php-format
+#, php-format
 msgid "Documents folder %s moved to trash successfully."
-msgstr "Документът е добавен успешно"
+msgstr ""
 
 #: common/docman/actions/trashfile.php:66
-#, fuzzy
 msgid "moved to trash successfully."
-msgstr "Документът е добавен успешно"
+msgstr ""
 
 #: common/docman/actions/updatecreateonline.php:33
-#, fuzzy
 msgid "Create Online Documents Status updated successfully: Active."
-msgstr "Документът е добавен успешно"
+msgstr ""
 
 #: common/docman/actions/updatecreateonline.php:36
-#, fuzzy
 msgid "Create Online Documents Status updated successfully: Off."
-msgstr "Документът е добавен успешно"
+msgstr ""
 
 #: common/docman/actions/updateenginesearch.php:33
-#, fuzzy
 msgid "Search Engine Status updated successfully: Active."
-msgstr "Документът е добавен успешно"
+msgstr ""
 
 #: common/docman/actions/updateenginesearch.php:36
-#, fuzzy
 msgid "Search Engine Status updated successfully: Off."
-msgstr "Документът е добавен успешно"
+msgstr ""
 
 #: common/docman/actions/updatewebdavinterface.php:33
-#, fuzzy
 msgid "Webdav Interface updated successfully: Active."
-msgstr "Обновено успешно"
+msgstr ""
 
 #: common/docman/actions/updatewebdavinterface.php:36
-#, fuzzy
 msgid "Webdav Interface updated successfully: Off."
-msgstr "Обновено успешно"
+msgstr ""
 
 #: common/docman/actions/validatefile.php:61
-#, fuzzy
 msgid "activated successfully."
-msgstr "Обновено успешно"
+msgstr ""
 
 #: common/docman/Document.class.php:65
 #: common/docman/DocumentFactory.class.php:92
@@ -507,9 +483,8 @@ msgstr "Обновено успешно"
 #: common/tracker/ArtifactType.class.php:154
 #: common/tracker/ArtifactTypeFactory.class.php:59
 #: common/tracker/ArtifactTypes.class.php:54
-#, fuzzy
 msgid "No Valid Group Object"
-msgstr "Невалиден проект"
+msgstr ""
 
 #: common/docman/Document.class.php:82
 #: common/docman/DocumentGroup.class.php:76 common/forum/Forum.class.php:139
@@ -522,39 +497,36 @@ msgstr ""
 
 #: common/docman/Document.class.php:113 common/docman/Document.class.php:837
 #: common/pm/ProjectGroup.class.php:145 common/pm/ProjectGroup.class.php:338
+#, fuzzy
 msgid "Title Must Be At Least 5 Characters"
-msgstr ""
+msgstr "Името на форума трябва да бъде поне 5 символа"
 
 #: common/docman/Document.class.php:117 common/docman/Document.class.php:842
+#, fuzzy
 msgid "Document Description Must Be At Least 10 Characters"
-msgstr ""
+msgstr "Описанието на форума трябва да бъде поне 10 символа"
 
 #: common/docman/Document.class.php:141 common/docman/Document.class.php:149
 #: common/docman/Document.class.php:851
-#, fuzzy
 msgid "Document already published in this folder"
-msgstr "Публикуване на документ"
+msgstr ""
 
 #: common/docman/Document.class.php:198 common/docman/Document.class.php:205
-#, fuzzy
 msgid "Error Adding Document:"
-msgstr "Грешка при добавянето на форум"
+msgstr ""
 
 #: common/docman/Document.class.php:198
-#, fuzzy
 msgid "Not a file"
-msgstr "Няма статистика"
+msgstr ""
 
 #: common/docman/Document.class.php:214
-#, fuzzy
 msgid "Error fetching Document"
-msgstr "Грешка при получаването на "
+msgstr ""
 
 #: common/docman/Document.class.php:225 common/docman/Document.class.php:890
 #: common/docman/Document.class.php:1106
-#, fuzzy
 msgid "Error updating document group:"
-msgstr "Грешка при добавянето на форум"
+msgstr ""
 
 #: common/docman/Document.class.php:252
 #, fuzzy
@@ -583,14 +555,12 @@ msgid "Document lock failed"
 msgstr "Име на документа"
 
 #: common/docman/Document.class.php:706
-#, fuzzy
 msgid "Document reservation failed"
-msgstr "Преглед на документите"
+msgstr ""
 
 #: common/docman/Document.class.php:944 common/docman/views/additem.php:57
-#, fuzzy
 msgid "New Document"
-msgstr "Публикуване на документ"
+msgstr ""
 
 #: common/docman/Document.class.php:946
 #, fuzzy
@@ -624,7 +594,7 @@ msgstr "Име на документа"
 #: common/docman/Document.class.php:952
 #, fuzzy
 msgid "Document description"
-msgstr "Описание:"
+msgstr "Описание"
 
 #: common/docman/Document.class.php:953
 #: common/docman/DocumentGroup.class.php:731
@@ -660,13 +630,12 @@ msgstr "Няма намерени документи"
 #: common/docman/DocumentGroup.class.php:67
 #: common/docman/views/listfile.php:173
 #: common/docman/views/listtrashfile.php:116
-#, fuzzy
 msgid "Document Folder"
-msgstr "Име на документа"
+msgstr ""
 
 #: common/docman/DocumentGroup.class.php:101
 msgid "Name is required"
-msgstr ""
+msgstr "Името е задължително"
 
 #: common/docman/DocumentGroup.class.php:110
 #: common/docman/DocumentGroup.class.php:490
@@ -675,9 +644,8 @@ msgid "Invalid Documents Folder parent ID"
 msgstr "Невалиден идентификатор на папка"
 
 #: common/docman/DocumentGroup.class.php:131
-#, fuzzy
 msgid "Folder name already exists"
-msgstr "Това потребителско име вече е заето."
+msgstr ""
 
 #: common/docman/DocumentGroup.class.php:147
 #, fuzzy
@@ -694,9 +662,8 @@ msgid "Invalid Document Folder ID"
 msgstr "Невалиден идентификатор на папка"
 
 #: common/docman/DocumentGroup.class.php:502
-#, fuzzy
 msgid "Documents Folder name already exists"
-msgstr "Това потребителско име вече е заето."
+msgstr ""
 
 #: common/docman/DocumentGroup.class.php:525
 #, fuzzy, php-format
@@ -704,20 +671,17 @@ msgid "Error: %s"
 msgstr "Грешка при добавянето на форум"
 
 #: common/docman/DocumentGroup.class.php:676
-#, fuzzy
 msgid "Browse this folder"
-msgstr "Редактиране на папка"
+msgstr ""
 
 #: common/docman/DocumentGroup.class.php:723
 #: common/docman/views/additem.php:59
-#, fuzzy
 msgid "New Folder"
-msgstr "Име"
+msgstr ""
 
 #: common/docman/DocumentGroup.class.php:725
-#, fuzzy
 msgid "Updated folder by"
-msgstr "Публикуване на документ"
+msgstr ""
 
 #: common/docman/DocumentGroup.class.php:733
 msgid "Updated by"
@@ -741,9 +705,8 @@ msgid "Injected by ZIP:"
 msgstr ""
 
 #: common/docman/DocumentGroup.class.php:838
-#, fuzzy
 msgid "Unknown item."
-msgstr "Преглед на документите"
+msgstr ""
 
 #: common/docman/DocumentGroup.class.php:845
 msgid "Unable to open folder for injecting into tree"
@@ -751,9 +714,8 @@ msgstr ""
 
 #: common/docman/DocumentGroupFactory.class.php:86
 #: common/docman/DocumentGroupFactory.class.php:120
-#, fuzzy
 msgid "No Documents Folder Found"
-msgstr "Няма намерени документи"
+msgstr ""
 
 #: common/docman/DocumentManager.class.php:190
 msgid "Number of documents in this folder"
@@ -915,9 +877,9 @@ msgstr ""
 #: common/docman/views/addfile.php:102 common/docman/views/addfile.php:103
 #: common/docman/views/addfile.php:110 common/docman/views/addfile.php:111
 #: common/docman/views/editfile.php:39 common/docman/views/editfile.php:43
-#, php-format
+#, fuzzy, php-format
 msgid "(at least %s characters)"
-msgstr ""
+msgstr "Името на форума трябва да бъде поне 3 символа"
 
 #: common/docman/views/addfile.php:116
 msgid "Type of Document"
@@ -948,14 +910,12 @@ msgid "URL"
 msgstr ""
 
 #: common/docman/views/addfile.php:121
-#, fuzzy
 msgid "Already-uploaded file"
-msgstr "Нишка"
+msgstr ""
 
 #: common/docman/views/addfile.php:124
-#, fuzzy
 msgid "Create online"
-msgstr "Категория"
+msgstr ""
 
 #: common/docman/views/addfile.php:130
 #: plugins/mantisbt/view/addAttachment.php:34
@@ -1002,9 +962,8 @@ msgid "Documents folder that document belongs in"
 msgstr "Папка в която да се постави документа"
 
 #: common/docman/views/addfile.php:204
-#, fuzzy
 msgid "Status of that document"
-msgstr "Редактиране на папка"
+msgstr ""
 
 #: common/docman/views/addfile.php:212 plugins/mantisbt/view/addIssue.php:148
 msgid "Mandatory fields"
@@ -1023,9 +982,8 @@ msgstr "Публикуване"
 #: common/docman/views/pendingfiles.php:37
 #: common/docman/views/reporting.php:53 common/docman/views/search.php:34
 #: common/docman/views/tree.php:36 common/docman/views/views.php:25
-#, fuzzy
 msgid "Document Manager Access Denied"
-msgstr "Преглед на документите"
+msgstr ""
 
 #: common/docman/views/additem.php:56
 #, fuzzy
@@ -1043,9 +1001,8 @@ msgid ""
 msgstr ""
 
 #: common/docman/views/additem.php:61 common/docman/views/additem.php:85
-#, fuzzy
 msgid "Inject Tree"
-msgstr "Проекти на потребителя"
+msgstr ""
 
 #: common/docman/views/additem.php:84
 #, fuzzy
@@ -1053,14 +1010,12 @@ msgid "Upload archive:"
 msgstr "Файл със съдържанието на документа"
 
 #: common/docman/views/addsubdocgroup.php:56
-#, fuzzy
 msgid "Name of the document subfolder to create"
-msgstr "Няма намерени документи"
+msgstr ""
 
 #: common/docman/views/addsubdocgroup.php:59
-#, fuzzy
 msgid "Name of the document folder to create"
-msgstr "Няма намерени документи"
+msgstr ""
 
 #: common/docman/views/addsubdocgroup.php:63 www/admin/responses_admin.php:132
 #: www/project/admin/database.php:180 www/project/admin/vhost.php:123
@@ -1189,9 +1144,8 @@ msgstr "Грешна парола"
 #: common/docman/views/listfile.php:158
 #: common/docman/views/listtrashfile.php:109
 #: common/docman/views/pendingfiles.php:55
-#, fuzzy
 msgid "Edit document dialog box"
-msgstr "Редактиране на папка"
+msgstr ""
 
 #: common/docman/views/listfile.php:169 www/export/rssAboTask.php:142
 #: www/pm/browse_task.php:385 www/pm/mod_task.php:66
