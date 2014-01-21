@@ -167,7 +167,7 @@ AND news_bytes.group_id=groups.group_id ", array($id));
 	*/
 
 	$old_date = time()-60*60*24*30;
-	$qpa_pending = db_construct_qpa (false, 'SELECT groups.group_id,id,post_date,summary,
+	$qpa_pending = db_construct_qpa(array(), 'SELECT groups.group_id,id,post_date,summary,
 				group_name,unix_group_name
 			FROM news_bytes,groups
 			WHERE is_approved=0
@@ -177,15 +177,15 @@ AND news_bytes.group_id=groups.group_id ", array($id));
 			ORDER BY post_date', array ($old_date, 'A')) ;
 
 	$old_date = time()-(60*60*24*7);
-	$qpa_rejected = db_construct_qpa (false, 'SELECT groups.group_id,id,post_date,summary,
+	$qpa_rejected = db_construct_qpa(array(), 'SELECT groups.group_id,id,post_date,summary,
 				group_name,unix_group_name
 			FROM news_bytes,groups
 			WHERE is_approved=2
 			AND news_bytes.group_id=groups.group_id
 			AND post_date > $1
-			ORDER BY post_date', array ($old_date)) ;
+			ORDER BY post_date', array($old_date)) ;
 
-	$qpa_approved = db_construct_qpa (false, 'SELECT groups.group_id,id,post_date,summary,
+	$qpa_approved = db_construct_qpa(array(), 'SELECT groups.group_id,id,post_date,summary,
 				group_name,unix_group_name
 			FROM news_bytes,groups
 			WHERE is_approved=1
