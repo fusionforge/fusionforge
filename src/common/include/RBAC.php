@@ -558,33 +558,38 @@ abstract class BaseRole extends Error {
 			}
 		}
 
-		$atf = new ArtifactTypeFactory ($project) ;
-		if (!$atf->isError()) {
-			$tids = $atf->getAllArtifactTypeIds () ;
-			foreach ($tids as $tid) {
-				$result['tracker'][$tid] = $this->getVal ('tracker', $tid) ;
+		if ($project->usesTracker()) {
+			$atf = new ArtifactTypeFactory ($project) ;
+			if (!$atf->isError()) {
+				$tids = $atf->getAllArtifactTypeIds () ;
+				foreach ($tids as $tid) {
+					$result['tracker'][$tid] = $this->getVal ('tracker', $tid) ;
+				}
 			}
+			$sections[] = 'tracker' ;
 		}
-		$sections[] = 'tracker' ;
 
-		$ff = new ForumFactory ($project) ;
-		if (!$ff->isError()) {
-			$fids = $ff->getAllForumIds();
-			foreach ($fids as $fid) {
-				$result['forum'][$fid] = $this->getVal('forum', $fid);
+		if ($project->usesForum()) {
+			$ff = new ForumFactory ($project) ;
+			if (!$ff->isError()) {
+				$fids = $ff->getAllForumIds();
+				foreach ($fids as $fid) {
+					$result['forum'][$fid] = $this->getVal('forum', $fid);
+				}
 			}
+			$sections[] = 'forum' ;
 		}
-		$sections[] = 'forum' ;
 
-		$pgf = new ProjectGroupFactory ($project) ;
-		if (!$pgf->isError()) {
-			$pgids = $pgf->getAllProjectGroupIds();
-			foreach ($pgids as $pgid) {
-				$result['pm'][$pgid] = $this->getVal('pm', $pgid);
+		if ($project->usesPM()) {
+			$pgf = new ProjectGroupFactory ($project) ;
+			if (!$pgf->isError()) {
+				$pgids = $pgf->getAllProjectGroupIds();
+				foreach ($pgids as $pgid) {
+					$result['pm'][$pgid] = $this->getVal('pm', $pgid);
+				}
 			}
+			$sections[] = 'pm' ;
 		}
-		$sections[] = 'pm' ;
-
 
 		if (USE_PFO_RBAC) {
 			// Add settings not yet listed so far (probably plugins)
