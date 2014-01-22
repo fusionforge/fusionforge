@@ -248,7 +248,7 @@ if ($mode == "edit") {
 	<form action="'. getStringFromServer('PHP_SELF') .'" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="group_id" value="'.$group_id.'" />
 	<strong>'._('Local filename')._(':').'</strong>'.utils_requiredField().'<br />
-	<input type="file" required="required" name="input_file" size="30" />
+	<input type="file" required="required" name="input_file" />
 	<p>
 	<strong>'._('Description')._(':').'</strong>'.utils_requiredField().'<br />
 	<input type="text" required="required" name="description" size="40" maxlength="255" /></p><p>
