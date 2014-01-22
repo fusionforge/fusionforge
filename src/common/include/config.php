@@ -214,7 +214,7 @@ function forge_set_vars_from_config () {
  * Define a new configuration item with given name/section and default value
  * @param string $var name
  * @param string $section
- * @param any $default
+ * @param string|bool|int $default
  */
 function forge_define_config_item ($var, $section, $default) {
 	$c = FusionForgeConfig::get_instance () ;
