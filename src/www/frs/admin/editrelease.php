@@ -258,7 +258,7 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 	<?php echo('('._('max upload size: '.human_readable_bytes(util_get_maxuploadfilesize())).')') ?></td>
 </tr>
 <tr>
-	<td><input type="file" name="uploaded_changes" size="30" /></td>
+	<td><input type="file" name="uploaded_changes" /></td>
 </tr>
 <tr>
 	<td colspan="2">
@@ -291,7 +291,7 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 <form enctype="multipart/form-data" method="post" action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id&amp;release_id=$release_id&amp;package_id=$package_id"; ?>">
 <input type="hidden" name="step2" value="1" />
 <fieldset><legend><strong><?php echo _("File Name") ?></strong></legend>
-<?php echo _("Upload a new file") ?>: <input type="file" name="userfile"  size="30" /> <?php echo('('._('max upload size: '.human_readable_bytes(util_get_maxuploadfilesize())).')') ?>
+<?php echo _("Upload a new file") ?>: <input type="file" name="userfile" /> <?php echo('('._('max upload size: '.human_readable_bytes(util_get_maxuploadfilesize())).')') ?>
 <?php
 if (forge_get_config('use_ftp_uploads')) {
 	echo '<p>';
