@@ -112,7 +112,7 @@ echo '<table class="fullwidth">';
 echo '<tr class="top">';
 echo '<td class="halfwidth">';
 
-echo $HTML->boxTop(_('Active Tools').'');
+echo $HTML->boxTop(_('Active Tools'));
 ?>
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
@@ -120,8 +120,8 @@ echo $HTML->boxTop(_('Active Tools').'');
 <input type="hidden" name="group_id" value="<?php echo $group->getID(); ?>" />
 <input type="hidden" name="form_group_name" value="<?php echo $group->getPublicName(); ?>" />
 <input type="hidden" name="form_shortdesc" value="<?php echo $group->getDescription(); ?>" />
-<input type="hidden" name="form_tags" size="100" value="<?php echo $group->getTags(); ?>" />
-<input type="hidden" name="form_homepage" size="100" value="<?php echo $group->getHomePage(); ?>" />
+<input type="hidden" name="form_tags" value="<?php echo $group->getTags(); ?>" />
+<input type="hidden" name="form_homepage" value="<?php echo $group->getHomePage(); ?>" />
 
 <?php
 
