@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-20 13:46+0100\n"
+"POT-Creation-Date: 2014-01-23 10:57+0100\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -237,28 +237,28 @@ msgstr ""
 #: common/include/Group.class.php:2696 common/include/Group.class.php:2706
 #: common/include/Group.class.php:2707
 #: common/include/GroupJoinRequest.class.php:298
-#: common/include/Navigation.class.php:60 common/include/User.class.php:350
+#: common/include/Navigation.class.php:61 common/include/User.class.php:350
 #: common/include/User.class.php:436 common/include/User.class.php:1410
 #: common/mail/MailingList.class.php:132 common/mail/MailingList.class.php:139
-#: common/mail/MailingList.class.php:174
+#: common/mail/MailingList.class.php:177
 #: common/mail/MailingListFactory.class.php:103
 #: common/reporting/report_utils.php:27
 #: common/search/SearchQuery.class.php:120
 #: common/tracker/actions/admin-tracker.php:31
-#: common/tracker/actions/admin-updates.php:51
-#: common/tracker/actions/admin-updates.php:107
-#: common/tracker/actions/admin-updates.php:129
-#: common/tracker/actions/admin-updates.php:151
-#: common/tracker/actions/admin-updates.php:206
-#: common/tracker/actions/admin-updates.php:235
-#: common/tracker/actions/admin-updates.php:266
-#: common/tracker/actions/admin-updates.php:307
-#: common/tracker/actions/admin-updates.php:435
-#: common/tracker/actions/admin-updates.php:447
-#: common/tracker/actions/admin-updates.php:478
-#: common/tracker/actions/admin-updates.php:501
-#: common/tracker/actions/admin-updates.php:522
-#: common/tracker/actions/admin-updates.php:581
+#: common/tracker/actions/admin-updates.php:58
+#: common/tracker/actions/admin-updates.php:114
+#: common/tracker/actions/admin-updates.php:136
+#: common/tracker/actions/admin-updates.php:158
+#: common/tracker/actions/admin-updates.php:213
+#: common/tracker/actions/admin-updates.php:249
+#: common/tracker/actions/admin-updates.php:280
+#: common/tracker/actions/admin-updates.php:321
+#: common/tracker/actions/admin-updates.php:449
+#: common/tracker/actions/admin-updates.php:461
+#: common/tracker/actions/admin-updates.php:492
+#: common/tracker/actions/admin-updates.php:515
+#: common/tracker/actions/admin-updates.php:536
+#: common/tracker/actions/admin-updates.php:595
 #: common/tracker/actions/browse.php:402 common/tracker/actions/browse.php:405
 #: common/tracker/actions/browse.php:749 common/tracker/actions/detail.php:140
 #: common/tracker/actions/mod-limited.php:164
@@ -276,14 +276,14 @@ msgstr ""
 #: common/tracker/actions/tracker.php:383
 #: common/tracker/actions/tracker.php:388
 #: common/tracker/actions/tracker.php:500
-#: common/tracker/ArtifactExtraField.class.php:188
-#: common/tracker/ArtifactExtraField.class.php:194
+#: common/tracker/ArtifactExtraField.class.php:193
+#: common/tracker/ArtifactExtraField.class.php:199
 #: common/tracker/ArtifactType.class.php:216
 #: common/tracker/ArtifactType.class.php:986
 #: common/tracker/include/ArtifactHtml.class.php:110
 #: common/tracker/include/ArtifactHtml.class.php:112
 #: common/tracker/include/ArtifactHtml.class.php:220
-#: common/tracker/include/ArtifactTypeHtml.class.php:438
+#: common/tracker/include/ArtifactTypeHtml.class.php:442
 #: common/tracker/views/form-addextrafieldoption.php:39
 #: common/tracker/views/form-adminroadmap.php:70
 #: common/tracker/views/form-adminroadmap.php:193
@@ -409,7 +409,7 @@ msgstr ""
 #: common/docman/actions/monitorfile.php:56
 #: common/tracker/actions/tracker.php:429
 #: common/tracker/actions/tracker.php:446
-#: common/tracker/Artifact.class.php:618
+#: common/tracker/Artifact.class.php:617
 #: common/tracker/ArtifactType.class.php:545 www/frs/monitor.php:65
 #: www/frs/monitor.php:66
 msgid "Monitoring Started"
@@ -418,7 +418,7 @@ msgstr "Monitoring gestart"
 #: common/docman/actions/monitordirectory.php:72
 #: common/docman/actions/monitorfile.php:76
 #: common/tracker/actions/tracker.php:431
-#: common/tracker/Artifact.class.php:628
+#: common/tracker/Artifact.class.php:627
 #: common/tracker/ArtifactType.class.php:555 www/developer/monitor.php:75
 #: www/frs/monitor.php:57 www/frs/monitor.php:58
 msgid "Monitoring Stopped"
@@ -1160,7 +1160,7 @@ msgstr "Groep waar document in thuis hoort"
 #: common/tracker/actions/detail.php:80
 #: common/tracker/actions/mod-limited.php:128
 #: common/tracker/actions/mod.php:155 common/tracker/actions/query.php:340
-#: common/tracker/Artifact.class.php:937
+#: common/tracker/Artifact.class.php:936
 #: common/tracker/views/form-customizelist.php:39 www/pm/browse_task.php:381
 #: www/project/admin/database.php:204
 msgid "State"
@@ -1302,8 +1302,8 @@ msgstr "Achternaam:"
 #: common/docman/views/listtrashfile.php:129
 #: common/docman/views/pendingfiles.php:63 common/docman/views/search.php:150
 #: common/include/Group.class.php:793
-#: common/tracker/ArtifactExtraField.class.php:328
-#: common/tracker/include/ArtifactTypeHtml.class.php:331
+#: common/tracker/ArtifactExtraField.class.php:351
+#: common/tracker/include/ArtifactTypeHtml.class.php:335
 #: common/tracker/views/form-addextrafieldoption.php:109
 #: common/tracker/views/form-addextrafield.php:131
 #: common/tracker/views/form-updateextrafieldelement.php:65
@@ -1334,7 +1334,7 @@ msgstr ""
 #: common/docman/views/listfile.php:218
 #: common/docman/views/listtrashfile.php:129
 #: common/docman/views/pendingfiles.php:63
-#: common/tracker/include/ArtifactTypeHtml.class.php:373 www/frs/index.php:206
+#: common/tracker/include/ArtifactTypeHtml.class.php:377 www/frs/index.php:206
 #: www/project/admin/editimages.php:267
 msgid "Size"
 msgstr "Grootte"
@@ -1407,13 +1407,13 @@ msgstr ""
 #: common/tracker/actions/mod-limited.php:98
 #: common/tracker/actions/mod-limited.php:103
 #: common/tracker/actions/mod.php:99 common/tracker/actions/mod.php:104
-#: common/tracker/Artifact.class.php:1681
+#: common/tracker/Artifact.class.php:1680
 #: common/tracker/include/ArtifactHtml.class.php:111
 #: common/tracker/include/ArtifactHtml.class.php:169
 #: common/tracker/include/ArtifactHtml.class.php:178
-#: common/tracker/include/ArtifactTypeHtml.class.php:342
-#: common/tracker/include/ArtifactTypeHtml.class.php:343
-#: common/tracker/include/ArtifactTypeHtml.class.php:384
+#: common/tracker/include/ArtifactTypeHtml.class.php:346
+#: common/tracker/include/ArtifactTypeHtml.class.php:347
+#: common/tracker/include/ArtifactTypeHtml.class.php:388
 #: common/widget/Widget_MyLatestSvnCommits.class.php:65
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:112
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:114
@@ -1593,7 +1593,7 @@ msgid ""
 msgstr ""
 
 #: common/docman/views/menu.php:55 common/docman/views/search.php:63
-#: common/include/Navigation.class.php:171
+#: common/include/Navigation.class.php:172
 #: plugins/globalsearch/common/globalsearch_stats_boxes.php:48
 #: www/admin/index.php:66 www/admin/index.php:155
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:341
@@ -1615,7 +1615,7 @@ msgid "Recover or delete permanently files with deleted status."
 msgstr ""
 
 #: common/docman/views/menu.php:70 common/frs/include/frs_utils.php:78
-#: common/include/Navigation.class.php:300
+#: common/include/Navigation.class.php:301
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:54
 #: common/tracker/include/ArtifactTypeHtml.class.php:68
 #: www/pm/include/ProjectGroupHTML.class.php:99
@@ -1677,7 +1677,7 @@ msgid "Mass actions for selected pending files:"
 msgstr ""
 
 #: common/docman/views/reporting.php:92
-#: common/tracker/include/ArtifactTypeHtml.class.php:329
+#: common/tracker/include/ArtifactTypeHtml.class.php:333
 #: www/activity/index.php:180 www/frs/reporting/downloads.php:109
 #: www/people/editprofile.php:278 www/people/skills_utils.php:50
 #: www/people/skills_utils.php:154 www/pm/add_task.php:95
@@ -1735,8 +1735,8 @@ msgstr "Startdatum"
 #: common/tracker/actions/taskmgr.php:161
 #: common/tracker/actions/taskmgr.php:162
 #: common/tracker/include/ArtifactHtml.class.php:215
-#: common/tracker/include/ArtifactTypeHtml.class.php:325
-#: common/tracker/include/ArtifactTypeHtml.class.php:371
+#: common/tracker/include/ArtifactTypeHtml.class.php:329
+#: common/tracker/include/ArtifactTypeHtml.class.php:375
 #: common/tracker/include/build_submission_form.php:45
 #: common/tracker/include/build_submission_form.php:53
 #: common/tracker/include/build_submission_form.php:62
@@ -1756,7 +1756,7 @@ msgstr "Startdatum"
 #: common/tracker/views/form-updatecanned.php:48
 #: common/tracker/views/form-updateextrafieldelement.php:57
 #: common/tracker/views/form-updateextrafield.php:49
-#: common/tracker/views/form-updateextrafield.php:83
+#: common/tracker/views/form-updateextrafield.php:93
 #: common/tracker/views/form-updatetracker.php:53
 #: common/tracker/views/form-updatetracker.php:64
 #: common/tracker/views/form-updatetracker.php:69
@@ -1938,7 +1938,7 @@ msgid ":"
 msgstr ""
 
 #: common/docman/views/reporting.php:94
-#: common/tracker/include/ArtifactTypeHtml.class.php:330
+#: common/tracker/include/ArtifactTypeHtml.class.php:334
 #: www/activity/index.php:181 www/frs/reporting/downloads.php:111
 #: www/people/editprofile.php:279 www/people/skills_utils.php:51
 #: www/people/skills_utils.php:155 www/pm/add_task.php:110
@@ -2012,7 +2012,7 @@ msgstr "Gebruiker"
 #: common/tracker/actions/detail.php:69
 #: common/tracker/include/ArtifactHtml.class.php:110
 #: common/tracker/include/ArtifactHtml.class.php:147
-#: common/tracker/include/ArtifactTypeHtml.class.php:375
+#: common/tracker/include/ArtifactTypeHtml.class.php:379
 #: common/widget/Widget_ProjectLatestDocuments.class.php:73
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:88
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:111
@@ -2434,16 +2434,16 @@ msgstr "Je kunt je positie alleen opslaan als je bent ingelogd."
 #: common/forum/Forum.class.php:606 common/survey/Survey.class.php:180
 #: common/survey/Survey.class.php:218
 #: common/survey/SurveyQuestion.class.php:151
-#: common/tracker/actions/admin-updates.php:151
-#: common/tracker/actions/admin-updates.php:235
-#: common/tracker/actions/admin-updates.php:266
-#: common/tracker/actions/admin-updates.php:307
-#: common/tracker/actions/admin-updates.php:435
-#: common/tracker/actions/admin-updates.php:447
-#: common/tracker/actions/admin-updates.php:478
-#: common/tracker/actions/admin-updates.php:501
-#: common/tracker/actions/admin-updates.php:522
-#: common/tracker/Artifact.class.php:1141
+#: common/tracker/actions/admin-updates.php:158
+#: common/tracker/actions/admin-updates.php:249
+#: common/tracker/actions/admin-updates.php:280
+#: common/tracker/actions/admin-updates.php:321
+#: common/tracker/actions/admin-updates.php:449
+#: common/tracker/actions/admin-updates.php:461
+#: common/tracker/actions/admin-updates.php:492
+#: common/tracker/actions/admin-updates.php:515
+#: common/tracker/actions/admin-updates.php:536
+#: common/tracker/Artifact.class.php:1140
 #: plugins/mailman/include/MailmanList.class.php:247
 #: plugins/mailman/include/MailmanList.class.php:372
 #: plugins/mailman/include/MailmanList.class.php:389
@@ -2453,9 +2453,9 @@ msgstr "Wijzigen mislukt"
 
 #: common/forum/Forum.class.php:621 common/frs/FRSPackage.class.php:470
 #: common/frs/FRSRelease.class.php:354 common/include/Group.class.php:1617
-#: common/mail/MailingList.class.php:398 common/pm/ProjectGroup.class.php:384
-#: common/pm/ProjectTask.class.php:517 common/tracker/Artifact.class.php:505
-#: common/tracker/ArtifactExtraField.class.php:431
+#: common/mail/MailingList.class.php:401 common/pm/ProjectGroup.class.php:384
+#: common/pm/ProjectTask.class.php:517 common/tracker/Artifact.class.php:504
+#: common/tracker/ArtifactExtraField.class.php:459
 #: common/tracker/ArtifactType.class.php:796
 msgid "Please tick all checkboxes."
 msgstr ""
@@ -2493,7 +2493,7 @@ msgstr "Thread"
 msgid "Posted by"
 msgstr "Gepost door"
 
-#: common/forum/ForumHTML.class.php:70 common/include/Navigation.class.php:379
+#: common/forum/ForumHTML.class.php:70 common/include/Navigation.class.php:380
 #: common/tracker/actions/browse.php:197 common/tracker/actions/browse.php:555
 #: common/tracker/actions/detail.php:109
 #: common/tracker/actions/mod-limited.php:142
@@ -2561,7 +2561,7 @@ msgstr ""
 #: common/forum/ForumHTML.class.php:209 common/forum/ForumHTML.class.php:267
 #: common/forum/ForumMessage.class.php:666
 #: common/tracker/include/ArtifactHtml.class.php:148
-#: common/tracker/include/ArtifactTypeHtml.class.php:376
+#: common/tracker/include/ArtifactTypeHtml.class.php:380
 #: www/activity/index.php:266 www/forum/message.php:126
 #: www/pm/include/ProjectTaskHTML.class.php:157
 #: www/pm/include/ProjectTaskHTML.class.php:203
@@ -2593,7 +2593,7 @@ msgstr ""
 #: common/forum/ForumHTML.class.php:349 common/tracker/actions/detail.php:151
 #: common/tracker/actions/mod-limited.php:177
 #: common/tracker/actions/mod.php:240
-#: common/tracker/include/ArtifactTypeHtml.class.php:371
+#: common/tracker/include/ArtifactTypeHtml.class.php:375
 #: www/forum/attachment.php:41 www/forum/attachment.php:123
 #: www/forum/attachment.php:151
 msgid "Attachments"
@@ -2792,7 +2792,7 @@ msgstr "Ongeldige file_id"
 
 #: common/frs/FRSFile.class.php:416 common/frs/FRSPackage.class.php:400
 #: common/frs/FRSRelease.class.php:438 common/include/Error.class.php:167
-#: common/mail/MailingList.class.php:265 common/pm/ProjectGroup.class.php:369
+#: common/mail/MailingList.class.php:268 common/pm/ProjectGroup.class.php:369
 #: www/admin/pending-news.php:76 www/admin/pending-news.php:86
 #: www/admin/pending-news.php:106 www/news/admin/index.php:90
 #, fuzzy, php-format
@@ -3662,7 +3662,7 @@ msgid "Delete failed"
 msgstr "Verwijderen mislukt"
 
 #: common/include/group_section_texts.php:29
-#: common/include/Navigation.class.php:425
+#: common/include/Navigation.class.php:426
 #: common/reporting/report_utils.php:136 common/reporting/report_utils.php:677
 #: common/reporting/report_utils.php:678
 #: common/widget/Widget_MyMonitoredForums.class.php:138
@@ -3681,7 +3681,7 @@ msgid "Trackers"
 msgstr "Trackers"
 
 #: common/include/group_section_texts.php:31
-#: common/include/Navigation.class.php:473 common/include/rbac_texts.php:157
+#: common/include/Navigation.class.php:474 common/include/rbac_texts.php:157
 #: common/reporting/report_utils.php:144 common/reporting/report_utils.php:187
 #: common/reporting/report_utils.php:690 common/reporting/report_utils.php:942
 #: common/widget/Widget_ProjectPublicAreas.class.php:147
@@ -3707,7 +3707,7 @@ msgid "File Release System"
 msgstr "Gebruik bestandopleveringssysteem"
 
 #: common/include/group_section_texts.php:34
-#: common/include/Navigation.class.php:518 plugins/blocks/www/index.php:157
+#: common/include/Navigation.class.php:519 plugins/blocks/www/index.php:157
 #: plugins/quota_management/www/quota_project.php:74
 #: www/activity/index.php:114 www/activity/index.php:311
 #: www/admin/index.php:191 www/export/rss20_activity.php:164
@@ -3724,79 +3724,79 @@ msgstr "Fout - optie uitgezet."
 msgid "Error - only text/plain supported at this time"
 msgstr ""
 
-#: common/include/Navigation.class.php:175
+#: common/include/Navigation.class.php:176
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:89
 #: www/search/include/renderers/HtmlGroupSearchRenderer.class.php:75
 msgid "Advanced search"
 msgstr "Uitgebreid zoeken"
 
-#: common/include/Navigation.class.php:191
+#: common/include/Navigation.class.php:192
 #: plugins/mediawiki/mediawiki-skin/FusionForge.php:206
 msgid "Log Out"
 msgstr "Uitloggen"
 
-#: common/include/Navigation.class.php:194 www/account/index.php:117
+#: common/include/Navigation.class.php:195 www/account/index.php:117
 #: www/include/html.php:1000
 msgid "My Account"
 msgstr "Mijn account"
 
-#: common/include/Navigation.class.php:202
+#: common/include/Navigation.class.php:203
 #: plugins/mediawiki/mediawiki-skin/FusionForge.php:210
 msgid "Log In"
 msgstr "Inloggen"
 
-#: common/include/Navigation.class.php:206
+#: common/include/Navigation.class.php:207
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:86
 msgid "New Account"
 msgstr "Nieuw account"
 
-#: common/include/Navigation.class.php:230
+#: common/include/Navigation.class.php:231
 #: plugins/quota_management/www/quota.php:163 www/account/lostpw.php:74
 #, php-format
 msgid "Home"
 msgstr "Startpagina"
 
-#: common/include/Navigation.class.php:232 www/reporting/index.php:33
+#: common/include/Navigation.class.php:233 www/reporting/index.php:33
 msgid "Main Page"
 msgstr "Hoofdpagina"
 
-#: common/include/Navigation.class.php:235
+#: common/include/Navigation.class.php:236
 #, fuzzy
 msgid "My Page"
 msgstr "Hoofdpagina"
 
-#: common/include/Navigation.class.php:237
+#: common/include/Navigation.class.php:238
 msgid "Your Page, widgets selected by you to follow your items."
 msgstr ""
 
-#: common/include/Navigation.class.php:248 www/project/admin/index.php:163
+#: common/include/Navigation.class.php:249 www/project/admin/index.php:163
 #: www/reporting/index.php:46 www/search/include/SearchManager.class.php:145
 #: www/search/include/SearchManager.class.php:165
 #: www/stats/site_stats_utils.php:472
 msgid "Projects"
 msgstr "Projecten"
 
-#: common/include/Navigation.class.php:250
+#: common/include/Navigation.class.php:251
 msgid "Map of projects, by categories or types."
 msgstr ""
 
-#: common/include/Navigation.class.php:257
+#: common/include/Navigation.class.php:258
 msgid "Code Snippets"
 msgstr "Codefragmenten"
 
-#: common/include/Navigation.class.php:259
+#: common/include/Navigation.class.php:260
 msgid "Tooling library. Small coding tips."
 msgstr ""
 
-#: common/include/Navigation.class.php:266
+#: common/include/Navigation.class.php:267
 msgid "Project Openings"
 msgstr "Project vacatures"
 
-#: common/include/Navigation.class.php:268
+#: common/include/Navigation.class.php:269
 msgid "Hiring Market Place."
 msgstr ""
 
-#: common/include/Navigation.class.php:292
+#: common/include/Navigation.class.php:293
 #: plugins/quota_management/www/quota_admin.php:38
 #: plugins/quota_management/www/quota.php:36 www/admin/globalroleedit.php:140
 #: www/admin/index.php:39 www/admin/vhost.php:106
@@ -3804,25 +3804,25 @@ msgstr ""
 msgid "Site Admin"
 msgstr "Site beheer"
 
-#: common/include/Navigation.class.php:294
+#: common/include/Navigation.class.php:295
 msgid ""
 "Administration Submenu to handle global configuration, users & projects."
 msgstr ""
 
-#: common/include/Navigation.class.php:302
+#: common/include/Navigation.class.php:303
 msgid "Statistics about visits, users & projects in time frame."
 msgstr ""
 
-#: common/include/Navigation.class.php:323
+#: common/include/Navigation.class.php:324
 msgid "Project home page, widgets selected to follow specific items."
 msgstr ""
 
-#: common/include/Navigation.class.php:380
+#: common/include/Navigation.class.php:381
 #, fuzzy
 msgid "Project Homepage. Widgets oriented"
 msgstr "Project bestandslijst"
 
-#: common/include/Navigation.class.php:397 common/tracker/actions/mod.php:144
+#: common/include/Navigation.class.php:398 common/tracker/actions/mod.php:144
 #: common/tracker/actions/mod.php:196
 #: common/tracker/include/build_submission_form.php:64
 #: common/widget/Widget_MyProjects.class.php:77
@@ -3831,27 +3831,27 @@ msgstr "Project bestandslijst"
 msgid "Admin"
 msgstr "Beheer"
 
-#: common/include/Navigation.class.php:398 www/admin/approve-pending.php:137
+#: common/include/Navigation.class.php:399 www/admin/approve-pending.php:137
 #: www/admin/groupedit.php:99 www/admin/useredit.php:276
 #: www/admin/useredit.php:307
 msgid "Project Admin"
 msgstr "Projectbeheer"
 
-#: common/include/Navigation.class.php:414 www/activity/index.php:95
+#: common/include/Navigation.class.php:415 www/activity/index.php:95
 #: www/activity/index.php:179 www/activity/index.php:265
 #: www/export/rss_project.php:98
 msgid "Activity"
 msgstr "Activiteit"
 
-#: common/include/Navigation.class.php:415
+#: common/include/Navigation.class.php:416
 msgid "Last activities per category."
 msgstr ""
 
-#: common/include/Navigation.class.php:426
+#: common/include/Navigation.class.php:427
 msgid "Tech & help forums."
 msgstr ""
 
-#: common/include/Navigation.class.php:440 common/include/rbac_texts.php:156
+#: common/include/Navigation.class.php:441 common/include/rbac_texts.php:156
 #: common/reporting/report_utils.php:132
 #: common/tracker/actions/admin-ind.php:99 common/tracker/actions/ind.php:57
 #: common/widget/Widget_ProjectPublicAreas.class.php:56
@@ -3860,51 +3860,51 @@ msgstr ""
 msgid "Tracker"
 msgstr "Tracker"
 
-#: common/include/Navigation.class.php:441
+#: common/include/Navigation.class.php:442
 msgid "Issues, tickets, bugs."
 msgstr ""
 
-#: common/include/Navigation.class.php:458 plugins/blocks/www/index.php:153
+#: common/include/Navigation.class.php:459 plugins/blocks/www/index.php:153
 msgid "Lists"
 msgstr "Lijsten"
 
-#: common/include/Navigation.class.php:459
+#: common/include/Navigation.class.php:460
 #: common/widget/Widget_ProjectPublicAreas.class.php:135
 msgid "Mailing Lists"
 msgstr "Mailing lijsten"
 
-#: common/include/Navigation.class.php:474
+#: common/include/Navigation.class.php:475
 #, fuzzy
 msgid "Project Management."
 msgstr "Nieuwe projectnaam"
 
-#: common/include/Navigation.class.php:488
+#: common/include/Navigation.class.php:489
 #: common/reporting/report_utils.php:140 common/reporting/report_utils.php:665
 #: plugins/blocks/www/index.php:155
 msgid "Docs"
 msgstr "Documentatie"
 
-#: common/include/Navigation.class.php:489 www/index_std.php:40
+#: common/include/Navigation.class.php:490 www/index_std.php:40
 #, fuzzy
 msgid "Document Management."
 msgstr "Bekijk documentatie"
 
-#: common/include/Navigation.class.php:503
+#: common/include/Navigation.class.php:504
 #: common/widget/Widget_ProjectPublicAreas.class.php:171
 #: plugins/blocks/www/index.php:156
 msgid "Surveys"
 msgstr "Enquêtes"
 
-#: common/include/Navigation.class.php:504
+#: common/include/Navigation.class.php:505
 msgid "Online surveys, project needs your point of view."
 msgstr ""
 
-#: common/include/Navigation.class.php:519
+#: common/include/Navigation.class.php:520
 #, fuzzy
 msgid "Flash head line from the project."
 msgstr "Een dergelijke vacature komt in dit project niet voor"
 
-#: common/include/Navigation.class.php:533 common/include/rbac_texts.php:164
+#: common/include/Navigation.class.php:534 common/include/rbac_texts.php:164
 #: common/widget/Widget_MyLatestSvnCommits.class.php:108
 #: plugins/blocks/www/index.php:158 plugins/quota_management/www/quota.php:165
 #: plugins/quota_management/www/quota.php:189
@@ -3914,20 +3914,20 @@ msgstr "Een dergelijke vacature komt in dit project niet voor"
 msgid "SCM"
 msgstr "SCM"
 
-#: common/include/Navigation.class.php:534
+#: common/include/Navigation.class.php:535
 msgid "Source Content Management, peer-review and source discovery."
 msgstr ""
 
-#: common/include/Navigation.class.php:565 common/include/rbac_texts.php:166
+#: common/include/Navigation.class.php:566 common/include/rbac_texts.php:166
 #: plugins/blocks/www/index.php:159
 msgid "Files"
 msgstr "Bestanden"
 
-#: common/include/Navigation.class.php:566
+#: common/include/Navigation.class.php:567
 msgid "All published files organized per version."
 msgstr ""
 
-#: common/include/Navigation.class.php:632
+#: common/include/Navigation.class.php:633
 msgid "Show source"
 msgstr "Toon broncode"
 
@@ -4446,11 +4446,11 @@ msgstr ""
 "te herstellen."
 
 #: common/include/User.class.php:436 common/survey/Survey.class.php:129
-#: common/tracker/actions/admin-updates.php:107
-#: common/tracker/actions/admin-updates.php:129
-#: common/tracker/actions/admin-updates.php:206
-#: common/tracker/ArtifactExtraField.class.php:188
-#: common/tracker/ArtifactExtraField.class.php:194
+#: common/tracker/actions/admin-updates.php:114
+#: common/tracker/actions/admin-updates.php:136
+#: common/tracker/actions/admin-updates.php:213
+#: common/tracker/ArtifactExtraField.class.php:193
+#: common/tracker/ArtifactExtraField.class.php:199
 #: www/people/admin/index.php:52 www/people/admin/index.php:65
 #: www/pm/admin/index.php:98 www/survey/rating_resp.php:56
 msgid "Insert Error"
@@ -4496,7 +4496,7 @@ msgstr ""
 msgid "Enjoy the site."
 msgstr "Veel plezier."
 
-#: common/include/User.class.php:495 common/mail/MailingList.class.php:205
+#: common/include/User.class.php:495 common/mail/MailingList.class.php:208
 #: plugins/authbuiltin/www/post-login.php:122
 #: plugins/authldap/www/post-login.php:117
 #: plugins/mailman/www/mailman_utils.php:35 www/account/change_email.php:63
@@ -4692,13 +4692,13 @@ msgstr "Lijst bestaat al"
 msgid "Forum exists with the same name"
 msgstr ""
 
-#: common/mail/MailingList.class.php:174
+#: common/mail/MailingList.class.php:177
 #: plugins/mailman/include/MailmanList.class.php:163
 #, fuzzy
 msgid "Error Creating mailing list"
 msgstr "Bestaande mailinglijsten"
 
-#: common/mail/MailingList.class.php:189
+#: common/mail/MailingList.class.php:192
 #, php-format
 msgid ""
 "A mailing list will be created on %1$s in one hour\n"
@@ -4733,13 +4733,13 @@ msgstr ""
 "\n"
 "Bedankt voor het aanmelden van je project bij %1$s."
 
-#: common/mail/MailingList.class.php:208
+#: common/mail/MailingList.class.php:211
 #: plugins/mailman/www/mailman_utils.php:38
 #, php-format
 msgid "%s New Mailing List"
 msgstr "%s Nieuwe Mailinglijst"
 
-#: common/mail/MailingList.class.php:228
+#: common/mail/MailingList.class.php:231
 #: common/mail/MailingListFactory.class.php:103
 #: plugins/mailman/include/MailmanList.class.php:225
 #: plugins/mailman/include/MailmanListFactory.class.php:112
@@ -5224,14 +5224,14 @@ msgstr ""
 #: common/tracker/include/build_submission_form.php:118
 #: common/tracker/views/form-addcanned.php:78
 #: common/tracker/views/form-addextrafieldoption.php:112
-#: common/tracker/views/form-addextrafield.php:146
+#: common/tracker/views/form-addextrafield.php:150
 #: common/tracker/views/form-adminroadmap.php:234
 #: common/tracker/views/form-clonetracker.php:59
 #: common/tracker/views/form-edittemplate.php:24
 #: common/tracker/views/form-extrafieldcopy.php:94
 #: common/tracker/views/form-updatecanned.php:52
 #: common/tracker/views/form-updateextrafieldelement.php:72
-#: common/tracker/views/form-updateextrafield.php:94
+#: common/tracker/views/form-updateextrafield.php:104
 #: common/tracker/views/form-updatetracker.php:81
 #: common/tracker/views/form-workflow.php:123
 #: common/tracker/views/form-workflow_roles.php:77
@@ -5348,16 +5348,16 @@ msgstr ""
 msgid "Permanently delete this tracker."
 msgstr "Deze tracker onherroepelijk verwijderen."
 
-#: common/tracker/actions/admin-updates.php:46
-#: common/tracker/actions/admin-updates.php:65
-#: common/tracker/actions/admin-updates.php:94
-#: common/tracker/actions/admin-updates.php:188
-#: common/tracker/actions/admin-updates.php:230
-#: common/tracker/actions/admin-updates.php:253
-#: common/tracker/actions/admin-updates.php:473
-#: common/tracker/actions/admin-updates.php:493
-#: common/tracker/actions/admin-updates.php:517
-#: common/tracker/actions/admin-updates.php:572
+#: common/tracker/actions/admin-updates.php:48
+#: common/tracker/actions/admin-updates.php:72
+#: common/tracker/actions/admin-updates.php:101
+#: common/tracker/actions/admin-updates.php:195
+#: common/tracker/actions/admin-updates.php:239
+#: common/tracker/actions/admin-updates.php:267
+#: common/tracker/actions/admin-updates.php:487
+#: common/tracker/actions/admin-updates.php:507
+#: common/tracker/actions/admin-updates.php:531
+#: common/tracker/actions/admin-updates.php:586
 #: common/tracker/views/form-addextrafieldoption.php:31
 #: common/tracker/views/form-deleteextrafieldelement.php:34
 #: common/tracker/views/form-updateextrafieldelement.php:34
@@ -5365,110 +5365,110 @@ msgstr "Deze tracker onherroepelijk verwijderen."
 msgid "Unable to create ArtifactExtraField Object"
 msgstr ""
 
-#: common/tracker/actions/admin-updates.php:51
+#: common/tracker/actions/admin-updates.php:58
 msgid "Error inserting a custom field"
 msgstr "Fout bij het invoegen van een extra veld"
 
-#: common/tracker/actions/admin-updates.php:54
+#: common/tracker/actions/admin-updates.php:61
 msgid "Extra field inserted"
 msgstr "Extra veld ingevoegd"
 
-#: common/tracker/actions/admin-updates.php:81
+#: common/tracker/actions/admin-updates.php:88
 msgid "Custom Field Deleted"
 msgstr ""
 
-#: common/tracker/actions/admin-updates.php:110
+#: common/tracker/actions/admin-updates.php:117
 msgid "Element inserted"
 msgstr "Element ingevoegd"
 
-#: common/tracker/actions/admin-updates.php:124
-#: common/tracker/actions/admin-updates.php:146
+#: common/tracker/actions/admin-updates.php:131
+#: common/tracker/actions/admin-updates.php:153
 #: www/tracker/admin/index.php:187
 #, fuzzy
 msgid "Unable to create ArtifactCanned Object"
 msgstr "Fout bij aanmaken groep object"
 
-#: common/tracker/actions/admin-updates.php:132
+#: common/tracker/actions/admin-updates.php:139
 msgid "Canned Response Inserted"
 msgstr "Standaard antwoord invoegen"
 
-#: common/tracker/actions/admin-updates.php:154
+#: common/tracker/actions/admin-updates.php:161
 msgid "Canned Response Updated"
 msgstr "Standaard antwoord aangepast"
 
-#: common/tracker/actions/admin-updates.php:177
+#: common/tracker/actions/admin-updates.php:184
 #: common/tracker/actions/tracker.php:37 www/tracker/admin/index.php:72
 #: www/tracker/download.php:42
 #, fuzzy
 msgid "ArtifactType could not be created"
 msgstr "Verwijderen van item niet gelukt"
 
-#: common/tracker/actions/admin-updates.php:184
+#: common/tracker/actions/admin-updates.php:191
 #, fuzzy
 msgid "Copy into Tracker: "
 msgstr "Tracker item"
 
-#: common/tracker/actions/admin-updates.php:238
+#: common/tracker/actions/admin-updates.php:252
 msgid "Custom Field updated"
 msgstr "Extra veld aangepast"
 
-#: common/tracker/actions/admin-updates.php:259
-#: common/tracker/actions/admin-updates.php:578
+#: common/tracker/actions/admin-updates.php:273
+#: common/tracker/actions/admin-updates.php:592
 #: common/tracker/views/form-deleteextrafieldelement.php:41
 #: common/tracker/views/form-updateextrafieldelement.php:41
 msgid "Unable to create ArtifactExtraFieldElement Object"
 msgstr ""
 
-#: common/tracker/actions/admin-updates.php:269
+#: common/tracker/actions/admin-updates.php:283
 msgid "Element updated"
 msgstr "Element aangepast"
 
-#: common/tracker/actions/admin-updates.php:282
+#: common/tracker/actions/admin-updates.php:296
 msgid "Clone ID"
 msgstr ""
 
-#: common/tracker/actions/admin-updates.php:285
+#: common/tracker/actions/admin-updates.php:299
 #, fuzzy
 msgid "Error cloning fields: "
 msgstr "Fout bij het invoegen van een extra veld"
 
-#: common/tracker/actions/admin-updates.php:287
+#: common/tracker/actions/admin-updates.php:301
 #, fuzzy
 msgid "Successfully Cloned Tracker Fields "
 msgstr "Relatie met Tracker toegevoegd"
 
-#: common/tracker/actions/admin-updates.php:310
-#: common/tracker/actions/admin-updates.php:432
-#: common/tracker/actions/admin-updates.php:481
-#: common/tracker/actions/admin-updates.php:510
-#: common/tracker/actions/admin-updates.php:525
+#: common/tracker/actions/admin-updates.php:324
+#: common/tracker/actions/admin-updates.php:446
+#: common/tracker/actions/admin-updates.php:495
+#: common/tracker/actions/admin-updates.php:524
+#: common/tracker/actions/admin-updates.php:539
 msgid "Tracker Updated"
 msgstr "Tracker aangepast"
 
-#: common/tracker/actions/admin-updates.php:462
+#: common/tracker/actions/admin-updates.php:476
 #, fuzzy
 msgid "Renderer Updated"
 msgstr "Toegevoegd"
 
-#: common/tracker/actions/admin-updates.php:539
+#: common/tracker/actions/admin-updates.php:553
 msgid "Error: Initial values not saved, no initial state given."
 msgstr ""
 
-#: common/tracker/actions/admin-updates.php:543
+#: common/tracker/actions/admin-updates.php:557
 msgid "Initial values saved."
 msgstr ""
 
-#: common/tracker/actions/admin-updates.php:552
-#: common/tracker/actions/admin-updates.php:562
+#: common/tracker/actions/admin-updates.php:566
+#: common/tracker/actions/admin-updates.php:576
 msgid "Workflow saved"
 msgstr ""
 
-#: common/tracker/actions/admin-updates.php:581
+#: common/tracker/actions/admin-updates.php:595
 #, fuzzy
 msgid "Error deleting an element"
 msgstr "Fout bij het invoegen van een element"
 
-#: common/tracker/actions/admin-updates.php:584
+#: common/tracker/actions/admin-updates.php:598
 #, fuzzy
 msgid "Element deleted"
 msgstr "Element aangepast"
@@ -5650,7 +5650,7 @@ msgstr "Alles verwijderen"
 #: common/tracker/actions/browse.php:567 common/tracker/actions/browse.php:745
 #: common/tracker/actions/detail.php:97
 #: common/tracker/actions/mod-limited.php:114
-#: common/tracker/actions/mod.php:140 common/tracker/Artifact.class.php:933
+#: common/tracker/actions/mod.php:140 common/tracker/Artifact.class.php:932
 #: common/tracker/include/build_submission_form.php:62
 #: common/tracker/views/form-customizelist.php:41
 #: cronjobs/send_pending_items_mail.php:119
@@ -5681,7 +5681,7 @@ msgid "Submitted by"
 msgstr "Ingediend door"
 
 #: common/tracker/actions/browse.php:571 common/tracker/actions/mod.php:228
-#: common/tracker/include/ArtifactTypeHtml.class.php:325
+#: common/tracker/include/ArtifactTypeHtml.class.php:329
 #: common/tracker/views/form-customizelist.php:45
 msgid "Related Tasks"
 msgstr ""
@@ -5712,12 +5712,12 @@ msgid "No Change"
 msgstr "Geen wijzigingen"
 
 #: common/tracker/actions/browse.php:746
-#: common/tracker/include/ArtifactTypeHtml.class.php:692
-#: common/tracker/include/ArtifactTypeHtml.class.php:726
+#: common/tracker/include/ArtifactTypeHtml.class.php:696
+#: common/tracker/include/ArtifactTypeHtml.class.php:730
 msgid "Nobody"
 msgstr "Niemand"
 
-#: common/tracker/actions/browse.php:755 common/tracker/Artifact.class.php:941
+#: common/tracker/actions/browse.php:755 common/tracker/Artifact.class.php:940
 msgid "Canned Response"
 msgstr "Standaard antwoord"
 
@@ -5875,9 +5875,9 @@ msgid "Included"
 msgstr ""
 
 #: common/tracker/actions/format_csv.php:76
-#: common/tracker/include/ArtifactTypeHtml.class.php:546
-#: common/tracker/include/ArtifactTypeHtml.class.php:591
-#: common/tracker/include/ArtifactTypeHtml.class.php:758
+#: common/tracker/include/ArtifactTypeHtml.class.php:550
+#: common/tracker/include/ArtifactTypeHtml.class.php:595
+#: common/tracker/include/ArtifactTypeHtml.class.php:762
 #: plugins/scmhg/common/HgPlugin.class.php:624 www/admin/pluginman.php:230
 #: www/admin/pluginman.php:249 www/admin/pluginman.php:261
 #: www/admin/pluginman.php:262 www/include/html.php:322
@@ -5958,7 +5958,7 @@ msgstr "Datum afgesloten"
 msgid "Existing Files"
 msgstr "Bestaande bestanden"
 
-#: common/tracker/actions/mod.php:111 common/tracker/Artifact.class.php:945
+#: common/tracker/actions/mod.php:111 common/tracker/Artifact.class.php:944
 msgid "Data Type"
 msgstr "Datatype"
 
@@ -6045,8 +6045,8 @@ msgid "Default project query (for project level query only)"
 msgstr ""
 
 #: common/tracker/actions/query.php:367
-#: common/tracker/include/ArtifactTypeHtml.class.php:258
-#: common/tracker/include/ArtifactTypeHtml.class.php:265
+#: common/tracker/include/ArtifactTypeHtml.class.php:262
+#: common/tracker/include/ArtifactTypeHtml.class.php:269
 #, php-format
 msgid "(%% for wildcards)"
 msgstr ""
@@ -6234,7 +6234,7 @@ msgid "Title and Message Body are required"
 msgstr "Artefact: berichttekst is verplicht'"
 
 #: common/tracker/Artifact.class.php:142
-#: common/tracker/ArtifactExtraField.class.php:68
+#: common/tracker/ArtifactExtraField.class.php:69
 #, fuzzy
 msgid "Invalid Artifact Type"
 msgstr "Ongeldig ID"
@@ -6244,7 +6244,7 @@ msgstr "Ongeldig ID"
 msgid "Only project members can view private artifact types"
 msgstr "Artefact: alleen groepsleden kunnen private artefacttypes zien"
 
-#: common/tracker/Artifact.class.php:191 common/tracker/Artifact.class.php:779
+#: common/tracker/Artifact.class.php:191 common/tracker/Artifact.class.php:778
 #, fuzzy
 msgid "You are not currently allowed to submit items to this tracker."
 msgstr "Je hebt geen toestemming om deze pagina op te vragen"
@@ -6259,182 +6259,182 @@ msgstr "Artefact: samenvatting van bericht is verplicht"
 msgid "Message Body Is Required"
 msgstr "Artefact: berichttekst is verplicht'"
 
-#: common/tracker/Artifact.class.php:229
+#: common/tracker/Artifact.class.php:228
 #, fuzzy
 msgid "Error remapping status"
 msgstr "Fout bij aanmaken %1$s"
 
-#: common/tracker/Artifact.class.php:300
+#: common/tracker/Artifact.class.php:299
 #, fuzzy
 msgid "Invalid Artifact ID"
 msgstr "Ongeldig ID"
 
-#: common/tracker/Artifact.class.php:516
+#: common/tracker/Artifact.class.php:515
 #, fuzzy
 msgid "Error deleting extra field data: "
 msgstr "Fout bij het invoegen van een element"
 
-#: common/tracker/Artifact.class.php:527
+#: common/tracker/Artifact.class.php:526
 #, fuzzy
 msgid "Error deleting file from db: "
 msgstr "Fout bij aanmaken groep object"
 
-#: common/tracker/Artifact.class.php:535
+#: common/tracker/Artifact.class.php:534
 #, fuzzy
 msgid "Error deleting message: "
 msgstr "Fout bij het toevoegen van een forum"
 
-#: common/tracker/Artifact.class.php:543
+#: common/tracker/Artifact.class.php:542
 #, fuzzy
 msgid "Error deleting history: "
 msgstr "Groep Index informatie"
 
-#: common/tracker/Artifact.class.php:551
+#: common/tracker/Artifact.class.php:550
 #, fuzzy
 msgid "Error deleting monitor: "
 msgstr "Fout bij aanmaken groep object"
 
-#: common/tracker/Artifact.class.php:559
+#: common/tracker/Artifact.class.php:558
 #, fuzzy
 msgid "Error deleting artifact: "
 msgstr "Fout bij aanmaken groep object"
 
-#: common/tracker/Artifact.class.php:570 common/tracker/Artifact.class.php:580
+#: common/tracker/Artifact.class.php:569 common/tracker/Artifact.class.php:579
 #, fuzzy
 msgid "Error updating artifact counts: "
 msgstr "Groep Index informatie"
 
-#: common/tracker/Artifact.class.php:601
+#: common/tracker/Artifact.class.php:600
 msgid "Valid Email Address Required"
 msgstr "Geldig e-mail adres is verplicht"
 
-#: common/tracker/Artifact.class.php:952
+#: common/tracker/Artifact.class.php:951
 msgid "Invalid assigned person: must be a technician"
 msgstr ""
 
-#: common/tracker/Artifact.class.php:975
+#: common/tracker/Artifact.class.php:974
 #, fuzzy
 msgid "Could not move to new Artifact Type"
 msgstr "Kon de gevraagde bewerking niet uitvoeren"
 
-#: common/tracker/Artifact.class.php:987
+#: common/tracker/Artifact.class.php:986
 #, php-format
 msgid "Moved from %1$s to %2$s"
 msgstr ""
 
-#: common/tracker/Artifact.class.php:1061
+#: common/tracker/Artifact.class.php:1060
 msgid "Removal of old artifact_extra_field_data failed: "
 msgstr ""
 
-#: common/tracker/Artifact.class.php:1169
+#: common/tracker/Artifact.class.php:1168
 msgid "Could Not Create Canned Response Object"
 msgstr ""
 
-#: common/tracker/Artifact.class.php:1182
+#: common/tracker/Artifact.class.php:1181
 #, fuzzy
 msgid "Unable to Use Canned Response"
 msgstr "Gebruik standaard antwoord"
 
-#: common/tracker/Artifact.class.php:1197
+#: common/tracker/Artifact.class.php:1196
 msgid "Nothing Changed - Update Cancelled"
 msgstr "Niets Gewijzigd - Actie Afgebroken"
 
-#: common/tracker/Artifact.class.php:1230
+#: common/tracker/Artifact.class.php:1229
 #, fuzzy
 msgid "Error updating assigned_to in artifact: "
 msgstr "Groep Index informatie"
 
-#: common/tracker/Artifact.class.php:1305
-#: common/tracker/Artifact.class.php:1315
+#: common/tracker/Artifact.class.php:1304
+#: common/tracker/Artifact.class.php:1314
 #, fuzzy
 msgid "Status Custom Field Must Be Set"
 msgstr "Extra veld aangepast"
 
-#: common/tracker/ArtifactExtraField.class.php:105
-#: common/tracker/ArtifactExtraField.class.php:380
-msgid "a field name is required"
-msgstr "veldnaam is verplicht"
+#: common/tracker/ArtifactExtraField.class.php:108
+#: common/tracker/ArtifactExtraField.class.php:404
+msgid "A field name is required"
+msgstr "Veldnaam is verplicht"
 
-#: common/tracker/ArtifactExtraField.class.php:109
+#: common/tracker/ArtifactExtraField.class.php:112
 #, fuzzy
 msgid "Type of custom field not selected"
 msgstr "Type extra veld"
 
-#: common/tracker/ArtifactExtraField.class.php:121
-#: common/tracker/ArtifactExtraField.class.php:389
+#: common/tracker/ArtifactExtraField.class.php:124
+#: common/tracker/ArtifactExtraField.class.php:413
 #, fuzzy
 msgid "Field name already exists"
 msgstr "De opgegeven gebruikersnaam bestaat al."
 
-#: common/tracker/ArtifactExtraField.class.php:126
+#: common/tracker/ArtifactExtraField.class.php:129
 msgid "Invalid size/maxlength for text field"
 msgstr ""
 
-#: common/tracker/ArtifactExtraField.class.php:132
+#: common/tracker/ArtifactExtraField.class.php:135
 msgid "Invalid rows/cols for textarea field"
 msgstr ""
 
-#: common/tracker/ArtifactExtraField.class.php:137
+#: common/tracker/ArtifactExtraField.class.php:140
 msgid "This Tracker already uses custom statuses"
 msgstr ""
 
-#: common/tracker/ArtifactExtraField.class.php:234
+#: common/tracker/ArtifactExtraField.class.php:239
 #, fuzzy
 msgid "Invalid ArtifactExtraField ID"
 msgstr "Ongeldig ID"
 
-#: common/tracker/ArtifactExtraField.class.php:322
+#: common/tracker/ArtifactExtraField.class.php:345
 #: common/tracker/views/form-addextrafield.php:124
 msgid "Select Box"
 msgstr "Selectbox"
 
-#: common/tracker/ArtifactExtraField.class.php:323
+#: common/tracker/ArtifactExtraField.class.php:346
 #: common/tracker/views/form-addextrafield.php:125
 msgid "Check Box"
 msgstr ""
 
-#: common/tracker/ArtifactExtraField.class.php:324
+#: common/tracker/ArtifactExtraField.class.php:347
 #: common/tracker/views/form-addextrafield.php:126
 msgid "Radio Buttons"
 msgstr "Radiobuttons"
 
-#: common/tracker/ArtifactExtraField.class.php:325
+#: common/tracker/ArtifactExtraField.class.php:348
 #: common/tracker/views/form-addextrafield.php:127
 msgid "Text Field"
 msgstr "Tekstveld"
 
-#: common/tracker/ArtifactExtraField.class.php:326
+#: common/tracker/ArtifactExtraField.class.php:349
 #: common/tracker/views/form-addextrafield.php:128
 msgid "Multi-Select Box"
 msgstr ""
 
-#: common/tracker/ArtifactExtraField.class.php:327
+#: common/tracker/ArtifactExtraField.class.php:350
 #: common/tracker/views/form-addextrafield.php:129
 msgid "Text Area"
 msgstr "Tekstgebied"
 
-#: common/tracker/ArtifactExtraField.class.php:329
+#: common/tracker/ArtifactExtraField.class.php:352
 #: common/tracker/views/form-addextrafield.php:134
 #, fuzzy
 msgid "Relation between artifacts"
 msgstr "Verwijder deze taak"
 
-#: common/tracker/ArtifactExtraField.class.php:330
+#: common/tracker/ArtifactExtraField.class.php:353
 msgid "Integer"
 msgstr ""
 
-#: common/tracker/ArtifactExtraField.class.php:499
+#: common/tracker/ArtifactExtraField.class.php:527
 msgid ""
 "The alias contains invalid characters. Only letters, numbers, hypens (-), at "
 "sign (@) and underscores (_) allowed."
 msgstr ""
 
-#: common/tracker/ArtifactExtraField.class.php:502
+#: common/tracker/ArtifactExtraField.class.php:530
 #, php-format
 msgid "“%s” is a reserved alias. Please provide another name."
 msgstr ""
 
-#: common/tracker/ArtifactExtraField.class.php:587
+#: common/tracker/ArtifactExtraField.class.php:615
 msgid "Out of range value"
 msgstr ""
 
@@ -6650,26 +6650,26 @@ msgstr "Standaard antwoorden toevoegen / wijzigen"
 msgid "Clone Tracker"
 msgstr ""
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:327
+#: common/tracker/include/ArtifactTypeHtml.class.php:331
 #, fuzzy
 msgid "Task Id and Summary"
 msgstr "Taaksamenvatting"
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:328
+#: common/tracker/include/ArtifactTypeHtml.class.php:332
 msgid "Progress"
 msgstr ""
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:332
+#: common/tracker/include/ArtifactTypeHtml.class.php:336
 #: www/pm/include/ProjectTaskHTML.class.php:111
 msgid "Remove Relation"
 msgstr "Verwijder relatie"
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:358
+#: common/tracker/include/ArtifactTypeHtml.class.php:362
 #, php-format
 msgid "Average completion rate: %d%%"
 msgstr ""
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:374
+#: common/tracker/include/ArtifactTypeHtml.class.php:378
 #: common/tracker/views/form-adminroadmap.php:193
 #: plugins/blocks/www/index.php:196 plugins/contribtracker/www/index.php:134
 #: plugins/mantisbt/view/admin/addCategory.php:32
@@ -6693,7 +6693,7 @@ msgstr ""
 msgid "Name"
 msgstr "Naam"
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:377
+#: common/tracker/include/ArtifactTypeHtml.class.php:381
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:97
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:146
 #: plugins/mantisbt/view/viewAttachment.php:56
@@ -6701,7 +6701,7 @@ msgstr "Naam"
 msgid "Download"
 msgstr "Download"
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:670
+#: common/tracker/include/ArtifactTypeHtml.class.php:674
 msgid ""
 "Tip: Enter a space-separated list of artifact ids ([#NNN] also accepted)"
 msgstr ""
@@ -6892,7 +6892,7 @@ msgid "Custom Field Name"
 msgstr "Extra veldnaam"
 
 #: common/tracker/views/form-addextrafield.php:118
-#: common/tracker/views/form-updateextrafield.php:83
+#: common/tracker/views/form-updateextrafield.php:93
 msgid "Field alias"
 msgstr ""
 
@@ -6921,21 +6921,37 @@ msgstr "Tekstveldgrootte/Tekstgebied rijen"
 msgid "Text Field Maxlength/Text Area Columns"
 msgstr "Maximum tekstveldlengte/Tekstgebied kolommen"
 
+#: common/tracker/views/form-addextrafield.php:141
+#: common/tracker/views/form-updateextrafield.php:80
+#, fuzzy
+msgid "Hide the default none value"
+msgstr "Bewerk een enquête"
+
 #: common/tracker/views/form-addextrafield.php:143
+#: common/tracker/views/form-updateextrafield.php:86
+msgid "Label for the none value"
+msgstr ""
+
+#: common/tracker/views/form-addextrafield.php:144
+#, fuzzy
+msgid "none"
+msgstr "Klaar"
+
+#: common/tracker/views/form-addextrafield.php:147
 #, fuzzy
 msgid "Warning: this add new custom field"
 msgstr "Fout bij het invoegen van een extra veld"
 
-#: common/tracker/views/form-addextrafield.php:151
+#: common/tracker/views/form-addextrafield.php:155
 msgid "Custom Field Rendering Template"
 msgstr ""
 
-#: common/tracker/views/form-addextrafield.php:154
+#: common/tracker/views/form-addextrafield.php:158
 #, fuzzy
 msgid "Edit template"
 msgstr "Release bewerken"
 
-#: common/tracker/views/form-addextrafield.php:155
+#: common/tracker/views/form-addextrafield.php:159
 msgid "Delete template"
 msgstr ""
 
@@ -7258,7 +7274,7 @@ msgid "Update a custom field element in %s"
 msgstr "Fout bij het invoegen van een extra veld naam"
 
 #: common/tracker/views/form-updateextrafieldelement.php:69
-#: common/tracker/views/form-updateextrafield.php:90
+#: common/tracker/views/form-updateextrafield.php:100
 msgid ""
 "It is not recommended that you change the custom field name because other "
 "things are dependent upon it. When you change the custom field name, all "
@@ -7293,7 +7309,7 @@ msgstr "Tekstveld"
 msgid "Text Field Maxlength"
 msgstr "Maximum tekstveldlengte/Tekstgebied kolommen"
 
-#: common/tracker/views/form-updateextrafield.php:88
+#: common/tracker/views/form-updateextrafield.php:98
 msgid "Field is mandatory"
 msgstr ""
 
@@ -25808,10 +25824,6 @@ msgstr "Gebruikersnaam"
 
 #~ msgid "Search in"
 #~ msgstr "Zoeken in"
-
-#, fuzzy
-#~ msgid "none"
-#~ msgstr "Klaar"
 
 #~ msgid "Name Of Survey:"
 #~ msgstr "Naam van de enquête:"

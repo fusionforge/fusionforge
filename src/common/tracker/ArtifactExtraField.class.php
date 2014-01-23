@@ -401,7 +401,7 @@ class ArtifactExtraField extends Error {
 		//	data validation
 		//
 		if (!$name) {
-			$this->setError(_('a field name is required'));
+			$this->setError(_('A field name is required'));
 			return false;
 		}
 		$res = db_query_params ('SELECT field_name FROM artifact_extra_field_list
