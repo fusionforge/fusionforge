@@ -255,8 +255,8 @@ abstract class BaseRole extends Error {
 	 *
 	 * If an update occurred and you need to access the updated info.
 	 *
-	 * @param		int		$role_id
-	 * @return		bool	success
+	 * @param	int	$role_id
+	 * @return	bool	success
 	 */
 	function fetchData($role_id) {
 		unset($this->data_array);
@@ -378,8 +378,11 @@ abstract class BaseRole extends Error {
 	}
 
 	/**
-	 * TODO: Enter description here ...
-	 * @return multitype:
+	 * getGlobalSettings - get the permissions for global settings
+	 *
+	 * The following sections are global : forge_admin, forge_stats, approve_projects, approve_news
+	 *
+	 * @return	array	array of permission for global settings
 	 */
 	function getGlobalSettings () {
 		$result = array();
@@ -401,9 +404,10 @@ abstract class BaseRole extends Error {
 	}
 
 	/**
-	 * TODO: Enter description here ...
-	 * @param  unknown_type   $section
-	 * @param  unknown_type   $reference
+	 * getSetting - TODO: Enter description here ...
+	 *
+	 * @param	string	$section
+	 * @param	unknown_type	$reference
 	 * @return number|boolean
 	 */
 	function getSetting($section, $reference) {
@@ -557,11 +561,11 @@ abstract class BaseRole extends Error {
 	}
 
 	/**
-	 *	getVal - get a value out of the array of settings for this role.
+	 * getVal - get a value out of the array of settings for this role.
 	 *
-	 *	@param	string	$section	The name of the role.
-	 *	@param	integer	$ref_id		The ref_id (ex: group_artifact_id, group_forum_id) for this item.
-	 *	@return integer	The value of this item.
+	 * @param	string	$section	The name of the role.
+	 * @param	integer	$ref_id		The ref_id (ex: group_artifact_id, group_forum_id) for this item.
+	 * @return integer	The value of this item.
 	 */
 	function getVal($section, $ref_id) {
 		if (!$ref_id) {
@@ -571,10 +575,10 @@ abstract class BaseRole extends Error {
 	}
 
 	/**
-	 *  &getRoleVals - get all the values and language text strings for this section.
+	 * &getRoleVals - get all the values and language text strings for this section.
 	 *
-	 *	@param	string	$section
-	 *  @return array	Assoc array of values for this section.
+	 * @param	string	$section
+	 * @return	array	Assoc array of values for this section.
 	 */
 	function &getRoleVals($section) {
 		global $role_vals, $rbac_permission_names;
@@ -738,12 +742,12 @@ abstract class BaseRole extends Error {
 	}
 
 	/**
-	 *	update - update a role in the database.
+	 * update - update a role in the database.
 	 *
-	 *	@param	string	$role_name		The name of the role.
-	 *	@param	array	$data			A multi-dimensional array of data in this format: $data['section_name']['ref_id']=$val
-	 *  @param  boolean $check_perms	Perform permission checking
-	 *	@return	boolean	True on success or false on failure.
+	 * @param	string	$role_name	The name of the role.
+	 * @param	array	$data		A multi-dimensional array of data in this format: $data['section_name']['ref_id']=$val
+	 * @param	boolean	$check_perms	Perform permission checking
+	 * @return	boolean	True on success or false on failure.
 	 */
 	function update($role_name,$data,$check_perms=true) {
 		global $SYS;
@@ -1218,10 +1222,10 @@ class RoleComparator {
 	}
 
 	/**
-	 * TODO: Enter description here ...
-	 * @param Role $a
-	 * @param Role $b
-	 * @return number
+	 * CompareNoRef - TODO: Enter description here ...
+	 * @param	Role	$a
+	 * @param	Role	$b
+	 * @return	number
 	 */
 	function CompareNoRef ($a, $b) {
 		$ap = $a->getHomeProject() ;

@@ -102,8 +102,8 @@ abstract class ForgeAuthPlugin extends Plugin {
 	/**
 	 * Is there a valid session?
 	 *
-	 * @param unknown_type $params
-	 * @return FORGE_AUTH_AUTHORITATIVE_ACCEPT, FORGE_AUTH_AUTHORITATIVE_REJECT or FORGE_AUTH_NOT_AUTHORITATIVE
+	 * @param	array	$params
+	 * @return	FORGE_AUTH_AUTHORITATIVE_ACCEPT, FORGE_AUTH_AUTHORITATIVE_REJECT or FORGE_AUTH_NOT_AUTHORITATIVE
 	 * TODO : document 'auth_token' param
 	 */
 	function checkAuthSession(&$params) {
@@ -135,8 +135,8 @@ abstract class ForgeAuthPlugin extends Plugin {
 	 *
 	 * This will generate a valid forge user (by default, it was generated and cached already in saved_user)
 	 *
-	 * @param unknown_type $params
-	 * @return array $params['results'] containing user object
+	 * @param	array	$params
+	 * @return	array	$params['results'] containing user object
 	 */
 	function fetchAuthUser(&$params) {
 		if ($this->saved_user && $this->isSufficient()) {
@@ -146,7 +146,7 @@ abstract class ForgeAuthPlugin extends Plugin {
 
 	/**
 	 * Terminate an authentication session
-	 * @param unknown_type $params
+	 * @param	array	$params
 	 */
 	function closeAuthSession($params) {
 		if ($this->isSufficient() || $this->isRequired()) {
@@ -156,7 +156,7 @@ abstract class ForgeAuthPlugin extends Plugin {
 
 	/**
 	 * Add new roles not necessarily stored in the database
-	 * @param unknown_type $params
+	 * @param	array	$params
 	 */
 	function getExtraRoles(&$params) {
 		// $params['new_roles'][] = RBACEngine::getInstance()->getRoleById(123);
@@ -164,7 +164,7 @@ abstract class ForgeAuthPlugin extends Plugin {
 
 	/**
 	 * Filter out unwanted roles
-	 * @param unknown_type $params
+	 * @param	array	$params
 	 */
 	function restrictRoles(&$params) {
 		// $params['dropped_roles'][] = RBACEngine::getInstance()->getRoleById(123);
@@ -177,7 +177,7 @@ abstract class ForgeAuthPlugin extends Plugin {
 	/**
 	 * Returns the session cookie name for the auth plugin (by default forge_session_AUTHPLUGINNAME)
 	 *
-	 * @return string
+	 * @return	string
 	 */
 	protected function getCookieName() {
 		if ($this->cookie_name) {
@@ -207,8 +207,9 @@ abstract class ForgeAuthPlugin extends Plugin {
 
 	/**
 	 * Start a new session for a user
-	 * @param string $username
-	 * @return boolean
+	 *
+	 * @param	string	$username
+	 * @return	boolean
 	 */
 	function startSession($username) {
 		if ($this->isSufficient() || $this->isRequired()) {
@@ -231,7 +232,7 @@ abstract class ForgeAuthPlugin extends Plugin {
 
 	/**
 	 * TODO: Enter description here ...
-	 * @return Ambigous <Ambigous, NULL, boolean>
+	 * @return	Ambigous	<Ambigous, NULL, boolean>
 	 */
 	public function isRequired() {
 		return forge_get_config('required', $this->name);
@@ -239,7 +240,7 @@ abstract class ForgeAuthPlugin extends Plugin {
 
 	/**
 	 * TODO: Enter description here ...
-	 * @return Ambigous <Ambigous, NULL, boolean>
+	 * @return	Ambigous	<Ambigous, NULL, boolean>
 	 */
 	public function isSufficient() {
 		return forge_get_config('sufficient', $this->name);
@@ -247,8 +248,8 @@ abstract class ForgeAuthPlugin extends Plugin {
 
 	/**
 	 * TODO: Enter description here ...
-	 * @param unknown_type $event
-	 * @return boolean
+	 * @param	unknown_type	$event
+	 * @return	boolean
 	 */
 	public function syncDataOn($event) {
 		$configval = forge_get_config('sync_data_on', $this->name);

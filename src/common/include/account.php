@@ -25,8 +25,8 @@
 /**
  * account_pwvalid() - Validates a password
  *
- * @param		string	$pw	The plaintext password string
- * @return		bool	true on success/false on failure
+ * @param	string	$pw	The plaintext password string
+ * @return	bool	true on success/false on failure
  *
  */
 function account_pwvalid($pw) {
@@ -40,9 +40,9 @@ function account_pwvalid($pw) {
 /**
  * account_namevalid() - Validates a login username
  *
- * @param		string	$name	The username string
- * @param		bool	$unix	Check for an unix username
- * @return		bool	true on success/false on failure
+ * @param	string	$name	The username string
+ * @param	bool	$unix	Check for an unix username
+ * @return	bool	true on success/false on failure
  *
  */
 function account_namevalid($name, $unix=false) {
@@ -105,8 +105,8 @@ function account_namevalid($name, $unix=false) {
 /**
  * account_groupnamevalid() - Validates an account group name
  *
- * @param		string	$name	The group name string
- * @return		bool	true on success/false on failure
+ * @param	string	$name	The group name string
+ * @return	bool	true on success/false on failure
  *
  */
 function account_groupnamevalid($name) {
@@ -131,11 +131,11 @@ function account_groupnamevalid($name) {
 }
 
 /**
- * genchr() - Generate a random character
+ * genchr - Generate a random character
  *
  * This is a local function used for account_salt()
  *
- * @return int $num A random character
+ * @return	string	A random character
  *
  */
 function genchr(){
@@ -147,7 +147,7 @@ function genchr(){
 }
 
 /**
- * account_gensalt() - A random salt generator
+ * account_gensalt - A random salt generator
  *
  * @returns	string	The random salt string
  *
@@ -181,7 +181,7 @@ function account_gensalt(){
 }
 
 /**
- * account_genunixpw() - Generate unix password
+ * account_genunixpw - Generate unix password
  *
  * @param	string	$plainpw	The plaintext password string
  * @return	string	The encrypted password
@@ -199,8 +199,9 @@ function account_genunixpw($plainpw) {
 }
 
 /**
- * account_get_user_default_shell() - return default user shell
+ * account_get_user_default_shell - return default user shell
  *
+ * @return	string	the shell absolute path.
  */
 function account_get_user_default_shell() {
 	$user_default_shell = forge_get_config('user_default_shell');
@@ -212,8 +213,9 @@ function account_get_user_default_shell() {
 }
 
 /**
- * account_getavailableshells() - return available shells for the users
+ * account_getavailableshells - return available shells for the users
  *
+ * @return	array	Available shells
  */
 function account_getavailableshells($add_user_default_shell = TRUE) {
 	// we'd better use the shells defined inside the 'chroot' in /var/lib/gforge/chroot/etc/shells it it exists
@@ -247,10 +249,10 @@ function account_getavailableshells($add_user_default_shell = TRUE) {
 }
 
 /**
- * account_shellselects() - Print out shell selects
+ * account_shellselects - Print out shell selects
  *
- * @param	string	The current shell
- *
+ * @param	string	the current shell
+ * @return	string	HTML code options for a select tag
  */
 function account_shellselects($current) {
 	$html = '';
@@ -281,7 +283,7 @@ function account_shellselects($current) {
 }
 
 /**
- * account_user_homedir() - Returns full path of user home directory
+ * account_user_homedir - Returns full path of user home directory
  *
  * @param	string	The username
  * @return	string	home directory path
@@ -292,7 +294,7 @@ function account_user_homedir($user) {
 }
 
 /**
- * account_group_homedir() - Returns full path of group home directory
+ * account_group_homedir - Returns full path of group home directory
  *
  * @param	string	The group name
  * @return	string	home directory path
@@ -303,10 +305,10 @@ function account_group_homedir($group) {
 }
 
 /**
- * checkKeys() - Simple function that tries to check the validity of public ssh keys with a regexp.
+ * checkKeys - Simple function that tries to check the validity of public ssh keys with a regexp.
  * Exits with an error message if an invalid key is found.
  *
- * @param string $keys	A string with a set of keys to check. Each key is delimited by a carriage return.
+ * @param	string	$keys	A string with a set of keys to check. Each key is delimited by a carriage return.
  */
 function checkKeys($keys) {
 	$key = strtok($keys, "\n");
