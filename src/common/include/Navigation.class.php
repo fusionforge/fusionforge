@@ -40,17 +40,24 @@ class Navigation extends Error {
 	 */
 	var $project_menu_data;
 
-	/** Constructor */
+	/**
+	 * Constructor
+	 */
 	function Navigation() {
 		$this->Error();
 		return true;
 	}
 
-	/** Get the HTML code of the title of the page. If the array
-	 *  $params contains a value for the key 'title', this title
-	 *  is appended to the title generated here. If $asHTML is
-	 *  set to false, it will return only the title in plain
-	 *  text.
+	/**
+	 * getTitle - Get the HTML code of the title of the page.
+	 * If the array $params contains a value for the key 'title',
+	 * this title is appended to the title generated here.
+	 * If $asHTML is set to false, it will return only the title
+	 * in plain text.
+	 *
+	 * @param	array	$params
+	 * @param	bool	$asHTML	html or not
+	 * @return	string	text or html code
 	 */
 	function getTitle($params, $asHTML = true) {
 		if (!$asHTML) {
@@ -66,9 +73,10 @@ class Navigation extends Error {
 		}
 	}
 
-	/** Get the HTML code for the favicon links of the site (to be
-	 *  put into the <head>. If $asHTML is false, it will return
-	 *  the URL of the favicon.
+	/**
+	 * Get the HTML code for the favicon links of the site (to be
+	 * put into the <head>. If $asHTML is false, it will return
+	 * the URL of the favicon.
 	 *
 	 * @todo: Make favicon configurable
 	 */
@@ -83,11 +91,12 @@ class Navigation extends Error {
 		}
 	}
 
-	/** Get the HTML code for the RSS feeds of the site (to be put
-	 *  into the <head>. If $asHTML is false, it will return an
-	 *  array with the following structure: $result['titles']:
-	 *  list of titles of the feeds; $result['urls'] list of urls
-	 *  of the feeds.
+	/**
+	 * Get the HTML code for the RSS feeds of the site (to be put
+	 * into the <head>. If $asHTML is false, it will return an
+	 * array with the following structure: $result['titles']:
+	 * list of titles of the feeds; $result['urls'] list of urls
+	 * of the feeds.
 	 */
 	function getRSS($asHTML = true) {
 		if (!$asHTML) {
@@ -489,7 +498,7 @@ class Navigation extends Error {
 				$menu['titles'][] = _('Docs');
 				$menu['tooltips'][] = _('Document Management.');
 				$menu['urls'][] = util_make_uri('/docman/?group_id=' . $group_id);
-				if (forge_check_perm ('docman', $group_id, 'approve')) {
+				if (forge_check_perm ('docman', $group_id, 'admin')) {
 					$menu['adminurls'][] = util_make_uri('/docman/?group_id='.$group_id.'&amp;view=admin');
 				} else {
 					$menu['adminurls'][] = false;

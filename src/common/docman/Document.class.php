@@ -976,6 +976,7 @@ class Document extends Error {
 		$desc     = util_unconvert_htmlspecialchars( $this->getDescription() );
 		$group_id = $this->Group->getID();
 		$name     = $this->getCreatorRealName()." (".$this->getCreatorUserName().")";
+		$bcc      = '';
 
 		$subject="[" . forge_get_config('forge_name') ."] ".util_unconvert_htmlspecialchars($doc_name);
 		$body = "\nA new document has been uploaded and waiting to be approved by you:".
@@ -996,10 +997,13 @@ class Document extends Error {
 		$extra_headers .= "Errors-To: <noreply@".forge_get_config('web_host').">\n";
 		$extra_headers .= "Sender: <noreply@".forge_get_config('web_host').">";
 
-		$sql = 'SELECT u.email FROM user_group ug INNER JOIN users u ON u.user_id=ug.user_id
-			WHERE ug.admin_flags = $1 AND ug.group_id = $2';
-		$res = db_query_params($sql, array('A', $group_id));
-		$bcc = implode(util_result_column_to_array($res),',');
+		$groupUsers = $this->Group->getUsers();
+		$rbacEngine = RBACEngine::getInstance();
+		foreach ($groupUsers as $key => $groupUser) {
+			if ($rbacEngine->isActionAllowedForUser($groupUser, 'docman', $group_id, 'approve')) {
+				$bcc .= $groupUser->getEmail().',';
+			}
+		}
 		if (strlen($bcc) > 0) {
 			util_send_message('',$subject,$body,"noreply@".forge_get_config('web_host'),
 				$bcc,'Docman',$extra_headers);

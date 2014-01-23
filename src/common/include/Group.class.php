@@ -2839,8 +2839,8 @@ if there is anything we can do to help you.
 	/**
 	 * getUsers - Get the users of a group
 	 *
-	 * @param bool $onlylocal
-	 * @return array of user's objects.
+	 * @param	bool	$onlylocal
+	 * @return	array	user's objects.
 	 */
 	function getUsers($onlylocal = true) {
 		if (!isset($this->membersArr)) {
