@@ -73,19 +73,6 @@ foreach ($fields as $f => $name) {
 		 "<br />\n";
 }
 
-$keys=array_keys($efarr);
-$rows=count($keys);
-if ($rows > 0) {
-	for ($k=0; $k < $rows; $k++) {
-		$i=$keys[$k];
-		$pos = array_search($i, $browse_fields);
-		echo "<input type=\"text\" name=\"browse_fields[$i]\" value=\"" .
-		 	 (($pos !== false) ? $pos + 1 : '') .
-		 	 "\" size=\"3\" maxlength=\"3\" /> " .
-			 $efarr[$i]['field_name'] .
-			 "<br />\n";
-	}
-}
 ?>
 
 <p>
