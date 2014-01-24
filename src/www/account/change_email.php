@@ -85,9 +85,9 @@ echo '<p>' . _('Submitting the form below will mail a confirmation URL to the ne
 <input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
 <?php echo _('New Email Address')._(':'); ?>
     <label for="newemail">
-        <input id="newemail" type="text" name="newemail" maxlength="255"/>
+        <input id="newemail" required="required" type="email" name="newemail" maxlength="255"/>
     </label>
-    <input type="submit" name="submit" value="<?php echo _('Send Confirmation to New Address') ?>" />
+    <input type="submit" name="submit" value="<?php echo _('Send Confirmation to New Address'); ?>" />
 </p>
 </form>
 
