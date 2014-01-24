@@ -268,7 +268,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 				}
 			} elseif ($k == 'new_tracker') {
 				$res = db_query_params('SELECT group_artifact_id FROM artifact_group_list WHERE group_id=$1',
-						       array ($this->Group->getID())) ;
+								array ($this->Group->getID())) ;
 				if (!$res) {
 					$this->setError('Error: Tracker'.db_error());
 					return false;
