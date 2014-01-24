@@ -38,9 +38,6 @@ var controllerAddItem;
 
 jQuery(document).ready(function() {
 	controllerAddItem = new DocManAddItemController({
-		divCreateDir:	jQuery('#addsubdocgroup'),
-		divCreateDoc:	jQuery('#addfile'),
-		divZipInject:	jQuery('#zipinject'),
 		injectZip:	jQuery('#injectzip'),
 		submitZip:	jQuery('#submitinjectzip')
 	});
@@ -55,10 +52,12 @@ jQuery(document).ready(function() {
 <ul>
 <li><a id="tab-new-document" href="#tabs-new-document" class="tabtitle" title="<?php echo _('Submit a new document in this folder.') ?>">
     <?php echo _('New Document') ?></a></li>
+<?php if (forge_check_perm('docman', $group_id, 'approve')) { ?>
 <li><a id="tab-new-folder" href="#tabs-new-folder" class="tabtitle" title="<?php echo _('Create a folder based on this name.') ?>">
     <?php echo _('New Folder') ?></a></li>
 <li><a id="tab-inject-tree" href="#tabs-inject-tree" class="tabtitle" title="<?php echo _('Create a full folders tree using an compressed archive. Only ZIP format support.') ?>">
     <?php echo _('Inject Tree') ?></a></li>
+<?php } ?>
 </ul>
 
 <?php
@@ -68,16 +67,13 @@ include ($gfcommon.'docman/views/addfile.php');
 echo '</div>';
 echo '</div>';
 
-echo '<div id="tabs-new-folder">';
 if (forge_check_perm('docman', $group_id, 'approve')) {
+	echo '<div id="tabs-new-folder">';
 	echo '<div class="docman_div_include" id="addsubdocgroup">';
 	include ($gfcommon.'docman/views/addsubdocgroup.php');
 	echo '</div>';
-}
-echo '</div>';
-
-echo '<div id="tabs-inject-tree">';
-if (forge_check_perm('docman', $group_id, 'approve')) {
+	echo '</div>';
+	echo '<div id="tabs-inject-tree">';
 	echo '<div class="docman_div_include" id="zipinject">';
 	echo '<form id="injectzip" name="injectzip" method="post" action="?group_id='.$group_id.'&amp;action=injectzip&amp;dirid='.$dirid.'" enctype="multipart/form-data">';
 	echo '<p>';
@@ -86,7 +82,7 @@ if (forge_check_perm('docman', $group_id, 'approve')) {
 	echo '</p>';
 	echo '</form>';
 	echo '</div>';
+	echo '</div>';
 }
-echo '</div>';
 
 echo '</div>';
