@@ -198,7 +198,7 @@ class GroupJoinRequest extends Error {
 	/**
 	 *      getComments - get the field comments.
 	 *
-	 * @return text The field.
+	 * @return string  The field.
 	 */
 	function getComments() {
 		return $this->data_array['comments'];

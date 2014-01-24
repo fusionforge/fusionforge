@@ -252,7 +252,7 @@ class DocumentFactory extends Error {
 	 * setLimit - call this before getDocuments() if you want to limit number of documents retrieve.
 	 * default value is 0 which means : no limit.
 	 *
-	 * @param	int	The limit of documents
+	 * @param	int	$limit The limit of documents
 	 * @access	public
 	 */
 	function setLimit($limit) {

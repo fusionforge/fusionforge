@@ -29,7 +29,7 @@
 /**
  * htpasswd_apr1_md5 - generate htpasswd md5 format password
  *
- * @param	string	the plain string password
+ * @param	string	$plainpasswd the plain string password
  * @return	string	the apr1 string passwords
  *
  * From http://www.php.net/manual/en/function.crypt.php#73619

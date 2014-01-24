@@ -174,8 +174,8 @@
 	/**
 	 * Apply validator on submitted user array.
 	 *
-	 * @param string Index in the user submitted values where the array stands.
-	 * @param Valid  Validator to apply
+	 * @param string $index Index in the user submitted values where the array stands.
+	 * @param string $validator  Validator to apply
 	 * @return boolean
 	 */
 	function validInArray($index, &$validator) {

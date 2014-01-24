@@ -254,10 +254,10 @@ class DocumentManager extends Error {
 	 * getDocGroupList - Returns as a string used in javascript the list of available folders
 	 *
 	 * @param	$nested_groups
-	 * @param	string		must be json which is wrong, this function does not return any json object
-	 * @param	bool		allow the "None" which is the "/"
-	 * @param	int		the selected folder id
-	 * @param	array		folders id to not display
+	 * @param	string	$format	must be json which is wrong, this function does not return any json object
+	 * @param	bool	$allow_none	allow the "None" which is the "/"
+	 * @param	int		$selected_id the selected folder id
+	 * @param	array	$dont_display	folders id to not display
 	 * @return	string
 	 */
 	function getDocGroupList($nested_groups, $format = '', $allow_none = true, $selected_id = 0, $dont_display = array()) {

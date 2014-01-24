@@ -157,9 +157,9 @@ require_once 'common/widget/Widget_MyMonitoredDocuments.class.php';
 	 *
 	 * Take the content of a widget, clone it and return the id of the new content
 	 *
-	 * @param $id the id of the content to clone
-	 * @param $owner_id the owner of the widget of the new widget
-	 * @param $owner_type the type of the owner of the new widget (see WidgetLayoutManager)
+	 * @param int $id the id of the content to clone
+	 * @param int $owner_id the owner of the widget of the new widget
+	 * @param int $owner_type the type of the owner of the new widget (see WidgetLayoutManager)
 	 * @return int
 	 */
 	function cloneContent($id, $owner_id, $owner_type) {

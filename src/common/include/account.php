@@ -215,9 +215,10 @@ function account_get_user_default_shell() {
 /**
  * account_getavailableshells - return available shells for the users
  *
- * @return	array	Available shells
+ * @param bool $add_user_default_shell
+ * @return    array    Available shells
  */
-function account_getavailableshells($add_user_default_shell = TRUE) {
+function account_getavailableshells($add_user_default_shell = true) {
 	// we'd better use the shells defined inside the 'chroot' in /var/lib/gforge/chroot/etc/shells it it exists
 	$chroot = forge_get_config('chroot');
 	$shells_file = $chroot.'/etc/shells';
@@ -238,7 +239,7 @@ function account_getavailableshells($add_user_default_shell = TRUE) {
 	if ($add_user_default_shell) {
 		$user_default_shell = account_get_user_default_shell();
 		if (! file_exists($user_default_shell) ) {
-			// we'll always add cvssh if no other defaukt set ... TODO: explain why ?
+			// we'll always add cvssh if no other default set ... TODO: explain why ?
 			$user_default_shell = "/bin/cvssh";
 		}
 		if (!in_array($user_default_shell, $out_shells)) {
@@ -251,7 +252,7 @@ function account_getavailableshells($add_user_default_shell = TRUE) {
 /**
  * account_shellselects - Print out shell selects
  *
- * @param	string	the current shell
+ * @param	string	$current the current shell
  * @return	string	HTML code options for a select tag
  */
 function account_shellselects($current) {

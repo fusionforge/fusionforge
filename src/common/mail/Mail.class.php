@@ -126,7 +126,7 @@ class Mail {
 	* user email.
 	*
 	* @param	$list	(IN) list of email addresses separated by , or ;
-	* @return	list of email separated by ,
+	* @return	string list of email separated by ,
 	*/
 	function _validateRecipient($list) {
 		$recipArray = preg_split('/[;,]/', $list);
