@@ -83,13 +83,15 @@ class PluginHudsonJobDao extends DataAccessObject {
 	 * @return DataAccessResult
 	 */
 	function & searchByUserID($user_id) {
-		$sql = "SELECT j.*
-			FROM plugin_hudson_job j, users u, user_group ug
-			WHERE ug.group_id = j.group_id AND
-			u.user_id = ug.user_id AND
-			u.user_id = $1";
-		$user_id = $this->da->quoteSmart($user_id);
-		return $this->retrieve($sql,array($user_id));
+		$u = user_get_object($user_id);
+		$gl = $u->getGroups();
+		$gids = array();
+		foreach ($gl as $g) {
+			$gids[] = $g->getID();
+		}
+		$sql = "SELECT * FROM plugin_hudson_job	WHERE group_id=ANY($1)";
+		$garray = db_int_array_to_any_clause($gids);
+		return $this->retrieve($sql,array($garray));
 	}
 
 	/**
