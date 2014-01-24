@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-23 10:57+0100\n"
+"POT-Creation-Date: 2014-01-24 18:58+0100\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -174,9 +174,8 @@ msgstr ""
 #: common/docman/Document.class.php:950
 #: common/docman/DocumentGroup.class.php:729
 #: common/docman/views/reporting.php:169
-#, fuzzy
 msgid "Folder"
-msgstr "Добавяне на бележка"
+msgstr ""
 
 #: common/docman/actions/monitordirectory.php:43
 #: common/docman/actions/monitorfile.php:44
@@ -224,7 +223,7 @@ msgstr "Добавяне на бележка"
 #: common/include/Group.class.php:2696 common/include/Group.class.php:2706
 #: common/include/Group.class.php:2707
 #: common/include/GroupJoinRequest.class.php:298
-#: common/include/Navigation.class.php:61 common/include/User.class.php:350
+#: common/include/Navigation.class.php:68 common/include/User.class.php:350
 #: common/include/User.class.php:436 common/include/User.class.php:1410
 #: common/mail/MailingList.class.php:132 common/mail/MailingList.class.php:139
 #: common/mail/MailingList.class.php:177
@@ -524,7 +523,7 @@ msgid "Error fetching Document"
 msgstr ""
 
 #: common/docman/Document.class.php:225 common/docman/Document.class.php:890
-#: common/docman/Document.class.php:1106
+#: common/docman/Document.class.php:1110
 msgid "Error updating document group:"
 msgstr ""
 
@@ -550,22 +549,20 @@ msgid "Unable To Clear Monitor"
 msgstr ""
 
 #: common/docman/Document.class.php:678
-#, fuzzy
 msgid "Document lock failed"
-msgstr "Име на документа"
+msgstr ""
 
 #: common/docman/Document.class.php:706
 msgid "Document reservation failed"
 msgstr ""
 
-#: common/docman/Document.class.php:944 common/docman/views/additem.php:57
+#: common/docman/Document.class.php:944 common/docman/views/additem.php:54
 msgid "New Document"
 msgstr ""
 
 #: common/docman/Document.class.php:946
-#, fuzzy
 msgid "Updated document"
-msgstr "Публикуване на документ"
+msgstr ""
 
 #: common/docman/Document.class.php:946 common/docman/views/listfile.php:285
 #: common/widget/Widget_MyLatestSvnCommits.class.php:66
@@ -613,12 +610,11 @@ msgstr ""
 msgid "Docman"
 msgstr ""
 
-#: common/docman/Document.class.php:1025
-#, fuzzy
+#: common/docman/Document.class.php:1029
 msgid "Error Deleting Document:"
 msgstr "Грешка при получаването на "
 
-#: common/docman/Document.class.php:1101
+#: common/docman/Document.class.php:1105
 #: common/docman/DocumentGroup.class.php:879
 msgid "wrong column name"
 msgstr ""
@@ -648,9 +644,8 @@ msgid "Folder name already exists"
 msgstr ""
 
 #: common/docman/DocumentGroup.class.php:147
-#, fuzzy
 msgid "Error Adding Folder:"
-msgstr "Грешка при добавянето на форум"
+msgstr ""
 
 #: common/docman/DocumentGroup.class.php:241
 msgid "Unsupported injected file:"
@@ -666,16 +661,16 @@ msgid "Documents Folder name already exists"
 msgstr ""
 
 #: common/docman/DocumentGroup.class.php:525
-#, fuzzy, php-format
+#, php-format
 msgid "Error: %s"
-msgstr "Грешка при добавянето на форум"
+msgstr ""
 
 #: common/docman/DocumentGroup.class.php:676
 msgid "Browse this folder"
 msgstr ""
 
 #: common/docman/DocumentGroup.class.php:723
-#: common/docman/views/additem.php:59
+#: common/docman/views/additem.php:57
 msgid "New Folder"
 msgstr ""
 
@@ -698,7 +693,7 @@ msgstr ""
 #: common/docman/DocumentGroup.class.php:824
 #, fuzzy
 msgid "(Title must be at least 5 characters.)"
-msgstr "Името на форума трябва да бъде поне 3 символа"
+msgstr "Името на форума трябва да бъде поне 5 символа"
 
 #: common/docman/DocumentGroup.class.php:829
 msgid "Injected by ZIP:"
@@ -732,9 +727,8 @@ msgstr ""
 
 #: common/docman/DocumentManager.class.php:202
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:52
-#, fuzzy
 msgid "Created by"
-msgstr "Категория"
+msgstr ""
 
 #: common/docman/DocumentManager.class.php:206
 msgid "; "
@@ -877,9 +871,9 @@ msgstr ""
 #: common/docman/views/addfile.php:102 common/docman/views/addfile.php:103
 #: common/docman/views/addfile.php:110 common/docman/views/addfile.php:111
 #: common/docman/views/editfile.php:39 common/docman/views/editfile.php:43
-#, fuzzy, php-format
+#, php-format
 msgid "(at least %s characters)"
-msgstr "Името на форума трябва да бъде поне 3 символа"
+msgstr ""
 
 #: common/docman/views/addfile.php:116
 msgid "Type of Document"
@@ -922,7 +916,7 @@ msgstr ""
 msgid "Upload File"
 msgstr "Файл със съдържанието на документа"
 
-#: common/docman/views/addfile.php:132 common/docman/views/additem.php:84
+#: common/docman/views/addfile.php:132 common/docman/views/additem.php:80
 #: common/docman/views/editfile.php:81
 #, php-format
 msgid "(max upload size: %s)"
@@ -985,29 +979,27 @@ msgstr "Публикуване"
 msgid "Document Manager Access Denied"
 msgstr ""
 
-#: common/docman/views/additem.php:56
-#, fuzzy
+#: common/docman/views/additem.php:53
 msgid "Submit a new document in this folder."
-msgstr "Публикуване на документ"
+msgstr ""
 
-#: common/docman/views/additem.php:58
+#: common/docman/views/additem.php:56
 msgid "Create a folder based on this name."
 msgstr ""
 
-#: common/docman/views/additem.php:60
+#: common/docman/views/additem.php:58
 msgid ""
 "Create a full folders tree using an compressed archive. Only ZIP format "
 "support."
 msgstr ""
 
-#: common/docman/views/additem.php:61 common/docman/views/additem.php:85
+#: common/docman/views/additem.php:59 common/docman/views/additem.php:81
 msgid "Inject Tree"
 msgstr ""
 
-#: common/docman/views/additem.php:84
-#, fuzzy
+#: common/docman/views/additem.php:80
 msgid "Upload archive:"
-msgstr "Файл със съдържанието на документа"
+msgstr ""
 
 #: common/docman/views/addsubdocgroup.php:56
 msgid "Name of the document subfolder to create"
@@ -1055,9 +1047,8 @@ msgid "Disable Webdav Interface"
 msgstr ""
 
 #: common/docman/views/editdocgroup.php:59
-#, fuzzy
 msgid "Folder Name"
-msgstr "Име на форума"
+msgstr ""
 
 #: common/docman/views/editdocgroup.php:62
 msgid "belongs to"
@@ -1127,9 +1118,8 @@ msgid "OPTIONAL: Upload new file:"
 msgstr ""
 
 #: common/docman/views/help.php:38
-#, fuzzy
 msgid "Documents parsing is also available thru webdav"
-msgstr "Име на документа"
+msgstr ""
 
 #: common/docman/views/help.php:39
 msgid "Direct Webdav URL"
@@ -1137,9 +1127,8 @@ msgstr ""
 
 #: common/docman/views/listfile.php:112
 #: common/docman/views/listtrashfile.php:73
-#, fuzzy
 msgid "Invalid folder"
-msgstr "Грешна парола"
+msgstr ""
 
 #: common/docman/views/listfile.php:158
 #: common/docman/views/listtrashfile.php:109
@@ -1159,7 +1148,6 @@ msgstr ""
 #: common/docman/views/listfile.php:175 common/docman/views/listfile.php:206
 #: common/docman/views/listtrashfile.php:118
 #: common/docman/views/listtrashfile.php:123
-#, fuzzy
 msgid "Edit this folder"
 msgstr "Редактиране на папка"
 
@@ -1168,28 +1156,24 @@ msgid "Move this folder and his content to trash"
 msgstr ""
 
 #: common/docman/views/listfile.php:178
-#, fuzzy
 msgid "Permanently delete this folder"
-msgstr "Изтриване на съобщение"
+msgstr ""
 
 #: common/docman/views/listfile.php:183
-#, fuzzy
 msgid "Add a new item in this folder"
-msgstr "Публикуване на документ"
+msgstr ""
 
 #: common/docman/views/listfile.php:190
 msgid "Download this folder as a ZIP"
 msgstr ""
 
 #: common/docman/views/listfile.php:195
-#, fuzzy
 msgid "Stop monitoring this folder"
-msgstr "Регистрация"
+msgstr ""
 
 #: common/docman/views/listfile.php:198
-#, fuzzy
 msgid "Start monitoring this folder"
-msgstr "Редактиране на папка"
+msgstr ""
 
 #: common/docman/views/listfile.php:218
 #: common/docman/views/listtrashfile.php:129
@@ -1308,9 +1292,8 @@ msgstr ""
 #: plugins/mantisbt/view/viewAttachment.php:50
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:32
 #: www/account/editsshkeys.php:51
-#, fuzzy
 msgid "Actions"
-msgstr "Регистрацията не е активна"
+msgstr ""
 
 #: common/docman/views/listfile.php:231 common/docman/views/listfile.php:236
 #: common/docman/views/listtrashfile.php:137
@@ -1326,9 +1309,8 @@ msgstr ""
 #: common/docman/views/listfile.php:248
 #: common/docman/views/listtrashfile.php:147
 #: common/docman/views/pendingfiles.php:80
-#, fuzzy
 msgid "View this document"
-msgstr "Преглед на документите"
+msgstr ""
 
 #: common/docman/views/listfile.php:257
 #: common/docman/views/listtrashfile.php:156
@@ -1407,32 +1389,28 @@ msgstr ""
 #: common/docman/views/listfile.php:326 common/docman/views/listfile.php:337
 #: common/docman/views/listtrashfile.php:192
 #: common/docman/views/pendingfiles.php:127
-#, fuzzy
 msgid "Edit this document"
-msgstr "Редактиране на папка"
+msgstr ""
 
 #: common/docman/views/listfile.php:328
 msgid "Reserve this document for later edition"
 msgstr ""
 
 #: common/docman/views/listfile.php:328
-#, fuzzy
 msgid "Reserve this document"
-msgstr "Изтриване на съобщение"
+msgstr ""
 
 #: common/docman/views/listfile.php:333
 msgid "Enforce reservation"
 msgstr ""
 
 #: common/docman/views/listfile.php:338 common/docman/views/listfile.php:365
-#, fuzzy
 msgid "Release reservation"
-msgstr "Истинско Име"
+msgstr ""
 
 #: common/docman/views/listfile.php:344
-#, fuzzy
 msgid "Stop monitoring this document"
-msgstr "Регистрация"
+msgstr ""
 
 #: common/docman/views/listfile.php:347
 msgid "Start monitoring this document"
@@ -1459,9 +1437,8 @@ msgid "Reserve for later edition"
 msgstr ""
 
 #: common/docman/views/listfile.php:364
-#, fuzzy
 msgid "Reserve"
-msgstr "Анонимен потребител"
+msgstr ""
 
 #: common/docman/views/listfile.php:366 common/tracker/actions/detail.php:53
 #: common/tracker/actions/mod-limited.php:62 common/tracker/actions/mod.php:60
@@ -1488,9 +1465,8 @@ msgstr ""
 #: common/docman/views/listfile.php:376
 #: common/docman/views/listtrashfile.php:209
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:88
-#, fuzzy
 msgid "No documents."
-msgstr "Публикуване на документ"
+msgstr ""
 
 #: common/docman/views/listtrashfile.php:93
 msgid "Delete permanently all documents and folders with deleted status."
@@ -1505,9 +1481,8 @@ msgid "Updated since less than 7 days"
 msgstr ""
 
 #: common/docman/views/listtrashfile.php:191
-#, fuzzy
 msgid "Delete permanently this document."
-msgstr "Изтриване на съобщение"
+msgstr ""
 
 #: common/docman/views/listtrashfile.php:202
 #: plugins/mailman/www/admin/deletelist.php:60 www/admin/groupdelete.php:61
@@ -1516,9 +1491,8 @@ msgid "Permanently Delete"
 msgstr ""
 
 #: common/docman/views/menu.php:44
-#, fuzzy
 msgid "View Documents"
-msgstr "Публикуване на документ"
+msgstr ""
 
 #: common/docman/views/menu.php:46
 msgid ""
@@ -1527,9 +1501,8 @@ msgid ""
 msgstr ""
 
 #: common/docman/views/menu.php:49
-#, fuzzy
 msgid "Add new item"
-msgstr "Добавяне"
+msgstr ""
 
 #: common/docman/views/menu.php:51
 msgid ""
@@ -1537,7 +1510,7 @@ msgid ""
 msgstr ""
 
 #: common/docman/views/menu.php:55 common/docman/views/search.php:63
-#: common/include/Navigation.class.php:172
+#: common/include/Navigation.class.php:181
 #: plugins/globalsearch/common/globalsearch_stats_boxes.php:48
 #: www/admin/index.php:66 www/admin/index.php:155
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:341
@@ -1550,16 +1523,15 @@ msgid "Search documents in this project using keywords."
 msgstr ""
 
 #: common/docman/views/menu.php:63
-#, fuzzy
 msgid "Trash"
-msgstr "Администриране"
+msgstr ""
 
 #: common/docman/views/menu.php:65
 msgid "Recover or delete permanently files with deleted status."
 msgstr ""
 
 #: common/docman/views/menu.php:70 common/frs/include/frs_utils.php:78
-#: common/include/Navigation.class.php:301
+#: common/include/Navigation.class.php:310
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:54
 #: common/tracker/include/ArtifactTypeHtml.class.php:68
 #: www/pm/include/ProjectGroupHTML.class.php:99
@@ -1569,9 +1541,8 @@ msgid "Reporting"
 msgstr "Отчитане"
 
 #: common/docman/views/menu.php:72
-#, fuzzy
 msgid "Docman module reporting."
-msgstr "Администриране"
+msgstr ""
 
 #: common/docman/views/menu.php:73 common/forum/ForumHTML.class.php:115
 #: common/forum/ForumHTML.class.php:121 common/frs/include/frs_utils.php:79
@@ -1590,25 +1561,21 @@ msgid "Administration"
 msgstr ""
 
 #: common/docman/views/menu.php:75
-#, fuzzy
 msgid "Docman module administration."
-msgstr "Администриране"
+msgstr ""
 
 #: common/docman/views/pendingfiles.php:42
-#, fuzzy
 msgid "No pending documents."
-msgstr "Регистрация"
+msgstr ""
 
 #: common/docman/views/pendingfiles.php:62
-#, fuzzy
 msgid "Pending files"
-msgstr "Регистрация"
+msgstr ""
 
 #: common/docman/views/pendingfiles.php:128
 #: common/docman/views/pendingfiles.php:139
-#, fuzzy
 msgid "Activate in this folder"
-msgstr "Редактиране на папка"
+msgstr ""
 
 #: common/docman/views/pendingfiles.php:135
 msgid ""
@@ -1914,9 +1881,8 @@ msgid "Refresh"
 msgstr ""
 
 #: common/docman/views/reporting.php:105
-#, fuzzy
 msgid "There have been no viewed documents for this project yet."
-msgstr "Вие не сте член на никой активен проект"
+msgstr ""
 
 #: common/docman/views/reporting.php:116 common/docman/views/reporting.php:124
 #: common/reporting/report_utils.php:73 www/frs/reporting/downloads.php:135
@@ -1986,14 +1952,12 @@ msgid "View user profile"
 msgstr "Преглед на Вашият профил"
 
 #: common/docman/views/search.php:61
-#, fuzzy
 msgid "Query: "
-msgstr "Дневникът е обновен"
+msgstr ""
 
 #: common/docman/views/search.php:62
-#, fuzzy
 msgid "Searched words"
-msgstr "Търси"
+msgstr ""
 
 #: common/docman/views/search.php:65
 msgid "All searched words are mandatory"
@@ -2016,32 +1980,28 @@ msgid "Filename and contents are used to match searched words"
 msgstr ""
 
 #: common/docman/views/search.php:68
-#, fuzzy
 msgid "Inside documents"
-msgstr "Публикуване на документ"
+msgstr ""
 
 #: common/docman/views/search.php:75
 msgid "search into childs following project hierarchy"
 msgstr ""
 
 #: common/docman/views/search.php:75 plugins/mantisbt/controler/filter.php:91
-#, fuzzy
 msgid "Include child projects"
-msgstr "Моите Проекти"
+msgstr ""
 
 #: common/docman/views/search.php:126
 msgid "Database query error"
 msgstr ""
 
 #: common/docman/views/search.php:129
-#, fuzzy
 msgid "Your search did not match any documents."
-msgstr "Не наблюдавате никакви форуми."
+msgstr ""
 
 #: common/docman/views/search.php:154 common/docman/views/tree.php:64
-#, fuzzy
 msgid "Browse document manager for this project."
-msgstr "Вие не сте член на никой активен проект"
+msgstr ""
 
 #: common/docman/views/search.php:162
 msgid "Your search is empty."
@@ -2132,9 +2092,8 @@ msgstr ""
 #: common/forum/AttachManager.class.php:181
 #: common/forum/AttachManager.class.php:267
 #: common/forum/AttachManager.class.php:323
-#, fuzzy
 msgid "Could not get message id"
-msgstr "Разрешение не беше получено"
+msgstr ""
 
 #: common/forum/AttachManager.class.php:197
 #: common/forum/AttachManager.class.php:287
@@ -2188,9 +2147,8 @@ msgstr ""
 #: www/forum/admin/index.php:247 www/forum/admin/index.php:286
 #: www/forum/attachment.php:70 www/forum/monitor.php:47 www/forum/new.php:48
 #: www/forum/save.php:47
-#, fuzzy
 msgid "Error getting Forum"
-msgstr "Грешка при добавянето на форум"
+msgstr ""
 
 #: common/forum/ForumAdmin.class.php:187
 msgid "Forum Info Updated Successfully"
@@ -2202,9 +2160,8 @@ msgid "Forum added successfully"
 msgstr "Форумът е създаден успешно"
 
 #: common/forum/ForumAdmin.class.php:232 www/forum/admin/index.php:293
-#, fuzzy
 msgid "Error Getting ForumMessage"
-msgstr "Грешка при добавянето на форум"
+msgstr ""
 
 #: common/forum/ForumAdmin.class.php:240
 #, fuzzy, php-format
@@ -2241,9 +2198,8 @@ msgid "Message"
 msgstr ""
 
 #: common/forum/ForumAdmin.class.php:333
-#, fuzzy
 msgid "No action"
-msgstr "Преглед на документите"
+msgstr ""
 
 #: common/forum/ForumAdmin.class.php:335
 #: plugins/mantisbt/controler/filter_roadmap.php:60
@@ -2252,9 +2208,8 @@ msgstr "Преглед на документите"
 #: plugins/mantisbt/view/admin/editVersion.php:79
 #: plugins/mantisbt/view/roadmap.php:98 plugins/mantisbt/view/roadmap.php:147
 #: www/frs/admin/editrelease.php:348 www/frs/reporting/downloads.php:197
-#, fuzzy
 msgid "Release"
-msgstr "Следващи Резултати"
+msgstr ""
 
 #: common/forum/ForumAdmin.class.php:360 common/forum/ForumHTML.class.php:328
 #: common/forum/ForumHTML.class.php:545
@@ -2294,22 +2249,19 @@ msgstr "Регистрацията е изтрита"
 
 #: common/forum/ForumAdmin.class.php:419 www/forum/forum.php:70
 #: www/forum/message.php:72
-#, fuzzy
 msgid "Error getting new Forum"
-msgstr "Грешка при добавянето на форум"
+msgstr ""
 
 #: common/forum/ForumAdmin.class.php:425 common/forum/ForumAdmin.class.php:427
 #: www/forum/admin/pendingmsgdetail.php:57
 #: www/forum/admin/pendingmsgdetail.php:59 www/forum/forum.php:89
 #: www/forum/forum.php:92 www/forum/message.php:82
-#, fuzzy
 msgid "Error getting new ForumMessage"
-msgstr "Грешка при добавянето на форум"
+msgstr ""
 
 #: common/forum/ForumAdmin.class.php:439
-#, fuzzy
 msgid "Pending message released"
-msgstr "съобщение(я) са изтрити"
+msgstr ""
 
 #: common/forum/ForumAdmin.class.php:461
 #: common/forum/ForumMessage.class.php:183
@@ -2360,7 +2312,7 @@ msgstr "Добре дошли"
 #: common/forum/Forum.class.php:265
 #, fuzzy
 msgid "Invalid forum group identifier."
-msgstr "Грешна парола"
+msgstr "Невалиден идентификатор на папка"
 
 #: common/forum/Forum.class.php:439 common/forum/Forum.class.php:474
 #: common/frs/FRSPackage.class.php:278 common/frs/FRSPackage.class.php:310
@@ -2405,9 +2357,8 @@ msgstr ""
 #: common/forum/Forum.class.php:632 common/forum/Forum.class.php:640
 #: common/forum/Forum.class.php:648 common/forum/Forum.class.php:656
 #: common/forum/Forum.class.php:664 common/forum/Forum.class.php:672
-#, fuzzy
 msgid "Error Deleting Forum"
-msgstr "Грешка при добавянето на форум"
+msgstr ""
 
 #: common/forum/ForumFactory.class.php:56 common/forum/ForumHTML.class.php:58
 #: common/include/rbac_texts.php:158 www/forum/forum.php:156
@@ -2421,21 +2372,19 @@ msgid "You don't have a permission to access this page"
 msgstr "Нямате право да достъпвате тази страница"
 
 #: common/forum/ForumFactory.class.php:158
-#, fuzzy
 msgid "Forum not found"
-msgstr "Няма намерени."
+msgstr ""
 
 #: common/forum/ForumFactory.class.php:192
-#, fuzzy
 msgid "Thread not found"
-msgstr "Нишка"
+msgstr ""
 
 #: common/forum/ForumHTML.class.php:68 www/export/rssAboTask.php:171
 #, fuzzy
 msgid "Posted by"
 msgstr "Публикуване на обяви"
 
-#: common/forum/ForumHTML.class.php:70 common/include/Navigation.class.php:380
+#: common/forum/ForumHTML.class.php:70 common/include/Navigation.class.php:389
 #: common/tracker/actions/browse.php:197 common/tracker/actions/browse.php:555
 #: common/tracker/actions/detail.php:109
 #: common/tracker/actions/mod-limited.php:142
@@ -2471,9 +2420,8 @@ msgid "Latest News"
 msgstr "Последни новини"
 
 #: common/forum/ForumHTML.class.php:106
-#, fuzzy
 msgid "View Forums"
-msgstr "Модул \"Форуми\""
+msgstr ""
 
 #: common/forum/ForumHTML.class.php:111
 msgid "Discussion Forums:"
@@ -2492,9 +2440,8 @@ msgid "Start New Thread"
 msgstr ""
 
 #: common/forum/ForumHTML.class.php:180 common/forum/ForumMessage.class.php:60
-#, fuzzy
 msgid "Invalid Forum Object"
-msgstr "Невалиден проект"
+msgstr ""
 
 #: common/forum/ForumHTML.class.php:203
 msgid "This is the content of the pending message"
@@ -2593,9 +2540,8 @@ msgid "Post Comment"
 msgstr "Изпращане на коментар"
 
 #: common/forum/ForumHTML.class.php:619
-#, fuzzy
 msgid "Anonymously"
-msgstr "Анонимно FTP пространство"
+msgstr ""
 
 #: common/forum/ForumHTML.class.php:620
 msgid "Receive comments via email"
@@ -2645,16 +2591,14 @@ msgid "Error: a forum message must include a message body and a subject."
 msgstr ""
 
 #: common/forum/ForumMessage.class.php:373
-#, fuzzy
 msgid "Invalid ParentMessage Object"
-msgstr "Грешна парола"
+msgstr ""
 
 #: common/forum/ForumMessage.class.php:406
 #: common/forum/ForumMessage.class.php:424
 #: common/forum/ForumMessage.class.php:577
-#, fuzzy
 msgid "Invalid Message Id"
-msgstr "Невалиден Email Адрес"
+msgstr ""
 
 #: common/forum/ForumMessage.class.php:658
 #, php-format
@@ -2737,9 +2681,9 @@ msgstr ""
 #: common/mail/MailingList.class.php:268 common/pm/ProjectGroup.class.php:369
 #: www/admin/pending-news.php:76 www/admin/pending-news.php:86
 #: www/admin/pending-news.php:106 www/news/admin/index.php:90
-#, fuzzy, php-format
+#, php-format
 msgid "Error On Update: %s"
-msgstr "Грешка при Обновяване:"
+msgstr "Грешка при Обновяване: %s"
 
 #: common/frs/FRSFileProcessorType.class.php:61
 #: common/frs/FRSFileType.class.php:68
@@ -2748,18 +2692,16 @@ msgstr ""
 
 #: common/frs/FRSPackage.class.php:143 common/frs/FRSPackage.class.php:375
 #: common/frs/FRSRelease.class.php:121 common/frs/FRSRelease.class.php:399
-#, fuzzy
 msgid "FRSPackage Name Must Be At Least 3 Characters"
-msgstr "Името на форума трябва да бъде поне 3 символа"
+msgstr "Името на FRSPackage трябва да бъде поне 3 символа"
 
 #: common/frs/FRSPackage.class.php:147
 msgid "Package Name can only be alphanumeric"
 msgstr ""
 
 #: common/frs/FRSPackage.class.php:158
-#, fuzzy
 msgid "Error Adding Package: Name Already Exists"
-msgstr "Това потребителско име вече е заето."
+msgstr ""
 
 #: common/frs/FRSPackage.class.php:169
 #, fuzzy
@@ -2771,34 +2713,28 @@ msgid "Invalid package_id"
 msgstr ""
 
 #: common/frs/FRSPackage.class.php:327
-#, fuzzy
 msgid "Error On querying monitor count: "
-msgstr "Грешка при добавянето на форум"
+msgstr ""
 
 #: common/frs/FRSPackage.class.php:388
-#, fuzzy
 msgid "Error Updating Package: Name Already Exists"
-msgstr "Това потребителско име вече е заето."
+msgstr ""
 
 #: common/frs/FRSPackage.class.php:407
-#, fuzzy
 msgid "Error Updating Package: Couldn't fetch data"
-msgstr "Това потребителско име вече е заето."
+msgstr ""
 
 #: common/frs/FRSPackage.class.php:417
-#, fuzzy
 msgid "Error Updating Package: Directory Already Exists"
-msgstr "Това потребителско име вече е заето."
+msgstr ""
 
 #: common/frs/FRSPackage.class.php:422
-#, fuzzy
 msgid "Error Updating Package: Couldn't rename dir"
-msgstr "Това потребителско име вече е заето."
+msgstr ""
 
 #: common/frs/FRSPackage.class.php:480
-#, fuzzy
 msgid "Release Error: "
-msgstr "Истинско Име"
+msgstr ""
 
 #: common/frs/FRSPackage.class.php:490
 msgid "Package delete error: trying to delete root dir"
@@ -2813,14 +2749,12 @@ msgid "Cannot open the file archive."
 msgstr ""
 
 #: common/frs/FRSRelease.class.php:83
-#, fuzzy
 msgid "Invalid FRS Package Object"
-msgstr "Грешна парола"
+msgstr ""
 
 #: common/frs/FRSRelease.class.php:143
-#, fuzzy
 msgid "Error Adding Release: Name Already Exists"
-msgstr "Това потребителско име вече е заето."
+msgstr ""
 
 #: common/frs/FRSRelease.class.php:187
 msgid "Invalid release_id"
@@ -2864,28 +2798,24 @@ msgid "Release delete error: trying to delete root dir"
 msgstr ""
 
 #: common/frs/FRSRelease.class.php:419
-#, fuzzy
 msgid "Error On Update: Name Already Exists"
-msgstr "Това потребителско име вече е заето."
+msgstr ""
 
 #: common/frs/FRSRelease.class.php:445
 msgid "Error Updating Release: Couldn't fetch data"
 msgstr ""
 
 #: common/frs/FRSRelease.class.php:455
-#, fuzzy
 msgid "Error Updating Release: Directory Already Exists"
-msgstr "Това потребителско име вече е заето."
+msgstr ""
 
 #: common/frs/FRSRelease.class.php:460
-#, fuzzy
 msgid "Error Updating Release: Couldn't rename dir"
-msgstr "Това потребителско име вече е заето."
+msgstr ""
 
 #: common/frs/include/frs_utils.php:77
-#, fuzzy
 msgid "View File Releases"
-msgstr "Последно издадени пакети"
+msgstr ""
 
 #: common/frs/include/frs_utils.php:175 common/frs/include/frs_utils.php:197
 msgid "Error: group id required"
@@ -2926,9 +2856,8 @@ msgid "Failed to find user %s"
 msgstr ""
 
 #: common/import/import_users.php:414 www/admin/globalroleedit.php:103
-#, fuzzy
 msgid "User Added Successfully"
-msgstr "Обновено успешно"
+msgstr ""
 
 #: common/include/account.php:34
 msgid "Password must be at least 6 characters."
@@ -2967,7 +2896,7 @@ msgstr ""
 msgid "Group name cannot contain underscore for DNS reasons."
 msgstr ""
 
-#: common/include/account.php:320
+#: common/include/account.php:323
 #, php-format
 msgid ""
 "The following key has a wrong format: |%s|.  Please, correct it by going "
@@ -2983,9 +2912,8 @@ msgid "Database initialisation error:"
 msgstr ""
 
 #: common/include/Error.class.php:106
-#, fuzzy
 msgid "No Error"
-msgstr "Грешка при добавянето на форум"
+msgstr ""
 
 #: common/include/Error.class.php:125 common/include/Group.class.php:432
 #: common/include/Group.class.php:515
@@ -3053,14 +2981,12 @@ msgid "You Attempted To Double-submit this item. Please avoid double-clicking."
 msgstr ""
 
 #: common/include/forge_events.php:26
-#, fuzzy
 msgid "Jobs"
-msgstr "Публикуване на обяви"
+msgstr ""
 
 #: common/include/forge_events.php:29
-#, fuzzy
 msgid "Create SCM Repositories"
-msgstr "Версия"
+msgstr ""
 
 #: common/include/forge_events.php:30
 msgid "Upgrade Forge Software"
@@ -3078,14 +3004,12 @@ msgid "Version"
 msgstr "Версия"
 
 #: common/include/Group.class.php:257
-#, fuzzy
 msgid "Group Not Found"
-msgstr "Няма намерени."
+msgstr ""
 
 #: common/include/Group.class.php:310
-#, fuzzy
 msgid "Group object already exists."
-msgstr "Това потребителско име вече е заето."
+msgstr ""
 
 #: common/include/Group.class.php:315 common/include/User.class.php:342
 #: common/include/User.class.php:402
@@ -3114,19 +3038,18 @@ msgid "Describe in a more comprehensive manner your project."
 msgstr ""
 
 #: common/include/Group.class.php:373
-#, fuzzy, php-format
+#, php-format
 msgid "Error: Cannot create group: %s"
-msgstr "Грешка при създаването на %s"
+msgstr ""
 
 #: common/include/Group.class.php:380
-#, fuzzy, php-format
+#, php-format
 msgid "Error: Cannot get group id: %s"
-msgstr "Грешка при добавянето на форум"
+msgstr ""
 
 #: common/include/Group.class.php:427 common/include/Group.class.php:510
-#, fuzzy
 msgid "Could not get permission."
-msgstr "Разрешение не беше получено"
+msgstr "Разрешение не беше получено."
 
 #: common/include/Group.class.php:448
 #, fuzzy, php-format
@@ -3141,19 +3064,18 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: common/include/Group.class.php:631
-#, fuzzy, php-format
+#, php-format
 msgid "Error updating project information: %s"
-msgstr "Информация за проекта"
+msgstr ""
 
 #: common/include/Group.class.php:637
-#, fuzzy, php-format
+#, php-format
 msgid "Error updating project information: use_docman %s"
-msgstr "Информация за проекта"
+msgstr ""
 
 #: common/include/Group.class.php:664
-#, fuzzy
 msgid "Error updating project information in plugin_hook group_update"
-msgstr "Информация за проекта"
+msgstr ""
 
 #: common/include/Group.class.php:743
 msgid "Invalid Status Change From: "
@@ -3207,19 +3129,16 @@ msgid "Could not properly delete the ProjectGroup:"
 msgstr ""
 
 #: common/include/Group.class.php:1714
-#, fuzzy
 msgid "Error FRS Packages: "
-msgstr "Грешка при добавянето на форум"
+msgstr ""
 
 #: common/include/Group.class.php:1722
-#, fuzzy
 msgid "Could not properly delete the FRSPackage:"
-msgstr "Разрешение не беше получено"
+msgstr ""
 
 #: common/include/Group.class.php:1733 common/include/Group.class.php:1748
-#, fuzzy
 msgid "Error Deleting News: "
-msgstr "Грешка при добавянето на форум"
+msgstr ""
 
 #: common/include/Group.class.php:1741
 #, php-format
@@ -3227,29 +3146,24 @@ msgid "Could Not Delete News Forum: %d"
 msgstr ""
 
 #: common/include/Group.class.php:1759 common/include/Group.class.php:1767
-#, fuzzy
 msgid "Error Deleting Documents: "
-msgstr "Грешка при получаването на "
+msgstr ""
 
 #: common/include/Group.class.php:1777
-#, fuzzy
 msgid "Error Deleting Tags: "
-msgstr "Грешка при получаването на "
+msgstr ""
 
 #: common/include/Group.class.php:1788
-#, fuzzy
 msgid "Error Deleting Project History: "
-msgstr "Информация за проекта"
+msgstr ""
 
 #: common/include/Group.class.php:1799
-#, fuzzy
 msgid "Error Deleting Project Plugins: "
-msgstr "Грешка при получаването на "
+msgstr ""
 
 #: common/include/Group.class.php:1810
-#, fuzzy
 msgid "Error Deleting SCM Statistics: "
-msgstr "Грешка при получаването на "
+msgstr ""
 
 #: common/include/Group.class.php:1826
 msgid "Could not properly delete the survey"
@@ -3265,19 +3179,16 @@ msgid "Could not properly delete the mailing list"
 msgstr ""
 
 #: common/include/Group.class.php:1872 common/include/Group.class.php:1880
-#, fuzzy
 msgid "Error Deleting Trove: "
-msgstr "Грешка при създаването на "
+msgstr ""
 
 #: common/include/Group.class.php:1891
-#, fuzzy
 msgid "Error Deleting Counters: "
-msgstr "Грешка при добавянето на форум"
+msgstr ""
 
 #: common/include/Group.class.php:1901 common/include/Group.class.php:1910
-#, fuzzy
 msgid "Error Deleting Project:"
-msgstr "Грешка при получаването на "
+msgstr ""
 
 #: common/include/Group.class.php:1982
 msgid "User is not active. Only active users can be added."
@@ -3400,9 +3311,9 @@ msgid "Reasons for negative decision"
 msgstr ""
 
 #: common/include/Group.class.php:2648
-#, fuzzy, php-format
+#, php-format
 msgid "%s Project Denied"
-msgstr "Проекти на потребителя"
+msgstr ""
 
 #: common/include/Group.class.php:2672
 msgid "Could not find user who has submitted the project."
@@ -3414,23 +3325,18 @@ msgstr ""
 
 #: common/include/Group.class.php:2687 common/include/Group.class.php:2698
 #: common/include/Group.class.php:2705 common/include/Group.class.php:2711
-#, fuzzy, php-format
+#, php-format
 msgid "New %s Project Submitted"
-msgstr "Проекти на потребителя"
+msgstr ""
 
 #: common/include/Group.class.php:2689 common/include/Group.class.php:2707
 #: www/admin/approve-pending.php:192
-#, fuzzy
 msgid "Submitted Description"
-msgstr "Кратко описание"
+msgstr ""
 
 #: common/include/Group.class.php:2696
-#, fuzzy
 msgid "Please visit the following URL to approve or reject this project"
 msgstr ""
-"Sledvashtoto syobshtenie e na kiriliza (izberete UTF8 encoding na browsera, "
-"za da go prochetete). Вие поискахте промяна на email адрес за GForge.\n"
-"Моля посетете следния линк, за да осъществите промяната на адреса:\n"
 
 #: common/include/Group.class.php:2708
 #, php-format
@@ -3445,9 +3351,8 @@ msgid "Group name is too short"
 msgstr "Въпросът е твърде кратък"
 
 #: common/include/Group.class.php:2729
-#, fuzzy
 msgid "Group name is too long"
-msgstr "История на промените по проекта"
+msgstr ""
 
 #: common/include/Group.class.php:2732
 msgid "Group name already taken"
@@ -3541,7 +3446,7 @@ msgid "Delete failed"
 msgstr ""
 
 #: common/include/group_section_texts.php:29
-#: common/include/Navigation.class.php:426
+#: common/include/Navigation.class.php:435
 #: common/reporting/report_utils.php:136 common/reporting/report_utils.php:677
 #: common/reporting/report_utils.php:678
 #: common/widget/Widget_MyMonitoredForums.class.php:138
@@ -3560,7 +3465,7 @@ msgid "Trackers"
 msgstr ""
 
 #: common/include/group_section_texts.php:31
-#: common/include/Navigation.class.php:474 common/include/rbac_texts.php:157
+#: common/include/Navigation.class.php:483 common/include/rbac_texts.php:157
 #: common/reporting/report_utils.php:144 common/reporting/report_utils.php:187
 #: common/reporting/report_utils.php:690 common/reporting/report_utils.php:942
 #: common/widget/Widget_ProjectPublicAreas.class.php:147
@@ -3586,7 +3491,7 @@ msgid "File Release System"
 msgstr "Модул \"Пакети\""
 
 #: common/include/group_section_texts.php:34
-#: common/include/Navigation.class.php:519 plugins/blocks/www/index.php:157
+#: common/include/Navigation.class.php:528 plugins/blocks/www/index.php:157
 #: plugins/quota_management/www/quota_project.php:74
 #: www/activity/index.php:114 www/activity/index.php:311
 #: www/admin/index.php:191 www/export/rss20_activity.php:164
@@ -3602,82 +3507,82 @@ msgstr ""
 msgid "Error - only text/plain supported at this time"
 msgstr ""
 
-#: common/include/Navigation.class.php:176
+#: common/include/Navigation.class.php:185
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:89
 #: www/search/include/renderers/HtmlGroupSearchRenderer.class.php:75
 msgid "Advanced search"
 msgstr ""
 
-#: common/include/Navigation.class.php:192
+#: common/include/Navigation.class.php:201
 #: plugins/mediawiki/mediawiki-skin/FusionForge.php:206
 msgid "Log Out"
 msgstr "Изход"
 
-#: common/include/Navigation.class.php:195 www/account/index.php:117
+#: common/include/Navigation.class.php:204 www/account/index.php:117
 #: www/include/html.php:1000
 msgid "My Account"
 msgstr "Моят акаунт"
 
-#: common/include/Navigation.class.php:203
+#: common/include/Navigation.class.php:212
 #: plugins/mediawiki/mediawiki-skin/FusionForge.php:210
 msgid "Log In"
 msgstr "Вход"
 
-#: common/include/Navigation.class.php:207
+#: common/include/Navigation.class.php:216
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:86
 msgid "New Account"
 msgstr "Регистрация"
 
-#: common/include/Navigation.class.php:231
+#: common/include/Navigation.class.php:240
 #: plugins/quota_management/www/quota.php:163 www/account/lostpw.php:74
 #, php-format
 msgid "Home"
 msgstr "Начало"
 
-#: common/include/Navigation.class.php:233 www/reporting/index.php:33
+#: common/include/Navigation.class.php:242 www/reporting/index.php:33
 #, fuzzy
 msgid "Main Page"
 msgstr "Оценка на уменията на потребителя"
 
-#: common/include/Navigation.class.php:236
+#: common/include/Navigation.class.php:245
 #, fuzzy
 msgid "My Page"
 msgstr "Моята страница"
 
-#: common/include/Navigation.class.php:238
+#: common/include/Navigation.class.php:247
 msgid "Your Page, widgets selected by you to follow your items."
 msgstr ""
 
-#: common/include/Navigation.class.php:249 www/project/admin/index.php:163
+#: common/include/Navigation.class.php:258 www/project/admin/index.php:163
 #: www/reporting/index.php:46 www/search/include/SearchManager.class.php:145
 #: www/search/include/SearchManager.class.php:165
 #: www/stats/site_stats_utils.php:472
 msgid "Projects"
 msgstr ""
 
-#: common/include/Navigation.class.php:251
-msgid "Map of projects, by categories or types."
-msgstr ""
-
-#: common/include/Navigation.class.php:258
-#, fuzzy
-msgid "Code Snippets"
-msgstr "Фрагменти"
-
 #: common/include/Navigation.class.php:260
-msgid "Tooling library. Small coding tips."
+msgid "Map of projects, by categories or types."
 msgstr ""
 
 #: common/include/Navigation.class.php:267
 #, fuzzy
+msgid "Code Snippets"
+msgstr "Фрагменти"
+
+#: common/include/Navigation.class.php:269
+msgid "Tooling library. Small coding tips."
+msgstr ""
+
+#: common/include/Navigation.class.php:276
+#, fuzzy
 msgid "Project Openings"
 msgstr "Помощ"
 
-#: common/include/Navigation.class.php:269
+#: common/include/Navigation.class.php:278
 msgid "Hiring Market Place."
 msgstr ""
 
-#: common/include/Navigation.class.php:293
+#: common/include/Navigation.class.php:302
 #: plugins/quota_management/www/quota_admin.php:38
 #: plugins/quota_management/www/quota.php:36 www/admin/globalroleedit.php:140
 #: www/admin/index.php:39 www/admin/vhost.php:106
@@ -3685,24 +3590,24 @@ msgstr ""
 msgid "Site Admin"
 msgstr "Администриране"
 
-#: common/include/Navigation.class.php:295
+#: common/include/Navigation.class.php:304
 msgid ""
 "Administration Submenu to handle global configuration, users & projects."
 msgstr ""
 
-#: common/include/Navigation.class.php:303
+#: common/include/Navigation.class.php:312
 msgid "Statistics about visits, users & projects in time frame."
 msgstr ""
 
-#: common/include/Navigation.class.php:324
+#: common/include/Navigation.class.php:333
 msgid "Project home page, widgets selected to follow specific items."
 msgstr ""
 
-#: common/include/Navigation.class.php:381
+#: common/include/Navigation.class.php:390
 msgid "Project Homepage. Widgets oriented"
 msgstr ""
 
-#: common/include/Navigation.class.php:398 common/tracker/actions/mod.php:144
+#: common/include/Navigation.class.php:407 common/tracker/actions/mod.php:144
 #: common/tracker/actions/mod.php:196
 #: common/tracker/include/build_submission_form.php:64
 #: common/widget/Widget_MyProjects.class.php:77
@@ -3711,28 +3616,28 @@ msgstr ""
 msgid "Admin"
 msgstr "Администриране"
 
-#: common/include/Navigation.class.php:399 www/admin/approve-pending.php:137
+#: common/include/Navigation.class.php:408 www/admin/approve-pending.php:137
 #: www/admin/groupedit.php:99 www/admin/useredit.php:276
 #: www/admin/useredit.php:307
 #, fuzzy
 msgid "Project Admin"
 msgstr "Администратори"
 
-#: common/include/Navigation.class.php:415 www/activity/index.php:95
+#: common/include/Navigation.class.php:424 www/activity/index.php:95
 #: www/activity/index.php:179 www/activity/index.php:265
 #: www/export/rss_project.php:98
 msgid "Activity"
 msgstr ""
 
-#: common/include/Navigation.class.php:416
+#: common/include/Navigation.class.php:425
 msgid "Last activities per category."
 msgstr ""
 
-#: common/include/Navigation.class.php:427
+#: common/include/Navigation.class.php:436
 msgid "Tech & help forums."
 msgstr ""
 
-#: common/include/Navigation.class.php:441 common/include/rbac_texts.php:156
+#: common/include/Navigation.class.php:450 common/include/rbac_texts.php:156
 #: common/reporting/report_utils.php:132
 #: common/tracker/actions/admin-ind.php:99 common/tracker/actions/ind.php:57
 #: common/widget/Widget_ProjectPublicAreas.class.php:56
@@ -3741,51 +3646,51 @@ msgstr ""
 msgid "Tracker"
 msgstr "Тракер"
 
-#: common/include/Navigation.class.php:442
+#: common/include/Navigation.class.php:451
 msgid "Issues, tickets, bugs."
 msgstr ""
 
-#: common/include/Navigation.class.php:459 plugins/blocks/www/index.php:153
+#: common/include/Navigation.class.php:468 plugins/blocks/www/index.php:153
 msgid "Lists"
 msgstr "Пощ.списъци"
 
-#: common/include/Navigation.class.php:460
+#: common/include/Navigation.class.php:469
 #: common/widget/Widget_ProjectPublicAreas.class.php:135
 msgid "Mailing Lists"
 msgstr "Пощенски списъци"
 
-#: common/include/Navigation.class.php:475
+#: common/include/Navigation.class.php:484
 #, fuzzy
 msgid "Project Management."
 msgstr "Проекти на потребителя"
 
-#: common/include/Navigation.class.php:489
+#: common/include/Navigation.class.php:498
 #: common/reporting/report_utils.php:140 common/reporting/report_utils.php:665
 #: plugins/blocks/www/index.php:155
 msgid "Docs"
 msgstr "Документи"
 
-#: common/include/Navigation.class.php:490 www/index_std.php:40
+#: common/include/Navigation.class.php:499 www/index_std.php:40
 #, fuzzy
 msgid "Document Management."
 msgstr "Преглед на документите"
 
-#: common/include/Navigation.class.php:504
+#: common/include/Navigation.class.php:513
 #: common/widget/Widget_ProjectPublicAreas.class.php:171
 #: plugins/blocks/www/index.php:156
 msgid "Surveys"
 msgstr "Проучвания"
 
-#: common/include/Navigation.class.php:505
+#: common/include/Navigation.class.php:514
 msgid "Online surveys, project needs your point of view."
 msgstr ""
 
-#: common/include/Navigation.class.php:520
+#: common/include/Navigation.class.php:529
 #, fuzzy
 msgid "Flash head line from the project."
 msgstr "Вие не сте член на никой активен проект"
 
-#: common/include/Navigation.class.php:534 common/include/rbac_texts.php:164
+#: common/include/Navigation.class.php:543 common/include/rbac_texts.php:164
 #: common/widget/Widget_MyLatestSvnCommits.class.php:108
 #: plugins/blocks/www/index.php:158 plugins/quota_management/www/quota.php:165
 #: plugins/quota_management/www/quota.php:189
@@ -3795,20 +3700,20 @@ msgstr "Вие не сте член на никой активен проект"
 msgid "SCM"
 msgstr ""
 
-#: common/include/Navigation.class.php:535
+#: common/include/Navigation.class.php:544
 msgid "Source Content Management, peer-review and source discovery."
 msgstr ""
 
-#: common/include/Navigation.class.php:566 common/include/rbac_texts.php:166
+#: common/include/Navigation.class.php:575 common/include/rbac_texts.php:166
 #: plugins/blocks/www/index.php:159
 msgid "Files"
 msgstr "Пакети"
 
-#: common/include/Navigation.class.php:567
+#: common/include/Navigation.class.php:576
 msgid "All published files organized per version."
 msgstr ""
 
-#: common/include/Navigation.class.php:633
+#: common/include/Navigation.class.php:642
 msgid "Show source"
 msgstr ""
 
@@ -3865,25 +3770,25 @@ msgstr "Вие не сте член на никой активен проект"
 msgid "Cannot unlink from home project"
 msgstr "Вие не сте член на никой активен проект"
 
-#: common/include/RBAC.php:594
+#: common/include/RBAC.php:598
 msgid "UNKNOWN (internal error, report bug to FusionForge)"
-msgstr ""
-
-#: common/include/RBAC.php:809
-#, php-format
-msgid "%s (global role)"
 msgstr ""
 
 #: common/include/RBAC.php:813
 #, php-format
+msgid "%s (global role)"
+msgstr ""
+
+#: common/include/RBAC.php:817
+#, php-format
 msgid "%s (in project %s)"
 msgstr ""
 
-#: common/include/RBAC.php:1115
+#: common/include/RBAC.php:1119
 msgid "Anonymous/not logged in"
 msgstr ""
 
-#: common/include/RBAC.php:1163
+#: common/include/RBAC.php:1167
 msgid "Any user logged in"
 msgstr ""
 
@@ -10950,9 +10855,9 @@ msgid "Add Mailing List"
 msgstr ""
 
 #: plugins/mailman/www/index.php:39 www/mail/index.php:53
-#, fuzzy, php-format
+#, php-format
 msgid "Mailing Lists for %s"
-msgstr "Пощенски списъци"
+msgstr "Пощенски списъци за %s"
 
 #: plugins/mailman/www/index.php:55 www/mail/index.php:68
 #, php-format

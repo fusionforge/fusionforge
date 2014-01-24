@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-23 10:57+0100\n"
+"POT-Creation-Date: 2014-01-24 18:58+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -225,7 +225,7 @@ msgstr "Dossier"
 #: common/include/Group.class.php:2696 common/include/Group.class.php:2706
 #: common/include/Group.class.php:2707
 #: common/include/GroupJoinRequest.class.php:298
-#: common/include/Navigation.class.php:61 common/include/User.class.php:350
+#: common/include/Navigation.class.php:68 common/include/User.class.php:350
 #: common/include/User.class.php:436 common/include/User.class.php:1410
 #: common/mail/MailingList.class.php:132 common/mail/MailingList.class.php:139
 #: common/mail/MailingList.class.php:177
@@ -525,7 +525,7 @@ msgid "Error fetching Document"
 msgstr "Erreur lors de la récupération du document"
 
 #: common/docman/Document.class.php:225 common/docman/Document.class.php:890
-#: common/docman/Document.class.php:1106
+#: common/docman/Document.class.php:1110
 msgid "Error updating document group:"
 msgstr "Erreur lors de la mise à jour du groupe de documents :"
 
@@ -557,7 +557,7 @@ msgstr "Impossible de verrouiller le document"
 msgid "Document reservation failed"
 msgstr "Impossible de réserver le document"
 
-#: common/docman/Document.class.php:944 common/docman/views/additem.php:57
+#: common/docman/Document.class.php:944 common/docman/views/additem.php:54
 msgid "New Document"
 msgstr "Nouveau document"
 
@@ -610,11 +610,11 @@ msgstr "Pour plus d'informations, visitez :"
 msgid "Docman"
 msgstr ""
 
-#: common/docman/Document.class.php:1025
+#: common/docman/Document.class.php:1029
 msgid "Error Deleting Document:"
 msgstr "Erreur lors de la suppression du document :"
 
-#: common/docman/Document.class.php:1101
+#: common/docman/Document.class.php:1105
 #: common/docman/DocumentGroup.class.php:879
 msgid "wrong column name"
 msgstr "Nom de colonne invalide"
@@ -668,7 +668,7 @@ msgid "Browse this folder"
 msgstr "Naviguer dans ce dossier"
 
 #: common/docman/DocumentGroup.class.php:723
-#: common/docman/views/additem.php:59
+#: common/docman/views/additem.php:57
 msgid "New Folder"
 msgstr "Nouveau dossier"
 
@@ -917,7 +917,7 @@ msgstr "Créer en ligne"
 msgid "Upload File"
 msgstr "Importer un fichier"
 
-#: common/docman/views/addfile.php:132 common/docman/views/additem.php:84
+#: common/docman/views/addfile.php:132 common/docman/views/additem.php:80
 #: common/docman/views/editfile.php:81
 #, php-format
 msgid "(max upload size: %s)"
@@ -981,15 +981,15 @@ msgstr "Soumettre les informations"
 msgid "Document Manager Access Denied"
 msgstr "Accès refusé au gestionnaire de documents"
 
-#: common/docman/views/additem.php:56
+#: common/docman/views/additem.php:53
 msgid "Submit a new document in this folder."
 msgstr "Soumettre un nouveau document dans ce dossier."
 
-#: common/docman/views/additem.php:58
+#: common/docman/views/additem.php:56
 msgid "Create a folder based on this name."
 msgstr "Créer un dossier avec ce nom."
 
-#: common/docman/views/additem.php:60
+#: common/docman/views/additem.php:58
 msgid ""
 "Create a full folders tree using an compressed archive. Only ZIP format "
 "support."
@@ -997,11 +997,11 @@ msgstr ""
 "Créer une arborescence complète de dossiers à prtie d'une archive "
 "compressée. Seul le format ZIP est accepté."
 
-#: common/docman/views/additem.php:61 common/docman/views/additem.php:85
+#: common/docman/views/additem.php:59 common/docman/views/additem.php:81
 msgid "Inject Tree"
 msgstr "Injecter un arbre"
 
-#: common/docman/views/additem.php:84
+#: common/docman/views/additem.php:80
 msgid "Upload archive:"
 msgstr "Importer une archive:"
 
@@ -1519,7 +1519,7 @@ msgid ""
 msgstr ""
 
 #: common/docman/views/menu.php:55 common/docman/views/search.php:63
-#: common/include/Navigation.class.php:172
+#: common/include/Navigation.class.php:181
 #: plugins/globalsearch/common/globalsearch_stats_boxes.php:48
 #: www/admin/index.php:66 www/admin/index.php:155
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:341
@@ -1540,7 +1540,7 @@ msgid "Recover or delete permanently files with deleted status."
 msgstr "Récupérer ou supprimer définitivement les documents de la corbeille."
 
 #: common/docman/views/menu.php:70 common/frs/include/frs_utils.php:78
-#: common/include/Navigation.class.php:301
+#: common/include/Navigation.class.php:310
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:54
 #: common/tracker/include/ArtifactTypeHtml.class.php:68
 #: www/pm/include/ProjectGroupHTML.class.php:99
@@ -2388,7 +2388,7 @@ msgstr "Fil de discussion non trouvé"
 msgid "Posted by"
 msgstr "Publié par"
 
-#: common/forum/ForumHTML.class.php:70 common/include/Navigation.class.php:380
+#: common/forum/ForumHTML.class.php:70 common/include/Navigation.class.php:389
 #: common/tracker/actions/browse.php:197 common/tracker/actions/browse.php:555
 #: common/tracker/actions/detail.php:109
 #: common/tracker/actions/mod-limited.php:142
@@ -2928,7 +2928,7 @@ msgstr ""
 "Le nom de groupe ne peut comporter de caractère souligné à cause des règles "
 "imposées par le DNS."
 
-#: common/include/account.php:320
+#: common/include/account.php:323
 #, php-format
 msgid ""
 "The following key has a wrong format: |%s|.  Please, correct it by going "
@@ -3528,7 +3528,7 @@ msgid "Delete failed"
 msgstr "Erreur lors de la suppression"
 
 #: common/include/group_section_texts.php:29
-#: common/include/Navigation.class.php:426
+#: common/include/Navigation.class.php:435
 #: common/reporting/report_utils.php:136 common/reporting/report_utils.php:677
 #: common/reporting/report_utils.php:678
 #: common/widget/Widget_MyMonitoredForums.class.php:138
@@ -3547,7 +3547,7 @@ msgid "Trackers"
 msgstr "Outils de suivi"
 
 #: common/include/group_section_texts.php:31
-#: common/include/Navigation.class.php:474 common/include/rbac_texts.php:157
+#: common/include/Navigation.class.php:483 common/include/rbac_texts.php:157
 #: common/reporting/report_utils.php:144 common/reporting/report_utils.php:187
 #: common/reporting/report_utils.php:690 common/reporting/report_utils.php:942
 #: common/widget/Widget_ProjectPublicAreas.class.php:147
@@ -3572,7 +3572,7 @@ msgid "File Release System"
 msgstr "Système de publication de fichiers"
 
 #: common/include/group_section_texts.php:34
-#: common/include/Navigation.class.php:519 plugins/blocks/www/index.php:157
+#: common/include/Navigation.class.php:528 plugins/blocks/www/index.php:157
 #: plugins/quota_management/www/quota_project.php:74
 #: www/activity/index.php:114 www/activity/index.php:311
 #: www/admin/index.php:191 www/export/rss20_activity.php:164
@@ -3588,109 +3588,109 @@ msgstr "Erreur : fichier trop volumineux"
 msgid "Error - only text/plain supported at this time"
 msgstr ""
 
-#: common/include/Navigation.class.php:176
+#: common/include/Navigation.class.php:185
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:89
 #: www/search/include/renderers/HtmlGroupSearchRenderer.class.php:75
 msgid "Advanced search"
 msgstr "Recherche avancée"
 
-#: common/include/Navigation.class.php:192
+#: common/include/Navigation.class.php:201
 #: plugins/mediawiki/mediawiki-skin/FusionForge.php:206
 msgid "Log Out"
 msgstr "Se déconnecter"
 
-#: common/include/Navigation.class.php:195 www/account/index.php:117
+#: common/include/Navigation.class.php:204 www/account/index.php:117
 #: www/include/html.php:1000
 msgid "My Account"
 msgstr "Mon compte"
 
-#: common/include/Navigation.class.php:203
+#: common/include/Navigation.class.php:212
 #: plugins/mediawiki/mediawiki-skin/FusionForge.php:210
 msgid "Log In"
 msgstr "S'identifier"
 
-#: common/include/Navigation.class.php:207
+#: common/include/Navigation.class.php:216
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:86
 msgid "New Account"
 msgstr "Nouveau compte"
 
-#: common/include/Navigation.class.php:231
+#: common/include/Navigation.class.php:240
 #: plugins/quota_management/www/quota.php:163 www/account/lostpw.php:74
 #, php-format
 msgid "Home"
 msgstr "Accueil"
 
-#: common/include/Navigation.class.php:233 www/reporting/index.php:33
+#: common/include/Navigation.class.php:242 www/reporting/index.php:33
 msgid "Main Page"
 msgstr "Page principale"
 
-#: common/include/Navigation.class.php:236
+#: common/include/Navigation.class.php:245
 msgid "My Page"
 msgstr "Ma page"
 
-#: common/include/Navigation.class.php:238
+#: common/include/Navigation.class.php:247
 msgid "Your Page, widgets selected by you to follow your items."
 msgstr ""
 "Votre page, contenant des widgets de votre choix pour suivre vos tâches."
 
-#: common/include/Navigation.class.php:249 www/project/admin/index.php:163
+#: common/include/Navigation.class.php:258 www/project/admin/index.php:163
 #: www/reporting/index.php:46 www/search/include/SearchManager.class.php:145
 #: www/search/include/SearchManager.class.php:165
 #: www/stats/site_stats_utils.php:472
 msgid "Projects"
 msgstr "Projets"
 
-#: common/include/Navigation.class.php:251
+#: common/include/Navigation.class.php:260
 msgid "Map of projects, by categories or types."
 msgstr "Carte des projets, triés par catégories."
 
-#: common/include/Navigation.class.php:258
+#: common/include/Navigation.class.php:267
 msgid "Code Snippets"
 msgstr "Échantillons de code"
 
-#: common/include/Navigation.class.php:260
+#: common/include/Navigation.class.php:269
 msgid "Tooling library. Small coding tips."
 msgstr "Bibliothèqe d'outils et de petits exemples de code."
 
-#: common/include/Navigation.class.php:267
+#: common/include/Navigation.class.php:276
 msgid "Project Openings"
 msgstr "Postes ouverts du projet"
 
-#: common/include/Navigation.class.php:269
+#: common/include/Navigation.class.php:278
 msgid "Hiring Market Place."
 msgstr "Place de marché pour recruter des collaborateurs."
 
-#: common/include/Navigation.class.php:293
+#: common/include/Navigation.class.php:302
 #: plugins/quota_management/www/quota_admin.php:38
 #: plugins/quota_management/www/quota.php:36 www/admin/globalroleedit.php:140
 #: www/admin/index.php:39 www/admin/vhost.php:106
 msgid "Site Admin"
 msgstr "Administration du site"
 
-#: common/include/Navigation.class.php:295
+#: common/include/Navigation.class.php:304
 msgid ""
 "Administration Submenu to handle global configuration, users & projects."
 msgstr ""
 "Sous-menu d'adminsitration, pour gérer la configuration globale, les "
 "utilisateurs et les projets."
 
-#: common/include/Navigation.class.php:303
+#: common/include/Navigation.class.php:312
 msgid "Statistics about visits, users & projects in time frame."
 msgstr ""
 "Statistiques sur les nombres de visites, d'utilisateurs et de projets au fil "
 "du temps."
 
-#: common/include/Navigation.class.php:324
+#: common/include/Navigation.class.php:333
 msgid "Project home page, widgets selected to follow specific items."
 msgstr ""
 "Page de résumé du projet, avec des widgets séléctionnés pour résumer "
 "différents aspects du projet."
 
-#: common/include/Navigation.class.php:381
+#: common/include/Navigation.class.php:390
 msgid "Project Homepage. Widgets oriented"
 msgstr "Résumé du projet, construit à partir de widgets."
 
-#: common/include/Navigation.class.php:398 common/tracker/actions/mod.php:144
+#: common/include/Navigation.class.php:407 common/tracker/actions/mod.php:144
 #: common/tracker/actions/mod.php:196
 #: common/tracker/include/build_submission_form.php:64
 #: common/widget/Widget_MyProjects.class.php:77
@@ -3699,27 +3699,27 @@ msgstr "Résumé du projet, construit à partir de widgets."
 msgid "Admin"
 msgstr "Administration"
 
-#: common/include/Navigation.class.php:399 www/admin/approve-pending.php:137
+#: common/include/Navigation.class.php:408 www/admin/approve-pending.php:137
 #: www/admin/groupedit.php:99 www/admin/useredit.php:276
 #: www/admin/useredit.php:307
 msgid "Project Admin"
 msgstr "Administration du projet"
 
-#: common/include/Navigation.class.php:415 www/activity/index.php:95
+#: common/include/Navigation.class.php:424 www/activity/index.php:95
 #: www/activity/index.php:179 www/activity/index.php:265
 #: www/export/rss_project.php:98
 msgid "Activity"
 msgstr "Activité"
 
-#: common/include/Navigation.class.php:416
+#: common/include/Navigation.class.php:425
 msgid "Last activities per category."
 msgstr "Activités récentes, triées par catégorie."
 
-#: common/include/Navigation.class.php:427
+#: common/include/Navigation.class.php:436
 msgid "Tech & help forums."
 msgstr "Forums techniques ou d'entr'aide."
 
-#: common/include/Navigation.class.php:441 common/include/rbac_texts.php:156
+#: common/include/Navigation.class.php:450 common/include/rbac_texts.php:156
 #: common/reporting/report_utils.php:132
 #: common/tracker/actions/admin-ind.php:99 common/tracker/actions/ind.php:57
 #: common/widget/Widget_ProjectPublicAreas.class.php:56
@@ -3728,48 +3728,48 @@ msgstr "Forums techniques ou d'entr'aide."
 msgid "Tracker"
 msgstr "Outil de suivi"
 
-#: common/include/Navigation.class.php:442
+#: common/include/Navigation.class.php:451
 msgid "Issues, tickets, bugs."
 msgstr "Problèmes, tickets, bugs etc."
 
-#: common/include/Navigation.class.php:459 plugins/blocks/www/index.php:153
+#: common/include/Navigation.class.php:468 plugins/blocks/www/index.php:153
 msgid "Lists"
 msgstr "Listes"
 
-#: common/include/Navigation.class.php:460
+#: common/include/Navigation.class.php:469
 #: common/widget/Widget_ProjectPublicAreas.class.php:135
 msgid "Mailing Lists"
 msgstr "Listes de diffusion"
 
-#: common/include/Navigation.class.php:475
+#: common/include/Navigation.class.php:484
 msgid "Project Management."
 msgstr "Gestion du projet."
 
-#: common/include/Navigation.class.php:489
+#: common/include/Navigation.class.php:498
 #: common/reporting/report_utils.php:140 common/reporting/report_utils.php:665
 #: plugins/blocks/www/index.php:155
 msgid "Docs"
 msgstr "Documents"
 
-#: common/include/Navigation.class.php:490 www/index_std.php:40
+#: common/include/Navigation.class.php:499 www/index_std.php:40
 msgid "Document Management."
 msgstr "Gestion des documents."
 
-#: common/include/Navigation.class.php:504
+#: common/include/Navigation.class.php:513
 #: common/widget/Widget_ProjectPublicAreas.class.php:171
 #: plugins/blocks/www/index.php:156
 msgid "Surveys"
 msgstr "Sondages"
 
-#: common/include/Navigation.class.php:505
+#: common/include/Navigation.class.php:514
 msgid "Online surveys, project needs your point of view."
 msgstr "Sondages en ligne, pour donner votre point de vue sur un projet."
 
-#: common/include/Navigation.class.php:520
+#: common/include/Navigation.class.php:529
 msgid "Flash head line from the project."
 msgstr "Nouvelles rapides à propos du projet."
 
-#: common/include/Navigation.class.php:534 common/include/rbac_texts.php:164
+#: common/include/Navigation.class.php:543 common/include/rbac_texts.php:164
 #: common/widget/Widget_MyLatestSvnCommits.class.php:108
 #: plugins/blocks/www/index.php:158 plugins/quota_management/www/quota.php:165
 #: plugins/quota_management/www/quota.php:189
@@ -3779,20 +3779,20 @@ msgstr "Nouvelles rapides à propos du projet."
 msgid "SCM"
 msgstr "Sources"
 
-#: common/include/Navigation.class.php:535
+#: common/include/Navigation.class.php:544
 msgid "Source Content Management, peer-review and source discovery."
 msgstr "Gestion de sources pour la publication et la revue de code."
 
-#: common/include/Navigation.class.php:566 common/include/rbac_texts.php:166
+#: common/include/Navigation.class.php:575 common/include/rbac_texts.php:166
 #: plugins/blocks/www/index.php:159
 msgid "Files"
 msgstr "Fichiers"
 
-#: common/include/Navigation.class.php:567
+#: common/include/Navigation.class.php:576
 msgid "All published files organized per version."
 msgstr "Les fichiers publiés, organisés par version."
 
-#: common/include/Navigation.class.php:633
+#: common/include/Navigation.class.php:642
 msgid "Show source"
 msgstr "Montrer le source"
 
@@ -3855,25 +3855,25 @@ msgstr "Impossible de se lier au projet"
 msgid "Cannot unlink from home project"
 msgstr "Impossible de se délier du projet"
 
-#: common/include/RBAC.php:594
+#: common/include/RBAC.php:598
 msgid "UNKNOWN (internal error, report bug to FusionForge)"
 msgstr ""
 
-#: common/include/RBAC.php:809
+#: common/include/RBAC.php:813
 #, php-format
 msgid "%s (global role)"
 msgstr "%s (rôle global)"
 
-#: common/include/RBAC.php:813
+#: common/include/RBAC.php:817
 #, php-format
 msgid "%s (in project %s)"
 msgstr "%s (dans le projet %s)"
 
-#: common/include/RBAC.php:1115
+#: common/include/RBAC.php:1119
 msgid "Anonymous/not logged in"
 msgstr "Anonyme/non connecté"
 
-#: common/include/RBAC.php:1163
+#: common/include/RBAC.php:1167
 msgid "Any user logged in"
 msgstr "Tout utilisateur connecté"
 
