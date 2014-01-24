@@ -296,7 +296,7 @@ class DocumentFactory extends Error {
 						if ($doc->getStateID() != 1) {
 							$valid = false;
 						}
-						if ($perm->isEditor()) {
+						if ($perm->isDocEditor()) {
 							$valid = true;
 						}
 					}
