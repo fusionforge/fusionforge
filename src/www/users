@@ -56,12 +56,15 @@ if (forge_get_config('restrict_users_visibility')) {
 	}
 	$u2 = $user->getID();
 
-	$res = db_query_params('SELECT g1.group_id FROM user_group g1, user_group g2
-		WHERE g1.user_id=$1
-		  AND g2.user_id=$2
-		  AND g1.group_id=g2.group_id',
-		array($u1,$u2));
-	if (db_numrows($res) < 1) {
+	$u2gl = $u2->getGroups();
+	$seen = false;
+	foreach ($u2gl as $u2g) {
+		if (forge_check_perm('project_read', $u2g->getID())) {
+			$seen = true;
+			break;
+		}
+	}
+	if ($seen == false) {
 		exit_permission_denied();
 	}
 }
