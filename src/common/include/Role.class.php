@@ -36,12 +36,12 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	var $Group;
 
 	/**
-	 * Role($group,$id) - CONSTRUCTOR.
+	 * Role - Constructor.
 	 *
 	 * @param	object		$group		The Group object.
 	 * @param	int|bool	$role_id	The role_id.
-     * @return	bool
-     */
+	 * @return	bool
+	 */
 	function Role($Group, $role_id = false) {
 		$this->BaseRole();
 		if (!$Group || !is_object($Group) || $Group->isError()) {
@@ -117,7 +117,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	 * isPublic - is this role public (accessible from projects
 	 * other than its home project)?
 	 *
-	 * @return	boolean True if public
+	 * @return	boolean	True if public
 	 */
 	function isPublic() {	// From the PFO spec
 		return $this->data_array['is_public'];
@@ -149,8 +149,8 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	 *
 	 *	@param	string	$role_name	The name of the role.
 	 *	@param	array	$data		A multi-dimensional array of data in this format: $data['section_name']['ref_id']=$val
-	 *	@param  bool    $new_project
-	 *	@return bool|int			The id on success or false on failure.
+	 *	@param	bool	$new_project
+	 *	@return bool|int		The id on success or false on failure.
 	 */
 	function create($role_name, $data, $new_project=false) {
 		if ($this->Group == NULL) {
@@ -228,8 +228,8 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 
 	/**
 	 * TODO: Enter description here ...
-	 * @param string $name
-	 * @return Ambiguous <number, boolean, contents>|boolean
+	 * @param	string		$name
+	 * @return	Ambiguous	<number, boolean, contents>|boolean
 	 */
 	function createDefault($name) {
 		if ($this->Group == NULL) {
@@ -345,8 +345,8 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 
 	/**
 	 * setUser -
-	 * @param	int	User ID
 	 *
+	 * @param	int	User ID
 	 * @return	boolean	True on success or false on failure.
 	 */
 	function setUser($user_id) {
