@@ -3,7 +3,7 @@
  * FusionForge Bazaar plugin
  *
  * Copyright 2009, Roland Mas
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013-2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -151,6 +151,7 @@ class BzrPlugin extends SCMPlugin {
 	}
 
 	function printBrowserPage ($params) {
+		global $HTML;
 		$project = $this->checkParams ($params) ;
 		if (!$project) {
 			return;
@@ -158,8 +159,13 @@ class BzrPlugin extends SCMPlugin {
 
 		if ($project->usesPlugin ($this->name)) {
 			if ($this->browserDisplayable ($project)) {
-				print '<iframe src="'.util_make_url ("/scm/loggerhead/".$project->getUnixName()).'" frameborder="0" width=100% height=700></iframe>' ;
-			}
+				print '<iframe id="scm_iframe" src="'.util_make_url ("/scm/loggerhead/".$project->getUnixName()).'" frameborder="0" width="100%" ></iframe>' ;
+				html_use_jqueryautoheight();
+				echo $HTML->getJavascripts();
+				echo '<script type="text/javascript">//<![CDATA[
+					jQuery(\'#scm_iframe\').iframeAutoHeight({heightOffset: 50});
+					//]]></script>';
+				}
 		}
 	}
 

@@ -4,7 +4,7 @@
  *
  * Copyright 2009, Roland Mas
  * Copyright 2012, Denise Patzker
- * Copyright 2012-2013, Franck Villaume - TrivialDev
+ * Copyright 2012-2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -189,13 +189,19 @@ class HgPlugin extends SCMPlugin {
 	}
 
 	function printBrowserPage($params) {
+		global $HTML;
 		$project = $this->checkParams($params);
 		if (!$project) {
 			return false;
 		}
 		if ($project->usesPlugin($this->name)) {
 			if ($this->browserDisplayable($project)) {
-				print '<iframe src="'.util_make_url('/plugins/scmhg/cgi-bin/'.$project->getUnixName().'.cgi?p='.$project->getUnixName()).'" frameborder="0" width=100% height=700></iframe>';
+				print '<iframe src="'.util_make_url('/plugins/scmhg/cgi-bin/'.$project->getUnixName().'.cgi?p='.$project->getUnixName()).'" frameborder="0" width="100%" ></iframe>';
+				html_use_jqueryautoheight();
+				echo $HTML->getJavascripts();
+				echo '<script type="text/javascript">//<![CDATA[
+					jQuery(\'#scm_iframe\').iframeAutoHeight({heightOffset: 50});
+					//]]></script>';
 			}
 		}
 	}

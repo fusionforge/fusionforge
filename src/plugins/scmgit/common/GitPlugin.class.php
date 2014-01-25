@@ -295,6 +295,7 @@ class GitPlugin extends SCMPlugin {
 
 	function printBrowserPage($params) {
 		global $HTML;
+		$useautoheight = 0;
 		$project = $this->checkParams($params);
 		if (!$project) {
 			return;
@@ -305,15 +306,19 @@ class GitPlugin extends SCMPlugin {
 				$user = user_get_object($params['user_id']);
 				echo $project->getUnixName().'/users/'.$user->getUnixName();
 				print '<iframe id="scm_iframe" src="'.util_make_url("/plugins/scmgit/cgi-bin/gitweb.cgi?p=".$project->getUnixName().'/users/'.$user->getUnixName().'.git').'" frameborder="0" width=100% ></iframe>';
+				$useautoheight = 1;
 			} elseif ($this->browserDisplayable($project)) {
 				print '<iframe id="scm_iframe" src="'.util_make_url("/plugins/scmgit/cgi-bin/gitweb.cgi?p=".$project->getUnixName().'/'.$project->getUnixName().'.git').'" frameborder="0" width=100% ></iframe>';
+				$useautoheight = 1;
 			}
 		}
-		html_use_jqueryautoheight();
-		echo $HTML->getJavascripts();
-		echo '<script type="text/javascript">//<![CDATA[
-			jQuery(\'#scm_iframe\').iframeAutoHeight({heightOffset: 50});
-			//]]></script>';
+		if ($useautoheight) {
+			html_use_jqueryautoheight();
+			echo $HTML->getJavascripts();
+			echo '<script type="text/javascript">//<![CDATA[
+				jQuery(\'#scm_iframe\').iframeAutoHeight({heightOffset: 50});
+				//]]></script>';
+		}
 	}
 
 	function getBrowserLinkBlock($project) {
