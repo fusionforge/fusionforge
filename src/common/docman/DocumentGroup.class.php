@@ -7,7 +7,7 @@
  * Copyright 2009, Roland Mas
  * Copyright 2010, Franck Villaume - Capgemini
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2013, Franck Villaume - TrivialDev
+ * Copyright 2012-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -87,8 +87,8 @@ class DocumentGroup extends Error {
 	/**
 	 * create - create a new item in the database.
 	 *
-	 * @param	$name
-	 * @param	int	$parent_doc_group
+	 * @param	string	$name			The name of the directory to create
+	 * @param	int	$parent_doc_group	The ID of the parent directory
 	 * @internal	param	\Item $string name.
 	 * @return	boolean	true on success / false on failure.
 	 * @access	public
@@ -168,10 +168,10 @@ class DocumentGroup extends Error {
 	 * delete - delete a DocumentGroup.
 	 * WARNING delete is recursive and permanent
 	 *
-	 * @param	$doc_groupid
-	 * @param	$project_group_id
-	 * @internal	param		\Document $integer Group Id, integer Project Group Id
-	 * @return	boolean		success
+	 * @param	int	$doc_groupid
+	 * @param	int	$project_group_id
+	 * @internal	param	\Document $integer Group Id, integer Project Group Id
+	 * @return	boolean	success
 	 * @access	public
 	 */
 	function delete($doc_groupid, $project_group_id) {
@@ -416,7 +416,7 @@ class DocumentGroup extends Error {
 	/**
 	 * addMonitoredBy - add this document for a specific user id for monitoring.
 	 *
-	 * @param	int	User ID
+	 * @param	int	$userid	User ID
 	 * @return	boolean	true if success
 	 */
 	function addMonitoredBy($userid) {
@@ -463,9 +463,9 @@ class DocumentGroup extends Error {
 	/**
 	 * update - update a DocumentGroup.
 	 *
-	 * @param	string	Name of the category.
-	 * @param	integer	the doc_group id of the parent. default = 0
-	 * @param	integer	update only the metadata : created_by, updatedate
+	 * @param	string	$name			Name of the category.
+	 * @param	int	$parent_doc_group	the doc_group id of the parent. default = 0
+	 * @param	int	$metadata		update only the metadata : created_by, updatedate
 	 * @return	boolean	success or not
 	 * @access	public
 	 */
@@ -533,13 +533,13 @@ class DocumentGroup extends Error {
 	 * A group has associated documents if and only if there are documents associated to this
 	 * group or to any of its childs
 	 *
-	 * @param	$nested_groups
-	 * @param	$document_factory
-	 * @param	int		$stateid
-	 * @internal	param		Array $array of nested groups information, fetched from DocumentGroupFactory class
-	 * @internal	param		\The $object DocumentFactory object
-	 * @internal	param		int $State of the documents
-	 * @return	boolean		success
+	 * @param	array	$nested_groups
+	 * @param	object	$document_factory
+	 * @param	int	$stateid
+	 * @internal	param	Array $array of nested groups information, fetched from DocumentGroupFactory class
+	 * @internal	param	\The $object DocumentFactory object
+	 * @internal	param	int $State of the documents
+	 * @return	boolean	success
 	 * @access	public
 	 */
 	function hasDocuments(&$nested_groups, &$document_factory, $stateid = 0) {
@@ -584,7 +584,7 @@ class DocumentGroup extends Error {
 	/**
 	 * getNumberOfDocuments - get the number of files in this doc_group, group_id and for a document state
 	 *
-	 * @param	int	the state id
+	 * @param	int	$stateId	the state id
 	 * @return	int	the number of found documents
 	 */
 	function getNumberOfDocuments($stateId = 1) {
@@ -604,8 +604,8 @@ class DocumentGroup extends Error {
 	/**
 	 * hasSubgroup - Checks if this group has a specified subgroup associated to it
 	 *
-	 * @param	array	Array of nested groups information, fetched from DocumentGroupFactory class
-	 * @param	int	ID of the subgroup
+	 * @param	array	$nested_groups		Array of nested groups information, fetched from DocumentGroupFactory class
+	 * @param	int	$doc_subgroup_id	ID of the subgroup
 	 * @return	boolean	success
 	 * @access	public
 	 */
@@ -632,8 +632,8 @@ class DocumentGroup extends Error {
 	/**
 	 * getSubgroup - Return the ids of any sub folders (first level only) in specific folder
 	 *
-	 * @param	int	ID of the specific folder
-	 * @param	int	the state id of this specific folder (default is 1)
+	 * @param	int	$docGroupId	ID of the specific folder
+	 * @param	int	$stateId	the state id of this specific folder (default is 1)
 	 * @return	array	the ids of any sub folders
 	 */
 	function getSubgroup($docGroupId, $stateId = 1) {
@@ -654,8 +654,8 @@ class DocumentGroup extends Error {
 	/**
 	 * getPath - return the complete_path
 	 *
-	 * @param	boolean	does path is url clickable (default is false)
-	 * @param	boolean	does path include this document group name ? (default is true)
+	 * @param	boolean	$url		does path is url clickable (default is false)
+	 * @param	boolean	$includename	does path include this document group name ? (default is true)
 	 * @return	string	the complete_path
 	 * @access	public
 	 */
@@ -698,7 +698,7 @@ class DocumentGroup extends Error {
 	/**
 	 * setParentDocGroupId - set the parent doc_group id of this document group.
 	 *
-	 * @param	int	Parent Doc_group Id.
+	 * @param	int	$parentDocGroupId	Parent Doc_group Id.
 	 * @return	boolean	success or not.
 	 * @access	public
 	 */
@@ -709,7 +709,7 @@ class DocumentGroup extends Error {
 	/**
 	 * sendNotice - Notifies of directory submissions
 	 *
-	 * @param	boolean	true = new directory (default value)
+	 * @param	boolean	$new	true = new directory (default value)
 	 * @return	bool
 	 */
 	function sendNotice($new = true) {
@@ -777,7 +777,7 @@ class DocumentGroup extends Error {
 	/**
 	 * injectRar - private method to inject a rar archive tree and files
 	 *
-	 * @param	array	uploaded rar
+	 * @param	array	$uploadedRar	uploaded rar
 	 * @return	boolean	success or not
 	 * @access	private
 	 */

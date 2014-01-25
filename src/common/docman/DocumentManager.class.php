@@ -2,7 +2,7 @@
 /**
  * FusionForge document manager
  *
- * Copyright 2011-2013, Franck Villaume - TrivialDev
+ * Copyright 2011-2014, Franck Villaume - TrivialDev
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2013, French Ministry of National Education
  * http://fusionforge.org
@@ -226,7 +226,7 @@ class DocumentManager extends Error {
 	 *
 	 * @param	string	$format		format of the return values. json returns : { name: id, }. Default is DB object.
 	 * @param	string	$removedval	skipped status id
-	 * @return resource|string
+	 * @return	resource|string
 	 */
 	function getStatusNameList($format = '', $removedval = '') {
 		if (!empty($removedval)) {
@@ -253,10 +253,10 @@ class DocumentManager extends Error {
 	/**
 	 * getDocGroupList - Returns as a string used in javascript the list of available folders
 	 *
-	 * @param	$nested_groups
-	 * @param	string	$format	must be json which is wrong, this function does not return any json object
+	 * @param	array	$nested_groups
+	 * @param	string	$format		must be json which is wrong, this function does not return any json object
 	 * @param	bool	$allow_none	allow the "None" which is the "/"
-	 * @param	int		$selected_id the selected folder id
+	 * @param	int	$selected_id	the selected folder id
 	 * @param	array	$dont_display	folders id to not display
 	 * @return	string
 	 */
@@ -285,8 +285,8 @@ class DocumentManager extends Error {
 	 * @param	array	$id_array	Reference to the array of ids that will be build
 	 * @param	array	$text_array	Reference to the array of group names
 	 * @param	array	$dont_display	Array of IDs of groups that should not be displayed
-	 * @param	int		$parent	The ID of the parent whose childs are being showed (0 for root groups)
-	 * @param	int		$level	The current level
+	 * @param	int	$parent	The ID of the parent whose childs are being showed (0 for root groups)
+	 * @param	int	$level	The current level
 	 */
 	function buildArrays($group_arr, &$id_array, &$text_array, &$dont_display, $parent = 0, $level = 0) {
 		if (!is_array($group_arr) || !array_key_exists("$parent", $group_arr)) return;
@@ -312,8 +312,8 @@ class DocumentManager extends Error {
 	 * getActivity - return the number of searched actions per sections between two dates
 	 *
 	 * @param	array	$sections	Sections to search for activity
-	 * @param	int		$begin		the start date time format time()
-	 * @param	int		$end		the end date time format time()
+	 * @param	int	$begin		the start date time format time()
+	 * @param	int	$end		the end date time format time()
 	 * @return	array	number per section of activities found between begin and end values
 	 */
 	function getActivity($sections, $begin, $end) {

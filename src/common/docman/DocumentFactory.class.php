@@ -7,7 +7,7 @@
  * Copyright 2009, Roland Mas
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2013, Franck Villaume - TrivialDev
+ * Copyright 2012-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -252,7 +252,7 @@ class DocumentFactory extends Error {
 	 * setLimit - call this before getDocuments() if you want to limit number of documents retrieve.
 	 * default value is 0 which means : no limit.
 	 *
-	 * @param	int	$limit The limit of documents
+	 * @param	int	$limit	The limit of documents
 	 * @access	public
 	 */
 	function setLimit($limit) {
@@ -262,7 +262,7 @@ class DocumentFactory extends Error {
 	/**
 	 * getDocuments - returns an array of Document objects.
 	 *
-	 * @param	int	$nocache
+	 * @param	int	$nocache	Force to reset the cached data if any available.
 	 * @internal	param	\no $integer cache : force reinit $this->Documents : default: cache is used
 	 * @return	array	Document objects.
 	 * @access	public

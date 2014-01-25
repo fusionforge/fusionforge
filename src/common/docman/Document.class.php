@@ -6,7 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2011-2013, Franck Villaume - TrivialDev
+ * Copyright 2011-2014, Franck Villaume - TrivialDev
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
@@ -430,7 +430,7 @@ class Document extends Error {
 	/**
 	 * getFileData - the filedata of this document.
 	 *
-	 * @param	boolean	update the download flag or not. default is true
+	 * @param	boolean	$download	update the download flag or not. default is true
 	 * @return	string	The filedata.
 	 */
 	function getFileData($download = true) {
@@ -579,7 +579,7 @@ class Document extends Error {
 	/**
 	 * removeMonitoredBy - remove this document for a specific user id for monitoring.
 	 *
-	 * @param	int	User ID
+	 * @param	int	$userid	User ID
 	 * @return	boolean	true if success
 	 */
 	function removeMonitoredBy($userid) {
@@ -596,7 +596,7 @@ class Document extends Error {
 	/**
 	 * addMonitoredBy - add this document for a specific user id for monitoring.
 	 *
-	 * @param	int	User ID
+	 * @param	int	$userid	User ID
 	 * @return	boolean	true if success
 	 */
 	function addMonitoredBy($userid) {
@@ -633,7 +633,7 @@ class Document extends Error {
 	/**
 	 * setState - set the stateid of the document.
 	 *
-	 * @param	int	The state id of the doc_states table.
+	 * @param	int	$stateid	The state id of the doc_states table.
 	 * @return	boolean	success or not.
 	 */
 	function setState($stateid) {
@@ -644,7 +644,7 @@ class Document extends Error {
 	/**
 	 * setDocGroupID - set the doc_group of the document.
 	 *
-	 * @param	int	The group_id of this document.
+	 * @param	int	$newdocgroupid	The group_id of this document.
 	 * @return	boolean	success or not.
 	 */
 	function setDocGroupID($newdocgroupid) {
@@ -654,12 +654,12 @@ class Document extends Error {
 	/**
 	 * setLock - set the locking status of the document.
 	 *
-	 * @param	$stateLock
-	 * @param	time		the epoch time.
-	 * @param	int		$thistime
-	 * @internal	param		\The $int status of the lock.
-	 * @internal	param		\The $int userid who set the lock.
-	 * @return	boolean		success or not.
+	 * @param	int	$stateLock	the status to be set
+	 * @param	string	$userid		the lock owner
+	 * @param	int	$thistime	the epoch time
+	 * @internal	param	\The $int status of the lock.
+	 * @internal	param	\The $int userid who set the lock.
+	 * @return	boolean	success or not.
 	 */
 	function setLock($stateLock, $userid = NULL, $thistime = 0) {
 		$res = db_query_params('UPDATE doc_data SET
