@@ -159,7 +159,7 @@ class BzrPlugin extends SCMPlugin {
 
 		if ($project->usesPlugin ($this->name)) {
 			if ($this->browserDisplayable ($project)) {
-				print '<iframe id="scm_iframe" src="'.util_make_url ("/scm/loggerhead/".$project->getUnixName()).'" frameborder="0" width=100% height=700></iframe>' ;
+				print '<iframe id="scm_iframe" src="'.util_make_url ("/scm/loggerhead/".$project->getUnixName()).'" frameborder="0" width="100%" ></iframe>' ;
 				html_use_jqueryautoheight();
 				echo $HTML->getJavascripts();
 				echo '<script type="text/javascript">//<![CDATA[

@@ -196,7 +196,7 @@ class HgPlugin extends SCMPlugin {
 		}
 		if ($project->usesPlugin($this->name)) {
 			if ($this->browserDisplayable($project)) {
-				print '<iframe src="'.util_make_url('/plugins/scmhg/cgi-bin/'.$project->getUnixName().'.cgi?p='.$project->getUnixName()).'" frameborder="0" width=100% height=700></iframe>';
+				print '<iframe src="'.util_make_url('/plugins/scmhg/cgi-bin/'.$project->getUnixName().'.cgi?p='.$project->getUnixName()).'" frameborder="0" width="100%" ></iframe>';
 				html_use_jqueryautoheight();
 				echo $HTML->getJavascripts();
 				echo '<script type="text/javascript">//<![CDATA[
