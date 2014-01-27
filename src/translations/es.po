@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-24 18:58+0100\n"
+"POT-Creation-Date: 2014-01-27 16:31+0100\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -331,9 +331,9 @@ msgstr ""
 #: plugins/projectlabels/www/index.php:172
 #: plugins/projects-hierarchy/view/home_project_link.php:37
 #: plugins/projects-hierarchy/view/home_project_link.php:47
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:629
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:631
-#: plugins/scmhg/common/HgPlugin.class.php:641 www/account/index.php:198
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:635
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:637
+#: plugins/scmhg/common/HgPlugin.class.php:647 www/account/index.php:198
 #: www/account/lostlogin.php:84 www/account/register.php:212
 #: www/account/verify.php:57 www/admin/approve-pending.php:190
 #: www/admin/approve-pending.php:192 www/admin/database.php:155
@@ -365,7 +365,7 @@ msgstr ""
 #: www/pm/detail_task.php:66 www/pm/detail_task.php:71
 #: www/pm/detail_task.php:86 www/pm/detail_task.php:90
 #: www/pm/detail_task.php:97 www/pm/detail_task.php:104
-#: www/pm/include/ProjectTaskHTML.class.php:141 www/pm/mod_task.php:52
+#: www/pm/include/ProjectTaskHTML.class.php:142 www/pm/mod_task.php:52
 #: www/pm/mod_task.php:61 www/pm/mod_task.php:66 www/pm/mod_task.php:78
 #: www/pm/mod_task.php:83 www/pm/mod_task.php:97 www/pm/mod_task.php:114
 #: www/pm/mod_task.php:126 www/pm/mod_task.php:146 www/pm/mod_task.php:160
@@ -860,7 +860,7 @@ msgstr ""
 #: plugins/oauthprovider/www/consumer.php:44
 #: plugins/oauthprovider/www/consumer.php:109
 #: plugins/oauthprovider/www/consumer_update_page.php:64
-#: plugins/scmhg/common/HgPlugin.class.php:643
+#: plugins/scmhg/common/HgPlugin.class.php:649
 #: plugins/scmhook/common/scmhookPlugin.class.php:284
 #: plugins/scmhook/common/scmhookPlugin.class.php:327
 #: plugins/scmhook/common/scmhookPlugin.class.php:370
@@ -1286,7 +1286,7 @@ msgstr "Ultima vez"
 #: www/news/admin/index.php:129 www/people/editjob.php:74
 #: www/people/editjob.php:166 www/people/viewjob.php:71
 #: www/pm/browse_task.php:159 www/pm/detail_task.php:153
-#: www/pm/ganttpage.php:182 www/pm/include/ProjectTaskHTML.class.php:109
+#: www/pm/ganttpage.php:182 www/pm/include/ProjectTaskHTML.class.php:110
 #: www/pm/mod_task.php:202 www/pm/mod_task.php:217
 #: www/reporting/usersummary.php:105
 msgid "Status"
@@ -1356,7 +1356,7 @@ msgstr "Creado o actualizado hace 7 dias"
 #: common/docman/views/listtrashfile.php:170
 #: common/docman/views/pendingfiles.php:101
 #: common/docman/views/pendingfiles.php:103
-#: common/forum/ForumHTML.class.php:219 common/pm/ProjectTask.class.php:1215
+#: common/forum/ForumHTML.class.php:219 common/pm/ProjectTask.class.php:1212
 #: common/tracker/actions/browse.php:607 common/tracker/actions/browse.php:618
 #: common/tracker/actions/browse.php:638 common/tracker/actions/detail.php:70
 #: common/tracker/actions/downloadcsv.php:84
@@ -1392,9 +1392,9 @@ msgstr "Creado o actualizado hace 7 dias"
 #: www/include/html.php:1075 www/news/news_utils.php:149
 #: www/news/news_utils.php:269 www/people/people_utils.php:423
 #: www/people/viewjob.php:77 www/pm/browse_task.php:264
-#: www/pm/browse_task.php:274 www/pm/include/ProjectTaskHTML.class.php:121
-#: www/pm/include/ProjectTaskHTML.class.php:174
-#: www/pm/include/ProjectTaskHTML.class.php:235 www/pm/mod_task.php:312
+#: www/pm/browse_task.php:274 www/pm/include/ProjectTaskHTML.class.php:122
+#: www/pm/include/ProjectTaskHTML.class.php:175
+#: www/pm/include/ProjectTaskHTML.class.php:236 www/pm/mod_task.php:312
 #: www/project/admin/project_admin_utils.php:180
 #: www/reporting/usersummary.php:129
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:93
@@ -1779,8 +1779,8 @@ msgstr "Fecha Inicial"
 #: plugins/mailman/www/admin/index.php:147
 #: plugins/mailman/www/admin/index.php:153
 #: plugins/mailman/www/admin/index.php:186
-#: plugins/scmgit/common/GitPlugin.class.php:1122
-#: plugins/scmhg/common/HgPlugin.class.php:643
+#: plugins/scmgit/common/GitPlugin.class.php:1127
+#: plugins/scmhg/common/HgPlugin.class.php:649
 #: plugins/scmsvn/common/SVNPlugin.class.php:242
 #: www/account/change_email.php:86 www/account/index.php:128
 #: www/account/index.php:140 www/account/index.php:144
@@ -1976,8 +1976,8 @@ msgstr "Usuario"
 #: www/forum/message.php:161 www/frs/admin/showreleases.php:101
 #: www/frs/index.php:205 www/frs/reporting/downloads.php:197
 #: www/news/admin/news_admin_utils.php:57 www/pm/calendar.php:264
-#: www/pm/include/ProjectTaskHTML.class.php:156
-#: www/pm/include/ProjectTaskHTML.class.php:202
+#: www/pm/include/ProjectTaskHTML.class.php:157
+#: www/pm/include/ProjectTaskHTML.class.php:203
 #: www/project/admin/project_admin_utils.php:161 www/reporting/timeadd.php:142
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:56
 #: www/search/include/renderers/ForumsHtmlSearchRenderer.class.php:49
@@ -2095,8 +2095,8 @@ msgstr "No se puedo obtener el objeto Forum"
 #: plugins/oauthprovider/www/request_tokens.php:100
 #: plugins/oauthprovider/www/request_tokens.php:103
 #: plugins/oauthprovider/www/request_tokens.php:108
-#: plugins/scmgit/common/GitPlugin.class.php:1098
-#: plugins/scmgit/common/GitPlugin.class.php:1107
+#: plugins/scmgit/common/GitPlugin.class.php:1103
+#: plugins/scmgit/common/GitPlugin.class.php:1112
 #: www/admin/admin_table.php:160 www/admin/admin_table.php:324
 #: www/admin/responses_admin.php:46 www/admin/trove/trove_cat_edit.php:150
 #: www/admin/useredit.php:231 www/admin/userlist.php:134
@@ -2492,8 +2492,8 @@ msgstr "Este es el contenido del mensaje pendiente"
 #: common/tracker/include/ArtifactHtml.class.php:148
 #: common/tracker/include/ArtifactTypeHtml.class.php:380
 #: www/activity/index.php:266 www/forum/message.php:126
-#: www/pm/include/ProjectTaskHTML.class.php:157
-#: www/pm/include/ProjectTaskHTML.class.php:203
+#: www/pm/include/ProjectTaskHTML.class.php:158
+#: www/pm/include/ProjectTaskHTML.class.php:204
 #: www/project/admin/project_admin_utils.php:162
 msgid "By"
 msgstr "De"
@@ -2551,8 +2551,8 @@ msgstr "Asunto"
 #: plugins/headermenu/view/admin/updateLinkValue.php:103
 #: plugins/oauthconsumer/www/provider_edit.php:30
 #: plugins/oauthprovider/www/consumer_update_page.php:50
-#: plugins/scmgit/common/GitPlugin.class.php:1128
-#: plugins/scmhg/common/HgPlugin.class.php:647
+#: plugins/scmgit/common/GitPlugin.class.php:1133
+#: plugins/scmhg/common/HgPlugin.class.php:653
 #: plugins/webanalytics/view/admin/updateLinkValue.php:42
 #: www/admin/admin_table.php:58 www/admin/admin_table.php:163
 #: www/admin/admin_table.php:222 www/forum/admin/index.php:414
@@ -3294,7 +3294,7 @@ msgid "Error Getting Role Object"
 msgstr "Error obteniendo el objeto rol"
 
 #: common/include/Group.class.php:2023 www/account/lostpw.php:44
-#: www/account/pending-resend.php:38 www/sendmessage.php:45 www/users:74
+#: www/account/pending-resend.php:38 www/sendmessage.php:45 www/users:77
 msgid "That user does not exist."
 msgstr "El usuario no existe."
 
@@ -3518,7 +3518,7 @@ msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr "Error - No puedo actualizar Grupo force_docman_reindex %s"
 
 #: common/include/GroupJoinRequest.class.php:104
-#: common/pm/ProjectTask.class.php:152 common/pm/ProjectTask.class.php:953
+#: common/pm/ProjectTask.class.php:152 common/pm/ProjectTask.class.php:950
 msgid "Must include "
 msgstr "Debe incluir"
 
@@ -3776,7 +3776,7 @@ msgstr "Foros tecnicos y de ayuda."
 #: common/reporting/report_utils.php:132
 #: common/tracker/actions/admin-ind.php:99 common/tracker/actions/ind.php:57
 #: common/widget/Widget_ProjectPublicAreas.class.php:56
-#: www/pm/include/ProjectTaskHTML.class.php:108
+#: www/pm/include/ProjectTaskHTML.class.php:109
 #: www/tracker/reporting/index.php:126
 msgid "Tracker"
 msgstr "Peticiones"
@@ -3914,21 +3914,21 @@ msgstr "No puedo desenlazar desde página proyecto"
 msgid "UNKNOWN (internal error, report bug to FusionForge)"
 msgstr "DESCONOCIDO (error interno, reportar un fallo a FusinForge)"
 
-#: common/include/RBAC.php:813
+#: common/include/RBAC.php:819
 #, php-format
 msgid "%s (global role)"
 msgstr "%s (rol global)"
 
-#: common/include/RBAC.php:817
+#: common/include/RBAC.php:823
 #, php-format
 msgid "%s (in project %s)"
 msgstr "%s (en proyecto %s)"
 
-#: common/include/RBAC.php:1119
+#: common/include/RBAC.php:1125
 msgid "Anonymous/not logged in"
 msgstr "Anónimo/no autenticado"
 
-#: common/include/RBAC.php:1167
+#: common/include/RBAC.php:1173
 msgid "Any user logged in"
 msgstr "Cualquier usuario autenticado"
 
@@ -4222,7 +4222,7 @@ msgid "No repository %s exists"
 msgstr "Estadísticas del repositorio"
 
 #: common/include/SCMPlugin.class.php:340
-#: plugins/scmhg/common/HgPlugin.class.php:600
+#: plugins/scmhg/common/HgPlugin.class.php:606
 #, fuzzy
 msgid "Add Repository"
 msgstr "Repositorio SCM"
@@ -4660,7 +4660,7 @@ msgstr ""
 msgid "%s does not use the Project Management tool"
 msgstr ""
 
-#: common/pm/ProjectTask.class.php:144 common/pm/ProjectTask.class.php:945
+#: common/pm/ProjectTask.class.php:144 common/pm/ProjectTask.class.php:942
 msgid "summary"
 msgstr "Resumen"
 
@@ -4668,23 +4668,23 @@ msgstr "Resumen"
 msgid "details"
 msgstr "detalles"
 
-#: common/pm/ProjectTask.class.php:146 common/pm/ProjectTask.class.php:946
+#: common/pm/ProjectTask.class.php:146 common/pm/ProjectTask.class.php:943
 msgid "priority"
 msgstr "prioridad"
 
-#: common/pm/ProjectTask.class.php:147 common/pm/ProjectTask.class.php:947
+#: common/pm/ProjectTask.class.php:147 common/pm/ProjectTask.class.php:944
 msgid "hours"
 msgstr "horas"
 
-#: common/pm/ProjectTask.class.php:148 common/pm/ProjectTask.class.php:948
+#: common/pm/ProjectTask.class.php:148 common/pm/ProjectTask.class.php:945
 msgid "start date"
 msgstr "fecha de incio"
 
-#: common/pm/ProjectTask.class.php:149 common/pm/ProjectTask.class.php:949
+#: common/pm/ProjectTask.class.php:149 common/pm/ProjectTask.class.php:946
 msgid "end date"
 msgstr "fecha de fin"
 
-#: common/pm/ProjectTask.class.php:150 common/pm/ProjectTask.class.php:951
+#: common/pm/ProjectTask.class.php:150 common/pm/ProjectTask.class.php:948
 #: www/pm/ganttpage.php:249
 msgid "category"
 msgstr "categoría"
@@ -4694,11 +4694,11 @@ msgstr "categoría"
 msgid "Invalid Task ID"
 msgstr "ID no válida"
 
-#: common/pm/ProjectTask.class.php:950
+#: common/pm/ProjectTask.class.php:947
 msgid "status"
 msgstr "estado"
 
-#: common/pm/ProjectTask.class.php:1227
+#: common/pm/ProjectTask.class.php:1224
 #, php-format
 msgid "[%1$s - %2$s] [Task #%3$d] "
 msgstr "[%1$s - %2$s] [Tarea #%3$d] "
@@ -5124,8 +5124,8 @@ msgstr "Texto libre para la página \"navega por los elementos\""
 #: plugins/forumml/www/forumml_utils.php:596 plugins/forumml/www/index.php:126
 #: plugins/mantisbt/view/addIssue.php:146
 #: plugins/mantisbt/view/addOrEditNote.php:58
-#: plugins/scmgit/common/GitPlugin.class.php:1129
-#: plugins/scmhg/common/HgPlugin.class.php:648
+#: plugins/scmgit/common/GitPlugin.class.php:1134
+#: plugins/scmhg/common/HgPlugin.class.php:654
 #: www/account/pending-resend.php:75 www/admin/admin_table.php:220
 #: www/admin/cronman.php:37 www/admin/globalroleedit.php:250
 #: www/admin/index.php:169 www/admin/pending-news.php:160
@@ -5391,7 +5391,7 @@ msgstr "Prioridad"
 #: common/tracker/actions/query.php:199
 #: common/tracker/views/form-customizelist.php:38
 #: cronjobs/send_pending_items_mail.php:118 www/people/viewjob.php:76
-#: www/pm/include/ProjectTaskHTML.class.php:110
+#: www/pm/include/ProjectTaskHTML.class.php:111
 #: www/project/report/index.php:136
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:59
 msgid "Open Date"
@@ -5660,7 +5660,7 @@ msgstr "Salvar cambios"
 #: common/tracker/actions/mod-limited.php:164
 #: common/tracker/actions/mod.php:189 common/tracker/actions/mod.php:218
 #: common/tracker/actions/query.php:386 www/news/news_utils.php:181
-#: www/pm/include/ProjectTaskHTML.class.php:141
+#: www/pm/include/ProjectTaskHTML.class.php:142
 #: www/survey/include/SurveyHTML.class.php:667
 msgid "Comments"
 msgstr "Comentarios"
@@ -5746,7 +5746,7 @@ msgstr ""
 #: common/tracker/include/ArtifactTypeHtml.class.php:550
 #: common/tracker/include/ArtifactTypeHtml.class.php:595
 #: common/tracker/include/ArtifactTypeHtml.class.php:762
-#: plugins/scmhg/common/HgPlugin.class.php:624 www/admin/pluginman.php:230
+#: plugins/scmhg/common/HgPlugin.class.php:630 www/admin/pluginman.php:230
 #: www/admin/pluginman.php:249 www/admin/pluginman.php:261
 #: www/admin/pluginman.php:262 www/include/html.php:322
 #: www/include/html.php:559 www/include/html.php:650 www/include/html.php:673
@@ -5806,7 +5806,7 @@ msgstr "Abierto"
 #: plugins/quota_management/www/quota_project.php:230
 #: plugins/scmcvs/common/CVSPlugin.class.php:195
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:230
-#: plugins/scmgit/common/GitPlugin.class.php:364
+#: plugins/scmgit/common/GitPlugin.class.php:369
 #: plugins/scmsvn/common/SVNPlugin.class.php:242 www/pm/index.php:102
 #: www/pm/mod_task.php:323 www/stats/site_stats_utils.php:265
 msgid "Total"
@@ -6391,13 +6391,13 @@ msgid "No Comments Have Been Posted"
 msgstr "No se han enviado Comentarios"
 
 #: common/tracker/include/ArtifactHtml.class.php:145
-#: www/pm/include/ProjectTaskHTML.class.php:200
+#: www/pm/include/ProjectTaskHTML.class.php:201
 #: www/project/admin/project_admin_utils.php:159
 msgid "Field"
 msgstr "Campo"
 
 #: common/tracker/include/ArtifactHtml.class.php:146
-#: www/pm/include/ProjectTaskHTML.class.php:201
+#: www/pm/include/ProjectTaskHTML.class.php:202
 #: www/project/admin/project_admin_utils.php:160
 msgid "Old Value"
 msgstr "AntiguoValor"
@@ -6498,7 +6498,7 @@ msgid "Progress"
 msgstr "En progreso"
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:336
-#: www/pm/include/ProjectTaskHTML.class.php:111
+#: www/pm/include/ProjectTaskHTML.class.php:112
 msgid "Remove Relation"
 msgstr "Eliminar Relación"
 
@@ -6520,7 +6520,7 @@ msgstr "Porcentaje medio de completado: %d%%"
 #: plugins/oauthprovider/www/consumer_update_page.php:54
 #: plugins/scmcvs/common/CVSPlugin.class.php:175
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:210
-#: plugins/scmgit/common/GitPlugin.class.php:344
+#: plugins/scmgit/common/GitPlugin.class.php:349
 #: plugins/scmsvn/common/SVNPlugin.class.php:222
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:32
 #: www/account/editsshkeys.php:51 www/account/index.php:307
@@ -8112,7 +8112,7 @@ msgstr "La tarea #%s está pendiente"
 #: cronjobs/send_pending_items_mail.php:78 www/pm/add_task.php:74
 #: www/pm/browse_task.php:125 www/pm/browse_task.php:230
 #: www/pm/detail_task.php:97 www/pm/ganttpage.php:165
-#: www/pm/include/ProjectTaskHTML.class.php:73 www/pm/mod_task.php:97
+#: www/pm/include/ProjectTaskHTML.class.php:74 www/pm/mod_task.php:97
 msgid "Task Summary"
 msgstr "Descripción de la Tarea"
 
@@ -10425,7 +10425,7 @@ msgid "Hudson/Jenkins"
 msgstr "Trabajos Hudson"
 
 #: plugins/hudson/include/hudsonPlugin.class.php:82
-msgid "Continuus Integration Scheduler"
+msgid "Continuous Integration Scheduler"
 msgstr "Programador de Integración Continua"
 
 #: plugins/hudson/include/hudsonPlugin.class.php:233
@@ -10526,12 +10526,12 @@ msgid "Edit Job"
 msgstr "Editar trabajos"
 
 #: plugins/hudson/include/hudsonViews.class.php:219
-#: plugins/hudson/include/hudsonViews.class.php:402
+#: plugins/hudson/include/hudsonViews.class.php:403
 msgid "Job URL:"
 msgstr "URL Trabajo:"
 
 #: plugins/hudson/include/hudsonViews.class.php:223
-#: plugins/hudson/include/hudsonViews.class.php:407
+#: plugins/hudson/include/hudsonViews.class.php:408
 msgid "eg: http://myCIserver/hudson/job/myJob"
 msgstr "ej: http://muServidor/hudson/job/mitrabajo"
 
@@ -10547,13 +10547,13 @@ msgstr ""
 
 #: plugins/hudson/include/hudsonViews.class.php:235
 #: plugins/hudson/include/hudsonViews.class.php:248
-#: plugins/hudson/include/hudsonViews.class.php:411
+#: plugins/hudson/include/hudsonViews.class.php:412
 #, fuzzy, php-format
 msgid "Trigger a build after %s commits:"
 msgstr "Lanzar una compilación tras una subida al repositorio:"
 
 #: plugins/hudson/include/hudsonViews.class.php:260
-#: plugins/hudson/include/hudsonViews.class.php:422
+#: plugins/hudson/include/hudsonViews.class.php:423
 msgid "with (optional) token:"
 msgstr "con (opcional) token:"
 
@@ -10625,11 +10625,11 @@ msgstr "Borrar esta tarea"
 msgid "No Hudson jobs associated with this project."
 msgstr "No hay trabajos Hudson asociados a este proyecto."
 
-#: plugins/hudson/include/hudsonViews.class.php:388
+#: plugins/hudson/include/hudsonViews.class.php:389
 msgid "To add a job, select the link just below."
 msgstr "Para agregar un trabajo, selecciona el enlace siguiente."
 
-#: plugins/hudson/include/hudsonViews.class.php:398
+#: plugins/hudson/include/hudsonViews.class.php:399
 msgid "Add job"
 msgstr "Añadir Trabajo"
 
@@ -13422,7 +13422,7 @@ msgstr "Descargar el nightly snapshot"
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:176
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:211
-#: plugins/scmgit/common/GitPlugin.class.php:345
+#: plugins/scmgit/common/GitPlugin.class.php:350
 #: plugins/scmsvn/common/SVNPlugin.class.php:223
 #: www/stats/site_stats_utils.php:284
 msgid "Adds"
@@ -13455,7 +13455,7 @@ msgid "where REPO can be: "
 msgstr ""
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:116
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:625
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:631
 msgid ", "
 msgstr ""
 
@@ -13484,24 +13484,24 @@ msgstr ""
 msgid "No repositories to browse"
 msgstr "Estadísticas del repositorio"
 
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:624
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:630
 msgid "Repository to be created: "
 msgstr "Repositorio a crear: "
 
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:628
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:634
 #, fuzzy
 msgid "Create new repository:"
 msgstr "Crear una nueva respuesta:"
 
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:629
-#: plugins/scmgit/common/GitPlugin.class.php:1098
-#: plugins/scmgit/common/GitPlugin.class.php:1122
-#: plugins/scmhg/common/HgPlugin.class.php:641
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:635
+#: plugins/scmgit/common/GitPlugin.class.php:1103
+#: plugins/scmgit/common/GitPlugin.class.php:1127
+#: plugins/scmhg/common/HgPlugin.class.php:647
 #, fuzzy
 msgid "Repository name"
 msgstr "Nombre repositorio: "
 
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:631
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:637
 #, fuzzy
 msgid "Clone"
 msgstr "Clonar"
@@ -13555,7 +13555,7 @@ msgstr[1] ""
 "anonimamente."
 
 #: plugins/scmgit/common/GitPlugin.class.php:140
-#: plugins/scmgit/common/GitPlugin.class.php:327
+#: plugins/scmgit/common/GitPlugin.class.php:332
 #: plugins/scmgit/common/scmgit_Widget_MyRepositories.class.php:52
 msgid "Browse Git Repository"
 msgstr "Navegar Repositorio Git"
@@ -13630,11 +13630,11 @@ msgstr ""
 msgid "<a href=\"%s\">Request a personal repository</a>."
 msgstr "<a href=\"%s\">Pedir un repositorio personal</a>."
 
-#: plugins/scmgit/common/GitPlugin.class.php:321
+#: plugins/scmgit/common/GitPlugin.class.php:326
 msgid "Git Repository Browser"
 msgstr "Navegador Repositorio Git"
 
-#: plugins/scmgit/common/GitPlugin.class.php:323
+#: plugins/scmgit/common/GitPlugin.class.php:328
 msgid ""
 "Browsing the Git tree gives you a view into the current status of this "
 "project's code. You may also view the complete histories of any file in the "
@@ -13644,72 +13644,72 @@ msgstr ""
 "fuente de este proyecto. Puede ademas ver el historial completo de cualquier "
 "ficheroen el repositorio."
 
-#: plugins/scmgit/common/GitPlugin.class.php:346
+#: plugins/scmgit/common/GitPlugin.class.php:351
 msgid "Updates"
 msgstr "Actualizaciones"
 
-#: plugins/scmgit/common/GitPlugin.class.php:972
+#: plugins/scmgit/common/GitPlugin.class.php:977
 #, fuzzy
 msgid "Git Commits"
 msgstr "Commits"
 
-#: plugins/scmgit/common/GitPlugin.class.php:990
+#: plugins/scmgit/common/GitPlugin.class.php:995
 msgid "Cannot create a secondary repository with the same name as the primary"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:995
-#: plugins/scmhg/common/HgPlugin.class.php:550
+#: plugins/scmgit/common/GitPlugin.class.php:1000
+#: plugins/scmhg/common/HgPlugin.class.php:556
 #, fuzzy
 msgid "This repository name is not valid"
 msgstr "Esta lista no esta activa"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1008
-#: plugins/scmhg/common/HgPlugin.class.php:545
-#: plugins/scmhg/common/HgPlugin.class.php:561
+#: plugins/scmgit/common/GitPlugin.class.php:1013
+#: plugins/scmhg/common/HgPlugin.class.php:551
+#: plugins/scmhg/common/HgPlugin.class.php:567
 #, fuzzy, php-format
 msgid "A repository %s already exists"
 msgstr "La Busqueda ya existe"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1033
+#: plugins/scmgit/common/GitPlugin.class.php:1038
 msgid "Invalid URL from which to clone"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1042
+#: plugins/scmgit/common/GitPlugin.class.php:1047
 #, fuzzy, php-format
 msgid "Clone of %s"
 msgstr "Clonar: "
 
-#: plugins/scmgit/common/GitPlugin.class.php:1092
+#: plugins/scmgit/common/GitPlugin.class.php:1097
 #, fuzzy, php-format
 msgid "No extra Git repository for project %1$s"
 msgstr "Gestione pestañas extra para el proyecto: %1$s"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1094
+#: plugins/scmgit/common/GitPlugin.class.php:1099
 #, fuzzy, php-format
 msgid "Extra Git repository for project %1$s"
 msgid_plural "Extra Git repositories for project %1$s"
 msgstr[0] "Gestione pestañas extra para el proyecto: %1$s"
 msgstr[1] "Gestione pestañas extra para el proyecto: %1$s"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1098
+#: plugins/scmgit/common/GitPlugin.class.php:1103
 #, fuzzy
 msgid "Initial repository description"
 msgstr "Descripción contribución:"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1098
+#: plugins/scmgit/common/GitPlugin.class.php:1103
 msgid "Initial clone URL (if any)"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1115
+#: plugins/scmgit/common/GitPlugin.class.php:1120
 #, fuzzy, php-format
 msgid "Create new Git repository for project %1$s"
 msgstr "Gestione pestañas extra para el proyecto: %1$s"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1124
+#: plugins/scmgit/common/GitPlugin.class.php:1129
 msgid "Description:"
 msgstr "Descripción:"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1126
+#: plugins/scmgit/common/GitPlugin.class.php:1131
 msgid ""
 "Initial clone URL (or name of an existing repository in this project; leave "
 "empty to start with an empty repository):"
@@ -13826,17 +13826,17 @@ msgstr ""
 msgid "Browse Hg Repository"
 msgstr "Navegar el repositorio CVS"
 
-#: plugins/scmhg/common/HgPlugin.class.php:570
+#: plugins/scmhg/common/HgPlugin.class.php:576
 #, fuzzy, php-format
 msgid "Clone of %s repository"
 msgstr "Repositorio del desarollador"
 
-#: plugins/scmhg/common/HgPlugin.class.php:633
+#: plugins/scmhg/common/HgPlugin.class.php:639
 #, fuzzy, php-format
 msgid "Create SCM repository for project %s"
 msgstr "Crear Repositorios SCM"
 
-#: plugins/scmhg/common/HgPlugin.class.php:645
+#: plugins/scmhg/common/HgPlugin.class.php:651
 #, fuzzy
 msgid "Cloned from:"
 msgstr "Clonar: "
@@ -16542,7 +16542,7 @@ msgid "Complete"
 msgstr "Completa"
 
 #: www/export/rssAboTask.php:161 www/news/news_utils.php:179
-#: www/pm/include/ProjectTaskHTML.class.php:155
+#: www/pm/include/ProjectTaskHTML.class.php:156
 msgid "Comment"
 msgstr "Comentarios"
 
@@ -19510,7 +19510,7 @@ msgid "Browse tasks"
 msgstr "Hojear tareas"
 
 #: www/pm/browse_task.php:124 www/pm/browse_task.php:228
-#: www/pm/ganttpage.php:164 www/pm/include/ProjectTaskHTML.class.php:72
+#: www/pm/ganttpage.php:164 www/pm/include/ProjectTaskHTML.class.php:73
 msgid "Task Id"
 msgstr "Id Tarea"
 
@@ -19932,43 +19932,43 @@ msgstr "Importar/Exportar CSV"
 msgid "Not Started"
 msgstr "No Comenzado"
 
-#: www/pm/include/ProjectTaskHTML.class.php:69
+#: www/pm/include/ProjectTaskHTML.class.php:70
 msgid "Tasks That Depend on This Task"
 msgstr "Tareas que Dependen de esta Tarea"
 
-#: www/pm/include/ProjectTaskHTML.class.php:88
+#: www/pm/include/ProjectTaskHTML.class.php:89
 msgid "No Tasks are Dependent on This Task"
 msgstr "Ninguna otra Tarea Depende de esta Tarea"
 
-#: www/pm/include/ProjectTaskHTML.class.php:104
+#: www/pm/include/ProjectTaskHTML.class.php:105
 msgid "Related Tracker Items"
 msgstr "Elementos del Registro Relacionados"
 
-#: www/pm/include/ProjectTaskHTML.class.php:107
+#: www/pm/include/ProjectTaskHTML.class.php:108
 msgid "Artifact Summary"
 msgstr "Resumen Artifact"
 
-#: www/pm/include/ProjectTaskHTML.class.php:129
+#: www/pm/include/ProjectTaskHTML.class.php:130
 msgid "No Related Tracker Items Have Been Added"
 msgstr "No se han añadido Elementos del Registro Relacionados"
 
-#: www/pm/include/ProjectTaskHTML.class.php:146
+#: www/pm/include/ProjectTaskHTML.class.php:147
 msgid "Sort comments antichronologically"
 msgstr "Organizar comentarios en orden cronologico invertido"
 
-#: www/pm/include/ProjectTaskHTML.class.php:150
+#: www/pm/include/ProjectTaskHTML.class.php:151
 msgid "Sort comments chronologically"
 msgstr "Organizar comentarios cronologicamente"
 
-#: www/pm/include/ProjectTaskHTML.class.php:182
+#: www/pm/include/ProjectTaskHTML.class.php:183
 msgid "No Comments Have Been Added"
 msgstr "No se ha añadido Comentarios"
 
-#: www/pm/include/ProjectTaskHTML.class.php:197
+#: www/pm/include/ProjectTaskHTML.class.php:198
 msgid "Task Change History"
 msgstr "Histórico de Cambios de la Tarea"
 
-#: www/pm/include/ProjectTaskHTML.class.php:243
+#: www/pm/include/ProjectTaskHTML.class.php:244
 msgid "No Changes Have Been Made"
 msgstr "No se ha realizado Cambios"
 
