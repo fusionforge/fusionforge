@@ -128,14 +128,12 @@ foreach ($pt_arr as $task) {
 for($j =0; $j <count($pt_arr); $j++) {
 	$dependentTasksArr = $pt_arr[$j]->getDependentOn();
 	$depends = '';
-	$level = 0;
 	foreach ($dependentTasksArr as $key => $dependentTask) {
 		if ($key != 100) {
 			for ($i =0; $i <count($transformedTasksArr); $i++) {
 				if ($transformedTasksArr[$i]['id'] == $key) {
 					// depends is based on the row number in the gantt editor ... which starts at 1 not 0... (0 is the th...)
 					$newkey = $i+1;
-					$level = $transformedTasksArr[$i]['level'] + 1;
 					break;
 				}
 			}
@@ -148,7 +146,6 @@ for($j =0; $j <count($pt_arr); $j++) {
 		}
 	}
 	$transformedTasksArr[$j]['depends'] = $depends;
-	$transformedTasksArr[$j]['level'] = $level;
 }
 
 $tech_id_arr[] = '0';
