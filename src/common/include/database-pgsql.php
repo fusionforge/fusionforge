@@ -155,7 +155,7 @@ function db_switcher($dbserver = NULL) {
  * @param	string	$file		File that contains the SQL statements.
  * @param	int	$limit		How many rows do you want returned.
  * @param	int	$offset		Of matching rows, return only rows starting here.
- * @param	int	$dbserver	ability to spread load to multiple db servers.
+ * @param	resource	$dbserver	ability to spread load to multiple db servers.
  * @return	int	result set handle.
  */
 function db_query_from_file($file, $limit = -1, $offset = 0, $dbserver = NULL) {
@@ -253,8 +253,8 @@ function db_query_params($qstring, $params, $limit = -1, $offset = 0, $dbserver 
 		    db_error($dbserver) . "), SQL: " . $qstring,
 		    print_r(array("params" => $params), 1));
 	} else {
-		error_log('SQL: ' . preg_replace('/\n\t+/', ' ', $qstring));
-		error_log('SQL> ' . db_error($dbserver));
+		error_log('SQL: '.preg_replace('/\n\t+/', ' ', $qstring));
+		error_log('SQL> '.db_error($dbserver));
 	}
 	return $res;
 }
@@ -305,7 +305,7 @@ function db_execute($qname, $params, $dbserver = NULL) {
 	global $sysdebug_dbquery, $sysdebug_dberrors;
 
 	db_connect_if_needed();
-	$dbconn = db_switcher($dbserver) ;
+	$dbconn = db_switcher($dbserver);
 
 	global $QUERY_COUNT;
 	$QUERY_COUNT++;
