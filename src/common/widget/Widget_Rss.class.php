@@ -185,7 +185,7 @@ require_once 'Widget.class.php';
 
 			if ($url || $title) {
 				$sql = "UPDATE widget_rss SET title=$1 , url=$2  WHERE owner_id =$3 AND owner_type = $4 AND id = $5";
-				$res = db_query_params($sql,array($title,$url,$this->owner_id,$this->owner_type,(int)$request->get('content_id')));
+				db_query_params($sql,array($title,$url,$this->owner_id,$this->owner_type,(int)$request->get('content_id')));
 				$done = true;
 			}
 		}
@@ -198,30 +198,29 @@ require_once 'Widget.class.php';
 	function isUnique() {
 		return false;
 	}
-	function _date_ago($from_time, $to_time, $include_seconds = false) {
+	function _date_ago($from_time, $to_time) {
 		$distance_in_minutes = round((abs($to_time - $from_time))/60);
-		$distance_in_seconds = round(abs($to_time - $from_time));
 
 		if ($distance_in_minutes <= 1) {
 			return ($distance_in_minutes == 0) ? _('less than 1 minute') : _('1 minute');
 		} elseif ($distance_in_minutes <= 44) {
-			return vsprintf(_('%s minutes ago'), $distance_in_minutes);
+			return sprintf(_('%d minutes ago'), $distance_in_minutes);
 		} elseif ($distance_in_minutes <= 89) {
 			return _('About one hour') ;
 		} elseif ($distance_in_minutes <= 1439) {
-			return vsprintf(_('about %s hours'), round($distance_in_minutes/60));
+			return sprintf(_('about %s hours'), round($distance_in_minutes/60));
 		} elseif ($distance_in_minutes <= 2879) {
 			return _('About one day') ;
 		} elseif ($distance_in_minutes <= 43199) {
-			return vsprintf(_('%s days ago'), round($distance_in_minutes/1440));
+			return sprintf(_('%s days ago'), round($distance_in_minutes/1440));
 		} elseif ($distance_in_minutes <= 86399) {
 			return _('About one month') ;
 		} elseif ($distance_in_minutes <= 525959) {
-			return vsprintf(_('%s months ago'), round($distance_in_minutes/43200));
+			return sprintf(_('%s months ago'), round($distance_in_minutes/43200));
 		} elseif ($distance_in_minutes <= 1051919) {
 			return _('About one year') ;
 		} else {
-			return vsprintf(_('over %s years'), round($distance_in_minutes/525960));
+			return sprintf(_('over %s years'), round($distance_in_minutes/525960));
 		}
 	}
 }
