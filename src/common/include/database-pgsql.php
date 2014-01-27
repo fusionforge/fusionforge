@@ -488,7 +488,7 @@ function db_numrows($qhandle) {
 /**
  * db_free_result - Frees a database result properly.
  *
- * @param	int	$qhandle	Query result set handle.
+ * @param	resource	$qhandle	Query result set handle.
  * @return	bool
  */
 function db_free_result($qhandle) {
@@ -510,8 +510,8 @@ function db_result($qhandle, $row, $field) {
 /**
  * db_result_seek - Sets cursor location in a result set.
  *
- * @param	int	Query result set handle.
- * @param	int	Row number.
+ * @param	resource $qhandle Query result set handle.
+ * @param	int	$row Row number.
  * @return	boolean	True on success
  */
 function db_result_seek($qhandle,$row) {
@@ -521,7 +521,7 @@ function db_result_seek($qhandle,$row) {
 /**
  * db_result_reset - Resets cursor location in a result set.
  *
- * @param	int	$qhandle	Query result set handle.
+ * @param	resource	$qhandle	Query result set handle.
  * @param	int	$row
  * @return	boolean	True on success
  */

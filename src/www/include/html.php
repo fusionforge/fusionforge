@@ -682,7 +682,7 @@ function html_build_select_box_sorted($result, $name, $checked_val = "xzxz", $sh
  * html_build_multiple_select_box() - Takes a result set, with the first column being the "id" or value
  * and the second column being the text you want displayed.
  *
- * @param		int		$result				The result set
+ * @param		resource $result				The result set
  * @param		string	$name				Text to be displayed
  * @param		string	$checked_array		The item that should be checked
  * @param		int		$size				The size of this box
