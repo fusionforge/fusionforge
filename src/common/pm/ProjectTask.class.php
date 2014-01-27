@@ -752,9 +752,6 @@ class ProjectTask extends Error {
 //
 //	IMPORTANT - MUST VERIFY NO CIRCULAR DEPENDENCY!!
 //
-		if (!$arr_ || empty($arr_)) {
-			$arr_=array('100'=>PM_LINK_DEFAULT);
-		}
 		$arr = array_keys($arr_);
 		//get existing dependencies to diff against
 		$arr2 = array_keys($this->getDependentOn());

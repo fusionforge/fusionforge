@@ -5,6 +5,7 @@
  * Copyright 1999/2000, Tim Perdue - Sourceforge
  * Copyright 2002 GForge, LLC
  * Copyright 2010, FusionForge Team
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -36,7 +37,7 @@ class ProjectTaskHTML extends ProjectTask {
 		$result=$this->getOtherTasks();
 		//get the data so we can mark items as SELECTED
 		$arr2 = array_keys($this->getDependentOn());
-		return html_build_multiple_select_box ($result,$name,$arr2);
+		return html_build_multiple_select_box ($result,$name,$arr2,8,false);
 	}
 
 	function multipleAssignedBox ($name='assigned_to[]') {
