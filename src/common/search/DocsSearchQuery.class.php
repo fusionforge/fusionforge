@@ -71,13 +71,13 @@ class DocsSearchQuery extends SearchQuery {
 		if (forge_get_config('use_fti')) {
 			return $this->getFTIQuery();
 		} else {
-			$qpa = db_construct_qpa () ;
-			$qpa = db_construct_qpa ($qpa,
+			$qpa = db_construct_qpa() ;
+			$qpa = db_construct_qpa($qpa,
 						 'SELECT x.* FROM (SELECT doc_data.docid, doc_data.title, doc_data.filename, doc_data.description, doc_groups.groupname, title||$1||description AS full_string_agg FROM doc_data, doc_groups WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.group_id = $2',
 						 array ($this->field_separator,
 							$this->groupId)) ;
 			if ($this->sections != SEARCH__ALL_SECTIONS) {
-				$qpa = db_construct_qpa ($qpa,
+				$qpa = db_construct_qpa($qpa,
 							 'AND doc_groups.doc_group = ANY ($1) ',
 							 array( db_int_array_to_any_clause ($this->sections))) ;
 			}
@@ -86,10 +86,10 @@ class DocsSearchQuery extends SearchQuery {
 			} else {
 				$qpa = db_construct_qpa($qpa, ' AND doc_data.stateid = 1');
 			}
-			$qpa = db_construct_qpa ($qpa,
+			$qpa = db_construct_qpa($qpa,
 						 ') AS x WHERE ') ;
 			$qpa = $this->addIlikeCondition ($qpa, 'full_string_agg') ;
-			$qpa = db_construct_qpa ($qpa,
+			$qpa = db_construct_qpa($qpa,
 						 ' ORDER BY x.groupname, x.title') ;
 		}
 		return $qpa;
@@ -99,37 +99,37 @@ class DocsSearchQuery extends SearchQuery {
 		$words = $this->getFTIwords();
 		$group_id=$this->groupId;
 
-		$qpa = db_construct_qpa () ;
+		$qpa = db_construct_qpa() ;
 
-		$qpa = db_construct_qpa ($qpa,
+		$qpa = db_construct_qpa($qpa,
 					 'SELECT x.* FROM (SELECT doc_data.docid, doc_data.filename, ts_headline(doc_data.title, q) AS title, ts_headline(doc_data.description, q) AS description, doc_groups.groupname, doc_data.title||$1||description AS full_string_agg, doc_data_idx.vectors FROM doc_data, doc_groups, doc_data_idx, to_tsquery($2) AS q',
 					 array ($this->field_separator,
 						$words)) ;
-		$qpa = db_construct_qpa ($qpa,
+		$qpa = db_construct_qpa($qpa,
 					 ' WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.docid = doc_data_idx.docid AND (vectors @@ to_tsquery($1)',
 					 array ($words)) ;
-		$qpa = db_construct_qpa ($qpa,
+		$qpa = db_construct_qpa($qpa,
 					 ') AND doc_data.group_id = $1',
 					 array ($group_id)) ;
 		if ($this->sections != SEARCH__ALL_SECTIONS) {
-			$qpa = db_construct_qpa ($qpa,
+			$qpa = db_construct_qpa($qpa,
 						 ' AND doc_groups.doc_group = ANY ($1)',
 						 array( db_int_array_to_any_clause ($this->sections))) ;
 		}
 		if ($this->showNonPublic) {
-			$qpa = db_construct_qpa ($qpa,
+			$qpa = db_construct_qpa($qpa,
 						 ' AND doc_data.stateid IN (1, 4, 5)') ;
 		} else {
-			$qpa = db_construct_qpa ($qpa,
+			$qpa = db_construct_qpa($qpa,
 						 ' AND doc_data.stateid = 1') ;
 		}
-		$qpa = db_construct_qpa ($qpa,
+		$qpa = db_construct_qpa($qpa,
 					 ') AS x ') ;
 		if (count($this->phrases)) {
 			$qpa = db_construct_qpa($qpa, 'WHERE ') ;
 			$qpa = $this->addMatchCondition($qpa, 'full_string_agg');
 		}
-		$qpa = db_construct_qpa ($qpa,
+		$qpa = db_construct_qpa($qpa,
 					 ' ORDER BY ts_rank(vectors, to_tsquery($1)) DESC, groupname ASC, title ASC',
 					 array($words)) ;
 		return $qpa ;

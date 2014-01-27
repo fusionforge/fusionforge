@@ -220,24 +220,24 @@ class TroveCategory extends Error {
 
 	function getProjects($offset) {
 		$qpa = db_constract_qpa () ;
-		$qpa = db_construct_qpa ($qpa, 'SELECT * FROM trove_agg') ;
+		$qpa = db_construct_qpa($qpa, 'SELECT * FROM trove_agg') ;
 
 		for($i = 0, $count = sizeof($this->filter); $i < $count; $i++) {
-			$qpa = db_construct_qpa ($qpa,
+			$qpa = db_construct_qpa($qpa,
 						 ", trove_agg trove_agg_$i") ;
 		}
 
-		$qpa = db_construct_qpa ($qpa,
+		$qpa = db_construct_qpa($qpa,
 					 ' WHERE trove_agg.trove_cat_id=$1 ',
 					 array ($this->categoryId)) ;
 
 		for($i = 0, $count = sizeof($this->filter); $i < $count; $i++) {
-			$qpa = db_construct_qpa ($qpa,
+			$qpa = db_construct_qpa($qpa,
 						 "AND trove_agg_$i.trove_cat_id=$1 AND trove_agg_$i.group_id=trove_agg.group_id ",
 						 array ($this->filter[$i])) ;
 		}
 
-		$qpa = db_construct_qpa ($qpa,
+		$qpa = db_construct_qpa($qpa,
 					 'ORDER BY trove_agg.trove_cat_id ASC, trove_agg.ranking ASC') ;
 
 		$result = db_query_qpa ($qpa, TROVE__PROJECTS_PER_PAGE, $offset);

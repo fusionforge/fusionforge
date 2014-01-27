@@ -63,31 +63,31 @@ class ArtifactSearchQuery extends SearchQuery {
 	 * @return array query+params array
 	 */
 	function getQuery() {
-		$qpa = db_construct_qpa () ;
+		$qpa = db_construct_qpa() ;
 
 		if (forge_get_config('use_fti')) {
 			$words = $this->getFTIwords();
 
 			if (count($this->phrases)) {
-				$qpa = db_construct_qpa ($qpa,
+				$qpa = db_construct_qpa($qpa,
 							 'SELECT x.* FROM (SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact.summary||$1||artifact.details||$1||coalesce(ff_string_agg(artifact_message.body), $1) as full_string_agg, artifact_idx.vectors FROM artifact LEFT OUTER JOIN artifact_message USING (artifact_id), users, artifact_idx WHERE users.user_id = artifact.submitted_by AND artifact.group_artifact_id = $2 AND artifact.artifact_id = artifact_idx.artifact_id AND vectors @@ to_tsquery($3) GROUP BY artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact.details, vectors) AS x WHERE ',
 							 array ($this->field_separator, $this->artifactId, $words)) ;
 				$qpa = $this->addMatchCondition ($qpa, 'full_string_agg') ;
-				$qpa = db_construct_qpa ($qpa,
+				$qpa = db_construct_qpa($qpa,
 						 ' ORDER BY ts_rank(vectors, to_tsquery($1)) DESC',
 						 array($words)) ;
 			} else {
-				$qpa = db_construct_qpa ($qpa,
+				$qpa = db_construct_qpa($qpa,
 							 'SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact_idx.vectors FROM artifact, users, artifact_idx WHERE users.user_id = artifact.submitted_by AND artifact.group_artifact_id = $1 AND artifact.artifact_id = artifact_idx.artifact_id AND vectors @@ to_tsquery($2) ORDER BY ts_rank(vectors, to_tsquery($2)) DESC',
 							 array ($this->artifactId, $words)) ;
 			}
 
 		} else {
-			$qpa = db_construct_qpa ($qpa,
+			$qpa = db_construct_qpa($qpa,
 						 'SELECT x.* FROM (SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact.summary||$1||artifact.details||$1||coalesce(ff_string_agg(artifact_message.body), $1) as full_string_agg FROM artifact LEFT OUTER JOIN artifact_message USING (artifact_id), users WHERE users.user_id = artifact.submitted_by AND artifact.group_artifact_id = $2 GROUP BY artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact.details) AS x WHERE ',
 						 array ($this->field_separator, $this->artifactId)) ;
 			$qpa = $this->addIlikeCondition ($qpa, 'full_string_agg') ;
-			$qpa = db_construct_qpa ($qpa,
+			$qpa = db_construct_qpa($qpa,
 						 ' ORDER BY artifact_id') ;
 		}
 

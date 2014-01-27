@@ -64,7 +64,7 @@ function snippet_mainpage() {
 	<strong>'._('Browse by Language')._(':').'</strong>
 	<ul>';
 
-	$qpa = db_construct_qpa (false, 'SELECT language, count(*) as count from snippet group by language') ;
+	$qpa = db_construct_qpa(array(), 'SELECT language, count(*) as count from snippet group by language') ;
 	$existing_snippets = create_snippet_hash($qpa, "language");
 	for ($i=1; $i<count($SCRIPT_LANGUAGE); $i++) {
 		$return .= '<li>'.util_make_link ('/snippet/browse.php?by=lang&amp;lang='.$i,$SCRIPT_LANGUAGE[$i]).' (';
@@ -81,7 +81,7 @@ function snippet_mainpage() {
 	<strong>'._('Browse by Category')._(':').'</strong>
 	<ul>';
 
-	$qpa = db_construct_qpa (false, 'SELECT category, count(*) as count from snippet group by category') ;
+	$qpa = db_construct_qpa(array(), 'SELECT category, count(*) as count from snippet group by category') ;
 	$existing_categories = create_snippet_hash($qpa, "category");
 	for ($i=1; $i<count($SCRIPT_CATEGORY); $i++) {
 		// Remove warning

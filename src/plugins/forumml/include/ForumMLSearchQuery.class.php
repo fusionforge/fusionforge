@@ -43,8 +43,8 @@ class ForumMLSearchQuery extends SearchQuery {
 
 		$pat = '_g'.$this->groupId.'_';
 		$len = strlen($pat)+1;
-		$qpa = db_construct_qpa () ;
-		$qpa = db_construct_qpa ($qpa,
+		$qpa = db_construct_qpa() ;
+		$qpa = db_construct_qpa($qpa,
 					  'SELECT mh.id_message, mh.value as subject, m.id_list '.
                         ' FROM plugin_forumml_message m, plugin_forumml_messageheader mh'.
                         ' WHERE mh.id_header = $1'.

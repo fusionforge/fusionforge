@@ -55,32 +55,32 @@ class NewsSearchQuery extends SearchQuery {
 	 */
 	function getQuery() {
 
-		$qpa = db_construct_qpa () ;
+		$qpa = db_construct_qpa() ;
 
 		if (forge_get_config('use_fti')) {
 			$group_id=$this->groupId;
 
 			$words = $this->getFTIwords();
-			$qpa = db_construct_qpa ($qpa,
+			$qpa = db_construct_qpa($qpa,
 						 'SELECT x.* FROM (SELECT ts_headline(news_bytes.summary, q) as summary, news_bytes.post_date, news_bytes.forum_id, users.realname, summary||$1||details AS full_string_agg, news_bytes_idx.vectors FROM news_bytes, users, to_tsquery($2) AS q, news_bytes_idx WHERE (news_bytes.group_id=$3 AND news_bytes.is_approved <> 4 AND news_bytes_idx.id = news_bytes.id AND news_bytes.submitted_by=users.user_id) AND vectors @@ q) AS x ',
 						 array ($this->field_separator,
 							$words,
 							$group_id)) ;
 			if (count ($this->phrases)) {
-				$qpa = db_construct_qpa ($qpa,
+				$qpa = db_construct_qpa($qpa,
 							 'WHERE ');
 				$qpa = $this->addMatchCondition ($qpa, 'full_string_agg') ;
 			}
-			$qpa = db_construct_qpa ($qpa,
+			$qpa = db_construct_qpa($qpa,
 						 ' ORDER BY ts_rank(vectors, to_tsquery($1)) DESC, post_date DESC',
 						 array($words)) ;
 		} else {
-			$qpa = db_construct_qpa ($qpa,
+			$qpa = db_construct_qpa($qpa,
 						 'SELECT x.* FROM (SELECT news_bytes.summary, news_bytes.post_date, news_bytes.forum_id, users.realname, summary||$1||details AS full_string_agg FROM news_bytes, users WHERE group_id=$2 AND is_approved <> 4 AND news_bytes.submitted_by = users.user_id) AS x WHERE ',
 						 array ($this->field_separator,
 							$this->groupId)) ;
 			$qpa = $this->addIlikeCondition ($qpa, 'full_string_agg') ;
-			$qpa = db_construct_qpa ($qpa,
+			$qpa = db_construct_qpa($qpa,
 						 ' ORDER BY post_date DESC') ;
 		}
 		return $qpa ;

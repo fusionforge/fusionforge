@@ -228,8 +228,8 @@ if (!$error_no_messages){
     $rss_messages = array();
 
     //get forum messages
-    $qpa = db_construct_qpa () ;
-    $qpa = db_construct_qpa ($qpa, 'SELECT f.group_forum_id AS group_forum_id,
+    $qpa = db_construct_qpa() ;
+    $qpa = db_construct_qpa($qpa, 'SELECT f.group_forum_id AS group_forum_id,
                 f.msg_id AS msg_id, f.subject AS subject, f.most_recent_date AS most_recent_date,
                 f.has_followups, f.thread_id,
                 u.realname AS user_realname,
@@ -244,19 +244,19 @@ if (!$error_no_messages){
 			     array ('A')) ;
     $cnt = 0;
     if ($n_forums > 0) {
-	    $qpa = db_construct_qpa ($qpa, 'AND (') ;
+	    $qpa = db_construct_qpa($qpa, 'AND (') ;
 	    foreach ($forums as $f){
-		    $qpa = db_construct_qpa ($qpa, 'f.group_forum_id = $1',
+		    $qpa = db_construct_qpa($qpa, 'f.group_forum_id = $1',
 					     array ($f->getID())) ;
 		    $cnt++ ;
 		    if ($cnt < $n_forums) {
-			    $qpa = db_construct_qpa ($qpa, ' OR ') ;
+			    $qpa = db_construct_qpa($qpa, ' OR ') ;
 		    }
 	    }
-	    $qpa = db_construct_qpa ($qpa, ') ') ;
+	    $qpa = db_construct_qpa($qpa, ') ') ;
     }
 
-    $qpa = db_construct_qpa ($qpa, 'ORDER BY f.most_recent_date DESC LIMIT $1',
+    $qpa = db_construct_qpa($qpa, 'ORDER BY f.most_recent_date DESC LIMIT $1',
 			     array ($number_items)) ;
 
     $res_msg = db_query_qpa($qpa);

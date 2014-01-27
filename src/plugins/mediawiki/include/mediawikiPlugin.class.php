@@ -302,30 +302,30 @@ class MediaWikiPlugin extends Plugin {
 				switch ($params['action']) {
 				case 'read':
 				default:
-					$params['qpa'] = db_construct_qpa ($params['qpa'], ' AND perm_val >= 1') ;
+					$params['qpa'] = db_construct_qpa($params['qpa'], ' AND perm_val >= 1') ;
 					break ;
 				}
 				break ;
 			case 'plugin_mediawiki_edit':
 				switch ($params['action']) {
 				case 'editexisting':
-					$params['qpa'] = db_construct_qpa ($params['qpa'], ' AND perm_val >= 1') ;
+					$params['qpa'] = db_construct_qpa($params['qpa'], ' AND perm_val >= 1') ;
 					break ;
 				case 'editnew':
-					$params['qpa'] = db_construct_qpa ($params['qpa'], ' AND perm_val >= 2') ;
+					$params['qpa'] = db_construct_qpa($params['qpa'], ' AND perm_val >= 2') ;
 					break ;
 				case 'editmove':
-					$params['qpa'] = db_construct_qpa ($params['qpa'], ' AND perm_val >= 3') ;
+					$params['qpa'] = db_construct_qpa($params['qpa'], ' AND perm_val >= 3') ;
 					break ;
 				}
 				break ;
 			case 'plugin_mediawiki_upload':
 				switch ($params['action']) {
 				case 'upload':
-					$params['qpa'] = db_construct_qpa ($params['qpa'], ' AND perm_val >= 1') ;
+					$params['qpa'] = db_construct_qpa($params['qpa'], ' AND perm_val >= 1') ;
 					break ;
 				case 'reupload':
-					$params['qpa'] = db_construct_qpa ($params['qpa'], ' AND perm_val >= 2') ;
+					$params['qpa'] = db_construct_qpa($params['qpa'], ' AND perm_val >= 2') ;
 					break ;
 				}
 				break ;
@@ -333,7 +333,7 @@ class MediaWikiPlugin extends Plugin {
 				switch ($params['action']) {
 				case 'admin':
 				default:
-					$params['qpa'] = db_construct_qpa ($params['qpa'], ' AND perm_val >= 1') ;
+					$params['qpa'] = db_construct_qpa($params['qpa'], ' AND perm_val >= 1') ;
 					break ;
 				}
 				break ;

@@ -848,19 +848,19 @@ class Artifact extends Error {
 	/**
 	 * setStatus - set the status of this artifact.
 	 *
-	 * @param	int	The artifact status ID.
-	 * @param	int	Closing date if status = 1
+	 * @param	int	$status_id The artifact status ID.
+	 * @param	int|bool	$closingTime Closing date if status = 1
 	 *
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
-	function setStatus($status_id, $closingTime=False) {
+	function setStatus($status_id, $closingTime=false) {
 		db_begin();
-		$qpa = db_construct_qpa (false, 'UPDATE artifact SET status_id=$1', array ($status_id)) ;
+		$qpa = db_construct_qpa(array(), 'UPDATE artifact SET status_id=$1', array ($status_id)) ;
 		if ($closingTime && $status_id != 1) {
 			$time=$closingTime;
-			$qpa = db_construct_qpa ($qpa, ', close_date=$1 ', array ($time)) ;
+			$qpa = db_construct_qpa($qpa, ', close_date=$1 ', array ($time)) ;
 		}
-		$qpa = db_construct_qpa ($qpa,
+		$qpa = db_construct_qpa($qpa,
 					 'WHERE artifact_id=$1 AND group_artifact_id=$2',
 					 array ($this->getID(), $artifact_type_id)) ;
 		$result=db_query_qpa($qpa);

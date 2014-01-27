@@ -103,45 +103,45 @@ if (!$offset || $offset < 0) {
 
 $array = explode(" ",$gwords);
 
-$qpa = db_construct_qpa (false, 'SELECT project_title, project_link, project_description, title, link FROM plugin_globalsearch_assoc_site_project, plugin_globalsearch_assoc_site WHERE plugin_globalsearch_assoc_site_project.assoc_site_id = plugin_globalsearch_assoc_site.assoc_site_id AND enabled = $1 AND status_id = 2',
+$qpa = db_construct_qpa(array(), 'SELECT project_title, project_link, project_description, title, link FROM plugin_globalsearch_assoc_site_project, plugin_globalsearch_assoc_site WHERE plugin_globalsearch_assoc_site_project.assoc_site_id = plugin_globalsearch_assoc_site.assoc_site_id AND enabled = $1 AND status_id = 2',
 			 array ('t')) ;
 
 if ($otherfreeknowledge) {
-        $qpa = db_construct_qpa ($qpa, ' AND onlysw = $1', array ('f')) ;
+        $qpa = db_construct_qpa($qpa, ' AND onlysw = $1', array ('f')) ;
 }
 
-$qpa = db_construct_qpa ($qpa, ' AND ((') ;
+$qpa = db_construct_qpa($qpa, ' AND ((') ;
 
 $i = 0 ;
 foreach ($array as $val) {
 	if ($i > 0) {
 		if ($gexact) {
-			$qpa = db_construct_qpa ($qpa, ' AND ') ;
+			$qpa = db_construct_qpa($qpa, ' AND ') ;
 		} else {
-			$qpa = db_construct_qpa ($qpa, ' OR ') ;
+			$qpa = db_construct_qpa($qpa, ' OR ') ;
 		}
 	}
 	$i++ ;
 
-	$qpa = db_construct_qpa ($qpa, 'lower(project_title) LIKE $1', array ("%$val%")) ;
+	$qpa = db_construct_qpa($qpa, 'lower(project_title) LIKE $1', array ("%$val%")) ;
 }
 
-$qpa = db_construct_qpa ($qpa, ') OR (') ;
+$qpa = db_construct_qpa($qpa, ') OR (') ;
 
 $i = 0 ;
 foreach ($array as $val) {
 	if ($i > 0) {
 		if ($gexact) {
-			$qpa = db_construct_qpa ($qpa, ' AND ') ;
+			$qpa = db_construct_qpa($qpa, ' AND ') ;
 		} else {
-			$qpa = db_construct_qpa ($qpa, ' OR ') ;
+			$qpa = db_construct_qpa($qpa, ' OR ') ;
 		}
 	}
 	$i++ ;
 
-	$qpa = db_construct_qpa ($qpa, 'lower(project_description) LIKE $1', array ("%$val%")) ;
+	$qpa = db_construct_qpa($qpa, 'lower(project_description) LIKE $1', array ("%$val%")) ;
 }
-$qpa = db_construct_qpa ($qpa, ')) ORDER BY '.$order) ;
+$qpa = db_construct_qpa($qpa, ')) ORDER BY '.$order) ;
 
 $limit=25;
 

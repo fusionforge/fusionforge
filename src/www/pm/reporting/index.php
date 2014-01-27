@@ -180,7 +180,7 @@ if ($what) {
 		pm_footer(array());
 
 	} elseif ($what=="subproject") {
-		$qpa1 = db_construct_qpa (false,
+		$qpa1 = db_construct_qpa(array(),
 					  'SELECT project_group_list.project_name AS subproject, count(*) AS Count
 FROM project_group_list,project_task
 WHERE project_group_list.group_project_id=project_task.group_project_id

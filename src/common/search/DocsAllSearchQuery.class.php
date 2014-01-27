@@ -82,7 +82,7 @@ class DocsAllSearchQuery extends SearchQuery {
 		$qpa = $this->addIlikeCondition($qpa, 'description', $this->words);
 		$qpa = db_construct_qpa($qpa, ') OR (');
 		$qpa = $this->addIlikeCondition($qpa, 'data_words', $this->words);
-		$qpa = db_construct_qpa ($qpa, ')) ORDER BY groups.group_name, doc_groups.groupname, doc_data.title') ;
+		$qpa = db_construct_qpa($qpa, ')) ORDER BY groups.group_name, doc_groups.groupname, doc_data.title') ;
 
 		return $qpa;
 	}

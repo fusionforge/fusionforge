@@ -247,8 +247,8 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 
 	private function _getRolesIdByAllowedAction ($section, $reference, $action = NULL) {
 		$result = array ();
-		$qpa = db_construct_qpa ();
-		$qpa = db_construct_qpa ($qpa,
+		$qpa = db_construct_qpa();
+		$qpa = db_construct_qpa($qpa,
 					 'SELECT role_id FROM pfo_role_setting WHERE section_name=$1 AND ref_id=$2 ',
 					 array ($section,
 						$reference));
@@ -265,120 +265,120 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 		case 'tracker_admin':
 		case 'pm_admin':
 		case 'forum_admin':
-			$qpa = db_construct_qpa ($qpa, 'AND perm_val = 1');
+			$qpa = db_construct_qpa($qpa, 'AND perm_val = 1');
 			break;
 		case 'forge_stats':
 			switch ($action) {
 			case 'ANY':
-				$qpa = db_construct_qpa ($qpa, 'AND perm_val != 0');
+				$qpa = db_construct_qpa($qpa, 'AND perm_val != 0');
 				break;
 			case 'read':
-				$qpa = db_construct_qpa ($qpa, 'AND perm_val >= 1');
+				$qpa = db_construct_qpa($qpa, 'AND perm_val >= 1');
 				break;
 			case 'admin':
-				$qpa = db_construct_qpa ($qpa, 'AND perm_val >= 2');
+				$qpa = db_construct_qpa($qpa, 'AND perm_val >= 2');
 				break;
 			}
 			break;
 		case 'scm':
 			switch ($action) {
 			case 'ANY':
-				$qpa = db_construct_qpa ($qpa, 'AND perm_val != 0');
+				$qpa = db_construct_qpa($qpa, 'AND perm_val != 0');
 				break;
 			case 'read':
-				$qpa = db_construct_qpa ($qpa, 'AND perm_val >= 1');
+				$qpa = db_construct_qpa($qpa, 'AND perm_val >= 1');
 				break;
 			case 'write':
-				$qpa = db_construct_qpa ($qpa, 'AND perm_val >= 2');
+				$qpa = db_construct_qpa($qpa, 'AND perm_val >= 2');
 				break;
 			}
 			break;
 		case 'docman':
 			switch ($action) {
 			case 'ANY':
-				$qpa = db_construct_qpa ($qpa, 'AND perm_val != 0');
+				$qpa = db_construct_qpa($qpa, 'AND perm_val != 0');
 				break;
 			case 'read':
-				$qpa = db_construct_qpa ($qpa, 'AND perm_val >= 1');
+				$qpa = db_construct_qpa($qpa, 'AND perm_val >= 1');
 				break;
 			case 'submit':
-				$qpa = db_construct_qpa ($qpa, 'AND perm_val >= 2');
+				$qpa = db_construct_qpa($qpa, 'AND perm_val >= 2');
 				break;
 			case 'approve':
-				$qpa = db_construct_qpa ($qpa, 'AND perm_val >= 3');
+				$qpa = db_construct_qpa($qpa, 'AND perm_val >= 3');
 				break;
 			case 'admin':
-				$qpa = db_construct_qpa ($qpa, 'AND perm_val >= 4');
+				$qpa = db_construct_qpa($qpa, 'AND perm_val >= 4');
 				break;
 			}
 			break;
 		case 'frs':
 			switch ($action) {
 			case 'ANY':
-				$qpa = db_construct_qpa ($qpa, 'AND perm_val != 0');
+				$qpa = db_construct_qpa($qpa, 'AND perm_val != 0');
 				break;
 			case 'read_public':
-				$qpa = db_construct_qpa ($qpa, 'AND perm_val >= 1');
+				$qpa = db_construct_qpa($qpa, 'AND perm_val >= 1');
 				break;
 			case 'read_private':
-				$qpa = db_construct_qpa ($qpa, 'AND perm_val >= 2');
+				$qpa = db_construct_qpa($qpa, 'AND perm_val >= 2');
 				break;
 			case 'write':
-				$qpa = db_construct_qpa ($qpa, 'AND perm_val >= 3');
+				$qpa = db_construct_qpa($qpa, 'AND perm_val >= 3');
 				break;
 			}
 			break;
 		case 'forum':
 			switch ($action) {
 			case 'ANY':
-				$qpa = db_construct_qpa ($qpa, 'AND perm_val != 0');
+				$qpa = db_construct_qpa($qpa, 'AND perm_val != 0');
 				break;
 			case 'read':
-				$qpa = db_construct_qpa ($qpa, 'AND perm_val >= 1');
+				$qpa = db_construct_qpa($qpa, 'AND perm_val >= 1');
 				break;
 			case 'post':
-				$qpa = db_construct_qpa ($qpa, 'AND perm_val >= 2');
+				$qpa = db_construct_qpa($qpa, 'AND perm_val >= 2');
 				break;
 			case 'unmoderated_post':
-				$qpa = db_construct_qpa ($qpa, 'AND perm_val >= 3');
+				$qpa = db_construct_qpa($qpa, 'AND perm_val >= 3');
 				break;
 			case 'moderate':
-				$qpa = db_construct_qpa ($qpa, 'AND perm_val >= 4');
+				$qpa = db_construct_qpa($qpa, 'AND perm_val >= 4');
 				break;
 			}
 			break;
 		case 'tracker':
 			switch ($action) {
 			case 'ANY':
-				$qpa = db_construct_qpa ($qpa, 'AND perm_val != 0');
+				$qpa = db_construct_qpa($qpa, 'AND perm_val != 0');
 				break;
 			case 'read':
-				$qpa = db_construct_qpa ($qpa, 'AND (perm_val & 1) = 1');
+				$qpa = db_construct_qpa($qpa, 'AND (perm_val & 1) = 1');
 				break;
 			case 'tech':
-				$qpa = db_construct_qpa ($qpa, 'AND (perm_val & 2) = 2');
+				$qpa = db_construct_qpa($qpa, 'AND (perm_val & 2) = 2');
 				break;
 			case 'manager':
-				$qpa = db_construct_qpa ($qpa, 'AND (perm_val & 4) = 4');
+				$qpa = db_construct_qpa($qpa, 'AND (perm_val & 4) = 4');
 				break;
 			case 'submit':
-				$qpa = db_construct_qpa ($qpa, 'AND (perm_val & 8) = 8');
+				$qpa = db_construct_qpa($qpa, 'AND (perm_val & 8) = 8');
 				break;
 			}
 			break;
 		case 'pm':
 			switch ($action) {
 			case 'ANY':
-				$qpa = db_construct_qpa ($qpa, 'AND perm_val != 0');
+				$qpa = db_construct_qpa($qpa, 'AND perm_val != 0');
 				break;
 			case 'read':
-				$qpa = db_construct_qpa ($qpa, 'AND (perm_val & 1) = 1');
+				$qpa = db_construct_qpa($qpa, 'AND (perm_val & 1) = 1');
 				break;
 			case 'tech':
-				$qpa = db_construct_qpa ($qpa, 'AND (perm_val & 2) = 2');
+				$qpa = db_construct_qpa($qpa, 'AND (perm_val & 2) = 2');
 				break;
 			case 'manager':
-				$qpa = db_construct_qpa ($qpa, 'AND (perm_val & 4) = 4');
+				$qpa = db_construct_qpa($qpa, 'AND (perm_val & 4) = 4');
 				break;
 			}
 			break;

@@ -44,53 +44,53 @@ class ExportProjectSearchQuery extends SearchQuery {
 	 */
 	function getQuery() {
 
-		$qpa = db_construct_qpa () ;
+		$qpa = db_construct_qpa() ;
 		if (forge_get_config('use_fti')) {
 			$words = $this->getFTIwords();
 
-			$qpa = db_construct_qpa ($qpa,
+			$qpa = db_construct_qpa($qpa,
 						 'SELECT ts_headline(unix_group_name, q) as unix_group_name, ts_headline(short_description, q) as short_description, type_id, groups.group_id, license, register_time FROM groups, groups_idx, to_tsquery($1) q ',
 						 array (implode (' ', $words))) ;
-			$qpa = db_construct_qpa ($qpa,
+			$qpa = db_construct_qpa($qpa,
 						 'WHERE status IN ($1, $2) AND short_description <> $3 AND groups.group_id = groups_idx.group_id',
 						 array ('A',
 							'H',
 							'')) ;
-			$qpa = db_construct_qpa ($qpa,
+			$qpa = db_construct_qpa($qpa,
 						 ' AND (vectors @@ q' ) ;
 			if (count($this->phrases)) {
-				$qpa = db_construct_qpa ($qpa,
+				$qpa = db_construct_qpa($qpa,
 							 $this->getOperator()) ;
-				$qpa = db_construct_qpa ($qpa,
+				$qpa = db_construct_qpa($qpa,
 							 '(') ;
 				$qpa = $this->addMatchCondition($qpa, 'group_name');
-				$qpa = db_construct_qpa ($qpa,
+				$qpa = db_construct_qpa($qpa,
 							 ') OR (') ;
 				$qpa = $this->addMatchCondition($qpa, 'unix_group_name');
-				$qpa = db_construct_qpa ($qpa,
+				$qpa = db_construct_qpa($qpa,
 							 ') OR (') ;
 				$qpa = $this->addMatchCondition($qpa, 'short_description');
-				$qpa = db_construct_qpa ($qpa,
+				$qpa = db_construct_qpa($qpa,
 							 ')') ;
 			}
-			$qpa = db_construct_qpa ($qpa,
+			$qpa = db_construct_qpa($qpa,
 						 ') ORDER BY ts_rank(vectors, q) DESC, group_name ASC') ;
 		} else {
-			$qpa = db_construct_qpa ($qpa,
+			$qpa = db_construct_qpa($qpa,
 						 'SELECT group_name,unix_group_name,type_id,groups.group_id, short_description,license,register_time FROM groups WHERE status IN ($1, $2) AND short_description <> $3 AND groups.group_id = groups_idx.group_id',
 							 array ('A',
 								'H',
 								'')) ;
-                        $qpa = db_construct_qpa ($qpa,
+                        $qpa = db_construct_qpa($qpa,
                                                  ' AND ((') ;
                         $qpa = $this->addIlikeCondition ($qpa, 'group_name') ;
-                        $qpa = db_construct_qpa ($qpa,
+                        $qpa = db_construct_qpa($qpa,
                                                  ') OR (') ;
                         $qpa = $this->addIlikeCondition ($qpa, 'unix_group_name') ;
-			$qpa = db_construct_qpa ($qpa,
+			$qpa = db_construct_qpa($qpa,
                                                  ') OR (') ;
                         $qpa = $this->addIlikeCondition ($qpa, 'short_description') ;
-			$qpa = db_construct_qpa ($qpa,
+			$qpa = db_construct_qpa($qpa,
                                                  '))') ;
 		}
 		return $qpa ;

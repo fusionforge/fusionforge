@@ -76,7 +76,7 @@ function admin_table_postadd($table, $unit) {
 	$field_list = getStringFromRequest('__fields__');
 	$fields = explode(",", $field_list);
 	$values = array(); $v = array ();
-	$qpa = db_construct_qpa (false, 'INSERT INTO ' . $table . ' (' . $field_list . ') VALUES (') ;
+	$qpa = db_construct_qpa(array(), 'INSERT INTO ' . $table . ' (' . $field_list . ') VALUES (') ;
 
 	$i = 1 ;
 	foreach ($fields as $field) {
@@ -85,7 +85,7 @@ function admin_table_postadd($table, $unit) {
 		$values[] = getStringFromPost($field);
 	}
 
-	$qpa = db_construct_qpa ($qpa, implode (',', $v).')', $values) ;
+	$qpa = db_construct_qpa($qpa, implode (',', $v).')', $values) ;
 
 	if (db_query_qpa($qpa)) {
 		print('<p class="feedback">');
@@ -237,19 +237,19 @@ function admin_table_edit($table, $unit, $primary_key, $id) {
 function admin_table_postedit($table, $unit, $primary_key, $id) {
 	global $_POST;
 
-	$qpa = db_construct_qpa (false, 'UPDATE ' . $table . ' SET ') ;
+	$qpa = db_construct_qpa(array(), 'UPDATE ' . $table . ' SET ') ;
 
 	$i = 0 ;
 	while (list($var, $val) = each($_POST)) {
 		if ($i > 0) {
-			$qpa = db_construct_qpa ($qpa, ', ') ;
+			$qpa = db_construct_qpa($qpa, ', ') ;
 		}
 		$i++ ;
 		if ($var != $primary_key) {
-			$qpa = db_construct_qpa ($qpa, "$var=$1", array ($val)) ;
+			$qpa = db_construct_qpa($qpa, "$var=$1", array ($val)) ;
 		}
 	}
-	$qpa = db_construct_qpa ($qpa, 'WHERE '.$primary_key.'=$1',
+	$qpa = db_construct_qpa($qpa, 'WHERE '.$primary_key.'=$1',
 				 array ($id)) ;
 
 	if (db_query_qpa($qpa)) {
@@ -264,7 +264,7 @@ function admin_table_postedit($table, $unit, $primary_key, $id) {
 	if (strlen($field_list)) {
 		$fields = explode(",", $field_list);
 		$values = array(); $v = array ();
-		$qpa = db_construct_qpa (false, 'INSERT INTO ' . $table . ' (' . $field_list . ') VALUES (') ;
+		$qpa = db_construct_qpa(array(), 'INSERT INTO ' . $table . ' (' . $field_list . ') VALUES (') ;
 
 		$i = 1 ;
 		foreach ($fields as $field) {
@@ -273,7 +273,7 @@ function admin_table_postedit($table, $unit, $primary_key, $id) {
 			$values[] = getStringFromPost($field);
 		}
 
-		$qpa = db_construct_qpa ($qpa, implode (',', $v).')', $values) ;
+		$qpa = db_construct_qpa($qpa, implode (',', $v).')', $values) ;
 
 		if (db_query_qpa($qpa)) {
 		print('<p class="feedback">');

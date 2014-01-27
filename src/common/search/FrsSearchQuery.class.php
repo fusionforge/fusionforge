@@ -67,71 +67,71 @@ class FrsSearchQuery extends SearchQuery {
 	 */
 	function getQuery() {
 
-		$qpa = db_construct_qpa () ;
+		$qpa = db_construct_qpa() ;
 
 		if (forge_get_config('use_fti')) {
-			$qpa = db_construct_qpa () ;
-			$qpa = db_construct_qpa ($qpa,
+			$qpa = db_construct_qpa() ;
+			$qpa = db_construct_qpa($qpa,
 						 'SELECT ts_headline(frs_package.name, q) AS package_name, ts_headline(frs_release.name, q) as release_name, frs_release.release_date, frs_release.release_id, users.realname FROM frs_file, frs_release, users, frs_package, to_tsquery($1) AS q, frs_release_idx r, frs_file_idx f WHERE frs_release.released_by = users.user_id AND r.release_id = frs_release.release_id AND f.file_id = frs_file.file_id AND frs_package.package_id = frs_release.package_id AND frs_file.release_id=frs_release.release_id AND frs_package.group_id=$2 ',
 						 array ($this->getFTIwords(),
 							$this->groupId)) ;
 			if ($this->sections != SEARCH__ALL_SECTIONS) {
-				$qpa = db_construct_qpa ($qpa,
+				$qpa = db_construct_qpa($qpa,
 							 'AND frs_package.package_id = ANY ($1) ',
 							 array (db_int_array_to_any_clause ($this->sections))) ;
 			}
 			if (!$this->showNonPublic) {
-				$qpa = db_construct_qpa ($qpa,
+				$qpa = db_construct_qpa($qpa,
 							 'AND is_public = 1 ') ;
 			}
-			$qpa = db_construct_qpa ($qpa,
+			$qpa = db_construct_qpa($qpa,
 						 'AND (f.vectors @@ q OR r.vectors @@ q) ') ;
 			if(count($this->phrases)) {
-				$qpa = db_construct_qpa ($qpa,
+				$qpa = db_construct_qpa($qpa,
 							 'AND ((') ;
 				$qpa = $this->addMatchCondition($qpa, 'frs_release.changes');
-				$qpa = db_construct_qpa ($qpa,
+				$qpa = db_construct_qpa($qpa,
 							 ') OR (') ;
 				$qpa = $this->addMatchCondition($qpa, 'frs_release.notes');
-				$qpa = db_construct_qpa ($qpa,
+				$qpa = db_construct_qpa($qpa,
 							 ') OR (') ;
 				$qpa = $this->addMatchCondition($qpa, 'frs_release.name');
-				$qpa = db_construct_qpa ($qpa,
+				$qpa = db_construct_qpa($qpa,
 							 ') OR (') ;
 				$qpa = $this->addMatchCondition($qpa, 'frs_file.filename');
-				$qpa = db_construct_qpa ($qpa,
+				$qpa = db_construct_qpa($qpa,
 							 ')) ') ;
 			}
 
-			$qpa = db_construct_qpa ($qpa,
+			$qpa = db_construct_qpa($qpa,
 						 ' ORDER BY frs_package.name, frs_release.name') ;
 
 		} else {
-			$qpa = db_construct_qpa ($qpa,
+			$qpa = db_construct_qpa($qpa,
 						 'SELECT frs_package.name as package_name, frs_release.name as release_name, frs_release.release_date, frs_release.release_id, users.realname FROM frs_file, frs_release, users, frs_package WHERE frs_release.released_by = users.user_id AND frs_package.package_id = frs_release.package_id AND frs_file.release_id=frs_release.release_id AND frs_package.group_id = $1 ',
 						 array ($this->groupId)) ;
 			if ($this->sections != SEARCH__ALL_SECTIONS) {
-				$qpa = db_construct_qpa ($qpa,
+				$qpa = db_construct_qpa($qpa,
 							 'AND frs_package.package_id = ANY ($1) ',
 							 array (db_int_array_to_any_clause ($this->sections))) ;
 			}
 			if (!$this->showNonPublic) {
-				$qpa = db_construct_qpa ($qpa,
+				$qpa = db_construct_qpa($qpa,
 							 'AND is_public = 1 ') ;
 			}
-			$qpa = db_construct_qpa ($qpa,
+			$qpa = db_construct_qpa($qpa,
 						 'AND ((') ;
 			$qpa = $this->addIlikeCondition ($qpa, 'frs_release.changes') ;
-			$qpa = db_construct_qpa ($qpa,
+			$qpa = db_construct_qpa($qpa,
 						 ') OR (') ;
 			$qpa = $this->addIlikeCondition ($qpa, 'frs_release.notes') ;
-			$qpa = db_construct_qpa ($qpa,
+			$qpa = db_construct_qpa($qpa,
 						 ') OR (') ;
 			$qpa = $this->addIlikeCondition ($qpa, 'frs_release.name') ;
-			$qpa = db_construct_qpa ($qpa,
+			$qpa = db_construct_qpa($qpa,
 						 ') OR (') ;
 			$qpa = $this->addIlikeCondition ($qpa, 'frs_file.filename') ;
-			$qpa = db_construct_qpa ($qpa,
+			$qpa = db_construct_qpa($qpa,
 						 ')) ORDER BY frs_package.name, frs_release.name') ;
 		}
 		return $qpa ;

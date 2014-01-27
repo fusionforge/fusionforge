@@ -187,7 +187,7 @@ class SearchQuery extends Error {
 	function addMatchCondition($qpa, $fieldName) {
 
 		if(!count($this->phrases)) {
-			$qpa = db_construct_qpa ($qpa, 'TRUE') ;
+			$qpa = db_construct_qpa($qpa, 'TRUE') ;
 			return $qpa;
 		}
 
@@ -198,10 +198,10 @@ class SearchQuery extends Error {
 
 		for ($i = 0; $i < count ($regexs); $i++) {
 			if ($i > 0) {
-				$qpa = db_construct_qpa ($qpa,
+				$qpa = db_construct_qpa($qpa,
 							 $this->operator) ;
 			}
-			$qpa = db_construct_qpa ($qpa,
+			$qpa = db_construct_qpa($qpa,
 						 $fieldName.' ~* $1',
 							 array ($regexs[$i])) ;
 		}
@@ -214,10 +214,10 @@ class SearchQuery extends Error {
 
 		for ($i = 0; $i < count ($wordArgs); $i++) {
 			if ($i > 0) {
-				$qpa = db_construct_qpa ($qpa,
+				$qpa = db_construct_qpa($qpa,
 							 $this->operator) ;
 			}
-			$qpa = db_construct_qpa ($qpa,
+			$qpa = db_construct_qpa($qpa,
 						 'lower ('.$fieldName.') LIKE $1',
 						 array ('%'.$wordArgs[$i].'%')) ;
 		}

@@ -317,7 +317,7 @@ class DocumentManager extends Error {
 	 * @return	array	number per section of activities found between begin and end values
 	 */
 	function getActivity($sections, $begin, $end) {
-		$qpa = db_construct_qpa(false);
+		$qpa = db_construct_qpa();
 		for ($i = 0; $i < count($sections); $i++) {
 			$union = 0;
 			if (count($sections) >= 1 && $i != count($sections) -1) {
