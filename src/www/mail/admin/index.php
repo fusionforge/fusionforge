@@ -6,7 +6,7 @@
  * Copyright 2003-2004 (c) Guillaume Smet - Open Wide
  * Copyright 2010 (c) Franck Villaume - Capgemini
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -184,7 +184,7 @@ if ($group_id) {
 			<input type="hidden" name="add_list" value="y" />
 			<input type="hidden" name="form_key" value="<?php echo form_generate_key();?>" />
 			<p><strong><?php echo _('Mailing List Name')._(':'); ?></strong><br />
-			<strong><?php echo $group->getUnixName(); ?>-<input type="text" name="list_name" value="" size="10" maxlength="12" />@<?php echo forge_get_config('lists_host'); ?></strong></p>
+			<strong><?php echo $group->getUnixName(); ?>-<input type="text" name="list_name" value="" size="10" maxlength="12" required="required" pattern="[a-zA-Z0-9]{4,}" />@<?php echo forge_get_config('lists_host'); ?></strong></p>
 			<p>
 			<strong><?php echo _('Is Public?'); ?></strong><br />
 			<input type="radio" name="is_public" value="<?php echo MAIL__MAILING_LIST_IS_PUBLIC; ?>" <?php echo ($group->isPublic() ? ' checked="checked"' : '') ?> /> <?php echo _('Yes'); ?><br />
