@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) Alcatel-Lucent
  * Copyright 2009, Roland Mas
+ * Copyright 2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -33,7 +34,7 @@ function util_gen_cross_ref ($text, $group_id) {
 	$text = preg_replace('/\[\#(\d+)\]/e', "_artifactid2url('\\1')", $text);
 
 	// Handle gforge [Tnnn] Syntax => links to task.
-	$text = preg_replace('/\[\T(\d+)\]/e', "_taskid2url('\\1')", $text);
+	$text = preg_replace('/\[\T(\d+)\]/e', "_taskid2url('\\1','$group_id')", $text);
 
 	// Handle [wiki:<pagename>] syntax
 	$text = preg_replace('/\[wiki:(.*?)\]/e', "_page2url('$prj','\\1')", $text);
@@ -71,13 +72,21 @@ function _artifactid2url ($id, $mode='') {
 	return $text;
 }
 
-function _taskid2url ($id) {
+/**
+ * _taskid2url - transform text [T##] to clickable URL
+ *
+ * @param	int	$id		the Task ID
+ * @param	int	$group_id	the group id owner of the task id
+ * @return	string	the clickable link
+ */
+function _taskid2url($id, $group_id) {
 	$text = '[T'.$id.']';
-	$res = db_query_params ('SELECT group_id, project_task.group_project_id, summary, status_id
+	$res = db_query_params('SELECT group_id, project_task.group_project_id, summary, status_id
 			FROM project_task, project_group_list
 			WHERE project_task_id=$1
-			AND project_task.group_project_id=project_group_list.group_project_id',
-				array ($id));
+			AND project_task.group_project_id=project_group_list.group_project_id
+			AND group_id = $2',
+				array ($id, $group_id));
 	if (db_numrows($res) == 1) {
 		$row = db_fetch_array($res);
 		$url = '/pm/task.php?func=detailtask&amp;project_task_id='.$id.'&amp;group_id='.$row['group_id'].'&amp;group_project_id='.$row['group_project_id'];
