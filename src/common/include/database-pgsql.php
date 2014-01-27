@@ -72,7 +72,7 @@ function db_connect() {
 	if (function_exists("pg_pconnect")) {
 		$gfconn = pg_pconnect(pg_connectstring(forge_get_config('database_name'), forge_get_config('database_user'), forge_get_config('database_password'), forge_get_config('database_host'), forge_get_config('database_port')));
 		if (!$gfconn) {
-			print forge_get_config ('forge_name')." Could Not Connect to Database: ".db_error();
+			print forge_get_config('forge_name')." Could Not Connect to Database: ".db_error();
 			exit;
 		}
 	} else {
@@ -162,7 +162,7 @@ function db_query_from_file($file, $limit = -1, $offset = 0, $dbserver = NULL) {
 	global $sysdebug_dbquery, $sysdebug_dberrors;
 
 	db_connect_if_needed();
-	$dbconn = db_switcher($dbserver) ;
+	$dbconn = db_switcher($dbserver);
 
 	global $QUERY_COUNT;
 	$QUERY_COUNT++;
@@ -371,7 +371,7 @@ function db_unprepare($name, $dbserver = NULL) {
  * @param	array	$qpa		array(query, array(parameters...))
  * @param	int	$limit		How many rows do you want returned.
  * @param	int	$offset		Of matching rows, return only rows starting here.
- * @param	int	$dbserver	Ability to spread load to multiple db servers.
+ * @param	resource	$dbserver	Ability to spread load to multiple db servers.
  * @return resource result set handle.
  */
 function db_query_qpa($qpa, $limit = -1, $offset = 0, $dbserver = NULL) {
@@ -408,7 +408,7 @@ $_sys_db_transaction_level = 0;
 /**
  * db_begin() - Begin a transaction.
  *
- * @param	int	$dbserver	Database server (SYS_DB_PRIMARY, SYS_DB_STATS, SYS_DB_TROVE, SYS_DB_SEARCH)
+ * @param	resource	$dbserver	Database server (SYS_DB_PRIMARY, SYS_DB_STATS, SYS_DB_TROVE, SYS_DB_SEARCH)
  * @return	bool	true.
  */
 function db_begin($dbserver = NULL) {
@@ -427,7 +427,7 @@ function db_begin($dbserver = NULL) {
 /**
  * db_commit - Commit a transaction.
  *
- * @param	int	$dbserver	Database server (SYS_DB_PRIMARY, SYS_DB_STATS, SYS_DB_TROVE, SYS_DB_SEARCH)
+ * @param	resource	$dbserver	Database server (SYS_DB_PRIMARY, SYS_DB_STATS, SYS_DB_TROVE, SYS_DB_SEARCH)
  * @return	bool	true on success/false on failure.
  */
 function db_commit($dbserver = NULL) {
@@ -452,7 +452,7 @@ function db_commit($dbserver = NULL) {
 /**
  * db_rollback - Rollback a transaction.
  *
- * @param	int	$dbserver	Database server (SYS_DB_PRIMARY, SYS_DB_STATS, SYS_DB_TROVE, SYS_DB_SEARCH)
+ * @param	resource	$dbserver	Database server (SYS_DB_PRIMARY, SYS_DB_STATS, SYS_DB_TROVE, SYS_DB_SEARCH)
  * @return	bool	true on success/false on failure.
  */
 function db_rollback($dbserver = NULL) {
@@ -591,7 +591,7 @@ function db_fetch_array_by_row($qhandle, $row) {
  * @param	resource	$qhandle		Query result set handle.
  * @param	string		$table_name		Name of the table you inserted into.
  * @param	string		$pkey_field_name	Field name of the primary key.
- * @param	string		$dbserver		Server to which original query was made
+ * @param	resource		$dbserver		Server to which original query was made
  * @return	int		id of the primary key or 0 on failure.
  */
 function db_insertid($qhandle, $table_name, $pkey_field_name, $dbserver = NULL) {
@@ -607,7 +607,7 @@ function db_insertid($qhandle, $table_name, $pkey_field_name, $dbserver = NULL) 
 /**
  * db_error - Returns the last error from the database.
  *
- * @param	int	$dbserver	Database server (SYS_DB_PRIMARY, SYS_DB_STATS, SYS_DB_TROVE, SYS_DB_SEARCH)
+ * @param	resource	$dbserver	Database server (SYS_DB_PRIMARY, SYS_DB_STATS, SYS_DB_TROVE, SYS_DB_SEARCH)
  * @return	string	error message.
  */
 function db_error($dbserver = NULL) {
@@ -675,7 +675,7 @@ function db_drop_table_if_exists($name, $cascade = false) {
 
 function db_drop_sequence_if_exists($name) {
 	if (!db_check_sequence_exists($name)) {
-		return;
+		return true;
 	}
 	$sql = "DROP SEQUENCE $name";
 	$res = db_query_params($sql, array());
@@ -723,6 +723,7 @@ function db_bump_sequence_to($seqname, $target) {
 		}
 		$current = db_result($res, 0, 0);
 	}
+	return true;
 }
 
 function db_int_array_to_any_clause($arr) {
@@ -782,7 +783,7 @@ function db_construct_qpa($old_qpa = array(), $new_sql = '', $new_params = array
 	return array($sql, $params, $max);
 }
 
-function db_join_qpa($old_qpa = false, $new_qpa = false) {
+function db_join_qpa($old_qpa = array(), $new_qpa = array()) {
 	return db_construct_qpa($old_qpa, $new_qpa[0], $new_qpa[1]);
 }
 
