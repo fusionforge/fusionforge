@@ -275,6 +275,7 @@ $report=new Report();
 if ($report->isError()) {
 	exit_error($report->getErrorMessage(),'pm');
 }
+$report->setStartDate($pt->ProjectGroup->Group->getStartDate());
 
 echo '<form id="time-tracking" action="/reporting/timeadd.php" method="post">
 	<input type="hidden" name="project_task_id" value="'.$project_task_id.'" />

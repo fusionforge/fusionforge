@@ -61,7 +61,9 @@ function Report() {
 }
 
 /**
- *	get the unix time that this install was setup.
+ * getMinDate - get the unix time that this install was setup.
+ *
+ * @return	int	the startdate
  */
 function getMinDate() {
 	if (!$this->site_start_date) {
@@ -70,6 +72,19 @@ function getMinDate() {
 		$this->site_start_date=db_result($res,0,'start_date');
 	}
 	return $this->site_start_date;
+}
+
+/**
+ * setStartDate - force the start date for this report
+ *
+ * @param	int	$startdate	the epoch start date
+ */
+function setStartDate($startdate) {
+	$_startdate = $this->getMinDate();
+	if ($_startdate > $startdate) {
+		$startdate = $_startdate;
+	}
+	$this->site_start_date = $startdate;
 }
 
 function &getMonthStartArr() {
