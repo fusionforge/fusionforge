@@ -203,8 +203,8 @@ function db_query_from_file($file, $limit = -1, $offset = 0, $dbserver = NULL) {
 		    db_error($dbserver) . "), SQL: " . $qstring,
 		    $sysdebug_dbquery ? debug_string_backtrace() : false);
 	} else {
-		error_log('SQL: ' . preg_replace('/\n\t+/', ' ', $qstring));
-		error_log('SQL> ' . db_error($dbserver));
+		error_log('SQL: '.preg_replace('/\n\t+/', ' ', $qstring));
+		error_log('SQL> '.db_error($dbserver));
 	}
 	return $res;
 }
