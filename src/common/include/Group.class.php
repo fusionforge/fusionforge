@@ -161,7 +161,7 @@ function group_get_object_by_publicname($groupname) {
  * get_public_active_projects_asc() - Get a list of rows for public active projects (initially in trove/full_list)
  *
  * @param	int	$max_query_limit Optional Maximum number of rows to limit query length
- * @return  array List of public active projects
+ * @return	array	List of public active projects
  */
 function get_public_active_projects_asc($max_query_limit = -1) {
 
@@ -417,7 +417,7 @@ class Group extends Error {
 	 * @param	int	$type_id	Group type (1-project, 2-foundry).
 	 * @param	string	$unix_box	Machine on which group's home directory located.
 	 * @param	string	$http_domain	Domain which serves group's WWW.
-	 * @return	bool			status.
+	 * @return	bool	status.
 	 * @access	public
 	 */
 	function updateAdmin(&$user, $type_id, $unix_box, $http_domain) {
@@ -474,29 +474,29 @@ class Group extends Error {
 	 *
 	 * Unlike updateAdmin(), this function accessible to project admin.
 	 *
-	 * @param object	$user		User requesting operation (for access control).
-	 * @param string	$group_name
-	 * @param string	$homepage
-	 * @param string	$short_description
-	 * @param bool		$use_mail
-	 * @param bool		$use_survey
-	 * @param bool		$use_forum
-	 * @param bool		$use_pm
-	 * @param bool		$use_pm_depend_box
-	 * @param bool		$use_scm
-	 * @param bool		$use_news
-	 * @param bool		$use_docman
-	 * @param string	$new_doc_address
-	 * @param bool		$send_all_docs
-	 * @param int		$logo_image_id
-	 * @param bool		$use_ftp
-	 * @param bool		$use_tracker
-	 * @param bool		$use_frs
-	 * @param bool		$use_stats
-	 * @param $tags
-	 * @param bool		$use_activity
-	 * @param bool		$is_public		group is publicly accessible
-	 * @return    int    status.
+	 * @param	object	$user			User requesting operation (for access control).
+	 * @param	string	$group_name
+	 * @param	string	$homepage
+	 * @param	string	$short_description
+	 * @param	bool	$use_mail
+	 * @param	bool	$use_survey
+	 * @param	bool	$use_forum
+	 * @param	bool	$use_pm
+	 * @param	bool	$use_pm_depend_box
+	 * @param	bool	$use_scm
+	 * @param	bool	$use_news
+	 * @param	bool	$use_docman
+	 * @param	string	$new_doc_address
+	 * @param	bool	$send_all_docs
+	 * @param	int	$logo_image_id
+	 * @param	bool	$use_ftp
+	 * @param	bool	$use_tracker
+	 * @param	bool	$use_frs
+	 * @param	bool	$use_stats
+	 * @param	string	$tags
+	 * @param	bool	$use_activity
+	 * @param	bool	$is_public		group is publicly accessible
+	 * @return	int    status.
 	 * @access    public
 	 */
 	function update(&$user, $group_name, $homepage, $short_description, $use_mail, $use_survey, $use_forum,
@@ -834,19 +834,19 @@ class Group extends Error {
 	}
 
 	/**
-	 *	isTemplate - Simply returns the is_template flag from the database.
+	 * isTemplate - Simply returns the is_template flag from the database.
 	 *
-	 *	@return	boolean	is_template.
+	 * @return	boolean	is_template.
 	 */
 	function isTemplate() {
 		return $this->data_array['is_template'];
 	}
 
 	/**
-	 *	setAsTemplate - Set the template status of a project
+	 * setAsTemplate - Set the template status of a project
 	 *
-	 *	@param	boolean	$booleanparam	is_template.
-	 * @return bool
+	 * @param	boolean	$booleanparam	is_template.
+	 * @return	bool
 	 */
 	function setAsTemplate($booleanparam) {
 		db_begin();
@@ -864,9 +864,9 @@ class Group extends Error {
 	}
 
 	/**
-	 *	getTemplateProject - Return the project template this project is built from
+	 * getTemplateProject - Return the project template this project is built from
 	 *
-	 *	@return	object	The template project
+	 * @return	object	The template project
 	 */
 	function getTemplateProject() {
 		return group_get_object($this->data_array['built_from_template']);
@@ -947,7 +947,7 @@ class Group extends Error {
 	 * setSCMBox - the hostname of the scm box where this project is located.
 	 *
 	 * @param	string	$scm_box	The name of the new SCM_BOX
-	 * @return bool
+	 * @return	bool
 	 */
 	function setSCMBox($scm_box) {
 
@@ -992,7 +992,7 @@ class Group extends Error {
 	}
 
 	/**
-	 * getAdmins() - Get array of Admin user objects.
+	 * getAdmins - Get array of Admin user objects.
 	 *
 	 * @return	array	Array of User objects.
 	 */
@@ -1081,10 +1081,10 @@ class Group extends Error {
 	}
 
 	/**
-	 *	setUseSCM - Set the SCM usage
+	 * setUseSCM - Set the SCM usage
 	 *
-	 *	@param	boolean	$booleanparam	enabled/disabled
-	 * @return bool
+	 * @param	boolean	$booleanparam	enabled/disabled
+	 * @return	bool
 	 */
 	function setUseSCM($booleanparam) {
 		db_begin();
@@ -1102,7 +1102,7 @@ class Group extends Error {
 	}
 
 	/**
-	 *	usesMail - whether or not this group has opted to use mailing lists.
+	 * usesMail - whether or not this group has opted to use mailing lists.
 	 *
 	 * @return	boolean	uses_mail.
 	 */
@@ -1123,10 +1123,10 @@ class Group extends Error {
 	}
 
 	/**
-	 *	setUseMail - Set the mailing-list usage
+	 * setUseMail - Set the mailing-list usage
 	 *
-	 *	@param	boolean	$booleanparam	enabled/disabled
-	 * @return bool
+	 * @param	boolean	$booleanparam	enabled/disabled
+	 * @return	bool
 	 */
 	function setUseMail($booleanparam) {
 		db_begin();
@@ -1144,7 +1144,7 @@ class Group extends Error {
 	}
 
 	/**
-	 * 	usesNews - whether or not this group has opted to use news.
+	 * usesNews - whether or not this group has opted to use news.
 	 *
 	 * @return	boolean	uses_news.
 	 */
@@ -1183,10 +1183,10 @@ class Group extends Error {
 	}
 
 	/**
-	 *	setUseForum - Set the forum usage
+	 * setUseForum - Set the forum usage
 	 *
-	 *	@param	boolean	$booleanparam	enabled/disabled
-	 * @return bool
+	 * @param	boolean	$booleanparam	enabled/disabled
+	 * @return	bool
 	 */
 	function setUseForum($booleanparam) {
 		db_begin();
@@ -1204,7 +1204,7 @@ class Group extends Error {
 	}
 
 	/**
-	 *  usesStats - whether or not this group has opted to use stats.
+	 * usesStats - whether or not this group has opted to use stats.
 	 *
 	 * @return	boolean	uses_stats.
 	 */
@@ -1226,10 +1226,10 @@ class Group extends Error {
 	}
 
 	/**
-	 *	setUseFRS - Set the FRS usage
+	 * setUseFRS - Set the FRS usage
 	 *
-	 *	@param	boolean	$booleanparam	enabled/disabled
-	 * @return bool
+	 * @param	boolean	$booleanparam	enabled/disabled
+	 * @return	bool
 	 */
 	function setUseFRS($booleanparam) {
 		db_begin();
@@ -1247,7 +1247,7 @@ class Group extends Error {
 	}
 
 	/**
-	 *  usesTracker - whether or not this group has opted to use tracker.
+	 * usesTracker - whether or not this group has opted to use tracker.
 	 *
 	 * @return	boolean	uses_tracker.
 	 */
@@ -1260,12 +1260,12 @@ class Group extends Error {
 	}
 
 	/**
-	 *	setUseTracker - Set the tracker usage
+	 * setUseTracker - Set the tracker usage
 	 *
-	 *	@param	boolean	$booleanparam	enabled/disabled
-	 * @return bool
+	 * @param	boolean	$booleanparam	enabled/disabled
+	 * @return	bool
 	 */
-	function setUseTracker ($booleanparam) {
+	function setUseTracker($booleanparam) {
 		db_begin();
 		$booleanparam = $booleanparam ? 1 : 0;
 		$res = db_query_params ('UPDATE groups SET use_tracker=$1 WHERE group_id=$2',
