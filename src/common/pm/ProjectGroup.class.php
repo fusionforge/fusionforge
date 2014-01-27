@@ -250,7 +250,7 @@ class ProjectGroup extends Error {
 		if ($category_id) {
 			$qpa = db_construct_qpa($qpa, '  AND category_id = $1 ', array($category_id));
 		}
-		if ($status_id != 100) {
+		if (is_int($status_id) && $status_id != 100) {
 			$qpa = db_construct_qpa($qpa, ' AND status_id = $1 ', array($status_id));
 		}
 		$res = db_query_qpa($qpa);

@@ -771,23 +771,29 @@ abstract class BaseRole extends Error {
 			$this->setName($role_name) ;
 		}
 		
-		$res = db_query_params ('DELETE FROM pfo_role_setting WHERE role_id=$1',
-					array ($role_id)) ;
+		$res = db_prepare ('DELETE FROM pfo_role_setting WHERE role_id=$1 AND section_name=$2 AND ref_id=$3',
+				   'delete_from_pfo_role_setting');
 
 		$res = db_prepare ('INSERT INTO pfo_role_setting (role_id, section_name, ref_id, perm_val) VALUES ($1, $2, $3, $4)',
 				   'insert_into_pfo_role_setting');
 		
 		foreach ($data as $sect => $refs) {
 			foreach ($refs as $refid => $value) {
+				$res = db_execute ('delete_from_pfo_role_setting',
+						   array ($role_id,
+							  $sect,
+							  $refid)) ;
 				$res = db_execute ('insert_into_pfo_role_setting',
 						   array ($role_id,
 							  $sect,
 							  $refid,
 							  $value)) ;
+				$this->perms_array[$sect][$refid] = $value;
 			}
 		}
 
 		$res = db_unprepare ('insert_into_pfo_role_setting');
+		$res = db_unprepare ('delete_from_pfo_role_setting');
 
 		$hook_params = array ();
 		$hook_params['role'] =& $this;

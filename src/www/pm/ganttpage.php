@@ -6,7 +6,7 @@
  * Copyright 2002 GForge, LLC, Tim Perdue
  * Copyright 2010, FusionForge Team
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -81,7 +81,6 @@ foreach ($techs as $tech) {
 	$transformedRolesArr[] = array('id' => $role->getID(), 'name' => $role->getName());
 }
 $transformedTasksArr = array();
-$transformedTasksArr2 = array();
 $minstartdate = 99999999999999999999;
 //$maxstartdate = 0;
 foreach ($pt_arr as $task) {
@@ -141,7 +140,11 @@ for($j =0; $j <count($pt_arr); $j++) {
 				}
 			}
 			// bug here.... $key should be the array key of the task not the task id...
-			$depends .= $newkey.',';
+			if (strlen($depends)) {
+				$depends .= $newkey.',';
+			} else {
+				$depends .= $newkey;
+			}
 		}
 	}
 	$transformedTasksArr[$j]['depends'] = $depends;
