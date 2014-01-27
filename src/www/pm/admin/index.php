@@ -6,7 +6,7 @@
  * Copyright 2002 GForge, LLC, Tim Perdue
  * Copyright 2010, FusionForge Team
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -355,7 +355,7 @@ if ($add_cat && $group_project_id) {
 	</table>
 	</form>
 	<?php
-
+	echo '<p>'.util_make_link ('/pm/admin/?group_id='.$group_id.'&amp;add_cat=1&amp;group_project_id='.$group_project_id,_('Category Administration')).'</p>';
 	pm_footer(array());
 
 } elseif ($delete && $group_project_id) {
