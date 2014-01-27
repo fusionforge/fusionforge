@@ -266,7 +266,7 @@ class Layout extends Error {
 		<meta name="keywords" content="<?php echo $params['meta-keywords'] ?>" />
 <?php } ?>
 		<?php
-		plugin_hook('htmlhead', array());
+		plugin_hook('htmlhead');
 		$this->headerTitle($params);
 		$this->headerFavIcon();
 		$this->headerRSS();
@@ -350,10 +350,10 @@ class Layout extends Error {
 		echo '
 			<script type="text/javascript" src="'. util_make_uri('/js/common.js') .'"></script>
 			<script type="text/javascript">/* <![CDATA[ */';
-		plugin_hook ("javascript",false);
+		plugin_hook ("javascript");
 		echo '
 			/* ]]> */</script>';
-		plugin_hook ("javascript_file",false);
+		plugin_hook ("javascript_file");
 		echo $this->getJavascripts();
 
 		// invoke the 'javascript' hook for custom javascript addition
@@ -538,7 +538,7 @@ if (isset($params['group']) && $params['group']) {
 
 		<?php echo $this->navigation->getShowSource();
 
-		plugin_hook('webanalytics_url', array());
+		plugin_hook('webanalytics_url');
 
 		echo "</body>\n";
 		echo "</html>\n";

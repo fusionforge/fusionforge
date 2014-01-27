@@ -107,7 +107,7 @@ class Theme extends Layout {
 		echo '</div>' . "\n";
 		echo '<div id="maindiv">' . "\n";
 
-		plugin_hook('message', array());
+		plugin_hook('message');
 
 		if(isset($GLOBALS['error_msg']) && $GLOBALS['error_msg']) {
 			echo $this->error_msg($GLOBALS['error_msg']);
@@ -138,7 +138,7 @@ class Theme extends Layout {
 		echo $this->navigation->getPoweredBy();
 		echo $this->navigation->getShowSource();
 		echo '<div style="clear:both"></div></div>';
-		plugin_hook('webanalytics_url', array());
+		plugin_hook('webanalytics_url');
 		echo '</body></html>' . "\n";
 	}
 
@@ -427,7 +427,7 @@ class Theme extends Layout {
 	{
 		echo '<script type="text/javascript" src="'. util_make_uri('/js/common.js') .'"></script>';
 
-		plugin_hook("javascript_file", false);
+		plugin_hook("javascript_file");
 
 		// invoke the 'javascript' hook for custom javascript addition
 		$params = array('return' => false);

@@ -1012,7 +1012,7 @@ function site_user_header($params) {
 	if (plugin_hook_listeners("usermenu") > 0) {
 		echo $HTML->subMenuSeparator();
 	}
-	plugin_hook("usermenu", false);
+	plugin_hook("usermenu");
 	echo $HTML->endSubMenu();
 }
 
