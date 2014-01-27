@@ -126,7 +126,7 @@ class ArtifactTypeHtml extends ArtifactType {
 		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&amp;atid='.$this->getID().'&amp;delete=1';
 		$title_arr[]=_('Delete');
 
-		echo $HTML->printSubMenu($title_arr, $links_arr, false);
+		echo $HTML->printSubMenu($title_arr, $links_arr, array());
 	}
 
 	function adminFooter($params) {

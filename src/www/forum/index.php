@@ -62,7 +62,7 @@ if ($group_id) {
 
 //	echo _('<p>Choose a forum and you can browse, search, and post messages.<p>');
 
-	echo $HTML->printsubMenu(array(_("My Monitored Forums")), array("/forum/myforums.php?group_id=$group_id"), false);
+	echo $HTML->printsubMenu(array(_("My Monitored Forums")), array("/forum/myforums.php?group_id=$group_id"), array());
 
 	plugin_hook("blocks", "forum index");
 
