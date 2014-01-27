@@ -384,6 +384,7 @@ class hudsonViews extends Views {
 			echo '</table>';
 		} else {
 			echo '<p>'._('No Hudson jobs associated with this project.');
+			echo "\n";
 			if ($user->isMember($request->get('group_id'), 'A')) {
 				echo _('To add a job, select the link just below.');
 			}
