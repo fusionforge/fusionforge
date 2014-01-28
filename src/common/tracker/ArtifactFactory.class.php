@@ -457,7 +457,7 @@ class ArtifactFactory extends Error {
 				$this->artifacts[] = new Artifact($this->ArtifactType, $arr);
 			}
 		}
-		if ($sortcol == 'extra' || $sortcol != '_votes' || $sortcol != '_voters' || $sortcol != '_votage') {
+		if ($sortcol == 'extra' || $sortcol == '_votes' || $sortcol == '_voters' || $sortcol == '_votage') {
 			sortArtifactList ($this->artifacts, $this->order_col, $this->sort) ;
 		}
 		return $this->artifacts;
