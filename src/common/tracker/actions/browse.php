@@ -5,7 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 Roland Mas
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2013, Franck Villaume - TrivialDev
+ * Copyright 2012-2014, Franck Villaume - TrivialDev
  * Copyright 2011, Iñigo Martinez
  * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
  *
@@ -201,6 +201,9 @@ $order_name_arr[]=_('Last Modified Date');
 $order_name_arr[]=_('Close Date');
 $order_name_arr[]=_('Submitter');
 $order_name_arr[]=_('Assignee');
+$order_name_arr[]=_('# Votes');
+$order_name_arr[]=_('# Voters');
+$order_name_arr[]=_('% Votes');
 
 $order_arr=array();
 $order_arr[]='artifact_id';
@@ -211,6 +214,9 @@ $order_arr[]='last_modified_date';
 $order_arr[]='close_date';
 $order_arr[]='submitted_by';
 $order_arr[]='assigned_to';
+$order_arr[]='_votes';
+$order_arr[]='_voters';
+$order_arr[]='_votage';
 
 //
 //	custom sort arrays to build pop-up box

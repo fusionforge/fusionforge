@@ -7,6 +7,7 @@
  * Copyright 2009, Roland Mas
  * Copyright (C) 2009-2013 Alain Peyrat, Alcatel-Lucent
  * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
+ * Copyright 2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -1919,6 +1920,27 @@ class ArtifactComparator {
 			$a_priority = $a->getPriority() ;
 			$b_priority = $b->getPriority() ;
 			return ($a_priority < $b_priority) ? -1 : 1;
+			break;
+		case '_votes':
+			$a->getVotes();
+			$a_votes = $a->votes[0];
+			$b->getVotes();
+			$b_votes = $b->votes[0];
+			return ($a_votes < $b_votes) ? -1 : 1;
+			break;
+		case '_voters':
+			$a->getVotes();
+			$a_votes = $a->votes[1];
+			$b->getVotes();
+			$b_votes = $b->votes[1];
+			return ($a_votes < $b_votes) ? -1 : 1;
+			break;
+		case '_votage':
+			$a->getVotes();
+			$a_votes = $a->votes[2];
+			$b->getVotes();
+			$b_votes = $b->votes[2];
+			return ($a_votes < $b_votes) ? -1 : 1;
 			break;
 		default:
 			$aa=$a->getExtraFieldDataText();
