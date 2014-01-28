@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -549,6 +549,7 @@ switch (getStringFromRequest('func')) {
 			} elseif ($ah->isError()) {
 				exit_error($ah->getErrorMessage(),'tracker');
 			} else {
+				use_javascript('/js/sortable.js');
 				if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
 					include $gfcommon.'tracker/actions/mod.php';
 				} elseif (forge_check_perm ('tracker', $ath->getID(), 'tech')) {
