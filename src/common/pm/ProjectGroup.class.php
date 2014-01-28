@@ -30,7 +30,7 @@ require_once $gfcommon.'include/Error.class.php';
  *
  * @param	array   $group_project_id	whether or not the db result handle is passed in
  * @param	bool	$data
- * @return	object	the ProjectGroup object
+ * @return	ProjectGroup	the ProjectGroup object
  */
 function &projectgroup_get_object($group_project_id, $data = false) {
 	global $PROJECTGROUP_OBJ;
