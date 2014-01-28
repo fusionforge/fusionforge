@@ -49,7 +49,7 @@ function people_footer($params) {
 	$HTML->footer($params);
 }
 
-function people_skill_box($name='skill_id',$checked='xyxy') {
+function people_skill_box($name='skill_id') {
 	global $PEOPLE_SKILL;
 	if (!$PEOPLE_SKILL) {
 		//will be used many times potentially on a single page
