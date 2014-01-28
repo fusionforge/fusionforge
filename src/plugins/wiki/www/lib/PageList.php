@@ -1326,7 +1326,7 @@ class PageList
      * column will only be added the first time, and ignored the succeeding times.
      * If you wish to add multiple columns of the same type, use addColumnObject().
      *
-     * @param string column name
+     * @param string $column column name
      * @return bool true if column is added, false otherwise
      */
     function _addColumn($column)

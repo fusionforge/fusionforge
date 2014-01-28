@@ -126,11 +126,11 @@ class WikiPluginCached extends WikiPlugin
      * however. </b>
      *
      * @access protected
-     * @param  dbi       WikiDB  database abstraction class
-     * @param  argstr    string  plugin arguments in the call from PhpWiki
-     * @param  request   Request ???
-     * @param  string    basepage Pagename to use to interpret links [/relative] page names.
-     * @return string HTML output to be printed to browser
+     * @param  WikiDB  $dbi      database abstraction class
+     * @param  string  $argstr   plugin arguments in the call from PhpWiki
+     * @param  Request $request
+     * @param  string  $basepage Pagename to use to interpret links [/relative] page names.
+     * @return string            HTML output to be printed to browser
      *
      * @see #getHtml
      * @see #getImage

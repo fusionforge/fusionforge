@@ -273,15 +273,15 @@ class WikiDB
      *
      * @access public
      *
-     * @param boolean $include_empty Optional. Normally pages whose most
+     * @param bool $include_empty Optional. Normally pages whose most
      * recent revision has empty content are considered to be
      * non-existant. Unless $include_defaulted is set to true, those
      * pages will not be returned.
-     * @param string or false $sortby Optional. "+-column,+-column2".
+     * @param string $sortby Optional. "+-column,+-column2".
      *        If false the result is faster in natural order.
-     * @param string or false $limit Optional. Encoded as "$offset,$count".
+     * @param string $limit Optional. Encoded as "$offset,$count".
      *         $offset defaults to 0.
-     * @param string $exclude: Optional comma-separated list of pagenames.
+     * @param string $exclude  Optional comma-separated list of pagenames.
      *
      * @return WikiDB_PageIterator A WikiDB_PageIterator which contains all pages
      *     in the WikiDB which have non-default contents.
@@ -332,11 +332,11 @@ class WikiDB
      *
      * @access public
      * @param TextSearchQuery $search A TextSearchQuery object
-     * @param string or false $sortby Optional. "+-column,+-column2".
+     * @param string $sortby Optional. "+-column,+-column2".
      *        If false the result is faster in natural order.
-     * @param string or false $limit Optional. Encoded as "$offset,$count".
+     * @param string $limit Optional. Encoded as "$offset,$count".
      *         $offset defaults to 0.
-     * @param  string              $exclude: Optional comma-separated list of pagenames.
+     * @param  string $exclude Optional comma-separated list of pagenames.
      * @return WikiDB_PageIterator A WikiDB_PageIterator containing the matching pages.
      * @see TextSearchQuery
      */
@@ -363,11 +363,11 @@ class WikiDB
      * @access public
      *
      * @param TextSearchQuery $search A TextSearchQuery object.
-     * @param string or false $sortby Optional. "+-column,+-column2".
+     * @param string $sortby Optional. "+-column,+-column2".
      *        If false the result is faster in natural order.
-     * @param string or false $limit Optional. Encoded as "$offset,$count".
+     * @param string $limit Optional. Encoded as "$offset,$count".
      *         $offset defaults to 0.
-     * @param  string              $exclude: Optional comma-separated list of pagenames.
+     * @param  string $exclude Optional comma-separated list of pagenames.
      * @return WikiDB_PageIterator A WikiDB_PageIterator containing the matching pages.
      * @see TextSearchQuery
      */
@@ -388,10 +388,10 @@ class WikiDB
      *
      * @access public
      *
-     * @param integer $limit The maximum number of pages to return.
+     * @param int $limit The maximum number of pages to return.
      * Set $limit to zero to return all pages.  If $limit < 0, pages will
      * be sorted in decreasing order of popularity.
-     * @param string or false $sortby Optional. "+-column,+-column2".
+     * @param string $sortby Optional. "+-column,+-column2".
      *        If false the result is faster in natural order.
      *
      * @return WikiDB_PageIterator A WikiDB_PageIterator containing the matching
@@ -441,9 +441,9 @@ class WikiDB
     /**
      * @access public
      *
-     * @param string or false $sortby Optional. "+-column,+-column2".
+     * @param string $sortby Optional. "+-column,+-column2".
      *        If false the result is faster in natural order.
-     * @param string or false $limit Optional. Encoded as "$offset,$count".
+     * @param string $limit Optional. Encoded as "$offset,$count".
      *         $offset defaults to 0.
      * @return Iterator A generic iterator containing rows of
      *         (duplicate) pagename, wantedfrom.
@@ -1460,7 +1460,7 @@ class WikiDB_Page
 
     /**
      * @access private
-     * @param integer_or_object $version_or_pagerevision
+     * @param int|object $version_or_pagerevision
      * Takes either the version number (and int) or a WikiDB_PageRevision
      * object.
      * @return integer The version number.
