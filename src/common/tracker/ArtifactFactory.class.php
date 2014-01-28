@@ -4,6 +4,7 @@
  *
  * Copyright 2002, GForge, LLC
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -203,7 +204,10 @@ class ArtifactFactory extends Error {
 					   'assigned_to',
 					   'submitted_by',
 					   'priority',
-					   'last_modified_date') ;
+					   'last_modified_date',
+					   '_votes',
+					   '_voters',
+					   '_votage') ;
 		$efarr = $this->ArtifactType->getExtraFields();
 		$keys=array_keys($efarr);
 		for ($k=0; $k<count($keys); $k++) {
@@ -430,9 +434,12 @@ class ArtifactFactory extends Error {
 							    'close_date',
 							    'assigned_to',
 							    'submitted_by',
-							    'priority'));
+							    'priority',
+							    '_votage',
+							    '_voters',
+							    '_votes'));
 
-		if ($sortcol != 'extra') {
+		if ($sortcol != 'extra' && $sortcol != '_votes' && $sortcol != '_voters' && $sortcol != '_votage' ) {
 			$ordersql = " ORDER BY Artifacts.group_artifact_id $sortorder, Artifacts.$sortcol $sortorder" ;
 		} else {
 			$ordersql = ''  ;
@@ -450,7 +457,7 @@ class ArtifactFactory extends Error {
 				$this->artifacts[] = new Artifact($this->ArtifactType, $arr);
 			}
 		}
-		if ($sortcol == 'extra') {
+		if ($sortcol == 'extra' || $sortcol != '_votes' || $sortcol != '_voters' || $sortcol != '_votage') {
 			sortArtifactList ($this->artifacts, $this->order_col, $this->sort) ;
 		}
 		return $this->artifacts;
