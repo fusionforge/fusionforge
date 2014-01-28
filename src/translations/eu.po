@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-27 16:31+0100\n"
+"POT-Creation-Date: 2014-01-28 09:29+0100\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -381,7 +381,7 @@ msgstr "Fitxeroaren izena"
 #: www/pm/mod_task.php:83 www/pm/mod_task.php:97 www/pm/mod_task.php:114
 #: www/pm/mod_task.php:126 www/pm/mod_task.php:146 www/pm/mod_task.php:160
 #: www/pm/mod_task.php:173 www/pm/mod_task.php:183 www/pm/mod_task.php:197
-#: www/pm/mod_task.php:202 www/pm/mod_task.php:212 www/pm/mod_task.php:323
+#: www/pm/mod_task.php:202 www/pm/mod_task.php:212 www/pm/mod_task.php:324
 #: www/pm/task.php:354 www/project/admin/database.php:66
 #: www/project/admin/roledelete.php:62 www/register/index.php:188
 #: www/reporting/timeadd.php:70
@@ -1442,7 +1442,7 @@ msgstr ""
 #: www/people/viewjob.php:77 www/pm/browse_task.php:264
 #: www/pm/browse_task.php:274 www/pm/include/ProjectTaskHTML.class.php:122
 #: www/pm/include/ProjectTaskHTML.class.php:175
-#: www/pm/include/ProjectTaskHTML.class.php:236 www/pm/mod_task.php:312
+#: www/pm/include/ProjectTaskHTML.class.php:236 www/pm/mod_task.php:313
 #: www/project/admin/project_admin_utils.php:180
 #: www/reporting/usersummary.php:129
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:93
@@ -2187,7 +2187,7 @@ msgstr "Ezabatu"
 #: www/account/editsshkeys.php:84 www/admin/admin_table.php:54
 #: www/admin/database.php:165 www/admin/trove/trove_cat_add.php:116
 #: www/admin/trove/trove_cat_list.php:50 www/admin/trove/trove_cat_list.php:53
-#: www/pm/mod_task.php:289 www/reporting/timeadd.php:183
+#: www/pm/mod_task.php:290 www/reporting/timeadd.php:183
 #: www/reporting/timecategory.php:101
 msgid "Add"
 msgstr ""
@@ -2633,7 +2633,7 @@ msgstr "Gaia"
 #: www/admin/admin_table.php:222 www/forum/admin/index.php:414
 #: www/forum/monitor.php:65 www/my/rmproject.php:96
 #: www/people/editprofile.php:157 www/people/editprofile.php:215
-#: www/pm/mod_task.php:289 www/register/index.php:315
+#: www/pm/mod_task.php:290 www/register/index.php:315
 #: www/reporting/timeadd.php:183 www/tracker/admin/index.php:103
 #: www/tracker/admin/index.php:180
 msgid "Cancel"
@@ -5943,7 +5943,7 @@ msgstr ""
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:230
 #: plugins/scmgit/common/GitPlugin.class.php:369
 #: plugins/scmsvn/common/SVNPlugin.class.php:242 www/pm/index.php:102
-#: www/pm/mod_task.php:323 www/stats/site_stats_utils.php:265
+#: www/pm/mod_task.php:324 www/stats/site_stats_utils.php:265
 msgid "Total"
 msgstr "Orotara"
 
@@ -8177,52 +8177,52 @@ msgstr ""
 msgid "Cannot add empty RSS URL"
 msgstr ""
 
-#: common/widget/Widget_Rss.class.php:206
+#: common/widget/Widget_Rss.class.php:205
 msgid "less than 1 minute"
 msgstr ""
 
-#: common/widget/Widget_Rss.class.php:206
+#: common/widget/Widget_Rss.class.php:205
 msgid "1 minute"
 msgstr ""
 
-#: common/widget/Widget_Rss.class.php:208
+#: common/widget/Widget_Rss.class.php:207
 #, php-format
-msgid "%s minutes ago"
+msgid "%d minutes ago"
 msgstr ""
 
-#: common/widget/Widget_Rss.class.php:210
+#: common/widget/Widget_Rss.class.php:209
 msgid "About one hour"
 msgstr ""
 
-#: common/widget/Widget_Rss.class.php:212
+#: common/widget/Widget_Rss.class.php:211
 #, php-format
 msgid "about %s hours"
 msgstr ""
 
-#: common/widget/Widget_Rss.class.php:214
+#: common/widget/Widget_Rss.class.php:213
 msgid "About one day"
 msgstr ""
 
-#: common/widget/Widget_Rss.class.php:216
+#: common/widget/Widget_Rss.class.php:215
 #, php-format
 msgid "%s days ago"
 msgstr ""
 
-#: common/widget/Widget_Rss.class.php:218
+#: common/widget/Widget_Rss.class.php:217
 #, fuzzy
 msgid "About one month"
 msgstr "Azken hilabetea"
 
-#: common/widget/Widget_Rss.class.php:220
+#: common/widget/Widget_Rss.class.php:219
 #, fuzzy, php-format
 msgid "%s months ago"
 msgstr "Azken hilabetea(k)"
 
-#: common/widget/Widget_Rss.class.php:222
+#: common/widget/Widget_Rss.class.php:221
 msgid "About one year"
 msgstr ""
 
-#: common/widget/Widget_Rss.class.php:224
+#: common/widget/Widget_Rss.class.php:223
 #, php-format
 msgid "over %s years"
 msgstr ""
@@ -19866,6 +19866,11 @@ msgstr ""
 #: www/pm/admin/index.php:323 www/pm/index.php:99
 msgid "Subproject Name"
 msgstr ""
+
+#: www/pm/admin/index.php:358
+#, fuzzy
+msgid "Category Administration"
+msgstr "Foroak: administrazioa"
 
 #: www/pm/admin/index.php:372 www/pm/admin/index.php:394
 #, fuzzy
