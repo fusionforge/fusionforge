@@ -6,6 +6,7 @@
  * Copyright 2002-2004, GForge, LLC
  * Copyright 2009, Roland Mas
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -142,6 +143,12 @@ class ArtifactType extends Error {
 	var $element_status;
 
 	/**
+	 * cached return value of getVoters
+	 * @var	int|bool	$voters
+	 */
+	var $voters = false;
+
+	/**
 	 * ArtifactType - constructor.
 	 *
 	 * @param	Group		$Group			The Group object.
@@ -273,6 +280,7 @@ class ArtifactType extends Error {
 	 * @return	boolean	success.
 	 */
 	function fetchData($artifact_type_id) {
+		$this->voters = false;
 		$res = db_query_params('SELECT * FROM artifact_group_list_vw
 			WHERE group_artifact_id=$1
 			AND group_id=$2',
@@ -1059,6 +1067,38 @@ class ArtifactType extends Error {
 		return $res;
 	}
 
+	/**
+	 * canVote - check whether the current user can vote on
+	 *		items in this tracker
+	 *
+	 * @return	bool	true if they can
+	 */
+	function canVote() {
+		return forge_check_perm('tracker', $this->getID(), 'vote');
+	}
+
+	/**
+	 * getVoters - get IDs of users that may vote on
+	 *		items in this tracker
+	 *
+	 * @return	array	list of user IDs
+	 */
+	function getVoters() {
+		if ($this->voters !== false) {
+			return $this->voters;
+		}
+
+		$this->voters = array();
+		if (($engine = RBACEngine::getInstance())
+			&& ($voters = $engine->getUsersByAllowedAction('tracker', $this->getID(), 'vote'))
+			&& (count($voters) > 0)) {
+			foreach ($voters as $voter) {
+				$voter_id = $voter->getID();
+				$this->voters[$voter_id] = $voter_id;
+			}
+		}
+		return $this->voters;
+	}
 }
 
 // Local Variables:

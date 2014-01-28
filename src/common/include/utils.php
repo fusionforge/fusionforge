@@ -1791,6 +1791,18 @@ function util_sudo_effective_user($username, $function, $params=array()) {
 	return true;
 }
 
+function getselfhref($p = array(), $return_encoded = true) {
+	global $group_id, $atid, $aid, $is_add;
+	$p['group_id'] = $group_id;
+	$p['atid'] = $atid;
+	if (!$is_add) {
+		/* grml… */
+		$p['aid'] = $aid;
+		$p['artifact_id'] = $aid;
+	}
+	return util_gethref(false, $p, $return_encoded);
+}
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"

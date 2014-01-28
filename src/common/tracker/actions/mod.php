@@ -5,7 +5,8 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 (c) Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -32,6 +33,13 @@ global $group_id;
 global $group;
 global $aid;
 global $atid;
+
+function gettipspan($idpart, $content) {
+	$id = 'tracker-' . str_replace(' ', '_', $idpart);
+	return '<span id="' . $id . '" title="' .
+	html_get_tooltip_description($idpart) . '">' .
+	$content . '</span>';
+}
 
 html_use_coolfieldset();
 $ath->header(array ('title'=> $ah->getStringID().' '. $ah->getSummary(), 'atid'=>$ath->getID()));
@@ -62,6 +70,23 @@ if (session_loggedin()) {
 				echo '
 				<a id="tracker-monitor" href="index.php?group_id='.$group_id.'&amp;artifact_id='.$ah->getID().'&amp;atid='.$ath->getID().'&amp;func=monitor" title="'.util_html_secure(html_get_tooltip_description('monitor')).'"><strong>'.
 					html_image('ic/'.$img.'','20','20').' '.$text.'</strong></a>';
+				?>
+			</td>
+			<td><?php
+					$votes = $ah->getVotes();
+					echo '<span id="tracker-votes" title="'.html_get_tooltip_description('votes').'" >'.html_e('strong', array(), _('Votes') . _(': ')).sprintf('%1$d/%2$d (%3$d%%)', $votes[0], $votes[1], $votes[2]).'</span>';
+
+					if ($ath->canVote()) {
+						if ($ah->hasVote()) {
+							$key = 'pointer_down';
+							$txt = _('Retract Vote');
+						} else {
+							$key = 'pointer_up';
+							$txt = _('Cast Vote');
+						}
+						echo '<a id="tracker-vote" alt="'.$txt.'" title="'.html_get_tooltip_description('vote').'" href="'.getselfhref(array('func' => $key)) . '">' .
+							html_image('ic/' . $key . '.png', '16', '16', array('border' => '0')) . '</a>';
+					}
 				?>
 			</td>
 			<td><?php
@@ -131,11 +156,14 @@ echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 		<td>
 		</td>
 	</tr>
-
+	<tr>
+		<td>
 	<?php
 		$ath->renderExtraFields($ah->getExtraFieldData(),true,'none',false,'Any',array(),false,'UPDATE');
 	?>
-
+		</td>
+		<td></td>
+	</tr>
 	<tr>
 		<td><strong><?php echo _('Assigned to')._(': ') ?></strong><br />
 		<?php

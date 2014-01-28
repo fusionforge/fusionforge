@@ -66,7 +66,10 @@ if ($headers) {
 		'close_date'.$sep.
 		'last_modified_date'.$sep.
 		'summary'.$sep.
-		'details';
+		'details'.$sep.
+		'_votes'.$sep.
+		'_voters'.$sep.
+		'_votage';
 
 	//
 	//	Show the extra fields
@@ -85,6 +88,7 @@ for ($i=0; $i<count($at_arr); $i++) {
 	$update_date = $at_arr[$i]->getLastModifiedDate() ? date(_('Y-m-d H:i'),$at_arr[$i]->getLastModifiedDate()) : '';
 	$close_date  = $at_arr[$i]->getCloseDate()? date(_('Y-m-d H:i'),$at_arr[$i]->getCloseDate()): '';
 
+	$at_arr[$i]->getVotes();
 	echo $at_arr[$i]->getID().$sep.
 		$at_arr[$i]->getStatusID().$sep.
 		'"'.$at_arr[$i]->getStatusName().'"'.$sep.
@@ -97,7 +101,10 @@ for ($i=0; $i<count($at_arr); $i++) {
 		'"'.$close_date.'"'.$sep.
 		'"'.$update_date.'"'.$sep.
 		'"'.fix4csv($at_arr[$i]->getSummary()).'"'.$sep.
-		'"'.fix4csv($at_arr[$i]->getDetails()).'"';
+		'"'.fix4csv($at_arr[$i]->getDetails()).'"'.$sep.
+		$votes[0].$sep.
+		$votes[1].$sep.
+		$votes[2];
 
 	//
 	//	Show the extra fields

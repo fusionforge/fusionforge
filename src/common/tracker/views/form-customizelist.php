@@ -4,6 +4,7 @@
  *
  * Copyright 2010, FusionForge Team
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -43,7 +44,10 @@ $fields = array (
 	'close_date' => _('Close Date'),
 	'details' => _('Detailed description'),
 	'related_tasks' => _('Related Tasks'),
-	'last_modified_date' => _('Last Modified Date')
+	'last_modified_date' => _('Last Modified Date'),
+	'_votes' => _('# Votes'),
+	'_voters' => _('# Voters'),
+	'_votage' => _('% Votes')
 );
 
 if(count($ath->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_STATUS))) > 0) {

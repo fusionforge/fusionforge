@@ -6,7 +6,7 @@
  * Copyright 2010 (c) FusionForge Team
  * Copyright (C) 2010-2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2011-2013, Franck Villaume - TrivialDev
+ * Copyright 2011-2014, Franck Villaume - TrivialDev
  * Copyright © 2011, 2012
  *	Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
  *
@@ -423,6 +423,10 @@ function html_get_tooltip_description($element_name) {
 			return _('You can monitor or un-monitor this item by clicking the “Monitor” button.')
 				.' <br /><br />'
 				._('<strong>Note!</strong> this will send you additional email. If you add comments to this item, or submitted, or are assigned this item, you will also get emails for those reasons as well!');
+		case 'vote':
+			return _('You can cast your vote for a Tracker Item to aid Project Management to decide which features to prioritise, and retract votes at any time. Please use this functionality sparingly, as it loses its meaning if you vote on *every* item.');
+		case 'votes':
+			return _('This metric displays the number of people who can *currently* vote for features in this tracker, and how many of them did so. (This means historic votes of people no longer allowed to vote, while not lost, do not play into the numbers displayed.)');
 		default:
 			return '';
 	}

@@ -4,7 +4,8 @@
  *
  * Copyright 2004, GForge, LLC
  * Copyright 2009-2010, Roland Mas
- * Copyright 2012-2013, Franck Villaume - TrivialDev
+ * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
  * Copyright 2013, French Ministry of National Education
  * http://fusionforge.org
  *
@@ -68,11 +69,11 @@ abstract class BaseRole extends Error {
 			'pm_admin' => array(0, 1),
 			'forum_admin' => array(0, 1),
 
-			'tracker' => array(0, 1, 9, 11, 13, 15),
+			'tracker' => array(0, 1, 9, 11, 13, 15, 17, 19, 21, 23),
 			'pm' => array(0, 1, 3, 5, 7),
 			'forum' => array(0, 1, 2, 3, 4),
 
-			'new_tracker' => array(0, 1, 9, 11, 13, 15),
+			'new_tracker' => array(0, 1, 9, 11, 13, 15, 17, 19, 21, 23),
 			'new_pm' => array(0, 1, 3, 5, 7),
 			'new_forum' => array(0, 1, 2, 3, 4),
 
@@ -707,10 +708,9 @@ abstract class BaseRole extends Error {
 			case 'submit':
 				return (($value & 8) != 0) ;
 				break ;
-			/*
-			 * bit4 (value & 16) is reserved
-			 * for tracker item vote from Evolvis
-			 */
+			case 'vote':
+				return (($value & 16) != 0);
+				break;
 			}
 			break ;
 
@@ -1092,6 +1092,19 @@ class RoleAnonymous extends BaseRole implements PFO_RoleAnonymous {
 
 		$c = __CLASS__ ;
 		self::$_instance = new $c ;
+
+		 /* drop vote rights from RoleAnonymous */
+		 // why ?????
+		foreach (array('tracker', 'new_tracker') as $x) {
+			$y = array();
+			foreach (self::$_instance->role_values[$x] as $z) {
+				if (($z & 16) != 0) {
+					continue;
+				}
+				$y[] = $z;
+			}
+			self::$_instance->role_values[$x] = $y;
+		}
 
 		$res = db_query_params ('SELECT r.role_id FROM pfo_role r, pfo_role_class c WHERE r.role_class = c.class_id AND c.class_name = $1',
 					array ('PFO_RoleAnonymous')) ;
