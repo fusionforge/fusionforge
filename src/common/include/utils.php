@@ -679,7 +679,7 @@ function GraphIt($name_string, $value_string, $title) {
  * ShowResultSet - Show a generic result set
  * Very simple, plain way to show a generic result set
  *
- * @param	int	$result			The result set ID
+ * @param	resource	$result			The result set ID
  * @param	string	$title			The title of the result set
  * @param	bool	$linkify		The option to turn URL's into links
  * @param	bool	$displayHeaders		The option to display headers
@@ -1110,7 +1110,7 @@ function util_make_base_url($prefix = '') {
  * @return	string	URL
  */
 function util_make_url($path = '', $prefix = '') {
-	$url = util_make_base_url($prefix).util_make_uri($path) ;
+	$url = util_make_base_url($prefix).util_make_uri($path);
 	return $url;
 }
 
