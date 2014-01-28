@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-28 13:53+0100\n"
+"POT-Creation-Date: 2014-01-28 15:16+0100\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -5276,8 +5276,9 @@ msgstr "Texto de formulario libre para a páxina de \"navegar polos elementos\""
 #: www/forum/admin/index.php:413 www/include/vote_function.php:286
 #: www/my/bookmark_add.php:63 www/my/bookmark_edit.php:69 www/my/diary.php:191
 #: www/news/admin/index.php:149 www/news/news_utils.php:42
-#: www/news/submit.php:170 www/pm/add_task.php:57 www/pm/add_task.php:140
-#: www/pm/add_task.php:154 www/pm/admin/index.php:219
+#: www/news/submit.php:170 www/people/admin/index.php:104
+#: www/people/admin/index.php:138 www/pm/add_task.php:57
+#: www/pm/add_task.php:140 www/pm/add_task.php:154 www/pm/admin/index.php:219
 #: www/pm/admin/index.php:264 www/pm/admin/index.php:295 www/pm/csv.php:90
 #: www/pm/deletetask.php:51 www/pm/mod_task.php:54 www/pm/mod_task.php:254
 #: www/project/admin/editimages.php:235 www/project/admin/roledelete.php:93
@@ -19470,6 +19471,11 @@ msgstr "Non se atoparon novas"
 #, fuzzy
 msgid "New Skill Name"
 msgstr "Nome do novo paquete "
+
+#: www/people/admin/index.php:136
+#, fuzzy
+msgid "Once you add a skill, it cannot be deleted"
+msgstr "Unha vez engadida a categoría, non se poderá eliminar"
 
 #: www/people/admin/index.php:149
 #, fuzzy

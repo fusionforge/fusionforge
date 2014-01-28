@@ -101,7 +101,7 @@ if (forge_check_global_perm('forge_admin')) {
 		</p>
 		<p class="warning"><?php echo _('Once you add a category, it cannot be deleted') ?></p>
 		<p>
-		<input type="submit" name="submit" value="submit"></p>
+		<input type="submit" name="submit" value="<?php echo _('Submit') ?>"></p>
 		</form>
 		<?php
 
@@ -133,9 +133,9 @@ if (forge_check_global_perm('forge_admin')) {
 		<strong><?php echo _('New Skill Name')._(':'); ?></strong>
 		<input type="text" name="skill_name" value="" size="15" maxlength="30" />
 		</p>
-		<p class="warning">Once you add a skill, it cannot be deleted</p>
+		<p class="warning"><?php echo _('Once you add a skill, it cannot be deleted') ?></p>
 		<p>
-		<input type="submit" name="submit" value="SUBMIT"></p>
+		<input type="submit" name="submit" value="<?php echo _('Submit') ?>"></p>
 		</form>
 		<?php
 
