@@ -222,7 +222,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		$classth[] = 'unsortable';
 	}
 	echo '<div class="docmanDiv">';
-	echo $HTML->listTableTop($tabletop, false, 'sortable_docman_listfile', 'sortable', $classth);
+	echo $HTML->listTableTop($tabletop, array(), 'sortable_docman_listfile', 'sortable', $classth);
 	$time_new = 604800;
 	foreach ($nested_docs[$dirid] as $d) {
 		echo '<tr>';

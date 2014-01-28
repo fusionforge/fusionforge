@@ -27,8 +27,8 @@
  * reports_quick_graph() - Show a quick graph of data.
  *
  * @param	string	$title		Graph title
- * @param	int	$qpa1		First query resource ID
- * @param	int	$qpa2		Second query resource ID
+ * @param	array	$qpa1		First query resource ID
+ * @param	array	$qpa2		Second query resource ID
  * @param	string	$bar_colors	The bar colors
  */
 function reports_quick_graph($title, $qpa1, $qpa2, $bar_colors) {

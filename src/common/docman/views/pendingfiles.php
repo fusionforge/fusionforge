@@ -62,7 +62,7 @@ jQuery(document).ready(function() {
 		echo '<h4>'._('Pending files').'</h4>';
 		$tabletop = array('<input id="checkallpending" type="checkbox" onchange="controllerListPending.checkAll(\'checkeddocidpending\', \'pending\')" />', '', _('File Name'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'), _('Actions'));
 		$classth = array('unsortable', 'unsortable', '', '', '', '', '', '', '', 'unsortable');
-		echo $HTML->listTableTop($tabletop, false, 'sortable_docman_listfile', 'sortable', $classth);
+		echo $HTML->listTableTop($tabletop, array(), 'sortable_docman_listfile', 'sortable', $classth);
 		$time_new = 604800;
 		foreach ($nested_pending_docs[$dirid] as $d) {
 			echo '<tr>';

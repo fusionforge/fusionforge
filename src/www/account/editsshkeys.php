@@ -50,7 +50,7 @@ if (count($sshKeysArray)) {
 	echo $HTML->boxTop(_('Available keys'));
 	$tabletop = array(_('Name'), _('Algorithm'), _('Fingerprint'), _('Uploaded'), _('Ready ?'), _('Actions'));
 	$classth = array('', '', '', '', '', '', 'unsortable');
-	echo $HTML->listTableTop($tabletop, false, 'sortable_sshkeys_listlinks', 'sortable', $classth);
+	echo $HTML->listTableTop($tabletop, array(), 'sortable_sshkeys_listlinks', 'sortable', $classth);
 	foreach($sshKeysArray as $sshKey) {
 		echo '<tr>';
 		echo '<td>'.$sshKey['name'].'</td>';
