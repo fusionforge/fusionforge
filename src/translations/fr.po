@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-28 13:53+0100\n"
+"POT-Creation-Date: 2014-01-28 14:10+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -10306,9 +10306,8 @@ msgid "Hudson/Jenkins"
 msgstr ""
 
 #: plugins/hudson/include/hudsonPlugin.class.php:82
-#, fuzzy
 msgid "Continuous Integration Scheduler"
-msgstr "Intégration continue"
+msgstr "Ordonnanceur d'intégration continue"
 
 #: plugins/hudson/include/hudsonPlugin.class.php:233
 msgid "Hudson Build"
@@ -14121,8 +14120,9 @@ msgid ""
 "Changing your email address will require confirmation from your new email "
 "address, so that we can ensure we have a good email address on file."
 msgstr ""
-"Le changement d'adresse e-mail requiert une confirmation de votre nouvelle "
-"adresse, de manière à assurer que l'adresse enregistrée est correcte."
+"Le changement d'adresse électronique requiert une confirmation de votre "
+"nouvelle adresse, de manière à assurer que l'adresse enregistrée est "
+"correcte."
 
 #: www/account/change_email.php:79
 msgid ""
@@ -14141,7 +14141,7 @@ msgid ""
 "Submitting the form below will mail a confirmation URL to the new email "
 "address. Visiting this link will complete the email change."
 msgstr ""
-"La validation du formulaire ci-dessous enverra un e-mail à la nouvelle "
+"La validation du formulaire ci-dessous enverra un courriel à la nouvelle "
 "adresse, avec un lien de confirmation. Il faudra visiter ce lien pour mener "
 "à bien le changement d'adresse."
 
@@ -14624,8 +14624,8 @@ msgid ""
 "Visiting the link sent in this email will activate the account."
 msgstr ""
 "Vous allez recevoir un courrier électronique de confirmation pour vérifier "
-"votre adresse e-mail. Suivez le lien qui vous a été envoyé pour activer "
-"votre compte."
+"votre adresse électronique. Suivez le lien qui vous a été envoyé pour "
+"activer votre compte."
 
 #: www/account/register.php:121
 #, php-format
@@ -17227,9 +17227,8 @@ msgid "Recently Registered Projects"
 msgstr "Derniers projets enregistrés"
 
 #: www/include/features_boxes.php:57
-#, fuzzy
 msgid "System Information"
-msgstr "Autres informations"
+msgstr "Informations système"
 
 #: www/include/features_boxes.php:59
 #, php-format
@@ -18730,9 +18729,8 @@ msgid "Skill Inserted"
 msgstr "Compétence ajoutée"
 
 #: www/people/admin/index.php:80
-#, fuzzy
 msgid "Add/Change Categories"
-msgstr "Ajouter/Éditer catégories"
+msgstr "Ajouter/modifier les catégories"
 
 #: www/people/admin/index.php:90
 #, fuzzy
@@ -18740,9 +18738,8 @@ msgid "No job categories"
 msgstr "Aucune catégorie"
 
 #: www/people/admin/index.php:99
-#, fuzzy
 msgid "New Category Name"
-msgstr "Nom de catégorie"
+msgstr "Nom de la nouvelle catégorie"
 
 #: www/people/admin/index.php:102 www/pm/admin/index.php:218
 msgid "Once you add a category, it cannot be deleted"
