@@ -77,7 +77,7 @@ if (forge_check_global_perm('forge_admin')) {
 		/*
 			Show categories and blank row
 		*/
-		people_header(array ('title'=>'Add/Change Categories'));
+		people_header(array ('title'=>_('Add/Change Categories')));
 
 		/*
 			List of possible categories for this group
@@ -99,9 +99,9 @@ if (forge_check_global_perm('forge_admin')) {
 		<strong><?php echo _('New Category Name')._(':'); ?></strong>
 		<input type="text" name="cat_name" value="" size="15" maxlength="30" />
 		</p>
-		<p class="warning">Once you add a category, it cannot be deleted</p>
+		<p class="warning"><?php echo _('Once you add a category, it cannot be deleted') ?></p>
 		<p>
-		<input type="submit" name="submit" value="SUBMIT"></p>
+		<input type="submit" name="submit" value="submit"></p>
 		</form>
 		<?php
 
