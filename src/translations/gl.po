@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-28 09:29+0100\n"
+"POT-Creation-Date: 2014-01-28 13:53+0100\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -19438,6 +19438,11 @@ msgstr "Categoría inserida"
 msgid "Skill Inserted"
 msgstr "Inseriuse a enquisa"
 
+#: www/people/admin/index.php:80
+#, fuzzy
+msgid "Add/Change Categories"
+msgstr "Engadir/editar categorías"
+
 #: www/people/admin/index.php:90
 #, fuzzy
 msgid "No job categories"
@@ -19447,6 +19452,10 @@ msgstr "Engadir categorías"
 #, fuzzy
 msgid "New Category Name"
 msgstr "Nome da categoría"
+
+#: www/people/admin/index.php:102 www/pm/admin/index.php:218
+msgid "Once you add a category, it cannot be deleted"
+msgstr "Unha vez engadida a categoría, non se poderá eliminar"
 
 #: www/people/admin/index.php:114
 msgid "Add/Change People Skills"
@@ -20017,10 +20026,6 @@ msgstr "Non se definiron categorías"
 #: www/reporting/timecategory.php:70 www/reporting/timecategory.php:90
 msgid "Category Name"
 msgstr "Nome da categoría"
-
-#: www/pm/admin/index.php:218
-msgid "Once you add a category, it cannot be deleted"
-msgstr "Unha vez engadida a categoría, non se poderá eliminar"
 
 #: www/pm/admin/index.php:243
 #, fuzzy, php-format
@@ -24311,9 +24316,6 @@ msgstr "Non se introduciu un nome de usuario"
 #~ msgstr ""
 #~ "Actualizouse o estado de Unix mentres se facía réplica do estado do web; "
 #~ "a non ser que teña o valor 'Non ten conta de unix (N)' "
-
-#~ msgid "Add/Edit Categories"
-#~ msgstr "Engadir/editar categorías"
 
 #~ msgid "Permanently delete this subproject and all its data."
 #~ msgstr "Eliminar permanentemente este subproxecto e todos os seus datos."

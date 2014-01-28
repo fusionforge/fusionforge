@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-28 09:29+0100\n"
+"POT-Creation-Date: 2014-01-28 13:53+0100\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -19225,6 +19225,11 @@ msgstr "Sartutako kategoria"
 msgid "Skill Inserted"
 msgstr "Inkesta ezarria"
 
+#: www/people/admin/index.php:80
+#, fuzzy
+msgid "Add/Change Categories"
+msgstr "Kategoriak gehitu/argitaratu"
+
 #: www/people/admin/index.php:90
 #, fuzzy
 msgid "No job categories"
@@ -19234,6 +19239,10 @@ msgstr "Kategoriak gehitu"
 #, fuzzy
 msgid "New Category Name"
 msgstr "Kategoriaren izena"
+
+#: www/people/admin/index.php:102 www/pm/admin/index.php:218
+msgid "Once you add a category, it cannot be deleted"
+msgstr "Kategoria bat sortzen baduzu ezin izango duzu ezabatu"
 
 #: www/people/admin/index.php:114
 msgid "Add/Change People Skills"
@@ -19798,10 +19807,6 @@ msgstr "Zehaztugabeko kategoriak"
 #: www/reporting/timecategory.php:70 www/reporting/timecategory.php:90
 msgid "Category Name"
 msgstr "Kategoriaren izena"
-
-#: www/pm/admin/index.php:218
-msgid "Once you add a category, it cannot be deleted"
-msgstr "Kategoria bat sortzen baduzu ezin izango duzu ezabatu"
 
 #: www/pm/admin/index.php:243
 #, fuzzy, php-format
@@ -23849,9 +23854,6 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #~ msgstr ""
 #~ "Unix egoera eguneratua webgunea isladatzen (\"mirroring\") zen bitartean, "
 #~ "bestela ondorengo balio du 'Ez du unix (N) konturik'"
-
-#~ msgid "Add/Edit Categories"
-#~ msgstr "Kategoriak gehitu/argitaratu"
 
 #~ msgid ""
 #~ "You can set the status to 'Pending' if you are waiting for a response "

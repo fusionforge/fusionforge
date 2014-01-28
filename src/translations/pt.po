@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-28 09:29+0100\n"
+"POT-Creation-Date: 2014-01-28 13:53+0100\n"
 "PO-Revision-Date: 2009-02-01 14:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -18002,6 +18002,11 @@ msgstr "Categoria Inserida"
 msgid "Skill Inserted"
 msgstr ""
 
+#: www/people/admin/index.php:80
+#, fuzzy
+msgid "Add/Change Categories"
+msgstr "Adicionar/Editar Categorias"
+
 #: www/people/admin/index.php:90
 #, fuzzy
 msgid "No job categories"
@@ -18011,6 +18016,10 @@ msgstr "Nenhuma categoria definida"
 #, fuzzy
 msgid "New Category Name"
 msgstr "Nome da Categoria"
+
+#: www/people/admin/index.php:102 www/pm/admin/index.php:218
+msgid "Once you add a category, it cannot be deleted"
+msgstr "Uma vez adicionada uma categoria, ela não pode ser apagada"
 
 #: www/people/admin/index.php:114
 msgid "Add/Change People Skills"
@@ -18555,10 +18564,6 @@ msgstr "Nenhuma categoria definida"
 #: www/reporting/timecategory.php:70 www/reporting/timecategory.php:90
 msgid "Category Name"
 msgstr "Nome da Categoria"
-
-#: www/pm/admin/index.php:218
-msgid "Once you add a category, it cannot be deleted"
-msgstr "Uma vez adicionada uma categoria, ela não pode ser apagada"
 
 #: www/pm/admin/index.php:243
 #, php-format
@@ -22169,9 +22174,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Estado do Unix atualizado espelhando o estado da web, a menos que tenha o "
 #~ "valor 'Sem conta unix (N)'"
-
-#~ msgid "Add/Edit Categories"
-#~ msgstr "Adicionar/Editar Categorias"
 
 #~ msgid ""
 #~ "You can set the status to 'Pending' if you are waiting for a response "

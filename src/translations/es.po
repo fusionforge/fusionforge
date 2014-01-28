@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-28 09:29+0100\n"
+"POT-Creation-Date: 2014-01-28 13:53+0100\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -18820,6 +18820,11 @@ msgstr "Categoria Insertada"
 msgid "Skill Inserted"
 msgstr "Habilidad insertada"
 
+#: www/people/admin/index.php:80
+#, fuzzy
+msgid "Add/Change Categories"
+msgstr "Añadir/Editar Categorias"
+
 #: www/people/admin/index.php:90
 #, fuzzy
 msgid "No job categories"
@@ -18829,6 +18834,10 @@ msgstr "No hay Categorias"
 #, fuzzy
 msgid "New Category Name"
 msgstr "Nombre de Categoría"
+
+#: www/people/admin/index.php:102 www/pm/admin/index.php:218
+msgid "Once you add a category, it cannot be deleted"
+msgstr "Si añade una categoria no podrá borrarla"
 
 #: www/people/admin/index.php:114
 msgid "Add/Change People Skills"
@@ -19398,10 +19407,6 @@ msgstr "Sin categorias definidas"
 #: www/reporting/timecategory.php:70 www/reporting/timecategory.php:90
 msgid "Category Name"
 msgstr "Nombre de Categoría"
-
-#: www/pm/admin/index.php:218
-msgid "Once you add a category, it cannot be deleted"
-msgstr "Si añade una categoria no podrá borrarla"
 
 #: www/pm/admin/index.php:243
 #, php-format
@@ -23641,9 +23646,6 @@ msgstr "No ha proporcionado el nombre de usuario"
 #~ "Una vez que tus recortes han sido publicados, puedes crear un \"Paquete\" "
 #~ "de recortes. El paquete puede contener varias, versiones específicas de "
 #~ "otros recortes."
-
-#~ msgid "Add/Edit Categories"
-#~ msgstr "Añadir/Editar Categorias"
 
 #~ msgid "Permanently delete this subproject and all its data."
 #~ msgstr "Borrar permanentemente este subproyecto y todos sus datos."

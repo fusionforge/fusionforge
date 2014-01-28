@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-28 09:29+0100\n"
+"POT-Creation-Date: 2014-01-28 13:53+0100\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -18796,6 +18796,11 @@ msgstr ""
 msgid "Skill Inserted"
 msgstr ""
 
+#: www/people/admin/index.php:80
+#, fuzzy
+msgid "Add/Change Categories"
+msgstr "분류 더하기/고치기"
+
 #: www/people/admin/index.php:90
 #, fuzzy
 msgid "No job categories"
@@ -18805,6 +18810,10 @@ msgstr "분류가 정의되어 있지 않음"
 #, fuzzy
 msgid "New Category Name"
 msgstr "분류 이름"
+
+#: www/people/admin/index.php:102 www/pm/admin/index.php:218
+msgid "Once you add a category, it cannot be deleted"
+msgstr "분류를 한 번 만들면 지울 수 없습니다"
 
 #: www/people/admin/index.php:114
 msgid "Add/Change People Skills"
@@ -19356,10 +19365,6 @@ msgstr "분류가 정의되어 있지 않음"
 #: www/reporting/timecategory.php:70 www/reporting/timecategory.php:90
 msgid "Category Name"
 msgstr "분류 이름"
-
-#: www/pm/admin/index.php:218
-msgid "Once you add a category, it cannot be deleted"
-msgstr "분류를 한 번 만들면 지울 수 없습니다"
 
 #: www/pm/admin/index.php:243
 #, php-format
@@ -23211,9 +23216,6 @@ msgstr "사용자ID"
 #, fuzzy
 #~ msgid "Project full name"
 #~ msgstr "새 프로젝트 이름"
-
-#~ msgid "Add/Edit Categories"
-#~ msgstr "분류 더하기/고치기"
 
 #~ msgid ""
 #~ "You can set the status to 'Pending' if you are waiting for a response "

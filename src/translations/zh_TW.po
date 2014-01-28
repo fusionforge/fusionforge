@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-28 09:29+0100\n"
+"POT-Creation-Date: 2014-01-28 13:53+0100\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -19220,6 +19220,11 @@ msgstr "分類已新增"
 msgid "Skill Inserted"
 msgstr "問卷新增了"
 
+#: www/people/admin/index.php:80
+#, fuzzy
+msgid "Add/Change Categories"
+msgstr "增加/編輯分類"
+
 #: www/people/admin/index.php:90
 #, fuzzy
 msgid "No job categories"
@@ -19229,6 +19234,10 @@ msgstr "增加分類"
 #, fuzzy
 msgid "New Category Name"
 msgstr "類別名稱"
+
+#: www/people/admin/index.php:102 www/pm/admin/index.php:218
+msgid "Once you add a category, it cannot be deleted"
+msgstr "只要您新增一個分類，它就無法被刪除"
 
 #: www/people/admin/index.php:114
 msgid "Add/Change People Skills"
@@ -19790,10 +19799,6 @@ msgstr "沒有定義分類"
 #: www/reporting/timecategory.php:70 www/reporting/timecategory.php:90
 msgid "Category Name"
 msgstr "類別名稱"
-
-#: www/pm/admin/index.php:218
-msgid "Once you add a category, it cannot be deleted"
-msgstr "只要您新增一個分類，它就無法被刪除"
 
 #: www/pm/admin/index.php:243
 #, fuzzy, php-format
@@ -23873,9 +23878,6 @@ msgstr "帳號"
 #~ "account (N)'"
 #~ msgstr ""
 #~ "Unix帳號狀態更新反映自網站的狀態，除非它的設定值是'沒有Unix帳號 (N)'。"
-
-#~ msgid "Add/Edit Categories"
-#~ msgstr "增加/編輯分類"
 
 #~ msgid "Permanently delete this subproject and all its data."
 #~ msgstr "永久地刪除子專案與它的全部資料"

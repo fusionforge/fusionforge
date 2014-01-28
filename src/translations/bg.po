@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-28 09:29+0100\n"
+"POT-Creation-Date: 2014-01-28 13:53+0100\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -18682,6 +18682,11 @@ msgstr ""
 msgid "Skill Inserted"
 msgstr "Дневникът е обновен"
 
+#: www/people/admin/index.php:80
+#, fuzzy
+msgid "Add/Change Categories"
+msgstr "Последно издадени пакети"
+
 #: www/people/admin/index.php:90
 #, fuzzy
 msgid "No job categories"
@@ -18691,6 +18696,10 @@ msgstr "Няма намерени категории"
 #, fuzzy
 msgid "New Category Name"
 msgstr "Категория"
+
+#: www/people/admin/index.php:102 www/pm/admin/index.php:218
+msgid "Once you add a category, it cannot be deleted"
+msgstr ""
 
 #: www/people/admin/index.php:114
 msgid "Add/Change People Skills"
@@ -19248,10 +19257,6 @@ msgstr ""
 #: www/pm/admin/index.php:214 www/pm/admin/index.php:260
 #: www/reporting/timecategory.php:70 www/reporting/timecategory.php:90
 msgid "Category Name"
-msgstr ""
-
-#: www/pm/admin/index.php:218
-msgid "Once you add a category, it cannot be deleted"
 msgstr ""
 
 #: www/pm/admin/index.php:243

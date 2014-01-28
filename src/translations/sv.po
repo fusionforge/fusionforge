@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-28 09:29+0100\n"
+"POT-Creation-Date: 2014-01-28 13:53+0100\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -18992,6 +18992,11 @@ msgstr "Kategori infogad"
 msgid "Skill Inserted"
 msgstr "Undersökning infogad"
 
+#: www/people/admin/index.php:80
+#, fuzzy
+msgid "Add/Change Categories"
+msgstr "Lägg till/Redigera kategorier"
+
 #: www/people/admin/index.php:90
 #, fuzzy
 msgid "No job categories"
@@ -19001,6 +19006,10 @@ msgstr "Lägg till kategorier"
 #, fuzzy
 msgid "New Category Name"
 msgstr "Kategorinamn"
+
+#: www/people/admin/index.php:102 www/pm/admin/index.php:218
+msgid "Once you add a category, it cannot be deleted"
+msgstr "När du lagt till en kategori, så kan den inte tas bort"
 
 #: www/people/admin/index.php:114
 msgid "Add/Change People Skills"
@@ -19563,10 +19572,6 @@ msgstr "Inga kategorier definierade"
 #: www/reporting/timecategory.php:70 www/reporting/timecategory.php:90
 msgid "Category Name"
 msgstr "Kategorinamn"
-
-#: www/pm/admin/index.php:218
-msgid "Once you add a category, it cannot be deleted"
-msgstr "När du lagt till en kategori, så kan den inte tas bort"
 
 #: www/pm/admin/index.php:243
 #, fuzzy, php-format
@@ -23608,9 +23613,6 @@ msgstr "Användarenamn"
 #~ msgstr ""
 #~ "Unixstatus uppdaterad, speglar webbstatus om det inte har värdet 'Inget "
 #~ "unixkonto (N)'"
-
-#~ msgid "Add/Edit Categories"
-#~ msgstr "Lägg till/Redigera kategorier"
 
 #~ msgid ""
 #~ "You can set the status to 'Pending' if you are waiting for a response "

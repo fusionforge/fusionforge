@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-28 09:29+0100\n"
+"POT-Creation-Date: 2014-01-28 13:53+0100\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -19281,6 +19281,11 @@ msgstr "Categoria inserida"
 msgid "Skill Inserted"
 msgstr "Enquesta inserida"
 
+#: www/people/admin/index.php:80
+#, fuzzy
+msgid "Add/Change Categories"
+msgstr "Afegeix/edita categories"
+
 #: www/people/admin/index.php:90
 #, fuzzy
 msgid "No job categories"
@@ -19290,6 +19295,10 @@ msgstr "Afegeix categories"
 #, fuzzy
 msgid "New Category Name"
 msgstr "Nom de la categoria"
+
+#: www/people/admin/index.php:102 www/pm/admin/index.php:218
+msgid "Once you add a category, it cannot be deleted"
+msgstr "Un cop heu afegit una categoria, no es pot suprimir"
 
 #: www/people/admin/index.php:114
 msgid "Add/Change People Skills"
@@ -19861,10 +19870,6 @@ msgstr "No hi ha definides categories"
 #: www/reporting/timecategory.php:70 www/reporting/timecategory.php:90
 msgid "Category Name"
 msgstr "Nom de la categoria"
-
-#: www/pm/admin/index.php:218
-msgid "Once you add a category, it cannot be deleted"
-msgstr "Un cop heu afegit una categoria, no es pot suprimir"
 
 #: www/pm/admin/index.php:243
 #, fuzzy, php-format
@@ -23955,9 +23960,6 @@ msgstr "Nom d'usuari"
 #, fuzzy
 #~ msgid "Project full name"
 #~ msgstr "Nom del nou projecte"
-
-#~ msgid "Add/Edit Categories"
-#~ msgstr "Afegeix/edita categories"
 
 #~ msgid "Permanently delete this subproject and all its data."
 #~ msgstr "Suprimeix permanentment aquest subprojecte i totes les seves dades."

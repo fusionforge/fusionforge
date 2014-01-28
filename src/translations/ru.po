@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-28 09:29+0100\n"
+"POT-Creation-Date: 2014-01-28 13:53+0100\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -19533,6 +19533,11 @@ msgstr "Категория вставлена"
 msgid "Skill Inserted"
 msgstr "Опрос вставлен"
 
+#: www/people/admin/index.php:80
+#, fuzzy
+msgid "Add/Change Categories"
+msgstr "Добавить/изменить категории"
+
 #: www/people/admin/index.php:90
 #, fuzzy
 msgid "No job categories"
@@ -19542,6 +19547,10 @@ msgstr "Добавить категории"
 #, fuzzy
 msgid "New Category Name"
 msgstr "Имя категории"
+
+#: www/people/admin/index.php:102 www/pm/admin/index.php:218
+msgid "Once you add a category, it cannot be deleted"
+msgstr "Добавленная категория неможет быть удалена в последствии"
 
 #: www/people/admin/index.php:114
 msgid "Add/Change People Skills"
@@ -20110,10 +20119,6 @@ msgstr "Категории неуказаны"
 #: www/reporting/timecategory.php:70 www/reporting/timecategory.php:90
 msgid "Category Name"
 msgstr "Имя категории"
-
-#: www/pm/admin/index.php:218
-msgid "Once you add a category, it cannot be deleted"
-msgstr "Добавленная категория неможет быть удалена в последствии"
 
 #: www/pm/admin/index.php:243
 #, fuzzy, php-format
@@ -24365,9 +24370,6 @@ msgstr "Имя участника обязательно"
 #~ "Эти страницы только для прямого изменения свойств пользовательского "
 #~ "объекта. Для изменения свойств соответствующего пользователю специфичной "
 #~ "группы, следуйте на страницу управления той группы"
-
-#~ msgid "Add/Edit Categories"
-#~ msgstr "Добавить/изменить категории"
 
 #~ msgid "Permanently delete this subproject and all its data."
 #~ msgstr "Полностью удалить этот подпроект и все его данные"

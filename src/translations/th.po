@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-28 09:29+0100\n"
+"POT-Creation-Date: 2014-01-28 13:53+0100\n"
 "PO-Revision-Date: 2013-06-03 17:16+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -17720,12 +17720,20 @@ msgstr ""
 msgid "Skill Inserted"
 msgstr ""
 
+#: www/people/admin/index.php:80
+msgid "Add/Change Categories"
+msgstr ""
+
 #: www/people/admin/index.php:90
 msgid "No job categories"
 msgstr ""
 
 #: www/people/admin/index.php:99
 msgid "New Category Name"
+msgstr ""
+
+#: www/people/admin/index.php:102 www/pm/admin/index.php:218
+msgid "Once you add a category, it cannot be deleted"
 msgstr ""
 
 #: www/people/admin/index.php:114
@@ -18251,10 +18259,6 @@ msgstr ""
 #: www/pm/admin/index.php:214 www/pm/admin/index.php:260
 #: www/reporting/timecategory.php:70 www/reporting/timecategory.php:90
 msgid "Category Name"
-msgstr ""
-
-#: www/pm/admin/index.php:218
-msgid "Once you add a category, it cannot be deleted"
 msgstr ""
 
 #: www/pm/admin/index.php:243
