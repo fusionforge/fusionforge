@@ -3,6 +3,7 @@
  * FusionForge RBAC engine
  *
  * Copyright 2010, Roland Mas
+ * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -364,6 +365,9 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 			case 'submit':
 				$qpa = db_construct_qpa($qpa, 'AND (perm_val & 8) = 8');
 				break;
+			case 'vote':
+				$qpa = db_construct_qpa ($qpa, 'AND (perm_val & 16) = 16');
+				break;
 			}
 			break;
 		case 'pm':
@@ -423,7 +427,7 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 			$result = array_merge ($result, $this->_getRolesIdByAllowedAction ('project_admin', $reference));
 			break;
 		case 'tracker':
-			if ($action != 'tech') {
+			if ($action != 'tech' && $action != 'vote') {
 				$t = artifactType_get_object ($reference);
 				$result = array_merge ($result, $this->_getRolesIdByAllowedAction ('tracker_admin', $t->Group->getID()));
 			}
@@ -439,7 +443,7 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 			$result = array_merge ($result, $this->_getRolesIdByAllowedAction ('forum_admin', $t->Group->getID()));
 			break;
 		case 'new_tracker':
-			if ($action != 'tech') {
+			if ($action != 'tech' && $action != 'vote') {
 				$result = array_merge ($result, $this->_getRolesIdByAllowedAction ('tracker_admin', $reference));
 			}
 			break;

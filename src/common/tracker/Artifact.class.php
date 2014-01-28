@@ -6,6 +6,7 @@
  * Copyright 2002-2004, GForge, LLC
  * Copyright 2009, Roland Mas
  * Copyright (C) 2009-2013 Alain Peyrat, Alcatel-Lucent
+ * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -124,6 +125,12 @@ class Artifact extends Error {
 	 * @var	result	$relatedtasks
 	 */
 	var $relatedtasks;
+
+	/**
+	 * cached return value of getVotes
+	 * @var	int|bool	$votes
+	 */
+	var $votes = false;
 
 	/**
 	 * Artifact - constructor.
@@ -292,6 +299,7 @@ class Artifact extends Error {
 	 * @return	boolean	success.
 	 */
 	function fetchData($artifact_id) {
+		$this->votes = false;
 		$res = db_query_params ('SELECT * FROM artifact_vw WHERE artifact_id=$1 AND group_artifact_id=$2',
 					array ($artifact_id,
 					       $this->ArtifactType->getID())) ;
@@ -1775,6 +1783,90 @@ class Artifact extends Error {
 		}
 
 		return $return;
+	}
+
+	/**
+	 * castVote - Vote on this tracker item or retract the vote
+	 * @param	bool	$value	true to cast, false to retract
+	 * @return	bool	success (false sets error message)
+	 */
+	function castVote($value = true) {
+		if (!($uid = user_getid()) || $uid == 100) {
+			$this->setMissingParamsError(_('User ID not passed'));
+			return false;
+		}
+		if (!$this->ArtifactType->canVote()) {
+			$this->setPermissionDeniedError();
+			return false;
+		}
+		$has_vote = $this->hasVote($uid);
+		if ($has_vote == $value) {
+			/* nothing changed */
+			return true;
+		}
+		if ($value) {
+			$res = db_query_params('INSERT INTO artifact_votes (artifact_id, user_id) VALUES ($1, $2)',
+						array($this->getID(), $uid));
+		} else {
+			$res = db_query_params('DELETE FROM artifact_votes WHERE artifact_id=$1 AND user_id=$2',
+						array($this->getID(), $uid));
+		}
+		if (!$res) {
+			$this->setError(db_error());
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * hasVote - Check if a user has voted on this tracker item
+	 *
+	 * @param	int	$uid	user ID (default: current user)
+	 * @return	bool	true if a vote exists
+	 */
+	function hasVote($uid=false) {
+		if (!$uid) {
+			$uid = user_getid();
+		}
+		if (!$uid || $uid == 100) {
+			return false;
+		}
+		$res = db_query_params('SELECT * FROM artifact_votes WHERE artifact_id=$1 AND user_id=$2',
+					array($this->getID(), $uid));
+		return (db_numrows($res) == 1);
+	}
+
+       /**
+        * getVotes - get number of valid cast and potential votes
+        *
+        * @return	array	(votes, voters, percent)
+        */
+	function getVotes() {
+		if ($this->votes !== false) {
+			return $this->votes;
+		}
+
+		$voters = $this->ArtifactType->getVoters();
+		unset($voters[0]);	/* just in case */
+		unset($voters[100]);	/* need users */
+		if (($numvoters = count($voters)) < 1) {
+			$this->votes = array(0, 0, 0);
+			return $this->votes;
+		}
+
+		$res = db_query_params('SELECT COUNT(*) AS count FROM artifact_votes WHERE artifact_id=$1 AND user_id=ANY($2)',
+					array($this->getID(), db_int_array_to_any_clause($voters)));
+		$db_count = db_fetch_array($res);
+		$numvotes = $db_count['count'];
+
+		/* check for invalid values */
+		if ($numvotes < 0 || $numvoters < $numvotes) {
+			$this->votes = array(-1, -1, 0);
+		} else {
+			$this->votes = array($numvotes, $numvoters,
+				(int)($numvotes * 100 / $numvoters + 0.5));
+		}
+		return $this->votes;
 	}
 }
 

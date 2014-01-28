@@ -7,6 +7,7 @@
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2012-2013, Franck Villaume - TrivialDev
  * Copyright 2011, Iñigo Martinez
+ * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -571,6 +572,12 @@ if ($art_arr && $art_cnt > 0) {
 				$title=_('Related Tasks');
 			if ($f == 'last_modified_date')
 				$title=_('Last Modified Date');
+			if ($f == '_votes')
+				$title = _('# Votes');
+			if ($f == '_voters')
+				$title = _('# Voters');
+			if ($f == '_votage')
+				$title = _('% Voted');
 		}
 		$title_arr[] = $title;
 	}
@@ -580,6 +587,7 @@ if ($art_arr && $art_cnt > 0) {
 	}
 
 	$then=(time()-$ath->getDuePeriod());
+	$voters = count($ath->getVoters());
 
 	for ($i=$start; $i<$max; $i++) {
 		$extra_data = $art_arr[$i]->getExtraFieldDataText();
@@ -648,6 +656,14 @@ if ($art_arr && $art_cnt > 0) {
 
 				}
 				echo '<td>' . $value .'</td>';
+			} else if ($f == '_votes') {
+				$v = $art_arr[$i]->getVotes();
+				echo html_e('td', array(), $v[0], false);
+			} else if ($f == '_voters') {
+				echo html_e('td', array(), $voters, false);
+			} else if ($f == '_votage') {
+				$v = $art_arr[$i]->getVotes();
+				echo html_e('td', array(), $v[2], false);
 			} else {
 				// Display ? for unknown values.
 				echo '<td>?</td>';

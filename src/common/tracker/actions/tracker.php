@@ -4,7 +4,8 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -557,6 +558,45 @@ switch (getStringFromRequest('func')) {
 					include $gfcommon.'tracker/actions/detail.php';
 				}
 			}
+			break;
+		}
+		//
+		//     Tracker Item Voting
+		//
+		case 'pointer_down': {
+			$artifact_id = $aid = getIntFromRequest('aid');
+			if ($aid) {
+				$ah = new ArtifactHtml($ath, $aid);
+				if (!$ah || !is_object($ah)) {
+					exit_error(_('Artifact Could Not Be Created'), 'tracker');
+				} else if ($ah->isError()) {
+					exit_error($ah->getErrorMessage(), 'tracker');
+				}
+				if ($ah->castVote(false)) {
+					$feedback = _('Retracted Vote successfully');
+				} else {
+					$error_msg = $ah->getErrorMessage();
+				}
+			}
+			include $gfcommon.'tracker/actions/browse.php';
+			break;
+		}
+		case 'pointer_up': {
+			$artifact_id = $aid = getIntFromRequest('aid');
+			if ($aid) {
+				$ah = new ArtifactHtml($ath, $aid);
+				if (!$ah || !is_object($ah)) {
+					exit_error(_('Artifact Could Not Be Created'), 'tracker');
+				} else if ($ah->isError()) {
+					exit_error($ah->getErrorMessage(), 'tracker');
+				}
+				if ($ah->castVote()) {
+					$feedback = _('Cast Vote successfully');
+				} else {
+					$error_msg = $ah->getErrorMessage();
+				}
+			}
+			include $gfcommon.'tracker/actions/browse.php';
 			break;
 		}
 		default : {

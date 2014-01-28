@@ -3,6 +3,7 @@
  * FusionForge localisation
  *
  * Copyright 2007-2010, Roland Mas
+ * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -80,6 +81,14 @@ function setup_rbac_strings () {
 								  'tracker13' => _('Manager'),
 								  'tracker14' => _('Tech & manager (no read access)'),
 								  'tracker15' => _('Tech & manager'),
+								  'tracker16' => _('No access + Vote'),
+								  'tracker17' => _('Read only + Vote'),
+								  'tracker18' => _('Technician (no read access) + Vote'),
+								  'tracker19' => _('Technician + Vote'),
+								  'tracker20' => _('Manager (no read access) + Vote'),
+								  'tracker21' => _('Manager + Vote'),
+								  'tracker22' => _('Tech & manager (no read access) + Vote'),
+								  'tracker23' => _('Tech & manager + Vote'),
 								  'pm0' => _('No Access'),
 								  'pm1' => _('Read only'),
 								  'pm2' => _('Technician (no read access)'),
@@ -110,6 +119,14 @@ function setup_rbac_strings () {
 								  'new_tracker13' => _('Manager'),
 								  'new_tracker14' => _('Tech & manager (no read access)'),
 								  'new_tracker15' => _('Tech & manager'),
+								  'new_tracker16' => _('No access + Vote'),
+								  'new_tracker17' => _('Read only + Vote'),
+								  'new_tracker18' => _('Technician (no read access) + Vote'),
+								  'new_tracker19' => _('Technician + Vote'),
+								  'new_tracker20' => _('Manager (no read access) + Vote'),
+								  'new_tracker21' => _('Manager + Vote'),
+								  'new_tracker22' => _('Tech & manager (no read access) + Vote'),
+								  'new_tracker23' => _('Tech & manager + Vote'),
 								  'new_pm0' => _('No Access'),
 								  'new_pm1' => _('Read only'),
 								  'new_pm2' => _('Technician (no read access)'),

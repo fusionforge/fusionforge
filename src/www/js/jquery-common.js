@@ -3,6 +3,8 @@
  *
  * Copyright 2010, Alain Peyrat
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -34,7 +36,8 @@ jQuery(function() {
 		jQuery('#tracker-comment').tipsy({gravity: 'w', delayIn: 1000, delayOut: 500, fade: true});
 		jQuery('#tracker-new_artifact_type_id').tipsy({gravity: 'w', html:true, delayIn: 1000, delayOut: 500, fade: true});
 		jQuery('#tracker-manage-roles').tipsy({gravity: 'w', delayIn: 1000, delayOut: 500, fade: true});
-
+		jQuery('#tracker-vote').tipsy({gravity: 'w', delayIn: 1000, delayOut: 500, fade: true});
+		jQuery('#tracker-votes').tipsy({gravity: 'n', delayIn: 1000, delayOut: 500, fade: true});
 		jQuery('.forum_monitor').tipsy({gravity: 'n', html:true, delayIn: 1000, delayOut: 500, fade: true});
 		jQuery('.forum_save_place').tipsy({gravity: 'n', html:true, delayIn: 1000, delayOut: 500, fade: true});
 		jQuery('.forum_start_thread').tipsy({gravity: 'n', html:true, delayIn: 1000, delayOut: 500, fade: true});
