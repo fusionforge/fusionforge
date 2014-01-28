@@ -903,10 +903,8 @@ class LoadFileConflictPageEditor
         $current = &$this->current;
 
         if ($selected && $selected->getVersion() != $current->getVersion()) {
-            $rev = $selected;
             $pagelink = WikiLink($selected);
         } else {
-            $rev = $current;
             $pagelink = WikiLink($this->page);
         }
 

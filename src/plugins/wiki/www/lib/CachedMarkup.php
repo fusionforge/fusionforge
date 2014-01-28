@@ -122,7 +122,6 @@ class CacheableMarkup extends XmlContent
      */
     function getLinkInfo()
     {
-        $link = array();
         foreach ($this->_content as $link) {
             if (!isa($link, 'Cached_Link'))
                 continue;

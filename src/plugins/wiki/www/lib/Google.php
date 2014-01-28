@@ -95,9 +95,7 @@ class GoogleSearchResults
         foreach ($this->fields as $f) {
             $this->{$f} = $result[$f];
         }
-        $i = 0;
         $this->results = array();
-        //$this->resultElements = $result['resultElements'];
         foreach ($this->resultElements as $r) {
             $this->results[] = new GoogleSearchResult($r);
         }
@@ -272,7 +270,7 @@ class Google
     /**
      * Get spelling suggestions from Google
      *
-     * @param  string phrase   word or phrase to spell-check
+     * @param  string $phrase   word or phrase to spell-check
      * @return string text of any suggested replacement, or None
      */
     function doSpellingSuggestion($phrase)
