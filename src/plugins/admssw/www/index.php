@@ -40,7 +40,7 @@ $HTML->printSoftwareMapLinks();
 echo '<p>'._('Preview of RDF meta-data about the forge, conforming to the ADMS.SW specifications').'</p>';
 
 echo '<ul>';
-echo '<li>'._('Public projects :');
+echo '<li>'._('Public projects:');
 
 	echo '<ul>';
 	echo '<li>'.util_make_link('/plugins/'.$pluginname.'/projectsturtle.php', _('short index')).', '.
@@ -50,7 +50,7 @@ echo '<li>'._('Public projects :');
 
 echo '</li>';
 
-echo '<li>'._('Trove categories :');
+echo '<li>'._('Trove Categories:');
 
 echo '<ul>';
 echo '<li>'.util_make_link('/plugins/'.$pluginname.'/trove.php', _('as Turtle')).'</li>';

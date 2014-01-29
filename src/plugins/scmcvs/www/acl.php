@@ -41,10 +41,10 @@ preg_match("/^([[:alnum:]-]{3,15})$/", $env_group, $matches);
 preg_match("/[[:alnum:]_-]{3,15}/", $env_user, $matches2);
 
 if (count($matches) == 0) {
-	exit_error(_('Invalid CVS repository : ').$env_group,'home');
+	exit_error(_('Invalid CVS repository: ').$env_group,'home');
 } else {
 	if (count($matches2) == 0) {
-		exit_error(_('Invalid username : ').$env_user,'home');
+		exit_error(_('Invalid username: ').$env_user,'home');
 	}
 
 	$userName = $matches2[count($matches2)-1];

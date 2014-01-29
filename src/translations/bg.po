@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-28 15:16+0100\n"
+"POT-Creation-Date: 2014-01-29 11:46+0100\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -27,8 +27,8 @@ msgstr ""
 #: common/docman/actions/addfile.php:124 common/docman/actions/addfile.php:160
 #: common/docman/DocumentGroup.class.php:221
 #: common/docman/DocumentGroup.class.php:834
-#: common/tracker/actions/tracker.php:132
-#: common/tracker/actions/tracker.php:360 www/project/admin/editimages.php:58
+#: common/tracker/actions/tracker.php:133
+#: common/tracker/actions/tracker.php:361 www/project/admin/editimages.php:58
 msgid "Invalid file name."
 msgstr ""
 
@@ -245,27 +245,30 @@ msgstr ""
 #: common/tracker/actions/admin-updates.php:515
 #: common/tracker/actions/admin-updates.php:536
 #: common/tracker/actions/admin-updates.php:595
-#: common/tracker/actions/browse.php:402 common/tracker/actions/browse.php:405
-#: common/tracker/actions/browse.php:749 common/tracker/actions/detail.php:140
-#: common/tracker/actions/mod-limited.php:164
-#: common/tracker/actions/mod.php:111 common/tracker/actions/mod.php:140
-#: common/tracker/actions/mod.php:147 common/tracker/actions/mod.php:155
-#: common/tracker/actions/mod.php:175 common/tracker/actions/mod.php:216
-#: common/tracker/actions/mod.php:218 common/tracker/actions/query.php:325
-#: common/tracker/actions/query.php:340 common/tracker/actions/query.php:346
-#: common/tracker/actions/query.php:347 common/tracker/actions/query.php:382
-#: common/tracker/actions/query.php:384 common/tracker/actions/query.php:386
-#: common/tracker/actions/query.php:391 common/tracker/actions/tracker.php:166
-#: common/tracker/actions/tracker.php:168
-#: common/tracker/actions/tracker.php:213
-#: common/tracker/actions/tracker.php:282
-#: common/tracker/actions/tracker.php:383
-#: common/tracker/actions/tracker.php:388
-#: common/tracker/actions/tracker.php:500
+#: common/tracker/actions/browse.php:409 common/tracker/actions/browse.php:412
+#: common/tracker/actions/browse.php:771 common/tracker/actions/detail.php:63
+#: common/tracker/actions/detail.php:157
+#: common/tracker/actions/mod-limited.php:72
+#: common/tracker/actions/mod-limited.php:181
+#: common/tracker/actions/mod.php:77 common/tracker/actions/mod.php:136
+#: common/tracker/actions/mod.php:168 common/tracker/actions/mod.php:175
+#: common/tracker/actions/mod.php:183 common/tracker/actions/mod.php:203
+#: common/tracker/actions/mod.php:244 common/tracker/actions/mod.php:246
+#: common/tracker/actions/query.php:325 common/tracker/actions/query.php:340
+#: common/tracker/actions/query.php:346 common/tracker/actions/query.php:347
+#: common/tracker/actions/query.php:382 common/tracker/actions/query.php:384
+#: common/tracker/actions/query.php:386 common/tracker/actions/query.php:391
+#: common/tracker/actions/tracker.php:167
+#: common/tracker/actions/tracker.php:169
+#: common/tracker/actions/tracker.php:214
+#: common/tracker/actions/tracker.php:283
+#: common/tracker/actions/tracker.php:384
+#: common/tracker/actions/tracker.php:389
+#: common/tracker/actions/tracker.php:501
 #: common/tracker/ArtifactExtraField.class.php:193
 #: common/tracker/ArtifactExtraField.class.php:199
-#: common/tracker/ArtifactType.class.php:216
-#: common/tracker/ArtifactType.class.php:986
+#: common/tracker/ArtifactType.class.php:223
+#: common/tracker/ArtifactType.class.php:994
 #: common/tracker/include/ArtifactHtml.class.php:110
 #: common/tracker/include/ArtifactHtml.class.php:112
 #: common/tracker/include/ArtifactHtml.class.php:220
@@ -345,7 +348,7 @@ msgstr ""
 #: www/forum/forum.php:156 www/forum/message.php:126
 #: www/frs/admin/deletepackage.php:57 www/frs/admin/qrs.php:197
 #: www/frs/shownotes.php:64 www/include/features_boxes.php:150
-#: www/include/features_boxes.php:159 www/include/html.php:928
+#: www/include/features_boxes.php:159 www/include/html.php:932
 #: www/include/user_profile.php:87 www/include/user_profile.php:92
 #: www/include/user_profile.php:111 www/new/index.php:98
 #: www/news/submit.php:153 www/news/submit.php:155 www/news/submit.php:158
@@ -393,19 +396,19 @@ msgstr ""
 
 #: common/docman/actions/monitordirectory.php:54
 #: common/docman/actions/monitorfile.php:56
-#: common/tracker/actions/tracker.php:429
-#: common/tracker/actions/tracker.php:446
-#: common/tracker/Artifact.class.php:617
-#: common/tracker/ArtifactType.class.php:545 www/frs/monitor.php:65
+#: common/tracker/actions/tracker.php:430
+#: common/tracker/actions/tracker.php:447
+#: common/tracker/Artifact.class.php:626
+#: common/tracker/ArtifactType.class.php:553 www/frs/monitor.php:65
 #: www/frs/monitor.php:66
 msgid "Monitoring Started"
 msgstr ""
 
 #: common/docman/actions/monitordirectory.php:72
 #: common/docman/actions/monitorfile.php:76
-#: common/tracker/actions/tracker.php:431
-#: common/tracker/Artifact.class.php:627
-#: common/tracker/ArtifactType.class.php:555 www/developer/monitor.php:75
+#: common/tracker/actions/tracker.php:432
+#: common/tracker/Artifact.class.php:636
+#: common/tracker/ArtifactType.class.php:563 www/developer/monitor.php:75
 #: www/frs/monitor.php:57 www/frs/monitor.php:58
 msgid "Monitoring Stopped"
 msgstr ""
@@ -479,7 +482,7 @@ msgstr ""
 #: common/survey/SurveyQuestion.class.php:57
 #: common/survey/SurveyQuestionFactory.class.php:53
 #: common/survey/SurveyResponse.class.php:55
-#: common/tracker/ArtifactType.class.php:154
+#: common/tracker/ArtifactType.class.php:161
 #: common/tracker/ArtifactTypeFactory.class.php:59
 #: common/tracker/ArtifactTypes.class.php:54
 msgid "No Valid Group Object"
@@ -571,7 +574,7 @@ msgstr ""
 
 #: common/docman/Document.class.php:949
 #: common/docman/DocumentGroup.class.php:728
-#: common/forum/ForumHTML.class.php:73 common/tracker/actions/browse.php:365
+#: common/forum/ForumHTML.class.php:73 common/tracker/actions/browse.php:372
 #: plugins/contribtracker/www/index.php:35
 #: plugins/contribtracker/www/index.php:167
 #: plugins/mantisbt/view/admin/StatPerStatus.php:47
@@ -595,7 +598,7 @@ msgstr "Описание"
 
 #: common/docman/Document.class.php:953
 #: common/docman/DocumentGroup.class.php:731
-#: common/include/Group.class.php:2692 common/tracker/actions/browse.php:201
+#: common/include/Group.class.php:2692 common/tracker/actions/browse.php:202
 #: common/tracker/actions/query.php:202 common/tracker/actions/query.php:346
 msgid "Submitter"
 msgstr ""
@@ -742,7 +745,7 @@ msgstr ""
 #: common/docman/include/DocumentGroupHTML.class.php:50
 #: common/include/User.class.php:1410 common/search/SearchQuery.class.php:120
 #: common/survey/SurveyResponse.class.php:95
-#: common/tracker/actions/tracker.php:266
+#: common/tracker/actions/tracker.php:267
 #: common/tracker/views/form-adminroadmap.php:57
 #: plugins/forumml/www/index.php:54 plugins/forumml/www/index.php:59
 #: plugins/forumml/www/index.php:62 plugins/forumml/www/message.php:90
@@ -807,7 +810,7 @@ msgstr ""
 #: common/docman/views/pendingfiles.php:63
 #: common/tracker/actions/admin-ind.php:99
 #: common/tracker/actions/admin-ind.php:139
-#: common/tracker/actions/browse.php:557 common/tracker/actions/ind.php:57
+#: common/tracker/actions/browse.php:564 common/tracker/actions/ind.php:57
 #: common/tracker/views/form-updatetracker.php:53
 #: plugins/blocks/www/index.php:202
 #: plugins/contribtracker/www/global_admin.php:243
@@ -1097,13 +1100,13 @@ msgstr ""
 msgid "Folder that document belongs to:"
 msgstr "Папка в която да се постави документа"
 
-#: common/docman/views/editfile.php:70 common/tracker/actions/browse.php:405
-#: common/tracker/actions/browse.php:563 common/tracker/actions/browse.php:749
-#: common/tracker/actions/detail.php:80
-#: common/tracker/actions/mod-limited.php:128
-#: common/tracker/actions/mod.php:155 common/tracker/actions/query.php:340
-#: common/tracker/Artifact.class.php:936
-#: common/tracker/views/form-customizelist.php:39 www/pm/browse_task.php:381
+#: common/docman/views/editfile.php:70 common/tracker/actions/browse.php:412
+#: common/tracker/actions/browse.php:570 common/tracker/actions/browse.php:771
+#: common/tracker/actions/detail.php:97
+#: common/tracker/actions/mod-limited.php:145
+#: common/tracker/actions/mod.php:183 common/tracker/actions/query.php:340
+#: common/tracker/Artifact.class.php:945
+#: common/tracker/views/form-customizelist.php:40 www/pm/browse_task.php:381
 #: www/project/admin/database.php:204
 msgid "State"
 msgstr ""
@@ -1330,15 +1333,15 @@ msgstr ""
 #: common/docman/views/pendingfiles.php:101
 #: common/docman/views/pendingfiles.php:103
 #: common/forum/ForumHTML.class.php:219 common/pm/ProjectTask.class.php:1212
-#: common/tracker/actions/browse.php:607 common/tracker/actions/browse.php:618
-#: common/tracker/actions/browse.php:638 common/tracker/actions/detail.php:70
-#: common/tracker/actions/downloadcsv.php:84
-#: common/tracker/actions/downloadcsv.php:85
-#: common/tracker/actions/downloadcsv.php:86
-#: common/tracker/actions/mod-limited.php:98
-#: common/tracker/actions/mod-limited.php:103
-#: common/tracker/actions/mod.php:99 common/tracker/actions/mod.php:104
-#: common/tracker/Artifact.class.php:1680
+#: common/tracker/actions/browse.php:621 common/tracker/actions/browse.php:632
+#: common/tracker/actions/browse.php:652 common/tracker/actions/detail.php:87
+#: common/tracker/actions/downloadcsv.php:87
+#: common/tracker/actions/downloadcsv.php:88
+#: common/tracker/actions/downloadcsv.php:89
+#: common/tracker/actions/mod-limited.php:115
+#: common/tracker/actions/mod-limited.php:120
+#: common/tracker/actions/mod.php:124 common/tracker/actions/mod.php:129
+#: common/tracker/Artifact.class.php:1689
 #: common/tracker/include/ArtifactHtml.class.php:111
 #: common/tracker/include/ArtifactHtml.class.php:169
 #: common/tracker/include/ArtifactHtml.class.php:178
@@ -1362,7 +1365,7 @@ msgstr ""
 #: www/export/rss20_docman.php:135 www/export/rss20_docman.php:137
 #: www/export/tracker.php:107 www/forum/index.php:90 www/forum/message.php:127
 #: www/forum/myforums.php:152 www/frs/index.php:175 www/frs/index.php:234
-#: www/include/html.php:1075 www/news/news_utils.php:149
+#: www/include/html.php:1079 www/news/news_utils.php:149
 #: www/news/news_utils.php:269 www/people/people_utils.php:423
 #: www/people/viewjob.php:77 www/pm/browse_task.php:264
 #: www/pm/browse_task.php:274 www/pm/include/ProjectTaskHTML.class.php:122
@@ -1440,16 +1443,16 @@ msgstr ""
 msgid "Reserve"
 msgstr ""
 
-#: common/docman/views/listfile.php:366 common/tracker/actions/detail.php:53
-#: common/tracker/actions/mod-limited.php:62 common/tracker/actions/mod.php:60
+#: common/docman/views/listfile.php:366 common/tracker/actions/detail.php:54
+#: common/tracker/actions/mod-limited.php:63 common/tracker/actions/mod.php:68
 #: common/tracker/include/ArtifactTypeHtml.class.php:76
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:94
 msgid "Monitor"
 msgstr ""
 
 #: common/docman/views/listfile.php:367 common/forum/ForumHTML.class.php:140
-#: common/tracker/actions/detail.php:49
-#: common/tracker/actions/mod-limited.php:58 common/tracker/actions/mod.php:56
+#: common/tracker/actions/detail.php:50
+#: common/tracker/actions/mod-limited.php:59 common/tracker/actions/mod.php:64
 #: common/widget/Widget_MyMonitoredDocuments.class.php:90
 #: common/widget/Widget_MyMonitoredForums.class.php:125
 #: common/widget/Widget_MyMonitoredFp.class.php:106 www/forum/monitor.php:59
@@ -1615,30 +1618,30 @@ msgstr ""
 #: common/tracker/actions/admin-ind.php:150
 #: common/tracker/actions/admin-ind.php:153
 #: common/tracker/actions/admin-ind.php:156
-#: common/tracker/actions/browse.php:737 common/tracker/actions/browse.php:745
-#: common/tracker/actions/browse.php:755 common/tracker/actions/detail.php:69
-#: common/tracker/actions/detail.php:73 common/tracker/actions/detail.php:80
-#: common/tracker/actions/detail.php:87 common/tracker/actions/detail.php:97
-#: common/tracker/actions/detail.php:109 common/tracker/actions/detail.php:133
-#: common/tracker/actions/detail.php:155 common/tracker/actions/detail.php:162
+#: common/tracker/actions/browse.php:759 common/tracker/actions/browse.php:767
+#: common/tracker/actions/browse.php:777 common/tracker/actions/detail.php:86
+#: common/tracker/actions/detail.php:90 common/tracker/actions/detail.php:97
+#: common/tracker/actions/detail.php:104 common/tracker/actions/detail.php:114
+#: common/tracker/actions/detail.php:126 common/tracker/actions/detail.php:150
+#: common/tracker/actions/detail.php:172 common/tracker/actions/detail.php:179
 #: common/tracker/actions/format_csv.php:69
 #: common/tracker/actions/format_csv.php:74
 #: common/tracker/actions/format_csv.php:87
 #: common/tracker/actions/format_csv.php:91
-#: common/tracker/actions/mod-limited.php:86
-#: common/tracker/actions/mod-limited.php:96
-#: common/tracker/actions/mod-limited.php:102
-#: common/tracker/actions/mod-limited.php:114
+#: common/tracker/actions/mod-limited.php:103
+#: common/tracker/actions/mod-limited.php:113
 #: common/tracker/actions/mod-limited.php:119
-#: common/tracker/actions/mod-limited.php:128
-#: common/tracker/actions/mod-limited.php:142
-#: common/tracker/actions/mod-limited.php:178
-#: common/tracker/actions/mod-limited.php:181
-#: common/tracker/actions/mod-limited.php:188
-#: common/tracker/actions/mod.php:88 common/tracker/actions/mod.php:97
-#: common/tracker/actions/mod.php:103 common/tracker/actions/mod.php:167
-#: common/tracker/actions/mod.php:192 common/tracker/actions/mod.php:241
-#: common/tracker/actions/mod.php:244 common/tracker/actions/query.php:372
+#: common/tracker/actions/mod-limited.php:131
+#: common/tracker/actions/mod-limited.php:136
+#: common/tracker/actions/mod-limited.php:145
+#: common/tracker/actions/mod-limited.php:159
+#: common/tracker/actions/mod-limited.php:195
+#: common/tracker/actions/mod-limited.php:198
+#: common/tracker/actions/mod-limited.php:205
+#: common/tracker/actions/mod.php:113 common/tracker/actions/mod.php:122
+#: common/tracker/actions/mod.php:128 common/tracker/actions/mod.php:195
+#: common/tracker/actions/mod.php:220 common/tracker/actions/mod.php:269
+#: common/tracker/actions/mod.php:272 common/tracker/actions/query.php:372
 #: common/tracker/actions/query.php:374 common/tracker/actions/query.php:376
 #: common/tracker/actions/query.php:399 common/tracker/actions/taskmgr.php:107
 #: common/tracker/actions/taskmgr.php:108
@@ -1661,7 +1664,7 @@ msgstr ""
 #: common/tracker/views/form-addextrafield.php:114
 #: common/tracker/views/form-addextrafield.php:118
 #: common/tracker/views/form-addextrafield.php:123
-#: common/tracker/views/form-customizelist.php:123
+#: common/tracker/views/form-customizelist.php:127
 #: common/tracker/views/form-deleteextrafieldelement.php:61
 #: common/tracker/views/form-updatecanned.php:43
 #: common/tracker/views/form-updatecanned.php:48
@@ -1918,7 +1921,7 @@ msgid "User"
 msgstr ""
 
 #: common/docman/views/reporting.php:169 common/forum/ForumHTML.class.php:69
-#: common/tracker/actions/detail.php:69
+#: common/tracker/actions/detail.php:86
 #: common/tracker/include/ArtifactHtml.class.php:110
 #: common/tracker/include/ArtifactHtml.class.php:147
 #: common/tracker/include/ArtifactTypeHtml.class.php:379
@@ -2023,12 +2026,12 @@ msgstr "Разрешение не беше получено"
 #: common/forum/ForumAdmin.class.php:69 common/forum/ForumAdmin.class.php:334
 #: common/tracker/actions/admin-tracker.php:75
 #: common/tracker/actions/deleteartifact.php:57
-#: common/tracker/actions/mod.php:76
+#: common/tracker/actions/mod.php:101
 #: common/tracker/include/ArtifactTypeHtml.class.php:127
 #: common/tracker/views/form-addcanned.php:54
 #: common/tracker/views/form-addextrafield.php:57
 #: common/tracker/views/form-addextrafield.php:81
-#: common/tracker/views/form-customizelist.php:100
+#: common/tracker/views/form-customizelist.php:104
 #: common/tracker/views/form-deleteextrafieldelement.php:73
 #: common/tracker/views/form-deleteextrafield.php:52
 #: common/tracker/views/form-deletetracker.php:46
@@ -2072,7 +2075,7 @@ msgid "Delete"
 msgstr ""
 
 #: common/forum/AttachManager.class.php:164
-#: common/tracker/views/form-customizelist.php:129
+#: common/tracker/views/form-customizelist.php:133
 #: common/widget/WidgetLayoutManager.class.php:540
 #: common/widget/WidgetLayoutManager.class.php:567
 #: plugins/extsubproj/view/admin/viewProjectConfiguration.php:61
@@ -2316,7 +2319,7 @@ msgstr "Невалиден идентификатор на папка"
 
 #: common/forum/Forum.class.php:439 common/forum/Forum.class.php:474
 #: common/frs/FRSPackage.class.php:278 common/frs/FRSPackage.class.php:310
-#: common/tracker/ArtifactType.class.php:527
+#: common/tracker/ArtifactType.class.php:535
 #, fuzzy
 msgid "You can only monitor if you are logged in."
 msgstr "Вие публикувате анонимно защото не сте"
@@ -2337,7 +2340,7 @@ msgstr ""
 #: common/tracker/actions/admin-updates.php:492
 #: common/tracker/actions/admin-updates.php:515
 #: common/tracker/actions/admin-updates.php:536
-#: common/tracker/Artifact.class.php:1140
+#: common/tracker/Artifact.class.php:1149
 #: plugins/mailman/include/MailmanList.class.php:247
 #: plugins/mailman/include/MailmanList.class.php:372
 #: plugins/mailman/include/MailmanList.class.php:389
@@ -2348,9 +2351,9 @@ msgstr ""
 #: common/forum/Forum.class.php:621 common/frs/FRSPackage.class.php:470
 #: common/frs/FRSRelease.class.php:354 common/include/Group.class.php:1617
 #: common/mail/MailingList.class.php:401 common/pm/ProjectGroup.class.php:384
-#: common/pm/ProjectTask.class.php:517 common/tracker/Artifact.class.php:504
+#: common/pm/ProjectTask.class.php:517 common/tracker/Artifact.class.php:513
 #: common/tracker/ArtifactExtraField.class.php:459
-#: common/tracker/ArtifactType.class.php:796
+#: common/tracker/ArtifactType.class.php:804
 msgid "Please tick all checkboxes."
 msgstr ""
 
@@ -2361,7 +2364,7 @@ msgid "Error Deleting Forum"
 msgstr ""
 
 #: common/forum/ForumFactory.class.php:56 common/forum/ForumHTML.class.php:58
-#: common/include/rbac_texts.php:158 www/forum/forum.php:156
+#: common/include/rbac_texts.php:175 www/forum/forum.php:156
 #: www/forum/index.php:69 www/forum/myforums.php:69
 msgid "Forum"
 msgstr "Форум"
@@ -2385,13 +2388,13 @@ msgid "Posted by"
 msgstr "Публикуване на обяви"
 
 #: common/forum/ForumHTML.class.php:70 common/include/Navigation.class.php:389
-#: common/tracker/actions/browse.php:197 common/tracker/actions/browse.php:555
-#: common/tracker/actions/detail.php:109
-#: common/tracker/actions/mod-limited.php:142
-#: common/tracker/actions/mod.php:167 common/tracker/actions/query.php:198
+#: common/tracker/actions/browse.php:198 common/tracker/actions/browse.php:562
+#: common/tracker/actions/detail.php:126
+#: common/tracker/actions/mod-limited.php:159
+#: common/tracker/actions/mod.php:195 common/tracker/actions/query.php:198
 #: common/tracker/actions/query.php:382
 #: common/tracker/include/build_submission_form.php:72
-#: common/tracker/views/form-customizelist.php:37
+#: common/tracker/views/form-customizelist.php:38
 #: cronjobs/send_pending_items_mail.php:116
 #: plugins/mantisbt/view/addIssue.php:133
 #: plugins/mantisbt/view/editIssue.php:213
@@ -2480,9 +2483,9 @@ msgstr ""
 msgid "Warning: Uploaded file will replace current file"
 msgstr ""
 
-#: common/forum/ForumHTML.class.php:349 common/tracker/actions/detail.php:151
-#: common/tracker/actions/mod-limited.php:177
-#: common/tracker/actions/mod.php:240
+#: common/forum/ForumHTML.class.php:349 common/tracker/actions/detail.php:168
+#: common/tracker/actions/mod-limited.php:194
+#: common/tracker/actions/mod.php:268
 #: common/tracker/include/ArtifactTypeHtml.class.php:375
 #: www/forum/attachment.php:41 www/forum/attachment.php:123
 #: www/forum/attachment.php:151
@@ -2535,7 +2538,7 @@ msgid ""
 "You are posting anonymously because you are not <a href=\"%s\">logged in</a>"
 msgstr "Вие публикувате анонимно защото не сте"
 
-#: common/forum/ForumHTML.class.php:619 common/tracker/actions/mod.php:216
+#: common/forum/ForumHTML.class.php:619 common/tracker/actions/mod.php:244
 msgid "Post Comment"
 msgstr "Изпращане на коментар"
 
@@ -2932,7 +2935,7 @@ msgstr "Разрешението е отказано."
 
 #: common/include/Error.class.php:142 common/include/User.class.php:350
 #: common/include/User.class.php:931 common/include/User.class.php:983
-#: common/tracker/actions/tracker.php:85
+#: common/tracker/actions/tracker.php:86
 #: plugins/forumml/www/forumml_utils.php:679 www/account/change_email.php:38
 msgid "Invalid Email Address"
 msgstr "Невалиден Email Адрес"
@@ -3440,7 +3443,7 @@ msgstr ""
 #: common/include/GroupJoinRequest.class.php:298
 #: common/survey/Survey.class.php:240
 #: common/survey/SurveyQuestion.class.php:170
-#: common/tracker/actions/tracker.php:500 www/pm/task.php:354
+#: common/tracker/actions/tracker.php:501 www/pm/task.php:354
 #: www/reporting/timeadd.php:70 www/survey/admin/question.php:75
 msgid "Delete failed"
 msgstr ""
@@ -3465,7 +3468,7 @@ msgid "Trackers"
 msgstr ""
 
 #: common/include/group_section_texts.php:31
-#: common/include/Navigation.class.php:483 common/include/rbac_texts.php:157
+#: common/include/Navigation.class.php:483 common/include/rbac_texts.php:174
 #: common/reporting/report_utils.php:144 common/reporting/report_utils.php:187
 #: common/reporting/report_utils.php:690 common/reporting/report_utils.php:942
 #: common/widget/Widget_ProjectPublicAreas.class.php:147
@@ -3519,7 +3522,7 @@ msgid "Log Out"
 msgstr "Изход"
 
 #: common/include/Navigation.class.php:204 www/account/index.php:117
-#: www/include/html.php:1000
+#: www/include/html.php:1004
 msgid "My Account"
 msgstr "Моят акаунт"
 
@@ -3607,8 +3610,8 @@ msgstr ""
 msgid "Project Homepage. Widgets oriented"
 msgstr ""
 
-#: common/include/Navigation.class.php:407 common/tracker/actions/mod.php:144
-#: common/tracker/actions/mod.php:196
+#: common/include/Navigation.class.php:407 common/tracker/actions/mod.php:172
+#: common/tracker/actions/mod.php:224
 #: common/tracker/include/build_submission_form.php:64
 #: common/widget/Widget_MyProjects.class.php:77
 #: www/include/Layout.class.php:720 www/pm/add_task.php:53
@@ -3637,7 +3640,7 @@ msgstr ""
 msgid "Tech & help forums."
 msgstr ""
 
-#: common/include/Navigation.class.php:450 common/include/rbac_texts.php:156
+#: common/include/Navigation.class.php:450 common/include/rbac_texts.php:173
 #: common/reporting/report_utils.php:132
 #: common/tracker/actions/admin-ind.php:99 common/tracker/actions/ind.php:57
 #: common/widget/Widget_ProjectPublicAreas.class.php:56
@@ -3690,7 +3693,7 @@ msgstr ""
 msgid "Flash head line from the project."
 msgstr "Вие не сте член на никой активен проект"
 
-#: common/include/Navigation.class.php:543 common/include/rbac_texts.php:164
+#: common/include/Navigation.class.php:543 common/include/rbac_texts.php:181
 #: common/widget/Widget_MyLatestSvnCommits.class.php:108
 #: plugins/blocks/www/index.php:158 plugins/quota_management/www/quota.php:165
 #: plugins/quota_management/www/quota.php:189
@@ -3704,7 +3707,7 @@ msgstr ""
 msgid "Source Content Management, peer-review and source discovery."
 msgstr ""
 
-#: common/include/Navigation.class.php:575 common/include/rbac_texts.php:166
+#: common/include/Navigation.class.php:575 common/include/rbac_texts.php:183
 #: plugins/blocks/www/index.php:159
 msgid "Files"
 msgstr "Пакети"
@@ -3760,17 +3763,17 @@ msgstr ""
 msgid "Posted data is too large. %1$s exceeds the maximum size of %2$s"
 msgstr ""
 
-#: common/include/RBAC.php:194
+#: common/include/RBAC.php:195
 #, fuzzy
 msgid "Cannot link to home project"
 msgstr "Вие не сте член на никой активен проект"
 
-#: common/include/RBAC.php:229
+#: common/include/RBAC.php:230
 #, fuzzy
 msgid "Cannot unlink from home project"
 msgstr "Вие не сте член на никой активен проект"
 
-#: common/include/RBAC.php:598
+#: common/include/RBAC.php:599
 msgid "UNKNOWN (internal error, report bug to FusionForge)"
 msgstr ""
 
@@ -3784,239 +3787,277 @@ msgstr ""
 msgid "%s (in project %s)"
 msgstr ""
 
-#: common/include/RBAC.php:1125
+#: common/include/RBAC.php:1138
 msgid "Anonymous/not logged in"
 msgstr ""
 
-#: common/include/RBAC.php:1173
+#: common/include/RBAC.php:1186
 msgid "Any user logged in"
 msgstr ""
 
-#: common/include/rbac_texts.php:45 common/include/rbac_texts.php:57
-#: common/include/rbac_texts.php:60 common/include/rbac_texts.php:62
-#: common/include/rbac_texts.php:64
+#: common/include/rbac_texts.php:46 common/include/rbac_texts.php:58
+#: common/include/rbac_texts.php:61 common/include/rbac_texts.php:63
+#: common/include/rbac_texts.php:65
 #: plugins/mediawiki/include/mediawikiPlugin.class.php:219
 msgid "No administrative access"
 msgstr ""
 
-#: common/include/rbac_texts.php:46 common/include/rbac_texts.php:144
+#: common/include/rbac_texts.php:47 common/include/rbac_texts.php:161
 #, fuzzy
 msgid "Forge administration"
 msgstr "Форуми: Администрация"
 
-#: common/include/rbac_texts.php:47 common/include/rbac_texts.php:49
-#: common/include/rbac_texts.php:51 common/include/rbac_texts.php:67
-#: common/include/rbac_texts.php:83 common/include/rbac_texts.php:91
-#: common/include/rbac_texts.php:97 common/include/rbac_texts.php:113
-#: common/include/rbac_texts.php:121 common/include/rbac_texts.php:127
-#: common/include/rbac_texts.php:130 common/include/rbac_texts.php:135
+#: common/include/rbac_texts.php:48 common/include/rbac_texts.php:50
+#: common/include/rbac_texts.php:52 common/include/rbac_texts.php:68
+#: common/include/rbac_texts.php:92 common/include/rbac_texts.php:100
+#: common/include/rbac_texts.php:106 common/include/rbac_texts.php:130
+#: common/include/rbac_texts.php:138 common/include/rbac_texts.php:144
+#: common/include/rbac_texts.php:147 common/include/rbac_texts.php:152
 #: plugins/hudson/include/hudsonPlugin.class.php:348
 #: plugins/moinmoin/common/MoinMoinPlugin.class.php:150
 #, fuzzy
 msgid "No Access"
 msgstr "Няма издания"
 
-#: common/include/rbac_texts.php:48 common/include/rbac_texts.php:145
+#: common/include/rbac_texts.php:49 common/include/rbac_texts.php:162
 #, fuzzy
 msgid "Approve projects"
 msgstr "Регистрирани проекти"
 
-#: common/include/rbac_texts.php:50 common/include/rbac_texts.php:146
+#: common/include/rbac_texts.php:51 common/include/rbac_texts.php:163
 msgid "Approve news"
 msgstr ""
 
-#: common/include/rbac_texts.php:52
+#: common/include/rbac_texts.php:53
 #: plugins/mediawiki/include/mediawikiPlugin.class.php:199
 #: plugins/moinmoin/common/MoinMoinPlugin.class.php:151
 #, fuzzy
 msgid "Read access"
 msgstr "Няма издания"
 
-#: common/include/rbac_texts.php:53
+#: common/include/rbac_texts.php:54
 #, fuzzy
 msgid "Admin forge stats"
 msgstr "Промяна на статуса на форума"
 
-#: common/include/rbac_texts.php:55
+#: common/include/rbac_texts.php:56
 msgid "Hidden"
 msgstr ""
 
-#: common/include/rbac_texts.php:56
+#: common/include/rbac_texts.php:57
 msgid "Visible"
 msgstr ""
 
-#: common/include/rbac_texts.php:58 common/include/rbac_texts.php:150
+#: common/include/rbac_texts.php:59 common/include/rbac_texts.php:167
 #, fuzzy
 msgid "Project administration"
 msgstr "Администриране"
 
-#: common/include/rbac_texts.php:61 common/tracker/actions/admin-ind.php:87
+#: common/include/rbac_texts.php:62 common/tracker/actions/admin-ind.php:87
 #: www/project/admin/tools.php:321
 #, fuzzy
 msgid "Trackers Administration"
 msgstr "Администриране"
 
-#: common/include/rbac_texts.php:63 common/include/rbac_texts.php:153
+#: common/include/rbac_texts.php:64 common/include/rbac_texts.php:170
 #, fuzzy
 msgid "Task managers administration"
 msgstr "Администриране"
 
-#: common/include/rbac_texts.php:65 common/include/rbac_texts.php:154
+#: common/include/rbac_texts.php:66 common/include/rbac_texts.php:171
 #, fuzzy
 msgid "Forums administration"
 msgstr "Форуми: Администрация"
 
-#: common/include/rbac_texts.php:68 common/include/rbac_texts.php:84
-#: common/include/rbac_texts.php:92 common/include/rbac_texts.php:98
-#: common/include/rbac_texts.php:114 common/include/rbac_texts.php:122
-#: common/include/rbac_texts.php:128 common/include/rbac_texts.php:131
+#: common/include/rbac_texts.php:69 common/include/rbac_texts.php:93
+#: common/include/rbac_texts.php:101 common/include/rbac_texts.php:107
+#: common/include/rbac_texts.php:131 common/include/rbac_texts.php:139
+#: common/include/rbac_texts.php:145 common/include/rbac_texts.php:148
 #, fuzzy
 msgid "Read only"
 msgstr "Нишка"
 
-#: common/include/rbac_texts.php:69 common/include/rbac_texts.php:99
+#: common/include/rbac_texts.php:70 common/include/rbac_texts.php:108
 msgid "Technician (no read access, no submitting)"
 msgstr ""
 
-#: common/include/rbac_texts.php:70 common/include/rbac_texts.php:100
+#: common/include/rbac_texts.php:71 common/include/rbac_texts.php:109
 msgid "Technician (no submitting)"
 msgstr ""
 
-#: common/include/rbac_texts.php:71 common/include/rbac_texts.php:101
+#: common/include/rbac_texts.php:72 common/include/rbac_texts.php:110
 msgid "Manager (no read access, no submitting)"
 msgstr ""
 
-#: common/include/rbac_texts.php:72 common/include/rbac_texts.php:102
+#: common/include/rbac_texts.php:73 common/include/rbac_texts.php:111
 msgid "Manager (no submitting)"
 msgstr ""
 
-#: common/include/rbac_texts.php:73 common/include/rbac_texts.php:103
+#: common/include/rbac_texts.php:74 common/include/rbac_texts.php:112
 msgid "Tech & manager (no read access, no submitting)"
 msgstr ""
 
-#: common/include/rbac_texts.php:74 common/include/rbac_texts.php:104
+#: common/include/rbac_texts.php:75 common/include/rbac_texts.php:113
 #, fuzzy
 msgid "Tech & manager (no submitting)"
 msgstr "Инструменти за администриране"
 
-#: common/include/rbac_texts.php:75 common/include/rbac_texts.php:105
+#: common/include/rbac_texts.php:76 common/include/rbac_texts.php:114
 #, fuzzy
 msgid "Submit only"
 msgstr "Изпращане на новини"
 
-#: common/include/rbac_texts.php:76 common/include/rbac_texts.php:106
+#: common/include/rbac_texts.php:77 common/include/rbac_texts.php:115
 msgid "Read & submit"
 msgstr ""
 
-#: common/include/rbac_texts.php:77 common/include/rbac_texts.php:85
-#: common/include/rbac_texts.php:107 common/include/rbac_texts.php:115
+#: common/include/rbac_texts.php:78 common/include/rbac_texts.php:94
+#: common/include/rbac_texts.php:116 common/include/rbac_texts.php:132
 msgid "Technician (no read access)"
 msgstr ""
 
-#: common/include/rbac_texts.php:78 common/include/rbac_texts.php:86
-#: common/include/rbac_texts.php:108 common/include/rbac_texts.php:116
+#: common/include/rbac_texts.php:79 common/include/rbac_texts.php:95
+#: common/include/rbac_texts.php:117 common/include/rbac_texts.php:133
 msgid "Technician"
 msgstr ""
 
-#: common/include/rbac_texts.php:79 common/include/rbac_texts.php:87
-#: common/include/rbac_texts.php:109 common/include/rbac_texts.php:117
+#: common/include/rbac_texts.php:80 common/include/rbac_texts.php:96
+#: common/include/rbac_texts.php:118 common/include/rbac_texts.php:134
 msgid "Manager (no read access)"
 msgstr ""
 
-#: common/include/rbac_texts.php:80 common/include/rbac_texts.php:88
-#: common/include/rbac_texts.php:110 common/include/rbac_texts.php:118
+#: common/include/rbac_texts.php:81 common/include/rbac_texts.php:97
+#: common/include/rbac_texts.php:119 common/include/rbac_texts.php:135
 #, fuzzy
 msgid "Manager"
 msgstr "Управление на задачи"
 
-#: common/include/rbac_texts.php:81 common/include/rbac_texts.php:89
-#: common/include/rbac_texts.php:111 common/include/rbac_texts.php:119
+#: common/include/rbac_texts.php:82 common/include/rbac_texts.php:98
+#: common/include/rbac_texts.php:120 common/include/rbac_texts.php:136
 msgid "Tech & manager (no read access)"
 msgstr ""
 
-#: common/include/rbac_texts.php:82 common/include/rbac_texts.php:90
-#: common/include/rbac_texts.php:112 common/include/rbac_texts.php:120
+#: common/include/rbac_texts.php:83 common/include/rbac_texts.php:99
+#: common/include/rbac_texts.php:121 common/include/rbac_texts.php:137
 #, fuzzy
 msgid "Tech & manager"
 msgstr "Инструменти за администриране"
 
-#: common/include/rbac_texts.php:93 common/include/rbac_texts.php:123
+#: common/include/rbac_texts.php:84 common/include/rbac_texts.php:122
+#, fuzzy
+msgid "No access + Vote"
+msgstr "Няма издания"
+
+#: common/include/rbac_texts.php:85 common/include/rbac_texts.php:123
+#, fuzzy
+msgid "Read only + Vote"
+msgstr "Нишка"
+
+#: common/include/rbac_texts.php:86 common/include/rbac_texts.php:124
+msgid "Technician (no read access) + Vote"
+msgstr ""
+
+#: common/include/rbac_texts.php:87 common/include/rbac_texts.php:125
+msgid "Technician + Vote"
+msgstr ""
+
+#: common/include/rbac_texts.php:88 common/include/rbac_texts.php:126
+#, fuzzy
+msgid "Manager (no read access) + Vote"
+msgstr "Моят акаунт"
+
+#: common/include/rbac_texts.php:89 common/include/rbac_texts.php:127
+#, fuzzy
+msgid "Manager + Vote"
+msgstr "Управление на задачи"
+
+#: common/include/rbac_texts.php:90 common/include/rbac_texts.php:128
+#, fuzzy
+msgid "Tech & manager (no read access) + Vote"
+msgstr "Инструменти за администриране"
+
+#: common/include/rbac_texts.php:91 common/include/rbac_texts.php:129
+#, fuzzy
+msgid "Tech & manager + Vote"
+msgstr "Инструменти за администриране"
+
+#: common/include/rbac_texts.php:102 common/include/rbac_texts.php:140
 #, fuzzy
 msgid "Moderated post"
 msgstr "още нови обяви"
 
-#: common/include/rbac_texts.php:94 common/include/rbac_texts.php:124
+#: common/include/rbac_texts.php:103 common/include/rbac_texts.php:141
 #, fuzzy
 msgid "Unmoderated post"
 msgstr "още нови обяви"
 
-#: common/include/rbac_texts.php:95 common/include/rbac_texts.php:125
+#: common/include/rbac_texts.php:104 common/include/rbac_texts.php:142
 msgid "Moderation"
 msgstr ""
 
-#: common/include/rbac_texts.php:129
+#: common/include/rbac_texts.php:146
 #, fuzzy
 msgid "Commit access"
 msgstr "Няма издания"
 
-#: common/include/rbac_texts.php:132
+#: common/include/rbac_texts.php:149
 #, fuzzy
 msgid "Submit documents"
 msgstr "Публикуване на документ"
 
-#: common/include/rbac_texts.php:133
+#: common/include/rbac_texts.php:150
 #, fuzzy
 msgid "Approve documents"
 msgstr "Модул \"Форуми\""
 
-#: common/include/rbac_texts.php:134
+#: common/include/rbac_texts.php:151
 #, fuzzy
 msgid "Doc manager administration"
 msgstr "Администриране"
 
-#: common/include/rbac_texts.php:136
+#: common/include/rbac_texts.php:153
 msgid "View public packages only"
 msgstr ""
 
-#: common/include/rbac_texts.php:137
+#: common/include/rbac_texts.php:154
 #, fuzzy
 msgid "View all packages"
 msgstr "Добавени пакети"
 
-#: common/include/rbac_texts.php:138
+#: common/include/rbac_texts.php:155
 #, fuzzy
 msgid "Publish files"
 msgstr "Общодостъпни места"
 
-#: common/include/rbac_texts.php:147
+#: common/include/rbac_texts.php:164
 #, fuzzy
 msgid "Forge statistics"
 msgstr "Модул \"Статистики\""
 
-#: common/include/rbac_texts.php:149
+#: common/include/rbac_texts.php:166
 #, fuzzy
 msgid "Project visibility"
 msgstr "Общо за целия проект"
 
-#: common/include/rbac_texts.php:152
+#: common/include/rbac_texts.php:169
 #, fuzzy
 msgid "Trackers administration"
 msgstr "Администриране"
 
-#: common/include/rbac_texts.php:160
+#: common/include/rbac_texts.php:177
 #, fuzzy
 msgid "Default for new trackers"
 msgstr "Създаване на пакет"
 
-#: common/include/rbac_texts.php:161
+#: common/include/rbac_texts.php:178
 msgid "Default for new task managers"
 msgstr ""
 
-#: common/include/rbac_texts.php:162
+#: common/include/rbac_texts.php:179
 msgid "Default for new forums"
 msgstr ""
 
-#: common/include/rbac_texts.php:165
+#: common/include/rbac_texts.php:182
 #, fuzzy
 msgid "Documentation manager"
 msgstr "Преглед на документите"
@@ -5128,7 +5169,7 @@ msgid "Canned Response Updated"
 msgstr ""
 
 #: common/tracker/actions/admin-updates.php:184
-#: common/tracker/actions/tracker.php:37 www/tracker/admin/index.php:72
+#: common/tracker/actions/tracker.php:38 www/tracker/admin/index.php:72
 #: www/tracker/download.php:42
 msgid "ArtifactType could not be created"
 msgstr ""
@@ -5202,15 +5243,15 @@ msgstr "Грешка при получаването на "
 msgid "Element deleted"
 msgstr "Няма намерени."
 
-#: common/tracker/actions/browse.php:95
+#: common/tracker/actions/browse.php:96
 #: common/tracker/actions/downloadcsv.php:38
 #: common/tracker/actions/taskmgr.php:142 www/pm/admin/index.php:405
 #: www/pm/index.php:46 www/pm/task.php:86 www/tracker/roadmap.php:333
 msgid "Could Not Get Factory"
 msgstr ""
 
-#: common/tracker/actions/browse.php:184 common/tracker/actions/browse.php:306
-#: common/tracker/actions/browse.php:311 common/tracker/actions/query.php:340
+#: common/tracker/actions/browse.php:185 common/tracker/actions/browse.php:313
+#: common/tracker/actions/browse.php:318 common/tracker/actions/query.php:340
 #: www/pm/browse_task.php:106 www/pm/browse_task.php:117
 #: www/pm/browse_task.php:159 www/pm/ganttpage.php:152
 #: www/pm/ganttpage.php:154 www/pm/ganttpage.php:156 www/pm/ganttpage.php:158
@@ -5218,12 +5259,12 @@ msgstr ""
 msgid "Any"
 msgstr ""
 
-#: common/tracker/actions/browse.php:189 www/pm/browse_task.php:108
+#: common/tracker/actions/browse.php:190 www/pm/browse_task.php:108
 #: www/pm/browse_task.php:353 www/pm/ganttpage.php:154
 msgid "Unassigned"
 msgstr ""
 
-#: common/tracker/actions/browse.php:195 common/tracker/actions/browse.php:553
+#: common/tracker/actions/browse.php:196 common/tracker/actions/browse.php:560
 #: common/tracker/actions/query.php:196
 #: common/tracker/views/form-addcanned.php:40 www/admin/massmail.php:134
 #: www/admin/search.php:72 www/admin/search.php:147 www/my/dashboard.php:65
@@ -5233,12 +5274,12 @@ msgstr ""
 msgid "Id"
 msgstr ""
 
-#: common/tracker/actions/browse.php:196 common/tracker/actions/browse.php:565
-#: common/tracker/actions/browse.php:737 common/tracker/actions/detail.php:73
-#: common/tracker/actions/mod-limited.php:119
-#: common/tracker/actions/mod.php:147 common/tracker/actions/query.php:197
+#: common/tracker/actions/browse.php:197 common/tracker/actions/browse.php:572
+#: common/tracker/actions/browse.php:759 common/tracker/actions/detail.php:90
+#: common/tracker/actions/mod-limited.php:136
+#: common/tracker/actions/mod.php:175 common/tracker/actions/query.php:197
 #: common/tracker/include/build_submission_form.php:66
-#: common/tracker/views/form-customizelist.php:40
+#: common/tracker/views/form-customizelist.php:41
 #: plugins/mantisbt/view/addIssue.php:73
 #: plugins/mantisbt/view/editIssue.php:128
 #: plugins/mantisbt/view/viewIssue.php:85 www/my/dashboard.php:76
@@ -5248,9 +5289,9 @@ msgstr ""
 msgid "Priority"
 msgstr ""
 
-#: common/tracker/actions/browse.php:198 common/tracker/actions/browse.php:559
+#: common/tracker/actions/browse.php:199 common/tracker/actions/browse.php:566
 #: common/tracker/actions/query.php:199
-#: common/tracker/views/form-customizelist.php:38
+#: common/tracker/views/form-customizelist.php:39
 #: cronjobs/send_pending_items_mail.php:118 www/people/viewjob.php:76
 #: www/pm/include/ProjectTaskHTML.class.php:111
 #: www/project/report/index.php:136
@@ -5258,128 +5299,146 @@ msgstr ""
 msgid "Open Date"
 msgstr ""
 
-#: common/tracker/actions/browse.php:199 common/tracker/actions/browse.php:573
+#: common/tracker/actions/browse.php:200 common/tracker/actions/browse.php:580
 #: common/tracker/actions/query.php:200
-#: common/tracker/views/form-customizelist.php:46
+#: common/tracker/views/form-customizelist.php:47
 #, fuzzy
 msgid "Last Modified Date"
 msgstr "Дневникът е обновен"
 
-#: common/tracker/actions/browse.php:200 common/tracker/actions/browse.php:561
+#: common/tracker/actions/browse.php:201 common/tracker/actions/browse.php:568
 #: common/tracker/actions/query.php:201
-#: common/tracker/views/form-customizelist.php:43
+#: common/tracker/views/form-customizelist.php:44
 msgid "Close Date"
 msgstr ""
 
-#: common/tracker/actions/browse.php:202 common/tracker/actions/browse.php:402
+#: common/tracker/actions/browse.php:203 common/tracker/actions/browse.php:409
 #: common/tracker/actions/query.php:203 common/tracker/actions/query.php:347
 #: www/pm/browse_task.php:158 www/pm/ganttpage.php:181
 msgid "Assignee"
 msgstr ""
 
-#: common/tracker/actions/browse.php:218 common/tracker/actions/query.php:219
+#: common/tracker/actions/browse.php:204 common/tracker/actions/browse.php:582
+#: common/tracker/views/form-customizelist.php:48
+#, fuzzy
+msgid "# Votes"
+msgstr "Бележки"
+
+#: common/tracker/actions/browse.php:205 common/tracker/actions/browse.php:584
+#: common/tracker/views/form-customizelist.php:49
+#, fuzzy
+msgid "# Voters"
+msgstr "Бележки"
+
+#: common/tracker/actions/browse.php:206
+#: common/tracker/views/form-customizelist.php:50
+#, fuzzy
+msgid "% Votes"
+msgstr "Бележки"
+
+#: common/tracker/actions/browse.php:225 common/tracker/actions/query.php:219
 msgid "Ascending"
 msgstr ""
 
-#: common/tracker/actions/browse.php:219 common/tracker/actions/query.php:220
+#: common/tracker/actions/browse.php:226 common/tracker/actions/query.php:220
 msgid "Descending"
 msgstr ""
 
-#: common/tracker/actions/browse.php:229 common/tracker/actions/query.php:230
+#: common/tracker/actions/browse.php:236 common/tracker/actions/query.php:230
 msgid "Any changes"
 msgstr ""
 
-#: common/tracker/actions/browse.php:230 common/tracker/actions/query.php:231
+#: common/tracker/actions/browse.php:237 common/tracker/actions/query.php:231
 msgid "Last 24 h"
 msgstr ""
 
-#: common/tracker/actions/browse.php:231 common/tracker/actions/query.php:232
+#: common/tracker/actions/browse.php:238 common/tracker/actions/query.php:232
 msgid "Last 7 days"
 msgstr ""
 
-#: common/tracker/actions/browse.php:232 common/tracker/actions/query.php:233
+#: common/tracker/actions/browse.php:239 common/tracker/actions/query.php:233
 msgid "Last 2 weeks"
 msgstr ""
 
-#: common/tracker/actions/browse.php:233 common/tracker/actions/query.php:234
+#: common/tracker/actions/browse.php:240 common/tracker/actions/query.php:234
 #, fuzzy
 msgid "Last month"
 msgstr "Последен пост"
 
-#: common/tracker/actions/browse.php:272 www/pm/browse_task.php:181
+#: common/tracker/actions/browse.php:279 www/pm/browse_task.php:181
 #, php-format
 msgid "Displaying results %1$d‒%2$d out of %3$d total."
 msgstr ""
 
-#: common/tracker/actions/browse.php:275 www/pm/browse_task.php:184
+#: common/tracker/actions/browse.php:282 www/pm/browse_task.php:184
 #, php-format
 msgid "Displaying %2$s results."
 msgstr ""
 
-#: common/tracker/actions/browse.php:277 www/pm/browse_task.php:186
+#: common/tracker/actions/browse.php:284 www/pm/browse_task.php:186
 #: www/top/topusers.php:67
 msgid "Change"
 msgstr ""
 
-#: common/tracker/actions/browse.php:328 common/tracker/actions/browse.php:438
+#: common/tracker/actions/browse.php:335 common/tracker/actions/browse.php:445
 msgid "Advanced queries"
 msgstr ""
 
-#: common/tracker/actions/browse.php:358 www/include/html.php:653
+#: common/tracker/actions/browse.php:365 www/include/html.php:657
 #, fuzzy
 msgid "Select One"
 msgstr "Файл"
 
-#: common/tracker/actions/browse.php:365 www/frs/admin/index.php:210
+#: common/tracker/actions/browse.php:372 www/frs/admin/index.php:210
 #: www/my/diary.php:209
 msgid "Private"
 msgstr ""
 
-#: common/tracker/actions/browse.php:377
+#: common/tracker/actions/browse.php:384
 msgid "Power Query"
 msgstr ""
 
-#: common/tracker/actions/browse.php:379 common/tracker/actions/browse.php:391
+#: common/tracker/actions/browse.php:386 common/tracker/actions/browse.php:398
 #: common/tracker/actions/query.php:252 common/tracker/actions/query.php:256
 msgid "Build Query"
 msgstr ""
 
-#: common/tracker/actions/browse.php:395 common/tracker/actions/browse.php:439
+#: common/tracker/actions/browse.php:402 common/tracker/actions/browse.php:446
 msgid "Simple Filtering and Sorting"
 msgstr ""
 
-#: common/tracker/actions/browse.php:423 common/tracker/actions/query.php:391
+#: common/tracker/actions/browse.php:430 common/tracker/actions/query.php:391
 msgid "Order by"
 msgstr ""
 
-#: common/tracker/actions/browse.php:426
+#: common/tracker/actions/browse.php:433
 msgid "Quick Browse"
 msgstr ""
 
-#: common/tracker/actions/browse.php:435
+#: common/tracker/actions/browse.php:442
 #: common/tracker/views/form-adminroadmap.php:489
 msgid "Default"
 msgstr ""
 
-#: common/tracker/actions/browse.php:437
+#: common/tracker/actions/browse.php:444
 #, php-format
 msgid "Viewing only opened records by default, use “%1$s” or “%2$s” to change."
 msgstr ""
 
-#: common/tracker/actions/browse.php:538 www/pm/browse_task.php:209
+#: common/tracker/actions/browse.php:545 www/pm/browse_task.php:209
 msgid "Check all"
 msgstr ""
 
-#: common/tracker/actions/browse.php:540 www/pm/browse_task.php:211
+#: common/tracker/actions/browse.php:547 www/pm/browse_task.php:211
 msgid "Clear all"
 msgstr ""
 
-#: common/tracker/actions/browse.php:567 common/tracker/actions/browse.php:745
-#: common/tracker/actions/detail.php:97
-#: common/tracker/actions/mod-limited.php:114
-#: common/tracker/actions/mod.php:140 common/tracker/Artifact.class.php:932
+#: common/tracker/actions/browse.php:574 common/tracker/actions/browse.php:767
+#: common/tracker/actions/detail.php:114
+#: common/tracker/actions/mod-limited.php:131
+#: common/tracker/actions/mod.php:168 common/tracker/Artifact.class.php:941
 #: common/tracker/include/build_submission_form.php:62
-#: common/tracker/views/form-customizelist.php:41
+#: common/tracker/views/form-customizelist.php:42
 #: cronjobs/send_pending_items_mail.php:119
 #: plugins/mantisbt/controler/filter.php:138
 #: plugins/mantisbt/view/addIssue.php:74
@@ -5391,9 +5450,10 @@ msgstr ""
 msgid "Assigned to"
 msgstr ""
 
-#: common/tracker/actions/browse.php:569 common/tracker/actions/detail.php:87
-#: common/tracker/actions/mod-limited.php:86 common/tracker/actions/mod.php:88
-#: common/tracker/views/form-customizelist.php:42
+#: common/tracker/actions/browse.php:576 common/tracker/actions/detail.php:104
+#: common/tracker/actions/mod-limited.php:103
+#: common/tracker/actions/mod.php:113
+#: common/tracker/views/form-customizelist.php:43
 #: cronjobs/send_pending_items_mail.php:79
 #: cronjobs/send_pending_items_mail.php:120
 #: plugins/mantisbt/controler/filter.php:122 www/admin/approve-pending.php:209
@@ -5407,48 +5467,53 @@ msgstr ""
 msgid "Submitted by"
 msgstr ""
 
-#: common/tracker/actions/browse.php:571 common/tracker/actions/mod.php:228
+#: common/tracker/actions/browse.php:578 common/tracker/actions/mod.php:256
 #: common/tracker/include/ArtifactTypeHtml.class.php:329
-#: common/tracker/views/form-customizelist.php:45
+#: common/tracker/views/form-customizelist.php:46
 msgid "Related Tasks"
 msgstr ""
 
-#: common/tracker/actions/browse.php:691
+#: common/tracker/actions/browse.php:586
+#, fuzzy
+msgid "% Voted"
+msgstr "Бележки"
+
+#: common/tracker/actions/browse.php:713
 #, php-format
 msgid "* Denotes requests > %s Days Old"
 msgstr ""
 
-#: common/tracker/actions/browse.php:714 common/tracker/actions/browse.php:758
+#: common/tracker/actions/browse.php:736 common/tracker/actions/browse.php:780
 #: www/pm/browse_task.php:359 www/pm/browse_task.php:388
 #, fuzzy
 msgid "Mass Update"
 msgstr "Дневникът е обновен"
 
-#: common/tracker/actions/browse.php:718 www/pm/browse_task.php:364
+#: common/tracker/actions/browse.php:740 www/pm/browse_task.php:364
 msgid ""
 "If you wish to apply changes to all items selected above, use these controls "
 "to change their properties and click once on “Mass Update”."
 msgstr ""
 
-#: common/tracker/actions/browse.php:735 common/tracker/actions/browse.php:746
-#: common/tracker/actions/browse.php:750 www/include/html.php:363
-#: www/include/html.php:619 www/include/html.php:823
+#: common/tracker/actions/browse.php:757 common/tracker/actions/browse.php:768
+#: common/tracker/actions/browse.php:772 www/include/html.php:363
+#: www/include/html.php:623 www/include/html.php:827
 #: www/pm/browse_task.php:356 www/pm/browse_task.php:371
 #: www/pm/browse_task.php:382
 msgid "No Change"
 msgstr ""
 
-#: common/tracker/actions/browse.php:746
+#: common/tracker/actions/browse.php:768
 #: common/tracker/include/ArtifactTypeHtml.class.php:696
 #: common/tracker/include/ArtifactTypeHtml.class.php:730
 msgid "Nobody"
 msgstr ""
 
-#: common/tracker/actions/browse.php:755 common/tracker/Artifact.class.php:940
+#: common/tracker/actions/browse.php:777 common/tracker/Artifact.class.php:949
 msgid "Canned Response"
 msgstr ""
 
-#: common/tracker/actions/browse.php:767
+#: common/tracker/actions/browse.php:789
 msgid "No items found"
 msgstr ""
 
@@ -5508,52 +5573,70 @@ msgstr ""
 msgid "I am Sure"
 msgstr "Добавяне на проучване"
 
-#: common/tracker/actions/detail.php:61
-#: common/tracker/actions/mod-limited.php:78 common/tracker/actions/mod.php:79
-#: common/tracker/actions/query.php:265
+#: common/tracker/actions/detail.php:63
+#: common/tracker/actions/mod-limited.php:72 common/tracker/actions/mod.php:77
+#: www/survey/admin/show_results.php:99
+#, fuzzy
+msgid "Votes"
+msgstr "Бележки"
+
+#: common/tracker/actions/detail.php:67
+#: common/tracker/actions/mod-limited.php:76 common/tracker/actions/mod.php:82
+msgid "Retract Vote"
+msgstr ""
+
+#: common/tracker/actions/detail.php:70
+#: common/tracker/actions/mod-limited.php:79 common/tracker/actions/mod.php:85
+#, fuzzy
+msgid "Cast Vote"
+msgstr "Фамилия:"
+
+#: common/tracker/actions/detail.php:78
+#: common/tracker/actions/mod-limited.php:95
+#: common/tracker/actions/mod.php:104 common/tracker/actions/query.php:265
 msgid "Save Changes"
 msgstr ""
 
-#: common/tracker/actions/detail.php:124 common/tracker/actions/detail.php:140
-#: common/tracker/actions/mod-limited.php:158
-#: common/tracker/actions/mod-limited.php:164
-#: common/tracker/actions/mod.php:189 common/tracker/actions/mod.php:218
+#: common/tracker/actions/detail.php:141 common/tracker/actions/detail.php:157
+#: common/tracker/actions/mod-limited.php:175
+#: common/tracker/actions/mod-limited.php:181
+#: common/tracker/actions/mod.php:217 common/tracker/actions/mod.php:246
 #: common/tracker/actions/query.php:386 www/news/news_utils.php:181
 #: www/pm/include/ProjectTaskHTML.class.php:142
 #: www/survey/include/SurveyHTML.class.php:667
 msgid "Comments"
 msgstr ""
 
-#: common/tracker/actions/detail.php:133
-#: common/tracker/actions/mod-limited.php:161 www/pm/mod_task.php:126
+#: common/tracker/actions/detail.php:150
+#: common/tracker/actions/mod-limited.php:178 www/pm/mod_task.php:126
 msgid "Add A Comment"
 msgstr ""
 
-#: common/tracker/actions/detail.php:155
-#: common/tracker/actions/mod-limited.php:181
-#: common/tracker/actions/mod.php:244
+#: common/tracker/actions/detail.php:172
+#: common/tracker/actions/mod-limited.php:198
+#: common/tracker/actions/mod.php:272
 #: common/tracker/include/build_submission_form.php:106
 msgid "Attach Files"
 msgstr ""
 
-#: common/tracker/actions/detail.php:155
-#: common/tracker/actions/mod-limited.php:181
-#: common/tracker/actions/mod.php:244
+#: common/tracker/actions/detail.php:172
+#: common/tracker/actions/mod-limited.php:198
+#: common/tracker/actions/mod.php:272
 #: common/tracker/include/build_submission_form.php:106
 #: www/frs/admin/editrelease.php:251 www/frs/admin/editrelease.php:258
 #: www/frs/admin/editrelease.php:294
 msgid "max upload size: "
 msgstr ""
 
-#: common/tracker/actions/detail.php:162
-#: common/tracker/actions/mod-limited.php:188
+#: common/tracker/actions/detail.php:179
+#: common/tracker/actions/mod-limited.php:205
 #: plugins/mantisbt/view/viewAttachment.php:44
 msgid "Attached Files"
 msgstr ""
 
-#: common/tracker/actions/detail.php:172
-#: common/tracker/actions/mod-limited.php:198
-#: common/tracker/actions/mod.php:259
+#: common/tracker/actions/detail.php:189
+#: common/tracker/actions/mod-limited.php:215
+#: common/tracker/actions/mod.php:287
 #: plugins/scmcvs/common/CVSPlugin.class.php:177
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:212
 #: plugins/scmsvn/common/SVNPlugin.class.php:224
@@ -5562,10 +5645,10 @@ msgstr ""
 msgid "Commits"
 msgstr ""
 
-#: common/tracker/actions/detail.php:182 common/tracker/actions/detail.php:183
-#: common/tracker/actions/mod-limited.php:208
-#: common/tracker/actions/mod-limited.php:209
-#: common/tracker/actions/mod.php:269 common/tracker/actions/mod.php:270
+#: common/tracker/actions/detail.php:199 common/tracker/actions/detail.php:200
+#: common/tracker/actions/mod-limited.php:225
+#: common/tracker/actions/mod-limited.php:226
+#: common/tracker/actions/mod.php:297 common/tracker/actions/mod.php:298
 #: common/tracker/include/ArtifactHtml.class.php:215
 #: www/snippet/addversion.php:98 www/snippet/addversion.php:221
 msgid "Changes"
@@ -5610,8 +5693,8 @@ msgstr ""
 #: plugins/scmhg/common/HgPlugin.class.php:630 www/admin/pluginman.php:230
 #: www/admin/pluginman.php:249 www/admin/pluginman.php:261
 #: www/admin/pluginman.php:262 www/include/html.php:322
-#: www/include/html.php:559 www/include/html.php:650 www/include/html.php:673
-#: www/include/html.php:707 www/include/html.php:750 www/pm/format_csv.php:78
+#: www/include/html.php:563 www/include/html.php:654 www/include/html.php:677
+#: www/include/html.php:711 www/include/html.php:754 www/pm/format_csv.php:78
 #: www/pm/ganttpage.php:158 www/tracker/roadmap.php:440
 msgid "None"
 msgstr ""
@@ -5671,43 +5754,44 @@ msgstr ""
 msgid "Total"
 msgstr ""
 
-#: common/tracker/actions/mod-limited.php:73 common/tracker/actions/mod.php:71
+#: common/tracker/actions/mod-limited.php:90 common/tracker/actions/mod.php:96
 msgid "Build Task Relation"
 msgstr ""
 
-#: common/tracker/actions/mod-limited.php:96 common/tracker/actions/mod.php:97
+#: common/tracker/actions/mod-limited.php:113
+#: common/tracker/actions/mod.php:122
 msgid "Date Submitted"
 msgstr ""
 
-#: common/tracker/actions/mod-limited.php:102
-#: common/tracker/actions/mod.php:103
+#: common/tracker/actions/mod-limited.php:119
+#: common/tracker/actions/mod.php:128
 msgid "Date Closed"
 msgstr ""
 
-#: common/tracker/actions/mod-limited.php:178
-#: common/tracker/actions/mod.php:241
+#: common/tracker/actions/mod-limited.php:195
+#: common/tracker/actions/mod.php:269
 msgid "Existing Files"
 msgstr ""
 
-#: common/tracker/actions/mod.php:111 common/tracker/Artifact.class.php:944
+#: common/tracker/actions/mod.php:136 common/tracker/Artifact.class.php:953
 msgid "Data Type"
 msgstr ""
 
-#: common/tracker/actions/mod.php:168 www/include/html.php:407
+#: common/tracker/actions/mod.php:196 www/include/html.php:407
 msgid ""
 "The summary text-box represents a short tracker item summary. Useful when "
 "browsing through several tracker items."
 msgstr ""
 
-#: common/tracker/actions/mod.php:175 common/tracker/actions/query.php:384
+#: common/tracker/actions/mod.php:203 common/tracker/actions/query.php:384
 #: common/tracker/include/ArtifactHtml.class.php:45
 #: common/tracker/include/ArtifactHtml.class.php:50
 #: common/tracker/include/build_submission_form.php:79
-#: common/tracker/views/form-customizelist.php:44
+#: common/tracker/views/form-customizelist.php:45
 msgid "Detailed description"
 msgstr ""
 
-#: common/tracker/actions/mod.php:192
+#: common/tracker/actions/mod.php:220
 msgid "Use Canned Response"
 msgstr ""
 
@@ -5800,14 +5884,16 @@ msgstr "Описание"
 msgid "Display a short summary box on top of the list (roadmap status)."
 msgstr ""
 
-#: common/tracker/actions/taskmgr.php:40 common/tracker/actions/tracker.php:75
-#: common/tracker/actions/tracker.php:166
-#: common/tracker/actions/tracker.php:253
-#: common/tracker/actions/tracker.php:424
-#: common/tracker/actions/tracker.php:441
-#: common/tracker/actions/tracker.php:470
-#: common/tracker/actions/tracker.php:491
-#: common/tracker/actions/tracker.php:548 www/tracker/download.php:50
+#: common/tracker/actions/taskmgr.php:40 common/tracker/actions/tracker.php:76
+#: common/tracker/actions/tracker.php:167
+#: common/tracker/actions/tracker.php:254
+#: common/tracker/actions/tracker.php:425
+#: common/tracker/actions/tracker.php:442
+#: common/tracker/actions/tracker.php:471
+#: common/tracker/actions/tracker.php:492
+#: common/tracker/actions/tracker.php:549
+#: common/tracker/actions/tracker.php:572
+#: common/tracker/actions/tracker.php:590 www/tracker/download.php:50
 msgid "Artifact Could Not Be Created"
 msgstr ""
 
@@ -5833,7 +5919,7 @@ msgstr ""
 
 #: common/tracker/actions/taskmgr.php:107
 #: common/tracker/actions/taskmgr.php:161
-#: common/tracker/actions/tracker.php:282 www/activity/index.php:291
+#: common/tracker/actions/tracker.php:283 www/activity/index.php:291
 #: www/activity/index.php:296
 msgid "Tracker Item"
 msgstr ""
@@ -5865,209 +5951,224 @@ msgstr ""
 msgid "Create New Task"
 msgstr ""
 
-#: common/tracker/actions/tracker.php:97
+#: common/tracker/actions/tracker.php:98
 #, fuzzy, php-format
 msgid "Item %s successfully created"
 msgstr "Създадено успешно"
 
-#: common/tracker/actions/tracker.php:109
+#: common/tracker/actions/tracker.php:110
 #, php-format
 msgid "Error on attached file %1$d, file is too large (maximum: %2$s)."
 msgstr ""
 
-#: common/tracker/actions/tracker.php:113
+#: common/tracker/actions/tracker.php:114
 #, php-format
 msgid "Error on attached file %d, transfer interrupted."
 msgstr ""
 
-#: common/tracker/actions/tracker.php:127
-#: common/tracker/actions/tracker.php:354
-#: common/tracker/actions/tracker.php:383
+#: common/tracker/actions/tracker.php:128
+#: common/tracker/actions/tracker.php:355
+#: common/tracker/actions/tracker.php:384
 #, fuzzy
 msgid "Could Not Create File Object"
 msgstr "Разрешение не беше получено"
 
-#: common/tracker/actions/tracker.php:135
+#: common/tracker/actions/tracker.php:136
 msgid "Could Not Attach File to Item: "
 msgstr ""
 
-#: common/tracker/actions/tracker.php:219
+#: common/tracker/actions/tracker.php:220
 #, fuzzy
 msgid "Updated Successfully"
 msgstr "Обновено успешно"
 
-#: common/tracker/actions/tracker.php:266
+#: common/tracker/actions/tracker.php:267
 #, fuzzy, php-format
 msgid "Could not get Project Task for %d"
 msgstr "Разрешение не беше получено"
 
-#: common/tracker/actions/tracker.php:292
-#: common/tracker/actions/tracker.php:311
+#: common/tracker/actions/tracker.php:293
+#: common/tracker/actions/tracker.php:312
 msgid "Comment added"
 msgstr ""
 
-#: common/tracker/actions/tracker.php:335
+#: common/tracker/actions/tracker.php:336
 #, php-format
 msgid "Error: Skipping attachment %d: file is too large."
 msgstr ""
 
-#: common/tracker/actions/tracker.php:339
+#: common/tracker/actions/tracker.php:340
 #, php-format
 msgid "Error: Skipping attachment %d: transfer interrupted."
 msgstr ""
 
-#: common/tracker/actions/tracker.php:363
+#: common/tracker/actions/tracker.php:364
 msgid "File Upload: Error"
 msgstr ""
 
-#: common/tracker/actions/tracker.php:366
+#: common/tracker/actions/tracker.php:367
 msgid "File Upload: Successful"
 msgstr ""
 
-#: common/tracker/actions/tracker.php:388
+#: common/tracker/actions/tracker.php:389
 #, fuzzy
 msgid "File Delete"
 msgstr "Следващи Резултати"
 
-#: common/tracker/actions/tracker.php:391
+#: common/tracker/actions/tracker.php:392
 msgid "File Delete: Successful"
 msgstr ""
 
-#: common/tracker/actions/tracker.php:402
+#: common/tracker/actions/tracker.php:403
 #, fuzzy, php-format
 msgid "Item %s successfully updated"
 msgstr "Паролата сменена успешно"
 
-#: common/tracker/actions/tracker.php:448
+#: common/tracker/actions/tracker.php:449
 #, fuzzy
 msgid "Monitoring Deactivated"
 msgstr "Наблюдавани Форуми"
 
-#: common/tracker/actions/tracker.php:496
+#: common/tracker/actions/tracker.php:497
 msgid "Confirmation failed. Artifact not deleted"
 msgstr ""
 
-#: common/tracker/actions/tracker.php:502
+#: common/tracker/actions/tracker.php:503
 msgid "Artifact Deleted Successfully"
 msgstr ""
+
+#: common/tracker/actions/tracker.php:577
+#, fuzzy
+msgid "Retracted Vote successfully"
+msgstr "Форумът е създаден успешно"
+
+#: common/tracker/actions/tracker.php:595
+#, fuzzy
+msgid "Cast Vote successfully"
+msgstr "Създадено успешно"
 
 #: common/tracker/ArtifactCanned.class.php:86
 msgid "Title and Message Body are required"
 msgstr ""
 
-#: common/tracker/Artifact.class.php:142
+#: common/tracker/Artifact.class.php:150
 #: common/tracker/ArtifactExtraField.class.php:69
 #, fuzzy
 msgid "Invalid Artifact Type"
 msgstr "Грешна парола"
 
-#: common/tracker/Artifact.class.php:154
+#: common/tracker/Artifact.class.php:162
 msgid "Only project members can view private artifact types"
 msgstr ""
 
-#: common/tracker/Artifact.class.php:191 common/tracker/Artifact.class.php:778
+#: common/tracker/Artifact.class.php:199 common/tracker/Artifact.class.php:787
 #, fuzzy
 msgid "You are not currently allowed to submit items to this tracker."
 msgstr "Нямате право да достъпвате тази страница"
 
-#: common/tracker/Artifact.class.php:206
+#: common/tracker/Artifact.class.php:214
 msgid "Message Summary Is Required"
 msgstr ""
 
-#: common/tracker/Artifact.class.php:210
+#: common/tracker/Artifact.class.php:218
 msgid "Message Body Is Required"
 msgstr ""
 
-#: common/tracker/Artifact.class.php:228
+#: common/tracker/Artifact.class.php:236
 #, fuzzy
 msgid "Error remapping status"
 msgstr "Грешка при създаването на "
 
-#: common/tracker/Artifact.class.php:299
+#: common/tracker/Artifact.class.php:308
 #, fuzzy
 msgid "Invalid Artifact ID"
 msgstr "Грешна парола"
 
-#: common/tracker/Artifact.class.php:515
+#: common/tracker/Artifact.class.php:524
 #, fuzzy
 msgid "Error deleting extra field data: "
 msgstr "Грешка при получаването на "
 
-#: common/tracker/Artifact.class.php:526
+#: common/tracker/Artifact.class.php:535
 #, fuzzy
 msgid "Error deleting file from db: "
 msgstr "Грешка при създаването на "
 
-#: common/tracker/Artifact.class.php:534
+#: common/tracker/Artifact.class.php:543
 #, fuzzy
 msgid "Error deleting message: "
 msgstr "Грешка при добавянето на форум"
 
-#: common/tracker/Artifact.class.php:542
+#: common/tracker/Artifact.class.php:551
 #, fuzzy
 msgid "Error deleting history: "
 msgstr "Информация за проекта"
 
-#: common/tracker/Artifact.class.php:550
+#: common/tracker/Artifact.class.php:559
 #, fuzzy
 msgid "Error deleting monitor: "
 msgstr "Грешка при добавянето на форум"
 
-#: common/tracker/Artifact.class.php:558
+#: common/tracker/Artifact.class.php:567
 #, fuzzy
 msgid "Error deleting artifact: "
 msgstr "Грешка при получаването на "
 
-#: common/tracker/Artifact.class.php:569 common/tracker/Artifact.class.php:579
+#: common/tracker/Artifact.class.php:578 common/tracker/Artifact.class.php:588
 #, fuzzy
 msgid "Error updating artifact counts: "
 msgstr "Информация за проекта"
 
-#: common/tracker/Artifact.class.php:600
+#: common/tracker/Artifact.class.php:609
 #, fuzzy
 msgid "Valid Email Address Required"
 msgstr "Невалиден Email Адрес"
 
-#: common/tracker/Artifact.class.php:951
+#: common/tracker/Artifact.class.php:960
 msgid "Invalid assigned person: must be a technician"
 msgstr ""
 
-#: common/tracker/Artifact.class.php:974
+#: common/tracker/Artifact.class.php:983
 #, fuzzy
 msgid "Could not move to new Artifact Type"
 msgstr "Разрешение не беше получено"
 
-#: common/tracker/Artifact.class.php:986
+#: common/tracker/Artifact.class.php:995
 #, php-format
 msgid "Moved from %1$s to %2$s"
 msgstr ""
 
-#: common/tracker/Artifact.class.php:1060
+#: common/tracker/Artifact.class.php:1069
 msgid "Removal of old artifact_extra_field_data failed: "
 msgstr ""
 
-#: common/tracker/Artifact.class.php:1168
+#: common/tracker/Artifact.class.php:1177
 #, fuzzy
 msgid "Could Not Create Canned Response Object"
 msgstr "Разрешение не беше получено"
 
-#: common/tracker/Artifact.class.php:1181
+#: common/tracker/Artifact.class.php:1190
 msgid "Unable to Use Canned Response"
 msgstr ""
 
-#: common/tracker/Artifact.class.php:1196
+#: common/tracker/Artifact.class.php:1205
 msgid "Nothing Changed - Update Cancelled"
 msgstr ""
 
-#: common/tracker/Artifact.class.php:1229
+#: common/tracker/Artifact.class.php:1238
 #, fuzzy
 msgid "Error updating assigned_to in artifact: "
 msgstr "Информация за проекта"
 
-#: common/tracker/Artifact.class.php:1304
-#: common/tracker/Artifact.class.php:1314
+#: common/tracker/Artifact.class.php:1313
+#: common/tracker/Artifact.class.php:1323
 msgid "Status Custom Field Must Be Set"
 msgstr ""
+
+#: common/tracker/Artifact.class.php:1796
+#, fuzzy
+msgid "User ID not passed"
+msgstr "Истинско Име"
 
 #: common/tracker/ArtifactExtraField.class.php:108
 #: common/tracker/ArtifactExtraField.class.php:404
@@ -6228,18 +6329,18 @@ msgstr ""
 msgid "Invalid Close Date Range"
 msgstr ""
 
-#: common/tracker/ArtifactType.class.php:209
-#: common/tracker/ArtifactType.class.php:968
+#: common/tracker/ArtifactType.class.php:216
+#: common/tracker/ArtifactType.class.php:976
 msgid ""
 "ArtifactType: Name, Description, Due Period, and Status Timeout are required"
 msgstr ""
 
-#: common/tracker/ArtifactType.class.php:216
-#: common/tracker/ArtifactType.class.php:986
+#: common/tracker/ArtifactType.class.php:223
+#: common/tracker/ArtifactType.class.php:994
 msgid "E-mail address(es) appeared invalid"
 msgstr ""
 
-#: common/tracker/ArtifactType.class.php:979
+#: common/tracker/ArtifactType.class.php:987
 #, fuzzy
 msgid "Tracker name already used"
 msgstr "Това потребителско име вече е заето."
@@ -6503,14 +6604,14 @@ msgstr "Файл"
 
 #: common/tracker/views/form-addextrafieldoption.php:47
 #: common/tracker/views/form-adminroadmap.php:402
-#: common/tracker/views/form-customizelist.php:98
+#: common/tracker/views/form-customizelist.php:102
 #, fuzzy
 msgid "Current / New positions"
 msgstr "Версия"
 
 #: common/tracker/views/form-addextrafieldoption.php:48
 #: common/tracker/views/form-adminroadmap.php:403
-#: common/tracker/views/form-customizelist.php:99
+#: common/tracker/views/form-customizelist.php:103
 msgid "Up/Down positions"
 msgstr ""
 
@@ -6525,7 +6626,7 @@ msgstr ""
 
 #: common/tracker/views/form-addextrafieldoption.php:84
 #: common/tracker/views/form-adminroadmap.php:412
-#: common/tracker/views/form-customizelist.php:108
+#: common/tracker/views/form-customizelist.php:112
 #, fuzzy
 msgid "Reorder"
 msgstr "Премахване"
@@ -6867,26 +6968,26 @@ msgid ""
 "you from cloning multiple times or making a huge mess. You have been warned!"
 msgstr ""
 
-#: common/tracker/views/form-customizelist.php:24
+#: common/tracker/views/form-customizelist.php:25
 msgid "Customize Browse List"
 msgstr ""
 
-#: common/tracker/views/form-customizelist.php:90
+#: common/tracker/views/form-customizelist.php:94
 msgid ""
 "Set order of the fields that will be displayed on the browse view of your "
 "tracker:"
 msgstr ""
 
-#: common/tracker/views/form-customizelist.php:97
+#: common/tracker/views/form-customizelist.php:101
 msgid "Fields"
 msgstr ""
 
-#: common/tracker/views/form-customizelist.php:118
+#: common/tracker/views/form-customizelist.php:122
 msgid ""
 "Select the fields that will be displayed on the browse view of your tracker:"
 msgstr ""
 
-#: common/tracker/views/form-customizelist.php:123
+#: common/tracker/views/form-customizelist.php:127
 #, fuzzy
 msgid "Add New Field"
 msgstr "Добавяне"
@@ -8065,7 +8166,7 @@ msgstr ""
 
 #: plugins/admssw/www/index.php:43
 #, fuzzy
-msgid "Public projects :"
+msgid "Public projects:"
 msgstr "Тема:"
 
 #: plugins/admssw/www/index.php:46
@@ -8088,7 +8189,7 @@ msgstr ""
 
 #: plugins/admssw/www/index.php:53
 #, fuzzy
-msgid "Trove categories :"
+msgid "Trove Categories:"
 msgstr "Няма намерени категории"
 
 #: plugins/admssw/www/index.php:56
@@ -11741,7 +11842,7 @@ msgstr ""
 
 #: plugins/mediawiki/www/plugin_admin.php:173
 #, fuzzy
-msgid "This project's wiki logo : $wgLogo"
+msgid "This project's wiki logo: $wgLogo"
 msgstr "Модул \"Пощенски списъци\""
 
 #: plugins/mediawiki/www/plugin_admin.php:176
@@ -13420,12 +13521,12 @@ msgid "Error! homedirs.php hasn't created a home directory for user %s"
 msgstr ""
 
 #: plugins/scmcvs/www/acl.php:44
-msgid "Invalid CVS repository : "
+msgid "Invalid CVS repository: "
 msgstr ""
 
 #: plugins/scmcvs/www/acl.php:47
 #, fuzzy
-msgid "Invalid username : "
+msgid "Invalid username: "
 msgstr "Грешна парола"
 
 #: plugins/scmcvs/www/acl.php:53
@@ -17467,105 +17568,121 @@ msgid ""
 "also get emails for those reasons as well!"
 msgstr ""
 
-#: www/include/html.php:565
+#: www/include/html.php:427
+msgid ""
+"You can cast your vote for a Tracker Item to aid Project Management to "
+"decide which features to prioritise, and retract votes at any time. Please "
+"use this functionality sparingly, as it loses its meaning if you vote on "
+"*every* item."
+msgstr ""
+
+#: www/include/html.php:429
+msgid ""
+"This metric displays the number of people who can *currently* vote for "
+"features in this tracker, and how many of them did so. (This means historic "
+"votes of people no longer allowed to vote, while not lost, do not play into "
+"the numbers displayed.)"
+msgstr ""
+
+#: www/include/html.php:569
 #, fuzzy
 msgid "Error: uneven row counts"
 msgstr "Няма въпроси към това проучване"
 
-#: www/include/html.php:825
+#: www/include/html.php:829
 msgid "Lowest"
 msgstr ""
 
-#: www/include/html.php:829
+#: www/include/html.php:833
 msgid "Highest"
 msgstr ""
 
-#: www/include/html.php:913
+#: www/include/html.php:917
 #, fuzzy, php-format
 msgid "Project access problem: %s"
 msgstr "Администратори"
 
-#: www/include/html.php:915
+#: www/include/html.php:919
 #, fuzzy, php-format
 msgid "Project Problem: %s"
 msgstr "Администратори"
 
-#: www/include/html.php:984
+#: www/include/html.php:988
 msgid "My Personal Page"
 msgstr ""
 
-#: www/include/html.php:986
+#: www/include/html.php:990
 msgid ""
 "View your personal page, a selection of widgets to follow the informations "
 "from projects."
 msgstr ""
 
-#: www/include/html.php:989
+#: www/include/html.php:993
 #, fuzzy
 msgid "My Trackers Dashboard"
 msgstr "Тракер"
 
-#: www/include/html.php:991
+#: www/include/html.php:995
 #, fuzzy
 msgid "View your tasks and artifacts."
 msgstr "Нямате въведени бележки в дневника"
 
-#: www/include/html.php:995 www/my/diary.php:166
+#: www/include/html.php:999 www/my/diary.php:166
 msgid "My Diary and Notes"
 msgstr "Моят дневник и бележки"
 
-#: www/include/html.php:997
+#: www/include/html.php:1001
 msgid "Manage your diary. Add, modify or delete your notes."
 msgstr ""
 
-#: www/include/html.php:1002
+#: www/include/html.php:1006
 msgid "Manage your account. Change your password, select your preferences."
 msgstr ""
 
-#: www/include/html.php:1006 www/register/index.php:174
+#: www/include/html.php:1010 www/register/index.php:174
 msgid "Register Project"
 msgstr "Регистриране на нов проект"
 
-#: www/include/html.php:1008
+#: www/include/html.php:1012
 msgid "Register a new project in forge, following the workflow."
 msgstr ""
 
-#: www/include/html.php:1057
+#: www/include/html.php:1061
 #, php-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: www/include/html.php:1061
+#: www/include/html.php:1065
 #, php-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: www/include/html.php:1065
+#: www/include/html.php:1069
 #, php-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: www/include/html.php:1069
+#: www/include/html.php:1073
 #, php-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: www/include/html.php:1073
+#: www/include/html.php:1077
 #, php-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: www/include/html.php:1292
+#: www/include/html.php:1296
 #, php-format
 msgid " Displaying %1$s per page. Projects sorted by alphabetical order."
 msgstr ""
@@ -22286,11 +22403,6 @@ msgstr ""
 msgid "Cannot get Survey"
 msgstr "Дневникът е обновен"
 
-#: www/survey/admin/show_results.php:99
-#, fuzzy
-msgid "Votes"
-msgstr "Бележки"
-
 #: www/survey/admin/show_results.php:122
 msgid "No Survey Question is found"
 msgstr "Няма въпроси към това проучване"
@@ -23815,10 +23927,6 @@ msgstr ""
 
 #~ msgid "PAGE NOT FOUND"
 #~ msgstr "Страницата не е намерена"
-
-#, fuzzy
-#~ msgid "File %s wrote successfully."
-#~ msgstr "Създадено успешно"
 
 #, fuzzy
 #~ msgid "Missing User Argument"
