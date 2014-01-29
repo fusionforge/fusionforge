@@ -14,7 +14,7 @@
 grep -q debian-repository /etc/apt/sources.list
 if [ $? -ne 0 ]; then
     echo "You probably need to add the following in /etc/apt/sources.list :"
-    echo "deb file:///root/debian-repository local/"
+    echo "echo 'deb file:///root/debian-repository local/' >> /etc/apt/sources.list"
     exit 1
 fi
 
