@@ -6,7 +6,7 @@
  * The rest Copyright 2002-2004 (c) GForge Team - Sung Kim
  * Copyright 2008-2010 (c) FusionForge Team
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -390,19 +390,6 @@ class SurveyHTML extends Error {
 				continue;
 			}
 
-			if (!$surveys[$i]->isActive()) {
-				if ($show_inactive) {
-					$strike_open="<strike>";
-					$strike_close="</strike>";
-				} else {
-					continue;
-				}
-			} else {
-				$strike_open="";
-				$strike_close="";
-
-			}
-
 			$displaycount++;
 
 			$ret.= "<tr ". $GLOBALS['HTML']->boxGetAltRowStyle($color_index++) .">\n";
@@ -410,7 +397,13 @@ class SurveyHTML extends Error {
 				$ret.= '<td>'.$surveys[$i]->getID().'</td>';
 			}
 
-			$ret.= '<td>'.$strike_open.util_make_link ('/survey/survey.php?group_id='.$group_id.'&amp;survey_id='. $surveys[$i]->getID(), $surveys[$i]->getTitle()). $strike_close.'</td>';
+			$ret.= '<td>';
+			if ($surveys[$i]->isActive()) {
+				$ret.= util_make_link ('/survey/survey.php?group_id='.$group_id.'&amp;survey_id='. $surveys[$i]->getID(), $surveys[$i]->getTitle());
+			} else {
+				$ret.= '<strike>'.$surveys[$i]->getTitle().'</strike>';
+			}
+			$ret.= '</td>';
 
 			if ($show_questions) {
 				// add a space after comma

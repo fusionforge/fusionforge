@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
- * Copyright 2010 (c) Franck Villaume
+ * Copyright 2010-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -167,10 +167,10 @@ array($group_id, user_getid(), htmlspecialchars($title), htmlspecialchars($descr
 		'. people_job_status_box('status_id',db_result($result,0,'status_id')) .'</p>
 		<p>
 		<strong>'._('Short Description')._(':').'</strong><br />
-		<input type="text" name="title" value="'. db_result($result,0,'title') .'" size="40" maxlength="60" /></p>
+		<input type="text" name="title" value="'. db_result($result,0,'title') .'" size="40" maxlength="60" required="required" /></p>
 		<p>
 		<strong>'._('Long Description')._(':').'</strong><br />
-		<textarea name="description" rows="10" cols="60">'. db_result($result,0,'description') .'</textarea></p>
+		<textarea name="description" rows="10" cols="60" required="required" >'. db_result($result,0,'description') .'</textarea></p>
 		<p>
 		<input type="submit" name="update_job" value="'._('Update Descriptions').'" /></p>
 		</form>';

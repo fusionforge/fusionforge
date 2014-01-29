@@ -262,7 +262,7 @@ switch (getStringFromRequest('func')) {
 			if (count($remlink) > 0 && forge_check_perm ('tracker_admin', $ah->ArtifactType->Group->getID())) {
 				require_once $gfcommon.'pm/ProjectTask.class.php';
 				foreach ($remlink as $tid) {
-					$pt = &projecttask_get_object($tid);
+					$pt = projecttask_get_object($tid);
 					if (!$pt || $pt->isError())
 						exit_error(_('Error'), sprintf(_('Could not get Project Task for %d'), $tid));
 					if (!$pt->removeRelatedArtifacts(array($artifact_id)))
