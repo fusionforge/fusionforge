@@ -1,0 +1,6 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Build + inst
+Exec=sh -c "/root/scripts/build.sh ; /root/scripts/install.sh ; echo Press Enter... ; read i"
+Terminal=true
+Type=Application
