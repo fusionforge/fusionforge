@@ -242,7 +242,7 @@ class GitPlugin extends SCMPlugin {
 			$b .= '<p class="error">Error: No access protocol has been allowed for the Git plugin in scmgit.ini: : use_ssh and use_dav are disabled</p>';
 		}
 
-		if (session_loggedin()) {
+		if (session_loggedin() && forge_get_config('use_ssh', 'scmgit')) {
 			$u = user_get_object(user_getid());
 			if ($u->getUnixStatus() == 'A') {
 				$result = db_query_params('SELECT * FROM scm_personal_repos p WHERE p.group_id=$1 AND p.user_id=$2 AND plugin_id=$3',
