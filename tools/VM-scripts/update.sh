@@ -11,10 +11,11 @@
 
 # First, make sure the Debian distro is up-to-date
 aptitude update
-aptitude dist-upgrade
+aptitude -y dist-upgrade
 
 # Make sure to add tools needed for build.sh
-aptitude install bzr mini-dinstall devscripts dpatch sharutils docbook-to-man confget dupload
+aptitude -y install mini-dinstall dput devscripts equivs
+mk-build-deps -i /root/fusionforge/src/debian/control -t 'aptitude -y' -r
 
 set -e
 
@@ -32,3 +33,6 @@ if [ -d src/plugins/oslc/tests ]; then
     cd /root/fusionforge/src/plugins/oslc/tests
     ./setup-provider-test.sh
 fi
+
+# Test dependencies
+aptitude -y install php5-cli phpunit phpunit-selenium default-jre iceweasel
