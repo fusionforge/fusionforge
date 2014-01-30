@@ -85,12 +85,11 @@ fi
 
 echo "Dropping database $database"
 su - postgres -c "dropdb -e $database"
-su - postgres -c "createdb -e $database"
 
 if [ -f /root/dump ]
 then
 	echo "Restore database from dump file: psql -f- < /root/dump"
-	su - postgres -c "pg_restore -d $database" < /root/dump > /var/log/pg_restore.log 2>/var/log/pg_restore.err
+	su - postgres -c "psql -f-" < /root/dump > /var/log/pg_restore.log 2>/var/log/pg_restore.err
 else
 	# TODO: reinit the db from scratch and create the dump
 	echo "Couldn't restore the database: No /root/dump found"
