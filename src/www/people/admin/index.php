@@ -89,7 +89,7 @@ if (forge_check_global_perm('forge_admin')) {
 		$result=db_query_params('SELECT category_id,name FROM people_job_category', array());
 		echo "<p>";
 		if ($result && db_numrows($result) > 0) {
-			ShowResultSet($result,_('Existing Categories'),'people_cat');
+			ShowResultSet($result,_('Existing Categories'), 'people_cat');
 		} else {
 			echo '<p class="error">'._('No job categories').'</p>';
 			echo db_error();
@@ -115,7 +115,7 @@ if (forge_check_global_perm('forge_admin')) {
 		/*
 			Show people_groups and blank row
 		*/
-		people_header(array('title'=>_('Add/Change People Skills')));
+		people_header(array('title' => _('Add/Change People Skills')));
 
 		/*
 			List of possible people_groups for this group
@@ -123,7 +123,7 @@ if (forge_check_global_perm('forge_admin')) {
 		$result=db_query_params('SELECT skill_id,name FROM people_skill', array());
 		echo "<p>";
 		if ($result && db_numrows($result) > 0) {
-			ShowResultSet($result,_('Existing Skills'),"people_skills");
+			ShowResultSet($result,_('Existing Skills'), 'people_skills');
 		} else {
 			echo db_error();
 			echo "\n<h2>"._('No Skills Found').'</h2>';
@@ -150,14 +150,15 @@ if (forge_check_global_perm('forge_admin')) {
 			Show main page
 		*/
 
-		people_header(array('title'=>_('People Administration')));
+		people_header(array('title' => _('People Administration')));
 
 		echo '<p>
-			<a href="'.getStringFromServer('PHP_SELF').'?people_cat=1">'._('Add Job Categories').'</a><br />';
+			<a href="'.getStringFromServer('PHP_SELF').'?people_cat=1" >'._('Add Job Categories').'</a><br />';
 	//	echo "\nAdd categories of bugs like, 'mail module','gant chart module','interface', etc<p>";
 
 		echo "\n".'<a href="'.getStringFromServer('PHP_SELF').'?people_skills=1" >'._('Add Job Skills').'</a><br />';
 	//	echo "\nAdd Groups of bugs like 'future requests','unreproducible', etc<p>";
+		echo '</p>';
 
 		people_footer(array());
 	}
