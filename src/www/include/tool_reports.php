@@ -29,9 +29,8 @@
  * @param	string	$title		Graph title
  * @param	array	$qpa1		First query resource ID
  * @param	array	$qpa2		Second query resource ID
- * @param	string	$bar_colors	The bar colors
  */
-function reports_quick_graph($title, $qpa1, $qpa2, $bar_colors) {
+function reports_quick_graph($title, $qpa1, $qpa2) {
 	$result1 = db_query_qpa($qpa1);
 	$result2 = db_query_qpa($qpa2);
 	if ($result1 && $result2 && db_numrows($result2) > 0) {
