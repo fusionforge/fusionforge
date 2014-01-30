@@ -351,26 +351,51 @@ function people_show_category_table() {
 	//show a list of categories in a table
 	//provide links to drill into a detail page that shows these categories
 
-	$title_arr=array();
-	$title_arr[]=_('Category');
+	$title_arr = array();
+	$title_arr[] = _('Category');
 
-	$return = $GLOBALS['HTML']->listTableTop ($title_arr);
+	$result= db_query_params('SELECT pjc.category_id, pjc.name, COUNT(pj.category_id) AS total, pj.group_id
+				FROM people_job_category pjc LEFT JOIN people_job pj
+				ON pjc.category_id=pj.category_id
+				WHERE pjc.private_flag=0
+				AND (pj.status_id=1 OR pj.status_id IS NULL)
+				GROUP BY pjc.category_id, pjc.name, pj.group_id', array());
 
-	$result= db_query_params('SELECT pjc.category_id, pjc.name, COUNT(pj.category_id) AS total
-FROM people_job_category pjc LEFT JOIN people_job pj
-ON pjc.category_id=pj.category_id
-WHERE pjc.private_flag=0
-AND (pj.status_id=1 OR pj.status_id IS NULL)
-GROUP BY pjc.category_id, pjc.name', array());
-
-	$rows=db_numrows($result);
-	if (!$result || $rows < 1) {
-		$return .= '<tr><td><h2>'._('No Categories Found').'</h2></td></tr>';
+	$categories = array();
+	$i = 0;
+	while ($arr = db_fetch_array($result)) {
+		$added = 0;
+		if (empty($arr['group_id']) || forge_check_perm('project_read', $arr['group_id'])) {
+			$categories[$i] = $arr;
+			$added = 1;
+		}
+		if ($added && ((count($categories) - 1) > 0)) {
+			for ($j = 0; $j < (count($categories) - 1); $j++) {
+				$found = 0;
+				if ( $categories[$j]['category_id'] == $categories[$i]['category_id'] ) {
+					$categories[$j]['total'] += $categories[$i]['total'];
+					$found = 1;
+					break;
+				}
+			}
+			if ($found) {
+				array_pop($categories);
+				$added = 0;
+				$i--;
+			}
+		}
+		if ($added) {
+			$i++;
+		}
+	}
+	if (count($categories) < 1) {
+		$return = '<p class="warning" >'._('No categories found.').'</p>';
 	} else {
-		for ($i=0; $i<$rows; $i++) {
-			echo db_error();
-			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td>'
-			.util_make_link ('/people/?category_id='.  db_result($result,$i,'category_id'), db_result($result,$i,'name')) .' ('. db_result($result,$i,'total') .')</td></tr>';
+		$return = $GLOBALS['HTML']->listTableTop($title_arr);
+		for ($i = 0; $i< count($categories); $i++) {
+			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
+				<td>'.util_make_link('/people/?category_id='.$categories[$i]['category_id'], $categories[$i]['name']).' ('.$categories[$i]['total'].')</td>
+				</tr>';
 		}
 	}
 	$return .= $GLOBALS['HTML']->listTableBottom();
@@ -380,11 +405,11 @@ GROUP BY pjc.category_id, pjc.name', array());
 function people_show_project_jobs($group_id) {
 	//show open jobs for this project
 	$result = db_query_params('SELECT people_job.group_id,people_job.job_id,groups.group_name,groups.unix_group_name,people_job.title,people_job.post_date,people_job_category.name AS category_name
-FROM people_job,people_job_category,groups
-WHERE people_job.group_id=$1
-AND people_job.group_id=groups.group_id
-AND people_job.category_id=people_job_category.category_id
-AND people_job.status_id=1 ORDER BY post_date DESC', array($group_id));
+				FROM people_job,people_job_category,groups
+				WHERE people_job.group_id=$1
+				AND people_job.group_id=groups.group_id
+				AND people_job.category_id=people_job_category.category_id
+				AND people_job.status_id=1 ORDER BY post_date DESC', array($group_id));
 
 	return people_show_job_list($result);
 }
@@ -392,11 +417,11 @@ AND people_job.status_id=1 ORDER BY post_date DESC', array($group_id));
 function people_show_category_jobs($category_id) {
 	//show open jobs for this category
 	$result=db_query_params('SELECT people_job.group_id,people_job.job_id,groups.unix_group_name,groups.group_name,people_job.title,people_job.post_date,people_job_category.name AS category_name
-FROM people_job,people_job_category,groups
-WHERE people_job.category_id=$1
-AND people_job.group_id=groups.group_id
-AND people_job.category_id=people_job_category.category_id
-AND people_job.status_id=1 ORDER BY post_date DESC', array($category_id));
+				FROM people_job,people_job_category,groups
+				WHERE people_job.category_id=$1
+				AND people_job.group_id=groups.group_id
+				AND people_job.category_id=people_job_category.category_id
+				AND people_job.status_id=1 ORDER BY post_date DESC', array($category_id));
 
 	return people_show_job_list($result);
 }
@@ -406,31 +431,34 @@ function people_show_job_list($result) {
 
 	//query must contain 'group_id', 'job_id', 'title', 'category_name' and 'status_name'
 
-	$title_arr=array();
-	$title_arr[]=_('Title');
-	$title_arr[]=_('Category');
-	$title_arr[]=_('Date Opened');
-	$title_arr[]= sprintf(_('%s project'), forge_get_config ('forge_name'));
+	$title_arr = array();
+	$title_arr[] = _('Title');
+	$title_arr[] = _('Category');
+	$title_arr[] = _('Date Opened');
+	$title_arr[] = sprintf(_('%s project'), forge_get_config('forge_name'));
 
-	$return = $GLOBALS['HTML']->listTableTop ($title_arr);
-
-	$rows=db_numrows($result);
-	if (!isset($i)){$i=1;}
-	if ($rows < 1) {
-		$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td class="warning" colspan="4">'._('None Found'). db_error() .'</td></tr>';
-	} else {
-		for ($i=0; $i < $rows; $i++) {
-			$return .= '
-				<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .
-					'><td>'.util_make_link ('/people/viewjob.php?group_id='. db_result($result,$i,'group_id') .'&amp;job_id='.  db_result($result,$i,'job_id'), db_result($result,$i,'title')) .'</td><td>'.
-					db_result($result,$i,'category_name') .'</td><td>'.
-					date(_('Y-m-d H:i'),db_result($result,$i,'post_date')) .
-					'</td><td>'.util_make_link_g (strtolower(db_result($result,$i,'unix_group_name')),db_result($result,$i,'group_id'),db_result($result,$i,'group_name')) .'</td></tr>';
+	$projects = array();
+	while ($arr = db_fetch_array($result)) {
+		if (forge_check_perm('project_read', $arr['group_id'])) {
+			$projects[] = $arr;
 		}
 	}
 
-	$return .= $GLOBALS['HTML']->listTableBottom();
-
+	if (count($projects) < 1) {
+		$return = '<p class="warning" >'._('None Found').'</p>';
+	} else {
+		$return = $GLOBALS['HTML']->listTableTop ($title_arr);
+		for ($i = 0; $i < count($projects); $i++) {
+			$return .= '
+				<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) . '>
+					<td>'.util_make_link('/people/viewjob.php?group_id='.$projects[$i]['group_id'].'&amp;job_id='.$projects[$i]['job_id'], $projects[$i]['title']) .'</td>
+					<td>'.$projects[$i]['category_name'].'</td>
+					<td>'.date(_('Y-m-d H:i'), $projects[$i]['post_date']).'</td>
+					<td>'.util_make_link_g(strtolower($projects[$i]['unix_group_name']), $projects[$i]['group_id'], $projects[$i]['group_name']).'</td>
+				</tr>';
+		}
+		$return .= $GLOBALS['HTML']->listTableBottom();
+	}
 	return $return;
 }
 
