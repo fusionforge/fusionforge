@@ -64,7 +64,7 @@ function people_skill_level_box($name='skill_level_id',$checked='xyxy') {
 		//will be used many times potentially on a single page
 		$PEOPLE_SKILL_LEVEL=db_query_params("SELECT * FROM people_skill_level", array());
 	}
-	return html_build_select_box ($PEOPLE_SKILL_LEVEL,$name,$checked);
+	return html_build_select_box($PEOPLE_SKILL_LEVEL,$name,$checked, false);
 }
 
 function people_skill_year_box($name='skill_year_id',$checked='xyxy') {
@@ -73,7 +73,7 @@ function people_skill_year_box($name='skill_year_id',$checked='xyxy') {
 		//will be used many times potentially on a single page
 		$PEOPLE_SKILL_YEAR=db_query_params("SELECT * FROM people_skill_year", array());
 	}
-	return html_build_select_box ($PEOPLE_SKILL_YEAR,$name,$checked);
+	return html_build_select_box ($PEOPLE_SKILL_YEAR,$name,$checked, false);
 }
 
 function people_job_status_box($name='status_id',$checked='xyxy') {
@@ -229,11 +229,11 @@ VALUES ($1, $2, $3, $4)', array($job_id, $skill_id, $skill_level_id, $skill_year
 
 function people_show_job_inventory($job_id) {
 	$result=db_query_params('SELECT people_skill.name AS skill_name, people_skill_level.name AS level_name, people_skill_year.name AS year_name
-FROM people_skill_year,people_skill_level,people_skill,people_job_inventory
-WHERE people_skill_year.skill_year_id=people_job_inventory.skill_year_id
-AND people_skill_level.skill_level_id=people_job_inventory.skill_level_id
-AND people_skill.skill_id=people_job_inventory.skill_id
-AND people_job_inventory.job_id=$1', array($job_id));
+				FROM people_skill_year,people_skill_level,people_skill,people_job_inventory
+				WHERE people_skill_year.skill_year_id=people_job_inventory.skill_year_id
+				AND people_skill_level.skill_level_id=people_job_inventory.skill_level_id
+				AND people_skill.skill_id=people_job_inventory.skill_id
+				AND people_job_inventory.job_id=$1', array($job_id));
 
 	$title_arr=array();
 	$title_arr[]=_('Skill');
@@ -298,7 +298,7 @@ function people_edit_job_inventory($job_id,$group_id) {
 	$result=db_query_params('SELECT * FROM people_job_inventory WHERE job_id=$1', array($job_id));
 
 	$title_arr=array();
-	$title_arr[]=_('Skill').utils_requiredField();
+	$title_arr[]=_('Skill');
 	$title_arr[]=_('Level').utils_requiredField();
 	$title_arr[]=_('Experience').utils_requiredField();
 	$title_arr[]=_('Action');
