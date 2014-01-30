@@ -23,8 +23,10 @@ Debian GNU/Linux + FusionForge Dev VM \l
 
 Login with vagrant/vagrant and use 'sudo -i' to become root.
 To install a graphical environment, run "/root/scripts/install-gui.sh".
-Current keyboard layout is US QWERTY.
-(Change it with 'dpkg-reconfigure console-data')
+Default keyboard layout is US QWERTY.
+(Change it with 'dpkg-reconfigure keyboard-configuration --pri=high')
+Default language is English.
+(Change it with 'dpkg-reconfigure locales')
 
 EOF
 
