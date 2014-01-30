@@ -46,7 +46,7 @@ if ($group_id) {
 
  } elseif ($category_id && is_numeric($category_id)) {
 
-	people_header(array('title'=>_('Help Wanted System')));
+	people_header(array('title'=>_('Help Wanted System')._(' as ').people_get_category_name($category_id)));
 
 	echo '
 		<p>'._('Click job titles for more detailed descriptions.').'</p>
