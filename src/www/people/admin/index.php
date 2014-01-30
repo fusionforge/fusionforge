@@ -81,7 +81,7 @@ if (forge_check_global_perm('forge_admin')) {
 		/*
 			Show categories and blank row
 		*/
-		people_header(array ('title'=>'Add/Change Categories'));
+		people_header(array ('title'=>_('Add/Change Categories')));
 
 		/*
 			List of possible categories for this group
@@ -89,7 +89,7 @@ if (forge_check_global_perm('forge_admin')) {
 		$result=db_query_params('SELECT category_id,name FROM people_job_category', array());
 		echo "<p>";
 		if ($result && db_numrows($result) > 0) {
-			ShowResultSet($result,'Existing Categories','people_cat');
+			ShowResultSet($result,_('Existing Categories'),'people_cat');
 		} else {
 			echo '<p class="error">'._('No job categories').'</p>';
 			echo db_error();
@@ -103,9 +103,9 @@ if (forge_check_global_perm('forge_admin')) {
 		<strong><?php echo _('New Category Name')._(':').utils_requiredField(); ?></strong>
 		<input type="text" name="cat_name" value="" size="15" maxlength="30" required="required" />
 		</p>
-		<p class="warning">Once you add a category, it cannot be deleted</p>
+		<p class="warning"><?php echo _('Once you add a category, it cannot be deleted'); ?></p>
 		<p>
-		<input type="submit" name="submit" value="SUBMIT"></p>
+		<input type="submit" name="submit" value="<?php echo _('Submit'); ?>"></p>
 		</form>
 		<?php
 
@@ -123,7 +123,7 @@ if (forge_check_global_perm('forge_admin')) {
 		$result=db_query_params('SELECT skill_id,name FROM people_skill', array());
 		echo "<p>";
 		if ($result && db_numrows($result) > 0) {
-			ShowResultSet($result,"Existing Skills","people_skills");
+			ShowResultSet($result,_('Existing Skills'),"people_skills");
 		} else {
 			echo db_error();
 			echo "\n<h2>"._('No Skills Found').'</h2>';
@@ -137,9 +137,9 @@ if (forge_check_global_perm('forge_admin')) {
 		<strong><?php echo _('New Skill Name')._(':'); ?></strong>
 		<input type="text" name="skill_name" value="" size="15" maxlength="30" />
 		</p>
-		<p class="warning">Once you add a skill, it cannot be deleted</p>
+		<p class="warning"><?php echo _('Once you add a skill, it cannot be deleted'); ?></p>
 		<p>
-		<input type="submit" name="submit" value="SUBMIT"></p>
+		<input type="submit" name="submit" value="<?php echo _('Submit'); ?>"></p>
 		</form>
 		<?php
 
@@ -153,10 +153,10 @@ if (forge_check_global_perm('forge_admin')) {
 		people_header(array('title'=>_('People Administration')));
 
 		echo '<p>
-			<a href="'.getStringFromServer('PHP_SELF').'?people_cat=1">Add Job Categories</a><br />';
+			<a href="'.getStringFromServer('PHP_SELF').'?people_cat=1">'._('Add Job Categories').'</a><br />';
 	//	echo "\nAdd categories of bugs like, 'mail module','gant chart module','interface', etc<p>";
 
-		echo "\n<a href=\"".getStringFromServer('PHP_SELF')."?people_skills=1\">Add Job Skills</a><br />";
+		echo "\n".'<a href="'.getStringFromServer('PHP_SELF').'?people_skills=1" >'._('Add Job Skills').'</a><br />';
 	//	echo "\nAdd Groups of bugs like 'future requests','unreproducible', etc<p>";
 
 		people_footer(array());
