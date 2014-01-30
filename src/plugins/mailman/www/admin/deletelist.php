@@ -53,8 +53,8 @@ mailman_header(array(
 
 ?>
 <h3><?php echo $ml->getName(); ?></h3>
-<p>
 <form method="post" action="<?php echo $request->get('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&amp;id=<?php echo $ml->getID(); ?>">
+<p>
 <input id="sure" type="checkbox" name="sure" value="1">
 <label for="sure">
 <?php echo _('Confirm Delete'); ?><br />
@@ -64,8 +64,8 @@ mailman_header(array(
 <?php echo _('Confirm Delete'); ?><br />
 </label>
 <input type="submit" name="submit" value="<?php echo _('Permanently Delete'); ?>">
-</form>
 </p>
+</form>
 <?php
 
 mail_footer(array());
