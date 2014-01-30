@@ -532,7 +532,7 @@ if (isset($params['group']) && $params['group']) {
 	function footerEnd() { ?>
 
 		<!-- PLEASE LEAVE "Powered By FusionForge" on your site -->
-		<div align="right">
+		<div class="align-right">
 		<?php echo $this->navigation->getPoweredBy(); ?>
 		</div>
 
