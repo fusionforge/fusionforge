@@ -160,16 +160,16 @@ array($group_id, user_getid(), htmlspecialchars($title), htmlspecialchars($descr
 		<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 		<input type="hidden" name="group_id" value="'.$group_id.'" />
 		<input type="hidden" name="job_id" value="'.$job_id.'" />
-		<strong>'._('Category').'</strong><br />
+		<strong>'._('Category').'</strong>'.utils_requiredField().'<br />
 		'. people_job_category_box('category_id',db_result($result,0,'category_id')) .'
 		<p>
-		<strong>'._('Status').'</strong><br />
+		<strong>'._('Status').'</strong>'.utils_requiredField().'<br />
 		'. people_job_status_box('status_id',db_result($result,0,'status_id')) .'</p>
 		<p>
-		<strong>'._('Short Description')._(':').'</strong><br />
+		<strong>'._('Short Description')._(':').'</strong>'.utils_requiredField().'<br />
 		<input type="text" name="title" value="'. db_result($result,0,'title') .'" size="40" maxlength="60" required="required" /></p>
 		<p>
-		<strong>'._('Long Description')._(':').'</strong><br />
+		<strong>'._('Long Description')._(':').'</strong>'.utils_requiredField().'<br />
 		<textarea name="description" rows="10" cols="60" required="required" >'. db_result($result,0,'description') .'</textarea></p>
 		<p>
 		<input type="submit" name="update_job" value="'._('Update Descriptions').'" /></p>
