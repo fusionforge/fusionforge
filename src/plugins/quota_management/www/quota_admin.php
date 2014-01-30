@@ -145,7 +145,7 @@ if (db_numrows($res_db) > 0) {
 </table>
 <?php
 
-site_admin_footer(array());
+site_admin_footer();
 
 // Local Variables:
 // mode: php

@@ -109,7 +109,7 @@ function project_admin_header($params) {
 
 */
 
-function project_admin_footer($params=array()) {
+function project_admin_footer($params = array()) {
 	site_project_footer($params);
 }
 

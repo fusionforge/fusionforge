@@ -65,4 +65,4 @@ echo '<a href="', '/plugins/'.$pluginname.'/consumer.php' , '">', 'Consumers', '
 echo '<a href="', '/plugins/'.$pluginname.'/request_tokens.php?type='.$type.'&id='.$id , '">', 'Request tokens', '</a><br> ';
 echo '<a href="', '/plugins/'.$pluginname.'/access_tokens.php?type='.$type.'&id='.$id , '">', 'Access tokens', '</a><br> ';
 
-site_project_footer(array());
+site_project_footer();

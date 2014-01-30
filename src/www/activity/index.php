@@ -345,4 +345,4 @@ if (count($results) < 1) {
 	}
 }
 
-site_project_footer(array());
+site_project_footer();

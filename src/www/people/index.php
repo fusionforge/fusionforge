@@ -92,4 +92,4 @@ ORDER BY post_date DESC', array(), 5);
 
 }
 
-people_footer(array());
+people_footer();

@@ -205,7 +205,7 @@ if (db_numrows($res) >= 1) {
 </form>
 
 <?php
-site_admin_footer(array());
+site_admin_footer();
 
 // Local Variables:
 // mode: php

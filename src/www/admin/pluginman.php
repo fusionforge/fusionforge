@@ -295,7 +295,7 @@ echo $HTML->listTableBottom();
 
 <?php
 
-site_admin_footer(array());
+site_admin_footer();
 
 // Local Variables:
 // mode: php

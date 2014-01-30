@@ -62,8 +62,8 @@ function news_header($params) {
 	}
 }
 
-function news_footer($params) {
-	GLOBAL $HTML;
+function news_footer($params = array()) {
+	global $HTML;
 	$HTML->footer($params);
 }
 

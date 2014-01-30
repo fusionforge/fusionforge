@@ -65,4 +65,4 @@ switch ($type) {
 	}
 }
 
-site_project_footer(array());
+site_project_footer();

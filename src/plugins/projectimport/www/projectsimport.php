@@ -140,7 +140,7 @@ class ProjectsImportPage extends FileManagerPage {
                     </div>
               </form>';
 
-		site_footer(array());
+		site_footer();
 	}
 
 	/**

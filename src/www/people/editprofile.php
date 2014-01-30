@@ -156,7 +156,7 @@ WHERE user_id=$2', array($people_view_skills, user_getid()));
 				echo '<input type="submit" name="MultiEdit" value="'._('Done').'" />';
 				echo '<input type="submit" name="cancelMultiEdit" value="'._('Cancel').'" />';
 				echo '</form>';
-				people_footer(array());
+				people_footer();
 				return;
 			}
 		}

@@ -57,7 +57,7 @@ pm_header(array('title'=>sprintf(_("Delete Task [T%s]"), $project_task_id),
 
 <?php
 
-pm_footer(array());
+pm_footer();
 
 // Local Variables:
 // mode: php

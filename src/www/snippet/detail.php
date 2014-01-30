@@ -203,7 +203,7 @@ ORDER BY snippet_package_version.snippet_package_version_id DESC',
 	<p>' ._('You can submit a new version of this package if you have modified it and you feel it is appropriate to share with others.').'.</p>';
 
 	}
-	snippet_footer(array());
+	snippet_footer();
 
 } elseif ($type=='packagever') {
 	/*
@@ -216,7 +216,7 @@ ORDER BY snippet_package_version.snippet_package_version_id DESC',
 
 	snippet_show_package_snippets($id);
 
-	snippet_footer(array());
+	snippet_footer();
 
 } else {
 

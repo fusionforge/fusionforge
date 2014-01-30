@@ -124,7 +124,7 @@ foreach ($sections as $section) {
 
 echo $HTML->listTableBottom();
 
-site_admin_footer(array());
+site_admin_footer();
 
 function get_absolute_filename($filename) {
 	// Check for absolute path

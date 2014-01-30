@@ -99,4 +99,4 @@ printf(_('You are about to permanently delete role %s'), $role->getName()); ?>
 </table>
 
 <?php
-project_admin_footer(array());
+project_admin_footer();

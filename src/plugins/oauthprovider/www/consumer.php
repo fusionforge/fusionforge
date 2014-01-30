@@ -123,7 +123,7 @@ $f_consumer_email = getStringFromPost( 'consumer_email' );
 </form>
 <?php }
 
-	site_project_footer(array());
+site_project_footer();
 
 // Local Variables:
 // mode: php

@@ -100,4 +100,4 @@ $sep = getStringFromRequest('sep', ',');
 </ul>
 
 <?php
-pm_footer(array());
+pm_footer();

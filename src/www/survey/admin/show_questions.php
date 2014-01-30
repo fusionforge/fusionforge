@@ -33,7 +33,7 @@ survey_header(array('title'=>_('Survey Questions')));
 
 if (!session_loggedin() || !forge_check_perm('project_admin', $group_id)) {
 	echo '<div class="error">'._('Permission denied.').'</div>';
-	survey_footer(array());
+	survey_footer();
 	exit;
 }
 
@@ -85,7 +85,7 @@ WHERE survey_question_types.id=survey_questions.question_type AND survey_questio
 
 showResultsEditQuestion($result);
 
-survey_footer(array());
+survey_footer();
 
 // Local Variables:
 // mode: php

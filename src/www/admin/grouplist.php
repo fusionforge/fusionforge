@@ -166,7 +166,7 @@ foreach ($rows as $grp) {
 
 echo $HTML->listTableBottom();
 
-site_admin_footer(array());
+site_admin_footer();
 
 // Local Variables:
 // mode: php

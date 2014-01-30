@@ -170,7 +170,7 @@ if (session_loggedin()) {
 	echo '<div><input type="submit" name="submit" value="'._('Submit').'" />
 		</div></form>';
 
-	news_footer(array());
+	news_footer();
 
 } else {
 

@@ -73,13 +73,9 @@ html_use_tooltips();
 
 site_admin_header(array('title'=>_('Browse Trove Tree')));
 
-?>
-
-<?php
-
 printnode(0,"root");
 
-site_admin_footer(array());
+site_admin_footer();
 
 // Local Variables:
 // mode: php

@@ -52,11 +52,11 @@ if ($group_id) {
 
 	if ($ff->isError()) {
 		echo '<p class="error">'. $ff->getErrorMessage().'</p>';
-		forum_footer(array());
+		forum_footer();
 		exit;
 	} elseif ( count($farr) < 1) {
 		echo '<p class="information">'.sprintf(_('No Forums Found for %s'), $g->getPublicName()) .'</p>';
-		forum_footer(array());
+		forum_footer();
 		exit;
 	}
 
@@ -92,7 +92,7 @@ if ($group_id) {
 	}
 	echo $HTML->listTableBottom();
 
-	forum_footer(array());
+	forum_footer();
 
 } else {
 

@@ -57,7 +57,7 @@ if (!$type) {
 		editRemoteAccount(getStringFromRequest('account_id'));
 	}
 }
-site_project_footer(array());
+site_project_footer();
 
 /**
  *

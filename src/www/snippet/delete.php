@@ -46,7 +46,7 @@ if (session_loggedin()) {
 			"snippet_package_version_id=$2", array(user_getid(), $snippet_package_version_id));
 		if (!$result || db_numrows($result) < 1) {
 			echo '<p class="error">Error: Only the creator of a package version can delete snippets from it.</p>';
-			snippet_footer(array());
+			snippet_footer();
 			exit;
 		} else {
 
@@ -58,11 +58,11 @@ AND snippet_package_version_id=$2',
 				$snippet_package_version_id));
 			if (!$result || db_affected_rows($result) < 1) {
 				echo '<p class="error">Error: That snippet doesn\'t exist in this package.</p>';
-				snippet_footer(array());
+				snippet_footer();
 				exit;
 			} else {
 				echo '<p class="feedback">Item Removed From Package</p>';
-				snippet_footer(array());
+				snippet_footer();
 				exit;
 			}
 		}
@@ -77,7 +77,7 @@ AND snippet_package_version_id=$2',
 			"WHERE snippet_version_id=$1 AND submitted_by=$2", array($snippet_version_id, user_getid()));
 		if (!$result || db_numrows($result) < 1) {
 			echo '<p class="error">Error: That snippet doesn\'t exist.</p>';
-			snippet_footer(array());
+			snippet_footer();
 			exit;
 		} else {
 			$snippet_id=db_result($result,0,'snippet_id');
@@ -95,7 +95,7 @@ AND snippet_package_version_id=$2',
 			}
 
 			echo '<class="feedback">Snippet Removed</p>';
-			snippet_footer(array());
+			snippet_footer();
 			exit;
 		}
 
@@ -112,7 +112,7 @@ AND snippet_package_version_id=$2',
 		if (!$result || db_numrows($result) < 1) {
 			//they don't own it or it's not found
 			echo '<p class="error">Error: Only the creator of a package version can delete it.</p>';
-			snippet_footer(array());
+			snippet_footer();
 			exit;
 		} else {
 			$snippet_package_id=db_result($result,0,'snippet_package_id');
@@ -135,7 +135,7 @@ AND snippet_package_version_id=$2',
 				$result=db_query_params("DELETE FROM snippet_package WHERE snippet_package_id=$1", array($snippet_package_id));
 			}
 			echo '<p class="feedback">Package Removed</p>';
-			snippet_footer(array());
+			snippet_footer();
 			exit;
 		}
 	} else {

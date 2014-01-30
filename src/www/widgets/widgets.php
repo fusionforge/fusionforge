@@ -53,7 +53,7 @@ if (isLogged()) {
 					$current = $userm->getCurrentUser();
 					site_user_header(array('title'=>sprintf(_('Personal Page for %s'), user_getname())));
 					$lm->displayAvailableWidgets(user_getid(), WidgetLayoutManager::OWNER_TYPE_USER, $layout_id);
-					site_footer(array());
+					site_footer();
 					break;
 				case WidgetLayoutManager::OWNER_TYPE_GROUP:
 					$pm = ProjectManager::instance();
@@ -70,7 +70,7 @@ if (isLogged()) {
 							}
 							site_project_header(array('title'=>$title, 'group'=>$group_id, 'toptab'=>'summary'));
 							$lm->displayAvailableWidgets($group_id, WidgetLayoutManager::OWNER_TYPE_GROUP, $layout_id);
-							site_footer(array());
+							site_footer();
 						} else {
 							$GLOBALS['Response']->redirect('/projects/'.$project->getUnixName().'/');
 						}

@@ -63,7 +63,7 @@ if ($forum_id && $group_id) {
 					_('Do you really want to unsubscribe ?'),
 				array('group_id' => $group_id, 'forum_id' => $forum_id, 'stop' => 1),
 				array('confirm' => _('Unsubscribe'), 'cancel' => _('Cancel')) );
-			forum_footer(array());
+			forum_footer();
 			exit;
 		}
 		if (!$f->stopMonitor()) {

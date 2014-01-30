@@ -656,7 +656,7 @@ class HgPlugin extends SCMPlugin {
 
 		<?php
 
-		project_admin_footer(array());
+		project_admin_footer();
 	}
 
 }

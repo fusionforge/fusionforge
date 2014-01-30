@@ -70,7 +70,7 @@ function scm_header($params) {
 
 function scm_footer() {
 	echo '</div>';
-	site_project_footer(array());
+	site_project_footer();
 }
 
 function commitstime_graph($group_id, $chartid) {

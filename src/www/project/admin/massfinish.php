@@ -96,7 +96,7 @@ if (!$res || db_numrows($res) < 1) {
 echo '<p><input type="submit" name="finished" value="'._('Add All').'" /></p>
 </form>';
 
-project_admin_footer(array());
+project_admin_footer();
 
 // Local Variables:
 // mode: php

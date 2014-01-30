@@ -152,7 +152,7 @@ while ($row_parent = db_fetch_array($res_parent)) {
 
 <?php
 
-site_admin_footer(array());
+site_admin_footer();
 
 // Local Variables:
 // mode: php

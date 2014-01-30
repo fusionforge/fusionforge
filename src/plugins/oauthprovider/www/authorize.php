@@ -158,4 +158,4 @@ try {
 	exit_error( "Oauth authorisation error!", 'oauthprovider' );
 
 }
-site_project_footer(array());
+site_project_footer();

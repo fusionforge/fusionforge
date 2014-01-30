@@ -118,12 +118,12 @@ class extsubprojPlugin extends Plugin {
 		switch ($type) {
 			case 'globaladmin': {
 				session_require_global_perm('forge_admin');
-				site_admin_footer(array());
+				site_admin_footer();
 				break;
 			}
 			case 'admin':
 			default: {
-				site_project_footer(array());
+				site_project_footer();
 				break;
 			}
 		}

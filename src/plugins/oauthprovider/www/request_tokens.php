@@ -118,4 +118,4 @@ if(count($t_tokens)>0) {
 	echo '<p>'. _('No request tokens were found!').'</p>';
 }
 
-site_project_footer(array());
+site_project_footer();

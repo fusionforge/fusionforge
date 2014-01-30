@@ -55,4 +55,4 @@ if (!$type) {
 		echo '<p> This is Help section. @TODO: include few tips on how to use and config the plugin. </p>';
 	}
 }
-site_project_footer(array());
+site_project_footer();

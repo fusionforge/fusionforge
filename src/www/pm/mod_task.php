@@ -332,7 +332,7 @@ echo '
 echo $HTML->listTableBottom();
 echo "</form>\n";
 
-pm_footer(array());
+pm_footer();
 
 // Local Variables:
 // mode: php

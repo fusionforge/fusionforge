@@ -30,12 +30,11 @@ $suppress_nav = getStringFromRequest('suppress_nav');
 
 function handle_add_exit() {
 	global $suppress_nav;
-        if ($suppress_nav) {
-                echo '
-                </body></html>';
-        } else {
-                snippet_footer(array());
-        }
+	if ($suppress_nav) {
+		echo '</body></html>';
+	} else {
+		snippet_footer();
+	}
 	exit;
 }
 

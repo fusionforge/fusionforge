@@ -100,7 +100,7 @@ function snippet_mainpage() {
 
 snippet_header(array('title'=>_('Snippet Library'), 'header'=>'Snippet Library'));
 echo snippet_mainpage();
-snippet_footer(array());
+snippet_footer();
 
 // Local Variables:
 // mode: php

@@ -58,7 +58,7 @@ if (!$type) {
 		createNewAccountForm($user->getID());
 	}
 }
-site_project_footer(array());
+site_project_footer();
 
 /**
 *

@@ -239,4 +239,4 @@ $format .= " using '$sep' as separator.";
 </table>
 
 <?php
-pm_footer(array());
+pm_footer();

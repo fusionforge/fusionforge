@@ -56,7 +56,7 @@ if (session_loggedin()) {
 				form_release_key(getStringFromRequest("form_key"));
 				$error_msg .= _('Error doing snippet package insert').' '.db_error();
 				snippet_header(array('title'=>_('Submit A New Snippet Package')));
-				snippet_footer(array());
+				snippet_footer();
 				exit;
 			} else {
 				$feedback .= _('Snippet Package Added Successfully.');
@@ -75,7 +75,7 @@ if (session_loggedin()) {
 					$error_msg .= _('Error doing snippet package version insert');
 					snippet_header(array('title'=>_('Submit A New Snippet Package')));
 					echo db_error();
-					snippet_footer(array());
+					snippet_footer();
 					exit;
 				} else {
 					//so far so good - now add snippets to the package
@@ -114,7 +114,7 @@ function show_add_snippet_box() {
 
 					<?php
 
-					snippet_footer(array());
+					snippet_footer();
 					exit;
 				}
 			}
@@ -178,7 +178,7 @@ function show_add_snippet_box() {
 
 	</table></form>
 	<?php
-	snippet_footer(array());
+	snippet_footer();
 
 } else {
 

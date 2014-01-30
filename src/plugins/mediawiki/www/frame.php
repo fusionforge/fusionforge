@@ -38,7 +38,7 @@ if (file_exists ('/var/lib/gforge/plugins/mediawiki/wikidata/'.$group->getUnixNa
 	print '<h2>'._('Wiki not created yet, please wait for a few minutes.').'</h2>';
 }
 
-site_project_footer(array());
+site_project_footer();
 
 // Local Variables:
 // mode: php

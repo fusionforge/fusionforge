@@ -41,7 +41,7 @@ session_require_perm ('forum_admin', $group_id) ;
 
 forum_header(array('title'=>_('Forums Administration')));
 $fa->ExecuteAction($action);
-forum_footer(array());
+forum_footer();
 
 // Local Variables:
 // mode: php

@@ -109,4 +109,4 @@ foreach ($members as $user) {
 // end of community member description block
 echo $GLOBALS['HTML']->listTableBottom();
 
-site_project_footer(array());
+site_project_footer();

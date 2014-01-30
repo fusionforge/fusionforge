@@ -100,7 +100,7 @@ echo '
 </table>
 ';
 
-site_user_footer(array());
+site_user_footer();
 
 // Local Variables:
 // mode: php

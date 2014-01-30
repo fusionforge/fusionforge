@@ -73,7 +73,7 @@ function pm_quick_report($group_id,$title,$subtitle1,$qpa1,$subtitle2,$qpa2,$com
 
 	if ($comment) echo $comment;
 
-	pm_footer(array());
+	pm_footer();
 }
 
 html_use_jqueryjqplotpluginCanvas();
@@ -177,7 +177,7 @@ if ($what) {
 		$labels[] = _('Number of tasks still not completed');
 		report_pm_hbar(2, $values, $ticks, $labels);
 
-		pm_footer(array());
+		pm_footer();
 
 	} elseif ($what=="subproject") {
 		$qpa1 = db_construct_qpa(array(),
@@ -249,7 +249,7 @@ AND project_group_list.group_id=$1', array ($group_id));
 
 	pm_reporting_header($group_id);
 
-	pm_footer(array());
+	pm_footer();
 
 }
 

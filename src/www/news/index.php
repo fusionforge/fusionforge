@@ -78,7 +78,7 @@ if ($rows < 1) {
 	echo news_show_latest($group_id,10,true,false,false,-1, true);
 }
 
-news_footer(array());
+news_footer();
 
 // Local Variables:
 // mode: php

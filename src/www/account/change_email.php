@@ -69,7 +69,7 @@ if (getStringFromRequest('submit')) {
 	print '<p>' . _('An email has been sent to the new address. Follow the instructions in the email to complete the email change.') . '</p>';
     printf ('<a href="%s">[ Home ]</a>', util_make_url ('/'));
 
-	site_user_footer(array());
+	site_user_footer();
 	exit();
 }
 
@@ -94,7 +94,7 @@ echo '<p>' . _('Submitting the form below will mail a confirmation URL to the ne
 <p><?php echo util_make_link('/', _('Return')); ?></p>
 
 <?php
-site_user_footer(array());
+site_user_footer();
 
 // Local Variables:
 // mode: php

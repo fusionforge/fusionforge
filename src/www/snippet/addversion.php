@@ -111,7 +111,7 @@ if (session_loggedin()) {
 		</table></form></p>
 		<?php
 
-		snippet_footer(array());
+		snippet_footer();
 
 	} elseif ($type=='package') {
 		/*
@@ -153,7 +153,7 @@ if (session_loggedin()) {
 					//error in database
 					$error_msg .= _('Error doing snippet package version insert').' '.db_error();
 					snippet_header(array('title'=>_('New snippet package')));
-					snippet_footer(array());
+					snippet_footer();
 					exit;
 				} else {
 					//so far so good - now add snippets to the package
@@ -189,7 +189,7 @@ function show_add_snippet_box() {
 
 					<?php
 
-					snippet_footer(array());
+					snippet_footer();
 					exit;
 				}
 
@@ -230,7 +230,7 @@ function show_add_snippet_box() {
 		</table></form></p>
 		<?php
 
-		snippet_footer(array());
+		snippet_footer();
 
 	} else {
 		exit_error(_('Error: was the URL or form mangled??'));

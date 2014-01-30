@@ -53,7 +53,7 @@ if ($user_id && is_numeric($user_id)) {
 		*/
 		if (db_result($result, 0, 'people_view_skills') != 1) {
 			echo '<p class="warning">'._('This user has set his/her profile to private.').'</p>';
-			people_footer(array());
+			people_footer();
 			exit;
 		}
 		echo '<p>
@@ -64,7 +64,7 @@ if ($user_id && is_numeric($user_id)) {
 		echo '</table>';
 	}
 
-	people_footer(array());
+	people_footer();
 
 } else {
 	/*

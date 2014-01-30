@@ -84,7 +84,7 @@ plugin_hook('project_before_widgets', $params);
 $lm = new WidgetLayoutManager();
 $lm->displayLayout($group_id, WidgetLayoutManager::OWNER_TYPE_GROUP);
 
-site_project_footer(array());
+site_project_footer();
 
 // Local Variables:
 // mode: php

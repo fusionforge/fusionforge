@@ -113,7 +113,6 @@ project_admin_header(array('title'=>sprintf(_('Project Statistics for %s'), $gro
 </tr>
 </table>
 </form>
-<p>
 <?php
 if ($start == $end) {
 	echo '<p class="error">'._('Start and end dates must be different').'</p>';
@@ -122,8 +121,5 @@ if ($start == $end) {
 		echo '<p class="error">'._('Error during graphic computation.');
 	}
 }
-?>
-</p>
-<?php
 
-site_project_footer(array());
+site_project_footer();

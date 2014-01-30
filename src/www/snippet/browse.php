@@ -120,4 +120,4 @@ if ((!$result || $rows < 1) && (!$result2 || $rows2 < 1)) {
 	}
 	echo $GLOBALS['HTML']->listTableBottom();
 }
-snippet_footer(array());
+snippet_footer();

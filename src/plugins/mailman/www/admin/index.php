@@ -133,7 +133,7 @@ if ($group_id) {
 		if ($mlFactory->isError()) {
 			echo '<h1>'._('Error').' '._('Unable to get the lists') .'</h1>';
 			echo $mlFactory->getErrorMessage();
-			mail_footer(array());
+			mail_footer();
 			exit;
 		}
 

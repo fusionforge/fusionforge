@@ -220,7 +220,7 @@ if ($add_cat && $group_project_id) {
 	</form>
 	<?php
 
-	pm_footer(array());
+	pm_footer();
 
 } elseif ($update_cat && $group_project_id && $id) {
 
@@ -266,7 +266,7 @@ if ($add_cat && $group_project_id) {
 		<?php
 	}
 
-	pm_footer(array());
+	pm_footer();
 
 } elseif (getStringFromRequest('addproject')) {
 	/*
@@ -295,7 +295,7 @@ if ($add_cat && $group_project_id) {
 	<input type="submit" name="submit" value="<?php echo _('Submit') ?>" />
 	</form>
 	<?php
-	pm_footer(array());
+	pm_footer();
 
 } elseif (getStringFromRequest('update_pg') && $group_project_id) {
 
@@ -356,7 +356,7 @@ if ($add_cat && $group_project_id) {
 	</form>
 	<?php
 	echo '<p>'.util_make_link ('/pm/admin/?group_id='.$group_id.'&amp;add_cat=1&amp;group_project_id='.$group_project_id,_('Category Administration')).'</p>';
-	pm_footer(array());
+	pm_footer();
 
 } elseif ($delete && $group_project_id) {
 
@@ -396,7 +396,7 @@ if ($add_cat && $group_project_id) {
 	</form>
 	<?php
 
-	pm_footer(array());
+	pm_footer();
 
 } else {
 
@@ -437,5 +437,5 @@ if ($add_cat && $group_project_id) {
 
 	}
 
-	pm_footer(array());
+	pm_footer();
 }

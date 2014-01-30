@@ -259,7 +259,7 @@ echo '<p><input type="checkbox" name="sure" value="1"/> '._("Really delete this 
 echo '<input type="submit" name="submit" value="'._('Delete role').'" /></p>
 </form>';
 
-site_admin_footer(array());
+site_admin_footer();
 
 // Local Variables:
 // mode: php

@@ -86,4 +86,4 @@ echo '<input type="file" name="uploaded_filekey" />';
 <?php
 echo '</form>';
 
-site_user_footer(array());
+site_user_footer();

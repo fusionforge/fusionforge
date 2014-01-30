@@ -352,4 +352,4 @@ echo '</td>';
 echo '</tr>';
 echo '</table>';
 
-project_admin_footer(array());
+project_admin_footer();

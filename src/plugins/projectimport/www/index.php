@@ -704,7 +704,7 @@ class ProjectImportPage extends FileManagerPage {
                     </div>';
 		echo '</form>';
 
-		site_project_footer(array());
+		site_project_footer();
 
 	}
 }

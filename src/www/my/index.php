@@ -60,7 +60,7 @@ echo '</ul>';
 $lm = new WidgetLayoutManager();
 $lm->displayLayout($user->getID(), WidgetLayoutManager::OWNER_TYPE_USER);
 
-site_user_footer(array());
+site_user_footer();
 
 // Local Variables:
 // mode: php

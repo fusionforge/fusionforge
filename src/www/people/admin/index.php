@@ -109,7 +109,7 @@ if (forge_check_global_perm('forge_admin')) {
 		</form>
 		<?php
 
-		people_footer(array());
+		people_footer();
 
 	} elseif (getStringFromRequest('people_skills')) {
 		/*
@@ -143,7 +143,7 @@ if (forge_check_global_perm('forge_admin')) {
 		</form>
 		<?php
 
-		people_footer(array());
+		people_footer();
 
 	} else {
 		/*
@@ -160,7 +160,7 @@ if (forge_check_global_perm('forge_admin')) {
 	//	echo "\nAdd Groups of bugs like 'future requests','unreproducible', etc<p>";
 		echo '</p>';
 
-		people_footer(array());
+		people_footer();
 	}
 
 } else {

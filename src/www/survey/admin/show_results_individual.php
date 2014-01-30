@@ -32,8 +32,8 @@ $customer_id = getIntFromRequest('customer_id');
 survey_header(array('title'=>_('Results')));
 
 if (!session_loggedin() || !forge_check_perm('project_admin', $group_id)) {
-        echo '<div class="error">'._('Permission denied.').'</div>';
-        survey_footer(array());
+	echo '<div class="error">'._('Permission denied.').'</div>';
+	survey_footer();
 	exit;
 }
 
@@ -231,7 +231,7 @@ echo "\n\n</table>";
 
 <?php
 
-survey_footer(array());
+survey_footer();
 
 // Local Variables:
 // mode: php

@@ -196,7 +196,7 @@ if ($group_id) {
 	}
 }
 
-site_project_footer(array());
+site_project_footer();
 
 // Local Variables:
 // mode: php

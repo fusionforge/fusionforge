@@ -284,7 +284,7 @@ class ForumAdmin extends Error {
 
 			if (count($moderated_forums)==0) {
 				echo $HTML->feedback(_('No forums are moderated for this group'));
-				forum_footer(array());
+				forum_footer();
 				exit();
 			}
 			if (!$forum_id) {

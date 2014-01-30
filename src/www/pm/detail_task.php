@@ -188,7 +188,7 @@ pm_header(array('title'=>_('Task Detail'),'group_project_id'=>$group_project_id)
 </table>
 <?php
 
-pm_footer(array());
+pm_footer();
 
 // Local Variables:
 // mode: php

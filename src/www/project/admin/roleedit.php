@@ -303,7 +303,7 @@ echo $HTML->listTableBottom();
 echo '<p><input type="submit" name="submit" value="'._('Submit').'" /></p>
 </form>';
 
-project_admin_footer(array());
+project_admin_footer();
 
 // Local Variables:
 // mode: php

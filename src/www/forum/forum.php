@@ -202,7 +202,7 @@ if ($forum_id) {
 
 		if ($fmf->isError()) {
 			echo '<p class="error">'.$fmf->getErrorMessage().'</p>';
-	        forum_footer(array());
+	        forum_footer();
             exit;
 		}
 
@@ -237,7 +237,7 @@ if ($forum_id) {
 		$msg_arr =& $fmf->nestArray($fmf->getThreaded());
 		if ($fmf->isError()) {
 			echo '<p class="error">'.$fmf->getErrorMessage().'</p>';
-	        forum_footer(array());
+	        forum_footer();
             exit;
 		}
 
@@ -294,7 +294,7 @@ if ($forum_id) {
 		$msg_arr =& $fmf->getFlat($thread_id);
 		if ($fmf->isError()) {
 			echo '<p class="error">'.$fmf->getErrorMessage().'</p>';
-			forum_footer(array());
+			forum_footer();
 			exit;
 		}
 		$avail_rows=$fmf->fetched_rows;
@@ -394,7 +394,7 @@ ORDER BY f.most_recent_date DESC',
 	}
 
 	echo $ret_val;
-	forum_footer(array());
+	forum_footer();
 
 } else {
 

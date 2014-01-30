@@ -164,7 +164,7 @@ if (getStringFromRequest('submit')) {
 			}
 		}
 
-		site_footer(array());
+		site_footer();
 		exit();
 	}
 } elseif (getStringFromRequest('i_disagree')) {
@@ -319,7 +319,7 @@ if (count ($template_projects) > 1) {
 
 <?php
 
-site_footer(array());
+site_footer();
 
 // Local Variables:
 // mode: php

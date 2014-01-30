@@ -62,7 +62,7 @@ function site_admin_header($params, $required_perm = 'forge_admin') {
 	site_header($params);
 }
 
-function site_admin_footer($params) {
+function site_admin_footer($params = array()) {
 	site_footer($params);
 }
 

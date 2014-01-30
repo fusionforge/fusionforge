@@ -49,7 +49,7 @@ if (!$forum_id) {
 	} else {
 		$fa->ExecuteAction($action);
 	}
-	forum_footer(array());
+	forum_footer();
 
 } else {
 	session_require_perm ('forum', $forum_id, 'moderate') ;
@@ -60,5 +60,5 @@ if (!$forum_id) {
 	} else {
 		$fa->ExecuteAction($action);
 	}
-	forum_footer(array());
+	forum_footer();
 }

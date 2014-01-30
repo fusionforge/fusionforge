@@ -217,5 +217,5 @@ WHERE user_id=$4 AND id=$5',
 		echo '</table>';
 	}
 
-	site_user_footer(array());
+	site_user_footer();
 }

@@ -50,7 +50,7 @@ function frs_admin_header($params) {
 }
 
 function frs_admin_footer() {
-	site_project_footer(array());
+	site_project_footer();
 }
 
 function frs_header($params) {

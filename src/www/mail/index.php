@@ -59,7 +59,7 @@ if ($group_id) {
 
 	if ($mlFactory->isError()) {
 		echo '<p class="error">'.sprintf(_('Unable to get the list %s: %s'), $group->getPublicName(), $mlFactory->getErrorMessage()) .'</p>';
-		mail_footer(array());
+		mail_footer();
 		exit;
 	}
 
@@ -67,7 +67,7 @@ if ($group_id) {
 	if($mlCount == 0) {
 		echo '<p class="information">'.sprintf(_('No Lists found for %s'), $group->getPublicName()) .'</p>';
 		echo '<p>'._('Project administrators use the admin link to request mailing lists.').'</p>';
-		mail_footer(array());
+		mail_footer();
 		exit;
 	}
 
@@ -106,7 +106,7 @@ if ($group_id) {
 
 	echo $HTML->listTableBottom();
 
-	mail_footer(array());
+	mail_footer();
 
 } else {
 

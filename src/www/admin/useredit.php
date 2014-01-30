@@ -315,7 +315,7 @@ if ($fullListProjectsQueryResult) {
 echo '<br/><input type="submit" name="submit" value="'. _('Update').'" />';
 echo '</form>';
 
-site_admin_footer(array());
+site_admin_footer();
 
 // Local Variables:
 // mode: php

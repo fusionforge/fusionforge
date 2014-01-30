@@ -226,4 +226,4 @@ if ($msg_id) {
 
 }
 
-forum_footer(array());
+forum_footer();

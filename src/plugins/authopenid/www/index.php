@@ -168,7 +168,7 @@ echo $HTML->listTableBottom();
 
 echo $HTML->boxBottom();
 
-site_user_footer(array());
+site_user_footer();
 
 // Local Variables:
 // mode: php

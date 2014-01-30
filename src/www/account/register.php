@@ -105,7 +105,7 @@ if (getStringFromRequest('submit')) {
 						_('Error during user activation but after user registration (user is now in pending state and will not get a notification eMail!)') .
 						'</span>' ;
 					print '<p>' . sprintf(_("Could not activate newly registered user's forge account: %s"), htmlspecialchars($new_user->getErrorMessage())) . '</p>';
-					$HTML->footer(array());
+					site_footer();
 					exit;
 				}
 			}
@@ -121,7 +121,7 @@ if (getStringFromRequest('submit')) {
 				printf (_('You have registered and activated user %1$s on %2$s. They will not receive an eMail about this fact.'), $unix_name, forge_get_config('forge_name'));
 				print '</p>' ;
 			}
-			site_footer(array());
+			site_footer();
 			exit;
 		} else {
 			$error_msg = $new_user->getErrorMessage();
@@ -280,7 +280,7 @@ if($toDisplay != "") {
 </form>
 <p><a href="pending-resend.php"><?php echo _('Resend confirmation email to a pending account'); ?></a></p>
 
-<?php site_footer(array());
+<?php site_footer();
 
 // Local Variables:
 // mode: php

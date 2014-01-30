@@ -68,4 +68,4 @@ mailman_header(array(
 </form>
 <?php
 
-mail_footer(array());
+mail_footer();

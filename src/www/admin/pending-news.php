@@ -199,7 +199,7 @@ AND news_bytes.group_id=groups.group_id ", array($id));
 		);
 
 }
-news_footer(array());
+news_footer();
 
 // Local Variables:
 // mode: php

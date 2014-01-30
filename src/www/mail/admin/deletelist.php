@@ -80,4 +80,4 @@ mail_header(array('title' => _('Permanently Delete Mailing List ') . $ml->getNam
 </fieldset>
 <?php
 
-mail_footer(array());
+mail_footer();

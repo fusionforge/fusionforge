@@ -72,4 +72,4 @@ if ($result) {
 
 print "<p><a href=\"/my/\">"._('Return')."</a></p>";
 
-site_user_footer(array());
+site_user_footer();

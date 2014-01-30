@@ -209,7 +209,7 @@ if ($mode == "edit") {
 
 	if (!$result || db_numrows($result)!=1) {
 		$feedback .= "Cannot edit multimedia file<br />";
-		project_admin_footer(array());
+		project_admin_footer();
 		exit();
 	}
 
@@ -307,7 +307,7 @@ for ($i=0; $i<$rows; $i++) {
 
 echo $GLOBALS['HTML']->listTableBottom();
 
-project_admin_footer(array());
+project_admin_footer();
 
 // Local Variables:
 // mode: php

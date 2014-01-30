@@ -357,4 +357,4 @@ if ($type == 'admin') {
 	session_redirect('/plugins/blocks/index.php?id='.$id.'&type=admin&pluginname=blocks&feedback='.urlencode($msg));
 }
 
-site_project_footer(array());
+site_project_footer();

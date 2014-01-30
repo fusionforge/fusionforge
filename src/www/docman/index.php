@@ -127,4 +127,4 @@ echo '<div id="views">';
 include ($gfcommon.'docman/views/views.php');
 echo '</div>';
 
-site_project_footer(array());
+site_project_footer();

@@ -75,4 +75,4 @@ echo util_make_link('/plugins/'.$pluginname.'/request_tokens.php'.$link_param, _
 echo util_make_link('/plugins/'.$pluginname.'/access_tokens.php'.$link_param, _('Access tokens')).'<br /> ';
 
 //html_page_bottom();
-site_project_footer(array());
+site_project_footer();

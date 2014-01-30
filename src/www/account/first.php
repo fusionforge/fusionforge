@@ -36,4 +36,4 @@ print '<p>';
 printf(_('-- the %s staff'), $forge_name);
 print '</p>';
 
-site_user_footer(array());
+site_user_footer();

@@ -347,7 +347,7 @@ if (forge_get_config('use_shell')) {
 </form>
 
 <?php
-site_user_footer(array());
+site_user_footer();
 
 // Local Variables:
 // mode: php

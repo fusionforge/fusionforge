@@ -160,7 +160,7 @@ will add duration and parent_id choices at some point
 </form>
 <?php
 
-pm_footer(array());
+pm_footer();
 
 // Local Variables:
 // mode: php

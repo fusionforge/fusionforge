@@ -171,7 +171,7 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 		}
 
 	}
-	news_footer(array());
+	news_footer();
 
 } else { // No group, or newsadmin group
 	session_redirect('/admin/pending-news.php');

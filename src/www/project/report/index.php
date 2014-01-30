@@ -28,77 +28,77 @@ require_once $gfcommon.'include/pre.php';
 
 function GetTime ($timedifference) {
 
-   if ($timedifference >= 0) {
+	if ($timedifference >= 0) {
 
-       $mval = ($timedifference / 2592000);
-       $monthval = intval($mval);
-       if ($monthval > 1 ) {
-		return "$monthval Months Ago";
+		$mval = ($timedifference / 2592000);
+		$monthval = intval($mval);
+		if ($monthval > 1 ) {
+			return "$monthval Months Ago";
+		}
+
+		$wval = ($timedifference / 604800);
+		$weektime = intval($wval);
+		if ($weektime > 1 ) {
+			return "$weektime Weeks Ago";
+		}
+
+		$dval = ($timedifference / 86400) ;
+		$daytime = intval($dval);
+		if ($daytime > 1 ) {
+			return "$daytime Days Ago";
+		}
+
+		$hval = ($timedifference / 3600);
+		$hourtime = intval($hval);
+		if ($hourtime > 1 ) {
+			return "$hourtime Hours Ago";
+		}
+
+		$mval = ($timedifference  / 60);
+		$minutetime = intval($mval);
+		if ( $minutetime > 1 ) {
+			return "$minutetime Minutes Ago";
+		}
+
+		return "$timedifference Seconds Ago";
+
+	} else {
+
+		$timedifference=abs($timedifference);
+
+		$mval = ($timedifference / 2592000);
+		$monthval = intval($mval);
+		if ($monthval > 1 ) {
+			return "Next $monthval Months";
+		}
+
+		$wval = ($timedifference / 604800);
+		$weektime = intval($wval);
+		if ($weektime > 1 ) {
+			return "Next $weektime Weeks";
+		}
+
+		$dval = ($timedifference / 86400) ;
+		$daytime = intval($dval);
+		if ($daytime > 1 ) {
+			return "Next $daytime Days";
+		}
+
+		$hval = ($timedifference / 3600);
+		$hourtime = intval($hval);
+		if ($hourtime > 1 ) {
+			return "Next $hourtime Hours";
+		}
+
+		$mval = ($timedifference  / 60);
+		$minutetime = intval($mval);
+		if ( $minutetime > 1 ) {
+			return "Next $minutetime Minutes";
+		}
+
+		return "Next $timedifference Seconds";
+
 	}
-
-       $wval = ($timedifference / 604800);
-       $weektime = intval($wval);
-       if ($weektime > 1 ) {
-		return "$weektime Weeks Ago";
-       }
-
-       $dval = ($timedifference / 86400) ;
-       $daytime = intval($dval);
-       if ($daytime > 1 ) {
-                return "$daytime Days Ago";
-       }
-
-       $hval = ($timedifference / 3600);
-       $hourtime = intval($hval);
-       if ($hourtime > 1 ) {
-                return "$hourtime Hours Ago";
-       }
-
-       $mval = ($timedifference  / 60);
-       $minutetime = intval($mval);
-       if ( $minutetime > 1 ) {
-		return "$minutetime Minutes Ago";
-	}
-
-       return "$timedifference Seconds Ago";
-
-   } else {
-
-       $timedifference=abs($timedifference);
-
-       $mval = ($timedifference / 2592000);
-       $monthval = intval($mval);
-       if ($monthval > 1 ) {
-                return "Next $monthval Months";
-        }
-
-       $wval = ($timedifference / 604800);
-       $weektime = intval($wval);
-       if ($weektime > 1 ) {
-                return "Next $weektime Weeks";
-       }
-
-       $dval = ($timedifference / 86400) ;
-       $daytime = intval($dval);
-       if ($daytime > 1 ) {
-                return "Next $daytime Days";
-       }
-
-       $hval = ($timedifference / 3600);
-       $hourtime = intval($hval);
-       if ($hourtime > 1 ) {
-                return "Next $hourtime Hours";
-       }
-
-       $mval = ($timedifference  / 60);
-       $minutetime = intval($mval);
-       if ( $minutetime > 1 ) {
-                return "Next $minutetime Minutes";
-        }
-
-       return "Next $timedifference Seconds";
-
-   }
 
 }
 
@@ -109,14 +109,14 @@ $group_id = getIntFromRequest('group_id');
 
 $group = group_get_object($group_id);
 if (!$group || !is_object($group)) {
-        exit_no_group();
+	exit_no_group();
 }
 if ($group->isError()) {
-        if($group->isPermissionDeniedError()) {
-                exit_permission_denied($group->getErrorMessage(),'admin');
-        } else {
-                exit_error($group->getErrorMessage(),'admin');
-        }
+	if($group->isPermissionDeniedError()) {
+		exit_permission_denied($group->getErrorMessage(),'admin');
+	} else {
+		exit_error($group->getErrorMessage(),'admin');
+	}
 }
 
 if (!$group_id && $form_grp) {
@@ -248,4 +248,4 @@ foreach ($group->getUsers() as $member) {
 
 echo $GLOBALS['HTML']->listTableBottom();
 
-site_project_footer(array());
+site_project_footer();

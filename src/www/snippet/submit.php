@@ -146,7 +146,7 @@ if (session_loggedin()) {
 	</table></form>
 
 	<?php
-	snippet_footer(array());
+	snippet_footer();
 
 } else {
 

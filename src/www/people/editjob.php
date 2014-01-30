@@ -182,7 +182,7 @@ if ($group_id && (forge_check_perm('project_admin', $group_id))) {
 
 	}
 
-	people_footer(array());
+	people_footer();
 
 } else {
 	/*

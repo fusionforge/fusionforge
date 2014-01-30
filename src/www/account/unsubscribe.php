@@ -77,4 +77,4 @@ if ($all) {
 
 <?php
 
-site_footer(array());
+site_footer();

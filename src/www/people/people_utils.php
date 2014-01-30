@@ -44,7 +44,7 @@ function people_header($params) {
 	}
 }
 
-function people_footer($params) {
+function people_footer($params = array()) {
 	global $HTML;
 	$HTML->footer($params);
 }

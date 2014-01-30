@@ -91,7 +91,7 @@ array($job_id, $group_id));
 		echo people_show_job_inventory($job_id).'</td></tr></table>';
 	}
 
-	people_footer(array());
+	people_footer();
 
 } else {
 	/*

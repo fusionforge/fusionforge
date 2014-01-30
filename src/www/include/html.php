@@ -879,7 +879,7 @@ function site_header($params) {
  *
  * @param	array	$params	Footer params array
  */
-function site_footer($params) {
+function site_footer($params = array()) {
 	global $HTML;
 	$HTML->footer($params);
 }
@@ -962,7 +962,7 @@ function site_project_header($params) {
  *
  * @param	array	$params	array() empty
  */
-function site_project_footer($params) {
+function site_project_footer($params = array()) {
 	site_footer($params);
 }
 
@@ -1026,7 +1026,7 @@ function site_user_header($params) {
  *
  * @param	array	$params	array() empty
  */
-function site_user_footer($params) {
+function site_user_footer($params = array()) {
 	site_footer($params);
 }
 

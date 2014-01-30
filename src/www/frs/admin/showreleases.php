@@ -117,7 +117,7 @@ for ($i=0; $i<count($rs); $i++) {
 
 echo $GLOBALS['HTML']->listTableBottom();
 
-frs_admin_footer(array());
+frs_admin_footer();
 
 // Local Variables:
 // mode: php

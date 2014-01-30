@@ -157,7 +157,7 @@ function forum_header($params) {
 	}
 }
 
-function forum_footer($params) {
+function forum_footer($params = array()) {
 	site_project_footer($params);
 }
 

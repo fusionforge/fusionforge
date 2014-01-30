@@ -49,4 +49,4 @@ array(),30);
 
 }
 
-people_footer(array());
+people_footer();

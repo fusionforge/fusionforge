@@ -331,7 +331,7 @@ if ($type == 'onemonth') {
 	}
 }
 
-pm_footer(array());
+pm_footer();
 
 // Local Variables:
 // mode: php

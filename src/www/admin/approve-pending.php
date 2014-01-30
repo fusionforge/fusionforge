@@ -114,7 +114,7 @@ $rows = db_numrows($res_grp);
 
 if ($rows < 1) {
 	print '<p class="information">'._('No Pending Projects to Approve').'</p>';
-	site_admin_footer(array());
+	site_admin_footer();
 	exit;
 }
 
@@ -232,7 +232,7 @@ echo '
 	</form>
 	';
 
-site_admin_footer(array());
+site_admin_footer();
 
 // Local Variables:
 // mode: php

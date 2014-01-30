@@ -71,4 +71,4 @@ site_admin_header(array('title'=>$title));
 
 <?php
 
-site_admin_footer(array());
+site_admin_footer();

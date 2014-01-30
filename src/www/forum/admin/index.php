@@ -126,7 +126,7 @@ if (getStringFromRequest('add_forum')) {
 			</p>
 			</form>';
 	echo '<span>'.sprintf(_('%s Mandatory fields'), utils_requiredField()).'</span>';
-	forum_footer(array());
+	forum_footer();
 
 } elseif (getStringFromRequest('change_status')) {
 	/*
@@ -136,6 +136,7 @@ if (getStringFromRequest('add_forum')) {
 	$f = new Forum ($g,$group_forum_id);
 
 	forum_header(array('title'=>_('Change forum status')));
+
 	echo '<p>'._('You can adjust forum features from here. Please note that private forums can still be viewed by members of your project, not the general public.').'</p>';
 	$fa = new ForumAdmin($f->Group->getID());
 	$fa->PrintAdminPendingOption($group_forum_id);
@@ -185,7 +186,7 @@ if (getStringFromRequest('add_forum')) {
 			<input type="checkbox" name="really_sure" value="1" />'._('I am Really Sure').'<br />
 			<input type="submit" name="submit" value="'._('Delete').'" />
 			</form>';
-	forum_footer(array());
+	forum_footer();
 
 } elseif ( getStringFromRequest("deletemsg") ) {
 	// delete message handling
@@ -469,7 +470,7 @@ if (getStringFromRequest('add_forum')) {
 		}
 	}
 
-	forum_footer(array());
+	forum_footer();
 }
 
 // Local Variables:

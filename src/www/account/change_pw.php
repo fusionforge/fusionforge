@@ -114,4 +114,4 @@ if (getStringFromRequest('submit')) {
 	<?php
 }
 
-site_user_footer(array());
+site_user_footer();

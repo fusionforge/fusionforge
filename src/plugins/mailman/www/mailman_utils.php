@@ -211,7 +211,7 @@ function mailman_header($params) {
 	echo "</b></p>\n";
 }
 
-function mail_footer($params) {
+function mail_footer($params = array()) {
 	site_project_footer($params);
 }
 

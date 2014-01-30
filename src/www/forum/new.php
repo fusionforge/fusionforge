@@ -63,7 +63,7 @@ if ($forum_id && $group_id) {
 		} else {
 			forum_header(array('title'=> _('Start New Topic for: ') . $f->getName(), 'forum_id'=>$forum_id, 'modal' => 1));
 			$fh->showPostForm();
-			forum_footer(array());
+			forum_footer();
 		}
 	} else {
 		exit_not_logged_in();

@@ -205,5 +205,6 @@ if (!session_loggedin()) {
 	</td></tr>
 -->
 	</table>';
-	site_user_footer(array());
+
+	site_user_footer();
 }

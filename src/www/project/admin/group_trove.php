@@ -123,7 +123,7 @@ while (list($catroot,$fullname) = each($CATROOTS)) {
 
 <?php
 
-project_admin_footer(array());
+project_admin_footer();
 
 // Local Variables:
 // mode: php

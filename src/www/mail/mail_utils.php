@@ -56,7 +56,7 @@ function mail_header($params) {
 	}
 }
 
-function mail_footer($params) {
+function mail_footer($params = array()) {
 	site_project_footer($params);
 }
 

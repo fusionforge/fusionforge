@@ -58,7 +58,7 @@ if ($group_id && (forge_check_perm('project_admin', $group_id))) {
 		<input type="submit" name="add_job" value="'._('Continue >>').'" />
 		</form></p>';
 
-	people_footer(array());
+	people_footer();
 
 } else {
 	/*

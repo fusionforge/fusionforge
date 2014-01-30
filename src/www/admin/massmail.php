@@ -72,7 +72,7 @@ if (getStringFromRequest('submit')) {
 	$title = _('Massmail admin');
 	site_admin_header(array('title'=>$title));
 	print "<p class=\"feedback\">" ._('Mailing successfully scheduled for delivery'). "</p>";
-	site_admin_footer(array());
+	site_admin_footer();
 	exit();
 }
 
@@ -165,7 +165,7 @@ if ($seen) {
 	echo '<p>' . _('No deliveries active.') . "</p>\n";
 }
 
-site_admin_footer(array());
+site_admin_footer();
 
 // Local Variables:
 // mode: php

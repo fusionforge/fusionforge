@@ -72,4 +72,4 @@ echo ngettext('You can request to join a project by clicking the submit button. 
 </form>
 <?php
 
-site_project_footer(array());
+site_project_footer();

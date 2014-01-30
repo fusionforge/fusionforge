@@ -394,7 +394,7 @@ if ($rows < 1) {
 	}
 }
 
-pm_footer(array());
+pm_footer();
 
 // Local Variables:
 // mode: php

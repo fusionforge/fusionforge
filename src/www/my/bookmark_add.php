@@ -65,4 +65,4 @@ if (getStringFromRequest('submit') && $bookmark_url && $bookmark_title) {
 	<?php
 }
 
-site_user_footer(array());
+site_user_footer();

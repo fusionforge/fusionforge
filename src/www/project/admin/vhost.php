@@ -155,4 +155,4 @@ if (db_numrows($res_db) > 0) {
 	echo '<p>'._('No VHOSTs defined').'</p>';
 }
 
-project_admin_footer(array());
+project_admin_footer();

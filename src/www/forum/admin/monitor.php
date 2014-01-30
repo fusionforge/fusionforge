@@ -54,7 +54,7 @@ fmf.forum_id =$1 order by users.user_id',
 
 if ($res && db_numrows($res) == 0) {
 	echo '<p class="information">'._('No Monitoring Users').'</p>';
-	forum_footer(array());
+	forum_footer();
 	exit;
 }
 
@@ -73,4 +73,4 @@ while ($arr=db_fetch_array($res)) {
 }
 echo $HTML->listTableBottom();
 
-forum_footer(array());
+forum_footer();

@@ -209,4 +209,4 @@ echo "</div>\n\n";
 </form>
 
 <?php
-site_project_footer(array());
+site_project_footer();

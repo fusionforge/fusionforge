@@ -70,7 +70,7 @@ printf (_('Welcome, %1$s. Your email change is complete. Your new email address 
 
 <?php
 
-site_user_footer(array());
+site_user_footer();
 
 // Local Variables:
 // mode: php

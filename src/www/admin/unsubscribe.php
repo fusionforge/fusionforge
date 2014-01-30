@@ -60,7 +60,7 @@ if (getStringFromRequest('submit') && $user_name) {
 		</form>
 
 		<?php
-		site_admin_footer(array());
+		site_admin_footer();
 		exit();
 	} else {
 

@@ -193,7 +193,7 @@ if (getStringFromRequest('tweak')) {
 
 }
 
-site_admin_footer(array());
+site_admin_footer();
 
 // Local Variables:
 // mode: php
