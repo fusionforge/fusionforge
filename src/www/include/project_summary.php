@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010, FusionForge Team
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -116,29 +117,31 @@ function project_summary($group_id, $mode, $no_table) {
 
 	// ################## ArtifactTypes
 
-	$return .= '<a href="'.util_make_url ('/tracker/?group_id='.$group_id).'">';
-	$return .= html_image("ic/tracker20g.png",'20','20',array('alt'=>'Tracker'));
-	$return .= ' Tracker</a>';
+	if ($project->usesTracker()) {
+		$return .= '<a href="'.util_make_url ('/tracker/?group_id='.$group_id).'">';
+		$return .= html_image("ic/tracker20g.png",'20','20',array('alt'=>'Tracker'));
+		$return .= ' Tracker</a>';
 
-	if ($mode != 'compact') {
-		$result=db_query_params ('SELECT agl.*,aca.count,aca.open_count
-		FROM artifact_group_list agl
-		LEFT JOIN artifact_counts_agg aca USING (group_artifact_id)
-		WHERE agl.group_id=$1
-		AND agl.is_public=1
-		ORDER BY group_artifact_id ASC',
-			array($group_id));
+		if ($mode != 'compact') {
+			$result=db_query_params ('SELECT agl.*,aca.count,aca.open_count
+			FROM artifact_group_list agl
+			LEFT JOIN artifact_counts_agg aca USING (group_artifact_id)
+			WHERE agl.group_id=$1
+			AND agl.is_public=1
+			ORDER BY group_artifact_id ASC',
+				array($group_id));
 
-		$rows = db_numrows($result);
+			$rows = db_numrows($result);
 
-		if (!$result || $rows < 1) {
-			$return .= '<br /><em>'._('There are no public trackers available').'</em>';
-		} else {
-			for ($j = 0; $j < $rows; $j++) {
-				$return .= '<p>
-				&nbsp;-&nbsp;'.util_make_link ('/tracker/?atid='. db_result($result, $j, 'group_artifact_id') . '&amp;group_id='.$group_id.'&amp;func=browse',db_result($result, $j, 'name'));
-				$return .= sprintf(ngettext('(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', '(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', (int) db_result($result, $j, 'open_count')), (int) db_result($result, $j, 'open_count'), (int) db_result($result, $j, 'count')) ;
-				$return .= '</p>';
+			if (!$result || $rows < 1) {
+				$return .= '<br /><em>'._('There are no public trackers available').'</em>';
+			} else {
+				for ($j = 0; $j < $rows; $j++) {
+					$return .= '<p>
+					&nbsp;-&nbsp;'.util_make_link ('/tracker/?atid='. db_result($result, $j, 'group_artifact_id') . '&amp;group_id='.$group_id.'&amp;func=browse',db_result($result, $j, 'name'));
+					$return .= sprintf(ngettext('(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', '(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', (int) db_result($result, $j, 'open_count')), (int) db_result($result, $j, 'open_count'), (int) db_result($result, $j, 'count')) ;
+					$return .= '</p>';
+				}
 			}
 		}
 	}
@@ -255,7 +258,7 @@ function project_summary($group_id, $mode, $no_table) {
 
 	// ######################## Released Files
 
-	if ($project->isActive()) {
+	if ($project->usesFRS()) {
 		$return .= '
 
 			<hr />';
