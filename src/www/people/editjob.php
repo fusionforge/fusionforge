@@ -55,8 +55,8 @@ if ($group_id && (forge_check_perm('project_admin', $group_id))) {
 			exit_form_double_submit('admin');
 		}
 		$result=db_query_params("INSERT INTO people_job (group_id,created_by,title,description,post_date,status_id,category_id)
-VALUES ($1, $2, $3, $4, $5, $6, $7)",
-array($group_id, user_getid(), htmlspecialchars($title), htmlspecialchars($description), time(), '1',$category_id));
+					VALUES ($1, $2, $3, $4, $5, $6, $7)",
+					array($group_id, user_getid(), htmlspecialchars($title), htmlspecialchars($description), time(), '1',$category_id));
 		if (!$result || db_affected_rows($result) < 1) {
 			$error_msg .= sprintf(_('Job insert failed: %s'),db_error());
 			form_release_key(getStringFromRequest("form_key"));
@@ -82,7 +82,7 @@ array($group_id, user_getid(), htmlspecialchars($title), htmlspecialchars($descr
 			$feedback = _('Job updated successfully');
 		}
 
-} elseif (getStringFromRequest('add_to_job_inventory')) {
+	} elseif (getStringFromRequest('add_to_job_inventory')) {
 		/*
 			add item to job inventory
 		*/
@@ -92,8 +92,9 @@ array($group_id, user_getid(), htmlspecialchars($title), htmlspecialchars($descr
 		}
 
 		if (people_verify_job_group($job_id,$group_id)) {
-			people_add_to_job_inventory($job_id,$skill_id,$skill_level_id,$skill_year_id);
-			$feedback .= _('Job updated successfully');
+			if (people_add_to_job_inventory($job_id,$skill_id,$skill_level_id,$skill_year_id)) {;
+				$feedback .= _('Job updated successfully');
+			}
 		} else {
 			$error_msg .= _('Job update failed - wrong project_id');
 		}

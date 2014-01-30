@@ -211,15 +211,19 @@ VALUES ($1, $2, $3, $4)', array($job_id, $skill_id, $skill_level_id, $skill_year
 			if (!$result || db_affected_rows($result) < 1) {
 				$error_msg .= _('Error inserting into job inventory: ');
 				$error_msg .= db_error();
+				return false;
 			} else {
 				$feedback .= _('Added to job inventory');
+				return true;
 			}
 		} else {
-			$feedback .= _('Error: job already in your inventory');
+			$error_msg .= _('Error: job already in your inventory');
+			return false;
 		}
 
 	} else {
 		echo '<p class="error">'._('You must be logged in first').'</p>';
+		return false;
 	}
 }
 
