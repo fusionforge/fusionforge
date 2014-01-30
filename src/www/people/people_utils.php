@@ -83,7 +83,7 @@ function people_job_status_box($name='status_id',$checked='xyxy') {
 
 function people_job_category_box($name='category_id',$checked='xyxy') {
 	$result=db_query_params("SELECT category_id,name FROM people_job_category WHERE private_flag=0", array());
-	return html_build_select_box ($result,$name,$checked);
+	return html_build_select_box($result, $name, $checked, false);
 }
 
 function people_add_to_skill_inventory($skill_id,$skill_level_id,$skill_year_id) {
