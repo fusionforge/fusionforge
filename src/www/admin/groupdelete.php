@@ -54,10 +54,18 @@ site_admin_header(array('title'=>$title));
 ?>
 
 <form action="<?php echo '?group_id='.$group_id; ?>" method="post">
-<input type="checkbox" value="1" name="sure" /> <?php echo _('Confirm Delete'); ?><br />
-<input type="checkbox" value="1" name="reallysure" /> <?php echo _('Confirm Delete'); ?><br />
-<input type="checkbox" value="1" name="reallyreallysure" /> <?php echo _('Confirm Delete'); ?><br />
-
+<input id="sure" type="checkbox" value="1" name="sure" />
+<label for="sure">
+<?php echo _('Confirm Delete'); ?><br />
+</label>
+<input id="reallysure" type="checkbox" value="1" name="reallysure" />
+<label for="reallysure">
+<?php echo _('Confirm Delete'); ?><br />
+</label>
+<input id="reallyreallysure" type="checkbox" value="1" name="reallyreallysure" />
+<label for="reallyreallysure">
+<?php echo _('Confirm Delete'); ?><br />
+</label>
 <input type="submit" name="submit" value="<?php echo _('Permanently Delete'); ?>" />
 </form>
 
