@@ -47,7 +47,7 @@ class globalSearchPlugin extends Plugin {
 	 * @return	string	html code to display
 	 */
 	function show_globalsearch_stats_boxes() {
-		GLOBAL $HTML;
+		global $HTML;
 
 		$return = '';
 		$return .= $HTML->boxTop(_("Global Search"));
