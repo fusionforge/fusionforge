@@ -27,7 +27,7 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'/include/FusionForge.class.php';
 
 function show_globalsearch_stats_boxes() {
-        GLOBAL $HTML;
+        global $HTML;
 
         $return = '';
         $return .= $HTML->boxTop(_("Global Search"));
