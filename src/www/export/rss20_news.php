@@ -1,5 +1,7 @@
 <?php
 /**
+ * Previous Copyright : Fusionforge Team
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -25,6 +27,8 @@
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'export/rss_utils.inc';
+
+$sysdebug_enable = false;
 
 header("Content-Type: text/xml; charset=utf-8");
 print '<?xml version="1.0" encoding="UTF-8"?>
