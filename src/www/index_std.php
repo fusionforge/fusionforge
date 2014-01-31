@@ -40,7 +40,7 @@ require_once $gfcommon.'include/FusionForge.class.php';
 <li><?php print _('Document Management.'); ?></li>
 <li><?php print _('News announcements.'); ?></li>
 <li><?php print _('Surveys for users and admins.'); ?></li>
-<li><?php print _('Issue tracking with "unlimited" numbers of categories, text fields, etc.'); ?></li>
+<li><?php print _('Issue tracking with “unlimited” numbers of categories, text fields, etc.'); ?></li>
 <li><?php print _('Task management.'); ?></li>
 <li><?php print _('Wiki (using MediaWiki or phpWiki).'); ?></li>
 <li><?php print _('A powerful plugin system to add new features.'); ?></li>
@@ -49,7 +49,7 @@ require_once $gfcommon.'include/FusionForge.class.php';
 <p><?php print _('Checkout the roadmap for closed issues (bugs, patches, features requests) ') ?><a href="/tracker/roadmap.php?group_id=6&roadmap_id=1&release=5.3"><?php echo _('here') ?></a></p>
 <p><?php print _('Standards features:') ?></p>
 <ul>
-<li><?php print _('Widget: MyArtifacts Enhancement : add monitored artifacts (TrivialDev)'); ?></li>
+<li><?php print _('Widget: MyArtifacts Enhancement: add monitored artifacts (TrivialDev)'); ?></li>
 <li><?php print _('Trackers: Attachements moved to filesystem to allow larger attachments & reduce DB size (Alcatel-Lucent)'); ?></li>
 <li><?php print _('Docman: Files moved to filesystem using the Storage generic class (TrivialDev)'); ?></li>
 <li><?php print _('Users: notify admins when user has validated his account (TrivialDev)'); ?></li>
@@ -58,7 +58,7 @@ require_once $gfcommon.'include/FusionForge.class.php';
 <li><?php print _('Docman: Directory monitoring (TrivialDev)'); ?></li>
 <li><?php print _('Activity: New Directory appears now in activity (TrivialDev)'); ?></li>
 <li><?php print _('Docman: Display number of download per file, max upload size (TrivialDev)'); ?></li>
-<li><?php print _('Widget: Project Document Activity : new or updates files, new directories, in the last 4 weeks (TrivialDev)'); ?></li>
+<li><?php print _('Widget: Project Document Activity: new or updates files, new directories, in the last 4 weeks (TrivialDev)'); ?></li>
 <li><?php print _('Frs: Download statistics are available as graph now (TrivialDev)'); ?></li>
 <li><?php print _('New SOAP services to handle adding/removing groups, users and tasks (patch by Pasquale Vitale)'); ?></li>
 <li><?php print _('Docman: add report view as in FRS (TrivialDev)'); ?></li>
@@ -76,9 +76,9 @@ require_once $gfcommon.'include/FusionForge.class.php';
 <li><?php print _('scmhook: Add commitEmail support for scmhg plugin (TrivialDev)'); ?></li>
 <li><?php print _('new admssw plugin to provide ADMS.SW compatible RDF descriptions of projects'); ?></li>
 <li><?php print _('blocks: improved with a new HTML widget for the project summary page (Alcatel-Lucent)'); ?></li>
-<li><?php print _('svntracker : this plugin is superseed by scmhook'); ?></li>
-<li><?php print _('svncommitemail : this plugin is superseed by scmhook'); ?></li>
-<li><?php print _('new phpcaptcha plugin : enable a captcha in the register page. (TrivialDev)'); ?></li>
+<li><?php print _('svntracker: this plugin is superseed by scmhook'); ?></li>
+<li><?php print _('svncommitemail: this plugin is superseed by scmhook'); ?></li>
+<li><?php print _('new phpcaptcha plugin: enable a captcha in the register page. (TrivialDev)'); ?></li>
 </ul>
 <h3><?php print _("What's new in FusionForge 5.2"); ?></h3>
 <ul>
@@ -86,17 +86,11 @@ require_once $gfcommon.'include/FusionForge.class.php';
 <li><?php print _('Docman: inject ZIP as a tree (Capgemini)') ?></li>
 <li><?php print _('Widget: New User Widget: Last 5 documents published in my project (Capgemini)') ?></li>
 <li><?php print _('Docman: mass action (Capgemini)') ?></li>
-<li><?php print _('New Message plugin to display global messages like planned upgrade or outage
-  (Alcatel-Lucent).') ?></li>
+<li><?php print _('New Message plugin to display global messages like planned upgrade or outage (Alcatel-Lucent).') ?></li>
 <li><?php print _('Docman: complete rewritten of trash and pending view (Capgemini)') ?></li>
-<li><?php print _('New Scmhook: complete library to handle hooks for any scm available in
-  fusionforge. Currently supporting post-commit and pre-commit hook.
-  scmsvn pre-commit and post-commit library is provided (Capgemini)') ?></li>
-<li><?php print _('New Widget: smcgit personal URL of cloned repositories. Currently just
-  a list of URLs of your personal repository cloned from project you
-   belong. (Capgemini)') ?></li>
-<li><?php print _('Docman: interaction with the projects-hierarchy plugin to enable hierarchical
-  browsing. (Capgemini)') ?></li>
+<li><?php print _('New Scmhook: complete library to handle hooks for any scm available in fusionforge. Currently supporting post-commit and pre-commit hook. scmsvn pre-commit and post-commit library is provided (Capgemini)') ?></li>
+<li><?php print _('New Widget: smcgit personal URL of cloned repositories. Currently just a list of URLs of your personal repository cloned from project you belong. (Capgemini)') ?></li>
+<li><?php print _('Docman: interaction with the projects-hierarchy plugin to enable hierarchical browsing. (Capgemini)') ?></li>
 <li><?php print _('Admin: User add membership to multiples projects in one shot (Capgemini)') ?></li>
 <li><?php print _('New MoinMoinWiki plugin (AdaCore)') ?></li>
 <li><?php print _('Trackers: New view to display roadmaps view for trackers (Alcatel-Lucent)') ?></li>
@@ -170,11 +164,11 @@ if(forge_get_config('use_news')) {
 
 <div id="ft">
 <?php
-			$forge = new FusionForge() ;
+		$forge = new FusionForge();
 		printf (_('This site is running %1$s version %2$s'),
 			$forge->software_name,
 			$forge->software_version) ;
-			printf('<div about="" typeof="planetforge:ForgeService">'."\n"
+		printf('<div about="" typeof="planetforge:ForgeService">'."\n"
 				.'<div rel="planetforge:operated_by">'."\n"
 				.'<div about="#forge" typeof="planetforge:ForgeSoftware">'."\n"
 				.'<span property="planetforge:name" content="%1$s"></span>'."\n"
