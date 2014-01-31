@@ -36,7 +36,11 @@ $category_id = getIntFromRequest('category_id');
 
 if ($group_id) {
 
-	project_admin_header(array());
+	if (forge_check_perm('project_admin', $group_id)) {
+		project_admin_header(array());
+	} else {
+		site_project_header(array('title' => _('Help Wanted System'), 'group' => $group_id, 'toptab' => 'summary'));
+	}
 
 	echo '
 	<p>'._('Here is a list of positions available for this project.').'</p>
