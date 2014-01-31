@@ -3,6 +3,7 @@
  *
  * Copyright 2006 Daniel A. Perez <daniel@gforgegroup.com>
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -51,6 +52,7 @@ if ($group_id) {
 		$webmaster = forge_get_config('admin_email');
 	}
 
+	$sysdebug_enable = false;
 	// ## one time output
 	header("Content-Type: text/xml; charset=utf-8");
 	print '<?xml version="1.0" encoding="UTF-8"?>
@@ -191,7 +193,7 @@ if ($group_id) {
 } else {
 	// Print error showing no group was selected
 
-	echo "<br /><span class=\"error\">    Error: No group selected</span>";
+	echo '<br /><span class="error">'._('Error: No group selected').'</span>';
 }
 
 function date_compare($a, $b)
