@@ -228,7 +228,7 @@ if ($usingplugin) {
 	}
 }
 
-$HTML->footer(array());
+$HTML->footer();
 
 // Local Variables:
 // mode: php

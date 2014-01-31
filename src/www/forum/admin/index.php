@@ -167,7 +167,7 @@ if (getStringFromRequest('add_forum')) {
 	//echo '<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_forum_id='.$group_forum_id.'&amp;delete=1">'._('Delete Message').'</a><br />';
 	echo '<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_forum_id='.$group_forum_id.'&amp;deleteforum=1">'._('Delete entire forum and all content').'</a></p>';
 	echo '<span>'.sprintf(_('%s Mandatory fields'), utils_requiredField()).'</span>';
-	forum_footer(array());
+	forum_footer();
 
 } elseif ($deleteforum && $group_forum_id) {
 
@@ -204,7 +204,7 @@ if (getStringFromRequest('add_forum')) {
 		$feedback .= $fa->ExecuteAction("delete");
 		forum_header(array('title'=>_('Delete a Message')));
 		echo '<p>'.util_make_link ('/forum/forum.php?forum_id=' . $forum_id, _("Return to the forum")) . '</p>';
-		forum_footer(array());
+		forum_footer();
 	} elseif (getStringFromRequest("cancel")) {
 		// the user cancelled the request, go back to forum
 		//if thread_id is 0, then we came from message.php. else, we came from forum.php
@@ -230,7 +230,7 @@ if (getStringFromRequest('add_forum')) {
 							</p>
 							</form>
 							</center>';
-		forum_footer(array());
+		forum_footer();
 	}
 } elseif (getStringFromRequest("editmsg")) {
 	// edit message handling
@@ -275,7 +275,7 @@ if (getStringFromRequest('add_forum')) {
 		}
 		forum_header(array('title'=>_('Edit a Message')));
 		echo '<p>'.util_make_link ('/forum/forum.php?forum_id=' . $forum_id, _("Return to the forum")) ;
-		forum_footer(array());
+		forum_footer();
 	} elseif (getStringFromRequest("cancel")) {
 		// the user cancelled the request, go back to forum
 		session_redirect('/forum/message.php?msg_id='.$msg_id);
@@ -305,7 +305,7 @@ if (getStringFromRequest('add_forum')) {
 
 		forum_header(array('title'=>_('Edit a Message')));
 		$fh->showEditForm($fm);
-		forum_footer(array());
+		forum_footer();
 	}
 } elseif (getStringFromRequest("movethread")) {
 	$thread_id = getIntFromRequest("movethread");
@@ -350,7 +350,7 @@ if (getStringFromRequest('add_forum')) {
 		forum_header(array('title'=>_('Edit a Message')));
 		echo '<p><a href="/forum/forum.php?forum_id=' . $new_forum_id . '">'._('Return to the forum').'</a></p>';
 		echo '<p><a href="/forum/forum.php?thread_id='.$thread_id.'&amp;forum_id=' . $new_forum_id . '">'._('Return to the thread').'</a></p>';
-		forum_footer(array());
+		forum_footer();
 	} elseif (getStringFromRequest("cancel")) {
 		// the user cancelled the request, go back to forum
 		if ($return_to_message) {
@@ -374,7 +374,7 @@ if (getStringFromRequest('add_forum')) {
 		if ($ff->isError()) {
 			echo '<p class="error">'.sprintf(_('No Forums Found for %s'), $g->getPublicName())
                  . $ff->getErrorMessage().'</p>';
-			forum_footer(array());
+			forum_footer();
 			exit;
 		}
 
@@ -417,7 +417,7 @@ if (getStringFromRequest('add_forum')) {
 							</form>
 							</center>';
 
-		forum_footer(array());
+		forum_footer();
 	}
 
 } else {

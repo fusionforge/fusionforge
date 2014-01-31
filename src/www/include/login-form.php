@@ -96,7 +96,7 @@ function display_login_form($return_to = '/', $triggered = false, $full_page = f
 	}
 
 	if ($full_page) {
-		$HTML->footer(array());
+		$HTML->footer();
 	}
 }
 

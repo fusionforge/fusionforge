@@ -77,7 +77,7 @@
 			</tr>
 			</table>
 			<?php
-			$ath->footer(array());
+			$ath->footer();
 		}
 	}
 

@@ -94,4 +94,4 @@ $sep = getStringFromRequest('sep', ',');
 </ul>
 
 <?php
-$ath->footer(array());
+$ath->footer();

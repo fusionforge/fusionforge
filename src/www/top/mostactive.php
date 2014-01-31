@@ -91,7 +91,7 @@ if ($i<$rows) {
 
 echo $HTML->listTableBottom();
 
-$HTML->footer(array());
+$HTML->footer();
 
 // Local Variables:
 // mode: php

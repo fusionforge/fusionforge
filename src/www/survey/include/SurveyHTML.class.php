@@ -97,7 +97,7 @@ class SurveyHTML extends Error {
 	/**
 	 * Show Survey footer
 	 */
-	function footer($params) {
+	function footer($params = array()) {
 		site_project_footer($params);
 	}
 

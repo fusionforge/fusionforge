@@ -67,4 +67,4 @@ while ($row = db_fetch_array($res)) {
 
 </table>
 <?php
-$HTML->footer(array());
+$HTML->footer();

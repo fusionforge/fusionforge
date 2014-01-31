@@ -41,7 +41,7 @@ function goodbye($msg) {
 	site_header(array('title'=>_('Attachments')));
 	html_feedback_top($msg);
 	echo '<form method="post"><input type="button" value="'._('Close Window').'" onclick="window.close() /"></form>';
-	site_footer(array());
+	site_footer();
 	exit();
 	/*echo "<center>" . $msg . "</center><p>";
 	die ('<center><form method="post"><input type="button" value="Close Window" onclick="window.close()"></form></center>');*/
@@ -144,7 +144,7 @@ if ($edit=="yes") {
 				$feedback .= "<br />" . $item;
 			}
 			echo '<p><p><center><form method="post"><input type="button" value="'._("Close Window").'" onclick="window.close()"></form></center>';
-			forum_footer(array());
+			forum_footer();
 			exit();
 		} else {
 			//show the form to edit the attach
@@ -161,7 +161,7 @@ if ($edit=="yes") {
 				$filename = db_result($res,0,'filename');
 			}
 			echo $fh->LinkAttachEditForm($filename,$group_id,$forum_id,$attachid,$msg_id);
-			forum_footer(array());
+			forum_footer();
 			exit();
 		}
 

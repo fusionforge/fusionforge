@@ -84,7 +84,7 @@ while ($row_top = db_fetch_array($res_top)) {
 
 echo $HTML->listTableBottom();
 
-$HTML->footer(array());
+$HTML->footer();
 
 // Local Variables:
 // mode: php

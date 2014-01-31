@@ -119,7 +119,7 @@ if (getStringFromRequest('submit')) {
 					) ;
 				echo '</p>';
 				db_commit();
-				frs_admin_footer(array());
+				frs_admin_footer();
 				exit();
 			}
 		}

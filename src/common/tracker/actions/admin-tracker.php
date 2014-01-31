@@ -77,4 +77,4 @@ echo '<br />';
 echo _('Permanently delete this tracker.');
 echo '</p>';
 
-$ath->footer(array());
+$ath->footer();

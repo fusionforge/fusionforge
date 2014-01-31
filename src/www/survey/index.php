@@ -59,4 +59,4 @@ if (!$ss) {
     echo($sh->showSurveys($ss, 0, 0, 1, 1, 1, 0));
 }
 
-$sh->footer(array());
+$sh->footer();

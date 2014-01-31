@@ -112,7 +112,7 @@
 		<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" />
 		</form>
 		<?php
-		$ath->footer(array());
+		$ath->footer();
 	}
 // Local Variables:
 // mode: php

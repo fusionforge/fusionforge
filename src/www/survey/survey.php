@@ -58,4 +58,4 @@ if (!$survey_id) {
 	echo($sh->showSurveyForm($s));
 }
 
-$sh->footer(array());
+$sh->footer();

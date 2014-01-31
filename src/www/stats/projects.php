@@ -55,4 +55,4 @@ $HTML->header(array('title'=>sprintf(_('%s Site Project Statistical Comparisons'
 	<br /><br />
 </div>
 <?php
-$HTML->footer(array());
+$HTML->footer();

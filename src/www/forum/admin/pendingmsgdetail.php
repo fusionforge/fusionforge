@@ -66,7 +66,7 @@ if (!$fhtml || !is_object($fhtml)) {
 }
 forum_header(array());
 echo $fhtml->showPendingMessage($fm);
-$HTML->footer(array());
+$HTML->footer();
 
 // Local Variables:
 // mode: php

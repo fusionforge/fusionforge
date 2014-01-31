@@ -54,7 +54,7 @@ $sh->header(array('title'=>$title, 'modal'=>1));
 
 if (!session_loggedin() || !forge_check_perm('project_admin', $group_id)) {
 	echo '<div class="error">'._('Permission denied.').'</div>';
-	$sh->footer(array());
+	$sh->footer();
 	exit;
 }
 
@@ -122,7 +122,7 @@ if (!$sqs) {
 	echo($sh->showQuestions($sqs));
 }
 
-$sh->footer(array());
+$sh->footer();
 
 // Local Variables:
 // mode: php

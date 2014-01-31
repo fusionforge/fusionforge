@@ -205,7 +205,7 @@ $nb = $count? ' ('.$count.')' : '';
 </form>
 <?php
 
-$ath->footer(array());
+$ath->footer();
 
 // Local Variables:
 // mode: php

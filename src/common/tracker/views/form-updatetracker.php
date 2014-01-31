@@ -82,7 +82,7 @@ $ath->adminHeader(array('title'=>sprintf(_('Update settings for %s'),
 		</form>
 		<?php
 
-		$ath->footer(array());
+		$ath->footer();
 
 // Local Variables:
 // mode: php

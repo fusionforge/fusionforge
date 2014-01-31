@@ -51,13 +51,13 @@ if (!$g || !is_object($g) || $g->isError()) {
 }
 
 $is_admin_page='y';
-$sh = new  SurveyHtml();
+$sh = new SurveyHtml();
 
 $is_admin_page='y';
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
 	echo '<p class="error">'._('Permission denied.').'</p>';
-	$sh->footer(array());
+	$sh->footer();
 	exit;
 }
 
@@ -102,7 +102,7 @@ if ($survey_id) {
 				print "</tr>\n";
 			}
 			print "</table>";
-			$sh->footer(array());
+			$sh->footer();
         } else {
 			// CSV mode
 		    header('Content-type: text/csv');

@@ -58,7 +58,7 @@ echo '<tr><td><strong>'._('Total Non-English').'</strong></td>'.
 echo $GLOBALS['HTML']->listTableBottom();
 echo "<p>"._('This is a list of the preferences that users have chosen in their user preferences; it does not include languages which are selected via cookies or browser preferences')."</p>";
 
-$HTML->footer( array() );
+$HTML->footer();
 
 // Local Variables:
 // mode: php

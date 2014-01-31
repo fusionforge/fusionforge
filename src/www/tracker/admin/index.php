@@ -101,7 +101,7 @@ if ($group_id && $atid) {
 				. '<br/><br/>' . _('Do you really want to do that?'),
 				array('group_id' => $group_id, 'atid' => $atid, 'deletetemplate' => 1),
 				array('confirm' => _('Delete'), 'cancel' => _('Cancel')));
-			$ath->footer(array());
+			$ath->footer();
 			exit;
 		}
 
@@ -178,7 +178,7 @@ if ($group_id && $atid) {
 				. '<br/><br/>' . _('Do you really want to do that?'),
 				array('group_id' => $group_id, 'atid' => $atid, 'delete_canned' => 1, 'id' => $id),
 				array('confirm' => _('Delete'), 'cancel' => _('Cancel')));
-			$ath->footer(array());
+			$ath->footer();
 			exit;
 		}
 

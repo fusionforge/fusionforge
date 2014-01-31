@@ -57,7 +57,7 @@ $HTML->header(array('title'=>sprintf(_('Source of %s'), $file)));
 
 show_source($fname);
 
-$HTML->footer(array());
+$HTML->footer();
 
 // Local Variables:
 // mode: php

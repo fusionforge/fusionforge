@@ -78,7 +78,7 @@ if ( !forge_check_perm('project_admin', $group_id)) {
 
 <?php
 
-$sh->footer(array());
+$sh->footer();
 
 // Local Variables:
 // mode: php

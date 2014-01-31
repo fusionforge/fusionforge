@@ -46,7 +46,7 @@ if (!$survey_id) {
 		Quit if params are not provided
 	*/
 	echo '<p class="error">'._('For some reason, the Project ID or Survey ID did not make it to this page').'</p>';
-	$sh->footer(array());
+	$sh->footer();
 	exit;
 }
 
@@ -91,4 +91,4 @@ for ($i=0; $i<$count; $i++) {
     }
 }
 
-$sh->footer(array());
+$sh->footer();

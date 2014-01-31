@@ -64,4 +64,4 @@ if (!session_loggedin()) {
 		exit_missing_param('',array(_('Vote ID'),_('Response'),_('Flag')),'survey');
 	}
 }
-$HTML->footer(array());
+$HTML->footer();

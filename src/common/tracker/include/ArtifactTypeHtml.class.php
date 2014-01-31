@@ -93,7 +93,7 @@ class ArtifactTypeHtml extends ArtifactType {
 
 	}
 
-	function footer($params) {
+	function footer($params = array()) {
 		site_project_footer($params);
 	}
 

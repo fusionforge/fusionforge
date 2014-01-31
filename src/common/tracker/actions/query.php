@@ -405,7 +405,7 @@ echo '<tr>
 echo '
 	</table></form>';
 echo '</fieldset></td></tr></table>';
-$ath->footer(array());
+$ath->footer();
 
 // Local Variables:
 // mode: php

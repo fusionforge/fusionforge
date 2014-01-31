@@ -132,7 +132,7 @@ class Theme extends Layout {
 		echo '</div><!-- id="maindiv" -->' . "\n";
 	}
 
-	function footer($params) {
+	function footer($params = array()) {
 		$this->bodyFooter($params);
 		echo '<div class="footer">' . "\n";
 		echo $this->navigation->getPoweredBy();

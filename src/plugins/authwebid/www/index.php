@@ -164,7 +164,7 @@ echo $HTML->boxTop(_('My WebID identities'));
 
 		echo $HTML->boxBottom();
 
-site_user_footer(array());
+site_user_footer();
 
 // Local Variables:
 // mode: php

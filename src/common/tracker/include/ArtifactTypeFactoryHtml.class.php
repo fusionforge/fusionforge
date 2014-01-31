@@ -67,7 +67,7 @@ class ArtifactTypeFactoryHtml extends ArtifactTypeFactory {
 		site_project_header($params);
 	}
 
-	function footer($params=array()) {
+	function footer($params = array()) {
 		site_project_footer($params);
 	}
 

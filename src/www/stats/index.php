@@ -64,4 +64,4 @@ echo '<ul><li><a href="i18n.php">'.("I18n Statistics").'</a></li></ul>';
 // END PAGE CONTENT CODE
 //
 
-$HTML->footer( array() );
+$HTML->footer();

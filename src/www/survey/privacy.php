@@ -57,4 +57,4 @@ echo '</p>';
 
 <p><strong><?php printf(_('-- the %s staff'), forge_get_config ('forge_name')); ?></strong></p>
 
-<?php $sh->footer(array());
+<?php $sh->footer();

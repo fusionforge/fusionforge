@@ -214,7 +214,7 @@ WHERE user_id=$2', array($people_view_skills, user_getid()));
 					echo '<input type="submit" name="MultiDelete" value="'._('Confirm').'" />';
 					echo '<input type="submit" name="MultiDeleteCancel" value="'._('Cancel').'" />';
 					echo '</form>';
-					people_footer(array());
+					people_footer();
 				}
 				return;
 			}
@@ -320,7 +320,7 @@ WHERE user_id=$2', array($people_view_skills, user_getid()));
 
 	}
 
-	people_footer(array());
+	people_footer();
 
 } else {
 	/*

@@ -57,7 +57,7 @@ $id = getStringFromRequest('id');
 		</table>
 		<?php
 
-		$ath->footer(array());
+		$ath->footer();
 
 // Local Variables:
 // mode: php

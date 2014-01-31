@@ -51,7 +51,7 @@ $s = new Survey($g, $survey_id);
 if (!session_loggedin() || !forge_check_perm('project_admin', $group_id)) {
 	$sh->header(array());
 	echo '<div class="error">' . _('Permission denied.') . '</div>';
-	$sh->footer(array());
+	$sh->footer();
 	exit;
 }
 
@@ -102,4 +102,4 @@ if (!$ss) {
 	echo($sh->showSurveys($ss, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1));
 }
 
-$sh->footer(array());
+$sh->footer();

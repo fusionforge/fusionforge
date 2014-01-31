@@ -116,7 +116,7 @@ ORDER BY snippet_version.snippet_version_id DESC", array($id));
 	<p>' ._('You can submit a new version of this snippet if you have modified it and you feel it is appropriate to share with others.').'.</p>';
 
 	}
-	snippet_footer(array());
+	snippet_footer();
 
 } elseif ($type=='package') {
 	/*

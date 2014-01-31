@@ -52,7 +52,7 @@ $ath->adminHeader(array ('title'=>sprintf(_('Permanently Delete Tracker %s'),
 
 <?php
 
-$ath->footer(array());
+$ath->footer();
 
 // Local Variables:
 // mode: php

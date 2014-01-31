@@ -125,4 +125,4 @@ if (!$has_error) {
 <?php
 }
 
-$ath->footer(array());
+$ath->footer();

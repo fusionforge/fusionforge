@@ -84,7 +84,7 @@ class HtmlSearchRenderer extends SearchRenderer {
 	 * writeFooter - write the footer
 	 */
 	function writeFooter() {
-		$GLOBALS['HTML']->footer(array());
+		$GLOBALS['HTML']->footer();
 	}
 
 	/**

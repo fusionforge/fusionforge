@@ -78,4 +78,4 @@ require_once 'common/tracker/ArtifactWorkflow.class.php';
 		</form>
 		<?php
 
-		$ath->footer(array());
+		$ath->footer();

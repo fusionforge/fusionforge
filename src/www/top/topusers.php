@@ -107,7 +107,7 @@ echo $HTML->listTableBottom();
 	<td align="RIGHT"><a href="topusers.php?offset='.($offset+50).'"><strong>More --></strong></a></td></tr>
 ';*/
 
-$HTML->footer(array());
+$HTML->footer();
 
 // Local Variables:
 // mode: php

@@ -56,4 +56,4 @@ $HTML->header(array('title'=>sprintf(_('%s Sitewide Statistics Graphs'), forge_g
 </p>
 
 <?php
-$HTML->footer( array() );
+$HTML->footer();

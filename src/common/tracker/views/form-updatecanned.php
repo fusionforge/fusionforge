@@ -53,7 +53,7 @@ $ath->adminHeader(array('title'=>$title));
 			</form>
 			<?php
 		}
-		$ath->footer(array());
+		$ath->footer();
 
 // Local Variables:
 // mode: php

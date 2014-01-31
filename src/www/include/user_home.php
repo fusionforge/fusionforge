@@ -201,7 +201,7 @@ if (forge_get_config('use_ratings')) {
 }
 echo $HTML->boxBottom();
 
-$HTML->footer(array());
+$HTML->footer();
 
 // Local Variables:
 // mode: php

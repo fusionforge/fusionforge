@@ -88,8 +88,7 @@ if (!session_loggedin()) {
 
 	echo '
 	<h3>'._('Ratings Recorded').'</h3>
-	<p>'._('You can re-rate this person by simply returning to their ratings page and re-submitting the info.').'.</p>
-	<p>&nbsp;</p>';
+	<p>'._('You can re-rate this person by simply returning to their ratings page and re-submitting the info.').'.</p>';
 
-	$HTML->footer(array());
+	$HTML->footer();
 }

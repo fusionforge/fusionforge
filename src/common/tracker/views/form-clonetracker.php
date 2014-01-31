@@ -60,6 +60,6 @@ if (!$g || !is_object($g)) {
 		</form>
 <?php
 		}
-		$ath->footer(array());
+		$ath->footer();
 	}
 }

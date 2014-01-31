@@ -153,4 +153,4 @@ if ($start == $end) {
 		}
 	}
 }
-$h->footer(array());
+$h->footer();

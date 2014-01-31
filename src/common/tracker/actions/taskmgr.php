@@ -172,4 +172,4 @@ if (getStringFromRequest('add_to_task')) {
 		</form>';
 }
 
-$ath->footer(array());
+$ath->footer();

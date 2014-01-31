@@ -338,7 +338,7 @@ if ( $cat === 'c' ) {
 //	.$query_projlist.'</FONT>';
 echo '</div><!-- id="project-tree" -->' . "\n";
 
-$HTML->footer(array());
+$HTML->footer();
 
 // Local Variables:
 // mode: php

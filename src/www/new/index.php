@@ -155,4 +155,4 @@ if (!$res_new || db_numrows($res_new) < 1) {
 
 }
 
-$HTML->footer(array());
+$HTML->footer();

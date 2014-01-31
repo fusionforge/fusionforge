@@ -124,7 +124,7 @@ if ($login) {
 // Otherwise, display the login form again
 display_login_form($return_to, $triggered);
 
-$HTML->footer(array());
+$HTML->footer();
 
 // Local Variables:
 // mode: php

@@ -44,4 +44,4 @@ $HTML->header(array('title'=>sprintf(_('Top %s Projects'), forge_get_config ('fo
 </ul>
 
 <?php
-$HTML->footer(array());
+$HTML->footer();

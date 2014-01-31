@@ -135,4 +135,4 @@ echo '</select>'."\n";
 <?php
 }
 
-$ath->footer(array());
+$ath->footer();

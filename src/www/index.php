@@ -34,9 +34,9 @@ $HTML->header(array('title'=>_('Welcome'), 'h1' => ''));
 
 // Main page content is now themeable (see www/include/Layout.class.php);
 // Default is index_std.php;
-include ( $HTML->getRootIndex() );
+include ($HTML->getRootIndex());
 
-$HTML->footer(array());
+$HTML->footer();
 
 // Local Variables:
 // mode: php

@@ -91,7 +91,7 @@ if (getStringFromRequest('send_mail')) {
 			util_send_message($to, $subject, $body, $email, '', $name);
 			$HTML->header(array('title' => forge_get_config('forge_name').' ' ._('Contact')));
 			echo '<p>'._('Message has been sent').'.</p>';
-			$HTML->footer(array());
+			$HTML->footer();
 			exit;
 		} elseif ($touser) {
 			/*
@@ -102,7 +102,7 @@ if (getStringFromRequest('send_mail')) {
 			util_send_message($to, $subject, $body, $email, '', $name);
 			$HTML->header(array('title' => forge_get_config('forge_name').' '._('Contact')));
 			echo '<p>'._('Message has been sent').'</p>';
-			$HTML->footer(array());
+			$HTML->footer();
 			exit;
 		}
 	}
@@ -192,7 +192,7 @@ if (!$is_logged) {
 </p>
 </form>
 <?php
-$HTML->footer(array());
+$HTML->footer();
 
 // Local Variables:
 // mode: php

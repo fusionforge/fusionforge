@@ -95,7 +95,7 @@ $res = db_query_params ('SELECT g.unix_group_name, agl.name AS tracker_name, aef
 		</td></tr></table></form>
 
 <?php
-		$ath->footer(array());
+		$ath->footer();
 
 // Local Variables:
 // mode: php

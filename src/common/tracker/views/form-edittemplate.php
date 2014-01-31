@@ -25,7 +25,7 @@ plugin_hook_by_reference("text_editor",$params);
 </form>
 <?php
 
-$ath->footer(array());
+$ath->footer();
 
 // Local Variables:
 // mode: php

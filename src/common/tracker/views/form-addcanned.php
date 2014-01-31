@@ -79,7 +79,7 @@ $ath->adminHeader(array('title'=>$title, 'modal'=>1));
 		</form>
 		<?php
 
-		$ath->footer(array());
+		$ath->footer();
 
 // Local Variables:
 // mode: php

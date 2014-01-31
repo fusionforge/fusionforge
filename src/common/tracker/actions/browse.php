@@ -790,7 +790,7 @@ if ($art_arr && $art_cnt > 0) {
 	echo db_error();
 }
 
-$ath->footer(array());
+$ath->footer();
 
 // Local Variables:
 // mode: php

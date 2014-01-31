@@ -64,7 +64,7 @@ $sh->header(array('title' => $title, 'modal' => 1));
 
 if (!session_loggedin() || !forge_check_perm('project_admin', $group_id)) {
 	echo '<p class="error">'._('Permission denied.').'</p>';
-	$sh->footer(array());
+	$sh->footer();
 	exit;
 }
 
@@ -74,11 +74,11 @@ if ($survey_id) {
 
 	if (!$s || !is_object($s)) {
 		echo '<p class="error">'._('Error'). ' ' . _('Cannot get Survey') ."</p>";
-		$sh->footer(array());
+		$sh->footer();
 		exit;
 	} elseif ( $s->isError()) {
 		echo '<p class="error">'._('Error'). $s->getErrorMessage() ."</p>";
-		$sh->footer(array());
+		$sh->footer();
 		exit;
 	}
 
@@ -124,7 +124,7 @@ if (!$ss) {
 	echo($sh->showSurveys($ss, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1));
 }
 
-$sh->footer(array());
+$sh->footer();
 
 /**
  * showResult - Get Result from Survey and Question. Pass the result to Show Result HTML class

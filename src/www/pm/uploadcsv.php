@@ -87,4 +87,4 @@ external application, such as MS Project. Primarily preserved for sorting purpos
 </table>
 <p />
 <?php
-pm_footer(array());
+pm_footer();

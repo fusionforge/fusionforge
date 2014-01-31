@@ -49,7 +49,7 @@ $HTML->header(array('title'=> _('Terms of use')));
 
 <?php
 
-$HTML->footer(array());
+$HTML->footer();
 
 // Local Variables:
 // mode: php

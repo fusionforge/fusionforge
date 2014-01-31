@@ -159,7 +159,7 @@ if ($rows > 0) {
 		echo '<a href="'.getStringFromServer('PHP_SELF').'?deletetemplate=1&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'._('Delete template').'</a><br />';
 		echo "</p>";
 
-		$ath->footer(array());
+		$ath->footer();
 
 // Local Variables:
 // mode: php

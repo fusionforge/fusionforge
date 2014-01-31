@@ -163,7 +163,7 @@ if (viewcvs_is_html()) {
 		'group'=>$Group->getID()));
 
 	echo $content;
-	scm_footer(array());
+	scm_footer();
 } else {
 	// TODO does not seem to work when allow_tar = 1 in ViewCVS conf
 	// (allow to generate on the fly a tar.gz): the generated file

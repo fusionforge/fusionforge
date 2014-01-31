@@ -64,7 +64,7 @@ $ath->header(array ('title'=>_('Delete artifact').': [#'. $ah->getID(). '] ' . $
 
 <?php
 
-$ath->footer(array());
+$ath->footer();
 
 // Local Variables:
 // mode: php
