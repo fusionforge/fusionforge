@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-31 16:23+0100\n"
+"POT-Creation-Date: 2014-01-31 17:03+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -10292,9 +10292,8 @@ msgid "Hudson/Jenkins"
 msgstr ""
 
 #: plugins/hudson/include/hudsonPlugin.class.php:82
-#, fuzzy
 msgid "Continuus Integration Scheduler"
-msgstr "Intégration continue"
+msgstr "Ordonnanceur d'intégration continue"
 
 #: plugins/hudson/include/hudsonPlugin.class.php:233
 msgid "Hudson Build"
@@ -13817,7 +13816,7 @@ msgstr ""
 
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:96
 msgid "Related SVN commits"
-msgstr " Envois SVN liés"
+msgstr "Envois Subversion liés"
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:108
 msgid "Anonymous Subversion Access"
@@ -14107,8 +14106,9 @@ msgid ""
 "Changing your email address will require confirmation from your new email "
 "address, so that we can ensure we have a good email address on file."
 msgstr ""
-"Le changement d'adresse e-mail requiert une confirmation de votre nouvelle "
-"adresse, de manière à assurer que l'adresse enregistrée est correcte."
+"Le changement d'adresse électronique requiert une confirmation de votre "
+"nouvelle adresse, de manière à assurer que l'adresse enregistrée est "
+"correcte."
 
 #: www/account/change_email.php:79
 msgid ""
@@ -14127,7 +14127,7 @@ msgid ""
 "Submitting the form below will mail a confirmation URL to the new email "
 "address. Visiting this link will complete the email change."
 msgstr ""
-"La validation du formulaire ci-dessous enverra un e-mail à la nouvelle "
+"La validation du formulaire ci-dessous enverra un courriel à la nouvelle "
 "adresse, avec un lien de confirmation. Il faudra visiter ce lien pour mener "
 "à bien le changement d'adresse."
 
@@ -14610,8 +14610,8 @@ msgid ""
 "Visiting the link sent in this email will activate the account."
 msgstr ""
 "Vous allez recevoir un courrier électronique de confirmation pour vérifier "
-"votre adresse e-mail. Suivez le lien qui vous a été envoyé pour activer "
-"votre compte."
+"votre adresse électronique. Suivez le lien qui vous a été envoyé pour "
+"activer votre compte."
 
 #: www/account/register.php:121
 #, php-format
@@ -17213,9 +17213,8 @@ msgid "Recently Registered Projects"
 msgstr "Derniers projets enregistrés"
 
 #: www/include/features_boxes.php:57
-#, fuzzy
 msgid "System Information"
-msgstr "Autres informations"
+msgstr "Informations système"
 
 #: www/include/features_boxes.php:59
 #, php-format
@@ -17887,8 +17886,9 @@ msgstr ""
 msgid ""
 "Trackers: Attachements moved to filesystem to allow larger attachments & "
 "reduce DB size (Alcatel-Lucent)"
-msgstr "Outils de suivi : les pièces jointes sont maintenant stockées dans "
-"le système de fichiers pour pouvoir gérer des pièces jointes plus volumineuses "
+msgstr ""
+"Outils de suivi : les pièces jointes sont maintenant stockées dans le "
+"système de fichiers pour pouvoir gérer des pièces jointes plus volumineuses "
 "et réduire la taille de la base de données (Alcatel-Lucent)"
 
 #: www/index_std.php:54
@@ -17903,7 +17903,8 @@ msgstr ""
 
 #: www/index_std.php:56
 msgid "Allow project to disable the Project Activity (Alcatel-Lucent)"
-msgstr "Un projet peut maintenant désactiver l'activité du projet (Alcatel-Lucent)"
+msgstr ""
+"Un projet peut maintenant désactiver l'activité du projet (Alcatel-Lucent)"
 
 #: www/index_std.php:57
 msgid ""
@@ -17992,8 +17993,9 @@ msgstr ""
 msgid ""
 "scmhook: Support added for pre-revprop-changehooks to change properties "
 "(Alcatel-Lucent)"
-msgstr "scmhook : ajout du support de pre-revprop-changehooks pour modifier "
-"les propriétés (Alcatel-Lucent)"
+msgstr ""
+"scmhook : ajout du support de pre-revprop-changehooks pour modifier les "
+"propriétés (Alcatel-Lucent)"
 
 #: www/index_std.php:76
 msgid "scmhook: Add commitEmail support for scmhg plugin (TrivialDev)"
@@ -18008,8 +18010,9 @@ msgstr ""
 msgid ""
 "blocks: improved with a new HTML widget for the project summary page "
 "(Alcatel-Lucent)"
-msgstr "Blocs : amélioration avec un nouveau gadget HTML pour la page "
-"de résumé du projet (Alcatel-Lucent)"
+msgstr ""
+"Blocs : amélioration avec un nouveau gadget HTML pour la page de résumé du "
+"projet (Alcatel-Lucent)"
 
 #: www/index_std.php:79
 msgid "svntracker: this plugin is superseed by scmhook"
@@ -18045,8 +18048,9 @@ msgstr "Documents : action de masse (Capgemini)"
 msgid ""
 "New Message plugin to display global messages like planned upgrade or outage "
 "(Alcatel-Lucent)."
-msgstr "Nouveau greffon permettant d'afficher des messages globaux, tels qu'une "
-"mise à jour ou une indisponibilité (Alcatel-Lucent)."
+msgstr ""
+"Nouveau greffon permettant d'afficher des messages globaux, tels qu'une mise "
+"à jour ou une indisponibilité (Alcatel-Lucent)."
 
 #: www/index_std.php:90
 msgid "Docman: complete rewritten of trash and pending view (Capgemini)"
@@ -18084,7 +18088,9 @@ msgstr ""
 #: www/index_std.php:96
 msgid ""
 "Trackers: New view to display roadmaps view for trackers (Alcatel-Lucent)"
-msgstr "Outils de suivi : possibilité d'afficher des feuilles de route (Alcatel-Lucent)"
+msgstr ""
+"Outils de suivi : possibilité d'afficher des feuilles de route (Alcatel-"
+"Lucent)"
 
 #: www/index_std.php:97
 msgid ""
@@ -18724,9 +18730,8 @@ msgid "Missing skill name."
 msgstr "Nom du rôle manquant"
 
 #: www/people/admin/index.php:84
-#, fuzzy
 msgid "Add/Change Categories"
-msgstr "Ajouter/Éditer catégories"
+msgstr "Ajouter/modifier les catégories"
 
 #: www/people/admin/index.php:92
 #, fuzzy
@@ -18739,9 +18744,8 @@ msgid "No job categories"
 msgstr "Aucune catégorie"
 
 #: www/people/admin/index.php:103
-#, fuzzy
 msgid "New Category Name"
-msgstr "Nom de catégorie"
+msgstr "Nom de la nouvelle catégorie"
 
 #: www/people/admin/index.php:106 www/pm/admin/index.php:218
 msgid "Once you add a category, it cannot be deleted"
@@ -23892,21 +23896,6 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 
 #~ msgid "Edit job"
 #~ msgstr "Éditer la tâche"
-
-#~ msgid "Trigger a build after SVN commits:"
-#~ msgstr "Déclencher une construction après une validation SVN :"
-
-#~ msgid "Trigger a build after CVS commits:"
-#~ msgstr "Déclencher une construction après une validation SVN :"
-
-#~ msgid "Trigger a build after commits:"
-#~ msgstr "Déclencher une construction après validation :"
-
-#~ msgid "SVN"
-#~ msgstr "SVN"
-
-#~ msgid "CVS"
-#~ msgstr "CVS"
 
 #~ msgid "Customize layout"
 #~ msgstr "Personnaliser la mise en page"

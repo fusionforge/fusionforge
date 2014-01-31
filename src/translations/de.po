@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-31 16:23+0100\n"
+"POT-Creation-Date: 2014-01-31 17:03+0100\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -2252,7 +2252,6 @@ msgid "Forum Info Updated Successfully"
 msgstr "Foren-Info erfolgreich aktualisiert"
 
 #: common/forum/ForumAdmin.class.php:214
-#, fuzzy
 msgid "Forum added successfully"
 msgstr "Forum erfolgreich angelegt"
 
@@ -2893,9 +2892,8 @@ msgid "Error Adding Release: Name Already Exists"
 msgstr "Ein solches Element existiert bereits"
 
 #: common/frs/FRSRelease.class.php:187
-#, fuzzy
 msgid "Invalid release_id"
-msgstr "Ungültiger Dateiname."
+msgstr "Ungültiger release_id"
 
 #: common/frs/FRSRelease.class.php:286
 #, php-format
@@ -4796,14 +4794,12 @@ msgstr "Datum hinzufügen"
 
 #: common/pm/ProjectTask.class.php:150 common/pm/ProjectTask.class.php:948
 #: www/pm/ganttpage.php:249
-#, fuzzy
 msgid "category"
 msgstr "Kategorie"
 
 #: common/pm/ProjectTask.class.php:235
-#, fuzzy
 msgid "Invalid Task ID"
-msgstr "Ungültige ID"
+msgstr "Ungültige Task ID"
 
 #: common/pm/ProjectTask.class.php:947
 msgid "status"
@@ -4815,9 +4811,8 @@ msgid "[%1$s - %2$s] [Task #%3$d] "
 msgstr "[%1$s - %2$s] [Task #%3$d] "
 
 #: common/reporting/ReportDownloads.class.php:77 www/frs/admin/index.php:151
-#, fuzzy
 msgid "There are no packages defined."
-msgstr "Für dieses Projekt sind keine Datenpakete definiert."
+msgstr "Keine Datenpakete sind definiert."
 
 #: common/reporting/report_utils.php:27
 #, php-format
@@ -6145,9 +6140,9 @@ msgid "Create New Task"
 msgstr "Neuen Auftrag anlegen"
 
 #: common/tracker/actions/tracker.php:97
-#, fuzzy, php-format
+#, php-format
 msgid "Item %s successfully created"
-msgstr "Element erfolgreich angelegt"
+msgstr "Element %s erfolgreich angelegt"
 
 #: common/tracker/actions/tracker.php:109
 #, php-format
@@ -6240,9 +6235,8 @@ msgid "Invalid Artifact Type"
 msgstr "Ungültige ID"
 
 #: common/tracker/Artifact.class.php:154
-#, fuzzy
 msgid "Only project members can view private artifact types"
-msgstr "Produkt: Nur Gruppenmitglieder können private Produkttypen sehen"
+msgstr "Nur Projektmitglieder können private Produkttypen sehen"
 
 #: common/tracker/Artifact.class.php:191 common/tracker/Artifact.class.php:779
 #, fuzzy
@@ -6260,14 +6254,12 @@ msgid "Message Body Is Required"
 msgstr "Gegenstand: Rumpf der Nachricht erforderlich"
 
 #: common/tracker/Artifact.class.php:229
-#, fuzzy
 msgid "Error remapping status"
-msgstr "Artifact: Fehler bom remapStatus"
+msgstr "Fehler bom remapStatus"
 
 #: common/tracker/Artifact.class.php:300
-#, fuzzy
 msgid "Invalid Artifact ID"
-msgstr "Ungültige ID"
+msgstr "Ungültige Artifact ID"
 
 #: common/tracker/Artifact.class.php:516
 #, fuzzy
@@ -6379,9 +6371,8 @@ msgid "This Tracker already uses custom statuses"
 msgstr ""
 
 #: common/tracker/ArtifactExtraField.class.php:234
-#, fuzzy
 msgid "Invalid ArtifactExtraField ID"
-msgstr "Ungültige ID"
+msgstr "Ungültige ArtifactExtraField ID"
 
 #: common/tracker/ArtifactExtraField.class.php:322
 #: common/tracker/views/form-addextrafield.php:124
@@ -6456,14 +6447,13 @@ msgstr "Produktgruppe: Dateiname, Typ, Größe und Daten sind erforderlich"
 
 #: common/tracker/ArtifactHistory.class.php:53
 #: common/tracker/ArtifactMessage.class.php:53
-#, fuzzy
 msgid "Invalid Artifact"
-msgstr "Ungültige ID"
+msgstr "Ungültige Artifact"
 
 #: common/tracker/ArtifactHistory.class.php:82
 #, fuzzy
 msgid "Invalid ArtifactHistory ID"
-msgstr "Ungültige ID"
+msgstr "Ungültige ArtifactHistory ID"
 
 #: common/tracker/ArtifactMessage.class.php:89
 msgid "Error: Logged In User Bug Could Not Get User Object"
@@ -6478,9 +6468,8 @@ msgid "Logged In: NO"
 msgstr "Angemeldet: NEIN"
 
 #: common/tracker/ArtifactMessage.class.php:139
-#, fuzzy
 msgid "Invalid ArtifactMessage ID"
-msgstr "Ungültige ID"
+msgstr "Ungültige ArtifactMessage ID"
 
 #: common/tracker/ArtifactQuery.class.php:148
 #: common/tracker/ArtifactQuery.class.php:742
@@ -6744,9 +6733,8 @@ msgstr "Weist auf benötigte Felder hin."
 
 #: common/tracker/Roadmap.class.php:75
 #: common/tracker/RoadmapFactory.class.php:68
-#, fuzzy
 msgid "Invalid Group"
-msgstr "Ungültiger Benutzer"
+msgstr "Ungültiger Projekt"
 
 #: common/tracker/Roadmap.class.php:103
 #, fuzzy, php-format
@@ -11064,7 +11052,6 @@ msgid "Error On Query:"
 msgstr "Fehler bei der Aktualisierung:"
 
 #: plugins/mailman/include/MailmanList.class.php:435
-#, fuzzy
 msgid "Missing params"
 msgstr "Fehlende Parameter"
 
@@ -11333,9 +11320,8 @@ msgstr "Benutzer erfolgreich hinzugefügt"
 
 #: plugins/mantisbt/action/addCategory.php:45
 #: plugins/mantisbt/action/renameCategory.php:50
-#, fuzzy
 msgid "Missing category name"
-msgstr "Fehlende Parameter"
+msgstr "Fehlende Kategoriename"
 
 #: plugins/mantisbt/action/addIssue.php:126
 msgid "Ticket "
@@ -11347,9 +11333,8 @@ msgid "Note added successfully."
 msgstr "Benutzer erfolgreich hinzugefügt"
 
 #: plugins/mantisbt/action/addVersion.php:73
-#, fuzzy
 msgid "Missing version."
-msgstr "Fehlende Parameter"
+msgstr "Fehlende Version."
 
 #: plugins/mantisbt/action/deleteAttachment.php:36
 #, fuzzy
@@ -11367,9 +11352,8 @@ msgid "Category %s deleted successfully."
 msgstr "Job Qualifikationen-Löschung erfolgreich"
 
 #: plugins/mantisbt/action/deleteCategory.php:43
-#, fuzzy
 msgid "Missing parameters to delete category."
-msgstr "Fehlende Parameter"
+msgstr "Fehlende Parameter zur Kategorie löschen."
 
 #: plugins/mantisbt/action/deleteNote.php:39
 #, fuzzy
@@ -11382,9 +11366,8 @@ msgid "Version deleted successfully."
 msgstr "Fertigkeit erfolgreich gelöscht"
 
 #: plugins/mantisbt/action/deleteVersion.php:47
-#, fuzzy
 msgid "Missing parameters to delete version."
-msgstr "Fehlende Parameter"
+msgstr "Fehlende Parameter zur Version löschen."
 
 #: plugins/mantisbt/action/init.php:41
 #, fuzzy
@@ -12125,9 +12108,8 @@ msgid ""
 msgstr ""
 
 #: plugins/mediawiki/www/plugin_admin.php:113
-#, fuzzy
 msgid "File successfully removed"
-msgstr "Element erfolgreich angelegt"
+msgstr "Datei erfolgreich gelöscht"
 
 #: plugins/mediawiki/www/plugin_admin.php:115
 #, fuzzy
@@ -13810,9 +13792,8 @@ msgid "This CPOLD plugin is only intended as a proof of concept."
 msgstr "Dieses CPOLD Plugin ist ausschliesslich als Muster gedacht."
 
 #: plugins/scmcpold/common/CpoldPlugin.class.php:60
-#, fuzzy
 msgid "Anonymous CPOLD Access"
-msgstr "Ermögliche anonymen Zugang"
+msgstr "Anonymer CPOLD Zugang"
 
 #: plugins/scmcpold/common/CpoldPlugin.class.php:63
 #, php-format
@@ -13870,17 +13851,17 @@ msgstr ""
 #: plugins/scmcvs/www/acl.php:44
 #, fuzzy
 msgid "Invalid CVS repository : "
-msgstr "Durchsuche CVS Repository"
+msgstr "Ungültiger CVS Repository: "
 
 #: plugins/scmcvs/www/acl.php:47
 #, fuzzy
 msgid "Invalid username : "
-msgstr "Ungültiger Benutzer"
+msgstr "Ungültiger Benutzername: "
 
 #: plugins/scmcvs/www/acl.php:53
-#, fuzzy, php-format
+#, php-format
 msgid "User not found %s"
-msgstr "Forum nicht gefunden."
+msgstr "Benutzer nicht gefunden %s"
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:116
 msgid "where REPO can be: "
@@ -14179,9 +14160,8 @@ msgid ""
 msgstr ""
 
 #: plugins/scmhg/common/HgPlugin.class.php:67
-#, fuzzy
 msgid "Anonymous Mercurial Access"
-msgstr "Ermögliche anonymen Zugang"
+msgstr "Anonymer Mercurial Zugang"
 
 #: plugins/scmhg/common/HgPlugin.class.php:73
 msgid ""
@@ -15896,7 +15876,7 @@ msgstr "Zeige vollständige Benutzerliste/Bearbeite Benutzer"
 
 #: www/admin/index.php:55
 msgid "Display Users Beginning with:"
-msgstr "Zeige Benutzer, die anfangen mit :"
+msgstr "Zeige Benutzer, die anfangen mit:"
 
 #: www/admin/index.php:62
 msgid "Search <em>(userid, username, realname, email)</em>"
@@ -15954,7 +15934,7 @@ msgstr "Zeige vollständige Projektliste/Bearbeite Projekte"
 
 #: www/admin/index.php:144
 msgid "Display Projects Beginning with:"
-msgstr "Zeige Projekte, die anfangen mit :"
+msgstr "Zeige Projekte, die anfangen mit:"
 
 #: www/admin/index.php:151
 msgid "Search <em>(groupid, project Unix name, project full name)</em>"
@@ -16370,9 +16350,8 @@ msgid "Real Name"
 msgstr "Richtiger Name"
 
 #: www/admin/search.php:96
-#, fuzzy
 msgid "No user found."
-msgstr "Keine Treffer gefunden"
+msgstr "Keine Benutzer gefunden."
 
 #: www/admin/search.php:144
 #, php-format
@@ -16723,9 +16702,8 @@ msgid "Vhost not valid"
 msgstr "Datum nicht gültig"
 
 #: www/admin/vhost.php:80
-#, fuzzy
 msgid "Missing group name"
-msgstr "Fehlende Parameter"
+msgstr "Fehlende Projektname"
 
 #: www/admin/vhost.php:100
 #, fuzzy
@@ -17482,9 +17460,8 @@ msgstr "Versionsname"
 
 #: www/frs/admin/editrelease.php:231 www/frs/admin/index.php:179
 #: www/frs/admin/index.php:207 www/frs/admin/qrs.php:178
-#, fuzzy
 msgid "At least 3 characters"
-msgstr "(mindestens %s Zeichen)"
+msgstr "Mindestens 3 Zeichen"
 
 #: www/frs/admin/editrelease.php:244
 msgid ""
@@ -18993,9 +18970,8 @@ msgid "Reset admin password"
 msgstr "Admin-Passwort zurücksetzen"
 
 #: www/mail/index.php:47
-#, fuzzy
 msgid "Could Not Get MailingListFactory"
-msgstr "Konnte Factory nicht anzeigen"
+msgstr "Konnte MailingListFactory nicht anzeigen"
 
 #: www/mail/index.php:61
 #, fuzzy, php-format
@@ -19386,7 +19362,6 @@ msgid "Missing skill name."
 msgstr "Fehlende Parameter"
 
 #: www/people/admin/index.php:84
-#, fuzzy
 msgid "Add/Change Categories"
 msgstr "Kategorien hinzufügen/Ändern"
 
@@ -20050,14 +20025,12 @@ msgid "New Subproject Name"
 msgstr "Name des neues Unterprojekt"
 
 #: www/pm/admin/index.php:288 www/pm/admin/index.php:327
-#, fuzzy
 msgid "At least 5 characters"
-msgstr "(mindestens %s Zeichen)"
+msgstr "Mindestens 5 Zeichen"
 
 #: www/pm/admin/index.php:291 www/pm/admin/index.php:337
-#, fuzzy
 msgid "At least 10 characters"
-msgstr "(mindestens %s Zeichen)"
+msgstr "Mindestens 10 Zeichen"
 
 #: www/pm/admin/index.php:293 www/pm/admin/index.php:343
 msgid "Send All Updates To"
@@ -20252,7 +20225,6 @@ msgid "December"
 msgstr "Dezember"
 
 #: www/pm/calendar.php:101
-#, fuzzy
 msgid "Error: Could Not Get Factory"
 msgstr "Konnte Factory nicht anzeigen"
 
