@@ -65,7 +65,7 @@ $detailed = true;
 print $plugin->getProjectsListDisplay($documenturi, $content_type, $p, $pl, $detailed);
 
 if ($content_type == 'text/html') {
-	$HTML->footer(array());
+	$HTML->footer();
 }
 
 // Local Variables:

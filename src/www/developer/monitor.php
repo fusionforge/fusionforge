@@ -76,10 +76,10 @@ if (!session_loggedin()) {
 			echo _('You will not receive any more emails from this user');
 
 		}
-		$HTML->footer (array());
+		$HTML->footer();
 	} else {
 		$HTML->header(array('title'=>_('Error: Choose a User To Monitor First')));
-		$HTML->footer(array());
+		$HTML->footer();
 	}
 
 }

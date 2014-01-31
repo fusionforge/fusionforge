@@ -55,7 +55,7 @@ $p = $plugin->process_paging_params_or_redirect($projectsnum, $pl);
 $detailed = false;
 print $plugin->getProjectsListDisplay($documenturi, 'text/html', $p, $pl, $detailed, $scripturl);
 
-$HTML->footer(array());
+$HTML->footer();
 
 // Local Variables:
 // mode: php

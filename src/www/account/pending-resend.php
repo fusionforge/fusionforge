@@ -44,7 +44,7 @@ if (getStringFromRequest('submit')) {
 			$u->sendRegistrationEmail();
 			$HTML->header(array('title'=>_('Pending Account')));
 			echo '<p>'. _('Your email confirmation has been resent. Visit the link in this email to complete the registration process.'). '</p>';
-			$HTML->footer(array());
+			$HTML->footer();
 			exit;
 		}
 	}
@@ -75,4 +75,4 @@ if (forge_get_config('require_unique_email')) {
 <p><input type="submit" name="submit" value="<?php echo _('Submit'); ?>" /></p>
 </form>
 
-<?php $HTML->footer(array());
+<?php $HTML->footer();

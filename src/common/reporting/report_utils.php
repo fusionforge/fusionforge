@@ -30,7 +30,7 @@ function report_header($title) {
 
 function report_footer() {
 	global $HTML;
-	$HTML->footer(array());
+	$HTML->footer();
 }
 
 function report_span_box($name='SPAN', $selected='1', $suppress_daily=false) {
@@ -721,7 +721,7 @@ function report_actgraph($type, $SPAN, $start, $end, $id, $area) {
 			foreach ($results as $arr) {
 				$dd = date($formatDate, $arr['activity_date']);
 				switch ($SPAN) {
-					case REPORT_TYPE_MONTHLY : {
+					case REPORT_TYPE_MONTHLY: {
 						$d = mktime(0, 0, 0, substr($dd, 5, 2) , 1, substr($dd, 0, 4));
 						break;
 					}

@@ -77,7 +77,7 @@ if (getStringFromRequest("submit")) {
 		printf (_('Congratulations, you have re-set your account password. You may <a href="%s">login</a> to the site now.'),
 			  util_make_url ("/account/login.php"));
 		print '</p>';
-		$HTML->footer(array());
+		$HTML->footer();
 		exit();
 	}
 
@@ -109,7 +109,7 @@ echo '</p>';
 
 <?php
 
-$HTML->footer(array());
+$HTML->footer();
 
 // Local Variables:
 // mode: php

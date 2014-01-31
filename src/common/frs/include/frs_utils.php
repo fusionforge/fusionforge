@@ -94,7 +94,7 @@ function frs_header($params) {
 }
 
 function frs_footer() {
-	site_project_footer(array());
+	site_project_footer();
 }
 
 /*

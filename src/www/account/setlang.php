@@ -39,4 +39,4 @@ remembered next time you visit the site.
 
 <?php
 
-$HTML->footer(array());
+$HTML->footer();

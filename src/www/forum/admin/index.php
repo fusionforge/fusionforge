@@ -450,7 +450,7 @@ if (getStringFromRequest('add_forum')) {
 	if ($ff->isError()) {
 		echo '<p class="error">'.sprintf(_('No Forums Found for %s'), $g->getPublicName())
 			. $ff->getErrorMessage().'</p>';
-		forum_footer(array());
+		forum_footer();
 		exit;
 	}
 

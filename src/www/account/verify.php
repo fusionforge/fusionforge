@@ -94,4 +94,4 @@ if (forge_get_config('require_unique_email')) {
 </form>
 
 <?php
-$HTML->footer(array());
+$HTML->footer();

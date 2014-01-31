@@ -60,7 +60,7 @@ echo '</li>';
 
 echo '</ul>';
 
-$HTML->footer(array());
+$HTML->footer();
 
 // Local Variables:
 // mode: php

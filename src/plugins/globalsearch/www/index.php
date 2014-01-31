@@ -81,13 +81,13 @@ echo $gsplugin->search_box ();
 
 if ($gwords && (strlen($gwords) < 3)) {
         echo "<h2>"._("Search must be at least three characters")."</h2>";
-        $HTML->footer(array());
+        $HTML->footer();
         exit;
 }
 
 if (!$gwords) {
         echo "<br /><b>"._("Enter Your Search Words Above")."</b></p>";
-        $HTML->footer(array());
+        $HTML->footer();
         exit;
 }
 
@@ -218,7 +218,7 @@ if ( !$no_rows && ( ($rows_returned > $rows) || ($offset != 0) ) ) {
         echo "</table>\n";
 }
 
-$HTML->footer(array());
+$HTML->footer();
 
 // Local Variables:
 // mode: php

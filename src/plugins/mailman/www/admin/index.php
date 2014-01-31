@@ -156,7 +156,7 @@ if ($group_id) {
 			<input type="submit" name="submit" value="<?php echo _('Add This List'); ?>" /></p>
 			</form>
 			<?php
-			mail_footer(array());
+			mail_footer();
 
 		//
 		//	Form to modify list
@@ -189,7 +189,7 @@ if ($group_id) {
 			<input type="submit" name="submit" value="<?php echo _('Update'); ?>" /></p>
 			</form>
 			<?php
-			mail_footer(array());
+			mail_footer();
 	} else {
 		//
 		//	Show lists
@@ -210,7 +210,7 @@ if ($group_id) {
 		if ($mlFactory->isError()) {
 			echo '<p>'._('Error').' '.sprintf(_('Unable to get the list %s'), $Group->getPublicName()) .'</p>';
 			echo $mlFactory->getErrorMessage();
-			mail_footer(array());
+			mail_footer();
 			exit;
 		}
 		echo '<p>'.sprintf(_('You can administrate lists from here. Please note that private lists can still be viewed by members of your project, but are not listed on %s.'), forge_get_config ('forge_name')).'</p>';
@@ -231,7 +231,7 @@ if ($group_id) {
 
                         table_end();
                 }
-                mail_footer(array());
+                mail_footer();
         }
 } else {
         exit_no_group();

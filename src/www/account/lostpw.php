@@ -73,7 +73,7 @@ if (getStringFromRequest('submit')) {
 
 		echo '<p>'.printf(_('An email has been sent to the address you have on file. Follow the instructions in the email to change your account password.').'</p><p><a href="%s">'._("Home").'</a>', util_make_url ('/')).'</p>';
 
-		$HTML->footer(array());
+		$HTML->footer();
 		exit();
 	}
 }
@@ -100,7 +100,7 @@ echo '<p>' . _('Clicking “Send Lost PW Hash” below will email a URL to the e
 
 <?php
 
-$HTML->footer(array());
+$HTML->footer();
 
 // Local Variables:
 // mode: php

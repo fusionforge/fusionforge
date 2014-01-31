@@ -87,7 +87,7 @@ class WikiTheme_fusionforge extends WikiTheme_Wikilens
             $domain = textdomain(NULL);
             textdomain('fusionforge');
 
-            $HTML->footer(array());
+            $HTML->footer();
 
             textdomain($domain);
         }

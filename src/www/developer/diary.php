@@ -91,7 +91,7 @@ if ($diary_user) {
 	}
 	echo "</table>\n";
 
-	$HTML->footer(array());
+	$HTML->footer();
 
 } else {
 	exit_error(_('No User Selected'),'home');

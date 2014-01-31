@@ -382,7 +382,7 @@ switch (getStringFromRequest('function')) {
 
 admin_table_show($table, $unit, $primary_key);
 
-$HTML->footer(array());
+$HTML->footer();
 
 // Local Variables:
 // mode: php

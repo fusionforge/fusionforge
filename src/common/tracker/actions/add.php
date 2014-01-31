@@ -32,7 +32,7 @@ $ath->header(array ('title'=>_('Submit New')));
 require_once $gfcommon.'tracker/include/build_submission_form.php';
 artifact_submission_form($ath, $group);
 
-$ath->footer(array());
+$ath->footer();
 
 // Local Variables:
 // mode: php

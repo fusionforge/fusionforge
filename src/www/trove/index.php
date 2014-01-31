@@ -238,4 +238,4 @@ if ($querytotalcount > $TROVE_BROWSELIMIT) {
 	print $html_limit;
 }
 
-$HTML->footer(array());
+$HTML->footer();

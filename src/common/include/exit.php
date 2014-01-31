@@ -32,7 +32,7 @@ function exit_error($text = "", $toptab = '') {
 	global $HTML, $group_id;
 	$HTML->header(array('title'=>_('Exiting with error'), 'group'=>$group_id, 'toptab'=>$toptab));
 	echo $HTML->error_msg(htmlspecialchars($text));
-	$HTML->footer(array());
+	$HTML->footer();
 	exit;
 }
 
