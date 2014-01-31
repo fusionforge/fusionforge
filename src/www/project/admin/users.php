@@ -228,7 +228,7 @@ project_admin_header(array('title'=>sprintf(_('Members of %s'), $group->getPubli
 				if (!$user || !is_object($user)) {
 					echo "Invalid User";
 				}
-				?>
+?>
 		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>"
 			method="post">
 		<input type="hidden" name="submit" value="y" />
