@@ -187,23 +187,23 @@ $server->register(
 //get user objects for array of user_ids
 function &getUsers($session_ser,$user_ids) {
 	continue_session($session_ser);
-	$usrs = user_get_objects($user_ids);
-	if (!$usrs) {
+	$users = user_get_objects($user_ids);
+	if (!$users) {
 		return new soap_fault ('3001','user','Could Not Get Users By Id','Could Not Get Users By Id');
 	}
 
-	return users_to_soap($usrs);
+	return users_to_soap($users);
 }
 
 //get active user objects
 function getActiveUsers($session_ser) {
 	continue_session($session_ser);
-	$usrs =& user_get_active_users();
-	if (!$usrs) {
+	$users = user_get_active_users();
+	if (!$users) {
 		return new soap_fault ('3001','getActiveUsers','Could Not Get Forge Users','Could Not Get Forge Users');
 	}
 
-	return users_to_soap($usrs);
+	return users_to_soap($users);
 }
 
 //[Yosu] getGroupUsers (session_ser, group_id)
@@ -332,29 +332,29 @@ function &userGetGroups($session_ser,$user_id) {
 /*
 	Converts an array of User objects to soap data
 */
-function &users_to_soap($usrs) {
+function &users_to_soap($users) {
 	$return = array();
-	for ($i=0; $i<count($usrs); $i++) {
-		if ($usrs[$i]->isError()) {
-			return new soap_fault ('','User to soap',$usrs[$i]->getErrorMessage(),$usrs[$i]->getErrorMessage());
+	for ($i=0; $i<count($users); $i++) {
+		if ($users[$i]->isError()) {
+			return new soap_fault ('','User to soap',$users[$i]->getErrorMessage(),$users[$i]->getErrorMessage());
 			//skip it if it had an error
 		} else {
 			//build an array of just the fields we want
 			$return[] = array(
-			'user_id'=>$usrs[$i]->data_array['user_id'],
-			'user_name'=>$usrs[$i]->data_array['user_name'],
-			'title'=>$usrs[$i]->data_array['title'],
-			'firstname'=>$usrs[$i]->data_array['firstname'],
-			'lastname'=>$usrs[$i]->data_array['lastname'],
-			'address'=>$usrs[$i]->data_array['address'],
-			'address2'=>$usrs[$i]->data_array['address2'],
-			'phone'=>$usrs[$i]->data_array['phone'],
-			'fax'=>$usrs[$i]->data_array['fax'],
-			'status'=>$usrs[$i]->data_array['status'],
-			'timezone'=>$usrs[$i]->data_array['timezone'],
-			'country_code'=>$usrs[$i]->data_array['ccode'],
-			'add_date'=>$usrs[$i]->data_array['add_date'],
-			'language_id'=>$usrs[$i]->data_array['language']
+			'user_id'=>$users[$i]->data_array['user_id'],
+			'user_name'=>$users[$i]->data_array['user_name'],
+			'title'=>$users[$i]->data_array['title'],
+			'firstname'=>$users[$i]->data_array['firstname'],
+			'lastname'=>$users[$i]->data_array['lastname'],
+			'address'=>$users[$i]->data_array['address'],
+			'address2'=>$users[$i]->data_array['address2'],
+			'phone'=>$users[$i]->data_array['phone'],
+			'fax'=>$users[$i]->data_array['fax'],
+			'status'=>$users[$i]->data_array['status'],
+			'timezone'=>$users[$i]->data_array['timezone'],
+			'country_code'=>$users[$i]->data_array['ccode'],
+			'add_date'=>$users[$i]->data_array['add_date'],
+			'language_id'=>$users[$i]->data_array['language']
 			);
 		}
 
