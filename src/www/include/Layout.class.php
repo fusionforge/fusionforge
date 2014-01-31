@@ -498,7 +498,7 @@ if (isset($params['group']) && $params['group']) {
 
 	}
 
-	function footer($params) {
+	function footer($params = array()) {
 
 	?>
 
