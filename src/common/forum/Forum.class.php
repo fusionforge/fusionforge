@@ -430,7 +430,7 @@ class Forum extends Error {
 	/**
 	 * setMonitor - Add the current user to the list of people monitoring the forum.
 	 *
-	 * @param	int	user id of the user which will be set to monitor this forum. Defaults to 0, meaning the current logged in user will be used.
+	 * @param	int	$u user id of the user which will be set to monitor this forum. Defaults to 0, meaning the current logged in user will be used.
 	 * @return	boolean	success.
 	 */
 	function setMonitor($u = -1) {
@@ -543,9 +543,9 @@ class Forum extends Error {
 	/**
 	 * update - use this function to update an entry in the database.
 	 *
-	 * @param	string	The name of the forum.
-	 * @param	string	The description of the forum.
-	 * @param	string	The email address to send all new posts to.
+	 * @param	string	$forum_name The name of the forum.
+	 * @param	string	$description The description of the forum.
+	 * @param	string	$send_all_posts_to The email address to send all new posts to.
 	 * @return	boolean	success.
 	 */
 	function update($forum_name, $description, $send_all_posts_to = '') {

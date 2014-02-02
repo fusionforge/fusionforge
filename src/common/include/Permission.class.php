@@ -33,11 +33,11 @@ $PERMISSION_OBJ=array();
  * permission_get_object is useful so you can pool Permission objects/save database queries
  * You should always use this instead of instantiating the object directly
  *
- * @param		$_Group object	The Group in question
+ * @param		object	$_Group object	The Group in question
  * @return      object	a Permission or false on failure
  *
  */
-function &permission_get_object(&$_Group, &$_User = NULL) {
+function &permission_get_object(&$_Group) {
 	//create a common set of Permission objects
 	//saves a little wear on the database
 
