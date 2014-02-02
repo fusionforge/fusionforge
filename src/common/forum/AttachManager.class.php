@@ -89,9 +89,7 @@ class AttachManager extends Error {
 		return '<script type="text/javascript">/* <![CDATA[ */
 
 		function confirmDel() {
-			var agree=confirm("Proceed with deletion? ");
-			if (agree) return true ;
-			else return false ;
+			return confirm("Proceed with deletion? ");
 		}
 
 		function manageattachments(url,del) {
