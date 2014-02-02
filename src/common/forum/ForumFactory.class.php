@@ -155,7 +155,7 @@ ORDER BY group_forum_id',
 		$rows = db_numrows($result);
 
 		if (!$result) {
-			$this->setError(_('Forum not found').' : '.db_error());
+			$this->setError(_('Forum not found')._(': ').db_error());
 			$this->forums = false;
 		} else {
 			while ($arr = db_fetch_array($result)) {
