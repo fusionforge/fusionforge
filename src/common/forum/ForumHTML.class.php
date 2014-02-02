@@ -91,7 +91,7 @@ function forum_header($params) {
 			} else {
 				echo util_make_links($body);
 			}
-			echo '</td><td valign="top" width="35%">';
+			echo '</td><td class="top" style="width:35%">';
 			echo $HTML->boxTop(_('Latest News'));
 			echo news_show_latest($params['group'],5,false);
 			echo $HTML->boxBottom();
@@ -572,7 +572,7 @@ class ForumHTML extends Error {
 			}
 			echo notepad_func();
 			?>
-			<div align="center">
+			<div class="align=-center">
 <form id="ForumPostForm" enctype="multipart/form-data" action="<?php echo util_make_url ('/forum/forum.php?forum_id='.$this->Forum->getID().'&amp;group_id='.$group_id); ?>" method="post">
 			<?php $objid = $this->Forum->getID();?>
 			<input type="hidden" name="post_message" value="y" />
