@@ -273,7 +273,7 @@ class ForumAdmin extends Error {
 						array ($group_id));
 			if (!$res) {
 				echo db_error();
-				return;
+				return '';
 			}
 
 			$moderated_forums = array();
@@ -326,7 +326,7 @@ class ForumAdmin extends Error {
 				$forum_id));
 			if (!$res) {
 				echo db_error();
-				return;
+				return '';
 			}
 
 			//array with the supported actions
