@@ -610,7 +610,8 @@ class ForumMessage extends Error {
 	/**
 	 *	removebbcode - workaround to remove bbcode tags.
 	 *
-	 *	@return string	converted text
+     * @param string $text
+	 * @return string	converted text
 	 */
 	function removebbcode($text) {
 		//$replaced =  preg_replace("/\[[_a-zA-Z]:.+\](.+)\[\/[_a-zA-Z]:.*\]/","$1",$text);
