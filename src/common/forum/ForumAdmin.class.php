@@ -65,8 +65,8 @@ class ForumAdmin extends Error {
 			$thread_id = 0;
 		}
 
-		$return .= '    <a href="admin/index.php?editmsg=' . $msg_id  . '&amp;group_id=' . $group_id .  '&amp;thread_id=' . $thread_id. '&amp;forum_id=' . $forum_id . '">' . html_image('ic/forum_edit.gif','37','15',array('alt'=>_("Edit"))) . "</a>";
-		$return .= '    <a href="admin/index.php?deletemsg=' . $msg_id  . '&amp;group_id=' . $group_id . '&amp;thread_id=' . $thread_id. '&amp;forum_id=' . $forum_id . '">' . html_image('ic/forum_delete.gif','16','18',array('alt'=>_("Delete"))) . "</a>";
+		$return .= '    <a href="admin/index.php?editmsg='.$msg_id.'&amp;group_id='.$group_id.'&amp;thread_id='.$thread_id.'&amp;forum_id='.$forum_id.'">' .html_image('ic/forum_edit.gif','37','15',array('alt'=>_("Edit"))) . "</a>";
+		$return .= '    <a href="admin/index.php?deletemsg='.$msg_id.'&amp;group_id='.$group_id.'&amp;thread_id='.$thread_id.'&amp;forum_id='.$forum_id.'">' .html_image('ic/forum_delete.gif','16','18',array('alt'=>_("Delete"))) . "</a>";
 		//		$return .= "<br />";
 		return $return;
 	}
@@ -77,7 +77,7 @@ class ForumAdmin extends Error {
 	 */
 
 	function PrintAdminOptions() {
-		global $group_id,$forum_id;
+		global $group_id, $forum_id;
 
 		echo '
 			<p>
@@ -182,7 +182,7 @@ class ForumAdmin extends Error {
 			session_require_perm ('forum_admin', $f->Group->getID()) ;
 
 			if (!$f->update($forum_name,$description,$send_all_posts_to)) {
-				$this->setError($f->getErrorMessage());
+				exit_error($f->getErrorMessage(),'forums');
 			} else {
 				$feedback = _('Forum Info Updated Successfully');
 			}
@@ -209,7 +209,7 @@ class ForumAdmin extends Error {
 			}
 			if (!$f->create($forum_name,$description,$send_all_posts_to,1)) {
 				form_release_key(getStringFromRequest("form_key"));
-				$this->setError($f->getErrorMessage());
+				exit_error($f->getErrorMessage(),'forums');
 			} else {
 				$feedback = _('Forum added successfully');
 			}
