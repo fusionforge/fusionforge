@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2014, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -64,6 +64,7 @@ class Widget_ProjectLatestFileReleases extends Widget {
 			WHERE frs_package.package_id=frs_release.package_id
 			AND frs_package.group_id=$1
 			AND frs_release.status_id=1
+			AND frs_package.status_id=1
 			AND (frs_package.is_public=1 OR 1 != $2)
 			ORDER BY frs_package.package_id,frs_release.release_date DESC',
 			array ($group_id,
