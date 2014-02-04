@@ -124,4 +124,4 @@ echo '<input type="submit" value="'. _('Add') .'" />';
 echo '</td></tr></table>';
 echo '</form>';
 
-echo utils_requiredField().' '._('Indicates required fields.');
+printf(_('Fields marked with %s are mandatory.'), utils_requiredField());

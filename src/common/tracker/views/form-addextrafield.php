@@ -101,7 +101,8 @@ if ($rows > 0) {
 	}
 	echo $GLOBALS['HTML']->listTableBottom();
 
-	echo utils_requiredField().' '._('Indicates required fields.');
+	printf(_('Fields marked with %s are mandatory.'), utils_requiredField());
+
 } else {
 	echo "\n<p class=\"warning_msg\">"._('You have not defined any custom fields')."</p>";
 }

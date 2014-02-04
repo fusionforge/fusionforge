@@ -145,6 +145,8 @@ if (!isset($errorPage)){
 	echo 	'<div align="center">';
 	echo 		'<input type="button" name="submitbutton" value="'._('Submit').'" onclick="validate();">';
 	echo 	'</div>';
-	echo	'* '._('Mandatory fields');
+	echo 	'<p>';
+	printf(_('Fields marked with %s are mandatory.'), utils_requiredField());
+	echo 	'</p>';
 	echo 	'</form>';
 }

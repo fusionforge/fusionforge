@@ -119,7 +119,12 @@ function artifact_submission_form($ath, $group) {
 		</td>
 	</tr>
 
-	<tr><td colspan="2"><br/><?php echo utils_requiredField() . ' ' . _('Indicates required fields.'); ?></td></tr>
-	</table></form>
+	<tr>
+		<td colspan="2">
+			<?php printf(_('Fields marked with %s are mandatory.'), utils_requiredField()); ?>
+		</td>
+	</tr>
+	</table>
+	</form>
 <?php
 }

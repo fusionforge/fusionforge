@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-31 17:05+0100\n"
+"POT-Creation-Date: 2014-02-04 14:35+0100\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -224,13 +224,14 @@ msgstr "Имя файла"
 #: common/forum/Forum.class.php:606 common/forum/Forum.class.php:632
 #: common/forum/Forum.class.php:640 common/forum/Forum.class.php:648
 #: common/forum/Forum.class.php:656 common/forum/Forum.class.php:664
-#: common/forum/Forum.class.php:672 common/forum/ForumHTML.class.php:58
-#: common/forum/ForumHTML.class.php:68 common/forum/ForumHTML.class.php:69
-#: common/forum/ForumHTML.class.php:70 common/forum/ForumHTML.class.php:73
-#: common/forum/ForumHTML.class.php:209 common/forum/ForumHTML.class.php:267
-#: common/forum/ForumHTML.class.php:523 common/forum/ForumHTML.class.php:527
-#: common/forum/ForumHTML.class.php:587 common/forum/ForumHTML.class.php:590
-#: common/forum/ForumMessage.class.php:666 common/frs/FRSFile.class.php:187
+#: common/forum/Forum.class.php:672 common/forum/ForumFactory.class.php:158
+#: common/forum/ForumHTML.class.php:58 common/forum/ForumHTML.class.php:68
+#: common/forum/ForumHTML.class.php:69 common/forum/ForumHTML.class.php:70
+#: common/forum/ForumHTML.class.php:73 common/forum/ForumHTML.class.php:209
+#: common/forum/ForumHTML.class.php:267 common/forum/ForumHTML.class.php:523
+#: common/forum/ForumHTML.class.php:527 common/forum/ForumHTML.class.php:587
+#: common/forum/ForumHTML.class.php:590
+#: common/forum/ForumMessage.class.php:667 common/frs/FRSFile.class.php:187
 #: common/frs/FRSFile.class.php:440 common/frs/FRSPackage.class.php:295
 #: common/include/Error.class.php:206 common/include/exit.php:80
 #: common/include/Group.class.php:2634 common/include/Group.class.php:2635
@@ -1021,12 +1022,17 @@ msgstr "Группа документа"
 msgid "Status of that document"
 msgstr "Взять на контроль этот пакет"
 
-#: common/docman/views/addfile.php:212 plugins/mantisbt/view/addIssue.php:148
-#, fuzzy
-msgid "Mandatory fields"
-msgstr "Управлять спец полями"
+#: common/docman/views/addfile.php:213
+#: common/tracker/include/build_submission_form.php:124
+#: common/tracker/views/form-addextrafield.php:104
+#: plugins/headermenu/view/admin/updateLinkValue.php:106
+#: plugins/headermenu/view/admin/viewProjectConfiguration.php:127
+#: plugins/mantisbt/view/addIssue.php:149 www/account/register.php:275
+#, php-format
+msgid "Fields marked with %s are mandatory."
+msgstr "Поля, помеченные %s обязательны."
 
-#: common/docman/views/addfile.php:214
+#: common/docman/views/addfile.php:216
 msgid "Submit Information"
 msgstr "Отправить"
 
@@ -1133,7 +1139,7 @@ msgid "Restore"
 msgstr ""
 
 #: common/docman/views/editdocgroup.php:71
-#: common/forum/AttachManager.class.php:149
+#: common/forum/AttachManager.class.php:147
 #: common/forum/ForumAdmin.class.php:68
 #: common/tracker/views/form-addextrafield.php:54
 #: common/tracker/views/form-addextrafield.php:77
@@ -1325,7 +1331,7 @@ msgstr "Фамилия:"
 #: common/tracker/ArtifactExtraField.class.php:351
 #: common/tracker/include/ArtifactTypeHtml.class.php:335
 #: common/tracker/views/form-addextrafieldoption.php:109
-#: common/tracker/views/form-addextrafield.php:131
+#: common/tracker/views/form-addextrafield.php:132
 #: common/tracker/views/form-updateextrafieldelement.php:65
 #: common/widget/Widget_ProjectLatestDocuments.class.php:76
 #: cronjobs/send_pending_items_mail.php:80
@@ -1541,7 +1547,7 @@ msgstr "Внешний участник"
 #: common/docman/views/listfile.php:366 common/tracker/actions/detail.php:54
 #: common/tracker/actions/mod-limited.php:63 common/tracker/actions/mod.php:68
 #: common/tracker/include/ArtifactTypeHtml.class.php:76
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:94
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:95
 msgid "Monitor"
 msgstr "Информировать"
 
@@ -1768,9 +1774,9 @@ msgstr "Начальная дата"
 #: common/tracker/views/form-addcanned.php:69
 #: common/tracker/views/form-addcanned.php:74
 #: common/tracker/views/form-addextrafieldoption.php:103
-#: common/tracker/views/form-addextrafield.php:114
-#: common/tracker/views/form-addextrafield.php:118
-#: common/tracker/views/form-addextrafield.php:123
+#: common/tracker/views/form-addextrafield.php:115
+#: common/tracker/views/form-addextrafield.php:119
+#: common/tracker/views/form-addextrafield.php:124
 #: common/tracker/views/form-customizelist.php:127
 #: common/tracker/views/form-deleteextrafieldelement.php:61
 #: common/tracker/views/form-updatecanned.php:43
@@ -2035,7 +2041,7 @@ msgstr "Пользователь"
 #: common/tracker/include/ArtifactHtml.class.php:147
 #: common/tracker/include/ArtifactTypeHtml.class.php:379
 #: common/widget/Widget_ProjectLatestDocuments.class.php:73
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:88
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:89
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:111
 #: plugins/contribtracker/www/index.php:42
 #: plugins/contribtracker/www/project_admin.php:289
@@ -2131,14 +2137,15 @@ msgstr ""
 msgid "Child project"
 msgstr "Дочерний проект"
 
-#: common/forum/AttachManager.class.php:144 www/forum/admin/index.php:327
+#: common/forum/AttachManager.class.php:142
+#: common/forum/AttachManager.class.php:155 www/forum/admin/index.php:327
 #: www/forum/admin/index.php:333 www/forum/admin/index.php:398
 #: www/forum/admin/monitor.php:41
 #, fuzzy
 msgid "Could Not Get Forum Object"
 msgstr "Невозможно получение группы проекта"
 
-#: common/forum/AttachManager.class.php:150
+#: common/forum/AttachManager.class.php:148
 #: common/forum/ForumAdmin.class.php:69 common/forum/ForumAdmin.class.php:334
 #: common/tracker/actions/admin-tracker.php:75
 #: common/tracker/actions/deleteartifact.php:57
@@ -2190,7 +2197,7 @@ msgstr "Невозможно получение группы проекта"
 msgid "Delete"
 msgstr "Удалить"
 
-#: common/forum/AttachManager.class.php:164
+#: common/forum/AttachManager.class.php:162
 #: common/tracker/views/form-customizelist.php:133
 #: common/widget/WidgetLayoutManager.class.php:540
 #: common/widget/WidgetLayoutManager.class.php:567
@@ -2208,35 +2215,35 @@ msgstr "Удалить"
 msgid "Add"
 msgstr "Добавить"
 
-#: common/forum/AttachManager.class.php:181
-#: common/forum/AttachManager.class.php:267
-#: common/forum/AttachManager.class.php:323
+#: common/forum/AttachManager.class.php:179
+#: common/forum/AttachManager.class.php:265
+#: common/forum/AttachManager.class.php:321
 msgid "Could not get message id"
 msgstr "Нет идентификатора сообщения"
 
-#: common/forum/AttachManager.class.php:197
-#: common/forum/AttachManager.class.php:287
-#: common/forum/AttachManager.class.php:309
-#: common/forum/AttachManager.class.php:343
+#: common/forum/AttachManager.class.php:195
+#: common/forum/AttachManager.class.php:285
+#: common/forum/AttachManager.class.php:307
+#: common/forum/AttachManager.class.php:341
 msgid "File uploaded"
 msgstr "Файл загружен"
 
-#: common/forum/AttachManager.class.php:199
-#: common/forum/AttachManager.class.php:290
-#: common/forum/AttachManager.class.php:313
-#: common/forum/AttachManager.class.php:346
+#: common/forum/AttachManager.class.php:197
+#: common/forum/AttachManager.class.php:288
+#: common/forum/AttachManager.class.php:311
+#: common/forum/AttachManager.class.php:344
 msgid "File not uploaded"
 msgstr "Файл не загружен"
 
-#: common/forum/AttachManager.class.php:235
+#: common/forum/AttachManager.class.php:233
 msgid "Invalid Extension"
 msgstr "Некорректное расширение"
 
-#: common/forum/AttachManager.class.php:243
+#: common/forum/AttachManager.class.php:241
 msgid "Error, problem with the attachment file uploaded into the server"
 msgstr "Проблема при получении прикрепленной части сервером"
 
-#: common/forum/AttachManager.class.php:310
+#: common/forum/AttachManager.class.php:308
 msgid "File Updated Successfully"
 msgstr "Файл успешно обновлен"
 
@@ -2573,7 +2580,7 @@ msgid "This is the content of the pending message"
 msgstr "Содержимое незаконченного сообщения"
 
 #: common/forum/ForumHTML.class.php:209 common/forum/ForumHTML.class.php:267
-#: common/forum/ForumMessage.class.php:666
+#: common/forum/ForumMessage.class.php:667
 #: common/tracker/include/ArtifactHtml.class.php:148
 #: common/tracker/include/ArtifactTypeHtml.class.php:380
 #: www/activity/index.php:266 www/forum/message.php:126
@@ -2714,7 +2721,7 @@ msgid "Could Not Update Parent"
 msgstr "Невозможно обновить структуру"
 
 #: common/forum/ForumMessage.class.php:357
-#: common/forum/ForumMessage.class.php:801
+#: common/forum/ForumMessage.class.php:802
 msgid "Error: a forum message must include a message body and a subject."
 msgstr "Должен иметь тему и содержать текст сообщения."
 
@@ -2729,7 +2736,7 @@ msgstr "неправильное вложение"
 msgid "Invalid Message Id"
 msgstr "неправильный идентификатор письма"
 
-#: common/forum/ForumMessage.class.php:658
+#: common/forum/ForumMessage.class.php:659
 #, php-format
 msgid ""
 "\n"
@@ -2737,7 +2744,7 @@ msgid ""
 "%s"
 msgstr ""
 
-#: common/forum/ForumMessage.class.php:660
+#: common/forum/ForumMessage.class.php:661
 #, php-format
 msgid ""
 "\n"
@@ -2748,12 +2755,12 @@ msgid ""
 "%1$s"
 msgstr ""
 
-#: common/forum/ForumMessage.class.php:671
+#: common/forum/ForumMessage.class.php:672
 #, fuzzy
 msgid "A file has been uploaded with this message."
 msgstr "Файл должен быть указан на этой странице."
 
-#: common/forum/ForumMessage.class.php:682
+#: common/forum/ForumMessage.class.php:683
 #, php-format
 msgid ""
 "You are receiving this email because you elected to monitor this forum.\n"
@@ -2761,7 +2768,7 @@ msgid ""
 "%s\n"
 msgstr ""
 
-#: common/forum/ForumMessage.class.php:825
+#: common/forum/ForumMessage.class.php:826
 #, fuzzy
 msgid "Message not found"
 msgstr "Сообщение не найдено"
@@ -2918,7 +2925,7 @@ msgid "Project %1$s (%2$s) has released a new version of package “%3$s”."
 msgstr ""
 
 #: common/frs/FRSRelease.class.php:294
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:130
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:131
 #: www/frs/admin/qrs.php:244 www/frs/shownotes.php:78
 msgid "Release Notes"
 msgstr "Примечания к релизу"
@@ -3154,7 +3161,7 @@ msgid "Upgrade Forge Software"
 msgstr "Карта категорий хранилища"
 
 #: common/include/forge_events.php:39
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:85
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:86
 #: plugins/mantisbt/view/admin/editVersion.php:61
 #: plugins/mantisbt/view/admin/viewVersion.php:49
 #: plugins/mantisbt/view/roadmap.php:100 plugins/mantisbt/view/roadmap.php:149
@@ -3679,15 +3686,15 @@ msgstr "Ошибка удаления"
 #: common/widget/Widget_MyMonitoredForums.class.php:138
 #: plugins/blocks/www/index.php:151
 #: plugins/quota_management/www/quota_project.php:87
-#: www/export/rss20_activity.php:153
+#: www/export/rss20_activity.php:155
 msgid "Forums"
 msgstr "Форумы"
 
 #: common/include/group_section_texts.php:30
 #: common/reporting/report_utils.php:698
 #: common/widget/Widget_MyArtifacts.class.php:291
-#: plugins/blocks/www/index.php:152 www/export/rss20_activity.php:120
-#: www/export/rss20_activity.php:131 www/reporting/toolspie.php:65
+#: plugins/blocks/www/index.php:152 www/export/rss20_activity.php:122
+#: www/export/rss20_activity.php:133 www/reporting/toolspie.php:65
 msgid "Trackers"
 msgstr "Трекеры"
 
@@ -3711,8 +3718,8 @@ msgstr "Документация"
 
 #: common/include/group_section_texts.php:33
 #: common/widget/Widget_MyMonitoredFp.class.php:119
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:168
-#: www/export/rss20_activity.php:142
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:169
+#: www/export/rss20_activity.php:144
 msgid "File Release System"
 msgstr "Система выпуска файла"
 
@@ -3720,7 +3727,7 @@ msgstr "Система выпуска файла"
 #: common/include/Navigation.class.php:528 plugins/blocks/www/index.php:157
 #: plugins/quota_management/www/quota_project.php:74
 #: www/activity/index.php:114 www/activity/index.php:311
-#: www/admin/index.php:191 www/export/rss20_activity.php:164
+#: www/admin/index.php:191 www/export/rss20_activity.php:166
 #: www/news/index.php:34
 msgid "News"
 msgstr "Новости"
@@ -5300,7 +5307,7 @@ msgstr ""
 #: common/tracker/include/build_submission_form.php:118
 #: common/tracker/views/form-addcanned.php:78
 #: common/tracker/views/form-addextrafieldoption.php:112
-#: common/tracker/views/form-addextrafield.php:150
+#: common/tracker/views/form-addextrafield.php:151
 #: common/tracker/views/form-adminroadmap.php:234
 #: common/tracker/views/form-clonetracker.php:59
 #: common/tracker/views/form-edittemplate.php:24
@@ -6008,7 +6015,7 @@ msgid "None"
 msgstr "Нет"
 
 #: common/tracker/actions/format_csv.php:84
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:91
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:92
 #: plugins/mantisbt/view/viewNote.php:42 www/pm/csv.php:93
 #: www/pm/format_csv.php:86
 msgid "Notes"
@@ -6526,37 +6533,37 @@ msgid "Invalid ArtifactExtraField ID"
 msgstr "Неверный указатель"
 
 #: common/tracker/ArtifactExtraField.class.php:345
-#: common/tracker/views/form-addextrafield.php:124
+#: common/tracker/views/form-addextrafield.php:125
 msgid "Select Box"
 msgstr "Выделено"
 
 #: common/tracker/ArtifactExtraField.class.php:346
-#: common/tracker/views/form-addextrafield.php:125
+#: common/tracker/views/form-addextrafield.php:126
 msgid "Check Box"
 msgstr "Отмечено"
 
 #: common/tracker/ArtifactExtraField.class.php:347
-#: common/tracker/views/form-addextrafield.php:126
+#: common/tracker/views/form-addextrafield.php:127
 msgid "Radio Buttons"
 msgstr "Клавиши сообщений "
 
 #: common/tracker/ArtifactExtraField.class.php:348
-#: common/tracker/views/form-addextrafield.php:127
+#: common/tracker/views/form-addextrafield.php:128
 msgid "Text Field"
 msgstr "Поле текста"
 
 #: common/tracker/ArtifactExtraField.class.php:349
-#: common/tracker/views/form-addextrafield.php:128
+#: common/tracker/views/form-addextrafield.php:129
 msgid "Multi-Select Box"
 msgstr "Комбинированный ввод"
 
 #: common/tracker/ArtifactExtraField.class.php:350
-#: common/tracker/views/form-addextrafield.php:129
+#: common/tracker/views/form-addextrafield.php:130
 msgid "Text Area"
 msgstr "Область текста"
 
 #: common/tracker/ArtifactExtraField.class.php:352
-#: common/tracker/views/form-addextrafield.php:134
+#: common/tracker/views/form-addextrafield.php:135
 #, fuzzy
 msgid "Relation between artifacts"
 msgstr "Удалить образец"
@@ -6842,8 +6849,8 @@ msgid "Name"
 msgstr "Имя"
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:381
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:97
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:146
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:98
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:147
 #: plugins/mantisbt/view/viewAttachment.php:56
 #: plugins/mediawiki/www/plugin_admin.php:177 www/new/index.php:118
 msgid "Download"
@@ -6878,14 +6885,6 @@ msgid "DO NOT enter passwords or confidential information in your message!"
 msgstr ""
 "НИКОГДА не указывайте ваши пароли или прочую конфеденциальную информацию в "
 "почте"
-
-#: common/tracker/include/build_submission_form.php:122
-#: common/tracker/views/form-addextrafield.php:104
-#: plugins/headermenu/view/admin/updateLinkValue.php:106
-#: plugins/headermenu/view/admin/viewProjectConfiguration.php:127
-#, fuzzy
-msgid "Indicates required fields."
-msgstr "Заполните все необходимые поля"
 
 #: common/tracker/Roadmap.class.php:75
 #: common/tracker/RoadmapFactory.class.php:68
@@ -7029,77 +7028,77 @@ msgstr "Копировать"
 msgid "Add/Reorder choices"
 msgstr "добавить выбор"
 
-#: common/tracker/views/form-addextrafield.php:106
+#: common/tracker/views/form-addextrafield.php:107
 msgid "You have not defined any custom fields"
 msgstr "Вы не указали поля выделений"
 
-#: common/tracker/views/form-addextrafield.php:109
+#: common/tracker/views/form-addextrafield.php:110
 msgid "Add New Custom Field"
 msgstr "Добавить новое поле"
 
-#: common/tracker/views/form-addextrafield.php:114
+#: common/tracker/views/form-addextrafield.php:115
 #: common/tracker/views/form-updateextrafield.php:49
 msgid "Custom Field Name"
 msgstr "Название нового поля"
 
-#: common/tracker/views/form-addextrafield.php:118
+#: common/tracker/views/form-addextrafield.php:119
 #: common/tracker/views/form-updateextrafield.php:93
 msgid "Field alias"
 msgstr "Альяс поля"
 
-#: common/tracker/views/form-addextrafield.php:123
+#: common/tracker/views/form-addextrafield.php:124
 #: common/tracker/views/form-updateextrafield.php:42
 msgid "Type of custom field"
 msgstr "Тип выделенного поля"
 
-#: common/tracker/views/form-addextrafield.php:133
+#: common/tracker/views/form-addextrafield.php:134
 msgid "Box type technician"
 msgstr "Техничесский отдел"
 
-#: common/tracker/views/form-addextrafield.php:136
+#: common/tracker/views/form-addextrafield.php:137
 msgid ""
 "Text Fields and Text Areas need to have Size/Maxlength and Rows/Cols "
 "defined, respectively."
 msgstr ""
 "Поля и области текста должны иметь установленный размер по высоте и ширине."
 
-#: common/tracker/views/form-addextrafield.php:137
+#: common/tracker/views/form-addextrafield.php:138
 msgid "Text Field Size/Text Area Rows"
 msgstr "Текстовое поле. Размер / количество строк"
 
-#: common/tracker/views/form-addextrafield.php:139
+#: common/tracker/views/form-addextrafield.php:140
 msgid "Text Field Maxlength/Text Area Columns"
 msgstr "Текстовое поле, максимальная длинна текста / ширина колонок"
 
-#: common/tracker/views/form-addextrafield.php:141
+#: common/tracker/views/form-addextrafield.php:142
 #: common/tracker/views/form-updateextrafield.php:80
 #, fuzzy
 msgid "Hide the default none value"
 msgstr "Нельзя удалять системные группы"
 
-#: common/tracker/views/form-addextrafield.php:143
+#: common/tracker/views/form-addextrafield.php:144
 #: common/tracker/views/form-updateextrafield.php:86
 msgid "Label for the none value"
 msgstr ""
 
-#: common/tracker/views/form-addextrafield.php:144
+#: common/tracker/views/form-addextrafield.php:145
 msgid "none"
 msgstr "нет"
 
-#: common/tracker/views/form-addextrafield.php:147
+#: common/tracker/views/form-addextrafield.php:148
 msgid "Warning: this add new custom field"
 msgstr "Внимание! Это добавит новое поле"
 
-#: common/tracker/views/form-addextrafield.php:155
+#: common/tracker/views/form-addextrafield.php:156
 msgid "Custom Field Rendering Template"
 msgstr "Шаблон представляемого поля"
 
-#: common/tracker/views/form-addextrafield.php:158
+#: common/tracker/views/form-addextrafield.php:159
 #, fuzzy
 msgid "Edit template"
 msgstr "Редактирование"
 
-#: common/tracker/views/form-addextrafield.php:159
+#: common/tracker/views/form-addextrafield.php:160
 msgid "Delete template"
 msgstr "Удалить тему"
 
@@ -8150,44 +8149,44 @@ msgstr ""
 msgid "Latest File Releases"
 msgstr "Последние файл-релизы"
 
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:75
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:76
 msgid "This Project Has Not Released Any Files"
 msgstr "Проект не выпустил ниодного файла"
 
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:82
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:83
 #: www/frs/reporting/downloads.php:107 www/frs/reporting/downloads.php:197
 #: www/snippet/add_snippet_to_package.php:127
 msgid "Package"
 msgstr "Пакет"
 
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:138
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:139
 #: www/frs/index.php:136
 msgid "Monitor this package"
 msgstr "Взять на контроль этот пакет"
 
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:157
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:158
 msgid "View All Project Files"
 msgstr "Список всех файлов проекта"
 
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:172
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:173
 msgid ""
 "List the most recent packages available for download along with their "
 "revision."
 msgstr ""
 
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:174
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:175
 msgid ""
 "A Release Notes icon allows you to see the latest changes and developers "
 "comments associated with this revision."
 msgstr ""
 
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:176
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:177
 msgid ""
 "Then comes the monitor icon, selecting this icon will cause this package to "
 "be monitored for you."
 msgstr ""
 
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:178
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:179
 msgid ""
 "Anytime the project development team posts a new release, you will be "
 "automatically notified via e-mail. All monitored File Releases are listed in "
@@ -15514,11 +15513,6 @@ msgstr ""
 msgid "Activate this user immediately"
 msgstr ""
 
-#: www/account/register.php:275
-#, php-format
-msgid "Fields marked with %s are mandatory."
-msgstr "Поля, помеченные %s обязательны."
-
 #: www/account/register.php:278
 msgid "Register"
 msgstr "Регистрация"
@@ -17258,10 +17252,15 @@ msgstr ""
 msgid "Exports Available"
 msgstr "Нет доступной статистики"
 
-#: www/export/rss20_activity.php:109 www/register/index.php:245
+#: www/export/rss20_activity.php:111 www/register/index.php:245
 #, fuzzy
 msgid "Source Code"
 msgstr "Источник из %1$s"
+
+#: www/export/rss20_activity.php:196
+#, fuzzy
+msgid "Error: No group selected"
+msgstr "Ошибка отказа группе"
 
 #: www/export/rss20_docman.php:78
 msgid "Please supply a Group ID with the request."
@@ -20039,58 +20038,58 @@ msgstr ""
 msgid "Help Wanted Latest Posts"
 msgstr "Свежие объявления о поиске вакансий для проектов"
 
-#: www/people/index.php:42
-msgid "Here is a list of positions available for this project."
-msgstr "Список вакантных позиций для этого проекта"
-
-#: www/people/index.php:49 www/people/index.php:58
+#: www/people/index.php:42 www/people/index.php:53 www/people/index.php:62
 msgid "Help Wanted System"
 msgstr "Служба поиска вакансий"
 
-#: www/people/index.php:49
+#: www/people/index.php:46
+msgid "Here is a list of positions available for this project."
+msgstr "Список вакантных позиций для этого проекта"
+
+#: www/people/index.php:53
 msgid " as "
 msgstr ""
 
-#: www/people/index.php:52
+#: www/people/index.php:56
 msgid "Click job titles for more detailed descriptions."
 msgstr ""
 "Для детального ознакомления с типом работы выберите интересующий Вас пункт"
 
-#: www/people/index.php:61
+#: www/people/index.php:65
 #, php-format
 msgid ""
 "The %s Project Help Wanted board is for non-commercial, project volunteer "
 "openings. Commercial use is prohibited."
 msgstr ""
 
-#: www/people/index.php:65
+#: www/people/index.php:69
 msgid ""
 "Project listings remain live for two weeks, or until closed by the poster, "
 "whichever comes first. (Project administrators may always re-post expired "
 "openings.)"
 msgstr ""
 
-#: www/people/index.php:69
+#: www/people/index.php:73
 msgid ""
 "Browse through the category menu to find projects looking for your help."
 msgstr ""
 
-#: www/people/index.php:73
+#: www/people/index.php:77
 msgid ""
 "If you're a project admin, log in and submit help wanted requests through "
 "your project administration page."
 msgstr ""
 
-#: www/people/index.php:77
+#: www/people/index.php:81
 msgid ""
 "To suggest new job categories, submit a request via the support manager."
 msgstr ""
 
-#: www/people/index.php:82
+#: www/people/index.php:86
 msgid "Last posts"
 msgstr "Последние записи"
 
-#: www/people/index.php:91
+#: www/people/index.php:95
 msgid "more latest posts"
 msgstr "другие последние записи"
 
@@ -23998,6 +23997,14 @@ msgstr "Глобальное изменение"
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "Имя участника обязательно"
+
+#, fuzzy
+#~ msgid "Mandatory fields"
+#~ msgstr "Управлять спец полями"
+
+#, fuzzy
+#~ msgid "Indicates required fields."
+#~ msgstr "Заполните все необходимые поля"
 
 #~ msgid "Query does not exist"
 #~ msgstr "Запрос не существует"

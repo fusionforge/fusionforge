@@ -103,7 +103,7 @@ if (is_array($linkValues)) {
     echo '<input type="submit" name="submit" value="'. _('Cancel') .'" formnovalidate="formnovalidate" />';
 	echo '</p>';
 	echo '</form>';
-	echo utils_requiredField().' '._('Indicates required fields.');
+	printf(_('Fields marked with %s are mandatory.'), utils_requiredField());
 } else {
 	$error_msg = _('Cannot retrieve value for this link:').' '.$linkId;
 	session_redirect($redirect_url.'&error_msg='.urlencode($error_msg));

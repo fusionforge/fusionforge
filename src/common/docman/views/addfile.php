@@ -209,7 +209,9 @@ if ($dgf->getNested() == NULL) {
 				</tr>';
 	}
 	echo '	</table>';
-	echo '<span>'.utils_requiredField() .' '. _('Mandatory fields').'</span>';
+	echo '	<p>';
+	printf(_('Fields marked with %s are mandatory.'), utils_requiredField());
+	echo '	</p>';
 	echo '	<div class="docmanSubmitDiv">
 			<input type="submit" name="submit" value="'. _('Submit Information'). '" />
 		</div>
