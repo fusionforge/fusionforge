@@ -11,18 +11,9 @@
 				"scripts/base.sh",
 				"scripts/vagrant.sh",
 				"scripts/virtualbox.sh",
-				"scripts/console-utils.sh",
-				"scripts/fusionforge.sh",
+				"scripts/fusionforge-source.sh",
 				"scripts/cleanup.sh"
-			],
-			"override": {
-				"virtualbox-iso": {
-					"execute_command": "echo 'vagrant'|sudo -S bash '{{.Path}}'"
-				},
-				"qemu": {
-					"execute_command": "echo 'vagrant'|sudo -S bash '{{.Path}}'"
-				}
-			}
+			]
 		}
 	],
 	"builders": [
@@ -42,9 +33,9 @@
 			"iso_checksum": "2ed8a7ec7ef3abe59b825f7c8d7176322b87341800277c70dce807c5c9ab1c8f18a9e677766d2a12df334024fe27580cf208a305afaf09e96cfe9e762e4f94df",
 			"iso_checksum_type": "sha512",
 			"iso_url": "http://cdimage.debian.org/cdimage/release/7.3.0/amd64/iso-cd/debian-7.3.0-amd64-netinst.iso",
-			"ssh_username": "vagrant",
+			"ssh_username": "root",
 			"ssh_password": "vagrant",
-			"shutdown_command": "echo 'vagrant'|sudo -S poweroff",
+			"shutdown_command": "poweroff",
 			"guest_additions_mode": "disable",
 			"virtualbox_version_file": ".vbox_version",
 			"vboxmanage": [
@@ -69,13 +60,13 @@
 			"iso_checksum": "4a5fa01c81cc300f4729136e28ebe600",
 			"iso_checksum": "2ed8a7ec7ef3abe59b825f7c8d7176322b87341800277c70dce807c5c9ab1c8f18a9e677766d2a12df334024fe27580cf208a305afaf09e96cfe9e762e4f94df",
 			"iso_checksum_type": "sha512",
-			"shutdown_command": "echo 'vagrant'|sudo -S poweroff",
+			"shutdown_command": "poweroff",
 			"disk_size": 10140,
 			"format": "qcow2",
 			"headless": false,
 			"accelerator": "kvm",
 			"http_directory": "http",
-			"ssh_username": "vagrant",
+			"ssh_username": "root",
 			"ssh_password": "vagrant",
 			"vm_name": "fusionforge-dev",
 			"boot_command": [

@@ -14,7 +14,7 @@
 
 #set -x
 
-# Pupulate the repo
+# Populate the repo
 rm -rf /root/debian-repository
 mkdir -p /root/debian-repository
 

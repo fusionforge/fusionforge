@@ -7,8 +7,6 @@
 # This script will update the system and the checked-out branch to the
 # latest state to be tested.
 
-# Prerequisite : running 'sh scripts/configure-scripts.sh' once
-
 # First, make sure the Debian distro is up-to-date
 aptitude update
 aptitude -y dist-upgrade
@@ -16,6 +14,12 @@ aptitude -y dist-upgrade
 # Make sure to add tools needed for build.sh
 aptitude -y install mini-dinstall dput devscripts equivs
 mk-build-deps -i /root/fusionforge/src/debian/control -t 'aptitude -y' -r
+
+# "Backport" recent dependency
+wget http://ftp.fr.debian.org/debian/pool/main/l/loggerhead/loggerhead_1.19~bzr479-3_all.deb
+aptitude install gdebi-core
+gdebi --non-interactive loggerhead_1.19~bzr479-3_all.deb
+
 
 set -e
 
