@@ -100,8 +100,10 @@
 		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;boxid='.$boxid.'&amp;atid='.$ath->getID(); ?>" method="post">
 		<input type="hidden" name="add_opt" value="y" />
 		<br /><br />
-		<strong><?php echo _('Add New Element')._(':'); ?></strong>
-		<input type="text" name="name" value="" size="15" maxlength="30" />
+		<label for="name">
+			<strong><?php echo _('Add New Element')._(':'); ?></strong>
+		</label>
+		<input type="text" id="name" name="name" value="" size="15" maxlength="30" />
 		<!--
 		Show a pop-up box to choose the possible statuses that this element will map to
 		-->

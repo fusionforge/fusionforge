@@ -64,16 +64,36 @@ $sep = getStringFromRequest('sep', ',');
 			<input type="hidden" name="group_id" value="<?php echo $group_id ?>" />
 			<input type="hidden" name="atid" value="<?php echo $ath->getID() ?>" />
 			<input type="hidden" name="func" value="csv" />
-		<table>
+		<table class="infotable">
 			<tr>
-				<td class="top"><strong><?php echo _('Separator')._(':'); ?></strong></td>
-				<td><input type="radio" name="sep" value=","<?php if ($sep==',') echo ' checked="checked"' ?>/><?php echo _('Comma (char: “,”)'); ?><br />
-				<input type="radio" name="sep" value=";"<?php if ($sep==';') echo ' checked="checked"' ?>/><?php echo _('Semi-colon (char: “;”)'); ?></td>
+				<td>
+					<?php echo _('Separator')._(':'); ?>
+				</td>
+				<td>
+					<input type="radio" id="comma" name="sep" value=","<?php if ($sep==',') echo ' checked="checked"' ?> />
+					<label for="comma">
+						<?php echo _('Comma (char: “,”)'); ?><br />
+					</label>
+					<input type="radio" id="semi-colon" name="sep" value=";"<?php if ($sep==';') echo ' checked="checked"' ?> />
+					<label for="semi-colon">
+						<?php echo _('Semi-colon (char: “;”)'); ?>
+					</label>
+				</td>
 			</tr>
 			<tr>
-				<td class="top"><strong><?php echo _('Header')._(':'); ?></strong></td>
-				<td><input type="radio" name="headers" value="1"<?php if ($headers) echo ' checked="checked"' ?>/><?php echo _('Included'); ?><br />
-				<input type="radio" name="headers" value="0"<?php if (!$headers) echo ' checked="checked"' ?>/><?php echo _('None'); ?></td>
+				<td>
+					<?php echo _('Header')._(':'); ?>
+				</td>
+				<td>
+					<input type="radio" id="included" name="headers" value="1"<?php if ($headers) echo ' checked="checked"' ?> />
+					<label for="included">
+						<?php echo _('Included'); ?><br />
+					</label>
+					<input type="radio" id="none" name="headers" value="0"<?php if (!$headers) echo ' checked="checked"' ?> />
+					<label for="none">
+						<?php echo _('None'); ?>
+					</label>
+				</td>
 			</tr>
 		</table>
 		<input type="submit" name="Submit" /></form>
