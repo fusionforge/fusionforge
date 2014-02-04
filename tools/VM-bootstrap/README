@@ -1,15 +1,16 @@
 Create the FusionForge Dev VM using packer.io
 
+
 Use in Vagrant:
 
-  vagrant init fusionforge-dev http://fusionforge.fusionforge.org/sandbox/fusionforge-dev.box
-  # Optionaly modify 'Vagrantfile', e.g. enable 'vb.gui'.
-  vagrant up
+See https://fusionforge.org/plugins/mediawiki/wiki/fusionforge/index.php/Virtual_machine_development_environment
+
 
 Simple rebuild of the .box:
 
   packer build -only=virtualbox-iso fusionforge-dev.json
   packer build -only=qemu fusionforge-dev.json  # lacks .box export support as of 2014-01
+
 
 Debug fusionforge.sh:
 
@@ -21,6 +22,7 @@ Debug fusionforge.sh:
   packer build fusionforge-dev-from_ovf.json  # debug: OK!
   rm bare.box bare.json
   # Now you can launch an official rebuild.
+
 
 Inspiration:
 - https://github.com/jedi4ever/veewee/tree/master/templates/Debian-7.3.0-amd64-netboot

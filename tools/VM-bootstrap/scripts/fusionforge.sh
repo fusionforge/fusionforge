@@ -3,13 +3,9 @@ apt-get -y --force-yes install bzr
 cd /root/
 bzr checkout https://fusionforge.org/anonscm/bzr/deb-packaging/unstable fusionforge
 
-# Install scripts
-#wget -q -O - "https://fusionforge.org/plugins/scmgit/cgi-bin/gitweb.cgi?p=fusionforge/fusionforge.git;a=blob_plain;f=tools/VM-scripts/configure-scripts.sh;hb=HEAD" | sh -s trunk
-ln -s fusionforge/tools/VM-scripts scripts
-
 # Update system
 # Not done here, it makes the .box too big (1.5GB)
-# yes | scripts/update.sh
+# yes | /root/fusionforge/tools/VM-scripts/update.sh
 
 # Install dependencies
 apt-get -y --force-yes install moreutils
@@ -22,7 +18,7 @@ cat <<'EOF' > /etc/issue
 Debian GNU/Linux + FusionForge Dev VM \l
 
 Login with vagrant/vagrant and use 'sudo -i' to become root.
-To install a graphical environment, run "/root/scripts/install-gui.sh".
+To install a graphical environment, run "/root/fusionforge/tools/VM-scripts/install-gui.sh".
 Default keyboard layout is US QWERTY.
 (Change it with 'dpkg-reconfigure keyboard-configuration --pri=high')
 Default language is English.

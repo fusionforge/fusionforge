@@ -1,6 +1,6 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Run testsuite
-Exec=sh -c "/root/scripts/run-testsuite.sh ; echo Press Enter... ; read i"
+Exec=sh -c "/root/fusionforge/tools/VM-scripts/run-testsuite.sh ; echo Press Enter... ; read i"
 Terminal=true
 Type=Application
