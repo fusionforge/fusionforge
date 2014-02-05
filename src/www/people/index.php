@@ -54,7 +54,7 @@ if ($group_id) {
 
 	echo '
 		<p>'._('Click job titles for more detailed descriptions.').'</p>
-';
+	';
 	echo people_show_category_jobs($category_id);
 
 } else {
@@ -86,11 +86,11 @@ if ($group_id) {
 	echo '<h2>'._('Last posts').'</h2>';
 
 	$result=db_query_params('SELECT people_job.group_id,people_job.job_id,groups.group_name,groups.unix_group_name,people_job.title,people_job.post_date,people_job_category.name AS category_name
-FROM people_job,people_job_category,groups
-WHERE people_job.group_id=groups.group_id
-AND people_job.category_id=people_job_category.category_id
-AND people_job.status_id=1
-ORDER BY post_date DESC', array(), 5);
+				FROM people_job,people_job_category,groups
+				WHERE people_job.group_id=groups.group_id
+				AND people_job.category_id=people_job_category.category_id
+				AND people_job.status_id=1
+				ORDER BY post_date DESC', array(), 5);
         echo people_show_job_list($result);
         echo '<p><a href="helpwanted-latest.php">['._('more latest posts').']</a></p>';
 

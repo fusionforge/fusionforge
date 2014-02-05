@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002 (c) Silicon and Software Systems (S3)
- * Copyright 2010 (c) Franck Villaume
+ * Copyright 2010-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -48,7 +48,7 @@ if (session_loggedin()) {
 		}
 
 		$result=db_query_params('UPDATE users SET people_view_skills=$1
-WHERE user_id=$2', array($people_view_skills, user_getid()));
+					WHERE user_id=$2', array($people_view_skills, user_getid()));
 		if (!$result || db_affected_rows($result) < 1) {
 			form_release_key(getStringFromRequest("form_key"));
 			$error_msg .= sprintf(_('User update failed: %s'),db_error());
@@ -81,18 +81,19 @@ WHERE user_id=$2', array($people_view_skills, user_getid()));
 
 
 			$result = db_query_params("SELECT * from skills_data where user_id = $1
-				   AND type=$2
-				   AND title=$3
-				   AND start=$4
-				   AND finish=$5
-				   AND keywords=$6",
+						AND type=$2
+						AND title=$3
+						AND start=$4
+						AND finish=$5
+						AND keywords=$6",
 					 array(user_getid(), $type, $title, $start, $finish, $keywords));
 
 			if (db_numrows($result) >= 1) {
 				$feedback .= '';	/* don't tell them anything! */
 			} else {
-				$result = db_query_params("INSERT into skills_data (user_id, type, title, start, finish, keywords) values
-($1, $2, $3, $4, $5, $6)",array(user_getid(), $type, $title, $start, $finish, $keywords));
+				$result = db_query_params("INSERT into skills_data (user_id, type, title, start, finish, keywords)
+									values ($1, $2, $3, $4, $5, $6)",
+									array(user_getid(), $type, $title, $start, $finish, $keywords));
 
 				if (!$result || db_affected_rows($result) < 1) {
 					form_release_key(getStringFromRequest("form_key"));
@@ -141,7 +142,7 @@ WHERE user_id=$2', array($people_view_skills, user_getid()));
 						$error_msg = sprintf(_('Failed to update skills: %s'),db_error());
 						break;
 					} else {
-						$feedback = ngettext ('Skill updated', 'Skills updated', db_affected_rows($result));
+						$feedback = ngettext (_('Skill updated'), _('Skills updated'), db_affected_rows($result));
 					}
 				}   /* end for */
 
@@ -185,7 +186,7 @@ WHERE user_id=$2', array($people_view_skills, user_getid()));
 				if (!$result || db_affected_rows($result) < 1) {
 					$error_msg .= sprintf(_('Failed to delete any skills: %s'),db_error());
 				} else {
-					$feedback = ngettext ('Skill deleted successfully', 'Skills deleted successfully', db_affected_rows($result));
+					$feedback = ngettext (_('Skill deleted successfully'), _('Skills deleted successfully'), db_affected_rows($result));
 				}
 			} else {
 				$result = db_query_params ('SELECT title FROM skills_data where skills_data_id = ANY ($1)',
@@ -197,7 +198,7 @@ WHERE user_id=$2', array($people_view_skills, user_getid()));
 					people_header(array('title'=>_('Confirm skill delete')));
 
 					echo '<span class="important">'._('Confirm Delete').'</span>';
-					print ngettext('You are about to delete the following skill from the skills database:', 'You are about to delete the following skills from the skills database:', $rows) ;
+					print ngettext(_('You are about to delete the following skill from the skills database:'), _('You are about to delete the following skills from the skills database:'), $rows) ;
 					echo "<br />";
 					for($i = 0; $i < $rows; $i++) {
 						echo "<strong>&nbsp;&nbsp;&nbsp;" .db_result($result, $i, 'title') . "</strong><br />";
@@ -282,32 +283,32 @@ WHERE user_id=$2', array($people_view_skills, user_getid()));
 				$HTML->multiTableRow('',$cell_data,TRUE);
 
 		echo	"<tr>
-<td>".html_build_select_box($skills, "type", 1, false, "")."</td>
-<td>".html_build_select_box_from_arrays($monthArrayVals,$monthArray, "startM", date("m"), false, "").
-						html_build_select_box_from_arrays($yearArray,$yearArray, "startY", 0, false, "")."</td>
-<td>".html_build_select_box_from_arrays($monthArrayVals,$monthArray, "endM", date("m"), false, "").
-						html_build_select_box_from_arrays($yearArray,$yearArray, "endY", 0, false, "")."</td>
-</tr>
-</table>
-<table>";
+				<td>".html_build_select_box($skills, "type", 1, false, "")."</td>
+				<td>".html_build_select_box_from_arrays($monthArrayVals,$monthArray, "startM", date("m"), false, "").
+										html_build_select_box_from_arrays($yearArray,$yearArray, "startY", 0, false, "")."</td>
+				<td>".html_build_select_box_from_arrays($monthArrayVals,$monthArray, "endM", date("m"), false, "").
+										html_build_select_box_from_arrays($yearArray,$yearArray, "endY", 0, false, "")."</td>
+			</tr>
+			</table>
+			<table>";
 
-				$cell_data = array();
-				$cell_data[] = array(_('Title (max 100 characters)'));
-				echo $HTML->multiTableRow('',$cell_data,TRUE);
+		$cell_data = array();
+		$cell_data[] = array(_('Title (max 100 characters)'));
+		echo $HTML->multiTableRow('',$cell_data,TRUE);
 
-				echo "<tr>
-<td><input type=text name=\"title\" size=100></td>
-</tr>";
-				$cell_data = array();
-				$cell_data[] = array(_('Keywords (max 255 characters)'));
-				echo $HTML->multiTableRow('',$cell_data,TRUE);
-				echo "<tr>
-<td><textarea name=\"keywords\" rows=\"3\" cols=\"85\" wrap=\"soft\"></textarea></td>
-</tr>
-<tr>
-<td><input type=submit name=\"AddSkill\" value=\""._('Add This Skill')."\"></td>
-</tr>
-</table>";
+		echo '<tr>
+			<td><input type="text" name="title" size="100" /></td>
+			</tr>';
+		$cell_data = array();
+		$cell_data[] = array(_('Keywords (max 255 characters)'));
+		echo $HTML->multiTableRow('',$cell_data,TRUE);
+		echo '<tr>
+				<td><textarea name="keywords" rows="3" cols="85" wrap="soft"></textarea></td>
+			</tr>
+			<tr>
+				<td><input type="submit" name="AddSkill" value="'._('Add This Skill').'" /></td>
+			</tr>
+			</table>';
 
 		echo '</form>';
 

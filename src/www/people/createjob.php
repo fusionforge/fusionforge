@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -41,7 +42,7 @@ if ($group_id && (forge_check_perm('project_admin', $group_id))) {
 		Fill in the info to create a job
 	*/
 	echo '
-		<p>'._('Start by filling in the fields below. When you click continue, you will be shown a list of skills and experience levels that this job requires.').'	</p>
+		<p>'._('Start by filling in the fields below. When you click continue, you will be shown a list of skills and experience levels that this job requires.').'</p>
 		<p>
 		<form action="'.util_make_url ('/people/editjob.php').'" method="post">
 		<input type="hidden" name="group_id" value="'.$group_id.'" />
