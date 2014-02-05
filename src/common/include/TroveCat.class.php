@@ -44,13 +44,15 @@ class TroveCat extends Error {
 		return $this->fetchData($cat_id);
 	}
 
-	/**
-	 * fetchData - May need to refresh database fields.
-	 *
-	 * If an update occurred and you need to access the updated info.
-	 *
-	 * @return	bool	success;
-	 */
+    /**
+     * fetchData - May need to refresh database fields.
+     *
+     * If an update occurred and you need to access the updated info.
+     *
+     * @param int $cat_id
+     * @param bool $res
+     * @return    bool    success;
+     */
 	function fetchData($cat_id, &$res = false) {
 
 		unset($this->data_array);
@@ -64,11 +66,10 @@ class TroveCat extends Error {
 			}
 		}
 		$row =  db_fetch_array($res);
-		if($row) {
+		if ($row) {
 			$this->data_array = $row;
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
 	}

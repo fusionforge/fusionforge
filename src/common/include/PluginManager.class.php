@@ -49,7 +49,7 @@ class PluginManager extends Error {
 	/**
 	 * GetPlugins() - get a list of installed plugins
 	 *
-	 * @return	hash of plugin id => plugin names
+	 * @return	array hash of plugin id => plugin names
 	 */
 	function GetPlugins() {
 		if (!isset($this->plugins_data)) {

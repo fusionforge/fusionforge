@@ -70,9 +70,9 @@ function user_get_object_by_email($email, $res = false) {
  * user_get_object is useful so you can pool user objects/save database queries
  * You should always use this instead of instantiating the object directly
  *
- * @param	string	The unix username - required
- * @param	int	The result set handle ("SELECT * FROM USERS WHERE user_id=xx")
- * @return	a user object or false on failure
+ * @param    string $user_name The unix username - required
+ * @param bool|int $res The result set handle ("SELECT * FROM USERS WHERE user_id=xx")
+ * @return    object a user object or false on failure
  */
 function &user_get_object_by_name_or_email($user_name, $res = false) {
 	$user = user_get_object_by_name($user_name, $res);
@@ -1195,11 +1195,12 @@ Use one below, but make sure it is entered as the single line.)
 		return $this->data_array['title'];
 	}
 
-	/**
-	 * getGroups - get an array of groups this user is a member of.
-	 *
-	 * @return array	Array of groups.
-	 */
+    /**
+     * getGroups - get an array of groups this user is a member of.
+     *
+     * @param bool $onlylocal
+     * @return array    Array of groups.
+     */
 	function &getGroups($onlylocal = true) {
 		$ids = array();
 		foreach ($this->getRoles() as $r) {
@@ -1226,12 +1227,12 @@ Use one below, but make sure it is entered as the single line.)
 		return $this->data_array['authorized_keys'];
 	}
 
-	/**
-	 *	addAuthorizedKey - add the SSH authorized key for the user.
-	 *
-	 * @param    string    $keys The users public keys.
-	 * @return    boolean    success.
-	 */
+    /**
+     *    addAuthorizedKey - add the SSH authorized key for the user.
+     *
+     * @param string $key
+     * @return    boolean    success.
+     */
 	function addAuthorizedKey($key) {
 		$key = trim($key);
 		$key = preg_replace("/\r\n/", "\n", $key); // Convert to Unix EOL
@@ -1613,7 +1614,7 @@ Use one below, but make sure it is entered as the single line.)
 	 * @return    boolean    success.
 	 */
 	function unsubscribeFromMailings($all = false) {
-		$res1 = $res2 = $res3 = true;
+		$res2 = $res3 = true;
 		$res1 = db_query_params('UPDATE users SET mail_siteupdates=0, mail_va=0 WHERE user_id=$1',
 			array($this->getID()));
 		if ($all) {
@@ -1780,10 +1781,9 @@ function user_ismember($group_id, $type = 0) {
 /**
  * user_getname() - DEPRECATED; DO NOT USE! (TODO: document what should be used instead)
  *
- * @param        int        $user_id The User ID
+ * @param bool|int $user_id The User ID
  * @return string
  * @deprecated
- *
  */
 function user_getname($user_id = false) {
 	// use current user if one is not passed in
