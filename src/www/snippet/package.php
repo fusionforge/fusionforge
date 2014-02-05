@@ -94,7 +94,7 @@ if (session_loggedin()) {
 
 <script type="text/javascript">/* <![CDATA[ */
 function show_add_snippet_box() {
-	var newWindow = open("","occursDialog","height=500,width=300,scrollbars=yes,resizable=yes");
+	var newWindow = open('','occursDialog','height=500,width=300,scrollbars=yes,resizable=yes');
 	newWindow.location=('/snippet/add_snippet_to_package.php?suppress_nav=1&snippet_package_version_id=<?php
 			echo $snippet_package_version_id; ?>');
 }
@@ -106,7 +106,7 @@ function show_add_snippet_box() {
 <p>
 <?php echo _('If a new window opened, use it to add snippets to your package. If a new window did not open, use the following link to add to your package BEFORE you leave this page.'); ?></p>
 
-<p><?php echo util_make_link ('/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id,_('Add snippets to package'),array('target'=>'_blank')); ?></p>
+<p><?php echo util_make_link ('/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id,_('Add snippets to package')); ?></p>
 
 <p>
 <?php echo _('<strong>Browse the library</strong> to find the snippets you want to add, then add them using the new window link shown above.'); ?>
@@ -140,7 +140,7 @@ function show_add_snippet_box() {
 	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
 	<input type="hidden" name="post_changes" value="y" />
-	<input type="hidden" name="changes" value="First Posted Version" />
+	<input type="hidden" name="changes" value="<?php echo _('First Posted Version') ?>" />
 
 	<table>
 

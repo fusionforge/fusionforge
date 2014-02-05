@@ -66,8 +66,9 @@ if (session_loggedin()) {
 				check to see if they are the creator of this version
 			*/
 			$result=db_query_params("SELECT * FROM snippet_package_version ".
-				"WHERE submitted_by=$1 AND ".
-				"snippet_package_version_id=$2", array(user_getid(), $snippet_package_version_id));
+						"WHERE submitted_by=$1 AND ".
+						"snippet_package_version_id=$2",
+						array(user_getid(), $snippet_package_version_id));
 			if (!$result || db_numrows($result) < 1) {
 				echo '<p class="error">' ._('Error: Only the creator of a package version can add snippets to it.').'</p>';
 				handle_add_exit();
@@ -76,10 +77,10 @@ if (session_loggedin()) {
 			/*
 				make sure the snippet_version_id exists
 			*/
-			$result=db_query_params ('SELECT * FROM snippet_version WHERE snippet_version_id=$1',
-			array($snippet_version_id));
+			$result=db_query_params('SELECT * FROM snippet_version WHERE snippet_version_id=$1',
+						array($snippet_version_id));
 			if (!$result || db_numrows($result) < 1) {
-				echo '<p class="error">' ._('Error: snippet doesn\'t exist').'</p>';
+				echo '<p class="error">' ._('Error: snippet does not exist').'</p>';
 				echo util_make_link ('/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id,_('Back To Add Page'));
 				handle_add_exit();
 			}
@@ -87,14 +88,14 @@ if (session_loggedin()) {
 			/*
 				make sure the snippet_version_id isn't already in this package
 			*/
-			$result=db_query_params ('SELECT * FROM snippet_package_item
-WHERE snippet_package_version_id=$1
-AND snippet_version_id=$2',
-			array($snippet_package_version_id,
-				$snippet_version_id));
+			$result=db_query_params('SELECT * FROM snippet_package_item
+						WHERE snippet_package_version_id=$1
+						AND snippet_version_id=$2',
+						array($snippet_package_version_id,
+							$snippet_version_id));
 			if ($result && db_numrows($result) > 0) {
 				echo '<p class="error">'._('Error: That snippet was already added to this package.').'</p>';
-				echo util_make_url ('/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id,_('Back To Add Page'));
+				echo util_make_link ('/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id,_('Back To Add Page'));
 				handle_add_exit();
 			}
 
@@ -102,10 +103,10 @@ AND snippet_version_id=$2',
 				create the snippet version
 			*/
 			$result=db_query_params("INSERT INTO snippet_package_item (snippet_package_version_id,snippet_version_id)
-VALUES ($1, $2)", array($snippet_package_version_id, $snippet_version_id));
+						VALUES ($1, $2)", array($snippet_package_version_id, $snippet_version_id));
 
 			if (!$result) {
-				$feedback .= _('Error doing snippet version insert').' '.db_error();
+				$error_msg .= _('Error doing snippet version insert').' '.db_error();
 			} else {
 				$feedback .= _('Snippet Version Added Successfully.');
 			}
@@ -114,14 +115,13 @@ VALUES ($1, $2)", array($snippet_package_version_id, $snippet_version_id));
 			echo util_make_link ('/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id,_('Back To Add Page'));
 			handle_add_exit();
 		}
-
 	}
 
 	$result=db_query_params ('SELECT snippet_package.name,snippet_package_version.version
-FROM snippet_package,snippet_package_version
-WHERE snippet_package.snippet_package_id=snippet_package_version.snippet_package_id
-AND snippet_package_version.snippet_package_version_id=$1',
-			array($snippet_package_version_id));
+				FROM snippet_package,snippet_package_version
+				WHERE snippet_package.snippet_package_id=snippet_package_version.snippet_package_id
+				AND snippet_package_version.snippet_package_version_id=$1',
+				array($snippet_package_version_id));
 
 	?>
 	<p>
@@ -138,20 +138,20 @@ AND snippet_package_version.snippet_package_version_id=$1',
 	<table>
 	<tr><td colspan="2" class="align-center">
 		<strong><?php echo _('Add This Snippet Version ID:'); ?></strong><br />
- <select name="snippet_version_id">
+		<select name="snippet_version_id">
 <?php
 
 $combolistresult = db_query_params ('SELECT myname,snippet_version.snippet_version_id
-FROM ( SELECT MAX(post_date) AS
-mydate,name AS myname,snippet.snippet_id AS myid
-FROM
-snippet,snippet_version
-WHERE
-snippet.snippet_id=snippet_version.snippet_id
-GROUP BY
-name,snippet.snippet_id ) AS foo,snippet_version
-WHERE
-snippet_version.post_date=mydate',array());
+					FROM ( SELECT MAX(post_date) AS
+					mydate,name AS myname,snippet.snippet_id AS myid
+					FROM
+					snippet,snippet_version
+					WHERE
+					snippet.snippet_id=snippet_version.snippet_id
+					GROUP BY
+					name,snippet.snippet_id ) AS foo,snippet_version
+					WHERE
+					snippet_version.post_date=mydate',array());
 $combolistrows=db_numrows($combolistresult);
 for ($i=0; $i<$combolistrows; $i++)
 {
@@ -171,19 +171,20 @@ for ($i=0; $i<$combolistrows; $i++)
 	/*
 		Show the snippets in this package
 	*/
-	$result=db_query_params ('SELECT snippet_package_item.snippet_version_id, snippet_version.version, snippet.name
-FROM snippet,snippet_version,snippet_package_item
-WHERE snippet.snippet_id=snippet_version.snippet_id
-AND snippet_version.snippet_version_id=snippet_package_item.snippet_version_id
-AND snippet_package_item.snippet_package_version_id=$1',
-			array($snippet_package_version_id));
+	$result=db_query_params('SELECT snippet_package_item.snippet_version_id, snippet_version.version, snippet.name
+				FROM snippet,snippet_version,snippet_package_item
+				WHERE snippet.snippet_id=snippet_version.snippet_id
+				AND snippet_version.snippet_version_id=snippet_package_item.snippet_version_id
+				AND snippet_package_item.snippet_package_version_id=$1',
+				array($snippet_package_version_id));
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo db_error();
 		echo '
-		<p>' ._('No Snippets Are In This Package Yet').'</p>';
+		<p class="information" >' ._('No Snippets Are In This Package Yet').'</p>';
 	} else {
 		echo $HTML->boxTop(_('Snippets In This Package'));
+		echo $HTML->listTableTop();
 		for ($i=0; $i<$rows; $i++) {
 			echo '
 			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td class="align-center">
@@ -193,6 +194,7 @@ AND snippet_package_item.snippet_package_version_id=$1',
 
 			$last_group=db_result($result,$i,'group_id');
 		}
+		echo $HTML->listTableBottom();
 		echo $HTML->boxBottom();
 	}
 
