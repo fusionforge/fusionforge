@@ -3,6 +3,7 @@
  * Code Snippets Repository
  *
  * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -34,9 +35,10 @@ $result = db_query_params ('SELECT language,code FROM (snippet NATURAL JOIN snip
 			   array ($id));
 
 if ($result && db_numrows($result) > 0) {
+	$sysdebug_enable = false;
 	header('Content-Type: text/plain');
 	header('Content-Disposition: attachment; filename="snippet_'.$id.$SCRIPT_EXTENSION[db_result($result,0,'language')].'"');
-	if (strlen(db_result($result,0,'code')) > 1) {
+	if (strlen(db_result($result,0,'code'))) {
 		echo util_unconvert_htmlspecialchars( db_result($result,0,'code') );
 	} else {
 		echo 'nothing in here';
