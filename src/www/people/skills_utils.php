@@ -3,6 +3,7 @@
  * Skills support functions.
  *
  * Copyright 2002 (c) Silicon and Software Systems (S3)
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -36,14 +37,14 @@ function displayUserSkills($user_id, $allowEdit) {
 	$rows = db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo db_error();
-		$feedback = 'No skills listed ';
-		echo '<tr><td>This user has not entered any skills.</td></tr>';
+		$feedback = _('No skills listed.');
+		echo '<tr><td>'._('This user has not entered any skills.').'</td></tr>';
 	} else {
 
 		echo '<tr class="tableheading">';				 /* headings for the columns */
 		if($allowEdit) {
 			echo '<td>'._('Edit').'</td>'.
-				 '<td>'._('Delete').'</td>';
+				'<td>'._('Delete').'</td>';
 		}
 		echo '<td>'._('Type').'</td>'.
 			 '<td>'._('Title').'</td>'.
@@ -163,7 +164,6 @@ function handle_multi_edit($skill_ids = array()) {
 					'</tr>'.
 				'</table>'.
 				'</td></tr>'.
-
 				'<tr '.$HTML->boxGetAltRowStyle($i+1).'><td>'.
 				'<table>'.
 					'<tr class="tableheading">'.
@@ -179,7 +179,6 @@ function handle_multi_edit($skill_ids = array()) {
 					'<tr>'.
 						'<td><textarea name="keywords[]" rows="3" cols="85">'.db_result($result, $i,'keywords').'</textarea></td>'.
 					'</tr>'.
-
 				 '</table>';
 			echo '</td></tr>';
 			echo '</table><br />';

@@ -49,16 +49,16 @@ function people_footer($params = array()) {
 	$HTML->footer($params);
 }
 
-function people_skill_box($name='skill_id') {
+function people_skill_box($name='skill_id',$checked='xzxz') {
 	global $PEOPLE_SKILL;
 	if (!$PEOPLE_SKILL) {
 		//will be used many times potentially on a single page
 		$PEOPLE_SKILL=db_query_params("SELECT * FROM people_skill ORDER BY name ASC", array());
 	}
-	return html_build_select_box($PEOPLE_SKILL,$name,'xzxz',false);
+	return html_build_select_box($PEOPLE_SKILL,$name,$checked,false);
 }
 
-function people_skill_level_box($name='skill_level_id',$checked='xyxy') {
+function people_skill_level_box($name='skill_level_id',$checked='xzxz') {
 	global $PEOPLE_SKILL_LEVEL;
 	if (!$PEOPLE_SKILL_LEVEL) {
 		//will be used many times potentially on a single page
@@ -67,7 +67,7 @@ function people_skill_level_box($name='skill_level_id',$checked='xyxy') {
 	return html_build_select_box($PEOPLE_SKILL_LEVEL,$name,$checked, false);
 }
 
-function people_skill_year_box($name='skill_year_id',$checked='xyxy') {
+function people_skill_year_box($name='skill_year_id',$checked='xzxz') {
 	global $PEOPLE_SKILL_YEAR;
 	if (!$PEOPLE_SKILL_YEAR) {
 		//will be used many times potentially on a single page
@@ -76,12 +76,12 @@ function people_skill_year_box($name='skill_year_id',$checked='xyxy') {
 	return html_build_select_box ($PEOPLE_SKILL_YEAR,$name,$checked, false);
 }
 
-function people_job_status_box($name='status_id',$checked='xyxy') {
+function people_job_status_box($name='status_id',$checked='xzxz') {
 	$result=db_query_params("SELECT * FROM people_job_status", array());
 	return html_build_select_box ($result,$name,$checked);
 }
 
-function people_job_category_box($name='category_id',$checked='xyxy') {
+function people_job_category_box($name='category_id',$checked='xzxz') {
 	$result=db_query_params("SELECT category_id,name FROM people_job_category WHERE private_flag=0", array());
 	return html_build_select_box($result, $name, $checked, false);
 }
@@ -91,7 +91,7 @@ function people_add_to_skill_inventory($skill_id,$skill_level_id,$skill_year_id)
 	global $error_msg;
 	if (session_loggedin()) {
 		// check required fields
-		if (!$skill_id || $skill_id == "xyxy") {
+		if (!$skill_id || $skill_id == 'xzxz') {
 			$feedback .= _('Must select a skill ID');
 		} else {
 		//check if they've already added this skill
@@ -111,17 +111,17 @@ VALUES ($1, $2, $3, $4)", array(user_getid() ,$skill_id, $skill_level_id, $skill
 		}
 		}
 	} else {
-		echo '<p class="error">You must be logged in first</p>';
+		echo '<p class="error">'._('You must be logged in first').'</p>';
 	}
 }
 
 function people_show_skill_inventory($user_id) {
 	$result = db_query_params("SELECT people_skill.name AS skill_name, people_skill_level.name AS level_name, people_skill_year.name AS year_name
-FROM people_skill_year,people_skill_level,people_skill,people_skill_inventory
-WHERE people_skill_year.skill_year_id=people_skill_inventory.skill_year_id
-AND people_skill_level.skill_level_id=people_skill_inventory.skill_level_id
-AND people_skill.skill_id=people_skill_inventory.skill_id
-AND people_skill_inventory.user_id=$1", array($user_id));
+				FROM people_skill_year,people_skill_level,people_skill,people_skill_inventory
+				WHERE people_skill_year.skill_year_id=people_skill_inventory.skill_year_id
+				AND people_skill_level.skill_level_id=people_skill_inventory.skill_level_id
+				AND people_skill.skill_id=people_skill_inventory.skill_id
+				AND people_skill_inventory.user_id=$1", array($user_id));
 
 	$title_arr=array();
 	$title_arr[]=_('Skill');
@@ -207,7 +207,8 @@ function people_add_to_job_inventory($job_id,$skill_id,$skill_level_id,$skill_ye
 		if (!$result || db_numrows($result) < 1) {
 			// job is not yet in this inventory
 			$result=db_query_params('INSERT INTO people_job_inventory (job_id,skill_id,skill_level_id,skill_year_id)
-VALUES ($1, $2, $3, $4)', array($job_id, $skill_id, $skill_level_id, $skill_year_id));
+							VALUES ($1, $2, $3, $4)',
+							array($job_id, $skill_id, $skill_level_id, $skill_year_id));
 			if (!$result || db_affected_rows($result) < 1) {
 				$error_msg .= _('Error inserting into job inventory: ');
 				$error_msg .= db_error();
@@ -217,7 +218,7 @@ VALUES ($1, $2, $3, $4)', array($job_id, $skill_id, $skill_level_id, $skill_year
 				return true;
 			}
 		} else {
-			$error_msg .= _('Error: job already in your inventory');
+			$error_msg .= _('Error: Skill already in your inventory.');
 			return false;
 		}
 

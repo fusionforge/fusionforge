@@ -48,7 +48,7 @@ if ($group_id && (forge_check_perm('project_admin', $group_id))) {
 		/*
 			create a new job
 		*/
-		if (!$title || !$description || $category_id==100) {
+		if (!$title || !$description || $category_id == 'xzxz') {
 			exit_missing_param('',array(_('Title'),_('Description'),_('Category')),'admin');
 		}
 		if (!form_key_is_valid(getStringFromRequest('form_key'))) {
@@ -69,7 +69,7 @@ if ($group_id && (forge_check_perm('project_admin', $group_id))) {
 		/*
 			update the job's description, status, etc
 		*/
-		if (!$title || !$description || $category_id==100 || $status_id==100 || !$job_id) {
+		if (!$title || !$description || $category_id== 'xzxz' || $status_id== 'xzxz' || !$job_id) {
 			//required info
 			exit_missing_param('',array(_('Title'),_('Description'),_('Category'),_('Status'),_('Job')),'admin');
 		}
@@ -86,7 +86,7 @@ if ($group_id && (forge_check_perm('project_admin', $group_id))) {
 		/*
 			add item to job inventory
 		*/
-		if ($skill_id == "xyxy" || $skill_level_id==100 || $skill_year_id==100  || !$job_id) {
+		if ($skill_id == 'xzxz' || $skill_level_id == 'xzxz' || $skill_year_id== 'xzxz'  || !$job_id) {
 			//required info
 			exit_missing_param('',array(_('Skill'),_('Skill Level'),_('Skill Year'),_('Job')),'admin');
 		}
@@ -103,7 +103,7 @@ if ($group_id && (forge_check_perm('project_admin', $group_id))) {
 		/*
 			Change Skill level, experience etc.
 		*/
-		if ($skill_level_id==100 || $skill_year_id==100  || !$job_id || !$job_inventory_id) {
+		if ($skill_level_id == 'xzxz' || $skill_year_id == 'xzxz'  || !$job_id || !$job_inventory_id) {
 			//required info
 			exit_missing_param('',array(_('Skill Level'),_('Skill Year'),_('Job'),_('Job Inventory')),'admin');
 		}
