@@ -37,7 +37,7 @@ if (session_loggedin()) {
 		$result=db_query_params ('SELECT * FROM snippet WHERE snippet_id=$1',
 			array($id));
 		if (!$result || db_numrows($result) < 1) {
-			exit_error(_('Error: snippet doesn\'t exist'));
+			exit_error(_('Error: snippet does not exist'));
 		}
 
 		/*
@@ -123,9 +123,9 @@ if (session_loggedin()) {
 			See if the package exists first
 		*/
 		$result=db_query_params ('SELECT * FROM snippet_package WHERE snippet_package_id=$1',
-			array($id));
+					array($id));
 		if (!$result || db_numrows($result) < 1) {
-			exit_error(_('Error: snippet_package doesn\'t exist'));
+			exit_error(_('Error: snippet_package does not exist'));
 		}
 
 		if (getStringFromRequest('post_changes')) {
@@ -172,7 +172,7 @@ if (session_loggedin()) {
 
 <script type="text/javascript">/* <![CDATA[ */
 function show_add_snippet_box() {
-	var newWindow = open("","occursDialog","height=500,width=300,scrollbars=yes,resizable=yes");
+	var newWindow = open('','occursDialog','height=500,width=300,scrollbars=yes,resizable=yes');
 	newWindow.location=('/snippet/add_snippet_to_package.php?snippet_package_version_id=<?php
 			echo $snippet_package_version_id; ?>');
 }

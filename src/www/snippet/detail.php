@@ -48,9 +48,9 @@ if ($type=='snippet') {
 		Get all the versions of this snippet
 	*/
 	$result=db_query_params("SELECT users.realname,users.user_name,users.user_id,snippet_version.snippet_version_id,snippet_version.version,snippet_version.post_date,snippet_version.changes
-FROM snippet_version,users
-WHERE users.user_id=snippet_version.submitted_by AND snippet_id=$1
-ORDER BY snippet_version.snippet_version_id DESC", array($id));
+				FROM snippet_version,users
+				WHERE users.user_id=snippet_version.submitted_by AND snippet_id=$1
+				ORDER BY snippet_version.snippet_version_id DESC", array($id));
 
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
@@ -112,7 +112,7 @@ ORDER BY snippet_version.snippet_version_id DESC", array($id));
 		Show a link so you can add a new version of this snippet
 	*/
 	echo '
-	<h3><a href="'.util_make_url ('/snippet/addversion.php?type=snippet&amp;id='.htmlspecialchars($id)).'"><span class="important">'._('Submit a new version').'</span></a></h3>
+	<h3><a href="'.util_make_url ('/snippet/addversion.php?type=snippet&amp;id='.htmlspecialchars($id)).'"><span class="information">'._('Submit a new version').'</span></a></h3>
 	<p>' ._('You can submit a new version of this snippet if you have modified it and you feel it is appropriate to share with others.').'.</p>';
 
 	}
@@ -120,27 +120,22 @@ ORDER BY snippet_version.snippet_version_id DESC", array($id));
 
 } elseif ($type=='package') {
 	/*
-
-
 		View a package and show its versions
 		Expand and show the snippets for the latest version
-
-
 	*/
 
 	snippet_header(array('title'=>_('Snippet Library')));
-
 	snippet_show_package_details($id);
 
 	/*
 		Get all the versions of this package
 	*/
 	$result = db_query_params ('SELECT users.realname,users.user_name,users.user_id,snippet_package_version.snippet_package_version_id,
-snippet_package_version.version,snippet_package_version.post_date
-FROM snippet_package_version,users
-WHERE users.user_id=snippet_package_version.submitted_by AND snippet_package_id=$1
-ORDER BY snippet_package_version.snippet_package_version_id DESC',
-				   array($id));
+					snippet_package_version.version,snippet_package_version.post_date
+					FROM snippet_package_version,users
+					WHERE users.user_id=snippet_package_version.submitted_by AND snippet_package_id=$1
+					ORDER BY snippet_package_version.snippet_package_version_id DESC',
+					array($id));
 
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
@@ -182,25 +177,25 @@ ORDER BY snippet_package_version.snippet_package_version_id DESC',
 		</p><p>'._('Download a raw-text version of this code by clicking on “Download Version”').'
 		</p>';
 
-	/*
-		show the latest version of the package
-		and its snippets
-	*/
+		/*
+			show the latest version of the package
+			and its snippets
+		*/
 
-	echo '
-		<p>&nbsp;</p>
-		<hr />
-		<h2>' ._('Latest Package Version: ').db_result($result,0,'version').'</h2>
-		<p>&nbsp;</p>
-		<p>&nbsp;</p>';
-	snippet_show_package_snippets($newest_version);
+		echo '
+			<p>&nbsp;</p>
+			<hr />
+			<h2>' ._('Latest Package Version: ').db_result($result,0,'version').'</h2>
+			<p>&nbsp;</p>
+			<p>&nbsp;</p>';
+		snippet_show_package_snippets($newest_version);
 
-	/*
-		Show a form so you can add a new version of this package
-	*/
-	echo '
-	<h3><a href="'.util_make_url ('/snippet/addversion.php?type=package&amp;id='.$id).'"><span class="important">' ._('Submit a new version').'</span></a></h3>
-	<p>' ._('You can submit a new version of this package if you have modified it and you feel it is appropriate to share with others.').'.</p>';
+		/*
+			Show a form so you can add a new version of this package
+		*/
+		echo '
+		<h3><a href="'.util_make_url ('/snippet/addversion.php?type=package&amp;id='.$id).'"><span class="information">' ._('Submit a new version').'</span></a></h3>
+		<p>' ._('You can submit a new version of this package if you have modified it and you feel it is appropriate to share with others.').'.</p>';
 
 	}
 	snippet_footer();
@@ -211,11 +206,8 @@ ORDER BY snippet_package_version.snippet_package_version_id DESC',
 	*/
 
 	snippet_header(array('title'=>_('Snippet Library')));
-
 	snippet_show_package_details($id);
-
 	snippet_show_package_snippets($id);
-
 	snippet_footer();
 
 } else {

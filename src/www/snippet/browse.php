@@ -46,7 +46,7 @@ function createPackageQuery($clause) {
 	return "SELECT users.realname,users.user_name,users.user_id,snippet_package.description,snippet_package.snippet_package_id,snippet_package.name FROM snippet_package,users WHERE users.user_id=snippet_package.created_by AND ".$clause;
 }
 
-snippet_header(array('title'=>_('Snippet Library'), 'header'=>''));
+snippet_header(array('title'=>_('Snippet Library')));
 
 $by = getStringFromRequest('by');
 

@@ -98,7 +98,7 @@ function snippet_mainpage() {
 	return $return;
 }
 
-snippet_header(array('title'=>_('Snippet Library'), 'header'=>'Snippet Library'));
+snippet_header(array('title'=>_('Snippet Library')));
 echo snippet_mainpage();
 snippet_footer();
 

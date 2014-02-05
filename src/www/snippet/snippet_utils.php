@@ -129,11 +129,11 @@ function snippet_footer($params = array()) {
 function snippet_show_package_snippets($version) {
 	//show the latest version
 	$result=db_query_params("SELECT users.realname,users.user_id,snippet_package_item.snippet_version_id, snippet_version.version,snippet.name,users.user_name
-FROM snippet,snippet_version,snippet_package_item,users
-WHERE snippet.snippet_id=snippet_version.snippet_id
-AND users.user_id=snippet_version.submitted_by
-AND snippet_version.snippet_version_id=snippet_package_item.snippet_version_id
-AND snippet_package_item.snippet_package_version_id=$1", array($version));
+				FROM snippet,snippet_version,snippet_package_item,users
+				WHERE snippet.snippet_id=snippet_version.snippet_id
+				AND users.user_id=snippet_version.submitted_by
+				AND snippet_version.snippet_version_id=snippet_package_item.snippet_version_id
+				AND snippet_package_item.snippet_package_version_id=$1", array($version));
 
 	$rows=db_numrows($result);
 	echo '<h3>' ._('Snippets In This Package').'</h3>';
@@ -144,14 +144,12 @@ AND snippet_package_item.snippet_package_version_id=$1", array($version));
 	$title_arr[]= _('Title');
 	$title_arr[]= _('Author');
 
-	echo $GLOBALS['HTML']->listTableTop($title_arr);
-
 	if (!$result || $rows < 1) {
 		echo db_error();
 		echo '
-			<tr><td colspan="4"><h3>' ._('No Snippets Are In This Package Yet').'</h3></td></tr>';
+			<div class="warning_msg">'._('No Snippets Are In This Package Yet').'</div>';
 	} else {
-
+		echo $GLOBALS['HTML']->listTableTop($title_arr);
 		//get the newest version, so we can display it's code
 		$newest_version=db_result($result,0,'snippet_version_id');
 
@@ -164,10 +162,8 @@ AND snippet_package_item.snippet_package_version_id=$1", array($version));
 				db_result($result,$i,'name').'</td><td>'.
 				util_make_link_u(db_result($result, $i, 'user_name'), db_result($result, $i, 'user_id'),db_result($result, $i, 'realname')).'</td></tr>';
 		}
+		echo $GLOBALS['HTML']->listTableBottom();
 	}
-
-	echo $GLOBALS['HTML']->listTableBottom();
-
 }
 
 function snippet_show_package_details($id) {
