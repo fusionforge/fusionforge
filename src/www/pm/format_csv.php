@@ -1,6 +1,7 @@
 <?php
-/*
+/**
  * Copyright (C) 2009 Alain Peyrat, Alcatel-Lucent
+ * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -18,7 +19,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-/*
+/**
  * Standard Alcatel-Lucent disclaimer for contributing to open source
  *
  * "The provided file ("Contribution") has not been tested and/or
@@ -56,26 +57,55 @@ $sep = getStringFromRequest('sep', ',');
 	<tr>
 		<td>
 		<fieldset><legend><strong><?php echo _('CSV Format'); ?></strong></legend>
-		<form action="/pm/task.php" method="get"><input type="hidden"
-			name="group_id" value="<?php echo $group_id ?>" /> <input
-			type="hidden" name="group_project_id"
-			value="<?php echo $group_project_id ?>" /> <input type="hidden"
-			name="func" value="csv" />
-		<table>
+		<form action="/pm/task.php" method="get">
+			<input type="hidden" name="group_id" value="<?php echo $group_id ?>" />
+			<input type="hidden" name="group_project_id" value="<?php echo $group_project_id ?>" />
+			<input type="hidden" name="func" value="csv" />
+		<table class="infotable">
 			<tr>
-				<td class="top"><strong><?php echo _('Content')._(':'); ?></strong></td>
-				<td><input type="radio" name="full" value="1"<?php if ($full) echo ' checked="checked"' ?>/><?php echo _('Full'); ?><br />
-				<input type="radio" name="full" value="0"<?php if (!$full) echo ' checked="checked"' ?> /><?php echo _('Normal'); ?></td>
+				<td>
+					<?php echo _('Content')._(':'); ?>
+				</td>
+				<td>
+					<input type="radio" id="full" name="full" value="1"<?php if ($full) echo ' checked="checked"' ?>/>
+					<label for="full">
+						<?php echo _('Full'); ?><br />
+					</label>
+					<input type="radio" id="normal" name="full" value="0"<?php if (!$full) echo ' checked="checked"' ?> />
+					<label for="normal">
+						<?php echo _('Normal'); ?>
+					</label>
+				</td>
 			</tr>
 			<tr>
-				<td class="top"><strong><?php echo _('Separator')._(':'); ?></strong></td>
-				<td><input type="radio" name="sep" value=","<?php if ($sep==',') echo ' checked="checked"' ?>/><?php echo _('Comma (char: “,”)'); ?><br />
-				<input type="radio" name="sep" value=";"<?php if ($sep==';') echo ' checked="checked"' ?>/><?php echo _('Semi-colon (char: “;”)'); ?></td>
+				<td>
+					<?php echo _('Separator')._(':'); ?>
+				</td>
+				<td>
+					<input type="radio" id="comma" name="sep" value=","<?php if ($sep==',') echo ' checked="checked"' ?>/>
+					<label for="comma">
+						<?php echo _('Comma (char: “,”)'); ?><br />
+					</label>
+					<input type="radio" id="semi-colon" name="sep" value=";"<?php if ($sep==';') echo ' checked="checked"' ?>/>
+					<label for="semi-colon">
+						<?php echo _('Semi-colon (char: “;”)'); ?>
+					</label>
+				</td>
 			</tr>
 			<tr>
-				<td class="top"><strong><?php echo _('Header')._(':'); ?></strong></td>
-				<td><input type="radio" name="headers" value="1"<?php if ($headers) echo ' checked="checked"' ?>/><?php echo _('Included'); ?><br />
-				<input type="radio" name="headers" value="0"<?php if (!$headers) echo ' checked="checked"' ?>/><?php echo _('None'); ?></td>
+				<td>
+					<?php echo _('Header')._(':'); ?>
+				</td>
+				<td>
+					<input type="radio" id="included" name="headers" value="1"<?php if ($headers) echo ' checked="checked"' ?> />
+					<label for="included">
+						<?php echo _('Included'); ?><br />
+					</label>
+					<input type="radio" id="none" name="headers" value="0"<?php if (!$headers) echo ' checked="checked"' ?> />
+					<label for="none">
+						<?php echo _('None'); ?>
+					</label>
+				</td>
 			</tr>
 		</table>
 		<input type="submit" name="Submit" /></form>
