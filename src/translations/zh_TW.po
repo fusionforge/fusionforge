@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-04 14:35+0100\n"
+"POT-Creation-Date: 2014-02-05 18:20+0100\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -344,8 +344,8 @@ msgstr "檔案名"
 #: plugins/oauthconsumer/www/get_access_token.php:139
 #: plugins/projectimport/common/ProjectImporter.class.php:124
 #: plugins/projectlabels/www/index.php:172
-#: plugins/projects-hierarchy/view/home_project_link.php:37
-#: plugins/projects-hierarchy/view/home_project_link.php:47
+#: plugins/projects-hierarchy/view/home_project_link.php:54
+#: plugins/projects-hierarchy/view/home_project_link.php:64
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:635
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:637
 #: plugins/scmhg/common/HgPlugin.class.php:647 www/account/index.php:198
@@ -370,7 +370,7 @@ msgstr "檔案名"
 #: www/include/user_profile.php:111 www/new/index.php:98
 #: www/news/submit.php:153 www/news/submit.php:155 www/news/submit.php:158
 #: www/people/admin/index.php:53 www/people/admin/index.php:66
-#: www/people/editprofile.php:233 www/people/skills_utils.php:121
+#: www/people/editprofile.php:234 www/people/skills_utils.php:122
 #: www/people/viewprofile.php:47 www/pm/add_task.php:50 www/pm/add_task.php:63
 #: www/pm/add_task.php:67 www/pm/add_task.php:74 www/pm/add_task.php:81
 #: www/pm/add_task.php:88 www/pm/add_task.php:95 www/pm/add_task.php:110
@@ -392,10 +392,10 @@ msgstr "檔案名"
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:101
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
-#: www/snippet/submit.php:104 www/snippet/submit.php:108
-#: www/snippet/submit.php:113 www/snippet/submit.php:117
-#: www/snippet/submit.php:123 www/snippet/submit.php:129
-#: www/snippet/submit.php:136 www/snippet/submit.php:140
+#: www/snippet/submit.php:105 www/snippet/submit.php:109
+#: www/snippet/submit.php:114 www/snippet/submit.php:118
+#: www/snippet/submit.php:124 www/snippet/submit.php:130
+#: www/snippet/submit.php:137 www/snippet/submit.php:141
 #: www/softwaremap/tag_cloud.php:144 www/softwaremap/tag_cloud.php:164
 #: www/softwaremap/trove_list.php:81 www/softwaremap/trove_list.php:219
 #: www/softwaremap/trove_list.php:320 www/softwaremap/trove_list.php:324
@@ -828,7 +828,7 @@ msgstr ""
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:101
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
-#: www/snippet/download.php:45 www/survey/admin/question.php:64
+#: www/snippet/download.php:47 www/survey/admin/question.php:64
 #: www/survey/admin/question.php:66 www/survey/admin/show_csv.php:80
 #: www/survey/admin/show_csv.php:82 www/survey/admin/show_results.php:76
 #: www/survey/admin/show_results.php:80 www/survey/admin/show_results.php:91
@@ -911,8 +911,8 @@ msgstr ""
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:62
 #: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:55
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:46
-#: www/snippet/package.php:151 www/snippet/snippet_utils.php:208
-#: www/snippet/snippet_utils.php:242 www/snippet/submit.php:108
+#: www/snippet/package.php:151 www/snippet/snippet_utils.php:196
+#: www/snippet/snippet_utils.php:230 www/snippet/submit.php:109
 msgid "Description"
 msgstr "說明"
 
@@ -1148,7 +1148,7 @@ msgstr ""
 #: plugins/oauthconsumer/www/providers.php:32 www/admin/admin_table.php:323
 #: www/admin/responses_admin.php:45 www/admin/responses_admin.php:92
 #: www/admin/trove/trove_cat_list.php:52 www/frs/admin/showreleases.php:111
-#: www/people/skills_utils.php:45 www/people/skills_utils.php:103
+#: www/people/skills_utils.php:46 www/people/skills_utils.php:104
 #: www/project/admin/editimages.php:262 www/project/admin/editimages.php:293
 #: www/survey/include/SurveyHTML.class.php:319
 #: www/survey/include/SurveyHTML.class.php:368
@@ -1282,13 +1282,13 @@ msgstr ""
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:214
 #: www/account/index.php:242 www/account/register.php:171
 #: www/people/editjob.php:52 www/people/editjob.php:74
-#: www/people/editprofile.php:106 www/people/people_utils.php:435
-#: www/people/skills_utils.php:49 www/pm/admin/index.php:190
+#: www/people/editprofile.php:107 www/people/people_utils.php:436
+#: www/people/skills_utils.php:50 www/pm/admin/index.php:190
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:61
 #: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:54
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:46
 #: www/snippet/browse.php:85 www/snippet/package.php:147
-#: www/snippet/snippet_utils.php:156 www/snippet/submit.php:104
+#: www/snippet/snippet_utils.php:144 www/snippet/submit.php:105
 msgid "Title"
 msgstr "標題"
 
@@ -1307,7 +1307,7 @@ msgstr "標題"
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:55
 #: www/search/include/renderers/ForumsHtmlSearchRenderer.class.php:48
 #: www/snippet/detail.php:66 www/snippet/detail.php:155
-#: www/snippet/snippet_utils.php:157
+#: www/snippet/snippet_utils.php:145
 msgid "Author"
 msgstr "作者"
 
@@ -1324,7 +1324,7 @@ msgstr "姓氏："
 #: common/include/Group.class.php:793
 #: common/tracker/ArtifactExtraField.class.php:351
 #: common/tracker/include/ArtifactTypeHtml.class.php:335
-#: common/tracker/views/form-addextrafieldoption.php:109
+#: common/tracker/views/form-addextrafieldoption.php:111
 #: common/tracker/views/form-addextrafield.php:132
 #: common/tracker/views/form-updateextrafieldelement.php:65
 #: common/widget/Widget_ProjectLatestDocuments.class.php:76
@@ -1452,7 +1452,7 @@ msgstr ""
 #: www/export/tracker.php:107 www/forum/index.php:90 www/forum/message.php:127
 #: www/forum/myforums.php:152 www/frs/index.php:175 www/frs/index.php:234
 #: www/include/html.php:1079 www/news/news_utils.php:149
-#: www/news/news_utils.php:269 www/people/people_utils.php:456
+#: www/news/news_utils.php:269 www/people/people_utils.php:457
 #: www/people/viewjob.php:77 www/pm/browse_task.php:264
 #: www/pm/browse_task.php:274 www/pm/include/ProjectTaskHTML.class.php:122
 #: www/pm/include/ProjectTaskHTML.class.php:175
@@ -1700,8 +1700,8 @@ msgstr ""
 #: common/docman/views/reporting.php:92
 #: common/tracker/include/ArtifactTypeHtml.class.php:333
 #: www/activity/index.php:180 www/frs/reporting/downloads.php:109
-#: www/people/editprofile.php:278 www/people/skills_utils.php:50
-#: www/people/skills_utils.php:154 www/pm/add_task.php:95
+#: www/people/editprofile.php:279 www/people/skills_utils.php:51
+#: www/people/skills_utils.php:155 www/pm/add_task.php:95
 #: www/pm/browse_task.php:126 www/pm/browse_task.php:232
 #: www/pm/detail_task.php:86 www/pm/ganttpage.php:166 www/pm/mod_task.php:146
 #: www/project/stats/index.php:107 www/reporting/groupadded.php:66
@@ -1731,10 +1731,10 @@ msgstr "開啟日期"
 #: common/tracker/actions/detail.php:104 common/tracker/actions/detail.php:114
 #: common/tracker/actions/detail.php:126 common/tracker/actions/detail.php:150
 #: common/tracker/actions/detail.php:172 common/tracker/actions/detail.php:179
-#: common/tracker/actions/format_csv.php:69
-#: common/tracker/actions/format_csv.php:74
-#: common/tracker/actions/format_csv.php:87
-#: common/tracker/actions/format_csv.php:91
+#: common/tracker/actions/format_csv.php:70
+#: common/tracker/actions/format_csv.php:85
+#: common/tracker/actions/format_csv.php:107
+#: common/tracker/actions/format_csv.php:111
 #: common/tracker/actions/mod-limited.php:103
 #: common/tracker/actions/mod-limited.php:113
 #: common/tracker/actions/mod-limited.php:119
@@ -1767,7 +1767,7 @@ msgstr "開啟日期"
 #: common/tracker/include/build_submission_form.php:106
 #: common/tracker/views/form-addcanned.php:69
 #: common/tracker/views/form-addcanned.php:74
-#: common/tracker/views/form-addextrafieldoption.php:103
+#: common/tracker/views/form-addextrafieldoption.php:104
 #: common/tracker/views/form-addextrafield.php:115
 #: common/tracker/views/form-addextrafield.php:119
 #: common/tracker/views/form-addextrafield.php:124
@@ -1901,9 +1901,9 @@ msgstr "開啟日期"
 #: www/my/bookmark_edit.php:59 www/my/bookmark_edit.php:65
 #: www/my/diary.php:183 www/my/diary.php:187 www/news/admin/index.php:125
 #: www/people/admin/index.php:103 www/people/admin/index.php:137
-#: www/people/createjob.php:52 www/people/createjob.php:55
+#: www/people/createjob.php:53 www/people/createjob.php:56
 #: www/people/editjob.php:170 www/people/editjob.php:173
-#: www/people/editprofile.php:241 www/pm/admin/index.php:214
+#: www/people/editprofile.php:242 www/pm/admin/index.php:214
 #: www/pm/admin/index.php:293 www/pm/admin/index.php:323
 #: www/pm/admin/index.php:333 www/pm/admin/index.php:343
 #: www/pm/format_csv.php:66 www/pm/format_csv.php:71 www/pm/format_csv.php:76
@@ -1941,16 +1941,16 @@ msgstr "開啟日期"
 #: www/reporting/usertime.php:95 www/reporting/usertime.php:96
 #: www/sendmessage.php:150 www/sendmessage.php:161 www/sendmessage.php:172
 #: www/sendmessage.php:176 www/snippet/add_snippet_to_package.php:127
-#: www/snippet/addversion.php:94 www/snippet/addversion.php:98
-#: www/snippet/addversion.php:102 www/snippet/addversion.php:217
-#: www/snippet/addversion.php:221 www/snippet/index.php:64
+#: www/snippet/addversion.php:95 www/snippet/addversion.php:99
+#: www/snippet/addversion.php:103 www/snippet/addversion.php:218
+#: www/snippet/addversion.php:222 www/snippet/index.php:64
 #: www/snippet/index.php:81 www/snippet/package.php:147
 #: www/snippet/package.php:151 www/snippet/package.php:156
-#: www/snippet/package.php:169 www/snippet/snippet_utils.php:199
-#: www/snippet/snippet_utils.php:203 www/snippet/snippet_utils.php:208
-#: www/snippet/snippet_utils.php:229 www/snippet/snippet_utils.php:231
-#: www/snippet/snippet_utils.php:235 www/snippet/snippet_utils.php:237
-#: www/snippet/snippet_utils.php:242
+#: www/snippet/package.php:169 www/snippet/snippet_utils.php:187
+#: www/snippet/snippet_utils.php:191 www/snippet/snippet_utils.php:196
+#: www/snippet/snippet_utils.php:217 www/snippet/snippet_utils.php:219
+#: www/snippet/snippet_utils.php:223 www/snippet/snippet_utils.php:225
+#: www/snippet/snippet_utils.php:230
 #: www/survey/include/SurveyHTML.class.php:137
 #: www/survey/include/SurveyHTML.class.php:139
 #: www/survey/include/SurveyHTML.class.php:198
@@ -1961,8 +1961,8 @@ msgstr ""
 #: common/docman/views/reporting.php:94
 #: common/tracker/include/ArtifactTypeHtml.class.php:334
 #: www/activity/index.php:181 www/frs/reporting/downloads.php:111
-#: www/people/editprofile.php:279 www/people/skills_utils.php:51
-#: www/people/skills_utils.php:155 www/pm/add_task.php:110
+#: www/people/editprofile.php:280 www/people/skills_utils.php:52
+#: www/people/skills_utils.php:156 www/pm/add_task.php:110
 #: www/pm/browse_task.php:127 www/pm/browse_task.php:234
 #: www/pm/detail_task.php:90 www/pm/ganttpage.php:167 www/pm/mod_task.php:160
 #: www/project/stats/index.php:108 www/reporting/groupadded.php:67
@@ -2126,7 +2126,7 @@ msgid "Your search is empty."
 msgstr ""
 
 #: common/docman/views/tree.php:64
-#: plugins/projects-hierarchy/view/home_project_link.php:47
+#: plugins/projects-hierarchy/view/home_project_link.php:64
 msgid "Child project"
 msgstr ""
 
@@ -2182,8 +2182,8 @@ msgstr "無法更新上層文章"
 #: www/frs/admin/deletepackage.php:74 www/frs/admin/deleterelease.php:76
 #: www/frs/admin/index.php:185 www/frs/admin/showreleases.php:114
 #: www/news/admin/index.php:131 www/people/people_utils.php:179
-#: www/people/people_utils.php:327 www/people/skills_utils.php:46
-#: www/people/skills_utils.php:104 www/project/admin/vhost.php:146
+#: www/people/people_utils.php:328 www/people/skills_utils.php:47
+#: www/people/skills_utils.php:105 www/project/admin/vhost.php:146
 #: www/reporting/timeadd.php:163 www/snippet/detail.php:67
 #: www/survey/include/SurveyHTML.class.php:321 www/tracker/admin/index.php:103
 #: www/tracker/admin/index.php:180
@@ -2358,7 +2358,7 @@ msgstr "發佈"
 #: www/admin/vhost.php:183 www/forum/admin/index.php:163
 #: www/frs/admin/editrelease.php:350 www/frs/admin/index.php:182
 #: www/mail/admin/index.php:228 www/mail/admin/index.php:281
-#: www/people/people_utils.php:178 www/people/people_utils.php:326
+#: www/people/people_utils.php:178 www/people/people_utils.php:327
 #: www/pm/admin/index.php:352 www/pm/calendar.php:289
 #: www/project/admin/database.php:230 www/project/admin/index.php:289
 #: www/project/admin/tools.php:305 www/reporting/timecategory.php:99
@@ -2651,7 +2651,7 @@ msgstr "主題"
 #: www/admin/admin_table.php:58 www/admin/admin_table.php:163
 #: www/admin/admin_table.php:222 www/forum/admin/index.php:415
 #: www/forum/monitor.php:65 www/my/rmproject.php:96
-#: www/people/editprofile.php:157 www/people/editprofile.php:215
+#: www/people/editprofile.php:158 www/people/editprofile.php:216
 #: www/pm/mod_task.php:290 www/register/index.php:315
 #: www/reporting/timeadd.php:183 www/tracker/admin/index.php:103
 #: www/tracker/admin/index.php:180
@@ -3159,9 +3159,9 @@ msgstr "軟體地圖"
 #: plugins/mantisbt/view/admin/editVersion.php:61
 #: plugins/mantisbt/view/admin/viewVersion.php:49
 #: plugins/mantisbt/view/roadmap.php:100 plugins/mantisbt/view/roadmap.php:149
-#: www/new/index.php:98 www/snippet/addversion.php:94
-#: www/snippet/addversion.php:217 www/snippet/package.php:169
-#: www/snippet/submit.php:136
+#: www/new/index.php:98 www/snippet/addversion.php:95
+#: www/snippet/addversion.php:218 www/snippet/package.php:169
+#: www/snippet/submit.php:137
 msgid "Version"
 msgstr "版本"
 
@@ -5271,7 +5271,7 @@ msgstr ""
 #: common/tracker/include/build_submission_form.php:54
 #: common/tracker/include/build_submission_form.php:118
 #: common/tracker/views/form-addcanned.php:78
-#: common/tracker/views/form-addextrafieldoption.php:112
+#: common/tracker/views/form-addextrafieldoption.php:114
 #: common/tracker/views/form-addextrafield.php:151
 #: common/tracker/views/form-adminroadmap.php:234
 #: common/tracker/views/form-clonetracker.php:59
@@ -5308,8 +5308,8 @@ msgstr ""
 #: www/project/admin/editimages.php:235 www/project/admin/roledelete.php:93
 #: www/project/admin/roleedit.php:303 www/project/request.php:70
 #: www/register/index.php:314 www/snippet/add_snippet_to_package.php:166
-#: www/snippet/addversion.php:109 www/snippet/addversion.php:228
-#: www/snippet/package.php:176 www/snippet/submit.php:144
+#: www/snippet/addversion.php:110 www/snippet/addversion.php:229
+#: www/snippet/package.php:176 www/snippet/submit.php:145
 #: www/survey/include/SurveyHTML.class.php:559 www/tracker/roadmap.php:444
 msgid "Submit"
 msgstr "提交"
@@ -5836,7 +5836,7 @@ msgstr "刪除樣板"
 #: plugins/mailman/www/admin/deletelist.php:64 www/admin/groupdelete.php:59
 #: www/admin/groupdelete.php:63 www/admin/groupdelete.php:67
 #: www/mail/admin/deletelist.php:67 www/mail/admin/deletelist.php:73
-#: www/people/editprofile.php:199 www/project/admin/roledelete.php:83
+#: www/people/editprofile.php:200 www/project/admin/roledelete.php:83
 msgid "Confirm Delete"
 msgstr "確認刪除"
 
@@ -5933,7 +5933,7 @@ msgstr ""
 #: common/tracker/actions/mod-limited.php:226
 #: common/tracker/actions/mod.php:297 common/tracker/actions/mod.php:298
 #: common/tracker/include/ArtifactHtml.class.php:215
-#: www/snippet/addversion.php:98 www/snippet/addversion.php:221
+#: www/snippet/addversion.php:99 www/snippet/addversion.php:222
 msgid "Changes"
 msgstr "異動"
 
@@ -5947,29 +5947,29 @@ msgstr "更新"
 msgid "CSV Format"
 msgstr "更新"
 
-#: common/tracker/actions/format_csv.php:69
-#: common/tracker/actions/format_csv.php:87 www/pm/format_csv.php:71
+#: common/tracker/actions/format_csv.php:70
+#: common/tracker/actions/format_csv.php:107 www/pm/format_csv.php:71
 #, fuzzy
 msgid "Separator"
 msgstr "建立"
 
-#: common/tracker/actions/format_csv.php:70 www/pm/format_csv.php:72
+#: common/tracker/actions/format_csv.php:75 www/pm/format_csv.php:72
 msgid "Comma (char: “,”)"
 msgstr ""
 
-#: common/tracker/actions/format_csv.php:71 www/pm/format_csv.php:73
+#: common/tracker/actions/format_csv.php:79 www/pm/format_csv.php:73
 msgid "Semi-colon (char: “;”)"
 msgstr ""
 
-#: common/tracker/actions/format_csv.php:74 www/pm/format_csv.php:76
+#: common/tracker/actions/format_csv.php:85 www/pm/format_csv.php:76
 msgid "Header"
 msgstr ""
 
-#: common/tracker/actions/format_csv.php:75 www/pm/format_csv.php:77
+#: common/tracker/actions/format_csv.php:90 www/pm/format_csv.php:77
 msgid "Included"
 msgstr ""
 
-#: common/tracker/actions/format_csv.php:76
+#: common/tracker/actions/format_csv.php:94
 #: common/tracker/include/ArtifactTypeHtml.class.php:550
 #: common/tracker/include/ArtifactTypeHtml.class.php:595
 #: common/tracker/include/ArtifactTypeHtml.class.php:762
@@ -5982,22 +5982,22 @@ msgstr ""
 msgid "None"
 msgstr "無"
 
-#: common/tracker/actions/format_csv.php:84
+#: common/tracker/actions/format_csv.php:104
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:92
 #: plugins/mantisbt/view/viewNote.php:42 www/pm/csv.php:93
 #: www/pm/format_csv.php:86
 msgid "Notes"
 msgstr "備註"
 
-#: common/tracker/actions/format_csv.php:88 www/pm/format_csv.php:94
+#: common/tracker/actions/format_csv.php:108 www/pm/format_csv.php:94
 msgid "Some international versions of Microsoft Excel use “;” instead of “,”."
 msgstr ""
 
-#: common/tracker/actions/format_csv.php:91 www/pm/format_csv.php:97
+#: common/tracker/actions/format_csv.php:111 www/pm/format_csv.php:97
 msgid "Headers Included or not"
 msgstr ""
 
-#: common/tracker/actions/format_csv.php:92 www/pm/format_csv.php:98
+#: common/tracker/actions/format_csv.php:112 www/pm/format_csv.php:98
 msgid "Add a line with the name of the fields at the first line."
 msgstr ""
 
@@ -6937,7 +6937,7 @@ msgstr ""
 msgid "You have not defined any elements."
 msgstr "您沒有定義任何的組成元件"
 
-#: common/tracker/views/form-addextrafieldoption.php:103
+#: common/tracker/views/form-addextrafieldoption.php:104
 msgid "Add New Element"
 msgstr "新增新組成元件"
 
@@ -6954,8 +6954,8 @@ msgstr "訂製欄位定義"
 #: plugins/mantisbt/view/admin/editVersion.php:64
 #: plugins/mantisbt/view/admin/viewVersion.php:52 www/admin/database.php:101
 #: www/admin/massmail.php:135 www/frs/index.php:209
-#: www/people/editprofile.php:106 www/people/editprofile.php:277
-#: www/people/skills_utils.php:48 www/people/skills_utils.php:153
+#: www/people/editprofile.php:107 www/people/editprofile.php:278
+#: www/people/skills_utils.php:49 www/people/skills_utils.php:154
 #: www/project/stats/index.php:106 www/reporting/groupadded.php:65
 #: www/reporting/groupcum.php:65 www/reporting/projectact.php:71
 #: www/reporting/projecttime.php:80 www/reporting/projecttime.php:93
@@ -6964,7 +6964,7 @@ msgstr "訂製欄位定義"
 #: www/reporting/useradded.php:64 www/reporting/usercum.php:64
 #: www/reporting/usertime.php:94 www/reporting/usertime.php:106
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:45
-#: www/snippet/snippet_utils.php:229
+#: www/snippet/snippet_utils.php:217
 #: www/survey/include/SurveyHTML.class.php:251
 #: www/tracker/reporting/index.php:130
 msgid "Type"
@@ -7146,7 +7146,7 @@ msgstr "您確定要刪除這個任務嗎？"
 #: www/admin/approve-pending.php:162 www/admin/groupedit.php:161
 #: www/admin/responses_admin.php:50 www/forum/admin/index.php:224
 #: www/mail/admin/index.php:190 www/mail/admin/index.php:221
-#: www/people/editprofile.php:244 www/survey/include/SurveyHTML.class.php:202
+#: www/people/editprofile.php:245 www/survey/include/SurveyHTML.class.php:202
 #: www/survey/include/SurveyHTML.class.php:420
 msgid "Yes"
 msgstr "是"
@@ -10054,7 +10054,7 @@ msgstr "%1$s 帳號註冊"
 
 #: plugins/globaldashboard/www/admin/manage_accounts.php:80
 #: plugins/mantisbt/view/admin/viewVersion.php:53 www/admin/pluginman.php:138
-#: www/people/people_utils.php:160 www/people/people_utils.php:304
+#: www/people/people_utils.php:160 www/people/people_utils.php:305
 #: www/project/admin/users.php:303 www/project/admin/users.php:377
 #: www/project/admin/users.php:437 www/project/admin/users.php:461
 msgid "Action"
@@ -10131,7 +10131,7 @@ msgstr "您確定要刪除這個自訂類型？"
 #: plugins/projects-hierarchy/view/admin_project_link.php:81
 #: www/admin/groupedit.php:160 www/forum/admin/index.php:225
 #: www/mail/admin/index.php:191 www/mail/admin/index.php:222
-#: www/people/editprofile.php:243 www/survey/include/SurveyHTML.class.php:203
+#: www/people/editprofile.php:244 www/survey/include/SurveyHTML.class.php:203
 #: www/survey/include/SurveyHTML.class.php:422
 msgid "No"
 msgstr "否"
@@ -11732,16 +11732,16 @@ msgstr ""
 #: plugins/mantisbt/view/admin/viewCategorie.php:49
 #: plugins/mantisbt/view/editIssue.php:88
 #: plugins/mantisbt/view/viewIssue.php:57
-#: plugins/mantisbt/view/viewIssues.php:218 www/people/createjob.php:49
+#: plugins/mantisbt/view/viewIssues.php:218 www/people/createjob.php:50
 #: www/people/editjob.php:52 www/people/editjob.php:74
-#: www/people/editjob.php:164 www/people/people_utils.php:355
-#: www/people/people_utils.php:436 www/pm/add_task.php:50
+#: www/people/editjob.php:164 www/people/people_utils.php:356
+#: www/people/people_utils.php:437 www/pm/add_task.php:50
 #: www/pm/browse_task.php:160 www/pm/browse_task.php:238
 #: www/pm/browse_task.php:369 www/pm/detail_task.php:52
 #: www/pm/ganttpage.php:183 www/pm/mod_task.php:61 www/pm/mod_task.php:268
 #: www/reporting/timeadd.php:144 www/snippet/package.php:162
-#: www/snippet/snippet_utils.php:199 www/snippet/snippet_utils.php:231
-#: www/snippet/submit.php:129
+#: www/snippet/snippet_utils.php:187 www/snippet/snippet_utils.php:219
+#: www/snippet/submit.php:130
 msgid "Category"
 msgstr "類別"
 
@@ -13520,17 +13520,17 @@ msgstr "搜尋在"
 msgid "Disable hierarchical browsing"
 msgstr "搜尋在"
 
-#: plugins/projects-hierarchy/view/home_project_link.php:33
+#: plugins/projects-hierarchy/view/home_project_link.php:50
 msgid "Linked projects"
 msgstr ""
 
-#: plugins/projects-hierarchy/view/home_project_link.php:37
+#: plugins/projects-hierarchy/view/home_project_link.php:54
 #, fuzzy
 msgid "Parent Project"
 msgstr "私人群組"
 
-#: plugins/projects-hierarchy/view/home_project_link.php:37
-#: plugins/projects-hierarchy/view/home_project_link.php:47
+#: plugins/projects-hierarchy/view/home_project_link.php:54
+#: plugins/projects-hierarchy/view/home_project_link.php:64
 #, fuzzy
 msgid "Direct link to project"
 msgstr "搜尋整個的專案"
@@ -15013,8 +15013,8 @@ msgid "Last Name:"
 msgstr "姓氏："
 
 #: www/account/index.php:174 www/snippet/package.php:156
-#: www/snippet/snippet_utils.php:203 www/snippet/snippet_utils.php:237
-#: www/snippet/submit.php:123 www/stats/i18n.php:34
+#: www/snippet/snippet_utils.php:191 www/snippet/snippet_utils.php:225
+#: www/snippet/submit.php:124 www/stats/i18n.php:34
 msgid "Language"
 msgstr "語言"
 
@@ -15894,8 +15894,8 @@ msgstr "Unix帳號"
 msgid "Public?"
 msgstr "公開？"
 
-#: www/admin/grouplist.php:72 www/snippet/snippet_utils.php:235
-#: www/snippet/submit.php:117
+#: www/admin/grouplist.php:72 www/snippet/snippet_utils.php:223
+#: www/snippet/submit.php:118
 msgid "License"
 msgstr "授權方式"
 
@@ -17703,7 +17703,7 @@ msgid "Package name"
 msgstr "分類名稱"
 
 #: www/frs/admin/index.php:157 www/frs/admin/index.php:208
-#: www/people/editprofile.php:241
+#: www/people/editprofile.php:242
 msgid "Publicly Viewable"
 msgstr "是否公開瀏覽"
 
@@ -19408,7 +19408,7 @@ msgstr "增加分類"
 msgid "Add Job Skills"
 msgstr "增加技能"
 
-#: www/people/createjob.php:44
+#: www/people/createjob.php:45
 msgid ""
 "Start by filling in the fields below. When you click continue, you will be "
 "shown a list of skills and experience levels that this job requires."
@@ -19416,17 +19416,17 @@ msgstr ""
 "首先填寫以下各項。當點擊繼續時，將會展示給您這個工作所需要的技能和經驗登記列"
 "表。"
 
-#: www/people/createjob.php:52 www/people/editjob.php:170
+#: www/people/createjob.php:53 www/people/editjob.php:170
 #: www/project/admin/index.php:139
 msgid "Short Description"
 msgstr "簡短說明"
 
-#: www/people/createjob.php:55 www/people/editjob.php:173
+#: www/people/createjob.php:56 www/people/editjob.php:173
 #: www/people/viewjob.php:84
 msgid "Long Description"
 msgstr "詳細說明"
 
-#: www/people/createjob.php:58
+#: www/people/createjob.php:59
 msgid "Continue >>"
 msgstr "繼續 >>"
 
@@ -19449,8 +19449,8 @@ msgid "Job updated successfully"
 msgstr "工作更新成功"
 
 #: www/people/editjob.php:91 www/people/people_utils.php:127
-#: www/people/people_utils.php:157 www/people/people_utils.php:239
-#: www/people/people_utils.php:301
+#: www/people/people_utils.php:157 www/people/people_utils.php:240
+#: www/people/people_utils.php:302
 msgid "Skill"
 msgstr "技術"
 
@@ -19541,130 +19541,130 @@ msgstr "更新錯誤"
 msgid "User updated successfully"
 msgstr "會員更新成功"
 
-#: www/people/editprofile.php:99
+#: www/people/editprofile.php:100
 #, fuzzy, php-format
 msgid "Failed to add the skill %s"
 msgstr "增加技能失敗"
 
-#: www/people/editprofile.php:101
+#: www/people/editprofile.php:102
 msgid "Skill added successfully"
 msgstr "增加技能成功"
 
-#: www/people/editprofile.php:106
+#: www/people/editprofile.php:107
 #, fuzzy
 msgid "Start Month"
 msgstr "開啟日期"
 
-#: www/people/editprofile.php:106
+#: www/people/editprofile.php:107
 #, fuzzy
 msgid "Start Year"
 msgstr "開啟日期"
 
-#: www/people/editprofile.php:106
+#: www/people/editprofile.php:107
 #, fuzzy
 msgid "End Month"
 msgstr "月"
 
-#: www/people/editprofile.php:106
+#: www/people/editprofile.php:107
 #, fuzzy
 msgid "End Year"
 msgstr "結束日期"
 
-#: www/people/editprofile.php:106 www/people/skills_utils.php:52
+#: www/people/editprofile.php:107 www/people/skills_utils.php:53
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:47
 msgid "Keywords"
 msgstr "關鍵字"
 
-#: www/people/editprofile.php:124
+#: www/people/editprofile.php:125
 msgid "No skills selected to edit."
 msgstr "沒有選擇技能進行編輯"
 
-#: www/people/editprofile.php:141
+#: www/people/editprofile.php:142
 #, fuzzy, php-format
 msgid "Failed to update skills: %s"
 msgstr "更新技能失敗"
 
-#: www/people/editprofile.php:144
+#: www/people/editprofile.php:145
 #, fuzzy
 msgid "Skill updated"
 msgid_plural "Skills updated"
 msgstr[0] "文件更新"
 msgstr[1] "文件更新"
 
-#: www/people/editprofile.php:149 www/people/editprofile.php:150
+#: www/people/editprofile.php:150 www/people/editprofile.php:151
 msgid "Edit Skills"
 msgstr "編輯技能"
 
-#: www/people/editprofile.php:151
+#: www/people/editprofile.php:152
 msgid "Change the required fields, and press “Done” at the bottom of the page"
 msgstr ""
 
-#: www/people/editprofile.php:156
+#: www/people/editprofile.php:157
 msgid "Done"
 msgstr "完成"
 
-#: www/people/editprofile.php:164
+#: www/people/editprofile.php:165
 msgid "Cancelled skills update"
 msgstr "取消技能的更新"
 
-#: www/people/editprofile.php:177
+#: www/people/editprofile.php:178
 msgid "No skills selected to delete."
 msgstr "沒有選擇技能進行刪除"
 
-#: www/people/editprofile.php:186
+#: www/people/editprofile.php:187
 #, fuzzy, php-format
 msgid "Failed to delete any skills: %s"
 msgstr "刪除技能失敗"
 
-#: www/people/editprofile.php:188
+#: www/people/editprofile.php:189
 #, fuzzy
 msgid "Skill deleted successfully"
 msgid_plural "Skills deleted successfully"
 msgstr[0] "工作技能刪除成功"
 msgstr[1] "工作技能刪除成功"
 
-#: www/people/editprofile.php:197
+#: www/people/editprofile.php:198
 msgid "Confirm skill delete"
 msgstr "確認刪除該技能"
 
-#: www/people/editprofile.php:200
+#: www/people/editprofile.php:201
 msgid "You are about to delete the following skill from the skills database:"
 msgid_plural ""
 "You are about to delete the following skills from the skills database:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: www/people/editprofile.php:205
+#: www/people/editprofile.php:206
 #, fuzzy
 msgid "This action cannot be undone."
 msgstr "這個動作無法在技能資料庫中完成。"
 
-#: www/people/editprofile.php:206
+#: www/people/editprofile.php:207
 msgid "Are you <strong>sure</strong> you wish to continue?"
 msgstr "您<strong>確定</strong> 您希望繼續？"
 
-#: www/people/editprofile.php:214
+#: www/people/editprofile.php:215
 msgid "Confirm"
 msgstr "確認"
 
-#: www/people/editprofile.php:224
+#: www/people/editprofile.php:225
 msgid "Skill deletion cancelled"
 msgstr "取消技能刪除"
 
-#: www/people/editprofile.php:227
+#: www/people/editprofile.php:228
 msgid "Edit Your Profile"
 msgstr "編輯您的個人能力"
 
-#: www/people/editprofile.php:233 www/people/skills_utils.php:121
-#: www/people/skills_utils.php:122 www/people/viewprofile.php:47
+#: www/people/editprofile.php:234 www/people/skills_utils.php:122
+#: www/people/skills_utils.php:123 www/people/viewprofile.php:47
 msgid "No Such User"
 msgstr "沒有這個會員"
 
-#: www/people/editprofile.php:237
+#: www/people/editprofile.php:238
 msgid "Edit Public Permissions"
 msgstr "編輯公共許可權"
 
-#: www/people/editprofile.php:239
+#: www/people/editprofile.php:240
 msgid ""
 "The following option determines if others can see your skills. If they "
 "cannot, you can still enter your skills."
@@ -19672,43 +19672,43 @@ msgstr ""
 "以下選項決定別人是否可以看見您的技能。就算他們不能看見您的技能，您也可以一樣"
 "的輸入您的技能。"
 
-#: www/people/editprofile.php:246
+#: www/people/editprofile.php:247
 msgid "Update Permissions"
 msgstr "更新許可權"
 
-#: www/people/editprofile.php:255
+#: www/people/editprofile.php:256
 msgid "No skill types in database (skills_data_types table)"
 msgstr "資料庫中沒有技能類型(skills_data_types table)"
 
-#: www/people/editprofile.php:271 www/people/people_utils.php:188
-#: www/people/people_utils.php:336
+#: www/people/editprofile.php:272 www/people/people_utils.php:188
+#: www/people/people_utils.php:337
 msgid "Add a new skill"
 msgstr "增加新技能"
 
-#: www/people/editprofile.php:272
+#: www/people/editprofile.php:273
 msgid ""
 "You can enter new skills you have acquired here. Please enter the start and "
 "finish dates as accurately as possible."
 msgstr "您可以輸入在這兒學到的新技能。請輸入儘量正確的開始和結束時間。"
 
-#: www/people/editprofile.php:273 www/reporting/timeadd.php:96
+#: www/people/editprofile.php:274 www/reporting/timeadd.php:96
 msgid "All fields are required!"
 msgstr "所有項都必須填寫！"
 
-#: www/people/editprofile.php:295 www/people/skills_utils.php:170
+#: www/people/editprofile.php:296 www/people/skills_utils.php:170
 #, fuzzy
 msgid "Title (max 100 characters)"
 msgstr "關鍵字（不多於255字元）"
 
-#: www/people/editprofile.php:302 www/people/skills_utils.php:177
+#: www/people/editprofile.php:303 www/people/skills_utils.php:177
 msgid "Keywords (max 255 characters)"
 msgstr "關鍵字（不多於255字元）"
 
-#: www/people/editprofile.php:308
+#: www/people/editprofile.php:309
 msgid "Add This Skill"
 msgstr "增加這個技能"
 
-#: www/people/editprofile.php:314
+#: www/people/editprofile.php:315
 msgid "Edit/Delete Your Skills"
 msgstr "編輯/刪除您的技能"
 
@@ -19787,18 +19787,22 @@ msgstr "加入到技能目錄"
 msgid "Error: skill already in your inventory"
 msgstr "錯誤 － 技能已經在您的目錄中"
 
+#: www/people/people_utils.php:114 www/people/people_utils.php:226
+msgid "You must be logged in first"
+msgstr "請先登入"
+
 #: www/people/people_utils.php:128 www/people/people_utils.php:158
-#: www/people/people_utils.php:240 www/people/people_utils.php:302
+#: www/people/people_utils.php:241 www/people/people_utils.php:303
 msgid "Level"
 msgstr "等級"
 
 #: www/people/people_utils.php:129 www/people/people_utils.php:159
-#: www/people/people_utils.php:241 www/people/people_utils.php:303
+#: www/people/people_utils.php:242 www/people/people_utils.php:304
 msgid "Experience"
 msgstr "經驗"
 
-#: www/people/people_utils.php:137 www/people/people_utils.php:248
-#: www/people/people_utils.php:313
+#: www/people/people_utils.php:137 www/people/people_utils.php:249
+#: www/people/people_utils.php:314
 msgid "No Skill Inventory Set Up"
 msgstr "沒有設定技能目錄"
 
@@ -19806,50 +19810,56 @@ msgstr "沒有設定技能目錄"
 msgid "No skill setup"
 msgstr ""
 
-#: www/people/people_utils.php:194 www/people/people_utils.php:344
+#: www/people/people_utils.php:194 www/people/people_utils.php:345
 msgid "Add Skill"
 msgstr "增加技能"
 
-#: www/people/people_utils.php:212
+#: www/people/people_utils.php:213
 #, fuzzy
 msgid "Error inserting into job inventory: "
 msgstr "錯誤 － 無法新增技能目錄"
 
-#: www/people/people_utils.php:216
+#: www/people/people_utils.php:217
 #, fuzzy
 msgid "Added to job inventory"
 msgstr "加入到技能目錄"
 
-#: www/people/people_utils.php:220
+#: www/people/people_utils.php:221
 #, fuzzy
-msgid "Error: job already in your inventory"
+msgid "Error: Skill already in your inventory."
 msgstr "錯誤 － 技能已經在您的目錄中"
 
-#: www/people/people_utils.php:225
-msgid "You must be logged in first"
-msgstr "請先登入"
-
-#: www/people/people_utils.php:277 www/people/people_utils.php:286
+#: www/people/people_utils.php:278 www/people/people_utils.php:287
 msgid "Invalid ID"
 msgstr "無效的編號"
 
-#: www/people/people_utils.php:392
+#: www/people/people_utils.php:393
 #, fuzzy
 msgid "No categories found."
 msgstr "沒有發現分類"
 
-#: www/people/people_utils.php:437
+#: www/people/people_utils.php:438
 msgid "Date Opened"
 msgstr "送出日期"
 
-#: www/people/people_utils.php:438
+#: www/people/people_utils.php:439
 #, php-format
 msgid "%s project"
 msgstr "%s 專案"
 
-#: www/people/people_utils.php:448
+#: www/people/people_utils.php:449
 msgid "None Found"
 msgstr "沒有發現"
+
+#: www/people/skills_utils.php:40
+#, fuzzy
+msgid "No skills listed."
+msgstr "沒有選擇技能進行編輯"
+
+#: www/people/skills_utils.php:41
+#, fuzzy
+msgid "This user has not entered any skills."
+msgstr "這個研發人員不屬於任何專案"
 
 #: www/people/viewjob.php:54
 #, fuzzy
@@ -20093,7 +20103,7 @@ msgid "Detail View"
 msgstr "詳細檢視"
 
 #: www/pm/browse_task.php:163 www/pm/ganttpage.php:185
-#: www/snippet/snippet_utils.php:130
+#: www/snippet/snippet_utils.php:118
 msgid "Browse"
 msgstr "瀏覽"
 
@@ -22239,7 +22249,7 @@ msgstr "您的 Email"
 msgid "Send Message"
 msgstr "傳送 Email"
 
-#: www/snippet/add_snippet_to_package.php:50 www/snippet/snippet_utils.php:131
+#: www/snippet/add_snippet_to_package.php:50 www/snippet/snippet_utils.php:119
 msgid "Submit A New Snippet"
 msgstr "上傳一個新的程式碼"
 
@@ -22251,7 +22261,7 @@ msgstr "錯誤 - snippet_package_version_id 錯誤"
 msgid "Error: Only the creator of a package version can add snippets to it."
 msgstr "錯誤 - 只有軟體包裝版本的建立者可以新增程式碼到其中"
 
-#: www/snippet/add_snippet_to_package.php:81 www/snippet/addversion.php:39
+#: www/snippet/add_snippet_to_package.php:81 www/snippet/addversion.php:40
 msgid "Error: snippet doesn't exist"
 msgstr "錯誤 - 程式碼不存在"
 
@@ -22265,18 +22275,18 @@ msgstr "回到新增頁面"
 msgid "Error: That snippet was already added to this package."
 msgstr "錯誤 - 那個程式碼已經新增到這個軟體包裝中"
 
-#: www/snippet/add_snippet_to_package.php:107 www/snippet/addversion.php:71
-#: www/snippet/submit.php:74
+#: www/snippet/add_snippet_to_package.php:107 www/snippet/addversion.php:72
+#: www/snippet/submit.php:75
 msgid "Error doing snippet version insert"
 msgstr "新增程式碼版本時發生錯誤！"
 
-#: www/snippet/add_snippet_to_package.php:109 www/snippet/addversion.php:74
+#: www/snippet/add_snippet_to_package.php:109 www/snippet/addversion.php:75
 msgid "Snippet Version Added Successfully."
 msgstr "程式碼版本新增成功"
 
-#: www/snippet/add_snippet_to_package.php:112 www/snippet/addversion.php:77
-#: www/snippet/addversion.php:198 www/snippet/package.php:123
-#: www/snippet/submit.php:81
+#: www/snippet/add_snippet_to_package.php:112 www/snippet/addversion.php:78
+#: www/snippet/addversion.php:199 www/snippet/package.php:123
+#: www/snippet/submit.php:82
 msgid "Error: Go back and fill in all the information"
 msgstr "錯誤 - 回上頁並且填入所有資訊"
 
@@ -22295,28 +22305,28 @@ msgstr ""
 msgid "Add This Snippet Version ID:"
 msgstr "新增這個程式碼版本編號："
 
-#: www/snippet/add_snippet_to_package.php:164 www/snippet/addversion.php:107
-#: www/snippet/addversion.php:226 www/snippet/package.php:174
-#: www/snippet/submit.php:144
+#: www/snippet/add_snippet_to_package.php:164 www/snippet/addversion.php:108
+#: www/snippet/addversion.php:227 www/snippet/package.php:174
+#: www/snippet/submit.php:145
 msgid "Make sure all info is complete and accurate"
 msgstr "請確認所有資訊是正確且完整的"
 
 #: www/snippet/add_snippet_to_package.php:183
-#: www/snippet/snippet_utils.php:164
+#: www/snippet/snippet_utils.php:152
 msgid "No Snippets Are In This Package Yet"
 msgstr "目前這個集合還沒有程式碼"
 
 #: www/snippet/add_snippet_to_package.php:185
-#: www/snippet/snippet_utils.php:151
+#: www/snippet/snippet_utils.php:139
 msgid "Snippets In This Package"
 msgstr "這個軟體包裝的程式碼"
 
-#: www/snippet/addversion.php:81 www/snippet/addversion.php:202
+#: www/snippet/addversion.php:82 www/snippet/addversion.php:203
 #, fuzzy
 msgid "New snippet version"
 msgstr "最新程式碼版本："
 
-#: www/snippet/addversion.php:84
+#: www/snippet/addversion.php:85
 msgid ""
 "If you have modified a version of a snippet and you feel it is significant "
 "enough to share with others, please do so."
@@ -22324,38 +22334,38 @@ msgstr ""
 "如果您已經修改一個片斷程式碼的一個版本，而且您感覺它夠重要來和其他人分享，請"
 "這麼做。"
 
-#: www/snippet/addversion.php:102 www/snippet/submit.php:140
+#: www/snippet/addversion.php:103 www/snippet/submit.php:141
 msgid "Paste the Code Here"
 msgstr "在這裡貼上程式碼"
 
-#: www/snippet/addversion.php:127
+#: www/snippet/addversion.php:128
 #, fuzzy
 msgid "Error: snippet_package doesn't exist"
 msgstr "錯誤, 錯誤 - 程式碼集合不存在"
 
-#: www/snippet/addversion.php:154 www/snippet/package.php:75
+#: www/snippet/addversion.php:155 www/snippet/package.php:75
 msgid "Error doing snippet package version insert"
 msgstr "插入程式碼集合版本時發生錯誤！"
 
-#: www/snippet/addversion.php:155
+#: www/snippet/addversion.php:156
 #, fuzzy
 msgid "New snippet package"
 msgstr "送出一個新的程式碼集合"
 
-#: www/snippet/addversion.php:160 www/snippet/package.php:82
+#: www/snippet/addversion.php:161 www/snippet/package.php:82
 msgid "Snippet Package Version Added Successfully."
 msgstr "程式碼集合版本新增成功"
 
-#: www/snippet/addversion.php:165
+#: www/snippet/addversion.php:166
 #, fuzzy
 msgid "Add snippet to package"
 msgstr "新增程式碼到這個集合"
 
-#: www/snippet/addversion.php:181 www/snippet/package.php:105
+#: www/snippet/addversion.php:182 www/snippet/package.php:105
 msgid "IMPORTANT!"
 msgstr "重要!"
 
-#: www/snippet/addversion.php:183 www/snippet/package.php:107
+#: www/snippet/addversion.php:184 www/snippet/package.php:107
 msgid ""
 "If a new window opened, use it to add snippets to your package. If a new "
 "window did not open, use the following link to add to your package BEFORE "
@@ -22364,13 +22374,13 @@ msgstr ""
 "如果一個新視窗開啟，使用它新增片斷程式碼至您的軟體封裝。如果一個新視窗沒有開"
 "啟，在您離開這個頁面之前使用下列連結來新增至您的軟體封裝。"
 
-#: www/snippet/addversion.php:186 www/snippet/package.php:87
+#: www/snippet/addversion.php:187 www/snippet/package.php:87
 #: www/snippet/package.php:109
 #, fuzzy
 msgid "Add snippets to package"
 msgstr "新增程式碼到這個集合"
 
-#: www/snippet/addversion.php:187 www/snippet/package.php:112
+#: www/snippet/addversion.php:188 www/snippet/package.php:112
 msgid ""
 "<strong>Browse the library</strong> to find the snippets you want to add, "
 "then add them using the new window link shown above."
@@ -22378,7 +22388,7 @@ msgstr ""
 "<strong>瀏覽函式庫</strong>是為了找尋您要新增的片斷程式碼，然後使用顯示在上面"
 "的新視窗連結新增它們。"
 
-#: www/snippet/addversion.php:207
+#: www/snippet/addversion.php:208
 msgid ""
 "If you have modified a version of a package and you feel it is significant "
 "enough to share with others, please do so."
@@ -22386,7 +22396,7 @@ msgstr ""
 "如果您已經修改一個軟體封裝的一個版本，而且您感覺它夠重要來和其他人分享，請這"
 "麼做。"
 
-#: www/snippet/addversion.php:236
+#: www/snippet/addversion.php:237
 #, fuzzy
 msgid "Error: was the URL or form mangled??"
 msgstr "錯誤, 錯誤 - 網址格式有誤"
@@ -22417,7 +22427,7 @@ msgid "No snippets found."
 msgstr "找不到程式碼."
 
 #: www/snippet/browse.php:84 www/snippet/detail.php:63
-#: www/snippet/snippet_utils.php:154
+#: www/snippet/snippet_utils.php:142
 msgid "Snippet ID"
 msgstr "程式碼編號"
 
@@ -22447,7 +22457,7 @@ msgstr "錯誤 - 未發現版本"
 msgid "Versions Of This Snippet:"
 msgstr "這個程式碼的版本："
 
-#: www/snippet/detail.php:64 www/snippet/snippet_utils.php:155
+#: www/snippet/detail.php:64 www/snippet/snippet_utils.php:143
 msgid "Download Version"
 msgstr "下載版本"
 
@@ -22581,11 +22591,11 @@ msgid ""
 "package."
 msgstr ""
 
-#: www/snippet/package.php:159 www/snippet/submit.php:125
+#: www/snippet/package.php:159 www/snippet/submit.php:126
 msgid "Suggest a Language"
 msgstr "建議新程式語言"
 
-#: www/snippet/package.php:165 www/snippet/submit.php:131
+#: www/snippet/package.php:165 www/snippet/submit.php:132
 msgid "Suggest a Category"
 msgstr "建議新類別"
 
@@ -22670,24 +22680,24 @@ msgstr "只用在網站中"
 msgid "Other Language"
 msgstr "其它程式語言"
 
-#: www/snippet/snippet_utils.php:132
+#: www/snippet/snippet_utils.php:120
 msgid "Create A Package"
 msgstr "建立一個集合"
 
-#: www/snippet/submit.php:59
+#: www/snippet/submit.php:60
 msgid "Error doing snippet insert"
 msgstr "新增程式碼時發生錯誤！"
 
-#: www/snippet/submit.php:61 www/snippet/submit.php:76
+#: www/snippet/submit.php:62 www/snippet/submit.php:77
 msgid "Snippet Added Successfully."
 msgstr "程式碼新增成功！"
 
-#: www/snippet/submit.php:85
+#: www/snippet/submit.php:86
 #, fuzzy
 msgid "Snippet submit"
 msgstr "程式碼"
 
-#: www/snippet/submit.php:89
+#: www/snippet/submit.php:90
 msgid ""
 "You can post a new code snippet and share it with other people around the "
 "world. Just fill in this information. <strong>Give a good description</"
@@ -22695,14 +22705,14 @@ msgid ""
 "understand it."
 msgstr ""
 
-#: www/snippet/submit.php:92
+#: www/snippet/submit.php:93
 msgid ""
 "<span class=\"important\">Note:</span> You can submit a new version of an "
 "existing snippet by browsing the library. You should only use this page if "
 "you are submitting an entirely new script or function."
 msgstr ""
 
-#: www/snippet/submit.php:113
+#: www/snippet/submit.php:114
 msgid "Script Type"
 msgstr "程式碼類型"
 
@@ -23597,6 +23607,10 @@ msgid "No User Name Provided"
 msgstr "帳號"
 
 #, fuzzy
+#~ msgid "Error: job already in your inventory"
+#~ msgstr "錯誤 － 技能已經在您的目錄中"
+
+#, fuzzy
 #~ msgid "Mandatory fields"
 #~ msgstr "管理訂製欄位"
 
@@ -23629,10 +23643,6 @@ msgstr "帳號"
 
 #~ msgid "Monitoring has been turned off"
 #~ msgstr "監視行為已被關閉"
-
-#, fuzzy
-#~ msgid "This user is not a member of any projects."
-#~ msgstr "這個研發人員不屬於任何專案"
 
 #~ msgid "Mailing List Name:"
 #~ msgstr "通信論壇名稱："

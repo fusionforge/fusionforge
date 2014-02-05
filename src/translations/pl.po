@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-04 14:35+0100\n"
+"POT-Creation-Date: 2014-02-05 18:20+0100\n"
 "PO-Revision-Date: 2009-10-06 16:20+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -329,8 +329,8 @@ msgstr ""
 #: plugins/oauthconsumer/www/get_access_token.php:139
 #: plugins/projectimport/common/ProjectImporter.class.php:124
 #: plugins/projectlabels/www/index.php:172
-#: plugins/projects-hierarchy/view/home_project_link.php:37
-#: plugins/projects-hierarchy/view/home_project_link.php:47
+#: plugins/projects-hierarchy/view/home_project_link.php:54
+#: plugins/projects-hierarchy/view/home_project_link.php:64
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:635
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:637
 #: plugins/scmhg/common/HgPlugin.class.php:647 www/account/index.php:198
@@ -355,7 +355,7 @@ msgstr ""
 #: www/include/user_profile.php:111 www/new/index.php:98
 #: www/news/submit.php:153 www/news/submit.php:155 www/news/submit.php:158
 #: www/people/admin/index.php:53 www/people/admin/index.php:66
-#: www/people/editprofile.php:233 www/people/skills_utils.php:121
+#: www/people/editprofile.php:234 www/people/skills_utils.php:122
 #: www/people/viewprofile.php:47 www/pm/add_task.php:50 www/pm/add_task.php:63
 #: www/pm/add_task.php:67 www/pm/add_task.php:74 www/pm/add_task.php:81
 #: www/pm/add_task.php:88 www/pm/add_task.php:95 www/pm/add_task.php:110
@@ -377,10 +377,10 @@ msgstr ""
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:101
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
-#: www/snippet/submit.php:104 www/snippet/submit.php:108
-#: www/snippet/submit.php:113 www/snippet/submit.php:117
-#: www/snippet/submit.php:123 www/snippet/submit.php:129
-#: www/snippet/submit.php:136 www/snippet/submit.php:140
+#: www/snippet/submit.php:105 www/snippet/submit.php:109
+#: www/snippet/submit.php:114 www/snippet/submit.php:118
+#: www/snippet/submit.php:124 www/snippet/submit.php:130
+#: www/snippet/submit.php:137 www/snippet/submit.php:141
 #: www/softwaremap/tag_cloud.php:144 www/softwaremap/tag_cloud.php:164
 #: www/softwaremap/trove_list.php:81 www/softwaremap/trove_list.php:219
 #: www/softwaremap/trove_list.php:320 www/softwaremap/trove_list.php:324
@@ -773,7 +773,7 @@ msgstr ""
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:101
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
-#: www/snippet/download.php:45 www/survey/admin/question.php:64
+#: www/snippet/download.php:47 www/survey/admin/question.php:64
 #: www/survey/admin/question.php:66 www/survey/admin/show_csv.php:80
 #: www/survey/admin/show_csv.php:82 www/survey/admin/show_results.php:76
 #: www/survey/admin/show_results.php:80 www/survey/admin/show_results.php:91
@@ -856,8 +856,8 @@ msgstr ""
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:62
 #: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:55
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:46
-#: www/snippet/package.php:151 www/snippet/snippet_utils.php:208
-#: www/snippet/snippet_utils.php:242 www/snippet/submit.php:108
+#: www/snippet/package.php:151 www/snippet/snippet_utils.php:196
+#: www/snippet/snippet_utils.php:230 www/snippet/submit.php:109
 msgid "Description"
 msgstr ""
 
@@ -1079,7 +1079,7 @@ msgstr ""
 #: plugins/oauthconsumer/www/providers.php:32 www/admin/admin_table.php:323
 #: www/admin/responses_admin.php:45 www/admin/responses_admin.php:92
 #: www/admin/trove/trove_cat_list.php:52 www/frs/admin/showreleases.php:111
-#: www/people/skills_utils.php:45 www/people/skills_utils.php:103
+#: www/people/skills_utils.php:46 www/people/skills_utils.php:104
 #: www/project/admin/editimages.php:262 www/project/admin/editimages.php:293
 #: www/survey/include/SurveyHTML.class.php:319
 #: www/survey/include/SurveyHTML.class.php:368
@@ -1202,13 +1202,13 @@ msgstr ""
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:214
 #: www/account/index.php:242 www/account/register.php:171
 #: www/people/editjob.php:52 www/people/editjob.php:74
-#: www/people/editprofile.php:106 www/people/people_utils.php:435
-#: www/people/skills_utils.php:49 www/pm/admin/index.php:190
+#: www/people/editprofile.php:107 www/people/people_utils.php:436
+#: www/people/skills_utils.php:50 www/pm/admin/index.php:190
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:61
 #: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:54
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:46
 #: www/snippet/browse.php:85 www/snippet/package.php:147
-#: www/snippet/snippet_utils.php:156 www/snippet/submit.php:104
+#: www/snippet/snippet_utils.php:144 www/snippet/submit.php:105
 msgid "Title"
 msgstr ""
 
@@ -1227,7 +1227,7 @@ msgstr ""
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:55
 #: www/search/include/renderers/ForumsHtmlSearchRenderer.class.php:48
 #: www/snippet/detail.php:66 www/snippet/detail.php:155
-#: www/snippet/snippet_utils.php:157
+#: www/snippet/snippet_utils.php:145
 msgid "Author"
 msgstr ""
 
@@ -1243,7 +1243,7 @@ msgstr ""
 #: common/include/Group.class.php:793
 #: common/tracker/ArtifactExtraField.class.php:351
 #: common/tracker/include/ArtifactTypeHtml.class.php:335
-#: common/tracker/views/form-addextrafieldoption.php:109
+#: common/tracker/views/form-addextrafieldoption.php:111
 #: common/tracker/views/form-addextrafield.php:132
 #: common/tracker/views/form-updateextrafieldelement.php:65
 #: common/widget/Widget_ProjectLatestDocuments.class.php:76
@@ -1368,7 +1368,7 @@ msgstr ""
 #: www/export/tracker.php:107 www/forum/index.php:90 www/forum/message.php:127
 #: www/forum/myforums.php:152 www/frs/index.php:175 www/frs/index.php:234
 #: www/include/html.php:1079 www/news/news_utils.php:149
-#: www/news/news_utils.php:269 www/people/people_utils.php:456
+#: www/news/news_utils.php:269 www/people/people_utils.php:457
 #: www/people/viewjob.php:77 www/pm/browse_task.php:264
 #: www/pm/browse_task.php:274 www/pm/include/ProjectTaskHTML.class.php:122
 #: www/pm/include/ProjectTaskHTML.class.php:175
@@ -1595,8 +1595,8 @@ msgstr ""
 #: common/docman/views/reporting.php:92
 #: common/tracker/include/ArtifactTypeHtml.class.php:333
 #: www/activity/index.php:180 www/frs/reporting/downloads.php:109
-#: www/people/editprofile.php:278 www/people/skills_utils.php:50
-#: www/people/skills_utils.php:154 www/pm/add_task.php:95
+#: www/people/editprofile.php:279 www/people/skills_utils.php:51
+#: www/people/skills_utils.php:155 www/pm/add_task.php:95
 #: www/pm/browse_task.php:126 www/pm/browse_task.php:232
 #: www/pm/detail_task.php:86 www/pm/ganttpage.php:166 www/pm/mod_task.php:146
 #: www/project/stats/index.php:107 www/reporting/groupadded.php:66
@@ -1626,10 +1626,10 @@ msgstr ""
 #: common/tracker/actions/detail.php:104 common/tracker/actions/detail.php:114
 #: common/tracker/actions/detail.php:126 common/tracker/actions/detail.php:150
 #: common/tracker/actions/detail.php:172 common/tracker/actions/detail.php:179
-#: common/tracker/actions/format_csv.php:69
-#: common/tracker/actions/format_csv.php:74
-#: common/tracker/actions/format_csv.php:87
-#: common/tracker/actions/format_csv.php:91
+#: common/tracker/actions/format_csv.php:70
+#: common/tracker/actions/format_csv.php:85
+#: common/tracker/actions/format_csv.php:107
+#: common/tracker/actions/format_csv.php:111
 #: common/tracker/actions/mod-limited.php:103
 #: common/tracker/actions/mod-limited.php:113
 #: common/tracker/actions/mod-limited.php:119
@@ -1662,7 +1662,7 @@ msgstr ""
 #: common/tracker/include/build_submission_form.php:106
 #: common/tracker/views/form-addcanned.php:69
 #: common/tracker/views/form-addcanned.php:74
-#: common/tracker/views/form-addextrafieldoption.php:103
+#: common/tracker/views/form-addextrafieldoption.php:104
 #: common/tracker/views/form-addextrafield.php:115
 #: common/tracker/views/form-addextrafield.php:119
 #: common/tracker/views/form-addextrafield.php:124
@@ -1796,9 +1796,9 @@ msgstr ""
 #: www/my/bookmark_edit.php:59 www/my/bookmark_edit.php:65
 #: www/my/diary.php:183 www/my/diary.php:187 www/news/admin/index.php:125
 #: www/people/admin/index.php:103 www/people/admin/index.php:137
-#: www/people/createjob.php:52 www/people/createjob.php:55
+#: www/people/createjob.php:53 www/people/createjob.php:56
 #: www/people/editjob.php:170 www/people/editjob.php:173
-#: www/people/editprofile.php:241 www/pm/admin/index.php:214
+#: www/people/editprofile.php:242 www/pm/admin/index.php:214
 #: www/pm/admin/index.php:293 www/pm/admin/index.php:323
 #: www/pm/admin/index.php:333 www/pm/admin/index.php:343
 #: www/pm/format_csv.php:66 www/pm/format_csv.php:71 www/pm/format_csv.php:76
@@ -1836,16 +1836,16 @@ msgstr ""
 #: www/reporting/usertime.php:95 www/reporting/usertime.php:96
 #: www/sendmessage.php:150 www/sendmessage.php:161 www/sendmessage.php:172
 #: www/sendmessage.php:176 www/snippet/add_snippet_to_package.php:127
-#: www/snippet/addversion.php:94 www/snippet/addversion.php:98
-#: www/snippet/addversion.php:102 www/snippet/addversion.php:217
-#: www/snippet/addversion.php:221 www/snippet/index.php:64
+#: www/snippet/addversion.php:95 www/snippet/addversion.php:99
+#: www/snippet/addversion.php:103 www/snippet/addversion.php:218
+#: www/snippet/addversion.php:222 www/snippet/index.php:64
 #: www/snippet/index.php:81 www/snippet/package.php:147
 #: www/snippet/package.php:151 www/snippet/package.php:156
-#: www/snippet/package.php:169 www/snippet/snippet_utils.php:199
-#: www/snippet/snippet_utils.php:203 www/snippet/snippet_utils.php:208
-#: www/snippet/snippet_utils.php:229 www/snippet/snippet_utils.php:231
-#: www/snippet/snippet_utils.php:235 www/snippet/snippet_utils.php:237
-#: www/snippet/snippet_utils.php:242
+#: www/snippet/package.php:169 www/snippet/snippet_utils.php:187
+#: www/snippet/snippet_utils.php:191 www/snippet/snippet_utils.php:196
+#: www/snippet/snippet_utils.php:217 www/snippet/snippet_utils.php:219
+#: www/snippet/snippet_utils.php:223 www/snippet/snippet_utils.php:225
+#: www/snippet/snippet_utils.php:230
 #: www/survey/include/SurveyHTML.class.php:137
 #: www/survey/include/SurveyHTML.class.php:139
 #: www/survey/include/SurveyHTML.class.php:198
@@ -1856,8 +1856,8 @@ msgstr ""
 #: common/docman/views/reporting.php:94
 #: common/tracker/include/ArtifactTypeHtml.class.php:334
 #: www/activity/index.php:181 www/frs/reporting/downloads.php:111
-#: www/people/editprofile.php:279 www/people/skills_utils.php:51
-#: www/people/skills_utils.php:155 www/pm/add_task.php:110
+#: www/people/editprofile.php:280 www/people/skills_utils.php:52
+#: www/people/skills_utils.php:156 www/pm/add_task.php:110
 #: www/pm/browse_task.php:127 www/pm/browse_task.php:234
 #: www/pm/detail_task.php:90 www/pm/ganttpage.php:167 www/pm/mod_task.php:160
 #: www/project/stats/index.php:108 www/reporting/groupadded.php:67
@@ -2013,7 +2013,7 @@ msgid "Your search is empty."
 msgstr ""
 
 #: common/docman/views/tree.php:64
-#: plugins/projects-hierarchy/view/home_project_link.php:47
+#: plugins/projects-hierarchy/view/home_project_link.php:64
 msgid "Child project"
 msgstr ""
 
@@ -2068,8 +2068,8 @@ msgstr ""
 #: www/frs/admin/deletepackage.php:74 www/frs/admin/deleterelease.php:76
 #: www/frs/admin/index.php:185 www/frs/admin/showreleases.php:114
 #: www/news/admin/index.php:131 www/people/people_utils.php:179
-#: www/people/people_utils.php:327 www/people/skills_utils.php:46
-#: www/people/skills_utils.php:104 www/project/admin/vhost.php:146
+#: www/people/people_utils.php:328 www/people/skills_utils.php:47
+#: www/people/skills_utils.php:105 www/project/admin/vhost.php:146
 #: www/reporting/timeadd.php:163 www/snippet/detail.php:67
 #: www/survey/include/SurveyHTML.class.php:321 www/tracker/admin/index.php:103
 #: www/tracker/admin/index.php:180
@@ -2237,7 +2237,7 @@ msgstr ""
 #: www/admin/vhost.php:183 www/forum/admin/index.php:163
 #: www/frs/admin/editrelease.php:350 www/frs/admin/index.php:182
 #: www/mail/admin/index.php:228 www/mail/admin/index.php:281
-#: www/people/people_utils.php:178 www/people/people_utils.php:326
+#: www/people/people_utils.php:178 www/people/people_utils.php:327
 #: www/pm/admin/index.php:352 www/pm/calendar.php:289
 #: www/project/admin/database.php:230 www/project/admin/index.php:289
 #: www/project/admin/tools.php:305 www/reporting/timecategory.php:99
@@ -2513,7 +2513,7 @@ msgstr ""
 #: www/admin/admin_table.php:58 www/admin/admin_table.php:163
 #: www/admin/admin_table.php:222 www/forum/admin/index.php:415
 #: www/forum/monitor.php:65 www/my/rmproject.php:96
-#: www/people/editprofile.php:157 www/people/editprofile.php:215
+#: www/people/editprofile.php:158 www/people/editprofile.php:216
 #: www/pm/mod_task.php:290 www/register/index.php:315
 #: www/reporting/timeadd.php:183 www/tracker/admin/index.php:103
 #: www/tracker/admin/index.php:180
@@ -2981,9 +2981,9 @@ msgstr ""
 #: plugins/mantisbt/view/admin/editVersion.php:61
 #: plugins/mantisbt/view/admin/viewVersion.php:49
 #: plugins/mantisbt/view/roadmap.php:100 plugins/mantisbt/view/roadmap.php:149
-#: www/new/index.php:98 www/snippet/addversion.php:94
-#: www/snippet/addversion.php:217 www/snippet/package.php:169
-#: www/snippet/submit.php:136
+#: www/new/index.php:98 www/snippet/addversion.php:95
+#: www/snippet/addversion.php:218 www/snippet/package.php:169
+#: www/snippet/submit.php:137
 msgid "Version"
 msgstr ""
 
@@ -4886,7 +4886,7 @@ msgstr ""
 #: common/tracker/include/build_submission_form.php:54
 #: common/tracker/include/build_submission_form.php:118
 #: common/tracker/views/form-addcanned.php:78
-#: common/tracker/views/form-addextrafieldoption.php:112
+#: common/tracker/views/form-addextrafieldoption.php:114
 #: common/tracker/views/form-addextrafield.php:151
 #: common/tracker/views/form-adminroadmap.php:234
 #: common/tracker/views/form-clonetracker.php:59
@@ -4923,8 +4923,8 @@ msgstr ""
 #: www/project/admin/editimages.php:235 www/project/admin/roledelete.php:93
 #: www/project/admin/roleedit.php:303 www/project/request.php:70
 #: www/register/index.php:314 www/snippet/add_snippet_to_package.php:166
-#: www/snippet/addversion.php:109 www/snippet/addversion.php:228
-#: www/snippet/package.php:176 www/snippet/submit.php:144
+#: www/snippet/addversion.php:110 www/snippet/addversion.php:229
+#: www/snippet/package.php:176 www/snippet/submit.php:145
 #: www/survey/include/SurveyHTML.class.php:559 www/tracker/roadmap.php:444
 msgid "Submit"
 msgstr ""
@@ -5420,7 +5420,7 @@ msgstr ""
 #: plugins/mailman/www/admin/deletelist.php:64 www/admin/groupdelete.php:59
 #: www/admin/groupdelete.php:63 www/admin/groupdelete.php:67
 #: www/mail/admin/deletelist.php:67 www/mail/admin/deletelist.php:73
-#: www/people/editprofile.php:199 www/project/admin/roledelete.php:83
+#: www/people/editprofile.php:200 www/project/admin/roledelete.php:83
 msgid "Confirm Delete"
 msgstr ""
 
@@ -5516,7 +5516,7 @@ msgstr ""
 #: common/tracker/actions/mod-limited.php:226
 #: common/tracker/actions/mod.php:297 common/tracker/actions/mod.php:298
 #: common/tracker/include/ArtifactHtml.class.php:215
-#: www/snippet/addversion.php:98 www/snippet/addversion.php:221
+#: www/snippet/addversion.php:99 www/snippet/addversion.php:222
 msgid "Changes"
 msgstr ""
 
@@ -5528,28 +5528,28 @@ msgstr ""
 msgid "CSV Format"
 msgstr ""
 
-#: common/tracker/actions/format_csv.php:69
-#: common/tracker/actions/format_csv.php:87 www/pm/format_csv.php:71
+#: common/tracker/actions/format_csv.php:70
+#: common/tracker/actions/format_csv.php:107 www/pm/format_csv.php:71
 msgid "Separator"
 msgstr ""
 
-#: common/tracker/actions/format_csv.php:70 www/pm/format_csv.php:72
+#: common/tracker/actions/format_csv.php:75 www/pm/format_csv.php:72
 msgid "Comma (char: “,”)"
 msgstr ""
 
-#: common/tracker/actions/format_csv.php:71 www/pm/format_csv.php:73
+#: common/tracker/actions/format_csv.php:79 www/pm/format_csv.php:73
 msgid "Semi-colon (char: “;”)"
 msgstr ""
 
-#: common/tracker/actions/format_csv.php:74 www/pm/format_csv.php:76
+#: common/tracker/actions/format_csv.php:85 www/pm/format_csv.php:76
 msgid "Header"
 msgstr ""
 
-#: common/tracker/actions/format_csv.php:75 www/pm/format_csv.php:77
+#: common/tracker/actions/format_csv.php:90 www/pm/format_csv.php:77
 msgid "Included"
 msgstr ""
 
-#: common/tracker/actions/format_csv.php:76
+#: common/tracker/actions/format_csv.php:94
 #: common/tracker/include/ArtifactTypeHtml.class.php:550
 #: common/tracker/include/ArtifactTypeHtml.class.php:595
 #: common/tracker/include/ArtifactTypeHtml.class.php:762
@@ -5562,22 +5562,22 @@ msgstr ""
 msgid "None"
 msgstr ""
 
-#: common/tracker/actions/format_csv.php:84
+#: common/tracker/actions/format_csv.php:104
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:92
 #: plugins/mantisbt/view/viewNote.php:42 www/pm/csv.php:93
 #: www/pm/format_csv.php:86
 msgid "Notes"
 msgstr ""
 
-#: common/tracker/actions/format_csv.php:88 www/pm/format_csv.php:94
+#: common/tracker/actions/format_csv.php:108 www/pm/format_csv.php:94
 msgid "Some international versions of Microsoft Excel use “;” instead of “,”."
 msgstr ""
 
-#: common/tracker/actions/format_csv.php:91 www/pm/format_csv.php:97
+#: common/tracker/actions/format_csv.php:111 www/pm/format_csv.php:97
 msgid "Headers Included or not"
 msgstr ""
 
-#: common/tracker/actions/format_csv.php:92 www/pm/format_csv.php:98
+#: common/tracker/actions/format_csv.php:112 www/pm/format_csv.php:98
 msgid "Add a line with the name of the fields at the first line."
 msgstr ""
 
@@ -6445,7 +6445,7 @@ msgstr ""
 msgid "You have not defined any elements."
 msgstr ""
 
-#: common/tracker/views/form-addextrafieldoption.php:103
+#: common/tracker/views/form-addextrafieldoption.php:104
 msgid "Add New Element"
 msgstr ""
 
@@ -6462,8 +6462,8 @@ msgstr ""
 #: plugins/mantisbt/view/admin/editVersion.php:64
 #: plugins/mantisbt/view/admin/viewVersion.php:52 www/admin/database.php:101
 #: www/admin/massmail.php:135 www/frs/index.php:209
-#: www/people/editprofile.php:106 www/people/editprofile.php:277
-#: www/people/skills_utils.php:48 www/people/skills_utils.php:153
+#: www/people/editprofile.php:107 www/people/editprofile.php:278
+#: www/people/skills_utils.php:49 www/people/skills_utils.php:154
 #: www/project/stats/index.php:106 www/reporting/groupadded.php:65
 #: www/reporting/groupcum.php:65 www/reporting/projectact.php:71
 #: www/reporting/projecttime.php:80 www/reporting/projecttime.php:93
@@ -6472,7 +6472,7 @@ msgstr ""
 #: www/reporting/useradded.php:64 www/reporting/usercum.php:64
 #: www/reporting/usertime.php:94 www/reporting/usertime.php:106
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:45
-#: www/snippet/snippet_utils.php:229
+#: www/snippet/snippet_utils.php:217
 #: www/survey/include/SurveyHTML.class.php:251
 #: www/tracker/reporting/index.php:130
 msgid "Type"
@@ -6638,7 +6638,7 @@ msgstr ""
 #: www/admin/approve-pending.php:162 www/admin/groupedit.php:161
 #: www/admin/responses_admin.php:50 www/forum/admin/index.php:224
 #: www/mail/admin/index.php:190 www/mail/admin/index.php:221
-#: www/people/editprofile.php:244 www/survey/include/SurveyHTML.class.php:202
+#: www/people/editprofile.php:245 www/survey/include/SurveyHTML.class.php:202
 #: www/survey/include/SurveyHTML.class.php:420
 msgid "Yes"
 msgstr ""
@@ -9317,7 +9317,7 @@ msgstr ""
 
 #: plugins/globaldashboard/www/admin/manage_accounts.php:80
 #: plugins/mantisbt/view/admin/viewVersion.php:53 www/admin/pluginman.php:138
-#: www/people/people_utils.php:160 www/people/people_utils.php:304
+#: www/people/people_utils.php:160 www/people/people_utils.php:305
 #: www/project/admin/users.php:303 www/project/admin/users.php:377
 #: www/project/admin/users.php:437 www/project/admin/users.php:461
 msgid "Action"
@@ -9386,7 +9386,7 @@ msgstr ""
 #: plugins/projects-hierarchy/view/admin_project_link.php:81
 #: www/admin/groupedit.php:160 www/forum/admin/index.php:225
 #: www/mail/admin/index.php:191 www/mail/admin/index.php:222
-#: www/people/editprofile.php:243 www/survey/include/SurveyHTML.class.php:203
+#: www/people/editprofile.php:244 www/survey/include/SurveyHTML.class.php:203
 #: www/survey/include/SurveyHTML.class.php:422
 msgid "No"
 msgstr ""
@@ -10824,16 +10824,16 @@ msgstr ""
 #: plugins/mantisbt/view/admin/viewCategorie.php:49
 #: plugins/mantisbt/view/editIssue.php:88
 #: plugins/mantisbt/view/viewIssue.php:57
-#: plugins/mantisbt/view/viewIssues.php:218 www/people/createjob.php:49
+#: plugins/mantisbt/view/viewIssues.php:218 www/people/createjob.php:50
 #: www/people/editjob.php:52 www/people/editjob.php:74
-#: www/people/editjob.php:164 www/people/people_utils.php:355
-#: www/people/people_utils.php:436 www/pm/add_task.php:50
+#: www/people/editjob.php:164 www/people/people_utils.php:356
+#: www/people/people_utils.php:437 www/pm/add_task.php:50
 #: www/pm/browse_task.php:160 www/pm/browse_task.php:238
 #: www/pm/browse_task.php:369 www/pm/detail_task.php:52
 #: www/pm/ganttpage.php:183 www/pm/mod_task.php:61 www/pm/mod_task.php:268
 #: www/reporting/timeadd.php:144 www/snippet/package.php:162
-#: www/snippet/snippet_utils.php:199 www/snippet/snippet_utils.php:231
-#: www/snippet/submit.php:129
+#: www/snippet/snippet_utils.php:187 www/snippet/snippet_utils.php:219
+#: www/snippet/submit.php:130
 msgid "Category"
 msgstr ""
 
@@ -12433,16 +12433,16 @@ msgstr ""
 msgid "Disable hierarchical browsing"
 msgstr ""
 
-#: plugins/projects-hierarchy/view/home_project_link.php:33
+#: plugins/projects-hierarchy/view/home_project_link.php:50
 msgid "Linked projects"
 msgstr ""
 
-#: plugins/projects-hierarchy/view/home_project_link.php:37
+#: plugins/projects-hierarchy/view/home_project_link.php:54
 msgid "Parent Project"
 msgstr ""
 
-#: plugins/projects-hierarchy/view/home_project_link.php:37
-#: plugins/projects-hierarchy/view/home_project_link.php:47
+#: plugins/projects-hierarchy/view/home_project_link.php:54
+#: plugins/projects-hierarchy/view/home_project_link.php:64
 msgid "Direct link to project"
 msgstr ""
 
@@ -13859,8 +13859,8 @@ msgid "Last Name:"
 msgstr "Nazwisko:"
 
 #: www/account/index.php:174 www/snippet/package.php:156
-#: www/snippet/snippet_utils.php:203 www/snippet/snippet_utils.php:237
-#: www/snippet/submit.php:123 www/stats/i18n.php:34
+#: www/snippet/snippet_utils.php:191 www/snippet/snippet_utils.php:225
+#: www/snippet/submit.php:124 www/stats/i18n.php:34
 msgid "Language"
 msgstr "Język"
 
@@ -14685,8 +14685,8 @@ msgstr ""
 msgid "Public?"
 msgstr ""
 
-#: www/admin/grouplist.php:72 www/snippet/snippet_utils.php:235
-#: www/snippet/submit.php:117
+#: www/admin/grouplist.php:72 www/snippet/snippet_utils.php:223
+#: www/snippet/submit.php:118
 msgid "License"
 msgstr ""
 
@@ -16359,7 +16359,7 @@ msgid "Package name"
 msgstr ""
 
 #: www/frs/admin/index.php:157 www/frs/admin/index.php:208
-#: www/people/editprofile.php:241
+#: www/people/editprofile.php:242
 msgid "Publicly Viewable"
 msgstr ""
 
@@ -17995,23 +17995,23 @@ msgstr ""
 msgid "Add Job Skills"
 msgstr ""
 
-#: www/people/createjob.php:44
+#: www/people/createjob.php:45
 msgid ""
 "Start by filling in the fields below. When you click continue, you will be "
 "shown a list of skills and experience levels that this job requires."
 msgstr ""
 
-#: www/people/createjob.php:52 www/people/editjob.php:170
+#: www/people/createjob.php:53 www/people/editjob.php:170
 #: www/project/admin/index.php:139
 msgid "Short Description"
 msgstr ""
 
-#: www/people/createjob.php:55 www/people/editjob.php:173
+#: www/people/createjob.php:56 www/people/editjob.php:173
 #: www/people/viewjob.php:84
 msgid "Long Description"
 msgstr ""
 
-#: www/people/createjob.php:58
+#: www/people/createjob.php:59
 msgid "Continue >>"
 msgstr ""
 
@@ -18034,8 +18034,8 @@ msgid "Job updated successfully"
 msgstr ""
 
 #: www/people/editjob.php:91 www/people/people_utils.php:127
-#: www/people/people_utils.php:157 www/people/people_utils.php:239
-#: www/people/people_utils.php:301
+#: www/people/people_utils.php:157 www/people/people_utils.php:240
+#: www/people/people_utils.php:302
 msgid "Skill"
 msgstr ""
 
@@ -18121,164 +18121,164 @@ msgstr ""
 msgid "User updated successfully"
 msgstr ""
 
-#: www/people/editprofile.php:99
+#: www/people/editprofile.php:100
 #, php-format
 msgid "Failed to add the skill %s"
 msgstr ""
 
-#: www/people/editprofile.php:101
+#: www/people/editprofile.php:102
 msgid "Skill added successfully"
 msgstr ""
 
-#: www/people/editprofile.php:106
+#: www/people/editprofile.php:107
 msgid "Start Month"
 msgstr ""
 
-#: www/people/editprofile.php:106
+#: www/people/editprofile.php:107
 msgid "Start Year"
 msgstr ""
 
-#: www/people/editprofile.php:106
+#: www/people/editprofile.php:107
 msgid "End Month"
 msgstr ""
 
-#: www/people/editprofile.php:106
+#: www/people/editprofile.php:107
 msgid "End Year"
 msgstr ""
 
-#: www/people/editprofile.php:106 www/people/skills_utils.php:52
+#: www/people/editprofile.php:107 www/people/skills_utils.php:53
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:47
 msgid "Keywords"
 msgstr ""
 
-#: www/people/editprofile.php:124
+#: www/people/editprofile.php:125
 msgid "No skills selected to edit."
 msgstr ""
 
-#: www/people/editprofile.php:141
+#: www/people/editprofile.php:142
 #, php-format
 msgid "Failed to update skills: %s"
 msgstr ""
 
-#: www/people/editprofile.php:144
+#: www/people/editprofile.php:145
 msgid "Skill updated"
 msgid_plural "Skills updated"
 msgstr[0] ""
 msgstr[1] ""
 
-#: www/people/editprofile.php:149 www/people/editprofile.php:150
+#: www/people/editprofile.php:150 www/people/editprofile.php:151
 msgid "Edit Skills"
 msgstr ""
 
-#: www/people/editprofile.php:151
+#: www/people/editprofile.php:152
 msgid "Change the required fields, and press “Done” at the bottom of the page"
 msgstr ""
 
-#: www/people/editprofile.php:156
+#: www/people/editprofile.php:157
 msgid "Done"
 msgstr ""
 
-#: www/people/editprofile.php:164
+#: www/people/editprofile.php:165
 msgid "Cancelled skills update"
 msgstr ""
 
-#: www/people/editprofile.php:177
+#: www/people/editprofile.php:178
 msgid "No skills selected to delete."
 msgstr ""
 
-#: www/people/editprofile.php:186
+#: www/people/editprofile.php:187
 #, php-format
 msgid "Failed to delete any skills: %s"
 msgstr ""
 
-#: www/people/editprofile.php:188
+#: www/people/editprofile.php:189
 msgid "Skill deleted successfully"
 msgid_plural "Skills deleted successfully"
 msgstr[0] ""
 msgstr[1] ""
 
-#: www/people/editprofile.php:197
+#: www/people/editprofile.php:198
 msgid "Confirm skill delete"
 msgstr ""
 
-#: www/people/editprofile.php:200
+#: www/people/editprofile.php:201
 msgid "You are about to delete the following skill from the skills database:"
 msgid_plural ""
 "You are about to delete the following skills from the skills database:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: www/people/editprofile.php:205
+#: www/people/editprofile.php:206
 msgid "This action cannot be undone."
 msgstr ""
 
-#: www/people/editprofile.php:206
+#: www/people/editprofile.php:207
 msgid "Are you <strong>sure</strong> you wish to continue?"
 msgstr ""
 
-#: www/people/editprofile.php:214
+#: www/people/editprofile.php:215
 msgid "Confirm"
 msgstr ""
 
-#: www/people/editprofile.php:224
+#: www/people/editprofile.php:225
 msgid "Skill deletion cancelled"
 msgstr ""
 
-#: www/people/editprofile.php:227
+#: www/people/editprofile.php:228
 msgid "Edit Your Profile"
 msgstr ""
 
-#: www/people/editprofile.php:233 www/people/skills_utils.php:121
-#: www/people/skills_utils.php:122 www/people/viewprofile.php:47
+#: www/people/editprofile.php:234 www/people/skills_utils.php:122
+#: www/people/skills_utils.php:123 www/people/viewprofile.php:47
 msgid "No Such User"
 msgstr ""
 
-#: www/people/editprofile.php:237
+#: www/people/editprofile.php:238
 msgid "Edit Public Permissions"
 msgstr ""
 
-#: www/people/editprofile.php:239
+#: www/people/editprofile.php:240
 msgid ""
 "The following option determines if others can see your skills. If they "
 "cannot, you can still enter your skills."
 msgstr ""
 
-#: www/people/editprofile.php:246
+#: www/people/editprofile.php:247
 msgid "Update Permissions"
 msgstr ""
 
-#: www/people/editprofile.php:255
+#: www/people/editprofile.php:256
 msgid "No skill types in database (skills_data_types table)"
 msgstr ""
 
-#: www/people/editprofile.php:271 www/people/people_utils.php:188
-#: www/people/people_utils.php:336
+#: www/people/editprofile.php:272 www/people/people_utils.php:188
+#: www/people/people_utils.php:337
 msgid "Add a new skill"
 msgstr ""
 
-#: www/people/editprofile.php:272
+#: www/people/editprofile.php:273
 msgid ""
 "You can enter new skills you have acquired here. Please enter the start and "
 "finish dates as accurately as possible."
 msgstr ""
 
-#: www/people/editprofile.php:273 www/reporting/timeadd.php:96
+#: www/people/editprofile.php:274 www/reporting/timeadd.php:96
 msgid "All fields are required!"
 msgstr ""
 
-#: www/people/editprofile.php:295 www/people/skills_utils.php:170
+#: www/people/editprofile.php:296 www/people/skills_utils.php:170
 msgid "Title (max 100 characters)"
 msgstr ""
 
-#: www/people/editprofile.php:302 www/people/skills_utils.php:177
+#: www/people/editprofile.php:303 www/people/skills_utils.php:177
 msgid "Keywords (max 255 characters)"
 msgstr ""
 
-#: www/people/editprofile.php:308
+#: www/people/editprofile.php:309
 msgid "Add This Skill"
 msgstr ""
 
-#: www/people/editprofile.php:314
+#: www/people/editprofile.php:315
 msgid "Edit/Delete Your Skills"
 msgstr ""
 
@@ -18356,18 +18356,23 @@ msgstr ""
 msgid "Error: skill already in your inventory"
 msgstr ""
 
+#: www/people/people_utils.php:114 www/people/people_utils.php:226
+#, fuzzy
+msgid "You must be logged in first"
+msgstr "Musisz podać imię"
+
 #: www/people/people_utils.php:128 www/people/people_utils.php:158
-#: www/people/people_utils.php:240 www/people/people_utils.php:302
+#: www/people/people_utils.php:241 www/people/people_utils.php:303
 msgid "Level"
 msgstr ""
 
 #: www/people/people_utils.php:129 www/people/people_utils.php:159
-#: www/people/people_utils.php:241 www/people/people_utils.php:303
+#: www/people/people_utils.php:242 www/people/people_utils.php:304
 msgid "Experience"
 msgstr ""
 
-#: www/people/people_utils.php:137 www/people/people_utils.php:248
-#: www/people/people_utils.php:313
+#: www/people/people_utils.php:137 www/people/people_utils.php:249
+#: www/people/people_utils.php:314
 msgid "No Skill Inventory Set Up"
 msgstr ""
 
@@ -18375,46 +18380,49 @@ msgstr ""
 msgid "No skill setup"
 msgstr ""
 
-#: www/people/people_utils.php:194 www/people/people_utils.php:344
+#: www/people/people_utils.php:194 www/people/people_utils.php:345
 msgid "Add Skill"
 msgstr ""
 
-#: www/people/people_utils.php:212
+#: www/people/people_utils.php:213
 msgid "Error inserting into job inventory: "
 msgstr ""
 
-#: www/people/people_utils.php:216
+#: www/people/people_utils.php:217
 msgid "Added to job inventory"
 msgstr ""
 
-#: www/people/people_utils.php:220
-msgid "Error: job already in your inventory"
+#: www/people/people_utils.php:221
+msgid "Error: Skill already in your inventory."
 msgstr ""
 
-#: www/people/people_utils.php:225
-#, fuzzy
-msgid "You must be logged in first"
-msgstr "Musisz podać imię"
-
-#: www/people/people_utils.php:277 www/people/people_utils.php:286
+#: www/people/people_utils.php:278 www/people/people_utils.php:287
 msgid "Invalid ID"
 msgstr ""
 
-#: www/people/people_utils.php:392
+#: www/people/people_utils.php:393
 msgid "No categories found."
 msgstr ""
 
-#: www/people/people_utils.php:437
+#: www/people/people_utils.php:438
 msgid "Date Opened"
 msgstr ""
 
-#: www/people/people_utils.php:438
+#: www/people/people_utils.php:439
 #, php-format
 msgid "%s project"
 msgstr ""
 
-#: www/people/people_utils.php:448
+#: www/people/people_utils.php:449
 msgid "None Found"
+msgstr ""
+
+#: www/people/skills_utils.php:40
+msgid "No skills listed."
+msgstr ""
+
+#: www/people/skills_utils.php:41
+msgid "This user has not entered any skills."
 msgstr ""
 
 #: www/people/viewjob.php:54
@@ -18633,7 +18641,7 @@ msgid "Detail View"
 msgstr ""
 
 #: www/pm/browse_task.php:163 www/pm/ganttpage.php:185
-#: www/snippet/snippet_utils.php:130
+#: www/snippet/snippet_utils.php:118
 msgid "Browse"
 msgstr ""
 
@@ -20621,7 +20629,7 @@ msgstr ""
 msgid "Send Message"
 msgstr ""
 
-#: www/snippet/add_snippet_to_package.php:50 www/snippet/snippet_utils.php:131
+#: www/snippet/add_snippet_to_package.php:50 www/snippet/snippet_utils.php:119
 msgid "Submit A New Snippet"
 msgstr ""
 
@@ -20633,7 +20641,7 @@ msgstr ""
 msgid "Error: Only the creator of a package version can add snippets to it."
 msgstr ""
 
-#: www/snippet/add_snippet_to_package.php:81 www/snippet/addversion.php:39
+#: www/snippet/add_snippet_to_package.php:81 www/snippet/addversion.php:40
 msgid "Error: snippet doesn't exist"
 msgstr ""
 
@@ -20647,18 +20655,18 @@ msgstr ""
 msgid "Error: That snippet was already added to this package."
 msgstr ""
 
-#: www/snippet/add_snippet_to_package.php:107 www/snippet/addversion.php:71
-#: www/snippet/submit.php:74
+#: www/snippet/add_snippet_to_package.php:107 www/snippet/addversion.php:72
+#: www/snippet/submit.php:75
 msgid "Error doing snippet version insert"
 msgstr ""
 
-#: www/snippet/add_snippet_to_package.php:109 www/snippet/addversion.php:74
+#: www/snippet/add_snippet_to_package.php:109 www/snippet/addversion.php:75
 msgid "Snippet Version Added Successfully."
 msgstr ""
 
-#: www/snippet/add_snippet_to_package.php:112 www/snippet/addversion.php:77
-#: www/snippet/addversion.php:198 www/snippet/package.php:123
-#: www/snippet/submit.php:81
+#: www/snippet/add_snippet_to_package.php:112 www/snippet/addversion.php:78
+#: www/snippet/addversion.php:199 www/snippet/package.php:123
+#: www/snippet/submit.php:82
 msgid "Error: Go back and fill in all the information"
 msgstr ""
 
@@ -20677,85 +20685,85 @@ msgstr ""
 msgid "Add This Snippet Version ID:"
 msgstr ""
 
-#: www/snippet/add_snippet_to_package.php:164 www/snippet/addversion.php:107
-#: www/snippet/addversion.php:226 www/snippet/package.php:174
-#: www/snippet/submit.php:144
+#: www/snippet/add_snippet_to_package.php:164 www/snippet/addversion.php:108
+#: www/snippet/addversion.php:227 www/snippet/package.php:174
+#: www/snippet/submit.php:145
 msgid "Make sure all info is complete and accurate"
 msgstr ""
 
 #: www/snippet/add_snippet_to_package.php:183
-#: www/snippet/snippet_utils.php:164
+#: www/snippet/snippet_utils.php:152
 msgid "No Snippets Are In This Package Yet"
 msgstr ""
 
 #: www/snippet/add_snippet_to_package.php:185
-#: www/snippet/snippet_utils.php:151
+#: www/snippet/snippet_utils.php:139
 msgid "Snippets In This Package"
 msgstr ""
 
-#: www/snippet/addversion.php:81 www/snippet/addversion.php:202
+#: www/snippet/addversion.php:82 www/snippet/addversion.php:203
 msgid "New snippet version"
 msgstr ""
 
-#: www/snippet/addversion.php:84
+#: www/snippet/addversion.php:85
 msgid ""
 "If you have modified a version of a snippet and you feel it is significant "
 "enough to share with others, please do so."
 msgstr ""
 
-#: www/snippet/addversion.php:102 www/snippet/submit.php:140
+#: www/snippet/addversion.php:103 www/snippet/submit.php:141
 msgid "Paste the Code Here"
 msgstr ""
 
-#: www/snippet/addversion.php:127
+#: www/snippet/addversion.php:128
 msgid "Error: snippet_package doesn't exist"
 msgstr ""
 
-#: www/snippet/addversion.php:154 www/snippet/package.php:75
+#: www/snippet/addversion.php:155 www/snippet/package.php:75
 msgid "Error doing snippet package version insert"
 msgstr ""
 
-#: www/snippet/addversion.php:155
+#: www/snippet/addversion.php:156
 msgid "New snippet package"
 msgstr ""
 
-#: www/snippet/addversion.php:160 www/snippet/package.php:82
+#: www/snippet/addversion.php:161 www/snippet/package.php:82
 msgid "Snippet Package Version Added Successfully."
 msgstr ""
 
-#: www/snippet/addversion.php:165
+#: www/snippet/addversion.php:166
 msgid "Add snippet to package"
 msgstr ""
 
-#: www/snippet/addversion.php:181 www/snippet/package.php:105
+#: www/snippet/addversion.php:182 www/snippet/package.php:105
 msgid "IMPORTANT!"
 msgstr ""
 
-#: www/snippet/addversion.php:183 www/snippet/package.php:107
+#: www/snippet/addversion.php:184 www/snippet/package.php:107
 msgid ""
 "If a new window opened, use it to add snippets to your package. If a new "
 "window did not open, use the following link to add to your package BEFORE "
 "you leave this page."
 msgstr ""
 
-#: www/snippet/addversion.php:186 www/snippet/package.php:87
+#: www/snippet/addversion.php:187 www/snippet/package.php:87
 #: www/snippet/package.php:109
 msgid "Add snippets to package"
 msgstr ""
 
-#: www/snippet/addversion.php:187 www/snippet/package.php:112
+#: www/snippet/addversion.php:188 www/snippet/package.php:112
 msgid ""
 "<strong>Browse the library</strong> to find the snippets you want to add, "
 "then add them using the new window link shown above."
 msgstr ""
 
-#: www/snippet/addversion.php:207
+#: www/snippet/addversion.php:208
 msgid ""
 "If you have modified a version of a package and you feel it is significant "
 "enough to share with others, please do so."
 msgstr ""
 
-#: www/snippet/addversion.php:236
+#: www/snippet/addversion.php:237
 msgid "Error: was the URL or form mangled??"
 msgstr ""
 
@@ -20784,7 +20792,7 @@ msgid "No snippets found."
 msgstr ""
 
 #: www/snippet/browse.php:84 www/snippet/detail.php:63
-#: www/snippet/snippet_utils.php:154
+#: www/snippet/snippet_utils.php:142
 msgid "Snippet ID"
 msgstr ""
 
@@ -20812,7 +20820,7 @@ msgstr ""
 msgid "Versions Of This Snippet:"
 msgstr ""
 
-#: www/snippet/detail.php:64 www/snippet/snippet_utils.php:155
+#: www/snippet/detail.php:64 www/snippet/snippet_utils.php:143
 msgid "Download Version"
 msgstr ""
 
@@ -20937,11 +20945,11 @@ msgid ""
 "package."
 msgstr ""
 
-#: www/snippet/package.php:159 www/snippet/submit.php:125
+#: www/snippet/package.php:159 www/snippet/submit.php:126
 msgid "Suggest a Language"
 msgstr ""
 
-#: www/snippet/package.php:165 www/snippet/submit.php:131
+#: www/snippet/package.php:165 www/snippet/submit.php:132
 msgid "Suggest a Category"
 msgstr ""
 
@@ -21026,23 +21034,23 @@ msgstr ""
 msgid "Other Language"
 msgstr ""
 
-#: www/snippet/snippet_utils.php:132
+#: www/snippet/snippet_utils.php:120
 msgid "Create A Package"
 msgstr ""
 
-#: www/snippet/submit.php:59
+#: www/snippet/submit.php:60
 msgid "Error doing snippet insert"
 msgstr ""
 
-#: www/snippet/submit.php:61 www/snippet/submit.php:76
+#: www/snippet/submit.php:62 www/snippet/submit.php:77
 msgid "Snippet Added Successfully."
 msgstr ""
 
-#: www/snippet/submit.php:85
+#: www/snippet/submit.php:86
 msgid "Snippet submit"
 msgstr ""
 
-#: www/snippet/submit.php:89
+#: www/snippet/submit.php:90
 msgid ""
 "You can post a new code snippet and share it with other people around the "
 "world. Just fill in this information. <strong>Give a good description</"
@@ -21050,14 +21058,14 @@ msgid ""
 "understand it."
 msgstr ""
 
-#: www/snippet/submit.php:92
+#: www/snippet/submit.php:93
 msgid ""
 "<span class=\"important\">Note:</span> You can submit a new version of an "
 "existing snippet by browsing the library. You should only use this page if "
 "you are submitting an entirely new script or function."
 msgstr ""
 
-#: www/snippet/submit.php:113
+#: www/snippet/submit.php:114
 msgid "Script Type"
 msgstr ""
 
