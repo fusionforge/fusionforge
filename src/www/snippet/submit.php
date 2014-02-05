@@ -3,6 +3,7 @@
  * Code Snippets Repository
  *
  * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -101,11 +102,11 @@ if (session_loggedin()) {
 	<table>
 
 	<tr><td colspan="2">
-	    <?php echo $HTML->html_input('name', '', _('Title')._(': ') . utils_requiredField(), 'text', '', array('size' => '45', 'maxlength' => '60')); ?>
+	    <?php echo $HTML->html_input('name', '', _('Title')._(': ') . utils_requiredField(), 'text', '', array('size' => '45', 'maxlength' => '60', 'required' => 'required')); ?>
 	</td></tr>
 
 	<tr><td colspan="2">
-        <?php echo $HTML->html_textarea('description', '', _('Description')._(': ') . utils_requiredField(), '', array('rows' => '5', 'cols' => '45')); ?>
+        <?php echo $HTML->html_textarea('description', '', _('Description')._(': ') . utils_requiredField(), '', array('rows' => '5', 'cols' => '45', 'required' => 'required')); ?>
 	</td></tr>
 
 	<tr>
@@ -133,11 +134,11 @@ if (session_loggedin()) {
 	</tr>
 
 	<tr><td colspan="2">
-        <?php echo $HTML->html_input('version', '', _('Version')._(': ') . utils_requiredField(), 'text', '', array('size' => '10', 'maxlength' => '15')); ?>
+        <?php echo $HTML->html_input('version', '', _('Version')._(': ') . utils_requiredField(), 'text', '', array('size' => '10', 'maxlength' => '15', 'required' => 'required')); ?>
 	</td></tr>
 
 	<tr><td colspan="2">
-	    <?php echo $HTML->html_textarea('code', '', _('Paste the Code Here')._(': ') . utils_requiredField(), '', array('rows' => '30', 'cols' => '85')); ?>
+	    <?php echo $HTML->html_textarea('code', '', _('Paste the Code Here')._(': ') . utils_requiredField(), '', array('rows' => '30', 'cols' => '85', 'required' => 'required')); ?>
 	</td></tr>
 
 	<tr><td colspan="2" class="align-center">

@@ -3,6 +3,7 @@
  * Code Snippets Repository
  *
  * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -91,16 +92,16 @@ if (session_loggedin()) {
 		<input type="hidden" name="id" value="<?php echo $id; ?>" />
 
 		<table>
-		<tr><td colspan="2"><strong><?php echo _('Version')._(':'); ?></strong><br />
-			<input type="text" name="version" size="10" maxlength="15" />
+		<tr><td colspan="2"><strong><?php echo _('Version')._(':'). utils_requiredField(); ?></strong><br />
+			<input type="text" name="version" size="10" maxlength="15" required="required" />
 		</td></tr>
 
-		<tr><td colspan="2"><strong><?php echo _('Changes')._(':'); ?></strong><br />
-			<textarea name="changes" rows="5" cols="45"></textarea>
+		<tr><td colspan="2"><strong><?php echo _('Changes')._(':'). utils_requiredField(); ?></strong><br />
+			<textarea name="changes" rows="5" cols="45" required="required" s></textarea>
 		</td></tr>
 
-		<tr><td colspan="2"><strong><?php echo _('Paste the Code Here')._(':'); ?></strong><br />
-			<textarea name="code" rows="30" cols="85"></textarea>
+		<tr><td colspan="2"><strong><?php echo _('Paste the Code Here')._(':'). utils_requiredField(); ?></strong><br />
+			<textarea name="code" rows="30" cols="85" required="required" ></textarea>
 		</td></tr>
 
 		<tr><td colspan="2" class="align-center">
