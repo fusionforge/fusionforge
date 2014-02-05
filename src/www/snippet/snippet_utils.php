@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems - Tim Perdue
  * Copyright 2012, Jean-Christophe Masson - French National Education Department
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -103,24 +103,12 @@ $SCRIPT_EXTENSION[16] = '.cs';
 
 function snippet_header($params) {
 	global $HTML;
-	global $feedback;
-	global $warning_msg;
-	global $error_msg;
 
 	if (!forge_get_config('use_snippet')) {
 		exit_disabled();
 	}
 
 	$HTML->header($params);
-	if (!empty($error_msg)) {
-		html_feedback_top($error_msg);
-	}
-	if (!empty($warning_msg)) {
-		html_feedback_top($warning_msg);
-	}
-	if (!empty($feedback)) {
-		html_feedback_top($feedback);
-	}
 
 	/*
 		Show horizontal links
@@ -134,7 +122,7 @@ function snippet_header($params) {
 }
 
 function snippet_footer($params) {
-	GLOBAL $HTML;
+	global $HTML;
 	$HTML->footer($params);
 }
 
