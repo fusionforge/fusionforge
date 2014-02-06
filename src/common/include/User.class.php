@@ -1195,12 +1195,12 @@ Use one below, but make sure it is entered as the single line.)
 		return $this->data_array['title'];
 	}
 
-    /**
-     * getGroups - get an array of groups this user is a member of.
-     *
-     * @param bool $onlylocal
-     * @return array    Array of groups.
-     */
+	/**
+	 * getGroups - get an array of groups this user is a member of.
+	 *
+	 * @param bool $onlylocal
+	 * @return array Array of groups.
+	 */
 	function &getGroups($onlylocal = true) {
 		$ids = array();
 		foreach ($this->getRoles() as $r) {
@@ -1227,12 +1227,12 @@ Use one below, but make sure it is entered as the single line.)
 		return $this->data_array['authorized_keys'];
 	}
 
-    /**
-     *    addAuthorizedKey - add the SSH authorized key for the user.
-     *
-     * @param string $key
-     * @return    boolean    success.
-     */
+	/**
+	 *    addAuthorizedKey - add the SSH authorized key for the user.
+	 *
+	 * @param string $key
+	 * @return    boolean    success.
+	 */
 	function addAuthorizedKey($key) {
 		$key = trim($key);
 		$key = preg_replace("/\r\n/", "\n", $key); // Convert to Unix EOL
