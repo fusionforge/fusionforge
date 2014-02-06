@@ -5,7 +5,7 @@
  * Copyright 2003-2010, Roland Mas, Franck Villaume
  * Copyright 2004, GForge, LLC
  * Copyright 2010, Alain Peyrat <aljeux@free.fr>
- * Copyright 2012-2013, Franck Villaume - TrivialDev
+ * Copyright 2012-2014, Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of National Education
  *
  * This file is part of FusionForge.
@@ -79,7 +79,7 @@ class SVNPlugin extends SCMPlugin {
 			if (!$add_num) {
 				$add_num=0;
 			}
-			echo ' (Subversion: '.sprintf(_('<strong>%1$s</strong> commits, <strong>%2$s</strong> adds'), number_format($commit_num, 0), number_format($add_num, 0)).")";
+			echo ' (Subversion: '.sprintf(_('<strong>%1$s</strong> updates, <strong>%2$s</strong> adds'), number_format($commit_num, 0), number_format($add_num, 0)).")";
 		}
 	}
 
@@ -221,7 +221,7 @@ class SVNPlugin extends SCMPlugin {
 			$tableHeaders = array(
 				_('Name'),
 				_('Adds'),
-				_('Commits')
+				_('Updates')
 				);
 			$b .= $HTML->listTableTop($tableHeaders);
 
