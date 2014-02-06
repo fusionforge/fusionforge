@@ -14,6 +14,12 @@
 
 #set -x
 
+
+# Build dependencies
+aptitude -y install mini-dinstall dput devscripts equivs
+mk-build-deps -i /root/fusionforge/src/debian/control -t 'apt-get -y' -r
+
+
 # Populate the repo
 rm -rf /root/debian-repository
 mkdir -p /root/debian-repository
