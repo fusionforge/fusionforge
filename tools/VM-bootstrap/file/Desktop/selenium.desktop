@@ -1,6 +1,0 @@
-[Desktop Entry]
-Encoding=UTF-8
-Name=Selenium
-Exec=make -C /root/fusionforge/3rd-party/selenium
-Terminal=true
-Type=Application
