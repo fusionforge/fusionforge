@@ -6,6 +6,7 @@
  * Copyright 2002-2004, GForge, LLC
  * Copyright 2009, Roland Mas
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -667,6 +668,9 @@ class ArtifactType extends Error {
 		}
 		$efs = $at->getExtraFields();
 
+		// get current getExtraFields if any
+		$current_efs = $this->getExtraFields();
+
 		//
 		//	Iterate list of extra fields
 		//
@@ -674,6 +678,13 @@ class ArtifactType extends Error {
 		foreach ($efs as $ef) {
 			//new field in this tracker
 			$nef = new ArtifactExtraField($this);
+			foreach ($current_efs as $current_ef) {
+				if ($current_ef['field_name'] == $ef['field_name']) {
+					// we delete the current extra field and use the template one...
+					$current_ef_todelete = new ArtifactExtraField($this, $current_ef);
+					$current_ef_todelete->delete(true,true);
+				}
+			}
 			if (!$nef->create( util_unconvert_htmlspecialchars($ef['field_name']), $ef['field_type'], $ef['attribute1'], $ef['attribute2'], $ef['is_required'], $ef['alias'])) {
 				$this->setError('Error Creating New Extra Field: '.$nef->getErrorMessage());
 				db_rollback();
