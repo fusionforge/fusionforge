@@ -81,7 +81,7 @@ class DarcsPlugin extends SCMPlugin {
 			if (!$add_num) {
 				$add_num=0;
 			}
-			echo ' (Darcs: '.sprintf(_('<strong>%1$s</strong> commits, <strong>%2$s</strong> adds'), number_format($commit_num, 0), number_format($add_num, 0)).")";
+			echo ' (Darcs: '.sprintf(_('<strong>%1$s</strong> updates, <strong>%2$s</strong> adds'), number_format($commit_num, 0), number_format($add_num, 0)).")";
 		}
 	}
 
@@ -209,7 +209,7 @@ class DarcsPlugin extends SCMPlugin {
 			$tableHeaders = array(
 				_('Name'),
 				_('Adds'),
-				_('Commits')
+				_('Updates')
 				);
 			$b .= $HTML->listTableTop($tableHeaders);
 
