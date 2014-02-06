@@ -18,7 +18,3 @@ chown -R root: /root/Desktop
 apt-get -y --force-yes install bzr
 cd /root/
 bzr checkout https://fusionforge.org/anonscm/bzr/deb-packaging/master fusionforge
-
-# Update system
-# Not done here, it makes the .box too big (1.5GB)
-# yes | /root/fusionforge/tools/VM-scripts/update.sh
