@@ -3,7 +3,7 @@
 /*
  * Copyright (C) 2006 Alain Peyrat, Alcatel-Lucent
  * Copyright (C) 2010 Alain Peyrat <aljeux@free.fr>
- * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright (C) 2012-2014 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -343,15 +343,15 @@ if ($type == 'admin') {
 			"</fieldset>";
 } elseif ($type == 'configure_post') {
 	$res = db_query_params('SELECT id FROM plugin_blocks WHERE group_id=$1 AND name=$2',
-			array($id,$name));
+			array($id, htmlspecialchars($name)));
 	if (db_numrows($res)== 0) {
 		db_query_params('INSERT INTO plugin_blocks (group_id, name, content)
 				VALUES ($1, $2, $3)',
-				array($id, $name, $body));
+				array($id, htmlspecialchars($name), $body));
 	} else {
 		db_query_params('UPDATE plugin_blocks SET content=$1
 				WHERE group_id=$2 AND name=$3',
-				array($body, $id, $name));
+				array($body, $id, htmlspecialchars($name)));
 	}
 	$msg = $name .' : '. _('Block configuration saved');
 	session_redirect('/plugins/blocks/index.php?id='.$id.'&type=admin&pluginname=blocks&feedback='.urlencode($msg));
