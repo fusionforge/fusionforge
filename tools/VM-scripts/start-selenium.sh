@@ -17,5 +17,8 @@ echo
 echo "You may wish to install a graphical environment (gnome, kde, lxde, ...) to run the selenium server inside the VM's display."
 echo
 
+# Test dependencies
+aptitude -y install default-jre iceweasel
+
 cd /root/fusionforge/3rd-party/selenium
 make

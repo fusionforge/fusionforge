@@ -20,6 +20,11 @@ fi
 
 set -e
 
+# "Backport" recent dependency
+wget http://ftp.fr.debian.org/debian/pool/main/l/loggerhead/loggerhead_1.19~bzr479-3_all.deb
+aptitude install gdebi-core
+gdebi --non-interactive loggerhead_1.19~bzr479-3_all.deb
+
 aptitude update
 if dpkg -l fusionforge-full | grep -q ^ii ; then
     # Already installed, upgrading
