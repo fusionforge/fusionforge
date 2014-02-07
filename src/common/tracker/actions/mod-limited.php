@@ -153,7 +153,6 @@ if (session_loggedin()) {
 	<?php } ?>
 	<?php
 		$ath->renderRelatedTasks($group, $ah);
-		$ath->renderFiles($group_id, $ah);
 	?>
 	<tr>
 		<td colspan="2"><strong><?php echo _('Summary')._(':'); ?><?php echo utils_requiredField(); ?></strong><br />
