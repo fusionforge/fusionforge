@@ -259,7 +259,7 @@ if(forge_get_config('use_docman')) {
 <p>
 <?php echo _('If you wish, you can provide default email addresses to which new submissions will be sent') ?>.<br />
 <strong><?php echo _('New Document Submissions')._(':'); ?></strong><br />
-<input type="text" name="new_doc_address" value="<?php echo $group->getDocEmailAddress(); ?>" size="40" maxlength="250" />
+<input type="email" name="new_doc_address" value="<?php echo $group->getDocEmailAddress(); ?>" size="40" maxlength="250" />
 <?php echo _('(send on all updates)') ?>
 <input type="checkbox" name="send_all_docs" value="1" <?php echo c($group->docEmailAll()); ?> />
 </p>
