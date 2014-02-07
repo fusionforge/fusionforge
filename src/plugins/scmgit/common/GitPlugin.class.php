@@ -695,11 +695,11 @@ class GitPlugin extends SCMPlugin {
 		}
 
 		if ($params['mode'] == 'day') {
-			$year = $params ['year'];
-			$month = $params ['month'];
-			$day = $params ['day'];
-			$month_string = sprintf( "%04d%02d", $year, $month );
-			$start_time = gmmktime( 0, 0, 0, $month, $day, $year);
+			$year = $params['year'];
+			$month = $params['month'];
+			$day = $params['day'];
+			$month_string = sprintf("%04d%02d", $year, $month);
+			$start_time = gmmktime(0, 0, 0, $month, $day, $year);
 			$end_time = $start_time + 86400;
 
 			$usr_adds    = array();
