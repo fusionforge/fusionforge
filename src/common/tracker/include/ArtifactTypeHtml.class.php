@@ -388,7 +388,9 @@ class ArtifactTypeHtml extends ArtifactType {
 				echo '<td>'.date(_('Y-m-d H:i'), $file->getDate()).'</td>';
 				echo '<td>'.$file->getSubmittedUnixName().'</td>';
 				echo '<td><a href="/tracker/download.php/'.$group_id.'/'. $this->getID().'/'. $ah->getID() .'/'.$file->getID().'/'.$file->getName() .'">'. htmlspecialchars($file->getName()) .'</a></td>';
-//				<td><input type="checkbox" name="delete_file[]" value="'. $file->getID() .'">'._("Delete").' </td>
+				if (forge_check_perm ('tracker', $this->getID(), 'tech')) {
+					echo '<td><input type="checkbox" name="delete_file[]" value="'. $file->getID() .'">'._('Delete').'</td>';
+				}
 				echo '</tr>';
 			}
 

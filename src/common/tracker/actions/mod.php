@@ -189,7 +189,6 @@ echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 	<?php } ?>
 	<?php
 		$ath->renderRelatedTasks($group, $ah);
-		$ath->renderFiles($group_id, $ah);
 	?>
 	<tr>
 		<td colspan="2"><strong><?php echo _('Summary')._(':'); ?><?php echo utils_requiredField(); ?></strong><br />
