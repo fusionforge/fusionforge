@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-31 17:03+0100\n"
+"POT-Creation-Date: 2014-02-07 16:11+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -28,8 +28,8 @@ msgstr "Clé SSH ajoutée avec succès."
 #: common/docman/actions/addfile.php:124 common/docman/actions/addfile.php:160
 #: common/docman/DocumentGroup.class.php:221
 #: common/docman/DocumentGroup.class.php:834
-#: common/tracker/actions/tracker.php:132
-#: common/tracker/actions/tracker.php:360 www/project/admin/editimages.php:58
+#: common/tracker/actions/tracker.php:133
+#: common/tracker/actions/tracker.php:361 www/project/admin/editimages.php:58
 msgid "Invalid file name."
 msgstr "Nom de fichier invalide."
 
@@ -247,31 +247,34 @@ msgstr "Dossier"
 #: common/tracker/actions/admin-updates.php:501
 #: common/tracker/actions/admin-updates.php:522
 #: common/tracker/actions/admin-updates.php:581
-#: common/tracker/actions/browse.php:402 common/tracker/actions/browse.php:405
-#: common/tracker/actions/browse.php:749 common/tracker/actions/detail.php:140
-#: common/tracker/actions/mod-limited.php:164
-#: common/tracker/actions/mod.php:111 common/tracker/actions/mod.php:140
-#: common/tracker/actions/mod.php:147 common/tracker/actions/mod.php:155
-#: common/tracker/actions/mod.php:175 common/tracker/actions/mod.php:216
-#: common/tracker/actions/mod.php:218 common/tracker/actions/query.php:325
-#: common/tracker/actions/query.php:340 common/tracker/actions/query.php:346
-#: common/tracker/actions/query.php:347 common/tracker/actions/query.php:382
-#: common/tracker/actions/query.php:384 common/tracker/actions/query.php:386
-#: common/tracker/actions/query.php:391 common/tracker/actions/tracker.php:166
-#: common/tracker/actions/tracker.php:168
-#: common/tracker/actions/tracker.php:213
-#: common/tracker/actions/tracker.php:282
-#: common/tracker/actions/tracker.php:383
-#: common/tracker/actions/tracker.php:388
-#: common/tracker/actions/tracker.php:500
+#: common/tracker/actions/browse.php:409 common/tracker/actions/browse.php:412
+#: common/tracker/actions/browse.php:771 common/tracker/actions/detail.php:63
+#: common/tracker/actions/detail.php:157
+#: common/tracker/actions/mod-limited.php:72
+#: common/tracker/actions/mod-limited.php:180
+#: common/tracker/actions/mod.php:77 common/tracker/actions/mod.php:136
+#: common/tracker/actions/mod.php:168 common/tracker/actions/mod.php:175
+#: common/tracker/actions/mod.php:183 common/tracker/actions/mod.php:202
+#: common/tracker/actions/mod.php:243 common/tracker/actions/mod.php:245
+#: common/tracker/actions/query.php:325 common/tracker/actions/query.php:340
+#: common/tracker/actions/query.php:346 common/tracker/actions/query.php:347
+#: common/tracker/actions/query.php:382 common/tracker/actions/query.php:384
+#: common/tracker/actions/query.php:386 common/tracker/actions/query.php:391
+#: common/tracker/actions/tracker.php:167
+#: common/tracker/actions/tracker.php:169
+#: common/tracker/actions/tracker.php:214
+#: common/tracker/actions/tracker.php:283
+#: common/tracker/actions/tracker.php:384
+#: common/tracker/actions/tracker.php:389
+#: common/tracker/actions/tracker.php:501
 #: common/tracker/ArtifactExtraField.class.php:188
 #: common/tracker/ArtifactExtraField.class.php:194
-#: common/tracker/ArtifactType.class.php:216
-#: common/tracker/ArtifactType.class.php:986
+#: common/tracker/ArtifactType.class.php:224
+#: common/tracker/ArtifactType.class.php:1005
 #: common/tracker/include/ArtifactHtml.class.php:110
 #: common/tracker/include/ArtifactHtml.class.php:112
 #: common/tracker/include/ArtifactHtml.class.php:220
-#: common/tracker/include/ArtifactTypeHtml.class.php:438
+#: common/tracker/include/ArtifactTypeHtml.class.php:440
 #: common/tracker/views/form-addextrafieldoption.php:39
 #: common/tracker/views/form-adminroadmap.php:70
 #: common/tracker/views/form-adminroadmap.php:193
@@ -326,8 +329,8 @@ msgstr "Dossier"
 #: plugins/oauthconsumer/www/get_access_token.php:139
 #: plugins/projectimport/common/ProjectImporter.class.php:124
 #: plugins/projectlabels/www/index.php:172
-#: plugins/projects-hierarchy/view/home_project_link.php:37
-#: plugins/projects-hierarchy/view/home_project_link.php:47
+#: plugins/projects-hierarchy/view/home_project_link.php:54
+#: plugins/projects-hierarchy/view/home_project_link.php:64
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:635
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:637
 #: plugins/scmhg/common/HgPlugin.class.php:647 www/account/index.php:198
@@ -347,12 +350,12 @@ msgstr "Dossier"
 #: www/forum/forum.php:156 www/forum/message.php:126
 #: www/frs/admin/deletepackage.php:57 www/frs/admin/qrs.php:197
 #: www/frs/shownotes.php:64 www/include/features_boxes.php:150
-#: www/include/features_boxes.php:159 www/include/html.php:928
+#: www/include/features_boxes.php:159 www/include/html.php:932
 #: www/include/user_profile.php:87 www/include/user_profile.php:92
 #: www/include/user_profile.php:111 www/new/index.php:98
 #: www/news/submit.php:153 www/news/submit.php:155 www/news/submit.php:158
 #: www/people/admin/index.php:53 www/people/admin/index.php:66
-#: www/people/editprofile.php:233 www/people/skills_utils.php:121
+#: www/people/editprofile.php:234 www/people/skills_utils.php:122
 #: www/people/viewprofile.php:47 www/pm/add_task.php:50 www/pm/add_task.php:63
 #: www/pm/add_task.php:67 www/pm/add_task.php:74 www/pm/add_task.php:81
 #: www/pm/add_task.php:88 www/pm/add_task.php:95 www/pm/add_task.php:110
@@ -374,10 +377,10 @@ msgstr "Dossier"
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:101
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
-#: www/snippet/submit.php:104 www/snippet/submit.php:108
-#: www/snippet/submit.php:113 www/snippet/submit.php:117
-#: www/snippet/submit.php:123 www/snippet/submit.php:129
-#: www/snippet/submit.php:136 www/snippet/submit.php:140
+#: www/snippet/submit.php:105 www/snippet/submit.php:109
+#: www/snippet/submit.php:114 www/snippet/submit.php:118
+#: www/snippet/submit.php:124 www/snippet/submit.php:130
+#: www/snippet/submit.php:137 www/snippet/submit.php:141
 #: www/softwaremap/tag_cloud.php:144 www/softwaremap/tag_cloud.php:164
 #: www/softwaremap/trove_list.php:81 www/softwaremap/trove_list.php:219
 #: www/softwaremap/trove_list.php:320 www/softwaremap/trove_list.php:324
@@ -395,19 +398,19 @@ msgstr " : "
 
 #: common/docman/actions/monitordirectory.php:54
 #: common/docman/actions/monitorfile.php:56
-#: common/tracker/actions/tracker.php:429
-#: common/tracker/actions/tracker.php:446
-#: common/tracker/Artifact.class.php:618
-#: common/tracker/ArtifactType.class.php:545 www/frs/monitor.php:65
+#: common/tracker/actions/tracker.php:430
+#: common/tracker/actions/tracker.php:447
+#: common/tracker/Artifact.class.php:627
+#: common/tracker/ArtifactType.class.php:554 www/frs/monitor.php:65
 #: www/frs/monitor.php:66
 msgid "Monitoring Started"
 msgstr "Surveillance démarrée"
 
 #: common/docman/actions/monitordirectory.php:72
 #: common/docman/actions/monitorfile.php:76
-#: common/tracker/actions/tracker.php:431
-#: common/tracker/Artifact.class.php:628
-#: common/tracker/ArtifactType.class.php:555 www/developer/monitor.php:75
+#: common/tracker/actions/tracker.php:432
+#: common/tracker/Artifact.class.php:637
+#: common/tracker/ArtifactType.class.php:564 www/developer/monitor.php:75
 #: www/frs/monitor.php:57 www/frs/monitor.php:58
 msgid "Monitoring Stopped"
 msgstr "Surveillance arrêtée"
@@ -481,7 +484,7 @@ msgstr "activé avec succès."
 #: common/survey/SurveyQuestion.class.php:57
 #: common/survey/SurveyQuestionFactory.class.php:53
 #: common/survey/SurveyResponse.class.php:55
-#: common/tracker/ArtifactType.class.php:154
+#: common/tracker/ArtifactType.class.php:162
 #: common/tracker/ArtifactTypeFactory.class.php:59
 #: common/tracker/ArtifactTypes.class.php:54
 msgid "No Valid Group Object"
@@ -572,7 +575,7 @@ msgstr "par"
 
 #: common/docman/Document.class.php:949
 #: common/docman/DocumentGroup.class.php:728
-#: common/forum/ForumHTML.class.php:73 common/tracker/actions/browse.php:365
+#: common/forum/ForumHTML.class.php:73 common/tracker/actions/browse.php:372
 #: plugins/contribtracker/www/index.php:35
 #: plugins/contribtracker/www/index.php:167
 #: plugins/mantisbt/view/admin/StatPerStatus.php:47
@@ -595,7 +598,7 @@ msgstr "Description du document"
 
 #: common/docman/Document.class.php:953
 #: common/docman/DocumentGroup.class.php:731
-#: common/include/Group.class.php:2692 common/tracker/actions/browse.php:201
+#: common/include/Group.class.php:2692 common/tracker/actions/browse.php:202
 #: common/tracker/actions/query.php:202 common/tracker/actions/query.php:346
 msgid "Submitter"
 msgstr "Soumis par"
@@ -740,7 +743,7 @@ msgstr "Dernière modification"
 #: common/docman/include/DocumentGroupHTML.class.php:50
 #: common/include/User.class.php:1410 common/search/SearchQuery.class.php:120
 #: common/survey/SurveyResponse.class.php:95
-#: common/tracker/actions/tracker.php:266
+#: common/tracker/actions/tracker.php:267
 #: common/tracker/views/form-adminroadmap.php:57
 #: plugins/forumml/www/index.php:54 plugins/forumml/www/index.php:59
 #: plugins/forumml/www/index.php:62 plugins/forumml/www/message.php:90
@@ -770,7 +773,7 @@ msgstr "Dernière modification"
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:101
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
-#: www/snippet/download.php:45 www/survey/admin/question.php:64
+#: www/snippet/download.php:47 www/survey/admin/question.php:64
 #: www/survey/admin/question.php:66 www/survey/admin/show_csv.php:80
 #: www/survey/admin/show_csv.php:82 www/survey/admin/show_results.php:76
 #: www/survey/admin/show_results.php:80 www/survey/admin/show_results.php:91
@@ -808,7 +811,7 @@ msgstr ""
 #: common/docman/views/pendingfiles.php:63
 #: common/tracker/actions/admin-ind.php:99
 #: common/tracker/actions/admin-ind.php:139
-#: common/tracker/actions/browse.php:557 common/tracker/actions/ind.php:57
+#: common/tracker/actions/browse.php:564 common/tracker/actions/ind.php:57
 #: common/tracker/views/form-updatetracker.php:53
 #: plugins/blocks/www/index.php:202
 #: plugins/contribtracker/www/global_admin.php:243
@@ -856,8 +859,8 @@ msgstr ""
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:62
 #: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:55
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:46
-#: www/snippet/package.php:151 www/snippet/snippet_utils.php:208
-#: www/snippet/snippet_utils.php:242 www/snippet/submit.php:108
+#: www/snippet/package.php:151 www/snippet/snippet_utils.php:192
+#: www/snippet/snippet_utils.php:226 www/snippet/submit.php:109
 msgid "Description"
 msgstr "Description"
 
@@ -1076,7 +1079,7 @@ msgstr "Restaurer"
 #: plugins/oauthconsumer/www/providers.php:32 www/admin/admin_table.php:330
 #: www/admin/responses_admin.php:45 www/admin/responses_admin.php:92
 #: www/admin/trove/trove_cat_list.php:52 www/frs/admin/showreleases.php:111
-#: www/people/skills_utils.php:45 www/people/skills_utils.php:103
+#: www/people/skills_utils.php:46 www/people/skills_utils.php:104
 #: www/project/admin/editimages.php:262 www/project/admin/editimages.php:293
 #: www/survey/include/SurveyHTML.class.php:319
 #: www/survey/include/SurveyHTML.class.php:368
@@ -1104,13 +1107,13 @@ msgstr ""
 msgid "Folder that document belongs to:"
 msgstr "Dossier auquel le document appartient :"
 
-#: common/docman/views/editfile.php:70 common/tracker/actions/browse.php:405
-#: common/tracker/actions/browse.php:563 common/tracker/actions/browse.php:749
-#: common/tracker/actions/detail.php:80
-#: common/tracker/actions/mod-limited.php:128
-#: common/tracker/actions/mod.php:155 common/tracker/actions/query.php:340
-#: common/tracker/Artifact.class.php:937
-#: common/tracker/views/form-customizelist.php:39 www/pm/browse_task.php:381
+#: common/docman/views/editfile.php:70 common/tracker/actions/browse.php:412
+#: common/tracker/actions/browse.php:570 common/tracker/actions/browse.php:771
+#: common/tracker/actions/detail.php:97
+#: common/tracker/actions/mod-limited.php:145
+#: common/tracker/actions/mod.php:183 common/tracker/actions/query.php:340
+#: common/tracker/Artifact.class.php:946
+#: common/tracker/views/form-customizelist.php:40 www/pm/browse_task.php:381
 #: www/project/admin/database.php:204
 msgid "State"
 msgstr "État"
@@ -1202,13 +1205,13 @@ msgstr ""
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:214
 #: www/account/index.php:242 www/account/register.php:171
 #: www/people/editjob.php:52 www/people/editjob.php:74
-#: www/people/editprofile.php:106 www/people/people_utils.php:435
-#: www/people/skills_utils.php:49 www/pm/admin/index.php:190
+#: www/people/editprofile.php:107 www/people/people_utils.php:436
+#: www/people/skills_utils.php:50 www/pm/admin/index.php:190
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:61
 #: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:54
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:46
 #: www/snippet/browse.php:85 www/snippet/package.php:147
-#: www/snippet/snippet_utils.php:156 www/snippet/submit.php:104
+#: www/snippet/snippet_utils.php:144 www/snippet/submit.php:105
 msgid "Title"
 msgstr "Titre"
 
@@ -1226,8 +1229,8 @@ msgstr "Titre"
 #: www/forum/forum.php:246 www/forum/message.php:160
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:55
 #: www/search/include/renderers/ForumsHtmlSearchRenderer.class.php:48
-#: www/snippet/detail.php:66 www/snippet/detail.php:155
-#: www/snippet/snippet_utils.php:157
+#: www/snippet/detail.php:66 www/snippet/detail.php:150
+#: www/snippet/snippet_utils.php:145
 msgid "Author"
 msgstr "Auteur"
 
@@ -1335,15 +1338,15 @@ msgstr "Créé ou mis à jour depuis moins de 7 jours"
 #: common/docman/views/pendingfiles.php:101
 #: common/docman/views/pendingfiles.php:103
 #: common/forum/ForumHTML.class.php:219 common/pm/ProjectTask.class.php:1212
-#: common/tracker/actions/browse.php:607 common/tracker/actions/browse.php:618
-#: common/tracker/actions/browse.php:638 common/tracker/actions/detail.php:70
-#: common/tracker/actions/downloadcsv.php:84
-#: common/tracker/actions/downloadcsv.php:85
-#: common/tracker/actions/downloadcsv.php:86
-#: common/tracker/actions/mod-limited.php:98
-#: common/tracker/actions/mod-limited.php:103
-#: common/tracker/actions/mod.php:99 common/tracker/actions/mod.php:104
-#: common/tracker/Artifact.class.php:1681
+#: common/tracker/actions/browse.php:621 common/tracker/actions/browse.php:632
+#: common/tracker/actions/browse.php:652 common/tracker/actions/detail.php:87
+#: common/tracker/actions/downloadcsv.php:87
+#: common/tracker/actions/downloadcsv.php:88
+#: common/tracker/actions/downloadcsv.php:89
+#: common/tracker/actions/mod-limited.php:115
+#: common/tracker/actions/mod-limited.php:120
+#: common/tracker/actions/mod.php:124 common/tracker/actions/mod.php:129
+#: common/tracker/Artifact.class.php:1690
 #: common/tracker/include/ArtifactHtml.class.php:111
 #: common/tracker/include/ArtifactHtml.class.php:169
 #: common/tracker/include/ArtifactHtml.class.php:178
@@ -1367,8 +1370,8 @@ msgstr "Créé ou mis à jour depuis moins de 7 jours"
 #: www/export/rss20_docman.php:135 www/export/rss20_docman.php:137
 #: www/export/tracker.php:107 www/forum/index.php:90 www/forum/message.php:127
 #: www/forum/myforums.php:152 www/frs/index.php:175 www/frs/index.php:234
-#: www/include/html.php:1075 www/news/news_utils.php:149
-#: www/news/news_utils.php:269 www/people/people_utils.php:456
+#: www/include/html.php:1079 www/news/news_utils.php:149
+#: www/news/news_utils.php:269 www/people/people_utils.php:457
 #: www/people/viewjob.php:77 www/pm/browse_task.php:264
 #: www/pm/browse_task.php:274 www/pm/include/ProjectTaskHTML.class.php:122
 #: www/pm/include/ProjectTaskHTML.class.php:175
@@ -1376,7 +1379,7 @@ msgstr "Créé ou mis à jour depuis moins de 7 jours"
 #: www/project/admin/project_admin_utils.php:180
 #: www/reporting/usersummary.php:129
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:93
-#: www/snippet/detail.php:81 www/snippet/detail.php:170
+#: www/snippet/detail.php:81 www/snippet/detail.php:165
 #: www/soap/tracker/tracker.php:1126 www/softwaremap/full_list.php:122
 #: www/softwaremap/tag_cloud.php:165 www/softwaremap/trove_list.php:324
 #: www/stats/lastlogins.php:61
@@ -1447,16 +1450,16 @@ msgstr "Réserver ce document pour une édition ultérieure"
 msgid "Reserve"
 msgstr "Réserver"
 
-#: common/docman/views/listfile.php:366 common/tracker/actions/detail.php:53
-#: common/tracker/actions/mod-limited.php:62 common/tracker/actions/mod.php:60
+#: common/docman/views/listfile.php:366 common/tracker/actions/detail.php:54
+#: common/tracker/actions/mod-limited.php:63 common/tracker/actions/mod.php:68
 #: common/tracker/include/ArtifactTypeHtml.class.php:76
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:94
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:95
 msgid "Monitor"
 msgstr "Surveiller"
 
 #: common/docman/views/listfile.php:367 common/forum/ForumHTML.class.php:140
-#: common/tracker/actions/detail.php:49
-#: common/tracker/actions/mod-limited.php:58 common/tracker/actions/mod.php:56
+#: common/tracker/actions/detail.php:50
+#: common/tracker/actions/mod-limited.php:59 common/tracker/actions/mod.php:64
 #: common/widget/Widget_MyMonitoredDocuments.class.php:90
 #: common/widget/Widget_MyMonitoredForums.class.php:125
 #: common/widget/Widget_MyMonitoredFp.class.php:106 www/forum/monitor.php:59
@@ -1601,8 +1604,8 @@ msgstr "Actions collectives sur les fichiers en attente sélectionnés :"
 #: common/docman/views/reporting.php:92
 #: common/tracker/include/ArtifactTypeHtml.class.php:329
 #: www/activity/index.php:180 www/frs/reporting/downloads.php:109
-#: www/people/editprofile.php:278 www/people/skills_utils.php:50
-#: www/people/skills_utils.php:154 www/pm/add_task.php:95
+#: www/people/editprofile.php:279 www/people/skills_utils.php:51
+#: www/people/skills_utils.php:155 www/pm/add_task.php:95
 #: www/pm/browse_task.php:126 www/pm/browse_task.php:232
 #: www/pm/detail_task.php:86 www/pm/ganttpage.php:166 www/pm/mod_task.php:146
 #: www/project/stats/index.php:107 www/reporting/groupadded.php:66
@@ -1626,30 +1629,30 @@ msgstr "Date de début"
 #: common/tracker/actions/admin-ind.php:150
 #: common/tracker/actions/admin-ind.php:153
 #: common/tracker/actions/admin-ind.php:156
-#: common/tracker/actions/browse.php:737 common/tracker/actions/browse.php:745
-#: common/tracker/actions/browse.php:755 common/tracker/actions/detail.php:69
-#: common/tracker/actions/detail.php:73 common/tracker/actions/detail.php:80
-#: common/tracker/actions/detail.php:87 common/tracker/actions/detail.php:97
-#: common/tracker/actions/detail.php:109 common/tracker/actions/detail.php:133
-#: common/tracker/actions/detail.php:155 common/tracker/actions/detail.php:162
+#: common/tracker/actions/browse.php:759 common/tracker/actions/browse.php:767
+#: common/tracker/actions/browse.php:777 common/tracker/actions/detail.php:86
+#: common/tracker/actions/detail.php:90 common/tracker/actions/detail.php:97
+#: common/tracker/actions/detail.php:104 common/tracker/actions/detail.php:114
+#: common/tracker/actions/detail.php:126 common/tracker/actions/detail.php:150
+#: common/tracker/actions/detail.php:172 common/tracker/actions/detail.php:179
 #: common/tracker/actions/format_csv.php:69
 #: common/tracker/actions/format_csv.php:74
 #: common/tracker/actions/format_csv.php:87
 #: common/tracker/actions/format_csv.php:91
-#: common/tracker/actions/mod-limited.php:86
-#: common/tracker/actions/mod-limited.php:96
-#: common/tracker/actions/mod-limited.php:102
-#: common/tracker/actions/mod-limited.php:114
+#: common/tracker/actions/mod-limited.php:103
+#: common/tracker/actions/mod-limited.php:113
 #: common/tracker/actions/mod-limited.php:119
-#: common/tracker/actions/mod-limited.php:128
-#: common/tracker/actions/mod-limited.php:142
-#: common/tracker/actions/mod-limited.php:178
-#: common/tracker/actions/mod-limited.php:181
-#: common/tracker/actions/mod-limited.php:188
-#: common/tracker/actions/mod.php:88 common/tracker/actions/mod.php:97
-#: common/tracker/actions/mod.php:103 common/tracker/actions/mod.php:167
-#: common/tracker/actions/mod.php:192 common/tracker/actions/mod.php:241
-#: common/tracker/actions/mod.php:244 common/tracker/actions/query.php:372
+#: common/tracker/actions/mod-limited.php:131
+#: common/tracker/actions/mod-limited.php:136
+#: common/tracker/actions/mod-limited.php:145
+#: common/tracker/actions/mod-limited.php:158
+#: common/tracker/actions/mod-limited.php:194
+#: common/tracker/actions/mod-limited.php:197
+#: common/tracker/actions/mod-limited.php:204
+#: common/tracker/actions/mod.php:113 common/tracker/actions/mod.php:122
+#: common/tracker/actions/mod.php:128 common/tracker/actions/mod.php:194
+#: common/tracker/actions/mod.php:219 common/tracker/actions/mod.php:268
+#: common/tracker/actions/mod.php:271 common/tracker/actions/query.php:372
 #: common/tracker/actions/query.php:374 common/tracker/actions/query.php:376
 #: common/tracker/actions/query.php:399 common/tracker/actions/taskmgr.php:107
 #: common/tracker/actions/taskmgr.php:108
@@ -1672,7 +1675,7 @@ msgstr "Date de début"
 #: common/tracker/views/form-addextrafield.php:114
 #: common/tracker/views/form-addextrafield.php:118
 #: common/tracker/views/form-addextrafield.php:123
-#: common/tracker/views/form-customizelist.php:123
+#: common/tracker/views/form-customizelist.php:127
 #: common/tracker/views/form-deleteextrafieldelement.php:61
 #: common/tracker/views/form-updatecanned.php:43
 #: common/tracker/views/form-updatecanned.php:48
@@ -1802,9 +1805,9 @@ msgstr "Date de début"
 #: www/my/bookmark_edit.php:59 www/my/bookmark_edit.php:65
 #: www/my/diary.php:183 www/my/diary.php:187 www/news/admin/index.php:125
 #: www/people/admin/index.php:103 www/people/admin/index.php:137
-#: www/people/createjob.php:52 www/people/createjob.php:55
+#: www/people/createjob.php:53 www/people/createjob.php:56
 #: www/people/editjob.php:170 www/people/editjob.php:173
-#: www/people/editprofile.php:241 www/pm/admin/index.php:214
+#: www/people/editprofile.php:242 www/pm/admin/index.php:214
 #: www/pm/admin/index.php:293 www/pm/admin/index.php:323
 #: www/pm/admin/index.php:333 www/pm/admin/index.php:343
 #: www/pm/format_csv.php:66 www/pm/format_csv.php:71 www/pm/format_csv.php:76
@@ -1842,16 +1845,16 @@ msgstr "Date de début"
 #: www/reporting/usertime.php:95 www/reporting/usertime.php:96
 #: www/sendmessage.php:150 www/sendmessage.php:161 www/sendmessage.php:172
 #: www/sendmessage.php:176 www/snippet/add_snippet_to_package.php:128
-#: www/snippet/addversion.php:94 www/snippet/addversion.php:98
-#: www/snippet/addversion.php:102 www/snippet/addversion.php:217
-#: www/snippet/addversion.php:221 www/snippet/index.php:64
+#: www/snippet/addversion.php:95 www/snippet/addversion.php:99
+#: www/snippet/addversion.php:103 www/snippet/addversion.php:218
+#: www/snippet/addversion.php:222 www/snippet/index.php:64
 #: www/snippet/index.php:81 www/snippet/package.php:147
 #: www/snippet/package.php:151 www/snippet/package.php:156
-#: www/snippet/package.php:169 www/snippet/snippet_utils.php:199
-#: www/snippet/snippet_utils.php:203 www/snippet/snippet_utils.php:208
-#: www/snippet/snippet_utils.php:229 www/snippet/snippet_utils.php:231
-#: www/snippet/snippet_utils.php:235 www/snippet/snippet_utils.php:237
-#: www/snippet/snippet_utils.php:242
+#: www/snippet/package.php:169 www/snippet/snippet_utils.php:183
+#: www/snippet/snippet_utils.php:187 www/snippet/snippet_utils.php:192
+#: www/snippet/snippet_utils.php:213 www/snippet/snippet_utils.php:215
+#: www/snippet/snippet_utils.php:219 www/snippet/snippet_utils.php:221
+#: www/snippet/snippet_utils.php:226
 #: www/survey/include/SurveyHTML.class.php:137
 #: www/survey/include/SurveyHTML.class.php:139
 #: www/survey/include/SurveyHTML.class.php:198
@@ -1862,8 +1865,8 @@ msgstr " :"
 #: common/docman/views/reporting.php:94
 #: common/tracker/include/ArtifactTypeHtml.class.php:330
 #: www/activity/index.php:181 www/frs/reporting/downloads.php:111
-#: www/people/editprofile.php:279 www/people/skills_utils.php:51
-#: www/people/skills_utils.php:155 www/pm/add_task.php:110
+#: www/people/editprofile.php:280 www/people/skills_utils.php:52
+#: www/people/skills_utils.php:156 www/pm/add_task.php:110
 #: www/pm/browse_task.php:127 www/pm/browse_task.php:234
 #: www/pm/detail_task.php:90 www/pm/ganttpage.php:167 www/pm/mod_task.php:160
 #: www/project/stats/index.php:108 www/reporting/groupadded.php:67
@@ -1929,12 +1932,12 @@ msgid "User"
 msgstr "Utilisateur"
 
 #: common/docman/views/reporting.php:169 common/forum/ForumHTML.class.php:69
-#: common/tracker/actions/detail.php:69
+#: common/tracker/actions/detail.php:86
 #: common/tracker/include/ArtifactHtml.class.php:110
 #: common/tracker/include/ArtifactHtml.class.php:147
 #: common/tracker/include/ArtifactTypeHtml.class.php:375
 #: common/widget/Widget_ProjectLatestDocuments.class.php:73
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:88
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:89
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:111
 #: plugins/contribtracker/www/index.php:42
 #: plugins/contribtracker/www/project_admin.php:289
@@ -2019,7 +2022,7 @@ msgid "Your search is empty."
 msgstr "Votre recherche est vide."
 
 #: common/docman/views/tree.php:64
-#: plugins/projects-hierarchy/view/home_project_link.php:47
+#: plugins/projects-hierarchy/view/home_project_link.php:64
 msgid "Child project"
 msgstr "Projet fils"
 
@@ -2033,12 +2036,13 @@ msgstr "Erreur lors de la création de l'objet Forum"
 #: common/forum/ForumAdmin.class.php:69 common/forum/ForumAdmin.class.php:334
 #: common/tracker/actions/admin-tracker.php:75
 #: common/tracker/actions/deleteartifact.php:57
-#: common/tracker/actions/mod.php:76
+#: common/tracker/actions/mod.php:101
 #: common/tracker/include/ArtifactTypeHtml.class.php:127
+#: common/tracker/include/ArtifactTypeHtml.class.php:388
 #: common/tracker/views/form-addcanned.php:54
 #: common/tracker/views/form-addextrafield.php:57
 #: common/tracker/views/form-addextrafield.php:81
-#: common/tracker/views/form-customizelist.php:100
+#: common/tracker/views/form-customizelist.php:104
 #: common/tracker/views/form-deleteextrafieldelement.php:73
 #: common/tracker/views/form-deleteextrafield.php:52
 #: common/tracker/views/form-deletetracker.php:46
@@ -2073,8 +2077,8 @@ msgstr "Erreur lors de la création de l'objet Forum"
 #: www/frs/admin/deletepackage.php:74 www/frs/admin/deleterelease.php:76
 #: www/frs/admin/index.php:185 www/frs/admin/showreleases.php:114
 #: www/news/admin/index.php:131 www/people/people_utils.php:179
-#: www/people/people_utils.php:327 www/people/skills_utils.php:46
-#: www/people/skills_utils.php:104 www/project/admin/vhost.php:146
+#: www/people/people_utils.php:328 www/people/skills_utils.php:47
+#: www/people/skills_utils.php:105 www/project/admin/vhost.php:146
 #: www/reporting/timeadd.php:163 www/snippet/detail.php:67
 #: www/survey/include/SurveyHTML.class.php:321 www/tracker/admin/index.php:103
 #: www/tracker/admin/index.php:180
@@ -2082,7 +2086,7 @@ msgid "Delete"
 msgstr "Supprimer"
 
 #: common/forum/AttachManager.class.php:164
-#: common/tracker/views/form-customizelist.php:129
+#: common/tracker/views/form-customizelist.php:133
 #: common/widget/WidgetLayoutManager.class.php:540
 #: common/widget/WidgetLayoutManager.class.php:567
 #: plugins/extsubproj/view/admin/viewProjectConfiguration.php:61
@@ -2241,7 +2245,7 @@ msgstr "Publier"
 #: www/admin/vhost.php:183 www/forum/admin/index.php:162
 #: www/frs/admin/editrelease.php:350 www/frs/admin/index.php:182
 #: www/mail/admin/index.php:228 www/mail/admin/index.php:281
-#: www/people/people_utils.php:178 www/people/people_utils.php:326
+#: www/people/people_utils.php:178 www/people/people_utils.php:327
 #: www/pm/admin/index.php:352 www/pm/calendar.php:289
 #: www/project/admin/database.php:230 www/project/admin/index.php:289
 #: www/project/admin/tools.php:305 www/reporting/timecategory.php:99
@@ -2322,7 +2326,7 @@ msgstr "Identifiant invalide pour le groupe de forums."
 
 #: common/forum/Forum.class.php:439 common/forum/Forum.class.php:474
 #: common/frs/FRSPackage.class.php:278 common/frs/FRSPackage.class.php:310
-#: common/tracker/ArtifactType.class.php:527
+#: common/tracker/ArtifactType.class.php:536
 msgid "You can only monitor if you are logged in."
 msgstr "Vous ne pouvez pas établir de surveillance sans être identifié."
 
@@ -2342,7 +2346,7 @@ msgstr "Vous ne pouvez pas enregistrer cette position sans être identifié."
 #: common/tracker/actions/admin-updates.php:478
 #: common/tracker/actions/admin-updates.php:501
 #: common/tracker/actions/admin-updates.php:522
-#: common/tracker/Artifact.class.php:1141
+#: common/tracker/Artifact.class.php:1150
 #: plugins/mailman/include/MailmanList.class.php:247
 #: plugins/mailman/include/MailmanList.class.php:372
 #: plugins/mailman/include/MailmanList.class.php:389
@@ -2353,9 +2357,9 @@ msgstr "La mise à jour a échoué"
 #: common/forum/Forum.class.php:621 common/frs/FRSPackage.class.php:470
 #: common/frs/FRSRelease.class.php:354 common/include/Group.class.php:1617
 #: common/mail/MailingList.class.php:398 common/pm/ProjectGroup.class.php:384
-#: common/pm/ProjectTask.class.php:517 common/tracker/Artifact.class.php:505
+#: common/pm/ProjectTask.class.php:517 common/tracker/Artifact.class.php:514
 #: common/tracker/ArtifactExtraField.class.php:431
-#: common/tracker/ArtifactType.class.php:796
+#: common/tracker/ArtifactType.class.php:815
 msgid "Please tick all checkboxes."
 msgstr "Veuillez cocher toutes les cases."
 
@@ -2366,7 +2370,7 @@ msgid "Error Deleting Forum"
 msgstr "Erreur lors de la suppression du forum"
 
 #: common/forum/ForumFactory.class.php:56 common/forum/ForumHTML.class.php:58
-#: common/include/rbac_texts.php:158 www/forum/forum.php:156
+#: common/include/rbac_texts.php:175 www/forum/forum.php:156
 #: www/forum/index.php:69 www/forum/myforums.php:69
 msgid "Forum"
 msgstr "Forum"
@@ -2389,13 +2393,13 @@ msgid "Posted by"
 msgstr "Publié par"
 
 #: common/forum/ForumHTML.class.php:70 common/include/Navigation.class.php:389
-#: common/tracker/actions/browse.php:197 common/tracker/actions/browse.php:555
-#: common/tracker/actions/detail.php:109
-#: common/tracker/actions/mod-limited.php:142
-#: common/tracker/actions/mod.php:167 common/tracker/actions/query.php:198
+#: common/tracker/actions/browse.php:198 common/tracker/actions/browse.php:562
+#: common/tracker/actions/detail.php:126
+#: common/tracker/actions/mod-limited.php:158
+#: common/tracker/actions/mod.php:194 common/tracker/actions/query.php:198
 #: common/tracker/actions/query.php:382
 #: common/tracker/include/build_submission_form.php:72
-#: common/tracker/views/form-customizelist.php:37
+#: common/tracker/views/form-customizelist.php:38
 #: cronjobs/send_pending_items_mail.php:116
 #: plugins/mantisbt/view/addIssue.php:133
 #: plugins/mantisbt/view/editIssue.php:213
@@ -2484,9 +2488,9 @@ msgstr "Fichier à publier"
 msgid "Warning: Uploaded file will replace current file"
 msgstr "Attention : le fichier actuel sera remplacé de manière permanente"
 
-#: common/forum/ForumHTML.class.php:349 common/tracker/actions/detail.php:151
-#: common/tracker/actions/mod-limited.php:177
-#: common/tracker/actions/mod.php:240
+#: common/forum/ForumHTML.class.php:349 common/tracker/actions/detail.php:168
+#: common/tracker/actions/mod-limited.php:193
+#: common/tracker/actions/mod.php:267
 #: common/tracker/include/ArtifactTypeHtml.class.php:371
 #: www/forum/attachment.php:41 www/forum/attachment.php:123
 #: www/forum/attachment.php:151
@@ -2521,7 +2525,7 @@ msgstr "Sujet"
 #: www/admin/admin_table.php:59 www/admin/admin_table.php:166
 #: www/admin/admin_table.php:227 www/forum/admin/index.php:414
 #: www/forum/monitor.php:65 www/my/rmproject.php:96
-#: www/people/editprofile.php:157 www/people/editprofile.php:215
+#: www/people/editprofile.php:158 www/people/editprofile.php:216
 #: www/pm/mod_task.php:290 www/register/index.php:315
 #: www/reporting/timeadd.php:183 www/tracker/admin/index.php:103
 #: www/tracker/admin/index.php:180
@@ -2540,7 +2544,7 @@ msgstr ""
 "Vous ajoutez un message anonyme car vous n'êtes pas <a href=\"%s"
 "\">identifié</a>"
 
-#: common/forum/ForumHTML.class.php:619 common/tracker/actions/mod.php:216
+#: common/forum/ForumHTML.class.php:619 common/tracker/actions/mod.php:243
 msgid "Post Comment"
 msgstr "Publier le commentaire"
 
@@ -2795,7 +2799,7 @@ msgstr ""
 "Le projet %1$s (%2$s) a publié une nouvelle version de son paquet « %3$s »."
 
 #: common/frs/FRSRelease.class.php:294
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:130
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:131
 #: www/frs/admin/qrs.php:244 www/frs/shownotes.php:78
 msgid "Release Notes"
 msgstr "Notes de version"
@@ -2965,7 +2969,7 @@ msgstr "Permission refusée."
 
 #: common/include/Error.class.php:142 common/include/User.class.php:350
 #: common/include/User.class.php:931 common/include/User.class.php:983
-#: common/tracker/actions/tracker.php:85
+#: common/tracker/actions/tracker.php:86
 #: plugins/forumml/www/forumml_utils.php:679 www/account/change_email.php:38
 msgid "Invalid Email Address"
 msgstr "Adresse de messagerie non valide"
@@ -3027,13 +3031,13 @@ msgid "Upgrade Forge Software"
 msgstr "Mettre à jour le logiciel de la Forge"
 
 #: common/include/forge_events.php:39
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:85
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:86
 #: plugins/mantisbt/view/admin/editVersion.php:61
 #: plugins/mantisbt/view/admin/viewVersion.php:49
 #: plugins/mantisbt/view/roadmap.php:100 plugins/mantisbt/view/roadmap.php:149
-#: www/new/index.php:98 www/snippet/addversion.php:94
-#: www/snippet/addversion.php:217 www/snippet/package.php:169
-#: www/snippet/submit.php:136
+#: www/new/index.php:98 www/snippet/addversion.php:95
+#: www/snippet/addversion.php:218 www/snippet/package.php:169
+#: www/snippet/submit.php:137
 msgid "Version"
 msgstr "Version"
 
@@ -3522,7 +3526,7 @@ msgstr ""
 #: common/include/GroupJoinRequest.class.php:298
 #: common/survey/Survey.class.php:240
 #: common/survey/SurveyQuestion.class.php:170
-#: common/tracker/actions/tracker.php:500 www/pm/task.php:354
+#: common/tracker/actions/tracker.php:501 www/pm/task.php:354
 #: www/reporting/timeadd.php:70 www/survey/admin/question.php:75
 msgid "Delete failed"
 msgstr "Erreur lors de la suppression"
@@ -3534,20 +3538,20 @@ msgstr "Erreur lors de la suppression"
 #: common/widget/Widget_MyMonitoredForums.class.php:138
 #: plugins/blocks/www/index.php:151
 #: plugins/quota_management/www/quota_project.php:87
-#: www/export/rss20_activity.php:153
+#: www/export/rss20_activity.php:155
 msgid "Forums"
 msgstr "Forums"
 
 #: common/include/group_section_texts.php:30
 #: common/reporting/report_utils.php:698
 #: common/widget/Widget_MyArtifacts.class.php:291
-#: plugins/blocks/www/index.php:152 www/export/rss20_activity.php:120
-#: www/export/rss20_activity.php:131 www/reporting/toolspie.php:65
+#: plugins/blocks/www/index.php:152 www/export/rss20_activity.php:122
+#: www/export/rss20_activity.php:133 www/reporting/toolspie.php:65
 msgid "Trackers"
 msgstr "Outils de suivi"
 
 #: common/include/group_section_texts.php:31
-#: common/include/Navigation.class.php:483 common/include/rbac_texts.php:157
+#: common/include/Navigation.class.php:483 common/include/rbac_texts.php:174
 #: common/reporting/report_utils.php:144 common/reporting/report_utils.php:187
 #: common/reporting/report_utils.php:690 common/reporting/report_utils.php:942
 #: common/widget/Widget_ProjectPublicAreas.class.php:147
@@ -3566,8 +3570,8 @@ msgstr "Documents"
 
 #: common/include/group_section_texts.php:33
 #: common/widget/Widget_MyMonitoredFp.class.php:119
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:168
-#: www/export/rss20_activity.php:142
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:169
+#: www/export/rss20_activity.php:144
 msgid "File Release System"
 msgstr "Système de publication de fichiers"
 
@@ -3575,7 +3579,7 @@ msgstr "Système de publication de fichiers"
 #: common/include/Navigation.class.php:528 plugins/blocks/www/index.php:157
 #: plugins/quota_management/www/quota_project.php:74
 #: www/activity/index.php:114 www/activity/index.php:311
-#: www/admin/index.php:191 www/export/rss20_activity.php:164
+#: www/admin/index.php:191 www/export/rss20_activity.php:166
 #: www/news/index.php:34
 msgid "News"
 msgstr "Annonces"
@@ -3600,7 +3604,7 @@ msgid "Log Out"
 msgstr "Se déconnecter"
 
 #: common/include/Navigation.class.php:204 www/account/index.php:117
-#: www/include/html.php:1000
+#: www/include/html.php:1004
 msgid "My Account"
 msgstr "Mon compte"
 
@@ -3690,8 +3694,8 @@ msgstr ""
 msgid "Project Homepage. Widgets oriented"
 msgstr "Résumé du projet, construit à partir de widgets."
 
-#: common/include/Navigation.class.php:407 common/tracker/actions/mod.php:144
-#: common/tracker/actions/mod.php:196
+#: common/include/Navigation.class.php:407 common/tracker/actions/mod.php:172
+#: common/tracker/actions/mod.php:223
 #: common/tracker/include/build_submission_form.php:64
 #: common/widget/Widget_MyProjects.class.php:77
 #: www/include/Layout.class.php:720 www/pm/add_task.php:53
@@ -3719,7 +3723,7 @@ msgstr "Activités récentes, triées par catégorie."
 msgid "Tech & help forums."
 msgstr "Forums techniques ou d'entr'aide."
 
-#: common/include/Navigation.class.php:450 common/include/rbac_texts.php:156
+#: common/include/Navigation.class.php:450 common/include/rbac_texts.php:173
 #: common/reporting/report_utils.php:132
 #: common/tracker/actions/admin-ind.php:99 common/tracker/actions/ind.php:57
 #: common/widget/Widget_ProjectPublicAreas.class.php:56
@@ -3769,7 +3773,7 @@ msgstr "Sondages en ligne, pour donner votre point de vue sur un projet."
 msgid "Flash head line from the project."
 msgstr "Nouvelles rapides à propos du projet."
 
-#: common/include/Navigation.class.php:543 common/include/rbac_texts.php:164
+#: common/include/Navigation.class.php:543 common/include/rbac_texts.php:181
 #: common/widget/Widget_MyLatestSvnCommits.class.php:108
 #: plugins/blocks/www/index.php:158 plugins/quota_management/www/quota.php:165
 #: plugins/quota_management/www/quota.php:189
@@ -3783,7 +3787,7 @@ msgstr "Sources"
 msgid "Source Content Management, peer-review and source discovery."
 msgstr "Gestion de sources pour la publication et la revue de code."
 
-#: common/include/Navigation.class.php:575 common/include/rbac_texts.php:166
+#: common/include/Navigation.class.php:575 common/include/rbac_texts.php:183
 #: plugins/blocks/www/index.php:159
 msgid "Files"
 msgstr "Fichiers"
@@ -3847,15 +3851,15 @@ msgid "Posted data is too large. %1$s exceeds the maximum size of %2$s"
 msgstr ""
 "La taille des données fournies (%1$s) dépasse la limite autorisée (%2$s)."
 
-#: common/include/RBAC.php:194
+#: common/include/RBAC.php:195
 msgid "Cannot link to home project"
 msgstr "Impossible de se lier au projet"
 
-#: common/include/RBAC.php:229
+#: common/include/RBAC.php:230
 msgid "Cannot unlink from home project"
 msgstr "Impossible de se délier du projet"
 
-#: common/include/RBAC.php:598
+#: common/include/RBAC.php:599
 msgid "UNKNOWN (internal error, report bug to FusionForge)"
 msgstr ""
 
@@ -3869,213 +3873,253 @@ msgstr "%s (rôle global)"
 msgid "%s (in project %s)"
 msgstr "%s (dans le projet %s)"
 
-#: common/include/RBAC.php:1125
+#: common/include/RBAC.php:1138
 msgid "Anonymous/not logged in"
 msgstr "Anonyme/non connecté"
 
-#: common/include/RBAC.php:1173
+#: common/include/RBAC.php:1186
 msgid "Any user logged in"
 msgstr "Tout utilisateur connecté"
 
-#: common/include/rbac_texts.php:45 common/include/rbac_texts.php:57
-#: common/include/rbac_texts.php:60 common/include/rbac_texts.php:62
-#: common/include/rbac_texts.php:64
+#: common/include/rbac_texts.php:46 common/include/rbac_texts.php:58
+#: common/include/rbac_texts.php:61 common/include/rbac_texts.php:63
+#: common/include/rbac_texts.php:65
 #: plugins/mediawiki/include/mediawikiPlugin.class.php:219
 msgid "No administrative access"
 msgstr "Pas d'accès administratif"
 
-#: common/include/rbac_texts.php:46 common/include/rbac_texts.php:144
+#: common/include/rbac_texts.php:47 common/include/rbac_texts.php:161
 msgid "Forge administration"
 msgstr "Administration de la forge"
 
-#: common/include/rbac_texts.php:47 common/include/rbac_texts.php:49
-#: common/include/rbac_texts.php:51 common/include/rbac_texts.php:67
-#: common/include/rbac_texts.php:83 common/include/rbac_texts.php:91
-#: common/include/rbac_texts.php:97 common/include/rbac_texts.php:113
-#: common/include/rbac_texts.php:121 common/include/rbac_texts.php:127
-#: common/include/rbac_texts.php:130 common/include/rbac_texts.php:135
+#: common/include/rbac_texts.php:48 common/include/rbac_texts.php:50
+#: common/include/rbac_texts.php:52 common/include/rbac_texts.php:68
+#: common/include/rbac_texts.php:92 common/include/rbac_texts.php:100
+#: common/include/rbac_texts.php:106 common/include/rbac_texts.php:130
+#: common/include/rbac_texts.php:138 common/include/rbac_texts.php:144
+#: common/include/rbac_texts.php:147 common/include/rbac_texts.php:152
 #: plugins/hudson/include/hudsonPlugin.class.php:348
 #: plugins/moinmoin/common/MoinMoinPlugin.class.php:150
 msgid "No Access"
 msgstr "Aucun accès"
 
-#: common/include/rbac_texts.php:48 common/include/rbac_texts.php:145
+#: common/include/rbac_texts.php:49 common/include/rbac_texts.php:162
 msgid "Approve projects"
 msgstr "Approbation des projets"
 
-#: common/include/rbac_texts.php:50 common/include/rbac_texts.php:146
+#: common/include/rbac_texts.php:51 common/include/rbac_texts.php:163
 msgid "Approve news"
 msgstr "Approbation des nouvelles"
 
-#: common/include/rbac_texts.php:52
+#: common/include/rbac_texts.php:53
 #: plugins/mediawiki/include/mediawikiPlugin.class.php:199
 #: plugins/moinmoin/common/MoinMoinPlugin.class.php:151
 msgid "Read access"
 msgstr "Accès en lecture"
 
-#: common/include/rbac_texts.php:53
+#: common/include/rbac_texts.php:54
 msgid "Admin forge stats"
 msgstr "Administration des statistiques de la forge"
 
-#: common/include/rbac_texts.php:55
+#: common/include/rbac_texts.php:56
 msgid "Hidden"
 msgstr "Caché"
 
-#: common/include/rbac_texts.php:56
+#: common/include/rbac_texts.php:57
 msgid "Visible"
 msgstr "Visible"
 
-#: common/include/rbac_texts.php:58 common/include/rbac_texts.php:150
+#: common/include/rbac_texts.php:59 common/include/rbac_texts.php:167
 msgid "Project administration"
 msgstr "Administration du projet"
 
-#: common/include/rbac_texts.php:61 common/tracker/actions/admin-ind.php:87
+#: common/include/rbac_texts.php:62 common/tracker/actions/admin-ind.php:87
 #: www/project/admin/tools.php:321
 msgid "Trackers Administration"
 msgstr "Administration des traceurs"
 
-#: common/include/rbac_texts.php:63 common/include/rbac_texts.php:153
+#: common/include/rbac_texts.php:64 common/include/rbac_texts.php:170
 msgid "Task managers administration"
 msgstr "Administration des gestionnaires de tâches"
 
-#: common/include/rbac_texts.php:65 common/include/rbac_texts.php:154
+#: common/include/rbac_texts.php:66 common/include/rbac_texts.php:171
 msgid "Forums administration"
 msgstr "Administration des forums"
 
-#: common/include/rbac_texts.php:68 common/include/rbac_texts.php:84
-#: common/include/rbac_texts.php:92 common/include/rbac_texts.php:98
-#: common/include/rbac_texts.php:114 common/include/rbac_texts.php:122
-#: common/include/rbac_texts.php:128 common/include/rbac_texts.php:131
+#: common/include/rbac_texts.php:69 common/include/rbac_texts.php:93
+#: common/include/rbac_texts.php:101 common/include/rbac_texts.php:107
+#: common/include/rbac_texts.php:131 common/include/rbac_texts.php:139
+#: common/include/rbac_texts.php:145 common/include/rbac_texts.php:148
 msgid "Read only"
 msgstr "Lecture seule"
 
-#: common/include/rbac_texts.php:69 common/include/rbac_texts.php:99
+#: common/include/rbac_texts.php:70 common/include/rbac_texts.php:108
 msgid "Technician (no read access, no submitting)"
 msgstr "Technicien (sans accès en lecture, sans soumission)"
 
-#: common/include/rbac_texts.php:70 common/include/rbac_texts.php:100
+#: common/include/rbac_texts.php:71 common/include/rbac_texts.php:109
 msgid "Technician (no submitting)"
 msgstr "Technicien (pas de soumission)"
 
-#: common/include/rbac_texts.php:71 common/include/rbac_texts.php:101
+#: common/include/rbac_texts.php:72 common/include/rbac_texts.php:110
 msgid "Manager (no read access, no submitting)"
 msgstr "Manager (sans accès en lecture, sans soumission)"
 
-#: common/include/rbac_texts.php:72 common/include/rbac_texts.php:102
+#: common/include/rbac_texts.php:73 common/include/rbac_texts.php:111
 msgid "Manager (no submitting)"
 msgstr "Manager (sans soumission)"
 
-#: common/include/rbac_texts.php:73 common/include/rbac_texts.php:103
+#: common/include/rbac_texts.php:74 common/include/rbac_texts.php:112
 msgid "Tech & manager (no read access, no submitting)"
 msgstr "Technicien et manager (sans accès en lecture, sans soumission)"
 
-#: common/include/rbac_texts.php:74 common/include/rbac_texts.php:104
+#: common/include/rbac_texts.php:75 common/include/rbac_texts.php:113
 msgid "Tech & manager (no submitting)"
 msgstr "Technicien et manager (sans soumission)"
 
-#: common/include/rbac_texts.php:75 common/include/rbac_texts.php:105
+#: common/include/rbac_texts.php:76 common/include/rbac_texts.php:114
 msgid "Submit only"
 msgstr "Soumission uniquement"
 
-#: common/include/rbac_texts.php:76 common/include/rbac_texts.php:106
+#: common/include/rbac_texts.php:77 common/include/rbac_texts.php:115
 msgid "Read & submit"
 msgstr "Accès en lecture et soumission"
 
-#: common/include/rbac_texts.php:77 common/include/rbac_texts.php:85
-#: common/include/rbac_texts.php:107 common/include/rbac_texts.php:115
+#: common/include/rbac_texts.php:78 common/include/rbac_texts.php:94
+#: common/include/rbac_texts.php:116 common/include/rbac_texts.php:132
 msgid "Technician (no read access)"
 msgstr "Technicien (sans accès en lecture)"
 
-#: common/include/rbac_texts.php:78 common/include/rbac_texts.php:86
-#: common/include/rbac_texts.php:108 common/include/rbac_texts.php:116
+#: common/include/rbac_texts.php:79 common/include/rbac_texts.php:95
+#: common/include/rbac_texts.php:117 common/include/rbac_texts.php:133
 msgid "Technician"
 msgstr "Technicien"
 
-#: common/include/rbac_texts.php:79 common/include/rbac_texts.php:87
-#: common/include/rbac_texts.php:109 common/include/rbac_texts.php:117
+#: common/include/rbac_texts.php:80 common/include/rbac_texts.php:96
+#: common/include/rbac_texts.php:118 common/include/rbac_texts.php:134
 msgid "Manager (no read access)"
 msgstr "Manager (sans accès en lecture)"
 
-#: common/include/rbac_texts.php:80 common/include/rbac_texts.php:88
-#: common/include/rbac_texts.php:110 common/include/rbac_texts.php:118
+#: common/include/rbac_texts.php:81 common/include/rbac_texts.php:97
+#: common/include/rbac_texts.php:119 common/include/rbac_texts.php:135
 msgid "Manager"
 msgstr "Manager"
 
-#: common/include/rbac_texts.php:81 common/include/rbac_texts.php:89
-#: common/include/rbac_texts.php:111 common/include/rbac_texts.php:119
+#: common/include/rbac_texts.php:82 common/include/rbac_texts.php:98
+#: common/include/rbac_texts.php:120 common/include/rbac_texts.php:136
 msgid "Tech & manager (no read access)"
 msgstr "Technicien et manager (pas d'accès en lecture)"
 
-#: common/include/rbac_texts.php:82 common/include/rbac_texts.php:90
-#: common/include/rbac_texts.php:112 common/include/rbac_texts.php:120
+#: common/include/rbac_texts.php:83 common/include/rbac_texts.php:99
+#: common/include/rbac_texts.php:121 common/include/rbac_texts.php:137
 msgid "Tech & manager"
 msgstr "Technicien et manager"
 
-#: common/include/rbac_texts.php:93 common/include/rbac_texts.php:123
+#: common/include/rbac_texts.php:84 common/include/rbac_texts.php:122
+#, fuzzy
+msgid "No access + Vote"
+msgstr "Aucun accès"
+
+#: common/include/rbac_texts.php:85 common/include/rbac_texts.php:123
+#, fuzzy
+msgid "Read only + Vote"
+msgstr "Lecture seule"
+
+#: common/include/rbac_texts.php:86 common/include/rbac_texts.php:124
+#, fuzzy
+msgid "Technician (no read access) + Vote"
+msgstr "Technicien (sans accès en lecture)"
+
+#: common/include/rbac_texts.php:87 common/include/rbac_texts.php:125
+#, fuzzy
+msgid "Technician + Vote"
+msgstr "Technicien"
+
+#: common/include/rbac_texts.php:88 common/include/rbac_texts.php:126
+#, fuzzy
+msgid "Manager (no read access) + Vote"
+msgstr "Manager (sans accès en lecture)"
+
+#: common/include/rbac_texts.php:89 common/include/rbac_texts.php:127
+#, fuzzy
+msgid "Manager + Vote"
+msgstr "Gérer les rôles"
+
+#: common/include/rbac_texts.php:90 common/include/rbac_texts.php:128
+#, fuzzy
+msgid "Tech & manager (no read access) + Vote"
+msgstr "Technicien et manager (pas d'accès en lecture)"
+
+#: common/include/rbac_texts.php:91 common/include/rbac_texts.php:129
+#, fuzzy
+msgid "Tech & manager + Vote"
+msgstr "Technicien et manager"
+
+#: common/include/rbac_texts.php:102 common/include/rbac_texts.php:140
 msgid "Moderated post"
 msgstr "Publication modérée"
 
-#: common/include/rbac_texts.php:94 common/include/rbac_texts.php:124
+#: common/include/rbac_texts.php:103 common/include/rbac_texts.php:141
 msgid "Unmoderated post"
 msgstr "Publication sans modération"
 
-#: common/include/rbac_texts.php:95 common/include/rbac_texts.php:125
+#: common/include/rbac_texts.php:104 common/include/rbac_texts.php:142
 msgid "Moderation"
 msgstr "Modération"
 
-#: common/include/rbac_texts.php:129
+#: common/include/rbac_texts.php:146
 msgid "Commit access"
 msgstr "Accès commit"
 
-#: common/include/rbac_texts.php:132
+#: common/include/rbac_texts.php:149
 msgid "Submit documents"
 msgstr "Soumission de documents"
 
-#: common/include/rbac_texts.php:133
+#: common/include/rbac_texts.php:150
 msgid "Approve documents"
 msgstr "Approbation des documents"
 
-#: common/include/rbac_texts.php:134
+#: common/include/rbac_texts.php:151
 msgid "Doc manager administration"
 msgstr "Administration du gestionnaire de documents"
 
-#: common/include/rbac_texts.php:136
+#: common/include/rbac_texts.php:153
 msgid "View public packages only"
 msgstr "Visibilité uniquement sur les paquets publics"
 
-#: common/include/rbac_texts.php:137
+#: common/include/rbac_texts.php:154
 msgid "View all packages"
 msgstr "Visibilité sur tous les paquets"
 
-#: common/include/rbac_texts.php:138
+#: common/include/rbac_texts.php:155
 msgid "Publish files"
 msgstr "Publication de fichiers"
 
-#: common/include/rbac_texts.php:147
+#: common/include/rbac_texts.php:164
 msgid "Forge statistics"
 msgstr "Statistiques de la forge"
 
-#: common/include/rbac_texts.php:149
+#: common/include/rbac_texts.php:166
 msgid "Project visibility"
 msgstr "Visibilité sur le projet"
 
-#: common/include/rbac_texts.php:152
+#: common/include/rbac_texts.php:169
 msgid "Trackers administration"
 msgstr "Administration des outils de suivi"
 
-#: common/include/rbac_texts.php:160
+#: common/include/rbac_texts.php:177
 msgid "Default for new trackers"
 msgstr "Valeur par défaut pour les nouveaux outils de suivi"
 
-#: common/include/rbac_texts.php:161
+#: common/include/rbac_texts.php:178
 msgid "Default for new task managers"
 msgstr "Valeur par défaut pour les nouveaux gestionnaires de tâches"
 
-#: common/include/rbac_texts.php:162
+#: common/include/rbac_texts.php:179
 msgid "Default for new forums"
 msgstr "Valeur par défaut pour les nouveaux forums"
 
-#: common/include/rbac_texts.php:165
+#: common/include/rbac_texts.php:182
 msgid "Documentation manager"
 msgstr "Gestionnaire de documentation"
 
@@ -5020,7 +5064,7 @@ msgstr "Texte libre pour la page de navigation"
 #: common/tracker/views/form-addextrafieldoption.php:112
 #: common/tracker/views/form-addextrafield.php:146
 #: common/tracker/views/form-adminroadmap.php:234
-#: common/tracker/views/form-clonetracker.php:59
+#: common/tracker/views/form-clonetracker.php:60
 #: common/tracker/views/form-edittemplate.php:24
 #: common/tracker/views/form-extrafieldcopy.php:94
 #: common/tracker/views/form-updatecanned.php:52
@@ -5054,8 +5098,8 @@ msgstr "Texte libre pour la page de navigation"
 #: www/project/admin/editimages.php:235 www/project/admin/roledelete.php:93
 #: www/project/admin/roleedit.php:303 www/project/request.php:70
 #: www/register/index.php:314 www/snippet/add_snippet_to_package.php:167
-#: www/snippet/addversion.php:109 www/snippet/addversion.php:228
-#: www/snippet/package.php:176 www/snippet/submit.php:144
+#: www/snippet/addversion.php:110 www/snippet/addversion.php:229
+#: www/snippet/package.php:176 www/snippet/submit.php:145
 #: www/survey/include/SurveyHTML.class.php:559 www/tracker/roadmap.php:444
 msgid "Submit"
 msgstr "Soumettre"
@@ -5185,7 +5229,7 @@ msgid "Canned Response Updated"
 msgstr "Réponse type mise à jour"
 
 #: common/tracker/actions/admin-updates.php:177
-#: common/tracker/actions/tracker.php:37 www/tracker/admin/index.php:72
+#: common/tracker/actions/tracker.php:38 www/tracker/admin/index.php:72
 #: www/tracker/download.php:42
 msgid "ArtifactType could not be created"
 msgstr "Erreur lors de la création de l'objet ArtifactType"
@@ -5255,15 +5299,15 @@ msgstr "Erreur lors de la suppression d'un élément"
 msgid "Element deleted"
 msgstr "Elément supprimé"
 
-#: common/tracker/actions/browse.php:95
+#: common/tracker/actions/browse.php:96
 #: common/tracker/actions/downloadcsv.php:38
 #: common/tracker/actions/taskmgr.php:142 www/pm/admin/index.php:405
 #: www/pm/index.php:46 www/pm/task.php:86 www/tracker/roadmap.php:333
 msgid "Could Not Get Factory"
 msgstr "Erreur lors de la création de l'objet Factory"
 
-#: common/tracker/actions/browse.php:184 common/tracker/actions/browse.php:306
-#: common/tracker/actions/browse.php:311 common/tracker/actions/query.php:340
+#: common/tracker/actions/browse.php:185 common/tracker/actions/browse.php:313
+#: common/tracker/actions/browse.php:318 common/tracker/actions/query.php:340
 #: www/pm/browse_task.php:106 www/pm/browse_task.php:117
 #: www/pm/browse_task.php:159 www/pm/ganttpage.php:152
 #: www/pm/ganttpage.php:154 www/pm/ganttpage.php:156 www/pm/ganttpage.php:158
@@ -5271,12 +5315,12 @@ msgstr "Erreur lors de la création de l'objet Factory"
 msgid "Any"
 msgstr "Tous"
 
-#: common/tracker/actions/browse.php:189 www/pm/browse_task.php:108
+#: common/tracker/actions/browse.php:190 www/pm/browse_task.php:108
 #: www/pm/browse_task.php:353 www/pm/ganttpage.php:154
 msgid "Unassigned"
 msgstr "Personne"
 
-#: common/tracker/actions/browse.php:195 common/tracker/actions/browse.php:553
+#: common/tracker/actions/browse.php:196 common/tracker/actions/browse.php:560
 #: common/tracker/actions/query.php:196
 #: common/tracker/views/form-addcanned.php:40 www/admin/massmail.php:134
 #: www/admin/search.php:72 www/admin/search.php:147 www/my/dashboard.php:65
@@ -5286,12 +5330,12 @@ msgstr "Personne"
 msgid "Id"
 msgstr "Identifiant"
 
-#: common/tracker/actions/browse.php:196 common/tracker/actions/browse.php:565
-#: common/tracker/actions/browse.php:737 common/tracker/actions/detail.php:73
-#: common/tracker/actions/mod-limited.php:119
-#: common/tracker/actions/mod.php:147 common/tracker/actions/query.php:197
+#: common/tracker/actions/browse.php:197 common/tracker/actions/browse.php:572
+#: common/tracker/actions/browse.php:759 common/tracker/actions/detail.php:90
+#: common/tracker/actions/mod-limited.php:136
+#: common/tracker/actions/mod.php:175 common/tracker/actions/query.php:197
 #: common/tracker/include/build_submission_form.php:66
-#: common/tracker/views/form-customizelist.php:40
+#: common/tracker/views/form-customizelist.php:41
 #: plugins/mantisbt/view/addIssue.php:73
 #: plugins/mantisbt/view/editIssue.php:128
 #: plugins/mantisbt/view/viewIssue.php:85 www/my/dashboard.php:76
@@ -5301,9 +5345,9 @@ msgstr "Identifiant"
 msgid "Priority"
 msgstr "Priorité"
 
-#: common/tracker/actions/browse.php:198 common/tracker/actions/browse.php:559
+#: common/tracker/actions/browse.php:199 common/tracker/actions/browse.php:566
 #: common/tracker/actions/query.php:199
-#: common/tracker/views/form-customizelist.php:38
+#: common/tracker/views/form-customizelist.php:39
 #: cronjobs/send_pending_items_mail.php:118 www/people/viewjob.php:76
 #: www/pm/include/ProjectTaskHTML.class.php:111
 #: www/project/report/index.php:136
@@ -5311,127 +5355,145 @@ msgstr "Priorité"
 msgid "Open Date"
 msgstr "Date d'ouverture"
 
-#: common/tracker/actions/browse.php:199 common/tracker/actions/browse.php:573
+#: common/tracker/actions/browse.php:200 common/tracker/actions/browse.php:580
 #: common/tracker/actions/query.php:200
-#: common/tracker/views/form-customizelist.php:46
+#: common/tracker/views/form-customizelist.php:47
 msgid "Last Modified Date"
 msgstr "Date de la dernière modification"
 
-#: common/tracker/actions/browse.php:200 common/tracker/actions/browse.php:561
+#: common/tracker/actions/browse.php:201 common/tracker/actions/browse.php:568
 #: common/tracker/actions/query.php:201
-#: common/tracker/views/form-customizelist.php:43
+#: common/tracker/views/form-customizelist.php:44
 msgid "Close Date"
 msgstr "Date de fermeture"
 
-#: common/tracker/actions/browse.php:202 common/tracker/actions/browse.php:402
+#: common/tracker/actions/browse.php:203 common/tracker/actions/browse.php:409
 #: common/tracker/actions/query.php:203 common/tracker/actions/query.php:347
 #: www/pm/browse_task.php:158 www/pm/ganttpage.php:181
 msgid "Assignee"
 msgstr "Responsable"
 
-#: common/tracker/actions/browse.php:218 common/tracker/actions/query.php:219
+#: common/tracker/actions/browse.php:204 common/tracker/actions/browse.php:582
+#: common/tracker/views/form-customizelist.php:48
+#, fuzzy
+msgid "# Votes"
+msgstr "Votes"
+
+#: common/tracker/actions/browse.php:205 common/tracker/actions/browse.php:584
+#: common/tracker/views/form-customizelist.php:49
+#, fuzzy
+msgid "# Voters"
+msgstr "Votes"
+
+#: common/tracker/actions/browse.php:206
+#: common/tracker/views/form-customizelist.php:50
+#, fuzzy
+msgid "% Votes"
+msgstr "Votes"
+
+#: common/tracker/actions/browse.php:225 common/tracker/actions/query.php:219
 msgid "Ascending"
 msgstr "Croissant"
 
-#: common/tracker/actions/browse.php:219 common/tracker/actions/query.php:220
+#: common/tracker/actions/browse.php:226 common/tracker/actions/query.php:220
 msgid "Descending"
 msgstr "Décroissant"
 
-#: common/tracker/actions/browse.php:229 common/tracker/actions/query.php:230
+#: common/tracker/actions/browse.php:236 common/tracker/actions/query.php:230
 msgid "Any changes"
 msgstr "Tous les changements"
 
-#: common/tracker/actions/browse.php:230 common/tracker/actions/query.php:231
+#: common/tracker/actions/browse.php:237 common/tracker/actions/query.php:231
 msgid "Last 24 h"
 msgstr "Les dernières 24 h"
 
-#: common/tracker/actions/browse.php:231 common/tracker/actions/query.php:232
+#: common/tracker/actions/browse.php:238 common/tracker/actions/query.php:232
 msgid "Last 7 days"
 msgstr "La dernière semaine"
 
-#: common/tracker/actions/browse.php:232 common/tracker/actions/query.php:233
+#: common/tracker/actions/browse.php:239 common/tracker/actions/query.php:233
 msgid "Last 2 weeks"
 msgstr "La dernière quinzaine"
 
-#: common/tracker/actions/browse.php:233 common/tracker/actions/query.php:234
+#: common/tracker/actions/browse.php:240 common/tracker/actions/query.php:234
 msgid "Last month"
 msgstr "Le mois dernier"
 
-#: common/tracker/actions/browse.php:272 www/pm/browse_task.php:181
+#: common/tracker/actions/browse.php:279 www/pm/browse_task.php:181
 #, php-format
 msgid "Displaying results %1$d‒%2$d out of %3$d total."
 msgstr "Affichage des résultats %1$d‒%2$d (sur un total de %3$d)."
 
-#: common/tracker/actions/browse.php:275 www/pm/browse_task.php:184
+#: common/tracker/actions/browse.php:282 www/pm/browse_task.php:184
 #, php-format
 msgid "Displaying %2$s results."
 msgstr "Affichage de %2$s résultats."
 
-#: common/tracker/actions/browse.php:277 www/pm/browse_task.php:186
+#: common/tracker/actions/browse.php:284 www/pm/browse_task.php:186
 #: www/top/topusers.php:67
 msgid "Change"
 msgstr "Changement"
 
-#: common/tracker/actions/browse.php:328 common/tracker/actions/browse.php:438
+#: common/tracker/actions/browse.php:335 common/tracker/actions/browse.php:445
 msgid "Advanced queries"
 msgstr "Requêtes avancées"
 
-#: common/tracker/actions/browse.php:358 www/include/html.php:653
+#: common/tracker/actions/browse.php:365 www/include/html.php:657
 msgid "Select One"
 msgstr "Sélectionner"
 
-#: common/tracker/actions/browse.php:365 www/frs/admin/index.php:210
+#: common/tracker/actions/browse.php:372 www/frs/admin/index.php:210
 #: www/my/diary.php:209
 msgid "Private"
 msgstr "Privé"
 
-#: common/tracker/actions/browse.php:377
+#: common/tracker/actions/browse.php:384
 msgid "Power Query"
 msgstr "Exécuter"
 
-#: common/tracker/actions/browse.php:379 common/tracker/actions/browse.php:391
+#: common/tracker/actions/browse.php:386 common/tracker/actions/browse.php:398
 #: common/tracker/actions/query.php:252 common/tracker/actions/query.php:256
 msgid "Build Query"
 msgstr "Construire une requête"
 
-#: common/tracker/actions/browse.php:395 common/tracker/actions/browse.php:439
+#: common/tracker/actions/browse.php:402 common/tracker/actions/browse.php:446
 msgid "Simple Filtering and Sorting"
 msgstr "Filtrage et tri simples"
 
-#: common/tracker/actions/browse.php:423 common/tracker/actions/query.php:391
+#: common/tracker/actions/browse.php:430 common/tracker/actions/query.php:391
 msgid "Order by"
 msgstr "Trier par"
 
-#: common/tracker/actions/browse.php:426
+#: common/tracker/actions/browse.php:433
 msgid "Quick Browse"
 msgstr "Navigation rapide"
 
-#: common/tracker/actions/browse.php:435
+#: common/tracker/actions/browse.php:442
 #: common/tracker/views/form-adminroadmap.php:489
 msgid "Default"
 msgstr "Par défaut"
 
-#: common/tracker/actions/browse.php:437
+#: common/tracker/actions/browse.php:444
 #, php-format
 msgid "Viewing only opened records by default, use “%1$s” or “%2$s” to change."
 msgstr ""
 "Seuls les enregistrements ouverts sont affichés par défaut.  Pour voir les "
 "autres, utilisez les fonctions de « %1$s » ou de « %2$s »."
 
-#: common/tracker/actions/browse.php:538 www/pm/browse_task.php:209
+#: common/tracker/actions/browse.php:545 www/pm/browse_task.php:209
 msgid "Check all"
 msgstr "Cocher tout"
 
-#: common/tracker/actions/browse.php:540 www/pm/browse_task.php:211
+#: common/tracker/actions/browse.php:547 www/pm/browse_task.php:211
 msgid "Clear all"
 msgstr "Décocher tout"
 
-#: common/tracker/actions/browse.php:567 common/tracker/actions/browse.php:745
-#: common/tracker/actions/detail.php:97
-#: common/tracker/actions/mod-limited.php:114
-#: common/tracker/actions/mod.php:140 common/tracker/Artifact.class.php:933
+#: common/tracker/actions/browse.php:574 common/tracker/actions/browse.php:767
+#: common/tracker/actions/detail.php:114
+#: common/tracker/actions/mod-limited.php:131
+#: common/tracker/actions/mod.php:168 common/tracker/Artifact.class.php:942
 #: common/tracker/include/build_submission_form.php:62
-#: common/tracker/views/form-customizelist.php:41
+#: common/tracker/views/form-customizelist.php:42
 #: cronjobs/send_pending_items_mail.php:119
 #: plugins/mantisbt/controler/filter.php:138
 #: plugins/mantisbt/view/addIssue.php:74
@@ -5443,9 +5505,10 @@ msgstr "Décocher tout"
 msgid "Assigned to"
 msgstr "Confié à"
 
-#: common/tracker/actions/browse.php:569 common/tracker/actions/detail.php:87
-#: common/tracker/actions/mod-limited.php:86 common/tracker/actions/mod.php:88
-#: common/tracker/views/form-customizelist.php:42
+#: common/tracker/actions/browse.php:576 common/tracker/actions/detail.php:104
+#: common/tracker/actions/mod-limited.php:103
+#: common/tracker/actions/mod.php:113
+#: common/tracker/views/form-customizelist.php:43
 #: cronjobs/send_pending_items_mail.php:79
 #: cronjobs/send_pending_items_mail.php:120
 #: plugins/mantisbt/controler/filter.php:122 www/admin/approve-pending.php:209
@@ -5459,23 +5522,28 @@ msgstr "Confié à"
 msgid "Submitted by"
 msgstr "Proposé par"
 
-#: common/tracker/actions/browse.php:571 common/tracker/actions/mod.php:228
+#: common/tracker/actions/browse.php:578 common/tracker/actions/mod.php:255
 #: common/tracker/include/ArtifactTypeHtml.class.php:325
-#: common/tracker/views/form-customizelist.php:45
+#: common/tracker/views/form-customizelist.php:46
 msgid "Related Tasks"
 msgstr "Tâches liées"
 
-#: common/tracker/actions/browse.php:691
+#: common/tracker/actions/browse.php:586
+#, fuzzy
+msgid "% Voted"
+msgstr "Aucun vote"
+
+#: common/tracker/actions/browse.php:713
 #, php-format
 msgid "* Denotes requests > %s Days Old"
 msgstr "* indique les requêtes datant de plus de %s jours"
 
-#: common/tracker/actions/browse.php:714 common/tracker/actions/browse.php:758
+#: common/tracker/actions/browse.php:736 common/tracker/actions/browse.php:780
 #: www/pm/browse_task.php:359 www/pm/browse_task.php:388
 msgid "Mass Update"
 msgstr "Mise à jour massive"
 
-#: common/tracker/actions/browse.php:718 www/pm/browse_task.php:364
+#: common/tracker/actions/browse.php:740 www/pm/browse_task.php:364
 msgid ""
 "If you wish to apply changes to all items selected above, use these controls "
 "to change their properties and click once on “Mass Update”."
@@ -5484,25 +5552,25 @@ msgstr ""
 "ci-dessus, utilisez ces contrôles pour changer les propriétés, et cliquez "
 "(une seule fois) sur « Mise à jour massive »."
 
-#: common/tracker/actions/browse.php:735 common/tracker/actions/browse.php:746
-#: common/tracker/actions/browse.php:750 www/include/html.php:363
-#: www/include/html.php:619 www/include/html.php:823
+#: common/tracker/actions/browse.php:757 common/tracker/actions/browse.php:768
+#: common/tracker/actions/browse.php:772 www/include/html.php:363
+#: www/include/html.php:623 www/include/html.php:827
 #: www/pm/browse_task.php:356 www/pm/browse_task.php:371
 #: www/pm/browse_task.php:382
 msgid "No Change"
 msgstr "Aucun changement"
 
-#: common/tracker/actions/browse.php:746
-#: common/tracker/include/ArtifactTypeHtml.class.php:692
-#: common/tracker/include/ArtifactTypeHtml.class.php:726
+#: common/tracker/actions/browse.php:768
+#: common/tracker/include/ArtifactTypeHtml.class.php:694
+#: common/tracker/include/ArtifactTypeHtml.class.php:728
 msgid "Nobody"
 msgstr "Personne"
 
-#: common/tracker/actions/browse.php:755 common/tracker/Artifact.class.php:941
+#: common/tracker/actions/browse.php:777 common/tracker/Artifact.class.php:950
 msgid "Canned Response"
 msgstr "Réponse type"
 
-#: common/tracker/actions/browse.php:767
+#: common/tracker/actions/browse.php:789
 msgid "No items found"
 msgstr "Aucun élément trouvé"
 
@@ -5541,7 +5609,7 @@ msgstr "Supprimer l'objet"
 #: plugins/mailman/www/admin/deletelist.php:59 www/admin/groupdelete.php:57
 #: www/admin/groupdelete.php:58 www/admin/groupdelete.php:59
 #: www/mail/admin/deletelist.php:67 www/mail/admin/deletelist.php:73
-#: www/people/editprofile.php:199 www/project/admin/roledelete.php:83
+#: www/people/editprofile.php:200 www/project/admin/roledelete.php:83
 msgid "Confirm Delete"
 msgstr "Confirmez la suppression"
 
@@ -5561,66 +5629,81 @@ msgstr "Êtes-vous sûr de vouloir supprimer cet élément ?"
 msgid "I am Sure"
 msgstr "Je confirme"
 
-#: common/tracker/actions/detail.php:61
-#: common/tracker/actions/mod-limited.php:78 common/tracker/actions/mod.php:79
-#: common/tracker/actions/query.php:265
+#: common/tracker/actions/detail.php:63
+#: common/tracker/actions/mod-limited.php:72 common/tracker/actions/mod.php:77
+#: www/survey/admin/show_results.php:99
+msgid "Votes"
+msgstr "Votes"
+
+#: common/tracker/actions/detail.php:67
+#: common/tracker/actions/mod-limited.php:76 common/tracker/actions/mod.php:82
+msgid "Retract Vote"
+msgstr ""
+
+#: common/tracker/actions/detail.php:70
+#: common/tracker/actions/mod-limited.php:79 common/tracker/actions/mod.php:85
+#, fuzzy
+msgid "Cast Vote"
+msgstr "Dernière date"
+
+#: common/tracker/actions/detail.php:78
+#: common/tracker/actions/mod-limited.php:95
+#: common/tracker/actions/mod.php:104 common/tracker/actions/query.php:265
 msgid "Save Changes"
 msgstr "Enregistrer les modifications"
 
-#: common/tracker/actions/detail.php:124 common/tracker/actions/detail.php:140
-#: common/tracker/actions/mod-limited.php:158
-#: common/tracker/actions/mod-limited.php:164
-#: common/tracker/actions/mod.php:189 common/tracker/actions/mod.php:218
+#: common/tracker/actions/detail.php:141 common/tracker/actions/detail.php:157
+#: common/tracker/actions/mod-limited.php:174
+#: common/tracker/actions/mod-limited.php:180
+#: common/tracker/actions/mod.php:216 common/tracker/actions/mod.php:245
 #: common/tracker/actions/query.php:386 www/news/news_utils.php:181
 #: www/pm/include/ProjectTaskHTML.class.php:142
 #: www/survey/include/SurveyHTML.class.php:660
 msgid "Comments"
 msgstr "Commentaires"
 
-#: common/tracker/actions/detail.php:133
-#: common/tracker/actions/mod-limited.php:161 www/pm/mod_task.php:126
+#: common/tracker/actions/detail.php:150
+#: common/tracker/actions/mod-limited.php:177 www/pm/mod_task.php:126
 msgid "Add A Comment"
 msgstr "Ajouter un commentaire"
 
-#: common/tracker/actions/detail.php:155
-#: common/tracker/actions/mod-limited.php:181
-#: common/tracker/actions/mod.php:244
+#: common/tracker/actions/detail.php:172
+#: common/tracker/actions/mod-limited.php:197
+#: common/tracker/actions/mod.php:271
 #: common/tracker/include/build_submission_form.php:106
 msgid "Attach Files"
 msgstr "Joindre des fichiers"
 
-#: common/tracker/actions/detail.php:155
-#: common/tracker/actions/mod-limited.php:181
-#: common/tracker/actions/mod.php:244
+#: common/tracker/actions/detail.php:172
+#: common/tracker/actions/mod-limited.php:197
+#: common/tracker/actions/mod.php:271
 #: common/tracker/include/build_submission_form.php:106
 #: www/frs/admin/editrelease.php:251 www/frs/admin/editrelease.php:258
 #: www/frs/admin/editrelease.php:294
 msgid "max upload size: "
 msgstr ""
 
-#: common/tracker/actions/detail.php:162
-#: common/tracker/actions/mod-limited.php:188
+#: common/tracker/actions/detail.php:179
+#: common/tracker/actions/mod-limited.php:204
 #: plugins/mantisbt/view/viewAttachment.php:44
 msgid "Attached Files"
 msgstr "Fichiers joints"
 
-#: common/tracker/actions/detail.php:172
-#: common/tracker/actions/mod-limited.php:198
-#: common/tracker/actions/mod.php:259
+#: common/tracker/actions/detail.php:189
+#: common/tracker/actions/mod-limited.php:214
+#: common/tracker/actions/mod.php:286
 #: plugins/scmcvs/common/CVSPlugin.class.php:177
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:212
-#: plugins/scmsvn/common/SVNPlugin.class.php:224
 #: utils/fixscripts/populate_template_project.php:203
 #: www/stats/site_stats_utils.php:283
 msgid "Commits"
 msgstr "Envois"
 
-#: common/tracker/actions/detail.php:182 common/tracker/actions/detail.php:183
-#: common/tracker/actions/mod-limited.php:208
-#: common/tracker/actions/mod-limited.php:209
-#: common/tracker/actions/mod.php:269 common/tracker/actions/mod.php:270
+#: common/tracker/actions/detail.php:199 common/tracker/actions/detail.php:200
+#: common/tracker/actions/mod-limited.php:224
+#: common/tracker/actions/mod-limited.php:225
+#: common/tracker/actions/mod.php:296 common/tracker/actions/mod.php:297
 #: common/tracker/include/ArtifactHtml.class.php:215
-#: www/snippet/addversion.php:98 www/snippet/addversion.php:221
+#: www/snippet/addversion.php:99 www/snippet/addversion.php:222
 msgid "Changes"
 msgstr "Changements"
 
@@ -5654,20 +5737,20 @@ msgid "Included"
 msgstr "Inclus"
 
 #: common/tracker/actions/format_csv.php:76
-#: common/tracker/include/ArtifactTypeHtml.class.php:546
-#: common/tracker/include/ArtifactTypeHtml.class.php:591
-#: common/tracker/include/ArtifactTypeHtml.class.php:758
+#: common/tracker/include/ArtifactTypeHtml.class.php:548
+#: common/tracker/include/ArtifactTypeHtml.class.php:593
+#: common/tracker/include/ArtifactTypeHtml.class.php:760
 #: plugins/scmhg/common/HgPlugin.class.php:630 www/admin/pluginman.php:230
 #: www/admin/pluginman.php:249 www/admin/pluginman.php:261
 #: www/admin/pluginman.php:262 www/include/html.php:322
-#: www/include/html.php:559 www/include/html.php:650 www/include/html.php:673
-#: www/include/html.php:707 www/include/html.php:750 www/pm/format_csv.php:78
+#: www/include/html.php:563 www/include/html.php:654 www/include/html.php:677
+#: www/include/html.php:711 www/include/html.php:754 www/pm/format_csv.php:78
 #: www/pm/ganttpage.php:158 www/tracker/roadmap.php:440
 msgid "None"
 msgstr "Aucun(e)"
 
 #: common/tracker/actions/format_csv.php:84
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:91
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:92
 #: plugins/mantisbt/view/viewNote.php:42 www/pm/csv.php:93
 #: www/pm/format_csv.php:86
 msgid "Notes"
@@ -5726,29 +5809,30 @@ msgstr "Ouvert"
 msgid "Total"
 msgstr "Total"
 
-#: common/tracker/actions/mod-limited.php:73 common/tracker/actions/mod.php:71
+#: common/tracker/actions/mod-limited.php:90 common/tracker/actions/mod.php:96
 msgid "Build Task Relation"
 msgstr "Établir une relation avec des tâches"
 
-#: common/tracker/actions/mod-limited.php:96 common/tracker/actions/mod.php:97
+#: common/tracker/actions/mod-limited.php:113
+#: common/tracker/actions/mod.php:122
 msgid "Date Submitted"
 msgstr "Date de soumission"
 
-#: common/tracker/actions/mod-limited.php:102
-#: common/tracker/actions/mod.php:103
+#: common/tracker/actions/mod-limited.php:119
+#: common/tracker/actions/mod.php:128
 msgid "Date Closed"
 msgstr "Date de fermeture"
 
-#: common/tracker/actions/mod-limited.php:178
-#: common/tracker/actions/mod.php:241
+#: common/tracker/actions/mod-limited.php:194
+#: common/tracker/actions/mod.php:268
 msgid "Existing Files"
 msgstr "Fichiers existants"
 
-#: common/tracker/actions/mod.php:111 common/tracker/Artifact.class.php:945
+#: common/tracker/actions/mod.php:136 common/tracker/Artifact.class.php:954
 msgid "Data Type"
 msgstr "Type de données"
 
-#: common/tracker/actions/mod.php:168 www/include/html.php:407
+#: common/tracker/actions/mod.php:195 www/include/html.php:407
 msgid ""
 "The summary text-box represents a short tracker item summary. Useful when "
 "browsing through several tracker items."
@@ -5756,15 +5840,15 @@ msgstr ""
 "Le champ résumé doit contenir un résumé concis de l'élément à suivre. Utile "
 "lorsqu'on parcourt plusieurs éléments."
 
-#: common/tracker/actions/mod.php:175 common/tracker/actions/query.php:384
+#: common/tracker/actions/mod.php:202 common/tracker/actions/query.php:384
 #: common/tracker/include/ArtifactHtml.class.php:45
 #: common/tracker/include/ArtifactHtml.class.php:50
 #: common/tracker/include/build_submission_form.php:79
-#: common/tracker/views/form-customizelist.php:44
+#: common/tracker/views/form-customizelist.php:45
 msgid "Detailed description"
 msgstr "Description détaillée"
 
-#: common/tracker/actions/mod.php:192
+#: common/tracker/actions/mod.php:219
 msgid "Use Canned Response"
 msgstr "Utiliser une réponse type"
 
@@ -5854,14 +5938,16 @@ msgstr "Options"
 msgid "Display a short summary box on top of the list (roadmap status)."
 msgstr "Afficher une barre d'état au-dessus de la liste."
 
-#: common/tracker/actions/taskmgr.php:40 common/tracker/actions/tracker.php:75
-#: common/tracker/actions/tracker.php:166
-#: common/tracker/actions/tracker.php:253
-#: common/tracker/actions/tracker.php:424
-#: common/tracker/actions/tracker.php:441
-#: common/tracker/actions/tracker.php:470
-#: common/tracker/actions/tracker.php:491
-#: common/tracker/actions/tracker.php:548 www/tracker/download.php:50
+#: common/tracker/actions/taskmgr.php:40 common/tracker/actions/tracker.php:76
+#: common/tracker/actions/tracker.php:167
+#: common/tracker/actions/tracker.php:254
+#: common/tracker/actions/tracker.php:425
+#: common/tracker/actions/tracker.php:442
+#: common/tracker/actions/tracker.php:471
+#: common/tracker/actions/tracker.php:492
+#: common/tracker/actions/tracker.php:549
+#: common/tracker/actions/tracker.php:572
+#: common/tracker/actions/tracker.php:590 www/tracker/download.php:50
 msgid "Artifact Could Not Be Created"
 msgstr "Erreur lors de la création de l'élément"
 
@@ -5886,7 +5972,7 @@ msgstr "Établir une relation entre le suivi et les tâches."
 
 #: common/tracker/actions/taskmgr.php:107
 #: common/tracker/actions/taskmgr.php:161
-#: common/tracker/actions/tracker.php:282 www/activity/index.php:291
+#: common/tracker/actions/tracker.php:283 www/activity/index.php:291
 #: www/activity/index.php:296
 msgid "Tracker Item"
 msgstr "Élément de suivi"
@@ -5917,193 +6003,208 @@ msgstr "Ajouter une relation avec une tâche existante"
 msgid "Create New Task"
 msgstr "Créer une nouvelle tâche"
 
-#: common/tracker/actions/tracker.php:97
+#: common/tracker/actions/tracker.php:98
 #, php-format
 msgid "Item %s successfully created"
 msgstr "Élément %s créé avec succès"
 
-#: common/tracker/actions/tracker.php:109
+#: common/tracker/actions/tracker.php:110
 #, php-format
 msgid "Error on attached file %1$d, file is too large (maximum: %2$s)."
 msgstr ""
 
-#: common/tracker/actions/tracker.php:113
+#: common/tracker/actions/tracker.php:114
 #, php-format
 msgid "Error on attached file %d, transfer interrupted."
 msgstr ""
 
-#: common/tracker/actions/tracker.php:127
-#: common/tracker/actions/tracker.php:354
-#: common/tracker/actions/tracker.php:383
+#: common/tracker/actions/tracker.php:128
+#: common/tracker/actions/tracker.php:355
+#: common/tracker/actions/tracker.php:384
 msgid "Could Not Create File Object"
 msgstr "Erreur lors de la création de l'objet fichier"
 
-#: common/tracker/actions/tracker.php:135
+#: common/tracker/actions/tracker.php:136
 msgid "Could Not Attach File to Item: "
 msgstr "Erreur lors de la création de la pièce jointe : "
 
-#: common/tracker/actions/tracker.php:219
+#: common/tracker/actions/tracker.php:220
 msgid "Updated Successfully"
 msgstr "Mis à jour avec succès"
 
-#: common/tracker/actions/tracker.php:266
+#: common/tracker/actions/tracker.php:267
 #, fuzzy, php-format
 msgid "Could not get Project Task for %d"
 msgstr "Erreur lors de la création de l'objet ProjectTask."
 
-#: common/tracker/actions/tracker.php:292
-#: common/tracker/actions/tracker.php:311
+#: common/tracker/actions/tracker.php:293
+#: common/tracker/actions/tracker.php:312
 msgid "Comment added"
 msgstr "Commentaire ajouté"
 
-#: common/tracker/actions/tracker.php:335
+#: common/tracker/actions/tracker.php:336
 #, php-format
 msgid "Error: Skipping attachment %d: file is too large."
 msgstr "La pièce jointe %d a été ignorée car trop volumineuse."
 
-#: common/tracker/actions/tracker.php:339
+#: common/tracker/actions/tracker.php:340
 #, php-format
 msgid "Error: Skipping attachment %d: transfer interrupted."
 msgstr "La pièce jointe %d a été ignorée (transfert interrompu)."
 
-#: common/tracker/actions/tracker.php:363
+#: common/tracker/actions/tracker.php:364
 msgid "File Upload: Error"
 msgstr "Erreur lors de la publication du fichier"
 
-#: common/tracker/actions/tracker.php:366
+#: common/tracker/actions/tracker.php:367
 msgid "File Upload: Successful"
 msgstr "Fichier envoyé avec succès"
 
-#: common/tracker/actions/tracker.php:388
+#: common/tracker/actions/tracker.php:389
 msgid "File Delete"
 msgstr "Fichier détruit"
 
-#: common/tracker/actions/tracker.php:391
+#: common/tracker/actions/tracker.php:392
 msgid "File Delete: Successful"
 msgstr "Fichier détruit avec succès"
 
-#: common/tracker/actions/tracker.php:402
+#: common/tracker/actions/tracker.php:403
 #, php-format
 msgid "Item %s successfully updated"
 msgstr "Élément %s correctement mis à jour."
 
-#: common/tracker/actions/tracker.php:448
+#: common/tracker/actions/tracker.php:449
 msgid "Monitoring Deactivated"
 msgstr "Surveillance arrêtée"
 
-#: common/tracker/actions/tracker.php:496
+#: common/tracker/actions/tracker.php:497
 msgid "Confirmation failed. Artifact not deleted"
 msgstr "Vous n'avez pas confirmé : l'élément n'a pas été supprimé"
 
-#: common/tracker/actions/tracker.php:502
+#: common/tracker/actions/tracker.php:503
 msgid "Artifact Deleted Successfully"
 msgstr "Élément supprimé avec succès"
+
+#: common/tracker/actions/tracker.php:577
+#, fuzzy
+msgid "Retracted Vote successfully"
+msgstr "Mise à jour de l'utilisateur réussie"
+
+#: common/tracker/actions/tracker.php:595
+#, fuzzy
+msgid "Cast Vote successfully"
+msgstr "activé avec succès."
 
 #: common/tracker/ArtifactCanned.class.php:86
 msgid "Title and Message Body are required"
 msgstr "le titre et le corps du message sont obligatoires"
 
-#: common/tracker/Artifact.class.php:142
+#: common/tracker/Artifact.class.php:150
 #: common/tracker/ArtifactExtraField.class.php:68
 #, fuzzy
 msgid "Invalid Artifact Type"
 msgstr "Numéro d'identifiant invalide"
 
-#: common/tracker/Artifact.class.php:154
+#: common/tracker/Artifact.class.php:162
 msgid "Only project members can view private artifact types"
 msgstr "Seuls les membres du projet peuvent voir les éléments privés"
 
-#: common/tracker/Artifact.class.php:191 common/tracker/Artifact.class.php:779
+#: common/tracker/Artifact.class.php:199 common/tracker/Artifact.class.php:788
 msgid "You are not currently allowed to submit items to this tracker."
 msgstr "Vous n'êtes pas autorisé à créer des tickets dans ce traceur."
 
-#: common/tracker/Artifact.class.php:206
+#: common/tracker/Artifact.class.php:214
 msgid "Message Summary Is Required"
 msgstr "Il faut un titre"
 
-#: common/tracker/Artifact.class.php:210
+#: common/tracker/Artifact.class.php:218
 msgid "Message Body Is Required"
 msgstr "Il faut un contenu"
 
-#: common/tracker/Artifact.class.php:229
+#: common/tracker/Artifact.class.php:237
 msgid "Error remapping status"
 msgstr "Erreur lors de la mise en correspondance du statut"
 
-#: common/tracker/Artifact.class.php:300
+#: common/tracker/Artifact.class.php:309
 msgid "Invalid Artifact ID"
 msgstr "Numéro d'identifiant invalide"
 
-#: common/tracker/Artifact.class.php:516
+#: common/tracker/Artifact.class.php:525
 msgid "Error deleting extra field data: "
 msgstr "Erreur lors de la suppression du champ supplémentaire : "
 
-#: common/tracker/Artifact.class.php:527
+#: common/tracker/Artifact.class.php:536
 msgid "Error deleting file from db: "
 msgstr "Erreur lors de la suppression : "
 
-#: common/tracker/Artifact.class.php:535
+#: common/tracker/Artifact.class.php:544
 msgid "Error deleting message: "
 msgstr "Erreur lors de la suppression de l'annonce : "
 
-#: common/tracker/Artifact.class.php:543
+#: common/tracker/Artifact.class.php:552
 msgid "Error deleting history: "
 msgstr "Erreur lors de la suppression de l'historique : "
 
-#: common/tracker/Artifact.class.php:551
+#: common/tracker/Artifact.class.php:560
 msgid "Error deleting monitor: "
 msgstr "Erreur lors de l'arrêt de la surveillance : "
 
-#: common/tracker/Artifact.class.php:559
+#: common/tracker/Artifact.class.php:568
 msgid "Error deleting artifact: "
 msgstr "Erreur lors de la suppression : "
 
-#: common/tracker/Artifact.class.php:570 common/tracker/Artifact.class.php:580
+#: common/tracker/Artifact.class.php:579 common/tracker/Artifact.class.php:589
 msgid "Error updating artifact counts: "
 msgstr "Erreur de mise à jour : "
 
-#: common/tracker/Artifact.class.php:601
+#: common/tracker/Artifact.class.php:610
 msgid "Valid Email Address Required"
 msgstr "Une adresse électronique valide est requise"
 
-#: common/tracker/Artifact.class.php:952
+#: common/tracker/Artifact.class.php:961
 msgid "Invalid assigned person: must be a technician"
 msgstr "Impossible d'affecter à cette personne : ce doit être un technicien"
 
-#: common/tracker/Artifact.class.php:975
+#: common/tracker/Artifact.class.php:984
 msgid "Could not move to new Artifact Type"
 msgstr ""
 
-#: common/tracker/Artifact.class.php:987
+#: common/tracker/Artifact.class.php:996
 #, php-format
 msgid "Moved from %1$s to %2$s"
 msgstr "Déplacé de %1$s à %2$s"
 
-#: common/tracker/Artifact.class.php:1061
+#: common/tracker/Artifact.class.php:1070
 msgid "Removal of old artifact_extra_field_data failed: "
 msgstr "Erreur lors de la suppression de l'ancien artifact_extra_field_data : "
 
-#: common/tracker/Artifact.class.php:1169
+#: common/tracker/Artifact.class.php:1178
 msgid "Could Not Create Canned Response Object"
 msgstr "Erreur lors de la création de la réponse type"
 
-#: common/tracker/Artifact.class.php:1182
+#: common/tracker/Artifact.class.php:1191
 msgid "Unable to Use Canned Response"
 msgstr "Impossible d'utiliser une réponse type"
 
-#: common/tracker/Artifact.class.php:1197
+#: common/tracker/Artifact.class.php:1206
 msgid "Nothing Changed - Update Cancelled"
 msgstr "Aucun changement - Mise à jour annulée"
 
-#: common/tracker/Artifact.class.php:1230
+#: common/tracker/Artifact.class.php:1239
 #, fuzzy
 msgid "Error updating assigned_to in artifact: "
 msgstr "Erreur lors de la mise à jour des informations sur le projet : "
 
-#: common/tracker/Artifact.class.php:1305
-#: common/tracker/Artifact.class.php:1315
+#: common/tracker/Artifact.class.php:1314
+#: common/tracker/Artifact.class.php:1324
 #, fuzzy
 msgid "Status Custom Field Must Be Set"
 msgstr "Champ supplémentaire supprimé"
+
+#: common/tracker/Artifact.class.php:1797
+#, fuzzy
+msgid "User ID not passed"
+msgstr "Utilisateur inactif"
 
 #: common/tracker/ArtifactExtraField.class.php:105
 #: common/tracker/ArtifactExtraField.class.php:380
@@ -6269,20 +6370,20 @@ msgstr "Étendue de dates pour l'ouverture"
 msgid "Invalid Close Date Range"
 msgstr "Étendue de dates pour la fermeture"
 
-#: common/tracker/ArtifactType.class.php:209
-#: common/tracker/ArtifactType.class.php:968
+#: common/tracker/ArtifactType.class.php:217
+#: common/tracker/ArtifactType.class.php:987
 msgid ""
 "ArtifactType: Name, Description, Due Period, and Status Timeout are required"
 msgstr ""
 "Type de traceur : les champs nom, description, délai avant retard, "
 "persistance doivent être renseignés."
 
-#: common/tracker/ArtifactType.class.php:216
-#: common/tracker/ArtifactType.class.php:986
+#: common/tracker/ArtifactType.class.php:224
+#: common/tracker/ArtifactType.class.php:1005
 msgid "E-mail address(es) appeared invalid"
 msgstr "Une ou plusieurs adresses électroniques semblent invalides"
 
-#: common/tracker/ArtifactType.class.php:979
+#: common/tracker/ArtifactType.class.php:998
 msgid "Tracker name already used"
 msgstr "Ce nom d'outil de suivi est déjà pris"
 
@@ -6399,7 +6500,7 @@ msgid "Add/Update Canned Responses"
 msgstr "Ajouter/modifier les réponses types pour %s"
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:124
-#: common/tracker/views/form-clonetracker.php:48
+#: common/tracker/views/form-clonetracker.php:49
 msgid "Clone Tracker"
 msgstr "Cloner l'outil de suivi"
 
@@ -6446,14 +6547,14 @@ msgid "Name"
 msgstr "Nom"
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:377
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:97
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:146
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:98
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:147
 #: plugins/mantisbt/view/viewAttachment.php:56
 #: plugins/mediawiki/www/plugin_admin.php:177 www/new/index.php:118
 msgid "Download"
 msgstr "Télécharger"
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:670
+#: common/tracker/include/ArtifactTypeHtml.class.php:672
 msgid ""
 "Tip: Enter a space-separated list of artifact ids ([#NNN] also accepted)"
 msgstr ""
@@ -6547,13 +6648,13 @@ msgstr "Nom du champ supplémentaire"
 
 #: common/tracker/views/form-addextrafieldoption.php:47
 #: common/tracker/views/form-adminroadmap.php:402
-#: common/tracker/views/form-customizelist.php:98
+#: common/tracker/views/form-customizelist.php:102
 msgid "Current / New positions"
 msgstr "Postes courants et nouveaux"
 
 #: common/tracker/views/form-addextrafieldoption.php:48
 #: common/tracker/views/form-adminroadmap.php:403
-#: common/tracker/views/form-customizelist.php:99
+#: common/tracker/views/form-customizelist.php:103
 msgid "Up/Down positions"
 msgstr "Monter/descendre les positions"
 
@@ -6568,7 +6669,7 @@ msgstr ""
 
 #: common/tracker/views/form-addextrafieldoption.php:84
 #: common/tracker/views/form-adminroadmap.php:412
-#: common/tracker/views/form-customizelist.php:108
+#: common/tracker/views/form-customizelist.php:112
 msgid "Reorder"
 msgstr "Réordonner"
 
@@ -6597,8 +6698,8 @@ msgstr "Champs supplémentaires définis"
 #: plugins/mantisbt/view/admin/editVersion.php:64
 #: plugins/mantisbt/view/admin/viewVersion.php:52 www/admin/database.php:101
 #: www/admin/massmail.php:135 www/frs/index.php:209
-#: www/people/editprofile.php:106 www/people/editprofile.php:277
-#: www/people/skills_utils.php:48 www/people/skills_utils.php:153
+#: www/people/editprofile.php:107 www/people/editprofile.php:278
+#: www/people/skills_utils.php:49 www/people/skills_utils.php:154
 #: www/project/stats/index.php:106 www/reporting/groupadded.php:65
 #: www/reporting/groupcum.php:65 www/reporting/projectact.php:71
 #: www/reporting/projecttime.php:80 www/reporting/projecttime.php:93
@@ -6607,7 +6708,7 @@ msgstr "Champs supplémentaires définis"
 #: www/reporting/useradded.php:64 www/reporting/usercum.php:64
 #: www/reporting/usertime.php:94 www/reporting/usertime.php:106
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:45
-#: www/snippet/snippet_utils.php:229
+#: www/snippet/snippet_utils.php:213
 #: www/survey/include/SurveyHTML.class.php:251
 #: www/tracker/reporting/index.php:130
 msgid "Type"
@@ -6761,7 +6862,7 @@ msgstr "Êtes-vous sûr de vouloir supprimer la feuille de route %s ?"
 #: www/admin/approve-pending.php:162 www/admin/groupedit.php:161
 #: www/admin/responses_admin.php:50 www/forum/admin/index.php:223
 #: www/mail/admin/index.php:190 www/mail/admin/index.php:221
-#: www/people/editprofile.php:244 www/survey/include/SurveyHTML.class.php:202
+#: www/people/editprofile.php:245 www/survey/include/SurveyHTML.class.php:202
 #: www/survey/include/SurveyHTML.class.php:420
 msgid "Yes"
 msgstr "Oui"
@@ -6857,11 +6958,11 @@ msgstr "Nom de la feuille de route"
 msgid "New Roadmap"
 msgstr "Nouvelle feuille de route"
 
-#: common/tracker/views/form-clonetracker.php:32
+#: common/tracker/views/form-clonetracker.php:33
 msgid "Unable to Create Template Group Object"
 msgstr "Erreur lors de la création du projet modèle."
 
-#: common/tracker/views/form-clonetracker.php:51
+#: common/tracker/views/form-clonetracker.php:52
 msgid ""
 "The site administrator must first set up template trackers in the template "
 "projet with default values and set permissions propertly so you can access "
@@ -6871,26 +6972,29 @@ msgstr ""
 "suivi avec des valeurs par défaut, et réglé les permissions de manière à ce "
 "que vous y ayez accès."
 
-#: common/tracker/views/form-clonetracker.php:54
+#: common/tracker/views/form-clonetracker.php:55
 msgid "Choose the template tracker to clone."
 msgstr "Choisissez l'outil de suivi à cloner."
 
-#: common/tracker/views/form-clonetracker.php:57
+#: common/tracker/views/form-clonetracker.php:58
+#, fuzzy
 msgid ""
 "WARNING!!! Cloning this tracker will duplicate all the fields and all the "
 "elements from those fields into this tracker. There is nothing to prevent "
-"you from cloning multiple times or making a huge mess. You have been warned!"
+"you from cloning multiple times or making a huge mess. If you have "
+"preexisting extrafields with same name, they will be dropped. You have been "
+"warned!"
 msgstr ""
 "ATTENTION !  Le clonage de cet outil de suivi va dupliquer tous les champs "
 "et tous les éléments de ces champs dans cet outil.  Aucun mécanisme de "
 "sécurité ne vous empêche de réaliser des clonages multiples, et de vous "
 "retrouver avec un désordre colossal.  Soyez prudent."
 
-#: common/tracker/views/form-customizelist.php:24
+#: common/tracker/views/form-customizelist.php:25
 msgid "Customize Browse List"
 msgstr "Personnaliser la navigation"
 
-#: common/tracker/views/form-customizelist.php:90
+#: common/tracker/views/form-customizelist.php:94
 msgid ""
 "Set order of the fields that will be displayed on the browse view of your "
 "tracker:"
@@ -6898,18 +7002,18 @@ msgstr ""
 "Choisir l'ordre des champs qui seront affichés dans l'écran de navigation de "
 "votre outil de suivi :"
 
-#: common/tracker/views/form-customizelist.php:97
+#: common/tracker/views/form-customizelist.php:101
 msgid "Fields"
 msgstr "Champs"
 
-#: common/tracker/views/form-customizelist.php:118
+#: common/tracker/views/form-customizelist.php:122
 msgid ""
 "Select the fields that will be displayed on the browse view of your tracker:"
 msgstr ""
 "Choisir les champs qui seront affichés dans l'écran de navigation de votre "
 "outil de suivi :"
 
-#: common/tracker/views/form-customizelist.php:123
+#: common/tracker/views/form-customizelist.php:127
 msgid "Add New Field"
 msgstr "Ajouter un nouveau champ"
 
@@ -7687,32 +7791,32 @@ msgstr "Liste des 5 derniers documents publiés par les membres du projet."
 msgid "Latest File Releases"
 msgstr "Derniers fichiers publiés"
 
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:75
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:76
 msgid "This Project Has Not Released Any Files"
 msgstr "Ce projet n'a pas encore publié de fichier"
 
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:82
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:83
 #: www/frs/reporting/downloads.php:107 www/frs/reporting/downloads.php:197
 #: www/snippet/add_snippet_to_package.php:128
 msgid "Package"
 msgstr "Paquet"
 
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:138
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:139
 #: www/frs/index.php:136
 msgid "Monitor this package"
 msgstr "Surveiller ce paquet"
 
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:157
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:158
 msgid "View All Project Files"
 msgstr "Voir tous les fichiers du projet"
 
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:172
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:173
 msgid ""
 "List the most recent packages available for download along with their "
 "revision."
 msgstr "Liste des paquets les plus récents disponibles au téléchargement."
 
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:174
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:175
 msgid ""
 "A Release Notes icon allows you to see the latest changes and developers "
 "comments associated with this revision."
@@ -7720,14 +7824,14 @@ msgstr ""
 "Une icône de Notes de Publication donne une liste des derniers changements "
 "et des commentaires des développeurs sur une révision."
 
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:176
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:177
 msgid ""
 "Then comes the monitor icon, selecting this icon will cause this package to "
 "be monitored for you."
 msgstr ""
 "L'icône de supervision permet de déclencher la surveillance d'un paquet."
 
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:178
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:179
 msgid ""
 "Anytime the project development team posts a new release, you will be "
 "automatically notified via e-mail. All monitored File Releases are listed in "
@@ -9598,7 +9702,7 @@ msgstr ""
 
 #: plugins/globaldashboard/www/admin/manage_accounts.php:80
 #: plugins/mantisbt/view/admin/viewVersion.php:53 www/admin/pluginman.php:138
-#: www/people/people_utils.php:160 www/people/people_utils.php:304
+#: www/people/people_utils.php:160 www/people/people_utils.php:305
 #: www/project/admin/users.php:303 www/project/admin/users.php:377
 #: www/project/admin/users.php:437 www/project/admin/users.php:461
 msgid "Action"
@@ -9667,7 +9771,7 @@ msgstr "Êtes-vous sûr de vouloir supprimer cette forge partenaire ?"
 #: plugins/projects-hierarchy/view/admin_project_link.php:81
 #: www/admin/groupedit.php:160 www/forum/admin/index.php:224
 #: www/mail/admin/index.php:191 www/mail/admin/index.php:222
-#: www/people/editprofile.php:243 www/survey/include/SurveyHTML.class.php:203
+#: www/people/editprofile.php:244 www/survey/include/SurveyHTML.class.php:203
 #: www/survey/include/SurveyHTML.class.php:422
 msgid "No"
 msgstr "Non"
@@ -11173,16 +11277,16 @@ msgstr ""
 #: plugins/mantisbt/view/admin/viewCategorie.php:49
 #: plugins/mantisbt/view/editIssue.php:88
 #: plugins/mantisbt/view/viewIssue.php:57
-#: plugins/mantisbt/view/viewIssues.php:218 www/people/createjob.php:49
+#: plugins/mantisbt/view/viewIssues.php:218 www/people/createjob.php:50
 #: www/people/editjob.php:52 www/people/editjob.php:74
-#: www/people/editjob.php:164 www/people/people_utils.php:355
-#: www/people/people_utils.php:436 www/pm/add_task.php:50
+#: www/people/editjob.php:164 www/people/people_utils.php:356
+#: www/people/people_utils.php:437 www/pm/add_task.php:50
 #: www/pm/browse_task.php:160 www/pm/browse_task.php:238
 #: www/pm/browse_task.php:369 www/pm/detail_task.php:52
 #: www/pm/ganttpage.php:183 www/pm/mod_task.php:61 www/pm/mod_task.php:268
 #: www/reporting/timeadd.php:144 www/snippet/package.php:162
-#: www/snippet/snippet_utils.php:199 www/snippet/snippet_utils.php:231
-#: www/snippet/submit.php:129
+#: www/snippet/snippet_utils.php:183 www/snippet/snippet_utils.php:215
+#: www/snippet/submit.php:130
 msgid "Category"
 msgstr "Catégorie"
 
@@ -12829,16 +12933,16 @@ msgstr "Activer la navigation hiérarchique"
 msgid "Disable hierarchical browsing"
 msgstr "Désactiver la navigation hiérarchique"
 
-#: plugins/projects-hierarchy/view/home_project_link.php:33
+#: plugins/projects-hierarchy/view/home_project_link.php:50
 msgid "Linked projects"
 msgstr "Projets liés"
 
-#: plugins/projects-hierarchy/view/home_project_link.php:37
+#: plugins/projects-hierarchy/view/home_project_link.php:54
 msgid "Parent Project"
 msgstr "Projet parent"
 
-#: plugins/projects-hierarchy/view/home_project_link.php:37
-#: plugins/projects-hierarchy/view/home_project_link.php:47
+#: plugins/projects-hierarchy/view/home_project_link.php:54
+#: plugins/projects-hierarchy/view/home_project_link.php:64
 msgid "Direct link to project"
 msgstr "Lien direct au projet"
 
@@ -13041,14 +13145,13 @@ msgid "Documentation for %1$s is available at <a href=\"%2$s\">%2$s</a>."
 msgstr "La documentation de %1$s est disponible <a href=\"%2$s\">%2$s</a>."
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:70
-#: plugins/scmcvs/common/CVSPlugin.class.php:66
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:84
 #: plugins/scmgit/common/GitPlugin.class.php:78
 #: plugins/scmhg/common/HgPlugin.class.php:187
 #: plugins/scmsvn/common/SVNPlugin.class.php:82
 #, php-format
-msgid "<strong>%1$s</strong> commits, <strong>%2$s</strong> adds"
-msgstr "<strong>%1$s</strong> envois, <strong>%2$s</strong> ajouts"
+msgid "<strong>%1$s</strong> updates, <strong>%2$s</strong> adds"
+msgstr "<strong>%1$s</strong> mises à jour, <strong>%2$s</strong> ajouts"
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:84
 msgid "Anonymous Bazaar Access"
@@ -13253,6 +13356,11 @@ msgstr "Accès anonyme au dépôt CPOLD"
 msgid "This project's CPOLD repository can be accessep anonymously at %s."
 msgstr "Le dépôt CPOLD de ce projet est accessible de manière anonyme à %s."
 
+#: plugins/scmcvs/common/CVSPlugin.class.php:66
+#, php-format
+msgid "<strong>%1$s</strong> commits, <strong>%2$s</strong> adds"
+msgstr "<strong>%1$s</strong> envois, <strong>%2$s</strong> ajouts"
+
 #: plugins/scmcvs/common/CVSPlugin.class.php:80
 msgid "Anonymous CVS Access"
 msgstr "Accès anonyme à CVS"
@@ -13344,6 +13452,12 @@ msgstr ""
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:194
 msgid "No repositories to browse"
 msgstr "Aucun dépôt à explorer"
+
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:212
+#: plugins/scmgit/common/GitPlugin.class.php:351
+#: plugins/scmsvn/common/SVNPlugin.class.php:224
+msgid "Updates"
+msgstr "Mises à jour"
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:630
 msgid "Repository to be created: "
@@ -13495,10 +13609,6 @@ msgstr ""
 "Parcourir le dépôt Git permet de naviguer dans l'état actuel du code de ce "
 "projet, mais également d'avoir accès à l'historique complet de chaque "
 "fichier présent dans le dépôt."
-
-#: plugins/scmgit/common/GitPlugin.class.php:351
-msgid "Updates"
-msgstr "Mises à jour"
 
 #: plugins/scmgit/common/GitPlugin.class.php:977
 msgid "Git Commits"
@@ -14344,8 +14454,8 @@ msgid "Last Name:"
 msgstr "Nom de famille :"
 
 #: www/account/index.php:174 www/snippet/package.php:156
-#: www/snippet/snippet_utils.php:203 www/snippet/snippet_utils.php:237
-#: www/snippet/submit.php:123 www/stats/i18n.php:34
+#: www/snippet/snippet_utils.php:187 www/snippet/snippet_utils.php:221
+#: www/snippet/submit.php:124 www/stats/i18n.php:34
 msgid "Language"
 msgstr "Langue"
 
@@ -15246,8 +15356,8 @@ msgstr "Nom Unix"
 msgid "Public?"
 msgstr "Public ?"
 
-#: www/admin/grouplist.php:72 www/snippet/snippet_utils.php:235
-#: www/snippet/submit.php:117
+#: www/admin/grouplist.php:72 www/snippet/snippet_utils.php:219
+#: www/snippet/submit.php:118
 msgid "License"
 msgstr "Licence"
 
@@ -16333,9 +16443,14 @@ msgstr "L'extension PHP est manquante."
 msgid "Exports Available"
 msgstr "Exports disponibles"
 
-#: www/export/rss20_activity.php:109 www/register/index.php:245
+#: www/export/rss20_activity.php:111 www/register/index.php:245
 msgid "Source Code"
 msgstr "Code source"
+
+#: www/export/rss20_activity.php:196
+#, fuzzy
+msgid "Error: No group selected"
+msgstr "Erreur lors du refus d'un projet : "
 
 #: www/export/rss20_docman.php:78
 msgid "Please supply a Group ID with the request."
@@ -16989,7 +17104,7 @@ msgid "Package name"
 msgstr "Nom du paquet"
 
 #: www/frs/admin/index.php:157 www/frs/admin/index.php:208
-#: www/people/editprofile.php:241
+#: www/people/editprofile.php:242
 msgid "Publicly Viewable"
 msgstr "Visible par le public"
 
@@ -17423,33 +17538,49 @@ msgstr ""
 "Si vous ajoutez des commentaires à cet élément à suivre, que vous l'avez "
 "soumis ou s'il vous est affecté, vous recevrez des messages également."
 
-#: www/include/html.php:565
+#: www/include/html.php:427
+msgid ""
+"You can cast your vote for a Tracker Item to aid Project Management to "
+"decide which features to prioritise, and retract votes at any time. Please "
+"use this functionality sparingly, as it loses its meaning if you vote on "
+"*every* item."
+msgstr ""
+
+#: www/include/html.php:429
+msgid ""
+"This metric displays the number of people who can *currently* vote for "
+"features in this tracker, and how many of them did so. (This means historic "
+"votes of people no longer allowed to vote, while not lost, do not play into "
+"the numbers displayed.)"
+msgstr ""
+
+#: www/include/html.php:569
 msgid "Error: uneven row counts"
 msgstr ""
 
-#: www/include/html.php:825
+#: www/include/html.php:829
 msgid "Lowest"
 msgstr "Minimum"
 
-#: www/include/html.php:829
+#: www/include/html.php:833
 msgid "Highest"
 msgstr "Maximum"
 
-#: www/include/html.php:913
+#: www/include/html.php:917
 #, php-format
 msgid "Project access problem: %s"
 msgstr "Problème d'accès au projet : %s"
 
-#: www/include/html.php:915
+#: www/include/html.php:919
 #, php-format
 msgid "Project Problem: %s"
 msgstr "Problème dans le projet : %s"
 
-#: www/include/html.php:984
+#: www/include/html.php:988
 msgid "My Personal Page"
 msgstr "Ma page personnelle"
 
-#: www/include/html.php:986
+#: www/include/html.php:990
 msgid ""
 "View your personal page, a selection of widgets to follow the informations "
 "from projects."
@@ -17457,73 +17588,73 @@ msgstr ""
 "Visualisez votre page personnelle, une sélection de gadgets pour suivre les "
 "projets."
 
-#: www/include/html.php:989
+#: www/include/html.php:993
 msgid "My Trackers Dashboard"
 msgstr "Tableau de bord des outils de suivi"
 
-#: www/include/html.php:991
+#: www/include/html.php:995
 msgid "View your tasks and artifacts."
 msgstr "Visualisez vos tâches et vos artifacts."
 
-#: www/include/html.php:995 www/my/diary.php:166
+#: www/include/html.php:999 www/my/diary.php:166
 msgid "My Diary and Notes"
 msgstr "Journal et notes"
 
-#: www/include/html.php:997
+#: www/include/html.php:1001
 msgid "Manage your diary. Add, modify or delete your notes."
 msgstr "Gérez votre journal. Ajoutez, modifiez ou supprimez vos notes."
 
-#: www/include/html.php:1002
+#: www/include/html.php:1006
 msgid "Manage your account. Change your password, select your preferences."
 msgstr ""
 "Gérez votre compte. Modifiez votre mot de passe, sélectionnez vos "
 "préférences."
 
-#: www/include/html.php:1006 www/register/index.php:174
+#: www/include/html.php:1010 www/register/index.php:174
 msgid "Register Project"
 msgstr "Enregistrer un projet"
 
-#: www/include/html.php:1008
+#: www/include/html.php:1012
 msgid "Register a new project in forge, following the workflow."
 msgstr ""
 "Enregistrer un nouveau projet dans la forge en suivant les transitions."
 
-#: www/include/html.php:1057
+#: www/include/html.php:1061
 #, php-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "il y a %d seconde"
 msgstr[1] "il y a %d secondes"
 
-#: www/include/html.php:1061
+#: www/include/html.php:1065
 #, php-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "il y a %d minute"
 msgstr[1] "il y a %d minutes"
 
-#: www/include/html.php:1065
+#: www/include/html.php:1069
 #, php-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "il y a %d heure"
 msgstr[1] "il y a %d heures"
 
-#: www/include/html.php:1069
+#: www/include/html.php:1073
 #, php-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "il y a %d jour"
 msgstr[1] "il y a %d jours"
 
-#: www/include/html.php:1073
+#: www/include/html.php:1077
 #, php-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "il y a %d semaine"
 msgstr[1] "il y a %d semaines"
 
-#: www/include/html.php:1292
+#: www/include/html.php:1296
 #, php-format
 msgid " Displaying %1$s per page. Projects sorted by alphabetical order."
 msgstr ""
@@ -18792,7 +18923,7 @@ msgstr "Aucune catégorie"
 msgid "Add Job Skills"
 msgstr "Ajouter une compétence"
 
-#: www/people/createjob.php:44
+#: www/people/createjob.php:45
 msgid ""
 "Start by filling in the fields below. When you click continue, you will be "
 "shown a list of skills and experience levels that this job requires."
@@ -18801,17 +18932,17 @@ msgstr ""
 "Continuer >>, une liste de niveaux d'expérience et de compétences "
 "nécessaires pour ce poste vous sera proposée."
 
-#: www/people/createjob.php:52 www/people/editjob.php:170
+#: www/people/createjob.php:53 www/people/editjob.php:170
 #: www/project/admin/index.php:139
 msgid "Short Description"
 msgstr "Description courte"
 
-#: www/people/createjob.php:55 www/people/editjob.php:173
+#: www/people/createjob.php:56 www/people/editjob.php:173
 #: www/people/viewjob.php:84
 msgid "Long Description"
 msgstr "Description longue"
 
-#: www/people/createjob.php:58
+#: www/people/createjob.php:59
 msgid "Continue >>"
 msgstr "Continuer >>"
 
@@ -18834,8 +18965,8 @@ msgid "Job updated successfully"
 msgstr "Le poste a été mis à jour correctement"
 
 #: www/people/editjob.php:91 www/people/people_utils.php:127
-#: www/people/people_utils.php:157 www/people/people_utils.php:239
-#: www/people/people_utils.php:301
+#: www/people/people_utils.php:157 www/people/people_utils.php:240
+#: www/people/people_utils.php:302
 msgid "Skill"
 msgstr "Compétence"
 
@@ -18929,129 +19060,140 @@ msgstr "La mise à jour de cet utilisateur a échoué : %s"
 msgid "User updated successfully"
 msgstr "Mise à jour de l'utilisateur réussie"
 
-#: www/people/editprofile.php:99
+#: www/people/editprofile.php:100
 #, php-format
 msgid "Failed to add the skill %s"
 msgstr "Échec lors de l'ajout de la compétence %s"
 
-#: www/people/editprofile.php:101
+#: www/people/editprofile.php:102
 msgid "Skill added successfully"
 msgstr "Compétences ajoutée avec succès"
 
-#: www/people/editprofile.php:106
+#: www/people/editprofile.php:107
 msgid "Start Month"
 msgstr "Mois de début"
 
-#: www/people/editprofile.php:106
+#: www/people/editprofile.php:107
 msgid "Start Year"
 msgstr "Année de début"
 
-#: www/people/editprofile.php:106
+#: www/people/editprofile.php:107
 msgid "End Month"
 msgstr "Mois de fin"
 
-#: www/people/editprofile.php:106
+#: www/people/editprofile.php:107
 msgid "End Year"
 msgstr "Année de fin"
 
-#: www/people/editprofile.php:106 www/people/skills_utils.php:52
+#: www/people/editprofile.php:107 www/people/skills_utils.php:53
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:47
 msgid "Keywords"
 msgstr "Mots-clefs"
 
-#: www/people/editprofile.php:124
+#: www/people/editprofile.php:125
 msgid "No skills selected to edit."
 msgstr "Aucune compétence n'est sélectionnée pour l'édition."
 
-#: www/people/editprofile.php:141
+#: www/people/editprofile.php:142
 #, php-format
 msgid "Failed to update skills: %s"
 msgstr "Échec lors de la mise à jour de la compétence : %s."
 
-#: www/people/editprofile.php:144
+#: www/people/editprofile.php:145
+#, fuzzy
 msgid "Skill updated"
-msgid_plural "Skills updated"
-msgstr[0] "Compétence mise à jour"
-msgstr[1] "Compétences mises à jour"
+msgstr "Compétence mise à jour"
 
-#: www/people/editprofile.php:149 www/people/editprofile.php:150
+#: www/people/editprofile.php:145
+#, fuzzy
+msgid "Skills updated"
+msgstr "Compétence mise à jour"
+
+#: www/people/editprofile.php:150 www/people/editprofile.php:151
 msgid "Edit Skills"
 msgstr "Édition des compétences"
 
-#: www/people/editprofile.php:151
+#: www/people/editprofile.php:152
 msgid "Change the required fields, and press “Done” at the bottom of the page"
 msgstr ""
 "Veuillez modifier les champs requis, puis cliquer sur « Effectué » en bas de "
 "page."
 
-#: www/people/editprofile.php:156
+#: www/people/editprofile.php:157
 msgid "Done"
 msgstr "Effectué"
 
-#: www/people/editprofile.php:164
+#: www/people/editprofile.php:165
 msgid "Cancelled skills update"
 msgstr "Mise à jour de la compétence annulée"
 
-#: www/people/editprofile.php:177
+#: www/people/editprofile.php:178
 msgid "No skills selected to delete."
 msgstr "Aucune compétence n'est sélectionnée pour la suppression."
 
-#: www/people/editprofile.php:186
+#: www/people/editprofile.php:187
 #, php-format
 msgid "Failed to delete any skills: %s"
 msgstr "Échec de la suppression de compétences : %s"
 
-#: www/people/editprofile.php:188
+#: www/people/editprofile.php:189
+#, fuzzy
 msgid "Skill deleted successfully"
-msgid_plural "Skills deleted successfully"
-msgstr[0] "Compétence correctement supprimée"
-msgstr[1] "Compétences correctement supprimées"
+msgstr "Compétence correctement supprimée"
 
-#: www/people/editprofile.php:197
+#: www/people/editprofile.php:189
+#, fuzzy
+msgid "Skills deleted successfully"
+msgstr "Compétence correctement supprimée"
+
+#: www/people/editprofile.php:198
 msgid "Confirm skill delete"
 msgstr "Confirmation de la suppression d'une compétence"
 
-#: www/people/editprofile.php:200
+#: www/people/editprofile.php:201
+#, fuzzy
 msgid "You are about to delete the following skill from the skills database:"
-msgid_plural ""
-"You are about to delete the following skills from the skills database:"
-msgstr[0] ""
+msgstr ""
 "Vous êtes sur le point de supprimer la compétence suivante de la base de "
 "données :"
-msgstr[1] ""
-"Vous êtes sur le point de supprimer les compétences suivantes de la base de "
+
+#: www/people/editprofile.php:201
+#, fuzzy
+msgid "You are about to delete the following skills from the skills database:"
+msgstr ""
+"Vous êtes sur le point de supprimer la compétence suivante de la base de "
 "données :"
 
-#: www/people/editprofile.php:205
+#: www/people/editprofile.php:206
 msgid "This action cannot be undone."
 msgstr "Cette action ne peut être annulée."
 
-#: www/people/editprofile.php:206
+#: www/people/editprofile.php:207
 msgid "Are you <strong>sure</strong> you wish to continue?"
 msgstr "Êtes-vous <strong>sûr</strong> de vouloir continuer ?"
 
-#: www/people/editprofile.php:214
+#: www/people/editprofile.php:215
 msgid "Confirm"
 msgstr "Confirmer"
 
-#: www/people/editprofile.php:224
+#: www/people/editprofile.php:225
 msgid "Skill deletion cancelled"
 msgstr "Effacement de compétence annulé"
 
-#: www/people/editprofile.php:227
+#: www/people/editprofile.php:228
 msgid "Edit Your Profile"
 msgstr "Édition de votre profil"
 
-#: www/people/editprofile.php:233 www/people/skills_utils.php:121
-#: www/people/skills_utils.php:122 www/people/viewprofile.php:47
+#: www/people/editprofile.php:234 www/people/skills_utils.php:122
+#: www/people/skills_utils.php:123 www/people/viewprofile.php:47
 msgid "No Such User"
 msgstr "Cet utilisateur n'existe pas"
 
-#: www/people/editprofile.php:237
+#: www/people/editprofile.php:238
 msgid "Edit Public Permissions"
 msgstr "Éditer les permissions publiques"
 
-#: www/people/editprofile.php:239
+#: www/people/editprofile.php:240
 msgid ""
 "The following option determines if others can see your skills. If they "
 "cannot, you can still enter your skills."
@@ -19060,22 +19202,22 @@ msgstr ""
 "compétences. Même s'ils ne le peuvent pas, vous pouvez toujours remplir vos "
 "compétences."
 
-#: www/people/editprofile.php:246
+#: www/people/editprofile.php:247
 msgid "Update Permissions"
 msgstr "Mise à jour des permissions"
 
-#: www/people/editprofile.php:255
+#: www/people/editprofile.php:256
 msgid "No skill types in database (skills_data_types table)"
 msgstr ""
 "Pas de types de compétences dans la base de données (table "
 "skills_data_types)."
 
-#: www/people/editprofile.php:271 www/people/people_utils.php:188
-#: www/people/people_utils.php:336
+#: www/people/editprofile.php:272 www/people/people_utils.php:188
+#: www/people/people_utils.php:337
 msgid "Add a new skill"
 msgstr "Ajouter une nouvelle compétence"
 
-#: www/people/editprofile.php:272
+#: www/people/editprofile.php:273
 msgid ""
 "You can enter new skills you have acquired here. Please enter the start and "
 "finish dates as accurately as possible."
@@ -19083,23 +19225,23 @@ msgstr ""
 "Vous pouvez entrer les nouvelles compétences que vous avez acquises ici. "
 "Veuillez entrer les dates de début et de fin aussi précisément que possible."
 
-#: www/people/editprofile.php:273 www/reporting/timeadd.php:96
+#: www/people/editprofile.php:274 www/reporting/timeadd.php:96
 msgid "All fields are required!"
 msgstr "Tous les champs doivent être remplis !"
 
-#: www/people/editprofile.php:295 www/people/skills_utils.php:170
+#: www/people/editprofile.php:296 www/people/skills_utils.php:170
 msgid "Title (max 100 characters)"
 msgstr "Titre (100 caractères maximum)"
 
-#: www/people/editprofile.php:302 www/people/skills_utils.php:177
+#: www/people/editprofile.php:303 www/people/skills_utils.php:177
 msgid "Keywords (max 255 characters)"
 msgstr "Mots-clefs (max 255 caractères)"
 
-#: www/people/editprofile.php:308
+#: www/people/editprofile.php:309
 msgid "Add This Skill"
 msgstr "Ajouter cette compétence"
 
-#: www/people/editprofile.php:314
+#: www/people/editprofile.php:315
 msgid "Edit/Delete Your Skills"
 msgstr "Modifier ou supprimer vos compétences"
 
@@ -19107,23 +19249,23 @@ msgstr "Modifier ou supprimer vos compétences"
 msgid "Help Wanted Latest Posts"
 msgstr "Derniers envois de demande d'aide"
 
-#: www/people/index.php:42
-msgid "Here is a list of positions available for this project."
-msgstr "Voici une liste de fonctions possibles dans ce projet."
-
-#: www/people/index.php:49 www/people/index.php:58
+#: www/people/index.php:42 www/people/index.php:53 www/people/index.php:62
 msgid "Help Wanted System"
 msgstr "Les projets ayant besoin d'aide"
 
-#: www/people/index.php:49
+#: www/people/index.php:46
+msgid "Here is a list of positions available for this project."
+msgstr "Voici une liste de fonctions possibles dans ce projet."
+
+#: www/people/index.php:53
 msgid " as "
 msgstr ""
 
-#: www/people/index.php:52
+#: www/people/index.php:56
 msgid "Click job titles for more detailed descriptions."
 msgstr "Cliquez sur les noms de « métiers » pour plus d'informations."
 
-#: www/people/index.php:61
+#: www/people/index.php:65
 #, php-format
 msgid ""
 "The %s Project Help Wanted board is for non-commercial, project volunteer "
@@ -19132,7 +19274,7 @@ msgstr ""
 "Le système d'annonces de %s permet de publier des postes pour des "
 "volontaires. Toute utilisation commerciale est interdite."
 
-#: www/people/index.php:65
+#: www/people/index.php:69
 msgid ""
 "Project listings remain live for two weeks, or until closed by the poster, "
 "whichever comes first. (Project administrators may always re-post expired "
@@ -19143,14 +19285,14 @@ msgstr ""
 "administrateurs de projets peuvent toujours soumettre une nouvelle fois les "
 "offres qui ont expiré.)"
 
-#: www/people/index.php:69
+#: www/people/index.php:73
 msgid ""
 "Browse through the category menu to find projects looking for your help."
 msgstr ""
 "Naviguez dans le menu des catégories pour trouver des projets qui "
 "recherchent votre aide."
 
-#: www/people/index.php:73
+#: www/people/index.php:77
 msgid ""
 "If you're a project admin, log in and submit help wanted requests through "
 "your project administration page."
@@ -19158,18 +19300,18 @@ msgstr ""
 "Si vous êtes administrateur de projet, identifiez-vous et soumettez des "
 "demandes d'aide à travers l'interface d'administration de votre projet."
 
-#: www/people/index.php:77
+#: www/people/index.php:81
 msgid ""
 "To suggest new job categories, submit a request via the support manager."
 msgstr ""
 "Pour suggérer de nouvelles catégories, soumettez votre demande via le "
 "gestionnaire de support."
 
-#: www/people/index.php:82
+#: www/people/index.php:86
 msgid "Last posts"
 msgstr "Dernières demandes"
 
-#: www/people/index.php:91
+#: www/people/index.php:95
 msgid "more latest posts"
 msgstr "Encore ..."
 
@@ -19189,18 +19331,22 @@ msgstr "Ajouté à l'inventaire de compétences"
 msgid "Error: skill already in your inventory"
 msgstr "Erreur: la compétence demandée est toujours dans votre référentiel."
 
+#: www/people/people_utils.php:114 www/people/people_utils.php:226
+msgid "You must be logged in first"
+msgstr "Vous devez être logué d'abord"
+
 #: www/people/people_utils.php:128 www/people/people_utils.php:158
-#: www/people/people_utils.php:240 www/people/people_utils.php:302
+#: www/people/people_utils.php:241 www/people/people_utils.php:303
 msgid "Level"
 msgstr "Niveau"
 
 #: www/people/people_utils.php:129 www/people/people_utils.php:159
-#: www/people/people_utils.php:241 www/people/people_utils.php:303
+#: www/people/people_utils.php:242 www/people/people_utils.php:304
 msgid "Experience"
 msgstr "Expérience"
 
-#: www/people/people_utils.php:137 www/people/people_utils.php:248
-#: www/people/people_utils.php:313
+#: www/people/people_utils.php:137 www/people/people_utils.php:249
+#: www/people/people_utils.php:314
 msgid "No Skill Inventory Set Up"
 msgstr "Aucun référentiel de compétences n'est défini"
 
@@ -19208,47 +19354,54 @@ msgstr "Aucun référentiel de compétences n'est défini"
 msgid "No skill setup"
 msgstr "Aucune compétence n'est en place"
 
-#: www/people/people_utils.php:194 www/people/people_utils.php:344
+#: www/people/people_utils.php:194 www/people/people_utils.php:345
 msgid "Add Skill"
 msgstr "Ajouter une compétence"
 
-#: www/people/people_utils.php:212
+#: www/people/people_utils.php:213
 msgid "Error inserting into job inventory: "
 msgstr "Erreur en insérant dans la liste des compétences : "
 
-#: www/people/people_utils.php:216
+#: www/people/people_utils.php:217
 msgid "Added to job inventory"
 msgstr "Ajouté à l'inventaire de compétences"
 
-#: www/people/people_utils.php:220
-msgid "Error: job already in your inventory"
-msgstr "Erreur: la compétence demandée est déjà dans votre référentiel"
+#: www/people/people_utils.php:221
+#, fuzzy
+msgid "Error: Skill already in your inventory."
+msgstr "Erreur: la compétence demandée est toujours dans votre référentiel."
 
-#: www/people/people_utils.php:225
-msgid "You must be logged in first"
-msgstr "Vous devez être logué d'abord"
-
-#: www/people/people_utils.php:277 www/people/people_utils.php:286
+#: www/people/people_utils.php:278 www/people/people_utils.php:287
 msgid "Invalid ID"
 msgstr "Identifiant invalide"
 
-#: www/people/people_utils.php:392
+#: www/people/people_utils.php:393
 #, fuzzy
 msgid "No categories found."
 msgstr "Aucune catégorie trouvée"
 
-#: www/people/people_utils.php:437
+#: www/people/people_utils.php:438
 msgid "Date Opened"
 msgstr "Date de dépôt"
 
-#: www/people/people_utils.php:438
+#: www/people/people_utils.php:439
 #, php-format
 msgid "%s project"
 msgstr "Projet de %s"
 
-#: www/people/people_utils.php:448
+#: www/people/people_utils.php:449
 msgid "None Found"
 msgstr "Aucune demande trouvée"
+
+#: www/people/skills_utils.php:40
+#, fuzzy
+msgid "No skills listed."
+msgstr "Aucune compétence n'est en place"
+
+#: www/people/skills_utils.php:41
+#, fuzzy
+msgid "This user has not entered any skills."
+msgstr "Cet utilisateur ne fait partie d'aucun projet."
 
 #: www/people/viewjob.php:54
 #, fuzzy
@@ -19483,7 +19636,7 @@ msgid "Detail View"
 msgstr "Vue détaillée"
 
 #: www/pm/browse_task.php:163 www/pm/ganttpage.php:185
-#: www/snippet/snippet_utils.php:130
+#: www/snippet/snippet_utils.php:118
 msgid "Browse"
 msgstr "Parcourir"
 
@@ -21630,7 +21783,7 @@ msgstr "Votre adresse électronique"
 msgid "Send Message"
 msgstr "Envoyer message"
 
-#: www/snippet/add_snippet_to_package.php:51 www/snippet/snippet_utils.php:131
+#: www/snippet/add_snippet_to_package.php:51 www/snippet/snippet_utils.php:119
 msgid "Submit A New Snippet"
 msgstr "Soumettre un nouvel échantillon de code"
 
@@ -21638,38 +21791,39 @@ msgstr "Soumettre un nouvel échantillon de code"
 msgid "Error: snippet_package_version_id missing"
 msgstr "Erreur: identifiant de version de paquet manquant"
 
-#: www/snippet/add_snippet_to_package.php:72
+#: www/snippet/add_snippet_to_package.php:73
 msgid "Error: Only the creator of a package version can add snippets to it."
 msgstr ""
 "Erreur: seul le créateur d'une version de paquet peut lui ajouter des "
 "échantillons."
 
-#: www/snippet/add_snippet_to_package.php:82 www/snippet/addversion.php:39
-msgid "Error: snippet doesn't exist"
+#: www/snippet/add_snippet_to_package.php:83 www/snippet/addversion.php:40
+#, fuzzy
+msgid "Error: snippet does not exist"
 msgstr "Erreur: cet échantillon n'existe pas"
 
-#: www/snippet/add_snippet_to_package.php:83
-#: www/snippet/add_snippet_to_package.php:97
-#: www/snippet/add_snippet_to_package.php:114
+#: www/snippet/add_snippet_to_package.php:84
+#: www/snippet/add_snippet_to_package.php:98
+#: www/snippet/add_snippet_to_package.php:115
 msgid "Back To Add Page"
 msgstr "Retour à la page d'ajout"
 
-#: www/snippet/add_snippet_to_package.php:96
+#: www/snippet/add_snippet_to_package.php:97
 msgid "Error: That snippet was already added to this package."
 msgstr "Erreur: cet échantillon de code est toujours présent dans ce paquet."
 
-#: www/snippet/add_snippet_to_package.php:108 www/snippet/addversion.php:71
-#: www/snippet/submit.php:74
+#: www/snippet/add_snippet_to_package.php:109 www/snippet/addversion.php:72
+#: www/snippet/submit.php:75
 msgid "Error doing snippet version insert"
 msgstr "Erreur lors de l'insertion de version de l'échantillon"
 
-#: www/snippet/add_snippet_to_package.php:110 www/snippet/addversion.php:74
+#: www/snippet/add_snippet_to_package.php:111 www/snippet/addversion.php:75
 msgid "Snippet Version Added Successfully."
 msgstr "La version de l'échantillon a été correctement ajoutée."
 
-#: www/snippet/add_snippet_to_package.php:113 www/snippet/addversion.php:77
-#: www/snippet/addversion.php:198 www/snippet/package.php:123
-#: www/snippet/submit.php:81
+#: www/snippet/add_snippet_to_package.php:114 www/snippet/addversion.php:78
+#: www/snippet/addversion.php:199 www/snippet/package.php:123
+#: www/snippet/submit.php:82
 msgid "Error: Go back and fill in all the information"
 msgstr "Erreur : Revenez en arrière et remplissez toutes les informations"
 
@@ -21693,27 +21847,27 @@ msgstr ""
 msgid "Add This Snippet Version ID:"
 msgstr "Ajouter cet identifiant de version :"
 
-#: www/snippet/add_snippet_to_package.php:165 www/snippet/addversion.php:107
-#: www/snippet/addversion.php:226 www/snippet/package.php:174
-#: www/snippet/submit.php:144
+#: www/snippet/add_snippet_to_package.php:165 www/snippet/addversion.php:108
+#: www/snippet/addversion.php:227 www/snippet/package.php:174
+#: www/snippet/submit.php:145
 msgid "Make sure all info is complete and accurate"
 msgstr "Assurez-vous que toutes les informations sont complètes et exactes"
 
 #: www/snippet/add_snippet_to_package.php:184
-#: www/snippet/snippet_utils.php:164
+#: www/snippet/snippet_utils.php:150
 msgid "No Snippets Are In This Package Yet"
 msgstr "Il n'y a pas d'échantillon de code dans le paquet pour le moment"
 
 #: www/snippet/add_snippet_to_package.php:186
-#: www/snippet/snippet_utils.php:151
+#: www/snippet/snippet_utils.php:139
 msgid "Snippets In This Package"
 msgstr "Échantillons de code de ce paquet"
 
-#: www/snippet/addversion.php:81 www/snippet/addversion.php:202
+#: www/snippet/addversion.php:82 www/snippet/addversion.php:203
 msgid "New snippet version"
 msgstr "Nouvelle version d'échantillon"
 
-#: www/snippet/addversion.php:84
+#: www/snippet/addversion.php:85
 msgid ""
 "If you have modified a version of a snippet and you feel it is significant "
 "enough to share with others, please do so."
@@ -21721,35 +21875,36 @@ msgstr ""
 "Si vous avez changé la version d'un échantillon et que vous la pensez assez "
 "importante pour la partager."
 
-#: www/snippet/addversion.php:102 www/snippet/submit.php:140
+#: www/snippet/addversion.php:103 www/snippet/submit.php:141
 msgid "Paste the Code Here"
 msgstr "Coller le code ici"
 
-#: www/snippet/addversion.php:127
-msgid "Error: snippet_package doesn't exist"
+#: www/snippet/addversion.php:128
+#, fuzzy
+msgid "Error: snippet_package does not exist"
 msgstr "Erreur: ce paquet d'échantillons n'existe pas"
 
-#: www/snippet/addversion.php:154 www/snippet/package.php:75
+#: www/snippet/addversion.php:155 www/snippet/package.php:75
 msgid "Error doing snippet package version insert"
 msgstr "Erreur : pendant l'insertion d'une version de paquet d'échantillons"
 
-#: www/snippet/addversion.php:155
+#: www/snippet/addversion.php:156
 msgid "New snippet package"
 msgstr "Nouveau paquet d'échantillons"
 
-#: www/snippet/addversion.php:160 www/snippet/package.php:82
+#: www/snippet/addversion.php:161 www/snippet/package.php:82
 msgid "Snippet Package Version Added Successfully."
 msgstr "Paquet d'échantillon correctement inséré."
 
-#: www/snippet/addversion.php:165
+#: www/snippet/addversion.php:166
 msgid "Add snippet to package"
 msgstr "Ajouter un échantillon au paquet"
 
-#: www/snippet/addversion.php:181 www/snippet/package.php:105
+#: www/snippet/addversion.php:182 www/snippet/package.php:105
 msgid "IMPORTANT!"
 msgstr "IMPORTANT !"
 
-#: www/snippet/addversion.php:183 www/snippet/package.php:107
+#: www/snippet/addversion.php:184 www/snippet/package.php:107
 msgid ""
 "If a new window opened, use it to add snippets to your package. If a new "
 "window did not open, use the following link to add to your package BEFORE "
@@ -21760,12 +21915,12 @@ msgstr ""
 "utilisez le lien suivantpour ajouter des échantillons à votre paquet AVANT "
 "de quitter la page."
 
-#: www/snippet/addversion.php:186 www/snippet/package.php:87
+#: www/snippet/addversion.php:187 www/snippet/package.php:87
 #: www/snippet/package.php:109
 msgid "Add snippets to package"
 msgstr "Ajouter des échantillons au paquet"
 
-#: www/snippet/addversion.php:187 www/snippet/package.php:112
+#: www/snippet/addversion.php:188 www/snippet/package.php:112
 msgid ""
 "<strong>Browse the library</strong> to find the snippets you want to add, "
 "then add them using the new window link shown above."
@@ -21773,7 +21928,7 @@ msgstr ""
 "<strong>Parcourez la bibliothèque</strong> pour trouver les échantillons que "
 "vous voulez ajouter au paquet."
 
-#: www/snippet/addversion.php:207
+#: www/snippet/addversion.php:208
 msgid ""
 "If you have modified a version of a package and you feel it is significant "
 "enough to share with others, please do so."
@@ -21781,12 +21936,12 @@ msgstr ""
 "Si vous avez modifié une version de paquet et que vous pensez que c'est "
 "assez significatif pour le partager avec les autres, faites-le."
 
-#: www/snippet/addversion.php:236
+#: www/snippet/addversion.php:237
 msgid "Error: was the URL or form mangled??"
 msgstr "Erreur: URL invalide ?"
 
 #: www/snippet/browse.php:49 www/snippet/detail.php:43
-#: www/snippet/detail.php:131 www/snippet/detail.php:213
+#: www/snippet/detail.php:127 www/snippet/detail.php:208
 #: www/snippet/index.php:101
 msgid "Snippet Library"
 msgstr "Bibliothèque d'échantillons"
@@ -21810,7 +21965,7 @@ msgid "No snippets found."
 msgstr "Aucun échantillon trouvé."
 
 #: www/snippet/browse.php:84 www/snippet/detail.php:63
-#: www/snippet/snippet_utils.php:154
+#: www/snippet/snippet_utils.php:142
 msgid "Snippet ID"
 msgstr "Numéro d'identification de l'échantillon"
 
@@ -21826,11 +21981,55 @@ msgstr "Paquets d'échantillons"
 msgid "Snippets"
 msgstr "Échantillons"
 
-#: www/snippet/delete.php:142
+#: www/snippet/delete.php:33
+#, fuzzy
+msgid "Delete Snippets"
+msgstr "Échantillons de code"
+
+#: www/snippet/delete.php:49
+#, fuzzy
+msgid ""
+"Error: Only the creator of a package version can delete snippets from it."
+msgstr ""
+"Erreur: seul le créateur d'une version de paquet peut lui ajouter des "
+"échantillons."
+
+#: www/snippet/delete.php:61
+#, fuzzy
+msgid "Error: That snippet does not exist in this package."
+msgstr "Erreur - Cet extrait de code n'existe pas"
+
+#: www/snippet/delete.php:65
+msgid "Item Removed From Package"
+msgstr ""
+
+#: www/snippet/delete.php:81
+#, fuzzy
+msgid "Error: That snippet does not exist."
+msgstr "Erreur - Cet extrait de code n'existe pas"
+
+#: www/snippet/delete.php:100
+#, fuzzy
+msgid "Snippet Removed"
+msgstr "Numéro d'identification de l'échantillon"
+
+#: www/snippet/delete.php:118
+#, fuzzy
+msgid "Error: Only the creator of a package version can delete it."
+msgstr ""
+"Erreur: seul le créateur d'une version de paquet peut lui ajouter des "
+"échantillons."
+
+#: www/snippet/delete.php:144
+#, fuzzy
+msgid "Package Removed"
+msgstr "Nom du paquet"
+
+#: www/snippet/delete.php:149
 msgid "Error: mangled URL?"
 msgstr "Erreur: URL invalide ?"
 
-#: www/snippet/detail.php:57 www/snippet/detail.php:147
+#: www/snippet/detail.php:57 www/snippet/detail.php:142
 msgid "Error: no versions found"
 msgstr "Erreur: aucune version trouvée"
 
@@ -21838,11 +22037,11 @@ msgstr "Erreur: aucune version trouvée"
 msgid "Versions Of This Snippet:"
 msgstr "Versions de cet échantillon :"
 
-#: www/snippet/detail.php:64 www/snippet/snippet_utils.php:155
+#: www/snippet/detail.php:64 www/snippet/snippet_utils.php:143
 msgid "Download Version"
 msgstr "Télécharger la version"
 
-#: www/snippet/detail.php:65 www/snippet/detail.php:154
+#: www/snippet/detail.php:65 www/snippet/detail.php:149
 msgid "Date Posted"
 msgstr "Date d'envoi"
 
@@ -21850,7 +22049,7 @@ msgstr "Date d'envoi"
 msgid "Changes since last version:"
 msgstr "Changement depuis la dernière version :"
 
-#: www/snippet/detail.php:95 www/snippet/detail.php:182
+#: www/snippet/detail.php:95 www/snippet/detail.php:177
 msgid ""
 "Download a raw-text version of this code by clicking on “Download Version”"
 msgstr ""
@@ -21861,7 +22060,7 @@ msgstr ""
 msgid "Latest Snippet Version: "
 msgstr "Dernière version d'échantillon : "
 
-#: www/snippet/detail.php:115 www/snippet/detail.php:202
+#: www/snippet/detail.php:115 www/snippet/detail.php:197
 msgid "Submit a new version"
 msgstr "Soumettre une nouvelle version"
 
@@ -21873,23 +22072,23 @@ msgstr ""
 "Vous pouvez fournir une nouvelle version de cet échantillon si vous l'avez "
 "modifié et que vous trouvez bien de le partager avec les autres."
 
-#: www/snippet/detail.php:150
+#: www/snippet/detail.php:145
 msgid "Versions Of This Package:"
 msgstr "Versions de ce paquet :"
 
-#: www/snippet/detail.php:153
+#: www/snippet/detail.php:148
 msgid "Package Version"
 msgstr "Version du paquet"
 
-#: www/snippet/detail.php:156
+#: www/snippet/detail.php:151
 msgid "Edit/Del"
 msgstr "Édition / Suppression"
 
-#: www/snippet/detail.php:193
+#: www/snippet/detail.php:188
 msgid "Latest Package Version: "
 msgstr "Dernière version du paquet : "
 
-#: www/snippet/detail.php:203
+#: www/snippet/detail.php:198
 msgid ""
 "You can submit a new version of this package if you have modified it and you "
 "feel it is appropriate to share with others."
@@ -21897,7 +22096,7 @@ msgstr ""
 "Vous pouvez fournir une nouvelle version de ce paquet si vous l'avez modifié "
 "et si vous trouvez bien de le partager avec les autres."
 
-#: www/snippet/detail.php:223
+#: www/snippet/detail.php:215
 msgid "Error: was the URL mangled?"
 msgstr "Erreur: URL invalide ?"
 
@@ -21985,11 +22184,16 @@ msgstr ""
 "utilisant le lien présent près du paquet existant. Cette page-ci ne sert "
 "qu'à créer de nouveaux paquets."
 
-#: www/snippet/package.php:159 www/snippet/submit.php:125
+#: www/snippet/package.php:143
+#, fuzzy
+msgid "First Posted Version"
+msgstr "Version précédente"
+
+#: www/snippet/package.php:159 www/snippet/submit.php:126
 msgid "Suggest a Language"
 msgstr "Suggérer un nouveau langage"
 
-#: www/snippet/package.php:165 www/snippet/submit.php:131
+#: www/snippet/package.php:165 www/snippet/submit.php:132
 msgid "Suggest a Category"
 msgstr "Suggérer une nouvelle catégorie"
 
@@ -22074,23 +22278,23 @@ msgstr "Site web seulement"
 msgid "Other Language"
 msgstr "Autres langages"
 
-#: www/snippet/snippet_utils.php:132
+#: www/snippet/snippet_utils.php:120
 msgid "Create A Package"
 msgstr "Créer un paquet"
 
-#: www/snippet/submit.php:59
+#: www/snippet/submit.php:60
 msgid "Error doing snippet insert"
 msgstr "Erreur lors de l'insertion d'un échantillon"
 
-#: www/snippet/submit.php:61 www/snippet/submit.php:76
+#: www/snippet/submit.php:62 www/snippet/submit.php:77
 msgid "Snippet Added Successfully."
 msgstr "Échantillon correctement ajouté."
 
-#: www/snippet/submit.php:85
+#: www/snippet/submit.php:86
 msgid "Snippet submit"
 msgstr "Soumission d'échantillons"
 
-#: www/snippet/submit.php:89
+#: www/snippet/submit.php:90
 msgid ""
 "You can post a new code snippet and share it with other people around the "
 "world. Just fill in this information. <strong>Give a good description</"
@@ -22103,7 +22307,7 @@ msgstr ""
 "<strong>commenter votre code</strong>, pour que les autres puissent le lire "
 "et le comprendre."
 
-#: www/snippet/submit.php:92
+#: www/snippet/submit.php:93
 msgid ""
 "<span class=\"important\">Note:</span> You can submit a new version of an "
 "existing snippet by browsing the library. You should only use this page if "
@@ -22113,7 +22317,7 @@ msgstr ""
 "version d'un échantillon existant à partir des pages de navigation. Cette "
 "page-ci ne sert qu'à créer de nouveaux échantillons."
 
-#: www/snippet/submit.php:113
+#: www/snippet/submit.php:114
 msgid "Script Type"
 msgstr "Type de script"
 
@@ -22473,10 +22677,6 @@ msgstr "Résultat du sondage"
 #: www/survey/admin/show_results.php:76
 msgid "Cannot get Survey"
 msgstr "Sondage introuvable"
-
-#: www/survey/admin/show_results.php:99
-msgid "Votes"
-msgstr "Votes"
 
 #: www/survey/admin/show_results.php:122
 msgid "No Survey Question is found"
@@ -23001,6 +23201,9 @@ msgstr "Erreur de mise à jour"
 msgid "No User Name Provided"
 msgstr "Aucun nom d'utilisateur n'a été fourni"
 
+#~ msgid "Error: job already in your inventory"
+#~ msgstr "Erreur: la compétence demandée est déjà dans votre référentiel"
+
 #~ msgid "Displaying results %1$d‒%2$d."
 #~ msgstr "Affichage des résultats %1$d‒%2$d."
 
@@ -23024,9 +23227,6 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 
 #~ msgid "Monitoring has been turned off"
 #~ msgstr "Le suivi a été arrêté"
-
-#~ msgid "This user is not a member of any projects."
-#~ msgstr "Cet utilisateur ne fait partie d'aucun projet."
 
 #~ msgid "Mailing List Name:"
 #~ msgstr "Nom de la liste de diffusion :"
@@ -24030,10 +24230,6 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #~ "Si vous désirez contribuer à ce projet en devenant développeur, contactez "
 #~ "l'un des administrateurs du projet (signalés en gras dans la liste ci-"
 #~ "dessous)."
-
-#, fuzzy
-#~ msgid "Error: That snippet doesn't exist."
-#~ msgstr "Erreur - Cet extrait de code n'existe pas"
 
 #~ msgid ""
 #~ "The \"Snippet Version ID\" is the unique ID number that is shown next to "
@@ -25287,9 +25483,6 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 
 #~ msgid "All documents"
 #~ msgstr "Tous les documents"
-
-#~ msgid "Manage Roles"
-#~ msgstr "Gérer les rôles"
 
 #~ msgid "Add Tracker"
 #~ msgstr "Ajout d'un traceur"
