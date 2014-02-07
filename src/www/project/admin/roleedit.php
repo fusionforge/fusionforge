@@ -8,6 +8,7 @@
  * Copyright © 2011
  *	Thorsten Glaser <t.glaser@tarent.de>
  * Copyright 2014, Stéphane-Eymeric Bredthauer
+ * Copyright 2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -92,6 +93,7 @@ if (getStringFromRequest('submit')) {
 				$error_msg .= $role->getErrorMessage();
 			} else {
 				$feedback = _('Successfully Created New Role');
+				$group->addHistory(_('Added Role'), $role_name);
 			}
 		} else {
 			if ($role instanceof RoleExplicit) {
@@ -101,6 +103,7 @@ if (getStringFromRequest('submit')) {
 				$error_msg .= $role->getErrorMessage();
 			} else {
 				$feedback = _('Successfully Updated Role');
+				$group->addHistory(_('Updated Role'), $role_name);
 			}
 		}
 	}

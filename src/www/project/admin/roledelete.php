@@ -4,6 +4,7 @@
  *
  * Copyright 2010 (c) Alcatel-Lucent
  * Copyright 2011, Roland Mas
+ * Copyright 2014, Franck Villaume - TrivialDev
  *
  * @author Alain Peyrat
  * @date 2010-05-18
@@ -58,10 +59,12 @@ if ($role->getHomeProject()->getID() != $group_id) {
 
 if (getStringFromRequest('submit')) {
 	if (getIntFromRequest('sure')) {
+		$role_name = $role->getName();
 		if (!$role->delete()) {
 			$error_msg = _('Error')._(': ').$role->getErrorMessage();
 		} else {
 			$feedback = _('Successfully Deleted Role');
+			$group->addHistory(_('Deleted Role'), $role_name);
 			session_redirect('/project/admin/users.php?group_id='.$group_id.'&feedback='.urlencode($feedback));
 		}
 	} else {
