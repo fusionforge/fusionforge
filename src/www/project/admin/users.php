@@ -1,5 +1,5 @@
 <?php
-/*-
+/**
  * Project Admin Users Page
  *
  * Copyright 2004 GForge, LLC
@@ -8,6 +8,7 @@
  *	Thorsten Glaser <t.glaser@tarent.de>
  * Copyright 2011, Roland Mas
  * Copyright 2014, Stéphane-Eymeric Bredthauer
+ * Copyright 2014, Franck Villaume - TrivialDev
  * All rights reserved.
  * http://fusionforge.org
  *
@@ -188,6 +189,7 @@ if (getStringFromRequest('submit')) {
 					$error_msg = $r->getErrorMessage();
 				} else {
 					$feedback = _("Role linked successfully");
+					$group->addHistory(_('Linked Role'), $r->getName());
 					cache_external_roles () ;
 				}
 			}
@@ -201,6 +203,7 @@ if (getStringFromRequest('submit')) {
 					$error_msg = $r->getErrorMessage();
 				} else {
 					$feedback = _("Role unlinked successfully");
+					$group->addHistory(_('Unlinked Role'), $r->getName());
 					cache_external_roles () ;
 				}
 			}
