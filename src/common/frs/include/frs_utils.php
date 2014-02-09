@@ -260,7 +260,6 @@ function frs_add_file_from_form ($release, $type_id, $processor_id, $release_dat
 			exit_error($frsf->getErrorMessage(),'frs');
 		} else {
 			if (!$frsf->create($fname,$infile,$type_id,$processor_id,$release_date)) {
-				db_rollback();
 				exit_error($frsf->getErrorMessage(),'frs');
 			}
 			return true ;
