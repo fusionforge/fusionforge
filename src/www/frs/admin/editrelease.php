@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -151,12 +152,18 @@ if (getStringFromRequest('step2')) {
 	$ftp_filename = getStringFromRequest('ftp_filename');
 	$manual_filename = getStringFromRequest('manual_filename');
 
-	$ret = frs_add_file_from_form ($frsr, $type_id, $processor_id, $release_date,
-				       $userfile, $ftp_filename, $manual_filename) ;
-	if ($ret == true) {
-		$feedback = _('File Released') ;
+	if (!$type_id || $type_id == "100") {
+		$warning_msg .= _('Must select a file type.');
+	} else if (!$processor_id || $processor_id == "100") {
+		$warning_msg .= _('Must select a processor type.');
 	} else {
-		$error_msg .= $ret ;
+		$ret = frs_add_file_from_form ($frsr, $type_id, $processor_id, $release_date,
+					$userfile, $ftp_filename, $manual_filename) ;
+		if ($ret == true) {
+			$feedback = _('File Released') ;
+		} else {
+			$error_msg .= $ret ;
+		}
 	}
 }
 
