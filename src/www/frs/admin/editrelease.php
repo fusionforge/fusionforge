@@ -152,7 +152,8 @@ if (getStringFromRequest('step2')) {
 
 	$ret = frs_add_file_from_form ($frsr, $type_id, $processor_id, $release_date,
 				       $userfile, $ftp_filename, $manual_filename) ;
-	if ($ret == true) {
+
+	if ($ret === true) {
 		$feedback = _('File Released') ;
 	} else {
 		$error_msg .= $ret ;
