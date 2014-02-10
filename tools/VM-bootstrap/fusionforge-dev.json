@@ -3,7 +3,12 @@
 		{
 			"type": "file",
 			"source": "file/Desktop",
-			"destination": "/home/vagrant/"
+			"destination": "/root/"
+		},
+		{
+			"type": "file",
+			"source": "file/bashrc",
+			"destination": "/root/.bashrc"
 		},
 		{
 			"type": "shell",
