@@ -317,6 +317,12 @@ class GitPlugin extends SCMPlugin {
 			echo $HTML->getJavascripts();
 			echo '<script type="text/javascript">//<![CDATA[
 				jQuery(\'#scm_iframe\').iframeAutoHeight({heightOffset: 50});
+				jQuery(\'#scm_iframe\').load(function (){
+						if (this.contentWindow.location.href == "'.util_make_url('/projects/'.$project->getUnixName()).'/") {
+							console.log(this.contentWindow.location.href);
+							window.location.href = this.contentWindow.location.href;
+						};
+					});
 				//]]></script>';
 		}
 	}
