@@ -10,10 +10,6 @@ Default language is English.
 
 EOF
 
-# Install convenience desktop shortcuts for root to use:
-mv /home/vagrant/Desktop /root/Desktop
-chown -R root: /root/Desktop
-
 # Install sources
 apt-get -y --force-yes install bzr
 cd /root/
