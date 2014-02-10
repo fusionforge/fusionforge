@@ -52,7 +52,7 @@ class Widget_ProjectLatestDocuments extends Widget {
 		$qpa = db_construct_qpa($qpa, 'SELECT filename, title, updatedate, createdate, realname, user_name, state_name, filetype, docid, doc_group
 						FROM docdata_vw
 						WHERE group_id=$1
-						AND state_id=$2',
+						AND stateid=$2',
 					array($group_id,'1'));
 
 		if (session_loggedin() && (user_ismember($group_id) ||
