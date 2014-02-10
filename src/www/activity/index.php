@@ -5,7 +5,7 @@
  * Copyright 1999 dtype
  * Copyright 2006 (c) GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2014, Franck Villaume - TrivialDev
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
@@ -226,7 +226,7 @@ if (count($results) < 1) {
 					break;
 				}
 				case 'frsrelease': {
-					$cached_perms[$s][$ref] = forge_check_perm('frs', $ref, 'read');
+					$cached_perms[$s][$ref] = forge_check_perm('frs', $group_id, 'read_public');
 					break;
 				}
 				case 'forumpost':
@@ -250,7 +250,6 @@ if (count($results) < 1) {
 	}
 
 	usort($results, 'date_compare');
-
 
 	$displayTableTop = 0;
 	$j = 0;
