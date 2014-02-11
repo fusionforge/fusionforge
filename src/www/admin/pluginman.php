@@ -108,6 +108,8 @@ if (getStringFromRequest('update')) {
 
 			$plugin = $pm->GetPluginObject($pluginname);
 			if (!$plugin || $plugin->isError()) {
+				// we need to deactivate the plugin, something went wrong
+				$pm->deactivate($pluginname);
 				exit_error(_("Could not get plugin object"), 'admin');
 			} else {
 				if (method_exists($plugin, 'install')) {
