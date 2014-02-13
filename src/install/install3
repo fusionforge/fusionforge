@@ -3,6 +3,7 @@
 #
 # Copyright 2006 GForge, LLC
 # Copyright 2011 Christian Bayle <bayle@debian.org>
+# Copyright 2014, Franck Villaume - TrivialDev
 # http://fusionforge.org/
 #
 # @version
@@ -68,6 +69,7 @@ find_psql_init(){
 	done
 	if [ -z "$pgservice" ]
 	then
+		msg red "Error: Looks like postgresql is not installed. Die here."
 		exit 1
 	fi
 }
