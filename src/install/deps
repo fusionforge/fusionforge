@@ -4,7 +4,7 @@
 # Copyright 2006 GForge, LLC
 # Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
 # Copyright (C) 2011 Christian Bayle
-# Copyright 2013, Franck Villaume - TrivialDev
+# Copyright 2013-2014, Franck Villaume - TrivialDev
 # http://fusionforge.org/
 #
 # @version
@@ -54,10 +54,10 @@ deps_redhat() {
 			pg=postgresql
 		esac
 		case $targetversion in
-			5)
+			5|el5)
 				packagelist="httpd php mailman cvs $pg $pg-libs $pg-server $pg-contrib perl-URI php-pgsql subversion mod_dav_svn postfix rcs php-gd mod_ssl wget openssh which liberation-fonts php-htmlpurifier php-mbstring poppler-utils php-pecl-zip php-pear-HTTP_WebDAV_Server antiword php-pecl-Fileinfo shared-mime-info rsync git gitweb"
 				;;
-			6)
+			6|el6)
 				packagelist="httpd php mailman cvs $pg $pg-libs $pg-server $pg-contrib perl-URI php-pgsql subversion mod_dav_svn postfix rcs php-gd mod_ssl wget openssh which liberation-fonts php-htmlpurifier php-mbstring poppler-utils php-pear-HTTP_WebDAV_Server antiword shared-mime-info rsync git gitweb"
 				;;
 		esac
