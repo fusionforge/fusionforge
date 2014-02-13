@@ -109,7 +109,7 @@ detect_version()
 				release=$(rpm -q --queryformat='%{release}' kernel)
 				version=${release##*.}
 				;;
-		case
+		esac
 	else
 		version=$(lsb_release -rs | cut -f1 -d.)
 	fi
