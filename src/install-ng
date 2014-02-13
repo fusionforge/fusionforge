@@ -93,8 +93,9 @@ fusionforge_etc_dir=${FUSIONFORGE_ETC_DIR:-/etc/gforge}
 # Call to detect_os, this will set $type and $distrib
 os=$(detect_os)
 type=$(detect_type)
-targetversion=$(detect_version)
 echo "Install type = $type"
+targetversion=$(detect_version)
+echo "Target version (if any) = $targetversion"
 
 if $DEPS || $DEFAULT
 then
