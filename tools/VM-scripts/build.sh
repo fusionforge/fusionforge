@@ -82,7 +82,7 @@ if [ $? -eq 0 ]; then
 fi
 
 dch --newversion 999+$(date +%Y%m%d%H%M%S)-1 --distribution local --force-distribution "Autobuilt."
-debuild --no-lintian --no-tgz-check -us -uc -tc
+debuild --no-lintian --no-tgz-check -us -uc -tc  # using -tc so 'bzr st' is readable
 
 debrelease -f local
 mv $f debian/changelog

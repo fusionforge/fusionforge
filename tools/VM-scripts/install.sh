@@ -21,18 +21,17 @@ fi
 set -e
 
 # "Backport" recent dependency
-wget http://ftp.fr.debian.org/debian/pool/main/l/loggerhead/loggerhead_1.19~bzr479-3_all.deb
+wget -c http://ftp.fr.debian.org/debian/pool/main/l/loggerhead/loggerhead_1.19~bzr479-3_all.deb
 aptitude install gdebi-core
 gdebi --non-interactive loggerhead_1.19~bzr479-3_all.deb
 
 aptitude update
 if dpkg -l fusionforge-full | grep -q ^ii ; then
     # Already installed, upgrading
-    /root/scripts/reload-db.sh
+    /root/fusionforge/tests/func/db_reload.sh
     UCF_FORCE_CONFFNEW=yes LANG=C DEBIAN_FRONTEND=noninteractive aptitude -y dist-upgrade
 else
     # Initial installation
-    UCF_FORCE_CONFFNEW=yes LANG=C DEBIAN_FRONTEND=noninteractive aptitude -y install postgresql-8.4
     UCF_FORCE_CONFFNEW=yes LANG=C DEBIAN_FRONTEND=noninteractive aptitude -y install gforge-db-postgresql
     UCF_FORCE_CONFFNEW=yes LANG=C DEBIAN_FRONTEND=noninteractive aptitude -y install fusionforge-full
     /usr/share/gforge/bin/forge_set_password admin myadmin
