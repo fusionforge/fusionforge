@@ -305,7 +305,7 @@ EOF
 	msg green " * Running php db/upgrade-db.php"
         if ! php $fusionforge_src_dir/db/upgrade-db.php >> /tmp/gforge-upgrade.log ; then
 		msg red "upgrade-db.php failed."
-		return 1
+		exit 1
 	fi
 
 	if [ -z "$FFORGE_ADMIN_USER" ]
