@@ -95,7 +95,7 @@ function people_add_to_skill_inventory($skill_id,$skill_level_id,$skill_year_id)
 			$feedback .= _('Must select a skill ID');
 		} else {
 		//check if they've already added this skill
-		$result=db_query_prams("SELECT * FROM people_skill_inventory WHERE user_id=$1 AND skill_id=$2", array(user_getid(), $skill_id));
+		$result=db_query_params("SELECT * FROM people_skill_inventory WHERE user_id=$1 AND skill_id=$2", array(user_getid(), $skill_id));
 		if (!$result || db_numrows($result) < 1) {
 			//skill not already in inventory
 			$result = db_query_params("INSERT INTO people_skill_inventory (user_id,skill_id,skill_level_id,skill_year_id)
