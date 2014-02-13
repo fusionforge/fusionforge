@@ -225,10 +225,11 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 	public function getRolesByAllowedAction ($section, $reference, $action = NULL) {
 		$ids = $this->_getRolesIdByAllowedAction ($section, $reference, $action);
 		$roles = array ();
-		foreach ($ids as $role_id) {
-			$roles[] = $this->getRoleById ($role_id);
+		if (is_array($ids)) {
+			foreach ($ids as $role_id) {
+				$roles[] = $this->getRoleById ($role_id);
+			}
 		}
-
 		return $roles;
 	}
 
