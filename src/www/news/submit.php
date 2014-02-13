@@ -152,10 +152,10 @@ if (session_loggedin()) {
 		<input type="hidden" name="form_key" value="'. form_generate_key() .'" />
 		<p><strong>'._('For project')._(': ').$group->getPublicName().'</strong></p>
 		<p>
-		<strong>'._('Subject')._(': ').'</strong>'.utils_requiredField().'<br />
+		<strong>'._('Subject').utils_requiredField()._(': ').'</strong><br />
 		<input required="required" type="text" name="summary" value="'.$summary.'" size="80" /></p>
 		<p>
-		<strong>'._('Details')._(': ').'</strong>'.notepad_button('document.forms.newssubmitform.details').utils_requiredField().'</p>';
+		<strong>'._('Details').utils_requiredField()._(': ').'</strong>'.notepad_button('document.forms.newssubmitform.details').'</p>';
 
 	$params = array();
 	$params['name'] = 'details';

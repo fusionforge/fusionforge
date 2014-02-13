@@ -152,12 +152,12 @@ if ($displaydb) {
 <table>
 
 <tr>
-<td><?php echo _('Project Unix Name')._(': '); ?><?php echo utils_requiredField(); ?></td>
+<td><?php echo _('Project Unix Name').utils_requiredField()._(': '); ?></td>
 <td><input type="text" required="required" name="groupname" /></td>
 </tr>
 
 <tr>
-<td><?php echo _('Database Name')._(': '); ?><?php echo utils_requiredField(); ?></td>
+<td><?php echo _('Database Name').utils_requiredField()._(': '); ?></td>
 <td><input type="text" required="required" name="dbname" /></td>
 </tr>
 

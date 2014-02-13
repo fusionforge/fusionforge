@@ -110,11 +110,11 @@ if (getStringFromRequest('add_forum')) {
 			<input type="hidden" name="add_forum" value="y" />
 			<input type="hidden" name="group_id" value="'.$group_id.'" />
 			<input type="hidden" name="form_key" value="' . form_generate_key() . '" />
-			<strong>'._('Forum Name')._(':').utils_requiredField().'</strong><br />
+			<strong>'._('Forum Name').utils_requiredField()._(':').'</strong><br />
 			<input type="text" name="forum_name" required="required" value="" size="20" maxlength="30" />
 			</p>
 			<p>
-			<strong>'._('Description')._(':').utils_requiredField().'</strong><br />
+			<strong>'._('Description').utils_requiredField()._(':').'</strong><br />
 			<input type="text" name="description" required="required" value="" size="40" maxlength="80" />
 			</p>
 			<p>
@@ -156,7 +156,7 @@ if (getStringFromRequest('add_forum')) {
 				<input type="email" name="send_all_posts_to" value="'. $f->getSendAllPostsTo() .'" size="60" />
 				</p>
 				<p>
-				<strong>'._('Description')._(': ').utils_requiredField().'</strong><br />
+				<strong>'._('Description').utils_requiredField()._(': ').'</strong><br />
 				<input type="text" name="description" required="required" value="'. $f->getDescription() .'" size="60" maxlength="80" /><br />
 				</p>
 				<p>

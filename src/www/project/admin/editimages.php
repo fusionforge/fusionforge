@@ -247,10 +247,10 @@ if ($mode == "edit") {
 	<p>
 	<form action="'. getStringFromServer('PHP_SELF') .'" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="group_id" value="'.$group_id.'" />
-	<strong>'._('Local filename')._(':').'</strong>'.utils_requiredField().'<br />
+	<strong>'._('Local filename').utils_requiredField()._(':').'</strong><br />
 	<input type="file" required="required" name="input_file" />
 	<p>
-	<strong>'._('Description')._(':').'</strong>'.utils_requiredField().'<br />
+	<strong>'._('Description').utils_requiredField()._(':').'</strong><br />
 	<input type="text" required="required" name="description" size="40" maxlength="255" /></p><p>
 	<input type="hidden" name="add" value="1" />
 	<input type="submit" value="'._('Add File').'" name="submit" /></p>

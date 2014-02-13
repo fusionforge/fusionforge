@@ -66,12 +66,12 @@ $ath->adminHeader(array('title'=>$title, 'modal'=>1));
 		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post">
 		<input type="hidden" name="add_canned" value="y" />
 		<label for="title">
-		<strong><?php echo _('Title') . _(':') ?></strong><?php echo utils_requiredField(); ?><br />
+		<strong><?php echo _('Title').utils_requiredField()._(':') ?></strong><br />
 		</label>
 		<input id="title" type="text" name="title" required="required" value="" size="80" maxlength="80" />
 		<p>
 		<label for="body">
-		<strong><?php echo _('Message Body') . _(':') ?></strong><?php echo utils_requiredField(); ?><br />
+		<strong><?php echo _('Message Body').utils_requiredField()._(':') ?></strong><br />
 		</label>
 		<textarea id="body" name="body" required="required" rows="15" cols="80"></textarea></p>
 		<p>

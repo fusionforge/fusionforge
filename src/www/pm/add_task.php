@@ -71,21 +71,22 @@ plugin_hook_by_reference("text_editor", $params);
 
   	<tr>
 		<td colspan="2">
-		<strong><?php echo _('Task Summary') . _(': '); ?></strong><?php echo utils_requiredField(); ?><br />
+		<strong><?php echo _('Task Summary').utils_requiredField()._(': '); ?></strong><br />
 		<input required="required" type="text" name="summary" size="65" maxlength="65" value="<?php echo $related_artifact_summary; ?>" />
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="2">
-		<strong><?php echo _('Task Details') . _(': '); ?></strong><?php echo notepad_button('document.forms.addtaskform.details') ?> <?php echo utils_requiredField(); ?><br />
+		<strong><?php echo _('Task Details').utils_requiredField()._(': '); ?></strong>
+		<?php echo notepad_button('document.forms.addtaskform.details') ?><br />
 		<?php echo $params['content']; ?>
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="2">
-		<strong><?php echo _('Estimated Hours') . _(': '); ?></strong><?php echo utils_requiredField(); ?><br />
+		<strong><?php echo _('Estimated Hours').utils_requiredField()._(': '); ?></strong><br />
 		<input required="required" type="text" name="hours" size="5" value="1" />
 		</td>
 	</tr>
@@ -146,7 +147,7 @@ plugin_hook_by_reference("text_editor", $params);
 will add duration and parent_id choices at some point
 	<tr>
 		<td>
-		<strong><?php echo _('Estimated Hours') . _(': '); ?></strong><?php echo utils_requiredField(); ?><br />
+		<strong><?php echo _('Estimated Hours').utils_requiredField()._(':'); ?></strong><br />
 		<input required="required" type="text" name="hours" size="5" />
 		</td>
 

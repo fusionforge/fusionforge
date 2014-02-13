@@ -91,7 +91,7 @@ print '
 print '
 <form action="'.getStringFromServer('PHP_SELF').'" method="post">'
 .'<input type="hidden" name="form_key" value="'.form_generate_key().'" />'
-.'<strong>'._('Target Audience')._(':').'</strong>'.utils_requiredField().'<br />'.html_build_select_box_from_arrays(
+.'<strong>'._('Target Audience').utils_requiredField()._(':').'</strong><br />'.html_build_select_box_from_arrays(
 	array(0,'SITE','COMMNTY','DVLPR','ADMIN','ALL','SFDVLPR'),
 	array(
 		_('(select)'),
@@ -109,10 +109,10 @@ print '
 print '
 
 <p>
-<strong>' ._('Subject')._(':').'</strong>'.utils_requiredField().'
+<strong>' ._('Subject').utils_requiredField()._(':').'</strong>
 <br /><input type="text" required="required" name="mail_subject" size="50" value="['.forge_get_config ('forge_name').'] " /></p>
 
-<p><strong>'._('Text of Message')._(':').'</strong>'.utils_requiredField(). _('(will be appended with unsubscription information, if applicable)').'</p>
+<p><strong>'._('Text of Message').utils_requiredField()._(':').'</strong>'._('(will be appended with unsubscription information, if applicable)').'</p>
 <pre><textarea required="required" name="mail_message" cols="70" rows="20">
 </textarea>
 </pre>

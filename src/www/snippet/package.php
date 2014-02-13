@@ -144,16 +144,16 @@ function show_add_snippet_box() {
 
 	<table>
 
-	<tr><td colspan="2"><strong><?php echo _('Title')._(':'); ?></strong><?php echo utils_requiredField(); ?><br />
+	<tr><td colspan="2"><strong><?php echo _('Title').utils_requiredField()._(':'); ?></strong><br />
 		<input type="text" required="required" name="name" size="45" maxlength="60" />
 	</td></tr>
 
-	<tr><td colspan="2"><strong><?php echo _('Description')._(':'); ?></strong><?php echo utils_requiredField(); ?><br />
+	<tr><td colspan="2"><strong><?php echo _('Description').utils_requiredField()._(':'); ?></strong><br />
 		<textarea name="description" required="required" rows="5" cols="45"></textarea>
 	</td></tr>
 
 	<tr>
-	<td><strong><?php echo _('Language')._(':'); ?></strong><?php echo utils_requiredField(); ?><br />
+	<td><strong><?php echo _('Language').utils_requiredField()._(':'); ?></strong><br />
 		<?php echo html_build_select_box_from_array ($SCRIPT_LANGUAGE,'language'); ?>
 		<br />
 		<!--<?php echo util_make_link ('/support/?func=addsupport&amp;group_id=1',_('Suggest a Language')); ?>-->
@@ -166,7 +166,7 @@ function show_add_snippet_box() {
 	</td>
 	</tr>
 
-	<tr><td colspan="2"><strong><?php echo _('Version')._(':'); ?></strong><?php echo utils_requiredField(); ?><br />
+	<tr><td colspan="2"><strong><?php echo _('Version').utils_requiredField()._(':'); ?></strong><br />
 		<input type="text" required="required" name="version" size="10" maxlength="15" />
 	</td></tr>
 

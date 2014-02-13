@@ -101,7 +101,7 @@ if (forge_check_global_perm('forge_admin')) {
 		<input type="hidden" name="post_changes" value="y" />
 		<input type="hidden" name="form_key" value="<?php echo form_generate_key();?>">
 		<label for="cat_name">
-			<strong><?php echo _('New Category Name')._(':').utils_requiredField(); ?></strong>
+			<strong><?php echo _('New Category Name').utils_requiredField()._(':'); ?></strong>
 		</label>
 		<input type="text" id="cat_name" name="cat_name" value="" size="15" maxlength="30" required="required" />
 		</p>

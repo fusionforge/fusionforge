@@ -87,10 +87,10 @@ if (session_loggedin()) {
 
 	?>
 	<p>
-	<?php echo _('You can post a new code snippet and share it with other people around the world. Just fill in this information. <strong>Give a good description</strong> and <strong>comment your code</strong> so others can read and understand it.'); ?>
+    <?php echo _('You can post a new code snippet and share it with other people around the world. Just fill in this information. <strong>Give a good description</strong> and <strong>comment your code</strong> so others can read and understand it.'); ?>
 	</p>
 	<p>
-	<?php echo _('<span class="important">Note:</span> You can submit a new version of an existing snippet by browsing the library. You should only use this page if you are submitting an entirely new script or function.'); ?>
+    <?php echo _('<span class="important">Note:</span> You can submit a new version of an existing snippet by browsing the library. You should only use this page if you are submitting an entirely new script or function.'); ?>
 	</p>
 	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post" id="snippet_submit">
 	<?php
@@ -102,43 +102,43 @@ if (session_loggedin()) {
 	<table>
 
 	<tr><td colspan="2">
-	    <?php echo $HTML->html_input('name', '', _('Title')._(': ') . utils_requiredField(), 'text', '', array('size' => '45', 'maxlength' => '60', 'required' => 'required')); ?>
+	    <?php echo $HTML->html_input('name', '', _('Title').utils_requiredField()._(': '), 'text', '', array('size' => '45', 'maxlength' => '60')); ?>
 	</td></tr>
 
 	<tr><td colspan="2">
-        <?php echo $HTML->html_textarea('description', '', _('Description')._(': ') . utils_requiredField(), '', array('rows' => '5', 'cols' => '45', 'required' => 'required')); ?>
+        <?php echo $HTML->html_textarea('description', '', _('Description').utils_requiredField()._(': '), '', array('rows' => '5', 'cols' => '45')); ?>
 	</td></tr>
 
 	<tr>
 	<td>
-		<?php echo $HTML->html_select ($SCRIPT_TYPE, 'type', _('Script Type') ._(': '). utils_requiredField() ); ?>
+		<?php echo $HTML->html_select($SCRIPT_TYPE, 'type', _('Script Type').utils_requiredField()._(': ')); ?>
 	</td>
 
 	<td>
-		<?php echo $HTML->html_select ($SCRIPT_LICENSE, 'license', _('License')._(': ')); ?>
+		<?php echo $HTML->html_select($SCRIPT_LICENSE, 'license', _('License')._(': ')); ?>
 	</td>
 	</tr>
 
 	<tr>
 	<td>
-		<?php echo $HTML->html_select ($SCRIPT_LANGUAGE, 'language', _('Language')._(': ') . utils_requiredField()); ?>
+		<?php echo $HTML->html_select($SCRIPT_LANGUAGE, 'language', _('Language').utils_requiredField()._(': ')); ?>
 		<br />
 		<!-- FIXME: Where should this link go to? <?php echo util_make_link ('/support/?func=addsupport&amp;group_id=1',_('Suggest a Language')); ?> -->
 	</td>
 
 	<td>
-		<?php echo $HTML->html_select ($SCRIPT_CATEGORY, 'category', _('Category')._(': ') . utils_requiredField()); ?>
+		<?php echo $HTML->html_select($SCRIPT_CATEGORY, 'category', _('Category').utils_requiredField()._(': ')); ?>
                 <br />
                 <!-- FIXME: Where should this link go to? <?php echo util_make_link ('/support/?func=addsupport&amp;group_id=1',_('Suggest a Category')); ?> -->
 	</td>
 	</tr>
 
 	<tr><td colspan="2">
-        <?php echo $HTML->html_input('version', '', _('Version')._(': ') . utils_requiredField(), 'text', '', array('size' => '10', 'maxlength' => '15', 'required' => 'required')); ?>
+        <?php echo $HTML->html_input('version', '', _('Version').utils_requiredField()._(': '), 'text', '', array('size' => '10', 'maxlength' => '15')); ?>
 	</td></tr>
 
 	<tr><td colspan="2">
-	    <?php echo $HTML->html_textarea('code', '', _('Paste the Code Here')._(': ') . utils_requiredField(), '', array('rows' => '30', 'cols' => '85', 'required' => 'required')); ?>
+	    <?php echo $HTML->html_textarea('code', '', _('Paste the Code Here').utils_requiredField()._(': '), '', array('rows' => '30', 'cols' => '85')); ?>
 	</td></tr>
 
 	<tr><td colspan="2" class="align-center">

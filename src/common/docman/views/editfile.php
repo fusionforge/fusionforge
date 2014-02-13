@@ -35,11 +35,11 @@ echo '<div id="editFile" >';
 echo '<form id="editdocdata" name="editdocdata" method="post" enctype="multipart/form-data">';
 echo '<table>';
 echo '	<tr>';
-echo '		<td><strong>'. _('Document Title')._(': ').'</strong>'. utils_requiredField() .'<br />';
+echo '		<td><strong>'. _('Document Title').utils_requiredField()._(':').'</strong><br />';
 echo '		<input pattern=".{5,}" title="'.sprintf(_('(at least %s characters)'), 5).'" id="title" type="text" name="title" size="40" maxlength="255"/></td>';
 echo '	</tr>';
 echo '	<tr>';
-echo '		<td><strong>'. _('Description')._(': ').'</strong>'. utils_requiredField() .'<br />';
+echo '		<td><strong>'. _('Description').utils_requiredField()._(':').'</strong><br />';
 echo '		<input pattern=".{10,}" title="'.sprintf(_('(at least %s characters)'), 10).'" id="description" type="text" name="description" size="40" maxlength="255"/></td>';
 echo '	</tr>';
 if ($g->useDocmanSearch()) {
