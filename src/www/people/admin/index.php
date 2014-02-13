@@ -100,8 +100,10 @@ if (forge_check_global_perm('forge_admin')) {
 		<input type="hidden" name="people_cat" value="y" />
 		<input type="hidden" name="post_changes" value="y" />
 		<input type="hidden" name="form_key" value="<?php echo form_generate_key();?>">
-		<strong><?php echo _('New Category Name')._(':').utils_requiredField(); ?></strong>
-		<input type="text" name="cat_name" value="" size="15" maxlength="30" required="required" />
+		<label for="cat_name">
+			<strong><?php echo _('New Category Name')._(':').utils_requiredField(); ?></strong>
+		</label>
+		<input type="text" id="cat_name" name="cat_name" value="" size="15" maxlength="30" required="required" />
 		</p>
 		<p class="warning"><?php echo _('Once you add a category, it cannot be deleted'); ?></p>
 		<p>
@@ -134,8 +136,10 @@ if (forge_check_global_perm('forge_admin')) {
 		<input type="hidden" name="people_skills" value="y" />
 		<input type="hidden" name="post_changes" value="y" />
 		<input type="hidden" name="form_key" value="<?php echo form_generate_key();?>">
-		<strong><?php echo _('New Skill Name')._(':'); ?></strong>
-		<input type="text" name="skill_name" value="" size="15" maxlength="30" />
+		<label for="skill_name">
+			<strong><?php echo _('New Skill Name')._(':'); ?></strong>
+		</label>
+		<input type="text" id="skill_name" name="skill_name" value="" size="15" maxlength="30" />
 		</p>
 		<p class="warning"><?php echo _('Once you add a skill, it cannot be deleted'); ?></p>
 		<p>
