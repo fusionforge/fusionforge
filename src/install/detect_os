@@ -102,7 +102,7 @@ detect_version()
 	os=$(detect_os)
 	case $os in
 		centos|rhel|redhat_unknown|fedora)
-			release=$(rpm -q --queryformat='%{release}' kernel)
+			release=$(rpm -q --queryformat='%{release}' rpm)
 			version=${release##*.}
 			;;
 	esac
