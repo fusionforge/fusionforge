@@ -106,8 +106,8 @@ class Widget_MyProjects extends Widget {
 
 	function displayRss() {
 		$rss = new RSS(array(
-				'title'       => forge_get_config('forge_name').' - '. _('MyProjects'),
-				'description' => _('My projects'),
+				'title'       => forge_get_config('forge_name').' - '. _('My Projects'),
+				'description' => _('My Projects'),
 				'link'        => get_server_url(),
 				'language'    => 'en-us',
 				'copyright'   => 'Copyright Xerox',
