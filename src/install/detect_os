@@ -3,7 +3,7 @@
 # Simple OS detection script
 #
 # Currently supported:
-# * Red Hat 5 / CentOS 5
+# * Red Hat 5,6 / CentOS 5,6
 # * Fedora
 # * OpenSuSE 11
 #
@@ -98,6 +98,19 @@ detect_type()
 
 detect_version()
 {
-	version=$(lsb_release -rs | cut -f1 -d.)
+	version=''
+	lsb_release_bin=$(which lsb_release)
+	ret=`echo $?`
+	if [ $ret ]
+	then
+		os=$(detect_os)
+		case $os in
+			centos|rhel|redhat_unknown|fedora)
+				release=$(rpm -q --queryformat='%{release}' kernel)
+				version=${release##*.}
+				;;
+	else
+		version=$(lsb_release -rs | cut -f1 -d.)
+	fi
 	echo $version
 }
