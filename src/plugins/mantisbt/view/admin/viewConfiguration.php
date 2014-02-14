@@ -3,7 +3,7 @@
  * MantisBT plugin
  *
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2011-2012, Franck Villaume - TrivialDev
+ * Copyright 2011-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -65,7 +65,7 @@ echo '/></td></tr>';
 echo '<tr><td><label id="mantisbtinit-url" ';
 if ($use_tooltips)
 	echo 'title="'._('Specify the Full URL of the MantisBT Web Server.').'"';
-echo ' >URL</label></td><td><input id="mantisbturl" type="text" size="50" maxlength="255" name="url" value="'.$mantisbtConf['url'].'" /></td></tr>';
+echo ' >URL</label></td><td><input id="mantisbturl" type="url" size="50" maxlength="255" name="url" value="'.$mantisbtConf['url'].'" /></td></tr>';
 echo '<tr><td><label id="mantisbtinit-user" ';
 if ($use_tooltips)
 	echo 'title="'._('Specify the user with admin right to be used thru SOAP API.').'"';
@@ -73,7 +73,7 @@ echo ' >SOAP User</label></td><td><input id="mantisbtuser" type="text" size="50"
 echo '<tr><td><label id="mantisbtinit-password" ';
 if ($use_tooltips)
 	echo 'title="'._('Specify the password of this user.').'"';
-echo ' >SOAP Password</label></td><td><input id="mantisbtpassword" type="text" size="50" maxlength="255" name="soap_password" value="'.$mantisbtConf['soap_password'].'" /></td></tr>';
+echo ' >SOAP Password</label></td><td><input id="mantisbtpassword" type="password" size="50" maxlength="255" name="soap_password" value="'.$mantisbtConf['soap_password'].'" /></td></tr>';
 echo '<tr><td><label id="mantisbtinit-syncroles" ';
 if ($use_tooltips)
 	echo 'title="'._('Do you want to sync FusionForge -> MantisBT roles ? Not implemented yet.').'"';
