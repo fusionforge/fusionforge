@@ -23,7 +23,7 @@ dist:
 $(BUILDPLACE)/$(DSCFILE): $(BUILDPLACE)/selenium/selenium-server.jar
 	cd $(BUILDPLACE) ; dpkg-source -b selenium
 
-$(BUILDPLACE)/selenium/selenium-server.jar: $(BUILDPLACE)/selenium/debian
+$(BUILDPLACE)/selenium/selenium-server.jar: $(BUILDPLACE)/selenium/debian selenium.include
 	[ -d $@ ] || wget -O - $(SELENIUMURL) > $@
 
 $(BUILDPLACE)/selenium/debian:
