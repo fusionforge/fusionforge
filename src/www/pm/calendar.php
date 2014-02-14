@@ -171,7 +171,7 @@ function display_month($m, $y) {
 	$m = $date['mon'];
 	$y = $date['year'];
 ?>
-	<table class="centered" cellpadding="1" cellspacing="1" border="1" width="100%">
+	<table class="centered fullwidth bordered">
 		<tr>
 		 <th colspan="7"><?php echo date (_('F Y'), $tstamp); ?></th>
 		</tr>
@@ -179,16 +179,16 @@ function display_month($m, $y) {
 <?php
 	reset($dow);
 	while (list ($key, $val) = each ($dow)) {
-		print "\t\t\t<th width=\"14%\">$val</th>\n";
+		print "<th style=\"width:14%\">$val</th>\n";
 	}
 ?>
 		</tr>
 <?php
 	$curr_dow = 0;
 	$curr_date = 1;
-	print "\t\t<tr>\n";
+	print "<tr>\n";
 	while ($curr_dow != $first_dow) {
-		print "\t\t\t<td></td>\n";
+		print "<td></td>\n";
 		$curr_dow++;
 	}
 	while ($curr_date <= $days_in_month) {
@@ -204,7 +204,7 @@ function display_month($m, $y) {
 					  && $m == $month) {
 					$colour = "day";
 				}
-				print "\t\t\t<td valign=\"top\" class=\"" . $colour . "\">$curr_date";
+				print "<td class=\"top " . $colour . "\">$curr_date";
 				$cell_contents = '';
 				$rows = count($pt_arr);
 				for ($i = 0; $i < $rows; $i++) {
@@ -225,14 +225,14 @@ function display_month($m, $y) {
 				}
 				print "$cell_contents</td>\n";
 			} else {
-				print "\t\t\t<td></td>\n";
+				print "<td></td>\n";
 			}
 			$curr_dow++;
 			$curr_date++;
 		}
-		print "\t\t</tr>\n";
+		print "</tr>\n";
 		if ($curr_date <= $days_in_month) {
-			print "\t\t<tr>\n";
+			print "<tr>\n";
 		}
 		$curr_dow = 0;
 	}
@@ -266,21 +266,21 @@ function display_month($m, $y) {
 <?php
 
 	for ($i = 1990; $i < 2020; $i++) {
-		print "\t\t\t\t<option value=\"$i\"" . ($year == $i ? ' selected="selected"' : '') . ">$i</option>\n";
+		print "<option value=\"$i\"" . ($year == $i ? ' selected="selected"' : '') . ">$i</option>\n";
 	}
 ?>
 				</select>
 				<select name="month">
 <?php
 	for ($i = 1; $i <= 12; $i++) {
-		print "\t\t\t\t<option value=\"$i\"" . ($month == $i ? ' selected="selected"' : '') . ">" . $months[$i] . "</option>\n";
+		print "<option value=\"$i\"" . ($month == $i ? ' selected="selected"' : '') . ">" . $months[$i] . "</option>\n";
 	}
 ?>
 				</select>
 				<select name="day">
 <?php
 	for ($i = 1; $i <= 31; $i++) {
-		print "\t\t\t\t<option value=\"$i\"" . ($day == $i ? ' selected="selected"' : '') . ">$i</option>\n";
+		print "<option value=\"$i\"" . ($day == $i ? ' selected="selected"' : '') . ">$i</option>\n";
 	}
 ?>
 				</select>
@@ -301,11 +301,11 @@ function display_month($m, $y) {
 	</form>
 	<table class="fullwidth">
 		<tr>
-			<td width="20px" class="selected"></td>
+			<td style="width:20px" class="selected"></td>
 			<td><?php echo _('today\'s date') ?></td>
 		</tr>
 		<tr>
-			<td width="20px"></td>
+			<td style="width:20px"></td>
 			<td><?php echo _('selected date') ?></td>
 		</tr>
 	</table>
@@ -315,19 +315,19 @@ if ($type == 'onemonth') {
 	display_month($month, $year);
 } elseif ($type == 'threemonth') {
 	display_month($month - 1, $year);
-	print "\t<br />\n\n";
+	print "<br />\n\n";
 	display_month($month, $year);
-	print "\t<br />\n\n";
+	print "<br />\n\n";
 	display_month($month + 1, $year);
 } elseif ($type == 'currentyear') {
 	for ($i = 1; $i <= 12; $i++) {
 		display_month($i, $year);
-		print "\t<br />\n\n";
+		print "<br />\n\n";
 	}
 } elseif ($type == 'comingyear') {
 	for ($i = 0; $i < 12; $i++) {
 		display_month($month + $i, $year);
-		print "\t<br />\n\n";
+		print "<br />\n\n";
 	}
 }
 
