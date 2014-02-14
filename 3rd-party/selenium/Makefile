@@ -27,4 +27,5 @@ $(BUILDPLACE)/selenium/selenium-server.jar: $(BUILDPLACE)/selenium/debian seleni
 	[ -d $@ ] || wget -O - $(SELENIUMURL) > $@
 
 $(BUILDPLACE)/selenium/debian:
+	[ ! -d $(BUILDPLACE)/selenium ] || rm -rf $(BUILDPLACE)/selenium
 	[ -d $@ ] || cp -r selenium $(BUILDPLACE)
