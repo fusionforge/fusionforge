@@ -208,7 +208,7 @@ if ($type=='snippet') {
 	snippet_header(array('title'=>_('Snippet Library')));
 	snippet_show_package_details($id);
 	snippet_show_package_snippets($id);
-	snippet_footer();
+	snippet_footer(array());
 
 } else {
 

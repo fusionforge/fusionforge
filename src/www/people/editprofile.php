@@ -142,7 +142,7 @@ if (session_loggedin()) {
 						$error_msg = sprintf(_('Failed to update skills: %s'),db_error());
 						break;
 					} else {
-						$feedback = ngettext('Skill updated', 'Skills updated', db_affected_rows($result));
+						$feedback = ngettext (_('Skill updated'), _('Skills updated'), db_affected_rows($result));
 					}
 				}   /* end for */
 
@@ -186,7 +186,7 @@ if (session_loggedin()) {
 				if (!$result || db_affected_rows($result) < 1) {
 					$error_msg .= sprintf(_('Failed to delete any skills: %s'),db_error());
 				} else {
-					$feedback = ngettext('Skill deleted successfully', 'Skills deleted successfully', db_affected_rows($result));
+					$feedback = ngettext (_('Skill deleted successfully'), _('Skills deleted successfully'), db_affected_rows($result));
 				}
 			} else {
 				$result = db_query_params ('SELECT title FROM skills_data where skills_data_id = ANY ($1)',
@@ -198,7 +198,7 @@ if (session_loggedin()) {
 					people_header(array('title'=>_('Confirm skill delete')));
 
 					echo '<span class="important">'._('Confirm Delete').'</span>';
-					print ngettext('You are about to delete the following skill from the skills database:', 'You are about to delete the following skills from the skills database:', $rows) ;
+					print ngettext(_('You are about to delete the following skill from the skills database:'), _('You are about to delete the following skills from the skills database:'), $rows) ;
 					echo "<br />";
 					for($i = 0; $i < $rows; $i++) {
 						echo "<strong>&nbsp;&nbsp;&nbsp;" .db_result($result, $i, 'title') . "</strong><br />";

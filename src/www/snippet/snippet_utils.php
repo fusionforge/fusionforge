@@ -121,7 +121,7 @@ function snippet_header($params) {
 	echo '</p>';
 }
 
-function snippet_footer($params = array()) {
+function snippet_footer($params) {
 	global $HTML;
 	$HTML->footer($params);
 }

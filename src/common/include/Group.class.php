@@ -2034,7 +2034,7 @@ class Group extends Error {
 		//
 		//	audit trail
 		//
-		$this->addHistory('Added User',$user_identifier);
+		$this->addHistory(_('Added User'),$user_identifier);
 		db_commit();
 		return true;
 	}
@@ -2145,7 +2145,7 @@ class Group extends Error {
 		plugin_hook ("group_removeuser", $hook_params);
 
 		//audit trail
-		$this->addHistory('Removed User',$user_id);
+		$this->addHistory(_('Removed User'),$user_id);
 
 		db_commit();
 		return true;
@@ -2194,7 +2194,7 @@ class Group extends Error {
 		$found_role->removeUser ($user);
 		$newrole->addUser ($user);
 
-		$this->addHistory('Updated User',$user_id);
+		$this->addHistory(_('Updated User'),$user_id);
 		return true;
 	}
 
