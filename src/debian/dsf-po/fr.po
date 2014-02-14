@@ -1,0 +1,132 @@
+# Translation of @PACKAGENAME@ debconf templates to French
+# Copyright (C) 2002-2007 Christian Perrier <bubulle@debian.org>
+# This file is distributed under the same license as the @PACKAGENAME@ package.
+#
+# Christian Perrier <bubulle@debian.org>, 2002-2007, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGENAME@\n"
+"Report-Msgid-Bugs-To: fusionforge@packages.debian.org\n"
+"POT-Creation-Date: 2013-07-18 15:56+0200\n"
+"PO-Revision-Date: 2013-07-18 15:57+0200\n"
+"Last-Translator: Christian Perrier <bubulle@debian.org>\n"
+"Language-Team: French <debian-l10n-french@lists.debian.org>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:2001
+msgid "@FORGENAME@ domain or subdomain name:"
+msgstr "Nom de domaine ou de sous-domaine @FORGENAME@ :"
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:2001
+msgid ""
+"Please enter the domain that will host the @FORGENAME@ installation. Some "
+"services (scm, lists, etc.) will be given their own subdomain in that domain."
+msgstr ""
+"Veuillez indiquer le nom de domaine qui hébergera le serveur @FORGENAME@. "
+"Certains services auront leur propre sous-domaine à l'intérieur de ce "
+"domaine (scm, lists, etc.)."
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:3001
+msgid "@FORGENAME@ system name:"
+msgstr "Nom du système @FORGENAME@ :"
+
+#. Type: string
+#. Description
+#: ../dsf-in/common.templates:3001
+msgid ""
+"Please enter the name of the @FORGENAME@ system. It is used in various "
+"places throughout the system."
+msgstr ""
+"Veuillez indiquer le nom du système @FORGENAME@. Il est utilisé dans "
+"plusieurs parties du serveur."
+
+#. Type: password
+#. Description
+#: ../dsf-in/db-postgresql.templates:2001
+msgid "@FORGENAME@ administrator password:"
+msgstr "Mot de passe de l'administrateur de @FORGENAME@ :"
+
+#. Type: password
+#. Description
+#: ../dsf-in/db-postgresql.templates:2001
+msgid ""
+"The @FORGENAME@ administrator account will have full privileges on the "
+"forge. It will be used to approve the creation of new projects."
+msgstr ""
+"Le compte d'administration de @FORGENAME@ aura tous les privilèges sur la "
+"forge. Il servira à approuver la création de projets."
+
+#. Type: password
+#. Description
+#: ../dsf-in/db-postgresql.templates:2001
+msgid "Please choose the password for this forge account."
+msgstr "Veuillez choisir le mot de passe de ce compte."
+
+#. Type: password
+#. Description
+#: ../dsf-in/db-postgresql.templates:3001
+msgid "Password confirmation:"
+msgstr "Confirmation du mot de passe :"
+
+#. Type: password
+#. Description
+#: ../dsf-in/db-postgresql.templates:3001
+msgid "Please re-type the password for confirmation."
+msgstr "Veuillez entrer à nouveau le mot de passe, pour confirmation."
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "install the new version configured by @PACKAGE@"
+msgstr "installer la nouvelle version proposée par @PACKAGE@"
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "keep the local version currently installed"
+msgstr "conserver la version actuelle"
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "show the differences between the versions"
+msgstr "afficher les différences entre les versions"
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "show a side-by-side difference between the versions"
+msgstr "afficher les différences côte à côte"
+
+#. Type: select
+#. Choices
+#: ../dsf-in/db-postgresql.templates:4001
+msgid "start a new shell to examine the situation"
+msgstr "suspendre ce processus pour examiner la situation"
+
+#. Type: select
+#. Description
+#: ../dsf-in/db-postgresql.templates:4002
+msgid "What do you want to do about configuration file ${BASENAME}?"
+msgstr "Que voulez-vous faire du ficher de configuration ${BASENAME}?"
+
+#. Type: select
+#. Description
+#: ../dsf-in/db-postgresql.templates:4002
+msgid ""
+"The configuration file ${FILE} needs to be modified by @PACKAGE@, whereas it "
+"is also a configuration file of the postgresql package."
+msgstr ""
+"Le fichier de configuration ${FILE} doit être modifié pour permettre le "
+"fonctionnement de @PACKAGE@, mais il appartien au paquet postgresql."

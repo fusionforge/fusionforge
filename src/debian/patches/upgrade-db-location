@@ -1,0 +1,13 @@
+Index: src/db/upgrade-db.php
+===================================================================
+--- src.orig/db/upgrade-db.php
++++ src/db/upgrade-db.php
+@@ -10,7 +10,7 @@
+ require_once $gfcommon.'include/pre.php';
+ require_once $gfcommon.'include/sqlparser.php';
+ 
+-$db_path = dirname(__FILE__).'/';
++$db_path = dirname(__FILE__).'/../db/';
+ $date = -1;
+ $version = '';
+ 

@@ -1,0 +1,13 @@
+case "$1" in
+    install|upgrade)
+	dpkg-divert --package @PACKAGE@-plugin-mailman \
+		--divert /usr/lib/mailman/Mailman/Archiver/Archiver.py.old \
+		--rename /usr/lib/mailman/Mailman/Archiver/Archiver.py
+	dpkg-divert --package @PACKAGE@-plugin-mailman \
+		--divert /usr/lib/mailman/Mailman/SecurityManager.py.old \
+		--rename /usr/lib/mailman/Mailman/SecurityManager.py
+	dpkg-divert --package @PACKAGE@-plugin-mailman \
+		--divert /usr/lib/mailman/Mailman/MailList.py.old \
+		--rename /usr/lib/mailman/Mailman/MailList.py
+    ;;
+esac

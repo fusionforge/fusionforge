@@ -1,0 +1,44 @@
+TODO : document what this file is about (or get rid of it ?) -- Olivier Berger
+
+Here is a simple dependency graph
+
+
+sourceforge-common +
+                   |
+                   +- sourceforge-db-postgresql | sourceforge-db   +
+                   |                                               |
+                   |                                               +- sourceforge-web-apache | sourceforge-web 
+                   |
+                   +- sourceforge-mta-exim | sourceforge-mta 
+                   |
+                   +- sourceforge-dns-bind9 | sourceforge-dns 
+                   |
+                   +- sourceforge-ldap-openldap | sourceforge-ldap +
+                                                                   |
+                                                                   +- sourceforge-shell-ldap | sourceforge-shell 
+                                                                   |
+                                                                   +- sourceforge-cvs 
+                                                                   |
+                                                                   +- sourceforge-ftp-proftpd | sourceforge-ftp 
+                                                                   |
+                                                                   +- sourceforge-lists-mailman | sourceforge-lists 
+
+I suggest the folowing order
+
+PACKPATH=..
+export PACKPATH
+sudo dpkg -i $PACKPATH/sourceforge-common*deb
+sudo dpkg -i $PACKPATH/sourceforge-db-postgresql*deb
+sudo dpkg -i $PACKPATH/sourceforge-web-apache*deb
+
+sudo dpkg -i $PACKPATH/sourceforge-mta-exim*deb
+sudo dpkg -i $PACKPATH/sourceforge-dns-bind9*deb
+
+sudo dpkg -i $PACKPATH/sourceforge-ldap-openldap*deb
+sudo dpkg -i $PACKPATH/sourceforge-shell-ldap*deb
+
+sudo dpkg -i $PACKPATH/sourceforge-cvs*deb
+sudo dpkg -i $PACKPATH/sourceforge-ftp-proftpd*deb
+sudo dpkg -i $PACKPATH/sourceforge-lists-mailman*deb
+
+

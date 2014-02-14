@@ -1,0 +1,10 @@
+@LOG_PATH@/vhosts/*/access.log {
+       weekly
+       missingok
+       rotate 52
+       compress
+       delaycompress
+       notifempty
+       create 640 root adm
+       sharedscripts
+}

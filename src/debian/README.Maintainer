@@ -1,0 +1,218 @@
+DEBIAN GFORGE MAINTAINER HOWTO
+------------------------------
+
+Here is a short HOWTO explaining a few of the tricks that are used by
+the Debian Gforge packages.  
+
+ATTENTION TO NMUERS
+-------------------
+If you intend to NMU this package, *please* read it thoroughly.  While
+you can make it up as you do it as far as the helpers are organised,
+the database handling is, to say the least, very fragile.  And errors
+are fatal.  So go read the section entitled "THE DATABASE".  Do it
+now.  Don't skip it.  Really.
+
+HELPERS (DEBHELPER & DEBCONF)
+-----------------------------
+The package uses Debhelper and Debconf.  While not all features of are
+used (no Emacsen modules, no shared libraries, no rollback features in
+Debconf, etc.), some of them are.  Where they are, it is in a fairly
+straightforward way.  No black magic or advanced features are used.
+
+PACKAGE ORGANISATION
+--------------------
+Historically, the package was monolithic: there was only one (rather
+large) package, called "sourceforge".  This package went and changed
+things all over the system, configuring a database, a web server, the
+mail transfer agent, etc.  In order to keep a semblance of order in
+all the actions involved, we separated them by "subsystem".  There was
+the database subsystem, the web server subsystem, the LDAP subsystem,
+etc.  These subsystems were each represented by a script handling most
+of it.  These scripts are called deb-specific/install-*.sh.  The main
+maintainer scripts (postinst, prerm, cron jobs and suchlike) called
+these scripts in turn.  The install-*.sh scripts handle different
+parameters: "configure", "purge" and "update" have rather explicit
+names (I hope); "configure-files" and "purge-files" are special
+targets.  They are used as a way for the postinst to delegate the task
+of computing a proposed change in a configuration file to the
+subsystem.  The postinst then uses Debconf to ask whether the proposed
+file should be used, takes appropriate action, then lets the subsystem
+finish its configuration.  Similar things happen for prerm scripts.
+
+  The package is now split into several pkgname-* packages.  Some
+of them still contain some install-*.sh scripts (usually at most one).
+Each pkgname-* package installs its corresponding subsystem, or a
+semblance thereof.  For instance, it is planned that the database can
+be hosted on a different server than the website.  But the website
+still needs to know where the database server is.  In this case, the
+database host will have to install pkgname-db-local (or whatever
+the package is named), and the web server will have to install
+pkgname-db-remote.  The -db-local package will still install the
+database (thus invoking install-db.sh), but -db-remote will only
+install what is needed by the database *clients* (basically, the host
+where the database is installed and the appropriate password).
+
+  There are therefore some areas where packages overlap: the database
+password is a variable "provided" by both the -db-local and -db-remote
+packages.  Debconf is intelligent enough not to ask the corresponding
+question twice, but it is interesting nevertheless to keep the
+appropriate variables where they belong, and only there.  Hence the
+use of a Debhelper-like trick, as described below.
+
+DSF-HELPER
+----------
+This is the most tricky part of the source package.  The maintainer
+scripts and Debconf templates are not used "as is", but they are
+instead generated from templates.  In much the same way as Debhelper
+replaces #DEBHELPER# lines in maintainer scripts by appropriate chunks
+of code to add the needed functionality to packages, this package
+builds the maintainer scripts (and Debconf templates) from templates
+by inserting bits of text in them.  These bits can be either simple
+text (like for Debconf templates), or bits of code (like the
+appropriate code to handle one particular Debconf variable in a
+.config file, or a function to repeatedly ask for a password until two
+consecutive answers match).
+
+  I call this trick DSF-Helper (for "Debian Sourceforge helper").
+It's largely inspired from Debhelper (particularly dh_installdeb) in
+both its concepts and implementation, and it might result in a patch
+submitted against Debhelper proper when I'm confident it works and is
+useful.  It is currently implemented in Perl.
+
+  The "bits of stuff" are grouped by identifiers.  For each
+identifier, you can have one chunk of text for each family of
+generated files (currently the families are .templates, .config,
+.preinst, .postinst, .prerm and .postrm).  For instance, a Debconf
+variable shared between several packages will have one chunk for the
+.templates file (containing the Debconf template), one for the .config
+file (containing the appropriate Debconf call), and one for the
+.postinst file (containing code to turn this Debconf variable into a
+line in a configuration file).
+
+  Each subpackage can then use some of these "bits of stuff" in its
+files.  To do so, the files must be named *.dsfh-in and include lines
+like #DSFHELPER:identifier#.  These files will be processed by
+dsf-helper.pl and turned into the appropriate files, with the keywords
+replaced by the appropriate text.
+
+  Now for a few examples.
+
+- get-debconf-password: this is a simple shell function looping until
+  the user types the same passwrd twice.  This function is mostly
+  useful in .config files, hence the "group" consists of the sole
+  debian/dsf-helper/get-debconf-password.config file.  To use it in a
+  <blah>.config file, just rename that <blah>.config file as
+  <blah>.config.dsfh-in and include #DSFHELPER:get-debconf-password#
+  in it.
+
+- ldap-variables: this one involves both Debconf templates and .config
+  code.  Just include #DSFHELPER:ldap-variables# in both the
+  <blah>.templates.dsfh-in and <blah>.config.dsfh-in, and DSF-Helper
+  will insert the appropriate chunk of text in the appropriate file.
+
+  The rationale behind DSF-Helper is that the code handling, say, one
+particular Debconf variable is likely to change from time to time, and
+to be added to one subpackage and removed from another.  It can become
+a big hassle just to maintain the code in different files and keep it
+consistent, and creating a new subpackage is also a tedious task.
+DSF-Helper makes these tasks a bit more automated.  Each bit of code
+is only maintained in one file, and it's propagated into every package
+at package building time.  Creating a new package can be "just" a
+matter of picking the appropriate bits of code, and DSF-Helper will
+put them where needed.
+
+  To draw a comparison with compiled C code, DSF-Helper is separate
+compilation (each function in its own file) made into static binaries.
+The "static" part is this: I could of course have put all the bits of
+code into one external file, and source it at run time, but that
+cannot work for .config, .preinst and .postrm scripts since they are
+executed when the package is not installed (not yet unpacked or
+already removed).
+
+THE DATABASE
+------------
+It is vitally important that extreme care be taken for changes in the
+database.  A smooth upgrade path has been provided so far by carefully
+sequencing the changes in the database and making sure they will not
+conflict with each other or some other trick.  This section is
+targetted at people who touch deb-specific/db-upgrade.pl.  Please read
+it thoroughly, and don't skip paragraphs.  A single mistake can be a
+nightmare to fix (and believe me, I know that).
+
+  The database, as created by the package, has a lot of tables for the
+software proper, plus one especially used to store a version of the
+database scheme.  That one table is named debian_meta_data, and
+contains two fields (named 'key' and 'value').  Two rows are currently
+used: the one for which the key is 'db-version', and the one for which
+the key is 'current-path'.  Together they store the current status of
+the database.
+
+  The value of 'current-path' is only used during the first
+installation of Sourceforge 2.6.  If that installation is done on a
+fresh machine, the value will be 'scratch-to-2.6'.  If the
+installation is done as an upgrade on Sourceforge 2.5, the value will
+be '2.5-to-2.6'.  In any case, when that first installation is
+completed, the row is deleted.  There's currently no other use for
+this row.
+
+  The value of 'db-version' is a string encoding a version.  The
+ordering method for these strings is the one provided by dpkg
+--compare-versions.  The values currently used more or less match the
+package versions, but you shouldn't depend on it.  Special procedures
+(upgrading from 2.5, or installing a fresh 2.6, or future cases maybe)
+involve names not corresponding to a package version.  They still must
+be ordered according to dpkg.
+
+  The database upgrader (db-upgrade.pl) can be seen as walking along a
+path.  Either that path is an explicit one (during first install or
+upgrade from 2.5), or it is the default one (upgrading betwen versions
+of 2.6).  In any case, the walking is made in steps.  Each step has a
+target version (where it leads) and a series of actions to perform to
+reach that target.  If the current version of the database is lesser
+than the target version, the actions are performed, and the current
+version is updated to the target version.  If not, that step is
+skipped.  It is very important that steps are attempted in the correct
+order (ascending order of target versions), otherwise steps will be
+skipped.  It is also very important that the actions are dependable.
+Generally, when executing the actions for step n, you can depend on
+the database being compliant with the last step before n.
+
+  Tip #1: don't assume things unless you are certain they are true.
+Don't assume some value is missing from a table simply because it's
+missing from yours.  Don't assume some value is available.
+
+  Tip #2: test your patch.  Install Sourceforge 2.6 from scratch.
+Install it over a freshly installed Sourceforge 2.5.  Install it over
+a previous version of Sourceforge 2.6.  If at all possible, install it
+over a non-empty database coming from 2.5, then do it again over a
+non-empty database of 2.6.  If *any* of these break, *don't upload*.
+Period.
+
+  Tip #3: remember, there's no way back.  Once your package has been
+installed by some user, the database version has irreversibly been
+bumped up.  While you can sometimes revert changes by hand on your
+local database, you can't provide a rollback for potential thousands
+of users (even it the actual number is more in the tens than in the
+thousands).
+
+  Tip #4: the db-upgrade.pl script has evolved over time to involve a
+few functions, such as get_db_version and update_db_version.  Use
+them.  Your best bet would be to cut and paste a block, change the
+$target, and change the actions.
+
+  Tip #5: pay attention to the ordering of the blocks.  You can't go
+back in time, so all your changes must be at the end of the series of
+actions.
+
+  There.  Thanks for reading.  I know it sounds boring, but I can
+guarantee you will avoid problems if you understand this.  Maybe not
+all problems, but definitely some of them.
+
+CONTRIBUTING
+------------
+
+The source is maintained in bzr (see debian/control's Vcs-Bzr:
+field). A copy can be checked-out using : debcheckout gforge.
+
+
+  -- Roland Mas

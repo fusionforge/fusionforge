@@ -1,3 +1,6 @@
+@SOURCE_PATH@/lib/vendor/jquery-storage @SOURCE_PATH@/www/scripts/jquery-storage
+@SOURCE_PATH@/lib/vendor/jquery-simpletreemenu @SOURCE_PATH@/www/scripts/jquery-simpletreemenu
+@SOURCE_PATH@/lib/vendor/coolfieldset @SOURCE_PATH@/www/scripts/coolfieldset
 @SOURCE_PATH@/www/env.inc.php @PLUGIN_PATH@/env.inc.php
 usr/share/javascript/yui @SOURCE_PATH@/www/scripts/yui
 usr/share/javascript/prototype @SOURCE_PATH@/www/scripts/prototype

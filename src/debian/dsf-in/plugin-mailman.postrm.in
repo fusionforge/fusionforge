@@ -1,0 +1,7 @@
+case "$1" in
+    purge|remove)
+	    dpkg-divert --package @PACKAGE@-plugin-mailman --rename --remove /usr/lib/mailman/Mailman/Archiver/Archiver.py || true
+	    dpkg-divert --package @PACKAGE@-plugin-mailman --rename --remove /usr/lib/mailman/Mailman/SecurityManager.py || true
+	    dpkg-divert --package @PACKAGE@-plugin-mailman --rename --remove /usr/lib/mailman/Mailman/MailList.py || true
+	    ;;
+esac
