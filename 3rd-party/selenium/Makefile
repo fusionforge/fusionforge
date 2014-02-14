@@ -12,7 +12,7 @@ ARCH:=$(shell dpkg-architecture -qDEB_BUILD_ARCH 2>/dev/null)
 DSCFILE=selenium_$(VERS).dsc
 CHANGEFILE=selenium_$(VERS)_$(ARCH).changes
 
-default: $(BUILDRESULT)/$(CHANGEFILE) dist
+default: clean $(BUILDRESULT)/$(CHANGEFILE) dist
 
 $(BUILDRESULT)/$(CHANGEFILE): $(BUILDPLACE)/$(DSCFILE)
 	sudo cowbuilder --configfile $(COWBUILDERCONFIG) --build $(BUILDPLACE)/$(DSCFILE)
@@ -27,5 +27,7 @@ $(BUILDPLACE)/selenium/selenium-server.jar: $(BUILDPLACE)/selenium/debian seleni
 	[ -d $@ ] || wget -O - $(SELENIUMURL) > $@
 
 $(BUILDPLACE)/selenium/debian:
-	[ ! -d $(BUILDPLACE)/selenium ] || rm -rf $(BUILDPLACE)/selenium
 	[ -d $@ ] || cp -r selenium $(BUILDPLACE)
+
+clean:
+	[ ! -d $(BUILDPLACE)/selenium ] || rm -rf $(BUILDPLACE)/selenium
