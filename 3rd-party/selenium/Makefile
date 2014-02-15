@@ -12,7 +12,7 @@ ARCH:=$(shell dpkg-architecture -qDEB_BUILD_ARCH 2>/dev/null)
 DSCFILE=selenium_$(VERS).dsc
 CHANGEFILE=selenium_$(VERS)_$(ARCH).changes
 
-default: clean $(BUILDRESULT)/$(CHANGEFILE) dist
+default: $(BUILDRESULT)/$(CHANGEFILE) dist
 
 $(BUILDRESULT)/$(CHANGEFILE): $(BUILDPLACE)/$(DSCFILE)
 	sudo cowbuilder --configfile $(COWBUILDERCONFIG) --build $(BUILDPLACE)/$(DSCFILE)
@@ -20,7 +20,7 @@ $(BUILDRESULT)/$(CHANGEFILE): $(BUILDPLACE)/$(DSCFILE)
 dist:
 	reprepro -Vb $(REPOPATH)/debian --ignore=wrongdistribution --ignore=missingfile include $(DIST) $(BUILDRESULT)/$(CHANGEFILE)
 
-$(BUILDPLACE)/$(DSCFILE): $(BUILDPLACE)/selenium/selenium-server.jar
+$(BUILDPLACE)/$(DSCFILE): $(BUILDPLACE)/selenium_$(MAJOR).orig.tar.gz
 	cd $(BUILDPLACE) ; dpkg-source -b selenium
 
 $(BUILDPLACE)/selenium/selenium-server.jar: $(BUILDPLACE)/selenium/debian selenium.include
@@ -28,6 +28,9 @@ $(BUILDPLACE)/selenium/selenium-server.jar: $(BUILDPLACE)/selenium/debian seleni
 
 $(BUILDPLACE)/selenium/debian:
 	[ -d $@ ] || cp -r selenium $(BUILDPLACE)
+
+$(BUILDPLACE)/selenium_$(MAJOR).orig.tar.gz: $(BUILDPLACE)/selenium/selenium-server.jar
+	[ -d $@ ] || (cd $(BUILDPLACE) ; tar cvzf $@ selenium/selenium-server.jar)
 
 clean:
 	[ ! -d $(BUILDPLACE)/selenium ] || rm -rf $(BUILDPLACE)/selenium
