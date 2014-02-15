@@ -7,7 +7,7 @@
  * Copyright 2009, Roland Mas
  * Copyright 2010, Franck Villaume - Capgemini
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -130,8 +130,7 @@ switch (getStringFromRequest('func')) {
 			exit_error(_('Illegal format for hours: must be an integer or a float number.'),'pm');
 		}
 
-		if (!$dependent_on)
-		{
+		if (!is_array($dependent_on)) {
 			$dependent_on=array();
 		}
 		$start_date=mktime($start_hour,$start_minute,0,$start_month,$start_day,$start_year);
