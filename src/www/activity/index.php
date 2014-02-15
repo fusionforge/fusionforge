@@ -7,6 +7,7 @@
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2012-2014, Franck Villaume - TrivialDev
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2014, Benoit Debaenst - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -114,6 +115,15 @@ if (forge_get_config('use_news') && $group->usesNews()) {
 	$texts[]	= _('News');
 }
 
+if (forge_get_config('use_pm') && $group->usesPM()) {
+	$ids[]		= 'taskopen';
+	$texts[]	= _('Tasks Opened');
+	$ids[]		= 'taskclose';
+	$texts[]	= _('Tasks Closed');
+	$ids[]		= 'taskdelete';
+	$texts[]	= _('Tasks Deleted');
+}
+
 if (forge_get_config('use_frs') && $group->usesFRS()) {
 	$ids[]		= 'frsrelease';
 	$texts[]	= _('FRS Release');
@@ -219,7 +229,6 @@ if (count($results) < 1) {
 					$cached_perms[$s][$ref] = forge_check_perm('scm', $group_id, 'read');
 					break;
 				}
-				case 'commit':
 				case 'trackeropen':
 				case 'trackerclose': {
 					$cached_perms[$s][$ref] = forge_check_perm('tracker', $ref, 'read');
@@ -232,6 +241,12 @@ if (count($results) < 1) {
 				case 'forumpost':
 				case 'news': {
 					$cached_perms[$s][$ref] = forge_check_perm('forum', $ref, 'read');
+					break;
+				}
+				case 'taskopen': 
+				case 'taskclose':
+				case 'taskdelete': {
+					$cached_perms[$s][$ref] = forge_check_perm('pm', $ref, 'read');
 					break;
 				}
 				case 'docmannew':
@@ -276,48 +291,58 @@ if (count($results) < 1) {
 		}
 		switch (@$arr['section']) {
 			case 'scm': {
-				$icon = html_image('ic/cvs16b.png','','',array('alt'=>'Source Code'));
+				$icon = html_image('ic/cvs16b.png','','',array('alt'=>_('Source Code')));
 				$url = util_make_link('/scm/'.$arr['ref_id'].$arr['subref_id'],_('scm commit: ').$arr['description']);
 				break;
 			}
-			case 'commit': {
-				$icon = html_image('ic/cvs16b.png','','',array('alt'=>'Source Code'));
-				$url = util_make_link('/tracker/?func=detail&amp;atid='.$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'],_('Commit for Tracker Item').' [#'.$arr['subref_id'].'] '.$arr['description']);
-				break;
-			}
 			case 'trackeropen': {
-				$icon = html_image('ic/tracker20g.png','','',array('alt'=>'Trackers'));
+				$icon = html_image('ic/tracker20g.png','','',array('alt'=>_('Trackers')));
 				$url = util_make_link('/tracker/?func=detail&amp;atid='.$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'],_('Tracker Item').' [#'.$arr['subref_id'].'] '.$arr['description'].' '._('Opened'));
 				break;
 			}
 			case 'trackerclose': {
-				$icon = html_image('ic/tracker20g.png','','',array('alt'=>'Trackers'));
+				$icon = html_image('ic/tracker20g.png','','',array('alt'=>_('Trackers')));
 				$url = util_make_link('/tracker/?func=detail&amp;atid='.$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'],_('Tracker Item').' [#'.$arr['subref_id'].'] '.$arr['description'].' '._('Closed'));
 				break;
 			}
 			case 'frsrelease': {
-				$icon = html_image('ic/cvs16b.png','','',array('alt'=>'Files'));
+				$icon = html_image('ic/cvs16b.png','','',array('alt'=>_('Files')));
 				$url = util_make_link('/frs/?release_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'],_('FRS Release').' '.$arr['description']);
 				break;
 			}
 			case 'forumpost': {
-				$icon = html_image('ic/forum20g.png','','',array("alt"=>'Forum'));
+				$icon = html_image('ic/forum20g.png','','',array("alt"=>_('Forum')));
 				$url = util_make_link('/forum/message.php?msg_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'],_('Forum Post ').' '.$arr['description']);
 				break;
 			}
 			case 'news': {
-				$icon = html_image('ic/write16w.png','','',array('alt'=>'News'));
+				$icon = html_image('ic/write16w.png','','',array('alt'=>_('News')));
 				$url = util_make_link('/forum/forum.php?forum_id='.$arr['subref_id'],_('News').' '.$arr['description']);
+				break;
+			}
+			case 'taskopen': {
+				$icon = html_image('ic/write16w.png','','',array('alt'=>_('Tasks')));
+				$url = util_make_link('/pm/task.php?func=detailtask&project_task_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'].'&amp;group_project_id='.$arr['ref_id'],_('Tasks').' '.$arr['description']);
+				break;
+			}
+			case 'taskclose': {
+				$icon = html_image('ic/write16w.png','','',array('alt'=>_('Tasks')));
+				$url = util_make_link('/pm/task.php?func=detailtask&project_task_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'].'&amp;group_project_id='.$arr['ref_id'],_('Tasks').' '.$arr['description']);
+				break;
+			}
+			case 'taskdelete': {
+				$icon = html_image('ic/write16w.png','','',array('alt'=>_('Tasks')));
+				$url = util_make_link('/pm/task.php?func=detailtask&project_task_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'].'&amp;group_project_id='.$arr['ref_id'],_('Tasks').' '.$arr['description']);
 				break;
 			}
 			case 'docmannew':
 			case 'docmanupdate': {
-				$icon = html_image("ic/docman16b.png", '', '', array("alt"=>"Documents"));
+				$icon = html_image('ic/docman16b.png', '', '', array('alt'=>_('Documents')));
 				$url = util_make_link('docman/?group_id='.$arr['group_id'].'&amp;view=listfile&amp;dirid='.$arr['ref_id'],_('Document').' '.$arr['description']);
 				break;
 			}
 			case 'docgroupnew': {
-				$icon = html_image("ic/cfolder15.png", '', '', array("alt"=>"Directory"));
+				$icon = html_image('ic/cfolder15.png', '', '', array("alt"=>_('Directory')));
 				$url = util_make_link('docman/?group_id='.$arr['group_id'].'&amp;view=listfile&amp;dirid='.$arr['subref_id'],_('Directory').' '.$arr['description']);
 				break;
 			}
