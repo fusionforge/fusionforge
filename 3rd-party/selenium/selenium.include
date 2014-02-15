@@ -13,7 +13,5 @@ MAJOR=2.35.0
 MINOR=1
 SELENIUMURL=http://selenium.googlecode.com/files/selenium-server-standalone-$(MAJOR).jar
 
-#VERS=$(MAJOR)-$(MINOR)
-# Now native package
-VERS=$(MAJOR)
+VERS=$(MAJOR)-$(MINOR)
 
