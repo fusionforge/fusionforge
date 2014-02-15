@@ -7,7 +7,7 @@
  * Copyright 2009, Roland Mas
  * Copyright 2010, Alain Peyrat - Alcatel-Lucent
  * Copyright 2011, Thorsten Glaser <t.glaser@tarent.de>
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013-2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -807,6 +807,7 @@ class ProjectTask extends Error {
 	 * @param	array	$arr
 	 */
 	function &convertDependentOn($arr) {
+		$new = array();
 		$deps = $this->getDependentOn();
 		for ($i=0; $i<count($arr); $i++) {
 			if (isset($deps[$arr[$i]])) {
