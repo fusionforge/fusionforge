@@ -182,27 +182,44 @@ foreach ($show as $showthis) {
 $multiselect = html_build_multiple_select_box_from_arrays($ids, $texts, 'show[]', $show, count($texts), false);
 ?>
 
+<div id="activity">
+<div id="activity_left">
+
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
+
+<strong><?php echo _('Activity')._(':'); ?></strong></br>
+<?php echo $multiselect; ?></br></br>
+
+<strong><?php echo _('Start Date')._(':'); ?></strong></br>
+<input name="start_date" value="<?php echo $rendered_begin; ?>" size="10" maxlength="10" /></br></br>
+
+<strong><?php echo _('End Date')._(':'); ?></strong></br>
+<input name="end_date" value="<?php echo $rendered_end; ?>" size="10" maxlength="10" /></br></br>
+
+<input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" />
+<!--
 <table>
 	<tr>
-		<td><strong><?php echo _('Activity')._(':'); ?></strong></td>
-		<td><strong><?php echo _('Start Date')._(':'); ?></strong></td>
-		<td><strong><?php echo _('End Date')._(':'); ?></strong></td>
+		<td></td>
+		<td></td>
+		<td></td>
 		<td></td>
 	</tr>
 	<tr>
-		<td><?php echo $multiselect; ?></td>
-		<td class="top"><input name="start_date"
-			value="<?php echo $rendered_begin; ?>" size="10" maxlength="10" /></td>
-		<td class="top"><input name="end_date"
-			value="<?php echo $rendered_end; ?>" size="10" maxlength="10" /></td>
+		<td></td>
+		<td class="top"></td>
+		<td class="top"></td>
 		<td class="top">
-			<input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" />
+			
 		</td>
 	</tr>
 </table>
+-->
 </form>
+</div>
+
+<div id="activity_right">
 <?php
 if (count($results) < 1) {
 	echo '<p class="information">' . _('No Activity Found') . '</p>';
@@ -279,7 +296,6 @@ if (count($results) < 1) {
 			$theader[] = _('Activity');
 			$theader[] = _('By');
 
-			echo '<br/>';
 			echo $HTML->listTableTop($theader);
 			$displayTableTop = 1;
 		}
@@ -321,17 +337,18 @@ if (count($results) < 1) {
 				break;
 			}
 			case 'taskopen': {
-				$icon = html_image('ic/write16w.png','','',array('alt'=>_('Tasks')));
+				$icon = html_image('ic/taskman20w.png','','',array('alt'=>_('Tasks')));
 				$url = util_make_link('/pm/task.php?func=detailtask&project_task_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'].'&amp;group_project_id='.$arr['ref_id'],_('Tasks').' '.$arr['description']);
 				break;
 			}
 			case 'taskclose': {
-				$icon = html_image('ic/write16w.png','','',array('alt'=>_('Tasks')));
+				$icon = html_image('ic/taskman20w.png','','',array('alt'=>_('Tasks')));
 				$url = util_make_link('/pm/task.php?func=detailtask&project_task_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'].'&amp;group_project_id='.$arr['ref_id'],_('Tasks').' '.$arr['description']);
 				break;
 			}
+
 			case 'taskdelete': {
-				$icon = html_image('ic/write16w.png','','',array('alt'=>_('Tasks')));
+				$icon = html_image('ic/taskman20w.png','','',array('alt'=>_('Tasks')));
 				$url = util_make_link('/pm/task.php?func=detailtask&project_task_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'].'&amp;group_project_id='.$arr['ref_id'],_('Tasks').' '.$arr['description']);
 				break;
 			}
@@ -368,5 +385,9 @@ if (count($results) < 1) {
 		echo '<p class="information">' . _('No Activity Found') . '</p>';
 	}
 }
+
+echo '</div>';
+echo '</div>';
+
 
 site_project_footer();
