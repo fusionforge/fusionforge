@@ -366,6 +366,10 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 			case 'submit':
 				$qpa = db_construct_qpa ($qpa, 'AND (perm_val & 8) = 8');
 				break;
+			case 'vote':
+				$qpa = db_construct_qpa ($qpa, 'AND (perm_val & 16) = 16');
+				break;
+			}
 			break;
 		case 'pm':
 			switch ($action) {
