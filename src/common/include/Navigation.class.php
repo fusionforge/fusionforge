@@ -618,9 +618,7 @@ class Navigation extends Error {
 	function getPoweredBy($asHTML=true) {
 		$res['url'] = 'http://fusionforge.org/';
 		$res['image'] = util_make_uri('/images/pow-fusionforge.png');
-		$res['title'] = '<img src="'
-			. $res['image']
-			. '" alt="Powered By FusionForge" />';
+		$res['title'] = html_abs_image($res['image'], null, null, array("alt" => "Powered By FusionForge"));
 		$res['html'] = util_make_link($res['url'], $res['title'], array(), true);
 		if ($asHTML) {
 			return $res['html'];

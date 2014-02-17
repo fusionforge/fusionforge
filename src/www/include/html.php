@@ -120,7 +120,7 @@ function html_feedback_bottom($feedback) {
  * @return	string
  */
 function html_blankimage($height, $width) {
-	return '<img src="/images/blank.png" width="'.$width.'" height="'.$height.'" alt="" />';
+	html_abs_image("/images/blank.png", $width, $height);
 }
 
 /**
@@ -133,8 +133,12 @@ function html_blankimage($height, $width) {
  * @return	string
  */
 function html_abs_image($url, $width, $height, $args) {
+	global $use_tooltips;
 	$return = ('<img src="'.$url.'"');
 	reset($args);
+	if (!$use_tooltips && isset($args['title']) && isset($args['class']) && preg_match('/tabtitle/', $args['class'])) {
+		$args['title'] = '';
+	}
 	while (list($k, $v) = each($args)) {
 		$return .= ' '.$k.'="'.$v.'"';
 	}
