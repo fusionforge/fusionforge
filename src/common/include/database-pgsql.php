@@ -216,10 +216,10 @@ function db_query_from_file($file, $limit = -1, $offset = 0, $dbserver = NULL) {
  * @param	array		$params		parameters
  * @param	int		$limit		How many rows do you want returned.
  * @param	int		$offset		Of matching rows, return only rows starting here.
- * @param	resource		$dbserver	Ability to spread load to multiple db servers.
+ * @param	resource	$dbserver	Ability to spread load to multiple db servers.
  * @return	resource	result set handle.
  */
-function db_query_params($qstring, $params, $limit = -1, $offset = 0, $dbserver = NULL) {
+function db_query_params($qstring, $params = array(), $limit = -1, $offset = 0, $dbserver = NULL) {
 	global $sysdebug_dbquery, $sysdebug_dberrors;
 
 	db_connect_if_needed();
