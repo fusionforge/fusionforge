@@ -581,8 +581,11 @@ class GitPlugin extends SCMPlugin {
 						  'A',
 						  $this->getID()));
 		$rows = db_numrows ($result);
-		for ($i=0; $i<$rows; $i++) {
+		if (!is_dir($root.'/users')) {
 			system("mkdir -p $root/users");
+			chgrp($root.'/users', $unix_group);
+		}
+		for ($i=0; $i<$rows; $i++) {
 			$user_name = db_result($result,$i,'user_name');
 			$repodir = $root . '/users/' .  $user_name . '.git';
 
