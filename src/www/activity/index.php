@@ -179,7 +179,6 @@ foreach ($show as $showthis) {
 		exit_error(_('Invalid Data Passed to query'), 'home');
 	}
 }
-$multiselect = html_build_multiple_select_box_from_arrays($ids, $texts, 'show[]', $show, count($texts), false);
 ?>
 
 <div id="activity">
@@ -188,34 +187,25 @@ $multiselect = html_build_multiple_select_box_from_arrays($ids, $texts, 'show[]'
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
 
-<strong><?php echo _('Activity')._(':'); ?></strong></br>
-<?php echo $multiselect; ?></br></br>
+<div id="activity_select" >
+<div id="activity_label"><?php echo _('Activity')._(':'); ?></div>
+<?php echo html_build_multiple_select_box_from_arrays($ids, $texts, 'show[]', $show, count($texts), false); ?>
+</div>
 
-<strong><?php echo _('Start Date')._(':'); ?></strong></br>
-<input name="start_date" value="<?php echo $rendered_begin; ?>" size="10" maxlength="10" /></br></br>
+<div id="activity_startdate" >
+<div id="activity_label_startdate"><?php echo _('Start Date')._(':'); ?></div>
+<input name="start_date" value="<?php echo $rendered_begin; ?>" size="10" maxlength="10" />
+</div>
 
-<strong><?php echo _('End Date')._(':'); ?></strong></br>
-<input name="end_date" value="<?php echo $rendered_end; ?>" size="10" maxlength="10" /></br></br>
+<div id="activity_enddate" >
+<div id="activity_label_enddate"><?php echo _('End Date')._(':'); ?></div>
+<input name="end_date" value="<?php echo $rendered_end; ?>" size="10" maxlength="10" />
+</div>
 
+<div id="activity_submit" >
 <input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" />
-<!--
-<table>
-	<tr>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
-	</tr>
-	<tr>
-		<td></td>
-		<td class="top"></td>
-		<td class="top"></td>
-		<td class="top">
-			
-		</td>
-	</tr>
-</table>
--->
+</div>
+
 </form>
 </div>
 

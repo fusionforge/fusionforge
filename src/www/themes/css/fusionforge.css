@@ -902,20 +902,6 @@ fieldset {
 	padding: 5px;
 }
 
-#activity {
-	display: table;
-	width: 100%;
-}
-
-#activity_left {
-	float: left;
-}
-
-#activity_right {
-	float: left;
-	width: 70%;
-	padding-left: 50px;
-}
 
 #ff-mw-wrapper {
 	position: relative;	/* so MW can position absolutely */

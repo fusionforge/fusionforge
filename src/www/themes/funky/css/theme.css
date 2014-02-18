@@ -5,6 +5,7 @@
  * Copyright 2010, Franck Villaume - Capgemini
  * Copyright 2011, Iñigo Martinez
  * Copyright 2013-2014, Franck Villaume - TrivialDev
+ * Copyright 2014, Benoit Debaenst - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -846,3 +847,40 @@ p.information {
 .priority3 { background-color: #fde4aa}
 .priority4 { background-color: #fcd986}
 .priority5 { background-color: #fac955}
+
+/* Activity Page */
+#activity {
+	display: table;
+	width: 100%;
+}
+
+#activity_left {
+	float: left;
+}
+
+#activity_right {
+	overflow : hidden;
+	padding-left: 10px;
+	margin-top:5px;
+}
+
+#activity_select {
+
+}
+
+#activity_label,
+#activity_label_startdate,
+#activity_label_enddate {
+	font-weight:bold;
+	margin-top:10px;
+}
+
+#activity_startdate,
+#activity_enddate {
+
+}
+
+#activity_submit {
+	margin-top:10px;
+}
+
