@@ -801,9 +801,14 @@ function html_build_multiple_select_box_from_arrays($ids, $texts, $name, $checke
  * @return	html code for checkbox control
  */
 function html_build_checkbox($name, $value, $checked) {
-	return '<input type="checkbox" id="'.$name.'" name="'.$name.'"'
-		.' value="'.$value.'"'
-		.($checked ? 'checked="checked"' : '').'>';
+	$attrs = array();
+	$attrs['id'] = $name;
+	$attrs['name'] = $name;
+	$attrs['value'] = $value;
+	if ($checked) {
+		$attrs['checked'] = 'checked';
+	}
+	return html_e('input', $attrs);
 }
 
 /**
@@ -852,14 +857,14 @@ function html_buildcheckboxarray($options, $name, $checked_array) {
 	$checked_count = count($checked_array);
 
 	for ($i = 1; $i <= $option_count; $i++) {
-		echo '
-			<br /><input type="checkbox" name="'.$name.'" value="'.$i.'"';
+		$checked = 0;
+
 		for ($j = 0; $j < $checked_count; $j++) {
 			if ($i == $checked_array[$j]) {
-				echo ' checked="checked"';
+				$checked = 1;
 			}
 		}
-		echo ' /> '.$options[$i];
+		echo '<br />'.html_build_checkbox($name, $value, $checked).$options[$i];
 	}
 }
 
@@ -1098,6 +1103,10 @@ function relative_date($date) {
  *		XHTML string suitable for echo'ing
  */
 function html_eo($name, $attrs = array()) {
+	global $use_tooltips;
+	if (!$use_tooltips && isset($attrs['title']) && isset($attrs['class']) && preg_match('/tabtitle/', $attrs['class'])) {
+		$attrs['title'] = '';
+	}
 	$rv = '<'.$name;
 	foreach ($attrs as $key => $value) {
 		if (is_array($value)) {
@@ -1108,7 +1117,7 @@ function html_eo($name, $attrs = array()) {
 		}
 		$rv .= ' '.$key.'="'.htmlspecialchars($value).'"';
 	}
-	$rv .= '>';
+	$rv .= '>'."\n";
 	return $rv;
 }
 
@@ -1130,6 +1139,10 @@ function html_eo($name, $attrs = array()) {
  *		XHTML string suitable for echo'ing
  */
 function html_e($name, $attrs = array(), $content = "", $shortform = true) {
+	global $use_tooltips;
+	if (!$use_tooltips && isset($attrs['title']) && isset($attrs['class']) && preg_match('/tabtitle/', $attrs['class'])) {
+		$attrs['title'] = '';
+	}
 	$rv = '<'.$name;
 	foreach ($attrs as $key => $value) {
 		if (is_array($value)) {
@@ -1141,9 +1154,9 @@ function html_e($name, $attrs = array(), $content = "", $shortform = true) {
 		$rv .= ' '.$key.'="'.htmlspecialchars($value).'"';
 	}
 	if ($content === "" && $shortform) {
-		$rv .= ' />';
+		$rv .= ' />'."\n";
 	} else {
-		$rv .= '>'.$content.'</'.$name.'>';
+		$rv .= '>'.$content.'</'.$name.'>'."\n";
 	}
 	return $rv;
 }
@@ -1233,7 +1246,7 @@ function html_ac($spos) {
 	$rv = "";
 	while ($html_autoclose_pos > $spos) {
 		--$html_autoclose_pos;
-		$rv .= '</'.$html_autoclose_stack[$html_autoclose_pos]['name'].'>';
+		$rv .= '</'.$html_autoclose_stack[$html_autoclose_pos]['name'].'>'."\n";
 		unset($html_autoclose_stack[$html_autoclose_pos]);
 	}
 	return $rv;
