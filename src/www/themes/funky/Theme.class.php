@@ -152,9 +152,9 @@ class Theme extends Layout {
 	function boxTop($title, $id = '') {
 		if ($id) {
 			$id = $this->toSlug($id);
-			$idid = ' id="' . $id . '"';
-			$idtitle = ' id="' . $id . '-title"';
-			$idtcont = ' id="' . $id . '-title-content"';
+			$idid = $id;
+			$idtitle = $id.'-title"';
+			$idtcont = $id.'-title-content"';
 		} else {
 			$idid = "";
 			$idtitle = "";
@@ -162,9 +162,9 @@ class Theme extends Layout {
 		}
 
 		$t_result = '';
-		$t_result .= '<div' . $idid . ' class="box-surround">';
-		$t_result .= '<div' . $idtitle . ' class="box-title">';
-		$t_result .= '<div' . $idtcont . ' class="box-title-content">'. $title .'</div>';
+		$t_result .= html_e('div', array('id' => $idid, 'class' => 'box-surround'));
+		$t_result .= html_e('div', array('id' => $idtitle, 'class' => 'box-title'));
+		$t_result .= html_e('div', array('id' => $idtcont, 'class' => 'box-title-content'), $title, false);
 		$t_result .= '</div> <!-- class="box-title" -->';
 
 		return $t_result;
@@ -180,14 +180,12 @@ class Theme extends Layout {
 	function boxMiddle($title, $id = '') {
 		if ($id) {
 			$id = $this->toSlug($id);
-			$idtitle = ' id="' . $id . '-title"';
+			$idtitle = $id.'-title"';
 		} else {
 			$idtitle = "";
 		}
 
-		$t_result ='<div' . $idtitle . ' class="box-middle">'.$title.'</div>';
-
-		return $t_result;
+		return html_e('div', array('id' => $idtitle, 'class' => 'box-middle'), $title, false);
 	}
 
 	/**
@@ -200,13 +198,12 @@ class Theme extends Layout {
 	function boxContent($content, $id = '') {
 		if ($id) {
 			$id = $this->toSlug($id);
-			$idcont = ' id="' . $id . '-content"';
+			$idcont = $id.'-content"';
 		} else {
 			$idcont = "";
 		}
 
-		$t_result ='<div' . $idcont . ' class="box-content">'.$content.'</div>';
-		return $t_result;
+		return html_e('div', array('id' => $idcont, 'class' => 'box-content'), $content, false);
 	}
 
 	/**
@@ -226,11 +223,15 @@ class Theme extends Layout {
 	 * @param	int	$i	Row number
 	 * @return	string
 	 */
-	function boxGetAltRowStyle($i) 	{
+	function boxGetAltRowStyle($i, $classonly = false) {
 		if ($i % 2 == 0)
-			return 'class="bgcolor-white"';
+			$ret = 'bgcolor-white';
 		else
-			return 'class="bgcolor-grey"';
+			$ret = 'bgcolor-grey';
+		if ($classonly)
+			return $ret;
+		else
+			return 'class="'.$ret.'"';
 	}
 
 	function tabGenerator($TABS_DIRS, $TABS_TITLES, $TABS_TOOLTIPS, $nested=false,  $selected=false, $sel_tab_bgcolor='WHITE',  $total_width='100%') {
