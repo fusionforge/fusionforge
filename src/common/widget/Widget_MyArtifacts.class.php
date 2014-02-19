@@ -200,7 +200,7 @@ class Widget_MyArtifacts extends Widget {
 						$hide_url.
 						util_make_link('/tracker/?group_id='.$group_id_old, $group_name, array('class'=>'tabtitle-nw', 'title'=>_('Browse Trackers List for this project'))).
 						' - '.
-						util_make_link('/tracker/?group_id='.$group_id_old.'&amp;atid='.$atid_old, $tracker_name, array('class'=>'tabtitle', 'title'=>_('Browse this tracker for this project'))).
+						util_make_link('/tracker/?group_id='.$group_id_old.'&atid='.$atid_old, $tracker_name, array('class'=>'tabtitle', 'title'=>_('Browse this tracker for this project'))).
 						'    ';
 					$count_new = max(0, $count_diff);
 
@@ -260,7 +260,7 @@ class Widget_MyArtifacts extends Widget {
 						$html .= '
 							<tr '. $HTML->boxGetAltRowStyle($count_aids) .'>'.
 							'<td class="priority'.$trackers_array->getPriority().'">'.$trackers_array->getPriority().'</td>'.
-							'<td>'.util_make_link('/tracker/?func=detail&amp;group_id='.$group_id.'&amp;aid='.$aid.'&amp;atid='.$atid, stripslashes($summary), array("class"=>"tabtitle", "title"=>_('Browse this artefact'))).
+							'<td>'.util_make_link('/tracker/?func=detail&group_id='.$group_id.'&aid='.$aid.'&atid='.$atid, stripslashes($summary), array("class"=>"tabtitle", "title"=>_('Browse this artefact'))).
 							'</td>'.
 							'<td class="small tabtitle-ne" title="'.$AS_title.'">';
 						$html .= '&nbsp;'.$AS_flag.'</td></tr>';
@@ -277,7 +277,7 @@ class Widget_MyArtifacts extends Widget {
 				$hide_url.
 				util_make_link('/tracker/?group_id='.$group_id_old, $group_name, array('class'=>'tabtitle-nw', 'title'=>_('Browse Trackers List for this project'))).
 				' - '.
-				util_make_link('/tracker/?group_id='.$group_id_old.'&amp;atid='.$atid_old, $tracker_name, array('class'=>'tabtitle', 'title'=>_('Browse this tracker for this project'))).
+				util_make_link('/tracker/?group_id='.$group_id_old.'&atid='.$atid_old, $tracker_name, array('class'=>'tabtitle', 'title'=>_('Browse this tracker for this project'))).
 				'    ';
 			$count_new = max(0, $count_diff);
 

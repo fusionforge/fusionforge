@@ -61,7 +61,7 @@ function artifact_submission_form($ath, $group) {
 		echo '<tr>
 		<td><strong>'._('Assigned to')._(':').'</strong><br />';
 		echo $ath->technicianBox('assigned_to');
-		echo '&nbsp;'.util_make_link ('/tracker/admin/?group_id='.$group->getID().'&amp;atid='.$ath->getID().'&amp;update_users=1', '('._('Admin').')' );
+		echo '&nbsp;'.util_make_link('/tracker/admin/?group_id='.$group->getID().'&atid='.$ath->getID().'&update_users=1', '('._('Admin').')' );
 
 		echo '</td><td><strong>'._('Priority')._(':').'</strong><br />';
 		build_priority_select_box('priority');

@@ -115,7 +115,7 @@ class Widget_ProjectLatestFileReleases extends Widget {
 							<strong>' . $package_name . '</strong>
 						</td>';
 					// Releases to display
-//print '<div about="" xmlns:sioc="http://rdfs.org/sioc/ns#" rel="container_of" resource="'.util_make_link ('/frs/?group_id=' . $group_id . '&amp;release_id=' . db_result($res_files,$f,'release_id').'">';
+//print '<div about="" xmlns:sioc="http://rdfs.org/sioc/ns#" rel="container_of" resource="'.util_make_link('/frs/?group_id='.$group_id.'&release_id='.db_result($res_files,$f,'release_id').'">';
 					echo '
 						<td>'
 						.$package_release.'

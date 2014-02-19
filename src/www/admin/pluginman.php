@@ -212,7 +212,7 @@ foreach ($filelist as $filename) {
 		$msg = _('Active');
 		$status = "active";
 		$next = 'deactivate';
-		$link = util_make_link("/admin/pluginman.php?update=$filename&amp;action=deactivate", _('Deactivate'));
+		$link = util_make_link("/admin/pluginman.php?update=$filename&action=deactivate", _('Deactivate'));
 
 		$res = db_query_params ('SELECT u.user_name FROM plugins p, user_plugin up, users u WHERE p.plugin_name = $1 and up.user_id = u.user_id and p.plugin_id = up.plugin_id',
 			array($filename));
@@ -259,7 +259,7 @@ foreach ($filelist as $filename) {
 		$msg = _('Inactive');
 		$status = "inactive";
 		$next = 'activate';
-		$link = util_make_link("/admin/pluginman.php?update=$filename&amp;action=activate", _('Activate'));
+		$link = util_make_link("/admin/pluginman.php?update=$filename&action=activate", _('Activate'));
 		$users = _('None');
 		$groups = _('None');
 		$adminlink = '';

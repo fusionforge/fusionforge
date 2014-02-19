@@ -68,7 +68,7 @@ function forum_header($params) {
 				<strong>'._('Posted by')._(': ').'</strong> '.$user->getRealName().'<br />
 				<strong>'._('Date')._(': ').'</strong> '. relative_date(db_result($result,0,'post_date')).'<br />
 				<strong>'._('Summary')._(': ').'</strong>'.
-				util_make_link('/forum/forum.php?forum_id='.db_result($result, 0, 'forum_id').'&amp;group_id='.$group_id,
+				util_make_link('/forum/forum.php?forum_id='.db_result($result, 0, 'forum_id').'&group_id='.$group_id,
 						db_result($result, 0, 'summary')).'<br/>
 				<strong>'._('Project')._(': ').'</strong>'.
 				util_make_link_g($group->getUnixName(),db_result($result, 0, 'group_id'),$group->getPublicName()).'<br />
@@ -136,22 +136,21 @@ function forum_header($params) {
 	if (session_loggedin() ) {
 		if ($f) {
 			if ($f->isMonitoring()) {
-				echo util_make_link ('/forum/monitor.php?forum_id='.$forum_id.'&amp;group_id='.$group_id.'&amp;stop=1',
+				echo util_make_link('/forum/monitor.php?forum_id='.$forum_id.'&group_id='.$group_id.'&stop=1',
 								 html_image('ic/xmail16w.png').' '._('Stop Monitoring')).' | ';
 			} else {
-				echo util_make_link ('/forum/monitor.php?forum_id='.$forum_id.'&amp;group_id='.$group_id.'&amp;start=1',
+				echo util_make_link('/forum/monitor.php?forum_id='.$forum_id.'&group_id='.$group_id.'&start=1',
 							 html_image('ic/mail16w.png').' '._('Monitor Forum')).' | ';
 			}
-			echo util_make_link ('/forum/save.php?forum_id='.$forum_id.'&amp;group_id='.$group_id,
+			echo util_make_link('/forum/save.php?forum_id='.$forum_id.'&group_id='.$group_id,
 						 html_image('ic/save.png') .' '._('Save Place')).' | ';
 		}
 	} elseif ($f) {
-		echo '<a href="/forum/monitor.php?forum_id='.$forum_id.'&amp;group_id='.$group_id.'&amp;start=1">' .
-			html_image('ic/mail16w.png').' '._('Monitor Forum').'</a> | ';
+		echo util_make_link('/forum/monitor.php?forum_id='.$forum_id.'&group_id='.$group_id.'&start=1', html_image('ic/mail16w.png').' '._('Monitor Forum')).' | ';
 	}
 
 	if ($f && $forum_id) {
-		echo util_make_link ('/forum/new.php?forum_id='.$forum_id.'&amp;group_id='.$group_id,
+		echo util_make_link ('/forum/new.php?forum_id='.$forum_id.'&group_id='.$group_id,
 					 html_image('ic/write16w.png','20','20',array('alt'=>_('Start New Thread'))) .' '.
 					 _('Start New Thread'));
 	}

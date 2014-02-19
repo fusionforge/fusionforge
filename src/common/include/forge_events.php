@@ -26,8 +26,8 @@ abstract class ForgeEvent extends Plugin {
 		echo '<li><a name="jobs"></a>'.util_make_link('/admin/?action=listjobs#jobs', _('Jobs'))."\n";
 		if ($action == 'listjobs') {
 			echo '<ul>';
-			echo '<li>'.util_make_link('/admin/?action=runjobs&amp;job=create_scm_repos#jobs', _('Create SCM Repositories')).'</li>'."\n";
-			echo '<li>'.util_make_link('/admin/?action=runjobs&amp;job=scm_update#jobs', _('Upgrade Forge Software')).'</li>'."\n";
+			echo '<li>'.util_make_link('/admin/?action=runjobs&job=create_scm_repos#jobs', _('Create SCM Repositories')).'</li>'."\n";
+			echo '<li>'.util_make_link('/admin/?action=runjobs&job=scm_update#jobs', _('Upgrade Forge Software')).'</li>'."\n";
 			echo '</ul>';
 		}
 		echo '</li>';

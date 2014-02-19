@@ -169,7 +169,7 @@ echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 		<?php
 		echo $ath->technicianBox('assigned_to', $ah->getAssignedTo() );
 		echo " ";
-		echo util_make_link ('/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;update_users=1','('._('Admin').')');
+		echo util_make_link ('/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&update_users=1', '('._('Admin').')');
 		?>
 		</td><td>
 		<strong><?php echo _('Priority'). _(': ') ?></strong><br />
@@ -220,7 +220,7 @@ $nb = $count? ' ('.$count.')' : '';
 		<?php
 		echo $ath->cannedResponseBox('canned_response');
 		echo " ";
-		echo util_make_link ('/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;add_canned=1','('._('Admin').')');
+		echo util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&add_canned=1', '('._('Admin').')');
 		?>
 		<script type="text/javascript">/* <![CDATA[ */
 			$('#tracker-canned_response').change(function() {

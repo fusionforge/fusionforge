@@ -82,7 +82,7 @@ class Widget_ProjectPublicAreas extends Widget {
 					$tracker_stdzd_uri = util_make_url('/tracker/cm/project/'. $project->getUnixName() .'/atid/'. $group_artifact_id);
 					echo "\t".'<li about="'. $tracker_stdzd_uri . '" typeof="sioc:Container">'."\n";
 					print '<span rel="http://www.w3.org/2002/07/owl#sameAs">'."\n";
-					echo util_make_link ('/tracker/?atid='. $group_artifact_id . '&amp;group_id='.$group_id.'&amp;func=browse',$row['name']) . ' ' ;
+					echo util_make_link ('/tracker/?atid='. $group_artifact_id . '&group_id='.$group_id.'&func=browse',$row['name']) . ' ' ;
 					echo "</span>\n"; // /owl:sameAs
 					printf(ngettext('(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', '(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', $row['open_count']), $row['open_count'], $row['count']);
 					echo '<br />';
@@ -156,7 +156,7 @@ class Widget_ProjectPublicAreas extends Widget {
 				echo "\n".'<ul class="task-manager">';
 				foreach ($pgs as $pg) {
 					echo "\n\t<li>";
-					print util_make_link ('/pm/task.php?group_project_id='.$pg->getID().'&amp;group_id='.$group_id.'&amp;func=browse',$pg->getName());
+					print util_make_link ('/pm/task.php?group_project_id='.$pg->getID().'&group_id='.$group_id.'&func=browse',$pg->getName());
 					echo '</li>' ;
 				}
 				echo "\n</ul>";
