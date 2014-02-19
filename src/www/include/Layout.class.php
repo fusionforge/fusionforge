@@ -327,10 +327,9 @@ class Layout extends Error {
 	 *
 	 */
 	function headerSearch() {
-		echo '<link rel="search" title="'
-			. forge_get_config ('forge_name').'" href="'
-			. util_make_url ('/export/search_plugin.php')
-			. '" type="application/opensearchdescription+xml"/>'."\n";
+		echo html_e('link', array('rel' => "search", 'title' => forge_get_config('forge_name'),
+					'href' => util_make_url('/export/search_plugin.php'),
+					'type' => 'application/opensearchdescription+xml'));
 	}
 
 	/**
@@ -704,20 +703,11 @@ if (isset($params['group']) && $params['group']) {
 				foreach ($groups as $g) {
 					$group_id = $g->getID();
 					$menu = $this->navigation->getProjectMenu($group_id);
-
-					echo '
-						<option value="' . $menu['starturl'] . '">'
-						. $menu['name'] .'</option>';
-
+					echo html_e('option', array('value' => $menu['starturl']), $menu['name'], true);
 					for ($j = 0; $j < count($menu['urls']); $j++) {
-						echo '
-							<option value="' . $menu['urls'][$j] .'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
-							. $menu['titles'][$j] . '</option>';
+						echo html_e('option', array('value' => $menu['urls'][$j]), '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$menu['titles'][$j], true);
 						if (@$menu['adminurls'][$j]) {
-							echo  '
-								<option value="' . $menu['adminurls'][$j]
-								. '">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
-								. _('Admin') . '</option>';
+							echo  html_e('option', array('value' => $menu['adminurls'][$j]), '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'._('Admin'), true);
 						}
 					}
 				}
@@ -968,8 +958,7 @@ if (isset($params['group']) && $params['group']) {
 		if (!$feedback) {
 			return '';
 		} else {
-			return '
-			<p class="feedback">'.strip_tags($feedback, '<br>').'</p>';
+			return html_e('p', array('class' => 'feedback'), strip_tags($feedback, '<br>'), true);
 		}
 	}
 	/**
@@ -982,8 +971,7 @@ if (isset($params['group']) && $params['group']) {
 		if (!$msg) {
 			return '';
 		} else {
-			return '
-			<p class="warning_msg">'.strip_tags($msg, '<br>').'</p>';
+			return html_e('p', array('class' => 'warning_msg'), strip_tags($msg, '<br>'), true);
 		}
 	}
 
@@ -997,8 +985,7 @@ if (isset($params['group']) && $params['group']) {
 		if (!$msg) {
 			return '';
 		} else {
-			return '
-			<p class="error">'.strip_tags($msg, '<br>')."</p>\n";
+			return html_e('p', array('class' => 'error'), strip_tags($msg, '<br>'), true);
 		}
 	}
 
@@ -1012,8 +999,7 @@ if (isset($params['group']) && $params['group']) {
 		if (!$msg) {
 			return '';
 		} else {
-			return '
-			<p class="information">'.strip_tags($msg, '<br>').'</p>';
+			return html_e('p', array('class' => 'information'), strip_tags($msg, '<br>'), true);
 		}
 	}
 
@@ -1093,31 +1079,29 @@ if (isset($params['group']) && $params['group']) {
 		return $return;
 	}
 
-	function html_checkbox($name, $value, $id = '', $label = '', $checked = '', $extra_params = '') {
+	function html_checkbox($name, $value, $id = '', $label = '', $checked = '', $extra_params = array()) {
 		if (!$id) {
 			$id = $name;
 		}
-		$return = '<div class="field-holder">
-			';
-		$return .= '<input name="' . $name . '" id="' . $id . '" type="checkbox" value="' . $value . '" ';
+		$return = html_e('div', array('class' => 'field-holder'));
+		$attrs = array('name' => $name, 'id' => $id, 'type' => 'checkbox', 'value' => $value);
 		if ($checked) {
-			$return .= 'checked="checked" ';
+			$attrs['checked'] = 'checked';
 		}
 		if (is_array($extra_params)) {
 			foreach ($extra_params as $key => $extra_params_value) {
-				$return .= $key . '="' . $extra_params_value . '" ';
+				$attrs[$key] = $extra_params_value;
 			}
 		}
-		$return .= '/>';
+		$return .= html_e('input', $attrs);
 		if ($label) {
-			$return .= '<label for="' . $id . '">' . $label . '</label>
-				';
+			$return .= html_e('label', array('for' => $id), $label, true);
 		}
 		$return .= '</div>';
 		return $return;
 	}
 
-	function html_text_input_img_submit($name, $img_src, $id = '', $label = '', $value = '', $img_title = '', $img_alt = '', $extra_params = '', $img_extra_params = '') {
+	function html_text_input_img_submit($name, $img_src, $id = '', $label = '', $value = '', $img_title = '', $img_alt = '', $extra_params = array(), $img_extra_params = '') {
 		if (!$id) {
 			$id = $name;
 		}

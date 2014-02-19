@@ -69,7 +69,7 @@ class Navigation extends Error {
 			}
 		} else {
 			// return HTML code otherwise
-			return '<title>' . $this->getTitle($params, false) . '</title>';
+			return html_e('title', array(), $this->getTitle($params, false), true);
 		}
 	}
 
@@ -84,10 +84,8 @@ class Navigation extends Error {
 		if (!$asHTML) {
 			return util_make_url('/images/icon.png');
 		} else {
-			return '<link rel="icon" type="image/png" href="'
-				. $this->getFavIcon(false) .'" />'
-				. '<link rel="shortcut icon" type="image/png" href="'
-				. $this->getFavIcon(false) .'" />';
+			return html_e('link', array('rel' => 'icon', 'type' => 'image/png', 'href' => $this->getFavIcon(false))).
+				html_e('link', array('rel' => 'shortcut icon', 'type' => 'image/png', 'href' => $this->getFavIcon(false)));
 		}
 	}
 
@@ -121,11 +119,8 @@ class Navigation extends Error {
 		} else {
 			$feeds = $this->getRSS(false);
 			for ($j = 0; $j < count($feeds['urls']); $j++) {
-				echo '
-				<link rel="alternate" title="' .
-				    util_html_secure($feeds['titles'][$j]) .
-				    '" href="' . $feeds['urls'][$j] .
-				    '" type="application/rss+xml"/>';
+				echo html_e('link', array('rel' => 'alternate', 'title' => util_html_secure($feeds['titles'][$j]),
+							'href' => $feeds['urls'][$j], 'type' => 'application/rss+xml'));
 			}
 		}
 	}
@@ -150,8 +145,8 @@ class Navigation extends Error {
 			$exact = 1;
 		}
 
-		$res .= '<form id="searchBox" action="'.util_make_uri('/search/').'" method="get">
-			<div>';
+		$res .= html_eo('form', array('id' => 'searchBox', 'action' => util_make_uri('/search/'), 'method' => 'get'));
+		$res .= html_eo('div', array());
 		$parameters = array(
 			SEARCH__PARAMETER_GROUP_ID => $group_id,
 			SEARCH__PARAMETER_ARTIFACT_ID => $atid,
@@ -163,7 +158,7 @@ class Navigation extends Error {
 		$searchManager->setParametersValues($parameters);
 		$searchEngines =& $searchManager->getAvailableSearchEngines();
 
-		$res .= '<select name="type_of_search">';
+		$res .= html_eo('select', array('name' => 'type_of_search'));
 		for($i = 0, $max = count($searchEngines); $i < $max; $i++) {
 			$searchEngine =& $searchEngines[$i];
 			$res .= '<option value="' . $searchEngine->getType() . '"'

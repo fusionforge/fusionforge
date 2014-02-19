@@ -1156,22 +1156,23 @@ function util_make_uri($path) {
  */
 function util_make_link($path, $text, $extra_params = false, $absolute = false) {
 	global $use_tooltips;
-	$ep = '';
+	$attrs = array();
 	if (is_array($extra_params)) {
 		foreach ($extra_params as $key => $value) {
 			if ($key != 'title') {
-				$ep .= "$key=\"$value\" ";
+				$attrs[$key] = $value;
 			}
 			if ($key == 'title' && $use_tooltips) {
-				$ep .= "$key=\"$value\" ";
+				$attrs[$key] = $value;
 			}
 		}
 	}
 	if ($absolute) {
-		return '<a '.$ep.'href="'.$path.'">'.$text.'</a>';
+		$attrs['href'] = $path;
 	} else {
-		return '<a '.$ep.'href="'.util_make_uri($path).'">'.$text.'</a>';
+		$attrs['href'] = util_make_uri($path);
 	}
+	return html_e('a', $attrs, $text, true);
 }
 
 /**
@@ -1183,7 +1184,7 @@ function util_make_link($path, $text, $extra_params = false, $absolute = false) 
  * @return	string
  */
 function util_make_link_u($username, $user_id, $text) {
-	return '<a href="'.util_make_url_u($username, $user_id).'">'.$text.'</a>';
+	return util_make_link(util_make_url_u($username, $user_id), $text, false, true);
 }
 
 /**
@@ -1210,7 +1211,7 @@ function util_display_user($username, $user_id, $text, $size = 'xs') {
 	$params = array('user_id' => $user_id, 'size' => $size, 'content' => '');
 	plugin_hook_by_reference('user_logo', $params);
 
-	$url = '<a href="'.util_make_url_u($username, $user_id).'">'.$text.'</a>';
+	$url = util_make_link_u($username, $user_id, $text);
 	if ($params['content']) {
 		return $params['content'].$url.'<div class="new_line"></div>';
 	}
@@ -1252,7 +1253,7 @@ function util_make_link_g($group_name, $group_id, $text) {
 		return $hook_params['group_link'];
 	}
 
-	return '<a href="'.util_make_url_g($group_name, $group_id).'">'.$text.'</a>';
+	return html_e('a', array('href' => util_make_url_g($group_name, $group_id)), $text, true);
 }
 
 /**

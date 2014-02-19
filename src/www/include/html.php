@@ -51,7 +51,7 @@ function html_generic_fileheader($title) {
 	    false) . ";\n" .
 	    "//]]></script>\n";
 	$HTML->headerForgepluckerMeta();
-	echo html_e('title', array(), util_html_secure($title)) . "\n";
+	echo html_e('title', array(), util_html_secure($title));
 }
 
 /**
