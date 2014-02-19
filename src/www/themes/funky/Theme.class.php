@@ -73,8 +73,7 @@ class Theme extends Layout {
 		echo '<table id="header" class="fullwidth">' . "\n";
 		echo '<tr>' . "\n";
 		echo '<td id="header-col1">' . "\n";
-		echo util_make_link('/', html_image('/header/top-logo.png', null, null, array('alt'=>'FusionForge Home'))) . "\n";
-
+		echo util_make_link('/', html_image('/header/top-logo.png', null, null, array('alt'=>'FusionForge Home')));
 		echo '</td>' . "\n";
 		echo '<td id="header-col2">' . "\n";
 
@@ -134,7 +133,7 @@ class Theme extends Layout {
 
 	function footer($params = array()) {
 		$this->bodyFooter($params);
-		echo '<div class="footer">' . "\n";
+		echo html_e('div', array('class' => 'footer'));
 		echo $this->navigation->getPoweredBy();
 		echo $this->navigation->getShowSource();
 		echo '<div style="clear:both"></div></div>';
