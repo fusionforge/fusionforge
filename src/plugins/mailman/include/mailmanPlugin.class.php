@@ -74,7 +74,7 @@ class mailmanPlugin extends Plugin {
 		if ($hookname == "usermenu") {
 			$text = $this->text; // this is what shows in the tab
 			if ($G_SESSION->usesPlugin("mailman")) {
-				$param = '?type=user&amp;id=' . $G_SESSION->getId() . "&amp;pluginname=" . $this->name; // we indicate the part we're calling is the user one
+				$param = '?type=user&id=' . $G_SESSION->getId() . '&pluginname=' . $this->name; // we indicate the part we're calling is the user one
 				echo ' | ' . $HTML->PrintSubMenu (array ($text),
 					array ('/plugins/mailman/index.php' . $param ));
 			}
@@ -92,7 +92,7 @@ class mailmanPlugin extends Plugin {
 			}
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][]=$this->text;
-				$params['DIRS'][]='/plugins/mailman/index.php?group_id=' . $group_id . "&amp;pluginname=" . $this->name; // we indicate the part we�re calling is the project one
+				$params['DIRS'][]='/plugins/mailman/index.php?group_id=' . $group_id . '&pluginname=' . $this->name; // we indicate the part we�re calling is the project one
                 $params['ADMIN'][]='';
 			}
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
@@ -131,8 +131,8 @@ class mailmanPlugin extends Plugin {
 			$user = user_get_object($userid);
 			//check if the user has the plugin activated
 			if ($user->usesPlugin($this->name)) {
-				echo '	<p>' ;
-				echo util_make_link ("/plugins/mailman/index.php?id=$userid&amp;type=user&amp;pluginname=".$this->name,
+				echo '<p>' ;
+				echo util_make_link ('/plugins/mailman/index.php?id='.$userid.'&type=user&pluginname='.$this->name,
 									 _('View Personal mailman')
 				);
 				echo '</p>';
@@ -142,7 +142,7 @@ class mailmanPlugin extends Plugin {
 			$group_id = $params['group_id'];
 			$group = group_get_object($group_id);
 			if ( $group->usesPlugin ( $this->name ) ) {
-				echo '<p>'.util_make_link ("/plugins/".$this->name."/index.php?id=".$group->getID().'&amp;type=admin&amp;pluginname='.$this->name,
+				echo '<p>'.util_make_link ('/plugins/'.$this->name.'/index.php?id='.$group->getID().'&type=admin&pluginname='.$this->name,
 									 _('View the mailman Administration')).'</p>';
 			}
 		}
@@ -174,11 +174,10 @@ class mailmanPlugin extends Plugin {
 						echo ' <tr '. $HTML->boxGetAltRowStyle(1) .'><td colspan="2">'.util_make_link ('/plugins/mailman/index.php?group_id='.$group->getID(),$group->getPublicName()).'</td></tr>';
 					}
 					echo '
-						<tr '.$HTML->boxGetAltRowStyle(0).'><td class="align-center"><a href="/plugins/mailman/index.php?group_id='.$group->getID().
-						'&amp;action=unsubscribe&amp;id='.$l->getID().'">' .
-						'<img src="'.$HTML->imgroot.'/ic/trash.png" height="16" width="16" '.'alt="" /></a>' .
-						'</td><td style="width:99%"><a href="/plugins/mailman/index.php?group_id='.$group->getID().'&amp;action=options&amp;id='.$l->getID().'">'.
-						$l->getName().'"</a></td></tr>';
+						<tr '.$HTML->boxGetAltRowStyle(0).'>
+							<td class="align-center">'.util_make_link('/plugins/mailman/index.php?group_id='.$group->getID().'&action=unsubscribe&id='.$l->getID(),'<img src="'.$HTML->imgroot.'/ic/trash.png" height="16" width="16" '.'alt="" />').
+						'</td>
+							<td style="width:99%">'.util_make_link('/plugins/mailman/index.php?group_id='.$group->getID().'&action=options&id='.$l->getID(),$l->getName()).'</td></tr>';
 					$last_group= $group->getID();
 				}
 			}

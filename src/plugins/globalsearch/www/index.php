@@ -162,11 +162,11 @@ if (!$result || $rows < 1) {
         echo "<h3>".sprintf (_('Search results for “%s”'), $gwords)."</h3><p>\n\n";
 
         $title_arr = array();
-        $title_arr[] = util_make_link ('/plugins/globalsearch/?gwords='.urlencode($gwords).'&amp;order=project_title&amp;gexact='.$gexact,
+        $title_arr[] = util_make_link ('/plugins/globalsearch/?gwords='.urlencode($gwords).'&order=project_title&gexact='.$gexact,
 				       _("Project Name")) ;
-        $title_arr[] = util_make_link ('/plugins/globalsearch/?gwords='.urlencode($gwords).'&amp;order=project_description&amp;gexact='.$gexact,
+        $title_arr[] = util_make_link ('/plugins/globalsearch/?gwords='.urlencode($gwords).'&order=project_description&gexact='.$gexact,
 				       _('Description')) ;
-        $title_arr[] = util_make_link ('/plugins/globalsearch/?gwords='.urlencode($gwords).'&amp;order=title&amp;gexact='.$gexact,
+        $title_arr[] = util_make_link ('/plugins/globalsearch/?gwords='.urlencode($gwords).'&order=title&gexact='.$gexact,
 				       _('Forge')) ;
 
         echo $GLOBALS['HTML']->listTableTop($title_arr);

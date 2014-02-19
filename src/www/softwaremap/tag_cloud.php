@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Copyright (C) 2008-2009 Alcatel-Lucent
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -18,7 +18,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-/*
+/**
  * Standard Alcatel-Lucent disclaimer for contributing to open source
  *
  * "The Tag Cloud ("Contribution") has not been tested and/or
@@ -105,7 +105,7 @@ if ($selected_tag) {
 		for ($i=1 ;$i <= ceil($querytotalcount/$TROVE_BROWSELIMIT); $i++) {
 			$html_limit .= ' ';
 			if ($page != $i) {
-				$html_limit .= util_make_link ('/softwaremap/tag_cloud.php?tag='.$selected_tag.'&amp;page='.$i,
+				$html_limit .= util_make_link ('/softwaremap/tag_cloud.php?tag='.$selected_tag.'&page='.$i,
 							       '&lt;'.$i.'&gt;');
 			} else {
 				$html_limit .= '<strong>&lt;'.$i.'&gt;</strong>';

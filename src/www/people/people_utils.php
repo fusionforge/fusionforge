@@ -40,7 +40,7 @@ function people_header($params) {
 	}
 
 	if ($group_id && $job_id) {
-		echo ' | '.util_make_link ('/people/editjob.php?group_id='. $group_id .'&amp;job_id='. $job_id,_('Edit Job'));
+		echo ' | '.util_make_link ('/people/editjob.php?group_id='. $group_id .'&job_id='. $job_id,_('Edit Job'));
 	}
 }
 
@@ -452,7 +452,7 @@ function people_show_job_list($result) {
 		for ($i = 0; $i < count($projects); $i++) {
 			$return .= '
 				<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) . '>
-					<td>'.util_make_link('/people/viewjob.php?group_id='.$projects[$i]['group_id'].'&amp;job_id='.$projects[$i]['job_id'], $projects[$i]['title']) .'</td>
+					<td>'.util_make_link('/people/viewjob.php?group_id='.$projects[$i]['group_id'].'&job_id='.$projects[$i]['job_id'], $projects[$i]['title']) .'</td>
 					<td>'.$projects[$i]['category_name'].'</td>
 					<td>'.date(_('Y-m-d H:i'), $projects[$i]['post_date']).'</td>
 					<td>'.util_make_link_g(strtolower($projects[$i]['unix_group_name']), $projects[$i]['group_id'], $projects[$i]['group_name']).'</td>

@@ -156,13 +156,13 @@ function show_add_snippet_box() {
 	<td><strong><?php echo _('Language').utils_requiredField()._(':'); ?></strong><br />
 		<?php echo html_build_select_box_from_array ($SCRIPT_LANGUAGE,'language'); ?>
 		<br />
-		<!--<?php echo util_make_link ('/support/?func=addsupport&amp;group_id=1',_('Suggest a Language')); ?>-->
+		<!--<?php echo util_make_link ('/support/?func=addsupport&group_id=1',_('Suggest a Language')); ?>-->
 	</td>
 
 	<td><strong><?php echo _('Category') ?></strong><?php echo utils_requiredField(); ?><br />
 		<?php echo html_build_select_box_from_array ($SCRIPT_CATEGORY,'category'); ?>
 		<br />
-		<!--<?php echo util_make_link ('/support/?func=addsupport&amp;group_id=1',_('Suggest a Category')); ?>-->
+		<!--<?php echo util_make_link ('/support/?func=addsupport&group_id=1',_('Suggest a Category')); ?>-->
 	</td>
 	</tr>
 

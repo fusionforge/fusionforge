@@ -157,7 +157,7 @@ function snippet_show_package_snippets($version) {
 			echo '
 			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td>'.db_result($result,$i,'snippet_version_id').
 				'</td><td>'.
-				util_make_link('/snippet/download.php?type=snippet&amp;id='.db_result($result,$i,'snippet_version_id'),db_result($result,$i,'version')).
+				util_make_link('/snippet/download.php?type=snippet&id='.db_result($result,$i,'snippet_version_id'),db_result($result,$i,'version')).
 				'</td><td>'.
 				db_result($result,$i,'name').'</td><td>'.
 				util_make_link_u(db_result($result, $i, 'user_name'), db_result($result, $i, 'user_id'),db_result($result, $i, 'realname')).'</td></tr>';

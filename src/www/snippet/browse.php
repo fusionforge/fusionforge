@@ -95,7 +95,7 @@ if ((!$result || $rows < 1) && (!$result2 || $rows2 < 1)) {
 	for ($i=0; $i<$rows2; $i++) {
 		echo '
 			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td rowspan="2">'.
-			util_make_link ('/snippet/detail.php?type=package&amp;id='.db_result($result2,$i,'snippet_package_id'),'<strong>'.db_result($result2,$i,'snippet_package_id').'</strong>').'</td><td><strong>'.
+			util_make_link ('/snippet/detail.php?type=package&id='.db_result($result2,$i,'snippet_package_id'),'<strong>'.db_result($result2,$i,'snippet_package_id').'</strong>').'</td><td><strong>'.
 			db_result($result2,$i,'name').'</td><td>'.
 			util_make_link_u (db_result($result2, $i, 'user_name'), db_result($result2, $i, 'user_id'), db_result($result2, $i, 'realname')).'</td></tr>';
 		echo '
@@ -110,9 +110,9 @@ if ((!$result || $rows < 1) && (!$result2 || $rows2 < 1)) {
 	for ($i=0; $i<$rows; $i++) {
 		echo '
 			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td rowspan="2">'.
-			util_make_link ('/snippet/detail.php?type=snippet&amp;id='.db_result($result,$i,'snippet_id'),'<strong>'.db_result($result,$i,'snippet_id').'</strong>').
+			util_make_link ('/snippet/detail.php?type=snippet&id='.db_result($result,$i,'snippet_id'),'<strong>'.db_result($result,$i,'snippet_id').'</strong>').
 			'</td><td><strong>'.
-			util_make_link ('/snippet/detail.php?type=snippet&amp;id='.db_result($result,$i,'snippet_id'),db_result($result,$i,'name')).
+			util_make_link ('/snippet/detail.php?type=snippet&id='.db_result($result,$i,'snippet_id'),db_result($result,$i,'name')).
 			'</strong></td><td>'.
 			util_make_link_u (db_result($result, $i, 'user_name'), db_result($result, $i, 'user_id'), db_result($result, $i, 'realname')).'</td></tr>';
 		echo '

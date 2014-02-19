@@ -115,7 +115,7 @@ if (!$res_new || db_numrows($res_new) < 1) {
 				<td colspan="3">';
 				// link to whole file list for downloads
 				print '&nbsp;<br />'.
-				util_make_link ('/frs/?group_id='.$row_new['group_id'].'&amp;release_id='.$row_new['release_id'],_('Download')).
+				util_make_link ('/frs/?group_id='.$row_new['group_id'].'&release_id='.$row_new['release_id'],_('Download')).
 				' ('._('Project Total:') .$row_new['downloads'].') | ';
 				// notes for this release
 				print util_make_link ('/frs/shownotes.php?release_id='.$row_new['release_id'],_('Notes and Changes')).'

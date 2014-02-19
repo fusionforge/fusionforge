@@ -66,7 +66,7 @@ if ($group_id && $job_id) {
 
 		<tr><td>
 			<strong>'._('Contact Info').'<br />
-			'.util_make_link ('/sendmessage.php?touser='. db_result($result,0,'user_id') .'&amp;subject='. urlencode( 'RE: '.db_result($result,0,'title')), db_result($result,0,'user_name')) .'</strong>
+			'.util_make_link ('/sendmessage.php?touser='. db_result($result,0,'user_id') .'&subject='. urlencode( 'RE: '.db_result($result,0,'title')), db_result($result,0,'user_name')) .'</strong>
 		</td><td>
 			<strong>'._('Status').'</strong><br />
 			'. db_result($result,0,'status_name') .'

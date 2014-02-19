@@ -63,7 +63,7 @@ class headermenuPlugin extends Plugin {
 				$group_id = $params['group_id'];
 				$project = group_get_object($group_id);
 				if ($project->usesPlugin($this->name)) {
-					echo '<p>'.util_make_link('/plugins/'.$this->name.'/?type=projectadmin&amp;group_id='.$group_id,
+					echo '<p>'.util_make_link('/plugins/'.$this->name.'/?type=projectadmin&group_id='.$group_id,
 					     _('Menu Tabs Manager Admin'), array('class' => 'tabtitle', 'title' => _('Add/Remove/Activate/Desactivate tabs'))) . '</p>';
 				}
 				break;

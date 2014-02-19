@@ -128,18 +128,13 @@ if (!session_loggedin()) {
 						$art_arr = $af->getArtifacts();
 						if (count($art_arr) > 0) {
 							echo '<tr><td colspan="' . (array_sum($display_col)+1) . '" align="left" style="color: darkred; border-bottom: 1px solid #A0A0C0; border-top: 1px dotted #A0A0C0; background-color: #CACADA;"><strong> · '.
-								util_make_link ('/tracker/?group_id='.$at->Group->getID().'&amp;atid='.$at->getID(),
+								util_make_link ('/tracker/?group_id='.$at->Group->getID().'&atid='.$at->getID(),
 										$at->getName()) . '</strong></td></tr>';
 							$toggle=0;
 							foreach($art_arr as $art) {
 								echo '<tr '. $HTML->boxGetAltRowStyle($toggle++) . ' class="top"><td class="align-center">'. $art->getID() .'</td>';
 								if ($display_col['summary'])
-								echo '<td class="align-left"><a href="/tracker/?func=detail&aid='.
-									$art->getID() .
-									'&amp;group_id='. $p->getID() .'&amp;atid='.
-									$ath->getID().'">'.
-									$art->getSummary().
-									'</a></td>';
+								echo '<td class="align-left">'.util_make_link('/tracker/?func=detail&aid='.$art->getID().'&group_id='.$p->getID().'&atid='.$ath->getID(), $art->getSummary()).'</td>';
 								if ($display_col['changed'])
 									echo '<td width="150">'
 										.date(_('Y-m-d'),$art->getLastModifiedDate()) .'</td>';
@@ -169,9 +164,7 @@ if (!session_loggedin()) {
 												$pg = new ProjectGroup($g, $projectid);
 												echo $pg->getName().'<br/>';
 												$summary   = util_unconvert_htmlspecialchars($taskinfo['summary']);
-												echo '<a href="../pm/task.php?func=detailtask&amp;project_task_id='.$taskid.'&amp;group_id='.$groupid.'&amp;group_project_id='.$projectid.'">';
-												echo $summary;
-												echo '</a>';
+												echo util_make_link('/pm/task.php?func=detailtask&project_task_id='.$taskid.'&group_id='.$groupid.'&group_project_id='.$projectid, $summary);
 											}
 										}
 										echo '</td>';
