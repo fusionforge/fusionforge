@@ -70,7 +70,7 @@ class HtmlGroupSearchRenderer extends HtmlSearchRenderer {
 		site_project_header(array('title' => $title, 'group' => $this->groupId, 'toptab' => $this->topTab));
 
 		printf (_('Tip: Use %s to get more precise results.'),
-			util_make_link('/search/advanced_search.php?group_id='.$this->groupId.'&amp;words='.
+			util_make_link('/search/advanced_search.php?group_id='.$this->groupId.'&words='.
 				htmlspecialchars_decode($this->query['words']),
 				_('Advanced search')));
 	}

@@ -100,7 +100,7 @@ class DocsAllHtmlSearchRenderer extends HtmlSearchRenderer {
 			$document = new Document($currentDocGroupObject, db_result($result, $i, 'docid'));
 			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($rowColor) .'>'
 						. '<td>&nbsp;</td>'
-						. '<td>'.html_image('ic/cfolder15.png', '10', '12', array('border' => '0')).util_make_link('/docman/?group_id='.$currentDocGroupObject->getID().'&amp;view=listfile&amp;dirid='.$document->getDocGroupID(),db_result($result, $i, 'groupname')).'</td>';
+						. '<td>'.html_image('ic/cfolder15.png', '10', '12', array('border' => '0')).util_make_link('/docman/?group_id='.$currentDocGroupObject->getID().'&view=listfile&dirid='.$document->getDocGroupID(),db_result($result, $i, 'groupname')).'</td>';
 						if (db_result($result, $i, 'filetype') == 'URL') {
 							$return .= '<td><a href="'.db_result($result, $i, 'filename').'">';
 						} else {

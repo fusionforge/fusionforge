@@ -355,7 +355,7 @@ if ($add_cat && $group_project_id) {
 	</table>
 	</form>
 	<?php
-	echo '<p>'.util_make_link ('/pm/admin/?group_id='.$group_id.'&amp;add_cat=1&amp;group_project_id='.$group_project_id,_('Category Administration')).'</p>';
+	echo '<p>'.util_make_link('/pm/admin/?group_id='.$group_id.'&add_cat=1&group_project_id='.$group_project_id,_('Category Administration')).'</p>';
 	pm_footer();
 
 } elseif ($delete && $group_project_id) {

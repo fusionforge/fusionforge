@@ -50,7 +50,7 @@ plugin_hook_by_reference("text_editor", $params);
 		<strong><?php echo _('Category') . _(': '); ?></strong><br />
 		<?php
 		echo $pg->categoryBox('category_id');
-		echo util_make_link ('/pm/admin/?group_id='.$group_id.'&amp;add_cat=1&amp;group_project_id='.$group_project_id,'('._('Admin').')');
+		echo util_make_link('/pm/admin/?group_id='.$group_id.'&add_cat=1&group_project_id='.$group_project_id,'('._('Admin').')');
 		?>
 		</td>
 		<td>
