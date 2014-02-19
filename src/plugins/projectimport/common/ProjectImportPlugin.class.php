@@ -1,7 +1,7 @@
 <?php
-
 /**
  * ProjectImportPlugin Class
+ * Copyright 2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -65,9 +65,13 @@ class ProjectImportPlugin extends Plugin {
 			}
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][]=$this->text;
+				$params['ADMIN'][] = NULL;
+				$params['TOOLTIPS'][] = NULL;
 				$params['DIRS'][]=util_make_url ('/plugins/projectimport/index.php?type=group&group_id=' . $group_id . "&pluginname=" . $this->name) ; // we indicate the part we're calling is the project one
 			} else {
 				$params['TITLES'][]=$this->text." is [Off]";
+				$params['ADMIN'][] = NULL;
+				$params['TOOLTIPS'][] = NULL;
 				$params['DIRS'][]='';
 			}
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
