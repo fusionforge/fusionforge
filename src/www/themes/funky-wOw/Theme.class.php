@@ -210,11 +210,15 @@ class Theme extends Layout {
 	 * @param	int	$i	Row number
 	 * @return	string
 	 */
-	function boxGetAltRowStyle($i) 	{
+	function boxGetAltRowStyle($i, $classonly = false) {
 		if ($i % 2 == 0)
-			return 'class="bgcolor-white"';
+			$ret = 'bgcolor-white';
 		else
-			return 'class="bgcolor-grey"';
+			$ret = 'bgcolor-grey';
+		if ($classonly)
+			return $ret;
+		else
+			return 'class="'.$ret.'"';
 	}
 
 	function tabGenerator($TABS_DIRS, $TABS_TITLES, $TABS_TOOLTIPS, $nested=false,  $selected=false, $sel_tab_bgcolor='WHITE',  $total_width='100%') {
