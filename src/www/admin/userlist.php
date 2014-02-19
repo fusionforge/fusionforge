@@ -66,10 +66,10 @@ function performAction($newStatus, $statusString, $user_id) {
 function show_users_list($users, $filter = '', $sortorder = 'realname') {
 	echo '<p>' ._('Status')._(': ').
 		util_make_link('/admin/userlist.php', _('All')). '
-		<span class="active">'.util_make_link('/admin/userlist.php?status=A'.'&amp;sortorder='.$sortorder,_('Active')). '</span>
-		<span class="deleted">'.util_make_link('/admin/userlist.php?status=D'.'&amp;sortorder='.$sortorder,_('Deleted')).'</span>
-		<span class="suspended">'.util_make_link('/admin/userlist.php?status=S'.'&amp;sortorder='.$sortorder,_('Suspended')).'</span>
-		<span class="pending">'.util_make_link('/admin/userlist.php?status=P'.'&amp;sortorder='.$sortorder,_('(*)Pending')).'</span>'.'</p>';
+		<span class="active">'.util_make_link('/admin/userlist.php?status=A&sortorder='.$sortorder,_('Active')). '</span>
+		<span class="deleted">'.util_make_link('/admin/userlist.php?status=D&sortorder='.$sortorder,_('Deleted')).'</span>
+		<span class="suspended">'.util_make_link('/admin/userlist.php?status=S&sortorder='.$sortorder,_('Suspended')).'</span>
+		<span class="pending">'.util_make_link('/admin/userlist.php?status=P&sortorder='.$sortorder,_('(*)Pending')).'</span>'.'</p>';
 
 	if (!count($users)) {
 		echo '<div class="warning_msg">'._('No user found matching selected criteria.').'</div>';
@@ -124,19 +124,19 @@ function show_users_list($users, $filter = '', $sortorder = 'realname') {
 		echo '</td>';
 		echo '<td width="15%" style="text-align:center">';
 		if ($u->getStatus() != 'A') {
-			echo util_make_link('/admin/userlist.php?action=activate&amp;user_id='.$u->getID().$filter,_('Activate'));
+			echo util_make_link('/admin/userlist.php?action=activate&user_id='.$u->getID().$filter,_('Activate'));
 		} else {
 			echo '<strike>'._('Activate').'</strike>';
 		}
 		echo '</td>';
 		echo '<td width="15%" style="text-align:center">';
 		if ($u->getStatus() != 'D') {
-			echo util_make_link('/admin/userlist.php?action=delete&amp;user_id='.$u->getID().$filter,_('Delete'));
+			echo util_make_link('/admin/userlist.php?action=delete&user_id='.$u->getID().$filter,_('Delete'));
 		} else {
 			echo '<strike>'._('Delete').'</strike>';
 		}
 		echo '</td>';
-		echo '<td width="15%" style="text-align:center">'.util_make_link('/admin/userlist.php?action=suspend&amp;user_id='.$u->getID().$filter,_('Suspend')).'</td>';
+		echo '<td width="15%" style="text-align:center">'.util_make_link('/admin/userlist.php?action=suspend&user_id='.$u->getID().$filter,_('Suspend')).'</td>';
 		echo '<td width="12%" style="text-align:center">'.util_make_link('/admin/passedit.php?user_id='.$u->getID().$filter,_('Change Password')).'</td>';
 		echo '</tr>';
 		$count ++;

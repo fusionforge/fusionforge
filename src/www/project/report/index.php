@@ -190,7 +190,7 @@ foreach ($group->getUsers() as $member) {
                 for ($m=0; $m < $num_artifacts; $m++) {
 			echo '
 		<tr class="priority'.db_result($artifacts, $m, 'priority').'">
-			<td>'.util_make_link ('/tracker/?func=detail&amp;aid='. db_result($artifacts, $m, 'artifact_id') .'&amp;group_id='.$group_id.'&atid='.$artifact_type['group_artifact_id'], $artifact_type['name'].' '.db_result($artifacts, $m, 'artifact_id')).'
+			<td>'.util_make_link('/tracker/?func=detail&aid='. db_result($artifacts, $m, 'artifact_id') .'&group_id='.$group_id.'&atid='.$artifact_type['group_artifact_id'], $artifact_type['name'].' '.db_result($artifacts, $m, 'artifact_id')).'
 			</td>
 			<td>'.db_result($artifacts, $m, 'summary').'</td>';
 			echo '
@@ -229,7 +229,7 @@ foreach ($group->getUsers() as $member) {
 		if ( $task_type['percent_complete'] != 100 ) {
                 	echo '
 		<tr class="priority'.$task_type['priority'].'">
-			<td>'.util_make_link ('/pm/task.php?func=detailtask&amp;project_task_id='. $task_type['project_task_id'].'&amp;group_id='.$group_id.'&amp;group_project_id='.$task_type['group_project_id'],_('Task').' '.$task_type['project_task_id']).'
+			<td>'.util_make_link('/pm/task.php?func=detailtask&project_task_id='. $task_type['project_task_id'].'&group_id='.$group_id.'&group_project_id='.$task_type['group_project_id'],_('Task').' '.$task_type['project_task_id']).'
 			</td>
 			<td>'.$task_type['summary'].'
 			</td>

@@ -263,8 +263,8 @@ class SurveyHTML extends Error {
 			$ret.= '<td>'.$arr_to_del[$i]->getID().'</td>';
 			$ret.= '<td>'.$arr_to_del[$i]->getQuestion().'</td>';
 			$ret.= '<td>'.$arr_to_del[$i]->getQuestionStringType().'</td>';
-			$ret.= '<td><center>['.util_make_link ('/survey/admin/survey.php?group_id='.$group_id.'&amp;survey_id='. $survey_id.'&amp;is_up=1&amp;updown=Y'.'&amp;question_id='.$arr_to_del[$i]->getID(),_('Up')).'] ';
-			$ret.= '['.util_make_link ('/survey/admin/survey.php?group_id='.$group_id.'&amp;survey_id='. $survey_id.'&amp;is_up=0&amp;updown=Y'.'&amp;question_id='.$arr_to_del[$i]->getID(),_('Down')).']</center></td>';
+			$ret.= '<td><center>['.util_make_link ('/survey/admin/survey.php?group_id='.$group_id.'&survey_id='. $survey_id.'&is_up=1&updown=Y&question_id='.$arr_to_del[$i]->getID(),_('Up')).'] ';
+			$ret.= '['.util_make_link ('/survey/admin/survey.php?group_id='.$group_id.'&survey_id='. $survey_id.'&is_up=0&updown=Y&question_id='.$arr_to_del[$i]->getID(),_('Down')).']</center></td>';
 
 			$ret.= '<td><center><input type="checkbox" name="to_del[]" value="'.$arr_to_del[$i]->getID().'" /></center></td>';
 			$ret.= '</tr>';
@@ -399,7 +399,7 @@ class SurveyHTML extends Error {
 
 			$ret.= '<td>';
 			if ($surveys[$i]->isActive()) {
-				$ret.= util_make_link ('/survey/survey.php?group_id='.$group_id.'&amp;survey_id='. $surveys[$i]->getID(), $surveys[$i]->getTitle());
+				$ret.= util_make_link ('/survey/survey.php?group_id='.$group_id.'&survey_id='. $surveys[$i]->getID(), $surveys[$i]->getTitle());
 			} else {
 				$ret.= '<strike>'.$surveys[$i]->getTitle().'</strike>';
 			}
@@ -424,30 +424,29 @@ class SurveyHTML extends Error {
 			}
 			if ($show_edit) {
 				/* Edit/Delete Link */
-				$ret.= '<td>['.util_make_link ('/survey/admin/survey.php?group_id='.$group_id.'&amp;survey_id='. $surveys[$i]->getID(),_('Edit')).'] ';
+				$ret.= '<td>['.util_make_link ('/survey/admin/survey.php?group_id='.$group_id.'&survey_id='. $surveys[$i]->getID(),_('Edit')).'] ';
 
 				/* We don't support delete yet. Need to delete all results as well */
 				/*
-				$ret.= '['.util_make_link ('/survey/admin/survey.php?delete=Y&amp;group_id='.$group_id.'&amp;survey_id='. $surveys[$i]->getID(),_('Delete')).']';
+				$ret.= '['.util_make_link ('/survey/admin/survey.php?delete=Y&group_id='.$group_id.'&survey_id='. $surveys[$i]->getID(),_('Delete')).']';
                                 */
                                 $ret.='</td>';
 			}
 			if ($show_result) {
 				/* Edit/Delete Link */
-				$ret.= '<td>['.util_make_link ('/survey/admin/show_results.php?group_id='.$group_id.'&amp;survey_id='. $surveys[$i]->getID(),_('Result')).']</td>';
+				$ret.= '<td>['.util_make_link('/survey/admin/show_results.php?group_id='.$group_id.'&survey_id='. $surveys[$i]->getID(),_('Result')).']</td>';
 			}
 			if ($show_result_graph) {
 				/* Edit/Delete Link */
-				$ret.= '<td>['.util_make_link ('/survey/admin/show_results.php?graph=yes&amp;group_id='.$group_id.'&amp;survey_id='.  $surveys[$i]->getID(),_('Result with Graph')).']</td>';
+				$ret.= '<td>['.util_make_link('/survey/admin/show_results.php?graph=yes&group_id='.$group_id.'&survey_id='.  $surveys[$i]->getID(),_('Result with Graph')).']</td>';
 			}
 			if ($show_result_comment) {
 				/* Edit/Delete Link */
-				$ret.= '<td>['.util_make_link ('/survey/admin/show_results.php?graph=yes&amp;show_comment=yes&amp;group_id='.$group_id.'&amp;survey_id='.$surveys[$i]->getID(),_('Result with Graph and Comments')).']</td>';
+				$ret.= '<td>['.util_make_link('/survey/admin/show_results.php?graph=yes&show_comment=yes&group_id='.$group_id.'&survey_id='.$surveys[$i]->getID(),_('Result with Graph and Comments')).']</td>';
 			}
 			if ($show_result_csv) {
 				/* Csv Link */
-				$ret.= "<td>[<a href=\"/survey/admin/show_csv.php?group_id=$group_id&amp;survey_id=".$surveys[$i]->getID().'">';
-				$ret.= _("CSV").'</a>]</td>';
+				$ret.= "<td>['.util_make_link('/survey/admin/show_csv.php?group_id=$group_id&survey_id=".$surveys[$i]->getID(), _("CSV")).']</td>';
 			}
 			$ret.= "</tr>\n";
 		}
@@ -557,7 +556,7 @@ class SurveyHTML extends Error {
 
 		$ret.='<tr><td class="align-center" colspan="2">'.
 			'<input type="submit" name="submit" value="'._('Submit').'" />'.
-			'<br />'.util_make_link ('/survey/privacy.php?group_id='.$group_id,_('Survey Privacy')).
+			'<br />'.util_make_link('/survey/privacy.php?group_id='.$group_id, _('Survey Privacy')).
 			'</td></tr></form></table>';
 
 		return $ret;

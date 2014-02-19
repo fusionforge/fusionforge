@@ -138,7 +138,7 @@ function project_summary($group_id, $mode, $no_table) {
 			} else {
 				for ($j = 0; $j < $rows; $j++) {
 					$return .= '<p>
-					&nbsp;-&nbsp;'.util_make_link ('/tracker/?atid='. db_result($result, $j, 'group_artifact_id') . '&amp;group_id='.$group_id.'&amp;func=browse',db_result($result, $j, 'name'));
+					&nbsp;-&nbsp;'.util_make_link('/tracker/?atid='. db_result($result, $j, 'group_artifact_id') . '&group_id='.$group_id.'&func=browse',db_result($result, $j, 'name'));
 					$return .= sprintf(ngettext('(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', '(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', (int) db_result($result, $j, 'open_count')), (int) db_result($result, $j, 'open_count'), (int) db_result($result, $j, 'count')) ;
 					$return .= '</p>';
 				}
@@ -218,7 +218,7 @@ function project_summary($group_id, $mode, $no_table) {
 			} else {
 				for ($j = 0; $j < $rows; $j++) {
 					$return .= '
-					<br /> &nbsp; - '.util_make_link ('/pm/task.php?group_project_id='.db_result($result, $j, 'group_project_id').'&amp;group_id='.$group_id.'&amp;func=browse',db_result($result, $j, 'project_name'));
+					<br /> &nbsp; - '.util_make_link ('/pm/task.php?group_project_id='.db_result($result, $j, 'group_project_id').'&group_id='.$group_id.'&func=browse',db_result($result, $j, 'project_name'));
 				}
 				db_free_result($result);
 			}

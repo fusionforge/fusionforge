@@ -121,7 +121,7 @@ if (!$res || db_numrows($res) < 1) {
 		echo '
 		<tr '.$HTML->boxGetAltRowStyle(1).'>
 			<td>&nbsp;</td>
-			<td>'.util_make_link ('/pm/task.php?func=detailtask&amp;group_id='.db_result($res,$i,'group_id') .'&amp;project_task_id='.db_result($res,$i,'project_task_id') .'&amp;group_project_id='.db_result($res,$i,'group_project_id'),db_result($res,$i,'summary')) .'
+			<td>'.util_make_link('/pm/task.php?func=detailtask&group_id='.db_result($res,$i,'group_id') .'&project_task_id='.db_result($res,$i,'project_task_id') .'&group_project_id='.db_result($res,$i,'group_project_id'),db_result($res,$i,'summary')) .'
 			</td>
 			<td>'.db_result($res,$i,'status_name').'</td>
 			<td>'.number_format(db_result($res,$i,'cumulative_hrs'),1).'</td>
@@ -156,7 +156,7 @@ if (!$res || db_numrows($res) < 1) {
 				}
 				echo '
 			</td>
-			<td colspan="2">'.util_make_link ('/tracker/?func=detail&amp;atid='.db_result($res2,$j,'group_artifact_id'). '&amp;group_id='.db_result($res2,$j,'group_id'). '&amp;aid='.db_result($res2,$j,'artifact_id'), db_result($res2,$j,'summary')).'
+			<td colspan="2">'.util_make_link('/tracker/?func=detail&atid='.db_result($res2,$j,'group_artifact_id').'&group_id='.db_result($res2,$j,'group_id').'&aid='.db_result($res2,$j,'artifact_id'), db_result($res2,$j,'summary')).'
 			</td>
 		</tr>';
 			}
