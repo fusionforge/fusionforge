@@ -80,9 +80,9 @@ jQuery(document).ready(function() {
 					$docurltitle = _('View this document');
 				}
 			}
-			echo '<td><a href="'.$docurl.'" class="tabtitle-nw" title="'.$docurltitle.'" >';
-			echo html_image($d->getFileTypeImage(), '22', '22', array('alt'=>$d->getFileType()));;
-			echo '</a></td>';
+			echo '<td>';
+			echo util_make_link($docurl, html_image($d->getFileTypeImage(), '22', '22', array('alt'=>$d->getFileType())), array('class' => 'tabtitle-nw', 'title' => $docurltitle));
+			echo '</td>';
 			echo '<td>';
 			if (($d->getUpdated() && $time_new > (time() - $d->getUpdated())) || $time_new > (time() - $d->getCreated())) {
 				$html_image_attr = array();

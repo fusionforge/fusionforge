@@ -170,9 +170,9 @@ class DocumentManager extends Error {
 					$liclass = 'docman_li_treecontent_selected';
 				}
 				if ($this->Group->getID() != $g->getID()) {
-					$link = '/docman/?group_id='.$g->getID().'&amp;view='.$linkmenu.'&amp;dirid='.$localDg->getID().'&amp;childgroup_id='.$this->Group->getID();
+					$link = '/docman/?group_id='.$g->getID().'&view='.$linkmenu.'&dirid='.$localDg->getID().'&childgroup_id='.$this->Group->getID();
 				} else {
-					$link = '/docman/?group_id='.$this->Group->getID().'&amp;view='.$linkmenu.'&amp;dirid='.$localDg->getID();
+					$link = '/docman/?group_id='.$this->Group->getID().'&view='.$linkmenu.'&dirid='.$localDg->getID();
 				}
 				$nbDocsLabel = '';
 				$nbDocs = $localDg->getNumberOfDocuments($stateId);
