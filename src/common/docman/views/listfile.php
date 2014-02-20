@@ -248,9 +248,9 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 				$docurltitle = _('View this document');
 			}
 		}
-		echo '<td><a href="'.$docurl.'" class="tabtitle-nw" title="'.$docurltitle.'" >';
-		echo html_image($d->getFileTypeImage(), '22', '22', array('alt'=>$d->getFileType()));
-		echo '</a></td>'."\n";
+		echo '<td>';
+		echo util_make_link($docurl, html_image($d->getFileTypeImage(), '22', '22', array('alt' => $d->getFileType())), array('class' => 'tabtitle-nw', 'title' => $docurltitle));
+		echo '</td>'."\n";
 		echo '<td>';
 		if (($d->getUpdated() && $time_new > (time() - $d->getUpdated())) || $time_new > (time() - $d->getCreated())) {
 			$html_image_attr = array();
@@ -282,7 +282,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 			if ($reserved_by) {
 				$user = user_get_object($reserved_by);
 				if (is_object($user)) {
-					echo ' '._('by').' '.make_user_link($user->getUnixName(), $user->getRealName());
+					echo ' '._('by').' '.util_make_link_u($user->getUnixName(), $user->getID(), $user->getRealName());
 				}
 			}
 		} else {
