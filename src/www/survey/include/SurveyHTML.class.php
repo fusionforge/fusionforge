@@ -446,7 +446,7 @@ class SurveyHTML extends Error {
 			}
 			if ($show_result_csv) {
 				/* Csv Link */
-				$ret.= "<td>['.util_make_link('/survey/admin/show_csv.php?group_id=$group_id&survey_id=".$surveys[$i]->getID(), _("CSV")).']</td>';
+				$ret.= '<td>['.util_make_link('/survey/admin/show_csv.php?group_id=$group_id&survey_id='.$surveys[$i]->getID(), _('CSV')).']</td>';
 			}
 			$ret.= "</tr>\n";
 		}
