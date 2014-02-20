@@ -37,46 +37,49 @@ if (!forge_check_perm('docman', $group_id, 'read')) {
 
 $is_editor = forge_check_perm('docman', $g->getID(), 'approve');
 $searchString = trim(getStringFromPost("textsearch"));
-$subprojectsIncluded = getStringFromPost('includesubprojects');
 $insideDocuments = getStringFromPost('insideDocuments');
+$subprojectsIncluded = getStringFromPost('includesubprojects');
 $allchecked = "";
 $onechecked = "";
-$includesubprojects = "";
 $insideDocumentsCheckbox = "";
+$attrsInputSearchAll = array('type' => 'radio', 'name' => 'search_type', 'required' => 'required', 'value' => 'all', 'class' => 'tabtitle-nw', 'title' => _('All searched words are mandatory'));
+$attrsInputSearchOne = array('type' => 'radio', 'name' => 'search_type', 'required' => 'required', 'value' => 'one', 'class' => 'tabtitle', 'title' => _('At least one word must be found'));
+
 if (getStringFromPost('search_type') == "one") {
-	$onechecked = 'checked="checked"';
+	$attrsInputSearchOne['checked'] = 'checked';
 } else {
-	$allchecked = 'checked="checked"';
+	$attrsInputSearchAll['checked'] = 'checked';
 }
 
-if ($subprojectsIncluded)
-	$includesubprojects = 'checked="checked"';
-
-if ($insideDocuments)
-	$insideDocumentsCheckbox = 'checked="checked"';
-
-echo '<div class="docmanDivIncluded">';
-echo '<form method="post" action="?group_id='.$group_id.'&amp;view=search">';
-echo '<table>';
-echo '<tr><td><b>'._('Query: ').'</b>';
-echo '<input type="text" name="textsearch" id="textsearch" size="48" value="'.$searchString.'" required="required" placeholder="'._('Searched words').'" />';
-echo '<input type="submit" value="'._('Search').'" />';
-echo '</td></tr><tr><td>';
-echo '<input type="radio" name="search_type" required="required" value="all" '.$allchecked.' class="tabtitle-nw" title="'._('All searched words are mandatory').'" />'._('With all the words');
-echo '<input type="radio" name="search_type" required="required" value="one" '.$onechecked.' class="tabtitle" title="'._('At least one word must be found').'" />'._('With at least one of words');
+echo html_ao('div', array('id' => 'docman_search', 'class' => 'docmanDivIncluded'));
+echo html_ao('form', array('method' => 'post', 'action' => '?group_id='.$group_id.'&view=search'));
+echo html_ao('div', array('id' => 'docman_search_query_words'));
+echo html_e('span', array('id' => 'docman_search_query_label'), _('Query').utils_requiredField()._(': '));
+echo html_e('input', array('type' => 'text', 'name' => 'textsearch', 'id' => 'textsearch', 'size' => 48, 'value' => $searchString, 'required' => 'required', 'placeholder' => _('Searched words')));
+echo html_e('input', array('type' => 'submit', 'value' => _('Search')));
+echo html_ac(1);
+echo html_ao('div', array('id' => 'docman_search_query_ckeckbox'));
+echo html_e('input', $attrsInputSearchAll)._('With all the words');
+echo html_e('input', $attrsInputSearchOne)._('With at least one of words');
 if ($g->useDocmanSearch()) {
-	echo '<input type="checkbox" name="insideDocuments" value="1" '.$insideDocumentsCheckbox.' class="tabtitle" title="'._('Filename and contents are used to match searched words').'" />'._('Inside documents');
+	$attrsInputInsideDocs = array('type' => 'checkbox', 'name'  => 'insideDocuments', 'value' => 1, 'class' => 'tabtitle', 'title' => _('Filename and contents are used to match searched words'));
+	if ($insideDocuments)
+		$attrsInputInsideDocs['checked'] = 'checked';
+	echo html_e('input', $attrsInputInsideDocs)._('Inside documents');
 }
 if ($g->usesPlugin('projects-hierarchy')) {
 	$projectsHierarchy = plugin_get_object('projects-hierarchy');
 	$projectIDsArray = $projectsHierarchy->getFamily($group_id, 'child', true, 'validated');
 }
-if (isset($projectIDsArray) && is_array($projectIDsArray))
-	echo '<input type="checkbox" name="includesubprojects" value="1" '.$includesubprojects.' class="tabtitle" title="'._('search into childs following project hierarchy').'" />'._('Include child projects');
+if (isset($projectIDsArray) && is_array($projectIDsArray)) {
+	$attrsInputIncludeSubprojects = array('type' => 'checkbox', 'name'  => 'includesubprojects', 'value' => 1, 'class' => 'tabtitle', 'title' => _('search into childs following project hierarchy'));
+	if ($subprojectsIncluded)
+		$attrsInputIncludeSubprojects['checked'] = 'checked';
+	echo html_e('input', $attrsInputIncludeSubprojects)._('Include child projects');
+}
 
-echo '</td></tr>';
-echo '</table>';
-echo '</form>';
+echo html_ac(1);
+echo html_ao('div', array('id' => 'docman_search_query_result'));
 if ($searchString) {
 	$mots = preg_split("/[\s,]+/",$searchString);
 	$qpa = db_construct_qpa(false, 'SELECT filename, filetype, docid, doc_data.stateid as stateid, doc_states.name as statename, title, description, createdate, updatedate, doc_group, group_id FROM doc_data, doc_states WHERE doc_data.stateid = doc_states.stateid');
@@ -123,10 +126,10 @@ if ($searchString) {
 	$qpa = db_construct_qpa($qpa, ' ORDER BY updatedate, createdate');
 	$result = db_query_qpa($qpa);
 	if (!$result) {
-		echo '<p class="error">'._('Database query error').'</p>';
+		echo html_e('p', array('class' => 'error'), _('Database query error'));
 		db_free_result($result);
 	} elseif (db_numrows($result) < 1) {
-		echo '<p class="warning_msg">'._('Your search did not match any documents.').'</p>';
+		echo html_e('p', array('class' => 'warning_msg'), _('Your search did not match any documents.'));
 		db_free_result($result);
 	} else {
 		$resarr = array();
@@ -135,30 +138,32 @@ if ($searchString) {
 		}
 		db_free_result($result);
 		$count = 0;
-		echo '<table>';
+		echo html_ao('table',array('class' => 'fullwidth'));
 		foreach ($resarr as $item) {
+			echo html_ao('tr', array('class' => $HTML->boxGetAltRowStyle($count, true)));
+			echo html_ao('td');
 			$count++;
 			if ($item['filetype'] == 'URL') {
 				$fileurl = $item["filename"];
 			} else {
 				$fileurl = '/docman/view.php/'.$item["group_id"].'/'.$item["docid"].'/'.urlencode($item["filename"]);
 			}
-			echo '<tr><td width="20px" align="right"><b>'.$count.'.</b></td><td><b>'.$item["title"].'</b>&nbsp;(<a href="'.$fileurl.'">'.$item["filename"].'</a>)</td></tr>';
-			echo '<tr><td colspan="2">'.$item["description"].'</td></tr>';
+			echo html_e('p', array(), '<b>'.$count.'.&nbsp;'.$item["title"].'</b>&nbsp;('.util_make_link($fileurl, $item["filename"]).')', false);
+			echo html_e('p', array(), $item["description"], false);
 			$localProject = group_get_object($item['group_id']);
 			$docGroupObject = new DocumentGroup($localProject, $item['doc_group']);
-			echo '<tr><td colspan="2">'._('Status')._(': ').'<b>'.$item["statename"].'</b></td></tr>';
-			echo '<tr><td colspan="2">'._('Path')._(': ');
+			echo html_e('p', array(), _('Status')._(': ').'<b>'.$item["statename"].'</b>', false);
+			echo '<p>'._('Path')._(': ');
 			if ($localProject->getUnixName() != $g->getUnixName()) {
 				$browselink = '/docman/?group_id='.$localProject->getID();
 				echo util_make_link($browselink, $localProject->getPublicName(), array('title' => _('Browse document manager for this project.'), 'class' => 'tabtitle-nw')).'::';
 			}
-			echo '<i>'.$docGroupObject->getPath(true, true).'</i></td></tr>';
-			echo '<tr><td colspan="2">&nbsp;</td></tr>';
+			echo '<i>'.$docGroupObject->getPath(true, true).'</i></p>';
+			echo html_ac(3);
 		}
-		echo '</table>';
+		echo html_ac(2);
 	}
 } elseif (getStringFromServer('REQUEST_METHOD') === 'POST') {
-	echo '<p class="warning_msg">'._('Your search is empty.').'</p>';
+	echo html_e('p', array('class' => 'warning_msg'), _('Your search is empty.'));
 }
-echo '</div>';
+echo html_ac(0);

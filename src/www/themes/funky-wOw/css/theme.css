@@ -587,8 +587,14 @@ a.topTabSelected:hover {
 	padding: 4px;
 }
 
+.even
 .bgcolor-grey {
 	background-color: #fff3b8;
+}
+
+.odd
+.bgcolor-white {
+	background-color: #ffffff;
 }
 
 /*
@@ -754,16 +760,6 @@ p.information {
 	float: right;
 }
 
-.even {
-	background-color: #F0F0F0;
-	font-weight: normal;
-}
-
-.odd {
-	background-color: #FFFFFF;
-	font-weight: normal;
-}
-
 .info-box h2 {
 	font-size: 1.3em;
 	-moz-border-radius: 0.5em 0.5em 0 0;
@@ -843,4 +839,8 @@ p.information {
 #activity_submit input {
 	margin-top: 23px;
 	margin-left: 5px;
+}
+
+#docman_search_query_label {
+	font-weight:bold;
 }
