@@ -65,17 +65,17 @@ function pm_header($params) {
 
 	if ($group_project_id) {
 		$labels[] = (($pg) ? $pg->getName() : '');
-		$links[]  = '/pm/task.php?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=browse';
+		$links[]  = '/pm/task.php?group_id='.$group_id.'&group_project_id='.$group_project_id.'&func=browse';
 		$attr[] = '';
 		if (session_loggedin()) {
 			$labels[] = _('Add Task');
-			$links[]  = '/pm/task.php?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=addtask';
+			$links[]  = '/pm/task.php?group_id='.$group_id.'&group_project_id='.$group_project_id.'&func=addtask';
 			$attr[] = '';
 		}
 		if ($group_project_id) {
 			$gantt_width = 820;
 			$gantt_height = 680;
-			$gantt_url = "/pm/task.php?group_id=$group_id&amp;group_project_id=$group_project_id&amp;func=ganttpage";
+			$gantt_url = "/pm/task.php?group_id=$group_id&group_project_id=$group_project_id&func=ganttpage";
 			$gantt_title = _('Gantt Chart');
 			$gantt_winopt = 'scrollbars=yes,resizable=yes,toolbar=no,height=' . $gantt_height . ',width=' . $gantt_width;
 			$labels[] = $gantt_title;
@@ -91,7 +91,7 @@ function pm_header($params) {
 
 		// Import/Export using CSV files.
 		$labels[] = _('Import/Export CSV');
-		$links[]  = '/pm/task.php?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=csv';
+		$links[]  = '/pm/task.php?group_id='.$group_id.'&group_project_id='.$group_project_id.'&func=csv';
 		$attr[] = '';
 	}
 
@@ -100,7 +100,7 @@ function pm_header($params) {
 		$links[]  = '/pm/reporting/?group_id='.$group_id;
 		$attr[] = '';
 		$labels[] = _('Administration');
-		$links[]  = '/pm/admin/?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;update_pg=1';
+		$links[]  = '/pm/admin/?group_id='.$group_id.'&group_project_id='.$group_project_id.'&update_pg=1';
 		$attr[] = '';
 	} elseif (forge_check_perm ('pm_admin', $group_id)) {
 		$labels[] = _('Reporting');
