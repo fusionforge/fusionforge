@@ -47,13 +47,13 @@ $menu_attr[] = array('title' => _('View documents and folders in 2 panels. Left 
 
 if (forge_check_perm('docman', $group_id, 'submit')) {
 	$menu_text[] = _('Add new item');
-	$menu_links[] = '/docman/?group_id='.$group_id.'&amp;view=additem';
+	$menu_links[] = '/docman/?group_id='.$group_id.'&view=additem';
 	$menu_attr[] = array('title' => _('Add a new item such as file, create directory, inject a ZIP at root level.'), 'id' => 'addItemDocmanMenu', 'class' => 'tabtitle');
 }
 
 if ($g->useDocmanSearch()) {
 	$menu_text[] = _('Search');
-	$menu_links[] = '/docman/?group_id='.$group_id.'&amp;view=search';
+	$menu_links[] = '/docman/?group_id='.$group_id.'&view=search';
 	$menu_attr[] = array('title' => _('Search documents in this project using keywords.'), 'id' => 'searchDocmanMenu', 'class' => 'tabtitle');
 }
 
@@ -61,17 +61,17 @@ if (forge_check_perm('docman', $group_id, 'approve')) {
     $dm = new DocumentManager($g);
     if (!$dm->isTrashEmpty()) {
         $menu_text[] = _('Trash');
-        $menu_links[] = '/docman/?group_id='.$group_id.'&amp;view=listtrashfile';
+        $menu_links[] = '/docman/?group_id='.$group_id.'&view=listtrashfile';
         $menu_attr[] = array('title' => _('Recover or delete permanently files with deleted status.'), 'id' => 'trashDocmanMenu', 'class' => 'tabtitle');
     }
 }
 
 if (forge_check_perm('docman', $group_id, 'admin')) {
 	$menu_text[] = _('Reporting');
-	$menu_links[] = '/docman/?group_id='.$group_id.'&amp;view=reporting';
+	$menu_links[] = '/docman/?group_id='.$group_id.'&view=reporting';
 	$menu_attr[] = array('title' => _('Docman module reporting.'), 'id' => 'reportDocmanMenu', 'class' => 'tabtitle');
 	$menu_text[] = _('Administration');
-	$menu_links[] = '/docman/?group_id='.$group_id.'&amp;view=admin';
+	$menu_links[] = '/docman/?group_id='.$group_id.'&view=admin';
 	$menu_attr[] = array('title' => _('Docman module administration.'), 'id' => 'adminDocmanMenu', 'class' => 'tabtitle');
 }
 
