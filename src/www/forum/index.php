@@ -80,10 +80,7 @@ if ($group_id) {
 			echo $farr[$j]->getErrorMessage();
 		} else {
 			echo '<tr '. $HTML->boxGetAltRowStyle($j) . '><td>'.
-				'<a href="'.util_make_uri('/forum/forum.php?forum_id='.$farr[$j]->getID().'&amp;group_id='.$group_id).'">'.
-				html_image('ic/forum20w.png') .
-				' ' .
-				$farr[$j]->getName() .'</a></td>
+				util_make_link('/forum/forum.php?forum_id='.$farr[$j]->getID().'&group_id='.$group_id), html_image('ic/forum20w.png').' '.$farr[$j]->getName()).'</td>
 				<td>'.$farr[$j]->getDescription().'</td>
 				<td class="align-center">'.$farr[$j]->getThreadCount().'</td>
 				<td class="align-center">'. $farr[$j]->getMessageCount() .'</td>

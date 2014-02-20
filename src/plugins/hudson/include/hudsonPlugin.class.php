@@ -59,7 +59,7 @@ class hudsonPlugin extends Plugin {
 		if ($hookname == "usermenu") {
 			$text = $this->text; // this is what shows in the tab
 			if ($G_SESSION->usesPlugin("hudson")) {
-				$param = '?type=user&amp;id=' . $G_SESSION->getId() . "&amp;pluginname=" . $this->name; // we indicate the part we're calling is the user one
+				$param = '?type=user&;id=' . $G_SESSION->getId() . '&pluginname=' . $this->name; // we indicate the part we're calling is the user one
 				echo ' | ' . $HTML->PrintSubMenu (array ($text),
 						array ('/plugins/hudson/index.php' . $param ));
 			}
@@ -77,7 +77,7 @@ class hudsonPlugin extends Plugin {
 			}
 			if ( $project->usesPlugin( $this->name )) {
 				$params['TITLES'][] = $this->text;
-				$params['DIRS'][] = '/plugins/hudson/index.php?group_id=' . $group_id . "&amp;pluginname=" . $this->name; // we indicate the part we're calling is the project one
+				$params['DIRS'][] = '/plugins/hudson/index.php?group_id=' . $group_id . '&pluginname=' . $this->name; // we indicate the part we're calling is the project one
 				$params['ADMIN'][] = '';
 				$params['TOOLTIPS'][] = _('Continuous Integration Scheduler');
 			}

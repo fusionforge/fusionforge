@@ -41,7 +41,7 @@ class soapadminPlugin extends Plugin {
 		if ($hookname == "usermenu") {
 			$text = $this->text; // this is what shows in the tab
 			if ($G_SESSION->usesPlugin("soapadmin")) {
-				$param = '?type=user&id=' . $G_SESSION->getId() . "&pluginname=" . $this->name; // we indicate the part we're calling is the user one
+				$param = '?type=user&id=' . $G_SESSION->getId() . '&pluginname=' . $this->name; // we indicate the part we're calling is the user one
 				echo ' | ' . $HTML->PrintSubMenu (array ($text),
 						  array ('/plugins/soapadmin/index.php' . $param ));
 			}
@@ -59,7 +59,7 @@ class soapadminPlugin extends Plugin {
 			}
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][]=$this->text;
-				$params['DIRS'][]=util_make_url ('/plugins/soapadmin/index.php?type=group&id=' . $group_id . "&pluginname=" . $this->name) ; // we indicate the part we're calling is the project one
+				$params['DIRS'][]=util_make_url ('/plugins/soapadmin/index.php?type=group&id=' . $group_id . '&pluginname=' . $this->name) ; // we indicate the part we're calling is the project one
 			} else {
 				$params['TITLES'][]=$this->text." is [Off]";
 				$params['DIRS'][]='';

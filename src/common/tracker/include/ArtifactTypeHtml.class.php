@@ -53,34 +53,34 @@ class ArtifactTypeHtml extends ArtifactType {
 		$links[]  = '/tracker/?group_id='.$group_id;
 		$attr[]   = array('title' => _('Get the list of available trackers'), 'class' => 'tabtitle-nw');
 		$labels[] = $this->getName();
-		$links[]  = '/tracker/?func=browse&amp;group_id='.$group_id.'&amp;atid='. $this->getID();
+		$links[]  = '/tracker/?func=browse&group_id='.$group_id.'&atid='. $this->getID();
 		$attr[]   = array('title' => _('Browse this tracker.'), 'class' => 'tabtitle');
 		$labels[] = _('Export CSV');
-		$links[]  = '/tracker/?func=csv&amp;group_id='.$group_id.'&amp;atid='. $this->getID();
+		$links[]  = '/tracker/?func=csv&group_id='.$group_id.'&atid='. $this->getID();
 		$attr[]   = array('title' => _('Download data from this tracker as csv file.'), 'class' => 'tabtitle');
 		if (forge_check_perm ('tracker',$this->getID(),'submit')) {
 			$labels[] = _('Submit New');
-			$links[]  = '/tracker/?func=add&amp;group_id='.$group_id.'&amp;atid='. $this->getID();
+			$links[]  = '/tracker/?func=add&group_id='.$group_id.'&atid='. $this->getID();
 			$attr[]   = array('title' => _('Add a new issue.'), 'class' => 'tabtitle');
 		}
 
 		if (session_loggedin()) {
 			$labels[] = _('Reporting');
-			$links[]  = '/tracker/reporting/?group_id='.$group_id.'&amp;atid='. $this->getID();
+			$links[]  = '/tracker/reporting/?group_id='.$group_id.'&atid='. $this->getID();
 			$attr[]   = array('title' => _('Various graph about statistics.'), 'class' => 'tabtitle');
 			if ($this->isMonitoring()) {
 				$labels[] = _('Stop Monitor');
-				$links[]  = '/tracker/?group_id='.$group_id.'&amp;atid='. $this->getID().'&amp;func=monitor&amp;stop=1';
+				$links[]  = '/tracker/?group_id='.$group_id.'&atid='. $this->getID().'&func=monitor&stop=1';
 				$attr[]   = array('title' => _('Remove this tracker from your monitoring.'), 'class' => 'tabtitle');
 			} else {
 				$labels[] = _('Monitor');
-				$links[]  = '/tracker/?group_id='.$group_id.'&amp;atid='. $this->getID().'&amp;func=monitor&amp;start=1';
+				$links[]  = '/tracker/?group_id='.$group_id.'&atid='. $this->getID().'&func=monitor&start=1';
 				$attr[]   = array('title' => _('Add this tracker from your monitoring.'), 'class' => 'tabtitle');
 			}
 
 			if (forge_check_perm ('tracker', $this->getID(), 'manager')) {
 				$labels[] = _('Administration');
-				$links[]  = '/tracker/admin/?group_id='.$group_id.'&amp;atid='.$this->getID();
+				$links[]  = '/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID();
 				$attr[]   = array('title' => _('Global administration for trackers. Create, clone, workflow, fields ...'), 'class' => 'tabtitle');
 			}
 		}
@@ -105,25 +105,25 @@ class ArtifactTypeHtml extends ArtifactType {
 		$links_arr[]='/tracker/admin/?group_id='.$group_id;
 		$title_arr[]=_('New Tracker');
 
-		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&amp;atid='.$this->getID().'&amp;update_type=1';
+		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&update_type=1';
 		$title_arr[]=_('Update Settings');
 
-		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&amp;atid='.$this->getID().'&amp;add_extrafield=1';
+		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&add_extrafield=1';
 		$title_arr[]=_('Manage Custom Fields');
 
-		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&amp;atid='.$this->getID().'&amp;workflow=1';
+		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&workflow=1';
 		$title_arr[]=_('Manage Workflow');
 
-		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&amp;atid='.$this->getID().'&amp;customize_list=1';
+		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&customize_list=1';
 		$title_arr[]=_('Customize List');
 
-		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&amp;atid='.$this->getID().'&amp;add_canned=1';
+		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&add_canned=1';
 		$title_arr[]=_('Add/Update Canned Responses');
 
-		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&amp;atid='.$this->getID().'&amp;clone_tracker=1';
+		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&clone_tracker=1';
 		$title_arr[]=_('Clone Tracker');
 
-		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&amp;atid='.$this->getID().'&amp;delete=1';
+		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&delete=1';
 		$title_arr[]=_('Delete');
 
 		echo $HTML->printSubMenu($title_arr, $links_arr, array());
@@ -347,7 +347,7 @@ class ArtifactTypeHtml extends ArtifactType {
 				$enddate   = date(_('Y-m-d H:i'), $taskinfo['end_date']);
 				$status   = $taskinfo['status_name'];
 				echo '<tr>
-						<td><a href="/pm/task.php?func=detailtask&amp;project_task_id='.$taskid.'&amp;group_id='.$groupid.'&amp;group_project_id='.$projectid.'">[T'.$taskid.'] '.$summary.'</a></td>
+						<td>'.util_make_link('/pm/task.php?func=detailtask&project_task_id='.$taskid.'&group_id='.$groupid.'&group_project_id='.$projectid, '[T'.$taskid.'] '.$summary).'</td>
 						<td><div class="percentbar" style="width: 100px;">
 							<div style="width:'.round($taskinfo['percent_complete']).'px;"></div></div></td>
 						<td>'.$startdate.'</td>
@@ -387,7 +387,7 @@ class ArtifactTypeHtml extends ArtifactType {
 				echo '<td>'.htmlspecialchars($file->getName()).'</td>';
 				echo '<td>'.date(_('Y-m-d H:i'), $file->getDate()).'</td>';
 				echo '<td>'.$file->getSubmittedUnixName().'</td>';
-				echo '<td><a href="/tracker/download.php/'.$group_id.'/'. $this->getID().'/'. $ah->getID() .'/'.$file->getID().'/'.$file->getName() .'">'. htmlspecialchars($file->getName()) .'</a></td>';
+				echo '<td>'.util_make_link('/tracker/download.php/'.$group_id.'/'. $this->getID().'/'. $ah->getID() .'/'.$file->getID().'/'.$file->getName(), htmlspecialchars($file->getName())).'</td>';
 				if (forge_check_perm ('tracker', $this->getID(), 'tech')) {
 					echo '<td><input type="checkbox" name="delete_file[]" value="'. $file->getID() .'">'._('Delete').'</td>';
 				}

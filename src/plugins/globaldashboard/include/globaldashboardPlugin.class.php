@@ -40,7 +40,7 @@ class globaldashboardPlugin extends Plugin {
 		global $G_SESSION,$HTML;
 		$text = $this->text; // this is what shows in the tab
 		if ($G_SESSION->usesPlugin("globaldashboard")) {
-			$param = '?type=user&id=' . $G_SESSION->getId() . "&pluginname=" . $this->name; // we indicate the part we're calling is the user one
+			$param = '?type=user&id=' . $G_SESSION->getId() . '&pluginname=' . $this->name; // we indicate the part we're calling is the user one
 			echo $HTML->PrintSubMenu (array ($text),
 			array ('/plugins/globaldashboard/index.php' . $param ), array());
 		}

@@ -44,7 +44,7 @@ class oslcPlugin extends Plugin {
 		if ($hookname == "usermenu") {
 			$text = $this->text; // this is what shows in the tab
 			if ($G_SESSION->usesPlugin("oslc")) {
-				$param = '?type=user&id=' . $G_SESSION->getId() . "&pluginname=" . $this->name; // we indicate the part we're calling is the user one
+				$param = '?type=user&id=' . $G_SESSION->getId() . '&pluginname=' . $this->name; // we indicate the part we're calling is the user one
 				echo $HTML->PrintSubMenu (array ($text),
 						  array ('/plugins/oslc/index.php' . $param ));
 			}
@@ -64,10 +64,12 @@ class oslcPlugin extends Plugin {
 				$params['TITLES'][]=$this->text;
 				$params['DIRS'][]=util_make_uri('/plugins/oslc/');
 				$params['ADMIN'][]='';
+				$params['TOOLTIPS'][] = NULL;
 			} else {
 				$params['TITLES'][]=$this->text." is [Off]";
 				$params['DIRS'][]='';
 				$params['ADMIN'][]='';
+				$params['TOOLTIPS'][] = NULL;
 			}
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
 		} elseif ($hookname == "groupisactivecheckbox") {
