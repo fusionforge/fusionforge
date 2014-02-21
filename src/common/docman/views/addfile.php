@@ -33,12 +33,12 @@ global $group_id; // id of the group
 global $dirid; //id of the doc_group
 
 // plugin projects-hierarchy
-$actionurl = '?group_id='.$group_id.'&amp;action=addfile&amp;dirid='.$dirid;
+$actionurl = '?group_id='.$group_id.'&action=addfile&dirid='.$dirid;
 $redirecturl = '/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid;
 if (isset($childgroup_id) && $childgroup_id) {
 	$g = group_get_object($childgroup_id);
-	$actionurl .= '&amp;childgroup_id='.$childgroup_id;
-	$redirecturl .= '&amp;childgroup_id='.$childgroup_id;
+	$actionurl .= '&childgroup_id='.$childgroup_id;
+	$redirecturl .= '&childgroup_id='.$childgroup_id;
 }
 
 $dgf = new DocumentGroupFactory($g);
@@ -74,7 +74,7 @@ jQuery(document).ready(function() {
 
 //]]></script>
 <?php
-echo '<div class="docmanDivIncluded">';
+echo html_ao('div', array('class' => 'docmanDivIncluded'));
 if ($dgf->getNested() == NULL) {
 	$dg = new DocumentGroup($g);
 
@@ -85,90 +85,79 @@ if ($dgf->getNested() == NULL) {
 		session_redirect('/docman/?group_id='.$group_id.'&view=additem');
 	}
 
-	echo '<div class="warning">'. _('You MUST first create at least one folder to store your document.') .'</div>';
+	echo html_e('div', array('class' => 'warning'), _('You MUST first create at least one folder to store your document.'), false);
 } else {
 	/* display the add new documentation form */
-	echo '<p><strong>'. _('Document Title')._(': ').'</strong> '. _('Refers to the relatively brief title of the document (e.g. How to use the download server).'). '</p>';
-	echo '<p><strong>'. _('Description')._(': ').'</strong> '. _('A brief description to be placed just under the title.') .'</p>';
+	echo html_ao('p');
+	echo html_e('strong', array(), _('Document Title')._(': ')._('Refers to the relatively brief title of the document (e.g. How to use the download server).'), false);
+	echo html_ac(html_ap() - 1);
+	echo html_ao('p');
+	echo html_e('strong', array(), _('Description')._(': ')._('A brief description to be placed just under the title.'), false);
+	echo html_ac(html_ap() - 1);
 	if ($g->useDocmanSearch())
-		echo '<p>'._('Both fields are used by the document search engine.').'</p>';
+		echo html_e('p', array(), _('Both fields are used by the document search engine.'), false);
 
-	echo '<form name="adddata" action="'.$actionurl.'" method="post" enctype="multipart/form-data">';
-	echo '<table class="infotable">
-				<tr>
-					<td>
-						'. _('Document Title').utils_requiredField()
-					.'</td><td>'
-					.'<input pattern=".{5,}" placeholder="'._('Document Title').'" title="'.sprintf(_('(at least %s characters)'), 5).'" type="text" name="title" size="40" maxlength="255" required="required" />&nbsp;'
-					.sprintf(_('(at least %s characters)'), 5)
-					.'</td>
-				</tr>
-				<tr>
-					<td>
-						'. _('Description') .utils_requiredField()
-				 	.'</td><td>'
-						.'<input pattern=".{10,}" placeholder="'._('Description').'" title="'.sprintf(_('(at least %s characters)'), 10).'" type="text" name="description" size="50" maxlength="255" required="required" />&nbsp;'
-						.sprintf(_('(at least %s characters)'), 10)
-					.'</td>
-				</tr>
-				<tr>
-					<td>
-						'. _('Type of Document') .utils_requiredField()
-					.'</td><td>
-					<input type="radio" id="buttonFile" name="type" value="httpupload" checked="checked" required="required" />'. _('File') .
-					'<input type="radio" id="buttonUrl" name="type" value="pasteurl" required="required" />'. _('URL');
+	echo html_ao('form', array('name' => 'adddata', 'action' => $actionurl, 'method' => 'post', 'enctype' => 'multipart/form-data'));
+	echo html_ao('table', array('class' => 'infotable'));
+	echo html_ao('tr');
+	echo html_e('td', array(), _('Document Title').utils_requiredField(), false);
+	echo html_ao('td');
+	echo html_e('input', array('pattern' => '.{5,}', 'placeholder' => _('Document Title'), 'title' => sprintf(_('(at least %s characters)'), 5), 'type' => 'text', 'name' => 'title', 'size' => '40', 'maxlength' => '255', 'required' => 'required'));
+	echo html_e('span', array(), sprintf(_('(at least %s characters)'), 5), false);
+	echo html_ac(html_ap() - 2);
+	echo html_ao('tr');
+	echo html_e('td', array(), _('Description') .utils_requiredField(), false);
+	echo html_ao('td');
+	echo html_e('input', array('pattern' => '.{10,}', 'placeholder' => _('Description'), 'title' => sprintf(_('(at least %s characters)'), 10), 'type' => 'text', 'name' => 'description', 'size' => '50', 'maxlength' => '255', 'required' => 'required'));
+	echo html_e('span', array(), sprintf(_('(at least %s characters)'), 10), false);
+	echo html_ac(html_ap() - 2);
+	echo html_ao('tr');
+	echo html_e('td', array(), _('Type of Document') .utils_requiredField());
+	echo html_ao('td');
+	echo html_e('input', array('type' => 'radio', 'id' => 'buttonFile', 'name' => 'type', 'value' => 'httpupload', 'checked' => 'checked', 'required' => 'required')).html_e('span', array(), _('File'), false);
+	echo html_e('input', array('type' => 'radio', 'id' => 'buttonUrl', 'name' => 'type', 'value' => 'pasteurl', 'required' => 'required')).html_e('span', array(), _('URL'), false);
 	if (forge_get_config('use_manual_uploads')) {
-					echo '<input type="radio" id="buttonManualUpload" name="type" value="manualupload" required="required" />'. _('Already-uploaded file');
+		echo html_e('input', array('type' => 'radio', 'id' => 'buttonManualUpload', 'name' => 'type', 'value' => 'manualupload', 'required' => 'required')).html_e('span', array(), _('Already-uploaded file'), false);
 	}
 	if ($g->useCreateOnline()) {
-					echo '<input type="radio" id="buttonEditor" name="type" value="editor" required="required" />'. _('Create online');
+		echo html_e('input', array('type' => 'radio', 'id' => 'buttonEditor', 'name' => 'type', 'value' => 'editor', 'required' => 'required')).html_e('span', array(), _('Create online'), false);
 	}
-	echo '				</td>
-				</tr>
-				<tr id="filerow">
-					<td>
-						'. _('Upload File') .utils_requiredField()
-					.'</td><td>'
-						.'<input type="file" required="required" name="uploaded_data" />'.sprintf(_('(max upload size: %s)'),human_readable_bytes(util_get_maxuploadfilesize())).'
-					</td>
-				</tr>
-				<tr id="urlrow" style="display:none">
-					<td>
-						'. _('URL') . utils_requiredField()
-					.'</td><td>'
-						.'<input type="url" name="file_url" size="30" placeholder="'._('Enter a valid URL').'" pattern="ftp://.+|https?://.+" />
-					</td>
-				</tr>
-				<tr id="pathrow" style="display:none">
-					<td>
-						'. _('File') . utils_requiredField() . '</td><td>';
-
-	$incoming = forge_get_config('groupdir_prefix')."/".$g->getUnixName()."/incoming";
-	$manual_files_arr = ls($incoming, true);
-	if (count($manual_files_arr)) {
-		echo html_build_select_box_from_arrays($manual_files_arr, $manual_files_arr, 'manual_path', '');
-		echo '		<br />';
-		printf(_('Pick a file already uploaded (by SFTP or SCP) to the <a href="%2$s">project\'s incoming directory</a> (%1$s).'),
-		       $incoming, "sftp://" . forge_get_config('web_host') . $incoming . "/");
-		echo '
-					</td>
-				</tr>';
-	} else {
-		echo '		<p class="warning">';
-			printf(_('You need first to upload file in %s'),$incoming);
-		echo '		</p>';
-		echo '			</td>
-				</tr>';
+	echo html_ac(html_ap() - 2);
+	echo html_ao('tr', array('id' => 'filerow'));
+	echo html_e('td', array(), _('Upload File').utils_requiredField(), false);
+	echo html_ao('td');
+	echo html_e('input', array('type' => 'file', 'required' => 'required', 'name' => 'uploaded_data'));
+	echo html_e('span', array(), sprintf(_('(max upload size: %s)'), human_readable_bytes(util_get_maxuploadfilesize())), false);
+	echo html_ac(html_ap() - 2);
+	echo html_ao('tr', array('id' => 'urlrow', 'style' => 'display:none'));
+	echo html_e('td', array(), _('URL').utils_requiredField());
+	echo html_ao('td');
+	echo html_e('input', array('type' => 'url', 'name' => 'file_url', 'size' => '30', 'placeholder' => _('Enter a valid URL'), 'pattern' => 'ftp://.+|https?://.+'));
+	echo html_ac(html_ap() - 2);
+	echo html_ao('tr', array('id' => 'pathrow', 'style' => 'display:none'));
+	echo html_e('td', array(), _('File') . utils_requiredField(), false);
+	if (forge_get_config('use_manual_uploads')) {
+		echo html_ao('td');
+		$incoming = forge_get_config('groupdir_prefix')."/".$g->getUnixName()."/incoming";
+		$manual_files_arr = ls($incoming, true);
+		if (count($manual_files_arr)) {
+			echo html_build_select_box_from_arrays($manual_files_arr, $manual_files_arr, 'manual_path', '');
+			echo html_e('br');
+			echo html_e('span', array(), sprintf(_('Pick a file already uploaded (by SFTP or SCP) to the <a href="%1$s">project\'s incoming directory</a> (%2$s).'),
+								'sftp://'.forge_get_config('web_host').$incoming.'/', $incoming), false);
+		} else {
+			echo html_e('p', array('class' => 'warning'), printf(_('You need first to upload file in %s'),$incoming), false);
+		}
+		echo html_ac(html_ap() - 1);
 	}
-	echo '			<tr id="editnamerow" style="display:none">
-					<td>
-						'. _('File Name') . utils_requiredField()
-					.'</td><td>'
-						.'<input type="text" name="name" size="30" />
-					</td>
-				</tr>
-				<tr id="editrow" style="display:none">
-					<td colspan="2">';
+	echo html_ac(html_ap() - 1);
+	echo html_ao('tr', array('id' => 'editnamerow', 'style' => 'display:none'));
+	echo html_e('td', array(), _('File Name').utils_requiredField(), false);
+	echo html_ao('td');
+	echo html_e('input', array('type' => 'text', 'name' => 'name', 'size' => '30'));
+	echo html_ac(html_ap() - 2);
+	echo html_ao('tr', array('id' => 'editrow', 'style' => 'display:none'));
+	echo html_ao('td', array('colspan' => '2'));
 	$GLOBALS['editor_was_set_up'] = false;
 	$params = array() ;
 	/* name must be details !!! if name = data then nothing is displayed */
@@ -181,41 +170,30 @@ if ($dgf->getNested() == NULL) {
 		echo '<textarea name="details" rows="5" cols="80"></textarea>';
 	}
 	unset($GLOBALS['editor_was_set_up']);
-	echo '
-					</td>
-				</tr>';
+	echo html_ac(html_ap() - 2);
 	if ($dirid) {
-		echo '		<tr><td colspan="2"><input type="hidden" name="doc_group" value="'.$dirid.'"></td></tr>';
+		echo html_ao('tr');
+		echo html_ao('td', array('colspan' => 2));
+		echo html_e('input', array('type' => 'hidden', 'name' => 'doc_group', 'value' => $dirid));
+		echo html_ac(html_ap() - 2);
 	} else {
-		echo '
-				<tr>
-					<td>
-						'. _('Documents folder that document belongs in').'
-					</td><td>';
+		echo html_ao('tr');
+		echo html_e('td', array(), _('Documents folder that document belongs in'), false);
+		echo html_ao('td');
 		$dgh->showSelectNestedGroups($dgf->getNested(), 'doc_group', false, $dirid);
-		echo '
-					</td>
-				</tr>';
+		echo html_ac(html_ap() - 2);
 	}
 	if (forge_check_perm('docman', $group_id, 'approve')) {
-		echo '
-				<tr>
-					<td>
-						'. _('Status of that document').'
-					</td><td>';
+		echo html_ao('tr');
+		echo html_e('td', array(), _('Status of that document'), false);
+		echo html_ao('td');
 		doc_get_state_box('xzxz', 2); /**no direct deleted status */
-		echo '
-					</td>
-				</tr>';
+		echo html_ac(html_ap() - 2);
 	}
-	echo '	</table>';
-	echo '	<p>';
-	printf(_('Fields marked with %s are mandatory.'), utils_requiredField());
-	echo '	</p>';
-	echo '	<div class="docmanSubmitDiv">
-			<input type="submit" name="submit" value="'. _('Submit Information'). '" />
-		</div>
-		</form>';
+	echo html_ac(html_ap() - 1);
+	echo html_eo('p', array(), printf(_('Fields marked with %s are mandatory.'), utils_requiredField()));
+	echo html_ao('div', array('class' => 'docmanSubmitDiv'));
+	echo html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Submit Information')));
+	echo html_ac(html_ap() - 2);
 }
-
-echo '</div>';
+echo html_ac(html_ap() - 1);
