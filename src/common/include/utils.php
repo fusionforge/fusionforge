@@ -542,7 +542,7 @@ function utils_buildcheckboxarray($options, $name, $checked_array) {
  * @return	string	A string holding the HTML to mark a required field
  */
 function utils_requiredField() {
-	return '<span class="requiredfield">*</span>';
+	return html_e('span', array('class' => 'requiredfield'), '*');
 }
 
 /**
