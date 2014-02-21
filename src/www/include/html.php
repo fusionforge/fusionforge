@@ -1103,11 +1103,15 @@ function relative_date($date) {
  *		XHTML string suitable for echo'ing
  */
 function html_eo($name, $attrs = array()) {
-	global $use_tooltips;
+	global $use_tooltips, $html_autoclose_pos;
 	if (!$use_tooltips && isset($attrs['title']) && isset($attrs['class']) && preg_match('/tabtitle/', $attrs['class'])) {
 		$attrs['title'] = '';
 	}
-	$rv = '<'.$name;
+	$rv = '';
+	for ($i = 0; $i < $html_autoclose_pos; $i++) {
+		$rv .= "\t";
+	}
+	$rv .= '<'.$name;
 	foreach ($attrs as $key => $value) {
 		if (is_array($value)) {
 			$value = count($value) ? implode(" ", $value) : false;
@@ -1139,11 +1143,18 @@ function html_eo($name, $attrs = array()) {
  *		XHTML string suitable for echo'ing
  */
 function html_e($name, $attrs = array(), $content = "", $shortform = true) {
-	global $use_tooltips;
+	global $use_tooltips, $html_autoclose_pos;
 	if (!$use_tooltips && isset($attrs['title']) && isset($attrs['class']) && preg_match('/tabtitle/', $attrs['class'])) {
 		$attrs['title'] = '';
 	}
-	$rv = '<'.$name;
+	$rv = '';
+	for ($i = 0; $i < $html_autoclose_pos; $i++) {
+		$rv .= "\t";
+	}
+	if (!$shortform) {
+		$rv .= "\t";
+	}
+	$rv .= '<'.$name;
 	foreach ($attrs as $key => $value) {
 		if (is_array($value)) {
 			$value = count($value) ? implode(" ", $value) : false;
@@ -1245,6 +1256,9 @@ function html_ac($spos) {
 
 	$rv = "";
 	while ($html_autoclose_pos > $spos) {
+		for ($i = 0; $i < $html_autoclose_pos; $i++) {
+			$rv .= "\t";
+		}
 		--$html_autoclose_pos;
 		$rv .= '</'.$html_autoclose_stack[$html_autoclose_pos]['name'].'>'."\n";
 		unset($html_autoclose_stack[$html_autoclose_pos]);
