@@ -562,10 +562,6 @@ function html_build_select_box_from_arrays($vals, $texts, $select_name, $checked
 					   $show_100 = true, $text_100 = 'none',
 					   $show_any = false, $text_any = 'any', $allowed = false) {
 	$have_a_subelement = false;
-
-	if ($text_100 == 'none') {
-		$text_100 = _('None');
-	}
 	$return = '';
 
 	$rows = count($vals);
@@ -577,25 +573,31 @@ function html_build_select_box_from_arrays($vals, $texts, $select_name, $checked
 	$title = html_get_tooltip_description($select_name);
 	$id = '';
 	if ($title) {
-		$id = ' id="tracker-'.$select_name.'"';
+		$id = 'tracker-'.$select_name.'"';
 		if (preg_match('/\[\]/', $id)) {
 			$id = '';
 		}
 	}
 
-	$return .= '
-		<select'.$id.' name="'.$select_name.'" title="'.util_html_secure($title).'">';
+	$return .= html_ao('select', array('id' => $id, 'name' => $select_name, 'title' => util_html_secure($title)));
 
 	//we don't always want the default Any row shown
 	if ($show_any) {
-		$return .= '
-		<option value=""'.(($checked_val == '') ? ' selected="selected"' : '').'>'. util_html_secure($text_any) .'</option>';
+		$attrs = array('value' => '');
+		if ($checked_val)
+			$attrs['selected'] = 'selected';
+		$return .= html_e('option', $attrs, util_html_secure($text_any), false);
 		$have_a_subelement = true;
 	}
 	//we don't always want the default 100 row shown
 	if ($show_100) {
-		$return .= '
-		<option value="100"'.(($checked_val == 100) ? ' selected="selected"' : '').'>'. util_html_secure($text_100) .'</option>';
+		if ($text_100 == 'none') {
+			$text_100 = _('None');
+		}
+		$attrs = array('value' => 100);
+		if ($checked_val)
+			$attrs['selected'] = 'selected';
+		$return .= html_e('option', $attrs, util_html_secure($text_100), false);
 		$have_a_subelement = true;
 	}
 
@@ -605,16 +607,17 @@ function html_build_select_box_from_arrays($vals, $texts, $select_name, $checked
 		//  uggh - sorry - don't show the 100 row
 		//  if it was shown above, otherwise do show it
 		if (($vals[$i] != '100') || ($vals[$i] == '100' && !$show_100)) {
-			$return .= '
-				<option value="'.util_html_secure($vals[$i]).'"';
+			$attrs = array();
+			$attrs['value'] = util_html_secure($vals[$i]);
 			if ((string)$vals[$i] == (string)$checked_val) {
 				$checked_found = true;
-				$return .= ' selected="selected"';
+				$attrs['selected'] = 'selected';
 			}
 			if (is_array($allowed) && !in_array($vals[$i], $allowed)) {
-				$return .= ' disabled="disabled" class="option_disabled"';
+				$attrs['disabled'] = 'disabled';
+				$attrs['class'] = 'option_disabled';
 			}
-			$return .= '>'.util_html_secure($texts[$i]).'</option>';
+			$return .= html_e('option', $attrs, util_html_secure($texts[$i]));
 			$have_a_subelement = true;
 		}
 	}
@@ -623,18 +626,16 @@ function html_build_select_box_from_arrays($vals, $texts, $select_name, $checked
 	//	we want to preserve that value UNLESS that value was 'xzxz', the default value
 	//
 	if (!$checked_found && $checked_val != 'xzxz' && $checked_val && $checked_val != 100) {
-		$return .= '
-		<option value="'.util_html_secure($checked_val).'" selected="selected">'._('No Change').'</option>';
+		$return .= html_e('option', array('value' => util_html_secure($checked_val), 'selected' => 'selected'), _('No Change'), false);
 		$have_a_subelement = true;
 	}
 
 	if (!$have_a_subelement) {
 		/* <select></select> without <option/> in between is invalid */
-		return '<!-- select without options -->';
+		return '<!-- select without options -->'."\n";
 	}
 
-	$return .= '
-		</select>';
+	$return .= html_ac(html_ap() -1);
 	return $return;
 }
 
@@ -695,45 +696,46 @@ function html_build_select_box_sorted($result, $name, $checked_val = "xzxz", $sh
  * @param	string		$checked_array	The item that should be checked
  * @param	int		$size		The size of this box
  * @param	bool		$show_100	Whether or not to show the '100 row'
+ * @param	string		$text_100	The displayed text of the '100 row'
  * @return	string
  */
-function html_build_multiple_select_box($result, $name, $checked_array, $size = 8, $show_100 = true) {
+function html_build_multiple_select_box($result, $name, $checked_array, $size = 8, $show_100 = true, $text_100 = 'none') {
 	$checked_count = count($checked_array);
-	$return = '
-		<select name="'.$name.'" multiple="multiple" size="'.$size.'">';
+	$return = html_ao('select', array('name' => $name, 'multiple' => 'multiple', 'size' => $size));
 	if ($show_100) {
+		if ($text_100 == 'none') {
+			$text_100 = _('None');
+		}
 		/*
 			Put in the default NONE box
 		*/
-		$return .= '
-		<option value="100"';
+		$attrs = array('value' => 100);
 		for ($j = 0; $j < $checked_count; $j++) {
 			if ($checked_array[$j] == '100') {
-				$return .= ' selected="selected"';
+				$attrs['selected'] = 'selected';
 			}
 		}
-		$return .= '>'._('None').'</option>';
+		$return .= html_e('option', $attrs, $text_100, false);
 	}
 
 	$rows = db_numrows($result);
 	for ($i = 0; $i < $rows; $i++) {
 		if ((db_result($result, $i, 0) != '100') || (db_result($result, $i, 0) == '100' && !$show_100)) {
-			$return .= '
-				<option value="'.db_result($result, $i, 0).'"';
+			$attrs = array();
+			$attrs = array('value' => db_result($result, $i, 0));
 			/*
 				Determine if it's checked
 			*/
 			$val = db_result($result, $i, 0);
 			for ($j = 0; $j < $checked_count; $j++) {
 				if ($val == $checked_array[$j]) {
-					$return .= ' selected="selected"';
+					$attrs['selected'] = 'selected';
 				}
 			}
-			$return .= '>'.substr(db_result($result, $i, 1), 0, 35).'</option>';
+			$return .= html_e('option', $attrs, substr(db_result($result, $i, 1), 0, 35), false);
 		}
 	}
-	$return .= '
-		</select>';
+	$return .= html_ac(html_ap() -1);
 	return $return;
 }
 
@@ -751,8 +753,7 @@ function html_build_multiple_select_box($result, $name, $checked_array, $size = 
  */
 function html_build_multiple_select_box_from_arrays($ids, $texts, $name, $checked_array, $size = 8, $show_100 = true, $text_100 = 'none') {
 	$checked_count = count($checked_array);
-	$return = '
-		<select name="'.$name.'" multiple="multiple" size="'.$size.'">';
+	$return = html_ao('select', array('name' => $name, 'multiple' => 'multiple', 'size' => $size));
 	if ($show_100) {
 		if ($text_100 == 'none') {
 			$text_100 = _('None');
@@ -760,35 +761,33 @@ function html_build_multiple_select_box_from_arrays($ids, $texts, $name, $checke
 		/*
 			Put in the default NONE box
 		*/
-		$return .= '
-		<option value="100"';
+		$attrs = array('value' => 100);
 		for ($j = 0; $j < $checked_count; $j++) {
 			if ($checked_array[$j] == '100') {
-				$return .= ' selected="selected"';
+				$attrs['selected'] = 'selected';
 			}
 		}
-		$return .= '>'.$text_100.'</option>';
+		$return .= html_e('option', $attrs, $text_100, false);
 	}
 
 	$rows = count($ids);
 	for ($i = 0; $i < $rows; $i++) {
 		if (($ids[$i] != '100') || ($ids[$i] == '100' && !$show_100)) {
-			$return .= '
-				<option value="'.$ids[$i].'"';
+			$attrs = array();
+			$attrs = array('value' => $ids[$i]);
 			/*
 				Determine if it's checked
 			*/
 			$val = $ids[$i];
 			for ($j = 0; $j < $checked_count; $j++) {
 				if ($val == $checked_array[$j]) {
-					$return .= ' selected="selected"';
+					$attrs['selected'] = 'selected';
 				}
 			}
-			$return .= '>'.$texts[$i].' </option>';
+			$return .= html_e('option', $attrs, $texts[$i], false);
 		}
 	}
-	$return .= '
-		</select>';
+	$return .= html_ac(html_ap() -1);
 	return $return;
 }
 
@@ -801,10 +800,7 @@ function html_build_multiple_select_box_from_arrays($ids, $texts, $name, $checke
  * @return	html code for checkbox control
  */
 function html_build_checkbox($name, $value, $checked) {
-	$attrs = array();
-	$attrs['id'] = $name;
-	$attrs['name'] = $name;
-	$attrs['value'] = $value;
+	$attrs = array('id' => $name, 'name' => $name, 'value' => $value);
 	if ($checked) {
 		$attrs['checked'] = 'checked';
 	}
@@ -1119,7 +1115,7 @@ function html_eo($name, $attrs = array()) {
 		if ($value === false) {
 			continue;
 		}
-		$rv .= ' '.$key.'="'.htmlspecialchars($value).'"';
+		$rv .= ' '.$key.'="'.util_html_secure($value).'"';
 	}
 	$rv .= '>'."\n";
 	return $rv;
@@ -1162,7 +1158,7 @@ function html_e($name, $attrs = array(), $content = "", $shortform = true) {
 		if ($value === false) {
 			continue;
 		}
-		$rv .= ' '.$key.'="'.htmlspecialchars($value).'"';
+		$rv .= ' '.$key.'="'.util_html_secure($value).'"';
 	}
 	if ($content === "" && $shortform) {
 		$rv .= ' />'."\n";
