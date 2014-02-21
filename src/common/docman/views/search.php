@@ -57,7 +57,7 @@ echo html_ao('div', array('id' => 'docman_search_query_words'));
 echo html_e('span', array('id' => 'docman_search_query_label'), _('Query').utils_requiredField()._(': '));
 echo html_e('input', array('type' => 'text', 'name' => 'textsearch', 'id' => 'textsearch', 'size' => 48, 'value' => $searchString, 'required' => 'required', 'placeholder' => _('Searched words')));
 echo html_e('input', array('type' => 'submit', 'value' => _('Search')));
-echo html_ac(1);
+echo html_ac(html_ap() - 2);
 echo html_ao('div', array('id' => 'docman_search_query_ckeckbox'));
 echo html_e('input', $attrsInputSearchAll)._('With all the words');
 echo html_e('input', $attrsInputSearchOne)._('With at least one of words');
@@ -78,7 +78,7 @@ if (isset($projectIDsArray) && is_array($projectIDsArray)) {
 	echo html_e('input', $attrsInputIncludeSubprojects)._('Include child projects');
 }
 
-echo html_ac(1);
+echo html_ac(html_ap() - 1);
 echo html_ao('div', array('id' => 'docman_search_query_result'));
 if ($searchString) {
 	$mots = preg_split("/[\s,]+/",$searchString);
@@ -159,11 +159,11 @@ if ($searchString) {
 				echo util_make_link($browselink, $localProject->getPublicName(), array('title' => _('Browse document manager for this project.'), 'class' => 'tabtitle-nw')).'::';
 			}
 			echo '<i>'.$docGroupObject->getPath(true, true).'</i></p>';
-			echo html_ac(3);
+			echo html_ac(html_ap() - 2);
 		}
-		echo html_ac(2);
+		echo html_ac(html_ap() - 1);
 	}
 } elseif (getStringFromServer('REQUEST_METHOD') === 'POST') {
 	echo html_e('p', array('class' => 'warning_msg'), _('Your search is empty.'));
 }
-echo html_ac(0);
+echo html_ac(html_ap() -2);
