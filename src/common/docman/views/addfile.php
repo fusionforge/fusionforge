@@ -122,6 +122,7 @@ if ($dgf->getNested() == NULL) {
 	if ($g->useCreateOnline()) {
 		echo html_e('input', array('type' => 'radio', 'id' => 'buttonEditor', 'name' => 'type', 'value' => 'editor', 'required' => 'required')).html_e('span', array(), _('Create online'), false);
 	}
+<<<<<<< HEAD
 	echo html_ac(html_ap() - 2);
 	echo html_ao('tr', array('id' => 'filerow'));
 	echo html_e('td', array(), _('Upload File').utils_requiredField(), false);
@@ -134,9 +135,9 @@ if ($dgf->getNested() == NULL) {
 	echo html_ao('td');
 	echo html_e('input', array('type' => 'url', 'name' => 'file_url', 'size' => '30', 'placeholder' => _('Enter a valid URL'), 'pattern' => 'ftp://.+|https?://.+'));
 	echo html_ac(html_ap() - 2);
-	echo html_ao('tr', array('id' => 'pathrow', 'style' => 'display:none'));
-	echo html_e('td', array(), _('File') . utils_requiredField(), false);
 	if (forge_get_config('use_manual_uploads')) {
+		echo html_ao('tr', array('id' => 'pathrow', 'style' => 'display:none'));
+		echo html_e('td', array(), _('File') . utils_requiredField(), false);
 		echo html_ao('td');
 		$incoming = forge_get_config('groupdir_prefix')."/".$g->getUnixName()."/incoming";
 		$manual_files_arr = ls($incoming, true);
