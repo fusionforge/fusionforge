@@ -122,7 +122,6 @@ if ($dgf->getNested() == NULL) {
 	if ($g->useCreateOnline()) {
 		echo html_e('input', array('type' => 'radio', 'id' => 'buttonEditor', 'name' => 'type', 'value' => 'editor', 'required' => 'required')).html_e('span', array(), _('Create online'), false);
 	}
-<<<<<<< HEAD
 	echo html_ac(html_ap() - 2);
 	echo html_ao('tr', array('id' => 'filerow'));
 	echo html_e('td', array(), _('Upload File').utils_requiredField(), false);
@@ -149,9 +148,8 @@ if ($dgf->getNested() == NULL) {
 		} else {
 			echo html_e('p', array('class' => 'warning'), printf(_('You need first to upload file in %s'),$incoming), false);
 		}
-		echo html_ac(html_ap() - 1);
+		echo html_ac(html_ap() - 2);
 	}
-	echo html_ac(html_ap() - 1);
 	echo html_ao('tr', array('id' => 'editnamerow', 'style' => 'display:none'));
 	echo html_e('td', array(), _('File Name').utils_requiredField(), false);
 	echo html_ao('td');
