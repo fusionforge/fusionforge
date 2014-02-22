@@ -132,7 +132,7 @@ class FRSFile extends Error {
 		//	before calling this function
 		//
 		if (!is_file($file_location) || !file_exists($file_location)) {
-			$this->setError(_('FRSFile Appears to be invalid'));
+			$this->setError(_('FRSFile appears to be invalid.'));
 			return false;
 		}
 

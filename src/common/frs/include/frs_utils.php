@@ -6,7 +6,7 @@
  * Copyright 2002-2004 (c) GForge Team
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -206,10 +206,10 @@ function frs_show_package_popup ($group_id, $name='package_id', $checked_val="xz
 }
 
 function frs_add_file_from_form ($release, $type_id, $processor_id, $release_date,
-				 $userfile, $ftp_filename, $manual_filename) {
+				 $userfile, $ftp_filename, $manual_filename, $docman_fileid) {
 
-	$group_unix_name = $release->getFRSPackage()->getGroup()->getUnixName() ;
-	$incoming = forge_get_config('groupdir_prefix')."/$group_unix_name/incoming" ;
+	$group_unix_name = $release->getFRSPackage()->getGroup()->getUnixName();
+	$incoming = forge_get_config('groupdir_prefix').'/'.$group_unix_name.'/incoming';
 
 	$filechecks = false ;
 
@@ -241,6 +241,12 @@ function frs_add_file_from_form ($release, $type_id, $processor_id, $release_dat
 		$fname = $manual_filename ;
 		$move = false ;
 		$filechecks = true ;
+	} elseif ($release->getFRSPackage()->getGroup()->usesDocman() && $docman_fileid) {
+		$doc = new Document($release->getFRSPackage()->getGroup(), $docman_fileid);
+		$fname = $doc->getFilename();
+		$infile = DocumentStorage::instance()->get($docman_fileid);
+		$move = false;
+		$filechecks = true;
 	} elseif ($userfile && $userfile['error'] == UPLOAD_ERR_NO_FILE) {
 		return _('Must select a file.') ;
 	}

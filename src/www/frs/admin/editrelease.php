@@ -29,6 +29,7 @@ require_once $gfcommon.'frs/FRSPackage.class.php';
 require_once $gfcommon.'frs/FRSRelease.class.php';
 require_once $gfcommon.'frs/FRSFile.class.php';
 require_once $gfcommon.'frs/include/frs_utils.php';
+require_once $gfcommon.'docman/DocumentManager.class.php';
 
 $group_id = getIntFromRequest('group_id');
 $package_id = getIntFromRequest('package_id');
@@ -149,9 +150,10 @@ if (getStringFromRequest('step2')) {
 	$group_unix_name=group_getunixname($group_id);
 	$ftp_filename = getStringFromRequest('ftp_filename');
 	$manual_filename = getStringFromRequest('manual_filename');
+	$docman_fileid = getIntFromRequest('docman_fileid');
 
-	$ret = frs_add_file_from_form ($frsr, $type_id, $processor_id, $release_date,
-				       $userfile, $ftp_filename, $manual_filename) ;
+	$ret = frs_add_file_from_form($frsr, $type_id, $processor_id, $release_date,
+				       $userfile, $ftp_filename, $manual_filename, $docman_fileid);
 
 	if ($ret === true) {
 		$feedback = _('File Released') ;
@@ -314,6 +316,12 @@ if (forge_get_config('use_manual_uploads')) {
 	$manual_files_arr=frs_filterfiles(ls($incoming,true));
 	echo html_build_select_box_from_arrays($manual_files_arr,$manual_files_arr,'manual_filename','');
 	echo '</p>';
+}
+if ($group->usesDocman()) {
+	echo html_e('p', array(), _('Alternatively, you can pick a file available in the Documents Management tool.'), false);
+	$dm = new DocumentManager($group);
+	$dgf = new DocumentGroupFactory($group);
+	$dm->showSelectNestedGroups($dgf->getNested(), 'docman_fileid', true, 0, array(), true);
 }
 ?>
 </fieldset>

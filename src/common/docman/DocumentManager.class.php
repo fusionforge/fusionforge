@@ -26,6 +26,7 @@
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'include/User.class.php';
 require_once $gfcommon.'docman/DocumentGroup.class.php';
+require_once $gfcommon.'docman/DocumentFactory.class.php';
 
 class DocumentManager extends Error {
 
@@ -284,9 +285,10 @@ class DocumentManager extends Error {
 	 * @param	bool	$allow_none	Allow selection of "None"
 	 * @param	int	$selected_id	The ID of the group that should be selected by default (if any)
 	 * @param	array	$dont_display	Array of IDs of groups that should not be displayed
+	 * @param	bool	$display_files	Display filename instead of directory name only.
 	 * @return	string	html select box code
 	 */
-	function showSelectNestedGroups($group_arr, $select_name, $allow_none = true, $selected_id = 0, $dont_display = array()) {
+	function showSelectNestedGroups($group_arr, $select_name, $allow_none = true, $selected_id = 0, $dont_display = array(), $display_files = false) {
 		// Build arrays for calling html_build_select_box_from_arrays()
 		$id_array = array();
 		$text_array = array();
@@ -298,7 +300,7 @@ class DocumentManager extends Error {
 		}
 
 		// Recursively build the document group tree
-		$this->buildArrays($group_arr, $id_array, $text_array, $dont_display);
+		$this->buildArrays($group_arr, $id_array, $text_array, $dont_display, 0, 0, $display_files);
 
 		echo html_build_select_box_from_arrays($id_array, $text_array, $select_name, $selected_id, false);
 	}
@@ -310,10 +312,11 @@ class DocumentManager extends Error {
 	 * @param	array	$id_array	Reference to the array of ids that will be build
 	 * @param	array	$text_array	Reference to the array of group names
 	 * @param	array	$dont_display	Array of IDs of groups that should not be displayed
-	 * @param	int	$parent	The ID of the parent whose childs are being showed (0 for root groups)
-	 * @param	int	$level	The current level
+	 * @param	int	$parent		The ID of the parent whose childs are being showed (0 for root groups)
+	 * @param	int	$level		The current level
+	 * @param	bool	$display_files	Set filename instead of directory name.
 	 */
-	function buildArrays($group_arr, &$id_array, &$text_array, &$dont_display, $parent = 0, $level = 0) {
+	function buildArrays($group_arr, &$id_array, &$text_array, &$dont_display, $parent = 0, $level = 0, $display_files = false) {
 		if (!is_array($group_arr) || !array_key_exists("$parent", $group_arr)) return;
 
 		$child_count = count($group_arr["$parent"]);
@@ -325,11 +328,20 @@ class DocumentManager extends Error {
 
 			$margin = str_repeat("--", $level);
 
-			$id_array[] = $doc_group->getID();
-			$text_array[] = $margin.$doc_group->getName();
-
+			if (!$display_files) {
+				$id_array[] = $doc_group->getID();
+				$text_array[] = $margin.$doc_group->getName();
+			} else {
+				$df = new DocumentFactory($doc_group->getGroup());
+				$df->setDocGroupID($doc_group->getID());
+				$docs = $df->getDocuments();
+				foreach ($docs as $doc) {
+					$id_array[] = $doc->getID();
+					$text_array[] = $margin.$doc_group->getName().'/'.$doc->getFileName();
+				}
+			}
 			// Show childs (if any)
-			$this->buildArrays($group_arr, $id_array, $text_array, $dont_display, $doc_group->getID(), $level+1);
+			$this->buildArrays($group_arr, $id_array, $text_array, $dont_display, $doc_group->getID(), $level+1, $display_files);
 		}
 	}
 
