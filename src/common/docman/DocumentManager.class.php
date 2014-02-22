@@ -187,13 +187,13 @@ class DocumentManager extends Error {
 				}
 
 				if ($nbDocs && (!isset($nbDocsPending) || $nbDocsPending == 0) && (!isset($nbDocsHidden) || $nbDocsHidden == 0) && (!isset($nbDocsPrivate) || $nbDocsPrivate) && (!isset($nbDocsTrashed) || $nbDocsTrashed)) {
-					$nbDocsLabel = '<span class="tabtitle-nw" title="'._('Number of documents in this folder').'" >('.$nbDocs.')</span>';
+					$nbDocsLabel = html_e('span', array('class' => 'tabtitle-nw', 'title' => _('Number of documents in this folder')), '('.$nbDocs.')', false);
 				}
 				if (isset($nbDocsPending) && isset($nbDocsHidden) && isset($nbDocsPrivate)) {
-					$nbDocsLabel = '<span class="tabtitle-nw" title="'._('Number of documents in this folder per status. active/pending/hidden/private').'" >('.$nbDocs.'/'.$nbDocsPending.'/'.$nbDocsHidden.'/'.$nbDocsPrivate.')</span>';
+					$nbDocsLabel = html_e('span', array('class' => 'tabtitle-nw', 'title' => _('Number of documents in this folder per status. active/pending/hidden/private')), '('.$nbDocs.'/'.$nbDocsPending.'/'.$nbDocsHidden.'/'.$nbDocsPrivate.')', false);
 				}
 				if (isset($nbDocsTrashed)) {
-					$nbDocsLabel = '<span class="tabtitle-nw" title="'._('Number of deleted documents in this folder').'" >('.$nbDocsTrashed.')</span>';
+					$nbDocsLabel = html_e('span', array('class' => 'tabtitle-nw', 'title' => _('Number of deleted documents in this folder')), '('.$nbDocsTrashed.')', false);
 				}
 				if ($localDg->getName() != '.trash') {
 					$lititle = '';
@@ -207,16 +207,14 @@ class DocumentManager extends Error {
 						}
 						$lititle .= _('Last Modified')._(': ').relative_date($localDg->getLastModifyDate());
 					}
-					echo '<li id="leaf-'.$subGroupIdValue.'" class="'.$liclass.'">'.util_make_link($link, $localDg->getName(), array('class'=>'tabtitle-nw', 'title'=>$lititle)).$nbDocsLabel;
+					echo html_ao('li', array('id' => 'leaf-'.$subGroupIdValue, 'class' => $liclass)).util_make_link($link, $localDg->getName(), array('class'=>'tabtitle-nw', 'title'=>$lititle)).$nbDocsLabel;
 				} else {
-					echo '<li id="leaf-'.$subGroupIdValue.'" class="'.$liclass.'">'.util_make_link($link, $localDg->getName()).$nbDocsLabel;
+					echo html_ao('li', array('id' => 'leaf-'.$subGroupIdValue, 'class' => $liclass)).util_make_link($link, $localDg->getName()).$nbDocsLabel;
 				}
 				if ($dg->getSubgroup($subGroupIdValue, $stateId)) {
-					echo '<ul class="simpleTreeMenu" >';
-					$this->getTree($selecteddir, $linkmenu, $subGroupIdValue);
-					echo '</ul>';
+					echo html_e('ul', array('class' => 'simpleTreeMenu'), $this->getTree($selecteddir, $linkmenu, $subGroupIdValue), false);
 				}
-				echo '</li>';
+				echo html_ac(html_ap() -1);
 			}
 		}
 	}
