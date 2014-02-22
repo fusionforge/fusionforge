@@ -7,7 +7,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -32,7 +32,7 @@ global $g; //group object
 global $group_id; // id of the group
 global $dirid; // id of doc_group
 global $dgf; // document directory factory of this group
-global $dgh; // document directory html
+global $dm; // the Document Manager object
 
 if (!forge_check_perm('docman', $group_id, 'approve')) {
 	$return_msg= _('Document Manager Access Denied');
@@ -64,10 +64,10 @@ if ($dg->isError())
 <?php
 if ($dg->getState() == 2) {
 	$newdgf = new DocumentGroupFactory($g);
-	$dgh->showSelectNestedGroups($newdgf->getNested(), 'parent_dirid', true, false);
+	$dm->showSelectNestedGroups($newdgf->getNested(), 'parent_dirid', true, false);
 	$labelSubmit = _('Restore');
 } else {
-	$dgh->showSelectNestedGroups($dgf->getNested(), 'parent_dirid', true, $dg->getParentId(), array($dg->getID()));
+	$dm->showSelectNestedGroups($dgf->getNested(), 'parent_dirid', true, $dg->getParentId(), array($dg->getID()));
 	$labelSubmit = _('Edit');
 }
 ?>

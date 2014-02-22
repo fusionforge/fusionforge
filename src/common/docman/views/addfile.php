@@ -7,7 +7,7 @@
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2011, Roland Mas
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2013, Franck Villaume - TrivialDev
+ * Copyright 2012-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -31,6 +31,7 @@
 global $g; // group object
 global $group_id; // id of the group
 global $dirid; //id of the doc_group
+global $dm; // the Document Manager object
 
 // plugin projects-hierarchy
 $actionurl = '?group_id='.$group_id.'&action=addfile&dirid='.$dirid;
@@ -44,10 +45,6 @@ if (isset($childgroup_id) && $childgroup_id) {
 $dgf = new DocumentGroupFactory($g);
 if ($dgf->isError())
 	exit_error($dgf->getErrorMessage(), 'docman');
-
-$dgh = new DocumentGroupHTML($g);
-if ($dgh->isError())
-	exit_error($dgh->getErrorMessage(), 'docman');
 
 if (!forge_check_perm('docman', $group_id, 'submit')) {
 	$return_msg = _('Document Manager Action Denied.');
@@ -179,7 +176,7 @@ if ($dgf->getNested() == NULL) {
 		echo html_ao('tr');
 		echo html_e('td', array(), _('Documents folder that document belongs in'), false);
 		echo html_ao('td');
-		$dgh->showSelectNestedGroups($dgf->getNested(), 'doc_group', false, $dirid);
+		$dm->showSelectNestedGroups($dgf->getNested(), 'doc_group', false, $dirid);
 		echo html_ac(html_ap() - 2);
 	}
 	if (forge_check_perm('docman', $group_id, 'approve')) {

@@ -277,6 +277,33 @@ class DocumentManager extends Error {
 	}
 
 	/**
+	 * showSelectNestedGroups - Display the tree of document groups inside a <select> tag
+	 *
+	 * @param	array	$group_arr	Array of groups.
+	 * @param	string	$select_name	The name that will be assigned to the input
+	 * @param	bool	$allow_none	Allow selection of "None"
+	 * @param	int	$selected_id	The ID of the group that should be selected by default (if any)
+	 * @param	array	$dont_display	Array of IDs of groups that should not be displayed
+	 * @return	string	html select box code
+	 */
+	function showSelectNestedGroups($group_arr, $select_name, $allow_none = true, $selected_id = 0, $dont_display = array()) {
+		// Build arrays for calling html_build_select_box_from_arrays()
+		$id_array = array();
+		$text_array = array();
+
+		if ($allow_none) {
+			// First option to be displayed
+			$id_array[] = 0;
+			$text_array[] = _('None');
+		}
+
+		// Recursively build the document group tree
+		$this->buildArrays($group_arr, $id_array, $text_array, $dont_display);
+
+		echo html_build_select_box_from_arrays($id_array, $text_array, $select_name, $selected_id, false);
+	}
+
+	/**
 	 * buildArrays - Build the arrays to call html_build_select_box_from_arrays()
 	 *
 	 * @param	array	$group_arr	Array of groups.

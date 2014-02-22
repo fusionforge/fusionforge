@@ -6,9 +6,8 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright (C) 2010 Alcatel-Lucent
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2012-2013, Franck Villaume - TrivialDev
-
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -68,10 +67,6 @@ if ($df->isError())
 $dgf = new DocumentGroupFactory($g);
 if ($dgf->isError())
 	exit_error($dgf->getErrorMessage(), 'docman');
-
-$dgh = new DocumentGroupHTML($g);
-if ($dgh->isError())
-	exit_error($dgh->getErrorMessage(), 'docman');
 
 $df->setDocGroupID($dirid);
 

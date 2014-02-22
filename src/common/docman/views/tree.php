@@ -6,7 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -62,9 +62,9 @@ if (isset($projectIDsArray) && is_array($projectIDsArray)) {
 			&& forge_check_perm('docman', $groupObject->getID(), 'read')) {
 			echo '<hr>';
 			echo '<h5>'._('Child project')._(': ').util_make_link('/docman/?group_id='.$groupObject->getID(),$groupObject->getPublicName(), array('class'=>'tabtitle', 'title'=>_('Browse document manager for this project.'))).'</h5>';
-			$dm = new DocumentManager($groupObject);
+			$dmc = new DocumentManager($groupObject);
 			echo '<ul id="'.$groupObject->getUnixname().'-tree">';
-			$dm->getTree($dirid, $linkmenu);
+			$dmc->getTree($dirid, $linkmenu);
 			echo '</ul>';
 			echo '
 			<script type="text/javascript">//<![CDATA[
