@@ -65,6 +65,5 @@ if (sizeof($parent) || sizeof($childs)) {
 		}
 		echo '</ul>';
 	}
-	echo '</ul>';
 	echo $HTML->boxBottom();
 }
