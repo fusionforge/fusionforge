@@ -136,9 +136,9 @@ class Theme extends Layout {
 	function boxTop($title, $id = '') {
 		if ($id) {
 			$id = $this->toSlug($id);
-			$idid = ' id="' . $id . '"';
-			$idtitle = ' id="' . $id . '-title"';
-			$idtcont = ' id="' . $id . '-title-content"';
+			$idid = $id;
+			$idtitle = $id.'-title"';
+			$idtcont = $id.'-title-content"';
 		} else {
 			$idid = "";
 			$idtitle = "";
@@ -146,9 +146,9 @@ class Theme extends Layout {
 		}
 
 		$t_result = '';
-		$t_result .= '<div' . $idid . ' class="box-surround">';
-		$t_result .= '<div' . $idtitle . ' class="box-title">';
-		$t_result .= '<div' . $idtcont . ' class="box-title-content">'. $title .'</div>';
+		$t_result .= html_e('div', array('id' => $idid, 'class' => 'box-surround'));
+		$t_result .= html_e('div', array('id' => $idtitle, 'class' => 'box-title'));
+		$t_result .= html_e('div', array('id' => $idtcont, 'class' => 'box-title-content'), $title, false);
 		$t_result .= '</div> <!-- class="box-title" -->';
 
 		return $t_result;
@@ -164,14 +164,12 @@ class Theme extends Layout {
 	function boxMiddle($title, $id = '') {
 		if ($id) {
 			$id = $this->toSlug($id);
-			$idtitle = ' id="' . $id . '-title"';
+			$idtitle = $id.'-title"';
 		} else {
 			$idtitle = "";
 		}
 
-		$t_result ='<div' . $idtitle . ' class="box-middle">'.$title.'</div>';
-
-		return $t_result;
+		return html_e('div', array('id' => $idtitle, 'class' => 'box-middle'), $title, false);
 	}
 
 	/**
@@ -184,13 +182,12 @@ class Theme extends Layout {
 	function boxContent($content, $id = '') {
 		if ($id) {
 			$id = $this->toSlug($id);
-			$idcont = ' id="' . $id . '-content"';
+			$idcont = $id.'-content"';
 		} else {
 			$idcont = "";
 		}
 
-		$t_result ='<div' . $idcont . ' class="box-content">'.$content.'</div>';
-		return $t_result;
+		return html_e('div', array('id' => $idcont, 'class' => 'box-content'), $content, false);
 	}
 
 	/**
@@ -303,7 +300,7 @@ class Theme extends Layout {
 	 * @return	string	Html to start a submenu.
 	 */
 	function beginSubMenu() {
-		$return = '<ul class="submenu">';
+		$return = html_eo('ul', array('class' => 'submenu'));
 		return $return;
 	}
 
@@ -313,7 +310,7 @@ class Theme extends Layout {
 	 * @return	string	Html to end a submenu.
 	 */
 	function endSubMenu() {
-		$return = '</ul>';
+		$return = '</ul>'."\n";
 		return $return;
 	}
 
@@ -334,10 +331,15 @@ class Theme extends Layout {
 				$attr_arr[] = NULL;
 			}
 		}
-		for ($i=0; $i<$count; $i++)
-			$return .= "<li><span>" . util_make_link($links_arr[$i], $title_arr[$i], $attr_arr[$i]) . "</span></li>";
+		for ($i = 0; $i < $count; $i++) {
+			$return .= html_ao('li');
+			$return .= html_e('span', array(), util_make_link($links_arr[$i], $title_arr[$i], $attr_arr[$i]), false);
+			$return .= html_ac(html_ap() -1);
+		}
 
-		$return .= "<li><span>" . util_make_link($links_arr[$i], $title_arr[$i], $attr_arr[$i]) . "</span></li>";
+		$return .= html_ao('li');
+		$return .= html_e('span', array(), util_make_link($links_arr[$i], $title_arr[$i], $attr_arr[$i]), false);
+		$return .= html_ac(html_ap() -1);
 		return $return;
 	}
 
@@ -436,7 +438,6 @@ class Theme extends Layout {
 		?>
 		<script type="text/javascript">//<![CDATA[
 		jQuery(window).load(function(){
-			jQuery(".quicknews").hide();
 			setTimeout("jQuery('.feedback').hide('slow')", 5000);
 			setInterval(function() {
 					setTimeout("jQuery('.feedback').hide('slow')", 5000);

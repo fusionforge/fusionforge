@@ -42,22 +42,6 @@ class Theme extends Layout {
 		$this->addStylesheet('/themes/funky/css/theme-pages.css');
 	}
 
-	function quicknewsbutton() {
-		return "<div class='quicknews-toggle'><a href=# onclick='jQuery(\".quicknews\").slideToggle()'>news</a></div>";
-	}
-
-	function quicknews() {
-		$ret = "<div class='quicknews'>";
-		$ret .= "<ul>";
-		$ret .= "<li><h1>news de ouf</h1>hello world</li>";
-		$ret .= "<li><h1>news de ouf</h1>hello world</li>";
-		$ret .= "<li><h1>news de ouf</h1>hello world</li>";
-		$ret .= "<li><h1>news de ouf</h1>hello world</li>";
-		$ret .= "</ul>";
-		$ret .= "</div>";
-		return $ret;
-	}
-
 	function bodyHeader($params) {
 
 		if (!isset($params['h1']) && isset($params['title'])) {
@@ -315,7 +299,7 @@ class Theme extends Layout {
 	 * @return	string	Html to start a submenu.
 	 */
 	function beginSubMenu() {
-		$return = '<ul class="submenu">';
+		$return = html_eo('ul', array('class' => 'submenu'));
 		return $return;
 	}
 
@@ -325,7 +309,7 @@ class Theme extends Layout {
 	 * @return	string	Html to end a submenu.
 	 */
 	function endSubMenu() {
-		$return = '</ul>';
+		$return = '</ul>'."\n";
 		return $return;
 	}
 
@@ -346,10 +330,15 @@ class Theme extends Layout {
 				$attr_arr[] = NULL;
 			}
 		}
-		for ($i=0; $i<$count; $i++)
-			$return .= "<li><span>" . util_make_link($links_arr[$i], $title_arr[$i], $attr_arr[$i]) . "</span></li>";
+		for ($i = 0; $i < $count; $i++) {
+			$return .= html_ao('li');
+			$return .= html_e('span', array(), util_make_link($links_arr[$i], $title_arr[$i], $attr_arr[$i]), false);
+			$return .= html_ac(html_ap() -1);
+		}
 
-		$return .= "<li><span>" . util_make_link($links_arr[$i], $title_arr[$i], $attr_arr[$i]) . "</span></li>";
+		$return .= html_ao('li');
+		$return .= html_e('span', array(), util_make_link($links_arr[$i], $title_arr[$i], $attr_arr[$i]), false);
+		$return .= html_ac(html_ap() -1);
 		return $return;
 	}
 
