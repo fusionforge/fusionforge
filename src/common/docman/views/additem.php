@@ -48,41 +48,36 @@ jQuery(document).ready(function() {
 });
 //]]></script>
 
-<div id="tabs">
-<ul>
-<li><a id="tab-new-document" href="#tabs-new-document" class="tabtitle" title="<?php echo _('Submit a new document in this folder.') ?>">
-    <?php echo _('New Document') ?></a></li>
-<?php if (forge_check_perm('docman', $group_id, 'approve')) { ?>
-<li><a id="tab-new-folder" href="#tabs-new-folder" class="tabtitle" title="<?php echo _('Create a folder based on this name.') ?>">
-    <?php echo _('New Folder') ?></a></li>
-<li><a id="tab-inject-tree" href="#tabs-inject-tree" class="tabtitle" title="<?php echo _('Create a full folders tree using an compressed archive. Only ZIP format support.') ?>">
-    <?php echo _('Inject Tree') ?></a></li>
-<?php } ?>
-</ul>
-
 <?php
-echo '<div id="tabs-new-document">';
-echo '<div class="docman_div_include" id="addfile">';
-include ($gfcommon.'docman/views/addfile.php');
-echo '</div>';
-echo '</div>';
+echo html_ao('div', array('id' => 'tabs'));
+echo html_ao('ul');
+echo html_e('li', array(), util_make_link('#tabs-new-document', _('New Document'), array('id' => 'tab-new-document', 'class' => 'tabtitle', 'title' => _('Submit a new document in this folder.')), true), false);
 
 if (forge_check_perm('docman', $group_id, 'approve')) {
-	echo '<div id="tabs-new-folder">';
-	echo '<div class="docman_div_include" id="addsubdocgroup">';
-	include ($gfcommon.'docman/views/addsubdocgroup.php');
-	echo '</div>';
-	echo '</div>';
-	echo '<div id="tabs-inject-tree">';
-	echo '<div class="docman_div_include" id="zipinject">';
-	echo '<form id="injectzip" name="injectzip" method="post" action="?group_id='.$group_id.'&amp;action=injectzip&amp;dirid='.$dirid.'" enctype="multipart/form-data">';
-	echo '<p>';
-	echo '<label>' . _('Upload archive:') . ' </label><input type="file" name="uploaded_zip" required="required" />'.sprintf(_('(max upload size: %s)'),human_readable_bytes(util_get_maxuploadfilesize()));
-	echo '<input id="submitinjectzip" type="button" value="'. _('Inject Tree') .'" />';
-	echo '</p>';
-	echo '</form>';
-	echo '</div>';
-	echo '</div>';
+	echo html_e('li', array(), util_make_link('#tabs-new-folder', _('New Folder'), array('id' => 'tab-new-folder', 'class' => 'tabtitle', 'title' => _('Create a folder based on this name.')), true), false);
+	echo html_e('li', array(), util_make_link('#tabs-inject-tree', _('Inject Tree'), array('id' => 'tab-inject-tree', 'class' => 'tabtitle', 'title' => _('Create a full folders tree using an compressed archive. Only ZIP format support.')), true), false);
 }
 
-echo '</div>';
+echo html_ac(html_ap() -1);
+echo html_ao('div', array('id' => 'tabs-new-document'));
+echo html_ao('div', array('class' => 'docman_div_include', 'id' => 'addfile'));
+include ($gfcommon.'docman/views/addfile.php');
+echo html_ac(html_ap() -2);
+
+if (forge_check_perm('docman', $group_id, 'approve')) {
+	echo html_ao('div', array('id' => 'tabs-new-folder'));
+	echo html_ao('div', array('class' => 'docman_div_include', 'id' => 'addsubdocgroup'));
+	include ($gfcommon.'docman/views/addsubdocgroup.php');
+	echo html_ac(html_ap() -2);
+	echo html_ao('div', array('id' => 'tabs-inject-tree'));
+	echo html_ao('div', array('class' => 'docman_div_include', 'id' => 'zipinject'));
+	echo html_ao('form', array('id' => 'injectzip', 'name' => 'injectzip', 'method' => 'post', 'action' => '?group_id='.$group_id.'&action=injectzip&dirid='.$dirid, 'enctype' => 'multipart/form-data'));
+	echo html_ao('p');
+	echo html_e('label', array(), _('Upload archive:'), false);
+	echo html_e('input', array('type' => 'file', 'name' => 'uploaded_zip', 'required' => 'required'));
+	echo html_e('span', array(), sprintf(_('(max upload size: %s)'),human_readable_bytes(util_get_maxuploadfilesize())), false);
+	echo html_e('input', array('id' => 'submitinjectzip', 'type' => 'button', 'value' => _('Inject Tree')));
+	echo html_ac(html_ap() -4);
+}
+
+echo html_ac(html_ap() -1);
