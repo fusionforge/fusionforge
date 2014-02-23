@@ -213,7 +213,9 @@ class DocumentManager extends Error {
 					echo html_ao('li', array('id' => 'leaf-'.$subGroupIdValue, 'class' => $liclass)).util_make_link($link, $localDg->getName()).$nbDocsLabel;
 				}
 				if ($dg->getSubgroup($subGroupIdValue, $stateId)) {
-					echo html_e('ul', array('class' => 'simpleTreeMenu'), $this->getTree($selecteddir, $linkmenu, $subGroupIdValue), false);
+					echo html_ao('ul', array('class' => 'simpleTreeMenu'));
+					$this->getTree($selecteddir, $linkmenu, $subGroupIdValue);
+					echo html_ac(html_ap() - 1);
 				}
 				echo html_ac(html_ap() -1);
 			}
