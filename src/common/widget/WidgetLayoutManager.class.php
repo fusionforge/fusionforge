@@ -2,7 +2,7 @@
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013-2014, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -249,23 +249,31 @@ class WidgetLayoutManager {
 			$used_widgets[] = $data['name'];
 		}
 		// display contextual toolbar
-		echo '<ul class="widget_toolbar">';
-		$url = "/widgets/widgets.php?owner=".HTTPRequest::instance()->get('owner').
-			"&amp;layout_id=".HTTPRequest::instance()->get('layout_id');
+		echo html_ao('ul', array('class' => 'widget_toolbar'));
+		$url = '/widgets/widgets.php?owner='.HTTPRequest::instance()->get('owner').
+			'&layout_id='.HTTPRequest::instance()->get('layout_id');
 
 		$update_layout = (HTTPRequest::instance()->get('update') == 'layout');
 		if ($update_layout) {
 			// customized selected
-			echo '<li><a href="'. $url .'">'. _("Add widgets") .'</a></li>';
-			echo '<li class="current"><a href="'. $url.'&amp;update=layout' .'">'. _("Customize Layout") .'</a></li>';
+			echo html_ao('li');
+			echo util_make_link($url, _('Add widgets'));
+			echo html_ac(html_ap() - 1);
+			echo html_ao('li', array('class' => 'current'));
+			echo util_make_link($url.'&update=layout', _('Customize Layout'));
+			echo html_ac(html_ap() -1);
 			$action = 'layout';
 		} else {
 			// add selected, or default when first displayed
-			echo '<li class="current"><a href="'. $url .'">'. _("Add widgets") .'</a></li>';
-			echo '<li><a href="'. $url.'&amp;update=layout' .'">'. _("Customize Layout") .'</a></li>';
+			echo html_ao('li', array('class' => 'current'));
+			echo util_make_link($url, _('Add widgets'));
+			echo html_ac(html_ap() -1);
+			echo html_ao('li');
+			echo util_make_link($url.'&update=layout', _('Customize Layout'));
+			echo html_ac(html_ap() -1);
 			$action = 'widget';
 		}
-		echo '</ul>';
+		echo html_ac(html_ap() -1 );
 		echo '<form action="/widgets/updatelayout.php?owner='. $owner_type.$owner_id .'&amp;action='. $action .'&amp;layout_id='. $layout_id .'" method="post">';
 		if ($update_layout) {
 			?>
@@ -519,14 +527,14 @@ class WidgetLayoutManager {
 			if (count($categs)) {
 				// display the categories selector in left panel
 				foreach($categs as $c => $ws) {
-					$widget_rows[$c] = '<a class="widget-categ-switcher" id="widget-categ-switcher-'. $c .'" href="#widget-categ-'. $c .'" onClick="jQuery(\'.widget-categ-class-void\').hide();jQuery(\'.widget-categ-switcher\').removeClass(\'selected\');jQuery(\'#widget-categ-'. $c .'\').show();jQuery(\'#widget-categ-switcher-'. $c .'\').addClass(\'selected\');" ><span>'.  str_replace('_',' ', $hp->purify($c, CODENDI_PURIFIER_CONVERT_HTML))  .'</span></a>';
+					$widget_rows[$c] = html_e('a', array('class' => 'widget-categ-switcher', 'id' => 'widget-categ-switcher-'.$c, 'href' => '#widget-categ-'.$c, 'onClick' => 'jQuery(\'.widget-categ-class-void\').hide();jQuery(\'.widget-categ-switcher\').removeClass(\'selected\');jQuery(\'#widget-categ-'. $c .'\').show();jQuery(\'#widget-categ-switcher-'. $c .'\').addClass(\'selected\')'), html_e('span', array(), str_replace('_',' ', $hp->purify($c, CODENDI_PURIFIER_CONVERT_HTML))), false);
 				}
 				uksort($widget_rows, 'strnatcasecmp');
-				echo '<ul id="widget-categories">';
+				echo html_ao('ul', array('id' => 'widget-categories'));
 				foreach($widget_rows as $row) {
-					echo '<li>'. $row .'</li>';
+					echo html_e('li', array(), $row, false);
 				}
-				echo '</ul>';
+				echo html_ac(html_ap() - 1);
 			} else {
 				foreach($widgets as $widget_name) {
 					if ($widget = Widget::getInstance($widget_name)) {

@@ -1144,10 +1144,7 @@ function html_e($name, $attrs = array(), $content = "", $shortform = true) {
 		$attrs['title'] = '';
 	}
 	$rv = '';
-	for ($i = 0; $i < $html_autoclose_pos; $i++) {
-		$rv .= "\t";
-	}
-	if (!$shortform) {
+	for ($i = 0; $i < $html_autoclose_pos +1; $i++) {
 		$rv .= "\t";
 	}
 	$rv .= '<'.$name;
@@ -1250,7 +1247,7 @@ function html_ac($spos) {
 		throw new Exception($e);
 	}
 
-	$rv = "";
+	$rv = '';
 	while ($html_autoclose_pos > $spos) {
 		for ($i = 0; $i < $html_autoclose_pos; $i++) {
 			$rv .= "\t";

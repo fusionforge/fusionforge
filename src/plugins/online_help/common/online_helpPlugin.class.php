@@ -5,6 +5,7 @@
  *
  * Copyright 2008 Alain Peyrat <aljeux@free.fr>
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -82,7 +83,7 @@ class online_helpPlugin extends Plugin {
 			$guide .= 'index.html';
 		}
 
-		$guide = '<a href="javascript:help_window(\''.$guide.'\')">'._('Get Help').'</a>';
+		$guide = util_make_link('javascript:help_window(\''.$guide.'\')', _('Get Help'), array(), true);
 
 		$template = isset($params['template']) ?  $params['template'] : ' | {menu}';
 		echo str_replace('{menu}', $guide, $template);

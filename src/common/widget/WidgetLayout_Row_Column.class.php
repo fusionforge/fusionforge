@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
+ * Copyright 2014, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -35,11 +36,11 @@ class WidgetLayout_Row_Column {
         $this->contents[] = array('content' => &$c, 'is_minimized' => $is_minimized, 'display_preferences' => $display_preferences);
     }
     function display($readonly, $owner_id, $owner_type, $is_last) {
-        echo '<td style="height:10px; width:'. $this->width .'%; '. (!$is_last ? 'padding-right:20px;' : '') .'" id="'. $this->getColumnId() .'">';
+        echo html_ao('td', array('style' => 'height:10px; width:'. $this->width .'%; '. (!$is_last ? 'padding-right:20px;' : ''), 'id' => $this->getColumnId()));
         foreach ($this->contents as $key => $nop) {
             $this->contents[$key]['content']->display($this->row->layout->id, $this->id, $readonly, $this->contents[$key]['is_minimized'], $this->contents[$key]['display_preferences'], $owner_id, $owner_type);
         }
-        echo '</td>';
+        echo html_ac(html_ap() -1);
     }
     function getColumnId() {
         return 'widgetlayout_col_'. $this->id;

@@ -37,7 +37,6 @@ class Theme extends Layout {
 		$this->themeurl = util_make_url('themes/funky/');
 		$this->imgbaseurl = $this->themeurl . 'images/';
 		$this->imgroot = $this->imgbaseurl;
-
 		$this->addStylesheet('/themes/funky/css/theme.css');
 		$this->addStylesheet('/themes/funky/css/theme-pages.css');
 	}
@@ -54,41 +53,35 @@ class Theme extends Layout {
 			$params['title'] = $params['title'] . " - ".forge_get_config('forge_name');
 		}
 
-		echo '<table id="header" class="fullwidth">' . "\n";
-		echo '<tr>' . "\n";
-		echo '<td id="header-col1">' . "\n";
+		echo html_ao('table', array('id' => 'header', 'class' => 'fullwidth'));
+		echo html_ao('tr');
+		echo html_ao('td', array('id' => 'header-col1'));
 		echo util_make_link('/', html_image('/header/top-logo.png', null, null, array('alt'=>'FusionForge Home')));
-		echo '</td>' . "\n";
-		echo '<td id="header-col2">' . "\n";
+		echo html_ac(html_ap() -1);
+		echo html_ao('td', array('id' => 'header-col2'));
 
 		$items = $this->navigation->getUserLinks();
 		for ($j = 0; $j < count($items['titles']); $j++) {
-			$links[] = util_make_link($items['urls'][$j], $items['titles'][$j], array('class'=>'userlink'), true);
+			$links[] = util_make_link($items['urls'][$j], $items['titles'][$j], array('class' => 'userlink'), true);
 		}
 		echo implode(' | ', $links);
 		plugin_hook('headermenu', $params);
 
-		echo '</td>' . "\n";
-		echo '</tr>' . "\n";
-		echo '<tr>' . "\n";
-		echo '<td colspan="2" id="header-line2">' . "\n";
-		// echo $this->quicknewsbutton();
+		echo html_ac(html_ap() -2);
+		echo html_ao('tr');
+		echo html_ao('td', array('id' => 'header-line2', 'colspan' => 2));
 		$this->quickNav();
 		$this->searchBox();
-
-		echo '</td></tr>' . "\n";
-		echo '<tr><td colspan="2" id="header-news">' . "\n";
-		//echo $this->quicknews();
-		echo'</td></tr></table><!-- outer tabs -->' . "\n";
+		echo html_ac(html_ap() -3);
 		$this->outerTabs($params);
 		echo '<!-- inner tabs -->' . "\n";
-		echo '<div class="innertabs">' . "\n";
+		echo html_ao('div', array('class' => 'innertabs'));
 		if (isset($params['group']) && $params['group']) {
 			$this->projectTabs($params['toptab'], $params['group']);
 		}
 
-		echo '</div>' . "\n";
-		echo '<div id="maindiv">' . "\n";
+		echo html_ac(html_ap() -1);
+		echo html_ao('div', array('id' => 'maindiv'));
 
 		plugin_hook('message');
 
@@ -103,24 +96,25 @@ class Theme extends Layout {
 		}
 
 		if (isset($params['h1'])) {
-			echo '<h1>'.$params['h1'].'</h1>';
+			echo html_e('h1', array(), $params['h1'], false);
 		} elseif (isset($params['title'])) {
-			echo '<h1 class="hide">'.$params['title'].'</h1>';
+			echo html_e('h1', array('class' => 'hide'), $params['title'], false);
 		}
 		if (isset($params['submenu']))
 			echo $params['submenu'];
 	}
 
 	function bodyFooter($params) {
-		echo '</div><!-- id="maindiv" -->' . "\n";
+		echo html_ac(html_ap() -1).'<!-- id="maindiv" -->' . "\n";
 	}
 
 	function footer($params = array()) {
 		$this->bodyFooter($params);
-		echo html_e('div', array('class' => 'footer'));
+		echo html_ao('div', array('class' => 'footer'));
 		echo $this->navigation->getPoweredBy();
 		echo $this->navigation->getShowSource();
-		echo '<div style="clear:both"></div></div>';
+		echo '<div style="clear:both"></div>'."\n";
+		echo html_ac(html_ap() -1);
 		plugin_hook('webanalytics_url');
 		echo '</body></html>' . "\n";
 	}
@@ -145,11 +139,10 @@ class Theme extends Layout {
 		}
 
 		$t_result = '';
-		$t_result .= html_e('div', array('id' => $idid, 'class' => 'box-surround'));
-		$t_result .= html_e('div', array('id' => $idtitle, 'class' => 'box-title'));
+		$t_result .= html_ao('div', array('id' => $idid, 'class' => 'box-surround'));
+		$t_result .= html_ao('div', array('id' => $idtitle, 'class' => 'box-title'));
 		$t_result .= html_e('div', array('id' => $idtcont, 'class' => 'box-title-content'), $title, false);
-		$t_result .= '</div> <!-- class="box-title" -->';
-
+		$t_result .= html_ac(html_ap() -1);
 		return $t_result;
 	}
 
@@ -195,9 +188,7 @@ class Theme extends Layout {
 	 * @return	string
 	 */
 	function boxBottom() {
-		$t_result='</div><!-- class="box-surround" -->';
-
-		return $t_result;
+		return html_ac(html_ap() -1).'<!-- class="box-surround" -->'."\n";
 	}
 
 	/**
@@ -227,69 +218,68 @@ class Theme extends Layout {
 		global $use_tooltips;
 
 		if ($use_tooltips) {
-			?>
-			<script type="text/javascript">//<![CDATA[
-				if (typeof(jQuery(window).tipsy) == 'function') {
+			echo html_ao('script', array('type' => 'text/javascript'));
+			echo '	//<![CDATA[
+				if (typeof(jQuery(window).tipsy) == \'function\') {
 					jQuery(document).ready(
 						function() {
-							jQuery('.tabtitle').tipsy({delayIn: 500, delayOut: 0, fade: true});
-							jQuery('.tabtitle-nw').tipsy({gravity: 'nw', delayIn: 500, delayOut: 0, fade: true});
-							jQuery('.tabtitle-ne').tipsy({gravity: 'ne', delayIn: 500, delayOut: 0, fade: true});
-							jQuery('.tabtitle-w').tipsy({gravity: 'w', delayIn: 500, delayOut: 0, fade: true});
-							jQuery('.tabtitle-e').tipsy({gravity: 'e', delayIn: 500, delayOut: 0, fade: true});
-							jQuery('.tabtitle-sw').tipsy({gravity: 'sw', delayIn: 500, delayOut: 0, fade: true});
-							jQuery('.tabtitle-se').tipsy({gravity: 'se', delayIn: 500, delayOut: 0, fade: true});
+							jQuery(\'.tabtitle\').tipsy({delayIn: 500, delayOut: 0, fade: true});
+							jQuery(\'.tabtitle-nw\').tipsy({gravity: \'nw\', delayIn: 500, delayOut: 0, fade: true});
+							jQuery(\'.tabtitle-ne\').tipsy({gravity: \'ne\', delayIn: 500, delayOut: 0, fade: true});
+							jQuery(\'.tabtitle-w\').tipsy({gravity: \'w\', delayIn: 500, delayOut: 0, fade: true});
+							jQuery(\'.tabtitle-e\').tipsy({gravity: \'e\', delayIn: 500, delayOut: 0, fade: true});
+							jQuery(\'.tabtitle-sw\').tipsy({gravity: \'sw\', delayIn: 500, delayOut: 0, fade: true});
+							jQuery(\'.tabtitle-se\').tipsy({gravity: \'se\', delayIn: 500, delayOut: 0, fade: true});
 						}
 					);
 				}
-			//]]></script>
-			<?php
+			//]]>'."\n";
+			echo html_ac(html_ap() -1);
 		}
 
-		$return = '<!-- start tabs -->';
-		$return .= '<table class="tabGenerator fullwidth" ';
+		$return = '<!-- start tabs -->'."\n";
+		$attrs = array('class' => 'tabGenerator fullwidth');
 
 		if ($total_width != '100%')
-			$return .= 'style="width:' . $total_width . ';"';
+			$attrs['style'] = 'width:' . $total_width;
 
-		$return .= ">\n";
-		$return .= '<tr>';
+		$return .= html_ao('table', $attrs);
+		$return .= html_ao('tr');
 
 		$accumulated_width = 0;
 
-		for ($i=0; $i<$count; $i++) {
-			$tabwidth = intval(ceil(($i+1)*100/$count)) - $accumulated_width ;
-			$accumulated_width += $tabwidth ;
-
-			$return .= "\n";
+		for ($i = 0; $i < $count; $i++) {
+			$tabwidth = intval(ceil(($i+1)*100/$count)) - $accumulated_width;
+			$accumulated_width += $tabwidth;
 
 			// middle part
-			$return .= '<td class="tg-middle" style="width:'.$tabwidth.'%;"><a ';
-			$return .= 'id="'.md5($TABS_DIRS[$i]).'" ';
-			if ($use_tooltips && isset($TABS_TOOLTIPS[$i]))
-				$return .= 'class="tabtitle" title="'.$TABS_TOOLTIPS[$i].'" ';
-			$return .= 'href="'.$TABS_DIRS[$i].'">' . "\n";
-			$return .= '<span';
-
+			$attrs = array();
+			$attrs['class'] = 'tg-middle';
+			$attrs['style'] = 'width:'.$tabwidth.'%';
+			$return .= html_ao('td', $attrs);
+			if ($i == 0) {
+				$class_a = 'tabtitle-nw';
+			} else if ( $i == ($count - 1)) {
+				$class_a = 'tabtitle-ne';
+			} else {
+				$class_a = 'tabtitle';
+			}
+			$return .= html_ao('a', array('href' => $TABS_DIRS[$i], 'id' => md5($TABS_DIRS[$i]), 'class' => $class_a, 'title' => $TABS_TOOLTIPS[$i]));
+			$attrs = array();
 			if ($selected == $i)
-				$return .= ' class="selected"';
+				$attrs['class'] = 'selected';
 
-			$return .= '>';
-			$return .= '<span';
-
+			$return .= html_ao('span', $attrs);
+			$attrs = array();
 			if ($nested)
-				$return .= ' class="nested"';
+				$attrs['class'] = 'nested';
 
-			$return .= '>' . "\n";
-			$return .= ''.$TABS_TITLES[$i].'' . "\n";
-			$return .= '</span>';
-			$return .= '</span>' . "\n";
-			$return .= '</a></td>' . "\n";
+			$return .= html_e('span', $attrs, $TABS_TITLES[$i], false);
+			$return .= html_ac(html_ap() - 3);
 
 		}
 
-		$return .= '</tr></table><!-- end tabs -->';
-
+		$return .= html_ac(html_ap() -2).'<!-- end tabs -->'."\n";
 		return $return;
 	}
 
@@ -370,8 +360,7 @@ class Theme extends Layout {
 	 *
 	 * @return string
 	 */
-	function multiTableRow($row_attr, $cell_data, $istitle)
-	{
+	function multiTableRow($row_attr, $cell_data, $istitle) {
 		$return= '<tr class="ff" '.$row_attr;
 		if ( $istitle )
 			$return .=' align="center"';
@@ -402,8 +391,7 @@ class Theme extends Layout {
 	 * @param	string	$dirname	the dirname of the theme
 	 * @return	int		the theme id
 	 */
-	function getThemeIdFromName($dirname)
-	{
+	function getThemeIdFromName($dirname) {
 		$res = db_query_params ('SELECT theme_id FROM themes WHERE dirname=$1', array($dirname));
 		return db_result($res, 0, 'theme_id');
 	}
@@ -412,9 +400,8 @@ class Theme extends Layout {
 	 * headerJS() - creates the JS headers and calls the plugin javascript hook
 	 * @todo generalize this
 	 */
-	function headerJS()
-	{
-		echo '<script type="text/javascript" src="'. util_make_uri('/js/common.js') .'"></script>';
+	function headerJS() {
+		echo html_e('script', array('type' => 'text/javascript', 'src' => util_make_uri('/js/common.js')), '', false);
 
 		plugin_hook("javascript_file");
 
@@ -423,9 +410,10 @@ class Theme extends Layout {
 		plugin_hook("javascript", $params);
 		$javascript = $params['return'];
 		if($javascript) {
-			echo '<script type="text/javascript">//<![CDATA['."\n";
+			echo html_ao('script', array('type' => 'text/javascript')).'//<![CDATA['."\n";
 			echo $javascript;
-			echo "\n//]]></script>\n";
+			echo "\n".'//]]'."\n";
+			echo html_ac(html_ap() -1);
 		}
 		html_use_tooltips();
 		html_use_storage();
@@ -434,17 +422,16 @@ class Theme extends Layout {
 		html_use_jqueryui();
 		echo $this->getJavascripts();
 		echo $this->getStylesheets();
-		?>
-		<script type="text/javascript">//<![CDATA[
-		jQuery(window).load(function(){
-			jQuery(".quicknews").hide();
-			setTimeout("jQuery('.feedback').hide('slow')", 5000);
-			setInterval(function() {
-					setTimeout("jQuery('.feedback').hide('slow')", 5000);
-				}, 5000);
-		});
-		//]]></script>
-		<?php
+		echo html_ao('script', array('type' => 'text/javascript'));
+		echo '	//<![CDATA[
+			jQuery(window).load(function(){
+				setTimeout("jQuery(\'.feedback\').hide(\'slow\')", 5000);
+				setInterval(function() {
+						setTimeout("jQuery(\'.feedback\').hide(\'slow\')", 5000);
+					}, 5000);
+			});
+			//]]>'."\n";
+		echo html_ac(html_ap() -1);
 	}
 }
 

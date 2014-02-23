@@ -145,8 +145,8 @@ class Navigation extends Error {
 			$exact = 1;
 		}
 
-		$res .= html_eo('form', array('id' => 'searchBox', 'action' => util_make_uri('/search/'), 'method' => 'get'));
-		$res .= html_eo('div', array());
+		$res .= html_ao('form', array('id' => 'searchBox', 'action' => util_make_uri('/search/'), 'method' => 'get'));
+		$res .= html_ao('div', array());
 		$parameters = array(
 			SEARCH__PARAMETER_GROUP_ID => $group_id,
 			SEARCH__PARAMETER_ARTIFACT_ID => $atid,
@@ -158,29 +158,27 @@ class Navigation extends Error {
 		$searchManager->setParametersValues($parameters);
 		$searchEngines =& $searchManager->getAvailableSearchEngines();
 
-		$res .= html_eo('select', array('name' => 'type_of_search'));
+		$res .= html_ao('select', array('name' => 'type_of_search'));
 		for($i = 0, $max = count($searchEngines); $i < $max; $i++) {
 			$searchEngine =& $searchEngines[$i];
-			$res .= '<option value="' . $searchEngine->getType() . '"'
-				. ( $type_of_search == $searchEngine->getType() ? ' selected="selected"' : '' )
-				. '>' . $searchEngine->getLabel($parameters) . '</option>' . "\n";
+			$attrs = array('value' => $searchEngine->getType());
+			if ( $type_of_search == $searchEngine->getType())
+				$attrs['selected'] = 'selected';
+			$res .= html_e('option', $attrs, $searchEngine->getLabel($parameters), false);
 		}
-		$res .= '</select>';
+		$res .= html_ac(html_ap() - 1);
 
 		$parameters = $searchManager->getParameters();
 		foreach($parameters AS $name => $value) {
-			$res .= '<input type="hidden" value="'.$value.'" name="'.$name.'" />' . "\n";
+			$res .= html_e('input', array('type' => 'hidden', 'value' => $value, 'name' => $name));
 		}
-		$res .= '<input type="text" size="12" id="searchBox-words" name="words" value="'
-			. $defaultWords . '" required="required" />' . "\n";
-		$res .= '<input type="submit" name="Search" value="'._('Search').'" />' . "\n";
+		$res .= html_e('input', array('type' => 'text', 'size' => 12, 'id' => 'searchBox-words', 'name' => 'words', 'value' => $defaultWords, 'required' => 'required'));
+		$res .= html_e('input', array('type' => 'submit', 'name' => 'Search', 'value' => _('Search')));
 
 		if (isset($group_id) && $group_id) {
-			$res .= util_make_link('/search/advanced_search.php?group_id=' .
-					       $group_id, _('Advanced search'));
+			$res .= util_make_link('/search/advanced_search.php?group_id='.$group_id, _('Advanced search'));
 		}
-		$res .= '</div>';
-		$res .= '</form>';
+		$res .= html_ac(html_ap() - 2);
 
 		return $res;
 	}

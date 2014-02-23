@@ -40,23 +40,23 @@ class Widget_ProjectInfo extends Widget {
 		// Tag list
 		if (forge_get_config('use_project_tags')) {
 			$list_tag = list_project_tag($group_id);
-			echo '<p>'.html_image('ic/tag.png'). ' ';
+			echo html_ao('p').html_image('ic/tag.png'). ' ';
 			if ($list_tag) {
 				echo _('Tags')._(': '). $list_tag;
 			} else {
 				$project = group_get_object($group_id);
 				if (forge_check_perm ('project_admin', $project->getID())) {
-					print '<a href="/project/admin/?group_id=' . $group_id . '" >' . _('No tag defined for this project') . '</a>.';
+					echo util_make_link('/project/admin/?group_id='.$group_id, _('No tag defined for this project'));
 				}
 				else {
-					print _('No tag defined for this project');
+					echo html_e('span', array(), _('No tag defined for this project'), false);
 				}
 			}
-			echo "</p>\n";
+			echo html_ac(html_ap() - 1);
 		}
 
 		if(forge_get_config('use_trove')) {
-			print "<br />\n";
+			echo html_e('br');
 			print stripslashes(trove_getcatlisting($group_id,0,1,1))."\n";
 		}
 

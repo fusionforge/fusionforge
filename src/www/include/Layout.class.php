@@ -211,8 +211,7 @@ class Layout extends Error {
 	function getJavascripts() {
 		$code = '';
 		foreach ($this->javascripts as $js) {
-			$code .= "\t\t\t";
-			$code .= '<script type="text/javascript" src="'.$js.'"></script>'."\n";
+			$code .= html_e('script', array('type' => 'text/javascript', 'src' => $js), '', false);
 		}
 		$this->javascripts = array();
 		return $code;
@@ -224,11 +223,10 @@ class Layout extends Error {
 	function getStylesheets() {
 		$code = '';
 		foreach ($this->stylesheets as $c) {
-			$code .= "\t\t\t";
 			if ($c['media']) {
-				$code .= '<link rel="stylesheet" type="text/css" href="'.$c['css'].'" media="'.$c['media'].'" />'."\n";
+				$code .= html_e('link', array('rel' => 'stylesheet', 'type' => 'text/css', 'href' => $c['css'], 'media' => $c['media']));
 			} else {
-				$code .= '<link rel="stylesheet" type="text/css" href="'.$c['css'].'"/>'."\n";
+				$code .= html_e('link', array('rel' => 'stylesheet', 'type' => 'text/css', 'href' => $c['css']));
 			}
 		}
 		$this->stylesheets = array();
@@ -256,16 +254,14 @@ class Layout extends Error {
 	 */
 	function headerStart($params) {
 		$this->headerHTMLDeclaration();
-		?>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<?php if (isset($params['meta-description'])) { ?>
-		<meta name="description" content="<?php echo $params['meta-description'] ?>" />
-<?php } ?>
-<?php if (isset($params['meta-keywords'])) { ?>
-		<meta name="keywords" content="<?php echo $params['meta-keywords'] ?>" />
-<?php } ?>
-		<?php
+		echo html_ao('head');
+		echo html_e('meta', array('http-equiv' => 'Content-Type', 'content' => 'text/html; charset=utf-8'));
+		if (isset($params['meta-description'])) {
+			echo html_e('meta', array('name' => 'description', 'content' => $params['meta-description']));
+		}
+		if (isset($params['meta-keywords'])) {
+			echo html_e('meta', array('name' => 'keywords', 'content' => $params['meta-keywords']));
+		}
 		plugin_hook('htmlhead');
 		$this->headerTitle($params);
 		$this->headerFavIcon();
@@ -275,9 +271,7 @@ class Layout extends Error {
 		$this->headerJS();
 		$this->headerForgepluckerMeta();
 		$this->headerLinkedDataAutodiscovery();
-		?>
-	</head>
-		<?php
+		echo html_ac(html_ap() -1);
 	}
 
 	/**
@@ -346,9 +340,8 @@ class Layout extends Error {
 	 * @todo generalize this
 	 */
 	function headerJS() {
-		echo '
-			<script type="text/javascript" src="'. util_make_uri('/js/common.js') .'"></script>
-			<script type="text/javascript">/* <![CDATA[ */';
+		echo html_e('script', array('type' => 'text/javascript', 'src' => util_make_uri('/js/common.js')), '', false);
+		echo '	<script type="text/javascript">/* <![CDATA[ */';
 		plugin_hook ("javascript");
 		echo '
 			/* ]]> */</script>';
@@ -404,11 +397,8 @@ class Layout extends Error {
 		 * Forge-Identification Meta Header, Version 1.0
 		 * cf. http://home.gna.org/forgeplucker/forge-identification.html
 		 */
-		echo "\t\t\t";
 		$ff = new FusionForge();
-		printf('<meta name="Forge-Identification" content="%s:%s" />',
-		    $ff->software_type, $ff->software_version);
-		echo "\n";
+		echo html_e('meta', array('name' => 'Forge-Identification', 'content' => $ff->software_type.':'.$ff->software_version));
 	}
 
 	function bodyHeader($params){
@@ -695,10 +685,10 @@ if (isset($params['group']) && $params['group']) {
 			} else {
 				sortProjectList($groups);
 
-				echo '
-					<form id="quicknavform" name="quicknavform" action=""><div>
-					<select name="quicknav" id="quicknav" onchange="location.href=document.quicknavform.quicknav.value">
-					<option value="">'._('Quick Jump To...').'</option>';
+				echo html_ao('form', array('id' => 'quicknavform', 'name' => 'quicknavform', 'action' => ''));
+				echo html_ao('div');
+				echo html_ao('select', array('name' => 'quicknav', 'id' => 'quicknav', 'onchange' => 'location.href=document.quicknavform.quicknav.value'));
+				echo html_e('option', array('value' => ''), _('Quick Jump To...'), false);
 
 				foreach ($groups as $g) {
 					$group_id = $g->getID();
@@ -711,9 +701,7 @@ if (isset($params['group']) && $params['group']) {
 						}
 					}
 				}
-				echo '
-					</select>
-					</div></form>';
+				echo html_ac(html_ap() - 3);
 			}
 		}
 	}
@@ -1307,20 +1295,30 @@ if (isset($params['group']) && $params['group']) {
 		$element_id = 'widget_'. $widget->id .'-'. $widget->getInstanceId();
 		echo '<div class="widget" id="'. $element_id . "\">\n";
 		echo '<div class="widget_titlebar '. ($readonly?'':'widget_titlebar_handle') . "\">\n";
-		echo '<div class="widget_titlebar_title">'. $widget->getTitle() . "</div>\n";
+		echo html_e('div', array('class' => 'widget_titlebar_title'), $widget->getTitle(), false);
 		if (!$readonly) {
-			echo '<div class="widget_titlebar_close"><a href="/widgets/updatelayout.php?owner='. $owner_type.$owner_id .'&amp;action=widget&amp;name['. $widget->id .'][remove]='. $widget->getInstanceId() .'&amp;column_id='. $column_id .'&amp;layout_id='. $layout_id .'">'. $this->getPicto('ic/close.png', _('Close'), _('Close')) . "</a></div>\n";
+			echo html_ao('div', array('class' => 'widget_titlebar_close'));
+			echo util_make_link('/widgets/updatelayout.php?owner='.$owner_type.$owner_id.'&action=widget&name['.$widget->id.'][remove]='.$widget->getInstanceId().'&column_id='.$column_id.'&layout_id='.$layout_id, $this->getPicto('ic/close.png', _('Close'), _('Close')));
+			echo html_ac(html_ap() -1);
 			if ($is_minimized) {
-				echo '<div class="widget_titlebar_maximize"><a href="/widgets/updatelayout.php?owner='. $owner_type.$owner_id .'&amp;action=maximize&amp;name['. $widget->id .']='. $widget->getInstanceId() .'&amp;column_id='. $column_id .'&amp;layout_id='. $layout_id .'">'. $this->getPicto($this->_getTogglePlusForWidgets(), _('Maximize'), _('Maximize')) . "</a></div>\n";
+				echo html_ao('div', array('class' => 'widget_titlebar_maximize'));
+				echo util_make_link('/widgets/updatelayout.php?owner='.$owner_type.$owner_id.'&action=maximize&name['.$widget->id.']='.$widget->getInstanceId().'&column_id='.$column_id.'&layout_id='.$layout_id, $this->getPicto($this->_getTogglePlusForWidgets(), _('Maximize'), _('Maximize')));
+				echo html_ac(html_ap() -1);
 			} else {
-				echo '<div class="widget_titlebar_minimize"><a href="/widgets/updatelayout.php?owner='. $owner_type.$owner_id .'&amp;action=minimize&amp;name['. $widget->id .']='. $widget->getInstanceId() .'&amp;column_id='. $column_id .'&amp;layout_id='. $layout_id .'">'. $this->getPicto($this->_getToggleMinusForWidgets(), _('Minimize'), _('Minimize')) . "</a></div>\n";
+				echo html_ao('div', array('class' => 'widget_titlebar_minimize'));
+				echo util_make_link('/widgets/updatelayout.php?owner='.$owner_type.$owner_id.'&action=minimize&name['.$widget->id.']='.$widget->getInstanceId().'&column_id='.$column_id.'&layout_id='.$layout_id, $this->getPicto($this->_getToggleMinusForWidgets(), _('Minimize'), _('Minimize')));
+				echo html_ac(html_ap() -1);
 			}
 			if (strlen($widget->hasPreferences())) {
-				echo '<div class="widget_titlebar_prefs"><a href="/widgets/updatelayout.php?owner='. $owner_type.$owner_id .'&amp;action=preferences&amp;name['. $widget->id .']='. $widget->getInstanceId() .'&amp;layout_id='. $layout_id .'">'. _('Preferences') . "</a></div>\n";
+				echo html_ao('div', array('class' => 'widget_titlebar_prefs'));
+				echo util_make_link('/widgets/updatelayout.php?owner='.$owner_type.$owner_id.'&action=preferences&name['.$widget->id.']='.$widget->getInstanceId().'&layout_id='.$layout_id, _('Preferences'));
+				echo html_ac(html_ap() -1);
 			}
 		}
 		if ($widget->hasRss()) {
-			echo '<div class="widget_titlebar_rss"><a href="'.$widget->getRssUrl($owner_id, $owner_type) . "\">rss</a></div>\n";
+			echo html_ao('div', array('class' => 'widget_titlebar_rss'));
+			echo util_make_link($widget->getRssUrl($owner_id, $owner_type), 'rss');
+			echo html_ac(html_ap() -1);
 		}
 		echo "</div>\n";
 		$style = '';

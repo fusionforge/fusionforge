@@ -49,21 +49,21 @@ if (sizeof($childs)) {
 if (sizeof($parent) || sizeof($childs)) {
 	echo $HTML->boxTop(_('Linked projects'));
 	if (sizeof($parent)) {
-		echo '<ul>';
+		echo html_ao('ul');
 		$parentGroup = group_get_object($parent[0]);
-		echo '<li>'._('Parent Project')._(': ').util_make_link('/projects/'.$parentGroup->getUnixName(), $parentGroup->getPublicName(), array('class' => 'tabtitle', 'title' => _('Direct link to project'))).'</li>';
-		echo '</ul>';
+		echo html_e('li', array(), _('Parent Project')._(': ').util_make_link('/projects/'.$parentGroup->getUnixName(), $parentGroup->getPublicName(), array('class' => 'tabtitle', 'title' => _('Direct link to project'))));
+		echo html_ac(html_ap() -1);
 	}
 	if (sizeof($childs)) {
 		if (sizeof($parent))
-			echo '<hr>';
+			echo html_e('hr');
 
-		echo '<ul>';
+		echo html_ao('ul');
 		foreach ($childs as $child) {
 			$childGroup = group_get_object($child);
-			echo '<li>'._('Child project')._(': ').util_make_link('/projects/'.$childGroup->getUnixName(), $childGroup->getPublicName(), array('class' => 'tabtitle', 'title' => _('Direct link to project'))).'</li>';
+			echo html_e('li', array(), _('Child project')._(': ').util_make_link('/projects/'.$childGroup->getUnixName(), $childGroup->getPublicName(), array('class' => 'tabtitle', 'title' => _('Direct link to project'))));
 		}
-		echo '</ul>';
+		echo html_ac(html_ap() -1);
 	}
 	echo $HTML->boxBottom();
 }
