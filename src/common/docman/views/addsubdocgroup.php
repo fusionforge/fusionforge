@@ -6,7 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -36,10 +36,10 @@ if (!forge_check_perm('docman', $group_id, 'approve')) {
 }
 
 // plugin projects-hierarchy
-$actionurl = '?group_id='.$group_id.'&amp;action=addsubdocgroup&amp;dirid='.$dirid;
+$actionurl = '?group_id='.$group_id.'&action=addsubdocgroup&dirid='.$dirid;
 if (isset($childgroup_id) && $childgroup_id) {
 	$g = group_get_object($childgroup_id);
-	$actionurl .= '&amp;childgroup_id='.$childgroup_id;
+	$actionurl .= '&childgroup_id='.$childgroup_id;
 }
 
 ?>
@@ -50,16 +50,14 @@ function doItAddSubGroup() {
 }
 //]]></script>
 <?php
-echo '<div class="docmanDivIncluded">';
-echo '<form id="addsubgroup" name="addsubgroup" method="post" action="'.$actionurl.'">';
+echo html_ao('div', array('class' => 'docmanDivIncluded'));
+echo html_ao('form', array('id' => 'addsubgroup', 'name' => 'addsubgroup', 'method' => 'post', 'action' => $actionurl));
 if ($dirid) {
 	$folderMessage = _('Name of the document subfolder to create');
-	echo $folderMessage._(': ');
 } else {
 	$folderMessage = _('Name of the document folder to create');
-	echo $folderMessage._(': ');
 }
-echo '<input required="required" type="text" name="groupname" size="40" maxlength="255" placeholder="'.$folderMessage.'" />';
-echo '<input id="submitaddsubgroup" type="button" value="'. _('Create') .'" onclick="javascript:doItAddSubGroup()" />';
-echo '</form>';
-echo '</div>';
+echo html_e('span', array(), $folderMessage._(': '), false);
+echo html_e('input', array('required' => 'required', 'type' => 'text',  'name' => 'groupname', 'size' => 40, 'maxlength' => 255, 'placeholder' => $folderMessage));
+echo html_e('input', array('id' => 'submitaddsubgroup', 'type' => 'button', 'value' => _('Create'), 'onclick' => 'javascript:doItAddSubGroup()'));
+echo html_ac(html_ap() -2);

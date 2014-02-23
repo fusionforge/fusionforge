@@ -37,11 +37,11 @@ if (!forge_check_perm('docman', $group_id, 'read')) {
 	session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
 }
 
-echo '<div id="documenttree">';
+echo html_ao('div', array('id' => 'documenttree'));
 $dm = new DocumentManager($g);
-echo '<ul id="'.$g->getUnixname().'-tree">';
+echo html_ao('ul', array('id' => $g->getUnixname().'-tree'));
 $dm->getTree($dirid, $linkmenu);
-echo '</ul>';
+echo html_ac(html_ap() - 1);
 echo '
 <script type="text/javascript">//<![CDATA[
 	jQuery(document).ready(function() {
@@ -60,12 +60,12 @@ if (isset($projectIDsArray) && is_array($projectIDsArray)) {
 		$groupObject = group_get_object($projectID);
 		if ($groupObject->usesDocman() && $projectsHierarchy->getDocmanStatus($groupObject->getID())
 			&& forge_check_perm('docman', $groupObject->getID(), 'read')) {
-			echo '<hr>';
-			echo '<h5>'._('Child project')._(': ').util_make_link('/docman/?group_id='.$groupObject->getID(),$groupObject->getPublicName(), array('class'=>'tabtitle', 'title'=>_('Browse document manager for this project.'))).'</h5>';
+			echo html_e('hr');
+			echo html_e('h5', array(), _('Child project')._(': ').util_make_link('/docman/?group_id='.$groupObject->getID(),$groupObject->getPublicName(), array('class'=>'tabtitle', 'title'=>_('Browse document manager for this project.'))), false);
 			$dmc = new DocumentManager($groupObject);
-			echo '<ul id="'.$groupObject->getUnixname().'-tree">';
+			echo html_ao('ul', array('id' => $groupObject->getUnixname().'-tree'));
 			$dmc->getTree($dirid, $linkmenu);
-			echo '</ul>';
+			echo html_ac(html_ap() - 1);
 			echo '
 			<script type="text/javascript">//<![CDATA[
 				jQuery(document).ready(function() {
@@ -100,4 +100,4 @@ if (isset($childgroup_id) && $childgroup_id) {
 		//]]></script>
 	';
 }
-echo '</div>';
+echo html_ac(html_ap() - 1);

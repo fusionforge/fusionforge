@@ -26,7 +26,7 @@
 global $group_id;
 $projectsHierarchy = plugin_get_object('projects-hierarchy');
 
-echo '<h3>'._('Modify the hierarchy').'</h3>';
+echo html_e('h3', array(), _('Modify the hierarchy'), false);
 
 $childs = $projectsHierarchy->getFamily($group_id, 'child', false, 'validated');
 if (sizeof($childs)) {
