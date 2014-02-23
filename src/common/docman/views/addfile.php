@@ -42,6 +42,9 @@ if (isset($childgroup_id) && $childgroup_id) {
 	$redirecturl .= '&childgroup_id='.$childgroup_id;
 }
 
+if (!$dm)
+	$dm = new DocumentManager($g);
+
 $dgf = new DocumentGroupFactory($g);
 if ($dgf->isError())
 	exit_error($dgf->getErrorMessage(), 'docman');
