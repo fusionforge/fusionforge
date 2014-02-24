@@ -289,8 +289,7 @@ class Theme extends Layout {
 	 * @return	string	Html to start a submenu.
 	 */
 	function beginSubMenu() {
-		$return = html_eo('ul', array('class' => 'submenu'));
-		return $return;
+		return html_ao('ul', array('class' => 'submenu'));
 	}
 
 	/**
@@ -299,8 +298,7 @@ class Theme extends Layout {
 	 * @return	string	Html to end a submenu.
 	 */
 	function endSubMenu() {
-		$return = '</ul>'."\n";
-		return $return;
+		return html_ac(html_ap() -1);
 	}
 
 	/**

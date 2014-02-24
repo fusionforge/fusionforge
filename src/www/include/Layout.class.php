@@ -1293,8 +1293,8 @@ if (isset($params['group']) && $params['group']) {
 
 	function widget(&$widget, $layout_id, $readonly, $column_id, $is_minimized, $display_preferences, $owner_id, $owner_type) {
 		$element_id = 'widget_'. $widget->id .'-'. $widget->getInstanceId();
-		echo '<div class="widget" id="'. $element_id . "\">\n";
-		echo '<div class="widget_titlebar '. ($readonly?'':'widget_titlebar_handle') . "\">\n";
+		echo html_ao('div', array('class' => 'widget', 'id' => $element_id));
+		echo html_ao('div', array('class' => 'widget_titlebar '. ($readonly?'':'widget_titlebar_handle')));
 		echo html_e('div', array('class' => 'widget_titlebar_title'), $widget->getTitle(), false);
 		if (!$readonly) {
 			echo html_ao('div', array('class' => 'widget_titlebar_close'));
@@ -1320,23 +1320,23 @@ if (isset($params['group']) && $params['group']) {
 			echo util_make_link($widget->getRssUrl($owner_id, $owner_type), 'rss');
 			echo html_ac(html_ap() -1);
 		}
-		echo "</div>\n";
+		echo html_ac(html_ap() -1);
 		$style = '';
 		if ($is_minimized) {
 			$style = 'display:none;';
 		}
-		echo '<div class="widget_content" style="'. $style . "\">\n";
+		echo html_ao('div', array('class' => 'widget_content', 'style' => $style));
 		if (!$readonly && $display_preferences) {
 			echo '<div class="widget_preferences">'. $widget->getPreferencesForm($layout_id, $owner_id, $owner_type) . "</div>\n";
 		}
 		if ($widget->isAjax()) {
-			echo '<div id="'. $element_id .'-ajax">';
+			echo html_ao('div', array('id' => $element_id.'-ajax'));
 			echo '<noscript><iframe width="99%" frameborder="0" src="'. $widget->getIframeUrl($owner_id, $owner_type) .'"></iframe></noscript>';
-			echo "</div>\n";
+			echo html_ac(html_ap() -1);
 		} else {
 			echo $widget->getContent();
 		}
-		echo "</div>\n";
+		echo html_ac(html_ap() -1);
 		if ($widget->isAjax()) {
 			echo '<script type="text/javascript">/* <![CDATA[ */'."
 				jQuery(document).ready(function() {
@@ -1347,7 +1347,7 @@ if (isset($params['group']) && $params['group']) {
 						});
 			/* ]]> */</script>";
 		}
-		echo "</div>\n";
+		echo html_ac(html_ap() -1);
 	}
 
 	function _getTogglePlusForWidgets() {

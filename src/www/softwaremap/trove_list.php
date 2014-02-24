@@ -5,7 +5,7 @@
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2009, Roland Mas
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013-2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -193,9 +193,7 @@ if ( $cat === 'c' ) {
 	print "<ul>";
 	while ($row_sub = db_fetch_array($res_sub)) {
 		print "<li>";
-		print '<a href="trove_list.php?cat=c&form_cat=' . $row_sub['trove_cat_id'] . $discrim_url . '">';
-		print $row_sub['fullname'];
-		print '</a>';
+		echo util_make_link('/software/trove_list.php?cat=c&form_cat='.$row_sub['trove_cat_id'].$discrim_url, $row_sub['fullname']);
 		print '&nbsp;<em>(';
 		print sprintf(_('%s projects'), $row_sub['subprojects']?$row_sub['subprojects']:'0');
 		print ')</em>';

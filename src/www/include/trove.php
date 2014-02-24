@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -313,11 +314,9 @@ function trove_getcatlisting($group_id, $a_filter, $a_cats, $a_complete=0) {
 		if ($a_complete) {
 			for ($i=0;$i<$folders_len;$i++) {
 				if ($a_cats) {
-					$return .= '<a href="'.util_make_url ('/softwaremap/trove_list.php?cat=c&form_cat='.$folders_ids[$i].$discrim_url).'">';
-				}
-				$return .= ($folders[$i]);
-				if ($a_cats) {
-					$return .= '</a>';
+					$return .= util_make_link('/softwaremap/trove_list.php?cat=c&form_cat='.$folders_ids[$i].$discrim_url, $folders[$i]);
+				} else {
+					$return .= ($folders[$i]);
 				}
 				if ($i!=$folders_len-1) {
 					$return .= " : ";
@@ -325,11 +324,9 @@ function trove_getcatlisting($group_id, $a_filter, $a_cats, $a_complete=0) {
 			}
 		} else {
 			if ($a_cats) {
-				$return .= '<a href="'.util_make_url ('/softwaremap/trove_list.php?cat=c&form_cat='.$folders_ids[$folders_len-1].$discrim_url).'">';
-			}
-			$return .= ($folders[$folders_len-1]);
-			if ($a_cats) {
-				$return .= '</a>';
+				$return .= util_make_link('/softwaremap/trove_list.php?cat=c&form_cat='.$folders_ids[$folders_len-1].$discrim_url, $folders[$folders_len-1]);
+			} else {
+				$return .= ($folders[$folders_len-1]);
 			}
 			if ($i!=$folders_len-1) {
 				$return .= " : ";
@@ -340,13 +337,12 @@ function trove_getcatlisting($group_id, $a_filter, $a_cats, $a_complete=0) {
 			if ($filterisalreadyapplied) {
 				$return .= ' <strong>'._('(Now Filtering)').'</strong> ';
 			} else {
-				$return .= ' <a href="'.util_make_url ('/softwaremap/trove_list.php?cat=c&form_cat='.$form_cat);
 				if ($discrim_url) {
-					$return .= $discrim_url.','.$folders_ids[$folders_len-1];
+					$extraurlparam = $discrim_url.','.$folders_ids[$folders_len-1];
 				} else {
-					$return .= '&amp;discrim='.$folders_ids[$folders_len-1];
+					$extraurlparam = '&discrim='.$folders_ids[$folders_len-1];
 				}
-				$return .= '">'._('[Filter]').'</a> ';
+				$return .= util_make_link('/softwaremap/trove_list.php?cat=c&form_cat='.$form_cat.$extraurlparam, _('[Filter]'));
 			}
 		}
 		$proj_discrim_used[$folders_ids[0]] = 1;
