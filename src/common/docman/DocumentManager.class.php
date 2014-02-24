@@ -337,9 +337,13 @@ class DocumentManager extends Error {
 				$df = new DocumentFactory($doc_group->getGroup());
 				$df->setDocGroupID($doc_group->getID());
 				$docs = $df->getDocuments();
-				foreach ($docs as $doc) {
-					$id_array[] = $doc->getID();
-					$text_array[] = $margin.$doc_group->getName().'/'.$doc->getFileName();
+				if (is_array($docs)) {
+					foreach ($docs as $doc) {
+						if (!$doc->isURL()) {
+							$id_array[] = $doc->getID();
+							$text_array[] = $margin.$doc_group->getName().'/'.$doc->getFileName();
+						}
+					}
 				}
 			}
 			// Show childs (if any)
