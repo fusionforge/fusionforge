@@ -193,7 +193,7 @@ if ( $cat === 'c' ) {
 	print "<ul>";
 	while ($row_sub = db_fetch_array($res_sub)) {
 		print "<li>";
-		echo util_make_link('/software/trove_list.php?cat=c&form_cat='.$row_sub['trove_cat_id'].$discrim_url, $row_sub['fullname']);
+		echo util_make_link('/softwaremap/trove_list.php?cat=c&form_cat='.$row_sub['trove_cat_id'].$discrim_url, $row_sub['fullname']);
 		print '&nbsp;<em>(';
 		print sprintf(_('%s projects'), $row_sub['subprojects']?$row_sub['subprojects']:'0');
 		print ')</em>';
