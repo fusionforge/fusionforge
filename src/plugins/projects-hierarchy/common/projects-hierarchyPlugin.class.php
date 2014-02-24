@@ -182,7 +182,7 @@ class projects_hierarchyPlugin extends Plugin {
 				$return .= html_ao('ul', array('class' => 'simpleTreeMenu'));
 			}
 			foreach ($leafs as $leaf) {
-				$return .= html_ao('li', array('id' => 'leaf-'.$leaf)).util_make_link('/projects/'.group_getunixname($leaf), group_getname($leaf));
+				$return .= html_ao('li', array('id' => 'leaf-'.$leaf)).util_make_link_g(group_getunixname($leaf), $leaf, group_getname($leaf));
 				$return .= $this->getTree($leaf, 'child');
 				$return .= html_ac(html_ap() - 1);
 			}
@@ -194,6 +194,7 @@ class projects_hierarchyPlugin extends Plugin {
 	}
 
 	function showTree() {
+		echo html_ao('div', array('id' => 'project-hierarchy-tree'));
 		echo html_ao('ul', array('id' => 'tree'));
 		echo $this->getTree();
 		echo html_ac(html_ap() -1);
@@ -204,7 +205,7 @@ class projects_hierarchyPlugin extends Plugin {
 				}
 			})
 			//]]>'."\n";
-		echo html_ac(html_ap() -1);
+		echo html_ac(html_ap() - 2);
 	}
 
 	/**
