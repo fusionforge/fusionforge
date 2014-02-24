@@ -153,80 +153,58 @@ class projects_hierarchyPlugin extends Plugin {
 	}
 
 	function displayHierarchy() {
-		$tree = $this->buildTree();
-		$displayTree = $this->affTree($tree, 0);
-		$this->dTreeJS();
-		echo $displayTree;
+		$this->getJS();
+		$this->showTree();
 		return true;
 	}
 
-	function dTreeJS() {
-		echo '<link rel="stylesheet" href="/plugins/projects-hierarchy/dtree.css" type="text/css" />
-			<script type="text/javascript" src="/plugins/projects-hierarchy/dtree.js"></script>';
+	function getJS() {
+		global $HTML;
+		html_use_simplemenu();
+		echo $HTML->getJavascripts();
+		echo $HTML->getStylesheets();
 	}
 
-	function buildTree() {
-		global $project_name;
-		$res = db_query_params('select p1.group_id as father_id,p1.unix_group_name as father_unix_name,p1.group_name as father_name,p2.group_id as son_id,p2.unix_group_name as son_unix_name,p2.group_name as son_name
-					from groups as p1,groups as p2,plugin_projects_hierarchy_relationship
-					where p1.group_id=plugin_projects_hierarchy_relationship.project_id
-					and p2.group_id=plugin_projects_hierarchy_relationship.sub_project_id
-					and plugin_projects_hierarchy_relationship.status=$1
-					and (select tree from plugin_projects_hierarchy where project_id = p2.group_id)
-					order by father_name, son_name',
-					array('t'));
-		echo db_error();
-		// construction du tableau associatif
-		// key = name of the father
-		// value = list of sons
-		$tree = array();
-		while ($row = db_fetch_array($res)) {
-			if (forge_check_perm('project_read', $row['father_id']) && forge_check_perm('project_read', $row['son_id'])) {
-				$tree[$row['father_id']][] = $row['son_id'];
-				//get the unix name of the project
-				$project_name[$row['father_id']][0] = $row['father_name'];
-				$project_name[$row['son_id']][0] = $row['son_name'];
-				$project_name[$row['father_id']][1] = $row['father_unix_name'];
-				$project_name[$row['son_id']][1] = $row['son_unix_name'];
+	function getTree($start = 0, $order = 'root') {
+		$leafs = $this->getFamily($start, $order, false, 'validated');
+		for ($i = 0; $i < count($leafs); $i++) {
+			if (!forge_check_perm('project_read', $leafs[$i])) {
+				unset($leafs[$i]);
 			}
 		}
-		return $tree;
+		$leafs = array_values($leafs);
+		if ($order == 'root' && !count($leafs)) {
+			return html_e('p', array('class' => 'information'), _('No Tree to display.'));
+		}
+		if (count($leafs)) {
+			$return = '';
+			if ($start) {
+				$return .= html_ao('ul', array('class' => 'simpleTreeMenu'));
+			}
+			foreach ($leafs as $leaf) {
+				$return .= html_ao('li', array('id' => 'leaf-'.$leaf)).util_make_link('/projects/'.group_getunixname($leaf), group_getname($leaf));
+				$return .= $this->getTree($leaf, 'child');
+				$return .= html_ac(html_ap() - 1);
+			}
+			if ($start) {
+				$return .= html_ac(html_ap() - 1);
+			}
+			return $return;
+		}
 	}
 
-	function affTree($tree, $lvl) {
-		global $project_name;
-		$returnTree = '';
-
-		$arbre = array();
-		$cpt_pere = 0;
-
-		while (list($key, $sons) = each($tree)) {
-			// Really don't know why there is a warning there, and added @
-			if(@!$arbre[$key] != 0){
-				$arbre[$key] = 0;
-			}
-			$cpt_pere = $key;
-			foreach ($sons as $son) {
-				$arbre[$son] = $cpt_pere;
-			}
-		}
-
-		if (sizeof($arbre)) {
-			$returnTree .= '<table ><tr><td>';
-			$returnTree .= '<script type="text/javascript">';
-			$returnTree .= 'd = new dTree(\'d\');';
-			$returnTree .= 'd.add(0,-1,\'Project Hierarchy Tree\');';
-			reset($arbre);
-			//construction automatique de l'arbre format : (num_fils, num_pere,nom,nom_unix)
-			while (list($key2, $sons2) = each($arbre)) {
-				$returnTree .= "d.add('".$key2."','".$sons2."','".$project_name[$key2][0]."','".util_make_url( '/projects/'.$project_name[$key2][1] .'/', $project_name[$key2][1] ) ."');";
-			}
-
-			$returnTree .= 'document.write(d);';
-			$returnTree .= '</script>';
-			$returnTree .= '</td></tr></table>';
-		}
-		return $returnTree;
+	function showTree() {
+		echo html_ao('ul', array('id' => 'tree'));
+		echo $this->getTree();
+		echo html_ac(html_ap() -1);
+		echo html_ao('script', array('type' => 'text/javascript')).'//<![CDATA['."\n";
+		echo 'jQuery(document).ready(function() {
+				if (typeof(jQuery(\'#tree\').simpleTreeMenu) != "undefined") {
+					jQuery(\'#tree\').simpleTreeMenu();
+				}
+			})
+			//]]>'."\n";
+		echo html_ac(html_ap() -1);
 	}
 
 	/**
@@ -272,6 +250,12 @@ class projects_hierarchyPlugin extends Plugin {
 				if (isset($statusCondition))
 					$qpa = db_construct_qpa($qpa, ' AND status = $1', array($statusCondition));
 
+				$res = db_query_qpa($qpa);
+				break;
+			}
+			case "root": {
+				$qpa = db_construct_qpa(false, 'SELECT DISTINCT project_id as id FROM plugin_projects_hierarchy_relationship',
+							array());
 				$res = db_query_qpa($qpa);
 				break;
 			}
