@@ -120,7 +120,7 @@ function html_feedback_bottom($feedback) {
  * @return	string
  */
 function html_blankimage($height, $width) {
-	html_abs_image("/images/blank.png", $width, $height);
+	return html_abs_image("/images/blank.png", $width, $height);
 }
 
 /**
