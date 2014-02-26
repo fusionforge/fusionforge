@@ -49,12 +49,16 @@ $sql = "SELECT l.*
 $res = db_query_params($sql,array('u', $user->getID()));
 $layout_id = db_result($res, 0 , 'id');
 
-echo '<ul class="widget_toolbar">';
-$url = "/widgets/widgets.php?owner=u".$user->getID().
-	"&amp;layout_id=".$layout_id;
-echo '	<li ><a href="'. $url .'">'. _("Add widgets") .'</a></li>';
-echo '	<li><a href="'. $url.'&amp;update=layout' .'">'. _("Customize Layout") .'</a></li>';
-echo '</ul>';
+echo html_ao('ul', array('class' => 'widget_toolbar'));
+$url = '/widgets/widgets.php?owner=u'.$user->getID().'&layout_id='.$layout_id;
+$labels = array(_('Add widgets'), _('Customize Layout'));
+$urls = array($url, $url.'&update=layout');
+for($i = 0; $i < count($urls); $i++) {
+	echo html_ao('li');
+	echo util_make_link($urls[$i], $labels[$i]);
+	echo html_ac(html_ap() -1);
+}
+echo html_ac(html_ap() - 1);
 
 $lm = new WidgetLayoutManager();
 $lm->displayLayout($user->getID(), WidgetLayoutManager::OWNER_TYPE_USER);
