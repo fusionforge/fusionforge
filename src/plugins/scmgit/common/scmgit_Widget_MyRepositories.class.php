@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2012-2013, Franck Villaume - TrivialDev
+ * Copyright 2012-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -48,7 +48,7 @@ class scmgit_Widget_MyRepositories extends Widget {
 			$returnhtml = '<table>';
 			foreach ($GitRepositories as $GitRepository) {
 				$project = group_get_object($GitRepository);
-				$returnhtml .= '<tr><td><tt>git clone git+ssh://'.$user->getUnixName().'@' . $scmgitplugin->getBoxForProject($project) .'/'. forge_get_config('scm_root', 'scmgit') .'/'. $project->getUnixName() .'/users/'. $user->getUnixName() .'.git</tt></p></td>'.
+				$returnhtml .= '<tr><td><tt>git clone git+ssh://'.$user->getUnixName().'@' . $scmgitplugin->getBoxForProject($project) .'/'. forge_get_config('scm_root', 'scmgit') .'/'. $project->getUnixName() .'/users/'. $user->getUnixName() .'.git</tt></td>'.
 						'<td>'.util_make_link('/scm/browser.php?group_id='.$project->getID().'&user_id='.$user->getID(), _('Browse Git Repository')).'</td><tr>';
 			}
 			$returnhtml .= '</table>';
