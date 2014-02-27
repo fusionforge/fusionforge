@@ -143,12 +143,23 @@ jQuery(document).ready(function() {
 <?php
 $count=db_numrows($ah->getMessages());
 $nb = $count? ' ('.$count.')' : '';
+$pm = new PluginManager();
+$pluginsListeners = $pm->GetHookListeners('artifact_extra_detail');
+$pluginfound = false;
+foreach ($pluginsListeners as $pluginsListener) {
+	if ($ath->Group->usesPlugin($pluginsListener)) {
+		$pluginfound = true;
+		break;
+	}
+}
 ?>
 <div id="tabber">
 	<ul>
 	<li><a href="#tabber-comments"><?php echo _('Comments'); ?></a></li>
 	<li><a href="#tabber-attachments"><?php echo _('Attachments'); ?></a></li>
+	<?php if ($pluginfound) { ?>
 	<li><a href="#tabber-commits"><?php echo _('Commits'); ?></a></li>
+	<?php } ?>
 	<li><a href="#tabber-changes"><?php echo _('Changes'); ?></a></li>
 	</ul>
 	<div id="tabber-comments" class="tabbertab" title="<?php echo _('Comments').$nb; ?>">
@@ -196,6 +207,9 @@ $nb = $count? ' ('.$count.')' : '';
 		?>
 	</table>
 	</div>
+<?php
+	if ($pluginfound) {
+?>
 	<div id="tabber-commits" class="tabbertab" title="<?php echo _('Commits'); ?>" >
 	<table width="80%">
 	<tr><td colspan="2"><!-- dummy in case the hook is empty --></td></tr>
@@ -206,6 +220,9 @@ $nb = $count? ' ('.$count.')' : '';
 		?>
 	</table>
 	</div>
+<?php
+	}
+?>
 	<div id="tabber-changes" class="tabbertab" title="<?php echo _('Changes'); ?>">
 		<?php $ah->showHistory(); ?>
 	</div>
