@@ -264,19 +264,18 @@ class Theme extends Layout {
 			} else {
 				$class_a = 'tabtitle';
 			}
-			$return .= html_ao('a', array('href' => $TABS_DIRS[$i], 'id' => md5($TABS_DIRS[$i]), 'class' => $class_a, 'title' => $TABS_TOOLTIPS[$i]));
+			$return .= html_ao('a', array('href' => $TABS_DIRS[$i], 'id' => md5($TABS_DIRS[$i])));
 			$attrs = array();
 			if ($selected == $i)
 				$attrs['class'] = 'selected';
 
 			$return .= html_ao('span', $attrs);
-			$attrs = array();
+			$attrs = array('title' => $TABS_TOOLTIPS[$i], 'class' => $class_a);
 			if ($nested)
-				$attrs['class'] = 'nested';
+				$attrs['class'] .= ' nested';
 
 			$return .= html_e('span', $attrs, $TABS_TITLES[$i], false);
 			$return .= html_ac(html_ap() - 3);
-
 		}
 
 		$return .= html_ac(html_ap() -2).'<!-- end tabs -->'."\n";
