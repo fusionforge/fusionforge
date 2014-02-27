@@ -3,6 +3,7 @@
  * FusionForge login form functions
  *
  * Copyright 2011, Roland Mas
+ * Copyright 2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -19,8 +20,6 @@
  * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
-use_javascript('/tabber/tabber.js');
 
 function validate_return_to(&$return_to = '/') {
 	$newrt = '/';
@@ -75,21 +74,39 @@ function display_login_form($return_to = '/', $triggered = false, $full_page = f
 
 	if (count ($params['html_snippets']) > 1) {
 		$use_tabber = true;
-		echo '<div id="tabber" class="tabber">';
+		html_use_jqueryui();
+		echo $HTML->getJavascripts();
+		echo $HTML->getStylesheets();
+		echo '
+			<script type="text/javascript">//<![CDATA[
+			jQuery(document).ready(function() {
+				jQuery("#tabber").tabs();
+			});
+			//]]></script>';
+		echo '<div id="tabber">';
 	} else {
 		$use_tabber = false;
 	}
 
+	$htmlCodeUl = '<ul>';
+	$htmlCode = '';
 	foreach ($params['html_snippets'] as $p => $s) {
 		$plugin = plugin_get_object($p);
 		if ($use_tabber) {
-			echo '<div class="tabbertab" title="'.$plugin->text.'">';
+			$htmlCodeUl .= '<li><a href="#tabber-'.$plugin->name.'">'.$plugin->text.'</a></li>';
+			$htmlCode .= '<div id="tabber-'.$plugin->name.'" class="tabbertab" title="'.$plugin->text.'">';
 		}
-		echo $s;
+		$htmlCode .= $s;
 		if ($use_tabber) {
-			echo '</div>';
+			$htmlCode .= '</div>';
 		}
 	}
+	$htmlCodeUl .= '</ul>';
+	if ($use_tabber) {
+		echo $htmlCodeUl;
+	}
+
+	echo $htmlCode;
 
 	if ($use_tabber) {
 		echo '</div>';
