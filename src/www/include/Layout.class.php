@@ -182,6 +182,9 @@ class Layout extends Error {
 					$js .= '?'.date ("U", filemtime($filename));
 				}
 			}
+			if (forge_get_config('url_prefix')){
+				$js = forge_get_config('url_prefix').$js;
+			}
 			$this->javascripts[] = $js;
 		}
 	}
@@ -200,6 +203,9 @@ class Layout extends Error {
 				if (file_exists($filename)) {
 					$css .= '?'.date ("U", filemtime($filename));
 				}
+			}
+			if (forge_get_config('url_prefix')){
+				$css = forge_get_config('url_prefix').$css;
 			}
 			$this->stylesheets[] = array('css' => $css, 'media' => $media);
 		}
