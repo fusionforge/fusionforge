@@ -3,7 +3,7 @@
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
  * Copyright 2010, Franck Villaume - Capgemini
  * Copyright 2013, French Ministry of National Education
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013-2014, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -57,7 +57,7 @@ class Widget_MyProjects extends Widget {
 			foreach ($groups as $g) {
 				$i++;
 				$html_my_projects .= '
-				<tr '. $HTML->boxGetAltRowStyle($i) .'"><td style="width:99%">'.
+				<tr '. $HTML->boxGetAltRowStyle($i) .'><td style="width:99%">'.
 					'<a href="/projects/'. $g->getUnixName() .'/">'.
 					$g->getPublicName().'</a>';
 

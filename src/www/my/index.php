@@ -5,7 +5,7 @@
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2002-2004, GForge Team
  * Copyright 2009, Roland Mas
- * Copyright 2011-2013, Franck Villaume - TrivialDev
+ * Copyright 2011-2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -37,7 +37,6 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 }
 
 $user = session_get_user();
-use_javascript('/tabber/tabber.js');
 html_use_jqueryui();
 site_user_header(array('title'=>sprintf(_('Personal Page for %s'), $user->getRealName())));
 

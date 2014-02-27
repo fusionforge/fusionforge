@@ -181,7 +181,7 @@ addDagRPMForgeYumRepo() {
 # URL: http://rpmforge.net/
 [dag-rpmforge]
 name = Red Hat Enterprise $targetversion - RPMforge.net - dag
-baseurl = $rpm_repo/el$targetversion/en/\$basearch/dag
+baseurl = $rpm_repo/$targetversion/en/\$basearch/dag
 enabled = 0
 protect = 0
 gpgcheck = 0

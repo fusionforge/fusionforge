@@ -106,7 +106,7 @@ class Widget_MyTasks extends Widget {
                     if (!$hide_now) {
 
                     $html .= '
-                    <tr class=priority"'.db_result($result2,$i,'priority').
+                    <tr class="priority'.db_result($result2,$i,'priority').
                         '"><td class="small"><a href="/pm/task.php/?func=detailtask&amp;project_task_id='.
                         db_result($result2, $i, 'project_task_id').'&amp;group_id='.
                         $group_id.'&amp;group_project_id='.$group_project_id.

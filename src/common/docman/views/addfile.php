@@ -138,27 +138,28 @@ if ($dgf->getNested() == NULL) {
 					.'</td><td>'
 						.'<input type="url" name="file_url" size="30" placeholder="'._('Enter a valid URL').'" pattern="ftp://.+|https?://.+" />
 					</td>
-				</tr>
-				<tr id="pathrow" style="display:none">
+				</tr>';
+	if (forge_get_config('use_manual_uploads')) {
+		echo '		<tr id="pathrow" style="display:none">
 					<td>
 						'. _('File') . utils_requiredField() . '</td><td>';
-
-	$incoming = forge_get_config('groupdir_prefix')."/".$g->getUnixName()."/incoming";
-	$manual_files_arr = ls($incoming, true);
-	if (count($manual_files_arr)) {
-		echo html_build_select_box_from_arrays($manual_files_arr, $manual_files_arr, 'manual_path', '');
-		echo '		<br />';
-		printf(_('Pick a file already uploaded (by SFTP or SCP) to the <a href="%2$s">project\'s incoming directory</a> (%1$s).'),
-		       $incoming, "sftp://" . forge_get_config('web_host') . $incoming . "/");
-		echo '
-					</td>
-				</tr>';
-	} else {
-		echo '		<p class="warning">';
-			printf(_('You need first to upload file in %s'),$incoming);
-		echo '		</p>';
-		echo '			</td>
-				</tr>';
+		$incoming = forge_get_config('groupdir_prefix')."/".$g->getUnixName()."/incoming";
+		$manual_files_arr = ls($incoming, true);
+		if (count($manual_files_arr)) {
+			echo html_build_select_box_from_arrays($manual_files_arr, $manual_files_arr, 'manual_path', '');
+			echo '		<br />';
+			printf(_('Pick a file already uploaded (by SFTP or SCP) to the <a href="%2$s">project\'s incoming directory</a> (%1$s).'),
+			$incoming, "sftp://" . forge_get_config('web_host') . $incoming . "/");
+			echo '
+						</td>
+					</tr>';
+		} else {
+			echo '		<p class="warning">';
+				printf(_('You need first to upload file in %s'),$incoming);
+			echo '		</p>';
+			echo '			</td>
+					</tr>';
+		}
 	}
 	echo '			<tr id="editnamerow" style="display:none">
 					<td>

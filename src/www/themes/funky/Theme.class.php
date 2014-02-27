@@ -440,7 +440,6 @@ class Theme extends Layout {
 		}
 		html_use_tooltips();
 		html_use_storage();
-		html_use_simplemenu();
 		html_use_coolfieldset();
 		html_use_jqueryui();
 		echo $this->getJavascripts();

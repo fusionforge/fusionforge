@@ -62,7 +62,7 @@ function display_login_form($return_to = '/', $triggered = false, $full_page = f
 			session_redirect_external($urls[0]);
 		}
 
-		$HTML->header(array('title'=>'Login'));
+		$HTML->header(array('title'=>_('Login')));
 	}
 
 	if ($triggered) {

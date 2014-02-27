@@ -5,7 +5,7 @@
  * Copyright 2002 GForge, LLC
  * Copyright 2010, Franck Villaume - Capgemini
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013 Franck Villaume - TrivialDev
+ * Copyright 2013-2014 Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -71,7 +71,7 @@ class DocumentGroupHTML extends Error {
 		if ($allow_none) {
 			// First option to be displayed
 			$id_array[] = 0;
-			$text_array[] = "(None)";
+			$text_array[] = _('None');
 		}
 
 		// Recursively build the document group tree

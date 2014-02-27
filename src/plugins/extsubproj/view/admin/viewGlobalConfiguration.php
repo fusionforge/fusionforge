@@ -1,6 +1,6 @@
 <?php
 /**
- * Projects Hierarchy plugin
+ * extsubproj plugin
  *
  * Copyright 2011, Franck Villaume - Capgemini
  * http://fusionforge.org

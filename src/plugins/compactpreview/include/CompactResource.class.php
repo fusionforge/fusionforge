@@ -85,23 +85,23 @@ class UserCompactResource extends CompactResource {
 
 		// invoke user_logo hook
 		$logo_params = array('user_id' => $user_id, 'size' => $this->params['size'], 'content' => '');
-        plugin_hook_by_reference('user_logo', $logo_params);
+		plugin_hook_by_reference('user_logo', $logo_params);
 
-        $html = '';
-        // construct a link that is the base for a hover popup (see oslcTooltip.js)
-        //$url = '<a class="resourcePopupTrigger" href="'. util_make_url_u ($username, $user_id) .
+		$html = '';
+		// construct a link that is the base for a hover popup (see oslcTooltip.js)
+		//$url = '<a class="resourcePopupTrigger" href="'. util_make_url_u ($username, $user_id) .
 		//		'" rel="user,' . $username . '">'. $username . '</a>';
 		$resource_url = util_make_url_u ($username, $user_id);
 
-        //$url = '<a class="resourcePopupTrigger" href="'. $resource_url .
-        //				'" rel="'. $resource_url .'">'. $username . '</a>';
+		//$url = '<a class="resourcePopupTrigger" href="'. $resource_url .
+		//				'" rel="'. $resource_url .'">'. $username . '</a>';
 		$css_class = $this->getCssClass();
 
-        $url = '<a class="'. $css_class .
-        		'" href="'. $resource_url .'">'. $username .'</a>';
-        if ($logo_params['content']) {
-        	$html = $logo_params['content'] . $url .'<div class="new_line"></div>';
-        }
+		$url = '<a class="'. $css_class .
+				'" href="'. $resource_url .'">'. $username .'</a>';
+		if ($logo_params['content']) {
+			$html = $logo_params['content'] . $url .'<div class="new_line"></div>';
+		}
 		else {
 			$html = $url;
 		}
