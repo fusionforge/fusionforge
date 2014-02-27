@@ -25,8 +25,6 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-use_javascript('/tabber/tabber.js');
-
 global $ath;
 global $ah;
 global $group_id;
@@ -41,12 +39,18 @@ function gettipspan($idpart, $content) {
 	$content . '</span>';
 }
 
+html_use_jqueryui();
 html_use_coolfieldset();
 $ath->header(array ('title'=> $ah->getStringID().' '. $ah->getSummary(), 'atid'=>$ath->getID()));
 
 echo notepad_func();
 
 ?>
+<script type="text/javascript">//<![CDATA[
+jQuery(document).ready(function() {
+	jQuery("#tabber").tabs();
+});
+//]]></script>
 <form id="trackermodform" action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&amp;atid=<?php echo $ath->getID(); ?>" enctype="multipart/form-data" method="post">
 <input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>" />
 <input type="hidden" name="func" value="postmod" />
@@ -208,12 +212,32 @@ echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 		</div>
 	</td></tr>
 </table>
-<div id="tabber" class="tabber">
+<div id="tabber" >
 <?php
 $count=db_numrows($ah->getMessages());
 $nb = $count? ' ('.$count.')' : '';
+$pm = new PluginManager();
+$pluginsListeners = $pm->GetHookListeners('artifact_extra_detail');
+$pluginfound = false;
+foreach ($pluginsListeners as $pluginsListener) {
+	if ($ath->Group->usesPlugin($pluginsListener)) {
+		$pluginfound = true;
+		break;
+	}
+}
 ?>
-<div class="tabbertab" title="<?php echo _('Comments').$nb; ?>">
+	<ul>
+	<li><a href="#tabber-comments"><?php echo _('Comments'); ?></a></li>
+	<?php if ($group->usesPM()) { ?>
+	<li><a href="#tabber-tasks"><?php echo _('Related Tasks'); ?></a></li>
+	<?php } ?>
+	<li><a href="#tabber-attachments"><?php echo _('Attachments'); ?></a></li>
+	<?php if ($pluginfound) { ?>
+	<li><a href="#tabber-commits"><?php echo _('Commits'); ?></a></li>
+	<?php } ?>
+	<li><a href="#tabber-changes"><?php echo _('Changes'); ?></a></li>
+	</ul>
+<div id="tabber-comments" class="tabbertab" title="<?php echo _('Comments').$nb; ?>">
 <table width="80%">
 	<tr><td colspan="2">
 		<br /><strong><?php echo _('Use Canned Response')._(':'); ?></strong><br />
@@ -252,7 +276,7 @@ $ah->showMessages();
 <?php
 if ($group->usesPM()) {
 ?>
-<div class="tabbertab" title="<?php echo _('Related Tasks'); ?>">
+<div id="tabber-tasks" class="tabbertab" title="<?php echo _('Related Tasks'); ?>">
 	<?php
 		$ath->renderRelatedTasks($group, $ah);
 	?>
@@ -264,7 +288,7 @@ $file_list = $ah->getFiles();
 $count=count($file_list);
 $nb = $count? ' ('.$count.')' : '';
 ?>
-<div class="tabbertab" title="<?php echo _('Attachments').$nb; ?>">
+<div id="tabber-attachments" class="tabbertab" title="<?php echo _('Attachments').$nb; ?>">
 <h2><?php echo _('Existing Files')._(':'); ?></h2>
 <table width="80%">
 	<tr><td colspan="2">
@@ -283,7 +307,8 @@ $nb = $count? ' ('.$count.')' : '';
 	</td></tr>
 </table>
 </div>
-<div class="tabbertab" title="<?php echo _('Commits'); ?>">
+<?php if ($pluginfound) { ?>
+<div id="tabber-commits" class="tabbertab" title="<?php echo _('Commits'); ?>">
 <table width="80%">
 <tr><td colspan="2"><!-- dummy in case the hook is empty --></td></tr>
 	<?php
@@ -293,7 +318,8 @@ $nb = $count? ' ('.$count.')' : '';
 	?>
 </table>
 </div>
-<div class="tabbertab" title="<?php echo _('Changes'); ?>">
+<?php } ?>
+<div id="tabber-changes" class="tabbertab" title="<?php echo _('Changes'); ?>">
 	<h2><?php echo _('Changes') ?></h2>
 	<?php $ah->showHistory(); ?>
 </div>
