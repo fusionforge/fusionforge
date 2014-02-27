@@ -430,13 +430,7 @@ class Theme extends Layout {
 	 */
 	function headerJS()
 	{
-		$this->addjavascript('/js/common.js');
-		$this->addjavascript('/scripts/codendi/LayoutManager.js');
-		$this->addjavascript('/scripts/codendi/ReorderColumns.js');
-		$this->addjavascript('/scripts/codendi/codendi-1236793993.js');
-		$this->addjavascript('/scripts/codendi/validate.js');
-		$this->addjavascript('/scripts/codendi/Tooltip.js');
-
+		echo '<script type="text/javascript" src="'. util_make_uri('/js/common.js') .'"></script>';
 
 		plugin_hook("javascript_file", false);
 
