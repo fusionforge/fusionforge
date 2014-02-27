@@ -8,6 +8,8 @@
  * Copyright 2012-2014, Franck Villaume - TrivialDev
  * Copyright 2011, Iñigo Martinez
  * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
+ * Copyright 2014, Stéphane-Eymeric Bredthauer
+ * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -395,8 +397,7 @@ if (db_numrows($res)>0) {
 		echo '</optgroup>';
 	echo '</select>
 	<noscript><input type="submit" name="run" value="'._('Power Query').'" /></noscript>
-	&nbsp;&nbsp;<a href="/tracker/?atid='. $ath->getID().'&amp;group_id='.$group_id.'&amp;func=query">'.
-	_('Build Query').'</a>
+	&nbsp;&nbsp;'.util_make_link('/tracker/?atid='. $ath->getID().'&group_id='.$group_id.'&func=query', _('Build Query')).'
 	</td></tr></table>
 	</form>';
 	?>
@@ -407,8 +408,8 @@ if (db_numrows($res)>0) {
 		/* ]]> */</script>
 	<?php
 } else {
-	echo '<strong>
-	<a href="/tracker/?atid='. $ath->getID().'&amp;group_id='.$group_id.'&amp;func=query">'._('Build Query').'</a></strong>';
+
+	echo util_make_link('/tracker/?atid='. $ath->getID().'&group_id='.$group_id.'&func=query','<strong>'._('Build Query').'</strong>');
 }
 echo '
 	</div>
@@ -416,15 +417,15 @@ echo '
 	<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&amp;atid='.$ath->getID().'" method="post">
 	<input type="hidden" name="query_id" value="-1" />
 	<input type="hidden" name="set" value="custom" />
-	<table class="fullwidth">
+	<table>
 	<tr>
 	<td>
-	'._('Assignee')._(': '). $tech_box .'
+	'._('Assignee')._(': ').'<br>'. $tech_box .'
 	</td>
-	<td class="align-center">
-	'._('State')._(': '). $status_box .'
+	<td>
+	'._('State')._(': ').'<br>'. $status_box .'
 	</td>
-	<td class="align-right">';
+	<td>';
 
 // Compute the list of fields which can be sorted.
 $efarr = $ath->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_TEXT,
@@ -440,10 +441,11 @@ for ($k=0; $k<count($keys); $k++) {
 	$order_arr[] = $efarr[$i]['extra_field_id'];
 }
 
-echo _('Order by').
+echo _('Order by')._(': ').'<br>'.
 	html_build_select_box_from_arrays($order_arr,$order_name_arr,'_sort_col',$_sort_col,false) .
 	html_build_select_box_from_arrays($sort_arr,$sort_name_arr,'_sort_ord',$_sort_ord,false) .
-	'<input type="submit" name="submit" value="'._('Quick Browse').'" />';
+	'</td>
+	<td><br><input type="submit" name="submit" value="'._('Quick Browse').'" /></td>';
 
 echo '
 	</td>
@@ -536,9 +538,9 @@ if ($art_arr && $art_cnt > 0) {
 	}
 
 	if ($set=='custom') {
-		$set .= '&amp;_assigned_to='.$_assigned_to.'&amp;_status='.$_status.'&amp;_sort_col='.$_sort_col.'&amp;_sort_ord='.$_sort_ord;
+		$set .= '&_assigned_to='.$_assigned_to.'&_status='.$_status.'&_sort_col='.$_sort_col.'&_sort_ord='.$_sort_ord;
 		if (array_key_exists($ath->getCustomStatusField(),$_extra_fields)) {
-			$set .= '&amp;extra_fields['.$ath->getCustomStatusField().']='.$_extra_fields[$ath->getCustomStatusField()];
+			$set .= '&extra_fields['.$ath->getCustomStatusField().']='.$_extra_fields[$ath->getCustomStatusField()];
 		}
 	}
 
@@ -617,18 +619,20 @@ if ($art_arr && $art_cnt > 0) {
 				echo '<td style="white-space: nowrap;">'.
 				($IS_ADMIN?'<input type="checkbox" name="artifact_id_list[]" value="'.
 				$art_arr[$i]->getID() .'" /> ':'').
-				'<a href="'.getStringFromServer('PHP_SELF').'?func=detail&amp;aid='.
-				$art_arr[$i]->getID() .
-				'&amp;group_id='. $group_id .'&amp;atid='.
-				$ath->getID().'">'.$art_arr[$i]->getID() .
-				'</a></td>';
+				util_make_link(getStringFromServer('PHP_SELF').'?func=detail&aid='.
+				$art_arr[$i]->getID().
+				'&group_id='. $group_id .'&atid='.
+				$ath->getID(),
+				$art_arr[$i]->getID()).
+				'</td>';
 			} elseif ($f == 'summary') {
-		 		echo '<td><a href="'.getStringFromServer('PHP_SELF').'?func=detail&amp;aid='.
+		 		echo '<td>'.
+				util_make_link(getStringFromServer('PHP_SELF').'?func=detail&aid='.
 				$art_arr[$i]->getID() .
-				'&amp;group_id='. $group_id .'&amp;atid='.
-				$ath->getID().'">'.
-				$art_arr[$i]->getSummary().
-				'</a></td>';
+				'&group_id='. $group_id .'&atid='.
+				$ath->getID(),
+				$art_arr[$i]->getSummary()).
+				'</td>';
 			} elseif ($f == 'open_date') {
 				echo '<td>'. (($set != 'closed' && $art_arr[$i]->getOpenDate() < $then)?'* ':'&nbsp; ') .
 				date(_('Y-m-d H:i'),$art_arr[$i]->getOpenDate()) .'</td>';
@@ -650,13 +654,13 @@ if ($art_arr && $art_cnt > 0) {
 				$tasks_res = $art_arr[$i]->getRelatedTasks();
 				$s ='';
 				while ($rest = db_fetch_array($tasks_res)) {
-					$link = '/pm/task.php?func=detailtask&amp;project_task_id='.$rest['project_task_id'].
-						'&amp;group_id='.$group_id.'&amp;group_project_id='.$rest['group_project_id'];
+					$link = '/pm/task.php?func=detailtask&project_task_id='.$rest['project_task_id'].
+						'&group_id='.$group_id.'&group_project_id='.$rest['group_project_id'];
 					$title = '[T'.$rest['project_task_id'].']';
 					if ($rest['status_id'] == 2) {
 						$title = '<span class="strike">'.$title.'</span>';
 					}
-					print $s.'<a href="'.$link.'" title="'.util_html_secure($rest['summary']).'">'.$title.'</a>';
+					echo $s.util_make_link($link, $title, array( 'title' => util_html_secure($rest['summary'])));
 					$s = ' ';
 				}
 				echo '</td>';
@@ -697,7 +701,11 @@ if ($art_arr && $art_cnt > 0) {
 	$pages = $art_cnt / $paging;
 	$currentpage = intval($start / $paging);
 
-	if ($pages >= 1) {
+	if ($start > 0) {
+		echo util_make_link (getStringFromServer('PHP_SELF').'?func=browse&group_id='.$group_id.'&atid='.$ath->getID().'&set='. $set.'&start='.($start-$paging),'<strong>← '._('previous').'</strong>');
+		echo '&nbsp;&nbsp;';
+	}
+	if ($pages > 1) {
 		$skipped_pages=false;
 		for ($j=0; $j<$pages; $j++) {
 			if ($pages > 20) {
@@ -714,11 +722,13 @@ if ($art_arr && $art_cnt > 0) {
 			if ($j * $paging == $start) {
 				echo '<strong>'.($j+1).'</strong>&nbsp;&nbsp;';
 			} else {
-				echo '<a href="'.getStringFromServer('PHP_SELF')."?func=browse&amp;group_id=".$group_id.'&amp;atid='.$ath->getID().'&amp;set='. $set.'&amp;start='.($j*$paging).'"><strong>'.($j+1).'</strong></a>&nbsp;&nbsp;';
+				echo util_make_link(getStringFromServer('PHP_SELF').'?func=browse&group_id='.$group_id.'&atid='.$ath->getID().'&set='. $set.'&start='.($j*$paging), '<strong>'.($j+1).'</strong>').'&nbsp;&nbsp;';
 			}
 		}
 	}
-
+	if ( $art_cnt > $start + $paging) {
+		echo util_make_link (getStringFromServer('PHP_SELF').'?func=browse&group_id='.$group_id.'&atid='.$ath->getID().'&set='. $set.'&start='.($start+$paging),'<strong>'._('next').' →</strong>');
+	}
 	echo '<div style="display:table;width:100%">';
 	echo '<div style="display:table-row">';
 
