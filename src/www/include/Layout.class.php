@@ -182,9 +182,6 @@ class Layout extends Error {
 					$js .= '?'.date ("U", filemtime($filename));
 				}
 			}
-			if (forge_get_config('url_prefix')){
-				$js = forge_get_config('url_prefix').$js;
-			}
 			$this->javascripts[] = $js;
 		}
 	}
@@ -204,9 +201,6 @@ class Layout extends Error {
 					$css .= '?'.date ("U", filemtime($filename));
 				}
 			}
-			if (forge_get_config('url_prefix')){
-				$css = forge_get_config('url_prefix').$css;
-			}
 			$this->stylesheets[] = array('css' => $css, 'media' => $media);
 		}
 	}
@@ -217,7 +211,7 @@ class Layout extends Error {
 	function getJavascripts() {
 		$code = '';
 		foreach ($this->javascripts as $js) {
-			$code .= html_e('script', array('type' => 'text/javascript', 'src' => $js), '', false);
+			$code .= html_e('script', array('type' => 'text/javascript', 'src' => util_make_uri($js)), '', false);
 		}
 		$this->javascripts = array();
 		return $code;
@@ -230,9 +224,9 @@ class Layout extends Error {
 		$code = '';
 		foreach ($this->stylesheets as $c) {
 			if ($c['media']) {
-				$code .= html_e('link', array('rel' => 'stylesheet', 'type' => 'text/css', 'href' => $c['css'], 'media' => $c['media']));
+				$code .= html_e('link', array('rel' => 'stylesheet', 'type' => 'text/css', 'href' => util_make_uri($c['css']), 'media' => $c['media']));
 			} else {
-				$code .= html_e('link', array('rel' => 'stylesheet', 'type' => 'text/css', 'href' => $c['css']));
+				$code .= html_e('link', array('rel' => 'stylesheet', 'type' => 'text/css', 'href' => util_make_uri$c['css'])));
 			}
 		}
 		$this->stylesheets = array();
