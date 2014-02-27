@@ -6,6 +6,7 @@
  * Copyright 2002, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
  * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014, Stéphane-Eymeric Bredthauer
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -42,6 +43,7 @@ class ProjectTaskFactory extends Error {
 	 */
 	var $project_tasks;
 	var $order;
+	var $sort_order;
 	var $status;
 	var $category;
 	var $assigned_to;
@@ -77,15 +79,17 @@ class ProjectTaskFactory extends Error {
 	 * setup - sets up limits and sorts before you call getTasks().
 	 *
 	 * @param	int	$offset		The offset - number of rows to skip.
-	 * @param	string	$order		The way to order - ASC or DESC.
+	 * @param	string	$order		What to order.
 	 * @param	int	$max_rows	The max number of rows to return.
 	 * @param	string	$set		Whether to set these prefs into the user_prefs table - use "custom".
 	 * @param	int	$_assigned_to	Include this param if you want to limit to a certain assignee.
 	 * @param	int	$_status	Include this param if you want to limit to a certain category.
 	 * @param	$_category_id
 	 * @param	string    $_view
+	 * @param	string	$_sort_order	The way to order - ASC or DESC.
+	 *    
 	 */
-	function setup($offset,$order,$max_rows,$set,$_assigned_to,$_status,$_category_id,$_view='') {
+	function setup($offset,$order,$max_rows,$set,$_assigned_to,$_status,$_category_id,$_view='',$_sort_order) {
 //echo "<br />offset: $offset| order: $order|max_rows: $max_rows|_assigned_to: $_assigned_to|_status: $_status|_category_id: $_category_id +";
 		if ((!$offset) || ($offset < 0)) {
 			$this->offset=0;
@@ -114,7 +118,22 @@ class ProjectTaskFactory extends Error {
 		if (!$order) {
 			$order = 'project_task_id';
 		}
+		if ($_sort_order) {
+			if ($_sort_order=='ASC' || $_sort_order=='DESC') {
+				if (session_loggedin()) {
+					$u->setPreference('pm_task_sort_order'.$this->ProjectGroup->getID(), $_sort_order);
+				}
+			} else {
+				$_sort_order = NULL;
+			}
+		} else {
+			if (session_loggedin()) {
+				$_sort_order = $u->getPreference('pm_task_sort_order'.$this->ProjectGroup->getID());
+			}
+		}
+		
 		$this->order=$order;
+		$this->sort_order=$_sort_order;
 
 		if ($set=='custom') {
 			/*
@@ -156,12 +175,15 @@ class ProjectTaskFactory extends Error {
 			return $this->project_tasks;
 		}
 		$qpa = db_construct_qpa();
-		if ($this->order=='priority') {
-			$order = 'ORDER BY priority DESC' ;
+		if ($this->sort_order) {
+			$order = "ORDER BY $this->order $this->sort_order" ;
 		} else {
-			$order = "ORDER BY $this->order ASC" ;
+			if ($this->order=='priority') {
+				$order = 'ORDER BY priority DESC' ;
+			} else {
+				$order = "ORDER BY $this->order ASC" ;
+			}
 		}
-
 		if ($this->assigned_to) {
 			$tat = $this->assigned_to ;
 			if (! is_array ($tat))
