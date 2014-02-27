@@ -266,20 +266,25 @@ class Theme extends Layout {
 			// middle part
 			$return .= '<td class="tg-middle" style="width:'.$tabwidth.'%;"><a ';
 			$return .= 'id="'.md5($TABS_DIRS[$i]).'" ';
-			if ($use_tooltips && isset($TABS_TOOLTIPS[$i]))
-				$return .= 'class="tabtitle" title="'.$TABS_TOOLTIPS[$i].'" ';
 			$return .= 'href="'.$TABS_DIRS[$i].'">' . "\n";
 			$return .= '<span';
 
 			if ($selected == $i)
 				$return .= ' class="selected"';
-
 			$return .= '>';
 			$return .= '<span';
 
+			$classes = '';
 			if ($nested)
-				$return .= ' class="nested"';
+				$classes .= 'nested ';
 
+			if ($use_tooltips) {
+				$classes .= ' tabtitle ';
+				if  (isset($TABS_TOOLTIPS[$i])) {
+					$return .= ' title="'.$TABS_TOOLTIPS[$i].'" ';
+				}
+			}
+                        $return .= ' class="'.$classes.'" ';
 			$return .= '>' . "\n";
 			$return .= ''.$TABS_TITLES[$i].'' . "\n";
 			$return .= '</span>';
