@@ -80,7 +80,7 @@ input[type="text"], input[type="password"], textarea {
 .tabGenerator {font-weight:bold; margin:0; }
 .tabGenerator td {padding:0; }
 .tabGenerator .tg-left div div {
-  background: 0 0 url(/themes/gforge/images/toptab-new/left.gif) no-repeat;
+  background: 0 0 url(../images/toptab-new/left.gif) no-repeat;
   display: block;
   width: 3px;
   height: 30px;
@@ -89,13 +89,13 @@ input[type="text"], input[type="password"], textarea {
   vertical-align: middle;
 }
 .tabGenerator .tg-middle div div {
-  background: url(/themes/gforge/images/toptab-new/middle.gif);
+  background: url(../images/toptab-new/middle.gif);
   text-align:center;
   vertical-align: middle;
   height: 30px;
 }
 .tabGenerator .tg-right div div {
-  background: 0 0 url(/themes/gforge/images/toptab-new/right.gif) no-repeat;
+  background: 0 0 url(../images/toptab-new/right.gif) no-repeat;
   display: block;
   width: 9px;
   height: 30px;
@@ -107,17 +107,17 @@ input[type="text"], input[type="password"], textarea {
 .tabGenerator .tg-middle div div.nested,
 .tabGenerator .tg-right div div.nested {height: 22px; padding-top:0.5em; }
 
-.tabGenerator .tg-left div.selected div {background-image:url(/themes/gforge/images/toptab-new/selected-left.gif); }
-.tabGenerator .tg-middle div.selected div {background-image: url(/themes/gforge/images/toptab-new/selected-middle.gif); }
-.tabGenerator .tg-right div.selected div {background-image: url(/themes/gforge/images/toptab-new/selected-right.gif)}
+.tabGenerator .tg-left div.selected div {background-image:url(../images/toptab-new/selected-left.gif); }
+.tabGenerator .tg-middle div.selected div {background-image: url(../images/toptab-new/selected-middle.gif); }
+.tabGenerator .tg-right div.selected div {background-image: url(../images/toptab-new/selected-right.gif)}
 
-.tabGenerator .tg-left div div.nested {background:0 0 url(/themes/gforge/images/bottomtab-new/middle.gif); } 
-.tabGenerator .tg-middle div div.nested {background:url(/themes/gforge/images/bottomtab-new/middle.gif); }
-.tabGenerator .tg-right div div.nested {background: 0 0 url(/themes/gforge/images/bottomtab-new/separator.gif); }
+.tabGenerator .tg-left div div.nested {background:0 0 url(../images/bottomtab-new/middle.gif); } 
+.tabGenerator .tg-middle div div.nested {background:url(../images/bottomtab-new/middle.gif); }
+.tabGenerator .tg-right div div.nested {background: 0 0 url(../images/bottomtab-new/separator.gif); }
 
-.tabGenerator .tg-left div.selected div.nested {background:0 0 url(/themes/gforge/images/bottomtab-new/selected-middle.gif); }
-.tabGenerator .tg-middle div.selected div.nested{background:url(/themes/gforge/images/bottomtab-new/selected-middle.gif);  }
-.tabGenerator .tg-right div.selected div.nested {background: 0 0 url(/themes/gforge/images/bottomtab-new/selected-separator.gif); }
+.tabGenerator .tg-left div.selected div.nested {background:0 0 url(../images/bottomtab-new/selected-middle.gif); }
+.tabGenerator .tg-middle div.selected div.nested{background:url(../images/bottomtab-new/selected-middle.gif);  }
+.tabGenerator .tg-right div.selected div.nested {background: 0 0 url(../images/bottomtab-new/selected-separator.gif); }
 
 /* set padding only for non nested tabs */
 .tabGenerator .tg-middle div div a {display:block; padding-top: 0.5em;}

@@ -181,6 +181,9 @@ class Layout extends Error {
 					$js .= '?'.date ("U", filemtime($filename));
 				}
 			}
+                        if (forge_get_config('url_prefix')){
+                                $js = forge_get_config('url_prefix').$js;
+                        }
 			$this->javascripts[] = $js;
 		}
 	}
@@ -200,6 +203,9 @@ class Layout extends Error {
 					$css .= '?'.date ("U", filemtime($filename));
 				}
 			}
+                        if (forge_get_config('url_prefix')){
+                                $css = forge_get_config('url_prefix').$css;
+                        }
 			$this->stylesheets[] = array('css' => $css, 'media' => $media);
 		}
 	}
@@ -333,15 +339,16 @@ class Layout extends Error {
 	 * @todo generalize this
 	 */
 	function headerJS() {
+                $this->addJavascript('/scripts/prototype/prototype.js');
+                $this->addJavascript('/scripts/scriptaculous/scriptaculous.js');
+                $this->addJavascript('/scripts/codendi/Tooltip.js');
+                $this->addJavascript('/scripts/codendi/LayoutManager.js');
+                $this->addJavascript('/scripts/codendi/ReorderColumns.js');
+                $this->addJavascript('/scripts/codendi/codendi-1236793993.js');
+                $this->addJavascript('/scripts/codendi/validate.js');
+                $this->addJavascript('/js/common.js');
+
 		echo '
-			<script type="text/javascript" src="/scripts/prototype/prototype.js"></script>
-			<script type="text/javascript" src="/scripts/scriptaculous/scriptaculous.js"></script>
-			<script type="text/javascript" src="/scripts/codendi/Tooltip.js"></script>
-			<script type="text/javascript" src="/scripts/codendi/LayoutManager.js"></script>
-			<script type="text/javascript" src="/scripts/codendi/ReorderColumns.js"></script>
-			<script type="text/javascript" src="/scripts/codendi/codendi-1236793993.js"></script>
-			<script type="text/javascript" src="/scripts/codendi/validate.js"></script>
-			<script type="text/javascript" src="'. util_make_uri('/js/common.js') .'"></script>
 			<script language="JavaScript" type="text/javascript">/* <![CDATA[ */';
 		plugin_hook ("javascript",false);
 		echo '
