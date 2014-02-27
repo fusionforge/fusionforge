@@ -3,6 +3,7 @@
  * FusionForge plugin system
  *
  * Copyright 2002, 2009, Roland Mas
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -287,6 +288,20 @@ class PluginManager extends Error {
 			return count($p_list);
 		} else {
 			return 0;
+		}
+	}
+
+	/**
+	 * GetHookListeners() - list of plugins listening on a particular hook
+	 *
+	 * @param	string	$hookname	name of the hook
+	 * @return	array	array of plugin names, listening for this hookname
+	 */
+	function GetHookListeners($hookname) {
+		if (isset($this->hooks_to_plugins[$hookname])) {
+			return $this->hooks_to_plugins[$hookname];
+		} else {
+			return array();
 		}
 	}
 
