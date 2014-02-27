@@ -29,7 +29,7 @@ global $ah;
 global $group_id;
 global $aid;
 
-use_javascript('/tabber/tabber.js');
+html_use_jqueryui();
 html_use_coolfieldset();
 
 $ath->header(array ('title'=> $ah->getStringID().' '. $ah->getSummary(), 'atid'=>$ath->getID()));
@@ -37,6 +37,13 @@ $ath->header(array ('title'=> $ah->getStringID().' '. $ah->getSummary(), 'atid'=
 echo notepad_func();
 
 ?>
+
+<script type="text/javascript">//<![CDATA[
+jQuery(document).ready(function() {
+	jQuery("#tabber").tabs();
+});
+//]]></script>
+
 	<form id="trackerdetailform" action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&amp;atid=<?php echo $ath->getID(); ?>" method="post" enctype="multipart/form-data">
 
 <?php if (session_loggedin()) { ?>
@@ -133,73 +140,75 @@ echo notepad_func();
 			<?php $ah->showDetails(); ?>
 		</td></tr>
 </table>
-<div id="tabber" class="tabber">
 <?php
 $count=db_numrows($ah->getMessages());
 $nb = $count? ' ('.$count.')' : '';
 ?>
-<div class="tabbertab" title="<?php echo _('Comments').$nb; ?>">
-	<table width="80%">
-		<tr><td colspan="2">
-			<?php if (forge_check_perm ('tracker',$ath->getID(),'submit')) { ?>
-			<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>" />
-			<input type="hidden" name="func" value="postmod" />
-			<input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
-			<input type="hidden" name="artifact_id" value="<?php echo $ah->getID(); ?>" />
-			<p>
-			<strong><?php echo _('Add A Comment')._(':'); ?></strong>
-			<?php echo notepad_button('document.forms.trackerdetailform.details') ?><br />
-			<textarea name="details" rows="10" cols="60"></textarea>
-			</p>
-			<?php } ?>
-		</td></tr>
-		<tr><td colspan="2">
-		<h2><?php echo _('Comments')._(': '); ?></h2>
-		<?php $ah->showMessages(); ?>
-		</td></tr>
-</table>
-</div>
+<div id="tabber">
+	<ul>
+	<li><a href="#tabber-comments"><?php echo _('Comments'); ?></a></li>
+	<li><a href="#tabber-attachments"><?php echo _('Attachments'); ?></a></li>
+	<li><a href="#tabber-commits"><?php echo _('Commits'); ?></a></li>
+	<li><a href="#tabber-changes"><?php echo _('Changes'); ?></a></li>
+	</ul>
+	<div id="tabber-comments" class="tabbertab" title="<?php echo _('Comments').$nb; ?>">
+		<table width="80%">
+			<tr><td colspan="2">
+				<?php if (forge_check_perm ('tracker',$ath->getID(),'submit')) { ?>
+				<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>" />
+				<input type="hidden" name="func" value="postmod" />
+				<input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
+				<input type="hidden" name="artifact_id" value="<?php echo $ah->getID(); ?>" />
+				<p>
+				<strong><?php echo _('Add A Comment')._(':'); ?></strong>
+				<?php echo notepad_button('document.forms.trackerdetailform.details') ?><br />
+				<textarea name="details" rows="10" cols="60"></textarea>
+				</p>
+				<?php } ?>
+			</td></tr>
+			<tr><td colspan="2">
+			<?php $ah->showMessages(); ?>
+			</td></tr>
+	</table>
+	</div>
 <?php
 $tabcnt=0;
 $file_list = $ah->getFiles();
 $count=count($file_list);
 $nb = $count? ' ('.$count.')' : '';
 ?>
-<div class="tabbertab" title="<?php echo _('Attachments').$nb; ?>">
-<table width="80%">
-	<tr><td colspan="2">
-	<?php if (session_loggedin() && ($ah->getSubmittedBy() == user_getid())) { ?>
-		<strong><?php echo _('Attach Files')._(':'); ?></strong>  <?php echo('('._('max upload size: '.human_readable_bytes(util_get_maxuploadfilesize())).')') ?><br />
-		<input type="file" name="input_file0" /><br />
-		<input type="file" name="input_file1" /><br />
-		<input type="file" name="input_file2" /><br />
-		<input type="file" name="input_file3" /><br />
-		<input type="file" name="input_file4" /><br />
-	<?php } ?>
-	<h2><?php echo _('Attached Files')._(':'); ?></h2>
-	</td></tr>
-<?php
-	//
-	// print a list of files attached to this Artifact
-	//
-		$ath->renderFiles($group_id, $ah);
-	?>
-</table>
-</div>
-<div class="tabbertab" title="<?php echo _('Commits'); ?>" >
-<table width="80%">
-<tr><td colspan="2"><!-- dummy in case the hook is empty --></td></tr>
+	<div id="tabber-attachments" class="tabbertab" title="<?php echo _('Attachments').$nb; ?>">
+	<table width="80%">
+		<tr><td colspan="2">
+		<?php if (session_loggedin() && ($ah->getSubmittedBy() == user_getid())) { ?>
+			<strong><?php echo _('Attach Files')._(':'); ?></strong>  <?php echo('('._('max upload size: '.human_readable_bytes(util_get_maxuploadfilesize())).')') ?><br />
+			<input type="file" name="input_file0" /><br />
+			<input type="file" name="input_file1" /><br />
+			<input type="file" name="input_file2" /><br />
+			<input type="file" name="input_file3" /><br />
+			<input type="file" name="input_file4" /><br />
+		<?php } ?>
 	<?php
-		$hookParams['artifact_id'] = $aid;
-		$hookParams['group_id'] = $group_id;
-		plugin_hook("artifact_extra_detail",$hookParams);
-	?>
-</table>
-</div>
-<div class="tabbertab" title="<?php echo _('Changes'); ?>">
-	<h2><?php echo _('Changes') ?></h2>
-	<?php $ah->showHistory(); ?>
-</div>
+		//
+		// print a list of files attached to this Artifact
+		//
+			$ath->renderFiles($group_id, $ah);
+		?>
+	</table>
+	</div>
+	<div id="tabber-commits" class="tabbertab" title="<?php echo _('Commits'); ?>" >
+	<table width="80%">
+	<tr><td colspan="2"><!-- dummy in case the hook is empty --></td></tr>
+		<?php
+			$hookParams['artifact_id'] = $aid;
+			$hookParams['group_id'] = $group_id;
+			plugin_hook("artifact_extra_detail",$hookParams);
+		?>
+	</table>
+	</div>
+	<div id="tabber-changes" class="tabbertab" title="<?php echo _('Changes'); ?>">
+		<?php $ah->showHistory(); ?>
+	</div>
 	<?php $ah->showRelations(); ?>
 </div>
 </form>
