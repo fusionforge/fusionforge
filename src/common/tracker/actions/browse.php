@@ -156,8 +156,7 @@ if (!$art_arr && $af->isError()) {
 //build page title to make bookmarking easier
 //if a user was selected, add the user_name to the title
 //same for status
-use_javascript('/tabber/tabber.js');
-
+html_use_jqueryui();
 html_use_coolfieldset();
 
 $ath->header(array('atid'=>$ath->getID(), 'title'=>$ath->getName()));
@@ -331,8 +330,22 @@ print '<span rev="doap:bug-database sioc:space_of" resource="'. $proj_url .'" />
 print "</div>\n"; // end of about
 
 echo '
+<script type="text/javascript">//<![CDATA[
+jQuery(document).ready(function() {';
+if ($af->query_type == 'custom') {
+	echo '	jQuery("#tabber").tabs({active: 1});';
+} else {
+	echo '	jQuery("#tabber").tabs();';
+}
+echo '
+});
+//]]></script>
 <div id="tabber" class="tabber">
-	<div class="tabbertab" title="'._('Advanced queries').'">';
+	<ul>
+	<li><a href="#tabber-advancedquery">'._('Advanced queries').'</a></li>
+	<li><a href="#tabber-simplefiltering">'._('Simple Filtering and Sorting').'</a></li>
+	</ul>
+	<div id="tabber-advancedquery" title="'._('Advanced queries').'">';
 
 if (session_loggedin()) {
 	$res = db_query_params ('SELECT artifact_query_id,query_name, CASE WHEN query_type>0 THEN 1 ELSE 0 END as type
@@ -388,7 +401,7 @@ if (db_numrows($res)>0) {
 	</form>';
 	?>
 		<script type="text/javascript">/* <![CDATA[ */
-		$('#query_id').change(function() {
+		jQuery('#query_id').change(function() {
 			location.href = '<?php echo getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&atid='.$ath->getID().'&power_query=1&query_id=' ?>'+$('#query_id').val();
 		});
 		/* ]]> */</script>
@@ -399,7 +412,7 @@ if (db_numrows($res)>0) {
 }
 echo '
 	</div>
-	<div class="tabbertab'.($af->query_type == 'custom' ? ' tabbertabdefault' : '').'" title="'._('Simple Filtering and Sorting').'">
+	<div id="tabber-simplefiltering" title="'._('Simple Filtering and Sorting').'">
 	<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&amp;atid='.$ath->getID().'" method="post">
 	<input type="hidden" name="query_id" value="-1" />
 	<input type="hidden" name="set" value="custom" />
