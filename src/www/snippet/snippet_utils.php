@@ -147,7 +147,7 @@ function snippet_show_package_snippets($version) {
 	if (!$result || $rows < 1) {
 		echo db_error();
 		echo '
-			<div class="warning_msg">'._('No Snippets Are In This Package Yet').'</div>';
+			<p class="warning_msg">'._('No Snippets Are In This Package Yet').'</p>';
 	} else {
 		echo $GLOBALS['HTML']->listTableTop($title_arr);
 		//get the newest version, so we can display it's code
