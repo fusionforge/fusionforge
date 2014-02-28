@@ -3755,16 +3755,6 @@ src/www/scripts/codendi/common.js -text
 src/www/scripts/codendi/cross_references.js -text
 src/www/scripts/codendi/debug_reserved_names.js -text
 src/www/scripts/codendi/validate.js -text
-src/www/tabber/example-ajax-0.html -text
-src/www/tabber/example-ajax-1.html -text
-src/www/tabber/example-ajax-2.html -text
-src/www/tabber/example-ajax.html -text
-src/www/tabber/example-cookies.html -text
-src/www/tabber/example.css -text svneol=unset#text/css
-src/www/tabber/example.html -text
-src/www/tabber/example2.html -text
-src/www/tabber/tabber-minimized.js -text
-src/www/tabber/tabber.js -text
 src/www/themes/css/fusionforge.css -text svneol=unset#text/css
 src/www/themes/funky/COPYING -text
 src/www/themes/funky/README.txt -text
