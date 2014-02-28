@@ -1,3 +1,9 @@
+fusionforge (5.3~rc2+20140228-1+) experimental; urgency=medium
+
+  * Fixed shipping of Javascript libs.
+
+ -- Roland Mas <lolando@debian.org>  Fri, 28 Feb 2014 15:43:35 +0100
+
 fusionforge (5.3~rc2+20140228-1) experimental; urgency=low
 
   * Started following upstream 5.3 branch.
