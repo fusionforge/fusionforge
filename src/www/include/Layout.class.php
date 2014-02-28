@@ -226,7 +226,7 @@ class Layout extends Error {
 			if ($c['media']) {
 				$code .= html_e('link', array('rel' => 'stylesheet', 'type' => 'text/css', 'href' => util_make_uri($c['css']), 'media' => $c['media']));
 			} else {
-				$code .= html_e('link', array('rel' => 'stylesheet', 'type' => 'text/css', 'href' => util_make_uri$c['css'])));
+				$code .= html_e('link', array('rel' => 'stylesheet', 'type' => 'text/css', 'href' => util_make_uri($c['css'])));
 			}
 		}
 		$this->stylesheets = array();
