@@ -92,9 +92,6 @@ testpat:
 	@echo "PDOCSFILES=$(PDOCSFILES)"
 	@echo "PEXAMPLESFILES=$(PEXAMPLESFILES)"
 
-remove-binary-files:
-	sh $(CURDIR)/deb-specific/manage-uufiles.sh clean
-
 .PHONY: conffiles
 conffiles: $(PPOSTINST) $(PPREINST) $(PPRERM) $(PPOSTRM) $(CRONDFILES) $(DIRSFILES) $(LINKSFILES) $(INSTALLFILES) $(DOCSFILES) $(READMEFILES) $(PCRONDFILES) $(PDIRSFILES) $(PLINKSFILES) $(PINSTALLFILES) $(PDOCSFILES) $(PTRIGGERSFILES) $(PEXAMPLESFILES) debian/control
 
@@ -237,9 +234,6 @@ build: remove-binary-files debian/po/templates.pot conffiles
 
 # 	Build README.Debian from template
 	cat debian/README.Debian.tmpl | $(SED_REPLACE) > debian/README.Debian
-
-# 	Uudecode binary files
-	sh $(CURDIR)/deb-specific/manage-uufiles.sh decode
 
 # 	Build gettext *.mo files
 	utils/manage-translations.sh build
