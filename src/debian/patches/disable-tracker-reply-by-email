@@ -5,7 +5,7 @@ Index: src/common/tracker/Artifact.class.php
 ===================================================================
 --- src.orig/common/tracker/Artifact.class.php
 +++ src/common/tracker/Artifact.class.php
-@@ -1586,10 +1586,6 @@
+@@ -1595,10 +1595,6 @@
  				"\n".util_make_url ('/tracker/?atid='. $this->ArtifactType->getID() .
  					    "&aid=". $this->getID() .
  					    "&group_id=". $this->ArtifactType->Group->getID()) .
