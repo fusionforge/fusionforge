@@ -45,4 +45,4 @@ $result=db_query_params('SELECT people_job.group_id,people_job.job_id,groups.gro
 			array(),30);
 echo people_show_job_list($result) . '</p>';
 
-people_footer(array());
+people_footer();

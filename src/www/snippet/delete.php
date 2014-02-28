@@ -47,7 +47,7 @@ if (session_loggedin()) {
 					array(user_getid(), $snippet_package_version_id));
 		if (!$result || db_numrows($result) < 1) {
 			echo '<p class="error">'._('Error: Only the creator of a package version can delete snippets from it.').'</p>';
-			snippet_footer(array());
+			snippet_footer();
 			exit;
 		} else {
 
@@ -59,11 +59,11 @@ if (session_loggedin()) {
 							$snippet_package_version_id));
 			if (!$result || db_affected_rows($result) < 1) {
 				echo '<p class="error">'._('Error: That snippet does not exist in this package.').'</p>';
-				snippet_footer(array());
+				snippet_footer();
 				exit;
 			} else {
 				echo '<p class="feedback">'._('Item Removed From Package').'</p>';
-				snippet_footer(array());
+				snippet_footer();
 				exit;
 			}
 		}
@@ -79,7 +79,7 @@ if (session_loggedin()) {
 					array($snippet_version_id, user_getid()));
 		if (!$result || db_numrows($result) < 1) {
 			echo '<p class="error">'._('Error: That snippet does not exist.').'</p>';
-			snippet_footer(array());
+			snippet_footer();
 			exit;
 		} else {
 			$snippet_id=db_result($result,0,'snippet_id');
@@ -98,7 +98,7 @@ if (session_loggedin()) {
 			}
 
 			echo '<p class="feedback">'._('Snippet Removed').'</p>';
-			snippet_footer(array());
+			snippet_footer();
 			exit;
 		}
 
@@ -116,7 +116,7 @@ if (session_loggedin()) {
 		if (!$result || db_numrows($result) < 1) {
 			//they don't own it or it's not found
 			echo '<p class="error">'._('Error: Only the creator of a package version can delete it.').'</p>';
-			snippet_footer(array());
+			snippet_footer();
 			exit;
 		} else {
 			$snippet_package_id=db_result($result,0,'snippet_package_id');
@@ -142,7 +142,7 @@ if (session_loggedin()) {
 				$result=db_query_params("DELETE FROM snippet_package WHERE snippet_package_id=$1", array($snippet_package_id));
 			}
 			echo '<p class="feedback">'._('Package Removed').'</p>';
-			snippet_footer(array());
+			snippet_footer();
 			exit;
 		}
 	} else {
