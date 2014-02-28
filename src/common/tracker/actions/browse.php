@@ -526,14 +526,14 @@ if ($art_arr && $art_cnt > 0) {
 		if ($graph) {
 		?>
 		<table class="progress">
-      	<tbody>
-      		<tr><?php echo $graph; ?></tr>
-      	</tbody>
-      	</table>
-      	<table class="progress_legend">
-      		<tr><?php echo $legend ?></tr>
-      	</table>
-	<?php
+		<tbody>
+			<tr><?php echo $graph; ?></tr>
+		</tbody>
+		</table>
+		<table class="progress_legend">
+			<tr><?php echo $legend ?></tr>
+		</table>
+		<?php
 		}
 	}
 
