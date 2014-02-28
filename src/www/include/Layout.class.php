@@ -212,7 +212,7 @@ class Layout extends Error {
 		$code = '';
 		foreach ($this->javascripts as $js) {
 			$code .= "\t\t\t";
-			$code .= '<script type="text/javascript" src="'.$js.'"></script>'."\n";
+			$code .= '<script type="text/javascript" src="'.util_make_uri($js).'"></script>'."\n";
 		}
 		$this->javascripts = array();
 		return $code;
@@ -226,9 +226,9 @@ class Layout extends Error {
 		foreach ($this->stylesheets as $c) {
 			$code .= "\t\t\t";
 			if ($c['media']) {
-				$code .= '<link rel="stylesheet" type="text/css" href="'.$c['css'].'" media="'.$c['media'].'" />'."\n";
+				$code .= '<link rel="stylesheet" type="text/css" href="'.util_make_uri($c['css']).'" media="'.$c['media'].'" />'."\n";
 			} else {
-				$code .= '<link rel="stylesheet" type="text/css" href="'.$c['css'].'"/>'."\n";
+				$code .= '<link rel="stylesheet" type="text/css" href="'.util_make_uri($c['css']).'"/>'."\n";
 			}
 		}
 		$this->stylesheets = array();
