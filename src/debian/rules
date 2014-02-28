@@ -324,9 +324,6 @@ install: build
 # 	Remove potential SCM artefacts from binary packages
 	find $(addprefix $(CURDIR)/debian/, $(shell dh_listpackages)) -name .svn -or -name {arch} -or -name .arch-ids -or -name .bzr -or -name .cvsignore | xargs -r rm -rf
 
-# 	Also remove uuencoded files
-	find $(addprefix $(CURDIR)/debian/, $(shell dh_listpackages)) -name \*.uu | xargs -r rm
-
 
 binary: install
 
