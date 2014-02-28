@@ -225,7 +225,7 @@ debian/po/%:
 
 override_dh_auto_build:
 
-build: remove-binary-files debian/po/templates.pot conffiles
+build: debian/po/templates.pot conffiles
 	$(DH) $@
 
 # 	Build man pages from Docbook sources
@@ -247,7 +247,7 @@ build: remove-binary-files debian/po/templates.pot conffiles
 # 	Preprocess files with DSF-Helper
 	perl $(CURDIR)/deb-specific/dsf-helper.pl
 
-clean: remove-binary-files
+clean:
 	$(DH) $@
 
 	rm -f $(CURDIR)/debian/*.cron.d
