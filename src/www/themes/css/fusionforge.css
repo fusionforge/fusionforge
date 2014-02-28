@@ -109,33 +109,6 @@ figcaption {
 	font-weight: bold;
 }
 
-.tabberlive {
-	margin-top: 1em;
-}
-
-.tabberlive .tabbertab {
-	border: 1px solid #aaa;
-	border-top: 0;
-	padding: 5px;
-}
-
-.tabberlive .tabbertab h2 {
-	display: none;
-}
-
-.tabberlive .tabbertab h3 {
-	display: none;
-}
-
-.tabberlive .tabbertabhide {
-	display: none;
-}
-
-.tabberlive#tab2 .tabbertab {
-	height: 200px;
-	overflow: auto;
-}
-
 .tablecontent {
 	background-color: #eee;
 	font-size: 13px;

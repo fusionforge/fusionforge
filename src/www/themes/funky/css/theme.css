@@ -420,7 +420,6 @@ hr {
 	display:none;
 }
 
-/* =tabber */
 .topTab, a.topTab, a.topTab:visited, a.topTab:hover,
 .topTabSelected, a.topTabSelected, a.topTabSelected:visited,
 a.topTabSelected:hover {
@@ -460,76 +459,6 @@ a.topTabSelected:hover {
 .pane {
   color: rgb(112, 112, 112);
   background-color: white;
-}
-
-/*--------------------------------------------------
-  REQUIRED to hide the non-active tab content.
-  But do not hide them in the print stylesheet!
-  --------------------------------------------------*/
-.tabberlive .tabbertabhide {
-  display:none;
-}
-
-/*--------------------------------------------------
-  .tabber = before the tabber interface is set up
-  .tabberlive = after the tabber interface is set up
-  --------------------------------------------------*/
-.tabber {
-}
-
-.tabberlive {
-}
-
-.tabberlive ul {
-	margin-top: 10px;
-	margin-bottom: 0;
-	margin-left: 0;
-	/*border-collapse: collapse;*/
-	border-bottom: 1px solid #E2E3E4;
-	border-spacing: 6px 0;
-	padding-left: 0;
-}
-
-.tabberlive li {
-	display: table-cell;
-	border: 1px solid #E2E3E4;
-	height: 16px;
-	padding: 5px;
-	border-bottom: none;
-	border-top-left-radius: 6px;
-	border-top-right-radius: 6px;
-	-webkit-top-right-border-radius: 6px;
-	-webkit-top-left-border-radius: 6px;
-	-moz-border-radius-topright: 6px;
-	-moz-border-radius-topleft: 6px;
-	margin-right: 10px;
-	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(white), to(#f7f7f7));
-}
-
-.tabberlive li:hover  {
-	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f7f7f7), to(white));
-}
-
-/*--------------------------------------------------
-  .tabbertab = the tab content
-  Add style only after the tabber interface is set up (.tabberlive)
-  --------------------------------------------------*/
-.tabberlive, .tabbertab {
-	padding: 5px;
-	border:1px solid #E2E3E4;
-	border-top:0;
-	margin-bottom: 10px;
-}
-
-.tabberlive#tab1 {
-}
-
-.tabberlive#tab2 {
-}
-
-.tabberlive#tab2 .tabbertab {
-  height:200px;
-  overflow:auto;
 }
 
 .field-holder {
