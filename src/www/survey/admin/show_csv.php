@@ -134,7 +134,7 @@ if ($survey_id) {
  */
 
 function format ($f,$type) {
-//$radio_button = array("","5 (hight)", "4 (good)", "3 (mean)", "2 (low)", "1 (low)");
+// $radio_button = array("","5 (hight)", "4 (good)", "3 (mean)", "2 (low)", "1 (low)");
 $radio_button = array( "", "1 (low)", "2 (low)", "3 (mean)", "4 (good)", "5 (hight)" );
 $yes_no = array("","Yes","","","","No");
 	if($type == 1){
