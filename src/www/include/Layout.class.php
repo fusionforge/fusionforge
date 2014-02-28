@@ -624,44 +624,47 @@ if (isset($params['group']) && $params['group']) {
 	 * @return	string	the html code
 	 */
 	function listTableTop($titleArray = array(), $linksArray = array(), $class = '', $id = '', $thClassArray = array(), $thTitleArray = array()) {
+		$attrs = array('class' => 'listing');
 		$args = '';
 		if ($class) {
-			$args .= ' class="listing '.$class.'"';
+			$attrs['class'] .= ' '.$class;
 		} else {
-			$args .= ' class="listing full"';
+			$attrs['class'] .= ' full';
 		}
 		if ($id) {
-			$args .= ' id="'.$id.'"';
+			$attrs['id'] = $id;
 		}
-		$return = "\n".
-			'<table'.$args.'>';
+		$return = html_ao('table', $attrs);
 
 		if (count($titleArray)) {
-			$return .= '<thead><tr>';
+			$ap = html_ap();
+			$return .= html_ao('thead');
+			$return .= html_ao('tr');
 
 			$count = count($titleArray);
 			for ($i = 0; $i < $count; $i++) {
-				$th = '';
+				$thAttrs = array();
 				if ($thClassArray && $thClassArray[$i]) {
-					$th .= ' class="'.$thClassArray[$i].'"';
+					$thAttrs['class'] = $thClassArray[$i];
 				}
 				if ($thTitleArray && $thTitleArray[$i]) {
+					$thAttrs['title'] = $thTitleArray[$i];
 					$th .= ' title="'.$thTitleArray[$i].'"';
 				}
 				$cell = $titleArray[$i];
 				if ($linksArray) {
 					$cell = util_make_link($linksArray[$i], $titleArray[$i]);
 				}
-				$return .= "\n".' <th'.$th.'>'.$cell.'</th>';
+				$return .= html_e('th', $thAttrs, $cell, false);
 			}
-			$return .= "\n".'</tr></thead>'."\n";
+			$return .= html_ac($ap);
 		}
-		$return .= '<tbody>';
+		$return .= html_ao('tbody');
 		return $return;
 	}
 
 	function listTableBottom() {
-		return '</tbody>'."\n".'</table>';
+		return html_ac(html_ap() -2);
 	}
 
 	function outerTabs($params) {
