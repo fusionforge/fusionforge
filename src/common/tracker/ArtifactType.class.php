@@ -616,7 +616,7 @@ class ArtifactType extends Error {
 			$filter = implode(',', $types);
 			$types = explode(',', $filter);
 		} else {
-			$filter = "";
+			$filter = '';
 		}
 		if (!isset($this->extra_fields["$filter"])) {
 			$this->extra_fields["$filter"] = array();

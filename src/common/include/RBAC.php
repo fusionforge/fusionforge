@@ -326,45 +326,52 @@ abstract class BaseRole extends Error {
 			$result[$section][$group_id] = $this->getVal ($section, $group_id) ;
 		}
 
-		$atf = new ArtifactTypeFactory ($project) ;
-		if (!$atf->isError()) {
-			$tids = $atf->getAllArtifactTypeIds () ;
-			foreach ($tids as $tid) {
-				$result['tracker'][$tid] = $this->getVal ('tracker', $tid) ;
+		if ($project->usesTracker()) {
+			$atf = new ArtifactTypeFactory ($project) ;
+			if (!$atf->isError()) {
+				$tids = $atf->getAllArtifactTypeIds () ;
+				foreach ($tids as $tid) {
+					$result['tracker'][$tid] = $this->getVal ('tracker', $tid) ;
+				}
 			}
+			array_push ($sections,'tracker');
 		}
-		array_push ($sections,'tracker');
 
+		/*XXX merge from Branch_5_1: maybe this also only if usesForum? */
 		$sections_forum = array('forum_admin', 'new_forum');
 		foreach ($sections_forum as $section_forum) {
 			$result[$section_forum][$group_id] = $this->getVal ($section_forum, $group_id) ;
 		}
 		$sections = array_merge($sections, $sections_forum);
-		
-		$ff = new ForumFactory ($project) ;
-		if (!$ff->isError()) {
-			$fids = $ff->getAllForumIdsWithNews () ;
-			foreach ($fids as $fid) {
-				$result['forum'][$fid] = $this->getVal ('forum', $fid) ;
-			}
-		}
-		array_push ($sections,'forum');
 
+		if ($project->usesForum()) {
+			$ff = new ForumFactory ($project) ;
+			if (!$ff->isError()) {
+				$fids = $ff->getAllForumIdsWithNews () ;
+				foreach ($fids as $fid) {
+					$result['forum'][$fid] = $this->getVal ('forum', $fid) ;
+				}
+			}
+			array_push ($sections,'forum');
+		}
+
+		/*XXX see above, maybe only if usesPM? */
 		$sections_pm = array('pm_admin', 'new_pm');
 		foreach ($sections_pm as $section_pm) {
 			$result[$section_pm][$group_id] = $this->getVal ($section_pm, $group_id) ;
 		}
 		$sections = array_merge($sections, $sections_pm);
 
-		$pgf = new ProjectGroupFactory ($project) ;
-		if (!$pgf->isError()) {
-			$pgids = $pgf->getAllProjectGroupIds () ;
-			foreach ($pgids as $pgid) {
-				$result['pm'][$pgid] = $this->getVal ('pm', $pgid) ;
+		if ($project->usesPM()) {
+			$pgf = new ProjectGroupFactory ($project) ;
+			if (!$pgf->isError()) {
+				$pgids = $pgf->getAllProjectGroupIds () ;
+				foreach ($pgids as $pgid) {
+					$result['pm'][$pgid] = $this->getVal ('pm', $pgid) ;
+				}
 			}
+			array_push ($sections,'pm') ;
 		}
-		array_push ($sections,'pm') ;
-
 
 		// Add settings not yet listed so far (probably plugins)
 		// Currently handled:
