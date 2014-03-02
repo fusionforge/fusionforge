@@ -165,24 +165,24 @@ if ($DocGroupName) {
 	}
 	$headerPath .= _('Path')._(': ').'<i>'.$dgpath.'</i></h2>';
 	echo $headerPath;
-	echo '<h3 class="docman_h3" >'._('Document Folder')._(': ').'<i>'.$DocGroupName.'</i>&nbsp;';
+	echo '<h3 class="docman_h3" >'._('Document Folder')._(': ').html_e('i',array(),$DocGroupName, false).'&nbsp;';
 	if (forge_check_perm('docman', $ndg->Group->getID(), 'approve')) {
-		echo '<a href="#" class="tabtitle" id="docman-editdirectory" title="'._('Edit this folder').'" >'. html_image('docman/configure-directory.png',22,22,array('alt'=>'edit')). '</a>';
-		echo '<a href="'.$actionlistfileurl.'&amp;action=trashdir" class="tabtitle" id="docman-trashdirectory" title="'._('Move this folder and his content to trash').'" >'. html_image('docman/trash-empty.png',22,22,array('alt'=>'trashdir')). '</a>';
+		echo util_make_link('#', html_image('docman/configure-directory.png', 22, 22, array('alt' => 'edit')), array('class' => 'tabtitle', 'id' => 'docman-editdirectory', 'title' => _('Edit this folder')), true);
+		echo util_make_link($actionlistfileurl.'&action=trashdir', html_image('docman/trash-empty.png', 22, 22, array('alt' => 'trashdir')), array('class' => 'tabtitle', 'id' => 'docman-trashdirectory', 'title' => _('Move this folder and his content to trash')));
 		if (!isset($nested_docs[$dirid]) && !isset($nested_groups[$dirid]) && !isset($nested_pending_docs[$dirid])) {
-			echo '<a href="'.$actionlistfileurl.'&amp;action=deldir" class="tabtitle" id="docman-deletedirectory" title="'._('Permanently delete this folder').'" >'. html_image('docman/delete-directory.png',22,22,array('alt'=>'deldir')). '</a>';
+			echo util_make_link($actionlistfileurl.'&action=deldir', html_image('docman/delete-directory.png', 22, 22, array('alt' => 'deldir')), array('class' => 'tabtitle', 'id' => 'docman-deletedirectory', 'title' => _('Permanently delete this folder')));
 		}
 	}
 
 	if (forge_check_perm('docman', $group_id, 'submit')) {
-		echo '<a href="#" class="tabtitle" id="docman-additem" title="'. _('Add a new item in this folder') . '" >'. html_image('docman/insert-directory.png',22,22,array('alt'=>'additem')). '</a>';
+		echo util_make_link('#', html_image('docman/insert-directory.png', 22, 22, array('alt' => 'additem')), array('class' => 'tabtitle', 'id' => 'docman-additem', 'title' => _('Add a new item in this folder')), true);
 	}
 
 	$numFiles = $ndg->getNumberOfDocuments(1);
 	if (forge_check_perm('docman', $group_id, 'approve'))
 		$numPendingFiles = $ndg->getNumberOfDocuments(3);
 	if ($numFiles || (isset($numPendingFiles) && $numPendingFiles))
-		echo '<a href="/docman/view.php/'.$ndg->Group->getID().'/zip/full/'.$dirid.'" class="tabtitle" title="'. _('Download this folder as a ZIP') . '" >' . html_image('docman/download-directory-zip.png',22,22,array('alt'=>'downloadaszip')). '</a>';
+		echo util_make_link('/docman/view.php/'.$ndg->Group->getID().'/zip/full/'.$dirid, html_image('docman/download-directory-zip.png',22,22,array('alt'=>'downloadaszip')), array('class' => 'tabtitle', 'title' => _('Download this folder as a ZIP')));
 
 	if (session_loggedin()) {
 		if ($ndg->isMonitoredBy($u->getID())) {
@@ -192,7 +192,7 @@ if ($DocGroupName) {
 			$option = 'add';
 			$titleMonitor = _('Start monitoring this folder');
 		}
-		echo '<a class="tabtitle-ne" href="'.$actionlistfileurl.'&amp;action=monitordirectory&amp;option='.$option.'&amp;directoryid='.$ndg->getID().'" title="'.$titleMonitor.'" >'.html_image('docman/monitor-'.$option.'document.png',22,22,array('alt'=>$titleMonitor)). '</a>';
+		echo util_make_link($actionlistfileurl.'&action=monitordirectory&option='.$option.'&directoryid='.$ndg->getID(), html_image('docman/monitor-'.$option.'document.png',22,22,array('alt'=>$titleMonitor)), array('class' => 'tabtitle-ne', 'title' => $titleMonitor));
 	}
 	echo '</h3>';
 
