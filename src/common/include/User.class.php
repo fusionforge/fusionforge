@@ -46,24 +46,6 @@ function &user_get_object_by_name($user_name, $res = false) {
 }
 
 /**
- * user_get_object_by_realname() - Get User object by realname.
- * user_get_object is useful so you can pool user objects/save database queries
- * You should always use this instead of instantiating the object directly
- * If we get lucky, we get the GFUser object.
- *
- * @param string       $user_name The unix username - required
- * @param bool|int     $res       The result set handle ("SELECT * FROM USERS WHERE user_id=xx")
- * @return GFUser User object or false on failure
- */
-function &user_get_object_by_realname($real_name, $res = false) {
-	if (!$res) {
-		$res = db_query_params('SELECT * FROM users WHERE realname=$1',
-					array($real_name));
-	}
-	return user_get_object(db_result($res, 0, 'user_id'), $res);
-}
-
-/**
  * user_get_object_by_email() - Get User object by email address
  * Only works if sys_require_unique_email is true
  *
@@ -374,7 +356,7 @@ class GFUser extends Error {
 			return false;
 		}
 		if (forge_get_config('require_unique_email')) {
-			if (user_get_object_by_email($email)) {
+			if (user_get_object_by_email('$email')) {
 				$this->setError(_('User with this email already exists - use people search to recover your login.'));
 				return false;
 			}

@@ -960,7 +960,7 @@ class GitPlugin extends SCMPlugin {
 			$start_time = $params['begin'];
 			$end_time = $params['end'];
 			$repo = forge_get_config('repos_path', 'scmgit') . '/' . $project->getUnixName() . '/' . $project->getUnixName() . '.git';
-			$pipe = popen("GIT_DIR=\"$repo\" git log --date=raw --since=@$start_time --until=@$end_time --all --pretty='format:%ad||%an||%s||%h' --name-status", 'r' );
+			$pipe = popen("GIT_DIR=\"$repo\" git log --date=raw --since=@$start_time --until=@$end_time --all --pretty='format:%ad||%ae||%s||%h' --name-status", 'r' );
 			while (!feof($pipe) && $data = fgets($pipe)) {
 				$line = trim($data);
 				$splitedLine = explode('||', $line);
@@ -970,11 +970,11 @@ class GitPlugin extends SCMPlugin {
 					$result['group_id'] = $group_id;
 					$result['ref_id'] = 'browser.php?group_id='.$group_id;
 					$result['description'] = $splitedLine[2].' (commit '.$splitedLine[3].')';
-					$userObject = user_get_object_by_realname($splitedLine[1]);
+					$userObject = user_get_object_by_email($splitedLine[1]);
 					if (is_a($userObject, 'GFUser')) {
-						$result['realname'] = util_display_user($userObject->getUnixName(), $userObject->getID(), $userObject->getRealName());
+						$result['realname'] = make_user_link($userObject->getUnixName(), $userObject->getRealName());
 					} else {
-						$result['realname'] = $splitedLine[1];
+						$result['realname'] = '';
 					}
 					$splitedDate = explode(' ', $splitedLine[0]);
 					$result['activity_date'] = $splitedDate[0];
