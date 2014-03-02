@@ -220,18 +220,16 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 	echo $HTML->listTableTop($tabletop, array(), 'sortable_docman_listfile', 'sortable', $classth);
 	$time_new = 604800;
 	foreach ($nested_docs[$dirid] as $d) {
-		echo '<tr>';
-		echo '<td>';
+		$cells = array();
 		if (!$d->getLocked() && !$d->getReserved()) {
-			echo '<input type="checkbox" value="'.$d->getID().'" class="checkeddocidactive tabtitle-w" title="'._('Select / Deselect this document for massaction').'" onchange="controllerListFile.checkgeneral(\'active\')" />';
+			$cells[][] = '<input type="checkbox" value="'.$d->getID().'" class="checkeddocidactive tabtitle-w" title="'._('Select / Deselect this document for massaction').'" onchange="controllerListFile.checkgeneral(\'active\')" />';
 		} else {
 			if (session_loggedin() && ($d->getReservedBy() != $u->getID())) {
-				echo '<input type="checkbox" name="disabled" disabled="disabled"';
+				$cells[][] = '<input type="checkbox" name="disabled" disabled="disabled"';
 			} else {
-				echo '<input type="checkbox" value="'.$d->getID().'" class="checkeddocidactive tabtitle-w" title="'._('Select / Deselect this document for massaction').'"" onchange="controllerListFile.checkgeneral(\'active\')" />';
+				$cells[][] = '<input type="checkbox" value="'.$d->getID().'" class="checkeddocidactive tabtitle-w" title="'._('Select / Deselect this document for massaction').'"" onchange="controllerListFile.checkgeneral(\'active\')" />';
 			}
 		}
-		echo '</td>';
 		switch ($d->getFileType()) {
 			case "URL": {
 				$docurl = $d->getFileName();
@@ -243,65 +241,55 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 				$docurltitle = _('View this document');
 			}
 		}
-		echo '<td>';
-		echo util_make_link($docurl, html_image($d->getFileTypeImage(), '22', '22', array('alt' => $d->getFileType())), array('class' => 'tabtitle-nw', 'title' => $docurltitle));
-		echo '</td>'."\n";
-		echo '<td>';
+		$cells[][] =  util_make_link($docurl, html_image($d->getFileTypeImage(), '22', '22', array('alt' => $d->getFileType())), array('class' => 'tabtitle-nw', 'title' => $docurltitle));
+		$nextcell = '';
 		if (($d->getUpdated() && $time_new > (time() - $d->getUpdated())) || $time_new > (time() - $d->getCreated())) {
 			$html_image_attr = array();
 			$html_image_attr['alt'] = _('new');
 			$html_image_attr['class'] = 'tabtitle-ne';
 			$html_image_attr['title'] = _('Created or updated since less than 7 days');
-			echo html_image('docman/new.png', '14', '14', $html_image_attr);
+			$nextcell = html_image('docman/new.png', '14', '14', $html_image_attr);
 		}
-		echo '&nbsp;'.$d->getFileName();
-		echo '</td>';
-		echo '<td>'.$d->getName().'</td>';
-		echo '<td>'.$d->getDescription().'</td>';
-		echo '<td>'.make_user_link($d->getCreatorUserName(), $d->getCreatorRealName()).'</td>';
-		echo '<td>';
+		$cells[][] =  $nextcell.'&nbsp;'.$d->getFileName();
+		$cells[][] =  $d->getName();
+		$cells[][] =  $d->getDescription();
+		$cells[][] =  make_user_link($d->getCreatorUserName(), $d->getCreatorRealName());
 		if ( $d->getUpdated() ) {
-			echo date(_('Y-m-d H:i'), $d->getUpdated());
+			$cells[][] = date(_('Y-m-d H:i'), $d->getUpdated());
 		} else {
-			echo date(_('Y-m-d H:i'), $d->getCreated());
+			$cells[][] = date(_('Y-m-d H:i'), $d->getCreated());
 		}
-		echo '</td>';
-		echo '<td>';
+		$nextcell = '';
 		if ($d->getReserved()) {
 			$html_image_attr = array();
 			$html_image_attr['alt'] = _('Reserved Document');
 			$html_image_attr['class'] = 'tabtitle';
 			$html_image_attr['title'] = _('Reserved Document');
-			echo html_image('docman/document-reserved.png', '22', '22', $html_image_attr);
+			$nextcell = html_image('docman/document-reserved.png', '22', '22', $html_image_attr);
 			$reserved_by = $d->getReservedBy();
 			if ($reserved_by) {
 				$user = user_get_object($reserved_by);
 				if (is_object($user)) {
-					echo ' '._('by').' '.util_make_link_u($user->getUnixName(), $user->getID(), $user->getRealName());
+					$cells[][] = $nextcell.' '._('by').' '.util_make_link_u($user->getUnixName(), $user->getID(), $user->getRealName());
 				}
 			}
 		} else {
-			echo $d->getStateName();
+			$cells[][] = $d->getStateName();
 		}
-		echo '</td>';
-		echo '<td>';
 		switch ($d->getFileType()) {
 			case "URL": {
-				echo "--";
+				$cells[][] = "--";
 				break;
 			}
 			default: {
-				echo human_readable_bytes($d->getFileSize());
+				$cells[][] = human_readable_bytes($d->getFileSize());
 				break;
 			}
 		}
-		echo '</td>';
-		echo '<td>';
-			echo $d->getDownload();
-		echo '</td>';
+		$cells[][] = $d->getDownload();
 
 		if (forge_check_perm('docman', $group_id, 'approve')) {
-			echo '<td>';
+			$nextcell = '';
 			/* should we steal the lock on file ? */
 			if ($d->getLocked()) {
 				if ($d->getLockedBy() == $u->getID()) {
@@ -317,20 +305,20 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 			}
 			$editfileaction .= '&amp;group_id='.$GLOBALS['group_id'];
 			if (!$d->getLocked() && !$d->getReserved()) {
-				echo '<a class="tabtitle-ne" href="'.$actionlistfileurl.'&amp;action=trashfile&fileid='.$d->getID().'" title="'. _('Move this document to trash') .'" >'.html_image('docman/trash-empty.png',22,22,array('alt'=>_('Move this document to trash'))). '</a>';
-				echo '<a class="tabtitle-ne" href="#" onclick="javascript:controllerListFile.toggleEditFileView({action:\''.$editfileaction.'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json').', docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').', title:\''.addslashes($d->getName()).'\', filename:\''.$d->getFilename().'\', description:\''.addslashes($d->getDescription()).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', isHtml:\''.$d->isHtml().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri("docman").'\'})" title="'. _('Edit this document') .'" >'.html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this document'))). '</a>';
+				$nextcell .= '<a class="tabtitle-ne" href="'.$actionlistfileurl.'&amp;action=trashfile&fileid='.$d->getID().'" title="'. _('Move this document to trash') .'" >'.html_image('docman/trash-empty.png',22,22,array('alt'=>_('Move this document to trash'))). '</a>';
+				$nextcell .= '<a class="tabtitle-ne" href="#" onclick="javascript:controllerListFile.toggleEditFileView({action:\''.$editfileaction.'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json').', docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').', title:\''.addslashes($d->getName()).'\', filename:\''.$d->getFilename().'\', description:\''.addslashes($d->getDescription()).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', isHtml:\''.$d->isHtml().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri("docman").'\'})" title="'. _('Edit this document') .'" >'.html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this document'))). '</a>';
 				if (session_loggedin()) {
-					echo '<a class="tabtitle-ne" href="'.$actionlistfileurl.'&amp;action=reservefile&amp;fileid='.$d->getID().'" title="'. _('Reserve this document for later edition') .'" >'.html_image('docman/reserve-document.png',22,22,array('alt'=>_('Reserve this document'))). '</a>';
+					$nextcell .= '<a class="tabtitle-ne" href="'.$actionlistfileurl.'&amp;action=reservefile&amp;fileid='.$d->getID().'" title="'. _('Reserve this document for later edition') .'" >'.html_image('docman/reserve-document.png',22,22,array('alt'=>_('Reserve this document'))). '</a>';
 				}
 			} else {
 				if (session_loggedin() && $d->getReservedBy() != $u->getID()) {
 					if (forge_check_perm('docman', $ndg->Group->getID(), 'admin')) {
-						echo '<a class="tabtitle-ne" href="'.$actionlistfileurl.'&amp;action=enforcereserve&amp;fileid='.$d->getID().'" title="'. _('Enforce reservation') .'" >'.html_image('docman/enforce-document.png',22,22,array('alt'=>_('Enforce reservation')));
+						$nextcell .= '<a class="tabtitle-ne" href="'.$actionlistfileurl.'&amp;action=enforcereserve&amp;fileid='.$d->getID().'" title="'. _('Enforce reservation') .'" >'.html_image('docman/enforce-document.png',22,22,array('alt'=>_('Enforce reservation')));
 					}
 				} else {
-					echo '<a class="tabtitle-ne" href="'.$actionlistfileurl.'&amp;action=trashfile&amp;fileid='.$d->getID().'" title="'. _('Move this document to trash') .'" >'.html_image('docman/trash-empty.png',22,22,array('alt'=>_('Move this document to trash'))). '</a>';
-					echo '<a class="tabtitle-ne" href="#" onclick="javascript:controllerListFile.toggleEditFileView({action:\''.$editfileaction.'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json').', docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').', title:\''.addslashes($d->getName()).'\', filename:\''.$d->getFilename().'\', description:\''.addslashes($d->getDescription()).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', isHtml:\''.$d->isHtml().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri("docman").'\'})" title="'. _('Edit this document') .'" >'.html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this document'))). '</a>';
-					echo '<a class="tabtitle-ne" href="'.$actionlistfileurl.'&amp;action=releasefile&amp;fileid='.$d->getID().'" title="'. _('Release reservation') .'" >'.html_image('docman/release-document.png',22,22,array('alt'=>_('Release reservation'))). '</a>';
+					$nextcell .= '<a class="tabtitle-ne" href="'.$actionlistfileurl.'&amp;action=trashfile&amp;fileid='.$d->getID().'" title="'. _('Move this document to trash') .'" >'.html_image('docman/trash-empty.png',22,22,array('alt'=>_('Move this document to trash'))). '</a>';
+					$nextcell .= '<a class="tabtitle-ne" href="#" onclick="javascript:controllerListFile.toggleEditFileView({action:\''.$editfileaction.'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json').', docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').', title:\''.addslashes($d->getName()).'\', filename:\''.$d->getFilename().'\', description:\''.addslashes($d->getDescription()).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', isHtml:\''.$d->isHtml().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri("docman").'\'})" title="'. _('Edit this document') .'" >'.html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this document'))). '</a>';
+					$nextcell .= '<a class="tabtitle-ne" href="'.$actionlistfileurl.'&amp;action=releasefile&amp;fileid='.$d->getID().'" title="'. _('Release reservation') .'" >'.html_image('docman/release-document.png',22,22,array('alt'=>_('Release reservation'))). '</a>';
 				}
 			}
 			if (session_loggedin()) {
@@ -341,11 +329,11 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 					$option = 'add';
 					$titleMonitor = _('Start monitoring this document');
 				}
-				echo '<a class="tabtitle-ne" href="'.$actionlistfileurl.'&amp;action=monitorfile&amp;option='.$option.'&amp;fileid='.$d->getID().'" title="'.$titleMonitor.'" >'.html_image('docman/monitor-'.$option.'document.png',22,22,array('alt'=>$titleMonitor)). '</a>';
+				$nextcell .= '<a class="tabtitle-ne" href="'.$actionlistfileurl.'&amp;action=monitorfile&amp;option='.$option.'&amp;fileid='.$d->getID().'" title="'.$titleMonitor.'" >'.html_image('docman/monitor-'.$option.'document.png',22,22,array('alt'=>$titleMonitor)). '</a>';
 			}
-			echo '</td>';
+			$cells[][] = $nextcell;
 		}
-		echo '</tr>'."\n";
+		echo $HTML->multiTableRow(array(), $cells);
 	}
 	echo $HTML->listTableBottom();
 	echo '<p>';
