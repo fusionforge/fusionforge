@@ -195,20 +195,21 @@ function globalsearch_admin_table_postedit ($id) {
  *      globalsearch_admin_table_show() - display the specified table, sorted by the primary key, with links to add, edit, and delete
  */
 function globalsearch_admin_table_show () {
-        global $HTML, $PHP_SELF;
+	global $HTML, $PHP_SELF;
 
-        $result = db_query_params ('SELECT * FROM plugin_globalsearch_assoc_site ORDER BY assoc_site_id',
+	$result = db_query_params ('SELECT * FROM plugin_globalsearch_assoc_site ORDER BY assoc_site_id',
 				   array());
-        if ($result) {
-                $rows = db_numrows($result);
+	if ($result) {
+		$rows = db_numrows($result);
 
-                $cell_data=array();
-                $cell_data[]=array(ngettext('Associated forge','Associated forges',$rows).' <a href="'.$PHP_SELF.'?function=add">['._('add new').']</a>',
-                        'colspan="8"');
+		$cell_data=array();
+		$cell_data[]=array(ngettext('Associated forge','Associated forges',$rows).' <a href="'.$PHP_SELF.'?function=add">['._('add new').']</a>',
+			'colspan' => 8);
 
-                echo '<table border="0" width="100%">';
-                echo $HTML->multiTableRow('',$cell_data, TRUE);
+		echo '<table border="0" width="100%">';
+		echo $HTML->multiTableRow(array(),$cell_data, TRUE);
 
+		echo '<tr>';
 		echo '<td width="5%"></td>';
 		echo '<td><strong>'._('Forge ID').'</strong></td>';
 		echo '<td><strong>'._('Title').'</strong></td>';

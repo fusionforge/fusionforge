@@ -303,11 +303,10 @@ function admin_table_show($table, $unit, $primary_key) {
 		$cols = db_numfields($result);
 
 		$cell_data=array();
-		$cell_data[]=array(ucwords(getUnitLabel($unit)).' <a href="'.getStringFromServer('PHP_SELF').'?function=add">['._('add new').']</a>',
-			'colspan="'.($cols+1).'"');
-
+		$cell_data[] = array(ucwords(getUnitLabel($unit)).' <a href="'.getStringFromServer('PHP_SELF').'?function=add">['._('add new').']</a>',
+			'colspan' => ($cols+1));
 		echo '<table class="listing full">';
-		echo $HTML->multiTableRow('',$cell_data, TRUE);
+		echo $HTML->multiTableRow(array(), $cell_data, TRUE);
 
 		echo '
 			<tr><td></td>';

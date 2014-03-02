@@ -901,7 +901,7 @@ if (isset($params['group']) && $params['group']) {
 	/**
 	 * multiTableRow() - create a multilevel row in a table
 	 *
-	 * @param	string	$row_attr	the row attributes
+	 * @param	array	$row_attrs	the row attributes
 	 * @param	array	$cell_data	the array of cell data, each element is an array,
 	 *					the first item being the text,
 	 *					the subsequent items are attributes (dont include
@@ -910,32 +910,30 @@ if (isset($params['group']) && $params['group']) {
 	 * @param	bool	$istitle	is this row part of the title ?
 	 * @return	string	the html code
 	 */
-	function multiTableRow($row_attr, $cell_data, $istitle) {
-		$return= '
-			<tr '.$row_attr;
+	function multiTableRow($row_attrs, $cell_data, $istitle = false) {
+		$ap = html_ap();
 		if ( $istitle ) {
-			$return .=' class="align-center multiTableRowTitle"';
+			(isset($row_attrs['class'])) ? $row_attrs['class'] .= ' align-center multiTableRowTitle' : $row_attrs['class'] = 'align-center multiTableRowTitle';
+			$row_attrs['class'] .= '';
 		}
-		$return .= '>';
+		$return = html_ao('tr', $row_attrs);
 		for ( $c = 0; $c < count($cell_data); $c++ ) {
-			$return .='<td ';
-			for ( $a=1; $a < count($cell_data[$c]); $a++) {
-				$return .= $cell_data[$c][$a].' ';
+			$locAp = html_ap();
+			$cellAttrs = array();
+			foreach (array_slice($cell_data[$c],1) as $k => $v) {
+				$cellAttrs[$k] = $v;
 			}
-			$return .= '>';
+			$return .= html_ao('td', $cellAttrs);
 			if ( $istitle ) {
-				$return .='<span class="multiTableRowTitle">';
+				$return .= html_ao('span', array('class' => 'multiTableRowTitle'));
 			}
 			$return .= $cell_data[$c][0];
 			if ( $istitle ) {
-				$return .='</span>';
+				$return .= html_ac(html_ap() -1);
 			}
-			$return .= '</td>';
-
+			$return .= html_ac($locAp);
 		}
-		$return .= '</tr>
-			';
-
+		$return .= html_ac($ap);
 		return $return;
 	}
 

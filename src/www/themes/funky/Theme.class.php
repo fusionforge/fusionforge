@@ -347,7 +347,7 @@ class Theme extends Layout {
 	/**
 	 * multiTableRow() - create a multilevel row in a table
 	 *
-	 * @param	string	$row_attr	the row attributes
+	 * @param	array	$row_attrs	the row attributes
 	 * @param	array	$cell_data	the array of cell data, each element is an array,
 	 *					the first item being the text,
 	 *					the subsequent items are attributes (dont include
@@ -357,28 +357,31 @@ class Theme extends Layout {
 	 *
 	 * @return string
 	 */
-	function multiTableRow($row_attr, $cell_data, $istitle) {
-		$return= '<tr class="ff" '.$row_attr;
-		if ( $istitle )
-			$return .=' align="center"';
-
-		$return .= '>';
-		for ( $c = 0; $c < count($cell_data); $c++ ) {
-			$return .='<td class="ff" ';
-			for ( $a=1; $a < count($cell_data[$c]); $a++)
-				$return .= $cell_data[$c][$a].' ';
-
-			$return .= '>';
-			if ( $istitle )
-				$return .='<strong>';
-
-			$return .= $cell_data[$c][0];
-			if ( $istitle )
-				$return .='</strong>';
-
-			$return .= '</td>';
+	function multiTableRow($row_attrs, $cell_data, $istitle = false) {
+		$ap = html_ap();
+		(isset($row_attrs['class'])) ? $row_attrs['class'] .= ' ff' : $row_attrs['class'] = 'ff';
+		if ( $istitle ) {
+			$row_attrs['class'] .= ' align-center';
 		}
-		$return .= '</tr>';
+		$return = html_ao('tr', $row_attrs);
+		for ( $c = 0; $c < count($cell_data); $c++ ) {
+			$locAp = html_ap();
+			$cellAttrs = array();
+			foreach (array_slice($cell_data[$c],1) as $k => $v) {
+				$cellAttrs[$k] = $v;
+			}
+			(isset($cellAttrs['class'])) ? $cellAttrs['class'] .= ' ff' : $cellAttrs['class'] = 'ff';
+			$return .= html_ao('td', $cellAttrs);
+			if ( $istitle ) {
+				$return .= html_ao('strong');
+			}
+			$return .= $cell_data[$c][0];
+			if ( $istitle ) {
+				$return .= html_ac(html_ap() -1);
+			}
+			$return .= html_ac($locAp);
+		}
+		$return .= html_ac($ap);
 		return $return;
 	}
 

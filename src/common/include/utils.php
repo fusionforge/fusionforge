@@ -718,13 +718,13 @@ function ShowResultSet($result, $title = '', $linkify = false, $displayHeaders =
 		/*  Create the title  */
 		if (strlen($title) > 0) {
 			$titleCellData = array();
-			$titleCellData[] = array($title, 'colspan="'.count($headersCellData).'"');
-			echo $HTML->multiTableRow('', $titleCellData, TRUE);
+			$titleCellData[] = array($title, 'colspan' => count($headersCellData));
+			echo $HTML->multiTableRow(array(), $titleCellData, TRUE);
 		}
 
 		/* Display the headers */
 		if ($displayHeaders) {
-			echo $HTML->multiTableRow('', $headersCellData, TRUE);
+			echo $HTML->multiTableRow(array(), $headersCellData, TRUE);
 		}
 
 		/*  Create the rows  */

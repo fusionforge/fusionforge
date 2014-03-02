@@ -280,7 +280,7 @@ if (session_loggedin()) {
 		$cell_data[] = array(_('End Date'));
 		echo "<table>".
 
-				$HTML->multiTableRow('',$cell_data,TRUE);
+				$HTML->multiTableRow(array(),$cell_data,TRUE);
 
 		echo	"<tr>
 				<td>".html_build_select_box($skills, "type", 1, false, "")."</td>
@@ -294,14 +294,14 @@ if (session_loggedin()) {
 
 		$cell_data = array();
 		$cell_data[] = array(_('Title (max 100 characters)'));
-		echo $HTML->multiTableRow('',$cell_data,TRUE);
+		echo $HTML->multiTableRow(array(),$cell_data,TRUE);
 
 		echo '<tr>
 			<td><input type="text" name="title" size="100" /></td>
 			</tr>';
 		$cell_data = array();
 		$cell_data[] = array(_('Keywords (max 255 characters)'));
-		echo $HTML->multiTableRow('',$cell_data,TRUE);
+		echo $HTML->multiTableRow(array(),$cell_data,TRUE);
 		echo '<tr>
 				<td><textarea name="keywords" rows="3" cols="85" wrap="soft"></textarea></td>
 			</tr>
