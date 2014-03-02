@@ -5,7 +5,7 @@
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2009-2010, Roland Mas
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2014, Franck Villaume - TrivialDev
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
@@ -41,24 +41,6 @@ function &user_get_object_by_name($user_name, $res = false) {
 	if (!$res) {
 		$res = db_query_params('SELECT * FROM users WHERE user_name=$1',
 					array($user_name));
-	}
-	return user_get_object(db_result($res, 0, 'user_id'), $res);
-}
-
-/**
- * user_get_object_by_realname() - Get User object by realname.
- * user_get_object is useful so you can pool user objects/save database queries
- * You should always use this instead of instantiating the object directly
- * If we get lucky, we get the GFUser object.
- *
- * @param string       $user_name The unix username - required
- * @param bool|int     $res       The result set handle ("SELECT * FROM USERS WHERE user_id=xx")
- * @return GFUser User object or false on failure
- */
-function &user_get_object_by_realname($real_name, $res = false) {
-	if (!$res) {
-		$res = db_query_params('SELECT * FROM users WHERE realname=$1',
-					array($real_name));
 	}
 	return user_get_object(db_result($res, 0, 'user_id'), $res);
 }
