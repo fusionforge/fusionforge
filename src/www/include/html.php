@@ -1144,9 +1144,11 @@ function html_e($name, $attrs = array(), $content = "", $shortform = true) {
 		$attrs['title'] = '';
 	}
 	$rv = '';
+	$tab = '';
 	for ($i = 0; $i < $html_autoclose_pos +1; $i++) {
-		$rv .= "\t";
+		$tab .= "\t";
 	}
+	$rv .= $tab;
 	$rv .= '<'.$name;
 	foreach ($attrs as $key => $value) {
 		if (is_array($value)) {
@@ -1160,7 +1162,15 @@ function html_e($name, $attrs = array(), $content = "", $shortform = true) {
 	if ($content === "" && $shortform) {
 		$rv .= ' />'."\n";
 	} else {
-		$rv .= '>'.$content.'</'.$name.'>'."\n";
+		$rv .= '>';
+		if (preg_match('/([\<])([^\>]{1,})*([\>])/i', $content)) {
+			$rv .= "\n";
+		}
+		$rv .= $content;
+		if (preg_match('/([\<])([^\>]{1,})*([\>])/i', $content)) {
+			$rv .= $tab;
+		}
+		$rv .= '</'.$name.'>'."\n";
 	}
 	return $rv;
 }
