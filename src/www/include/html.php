@@ -1164,7 +1164,7 @@ function html_e($name, $attrs = array(), $content = "", $shortform = true) {
 	} else {
 		$rv .= '>';
 		if (preg_match('/([\<])([^\>]{1,})*([\>])/i', $content)) {
-			$rv .= "\n";
+			$rv .= "\n\t";
 		}
 		$rv .= $content;
 		if (preg_match('/([\<])([^\>]{1,})*([\>])/i', $content)) {
