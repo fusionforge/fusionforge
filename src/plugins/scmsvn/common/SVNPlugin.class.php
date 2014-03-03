@@ -627,7 +627,7 @@ class SVNPlugin extends SCMPlugin {
 					$result['section'] = 'scm';
 					$result['group_id'] = $group_id;
 					$result['ref_id'] = 'viewvc.php/?root='.$project->getUnixName();
-					$result['description'] = $message.' (r'.$revisions[$i].')';
+					$result['description'] = htmlspecialchars($message).' (r'.$revisions[$i].')';
 					$result['user_name'] = $users[$i];
 					$userObject = user_get_object_by_name($users[$i]);
 					if (is_a($userObject, 'GFUser')) {
