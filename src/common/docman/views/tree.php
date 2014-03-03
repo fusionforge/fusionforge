@@ -42,15 +42,15 @@ $dm = new DocumentManager($g);
 echo html_ao('ul', array('id' => $g->getUnixname().'-tree'));
 $dm->getTree($dirid, $linkmenu);
 echo html_ac(html_ap() - 1);
-echo '
-<script type="text/javascript">//<![CDATA[
+echo html_ao('script', array('type' => 'text/javascript'));
+echo '//<![CDATA[
 	jQuery(document).ready(function() {
 		if (typeof(jQuery(\'#'.$g->getUnixname().'-tree\').simpleTreeMenu) != "undefined") {
 			jQuery(\'#'.$g->getUnixname().'-tree\').simpleTreeMenu();
 		}
 	});
-//]]></script>
-';
+//]]>'."\n";
+echo html_ac(html_ap() - 1);
 if ($g->usesPlugin('projects-hierarchy')) {
 	$projectsHierarchy = plugin_get_object('projects-hierarchy');
 	$projectIDsArray = $projectsHierarchy->getFamily($group_id, 'child', true, 'validated');
@@ -66,38 +66,38 @@ if (isset($projectIDsArray) && is_array($projectIDsArray)) {
 			echo html_ao('ul', array('id' => $groupObject->getUnixname().'-tree'));
 			$dmc->getTree($dirid, $linkmenu);
 			echo html_ac(html_ap() - 1);
-			echo '
-			<script type="text/javascript">//<![CDATA[
+			echo html_ao('script', array('type' => 'text/javascript'));
+			echo '//<![CDATA[
 				jQuery(document).ready(function() {
 					if (typeof(jQuery(\'#'.$g->getUnixname().'-tree\').simpleTreeMenu) != "undefined") {
 						jQuery(\'#'.$groupObject->getUnixname().'-tree\').simpleTreeMenu();
 					}
 				});
-			//]]></script>
-			';
+			//]]>'."\n";
+			echo html_ac(html_ap() - 1);
 		}
 	}
 }
 if (isset($childgroup_id) && $childgroup_id) {
 	$groupObject = group_get_object($childgroup_id);
-	echo '
-		<script type="text/javascript">//<![CDATA[
+	echo html_ao('script', array('type' => 'text/javascript'));
+	echo '//<![CDATA[
 			jQuery(document).ready(function() {
 				if (typeof(jQuery(\'#'.$g->getUnixname().'-tree\').simpleTreeMenu) != "undefined") {
 					jQuery(\'#'.$groupObject->getUnixname().'-tree\').simpleTreeMenu(\'expandToNode\', jQuery(\'#leaf-'.$dirid.'\'));
 				}
 			});
-		//]]> /</script>
-	';
+		//]]>'."\n";
+	echo html_ac(html_ap() - 1);
 } else {
-	echo '
-		<script type="text/javascript">//<![CDATA[
+	echo html_ao('script', array('type' => 'text/javascript'));
+	echo '//<![CDATA[
 			jQuery(document).ready(function() {
 				if (typeof(jQuery(\'#'.$g->getUnixname().'-tree\').simpleTreeMenu) != "undefined") {
 					jQuery(\'#'.$g->getUnixname().'-tree\').simpleTreeMenu(\'expandToNode\', jQuery(\'#leaf-'.$dirid.'\'));
 				}
 			});
-		//]]></script>
-	';
+		//]]>'."\n";
+	echo html_ac(html_ap() - 1);
 }
 echo html_ac(html_ap() - 1);

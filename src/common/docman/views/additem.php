@@ -31,9 +31,10 @@ if (!forge_check_perm('docman', $group_id, 'submit')) {
 	$return_msg= _('Document Manager Access Denied');
 	session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
 }
-?>
 
-<script type="text/javascript">//<![CDATA[
+echo html_ao('script', array('type' => 'text/javascript'));
+?>
+//<![CDATA[
 var controllerAddItem;
 
 jQuery(document).ready(function() {
@@ -46,9 +47,9 @@ jQuery(document).ready(function() {
 jQuery(document).ready(function() {
 	jQuery("#tabs").tabs();
 });
-//]]></script>
-
+//]]>
 <?php
+echo html_ac(html_ap() - 1);
 echo html_ao('div', array('id' => 'tabs'));
 echo html_ao('ul');
 echo html_e('li', array(), util_make_link('#tabs-new-document', _('New Document'), array('id' => 'tab-new-document', 'class' => 'tabtitle', 'title' => _('Submit a new document in this folder.')), true), false);

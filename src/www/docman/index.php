@@ -118,12 +118,12 @@ $title = _('Documents for ').$g->getPublicName();
 
 site_project_header(array('title'=>$title, 'group'=>$group_id, 'toptab'=>'docman'));
 
-echo '<div id="menu" >';
+echo html_ao('div', array('id' => 'menu'));
 include ($gfcommon.'docman/views/menu.php');
-echo '</div>';
+echo html_ac(html_ap() - 1);
 
-echo '<div id="views">';
+echo html_ao('div', array('id' => 'views'));
 include ($gfcommon.'docman/views/views.php');
-echo '</div>';
+echo html_ac(html_ap() - 1);
 
 site_project_footer();
