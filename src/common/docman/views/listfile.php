@@ -198,7 +198,7 @@ if ($DocGroupName) {
 
 	if (forge_check_perm('docman', $ndg->Group->getID(), 'approve')) {
 		echo '<div class="docman_div_include" id="editdocgroup" style="display:none;">';
-		echo '<h4 class="docman_h4">'. _('Edit this folder') .'</h4>';
+		echo html_e('h4', array('class' => 'docman_h4'), _('Edit this folder'), false);
 		include ($gfcommon.'docman/views/editdocgroup.php');
 		echo '</div>';
 	}
@@ -237,7 +237,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 				break;
 			}
 			default: {
-				$docurl = util_make_uri('/docman/view.php/'.$d->Group->getID().'/'.$d->getID().'/'.urlencode($d->getFileName()));
+				$docurl = '/docman/view.php/'.$d->Group->getID().'/'.$d->getID().'/'.urlencode($d->getFileName());
 				$docurltitle = _('View this document');
 			}
 		}
