@@ -77,7 +77,7 @@ class SurveyResponseFactory extends Error {
 			return;
 		}
 		if ($survey->isError()) {
-			$this->setError(_('Survey').':: '.$survey->getErrorMessage());
+			$this->setError(_('Survey')._(': ').$survey->getErrorMessage());
 			return;
 		}
 		if (!$question || !is_object($question)) {
@@ -85,7 +85,7 @@ class SurveyResponseFactory extends Error {
 			return;
 		}
 		if ($question->isError()) {
-			$this->setError(_('Survey').':: '.$question->getErrorMessage());
+			$this->setError(_('Survey')._(': ').$question->getErrorMessage());
 			return;
 		}
 

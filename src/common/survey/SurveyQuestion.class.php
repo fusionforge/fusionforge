@@ -58,7 +58,7 @@ class SurveyQuestion extends Error {
 			return;
 		}
 		if ($Group->isError()) {
-			$this->setError('Survey:: '.$Group->getErrorMessage());
+			$this->setError('Survey: '.$Group->getErrorMessage());
 			return;
 		}
 		$this->Group =& $Group;

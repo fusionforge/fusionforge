@@ -64,7 +64,7 @@ function ReportUserAct($span,$user_id,$start=0,$end=0) {
 	$this->end_date=$end;
 
 	if (!$res || db_error()) {
-		$this->setError('ReportUserAct:: '.db_error());
+		$this->setError('ReportUserAct: '.db_error());
 		return false;
 	}
 	$this->setSpan($span);

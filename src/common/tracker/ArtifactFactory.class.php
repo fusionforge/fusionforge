@@ -72,11 +72,11 @@ class ArtifactFactory extends Error {
 	function __construct(&$ArtifactType) {
 		$this->Error();
 		if (!$ArtifactType || !is_object($ArtifactType)) {
-			$this->setError('ArtifactFactory:: No Valid ArtifactType Object');
+			$this->setError('ArtifactFactory: No Valid ArtifactType Object');
 			return;
 		}
 		if ($ArtifactType->isError()) {
-			$this->setError('ArtifactFactory:: '.$ArtifactType->getErrorMessage());
+			$this->setError('ArtifactFactory: '.$ArtifactType->getErrorMessage());
 			return;
 		}
 		$this->ArtifactType =& $ArtifactType;

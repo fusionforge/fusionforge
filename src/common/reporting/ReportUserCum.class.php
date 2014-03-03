@@ -55,7 +55,7 @@ function ReportUserCum($span,$start=0,$end=0) {
 	$this->end_date=$end;
 
 	if (!$res || db_error()) {
-		$this->setError('ReportUserAdded:: '.db_error());
+		$this->setError('ReportUserAdded: '.db_error());
 		return false;
 	}
 	$this->setSpan($span);

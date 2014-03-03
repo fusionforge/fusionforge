@@ -54,7 +54,7 @@ class SurveyQuestionFactory extends Error {
 			return;
 		}
 		if ($Group->isError()) {
-			$this->setError(_('Survey').':: '.$Group->getErrorMessage());
+			$this->setError(_('Survey')._(': ').$Group->getErrorMessage());
 			return;
 		}
 		if (!$Group->usesSurvey()) {

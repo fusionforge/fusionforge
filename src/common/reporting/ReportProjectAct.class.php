@@ -65,7 +65,7 @@ function ReportProjectAct($span,$group_id,$start=0,$end=0) {
 	$this->end_date=$end;
 
 	if (!$res || db_error()) {
-		$this->setError('ReportProjectAct:: '.db_error());
+		$this->setError('ReportProjectAct: '.db_error());
 		return false;
 	}
 	$this->setSpan($span);
