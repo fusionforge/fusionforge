@@ -35,14 +35,16 @@ if ( !forge_check_perm('docman', $group_id, 'admin')) {
 }
 
 echo html_ao('div', array('id' => 'principalAdminDiv', 'class' => 'docmanDivIncluded'));
+echo html_ao('script', array('type' => 'text/javascript'));
 ?>
-<script type="text/javascript">//<![CDATA[
+//<![CDATA[
 function doIt(formid) {
 	document.getElementById(formid).submit();
 	document.getElementById('submit'+formid).disabled = true;
 }
-//]]></script>
+//]]>
 <?php
+echo html_ac(html_ap() - 1);
 if (extension_loaded('zip')) {
 	echo html_ao('form', array('id' => 'backup', 'name' => 'backup', 'method' => 'post', 'action' => util_make_uri('/docman/view.php/'.$group_id.'/backup')));
 	echo html_ao('ul');
@@ -75,7 +77,7 @@ echo html_ac(html_ap() -2);
 if ($g->useDocmanSearch()) {
 	echo html_ao('form', array('id' => 'reindexword', 'name' => 'reindexword', 'method' => 'post', 'action' => '?group_id='.$group_id.'&action=forcereindexenginesearch'));
 	echo html_ao('ul');
-	echo '<li><input name="status" type="hidden" value="1"><input id="submitreindexword" type="button" value="'. _('Force reindexation search engine') .'" onclick="javascript:doIt(\'reindexword\')"></li>';
+	echo html_e('li', array(), html_e('input', array('name' => 'status', 'type' => 'hidden', 'value' => '1')).'<input id="submitreindexword" type="button" value="'. _('Force reindexation search engine') .'" onclick="javascript:doIt(\'reindexword\')">', false);
 	echo html_ac(html_ap() -2);
 }
 
@@ -88,7 +90,7 @@ if (forge_get_config('use_webdav')) {
 		$webdavStatus = '0';
 		$labelWebdavInterface = _('Disable Webdav Interface');
 	}
-	echo '<li><input name="status" type="hidden" value="'.$webdavStatus.'"><input id="submitweddavinterface" type="button" value="'.$labelWebdavInterface.'" onclick="javascript:doIt(\'webdavinterface\')"></li>';
+	echo html_e('li', array(), html_e('input', array('name' => 'status', 'type' => 'hidden', 'value' => $webdavStatus)).'<input id="submitweddavinterface" type="button" value="'.$labelWebdavInterface.'" onclick="javascript:doIt(\'webdavinterface\')">', false);
 	echo html_ac(html_ap() -2);
 }
 

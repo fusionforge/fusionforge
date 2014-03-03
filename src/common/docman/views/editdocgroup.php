@@ -33,6 +33,7 @@ global $group_id; // id of the group
 global $dirid; // id of doc_group
 global $dgf; // document directory factory of this group
 global $dm; // the Document Manager object
+global $HTML;
 
 if (!forge_check_perm('docman', $group_id, 'approve')) {
 	$return_msg= _('Document Manager Access Denied');
@@ -50,33 +51,24 @@ $dg = new DocumentGroup($g, $dirid);
 if ($dg->isError())
 	session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($dg->getErrorMessage()));
 
-?>
-<div class="docmanDivIncluded">
-	<form name="editgroup" action="<?php echo $actionurl; ?>" method="post">
-		<input type="hidden" name="dirid" value="<?php echo $dirid; ?>" />
-		<table>
-			<tr>
-				<td><?php echo _('Folder Name') ?></td>
-				<td><input required="required" type="text" name="groupname" value="<?php echo $dg->getName(); ?>" /></td>
-				<td>&nbsp;</td>
-				<td><?php echo _('belongs to') ?></td>
-				<td>
-<?php
+echo html_ao('div', array('class' => 'docmanDivIncluded'));
+echo html_ao('form', array('name' => 'editgroup', 'action' => $actionurl, 'method' => 'post'));
+echo html_e('input', array('type' => 'hidden', 'name' => 'dirid', 'value' => $dirid));
+echo $HTML->listTableTop();
+$cells[][] = _('Folder Name');
+$cells[][] = '<input required="required" type="text" name="groupname" value="'.$dg->getName().'" />';
+$cells[][] = '&nbsp;';
+$cells[][] = _('belongs to');
 if ($dg->getState() == 2) {
 	$newdgf = new DocumentGroupFactory($g);
-	$dm->showSelectNestedGroups($newdgf->getNested(), 'parent_dirid', true, false);
+	$cells[][] = $dm->showSelectNestedGroups($newdgf->getNested(), 'parent_dirid', true, false);
 	$labelSubmit = _('Restore');
 } else {
-	$dm->showSelectNestedGroups($dgf->getNested(), 'parent_dirid', true, $dg->getParentId(), array($dg->getID()));
+	$cells[][] = $dm->showSelectNestedGroups($dgf->getNested(), 'parent_dirid', true, $dg->getParentId(), array($dg->getID()));
 	$labelSubmit = _('Edit');
 }
-?>
-				</td>
-				<td><input type="submit" value="<?php echo $labelSubmit ?>" name="submit" /></td>
-			</tr>
-		</table>
-		<p>
-		<?php echo _('Folder name will be used as a title, so it should be formatted correspondingly.') ?>
-		</p>
-	</form>
-</div>
+$cells[][] = '<input type="submit" value="<?php echo $labelSubmit ?>" name="submit" />';
+echo $HTML->multiTableRow(array(), $cells);
+echo $HTML->listTableBottom();
+echo html_e('p', array(), _('Folder name will be used as a title, so it should be formatted correspondingly.'), false);
+echo html_ac(html_ap() - 2);

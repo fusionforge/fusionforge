@@ -53,9 +53,9 @@ if (!forge_check_perm('docman', $group_id, 'submit')) {
 	$return_msg = _('Document Manager Action Denied.');
 	session_redirect($redirecturl.'&warning_msg='.urlencode($return_msg));
 }
+echo html_ao('script', array('type' => 'text/javascript'));
 ?>
-
-<script type="text/javascript">//<![CDATA[
+//<![CDATA[
 var controllerAddFile;
 
 jQuery(document).ready(function() {
@@ -72,8 +72,9 @@ jQuery(document).ready(function() {
 	});
 });
 
-//]]></script>
+//]]>
 <?php
+echo html_ac(html_ap() - 1);
 echo html_ao('div', array('class' => 'docmanDivIncluded'));
 if ($dgf->getNested() == NULL) {
 	$dg = new DocumentGroup($g);
@@ -146,7 +147,7 @@ if ($dgf->getNested() == NULL) {
 			echo html_e('span', array(), sprintf(_('Pick a file already uploaded (by SFTP or SCP) to the <a href="%1$s">project\'s incoming directory</a> (%2$s).'),
 								'sftp://'.forge_get_config('web_host').$incoming.'/', $incoming), false);
 		} else {
-			echo html_e('p', array('class' => 'warning'), printf(_('You need first to upload file in %s'),$incoming), false);
+			echo html_e('p', array('class' => 'warning'), sprintf(_('You need first to upload file in %s'),$incoming), false);
 		}
 		echo html_ac(html_ap() - 2);
 	}
@@ -179,7 +180,7 @@ if ($dgf->getNested() == NULL) {
 		echo html_ao('tr');
 		echo html_e('td', array(), _('Documents folder that document belongs in'), false);
 		echo html_ao('td');
-		$dm->showSelectNestedGroups($dgf->getNested(), 'doc_group', false, $dirid);
+		echo $dm->showSelectNestedGroups($dgf->getNested(), 'doc_group', false, $dirid);
 		echo html_ac(html_ap() - 2);
 	}
 	if (forge_check_perm('docman', $group_id, 'approve')) {
@@ -190,7 +191,7 @@ if ($dgf->getNested() == NULL) {
 		echo html_ac(html_ap() - 2);
 	}
 	echo html_ac(html_ap() - 1);
-	echo html_eo('p', array(), printf(_('Fields marked with %s are mandatory.'), utils_requiredField()));
+	echo html_e('p', array(), sprintf(_('Fields marked with %s are mandatory.'), utils_requiredField()), false);
 	echo html_ao('div', array('class' => 'docmanSubmitDiv'));
 	echo html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Submit Information')));
 	echo html_ac(html_ap() - 2);

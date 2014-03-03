@@ -321,7 +321,7 @@ if ($group->usesDocman()) {
 	echo html_e('p', array(), _('Alternatively, you can pick a file available in the Documents Management tool.'), false);
 	$dm = new DocumentManager($group);
 	$dgf = new DocumentGroupFactory($group);
-	$dm->showSelectNestedGroups($dgf->getNested(), 'docman_fileid', true, 0, array(), true);
+	echo $dm->showSelectNestedGroups($dgf->getNested(), 'docman_fileid', true, 0, array(), true);
 }
 ?>
 </fieldset>

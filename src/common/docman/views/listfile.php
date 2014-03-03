@@ -132,7 +132,6 @@ if ($d_pending_arr != NULL ) {
 	}
 }
 
-$map = html_ap();
 echo html_ao('div', array('id' => 'rightdiv'));
 echo html_ao('script', array('type' => 'text/javascript'));
 ?>
@@ -166,8 +165,8 @@ if ($DocGroupName) {
 	}
 	$headerPath .= _('Path')._(': ').html_e('i', array(), $dgpath, false);
 	echo html_e('h2', array(), $headerPath, false);
-	$ap = html_ap();
-	echo html_ao('h3', array('class' => 'docman_h3'), _('Document Folder')._(': ').html_e('i',array(),$DocGroupName, false).'&nbsp;', false);
+	echo html_ao('h3', array('class' => 'docman_h3'));
+	echo html_e('span', array(), _('Document Folder')._(': ').html_e('i',array(),$DocGroupName, false).'&nbsp;', false);
 	if (forge_check_perm('docman', $ndg->Group->getID(), 'approve')) {
 		echo util_make_link('#', html_image('docman/configure-directory.png', 22, 22, array('alt' => 'edit')), array('class' => 'tabtitle', 'id' => 'docman-editdirectory', 'title' => _('Edit this folder')), true);
 		echo util_make_link($actionlistfileurl.'&action=trashdir', html_image('docman/trash-empty.png', 22, 22, array('alt' => 'trashdir')), array('class' => 'tabtitle', 'id' => 'docman-trashdirectory', 'title' => _('Move this folder and his content to trash')));
@@ -196,20 +195,18 @@ if ($DocGroupName) {
 		}
 		echo util_make_link($actionlistfileurl.'&action=monitordirectory&option='.$option.'&directoryid='.$ndg->getID(), html_image('docman/monitor-'.$option.'document.png',22,22,array('alt'=>$titleMonitor)), array('class' => 'tabtitle-ne', 'title' => $titleMonitor));
 	}
-	echo html_ac($ap);
+	echo html_ac(html_ap() - 1);
 
 	if (forge_check_perm('docman', $ndg->Group->getID(), 'approve')) {
-		$ap = html_ap();
 		echo html_ao('div', array('class' => 'docman_div_include', 'id' => 'editdocgroup', 'style' => 'display: none'));
 		echo html_e('h4', array('class' => 'docman_h4'), _('Edit this folder'), false);
 		include ($gfcommon.'docman/views/editdocgroup.php');
-		echo html_ac($ap);
+		echo html_ac(html_ap() - 1);
 	}
 	if (forge_check_perm('docman', $ndg->Group->getID(), 'submit')) {
-		$ap = html_ap();
 		echo html_ao('div', array('class' => 'docman_div_include', 'id' => 'additem', 'style' => 'display: none'));
 		include ($gfcommon.'docman/views/additem.php');
-		echo html_ac($ap);
+		echo html_ac(html_ap() - 1);
 	}
 }
 
@@ -220,7 +217,6 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		$tabletop[] = _('Actions');
 		$classth[] = 'unsortable';
 	}
-	$ap = html_ap();
 	echo html_ao('div', array('class' => 'docmanDiv'));
 	echo $HTML->listTableTop($tabletop, array(), 'sortable_docman_listfile', 'sortable', $classth);
 	$time_new = 604800;
@@ -343,9 +339,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 	echo $HTML->listTableBottom();
 	echo html_ao('p');
 	echo html_ao('span', array('id' => 'massactionactive', 'style' => 'display: none'));
-	echo '<span class="tabtitle" id="docman-massactionmessage" title="'. _('Actions availables for selected documents, you need to check at least one document to get actions') . '" >';
-	echo _('Mass actions for selected documents:');
-	echo '</span>';
+	echo html_e('span', array('class' => 'tabtitle', 'id' => 'docman-massactionmessage', 'title' => _('Actions availables for selected documents, you need to check at least one document to get actions')), _('Mass actions for selected documents:'), false);
 	if (forge_check_perm('docman', $ndg->Group->getID(), 'approve')) {
 		echo '<a class="tabtitle-ne" href="#" onclick="window.location.href=\'?group_id='.$group_id.'&amp;action=trashfile&amp;view=listfile&amp;dirid='.$dirid.'&amp;fileid=\'+controllerListFile.buildUrlByCheckbox(\'active\')" title="'. _('Move to trash') .'" >'.html_image('docman/trash-empty.png',22,22,array('alt'=>_('Move to trash'))). '</a>';
 		if (session_loggedin()) {
@@ -356,10 +350,10 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		}
 	}
 	echo '<a class="tabtitle" href="#" onclick="window.location.href=\'/docman/view.php/'.$group_id.'/zip/selected/'.$dirid.'/\'+controllerListFile.buildUrlByCheckbox(\'active\')" title="'. _('Download as a ZIP') . '" >' . html_image('docman/download-directory-zip.png',22,22,array('alt'=>'Download as Zip')). '</a>';
-	echo html_ac($ap);
+	echo html_ac(html_ap() - 3);
 } else {
 	if ($dirid) {
-		echo '<p class="information">'._('No documents.').'</p>';
+		echo html_e('p', array('class' => 'information'), _('No documents.'), false);
 	}
 }
 if (forge_check_perm('docman', $group_id, 'approve') && $DocGroupName) {
@@ -370,4 +364,4 @@ if (forge_check_perm('docman', $g->getID(), 'approve')) {
 }
 
 include ($gfcommon.'docman/views/help.php');
-echo html_ac($map);
+echo html_ac(html_ap() - 1);

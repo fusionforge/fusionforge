@@ -134,25 +134,19 @@ function html_blankimage($height, $width) {
  */
 function html_abs_image($url, $width, $height, $args) {
 	global $use_tooltips;
-	$return = ('<img src="'.$url.'"');
-	reset($args);
+	$args['src'] = $url;
 	if (!$use_tooltips && isset($args['title']) && isset($args['class']) && preg_match('/tabtitle/', $args['class'])) {
 		$args['title'] = '';
 	}
-	while (list($k, $v) = each($args)) {
-		$return .= ' '.$k.'="'.$v.'"';
-	}
-
 	if (!isset($args['alt'])) {
-		$return .= ' alt=""';
+		$args['alt'] = '';
 	}
 
 	// Add image dimensions (if given)
-	$return .= $width ? " width=\"".$width."\"" : '';
-	$return .= $height ? " height=\"".$height."\"" : '';
+	$width ? $args['width'] = $width : '';
+	$height ? $args['height'] = $height : '';
 
-	$return .= (' />');
-	return $return;
+	return html_e('img', $args);
 }
 
 /**
@@ -800,7 +794,7 @@ function html_build_multiple_select_box_from_arrays($ids, $texts, $name, $checke
  * @return	html code for checkbox control
  */
 function html_build_checkbox($name, $value, $checked) {
-	$attrs = array('id' => $name, 'name' => $name, 'value' => $value);
+	$attrs = array('id' => $name, 'name' => $name, 'value' => $value, 'type' => 'checkbox');
 	if ($checked) {
 		$attrs['checked'] = 'checked';
 	}
@@ -860,7 +854,7 @@ function html_buildcheckboxarray($options, $name, $checked_array) {
 				$checked = 1;
 			}
 		}
-		echo '<br />'.html_build_checkbox($name, $value, $checked).$options[$i];
+		echo html_e('br').html_build_checkbox($name, $value, $checked).$options[$i];
 	}
 }
 

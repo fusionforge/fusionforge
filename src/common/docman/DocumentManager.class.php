@@ -304,7 +304,7 @@ class DocumentManager extends Error {
 		// Recursively build the document group tree
 		$this->buildArrays($group_arr, $id_array, $text_array, $dont_display, 0, 0, $display_files);
 
-		echo html_build_select_box_from_arrays($id_array, $text_array, $select_name, $selected_id, false);
+		return html_build_select_box_from_arrays($id_array, $text_array, $select_name, $selected_id, false);
 	}
 
 	/**

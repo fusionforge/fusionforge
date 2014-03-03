@@ -42,14 +42,16 @@ if (isset($childgroup_id) && $childgroup_id) {
 	$actionurl .= '&childgroup_id='.$childgroup_id;
 }
 
+echo html_ao('script', array('type' => 'text/javascript'));
 ?>
-<script type="text/javascript">//<![CDATA[
+//<![CDATA[
 function doItAddSubGroup() {
 	document.getElementById('addsubgroup').submit();
 	document.getElementById('submitaddsubgroup').disabled = true;
 }
-//]]></script>
+//]]>
 <?php
+echo html_ac(html_ap() - 1);
 echo html_ao('div', array('class' => 'docmanDivIncluded'));
 echo html_ao('form', array('id' => 'addsubgroup', 'name' => 'addsubgroup', 'method' => 'post', 'action' => $actionurl));
 if ($dirid) {
