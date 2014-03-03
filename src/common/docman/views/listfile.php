@@ -38,7 +38,7 @@ global $dm; // the docman manager
 $linkmenu = 'listfile';
 $baseredirecturl = '/docman/?group_id='.$group_id;
 $redirecturl = $baseredirecturl.'&view=listfile&dirid='.$dirid;
-$actionlistfileurl = '?group_id='.$group_id.'&amp;view=listfile&amp;dirid='.$dirid;
+$actionlistfileurl = '/docman/?group_id='.$group_id.'&amp;view=listfile&amp;dirid='.$dirid;
 if (!forge_check_perm('docman', $group_id, 'read')) {
 	$return_msg= _('Document Manager Access Denied');
 	session_redirect($baseredirecturl.'&warning_msg='.urlencode($return_msg));
@@ -56,7 +56,7 @@ if ($childgroup_id) {
 		session_redirect($baseredirecturl.'&warning_msg='.urlencode($return_msg));
 	}
 	$redirecturl .= '&childgroup_id='.$childgroup_id;
-	$actionlistfileurl .= '&amp;childgroup_id='.$childgroup_id;
+	$actionlistfileurl .= '&childgroup_id='.$childgroup_id;
 	$g = group_get_object($childgroup_id);
 }
 
