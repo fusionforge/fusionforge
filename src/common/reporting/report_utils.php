@@ -357,7 +357,10 @@ function trackeract_graph($group_id, $area, $SPAN, $start, $end, $atid) {
 		plot'.$chartid.'.replot();
 		});'."\n";
 	echo '//]]></script>';
+	echo "<figure>\n";
+	echo "<figcaption>"._('Tracker Activity').' ('.date(_('Y-m-d'), $start).' - '.date(_('Y-m-d'), $end).')'."</figcaption>\n";
 	echo '<div id="chart'.$chartid.'"></div>';
+	echo "</figure>\n";
 	return true;
 }
 
@@ -392,7 +395,6 @@ function trackerpie_graph($group_id, $area, $SPAN, $start, $end, $atid) {
 	echo 'jQuery(document).ready(function(){
 		plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', [data],
 			{
-				title : \''.$areaname." (".strftime('%x',$start) ." - ". strftime('%x',$end) .")".'\',
 				seriesDefaults: {
 					// Make this a pie chart.
 					renderer: jQuery.jqplot.PieRenderer,
@@ -413,7 +415,10 @@ function trackerpie_graph($group_id, $area, $SPAN, $start, $end, $atid) {
 			plot'.$chartid.'.replot( { resetAxes: true } );
 		});'."\n";
 	echo '//]]></script>';
+	echo "<figure>\n";
+	echo "<figcaption>".$areaname.' ('.date(_('Y-m-d'), $start).' - '.date(_('Y-m-d'), $end).')'."</figcaption>\n";
 	echo '<div id="chart'.$chartid.'"></div>';
+	echo "</figure>\n";
 	return true;
 }
 
@@ -560,7 +565,6 @@ function report_graph($type, $SPAN, $start, $end) {
 			axes: {
 				xaxis: {
 					renderer: jQuery.jqplot.CategoryAxisRenderer,
-					label: \''.$label[0].'\',
 				},
 				yaxis: {
 					max: '.++$yMax.',
@@ -583,7 +587,10 @@ function report_graph($type, $SPAN, $start, $end) {
 			plot'.$chartid.'.replot( { resetAxes: true } );
 		});'."\n";
 	echo '//]]></script>';
+	echo "<figure>\n";
+	echo "<figcaption>".$label[0].' ('.date(_('Y-m-d'), $start).' - '.date(_('Y-m-d'), $end).')'."</figcaption>\n";
 	echo '<div id="chart'.$chartid.'"></div>';
+	echo "</figure>\n";
 	return true;
 }
 
@@ -785,7 +792,7 @@ function report_actgraph($type, $SPAN, $start, $end, $id, $area) {
 			}
 			break;
 		}
-		case REPORT_TYPE_WEEKLY : {
+		case REPORT_TYPE_WEEKLY: {
 			for ($j = 0; $j < count($rdates); $j++) {
 				$wrdates[$j] = date($formatDate, $rdates[$j]);
 			}
@@ -818,7 +825,6 @@ function report_actgraph($type, $SPAN, $start, $end, $id, $area) {
 	}
 	echo 'jQuery(document).ready(function(){
 			plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', series, {
-				title : \''.$areaname.' ('.strftime('%x', $start).' - '.strftime('%x', $end).') \',
 				axesDefaults: {
 					tickRenderer: jQuery.jqplot.CanvasAxisTickRenderer,
 					tickOptions: {
@@ -871,7 +877,10 @@ function report_actgraph($type, $SPAN, $start, $end, $id, $area) {
 		plot'.$chartid.'.replot();
 	});'."\n";
 	echo '//]]></script>';
+	echo "<figure>\n";
+	echo "<figcaption>".$areaname.' ('.date(_('Y-m-d'), $start).' - '.date(_('Y-m-d'), $end).')'."</figcaption>\n";
 	echo '<div id="chart'.$chartid.'"></div>';
+	echo "</figure>\n";
 	return true;
 }
 
@@ -953,7 +962,6 @@ function report_toolspiegraph($datatype = 0, $start, $end) {
 		echo 'jQuery(document).ready(function(){
 			plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', [data'.$chartid.'],
 				{
-					title : \''.$arr[$datatype].' ('.strftime('%x', $start) .' - '. strftime('%x', $end) .')\',
 					seriesDefaults: {
 						renderer: jQuery.jqplot.PieRenderer,
 						rendererOptions: {
@@ -973,7 +981,10 @@ function report_toolspiegraph($datatype = 0, $start, $end) {
 				plot'.$chartid.'.replot( { resetAxes: true } );
 			});'."\n";
 		echo '//]]></script>';
+		echo "<figure>\n";
+		echo "<figcaption>".$arr[$datatype].' ('.date(_('Y-m-d'), $start).' - '.date(_('Y-m-d'), $end).')'."</figcaption>\n";
 		echo '<div id="chart'.$chartid.'"></div>';
+		echo "</figure>\n";
 	} else {
 		echo '<p class="information" >'._('No data to display.').'</p>';
 	}
@@ -1019,7 +1030,6 @@ function report_timegraph($type = 'site', $area = 'tasks', $start, $end, $id = 0
 		echo 'jQuery(document).ready(function(){
 			plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', [data'.$chartid.'],
 				{
-					title : \''.$arr[$area].' ('.strftime('%x', $start) .' - '. strftime('%x', $end) .')\',
 					seriesDefaults: {
 						renderer: jQuery.jqplot.PieRenderer,
 						rendererOptions: {
@@ -1037,7 +1047,10 @@ function report_timegraph($type = 'site', $area = 'tasks', $start, $end, $id = 0
 				plot'.$chartid.'.replot( { resetAxes: true } );
 			});'."\n";
 		echo '//]]></script>';
+		echo "<figure>\n";
+		echo "<figcaption>".$arr[$area].' ('.date(_('Y-m-d'), $start).' - '.date(_('Y-m-d'), $end).')'."</figcaption>\n";
 		echo '<div id="chart'.$chartid.'"></div>';
+		echo "</figure>\n";
 	} else {
 		echo '<p class="information" >'._('No data to display.').'</p>';
 	}
@@ -1087,7 +1100,6 @@ function report_sitetimebargraph($start, $end) {
 		}
 		echo 'jQuery(document).ready(function(){
 				plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', series, {
-					title : \''.$areaname.' ('.strftime('%x', $start).' - '.strftime('%x', $end).') \',
 					axesDefaults: {
 						tickRenderer: jQuery.jqplot.CanvasAxisTickRenderer,
 						tickOptions: {
@@ -1140,7 +1152,10 @@ function report_sitetimebargraph($start, $end) {
 			plot'.$chartid.'.replot();
 		});'."\n";
 		echo '//]]></script>';
+		echo "<figure>\n";
+		echo "<figcaption>".$areaname.' ('.date(_('Y-m-d'), $start).' - '.date(_('Y-m-d'), $end).')'."</figcaption>\n";
 		echo '<div id="chart'.$chartid.'"></div>';
+		echo "</figure>\n";
 	} else {
 		echo '<p class="information">'._('No data to display.').'</p>';
 	}
