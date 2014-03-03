@@ -51,10 +51,6 @@ $dgf = new DocumentGroupFactory($g);
 if ($dgf->isError())
 	exit_error($dgf->getErrorMessage(), 'docman');
 
-$dgh = new DocumentGroupHTML($g);
-if ($dgh->isError())
-	exit_error($dgh->getErrorMessage(), 'docman');
-
 $df->setStateID('2');
 
 $d_arr =& $df->getDocuments();
