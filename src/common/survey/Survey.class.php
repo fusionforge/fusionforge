@@ -67,7 +67,7 @@ class Survey extends Error {
 			return;
 		}
 		if ($Group->isError()) {
-			$this->setError('Survey:: '.$Group->getErrorMessage());
+			$this->setError('Survey: '.$Group->getErrorMessage());
 			return;
 		}
 		$this->Group =& $Group;
@@ -91,10 +91,10 @@ class Survey extends Error {
 	/**
 	 * create - use this function to create a survey
 	 *
-	 * @param	$survey_title
-	 * @param	$add_questions
-	 * @param	int		$is_active
-	 * @param	int		$is_result_public
+	 * @param string $survey_title The survey title
+	 * @param array  $add_questions The question numbers to be added
+	 * @param int $is_active 1: Active, 0: Inactive
+	 * @param int $is_result_public
 	 * @param	Allow|int	$double_vote
 	 * @internal	param		\The $string survey title
 	 * @internal	param		array	$int The question numbers to be added
@@ -102,7 +102,7 @@ class Survey extends Error {
 	 * For future options
 	 * @internal	param		$is_result_public 0: Admins Only, 1: Group Members, 2: FusionForge user, 3:voted user 4:Every body
 	 * @internal	param		\Allow $double_vote double vote if it is 1
-	 * @return	boolean		success.
+	 * @return boolean success.
 	 */
 	function create($survey_title, $add_questions, $is_active = 0, $is_public = 1, $is_result_public = 0, $double_vote = 0) {
 		if (!$survey_title) {
@@ -138,10 +138,10 @@ class Survey extends Error {
 	/**
 	 * update - use this function to update a survey
 	 *
-	 * @param	$survey_title
-	 * @param	$add_questions
-	 * @param	$del_questions
-	 * @param	int		$is_active
+	 * @param string $survey_title The survey title
+	 * @param array  $add_questions The question numbers to be added
+	 * @param array  $del_questions The question numbers to be deleted
+	 * @param int $is_active 1: Active, 0: Inactive
 	 * @param	int		$is_result_public
 	 * @param	Allow|int	$double_vote
 	 * @internal	param		\The $string survey title
