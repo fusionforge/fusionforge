@@ -254,37 +254,37 @@ echo $HTML->boxTop(_('Preferences'));
 ?>
 
 <p>
-    <label for="mail_site">
-        <input id="mail_site" type="checkbox" name="mail_site" value="1"<?php
+	<input id="mail_site" type="checkbox" name="mail_site" value="1"<?php
 	if ($u->getMailingsPrefs('site')) print ' checked="checked"'; ?> />
-    </label>
-    <?php echo _('Receive Email about Site Updates <em>(Very low traffic and includes security notices. Highly Recommended.)</em>'); ?>
+	<label for="mail_site">
+		<?php echo _('Receive Email about Site Updates <em>(Very low traffic and includes security notices. Highly Recommended.)</em>'); ?>
+	</label>
 </p>
 
 <p>
-    <label for="mail_va">
-        <input id="mail_va" type="checkbox" name="mail_va" value="1"<?php
-    if ($u->getMailingsPrefs('va')) print ' checked="checked"'; ?> />
-    </label>
-    <?php echo _('Receive additional community mailings. <em>(Low traffic.)</em>'); ?>
+	<input id="mail_va" type="checkbox" name="mail_va" value="1"<?php
+	if ($u->getMailingsPrefs('va')) print ' checked="checked"'; ?> />
+	<label for="mail_va">
+		<?php echo _('Receive additional community mailings. <em>(Low traffic.)</em>'); ?>
+	</label>
 </p>
 
 <p>
 <?php if (forge_get_config('use_ratings')) { ?>
-    <label for="use_ratings">
-        <input id="use_ratings" type="checkbox" name="use_ratings" value="1"<?php
-        if ($u->usesRatings()) print ' checked="checked"'; ?> />
-    </label>
-    <?php printf(_('Participate in peer ratings. <em>(Allows you to rate other users using several criteria as well as to be rated by others. More information is available on your <a href="%s">user page</a> if you have chosen to participate in ratings.)</em>'),util_make_url_u ($u->getUnixName(),$u->getId()));
-} ?>
+	<input id="use_ratings" type="checkbox" name="use_ratings" value="1"<?php
+	if ($u->usesRatings()) print ' checked="checked"'; ?> />
+	<label for="use_ratings">
+		<?php printf(_('Participate in peer ratings. <em>(Allows you to rate other users using several criteria as well as to be rated by others. More information is available on your <a href="%s">user page</a> if you have chosen to participate in ratings.)</em>'), util_make_url_u($u->getUnixName(),$u->getId())); ?>
+	</label>
+<?php } ?>
 </p>
+
 <p>
-    <label for="use_tooltips">
-        <input id="use_tooltips" type="checkbox" name="use_tooltips" value="1"<?php
-    if ($u->usesTooltips()) print ' checked="checked"'; ?> />
-    </label>
-    <?php echo _('Enable tooltips. Small help texts displayed on mouse over links, images.');
-?>
+	<input id="use_tooltips" type="checkbox" name="use_tooltips" value="1"<?php
+	if ($u->usesTooltips()) print ' checked="checked"'; ?> />
+		<label for="use_tooltips">
+	<?php echo _('Enable tooltips. Small help texts displayed on mouse over links, images.'); ?>
+	</label>
 </p>
 
 <?php

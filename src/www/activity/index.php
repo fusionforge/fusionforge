@@ -317,7 +317,7 @@ if (count($results) < 1) {
 				break;
 			}
 			case 'forumpost': {
-				$icon = html_image('ic/forum20g.png','','',array("alt"=>_('Forum')));
+				$icon = html_image('ic/forum20g.png','','',array('alt'=>_('Forum')));
 				$url = util_make_link('/forum/message.php?msg_id='.$arr['subref_id'].'&group_id='.$arr['group_id'],_('Forum Post ').' '.$arr['description']);
 				break;
 			}

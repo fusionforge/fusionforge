@@ -148,7 +148,7 @@ if (getStringFromRequest('add_forum')) {
 				<input type="hidden" name="change_status" value="y" />
 				<input type="hidden" name="group_forum_id" value="'. $f->getID() .'" />
 				<input type="hidden" name="group_id" value="'.$group_id.'" />
-				<strong>'._('Forum Name')._(':').utils_requiredField().'</strong><br />
+				<strong>'._('Forum Name').utils_requiredField()._(':').'</strong><br />
 				<input type="text" name="forum_name" required="required" value="'. $f->getName() .'" size="20" maxlength="30" />
 				</p>
 				<p>
