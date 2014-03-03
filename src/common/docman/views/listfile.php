@@ -231,7 +231,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 			echo '<input type="checkbox" value="'.$d->getID().'" class="checkeddocidactive tabtitle-w" title="'._('Select / Deselect this document for massaction').'" onchange="controllerListFile.checkgeneral(\'active\')" />';
 		} else {
 			if (session_loggedin() && ($d->getReservedBy() != $u->getID())) {
-				echo '<input type="checkbox" name="disabled" disabled="disabled"';
+				echo '<input type="checkbox" name="disabled" disabled="disabled" />';
 			} else {
 				echo '<input type="checkbox" value="'.$d->getID().'" class="checkeddocidactive tabtitle-w" title="'._('Select / Deselect this document for massaction').'"" onchange="controllerListFile.checkgeneral(\'active\')" />';
 			}
@@ -330,7 +330,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 			} else {
 				if (session_loggedin() && $d->getReservedBy() != $u->getID()) {
 					if (forge_check_perm('docman', $ndg->Group->getID(), 'admin')) {
-						echo '<a class="tabtitle-ne" href="'.$actionlistfileurl.'&amp;action=enforcereserve&amp;fileid='.$d->getID().'" title="'. _('Enforce reservation') .'" >'.html_image('docman/enforce-document.png',22,22,array('alt'=>_('Enforce reservation')));
+						echo '<a class="tabtitle-ne" href="'.$actionlistfileurl.'&amp;action=enforcereserve&amp;fileid='.$d->getID().'" title="'. _('Enforce reservation') .'" >'.html_image('docman/enforce-document.png',22,22,array('alt'=>_('Enforce reservation'))).'</a>';
 					}
 				} else {
 					echo '<a class="tabtitle-ne" href="'.$actionlistfileurl.'&amp;action=trashfile&amp;fileid='.$d->getID().'" title="'. _('Move this document to trash') .'" >'.html_image('docman/trash-empty.png',22,22,array('alt'=>_('Move this document to trash'))). '</a>';
