@@ -66,7 +66,11 @@ if ($user_id && is_numeric($user_id)) {
 		echo '<p>
 			<strong>'._('Skills profile for').' : </strong>'. db_result($result, 0, 'realname') .
 			' ('.db_result($result, 0, 'user_name') .
-			')</p> <table class="fullwidth">';
+			')</p>';
+		if ($overwritten_access) {
+			echo util_make_link('/people/editprofile.php', _('Edit your profile'));
+		}
+		echo '<table class="fullwidth">';
 		displayUserSkills($user_id, 0);
 		echo '</table>';
 	}
