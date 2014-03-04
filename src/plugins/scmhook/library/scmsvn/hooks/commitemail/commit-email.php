@@ -31,6 +31,9 @@ $commit_email_pl = dirname(__FILE__).'/commit-email.pl';
 # Set sendmail path to next script from our configuration.
 putenv("SENDMAIL=".forge_get_config('sendmail_path'));
 
+# Make svnlook support accents
+putenv("LANG=en_US.UTF-8");
+
 if(!file_exists($svnlook) || !file_exists($commit_email_pl)) { die("Missing required executables."); }
 
 # Find who made the changes
