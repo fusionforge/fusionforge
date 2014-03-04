@@ -118,8 +118,8 @@ class WikiPlugin_WikicreoleTable
                     $cell = trim(substr($cell, 1));
                     $html_row->pushContent(HTML::th(TransformInline($cell, $basepage)));
                 } else {
-                    if (is_numeric($cell)) {
-                        $html_row->pushContent(HTML::td(array('style' => "text-align:right"), $cell));
+                    if ($this->is_wiki_numeric($cell)) {
+                        $html_row->pushContent(HTML::td(array('style' => "text-align:right"), TransformInline($cell, $basepage)));
                     } else {
                         $html_row->pushContent(HTML::td(TransformInline($cell, $basepage)));
                     }
@@ -128,6 +128,12 @@ class WikiPlugin_WikicreoleTable
             $html_table->pushContent($html_row);
         }
         return $html_table;
+    }
+
+    // $cell is a number, possibly in bold, italics or underlined
+    private function is_wiki_numeric($cell)
+    {
+        return is_numeric(trim($cell, "*/_'"));
     }
 
     private function parse_row($line)
