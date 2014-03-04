@@ -149,7 +149,7 @@ function handle_multi_edit($skill_ids = array()) {
 				'<tr '.$HTML->boxGetAltRowStyle($i+1).'>'.
 				'<td><h3>'.db_result($result, $i,'title').'</h3></td></tr>'.
 				'<tr><td>'.
-				'<table>'.
+				'<table class="fullwidth">'.
 					'<tr class="tableheading">'.
 						'<td >'._('Type').'</td>'.
 						'<td >'._('Start Date').'</td>'.
