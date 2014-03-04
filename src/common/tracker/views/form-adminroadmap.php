@@ -164,7 +164,7 @@ if (getStringFromRequest('delete_roadmap')) {
 	<input type="hidden" name="roadmap_id" value="<?php echo $roadmap_id ?>" />
 	<p>
 	<input type="submit" name="delete_roadmap_sure" value="<?php echo _('Yes') ?>" />
-	<input type="submit" name="cancel" value="<?php echo _('Cancel') ?>" />
+	<input type="submit" name="cancel" formnovalidate="formnovalidate" value="<?php echo _('Cancel') ?>" />
 	</p>
 	</form>
 	<?php
@@ -232,7 +232,7 @@ if ($set_roadmap_failed ||
 		echo '</table>'."\n";
 		echo '<p>
 			<input type="submit" name="set_roadmap" value="'._('Submit').'" />
-			<input type="submit" name="cancel" value="'._('Cancel').'" />
+			<input type="submit" name="cancel" formnovalidate="formnovalidate" value="'._('Cancel').'" />
 			</p>'."\n";
 		echo '</form>'."\n";
 	}
