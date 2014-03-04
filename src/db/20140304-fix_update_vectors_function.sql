@@ -94,7 +94,7 @@ BEGIN
 	-- **** skills_data table ****
 	ELSIF table_name = ''skills_data'' THEN
 		IF TG_OP = ''INSERT'' THEN
-			INSERT INTO skills_data_idx (skills_data_id, vectors) VALUES (NEW.skill_data_id, to_tsvector(coalesce(NEW.title,'''') ||'' ''|| coalesce(NEW.keywords,'''')));
+			INSERT INTO skills_data_idx (skills_data_id, vectors) VALUES (NEW.skills_data_id, to_tsvector(coalesce(NEW.title,'''') ||'' ''|| coalesce(NEW.keywords,'''')));
 		ELSIF TG_OP = ''UPDATE'' THEN
 			UPDATE skills_data_idx SET vectors=to_tsvector(coalesce(NEW.title,'''') ||'' ''|| coalesce(NEW.keywords,'''')) WHERE skills_data_id=NEW.skills_data_id;
 		ELSIF TG_OP = ''DELETE'' THEN
