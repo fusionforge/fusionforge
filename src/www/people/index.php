@@ -52,9 +52,7 @@ if ($group_id) {
 
 	people_header(array('title'=>_('Help Wanted System')._(' as ').people_get_category_name($category_id)));
 
-	echo '
-		<p>'._('Click job titles for more detailed descriptions.').'</p>
-	';
+	echo '<p>'._('Click job titles for more detailed descriptions.').'</p>';
 	echo people_show_category_jobs($category_id);
 
 } else {
