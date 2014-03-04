@@ -270,13 +270,13 @@ class Group extends Error {
 	 * fetchData - May need to refresh database fields if an update occurred.
 	 *
 	 * @param	int	$group_id The group_id.
-	 * @return	boolean	success or not
+	 * @return	bool	success or not
 	 */
 	function fetchData($group_id) {
 		$res = db_query_params ('SELECT * FROM groups WHERE group_id=$1',
 					array($group_id));
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError(sprintf('fetchData():: %s', db_error()));
+			$this->setError(sprintf('fetchData(): %s', db_error()));
 			return false;
 		}
 		$this->data_array = db_fetch_array($res);
@@ -299,7 +299,7 @@ class Group extends Error {
 	 * @param	bool	$is_public
 	 * @param	bool	$send_mail		Whether to send an email or not
 	 * @param	int	$built_from_template	The id of the project this new project is based on
-	 * @return	boolean	success or not
+	 * @return	bool	success or not
 	 */
 	function create(&$user, $group_name, $unix_name, $description, $purpose, $unix_box = 'shell1',
 			$scm_box = 'cvs1', $is_public = true, $send_mail = true, $built_from_template = 0) {
@@ -474,29 +474,29 @@ class Group extends Error {
 	 *
 	 * Unlike updateAdmin(), this function accessible to project admin.
 	 *
-	 * @param	object	$user			User requesting operation (for access control).
-	 * @param	string	$group_name
-	 * @param	string	$homepage
-	 * @param	string	$short_description
-	 * @param	bool	$use_mail
-	 * @param	bool	$use_survey
-	 * @param	bool	$use_forum
-	 * @param	bool	$use_pm
-	 * @param	bool	$use_pm_depend_box
-	 * @param	bool	$use_scm
-	 * @param	bool	$use_news
-	 * @param	bool	$use_docman
-	 * @param	string	$new_doc_address
-	 * @param	bool	$send_all_docs
-	 * @param	int	$logo_image_id
-	 * @param	bool	$use_ftp
-	 * @param	bool	$use_tracker
-	 * @param	bool	$use_frs
-	 * @param	bool	$use_stats
-	 * @param	string	$tags
-	 * @param	bool	$use_activity
-	 * @param	bool	$is_public		group is publicly accessible
-	 * @return	int    status.
+	 * @param object	$user		User requesting operation (for access control).
+	 * @param string	$group_name
+	 * @param string	$homepage
+	 * @param string	$short_description
+	 * @param bool	$use_mail
+	 * @param bool	$use_survey
+	 * @param bool	$use_forum
+	 * @param bool	$use_pm
+	 * @param bool	$use_pm_depend_box
+	 * @param bool	$use_scm
+	 * @param bool	$use_news
+	 * @param bool	$use_docman
+	 * @param string	$new_doc_address
+	 * @param bool	$send_all_docs
+	 * @param int	$logo_image_id
+	 * @param bool	$use_ftp
+	 * @param bool	$use_tracker
+	 * @param bool	$use_frs
+	 * @param bool	$use_stats
+	 * @param string	$tags
+	 * @param bool	$use_activity
+	 * @param bool	$is_public		group is publicly accessible
+	 * @return int    status.
 	 * @access    public
 	 */
 	function update(&$user, $group_name, $homepage, $short_description, $use_mail, $use_survey, $use_forum,
@@ -716,7 +716,7 @@ class Group extends Error {
 	 *
 	 * @param	object	$user	User requesting operation (for access control).
 	 * @param	string	$status	Status value.
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 * @access	public
 	 */
 	function setStatus(&$user, $status) {
@@ -800,7 +800,7 @@ class Group extends Error {
 	/**
 	 * isProject - Simple boolean test to see if it's a project or not.
 	 *
-	 * @return	boolean	is_project.
+	 * @return	bool	is_project.
 	 */
 	function isProject() {
 		if ($this->getType()==1) {
@@ -813,7 +813,7 @@ class Group extends Error {
 	/**
 	 * isPublic - Wrapper around RBAC to check if a project is anonymously readable
 	 *
-	 * @return	boolean	is_public.
+	 * @return	boo	is_public.
 	 */
 	function isPublic() {
 		$ra = RoleAnonymous::getInstance();
@@ -823,7 +823,7 @@ class Group extends Error {
 	/**
 	 * isActive - Database field status of 'A' returns true.
 	 *
-	 * @return	boolean	is_active.
+	 * @return	bool	is_active.
 	 */
 	function isActive() {
 		if ($this->getStatus()=='A') {
@@ -836,7 +836,7 @@ class Group extends Error {
 	/**
 	 * isTemplate - Simply returns the is_template flag from the database.
 	 *
-	 * @return	boolean	is_template.
+	 * @return	bool	is_template.
 	 */
 	function isTemplate() {
 		return $this->data_array['is_template'];
@@ -845,7 +845,7 @@ class Group extends Error {
 	/**
 	 * setAsTemplate - Set the template status of a project
 	 *
-	 * @param	boolean	$booleanparam	is_template.
+	 * @param	bool	$booleanparam	is_template.
 	 * @return	bool
 	 */
 	function setAsTemplate($booleanparam) {
@@ -1042,7 +1042,7 @@ class Group extends Error {
 	/**
 	 * enablePserver - whether or not this group has opted to enable Pserver.
 	 *
-	 * @return	boolean	enable_pserver.
+	 * @return	bool	enable_pserver.
 	 */
 	function enablePserver() {
 		if ($this->usesSCM()) {
@@ -1070,7 +1070,7 @@ class Group extends Error {
 	/**
 	 * usesSCM - whether or not this group has opted to use SCM.
 	 *
-	 * @return	boolean	uses_scm.
+	 * @return	bool	uses_scm.
 	 */
 	function usesSCM() {
 		if (forge_get_config('use_scm')) {
@@ -1083,7 +1083,7 @@ class Group extends Error {
 	/**
 	 * setUseSCM - Set the SCM usage
 	 *
-	 * @param	boolean	$booleanparam	enabled/disabled
+	 * @param	bool	$booleanparam	enabled/disabled
 	 * @return	bool
 	 */
 	function setUseSCM($booleanparam) {
@@ -1104,7 +1104,7 @@ class Group extends Error {
 	/**
 	 * usesMail - whether or not this group has opted to use mailing lists.
 	 *
-	 * @return	boolean	uses_mail.
+	 * @return	bool	uses_mail.
 	 */
 	function usesMail() {
 		if (forge_get_config('use_mail')) {
@@ -1125,7 +1125,7 @@ class Group extends Error {
 	/**
 	 * setUseMail - Set the mailing-list usage
 	 *
-	 * @param	boolean	$booleanparam	enabled/disabled
+	 * @param	bool	$booleanparam	enabled/disabled
 	 * @return	bool
 	 */
 	function setUseMail($booleanparam) {
@@ -1146,7 +1146,7 @@ class Group extends Error {
 	/**
 	 * usesNews - whether or not this group has opted to use news.
 	 *
-	 * @return	boolean	uses_news.
+	 * @return	bool	uses_news.
 	 */
 	function usesNews() {
 		if (forge_get_config('use_news')) {
@@ -1159,7 +1159,7 @@ class Group extends Error {
 	/**
 	 * usesActivity - whether or not this group has opted to display Project Activities.
 	 *
-	 * @return	boolean	uses_activities.
+	 * @return	bool	uses_activities.
 	 */
 	function usesActivity() {
 		if (forge_get_config('use_activity')) {
@@ -1172,7 +1172,7 @@ class Group extends Error {
 	/**
 	 * usesForum - whether or not this group has opted to use discussion forums.
 	 *
-	 * @return	boolean	uses_forum.
+	 * @return	bool	uses_forum.
 	 */
 	function usesForum() {
 		if (forge_get_config('use_forum')) {
@@ -1185,7 +1185,7 @@ class Group extends Error {
 	/**
 	 * setUseForum - Set the forum usage
 	 *
-	 * @param	boolean	$booleanparam	enabled/disabled
+	 * @param	bool	$booleanparam	enabled/disabled
 	 * @return	bool
 	 */
 	function setUseForum($booleanparam) {
@@ -1206,7 +1206,7 @@ class Group extends Error {
 	/**
 	 * usesStats - whether or not this group has opted to use stats.
 	 *
-	 * @return	boolean	uses_stats.
+	 * @return	bool	uses_stats.
 	 */
 	function usesStats() {
 		return $this->data_array['use_stats'];
@@ -1215,7 +1215,7 @@ class Group extends Error {
 	/**
 	 * usesFRS - whether or not this group has opted to use file release system.
 	 *
-	 * @return	boolean	uses_frs.
+	 * @return	bool	uses_frs.
 	 */
 	function usesFRS() {
 		if (forge_get_config('use_frs')) {
@@ -1228,7 +1228,7 @@ class Group extends Error {
 	/**
 	 * setUseFRS - Set the FRS usage
 	 *
-	 * @param	boolean	$booleanparam	enabled/disabled
+	 * @param bool	$booleanparam	enabled/disabled
 	 * @return	bool
 	 */
 	function setUseFRS($booleanparam) {
@@ -1249,7 +1249,7 @@ class Group extends Error {
 	/**
 	 * usesTracker - whether or not this group has opted to use tracker.
 	 *
-	 * @return	boolean	uses_tracker.
+	 * @return	bool	uses_tracker.
 	 */
 	function usesTracker() {
 		if (forge_get_config('use_tracker')) {
@@ -1262,7 +1262,7 @@ class Group extends Error {
 	/**
 	 * setUseTracker - Set the tracker usage
 	 *
-	 * @param	boolean	$booleanparam	enabled/disabled
+	 * @param	bool	$booleanparam	enabled/disabled
 	 * @return	bool
 	 */
 	function setUseTracker($booleanparam) {
@@ -1283,7 +1283,7 @@ class Group extends Error {
 	/**
 	 *  useCreateOnline - whether or not this group has opted to use create online documents option.
 	 *
-	 * @return	boolean	use_docman_create_online.
+	 * @return	bool	use_docman_create_online.
 	 */
 	function useCreateOnline() {
 		if (forge_get_config('use_docman')) {
@@ -1296,7 +1296,7 @@ class Group extends Error {
 	/**
 	 * usesDocman - whether or not this group has opted to use docman.
 	 *
-	 * @return	boolean	use_docman.
+	 * @return	bool	use_docman.
 	 */
 	function usesDocman() {
 		if (forge_get_config('use_docman')) {
@@ -1307,9 +1307,9 @@ class Group extends Error {
 	}
 
 	/**
-	 *	setUseDocman - Set the docman usage
+	 * setUseDocman - Set the docman usage
 	 *
-	 *	@param	boolean	$booleanparam	enabled/disabled
+	 * @param bool	$booleanparam	enabled/disabled
 	 * @return bool
 	 */
 	function setUseDocman($booleanparam) {
@@ -1341,7 +1341,7 @@ class Group extends Error {
 	/**
 	 *  useDocmanSearch - whether or not this group has opted to use docman search engine.
 	 *
-	 * @return	boolean	use_docman_search.
+	 * @return	bool	use_docman_search.
 	 */
 	function useDocmanSearch() {
 		if (forge_get_config('use_docman')) {
@@ -1354,7 +1354,7 @@ class Group extends Error {
 	/**
 	 * useWebdav - whether or not this group has opted to use webdav interface.
 	 *
-	 * @return	boolean	use_docman_search.
+	 * @return	bool	use_docman_search.
 	 */
 	function useWebdav() {
 		if (forge_get_config('use_webdav')) {
@@ -1367,7 +1367,7 @@ class Group extends Error {
 	/**
 	 * usesFTP - whether or not this group has opted to use FTP.
 	 *
-	 * @return	boolean	uses_ftp.
+	 * @return	bool	uses_ftp.
 	 */
 	function usesFTP() {
 		if (forge_get_config('use_ftp')) {
@@ -1380,7 +1380,7 @@ class Group extends Error {
 	/**
 	 * usesSurvey - whether or not this group has opted to use surveys.
 	 *
-	 * @return	boolean	uses_survey.
+	 * @return	bool	uses_survey.
 	 */
 	function usesSurvey() {
 		if (forge_get_config('use_survey')) {
@@ -1393,7 +1393,7 @@ class Group extends Error {
 	/**
 	 * usesPM - whether or not this group has opted to Project Manager.
 	 *
-	 * @return	boolean	uses_projman.
+	 * @return	bool	uses_projman.
 	 */
 	function usesPM() {
 		if (forge_get_config('use_pm')) {
@@ -1406,7 +1406,7 @@ class Group extends Error {
 	/**
 	 *	setUsePM - Set the PM usage
 	 *
-	 *	@param	boolean	$booleanparam	enabled/disabled
+	 *	@param	bool	$booleanparam	enabled/disabled
 	 * @return bool
 	 */
 	function setUsePM($booleanparam) {
@@ -1450,7 +1450,7 @@ class Group extends Error {
 	 * usesPlugin - returns true if the group uses a particular plugin
 	 *
 	 * @param	string	$pluginname name of the plugin
-	 * @return	boolean	whether plugin is being used or not
+	 * @return	bool	whether plugin is being used or not
 	 */
 	function usesPlugin($pluginname) {
 		$plugins_data = $this->getPlugins();
@@ -1467,7 +1467,7 @@ class Group extends Error {
 	 * usesServices - returns true if the group uses a particular plugin or feature
 	 *
 	 * @param	string	$feature    name of the plugin
-	 * @return	boolean	whether plugin is being used or not
+	 * @return	bool	whether plugin is being used or not
 	 */
 	function usesService($feature) {
 		$plugins_data = $this->getPlugins();
@@ -1487,7 +1487,7 @@ class Group extends Error {
 	 * setPluginUse - enables/disables plugins for the group
 	 *
 	 * @param	string	$pluginname	name of the plugin
-	 * @param	boolean	$val		the new state
+	 * @param	bool	$val		the new state
 	 * @return	string	database result
 	 */
 	function setPluginUse($pluginname, $val=true) {
@@ -1531,7 +1531,7 @@ class Group extends Error {
 	/**
 	 * DocEmailAll - whether or not this group has opted to use receive notices on all doc updates.
 	 *
-	 * @return	boolean	email_on_all_doc_updates.
+	 * @return	bool	email_on_all_doc_updates.
 	 */
 	function docEmailAll() {
 		return $this->data_array['send_all_docs'];
@@ -1951,7 +1951,7 @@ class Group extends Error {
 	 *
 	 * @param	string	$user_identifier	Unix name of the user to add OR integer user_id.
 	 * @param	int	$role_id		The role_id this user should have.
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 * @access	public
 	 */
 	function addUser($user_identifier, $role_id) {
@@ -2045,7 +2045,7 @@ class Group extends Error {
 	 * Users can remove themselves.
 	 *
 	 * @param	int	$user_id	The ID of the user to remove.
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function removeUser($user_id) {
 		global $SYS;
@@ -2156,7 +2156,7 @@ class Group extends Error {
 	 *
 	 * @param	int	$user_id	The ID of the user.
 	 * @param	int	$role_id	The role_id to set this user to.
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function updateUser($user_id, $role_id) {
 
@@ -2546,7 +2546,7 @@ class Group extends Error {
 	/**
 	 * sendApprovalEmail - Send new project email.
 	 *
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 * @access	public
 	 */
 	function sendApprovalEmail() {
@@ -2659,7 +2659,7 @@ if there is anything we can do to help you.
 	 * SourceForge admin user when a new project is
 	 * submitted.
 	 *
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 * @access	public
 	 */
 	function sendNewProjectNotificationEmail() {
@@ -2800,7 +2800,7 @@ if there is anything we can do to help you.
 	 *				S	suspended
 	 *				D	deleted
 	 *
-	 * @return	boolean success.
+	 * @return	bool success.
 	 */
 	function setUnixStatus($status) {
 		global $SYS;
