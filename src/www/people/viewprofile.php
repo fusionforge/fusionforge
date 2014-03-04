@@ -51,7 +51,14 @@ if ($user_id && is_numeric($user_id)) {
 		/*
 			profile set private
 		*/
-		if (db_result($result, 0, 'people_view_skills') != 1) {
+		$overwritten_access = 0;
+		if (session_loggedin()) {
+			$u = user_get_object(user_getid());
+			if ($u->getID() == $user_id) {
+				$overwritten_access = 1;
+			}
+		}
+		if ((db_result($result, 0, 'people_view_skills') != 1) && !$overwritten_access) {
 			echo '<p class="warning">'._('This user has set his/her profile to private.').'</p>';
 			people_footer();
 			exit;
@@ -59,7 +66,11 @@ if ($user_id && is_numeric($user_id)) {
 		echo '<p>
 			<strong>'._('Skills profile for').' : </strong>'. db_result($result, 0, 'realname') .
 			' ('.db_result($result, 0, 'user_name') .
-			')</p> <table class="fullwidth">';
+			')</p>';
+		if ($overwritten_access) {
+			echo util_make_link('/people/editprofile.php', _('Edit your profile'));
+		}
+		echo '<table class="fullwidth">';
 		displayUserSkills($user_id, 0);
 		echo '</table>';
 	}
