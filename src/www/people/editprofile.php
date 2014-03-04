@@ -297,13 +297,13 @@ if (session_loggedin()) {
 		echo $HTML->multiTableRow('',$cell_data,TRUE);
 
 		echo '<tr>
-			<td><input type="text" name="title" size="100" /></td>
+			<td><input type="text" name="title" size="100" required="required" /></td>
 			</tr>';
 		$cell_data = array();
 		$cell_data[] = array(_('Keywords (max 255 characters)'));
 		echo $HTML->multiTableRow('',$cell_data,TRUE);
 		echo '<tr>
-				<td><textarea name="keywords" rows="3" cols="85" wrap="soft"></textarea></td>
+				<td><textarea name="keywords" rows="3" cols="85" wrap="soft" required="required" ></textarea></td>
 			</tr>
 			<tr>
 				<td><input type="submit" name="AddSkill" value="'._('Add This Skill').'" /></td>
