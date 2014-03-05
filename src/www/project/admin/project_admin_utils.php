@@ -104,9 +104,7 @@ function project_admin_header($params) {
 }
 
 /*
-
 	Standard footer to be used on all /project/admin/* pages
-
 */
 
 function project_admin_footer($params = array()) {
