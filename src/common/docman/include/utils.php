@@ -7,7 +7,7 @@
  * Copyright 2002-2004, GForge Team
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2013, Franck Villaume - TrivialDev
+ * Copyright 2012-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -36,7 +36,7 @@ function doc_get_state_box($checkedval = 'xzxz', $removedval = '') {
 	} else {
 		$res_states = db_query_params('select * from doc_states', array());
 	}
-	echo html_build_select_box($res_states, 'stateid', $checkedval, false);
+	return html_build_select_box($res_states, 'stateid', $checkedval, false);
 }
 
 /**

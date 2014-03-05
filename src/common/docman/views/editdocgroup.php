@@ -67,7 +67,7 @@ if ($dg->getState() == 2) {
 	$cells[][] = $dm->showSelectNestedGroups($dgf->getNested(), 'parent_dirid', true, $dg->getParentId(), array($dg->getID()));
 	$labelSubmit = _('Edit');
 }
-$cells[][] = '<input type="submit" value="<?php echo $labelSubmit ?>" name="submit" />';
+$cells[][] = '<input type="submit" value="'.$labelSubmit.'" name="submit" />';
 echo $HTML->multiTableRow(array(), $cells);
 echo $HTML->listTableBottom();
 echo html_e('p', array(), _('Folder name will be used as a title, so it should be formatted correspondingly.'), false);

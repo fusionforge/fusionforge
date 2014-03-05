@@ -32,6 +32,7 @@ global $g; // group object
 global $group_id; // id of the group
 global $dirid; //id of the doc_group
 global $dm; // the Document Manager object
+global $HTML;
 
 // plugin projects-hierarchy
 $actionurl = '?group_id='.$group_id.'&action=addfile&dirid='.$dirid;
@@ -99,63 +100,57 @@ if ($dgf->getNested() == NULL) {
 		echo html_e('p', array(), _('Both fields are used by the document search engine.'), false);
 
 	echo html_ao('form', array('name' => 'adddata', 'action' => $actionurl, 'method' => 'post', 'enctype' => 'multipart/form-data'));
-	echo html_ao('table', array('class' => 'infotable'));
-	echo html_ao('tr');
-	echo html_e('td', array(), _('Document Title').utils_requiredField(), false);
-	echo html_ao('td');
-	echo html_e('input', array('pattern' => '.{5,}', 'placeholder' => _('Document Title'), 'title' => sprintf(_('(at least %s characters)'), 5), 'type' => 'text', 'name' => 'title', 'size' => '40', 'maxlength' => '255', 'required' => 'required'));
-	echo html_e('span', array(), sprintf(_('(at least %s characters)'), 5), false);
-	echo html_ac(html_ap() - 2);
-	echo html_ao('tr');
-	echo html_e('td', array(), _('Description') .utils_requiredField(), false);
-	echo html_ao('td');
-	echo html_e('input', array('pattern' => '.{10,}', 'placeholder' => _('Description'), 'title' => sprintf(_('(at least %s characters)'), 10), 'type' => 'text', 'name' => 'description', 'size' => '50', 'maxlength' => '255', 'required' => 'required'));
-	echo html_e('span', array(), sprintf(_('(at least %s characters)'), 10), false);
-	echo html_ac(html_ap() - 2);
-	echo html_ao('tr');
-	echo html_e('td', array(), _('Type of Document') .utils_requiredField());
-	echo html_ao('td');
-	echo html_e('input', array('type' => 'radio', 'id' => 'buttonFile', 'name' => 'type', 'value' => 'httpupload', 'checked' => 'checked', 'required' => 'required')).html_e('span', array(), _('File'), false);
-	echo html_e('input', array('type' => 'radio', 'id' => 'buttonUrl', 'name' => 'type', 'value' => 'pasteurl', 'required' => 'required')).html_e('span', array(), _('URL'), false);
+	echo $HTML->listTableTop(array(), array(), 'infotable');
+	$cells = array();
+	$cells[][] = _('Document Title').utils_requiredField();
+	$cells[][] = html_e('input', array('pattern' => '.{5,}', 'placeholder' => _('Document Title'), 'title' => sprintf(_('(at least %s characters)'), 5), 'type' => 'text', 'name' => 'title', 'size' => '40', 'maxlength' => '255', 'required' => 'required')).
+			html_e('span', array(), sprintf(_('(at least %s characters)'), 5), false);
+	echo $HTML->multiTableRow(array(), $cells);
+	$cells = array();
+	$cells[][] = _('Description') .utils_requiredField();
+	$cells[][] = html_e('input', array('pattern' => '.{10,}', 'placeholder' => _('Description'), 'title' => sprintf(_('(at least %s characters)'), 10), 'type' => 'text', 'name' => 'description', 'size' => '50', 'maxlength' => '255', 'required' => 'required')).
+			html_e('span', array(), sprintf(_('(at least %s characters)'), 10), false);
+	echo $HTML->multiTableRow(array(), $cells);
+	$cells = array();
+	$cells[][] = _('Type of Document') .utils_requiredField();
+	$nextcell = html_e('input', array('type' => 'radio', 'id' => 'buttonFile', 'name' => 'type', 'value' => 'httpupload', 'checked' => 'checked', 'required' => 'required')).html_e('span', array(), _('File'), false).
+			html_e('input', array('type' => 'radio', 'id' => 'buttonUrl', 'name' => 'type', 'value' => 'pasteurl', 'required' => 'required')).html_e('span', array(), _('URL'), false);
 	if (forge_get_config('use_manual_uploads')) {
-		echo html_e('input', array('type' => 'radio', 'id' => 'buttonManualUpload', 'name' => 'type', 'value' => 'manualupload', 'required' => 'required')).html_e('span', array(), _('Already-uploaded file'), false);
+		$nextcell .= html_e('input', array('type' => 'radio', 'id' => 'buttonManualUpload', 'name' => 'type', 'value' => 'manualupload', 'required' => 'required')).html_e('span', array(), _('Already-uploaded file'), false);
 	}
 	if ($g->useCreateOnline()) {
-		echo html_e('input', array('type' => 'radio', 'id' => 'buttonEditor', 'name' => 'type', 'value' => 'editor', 'required' => 'required')).html_e('span', array(), _('Create online'), false);
+		$nextcell .= html_e('input', array('type' => 'radio', 'id' => 'buttonEditor', 'name' => 'type', 'value' => 'editor', 'required' => 'required')).html_e('span', array(), _('Create online'), false);
 	}
-	echo html_ac(html_ap() - 2);
-	echo html_ao('tr', array('id' => 'filerow'));
-	echo html_e('td', array(), _('Upload File').utils_requiredField(), false);
-	echo html_ao('td');
-	echo html_e('input', array('type' => 'file', 'required' => 'required', 'name' => 'uploaded_data'));
-	echo html_e('span', array(), sprintf(_('(max upload size: %s)'), human_readable_bytes(util_get_maxuploadfilesize())), false);
-	echo html_ac(html_ap() - 2);
-	echo html_ao('tr', array('id' => 'urlrow', 'style' => 'display:none'));
-	echo html_e('td', array(), _('URL').utils_requiredField());
-	echo html_ao('td');
-	echo html_e('input', array('type' => 'url', 'name' => 'file_url', 'size' => '30', 'placeholder' => _('Enter a valid URL'), 'pattern' => 'ftp://.+|https?://.+'));
-	echo html_ac(html_ap() - 2);
+	$cells[][] = $nextcell;
+	echo $HTML->multiTableRow(array(), $cells);
+	$cells = array();
+	$cells[][] = _('Upload File').utils_requiredField();
+	$cells[][] = html_e('input', array('type' => 'file', 'required' => 'required', 'name' => 'uploaded_data')).
+			html_e('span', array(), sprintf(_('(max upload size: %s)'), human_readable_bytes(util_get_maxuploadfilesize())), false);
+	echo $HTML->multiTableRow(array('id' => 'filerow'), $cells);
+	$cells = array();
+	$cells[][] = _('URL').utils_requiredField();
+	$cells[][] = html_e('input', array('type' => 'url', 'name' => 'file_url', 'size' => '30', 'placeholder' => _('Enter a valid URL'), 'pattern' => 'ftp://.+|https?://.+'));
+	echo $HTML->multiTableRow(array('id' => 'urlrow', 'style' => 'display:none'), $cells);
 	if (forge_get_config('use_manual_uploads')) {
-		echo html_ao('tr', array('id' => 'pathrow', 'style' => 'display:none'));
-		echo html_e('td', array(), _('File') . utils_requiredField(), false);
-		echo html_ao('td');
+		$cells = array();
+		$cells[][] = _('File').utils_requiredField();
 		$incoming = forge_get_config('groupdir_prefix')."/".$g->getUnixName()."/incoming";
 		$manual_files_arr = ls($incoming, true);
 		if (count($manual_files_arr)) {
-			echo html_build_select_box_from_arrays($manual_files_arr, $manual_files_arr, 'manual_path', '');
-			echo html_e('br');
-			echo html_e('span', array(), sprintf(_('Pick a file already uploaded (by SFTP or SCP) to the <a href="%1$s">project\'s incoming directory</a> (%2$s).'),
-								'sftp://'.forge_get_config('web_host').$incoming.'/', $incoming), false);
+			$cells[][] = html_build_select_box_from_arrays($manual_files_arr, $manual_files_arr, 'manual_path', '').
+					html_e('br').
+					html_e('span', array(), sprintf(_('Pick a file already uploaded (by SFTP or SCP) to the <a href="%1$s">project\'s incoming directory</a> (%2$s).'),
+									'sftp://'.forge_get_config('web_host').$incoming.'/', $incoming), false);
 		} else {
-			echo html_e('p', array('class' => 'warning'), sprintf(_('You need first to upload file in %s'),$incoming), false);
+			$cells[][] = html_e('p', array('class' => 'warning'), sprintf(_('You need first to upload file in %s'),$incoming), false);
 		}
-		echo html_ac(html_ap() - 2);
+		echo $HTML->multiTableRow(array('id' => 'pathrow', 'style' => 'display:none'), $cells);
 	}
-	echo html_ao('tr', array('id' => 'editnamerow', 'style' => 'display:none'));
-	echo html_e('td', array(), _('File Name').utils_requiredField(), false);
-	echo html_ao('td');
-	echo html_e('input', array('type' => 'text', 'name' => 'name', 'size' => '30'));
-	echo html_ac(html_ap() - 2);
+	$cells = array();
+	$cells[][] = _('File Name').utils_requiredField();
+	$cells[][] = html_e('input', array('type' => 'text', 'name' => 'name', 'size' => '30'));
+	echo $HTML->multiTableRow(array('id' => 'editnamerow', 'style' => 'display:none'), $cells);
 	echo html_ao('tr', array('id' => 'editrow', 'style' => 'display:none'));
 	echo html_ao('td', array('colspan' => '2'));
 	$GLOBALS['editor_was_set_up'] = false;
@@ -177,20 +172,18 @@ if ($dgf->getNested() == NULL) {
 		echo html_e('input', array('type' => 'hidden', 'name' => 'doc_group', 'value' => $dirid));
 		echo html_ac(html_ap() - 2);
 	} else {
-		echo html_ao('tr');
-		echo html_e('td', array(), _('Documents folder that document belongs in'), false);
-		echo html_ao('td');
-		echo $dm->showSelectNestedGroups($dgf->getNested(), 'doc_group', false, $dirid);
-		echo html_ac(html_ap() - 2);
+		$cells = array();
+		$cells[][] = _('Documents folder that document belongs in');
+		$cells[][] = $dm->showSelectNestedGroups($dgf->getNested(), 'doc_group', false, $dirid);
+		echo $HTML->multiTableRow(array(), $cells);
 	}
 	if (forge_check_perm('docman', $group_id, 'approve')) {
-		echo html_ao('tr');
-		echo html_e('td', array(), _('Status of that document'), false);
-		echo html_ao('td');
-		doc_get_state_box('xzxz', 2); /**no direct deleted status */
-		echo html_ac(html_ap() - 2);
+		$cells = array();
+		$cells[][] = _('Status of that document');
+		$cells[][] = doc_get_state_box('xzxz', 2); /** no direct deleted status */
+		echo $HTML->multiTableRow(array(), $cells);
 	}
-	echo html_ac(html_ap() - 1);
+	echo $HTML->listTableBottom();
 	echo html_e('p', array(), sprintf(_('Fields marked with %s are mandatory.'), utils_requiredField()), false);
 	echo html_ao('div', array('class' => 'docmanSubmitDiv'));
 	echo html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Submit Information')));
