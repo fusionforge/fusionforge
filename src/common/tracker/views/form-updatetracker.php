@@ -61,26 +61,41 @@ $ath->adminHeader(array('title'=>sprintf(_('Update settings for %s'),
 		?>
 	</p>
 	<p>
-		<strong><?php echo _('Send email on new submission to address')._(':'); ?></strong><br />
-		<input type="text" name="email_address" value="<?php echo $email_address; ?>" /></p>
-	<p>
-		<input type="checkbox" name="email_all" value="1" <?php echo (($email_all)?'checked="checked"':''); ?> /> <strong><?php echo _('Send email on all changes') ?></strong>
+		<label for="email_address">
+			<strong><?php echo _('Send email on new submission to address')._(':'); ?></strong><br />
+		</label>
+		<input type="text" id="email_address" name="email_address" value="<?php echo $email_address; ?>" />
 	</p>
 	<p>
-		<strong><?php echo _('Days till considered overdue')._(':'); ?></strong><br />
-		<input type="text" name="due_period" value="<?php echo $due_period; ?>" />
+		<input type="checkbox" id="email_all" name="email_all" value="1" <?php echo (($email_all)?'checked="checked"':''); ?> />
+		<label for="email_all">
+			<strong><?php echo _('Send email on all changes') ?></strong>
+		</label>
 	</p>
 	<p>
-		<strong><?php echo _('Days till pending tracker items time out')._(':'); ?></strong><br />
-		<input type="text" name="status_timeout"  value="<?php echo $status_timeout; ?>" />
+		<label for="due_period">
+			<strong><?php echo _('Days till considered overdue')._(':'); ?></strong><br />
+		</label>
+		<input type="number" id="due_period" name="due_period" value="<?php echo $due_period; ?>" />
 	</p>
 	<p>
-		<strong><?php echo _('Free form text for the “Submit New” page')._(':'); ?></strong><br />
-		<textarea name="submit_instructions" rows="10" cols="55"><?php echo $submit_instructions; ?></textarea>
+		<label for="status_timeout">
+			<strong><?php echo _('Days till pending tracker items time out')._(':'); ?></strong><br />
+		</label>
+		<input type="number" id="status_timeout" name="status_timeout"  value="<?php echo $status_timeout; ?>" />
 	</p>
 	<p>
-		<strong><?php echo _('Free form text for the Browse page')._(':'); ?></strong><br />
-		<textarea name="browse_instructions" rows="10" cols="55"><?php echo $browse_instructions; ?></textarea></p>
+		<label for="submit_instructions">
+			<strong><?php echo _('Free form text for the “Submit New” page')._(':'); ?></strong><br />
+		</label>
+		<textarea id="submit_instructions" name="submit_instructions" rows="10" cols="55"><?php echo $submit_instructions; ?></textarea>
+	</p>
+	<p>
+		<label for="browse_instructions">
+			<strong><?php echo _('Free form text for the Browse page')._(':'); ?></strong><br />
+		</label>
+		<textarea id="browse_instructions" name="browse_instructions" rows="10" cols="55"><?php echo $browse_instructions; ?></textarea>
+	</p>
 	<p>
 		<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" />
 	</p>
