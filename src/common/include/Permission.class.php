@@ -33,7 +33,7 @@ $PERMISSION_OBJ=array();
  * permission_get_object is useful so you can pool Permission objects/save database queries
  * You should always use this instead of instantiating the object directly
  *
- * @param		object	$_Group object	The Group in question
+ * @param		object	$_Group	The Group in question
  * @return      object	a Permission or false on failure
  *
  */
@@ -201,9 +201,9 @@ class Permission extends Error {
 	}
 
 	/**
-	 *  isMember - Simple test to see if the current user is a member of this project.
+	 * isMember - Simple test to see if the current user is a member of this project.
 	 *
-	 *  @return	boolean	is_member.
+	 * @return bool is_member.
 	 */
 	function isMember() {
 		if ($this->isAdmin()) {
