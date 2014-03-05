@@ -43,7 +43,6 @@ class TroveCategoryLabel extends Error {
 			return false;
 		}
 		if ($category->isError()) {
-			//$this->setError('MailingList:: '.$Group->getErrorMessage());
 			return false;
 		}
 		$this->category =& $category;
