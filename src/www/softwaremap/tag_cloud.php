@@ -61,11 +61,11 @@ if ($selected_tag) {
 	$res_grp = db_query_params('
 		SELECT groups.group_id, group_name, unix_group_name, short_description, register_time
 		FROM project_tags, groups
-		WHERE name = $1
+		WHERE LOWER(name) = $1
 		AND project_tags.group_id = groups.group_id
 		AND status = $2 AND type_id=1 AND register_time > 0
 		ORDER BY group_name ASC',
-		array($selected_tag, 'A'), $TROVE_HARDQUERYLIMIT);
+		array(strtolower($selected_tag), 'A'), $TROVE_HARDQUERYLIMIT);
 	$projects = array();
 	$project_ids = array();
 	while ($row_grp = db_fetch_array($res_grp)) {
