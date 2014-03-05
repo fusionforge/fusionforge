@@ -87,7 +87,7 @@ plugin_hook_by_reference("text_editor", $params);
 	<tr>
 		<td colspan="2">
 		<strong><?php echo _('Estimated Hours').utils_requiredField()._(': '); ?></strong><br />
-		<input required="required" type="text" name="hours" size="5" value="1" />
+		<input required="required" type="number" name="hours" size="5" value="1" />
 		</td>
 	</tr>
 
@@ -148,7 +148,7 @@ will add duration and parent_id choices at some point
 	<tr>
 		<td>
 		<strong><?php echo _('Estimated Hours').utils_requiredField()._(':'); ?></strong><br />
-		<input required="required" type="text" name="hours" size="5" />
+		<input required="required" type="number" name="hours" size="5" />
 		</td>
 
 		<td>
