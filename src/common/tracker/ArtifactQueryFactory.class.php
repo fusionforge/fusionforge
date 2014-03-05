@@ -47,11 +47,11 @@ class ArtifactQueryFactory extends Error {
 	function __construct(&$ArtifactType) {
 		$this->Error();
 		if (!$ArtifactType || !is_object($ArtifactType)) {
-			$this->setError('ArtifactQueryFactory:: No ArtifactType Object');
+			$this->setError('ArtifactQueryFactory: No ArtifactType Object');
 			return;
 		}
 		if ($ArtifactType->isError()) {
-			$this->setError('ArtifactQueryFactory:: '.$ArtifactType->getErrorMessage());
+			$this->setError('ArtifactQueryFactory: '.$ArtifactType->getErrorMessage());
 			return;
 		}
 		$this->ArtifactType =& $ArtifactType;
@@ -69,7 +69,7 @@ class ArtifactQueryFactory extends Error {
 					array (user_getid(),
 					       $this->ArtifactType->getID())) ;
 		if (!$res) {
-			$this->setError("ArtifactQueryFactory:: Database error");
+			$this->setError("ArtifactQueryFactory: Database error");
 		}
 
 		while ($data = db_fetch_array($res)) {

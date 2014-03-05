@@ -55,7 +55,7 @@ class ProjectGroupFactory extends Error {
 			return;
 		}
 		if ($Group->isError()) {
-			$this->setError('ProjectGroup:: '.$Group->getErrorMessage());
+			$this->setError('ProjectGroup: '.$Group->getErrorMessage());
 			return;
 		}
 		if (!$Group->usesPM()) {

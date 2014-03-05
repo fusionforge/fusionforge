@@ -680,7 +680,7 @@ Use one below, but make sure it is entered as the single line.)
 		$res = db_query_params('SELECT * FROM users WHERE user_id=$1',
 					array($user_id));
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError('GFUser::fetchData():: '.db_error());
+			$this->setError('GFUser: '.db_error());
 			return false;
 		}
 		$this->data_array = db_fetch_array($res);

@@ -53,7 +53,7 @@ class ForumFactory extends Error {
 			return;
 		}
 		if ($Group->isError()) {
-			$this->setError(_('Forum').':: '.$Group->getErrorMessage());
+			$this->setError(_('Forums')._(': ').$Group->getErrorMessage());
 			return;
 		}
 		if (!$Group->usesForum()) {

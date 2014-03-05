@@ -61,11 +61,11 @@ class ProjectTaskFactory extends Error {
 	function ProjectTaskFactory(&$ProjectGroup) {
 		$this->Error();
 		if (!$ProjectGroup || !is_object($ProjectGroup)) {
-			$this->setError('ProjectTask:: No Valid ProjectGroup Object');
+			$this->setError('ProjectTask: No Valid ProjectGroup Object');
 			return false;
 		}
 		if ($ProjectGroup->isError()) {
-			$this->setError('ProjectTask:: '.$ProjectGroup->getErrorMessage());
+			$this->setError('ProjectTask: '.$ProjectGroup->getErrorMessage());
 			return false;
 		}
 		$this->ProjectGroup =& $ProjectGroup;

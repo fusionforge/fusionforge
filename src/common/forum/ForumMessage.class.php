@@ -61,7 +61,7 @@ class ForumMessage extends Error {
 			return false;
 		}
 		if ($Forum->isError()) {
-			$this->setError('ForumMessage:: '.$Forum->getErrorMessage());
+			$this->setError('ForumMessage: '.$Forum->getErrorMessage());
 			return false;
 		}
 		$this->Forum =& $Forum;
@@ -110,7 +110,7 @@ class ForumMessage extends Error {
 			$thread_id=$this->Forum->getNextThreadID();
 			$is_followup_to=0;
 			if (!$thread_id) {
-				$this->setError('ForumMessage::create() '._('Getting next thread_id failed'));
+				$this->setError('ForumMessage: '._('Getting next thread_id failed'));
 				db_rollback();
 				return false;
 			}
@@ -260,7 +260,7 @@ class ForumMessage extends Error {
 			$thread_id=$this->Forum->getNextThreadID();
 			$is_followup_to=0;
 			if (!$thread_id) {
-				$this->setError('ForumMessage::create() '._('Getting next thread_id failed'));
+				$this->setError('ForumMessage: '._('Getting next thread_id failed'));
 				db_rollback();
 				return false;
 			}
