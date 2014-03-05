@@ -119,7 +119,7 @@ for($i=0;$i<sizeof($monitored_forums);$i++) {
 			$rows=$max_rows;
 		}
 
-		$newcontent = '&nbsp;';
+		$new_content = '&nbsp;';
 		//this loops through every message AND followup, in search of new messages.
 		//anything that's new ( new thread or followup) is considered to be a "new thing" and the forum
 		//is considered to have new contents
@@ -128,11 +128,11 @@ for($i=0;$i<sizeof($monitored_forums);$i++) {
 				foreach ($forum_msg_arr as $forum_msg) {
 					if ($f->getSavedDate() < $forum_msg->getPostDate()) {
 						//we've got ourselves a new message or followup for this forum. note that, exit the search
-						$newcontent = "<center>" . html_image('ic/new.png','', '', array('alt' => 'new')) . "</center>";
+						$new_content = html_image('ic/new.png','', '', array('alt' => 'new'));
 						break;
 					}
 				}
-				if ($newcontent != '&nbsp;') {
+				if ($new_content != '&nbsp;') {
 					break;
 				}
 			}
@@ -142,7 +142,7 @@ for($i=0;$i<sizeof($monitored_forums);$i++) {
 			$total_rows++;
 			if ($f->getSavedDate() < $msg->getPostDate()) {
 				//we've got ourselves a new message for this forum. note that, exit the search
-				$newcontent = "<center>" . html_image('ic/new.png','', '', array('alt' => 'new')) . "</center>";
+				$new_content = "<center>" . html_image('ic/new.png','', '', array('alt' => 'new')) . "</center>";
 				break;
 			}
 			$j++;
@@ -159,7 +159,7 @@ for($i=0;$i<sizeof($monitored_forums);$i++) {
 			<td class="align-center">'.$f->getThreadCount().'</td>
 			<td class="align-center">'. $f->getMessageCount() .'</td>
 			<td class="align-center">'. $date .'</td>
-			<td>' . $newcontent . '</td></tr>';
+			<td class="align-center">' . $new_content . '</td></tr>';
 	}
 }
 
