@@ -195,7 +195,7 @@ unset($GLOBALS['editor_was_set_up']);
 	<tr>
 		<td>
 		<strong><?php echo _('Estimated Hours') . _(': '); ?></strong><br />
-		<input type="text" name="hours" size="5" value="<?php echo $pt->getHours(); ?>" />
+		<input type="number" name="hours" size="5" value="<?php echo $pt->getHours(); ?>" />
 		</td>
 
 		<td colspan="2">
@@ -210,7 +210,7 @@ unset($GLOBALS['editor_was_set_up']);
 	<tr>
 		<td>
 		<strong><?php echo _('Estimated Hours') . _(': '); ?></strong><br />
-		<input type="text" name="hours" size="5" value="<?php echo $pt->getHours(); ?>" />
+		<input type="number" name="hours" size="5" value="<?php echo $pt->getHours(); ?>" />
 		</td>
 
 		<td colspan="2">
