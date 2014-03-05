@@ -49,7 +49,7 @@ pm_header(array('title'=>_('Task Detail'),'group_project_id'=>$group_project_id)
 
 	<tr>
 		<td>
-		<strong><?php echo _('Category') ?></strong><br />
+		<strong><?php echo _('Category') . _(': '); ?></strong><br />
 		<?php echo $pt->getCategoryName(); ?>
 		</td>
 
