@@ -3,7 +3,7 @@
  *
  * Copyright 2010, Antoine Mercadal - Capgemini
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2011-2013, Franck Villaume - TrivialDev
+ * Copyright 2011-2014, Franck Villaume - TrivialDev
  * Copyright 2011, Alain Peyrat
  * http://fusionforge.org
  *
@@ -65,15 +65,34 @@ DocManListFileController.prototype =
 	resizableDiv: function() {
 		var splitterPosition = '30%';
 		var mainwidth = jQuery('#maindiv').width();
-		var fixheight = 40;
-		if (this.params.divEditFile !== undefined) {
-			fixheight = this.params.divEditFile.height() - 40;
-		}
 		if (jQuery.Storage.get('splitterStyle') !== undefined) {
 			var storedSplitterPosition = jQuery.Storage.get('splitterStyle').replace(/px;?/g, '').replace(/left: /g, '');
 			splitterPosition = Math.round(storedSplitterPosition * 100 / mainwidth )+'%';
 		}
-		(this.params.divLeft.height() > this.params.divRight.height() - fixheight) ? mainheight = this.params.divLeft.height() : mainheight = this.params.divRight.height() - fixheight;
+		if (this.params.page == 'trashfile') {
+			(this.params.divLeft.height() > this.params.divRight.height()) ? mainheight = this.params.divLeft.height() : mainheight = this.params.divRight.height();
+		} else {
+			var fixwidth = 0;
+			if (jQuery('#editFile')) {
+				fixwidth = jQuery('#editFile').height() - jQuery('#resourcePopupContainer').height();
+				if ( fixwidth < 0) {
+					fixwidth = 0;
+				}
+			}
+			if (fixwidth == 0) {
+				fixwidth = -40;
+			}
+			var totalRightHeight = 0;
+			this.params.divRight.children().each(function() {
+					if (jQuery(this).is(':visible')) {
+						totalRightHeight = totalRightHeight + jQuery(this).outerHeight();
+					}
+				});
+			totalRightHeight = totalRightHeight - fixwidth;
+			(this.params.divRight.height() - fixwidth < 0) ? useRightHeight = this.params.divRight.height() : useRightHeight = this.params.divRight.height() - fixwidth;
+			(useRightHeight < totalRightHeight) ? useRightHeight = totalRightHeight : useRightHeight ;
+			(this.params.divLeft.height() > this.params.divRight.height()) ? mainheight = this.params.divLeft.height() : mainheight = useRightHeight;
+		}
 		jQuery('#views').height(mainheight)
 				.split({orientation:'vertical', limit:100, position: splitterPosition});
 		jQuery('.vsplitter').mouseup(function(){
@@ -235,14 +254,14 @@ DocManListFileController.prototype =
 			}, this));
 		}
 		jQuery('#editdocdata').attr('action', this.docparams.action);
-		
+
 		jQuery.get(this.docparams.docManURL, {
 				group_id:	this.docparams.groupId,
 				action:		'lockfile',
 				lock:		1,
 				fileid:		this.docparams.id,
 				childgroup_id:	this.docparams.childGroupId
-			});		
+			});
 		this.lockInterval[this.docparams.id] = setInterval("jQuery.get('" + this.docparams.docManURL + "', {group_id:"+this.docparams.groupId+",action:'lockfile',lock:1,fileid:"+this.docparams.id+",childgroup_id:"+this.docparams.childGroupId+"})",this.docparams.lockIntervalDelay);
 		jQuery(this.params.divEditFile).dialog("open");
 
@@ -316,7 +335,7 @@ DocManAddFileController.prototype =
 			this.params.buttonEditor.click(jQuery.proxy(this, "toggleEditorView"));
 		}
 	},
-	
+
 	toggleFileRowView: function() {
 		this.params.fileRow.show();
 		this.params.fileRow.find('input').attr("required", "required");
@@ -327,7 +346,7 @@ DocManAddFileController.prototype =
 		this.params.editRow.hide();
 		this.params.editNameRow.hide();
 	},
-	
+
 	toggleUrlRowView: function() {
 		this.params.fileRow.hide();
 		this.params.fileRow.find('input').removeAttr("required");
@@ -338,7 +357,7 @@ DocManAddFileController.prototype =
 		this.params.editRow.hide();
 		this.params.editNameRow.hide();
 	},
-	
+
 	toggleManualUploadView: function() {
 		this.params.fileRow.hide();
 		this.params.fileRow.find('input').removeAttr("required");
@@ -349,7 +368,7 @@ DocManAddFileController.prototype =
 		this.params.editRow.hide();
 		this.params.editNameRow.hide();
 	},
-	
+
 	toggleEditorView: function() {
 		this.params.fileRow.hide();
 		this.params.fileRow.find('input').removeAttr("required");
