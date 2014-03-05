@@ -299,7 +299,7 @@ function people_edit_job_inventory($job_id,$group_id) {
 	$result=db_query_params('SELECT * FROM people_job_inventory WHERE job_id=$1', array($job_id));
 
 	$title_arr=array();
-	$title_arr[]=_('Skill');
+	$title_arr[]=_('Skill').utils_requiredField();
 	$title_arr[]=_('Level').utils_requiredField();
 	$title_arr[]=_('Experience').utils_requiredField();
 	$title_arr[]=_('Action');
