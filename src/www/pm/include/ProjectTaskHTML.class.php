@@ -86,8 +86,7 @@ class ProjectTaskHTML extends ProjectTask {
 			echo $GLOBALS['HTML']->listTableBottom();
 
 		} else {
-			echo '<h3>'._('No Tasks are Dependent on This Task').'</h3>';
-			echo db_error();
+			echo '<p>'._('No Tasks are Dependent on This Task').'</p>';
 		}
 	}
 
@@ -126,8 +125,7 @@ class ProjectTaskHTML extends ProjectTask {
 
 			echo $GLOBALS['HTML']->listTableBottom();
 		} else {
-			echo '
-			<h3>'._('No Related Tracker Items Have Been Added').'</h3>';
+			echo '<p>'._('No Related Tracker Items Have Been Added').'</p>';
 		}
 	}
 
@@ -172,17 +170,15 @@ class ProjectTaskHTML extends ProjectTask {
 				}
 
 				echo '</td>
-					<td valign="top">'.date(_('Y-m-d H:i'),db_result($result, $i, 'postdate')).'</td>
-					<td valign="top">'.db_result($result, $i, 'user_name').'</td></tr>';
+					<td class="top">'.date(_('Y-m-d H:i'),db_result($result, $i, 'postdate')).'</td>
+					<td class="top">'.db_result($result, $i, 'user_name').'</td></tr>';
 			}
 
 			echo $GLOBALS['HTML']->listTableBottom();
 
 		} else {
-			echo '
-			<h3>'._('No Comments Have Been Added').'</h3>';
+			echo '<p>'._('No Comments Have Been Posted').'</p>';
 		}
-
 	}
 
 	function showHistory() {
@@ -240,11 +236,9 @@ class ProjectTaskHTML extends ProjectTask {
 			echo $GLOBALS['HTML']->listTableBottom();
 
 		} else {
-			echo '
-			<h3>'._('No Changes Have Been Made').'</h3>';
+			echo '<p>'._('No Changes Have Been Made').'</p>';
 		}
 	}
-
 }
 
 // Local Variables:
