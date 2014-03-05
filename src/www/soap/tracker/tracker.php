@@ -194,7 +194,7 @@ $server->wsdl->addComplexType(
 	'tns:Artifact'
 );
 
-//getArtifact
+//getArtifacts
 $server->register(
 	'getArtifacts',
 	array(
