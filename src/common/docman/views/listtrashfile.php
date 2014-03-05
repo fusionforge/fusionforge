@@ -81,13 +81,14 @@ if ($d_arr != NULL ) {
 	}
 }
 
-echo '<div id="leftdiv">';
+echo html_ao('div', array('id' => 'leftdiv'));
 include ($gfcommon.'docman/views/tree.php');
-echo '</div>';
-echo '<div id="rightdiv">';
-echo '<div style="padding:5px;"><form id="emptytrash" name="emptytrash" method="post" action="?group_id='.$group_id.'&amp;action=emptytrash" >';
-echo '<input id="submitemptytrash" type="submit" value="'. _('Delete permanently all documents and folders with deleted status.') .'" >';
-echo '</form></div>';
+echo html_ac(html_ap() - 1);
+echo html_ao('div', array('id' => 'rightdiv'));
+echo html_ao('div', array('style' => 'padding:5px'));
+echo html_ao('form', array('id' => 'emptytrash', 'name' => 'emptytrash', 'method' => 'post', 'action' => '/docman/?group_id='.$group_id.'&action=emptytrash'));
+echo html_e('input', array('id' => 'submitemptytrash', 'type' => 'submit', 'value' => _('Delete permanently all documents and folders with deleted status.')));
+echo html_ac(html_ap() - 2);
 ?>
 <script type="text/javascript">//<![CDATA[
 var controllerListTrash;
@@ -202,11 +203,11 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 	echo '</div>';
 } else {
 	if ($dirid) {
-		echo '<p class="information">'._('No documents.').'</p>';
+		echo html_e('p', array('class' => 'information', _('No documents.'), false));
 	}
 }
 
-echo '</div>';
+echo html_ac(html_ap() -1);
 if (forge_check_perm('docman', $g->getID(), 'approve')) {
 	include ($gfcommon.'docman/views/editfile.php');
 }
