@@ -190,7 +190,7 @@ function show_newest_projects() {
 	}
 
 	if (forge_get_config('use_project_full_list')) {
-		$return .= '<div class="align-center">'.util_make_link ('/softwaremap/full_list.php', _('All newest projects'), array('class' => 'dot-link')).'</div>';
+		$return .= '<p class="align-center">'.util_make_link ('/softwaremap/full_list.php', _('All newest projects'), array('class' => 'dot-link')).'</p>';
 	}
 	return $return;
 }
