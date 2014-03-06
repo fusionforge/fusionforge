@@ -193,7 +193,7 @@ for ($i=0; $i<count($keys); $i++) {
 				//	on the same line as tracker public
 				//
 				if ($keys[$i] == 'forumpublic') {
-					$txt=' &nbsp; '.html_build_select_box_from_assoc(
+					$txt=' '.html_build_select_box_from_assoc(
 					$role->getRoleVals('forumanon'),
 					"data[forumanon][".db_result($res,$q,'group_forum_id')."]",
 					$role->getVal('forumanon',db_result($res,$q,'group_forum_id')),
@@ -201,7 +201,7 @@ for ($i=0; $i<count($keys); $i++) {
 				} else {
 					$txt='';
 				}
-				echo '<tr ' . $HTML->boxGetAltRowStyle($j++) . '>
+				echo '<tr '. $HTML->boxGetAltRowStyle($j++) . '>
 				<td style="padding-left: 4em;">'.$rbac_edit_section_names[$keys[$i]].'</td>
 				<td>'.db_result($res,$q,'forum_name').'</td>
 				<td>'.html_build_select_box_from_assoc(
@@ -247,7 +247,7 @@ for ($i=0; $i<count($keys); $i++) {
 				//	on the same line as tracker public
 				//
 				if ($keys[$i] == 'trackerpublic') {
-					$txt = ' &nbsp; '.html_build_select_box_from_assoc(
+					$txt = ' '.html_build_select_box_from_assoc(
 					$role->getRoleVals('trackeranon'),
 					"data[trackeranon][".db_result($res,$q,'group_artifact_id')."]",
 					$role->getVal('trackeranon',db_result($res,$q,'group_artifact_id')),
