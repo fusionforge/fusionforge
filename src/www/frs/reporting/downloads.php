@@ -141,9 +141,9 @@ if ($start == $end) {
 	}
 	for ($i=0; $i < count($data); $i++) {
 		echo 'var labels = [{label:\''.$data[$i][0].'\'}];';
-		$thisdate = date(_('Y-m'), mktime(0, 0, 0, substr($data[$i][4], 4, 2), 0, substr($data[$i][4], 0, 4)));
-		$indexkey = array_search($thisdate, $arr2);
-		$valuesArr[$indexkey+1]++;
+		$this_date = date(_('Y-m'), mktime(0, 0, 0, substr($data[$i][4], 4, 2), 0, substr($data[$i][4], 0, 4)));
+		$index_key = array_search($this_date, $arr2);
+		$valuesArr[$index_key+1]++;
 	}
 	foreach ($valuesArr as $key) {
 		echo 'values.push('.$key.');';
