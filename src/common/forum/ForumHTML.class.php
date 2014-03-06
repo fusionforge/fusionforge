@@ -519,11 +519,12 @@ class ForumHTML extends Error {
 			<table><tr><td class="top">
 			</td><td class="top">
 			<p>
-			<strong><?php echo _('Subject')._(': '); ?></strong><?php echo utils_requiredField(); ?><br />
+			<strong><?php echo _('Subject').utils_requiredField()._(':'); ?></strong><br />
 				<input type="text" autofocus="autofocus" required="required" name="subject" value="<?php echo $subject; ?>" size="80" maxlength="80" />
 			</p>
 			<p>
-			<strong><?php echo _('Message')._(': '); ?></strong><?php echo notepad_button('document.forms.ForumEditForm.body') ?><?php echo utils_requiredField(); ?>
+			<strong><?php echo _('Message').utils_requiredField()._(': '); ?></strong>
+			<?php echo notepad_button('document.forms.ForumEditForm.body'); ?>
 			</p>
 			<?php
 			$GLOBALS['editor_was_set_up']=false;
@@ -542,7 +543,7 @@ class ForumHTML extends Error {
 
 				<p style="text-align: center">
 				<input type="submit" name="ok" value="<?php echo _('Update'); ?>" />
-				<input type="submit" name="cancel" value="<?php echo _('Cancel'); ?>" />
+				<input type="submit" name="cancel" formnovalidate="formnovalidate" value="<?php echo _('Cancel'); ?>" />
 				</p>
 			</td></tr></table></fieldset>
 			</form>
@@ -583,10 +584,11 @@ class ForumHTML extends Error {
 			<td class="top">
 			</td>
 			<td class="top">
-			<strong><?php echo _('Subject')._(': '); ?></strong><?php echo utils_requiredField(); ?><br />
+			<strong><?php echo _('Subject').utils_requiredField()._(': '); ?></strong><br />
 				<input type="text" autofocus="autofocus" required="required" name="subject" value="<?php echo $subject; ?>" size="80" maxlength="80" />
 			<br />
-		<strong><?php echo _('Message')._(': '); ?></strong><?php echo notepad_button('document.forms.ForumPostForm.body') ?><?php echo utils_requiredField(); ?><br />
+		<strong><?php echo _('Message').utils_requiredField()._(': '); ?></strong>
+		<?php echo notepad_button('document.forms.ForumPostForm.body') ?><br />
 
 			<?php
 				$GLOBALS['editor_was_set_up']=false;
