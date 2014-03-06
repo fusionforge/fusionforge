@@ -151,7 +151,8 @@ jQuery(document).ready(function() {
 		childGroupId:		<?php echo util_ifsetor($childgroup_id, 0) ?>,
 		divEditFile:		jQuery('#editFile'),
 		divEditTitle:		'<?php echo _("Edit document dialog box") ?>',
-		enableResize:		true
+		enableResize:		true,
+		page:			'listfile'
 	});
 });
 
@@ -359,7 +360,13 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 if (forge_check_perm('docman', $group_id, 'approve') && $DocGroupName) {
 	include ($gfcommon.'docman/views/pendingfiles.php');
 }
-if (forge_check_perm('docman', $g->getID(), 'approve')) {
+$foundFiles = 0;
+if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
+	$foundFiles = count($nested_docs[$dirid]);
+} elseif (isset($nested_pending_docs)) {
+	$foundFiles .= count($nested_pending_docs);
+}
+if (forge_check_perm('docman', $g->getID(), 'approve') && $foundFiles) {
 	include ($gfcommon.'docman/views/editfile.php');
 }
 
