@@ -143,7 +143,7 @@ class Plugin extends Error {
 	 * @return	string	the directory
 	 */
 	function getThemePath(){
-		return util_make_url('plugins/'.$this->name.'/themes/default');
+		return 'plugins/'.$this->name.'/themes/default';
 	}
 
 	function registerRoleValues(&$params, $values) {
