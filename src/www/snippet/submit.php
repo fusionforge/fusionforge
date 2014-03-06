@@ -102,11 +102,11 @@ if (session_loggedin()) {
 	<table>
 
 	<tr><td colspan="2">
-	    <?php echo $HTML->html_input('name', '', _('Title')._(': ') . utils_requiredField(), 'text', '', array('size' => '45', 'maxlength' => '60', 'required' => 'required')); ?>
+	    <?php echo $HTML->html_input('name', '', _('Title').utils_requiredField()._(': '), 'text', '', array('size' => '45', 'maxlength' => '60', 'required' => 'required')); ?>
 	</td></tr>
 
 	<tr><td colspan="2">
-        <?php echo $HTML->html_textarea('description', '', _('Description')._(': ') . utils_requiredField(), '', array('rows' => '5', 'cols' => '45', 'required' => 'required')); ?>
+        <?php echo $HTML->html_textarea('description', '', _('Description').utils_requiredField()._(': '), '', array('rows' => '5', 'cols' => '45', 'required' => 'required')); ?>
 	</td></tr>
 
 	<tr>
@@ -134,11 +134,11 @@ if (session_loggedin()) {
 	</tr>
 
 	<tr><td colspan="2">
-        <?php echo $HTML->html_input('version', '', _('Version')._(': ') . utils_requiredField(), 'text', '', array('size' => '10', 'maxlength' => '15', 'required' => 'required')); ?>
+        <?php echo $HTML->html_input('version', '', _('Version').utils_requiredField()._(': '), 'text', '', array('size' => '10', 'maxlength' => '15')); ?>
 	</td></tr>
 
 	<tr><td colspan="2">
-	    <?php echo $HTML->html_textarea('code', '', _('Paste the Code Here')._(': ') . utils_requiredField(), '', array('rows' => '30', 'cols' => '85', 'required' => 'required')); ?>
+	    <?php echo $HTML->html_textarea('code', '', _('Paste the Code Here').utils_requiredField()._(': '), '', array('rows' => '30', 'cols' => '85')); ?>
 	</td></tr>
 
 	<tr><td colspan="2" class="align-center">
