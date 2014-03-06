@@ -1339,9 +1339,10 @@ if (isset($params['group']) && $params['group']) {
 		}
 		echo html_ac(html_ap() -1);
 		if ($widget->isAjax()) {
+			$spinner = '<div style="text-align:center">'.trim($this->getPicto('ic/spinner.gif',_('Spinner'), _('Spinner'), 10, 10)).'</div>';
 			echo '<script type="text/javascript">/* <![CDATA[ */'."
 				jQuery(document).ready(function() {
-						jQuery('#$element_id-ajax').html('<div style=\"text-align:center\">". $this->getPicto('ic/spinner.gif',_('Spinner'), _('Spinner'), 10, 10) ."</div>');
+						jQuery('#$element_id-ajax').html('".$spinner."');
 						jQuery.ajax({url:'". $widget->getAjaxUrl($owner_id, $owner_type) ."',
 							success: function(result){jQuery('#$element_id-ajax').html(result)},
 							});
