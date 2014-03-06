@@ -3,7 +3,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -42,12 +42,9 @@ if (!forge_check_perm('docman', $g->getID(), 'approve')) {
 }
 
 $arr_fileid = explode(',', getStringFromRequest('fileid'));
-$return_msg = _('Document(s)').' ';
 foreach ($arr_fileid as $fileid) {
 	if (!empty($fileid)) {
 		$d = new Document($g, $fileid);
-		$return_msg .= $d->getFilename().' ';
-
 		if ($d->isError())
 			session_redirect($urlredirect.'&error_msg='.urlencode($d->getErrorMessage()));
 
@@ -58,5 +55,6 @@ foreach ($arr_fileid as $fileid) {
 		session_redirect($urlredirect.'&warning_msg='.urlencode($warning_msg));
 	}
 }
-$return_msg .= _('activated successfully.');
+$count = count($arr_fileid);
+$return_msg = sprintf(ngettext('%s document validated successfully.', '%s documents validated successfully.', $count), $count);
 session_redirect($urlredirect.'&feedback='.urlencode($return_msg));

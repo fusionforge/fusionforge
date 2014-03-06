@@ -3,6 +3,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -33,12 +34,9 @@ if (!forge_check_perm('docman', $g->getID(), 'approve')) {
 }
 
 $arr_fileid = explode(',',getStringFromRequest('fileid'));
-$return_msg = _('Document(s)').' ';
 foreach ($arr_fileid as $fileid) {
 	if (!empty($fileid)) {
 		$d = new Document($g, $fileid);
-		$return_msg .= $d->getFilename().' ';
-
 		if ($d->isError())
 			session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($d->getErrorMessage()));
 
@@ -49,5 +47,6 @@ foreach ($arr_fileid as $fileid) {
 		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($warning_msg));
 	}
 }
-$return_msg .= _('deleted successfully.');
+$count = count($arr_fileid);
+$return_msg = sprintf(ngettext('%s document deleted successfully.', '%s documents deleted successfully.', $count), $count);
 session_redirect('/docman/?group_id='.$group_id.'&view=listtrashfile&dirid='.$dirid.'&feedback='.urlencode($return_msg));
