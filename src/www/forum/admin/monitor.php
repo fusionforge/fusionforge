@@ -58,7 +58,7 @@ if ($res && db_numrows($res) == 0) {
 	exit;
 }
 
-$tableHeaders = array(_('User'), _('Email'), _('Realname'));
+$tableHeaders = array(_('User'), _('Email'), _('Real Name'));
 
 $j=0;
 
