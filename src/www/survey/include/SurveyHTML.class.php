@@ -298,7 +298,7 @@ class SurveyHTML extends Error {
 		$ret = "<h2>" . sprintf(ngettext("%d question found", "%d questions found", $n), $n)."</h2>";
 
 		/* Head information */
-		$title_arr = array('Question ID', 'Question', 'Type', 'Edit/Delete');
+		$title_arr = array(_('Question ID'), _('Question'), _('Type'), _('Edit/Delete'));
 		$ret.=$GLOBALS['HTML']->listTableTop ($title_arr);
 
 		for($i = 0;  $i  <  count($questions);  $i++)  {
