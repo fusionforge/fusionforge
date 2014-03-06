@@ -152,7 +152,12 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 		$result[] = RoleAnonymous::getInstance();
 		$result[] = RoleLoggedIn::getInstance();
 
-		$uid = is_object($user) ? $user->getID() : $user;
+		$uid_s = is_object($user) ? $user->getID() : $user;
+		$uid = util_nat0($uid_s);
+		if ($uid === false) {
+			/* no valid number; would make Postgres error out */
+			return $result;
+		}
 
 		$res = db_query_params ('SELECT role_id FROM pfo_user_role WHERE user_id=$1',
 					array ($uid));
