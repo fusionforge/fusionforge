@@ -283,6 +283,7 @@ class SVNPlugin extends SCMPlugin {
 			if ($ret != 0) {
 				return false;
 			}
+			system ("sed -i '/enable-rep-sharing = false/s/^. //' $repo/db/fsfs.conf") ;
 			system ("svn mkdir -m'Init' file:///$repo/trunk file:///$repo/tags file:///$repo/branches >/dev/null") ;
 			if (forge_get_config('use_ssh', 'scmsvn')) {
 				$unix_group = 'scm_' . $project->getUnixName() ;
