@@ -203,9 +203,9 @@ echo '	<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.
 if ($rows < 1) {
 
 	echo '
-		<p class="feedback">'._('No Matching Tasks found').'</p>
+		<p class="information">'._('No Matching Tasks found').'</p>
 		<p />
-		<div class="warning">'._('Add tasks using the link above').'</div>';
+		<p class="important">'._('Add tasks using the link above').'</p>';
 	echo db_error();
 } else {
 
