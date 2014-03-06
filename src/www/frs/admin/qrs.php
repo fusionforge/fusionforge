@@ -172,7 +172,7 @@ frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 	</tr>
 	<tr>
 		<td>
-			<strong><?php echo _('Release Name')._(':'); ?><?php echo utils_requiredField();?></strong>
+			<strong><?php echo _('Release Name').utils_requiredField()._(':'); ?></strong>
 		</td>
 		<td>
 			<input type="text" required="required" name="release_name" value="<?php echo htmlspecialchars($release_name) ?>" pattern=".{3,}" title="<?php echo  _('At least 3 characters') ?>" />
