@@ -149,7 +149,7 @@ function handle_multi_edit($skill_ids = array()) {
 				'<tr '.$HTML->boxGetAltRowStyle($i+1).'>'.
 				'<td><h3>'.db_result($result, $i,'title').'</h3></td></tr>'.
 				'<tr><td>'.
-				'<table>'.
+				'<table class="fullwidth">'.
 					'<tr class="tableheading">'.
 						'<td >'._('Type').'</td>'.
 						'<td >'._('Start Date').'</td>'.
@@ -171,13 +171,13 @@ function handle_multi_edit($skill_ids = array()) {
 					'</tr>'.
 					'<tr>'.
 						'<td><input type="hidden" name="skill_edit[]" value="'.db_result($result, $i,'skills_data_id').'" />'.
-						'<input type="text" name="title[]" size="100" value="'.db_result($result, $i,'title').'" /></td>'.
+						'<input type="text" name="title[]" size="100" value="'.db_result($result, $i,'title').'" required="required" /></td>'.
 					'</tr>'.
 					'<tr>'.
 						'<td class="tableheading">'._('Keywords (max 255 characters)').'</td>'.
 					'</tr>'.
 					'<tr>'.
-						'<td><textarea name="keywords[]" rows="3" cols="85">'.db_result($result, $i,'keywords').'</textarea></td>'.
+						'<td><textarea name="keywords[]" rows="3" cols="85" required="required" >'.db_result($result, $i,'keywords').'</textarea></td>'.
 					'</tr>'.
 				 '</table>';
 			echo '</td></tr>';

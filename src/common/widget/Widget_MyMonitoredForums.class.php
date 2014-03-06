@@ -2,6 +2,7 @@
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
  * Copyright 2012-2013, Franck Villaume - TrivialDev
+ * Copyright (C) 2014 Alain Peyrat - Alcatel-Lucent
  *
  * This file is a part of FusionForge.
  *
@@ -39,7 +40,8 @@ class Widget_MyMonitoredForums extends Widget {
 
 	function getContent() {
 		$html_my_monitored_forums = '';
-		$sql="SELECT DISTINCT groups.group_id, groups.group_name, forum_group_list.group_forum_id ".
+		$sql="SELECT DISTINCT groups.group_id, groups.group_name,
+			forum_group_list.group_forum_id, forum_group_list.forum_name ".
 		"FROM groups,forum_group_list,forum_monitored_forums ".
 		"WHERE groups.group_id=forum_group_list.group_id ".
 		"AND groups.status = 'A' ".
@@ -59,17 +61,18 @@ class Widget_MyMonitoredForums extends Widget {
 		while ($r = db_fetch_array($result)) {
 			if (forge_check_perm('project', $r['group_id'], 'read')
 					&& forge_check_perm('forum', $r['group_forum_id'], 'read')) {
-				$glist[] = $r;
+				$glist[] = serialize(array($r['group_id'], $r['group_name']));
 			}
 		}
+		$glist = array_unique($glist);
 		$rows=count($glist);
 		if (!$result || $rows < 1) {
 			$html_my_monitored_forums .= '<div class="warning">' . _("You are not monitoring any forums.") . '</div><p>' . _("If you monitor forums, you will be sent new posts in the form of an email, with a link to the new message.") . '</p><p>' . _("You can monitor forums by clicking on the appropriate menu item in the discussion forum itself.") . '</p>';
 		} else {
 			$request =& HTTPRequest::instance();
 			$html_my_monitored_forums .= '<table style="width:100%">';
-			for ($j=0; $j<$rows; $j++) {
-				$group_id = $glist[$j]['group_id'];
+			foreach ($glist as $group) {
+				list($group_id, $group_name) = unserialize($group);
 
 				$sql2="SELECT forum_group_list.group_forum_id,forum_group_list.forum_name ".
 					"FROM groups,forum_group_list,forum_monitored_forums ".
@@ -107,8 +110,7 @@ class Widget_MyMonitoredForums extends Widget {
 				list($hide_now,$count_diff,$hide_url) = my_hide_url('forum',$group_id,$hide_item_id,$rows2,$hide_forum);
 
 				$html_hdr = '<tr class="boxitem"><td colspan="2">'.
-				$hide_url.'<a href="/forum/?group_id='.$group_id.'">'.
-				$glist[$j]['group_name'].'</a>    ';
+				$hide_url.'<a href="/forum/?group_id='.$group_id.'">'.$group_name.'</a>    ';
 
 				$html = '';
 				$count_new = max(0, $count_diff);

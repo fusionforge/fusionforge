@@ -107,7 +107,8 @@ jQuery(document).ready(function() {
 		divRight:		jQuery('#rightdiv'),
 		divEditFile:		jQuery('#editFile'),
 		divEditTitle:		'<?php echo _("Edit document dialog box") ?>',
-		enableResize:		true
+		enableResize:		true,
+		page:			'trashfile'
 	});
 });
 //]]></script>
@@ -211,6 +212,10 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 }
 
 echo '</div>';
-if (forge_check_perm('docman', $g->getID(), 'approve')) {
+$foundFiles = 0;
+if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
+	$foundFiles = count($nested_docs[$dirid]);
+}
+if (forge_check_perm('docman', $g->getID(), 'approve') && $foundFiles) {
 	include ($gfcommon.'docman/views/editfile.php');
 }

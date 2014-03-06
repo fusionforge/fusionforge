@@ -223,7 +223,6 @@ class AuthLDAPPlugin extends ForgeAuthPlugin {
 		forge_define_config_item('ldap_port', $this->name, 389);
 		forge_define_config_item('base_dn', $this->name, 'ou=users,dc=example,dc=com');
 		forge_define_config_item('ldap_version', $this->name, 3);
-		forge_define_config_item('skipped_users', $this->name, '');
 		forge_define_config_item('manager_dn', $this->name, '');
 		forge_define_config_item('manager_password', $this->name, '');
 	}
