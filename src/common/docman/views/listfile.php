@@ -252,7 +252,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		echo '<td><a href="'.$docurl.'" class="tabtitle-nw" title="'.$docurltitle.'" >';
 		echo html_image($d->getFileTypeImage(), '22', '22', array('alt'=>$d->getFileType()));
 		echo '</a></td>'."\n";
-		echo '<td>';
+		echo '<td style="word-wrap: break-word; max-width: 250px;" >';
 		if (($d->getUpdated() && $time_new > (time() - $d->getUpdated())) || $time_new > (time() - $d->getCreated())) {
 			$html_image_attr = array();
 			$html_image_attr['alt'] = _('new');
@@ -262,8 +262,8 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		}
 		echo '&nbsp;'.$d->getFileName();
 		echo '</td>';
-		echo '<td>'.$d->getName().'</td>';
-		echo '<td>'.$d->getDescription().'</td>';
+		echo '<td style="word-wrap: break-word; max-width: 250px;" >'.$d->getName().'</td>';
+		echo '<td style="word-wrap: break-word; max-width: 250px;" >'.$d->getDescription().'</td>';
 		echo '<td>'.make_user_link($d->getCreatorUserName(), $d->getCreatorRealName()).'</td>';
 		echo '<td>';
 		if ( $d->getUpdated() ) {
