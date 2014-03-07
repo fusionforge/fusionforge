@@ -132,7 +132,7 @@ if (!session_loggedin()) {
 										$at->getName()) . '</strong></td></tr>';
 							$toggle=0;
 							foreach($art_arr as $art) {
-								echo '<tr '. $HTML->boxGetAltRowStyle($toggle++) . ' class="top"><td class="align-center">'. $art->getID() .'</td>';
+								echo '<tr '. $HTML->boxGetAltRowStyle($toggle++) . '><td class="align-center">'. $art->getID() .'</td>';
 								if ($display_col['summary'])
 								echo '<td class="align-left">'.util_make_link('/tracker/?func=detail&aid='.$art->getID().'&group_id='.$p->getID().'&atid='.$ath->getID(), $art->getSummary()).'</td>';
 								if ($display_col['changed'])
