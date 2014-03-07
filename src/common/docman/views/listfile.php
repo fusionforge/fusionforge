@@ -250,9 +250,9 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 			$html_image_attr['title'] = _('Created or updated since less than 7 days');
 			$nextcell = html_image('docman/new.png', '14', '14', $html_image_attr);
 		}
-		$cells[][] =  $nextcell.'&nbsp;'.$d->getFileName();
-		$cells[][] =  $d->getName();
-		$cells[][] =  $d->getDescription();
+		$cells[] = array($nextcell.'&nbsp;'.$d->getFileName(), 'style' => 'word-wrap: break-word; max-width: 250px;');
+		$cells[] = array($d->getName(), 'style' => 'word-wrap: break-word; max-width: 250px;');
+		$cells[] = array($d->getDescription(), 'style' => 'word-wrap: break-word; max-width: 250px;');
 		$cells[][] =  make_user_link($d->getCreatorUserName(), $d->getCreatorRealName());
 		if ( $d->getUpdated() ) {
 			$cells[][] = date(_('Y-m-d H:i'), $d->getUpdated());
