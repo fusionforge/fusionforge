@@ -649,7 +649,6 @@ if (isset($params['group']) && $params['group']) {
 				}
 				if ($thTitleArray && $thTitleArray[$i]) {
 					$thAttrs['title'] = $thTitleArray[$i];
-					$th .= ' title="'.$thTitleArray[$i].'"';
 				}
 				$cell = $titleArray[$i];
 				if ($linksArray) {
