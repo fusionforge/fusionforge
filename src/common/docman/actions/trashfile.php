@@ -5,6 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -47,12 +48,9 @@ if ($childgroup_id) {
 }
 
 $arr_fileid = explode(',',getStringFromRequest('fileid'));
-$return_msg = _('Document(s)').' ';
 foreach ($arr_fileid as $fileid) {
 	if (!empty($fileid)) {
 		$d = new Document($g, $fileid);
-		$return_msg .= $d->getFilename().' ';
-
 		if ($d->isError())
 			session_redirect($redirecturl.'&error_msg='.urlencode($d->getErrorMessage()));
 
@@ -63,5 +61,6 @@ foreach ($arr_fileid as $fileid) {
 		session_redirect($redirecturl.'&warning_msg='.urlencode($warning_msg));
 	}
 }
-$return_msg .= _('moved to trash successfully.');
+$count = count($arr_fileid);
+$return_msg = sprintf(ngettext('%s document moved to trash successfully.', '%s documents moved to trash successfully.', $count), $count);
 session_redirect($redirecturl.'&feedback='.urlencode($return_msg));
