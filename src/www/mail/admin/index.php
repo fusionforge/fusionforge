@@ -183,12 +183,21 @@ if ($group_id) {
 			<input type="hidden" name="post_changes" value="y" />
 			<input type="hidden" name="add_list" value="y" />
 			<input type="hidden" name="form_key" value="<?php echo form_generate_key();?>" />
-			<p><strong><?php echo _('Mailing List Name')._(':'); ?></strong><br />
+			<p><strong><?php echo _('Mailing List Name').utils_requiredField()._(':'); ?></strong><br />
 			<strong><?php echo $group->getUnixName(); ?>-<input type="text" name="list_name" value="" size="10" maxlength="12" required="required" pattern="[a-zA-Z0-9]{4,}" />@<?php echo forge_get_config('lists_host'); ?></strong></p>
 			<p>
 			<strong><?php echo _('Is Public?'); ?></strong><br />
-			<input type="radio" name="is_public" value="<?php echo MAIL__MAILING_LIST_IS_PUBLIC; ?>" <?php echo ($group->isPublic() ? ' checked="checked"' : '') ?> /> <?php echo _('Yes'); ?><br />
-			<input type="radio" name="is_public" value="<?php echo MAIL__MAILING_LIST_IS_PRIVATE; ?>" <?php echo ($group->isPublic() ? '' : ' checked="checked"') ?> /> <?php echo _('No'); ?></p><p>
+			<input type="radio" id="public_yes" name="is_public" value="<?php echo MAIL__MAILING_LIST_IS_PUBLIC; ?>" checked="checked" />
+			<label for="public_yes">
+				<?php echo _('Yes'); ?>
+			</label>
+			<br />
+			<input type="radio" id="public_no" name="is_public" value="<?php echo MAIL__MAILING_LIST_IS_PRIVATE; ?>" />
+				<label for="public_no">
+			<?php echo _('No'); ?>
+			</label>
+			</p>
+			<p>
 			<strong><?php echo _('Description')._(':'); ?></strong><br />
 			<input type="text" name="description" value="" size="40" maxlength="80" /></p>
 			<p>
