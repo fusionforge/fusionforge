@@ -291,7 +291,7 @@ if ($add_cat && $group_project_id) {
 	<input type="text" name="description" value="" size="40" maxlength="80" required="required" pattern=".{10,}" title="<?php echo _('At least 10 characters') ?>" />
 	<p />
 	<strong><?php echo _('Send All Updates To')._(':'); ?></strong><br />
-	<input type="text" name="send_all_posts_to" value="" size="40" maxlength="80" /><p />
+	<input type="email" name="send_all_posts_to" value="" size="40" maxlength="80" /><p />
 	<input type="submit" name="submit" value="<?php echo _('Submit') ?>" />
 	</form>
 	<?php
@@ -344,7 +344,7 @@ if ($add_cat && $group_project_id) {
 		</label>
 		</td>
 		<td>
-			<input id="send_all_posts_to" type="text" name="send_all_posts_to" value="<?php echo $pg->getSendAllPostsTo(); ?>" size="40" maxlength="80" />
+			<input id="send_all_posts_to" type="email" name="send_all_posts_to" value="<?php echo $pg->getSendAllPostsTo(); ?>" size="40" maxlength="80" />
 		</td>
 	</tr>
 	<tr>
