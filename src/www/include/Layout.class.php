@@ -615,15 +615,16 @@ if (isset($params['group']) && $params['group']) {
 	/**
 	 * listTableTop() - Takes an array of titles and builds the first row of a new table.
 	 *
-	 * @param	array	$titleArray	The array of titles
-	 * @param	array	$linksArray	The array of title links
-	 * @param	string	$class		The css classes to add (optional)
-	 * @param	string	$id		The id of the table (needed by sortable for example)
-	 * @param	array	$thClassArray	specific class for th column
-	 * @param	array	$thTitleArray	specific title for th column
+	 * @param	array	$titleArray		The array of titles
+	 * @param	array	$linksArray		The array of title links
+	 * @param	string	$class			The css classes to add (optional)
+	 * @param	string	$id			The id of the table (needed by sortable for example)
+	 * @param	array	$thClassArray		specific class for th column
+	 * @param	array	$thTitleArray		specific title for th column
+	 * @param	array	$thOtherAttrsArray	optional other html attributes for the th
 	 * @return	string	the html code
 	 */
-	function listTableTop($titleArray = array(), $linksArray = array(), $class = '', $id = '', $thClassArray = array(), $thTitleArray = array()) {
+	function listTableTop($titleArray = array(), $linksArray = array(), $class = '', $id = '', $thClassArray = array(), $thTitleArray = array(), $thOtherAttrsArray = array()) {
 		$attrs = array('class' => 'listing');
 		$args = '';
 		if ($class) {
@@ -644,6 +645,9 @@ if (isset($params['group']) && $params['group']) {
 			$count = count($titleArray);
 			for ($i = 0; $i < $count; $i++) {
 				$thAttrs = array();
+				if ($thOtherAttrsArray && $thOtherAttrsArray[$i]) {
+					$thAttrs = $thOtherAttrsArray[$i];
+				}
 				if ($thClassArray && $thClassArray[$i]) {
 					$thAttrs['class'] = $thClassArray[$i];
 				}
