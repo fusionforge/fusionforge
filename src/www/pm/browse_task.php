@@ -197,16 +197,15 @@ echo '	<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.
 		<td>'._('Category')._(': ').'<br />'. $cat_box .'</td>
 		<td>'._('Sort On')._(': ').'<br />'. $order_box . $sort_box .'</td>
 		<td>'._('Detail View')._(': ').'<br />'. $view_box .'</td>
-		<td><br /><input type="submit" name="submit" value="'._('Browse').'" /></td>
+		<td><input type="submit" name="submit" value="'._('Browse').'" /></td>
 	</tr></table></form>';
 
 if ($rows < 1) {
 
-	echo '
-		<p class="information">'._('No Matching Tasks found').'</p>
-		<p />
-		<p class="important">'._('Add tasks using the link above').'</p>';
-	echo db_error();
+	echo '<p class="information">'._('No Matching Tasks found')."</p>\n";
+
+	echo '<p class="important">'._('Add tasks using the link above')."</p>\n";
+
 } else {
 
 	//create a new $set string to be used for next/prev button
@@ -394,34 +393,40 @@ if ($rows < 1) {
 		echo '<fieldset id="fieldset1_closed" class="coolfieldset">
 			<legend>'._('Mass Update').'</legend>
 			<div>
-			<table class="fullwidth">
-			<tr><td colspan="2">
-			<p>
-			<span class="important">'._('If you wish to apply changes to all items selected above, use these controls to change their properties and click once on “Mass Update”.').'</span>
-			</p>
-			</td></tr>
+			<p class="information">'._('If you wish to apply changes to all items selected above, use these controls to change their properties and click once on “Mass Update”.').'</p>
+
+			<table class="infotable">
 
 			<tr>
-			<td><strong>'._('Category')._(':').
-				'</strong><br />'. $pg->categoryBox ('category_id','xzxz',true,
-				_('No Change')) .'</td>
-			<td><strong>'._('Priority')._(':').
-				'</strong><br />';
+			<td>'._('Category')._(':').'</td>
+			<td>'. $pg->categoryBox ('category_id','xzxz',true, _('No Change')) .'</td>
+			</tr>
+
+			<tr>
+			<td>'._('Priority')._(':').'</td>
+			<td>';
 			build_priority_select_box ('priority', '100', true);
 			echo '</td>
 			</tr>
 
 			<tr>
-			<td><strong>'._('Assigned to')._(':').
-				'</strong><br />'. $tech_box .'</td>
-			<td><strong>'._('State')._(':').
-				'</strong><br />'. $pg->statusBox ('status_id','xzxz',true,_('No Change')) .'</td>
+			<td>'._('Assigned to')._(':').'</td>
+			<td>'. $tech_box .'</td>
 			</tr>
 
-			<tr><td><strong>'._('Subproject')._(':').'</strong><br />
-			'.$pg->groupProjectBox('new_group_project_id',$group_project_id,false).'</td>
-			<td><input type="submit" name="submit" value="'.
-			_('Mass Update').'" /></td></tr>
+			<tr>
+			<td>'._('State')._(':').'</td>
+			<td>'. $pg->statusBox ('status_id','xzxz',true,_('No Change')) .'</td>
+			</tr>
+
+			<tr>
+			<td>'._('Subproject')._(':').'</td>
+			<td>'.$pg->groupProjectBox('new_group_project_id',$group_project_id,false).'</td>
+			</tr>
+
+			<tr>
+			<td colspan="2"><input type="submit" name="submit" value="'. _('Mass Update').'" /></td>
+			</tr>
 
 			</table>
 			</div>
