@@ -99,6 +99,10 @@ if (($ecd = forge_get_config ('extra_config_dirs')) != NULL) {
 	}
 }
 
+if (forge_get_config('use_ssl')) {
+	header('Access-Control-Allow-Origin: http://'.forge_get_config('web_host'));
+}
+
 forge_define_config_item ('installation_environment', 'core', 'production') ;
 $installation_environment = forge_get_config ('installation_environment') ;
 if ($installation_environment == 'development' || $installation_environment == 'integration')
