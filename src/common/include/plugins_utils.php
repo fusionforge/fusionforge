@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright 2010 (c) Mélanie Le Bail
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -23,37 +24,53 @@ $GLOBALS['mailman_bin_dir'] =  '/usr/lib/mailman/bin';
 $GLOBALS['mailman_lib_dir'] = '/var/lib/mailman';
 $GLOBALS['forumml_arch'] = '/var/lib/mailman/archives';
 $GLOBALS['forumml_tmp'] = '/var/spool/forumml';
-$GLOBALS['forumml_dir'] = '/var/lib/gforge/forumml';
+$GLOBALS['forumml_dir'] = forge_get_config('data_path').'/forumml';
 $GLOBALS['sys_lf'] = "\n";
 
 function isLogged(){
-
-        return session_loggedin();
+	return session_loggedin();
 }
 
 function htmlRedirect($url) {
-        session_redirect($url);
+	session_redirect($url);
 }
+
 function htmlIframe($url,$poub) {
-        if (isset($poub['id'])) {
-                $id=$poub['id'];
-        }
-        else {
-                $id='';
-        }
-        echo ('<iframe src= "'.$url.'" id="'.$id.'" width=100% height=500px></iframe>');
+	global $HTML, $group_id;
+	$project = group_get_object($group_id);
+	if (isset($poub['id'])) {
+		$id = $poub['id'];
+	}
+	else {
+		$id = 'default_id_htmliframe';
+	}
+	if (!empty($url)) {
+		echo ('<iframe src="'.$url.'" id="'.$id.'" width="100%" ></iframe>');
+		html_use_jqueryautoheight();
+		echo $HTML->getJavascripts();
+		echo '<script type="text/javascript">//<![CDATA[
+			jQuery(\'#'.$id.'\').iframeAutoHeight({heightOffset: 50});
+			jQuery(\'#'.$id.'\').load(function (){
+					if (this.contentWindow.location.href == "'.util_make_url('/projects/'.$project->getUnixName()).'/") {
+						console.log(this.contentWindow.location.href);
+						window.location.href = this.contentWindow.location.href;
+					};
+				});
+			//]]></script>';
+	}
 }
 
 function helpButton($help) {
+}
 
+function getIcon($url, $w = 16, $h = 16, $args = array()) {
+	echo html_image($url, $w, $h, $args);
 }
-function getIcon($url,$w=16,$h=16,$args=array()) {
-        echo html_image($url,$w,$h,$args);
-}
+
 function getImage($img) {
-        echo util_make_url($GLOBALS['HTML']->imgroot.$img);
-
+	echo util_make_url($GLOBALS['HTML']->imgroot.$img);
 }
+
 function get_server_url() {
-		return util_make_url('');
+	return util_make_url('');
 }
