@@ -77,7 +77,6 @@ class hudsonViews extends Views {
 			$this->_display_add_job_form($group_id);
 		}
 		$this->_display_iframe();
-		$this->_hide_iframe();
 	}
 
 	function job_details() {
@@ -431,12 +430,10 @@ class hudsonViews extends Views {
 	}
 
 	function _display_iframe($url = '') {
-		echo '<div id="hudson_iframe_div">';
-		htmlIframe($url, array('id' => 'hudson_iframe', 'class' => 'iframe_service'));
-		echo '</div>';
-	}
-
-	function _hide_iframe() {
-		echo "<script type=\"text/javascript\">jQuery('hudson_iframe_div').slideToggle();</script>";
+		if (!empty($url)) {
+			echo '<div id="hudson_iframe_div">';
+			htmlIframe($url, array('id' => 'hudson_iframe', 'class' => 'iframe_service'));
+			echo '</div>';
+		}
 	}
 }
