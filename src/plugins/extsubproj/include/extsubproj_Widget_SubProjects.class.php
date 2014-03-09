@@ -32,7 +32,7 @@ class extsubproj_Widget_SubProjects extends Widget {
 	}
 
 	function getCategory() {
-		return _('Plugin (project)');
+		return _('General');
 	}
 
 	function getDescription() {
