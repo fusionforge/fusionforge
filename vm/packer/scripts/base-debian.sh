@@ -2,10 +2,7 @@
 apt-get -y --force-yes update
 #apt-get -y --force-yes install linux-headers-$(uname -r) build-essential
 #apt-get -y --force-yes install zlib1g-dev libssl-dev libreadline-gplv2-dev
-apt-get -y --force-yes install curl unzip
-
-# Set up sudo
-echo 'vagrant ALL=NOPASSWD:ALL' > /etc/sudoers.d/vagrant
+apt-get -y --force-yes install wget curl unzip sudo gpm bzip2 rsync emacs23-nox vim
 
 # Tweak sshd to prevent DNS resolution (speed up logins)
 echo 'UseDNS no' >> /etc/ssh/sshd_config

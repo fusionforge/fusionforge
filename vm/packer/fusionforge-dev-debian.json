@@ -13,11 +13,12 @@
 		{
 			"type": "shell",
 			"scripts": [
-				"scripts/base.sh",
+				"scripts/base-debian.sh",
 				"scripts/vagrant.sh",
-				"scripts/virtualbox.sh",
+				"scripts/virtualbox-debian.sh",
 				"scripts/fusionforge-source.sh",
-				"scripts/cleanup.sh"
+				"scripts/cleanup-debian.sh",
+				"scripts/zerodisk.sh"
 			]
 		}
 	],
@@ -29,7 +30,7 @@
 				"auto ",
 				"url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
 				"netcfg/get_hostname=forge ",
-				"netcfg/get_domain=local ",
+				"netcfg/get_domain=internal ",
 				"<enter>"
 			],
 			"disk_size": 7168,
@@ -78,7 +79,7 @@
 				"auto ",
 				"url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
 				"netcfg/get_hostname=forge ",
-				"netcfg/get_domain=local ",
+				"netcfg/get_domain=internal ",
 				"debian-installer/exit/poweroff=true",
 				"<enter>"
 			]
@@ -87,7 +88,7 @@
 	"post-processors": [
 		{
 			"type": "vagrant",
-			"output": "fusionforge-dev.box"
+			"output": "fusionforge-dev-debian.box"
 		}
 	]
 }
