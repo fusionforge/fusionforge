@@ -11,6 +11,13 @@ Default language is English.
 EOF
 
 # Install sources
-apt-get -y --force-yes install bzr
-cd /root/
-bzr checkout https://fusionforge.org/anonscm/bzr/deb-packaging/master fusionforge
+if [ -e /etc/debian_version ]; then
+    apt-get -y --force-yes install git
+    repo=git://fusionforge.org/deb-packaging/deb-packaging.git
+else
+    echo "TODO: instructions for CentOS" >> /etc/issue
+    yum -y install git
+    repo=git://fusionforge.org/fusionforge/fusionforge.git
+fi
+cd /usr/src/
+git clone $repo fusionforge/

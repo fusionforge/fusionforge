@@ -8,13 +8,13 @@ See https://fusionforge.org/plugins/mediawiki/wiki/fusionforge/index.php/Virtual
 
 Simple rebuild of the .box:
 
-  packer build -only=virtualbox-iso fusionforge-dev.json
+  packer build -only=virtualbox-iso fusionforge-dev-debian.json
   packer build -only=qemu fusionforge-dev.json  # lacks .box export support as of 2014-01
-
+  packer build -only=virtualbox-iso fusionforge-dev-centos.json
 
 Debug fusionforge.sh:
 
-  sed -e 's:"scripts/fusionforge.sh",::' -e 's/fusionforge-dev.box/bare.box/' fusionforge-dev.json > bare.json
+  sed -e 's:"scripts/fusionforge.sh",::' -e 's/fusionforge-dev.box/bare.box/' fusionforge-dev-debian.json > bare.json
   packer build -only=virtualbox-iso bare.json && tar xf bare.box
   packer build fusionforge-dev-from_ovf.json  # debug: KO, modify fusionforge.sh
   packer build fusionforge-dev-from_ovf.json  # debug: KO, modify fusionforge.sh
