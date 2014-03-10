@@ -13,7 +13,7 @@ EOF
 # Install sources
 if [ -e /etc/debian_version ]; then
     apt-get -y --force-yes install git
-    repo=git://fusionforge.org/deb-packaging/deb-packaging.git
+    repo='git://fusionforge.org/deb-packaging/deb-packaging.git -b debian/master'
 else
     echo "TODO: instructions for CentOS" >> /etc/issue
     yum -y install git
