@@ -10,10 +10,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "fusionforge-dev"
+  config.vm.box = "fusionforge-dev-debian"
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
+  #config.vm.box_url = "packer/fusionforge-dev-debian.box"
   config.vm.box_url = "http://fusionforge.fusionforge.org/sandbox/fusionforge-dev-debian.box"
 
   # Create a forwarded port mapping which allows access to a specific port
@@ -47,7 +48,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #
   config.vm.provider :virtualbox do |vb|
   #   # Don't boot with headless mode
-  #  vb.gui = true
+      vb.gui = true
   #
   #   # Use VBoxManage to customize the VM. For example to change memory:
   #   vb.customize ["modifyvm", :id, "--memory", "1024"]

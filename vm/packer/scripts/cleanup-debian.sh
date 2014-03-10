@@ -1,16 +1,10 @@
 #!/bin/bash
 
 # Clean up
-apt-get -y --force-yes remove linux-headers-$(uname -r) build-essential
 apt-get -y --force-yes autoremove
 apt-get -y --force-yes purge $(dpkg --list |grep '^rc' |awk '{print $2}')
 apt-get -y --force-yes purge $(dpkg --list |egrep 'linux-image-[0-9]' |awk '{print $3,$2}' |sort -nr |tail -n +2 |grep -v $(uname -r) |awk '{ print $2}')
 apt-get -y --force-yes clean
-
-# Cleanup Virtualbox
-VBOX_VERSION=$(cat .vbox_version)
-VBOX_ISO=VBoxGuestAdditions_$VBOX_VERSION.iso
-rm $VBOX_ISO
 
 # Removing leftover leases and persistent rules
 echo "cleaning up dhcp leases"

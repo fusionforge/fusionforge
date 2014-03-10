@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# Create the user vagrant with password vagrant
-useradd vagrant
+# Create the user vagrant with password vagrant,
+# and avoid /bin/sh aka dash under Debian
+useradd vagrant -s /bin/bash
 echo 'vagrant'|passwd --stdin vagrant
 echo 'vagrant ALL=NOPASSWD:ALL' > /etc/sudoers.d/vagrant
 chmod 0440 /etc/sudoers.d/vagrant
