@@ -13,7 +13,7 @@ aptitude -y dist-upgrade
 
 set -e
 
-cd /root/fusionforge
+cd /usr/src/fusionforge/
 # If using bzr, or git, update accordingly
 if [ -d .bzr/ ] ; then
     bzr update
