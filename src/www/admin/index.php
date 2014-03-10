@@ -101,7 +101,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 <?php
 
 		echo '<form action="globalroleedit.php" method="post"><p>';
-		echo '<input type="text" name="role_name" size="10" value="" />';
+		echo '<input type="text" name="role_name" size="10" value="" required="required" />';
 		echo '<input type="submit" name="add" value="'._("Create Role").'" /></p></form>';
 	?></li>
 </ul>
