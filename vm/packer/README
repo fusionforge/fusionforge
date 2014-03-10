@@ -29,3 +29,5 @@ Inspiration:
 - https://github.com/jedi4ever/veewee/tree/master/templates/Debian-7.3.0-amd64-netboot
 - https://github.com/ffuenf/vagrant-boxes/tree/master/packer/debian-7.3.0-amd64
 - https://github.com/puppetlabs/puppet-vagrant-boxes/tree/master/definitions/debian-70rc1-x64-vf503
+- https://github.com/blalor/vm-image-configs
+- http://opscode.github.io/bento/

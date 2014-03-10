@@ -1,4 +1,8 @@
 if test -f .vbox_version ; then
+    # Fix slow DNS
+    echo 'RES_OPTIONS="single-request-reopen"' >> /etc/sysconfig/network
+    service network restart
+
     # Installing the virtualbox guest additions
     VBOX_VERSION=$(cat .vbox_version)
     
