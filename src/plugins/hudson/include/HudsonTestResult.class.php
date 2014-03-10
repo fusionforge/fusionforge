@@ -127,7 +127,6 @@ class HudsonTestResult {
 		}
 		echo 'var plot'.$chartid.';';
 		echo 'jQuery(document).ready(function(){
-			console.log(data'.$chartid.');
 			plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', [data'.$chartid.'],
 				{
 					title : \'Test result: '.$this->getPassCount().'/'.$this->getTotalCount().'\',
