@@ -77,7 +77,7 @@ function forum_header($params) {
 
 			// display classification
 			if ($params['group'] == forge_get_config('news_group')) {
-				print stripslashes(trove_news_getcatlisting(db_result($result,0,'forum_id'),0,1));
+				print stripslashes(trove_getcatlisting(db_result($result,0,'forum_id'),0,1));
 			} elseif (forge_get_config('use_trove')) {
 				print stripslashes(trove_getcatlisting($params['group'],0,1));
 			}

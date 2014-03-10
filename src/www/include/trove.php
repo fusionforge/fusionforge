@@ -34,9 +34,9 @@ $TROVE_HARDQUERYLIMIT = -1;
 /**
  * trove_genfullpaths() - Regenerates full path entries for $node and all subnodes
  *
- * @param	int		$mynode			The node
- * @param	string	$myfullpath		The full path for this node
- * @param	int		$myfullpathids	The full path IDs
+ * @param	int	$mynode		The node
+ * @param	string	$myfullpath	The full path for this node
+ * @param	int	$myfullpathids	The full path IDs
  */
 function trove_genfullpaths($mynode, $myfullpath, $myfullpathids) {
 	// first generate own path
@@ -98,10 +98,10 @@ function trove_updaterootparent($mynode, $rootnode) {
 /**
  * trove_setnode() - Adds a group to a trove node
  *
- * @param		int	$group_id		The group ID
- * @param		int	$trove_cat_id	The trove category ID
- * @param		int	$rootnode		The root node
- * @return int
+ * @param	int	$group_id	The group ID
+ * @param	int	$trove_cat_id	The trove category ID
+ * @param	int	$rootnode	The root node
+ * @return	int
  */
 function trove_setnode($group_id, $trove_cat_id, $rootnode=0) {
 	// verify we were passed information
@@ -222,7 +222,7 @@ function trove_getallroots() {
 /**
  * trove_catselectfull() - Returns full select output for a particular root
  *
- * @param	int		$node		The node
+ * @param	int	$node		The node
  * @param	string	$selected	The category to pre-select
  * @param	string	$name		The select-box name
  * @param	string	$title
@@ -248,11 +248,11 @@ function trove_catselectfull($node, $selected, $name, $title='') {
 /**
  * trove_getcatlisting() - Gets discriminator listing for a group
  *
- * @param		int		$group_id	The group ID
- * @param		bool	$a_filter	Whether filters have already been applied
- * @param		bool	$a_cats		Whether to print category links
- * @param		int		$a_complete
- * @return string
+ * @param	int	$group_id	The group ID
+ * @param	bool	$a_filter	Whether filters have already been applied
+ * @param	bool	$a_cats		Whether to print category links
+ * @param	int	$a_complete
+ * @return	string
  */
 function trove_getcatlisting($group_id, $a_filter, $a_cats, $a_complete=0) {
 	global $discrim_url;
@@ -293,8 +293,8 @@ function trove_getcatlisting($group_id, $a_filter, $a_cats, $a_complete=0) {
 				$return .= "</li>\n";
 			}
 			$return .= '<li>';
-			if ($a_complete==0) {
-				$return .= $folders[0].' : ';
+			if ($a_complete == 0) {
+				$return .= $folders[0];
 			}
 		}
 
@@ -307,8 +307,12 @@ function trove_getcatlisting($group_id, $a_filter, $a_cats, $a_complete=0) {
 			}
 		}
 		// then print the stuff
-		if (array_key_exists($folders_ids[0], $proj_discrim_used)) {
-			$return .= '</li><li>';
+		if (! $a_complete == 0) {
+			if (array_key_exists($folders_ids[0], $proj_discrim_used)) {
+				$return .= '</li><li>';
+			}
+		} else {
+			$return .= ' : ';
 		}
 
 		if ($a_complete) {
@@ -328,9 +332,6 @@ function trove_getcatlisting($group_id, $a_filter, $a_cats, $a_complete=0) {
 			} else {
 				$return .= ($folders[$folders_len-1]);
 			}
-			if ($i!=$folders_len-1) {
-				$return .= " : ";
-			}
 		}
 
 		if ($a_filter) {
@@ -348,8 +349,7 @@ function trove_getcatlisting($group_id, $a_filter, $a_cats, $a_complete=0) {
 		$proj_discrim_used[$folders_ids[0]] = 1;
 		$isfirstdiscrim = 0;
 	}
-	if ($need_close_ul_tag)
-	{
+	if ($need_close_ul_tag) {
 		$return .= '</li></ul>';
 	}
 	return $return;
@@ -358,7 +358,7 @@ function trove_getcatlisting($group_id, $a_filter, $a_cats, $a_complete=0) {
 /**
  * trove_getfullname() - Returns cat fullname
  *
- * @param		int		$node	The node
+ * @param	int	$node	The node
  */
 function trove_getfullname($node) {
 	$res = db_query_params('
@@ -373,8 +373,8 @@ function trove_getfullname($node) {
 /**
  * trove_getfullpath() - Returns a full path for a trove category
  *
- * @param		int		$node	The node
- * @return string
+ * @param	int	$node	The node
+ * @return	string
  */
 function trove_getfullpath($node) {
 	$currentcat = $node;

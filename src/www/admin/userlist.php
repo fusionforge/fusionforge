@@ -136,7 +136,12 @@ function show_users_list($users, $filter = '', $sortorder = 'realname') {
 			echo '<strike>'._('Delete').'</strike>';
 		}
 		echo '</td>';
-		echo '<td width="15%" style="text-align:center">'.util_make_link('/admin/userlist.php?action=suspend&user_id='.$u->getID().$filter,_('Suspend')).'</td>';
+		echo '<td width="15%" style="text-align:center">';
+		if ($u->getStatus() != 'S') {
+			echo util_make_link('/admin/userlist.php?action=suspend&user_id='.$u->getID().$filter,_('Suspend')).'</td>';
+		} else {
+			echo '<strike>'._('Suspend').'</strike>';
+		}
 		echo '<td width="12%" style="text-align:center">'.util_make_link('/admin/passedit.php?user_id='.$u->getID().$filter,_('Change Password')).'</td>';
 		echo '</tr>';
 		$count ++;

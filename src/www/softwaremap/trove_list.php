@@ -195,7 +195,9 @@ if ( $cat === 'c' ) {
 		print "<li>";
 		echo util_make_link('/softwaremap/trove_list.php?cat=c&form_cat='.$row_sub['trove_cat_id'].$discrim_url, $row_sub['fullname']);
 		print '&nbsp;<em>(';
-		print sprintf(_('%s projects'), $row_sub['subprojects']?$row_sub['subprojects']:'0');
+		$realprojects = ($row_sub['subprojects']) ? $row_sub['subprojects'] : 0;
+		$plural = ($row_sub['subprojects'] > 1) ? $row_sub['subprojects'] : 0;
+		printf(ngettext('%s projects', '%s project', $plural), $realprojects);
 		print ')</em>';
 		print "</li>\n";
 	}
