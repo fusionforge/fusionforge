@@ -6,7 +6,7 @@
  * Copyright 2002 GForge, LLC, Tim Perdue
  * Copyright 2010, FusionForge Team
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -79,9 +79,8 @@ function pm_header($params) {
 			$gantt_title = _('Gantt Chart');
 			$gantt_winopt = 'scrollbars=yes,resizable=yes,toolbar=no,height=' . $gantt_height . ',width=' . $gantt_width;
 			$labels[] = $gantt_title;
-			$links[]  = $gantt_url . '" onclick="window.open(this.href, \'' . preg_replace('/\s/' , '_' , $gantt_title)
-			. '\', \'' . $gantt_winopt . '\'); return false;';
-			$attr[] = '';
+			$links[]  = $gantt_url;
+			$attr[] = array('onclick' => 'window.open(this.href, \''.preg_replace('/\s/' , '_' , $gantt_title).'\', \''.$gantt_winopt.'\'); return false;');
 		}
 		//upload/download as CSV files
 //		$labels[] = _('Download as CSV');
