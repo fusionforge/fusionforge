@@ -156,15 +156,14 @@ if (!$res || $rows < 1) {
 	$title_arr[] = _('Status');
 	$title_arr[] = _('Publicly Viewable');
 
+	echo '
+		<form action="'. getStringFromServer('PHP_SELF') .'" method="post">
+		<input type="hidden" name="group_id" value="'.$group_id.'" />
+		<input type="hidden" name="func" value="update_package" />';
 	echo $GLOBALS['HTML']->listTableTop($title_arr);
 
 	for ($i = 0; $i < $rows; $i++) {
-		echo '
-		<form action="'. getStringFromServer('PHP_SELF') .'" method="post">
-		<input type="hidden" name="group_id" value="'.$group_id.'" />
-		<input type="hidden" name="func" value="update_package" />
-		<input type="hidden" name="package_id" value="'. db_result($res, $i, 'package_id') .'" />
-		<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
+		echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 			<td style="white-space: nowrap;" align="center">
 					<a href="qrs.php?package_id='.
 						db_result($res, $i, 'package_id') .'&amp;group_id='. $group_id .'"><strong>['._('Add Release').']</strong>
@@ -176,7 +175,7 @@ if (!$res || $rows < 1) {
 					</a>';
 		}
 		echo '	</td>
-			<td><input type="text" name="package_name" value="'.db_result($res, $i, 'package_name') .'" size="20" maxlength="60" required="required" pattern=".{3,}" title="'. _('At least 3 characters') .'" /></td>
+			<td><input type="hidden" name="package_id" value="'. db_result($res, $i, 'package_id') .'" /><input type="text" name="package_name" value="'.db_result($res, $i, 'package_name') .'" size="20" maxlength="60" required="required" pattern=".{3,}" title="'. _('At least 3 characters') .'" /></td>
 			<td>'.frs_show_status_popup('status_id', db_result($res, $i, 'status_id')).'</td>
 			<td>'.frs_show_public_popup('is_public', db_result($res, $i, 'is_public')).'</td>
 			<td><input type="submit" name="submit" value="'._('Update').'" />
@@ -186,10 +185,11 @@ if (!$res || $rows < 1) {
 					</a>
 
 			</td>
-			</tr></form>';
+			</tr>';
 	}
 
 	echo $GLOBALS['HTML']->listTableBottom();
+	echo '</form>';
 }
 
 /*
