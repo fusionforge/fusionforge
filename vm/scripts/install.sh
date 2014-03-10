@@ -4,6 +4,7 @@
 # Authors :
 #  Roland Mas
 #  Olivier BERGER <olivier.berger@it-sudparis.eu>
+#  Sylvain Beucler
 
 # This script will install the Debian packages to be tested which have been build inside the VM
 
@@ -14,7 +15,7 @@
 grep -q debian-repository /etc/apt/sources.list
 if [ $? -ne 0 ]; then
     echo "You probably need to add the following in /etc/apt/sources.list :"
-    echo "echo 'deb file:///root/debian-repository local/' >> /etc/apt/sources.list"
+    echo "echo 'deb file:///usr/src/debian-repository local/' >> /etc/apt/sources.list"
     exit 1
 fi
 
@@ -28,7 +29,7 @@ gdebi --non-interactive loggerhead_1.19~bzr479-3_all.deb
 aptitude update
 if dpkg -l fusionforge-full | grep -q ^ii ; then
     # Already installed, upgrading
-    /root/fusionforge/tests/func/db_reload.sh
+    /usr/src/fusionforge/tests/func/db_reload.sh
     UCF_FORCE_CONFFNEW=yes LANG=C DEBIAN_FRONTEND=noninteractive aptitude -y dist-upgrade
 else
     # Initial installation

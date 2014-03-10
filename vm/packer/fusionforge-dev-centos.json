@@ -1,6 +1,11 @@
 {
   "provisioners": [
     {
+      "type": "file",
+      "source": "file/bashrc",
+      "destination": "/root/.bashrc"
+    },
+    {
       "type": "shell",
       "scripts": [
         "scripts/base-centos.sh",

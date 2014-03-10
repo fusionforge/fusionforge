@@ -14,6 +14,13 @@ EOM
     # Build dependencies for VirtualBox guest additions
     yum -y install gcc make gcc-c++ kernel-devel-`uname -r` zlib-devel openssl-devel readline-devel sqlite-devel perl dkms nfs-utils
     
+    # Build work-around:
+    # http://wiki.centos.org/HowTos/Virtualization/VirtualBox/CentOSguest
+    # https://github.com/blalor/vm-image-configs/blob/master/scripts/virtualbox.sh
+    for i in /usr/src/kernels/* ; do
+	ln -s /usr/include/drm/drm{,_sarea,_mode,_fourcc}.h $i/include/drm/
+    done
+
     mount -o loop VBoxGuestAdditions_$VBOX_VERSION.iso /mnt
     sh /mnt/VBoxLinuxAdditions.run
     umount /mnt
@@ -21,6 +28,7 @@ EOM
     
     # TODO: FIXME: this leads to yum trying to remove 'yum' through a chain of dependencies
     #yum -y erase   gcc make gcc-c++ kernel-devel-`uname -r` zlib-devel readline-devel sqlite-devel perl dkms nfs-utils
+    yum -y erase  kernel-devel-`uname -r`
     rm -rf /etc/yum.repos.d/epel.repo
     rm -rf VBoxGuestAdditions_*.iso
 fi

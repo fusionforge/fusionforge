@@ -3,6 +3,7 @@
 # Authors :
 #  Roland Mas
 #  Olivier BERGER <olivier.berger@it-sudparis.eu>
+#  Sylvain Beucler
 
 # This script will build the Debian packages to be tested
 
@@ -17,19 +18,19 @@
 
 # Build dependencies
 aptitude -y install mini-dinstall dput devscripts equivs
-mk-build-deps -i /root/fusionforge/src/debian/control -t 'apt-get -y' -r
+mk-build-deps -i /usr/src/fusionforge/src/debian/control -t 'apt-get -y' -r
 
 
 # Populate the repo
-rm -rf /root/debian-repository
-mkdir -p /root/debian-repository
+rm -rf /usr/src/debian-repository
+mkdir -p /usr/src/debian-repository
 
 if [ ! -f /root/.mini-dinstall.conf ]; then
     cat >/root/.mini-dinstall.conf <<EOF
 
 [DEFAULT]
 
-archivedir = /root/debian-repository
+archivedir = /usr/src/debian-repository
 archive_style = flat
 
 architectures = all, i386, source
@@ -49,7 +50,7 @@ if [ ! -f /root/.dput.cf ]; then
 
 [local]
 fqdn = localhost
-incoming = /root/debian-repository/mini-dinstall/incoming 
+incoming = /usr/src/debian-repository/mini-dinstall/incoming 
 method = local
 run_dinstall = 0
 allow_unsigned_uploads = yes
@@ -68,7 +69,7 @@ fi
 
 mini-dinstall -b
 
-cd /root/fusionforge/src
+cd /usr/src/fusionforge/src
 f=$(mktemp)
 cp debian/changelog $f
 
