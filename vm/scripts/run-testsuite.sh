@@ -8,11 +8,12 @@ aptitude -y install cowbuilder
 mkdir -p ~/builder/cow/
 DISTROLIST=wheezy /usr/src/fusionforge/tests/scripts/manage-cowbuilder.sh
 
-mkdir -p ~/build/
+mkdir -p /usr/src/build/debian/conf/
 aptitude -y install reprepro
-echo -e "Codename: wheezy\nArchitectures: amd64 source\nComponents: main" > ~/build/debian/conf/distributions
+echo -e "Codename: wheezy\nArchitectures: amd64 source\nComponents: main" > /usr/src/build/debian/conf/distributions
 cd /usr/src/fusionforge/3rd-party/selenium
 make
+dpkg -i /usr/src/build/debian/pool/main/s/selenium/selenium_*_all.deb
 
 
 # Test dependencies
