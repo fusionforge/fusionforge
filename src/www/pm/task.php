@@ -144,10 +144,10 @@ switch (getStringFromRequest('func')) {
 		} else {
 			if (count($add_artifact_id) > 0) {
 				if (!$pt->addRelatedArtifacts($add_artifact_id)) {
-					exit_error('addRelatedArtifacts():: '.$pt->getErrorMessage(),'pm');
+					exit_error('addRelatedArtifacts: '.$pt->getErrorMessage(),'pm');
 				}
 			}
-			$feedback=_('Task Created Successfully');
+			$feedback = _('Task Created Successfully');
 			include $gfwww.'pm/browse_task.php';
 		}
 		break;
