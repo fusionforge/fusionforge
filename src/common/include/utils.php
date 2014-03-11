@@ -229,10 +229,6 @@ function util_send_message($to, $subject, $body, $from = '', $BCC = '', $sendern
 		"\n\n".
 		util_convert_body($body, $charset);
 
-	if (!forge_get_config('sendmail_path')){
-		$sys_sendmail_path="/usr/sbin/sendmail";
-	}
-
 	$handle = popen(forge_get_config('sendmail_path')." -f'$from' -t -i", 'w');
 	fwrite($handle, $body2);
 	pclose($handle);
