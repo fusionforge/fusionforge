@@ -1,0 +1,4 @@
+etc/gforge/httpd.d
+etc/gforge/plugins/scmhook
+@PLUGIN_PATH@/scmhook/common
+@PLUGIN_PATH@/scmhook/www
