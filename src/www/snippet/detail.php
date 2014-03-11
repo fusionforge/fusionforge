@@ -112,7 +112,7 @@ if ($type=='snippet') {
 		Show a link so you can add a new version of this snippet
 	*/
 	echo '
-	<h3><a href="'.util_make_url ('/snippet/addversion.php?type=snippet&id='.htmlspecialchars($id)).'"><span class="information">'._('Submit a new version').'</span></a></h3>
+	<h3><a href="'.util_make_url('/snippet/addversion.php?type=snippet&id='.htmlspecialchars($id)).'"><span class="information">'._('Submit a new version').'</span></a></h3>
 	<p>' ._('You can submit a new version of this snippet if you have modified it and you feel it is appropriate to share with others.').'.</p>';
 
 	}
@@ -161,7 +161,7 @@ if ($type=='snippet') {
 		for ($i=0; $i<$rows; $i++) {
 			echo '
 			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td>'.
-			util_make_link ('/snippet/detail.php?type=packagever&id='.db_result($result,$i,'snippet_package_version_id'),'<strong>'.db_result($result,$i,'version').'</strong>').'</td><td>'.
+			util_make_link('/snippet/detail.php?type=packagever&id='.db_result($result,$i,'snippet_package_version_id'),'<strong>'.db_result($result,$i,'version').'</strong>').'</td><td>'.
 				date(_('Y-m-d H:i'),db_result($result,$i,'post_date')).'</td><td>'.
 				util_make_link_u (db_result($result, $i, 'user_name'), db_result($result, $i, 'user_id'),db_result($result, $i, 'realname')).'</td>'.
 				'<td class="align-center"><a href="'.util_make_url ('/snippet/add_snippet_to_package.php?snippet_package_version_id='.db_result($result,$i,'snippet_package_version_id')).
@@ -194,7 +194,7 @@ if ($type=='snippet') {
 			Show a form so you can add a new version of this package
 		*/
 		echo '
-		<h3><a href="'.util_make_url ('/snippet/addversion.php?type=package&id='.$id).'"><span class="information">' ._('Submit a new version').'</span></a></h3>
+		<h3><a href="'.util_make_url('/snippet/addversion.php?type=package&id='.$id).'"><span class="information">' ._('Submit a new version').'</span></a></h3>
 		<p>' ._('You can submit a new version of this package if you have modified it and you feel it is appropriate to share with others.').'.</p>';
 
 	}
