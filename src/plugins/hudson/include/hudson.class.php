@@ -29,7 +29,7 @@ class hudson extends Controler {
 
     function hudson() {
         $p = PluginManager::instance()->getPluginByName('hudson');
-        $this->themePath = $p->getThemePath();
+        $this->themePath = '/'.$p->getThemePath();
     }
 
     function getThemePath() {
