@@ -163,11 +163,11 @@ foreach ($group->getUsers() as $member) {
 	$role_string = implode (', ', $role_names) ;
 
 				echo '
-			<td align="center">'.$role_string.'
+			<td class="align-center">'.$role_string.'
 			</td>';
 	if(forge_get_config('use_people')) {
 		echo '
-			<td align="center">'.util_make_link('/people/viewprofile.php?user_id='.$member->getID(),_('View')).'
+			<td class="align-center">'.util_make_link('/people/viewprofile.php?user_id='.$member->getID(),_('View')).'
 			</td>';
 	}
 	echo '
@@ -242,7 +242,7 @@ foreach ($group->getUsers() as $member) {
 	}
 	echo '
 		<tr>
-			<td><br /></td>
+			<td></td>
 		</tr>';
 }
 
