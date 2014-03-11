@@ -241,6 +241,7 @@ if ($add_cat && $group_project_id) {
 	session_require_perm ('pm', $pg->getID(), 'manager') ;
 
 	$title = sprintf(_('Modify a Category in: %s'), $pg->getName());
+	pm_header(array('title'=>$title));
 
 	$ac = new ProjectCategory($pg,$id);
 	if (!$ac || !is_object($ac)) {
@@ -248,7 +249,6 @@ if ($add_cat && $group_project_id) {
 	} elseif ($ac->isError()) {
 		exit_error($ac->getErrorMessage(),'pm');
 	} else {
-		pm_header(array ('title'=>$title));
 		?>
 		<p class="information"><?php echo _('It is not recommended that you change the category name because other things are dependent upon it. When you change the category name, all related items will be changed to the new name.')?></p>
 		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>" method="post">
