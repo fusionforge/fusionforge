@@ -76,7 +76,6 @@ if (getStringFromRequest('confirm')) {
 site_user_header(array('title'=>_('Quitting Project')));
 
 echo '
-<h3>'._('Quitting Project').' </h3>
 <p>
 '._('You are about to remove yourself from the project. Please confirm your action:').'
 </p>
