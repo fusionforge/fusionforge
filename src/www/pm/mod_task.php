@@ -59,7 +59,8 @@ echo notepad_func();
 	<tr>
 		<td>
 			<strong><?php echo _('Category') . _(': '); ?></strong><br />
-			<?php echo $pg->categoryBox('category_id',$pt->getCategoryID()); ?> <?php util_make_link('/pm/admin/?group_id='.$group_id.'&add_cat=1&group_project_id='.$group_project_id,_('Admin')); ?>
+			<?php echo $pg->categoryBox('category_id',$pt->getCategoryID()); ?>
+			<?php echo util_make_link('/pm/admin/?group_id='.$group_id.'&add_cat=1&group_project_id='.$group_project_id,_('Admin')); ?>
 		</td>
 
 		<td>
