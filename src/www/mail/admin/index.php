@@ -299,7 +299,7 @@ if ($group_id) {
 					echo '</td>';
 					echo '<td class="align-center">';
 					if($currentList->getStatus() == MAIL__MAILING_LIST_IS_CONFIGURED) {
-						print '<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_list_id='.$currentList->getID().'&amp;reset_pw=1">'._('Reset admin password').'</a></td>' ;
+						echo '<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_list_id='.$currentList->getID().'&amp;reset_pw=1">'._('Reset admin password').'</a></td>' ;
 
 					}
 					echo '</tr>';
