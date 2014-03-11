@@ -157,7 +157,7 @@ if(forge_get_config('use_news')) {
 
 <td id="bd-col2">
 <?php
-	echo show_features_boxes();
+echo show_features_boxes();
 ?>
 
 </td></tr></table>
