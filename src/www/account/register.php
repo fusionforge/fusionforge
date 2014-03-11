@@ -200,7 +200,7 @@ $toDisplay = html_get_theme_popup('theme_id', $theme_id);
 if($toDisplay != "") {
 ?>
 <p>
-<?php echo _('Theme'); ?><br />
+<?php echo _('Theme')._(':'); ?><br />
 <?php echo $toDisplay; ?>
 </p>
 <?php } ?>
