@@ -40,11 +40,9 @@ require_once $gfcommon.'forum/ForumHTML.class.php';
 function goodbye($msg) {
 	site_header(array('title'=>_('Attachments')));
 	html_feedback_top($msg);
-	echo '<form method="post"><input type="button" value="'._('Close Window').'" onclick="window.close() /"></form>';
+	echo '<form method="post"><input type="button" value="'._('Close Window').'" onclick="window.close()" /></form>';
 	site_footer();
 	exit();
-	/*echo "<center>" . $msg . "</center><p>";
-	die ('<center><form method="post"><input type="button" value="Close Window" onclick="window.close()"></form></center>');*/
 }
 
 $attachid = getIntFromRequest("attachid");
@@ -143,7 +141,7 @@ if ($edit=="yes") {
 			foreach ($am->Getmessages() as $item) {
 				$feedback .= "<br />" . $item;
 			}
-			echo '<p><p><center><form method="post"><input type="button" value="'._("Close Window").'" onclick="window.close()"></form></center>';
+			goodbye("Attachment saved");
 			forum_footer();
 			exit();
 		} else {
