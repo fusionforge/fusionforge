@@ -1,6 +1,6 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Build + inst
-Exec=sh -c "/usr/src/fusionforge/tools/VM-scripts/build.sh ; /usr/src/fusionforge/tools/VM-scripts/install.sh ; echo Press Enter... ; read i"
+Exec=sh -c "/usr/src/fusionforge/vm/scripts/build.sh ; /usr/src/fusionforge/vm/scripts/install.sh ; echo Press Enter... ; read i"
 Terminal=true
 Type=Application
