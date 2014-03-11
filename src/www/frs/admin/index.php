@@ -124,6 +124,7 @@ if ($res && $rows > 0) {
 ?>
 
 <fieldset>
+<legend><?php echo _('Help about Packages and Releases');?></legend>
 <h2><?php echo _("Packages") ?></h2>
 <p><?php echo _("You can use packages to group different file releases together, or use them however you like.") ?></p>
 <h3><?php echo _("An example of packages:") ?></h3>
