@@ -83,8 +83,8 @@ if ($i<$rows) {
 	}
 	print '
 		</td>
-		<td>&nbsp;</td>
-		<td align="RIGHT">'.util_make_link ('/top/mostactive.php?type='.$type.'&offset='.($offset+$limit),'<strong>'._('More').' --></strong>').'
+		<td></td>
+		<td class="align-right">'.util_make_link ('/top/mostactive.php?type='.$type.'&offset='.($offset+$limit),'<strong>'._('More').' --></strong>').'
 		</td>
 	</tr>';
 }
