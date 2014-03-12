@@ -13,6 +13,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #config.vm.network :forwarded_port, guest: 80,  host: 8080
   #config.vm.network :forwarded_port, guest: 443, host: 8443
 
+  # Mount work repositories inside the VM:
+  #config.vm.synced_folder "..", "/usr/src/fusionforge"
+
   config.vm.provider :virtualbox do |vb|
       vb.gui = true
   end
