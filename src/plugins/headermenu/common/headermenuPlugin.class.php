@@ -395,7 +395,7 @@ class headermenuPlugin extends Plugin {
 				require_once($gfwww.'admin/admin_utils.php');
 				html_use_jquery();
 				html_use_jqueryui();
-				use_javascript('scripts/HeaderMenuController.js');
+				use_javascript('/plugins/'.$this->name.'/scripts/HeaderMenuController.js');
 				use_javascript('/js/sortable.js');
 				site_admin_header(array('title'=>_('Site Global Menu Admin'), 'toptab' => ''));
 				$returned = true;
@@ -419,7 +419,7 @@ class headermenuPlugin extends Plugin {
 			case 'projectadmin': {
 				html_use_jquery();
 				html_use_jqueryui();
-				use_javascript('scripts/HeaderMenuController.js');
+				use_javascript('/plugins/'.$this->name.'/scripts/HeaderMenuController.js');
 				use_javascript('/js/sortable.js');
 				$group_id = getIntFromRequest('group_id');
 				$params['toptab'] = 'admin';
