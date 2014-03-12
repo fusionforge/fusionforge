@@ -1,7 +1,7 @@
 #! /usr/bin/php
 <?php
 /**
- * GForge Cron Job
+ * Fusionforge Cron Job : ssh key administration
  *
  * The rest Copyright 2002-2005 (c) GForge Team
  * Copyright (C) 2009  Sylvain Beucler
