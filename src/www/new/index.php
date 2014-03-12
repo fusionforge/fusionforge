@@ -126,9 +126,7 @@ if (!$res_new || db_numrows($res_new) < 1) {
 		}
 	}
 
-	print '
-			<tr class="content">
-				<td>';
+		echo '<tr class="content"><td>';
         if ($offset != 0) {
         	print '<a href="'.util_make_url ('/new/?offset='.($offset-20)).'">'.
 				html_image("t2.png","15","15").
@@ -137,9 +135,7 @@ if (!$res_new || db_numrows($res_new) < 1) {
         	print '&nbsp;';
         }
 
-	print '
-				</td>
-				<td colspan="2" style="text-align:right">';
+	echo '</td><td colspan="2" style="text-align:right">"';
 	if (db_numrows($res_new)>$rows) {
 		print '<a href="'.util_make_url ('/new/?offset='.($offset+20).'"><strong>'._('Older Releases').'</strong> ') .
 			html_image("t.png","15","15") .
@@ -147,11 +143,7 @@ if (!$res_new || db_numrows($res_new) < 1) {
 	} else {
 		print "&nbsp;";
 	}
-	print '
-				</td>
-			</tr>
-		</table>
-';
+	echo "</td></tr>\n</table>";
 
 }
 
