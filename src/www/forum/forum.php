@@ -202,8 +202,8 @@ if ($forum_id) {
 
 		if ($fmf->isError()) {
 			echo '<p class="error">'.$fmf->getErrorMessage().'</p>';
-	        forum_footer(array());
-            exit;
+			forum_footer(array());
+			exit;
 		}
 
 		$rows=count($msg_arr["0"]);
@@ -237,8 +237,8 @@ if ($forum_id) {
 		$msg_arr =& $fmf->nestArray($fmf->getThreaded());
 		if ($fmf->isError()) {
 			echo '<p class="error">'.$fmf->getErrorMessage().'</p>';
-	        forum_footer(array());
-            exit;
+			forum_footer(array());
+			exit;
 		}
 
 		$title_arr=array();

@@ -148,7 +148,6 @@ if (session_loggedin()) {
 
 			} else	/* not confirmed multiedit */ {
 				people_header(array('title'=>_('Edit Skills')));
-				echo '<h2>'._('Edit Skills').'</h2>';
 				echo _('Change the required fields, and press “Done” at the bottom of the page');
 				echo '<form action="'.getStringFromServer('PHP_SELF').'" method="post">';
 				echo '<input type="hidden" name="form_key" value="'.form_generate_key().'">';
@@ -186,7 +185,7 @@ if (session_loggedin()) {
 				if (!$result || db_affected_rows($result) < 1) {
 					$error_msg .= sprintf(_('Failed to delete any skills: %s'),db_error());
 				} else {
-					$feedback = ngettext (_('Skill deleted successfully'), _('Skills deleted successfully'), db_affected_rows($result));
+					$feedback = ngettext ('Skill deleted successfully', 'Skills deleted successfully', db_affected_rows($result));
 				}
 			} else {
 				$result = db_query_params ('SELECT title FROM skills_data where skills_data_id = ANY ($1)',
@@ -198,7 +197,7 @@ if (session_loggedin()) {
 					people_header(array('title'=>_('Confirm skill delete')));
 
 					echo '<span class="important">'._('Confirm Delete').'</span>';
-					print ngettext(_('You are about to delete the following skill from the skills database:'), _('You are about to delete the following skills from the skills database:'), $rows) ;
+					print ngettext('You are about to delete the following skill from the skills database:', 'You are about to delete the following skills from the skills database:', $rows) ;
 					echo "<br />";
 					for($i = 0; $i < $rows; $i++) {
 						echo "<strong>&nbsp;&nbsp;&nbsp;" .db_result($result, $i, 'title') . "</strong><br />";
@@ -297,13 +296,13 @@ if (session_loggedin()) {
 		echo $HTML->multiTableRow('',$cell_data,TRUE);
 
 		echo '<tr>
-			<td><input type="text" name="title" size="100" /></td>
+			<td><input type="text" name="title" size="100" required="required" /></td>
 			</tr>';
 		$cell_data = array();
 		$cell_data[] = array(_('Keywords (max 255 characters)'));
 		echo $HTML->multiTableRow('',$cell_data,TRUE);
 		echo '<tr>
-				<td><textarea name="keywords" rows="3" cols="85" wrap="soft"></textarea></td>
+				<td><textarea name="keywords" rows="3" cols="85" wrap="soft" required="required" ></textarea></td>
 			</tr>
 			<tr>
 				<td><input type="submit" name="AddSkill" value="'._('Add This Skill').'" /></td>

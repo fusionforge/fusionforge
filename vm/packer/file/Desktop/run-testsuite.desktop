@@ -1,0 +1,6 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Run testsuite
+Exec=sh -c "/usr/src/fusionforge/vm/scripts/run-testsuite.sh ; echo Press Enter... ; read i"
+Terminal=true
+Type=Application

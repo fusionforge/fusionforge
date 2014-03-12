@@ -1771,23 +1771,27 @@ function util_mkdtemp($suffix = '', $prefix = 'tmp') {
  * @return	boolean	true on success, false on error
  */
 function util_sudo_effective_user($username, $function, $params=array()) {
-	$saved_egid = posix_getegid();
-	$saved_euid = posix_geteuid();
-
 	$userinfo = posix_getpwnam($username);
 	if ($userinfo === false) {
 		return false;
 	}
-	if (posix_setegid($userinfo['gid']) &&
-	    ($saved_euid != 0 || posix_initgroups($username, $userinfo['gid'])) &&
-	    posix_seteuid($userinfo['uid'])) {
-		$function($params);
-	}
 
-	posix_setegid($saved_egid);
-	posix_seteuid($saved_euid);
-	if ($saved_euid == 0)
-		posix_initgroups("root", 0);
+	$pid = pcntl_fork();
+	if ( $pid == -1 ) {
+		// Fork failed
+		exit(1);
+	} else if ($pid) {
+		pcntl_waitpid($pid, $status);
+	} else {
+		if (posix_setgid($userinfo['gid']) &&
+			posix_initgroups($username, $userinfo['gid']) &&
+			posix_setuid($userinfo['uid'])) {
+			putenv('HOME='.$userinfo['dir']);
+			$function($params);
+		}
+		//exit(1); // too nice, PHP gracefully quits and closes DB connection
+		posix_kill(posix_getpid(), 9);
+	}
 	return true;
 }
 

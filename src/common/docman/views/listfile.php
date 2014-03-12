@@ -38,8 +38,8 @@ global $dm; // the docman manager
 
 $linkmenu = 'listfile';
 $baseredirecturl = '/docman/?group_id='.$group_id;
-$redirecturl = $baseredirecturl.'&view=listfile&dirid='.$dirid;
-$actionlistfileurl = '?group_id='.$group_id.'&amp;view=listfile&amp;dirid='.$dirid;
+$redirecturl = $baseredirecturl.'&view='.$linkmenu.'&dirid='.$dirid;
+$actionlistfileurl = '?group_id='.$group_id.'&amp;view='.$linkmenu.'&amp;dirid='.$dirid;
 if (!forge_check_perm('docman', $group_id, 'read')) {
 	$return_msg= _('Document Manager Access Denied');
 	session_redirect($baseredirecturl.'&warning_msg='.urlencode($return_msg));
@@ -156,7 +156,8 @@ jQuery(document).ready(function() {
 		childGroupId:		<?php echo util_ifsetor($childgroup_id, 0) ?>,
 		divEditFile:		jQuery('#editFile'),
 		divEditTitle:		'<?php echo _("Edit document dialog box") ?>',
-		enableResize:		true
+		enableResize:		true,
+		page:			'listfile'
 	});
 });
 
@@ -231,7 +232,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 			echo '<input type="checkbox" value="'.$d->getID().'" class="checkeddocidactive tabtitle-w" title="'._('Select / Deselect this document for massaction').'" onchange="controllerListFile.checkgeneral(\'active\')" />';
 		} else {
 			if (session_loggedin() && ($d->getReservedBy() != $u->getID())) {
-				echo '<input type="checkbox" name="disabled" disabled="disabled"';
+				echo '<input type="checkbox" name="disabled" disabled="disabled" />';
 			} else {
 				echo '<input type="checkbox" value="'.$d->getID().'" class="checkeddocidactive tabtitle-w" title="'._('Select / Deselect this document for massaction').'"" onchange="controllerListFile.checkgeneral(\'active\')" />';
 			}
@@ -251,7 +252,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		echo '<td><a href="'.$docurl.'" class="tabtitle-nw" title="'.$docurltitle.'" >';
 		echo html_image($d->getFileTypeImage(), '22', '22', array('alt'=>$d->getFileType()));
 		echo '</a></td>'."\n";
-		echo '<td>';
+		echo '<td style="word-wrap: break-word; max-width: 250px;" >';
 		if (($d->getUpdated() && $time_new > (time() - $d->getUpdated())) || $time_new > (time() - $d->getCreated())) {
 			$html_image_attr = array();
 			$html_image_attr['alt'] = _('new');
@@ -261,8 +262,8 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		}
 		echo '&nbsp;'.$d->getFileName();
 		echo '</td>';
-		echo '<td>'.$d->getName().'</td>';
-		echo '<td>'.$d->getDescription().'</td>';
+		echo '<td style="word-wrap: break-word; max-width: 250px;" >'.$d->getName().'</td>';
+		echo '<td style="word-wrap: break-word; max-width: 250px;" >'.$d->getDescription().'</td>';
 		echo '<td>'.make_user_link($d->getCreatorUserName(), $d->getCreatorRealName()).'</td>';
 		echo '<td>';
 		if ( $d->getUpdated() ) {
@@ -330,7 +331,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 			} else {
 				if (session_loggedin() && $d->getReservedBy() != $u->getID()) {
 					if (forge_check_perm('docman', $ndg->Group->getID(), 'admin')) {
-						echo '<a class="tabtitle-ne" href="'.$actionlistfileurl.'&amp;action=enforcereserve&amp;fileid='.$d->getID().'" title="'. _('Enforce reservation') .'" >'.html_image('docman/enforce-document.png',22,22,array('alt'=>_('Enforce reservation')));
+						echo '<a class="tabtitle-ne" href="'.$actionlistfileurl.'&amp;action=enforcereserve&amp;fileid='.$d->getID().'" title="'. _('Enforce reservation') .'" >'.html_image('docman/enforce-document.png',22,22,array('alt'=>_('Enforce reservation'))).'</a>';
 					}
 				} else {
 					echo '<a class="tabtitle-ne" href="'.$actionlistfileurl.'&amp;action=trashfile&amp;fileid='.$d->getID().'" title="'. _('Move this document to trash') .'" >'.html_image('docman/trash-empty.png',22,22,array('alt'=>_('Move this document to trash'))). '</a>';
@@ -379,7 +380,13 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 if (forge_check_perm('docman', $group_id, 'approve') && $DocGroupName) {
 	include ($gfcommon.'docman/views/pendingfiles.php');
 }
-if (forge_check_perm('docman', $g->getID(), 'approve')) {
+$foundFiles = 0;
+if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
+	$foundFiles = count($nested_docs[$dirid]);
+} elseif (isset($nested_pending_docs)) {
+	$foundFiles .= count($nested_pending_docs);
+}
+if (forge_check_perm('docman', $g->getID(), 'approve') && $foundFiles) {
 	include ($gfcommon.'docman/views/editfile.php');
 }
 

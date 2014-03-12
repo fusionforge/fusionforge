@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013-2014, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -23,14 +23,15 @@ require_once 'common/mvc/Controler.class.php';
 require_once 'hudsonViews.class.php';
 require_once 'hudsonActions.class.php';
 /**
- * hudson */
+ * hudson
+ */
 class hudson extends Controler {
 
 	private $themePath;
 
 	function hudson() {
 		$p = PluginManager::instance()->getPluginByName('hudson');
-		$this->themePath = $p->getThemePath();
+		$this->themePath = '/'.$p->getThemePath();
 	}
 
 	function getThemePath() {

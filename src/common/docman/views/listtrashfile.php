@@ -5,7 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2011-2013, Franck Villaume - TrivialDev
+ * Copyright 2011-2014, Franck Villaume - TrivialDev
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
@@ -31,15 +31,30 @@ global $group_id; // id of the group
 global $dirid; // id of doc_group
 global $g; // the Group object
 
+$linkmenu = 'listtrashfile';
 $childgroup_id = getIntFromRequest('childgroup_id');
+$baseredirecturl = '/docman/?group_id='.$group_id;
+$redirecturl = $baseredirecturl.'&view=.'.$linkmenu.'&dirid='.$dirid;
+$actionlistfileurl = '?group_id='.$group_id.'&amp;view='.$linkmenu.'&amp;dirid='.$dirid;
 
 if (!forge_check_perm('docman', $group_id, 'approve')) {
 	$return_msg= _('Document Manager Access Denied');
-	session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
+	session_redirect($baseredirecturl.'&warning_msg='.urlencode($return_msg));
 }
 
+echo '<div id="leftdiv">';
+include ($gfcommon.'docman/views/tree.php');
+echo '</div>';
+
 // plugin projects-hierarchy
-if (isset($childgroup_id) && $childgroup_id) {
+$childgroup_id = getIntFromRequest('childgroup_id');
+if ($childgroup_id) {
+	if (!forge_check_perm('docman', $childgroup_id, 'read')) {
+		$return_msg= _('Document Manager Access Denied');
+		session_redirect($baseredirecturl.'&warning_msg='.urlencode($return_msg));
+	}
+	$redirecturl .= '&childgroup_id='.$childgroup_id;
+	$actionlistfileurl .= '&amp;childgroup_id='.$childgroup_id;
 	$g = group_get_object($childgroup_id);
 }
 
@@ -67,11 +82,11 @@ if ($dirid) {
 	$ndg = new DocumentGroup($g, $dirid);
 	$DocGroupName = $ndg->getName();
 	if (!$DocGroupName) {
-		session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($g->getErrorMessage()));
+		session_redirect($baseredirecturl.'&error_msg='.urlencode($g->getErrorMessage()));
 	}
 	if ($ndg->getState() != 2) {
 		$error_msg = _('Invalid folder');
-		session_redirect('/docman/?group_id='.$group_id.'&view=listtrashfile&error_msg='.urlencode($error_msg));
+		session_redirect($baseredirecturl.'&view=listtrashfile&error_msg='.urlencode($error_msg));
 	}
 }
 
@@ -85,9 +100,6 @@ if ($d_arr != NULL ) {
 	}
 }
 
-echo '<div id="leftdiv">';
-include ($gfcommon.'docman/views/tree.php');
-echo '</div>';
 echo '<div id="rightdiv">';
 echo '<div style="padding:5px;"><form id="emptytrash" name="emptytrash" method="post" action="?group_id='.$group_id.'&amp;action=emptytrash" >';
 echo '<input id="submitemptytrash" type="submit" value="'. _('Delete permanently all documents and folders with deleted status.') .'" >';
@@ -107,7 +119,8 @@ jQuery(document).ready(function() {
 		divRight:		jQuery('#rightdiv'),
 		divEditFile:		jQuery('#editFile'),
 		divEditTitle:		'<?php echo _("Edit document dialog box") ?>',
-		enableResize:		true
+		enableResize:		true,
+		page:			'trashfile'
 	});
 });
 //]]></script>
@@ -116,7 +129,7 @@ if ($DocGroupName) {
 	echo '<h3 class="docman_h3" >'._('Document Folder')._(': ').' <i>'.$DocGroupName.'</i>&nbsp;';
 	if ($DocGroupName != '.trash') {
 		echo '<a href="#" id="docman-editdirectory" class="tabtitle" title="'._('Edit this folder').'" >'. html_image('docman/configure-directory.png',22,22,array('alt'=>'edit')). '</a>';
-		echo '<a href="?group_id='.$group_id.'&amp;action=deldir&amp;dirid='.$dirid.'" id="docman-deletedirectory" title="'._('Delete permanently this folder and his content.').'" >'. html_image('docman/delete-directory.png',22,22,array('alt'=>'deldir')). '</a>';
+		echo '<a href="'.$actionlistfileurl.'&amp;action=deldir" id="docman-deletedirectory" title="'._('Delete permanently this folder and his content.').'" >'. html_image('docman/delete-directory.png',22,22,array('alt'=>'deldir')). '</a>';
 	}
 	echo '</h3>';
 	echo '<div class="docman_div_include" id="editdocgroup" style="display:none;">';
@@ -150,7 +163,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		echo '<td><a href="'.$docurl.'" class="tabtitle-nw" title="'.$docurltitle.'" >';
 		echo html_image($d->getFileTypeImage(), '22', '22', array('alt'=>$d->getFileType()));;
 		echo '</a></td>';
-		echo '<td>';
+		echo '<td style="word-wrap: break-word; max-width: 250px;" >';
 		if (($d->getUpdated() && $time_new > (time() - $d->getUpdated())) || $time_new > (time() - $d->getCreated())) {
 			$html_image_attr = array();
 			$html_image_attr['alt'] = _('new');
@@ -160,8 +173,8 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		}
 		echo '&nbsp;'.$d->getFileName();
 		echo '</td>';
-		echo '<td>'.$d->getName().'</td>';
-		echo '<td>'.$d->getDescription().'</td>';
+		echo '<td style="word-wrap: break-word; max-width: 250px;" >'.$d->getName().'</td>';
+		echo '<td style="word-wrap: break-word; max-width: 250px;" >'.$d->getDescription().'</td>';
 		echo '<td>'.make_user_link($d->getCreatorUserName(), $d->getCreatorRealName()).'</td>';
 		echo '<td>';
 		if ( $d->getUpdated() ) {
@@ -187,8 +200,12 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 
 		echo '<td>';
 		$newdgf = new DocumentGroupFactory($d->Group);
-		$editfileaction = '?action=editfile&amp;fromview=listfile&amp;dirid='.$d->getDocGroupID().'&amp;group_id='.$group_id;
-		echo '<a class="tabtitle" href="?group_id='.$group_id.'&amp;action=delfile&amp;view=listtrashfile&amp;dirid='.$dirid.'&fileid='.$d->getID().'" title="'. _('Delete permanently this document.') .'" >'.html_image('docman/delete-directory.png',22,22,array('alt'=>_('Delete permanently this document.'))). '</a>';
+		$editfileaction = '?action=editfile&amp;fromview=listfile&amp;dirid='.$d->getDocGroupID();
+		if (isset($GLOBALS['childgroup_id']) && $GLOBALS['childgroup_id']) {
+			$editfileaction .= '&amp;childgroup_id='.$GLOBALS['childgroup_id'];
+		}
+		$editfileaction .= '&amp;group_id='.$GLOBALS['group_id'];
+		echo '<a class="tabtitle" href="'.$actionlistfileurl.'&amp;action=delfile&amp;fileid='.$d->getID().'" title="'. _('Delete permanently this document.') .'" >'.html_image('docman/delete-directory.png',22,22,array('alt'=>_('Delete permanently this document.'))). '</a>';
 		echo '<a class="tabtitle-ne" href="#" onclick="javascript:controllerListTrash.toggleEditFileView({action:\''.$editfileaction.'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json','2').', docgroupDict:'.$dm->getDocGroupList($newdgf->getNested(), 'json').', title:\''.$d->getName().'\', filename:\''.$d->getFilename().'\', description:\''.$d->getDescription().'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri("docman").'\'})" title="'. _('Edit this document') .'" >'.html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this document'))). '</a>';
 		echo '</td>';
 		echo '</tr>'."\n";
@@ -199,8 +216,8 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
     echo '<span class="tabtitle" id="docman-massactionmessage" title="'. _('Actions availables for selected documents, you need to check at least one document to get actions') . '" >';
     echo _('Mass actions for selected documents:');
     echo '</span>';
-	echo '<a class="tabtitle" href="#" onclick="window.location.href=\'?group_id='.$group_id.'&amp;action=delfile&amp;view=listtrashfile&amp;dirid='.$dirid.'&amp;fileid=\'+controllerListTrash.buildUrlByCheckbox()" title="'. _('Permanently Delete') .'" >'.html_image('docman/delete-directory.png',22,22,array('alt'=>_('Permanently Delete'))). '</a>';
-	echo '<a class="tabtitle" href="#" onclick="window.location.href=\'/docman/view.php/'.$group_id.'/zip/selected/\'+controllerListTrash.buildUrlByCheckbox()" title="'. _('Download as a ZIP') . '" >' . html_image('docman/download-directory-zip.png',22,22,array('alt'=>_('Download as a ZIP'))). '</a>';
+	echo '<a class="tabtitle" href="#" onclick="window.location.href=\''.$actionlistfileurl.'&amp;action=delfile&amp;fileid=\'+controllerListTrash.buildUrlByCheckbox(\'active\')" title="'. _('Permanently Delete') .'" >'.html_image('docman/delete-directory.png',22,22,array('alt'=>_('Permanently Delete'))). '</a>';
+	echo '<a class="tabtitle" href="#" onclick="window.location.href=\'/docman/view.php/'.$group_id.'/zip/selected/\'+controllerListTrash.buildUrlByCheckbox(\'active\')" title="'. _('Download as a ZIP') . '" >' . html_image('docman/download-directory-zip.png',22,22,array('alt'=>_('Download as a ZIP'))). '</a>';
 	echo '</span>';
 	echo '</p>';
 	echo '</div>';
@@ -211,6 +228,10 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 }
 
 echo '</div>';
-if (forge_check_perm('docman', $g->getID(), 'approve')) {
+$foundFiles = 0;
+if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
+	$foundFiles = count($nested_docs[$dirid]);
+}
+if (forge_check_perm('docman', $g->getID(), 'approve') && $foundFiles) {
 	include ($gfcommon.'docman/views/editfile.php');
 }

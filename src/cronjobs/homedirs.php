@@ -167,10 +167,7 @@ foreach ($active_projects as $project) {
 		}
 
 		//system('chmod -R ug=rwX,o=rX ' . $ghome);
-		system('chown -R ' . forge_get_config('apache_user') . ':' .
-		    forge_get_config('apache_group') . ' ' . $ghome);
-		// find $ghome -type d -print0 | xargs -0 chmod g+s
-		//XXX disabled because, why is this owned by apache_group?
+		system('chown -R ' . forge_get_config('apache_user') . ':' .$groupname. ' ' . $ghome);
 	}
 }
 

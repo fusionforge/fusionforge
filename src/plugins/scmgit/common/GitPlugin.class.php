@@ -581,8 +581,11 @@ class GitPlugin extends SCMPlugin {
 						  'A',
 						  $this->getID()));
 		$rows = db_numrows ($result);
-		for ($i=0; $i<$rows; $i++) {
+		if (!is_dir($root.'/users')) {
 			system("mkdir -p $root/users");
+			chgrp($root.'/users', $unix_group);
+		}
+		for ($i=0; $i<$rows; $i++) {
 			$user_name = db_result($result,$i,'user_name');
 			$repodir = $root . '/users/' .  $user_name . '.git';
 
@@ -966,10 +969,10 @@ class GitPlugin extends SCMPlugin {
 					$result['section'] = 'scm';
 					$result['group_id'] = $group_id;
 					$result['ref_id'] = 'browser.php?group_id='.$group_id;
-					$result['description'] = $splitedLine[2].' (commit '.$splitedLine[3].')';
+					$result['description'] = htmlspecialchars($splitedLine[2]).' (commit '.$splitedLine[3].')';
 					$userObject = user_get_object_by_email($splitedLine[1]);
 					if (is_a($userObject, 'GFUser')) {
-						$result['realname'] = make_user_link($userObject->getUnixName(), $userObject->getRealName());
+						$result['realname'] = util_display_user($userObject->getUnixName(), $userObject->getID(), $userObject->getRealName());
 					} else {
 						$result['realname'] = '';
 					}

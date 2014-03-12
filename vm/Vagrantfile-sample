@@ -1,0 +1,22 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = "fusionforge-dev-debian"
+  #config.vm.box_url = "packer/fusionforge-dev-debian.box"
+  config.vm.box_url = "http://fusionforge.fusionforge.org/sandbox/fusionforge-dev-debian.box"
+
+  config.vm.network :private_network, ip: "192.168.35.11"
+  # Alternatively:
+  #config.vm.network :forwarded_port, guest: 80,  host: 8080
+  #config.vm.network :forwarded_port, guest: 443, host: 8443
+
+  # Mount work repositories inside the VM:
+  #config.vm.synced_folder "..", "/usr/src/fusionforge"
+
+  config.vm.provider :virtualbox do |vb|
+      vb.gui = true
+  end
+end

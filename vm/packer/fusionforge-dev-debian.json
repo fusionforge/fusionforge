@@ -1,0 +1,94 @@
+{
+	"provisioners": [
+		{
+			"type": "file",
+			"source": "file/Desktop",
+			"destination": "/root/"
+		},
+		{
+			"type": "file",
+			"source": "file/bashrc",
+			"destination": "/root/.bashrc"
+		},
+		{
+			"type": "shell",
+			"scripts": [
+				"scripts/base-debian.sh",
+				"scripts/vagrant.sh",
+				"scripts/virtualbox-debian.sh",
+				"scripts/fusionforge-source.sh",
+				"scripts/cleanup-debian.sh",
+				"scripts/zerodisk.sh"
+			]
+		}
+	],
+	"builders": [
+		{
+			"type": "virtualbox-iso",
+			"boot_command": [
+				"<esc><wait>",
+				"auto ",
+				"url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
+				"netcfg/get_hostname=forge ",
+				"netcfg/get_domain=internal ",
+				"<enter>"
+			],
+			"disk_size": 7168,
+			"guest_os_type": "Debian_64",
+			"http_directory": "http",
+			"iso_url": "http://cdimage.debian.org/cdimage/archive/7.3.0/amd64/iso-cd/debian-7.3.0-amd64-netinst.iso",
+			"iso_checksum": "2ed8a7ec7ef3abe59b825f7c8d7176322b87341800277c70dce807c5c9ab1c8f18a9e677766d2a12df334024fe27580cf208a305afaf09e96cfe9e762e4f94df",
+			"iso_checksum_type": "sha512",
+			"ssh_username": "root",
+			"ssh_password": "vagrant",
+			"shutdown_command": "poweroff",
+			"guest_additions_mode": "disable",
+			"virtualbox_version_file": ".vbox_version",
+			"vboxmanage": [
+				[
+					"modifyvm",
+					"{{.Name}}",
+					"--memory",
+					"512"
+				],
+				[
+					"modifyvm",
+					"{{.Name}}",
+					"--cpus",
+					"1"
+				]
+			],
+			"vm_name": "fusionforge-dev"
+		},
+		{
+			"type": "qemu",
+			"iso_url": "http://cdimage.debian.org/cdimage/archive/7.3.0/amd64/iso-cd/debian-7.3.0-amd64-netinst.iso",
+			"iso_checksum": "2ed8a7ec7ef3abe59b825f7c8d7176322b87341800277c70dce807c5c9ab1c8f18a9e677766d2a12df334024fe27580cf208a305afaf09e96cfe9e762e4f94df",
+			"iso_checksum_type": "sha512",
+			"shutdown_command": "poweroff",
+			"disk_size": 7168,
+			"format": "qcow2",
+			"headless": false,
+			"accelerator": "kvm",
+			"http_directory": "http",
+			"ssh_username": "root",
+			"ssh_password": "vagrant",
+			"vm_name": "fusionforge-dev",
+			"boot_command": [
+				"<esc><wait>",
+				"auto ",
+				"url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
+				"netcfg/get_hostname=forge ",
+				"netcfg/get_domain=internal ",
+				"debian-installer/exit/poweroff=true",
+				"<enter>"
+			]
+		}
+	],
+	"post-processors": [
+		{
+			"type": "vagrant",
+			"output": "fusionforge-dev-debian.box"
+		}
+	]
+}

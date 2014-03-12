@@ -1,7 +1,7 @@
 <?php
 /**
  *
- * Copyright 2011-2013, Franck Villaume - TrivialDev
+ * Copyright 2011-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -28,7 +28,7 @@ require_once $gfcommon.'widget/WidgetLayoutManager.class.php';
 require_once $gfcommon.'widget/Valid_Widget.class.php';
 
 html_use_jquery();
-use_javascript('scripts/LayoutController.js');
+use_javascript('/widgets/scripts/LayoutController.js');
 
 $hp = Codendi_HTMLPurifier::instance();
 if (isLogged()) {

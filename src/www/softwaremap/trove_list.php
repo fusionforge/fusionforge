@@ -197,7 +197,9 @@ if ( $cat === 'c' ) {
 		print $row_sub['fullname'];
 		print '</a>';
 		print '&nbsp;<em>(';
-		print sprintf(_('%s projects'), $row_sub['subprojects']?$row_sub['subprojects']:'0');
+		$realprojects = ($row_sub['subprojects']) ? $row_sub['subprojects'] : 0;
+		$plural = ($row_sub['subprojects'] > 1) ? $row_sub['subprojects'] : 0;
+		printf(ngettext('%s projects', '%s project', $plural), $realprojects);
 		print ')</em>';
 		print "</li>\n";
 	}

@@ -101,7 +101,7 @@ th, td {
 	border-collapse: collapse;
 }
 
-input[type="text"], input[type="password"], textarea {
+input[type="text"], input[type="password"], input[type="url"], input[type="email"], textarea {
 	width: auto;
 	border-radius: 6px;
 	border: 1px solid #e6e6e6;

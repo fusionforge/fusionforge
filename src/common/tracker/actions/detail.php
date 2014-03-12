@@ -177,13 +177,13 @@ $nb = $count? ' ('.$count.')' : '';
 		<input type="file" name="input_file4" /><br />
 	<?php } ?>
 	<h2><?php echo _('Attached Files')._(':'); ?></h2>
+	</td></tr>
 <?php
 	//
 	// print a list of files attached to this Artifact
 	//
 		$ath->renderFiles($group_id, $ah);
 	?>
-	</td></tr>
 </table>
 </div>
 <div class="tabbertab" title="<?php echo _('Commits'); ?>" >

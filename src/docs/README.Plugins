@@ -325,7 +325,7 @@ had been written.
   Hook Name  : javascript_file
   Locations  : www/include/Layout.class.php (function headerJS)
   Description: Add JS file in header. No params.
-               Offer easy use ot use_javascript('yourfile.js') or declare
+               Offer easy use ot use_javascript('/path/to/yourfile.js') or declare
                a specific call of html_use_jquery if needed.
                See plugin headermenu of example of use.
 

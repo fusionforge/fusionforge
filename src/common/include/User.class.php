@@ -5,7 +5,7 @@
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2009-2010, Roland Mas
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2014, Franck Villaume - TrivialDev
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
@@ -356,7 +356,7 @@ class GFUser extends Error {
 			return false;
 		}
 		if (forge_get_config('require_unique_email')) {
-			if (user_get_object_by_email('$email')) {
+			if (user_get_object_by_email($email)) {
 				$this->setError(_('User with this email already exists - use people search to recover your login.'));
 				return false;
 			}

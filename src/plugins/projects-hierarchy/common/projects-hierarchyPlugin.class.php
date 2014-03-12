@@ -4,7 +4,7 @@
  *
  * Copyright 2006 (c) Fabien Regnier - Sogeti
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2012-2013, Franck Villaume - TrivialDev
+ * Copyright 2012-2014, Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of National Education
  * http://fusionforge.org
  *
@@ -161,7 +161,7 @@ class projects_hierarchyPlugin extends Plugin {
 	}
 
 	function dTreeJS() {
-		echo '<link rel="StyleSheet" href="/plugins/projects-hierarchy/dtree.css" type="text/css" />
+		echo '<link rel="stylesheet" href="/plugins/projects-hierarchy/dtree.css" type="text/css" />
 			<script type="text/javascript" src="/plugins/projects-hierarchy/dtree.js"></script>';
 	}
 

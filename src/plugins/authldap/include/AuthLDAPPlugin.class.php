@@ -222,7 +222,7 @@ class AuthLDAPPlugin extends ForgeAuthPlugin {
 		forge_define_config_item('ldap_server', $this->name, 'ldap.example.com');
 		forge_define_config_item('ldap_port', $this->name, 389);
 		forge_define_config_item('base_dn', $this->name, 'ou=users,dc=example,dc=com');
-		forge_define_config_item('skipped_users', $this->name, '');
+		forge_define_config_item('ldap_version', $this->name, 3);
 		forge_define_config_item('manager_dn', $this->name, '');
 		forge_define_config_item('manager_password', $this->name, '');
 	}
@@ -237,7 +237,7 @@ class AuthLDAPPlugin extends ForgeAuthPlugin {
 		if (forge_get_config('manager_dn', $this->name)) {
 			ldap_bind($this->ldap_conn,
 				   forge_get_config('manager_dn', $this->name),
-				   forge_get_config('ldap_password'));
+				   forge_get_config('manager_password', $this->name));
 		} else {
 			ldap_bind($this->ldap_conn);
 		}
@@ -300,9 +300,9 @@ class AuthLDAPPlugin extends ForgeAuthPlugin {
 			$conn = ldap_connect($server);
 		}
 
-		if (forge_get_config('ldap_version')) {
-			debuglog("LDAP: ldap_set_option ($this->ldap_conn, LDAP_OPT_PROTOCOL_VERSION, ".forge_get_config('ldap_version').");");
-			if (!ldap_set_option($conn, LDAP_OPT_PROTOCOL_VERSION, forge_get_config('ldap_version'))) {
+		if (forge_get_config('ldap_version', $this->name)) {
+			debuglog("LDAP: ldap_set_option ($this->ldap_conn, LDAP_OPT_PROTOCOL_VERSION, ".forge_get_config('ldap_version', $this->name).");");
+			if (!ldap_set_option($conn, LDAP_OPT_PROTOCOL_VERSION, forge_get_config('ldap_version', $this->name))) {
 				debuglog("LDAP: ldap_set_option() failed: ".ldap_error($this->ldap_conn));
 				return false;
 			}
@@ -318,7 +318,7 @@ class AuthLDAPPlugin extends ForgeAuthPlugin {
 		// then authentificate with the server.
 		if (forge_get_config('manager_dn', $this->name)) {
 			if (!@ldap_bind($conn, forge_get_config('manager_dn', $this->name),
-					forge_get_config('ldap_password'))) {
+					forge_get_config('manager_password', $this->name))) {
 				error_log("LDAP application bind failed.");
 				return false;
 			}
