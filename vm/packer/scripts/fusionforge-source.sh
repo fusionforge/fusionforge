@@ -21,3 +21,7 @@ else
 fi
 cd /usr/src/
 git clone $repo fusionforge/
+
+git config --global color.diff auto
+git config --global color.status auto
+git config --global color.branch auto
