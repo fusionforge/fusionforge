@@ -35,6 +35,7 @@ html_generic_fileheader(_('Gantt Chart'));
 echo $HTML->getJavascripts();
 echo $HTML->getStylesheets();
 echo '</head><body>';
+echo html_ao('div', array('id' => 'maindiv'));
 
 /* define global vars */
 global $pg;
@@ -338,5 +339,6 @@ echo '<div id="workSpace" style="padding:0; overflow-y:auto; overflow-x:hidden; 
 
   <div class="__template__" type="ASSIGNMENT_ROW"><!--
   --></div>
+  </div><!-- end of gantEditorTemplates -->
 <?php
-$HTML->footer(false);
+$HTML->footer();
