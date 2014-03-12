@@ -71,8 +71,8 @@ if (!$ac || !is_object($ac)) {
 			<p>
 			<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
 			</form>
-			<?php
-			$ath->footer();
+		<?php
+		$ath->footer();
 	}
 }
 
