@@ -58,7 +58,7 @@ class DocumentManager extends Error {
 			return;
 		}
 		if ($Group->isError()) {
-			$this->setError('DocumentManager:: '. $Group->getErrorMessage());
+			$this->setError('DocumentManager: '. $Group->getErrorMessage());
 			return;
 		}
 		$this->Group =& $Group;

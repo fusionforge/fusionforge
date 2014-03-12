@@ -374,7 +374,7 @@ class ForumMessage extends Error {
 				return false;
 			}
 			if ($ParentMessage->isError()) {
-				$this->setError('ForumMessage::create() '.$ParentMessage->getErrorMessage());
+				$this->setError('ForumMessage '.$ParentMessage->getErrorMessage());
 				return false;
 			}
 		}

@@ -485,14 +485,14 @@ class ReportSetup extends Report {
 	function backfill_groups_added_daily($count=10000) {
 		$today=mktime(0,0,0,date('m'),date('d')-1,date('Y'));
 		if (!$start_date=$this->getMinDate()) {
-			$this->setError('backfill_groups_added_daily:: Could Not Get Start Date');
+			$this->setError('backfill_groups_added_daily: Could Not Get Start Date');
 			return false;
 		}
 		$i = 0;
 		while (true) {
 			$day=($today-($i*REPORT_DAY_SPAN));
 			if (!$this->groups_added_daily($day)) {
-				$this->setError('backfill_groups_added_daily:: Error adding daily row: '.db_error());
+				$this->setError('backfill_groups_added_daily: Error adding daily row: '.db_error());
 				return false;
 			}
 			if ($day < $start_date) {

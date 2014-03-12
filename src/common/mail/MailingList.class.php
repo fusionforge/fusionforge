@@ -66,7 +66,7 @@ class MailingList extends Error {
 			return;
 		}
 		if ($Group->isError()) {
-			$this->setError('MailingList:: '.$Group->getErrorMessage());
+			$this->setError('MailingList: '.$Group->getErrorMessage());
 			return;
 		}
 		$this->Group =& $Group;
@@ -163,7 +163,7 @@ class MailingList extends Error {
 		db_begin();
 		$result = db_query_params('INSERT INTO mail_group_list
 					(group_id, list_name, is_public, password, list_admin, status, description)
-					VALUES ($1,$2,$3,$4,$5,$6,$7)',
+					VALUES ($1, $2, $3, $4, $5, $6, $7)',
 			array(
 				$this->Group->getID(),
 				$realListName,

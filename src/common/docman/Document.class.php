@@ -66,7 +66,7 @@ class Document extends Error {
 			return;
 		}
 		if ($Group->isError()) {
-			$this->setError('Document:: '. $Group->getErrorMessage());
+			$this->setError('Document: '. $Group->getErrorMessage());
 			return;
 		}
 		$this->Group =& $Group;
@@ -79,7 +79,7 @@ class Document extends Error {
 			} else {
 				$this->data_array =& $arr;
 				if ($this->data_array['group_id'] != $this->Group->getID()) {
-					$this->setError('Document:: '. _('group_id in db result does not match Group Object'));
+					$this->setError('Document: '. _('group_id in db result does not match Group Object'));
 					$this->data_array = null;
 					return;
 				}

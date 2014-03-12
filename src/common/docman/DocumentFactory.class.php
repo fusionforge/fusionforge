@@ -94,7 +94,7 @@ class DocumentFactory extends Error {
 		}
 
 		if ($Group->isError()) {
-			$this->setError('ProjectGroup:: '.$Group->getErrorMessage());
+			$this->setError('ProjectGroup: '.$Group->getErrorMessage());
 			return;
 		}
 
@@ -356,7 +356,7 @@ class DocumentFactory extends Error {
 
 		$result = db_query_qpa($qpa);
 		if (!$result) {
-			$this->setError('getFromStorage::'.db_error());
+			$this->setError('getFromStorage:'.db_error());
 			return false;
 		}
 

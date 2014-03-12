@@ -55,7 +55,7 @@ class MailingListFactory extends Error {
 			return;
 		}
 		if ($Group->isError()) {
-			$this->setError('MailingListFactory:: '.$Group->getErrorMessage());
+			$this->setError('MailingListFactory: '.$Group->getErrorMessage());
 			return;
 		}
 		if (!$Group->usesMail()) {
