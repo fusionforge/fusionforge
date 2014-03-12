@@ -87,9 +87,9 @@ class ProjectTaskFactory extends Error {
 	 * @param	$_category_id
 	 * @param	string    $_view
 	 * @param	string	$_sort_order	The way to order - ASC or DESC.
-	 *    
+	 *
 	 */
-	function setup($offset,$order,$max_rows,$set,$_assigned_to,$_status,$_category_id,$_view='',$_sort_order) {
+	function setup($offset,$order,$max_rows,$set,$_assigned_to,$_status,$_category_id,$_view='',$_sort_order = NULL) {
 //echo "<br />offset: $offset| order: $order|max_rows: $max_rows|_assigned_to: $_assigned_to|_status: $_status|_category_id: $_category_id +";
 		if ((!$offset) || ($offset < 0)) {
 			$this->offset=0;
@@ -131,7 +131,7 @@ class ProjectTaskFactory extends Error {
 				$_sort_order = $u->getPreference('pm_task_sort_order'.$this->ProjectGroup->getID());
 			}
 		}
-		
+
 		$this->order=$order;
 		$this->sort_order=$_sort_order;
 
