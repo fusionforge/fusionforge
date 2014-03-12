@@ -9,6 +9,7 @@
  *   - register existing database in system
  *
  * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -115,13 +116,13 @@ site_admin_header(array('title'=>_('Site Admin')));
 <table>
 
 <tr>
-<td><?php echo _('Project Unix Name'); ?></td>
-<td><input type="text" name="groupname" /></td>
+<td><?php echo _('Project Unix Name').utils_requiredField(); ?></td>
+<td><input type="text" name="groupname" required="required" /></td>
 </tr>
 
 <tr>
-<td><?php echo _('Virtual Host Name'); ?></td>
-<td><input type="text" name="vhost_name" /></td>
+<td><?php echo _('Virtual Host Name').utils_requiredField(); ?></td>
+<td><input type="text" name="vhost_name" required="required" /></td>
 </tr>
 </table>
 
@@ -151,7 +152,7 @@ if (getStringFromRequest('tweak')) {
 	$vhost_name = getStringFromRequest('vhost_name');
 
 	$res_vh = db_query_params ('
-		SELECT vhostid,vhost_name,docdir,cgidir,unix_group_name,group_id
+		SELECT vhostid,vhost_name,docdir,cgidir,unix_group_name,prweb_vhost.group_id
 		FROM prweb_vhost,groups
 		WHERE vhost_name=$1
 		AND prweb_vhost.group_id=groups.group_id
