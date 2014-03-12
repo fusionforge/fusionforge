@@ -137,7 +137,7 @@ scm_header(array('title'=>_('SCM Repository'),'group'=>$group_id));
 		});
 	});
 </script>
-<form action="<?php echo getStringFromServer('PHP_SELF'); ?>">
+<form method="post" action="<?php echo util_make_uri('/scm/admin/?group_id='.$group_id) ?>">
 <?php
 
 	$hook_params = array () ;
