@@ -163,7 +163,7 @@ if (getStringFromRequest('tweak')) {
 
 		$row_vh = db_fetch_array($res_vh);
 
-		print '<p class="feedback">'._('Update Record:').'</p>';
+		print '<p class="information">'._('Update Record:').'</p>';
 
 		$title=array();
 		$title[]=_('VHOST ID');
