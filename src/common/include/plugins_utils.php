@@ -40,8 +40,7 @@ function htmlIframe($url,$poub) {
 	$project = group_get_object($group_id);
 	if (isset($poub['id'])) {
 		$id = $poub['id'];
-	}
-	else {
+	} else {
 		$id = 'default_id_htmliframe';
 	}
 	if (!empty($url)) {
