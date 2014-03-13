@@ -30,4 +30,5 @@ git clone $repo fusionforge/
 if [ -e /etc/debian_version ]; then
     cd fusionforge/
     git remote add upstream git://scm.fusionforge.org/fusionforge/fusionforge.git
+    git fetch upstream
 fi
