@@ -12,7 +12,7 @@
 
 
 #set -x
-grep -q debian-repository /etc/apt/sources.list
+grep -q debian-repository /etc/apt/sources.list /etc/apt/sources.list.d/*
 if [ $? -ne 0 ]; then
     echo "You probably need to add the following in /etc/apt/sources.list :"
     echo "echo 'deb file:///usr/src/debian-repository local/' >> /etc/apt/sources.list"
@@ -22,9 +22,9 @@ fi
 set -e
 
 # "Backport" recent dependency
-wget -c http://ftp.fr.debian.org/debian/pool/main/l/loggerhead/loggerhead_1.19~bzr479-3_all.deb
+wget -c http://snapshot.debian.org/archive/debian/20121107T152130Z/pool/main/l/loggerhead/loggerhead_1.19%7Ebzr477-1_all.deb
 aptitude install gdebi-core
-gdebi --non-interactive loggerhead_1.19~bzr479-3_all.deb
+gdebi --non-interactive loggerhead_1.19~bzr477-1_all.deb
 
 aptitude update
 if dpkg -l fusionforge-full | grep -q ^ii ; then
