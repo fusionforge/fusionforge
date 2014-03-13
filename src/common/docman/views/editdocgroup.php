@@ -52,7 +52,7 @@ if ($dg->isError())
 	session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($dg->getErrorMessage()));
 
 echo html_ao('div', array('class' => 'docmanDivIncluded'));
-echo html_ao('form', array('name' => 'editgroup', 'action' => $actionurl, 'method' => 'post'));
+echo html_ao('form', array('name' => 'editgroup', 'action' => util_make_uri($actionurl), 'method' => 'post'));
 echo html_e('input', array('type' => 'hidden', 'name' => 'dirid', 'value' => $dirid));
 echo $HTML->listTableTop();
 $cells[][] = _('Folder Name');

@@ -72,7 +72,7 @@ if (forge_check_perm('docman', $group_id, 'approve')) {
 	echo html_ac(html_ap() -2);
 	echo html_ao('div', array('id' => 'tabs-inject-tree'));
 	echo html_ao('div', array('class' => 'docman_div_include', 'id' => 'zipinject'));
-	echo html_ao('form', array('id' => 'injectzip', 'name' => 'injectzip', 'method' => 'post', 'action' => '?group_id='.$group_id.'&action=injectzip&dirid='.$dirid, 'enctype' => 'multipart/form-data'));
+	echo html_ao('form', array('id' => 'injectzip', 'name' => 'injectzip', 'method' => 'post', 'action' => util_make_uri('/docman/?group_id='.$group_id.'&action=injectzip&dirid='.$dirid), 'enctype' => 'multipart/form-data'));
 	echo html_ao('p');
 	echo html_e('label', array(), _('Upload archive:'), false);
 	echo html_e('input', array('type' => 'file', 'name' => 'uploaded_zip', 'required' => 'required'));

@@ -99,7 +99,7 @@ if ($dgf->getNested() == NULL) {
 	if ($g->useDocmanSearch())
 		echo html_e('p', array(), _('Both fields are used by the document search engine.'), false);
 
-	echo html_ao('form', array('name' => 'adddata', 'action' => $actionurl, 'method' => 'post', 'enctype' => 'multipart/form-data'));
+	echo html_ao('form', array('name' => 'adddata', 'action' => util_make_uri($actionurl), 'method' => 'post', 'enctype' => 'multipart/form-data'));
 	echo $HTML->listTableTop(array(), array(), 'infotable');
 	$cells = array();
 	$cells[][] = _('Document Title').utils_requiredField();

@@ -52,7 +52,7 @@ if (extension_loaded('zip')) {
 	echo html_ac(html_ap() -2);
 }
 
-echo html_ao('form', array('id' => 'createonline', 'name' => 'createonline', 'method' => 'post', 'action' => '?group_id='.$group_id.'&action=updatecreateonline'));
+echo html_ao('form', array('id' => 'createonline', 'name' => 'createonline', 'method' => 'post', 'action' => util_make_uri('/docman/?group_id='.$group_id.'&action=updatecreateonline')));
 echo html_ao('ul');
 $createOnlineStatus = '1';
 $labelCreateOnline = _('Enable Create Online Documents');
@@ -63,7 +63,7 @@ if ($g->useCreateOnline()) {
 echo '<li><input name="status" type="hidden" value="'.$createOnlineStatus.'"><input id="submitcreateonline" type="button" value="'.$labelCreateOnline.'" onclick="javascript:doIt(\'createonline\')"></li>';
 echo html_ac(html_ap() -2);
 
-echo html_ao('form', array('id' => 'searchengine', 'name' => 'searchengine', 'method' => 'post', 'action' => '?group_id='.$group_id.'&action=updateenginesearch'));
+echo html_ao('form', array('id' => 'searchengine', 'name' => 'searchengine', 'method' => 'post', 'action' => util_make_uri('/docman/?group_id='.$group_id.'&action=updateenginesearch')));
 echo html_ao('ul');
 $searchEngineStatus = '1';
 $labelSearchEngine = _('Enable Search Engine');
@@ -75,14 +75,14 @@ echo '<li><input name="status" type="hidden" value="'.$searchEngineStatus.'"><in
 echo html_ac(html_ap() -2);
 
 if ($g->useDocmanSearch()) {
-	echo html_ao('form', array('id' => 'reindexword', 'name' => 'reindexword', 'method' => 'post', 'action' => '?group_id='.$group_id.'&action=forcereindexenginesearch'));
+	echo html_ao('form', array('id' => 'reindexword', 'name' => 'reindexword', 'method' => 'post', 'action' => util_make_uri('/docman/?group_id='.$group_id.'&action=forcereindexenginesearch')));
 	echo html_ao('ul');
 	echo html_e('li', array(), html_e('input', array('name' => 'status', 'type' => 'hidden', 'value' => '1')).'<input id="submitreindexword" type="button" value="'. _('Force reindexation search engine') .'" onclick="javascript:doIt(\'reindexword\')">', false);
 	echo html_ac(html_ap() -2);
 }
 
 if (forge_get_config('use_webdav')) {
-	echo html_ao('form', array('id' => 'webdavinterface', 'name' => 'webdavinterface', 'method' => 'post', 'action' => '?group_id='.$group_id.'&action=updatewebdavinterface'));
+	echo html_ao('form', array('id' => 'webdavinterface', 'name' => 'webdavinterface', 'method' => 'post', 'action' => util_make_uri('/docman/?group_id='.$group_id.'&action=updatewebdavinterface')));
 	echo html_ao('ul');
 	$webdavStatus = '1';
 	$labelWebdavInterface = _('Enable Webdav Interface');
