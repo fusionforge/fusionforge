@@ -10,6 +10,10 @@ Default language is English.
 
 EOF
 
+git config --global color.diff auto
+git config --global color.status auto
+git config --global color.branch auto
+
 # Install sources
 if [ -e /etc/debian_version ]; then
     apt-get -y --force-yes install git
@@ -19,9 +23,11 @@ else
     yum -y install git
     repo=git://fusionforge.org/fusionforge/fusionforge.git
 fi
+
 cd /usr/src/
 git clone $repo fusionforge/
 
-git config --global color.diff auto
-git config --global color.status auto
-git config --global color.branch auto
+if [ -e /etc/debian_version ]; then
+    cd fusionforge/
+    git remote add upstream git://scm.fusionforge.org/fusionforge/fusionforge.git
+fi
