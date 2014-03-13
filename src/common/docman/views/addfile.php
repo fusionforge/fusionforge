@@ -35,7 +35,7 @@ global $dm; // the Document Manager object
 global $HTML;
 
 // plugin projects-hierarchy
-$actionurl = '?group_id='.$group_id.'&action=addfile&dirid='.$dirid;
+$actionurl = '/docman/?group_id='.$group_id.'&action=addfile&dirid='.$dirid;
 $redirecturl = '/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid;
 if (isset($childgroup_id) && $childgroup_id) {
 	$g = group_get_object($childgroup_id);

@@ -36,7 +36,7 @@ if (!forge_check_perm('docman', $group_id, 'approve')) {
 }
 
 // plugin projects-hierarchy
-$actionurl = '?group_id='.$group_id.'&action=addsubdocgroup&dirid='.$dirid;
+$actionurl = '/docman/?group_id='.$group_id.'&action=addsubdocgroup&dirid='.$dirid;
 if (isset($childgroup_id) && $childgroup_id) {
 	$g = group_get_object($childgroup_id);
 	$actionurl .= '&childgroup_id='.$childgroup_id;
