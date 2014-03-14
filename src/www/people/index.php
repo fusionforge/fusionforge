@@ -43,10 +43,9 @@ if ($group_id) {
 	}
 
 	echo '
-	<p>'._('Here is a list of positions available for this project.').'</p>
-	<p>';
+	<p>'._('Here is a list of positions available for this project.').'</p>';
 
-	echo people_show_project_jobs($group_id) . '</p>';
+	echo people_show_project_jobs($group_id);
 
  } elseif ($category_id && is_numeric($category_id)) {
 
