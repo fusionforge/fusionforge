@@ -4,11 +4,12 @@
 // upgrade-db.php          => Upgrade the main database.
 // upgrade-db.php all      => Upgrade the main database and active plugins.
 // upgrade-db.php <plugin> => Upgrade only the database of the given active plugin.
-echo "Entering  upgrade-db.php\n";
 
 require_once dirname(__FILE__).'/../common/include/env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/sqlparser.php';
+
+echo "Entering  upgrade-db.php\n";
 
 $db_path = dirname(__FILE__).'/';
 $date = -1;
