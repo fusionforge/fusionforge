@@ -60,11 +60,9 @@ db/20090507-add_artifact_workflow.sql	@SOURCE_PATH@/db/
 db/20090507-add_element_pos.sql		@SOURCE_PATH@/db/
 db/20090507-add_project_query.sql	@SOURCE_PATH@/db/
 db/20090507-browse_list.sql		@SOURCE_PATH@/db/
-db/2010*.sql				@SOURCE_PATH@/db/
-db/2011*.sql				@SOURCE_PATH@/db/
-db/2012*.sql				@SOURCE_PATH@/db/
-db/2013*.sql				@SOURCE_PATH@/db/
-db/2014*.sql				@SOURCE_PATH@/db/
+db/20090507-install_workflow.php	@SOURCE_PATH@/db/
+db/201*.sql				@SOURCE_PATH@/db/
+db/201*.php				@SOURCE_PATH@/db/
 db/FTI*.sql				@SOURCE_PATH@/db/
 db/schema-convergence*.sql		@SOURCE_PATH@/db/
 #
