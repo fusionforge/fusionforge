@@ -22,9 +22,11 @@ fi
 set -e
 
 # "Backport" recent dependency
-wget -c http://snapshot.debian.org/archive/debian/20121107T152130Z/pool/main/l/loggerhead/loggerhead_1.19%7Ebzr477-1_all.deb
-aptitude install gdebi-core
-gdebi --non-interactive loggerhead_1.19~bzr477-1_all.deb
+if ! dpkg -l loggerhead | grep -q ^ii ; then
+    wget -c http://snapshot.debian.org/archive/debian/20121107T152130Z/pool/main/l/loggerhead/loggerhead_1.19%7Ebzr477-1_all.deb
+    aptitude install gdebi-core
+    gdebi --non-interactive loggerhead_1.19~bzr477-1_all.deb
+fi
 
 aptitude update
 if dpkg -l fusionforge-full | grep -q ^ii ; then
