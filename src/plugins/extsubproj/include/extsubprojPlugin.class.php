@@ -228,13 +228,13 @@ class extsubprojPlugin extends Plugin {
 	* @return boolean
 	*/
 	function widgets($params) {
-		require_once 'common/widget/WidgetLayoutManager.class.php';
-		if ($params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_GROUP) {
-			$params['fusionforge_widgets'][] = 'plugin_extsubproj_project_subprojects';
-		}/*
-		if ($params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_USER) {
-			$params['fusionforge_widgets'][] = 'plugin_scmgit_user_myrepositories';
-		}*/
+		$group = group_get_object($GLOBALS['group_id']);
+		if ($group->usesPlugin($this->name)) {
+			require_once 'common/widget/WidgetLayoutManager.class.php';
+			if ($params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_GROUP) {
+				$params['fusionforge_widgets'][] = 'plugin_extsubproj_project_subprojects';
+			}
+		}
 		return true;
 	}
 
