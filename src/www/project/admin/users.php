@@ -428,10 +428,13 @@ echo '<tr><td colspan="2">
 
 echo '</tbody></table>' ;
 
-echo '
-        <form action="roleedit.php?group_id='. $group_id .'&amp;role_id=observer" method="post">
-        <p><input type="submit" name="edit" value="'._("Edit Observer").'" /></p>
-        </form>';
+//TODO: What is the observer ? role_id is a numeric.
+//      Something is missing here.
+//      Code commented by nerville : 20140314.
+// echo '
+//         <form action="roleedit.php?group_id='. $group_id .'&amp;role_id=observer" method="post">
+//         <p><input type="submit" name="edit" value="'._("Edit Observer").'" /></p>
+//         </form>';
 
 if (count ($used_external_roles)) {
 	echo $HTML->boxMiddle(_("Currently used external roles"));
