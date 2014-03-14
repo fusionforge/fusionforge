@@ -8,6 +8,7 @@ fusionforge (5.2.90~-1) UNRELEASED; urgency=low
   [ Sylvain Beucler]
   * Replace obsolete group_dump_update.pl with homedirs.php
   * Fix missing .ini files in plugins hudson, headermenu, projectlabels
+  * Install .php migration scripts (only .sql were included before)
 
  -- Roland Mas <lolando@debian.org>  Fri, 17 Jan 2014 16:45:20 +0100
 
