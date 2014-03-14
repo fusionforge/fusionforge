@@ -82,7 +82,7 @@ if [ $? -eq 0 ]; then
     echo "WARNING: It is likely that the mounted /tmp could be too short. If you experience a build error bellow, Try make some room on the FS and reboot, first."
 fi
 
-dch --newversion 999+$(date +%Y%m%d%H%M%S)-1 --distribution local --force-distribution "Autobuilt."
+dch --newversion $(dpkg-parsechangelog | sed -n 's/^Version: \([0-9.]\+\).*/\1/p')~$(date +%Y%m%d%H%M)-1 --distribution local --force-distribution "Autobuilt."
 debuild --no-lintian --no-tgz-check -us -uc -tc  # using -tc so 'bzr st' is readable
 
 debrelease -f local
