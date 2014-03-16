@@ -193,12 +193,12 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 
 		echo '<td>';
 		$newdgf = new DocumentGroupFactory($d->Group);
-		$editfileaction = '/docman/?action=editfile&amp;fromview=listfile&amp;dirid='.$d->getDocGroupID();
+		$editfileaction = '/docman/?action=editfile&fromview=listfile&dirid='.$d->getDocGroupID();
 		if (isset($GLOBALS['childgroup_id']) && $GLOBALS['childgroup_id']) {
-			$editfileaction .= '&amp;childgroup_id='.$GLOBALS['childgroup_id'];
+			$editfileaction .= '&childgroup_id='.$GLOBALS['childgroup_id'];
 		}
-		$editfileaction .= '&amp;group_id='.$GLOBALS['group_id'];
-		echo '<a class="tabtitle" href="'.$redirecturl.'&amp;action=delfile&amp;fileid='.$d->getID().'" title="'. _('Delete permanently this document.') .'" >'.html_image('docman/delete-directory.png',22,22,array('alt'=>_('Delete permanently this document.'))). '</a>';
+		$editfileaction .= '&group_id='.$GLOBALS['group_id'];
+		echo util_make_link($redirecturl.'&action=delfile&fileid='.$d->getID(), html_image('docman/delete-directory.png', 22, 22, array('alt' => _('Delete permanently this document.'))), array('class' => 'tabtitle', 'title' => _('Delete permanently this document.')));
 		echo '<a class="tabtitle-ne" href="#" onclick="javascript:controllerListTrash.toggleEditFileView({action:\''.$editfileaction.'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json','2').', docgroupDict:'.$dm->getDocGroupList($newdgf->getNested(), 'json').', title:\''.$d->getName().'\', filename:\''.$d->getFilename().'\', description:\''.$d->getDescription().'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri("docman").'\'})" title="'. _('Edit this document') .'" >'.html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this document'))). '</a>';
 		echo '</td>';
 		echo '</tr>'."\n";
