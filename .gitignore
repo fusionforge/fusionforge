@@ -65,3 +65,12 @@ htdocs/deb-repo/mkdebidx.log
 htdocs/deb-repo/timestamp
 src/www/scm/viewvc/viewvc.org/*.tar.gz
 src/www/scm/viewvc/viewvc.org/*.zip
+# Debian packaging:
+/*.dsc
+/*.tar.gz
+/*.diff.gz
+/*.build
+/*.changes
+/*.deb
+/*.upload
+/.pc
