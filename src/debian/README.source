@@ -39,3 +39,11 @@ upstream main version and Debian's packaging :
 http://patch-tracker.debian.org/package/fusionforge
 
  -- Olivier Berger <obergix@debian.org>, Mon, 19 Aug 2013 14:50:53 +0200
+
+
+The debian/control file is generated. If the build process modifies
+it, you can commit the resulting file in the VCS repository.  There's
+no way to generate it before debuild or debclean is called, so we keep
+it in the repository.
+
+ -- Sylvain Beucler <beuc@debian.org>, Sun, 16 Mar 2014 16:24:53 +0100
