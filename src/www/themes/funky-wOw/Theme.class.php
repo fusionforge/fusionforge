@@ -432,7 +432,6 @@ class Theme extends Layout {
 		html_use_coolfieldset();
 		html_use_jqueryui();
 		echo $this->getJavascripts();
-		echo $this->getStylesheets();
 		?>
 		<script type="text/javascript">//<![CDATA[
 		jQuery(window).load(function(){
