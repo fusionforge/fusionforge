@@ -34,7 +34,7 @@ global $g; // the Group object
 $linkmenu = 'listtrashfile';
 $childgroup_id = getIntFromRequest('childgroup_id');
 $baseredirecturl = '/docman/?group_id='.$group_id;
-$redirecturl = $baseredirecturl.'&view=.'.$linkmenu.'&dirid='.$dirid;
+$redirecturl = $baseredirecturl.'&view='.$linkmenu.'&dirid='.$dirid;
 if (!forge_check_perm('docman', $group_id, 'approve')) {
 	$return_msg= _('Document Manager Access Denied');
 	session_redirect($baseredirecturl.'&warning_msg='.urlencode($return_msg));
@@ -66,7 +66,6 @@ if ($dgf->isError())
 $df->setStateID('2');
 
 $d_arr =& $df->getDocuments();
-$linkmenu = 'listtrashfile';
 
 $nested_docs = array();
 $DocGroupName = 0;
@@ -79,7 +78,7 @@ if ($dirid) {
 	}
 	if ($ndg->getState() != 2) {
 		$error_msg = _('Invalid folder');
-		session_redirect($baseredirecturl.'&view=listtrashfile&error_msg='.urlencode($error_msg));
+		session_redirect($baseredirecturl.'&view='.$linkmenu.'&error_msg='.urlencode($error_msg));
 	}
 }
 
@@ -95,7 +94,7 @@ if ($d_arr != NULL ) {
 
 echo html_ao('div', array('id' => 'rightdiv'));
 echo html_ao('div', array('style' => 'padding:5px'));
-echo html_ao('form', array('id' => 'emptytrash', 'name' => 'emptytrash', 'method' => 'post', 'action' => '/docman/?group_id='.$group_id.'&action=emptytrash'));
+echo html_ao('form', array('id' => 'emptytrash', 'name' => 'emptytrash', 'method' => 'post', 'action' => util_make_uri('/docman/?group_id='.$group_id.'&action=emptytrash')));
 echo html_e('input', array('id' => 'submitemptytrash', 'type' => 'submit', 'value' => _('Delete permanently all documents and folders with deleted status.')));
 echo html_ac(html_ap() - 2);
 ?>
@@ -120,12 +119,12 @@ jQuery(document).ready(function() {
 //]]></script>
 <?php
 if ($DocGroupName) {
-	echo '<h3 class="docman_h3" >'._('Document Folder')._(': ').' <i>'.$DocGroupName.'</i>&nbsp;';
+	$content = _('Document Folder')._(': ').html_e('i', array(), $DocGroupName, false).'&nbsp;';
 	if ($DocGroupName != '.trash') {
-		echo '<a href="#" id="docman-editdirectory" class="tabtitle" title="'._('Edit this folder').'" >'. html_image('docman/configure-directory.png',22,22,array('alt'=>'edit')). '</a>';
-		echo '<a href="'.$redirecturl.'&amp;action=deldir" id="docman-deletedirectory" title="'._('Delete permanently this folder and his content.').'" >'. html_image('docman/delete-directory.png',22,22,array('alt'=>'deldir')). '</a>';
+		$content .= util_make_link('#', html_image('docman/configure-directory.png', 22, 22, array('alt' => _('Edit'))), array('id' => 'docman-editdirectory', 'class' => 'tabtitle', 'title' => _('Edit this folder')), true);
+		$content .= util_make_link($redirecturl.'&action=deldir', html_image('docman/delete-directory.png', 22, 22, array('alt' => _('Delete folder'))), array('id' => 'docman-deletedirectory', 'class' => 'tabtitle', 'title' => _('Delete permanently this folder and his content.')));
 	}
-	echo '</h3>';
+	echo html_e('h3', array('class' => 'docman_h3'), $content, false);
 	echo '<div class="docman_div_include" id="editdocgroup" style="display:none;">';
 	echo '<h4 class="docman_h4">'. _('Edit this folder') .'</h4>';
 	include ($gfcommon.'docman/views/editdocgroup.php');
@@ -207,9 +206,9 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 	echo $HTML->listTableBottom();
 	echo '<p>';
 	echo '<span id="massactionactive" style="display: none;" >';
-    echo '<span class="tabtitle" id="docman-massactionmessage" title="'. _('Actions availables for selected documents, you need to check at least one document to get actions') . '" >';
-    echo _('Mass actions for selected documents:');
-    echo '</span>';
+	echo '<span class="tabtitle" id="docman-massactionmessage" title="'. _('Actions availables for selected documents, you need to check at least one document to get actions') . '" >';
+	echo _('Mass actions for selected documents:');
+	echo '</span>';
 	echo '<a class="tabtitle" href="#" onclick="window.location.href=\''.$redirecturl.'&amp;action=delfile&amp;fileid=\'+controllerListTrash.buildUrlByCheckbox(\'active\')" title="'. _('Permanently Delete') .'" >'.html_image('docman/delete-directory.png',22,22,array('alt'=>_('Permanently Delete'))). '</a>';
 	echo '<a class="tabtitle" href="#" onclick="window.location.href=\'/docman/view.php/'.$group_id.'/zip/selected/\'+controllerListTrash.buildUrlByCheckbox(\'active\')" title="'. _('Download as a ZIP') . '" >' . html_image('docman/download-directory-zip.png',22,22,array('alt'=>_('Download as a ZIP'))). '</a>';
 	echo '</span>';
@@ -217,7 +216,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 	echo '</div>';
 } else {
 	if ($dirid) {
-		echo html_e('p', array('class' => 'information', _('No documents.'), false));
+		echo html_e('p', array('class' => 'information'), _('No documents.'), false);
 	}
 }
 
