@@ -131,7 +131,7 @@ if ($dgf->getNested() == NULL) {
 	$cells = array();
 	$cells[][] = _('URL').utils_requiredField();
 	$cells[][] = html_e('input', array('type' => 'url', 'name' => 'file_url', 'size' => '30', 'placeholder' => _('Enter a valid URL'), 'pattern' => 'ftp://.+|https?://.+'));
-	echo $HTML->multiTableRow(array('id' => 'urlrow', 'style' => 'display:none'), $cells);
+	echo $HTML->multiTableRow(array('id' => 'urlrow', 'class' => 'hide'), $cells);
 	if (forge_get_config('use_manual_uploads')) {
 		$cells = array();
 		$cells[][] = _('File').utils_requiredField();
@@ -145,13 +145,13 @@ if ($dgf->getNested() == NULL) {
 		} else {
 			$cells[][] = html_e('p', array('class' => 'warning'), sprintf(_('You need first to upload file in %s'),$incoming), false);
 		}
-		echo $HTML->multiTableRow(array('id' => 'pathrow', 'style' => 'display:none'), $cells);
+		echo $HTML->multiTableRow(array('id' => 'pathrow', 'class' => 'hide'), $cells);
 	}
 	$cells = array();
 	$cells[][] = _('File Name').utils_requiredField();
 	$cells[][] = html_e('input', array('type' => 'text', 'name' => 'name', 'size' => '30'));
-	echo $HTML->multiTableRow(array('id' => 'editnamerow', 'style' => 'display:none'), $cells);
-	echo html_ao('tr', array('id' => 'editrow', 'style' => 'display:none'));
+	echo $HTML->multiTableRow(array('id' => 'editnamerow', 'class' => 'hide'), $cells);
+	echo html_ao('tr', array('id' => 'editrow', 'class' => 'hide'));
 	echo html_ao('td', array('colspan' => '2'));
 	$GLOBALS['editor_was_set_up'] = false;
 	$params = array() ;

@@ -197,20 +197,20 @@ if ($DocGroupName) {
 	echo html_ac(html_ap() - 1);
 
 	if (forge_check_perm('docman', $ndg->Group->getID(), 'approve')) {
-		echo html_ao('div', array('class' => 'docman_div_include', 'id' => 'editdocgroup', 'style' => 'display: none'));
+		echo html_ao('div', array('class' => 'docman_div_include hide', 'id' => 'editdocgroup'));
 		echo html_e('h4', array('class' => 'docman_h4'), _('Edit this folder'), false);
 		include ($gfcommon.'docman/views/editdocgroup.php');
 		echo html_ac(html_ap() - 1);
 	}
 	if (forge_check_perm('docman', $ndg->Group->getID(), 'submit')) {
-		echo html_ao('div', array('class' => 'docman_div_include', 'id' => 'additem', 'style' => 'display: none'));
+		echo html_ao('div', array('class' => 'docman_div_include hide', 'id' => 'additem'));
 		include ($gfcommon.'docman/views/additem.php');
 		echo html_ac(html_ap() - 1);
 	}
 }
 
 if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
-	$tabletop = array('<input id="checkallactive" type="checkbox" title="'._('Select / Deselect all documents for massaction').'" class="tabtitle-w" onchange="controllerListFile.checkAll(\'checkeddocidactive\', \'active\')" />', '', _('File Name'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'), _('View'));
+	$tabletop = array(html_e('input', array('id' => 'checkallactive', 'type' => 'checkbox', 'title' => _('Select / Deselect all documents for massaction'), 'class' => 'tabtitle-w', 'onchange' => 'controllerListFile.checkAll("checkeddocidactive", "active")')), '', _('File Name'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'), _('View'));
 	$classth = array('unsortable', 'unsortable', '', '', '', '', '', '', '', '');
 	if (forge_check_perm('docman', $ndg->Group->getID(), 'approve')) {
 		$tabletop[] = _('Actions');
@@ -241,28 +241,20 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		}
 		$nextcell = '';
 		if (($d->getUpdated() && $time_new > (time() - $d->getUpdated())) || $time_new > (time() - $d->getCreated())) {
-			$html_image_attr = array();
-			$html_image_attr['alt'] = _('new');
-			$html_image_attr['class'] = 'tabtitle-ne';
-			$html_image_attr['title'] = _('Created or updated since less than 7 days');
-			$nextcell = html_image('docman/new.png', '14', '14', $html_image_attr);
+			$nextcell = html_image('docman/new.png', '14', '14', array('alt' => _('new'), 'class' => 'tabtitle-ne', 'title' => _('Created or updated since less than 7 days'))).'&nbsp;';
 		}
-		$cells[] = array($nextcell.'&nbsp;'.$d->getFileName(), 'style' => 'word-wrap: break-word; max-width: 250px;');
+		$cells[] = array($nextcell.$d->getFileName(), 'style' => 'word-wrap: break-word; max-width: 250px;');
 		$cells[] = array($d->getName(), 'style' => 'word-wrap: break-word; max-width: 250px;');
 		$cells[] = array($d->getDescription(), 'style' => 'word-wrap: break-word; max-width: 250px;');
 		$cells[][] =  make_user_link($d->getCreatorUserName(), $d->getCreatorRealName());
-		if ( $d->getUpdated() ) {
+		if ($d->getUpdated()) {
 			$cells[][] = date(_('Y-m-d H:i'), $d->getUpdated());
 		} else {
 			$cells[][] = date(_('Y-m-d H:i'), $d->getCreated());
 		}
 		$nextcell = '';
 		if ($d->getReserved()) {
-			$html_image_attr = array();
-			$html_image_attr['alt'] = _('Reserved Document');
-			$html_image_attr['class'] = 'tabtitle';
-			$html_image_attr['title'] = _('Reserved Document');
-			$nextcell = html_image('docman/document-reserved.png', '22', '22', $html_image_attr);
+			$nextcell = html_image('docman/document-reserved.png', '22', '22', array('alt' => _('Reserved Document'), 'class' => 'tabtitle', 'title' => _('Reserved Document')));
 			$reserved_by = $d->getReservedBy();
 			if ($reserved_by) {
 				$user = user_get_object($reserved_by);
@@ -334,7 +326,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 	}
 	echo $HTML->listTableBottom();
 	echo html_ao('p');
-	echo html_ao('span', array('id' => 'massactionactive', 'style' => 'display: none'));
+	echo html_ao('span', array('id' => 'massactionactive', 'class' => 'hide'));
 	echo html_e('span', array('class' => 'tabtitle', 'id' => 'docman-massactionmessage', 'title' => _('Actions availables for selected documents, you need to check at least one document to get actions')), _('Mass actions for selected documents:'), false);
 	if (forge_check_perm('docman', $ndg->Group->getID(), 'approve')) {
 		echo util_make_link('#', html_image('docman/trash-empty.png', 22, 22, array('alt' => _('Move to trash'))), array('onclick' => 'window.location.href=\''.util_make_uri($redirecturl.'&action=trashfile&fileid=\'+controllerListFile.buildUrlByCheckbox("active")'), 'class' => 'tabtitle-ne', 'title' => _('Move to trash')), true);
@@ -345,7 +337,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 			echo util_make_link('#', html_image('docman/monitor-removedocument.png', 22, 22, array('alt' => _('Stop Monitoring'))), array('class' => 'tabtitle-ne', 'onclick' => 'window.location.href=\''.util_make_uri($redirecturl.'&action=monitorfile&option=remove&fileid=\'+controllerListFile.buildUrlByCheckbox("active")'), 'title' => _('Stop Monitoring')), true);
 		}
 	}
-	echo util_make_link('#', html_image('docman/download-directory-zip.png', 22, 22, array('alt' => _('Download as Zip'))) , array('class' => 'tabtitle', 'onclick' => 'window.location.href=\''.util_make_uri('/docman/view.php/'.$group_id.'/zip/selected/'.$dirid.'/\'+controllerListFile.buildUrlByCheckbox("active")'), 'title' => _('Download as a ZIP')), true);
+	echo util_make_link('#', html_image('docman/download-directory-zip.png', 22, 22, array('alt' => _('Download as a ZIP'))) , array('class' => 'tabtitle', 'onclick' => 'window.location.href=\''.util_make_uri('/docman/view.php/'.$group_id.'/zip/selected/'.$dirid.'/\'+controllerListFile.buildUrlByCheckbox("active")'), 'title' => _('Download as a ZIP')), true);
 	echo html_ac(html_ap() - 3);
 } else {
 	if ($dirid) {

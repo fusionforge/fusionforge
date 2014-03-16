@@ -3,7 +3,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2012-2013, Franck Villaume - TrivialDev
+ * Copyright 2012-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -31,7 +31,6 @@ global $HTML; // Layout object
 global $nested_pending_docs;
 global $nested_groups;
 global $redirecturl; // built url from listfile.php (handle the hierarchy)
-global $actionlistfileurl; // built action url from listfile.php (handle the hierarchy)
 
 if (!forge_check_perm('docman', $g->getID(), 'approve')) {
 	$return_msg= _('Document Manager Access Denied');
@@ -39,11 +38,11 @@ if (!forge_check_perm('docman', $g->getID(), 'approve')) {
 }
 
 if (!isset($nested_pending_docs)) {
-	echo '<p class="information">'._('No pending documents.').'</p>';
+	echo html_e('p', array('class' => 'information'), _('No pending documents.'), false);
 } else {
-
+	echo html_ao('script', array('type' => 'text/javascript'));
 ?>
-<script type="text/javascript">//<![CDATA[
+//<![CDATA[
 var controllerListPending;
 
 jQuery(document).ready(function() {
@@ -55,90 +54,69 @@ jQuery(document).ready(function() {
 		divEditTitle:		'<?php echo _("Edit document dialog box") ?>'
 	});
 });
-//]]></script>
+//]]>
 <?php
+	echo html_ac(html_ap() - 1);
 	if (isset($nested_pending_docs[$dirid]) && is_array($nested_pending_docs[$dirid])) {
-		echo '<div class="docmanDiv">';
-		echo '<h4>'._('Pending files').'</h4>';
-		$tabletop = array('<input id="checkallpending" type="checkbox" onchange="controllerListPending.checkAll(\'checkeddocidpending\', \'pending\')" />', '', _('File Name'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'), _('Actions'));
+		echo html_ao('div', array('class' => 'docmanDiv'));
+		echo html_e('h4', array('class' => 'docman_h4'), _('Pending files'), false);
+		$tabletop = array(html_e('input', array('id' => 'checkallpending', 'type' => 'checkbox', 'onchange' => 'controllerListPending.checkAll("checkeddocidpending", "pending")')), '', _('File Name'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'), _('Actions'));
 		$classth = array('unsortable', 'unsortable', '', '', '', '', '', '', '', 'unsortable');
 		echo $HTML->listTableTop($tabletop, array(), 'sortable_docman_listfile', 'sortable', $classth);
 		$time_new = 604800;
 		foreach ($nested_pending_docs[$dirid] as $d) {
-			echo '<tr>';
-			echo '<td>';
-			echo '<input type="checkbox" value="'.$d->getID().'" class="checkeddocidpending" onchange="controllerListPending.checkgeneral(\'pending\')" />';
-			echo '</td>';
+			$cells = array();
+			$cells[][] = html_e('input', array('type' => 'checkbox', 'value' => $d->getID(), 'class' => 'checkeddocidpending', 'onchange' => 'controllerListPending.checkgeneral("pending")'));
 			switch ($d->getFileType()) {
 				case "URL": {
-					$docurl = $d->getFileName();
-					$docurltitle = _('Visit this link');
+					$cells[][] = util_make_link($d->getFileName(), html_image($d->getFileTypeImage(), '22', '22', array('alt'=>$d->getFileType())), array('class' => 'tabtitle-nw', 'title' => _('Visit this link')), true);
 					break;
 				}
 				default: {
-					$docurl = util_make_uri('/docman/view.php/'.$g->getID().'/'.$d->getID().'/'.urlencode($d->getFileName()));
-					$docurltitle = _('View this document');
+					$cells[][] = util_make_link('/docman/view.php/'.$g->getID().'/'.$d->getID().'/'.urlencode($d->getFileName()), html_image($d->getFileTypeImage(), '22', '22', array('alt'=>$d->getFileType())), array('class' => 'tabtitle-nw', 'title' => _('View this document')));
 				}
 			}
-			echo '<td>';
-			echo util_make_link($docurl, html_image($d->getFileTypeImage(), '22', '22', array('alt'=>$d->getFileType())), array('class' => 'tabtitle-nw', 'title' => $docurltitle));
-			echo '</td>';
-			echo '<td>';
+			$nextcell = '';
 			if (($d->getUpdated() && $time_new > (time() - $d->getUpdated())) || $time_new > (time() - $d->getCreated())) {
-				$html_image_attr = array();
-				$html_image_attr['alt'] = _('new');
-				$html_image_attr['class'] = 'docman-newdocument';
-				$html_image_attr['title'] = _('Created or updated since less than 7 days');
-				echo html_image('docman/new.png', '14', '14', $html_image_attr);
+				$nextcell.= html_image('docman/new.png', '14', '14', array('alt' => _('new'), 'class' => 'docman-newdocument', 'title' => _('Created or updated since less than 7 days'))).'&nbsp;';
 			}
-			echo '&nbsp;'.$d->getFileName();
-			echo '</td>';
-			echo '<td>'.$d->getName().'</td>';
-			echo '<td>'.$d->getDescription().'</td>';
-			echo '<td>'.make_user_link($d->getCreatorUserName(), $d->getCreatorRealName()).'</td>';
-			echo '<td>';
+			$cells[] = array($nextcell.$d->getFileName(), 'style' => 'word-wrap: break-word; max-width: 250px;');
+			$cells[] = array($d->getName(), 'style' => 'word-wrap: break-word; max-width: 250px;');
+			$cells[] = array($d->getDescription(), 'style' => 'word-wrap: break-word; max-width: 250px;');
+			$cells[][] = make_user_link($d->getCreatorUserName(), $d->getCreatorRealName());
 			if ( $d->getUpdated() ) {
-				echo date(_('Y-m-d H:i'), $d->getUpdated());
+				$cells[][] = date(_('Y-m-d H:i'), $d->getUpdated());
 			} else {
-				echo date(_('Y-m-d H:i'), $d->getCreated());
+				$cells[][] = date(_('Y-m-d H:i'), $d->getCreated());
 			}
-			echo '</td>';
-			echo '<td>';
-			echo $d->getStateName().'</td>';
-			echo '<td>';
+			$cells[][] =$d->getStateName();
 			switch ($d->getFileType()) {
 				case "URL": {
-					echo "--";
+					$cells[][] = "--";
 					break;
 				}
 				default: {
-					echo human_readable_bytes($d->getFileSize());
+					$cells[][] = human_readable_bytes($d->getFileSize());
 					break;
 				}
 			}
-			echo '</td>';
-
-			echo '<td>';
-			$editfileaction = '?action=editfile&amp;fromview=listfile&amp;dirid='.$d->getDocGroupID();
+			$nextcell = '';
+			$editfileaction = '/docman/?action=editfile&fromview=listfile&dirid='.$d->getDocGroupID();
 			if (isset($GLOBALS['childgroup_id']) && $GLOBALS['childgroup_id']) {
-				$editfileaction .= '&amp;childgroup_id='.$GLOBALS['childgroup_id'];
+				$editfileaction .= '&childgroup_id='.$GLOBALS['childgroup_id'];
 			}
-			$editfileaction .= '&amp;group_id='.$GLOBALS['group_id'];
-			echo '<a class="tabtitle-ne" href="#" onclick="javascript:controllerListPending.toggleEditFileView({action:\''.$editfileaction.'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json').', docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').', title:\''.htmlspecialchars($d->getName()).'\', filename:\''.$d->getFilename().'\', description:\''.htmlspecialchars($d->getDescription()).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri("docman").'\'})" title="'. _('Edit this document') .'" >'.html_image('docman/edit-file.png', 22, 22, array('alt'=>_('Edit this document'))). '</a>';
-			echo '<a class="tabtitle" href="#" onclick="window.location.href=\''.$actionlistfileurl.'&action=validatefile&fileid='.$d->getID().'\'" title="'. _('Activate in this folder') . '" >' . html_image('docman/validate.png', 22, 22, array('alt'=>'Activate in this folder')). '</a>';
-			echo '</td>';
-			echo '</tr>';
+			$editfileaction .= '&group_id='.$GLOBALS['group_id'];
+			$nextcell .= util_make_link('#', html_image('docman/edit-file.png', 22, 22, array('alt' => _('Edit this document'))), array('class' => 'tabtitle-ne', 'onclick' => 'javascript:controllerListPending.toggleEditFileView({action:\''.util_make_uri($editfileaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json').', docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').', title:\''.htmlspecialchars($d->getName()).'\', filename:\''.$d->getFilename().'\', description:\''.htmlspecialchars($d->getDescription()).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri("docman").'\'})', 'title' => _('Edit this document')), true);
+			$nextcell .= util_make_link('#', html_image('docman/validate.png', 22, 22, array('alt' => _('Activate in this folder'))), array('class' => 'tabtitle', 'onclick' => 'window.location.href=\''.util_make_uri($redirecturl.'&action=validatefile&fileid='.$d->getID()), 'title' => _('Activate in this folder')), true);
+			$cells[][] = $nextcell;
+			echo $HTML->multiTableRow(array(), $cells);
 		}
 		echo $HTML->listTableBottom();
-		echo '<p>';
-		echo '<span id="massactionpending" class="docman-massaction-hide" style="display:none;" >';
-		echo '<span id="docman-massactionpendingmessage" class="tabtitle-nw" title="'. _('Actions availables for checked files, you need to check at least one file to get actions') . '">';
-		echo _('Mass actions for selected pending files:');
-		echo '</span>';
-		echo '<a class="tabtitle" href="#" onclick="window.location.href=\'/docman/view.php/'.$g->getID().'/zip/selected/'.$dirid.'/\'+controllerListPending.buildUrlByCheckbox(\'pending\')" title="'. _('Download as a ZIP') . '" >' . html_image('docman/download-directory-zip.png', 22, 22, array('alt'=>_('Download as a ZIP'))). '</a>';
-		echo '<a class="tabtitle" href="#" onclick="window.location.href=\''.$actionlistfileurl.'&action=validatefile&fileid=\'+controllerListPending.buildUrlByCheckbox(\'pending\')" title="'. _('Activate in this folder') . '" >' . html_image('docman/validate.png', 22, 22, array('alt'=>'Activate in this folder')). '</a>';
-		echo '</span>';
-		echo '</p>';
-		echo '</div>';
+		echo html_ao('p');
+		echo html_ao('span', array('id' => 'massactionpending', 'class' => 'hide'));
+		echo html_e('span', array('class' => 'tabtitle-nw', 'id' => 'docman-massactionpendingmessage', 'title' => _('Actions availables for selected documents, you need to check at least one document to get actions')), _('Mass actions for selected pending documents:'), false);
+		echo util_make_link('#', html_image('docman/download-directory-zip.png', 22, 22, array('alt'=>_('Download as a ZIP'))), array('class' => 'tabtitle', 'onclick' => 'window.location.href=\''.util_make_uri('/docman/view.php/'.$g->getID().'/zip/selected/'.$dirid.'/\'+controllerListPending.buildUrlByCheckbox("pending")'), 'title' => _('Download as a ZIP')), true);
+		echo util_make_link('#', html_image('docman/validate.png', 22, 22, array('alt' => _('Activate in this folder'))), array('class' => 'tabtitle', 'onclick' => 'window.location.href=\''.util_make_uri($redirecturl.'&action=validatefile&fileid=\'+controllerListPending.buildUrlByCheckbox("pending")'), 'title' => _('Activate in this folder')), true);
+		echo html_ac(html_ap() - 3);
 	}
 }
