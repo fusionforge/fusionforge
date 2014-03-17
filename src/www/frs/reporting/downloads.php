@@ -201,9 +201,13 @@ if ($start == $end) {
 		echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>'.
 			'<td>'. $data[$i][0] .'</td>'.
 			'<td>'. $data[$i][1] .'</td>'.
-			'<td>'. basename($data[$i][2]) .'</td>'.
-			'<td><a href="/users/'.urlencode($data[$i][5]).'/">'. $data[$i][3] .'</a></td>'.
-			'<td class="align-center">'. $date .'</td></tr>';
+			'<td>'. basename($data[$i][2]) .'</td>';
+		if ($data[$i][6] != 100) {
+			echo '<td><a href="/users/'.urlencode($data[$i][5]).'/">'. $data[$i][3] .'</a></td>';
+		} else {
+			echo '<td>'.$data[$i][3].'</td>';
+		}
+		echo '<td class="align-center">'. $date .'</td></tr>';
 	}
 	echo $HTML->listTableBottom();
 }
