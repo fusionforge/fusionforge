@@ -70,19 +70,21 @@ class ReportPerGroupDocmanDownloads extends Report {
 			return;
 		}
 
-		$res = db_query_params ('SELECT docdata_vw.filename, docdata_vw.realname,
+		$res = db_query_params ('SELECT docdata_vw.filename, docman_dlstats_doc.user_id,
 					docman_dlstats_doc.month || lpad(docman_dlstats_doc.day::text,2,0::text),
-					docdata_vw.user_name,
 					docdata_vw.doc_group
 					FROM docman_dlstats_doc, docdata_vw
 					WHERE docdata_vw.group_id = $1
-					AND docman_dlstats_doc.month >= $2
-					AND docman_dlstats_doc.month <= $3
+					AND docdata_vw.stateid = $2
+					AND docman_dlstats_doc.month >= $3
+					AND docman_dlstats_doc.month <= $4
+					AND docdata_vw.docid = docman_dlstats_doc.docid
 					ORDER BY docman_dlstats_doc.month DESC,
 					docman_dlstats_doc.day DESC',
 					array ($group_id,
-					       $start_m,
-					       $end_m));
+						1,
+						$start_m,
+						$end_m));
 
 		$this->start_date = $start;
 		$this->end_date = $end;

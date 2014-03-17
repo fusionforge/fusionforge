@@ -78,34 +78,28 @@ html_use_jqueryjqplotpluginhighlighter();
 echo $HTML->getJavascripts();
 echo $HTML->getStylesheets();
 
+
 $report = new ReportPerGroupDocmanDownloads($group_id, $start, $end);
+
 if ($report->isError()) {
-	echo '<p class="error_msg">'.$report->getErrorMessage().'</p>';
+	echo html_e('p', array('class' => 'error_msg'), $report->getErrorMessage(), false);
 } else {
-?>
 
-<form action="<?php echo util_make_url('/docman/') ?>"
-	  method="get"
-	  class="align-center">
-	<input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
-	<input type="hidden" name="view" value="reporting" />
-	<strong><?php echo _('Start Date')._(':'); ?></strong>
-	<?php echo report_months_box($report, 'start', $start); ?>
-	<strong><?php echo _('End Date')._(':'); ?></strong>
-	<?php echo report_months_box($report, 'end', $end); ?>
-	<input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" />
-</form>
-
-<?php
+	echo html_ao('form', array('action' => util_make_uri('/docman/?group_id='.$group_id.'&view=reporting'), 'method' => 'post', 'class' => 'align-center'));
+	echo html_ao('div', array('id' => 'div_form_reporting'));
+	echo html_e('strong', array(), _('Start Date')._(':'), false);
+	echo report_months_box($report, 'start', $start);
+	echo html_e('strong', array(), _('End Date')._(':'), false);
+	echo html_e('input', array('type' => 'submit', 'value' => _('Refresh')));
+	echo html_ac(html_ap() -2);
 
 $data = $report->getData();
 
 if (count($data) == 0) {
-	echo '<p class="information">';
-	echo _('There have been no viewed documents for this project yet.');
-	echo '</p>';
+	echo html_e('p', array('class' => 'information'), _('There have been no viewed documents for this project yet.'), false);
 } else {
-	echo '<script type="text/javascript">//<![CDATA['."\n";
+	echo '<script type="text/javascript">';
+	echo '//<![CDATA['."\n";
 	echo 'var ticks = new Array();';
 	echo 'var values = new Array();';
 	$arr =& $report->getMonthStartArr();
@@ -164,20 +158,21 @@ if (count($data) == 0) {
 	echo 'jQuery(window).resize(function() {
 			plot1.replot( { resetAxes: true } );
 		});'."\n";
-	echo '//]]></script>';
+	echo '//]]>';
+	echo '</script>';
 	echo '<div id="chart1"></div>';
 	$tabletop = array(_('Folder'), _('Document'), _('User'), _('Date'));
 	$classth = array('', '', '', '');
 	echo $HTML->listTableTop($tabletop, false, 'sortable_docman_listfile', 'sortable', $classth);
-	for ($i=0; $i<count($data); $i++) {
-		$date = preg_replace('/^(....)(..)(..)$/', '\1-\2-\3', $data[$i][2]);
-		$ndg = new DocumentGroup($g, $data[$i][4]);
-		$path = $ndg->getPath(true);
-		echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>'.
-			'<td>'.$path.'</td>'.
-			'<td>'. $data[$i][0] .'</td>'.
-			'<td><a class="tabtitle" title="'._('View user profile').'" href="/users/'.urlencode($data[$i][3]).'/">'. $data[$i][1] .'</a></td>'.
-			'<td class="align-center">'. $date .'</td></tr>';
+	for ($i = 0; $i < count($data); $i++) {
+		$ndg = new DocumentGroup($g, $data[$i][3]);
+		$cells = array();
+		$cells[][] = $ndg->getPath(true);
+		$cells[][] = $data[$i][0];
+		$userObject = user_get_object($data[$i][1]);
+		$cells[][] = util_display_user($userObject->getUnixName(), $data[$i][1], $userObject->getRealName());
+		$cells[] = array(preg_replace('/^(....)(..)(..)$/', '\1-\2-\3', $data[$i][2]), 'class' => 'align-center');
+		echo $HTML->multiTableRow(array(), $cells);
 	}
 	echo $HTML->listTableBottom();
 }
