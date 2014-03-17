@@ -74,3 +74,5 @@ src/www/scm/viewvc/viewvc.org/*.zip
 /*.deb
 /*.upload
 /.pc
+# Emacs backup files
+*~
