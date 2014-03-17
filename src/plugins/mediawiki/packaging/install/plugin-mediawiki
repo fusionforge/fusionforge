@@ -6,3 +6,4 @@ plugins/mediawiki/db/*		   @PLUGIN_PATH@/mediawiki/lib/
 plugins/mediawiki/www/*            @PLUGIN_PATH@/mediawiki/www/
 plugins/mediawiki/etc/httpd.d/*    @SOURCE_PATH@/etc/httpd.d/
 plugins/mediawiki/etc/*.ini 	   etc/@PACKAGE@/config.ini.d/
+plugins/mediawiki/etc/plugins/mediawiki/* @CONFIG_PATH@/plugins/mediawiki/
