@@ -1,4 +1,3 @@
-etc/gforge/httpd.d
 etc/gforge/plugins/foafprofiles
 @PLUGIN_PATH@/foafprofiles/cgi-bin
 @PLUGIN_PATH@/foafprofiles/common
