@@ -34,9 +34,6 @@ deb-specific/sf-add-skill               @BINARY_PATH@/
 deb-specific/register-theme             @BINARY_PATH@/
 deb-specific/unregister-theme           @BINARY_PATH@/
 #
-deb-specific/register-plugin            @BINARY_PATH@/
-deb-specific/unregister-plugin          @BINARY_PATH@/
-#
 deb-specific/view_bug.sql               @SOURCE_PATH@/db/
 deb-specific/view_patch.sql             @SOURCE_PATH@/db/
 #
