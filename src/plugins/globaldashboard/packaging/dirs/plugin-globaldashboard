@@ -1,4 +1,3 @@
-etc/gforge/httpd.d
 etc/gforge/plugins/globaldashboard
 @PLUGIN_PATH@/globaldashboard/cgi-bin
 @PLUGIN_PATH@/globaldashboard/common
