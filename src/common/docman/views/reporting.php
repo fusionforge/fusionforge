@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (C) 2009-2012 Alain Peyrat, Alcatel-Lucent
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -171,13 +171,18 @@ if (count($data) == 0) {
 	echo $HTML->listTableTop($tabletop, false, 'sortable_docman_listfile', 'sortable', $classth);
 	for ($i=0; $i<count($data); $i++) {
 		$date = preg_replace('/^(....)(..)(..)$/', '\1-\2-\3', $data[$i][2]);
-		$ndg = new DocumentGroup($g, $data[$i][4]);
+		$ndg = new DocumentGroup($g, $data[$i][3]);
 		$path = $ndg->getPath(true);
 		echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>'.
 			'<td>'.$path.'</td>'.
-			'<td>'. $data[$i][0] .'</td>'.
-			'<td><a class="tabtitle" title="'._('View user profile').'" href="/users/'.urlencode($data[$i][3]).'/">'. $data[$i][1] .'</a></td>'.
-			'<td class="align-center">'. $date .'</td></tr>';
+			'<td>'. $data[$i][0] .'</td>';
+		if ( $data[$i][1] != 100) {
+			$userObject = user_get_object($data[$i][1]);
+			echo '<td>'.util_display_user($userObject->getUnixname(), $data[$i][1], $userObject->getRealname()).'</td>';
+		} else {
+			echo '<td>'._('Anonymous user').'</td>';
+		}
+		echo '<td class="align-center">'. $date .'</td></tr>';
 	}
 	echo $HTML->listTableBottom();
 }

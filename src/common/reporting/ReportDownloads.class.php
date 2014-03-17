@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * FusionForge reporting system
  *
  * Copyright (C) 2009 Alain Peyrat, Alcatel-Lucent
@@ -21,7 +21,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-/*
+/**
  * Standard Alcatel-Lucent disclaimer for contributing to open source
  *
  * "The class ("Contribution") has not been tested and/or
@@ -79,21 +79,21 @@ class ReportDownloads extends Report {
 		}
 
 		$res = db_query_params ('SELECT frs_package.name, frs_release.name,
-                       frs_file.filename, users.realname,
-                       frs_dlstats_file.month || lpad(frs_dlstats_file.day::text,2,0::text),
-                       users.user_name
-                FROM frs_dlstats_file, frs_file, frs_release,
-                     frs_package, users
-                WHERE frs_dlstats_file.user_id = users.user_id
-                  AND frs_dlstats_file.file_id = frs_file.file_id
-                  AND frs_file.release_id = frs_release.release_id
-                  AND frs_release.package_id = frs_package.package_id
-                  AND frs_package.group_id = $1
-                  AND frs_release.package_id = $2
-                  AND frs_dlstats_file.month >= $3
-                  AND frs_dlstats_file.month <= $4
-                ORDER BY frs_dlstats_file.month DESC,
-                       frs_dlstats_file.day DESC',
+					frs_file.filename, users.realname,
+					frs_dlstats_file.month || lpad(frs_dlstats_file.day::text,2,0::text),
+					users.user_name, users.user_id
+					FROM frs_dlstats_file, frs_file, frs_release,
+					frs_package, users
+					WHERE frs_dlstats_file.user_id = users.user_id
+					AND frs_dlstats_file.file_id = frs_file.file_id
+					AND frs_file.release_id = frs_release.release_id
+					AND frs_release.package_id = frs_package.package_id
+					AND frs_package.group_id = $1
+					AND frs_release.package_id = $2
+					AND frs_dlstats_file.month >= $3
+					AND frs_dlstats_file.month <= $4
+					ORDER BY frs_dlstats_file.month DESC,
+					frs_dlstats_file.day DESC',
 					array ($group_id,
 					       $package_id,
 					       $start_m,
