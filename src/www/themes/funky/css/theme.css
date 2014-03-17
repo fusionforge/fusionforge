@@ -1,4 +1,4 @@
-/* 
+/*
  * Stylesheet for Funky Theme.
  *
  * Copyright 2010, Antoine Mercadal - Capgemini
@@ -77,7 +77,7 @@ li {
 }
 
 a {
-	text-decoration:none; 
+	text-decoration:none;
 	font-weight: bold;
 	color: #7D88CC;
 	-webkit-transition-property: background-color, color, height, shadow;
@@ -91,13 +91,13 @@ a {
 }
 
 a:hover {
-	text-decoration: none; 
-	color: #7eaaee; 
+	text-decoration: none;
+	color: #7eaaee;
 	font-weight: bold;
 }
 
 th, td {
-	text-align:left; 
+	text-align:left;
 	border:none;
 	border-collapse: collapse;
 }
@@ -125,12 +125,12 @@ hr {
 	border-top-left-radius: 6px;
 	border-top-right-radius: 6px;
 	border-collapse: collapse;
-	
+
 }
 
 #header-col1 {
   padding:10px;
-} 
+}
 
 #header-col1 img{
   padding:0;
@@ -220,8 +220,8 @@ hr {
 #searchBox a{
   font-size: 10px;
   margin-right: 10px;
-  text-decoration:none; 
-  font-weight: bold; 
+  text-decoration:none;
+  font-weight: bold;
   color: #7D88CC;
   -webkit-transition-property: background-color, color, height, shadow;
   -webkit-transition-duration: 0.3s;
@@ -234,8 +234,8 @@ hr {
 }
 
 #searchBox a:hover {
-	text-decoration: none; 
-	color: #7eaaee; 
+	text-decoration: none;
+	color: #7eaaee;
 	font-weight: bold;
 }
 
@@ -292,7 +292,7 @@ hr {
 
 .tabGenerator td {
 	padding:0;
-	margin: 0; 
+	margin: 0;
 	vertical-align: middle;
 }
 
@@ -370,13 +370,13 @@ hr {
 
 .innertabs .tabGenerator td {
 	padding:0;
-	margin: 0; 
+	margin: 0;
 	vertical-align: middle;
 }
 
 .innertabs .tabGenerator .tg-middle {
   background-color: #F7F7F7;
-  vertical-align: middle; 
+  vertical-align: middle;
 }
 
 .innertabs .tabGenerator .tg-middle span {
@@ -560,12 +560,12 @@ a.topTabSelected:hover {
 	padding: 4px;
 }
 
-.bgcolor-grey
+.bgcolor-grey,
 .even {
 	background-color: #CDDCF3;
 }
 
-.bgcolor-white
+.bgcolor-white,
 .odd {
 	background-color: #FFFFFF;
 }
