@@ -138,30 +138,32 @@ if ($searchString) {
 		}
 		db_free_result($result);
 		$count = 0;
-		echo html_ao('table',array('class' => 'fullwidth'));
+		$tabletop = array(_('Order'), _('Document'), _('Description'), _('Status'), _('Path'));
+		$classth = array('', '', '', '', '');
+		echo $HTML->listTableTop($tabletop, false, 'sortable_docman_searchfile', 'sortable', $classth);
 		foreach ($resarr as $item) {
-			echo html_ao('tr', array('class' => $HTML->boxGetAltRowStyle($count, true)));
-			echo html_ao('td');
+			$cells = array();
 			$count++;
+			$cells[][] = html_e('strong', array(), $count, false);
 			if ($item['filetype'] == 'URL') {
-				$fileurl = $item["filename"];
+				$cells[][] = util_make_link($item["filename"], $item["title"], array(), true);
 			} else {
-				$fileurl = '/docman/view.php/'.$item["group_id"].'/'.$item["docid"].'/'.urlencode($item["filename"]);
+				$cells[][] = util_make_link('/docman/view.php/'.$item["group_id"].'/'.$item["docid"].'/'.urlencode($item["filename"]), $item["title"]);
 			}
-			echo html_e('p', array(), '<b>'.$count.'.&nbsp;'.$item["title"].'</b>&nbsp;('.util_make_link($fileurl, $item["filename"]).')', false);
-			echo html_e('p', array(), $item["description"], false);
+			$cells[][] = $item["description"];
 			$localProject = group_get_object($item['group_id']);
 			$docGroupObject = new DocumentGroup($localProject, $item['doc_group']);
-			echo html_e('p', array(), _('Status')._(': ').'<b>'.$item["statename"].'</b>', false);
-			echo '<p>'._('Path')._(': ');
+			$cells[][] = $item["statename"];
+			$nextcell = '';
 			if ($localProject->getUnixName() != $g->getUnixName()) {
 				$browselink = '/docman/?group_id='.$localProject->getID();
-				echo util_make_link($browselink, $localProject->getPublicName(), array('title' => _('Browse document manager for this project.'), 'class' => 'tabtitle-nw')).'::';
+				$nextcell .= util_make_link($browselink, $localProject->getPublicName(), array('title' => _('Browse document manager for this project.'), 'class' => 'tabtitle-nw')).'::';
 			}
-			echo '<i>'.$docGroupObject->getPath(true, true).'</i></p>';
-			echo html_ac(html_ap() - 2);
+			$nextcell .= html_e('i', array(), $docGroupObject->getPath(true, true), false);
+			$cells[][] = $nextcell;
+			echo $HTML->multiTableRow(array(), $cells);
 		}
-		echo html_ac(html_ap() - 1);
+		echo $HTML->listTableBottom();
 	}
 } elseif (getStringFromServer('REQUEST_METHOD') === 'POST') {
 	echo html_e('p', array('class' => 'warning_msg'), _('Your search is empty.'));
