@@ -145,6 +145,22 @@ Description: collaborative development tool - database (using PostgreSQL)
  This package installs, configures and maintains the FusionForge
  database.
 
+Package: gforge-db-remote
+Architecture: all
+Provides: gforge-db
+Conflicts: gforge-db
+Description: collaborative development tool - database (remote)
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This dummy package tells FusionForge you installed the database on a
+ separate machine.  It preserves the gforge-db virtual dependency, to
+ configure the database before depending packages in single-server
+ installs.
+
 Package: gforge-mta-exim4
 Architecture: all
 Depends: gforge-common, gforge-db-postgresql | gforge-db, perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, exim4-daemon-heavy, ${misc:Depends}
