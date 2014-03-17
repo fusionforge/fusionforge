@@ -73,11 +73,11 @@ function db_connect() {
 		$gfconn = pg_pconnect(pg_connectstring(forge_get_config('database_name'), forge_get_config('database_user'), forge_get_config('database_password'), forge_get_config('database_host'), forge_get_config('database_port')));
 		if (!$gfconn) {
 			print forge_get_config('forge_name')." Could Not Connect to Database: ".db_error();
-			exit;
+			exit(1);
 		}
 	} else {
 		print("function pg_pconnect doesn't exist: no postgresql interface");
-		exit;
+		exit(1);
 	}
 
 	//

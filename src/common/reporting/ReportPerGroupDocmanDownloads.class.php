@@ -5,6 +5,7 @@
  * Copyright (C) 2009 Alain Peyrat, Alcatel-Lucent
  * Copyright 2009, Roland Mas
  * Copyright 2012, Franck Villaume
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -75,9 +76,8 @@ class ReportPerGroupDocmanDownloads extends Report {
 					docdata_vw.doc_group
 					FROM docman_dlstats_doc, docdata_vw
 					WHERE docdata_vw.group_id = $1
-					AND docdata_vw.stateid = $2
-					AND docman_dlstats_doc.month >= $3
-					AND docman_dlstats_doc.month <= $4
+					AND docman_dlstats_doc.month >= $2
+					AND docman_dlstats_doc.month <= $3
 					AND docdata_vw.docid = docman_dlstats_doc.docid
 					ORDER BY docman_dlstats_doc.month DESC,
 					docman_dlstats_doc.day DESC',

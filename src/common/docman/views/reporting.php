@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (C) 2009-2012 Alain Peyrat, Alcatel-Lucent
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -169,8 +169,12 @@ if (count($data) == 0) {
 		$cells = array();
 		$cells[][] = $ndg->getPath(true);
 		$cells[][] = $data[$i][0];
-		$userObject = user_get_object($data[$i][1]);
-		$cells[][] = util_display_user($userObject->getUnixName(), $data[$i][1], $userObject->getRealName());
+		if ( $data[$i][1] != 100) {
+			$userObject = user_get_object($data[$i][1]);
+			$cells[][] = util_display_user($userObject->getUnixName(), $data[$i][1], $userObject->getRealName());
+		} else {
+			$cells[][] = _('Anonymous user');
+		}
 		$cells[] = array(preg_replace('/^(....)(..)(..)$/', '\1-\2-\3', $data[$i][2]), 'class' => 'align-center');
 		echo $HTML->multiTableRow(array(), $cells);
 	}
