@@ -271,8 +271,8 @@ class Layout extends Error {
 		$this->headerFavIcon();
 		$this->headerRSS();
 		$this->headerSearch();
-		$this->headerCSS();
 		$this->headerJS();
+		$this->headerCSS();
 		$this->headerForgepluckerMeta();
 		$this->headerLinkedDataAutodiscovery();
 		?>
