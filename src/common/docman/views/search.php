@@ -57,7 +57,7 @@ echo html_ao('div', array('id' => 'docman_search_query_words'));
 echo html_e('span', array('id' => 'docman_search_query_label'), _('Query').utils_requiredField()._(': '));
 echo html_e('input', array('type' => 'text', 'name' => 'textsearch', 'id' => 'textsearch', 'size' => 48, 'value' => $searchString, 'required' => 'required', 'placeholder' => _('Searched words')));
 echo html_e('input', array('type' => 'submit', 'value' => _('Search')));
-echo html_ac(html_ap() - 2);
+echo html_ac(html_ap() - 1);
 echo html_ao('div', array('id' => 'docman_search_query_ckeckbox'));
 echo html_e('input', $attrsInputSearchAll)._('With all the words');
 echo html_e('input', $attrsInputSearchOne)._('With at least one of words');
@@ -78,7 +78,7 @@ if (isset($projectIDsArray) && is_array($projectIDsArray)) {
 	echo html_e('input', $attrsInputIncludeSubprojects)._('Include child projects');
 }
 
-echo html_ac(html_ap() - 1);
+echo html_ac(html_ap() - 2);
 echo html_ao('div', array('id' => 'docman_search_query_result'));
 if ($searchString) {
 	$mots = preg_split("/[\s,]+/",$searchString);
@@ -148,7 +148,7 @@ if ($searchString) {
 			if ($item['filetype'] == 'URL') {
 				$cells[][] = util_make_link($item["filename"], $item["title"], array(), true);
 			} else {
-				$cells[][] = util_make_link('/docman/view.php/'.$item["group_id"].'/'.$item["docid"].'/'.urlencode($item["filename"]), $item["title"]);
+				$cells[][] = util_make_link('/docman/view.php/'.$item["group_id"].'/'.$item["docid"].'/'.urlencode($item["filename"]), $item["filename"]).' ('.$item["title"].')';
 			}
 			$cells[][] = $item["description"];
 			$localProject = group_get_object($item['group_id']);
