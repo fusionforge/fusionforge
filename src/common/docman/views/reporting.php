@@ -82,7 +82,7 @@ echo $HTML->getStylesheets();
 $report = new ReportPerGroupDocmanDownloads($group_id, $start, $end);
 
 if ($report->isError()) {
-	echo html_e('p', array('class' => 'error_msg'), $report->getErrorMessage(), false);
+	echo $HTML->error_msg($report->getErrorMessage());
 } else {
 
 	echo html_ao('form', array('action' => util_make_uri('/docman/?group_id='.$group_id.'&view=reporting'), 'method' => 'post', 'class' => 'align-center'));
@@ -96,7 +96,7 @@ if ($report->isError()) {
 $data = $report->getData();
 
 if (count($data) == 0) {
-	echo html_e('p', array('class' => 'information'), _('There have been no viewed documents for this project yet.'), false);
+	echo $HTML->information(_('There have been no viewed documents for this project yet.'));
 } else {
 	echo '<script type="text/javascript">';
 	echo '//<![CDATA['."\n";

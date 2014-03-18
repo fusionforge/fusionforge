@@ -29,6 +29,7 @@
 global $g;
 global $group_id;
 global $gfcommon;
+global $HTML;
 
 if (!forge_check_perm('docman', $group_id, 'read')) {
 	$return_msg= _('Document Manager Access Denied');
@@ -126,10 +127,10 @@ if ($searchString) {
 	$qpa = db_construct_qpa($qpa, ' ORDER BY updatedate, createdate');
 	$result = db_query_qpa($qpa);
 	if (!$result) {
-		echo html_e('p', array('class' => 'error'), _('Database query error'));
+		echo $HTML->error_msg(_('Database query error'));
 		db_free_result($result);
 	} elseif (db_numrows($result) < 1) {
-		echo html_e('p', array('class' => 'warning_msg'), _('Your search did not match any documents.'));
+		echo $HTML->warning_msg(_('Your search did not match any documents.'));
 		db_free_result($result);
 	} else {
 		$resarr = array();
@@ -156,8 +157,7 @@ if ($searchString) {
 			$cells[][] = $item["statename"];
 			$nextcell = '';
 			if ($localProject->getUnixName() != $g->getUnixName()) {
-				$browselink = '/docman/?group_id='.$localProject->getID();
-				$nextcell .= util_make_link($browselink, $localProject->getPublicName(), array('title' => _('Browse document manager for this project.'), 'class' => 'tabtitle-nw')).'::';
+				$nextcell .= util_make_link('/docman/?group_id='.$localProject->getID(), $localProject->getPublicName(), array('title' => _('Browse document manager for this project.'), 'class' => 'tabtitle-nw')).'::';
 			}
 			$nextcell .= html_e('i', array(), $docGroupObject->getPath(true, true), false);
 			$cells[][] = $nextcell;
@@ -166,6 +166,6 @@ if ($searchString) {
 		echo $HTML->listTableBottom();
 	}
 } elseif (getStringFromServer('REQUEST_METHOD') === 'POST') {
-	echo html_e('p', array('class' => 'warning_msg'), _('Your search is empty.'));
+	echo $HTML->warning_msg(_('Your search is empty.'));
 }
 echo html_ac(html_ap() -2);

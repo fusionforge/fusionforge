@@ -69,7 +69,7 @@ class Widget_ProjectLatestDocuments extends Widget {
 		if (!$res_files || $rows_files < 1) {
 			echo db_error();
 			// No documents
-			echo '<div class="warning">'._('This Project Has Not Published Any Documents').'</div>';
+			echo $HTML->warning_msg(_('This project has not published any documents.'));
 		} else {
 			$tabletop = array(_('Date'), _('File Name'), _('Title'), _('Author'), _('Path'));
 			if (session_loggedin() && (user_ismember($group_id) ||

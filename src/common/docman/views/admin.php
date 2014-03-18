@@ -48,7 +48,7 @@ echo html_ac(html_ap() - 1);
 if (extension_loaded('zip')) {
 	echo html_ao('form', array('id' => 'backup', 'name' => 'backup', 'method' => 'post', 'action' => util_make_uri('/docman/view.php/'.$group_id.'/backup')));
 	echo html_ao('ul');
-	echo html_e('li', array(), '<input id="submitbackup" type="button" value="'. _('Extract documents and directories as an archive') .'" onclick="javascript:doIt(\'backup\')" />', false);
+	echo html_e('li', array(), html_e('input', array('id' => 'submitbackup', 'type' => 'button', 'value' => _('Extract documents and directories as an archive'), 'onclick' => 'javascript:doIt("backup")')), false);
 	echo html_ac(html_ap() -2);
 }
 
@@ -60,7 +60,7 @@ if ($g->useCreateOnline()) {
 	$createOnlineStatus='0';
 	$labelCreateOnline = _('Disable Create Online Documents');
 }
-echo '<li><input name="status" type="hidden" value="'.$createOnlineStatus.'"><input id="submitcreateonline" type="button" value="'.$labelCreateOnline.'" onclick="javascript:doIt(\'createonline\')"></li>';
+echo html_e('li', array(), html_e('input', array('name' => 'status', 'type' => 'hidden', 'value' => $createOnlineStatus)).html_e('input', array('id' => 'submitcreateonline', 'type' => 'button', 'value' => $labelCreateOnline, 'onclick' => 'javascript:doIt("createonline")')), false);
 echo html_ac(html_ap() -2);
 
 echo html_ao('form', array('id' => 'searchengine', 'name' => 'searchengine', 'method' => 'post', 'action' => util_make_uri('/docman/?group_id='.$group_id.'&action=updateenginesearch')));
@@ -71,13 +71,13 @@ if ($g->useDocmanSearch()) {
 	$searchEngineStatus='0';
 	$labelSearchEngine = _('Disable Search Engine');
 }
-echo '<li><input name="status" type="hidden" value="'.$searchEngineStatus.'"><input id="submitsearchengine" type="button" value="'.$labelSearchEngine.'" onclick="javascript:doIt(\'searchengine\')"></li>';
+echo html_e('li', array(), html_e('input', array('name' => 'status', 'type' => 'hidden', 'value' => $searchEngineStatus)).html_e('input', array('id' => 'submitsearchengine', 'type' => 'button', 'value' => $labelSearchEngine, 'onclick' =>'javascript:doIt("searchengine")')), false);
 echo html_ac(html_ap() -2);
 
 if ($g->useDocmanSearch()) {
 	echo html_ao('form', array('id' => 'reindexword', 'name' => 'reindexword', 'method' => 'post', 'action' => util_make_uri('/docman/?group_id='.$group_id.'&action=forcereindexenginesearch')));
 	echo html_ao('ul');
-	echo html_e('li', array(), html_e('input', array('name' => 'status', 'type' => 'hidden', 'value' => '1')).'<input id="submitreindexword" type="button" value="'. _('Force reindexation search engine') .'" onclick="javascript:doIt(\'reindexword\')">', false);
+	echo html_e('li', array(), html_e('input', array('name' => 'status', 'type' => 'hidden', 'value' => '1')).html_e('input', array('id' => 'submitreindexword', 'type' => 'button', 'value' => _('Force reindexation search engine'), 'onclick' => 'javascript:doIt("reindexword")')), false);
 	echo html_ac(html_ap() -2);
 }
 
@@ -90,7 +90,7 @@ if (forge_get_config('use_webdav')) {
 		$webdavStatus = '0';
 		$labelWebdavInterface = _('Disable Webdav Interface');
 	}
-	echo html_e('li', array(), html_e('input', array('name' => 'status', 'type' => 'hidden', 'value' => $webdavStatus)).'<input id="submitweddavinterface" type="button" value="'.$labelWebdavInterface.'" onclick="javascript:doIt(\'webdavinterface\')">', false);
+	echo html_e('li', array(), html_e('input', array('name' => 'status', 'type' => 'hidden', 'value' => $webdavStatus)).html_e('input', array('id' => 'submitweddavinterface', 'type' => 'button', 'value' => $labelWebdavInterface, 'onclick' => 'javascript:doIt("webdavinterface")')), false);
 	echo html_ac(html_ap() -2);
 }
 

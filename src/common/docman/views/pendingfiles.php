@@ -38,7 +38,7 @@ if (!forge_check_perm('docman', $g->getID(), 'approve')) {
 }
 
 if (!isset($nested_pending_docs)) {
-	echo html_e('p', array('class' => 'information'), _('No pending documents.'), false);
+	echo $HTML->information(_('No pending documents.'));
 } else {
 	echo html_ao('script', array('type' => 'text/javascript'));
 ?>

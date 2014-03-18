@@ -87,7 +87,7 @@ if ($dgf->getNested() == NULL) {
 		session_redirect('/docman/?group_id='.$group_id.'&view=additem');
 	}
 
-	echo html_e('div', array('class' => 'warning'), _('You MUST first create at least one folder to store your document.'), false);
+	echo $HTML->warning_msg(_('You MUST first create at least one folder to store your document.'));
 } else {
 	/* display the add new documentation form */
 	echo html_ao('p');

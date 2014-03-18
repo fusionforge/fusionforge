@@ -194,7 +194,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 	echo html_ac(html_ap() - 3);
 } else {
 	if ($dirid) {
-		echo html_e('p', array('class' => 'information'), _('No documents.'), false);
+		echo $HTML->information(_('No documents.'));
 	}
 }
 
