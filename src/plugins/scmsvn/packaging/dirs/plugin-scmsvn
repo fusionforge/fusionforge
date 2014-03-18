@@ -1,4 +1,3 @@
-etc/gforge/httpd.d
 etc/gforge/plugins/scmsvn
 @PLUGIN_PATH@/scmsvn/bin
 @PLUGIN_PATH@/scmsvn/cronjobs

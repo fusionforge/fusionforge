@@ -106,9 +106,9 @@ if [ ! -e $GNUPGHOME ]; then
       Expire-Date: 0
       %commit
 EOF
-    gpg --export FusionForge -a > /usr/src/debian-repository/key.asc
-    apt-key add /usr/src/debian-repository/key.asc
 fi
+gpg --export FusionForge -a > /usr/src/debian-repository/key.asc
+apt-key add /usr/src/debian-repository/key.asc
 (
     cd /usr/src/debian-repository/local/
     rm -f Release.gpg

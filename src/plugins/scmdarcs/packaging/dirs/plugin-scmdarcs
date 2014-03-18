@@ -1,4 +1,3 @@
-etc/gforge/httpd.d
 etc/gforge/plugins/scmdarcs
 @PLUGIN_PATH@/scmdarcs/cgi-bin
 @PLUGIN_PATH@/scmdarcs/common
