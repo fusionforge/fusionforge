@@ -4,7 +4,7 @@
  * phpcaptchaPlugin Class
  *
  * Copyright 2010, Luis Daniel Ibáñez
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -30,7 +30,7 @@ class phpcaptchaPlugin extends Plugin {
 	function __construct() {
 		$this->Plugin();
 		$this->name = 'phpcaptcha';
-		$this->text = 'Enable use of phpcaptcha (more information www.phpcaptcha.org)';
+		$this->text = _('Enable use of phpcaptcha (more information www.phpcaptcha.org)');
 		$this->_addHook('captcha_check');
 		$this->_addHook('captcha_form');
 		$this->phpcaptcha_path = forge_get_config('phpcaptcha_path', 'phpcaptcha');
@@ -47,6 +47,7 @@ class phpcaptchaPlugin extends Plugin {
 	}
 
 	function captcha_form() {
+		global $HTML;
 		if ($this->checkConfig()) {
 			echo '<p>
 				<img id="captcha" src="/plugins/'.$this->name.'/securimage_show.php" alt="CAPTCHA Image" />
@@ -57,7 +58,7 @@ class phpcaptchaPlugin extends Plugin {
 			echo '<input type="text" name="captcha_code" size="10" maxlength="6" />';
 			echo '</p>';
 		} else {
-			echo '<p class="information">'._('phpcaptcha seems not installed. Contact your administrator for more informations.').'</p>';
+			echo $HTML->information(_('phpcaptcha seems not installed. Contact your administrator for more informations.'));
 		}
 	}
 

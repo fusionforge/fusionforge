@@ -3,7 +3,7 @@
  * scmhookPlugin Class
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2013, Franck Villaume - TrivialDev
+ * Copyright 2012-2014, Franck Villaume - TrivialDev
  * Copyright 2012, Benoit Debaenst - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -136,7 +136,7 @@ class scmhookPlugin extends Plugin {
 		if (count($hooksAvailable)) {
 			echo '<div id="scmhook">';
 			if ($statusDeploy)
-				echo '<p class="warning">'._('Hooks management update process waiting ...').'</p>';
+				echo $HTML->warning_msg(_('Hooks management update process waiting ...'));
 
 			echo '<h2>'._('Enable Repository Hooks').'</h2>';
 			switch ($scm) {
@@ -153,13 +153,13 @@ class scmhookPlugin extends Plugin {
 					break;
 				}
 				default: {
-					echo '<div class="warning">'._('SCM Type not supported yet by scmhook').'</div>';
+					echo $HTML->warning_msg(_('SCM Type not supported yet by scmhook'));
 					break;
 				}
 			}
 			echo '</div><p />';
 		} else {
-			echo '<p class="information">'._('No hooks available').'</p>';
+			echo $HTML->information(_('No hooks available'));
 		}
 	}
 

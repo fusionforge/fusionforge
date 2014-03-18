@@ -52,7 +52,7 @@ jQuery(document).ready(function() {
 $linksArray = $headermenu->getAvailableLinks('groupmenu', $group_id);
 if (sizeof($linksArray)) {
 	echo '<h2>'._('Manage available tabs')."</h2>\n";
-	echo '<p class="information">'. _('You can reorder tabs, just drag & drop rows in the table below and save order. Please note that those extra tabs can only appear after the standard tabs. And you can only move them inside the set of extra tabs.').'</p>';
+	echo $HTML->information(_('You can reorder tabs, just drag & drop rows in the table below and save order. Please note that those extra tabs can only appear after the standard tabs. And you can only move them inside the set of extra tabs.'));
 	$tabletop = array(_('Order'), _('Tab Type'), _('Displayed Name'), _('Description'), _('Status'), _('Actions'));
 	$classth = array('', '', '', '', '', 'unsortable');
 	echo $HTML->listTableTop($tabletop, false, 'sortable_headermenu_listlinks', 'sortable', $classth);
@@ -87,7 +87,7 @@ if (sizeof($linksArray)) {
 }
 
 echo '<h2>'._('Add new tab')."</h2>\n";
-echo '<p class="information">'._('You can add your own tabs in the menu bar with the form below.').'</p>';
+echo $HTML->information(_('You can add your own tabs in the menu bar with the form below.'));
 echo '<form method="POST" name="addLink" action="index.php?type=projectadmin&amp;group_id='.$group_id.'&amp;action=addLink">';
 echo '<table class="infotable">'."\n";
 echo '<tr>';

@@ -29,7 +29,7 @@ class scmgit_Widget_MyRepositories extends Widget {
 	}
 
 	function getTitle() {
-		return _("My Git cloned Repositories List");
+		return _('My Git cloned Repositories List');
 	}
 
 	function getCategory() {
@@ -37,24 +37,27 @@ class scmgit_Widget_MyRepositories extends Widget {
 	}
 
 	function getDescription() {
-		return _("Get the list of URLS of your personal Git repository cloned from projects.");
+		return _('Get the list of URLS of your personal Git repository cloned from projects.');
 	}
 
 	function getContent() {
+		global $HTML;
 		$user = UserManager::instance()->getCurrentUser();
 		$scmgitplugin = plugin_get_object('scmgit');
 		$GitRepositories = $this->getMyRepositoriesList($scmgitplugin);
 		if (count($GitRepositories)) {
-			$returnhtml = '<table>';
+			$returnhtml = $HTML->listTableTop(array());
 			foreach ($GitRepositories as $GitRepository) {
 				$project = group_get_object($GitRepository);
-				$returnhtml .= '<tr><td><tt>git clone git+ssh://'.$user->getUnixName().'@' . $scmgitplugin->getBoxForProject($project) .'/'. forge_get_config('scm_root', 'scmgit') .'/'. $project->getUnixName() .'/users/'. $user->getUnixName() .'.git</tt></td>'.
-						'<td>'.util_make_link('/scm/browser.php?group_id='.$project->getID().'&user_id='.$user->getID(), _('Browse Git Repository')).'</td><tr>';
+				$cells = array();
+				$cells[][] = '<tt>git clone git+ssh://'.$user->getUnixName().'@' . $scmgitplugin->getBoxForProject($project) .'/'. forge_get_config('scm_root', 'scmgit') .'/'. $project->getUnixName() .'/users/'. $user->getUnixName() .'.git</tt>';
+				$cells[][] = util_make_link('/scm/browser.php?group_id='.$project->getID().'&user_id='.$user->getID(), _('Browse Git Repository'));
+				$returnhtml .= $HTML->multiTableRow(array(), $cells);
 			}
-			$returnhtml .= '</table>';
+			$returnhtml .= $HTML->listTableBottom();
 			return $returnhtml;
 		} else {
-			return '<p class="information">'._('No personal git repository').'</p>';
+			return $HTML->information(_('No personal git repository'));
 		}
 	}
 

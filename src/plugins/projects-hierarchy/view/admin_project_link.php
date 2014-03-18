@@ -56,7 +56,7 @@ if ($projectsHierarchy->isUsed($group_id)) {
 	echo '<input type="submit" value="'._('Add Child project').'">';
 	echo '</form>';
 } else {
-	echo '<p class="information">'._('No other project using project hierarchy plugin.').'</p>';
+	echo $HTML->information(_('No other project using project hierarchy plugin.'));
 }
 
 echo '<h4>'._('Pending hierarchy request').'</h4>';
@@ -85,4 +85,4 @@ if (sizeof($pendingChilds)) {
 }
 
 if (!sizeof($pendingParent) && !sizeof($pendingChilds))
-	echo '<p class="information">'._('No pending requests').'</p>';
+	echo $HTML->information(_('No pending requests'));

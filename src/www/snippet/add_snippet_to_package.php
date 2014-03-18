@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -26,6 +27,7 @@ require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'snippet/snippet_utils.php';
 
+global $HTML;
 $suppress_nav = getStringFromRequest('suppress_nav');
 
 function handle_add_exit() {
@@ -52,7 +54,7 @@ if (session_loggedin()) {
 
 	if (!$snippet_package_version_id) {
 		//make sure the package id was passed in
-		echo '<p class="error">' ._('Error: snippet_package_version_id missing') .'</p>';
+		echo $HTML->error_msg(_('Error: snippet_package_version_id missing'));
 		handle_add_exit();
 	}
 
@@ -69,7 +71,7 @@ if (session_loggedin()) {
 						"snippet_package_version_id=$2",
 						array(user_getid(), $snippet_package_version_id));
 			if (!$result || db_numrows($result) < 1) {
-				echo '<p class="error">' ._('Error: Only the creator of a package version can add snippets to it.').'</p>';
+				echo $HTML->error_msg(_('Error: Only the creator of a package version can add snippets to it.'));
 				handle_add_exit();
 			}
 
@@ -79,7 +81,7 @@ if (session_loggedin()) {
 			$result=db_query_params('SELECT * FROM snippet_version WHERE snippet_version_id=$1',
 						array($snippet_version_id));
 			if (!$result || db_numrows($result) < 1) {
-				echo '<p class="error">' ._('Error: snippet does not exist').'</p>';
+				echo $HTML->error_msg(_('Error: snippet does not exist'));
 				echo util_make_link ('/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id,_('Back To Add Page'));
 				handle_add_exit();
 			}
@@ -93,7 +95,7 @@ if (session_loggedin()) {
 						array($snippet_package_version_id,
 							$snippet_version_id));
 			if ($result && db_numrows($result) > 0) {
-				echo '<p class="error">'._('Error: That snippet was already added to this package.').'</p>';
+				echo $HTML->error_msg(_('Error: That snippet was already added to this package.'));
 				echo util_make_link ('/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id,_('Back To Add Page'));
 				handle_add_exit();
 			}
@@ -110,7 +112,7 @@ if (session_loggedin()) {
 				$feedback .= _('Snippet Version Added Successfully.');
 			}
 		} else {
-			echo '<p class="error">' ._('Error: Go back and fill in all the information').'</p>';
+			echo $HTML->error_msg(_('Error: Go back and fill in all the information'));
 			echo util_make_link ('/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id,_('Back To Add Page'));
 			handle_add_exit();
 		}
@@ -159,7 +161,6 @@ for ($i=0; $i<$combolistrows; $i++)
 ?>
 </select>
 	</td></tr>
-
 	<tr><td colspan="2" class="align-center">
 		<strong><?php echo _('Make sure all info is complete and accurate'); ?></strong>
 		<br />
@@ -179,14 +180,13 @@ for ($i=0; $i<$combolistrows; $i++)
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo db_error();
-		echo '
-		<p class="information" >' ._('No Snippets Are In This Package Yet').'</p>';
+		echo $HTML->information(_('No Snippets Are In This Package Yet'));
 	} else {
 		echo $HTML->boxTop(_('Snippets In This Package'));
 		echo $HTML->listTableTop();
 		for ($i=0; $i<$rows; $i++) {
 			echo '
-			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td class="align-center">
+			<tr '. $HTML->boxGetAltRowStyle($i) .'><td class="align-center">
 				<a href="'.util_make_url ('/snippet/delete.php?type=frompackage&snippet_version_id='.db_result($result,$i,'snippet_version_id').'&snippet_package_version_id='.$snippet_package_version_id).
 				'">' . html_image("ic/trash.png","16","16") . '</a></td><td style="width:99%">'.
 				db_result($result,$i,'name').' '.db_result($result,$i,'version')."</td></tr>";
@@ -196,11 +196,7 @@ for ($i=0; $i<$combolistrows; $i++)
 		echo $HTML->listTableBottom();
 		echo $HTML->boxBottom();
 	}
-
 	handle_add_exit();
-
 } else {
-
 	exit_not_logged_in();
-
 }

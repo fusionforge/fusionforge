@@ -55,7 +55,7 @@ $linksHeaderMenuArray = $headermenu->getAvailableLinks('headermenu');
 $linksOuterMenuArray = $headermenu->getAvailableLinks('outermenu');
 
 if (sizeof($linksHeaderMenuArray) || sizeof($linksOuterMenuArray)) {
-	echo '<p class="information">'. _('You can reorder tabs, just drag & drop rows in the table below and save order. Please note that those extra tabs can only appear after the standard tabs. And you can only move them inside the set of extra tabs.').'</p>';
+	echo $HTML->information(_('You can reorder tabs, just drag & drop rows in the table below and save order. Please note that those extra tabs can only appear after the standard tabs. And you can only move them inside the set of extra tabs.'));
 }
 if (sizeof($linksHeaderMenuArray)) {
 	echo '<h2>'._('Manage available tabs in headermenu').'</h2>';
@@ -87,7 +87,7 @@ if (sizeof($linksHeaderMenuArray)) {
 	echo '<input type="button" id="linkorderheadervalidatebutton" value="'._('Save Order').'" style="display:none;" />';
 	echo '<br/>';
 } else {
-	echo '<p class="information">'._('No tabs available for headermenu').'</p>';
+	echo $HTML->information(_('No tabs available for headermenu'));
 }
 
 if (sizeof($linksOuterMenuArray)) {
@@ -120,11 +120,11 @@ if (sizeof($linksOuterMenuArray)) {
 	echo '<input type="button" id="linkorderoutervalidatebutton" value="'._('Save Order').'" style="display:none;" />';
 	echo '<br/>';
 } else {
-	echo '<p class="information">'._('No tabs available for outermenu').'</p>';
+	echo $HTML->information(_('No tabs available for outermenu'));
 }
 
 echo '<h2>'._('Add new tab').'</h2>';
-echo '<p class="information">'._('You can add specific tabs in outermenu (main tab) or headermenu (next to the login) with the form below.').'</p>';
+echo $HTML->information(_('You can add specific tabs in outermenu (main tab) or headermenu (next to the login) with the form below.'));
 echo '<form method="POST" name="addLink" action="index.php?type=globaladmin&amp;action=addLink">';
 echo '<table class="infotable"><tr>';
 echo '<td>'._('Displayed Name')._(':').'</td><td><input required="required" name="name" type="text" maxlength="255" /></td>';
