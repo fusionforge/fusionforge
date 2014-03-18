@@ -1,3 +1,4 @@
+#!/usr/bin/php
 <?php
 /**
  * Copyright 2011, Franck Villaume - Capgemini
