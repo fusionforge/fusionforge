@@ -770,6 +770,7 @@ p.information {
 	margin-left: 5px;
 }
 
+.docman_editfile_title,
 #docman_search_query_label {
 	font-weight:bold;
 }

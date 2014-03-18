@@ -811,6 +811,7 @@ p.information {
 	margin-top:10px;
 }
 
+.docman_editfile_title,
 #docman_search_query_label {
 	font-weight:bold;
 }
