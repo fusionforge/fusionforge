@@ -143,7 +143,7 @@ jQuery(document).ready(function() {
 		divEditDirectory:	jQuery('#editdocgroup'),
 		buttonAddItem:		jQuery('#docman-additem'),
 		buttonEditDirectory:	jQuery('#docman-editdirectory'),
-		docManURL:		'<?php util_make_uri('/docman') ?>',
+		docManURL:		'<?php echo util_make_uri('/docman') ?>',
 		divLeft:		jQuery('#leftdiv'),
 		divRight:		jQuery('#rightdiv'),
 		childGroupId:		<?php echo util_ifsetor($childgroup_id, 0) ?>,
