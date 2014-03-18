@@ -28,8 +28,6 @@ cronjobs/get_news_notapproved.pl	@SOURCE_PATH@/cronjobs/
 deb-specific/stats_projects_logparse.pl @BINARY_PATH@/
 deb-specific/install-db.sh              @BINARY_PATH@/
 deb-specific/old-db-upgrade.pl              @BINARY_PATH@/
-deb-specific/sqlparser.pm               @SOURCE_PATH@/lib/
-deb-specific/sqlhelper.pm               @SOURCE_PATH@/lib/
 deb-specific/sf-add-skill               @BINARY_PATH@/
 deb-specific/register-theme             @BINARY_PATH@/
 deb-specific/unregister-theme           @BINARY_PATH@/

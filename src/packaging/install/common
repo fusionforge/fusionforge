@@ -13,8 +13,11 @@ utils/forge_run_job                    @BINARY_PATH@/
 utils/forge_run_plugin_job             @BINARY_PATH@/
 utils/migrate-to-ini-files.sh	       @BINARY_PATH@/
 #
-deb-specific/register-plugin            @BINARY_PATH@/
-deb-specific/unregister-plugin          @BINARY_PATH@/
+deb-specific/sqlparser.pm              @SOURCE_PATH@/lib/
+deb-specific/sqlhelper.pm              @SOURCE_PATH@/lib/
+#
+deb-specific/register-plugin           @BINARY_PATH@/
+deb-specific/unregister-plugin         @BINARY_PATH@/
 #
 deb-specific/user_dump_update.pl       @BINARY_PATH@/
 deb-specific/group_dump_update.pl      @BINARY_PATH@/
