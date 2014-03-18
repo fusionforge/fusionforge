@@ -193,7 +193,7 @@ require_once $gfcommon.'include/Error.class.php';
 
 // Database abstraction
 // From here database is required
-if (forge_get_config('database_name') != "") {
+if (getenv('FUSIONFORGE_NO_DB') != 'true' and forge_get_config('database_name') != "") {
 	require_once $gfcommon.'include/database-pgsql.php';
 
 	// Authentication and access control
@@ -229,7 +229,7 @@ if (forge_get_config('database_name') != "") {
 	// Authentication-specific plugins subsystem
 	require_once $gfcommon.'include/AuthPlugin.class.php' ;
 
-	if (getenv ('FUSIONFORGE_NO_PLUGINS') != 'true' and getenv('FUSIONFORGE_NO_DB')) {
+	if (getenv ('FUSIONFORGE_NO_PLUGINS') != 'true') {
 		setup_plugin_manager () ;
 	}
 
