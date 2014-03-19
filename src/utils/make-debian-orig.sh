@@ -26,7 +26,7 @@ if [ -e ../fusionforge_$u.orig.tar.gz ] ; then
     exit 1
 fi
 
-git archive --format=tar --root=fusionforge-$u HEAD \
+git archive --format=tar --prefix=fusionforge-$u/ HEAD \
     | tar -f - --delete fusionforge-$u/debian \
     | gzip -c \
     > ../fusionforge_$u.orig.tar.gz
