@@ -92,9 +92,6 @@ testpat:
 	@echo "PDOCSFILES=$(PDOCSFILES)"
 	@echo "PEXAMPLESFILES=$(PEXAMPLESFILES)"
 
-remove-binary-files:
-	sh $(CURDIR)/deb-specific/manage-uufiles.sh clean
-
 .PHONY: conffiles
 conffiles: $(PPOSTINST) $(PPREINST) $(PPRERM) $(PPOSTRM) $(CRONDFILES) $(DIRSFILES) $(LINKSFILES) $(INSTALLFILES) $(DOCSFILES) $(READMEFILES) $(PCRONDFILES) $(PDIRSFILES) $(PLINKSFILES) $(PINSTALLFILES) $(PDOCSFILES) $(PTRIGGERSFILES) $(PEXAMPLESFILES) debian/control
 
@@ -228,7 +225,7 @@ debian/po/%:
 
 override_dh_auto_build:
 
-build: remove-binary-files debian/po/templates.pot conffiles
+build: debian/po/templates.pot conffiles
 	$(DH) $@
 
 # 	Build man pages from Docbook sources
@@ -237,9 +234,6 @@ build: remove-binary-files debian/po/templates.pot conffiles
 
 # 	Build README.Debian from template
 	cat debian/README.Debian.tmpl | $(SED_REPLACE) > debian/README.Debian
-
-# 	Uudecode binary files
-	sh $(CURDIR)/deb-specific/manage-uufiles.sh decode
 
 # 	Build gettext *.mo files
 	utils/manage-translations.sh build
@@ -253,7 +247,7 @@ build: remove-binary-files debian/po/templates.pot conffiles
 # 	Preprocess files with DSF-Helper
 	perl $(CURDIR)/deb-specific/dsf-helper.pl
 
-clean: remove-binary-files
+clean:
 	$(DH) $@
 
 	rm -f $(CURDIR)/debian/*.cron.d
@@ -304,8 +298,8 @@ install: build
 # 	Rename config files
 	mv $(CURDIR)/debian/$(OLDPACKAGE)-common/etc/$(PACKAGE)/config.ini-fhs $(CURDIR)/debian/$(OLDPACKAGE)-common/etc/$(PACKAGE)/config.ini
 	mkdir -p $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf.d
-	cp $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/$(SOURCE_PATH)/etc/httpd.conf.d-fhs/*.conf $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf.d/
-	cp $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/$(SOURCE_PATH)/etc/httpd.conf.d-fhs/*.inc $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf.d/
+	cp -v $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/$(SOURCE_PATH)/etc/httpd.conf.d-fhs/*.conf $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf.d/
+	cp -v $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/$(SOURCE_PATH)/etc/httpd.conf.d-fhs/*.inc $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf.d/
 	cp $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/$(SOURCE_PATH)/etc/httpd.conf-fhs $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf
 
 # 	Remove those that need to be generated at install time
@@ -327,11 +321,11 @@ install: build
 # 	Remove NuSOAP class from binary packages (provided by libnusoap-php)
 	find $(addprefix $(CURDIR)/debian/, $(shell dh_listpackages)) -name nusoap.php | xargs -r rm
 
+# 	Remove some Jquery files from binary packages (provided by libjs-jquery-*)
+	for i in jquery jquery-ui jquery-tipsy; do find -type d $(addprefix $(CURDIR)/debian/, $(shell dh_listpackages)) -path */vendor/$$i ; done | xargs -r rm
+
 # 	Remove potential SCM artefacts from binary packages
 	find $(addprefix $(CURDIR)/debian/, $(shell dh_listpackages)) -name .svn -or -name {arch} -or -name .arch-ids -or -name .bzr -or -name .cvsignore | xargs -r rm -rf
-
-# 	Also remove uuencoded files
-	find $(addprefix $(CURDIR)/debian/, $(shell dh_listpackages)) -name \*.uu | xargs -r rm
 
 
 binary: install

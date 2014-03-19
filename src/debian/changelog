@@ -1,4 +1,17 @@
-fusionforge (5.2.90~-1) UNRELEASED; urgency=low
+fusionforge (5.3~rc2+20140303-1) experimental; urgency=medium
+
+  * New snapshot from upstream 5.3 branch.
+
+ -- Roland Mas <lolando@debian.org>  Mon, 03 Mar 2014 10:48:07 +0100
+
+fusionforge (5.3~rc2+20140228-2) experimental; urgency=low
+
+  * Fixed shipping of Javascript libs, and updated patch to use those that
+    are present in Debian.
+
+ -- Roland Mas <lolando@debian.org>  Fri, 28 Feb 2014 17:42:35 +0100
+
+fusionforge (5.3~rc2+20140228-1) experimental; urgency=low
 
   [ Roland Mas ]
   * Started following upstream 5.3 branch.
@@ -11,7 +24,7 @@ fusionforge (5.2.90~-1) UNRELEASED; urgency=low
   * Install .php migration scripts (only .sql were included before)
   * New gforge-db-remote package
 
- -- Roland Mas <lolando@debian.org>  Fri, 17 Jan 2014 16:45:20 +0100
+ -- Roland Mas <lolando@debian.org>  Fri, 28 Feb 2014 09:45:06 +0100
 
 fusionforge (5.2.3+20130110-1) UNRELEASED; urgency=low
 
