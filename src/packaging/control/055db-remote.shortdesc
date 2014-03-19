@@ -1,0 +1,4 @@
+ This dummy package tells FusionForge you installed the database on a
+ separate machine.  It preserves the gforge-db virtual dependency, to
+ configure the database before depending packages in single-server
+ installs.
