@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2013, French Ministry of National Education
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -25,6 +26,8 @@
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'snippet/snippet_utils.php';
+
+global $HTML;
 
 /*
 	Show a detail page for either a snippet or a package
@@ -54,7 +57,7 @@ if ($type=='snippet') {
 
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
-		echo '<div class="error">' ._('Error: no versions found').'</div>';
+		echo $HTML->error_msg(_('Error: no versions found'));
 	} else {
 		echo '
 		<h3>' ._('Versions Of This Snippet:').'</h3>
@@ -66,7 +69,7 @@ if ($type=='snippet') {
 		$title_arr[]= _('Author');
 		$title_arr[]= _('Delete');
 
-		echo $GLOBALS['HTML']->listTableTop ($title_arr);
+		echo $HTML->listTableTop ($title_arr);
 
 		/*
 			get the newest version of this snippet, so we can display its code
@@ -75,12 +78,12 @@ if ($type=='snippet') {
 
 		for ($i=0; $i<$rows; $i++) {
 			echo '
-				<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td>'.db_result($result,$i,'snippet_version_id').
+				<tr '. $HTML->boxGetAltRowStyle($i) .'><td>'.db_result($result,$i,'snippet_version_id').
 				'</td><td>'.
 				util_make_link ('/snippet/download.php?type=snippet&id='.db_result($result,$i,'snippet_version_id'),'<strong>'. db_result($result,$i,'version').'</strong>').'</td><td>'.
 				date(_('Y-m-d H:i'),db_result($result,$i,'post_date')).'</td><td>'.
 				util_make_link_u (db_result($result, $i, 'user_name'), db_result($result, $i, 'user_id'),db_result($result, $i, 'realname')).'</td>'.
-				'<td class="align-center"><a href="'.util_make_url ('/snippet/delete.php?type=snippet&snippet_version_id='.db_result($result,$i,'snippet_version_id')).'">' . html_image("ic/trash.png","16","16",array("border"=>"0")) . '</a></td></tr>';
+				'<td class="align-center">'.util_make_link('/snippet/delete.php?type=snippet&snippet_version_id='.db_result($result,$i,'snippet_version_id'), html_image("ic/trash.png","16","16",array("border"=>"0"))).'</td></tr>';
 
 				if ($i != ($rows - 1)) {
 					echo '
@@ -89,7 +92,7 @@ if ($type=='snippet') {
 				}
 		}
 
-		echo $GLOBALS['HTML']->listTableBottom();
+		echo $HTML->listTableBottom();
 
 		echo '
 		</p><p>'._('Download a raw-text version of this code by clicking on “Download Version”').'
@@ -112,7 +115,7 @@ if ($type=='snippet') {
 		Show a link so you can add a new version of this snippet
 	*/
 	echo '
-	<h3><a href="'.util_make_url('/snippet/addversion.php?type=snippet&id='.htmlspecialchars($id)).'"><span class="information">'._('Submit a new version').'</span></a></h3>
+	<h3>'.util_make_link('/snippet/addversion.php?type=snippet&id='.htmlspecialchars($id), _('Submit a new version')).'</h3>
 	<p>' ._('You can submit a new version of this snippet if you have modified it and you feel it is appropriate to share with others.').'.</p>';
 
 	}
@@ -139,7 +142,7 @@ if ($type=='snippet') {
 
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
-		echo '<div class="error">' ._('Error: no versions found').'</div>';
+		echo $HTML->error_msg(_('Error: no versions found'));
 	} else {
 		echo '
 		<h3>' ._('Versions Of This Package:').'</h3>
@@ -150,7 +153,7 @@ if ($type=='snippet') {
 		$title_arr[]= _('Author');
 		$title_arr[]= _('Edit/Del');
 
-		echo $GLOBALS['HTML']->listTableTop ($title_arr);
+		echo $HTML->listTableTop ($title_arr);
 
 		/*
 			determine the newest version of this package,
@@ -160,18 +163,17 @@ if ($type=='snippet') {
 
 		for ($i=0; $i<$rows; $i++) {
 			echo '
-			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td>'.
+			<tr '. $HTML->boxGetAltRowStyle($i) .'><td>'.
 			util_make_link('/snippet/detail.php?type=packagever&id='.db_result($result,$i,'snippet_package_version_id'),'<strong>'.db_result($result,$i,'version').'</strong>').'</td><td>'.
 				date(_('Y-m-d H:i'),db_result($result,$i,'post_date')).'</td><td>'.
 				util_make_link_u (db_result($result, $i, 'user_name'), db_result($result, $i, 'user_id'),db_result($result, $i, 'realname')).'</td>'.
-				'<td class="align-center"><a href="'.util_make_url ('/snippet/add_snippet_to_package.php?snippet_package_version_id='.db_result($result,$i,'snippet_package_version_id')).
-				'">' . html_image("ic/pencil.png","20","25") .
-				'</a> &nbsp; &nbsp; &nbsp; <a href="'.
-				util_make_url ('/snippet/delete.php?type=package&snippet_package_version_id='.db_result($result,$i,'snippet_package_version_id')).
-				'">' . html_image("ic/trash.png","16","16") . '</a></td></tr>';
+				'<td class="align-center">'.
+				util_make_link('/snippet/add_snippet_to_package.php?snippet_package_version_id='.db_result($result,$i,'snippet_package_version_id'), html_image("ic/pencil.png","20","25")).
+				'&nbsp; &nbsp; &nbsp; '.
+				util_make_link('/snippet/delete.php?type=package&snippet_package_version_id='.db_result($result,$i,'snippet_package_version_id'), html_image("ic/trash.png","16","16")).'</td></tr>';
 		}
 
-		echo $GLOBALS['HTML']->listTableBottom();
+		echo $HTML->listTableBottom();
 
 		echo '
 		</p><p>'._('Download a raw-text version of this code by clicking on “Download Version”').'
@@ -194,7 +196,7 @@ if ($type=='snippet') {
 			Show a form so you can add a new version of this package
 		*/
 		echo '
-		<h3><a href="'.util_make_url('/snippet/addversion.php?type=package&id='.$id).'"><span class="information">' ._('Submit a new version').'</span></a></h3>
+		<h3>'.util_make_link('/snippet/addversion.php?type=package&id='.$id), _('Submit a new version')).'</h3>
 		<p>' ._('You can submit a new version of this package if you have modified it and you feel it is appropriate to share with others.').'.</p>';
 
 	}

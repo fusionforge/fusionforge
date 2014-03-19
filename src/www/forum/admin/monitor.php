@@ -5,6 +5,7 @@
  * Copyright 1999-2001 (c) Tim Perdue - VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
  * Copyright 2010 (c) Franck Villaume - Capgemini
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -33,44 +34,42 @@ require_once $gfcommon.'forum/ForumMessageFactory.class.php';
 require_once $gfcommon.'forum/ForumMessage.class.php';
 require_once $gfcommon.'include/TextSanitizer.class.php'; // to make the HTML input by the user safe to store
 
+global $HTML;
+
 $group_id = getIntFromRequest('group_id');
 $group_forum_id = getIntFromRequest('group_forum_id');
 $g = group_get_object($group_id);
-$f = new Forum ($g,$group_forum_id);
+$f = new Forum($g, $group_forum_id);
 if (!$f || !is_object($f)) {
-	exit_error(_('Could Not Get Forum Object'),'forums');
+	exit_error(_('Could Not Get Forum Object'), 'forums');
 } elseif ($f->isError()) {
-	exit_error($f->getErrorMessage(),'forums');
+	exit_error($f->getErrorMessage(), 'forums');
 }
 
-session_require_perm ('forum_admin', $f->Group->getID()) ;
+session_require_perm ('forum_admin', $f->Group->getID());
 
-forum_header(array('title'=>_('Monitoring Users')));
+forum_header(array('title'=>sprintf(_('Forum %s Monitoring Users'), $f->getName())));
 
-$res = db_query_params ('select users.user_id,users.user_name, users.email, users.realname from
-users,forum_monitored_forums fmf where fmf.user_id=users.user_id and
-fmf.forum_id =$1 order by users.user_id',
-			array ($group_forum_id));
+$res = db_query_params('select users.user_id,users.user_name, users.email, users.realname from
+			users,forum_monitored_forums fmf where fmf.user_id=users.user_id and
+			fmf.forum_id =$1 order by users.user_id',
+			array($group_forum_id));
 
 if ($res && db_numrows($res) == 0) {
-	echo '<p class="information">'._('No Monitoring Users').'</p>';
+	echo $HTML->information(_('No Monitoring Users'));
 	forum_footer();
 	exit;
 }
 
 $tableHeaders = array(_('User'), _('Email'), _('Real Name'));
-
-$j=0;
-
 echo $HTML->listTableTop($tableHeaders);
 
-while ($arr=db_fetch_array($res)) {
-
-	echo '<tr '. $HTML->boxGetAltRowStyle($j++) . '><td>'.$arr['user_name'].'</td>
-	<td>'.$arr['email'].'</td>
-	<td>'.$arr['realname'].'</td></tr>';
-
+while ($arr = db_fetch_array($res)) {
+	$cells = array();
+	$cells[][] = $arr['user_name'];
+	$cells[][] = $arr['email'];
+	$cells[][] = $arr['realname'];
+	echo $HTML->multiTableRow(array(), $cells);
 }
 echo $HTML->listTableBottom();
-
 forum_footer();

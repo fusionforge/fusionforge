@@ -6,7 +6,7 @@
  * Copyright 2002, Tim Perdue - GForge, LLC
  * Copyright 2010 (c) Franck Villaume - Capgemini
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013-2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -30,6 +30,8 @@ require_once $gfcommon.'forum/ForumHTML.class.php';
 require_once $gfcommon.'forum/ForumFactory.class.php';
 require_once $gfcommon.'forum/Forum.class.php';
 
+global $HTML;
+
 $group_id = getIntFromRequest('group_id');
 if ($group_id) {
 	$g = group_get_object($group_id);
@@ -51,11 +53,11 @@ if ($group_id) {
 	forum_header(array('title'=>sprintf(_('Forums for %s'), $g->getPublicName()) ));
 
 	if ($ff->isError()) {
-		echo '<p class="error">'. $ff->getErrorMessage().'</p>';
+		echo $HTML->error_msg($ff->getErrorMessage());
 		forum_footer();
 		exit;
 	} elseif ( count($farr) < 1) {
-		echo '<p class="information">'.sprintf(_('No Forums Found for %s'), $g->getPublicName()) .'</p>';
+		echo $HTML->information(sprintf(_('No Forums Found for %s'), $g->getPublicName()));
 		forum_footer();
 		exit;
 	}
@@ -79,12 +81,13 @@ if ($group_id) {
 		} elseif ($farr[$j]->isError()) {
 			echo $farr[$j]->getErrorMessage();
 		} else {
-			echo '<tr '. $HTML->boxGetAltRowStyle($j) . '><td>'.
-				util_make_link('/forum/forum.php?forum_id='.$farr[$j]->getID().'&group_id='.$group_id, html_image('ic/forum20w.png').' '.$farr[$j]->getName()).'</td>
-				<td>'.$farr[$j]->getDescription().'</td>
-				<td class="align-center">'.$farr[$j]->getThreadCount().'</td>
-				<td class="align-center">'. $farr[$j]->getMessageCount() .'</td>
-				<td>'.  date(_('Y-m-d H:i'),$farr[$j]->getMostRecentDate()) .'</td></tr>';
+			$cells = array();
+			$cells[][] = util_make_link('/forum/forum.php?forum_id='.$farr[$j]->getID().'&group_id='.$group_id, html_image('ic/forum20w.png').' '.$farr[$j]->getName());
+			$cells[][] = $farr[$j]->getDescription();
+			$cells[] = array($farr[$j]->getThreadCount(), 'class' => 'align-center');
+			$cells[] = array($farr[$j]->getMessageCount(), 'class' => 'align-center');
+			$cells[][] = date(_('Y-m-d H:i'),$farr[$j]->getMostRecentDate());
+			echo $HTML->multiTableRow(array(), $cells);
 		}
 	}
 	echo $HTML->listTableBottom();

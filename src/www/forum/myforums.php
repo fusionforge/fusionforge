@@ -8,6 +8,7 @@
  * Copyright 2005 (c) - Daniel Perez
  * Copyright 2010 (c) Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -34,6 +35,8 @@ require_once $gfcommon.'forum/ForumFactory.class.php';
 require_once $gfcommon.'forum/ForumMessageFactory.class.php';
 require_once $gfcommon.'forum/ForumMessage.class.php';
 
+global $HTML;
+
 session_require_login();
 
 $user_id = user_getid();
@@ -50,12 +53,12 @@ if ($group_id) {
 $result = db_query_params ('SELECT mon.forum_id, fg.group_id FROM forum_monitored_forums mon,forum_group_list fg where mon.user_id=$1 and fg.group_forum_id=mon.forum_id',
 			   array ($user_id));
 if (!$result) {
-    echo '<p class="error">Database error :'.db_error().'</p>';
+    echo $HTML->error_msg(_('Database error :').db_error());
     forum_footer();
     exit;
 }
 if ( db_numrows($result) < 1) {
-    echo '<p class="information">'._('You have no monitored forums').'</p>';
+    echo $HTML->information(_('You have no monitored forums'));
     forum_footer();
     exit;
 }
@@ -93,16 +96,16 @@ for($i=0;$i<sizeof($monitored_forums);$i++) {
 
 		$fh = new ForumHTML($f);
 		if (!$fh || !is_object($fh)) {
-			exit_error(_('Error getting new ForumHTML'),'forums');
+			exit_error(_('Error getting new ForumHTML'), 'forums');
 		} elseif ($fh->isError()) {
-			exit_error($fh->getErrorMessage(),'forums');
+			exit_error($fh->getErrorMessage(), 'forums');
 		}
 
 		$fmf = new ForumMessageFactory($f);
 		if (!$fmf || !is_object($fmf)) {
-			exit_error(_('Error getting new ForumMessageFactory'),'forums');
+			exit_error(_('Error getting new ForumMessageFactory'), 'forums');
 		} elseif ($fmf->isError()) {
-			exit_error($fmf->getErrorMessage(),'forums');
+			exit_error($fmf->getErrorMessage(), 'forums');
 		}
 
 		$fmf->setUp($offset,$style,$max_rows,$set);
@@ -111,7 +114,7 @@ for($i=0;$i<sizeof($monitored_forums);$i++) {
 		$offset=$fmf->offset;
 		$msg_arr = $fmf->nestArray($fmf->getNested());
 		if ($fmf->isError()) {
-			exit_error($fmf->getErrorMessage(),'forums');
+			exit_error($fmf->getErrorMessage(), 'forums');
 		}
 		$rows=count($msg_arr[0]);
 		$avail_rows=$fmf->fetched_rows;
@@ -150,16 +153,14 @@ for($i=0;$i<sizeof($monitored_forums);$i++) {
 
 		$this_forum_group = $f->getGroup();
 		$date = $f->getMostRecentDate()? date(_('Y-m-d H:i'),$f->getMostRecentDate()) : '';
-		echo '<tr '. $HTML->boxGetAltRowStyle($j++) . '>
-			<td>' . $this_forum_group->getPublicName() . '</td>
-			<td><a href="forum.php?forum_id='. $f->getID() .'&amp;group_id='.$this_forum_group->getID().'">'.
-			html_image('ic/forum20w.png') .
-			'&nbsp;' .
-			$f->getName() .'</a></td>
-			<td class="align-center">'.$f->getThreadCount().'</td>
-			<td class="align-center">'. $f->getMessageCount() .'</td>
-			<td class="align-center">'. $date .'</td>
-			<td class="align-center">' . $new_content . '</td></tr>';
+		$cells = array();
+		$cells[][] = $this_forum_group->getPublicName();
+		$cells[][] = util_make_link('/forum/forum.php?forum_id='.$f->getID().'&group_id='.$this_forum_group->getID(), html_image('ic/forum20w.png').'&nbsp;'.$f->getName());
+		$cells[] = array($f->getThreadCount(), 'class' => 'align-center');
+		$cells[] = array($f->getMessageCount(), 'class' => 'align-center');
+		$cells[] = array($date, 'class' => 'align-center');
+		$cells[] = array($new_content, 'class' => 'align-center');
+		echo $HTML->multiTableRow(array(), $cells);
 	}
 }
 

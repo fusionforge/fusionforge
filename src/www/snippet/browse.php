@@ -26,6 +26,8 @@ require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'snippet/snippet_utils.php';
 
+global $HTML;
+
 /**
  * createSnippetQuery - Creates the SQL query for loading data about snippets
  *
@@ -77,7 +79,7 @@ $result2 = db_query_qpa ($qpa2) ;
 $rows2=db_numrows($result2);
 
 if ((!$result || $rows < 1) && (!$result2 || $rows2 < 1)) {
-	echo '<p class="information">' ._('No snippets found.').'</p>';
+	echo $HTML->information(_('No snippets found.'));
 } else {
 
 	$title_arr=array();
@@ -85,7 +87,7 @@ if ((!$result || $rows < 1) && (!$result2 || $rows2 < 1)) {
 	$title_arr[]= _('Title');
 	$title_arr[]= _('Creator');
 
-	echo $GLOBALS['HTML']->listTableTop ($title_arr);
+	echo $HTML->listTableTop ($title_arr);
 
 	//	List packages if there are any
 	if ($rows2 > 0) {
@@ -94,12 +96,12 @@ if ((!$result || $rows < 1) && (!$result2 || $rows2 < 1)) {
 	}
 	for ($i=0; $i<$rows2; $i++) {
 		echo '
-			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td rowspan="2">'.
+			<tr '. $HTML->boxGetAltRowStyle($i) .'><td rowspan="2">'.
 			util_make_link ('/snippet/detail.php?type=package&id='.db_result($result2,$i,'snippet_package_id'),'<strong>'.db_result($result2,$i,'snippet_package_id').'</strong>').'</td><td><strong>'.
 			db_result($result2,$i,'name').'</td><td>'.
 			util_make_link_u (db_result($result2, $i, 'user_name'), db_result($result2, $i, 'user_id'), db_result($result2, $i, 'realname')).'</td></tr>';
 		echo '
-			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td colspan="2">'.util_make_links(nl2br(db_result($result2,$i,'description'))).'</td></tr>';
+			<tr '. $HTML->boxGetAltRowStyle($i) .'><td colspan="2">'.util_make_links(nl2br(db_result($result2,$i,'description'))).'</td></tr>';
 	}
 
 	//	List snippets if there are any
@@ -109,15 +111,15 @@ if ((!$result || $rows < 1) && (!$result2 || $rows2 < 1)) {
 	}
 	for ($i=0; $i<$rows; $i++) {
 		echo '
-			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td rowspan="2">'.
+			<tr '. $HTML->boxGetAltRowStyle($i) .'><td rowspan="2">'.
 			util_make_link ('/snippet/detail.php?type=snippet&id='.db_result($result,$i,'snippet_id'),'<strong>'.db_result($result,$i,'snippet_id').'</strong>').
 			'</td><td><strong>'.
 			util_make_link ('/snippet/detail.php?type=snippet&id='.db_result($result,$i,'snippet_id'),db_result($result,$i,'name')).
 			'</strong></td><td>'.
 			util_make_link_u (db_result($result, $i, 'user_name'), db_result($result, $i, 'user_id'), db_result($result, $i, 'realname')).'</td></tr>';
 		echo '
-			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td colspan="2">'.util_make_links(nl2br(db_result($result,$i,'description'))).'</td></tr>';
+			<tr '. $HTML->boxGetAltRowStyle($i) .'><td colspan="2">'.util_make_links(nl2br(db_result($result,$i,'description'))).'</td></tr>';
 	}
-	echo $GLOBALS['HTML']->listTableBottom();
+	echo $HTML->listTableBottom();
 }
 snippet_footer();
