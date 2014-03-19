@@ -3,7 +3,7 @@
  * FusionForge trackers
  *
  * Copyright 2011, Alcatel-Lucent
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -150,6 +150,7 @@ function color_gradient($colors, $nb_colors) {
 	return $grad;
 }
 
+global $HTML;
 html_use_jquery();
 
 if (!forge_get_config('use_tracker')) {
@@ -190,7 +191,7 @@ if (empty($roadmaps)) {
 	$information = _('No roadmap available');
 	local_exit('<p>'._('The roadmap provides a short view on the trackers by viewing all tickets related to a release.').'</p>'.
 		'<p>'.sprintf(_('If you have project administrator rights, you can easily <a href="%s">create roadmaps</a>.'),
-				'/tracker/admin/index.php?group_id='.$group_id.'&admin_roadmap=1&new_roadmap=submit').'</p>');
+				util_make_uri('/tracker/admin/index.php?group_id='.$group_id.'&admin_roadmap=1&new_roadmap=submit')).'</p>');
 }
 
 $selected_roadmap = null;
@@ -254,7 +255,7 @@ $at_arr = $atfh->getArtifactTypes();
 $artifact_type_list = $selected_roadmap->getList();
 
 if (!$at_arr || count($at_arr) < 1) {
-	local_exit('<p class="information">'._('No trackers have been set up.').'</p>');
+	local_exit($HTML->information(_('No trackers have been set up.')));
 } else {
 
 	foreach ($at_arr as $artifact_type) {
@@ -449,7 +450,7 @@ if (!$at_arr || count($at_arr) < 1) {
 	echo '<div id="div_roadmap">'."\n";
 
 	if (empty($release_order)) {
-		echo '<p><strong>'._('No release available').'</strong></p>';
+		echo $HTML->information(_('No release available'));
 	}
 
 	for ($i = 0; $i < count($release_order); $i++) {

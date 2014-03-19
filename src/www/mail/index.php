@@ -32,6 +32,7 @@ require_once $gfwww.'mail/../mail/mail_utils.php';
 require_once $gfcommon.'mail/MailingList.class.php';
 require_once $gfcommon.'mail/MailingListFactory.class.php';
 
+global $HTML;
 $group_id = getIntFromGet('group_id');
 
 if ($group_id) {
@@ -58,14 +59,14 @@ if ($group_id) {
 	$mlArray = $mlFactory->getMailingLists();
 
 	if ($mlFactory->isError()) {
-		echo '<p class="error">'.sprintf(_('Unable to get the list %s: %s'), $group->getPublicName(), $mlFactory->getErrorMessage()) .'</p>';
+		echo $HTML->error_msg(sprintf(_('Unable to get the list %s: %s'), $group->getPublicName(), $mlFactory->getErrorMessage()));
 		mail_footer();
 		exit;
 	}
 
 	$mlCount = count($mlArray);
 	if($mlCount == 0) {
-		echo '<p class="information">'.sprintf(_('No Lists found for %s'), $group->getPublicName()) .'</p>';
+		echo $HTML->information(sprintf(_('No Lists found for %s'), $group->getPublicName()));
 		echo '<p>'._('Project administrators use the admin link to request mailing lists.').'</p>';
 		mail_footer();
 		exit;
