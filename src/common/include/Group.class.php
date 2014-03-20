@@ -1509,14 +1509,13 @@ class Group extends Error {
 			$res = db_query_params('INSERT INTO group_plugin (group_id, plugin_id) VALUES ($1, $2)',
 						array($this->getID(),
 							$plugin_id));
-			return $res;
 		} else {
 			$res = db_query_params('DELETE FROM group_plugin WHERE group_id=$1 AND plugin_id=$2',
 						array($this->getID(),
 							$plugin_id));
-			return $res;
 		}
 		$this->normalizeAllRoles();
+		return $res;
 	}
 
 	/**
@@ -2228,7 +2227,7 @@ class Group extends Error {
 		/*
 			Activate member(s) of the project
 		*/
-		
+
 		global $SYS;
 
 		$members = $this->getUsers (true);
