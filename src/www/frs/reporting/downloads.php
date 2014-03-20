@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (C) 2009-2012 Alain Peyrat, Alcatel-Lucent
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -48,6 +48,8 @@ require_once $gfcommon.'frs/include/frs_utils.php';
 require_once $gfcommon.'reporting/report_utils.php';
 require_once $gfcommon.'reporting/ReportDownloads.class.php';
 
+global $HTML;
+
 $group_id = getIntFromRequest('group_id');
 $package_id = getIntFromRequest('package_id');
 $start = getIntFromRequest('start');
@@ -93,7 +95,7 @@ frs_header(array('title' => _('File Release Reporting'),
 
 $report = new ReportDownloads($group_id, $package_id, $start, $end);
 if ($report->isError()) {
-	echo '<p class="error_msg">'.$report->getErrorMessage().'</p>';
+	echo $HTML->error_msg($report->getErrorMessage());
 	frs_footer();
 	exit;
 }
@@ -118,11 +120,9 @@ if ($report->isError()) {
 $data = $report->getData();
 
 if ($start == $end) {
-    echo '<p class="error">'._('Start and end dates must be different').'</p>';
+	echo $HTML->error_msg(_('Start and end dates must be different'));
 } elseif (count($data) == 0) {
-	echo '<p class="information">';
-	echo _('There have been no downloads for this package.');
-	echo '</p>';
+	echo $HTML->information(_('There have been no downloads for this package.'));
 } else {
 	echo '<script type="text/javascript">//<![CDATA['."\n";
 	echo 'var ticks = new Array();';
@@ -198,16 +198,17 @@ if ($start == $end) {
                               false, true, 'Download');
 	for ($i=0; $i<count($data); $i++) {
 		$date = preg_replace('/^(....)(..)(..)$/', '\1-\2-\3', $data[$i][4]);
-		echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>'.
-			'<td>'. $data[$i][0] .'</td>'.
-			'<td>'. $data[$i][1] .'</td>'.
-			'<td>'. basename($data[$i][2]) .'</td>';
+		$cells = array();
+		$cells[][] = $data[$i][0];
+		$cells[][] = $data[$i][1];
+		$cells[][] = basename($data[$i][2]);
 		if ($data[$i][6] != 100) {
-			echo '<td><a href="/users/'.urlencode($data[$i][5]).'/">'. $data[$i][3] .'</a></td>';
+			$cells[][] = util_display_user($data[$i][5], $data[$i][6], $data[$i][3]);
 		} else {
-			echo '<td>'.$data[$i][3].'</td>';
+			$cells[][] = $data[$i][3];
 		}
-		echo '<td class="align-center">'. $date .'</td></tr>';
+		$cells[] = array($date, 'class' => 'align-center');
+		echo $HTML->multiTableRow(array(), $cells);
 	}
 	echo $HTML->listTableBottom();
 }
