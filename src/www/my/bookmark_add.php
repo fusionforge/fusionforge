@@ -3,6 +3,7 @@
  * User's bookmark Page
  *
  * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2014, Stéphane-Eymeric Bredthauer
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -30,39 +31,27 @@ $bookmark_url = trim(getStringFromRequest('bookmark_url'));
 $bookmark_title = trim(getStringFromRequest('bookmark_title'));
 
 if (getStringFromRequest('submit') && $bookmark_url && $bookmark_title) {
-
-	echo "<p>\n";
-	printf(_('Added bookmark for <strong>%1$s</strong> with title <strong>%2$s</strong>'),
-		htmlspecialchars($bookmark_url),
-		htmlspecialchars($bookmark_title));
-	echo "</p>\n";
-
+	echo html_e('p',array(),sprintf(_('Added bookmark for <strong>%1$s</strong> with title <strong>%2$s</strong>'),	htmlspecialchars($bookmark_url), htmlspecialchars($bookmark_title)));
 	bookmark_add ($bookmark_url, $bookmark_title);
-	echo "<p>\n";
-	print "<a href=\"$bookmark_url\">"._('Visit the bookmarked page')."</a>";
-	echo "</p>\n";
-	echo "<p>\n";
-	print "<a href=\"/my/\">"._('Back to your homepage')."</a>";
-	echo "</p>\n";
-
+	echo html_ao('p');
+	echo util_make_link($bookmark_url, _('Visit the bookmarked page'),false,true);
+	echo html_ac(html_ap()-1);
+	echo html_ao('p');
+	echo util_make_link('/my/',_('Back to your homepage'));
+	echo html_ac(html_ap()-1);
 } else {
-	?>
-	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
-	<p>
-		<label for="bookmark_url">
-			<?php echo _('Bookmark URL')._(':'); ?><br />
-		</label>
-		<input id="bookmark_url" required="required" type="url" name="bookmark_url" value="http://" />
-	</p>
-	<p>
-		<label for="bookmark_title">
-			<?php echo _('Bookmark Title')._(':'); ?><br />
-		</label>
-		<input id="bookmark_title" required="required" type="text" name="bookmark_title" value="" />
-	</p>
-	<p><input type="submit" name="submit" value="<?php echo _('Submit') ?>" /></p>
-	</form>
-	<?php
+	echo html_ao('form', array('action' => util_make_uri('/my/bookmark_add.php'), 'method' => 'post'));
+	echo html_ao('p');
+	echo html_e('label', array('for' => 'bookmark_url'), _('Bookmark URL')._(':').html_e('br'));
+	echo html_e('input', array('id' => 'bookmark_url', 'required' => 'required', 'type' => 'url', 'name' => 'bookmark_url', 'value' => 'http://'));
+	echo html_ac(html_ap()-1);
+	echo html_ao('p');
+	echo html_e('label', array('for' => 'bookmark_title'), _('Bookmark Title')._(':').html_e('br'));
+	echo html_e('input', array('id' => 'bookmark_title', 'required' => 'required', 'type' => 'text', 'name' => 'bookmark_title', 'value' => ''));
+	echo html_ac(html_ap()-1);
+	echo html_ao('p');
+	echo html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Submit')));
+	echo html_ac(html_ap()-2);
 }
 
 site_user_footer();

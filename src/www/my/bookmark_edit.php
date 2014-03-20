@@ -3,6 +3,7 @@
  * User's bookmark editing Page
  *
  * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2014, Stéphane-Eymeric Bredthauer
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -50,26 +51,20 @@ if ($result) {
 	$bookmark_url = db_result($result,0,'bookmark_url');
 	$bookmark_title = db_result($result,0,'bookmark_title');
 }
-?>
-<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
-	<input type="hidden" name="bookmark_id" value="<?php echo $bookmark_id; ?>" />
 
-	<p>
-		<label for="bookmark_url">
-			<?php echo _('Bookmark URL')._(':'); ?><br />
-		</label>
-		<input id="bookmark_url" required="required" type="url" name="bookmark_url" value="<?php echo $bookmark_url; ?>" />
-	</p>
-	<p>
-		<label for="bookmark_title">
-			<?php echo _('Bookmark Title')._(':'); ?><br />
-		</label>
-		<input id="bookmark_title" required="required" type="text" name="bookmark_title" value="<?php echo $bookmark_title; ?>" />
-	</p>
-	<p><input type="submit" name="submit" value="<?php echo _('Submit') ?>" /></p>
-</form>
-<?php
-
-print "<p><a href=\"/my/\">"._('Return')."</a></p>";
+echo html_ao('form', array('action' => util_make_uri('/my/bookmark_edit.php'), 'method' => 'post'));
+echo html_e('input', array('type' => 'hidden', 'name' => 'bookmark_id', 'value' => $bookmark_id));
+echo html_ao('p');
+echo html_e('label', array('for' => 'bookmark_url'), _('Bookmark URL')._(':').html_e('br'));
+echo html_e('input', array('id' => 'bookmark_url', 'required' => 'required', 'type' => 'url', 'name' => 'bookmark_url', 'value' => $bookmark_url));
+echo html_ac(html_ap()-1);
+echo html_ao('p');
+echo html_e('label', array('for' => 'bookmark_title'), _('Bookmark Title')._(':').html_e('br'));
+echo html_e('input', array('id' => 'bookmark_title', 'required' => 'required', 'type' => 'text', 'name' => 'bookmark_title', 'value' => $bookmark_title));
+echo html_ac(html_ap()-1);
+echo html_ao('p');
+echo html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Submit')));
+echo html_ac(html_ap()-2);
+echo html_e('p', array(), util_make_link('/my/', _('Return')));
 
 site_user_footer();
