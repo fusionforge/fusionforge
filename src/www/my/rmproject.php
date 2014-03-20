@@ -5,6 +5,7 @@
  * Confirmation page for users' removing themselves from project.
  *
  * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2014, Stéphane-Eymeric Bredthauer
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -75,29 +76,23 @@ if (getStringFromRequest('confirm')) {
 
 site_user_header(array('title'=>_('Quitting Project')));
 
-echo '
-<p>
-'._('You are about to remove yourself from the project. Please confirm your action:').'
-</p>
+echo html_e('p', array(), _('You are about to remove yourself from the project. Please confirm your action:'));
 
-<table>
-<tr><td>
+echo html_ao('table');
+echo html_ao('tr');
+echo html_ao('td');
 
-<form action="'.getStringFromServer('PHP_SELF').'" method="post">
-<input type="hidden" name="confirm" value="1" />
-<input type="hidden" name="group_id" value="'.$group_id.'" />
-<input type="submit" value="'._('Remove').'" />
-</form>
+echo html_ao('form', array('action' => util_make_uri('/my/rmproject.php'), 'method' => 'post'));
+echo html_e('input',array('type' => 'hidden', 'name' => 'confirm', 'value' => '1'));
+echo html_e('input',array('type' => 'hidden', 'name' => 'group_id', 'value' => $group_id));
+echo html_e('input',array('type' => 'submit', 'value' => _('Remove')));
+echo html_ac(html_ap()-2);
 
-</td><td>
+echo html_ao('td');
 
-<form action="/my/" method="get">
-<input type="submit" value="'._('Cancel').'" />
-</form>
-
-</td></tr>
-</table>
-';
+echo html_ao('form', array('action' => util_make_uri('/my/'), 'method' => 'get'));
+echo html_e('input',array('type' => 'submit', 'value' => _('Cancel')));
+echo html_ac(html_ap()-4);
 
 site_user_footer();
 
