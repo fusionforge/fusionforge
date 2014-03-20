@@ -108,15 +108,14 @@ class SurveyHTML extends Error {
 	 */
 	function showAddQuestionForm( &$q ) {
 		global $group_id;
+		global $HTML;
 
 		/* Default is add */
 		$question_button = _('Add this Question');
 
 		/* If we have a question object, it is a Modify */
 		if ($q && is_object($q) && !$q->isError() && $q->getID()) {
-			$warning_msg = '<p class="warning_msg">'.
-				_('WARNING! It is a bad idea to change a question after responses to it have been submitted').
-				'</p>';
+			$warning_msg = $HTML->warning_msg(_('WARNING! It is a bad idea to change a question after responses to it have been submitted'));
 			$question_id = $q->getID();
 			$question = $q->getQuestion();
 			$question_type = $q->getQuestionType();
@@ -155,6 +154,7 @@ class SurveyHTML extends Error {
 	function showAddSurveyForm( &$s) {
 		global $group_id;
 		global $survey_id;
+		global $HTML;
 
 		/* If no question is available */
 		if (! $survey_id && ! count($s->getAddableQuestionInstances())) {
@@ -172,8 +172,7 @@ class SurveyHTML extends Error {
 
 		/* If we have a survey object, it is a Modify */
 		if ($s && is_object($s) && !$s->isError() && $s->getID()) {
-			$warning_msg = '<p class="warning_msg">'.
-				_('WARNING! It is a bad idea to edit a survey after responses have been posted').'</p>';
+			$warning_msg = $HTML->warning_msg(_('WARNING! It is a bad idea to edit a survey after responses have been posted'));
 			$survey_id = $s->getID();
 			$survey_title = $s->getTitle();
 			$survey_questions = $s->getQuestionString();
@@ -211,7 +210,7 @@ class SurveyHTML extends Error {
 			$title_arr[] = "&nbsp;";
 			$title_arr[] = _('Questions');
 			$title_arr[] = "&nbsp;";
-			$ret.=$GLOBALS['HTML']->listTableTop ($title_arr);
+			$ret.= $HTML->listTableTop ($title_arr);
 		}
 
 		for($i = 0;  $i  <  count($arr_to_add);  $i++)  {
@@ -222,7 +221,7 @@ class SurveyHTML extends Error {
 			}
 
 			if ($i%3==0) {
-				$ret.= "<tr ". $GLOBALS['HTML']->boxGetAltRowStyle($i) .">\n";
+				$ret.= "<tr ". $HTML->boxGetAltRowStyle($i) .">\n";
 			}
 
 			$ret.= '<td><input type="checkbox" name="to_add[]" value="'.$arr_to_add[$i]->getID().'" />'.
@@ -242,14 +241,14 @@ class SurveyHTML extends Error {
 				$ret.='<td>&nbsp;</td></tr>';
 			}
 
-			$ret.= $GLOBALS['HTML']->listTableBottom();
+			$ret.= $HTML->listTableBottom();
 		}
 
 		/* Deletable questions */
 		if (count($arr_to_del) > 0) {
 			$ret.='<h2>'. _('Questions in this Survey').'</h2>';
 			$title_arr = array(_('Question'), _('Type'), _('Order'), _('Delete from this Survey'));
-			$ret.=$GLOBALS['HTML']->listTableTop ($title_arr);
+			$ret.= $HTML->listTableTop ($title_arr);
 		}
 
 		for($i = 0;  $i  <  count($arr_to_del);  $i++)  {
@@ -258,7 +257,7 @@ class SurveyHTML extends Error {
 				continue;
 			}
 
-			$ret.= "<tr ". $GLOBALS['HTML']->boxGetAltRowStyle($i) .">\n";
+			$ret.= "<tr ". $HTML->boxGetAltRowStyle($i) .">\n";
 
 			$ret.= '<td>'.$arr_to_del[$i]->getID().'</td>';
 			$ret.= '<td>'.$arr_to_del[$i]->getQuestion().'</td>';
@@ -272,7 +271,7 @@ class SurveyHTML extends Error {
 		}
 
 		if (count($arr_to_del)) {
-			$ret.= $GLOBALS['HTML']->listTableBottom();
+			$ret.= $HTML->listTableBottom();
 		}
 
 		/* Privous style question input text box. deprecated.
@@ -293,13 +292,14 @@ class SurveyHTML extends Error {
 	 */
 	function showQuestions(&$questions) {
 		global $group_id;
+		global $HTML;
 
 		$n = count($questions);
 		$ret = "<h2>" . sprintf(ngettext("%d question found", "%d questions found", $n), $n)."</h2>";
 
 		/* Head information */
 		$title_arr = array(_('Question ID'), _('Question'), _('Type'), _('Edit/Delete'));
-		$ret.=$GLOBALS['HTML']->listTableTop ($title_arr);
+		$ret.= $HTML->listTableTop ($title_arr);
 
 		for($i = 0;  $i  <  count($questions);  $i++)  {
 			if ($questions[$i]->isError()) {
@@ -307,22 +307,16 @@ class SurveyHTML extends Error {
 				continue;
 			}
 
-			$ret.= "<tr ". $GLOBALS['HTML']->boxGetAltRowStyle($i) .">\n";
-			$ret.= "<td><a href=\"question.php?group_id=$group_id&amp;question_id=".
-				$questions[$i]->getID()."\">".$questions[$i]->getID()."</a></td>\n";
-
+			$ret.= "<tr ". $HTML->boxGetAltRowStyle($i) .">\n";
+			$ret.= '<td>'.util_make_link('/survey/admin/question.php?group_id='.$group_id.'&question_id='.$questions[$i]->getID(), $questions[$i]->getID()).'</td>'."\n";
 			$ret.= '<td>'.$questions[$i]->getQuestion().'</td>';
 			$ret.= '<td>'.$questions[$i]->getQuestionStringType().'</td>';
-
 			/* Edit/Delete Link */
-			$ret.= "<td>[<a href=\"question.php?group_id=$group_id&amp;question_id=".$questions[$i]->getID().'">';
-			$ret.= _('Edit').'</a>] ';
-			$ret.= "[<a href=\"question.php?delete=Y&amp;group_id=$group_id&amp;question_id=".$questions[$i]->getID().'">';
-			$ret.= _('Delete').'</a>]</td>';
-
-			$ret.= "</tr>";
+			$ret.= '<td>['.util_make_link('/survey/admin/question.php?group_id='.$group_id.'&question_id='.$questions[$i]->getID(), _('Edit')).'] ';
+			$ret.= '['.util_make_link('/survey/admin/question.php?delete=Y&group_id='.$group_id.'&question_id='.$questions[$i]->getID(), _('Delete')).']</td>';
+			$ret.= '</tr>';
 		}
-		$ret.= $GLOBALS['HTML']->listTableBottom();
+		$ret.= $HTML->listTableBottom();
 		return $ret;
 	}
 
@@ -341,6 +335,7 @@ class SurveyHTML extends Error {
 			      $show_inactive=0 ) {
 		global $user_id;
 		global $group_id;
+		global $HTML;
 
 		$ret = '';
 		$displaycount = 0;
@@ -380,7 +375,7 @@ class SurveyHTML extends Error {
 			$title_arr[] = _("CSV");
 		}
 
-		$ret.=$GLOBALS['HTML']->listTableTop ($title_arr);
+		$ret.= $HTML->listTableTop ($title_arr);
 
 		/* Color index for table */
 		$color_index=0;
@@ -392,14 +387,14 @@ class SurveyHTML extends Error {
 
 			$displaycount++;
 
-			$ret.= "<tr ". $GLOBALS['HTML']->boxGetAltRowStyle($color_index++) .">\n";
+			$ret.= "<tr ". $HTML->boxGetAltRowStyle($color_index++) .">\n";
 			if ($show_id) {
 				$ret.= '<td>'.$surveys[$i]->getID().'</td>';
 			}
 
 			$ret.= '<td>';
 			if ($surveys[$i]->isActive()) {
-				$ret.= util_make_link ('/survey/survey.php?group_id='.$group_id.'&survey_id='. $surveys[$i]->getID(), $surveys[$i]->getTitle());
+				$ret.= util_make_link('/survey/survey.php?group_id='.$group_id.'&survey_id='. $surveys[$i]->getID(), $surveys[$i]->getTitle());
 			} else {
 				$ret.= '<strike>'.$surveys[$i]->getTitle().'</strike>';
 			}
@@ -424,7 +419,7 @@ class SurveyHTML extends Error {
 			}
 			if ($show_edit) {
 				/* Edit/Delete Link */
-				$ret.= '<td>['.util_make_link ('/survey/admin/survey.php?group_id='.$group_id.'&survey_id='. $surveys[$i]->getID(),_('Edit')).'] ';
+				$ret.= '<td>['.util_make_link('/survey/admin/survey.php?group_id='.$group_id.'&survey_id='. $surveys[$i]->getID(),_('Edit')).'] ';
 
 				/* We don't support delete yet. Need to delete all results as well */
 				/*
@@ -451,9 +446,9 @@ class SurveyHTML extends Error {
 			$ret.= "</tr>\n";
 		}
 
-		$ret.= $GLOBALS['HTML']->listTableBottom();
+		$ret.= $HTML->listTableBottom();
 		if ($displaycount == 0) {
-			return '<p class="information">'._('No Survey is found').'</p>';
+			return $HTML->information(_('No Survey is found'));
 		}
 		return $ret;
 	}
@@ -466,16 +461,17 @@ class SurveyHTML extends Error {
 	function showSurveyForm(&$s) {
 		global $group_id;
 		global $survey_id;
+		global $HTML;
 
 		if (!$s->isActive()) {
-			return '<p class="error">'. _('Error: you cannot vote for inactive survey').'</p>';
+			return $HTML->error_msg(_('Error: you cannot vote for inactive survey'));
 		}
 		/* Get questions of this survey */
 		$questions = & $s->getQuestionInstances();
 
 		$ret="";
 		if ($s->isUserVote(user_getid())) {
-			$ret.= '<p class="warning_msg">'. _('Warning - you are about to vote a second time on this survey.').'</p>';
+			$ret.= $HTML->warning_msg(_('Warning - you are about to vote a second time on this survey.'));
 		}
 		$ret.= '<form action="/survey/survey_resp.php" method="post">'.
 			'<input type="hidden" name="group_id" value="'.$group_id.'" />'.
@@ -684,11 +680,11 @@ class SurveyHTML extends Error {
 					$ret.='</pre>';
 				}
 			} else {
-				$ret.='<ul><li><a href="show_results.php?survey_id='.$Survey->getID().
-					'&amp;question_id='.$Question->getID().
-					'&amp;group_id='.$group_id.'">'.
-					sprintf(ngettext('View All %s Comment', 'View All %s Comments', $totalCount), $totalCount).
-					'</a></li></ul>';
+				$ret.='<ul><li>'.util_make_link('/survey/admin/show_results.php?survey_id='.$Survey->getID().
+					'&question_id='.$Question->getID().
+					'&group_id='.$group_id,
+					sprintf(ngettext('View All %s Comment', 'View All %s Comments', $totalCount), $totalCount)).
+					'</li></ul>';
 			}
 
 			break;

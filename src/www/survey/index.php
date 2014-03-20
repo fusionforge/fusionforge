@@ -27,17 +27,19 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'survey/SurveyFactory.class.php';
 require_once $gfwww.'survey/include/SurveyHTML.class.php';
 
+global $HTML;
+
 $group_id = getIntFromRequest('group_id');
 $survey_id = getIntFromRequest('survey_id');
 
  /* We need a group_id */
 if (!$group_id) {
-    exit_no_group();
+	exit_no_group();
 }
 
 $g = group_get_object($group_id);
 if (!$g || !is_object($g) || $g->isError()) {
-    exit_no_group();
+	exit_no_group();
 }
 
 $user_id = user_getid();
@@ -53,10 +55,10 @@ plugin_hook ("blocks", "survey index");
 $sf = new SurveyFactory($g);
 $ss = & $sf->getSurveys();
 if (!$ss) {
-    echo '<p class="information">' . (_('No Survey is found')) . '</p>';
+	echo $HTML->information(_('No Survey is found'));
 } else {
 	echo '<p>' . _('Select a survey to vote') . '</p>';
-    echo($sh->showSurveys($ss, 0, 0, 1, 1, 1, 0));
+	echo($sh->showSurveys($ss, 0, 0, 1, 1, 1, 0));
 }
 
 $sh->footer();

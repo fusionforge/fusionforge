@@ -33,6 +33,8 @@ require_once $gfcommon.'frs/FRSPackage.class.php';
 require_once $gfcommon.'frs/FRSRelease.class.php';
 require_once $gfcommon.'frs/FRSFile.class.php';
 
+global $HTML;
+
 $group_id = getIntFromRequest('group_id');
 if (!$group_id) {
 	exit_no_group();
@@ -118,7 +120,7 @@ $res = db_query_params('SELECT status_id, package_id, name AS package_name, is_p
 $rows = db_numrows($res);
 if ($res && $rows > 0) {
 	echo '<h2>'._('QRS').'</h2>';
-	printf(_('Click here to %1$s quick-release a file %2$s'), '<a href="qrs.php?group_id=' . $group_id . '">', '</a>');
+	echo _('Click here to ').util_make_link('/frs/admin/qrs.php?group_id='.$group_id, _('quick-release a file'));
 	echo '<br />';
 }
 ?>
@@ -149,7 +151,7 @@ if ($res && $rows > 0) {
 */
 
 if (!$res || $rows < 1) {
-	echo '<p class="information">'._('There are no packages defined.').'</p>';
+	echo $HTML->information(_('There are no packages defined.'));
 } else {
 	$title_arr = array();
 	$title_arr[] = _('Releases');
@@ -158,38 +160,30 @@ if (!$res || $rows < 1) {
 	$title_arr[] = _('Publicly Viewable');
 
 	echo '
-		<form action="'. getStringFromServer('PHP_SELF') .'" method="post">
+		<form action="'.util_make_uri('/frs/admin/').'" method="post">
 		<input type="hidden" name="group_id" value="'.$group_id.'" />
 		<input type="hidden" name="func" value="update_package" />';
-	echo $GLOBALS['HTML']->listTableTop($title_arr);
+	echo $HTML->listTableTop($title_arr);
 
 	for ($i = 0; $i < $rows; $i++) {
-		echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
-			<td style="white-space: nowrap;" align="center">
-					<a href="qrs.php?package_id='.
-						db_result($res, $i, 'package_id') .'&amp;group_id='. $group_id .'"><strong>['._('Add Release').']</strong>
-					</a>';
+		echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>
+			<td style="white-space: nowrap;" align="center">'.
+				util_make_link('/frs/admin/qrs.php?package_id='.db_result($res, $i, 'package_id').'&group_id='.$group_id, '<strong>['._('Add Release').']</strong>');
 		$packageObject = frspackage_get_object(db_result($res, $i, 'package_id'));
 		if (count($packageObject->getReleases())) {
-			echo '		<a href="showreleases.php?package_id='.
-						db_result($res, $i, 'package_id') .'&amp;group_id='. $group_id .'"><strong>['._('Edit Releases').']</strong>
-					</a>';
+			echo util_make_link('/frs/admin/showreleases.php?package_id='.db_result($res, $i, 'package_id').'&group_id='.$group_id, '<strong>['._('Edit Releases').']</strong>');
 		}
 		echo '	</td>
 			<td><input type="hidden" name="package_id" value="'. db_result($res, $i, 'package_id') .'" /><input type="text" name="package_name" value="'.db_result($res, $i, 'package_name') .'" size="20" maxlength="60" required="required" pattern=".{3,}" title="'. _('At least 3 characters') .'" /></td>
 			<td>'.frs_show_status_popup('status_id', db_result($res, $i, 'status_id')).'</td>
 			<td>'.frs_show_public_popup('is_public', db_result($res, $i, 'is_public')).'</td>
-			<td><input type="submit" name="submit" value="'._('Update').'" />
-
-					<a href="deletepackage.php?package_id='.
-						db_result($res,$i,'package_id') .'&amp;group_id='. $group_id .'"><strong>['._('Delete').']</strong>
-					</a>
-
-			</td>
+			<td><input type="submit" name="submit" value="'._('Update').'" />'.
+				util_make_link('/frs/admin/deletepackage.php?package_id='.db_result($res,$i,'package_id').'&group_id='.$group_id, '<strong>['._('Delete').']</strong>').
+			'</td>
 			</tr>';
 	}
 
-	echo $GLOBALS['HTML']->listTableBottom();
+	echo $HTML->listTableBottom();
 	echo '</form>';
 }
 
@@ -201,7 +195,7 @@ if (!$res || $rows < 1) {
 
 <fieldset>
 <legend><?php echo _('Create New Package') ?></legend>
-<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
+<form action="<?php echo util_make_uri('/frs/admin'); ?>" method="post">
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
 <input type="hidden" name="func" value="add_package" />
 <p><strong><?php echo _('New Package Name')._(':'); ?></strong>
