@@ -82,7 +82,6 @@ class ReportPerGroupDocmanDownloads extends Report {
 					ORDER BY docman_dlstats_doc.month DESC,
 					docman_dlstats_doc.day DESC',
 					array ($group_id,
-						1,
 						$start_m,
 						$end_m));
 
