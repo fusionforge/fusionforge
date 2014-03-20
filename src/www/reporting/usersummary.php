@@ -28,7 +28,9 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'reporting/report_utils.php';
 require_once $gfcommon.'reporting/Report.class.php';
 
-session_require_global_perm ('forge_stats', 'read') ;
+global $HTML;
+
+session_require_global_perm('forge_stats', 'read');
 
 $report=new Report();
 if ($report->isError()) {
@@ -78,25 +80,25 @@ report_header(_('User Summary Report'));
 
 	<?php
 	$res = db_query_params ('SELECT users.realname,users.user_id,users.user_name, ps.status_name, pgl.group_id, pt.group_project_id, pt.summary, pt.hours, pt.end_date, pt.project_task_id, pt.hours, sum(rtt.hours) AS remaining_hrs,
-(select sum(hours) from rep_time_tracking
-	WHERE user_id=users.user_id
-	AND project_task_id=pt.project_task_id
-	AND report_date BETWEEN $1 AND $2) AS cumulative_hrs
-FROM users, project_assigned_to pat, project_status ps, project_group_list pgl, project_task pt
-LEFT JOIN rep_time_tracking rtt USING (project_task_id)
-WHERE users.user_id=pat.assigned_to_id
-AND pgl.group_project_id=pt.group_project_id
-AND pat.project_task_id=pt.project_task_id
-AND pt.status_id=ps.status_id
-AND pt.status_id = ANY ($3)
-AND pt.start_date BETWEEN $1 AND $2
-GROUP BY realname, users.user_id, user_name, status_name, pgl.group_id, pt.group_project_id,
-	summary, pt.hours, end_date, pt.project_task_id, pt.hours',
+				(select sum(hours) from rep_time_tracking
+					WHERE user_id=users.user_id
+					AND project_task_id=pt.project_task_id
+					AND report_date BETWEEN $1 AND $2) AS cumulative_hrs
+				FROM users, project_assigned_to pat, project_status ps, project_group_list pgl, project_task pt
+				LEFT JOIN rep_time_tracking rtt USING (project_task_id)
+				WHERE users.user_id=pat.assigned_to_id
+				AND pgl.group_project_id=pt.group_project_id
+				AND pat.project_task_id=pt.project_task_id
+				AND pt.status_id=ps.status_id
+				AND pt.status_id = ANY ($3)
+				AND pt.start_date BETWEEN $1 AND $2
+				GROUP BY realname, users.user_id, user_name, status_name, pgl.group_id, pt.group_project_id,
+					summary, pt.hours, end_date, pt.project_task_id, pt.hours',
 				array ($start,
-				       $end,
-				       db_int_array_to_any_clause (explode(',',$tstat))));
+					$end,
+					db_int_array_to_any_clause (explode(',',$tstat))));
 if (!$res || db_numrows($res) < 1) {
-	echo '<p class="information">' . _('No matches found').db_error() . '</p>';
+	echo $HTML->information(_('No matches found').db_error());
 } else {
 	$tableHeaders = array(
 		_('Name'),
@@ -120,7 +122,7 @@ if (!$res || db_numrows($res) < 1) {
 		echo '
 		<tr '.$HTML->boxGetAltRowStyle(1).'>
 			<td>&nbsp;</td>
-			<td>'.util_make_link('/pm/task.php?func=detailtask&group_id='.db_result($res,$i,'group_id') .'&project_task_id='.db_result($res,$i,'project_task_id') .'&group_project_id='.db_result($res,$i,'group_project_id'),db_result($res,$i,'summary')) .'
+			<td>'.util_make_link('/pm/task.php?func=detailtask&group_id='.db_result($res,$i,'group_id').'&project_task_id='.db_result($res,$i,'project_task_id') .'&group_project_id='.db_result($res,$i,'group_project_id'),db_result($res,$i,'summary')) .'
 			</td>
 			<td>'.db_result($res,$i,'status_name').'</td>
 			<td>'.number_format(db_result($res,$i,'cumulative_hrs'),1).'</td>
@@ -161,10 +163,8 @@ if (!$res || db_numrows($res) < 1) {
 			}
 			$last_tracker='';
 		}
-
 	}
 	echo $HTML->listTableBottom();
-
 }
 
 report_footer();

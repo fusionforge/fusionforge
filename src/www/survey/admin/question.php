@@ -6,6 +6,7 @@
  * Copyright 2002-2004 (c) GForge Team
  * Copyright 2008-2010 (c) FusionForge Team
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -30,6 +31,8 @@ require_once $gfcommon.'survey/SurveyQuestion.class.php';
 require_once $gfcommon.'survey/SurveyQuestionFactory.class.php';
 require_once $gfwww.'survey/include/SurveyHTML.class.php';
 
+global $HTML;
+
 $group_id = getIntFromRequest('group_id');
 $survey_id = getIntFromRequest('survey_id');
 $question_id = getIntFromRequest('question_id');
@@ -53,7 +56,7 @@ $title = $question_id ? _('Edit a Question') : _('Add a Question');
 $sh->header(array('title'=>$title, 'modal'=>1));
 
 if (!session_loggedin() || !forge_check_perm('project_admin', $group_id)) {
-	echo '<div class="error">'._('Permission denied.').'</div>';
+	echo $HTML->error_msg(_('Permission denied.'));
 	$sh->footer();
 	exit;
 }
@@ -61,9 +64,9 @@ if (!session_loggedin() || !forge_check_perm('project_admin', $group_id)) {
 /* Create a Survey Question for general purpose */
 $sq = new SurveyQuestion($g, $question_id);
 if (!$sq || !is_object($sq)) {
-	echo '<div class="error">'._('Error'). ' ' . _('Cannot get Survey Question') ."</div>";
+	echo $HTML->error_msg(_('Error'). ' ' . _('Cannot get Survey Question'));
 } elseif ($sq->isError()) {
-	echo '<div class="error">'._('Error'). $sq->getErrorMessage() ."</div>";
+	echo $HTML->error_msg(_('Error'). $sq->getErrorMessage());
 }
 
 /* Delete a question */
@@ -72,11 +75,9 @@ if (getStringFromRequest('delete')=="Y" && $question_id) {
 
 	/* Error */
 	if ($sq->isError()) {
-		$msg = _('Delete failed').' '.$sq->getErrorMessage();
-		echo '<p class="error">' .$msg ."</p>";
+		echo $HTML->error_msg(_('Delete failed').' '.$sq->getErrorMessage());
 	} else {
-		$msg = _('Successfully Deleted.');
-		echo '<p class="feedback">' .$msg ."</p>";
+		echo $HTML->feedback(_('Successfully Deleted.'));
 	}
 } elseif (getStringFromRequest('post')=="Y") {
 	/* Modification */
@@ -94,11 +95,10 @@ if (getStringFromRequest('delete')=="Y" && $question_id) {
 
 	/* Error */
 	if ($sq->isError()) {
-		$msg = $sq->getErrorMessage();
+		echo $HTML->error_msg($sq->getErrorMessage());
 		form_release_key(getStringFromRequest("form_key"));
-		echo '<p class="error">' .$msg ."</p>";
 	} else {
-		echo '<p class="feedback">' .$msg ."</p>";
+		echo $HTML->feedback($msg);
 	}
 
 	/* Add now Question */
@@ -115,9 +115,7 @@ echo($sh->showAddQuestionForm($sq));
 $sqf = new SurveyQuestionFactory($g);
 $sqs = $sqf->getSurveyQuestions();
 if (!$sqs) {
-	echo '<p class="information">';
-	echo (_('No questions found'));
-	echo '</p>';
+	echo $HTML->information(_('No questions found'));
 } else {
 	echo($sh->showQuestions($sqs));
 }

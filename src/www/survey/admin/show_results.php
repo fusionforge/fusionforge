@@ -5,7 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -35,6 +35,8 @@ require_once $gfcommon.'survey/SurveyResponse.class.php';
 require_once $gfcommon.'survey/SurveyResponseFactory.class.php';
 require_once $gfwww.'survey/include/SurveyHTML.class.php';
 
+global $HTML;
+
 $group_id = getIntFromRequest('group_id');
 $survey_id = getIntFromRequest('survey_id');
 $graph = getStringFromRequest('graph');
@@ -63,7 +65,7 @@ $title = _('Survey Results');
 $sh->header(array('title' => $title, 'modal' => 1));
 
 if (!session_loggedin() || !forge_check_perm('project_admin', $group_id)) {
-	echo '<p class="error">'._('Permission denied.').'</p>';
+	echo $HTML->error_msg(_('Permission denied.'));
 	$sh->footer();
 	exit;
 }
@@ -73,11 +75,11 @@ if ($survey_id) {
 	$s = new Survey($g, $survey_id);
 
 	if (!$s || !is_object($s)) {
-		echo '<p class="error">'._('Error'). ' ' . _('Cannot get Survey') ."</p>";
+		echo $HTML->error_msg(_('Error'). ' ' . _('Cannot get Survey'));
 		$sh->footer();
 		exit;
 	} elseif ( $s->isError()) {
-		echo '<p class="error">'._('Error'). $s->getErrorMessage() ."</p>";
+		echo $HTML->error_msg(_('Error'). $s->getErrorMessage());
 		$sh->footer();
 		exit;
 	}
@@ -88,9 +90,9 @@ if ($survey_id) {
 		/* Create a Survey Question for general purpose */
 		$sq = new SurveyQuestion($g, $question_id);
 		if (!$sq || !is_object($sq)) {
-			echo '<p class="error">'._('Error'). ' ' . _('Cannot get Survey Question') ."</p>";
+			echo $HTML->error_msg(_('Error'). ' ' . _('Cannot get Survey Question'));
 		} elseif ($sq->isError()) {
-			echo '<p class="error">'._('Error'). $sq->getErrorMessage() ."</p>";
+			echo $HTML->error_msg(_('Error'). $sq->getErrorMessage());
 		} else {
 			showResult($sh, $s, $sq, 1, 0, $graph);
 		}
@@ -119,7 +121,7 @@ if ($survey_id) {
 $sf = new SurveyFactory($g);
 $ss = & $sf->getSurveys();
 if (!$ss) {
-	echo '<p class="information">' . _('No Survey Question is found') . '</p>';
+	echo $HTML->information(_('No Survey Question is found'));
 } else {
 	echo($sh->showSurveys($ss, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1));
 }
@@ -137,9 +139,9 @@ function showResult(&$SurveyHTML, &$Survey, &$Question, $show_comment=0, $q_num=
 	/* Get results */
 	$srf = new SurveyResponseFactory($Survey, $Question);
 	if (!$srf || !is_object($srf)) {
-		echo '<p class="error">'._('Error'). ' ' . _('Cannot get Survey Response Factory') ."</p>";
+		echo $HTML->error_msg(_('Error'). ' ' . _('Cannot get Survey Response Factory'));
 	} elseif ( $srf->isError()) {
-		echo '<p class="error">'._('Error'). $srf->getErrorMessage() ."</p>";
+		echo $HTML->error_msg(_('Error'). $srf->getErrorMessage());
 	} else {
 		/* Show result in HTML*/
 		echo ($SurveyHTML->showResult($srf, $show_comment, $q_num, $graph));

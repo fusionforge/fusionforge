@@ -31,17 +31,19 @@ require_once $gfcommon.'survey/SurveyQuestion.class.php';
 require_once $gfcommon.'survey/SurveyQuestionFactory.class.php';
 require_once $gfwww.'survey/include/SurveyHTML.class.php';
 
+global $HTML;
+
 $group_id = getIntFromRequest('group_id');
 $survey_id = getIntFromRequest('survey_id');
 
 /* We need a group_id */
 if (!$group_id) {
-    exit_no_group();
+	exit_no_group();
 }
 
 $g = group_get_object($group_id);
 if (!$g || !is_object($g) || $g->isError()) {
-    exit_no_group();
+	exit_no_group();
 }
 
 $is_admin_page='y';
@@ -50,27 +52,27 @@ $s = new Survey($g, $survey_id);
 
 if (!session_loggedin() || !forge_check_perm('project_admin', $group_id)) {
 	$sh->header(array());
-	echo '<div class="error">' . _('Permission denied.') . '</div>';
+	echo $HTML->error_msg(_('Permission denied.'));
 	$sh->footer();
 	exit;
 }
 
 if (getStringFromRequest('post')=="Y") {
-    if (!form_key_is_valid(getStringFromRequest('form_key'))) {
+	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 		exit_form_double_submit('surveys');
 	}
 	$survey_title = getStringFromRequest('survey_title');
-    $to_add = getStringFromRequest('to_add');
-    $to_del = getStringFromRequest('to_del');
-    $is_active = getStringFromRequest('is_active');
+	$to_add = getStringFromRequest('to_add');
+	$to_del = getStringFromRequest('to_del');
+	$is_active = getStringFromRequest('is_active');
 
-    if ($survey_id) { /* Modify */
+	if ($survey_id) { /* Modify */
 		$s->update($survey_title, $to_add, $to_del, $is_active);
 		$feedback = _('Update Successful');
-    }  else {  /* Add */
+	}  else {  /* Add */
 		$s->create($survey_title, $to_add, $is_active);
 		$feedback = _('Survey Added');
-    }
+	}
 }
 
 /* Order changes */
@@ -84,8 +86,8 @@ if (getStringFromRequest('updown')=="Y") {
 
 /* Error on previous transactions? */
 if ($s->isError()) {
-    $error_msg = $s->getErrorMessage();
-    form_release_key(getStringFromRequest("form_key"));
+	$error_msg = $s->getErrorMessage();
+	form_release_key(getStringFromRequest("form_key"));
 }
 
 $title = $survey_id ? _('Edit a Survey') : _('Add a Survey');
@@ -97,7 +99,7 @@ echo ($sh->ShowAddSurveyForm($s));
 $sf = new SurveyFactory($g);
 $ss = & $sf->getSurveys();
 if (!$ss) {
-	echo '<p class="information">' . _('No Survey is found') . '</p>';
+	echo $HTML->information(_('No Survey is found'));
 } else {
 	echo($sh->showSurveys($ss, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1));
 }
