@@ -59,7 +59,7 @@ class ScmGitTest extends FForge_SeleniumTestCase
 
 		$this->open(ROOT.'/plugins/scmgit/cgi-bin/gitweb.cgi?a=project_list;pf=projecta');
 		$this->waitForPageToLoad();
-		$this->assertElementPresent("//div[@class='page_footer']");
+		$this->assertElementPresent("//.[@class='page_footer']");
 		$this->assertTextPresent("projecta.git");
 		$this->assertTextPresent("other-repo.git");
 		$this->assertTextPresent("users/".FORGE_ADMIN_USERNAME.".git");
@@ -77,7 +77,7 @@ class ScmGitTest extends FForge_SeleniumTestCase
 
 		$this->open(ROOT.'/plugins/scmgit/cgi-bin/gitweb.cgi?a=project_list;pf=projecta');
 		$this->waitForPageToLoad();
-		$this->assertElementPresent("//div[@class='page_footer']");
+		$this->assertElementPresent("//.[@class='page_footer']");
 		$this->assertTextPresent("projecta.git");
 		$this->assertTextNotPresent("other-repo.git");
 		$this->assertTextPresent("users/".FORGE_ADMIN_USERNAME.".git");
@@ -92,7 +92,7 @@ class ScmGitTest extends FForge_SeleniumTestCase
 	{
 		if ($action == 'waitForPageToLoad') {
 			$this->assertTrue($this->isElementPresent("//h1")
-					  || $this->isElementPresent("//div[@class='page_footer']"));
+					  || $this->isElementPresent("//.[@class='page_footer']"));
 		}
 	}
 
