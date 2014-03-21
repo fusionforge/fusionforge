@@ -1119,6 +1119,7 @@ class GitPlugin extends SCMPlugin {
 <input type="hidden" name="group_id" value="<?php echo $params['group_id'] ?>" />
 <input type="hidden" name="delete_repository" value="1" />
 <input type="hidden" name="repo_name" value="<?php echo $repo['repo_name']?>" />
+<input type="hidden" name="scm_enable_anonymous" value="<?php if ($project->enableAnonSCM()) echo 1 ; else echo 0 ?>" />
 <input type="submit" name="submit" value="<?php echo _('Delete') ?>" />
 </form>
 <?php
@@ -1140,6 +1141,7 @@ class GitPlugin extends SCMPlugin {
 <input type="text" size="60" name="description" value="" /></p>
 <p><strong><?php echo _('Initial clone URL (or name of an existing repository in this project; leave empty to start with an empty repository):') ?></strong><br />
 <input type="text" size="60" name="clone" value="<?php echo $project_name; ?>" /></p>
+<input type="hidden" name="scm_enable_anonymous" value="<?php if ($project->enableAnonSCM()) echo 1 ; else echo 0 ?>" />
 <input type="submit" name="cancel" value="<?php echo _('Cancel') ?>" />
 <input type="submit" name="submit" value="<?php echo _('Submit') ?>" />
 </form>
