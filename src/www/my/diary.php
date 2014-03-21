@@ -53,12 +53,12 @@ if (!session_loggedin()) {
 		if (getStringFromRequest('update')) {
 			//updating an existing diary entry
 			$res=db_query_params ('UPDATE user_diary SET summary=$1,details=$2,is_public=$3
-WHERE user_id=$4 AND id=$5',
-			array($summary,
-				$details,
-				$is_public,
-				user_getid() ,
-				$diary_id));
+						WHERE user_id=$4 AND id=$5',
+						array($summary,
+							$details,
+							$is_public,
+							user_getid() ,
+							$diary_id));
 			if ($res && db_affected_rows($res) > 0) {
 				$feedback .= _('Diary Updated');
 			} else {
@@ -68,7 +68,7 @@ WHERE user_id=$4 AND id=$5',
 			}
 		} elseif (getStringFromRequest('add')) {
 			//inserting a new diary entry
-			$res=db_query_params ('INSERT INTO user_diary (user_id,date_posted,summary,details,is_public) VALUES
+			$res = db_query_params ('INSERT INTO user_diary (user_id,date_posted,summary,details,is_public) VALUES
 								($1,$2,$3,$4,$5)',
 								array(user_getid() ,
 									time() ,
@@ -80,11 +80,11 @@ WHERE user_id=$4 AND id=$5',
 				if ($is_public) {
 
 					//send an email if users are monitoring
-					$result=db_query_params ('SELECT users.email from user_diary_monitor,users
+					$result = db_query_params ('SELECT users.email from user_diary_monitor,users
 										WHERE user_diary_monitor.user_id=users.user_id
 										AND user_diary_monitor.monitored_user=$1',
 										array(user_getid() ));
-					$rows=db_numrows($result);
+					$rows = db_numrows($result);
 
 					if ($result) {
 						if ($rows > 0) {
@@ -112,7 +112,7 @@ WHERE user_id=$4 AND id=$5',
 							$body .= _('To stop monitoring this user, visit the following link:');
 							$body .= "\n";
 
-							$body .= util_make_url("/developer/monitor.php?diary_user=".user_getid());
+							$body .= util_make_url('/developer/monitor.php?diary_user='.user_getid());
 
 							util_send_message($to, $subject, $body, $to, $tolist);
 
@@ -144,35 +144,34 @@ WHERE user_id=$4 AND id=$5',
 	$_is_public = '';
 
 	if ($diary_id) {
-
 		$res=db_query_params('SELECT * FROM user_diary WHERE user_id=$1 AND id=$2',
-							array(user_getid(),
-								$diary_id));
+					array(user_getid(),
+						$diary_id));
 		if (!$res || db_numrows($res) < 1) {
 			$feedback .= _('Entry not found or does not belong to you');
-			$proc_str='add';
-			$info_str=_('Add A New Entry');
+			$proc_str = 'add';
+			$info_str = _('Add A New Entry');
 		} else {
-			$proc_str='update';
-			$info_str=_('Update An Entry');
-			$_summary=db_result($res,0,'summary');
-			$_details=db_result($res,0,'details');
-			$_is_public=db_result($res,0,'is_public');
-			$_diary_id=db_result($res,0,'id');
+			$proc_str = 'update';
+			$info_str = _('Update An Entry');
+			$_summary = db_result($res,0,'summary');
+			$_details = db_result($res,0,'details');
+			$_is_public = db_result($res,0,'is_public');
+			$_diary_id = db_result($res,0,'id');
 		}
 	} else {
-		$proc_str='add';
-		$info_str=_('Add A New Entry');
+		$proc_str = 'add';
+		$info_str = _('Add A New Entry');
 		$_diary_id = '';
 	}
 
-	site_user_header(array('title'=>_('My Diary and Notes')));
+	site_user_header(array('title' => _('My Diary and Notes')));
 
-	$params['name'] = "details";
+	$params['name'] = 'details';
 	$params['body'] = $_details;
-	$params['height'] = "350";
-	$params['width'] = "100%";
-	$params['content'] = '<textarea required="required" name="details" rows="10" cols="60">'.$_details.'</textarea>';
+	$params['height'] = '350';
+	$params['width'] = '100%';
+	$params['content'] = html_e('textarea', array('required' => 'required', 'name' => 'details', 'rows' => 10, 'cols' => 60), $_details, false);
 	$params['user_id'] = $u->getID();
 	plugin_hook_by_reference("text_editor", $params);
 
@@ -183,13 +182,13 @@ WHERE user_id=$4 AND id=$5',
 	echo html_e('input', array('type' => 'hidden', 'name' => $proc_str, 'value' => '1'));
 	echo html_e('input', array('type' => 'hidden', 'name' => 'diary_id', 'value' => $_diary_id));
 	echo html_ao('table', array('class' => 'fullwidth'));
-	echo html_ao('tr').html_ao('td');	
+	echo html_ao('tr').html_ao('td');
 	echo html_e('strong', array(),_('Summary')._(':')).'<br />';
 	echo html_e('input', array( 'required' => 'required', 'type' => 'text', 'name' => 'summary', 'size' => '60', 'maxlength' => '60', 'value' => $_summary));
 	echo html_ac(html_ap()-2);
 
 	echo html_ao('tr').html_ao('td');
-	echo html_e('strong', array(),_('Details')._(':')).'<br />';	
+	echo html_e('strong', array(),_('Details')._(':')).'<br />';
 	echo $params['content'];
 	echo html_ac(html_ap()-2);
 
@@ -204,11 +203,11 @@ WHERE user_id=$4 AND id=$5',
 	echo html_ac(html_ap()-1);
 
 	echo html_e('p', array(), _('If marked as public, your entry will be mailed to any monitoring users when it is first submitted.'));
-	echo html_ac(html_ap()-4);	
+	echo html_ac(html_ap()-4);
 
 	echo html_e('h2', array(), _('Existing Diary and Notes Entries'));
-	$result=db_query_params ('SELECT * FROM user_diary WHERE user_id=$1 ORDER BY id DESC',
-			array(user_getid() ));
+	$result=db_query_params('SELECT * FROM user_diary WHERE user_id=$1 ORDER BY id DESC',
+				array(user_getid()));
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo $HTML->information(_('You Have No Diary Entries'));
@@ -219,7 +218,7 @@ WHERE user_id=$4 AND id=$5',
 			$public = db_result($result,$i,'is_public') ? _('Public') : _('Private');
 			$row_attrs = array('class' => $HTML->boxGetAltRowStyle($i,true));
 			$cell_data = array();
-			$cell_data [] = array(util_make_link('/my/diary.php'.'?diary_id='.db_result($result,$i,'id'), db_result($result,$i,'summary')));
+			$cell_data [] = array(util_make_link('/my/diary.php?diary_id='.db_result($result,$i,'id'), db_result($result,$i,'summary')));
 			$cell_data [] = array($date);
 			$cell_data [] = array($public);
 			echo $HTML->multiTableRow($row_attrs, $cell_data);

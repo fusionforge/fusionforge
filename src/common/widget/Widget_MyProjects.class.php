@@ -74,7 +74,7 @@ class Widget_MyProjects extends Widget {
 					}
 				}
 				if ($isadmin) {
-					$html_my_projects .= ' <small>'.util_make_link('/project/admin/?group_id='.$g->getID(), '['._("Admin").']'.'</small>';
+					$html_my_projects .= ' <small>'.util_make_link('/project/admin/?group_id='.$g->getID(), '['._("Admin").']').'</small>';
 				}
 				$html_my_projects .= ' <small>('.htmlspecialchars (implode (', ', $role_names)).')</small>';
 				if (!$ra->hasPermission('project_read', $g->getID())) {
