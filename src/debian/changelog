@@ -1,8 +1,8 @@
-fusionforge (5.3~rc3+20140321-1) UNRELEASED; urgency=medium
+fusionforge (5.3~rc3+20140321-1) experimental; urgency=medium
 
   * New snapshot from upstream 5.3 branch.
 
- -- Roland Mas <lolando@debian.org>  Fri, 21 Mar 2014 13:25:06 +0100
+ -- Roland Mas <lolando@debian.org>  Fri, 21 Mar 2014 14:28:35 +0100
 
 fusionforge (5.3~rc3+20140319-1) experimental; urgency=medium
 
