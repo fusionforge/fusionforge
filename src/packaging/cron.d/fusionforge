@@ -71,6 +71,9 @@ PATH=@BINARY_PATH@:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 # Create the shell users accounts and groups home directories
 15 * * * * root forge_run_job homedirs.php
 
+# SSH keys
+20 * * * * root forge_run_job ssh_create.php
+
 # Create the new mailing lists
 06 * * * * root forge_run_job mail/mailing_lists_create.php
 

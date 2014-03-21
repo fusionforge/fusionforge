@@ -22,11 +22,6 @@ MAILTO=""
 #10 * * * * root $PHP $FUSIONFORGE/plugins/scmcvs/cronjobs/usergroup.php
 
 #
-#       Upload the SSH key files
-#
-15 * * * * root $PHP $FUSIONFORGE/plugins/scmcvs/cronjobs/ssh_create.php
-
-#
 #       Create the blank cvs trees
 #
 20 * * * * root $PHP $FUSIONFORGE/plugins/scmcvs/cronjobs/cvs.php
