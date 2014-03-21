@@ -49,7 +49,7 @@ class Widget_MyProjects extends Widget {
 		sortRoleList ($roles) ;
 
 		if (count ($groups) < 1) {
-			$html_my_projects .= '<div class="warning">'. _("You're not a member of any project") .'</div>';
+			$html_my_projects .= $HTML->warning_msg(_("You're not a member of any project"));
 		} else {
 			$html_my_projects .= '<table style="width:100%">';
 			$i = 0;
@@ -74,7 +74,7 @@ class Widget_MyProjects extends Widget {
 					}
 				}
 				if ($isadmin) {
-					$html_my_projects .= ' <small><a href="/project/admin/?group_id='.$g->getID().'">['._("Admin").']</a></small>';
+					$html_my_projects .= ' <small>'.util_make_link('/project/admin/?group_id='.$g->getID(), '['._("Admin").']'.'</small>';
 				}
 				$html_my_projects .= ' <small>('.htmlspecialchars (implode (', ', $role_names)).')</small>';
 				if (!$ra->hasPermission('project_read', $g->getID())) {
