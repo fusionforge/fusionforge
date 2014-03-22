@@ -43,6 +43,7 @@ configure_libnss_pgsql(){
 ### NSS Configuration for Gforge
 
 #----------------- DB connection
+# Use 'trust' authentication, cf. https://bugs.debian.org/551389
 connectionstring = user=$db_user_nss dbname=$db_name
 
 
