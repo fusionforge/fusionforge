@@ -5,6 +5,7 @@
  * Copyright 2005, Guillaume Smet <guillaume-gforge@smet.org>
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -61,20 +62,21 @@ class commitTracker extends scmhook {
 						ORDER BY svn_date',
 						array($params['artifact_id']));
 		if (!$DBResult) {
-			echo '<p class="error_msg">'._('Unable to retrieve data').'</p>';
+			echo $HTML->error_msg(_('Unable to retrieve data'));
 		} else {
 			$this->getCommitEntries($DBResult, $params['group_id']);
 		}
 	}
 
 	function task_extra_detail($params) {
+		global $HTML;
 		$DBResult = db_query_params ('SELECT * FROM plugin_scmhook_scmsvn_committracker_data_master, plugin_scmhook_scmsvn_committracker_data_artifact
 						WHERE plugin_scmhook_scmsvn_committracker_data_artifact.project_task_id=$1
 						AND plugin_scmhook_scmsvn_committracker_data_master.holder_id=plugin_scmhook_scmsvn_committracker_data_artifact.id
 						ORDER BY svn_date',
 						array($params['task_id']));
 		if (!$DBResult) {
-			echo '<p class="error_msg">'._('Unable to retrieve data').'</p>';
+			echo $HTML->error_msg(_('Unable to retrieve data'));
 		} else {
 			$this->getCommitEntries($DBResult, $params['group_id']);
 		}
@@ -88,6 +90,7 @@ class commitTracker extends scmhook {
 	*
 	*/
 	function getCommitEntries($DBResult, $group_id) {
+		global $HTML;
 		$group = group_get_object($group_id);
 		$Rows= db_numrows($DBResult);
 
@@ -96,11 +99,11 @@ class commitTracker extends scmhook {
 			echo '<h2>'._('Related SVN commits').'</h2>';
 
 			$title_arr = $this->getTitleArr();
-			echo $GLOBALS['HTML']->listTableTop($title_arr);
+			echo $HTML->listTableTop($title_arr);
 
 			for ($i=0; $i<$Rows; $i++) {
 				$Row = db_fetch_array($DBResult);
-				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
+				echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>'.
 				'<td>'. $this->getFileLink($group->getUnixName(),
 						$Row['file'],$Row['actual_version']). '</td>'.
 				'<td>'. date(_('Y-m-d'), $Row['svn_date']).'</td>'.
@@ -117,7 +120,7 @@ class commitTracker extends scmhook {
 							 $Row['author']).'</td>
 				</tr>';
 			}
-			echo $GLOBALS['HTML']->listTableBottom();
+			echo $HTML->listTableBottom();
 			echo '</td></tr>';
 		}
 	}

@@ -69,6 +69,7 @@ function admin_table_add($table, $unit, $primary_key) {
  * @param	string	$unit	the name of the "units" described by the table's records
  */
 function admin_table_postadd($table, $unit) {
+	global $HTML;
 	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 		exit_form_double_submit('home');
 	}
@@ -88,13 +89,9 @@ function admin_table_postadd($table, $unit) {
 	$qpa = db_construct_qpa($qpa, implode (',', $v).')', $values) ;
 
 	if (db_query_qpa($qpa)) {
-		print('<p class="feedback">');
-		printf(_('%s successfully added.'), ucfirst(getUnitLabel($unit)));
-		print('</p>');
+		echo $HTML->feedback(sprintf(_('%s successfully added.'), ucfirst(getUnitLabel($unit))));
 	} else {
-		print('<p class="error">');
-		echo db_error();
-		print('</p>');
+		echo $HTML->error_msg(db_error());
 		form_release_key(getStringFromRequest('form_key'));
 	}
 }
@@ -108,12 +105,13 @@ function admin_table_postadd($table, $unit) {
  * @param	string	$id		the id of the record to act on
  */
 function admin_table_confirmdelete($table, $unit, $primary_key, $id) {
+	global $HTML;
 	if ($unit == "processor") {
 		$result = db_numrows(db_query_params ('SELECT processor_id FROM frs_file WHERE processor_id = $1',
 			array($id)));
 		if ($result > 0) {
-			echo '<p class="warning_msg">'.sprintf(_('You cannot delete the processor %s since it is currently referenced in a file release.'), db_result(db_query_params ('select name from frs_processor where processor_id = $1',
-			array($id)), 0, 0)).'</p>';
+			echo $HTML->warning_msg(sprintf(_('You cannot delete the processor %s since it is currently referenced in a file release.'), db_result(db_query_params ('select name from frs_processor where processor_id = $1',
+			array($id)), 0, 0)));
 			return;
 		}
 	}
@@ -121,16 +119,16 @@ function admin_table_confirmdelete($table, $unit, $primary_key, $id) {
 		$result = db_numrows(db_query_params ('SELECT license FROM groups WHERE license = $1',
 			array($id)));
 		if ($result > 0) {
-			echo '<div class="warning_msg">'.sprintf(_('You can\'t delete the license %s since it is currently referenced in a project.'), db_result(db_query_params ('select license_name from licenses where license_id = $1',
-			array($id)), 0, 0)).'</div>';
+			echo $HTML->warning_msg(sprintf(_('You can\'t delete the license %s since it is currently referenced in a project.'), db_result(db_query_params ('select license_name from licenses where license_id = $1',
+			array($id)), 0, 0)));
 			return;
 		}
 	}
 	if ($unit == "supported_language") {
 		$result = db_numrows(db_query_params("SELECT language FROM users WHERE language=$1", array($id)));
 		if ($result > 0) {
-			echo '<div class="warning_msg">'.sprintf(_('You cannot delete the language %s since it is currently referenced in a user profile.'), db_result(db_query_params ('select language from users where language = $1',
-			array($id)), 0, 0)).'</div>';
+			echo $HTML->warning_msg(sprintf(_('You cannot delete the language %s since it is currently referenced in a user profile.'), db_result(db_query_params ('select language from users where language = $1',
+			array($id)), 0, 0)));
 			return;
 		}
 	}
@@ -138,8 +136,8 @@ function admin_table_confirmdelete($table, $unit, $primary_key, $id) {
 	if ($unit == "theme") {
 		$result = db_numrows(db_query_params("SELECT theme_id FROM users WHERE theme_id=$1", array($id)));
 		if ($result > 0) {
-			echo '<div class="warning_msg">'.sprintf(_('You cannot delete the theme %s since it is currently referenced in a user profile.'), db_result(db_query_params ('select language from users where language = $1',
-			array($id)), 0, 0)).'</div>';
+			echo $HTML->warning_msg(sprintf(_('You cannot delete the theme %s since it is currently referenced in a user profile.'), db_result(db_query_params ('select language from users where language = $1',
+			array($id)), 0, 0)));
 			return;
 		}
 	}
@@ -163,7 +161,7 @@ function admin_table_confirmdelete($table, $unit, $primary_key, $id) {
 			<input type="submit" value="'._('Cancel').'" />
 			</form>';
 	} else {
-		echo db_error();
+		echo $HTML->error_msg(db_error());
 	}
 }
 
@@ -176,12 +174,11 @@ function admin_table_confirmdelete($table, $unit, $primary_key, $id) {
  * @param	string	$id		the id of the record to act on
  */
 function admin_table_delete($table, $unit, $primary_key, $id) {
+	global $HTML;
 	if (db_query_params("DELETE FROM $table WHERE $primary_key=$1", array($id))) {
-                print('<p class="feedback">');
-		printf(_('%s successfully deleted.'), ucfirst(getUnitLabel($unit)));
-                print('</p>');
+		echo $HTML->feedback(sprintf(_('%s successfully deleted.'), ucfirst(getUnitLabel($unit))));
 	} else {
-		echo db_error();
+		echo $HTML->error_msg(db_error());
 	}
 }
 
@@ -194,6 +191,7 @@ function admin_table_delete($table, $unit, $primary_key, $id) {
  * @param	string	$id		the id of the record to act on
  */
 function admin_table_edit($table, $unit, $primary_key, $id) {
+	global $HTML;
 	$result = db_query_params("SELECT * FROM $table WHERE $primary_key=$1", array($id));
 
 	if ($result) {
@@ -222,7 +220,7 @@ function admin_table_edit($table, $unit, $primary_key, $id) {
 			<input type="submit" value="'._('Cancel').'" />
 			</form>';
 	} else {
-		echo db_error();
+		echo $HTML->error_msg(db_error());
 	}
 }
 
@@ -236,6 +234,7 @@ function admin_table_edit($table, $unit, $primary_key, $id) {
  */
 function admin_table_postedit($table, $unit, $primary_key, $id) {
 	global $_POST;
+	global $HTML;
 
 	$qpa = db_construct_qpa(array(), 'UPDATE ' . $table . ' SET ') ;
 
@@ -253,11 +252,9 @@ function admin_table_postedit($table, $unit, $primary_key, $id) {
 				 array ($id)) ;
 
 	if (db_query_qpa($qpa)) {
-		print('<p class="feedback">');
-		printf(_('%s successfully modified.'), ucfirst(getUnitLabel($unit)));
-		print('</p>');
+		echo $HTML->feedback(sprintf(_('%s successfully modified.'), ucfirst(getUnitLabel($unit))));
 	} else {
-		echo db_error();
+		echo $HTML->error_msg(db_error());
 	}
 
 	$field_list = getStringFromRequest('__fields__');
@@ -276,12 +273,10 @@ function admin_table_postedit($table, $unit, $primary_key, $id) {
 		$qpa = db_construct_qpa($qpa, implode (',', $v).')', $values) ;
 
 		if (db_query_qpa($qpa)) {
-		print('<p class="feedback">');
-			printf(_('%s successfully added.'), ucfirst(getUnitLabel($unit)));
-		print('</p>');
+			echo $HTML->feedback(sprintf(_('%s successfully added.'), ucfirst(getUnitLabel($unit))));
 		} else {
 			form_release_key(getStringFromRequest('form_key'));
-			echo db_error();
+			echo $HTML->error_msg(db_error());
 		}
 	}
 }
@@ -328,7 +323,7 @@ function admin_table_show($table, $unit, $primary_key) {
 		}
 		echo '</table>';
 	} else {
-		echo db_error();
+		echo $HTML->error_msg(db_error());
 	}
 }
 
@@ -345,7 +340,9 @@ function getUnitLabel($unit) {
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 
-session_require_global_perm ('forge_admin');
+global $HTML;
+
+session_require_global_perm('forge_admin');
 
 $HTML->header(array('title'=>sprintf(_('Edit the %ss Table'), ucwords(getUnitLabel($unit)))));
 

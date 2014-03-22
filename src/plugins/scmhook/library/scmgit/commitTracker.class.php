@@ -6,6 +6,7 @@
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2013-2014, Benoit Debaenst - TrivialDev
+ * Copyright 2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -59,13 +60,14 @@ class commitTracker extends scmhook {
 	}
 
 	function artifact_extra_detail($params) {
+		global $HTML;
 		$DBResult = db_query_params('SELECT * FROM plugin_scmhook_scmgit_committracker_data_master, plugin_scmhook_scmgit_committracker_data_artifact
 						WHERE plugin_scmhook_scmgit_committracker_data_artifact.group_artifact_id = $1
 						AND plugin_scmhook_scmgit_committracker_data_master.holder_id = plugin_scmhook_scmgit_committracker_data_artifact.id
 						ORDER BY git_date',
 						array($params['artifact_id']));
 		if (!$DBResult) {
-			echo '<p class="error_msg">'._('Unable to retrieve data').'</p>';
+			echo $HTML->error_msg(_('Unable to retrieve data'));
 		} else {
 			$this->getCommitEntries($DBResult, $params['group_id']);
 		}
@@ -78,7 +80,7 @@ class commitTracker extends scmhook {
 						ORDER BY git_date',
 						array($params['task_id']));
 		if (!$DBResult) {
-			echo '<p class="error_msg">'._('Unable to retrieve data').'</p>';
+			echo $HTML->error_msg(_('Unable to retrieve data'));
 		} else {
 			$this->getCommitEntries($DBResult, $params['group_id']);
 		}
@@ -92,6 +94,7 @@ class commitTracker extends scmhook {
 	*
 	*/
 	function getCommitEntries($DBResult, $group_id) {
+		global $HTML;
 		$group = group_get_object($group_id);
 		$Rows= db_numrows($DBResult);
 
@@ -100,11 +103,11 @@ class commitTracker extends scmhook {
 			echo '<h2>'._('Related Git commits').'</h2>';
 
 			$title_arr = $this->getTitleArr($group_id);
-			echo $GLOBALS['HTML']->listTableTop($title_arr);
+			echo $HTML->listTableTop($title_arr);
 
 			for ($i=0; $i<$Rows; $i++) {
 				$Row = db_fetch_array($DBResult);
-				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
+				echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>'.
 				'<td>'. $this->getFileLink($group->getUnixName(),
 						$Row['file'],$Row['actual_version']). '</td>'.
 				'<td>'. date(_('Y-m-d'), $Row['git_date']).'</td>'.
@@ -121,7 +124,7 @@ class commitTracker extends scmhook {
 							 $Row['author']).'</td>
 				</tr>';
 			}
-			echo $GLOBALS['HTML']->listTableBottom();
+			echo $HTML->listTableBottom();
 			echo '</td></tr>';
 		}
 	}
@@ -136,7 +139,7 @@ class commitTracker extends scmhook {
 	*/
 	function getTitleArr($group_id) {
 		$title_arr=array();
-		$title_arr[]=_('Filename (<a href="/scm/browser.php?group_id='.$group_id.'">Browse</a>)');
+		$title_arr[]=_('Filename').' ('.util_make_link('/scm/browser.php?group_id='.$group_id, _('Browse')).')';
 		$title_arr[]=_('Date');
 		$title_arr[]=_('Previous Version');
 		$title_arr[]=_('Current Version');
@@ -185,6 +188,6 @@ class commitTracker extends scmhook {
 	*
 	*/
 	function getDiffLink($GroupName, $FileName, $PrevVersion, $ActualVersion) {
-		return $PrevVersion; 
+		return $PrevVersion;
 	}
 }

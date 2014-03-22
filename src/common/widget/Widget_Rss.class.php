@@ -3,7 +3,7 @@
  * Generic RSS Widget Class
  *
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is a part of Fusionforge.
@@ -41,6 +41,7 @@ require_once 'Widget.class.php';
 		return $this->rss_title ?  $hp->purify($this->rss_title, CODENDI_PURIFIER_CONVERT_HTML)  : _('RSS Reader');
 	}
 	function getContent() {
+		global $HTML;
 		$hp = Codendi_HTMLPurifier::instance();
 		$content = '';
 		if ($this->rss_url) {
@@ -52,7 +53,7 @@ require_once 'Widget.class.php';
 			require_once 'common/rss/simplepie.inc';
 			if (!is_dir(forge_get_config('data_path') .'/rss')) {
 				if (!mkdir(forge_get_config('data_path') .'/rss')) {
-					$content .= '<p class="error_msg" >'._('Cannot create backend directory. Contact forge administrator.').'</p>';
+					$content .= $HTML->error_msg(_('Cannot create backend directory. Contact forge administrator.'));
 				}
 			}
 			$rss = new SimplePie($this->rss_url, forge_get_config('data_path') .'/rss', null, forge_get_config('sys_proxy'));
@@ -63,7 +64,7 @@ require_once 'Widget.class.php';
 			foreach($items as $item){
 				$i=$i+1;
 
-				$content .= '<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i).'><td WIDTH="99%">';
+				$content .= '<tr '.$HTML->boxGetAltRowStyle($i).'><td WIDTH="99%">';
 				if ($image = $item->get_link(0, 'image')) {
 					//hack to display twitter avatar
 					$content .= '<img src="'.  $hp->purify($image, CODENDI_PURIFIER_CONVERT_HTML)  .'" style="float:left; margin-right:1em;" />';

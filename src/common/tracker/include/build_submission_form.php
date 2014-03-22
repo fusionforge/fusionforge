@@ -3,7 +3,7 @@
  * Generic Tracker facility
  *
  * Copyright 1999-2001 (c) VA Linux Systems; 2005 GForge, LLC
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2014, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -40,9 +40,9 @@ function artifact_submission_form($ath, $group) {
 		<td class="top">
 <?php
 	if (!session_loggedin()) {
-		echo '<div class="login_warning_msg">
-		<span class="warning_msg">'.sprintf(_('Please %1$s login %2$s'), '<a href="'.util_make_url ('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI'))).'">', '</a>').'</span><br />
-		'._('If you <strong>cannot</strong> login, then enter your email address here')._(':').'<p>
+		echo '<div class="login_warning_msg">';
+		echo $HTML->warning_msg(_('Please').' '.util_make_link('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI')), _('login')));
+		echo _('If you <strong>cannot</strong> login, then enter your email address here')._(':').'<p>
 		<input type="text" name="user_email" size="50" maxlength="255" /></p>
 		</div>';
 	}
@@ -85,14 +85,13 @@ function artifact_submission_form($ath, $group) {
 		<td colspan="2">
 <?php
 	if (!session_loggedin()) {
-		echo '<div class="login_warning_msg">
-		<div class="error">'.sprintf(_('Please %1$s login %2$s'), '<a href="'.util_make_url ('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI'))).'">', '</a>').'</div><br />
-		'._('If you <strong>cannot</strong> login, then enter your email address here').':<p>
+		echo '<div class="login_warning_msg">';
+		echo $HTML->error_msg(_('Please').' '.util_make_link('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI')), _('login')));
+		echo _('If you <strong>cannot</strong> login, then enter your email address here').':<p>
 		<input type="text" name="user_email" size="30" maxlength="255" /></p>
 		</div>';
 	}
 ?>
-
 		<p>&nbsp;</p>
 		<span class="important"><?php echo _('DO NOT enter passwords or confidential information in your message!'); ?></span>
 		</td>
@@ -101,7 +100,7 @@ function artifact_submission_form($ath, $group) {
 	<tr>
 		<td colspan="2">
 		<div class="file_attachments">
-		<a href="javascript:help_window(\''. util_make_url ('/help/tracker.php?helpname=attach_file') .'\')"><strong>(?)</strong></a>
+		<a href="javascript:help_window(\''. util_make_url('/help/tracker.php?helpname=attach_file') .'\')"><strong>(?)</strong></a>
 		<p>
 		<strong><?php echo _('Attach Files')._(':'); ?> </strong> <?php echo('('._('max upload size: '.human_readable_bytes(util_get_maxuploadfilesize())).')') ?><br />
 		<input type="file" name="input_file0" /><br />

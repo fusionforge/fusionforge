@@ -6,7 +6,7 @@
  * Copyright 2002, Tim Perdue - GForge, LLC
  * Copyright 2010 (c) Franck Villaume - Capgemini
  * Copyright (C) 2010-2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013-2014, Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of National Education
  * http://fusionforge.org
  *
@@ -161,10 +161,10 @@ function forum_footer($params = array()) {
 }
 
 /**
-
-	Wrap many forum functions in this class
-
-**/
+ *
+ *Wrap many forum functions in this class
+ *
+ */
 class ForumHTML extends Error {
 	/**
 	 * The Forum object.
@@ -190,9 +190,8 @@ class ForumHTML extends Error {
 	/**
 	 * Function showPendingMessage
 	 *
-	 * @param 	object	$msg The message.
-	 *
-	 * @return 	string return the html output
+	 * @param	object	$msg	The message.
+	 * @return	string	return the html output
 	 */
 	function showPendingMessage ( &$msg) {
 		global $HTML,$group_id;
@@ -292,13 +291,12 @@ class ForumHTML extends Error {
 	/**
 	 *  LinkAttachEditForm - Returns the link to the attach form for editing
 	 *
-	 * @param string $filename Filename
-	 * @param int	$group_id group id
-	 * @param int	$forum_id forum id
-	 * @param int	$attachid attach id
-	 * @param int	$msg_id   msg id
-	 *
-	 * @return string The HTML output
+	 * @param	string	$filename	Filename
+	 * @param	int	$group_id	group id
+	 * @param	int	$forum_id	forum id
+	 * @param	int	$attachid	attach id
+	 * @param	int	$msg_id		msg id
+	 * @return	string The HTML output
 	 */
 
 	function LinkAttachEditForm($filename,$group_id,$forum_id,$attachid,$msg_id) {
@@ -338,7 +336,7 @@ class ForumHTML extends Error {
 	}
 
 	/**
-	 *  LinkAttachForm - echoes the link to the attach form
+	 * LinkAttachForm - echoes the link to the attach form
 	 */
 	function LinkAttachForm() {
 		$poststarttime = time();
@@ -359,9 +357,9 @@ class ForumHTML extends Error {
 	}
 
 	/**
-	 * @param string $msg_arr
-	 * @param string $msg_id
-	 * @return string
+	 * @param	string	$msg_arr
+	 * @param	string	$msg_id
+	 * @return	string
 	 */
 	function showNestedMessages ( &$msg_arr, $msg_id ) {
 		global $total_rows;
@@ -403,10 +401,10 @@ class ForumHTML extends Error {
 	}
 
 	/**
-	 * @param $msg_arr
-	 * @param $msg_id
-	 * @param $level
-	 * @return string
+	 * @param	$msg_arr
+	 * @param	$msg_id
+	 * @param	$level
+	 * @return	string
 	 */
 	function showSubmessages(&$msg_arr, $msg_id, $level) {
 		/*
@@ -481,8 +479,8 @@ class ForumHTML extends Error {
 	/**
 	 *  showEditForm - Prints the form to edit a message
 	 *
-	 *	@param 		int		$msg The Message
-	 *	@return		The HTML output echoed
+	 *	@param 	int	$msg The Message
+	 *	@return	The HTML output echoed
 	 */
 
 	function showEditForm(&$msg) {
@@ -573,7 +571,7 @@ class ForumHTML extends Error {
 			echo notepad_func();
 			?>
 			<div class="align-center">
-<form id="ForumPostForm" enctype="multipart/form-data" action="<?php echo util_make_url ('/forum/forum.php?forum_id='.$this->Forum->getID().'&amp;group_id='.$group_id); ?>" method="post">
+			<form id="ForumPostForm" enctype="multipart/form-data" action="<?php echo util_make_url ('/forum/forum.php?forum_id='.$this->Forum->getID().'&amp;group_id='.$group_id); ?>" method="post">
 			<?php $objid = $this->Forum->getID();?>
 			<input type="hidden" name="post_message" value="y" />
 			<input type="hidden" name="thread_id" value="<?php echo $thread_id; ?>" />
@@ -629,13 +627,9 @@ class ForumHTML extends Error {
 			<?php
 
 		} elseif ($rl->hasPermission('forum', $this->Forum->getID(), 'post')) {
-			echo '<span class="error">';
-			printf(_('You could post if you were <a href="%s">logged in</a>.'), util_make_uri('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI'))));
-			echo '</span>';
+			echo $HTML->error_msg(_('You could post if you were <a href="%s">logged in</a>.'), util_make_uri('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI'))));
 		} elseif (!session_loggedin()) {
-			echo '<span class="error">';
-			printf(_('Please <a href="%s">log in</a>'), util_make_uri('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI'))));
-			echo '</span><br/></p>';
+			echo $HTML->error_msg(_('Please <a href="%s">log in</a>'), util_make_uri('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI'))));
 		} else {
 			//do nothing
 		}

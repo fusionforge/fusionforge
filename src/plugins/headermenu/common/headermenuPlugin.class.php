@@ -302,8 +302,8 @@ class headermenuPlugin extends Plugin {
 	/**
 	 * updateLinkStatus - update the link status
 	 *
-	 * @param	int		$idLink the link id
-	 * @param	int		$linkStatus the new status of the link id
+	 * @param	int	$idLink the link id
+	 * @param	int	$linkStatus the new status of the link id
 	 * @return	bool	success or not
 	 */
 	function updateLinkStatus($idLink, $linkStatus) {
@@ -331,7 +331,7 @@ class headermenuPlugin extends Plugin {
 	/**
 	 * updateLink - update a valid link
 	 *
-	 * @param	int		$idLink the link id to be updated
+	 * @param	int	$idLink the link id to be updated
 	 * @param	string	$url the url
 	 * @param	string	$name the displayed name
 	 * @param	string	$description a short description (to help administration)
@@ -353,30 +353,32 @@ class headermenuPlugin extends Plugin {
 	/**
 	 * pageView - display an HTML Page
 	 *
-	 * @param	int		$pageid	the page id
+	 * @param	int	$pageid	the page id
 	 * @return	string	the html code
 	 */
 	function pageView($pageid) {
+		global $HTML;
 		$link = $this->getLink($pageid);
 		if ($link) {
 			return $link['htmlcode'];
 		} else {
-			return '<p class="error" >'._('Cannot retrieve the page').'</p>';
+			return $HTML->error_msg(_('Cannot retrieve the page'));
 		}
 	}
 
 	/**
 	 * iframeView - display the iframe
 	 *
-	 * @param	int		$pageid	the iframe id
+	 * @param	int	$pageid	the iframe id
 	 * @return	string	the html code
 	 */
 	 function iframeView($pageid) {
+		global $HTML;
 		$link = $this->getLink($pageid);
 		if ($link) {
 			return '<iframe src="'.rtrim($link['url'],'/').'" frameborder="0" height="600px" width="100%"></iframe>';
 		} else {
-			return '<p class="error" >'._('Cannot retrieve the page').'</p>';
+			return $HTML->error_msg(_('Cannot retrieve the page'));
 		}
 	 }
 
