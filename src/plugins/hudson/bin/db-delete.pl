@@ -8,7 +8,6 @@ use diagnostics ;
 
 use DBI ;
 use MIME::Base64 ;
-use HTML::Entities ;
 
 use vars qw/$dbh @reqlist $query/ ;
 use vars qw/$sys_default_domain $sys_cvs_host

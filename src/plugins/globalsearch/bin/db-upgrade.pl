@@ -10,7 +10,6 @@ use diagnostics ;
 
 use DBI ;
 use MIME::Base64 ;
-use HTML::Entities ;
 use Socket;
 
 use vars qw/$dbh @reqlist $query/ ;
