@@ -249,8 +249,9 @@ if ($add_cat && $group_project_id) {
 	} elseif ($ac->isError()) {
 		exit_error($ac->getErrorMessage(),'pm');
 	} else {
+
+		echo $HTML->information(_('It is not recommended that you change the category name because other things are dependent upon it. When you change the category name, all related items will be changed to the new name.'));
 		?>
-		<p class="information"><?php echo _('It is not recommended that you change the category name because other things are dependent upon it. When you change the category name, all related items will be changed to the new name.')?></p>
 		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>" method="post">
 		<p>
 		<input type="hidden" name="update_cat" value="y" />

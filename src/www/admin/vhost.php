@@ -32,6 +32,8 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/account.php';
 require_once $gfwww.'admin/admin_utils.php';
 
+global $HTML;
+
 if (!forge_get_config('use_project_vhost')) {
 	exit_disabled('home');
 }
@@ -163,7 +165,7 @@ if (getStringFromRequest('tweak')) {
 
 		$row_vh = db_fetch_array($res_vh);
 
-		print '<p class="information">'._('Update Record:').'</p>';
+		echo $HTML->information(_('Update Record:'));
 
 		$title=array();
 		$title[]=_('VHOST ID');
@@ -176,20 +178,20 @@ if (getStringFromRequest('tweak')) {
 		print '
 			<form name="update" method="post" action="'.getStringFromServer('PHP_SELF').'">
 
-			'.$GLOBALS['HTML']->listTableTop($title).'
+			'.$HTML->listTableTop($title).'
 			<tr><td>'.$row_vh['vhostid'].'</td>
 			<td>'.$row_vh['vhost_name'].'</td>
 			<td>'.util_make_link_g ($row_vh['unix_group_name'],$row_vh['group_id'],$row_vh['unix_group_name']).'</td>
 			<td><input maxlength="255" type="text" name="docdir" value="'.$row_vh['docdir'].'" /></td>
 			<td><input type="text" name="cgidir" value="'.$row_vh['cgidir'].'" /></td><td><input maxlength="255" type="submit" value="'._('Update').'" /></tr>
-			'.$GLOBALS['HTML']->listTableBottom().'
+			'.$HTML->listTableBottom().'
 
 			<input type="hidden" name="tweakcommit" value="1" />
 			<input type="hidden" name="vhostid" value="'.$row_vh['vhostid'].'" />
 			</form>
 		';
 	} else {
-		echo '<p class="warning">'._('No such VHOST: ') . $vhost_name.'</p>';
+		echo $HTML->warning_msg(_('No such VHOST: ').$vhost_name);
 	}
 
 }

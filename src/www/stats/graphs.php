@@ -28,7 +28,9 @@ require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'stats/site_stats_utils.php';
 
-session_require_global_perm ('forge_stats', 'read') ;
+global $HTML;
+
+session_require_global_perm('forge_stats', 'read');
 
 html_use_jqueryjqplotpluginCanvas();
 html_use_jqueryjqplotpluginhighlighter();
@@ -47,7 +49,9 @@ $HTML->header(array('title'=>sprintf(_('%s Sitewide Statistics Graphs'), forge_g
 </table>
 
 <hr />
-<p class="information" ><?php echo _('Displayed data: only last 24 months.'); ?></p>
+<?php
+echo $HTML->information(_('Displayed data: only last 24 months.'));
+?>
 <p class="align-center">
 <?php views_graph(1); ?>
 </p>

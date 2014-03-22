@@ -34,6 +34,8 @@ require_once $gfwww.'project/admin/project_admin_utils.php';
 require_once $gfcommon.'tracker/ArtifactTypes.class.php';
 require_once $gfcommon.'forum/Forum.class.php';
 
+global $HTML;
+
 session_require_global_perm ('approve_projects');
 
 function activate_group($group_id) {

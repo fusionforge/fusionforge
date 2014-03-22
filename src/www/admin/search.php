@@ -33,6 +33,8 @@ require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'admin/admin_utils.php';
 
+global $HTML;
+
 $search = trim(getStringFromRequest('search'));
 $usersearch = trim(getStringFromRequest('usersearch'));
 
@@ -76,12 +78,12 @@ if ($usersearch) {
 		$title[]=_('Member since');
 		$title[]=_('Status');
 
-		echo $GLOBALS['HTML']->listTableTop($title);
+		echo $HTML->listTableTop($title);
 		$i = 0 ;
 		while ($row = db_fetch_array($result)) {
 			print '
-				<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i++).'>
-				<td><a href="useredit.php?user_id='.$row['user_id'].'">'.$row['user_id'].'</a></td>
+				<tr '.$HTML->boxGetAltRowStyle($i++).'>
+				<td>'.util_make_link('/admin/useredit.php?user_id='.$row['user_id'], $row['user_id']).'</td>
 				<td>'.format_name($row['user_name'], $row['status']).'</td>
 				<td>'.$row['realname'].'</td>
 				<td>'.$row['email'].'</td>
@@ -91,9 +93,9 @@ if ($usersearch) {
 			';
 		}
 
-		echo $GLOBALS['HTML']->listTableBottom();
+		echo $HTML->listTableBottom();
 	} else {
-		echo '<p class="information">'._('No user found.').'</p>';
+		echo $HTML->information(_('No user found.'));
 	}
 } // end if ($usersearch)
 
@@ -150,7 +152,7 @@ if (getStringFromRequest('groupsearch')) {
 		$title[]=_('Registered');
 		$title[]=_('Status');
 
-		echo $GLOBALS['HTML']->listTableTop($title);
+		echo $HTML->listTableTop($title);
 
 		$i = 0;
 		foreach ($rows as $row) {
@@ -160,8 +162,8 @@ if (getStringFromRequest('groupsearch')) {
 			}
 
 			print '
-				<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i++).'>
-				<td><a href="groupedit.php?group_id='.$row['group_id'].'">'.$row['group_id'].'</a></td>
+				<tr '.$HTML->boxGetAltRowStyle($i++).'>
+				<td>'.util_make_link('/admin/groupedit.php?group_id='.$row['group_id'], $row['group_id']).'</td>
 				<td>'.format_name($row['unix_group_name'], $row['status']).'</td>
 				<td>'.$row['group_name'].'</td>
 				<td>'.date(_('Y-m-d H:i'), $row['register_time']).'</td>
@@ -171,9 +173,9 @@ if (getStringFromRequest('groupsearch')) {
 
 		}
 
-		echo $GLOBALS['HTML']->listTableBottom();
+		echo $HTML->listTableBottom();
 	} else {
-		echo '<p class="information">'._('No project found').'</p>';
+		echo $HTML->information(_('No project found'));
 	}
 } //end if($groupsearch)
 

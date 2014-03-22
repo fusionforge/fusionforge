@@ -41,7 +41,7 @@ use_javascript('/js/sortable.js');
 $atf->header();
 
 if (!$at_arr || count($at_arr) < 1) {
-	echo '<p class="information">'._('No trackers have been set up, or you cannot view them.').'</p>';
+	echo $HTML->information(_('No trackers have been set up, or you cannot view them.'));
 	echo '<p>';
 	echo sprintf(_('The Admin for this project will have to set up data types using the %1$s admin page %2$s'), '<a href="'.util_make_url ('/tracker/admin/?group_id='.$group_id).'">', '</a>');
 	echo "</p>";
@@ -66,9 +66,8 @@ if (!$at_arr || count($at_arr) < 1) {
 		} else {
 			echo '
 		<tr '. $HTML->boxGetAltRowStyle($j) . '>
-			<td><a href="'.util_make_uri('/tracker/?atid='.$at_arr[$j]->getID().'&amp;group_id='.$group_id.'&amp;func=browse').'">'.
- 				html_image("ic/tracker20w.png","20","20").' '.
-				$at_arr[$j]->getName() .'</a>
+			<td>'.util_make_url('/tracker/?atid='.$at_arr[$j]->getID().'&group_id='.$group_id.'&func=browse',
+ 				html_image("ic/tracker20w.png","20","20").' '.$at_arr[$j]->getName()).'
 			</td>
 			<td>' .  $at_arr[$j]->getDescription() .'
 			</td>

@@ -33,11 +33,12 @@ require_once $gfcommon.'tracker/ArtifactQuery.class.php';
 global $ath;
 global $group_id;
 global $group;
+global $HTML;
 
 //
 //  make sure this person has permission to view artifacts
 //
-session_require_perm ('tracker', $ath->getID(), 'read') ;
+session_require_perm('tracker', $ath->getID(), 'read');
 
 $query_id = getIntFromRequest('query_id');
 $start = getIntFromRequest('start');
@@ -604,7 +605,7 @@ if ($art_arr && $art_cnt > 0) {
 	}
 
 	if ($start < $max) {
-		echo $GLOBALS['HTML']->listTableTop ($title_arr);
+		echo $HTML->listTableTop ($title_arr);
 	}
 
 	$then=(time()-$ath->getDuePeriod());
@@ -696,13 +697,13 @@ if ($art_arr && $art_cnt > 0) {
 	}
 
 	if ($start < $max) {
-		echo $GLOBALS['HTML']->listTableBottom();
+		echo $HTML->listTableBottom();
 	}
 	$pages = $art_cnt / $paging;
 	$currentpage = intval($start / $paging);
 
 	if ($start > 0) {
-		echo util_make_link (getStringFromServer('PHP_SELF').'?func=browse&group_id='.$group_id.'&atid='.$ath->getID().'&set='. $set.'&start='.($start-$paging),'<strong>← '._('previous').'</strong>');
+		echo util_make_link(getStringFromServer('PHP_SELF').'?func=browse&group_id='.$group_id.'&atid='.$ath->getID().'&set='. $set.'&start='.($start-$paging),'<strong>← '._('previous').'</strong>');
 		echo '&nbsp;&nbsp;';
 	}
 	if ($pages > 1) {
@@ -727,7 +728,7 @@ if ($art_arr && $art_cnt > 0) {
 		}
 	}
 	if ( $art_cnt > $start + $paging) {
-		echo util_make_link (getStringFromServer('PHP_SELF').'?func=browse&group_id='.$group_id.'&atid='.$ath->getID().'&set='. $set.'&start='.($start+$paging),'<strong>'._('next').' →</strong>');
+		echo util_make_link(getStringFromServer('PHP_SELF').'?func=browse&group_id='.$group_id.'&atid='.$ath->getID().'&set='. $set.'&start='.($start+$paging),'<strong>'._('next').' →</strong>');
 	}
 	echo '<div style="display:table;width:100%">';
 	echo '<div style="display:table-row">';
@@ -759,8 +760,8 @@ if ($art_arr && $art_cnt > 0) {
 	<legend>'._('Mass Update').'</legend>
 	<div>
 		<table class="fullwidth" id="admin_mass_update">
-			<tr><td colspan="2">
-		<p class="information">'._('If you wish to apply changes to all items selected above, use these controls to change their properties and click once on “Mass Update”.').'</p>
+			<tr><td colspan="2">';
+		echo $HTML->information(_('If you wish to apply changes to all items selected above, use these controls to change their properties and click once on “Mass Update”.')).'
 			</td></tr>';
 
 		//
@@ -809,7 +810,7 @@ if ($art_arr && $art_cnt > 0) {
 	}
 
 } else {
-	echo '<p class="information">'._('No items found').'</p>';
+	echo $HTML->information(_('No items found'));
 	echo db_error();
 }
 

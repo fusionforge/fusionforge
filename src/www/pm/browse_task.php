@@ -393,10 +393,9 @@ if ($rows < 1) {
 
 		echo '<fieldset id="fieldset1_closed" class="coolfieldset">
 			<legend>'._('Mass Update').'</legend>
-			<div>
-			<p class="information">'._('If you wish to apply changes to all items selected above, use these controls to change their properties and click once on “Mass Update”.').'</p>
-
-			<table class="infotable">
+			<div>';
+		echo $HTML->information(_('If you wish to apply changes to all items selected above, use these controls to change their properties and click once on “Mass Update”.'));
+		echo '	<table class="infotable">
 
 			<tr>
 			<td>'._('Category')._(':').'</td>

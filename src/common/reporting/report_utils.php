@@ -239,17 +239,18 @@ function report_package_box($group_id, $name='dev_id', $selected='') {
 }
 
 function trackeract_graph($group_id, $area, $SPAN, $start, $end, $atid) {
+	global $HTML;
 	$now = time();
 	if ($now < $end) {
 		$end = $now;
 	}
 	if (!strlen($area)) {
-		echo '<p class="information">'._('No selected area.').'</p>';
+		echo $HTML->information(_('No selected area.'));
 		return true;
 	}
 	$report = new ReportTrackerAct($SPAN, $group_id, $atid, $start, $end);
 	if ($report->isError()) {
-		echo '<p class="error">'.$report->getErrorMessage().'</p>';
+		echo $HTML->error_msg($report->getErrorMessage());
 		return false;
 	}
 	$rdates = $report->getRawDates();
@@ -365,17 +366,18 @@ function trackeract_graph($group_id, $area, $SPAN, $start, $end, $atid) {
 }
 
 function trackerpie_graph($group_id, $area, $SPAN, $start, $end, $atid) {
+	global $HTML;
 	$now = time();
 	if ($now < $end) {
 		$end = $now;
 	}
 	if (!strlen($area)) {
-		echo '<p class="information">'._('No selected area.').'</p>';
+		echo $HTML->information(_('No selected area.'));
 		return true;
 	}
 	$report = new ReportTrackerAct($SPAN, $group_id, $atid, $start, $end);
 	if ($report->isError()) {
-		echo '<p class="error">'.$report->getErrorMessage().'</p>';
+		echo $HTML->error_msg($report->getErrorMessage());
 		return false;
 	}
 	switch ($area) {
@@ -423,6 +425,7 @@ function trackerpie_graph($group_id, $area, $SPAN, $start, $end, $atid) {
 }
 
 function report_graph($type, $SPAN, $start, $end) {
+	global $HTML;
 	$now = time() - 60*60*24; // 1 day
 	if ($now < $end) {
 		$end = $now;
@@ -451,12 +454,12 @@ function report_graph($type, $SPAN, $start, $end) {
 	}
 
 	if ($report->isError()) {
-		echo '<p class="error">'.$report->getErrorMessage().'</p>';
+		echo $HTML->error_msg($report->getErrorMessage());
 		return false;
 	}
 	$rdates = $report->getRawDates();
 	if (!$rdates) {
-		echo '<p class="information">'._('No data to display.').'</p>';
+		echo $HTML->information(_('No data to display.'));
 		return false;
 	}
 	$ydata[0]  = $report->getData();
@@ -595,6 +598,7 @@ function report_graph($type, $SPAN, $start, $end) {
 }
 
 function report_actgraph($type, $SPAN, $start, $end, $id, $area) {
+	global $HTML;
 	$now = time() - 60*60*24; // 1 day
 	if ($now < $end) {
 		$end = $now;
@@ -625,12 +629,12 @@ function report_actgraph($type, $SPAN, $start, $end, $id, $area) {
 	}
 
 	if ($report->isError()) {
-		echo '<p class="error">'.$report->getErrorMessage().'</p>';
+		echo $HTML->error_msg($report->getErrorMessage());
 		return false;
 	}
 	$rdates = $report->getRawDates();
 	if (!$rdates) {
-		echo '<p class="information">'._('No data to display.').'</p>';
+		echo $HTML->information(_('No data to display.'));
 		return false;
 	}
 	if (!$SPAN) {
@@ -885,6 +889,7 @@ function report_actgraph($type, $SPAN, $start, $end, $id, $area) {
 }
 
 function report_toolspiegraph($datatype = 0, $start, $end) {
+	global $HTML;
 	$now = time() - 60*60*24; // 1 day
 	if ($now < $end) {
 		$end = $now;
@@ -986,12 +991,13 @@ function report_toolspiegraph($datatype = 0, $start, $end) {
 		echo '<div id="chart'.$chartid.'"></div>';
 		echo "</figure>\n";
 	} else {
-		echo '<p class="information" >'._('No data to display.').'</p>';
+		echo $HTML->information(_('No data to display.'));
 	}
 }
 
 function report_timegraph($type = 'site', $area = 'tasks', $start, $end, $id = 0) {
 	global $pie_labels, $pie_vals;
+	global $HTML;
 
 	$now = time() - 60*60*24; // 1 day
 	if ($now < $end) {
@@ -1052,11 +1058,12 @@ function report_timegraph($type = 'site', $area = 'tasks', $start, $end, $id = 0
 		echo '<div id="chart'.$chartid.'"></div>';
 		echo "</figure>\n";
 	} else {
-		echo '<p class="information" >'._('No data to display.').'</p>';
+		echo $HTML->information(_('No data to display.'));
 	}
 }
 
 function report_sitetimebargraph($start, $end) {
+	global $HTML;
 	$now = time() - 60*60*24; // 1 day
 	if ($now < $end) {
 		$end = $now;
@@ -1157,7 +1164,7 @@ function report_sitetimebargraph($start, $end) {
 		echo '<div id="chart'.$chartid.'"></div>';
 		echo "</figure>\n";
 	} else {
-		echo '<p class="information">'._('No data to display.').'</p>';
+		echo $HTML->information(_('No data to display.'));
 	}
 	return true;
 }
