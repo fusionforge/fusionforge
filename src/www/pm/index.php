@@ -29,6 +29,8 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'pm/include/ProjectGroupHTML.class.php';
 require_once $gfcommon.'pm/ProjectGroupFactory.class.php';
 
+global $HTML;
+
 $group_id = getIntFromRequest('group_id');
 if (!$group_id) {
 	exit_no_group();
@@ -53,12 +55,12 @@ if ($pg_arr && $pgf->isError()) {
 	exit_error($pgf->getErrorMessage(),'pm');
 }
 
-pm_header(array('title'=>sprintf(_('Subprojects for %s'), $g->getPublicName())));
+pm_header(array('title' => sprintf(_('Subprojects for %s'), $g->getPublicName())));
 
 plugin_hook("blocks", "tasks index");
 
 if (count($pg_arr) < 1 || $pg_arr == false) {
-	echo '<p class="information">'._('No Subprojects Found').'</p>';
+	echo $HTML->information(_('No Subprojects Found'));
 	echo '<p>'._('No subprojects have been set up, or you cannot view them.').'</p>';
 	echo '<p class="important">'._('The Admin for this project will have to set up subprojects using the admin page.').'</p>';
 } else {
@@ -80,14 +82,14 @@ if (count($pg_arr) < 1 || $pg_arr == false) {
 						      'd')) ;
 
 	function build_column_sort_header ($group_id, $title, $val) {
-		global $sortcol, $sortorder ;
+		global $sortcol, $sortorder;
 
 		if ($sortcol != $val) {
-			return util_make_link ("/pm/?group_id=$group_id&sortcol=$val", $title);
+			return util_make_link('/pm/?group_id='.$group_id.'&sortcol='.$val, $title);
 		} elseif ($sortorder == 'a') {
-			return util_make_link ("/pm/?group_id=$group_id&sortcol=$val&sortorder=d", $title.' ▴');
+			return util_make_link('/pm/?group_id='.$group_id.'&sortcol='.$val.'&sortorder=d', $title.' ▴');
 		} else {
-			return util_make_link ("/pm/?group_id=$group_id&sortcol=$val&sortorder=a", $title.' ▾');
+			return util_make_link('/pm/?group_id='.$group_id.'&sortcol='.$val.'&sortorder=a', $title.' ▾');
 		}
 	}
 
@@ -166,10 +168,8 @@ if (count($pg_arr) < 1 || $pg_arr == false) {
 		} else {
 		echo '
 		<tr '. $HTML->boxGetAltRowStyle($j) . '>
-			<td><a href="'.util_make_uri('/pm/task.php?group_project_id='. $pg_arr[$j]->getID().'&amp;group_id='.$group_id.'&amp;func=browse').'">' .
-			html_image("ic/taskman20w.png","20","20") . ' &nbsp;'.$pg_arr[$j]->getID() .'</a></td>
-			<td><a href="'.util_make_url ('/pm/task.php?group_project_id='. $pg_arr[$j]->getID().'&amp;group_id='.$group_id.'&amp;func=browse').'">' .
-		$pg_arr[$j]->getName() .'</a></td>
+			<td>'.util_make_link('/pm/task.php?group_project_id='.$pg_arr[$j]->getID().'&group_id='.$group_id.'&func=browse', html_image("ic/taskman20w.png","20","20") . ' &nbsp;'.$pg_arr[$j]->getID()).'</td>
+			<td>'.util_make_link('/pm/task.php?group_project_id='.$pg_arr[$j]->getID().'&group_id='.$group_id.'&func=browse', $pg_arr[$j]->getName()).'</td>
 			<td>'.$pg_arr[$j]->getDescription() .'</td>
 			<td class="align-right">'. (int) $pg_arr[$j]->getOpenCount().'</td>
 			<td class="align-right">'. (int) $pg_arr[$j]->getTotalCount().'</td>

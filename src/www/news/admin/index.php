@@ -32,6 +32,8 @@ require_once $gfwww.'news/news_utils.php';
 require_once $gfcommon.'forum/Forum.class.php';
 require_once $gfcommon.'include/TextSanitizer.class.php'; // to make the HTML input by the user safe to store
 
+global $HTML;
+
 $group_id = getIntFromRequest('group_id');
 $post_changes = getStringFromRequest('post_changes');
 $approve = getStringFromRequest('approve');
@@ -84,7 +86,8 @@ if ($group_id && $group_id != forge_get_config('news_group')) {
 			}
 
 			$result = db_query_params("UPDATE news_bytes SET is_approved=$1, summary=$2,
-details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summary), $details, $id, $group_id));
+						details=$3 WHERE id=$4 AND group_id=$5",
+						array($status, htmlspecialchars($summary), $details, $id, $group_id));
 
 			if (!$result || db_affected_rows($result) < 1) {
 				$error_msg .= sprintf(_('Error On Update: %s'), db_error());
@@ -159,7 +162,7 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 		$group = group_get_object($group_id);
 
 		if ($rows < 1) {
-			echo '<p class="information">'._('No Queued Items Found').'</p>';
+			echo $HTML->information(_('No Queued Items Found'));
 		} else {
 			echo '
 				<ul>';

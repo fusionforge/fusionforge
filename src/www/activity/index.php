@@ -29,6 +29,8 @@
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 
+global $HTML;
+
 $group_id = getIntFromRequest("group_id");
 $received_begin = getStringFromRequest("start_date");
 $received_end = getStringFromRequest("end_date");
@@ -212,7 +214,7 @@ foreach ($show as $showthis) {
 <div id="activity_right">
 <?php
 if (count($results) < 1) {
-	echo '<p class="information">' . _('No Activity Found') . '</p>';
+	echo $HTML->information(_('No Activity Found'));
 } else {
 
 	function date_compare($a, $b)
@@ -250,7 +252,7 @@ if (count($results) < 1) {
 					$cached_perms[$s][$ref] = forge_check_perm('forum', $ref, 'read');
 					break;
 				}
-				case 'taskopen': 
+				case 'taskopen':
 				case 'taskclose':
 				case 'taskdelete': {
 					$cached_perms[$s][$ref] = forge_check_perm('pm', $ref, 'read');
@@ -372,7 +374,7 @@ if (count($results) < 1) {
 		echo $HTML->listTableBottom($theader);
 	}
 	if (!$displayTableTop) {
-		echo '<p class="information">' . _('No Activity Found') . '</p>';
+		echo $HTML->information(_('No Activity Found'));
 	}
 }
 

@@ -113,7 +113,7 @@ $res_grp = db_query_params("SELECT * FROM groups WHERE status='P' AND is_templat
 $rows = db_numrows($res_grp);
 
 if ($rows < 1) {
-	print '<p class="information">'._('No Pending Projects to Approve').'</p>';
+	echo $HTML->information(_('No Pending Projects to Approve'));
 	site_admin_footer();
 	exit;
 }

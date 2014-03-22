@@ -32,6 +32,8 @@ require_once $gfcommon.'pm/ProjectTaskFactory.class.php';
 //if a user was selected, add the user_name to the title
 //same for status
 
+global $HTML;
+
 $pagename = "pm_browse_custom";
 
 $offset = getIntFromRequest('offset');
@@ -202,8 +204,7 @@ echo '	<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.
 
 if ($rows < 1) {
 
-	echo '<p class="information">'._('No Matching Tasks found')."</p>\n";
-
+	echo $HTML->information(_('No Matching Tasks found'));
 	echo '<p class="important">'._('Add tasks using the link above')."</p>\n";
 
 } else {
@@ -259,7 +260,7 @@ if ($rows < 1) {
 	if ($display_col['priority'])
 		$title_arr[]=_('Priority');
 
-	echo $GLOBALS['HTML']->listTableTop ($title_arr);
+	echo $HTML->listTableTop($title_arr);
 
 	$now=time();
 
@@ -312,15 +313,15 @@ if ($rows < 1) {
 		}
 	}
 
-	echo $GLOBALS['HTML']->listTableBottom();
+	echo $HTML->listTableBottom();
 
 	/*
 	 Show extra rows for <-- Prev / Next -->
 	*/
 	if ($offset > 0) {
 		echo util_make_link (getStringFromServer('PHP_SELF').'?func=browse&group_project_id='.$group_project_id.'&group_id='.$group_id.'&offset='.($offset-$paging),'<strong>← '._('previous').'</strong>');
-		echo '&nbsp;&nbsp;';	
-	} 
+		echo '&nbsp;&nbsp;';
+	}
 	$pages = $totalTasks / $paging;
 	$currentpage = intval($offset / $paging);
 	if ($pages > 1) {
@@ -343,11 +344,11 @@ if ($rows < 1) {
 				echo util_make_link (getStringFromServer('PHP_SELF').'?func=browse&group_project_id='.$group_project_id.'&group_id='.$group_id.'&offset='.($j*$paging),'<strong>'.($j+1).'</strong>').'&nbsp;&nbsp;';
 			}
 		}
-	}	
+	}
 	if ( $totalTasks > $offset + $paging) {
 		echo util_make_link (getStringFromServer('PHP_SELF').'?func=browse&group_project_id='.$group_project_id.'&group_id='.$group_id.'&offset='.($offset+$paging),'<strong>'._('next').' →</strong>');
-	}	
-	
+	}
+
 	echo '<div style="display:table;width:100%">';
 	echo '<div style="display:table-row">';
 

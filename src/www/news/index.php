@@ -27,13 +27,15 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'news/news_utils.php';
 require_once $gfcommon.'forum/Forum.class.php';
 
+global $HTML;
+
 $group_id = getIntFromRequest('group_id');
 $limit = getIntFromRequest('limit');
 $offset = getIntFromRequest('offset');
 
 news_header(array('title'=>_('News')));
 
-plugin_hook ("blocks", "news index");
+plugin_hook("blocks", "news index");
 
 echo '<p>' . _('Choose a News item and you can browse, search, and post messages.') . '</p>';
 
@@ -69,9 +71,9 @@ if ($rows>$limit) {
 
 if ($rows < 1) {
 	if ($group_id) {
-		echo '<p class="information">'.sprintf(_('No News Found for %s'),group_getname($group_id)).'</p>';
+		echo $HTML->information(sprintf(_('No News Found for %s'),group_getname($group_id)));
 	} else {
-		echo '<p class="information">'._('No News Found').'</p>';
+		echo $HTML->information(_('No News Found'));
 	}
 	echo db_error();
 } else {

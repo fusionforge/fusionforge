@@ -189,20 +189,20 @@ if ($add_cat && $group_project_id) {
 		$title_arr[]=_('Id');
 		$title_arr[]=_('Title');
 
-		echo $GLOBALS['HTML']->listTableTop ($title_arr);
+		echo $HTML->listTableTop ($title_arr);
 
 		for ($i=0; $i < $rows; $i++) {
-			echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
+			echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>'.
 				'<td>'.db_result($result, $i, 'category_id').'</td>'.
 				'<td><a href="'.getStringFromServer('PHP_SELF').'?update_cat=1&amp;id='.
 					db_result($result, $i, 'category_id').'&amp;group_id='.$group_id.'&amp;group_project_id='. $pg->getID() .'">'.
 					db_result($result, $i, 'category_name').'</a></td></tr>';
 		}
 
-		echo $GLOBALS['HTML']->listTableBottom();
+		echo $HTML->listTableBottom();
 
 	} else {
-		echo "\n<p class=\"information\">"._('No categories defined')."</p>";
+		echo $HTML->information(_('No categories defined'));
 	}
 
 	?>
@@ -427,7 +427,7 @@ if ($add_cat && $group_project_id) {
 	$pg_arr = $pgf->getProjectGroups();
 
 	if (count($pg_arr) < 1 || $pg_arr == false) {
-		echo '<p class="information">' . _('No Subprojects Found in this Project') . '</p>';
+		echo $HTML->information(_('No Subprojects Found in this Project'));
 		echo '<p>' . _('You may add new Subprojects using the “Add a Subproject” link above.') . '</p>';
 		echo db_error();
 	} else {

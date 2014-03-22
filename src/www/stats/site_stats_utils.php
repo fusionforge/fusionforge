@@ -486,6 +486,7 @@ function stats_site_aggregate( ) {
 
 function views_graph($monthly = 0) {
 	global $gfcommon;
+	global $HTML;
 	require_once $gfcommon.'reporting/Report.class.php';
 	$report = new Report();
 	if ($monthly) {
@@ -567,12 +568,13 @@ function views_graph($monthly = 0) {
 		echo '//]]></script>';
 		echo '<div id="chart'.$chartid.'"></div>';
 	} else {
-		echo '<p class="information">'._('Page view: no graph to display.').'</p>';
+		echo $HTML->information(_('Page view: no graph to display.'));
 	}
 }
 
 function users_graph() {
 	global $gfcommon;
+	global $HTML;
 	require_once $gfcommon.'reporting/Report.class.php';
 	$report = new Report();
 	$res = db_query_params ('SELECT month,day,new_users,new_projects FROM stats_site ORDER BY month ASC, day ASC',
@@ -662,7 +664,7 @@ function users_graph() {
 		echo '//]]></script>';
 		echo '<div id="chart'.$chartid.'"></div>';
 	} else {
-		echo '<p class="information">'._('New users, new projects: no graph to display.').'</p>';
+		echo $HTML->information(_('New users, new projects: no graph to display.'));
 	}
 }
 
