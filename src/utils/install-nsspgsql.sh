@@ -39,17 +39,12 @@ modify_pam_pgsql(){
 
 # Check/Modify /etc/libnss-pgsql.conf
 configure_libnss_pgsql(){
-    hostconf=''
-    case "$db_host" in
-	127.*|localhost.*|localhost) ;; # 'local'
-	*) hostconf="host=$db_host"  ;; # 'host'
-    esac
     cat > /etc/nss-pgsql.conf.gforge-new <<EOF
 ### NSS Configuration for Gforge
 
 #----------------- DB connection
 # Use 'trust' authentication, cf. https://bugs.debian.org/551389
-connectionstring = user=$db_user_nss dbname=$db_name $hostconf
+connectionstring = user=$db_user_nss dbname=$db_name
 
 
 #----------------- NSS queries
@@ -66,7 +61,7 @@ EOF
 ### NSS Configuration for Gforge
 
 #----------------- DB connection
-shadowconnectionstring = user=$sys_dbuser_nss dbname=$db_name $hostconf
+shadowconnectionstring = user=$sys_dbuser_nss dbname=$db_name
 
 #----------------- NSS queries
 shadowbyname    = SELECT login AS shadow_name, passwd AS shadow_passwd, 14087 AS shadow_lstchg, 0 AS shadow_min, 99999 AS shadow_max, 7 AS shadow_warn, '' AS shadow_inact, '' AS shadow_expire, '' AS shadow_flag FROM nss_passwd WHERE login = \$1
