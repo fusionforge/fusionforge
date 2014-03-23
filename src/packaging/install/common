@@ -19,8 +19,8 @@ deb-specific/sqlhelper.pm              @SOURCE_PATH@/lib/
 deb-specific/register-plugin           @BINARY_PATH@/
 deb-specific/unregister-plugin         @BINARY_PATH@/
 #
-deb-specific/user_dump_update.pl       @BINARY_PATH@/
-deb-specific/ssh_dump_update.pl        @BINARY_PATH@/
+#deb-specific/user_dump_update.pl       @BINARY_PATH@/
+#deb-specific/ssh_dump_update.pl        @BINARY_PATH@/
 deb-specific/mailfwd_update.pl         @BINARY_PATH@/
 #
 deb-specific/update-user-group-ssh.sh  @BINARY_PATH@/
@@ -29,7 +29,6 @@ common                                 @SOURCE_PATH@/
 cronjobs/create_scm_repos.php          @SOURCE_PATH@/cronjobs/
 cronjobs/gather_scm_stats.php          @SOURCE_PATH@/cronjobs/
 cronjobs/generate_scm_snapshots.php    @SOURCE_PATH@/cronjobs/
-cronjobs/homedirs.php                  @SOURCE_PATH@/cronjobs/
 utils/default_page.php                 @SOURCE_PATH@/utils/
 locales/*                              usr/share/locale/
 #
