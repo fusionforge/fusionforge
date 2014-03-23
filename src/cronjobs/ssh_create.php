@@ -43,7 +43,7 @@ $keys = array();
 while ($arr = db_fetch_array($res2)) {
 	$username = $arr['user_name'];
 	$key = $arr['sshkey'];
-	if (!exists($keys[$username])) {
+	if (!array_key_exists($username, $keys)) {
 		$keys[$username] = array();
 	}
 	$keys[$username][] = $key;
