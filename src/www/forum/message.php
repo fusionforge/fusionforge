@@ -33,6 +33,8 @@ require_once $gfcommon.'forum/ForumFactory.class.php';
 require_once $gfcommon.'forum/ForumMessageFactory.class.php';
 require_once $gfcommon.'forum/ForumMessage.class.php';
 
+global $HTML;
+
 $msg_id = getIntFromRequest('msg_id');
 $total_rows = getIntFromRequest('total_rows');
 $ret_val = getIntFromRequest('ret_val');
@@ -160,7 +162,7 @@ if ($msg_id) {
 	$title_arr[]=_('Author');
 	$title_arr[]=_('Date');
 
-	$ret_val = $GLOBALS['HTML']->listTableTop ($title_arr);
+	$ret_val = $HTML->listTableTop ($title_arr);
 
 	$rows=count($msg_arr[0]);
 
@@ -182,7 +184,7 @@ if ($msg_id) {
 			$ah_begin='';
 			$ah_end='';
 		}
-		$ret_val .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($total_rows) .'>
+		$ret_val .= '<tr '. $HTML->boxGetAltRowStyle($total_rows) .'>
 			<td>'. $ah_begin .
 			html_image('ic/msg.png').' ';
 		/*
@@ -208,7 +210,7 @@ if ($msg_id) {
 		$i++;
 	}
 
-	$ret_val .= $GLOBALS['HTML']->listTableBottom();
+	$ret_val .= $HTML->listTableBottom();
 
 	echo $ret_val;
 
@@ -222,7 +224,7 @@ if ($msg_id) {
 
 } else {
 	forum_header(array('title'=>_('You Must Choose a Message First')));
-	echo '<p class="error">'._('You Must Choose a Message First').'</p>';
+	echo $HTML->error_msg(_('You Must Choose a Message First'));
 
 }
 

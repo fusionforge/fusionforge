@@ -32,6 +32,8 @@ require_once $gfwww.'mail/admin/../mail_utils.php';
 require_once $gfcommon.'mail/MailingList.class.php';
 require_once $gfcommon.'mail/MailingListFactory.class.php';
 
+global $HTML;
+
 $group_id = getIntFromRequest('group_id');
 
 if ($group_id) {
@@ -149,7 +151,7 @@ if ($group_id) {
 		$mlArray = $mlFactory->getMailingLists();
 
 		if ($mlFactory->isError()) {
-			echo '<p class="error">'._('Error').' '._('Unable to get the lists') .$mlFactory->getErrorMessage().'</p>';
+			echo $HTML->error_msg(_('Error').' '._('Unable to get the lists').' '.$mlFactory->getErrorMessage());
 			mail_footer();
 			exit;
 		}
@@ -213,9 +215,9 @@ if ($group_id) {
 		$mailingList = new MailingList($group, getIntFromGet('group_list_id'));
 
 		if(!$mailingList || !is_object($mailingList)) {
-			exit_error(_('Error getting the list'),'mail');
+			exit_error(_('Error getting the list'), 'mail');
 		} elseif($mailingList->isError()) {
-			exit_error($mailingList->getErrorMessage(),'mail');
+			exit_error($mailingList->getErrorMessage(), 'mail');
 		}
 
 		mail_header(array(
@@ -255,8 +257,8 @@ if ($group_id) {
 		$mlArray = $mlFactory->getMailingLists();
 
 		if ($mlFactory->isError()) {
-			echo '<p>'._('Error').' '.sprintf(_('Unable to get the list %s'), $group->getPublicName()) .'</p>';
-			echo '<div class="error">'.$mlFactory->getErrorMessage().'</div>';
+			echo $HTML->error_msg(_('Error').' '.sprintf(_('Unable to get the list %s'), $group->getPublicName()));
+			echo $HTML->error_msg($mlFactory->getErrorMessage());
 			mail_footer();
 			exit;
 		}
@@ -294,7 +296,7 @@ if ($group_id) {
 					if($currentList->getStatus() == MAIL__MAILING_LIST_IS_REQUESTED) {
 						echo _('Not activated yet');
 					} else {
-						echo '<a href="'.$currentList->getExternalAdminUrl().'">'._('Administration').'</a>';
+						echo util_make_link($currentList->getExternalAdminUrl(), _('Administration'));
 					}
 					echo '</td>';
 					echo '<td class="align-center">';

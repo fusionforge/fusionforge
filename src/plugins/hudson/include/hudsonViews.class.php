@@ -3,7 +3,7 @@
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
  * Copyright (c) 2010 Alcatel-Lucent
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013-2014, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -80,6 +80,7 @@ class hudsonViews extends Views {
 	}
 
 	function job_details() {
+		global $HTML;
 		$myfile=fopen('/tmp/jobdetails','a');
 		fwrite($myfile,"\n J'ai fait job detail");
 		$request =& HTTPRequest::instance();
@@ -105,11 +106,12 @@ class hudsonViews extends Views {
 			$this->_display_iframe($row['job_url']);
 			fwrite($myfile,"display iframe de ".$row['job_url']);
 		} else {
-			echo '<span class="error">'._("Error: Hudson object not found.").'</span>';
+			echo $HTML->error_msg(_('Error: Hudson object not found.'));
 		}
 	}
 
 	function last_build() {
+		global $HTML;
 		$request =& HTTPRequest::instance();
 		$group_id = $request->get('group_id');
 		$job_id = $request->get('job_id');
@@ -120,11 +122,12 @@ class hudsonViews extends Views {
 			$row = $dar->current();
 			$this->_display_iframe($row['job_url'].'/lastBuild/');
 		} else {
-			echo '<span class="error">'._("Error: Hudson object not found.").'</span>';
+			echo $HTML->error_msg(_('Error: Hudson object not found.'));
 		}
 	}
 
 	function build_number() {
+		global $HTML;
 		$request =& HTTPRequest::instance();
 		$group_id = $request->get('group_id');
 		if ($request->exist('build')) {
@@ -159,11 +162,12 @@ class hudsonViews extends Views {
 //			}
 			$this->_display_iframe($row['job_url'].'/'.$build_id.'/');
 		} else {
-			echo '<span class="error">'._("Error: Hudson object not found.").'</span>';
+			echo $HTML->error_msg(_('Error: Hudson object not found.'));
 		}
 	}
 
 	function last_test_result() {
+		global $HTML;
 		$request =& HTTPRequest::instance();
 		$group_id = $request->get('group_id');
 		$job_id = $request->get('job_id');
@@ -175,11 +179,12 @@ class hudsonViews extends Views {
 			$row = $dar->current();
 			$this->_display_iframe($row['job_url'].'/lastBuild/testReport/');
 		} else {
-			echo '<span class="error">'._("Error: Hudson object not found.").'</span>';
+			echo $HTML->error_msg(_('Error: Hudson object not found.'));
 		}
 	}
 
 	function test_trend() {
+		global $HTML;
 		$request =& HTTPRequest::instance();
 		$group_id = $request->get('group_id');
 		$job_id = $request->get('job_id');
@@ -191,7 +196,7 @@ class hudsonViews extends Views {
 			$row = $dar->current();
 			$this->_display_iframe($row['job_url'].'/test/?width=800&height=600&failureOnly=false');
 		} else {
-			echo '<span class="error">'._("Error: Hudson object not found.").'</span>';
+			echo $HTML->error_msg(_('Error: Hudson object not found.'));
 		}
 	}
 
@@ -210,7 +215,7 @@ class hudsonViews extends Views {
 			if ($dar->valid()) {
 				$row = $dar->current();
 
-				echo '<a href="/plugins/hudson/?group_id='.$group_id.'">'._("Back to jobs list").'</a>';
+				echo util_make_link('/plugins/hudson/?group_id='.$group_id, _('Back to jobs list'));
 
 				echo '<h3>'._("Edit Job").'</h3>';
 				echo ' <form method="post">';
@@ -278,6 +283,7 @@ class hudsonViews extends Views {
 	// }}}
 
 	function _display_jobs_table($group_id) {
+		global $HTML;
 		$request =& HTTPRequest::instance();
 		$group_id = $request->get('group_id');
 		$user = UserManager::instance()->getCurrentUser();
@@ -355,7 +361,7 @@ class hudsonViews extends Views {
 					$nb_columns = 4;
 					if ($project->usesService('svn')) { $nb_columns++; }
 					if ($project->usesService('cvs')) { $nb_columns++; }
-					echo '  <td colspan="'.$nb_columns.'"><span class="error">'.$e->getMessage().'</span></td>';
+					echo '  <td colspan="'.$nb_columns.'">'.$HTML->error_msg($e->getMessage()).'</td>';
 				}
 
 				if ($user->isMember($request->get('group_id'), 'A')) {

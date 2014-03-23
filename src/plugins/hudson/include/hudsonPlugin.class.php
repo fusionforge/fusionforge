@@ -236,6 +236,7 @@ class hudsonPlugin extends Plugin {
 	}
 
 	function ajax_reference_tooltip($params) {
+		global $HTML;
 		require_once 'HudsonJob.class.php';
 		require_once 'HudsonBuild.class.php';
 		require_once 'hudson_Widget_JobLastBuilds.class.php';
@@ -264,7 +265,7 @@ class hudsonPlugin extends Plugin {
 					echo '<strong>' . _("Build performed on:") . '</strong> ' . $build->getBuildTime() . '<br />';
 					echo '<strong>' . _("Status") . _(": ") . '</strong> ' . $build->getResult();
 				} else {
-					echo '<span class="error">'._("Error: Hudson object not found.").'</span>';
+					echo $HTML->error_msg(_('Error: Hudson object not found.'));
 				}
 				break;
 			case 'hudson_job':
@@ -305,7 +306,7 @@ class hudsonPlugin extends Plugin {
 					} catch (Exception $e) {
 					}
 				} else {
-					echo '<span class="error">'._("Error: Hudson object not found.").'</span>';
+					echo $HTML->error_msg(_('Error: Hudson object not found.'));
 				}
 				break;
 		}

@@ -19,7 +19,7 @@
  * Portions Copyright 2002-2009 (c) Roland Mas
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * Copyright 2012, Jean-Christophe Masson - French National Education Department
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -41,6 +41,9 @@
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'scm/SCMFactory.class.php';
+
+global $HTML;
+
 //
 //	Test if restricted project registration
 //
@@ -143,7 +146,7 @@ if (getStringFromRequest('submit')) {
 			printf(_('Thank you for choosing %s.'), forge_get_config ('forge_name'));
 			echo '</p>';
 		} elseif ($group->isError()) {
-			echo '<p class="error">' . $group->getErrorMessage() . '</p>';
+			echo $HTML->error_msg($group->getErrorMessage());
 		} else {
 			printf(_('Approving Project: %s'), $group->getUnixName());
 			echo '<br />';
@@ -153,7 +156,7 @@ if (getStringFromRequest('submit')) {
 			}
 
 			if (!$group->approve($u)) {
-				printf('<p class="error">' . _('Approval Error: %s'), $group->getErrorMessage() . '</p>');
+				echo $HTML->error_msg(sprintf(_('Approval Error: %s'), $group->getErrorMessage()));
 			} else {
 				echo '<p>';
 				echo _('Your project has been automatically approved. You should receive an email containing further information shortly.');
@@ -168,7 +171,7 @@ if (getStringFromRequest('submit')) {
 		exit();
 	}
 } elseif (getStringFromRequest('i_disagree')) {
-	session_redirect("/");
+	session_redirect('/');
 }
 
 site_user_header(array('title'=>_('Register Project')));

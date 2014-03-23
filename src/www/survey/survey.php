@@ -27,6 +27,8 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'survey/Survey.class.php';
 require_once $gfwww.'survey/include/SurveyHTML.class.php';
 
+global $HTML;
+
 $group_id = getIntFromRequest('group_id');
 $survey_id = getIntFromRequest('survey_id');
 
@@ -52,7 +54,7 @@ $title = _('Vote for Survey') . _(': ') . $s->getTitle();
 $sh->header(array('title'=>$title));
 
 if (!$survey_id) {
-	echo '<p class="error">'._('For some reason, the Project ID or Survey ID did not make it to this page').'</p>';
+	echo $HTML->error_msg(_('For some reason, the Project ID or Survey ID did not make it to this page'));
 } else {
 	plugin_hook("blocks", "survey_".$s->getTitle());
 	echo($sh->showSurveyForm($s));

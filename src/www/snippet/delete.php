@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems - Tim Perdue
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -25,6 +26,8 @@
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'snippet/snippet_utils.php';
+
+global $HTML;
 /*
 	Delete items from packages, package versions, and snippet versions
 */
@@ -46,7 +49,7 @@ if (session_loggedin()) {
 					"snippet_package_version_id=$2",
 					array(user_getid(), $snippet_package_version_id));
 		if (!$result || db_numrows($result) < 1) {
-			echo '<p class="error">'._('Error: Only the creator of a package version can delete snippets from it.').'</p>';
+			echo $HTML->error_msg(_('Error: Only the creator of a package version can delete snippets from it.'));
 			snippet_footer();
 			exit;
 		} else {
@@ -58,11 +61,11 @@ if (session_loggedin()) {
 						array($snippet_version_id,
 							$snippet_package_version_id));
 			if (!$result || db_affected_rows($result) < 1) {
-				echo '<p class="error">'._('Error: That snippet does not exist in this package.').'</p>';
+				echo $HTML->error_msg(_('Error: That snippet does not exist in this package.'));
 				snippet_footer();
 				exit;
 			} else {
-				echo '<p class="feedback">'._('Item Removed From Package').'</p>';
+				echo $HTML->feedback(_('Item Removed From Package'));
 				snippet_footer();
 				exit;
 			}
@@ -78,7 +81,7 @@ if (session_loggedin()) {
 					"WHERE snippet_version_id=$1 AND submitted_by=$2",
 					array($snippet_version_id, user_getid()));
 		if (!$result || db_numrows($result) < 1) {
-			echo '<p class="error">'._('Error: That snippet does not exist.').'</p>';
+			echo $HTML->error_msg(_('Error: That snippet does not exist.'));
 			snippet_footer();
 			exit;
 		} else {
@@ -97,7 +100,7 @@ if (session_loggedin()) {
 				$result=db_query_params("DELETE FROM snippet WHERE snippet_id=$1",array($snippet_id));
 			}
 
-			echo '<p class="feedback">'._('Snippet Removed').'</p>';
+			echo $HTML->feedback(_('Snippet Removed'));
 			snippet_footer();
 			exit;
 		}
@@ -115,7 +118,7 @@ if (session_loggedin()) {
 					array(user_getid(), $snippet_package_version_id));
 		if (!$result || db_numrows($result) < 1) {
 			//they don't own it or it's not found
-			echo '<p class="error">'._('Error: Only the creator of a package version can delete it.').'</p>';
+			echo $HTML->error_msg(_('Error: Only the creator of a package version can delete it.'));
 			snippet_footer();
 			exit;
 		} else {
@@ -141,16 +144,13 @@ if (session_loggedin()) {
 				//delete the main package even if the user didn't create it
 				$result=db_query_params("DELETE FROM snippet_package WHERE snippet_package_id=$1", array($snippet_package_id));
 			}
-			echo '<p class="feedback">'._('Package Removed').'</p>';
+			echo $HTML->feedback(_('Package Removed'));
 			snippet_footer();
 			exit;
 		}
 	} else {
 		exit_error(_('Error: mangled URL?'));
 	}
-
 } else {
-
 	exit_not_logged_in();
-
 }

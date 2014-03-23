@@ -5,7 +5,7 @@
  * Copyright 2003, Tim Perdue, tim@gforge.org
  * Copyright 2004 (c) GForge LLC
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -31,6 +31,8 @@ require_once $gfcommon.'reporting/Report.class.php';
 require_once $gfcommon.'reporting/ReportTrackerAct.class.php';
 require_once $gfcommon.'tracker/include/ArtifactTypeHtml.class.php';
 require_once $gfcommon.'tracker/include/ArtifactTypeFactoryHtml.class.php';
+
+global $HTML;
 
 if (!session_loggedin()) {
 	exit_not_logged_in();
@@ -139,16 +141,16 @@ $h->header(array('title' => _('Tracker Activity Reporting')));
 </form>
 <?php
 if ($start == $end) {
-	echo '<p class="error">'._('Start and end dates must be different').'</p>';
+	echo $HTML->error_msg(_('Start and end dates must be different'));
 } else {
 	if ($atid) {
 		if (!$area || $area == 'activity') {
 			if (!trackeract_graph($group_id, 'activity', $SPAN, $start, $end, $atid)) {
-				echo '<p class="error">'._('Error during graphic computation.').'</p>';
+				echo $HTML->error_msg(_('Error during graphic computation.'));
 			}
 		} else {
 			if (!trackerpie_graph($group_id, $area, $SPAN, $start, $end, $atid)) {
-				echo '<p class="error">'._('Error during graphic computation.').'</p>';
+				echo $HTML->error_msg(_('Error during graphic computation.'));
 			}
 		}
 	}

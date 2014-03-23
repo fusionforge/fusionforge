@@ -3,6 +3,7 @@
  * Projects Hierarchy plugin
  *
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -28,7 +29,7 @@ global $group_id;
 
 $projectsHierarchyProjectConf = $projectsHierarchy->getConf($group_id);
 if (!$projectsHierarchyProjectConf) {
-	echo '<div class="error">'._('Cannot retrieve data from DB').'</div>';
+	echo $HTML->error_msg(_('Cannot retrieve data from DB'));
 } else {
 	echo $HTML->boxTop(_('Manage project configuration'));
 	echo '<form method="post" action="?type=admin&group_id='.$group_id.'&pluginname='.$projectsHierarchy->name.'&action=updateProjectConf">';

@@ -146,6 +146,7 @@ class GitPlugin extends SCMPlugin {
 	}
 
 	function getInstructionsForRW($project) {
+		global $HTML;
 		$repo_list = array($project->getUnixName());
 
 		$result = db_query_params('SELECT repo_name FROM scm_secondary_repos WHERE group_id=$1 AND next_action = $2 AND plugin_id=$3 ORDER BY repo_name',
@@ -239,7 +240,7 @@ class GitPlugin extends SCMPlugin {
 
 		if (!isset($b)) {
 			$b = '<h2>'._('Developer Git Access').'</h2>';
-			$b .= '<p class="error">Error: No access protocol has been allowed for the Git plugin in scmgit.ini: : use_ssh and use_dav are disabled</p>';
+			$b .= $HTML->error_msg(_('Error: No access protocol has been allowed for the Git plugin in scmgit.ini: : use_ssh and use_dav are disabled'));
 		}
 
 		if (session_loggedin() && forge_get_config('use_ssh', 'scmgit')) {

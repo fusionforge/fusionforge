@@ -7,6 +7,7 @@
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2010-2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2013, French Ministry of National Education
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -201,7 +202,7 @@ if ($forum_id) {
 		$msg_arr =& $fmf->nestArray($fmf->getNested());
 
 		if ($fmf->isError()) {
-			echo '<p class="error">'.$fmf->getErrorMessage().'</p>';
+			echo $HTML->error_msg($fmf->getErrorMessage());
 			forum_footer();
 			exit;
 		}
@@ -236,7 +237,7 @@ if ($forum_id) {
 
 		$msg_arr =& $fmf->nestArray($fmf->getThreaded());
 		if ($fmf->isError()) {
-			echo '<p class="error">'.$fmf->getErrorMessage().'</p>';
+			echo $HTML->error_msg($fmf->getErrorMessage());
 			forum_footer();
 			exit;
 		}
@@ -246,7 +247,7 @@ if ($forum_id) {
 		$title_arr[]=_('Author');
 		$title_arr[]=_('Date');
 
-		$ret_val .= $GLOBALS['HTML']->listTableTop ($title_arr);
+		$ret_val .= $HTML->listTableTop ($title_arr);
 
 		$rows=count($msg_arr[0]);
 		$avail_rows=$fmf->fetched_rows;
@@ -259,7 +260,7 @@ if ($forum_id) {
 			$msg =& $msg_arr["0"][$i];
 			$total_rows++;
 
-			$ret_val .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($total_rows) .'>
+			$ret_val .= '<tr '. $HTML->boxGetAltRowStyle($total_rows) .'>
 				<td><a href="'.util_make_url ('/forum/message.php?msg_id='.$msg->getID().
 							      '&amp;group_id='.$group_id).'&amp;reply=0">'.
 				html_image('ic/msg.png').' ';
@@ -287,13 +288,13 @@ if ($forum_id) {
 			$i++;
 		}
 
-		$ret_val .= $GLOBALS['HTML']->listTableBottom();
+		$ret_val .= $HTML->listTableBottom();
 
 	} elseif (($style=='flat' && $thread_id) || ($style=='ultimate' && $thread_id)) {
 
 		$msg_arr =& $fmf->getFlat($thread_id);
 		if ($fmf->isError()) {
-			echo '<p class="error">'.$fmf->getErrorMessage().'</p>';
+			echo $HTML->error_msg($fmf->getErrorMessage());
 			forum_footer();
 			exit;
 		}
@@ -309,17 +310,17 @@ if ($forum_id) {
 		*/
 
 		$result = db_query_params ('SELECT f.most_recent_date,users.user_name,users.realname,users.user_id,f.msg_id,f.subject,f.thread_id,
-(count(f2.thread_id)-1) AS followups,max(f2.post_date) AS recent
-FROM forum f, forum f2, users
-WHERE f.group_forum_id=$1
-AND f.is_followup_to=0
-AND users.user_id=f.posted_by
-AND f.thread_id=f2.thread_id
-GROUP BY f.most_recent_date,users.user_name,users.realname,users.user_id,f.msg_id,f.subject,f.thread_id
-ORDER BY f.most_recent_date DESC',
-					   array ($forum_id),
-					   $max_rows+1,
-					   $offset);
+						(count(f2.thread_id)-1) AS followups,max(f2.post_date) AS recent
+						FROM forum f, forum f2, users
+						WHERE f.group_forum_id=$1
+						AND f.is_followup_to=0
+						AND users.user_id=f.posted_by
+						AND f.thread_id=f2.thread_id
+						GROUP BY f.most_recent_date,users.user_name,users.realname,users.user_id,f.msg_id,f.subject,f.thread_id
+						ORDER BY f.most_recent_date DESC',
+						array ($forum_id),
+						$max_rows+1,
+						$offset);
 
 		$avail_rows=db_numrows($result);
 
@@ -332,11 +333,11 @@ ORDER BY f.most_recent_date DESC',
 			$title_arr[]=_('Replies');
 			$title_arr[]=_('Last Post');
 
-			$ret_val .= $GLOBALS['HTML']->listTableTop ($title_arr);
+			$ret_val .= $HTML->listTableTop ($title_arr);
 			$i=0;
 			while (($row=db_fetch_array($result)) && ($i < $max_rows)) {
 				$ret_val .= '
-					<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><a href="'.util_make_uri('/forum/forum.php?thread_id='.
+					<tr '. $HTML->boxGetAltRowStyle($i) .'><td><a href="'.util_make_uri('/forum/forum.php?thread_id='.
 															$row['thread_id'].'&amp;forum_id='.$forum_id.'&amp;group_id='.$group_id).'">'.
 					html_image('ic/cfolder15.png') . ' ';
 				/*
@@ -360,7 +361,7 @@ ORDER BY f.most_recent_date DESC',
 				$i++;
 			}
 
-			$ret_val .= $GLOBALS['HTML']->listTableBottom();
+			$ret_val .= $HTML->listTableBottom();
 
 		}
 	}

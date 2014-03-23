@@ -29,12 +29,14 @@ require_once $gfcommon.'survey/Survey.class.php';
 require_once $gfcommon.'survey/SurveyResponse.class.php';
 require_once $gfwww.'survey/include/SurveyHTML.class.php';
 
+global $HTML;
+
 $group_id = getIntFromRequest('group_id');
 $survey_id = getIntFromRequest('survey_id');
 
 $g = group_get_object($group_id);
 if (!$g || !is_object($g) || $g->isError()) {
-    exit_no_group();
+	exit_no_group();
 }
 
 $sh = new SurveyHtml();
@@ -45,7 +47,7 @@ if (!$survey_id) {
 	/*
 		Quit if params are not provided
 	*/
-	echo '<p class="error">'._('For some reason, the Project ID or Survey ID did not make it to this page').'</p>';
+	echo $HTML->error_msg(_('For some reason, the Project ID or Survey ID did not make it to this page'));
 	$sh->footer();
 	exit;
 }
@@ -80,15 +82,15 @@ $now=time();
 $sr = new SurveyResponse($g);
 
 for ($i=0; $i<$count; $i++) {
-    /*	Insert each form value into the responses table */
+	/*	Insert each form value into the responses table */
 
-    $val="_" . $quest_array[$i];
-    $response = getStringFromRequest($val);;
+	$val="_" . $quest_array[$i];
+	$response = getStringFromRequest($val);;
 
-    $sr->create(user_getid(), $survey_id, $quest_array[$i], $response);
-    if ($sr->isError()) {
-	echo $sr->getErrorMessage();
-    }
+	$sr->create(user_getid(), $survey_id, $quest_array[$i], $response);
+	if ($sr->isError()) {
+		echo $sr->getErrorMessage();
+	}
 }
 
 $sh->footer();

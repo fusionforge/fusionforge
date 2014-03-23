@@ -27,6 +27,8 @@ require_once $gfwww.'project/admin/project_admin_utils.php';
 require_once $gfwww.'scm/include/scm_utils.php';
 require_once $gfcommon.'scm/SCMFactory.class.php';
 
+global $HTML;
+
 html_use_jquery();
 html_use_coolfieldset();
 
@@ -168,7 +170,7 @@ scm_header(array('title'=>_('SCM Repository'),'group'=>$group_id));
 			echo '</tr></tbody></table>'."\n";
 		}
 	} else {
-		echo '<p class="error_msg">'._('Error: Site has SCM but no plugins registered').'</p>';
+		echo $HTML->error_msg(_('Error: Site has SCM but no plugins registered'));
 	}
 
 	(isset($scm)) ? $hook_params['scm_plugin'] = $scm : $hook_params['scm_plugin'] = 0;

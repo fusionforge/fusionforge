@@ -26,7 +26,7 @@
  */
 
 function people_header($params) {
-	global $group_id,$job_id,$HTML;
+	global $group_id, $job_id, $HTML;
 
 	if ($group_id) {
 		$params['toptab'] = 'people';
@@ -89,6 +89,7 @@ function people_job_category_box($name='category_id',$checked='xzxz') {
 function people_add_to_skill_inventory($skill_id,$skill_level_id,$skill_year_id) {
 	global $feedback;
 	global $error_msg;
+	global $HTML;
 	if (session_loggedin()) {
 		// check required fields
 		if (!$skill_id || $skill_id == 'xzxz') {
@@ -99,7 +100,7 @@ function people_add_to_skill_inventory($skill_id,$skill_level_id,$skill_year_id)
 		if (!$result || db_numrows($result) < 1) {
 			//skill not already in inventory
 			$result = db_query_params("INSERT INTO people_skill_inventory (user_id,skill_id,skill_level_id,skill_year_id)
-VALUES ($1, $2, $3, $4)", array(user_getid() ,$skill_id, $skill_level_id, $skill_year_id));
+						VALUES ($1, $2, $3, $4)", array(user_getid() ,$skill_id, $skill_level_id, $skill_year_id));
 			if (!$result || db_affected_rows($result) < 1) {
 				$error_msg .= _('Error inserting into skill inventory: ');
 				$error_msg .= db_error();
@@ -111,11 +112,12 @@ VALUES ($1, $2, $3, $4)", array(user_getid() ,$skill_id, $skill_level_id, $skill
 		}
 		}
 	} else {
-		echo '<p class="error">'._('You must be logged in first').'</p>';
+		echo $HTML->error_msg(_('You must be logged in first'));
 	}
 }
 
 function people_show_skill_inventory($user_id) {
+	global $HTML;
 	$result = db_query_params("SELECT people_skill.name AS skill_name, people_skill_level.name AS level_name, people_skill_year.name AS year_name
 				FROM people_skill_year,people_skill_level,people_skill,people_skill_inventory
 				WHERE people_skill_year.skill_year_id=people_skill_inventory.skill_year_id
@@ -129,7 +131,7 @@ function people_show_skill_inventory($user_id) {
 	$title_arr[]=_('Experience');
 
 
-	echo $GLOBALS['HTML']->listTableTop ($title_arr);
+	echo $HTML->listTableTop ($title_arr);
 
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
@@ -139,7 +141,7 @@ function people_show_skill_inventory($user_id) {
 	} else {
 		for ($i=0; $i < $rows; $i++) {
 			echo '
-			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
+			<tr '. $HTML->boxGetAltRowStyle($i) .'>
 				<td>'.db_result($result,$i,'skill_name').'</td>
 				<td>'.db_result($result,$i,'level_name').'</td>
 				<td>'.db_result($result,$i,'year_name').'</td></tr>';
@@ -147,10 +149,11 @@ function people_show_skill_inventory($user_id) {
 		}
 	}
 
-	echo $GLOBALS['HTML']->listTableBottom();
+	echo $HTML->listTableBottom();
 }
 
 function people_edit_skill_inventory($user_id) {
+	global $HTML;
 	$result=db_query_params('SELECT * FROM people_skill_inventory WHERE user_id=$1', array($user_id));
 
 	$title_arr=array();
@@ -159,7 +162,7 @@ function people_edit_skill_inventory($user_id) {
 	$title_arr[]=_('Experience');
 	$title_arr[]=_('Action');
 
-	echo $GLOBALS['HTML']->listTableTop ($title_arr);
+	echo $HTML->listTableTop ($title_arr);
 
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
@@ -171,7 +174,7 @@ function people_edit_skill_inventory($user_id) {
 			echo '
 			<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 			<input type="hidden" name="skill_inventory_id" value="'.db_result($result,$i,'skill_inventory_id').'" />
-			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
+			<tr '. $HTML->boxGetAltRowStyle($i) .'>
 				<td>'. people_get_skill_name(db_result($result,$i,'skill_id')) .'</td>
 				<td>'. people_skill_level_box('skill_level_id',db_result($result,$i,'skill_level_id')). '</td>
 				<td>'. people_skill_year_box('skill_year_id',db_result($result,$i,'skill_year_id')). '</td>
@@ -187,20 +190,20 @@ function people_edit_skill_inventory($user_id) {
 	echo '
 	<tr class="tableheading"><td colspan="4">'._('Add a new skill').'/td></tr>
 	<form action="'.getStringFromServer('PHP_SELF').'" method="post">
-	<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
+	<tr '. $HTML->boxGetAltRowStyle($i) .'>
 		<td>'. people_skill_box('skill_id'). '</td>
 		<td>'. people_skill_level_box('skill_level_id'). '</td>
 		<td>'. people_skill_year_box('skill_year_id'). '</td>
 		<td nowrap="nowrap"><input type="submit" name="add_to_skill_inventory" value="'._('Add Skill').'" /></td>
 	</tr></form>';
 
-	echo $GLOBALS['HTML']->listTableBottom();
+	echo $HTML->listTableBottom();
 
 }
 
 
 function people_add_to_job_inventory($job_id,$skill_id,$skill_level_id,$skill_year_id) {
-	global $feedback, $error_msg;
+	global $feedback, $error_msg , $HTML;
 	if (session_loggedin()) {
 		// check if they've already added this job
 		$result=db_query_params('SELECT * FROM people_job_inventory WHERE job_id=$1 AND skill_id=$2', array($job_id, $skill_id));
@@ -223,12 +226,13 @@ function people_add_to_job_inventory($job_id,$skill_id,$skill_level_id,$skill_ye
 		}
 
 	} else {
-		echo '<p class="error">'._('You must be logged in first').'</p>';
+		echo $HTML->error_msg(_('You must be logged in first'));
 		return false;
 	}
 }
 
 function people_show_job_inventory($job_id) {
+	global $HTML;
 	$result=db_query_params('SELECT people_skill.name AS skill_name, people_skill_level.name AS level_name, people_skill_year.name AS year_name
 				FROM people_skill_year,people_skill_level,people_skill,people_job_inventory
 				WHERE people_skill_year.skill_year_id=people_job_inventory.skill_year_id
@@ -241,7 +245,7 @@ function people_show_job_inventory($job_id) {
 	$title_arr[]=_('Level');
 	$title_arr[]=_('Experience');
 
-	echo $GLOBALS['HTML']->listTableTop ($title_arr);
+	echo $HTML->listTableTop ($title_arr);
 
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
@@ -251,7 +255,7 @@ function people_show_job_inventory($job_id) {
 	} else {
 		for ($i=0; $i < $rows; $i++) {
 			echo '
-			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
+			<tr '. $HTML->boxGetAltRowStyle($i) .'>
 				<td>'.db_result($result,$i,'skill_name').'</td>
 				<td>'.db_result($result,$i,'level_name').'</td>
 				<td>'.db_result($result,$i,'year_name').'</td></tr>';
@@ -259,7 +263,7 @@ function people_show_job_inventory($job_id) {
 		}
 	}
 
-	echo $GLOBALS['HTML']->listTableBottom();
+	echo $HTML->listTableBottom();
 
 }
 
@@ -349,6 +353,7 @@ function people_edit_job_inventory($job_id,$group_id) {
 }
 
 function people_show_category_table() {
+	global $HTML;
 	//show a list of categories in a table
 	//provide links to drill into a detail page that shows these categories
 
@@ -390,16 +395,16 @@ function people_show_category_table() {
 		}
 	}
 	if (count($categories) < 1) {
-		$return = '<p class="warning" >'._('No categories found.').'</p>';
+		$return = $HTML->warning_msg(_('No categories found.'));
 	} else {
-		$return = $GLOBALS['HTML']->listTableTop($title_arr);
+		$return = $HTML->listTableTop($title_arr);
 		for ($i = 0; $i< count($categories); $i++) {
-			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
+			$return .= '<tr '. $HTML->boxGetAltRowStyle($i) .'>
 				<td>'.util_make_link('/people/?category_id='.$categories[$i]['category_id'], $categories[$i]['name']).' ('.$categories[$i]['total'].')</td>
 				</tr>';
 		}
 	}
-	$return .= $GLOBALS['HTML']->listTableBottom();
+	$return .= $HTML->listTableBottom();
 	return $return;
 }
 
@@ -428,6 +433,7 @@ function people_show_category_jobs($category_id) {
 }
 
 function people_show_job_list($result) {
+	global $HTML;
 	//takes a result set from a query and shows the jobs
 
 	//query must contain 'group_id', 'job_id', 'title', 'category_name' and 'status_name'
@@ -446,19 +452,19 @@ function people_show_job_list($result) {
 	}
 
 	if (count($projects) < 1) {
-		$return = '<p class="warning" >'._('None Found').'</p>';
+		$return = $HTML->warning_msg(_('None Found'));
 	} else {
-		$return = $GLOBALS['HTML']->listTableTop ($title_arr);
+		$return = $HTML->listTableTop ($title_arr);
 		for ($i = 0; $i < count($projects); $i++) {
 			$return .= '
-				<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) . '>
+				<tr '. $HTML->boxGetAltRowStyle($i) . '>
 					<td>'.util_make_link('/people/viewjob.php?group_id='.$projects[$i]['group_id'].'&job_id='.$projects[$i]['job_id'], $projects[$i]['title']) .'</td>
 					<td>'.$projects[$i]['category_name'].'</td>
 					<td>'.date(_('Y-m-d H:i'), $projects[$i]['post_date']).'</td>
 					<td>'.util_make_link_g(strtolower($projects[$i]['unix_group_name']), $projects[$i]['group_id'], $projects[$i]['group_name']).'</td>
 				</tr>';
 		}
-		$return .= $GLOBALS['HTML']->listTableBottom();
+		$return .= $HTML->listTableBottom();
 	}
 	return $return;
 }

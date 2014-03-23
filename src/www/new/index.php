@@ -26,6 +26,8 @@ require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'include/vote_function.php';
 
+global $HTML;
+
 $HTML->header(array("title"=>_('New File Releases')));
 
 $offset = getIntFromRequest('offset');
@@ -64,7 +66,7 @@ $res_new = db_query_params ('SELECT groups.group_name,
 			    $offset);
 
 if (!$res_new || db_numrows($res_new) < 1) {
-	echo '<p class="error">' . _('No new releases found') . db_error().'</p>';
+	echo $HTML->error_msg(_('No new releases found'));
 } else {
 	$rows = array();
 

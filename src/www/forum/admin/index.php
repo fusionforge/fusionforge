@@ -7,7 +7,7 @@
  * Copyright 2010 (c) Franck Villaume - Capgemini
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2013, French Ministry of National Education
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -55,8 +55,7 @@ if (!$g || !is_object($g) || $g->isError()) {
 	exit_no_group();
 }
 if (!$g->usesForum()) {
-	exit_error(sprintf(_('%s does not use the Forum tool.'),
-	    $g->getPublicName()), 'forums');
+	exit_error(sprintf(_('%s does not use the Forum tool.'), $g->getPublicName()), 'forums');
 }
 
 session_require_perm ('forum_admin', $group_id) ;
@@ -203,7 +202,7 @@ if (getStringFromRequest('add_forum')) {
 		//actually delete the message
 		$feedback .= $fa->ExecuteAction("delete");
 		forum_header(array('title'=>_('Delete a Message')));
-		echo '<p>'.util_make_link ('/forum/forum.php?forum_id=' . $forum_id, _("Return to the forum")) . '</p>';
+		echo '<p>'.util_make_link('/forum/forum.php?forum_id=' . $forum_id, _("Return to the forum")) . '</p>';
 		forum_footer();
 	} elseif (getStringFromRequest("cancel")) {
 		// the user cancelled the request, go back to forum
@@ -274,7 +273,7 @@ if (getStringFromRequest('add_forum')) {
 			session_redirect('/forum/admin/index.php?editmsg='.$msg_id.'&group_id='.$group_id.'&thread_id='.$thread_id.'&forum_id='.$forum_id.'&error_msg='.urlencode($fm->getErrorMessage()));
 		}
 		forum_header(array('title'=>_('Edit a Message')));
-		echo '<p>'.util_make_link ('/forum/forum.php?forum_id=' . $forum_id, _("Return to the forum")) ;
+		echo '<p>'.util_make_link('/forum/forum.php?forum_id=' . $forum_id, _("Return to the forum")) ;
 		forum_footer();
 	} elseif (getStringFromRequest("cancel")) {
 		// the user cancelled the request, go back to forum
@@ -348,8 +347,8 @@ if (getStringFromRequest('add_forum')) {
 		}
 
 		forum_header(array('title'=>_('Edit a Message')));
-		echo '<p><a href="/forum/forum.php?forum_id=' . $new_forum_id . '">'._('Return to the forum').'</a></p>';
-		echo '<p><a href="/forum/forum.php?thread_id='.$thread_id.'&amp;forum_id=' . $new_forum_id . '">'._('Return to the thread').'</a></p>';
+		echo '<p>'.util_make_link('/forum/forum.php?forum_id='.$new_forum_id, _('Return to the forum')).'</p>';
+		echo '<p>'.util_make_link('/forum/forum.php?thread_id='.$thread_id.'&forum_id='.$new_forum_id, _('Return to the thread')).'</p>';
 		forum_footer();
 	} elseif (getStringFromRequest("cancel")) {
 		// the user cancelled the request, go back to forum
@@ -372,8 +371,7 @@ if (getStringFromRequest('add_forum')) {
 		$farr = $ff->getForums();
 
 		if ($ff->isError()) {
-			echo '<p class="error">'.sprintf(_('No Forums Found for %s'), $g->getPublicName())
-                 . $ff->getErrorMessage().'</p>';
+			echo $HTML->error_msg(sprintf(_('No Forums Found for %s'), $g->getPublicName()).' '.$ff->getErrorMessage());
 			forum_footer();
 			exit;
 		}
@@ -448,8 +446,7 @@ if (getStringFromRequest('add_forum')) {
 	$farr = $ff->getForumsAdmin();
 
 	if ($ff->isError()) {
-		echo '<p class="error">'.sprintf(_('No Forums Found for %s'), $g->getPublicName())
-			. $ff->getErrorMessage().'</p>';
+		echo $HTML->error_msg(sprintf(_('No Forums Found for %s'), $g->getPublicName()).' '.$ff->getErrorMessage());
 		forum_footer();
 		exit;
 	}
@@ -462,7 +459,7 @@ if (getStringFromRequest('add_forum')) {
 		if (!is_object($farr[$j])) {
 			//just skip it - this object should never have been placed here
 		} elseif ($farr[$j]->isError()) {
-			echo $farr[$j]->getErrorMessage();
+			echo $HTML->error_msg($farr[$j]->getErrorMessage());
 		} else {
 			echo '<p><a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;change_status=1&amp;group_forum_id='. $farr[$j]->getID() .'">'.
 				$farr[$j]->getName() .'</a><br />'.$farr[$j]->getDescription().'<br /><a href="monitor.php?group_id='.$group_id.'&amp;group_forum_id='. $farr[$j]->getID() .'">'.

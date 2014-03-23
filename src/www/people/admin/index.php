@@ -28,6 +28,8 @@ require_once '../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'people/people_utils.php';
 
+global $HTML;
+
 if (!forge_get_config('use_people')) {
 	exit_disabled('home');
 }
@@ -91,8 +93,7 @@ if (forge_check_global_perm('forge_admin')) {
 		if ($result && db_numrows($result) > 0) {
 			ShowResultSet($result,_('Existing Categories'), 'people_cat');
 		} else {
-			echo '<p class="error">'._('No job categories').'</p>';
-			echo db_error();
+			echo $HTML->error_msg(_('No job categories').db_error());
 		}
 		?>
 		<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
