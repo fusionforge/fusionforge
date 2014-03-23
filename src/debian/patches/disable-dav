@@ -2,8 +2,8 @@ Author: Roland Mas <lolando@debian.org>
 Description: Disable SVN-over-WebDAV
 Index: src/plugins/scmsvn/etc/scmsvn.ini
 ===================================================================
---- src.orig/plugins/scmsvn/etc/scmsvn.ini
-+++ src/plugins/scmsvn/etc/scmsvn.ini
+--- src.orig/plugins/scmsvn/etc/scmsvn.ini	2014-03-23 21:54:18.387625479 +0100
++++ src/plugins/scmsvn/etc/scmsvn.ini	2014-03-23 21:54:18.383625587 +0100
 @@ -7,9 +7,9 @@
  ; is available in installation_environment = development only.
  plugin_status = valid
@@ -16,46 +16,10 @@ Index: src/plugins/scmsvn/etc/scmsvn.ini
  anonsvn_login = anonsvn
  anonsvn_password = anonsvn
  default_server = "$core/web_host"
-Index: src/etc/httpd.conf.d/plugin-scmsvn.inc
-===================================================================
---- src.orig/etc/httpd.conf.d/plugin-scmsvn.inc
-+++ src/etc/httpd.conf.d/plugin-scmsvn.inc
-@@ -1,15 +1,16 @@
--<Location /svn>
--  <IfModule mod_dav_svn.c>
--  DAV svn
--  SVNParentPath {scmsvn/repos_path}
--  
--  # how to authenticate a user
--  AuthzSVNAccessFile {core/data_path}/svnroot-access
--  AuthType Basic
--  AuthName "Document repository"
--  AuthUserFile {core/data_path}/svnroot-authfile
--  </IfModule>
--  
--  # only authenticated users may access the repository
--  Require valid-user
--</Location>
-+# Disabled by disable-dav.patch
-+# <Location /svn>
-+#   <IfModule mod_dav_svn.c>
-+#   DAV svn
-+#   SVNParentPath {scmsvn/repos_path}
-+#   
-+#   # how to authenticate a user
-+#   AuthzSVNAccessFile {core/data_path}/svnroot-access
-+#   AuthType Basic
-+#   AuthName "Document repository"
-+#   AuthUserFile {core/data_path}/svnroot-authfile
-+#   </IfModule>
-+#   
-+#   # only authenticated users may access the repository
-+#   Require valid-user
-+# </Location>
 Index: src/plugins/scmgit/etc/scmgit.ini
 ===================================================================
---- src.orig/plugins/scmgit/etc/scmgit.ini
-+++ src/plugins/scmgit/etc/scmgit.ini
+--- src.orig/plugins/scmgit/etc/scmgit.ini	2014-03-23 21:54:18.387625479 +0100
++++ src/plugins/scmgit/etc/scmgit.ini	2014-03-23 21:54:18.383625587 +0100
 @@ -15,11 +15,9 @@
  scm_root = "scmrepos/git"
  
