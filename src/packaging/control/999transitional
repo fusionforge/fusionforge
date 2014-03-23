@@ -2,8 +2,8 @@ Package: @OLDPACKAGE@-plugin-extratabs
 Architecture: all
 Section: oldlibs
 Priority: extra
-Depends: @PACKAGE@-plugin-extratabs, ${misc:Depends}
-Description: Extratabs plugin for FusionForge (transitional package)
+Depends: @PACKAGE@-plugin-headermenu, ${misc:Depends}
+Description: Headermenu plugin for FusionForge (transitional package)
  This package is only present for transitional purposes and can be
  safely removed.
 
