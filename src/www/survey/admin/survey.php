@@ -56,36 +56,35 @@ if (!session_loggedin() || !forge_check_perm('project_admin', $group_id)) {
 }
 
 if (getStringFromRequest('post')=="Y") {
-    if (!form_key_is_valid(getStringFromRequest('form_key'))) {
+	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 		exit_form_double_submit('surveys');
 	}
 	$survey_title = getStringFromRequest('survey_title');
-    $to_add = getStringFromRequest('to_add');
-    $to_del = getStringFromRequest('to_del');
-    $is_active = getStringFromRequest('is_active');
+	$to_add = getStringFromRequest('to_add');
+	$to_del = getStringFromRequest('to_del');
+	$is_active = getStringFromRequest('is_active');
 
-    if ($survey_id) { /* Modify */
+	if ($survey_id) { /* Modify */
 		$s->update($survey_title, $to_add, $to_del, $is_active);
 		$feedback = _('Update Successful');
-    }  else {  /* Add */
+	}  else {  /* Add */
 		$s->create($survey_title, $to_add, $is_active);
 		$feedback = _('Survey Added');
-    }
+	}
 }
 
 /* Order changes */
 if (getStringFromRequest('updown')=="Y") {
-    $question_id = getIntFromRequest('question_id');
-    $is_up = getStringFromRequest('is_up');
-
-    $s->updateOrder($question_id, $is_up);
-    $feedback = _('Update Successful');
+	$question_id = getIntFromRequest('question_id');
+	$is_up = getStringFromRequest('is_up');
+	$s->updateOrder($question_id, $is_up);
+	$feedback = _('Update Successful');
 }
 
 /* Error on previous transactions? */
 if ($s->isError()) {
-    $error_msg = $s->getErrorMessage();
-    form_release_key(getStringFromRequest("form_key"));
+	$error_msg = $s->getErrorMessage();
+	form_release_key(getStringFromRequest("form_key"));
 }
 
 $title = $survey_id ? _('Edit a Survey') : _('Add a Survey');
