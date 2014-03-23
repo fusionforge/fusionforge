@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 (c) Franck Villaume - Capgemini
+ * Copyright 2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -89,22 +90,22 @@ if (getStringFromRequest('submit')) {
 
 	<form action="<?php echo util_make_url('/account/change_pw.php'); ?>" method="post">
 	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
-	<p><?php echo _('Old Password') ?>:
+	<p><?php echo _('Old Password')._(':').utils_requiredField() ?>
 	<br />
 	<label for="old_passwd">
-		<input id="old_passwd" type="password" name="old_passwd"/>
-    </label>
-	</p>
-	<p><?php echo _('New Password (at least 6 chars)') ?>:
-	<br />
-	<label for="passwd">
-		<input id="passwd" type="password" name="passwd" />
+		<input id="old_passwd" type="password" name="old_passwd" required="required" />
 	</label>
 	</p>
-	<p><?php echo _('New Password (repeat)') ?>:
+	<p><?php echo _('New Password (at least 6 chars)')._(':').utils_requiredField() ?>
+	<br />
+	<label for="passwd">
+		<input id="passwd" type="password" name="passwd" required="required" pattern=".{6,}" />
+	</label>
+	</p>
+	<p><?php echo _('New Password (repeat)')._(':').utils_requiredField() ?>
 	<br />
 	<label for="passwd2">
-		<input id="passwd2" type="password" name="passwd2" />
+		<input id="passwd2" type="password" name="passwd2" required="required" pattern=".{6,}" />
 	</label>
 	</p>
 	<p>

@@ -136,7 +136,7 @@ class commitTracker extends scmhook {
 	*/
 	function getTitleArr($group_id) {
 		$title_arr=array();
-		$title_arr[]=_('Filename (<a href="/scm/browser.php?group_id='.$group_id.'">Broswe</a>)');
+		$title_arr[]=_('Filename (<a href="/scm/browser.php?group_id='.$group_id.'">Browse</a>)');
 		$title_arr[]=_('Date');
 		$title_arr[]=_('Previous Version');
 		$title_arr[]=_('Current Version');
