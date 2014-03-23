@@ -38,7 +38,7 @@ case "$1" in
 	    ln -s /etc/ssl/private/ssl-cert-snakeoil.key @CONFIG_PATH@/ssl-cert.key
 	fi
 	
-	for i in secrets.inc vhost-list.inc vhost-main.inc vhost-projects.inc ; do
+	for i in secrets.inc vhost-list.inc vhost-main.inc vhost-projects.inc plugin-scmsvn.inc ; do
 	    if [ -e /etc/gforge/httpd.conf.d/$i ] ; then
 		sed -i -e s,/usr/share/gforge/src,/usr/share/gforge,g /etc/gforge/httpd.conf.d/$i
 	    else
