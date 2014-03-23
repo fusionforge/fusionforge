@@ -25,7 +25,9 @@ setup_vars() {
     db_name=$(forge_get_config database_name)
     db_user=$(forge_get_config database_user)
     db_host=$(forge_get_config database_host)
-    
+    # homedir_prefix, e.g. /home/users/ (with trailing slash)
+    homedir_prefix=$(forge_get_config homedir_prefix | sed -e 's:[^/]$:&/:')
+
     db_user_nss=${db_user}_nss
 
     tmpfile_pattern=/tmp/$(basename $0).XXXXXX
@@ -53,9 +55,9 @@ connectionstring = user=$db_user_nss dbname=$db_name $hostconf
 
 
 #----------------- NSS queries
-getpwnam        = SELECT login AS username,passwd,gecos,('/var/lib/gforge/chroot/home/users/' || login) AS homedir,shell,uid,gid FROM nss_passwd WHERE login = \$1
-getpwuid        = SELECT login AS username,passwd,gecos,('/var/lib/gforge/chroot/home/users/' || login) AS homedir,shell,uid,gid FROM nss_passwd WHERE uid = \$1
-#allusers        = SELECT login AS username,passwd,gecos,('/var/lib/gforge/chroot/home/users/' || login) AS homedir,shell,uid,gid FROM nss_passwd
+getpwnam        = SELECT login AS username,passwd,gecos,('$homedir_prefix' || login) AS homedir,shell,uid,gid FROM nss_passwd WHERE login = \$1
+getpwuid        = SELECT login AS username,passwd,gecos,('$homedir_prefix' || login) AS homedir,shell,uid,gid FROM nss_passwd WHERE uid = \$1
+#allusers        = SELECT login AS username,passwd,gecos,('$homedir_prefix' || login) AS homedir,shell,uid,gid FROM nss_passwd
 getgroupmembersbygid = SELECT login AS username FROM nss_passwd WHERE gid = \$1
 getgrnam = SELECT name AS groupname,'x',gid,ARRAY(SELECT user_name FROM nss_usergroups WHERE nss_usergroups.gid = nss_groups.gid) AS members FROM nss_groups WHERE name = \$1
 getgrgid = SELECT name AS groupname,'x',gid,ARRAY(SELECT user_name FROM nss_usergroups WHERE nss_usergroups.gid = nss_groups.gid) AS members FROM nss_groups WHERE gid = \$1

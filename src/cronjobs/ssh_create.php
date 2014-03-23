@@ -26,7 +26,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require dirname(__FILE__).'/../../env.inc.php';
+require dirname(__FILE__).'/../common/include/env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require $gfcommon.'include/cron_utils.php';
 
@@ -43,7 +43,7 @@ $keys = array();
 while ($arr = db_fetch_array($res2)) {
 	$username = $arr['user_name'];
 	$key = $arr['sshkey'];
-	if (!exists($keys[$username])) {
+	if (!array_key_exists($username, $keys)) {
 		$keys[$username] = array();
 	}
 	$keys[$username][] = $key;
@@ -63,7 +63,7 @@ function create_authkeys($params) {
 }
 
 foreach ($keys as $username => $v) {
-	$ssh_key = join("\n", $v);
+	$ssh_key = join("\n", $v) . "\n";
 
 	$dir = forge_get_config('homedir_prefix').'/'.$username;
 	if (util_is_root_dir($dir)) {
