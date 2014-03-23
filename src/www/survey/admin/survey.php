@@ -77,11 +77,10 @@ if (getStringFromRequest('post')=="Y") {
 
 /* Order changes */
 if (getStringFromRequest('updown')=="Y") {
-    $question_id = getIntFromRequest('question_id');
-    $is_up = getStringFromRequest('is_up');
-
-    $s->updateOrder($question_id, $is_up);
-    $feedback = _('Update Successful');
+	$question_id = getIntFromRequest('question_id');
+	$is_up = getStringFromRequest('is_up');
+	$s->updateOrder($question_id, $is_up);
+	$feedback = _('Update Successful');
 }
 
 /* Error on previous transactions? */

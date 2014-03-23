@@ -1,15 +1,1 @@
 @SOURCE_PATH@/www/env.inc.php @PLUGIN_PATH@/env.inc.php
-usr/share/javascript/yui @SOURCE_PATH@/www/scripts/yui
-usr/share/javascript/prototype @SOURCE_PATH@/www/scripts/prototype
-usr/share/javascript/scriptaculous @SOURCE_PATH@/www/scripts/scriptaculous
-usr/share/javascript/jquery @SOURCE_PATH@/www/scripts/jquery
-usr/share/javascript/jquery-tipsy @SOURCE_PATH@/www/scripts/jquery-tipsy
-usr/share/javascript/jquery-ui @SOURCE_PATH@/www/scripts/jquery-ui
-usr/share/javascript/jquery-ui-themes @SOURCE_PATH@/www/scripts/jquery-ui-themes
-usr/share/javascript/yui @SOURCE_PATH@/vendor/yui
-usr/share/javascript/prototype @SOURCE_PATH@/vendor/prototype
-usr/share/javascript/scriptaculous @SOURCE_PATH@/vendor/scriptaculous
-usr/share/javascript/jquery @SOURCE_PATH@/vendor/jquery
-usr/share/javascript/jquery-tipsy @SOURCE_PATH@/vendor/jquery-tipsy
-usr/share/javascript/jquery-ui @SOURCE_PATH@/vendor/jquery-ui
-usr/share/javascript/jquery-ui-themes @SOURCE_PATH@/vendor/jquery-ui-themes

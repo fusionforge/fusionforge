@@ -1,2 +1,4 @@
 deb-specific/fusionforge.rsyslog etc/rsyslog.d/
-utils/install-nsspgsql.sh @BINARY_PATH@/
+utils/install-nsspgsql.sh        @BINARY_PATH@/
+cronjobs/homedirs.php            @SOURCE_PATH@/cronjobs/
+cronjobs/ssh_create.php          @SOURCE_PATH@/cronjobs/

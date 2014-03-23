@@ -247,7 +247,7 @@ class SurveyHTML extends Error {
 		/* Deletable questions */
 		if (count($arr_to_del) > 0) {
 			$ret.='<h2>'. _('Questions in this Survey').'</h2>';
-			$title_arr = array(_('Question'), _('Type'), _('Order'), _('Delete from this Survey'));
+			$title_arr = array('', _('Question'), _('Type'), _('Order'), _('Delete from this Survey'));
 			$ret.= $HTML->listTableTop ($title_arr);
 		}
 

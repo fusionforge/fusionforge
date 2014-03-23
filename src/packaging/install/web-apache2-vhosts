@@ -1,3 +1,4 @@
 deb-specific/create-vhosts.sh       @BINARY_PATH@/
 deb-specific/prepare-vhosts-file.pl @BINARY_PATH@/
+cronjobs/create_vhosts.php          @SOURCE_PATH@/cronjobs/
 etc/templates/httpd.vhosts          @CONFIG_PATH@/templates/
