@@ -25,6 +25,7 @@
  */
 
 global $group;
+global $HTML;
 
 if (getStringFromRequest('post_changes')) {
 	$name = getStringFromRequest('name');
@@ -87,7 +88,7 @@ if(isset($page_title)){
 $atf->header( array('title' => _('Trackers Administration')));
 
 if (!isset($at_arr) || !$at_arr || count($at_arr) < 1) {
-	echo '<p class="warning">'._('No trackers found').'</p>';
+	echo $HTML->warning_msg(_('No trackers found'));
 } else {
 
 	echo '
@@ -116,7 +117,7 @@ if (!isset($at_arr) || !$at_arr || count($at_arr) < 1) {
 	$roadmaps = $roadmap_factory->getRoadmaps(true);
 	if (!empty($roadmaps)) {
 		echo '	<p id="roadmapadminlink">
-			<a href="'.util_make_url('/tracker/admin/?group_id='.$group_id.'&admin_roadmap=1').'" >'._('Manage your roadmaps.').'</a>
+			'.util_make_link('/tracker/admin/?group_id='.$group_id.'&admin_roadmap=1', _('Manage your roadmaps.')).'
 			</p>';
 	}
 }

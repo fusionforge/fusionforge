@@ -300,6 +300,7 @@ class ForumHTML extends Error {
 	 */
 
 	function LinkAttachEditForm($filename,$group_id,$forum_id,$attachid,$msg_id) {
+		global $HTML;
 		$return_val = '
 
 			<form action="' . getStringFromServer('PHP_SELF') . '" method="post" enctype="multipart/form-data">
@@ -319,7 +320,7 @@ class ForumHTML extends Error {
 						<td>' . _('File to upload') . ':   <input type="file" name="attachment1"/></td>
 					</tr>
 					<tr>
-						<td class="warning">' . _('Warning: Uploaded file will replace current file') . '</td>
+						<td>'.$HTML->warning_msg(_('Warning: Uploaded file will replace current file')).'</td>
 					</tr>
 				</table>
 			<input type="submit" name="go" value="'._('Update').'" />

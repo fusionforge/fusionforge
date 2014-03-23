@@ -22,6 +22,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+global $HTML;
+
 //
 //  FORM TO UPDATE POP-UP CHOICES FOR A BOX
 //
@@ -63,11 +65,10 @@ if (!$ac || !is_object($ac)) {
 			-->
 			<?php if ($ac->getType() == ARTIFACT_EXTRAFIELDTYPE_STATUS) { ?>
 			<strong><?php echo _('Status'); ?></strong><br />
-			<?php echo $ath->statusBox('status_id',$ao->getStatusID(),false,false); ?>
-			<?php } ?>
-
-			<div class="warning"><?php echo _('It is not recommended that you change the custom field name because other things are dependent upon it. When you change the custom field name, all related items will be changed to the new name.') ?>
-			</div>
+			<?php echo $ath->statusBox('status_id',$ao->getStatusID(),false,false);
+			}
+			echo $HTML->warning_msg(_('It is not recommended that you change the custom field name because other things are dependent upon it. When you change the custom field name, all related items will be changed to the new name.'));
+			?>
 			<p>
 			<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
 			</form>

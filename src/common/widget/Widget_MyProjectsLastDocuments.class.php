@@ -34,7 +34,7 @@ class Widget_MyProjectsLastDocuments extends Widget {
 	}
 
 	function getTitle() {
-		return _("The 5 Last Documents in My Projects");
+		return _('The 5 Last Documents in My Projects');
 	}
 
 	function getContent() {
@@ -44,7 +44,7 @@ class Widget_MyProjectsLastDocuments extends Widget {
 		$groups = $user->getGroups();
 
 		if (count ($groups) < 1) {
-			$html_my_projects .= '<div class="warning">'. _("You're not a member of any project") .'</div>';
+			$html_my_projects .= $HTML->warning_msg(_("You're not a member of any project"));
 		} else {
 			sortProjectList($groups);
 			$request = HTTPRequest::instance();
@@ -85,12 +85,12 @@ class Widget_MyProjectsLastDocuments extends Widget {
 						$keys = array_keys($df->Documents);
 						$j = 0;
 						if (!count($keys)) {
-							$html .= '<tr><td colspan="4"><div class="warning">'._('No documents.').'</div></td></tr>';
+							$html .= '<tr><td colspan="4">'.$HTML->warning_msg(_('No documents.')).'</td></tr>';
 						}
 						foreach ($keys as $key) {
 							$dg = new DocumentGroup($g, $key);
 							$view = ($dg->getState() != 2) ? 'listfile' : 'listtrashfile';
-							$html .= '<tr><td colspan="4"><a href="'.util_make_url('/docman/?group_id='.$g->getID().'&view='.$view.'&dirid='.$key).'">'.$dg->getPath().'</a></td></tr>';
+							$html .= '<tr><td colspan="4">'.util_make_link('/docman/?group_id='.$g->getID().'&view='.$view.'&dirid='.$key, $dg->getPath()).'</td></tr>';
 							$j++;
 							$count = count($df->Documents[$key]);
 							for ($i=0; $i < $count; $i++) {
@@ -129,7 +129,7 @@ class Widget_MyProjectsLastDocuments extends Widget {
 	}
 
 	function getDescription() {
-		return _("List the last 5 documents (with filename, author and last modification time) published in projects you belong to. Selecting any of these projects brings you to the corresponding Project Document Manager page. The documents will be per directory ordered. Selecting any of directory links will brings you to the corresponding Project Document Manager Listing Directory page");
+		return _('List the last 5 documents (with filename, author and last modification time) published in projects you belong to. Selecting any of these projects brings you to the corresponding Project Document Manager page. The documents will be per directory ordered. Selecting any of directory links will brings you to the corresponding Project Document Manager Listing Directory page');
 	}
 
 	function getCategory() {

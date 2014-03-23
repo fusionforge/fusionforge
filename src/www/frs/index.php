@@ -5,7 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
  * Copyright 2010 (c) FusionForge Team
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -28,6 +28,8 @@ require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'frs/include/frs_utils.php';
 require_once $gfcommon.'frs/FRSPackage.class.php';
+
+global $HTML;
 
 $group_id = getIntFromRequest('group_id');
 $release_id = getIntFromRequest('release_id');
@@ -91,7 +93,7 @@ plugin_hook("blocks", "files index");
 
 if ( $num_packages < 1) {
 	echo "<h1>"._('No File Packages')."</h1>";
-	echo "<div class='warning'>"._('There are no file packages defined for this project.')."</div>";
+	echo $HTML->warning_msg(_('There are no file packages defined for this project.'));
 } else {
 	echo '<div id="forge-frs" class="underline-link">'."\n";
 
@@ -107,9 +109,8 @@ if ( $num_packages < 1) {
 	// If so, offer the opportunity to create a release
 
 	if (forge_check_perm ('frs', $group_id, 'write')) {
-		echo '<p><a href="admin/qrs.php?group_id='.$group_id.'">';
-		echo _('To create a new release click here.');
-		echo "</a></p>";
+		echo '<p>'.util_make_link('/frs/admin/qrs.php?group_id='.$group_id, _('To create a new release click here.'));
+		echo '</p>';
 	}
 
 	// get unix group name for path
@@ -131,11 +132,11 @@ if ( $num_packages < 1) {
 		if($frsPackage->isMonitoring()) {
 			$title = $package_name . " - " . _('Stop monitoring this package');
 			$url = '/frs/monitor.php?filemodule_id='. $package_id .'&amp;group_id='.db_result($res_package,$p,'group_id').'&amp;stop=1';
-			$package_monitor = util_make_link ( $url, $GLOBALS['HTML']->getMonitorPic($title));
+			$package_monitor = util_make_link ( $url, $HTML->getMonitorPic($title));
 		} else {
 			$title = $package_name . " - " . _('Monitor this package');
 			$url = '/frs/monitor.php?filemodule_id='. $package_id .'&amp;group_id='.db_result($res_package,$p,'group_id').'&amp;start=1';
-			$package_monitor = util_make_link ( $url, $GLOBALS['HTML']->getMonitorPic($title));
+			$package_monitor = util_make_link ( $url, $HTML->getMonitorPic($title));
 		}
 
 		$package_name_protected = $HTML->toSlug($package_name);
@@ -151,8 +152,7 @@ if ( $num_packages < 1) {
 		$proj_stats['releases'] += $num_releases;
 
 		if ( !$res_release || $num_releases < 1 ) {
-			echo '<div class="warning">' . _('No releases') . '</div>
-			';
+			echo $HTML->warning_msg(_('No releases'));
 		} else {
 			if (class_exists('ZipArchive')) {
 				// display link to latest-release-as-zip
@@ -172,12 +172,12 @@ if ( $num_packages < 1) {
                 // Switch whether release_id exists and/or release_id is current one
                 if ( ! $release_id || $release_id==$package_release_id ) {
                     // no release_id OR release_id is current one
-                    $release_title = util_make_link ( 'frs/shownotes.php?release_id=' . $package_release_id, $package_name.' '.$package_release['name'].' ('.date(_('Y-m-d H:i'),$package_release['release_date']).')');
-                    echo $GLOBALS['HTML']->boxTop($release_title, $package_name . '_' . $package_release['name'])."\n";
+                    $release_title = util_make_link('/frs/shownotes.php?release_id=' . $package_release_id, $package_name.' '.$package_release['name'].' ('.date(_('Y-m-d H:i'),$package_release['release_date']).')');
+                    echo $HTML->boxTop($release_title, $package_name . '_' . $package_release['name'])."\n";
                 } elseif ( $release_id!=$package_release_id ) {
                     // release_id but not current one
                     $t_url_anchor = $HTML->toSlug($package_name)."-".$HTML->toSlug($package_release['name'])."-title-content";
-                    $t_url = 'frs/?group_id='.$group_id.'&amp;release_id=' . $package_release_id . "#" . $t_url_anchor;
+                    $t_url = '/frs/?group_id='.$group_id.'&release_id=' . $package_release_id . "#" . $t_url_anchor;
                     $release_title = util_make_link ( $t_url, $package_name.' '.$package_release['name']);
                     echo '<div class="frs_release_name_version">'.$release_title."</div>"."\n";
                 }
@@ -212,10 +212,10 @@ if ( $num_packages < 1) {
                 // Switch whether release_id exists and/or release_id == package_release['release_id']
                 if ( ! $release_id ) {
                     // no release_id
-                    echo $GLOBALS['HTML']->listTableTop($cell_data,'',false);
+                    echo $HTML->listTableTop($cell_data,'',false);
                 } elseif ( $release_id==$package_release_id ) {
                     // release_id is current one
-                    echo $GLOBALS['HTML']->listTableTop($cell_data,'',true);
+                    echo $HTML->listTableTop($cell_data,'',true);
                 } else {
                     // release_id but not current one => dont print anything here
                 }
@@ -230,13 +230,13 @@ if ( $num_packages < 1) {
                         for ( $f = 0; $f < $num_files; $f++ ) {
                             $file_release = db_fetch_array( $res_file );
 
-                            $tmp_col1 = util_make_link ('/frs/download.php/file/'.$file_release['file_id'].'/'.$file_release['filename'], $file_release['filename']);
+                            $tmp_col1 = util_make_link('/frs/download.php/file/'.$file_release['file_id'].'/'.$file_release['filename'], $file_release['filename']);
                             $tmp_col2 = date(_('Y-m-d H:i'), $file_release['release_time'] );
                             $tmp_col3 = human_readable_bytes($file_release['file_size']);
                             $tmp_col4 = ($file_release['downloads'] ? number_format($file_release['downloads'], 0) : '0');
                             $tmp_col5 = $file_release['processor'];
                             $tmp_col6 = $file_release['type'];
-                            $tmp_col7 = util_make_link ('/frs/download.php/latestfile/'.$frsPackage->getID().'/'.$file_release['filename'], _('Latest version'));
+                            $tmp_col7 = util_make_link('/frs/download.php/latestfile/'.$frsPackage->getID().'/'.$file_release['filename'], _('Latest version'));
 
                             $proj_stats['size'] += $file_release['file_size'];
                             @$proj_stats['downloads'] += $file_release['downloads'];
@@ -252,14 +252,14 @@ if ( $num_packages < 1) {
                             echo '</tr>'."\n";
                         }
                     }
-                    echo $GLOBALS['HTML']->listTableBottom();
+                    echo $HTML->listTableBottom();
                 } else {
                     // release_id but not current one
                     // nothing to print here
                 }
 
                 if ( ! $release_id || $release_id==$package_release_id ) {
-                    echo $GLOBALS['HTML']->boxBottom();
+                    echo $HTML->boxBottom();
                 }
 			} //for: release(s)
 		} //if: release(s) available

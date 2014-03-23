@@ -22,6 +22,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+global $HTML;
+
 //
 //  FORM TO BUILD SELECTION BOXES
 //
@@ -43,12 +45,12 @@ if ($rows > 0) {
 	$title_arr[]=_('Type');
 	$title_arr[]=_('Elements Defined');
 	$title_arr[]=_('Add Options');
-	echo $GLOBALS['HTML']->listTableTop ($title_arr);
+	echo $HTML->listTableTop($title_arr);
 
 	for ($k=0; $k < $rows; $k++) {
 		$i=$keys[$k];
 		$id=str_replace('@','',$efarr[$i]['alias']);
-		echo '<tr id="field-'.$id.'" '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .">\n".
+		echo '<tr id="field-'.$id.'" '. $HTML->boxGetAltRowStyle($i) .">\n".
 			'<td>'.$efarr[$i]['field_name'].(($efarr[$i]['is_required']) ? utils_requiredField() : '').'<a href="'.getStringFromServer('PHP_SELF').'?update_box=1&amp;id='.
 				$efarr[$i]['extra_field_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
 				' ['._('Edit').']</a>'.
@@ -99,12 +101,12 @@ if ($rows > 0) {
 		echo "</td>\n";
 		echo "</tr>\n";
 	}
-	echo $GLOBALS['HTML']->listTableBottom();
+	echo $HTML->listTableBottom();
 
 	printf(_('Fields marked with %s are mandatory.'), utils_requiredField());
 
 } else {
-	echo "\n<p class=\"warning_msg\">"._('You have not defined any custom fields')."</p>";
+	echo $HTML->warning_msg(_('You have not defined any custom fields'));
 }
 
 		echo "<h2>"._('Add New Custom Field')."</h2>";
@@ -144,9 +146,9 @@ if ($rows > 0) {
 		<?php echo _('Label for the none value'); ?>
 			<input type="text" name="show100label" size="30" value="<?php echo _('none') ?>" /><br />
 		</p>
-		<p>
-		<div class="warning"><?php echo _('Warning: this add new custom field') ?></div>
-		</p>
+		<?php
+		echo $HTML->warning_msg(_('Warning: this add new custom field'));
+		?>
 		<p>
 		<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" />
 		</p>

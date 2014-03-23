@@ -5,7 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2011, Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2013, Franck Villaume - TrivialDev
+ * Copyright 2012-2014, Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of National Education
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -27,6 +27,8 @@
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/timezones.php';
+
+global $HTML;
 
 session_require_login();
 
@@ -328,7 +330,7 @@ if (forge_get_config('use_shell')) {
 		print '</strong>';
 		print '<br />' . util_make_link("account/editsshkeys.php",_('Edit Keys'));
 	} else {
-		echo '<div class="warning_msg">'._('Shell Account deactivated').'</div>';
+		echo $HTML->warning_msg(_('Shell Account deactivated'));
 	}
 	echo $HTML->boxBottom();
 }

@@ -49,7 +49,7 @@ class Widget_MyArtifacts extends Widget {
 	}
 
 	function getTitle() {
-		return _("My Artifacts");
+		return _('My Artifacts');
 	}
 
 	function updatePreferences(&$request) {
@@ -109,7 +109,7 @@ class Widget_MyArtifacts extends Widget {
 	}
 
 	function getContent() {
-
+		global $HTML;
 		$atf = new ArtifactsForUser(@UserManager::instance()->getCurrentUser());
 		$my_artifacts = array();
 		if ($this->_artifact_show == 'ASM'){
@@ -139,7 +139,7 @@ class Widget_MyArtifacts extends Widget {
 			$html_my_artifacts .= $this->_display_artifacts($my_artifacts, 1);
 			$html_my_artifacts .= '</table>';
 		} else {
-			$html_my_artifacts = '<div class="warning">'. _("You have no artifacts") . '</div>';
+			$html_my_artifacts = $HTML->warning_msg(_('You have no artifacts'));
 		}
 
 		return $html_my_artifacts;

@@ -26,6 +26,8 @@ require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/account.php';
 
+global $HTML;
+
 session_require_login () ;
 
 $u = user_get_object(user_getid());
@@ -72,9 +74,7 @@ if (getStringFromRequest('submit')) {
 	printf(_('%s Password Change Confirmation'), forge_get_config ('forge_name'));
 	print '</h2>';
 
-	print '<p class="feedback">';
-	print _('Congratulations. You have changed your password.');
-	print '</p>';
+	echo $HTML->feedback(_('Congratulations. You have changed your password.'));
 	?>
 
 	<p>

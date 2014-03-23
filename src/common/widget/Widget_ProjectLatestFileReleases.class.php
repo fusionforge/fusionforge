@@ -47,7 +47,7 @@ class Widget_ProjectLatestFileReleases extends Widget {
 		$group_id=$request->get('group_id');
 		$project = $pm->getProject($group_id);
 		$unix_group_name = $project->getUnixName();
-		$HTML=$GLOBALS['HTML'];
+		global $HTML;
 
 		//
 		//  Members of projects can see all packages
@@ -73,7 +73,7 @@ class Widget_ProjectLatestFileReleases extends Widget {
 		if (!$res_files || $rows_files < 1) {
 			echo db_error();
 			// No releases
-			echo '<div class="warning">'._('This Project Has Not Released Any Files').'</div>';
+			echo $HTML->warning_msg(_('This Project Has Not Released Any Files'));
 
 		} else {
 			echo '
@@ -155,7 +155,7 @@ class Widget_ProjectLatestFileReleases extends Widget {
 			}
 			echo '</table>';
 		}
-		echo '<div class="underline-link">' . util_make_link ('/frs/?group_id='.$group_id, _('View All Project Files')) . '</div>';
+		echo '<div class="underline-link">'.util_make_link('/frs/?group_id='.$group_id, _('View All Project Files')).'</div>';
 	}
 
 	function isAvailable() {

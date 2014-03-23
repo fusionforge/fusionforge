@@ -37,6 +37,7 @@ class Widget_MySurveys extends Widget {
 	var $_survey_show;
 
 	function __construct() {
+		global $HTML;
 		$this->Widget('mysurveys');
 		$this->_survey_show = UserManager::instance()->getCurrentUser()->getPreference('my_surveys_show');
 		if($this->_survey_show === false) {
@@ -60,7 +61,7 @@ class Widget_MySurveys extends Widget {
 
 		$html_my_surveys = '';
 		if (count ($projects) < 1) {
-			$html_my_surveys .= '<div class="warning">'. _("There are no surveys in your projects.") ."</div>\n";
+			$html_my_surveys .= $HTML->warning_msg(_('There are no surveys in your projects.'));
 		} else {
 			global $HTML;
 			$request =& HTTPRequest::instance();
@@ -133,11 +134,11 @@ class Widget_MySurveys extends Widget {
 			}
 			$html_my_surveys .= '</table>';
 		}
-	$this->content = $html_my_surveys;
+		$this->content = $html_my_surveys;
 	}
 
 	function getTitle() {
-		return _("Quick Survey");
+		return _('Quick Survey');
 	}
 
 	function getContent() {
@@ -145,7 +146,7 @@ class Widget_MySurveys extends Widget {
 	}
 
 	function getDescription() {
-		return _("List the surveys in your projects.");
+		return _('List the surveys in your projects.');
 	}
 
 	function hasPreferences() {

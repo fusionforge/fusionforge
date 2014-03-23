@@ -33,26 +33,27 @@ class Widget_MyBookmarks extends Widget {
 	}
 
 	function getTitle() {
-		return _("My Bookmarks");
+		return _('My Bookmarks');
 	}
 
 	function getContent() {
+		global $HTML;
 		$html_my_bookmarks = '';
 		$result = db_query_params("SELECT bookmark_url, bookmark_title, bookmark_id from user_bookmarks where ".
-		    "user_id=$1 ORDER BY bookmark_title",array( user_getid() ));
+					"user_id=$1 ORDER BY bookmark_title",array( user_getid() ));
 		$rows = db_numrows($result);
 		if (!$result || $rows < 1) {
-			$html_my_bookmarks .= '<div class="warning">'. _("You currently do not have any bookmarks saved") .'</div>';
+			$html_my_bookmarks .= $HTML->warning_msg(_('You currently do not have any bookmarks saved'));
 			$html_my_bookmarks .= db_error();
 		} else {
 			$html_my_bookmarks .= '<table class="fullwidth">';
 			for ($i=0; $i<$rows; $i++) {
-				$html_my_bookmarks .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td>';
+				$html_my_bookmarks .= '<tr '. $HTML->boxGetAltRowStyle($i) .'><td>';
 				$html_my_bookmarks .= '<a href="'. db_result($result,$i,'bookmark_url') .'">'. db_result($result,$i,'bookmark_title') .'</a> ';
 				$html_my_bookmarks .= '<small><a href="/my/bookmark_edit.php?bookmark_id='. db_result($result,$i,'bookmark_id') .'">['._("Edit").']</a></small></td>';
 				$html_my_bookmarks .= '<td style="text-align:right"><a href="/my/bookmark_delete.php?bookmark_id='. db_result($result,$i,'bookmark_id');
 				$html_my_bookmarks .= '" onClick="return confirm(\''._("Delete this bookmark?").'\')">';
-				$html_my_bookmarks .= '<img src="'.$GLOBALS['HTML']->imgroot.'ic/trash.png" height="16" width="16" alt="Delete" /></a></td></tr>';
+				$html_my_bookmarks .= '<img src="'.$HTML->imgroot.'ic/trash.png" height="16" width="16" alt="Delete" /></a></td></tr>';
 			}
 			$html_my_bookmarks .= '</table>';
 		}
@@ -62,9 +63,9 @@ class Widget_MyBookmarks extends Widget {
 
 	function getDescription() {
 		return sprintf(_('List your favorite bookmarks (your favorite pages in %s or external).'), forge_get_config('forge_name'))
-             . '<br />'
-             . sprintf(_('Note that in many cases %s uses URL with enough embedded information to bookmark sophisticated items like Software Map browsing, typical search in your project Bug or Task database, etc.'), forge_get_config('forge_name'))
-             . '<br />'
-             . _('Bookmarked items can be edited which means that both the title of the bookmark and its destination URL can be modified.');
+		. '<br />'
+		. sprintf(_('Note that in many cases %s uses URL with enough embedded information to bookmark sophisticated items like Software Map browsing, typical search in your project Bug or Task database, etc.'), forge_get_config('forge_name'))
+		. '<br />'
+		. _('Bookmarked items can be edited which means that both the title of the bookmark and its destination URL can be modified.');
 	}
 }

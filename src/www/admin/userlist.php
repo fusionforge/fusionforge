@@ -64,6 +64,7 @@ function performAction($newStatus, $statusString, $user_id) {
 }
 
 function show_users_list($users, $filter = '', $sortorder = 'realname') {
+	global $HTML;
 	echo '<p>' ._('Status')._(': ').
 		util_make_link('/admin/userlist.php', _('All')). '
 		<span class="active">'.util_make_link('/admin/userlist.php?status=A&sortorder='.$sortorder,_('Active')). '</span>
@@ -72,7 +73,7 @@ function show_users_list($users, $filter = '', $sortorder = 'realname') {
 		<span class="pending">'.util_make_link('/admin/userlist.php?status=P&sortorder='.$sortorder,_('(*)Pending')).'</span>'.'</p>';
 
 	if (!count($users)) {
-		echo '<div class="warning_msg">'._('No user found matching selected criteria.').'</div>';
+		echo $HTML->warning_msg(_('No user found matching selected criteria.'));
 		return;
 	}
 
@@ -96,14 +97,14 @@ function show_users_list($users, $filter = '', $sortorder = 'realname') {
 		''
 	);
 
-	echo $GLOBALS['HTML']->listTableTop($headers, $headerLinks);
+	echo $HTML->listTableTop($headers, $headerLinks);
 
 	$res = db_query_params('SELECT * FROM users WHERE user_id = ANY ($1) ORDER BY '.$sortorder,
 					array(db_int_array_to_any_clause($users)));
 	$count = 0;
 	while ($arr = db_fetch_array($res)) {
 		$u = new GFUser($arr['user_id'], $arr);
-		print '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($count) . '><td class="';
+		print '<tr '. $HTML->boxGetAltRowStyle($count) . '><td class="';
 		if ($u->getStatus() == 'A') print "active";
 		if ($u->getStatus() == 'D') print "deleted";
 		if ($u->getStatus() == 'S') print "suspended";
@@ -147,7 +148,7 @@ function show_users_list($users, $filter = '', $sortorder = 'realname') {
 		$count ++;
 	}
 
-	echo $GLOBALS['HTML']->listTableBottom();
+	echo $HTML->listTableBottom();
 
 }
 

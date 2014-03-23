@@ -30,6 +30,8 @@ require_once $gfwww.'include/pre.php';
 require_once $gfcommon.'include/account.php';
 require_once $gfwww.'admin/admin_utils.php';
 
+global $HTML;
+
 session_require_global_perm ('forge_admin');
 
 $user_id = getIntFromRequest('user_id');
@@ -77,16 +79,14 @@ if (getStringFromRequest('submit')) {
 	echo '<h2>';
 	printf(_('%s Password Change Confirmation'), forge_get_config('forge_name'));
 	echo '</h2>';
-	echo '<p class="feedback">';
-	printf(_('You have changed successfully the password of %1$s (%2$s).'), $u->getUnixName(), $u->getRealName());
-	echo '</p>';
+	echo $HTML->feedback(sprintf(_('You have changed successfully the password of %1$s (%2$s).'), $u->getUnixName(), $u->getRealName()));
 	printf('<p>'._("Go back to %s.").'</p>', '<a href="userlist.php">'._("the Full User List").'</a>');
 } else {
 	// Show change form
 	site_admin_header(array('title'=>_('Site Admin: Change User Password')));
 	?>
 
-	<form action="<?php echo util_make_url('/admin/passedit.php?user_id='.$user_id); ?>" method="post">
+	<form action="<?php echo util_make_uri('/admin/passedit.php?user_id='.$user_id); ?>" method="post">
 	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
 	<p><?php printf(_('Changing password for user #%1$s "%2$s" (%3$s).'), $user_id, $u->getUnixName(), $u->getRealName()); ?></p>
 	<p><?php echo _('New Password (at least 6 chars)') ?>:

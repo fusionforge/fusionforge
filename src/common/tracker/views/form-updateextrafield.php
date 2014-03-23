@@ -3,6 +3,7 @@
  * Tracker Facility
  *
  * Copyright 2010 (c) FusionForge Team
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -20,6 +21,8 @@
  * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
+
+global $HTML;
 
 //
 //  FORM TO UPDATE POP-UP BOXES
@@ -97,7 +100,9 @@ if (!$ac || !is_object($ac)) {
 	<p><input id="is_required" type="checkbox" name="is_required" <?php if ($ac->isRequired()) echo 'checked="checked"'; ?> />
 	<?php echo _('Field is mandatory')?></p>
 	<label for="is_required">
-	<p class="warning"><?php echo _('It is not recommended that you change the custom field name because other things are dependent upon it. When you change the custom field name, all related items will be changed to the new name.') ?>
+	<?php
+	echo $HTML->warning_msg(_('It is not recommended that you change the custom field name because other things are dependent upon it. When you change the custom field name, all related items will be changed to the new name.'));
+	?>
 	</label>
 	</p>
 	<p>

@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2012-2013, Franck Villaume - TrivialDev
+ * Copyright 2012-2014, Franck Villaume - TrivialDev
  * Copyright (C) 2014 Alain Peyrat - Alcatel-Lucent
  *
  * This file is a part of FusionForge.
@@ -35,10 +35,11 @@ class Widget_MyMonitoredForums extends Widget {
 	}
 
 	function getTitle() {
-		return _("Monitored Forums");
+		return _('Monitored Forums');
 	}
 
 	function getContent() {
+		global $HTML;
 		$html_my_monitored_forums = '';
 		$sql="SELECT DISTINCT groups.group_id, groups.group_name,
 			forum_group_list.group_forum_id, forum_group_list.forum_name ".
@@ -67,7 +68,7 @@ class Widget_MyMonitoredForums extends Widget {
 		$glist = array_unique($glist);
 		$rows=count($glist);
 		if (!$result || $rows < 1) {
-			$html_my_monitored_forums .= '<div class="warning">' . _("You are not monitoring any forums.") . '</div><p>' . _("If you monitor forums, you will be sent new posts in the form of an email, with a link to the new message.") . '</p><p>' . _("You can monitor forums by clicking on the appropriate menu item in the discussion forum itself.") . '</p>';
+			$html_my_monitored_forums .= $HTML->warning_msg(_('You are not monitoring any forums.')).'<p>' . _("If you monitor forums, you will be sent new posts in the form of an email, with a link to the new message.") . '</p><p>' . _("You can monitor forums by clicking on the appropriate menu item in the discussion forum itself.") . '</p>';
 		} else {
 			$request =& HTTPRequest::instance();
 			$html_my_monitored_forums .= '<table style="width:100%">';
@@ -118,12 +119,12 @@ class Widget_MyMonitoredForums extends Widget {
 					if (!$hide_now) {
 						$group_forum_id = $flist[$i]['group_forum_id'];
 						$html .= '
-					<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'"><td style="width:99%">'.
+					<tr '.$HTML->boxGetAltRowStyle($i) .'"><td style="width:99%">'.
 					'&nbsp;&nbsp;&nbsp;-&nbsp;<a href="/forum/forum.php?forum_id='.$group_forum_id.'">'.
 						$flist[$i]['forum_name'].'</a></td>'.
 					'<td class="align-center"><a href="/forum/monitor.php?forum_id='.$group_forum_id.'&group_id='.$group_id.'&stop=1'.
 					'" onClick="return confirm(\''._("Stop monitoring this Forum?").'\')">'.
-					'<img src="'.$GLOBALS['HTML']->imgroot.'ic/trash.png" height="16" width="16" '.
+					'<img src="'.$HTML->imgroot.'ic/trash.png" height="16" width="16" '.
 					'alt="'._("Stop Monitoring").'" /></a></td></tr>';
 					}
 				}
