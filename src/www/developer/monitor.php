@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -24,20 +25,18 @@
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 
+global $HTML;
+
 if (!forge_get_config('use_diary')) {
 	exit_disabled('home');
 }
 
 if (!session_loggedin()) {
-
 	exit_not_logged_in();
-
 } else {
-
 	/*
 		User obviously has to be logged in to monitor
 	*/
-
 	$diary_user = getStringFromRequest('diary_user');
 	if ($diary_user) {
 		/*
@@ -61,9 +60,9 @@ if (!session_loggedin()) {
 							  user_getid ()));
 
 			if (!$result) {
-				echo '<p class="error">' . _('Error inserting into user_diary_monitor') . '</p>';
+				echo $HTML->error_msg(_('Error inserting into user_diary_monitor'));
 			} else {
-				echo '<p class="feedback">' . _('User is now being monitored') . '</p>';
+				echo $HTML->feedback(_('User is now being monitored'));
 				echo '<p>' . _("You will now be emailed this user's diary entries.") . '</p>';
 				echo '<p>' . _('To turn off monitoring, simply click the <strong>Monitor user</strong> link again.') . '</p>';
 			}
@@ -72,7 +71,7 @@ if (!session_loggedin()) {
 			$result = db_query_params ('DELETE FROM user_diary_monitor WHERE user_id=$1 AND monitored_user=$2',
 						   array (user_getid(),
 							  $diary_user));
-			echo '<p class="feedback">' . _('Monitoring Stopped') . "</p>";
+			echo $HTML->feedback_('Monitoring Stopped'));
 			echo _('You will not receive any more emails from this user');
 
 		}

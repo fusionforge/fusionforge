@@ -3,7 +3,7 @@
  * Search Engine
  *
  * Copyright 2004 (c) Dominik Haas, GForge Team
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -84,10 +84,11 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 * writeBody - write the Body of the output
 	 */
 	function writeBody() {
+		global $HTML;
 		if (!$this->words) {
-			echo '<p class="error">'._('Error') . _(': ') . _('Please enter a term to search for').'</p>';
+			echo $HTML->error_msg(_('Error')._(': ')._('Please enter a term to search for'));
 		} elseif (!forge_get_config('use_fti') && (strlen($this->words) < 3)) {
-			echo '<p class="error">'._('Error') . _(': ') . _('Search must be at least three characters').'</p>';
+			echo $HTML->error_msg(_('Error')._(': ')._('Search must be at least three characters'));
 		} else {
 			echo $this->getResult();
 		}
@@ -99,6 +100,7 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
   	 * @return string result of all selected searches
 	 */
 	function getResult() {
+		global $HTML;
 		$html = '';
 
 		$group = group_get_object($this->groupId);
@@ -149,7 +151,7 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		}
 
 		if (! $html && ! $validLength) {
-			$html .= '<p class="error">'._('Error: search query too short').'</p>';
+			$html .= $HTML->error_msg(_('Error')._(': ')._('search query too short'));
 		}
 
 		// This is quite complex but the goal is to extract all the
@@ -208,6 +210,7 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
   	* @return string result of the renderer
 	*/
 	function getPartResult($renderer, $section, $title='') {
+		global $HTML;
 		$result = '';
 		$renderer->searchQuery->executeQuery();
 
@@ -217,13 +220,13 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$result .= '<h2><a name="'.$section.'"></a>'.$title.'</h2>';
 
 		if ($renderer->searchQuery->getRowsCount() > 0) {
-			$result .= $GLOBALS['HTML']->listTabletop($renderer->tableHeaders);
+			$result .= $HTML->listTabletop($renderer->tableHeaders);
 			$result .= $renderer->getRows();
-			$result .= $GLOBALS['HTML']->listTableBottom();
+			$result .= $HTML->listTableBottom();
 		} elseif(method_exists($renderer, 'getSections') && (count($renderer->getSections($this->groupId)) == 0)) {
-            $result .= '<p>'.sprintf(_('No matches found for “%s”'), $this->words);
-            $result .= _(' - ');
-            $result .= _('No sections available (check your permissions)').'</p>';
+			$result .= '<p>'.sprintf(_('No matches found for “%s”'), $this->words);
+			$result .= _(' - ');
+			$result .= _('No sections available (check your permissions)').'</p>';
 		} else {
 			$result .= '<p>'.sprintf(_('No matches found for “%s”'), htmlspecialchars($this->words)).'</p>';
 		}

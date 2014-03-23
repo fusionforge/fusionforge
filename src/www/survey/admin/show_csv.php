@@ -4,6 +4,7 @@
  *
  * Portions Copyright 1999-2001 (c) VA Linux Systems
  * The rest Copyright 2002-2004 (c) GForge Team
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -33,6 +34,8 @@ require_once $gfcommon.'survey/SurveyResponse.class.php';
 require_once $gfcommon.'survey/SurveyResponseFactory.class.php';
 require_once $gfwww.'survey/include/SurveyHTML.class.php';
 
+global $HTML;
+
 $group_id = getIntFromRequest('group_id');
 $survey_id = getIntFromRequest('survey_id');
 $graph = getStringFromRequest('graph');
@@ -56,33 +59,33 @@ $sh = new SurveyHtml();
 $is_admin_page='y';
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
-	echo '<p class="error">'._('Permission denied.').'</p>';
+	echo $HTML->error_msg(_('Permission denied.'));
 	$sh->footer();
 	exit;
 }
 
 if ($survey_id) {
-    $s = new Survey($g, $survey_id);
+	$s = new Survey($g, $survey_id);
 
-    /* Get questions of this survey */
-    $questions = & $s->getQuestionInstances();
-    foreach ($questions as $cur_question){
-	    $qid = $cur_question->getId();
-	    $lib = $cur_question->getQuestion();
-	    $type = $cur_question->getQuestionType();
-	    $header[$qid]=$lib;
-	    $types[$qid]=$type;
+	/* Get questions of this survey */
+	$questions = & $s->getQuestionInstances();
+	foreach ($questions as $cur_question){
+		$qid = $cur_question->getId();
+		$lib = $cur_question->getQuestion();
+		$type = $cur_question->getQuestionType();
+		$header[$qid]=$lib;
+		$types[$qid]=$type;
 	}
 
-    $one_question = $questions[0];
-    $srf = new SurveyResponseFactory($s, $one_question);
-    if (!$srf || !is_object($srf)) {
-		echo '<p class="error">'._("Error"). ' ' . _('Cannot get Survey Response Factory') ."</p>";
-    } elseif ( $srf->isError()) {
-		echo '<p class="error">'._("Error"). $srf->getErrorMessage() ."</p>";
-    } else {
+	$one_question = $questions[0];
+	$srf = new SurveyResponseFactory($s, $one_question);
+	if (!$srf || !is_object($srf)) {
+		echo $HTML->error_msg(_('Error').' '._('Cannot get Survey Response Factory'));
+	} elseif ( $srf->isError()) {
+		echo $HTML->error_msg(_('Error').' '.$srf->getErrorMessage());
+	} else {
 		$s2=$srf->getDetailResults();
-        if ($html) {
+		if ($html) {
 			$sh->header(array());
 			print "\n".'<table border="1">'."\n";
 			print "<tr>";
@@ -103,25 +106,25 @@ if ($survey_id) {
 			}
 			print "</table>";
 			$sh->footer();
-        } else {
+		} else {
 			// CSV mode
-		    header('Content-type: text/csv');
-		    list($year, $month) = explode('-', date('Y-m'));
-		    header('Content-disposition: filename="survey-'.$year.'-'.$month.'.csv"');
+			header('Content-type: text/csv');
+			list($year, $month) = explode('-', date('Y-m'));
+			header('Content-disposition: filename="survey-'.$year.'-'.$month.'.csv"');
 
-		    foreach ($header as $id=>$col){
+			foreach ($header as $id=>$col){
 				echo '"'.fix4csv($col).'";';
-		    }
+			}
 
-		    foreach ($s2 as $k=>$val){
+			foreach ($s2 as $k=>$val){
 				echo "\n";
 			    	foreach ($header as $id=>$col){
 			    	$res = format($val[$id],$types[$id]);
 			    	echo '"'.$res.'";';
 				}
-		    }
+			}
 		}
-    }
+	}
 }
 
 /*

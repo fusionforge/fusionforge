@@ -25,6 +25,8 @@
 require_once '../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 
+global $HTML;
+
 $is_admin_page='y';
 $group_id = getIntFromRequest('group_id');
 $survey_id = getIntFromRequest('survey_id');
@@ -32,7 +34,7 @@ $customer_id = getIntFromRequest('customer_id');
 survey_header(array('title'=>_('Results')));
 
 if (!session_loggedin() || !forge_check_perm('project_admin', $group_id)) {
-	echo '<div class="error">'._('Permission denied.').'</div>';
+	echo $HTML->error_msg(_('Permission denied.'));
 	survey_footer();
 	exit;
 }

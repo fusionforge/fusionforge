@@ -5,6 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2004 (c) Guillaume Smet / Open Wide
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -50,10 +51,11 @@ class HtmlSearchRenderer extends SearchRenderer {
 	 * flush - flush the html output
 	 */
 	function flush() {
+		global $HTML;
 		$searchQuery =& $this->searchQuery;
 		if($searchQuery->isError()) {
 			$this->writeHeader();
-			echo '<p class="error">'.$searchQuery->getErrorMessage().'</p>';
+			echo $HTML->error_msg($searchQuery->getErrorMessage());
 			$this->writeFooter();
 		} else {
 			$searchQuery->executeQuery();
@@ -84,7 +86,8 @@ class HtmlSearchRenderer extends SearchRenderer {
 	 * writeFooter - write the footer
 	 */
 	function writeFooter() {
-		$GLOBALS['HTML']->footer();
+		global $HTML;
+		$HTML->footer();
 	}
 
 	/**
@@ -93,6 +96,7 @@ class HtmlSearchRenderer extends SearchRenderer {
 	 * @return string html output
 	 */
 	function writeResults() {
+		global $HTML;
 		$searchQuery =& $this->searchQuery;
 		$query =& $this->query;
 
@@ -100,9 +104,9 @@ class HtmlSearchRenderer extends SearchRenderer {
 			$html = '<p><strong>'.sprintf(_('No matches found for “%s”'), $query['words']).'</strong></p>';
 			$html .= db_error();
 		} else {
-			$html = $GLOBALS['HTML']->listTableTop($this->tableHeaders);
+			$html = $HTML->listTableTop($this->tableHeaders);
 			$html .= $this->getRows();
-			$html .= $GLOBALS['HTML']->listTableBottom();
+			$html .= $HTML->listTableBottom();
 		}
 
 		if($searchQuery->getRowsCount() > 0 && ($searchQuery->getRowsTotalCount() > $searchQuery->getRowsCount() || $searchQuery->getOffset() != 0 )) {
@@ -125,17 +129,13 @@ class HtmlSearchRenderer extends SearchRenderer {
 		$html .= '<tr>';
 		$html .= '<td>';
 		if ($searchQuery->getOffset() != 0) {
-			$html .= '<a href="'.$this->getPreviousResultsUrl().'" class="prev">'
-				. html_image('t2.png', '15', '15')
-				. ' '._('Previous Results').'</a>';
+			$html .= util_make_link($this->getPreviousResultsUrl(), html_image('t2.png', '15', '15').' '._('Previous Results'), array('class' => 'prev'));
 		} else {
 			$html .= '&nbsp;';
 		}
 		$html .= '</td><td class="align-right">';
 		if ($searchQuery->getRowsTotalCount() > $searchQuery->getRowsCount()) {
-			$html .= '<a href="'.$this->getNextResultsUrl().'" class="next">'
-				._('Next Results').' '
-				. html_image('t.png', '15', '15') . '</a>';
+			$html .= util_make_link($this->getNextResultsUrl(), _('Next Results').' '.html_image('t.png', '15', '15'), array('class' => 'next'));
 		} else {
 			$html .= '&nbsp;';
 		}
@@ -153,9 +153,9 @@ class HtmlSearchRenderer extends SearchRenderer {
 		$offset = $this->searchQuery->getOffset() - $this->searchQuery->getRowsPerPage();
 		$query =& $this->query;
 
-		$url = '/search/?type='.$query['typeOfSearch'].'&amp;exact='.$query['isExact'].'&amp;q='.urlencode($query['words']);
+		$url = '/search/?type='.$query['typeOfSearch'].'&exact='.$query['isExact'].'&q='.urlencode($query['words']);
 		if($offset > 0) {
-			$url .= '&amp;offset='.$offset;
+			$url .= '&offset='.$offset;
 		}
 		return $url;
 	}
@@ -167,7 +167,7 @@ class HtmlSearchRenderer extends SearchRenderer {
 	 */
 	function getNextResultsUrl() {
 		$query =& $this->query;
-		return '/search/?type='.$query['typeOfSearch'].'&amp;exact='.$query['isExact'].'&amp;q='.urlencode($query['words']).'&amp;offset='.($this->searchQuery->getOffset() + $this->searchQuery->getRowsPerPage());
+		return '/search/?type='.$query['typeOfSearch'].'&exact='.$query['isExact'].'&q='.urlencode($query['words']).'&offset='.($this->searchQuery->getOffset() + $this->searchQuery->getRowsPerPage());
 	}
 
 	/**

@@ -4,6 +4,7 @@
  *
  * Copyright 2004 (c) Dominik Haas, GForge Team
  * Copyright 2013, French Ministry of National Education
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -97,8 +98,9 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 * writeBody - write the Body of the output
 	 */
 	function writeBody() {
+		global $HTML;
 		if (strlen($this->words) < 3) {
-			echo '<p class="error">'._('Error') . _(': ') . _('Search must be at least three characters').'</p>';
+			echo $HTML->error_msg(_('Error') . _(': ') . _('Search must be at least three characters'));
 		} else {
 			echo $this->getResult();
 		}
@@ -179,6 +181,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 * @return string result of the renderer
 	 */
 	function getPartResult($renderer, $section, $title='') {
+		global $HTML;
 		$result = '';
 		$renderer->searchQuery->executeQuery();
 		$query = NULL;
@@ -191,9 +194,9 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		if ($renderer->searchQuery->getRowsCount() > 0) {
 			if ($renderer->searchQuery->getRowsTotalCount() >= $renderer->searchQuery->getRowsPerPage())
 				$result .= '<i>' . sprintf(_('Note: only the first %d results for this category are displayed.'), $renderer->searchQuery->getRowsPerPage()) . '</i>';
-			$result .= $GLOBALS['HTML']->listTabletop($renderer->tableHeaders);
+			$result .= $HTML->listTabletop($renderer->tableHeaders);
 			$result .= $renderer->getRows();
-			$result .= $GLOBALS['HTML']->listTableBottom();
+			$result .= $HTML->listTableBottom();
 		} elseif(method_exists($renderer, 'getSections') && (count($renderer->getSections($this->groupId)) == 0)) {
 			$result .= '<p>'.sprintf(_('No matches found for “%s”'), $this->words);
 			$result .= _(' - ');
@@ -330,30 +333,30 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$res = '';
 		// display the searchmask
 		$res .= '
-        <form class="ff" name="advancedsearch" action="'.getStringFromServer('PHP_SELF').'" method="post">
-        <input class="ff" type="hidden" name="search" value="1"/>
-        <input class="ff" type="hidden" name="group_id" value="'.$group_id.'"/>
-        <div align="center"><br />
-            <table>
-                <tr class="ff">
-                    <td class="ff" colspan ="2">
-                        <input class="ff" type="text" size="60" name="words" value="'.stripslashes(htmlspecialchars($words)).'" />
-                        <input class="ff" type="submit" name="submitbutton" value="'._('Search').'" />
-                    </td>
-                </tr>
-                <tr class="ff">
-                    <td class="ff top">
-                        <input class="ff" type="radio" name="mode" value="'.SEARCH__MODE_AND.'" '.($isExact ? 'checked="checked"' : '').' />'._('with all words').'
-                    </td>
-                    <td class="ff">
-                        <input class="ff" type="radio" name="mode" value="'.SEARCH__MODE_OR.'" '.(!$isExact ? 'checked="checked"' : '').' />'._('with one word').'
-                    </td>
-                </tr>
-            </table><br />'
+			<form class="ff" name="advancedsearch" action="'.getStringFromServer('PHP_SELF').'" method="post">
+			<input class="ff" type="hidden" name="search" value="1"/>
+			<input class="ff" type="hidden" name="group_id" value="'.$group_id.'"/>
+			<div align="center"><br />
+			<table>
+				<tr class="ff">
+				<td class="ff" colspan ="2">
+					<input class="ff" type="text" size="60" name="words" value="'.stripslashes(htmlspecialchars($words)).'" />
+					<input class="ff" type="submit" name="submitbutton" value="'._('Search').'" />
+				</td>
+				</tr>
+				<tr class="ff">
+				<td class="ff top">
+					<input class="ff" type="radio" name="mode" value="'.SEARCH__MODE_AND.'" '.($isExact ? 'checked="checked"' : '').' />'._('with all words').'
+				</td>
+				<td class="ff">
+					<input class="ff" type="radio" name="mode" value="'.SEARCH__MODE_OR.'" '.(!$isExact ? 'checked="checked"' : '').' />'._('with one word').'
+				</td>
+				</tr>
+			</table><br />'
 			. $this->createSubSections($sectionsArray) .'
-        </div>
+			</div>
 		</form>
-';
+		';
 
 		// Add jquery javascript method for select none/all
 		$res .= <<< EOS

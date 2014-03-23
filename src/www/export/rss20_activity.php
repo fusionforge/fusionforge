@@ -26,6 +26,8 @@ require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'export/rss_utils.inc';
 
+global $HTML;
+
 $group_id = getIntFromRequest('group_id');
 $limit = getIntFromRequest('limit', 10);
 
@@ -56,8 +58,8 @@ if ($group_id) {
 	// ## one time output
 	header("Content-Type: text/xml; charset=utf-8");
 	print '<?xml version="1.0" encoding="UTF-8"?>
-       <rss version="2.0">
-       ';
+		<rss version="2.0">
+		';
 	print " <channel>\n";
 	print "  <title>".forge_get_config('forge_name')." $title Activity</title>\n";
 	print "  <link>".util_make_url("/activity/$link")."</link>\n";
@@ -192,8 +194,7 @@ if ($group_id) {
 
 } else {
 	// Print error showing no group was selected
-
-	echo '<br /><span class="error">'._('Error: No group selected').'</span>';
+	echo $HTML->error_msg(_('Error: No group selected'));
 }
 
 function date_compare($a, $b)

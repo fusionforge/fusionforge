@@ -5,7 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 (c) FusionForge Team
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013-2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -27,6 +27,8 @@ require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/account.php';
 require_once $gfcommon.'include/timezones.php';
+
+global $HTML;
 
 if (forge_get_config ('user_registration_restricted')) {
 	session_require_global_perm ('forge_admin');
@@ -101,9 +103,7 @@ if (getStringFromRequest('submit')) {
 
 			if ($activate_immediately) {
 				if (!$new_user->setStatus('A')) {
-					print '<span class="error">' .
-						_('Error during user activation but after user registration (user is now in pending state and will not get a notification eMail!)') .
-						'</span>' ;
+					echo $HTML->error_msg(_('Error during user activation but after user registration (user is now in pending state and will not get a notification eMail!)'));
 					print '<p>' . sprintf(_("Could not activate newly registered user's forge account: %s"), htmlspecialchars($new_user->getErrorMessage())) . '</p>';
 					site_footer();
 					exit;

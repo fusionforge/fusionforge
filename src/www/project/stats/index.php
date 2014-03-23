@@ -5,7 +5,7 @@
  * Copyright 2003 GForge, LLC
  * Copyright 2010 (c) Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2013, Franck Villaume - TrivialDev
+ * Copyright 2012-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -30,6 +30,8 @@ require_once $gfcommon.'reporting/report_utils.php';
 require_once $gfcommon.'reporting/Report.class.php';
 require_once $gfcommon.'reporting/ReportProjectAct.class.php';
 require_once $gfwww.'project/admin/project_admin_utils.php';
+
+global $HTML;
 
 $group_id = getIntFromRequest('group_id');
 if (!$group_id) {
@@ -115,10 +117,10 @@ project_admin_header(array('title'=>sprintf(_('Project Statistics for %s'), $gro
 </form>
 <?php
 if ($start == $end) {
-	echo '<p class="error">'._('Start and end dates must be different').'</p>';
+	echo $HTML->error_msg(_('Start and end dates must be different'));
 } else {
 	if (!report_actgraph('project', $SPAN, $start, $end, $group_id, $area)) {
-		echo '<p class="error">'._('Error during graphic computation.');
+		echo $HTML->error_msg(_('Error during graphic computation.'));
 	}
 }
 
