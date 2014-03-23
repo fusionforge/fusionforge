@@ -63,7 +63,7 @@ function create_authkeys($params) {
 }
 
 foreach ($keys as $username => $v) {
-	$ssh_key = join("\n", $v);
+	$ssh_key = join("\n", $v) . "\n";
 
 	$dir = forge_get_config('homedir_prefix').'/'.$username;
 	if (util_is_root_dir($dir)) {
