@@ -38,9 +38,7 @@ case $1 in
 		-e 's,{core/chroot},/var/lib/gforge/chroot,g' \
 		-e 's,{core/custom_path},/etc/gforge/custom,g' \
 		-e 's,{core/url_prefix},/,g' \
-		-e 's,{core/groupdir_prefix},/var/lib/gforge/chroot/home/groups,g' \
 		-e 's,{mediawiki/src_path},/usr/share/mediawiki,g' \
-		-e 's,{scmsvn/repos_path},/var/lib/gforge/chroot/scmrepos/svn,g' \
 		-e 's,{core/mailman_path},/var/lib/mailman,g' \
 		$i > httpd.conf.d-fhs/$(basename $i)
 	done
