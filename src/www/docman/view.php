@@ -189,10 +189,13 @@ if (is_numeric($docid)) {
 
 			if ($dg->hasDocuments($nested_groups, $df)) {
 				$filename = 'docman-'.$g->getUnixName().'-'.$dg->getID().'.zip';
-				$file = forge_get_config('data_path').'/'.$filename;
+				$file = forge_get_config('data_path').'/docman/'.$filename;
+				@unlink($file);
 				$zip = new ZipArchive;
-				if ( !$zip->open($file, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE))
+				if ( !$zip->open($file, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE)) {
+					@unlink($file);
 					exit_error(_('Unable to open ZIP archive for download as ZIP'), 'docman');
+				}
 
 				// ugly workaround to get the files at doc_group_id level
 				$df->setDocGroupID($dg->getID());
@@ -206,11 +209,15 @@ if (is_numeric($docid)) {
 							exit_error(_('Unable to fill ZIP file.'), 'docman');
 					}
 				}
-				if ( !docman_fill_zip($zip, $nested_groups, $df, $dg->getID()))
+				if ( !docman_fill_zip($zip, $nested_groups, $df, $dg->getID())) {
+					@unlink($file);
 					exit_error(_('Unable to fill ZIP archive for download as ZIP'), 'docman');
+				}
 
-				if ( !$zip->close())
+				if ( !$zip->close()) {
+					@unlink($file);
 					exit_error(_('Unable to close ZIP archive for download as ZIP'), 'docman');
+				}
 
 				header('Content-disposition: attachment; filename="'.$filename.'"');
 				header('Content-type: application/zip');
@@ -231,24 +238,31 @@ if (is_numeric($docid)) {
 			$dirid = $arr[6];
 			$arr_fileid = explode(',',$arr[7]);
 			$filename = 'docman-'.$g->getUnixName().'-selected-'.time().'.zip';
-			$file = forge_get_config('data_path').'/'.$filename;
+			$file = forge_get_config('data_path').'/docman/'.$filename;
+			@unlink($file);
 			$zip = new ZipArchive;
-			if (!$zip->open($file, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE))
+			if (!$zip->open($file, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE)) {
+				@unlink($file);
 				exit_error(_('Unable to open ZIP archive for download as ZIP'), 'docman');
+			}
 
 			foreach($arr_fileid as $docid) {
 				if (!empty($docid)) {
 					$d = new Document($g, $docid);
 					if (!$d || !is_object($d)) {
+						@unlink($file);
 						exit_error(_('Document is not available.'), 'docman');
 					} elseif ($d->isError()) {
+						@unlink($file);
 						exit_error($d->getErrorMessage(), 'docman');
 					}
 					if ($d->isURL()) {
 						continue;
 					}
-					if (!$zip->addFromString(iconv("UTF-8", "ASCII//TRANSLIT", $d->getFileName()), $d->getFileData()))
+					if (!$zip->addFromString(iconv("UTF-8", "ASCII//TRANSLIT", $d->getFileName()), $d->getFileData())) {
+						@unlink($file);
 						exit_error(_('Unable to fill ZIP file.'), 'docman');
+					}
 				} else {
 					$zip->close();
 					unlink($file);
@@ -256,8 +270,10 @@ if (is_numeric($docid)) {
 					session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($warning_msg));
 				}
 			}
-			if ( !$zip->close())
+			if ( !$zip->close()) {
+				@unlink($file);
 				exit_error(_('Unable to close ZIP archive for download as ZIP'), 'docman');
+			}
 
 			header('Content-disposition: attachment; filename="'.$filename.'"');
 			header('Content-type: application/zip');
@@ -274,7 +290,7 @@ if (is_numeric($docid)) {
 			exit_error(_('No document to display - invalid or inactive document number.'), 'docman');
 		}
 	} else {
-		exit_error(_('PHP extension is missing.'), 'docman');
+		exit_error(_('PHP ZIP extension is missing.'), 'docman');
 	}
 } else {
 	exit_error(_('No document to display - invalid or inactive document number.'), 'docman');
