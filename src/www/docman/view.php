@@ -112,17 +112,23 @@ if (is_numeric($docid)) {
 
 		if ( $nested_groups != NULL ) {
 			$filename = 'docman-'.$g->getUnixName().'-'.$docid.'.zip';
-			$file = '/tmp/'.$filename;
+			$file = forge_get_config('data_path').'/docman/'.$filename;
+
 			$zip = new ZipArchive;
 			if ( !$zip->open($file, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE)) {
+				@unlink($file);
 				exit_error(_('Unable to open ZIP archive for backup'), 'docman');
 			}
 
-			if ( !docman_fill_zip($zip, $nested_groups, $df))
+			if ( !docman_fill_zip($zip, $nested_groups, $df)) {
+				@unlink($file);
 				exit_error(_('Unable to fill ZIP archive for backup'), 'docman');
+			}
 
-			if ( !$zip->close())
+			if ( !$zip->close()) {
+				@unlink($file);
 				exit_error(_('Unable to close ZIP archive for backup'), 'docman');
+			}
 
 			header('Content-disposition: attachment; filename="'.$filename.'"');
 			header('Content-type: application/zip');
@@ -130,11 +136,11 @@ if (is_numeric($docid)) {
 			ob_end_clean();
 
 			if(!readfile_chunked($file)) {
-				unlink($file);
+				@unlink($file);
 				$error_msg = _('Unable to download backup file');
 				session_redirect('/docman/?group_id='.$group_id.'&view=admin&error_msg='.urlencode($error_msg));
 			}
-			unlink($file);
+			@unlink($file);
 		} else {
 			$warning_msg = _('No documents to backup.');
 			session_redirect('/docman/?group_id='.$group_id.'&view=admin&warning_msg='.urlencode($warning_msg));
