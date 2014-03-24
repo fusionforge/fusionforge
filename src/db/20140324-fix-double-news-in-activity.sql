@@ -39,3 +39,24 @@ UNION
 SELECT news_bytes.group_id,'news' AS section,news_bytes.id AS ref_id,news_bytes.forum_id AS subref_id,
 news_bytes.summary AS description, news_bytes.post_date AS activity_date, u.user_id, u.user_name, u.realname
 FROM news_bytes, users u WHERE u.user_id = news_bytes.submitted_by;
+UNION
+SELECT pgl.group_id, 'taskopen'::text AS section, p.group_project_id AS ref_id,
+p.project_task_id AS subref_id, p.summary AS description, p.last_modified_date AS activity_date,
+u.user_id, u.user_name, u.realname
+FROM project_task p
+JOIN project_group_list pgl USING (group_project_id), users u
+WHERE u.user_id = p.created_by AND p.status_id = 1
+UNION
+SELECT pgl.group_id, 'taskclose'::text AS section, p.group_project_id AS ref_id,p.project_task_id AS subref_id,
+p.summary AS description, p.last_modified_date AS activity_date, u.user_id,
+u.user_name, u.realname
+FROM project_task p
+JOIN project_group_list pgl USING (group_project_id), users u
+WHERE u.user_id = p.created_by AND p.status_id = 2
+UNION
+SELECT pgl.group_id, 'taskdelete'::text AS section, p.group_project_id AS ref_id,
+p.project_task_id AS subref_id, p.summary AS description, p.last_modified_date AS activity_date,
+u.user_id, u.user_name, u.realname
+FROM project_task p
+JOIN project_group_list pgl USING (group_project_id), users u
+WHERE u.user_id = p.created_by AND p.status_id = 3;
