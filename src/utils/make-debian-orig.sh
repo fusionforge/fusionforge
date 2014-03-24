@@ -32,7 +32,8 @@ if [ -e ../fusionforge_$u.orig.tar.gz ] ; then
     exit 1
 fi
 
-git archive --format=tar --prefix=fusionforge-$u/ $tag \
-    | tar -f - --delete fusionforge-$u/debian \
-    | gzip -c \
-    > ../fusionforge_$u.orig.tar.gz
+git archive --format=tar --prefix=fusionforge-$u/ $tag > ../fusionforge_$u.orig.tar
+if tar tf ../fusionforge_$u.orig.tar | grep -q fusionforge-$u/debian ; then
+    tar -f ../fusionforge_$u.orig.tar --delete fusionforge-$u/debian
+fi
+gzip ../fusionforge_$u.orig.tar
