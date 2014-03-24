@@ -38,7 +38,7 @@ users.user_name, users.realname FROM doc_groups, users WHERE doc_groups.created_
 UNION
 SELECT news_bytes.group_id,'news' AS section,news_bytes.id AS ref_id,news_bytes.forum_id AS subref_id,
 news_bytes.summary AS description, news_bytes.post_date AS activity_date, u.user_id, u.user_name, u.realname
-FROM news_bytes, users u WHERE u.user_id = news_bytes.submitted_by;
+FROM news_bytes, users u WHERE u.user_id = news_bytes.submitted_by
 UNION
 SELECT pgl.group_id, 'taskopen'::text AS section, p.group_project_id AS ref_id,
 p.project_task_id AS subref_id, p.summary AS description, p.last_modified_date AS activity_date,
