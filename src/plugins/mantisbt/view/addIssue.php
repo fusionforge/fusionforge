@@ -27,6 +27,7 @@ global $mantisbtConf;
 global $username;
 global $password;
 global $group_id;
+global $HTML;
 
 //validate function : to be sure needed informations are set before submit
 print	('
@@ -59,7 +60,7 @@ try {
 	$listStatus= $clientSOAP->__soapCall('mc_enum_status', array("username" => $username, "password" => $password));
 	$listVersions = $clientSOAP->__soapCall('mc_project_get_versions', array("username" => $username, "password" => $password, "project_id" => $mantisbtConf['id_mantisbt']));
 } catch (SoapFault $soapFault) {
-	echo '<div class="warning" >'. _('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring.'</div>';
+	echo $HTML->warning_msg(_('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring);
 	$errorPage = true;
 }
 

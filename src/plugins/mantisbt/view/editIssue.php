@@ -28,6 +28,7 @@ global $username;
 global $password;
 global $idBug;
 global $type;
+global $HTML;
 
 //validate function : to be sure needed informations are set before submit
 print   ('
@@ -62,7 +63,7 @@ try {
 	$listVersions = $clientSOAP->__soapCall('mc_project_get_versions', array("username" => $username, "password" => $password, "project_id" => $defect->project->id));
 	$listVersionsMilestone = $clientSOAP->__soapCall('mc_project_get_unreleased_versions', array("username" => $username, "password" => $password, "project_id" => $defect->project->id));
 } catch (SoapFault $soapFault) {
-	echo '<div class="warning" >'. _('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring.'</div>';
+	echo $HTML->warning_msg(_('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring);
 	$errorPage = true;
 }
 

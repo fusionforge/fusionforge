@@ -63,6 +63,7 @@ class HgPlugin extends SCMPlugin {
 	}
 
 	function getInstructionsForAnon($project) {
+		global $HTML;
 		$b = '<h2>';
 		$b .=  _('Anonymous Mercurial Access');
 		$b .= '</h2>';
@@ -77,7 +78,7 @@ class HgPlugin extends SCMPlugin {
 			$b .= _('The password is ').forge_get_config('anonhg_password', 'scmhg').'<br/>';
 
 		} else {
-			$b .= '<p class="warning">'._('Please contact forge administrator, scmhg plugin is not correctly configured');
+			$b .= $HTML->warning_msg(_('Please contact forge administrator, scmhg plugin is not correctly configured'));
 		}
 		$b .= '</p>';
 		return $b;

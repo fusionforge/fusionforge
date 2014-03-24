@@ -36,7 +36,7 @@ try {
 
 	$stats = $clientSOAP->__soapCall('mc_project_get_statistiques', array("username" => $username, "password" => $password, "project_id" => $mantisbtConf['id_mantisbt'], "level" => 0));
 } catch (SoapFault $soapFault) {
-	echo '<div class="warning" >'. _('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring.'</div>';
+	echo $HTML->warning_msg(_('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring.);
 	$errorPage = true;
 }
 

@@ -27,6 +27,7 @@ global $mantisbtConf;
 global $username;
 global $password;
 global $view;
+global $HTML;
 
 $mantisbt->getSubMenu();
 
@@ -42,7 +43,7 @@ switch ($view) {
 			try {
 				$clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
 			} catch (SoapFault $soapFault) {
-				echo '<div class="warning" >'. _('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring.'</div>';
+				echo $HTML->warning_msg(_('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring);
 				$errorPage = true;
 			}
 		}

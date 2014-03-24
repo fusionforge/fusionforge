@@ -28,6 +28,8 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'people/people_utils.php';
 require_once $gfwww.'people/skills_utils.php';
 
+global $HTML;
+
 if (!forge_get_config('use_people')) {
 	exit_disabled('home');
 }
@@ -59,7 +61,7 @@ if ($user_id && is_numeric($user_id)) {
 			}
 		}
 		if ((db_result($result, 0, 'people_view_skills') != 1) && !$overwritten_access) {
-			echo '<p class="warning">'._('This user has set his/her profile to private.').'</p>';
+			echo $HTML->warning_msg(_('This user has set his/her profile to private.'));
 			people_footer();
 			exit;
 		}

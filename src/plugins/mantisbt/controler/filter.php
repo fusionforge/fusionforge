@@ -27,6 +27,7 @@ global $mantisbtConf;
 global $username;
 global $password;
 global $group_id;
+global $HTML;
 
 $bugfilter = array();
 $bugfilter['_view_type'] = "advanced";
@@ -52,7 +53,7 @@ if (isset($_POST['dir'])) {
 try {
 	$listStatus = $clientSOAP->__soapCall('mc_enum_status', array("username" => $username, "password" => $password));
 } catch (SoapFault $soapFault) {
-	echo '<div class="warning" >'. _('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring.'</div>';
+	echo $HTML->warning_msg(_('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring);
 	$errorPage = true;
 }
 
@@ -81,7 +82,7 @@ if (!isset($errorPage)) {
 			$listChild = $clientSOAP->__soapCall('mc_project_get_all_subprojects', array("username" => $username, "password" => $password, "project_id" => $mantisbtConf['id_mantisbt']));
 			$mantisbtMembers =  $clientSOAP->__soapCall('mc_project_get_users', array("username" => $username, "password" => $password, "project_id" => $mantisbtConf['id_mantisbt'], "access" => "ANYBODY"));
 		} catch (SoapFault $soapFault) {
-			echo '<div class="warning" >'. _('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring.'</div>';
+			echo $HTML->warning_msg(_('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring);
 			$errorPage = true;
 		}
 

@@ -27,6 +27,7 @@ global $mantisbtConf;
 global $username;
 global $password;
 global $group_id;
+global $HTML;
 
 try {
 	/* do not recreate $clientSOAP object if already created by other pages */
@@ -36,12 +37,11 @@ try {
 	$listChild = $clientSOAP->__soapCall('mc_project_get_all_subprojects', array("username" => $username, "password" => $password, "project_id" => $mantisbtConf['id_mantisbt']));
 
 } catch (SoapFault $soapFault) {
-	echo '<div class="warning" >'. _('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring.'</div>';
+	echo $HTML->warning_msg(_('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring);
 	$errorPage = true;
 }
 
 if (!isset($errorPage)) {
-	global $HTML;
 ?>
 <script type="text/javascript">
 	jQuery(document).ready(function() {
@@ -89,7 +89,7 @@ if (!isset($errorPage)) {
 			try {
 				$idsBug = $clientSOAP->__soapCall('mc_issue_get_list_by_project_for_specific_version', array("username" => $username, "password" => $password, "project" => $mantisbtConf['id_mantisbt'], "version" => $version->name ));
 			} catch (SoapFault $soapFault) {
-				echo '<div class="warning" >'. _('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring.'</div>';
+				echo $HTML->warning_msg(_('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring);
 				break;
 			}
 			echo	'<fieldset>';
@@ -176,6 +176,6 @@ if (!isset($errorPage)) {
 			}
 		}
 	} else {
-		echo '<p class="warning">'._('No versions to display').'</p>';
+		echo $HTML->warning_msg(_('No versions to display'));
 	}
 }

@@ -37,7 +37,7 @@ try {
 
 	$listVersions = $clientSOAP->__soapCall('mc_project_get_versions', array("username" => $username, "password" => $password, "project_id" => $mantisbtConf['id_mantisbt']));
 } catch  (SoapFault $soapFault) {
-	echo '<div class="warning" >'. _('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring.'</div>';
+	echo $HTML->warning_msg(_('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring);
 	$errorPage = true;
 }
 
@@ -73,7 +73,7 @@ if (!isset($errorPage)){
 		}
 		echo '</table>';
 	} else {
-		echo '<p class="warning">'._('No versions').'</p>';
+		echo $HTML->warning_msg(_('No versions'));
 	}
 	echo $HTML->boxBottom();
 }

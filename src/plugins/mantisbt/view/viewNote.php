@@ -28,6 +28,7 @@ global $password;
 global $group_id;
 global $idBug;
 global $editable;
+global $HTML;
 
 //$msg is coming from previous soap error
 if (empty($msg)) {
@@ -67,7 +68,7 @@ if (empty($msg)) {
 		}
 		echo "</table>";
 	} else {
-		echo '<p class="warning">'._('No notes for this ticket').'</p>';
+		echo $HTML->warning_msg(_('No notes for this ticket'));
 	}
 ?>
 <script type="text/javascript">

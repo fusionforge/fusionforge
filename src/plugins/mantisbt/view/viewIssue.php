@@ -30,6 +30,7 @@ global $password;
 global $gfplugins;
 global $editable;
 global $group_id;
+global $HTML;
 
 if (!isset($defect)) {
 	try {
@@ -39,13 +40,13 @@ if (!isset($defect)) {
 
 		$defect = $clientSOAP->__soapCall('mc_issue_get', array("username" => $username, "password" => $password, "issue_id" => $idBug));
 	} catch (SoapFault $soapFault) {
-		echo '<div class="warning" >'. _('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring.'</div>';
+		echo $HTML->warning_msg(_('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring);
 		$errorPage = true;
 	}
 }
 
 if ($defect->project->id != $mantisbtConf['id_mantisbt']) {
-	echo '<div class="warning" >'. _('Woops: wrong issue id').'</div>';
+	echo $HTML->warning_msg(_('Woops: wrong issue id'));
 	$errorPage = true;
 }
 
@@ -138,7 +139,7 @@ if (!isset($errorPage)) {
 ?>
 </div>
 <?php
-	if (!isset($errorPage)) {
-		include($gfplugins.$mantisbt->name."/view/viewNote.php");
-		include($gfplugins.$mantisbt->name."/view/viewAttachment.php");
-	}
+if (!isset($errorPage)) {
+	include($gfplugins.$mantisbt->name."/view/viewNote.php");
+	include($gfplugins.$mantisbt->name."/view/viewAttachment.php");
+}

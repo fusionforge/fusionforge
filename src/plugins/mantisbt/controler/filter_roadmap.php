@@ -27,8 +27,7 @@ global $mantisbtConf;
 global $username;
 global $password;
 global $listChild;
-
-echo '<form id="mainform" method="post" action="?type=group&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&view=roadmap">';
+global $HTML;
 
 try {
 	/* do not recreate $clientSOAP object if already created by other pages */
@@ -38,11 +37,12 @@ try {
 	$listVersions = $clientSOAP->__soapCall('mc_project_get_versions', array("username" => $username, "password" => $password, "project_id" => $mantisbtConf['id_mantisbt']));
 
 } catch (SoapFault $soapFault) {
-	echo '<div class="warning" >'. _('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring.'</div>';
+	echo $HTML->warning_msg(_('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring);
 	$errorPage = true;
 }
 
 if (!isset($errorPage)) {
+	echo '<form id="mainform" method="post" action="?type=group&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&view=roadmap">';
 	if (sizeof($listVersions)) {
 		echo '<div style="float: left;margin-right: 10px; width: 145px; height: 140px;">';
 		echo '<h4 style="border-bottom: 1px solid #DAE0EA">'._('Versions:').'</h4>';

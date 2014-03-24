@@ -36,7 +36,7 @@ try {
 
 	$listCategories = $clientSOAP->__soapCall('mc_project_get_categories', array("username" => $username, "password" => $password, "project_id" => $mantisbtConf['id_mantisbt']));
 } catch (SoapFault $soapFault) {
-	echo '<div class="warning" >'. _('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring.'</div>';
+	echo $HTML->warning_msg(_('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring);
 	$errorPage = true;
 }
 
@@ -72,7 +72,7 @@ if (!isset($errorPage)){
 		}
 		echo '</table>';
 	} else {
-		echo '<p class="warning">'._('No Categories').'</p>';
+		echo $HTML->warning_msg(_('No Categories'));
 	}
 	echo $HTML->boxBottom();
 }

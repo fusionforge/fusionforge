@@ -28,6 +28,7 @@ global $username;
 global $password;
 global $group_id;
 global $editable;
+global $HTML;
 
 if (empty($msg)) {
 	if (!isset($defect)){
@@ -35,7 +36,7 @@ if (empty($msg)) {
 			$clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
 			$defect = $clientSOAP->__soapCall('mc_issue_get', array("username" => $username, "password" => $password, "issue_id" => $idBug));
 		}catch (SoapFault $soapFault) {
-			echo '<div class="warning" >'. _('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring.'</div>';
+			echo $HTML->warning_msg(_('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring);
 			$errorPage = true;
 		}
 	}
@@ -62,7 +63,7 @@ if (empty($msg)) {
 			}
 		echo "</table>";
 		} else {
-			echo '<p class="warning">'._('No attached files for this ticket').'</p>';
+			echo $HTML->warning_msg(_('No attached files for this ticket'));
 		}
 	}
 ?>

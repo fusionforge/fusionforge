@@ -127,6 +127,7 @@ function snippet_footer($params = array()) {
 }
 
 function snippet_show_package_snippets($version) {
+	global $HTML;
 	//show the latest version
 	$result=db_query_params("SELECT users.realname,users.user_id,snippet_package_item.snippet_version_id, snippet_version.version,snippet.name,users.user_name
 				FROM snippet,snippet_version,snippet_package_item,users
@@ -146,23 +147,22 @@ function snippet_show_package_snippets($version) {
 
 	if (!$result || $rows < 1) {
 		echo db_error();
-		echo '
-			<p class="warning_msg">'._('No Snippets Are In This Package Yet').'</p>';
+		echo $HTML->warning_msg(_('No Snippets Are In This Package Yet'));
 	} else {
-		echo $GLOBALS['HTML']->listTableTop($title_arr);
+		echo $HTML->listTableTop($title_arr);
 		//get the newest version, so we can display it's code
 		$newest_version=db_result($result,0,'snippet_version_id');
 
 		for ($i=0; $i<$rows; $i++) {
 			echo '
-			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td>'.db_result($result,$i,'snippet_version_id').
+			<tr '. $HTML->boxGetAltRowStyle($i) .'><td>'.db_result($result,$i,'snippet_version_id').
 				'</td><td>'.
 				util_make_link('/snippet/download.php?type=snippet&id='.db_result($result,$i,'snippet_version_id'),db_result($result,$i,'version')).
 				'</td><td>'.
 				db_result($result,$i,'name').'</td><td>'.
 				util_make_link_u(db_result($result, $i, 'user_name'), db_result($result, $i, 'user_id'),db_result($result, $i, 'realname')).'</td></tr>';
 		}
-		echo $GLOBALS['HTML']->listTableBottom();
+		echo $HTML->listTableBottom();
 	}
 }
 

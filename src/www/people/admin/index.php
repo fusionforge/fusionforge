@@ -106,7 +106,9 @@ if (forge_check_global_perm('forge_admin')) {
 		</label>
 		<input type="text" id="cat_name" name="cat_name" value="" size="15" maxlength="30" required="required" />
 		</p>
-		<p class="warning"><?php echo _('Once you add a category, it cannot be deleted'); ?></p>
+		<?php
+		echo $HTML->warning_msg(_('Once you add a category, it cannot be deleted'));
+		?>
 		<p>
 		<input type="submit" name="submit" value="<?php echo _('Submit'); ?>"></p>
 		</form>
@@ -142,7 +144,9 @@ if (forge_check_global_perm('forge_admin')) {
 		</label>
 		<input type="text" id="skill_name" name="skill_name" value="" size="15" maxlength="30" />
 		</p>
-		<p class="warning"><?php echo _('Once you add a skill, it cannot be deleted'); ?></p>
+		<?php
+		echo $HTML->warning_msg(_('Once you add a skill, it cannot be deleted'));
+		?>
 		<p>
 		<input type="submit" name="submit" value="<?php echo _('Submit'); ?>"></p>
 		</form>

@@ -26,6 +26,7 @@ global $mantisbt;
 global $mantisbtConf;
 global $username;
 global $password;
+global $HTML;
 
 $noteEdit;
 try {
@@ -43,7 +44,7 @@ try {
 	    }
     }
 } catch (SoapFault $soapFault) {
-	echo '<div class="warning" >'. _('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring.'</div>';
+	echo $HTML->warning_msg(_('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring);
 	$errorPage = true;
 }
 

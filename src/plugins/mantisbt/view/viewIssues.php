@@ -40,6 +40,7 @@ global $username;
 global $password;
 global $type;
 global $editable;
+global $HTML;
 
 global $prioritiesImg, $bugPerPage;
 
@@ -61,11 +62,11 @@ try {
 		}
 	}
 } catch (SoapFault $soapFault) {
-	echo '<div class="warning" >'. _('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring.'</div>';
+	echo $HTML->warning_msg(_('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring);
 	$errorPage = true;
 }
 if (!isset($clientSOAP) && !isset($errorPage)) {
-	echo '<div class="warning">'._('No data to retrieve').'</div>';
+	echo $HTML->warning_msg(_('No data to retrieve'));
 } elseif (!isset($errorPage) && isset($clientSOAP)) {
 
 ?>
@@ -120,7 +121,7 @@ if (!isset($clientSOAP) && !isset($errorPage)) {
 
 	// affichage page
 	if (!count($listBug)) {
-		echo '<p class="warning">'._('No tickets to display').'</p>';
+		echo $HTML->warning_msg(_('No tickets to display'));
 	} else {
 		$nbligne=0;
 

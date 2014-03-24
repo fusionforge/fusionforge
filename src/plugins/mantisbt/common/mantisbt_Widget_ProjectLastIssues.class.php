@@ -39,6 +39,7 @@ class mantisBT_Widget_ProjectLastIssues extends Widget {
 	}
 
 	function getContent() {
-		return '<div class="warning">'._('Not yet implemented').'</div>';
+		global $HTML;
+		return $HTML->warning_msg(_('Not yet implemented'));
 	}
 }
