@@ -16,6 +16,12 @@ else
     exit 1
 fi
 
+if [ "$1" != "" ] ; then
+    tag=$1
+else
+    tag=HEAD
+fi
+
 # package version including revision
 f=$(dpkg-parsechangelog | awk '/^Version:/ { print $2 }')
 # upstream version
@@ -26,7 +32,7 @@ if [ -e ../fusionforge_$u.orig.tar.gz ] ; then
     exit 1
 fi
 
-git archive --format=tar --prefix=fusionforge-$u/ HEAD \
+git archive --format=tar --prefix=fusionforge-$u/ $tag \
     | tar -f - --delete fusionforge-$u/debian \
     | gzip -c \
     > ../fusionforge_$u.orig.tar.gz
