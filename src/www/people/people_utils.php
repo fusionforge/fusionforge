@@ -203,7 +203,7 @@ function people_edit_skill_inventory($user_id) {
 
 
 function people_add_to_job_inventory($job_id,$skill_id,$skill_level_id,$skill_year_id) {
-	global $feedback, $error_msg , $HTML;
+	global $feedback, $error_msg, $HTML;
 	if (session_loggedin()) {
 		// check if they've already added this job
 		$result=db_query_params('SELECT * FROM people_job_inventory WHERE job_id=$1 AND skill_id=$2', array($job_id, $skill_id));
