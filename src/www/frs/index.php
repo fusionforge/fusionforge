@@ -51,8 +51,7 @@ if($content_type != $default_content_type) {
 	if($hook_params['content_type'] != ''){
 		header('Content-type: '. $hook_params['content_type']);
 		echo $hook_params['content'];
-	}
-	else {
+	} else {
 		header('HTTP/1.1 406 Not Acceptable',true,406);
 	}
 	exit(0);

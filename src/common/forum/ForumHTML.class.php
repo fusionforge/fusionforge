@@ -162,7 +162,7 @@ function forum_footer($params = array()) {
 
 /**
  *
- *Wrap many forum functions in this class
+ * Wrap many forum functions in this class
  *
  */
 class ForumHTML extends Error {

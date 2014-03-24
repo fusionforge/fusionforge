@@ -63,9 +63,9 @@ class Widget_MyBookmarks extends Widget {
 
 	function getDescription() {
 		return sprintf(_('List your favorite bookmarks (your favorite pages in %s or external).'), forge_get_config('forge_name'))
-		. '<br />'
-		. sprintf(_('Note that in many cases %s uses URL with enough embedded information to bookmark sophisticated items like Software Map browsing, typical search in your project Bug or Task database, etc.'), forge_get_config('forge_name'))
-		. '<br />'
-		. _('Bookmarked items can be edited which means that both the title of the bookmark and its destination URL can be modified.');
+			. '<br />'
+			. sprintf(_('Note that in many cases %s uses URL with enough embedded information to bookmark sophisticated items like Software Map browsing, typical search in your project Bug or Task database, etc.'), forge_get_config('forge_name'))
+			. '<br />'
+			. _('Bookmarked items can be edited which means that both the title of the bookmark and its destination URL can be modified.');
 	}
 }
