@@ -36,7 +36,7 @@ if ($report->isError()) {
 }
 
 $typ = getStringFromRequest('typ');
-$type = getStringFromRequest('type');
+$type = getStringFromRequest('type', 'tasks');
 $start = getIntFromRequest('start');
 $end = getIntFromRequest('end');
 
@@ -99,11 +99,8 @@ if ($typ =='r') {
 	}
 
 	echo $HTML->listTableBottom ();
-} elseif ($start != $end) { ?>
-<p>
-<?php report_timegraph('site', $type, $start, $end); ?>
-</p>
-<?php
+} elseif ($start != $end) {
+	report_timegraph('site', $type, $start, $end);
 }
 report_footer();
 

@@ -98,28 +98,25 @@ if ($sw) {
 	</tr></table>
 	</form>
 	<?php
-		if ($dev_id && $typ=='r') {
-			$report=new ReportUserTime($dev_id,$type,$start,$end);
-			$labels = $report->labels;
-			$data = $report->getData();
+	if ($dev_id && $typ=='r') {
+		$report=new ReportUserTime($dev_id,$type,$start,$end);
+		$labels = $report->labels;
+		$data = $report->getData();
 
-			echo $HTML->listTableTop(array(_('Type'), _('Time')));
+		echo $HTML->listTableTop(array(_('Type'), _('Time')));
 
-			for ($i=0; $i<count($labels); $i++) {
+		for ($i=0; $i<count($labels); $i++) {
 
-				echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>'.
-					'<td>'. $labels[$i] .'</td><td>'. $data[$i] .'</td></tr>';
+			echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>'.
+				'<td>'. $labels[$i] .'</td><td>'. $data[$i] .'</td></tr>';
 
-			}
-
-			echo $HTML->listTableBottom ();
-
-		} elseif ($dev_id && $start != $end) { ?>
-		<p>
-		<?php report_timegraph('user', $type, $start, $end, $dev_id); ?>
-		</p>
-		<?php
 		}
+
+		echo $HTML->listTableBottom ();
+
+	} elseif ($dev_id && $start != $end) {
+		report_timegraph('user', $type, $start, $end, $dev_id);
+	}
 }
 
 report_footer();

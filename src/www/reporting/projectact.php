@@ -74,12 +74,9 @@ report_header(_('Project Activity'));
 <td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" /></td>
 </tr></table>
 </form>
-<?php if ($g_id && $start != $end) { ?>
-	<p>
-	<?php report_actgraph('project', $SPAN, $start, $end, $g_id, $area); ?>
-	</p>
-	<?php
-
+<?php
+if ($g_id && $start != $end) {
+	report_actgraph('project', $SPAN, $start, $end, $g_id, $area);
 }
 
 report_footer();

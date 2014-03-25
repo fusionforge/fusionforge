@@ -67,11 +67,10 @@ report_header(_('Cumulative Users'));
 <td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" /></td>
 </tr></table>
 </form>
-<?php if ($start != $end) { ?>
-	<p>
-	<?php report_graph('usercumul', $SPAN, $start, $end); ?>
-	</p>
-<?php }
+<?php
+if ($start != $end) {
+	report_graph('usercumul', $SPAN, $start, $end);
+}
 
 report_footer();
 

@@ -68,11 +68,10 @@ report_header(_('Cumulative Projects'));
 <td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" /></td>
 </tr></table>
 </form>
-<?php if ($start != $end) { ?>
-	<p>
-	<?php report_graph('groupcumul', $SPAN, $start, $end); ?>
-	</p>
-<?php }
+<?php
+if ($start != $end) {
+	report_graph('groupcumul', $SPAN, $start, $end);
+}
 
 report_footer();
 
