@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-25 14:21+0100\n"
+"POT-Creation-Date: 2014-03-25 14:48+0100\n"
 "PO-Revision-Date: 2009-01-13 16:27+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -107,7 +107,7 @@ msgstr ""
 #: common/docman/actions/monitorfile.php:52
 #: common/docman/actions/monitorfile.php:72
 #: common/docman/actions/trashfile.php:60
-#: common/docman/actions/validatefile.php:54 www/docman/view.php:249
+#: common/docman/actions/validatefile.php:54 www/docman/view.php:269
 msgid "No action to perform"
 msgstr ""
 
@@ -246,7 +246,7 @@ msgstr ""
 #: common/tracker/actions/admin-updates.php:536
 #: common/tracker/actions/admin-updates.php:595
 #: common/tracker/actions/browse.php:424 common/tracker/actions/browse.php:427
-#: common/tracker/actions/browse.php:445 common/tracker/actions/browse.php:795
+#: common/tracker/actions/browse.php:445 common/tracker/actions/browse.php:794
 #: common/tracker/actions/detail.php:70
 #: common/tracker/actions/mod-limited.php:77
 #: common/tracker/actions/mod-limited.php:202
@@ -344,8 +344,8 @@ msgstr ""
 #: www/export/rssAboTask.php:173 www/export/rss_project.php:88
 #: www/export/rss_project.php:98 www/export/rss_project.php:104
 #: www/export/rss_project.php:110 www/forum/admin/index.php:158
-#: www/forum/admin/pendingmsgdetail.php:59 www/forum/forum.php:93
-#: www/forum/forum.php:157 www/forum/message.php:128
+#: www/forum/admin/pendingmsgdetail.php:59 www/forum/forum.php:56
+#: www/forum/forum.php:93 www/forum/forum.php:157 www/forum/message.php:128
 #: www/frs/admin/deletepackage.php:57 www/frs/admin/qrs.php:197
 #: www/frs/shownotes.php:64 www/include/features_boxes.php:150
 #: www/include/features_boxes.php:159 www/include/html.php:931
@@ -779,7 +779,7 @@ msgstr ""
 #: common/docman/views/pendingfiles.php:63 common/docman/views/search.php:142
 #: common/tracker/actions/admin-ind.php:100
 #: common/tracker/actions/admin-ind.php:140
-#: common/tracker/actions/browse.php:580 common/tracker/actions/ind.php:57
+#: common/tracker/actions/browse.php:579 common/tracker/actions/ind.php:57
 #: common/tracker/views/form-updatetracker.php:53
 #: plugins/blocks/www/index.php:202
 #: plugins/contribtracker/www/global_admin.php:243
@@ -1078,8 +1078,8 @@ msgstr ""
 #: common/tracker/actions/admin-ind.php:151
 #: common/tracker/actions/admin-ind.php:154
 #: common/tracker/actions/admin-ind.php:157
-#: common/tracker/actions/browse.php:783 common/tracker/actions/browse.php:791
-#: common/tracker/actions/browse.php:801 common/tracker/actions/detail.php:93
+#: common/tracker/actions/browse.php:782 common/tracker/actions/browse.php:790
+#: common/tracker/actions/browse.php:800 common/tracker/actions/detail.php:93
 #: common/tracker/actions/detail.php:97 common/tracker/actions/detail.php:104
 #: common/tracker/actions/detail.php:111 common/tracker/actions/detail.php:121
 #: common/tracker/actions/detail.php:133 common/tracker/actions/detail.php:174
@@ -1261,9 +1261,9 @@ msgstr ""
 #: www/people/editprofile.php:241 www/pm/add_task.php:150
 #: www/pm/admin/index.php:214 www/pm/admin/index.php:293
 #: www/pm/admin/index.php:323 www/pm/admin/index.php:333
-#: www/pm/admin/index.php:343 www/pm/browse_task.php:401
-#: www/pm/browse_task.php:406 www/pm/browse_task.php:413
-#: www/pm/browse_task.php:418 www/pm/browse_task.php:423
+#: www/pm/admin/index.php:343 www/pm/browse_task.php:403
+#: www/pm/browse_task.php:408 www/pm/browse_task.php:415
+#: www/pm/browse_task.php:420 www/pm/browse_task.php:425
 #: www/pm/format_csv.php:67 www/pm/format_csv.php:82 www/pm/format_csv.php:97
 #: www/pm/format_csv.php:119 www/pm/format_csv.php:123
 #: www/pm/format_csv.php:127 www/project/admin/database.php:164
@@ -1327,12 +1327,12 @@ msgid "Folder that document belongs to"
 msgstr ""
 
 #: common/docman/views/editfile.php:69 common/tracker/actions/browse.php:427
-#: common/tracker/actions/browse.php:586 common/tracker/actions/browse.php:795
+#: common/tracker/actions/browse.php:585 common/tracker/actions/browse.php:794
 #: common/tracker/actions/detail.php:104
 #: common/tracker/actions/mod-limited.php:150
 #: common/tracker/actions/mod.php:187 common/tracker/actions/query.php:340
 #: common/tracker/Artifact.class.php:945
-#: common/tracker/views/form-customizelist.php:40 www/pm/browse_task.php:418
+#: common/tracker/views/form-customizelist.php:40 www/pm/browse_task.php:420
 #: www/project/admin/database.php:204
 msgid "State"
 msgstr ""
@@ -1365,7 +1365,7 @@ msgid "Edit document dialog box"
 msgstr ""
 
 #: common/docman/views/listfile.php:163 www/export/rssAboTask.php:142
-#: www/pm/browse_task.php:423 www/pm/mod_task.php:67
+#: www/pm/browse_task.php:425 www/pm/mod_task.php:67
 msgid "Subproject"
 msgstr ""
 
@@ -1557,8 +1557,8 @@ msgstr ""
 #: common/docman/views/pendingfiles.php:88
 #: common/docman/views/pendingfiles.php:90
 #: common/forum/ForumHTML.class.php:217 common/pm/ProjectTask.class.php:1213
-#: common/tracker/actions/browse.php:639 common/tracker/actions/browse.php:650
-#: common/tracker/actions/browse.php:670 common/tracker/actions/detail.php:94
+#: common/tracker/actions/browse.php:638 common/tracker/actions/browse.php:649
+#: common/tracker/actions/browse.php:669 common/tracker/actions/detail.php:94
 #: common/tracker/actions/downloadcsv.php:87
 #: common/tracker/actions/downloadcsv.php:88
 #: common/tracker/actions/downloadcsv.php:89
@@ -2361,7 +2361,7 @@ msgstr ""
 msgid "You don't have a permission to access this page"
 msgstr ""
 
-#: common/forum/ForumFactory.class.php:158
+#: common/forum/ForumFactory.class.php:158 www/forum/forum.php:56
 msgid "Forum not found"
 msgstr ""
 
@@ -2380,7 +2380,7 @@ msgid "Posted by"
 msgstr ""
 
 #: common/forum/ForumHTML.class.php:70 common/include/Navigation.class.php:382
-#: common/tracker/actions/browse.php:200 common/tracker/actions/browse.php:578
+#: common/tracker/actions/browse.php:200 common/tracker/actions/browse.php:577
 #: common/tracker/actions/detail.php:133
 #: common/tracker/actions/mod-limited.php:163
 #: common/tracker/actions/mod.php:198 common/tracker/actions/query.php:198
@@ -5181,11 +5181,11 @@ msgid "Any"
 msgstr ""
 
 #: common/tracker/actions/browse.php:192 www/pm/browse_task.php:113
-#: www/pm/browse_task.php:389 www/pm/ganttpage.php:155
+#: www/pm/browse_task.php:391 www/pm/ganttpage.php:155
 msgid "Unassigned"
 msgstr ""
 
-#: common/tracker/actions/browse.php:198 common/tracker/actions/browse.php:576
+#: common/tracker/actions/browse.php:198 common/tracker/actions/browse.php:575
 #: common/tracker/actions/query.php:196
 #: common/tracker/views/form-addcanned.php:42 www/admin/massmail.php:134
 #: www/admin/search.php:74 www/admin/search.php:149 www/my/dashboard.php:65
@@ -5195,8 +5195,8 @@ msgstr ""
 msgid "Id"
 msgstr ""
 
-#: common/tracker/actions/browse.php:199 common/tracker/actions/browse.php:588
-#: common/tracker/actions/browse.php:783 common/tracker/actions/detail.php:97
+#: common/tracker/actions/browse.php:199 common/tracker/actions/browse.php:587
+#: common/tracker/actions/browse.php:782 common/tracker/actions/detail.php:97
 #: common/tracker/actions/mod-limited.php:141
 #: common/tracker/actions/mod.php:179 common/tracker/actions/query.php:197
 #: common/tracker/include/build_submission_form.php:66
@@ -5205,12 +5205,12 @@ msgstr ""
 #: plugins/mantisbt/view/editIssue.php:129
 #: plugins/mantisbt/view/viewIssue.php:86 www/my/dashboard.php:76
 #: www/pm/add_task.php:67 www/pm/browse_task.php:134
-#: www/pm/browse_task.php:261 www/pm/browse_task.php:406
+#: www/pm/browse_task.php:261 www/pm/browse_task.php:408
 #: www/pm/detail_task.php:71 www/pm/mod_task.php:84
 msgid "Priority"
 msgstr ""
 
-#: common/tracker/actions/browse.php:201 common/tracker/actions/browse.php:582
+#: common/tracker/actions/browse.php:201 common/tracker/actions/browse.php:581
 #: common/tracker/actions/query.php:199
 #: common/tracker/views/form-customizelist.php:39
 #: cronjobs/send_pending_items_mail.php:118 www/people/viewjob.php:76
@@ -5220,13 +5220,13 @@ msgstr ""
 msgid "Open Date"
 msgstr ""
 
-#: common/tracker/actions/browse.php:202 common/tracker/actions/browse.php:596
+#: common/tracker/actions/browse.php:202 common/tracker/actions/browse.php:595
 #: common/tracker/actions/query.php:200
 #: common/tracker/views/form-customizelist.php:47
 msgid "Last Modified Date"
 msgstr ""
 
-#: common/tracker/actions/browse.php:203 common/tracker/actions/browse.php:584
+#: common/tracker/actions/browse.php:203 common/tracker/actions/browse.php:583
 #: common/tracker/actions/query.php:201
 #: common/tracker/views/form-customizelist.php:44
 msgid "Close Date"
@@ -5238,12 +5238,12 @@ msgstr ""
 msgid "Assignee"
 msgstr ""
 
-#: common/tracker/actions/browse.php:206 common/tracker/actions/browse.php:598
+#: common/tracker/actions/browse.php:206 common/tracker/actions/browse.php:597
 #: common/tracker/views/form-customizelist.php:48
 msgid "# Votes"
 msgstr ""
 
-#: common/tracker/actions/browse.php:207 common/tracker/actions/browse.php:600
+#: common/tracker/actions/browse.php:207 common/tracker/actions/browse.php:599
 #: common/tracker/views/form-customizelist.php:49
 msgid "# Voters"
 msgstr ""
@@ -5299,12 +5299,12 @@ msgid "Change"
 msgstr ""
 
 #: common/tracker/actions/browse.php:348 common/tracker/actions/browse.php:351
-#: common/tracker/actions/browse.php:461
+#: common/tracker/actions/browse.php:460
 msgid "Advanced queries"
 msgstr ""
 
 #: common/tracker/actions/browse.php:349 common/tracker/actions/browse.php:417
-#: common/tracker/actions/browse.php:462
+#: common/tracker/actions/browse.php:461
 msgid "Simple Filtering and Sorting"
 msgstr ""
 
@@ -5334,25 +5334,25 @@ msgstr ""
 msgid "Quick Browse"
 msgstr ""
 
-#: common/tracker/actions/browse.php:458
+#: common/tracker/actions/browse.php:457
 #: common/tracker/views/form-adminroadmap.php:491
 msgid "Default"
 msgstr ""
 
-#: common/tracker/actions/browse.php:460
+#: common/tracker/actions/browse.php:459
 #, php-format
 msgid "Viewing only opened records by default, use “%1$s” or “%2$s” to change."
 msgstr ""
 
-#: common/tracker/actions/browse.php:561 www/pm/browse_task.php:228
+#: common/tracker/actions/browse.php:560 www/pm/browse_task.php:228
 msgid "Check all"
 msgstr ""
 
-#: common/tracker/actions/browse.php:563 www/pm/browse_task.php:230
+#: common/tracker/actions/browse.php:562 www/pm/browse_task.php:230
 msgid "Clear all"
 msgstr ""
 
-#: common/tracker/actions/browse.php:590 common/tracker/actions/browse.php:791
+#: common/tracker/actions/browse.php:589 common/tracker/actions/browse.php:790
 #: common/tracker/actions/detail.php:121
 #: common/tracker/actions/mod-limited.php:136
 #: common/tracker/actions/mod.php:172 common/tracker/Artifact.class.php:941
@@ -5364,12 +5364,12 @@ msgstr ""
 #: plugins/mantisbt/view/editIssue.php:128
 #: plugins/mantisbt/view/viewIssue.php:85 www/my/dashboard.php:79
 #: www/pm/add_task.php:125 www/pm/browse_task.php:259
-#: www/pm/browse_task.php:413 www/pm/detail_task.php:128
+#: www/pm/browse_task.php:415 www/pm/detail_task.php:128
 #: www/pm/mod_task.php:174
 msgid "Assigned to"
 msgstr ""
 
-#: common/tracker/actions/browse.php:592 common/tracker/actions/detail.php:111
+#: common/tracker/actions/browse.php:591 common/tracker/actions/detail.php:111
 #: common/tracker/actions/mod-limited.php:108
 #: common/tracker/actions/mod.php:117
 #: common/tracker/views/form-customizelist.php:43
@@ -5386,60 +5386,60 @@ msgstr ""
 msgid "Submitted by"
 msgstr ""
 
-#: common/tracker/actions/browse.php:594 common/tracker/actions/mod.php:232
+#: common/tracker/actions/browse.php:593 common/tracker/actions/mod.php:232
 #: common/tracker/actions/mod.php:279
 #: common/tracker/include/ArtifactTypeHtml.class.php:329
 #: common/tracker/views/form-customizelist.php:46
 msgid "Related Tasks"
 msgstr ""
 
-#: common/tracker/actions/browse.php:602
+#: common/tracker/actions/browse.php:601
 msgid "% Voted"
 msgstr ""
 
-#: common/tracker/actions/browse.php:706 www/pm/browse_task.php:322
+#: common/tracker/actions/browse.php:705 www/pm/browse_task.php:322
 msgid "previous"
 msgstr ""
 
-#: common/tracker/actions/browse.php:731 www/pm/browse_task.php:349
+#: common/tracker/actions/browse.php:730 www/pm/browse_task.php:349
 msgid "next"
 msgstr ""
 
-#: common/tracker/actions/browse.php:737
+#: common/tracker/actions/browse.php:736
 #, php-format
 msgid "* Denotes requests > %s Days Old"
 msgstr ""
 
-#: common/tracker/actions/browse.php:760 common/tracker/actions/browse.php:804
-#: www/pm/browse_task.php:395 www/pm/browse_task.php:428
+#: common/tracker/actions/browse.php:759 common/tracker/actions/browse.php:803
+#: www/pm/browse_task.php:397 www/pm/browse_task.php:430
 msgid "Mass Update"
 msgstr ""
 
-#: common/tracker/actions/browse.php:764 www/pm/browse_task.php:397
+#: common/tracker/actions/browse.php:763 www/pm/browse_task.php:399
 msgid ""
 "If you wish to apply changes to all items selected above, use these controls "
 "to change their properties and click once on “Mass Update”."
 msgstr ""
 
-#: common/tracker/actions/browse.php:781 common/tracker/actions/browse.php:792
-#: common/tracker/actions/browse.php:796 www/include/html.php:361
+#: common/tracker/actions/browse.php:780 common/tracker/actions/browse.php:791
+#: common/tracker/actions/browse.php:795 www/include/html.php:361
 #: www/include/html.php:623 www/include/html.php:826
-#: www/pm/browse_task.php:392 www/pm/browse_task.php:402
-#: www/pm/browse_task.php:419
+#: www/pm/browse_task.php:394 www/pm/browse_task.php:404
+#: www/pm/browse_task.php:421
 msgid "No Change"
 msgstr ""
 
-#: common/tracker/actions/browse.php:792
+#: common/tracker/actions/browse.php:791
 #: common/tracker/include/ArtifactTypeHtml.class.php:698
 #: common/tracker/include/ArtifactTypeHtml.class.php:732
 msgid "Nobody"
 msgstr ""
 
-#: common/tracker/actions/browse.php:801 common/tracker/Artifact.class.php:949
+#: common/tracker/actions/browse.php:800 common/tracker/Artifact.class.php:949
 msgid "Canned Response"
 msgstr ""
 
-#: common/tracker/actions/browse.php:813
+#: common/tracker/actions/browse.php:812
 msgid "No items found"
 msgstr ""
 
@@ -10881,7 +10881,7 @@ msgstr ""
 #: www/people/editjob.php:164 www/people/people_utils.php:361
 #: www/people/people_utils.php:443 www/pm/add_task.php:50
 #: www/pm/browse_task.php:199 www/pm/browse_task.php:257
-#: www/pm/browse_task.php:401 www/pm/detail_task.php:52
+#: www/pm/browse_task.php:403 www/pm/detail_task.php:52
 #: www/pm/ganttpage.php:184 www/pm/mod_task.php:61 www/pm/mod_task.php:269
 #: www/reporting/timeadd.php:144 www/snippet/package.php:162
 #: www/snippet/snippet_utils.php:183 www/snippet/snippet_utils.php:215
@@ -15716,72 +15716,72 @@ msgstr ""
 msgid "Documents for "
 msgstr ""
 
-#: www/docman/view.php:60 www/docman/view.php:237
+#: www/docman/view.php:60 www/docman/view.php:254
 msgid "Document is not available."
 msgstr ""
 
-#: www/docman/view.php:118
+#: www/docman/view.php:120
 msgid "Unable to open ZIP archive for backup"
 msgstr ""
 
-#: www/docman/view.php:122
+#: www/docman/view.php:125
 msgid "Unable to fill ZIP archive for backup"
 msgstr ""
 
-#: www/docman/view.php:125
+#: www/docman/view.php:130
 msgid "Unable to close ZIP archive for backup"
 msgstr ""
 
-#: www/docman/view.php:134
+#: www/docman/view.php:140
 msgid "Unable to download backup file"
 msgstr ""
 
-#: www/docman/view.php:139
+#: www/docman/view.php:145
 msgid "No documents to backup."
 msgstr ""
 
-#: www/docman/view.php:143
+#: www/docman/view.php:149
 msgid "ZIP extension is missing: no backup function"
 msgstr ""
 
-#: www/docman/view.php:155
+#: www/docman/view.php:161
 msgid "Webdav Access Canceled by user"
 msgstr ""
 
-#: www/docman/view.php:161
+#: www/docman/view.php:167
 msgid "No Webdav interface enabled."
 msgstr ""
 
-#: www/docman/view.php:189 www/docman/view.php:231
+#: www/docman/view.php:197 www/docman/view.php:246
 msgid "Unable to open ZIP archive for download as ZIP"
 msgstr ""
 
-#: www/docman/view.php:200 www/docman/view.php:245
+#: www/docman/view.php:209 www/docman/view.php:264
 msgid "Unable to fill ZIP file."
 msgstr ""
 
-#: www/docman/view.php:204
+#: www/docman/view.php:214
 msgid "Unable to fill ZIP archive for download as ZIP"
 msgstr ""
 
-#: www/docman/view.php:207 www/docman/view.php:254
+#: www/docman/view.php:219 www/docman/view.php:275
 msgid "Unable to close ZIP archive for download as ZIP"
 msgstr ""
 
-#: www/docman/view.php:216 www/docman/view.php:263
+#: www/docman/view.php:229 www/docman/view.php:285
 msgid "Unable to download ZIP archive"
 msgstr ""
 
-#: www/docman/view.php:221
+#: www/docman/view.php:234
 msgid "This documents folder is empty."
 msgstr ""
 
-#: www/docman/view.php:268 www/docman/view.php:274
+#: www/docman/view.php:290 www/docman/view.php:296
 msgid "No document to display - invalid or inactive document number."
 msgstr ""
 
-#: www/docman/view.php:271
-msgid "PHP extension is missing."
+#: www/docman/view.php:293
+msgid "PHP ZIP extension is missing."
 msgstr ""
 
 #: www/export/index.php:29
@@ -16022,10 +16022,6 @@ msgstr ""
 
 #: www/forum/attachment.php:157
 msgid "No attach found"
-msgstr ""
-
-#: www/forum/forum.php:56
-msgid "Error forum not found: "
 msgstr ""
 
 #: www/forum/forum.php:114
@@ -18734,7 +18730,7 @@ msgstr ""
 msgid "Add tasks using the link above"
 msgstr ""
 
-#: www/pm/browse_task.php:356
+#: www/pm/browse_task.php:358
 msgid "* Denotes overdue tasks"
 msgstr ""
 
