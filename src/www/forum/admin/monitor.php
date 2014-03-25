@@ -46,7 +46,7 @@ if (!$f || !is_object($f)) {
 	exit_error($f->getErrorMessage(), 'forums');
 }
 
-session_require_perm ('forum_admin', $f->Group->getID());
+session_require_perm('forum_admin', $f->Group->getID());
 
 forum_header(array('title'=>sprintf(_('Forum %s Monitoring Users'), $f->getName())));
 

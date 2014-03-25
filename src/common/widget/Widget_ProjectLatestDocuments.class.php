@@ -53,7 +53,7 @@ class Widget_ProjectLatestDocuments extends Widget {
 						FROM docdata_vw
 						WHERE group_id=$1
 						AND stateid=$2',
-					array($group_id,'1'));
+					array($group_id, '1'));
 
 		if (session_loggedin() && (user_ismember($group_id) ||
 		    forge_check_global_perm('forge_admin'))) {

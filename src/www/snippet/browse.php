@@ -87,7 +87,7 @@ if ((!$result || $rows < 1) && (!$result2 || $rows2 < 1)) {
 	$title_arr[]= _('Title');
 	$title_arr[]= _('Creator');
 
-	echo $HTML->listTableTop ($title_arr);
+	echo $HTML->listTableTop($title_arr);
 
 	//	List packages if there are any
 	if ($rows2 > 0) {
