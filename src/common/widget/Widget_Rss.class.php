@@ -64,7 +64,7 @@ require_once 'Widget.class.php';
 			foreach($items as $item){
 				$i=$i+1;
 
-				$content .= '<tr '.$HTML->boxGetAltRowStyle($i).'><td WIDTH="99%">';
+				$content .= '<tr '.$HTML->boxGetAltRowStyle($i).'><td width="99%">';
 				if ($image = $item->get_link(0, 'image')) {
 					//hack to display twitter avatar
 					$content .= '<img src="'.  $hp->purify($image, CODENDI_PURIFIER_CONVERT_HTML)  .'" style="float:left; margin-right:1em;" />';
