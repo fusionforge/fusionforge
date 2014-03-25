@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012, 2014 Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -32,7 +32,7 @@ class Widget_MyAdmin extends Widget {
 		$this->Widget('myadmin');
 	}
 	function getTitle() {
-		return _("Pending administrative tasks");
+		return _('Pending administrative tasks');
 	}
 	function getContent() {
 		$i = 0;
@@ -87,7 +87,7 @@ class Widget_MyAdmin extends Widget {
 
 			$html_my_admin .= $this->_get_admin_row(
 				$i++,
-				'<a href="/news/admin">'. _("Site News Approval") .'</a>',
+				util_make_link('/news/admin', _('Site News Approval')),
 				$pending_news,
 				$this->_get_color($pending_news)
 			);

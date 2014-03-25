@@ -93,11 +93,11 @@ class Widget_ProjectLatestDocuments extends Widget {
 				$path = $ndg->getPath(true, true);
 				switch ($filetype) {
 					case "URL": {
-						$docurl = $filename;
+						$docurl = util_make_link($filename, $filename, array(), true);
 						break;
 					}
 					default: {
-						$docurl = util_make_url('/docman/view.php/'.$group_id.'/'.$docid.'/'.urlencode($filename));
+						$docurl = util_make_link('/docman/view.php/'.$group_id.'/'.$docid.'/'.urlencode($filename), '<strong>'.$filename.'</strong>');
 					}
 				}
 				echo '
@@ -105,8 +105,8 @@ class Widget_ProjectLatestDocuments extends Widget {
 						<td>'
 							. date(_('Y-m-d'),$realdate) .
 						'</td>
-						<td>
-							<a href="'.$docurl.'" ><strong>' . $filename . '</strong></a>
+						<td>'
+							.$docurl.'
 						</td>
 						<td>'
 							.$title.'
@@ -127,7 +127,7 @@ class Widget_ProjectLatestDocuments extends Widget {
 			}
 			echo $HTML->listTableBottom();
 		}
-		echo '<div class="underline-link">' . util_make_link('/docman/?group_id='.$group_id, _('Browse Documents Manager')) . '</div>';
+		echo '<div class="underline-link">'.util_make_link('/docman/?group_id='.$group_id, _('Browse Documents Manager')) . '</div>';
 	}
 
 	function isAvailable() {

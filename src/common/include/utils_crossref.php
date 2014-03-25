@@ -46,7 +46,7 @@ function util_gen_cross_ref ($text, $group_id) {
 }
 
 function _page2url($prj,$page) {
-	return '<a href="/wiki/g/'.$prj.'/'.rawurlencode($page).'">'.$page.'</a>';
+	return util_make_link('/wiki/g/'.$prj.'/'.rawurlencode($page), $page);
 }
 
 function _artifactid2url ($id, $mode='') {
@@ -58,15 +58,15 @@ function _artifactid2url ($id, $mode='') {
 				array ($id)) ;
 	if (db_numrows($res) == 1) {
 		$row = db_fetch_array($res);
-		$url = '/tracker/?func=detail&amp;aid='.$id.'&amp;group_id='.$row['group_id'].'&amp;atid='.$row['group_artifact_id'];
-		$arg = 'title="'.util_html_secure($row['summary']).'"' ;
+		$url = '/tracker/?func=detail&aid='.$id.'&group_id='.$row['group_id'].'&atid='.$row['group_artifact_id'];
+		$arg['title'] = util_html_secure($row['summary']);
 		if ($row['status_id'] == 2) {
-			$arg .= 'class="artifact_closed"';
+			$arg['class'] = 'artifact_closed';
 		}
 		if ($mode == 'title') {
-			return '<a href="'.$url.'" '.$arg.'>'.$text.'</a> <a href="'.$url.'">'.$row['summary'].'</a><br />';
+			return util_make_link($url, $text, $arg).util_make_link($url, $row['summary']).'<br />';
 		} else {
-			return '<a href="'.$url.'" '.$arg.'>'.$text.'</a>';
+			return util_make_link($url, $text, $arg);
 		}
 	}
 	return $text;
@@ -89,17 +89,17 @@ function _taskid2url($id, $group_id) {
 				array ($id, $group_id));
 	if (db_numrows($res) == 1) {
 		$row = db_fetch_array($res);
-		$url = '/pm/task.php?func=detailtask&amp;project_task_id='.$id.'&amp;group_id='.$row['group_id'].'&amp;group_project_id='.$row['group_project_id'];
-		$arg = 'title="'.$row['summary'].'"' ;
+		$url = '/pm/task.php?func=detailtask&project_task_id='.$id.'&group_id='.$row['group_id'].'&group_project_id='.$row['group_project_id'];
+		$arg['title'] = util_html_secure($row['summary']);
 		if ($row['status_id'] == 2) {
-			$arg .= 'class="task_closed"';
+			$arg['class'] = 'task_closed';
 		}
-		return '<a href="'.$url.'" '.$arg.'>'.$text.'</a>';
+		return util_make_link($url, $text, $arg);
 	}
 	return $text;
 }
 
-function _forumid2url ($id) {
+function _forumid2url($id) {
 	$text = '[forum:'.$id.']';
 	$res = db_query_params ('SELECT group_id, forum.group_forum_id, subject
 			FROM forum, forum_group_list
@@ -108,9 +108,9 @@ function _forumid2url ($id) {
 				array ($id));
 	if (db_numrows($res) == 1) {
 		$row = db_fetch_array($res);
-		$url = '/forum/message.php?msg_id='.$id.'&amp;group_id='.$row['group_id'];
-		$arg = 'title="'.$row['subject'].'"' ;
-		return '<a href="'.$url.'" '.$arg.'>'.$text.'</a>';
+		$url = '/forum/message.php?msg_id='.$id.'&group_id='.$row['group_id'];
+		$arg['title'] = $row['subject'];
+		return util_make_link($url, $text, $arg);
 	}
 	return $text;
 }

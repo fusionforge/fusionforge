@@ -2,7 +2,7 @@
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
  * Copyright 2010, Franck Villaume - Capgemini
- * Copyright 2011-2013, Franck Villaume - TrivialDev
+ * Copyright 2011-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is a part of FusionForge.
@@ -77,8 +77,8 @@ class Widget_MyProjectsLastDocuments extends Widget {
 
 					list($hide_now,$count_diff,$hide_url) = my_hide_url('dmproj', $g->getID(), $hide_item_id, count($df->Documents), $hide_docmanproject);
 					$html_hdr = ($i ? '<tr class="boxitem"><td colspan="4">' : '').
-						$hide_url.'<a href="/docman/?group_id='.$g->getID().'">'.
-						$g->getPublicName().'</a>&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>';
+						$hide_url.util_make_link('/docman/?group_id='.$g->getID(), $g->getPublicName()).
+						'&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>';
 
 					$html = '';
 					if (!$hide_now) {
@@ -98,14 +98,14 @@ class Widget_MyProjectsLastDocuments extends Widget {
 								$html .= '<tr '. $HTML->boxGetAltRowStyle($j) .'>';
 								switch ($doc->getFileType()) {
 									case "URL": {
-										$docurl = $doc->getFileName();
+										$docurl = util_make_link($doc->getFileName(), html_image($doc->getFileTypeImage(), '22', '22', array('alt'=>$doc->getFileType())), array(), true);
 										break;
 									}
 									default: {
-										$docurl = util_make_url('/docman/view.php/'.$g->getID().'/'.$doc->getID().'/'.urlencode($doc->getFileName()));
+										$docurl = util_make_link('/docman/view.php/'.$g->getID().'/'.$doc->getID().'/'.urlencode($doc->getFileName()), html_image($doc->getFileTypeImage(), '22', '22', array('alt'=>$doc->getFileType())));
 									}
 								}
-								$html .= '<td><a href="'.$docurl.'">'.html_image($doc->getFileTypeImage(), '22', '22', array('alt'=>$doc->getFileType())).'</a></td>';
+								$html .= '<td>'.$docurl.'</td>';
 								$html .= '<td>'.$doc->getFilename().'</td>';
 								$html .= '<td>'.make_user_link($doc->getCreatorUserName(), $doc->getCreatorRealName()).'</td>';
 								if ( $doc->getUpdated() ) {

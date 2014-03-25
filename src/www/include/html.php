@@ -98,7 +98,7 @@ function make_user_link($username, $displayname = '') {
 	if (!strcasecmp($username, 'Nobody') || !strcasecmp($username, 'None')) {
 		return $username;
 	} else {
-		return '<a href="/users/'.$username.'">'.$displayname.'</a>';
+		return util_make_link('/users/'.$username, $displayname);
 	}
 }
 
@@ -120,7 +120,7 @@ function html_feedback_bottom($feedback) {
  * @return	string
  */
 function html_blankimage($height, $width) {
-	return html_abs_image("/images/blank.png", $width, $height);
+	return html_abs_image('/images/blank.png', $width, $height);
 }
 
 /**

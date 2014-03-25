@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013-2014, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -111,8 +111,7 @@ class Widget_MySurveys extends Widget {
 				list($hide_now,$count_diff,$hide_url) = my_hide_url('survey',$group_id,$hide_item_id,count($surveys),$hide_survey);
 
 				$html_hdr = '<tr class="boxitem"><td colspan="2">'.
-					$hide_url.'<a href="/survey/?group_id='.$group_id.'">'.
-					$project->getPublicName().'</a>    ';
+					$hide_url.util_make_link('/survey/?group_id='.$group_id, $project->getPublicName()).'    ';
 
 				$html = '';
 				$count_new = max(0, $count_diff);
@@ -124,8 +123,9 @@ class Widget_MySurveys extends Widget {
 						$survey_title = $survey->getTitle();
 						$html .= '
 							<tr '. $HTML->boxGetAltRowStyle($i) .'><td style="width:99%">'.
-							'&nbsp;&nbsp;&nbsp;-&nbsp;<a href="/survey/survey.php?group_id='.$group_id.'&amp;survey_id='.$group_survey_id.'">'.
-							$survey_title.'</a></td></tr>';
+							'&nbsp;&nbsp;&nbsp;-&nbsp;'.
+							util_make_link('/survey/survey.php?group_id='.$group_id.'&survey_id='.$group_survey_id, $survey_title).
+							'</td></tr>';
 					}
 				}
 

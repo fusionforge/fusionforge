@@ -58,8 +58,7 @@ class Widget_MyProjects extends Widget {
 				$i++;
 				$html_my_projects .= '
 				<tr '. $HTML->boxGetAltRowStyle($i) .'><td style="width:99%">'.
-					'<a href="/projects/'. $g->getUnixName() .'/">'.
-					$g->getPublicName().'</a>';
+					util_make_link('/projects/'.$g->getUnixName(), $g->getPublicName());
 
 				$isadmin = false;
 				$role_names = array();
@@ -74,7 +73,7 @@ class Widget_MyProjects extends Widget {
 					}
 				}
 				if ($isadmin) {
-					$html_my_projects .= ' <small>'.util_make_link('/project/admin/?group_id='.$g->getID(), '['._("Admin").']').'</small>';
+					$html_my_projects .= ' <small>'.util_make_link('/project/admin/?group_id='.$g->getID(), '['._('Admin').']').'</small>';
 				}
 				$html_my_projects .= ' <small>('.htmlspecialchars (implode (', ', $role_names)).')</small>';
 				if (!$ra->hasPermission('project_read', $g->getID())) {
@@ -85,7 +84,7 @@ class Widget_MyProjects extends Widget {
 					$html_my_projects .= '</td>'.
 						'<td><a href="rmproject.php?group_id='. $g->getID().
 						'" onClick="return confirm(\''._("Quit this project?").'\')">'.
-						'<img src="'.$GLOBALS['HTML']->imgroot.'ic/trash.png" alt="'._('Leave project').'" height="16" width="16" /></a></td></tr>';
+						'<img src="'.$HTML->imgroot.'ic/trash.png" alt="'._('Leave project').'" height="16" width="16" /></a></td></tr>';
 				} else {
 					$html_my_projects .= '</td><td>&nbsp;</td></tr>';
 				}

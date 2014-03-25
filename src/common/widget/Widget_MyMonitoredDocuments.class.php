@@ -83,11 +83,11 @@ class Widget_MyMonitoredDocuments extends Widget {
 						$docid = db_result($result2,$i,'docid');
 						$html .= '
 							<tr '. $HTML->boxGetAltRowStyle($i) .'><td style="width:99%">'.
-							'&nbsp;&nbsp;&nbsp;-&nbsp;<a href="/docman/?group_id='.$group_id.'&amp;view=listfile&amp;dirid='.$doc_group.'">'.
-							stripslashes(db_result($result2,$i,'filename')).'</a></td>'.
-							'<td class="align-center"><a href="/docman/?group_id='.$group_id.'&amp;action=monitorfile&amp;option=remove&amp;view=listfile&amp;dirid='.$doc_group.'&amp;fileid='.$docid.'">'.
-							'<img src="'.$HTML->imgroot.'ic/trash.png" height="16" width="16" '.
-							'alt="'._("Stop Monitoring").'" /></a></td></tr>';
+							'&nbsp;&nbsp;&nbsp;-&nbsp;'.
+							util_make_link('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$doc_group, stripslashes(db_result($result2,$i,'filename'))).'</td>'.
+							'<td class="align-center">'.
+							util_make_link('/docman/?group_id='.$group_id.'&action=monitorfile&option=remove&view=listfile&dirid='.$doc_group.'&fileid='.$docid,
+							'<img src="'.$HTML->imgroot.'ic/trash.png" height="16" width="16" "alt="'._("Stop Monitoring").'" />').'</td></tr>';
 					}
 				}
 
