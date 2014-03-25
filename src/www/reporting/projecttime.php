@@ -84,29 +84,24 @@ $a2[]='user';
 </tr></table>
 </form>
 <?php
-	if ($g_id && $typ=='r') {
-		$report=new ReportProjectTime($g_id,$type,$start,$end);
+if ($g_id && $typ=='r') {
+	$report=new ReportProjectTime($g_id,$type,$start,$end);
 
-		$labels = $report->labels;
-	    $data = $report->getData();
+	$labels = $report->labels;
+	$data = $report->getData();
 
-	    echo $HTML->listTableTop (array(_('Type'),
-	    		_('Time')));
+	echo $HTML->listTableTop (array(_('Type'),
+		_('Time')));
 
-	    for ($i=0; $i<count($labels); $i++) {
-
+	for ($i=0; $i<count($labels); $i++) {
 		echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>'.
-			'<td>'. $labels[$i] .'</td><td>'. $data[$i] .'</td></tr>';
-	    }
+		'<td>'. $labels[$i] .'</td><td>'. $data[$i] .'</td></tr>';
+	}
 
-	    echo $HTML->listTableBottom ();
+	echo $HTML->listTableBottom ();
 
-	} elseif ($g_id && $start != $end) { ?>
-	<p>
-	<?php report_timegraph('project', $type, $start, $end, $g_id); ?>
-	</p>
-	<?php
-
+} elseif ($g_id && $start != $end) {
+	report_timegraph('project', $type, $start, $end, $g_id);
 }
 
 report_footer();

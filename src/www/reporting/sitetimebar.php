@@ -104,16 +104,8 @@ if ($typ=='r') {
 
 	echo $HTML->listTableBottom ();
 
-} elseif ($start != $end) { ?>
-	<p>
-	<?php
-		report_sitetimebargraph($start, $end);
-	?>
-	<noscript>
-	<img src="sitetimebar_graph.php?<?php echo "start=$start&amp;end=$end"; ?>"  alt="" />
-	</noscript>
-	</p>
-	<?php
+} elseif ($start != $end) {
+	report_sitetimebargraph($start, $end);
 }
 
 report_footer();

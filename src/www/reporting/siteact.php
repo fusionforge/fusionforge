@@ -74,12 +74,9 @@ report_header(_('Site-Wide Activity'));
 <td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" /></td>
 </tr></table>
 </form>
-<?php if ($area && $start != $end) { ?>
-	<p>
-	<?php report_actgraph('sitewide', $SPAN, $start, $end, 0, $area); ?>
-	</p>
-	<?php
-
+<?php
+if ($area && $start != $end) {
+	report_actgraph('sitewide', $SPAN, $start, $end, 0, $area);
 }
 
 report_footer();

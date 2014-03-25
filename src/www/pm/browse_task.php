@@ -346,7 +346,9 @@ if ($rows < 1) {
 		}
 	}
 	if ( $totalTasks > $offset + $paging) {
-		echo util_make_link (getStringFromServer('PHP_SELF').'?func=browse&group_project_id='.$group_project_id.'&group_id='.$group_id.'&offset='.($offset+$paging),'<strong>'._('next').' →</strong>');
+		echo util_make_link('/pm/task.php?func=browse&group_project_id='.$group_project_id.'&group_id='.$group_id.'&offset='.($offset+$paging),'<strong>'._('next').' →</strong>');
+	} else {
+		echo '&nbsp;';
 	}
 
 	echo '<div style="display:table;width:100%">';
