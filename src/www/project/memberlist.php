@@ -100,11 +100,11 @@ foreach ($members as $user) {
 	echo '<td>';
 	echo util_display_user($user->getUnixName(),$user->getID(),$user->getUnixName(), 's');
 	echo '</td>';
-	echo '<td align="center">'.$role_string.'</td>';
-	if(forge_get_config('use_people')) {
-		echo '<td align="center">'.util_make_link ('/people/viewprofile.php?user_id='.$user->getID(),_('View')).'</td>';
+	echo '<td class="align-center">'.$role_string.'</td>';
+	if (forge_get_config('use_people')) {
+		echo '<td class="align-center">'.util_make_link('/people/viewprofile.php?user_id='.$user->getID(),_('View')).'</td>';
 	}
-   	echo '</tr>';
+	echo '</tr>';
 }
 // end of community member description block
 echo $GLOBALS['HTML']->listTableBottom();
