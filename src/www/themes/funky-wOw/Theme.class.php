@@ -195,6 +195,7 @@ class Theme extends Layout {
 	 * boxGetAltRowStyle() - Get an alternating row style for tables
 	 *
 	 * @param	int	$i	Row number
+	 * @param	bool $classonly Return class name only
 	 * @return	string
 	 */
 	function boxGetAltRowStyle($i, $classonly = false) {
