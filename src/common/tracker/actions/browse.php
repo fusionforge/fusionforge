@@ -449,7 +449,6 @@ echo _('Order by')._(': ').'<br>'.
 	<td><br><input type="submit" name="submit" value="'._('Quick Browse').'" /></td>';
 
 echo '
-	</td>
 	</tr>
 	</table>
 	</form>
