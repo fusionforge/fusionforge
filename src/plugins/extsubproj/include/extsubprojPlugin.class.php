@@ -76,10 +76,10 @@ class extsubprojPlugin extends Plugin {
 		return util_make_link('/plugins/'.$this->name.'/?group_id='.$group_id.'&type=admin&pluginname='.$this->name, _('External subprojects admin'), array('class'=>'tabtitle', 'title'=>_('Configure the External subprojects plugin')));
 	}
 	function getProjectAdminAddExtSubProjAction($group_id) {
-		return '?group_id='.$group_id.'&type=admin&pluginname='.$this->name.'&action=addExtSubProj';
+		return '/plugins/'.$this->name.'/?group_id='.$group_id.'&type=admin&pluginname='.$this->name.'&action=addExtSubProj';
 	}
 	function getProjectAdminDelExtSubProjAction($group_id, $url) {
-		return '?group_id='.$group_id.'&type=admin&pluginname='.$this->name.'&action=delExtSubProj&url='.urlencode($url);
+		return '/plugins/'.$this->name.'/?group_id='.$group_id.'&type=admin&pluginname='.$this->name.'&action=delExtSubProj&url='.urlencode($url);
 	}
 	/**
 	* getHeader - initialize header and js
@@ -228,10 +228,11 @@ class extsubprojPlugin extends Plugin {
 	* @return boolean
 	*/
 	function widgets($params) {
-		$group = group_get_object($GLOBALS['group_id']);
-		if ($group->usesPlugin($this->name)) {
-			require_once 'common/widget/WidgetLayoutManager.class.php';
-			if ($params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_GROUP) {
+		global $gfcommon;
+		require_once $gfcommon.'/widget/WidgetLayoutManager.class.php';
+		if ($params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_GROUP) {
+			$group = group_get_object($GLOBALS['group_id']);
+			if ($group->usesPlugin($this->name)) {
 				$params['fusionforge_widgets'][] = 'plugin_extsubproj_project_subprojects';
 			}
 		}
@@ -243,9 +244,9 @@ class extsubprojPlugin extends Plugin {
 	 * @param array $params
 	 */
 	function widget_instance($params) {
-		global $gfplugins;
+		global $gfplugins, $gfcommon;
 		//$user = UserManager::instance()->getCurrentUser();
-		require_once 'common/widget/WidgetLayoutManager.class.php';
+		require_once $gfcommon.'/widget/WidgetLayoutManager.class.php';
 		if ($params['widget'] == 'plugin_extsubproj_project_subprojects') {
 			require_once $gfplugins.$this->name.'/include/extsubproj_Widget_SubProjects.class.php';
 			$params['instance'] = new extsubproj_Widget_SubProjects(WidgetLayoutManager::OWNER_TYPE_GROUP, $this);
