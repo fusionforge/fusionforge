@@ -118,10 +118,8 @@ project_admin_header(array('title'=>sprintf(_('Project Statistics for %s'), $gro
 <?php
 if ($start == $end) {
 	echo $HTML->error_msg(_('Start and end dates must be different'));
-} else {
-	if (!report_actgraph('project', $SPAN, $start, $end, $group_id, $area)) {
+} elseif (!report_actgraph('project', $SPAN, $start, $end, $group_id, $area)) {
 		echo $HTML->error_msg(_('Error during graphic computation.'));
-	}
 }
 
 site_project_footer();
