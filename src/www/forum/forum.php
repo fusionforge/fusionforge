@@ -53,7 +53,7 @@ if ($forum_id) {
 			WHERE group_forum_id=$1',
 				array($forum_id));
 		if (!$result || db_numrows($result) < 1) {
-			exit_error(_('Error forum not found: ').db_error(),'forums');
+			exit_error(_('Forum not found')._(': ').db_error(),'forums');
 		}
 		$group_id=db_result($result,0,'group_id');
 	}
