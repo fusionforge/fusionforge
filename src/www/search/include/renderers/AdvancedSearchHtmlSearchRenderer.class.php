@@ -395,13 +395,13 @@ EOS;
 
 		$return = '
 			<table cellspacing="10" cellpadding="1" id="advsearch">
-							<tr class="tablecontent">
-								<td colspan="3" class="align-center">
-									<input type="checkbox" class="checkthemall">'._('Search All').'</a>
-								</td>
-							</tr>
-							<tr class="top tablecontent">
-								<td>';
+				<tr class="tablecontent">
+					<td colspan="3" class="align-center">
+						<input type="checkbox" class="checkthemall">'._('Search All').'</a>
+					</td>
+				</tr>
+				<tr class="top tablecontent">
+					<td>';
 		foreach($sectionsArray as $key => $section) {
 			$oldcountlines = $countLines;
 			if (is_array($section)) {
