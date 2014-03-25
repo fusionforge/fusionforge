@@ -45,7 +45,7 @@ function doc_get_state_box($checkedval = 'xzxz', $removedval = '') {
  * @param	object	$zip
  * @param	array	$nested_groups
  * @param	object	$document_factory
- * @param	int		$docgroup id : default value = 0
+ * @param	int	$docgroup id : default value = 0
  * @param	string	$parent_docname parent name : default value = empty
  * @return	boolean	success or not
  * @access	public
@@ -60,8 +60,10 @@ function docman_fill_zip($zip, $nested_groups, $document_factory, $docgroup = 0,
 			$docs = $document_factory->getDocuments(1);	// no caching
 			if (is_array($docs) && count($docs) > 0) {	// this group has documents
 				foreach ($docs as $doc) {
-					if (!$zip->addFromString(iconv("UTF-8", "ASCII//TRANSLIT", $parent_docname).'/'.iconv("UTF-8", "ASCII//TRANSLIT", $dg->getName()).'/'.iconv("UTF-8", "ASCII//TRANSLIT", $doc->getFileName()), $doc->getFileData()))
-						return false;
+					if (!$doc->isURL()) {
+						if (!$zip->addFromString(iconv("UTF-8", "ASCII//TRANSLIT", $parent_docname).'/'.iconv("UTF-8", "ASCII//TRANSLIT", $dg->getName()).'/'.iconv("UTF-8", "ASCII//TRANSLIT", $doc->getFileName()), $doc->getFileData()))
+							return false;
+					}
 				}
 			}
 			if (!docman_fill_zip($zip, $nested_groups, $document_factory, $dg->getID(), iconv("UTF-8", "ASCII//TRANSLIT", $parent_docname).'/'.iconv("UTF-8", "ASCII//TRANSLIT", $dg->getName()))) {
