@@ -4,7 +4,7 @@
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2014, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -66,7 +66,7 @@ if (!$at_arr || count($at_arr) < 1) {
 		} else {
 			echo '
 		<tr '. $HTML->boxGetAltRowStyle($j) . '>
-			<td>'.util_make_url('/tracker/?atid='.$at_arr[$j]->getID().'&group_id='.$group_id.'&func=browse',
+			<td>'.util_make_link('/tracker/?atid='.$at_arr[$j]->getID().'&group_id='.$group_id.'&func=browse',
  				html_image("ic/tracker20w.png","20","20").' '.$at_arr[$j]->getName()).'
 			</td>
 			<td>' .  $at_arr[$j]->getDescription() .'
