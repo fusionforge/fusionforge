@@ -3,7 +3,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2012-2013, Franck Villaume - TrivialDev
+ * Copyright 2012-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -96,10 +96,11 @@ jQuery(document).ready(function() {
 			echo '<td>'.$d->getName().'</td>';
 			echo '<td>'.$d->getDescription().'</td>';
 			echo '<td>'.make_user_link($d->getCreatorUserName(), $d->getCreatorRealName()).'</td>';
-			echo '<td>';
 			if ( $d->getUpdated() ) {
+				echo '<td sorttable_customkey="'.$d->getUpdated().'" >';
 				echo date(_('Y-m-d H:i'), $d->getUpdated());
 			} else {
+				echo '<td sorttable_customkey="'.$d->getCreated().'" >';
 				echo date(_('Y-m-d H:i'), $d->getCreated());
 			}
 			echo '</td>';
