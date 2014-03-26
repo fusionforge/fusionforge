@@ -117,6 +117,7 @@ function session_check_session_cookie($session_cookie) {
 		 * http://www.daemonology.net/blog/2009-06-11-cryptographic-right-answers.html
 		 * to protect the below code from malformed strings
 		 */
+                error_log("session_check_session_cookie failed: invalid format for $session_cookie !");
 		return false;
 	}
 
@@ -127,6 +128,7 @@ function session_check_session_cookie($session_cookie) {
 	if (hash_hmac("sha256", $session_cookie,
 	    forge_get_config('session_key'), true) !== $session_cookie_hmac) {
 		/* HMAC mismatch */
+                error_log("session_check_session_cookie failed: HMAC mismatch for $session_cookie_hmac !");
 		return false;
 	}
 
@@ -136,13 +138,16 @@ function session_check_session_cookie($session_cookie) {
 	$user_agent = util_unconvert_htmlspecialchars($user_agent);
 
 	if (!session_check_ip($ip, getStringFromServer('REMOTE_ADDR'))) {
+                error_log("session_check_session_cookie failed: wrong IP address !");
 		return false;
 	}
 	if (trim($user_agent) != getStringFromServer('HTTP_USER_AGENT')) {
+                error_log("session_check_session_cookie failed: wrong User-Agent !");
 		return false;
 	}
 	if ((forge_get_config('session_expire') > 0) &&
 	    ($time - time() >= forge_get_config('session_expire'))) {
+                error_log("session_check_session_cookie failed: expired !");
 		return false;
 	}
 
