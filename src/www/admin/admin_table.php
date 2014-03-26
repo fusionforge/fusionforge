@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 (c) Franck Villaume - Capgemini
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -298,7 +298,7 @@ function admin_table_show($table, $unit, $primary_key) {
 		$cols = db_numfields($result);
 
 		$cell_data=array();
-		$cell_data[] = array(ucwords(getUnitLabel($unit)).' <a href="'.getStringFromServer('PHP_SELF').'?function=add">['._('add new').']</a>',
+		$cell_data[] = array(ucwords(getUnitLabel($unit)).' '.util_make_link(getStringFromServer('PHP_SELF').'?function=add', '['._('add new').']'),
 			'colspan' => ($cols+1));
 		echo '<table class="listing full">';
 		echo $HTML->multiTableRow(array(), $cell_data, TRUE);
@@ -314,8 +314,8 @@ function admin_table_show($table, $unit, $primary_key) {
 			echo '<tr '. $HTML->boxGetAltRowStyle($j) . '>';
 
 			$id = db_result($result,$j,0);
-			echo '<td><a href="'.getStringFromServer('PHP_SELF').'?function=edit&amp;id='.$id.'">['._('Edit').']</a>';
-			echo '<a href="'.getStringFromServer('PHP_SELF').'?function=confirmdelete&amp;id='.$id.'">['._('Delete').']</a> </td>';
+			echo '<td>'.util_make_link(getStringFromServer('PHP_SELF').'?function=edit&id='.$id, '['._('Edit').']');
+			echo util_make_link(getStringFromServer('PHP_SELF').'?function=confirmdelete&id='.$id, '['._('Delete').']').'</td>';
 			for ($i = 0; $i < $cols; $i++) {
 				echo '<td>'. db_result($result, $j, $i) .'</td>';
 			}

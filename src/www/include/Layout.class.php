@@ -601,15 +601,19 @@ if (isset($params['group']) && $params['group']) {
 	/**
 	 * boxGetAltRowStyle() - Get an alternating row style for tables.
 	 *
-	 * @param	int	$i	Row number
+	 * @param	int	$i		Row number
+	 * @param	bool	$classonly	Return class name only
 	 * @return	string	the class code
 	 */
-	function boxGetAltRowStyle($i) {
-		if ($i % 2 == 0) {
-			return ' class="altRowStyleEven"';
-		} else {
-			return ' class="altRowStyleOdd"';
-		}
+	function boxGetAltRowStyle($i, $classonly = false) {
+		if ($i % 2 == 0)
+			$ret = 'altRowStyleEven';
+		else
+			$ret = 'altRowStyleOdd';
+		if ($classonly)
+			return $ret;
+		else
+			return 'class="'.$ret.'"';
 	}
 
 	/**

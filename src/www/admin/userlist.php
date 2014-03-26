@@ -3,7 +3,7 @@
  *
  * Copyright 1999-2000 (c) The SourceForge Crew
  * Copyright 2010 (c) Franck Villaume - Capgemini
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -103,53 +103,55 @@ function show_users_list($users, $filter = '', $sortorder = 'realname') {
 					array(db_int_array_to_any_clause($users)));
 	$count = 0;
 	while ($arr = db_fetch_array($res)) {
+		$cells = array();
 		$u = new GFUser($arr['user_id'], $arr);
-		print '<tr '. $HTML->boxGetAltRowStyle($count) . '><td class="';
-		if ($u->getStatus() == 'A') print "active";
-		if ($u->getStatus() == 'D') print "deleted";
-		if ($u->getStatus() == 'S') print "suspended";
-		if ($u->getStatus() == 'P') print "pending";
-		print '"><a href="useredit.php?user_id='.$u->getID().'">';
-		if ($u->getStatus() == 'P') print "*";
-		echo $u->getRealName().' ('.$u->getUnixName().')</a>';
-		echo '</td>';
-		echo '<td width="15%" class="align-center">';
-		echo ($u->getAddDate() ? date(_('Y-m-d H:i'), $u->getAddDate()) : '-');
-		echo '</td>';
-		echo '<td width="15%" style="text-align:center">';
-		if ($u->getStatus() != 'D') {
-			echo util_make_link('/developer/?form_dev='.$u->getID(),_('User Profile'));
-		} else {
-			echo '<strike>'._('User Profile').'</strike>';
+		$nextcell = $u->getRealName().' ('.$u->getUnixName().')';
+		if ($u->getStatus() == 'P') {
+			$nextcell = '*'.$nextcell;
 		}
-		echo '</td>';
-		echo '<td width="15%" style="text-align:center">';
+		$nextcell = util_make_link('/admin/useredit.php?user_id='.$u->getID(), $nextcell);
+		if ($u->getStatus() == 'A') {
+			$cells[] = array($nextcell, 'class' => 'active');
+		}
+		if ($u->getStatus() == 'D') {
+			$cells[] = array($nextcell, 'class' => 'deleted');
+		}
+		if ($u->getStatus() == 'S') {
+			$cells[] = array($nextcell, 'class' => 'suspended');
+		}
+		if ($u->getStatus() == 'P') {
+			$cells[] = array($nextcell, 'class' => 'pending');
+		}
+		$cells[] = array(($u->getAddDate() ? date(_('Y-m-d H:i'), $u->getAddDate()) : '-'), 'width' => '15%', 'class' => 'align-center');
+		if ($u->getStatus() != 'D') {
+			$nextcell = util_make_link('/developer/?form_dev='.$u->getID(),_('User Profile'));
+		} else {
+			$nextcell = '<strike>'._('User Profile').'</strike>';
+		}
+		$cells[] = array($nextcell, 'width' => '15%', 'class' => 'align-center');
 		if ($u->getStatus() != 'A') {
-			echo util_make_link('/admin/userlist.php?action=activate&user_id='.$u->getID().$filter,_('Activate'));
+			$nextcell = util_make_link('/admin/userlist.php?action=activate&user_id='.$u->getID().$filter,_('Activate'));
 		} else {
-			echo '<strike>'._('Activate').'</strike>';
+			$nextcell = '<strike>'._('Activate').'</strike>';
 		}
-		echo '</td>';
-		echo '<td width="15%" style="text-align:center">';
+		$cells[] = array($nextcell, 'width' => '15%', 'class' => 'align-center');
 		if ($u->getStatus() != 'D') {
-			echo util_make_link('/admin/userlist.php?action=delete&user_id='.$u->getID().$filter,_('Delete'));
+			$nextcell = util_make_link('/admin/userlist.php?action=delete&user_id='.$u->getID().$filter,_('Delete'));
 		} else {
-			echo '<strike>'._('Delete').'</strike>';
+			$nextcell = '<strike>'._('Delete').'</strike>';
 		}
-		echo '</td>';
-		echo '<td width="15%" style="text-align:center">';
+		$cells[] = array($nextcell, 'width' => '15%', 'class' => 'align-center');
 		if ($u->getStatus() != 'S') {
-			echo util_make_link('/admin/userlist.php?action=suspend&user_id='.$u->getID().$filter,_('Suspend')).'</td>';
+			$nextcell = util_make_link('/admin/userlist.php?action=suspend&user_id='.$u->getID().$filter,_('Suspend'));
 		} else {
-			echo '<strike>'._('Suspend').'</strike>';
+			$nextcell = '<strike>'._('Suspend').'</strike>';
 		}
-		echo '<td width="12%" style="text-align:center">'.util_make_link('/admin/passedit.php?user_id='.$u->getID().$filter,_('Change Password')).'</td>';
-		echo '</tr>';
+		$cells[] = array($nextcell, 'width' => '15%', 'class' => 'align-center');
+		$cells[] = array(util_make_link('/admin/passedit.php?user_id='.$u->getID().$filter,_('Change Password')), 'width' => '12%', 'class' => 'align-center');
+		echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($count, true)), $cells);
 		$count ++;
 	}
-
 	echo $HTML->listTableBottom();
-
 }
 
 // Administrative functions
@@ -206,7 +208,7 @@ if ($usingplugin) {
 	}
 	$filter='';
 	if (in_array($status,array('D','A','S','P'))) {
-		$filter = '&amp;status='.$status;
+		$filter = '&status='.$status;
 	}
 	$sort_order = getStringFromRequest('sortorder', 'realname');
 	util_ensure_value_in_set($sort_order,
@@ -223,7 +225,7 @@ if ($usingplugin) {
 		foreach ($project->getUsers() as $user) {
 			$users_id[] = $user->getID();
 		}
-		$filter = '&amp;group_id='.$group_id;
+		$filter = '&group_id='.$group_id;
 		$sort_order = getStringFromRequest('sortorder', 'realname');
 		util_ensure_value_in_set($sort_order,
 					array('realname','user_name','lastname','firstname','user_id','status','add_date'));
