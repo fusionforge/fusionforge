@@ -67,11 +67,10 @@ report_header(_('Users Added'));
 <td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" /></td>
 </tr></table>
 </form>
-<?php if ($start != $end) { ?>
-	<p>
-	<?php report_graph('useradded', $SPAN, $start, $end); ?>
-	</p>
-<?php }
+<?php
+if ($start != $end) {
+	report_graph('useradded', $SPAN, $start, $end);
+}
 
 report_footer();
 

@@ -305,7 +305,7 @@ if ($rows < 1) {
 	}
 	echo '</td><td>&nbsp;</td><td colspan="2">';
 	if ( $totalTasks > $offset + $paging) {
-		echo util_make_link ('/pm/task.php?func=browse&amp;group_project_id='.$group_project_id.'&amp;group_id='.$group_id.'&amp;offset='.($offset+$paging),'<strong>'._('next').' →</strong></a>');
+		echo util_make_link ('/pm/task.php?func=browse&amp;group_project_id='.$group_project_id.'&amp;group_id='.$group_id.'&amp;offset='.($offset+$paging),'<strong>'._('next').' →</strong>');
 	} else {
 		echo '&nbsp;';
 	}

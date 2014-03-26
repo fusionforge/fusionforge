@@ -89,14 +89,10 @@ if ($sw) {
 	<td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" /></td>
 	</tr></table>
 	</form>
-	<?php if ($dev_id && $start != $end) { ?>
-		<p>
-		<?php report_actgraph('user', $SPAN, $start, $end, $dev_id, $area); ?>
-		</p>
-		<?php
-
+	<?php
+	if ($dev_id && $start != $end) {
+		report_actgraph('user', $SPAN, $start, $end, $dev_id, $area);
 	}
-
 }
 
 report_footer();

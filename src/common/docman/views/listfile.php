@@ -6,7 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright (C) 2010 Alcatel-Lucent
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2012-2013, Franck Villaume - TrivialDev
+ * Copyright 2012-2014, Franck Villaume - TrivialDev
 
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
@@ -265,10 +265,11 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		echo '<td style="word-wrap: break-word; max-width: 250px;" >'.$d->getName().'</td>';
 		echo '<td style="word-wrap: break-word; max-width: 250px;" >'.$d->getDescription().'</td>';
 		echo '<td>'.make_user_link($d->getCreatorUserName(), $d->getCreatorRealName()).'</td>';
-		echo '<td>';
 		if ( $d->getUpdated() ) {
+			echo '<td sorttable_customkey="'.$d->getUpdated().'" >';
 			echo date(_('Y-m-d H:i'), $d->getUpdated());
 		} else {
+			echo '<td sorttable_customkey="'.$d->getCreated().'" >';
 			echo date(_('Y-m-d H:i'), $d->getCreated());
 		}
 		echo '</td>';
