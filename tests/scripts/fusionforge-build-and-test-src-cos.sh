@@ -8,9 +8,21 @@ export FORGE_HOME=/opt/gforge
 export HOST=$1
 export FILTER="TarCentosTests.php"
 
+case $HOST in
+    centos5.local)
+	VM=centos5
+	;;
+    centos6.local)
+	VM=centos6
+	;;
+    *)
+	VM=centos6
+	;;
+esac	
+
 prepare_workspace
-destroy_vm -t centos5 $HOST
-start_vm_if_not_keeped -t centos5 $HOST
+destroy_vm -t $VM $HOST
+start_vm_if_not_keeped -t $VM $HOST
 
 setup_redhat_3rdparty_repo
 
@@ -19,6 +31,9 @@ setup_redhat_3rdparty_repo
 #make -f Makefile.rh BUILDRESULT=$WORKSPACE/build/packages src
 
 setup_dag_repo $@
+if [ $VM = centos6 ] ; then
+    setup_epel_repo $@
+fi
 
 echo "Create $FORGE_HOME if necessary"
 ssh root@$HOST "[ -d $FORGE_HOME ] || mkdir -p $FORGE_HOME"
@@ -43,6 +58,11 @@ ssh root@$HOST "(echo [mediawiki];echo unbreak_frames=yes) >> /etc/gforge/config
 echo "Stop cron daemon"
 ssh root@$HOST "service crond stop" || true
 
+if [ $VM = centos6 ] ; then
+    ssh root@$HOST "yum -y --enablerepo=epel install php-phpunit-PHPUnit-Selenium"
+    ssh root@$HOST "yum -y remove mod_ssl ; service httpd restart"
+fi
+
 # Install selenium
 ssh root@$HOST "yum -y install selenium"
 
@@ -62,5 +82,5 @@ ssh root@$HOST "$FORGE_HOME/tests/func/vncxstartsuite.sh $FILTER" || retcode=$?
 rsync -av root@$HOST:/var/log/ $WORKSPACE/reports/
 scp root@$HOST:/tmp/gforge-*.log $WORKSPACE/reports/
 
-stop_vm_if_not_keeped -t centos5 $@
+stop_vm_if_not_keeped -t $VM $@
 exit $retcode
