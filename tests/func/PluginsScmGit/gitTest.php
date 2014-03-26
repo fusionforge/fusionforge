@@ -92,16 +92,16 @@ class ScmGitTest extends FForge_SeleniumTestCase
 
 		// Create a local clone, add stuff, push it to the repo
 		$t = exec("mktemp -d /tmp/gitTest.XXXXXX");
-		system("cd $t && git clone $p", $ret);
+		system("cd $t && git clone --quiet $p", $ret);
 		$this->assertEquals($ret, 0);
 
 		system("echo 'this is a simple text' > $t/projecta/mytext.txt");
-		system("cd $t/projecta && git add mytext.txt && git commit -a -m'Adding file'", $ret);
+		system("cd $t/projecta && git add mytext.txt && git commit --quiet -a -m'Adding file'", $ret);
 		system("echo 'another simple text' >> $t/projecta/mytext.txt");
-		system("cd $t/projecta && git commit -a -m'Modifying file'", $ret);
+		system("cd $t/projecta && git commit --quiet -a -m'Modifying file'", $ret);
 		$this->assertEquals($ret, 0);
 
-		system("cd $t/projecta && git push", $ret);
+		system("cd $t/projecta && git push --quiet", $ret);
 		$this->assertEquals($ret, 0);
 
 		// Check that the changes appear in gitweb
