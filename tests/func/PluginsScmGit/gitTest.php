@@ -101,7 +101,7 @@ class ScmGitTest extends FForge_SeleniumTestCase
 		system("cd $t/projecta && git commit --quiet -a -m'Modifying file'", $ret);
 		$this->assertEquals($ret, 0);
 
-		system("cd $t/projecta && git push --quiet", $ret);
+		system("cd $t/projecta && git push --quiet --all", $ret);
 		$this->assertEquals($ret, 0);
 
 		// Check that the changes appear in gitweb
