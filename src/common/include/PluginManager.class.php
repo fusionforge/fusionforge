@@ -23,7 +23,6 @@
 
 class PluginManager extends Error {
 	var $plugins_objects;
-	var $plugins_data;
 	var $plugins_to_hooks;
 	var $hooks_to_plugins;
 	var $returned_values = array();
@@ -135,7 +134,10 @@ class PluginManager extends Error {
 		$res = db_query_params('DELETE FROM plugins WHERE plugin_name = $1', array($pluginname));
 
 		$p_id = NULL;
-
+		
+		if (!isset($this->plugins_data)) {
+			$this->plugins_data = array();
+		}
 		foreach ($this->plugins_data as $i => $n) {
 			if ($n == $pluginname) {
 				$p_id = $i;
