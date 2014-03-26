@@ -23,6 +23,7 @@
 
 class PluginManager extends Error {
 	var $plugins_objects;
+	var $plugins_data;
 	var $plugins_to_hooks;
 	var $hooks_to_plugins;
 	var $returned_values = array();
