@@ -8,9 +8,21 @@ export FORGE_HOME=/usr/share/gforge
 export HOST=$1
 export FILTER="RPMCentosTests.php"
 
+case $HOST in
+    centos5.local)
+	VM=centos5
+	;;
+    centos6.local)
+	VM=centos6
+	;;
+    *)
+	VM=centos6
+	;;
+esac	
+
 prepare_workspace
-destroy_vm -t centos5 $HOST
-start_vm_if_not_keeped -t centos5 $HOST
+destroy_vm -t $VM $HOST
+start_vm_if_not_keeped -t $VM $HOST
 
 setup_redhat_3rdparty_repo
 
@@ -33,8 +45,14 @@ gpgcheck = 0
 EOF
 
 setup_dag_repo $@
+if [ $VM = centos6 ] ; then
+    setup_epel_repo $@
+fi
 
 sleep 5
+if [ $VM = centos6 ] ; then
+    ssh root@$HOST "yum -y --enablerepo=epel install cronolog"
+fi
 ssh root@$HOST "FFORGE_DB=$DB_NAME FFORGE_USER=gforge FFORGE_ADMIN_USER=$FORGE_ADMIN_USERNAME FFORGE_ADMIN_PASSWORD=$FORGE_ADMIN_PASSWORD export FFORGE_DB FFORGE_USER FFORGE_ADMIN_USER FFORGE_ADMIN_PASSWORD; yum install -y --skip-broken fusionforge fusionforge-plugin-scmsvn fusionforge-plugin-online_help fusionforge-plugin-extratabs fusionforge-plugin-authldap fusionforge-plugin-scmgit fusionforge-plugin-blocks"
 
 ssh root@$HOST '(echo [core];echo use_ssl=no) > /etc/gforge/config.ini.d/zzz-buildbot.ini'
@@ -46,6 +64,10 @@ ssh root@$HOST "perl -spi -e s#/usr/sbin/sendmail#$FORGE_HOME/tests/scripts/catc
 
 echo "Stop cron daemon"
 ssh root@$HOST "service crond stop" || true
+
+if [ $VM = centos6 ] ; then
+    ssh root@$HOST "yum -y --enablerepo=epel install php-phpunit-PHPUnit-Selenium"
+fi
 
 # Install selenium
 ssh root@$HOST "yum -y install selenium"
@@ -68,5 +90,5 @@ retcode=$?
 rsync -av root@$HOST:/var/log/ $WORKSPACE/reports/
 scp root@$HOST:/tmp/gforge-*.log $WORKSPACE/reports/
 
-stop_vm_if_not_keeped -t centos5 $@
+stop_vm_if_not_keeped -t $VM $@
 exit $retcode
