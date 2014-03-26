@@ -32,7 +32,7 @@ class TarCentosTests
 //		$suite->addTestFiles(glob("func/PluginsMoinMoin/*Test.php"));
 		$suite->addTestFiles(glob("func/PluginsOnlineHelp/*Test.php"));
 //		$suite->addTestFiles(glob("func/PluginsScmBzr/*Test.php"));
-//		$suite->addTestFiles(glob("func/PluginsScmGit/*Test.php"));
+		$suite->addTestFiles(glob("func/PluginsScmGit/*Test.php"));
 		$suite->addTestFiles(glob("func/RBAC/*Test.php"));
 		$suite->addTestFiles(glob("func/Surveys/*Test.php"));
 		$suite->addTestFiles(glob("func/Search/*Test.php"));
