@@ -527,7 +527,7 @@ class WidgetLayoutManager {
 			if (count($categs)) {
 				// display the categories selector in left panel
 				foreach($categs as $c => $ws) {
-					$widget_rows[$c] = html_e('a', array('class' => 'widget-categ-switcher', 'id' => 'widget-categ-switcher-'.$c, 'href' => '#widget-categ-'.$c, 'onClick' => 'jQuery(\'.widget-categ-class-void\').hide();jQuery(\'.widget-categ-switcher\').removeClass(\'selected\');jQuery(\'#widget-categ-'. $c .'\').show();jQuery(\'#widget-categ-switcher-'. $c .'\').addClass(\'selected\')'), html_e('span', array(), str_replace('_',' ', $hp->purify($c, CODENDI_PURIFIER_CONVERT_HTML))), false);
+					$widget_rows[$c] = util_make_link('#widget-categ-'.$c, html_e('span', array(), str_replace('_',' ', $hp->purify($c, CODENDI_PURIFIER_CONVERT_HTML))), array('class' => 'widget-categ-switcher', 'id' => 'widget-categ-switcher-'.$c, 'onClick' => 'jQuery(\'.widget-categ-class-void\').hide();jQuery(\'.widget-categ-switcher\').removeClass(\'selected\');jQuery(\'#widget-categ-'. $c .'\').show();jQuery(\'#widget-categ-switcher-'. $c .'\').addClass(\'selected\')'), true);
 				}
 				uksort($widget_rows, 'strnatcasecmp');
 				echo html_ao('ul', array('id' => 'widget-categories'));

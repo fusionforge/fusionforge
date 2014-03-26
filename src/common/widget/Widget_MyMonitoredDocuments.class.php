@@ -87,7 +87,7 @@ class Widget_MyMonitoredDocuments extends Widget {
 							util_make_link('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$doc_group, stripslashes(db_result($result2,$i,'filename'))).'</td>'.
 							'<td class="align-center">'.
 							util_make_link('/docman/?group_id='.$group_id.'&action=monitorfile&option=remove&view=listfile&dirid='.$doc_group.'&fileid='.$docid,
-							'<img src="'.$HTML->imgroot.'ic/trash.png" height="16" width="16" "alt="'._("Stop Monitoring").'" />').'</td></tr>';
+							'<img src="'.$HTML->imgroot.'ic/trash.png" height="16" width="16" "alt="'._("Stop Monitoring").'" />', array('onClick' => 'return confirm("'._("Stop monitoring this document?").'")')).'</td></tr>';
 					}
 				}
 

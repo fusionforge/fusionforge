@@ -81,11 +81,11 @@ class Widget_ProjectInfo extends Widget {
 				$actv_res=0;
 			}
 			print '<br />'.sprintf (_('Activity Ranking: <strong>%d</strong>'), $actv_res)."\n";
-			print '<br />'.sprintf(_('View project <a href="%s">Statistics</a>'),util_make_url ('/project/stats/?group_id='.$group_id))."\n";
+			print '<br />'.sprintf(_('View project <a href="%s">Statistics</a>'),util_make_url('/project/stats/?group_id='.$group_id))."\n";
 			if ( ($project->usesTracker() && forge_get_config('use_tracker')) || ($project->usesPm() && forge_get_config('use_pm')) ) {
-				print sprintf(_(' or <a href="%s">Activity</a>'),util_make_url ('/project/report/?group_id='.$group_id))."\n";
+				print sprintf(_(' or <a href="%s">Activity</a>'),util_make_url('/project/report/?group_id='.$group_id))."\n";
 			}
-			print '<br />'.sprintf(_('View list of <a href="%s">RSS feeds</a> available for this project.'), util_make_url ('/export/rss_project.php?group_id='.$group_id)). ' ' . html_image('ic/rss.png',16,16,array());
+			print '<br />'.sprintf(_('View list of <a href="%s">RSS feeds</a> available for this project.'), util_make_url('/export/rss_project.php?group_id='.$group_id)). ' ' . html_image('ic/rss.png',16,16,array());
 		}
 
 		if(forge_get_config('use_people')) {

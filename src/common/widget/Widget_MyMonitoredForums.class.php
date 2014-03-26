@@ -111,7 +111,7 @@ class Widget_MyMonitoredForums extends Widget {
 				list($hide_now,$count_diff,$hide_url) = my_hide_url('forum',$group_id,$hide_item_id,$rows2,$hide_forum);
 
 				$html_hdr = '<tr class="boxitem"><td colspan="2">'.
-				$hide_url.'<a href="/forum/?group_id='.$group_id.'">'.$group_name.'</a>    ';
+				$hide_url.util_make_link('/forum/?group_id='.$group_id, $group_name).'    ';
 
 				$html = '';
 				$count_new = max(0, $count_diff);
@@ -120,12 +120,13 @@ class Widget_MyMonitoredForums extends Widget {
 						$group_forum_id = $flist[$i]['group_forum_id'];
 						$html .= '
 					<tr '.$HTML->boxGetAltRowStyle($i) .'"><td style="width:99%">'.
-					'&nbsp;&nbsp;&nbsp;-&nbsp;<a href="/forum/forum.php?forum_id='.$group_forum_id.'">'.
-						$flist[$i]['forum_name'].'</a></td>'.
-					'<td class="align-center"><a href="/forum/monitor.php?forum_id='.$group_forum_id.'&group_id='.$group_id.'&stop=1'.
-					'" onClick="return confirm(\''._("Stop monitoring this Forum?").'\')">'.
-					'<img src="'.$HTML->imgroot.'ic/trash.png" height="16" width="16" '.
-					'alt="'._("Stop Monitoring").'" /></a></td></tr>';
+					'&nbsp;&nbsp;&nbsp;-&nbsp;'.
+					util_make_link('/forum/forum.php?forum_id='.$group_forum_id, $flist[$i]['forum_name']).'</td>'.
+					'<td class="align-center">'.
+					util_make_link('/forum/monitor.php?forum_id='.$group_forum_id.'&group_id='.$group_id.'&stop=1',
+							'<img src="'.$HTML->imgroot.'ic/trash.png" height="16" width="16" alt="'._("Stop Monitoring").'" />',
+							array('onClick' => 'return confirm("'._('Stop monitoring this Forum?').'")')).
+					'</td></tr>';
 					}
 				}
 
@@ -155,7 +156,7 @@ class Widget_MyMonitoredForums extends Widget {
 		$request =& HTTPRequest::instance();
 		$ajax_url = parent::getAjaxUrl($owner_id, $owner_type);
 		if ($request->exist('hide_item_id') || $request->exist('hide_forum')) {
-			$ajax_url .= '&amp;hide_item_id=' . $request->get('hide_item_id') . '&amp;hide_forum=' . $request->get('hide_forum');
+			$ajax_url .= '&hide_item_id='.$request->get('hide_item_id').'&hide_forum='.$request->get('hide_forum');
 		}
 		return $ajax_url;
 	}

@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
+ * Copyright 2014, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -49,15 +50,17 @@ class Widget_MyBookmarks extends Widget {
 			$html_my_bookmarks .= '<table class="fullwidth">';
 			for ($i=0; $i<$rows; $i++) {
 				$html_my_bookmarks .= '<tr '. $HTML->boxGetAltRowStyle($i) .'><td>';
-				$html_my_bookmarks .= '<a href="'. db_result($result,$i,'bookmark_url') .'">'. db_result($result,$i,'bookmark_title') .'</a> ';
-				$html_my_bookmarks .= '<small><a href="/my/bookmark_edit.php?bookmark_id='. db_result($result,$i,'bookmark_id') .'">['._("Edit").']</a></small></td>';
-				$html_my_bookmarks .= '<td style="text-align:right"><a href="/my/bookmark_delete.php?bookmark_id='. db_result($result,$i,'bookmark_id');
-				$html_my_bookmarks .= '" onClick="return confirm(\''._("Delete this bookmark?").'\')">';
-				$html_my_bookmarks .= '<img src="'.$HTML->imgroot.'ic/trash.png" height="16" width="16" alt="Delete" /></a></td></tr>';
+				$html_my_bookmarks .= util_make_link(db_result($result,$i,'bookmark_url'), db_result($result,$i,'bookmark_title'), array(), true);
+				$html_my_bookmarks .= '<small>'.util_make_link('/my/bookmark_edit.php?bookmark_id='.db_result($result,$i,'bookmark_id'), '['._('Edit').']').'</small></td>';
+				$html_my_bookmarks .= '<td style="text-align:right">';
+				$html_my_bookmarks .= util_make_link('/my/bookmark_delete.php?bookmark_id='.db_result($result,$i,'bookmark_id'),
+								'<img src="'.$HTML->imgroot.'ic/trash.png" height="16" width="16" alt="'._('Delete').'" />',
+								array('onClick' => 'return confirm("'._("Delete this bookmark?").'")'));
+				$html_my_bookmarks .= '</td></tr>';
 			}
 			$html_my_bookmarks .= '</table>';
 		}
-		$html_my_bookmarks .= '<div style="text-align:center; font-size:0.8em;"><a href="/my/bookmark_add.php">['. _("Add a bookmark") .']</a></div>';
+		$html_my_bookmarks .= '<div style="text-align:center; font-size:0.8em;">'.util_make_link('/my/bookmark_add.php', '['._('Add a bookmark').']').'</div>';
 		return $html_my_bookmarks;
 	}
 

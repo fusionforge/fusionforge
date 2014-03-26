@@ -35,7 +35,7 @@ class Widget_MyProjects extends Widget {
 		$this->Widget('myprojects');
 	}
 	function getTitle() {
-		return _("My Projects");
+		return _('My Projects');
 	}
 
 	function getContent() {
@@ -82,9 +82,10 @@ class Widget_MyProjects extends Widget {
 				}
 				if (!$isadmin) {
 					$html_my_projects .= '</td>'.
-						'<td><a href="rmproject.php?group_id='. $g->getID().
-						'" onClick="return confirm(\''._("Quit this project?").'\')">'.
-						'<img src="'.$HTML->imgroot.'ic/trash.png" alt="'._('Leave project').'" height="16" width="16" /></a></td></tr>';
+						'<td>'.util_make_link('/my/rmproject.php?group_id='.$g->getID(),
+									'<img src="'.$HTML->imgroot.'ic/trash.png" alt="'._('Leave project').'" height="16" width="16" />',
+									array('onClick' => 'return confirm("'._("Quit this project?").'")')).
+						'</td></tr>';
 				} else {
 					$html_my_projects .= '</td><td>&nbsp;</td></tr>';
 				}
@@ -92,7 +93,7 @@ class Widget_MyProjects extends Widget {
 			$html_my_projects .= '</table>';
 			if (isset($private_shown) && $private_shown) {
 				$html_my_projects .= '
-					<span>(*)&nbsp;<em>'._("Private project").'</em></span>';
+					<span>(*)&nbsp;<em>'._('Private project').'</em></span>';
 			}
 
 		}
@@ -147,7 +148,7 @@ class Widget_MyProjects extends Widget {
 	}
 
 	function getDescription() {
-		return _("List the projects you belong to. Selecting any of these projects brings you to the corresponding Project Summary page.");
+		return _('List the projects you belong to. Selecting any of these projects brings you to the corresponding Project Summary page.');
 	}
 }
 

@@ -96,7 +96,7 @@ require_once 'common/widget/Widget_MyMonitoredDocuments.class.php';
 	}
 	function getPreferencesForm($layout_id, $owner_id, $owner_type) {
 		$prefs  = '';
-		$prefs .= '<form method="post" action="/widgets/widget.php?owner='. $owner_type.$owner_id .'&amp;action=update&amp;name['. $this->id .']='. $this->getInstanceId() .'&amp;content_id='. $this->getInstanceId() .'&amp;layout_id='. $layout_id .'">';
+		$prefs .= '<form method="post" action="'.util_make_uri('/widgets/widget.php?owner='. $owner_type.$owner_id .'&action=update&name['. $this->id .']='. $this->getInstanceId() .'&content_id='. $this->getInstanceId() .'&layout_id='. $layout_id).'">';
 		$prefs .= '<fieldset><legend>'. _("Preferences") .'</legend>';
 		$prefs .= $this->getPreferences();
 		$prefs .= '<br />';

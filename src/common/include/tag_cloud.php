@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Copyright (C) 2008-2009 Alcatel-Lucent
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -18,7 +18,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-/*
+/**
  * Standard Alcatel-Lucent disclaimer for contributing to open source
  *
  * "The Tag Cloud ("Contribution") has not been tested and/or
@@ -70,7 +70,7 @@ $SELECTED_STYLE = 'style="text-decoration:overline underline;"';
  *
  * @param	array	$params	selected tag, max tag displayed, number of sizes available,
  * 							class prefix for css class, style for selected tag
- * @return string
+ * @return	string
  */
 function tag_cloud($params = array()) {
 	global $NB_SIZE;
@@ -169,8 +169,8 @@ function tag_cloud($params = array()) {
  * 						Each tag is a link to display a list of projects
  * 						where the tag is defined.
  *
- * @param		int		Group ID
- * @return string
+ * @param	int	Group ID
+ * @return	string
  */
 function list_project_tag($group_id) {
 	$req = 'SELECT name FROM project_tags WHERE group_id = $1';
@@ -180,9 +180,8 @@ function list_project_tag($group_id) {
 	$idx = 1;
 	if ($nb_tag) {
 		while ($row = db_fetch_array($res)) {
-			$return .= '<a href="/softwaremap/tag_cloud.php?tag='
-					. urlencode($row['name'])
-					. '">' . htmlspecialchars($row['name']) . '</a>' . (($idx < $nb_tag) ? ', ' : '');
+			$return .= util_make_link('/softwaremap/tag_cloud.php?tag='.urlencode($row['name']), htmlspecialchars($row['name']))
+				. (($idx < $nb_tag) ? ', ' : '');
 			$idx++;
 		}
 	}
