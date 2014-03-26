@@ -248,9 +248,9 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		$cells[] = array($d->getDescription(), 'style' => 'word-wrap: break-word; max-width: 250px;');
 		$cells[][] =  make_user_link($d->getCreatorUserName(), $d->getCreatorRealName());
 		if ($d->getUpdated()) {
-			$cells[][] = date(_('Y-m-d H:i'), $d->getUpdated());
+			$cells[] = array(date(_('Y-m-d H:i'), $d->getUpdated()), 'sorttable_customkey' => $d->getUpdated());
 		} else {
-			$cells[][] = date(_('Y-m-d H:i'), $d->getCreated());
+			$cells[] = array(date(_('Y-m-d H:i'), $d->getCreated()), 'sorttable_customkey' => $d->getCreated());
 		}
 		$nextcell = '';
 		if ($d->getReserved()) {

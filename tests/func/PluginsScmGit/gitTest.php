@@ -81,6 +81,40 @@ class ScmGitTest extends FForge_SeleniumTestCase
 		$this->assertTextPresent("projecta.git");
 		$this->assertTextNotPresent("other-repo.git");
 		$this->assertTextPresent("users/".FORGE_ADMIN_USERNAME.".git");
+
+		// Get the address of the repo
+		$this->open(ROOT);
+		$this->clickAndWait("link=ProjectA");
+		$this->clickAndWait("link=SCM");
+		$p = $this->getText("//tt[contains(.,'git clone git+ssh')]");
+		$p = preg_replace(",^git clone ,", "", $p);
+		$p = preg_replace(",://.*@,", "://root@", $p);
+
+		// Create a local clone, add stuff, push it to the repo
+		$t = exec("mktemp -d /tmp/gitTest.XXXXXX");
+		system("cd $t && git clone --quiet $p", $ret);
+		$this->assertEquals($ret, 0);
+
+		system("echo 'this is a simple text' > $t/projecta/mytext.txt");
+		system("cd $t/projecta && git add mytext.txt && git commit --quiet -a -m'Adding file'", $ret);
+		system("echo 'another simple text' >> $t/projecta/mytext.txt");
+		system("cd $t/projecta && git commit --quiet -a -m'Modifying file'", $ret);
+		$this->assertEquals($ret, 0);
+
+		system("cd $t/projecta && git push --quiet --all", $ret);
+		$this->assertEquals($ret, 0);
+
+		// Check that the changes appear in gitweb
+		$this->open(ROOT.'/plugins/scmgit/cgi-bin/gitweb.cgi?a=project_list;pf=projecta');
+		$this->waitForPageToLoad();
+		$this->assertElementPresent("//.[@class='page_footer']");
+		$this->assertTextPresent("projecta.git");
+		$this->click("link=projecta/projecta.git");
+		$this->waitForPageToLoad();
+		$this->assertTextPresent("Modifying file");
+		$this->assertTextPresent("Adding file");
+
+		system("rm -fr $t");
 	}
 
 	/**

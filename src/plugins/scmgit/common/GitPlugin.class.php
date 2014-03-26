@@ -399,7 +399,7 @@ class GitPlugin extends SCMPlugin {
 			chmod($repodir, 02750);
 		}
 		if (!is_file("$repodir/HEAD") && !is_dir("$repodir/objects") && !is_dir("$repodir/refs")) {
-			system("git clone --bare $main_repo $repodir");
+			system("git clone --bare --quiet $main_repo $repodir");
 			system("chown -R $user_name $repodir");
 			system("GIT_DIR=\"$repodir\" git update-server-info");
 			if (is_file("$repodir/hooks/post-update.sample")) {
@@ -527,9 +527,9 @@ class GitPlugin extends SCMPlugin {
 			$repodir = $root . '/' .  $repo_name . '.git';
 			if (!is_file("$repodir/HEAD") && !is_dir("$repodir/objects") && !is_dir("$repodir/refs")) {
 				if ($clone_url != '') {
-					system("cd $root;git clone --bare $clone_url $repodir");
+					system("cd $root;git clone --quiet --bare $clone_url $repodir");
 				} else {
-					system("GIT_DIR=\"$repodir\" git init --bare --shared=group");
+					system("GIT_DIR=\"$repodir\" git init --quiet --bare --shared=group");
 				}
 				system("GIT_DIR=\"$repodir\" git update-server-info");
 				if (is_file("$repodir/hooks/post-update.sample")) {
