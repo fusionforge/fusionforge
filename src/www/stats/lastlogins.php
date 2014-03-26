@@ -5,6 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 (c) Franck Villaume
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -31,7 +32,7 @@ session_require_global_perm ('forge_admin');
 $res = db_query_params ('SELECT us.user_id AS user_id,
 	us.ip_addr AS ip_addr,
 	us.time AS time,
-	users.user_name AS user_name FROM user_session us,users
+	users.user_name AS user_name, users.realname AS realname FROM user_session us,users
 	WHERE us.user_id=users.user_id AND
 	us.user_id>0 AND us.time>0 ORDER BY us.time DESC',
 			       array (),
@@ -59,7 +60,7 @@ $i=0;
 while ($row = db_fetch_array($res)) {
 	print ' <tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i++).'>';
 	print '<td >'.date(_('Y-m-d H:i'), $row['time']).'</td>';
-	print '<td >'.util_display_user($row['user_name']).'</td>';
+	print '<td >'.util_display_user($row['user_name'], $row['user_id'], $row['realname']).'</td>';
 	print '<td >'.$row['ip_addr'].'</td>';
 	print '</tr>';
 }
