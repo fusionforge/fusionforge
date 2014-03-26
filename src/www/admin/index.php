@@ -11,7 +11,7 @@
  * Copyright 2010 (c) FusionForge Team
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -50,11 +50,11 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 		printf(_('Active site users: <strong>%d</strong>'),
 		    $gforge->getNumberOfActiveUsers());
 	?></li>
-	<li><a href="userlist.php"><?php echo _('Display Full User List/Edit Users'); ?></a></li>
+	<li><?php echo util_make_link('/admin/userlist.php', _('Display Full User List/Edit Users')); ?></li>
 	<li><?php
 	echo _('Display Users Beginning with:').' ';
 	for ($i=0; $i < count($abc_array); $i++) {
-		echo '<a href="userlist.php?user_name_search='.$abc_array[$i].'">'.$abc_array[$i].'</a>|';
+		echo util_make_link('/admin/userlist.php?user_name_search='.$abc_array[$i], $abc_array[$i]).'|';
 	}
 ?>
 	<br />
@@ -66,11 +66,12 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 		<input type="submit" value="<?php echo _('Search'); ?>" />
 		</form>
 	</li>
-	<li><a href="../account/register.php"><?php
-	echo _('Register a New User');
-	?></a>
+	<li><?php
+	echo util_make_link('/account/register.php', _('Register a New User'));
+	?>
 	</li>
-	<li><a href="userlist.php?status=P"><?php echo _('Pending users'); ?></a></li>
+	<li><?php
+	echo util_make_link('/admin/userlist.php?status=P', _('Pending users')); ?></li>
 </ul>
 <?php
 	$params = array('result' => '');
@@ -139,11 +140,11 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 		$row = db_fetch_array($res);
 		printf(_('Pending projects: <strong>%d</strong>'), $row['count']);
 	?></li>
-	<li><a href="grouplist.php"><?php echo _('Display Full Project List/Edit Projects'); ?></a></li>
+	<li><?php echo util_make_link('/admin/grouplist.php', _('Display Full Project List/Edit Projects')); ?></li>
 
 	<li><?php echo _('Display Projects Beginning with:').' ';
 	for ($i=0; $i < count($abc_array); $i++) {
-		echo '<a href="grouplist.php?group_name_search='.$abc_array[$i].'">'.$abc_array[$i].'</a>|';
+		echo util_make_link('/admin/grouplist.php?group_name_search='.$abc_array[$i], $abc_array[$i]).'|';
 	}
 ?>
 	<br />
@@ -155,8 +156,8 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 		<input type="submit" value="<?php echo _('Search'); ?>" />
 		</form>
 	</li>
-	<li><?php echo util_make_link ('/register/',_('Register New Project')); ?></li>
-	<li><a href="approve-pending.php"><?php echo _('Pending projects (new project approval)'); ?></a></li>
+	<li><?php echo util_make_link('/register/',_('Register New Project')); ?></li>
+	<li><?php echo util_make_link('/admin/approve-pending.php', _('Pending projects (new project approval)')); ?></li>
 	<li><form name="projectsearch" action="search.php">
 	<?php echo _('Projects with status'); ?>
 	<select name="status">
@@ -168,7 +169,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 	<input type="hidden" name="search" value="%"/>
 	<input type="submit" value="<?php echo _('Submit');?> "/>
 	</form></li>
-	<li><a href="search.php?groupsearch=1&amp;is_public=0"><?php echo _('Private Projects'); ?></a></li>
+	<li><?php echo util_make_link('/admin/search.php?groupsearch=1&is_public=0', _('Private Projects')); ?></li>
 </ul>
 <?php
 	$params = array('result' => '');
@@ -190,7 +191,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 <div class="info-box">
 <h2><?php echo _('News'); ?></h2>
 <ul>
-	<li><?php echo util_make_link ('/admin/pending-news.php',_('Pending news (moderation for front-page)')); ?></li>
+	<li><?php echo util_make_link('/admin/pending-news.php', _('Pending news (moderation for front-page)')); ?></li>
 </ul>
 </div>
 <?php } ?>
@@ -198,7 +199,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 <div class="info-box">
 <h2><?php echo _('Stats'); ?></h2>
 <ul>
-	<li><?php echo util_make_link('/stats/',_('Site-Wide Stats')); ?></li>
+	<li><?php echo util_make_link('/stats/', _('Site-Wide Stats')); ?></li>
 	<?php plugin_hook('webanalytics_admin', array()); ?>
 </ul>
 </div>
@@ -206,37 +207,37 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 <div class="info-box">
 <h2><?php echo _('Trove Project Tree'); ?></h2>
 <ul>
-	<li><a href="trove/trove_cat_list.php"><?php echo _('Display Trove Map'); ?></a></li>
-	<li><a href="trove/trove_cat_add.php"><?php echo _('Add to the Trove Map'); ?></a></li>
+	<li><?php echo util_make_link('/admin/trove/trove_cat_list.php', _('Display Trove Map')); ?></li>
+	<li><?php echo util_make_link('/admin/trove/trove_cat_add.php', _('Add to the Trove Map')); ?></li>
 </ul>
 </div>
 
 <div class="info-box">
 <h2><?php echo _('Site Utilities'); ?></h2>
 <ul>
-	<li><a href="massmail.php"><?php printf(_('Mail Engine for %s Subscribers'), forge_get_config ('forge_name')); ?></a></li>
-	<li><a href="unsubscribe.php"><?php echo forge_get_config ('forge_name'); ?> <?php echo _('Site Mailings Maintenance'); ?></a></li>
-	<li><a href="edit_frs_filetype.php"><?php echo _('Add, Delete, or Edit File Types'); ?></a></li>
-	<li><a href="edit_frs_processor.php"><?php echo _('Add, Delete, or Edit Processors'); ?></a></li>
-	<li><a href="edit_theme.php"><?php echo _('Add, Delete, or Edit Themes'); ?></a></li>
-	<li><a href="<?php echo util_make_url ('/stats/lastlogins.php'); ?>"><?php echo _('Most Recent Opened Sessions'); ?></a></li>
-	<li><a href="cronman.php"><?php echo _('Cron Manager'); ?></a></li>
-	<li><a href="pluginman.php"><?php echo _('Plugin Manager'); ?></a></li>
-	<li><a href="configman.php"><?php echo _('Config Manager'); ?></a></li>
+	<li><?php echo util_make_link('/admin/massmail.php', sprintf(_('Mail Engine for %s Subscribers'), forge_get_config ('forge_name'))); ?></li>
+	<li><?php echo util_make_link('/admin/unsubscribe.php', forge_get_config('forge_name').' '._('Site Mailings Maintenance')); ?></li>
+	<li><?php echo util_make_link('/admin/edit_frs_filetype.php', _('Add, Delete, or Edit File Types')); ?></li>
+	<li><?php echo util_make_link('/admin/edit_frs_processor.php', _('Add, Delete, or Edit Processors')); ?></li>
+	<li><?php echo util_make_link('/admin/edit_theme.php', _('Add, Delete, or Edit Themes')); ?></li>
+	<li><?php echo util_make_link('/stats/lastlogins.php', _('Most Recent Opened Sessions')); ?></li>
+	<li><?php echo util_make_link('/admin/cronman.php', _('Cron Manager')); ?></li>
+	<li><?php echo util_make_link('/admin/pluginman.php', _('Plugin Manager')); ?></li>
+	<li><?php echo util_make_link('/admin/configman.php', _('Config Manager')); ?></li>
 	<?php plugin_hook("site_admin_option_hook", array()); ?>
 </ul>
 
 <?php if(forge_get_config('use_project_database') || forge_get_config('use_project_vhost') || forge_get_config('use_people')) { ?>
 <ul>
 	<?php if(forge_get_config('use_project_vhost')) { ?>
-		<li><a href="vhost.php"><?php echo _('Virtual Host Admin Tool'); ?></a></li>
+		<li><?php echo util_make_link('/admin/vhost.php', _('Virtual Host Admin Tool')); ?></li>
 	<?php
 	}
 	if(forge_get_config('use_project_database')) { ?>
-		<li><a href="database.php"><?php echo _('Project Database Administration'); ?></a></li>
+		<li><?php echo util_make_link('/admin/database.php', _('Project Database Administration')); ?></li>
 	<?php }
 	if(forge_get_config('use_people')) { ?>
-		<li><a href="<?php echo util_make_url ('/people/admin/'); ?>"><?php echo _('Job / Categories Administration'); ?></a></li>
+		<li><?php echo util_make_link('/people/admin/', _('Job / Categories Administration')); ?></li>
 	<?php } ?>
 </ul>
 </div>

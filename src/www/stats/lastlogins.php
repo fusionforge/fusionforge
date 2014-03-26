@@ -27,6 +27,8 @@
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 
+global $HTML;
+
 session_require_global_perm ('forge_admin');
 
 $res = db_query_params ('SELECT us.user_id AS user_id,
@@ -42,30 +44,17 @@ if (!$res || db_numrows($res) < 1) {
 	exit_error(_('No records found. Database error: ').db_error());
 }
 
-$HTML->header(array('title'=>_('Most Recent Opened Sessions')));
+$HTML->header(array('title' => _('Most Recent Opened Sessions')));
 
-?>
-
-<table class="fullwidth">
-<tr class="tableheading">
-	<th><?php echo _('Date'); ?></th>
-	<th><?php echo _('User Name'); ?></th>
-	<th><?php echo _('Source IP'); ?></th>
-</tr>
-
-<?php
-
-$alt=true;
+$titleArr = array(_('Date'), _('User Name'), _('Source IP'));
+echo $HTML->listTableTop($titleArr);
 $i=0;
 while ($row = db_fetch_array($res)) {
-	print ' <tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i++).'>';
-	print '<td >'.date(_('Y-m-d H:i'), $row['time']).'</td>';
-	print '<td >'.util_display_user($row['user_name'], $row['user_id'], $row['realname']).'</td>';
-	print '<td >'.$row['ip_addr'].'</td>';
-	print '</tr>';
+	$cells = array();
+	$cells[][] = date(_('Y-m-d H:i'), $row['time']);
+	$cells[][] = util_display_user($row['user_name'], $row['user_id'], $row['realname']);
+	$cells[][] = $row['ip_addr'];
+	echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i++, true)), $cells);
 }
-?>
-
-</table>
-<?php
+echo $HTML->listTableBottom();
 $HTML->footer();
