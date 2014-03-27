@@ -9,6 +9,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 (c) Franck Villaume - Capgemini
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -30,50 +31,70 @@ require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'admin/admin_utils.php';
 
+global $HTML;
+global $error_msg, $feedback;
+
 session_require_global_perm ('forge_admin');
 
-if (getStringFromRequest('submit')) {
+if (getStringFromRequest('action')) {
 	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 		exit_form_double_submit('admin');
 	}
-	$mail_type = getStringFromRequest('mail_type');
-	$mail_message = getStringFromRequest('mail_message');
-	$mail_subject = getStringFromRequest('mail_subject');
+	switch (getStringFromRequest('action')) {
+		case 'add': {
+			$mail_type = getStringFromRequest('mail_type');
+			$mail_message = getStringFromRequest('mail_message');
+			$mail_subject = getStringFromRequest('mail_subject');
 
-	if (!$mail_type) {
-		form_release_key(getStringFromRequest('form_key'));
-		exit_missing_param('',array(_('Target Audience')),'admin');
+			if (!$mail_type) {
+				form_release_key(getStringFromRequest('form_key'));
+				exit_missing_param('',array(_('Target Audience')),'admin');
+			}
+
+			if (!trim($mail_message)) {
+				form_release_key(getStringFromRequest('form_key'));
+				exit_missing_param('',array(_('No Message')),'admin');
+			}
+
+			if (trim($mail_subject) == '['.forge_get_config ('forge_name').']') {
+				form_release_key(getStringFromRequest('form_key'));
+				exit_missing_param('',array(_('No Subject')),'admin');
+			}
+
+			$res = db_query_params ('
+				INSERT INTO massmail_queue(type,subject,message,queued_date)
+				VALUES ($1,$2,$3,$4)
+			',
+					array($mail_type,
+						$mail_subject,
+						$mail_message,
+						time()));
+
+			if (!$res || db_affected_rows($res)<1) {
+				form_release_key(getStringFromRequest('form_key'));
+				$error_msg = _('Scheduling Mailing, Could not schedule mailing, database error: ').db_error();
+			} else {
+				$feedback = _('Mailing successfully scheduled for delivery');
+			}
+			break;
+		}
+		case 'del': {
+			$id = getIntFromRequest('id');
+			if (!$id) {
+				form_release_key(getStringFromRequest('form_key'));
+				exit_missing_param('',array(_('Delivery Id')),'admin');
+			}
+			$res = db_query_params('DELETE FROM massmail_queue WHERE id = $1',
+						array($id));
+			if (!$res || db_affected_rows($res)<1) {
+				form_release_key(getStringFromRequest('form_key'));
+				$error_msg = _('Scheduling Mailing, Could not delete mailing, database error: ').db_error();
+			} else {
+				$feedback = _('Mailing successfully deleted for delivery');
+			}
+			break;
+		}
 	}
-
-	if (!trim($mail_message)) {
-		form_release_key(getStringFromRequest('form_key'));
-		exit_missing_param('',array(_('No Message')),'admin');
-	}
-
-	if (trim($mail_subject) == '['.forge_get_config ('forge_name').']') {
-		form_release_key(getStringFromRequest('form_key'));
-		exit_missing_param('',array(_('No Subject')),'admin');
-	}
-
-	$res = db_query_params ('
-		INSERT INTO massmail_queue(type,subject,message,queued_date)
-		VALUES ($1,$2,$3,$4)
-	',
-			array($mail_type,
-				$mail_subject,
-				$mail_message,
-				time()));
-
-	if (!$res || db_affected_rows($res)<1) {
-		form_release_key(getStringFromRequest('form_key'));
-		exit_error(_('Scheduling Mailing, Could not schedule mailing, database error: ').db_error(),'admin');
-	}
-
-	$title = _('Massmail admin');
-	site_admin_header(array('title'=>$title));
-	print "<p class=\"feedback\">" ._('Mailing successfully scheduled for delivery'). "</p>";
-	site_admin_footer(array());
-	exit();
 }
 
 $title = sprintf(_('Mail Engine for %s Subscribers'), forge_get_config ('forge_name'));
@@ -89,7 +110,7 @@ print '
 ';
 
 print '
-<form action="'.getStringFromServer('PHP_SELF').'" method="post">'
+<form action="'.util_make_uri('/admin/massmail.php?action=add').'" method="post">'
 .'<input type="hidden" name="form_key" value="'.form_generate_key().'" />'
 .'<strong>'._('Target Audience')._(':').'</strong>'.utils_requiredField().'<br />'.html_build_select_box_from_arrays(
 	array(0,'SITE','COMMNTY','DVLPR','ADMIN','ALL','SFDVLPR'),
@@ -144,12 +165,12 @@ $seen = false;
 $i = 0;
 while ($row = db_fetch_array($res)) {
 	if (!$seen) {
-		echo $GLOBALS['HTML']->listTableTop($title);
+		echo $HTML->listTableTop($title);
 		$seen = true;
 	}
 	echo '
-	<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i++).'>
-	<td>&nbsp;<a href="massmail-del.php?id='.$row['id'].'"></a></td>
+	<tr '.$HTML->boxGetAltRowStyle($i++).'>
+	<td>&nbsp;<a href="/admin/massmail.php?id='.$row['id'].'&action=del">'._('Delete').'</a></td>
 	<td>'.$row['id'].'</td>
 	<td>'.$row['type'].'</td>
 	<td>'.$row['subject'].'</td>
@@ -160,7 +181,7 @@ while ($row = db_fetch_array($res)) {
 }
 
 if ($seen) {
-	echo $GLOBALS['HTML']->listTableBottom();
+	echo $HTML->listTableBottom();
 } else {
 	echo '<p>' . _('No deliveries active.') . "</p>\n";
 }
