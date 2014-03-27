@@ -76,6 +76,7 @@ if (getStringFromRequest('action')) {
 			} else {
 				$feedback = _('Mailing successfully scheduled for delivery');
 			}
+			break;
 		}
 		case 'del': {
 			$id = getIntFromRequest('id');
@@ -91,6 +92,7 @@ if (getStringFromRequest('action')) {
 			} else {
 				$feedback = _('Mailing successfully deleted for delivery');
 			}
+			break;
 		}
 	}
 }
