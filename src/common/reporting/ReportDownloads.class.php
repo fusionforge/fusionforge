@@ -79,12 +79,12 @@ class ReportDownloads extends Report {
 		}
 
 		$res = db_query_params ('SELECT frs_package.name, frs_release.name,
-					frs_file.filename, users.realname,
-					frs_dlstats_file.month || lpad(frs_dlstats_file.day::text,2,0::text),
+						frs_file.filename, users.realname,
+						frs_dlstats_file.month || lpad(frs_dlstats_file.day::text,2,0::text),
 					users.user_name, users.user_id
-					FROM frs_dlstats_file, frs_file, frs_release,
+				FROM frs_dlstats_file, frs_file, frs_release,
 					frs_package, users
-					WHERE frs_dlstats_file.user_id = users.user_id
+				WHERE frs_dlstats_file.user_id = users.user_id
 					AND frs_dlstats_file.file_id = frs_file.file_id
 					AND frs_file.release_id = frs_release.release_id
 					AND frs_release.package_id = frs_package.package_id
@@ -92,7 +92,7 @@ class ReportDownloads extends Report {
 					AND frs_release.package_id = $2
 					AND frs_dlstats_file.month >= $3
 					AND frs_dlstats_file.month <= $4
-					ORDER BY frs_dlstats_file.month DESC,
+				ORDER BY frs_dlstats_file.month DESC,
 					frs_dlstats_file.day DESC',
 					array ($group_id,
 					       $package_id,

@@ -78,9 +78,7 @@ html_use_jqueryjqplotpluginhighlighter();
 echo $HTML->getJavascripts();
 echo $HTML->getStylesheets();
 
-
 $report = new ReportPerGroupDocmanDownloads($group_id, $start, $end);
-
 if ($report->isError()) {
 	echo $HTML->error_msg($report->getErrorMessage());
 } else {
