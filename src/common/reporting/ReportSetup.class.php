@@ -436,14 +436,14 @@ class ReportSetup extends Report {
 	function backfill_users_added_daily($count=10000) {
 		$today=mktime(0,0,0,date('m'),date('d')-1,date('Y'));
 		if (!$start_date=$this->getMinDate()) {
-			$this->setError('backfill_users_added_daily:: Could Not Get Start Date');
+			$this->setError('backfill_users_added_daily: Could Not Get Start Date');
 			return false;
 		}
 		$i = 0;
 		while (true) {
 			$day=($today-($i*REPORT_DAY_SPAN));
 			if (!$this->users_added_daily($day)) {
-				$this->setError('backfill_users_added_daily:: Error adding daily row: '.db_error());
+				$this->setError('backfill_users_added_daily: Error adding daily row: '.db_error());
 				return false;
 			}
 			if ($day < $start_date) {
@@ -538,7 +538,7 @@ class ReportSetup extends Report {
 
 		for ($i=0; $i<count($arr); $i++) {
 			if (!$this->users_added_weekly($arr[$i])) {
-				$this->setError('backfill_users_added_weekly:: Error adding weekly row: '.db_error());
+				$this->setError('backfill_users_added_weekly: Error adding weekly row: '.db_error());
 				return false;
 			}
 		}
@@ -577,7 +577,7 @@ class ReportSetup extends Report {
 
 		for ($i=0; $i<count($arr); $i++) {
 			if (!$this->groups_added_weekly($arr[$i])) {
-				$this->setError('backfill_groups_added_weekly:: Error adding weekly row: '.db_error());
+				$this->setError('backfill_groups_added_weekly: Error adding weekly row: '.db_error());
 				return false;
 			}
 		}
@@ -618,7 +618,7 @@ class ReportSetup extends Report {
 		//skipping first one
 		for ($i=1; $i<count($arr); $i++) {
 			if (!$this->users_added_monthly($arr[$i],($arr[$i-1]-1))) {
-				$this->setError('backfill_users_added_monthly:: Error adding monthly row: '.db_error());
+				$this->setError('backfill_users_added_monthly: Error adding monthly row: '.db_error());
 				return false;
 			}
 		}
@@ -659,7 +659,7 @@ class ReportSetup extends Report {
 		//skipping first one
 		for ($i=1; $i<count($arr); $i++) {
 			if (!$this->groups_added_monthly($arr[$i],($arr[$i-1]-1))) {
-				$this->setError('backfill_groups_added_monthly:: Error adding monthly row: '.db_error());
+				$this->setError('backfill_groups_added_monthly: Error adding monthly row: '.db_error());
 				return false;
 			}
 		}
@@ -695,14 +695,14 @@ class ReportSetup extends Report {
 	function backfill_users_cum_daily($count=10000) {
 		$today=mktime(0,0,0,date('m'),date('d')-1,date('Y'));
 		if (!$start_date=$this->getMinDate()) {
-			$this->setError('backfill_users_cum_daily:: Could Not Get Start Date');
+			$this->setError('backfill_users_cum_daily: Could Not Get Start Date');
 			return false;
 		}
 		$i = 0;
 		while (true) {
 			$day=$today-($i*REPORT_DAY_SPAN);
 			if (!$this->users_cum_daily($day)) {
-				$this->setError('backfill_users_cum_daily:: Error adding daily row: '.db_error());
+				$this->setError('backfill_users_cum_daily: Error adding daily row: '.db_error());
 				return false;
 			}
 			if ($day < $start_date) {
@@ -743,14 +743,14 @@ class ReportSetup extends Report {
 	function backfill_groups_cum_daily($count=10000) {
 		$today=mktime(0,0,0,date('m'),date('d')-1,date('Y'));
 		if (!$start_date=$this->getMinDate()) {
-			$this->setError('backfill_groups_cum_daily:: Could Not Get Start Date');
+			$this->setError('backfill_groups_cum_daily: Could Not Get Start Date');
 			return false;
 		}
 		$i = 0;
 		while (true) {
 			$day=$today-($i*REPORT_DAY_SPAN);
 			if (!$this->groups_cum_daily($day)) {
-				$this->setError('backfill_groups_cum_daily:: Error adding daily row: '.db_error());
+				$this->setError('backfill_groups_cum_daily: Error adding daily row: '.db_error());
 				return false;
 			}
 			if ($day < $start_date) {
@@ -796,7 +796,7 @@ class ReportSetup extends Report {
 
 		for ($i=0; $i<count($arr); $i++) {
 			if (!$this->groups_cum_weekly($arr[$i])) {
-				$this->setError('backfill_users_cum_weekly:: Error adding weekly row: '.db_error());
+				$this->setError('backfill_users_cum_weekly: Error adding weekly row: '.db_error());
 				return false;
 			}
 		}
@@ -835,7 +835,7 @@ class ReportSetup extends Report {
 
 		for ($i=0; $i<count($arr); $i++) {
 			if (!$this->users_cum_weekly($arr[$i])) {
-				$this->setError('backfill_groups_cum_weekly:: Error adding weekly row: '.db_error());
+				$this->setError('backfill_groups_cum_weekly: Error adding weekly row: '.db_error());
 				return false;
 			}
 		}
@@ -875,7 +875,7 @@ class ReportSetup extends Report {
 		//skip first one
 		for ($i=1; $i<count($arr); $i++) {
 			if (!$this->users_cum_monthly($arr[$i],($arr[$i-1]-1))) {
-				$this->setError('backfill_users_cum_monthly:: Error adding monthly row: '.db_error());
+				$this->setError('backfill_users_cum_monthly: Error adding monthly row: '.db_error());
 				return false;
 			}
 		}
@@ -915,7 +915,7 @@ class ReportSetup extends Report {
 		//skip first one
 		for ($i=1; $i<count($arr); $i++) {
 			if (!$this->groups_cum_monthly($arr[$i],($arr[$i-1]-1))) {
-				$this->setError('backfill_groups_cum_monthly:: Error adding monthly row: '.db_error());
+				$this->setError('backfill_groups_cum_monthly: Error adding monthly row: '.db_error());
 				return false;
 			}
 		}
@@ -1008,14 +1008,14 @@ class ReportSetup extends Report {
 	function backfill_user_act_daily($count=10000) {
 		$today=mktime(0,0,0,date('m'),date('d')-1,date('Y'));
 		if (!$start_date=$this->getMinDate()) {
-			$this->setError('backfill_user_act_daily:: Could Not Get Start Date');
+			$this->setError('backfill_user_act_daily: Could Not Get Start Date');
 			return false;
 		}
 		$i = 0;
 		while (true) {
 			$day=$today-($i*REPORT_DAY_SPAN);
 			if (!$this->user_act_daily($day)) {
-				$this->setError('backfill_user_act_daily:: Error adding daily row: '.db_error());
+				$this->setError('backfill_user_act_daily: Error adding daily row: '.db_error());
 				return false;
 			}
 			if ($day < $start_date) {
@@ -1066,7 +1066,7 @@ class ReportSetup extends Report {
 
 		for ($i=0; $i<count($arr); $i++) {
 			if (!$this->user_act_weekly($arr[$i])) {
-				$this->setError('backfill_user_act_weekly:: Error adding weekly row: '.db_error());
+				$this->setError('backfill_user_act_weekly: Error adding weekly row: '.db_error());
 				return false;
 			}
 		}
@@ -1110,7 +1110,7 @@ class ReportSetup extends Report {
 
 		for ($i=1; $i<count($arr); $i++) {
 			if (!$this->user_act_monthly($arr[$i],($arr[$i-1]-1))) {
-				$this->setError('backfill_user_act_monthly:: Error adding monthly row: '.db_error());
+				$this->setError('backfill_user_act_monthly: Error adding monthly row: '.db_error());
 				return false;
 			}
 		}
@@ -1223,14 +1223,14 @@ class ReportSetup extends Report {
 	function backfill_group_act_daily($count=10000) {
 		$today=mktime(0,0,0,date('m'),date('d')-1,date('Y'));
 		if (!$start_date=$this->getMinDate()) {
-			$this->setError('backfill_group_act_daily:: Could Not Get Start Date');
+			$this->setError('backfill_group_act_daily: Could Not Get Start Date');
 			return false;
 		}
 		$i = 0;
 		while (true) {
 			$day=$today-($i*REPORT_DAY_SPAN);
 			if (!$this->group_act_daily($day)) {
-				$this->setError('backfill_group_act_daily:: Error adding daily row: '.db_error());
+				$this->setError('backfill_group_act_daily: Error adding daily row: '.db_error());
 				return false;
 			}
 			if ($day < $start_date) {
@@ -1283,7 +1283,7 @@ class ReportSetup extends Report {
 
 		for ($i=0; $i<count($arr); $i++) {
 			if (!$this->group_act_weekly($arr[$i])) {
-				$this->setError('backfill_user_act_weekly:: Error adding weekly row: '.db_error());
+				$this->setError('backfill_user_act_weekly: Error adding weekly row: '.db_error());
 				return false;
 			}
 		}
@@ -1330,7 +1330,7 @@ class ReportSetup extends Report {
 
 		for ($i=1; $i<count($arr); $i++) {
 			if (!$this->group_act_monthly($arr[$i],($arr[$i-1]-1))) {
-				$this->setError('backfill_group_act_monthly:: Error adding monthly row: '.db_error());
+				$this->setError('backfill_group_act_monthly: Error adding monthly row: '.db_error());
 				return false;
 			}
 		}
