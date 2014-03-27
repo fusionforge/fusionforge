@@ -4,7 +4,7 @@
  *
  * Copyright 2010-2011, Roland Mas
  * Copyright (c) 2011 Thorsten Glaser <t.glaser@tarent.de>
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013-2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -140,50 +140,40 @@ if (getStringFromRequest('dormusers')) {
 }
 
 if ($role instanceof RoleExplicit) {
-	$users = $role->getUsers () ;
+	$users = $role->getUsers();
 	if (count ($users) > 0) {
 		echo '<p><strong>'._('Current users with this role').'</strong></p>' ;
 
 		echo '
-		<form action="'.util_make_url('/admin/globalroleedit.php').'" method="post">
-		<input type="hidden" name="role_id" value="'.$role_id.'" />
-		<table><thead><tr>
-			<th>'._('User Name').'</th>
-			<th>'._('Remove').'</th>
-		</tr></thead><tbody>';
-
+		<form action="'.util_make_uri('/admin/globalroleedit.php').'" method="post">
+		<input type="hidden" name="role_id" value="'.$role_id.'" />';
+		$titleArr = array(_('User Name'), _('Remove'));
+		echo $HTML->listTableTop($titleArr);
 		foreach ($users as $user) {
-			echo '
-		<tr>
-			<td style="white-space:nowrap;">
-				<a href="/users/'.$user->getUnixName().'">';
+			$cells = array();
 			$display = $user->getRealName();
 			if (empty($display)) {
 				$display = $user->getUnixName();
 			}
-			echo $display . '</a>
-			</td><td>
-				<input type="checkbox" name="rmusers[]" value="' .
-			    $user->getID() . '" /> ' . _('Remove') . '
-			</td>
-		</tr>';
+			$cells[] = array(util_make_link('/users/'.$user->getUnixName(), $display), 'style' => 'white-space:nowrap');
+			$cells[][] = '<input type="checkbox" name="rmusers[]" value="'.$user->getID().'" />'._('Remove');
+			echo $HTML->multiTableRow(array(), $cells);
 		}
-		echo '
-		<tr><td colspan="2">
-			<input type="checkbox" name="reallyremove" value="1" />
-			' . _('Really remove ticked users from role?') . '
-		</td></tr><tr><td colspan="2">
-			<input type="submit" name="dormusers" value="' .
-		    _("Remove") . '" />
-		</td></tr>
-		</tbody></table></form>';
+		$cells = array();
+		$cells[] = array('<input type="checkbox" name="reallyremove" value="1" />'._('Really remove ticked users from role?'), 'colspan' => 2);
+		echo $HTML->multiTableRow(array(), $cells);
+		$cells = array();
+		$cells[] = array('<input type="submit" name="dormusers" value="'._('Remove').'" />', 'colspan' => 2);
+		echo $HTML->multiTableRow(array(), $cells);
+		echo $HTML->listTableBottom();
+		echo '</form>';
 	} else {
 		echo '<p><strong>'._('No users currently have this role').'</strong></p>' ;
 	}
 
 			?>
 		<form
-			action="<?php echo util_make_url('/admin/globalroleedit.php'); ?>"
+			action="<?php echo util_make_uri('/admin/globalroleedit.php'); ?>"
 			method="post">
 		<p><input type="text"
 			name="form_unix_name" size="10" value="" />
@@ -197,7 +187,7 @@ if ($role instanceof RoleExplicit) {
 
 echo '
 <p>
-<form action="'.util_make_url('/admin/globalroleedit.php').'" method="post">';
+<form action="'.util_make_uri('/admin/globalroleedit.php').'" method="post">';
 echo '<input type="hidden" name="role_id" value="'.$role_id.'" />' ;
 
 if ($role instanceof RoleExplicit) {
@@ -224,7 +214,6 @@ echo $HTML->listTableTop($titles);
 //
 //	Everything is built on the multi-dimensional arrays in the Role object
 //
-$j = 0;
 
 $keys = array_keys($role->getGlobalSettings ()) ;
 $keys2 = array () ;
@@ -236,15 +225,11 @@ foreach ($keys as $key) {
 $keys = $keys2 ;
 
 for ($i=0; $i<count($keys); $i++) {
-	echo '<tr '. $HTML->boxGetAltRowStyle($j++) . '>
-		<td colspan="2"><strong>'.$rbac_edit_section_names[$keys[$i]].'</strong></td>
-		<td>';
-	echo html_build_select_box_from_assoc($role->getRoleVals($keys[$i]), "data[".$keys[$i]."][-1]", $role->getVal($keys[$i],-1), false, false ) ;
-	echo '</td>
-		</tr>';
-
+	$cells = array();
+	$cells[] = array('<strong>'.$rbac_edit_section_names[$keys[$i]].'</strong>', 'colspan' => 2);
+	$cells[][] = html_build_select_box_from_assoc($role->getRoleVals($keys[$i]), "data[".$keys[$i]."][-1]", $role->getVal($keys[$i],-1), false, false );
+	echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
 }
-
 echo $HTML->listTableBottom();
 
 echo '<p><input type="submit" name="submit" value="'._('Submit').'" /></p>
