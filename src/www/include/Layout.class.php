@@ -135,7 +135,7 @@ class Layout extends Error {
 			html_error_top(_("Cannot find theme directory!"));
 			return;
 		}
-		$this->themeurl = util_make_url('themes/' . forge_get_config('default_theme') . '/');
+		$this->themeurl = util_make_uri('themes/' . forge_get_config('default_theme') . '/');
 
 		// determine {css,img,js}{url,dir}
 		if (file_exists ($this->themedir . 'images/')) {
@@ -322,7 +322,7 @@ class Layout extends Error {
 	 */
 	function headerSearch() {
 		echo html_e('link', array('rel' => "search", 'title' => forge_get_config('forge_name'),
-					'href' => util_make_url('/export/search_plugin.php'),
+					'href' => util_make_uri('/export/search_plugin.php'),
 					'type' => 'application/opensearchdescription+xml'));
 	}
 
@@ -406,7 +406,7 @@ class Layout extends Error {
 			<div class="header">
 			<table class="fullwidth" id="headertable">
 			<tr>
-			<td><a href="<?php echo util_make_url ('/'); ?>"><?php echo html_image('logo.png',198,52,array('border'=>'0')); ?></a></td>
+			<td><?php util_make_link('/', html_image('logo.png',198,52,array('border'=>'0'))); ?></td>
 			<td><?php $this->searchBox(); ?></td>
 			<td align="right"><?php
 			$items = $this->navigation->getUserLinks();

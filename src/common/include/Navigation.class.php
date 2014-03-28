@@ -82,7 +82,7 @@ class Navigation extends Error {
 	 */
 	function getFavIcon($asHTML = true) {
 		if (!$asHTML) {
-			return util_make_url('/images/icon.png');
+			return util_make_uri('/images/icon.png');
 		} else {
 			return html_e('link', array('rel' => 'icon', 'type' => 'image/png', 'href' => $this->getFavIcon(false))).
 				html_e('link', array('rel' => 'shortcut icon', 'type' => 'image/png', 'href' => $this->getFavIcon(false)));
@@ -103,17 +103,17 @@ class Navigation extends Error {
 			$res['urls'] = array();
 
 			$res['titles'][] = forge_get_config ('forge_name').' - Project News Highlights RSS';
-			$res['urls'][] = util_make_url('/export/rss_sfnews.php');
+			$res['urls'][] = util_make_uri('/export/rss_sfnews.php');
 
 			$res['titles'][] = forge_get_config ('forge_name').' - Project News Highlights RSS 2.0';
-			$res['urls'][] = util_make_url('/export/rss20_news.php');
+			$res['urls'][] = util_make_uri('/export/rss20_news.php');
 
 			$res['titles'][] = forge_get_config ('forge_name').' - New Projects RSS';
-			$res['urls'][] = util_make_url('/export/rss_sfprojects.php');
+			$res['urls'][] = util_make_uri('/export/rss_sfprojects.php');
 
 			if (isset($GLOBALS['group_id'])) {
 				$res['titles'][] = forge_get_config ('forge_name') . ' - New Activity RSS';
-				$res['urls'][] = util_make_url('/export/rss20_activity.php?group_id='.$GLOBALS['group_id']);
+				$res['urls'][] = util_make_uri('/export/rss20_activity.php?group_id='.$GLOBALS['group_id']);
 			}
 			return $res;
 		} else {

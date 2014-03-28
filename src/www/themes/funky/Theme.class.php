@@ -34,7 +34,7 @@ class Theme extends Layout {
 	function Theme() {
 		// Parent constructor
 		$this->Layout();
-		$this->themeurl = util_make_url('themes/funky/');
+		$this->themeurl = util_make_uri('themes/funky/');
 		$this->imgbaseurl = $this->themeurl . 'images/';
 		$this->imgroot = $this->imgbaseurl;
 		$this->addStylesheet('/themes/funky/css/theme.css');

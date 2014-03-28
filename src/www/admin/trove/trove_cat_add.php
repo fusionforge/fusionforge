@@ -72,7 +72,7 @@ if (getStringFromRequest('submit')) {
 site_admin_header(array('title'=>_('Add New Trove Category')));
 ?>
 
-<form action="trove_cat_add.php" method="post">
+<form action="<? echo util_make_uri('/admin/trove/trove_cat_add.php'); ?>" method="post">
 <input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>" />
 <p><?php echo _('Parent Category').utils_requiredField()._(':'); ?>
 <br /><select name="form_parent">

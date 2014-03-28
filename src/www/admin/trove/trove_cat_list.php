@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright (C) 2010-2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -47,24 +48,22 @@ function printnode ($nodeid,$text) {
 	print html_image('ic/cfolder15.png');
 	print ('&nbsp; <span class="trove-nodes" title="'.util_html_secure($title).'">'.$text.'</span> ');
 	if ($nodeid == 0) {
-		print ('<a href="trove_cat_add.php?parent_trove_cat_id='.$nodeid.'">['._('Add').']</a> ');
+		echo util_make_link('/admin/trove/trove_cat_add.php?parent_trove_cat_id='.$nodeid, '['._('Add').']');
 	} else {
-		print ('<a href="trove_cat_edit.php?trove_cat_id='.$nodeid.'">['._('Edit').']</a> ');
-		print ('<a href="trove_cat_add.php?parent_trove_cat_id='.$nodeid.'">['._('Add').']</a> ');
+		echo util_make_link('/admin/trove/trove_cat_edit.php?trove_cat_id='.$nodeid, '['._('Edit').']');
+		echo util_make_link('/admin/trove/trove_cat_add.php?parent_trove_cat_id='.$nodeid, '['._('Add').']');
 	}
 
 	$GLOBALS['depth']++;
-	$res_child = db_query_params ('
-		SELECT trove_cat_id,fullname FROM trove_cat
-		WHERE parent=$1
-		AND trove_cat_id!=0 ORDER BY fullname;
-	',
-			array($nodeid)) ;
+	$res_child = db_query_params ('SELECT trove_cat_id,fullname FROM trove_cat
+					WHERE parent=$1
+					AND trove_cat_id!=0 ORDER BY fullname',
+					array($nodeid)) ;
 
 	while ($row_child = db_fetch_array($res_child)) {
 		printnode($row_child["trove_cat_id"],$row_child["fullname"]);
 	}
-	$GLOBALS["depth"]--;
+	$GLOBALS['depth']--;
 }
 
 // ########################################################
@@ -73,7 +72,7 @@ html_use_tooltips();
 
 site_admin_header(array('title'=>_('Browse Trove Tree')));
 
-printnode(0,"root");
+printnode(0,'root');
 
 site_admin_footer();
 

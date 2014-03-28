@@ -1223,9 +1223,9 @@ function util_display_user($username, $user_id, $text, $size = 'xs') {
  */
 function util_make_url_u($username, $user_id) {
 	if (isset ($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
-		return util_make_url("/developer/?user_id=$user_id");
+		return util_make_uri('/developer/?user_id='.$user_id);
 	} else {
-		return util_make_url("/users/$username/");
+		return util_make_uri('/users/'.$username.'/');
 	}
 }
 
@@ -1261,9 +1261,9 @@ function util_make_link_g($group_name, $group_id, $text) {
  */
 function util_make_url_g($group_name, $group_id) {
 	if (isset ($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
-		return util_make_url("/project/?group_id=$group_id");
+		return util_make_uri('/project/?group_id='.$group_id);
 	} else {
-		return util_make_url("/projects/$group_name/");
+		return util_make_uri('/projects/'.$group_name.'/');
 	}
 }
 

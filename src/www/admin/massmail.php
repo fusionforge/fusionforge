@@ -168,16 +168,14 @@ while ($row = db_fetch_array($res)) {
 		echo $HTML->listTableTop($title);
 		$seen = true;
 	}
-	echo '
-	<tr '.$HTML->boxGetAltRowStyle($i++).'>
-	<td>&nbsp;<a href="/admin/massmail.php?id='.$row['id'].'&action=del">'._('Delete').'</a></td>
-	<td>'.$row['id'].'</td>
-	<td>'.$row['type'].'</td>
-	<td>'.$row['subject'].'</td>
-	<td>'.date(_('Y-m-d H:i'), $row['queued_date']).'</td>
-	<td> '.$row['last_userid'].'</td>
-	</tr>
-	';
+	$cells = array();
+	$cells[][] = util_make_link('/admin/massmail.php?id='.$row['id'].'&action=del', _('Delete'));
+	$cells[][] = $row['id'];
+	$cells[][] = $row['type'];
+	$cells[][] = $row['subject'];
+	$cells[][] = date(_('Y-m-d H:i'), $row['queued_date']);
+	$cells[][] = $row['last_userid'];
+	echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i++, true)), $cells);
 }
 
 if ($seen) {

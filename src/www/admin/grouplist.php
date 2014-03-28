@@ -134,7 +134,7 @@ if (getStringFromRequest('sortorder') == 'is_public') {
 	$rows = array_merge($public_rows, $private_rows);
 }
 
-$i = 0;
+$i = 1;
 foreach ($rows as $grp) {
 
 	if ($grp['status']=='A'){
@@ -151,17 +151,16 @@ foreach ($rows as $grp) {
 	if ($grp['register_time'] != 0) {
 		$time_display = date(_('Y-m-d H:i'),$grp['register_time']);
 	}
-	echo '<tr '.$HTML->boxGetAltRowStyle($i).'>';
-	echo '<td><a class="tabtitle-w" title="'._('Click to edit this project.').'" href="groupedit.php?group_id='.$grp['group_id'].'">'.$grp['group_name'].'</a></td>';
-	echo '<td>'.$time_display.'</td>';
-	echo '<td>'.$grp['unix_group_name'].'</td>';
-	echo '<td class="'.$status.'">'.$grp['status'].'</td>';
-	echo '<td>'.$grp['is_public'].'</td>';
-	echo '<td>'.$grp['license_name'].'</td>';
-	echo '<td>'.$grp['members'].'</td>';
-	echo '<td>'.$grp['is_template'].'</td>';
-	echo '</tr>';
-	$i++;
+	$cells = array();
+	$cells[][] = util_make_link('/admin/groupedit.php?group_id='.$grp['group_id'], $grp['group_name'], array('tabtitle-w', 'title' => _('Click to edit this project.')));
+	$cells[][] = $time_display;
+	$cells[][] = $grp['unix_group_name'];
+	$cells[] = array($grp['status'], 'class' => $status);
+	$cells[][] = $grp['is_public'];
+	$cells[][] = $grp['license_name'];
+	$cells[][] = $grp['members'];
+	$cells[][] = $grp['is_template'];
+	echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i++, true)), $cells);
 }
 
 echo $HTML->listTableBottom();

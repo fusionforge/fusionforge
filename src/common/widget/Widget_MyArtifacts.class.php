@@ -104,7 +104,7 @@ class Widget_MyArtifacts extends Widget {
 		$textsArray[] = _('assigned to or monitored by me'.' [AM]');
 		$textsArray[] = _('submitted by or monitored by me'.' [SM]');
 		$textsArray[] = _('assigned to or submitted by or monitored by me'.' [ASM]');
-		$prefs = _("Display artifacts:").html_build_select_box_from_arrays($optionsArray, $textsArray, "show", $this->_artifact_show);
+		$prefs = _('Display artifacts:').html_build_select_box_from_arrays($optionsArray, $textsArray, 'show', $this->_artifact_show);
 		return $prefs;
 	}
 
@@ -135,9 +135,9 @@ class Widget_MyArtifacts extends Widget {
 		}
 
 		if (count($my_artifacts) > 0) {
-			$html_my_artifacts = '<table style="width:100%">';
+			$html_my_artifacts = $HTML->listTableTop(array());
 			$html_my_artifacts .= $this->_display_artifacts($my_artifacts, 1);
-			$html_my_artifacts .= '</table>';
+			$html_my_artifacts .= $HTML->listTableBottom();
 		} else {
 			$html_my_artifacts = $HTML->warning_msg(_('You have no artifacts'));
 		}
@@ -165,16 +165,16 @@ class Widget_MyArtifacts extends Widget {
 		}
 
 		$j = $print_box_begin;
-		$html_my_artifacts = "";
-		$html = "";
-		$html_hdr = "";
+		$html_my_artifacts = '';
+		$html = '';
+		$html_hdr = '';
 
 		$aid_old  = 0;
 		$atid_old = 0;
 		$group_id_old = 0;
 		$count_aids = 0;
-		$group_name = "";
-		$tracker_name = "";
+		$group_name = '';
+		$tracker_name = '';
 
 		$artifact_types = array();
 		$allIds = array();
@@ -194,19 +194,16 @@ class Widget_MyArtifacts extends Widget {
 
 				//work on the tracker of the last round if there was one
 				if ($atid != $atid_old && $count_aids != 0) {
-					list($hide_now,$count_diff,$hide_url) =
-						my_hide_url('artifact', $atid_old, $hide_item_id, $count_aids, $hide_artifact);
-					$html_hdr =  '<tr class="boxitem"><td colspan="3">' .
-						$hide_url.
-						util_make_link('/tracker/?group_id='.$group_id_old, $group_name, array('class'=>'tabtitle-nw', 'title'=>_('Browse Trackers List for this project'))).
-						' - '.
-						util_make_link('/tracker/?group_id='.$group_id_old.'&atid='.$atid_old, $tracker_name, array('class'=>'tabtitle', 'title'=>_('Browse this tracker for this project'))).
-						'    ';
+					list($hide_now,$count_diff,$hide_url) = my_hide_url('artifact', $atid_old, $hide_item_id, $count_aids, $hide_artifact);
 					$count_new = max(0, $count_diff);
-
-					$html_hdr .= my_item_count($count_aids,$count_new).'</td></tr>';
-					$html_my_artifacts .= $html_hdr.$html;
-
+					$cells = array();
+					$cells[] = array($hide_url.
+							util_make_link('/tracker/?group_id='.$group_id_old, $group_name, array('class'=>'tabtitle-nw', 'title'=>_('Browse Trackers List for this project'))).
+							' - '.
+							util_make_link('/tracker/?group_id='.$group_id_old.'&atid='.$atid_old, $tracker_name, array('class'=>'tabtitle', 'title'=>_('Browse this tracker for this project'))).
+							'    '.
+							my_item_count($count_aids,$count_new), 'colspan' => 3);
+					$html_my_artifacts .= $HTML->multiTableRow(array('class' => 'boxitem'), $cells).$html;
 					$count_aids = 0;
 					$html = '';
 					$j++;
@@ -257,14 +254,11 @@ class Widget_MyArtifacts extends Widget {
 					}
 
 					if($AS_flag !='N') {
-						$html .= '
-							<tr '. $HTML->boxGetAltRowStyle($count_aids) .'>'.
-							'<td class="priority'.$trackers_array->getPriority().'">'.$trackers_array->getPriority().'</td>'.
-							'<td>'.util_make_link('/tracker/?func=detail&group_id='.$group_id.'&aid='.$aid.'&atid='.$atid, stripslashes($summary), array("class"=>"tabtitle", "title"=>_('Browse this artefact'))).
-							'</td>'.
-							'<td class="small tabtitle-ne" title="'.$AS_title.'">';
-						$html .= '&nbsp;'.$AS_flag.'</td></tr>';
-
+						$cells = array();
+						$cells[] = array($trackers_array->getPriority(), 'class' => 'priority'.$trackers_array->getPriority());
+						$cells[][] = util_make_link('/tracker/?func=detail&group_id='.$group_id.'&aid='.$aid.'&atid='.$atid, stripslashes($summary), array('class' => 'tabtitle', 'title' => _('Browse this artefact')));
+						$cells[] = array($AS_flag, 'title' => $AS_title, 'class' => 'small tabtitle-ne');
+						$html .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($count_aids, true)), $cells);
 					}
 				}
 				$aid_old = $aid;
@@ -273,16 +267,15 @@ class Widget_MyArtifacts extends Widget {
 		//work on the tracker of the last round if there was one
 		if ($atid_old != 0 && $count_aids != 0) {
 			list($hide_now,$count_diff,$hide_url) = my_hide_url('artifact',$atid_old,$hide_item_id,$count_aids,$hide_artifact);
-			$html_hdr = '<tr class="boxitem"><td colspan="3">'.
-				$hide_url.
-				util_make_link('/tracker/?group_id='.$group_id_old, $group_name, array('class'=>'tabtitle-nw', 'title'=>_('Browse Trackers List for this project'))).
-				' - '.
-				util_make_link('/tracker/?group_id='.$group_id_old.'&atid='.$atid_old, $tracker_name, array('class'=>'tabtitle', 'title'=>_('Browse this tracker for this project'))).
-				'    ';
 			$count_new = max(0, $count_diff);
-
-			$html_hdr .= my_item_count($count_aids,$count_new).'</td></tr>';
-			$html_my_artifacts .= $html_hdr.$html;
+			$cells = array();
+			$cells[] = array($hide_url.
+					util_make_link('/tracker/?group_id='.$group_id_old, $group_name, array('class'=>'tabtitle-nw', 'title'=>_('Browse Trackers List for this project'))).
+					' - '.
+					util_make_link('/tracker/?group_id='.$group_id_old.'&atid='.$atid_old, $tracker_name, array('class'=>'tabtitle', 'title'=>_('Browse this tracker for this project'))).
+					'    '.
+					my_item_count($count_aids,$count_new), 'colspan' => 3);
+			$html_my_artifacts .= $HTML->multiTableRow(array('class' => 'boxitem'), $cells).$html;
 		}
 		return $html_my_artifacts;
 	}
@@ -292,7 +285,7 @@ class Widget_MyArtifacts extends Widget {
 	}
 
 	function getDescription() {
-		return _("List artifacts you have submitted or assigned to you or you are monitoring, by project.");
+		return _('List artifacts you have submitted or assigned to you or you are monitoring, by project.');
 	}
 
 	function isAvailable() {
