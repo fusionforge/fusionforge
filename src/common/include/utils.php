@@ -180,7 +180,7 @@ function util_send_message($to,$subject,$body,$from='',$BCC='',$sendername='',$e
 		$charset = 'UTF-8';
 	}
 
-	$body2 = '';
+	$body2 = "Auto-Submitted: auto-generated\n";
 	if ($extra_headers) {
 		$body2 .= $extra_headers."\n";
 	}
