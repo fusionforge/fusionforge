@@ -180,6 +180,11 @@ prep_for_email()
 			refname_type="branch"
 			short_refname=${refname##refs/heads/}
 			;;
+		refs/changes/*,commit)
+			# Gerrit
+			refname_type="review change"
+			short_refname=${refname##refs/}
+			;;
 		refs/remotes/*,commit)
 			# tracking branch
 			refname_type="tracking branch"
