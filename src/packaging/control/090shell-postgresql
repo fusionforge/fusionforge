@@ -1,6 +1,6 @@
 Package: @OLDPACKAGE@-shell-postgresql
 Architecture: all
-Depends: @OLDPACKAGE@-common, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db-remote, perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, openssh-server, libnss-pgsql2, unscd | nscd, ${misc:Depends}
+Depends: @OLDPACKAGE@-common, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db-remote, perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, openssh-server, libnss-pgsql2, unscd | nscd, php5-cli, ${misc:Depends}
 Provides: @OLDPACKAGE@-shell
 Conflicts: @OLDPACKAGE@-shell
 Description: collaborative development tool - shell accounts (using PostgreSQL)

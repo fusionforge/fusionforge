@@ -57,6 +57,7 @@ cp -r src/ $BUILDPLACE/$PKGNAME-$MAJOR
 cd $BUILDPLACE/$PKGNAME-$MAJOR
 dch -b -v $MAJOR$MINOR -D UNRELEASED "This is $DIST-$ARCH autobuild"
 sed -i -e "1s/UNRELEASED/$DIST/" debian/changelog
+debian/rules debian/control
 pdebuild --configfile $COWBUILDERCONFIG --buildresult $BUILDRESULT
 
 cd $BUILDRESULT
