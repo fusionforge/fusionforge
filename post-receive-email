@@ -71,7 +71,9 @@
 #   sender address to be set.  This is also used as Header From.
 # hooks.emailprefix
 #   All emails have their subjects prefixed with this prefix, or "[SCM]"
-#   if emailprefix is unset, to aid filtering
+#   if emailprefix is unset, to aid filtering.
+# hooks.shortdesc
+#   If set, this is used in the Subject instead of the description file.
 # hooks.showrev
 #   The shell command used to format each revision in the email, with
 #   "%s" replaced with the commit id.  Defaults to "git rev-list -1
@@ -293,7 +295,7 @@ generate_email_header()
 	X-Git-Reftype: $refname_type
 	X-Git-Oldrev: $oldrev
 	X-Git-Newrev: $newrev
-	$(perl -Mutf8 -MEncode -e "print encode('MIME-Q', 'Subject: ${emailprefix}$projectdesc $refname_type $short_refname ${change_type}d. $describe');")
+	$(perl -Mutf8 -MEncode -e "print encode('MIME-Q', 'Subject: ${emailprefix}$shortdesc $refname_type $short_refname ${change_type}d. $describe');")
 	Auto-Submitted: auto-generated
 
 	This is an automated email from the git hooks/post-receive script. It was
@@ -794,6 +796,8 @@ diffopts=$(git config hooks.diffopts)
 : ${diffopts:="-p --stat --summary --find-copies-harder"}
 kgbconffile=$(git config hooks.kgbconffile)
 replyto=$(git config hooks.replyto)
+shortdesc=$(git config hooks.shortdesc)
+: ${shortdesc:=$projectdesc}
 
 # --- Main loop
 # Allow dual mode: run from the command line just like the update hook, or
