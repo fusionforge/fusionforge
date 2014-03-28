@@ -314,33 +314,33 @@ echo '</td>';
 echo '<td>';
 echo $HTML->boxTop(_('Tool Admin'));
 
-if($group->usesForum()) { ?>
-	<p><a href="/forum/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('Forums Admin') ?></a></p>
-<?php }
-if($group->usesTracker()) { ?>
-	<p><a href="/tracker/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('Trackers Administration') ?></a></p>
-<?php }
-if($group->usesMail()) { ?>
-	<p><a href="/mail/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('Mailing Lists Admin') ?></a></p>
-<?php }
-if($group->usesPM()) { ?>
-	<p><a href="/pm/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('Tasks Administration') ?></a></p>
-<?php }
-if($group->usesDocman()) { ?>
-	<p><a href="/docman/?group_id=<?php echo $group->getID(); ?>&amp;view=admin"><?php echo _('Documents Admin') ?></a></p>
-<?php }
-if($group->usesSurvey()) { ?>
-	<p><a href="/survey/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('Survey Admin') ?></a></p>
-<?php }
-if($group->usesNews()) { ?>
-	<p><a href="/news/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('News Admin') ?></a></p>
-<?php }
-if($group->usesSCM()) { ?>
-	<p><a href="/scm/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('Source Code Admin') ?></a></p>
-<?php }
-if($group->usesFRS()) { ?>
-	<p><a href="/frs/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('File Release System Admin') ?></a></p>
-<?php }
+if($group->usesForum()) {
+	echo html_e('p', array(), util_make_link('/forum/admin/?group_id='.$group->getID(), _('Forums Admin')), false);
+}
+if($group->usesTracker()) {
+	echo html_e('p', array(), util_make_link('/tracker/admin/?group_id='.$group->getID(), _('Trackers Administration')), false);
+}
+if($group->usesMail()) {
+	echo html_e('p', array(), util_make_link('/mail/admin/?group_id='.$group->getID(), _('Mailing Lists Admin')), false);
+}
+if($group->usesPM()) {
+	echo html_e('p', array(), util_make_link('/pm/admin/?group_id='.$group->getID(), _('Tasks Administration')), false);
+}
+if($group->usesDocman()) {
+	echo html_e('p', array(), util_make_link('/docman/?group_id='.$group->getID().'&view=admin', _('Documents Admin')), false);
+}
+if($group->usesSurvey()) {
+	echo html_e('p', array(), util_make_link('/survey/admin/?group_id='.$group->getID(), _('Survey Admin')), false);
+}
+if($group->usesNews()) {
+	echo html_e('p', array(), util_make_link('/news/admin/?group_id='.$group->getID(), _('News Admin')), false);
+}
+if($group->usesSCM()) {
+	echo html_e('p', array(), util_make_link('/scm/admin/?group_id='.$group->getID(), _('Source Code Admin')), false);
+}
+if($group->usesFRS()) {
+	echo html_e('p', array(), util_make_link('/frs/admin/?group_id='.$group->getID(), _('File Release System Admin')), false);
+}
 
 $hook_params = array();
 $hook_params['group_id'] = $group_id;

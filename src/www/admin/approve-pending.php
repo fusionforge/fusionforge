@@ -134,16 +134,16 @@ while ($row_grp = db_fetch_array($res_grp)) {
 
 	<h3><?php  echo _('Pre-approval modifications :'); ?></h3>
 
-	<p><?php echo util_make_link ('/admin/groupedit.php?group_id='.$row_grp['group_id'],_('Edit Project Details'));
+	<p><?php echo util_make_link('/admin/groupedit.php?group_id='.$row_grp['group_id'],_('Edit Project Details'));
 	echo _(' or ');
-	echo util_make_link ('/project/admin/?group_id='.$row_grp['group_id'],_('Project Admin'));
+	echo util_make_link('/project/admin/?group_id='.$row_grp['group_id'],_('Project Admin'));
 	echo _(' or ');
-	echo util_make_link ('/admin/userlist.php?group_id='.$row_grp['group_id'],_('View/Edit Project Members')); ?></p>
+	echo util_make_link('/admin/userlist.php?group_id='.$row_grp['group_id'],_('View/Edit Project Members')); ?></p>
 
 	<h3><?php echo _('Decision :'); ?></h3>
 	<table><tr class="bottom"><td>
 
-	<form name="approve.<?php echo $row_grp['unix_group_name'] ?>" action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
+	<form name="approve.<?php echo $row_grp['unix_group_name'] ?>" action="<?php echo util_make_uri('/admin/approve-pending.php'); ?>" method="post">
 	<input type="hidden" name="action" value="activate" />
 	<input type="hidden" name="list_of_groups" value="<?php print $row_grp['group_id']; ?>" />
 	<input type="submit" name="submit" value="<?php echo _('Approve'); ?>" />
@@ -152,11 +152,12 @@ while ($row_grp = db_fetch_array($res_grp)) {
 	</td><td><?php echo _(' or '); ?>
 	</td><td>
 
-	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
+	<form action="<?php echo util_make_uri('/admin/approve-pending.php'); ?>" method="post">
 	<input type="hidden" name="action" value="delete" />
 	<input type="hidden" name="group_id" value="<?php print $row_grp['group_id']; ?>" />
 	<?php echo _('Rejection canned responses'); ?><br />
-	<?php print get_canned_responses(); ?> <a href="responses_admin.php"><?php echo _('(manage responses)'); ?></a>
+	<?php print get_canned_responses();
+	echo util_make_link('/admin/responses_admin.php', _('(manage responses)')); ?>
 	<br />
 	<?php echo _('Custom response title and text'); ?><br />
 	<input type="text" name="response_title" size="30" maxlength="25" /><br />
@@ -225,7 +226,7 @@ $arr = util_result_column_to_array($res_grp, 0);
 $group_list = implode($arr, ',');
 
 echo '
-	<form action="'.getStringFromServer('PHP_SELF').'" method="post">
+	<form action="'.util_make_uri('/admin/approve-pending.php').'" method="post">
 	<p class="align-center">
 	<input type="hidden" name="action" value="activate" />
 	<input type="hidden" name="list_of_groups" value="'.$group_list.'" />

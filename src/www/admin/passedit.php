@@ -5,7 +5,7 @@
  * Copyright © 2010
  *	Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
  * All rights reserved.
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013-2014, Franck Villaume - TrivialDev
  *
  * Based on other FusionForge code.
  *
@@ -80,7 +80,7 @@ if (getStringFromRequest('submit')) {
 	printf(_('%s Password Change Confirmation'), forge_get_config('forge_name'));
 	echo '</h2>';
 	echo $HTML->feedback(sprintf(_('You have changed successfully the password of %1$s (%2$s).'), $u->getUnixName(), $u->getRealName()));
-	printf('<p>'._("Go back to %s.").'</p>', '<a href="userlist.php">'._("the Full User List").'</a>');
+	printf('<p>'._('Go back to %s.').'</p>', util_make_link('/admin/userlist.php', _('the Full User List'));
 } else {
 	// Show change form
 	site_admin_header(array('title'=>_('Site Admin: Change User Password')));

@@ -188,25 +188,21 @@ if ($add_cat && $group_project_id) {
 		$title_arr=array();
 		$title_arr[]=_('Id');
 		$title_arr[]=_('Title');
-
 		echo $HTML->listTableTop ($title_arr);
-
 		for ($i=0; $i < $rows; $i++) {
-			echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>'.
-				'<td>'.db_result($result, $i, 'category_id').'</td>'.
-				'<td><a href="'.getStringFromServer('PHP_SELF').'?update_cat=1&amp;id='.
-					db_result($result, $i, 'category_id').'&amp;group_id='.$group_id.'&amp;group_project_id='. $pg->getID() .'">'.
-					db_result($result, $i, 'category_name').'</a></td></tr>';
+			$cells = array();
+			$cells[][] = db_result($result, $i, 'category_id');
+			$cells[][] = util_make_link('/pm/admin/?update_cat=1&id='.db_result($result, $i, 'category_id').'&group_id='.$group_id.'&group_project_id='. $pg->getID(),
+							db_result($result, $i, 'category_name'));
+			echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
 		}
-
 		echo $HTML->listTableBottom();
-
 	} else {
 		echo $HTML->information(_('No categories defined'));
 	}
 
 	?>
-	<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>" method="post">
+	<form action="<?php echo util_make_uri('/pm/admin/?group_id='.$group_id); ?>" method="post">
 	<p>
 	<input type="hidden" name="add_cat" value="y" />
 	<input type="hidden" name="group_project_id" value="<?php echo $pg->getID(); ?>" />
@@ -251,7 +247,7 @@ if ($add_cat && $group_project_id) {
 	} else {
 		echo $HTML->information(_('It is not recommended that you change the category name because other things are dependent upon it. When you change the category name, all related items will be changed to the new name.'));
 		?>
-		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>" method="post">
+		<form action="<?php echo util_make_uri('/pm/admin/?group_id='.$group_id); ?>" method="post">
 		<p>
 		<input type="hidden" name="update_cat" value="y" />
 		<input type="hidden" name="id" value="<?php echo $ac->getID(); ?>" />
@@ -279,7 +275,7 @@ if ($add_cat && $group_project_id) {
 	?>
 	<p><?php echo _('Add a new subproject to the Tasks. <strong>This is different than adding a task to a subproject.</strong>') ?></p>
 
-	<form action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id"; ?>" method="post">
+	<form action="<?php echo util_make_uri('/pm/admin/?group_id='.$group_id); ?>" method="post">
 	<p>
 	<input type="hidden" name="addproject" value="y" />
 	<input type="hidden" name="post_changes" value="y" />
@@ -312,7 +308,7 @@ if ($add_cat && $group_project_id) {
 	?>
 	<p><?php echo _('You can modify an existing subproject using this form. Please note that private subprojects can still be viewed by members of your project, but not the general public.') ?></p>
 
-	<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>" method="post">
+	<form action="<?php echo util_make_uri('/pm/admin/?group_id='.$group_id);; ?>" method="post">
 	<input type="hidden" name="post_changes" value="y" />
 	<input type="hidden" name="update_pg" value="y" />
 	<input type="hidden" name="group_project_id" value="<?php echo $pg->getID(); ?>" />
@@ -372,7 +368,7 @@ if ($add_cat && $group_project_id) {
 	pm_header(array('title'=>_('Permanently delete this subproject and all its data')));
 
 	?>
-	<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_project_id='.$group_project_id; ?>" method="post">
+	<form action="<?php echo util_make_uri('/pm/admin/?group_id='.$group_id.'&group_project_id='.$group_project_id); ?>" method="post">
 	<p>
 	<input type="hidden" name="post_changes" value="y" />
 	<input type="hidden" name="delete" value="y" />
@@ -417,11 +413,8 @@ if ($add_cat && $group_project_id) {
 	//
 	if (forge_check_perm ('pm_admin', $group_id)) {
 		?>
-		<p />
-		<a href="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>&amp;addproject=1"><?php echo _('Add a Subproject') ?></a><br />
-		<?php echo _('Add a subproject, which can contain a set of tasks. This is different than creating a new task.') ?>
-		<p />
-		<?php
+		<?php util_make_link('/pm/admin/?group_id='.$group_id.'&addproject=1', _('Add a Subproject')) ?><br />
+		<?php echo _('Add a subproject, which can contain a set of tasks. This is different than creating a new task.');
 	}
 
 	$pg_arr = $pgf->getProjectGroups();
@@ -432,10 +425,8 @@ if ($add_cat && $group_project_id) {
 		echo db_error();
 	} else {
 		for ($i=0; $i<count($pg_arr); $i++) {
-			echo '<a href="'. getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_project_id='.$pg_arr[$i]->getID().'&amp;update_pg=1">'._('Edit/Update Subproject').': <strong>'.$pg_arr[$i]->getName().'</strong></a><p />';
+			echo '<p>'.util_make_link('/pm/admin/?group_id='.$group_id.'&group_project_id='.$pg_arr[$i]->getID().'&update_pg=1', _('Edit/Update Subproject').': <strong>'.$pg_arr[$i]->getName().'</strong>').'</p>';
 		}
-
 	}
-
 	pm_footer();
 }
