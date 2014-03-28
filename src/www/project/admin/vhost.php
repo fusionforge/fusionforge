@@ -27,6 +27,8 @@ require_once '../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'project/admin/project_admin_utils.php';
 
+global $HTML;
+
 if (!forge_get_config('use_project_vhost')) {
 	exit_disabled();
 }
@@ -37,9 +39,9 @@ session_require_perm ('project_admin', $group_id) ;
 $group = group_get_object($group_id);
 
 if (!$group || !is_object($group)) {
-        exit_error('Error','Error creating group object');
+        exit_error(_('Error:'),'Error creating group object');
 } elseif ($group->isError()) {
-        exit_error('ERROR',$group->getErrorMessage());
+        exit_error(_('Error:'),$group->getErrorMessage());
 }
 
 if (getStringFromRequest('createvhost')) {
@@ -55,9 +57,9 @@ if (getStringFromRequest('createvhost')) {
 			values ($1, $2, $3, $4)', array($vhost_name, $docdir, $cgidir, $group->getID()));
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$feedback .= "Cannot insert VHOST entry: ".db_error();
+			$error_msg = _('Cannot insert VHOST entry:').db_error();
 		} else {
-			$feedback .= _('Virtual Host scheduled for creation.');
+			$feedback = _('Virtual Host scheduled for creation.');
 			$group->addHistory('Added vhost '.$vhost_name.' ','');
 		}
 
@@ -92,7 +94,7 @@ if (getStringFromRequest('deletevhost')) {
 				$group_id));
 
 	if (!$res || db_affected_rows($res) < 1) {
-		$feedback .= "Could not delete VHOST entry:".db_error();
+		$error_msg .= _('Could not delete VHOST entry:').db_error();
 	} else {
 		$feedback .= _('VHOST deleted');
 		$group->addHistory('Virtual Host '.$row_vh['vhost_name'].' Removed','');
@@ -115,7 +117,7 @@ print '</p>';
 
 ?>
 
-<form name="new_vhost" action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group->getID().'&amp;createvhost=1'; ?>" method="post">
+<form name="new_vhost" action="<?php echo util_make_uri('/project/admin/?group_id='.$group->getID().'&createvhost=1'; ?>" method="post">
 <table>
 <tr>
 	<td> <?php echo _('New Virtual Host <em>(e.g. vhost.org)</em>') ?> </td>
@@ -137,20 +139,14 @@ if (db_numrows($res_db) > 0) {
 	$title=array();
 	$title[]=_('Virtual Host');
 	$title[]=_('Operations');
-	echo $GLOBALS['HTML']->listTableTop($title);
-
+	echo $HTML->listTableTop($title);
 	while ($row_db = db_fetch_array($res_db)) {
-
-		print '	<tr>
-			<td>'.$row_db['vhost_name'].'</td>
-			<td>[ <strong><a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group->getID().'&amp;vhostid='.$row_db['vhostid'].'&amp;deletevhost=1">'._('Delete').'</a></strong>]
-			</tr>
-		';
-
+		$cells = array();
+		$cells[][] = $row_db['vhost_name'];
+		$cells[][] = '[ <strong>'.util_make_link('/project/admin/?group_id='.$group->getID().'&vhostid='.$row_db['vhostid'].'&deletevhost=1', _('Delete')).'</strong>]';
+		echo $HTML->multiTableRow(array(), $cells);
 	}
-
-	echo $GLOBALS['HTML']->listTableBottom();
-
+	echo $HTML->listTableBottom();
 } else {
 	echo '<p>'._('No VHOSTs defined').'</p>';
 }
