@@ -281,6 +281,7 @@ generate_email_header()
 	MIME-Version: 1.0
 	Content-Type: text/plain; charset=UTF-8
 	Content-Transfer-Encoding: 8bit
+	From: $envelopesender
 	To: $recipients
 	X-Git-Refname: $refname
 	X-Git-Reftype: $refname_type
