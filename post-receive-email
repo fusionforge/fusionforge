@@ -90,6 +90,9 @@
 #   Default is "--stat --summary --find-copies-harder". Add -p to those
 #   options to include a unified diff of changes in addition to the usual
 #   summary output.
+# hooks.kgbconffile
+#   Full path to a configuration file for kgb-client, or unset/empty.
+#   If set, kgb-client will be invoked.
 #
 # Notes
 # -----
@@ -768,6 +771,7 @@ custom_showrev=$(git config hooks.showrev)
 maxlines=$(git config hooks.emailmaxlines)
 diffopts=$(git config hooks.diffopts)
 : ${diffopts:="--stat --summary --find-copies-harder"}
+kgbconffile=$(git config hooks.kgbconffile)
 
 # --- Main loop
 # Allow dual mode: run from the command line just like the update hook, or
@@ -778,9 +782,15 @@ if [ -n "$1" -a -n "$2" -a -n "$3" ]; then
 	# themselves
 	prep_for_email $2 $3 $1 && PAGER= generate_email
 else
+	ilines=
 	while read oldrev newrev refname
 	do
+		ilines="$ilines$oldrev $newrev $refname$nl"
 		prep_for_email $oldrev $newrev $refname || continue
 		generate_email $maxlines | send_mail
 	done
+	if [[ -n $kgbconffile && -s $kgbconffile ]]; then
+		print -nr -- "$ilines" | kgb-client \
+		    --conf "$kgbconffile" --repository git --git-reflog -
+	fi
 fi
