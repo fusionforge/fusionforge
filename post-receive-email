@@ -275,7 +275,6 @@ generate_email_header()
 	# Generate header
 	cat <<-EOF
 	To: $recipients
-	Subject: ${emailprefix}$projectdesc $refname_type $short_refname ${change_type}d. $describe
 	MIME-Version: 1.0
 	Content-Type: text/plain; charset=utf-8
 	Content-Transfer-Encoding: 8bit
@@ -283,6 +282,7 @@ generate_email_header()
 	X-Git-Reftype: $refname_type
 	X-Git-Oldrev: $oldrev
 	X-Git-Newrev: $newrev
+	$(perl -Mutf8 -MEncode -e "print encode('MIME-Q', 'Subject: ${emailprefix}$projectdesc $refname_type $short_refname ${change_type}d. $describe');")
 	Auto-Submitted: auto-generated
 
 	This is an automated email from the git hooks/post-receive script. It was
