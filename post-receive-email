@@ -1,4 +1,9 @@
-#!/bin/sh
+#!/bin/mksh
+#
+# Copyright © 2013
+#	Thorsten “mirabilos” Glaser <thorsten.glaser@teckids.org>
+# Copyright © 2011, 2012, 2013, 2014
+#	Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
 #
 # Copyright (c) 2007 Andy Parkins
 #
@@ -33,6 +38,9 @@
 #  # or
 #  ln -sf /etc/gforge/plugins/scmgit/post-receive-email.sh hooks/post-receive
 #  # but that can only be used for a Forge-controlled repository
+#
+# This hook script needs the “en_US.UTF-8” locale set up on the server.
+# The MirBSD Korn Shell (mksh) must be installed as /bin/mksh and usable.
 #
 # This hook script assumes it is enabled on the central repository of a
 # project, with all users pushing only to it and not between each other.  It
@@ -89,6 +97,16 @@
 # "X-Git-Newrev", and "X-Git-Reftype" to enable fine tuned filtering and
 # give information for debugging.
 #
+
+# ---------------------------- Environment Sanitisation
+
+nl='
+'
+unset LANGUAGE LC_ALL
+export LANG=C LC_ADDRESS=C LC_COLLATE=C LC_CTYPE=en_US.UTF-8 \
+    LC_IDENTIFICATION=C LC_MEASUREMENT=C LC_MESSAGES=C \
+    LC_MONETARY=C LC_NAME=C LC_NUMERIC=C LC_PAPER=C \
+    LC_TELEPHONE=C LC_TIME=C
 
 # ---------------------------- Functions
 
