@@ -51,7 +51,7 @@ if (getStringFromRequest('submit') && $user_name) {
 		</p>
 		<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 		<input type="hidden" name="user_name" value="<?php echo $user_name?>" />
-		Unsubscription type: <?php echo html_build_select_box_from_arrays(
+		<?php echo _('Unsubscription type:').html_build_select_box_from_arrays(
 			array(_('MAIL'),_('All')),
 			array(_('Admin-initiated mailings'),_('All site mailings')),
 			'type',false,false
