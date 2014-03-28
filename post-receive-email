@@ -278,10 +278,10 @@ generate_email_header()
 	# --- Email (all stdout will be the email)
 	# Generate header
 	cat <<-EOF
-	To: $recipients
 	MIME-Version: 1.0
 	Content-Type: text/plain; charset=UTF-8
 	Content-Transfer-Encoding: 8bit
+	To: $recipients
 	X-Git-Refname: $refname
 	X-Git-Reftype: $refname_type
 	X-Git-Oldrev: $oldrev
