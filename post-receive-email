@@ -64,9 +64,11 @@
 #   This is the list that all pushes of annotated tags will go to.  Leave it
 #   blank to default to the mailinglist field.  The announce emails lists
 #   the short log summary of the changes since the last annotated tag.
+# hooks.replyto
+#   If set, replies are requested to be directed to this eMail address.
 # hooks.envelopesender
 #   If set then the -f option is passed to sendmail to allow the envelope
-#   sender address to be set
+#   sender address to be set.  This is also used as Header From.
 # hooks.emailprefix
 #   All emails have their subjects prefixed with this prefix, or "[SCM]"
 #   if emailprefix is unset, to aid filtering
@@ -277,12 +279,16 @@ generate_email_header()
 {
 	# --- Email (all stdout will be the email)
 	# Generate header
+
+	routing_headers="To: $recipients"
+	[[ -n $envelopesender ]] && routing_headers="From: $envelopesender${nl}$routing_headers"
+	[[ -n $replyto ]] && routing_headers="$routing_headers${nl}Reply-To: $replyto"
+
 	cat <<-EOF
 	MIME-Version: 1.0
 	Content-Type: text/plain; charset=UTF-8
 	Content-Transfer-Encoding: 8bit
-	From: $envelopesender
-	To: $recipients
+	$routing_headers
 	X-Git-Refname: $refname
 	X-Git-Reftype: $refname_type
 	X-Git-Oldrev: $oldrev
@@ -787,6 +793,7 @@ maxlines=$(git config hooks.emailmaxlines)
 diffopts=$(git config hooks.diffopts)
 : ${diffopts:="-p --stat --summary --find-copies-harder"}
 kgbconffile=$(git config hooks.kgbconffile)
+replyto=$(git config hooks.replyto)
 
 # --- Main loop
 # Allow dual mode: run from the command line just like the update hook, or
