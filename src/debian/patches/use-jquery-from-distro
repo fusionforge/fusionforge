@@ -33,3 +33,20 @@ Index: src/www/include/html.php
  }
  
  function html_use_jqueryjqplot() {
+Index: src/etc/httpd.conf.d/vhost-main.inc
+===================================================================
+--- src.orig/etc/httpd.conf.d/vhost-main.inc
++++ src/etc/httpd.conf.d/vhost-main.inc
+@@ -34,9 +34,9 @@
+ 
+ Alias /images/ {core/source_path}/www/images/
+ Alias /scripts/coolfieldset/ {core/source_path}/vendor/coolfieldset/
+-Alias /scripts/jquery/ {core/source_path}/vendor/jquery/
+-Alias /scripts/jquery-ui/ {core/source_path}/vendor/jquery-ui/
+-Alias /scripts/jquery-tipsy/ {core/source_path}/vendor/jquery-tipsy/
++# Alias /scripts/jquery/ {core/source_path}/vendor/jquery/
++# Alias /scripts/jquery-ui/ {core/source_path}/vendor/jquery-ui/
++# Alias /scripts/jquery-tipsy/ {core/source_path}/vendor/jquery-tipsy/
+ Alias /scripts/jquery-storage/ {core/source_path}/vendor/jquery-storage/
+ Alias /scripts/jquery-simpletreemenu/ {core/source_path}/vendor/jquery-simpletreemenu/
+ Alias /scripts/jquery-jqplot/ {core/source_path}/vendor/jquery-jqplot/
