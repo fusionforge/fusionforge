@@ -75,7 +75,11 @@
 #   "%s" replaced with the commit id.  Defaults to "git rev-list -1
 #   --pretty %s", displaying the commit id, author, date and log
 #   message.  To list full patches separated by a blank line, you
-#   could set this to "git show -C %s; echo".
+#   could set this to "git show -C %s; echo". If you do that, make
+#   sure to remove the "-p" from hooks.diffopts to avoid getting
+#   two sets of diffs (the showrev diff is per commit, whereas the
+#   diffopts patch will show what really happened in the push as
+#   one diff).
 #   To list a gitweb/cgit URL *and* a full patch for each change set, use this:
 #     "t=%s; printf 'http://.../?id=%%s' \$t; echo;echo; git show -C \$t; echo"
 #   Be careful if "..." contains things that will be expanded by shell "eval"
@@ -87,9 +91,9 @@
 #   line is added indicating the number of suppressed lines.
 # hooks.diffopts
 #   Alternate options for the git diff-tree invocation that shows changes.
-#   Default is "--stat --summary --find-copies-harder". Add -p to those
-#   options to include a unified diff of changes in addition to the usual
-#   summary output.
+#   Default is "-p --stat --summary --find-copies-harder". Remove -p from
+#   those options to skil including a unified diff of changes in addition
+#   to the summary output. See hooks.showrev for more discussion on this.
 # hooks.kgbconffile
 #   Full path to a configuration file for kgb-client, or unset/empty.
 #   If set, kgb-client will be invoked.
@@ -780,7 +784,7 @@ emailprefix=$(git config hooks.emailprefix || echo '[SCM] ')
 custom_showrev=$(git config hooks.showrev)
 maxlines=$(git config hooks.emailmaxlines)
 diffopts=$(git config hooks.diffopts)
-: ${diffopts:="--stat --summary --find-copies-harder"}
+: ${diffopts:="-p --stat --summary --find-copies-harder"}
 kgbconffile=$(git config hooks.kgbconffile)
 
 # --- Main loop
