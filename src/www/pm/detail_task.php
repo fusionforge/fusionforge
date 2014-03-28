@@ -31,163 +31,99 @@ if (getStringFromRequest('commentsort') == 'anti') {
 }
 
 global $pt;
+global $HTML;
 
-pm_header(array('title'=>_('Task Detail'),'group_project_id'=>$group_project_id));
+pm_header(array('title' => _('Task Detail'), 'group_project_id' => $group_project_id));
 
+echo $HTML->listTableTop();
+$cells = array();
+$cells[][] = '<strong>'._('Submitted by')._(':').'</strong><br />'.$pt->getSubmittedRealName().'('.$pt->getSubmittedUnixName().')';
+$cells[][] = '<strong>'.util_make_link('/pm/t_follow.php/'.$project_task_id, 'Permalink'.(':')).'</strong><br />'.util_make_url('/pm/t_follow.php/'.$project_task_id);
+$cells[][] = '&nbsp;';
+echo $HTML->multiTableRow(array(), $cells);
+$cells = array();
+$cells[][] = '<strong>'._('Category')._(': ').'</strong><br />'.$pt->getCategoryName();
+$cells[][] = '<strong>'._('Task Detail Information (JSON)').(':').'</strong><br />'.
+		util_make_link('/pm/t_lookup.php?tid='.$project_task_id, 'application/json').
+		_(' or ').
+		util_make_link('/pm/t_lookup.php?text=1&amp;tid='.$project_task_id, 'text/plain');
+$cells[][] = '&nbsp;';
+echo $HTML->multiTableRow(array(), $cells);
+$cells = array();
+$cells[][] = '<strong>'._('Percent Complete')._(':').'</strong><br />'.$pt->getPercentComplete().'%';
+$cells[][] = '<strong>'._('Priority')._(':').'</strong><br />'.$pt->getPriority();
+$cells[][] = util_make_link('/export/rssAboTask.php?tid='.$project_task_id, html_image('ic/rss.png',16, 16, array('border' => '0')).' '._('Subscribe to task'));
+echo $HTML->multiTableRow(array(), $cells);
+$cells = array();
+$cells[][] = '<strong>'._('Start Date')._(':').'</strong><br />'.date(_('Y-m-d'), $pt->getStartDate());
+$cells[][] = '<strong>'._('End Date')._(':').'</strong><br />'.date(_('Y-m-d'), $pt->getEndDate());
+$cells[][] = '&nbsp;';
+echo $HTML->multiTableRow(array(), $cells);
+$cells = array();
+$cells[] = array('<strong>'._('Task Summary')._(':').'</strong><br />'.$pt->getSummary(), 'colspan' => 3);
+echo $HTML->multiTableRow(array(), $cells);
+$cells = array();
+$content = '<strong>'._('Original Comment')._(':').'</strong><br />';
+$sanitizer = new TextSanitizer();
+$body = $sanitizer->SanitizeHtml($pt->getDetails());
+if (strpos($body,'<') === false) {
+	$content .= nl2br($pt->getDetails());
+} else {
+	$content .= $body;
+}
+$cells[] = array($content, 'colspan' => 3);
+echo $HTML->multiTableRow(array(), $cells);
 ?>
-
-<table class="fullwidth">
-
-	<tr>
-		<td><strong><?php echo _('Submitted by') . _(': '); ?></strong><br /><?php echo $pt->getSubmittedRealName(); ?> (<?php echo $pt->getSubmittedUnixName(); ?>)</td>
-
-		<td>
-			<strong><a href="<?php echo util_make_url("/pm/t_follow.php/" . $project_task_id); ?>">Permalink</a>:</strong><br />
-			<?php echo util_make_url("/pm/t_follow.php/" . $project_task_id); ?>
-		</td>
-	</tr>
-
-	<tr>
-		<td>
-		<strong><?php echo _('Category') . _(': '); ?></strong><br />
-		<?php echo $pt->getCategoryName(); ?>
-		</td>
-
-		<td>
-		<strong>Task Detail Information (JSON):</strong><br />
-		<a href="<?php echo util_make_url("/pm/t_lookup.php?tid=" . $project_task_id); ?>">application/json</a>
-		or
-		<a href="<?php echo util_make_url("/pm/t_lookup.php?text=1&amp;tid=" . $project_task_id); ?>">text/plain</a>
-		</td>
-	</tr>
-
-	<tr>
-		<td>
-		<strong><?php echo _('Percent Complete') . _(': '); ?></strong><br />
-		<?php echo $pt->getPercentComplete(); ?>%
-		</td>
-
-		<td>
-		<strong><?php echo _('Priority') . _(': '); ?></strong><br />
-		<?php echo $pt->getPriority(); ?>
-		</td>
-
-		<td>
-		<?php echo util_make_link("/export/rssAboTask.php?tid=" .
-		    $project_task_id, html_image('ic/rss.png',
-		    16, 16, array('border' => '0')) . " " .
-		    _('Subscribe to task'));
-		?>
-		</td>
-	</tr>
-
-	<tr>
-		<td>
-		<strong><?php echo _('Start Date') . _(': '); ?></strong><br />
-		<?php echo date(_('Y-m-d'), $pt->getStartDate() ); ?>
-		</td>
-		<td>
-		<strong><?php echo _('End Date') . _(': '); ?></strong><br />
-		<?php echo date(_('Y-m-d'), $pt->getEndDate() ); ?>
-		</td>
-	</tr>
-
-  	<tr>
-		<td colspan="2">
-		<strong><?php echo _('Task Summary') . _(': '); ?></strong><br />
-		<?php echo $pt->getSummary(); ?>
-		</td>
-	</tr>
-
-	<tr>
-		<td colspan="2">
-		<strong><?php echo _('Original Comment') . _(': '); ?></strong><br />
-		<?php
-             $sanitizer = new TextSanitizer();
-             $body = $sanitizer->SanitizeHtml($pt->getDetails());
-             if (strpos($body,'<') === false) {
-                 echo nl2br($pt->getDetails());
-             } else {
-                 echo $body;
-             }
-        ?>
-		</td>
-	</tr>
-
-	<tr>
-		<td class="top">
-		<?php
-		/*
-			Get the list of ids this is assigned to and convert to array
-			to pass into multiple select box
-		*/
-
-		$result2=db_query_params ('SELECT users.user_name AS User_Name FROM users,project_assigned_to
-			WHERE users.user_id=project_assigned_to.assigned_to_id AND project_task_id=$1',
-			array($project_task_id));
-		ShowResultSet($result2,_('Assigned to'), false, false);
-		?>
-		</td>
-		<td class="top">
-		<?php
-		/*
-			Get the list of ids this is dependent on and convert to array
-			to pass into multiple select box
-		*/
-		$result2=db_query_params ('SELECT project_task.summary FROM project_dependencies,project_task
-			WHERE is_dependent_on_task_id=project_task.project_task_id
-			AND project_dependencies.project_task_id=$1',
-			array($project_task_id));
-		ShowResultSet($result2,_('Dependent on task'), false, false);
-		?>
-		</td>
-	</tr>
-
-	<tr>
-		<td>
-		<strong><?php echo _('Hours') ?></strong><br />
-		<?php echo $pt->getHours(); ?>
-		</td>
-
-		<td>
-		<strong><?php echo _('Status') ?></strong><br />
-		<?php
-		echo $pt->getStatusName();
-		?>
-		</td>
-	</tr>
-
-	<tr>
-		<td colspan="2">
-			<?php $pt->showDependentTasks(); ?>
-		</td>
-	</tr>
-
-	<tr>
-		<td colspan="2">
-			<?php $pt->showRelatedArtifacts(); ?>
-		</td>
-	</tr>
-
-	<tr>
-		<td colspan="2">
-			<?php $pt->showMessages($sort_comments_chronologically, "/pm/task.php?func=detailtask&amp;project_task_id=$project_task_id&amp;group_id=$group_id&amp;group_project_id=$group_project_id"); ?>
-		</td>
-	</tr>
+<tr>
+	<td class="top" colspan="2">
 	<?php
-		$hookParams['task_id'] = $project_task_id;
-		$hookParams['group_id'] = $group_id;
-		plugin_hook("task_extra_detail", $hookParams);
+	/*
+		Get the list of ids this is assigned to and convert to array
+		to pass into multiple select box
+	*/
+
+	$result2=db_query_params ('SELECT users.user_name AS User_Name FROM users,project_assigned_to
+		WHERE users.user_id=project_assigned_to.assigned_to_id AND project_task_id=$1',
+		array($project_task_id));
+	ShowResultSet($result2,_('Assigned to'), false, false);
 	?>
-	<tr>
-		<td colspan="2">
-			<?php $pt->showHistory(); ?>
-		</td>
-	</tr>
-
-</table>
+	</td>
+	<td class="top">
+	<?php
+	/*
+		Get the list of ids this is dependent on and convert to array
+		to pass into multiple select box
+	*/
+	$result2=db_query_params ('SELECT project_task.summary FROM project_dependencies,project_task
+		WHERE is_dependent_on_task_id=project_task.project_task_id
+		AND project_dependencies.project_task_id=$1',
+		array($project_task_id));
+	ShowResultSet($result2,_('Dependent on task'), false, false);
+	?>
+	</td>
+</tr>
 <?php
-
+$cells = array();
+$cells[][] = '<strong>'._('Hours').'</strong><br />'.$pt->getHours();
+$cells[][] = '<strong>'._('Status').'</strong><br />'.$pt->getStatusName();
+$cells[][] = '&nbsp;';
+echo $HTML->multiTableRow(array(), $cells);
+$cells = array();
+$cells[] = array($pt->showDependentTasks(), 'colspan' => 3);
+echo $HTML->multiTableRow(array(), $cells);
+$cells = array();
+$cells[] = array($pt->showRelatedArtifacts(), 'colspan' => 3);
+echo $HTML->multiTableRow(array(), $cells);
+$cells = array();
+$cells[] = array($pt->showMessages($sort_comments_chronologically, "/pm/task.php?func=detailtask&amp;project_task_id=$project_task_id&amp;group_id=$group_id&amp;group_project_id=$group_project_id"), 'colspan' => 3);
+echo $HTML->multiTableRow(array(), $cells);
+$hookParams['task_id'] = $project_task_id;
+$hookParams['group_id'] = $group_id;
+plugin_hook('task_extra_detail', $hookParams);
+$cells = array();
+$cells[] = array($pt->showHistory(), 'colspan' => 3);
+echo $HTML->multiTableRow(array(), $cells);
+echo $HTML->listTableBottom();
 pm_footer();
 
 // Local Variables:

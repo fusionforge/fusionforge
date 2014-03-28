@@ -117,7 +117,7 @@ print '</p>';
 
 ?>
 
-<form name="new_vhost" action="<?php echo util_make_uri('/project/admin/?group_id='.$group->getID().'&createvhost=1'; ?>" method="post">
+<form name="new_vhost" action="<?php echo util_make_uri('/project/admin/?group_id='.$group->getID().'&createvhost=1'); ?>" method="post">
 <table>
 <tr>
 	<td> <?php echo _('New Virtual Host <em>(e.g. vhost.org)</em>') ?> </td>
