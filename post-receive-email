@@ -554,11 +554,11 @@ generate_atag_email()
 		# performed on them
 		if [ -n "$prevtag" ]; then
 			# Show changes since the previous release
-			git shortlog "$prevtag..$newrev"
+			git shortlog --encoding=UTF-8 "$prevtag..$newrev"
 		else
 			# No previous tag, show all the changes since time
 			# began
-			git shortlog $newrev
+			git shortlog --encoding=UTF-8 $newrev
 		fi
 		;;
 	*)
