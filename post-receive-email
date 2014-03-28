@@ -733,7 +733,12 @@ limit_lines()
 
 send_mail()
 {
-	if [ -n "$envelopesender" ]; then
+	local x=$(cat; echo x)
+
+	x=${x%x}
+	[[ -n $x ]] || return 1
+
+	print -nr -- "$x" | if [ -n "$envelopesender" ]; then
 		/usr/sbin/sendmail -t -f "$envelopesender"
 	else
 		/usr/sbin/sendmail -t
