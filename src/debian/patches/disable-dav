@@ -2,8 +2,8 @@ Author: Roland Mas <lolando@debian.org>
 Description: Disable SVN-over-WebDAV
 Index: src/plugins/scmsvn/etc/scmsvn.ini
 ===================================================================
---- src.orig/plugins/scmsvn/etc/scmsvn.ini	2014-03-23 21:54:18.387625479 +0100
-+++ src/plugins/scmsvn/etc/scmsvn.ini	2014-03-23 21:54:18.383625587 +0100
+--- src.orig/plugins/scmsvn/etc/scmsvn.ini
++++ src/plugins/scmsvn/etc/scmsvn.ini
 @@ -7,9 +7,9 @@
  ; is available in installation_environment = development only.
  plugin_status = valid
@@ -18,8 +18,8 @@ Index: src/plugins/scmsvn/etc/scmsvn.ini
  default_server = "$core/web_host"
 Index: src/plugins/scmgit/etc/scmgit.ini
 ===================================================================
---- src.orig/plugins/scmgit/etc/scmgit.ini	2014-03-23 21:54:18.387625479 +0100
-+++ src/plugins/scmgit/etc/scmgit.ini	2014-03-23 21:54:18.383625587 +0100
+--- src.orig/plugins/scmgit/etc/scmgit.ini
++++ src/plugins/scmgit/etc/scmgit.ini
 @@ -15,11 +15,9 @@
  scm_root = "scmrepos/git"
  
