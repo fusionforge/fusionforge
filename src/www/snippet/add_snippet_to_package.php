@@ -82,7 +82,7 @@ if (session_loggedin()) {
 						array($snippet_version_id));
 			if (!$result || db_numrows($result) < 1) {
 				echo $HTML->error_msg(_('Error: snippet does not exist'));
-				echo util_make_link ('/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id,_('Back To Add Page'));
+				echo util_make_link('/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id,_('Back To Add Page'));
 				handle_add_exit();
 			}
 
@@ -96,7 +96,7 @@ if (session_loggedin()) {
 							$snippet_version_id));
 			if ($result && db_numrows($result) > 0) {
 				echo $HTML->error_msg(_('Error: That snippet was already added to this package.'));
-				echo util_make_link ('/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id,_('Back To Add Page'));
+				echo util_make_link('/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id,_('Back To Add Page'));
 				handle_add_exit();
 			}
 
@@ -113,7 +113,7 @@ if (session_loggedin()) {
 			}
 		} else {
 			echo $HTML->error_msg(_('Error: Go back and fill in all the information'));
-			echo util_make_link ('/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id,_('Back To Add Page'));
+			echo util_make_link('/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id,_('Back To Add Page'));
 			handle_add_exit();
 		}
 	}
@@ -186,9 +186,9 @@ for ($i=0; $i<$combolistrows; $i++)
 		echo $HTML->listTableTop();
 		for ($i=0; $i<$rows; $i++) {
 			echo '
-			<tr '. $HTML->boxGetAltRowStyle($i) .'><td class="align-center">
-				<a href="'.util_make_url ('/snippet/delete.php?type=frompackage&snippet_version_id='.db_result($result,$i,'snippet_version_id').'&snippet_package_version_id='.$snippet_package_version_id).
-				'">' . html_image("ic/trash.png","16","16") . '</a></td><td style="width:99%">'.
+			<tr '. $HTML->boxGetAltRowStyle($i) .'><td class="align-center">'.
+				util_make_link('/snippet/delete.php?type=frompackage&snippet_version_id='.db_result($result,$i,'snippet_version_id').'&snippet_package_version_id='.$snippet_package_version_id,
+						html_image("ic/trash.png","16","16")).'</td><td style="width:99%">'.
 				db_result($result,$i,'name').' '.db_result($result,$i,'version')."</td></tr>";
 
 			$last_group=db_result($result,$i,'group_id');

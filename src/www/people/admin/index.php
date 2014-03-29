@@ -162,10 +162,10 @@ if (forge_check_global_perm('forge_admin')) {
 		people_header(array('title' => _('People Administration')));
 
 		echo '<p>
-			<a href="'.getStringFromServer('PHP_SELF').'?people_cat=1" >'._('Add Job Categories').'</a><br />';
+			'.util_make_link('/people/admin/?people_cat=1', _('Add Job Categories')).'<br />';
 	//	echo "\nAdd categories of bugs like, 'mail module','gant chart module','interface', etc<p>";
 
-		echo "\n".'<a href="'.getStringFromServer('PHP_SELF').'?people_skills=1" >'._('Add Job Skills').'</a><br />';
+		echo "\n".util_make_link('/people/admin/?people_skills=1', _('Add Job Skills')).'<br />';
 	//	echo "\nAdd Groups of bugs like 'future requests','unreproducible', etc<p>";
 		echo '</p>';
 

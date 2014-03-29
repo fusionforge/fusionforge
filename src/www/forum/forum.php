@@ -259,11 +259,7 @@ if ($forum_id) {
 		while (($i < $rows) && ($total_rows < $max_rows)) {
 			$msg =& $msg_arr["0"][$i];
 			$total_rows++;
-
-			$ret_val .= '<tr '. $HTML->boxGetAltRowStyle($total_rows) .'>
-				<td><a href="'.util_make_url ('/forum/message.php?msg_id='.$msg->getID().
-							      '&amp;group_id='.$group_id).'&amp;reply=0">'.
-				html_image('ic/msg.png').' ';
+			$cells = array();
 			/*
 				See if this message is new or not
 				If so, highlite it in bold
@@ -278,10 +274,10 @@ if ($forum_id) {
 			/*
 				show the subject and poster
 			*/
-			$ret_val .= $bold_begin.$msg->getSubject() .$bold_end.'</a></td>'.
-				'<td>'.util_display_user($msg->getPosterName(), $msg->getPosterID(), $msg->getPosterRealName()).'</td>'.
-				'<td>'.relative_date($msg->getPostDate()).'</td></tr>';
-
+			$cells[][] = util_make_link('/forum/message.php?msg_id='.$msg->getID().'&group_id='.$group_id.'&reply=0', html_image('ic/msg.png').' '.$bold_begin.$msg->getSubject().$bold_end);
+			$cells[][] = util_display_user($msg->getPosterName(), $msg->getPosterID(), $msg->getPosterRealName());
+			$cells[][] = relative_date($msg->getPostDate());
+			$ret_val .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($total_rows, true)), $cells);
 			if ($msg->hasFollowups()) {
 				$ret_val .= $fh->showSubmessages($msg_arr,$msg->getID(),1);
 			}

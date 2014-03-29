@@ -89,7 +89,7 @@ if ($group_id) {
 				AND people_job.status_id=1
 				ORDER BY post_date DESC', array(), 5);
         echo people_show_job_list($result);
-        echo '<p><a href="helpwanted-latest.php">['._('more latest posts').']</a></p>';
+        echo '<p>'.util_make_link('/people/helpwanted-latest.php', '['._('more latest posts').']').'</p>';
 
 }
 

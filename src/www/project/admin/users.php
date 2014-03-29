@@ -239,10 +239,9 @@ project_admin_header(array('title'=>sprintf(_('Members of %s'), $group->getPubli
 		<input type="hidden" name="form_unix_name" value="<?php echo $user->getUnixName(); ?>" />
 		<table width="100%">
 			<tr>
-				<td style="white-space: nowrap;"><a
-					href="/users/<?php
-						echo $user->getUnixName();
-					?>"><?php echo $user->getRealName(); ?></a>
+				<td style="white-space: nowrap;"><?php
+					echo util_display_user($user->getUnixName(), $user->getId(), $user->getRealName());
+					?>
 				</td>
 				<td style="white-space: nowrap; text-align: right;"><?php
 					echo role_box($group_id,'role_id'); ?>
@@ -282,10 +281,8 @@ project_admin_header(array('title'=>sprintf(_('Members of %s'), $group->getPubli
 			<input type="submit" name="adduser" value="<?php echo _("Add Member") ?>" />
 		</div>
 		</form></div>
-		<div style="clear:both;">
-			<a href="massadd.php?group_id=<?php echo $group_id; ?>">
-				<?php echo _("Add Users From List"); ?>
-			</a>
+		<div style="clear:both;"><?php
+			echo util_make_link('/project/admin/massadd.php?group_id='.$group_id, _('Add Users From List')); ?>
 		</div>
 			<?php
 		}
@@ -323,15 +320,13 @@ foreach ($members as $user) {
 	foreach ($roles as $role) {
 		echo '<tr '. $HTML->boxGetAltRowStyle($i) . '>' ;
 		if (!$seen) {
-			echo '<td style="white-space: nowrap;" rowspan="'.(count($roles)+1).'">
-			<a href="/users/'.$user->getUnixName().'">';
+			echo '<td style="white-space: nowrap;" rowspan="'.(count($roles)+1).'">';
 			$display = $user->getRealName();
-			if (!empty($display)) {
-				echo $user->getRealName();
-			} else {
-				echo $user->getUnixName();
+			if (empty($display)) {
+				$display = $user->getUnixName();
 			}
-			echo "</a></td>\n";
+			echo util_display_user($user->getUnixName(), $user->getID(), $display);
+			echo "</td>\n";
 			$seen = true ;
 		}
 

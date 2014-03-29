@@ -58,14 +58,13 @@ class ProjectTaskHTML extends ProjectTask {
 	}
 
 	function showDependentTasks () {
-
+		global $HTMl;
 		$result=db_query_params ('SELECT project_task.project_task_id,project_task.summary
 			FROM project_task,project_dependencies
 			WHERE project_task.project_task_id=project_dependencies.project_task_id
 			AND project_dependencies.is_dependent_on_task_id=$1',
 			array($this->getID() ));
 		$rows=db_numrows($result);
-
 		if ($rows > 0) {
 			echo '<h3>'._('Tasks That Depend on This Task').'</h3>';
 
@@ -73,24 +72,22 @@ class ProjectTaskHTML extends ProjectTask {
 			$title_arr[]=_('Task Id');
 			$title_arr[]=_('Task Summary');
 
-			echo $GLOBALS['HTML']->listTableTop ($title_arr);
+			echo $HTMl->listTableTop ($title_arr);
 
-			for ($i=0; $i < $rows; $i++) {
-				echo '
-				<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
-					<td>'
-					.util_make_link ('/pm/task.php?func=detailtask&project_task_id='. db_result($result, $i, 'project_task_id'). '&group_id='. $this->ProjectGroup->Group->getID() . '&group_project_id='. $this->ProjectGroup->getID(), db_result($result, $i, 'project_task_id')).'</td>
-					<td>'.db_result($result, $i, 'summary').'</td></tr>';
+			for ($i = 0; $i < $rows; $i++) {
+				$cells = array();
+				$cells[][] = util_make_link('/pm/task.php?func=detailtask&project_task_id='. db_result($result, $i, 'project_task_id'). '&group_id='. $this->ProjectGroup->Group->getID() . '&group_project_id='. $this->ProjectGroup->getID(), db_result($result, $i, 'project_task_id'));
+				$cells[][] = db_result($result, $i, 'summary');
+				echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
 			}
-
-			echo $GLOBALS['HTML']->listTableBottom();
-
+			echo $HTMl->listTableBottom();
 		} else {
 			echo '<p>'._('No Tasks are Dependent on This Task').'</p>';
 		}
 	}
 
 	function showRelatedArtifacts() {
+		global $HTML;
 		$res=$this->getRelatedArtifacts();
 
 		$rows=db_numrows($res);
@@ -110,26 +107,27 @@ class ProjectTaskHTML extends ProjectTask {
 			$title_arr[]=_('Open Date');
 			(($is_admin) ? $title_arr[]=_('Remove Relation') : '');
 
-			echo $GLOBALS['HTML']->listTableTop ($title_arr);
+			echo $HTML->listTableTop ($title_arr);
 
-			for ($i=0; $i < $rows; $i++) {
-				echo '
-				<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
-					<td>'.util_make_link ('/tracker/?func=detail&aid='.db_result($res,$i,'artifact_id').'&group_id='.db_result($res,$i,'group_id').'&atid='.db_result($res,$i,'group_artifact_id'), db_result($res,$i,'summary')).'</td>
-					<td>'. db_result($res,$i,'name') .'</td>
-					<td>'. db_result($res,$i,'status_name') . '</td>
-					<td>'. date(_('Y-m-d H:i'),db_result($res,$i,'open_date')) .'</td>'.
-					(($is_admin) ? '<td><input type="checkbox" name="rem_artifact_id[]" value="'.db_result($res,$i,'artifact_id').'" /></td>' : '').
-					'</tr>';
+			for ($i = 0; $i < $rows; $i++) {
+				$cells = array();
+				$cells[][] = util_make_link('/tracker/?func=detail&aid='.db_result($res,$i,'artifact_id').'&group_id='.db_result($res,$i,'group_id').'&atid='.db_result($res,$i,'group_artifact_id'), db_result($res,$i,'summary'));
+				$cells[][] = db_result($res,$i,'name');
+				$cells[][] = db_result($res,$i,'status_name');
+				$cells[][] = date(_('Y-m-d H:i'),db_result($res,$i,'open_date'))
+				if ($is_admin) {
+					$cells[][] = '<input type="checkbox" name="rem_artifact_id[]" value="'.db_result($res,$i,'artifact_id').'" />';
+				}
+				echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
 			}
-
-			echo $GLOBALS['HTML']->listTableBottom();
+			echo $HTML->listTableBottom();
 		} else {
 			echo '<p>'._('No Related Tracker Items Have Been Added').'</p>';
 		}
 	}
 
-	function showMessages($asc=true,$whereto='/') {
+	function showMessages($asc = true, $whereto = '/') {
+		global $HTML;
 		/*
 			Show the details rows from task_history
 		*/
@@ -140,48 +138,40 @@ class ProjectTaskHTML extends ProjectTask {
 			echo '<h3>'._('Comments')._(': ');
 
 			if ($asc) {
-				echo '<a href="' .
-					util_make_url($whereto . '&amp;commentsort=anti') .
-					'">' . _('Sort comments antichronologically') . '</a>';
+				echo util_make_link($whereto.'&commentsort=anti', _('Sort comments antichronologically'));
 			} else {
-				echo '<a href="' .
-					util_make_url($whereto . '&amp;commentsort=chrono') .
-					'">' . _('Sort comments chronologically') . '</a>';
+				echo util_make_link($whereto.'&commentsort=chrono', _('Sort comments chronologically'));
 			}
 			echo "</h3>\n";
 
-			$title_arr=array();
-			$title_arr[]=_('Comment');
-			$title_arr[]=_('Date');
-			$title_arr[]=_('By');
+			$title_arr = array();
+			$title_arr[] = _('Comment');
+			$title_arr[] = _('Date');
+			$title_arr[] = _('By');
 
-			echo $GLOBALS['HTML']->listTableTop ($title_arr);
+			echo $HTML->listTableTop($title_arr);
 
-			for ($i=0; $i < $rows; $i++) {
-				echo '
-				<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
-				<td>';
+			for ($i = 0; $i < $rows; $i++) {
+				$cells = array();
 				$sanitizer = new TextSanitizer();
 				$body = $sanitizer->SanitizeHtml(db_result($result, $i, 'body'));
 				if (strpos($body,'<') === false) {
-					echo nl2br(db_result($result, $i, 'body'));
+					$cells[][] = nl2br(db_result($result, $i, 'body'));
 				} else {
-					echo $body;
+					$cells[][] = $body;
 				}
-
-				echo '</td>
-					<td class="top">'.date(_('Y-m-d H:i'),db_result($result, $i, 'postdate')).'</td>
-					<td class="top">'.db_result($result, $i, 'user_name').'</td></tr>';
+				$cells[][] = date(_('Y-m-d H:i'),db_result($result, $i, 'postdate'));
+				$cells[][] = db_result($result, $i, 'user_name');
+				echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
 			}
-
-			echo $GLOBALS['HTML']->listTableBottom();
-
+			echo $HTML->listTableBottom();
 		} else {
 			echo '<p>'._('No Comments Have Been Posted').'</p>';
 		}
 	}
 
 	function showHistory() {
+		global $HTML;
 		/*
 			show the project_history rows that are
 			relevant to this project_task_id, excluding details
@@ -199,42 +189,32 @@ class ProjectTaskHTML extends ProjectTask {
 			$title_arr[]=_('Date');
 			$title_arr[]=_('By');
 
-			echo $GLOBALS['HTML']->listTableTop ($title_arr);
+			echo $HTML->listTableTop ($title_arr);
 
-			for ($i=0; $i < $rows; $i++) {
-				$field=db_result($result, $i, 'field_name');
-
-				echo '
-					<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td>'.$field.'</td><td>';
-
+			for ($i = 0; $i < $rows; $i++) {
+				$field = db_result($result, $i, 'field_name');
+				$cells = array();
+				$cells[][] = $field;
+				$content = '';
 				if ($field == 'status_id') {
 //tdP - convert to actual status name
-					echo db_result($result, $i, 'old_value');
-
+					$content .= db_result($result, $i, 'old_value');
 				} elseif ($field == 'category_id') {
 //tdP convert to actual category_name
-					echo db_result($result, $i, 'old_value');
-
+					$content .= db_result($result, $i, 'old_value');
 				} elseif ($field == 'start_date') {
-
-					echo date('Y-m-d',db_result($result, $i, 'old_value'));
-
+					$content .= date('Y-m-d', db_result($result, $i, 'old_value'));
 				} elseif ($field == 'end_date') {
-
-					echo date('Y-m-d',db_result($result, $i, 'old_value'));
-
+					$content .= date('Y-m-d', db_result($result, $i, 'old_value'));
 				} else {
-
-					echo db_result($result, $i, 'old_value');
-
+					$content .= db_result($result, $i, 'old_value');
 				}
-				echo '</td>
-					<td>'. date(_('Y-m-d H:i'),db_result($result, $i, 'mod_date')) .'</td>
-					<td>'.db_result($result, $i, 'user_name').'</td></tr>';
+				$cells[][] = $content;
+				$cells[][] = date(_('Y-m-d H:i'),db_result($result, $i, 'mod_date'));
+				$cells[][] = db_result($result, $i, 'user_name');
+				echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
 			}
-
-			echo $GLOBALS['HTML']->listTableBottom();
-
+			echo $HTML->listTableBottom();
 		} else {
 			echo '<p>'._('No Changes Have Been Made').'</p>';
 		}
