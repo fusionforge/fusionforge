@@ -127,7 +127,7 @@ function hide_edit_button(id) {
 				echo '</td></tr>';
 			}
 
-			echo $GLOBALS['HTML']->listTableBottom();
+			echo '</tbody></table>';
 
 		} else {
 			echo '

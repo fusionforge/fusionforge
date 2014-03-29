@@ -807,7 +807,7 @@ function html_build_checkbox($name, $value, $checked) {
  * @see html_build_priority_select_box()
  */
 function build_priority_select_box($name = 'priority', $checked_val = '3', $nochange = false) {
-	html_build_priority_select_box($name, $checked_val, $nochange);
+	echo html_build_priority_select_box($name, $checked_val, $nochange);
 }
 
 /**
@@ -819,20 +819,20 @@ function build_priority_select_box($name = 'priority', $checked_val = '3', $noch
  * @param	bool	$nochange	Whether to make 'No Change' selected.
  */
 function html_build_priority_select_box($name = 'priority', $checked_val = '3', $nochange = false) {
-?>
-<select id="tracker-<?php echo $name ?>" name="<?php echo $name; ?>"
-		title="<?php echo util_html_secure(html_get_tooltip_description($name)) ?>">
-<?php if ($nochange) { ?>
-	<option value="100"<?php if ($nochange) {echo " selected=\"selected\"";} ?>><?php echo _('No Change') ?></option>
-<?php }  ?>
-	<option value="1"<?php if ($checked_val == "1") {echo " selected=\"selected\"";} ?>>1 - <?php echo _('Lowest') ?></option>
-	<option value="2"<?php if ($checked_val == "2") {echo " selected=\"selected\"";} ?>>2</option>
-	<option value="3"<?php if ($checked_val == "3") {echo " selected=\"selected\"";} ?>>3</option>
-	<option value="4"<?php if ($checked_val == "4") {echo " selected=\"selected\"";} ?>>4</option>
-	<option value="5"<?php if ($checked_val == "5") {echo " selected=\"selected\"";} ?>>5 - <?php echo _('Highest') ?></option>
-</select>
-<?php
-
+	$html = '<select id="tracker-'.$name.'" name="'.$name.'" title="'.util_html_secure(html_get_tooltip_description($name)).'">';
+	if ($nochange) {
+		$html .= '<option value="100" selected="selected" >'._('No Change').'</option>';
+	}
+	$labelOption = array('1 - '._('Lowest'), '2', '3', '4', '5 - '._('Highest'));
+	for ($i = 1; $i <= 5; $i++) {
+		$html .= '<option value="'.$i.'" ';
+		if ($checked_val == $i) {
+			$html .= 'selected="selected" ';
+		}
+		$html .= '>'.$labelOption[$i -1].'</option>';
+	}
+	$html .= '</select>';
+	return $html;
 }
 
 /**

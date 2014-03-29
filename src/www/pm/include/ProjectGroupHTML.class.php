@@ -150,25 +150,30 @@ class ProjectGroupHTML extends ProjectGroup {
 		return html_build_select_box($res,$name,$checked,$show_100,$text_100);
 	}
 
-	function percentCompleteBox($name='percent_complete',$selected=0) {
-		echo '
+	function percentCompleteBox($name='percent_complete', $selected = 0, $display = true) {
+		$html = '
 		<select name="'.$name.'">';
-		echo '
+		$html .= '
 		<option value="0">'._('Not Started'). '</option>';
 		for ($i=5; $i<101; $i+=5) {
-			echo '
+			$html .= '
 			<option value="'.$i.'"';
 			if ($i==$selected) {
-				echo ' selected="selected"';
+				$html .= ' selected="selected"';
 			}
-			echo '>'.$i.'%</option>';
+			$html .= '>'.$i.'%</option>';
 		}
-		echo '
+		$html .= '
 		</select>';
+		if ($display) {
+			echo $html;
+		} else {
+			return $html;
+		}
 	}
 
-	function showMonthBox($name,$select_month=0) {
-		echo '
+	function showMonthBox($name, $select_month = 0, $display = true) {
+		$html = '
 		<select name="'.$name.'" size="1">';
 		$monthlist = array(
 			'1'=>_('January'),
@@ -186,79 +191,103 @@ class ProjectGroupHTML extends ProjectGroup {
 
 		for ($i=1; $i<=count($monthlist); $i++) {
 			if ($i == $select_month) {
-				echo '
+				$html .= '
 				<option selected="selected" value="'.$i.'">'.$monthlist[$i].'</option>';
 			} else {
-				echo '
+				$html .= '
 				<option value="'.$i.'">'.$monthlist[$i].'</option>';
 			}
 		}
-		echo '
+		$html .= '
 		</select>';
+		if ($display) {
+			echo $html;
+		} else {
+			return $html;
+		}
 	}
 
-	function showDayBox($name,$day=1) {
-		echo '
+	function showDayBox($name, $day = 1, $display = true) {
+		$html = '
 		<select name="'.$name.'" size="1">';
 		for ($i=1; $i<=31; $i++) {
 			if ($i == $day) {
-				echo '
+				$html .= '
 				<option selected="selected" value="'.$i.'">'.$i.'</option>';
 			} else {
-				echo '
+				$html .= '
 				<option value="'.$i.'">'.$i.'</option>';
 			}
 		}
-		echo '
+		$html .= '
 		</select>';
+		if ($display) {
+			echo $html;
+		} else {
+			return $html;
+		}
 	}
 
-	function showYearBox($name,$year=1) {
+	function showYearBox($name, $year = 1, $display = true) {
 		$current_year = date('Y');
-		echo '
+		$html = '
 		<select name="'.$name.'" size="1">';
 		for ($i=$current_year-5; $i<=$current_year+8; $i++) {
 			if ($i == $year) {
-				echo '
+				$html .= '
 				<option selected="selected" value="'.$i.'">'.$i.'</option>';
 			} else {
-				echo '
+				$html .= '
 				<option value="'.$i.'">'.$i.'</option>';
 			}
 		}
-		echo '
+		$html .= '
 		</select>';
+		if ($display) {
+			echo $html;
+		} else {
+			return $html;
+		}
 	}
 
-	function showHourBox($name,$hour=1) {
-
-		echo '
+	function showHourBox($name, $hour = 1, $display = true) {
+		$html = '
 		<select name="'.$name.'" size="1">';
 		for ($i=0; $i<=23; $i++) {
 			if ($i == $hour) {
-				echo '
+				$html .= '
 				<option selected="selected" value="'.$i.'">'.$i.'</option>';
 			} else {
-				echo '
+				$html .= '
 				<option value="'.$i.'">'.$i.'</option>';
 			}
 		}
-		echo '
+		$html .= '
 		</select>';
+		if ($display) {
+			echo $html;
+		} else {
+			return $html;
+		}
 	}
 
-	function showMinuteBox($name,$minute=0) {
-		echo '	<select name="'.$name.'" size="1">';
+	function showMinuteBox($name, $minute = 0, $display = true) {
+		$html = '	<select name="'.$name.'" size="1">';
 		for ($i=0; $i<=45; $i=$i+15) {
 			if ($i == $minute) {
-				echo '	<option selected="selected" value="'.$i.'">'.$i.'</option>';
+				$html .= '	<option selected="selected" value="'.$i.'">'.$i.'</option>';
 			} else {
-				echo '
+				$html .= '
 				<option value="'.$i.'">'.$i.'</option>';
 			}
 		}
-		echo '
+		$html .= '
 		</select>';
+		if ($display) {
+			echo $html;
+		} else {
+			return $html;
+		}
 	}
 
 	function renderAssigneeList($assignee_ids) {

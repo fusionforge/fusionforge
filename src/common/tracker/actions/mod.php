@@ -160,14 +160,9 @@ echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 		<td>
 		</td>
 	</tr>
-	<tr>
-		<td>
 	<?php
 		$ath->renderExtraFields($ah->getExtraFieldData(),true,'none',false,'Any',array(),false,'UPDATE');
 	?>
-		</td>
-		<td></td>
-	</tr>
 	<tr>
 		<td><strong><?php echo _('Assigned to')._(': ') ?></strong><br />
 		<?php
@@ -190,8 +185,7 @@ echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 		<td>
 		</td>
 	</tr>
-	<?php } ?>
-	<?php
+	<?php }
 		$ath->renderRelatedTasks($group, $ah);
 	?>
 	<tr>

@@ -408,203 +408,203 @@ switch (getStringFromRequest('func')) {
 		include $gfcommon.'tracker/actions/browse.php';
 		break;
 	}
-		case 'monitor' : {
-			if (!session_loggedin()) {
-				exit_permission_denied();
-			}
-			$start = getIntFromRequest('start');
-			$stop = getIntFromRequest('stop');
-			$artifact_id = getIntFromRequest('artifact_id');
-
-			// Fix to prevent collision with the start variable used in browse.
-			$_GET['start'] = 0;
-
-			if ($artifact_id) {
-				$ah=new ArtifactHtml($ath,$artifact_id);
-				if (!$ah || !is_object($ah)) {
-					exit_error(_('Artifact Could Not Be Created'),'tracker');
-				} elseif ($ah->isError()) {
-					exit_error($ah->getErrorMessage(),'tracker');
-				} else {
-					if ($start && $ah->isMonitoring())
-						$feedback = _('Monitoring Started');
-					elseif ($stop && !$ah->isMonitoring())
-						$feedback = _('Monitoring Stopped');
-					else {
-						$ah->setMonitor();
-						$error_msg = $ah->getErrorMessage();
-					}
-					include $gfcommon.'tracker/actions/browse.php';
-				}
-			} else {
-				$at=new ArtifactType($group,$atid);
-				if (!$at || !is_object($at)) {
-					exit_error(_('Artifact Could Not Be Created'),'tracker');
-				} elseif ($at->isError()) {
-					exit_error($at->getErrorMessage(),'tracker');
-				} else {
-					if ($start && $at->isMonitoring())
-						$feedback = _('Monitoring Started');
-					elseif ($stop && !$at->isMonitoring())
-						$feedback = _('Monitoring Deactivated');
-					else {
-						$at->setMonitor();
-						$feedback=$at->getErrorMessage();
-						$at->clearError();
-					}
-					include $gfcommon.'tracker/actions/browse.php';
-				}
-			}
-			break;
+	case 'monitor' : {
+		if (!session_loggedin()) {
+			exit_permission_denied();
 		}
+		$start = getIntFromRequest('start');
+		$stop = getIntFromRequest('stop');
+		$artifact_id = getIntFromRequest('artifact_id');
 
+		// Fix to prevent collision with the start variable used in browse.
+		$_GET['start'] = 0;
 
-		//
-		//	Show delete form
-		//
-		case 'deleteartifact' : {
-			session_require_perm ('tracker', $ath->getID(), 'manager') ;
-
-			$aid = getIntFromRequest('aid');
-			$ah= new ArtifactHtml($ath,$aid);
-			if (!$ah || !is_object($ah)) {
-				exit_error(_('Artifact Could Not Be Created'),'tracker');
-			} elseif ($ah->isError()) {
-				exit_error($ah->getErrorMessage(),'tracker');
-			}
-			include $gfcommon.'tracker/actions/deleteartifact.php';
-			break;
-		}
-
-		//
-		//	Handle the actual delete
-		//
-
-		case 'postdeleteartifact' : {
-			if (!form_key_is_valid(getStringFromRequest('form_key'))) {
-				exit_form_double_submit('tracker');
-			}
-			session_require_perm ('tracker', $ath->getID(), 'manager') ;
-
-			$aid = getStringFromRequest('aid');
-			$ah= new ArtifactHtml($ath,$aid);
-			if (!$ah || !is_object($ah)) {
-				exit_error(_('Artifact Could Not Be Created'),'tracker');
-			} elseif ($ah->isError()) {
-				exit_error($ah->getErrorMessage(),'tracker');
-			}
-			if (!getStringFromRequest('confirm_delete')) {
-				$warning_msg .= _('Confirmation failed. Artifact not deleted');
-			}
-			else {
-				if (!$ah->delete(true)) {
-					$error_msg .= _('Delete failed')._(': ').$ah->getErrorMessage();
-				} else {
-					$feedback .= _('Artifact Deleted Successfully');
-				}
-			}
-			include $gfcommon.'tracker/actions/browse.php';
-			break;
-		}
-
-
-		case 'taskmgr' : {
-			include $gfcommon.'tracker/actions/taskmgr.php';
-			break;
-		}
-		case 'browse' : {
-			include $gfcommon.'tracker/actions/browse.php';
-			break;
-		}
-		case 'query' : {
-			include $gfcommon.'tracker/actions/query.php';
-			break;
-		}
-		case 'csv' : {
-			include $gfcommon.'tracker/actions/csv.php';
-			break;
-		}
-		case 'format_csv' : {
-			include $gfcommon.'tracker/actions/format_csv.php';
-			break;
-		}
-		case 'downloadcsv' : {
-			include $gfcommon.'tracker/actions/downloadcsv.php';
-			break;
-		}
-		case 'download' : {
-			$aid = getIntFromRequest('aid');
-			session_redirect('/tracker/download.php?group_id='.$group_id.'&atid='.$atid.'&aid='.$aid.'&file_id='.$file_id);
-			break;
-		}
-		case 'detail' : {
-			$aid = getIntFromRequest('aid');
-
-			//
-			//	users can modify their own tickets in a limited way if they submitted them
-			//	even if they are not artifact admins
-			//
-			$ah=new ArtifactHtml($ath,$aid);
+		if ($artifact_id) {
+			$ah=new ArtifactHtml($ath,$artifact_id);
 			if (!$ah || !is_object($ah)) {
 				exit_error(_('Artifact Could Not Be Created'),'tracker');
 			} elseif ($ah->isError()) {
 				exit_error($ah->getErrorMessage(),'tracker');
 			} else {
-				use_javascript('/js/sortable.js');
-				if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
-					include $gfcommon.'tracker/actions/mod.php';
-				} elseif (forge_check_perm ('tracker', $ath->getID(), 'tech')) {
-					include $gfcommon.'tracker/actions/mod-limited.php';
-				} else {
-					include $gfcommon.'tracker/actions/detail.php';
-				}
-			}
-			break;
-		}
-		//
-		//     Tracker Item Voting
-		//
-		case 'pointer_down': {
-			$artifact_id = $aid = getIntFromRequest('aid');
-			if ($aid) {
-				$ah = new ArtifactHtml($ath, $aid);
-				if (!$ah || !is_object($ah)) {
-					exit_error(_('Artifact Could Not Be Created'), 'tracker');
-				} else if ($ah->isError()) {
-					exit_error($ah->getErrorMessage(), 'tracker');
-				}
-				if ($ah->castVote(false)) {
-					$feedback = _('Retracted Vote successfully');
-				} else {
+				if ($start && $ah->isMonitoring())
+					$feedback = _('Monitoring Started');
+				elseif ($stop && !$ah->isMonitoring())
+					$feedback = _('Monitoring Stopped');
+				else {
+					$ah->setMonitor();
 					$error_msg = $ah->getErrorMessage();
 				}
+				include $gfcommon.'tracker/actions/browse.php';
 			}
-			include $gfcommon.'tracker/actions/browse.php';
-			break;
-		}
-		case 'pointer_up': {
-			$artifact_id = $aid = getIntFromRequest('aid');
-			if ($aid) {
-				$ah = new ArtifactHtml($ath, $aid);
-				if (!$ah || !is_object($ah)) {
-					exit_error(_('Artifact Could Not Be Created'), 'tracker');
-				} else if ($ah->isError()) {
-					exit_error($ah->getErrorMessage(), 'tracker');
+		} else {
+			$at=new ArtifactType($group,$atid);
+			if (!$at || !is_object($at)) {
+				exit_error(_('Artifact Could Not Be Created'),'tracker');
+			} elseif ($at->isError()) {
+				exit_error($at->getErrorMessage(),'tracker');
+			} else {
+				if ($start && $at->isMonitoring())
+					$feedback = _('Monitoring Started');
+				elseif ($stop && !$at->isMonitoring())
+					$feedback = _('Monitoring Deactivated');
+				else {
+					$at->setMonitor();
+					$feedback=$at->getErrorMessage();
+					$at->clearError();
 				}
-				if ($ah->castVote()) {
-					$feedback = _('Cast Vote successfully');
-				} else {
-					$error_msg = $ah->getErrorMessage();
-				}
+				include $gfcommon.'tracker/actions/browse.php';
 			}
-			include $gfcommon.'tracker/actions/browse.php';
-			break;
 		}
-		default : {
-			include $gfcommon.'tracker/actions/browse.php';
-			break;
-		}
+		break;
 	}
+
+
+	//
+	//	Show delete form
+	//
+	case 'deleteartifact' : {
+		session_require_perm ('tracker', $ath->getID(), 'manager') ;
+
+		$aid = getIntFromRequest('aid');
+		$ah= new ArtifactHtml($ath,$aid);
+		if (!$ah || !is_object($ah)) {
+			exit_error(_('Artifact Could Not Be Created'),'tracker');
+		} elseif ($ah->isError()) {
+			exit_error($ah->getErrorMessage(),'tracker');
+		}
+		include $gfcommon.'tracker/actions/deleteartifact.php';
+		break;
+	}
+
+	//
+	//	Handle the actual delete
+	//
+
+	case 'postdeleteartifact' : {
+		if (!form_key_is_valid(getStringFromRequest('form_key'))) {
+			exit_form_double_submit('tracker');
+		}
+		session_require_perm ('tracker', $ath->getID(), 'manager') ;
+
+		$aid = getStringFromRequest('aid');
+		$ah= new ArtifactHtml($ath,$aid);
+		if (!$ah || !is_object($ah)) {
+			exit_error(_('Artifact Could Not Be Created'),'tracker');
+		} elseif ($ah->isError()) {
+			exit_error($ah->getErrorMessage(),'tracker');
+		}
+		if (!getStringFromRequest('confirm_delete')) {
+			$warning_msg .= _('Confirmation failed. Artifact not deleted');
+		}
+		else {
+			if (!$ah->delete(true)) {
+				$error_msg .= _('Delete failed')._(': ').$ah->getErrorMessage();
+			} else {
+				$feedback .= _('Artifact Deleted Successfully');
+			}
+		}
+		include $gfcommon.'tracker/actions/browse.php';
+		break;
+	}
+
+
+	case 'taskmgr' : {
+		include $gfcommon.'tracker/actions/taskmgr.php';
+		break;
+	}
+	case 'browse' : {
+		include $gfcommon.'tracker/actions/browse.php';
+		break;
+	}
+	case 'query' : {
+		include $gfcommon.'tracker/actions/query.php';
+		break;
+	}
+	case 'csv' : {
+		include $gfcommon.'tracker/actions/csv.php';
+		break;
+	}
+	case 'format_csv' : {
+		include $gfcommon.'tracker/actions/format_csv.php';
+		break;
+	}
+	case 'downloadcsv' : {
+		include $gfcommon.'tracker/actions/downloadcsv.php';
+		break;
+	}
+	case 'download' : {
+		$aid = getIntFromRequest('aid');
+		session_redirect('/tracker/download.php?group_id='.$group_id.'&atid='.$atid.'&aid='.$aid.'&file_id='.$file_id);
+		break;
+	}
+	case 'detail' : {
+		$aid = getIntFromRequest('aid');
+
+		//
+		//	users can modify their own tickets in a limited way if they submitted them
+		//	even if they are not artifact admins
+		//
+		$ah=new ArtifactHtml($ath,$aid);
+		if (!$ah || !is_object($ah)) {
+			exit_error(_('Artifact Could Not Be Created'),'tracker');
+		} elseif ($ah->isError()) {
+			exit_error($ah->getErrorMessage(),'tracker');
+		} else {
+			use_javascript('/js/sortable.js');
+			if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
+				include $gfcommon.'tracker/actions/mod.php';
+			} elseif (forge_check_perm ('tracker', $ath->getID(), 'tech')) {
+				include $gfcommon.'tracker/actions/mod-limited.php';
+			} else {
+				include $gfcommon.'tracker/actions/detail.php';
+			}
+		}
+		break;
+	}
+	//
+	//     Tracker Item Voting
+	//
+	case 'pointer_down': {
+		$artifact_id = $aid = getIntFromRequest('aid');
+		if ($aid) {
+			$ah = new ArtifactHtml($ath, $aid);
+			if (!$ah || !is_object($ah)) {
+				exit_error(_('Artifact Could Not Be Created'), 'tracker');
+			} else if ($ah->isError()) {
+				exit_error($ah->getErrorMessage(), 'tracker');
+			}
+			if ($ah->castVote(false)) {
+				$feedback = _('Retracted Vote successfully');
+			} else {
+				$error_msg = $ah->getErrorMessage();
+			}
+		}
+		include $gfcommon.'tracker/actions/browse.php';
+		break;
+	}
+	case 'pointer_up': {
+		$artifact_id = $aid = getIntFromRequest('aid');
+		if ($aid) {
+			$ah = new ArtifactHtml($ath, $aid);
+			if (!$ah || !is_object($ah)) {
+				exit_error(_('Artifact Could Not Be Created'), 'tracker');
+			} else if ($ah->isError()) {
+				exit_error($ah->getErrorMessage(), 'tracker');
+			}
+			if ($ah->castVote()) {
+				$feedback = _('Cast Vote successfully');
+			} else {
+				$error_msg = $ah->getErrorMessage();
+			}
+		}
+		include $gfcommon.'tracker/actions/browse.php';
+		break;
+	}
+	default : {
+		include $gfcommon.'tracker/actions/browse.php';
+		break;
+	}
+}
 
 // Local Variables:
 // mode: php

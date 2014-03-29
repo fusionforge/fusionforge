@@ -46,16 +46,12 @@ if (!$at_arr || count($at_arr) < 1) {
 	echo sprintf(_('The Admin for this project will have to set up data types using the %1$s admin page %2$s'), '<a href="'.util_make_url ('/tracker/admin/?group_id='.$group_id).'">', '</a>');
 	echo "</p>";
 } else {
-
 	plugin_hook ("blocks", "tracker index");
-
 	echo '<p>'._('Choose a tracker and you can browse/edit/add items to it.').'</p>';
-
 	/*
 		Put the result set (list of trackers for this group) into a column with folders
 	*/
 	$tablearr = array(_('Tracker'),_('Description'),_('Open'),_('Total'));
-
 	echo $HTML->listTableTop($tablearr, false, 'full sortable_table_tracker', 'sortable_table_tracker');
 
 	for ($j = 0; $j < count($at_arr); $j++) {
@@ -64,23 +60,17 @@ if (!$at_arr || count($at_arr) < 1) {
 		} elseif ($at_arr[$j]->isError()) {
 			echo $at_arr[$j]->getErrorMessage();
 		} else {
-			echo '
-		<tr '. $HTML->boxGetAltRowStyle($j) . '>
-			<td>'.util_make_link('/tracker/?atid='.$at_arr[$j]->getID().'&group_id='.$group_id.'&func=browse',
- 				html_image("ic/tracker20w.png","20","20").' '.$at_arr[$j]->getName()).'
-			</td>
-			<td>' .  $at_arr[$j]->getDescription() .'
-			</td>
-			<td class="align-center">'. (int) $at_arr[$j]->getOpenCount() . '
-			</td>
-			<td class="align-center">'. (int) $at_arr[$j]->getTotalCount() .'
-			</td>
-		</tr>';
+			$cells = array();
+			$cells[][] = util_make_link('/tracker/?atid='.$at_arr[$j]->getID().'&group_id='.$group_id.'&func=browse',
+							html_image("ic/tracker20w.png","20","20").' '.$at_arr[$j]->getName());
+			$cells[][] = $at_arr[$j]->getDescription();
+			$cells[] = array((int) $at_arr[$j]->getOpenCount(), 'class' => 'align-center');
+			$cells[] = array((int) $at_arr[$j]->getTotalCount(), 'class' => 'align-center');
+			echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($j, true)), $cells);
 		}
 	}
 	echo $HTML->listTableBottom();
 }
-
 $atf->footer();
 
 // Local Variables:
