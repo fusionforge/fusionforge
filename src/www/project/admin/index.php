@@ -112,10 +112,6 @@ if (getStringFromRequest('submit')) {
 project_admin_header(array('title'=>sprintf(_('Project Information for %s'), $group->getPublicName()),'group'=>$group->getID()));
 ?>
 
-<table class="my-layout-table">
-	<tr>
-		<td>
-
 <?php echo $HTML->boxTop(_('Misc. Project Information'));
 
 if (forge_get_config('use_shell')) {
@@ -158,10 +154,8 @@ if (forge_get_config('use_shell')) {
 		echo '<br />';
 		echo _('Or pick a tag from those used by other projects: ');
 		echo '<br />';
-		echo '<table width="100%"><thead><tr>';
-		echo '<th>'._('Tags').'</th>';
-		echo '<th>'._('Projects').'</th>';
-		echo '</tr></thead><tbody>';
+		$titleArr = array(_('Tags'), _('Projects'));
+		echo $HTML->listTableTop($titleArr);
 
 		$unix_name = $group->getUnixName();
 		foreach ($infos as $tag => $plist) {
@@ -185,13 +179,15 @@ if (forge_get_config('use_shell')) {
 			echo '<td>'.implode(' ', $links).'</td>' ;
 			echo '</tr>' ;
 		}
-		echo '</tbody></table>' ;
+		echo $HTML->listTableBottom();
 	}
 } ?>
 
 <h2><?php echo _('Trove Categorization'); ?></h2>
 <p>
-<a href="/project/admin/group_trove.php?group_id=<?php echo $group->getID(); ?>">[<?php echo _('Edit Trove'); ?>]</a>
+<?php
+echo util_make_link('/project/admin/group_trove.php?group_id='.$group->getID(), '['._('Edit Trove').']');
+?>
 </p>
 
 <h2><?php echo _('Homepage Link') ?></h2>
@@ -294,13 +290,7 @@ if(forge_get_config('use_frs')) {
 <?php
 plugin_hook('hierarchy_views', array($group_id, 'admin'));
 
-echo $HTML->boxBottom();?>
-
-		</td>
-	</tr>
-</table>
-
-<?php
+echo $HTML->boxBottom();
 
 project_admin_footer();
 

@@ -413,7 +413,7 @@ if ($add_cat && $group_project_id) {
 	//
 	if (forge_check_perm ('pm_admin', $group_id)) {
 		?>
-		<?php util_make_link('/pm/admin/?group_id='.$group_id.'&addproject=1', _('Add a Subproject')) ?><br />
+		<?php echo util_make_link('/pm/admin/?group_id='.$group_id.'&addproject=1', _('Add a Subproject')) ?><br />
 		<?php echo _('Add a subproject, which can contain a set of tasks. This is different than creating a new task.');
 	}
 
