@@ -69,11 +69,11 @@ abstract class BaseRole extends Error {
 			'pm_admin' => array(0, 1),
 			'forum_admin' => array(0, 1),
 
-			'tracker' => array(0, 1, 9, 11, 13, 15, 17, 19, 21, 23),
+			'tracker' => array(0, 1, 9, 11, 13, 15, 23, 25, 27, 29),
 			'pm' => array(0, 1, 3, 5, 7),
 			'forum' => array(0, 1, 2, 3, 4),
 
-			'new_tracker' => array(0, 1, 9, 11, 13, 15, 17, 19, 21, 23),
+			'new_tracker' => array(0, 1, 9, 11, 13, 15, 23, 25, 27, 29),
 			'new_pm' => array(0, 1, 3, 5, 7),
 			'new_forum' => array(0, 1, 2, 3, 4),
 
@@ -778,13 +778,13 @@ abstract class BaseRole extends Error {
 		if ($role_name != $this->getName()) {
 			$this->setName($role_name) ;
 		}
-		
+
 		$res = db_prepare ('DELETE FROM pfo_role_setting WHERE role_id=$1 AND section_name=$2 AND ref_id=$3',
 				   'delete_from_pfo_role_setting');
 
 		$res = db_prepare ('INSERT INTO pfo_role_setting (role_id, section_name, ref_id, perm_val) VALUES ($1, $2, $3, $4)',
 				   'insert_into_pfo_role_setting');
-		
+
 		foreach ($data as $sect => $refs) {
 			foreach ($refs as $refid => $value) {
 				$res = db_execute ('delete_from_pfo_role_setting',
