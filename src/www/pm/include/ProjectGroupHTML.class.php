@@ -150,21 +150,18 @@ class ProjectGroupHTML extends ProjectGroup {
 		return html_build_select_box($res,$name,$checked,$show_100,$text_100);
 	}
 
-	function percentCompleteBox($name='percent_complete', $selected = 0, $display = true) {
-		$html = '
-		<select name="'.$name.'">';
-		$html .= '
-		<option value="0">'._('Not Started'). '</option>';
-		for ($i=5; $i<101; $i+=5) {
-			$html .= '
-			<option value="'.$i.'"';
-			if ($i==$selected) {
-				$html .= ' selected="selected"';
+	function percentCompleteBox($name = 'percent_complete', $selected = 0, $display = true) {
+		$vals = array(0);
+		$texts = array(_('Not Started'));
+		$checked_val = 0;
+		for ($i = 5; $i < 101; $i += 5) {
+			$vals[] = $i;
+			$texts[] = $i.'%';
+			if ($i == $selected) {
+				$checked_val = $i;
 			}
-			$html .= '>'.$i.'%</option>';
 		}
-		$html .= '
-		</select>';
+		$html = html_build_select_box_from_arrays($vals, $texts, $name, $checked_val, false, '', false, '');
 		if ($display) {
 			echo $html;
 		} else {
@@ -173,33 +170,28 @@ class ProjectGroupHTML extends ProjectGroup {
 	}
 
 	function showMonthBox($name, $select_month = 0, $display = true) {
-		$html = '
-		<select name="'.$name.'" size="1">';
+		$vals = array();
 		$monthlist = array(
-			'1'=>_('January'),
-			'2'=>_('February'),
-			'3'=>_('March'),
-			'4'=>_('April'),
-			'5'=>_('May'),
-			'6'=>_('June'),
-			'7'=>_('July'),
-			'8'=>_('August'),
-			'9'=>_('September'),
-			'10'=>_('October'),
-			'11'=>_('November'),
-			'12'=>_('December'));
-
-		for ($i=1; $i<=count($monthlist); $i++) {
+			_('January'),
+			_('February'),
+			_('March'),
+			_('April'),
+			_('May'),
+			_('June'),
+			_('July'),
+			_('August'),
+			_('September'),
+			_('October'),
+			_('November'),
+			_('December'));
+		$checked_val = 1;
+		for ($i = 1; $i <= count($monthlist); $i++) {
+			$vals[] = $i;
 			if ($i == $select_month) {
-				$html .= '
-				<option selected="selected" value="'.$i.'">'.$monthlist[$i].'</option>';
-			} else {
-				$html .= '
-				<option value="'.$i.'">'.$monthlist[$i].'</option>';
+				$checked_val = $i;
 			}
 		}
-		$html .= '
-		</select>';
+		$html = html_build_select_box_from_arrays($vals, $monthlist, $name, $checked_val, false, '', false, '');
 		if ($display) {
 			echo $html;
 		} else {
@@ -208,19 +200,15 @@ class ProjectGroupHTML extends ProjectGroup {
 	}
 
 	function showDayBox($name, $day = 1, $display = true) {
-		$html = '
-		<select name="'.$name.'" size="1">';
-		for ($i=1; $i<=31; $i++) {
+		$vals = array();
+		$checked_val = 1;
+		for ($i = 1; $i <= 31; $i++) {
+			$vals[] = $i;
 			if ($i == $day) {
-				$html .= '
-				<option selected="selected" value="'.$i.'">'.$i.'</option>';
-			} else {
-				$html .= '
-				<option value="'.$i.'">'.$i.'</option>';
+				$checked_val = $i;
 			}
 		}
-		$html .= '
-		</select>';
+		$html = html_build_select_box_from_arrays($vals, $vals, $name, $checked_val, false, '', false, '');
 		if ($display) {
 			echo $html;
 		} else {
@@ -229,20 +217,16 @@ class ProjectGroupHTML extends ProjectGroup {
 	}
 
 	function showYearBox($name, $year = 1, $display = true) {
+		$vals = array();
 		$current_year = date('Y');
-		$html = '
-		<select name="'.$name.'" size="1">';
-		for ($i=$current_year-5; $i<=$current_year+8; $i++) {
+		$checked_val = $current_year;
+		for ($i = $current_year - 5; $i <= $current_year + 8; $i++) {
+			$vals[] = $i;
 			if ($i == $year) {
-				$html .= '
-				<option selected="selected" value="'.$i.'">'.$i.'</option>';
-			} else {
-				$html .= '
-				<option value="'.$i.'">'.$i.'</option>';
+				$checked_val = $i;
 			}
 		}
-		$html .= '
-		</select>';
+		$html = html_build_select_box_from_arrays($vals, $vals, $name, $checked_val, false, '', false, '');
 		if ($display) {
 			echo $html;
 		} else {
@@ -251,19 +235,15 @@ class ProjectGroupHTML extends ProjectGroup {
 	}
 
 	function showHourBox($name, $hour = 1, $display = true) {
-		$html = '
-		<select name="'.$name.'" size="1">';
+		$vals = array();
+		$checked_val = 1;
 		for ($i=0; $i<=23; $i++) {
+			$vals[] = $i;
 			if ($i == $hour) {
-				$html .= '
-				<option selected="selected" value="'.$i.'">'.$i.'</option>';
-			} else {
-				$html .= '
-				<option value="'.$i.'">'.$i.'</option>';
+				$checked_val = $i;
 			}
 		}
-		$html .= '
-		</select>';
+		$html = html_build_select_box_from_arrays($vals, $vals, $name, $checked_val, false, '', false, '');
 		if ($display) {
 			echo $html;
 		} else {
@@ -272,17 +252,15 @@ class ProjectGroupHTML extends ProjectGroup {
 	}
 
 	function showMinuteBox($name, $minute = 0, $display = true) {
-		$html = '	<select name="'.$name.'" size="1">';
-		for ($i=0; $i<=45; $i=$i+15) {
+		$vals = array();
+		$checked_val = 0;
+		for ($i = 0; $i <= 45; $i = $i + 15) {
+			$vals[] = $i;
 			if ($i == $minute) {
-				$html .= '	<option selected="selected" value="'.$i.'">'.$i.'</option>';
-			} else {
-				$html .= '
-				<option value="'.$i.'">'.$i.'</option>';
+				$checked_val = $i;
 			}
 		}
-		$html .= '
-		</select>';
+		$html = html_build_select_box_from_arrays($vals, $vals, $name, $checked_val, false, '', false, '');
 		if ($display) {
 			echo $html;
 		} else {
