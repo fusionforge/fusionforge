@@ -110,7 +110,7 @@ $row_cat = db_fetch_array($res_cat);
 site_admin_header(array('title'=>_('Edit Trove Category')));
 ?>
 
-<form action="<?php util_make_uri('/admin/trove/trove_cat_edit.php'); ?>" method="post">
+<form action="<?php echo util_make_uri('/admin/trove/trove_cat_edit.php'); ?>" method="post">
 
 <p><?php echo _('Parent Category')._(':'); ?>
 <br /><select name="form_parent">
