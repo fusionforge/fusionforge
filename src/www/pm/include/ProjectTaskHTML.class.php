@@ -114,7 +114,7 @@ class ProjectTaskHTML extends ProjectTask {
 				$cells[][] = util_make_link('/tracker/?func=detail&aid='.db_result($res,$i,'artifact_id').'&group_id='.db_result($res,$i,'group_id').'&atid='.db_result($res,$i,'group_artifact_id'), db_result($res,$i,'summary'));
 				$cells[][] = db_result($res,$i,'name');
 				$cells[][] = db_result($res,$i,'status_name');
-				$cells[][] = date(_('Y-m-d H:i'),db_result($res,$i,'open_date'))
+				$cells[][] = date(_('Y-m-d H:i'),db_result($res,$i,'open_date'));
 				if ($is_admin) {
 					$cells[][] = '<input type="checkbox" name="rem_artifact_id[]" value="'.db_result($res,$i,'artifact_id').'" />';
 				}
