@@ -685,11 +685,13 @@ class WidgetLayoutManager {
 				LEFT JOIN layouts_contents AS R2 USING ( owner_type, owner_id, layout_id, column_id )
 				ORDER BY rank ASC
 				LIMIT 1";
-			$myfile=fopen('/tmp/debug','a');
-			$params = array($name,$content_id,$owner_type,$owner_id,$layout_id,$column_id);
-			fwrite($myfile, $sql." devient:\n");
-			fwrite($myfile, str_replace(array("$1","$2","$3","$4","$5","$6"),$params,$sql));
-			fwrite($myfile, "\n request content=".$request->get('content_id'));
+			if (forge_get_config('sysdebug_enable')) {
+				$myfile=fopen('/tmp/debug','a');
+				$params = array($name,$content_id,$owner_type,$owner_id,$layout_id,$column_id);
+				fwrite($myfile, $sql." devient:\n");
+				fwrite($myfile, str_replace(array("$1","$2","$3","$4","$5","$6"),$params,$sql));
+				fwrite($myfile, "\n request content=".$request->get('content_id'));
+			}
 			db_query_params($sql,array($name,$content_id,$owner_type,$owner_id,$layout_id,$column_id));
 			echo db_error();
 		}
