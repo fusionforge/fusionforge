@@ -35,12 +35,14 @@ function show_features_boxes() {
 	$return = '<h2 class="skip">' . _('Features Boxes') . '</h2>';
 
 	if (forge_get_config('use_project_tags')) {
-		$return .= $HTML->boxTop(_('Tag Cloud'), 'Tag_Cloud');
-		$return .= tag_cloud();
-		$return .= $HTML->boxMiddle(sprintf(_('%s Statistics'), forge_get_config ('forge_name')), 'Forge_Statistics');
-	} else {
-		$return .= $HTML->boxTop(sprintf(_('%s Statistics'), forge_get_config ('forge_name')), 'Forge_Statistics');
+		$contentTag = tag_cloud();
+		if (!empty($contentTag)) {
+			$return .= $HTML->boxTop(_('Tag Cloud'), 'Tag_Cloud');
+			$return .= $contentTag;
+			$return .= $HTML->boxBottom();
+		}
 	}
+	$return .= $HTML->boxTop(sprintf(_('%s Statistics'), forge_get_config ('forge_name')), 'Forge_Statistics');
 	$return .= show_sitestats();
 	if (forge_get_config('use_frs')) {
 		$return .= $HTML->boxMiddle(_('Top Project Downloads'), 'Top_Projects_Downloads');
