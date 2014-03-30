@@ -146,20 +146,18 @@ function stats_downloads_total() {
 }
 
 function show_sitestats() {
-
-	$gforge = new FusionForge();
+	$fforge = new FusionForge();
 	$return = '<p>';
-	$return .= _('Hosted Projects')._(': ');
+	$return .= _('Public Hosted Projects')._(': ');
+	$content = '<strong>'.number_format($fforge->getNumberOfPublicHostedProjects()).'</strong>';
 	if (forge_get_config('use_project_full_list')) {
-		$return .= '<a href="softwaremap/full_list.php">';
-	}
-	$return .= '<strong>'.number_format($gforge->getNumberOfPublicHostedProjects()).'</strong>';
-	if (forge_get_config('use_project_full_list')) {
-		$return .= '</a>';
+		$return .= util_make_link('/softwaremap/full_list.php', $content);
+	} else {
+		$return .= $content;
 	}
 	$return .= "</p><p>";
 	$return .= _('Registered Users')._(': ').'<strong>'.
-		number_format($gforge->getNumberOfActiveUsers()).'</strong>';
+		number_format($fforge->getNumberOfActiveUsers()).'</strong>';
 	$return .= "</p>\n";
 	return $return;
 }
