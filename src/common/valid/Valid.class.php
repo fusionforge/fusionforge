@@ -3,6 +3,7 @@
  * Copyright (c) STMicroelectronics, 2007. All Rights Reserved.
  *
  * Originally written by Manuel VACELET, 2007.
+ * Copyright 2014, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -26,62 +27,62 @@ require_once 'common/valid/Rule.class.php';
  * @package Codendi
  */
 class Valid {
-    /**
-     * @access private
-     */
-    var $errors;
+	/**
+	 * @access private
+	 */
+	var $errors;
 
-    /**
-     * @access private
-     */
-    var $key;
+	/**
+	 * @access private
+	 */
+	var $key;
 
-    /**
-     * @access private
-     */
-    var $rules;
+	/**
+	 * @access private
+	 */
+	var $rules;
 
-    /**
-     * @access private
-     */
-    var $isRequired;
+	/**
+	 * @access private
+	 */
+	var $isRequired;
 
-    /**
-     * @access private
-     */
-    var $useFeedback;
+	/**
+	 * @access private
+	 */
+	var $useFeedback;
 
-    /**
-     * @access private
-     */
-    var $globalErrorMessage;
+	/**
+	 * @access private
+	 */
+	var $globalErrorMessage;
 
-    /**
-     * @access private
-     */
-    var $isValid;
+	/**
+	 * @access private
+	 */
+	var $isValid;
 
-    /**
-     * Constructor
-     */
-    function Valid($key = null) {
-        $this->key = $key;
-        $this->errors = array();
-        $this->rules = array();
-        $this->isRequired = false;
-        $this->useFeedback = true;
-        $this->globalErrorMessage = null;
-        $this->isValid;
-    }
+	/**
+	 * Constructor
+	 */
+	function Valid($key = null) {
+		$this->key = $key;
+		$this->errors = array();
+		$this->rules = array();
+		$this->isRequired = false;
+		$this->useFeedback = true;
+		$this->globalErrorMessage = null;
+		$this->isValid;
+	}
 
-    /**
-     * Return the variable name on which rules must applies.
-     *
-     * @access private
-     */
-    function getKey() {
-        return $this->key;
-    }
+	/**
+	 * Return the variable name on which rules must applies.
+	 *
+	 * @access private
+	 */
+	function getKey() {
+		return $this->key;
+	}
 
 	/**
 	 * Add a new rule in this validation.
@@ -91,55 +92,55 @@ class Valid {
 	 * @param Rule   $rule    Reference on rule.
 	 * @param string|bool $message Error message.
 	 */
-    function addRule(&$rule, $message=false) {
-        $this->rules[] =& $rule;
-        $this->errors[] = $message;
-    }
-
-    /**
-     * The value is required.
-     *
-     * All rules must succeed (as usual). Empty / null values are forbidden
-     * (raise an error). And all failure generate an error (instead of a
-     * warning).
-     */
-    function required() {
-        $this->isRequired = true;
-    }
-
-    /**
-     * Turn feedback off.
-     */
-    function disableFeedback() {
-        $this->useFeedback = false;
-    }
-
-    /**
-     * Set a global error message that will replace all other messages.
-     *
-     * Note: If no error, no message raised. The message is raised with either
-     * 'warning' or 'error' level according to required();
-     * @param String Error message
-     */
-    function setErrorMessage($msg) {
-        $this->globalErrorMessage = $msg;
-    }
-
-    /**
-     * Return true if given value is empty
-     *
-     * @access private
-     * @param mixed	$value	Value to test
-     * @return boolean
-     */
-    function isValueEmpty($value) {
-        return ($value === '' || $value === false || $value === null);
-    }
+	function addRule(&$rule, $message=false) {
+		$this->rules[] =& $rule;
+		$this->errors[] = $message;
+	}
 
 	/**
-	* Append feedback in the global Response object.
-	* @access private
-	*/
+	 * The value is required.
+	 *
+	 * All rules must succeed (as usual). Empty / null values are forbidden
+	 * (raise an error). And all failure generate an error (instead of a
+	 * warning).
+	 */
+	function required() {
+		$this->isRequired = true;
+	}
+
+	/**
+	 * Turn feedback off.
+	 */
+	function disableFeedback() {
+		$this->useFeedback = false;
+	}
+
+	/**
+	 * Set a global error message that will replace all other messages.
+	 *
+	 * Note: If no error, no message raised. The message is raised with either
+	 * 'warning' or 'error' level according to required();
+	 * @param	String	Error message
+	 */
+	function setErrorMessage($msg) {
+		$this->globalErrorMessage = $msg;
+	}
+
+	/**
+	 * Return true if given value is empty
+	 *
+	 * @access	private
+	 * @param	mixed	$value	Value to test
+	 * @return	boolean
+	 */
+	function isValueEmpty($value) {
+		return ($value === '' || $value === false || $value === null);
+	}
+
+	/**
+	 * Append feedback in the global Response object.
+	 * @access private
+	 */
 	function addFeedback($level, $error) {
 		global $feedback, $error_msg, $warning_msg;
 		switch ($level) {
@@ -158,85 +159,83 @@ class Valid {
 		}
 	}
 
-    /**
-     * Generate error message according to settings.
-     *
-     * Takes in account user requirement 'required' and
-     * 'disableFeedback'. Empty error messages are discarded.
-     * @access private
-     */
-    function populateFeedback() {
-        if($this->useFeedback) {
-            $level = 'warning';
-            if($this->isRequired) {
-                $level = 'error';
-            }
-            if($this->globalErrorMessage !== null &&
-               !$this->isValid) {
-                $this->addFeedback($level, $this->globalErrorMessage);
-            } else {
-                foreach($this->errors as $error) {
-                    if($error != '') {
-                        $this->addFeedback($level, $error);
-                    }
-                }
-            }
-        }
-    }
-
-    /**
-     * Prepare error message on Rule:isValid result.
-     *
-     * If the test succeeded, the error message is cleared (either custom or
-     * built-in messages).
-     * @access private
-     * @param int	$i			Index of the Rule that was applied.
-     * @param bool	$result		Result of the test.
-     */
-    function errorMessage($i, $result) {
-        if($result === true) {
-            $this->errors[$i] = '';
-        } else {
-            if($this->errors[$i] === false) {
-                $this->errors[$i] = $this->rules[$i]->getErrorMessage($this->key);
-            }
-        }
-    }
-
-    /**
-     * Apply each rule on the given value and prepare feedback.
-     *
-     * @access private
-     * @param mixed $value	Value to test.
-     */
-    function checkEachRules($value) {
-        $isValid = true;
-        $rCtr = count($this->rules);
-        for($i = 0; $i < $rCtr; $i++) {
-            $valid = $this->rules[$i]->isValid($value);
-            $this->errorMessage($i, $valid);
-            $isValid = $isValid && $valid;
-        }
-        if($isValid && $this->isRequired && $this->isValueEmpty($value)) {
-            $this->isValid = false;
-        } else {
-            $this->isValid = $isValid;
-        }
-        $this->populateFeedback();
-    }
-
-    /**
-     * Run validation on given value.
-     *
-     * @param mixed $value	Value to test.
-	 * @return bool
+	/**
+	 * Generate error message according to settings.
+	 *
+	 * Takes in account user requirement 'required' and
+	 * 'disableFeedback'. Empty error messages are discarded.
+	 * @access private
 	 */
-    function validate($value) {
-        if($this->isRequired
-           || (!$this->isRequired && !$this->isValueEmpty($value))) {
-            $this->checkEachRules($value);
-            return $this->isValid;
-        }
-        return true;
-    }
+	function populateFeedback() {
+		if($this->useFeedback) {
+			$level = 'warning';
+			if($this->isRequired) {
+				$level = 'error';
+			}
+			if($this->globalErrorMessage !== null && !$this->isValid) {
+				$this->addFeedback($level, $this->globalErrorMessage);
+			} else {
+				foreach($this->errors as $error) {
+					if($error != '') {
+						$this->addFeedback($level, $error);
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * Prepare error message on Rule:isValid result.
+	 *
+	 * If the test succeeded, the error message is cleared (either custom or
+	 * built-in messages).
+	 * @access private
+	 * @param int	$i	Index of the Rule that was applied.
+	 * @param bool	$result	Result of the test.
+	 */
+	function errorMessage($i, $result) {
+		if($result === true) {
+			$this->errors[$i] = '';
+		} else {
+			if($this->errors[$i] === false) {
+				$this->errors[$i] = $this->rules[$i]->getErrorMessage($this->key);
+			}
+		}
+	}
+
+	/**
+	 * Apply each rule on the given value and prepare feedback.
+	 *
+	 * @access	private
+	 * @param	mixed	$value	Value to test.
+	 */
+	function checkEachRules($value) {
+		$isValid = true;
+		$rCtr = count($this->rules);
+		for($i = 0; $i < $rCtr; $i++) {
+			$valid = $this->rules[$i]->isValid($value);
+			$this->errorMessage($i, $valid);
+			$isValid = $isValid && $valid;
+		}
+		if($isValid && $this->isRequired && $this->isValueEmpty($value)) {
+			$this->isValid = false;
+		} else {
+			$this->isValid = $isValid;
+		}
+		$this->populateFeedback();
+	}
+
+	/**
+	 * Run validation on given value.
+	 *
+	 * @param	mixed	$value	Value to test.
+	 * @return	bool
+	 */
+	function validate($value) {
+		if($this->isRequired || (!$this->isRequired && !$this->isValueEmpty($value))) {
+			$this->checkEachRules($value);
+			return $this->isValid;
+		}
+		return true;
+	}
 }
