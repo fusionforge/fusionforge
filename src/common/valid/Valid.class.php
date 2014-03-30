@@ -136,13 +136,27 @@ class Valid {
         return ($value === '' || $value === false || $value === null);
     }
 
-    /**
-     * Append feedback in the global Response object.
-     * @access private
-     */
-    function addFeedback($level, $error) {
-        $GLOBALS['feedback'].=  $level.": ". $error;
-    }
+	/**
+	* Append feedback in the global Response object.
+	* @access private
+	*/
+	function addFeedback($level, $error) {
+		global $feedback, $error_msg, $warning_msg;
+		switch ($level) {
+			case 'error': {
+				$error_msg .= $level._(': ').$error;
+				break;
+			}
+			case 'warning': {
+				$warning_msg .= $level._(': ').$error;
+				break;
+			}
+			case 'feedback': {
+				$feedback .= $level._(': ').$error;
+				break;
+			}
+		}
+	}
 
     /**
      * Generate error message according to settings.
