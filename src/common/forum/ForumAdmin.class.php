@@ -57,16 +57,15 @@ class ForumAdmin extends Error {
 
 	function PrintAdminMessageOptions($msg_id,$group_id,$thread_id=0,$forum_id=0,$return_to_message=0) {
 
-		$return = '<a href="admin/index.php?movethread=' . $thread_id  . '&amp;msg_id=' . $msg_id . '&amp;group_id=' . $group_id . '&amp;forum_id=' . $forum_id .
-				  '&amp;return_to_message=' . $return_to_message . '">' . html_image('ic/forum_move.gif','37','15',array('alt'=>_('Move Thread'))). "</a>";
+		$return = util_make_link('/forum/admin/?movethread='.$thread_id.'&msg_id='.$msg_id.'&group_id='.$group_id.'&forum_id='.$forum_id.'&return_to_message='.$return_to_message, html_image('ic/forum_move.gif', '37', '15', array('alt' => _('Move Thread'))));
 
 		// Following code (if ...) is to keep old implementation but need to be cleaned
 		if ($return_to_message) {
 			$thread_id = 0;
 		}
 
-		$return .= '    <a href="admin/index.php?editmsg='.$msg_id.'&amp;group_id='.$group_id.'&amp;thread_id='.$thread_id.'&amp;forum_id='.$forum_id.'">' .html_image('ic/forum_edit.gif','37','15',array('alt'=>_("Edit"))) . "</a>";
-		$return .= '    <a href="admin/index.php?deletemsg='.$msg_id.'&amp;group_id='.$group_id.'&amp;thread_id='.$thread_id.'&amp;forum_id='.$forum_id.'">' .html_image('ic/forum_delete.gif','16','18',array('alt'=>_("Delete"))) . "</a>";
+		$return .= util_make_link('/forum/admin/?editmsg='.$msg_id.'&group_id='.$group_id.'&thread_id='.$thread_id.'&forum_id='.$forum_id, html_image('ic/forum_edit.gif', '37', '15', array('alt' => _("Edit"))));
+		$return .= util_make_link('/forum/admin/?deletemsg='.$msg_id.'&group_id='.$group_id.'&thread_id='.$thread_id.'&forum_id='.$forum_id, html_image('ic/forum_delete.gif', '16', '18', array('alt'=>_("Delete"))));
 		//		$return .= "<br />";
 		return $return;
 	}
@@ -79,11 +78,8 @@ class ForumAdmin extends Error {
 	function PrintAdminOptions() {
 		global $group_id, $forum_id;
 
-		echo '
-			<p>
-			<a href="index.php?group_id='.$group_id.'&amp;add_forum=1">'._('Add Forum').'</a>';
-		echo '
-			| <a href="pending.php?action=view_pending&amp;group_id=' . $group_id . '">' . _('Manage Pending Messages').'</a><br /></p>';
+		echo '<p>'.util_make_link('/forum/admin/?group_id='.$group_id.'&add_forum=1', _('Add Forum'));
+		echo ' | '.util_make_link('/forum/admin/pending.php?action=view_pending&group_id='.$group_id, _('Manage Pending Messages')).'<br /></p>';
 	}
 
 	/**
@@ -93,9 +89,7 @@ class ForumAdmin extends Error {
 	 */
 
 	function PrintAdminPendingOption($forum_id) {
-		echo '
-			<p>
-			<a href="pending.php?action=view_pending&amp;group_id=' . $this->group_id . '&amp;forum_id=' . $forum_id . '">' . _('Manage Pending Messages').'</a><br /></p>';
+		echo '<p>'.util_make_link('/forum/admin/pending.php?action=view_pending&group_id='.$this->group_id.'&forum_id='.$forum_id, _('Manage Pending Messages')).'<br /></p>';
 	}
 
 	/**
@@ -305,7 +299,7 @@ class ForumAdmin extends Error {
 				}
 			}
 			/* ]]> */</script>
-			<form name="pending" action="pending.php" method="post">
+			<form name="pending" action="'.util_make_uri('forum/admin/pending.php').'" method="post">
 			<input type="hidden" name="action" value="update_pending" />
 			<input type="hidden" name="form_key" value="' . form_generate_key() . '" />
 			<input type="hidden" name="group_id" value="' . getIntFromRequest("group_id") . '" />

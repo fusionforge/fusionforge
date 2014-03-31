@@ -461,9 +461,9 @@ if (getStringFromRequest('add_forum')) {
 		} elseif ($farr[$j]->isError()) {
 			echo $HTML->error_msg($farr[$j]->getErrorMessage());
 		} else {
-			echo '<p><a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;change_status=1&amp;group_forum_id='. $farr[$j]->getID() .'">'.
-				$farr[$j]->getName() .'</a><br />'.$farr[$j]->getDescription().'<br /><a href="monitor.php?group_id='.$group_id.'&amp;group_forum_id='. $farr[$j]->getID() .'">'.
-				_('Monitoring Users').'</a></p>';
+			echo '<p>'.util_make_link('/forum/admin?group_id='.$group_id.'&change_status=1&group_forum_id='.$farr[$j]->getID(), $farr[$j]->getName()) .'<br />'.
+			$farr[$j]->getDescription().'<br />'.
+			util_make_link('/forum/admin/monitor.php?group_id='.$group_id.'&group_forum_id='.$farr[$j]->getID(), _('Monitoring Users')).'</p>';
 		}
 	}
 
