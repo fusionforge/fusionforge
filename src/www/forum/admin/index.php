@@ -148,7 +148,7 @@ if (getStringFromRequest('add_forum')) {
 				<input type="hidden" name="group_forum_id" value="'. $f->getID() .'" />
 				<input type="hidden" name="group_id" value="'.$group_id.'" />
 				<strong>'._('Forum Name')._(':').utils_requiredField().'</strong><br />
-				<input type="text" name="forum_name" required="required" value="'. $f->getName() .'" size="20" maxlength="30" />
+				<input type="text" name="forum_name" required="required" value="'. $f->getName() .'" size="20" maxlength="30" pattern=".{3,}" />
 				</p>
 				<p>
 				<strong>'._('Email All Posts To:').'</strong><br />
@@ -156,7 +156,7 @@ if (getStringFromRequest('add_forum')) {
 				</p>
 				<p>
 				<strong>'._('Description')._(': ').utils_requiredField().'</strong><br />
-				<input type="text" name="description" required="required" value="'. $f->getDescription() .'" size="60" maxlength="80" /><br />
+				<input type="text" name="description" required="required" value="'. $f->getDescription() .'" size="60" maxlength="80" pattern=".{10,}" /><br />
 				</p>
 				<p>
 				<input type="submit" name="submit" value="'._('Update').'" />
