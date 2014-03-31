@@ -69,11 +69,11 @@ abstract class BaseRole extends Error {
 			'pm_admin' => array(0, 1),
 			'forum_admin' => array(0, 1),
 
-			'tracker' => array(0, 1, 9, 11, 13, 15, 23, 25, 27, 29),
+			'tracker' => array(0, 1, 9, 11, 13, 15, 25, 27, 29, 31),
 			'pm' => array(0, 1, 3, 5, 7),
 			'forum' => array(0, 1, 2, 3, 4),
 
-			'new_tracker' => array(0, 1, 9, 11, 13, 15, 23, 25, 27, 29),
+			'new_tracker' => array(0, 1, 9, 11, 13, 15, 25, 27, 29, 31),
 			'new_pm' => array(0, 1, 3, 5, 7),
 			'new_forum' => array(0, 1, 2, 3, 4),
 
