@@ -50,6 +50,7 @@ while (count ($exppath) >= 4) {
 		'api.php',
 		'index.php',
 		'load.php',
+		'img_auth.php',
 	    ))) {
                 $fusionforgeproject = $exppath[3] ;
                 break ;
