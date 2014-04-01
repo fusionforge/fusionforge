@@ -122,7 +122,7 @@ class headermenuPlugin extends Plugin {
 		$availableLinks = $this->getAvailableLinks('headermenu');
 		foreach ($availableLinks as $link) {
 			if ($link['is_enable']) {
-				$ahref = '<a href="'.$link['url'].'">'.htmlspecialchars($link['name']).'</a>';
+				$ahref = util_make_link($link['url'], htmlspecialchars($link['name']), array(), true);
 				$template = isset($params['template']) ?  $params['template'] : ' | {menu}';
 				echo str_replace('{menu}', $ahref, $template);
 			}
@@ -148,7 +148,7 @@ class headermenuPlugin extends Plugin {
 						break;
 					}
 					case 'htmlcode': {
-						$params['DIRS'][] = '/plugins/'.$this->name.'/?type=pageview&amp;pageid='.$link['id_headermenu'];
+						$params['DIRS'][] = '/plugins/'.$this->name.'/?type=pageview&pageid='.$link['id_headermenu'];
 						$params['TITLES'][] = $link['name'];
 						$params['TOOLTIPS'][] = $link['description'];
 						break;
@@ -177,19 +177,19 @@ class headermenuPlugin extends Plugin {
 						break;
 					}
 					case 'htmlcode': {
-						$params['DIRS'][] = '/plugins/'.$this->name.'/?type=pageview&amp;group_id='.$params['group'].'&amp;pageid='.$link['id_headermenu'];
+						$params['DIRS'][] = '/plugins/'.$this->name.'/?type=pageview&group_id='.$params['group'].'&pageid='.$link['id_headermenu'];
 						$params['TITLES'][] = $link['name'];
 						$params['TOOLTIPS'][] = $link['description'];
-						if (isset($params['toptab']) && ($params['toptab'] == '/plugins/'.$this->name.'/?type=pageview&amp;group_id='.$params['group'].'&amp;pageid='.$link['id_headermenu'])) {
+						if (isset($params['toptab']) && ($params['toptab'] == '/plugins/'.$this->name.'/?type=pageview&group_id='.$params['group'].'&amp;pageid='.$link['id_headermenu'])) {
 							$params['selected'] = (count($params['DIRS'])-1);
 						}
 						break;
 					}
 					case 'iframe': {
-						$params['DIRS'][] = '/plugins/'.$this->name.'/?type=iframeview&amp;group_id='.$params['group'].'&amp;pageid='.$link['id_headermenu'];
+						$params['DIRS'][] = '/plugins/'.$this->name.'/?type=iframeview&group_id='.$params['group'].'&pageid='.$link['id_headermenu'];
 						$params['TITLES'][] = $link['name'];
 						$params['TOOLTIPS'][] = $link['description'];
-						if (isset($params['toptab']) && ($params['toptab'] == '/plugins/'.$this->name.'/?type=iframeview&amp;group_id='.$params['group'].'&amp;pageid='.$link['id_headermenu'])) {
+						if (isset($params['toptab']) && ($params['toptab'] == '/plugins/'.$this->name.'/?type=iframeview&group_id='.$params['group'].'&pageid='.$link['id_headermenu'])) {
 							$params['selected'] = (count($params['DIRS'])-1);
 						}
 						break;
@@ -376,7 +376,13 @@ class headermenuPlugin extends Plugin {
 		global $HTML;
 		$link = $this->getLink($pageid);
 		if ($link) {
-			return '<iframe src="'.rtrim($link['url'],'/').'" frameborder="0" height="600px" width="100%"></iframe>';
+			html_use_jqueryautoheight();
+			$returncode = '<iframe id="headermenu_iframe" src="'.rtrim($link['url'],'/').'" frameborder="0" width="100%"></iframe>';
+			$returncode .= $HTML->getJavascripts();
+			$returncode .=  '<script type="text/javascript">//<![CDATA[
+				jQuery(\'#headermenu_iframe\').iframeAutoHeight({heightOffset: 50});
+				//]]></script>';
+			return $returncode;
 		} else {
 			return $HTML->error_msg(_('Cannot retrieve the page'));
 		}
@@ -408,12 +414,12 @@ class headermenuPlugin extends Plugin {
 				$link = $this->getLink($this->pageid);
 				$group_id = getIntFromRequest('group_id');
 				if ($group_id) {
-					$params['toptab'] = '/plugins/'.$this->name.'/?type='.$type.'&amp;group_id='.$group_id.'&amp;pageid='.$this->pageid;
+					$params['toptab'] = '/plugins/'.$this->name.'/?type='.$type.'&group_id='.$group_id.'&pageid='.$this->pageid;
 					$params['group'] = $group_id;
 					$params['title'] = $link['name'];
 					site_project_header($params);
 				} else {
-					site_header(array('title'=> $link['name'], 'toptab' => '/plugins/'.$this->name.'/?type='.$type.'&amp;pageid='.$this->pageid));
+					site_header(array('title'=> $link['name'], 'toptab' => '/plugins/'.$this->name.'/?type='.$type.'&pageid='.$this->pageid));
 				}
 				$returned = true;
 				break;
