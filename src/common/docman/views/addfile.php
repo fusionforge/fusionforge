@@ -99,7 +99,7 @@ if ($dgf->getNested() == NULL) {
 	if ($g->useDocmanSearch())
 		echo html_e('p', array(), _('Both fields are used by the document search engine.'), false);
 
-	echo html_ao('form', array('name' => 'adddata', 'action' => util_make_uri($actionurl), 'method' => 'post', 'enctype' => 'multipart/form-data'));
+	echo $HTML->openForm(array('name' => 'adddata', 'action' => util_make_uri($actionurl), 'method' => 'post', 'enctype' => 'multipart/form-data'));
 	echo $HTML->listTableTop(array(), array(), 'infotable');
 	$cells = array();
 	$cells[][] = _('Document Title').utils_requiredField();
@@ -184,9 +184,10 @@ if ($dgf->getNested() == NULL) {
 		echo $HTML->multiTableRow(array(), $cells);
 	}
 	echo $HTML->listTableBottom();
-	echo html_e('p', array(), sprintf(_('Fields marked with %s are mandatory.'), utils_requiredField()), false);
+	echo $HTML->addRequiredFieldsInfoBox();
 	echo html_ao('div', array('class' => 'docmanSubmitDiv'));
 	echo html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Submit Information')));
-	echo html_ac(html_ap() - 2);
+	echo html_ac(html_ap() - 1);
+	echo $HTML->closeForm();
 }
 echo html_ac(html_ap() - 1);

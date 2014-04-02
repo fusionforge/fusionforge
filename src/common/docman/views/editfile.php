@@ -33,7 +33,7 @@ if (!forge_check_perm('docman', $group_id, 'approve')) {
 }
 
 echo html_ao('div', array('id' => 'editFile'));
-echo html_ao('form', array('id' => 'editdocdata', 'name' => 'editdocdata', 'method' => 'post', 'enctype' => 'multipart/form-data'));
+echo $HTML->openForm(array('id' => 'editdocdata', 'name' => 'editdocdata', 'method' => 'post', 'enctype' => 'multipart/form-data'));
 echo $HTML->listTableTop(array());
 $cells = array();
 $cells[] = array(_('Document Title').utils_requiredField()._(':'), 'class' => 'docman_editfile_title');
@@ -79,4 +79,5 @@ $cells[][] = html_e('input', array('type' => 'file', 'name' => 'uploaded_data'))
 echo $HTML->multiTableRow(array('id' => 'uploadnewroweditfile'), $cells);
 echo $HTML->listTableBottom();
 echo html_e('input', array('type' => 'hidden', 'id' => 'docid', 'name' => 'docid'));
-echo html_ac(html_ap() -2);
+echo $HTML->closeForm();
+echo html_ac(html_ap() -1);

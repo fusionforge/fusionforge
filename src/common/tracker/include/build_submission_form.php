@@ -23,6 +23,7 @@
  */
 require_once 'note.php';
 function artifact_submission_form($ath, $group) {
+	global $HTML;
 	/*
 		Show the free-form text submitted by the project admin
 	*/
@@ -100,7 +101,7 @@ function artifact_submission_form($ath, $group) {
 	<tr>
 		<td colspan="2">
 		<div class="file_attachments">
-		<a href="javascript:help_window(\''. util_make_url('/help/tracker.php?helpname=attach_file') .'\')"><strong>(?)</strong></a>
+		<a href="javascript:help_window(\''. util_make_uri('/help/tracker.php?helpname=attach_file') .'\')"><strong>(?)</strong></a>
 		<p>
 		<strong><?php echo _('Attach Files')._(':'); ?> </strong> <?php echo('('._('max upload size: '.human_readable_bytes(util_get_maxuploadfilesize())).')') ?><br />
 		<input type="file" name="input_file0" /><br />
@@ -118,12 +119,8 @@ function artifact_submission_form($ath, $group) {
 		</td>
 	</tr>
 
-	<tr>
-		<td colspan="2">
-			<?php printf(_('Fields marked with %s are mandatory.'), utils_requiredField()); ?>
-		</td>
-	</tr>
 	</table>
 	</form>
 <?php
+	echo $HTML->addRequiredFieldsInfoBox();
 }

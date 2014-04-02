@@ -52,7 +52,7 @@ if ($dg->isError())
 	session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($dg->getErrorMessage()));
 
 echo html_ao('div', array('class' => 'docmanDivIncluded'));
-echo html_ao('form', array('name' => 'editgroup', 'action' => util_make_uri($actionurl), 'method' => 'post'));
+echo $HTML->openForm(array('name' => 'editgroup', 'action' => util_make_uri($actionurl), 'method' => 'post'));
 echo html_e('input', array('type' => 'hidden', 'name' => 'dirid', 'value' => $dirid));
 echo $HTML->listTableTop();
 $cells[][] = _('Folder Name');
@@ -71,4 +71,5 @@ $cells[][] = '<input type="submit" value="'.$labelSubmit.'" name="submit" />';
 echo $HTML->multiTableRow(array(), $cells);
 echo $HTML->listTableBottom();
 echo html_e('p', array(), _('Folder name will be used as a title, so it should be formatted correspondingly.'), false);
-echo html_ac(html_ap() - 2);
+echo $HTML->closeForm();
+echo html_ac(html_ap() - 1);

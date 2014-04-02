@@ -102,67 +102,65 @@ if ($rows > 0) {
 		echo "</tr>\n";
 	}
 	echo $HTML->listTableBottom();
-
-	printf(_('Fields marked with %s are mandatory.'), utils_requiredField());
-
+	echo $HTML->addRequiredFieldsInfoBox();
 } else {
 	echo $HTML->warning_msg(_('You have not defined any custom fields'));
 }
 
-		echo "<h2>"._('Add New Custom Field')."</h2>";
-		?>
-		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post">
-		<p>
-		<input type="hidden" name="add_extrafield" value="y" />
-		<strong><?php echo _('Custom Field Name')._(':').utils_requiredField(); ?></strong><br />
-		<input type="text" name="name" value="" size="15" maxlength="30" required="required" />
-		</p>
-		<p>
-		<strong><?php echo _('Field alias')._(':'); ?></strong><br />
-		<input type="text" name="alias" value="" size="15" maxlength="30" />
-		</p>
+echo "<h2>"._('Add New Custom Field')."</h2>";
+?>
+<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post">
+<p>
+<input type="hidden" name="add_extrafield" value="y" />
+<strong><?php echo _('Custom Field Name')._(':').utils_requiredField(); ?></strong><br />
+<input type="text" name="name" value="" size="15" maxlength="30" required="required" />
+</p>
+<p>
+<strong><?php echo _('Field alias')._(':'); ?></strong><br />
+<input type="text" name="alias" value="" size="15" maxlength="30" />
+</p>
 
-		<p>
-		<strong><?php  echo _('Type of custom field')._(':'); ?></strong><br />
-		<input type="radio" name="field_type" value="1" required="required" /> <?php echo _('Select Box'); ?><br />
-		<input type="radio" name="field_type" value="2" /> <?php echo _('Check Box'); ?><br />
-		<input type="radio" name="field_type" value="3" /> <?php echo _('Radio Buttons'); ?><br />
-		<input type="radio" name="field_type" value="4" /> <?php echo _('Text Field'); ?><br />
-		<input type="radio" name="field_type" value="5" /> <?php echo _('Multi-Select Box'); ?><br />
-		<input type="radio" name="field_type" value="6" /> <?php echo _('Text Area'); ?><br />
-		<?php if (!$ath->usesCustomStatuses()) { ?>
-		<input type="radio" name="field_type" value="7" /> <?php echo _('Status'); ?><br />
-		<?php } ?>
-		<!--<input type="radio" name="field_type" value="8" /> <?php echo _('Box type technician'); ?><br />-->
-		<input type="radio" name="field_type" value="9" /> <?php echo _('Relation between artifacts'); ?><br />
-		<p>
-		<?php echo _('Text Fields and Text Areas need to have Size/Maxlength and Rows/Cols defined, respectively.'); ?><br />
-		<?php echo _('Text Field Size/Text Area Rows'); ?>
-			<input type="text" name="attribute1" value="20" size="2" maxlength="2" /><br />
-		<?php echo _('Text Field Maxlength/Text Area Columns'); ?>
-			<input type="text" name="attribute2" value="80" size="2" maxlength="2" /><br />
-		<?php echo _('Hide the default none value'); ?>
-			<input type="checkbox" name="hide100" /><br />
-		<?php echo _('Label for the none value'); ?>
-			<input type="text" name="show100label" size="30" value="<?php echo _('none') ?>" /><br />
-		</p>
-		<?php
-		echo $HTML->warning_msg(_('Warning: this add new custom field'));
-		?>
-		<p>
-		<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" />
-		</p>
-		</form>
-		<?php
+<p>
+<strong><?php  echo _('Type of custom field')._(':'); ?></strong><br />
+<input type="radio" name="field_type" value="1" required="required" /> <?php echo _('Select Box'); ?><br />
+<input type="radio" name="field_type" value="2" /> <?php echo _('Check Box'); ?><br />
+<input type="radio" name="field_type" value="3" /> <?php echo _('Radio Buttons'); ?><br />
+<input type="radio" name="field_type" value="4" /> <?php echo _('Text Field'); ?><br />
+<input type="radio" name="field_type" value="5" /> <?php echo _('Multi-Select Box'); ?><br />
+<input type="radio" name="field_type" value="6" /> <?php echo _('Text Area'); ?><br />
+<?php if (!$ath->usesCustomStatuses()) { ?>
+<input type="radio" name="field_type" value="7" /> <?php echo _('Status'); ?><br />
+<?php } ?>
+<!--<input type="radio" name="field_type" value="8" /> <?php echo _('Box type technician'); ?><br />-->
+<input type="radio" name="field_type" value="9" /> <?php echo _('Relation between artifacts'); ?><br />
+<p>
+<?php echo _('Text Fields and Text Areas need to have Size/Maxlength and Rows/Cols defined, respectively.'); ?><br />
+<?php echo _('Text Field Size/Text Area Rows'); ?>
+	<input type="text" name="attribute1" value="20" size="2" maxlength="2" /><br />
+<?php echo _('Text Field Maxlength/Text Area Columns'); ?>
+	<input type="text" name="attribute2" value="80" size="2" maxlength="2" /><br />
+<?php echo _('Hide the default none value'); ?>
+	<input type="checkbox" name="hide100" /><br />
+<?php echo _('Label for the none value'); ?>
+	<input type="text" name="show100label" size="30" value="<?php echo _('none') ?>" /><br />
+</p>
+<?php
+echo $HTML->warning_msg(_('Warning: this add new custom field'));
+?>
+<p>
+<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" />
+</p>
+</form>
+<?php
 
-		echo "<h2>"._('Custom Field Rendering Template')."</h2>";
+echo "<h2>"._('Custom Field Rendering Template')."</h2>";
 
-		echo "<p>";
-		echo '<a href="'.getStringFromServer('PHP_SELF').'?edittemplate=1&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'._('Edit template').'</a><br />';
-		echo '<a href="'.getStringFromServer('PHP_SELF').'?deletetemplate=1&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'._('Delete template').'</a><br />';
-		echo "</p>";
+echo "<p>";
+echo '<a href="'.getStringFromServer('PHP_SELF').'?edittemplate=1&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'._('Edit template').'</a><br />';
+echo '<a href="'.getStringFromServer('PHP_SELF').'?deletetemplate=1&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'._('Delete template').'</a><br />';
+echo "</p>";
 
-		$ath->footer();
+$ath->footer();
 
 // Local Variables:
 // mode: php

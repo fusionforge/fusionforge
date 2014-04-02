@@ -53,7 +53,7 @@ if (getStringFromPost('search_type') == "one") {
 }
 
 echo html_ao('div', array('id' => 'docman_search', 'class' => 'docmanDivIncluded'));
-echo html_ao('form', array('method' => 'post', 'action' => util_make_uri('/docman/?group_id='.$group_id.'&view=search')));
+echo $HTML->openForm(array('method' => 'post', 'action' => util_make_uri('/docman/?group_id='.$group_id.'&view=search')));
 echo html_ao('div', array('id' => 'docman_search_query_words'));
 echo html_e('span', array('id' => 'docman_search_query_label'), _('Query').utils_requiredField()._(': '));
 echo html_e('input', array('type' => 'text', 'name' => 'textsearch', 'id' => 'textsearch', 'size' => 48, 'value' => $searchString, 'required' => 'required', 'placeholder' => _('Searched words')));
@@ -79,7 +79,8 @@ if (isset($projectIDsArray) && is_array($projectIDsArray)) {
 	echo html_e('input', $attrsInputIncludeSubprojects)._('Include child projects');
 }
 
-echo html_ac(html_ap() - 2);
+echo $HTML->closeForm();
+echo html_ac(html_ap() - 1);
 echo html_ao('div', array('id' => 'docman_search_query_result'));
 if ($searchString) {
 	$mots = preg_split("/[\s,]+/",$searchString);

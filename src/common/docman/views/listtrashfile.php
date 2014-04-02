@@ -94,9 +94,10 @@ if ($d_arr != NULL ) {
 
 echo html_ao('div', array('id' => 'rightdiv'));
 echo html_ao('div', array('style' => 'padding:5px'));
-echo html_ao('form', array('id' => 'emptytrash', 'name' => 'emptytrash', 'method' => 'post', 'action' => util_make_uri('/docman/?group_id='.$group_id.'&action=emptytrash')));
+echo $HTML->openForm(array('id' => 'emptytrash', 'name' => 'emptytrash', 'method' => 'post', 'action' => util_make_uri('/docman/?group_id='.$group_id.'&action=emptytrash')));
 echo html_e('input', array('id' => 'submitemptytrash', 'type' => 'submit', 'value' => _('Delete permanently all documents and folders with deleted status.')));
-echo html_ac(html_ap() - 2);
+echo $HTML->closeForm();
+echo html_ac(html_ap() - 1);
 ?>
 <script type="text/javascript">//<![CDATA[
 var controllerListTrash;

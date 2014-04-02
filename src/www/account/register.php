@@ -272,7 +272,7 @@ if($toDisplay != "") {
 ?>
 
 <p>
-<?php printf(_('Fields marked with %s are mandatory.'), utils_requiredField()); ?>
+<?php echo $HTML->addRequiredFieldsInfoBox(); ?>
 </p>
 <p>
 <input type="submit" name="submit" value="<?php echo _('Register'); ?>" />

@@ -2,7 +2,7 @@
 /**
  * webanalyticsPlugin Class
  *
- * Copyright 2012 Franck Villaume - TrivialDev
+ * Copyright 2012, 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -29,21 +29,26 @@ $linkId = getIntFromRequest('linkid');
 
 $linkValues = $webanalytics->getLink($linkId);
 if (is_array($linkValues)) {
-	echo '<form method="POST" name="updateLink" action="index.php?type=globaladmin&action=updateLinkValue">';
-	echo '<table><tr>';
+	echo $HTML->openForm(array('method' => 'POST', 'name' => 'updateLink', 'action' => util_make_uri('/plugins/'.$webanalytics->name.'/?type=globaladmin&action=updateLinkValue'));
 	echo $HTML->boxTop(_('Update this link'));
-	echo '<td>'._('Informative Name').'</td><td><input name="name" type="text" maxsize="255" value="'.$linkValues['name'].'" /></td>';
-	echo '</tr><tr>';
-	echo '<td>'._('Standard JavaScript Tracking code').'</td><td><textarea name="link" rows="15" cols="70" >'.$linkValues['url'].'</textarea></td>';
-	echo '</tr><tr>';
-	echo '<td>';
-	echo '<input type="hidden" name="linkid" value="'.$linkId.'" />';
-	echo '<input type="submit" value="'. _('Update') .'" />';
-	echo '<a href="/plugins/'.$webanalytics->name.'/?type=globaladmin"><input type="button" value="'. _('Cancel') .'" /></a>';
-	echo '</td>';
+	echo $HTML->listTableTop();
+	$cells = array();
+	$cells[][] = _('Informative Name').utils_requiredField()._(':');
+	$cells[][] = '<input name="name" type="text" maxsize="255" value="'.$linkValues['name'].'" required="required" />';
+	echo $HTML->multiTableRow(array(), $cells);
+	$cells = array();
+	$cells[][] = _('Standard JavaScript Tracking code').utils_requiredField()._(':');
+	$cells[][] = '<textarea name="link" rows="15" cols="70" required="required" >'.$linkValues['url'].'</textarea>';
+	echo $HTML->multiTableRow(array(), $cells);
+	$cells = array();
+	$cells[] = array('<input type="hidden" name="linkid" value="'.$linkId.'" />'.
+			'<input type="submit" value="'. _('Update') .'" />'.
+			util_make_link('/plugins/'.$webanalytics->name.'?type=globaladmin', '<input type="button" value="'. _('Cancel') .'" />'), 'colspan' => 2);
+	echo $HTML->multiTableRow(array(), $cells);
+	echo $HTML->listTableBottom();
 	echo $HTML->boxBottom();
-	echo '</tr></table>';
-	echo '</form>';
+	echo $HTML->closeForm();
+	echo $HTML->addRequiredFieldsInfoBox();
 } else {
 	$error_msg = _('Cannot retrieve value for this link:').' '.$linkId;
 	session_redirect('plugins/'.$webanalytics->name.'/?type=globaladmin&error_msg='.urlencode($error_msg));

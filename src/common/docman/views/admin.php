@@ -6,6 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -46,13 +47,14 @@ function doIt(formid) {
 <?php
 echo html_ac(html_ap() - 1);
 if (extension_loaded('zip')) {
-	echo html_ao('form', array('id' => 'backup', 'name' => 'backup', 'method' => 'post', 'action' => util_make_uri('/docman/view.php/'.$group_id.'/backup')));
+	echo $HTML->openForm(array('id' => 'backup', 'name' => 'backup', 'method' => 'post', 'action' => util_make_uri('/docman/view.php/'.$group_id.'/backup')));
 	echo html_ao('ul');
 	echo html_e('li', array(), html_e('input', array('id' => 'submitbackup', 'type' => 'button', 'value' => _('Extract documents and directories as an archive'), 'onclick' => 'javascript:doIt("backup")')), false);
-	echo html_ac(html_ap() -2);
+	echo html_ac(html_ap() -1);
+	echo $HTML->closeForm();
 }
 
-echo html_ao('form', array('id' => 'createonline', 'name' => 'createonline', 'method' => 'post', 'action' => util_make_uri('/docman/?group_id='.$group_id.'&action=updatecreateonline')));
+echo $HTML->openForm(array('id' => 'createonline', 'name' => 'createonline', 'method' => 'post', 'action' => util_make_uri('/docman/?group_id='.$group_id.'&action=updatecreateonline')));
 echo html_ao('ul');
 $createOnlineStatus = '1';
 $labelCreateOnline = _('Enable Create Online Documents');
@@ -61,9 +63,10 @@ if ($g->useCreateOnline()) {
 	$labelCreateOnline = _('Disable Create Online Documents');
 }
 echo html_e('li', array(), html_e('input', array('name' => 'status', 'type' => 'hidden', 'value' => $createOnlineStatus)).html_e('input', array('id' => 'submitcreateonline', 'type' => 'button', 'value' => $labelCreateOnline, 'onclick' => 'javascript:doIt("createonline")')), false);
-echo html_ac(html_ap() -2);
+echo html_ac(html_ap() -1);
+echo $HTML->closeForm();
 
-echo html_ao('form', array('id' => 'searchengine', 'name' => 'searchengine', 'method' => 'post', 'action' => util_make_uri('/docman/?group_id='.$group_id.'&action=updateenginesearch')));
+echo $HTML->openForm(array('id' => 'searchengine', 'name' => 'searchengine', 'method' => 'post', 'action' => util_make_uri('/docman/?group_id='.$group_id.'&action=updateenginesearch')));
 echo html_ao('ul');
 $searchEngineStatus = '1';
 $labelSearchEngine = _('Enable Search Engine');
@@ -72,17 +75,19 @@ if ($g->useDocmanSearch()) {
 	$labelSearchEngine = _('Disable Search Engine');
 }
 echo html_e('li', array(), html_e('input', array('name' => 'status', 'type' => 'hidden', 'value' => $searchEngineStatus)).html_e('input', array('id' => 'submitsearchengine', 'type' => 'button', 'value' => $labelSearchEngine, 'onclick' =>'javascript:doIt("searchengine")')), false);
-echo html_ac(html_ap() -2);
+echo html_ac(html_ap() -1);
+echo $HTML->closeForm();
 
 if ($g->useDocmanSearch()) {
-	echo html_ao('form', array('id' => 'reindexword', 'name' => 'reindexword', 'method' => 'post', 'action' => util_make_uri('/docman/?group_id='.$group_id.'&action=forcereindexenginesearch')));
+	echo $HTML->openForm(array('id' => 'reindexword', 'name' => 'reindexword', 'method' => 'post', 'action' => util_make_uri('/docman/?group_id='.$group_id.'&action=forcereindexenginesearch')));
 	echo html_ao('ul');
 	echo html_e('li', array(), html_e('input', array('name' => 'status', 'type' => 'hidden', 'value' => '1')).html_e('input', array('id' => 'submitreindexword', 'type' => 'button', 'value' => _('Force reindexation search engine'), 'onclick' => 'javascript:doIt("reindexword")')), false);
-	echo html_ac(html_ap() -2);
+	echo html_ac(html_ap() -1);
+	echo $HTML->closeForm();
 }
 
 if (forge_get_config('use_webdav')) {
-	echo html_ao('form', array('id' => 'webdavinterface', 'name' => 'webdavinterface', 'method' => 'post', 'action' => util_make_uri('/docman/?group_id='.$group_id.'&action=updatewebdavinterface')));
+	echo $HTML->openForm(array('id' => 'webdavinterface', 'name' => 'webdavinterface', 'method' => 'post', 'action' => util_make_uri('/docman/?group_id='.$group_id.'&action=updatewebdavinterface')));
 	echo html_ao('ul');
 	$webdavStatus = '1';
 	$labelWebdavInterface = _('Enable Webdav Interface');
@@ -91,7 +96,8 @@ if (forge_get_config('use_webdav')) {
 		$labelWebdavInterface = _('Disable Webdav Interface');
 	}
 	echo html_e('li', array(), html_e('input', array('name' => 'status', 'type' => 'hidden', 'value' => $webdavStatus)).html_e('input', array('id' => 'submitweddavinterface', 'type' => 'button', 'value' => $labelWebdavInterface, 'onclick' => 'javascript:doIt("webdavinterface")')), false);
-	echo html_ac(html_ap() -2);
+	echo html_ac(html_ap() -1);
+	echo $HTML->closeForm();
 }
 
 plugin_hook('hierarchy_views', array($group_id, 'docman'));

@@ -53,7 +53,7 @@ function doItAddSubGroup() {
 <?php
 echo html_ac(html_ap() - 1);
 echo html_ao('div', array('class' => 'docmanDivIncluded'));
-echo html_ao('form', array('id' => 'addsubgroup', 'name' => 'addsubgroup', 'method' => 'post', 'action' => util_make_uri($actionurl)));
+echo $HTML->openForm(array('id' => 'addsubgroup', 'name' => 'addsubgroup', 'method' => 'post', 'action' => util_make_uri($actionurl)));
 if ($dirid) {
 	$folderMessage = _('Name of the document subfolder to create');
 } else {
@@ -62,4 +62,5 @@ if ($dirid) {
 echo html_e('span', array(), $folderMessage._(': '), false);
 echo html_e('input', array('required' => 'required', 'type' => 'text',  'name' => 'groupname', 'size' => 40, 'maxlength' => 255, 'placeholder' => $folderMessage));
 echo html_e('input', array('id' => 'submitaddsubgroup', 'type' => 'button', 'value' => _('Create'), 'onclick' => 'javascript:doItAddSubGroup()'));
-echo html_ac(html_ap() -2);
+echo $HTML->closeForm();
+echo html_ac(html_ap() -1);

@@ -1406,6 +1406,30 @@ if (isset($params['group']) && $params['group']) {
 	function displayStylesheetElements() {
 		/* Codendi/Tuleap compatibility */
 	}
+
+	/**
+	 * openForm - create the html code to open a form
+	 *
+	 * @param	array	$args	argument of the form (method, action, ...)
+	 * @return	string	html code
+	 */
+	function openForm($args) {
+		return html_ao('form', $args);
+	}
+
+	/**
+	 * closeForm - create the html code to close a form
+	 *		must be used after openForm function.
+	 *
+	 * @return	string	html code
+	 */
+	function closeForm() {
+		return html_ac(html_ap() -1);
+	}
+
+	function addRequiredFieldsInfoBox() {
+		return html_e('p', array(), sprintf(_('Fields marked with %s are mandatory.'), utils_requiredField()), false);
+	}
 }
 
 // Local Variables:

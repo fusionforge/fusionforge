@@ -2,7 +2,7 @@
 /**
  * webanalyticsPlugin Global Configuration View
  *
- * Copyright 2012 Franck Villaume - TrivialDev
+ * Copyright 2012, 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -53,16 +53,18 @@ if (sizeof($linksArray)) {
 	echo '</br>';
 }
 
-echo '<form method="POST" name="addLink" action="index.php?type=globaladmin&action=addLink">';
-echo '<table><tr>';
+echo $HTML->openForm(array('method' => 'POST', 'name' => 'addLink', 'action' => util_make_uri('/plugins/'.$webanalytics->name.'?type=globaladmin&action=addLink')));
 echo $HTML->boxTop(_('Add a new webanalytics reference'));
-echo '<td>'._('Informative Name').'</td><td><input name="name" type="text" maxsize="255" /></td>';
+echo $HTML->listTableTop();
+echo '<tr>';
+echo '<td>'._('Informative Name').'</td><td><input name="name" type="text" maxsize="255" required="required" /></td>';
 echo '</tr><tr>';
-echo '<td>'._('Standard JavaScript Tracking code').'</td><td><textarea name="link" rows="15" cols="70">'._('Just paste your code here...').'</textarea></td>';
+echo '<td>'._('Standard JavaScript Tracking code').'</td><td><textarea name="link" rows="15" cols="70" required="required" >'._('Just paste your code here...').'</textarea></td>';
 echo '</tr><tr>';
 echo '<td>';
 echo '<input type="submit" value="'. _('Add') .'" />';
-echo '</td>';
+echo '</td></tr>';
+echo $HTML->listTableBottom();
 echo $HTML->boxBottom();
-echo '</tr></table>';
-echo '</form>';
+echo $HTML->closeForm();
+echo $HTML->addRequiredFieldsInfoBox();

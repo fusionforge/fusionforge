@@ -83,21 +83,22 @@ if ($report->isError()) {
 	echo $HTML->error_msg($report->getErrorMessage());
 } else {
 
-	echo html_ao('form', array('action' => util_make_uri('/docman/?group_id='.$group_id.'&view=reporting'), 'method' => 'post', 'class' => 'align-center'));
 	echo html_ao('div', array('id' => 'div_form_reporting'));
+	echo $HTML->openForm(array('action' => util_make_uri('/docman/?group_id='.$group_id.'&view=reporting'), 'method' => 'post', 'class' => 'align-center'));
 	echo html_e('strong', array(), _('Start Date')._(':'), false);
 	echo report_months_box($report, 'start', $start);
 	echo html_e('strong', array(), _('End Date')._(':'), false);
 	echo html_e('input', array('type' => 'submit', 'value' => _('Refresh')));
-	echo html_ac(html_ap() -2);
+	echo $HTML->closeForm();
+	echo html_ac(html_ap() -1);
 
 $data = $report->getData();
 
 if (count($data) == 0) {
 	echo $HTML->information(_('There have been no viewed documents for this project yet.'));
 } else {
-	echo '<script type="text/javascript">';
-	echo '//<![CDATA['."\n";
+	echo html_ao('script', array('type' => 'text/javascript'));
+	echo '//<![CDATA[';
 	echo 'var ticks = new Array();';
 	echo 'var values = new Array();';
 	$arr =& $report->getMonthStartArr();
@@ -157,8 +158,8 @@ if (count($data) == 0) {
 			plot1.replot( { resetAxes: true } );
 		});'."\n";
 	echo '//]]>';
-	echo '</script>';
-	echo '<div id="chart1"></div>';
+	echo html_ac(html_ap() -1);
+	echo html_e('div', array('id' => 'chart1'), '', false);
 	$tabletop = array(_('Folder'), _('Document'), _('User'), _('Date'));
 	$classth = array('', '', '', '');
 	echo $HTML->listTableTop($tabletop, false, 'sortable_docman_listfile', 'sortable', $classth);

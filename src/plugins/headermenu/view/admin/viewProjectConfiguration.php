@@ -25,9 +25,9 @@ global $HTML;
 global $headermenu;
 global $group_id;
 
+echo html_ao('script', array('type' => 'text/javascript'));
 ?>
-
-<script type="text/javascript">//<![CDATA[
+//<![CDATA[
 var controllerGroupMenu;
 
 jQuery(document).ready(function() {
@@ -46,9 +46,9 @@ jQuery(document).ready(function() {
 	});
 });
 
-//]]></script>
-
+//]]>
 <?php
+echo html_ac(html_ap() - 1);
 $linksArray = $headermenu->getAvailableLinks('groupmenu', $group_id);
 if (sizeof($linksArray)) {
 	echo html_e('h2', array(), _('Manage available tabs'));
@@ -89,26 +89,39 @@ if (sizeof($linksArray)) {
 
 echo html_e('h2', array(), _('Add new tab'));
 echo $HTML->information(_('You can add your own tabs in the menu bar with the form below.'));
-echo '<form method="POST" name="addLink" action="'.util_make_uri('/plugins/'.$headermenu->name.'/?type=projectadmin&group_id='.$group_id.'&action=addLink').'">';
+echo $HTML->openForm(array('method' => 'POST', 'name' => 'addLink', 'action' => util_make_uri('/plugins/'.$headermenu->name.'/?type=projectadmin&group_id='.$group_id.'&action=addLink')));
 echo $HTML->listTableTop();
 $cells = array();
-$cells[][] = _('Displayed Name').utils_requiredField()._(':');
+$cells[] = array(_('Displayed Name').utils_requiredField()._(':'), 'style' => 'text-align:right');
 $cells[][] = '<input required="required" name="name" type="text" maxlength="255" />';
 echo $HTML->multiTableRow(array(), $cells);
 $cells = array();
-$cells[][] = _('Description')._(':');
+$cells[] = array(_('Description')._(':'), 'style' => 'text-align:right');
 $cells[][] = '<input name="description" type="text" maxlength="255" />';
 echo $HTML->multiTableRow(array(), $cells);
-$cells = array();
-$cells[][] = _('Tab Type')._(':');
+$cells = array();$params['name'] = 'htmlcode';$params['name'] = 'htmlcode';
+$params['body'] = _('Just paste your code here...');;
+$params['width'] = "800";
+$params['height'] = "500";
+$params['user_id'] = user_getid();
+$params['content'] = '<textarea name="htmlcode" rows="5" cols="80">'.$params['body'].'</textarea>';
+plugin_hook("text_editor", $params);
+$cells[][] = $params['content'];
+$params['body'] = _('Just paste your code here...');;
+$params['width'] = "800";
+$params['height'] = "500";
+$params['user_id'] = user_getid();
+$params['content'] = '<textarea name="htmlcode" rows="5" cols="80">'.$params['body'].'</textarea>';
+plugin_hook("text_editor", $params);
+$cells[][] = $params['content'];
+$cells[] = array(_('Tab Type')._(':'), 'style' => 'text-align:right');
 $texts = array('URL', 'HTML Page');
 $vals = array('url', 'htmlcode');
 $select_name = 'typemenu';
 $cells[][] = html_build_radio_buttons_from_arrays($vals, $texts, $select_name, 'url', false);
 echo $HTML->multiTableRow(array(), $cells);
 $cells = array();
-$cells[][] = _('HTML Page').utils_requiredField()._(':');
-
+$cells[] = array(_('HTML Page').utils_requiredField()._(':'), 'style' => 'text-align:right');
 $params['name'] = 'htmlcode';
 $params['body'] = _('Just paste your code here...');
 $params['width'] = "800";
@@ -118,7 +131,7 @@ plugin_hook_by_reference("text_editor", $params);
 $cells[][] = $params['content'];
 echo $HTML->multiTableRow(array('id' => 'trhtmlcode', 'class' => 'hide'), $cells);
 $cells = array();
-$cells[][] = _('URL').utils_requiredField()._(':');
+$cells[] = array(_('URL').utils_requiredField()._(':'), 'style' => 'text-align:right');
 $cells[][] = '<input name="link" type="text" maxlength="255" />';
 echo $HTML->multiTableRow(array('id' => 'urlcode'), $cells);
 $cells = array();
@@ -128,6 +141,6 @@ $cells = array();
 $cells[] = array('<input type="hidden" name="linkmenu" value="groupmenu" /><input type="submit" value="'. _('Add') .'" />', 'colspan' => 2);
 echo $HTML->multiTableRow(array(), $cells);
 echo $HTML->listTableBottom();
-echo '</form>';
+echo $HTML->closeForm();
 
 printf(_('Fields marked with %s are mandatory.'), utils_requiredField());
