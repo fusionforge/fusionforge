@@ -31,7 +31,7 @@ require_once $gfcommon.'include/cron_utils.php';
 require_once $gfplugins.'scmhook/common/scmhookPlugin.class.php';
 
 // if you want debug output, uncomment the verbose variable.
-$verbose = true;
+//$verbose = true;
 
 ############
 ###### START
