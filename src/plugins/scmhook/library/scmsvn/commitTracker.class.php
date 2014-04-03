@@ -96,29 +96,21 @@ class commitTracker extends scmhook {
 
 		if ($Rows > 0) {
 			echo '<tr><td>';
-			echo '<h2>'._('Related SVN commits').'</h2>';
+			echo html_e('h2', array(), _('Related SVN commits'), false);
 
 			$title_arr = $this->getTitleArr();
 			echo $HTML->listTableTop($title_arr);
 
 			for ($i=0; $i<$Rows; $i++) {
 				$Row = db_fetch_array($DBResult);
-				echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>'.
-				'<td>'. $this->getFileLink($group->getUnixName(),
-						$Row['file'],$Row['actual_version']). '</td>'.
-				'<td>'. date(_('Y-m-d'), $Row['svn_date']).'</td>'.
-				'<td>'. $this->getDiffLink($group->getUnixName(),
-						$Row['file'],
-						$Row['prev_version'],
-						$Row['actual_version']).'</td>'.
-				'<td>'. $this->getActualVersionLink($group->getUnixName(),
-					$Row['file'], $Row['actual_version']).
-				'</td>
-				<td>'. htmlspecialchars($Row['log_text']).'</td>
-				<td>'. util_make_link_u($Row['author'],
-							 user_get_object_by_name($Row['author'])->getId(),
-							 $Row['author']).'</td>
-				</tr>';
+				$cells = array();
+				$cells[][] = $this->getFileLink($group->getUnixName(), $Row['file'], $Row['actual_version']);
+				$cells[][] = date(_('Y-m-d'), $Row['svn_date']);
+				$cells[][] = $this->getDiffLink($group->getUnixName(), $Row['file'], $Row['prev_version'], $Row['actual_version']);
+				$cells[][] = $this->getActualVersionLink($group->getUnixName(), $Row['file'], $Row['actual_version']);
+				$cells[][] = htmlspecialchars($Row['log_text']);
+				$cells[][] = util_make_link_u($Row['author'], user_get_object_by_name($Row['author'])->getId(), $Row['author']);
+				echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
 			}
 			echo $HTML->listTableBottom();
 			echo '</td></tr>';

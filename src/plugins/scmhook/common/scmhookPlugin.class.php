@@ -280,14 +280,14 @@ class scmhookPlugin extends Plugin {
 			}
 		}
 		if (count($hooksPreCommit)) {
-			echo '<h3>'._('pre-commit Hooks').'</h3>';
+			echo html_e('h3', array(), _('pre-commit Hooks'), false);
 			$tabletop = array('', _('Hook Name'), _('Description'));
 			$classth = array('unsortable', '', '');
 			echo $HTML->listTableTop($tabletop, false, 'sortable_scmhook_precommit', 'sortable', $classth);
 			foreach ($hooksPreCommit as $hookPreCommit) {
 				$isdisabled = 0;
 				if (! empty($hookPreCommit->onlyGlobalAdmin) && ! Permission::isGlobalAdmin()) {
-					echo '<tr style="display: none;" ><td>';
+					echo '<tr class="hide" ><td>';
 				}
 				else {
 					echo '<tr><td>';
@@ -323,14 +323,14 @@ class scmhookPlugin extends Plugin {
 			echo $HTML->listTableBottom();
 		}
 		if (count($hooksPreRevPropChange)) {
-			echo '<h3>'._('pre-revprop-change Hooks').'</h3>';
+			echo html_e('h3', array(), _('pre-revprop-change Hooks'), false);
 			$tabletop = array('', _('Hook Name'), _('Description'));
 			$classth = array('unsortable', '', '');
 			echo $HTML->listTableTop($tabletop, false, 'sortable_scmhook_precommit', 'sortable', $classth);
 			foreach ($hooksPreRevPropChange as $hook) {
 				$isdisabled = 0;
 				if (! empty($hook->onlyGlobalAdmin) && ! Permission::isGlobalAdmin()) {
-					echo '<tr style="display: none;" ><td>';
+					echo '<tr class="hide;" ><td>';
 				}
 				else {
 					echo '<tr><td>';
@@ -373,7 +373,7 @@ class scmhookPlugin extends Plugin {
 			foreach ($hooksPostCommit as $hookPostCommit) {
 				$isdisabled = 0;
 				if (! empty($hookPostCommit->onlyGlobalAdmin) && ! Permission::isGlobalAdmin()) {
-					echo '<tr style="display: none;" ><td>';
+					echo '<tr class="hide" ><td>';
 				}
 				else {
 					echo '<tr><td>';
@@ -427,14 +427,14 @@ class scmhookPlugin extends Plugin {
 			}
 		}
 		if (count($hooksServePushPullBundle)) {
-			echo '<h3>'._('serve-push-pull-bundle Hooks').'</h3>';
+			echo html_e('h3', array(), _('serve-push-pull-bundle Hooks'), false);
 			$tabletop = array('', _('Hook Name'), _('Description'));
 			$classth = array('unsortable', '', '');
 			echo $HTML->listTableTop($tabletop, false, 'sortable_scmhook_serve-push-pull-bundle', 'sortable', $classth);
 			foreach ($hooksServePushPullBundle as $hookServePushPullBundle) {
 				$isdisabled = 0;
 				if (! empty($hookServePushPullBundle->onlyGlobalAdmin) && ! Permission::isGlobalAdmin()) {
-					echo '<tr style="display: none;" ><td>';
+					echo '<tr class="hide" ><td>';
 				}
 				else {
 					echo '<tr><td>';
@@ -488,14 +488,14 @@ class scmhookPlugin extends Plugin {
 			}
 		}
 		if (count($hooksPostReceive)) {
-			echo '<h3>'._('post-receive Hooks').'</h3>';
+			echo hml_e('h3', array(), _('post-receive Hooks'), false);
 			$tabletop = array('', _('Hook Name'), _('Description'));
 			$classth = array('unsortable', '', '');
 			echo $HTML->listTableTop($tabletop, false, 'sortable_scmhook_post-receive', 'sortable', $classth);
 			foreach ($hooksPostReceive as $hookPostReceive) {
 				$isdisabled = 0;
 				if (! empty($hookPostReceive->onlyGlobalAdmin) && ! Permission::isGlobalAdmin()) {
-					echo '<tr style="display: none;" ><td>';
+					echo '<tr class="hide" ><td>';
 				}
 				else {
 					echo '<tr><td>';
