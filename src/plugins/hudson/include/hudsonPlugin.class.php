@@ -289,9 +289,9 @@ class hudsonPlugin extends Plugin {
 						$html .= '  <td>';
 						$html .= '   <ul>';
 						if ($job->hasBuilds()) {
-							$html .= ' <li>'._("Last Build:").' <a href="/plugins/hudson/?action=view_build&group_id='.$group_id.'&job_id='.$job_id.'&build_id='.$job->getLastBuildNumber().'"># '.$job->getLastBuildNumber().'</a></li>';
-							$html .= ' <li>'._("Last Success")._(": ").'<a href="/plugins/hudson/?action=view_build&group_id='.$group_id.'&job_id='.$job_id.'&build_id='.$job->getLastSuccessfulBuildNumber().'"># '.$job->getLastSuccessfulBuildNumber().'</a></li>';
-							$html .= ' <li>'._("Last Failure")._(": ").'<a href="/plugins/hudson/?action=view_build&group_id='.$group_id.'&job_id='.$job_id.'&build_id='.$job->getLastFailedBuildNumber().'"># '.$job->getLastFailedBuildNumber().'</a></li>';
+							$html .= ' <li>'._("Last Build:").util_make_link('/plugins/hudson/?action=view_build&group_id='.$group_id.'&job_id='.$job_id.'&build_id='.$job->getLastBuildNumber(), '# '.$job->getLastBuildNumber()).'</li>';
+							$html .= ' <li>'._("Last Success")._(": ").util_make_link('/plugins/hudson/?action=view_build&group_id='.$group_id.'&job_id='.$job_id.'&build_id='.$job->getLastSuccessfulBuildNumber(), '# '.$job->getLastSuccessfulBuildNumber()).'</li>';
+							$html .= ' <li>'._("Last Failure")._(": ").util_make_link('/plugins/hudson/?action=view_build&group_id='.$group_id.'&job_id='.$job_id.'&build_id='.$job->getLastFailedBuildNumber(), '# '.$job->getLastFailedBuildNumber()).'</li>';
 						} else {
 							$html .= ' <li>'. _("No build found for this job.") . '</li>';
 						}
