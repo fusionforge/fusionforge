@@ -71,7 +71,7 @@ function account_namevalid($name, $unix=false) {
 		return false;
 	}
 
-	if (!preg_match('/^[a-z0-9][-a-z0-9_\.]+$/', $name)) {
+	if (!preg_match('/^[a-z0-9][-a-z0-9_\.]+\z/', $name)) {
 		$GLOBALS['register_error'] = _('Illegal character in name.');
 		return false;
 	}
