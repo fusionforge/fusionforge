@@ -22,71 +22,26 @@ mk-build-deps -i /usr/src/fusionforge/src/debian/control -t 'apt-get -y' -r
 
 
 # Populate the repo
-rm -rf /usr/src/debian-repository
+#rm -rf /usr/src/debian-repository
 mkdir -p /usr/src/debian-repository
 
 if [ ! -f /root/.mini-dinstall.conf ]; then
     cat >/root/.mini-dinstall.conf <<EOF
-
 [DEFAULT]
-
 archivedir = /usr/src/debian-repository
 archive_style = flat
 
-architectures = all, i386, source
-generate_release = 1
 verify_sigs = 0
 
-max_retry_time = 3600
+generate_release = 1
+release_signscript = /usr/src/fusionforge/vm/scripts/mini-dinstall-sign.sh
 
+max_retry_time = 3600
 mail_on_success = false
 
 [local]
 EOF
 fi
-
-if [ ! -f /root/.dput.cf ]; then
-    cat > /root/.dput.cf <<EOF
-
-[local]
-fqdn = localhost
-incoming = /usr/src/debian-repository/mini-dinstall/incoming 
-method = local
-run_dinstall = 0
-allow_unsigned_uploads = yes
-post_upload_command = mini-dinstall -b
-allowed_distributions = local
-EOF
-fi
-
-if [ ! -f /root/.devscripts ]; then
-    cat > /root/.devscripts <<EOF
-
-DEBRELEASE_UPLOADER=dput
-DEBUILD_DPKG_BUILDPACKAGE_OPTS=-i
-EOF
-fi
-
-mini-dinstall -b
-
-cd /usr/src/fusionforge/src
-f=$(mktemp)
-cp debian/changelog $f
-
-# The build is likely to fail if /tmp is too short.
-# When filesystem is too much full, the boot scripts mount a tmpfs /tmp that is far too small to allow builds,
-# but still gets unnoticed.
-# We assume here that you didn't change the VM partitions layout and that /tmp is not a mounted partition.
-mount | grep /tmp
-if [ $? -eq 0 ]; then
-    echo "WARNING: It is likely that the mounted /tmp could be too short. If you experience a build error bellow, Try make some room on the FS and reboot, first."
-fi
-
-dch --newversion $(dpkg-parsechangelog | sed -n 's/^Version: \([0-9.]\+\(\~rc[0-9]\)\?\).*/\1/p')+$(date +%Y%m%d%H%M)-1 --distribution local --force-distribution "Autobuilt."
-debuild --no-lintian --no-tgz-check -us -uc -tc  # using -tc so 'bzr st' is readable
-
-debrelease -f local
-mv $f debian/changelog
 
 export GNUPGHOME=/usr/src/gnupg
 if [ ! -e $GNUPGHOME ]; then
@@ -109,11 +64,49 @@ EOF
 fi
 gpg --export FusionForge -a > /usr/src/debian-repository/key.asc
 apt-key add /usr/src/debian-repository/key.asc
-(
-    cd /usr/src/debian-repository/local/
-    rm -f Release.gpg
-    gpg --no-tty --batch --detach-sign -o Release.gpg Release
-)
+
+mini-dinstall -b
+
+
+if [ ! -f /root/.dput.cf ]; then
+    cat > /root/.dput.cf <<EOF
+[local]
+fqdn = localhost
+incoming = /usr/src/debian-repository/mini-dinstall/incoming 
+method = local
+run_dinstall = 0
+allow_unsigned_uploads = yes
+post_upload_command = mini-dinstall -b
+allowed_distributions = local
+EOF
+fi
+
+if [ ! -f /root/.devscripts ]; then
+    cat > /root/.devscripts <<EOF
+DEBRELEASE_UPLOADER=dput
+DEBUILD_DPKG_BUILDPACKAGE_OPTS=-i
+EOF
+fi
+
+
+cd /usr/src/fusionforge/src
+f=$(mktemp)
+cp debian/changelog $f
+
+# The build is likely to fail if /tmp is too short.
+# When filesystem is too much full, the boot scripts mount a tmpfs /tmp that is far too small to allow builds,
+# but still gets unnoticed.
+# We assume here that you didn't change the VM partitions layout and that /tmp is not a mounted partition.
+mount | grep /tmp
+if [ $? -eq 0 ]; then
+    echo "WARNING: It is likely that the mounted /tmp could be too short. If you experience a build error bellow, Try make some room on the FS and reboot, first."
+fi
+
+dch --newversion $(dpkg-parsechangelog | sed -n 's/^Version: \([0-9.]\+\(\~rc[0-9]\)\?\).*/\1/p')+$(date +%Y%m%d%H%M)-1 --distribution local --force-distribution "Autobuilt."
+debuild --no-lintian --no-tgz-check -us -uc -tc  # using -tc so 'bzr st' is readable
+
+debrelease -f local
+mv $f debian/changelog
 
 echo 'deb file:///usr/src/debian-repository local/' > /etc/apt/sources.list.d/local.list
 apt-get update
