@@ -29,7 +29,7 @@ $linkId = getIntFromRequest('linkid');
 
 $linkValues = $webanalytics->getLink($linkId);
 if (is_array($linkValues)) {
-	echo $HTML->openForm(array('method' => 'POST', 'name' => 'updateLink', 'action' => util_make_uri('/plugins/'.$webanalytics->name.'/?type=globaladmin&action=updateLinkValue'));
+	echo $HTML->openForm(array('method' => 'POST', 'name' => 'updateLink', 'action' => util_make_uri('/plugins/'.$webanalytics->name.'/?type=globaladmin&action=updateLinkValue')));
 	echo $HTML->boxTop(_('Update this link'));
 	echo $HTML->listTableTop();
 	$cells = array();

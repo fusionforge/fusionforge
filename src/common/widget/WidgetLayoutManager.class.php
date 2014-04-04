@@ -236,6 +236,7 @@ class WidgetLayoutManager {
 	 * @param	int		$layout_id
 	 */
 	function displayAvailableWidgets($owner_id, $owner_type, $layout_id) {
+		global $HTML;
 		// select already used widgets
 		$used_widgets = array();
 		$sql = "SELECT *
@@ -274,7 +275,7 @@ class WidgetLayoutManager {
 			$action = 'widget';
 		}
 		echo html_ac(html_ap() -1 );
-		echo '<form action="/widgets/updatelayout.php?owner='. $owner_type.$owner_id .'&amp;action='. $action .'&amp;layout_id='. $layout_id .'" method="post">';
+		echo $HTML->openForm(array('action' => util_make_uri('/widgets/updatelayout.php?owner='.$owner_type.$owner_id.'&action='.$action.'&layout_id='.$layout_id), 'method' => 'post'));
 		if ($update_layout) {
 			?>
 			<script type='text/javascript'>//<![CDATA[
@@ -310,7 +311,7 @@ class WidgetLayoutManager {
 			<?php
 			$sql = "SELECT * FROM layouts WHERE scope='S' ORDER BY id ";
 			$req_layouts = db_query_params($sql,array());
-			echo '<table>';
+			echo $HTML->listTableTop();
 			$is_custom = true;
 			while ($data = db_fetch_array($req_layouts)) {
 				$checked = $layout_id == $data['id'] ? 'checked="checked"' : '';
@@ -368,7 +369,7 @@ class WidgetLayoutManager {
 				</tr>
 				</table>';
 			echo '</td></tr>';
-			echo '</table>';
+			echo $HTML->listTableBottom();
 			echo '<input type="submit" id="save" value="'. _("Submit") .'" />';
 		} else {
 			// display the widget selection form
@@ -384,7 +385,7 @@ class WidgetLayoutManager {
 				</tbody>
 				</table>';
 		}
-		echo '</form>';
+		echo $HTML->closeForm();
 	}
 
 	function updateLayout($owner_id, $owner_type, $layout, $custom_layout) {
@@ -707,27 +708,28 @@ class WidgetLayoutManager {
 	}
 
 	protected function feedback($owner_id, $owner_type) {
-		$link = '/';
+		global $feedback;
+		$link = util_make_uri('/');
 		if ($owner_type == self::OWNER_TYPE_GROUP) {
 			//retrieve the short name of the project
 			if ($project = ProjectManager::instance()->getProject($owner_id)) {
 				$hp = Codendi_HTMLPurifier::instance();
-				$link = '/projects/'.  $hp->purify($project->getUnixName(), CODENDI_PURIFIER_CONVERT_HTML) ;
+				$link = util_make_uri('/projects/'.  $hp->purify($project->getUnixName(), CODENDI_PURIFIER_CONVERT_HTML));
 			}
 		} elseif ($owner_type == self::OWNER_TYPE_USER) {
-			$link = '/my/';
+			$link = util_make_uri('/my/');
 		}
-		$GLOBALS['feedback'] .= _('Your dashboard has been updated.');
+		$feedback .= _('Your dashboard has been updated.');
 	}
 
 	/**
 	 * removeWidget
 	 *
-	 * @param	int		$owner_id
+	 * @param	int	$owner_id
 	 * @param	string	$owner_type
-	 * @param	int		$layout_id
+	 * @param	int	$layout_id
 	 * @param	string	$name
-	 * @param	int		$instance_id
+	 * @param	int	$instance_id
 	 * @param	object	$widget
 	 */
 	function removeWidget($owner_id, $owner_type, $layout_id, $name, $instance_id, &$widget) {
@@ -741,11 +743,11 @@ class WidgetLayoutManager {
 	/**
 	 * mimizeWidget
 	 *
-	 * @param	int		$owner_id
+	 * @param	int	$owner_id
 	 * @param	string	$owner_type
-	 * @param	int		$layout_id
+	 * @param	int	$layout_id
 	 * @param	string	$name
-	 * @param	int		$instance_id
+	 * @param	int	$instance_id
 	 */
 	function mimizeWidget($owner_id, $owner_type, $layout_id, $name, $instance_id) {
 		$sql = "UPDATE layouts_contents SET is_minimized = 1 WHERE owner_type = $1 AND owner_id = $2 AND layout_id = $3 AND name = $4 AND content_id = $5";
@@ -756,11 +758,11 @@ class WidgetLayoutManager {
 	/**
 	 * maximizeWidget
 	 *
-	 * @param	int		$owner_id
+	 * @param	int	$owner_id
 	 * @param	string	$owner_type
-	 * @param	int		$layout_id
+	 * @param	int	$layout_id
 	 * @param	string	$name
-	 * @param	int		$instance_id
+	 * @param	int	$instance_id
 	 */
 	function maximizeWidget($owner_id, $owner_type, $layout_id, $name, $instance_id) {
 		$sql = "UPDATE layouts_contents SET is_minimized = 0 WHERE owner_type =$1 AND owner_id =$2 AND layout_id = $3 AND name = $4 AND content_id = $5";
@@ -771,11 +773,11 @@ class WidgetLayoutManager {
 	/**
 	 * displayWidgetPreferences
 	 *
-	 * @param	int		$owner_id
+	 * @param	int	$owner_id
 	 * @param	string	$owner_type
-	 * @param	int		$layout_id
+	 * @param	int	$layout_id
 	 * @param	string	$name
-	 * @param	int		$instance_id
+	 * @param	int	$instance_id
 	 */
 	function displayWidgetPreferences($owner_id, $owner_type, $layout_id, $name, $instance_id) {
 		$sql = "UPDATE layouts_contents SET display_preferences = 1, is_minimized = 0 WHERE owner_type = $1 AND owner_id = $2 AND layout_id = $3 AND name = $4 AND content_id = $5";
@@ -786,11 +788,11 @@ class WidgetLayoutManager {
 	/**
 	 * hideWidgetPreferences
 	 *
-	 * @param	int		$owner_id
+	 * @param	int	$owner_id
 	 * @param	string	$owner_type
-	 * @param	int		$layout_id
+	 * @param	int	$layout_id
 	 * @param	string	$name
-	 * @param	int		$instance_id
+	 * @param	int	$instance_id
 	 */
 	function hideWidgetPreferences($owner_id, $owner_type, $layout_id, $name, $instance_id) {
 		$sql = "UPDATE layouts_contents SET display_preferences = 0 WHERE owner_type = $1 AND owner_id = $2 AND layout_id = $3 AND name = $4 AND content_id = $5";
@@ -801,9 +803,9 @@ class WidgetLayoutManager {
 	/**
 	 * reorderLayout
 	 *
-	 * @param	int		$owner_id
+	 * @param	int	$owner_id
 	 * @param	string	$owner_type
-	 * @param	int		$layout_id
+	 * @param	int	$layout_id
 	 * @param	object	$request
 	 */
 	function reorderLayout($owner_id, $owner_type, $layout_id, &$request) {
