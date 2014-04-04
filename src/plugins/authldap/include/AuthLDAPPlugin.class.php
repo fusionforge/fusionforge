@@ -52,6 +52,7 @@ class AuthLDAPPlugin extends ForgeAuthPlugin {
 	}
 
 	function syncAccountInfo($params) {
+		global $HTML;
 		if (!$this->syncDataOn($params['event'])) {
 			return true;
 		}
@@ -92,7 +93,7 @@ class AuthLDAPPlugin extends ForgeAuthPlugin {
 			$user_data['timezone'] = 'GMT';
 			$user_data['jabber_address'] = '';
 			$user_data['jabber_only'] = 0;
-			$user_data['theme_id'] = 1;
+			$user_data['theme_id'] = $HTML->getThemeIdFromName(forge_get_config('default_theme'));
 			$user_data['unix_box'] = '';
 			$user_data['address'] = '';
 			$user_data['address2'] = '';
