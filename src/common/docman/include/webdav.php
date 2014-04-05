@@ -35,6 +35,7 @@
  */
 
 require_once 'HTTP/WebDAV/Server.php';
+require_once $gfcommon.'/docman/DocumentGroup.class.php';
 
 class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 
@@ -42,7 +43,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 	 * checkAuth - implement checkAuth called by HTTP_WebDAV_Server
 	 * to ensure authentication against user and pass
 	 *
-	 * @param	int		$group_id	group id
+	 * @param	int	$group_id	group id
 	 * @param	string	$user		username
 	 * @param	string	$pass		password
 	 * @return	bool	success
@@ -214,7 +215,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 					$lastpath = $options['path'];
 				}
 				$back_url = substr($options['path'], 0, strrpos($options['path'], strrchr($lastpath,'/')));
-				echo '<a href="'.util_make_uri($back_url).'">..</a>';
+				echo util_make_link($back_url, '..');
 			}
 			$res = db_query_params('select * from doc_groups where group_id = $1 and parent_doc_group = $2',
 						array($group_id, $analysed_path['doc_group']));
@@ -225,7 +226,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 				$subpath .= '/';
 			}
 			while ($arr = db_fetch_array($res)) {
-				echo '<li><a href="'.util_make_uri('/docman/view.php/'.$group_id.'/webdav'.$subpath.$arr['groupname']).'">'.$arr['groupname'].'</a></li>';
+				echo '<li>'.util_make_link('/docman/view.php/'.$group_id.'/webdav'.$subpath.$arr['groupname'], $arr['groupname']).'</li>';
 			}
 			$res = db_query_params('select filename, filetype from doc_data where group_id = $1 and doc_group = $2 and stateid = 1',
 						array($group_id, $analysed_path['doc_group']));
@@ -235,11 +236,11 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 			while ($arr = db_fetch_array($res)) {
 				switch ($arr['filetype']) {
 					case "URL": {
-						echo '<li><a href="'.$arr['filename'].'">'.$arr['filename'].'</a></li>';
+						echo '<li>'.util_make_link($arr['filename'], $arr['filename'], array(), true).'</li>';
 						break;
 					}
 					default: {
-						echo '<li><a href="'.util_make_uri('/docman/view.php/'.$group_id.'/webdav'.$subpath.$arr['filename']).'">'.$arr['filename'].'</a></li>';
+						echo '<li>'.util_make_link('/docman/view.php/'.$group_id.'/webdav'.$subpath.$arr['filename'], $arr['filename']).'</li>';
 					}
 				}
 			}
@@ -249,8 +250,60 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		} else {
 			session_redirect('/docman/view.php/'.$group_id.'/'.$analysed_path['docid'].'/'.$analysed_path['filename']);
 		}
-
 		exit;
+	}
+
+	function PUT(&$options) {
+	}
+
+	function MKCOL(&$options) {
+		if (!forge_check_perm('docman', $group_id, 'approve')) {
+			return false;
+		}
+		$arr_path = explode('/', $options['path']);
+		$group_id = $arr_path[3];
+
+		$this->doWeUseDocman($group_id);
+		$coltocreate = $arr_path[count($arr_path) - 2];
+		$dgId = $this->findDgID($arr_path, $group_id);
+		if ($dgId >= 0) {
+			$g = group_get_object($group_id);
+			if (!$g || !is_object($g))
+				exit_no_group();
+
+			$dg = new DocumentGroup($g);
+			if (!$dg->create($coltocreate, $dgId)) {
+				return false;
+			}
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * findDgID - get the ID of the document group where we are
+	 *
+	 * @param	array	$arr_path	the path as array
+	 * @param	int	$group_id	the project groupid
+	 * @return	int	the document group id
+	 */
+	function findDgID($arr_path, $group_id) {
+		$dgId = -1;
+		if ($arr_path[count($arr_path) - 3] == 'webdav') {
+			// we are in root directory
+			return 0;
+		}
+		$res = db_query_params('select doc_group from doc_groups where group_id = $1 and groupname = $2',
+						array($group_id, $arr_path[count($arr_path) - 3]));
+		if (!$res) {
+			exit_error(_('webdav db error:').' '.db_error(),'docman');
+		}
+		if (db_numrows($res) == 1) {
+			//lucky guy, there is only one directory with this name
+			$arr = db_fetch_array($result);
+			$dgId = $arr['doc_group'];
+		}
+		return $dgId;
 	}
 
 	/**
