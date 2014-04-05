@@ -73,7 +73,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 	 *
 	 * @param	array	$options	options passed by previous functions in HTTP_WebDAV_Server
 	 * @param	array	$files		files passed by previous functions in HTTP_WebDAV_Server
-	 * @return bool
+	 * @return 	string	http status
 	 */
 	function PROPFIND(&$options, &$files) {
 		$arr_path = explode('/',$options['path']);
@@ -109,7 +109,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 			$res = db_query_params('select * from doc_groups where group_id = $1 and doc_group = $2',
 						array($group_id, $analysed_path['doc_group']));
 			if (!$res)
-				return false;
+				return '404';
 
 			$arr = db_fetch_array($res);
 			if ($arr['updatedate']) {
@@ -130,7 +130,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 			$res = db_query_params('select * from doc_groups where group_id = $1 and parent_doc_group = $2',
 						array($group_id, $analysed_path['doc_group']));
 			if (!$res)
-				return false;
+				return '404';
 
 			while ($arr = db_fetch_array($res)) {
 				$i++;
@@ -153,7 +153,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 			$res = db_query_params('select filename,filetype,filesize,createdate,updatedate from doc_data where group_id = $1 and doc_group = $2',
 				array($group_id, $analysed_path['doc_group']));
 			if (!$res)
-				return false;
+				return '404';
 
 			while ($arr = db_fetch_array($res)) {
 				$i++;
@@ -175,7 +175,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 			}
 		}
 
-		return true;
+		return '200';
 	}
 
 	/**
@@ -258,7 +258,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 
 	function MKCOL(&$options) {
 		if (!forge_check_perm('docman', $group_id, 'approve')) {
-			return false;
+			return '403';
 		}
 		$arr_path = explode('/', $options['path']);
 		$group_id = $arr_path[3];
@@ -273,11 +273,11 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 
 			$dg = new DocumentGroup($g);
 			if (!$dg->create($coltocreate, $dgId)) {
-				return false;
+				return '409';
 			}
-			return true;
+			return '201';
 		}
-		return false;
+		return '405';
 	}
 
 	/**
