@@ -1,4 +1,3 @@
-plugins/contribtracker/bin/* @PLUGIN_PATH@/contribtracker/bin/
 plugins/contribtracker/common/* @PLUGIN_PATH@/contribtracker/common/
 plugins/contribtracker/db/* @PLUGIN_PATH@/contribtracker/db/
 plugins/contribtracker/etc/*.ini @CONFIG_PATH@/config.ini.d/

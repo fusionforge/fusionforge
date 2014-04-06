@@ -1,4 +1,3 @@
-plugins/scmdarcs/bin/*		@PLUGIN_PATH@/scmdarcs/bin/
 plugins/scmdarcs/common/*               @PLUGIN_PATH@/scmdarcs/common/
 plugins/scmdarcs/db/*		@PLUGIN_PATH@/scmdarcs/lib/
 plugins/scmdarcs/etc/*.ini 		etc/@PACKAGE@/config.ini.d/

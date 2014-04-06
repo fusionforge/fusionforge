@@ -2,5 +2,3 @@ plugins/authwebid/include   @PLUGIN_PATH@/authwebid/
 plugins/authwebid/www       @PLUGIN_PATH@/authwebid/
 plugins/authwebid/etc/*.ini etc/@PACKAGE@/config.ini.d/
 plugins/authwebid/db/*      @PLUGIN_PATH@/authwebid/db/
-plugins/authwebid/bin/*	@PLUGIN_PATH@/authwebid/bin/
-

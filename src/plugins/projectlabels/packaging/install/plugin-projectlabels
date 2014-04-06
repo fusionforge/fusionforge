@@ -1,4 +1,3 @@
-plugins/projectlabels/bin/*	@PLUGIN_PATH@/projectlabels/bin/
 plugins/projectlabels/common/*	@PLUGIN_PATH@/projectlabels/common/
 plugins/projectlabels/db/*	@PLUGIN_PATH@/projectlabels/lib/
 plugins/projectlabels/www/*	@PLUGIN_PATH@/projectlabels/www/

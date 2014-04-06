@@ -79,16 +79,28 @@ if ($argc == 1 || $argv[1] == 'all') {
 	}
 }
 
-// Upgrade activated plugins.
 if ($argc == 2) {
-	require_once $gfcommon.'include/DatabaseInstaller.class.php';
-	$plugins = get_installed_plugins();
-	foreach ($plugins as $plugin) {
-		if ($argv[1] == 'all' || $argv[1] == $plugin) {
-			$di = new DatabaseInstaller($plugin, dirname($db_path) . '/plugins/' . $plugin . '/db');
-			echo $di->upgrade();
+        if ($argv[1] == 'all') {
+                // Upgrade activated plugins.
+                require_once $gfcommon.'include/DatabaseInstaller.class.php';
+                $plugins = get_installed_plugins();
+                foreach ($plugins as $plugin) {
+                        if ($argv[1] == 'all') {
+                                $di = new DatabaseInstaller($plugin, dirname($db_path) . '/plugins/' . $plugin . '/db');
+                                echo $di->upgrade();
+                        }
+                }
+        } else {
+		// Upgrade a specific plugin, activating it if necessary (useful for packaging)
+                $pluginname = $argv[1];
+                $pm = plugin_manager_get_object();
+                if (!$pm->PluginIsInstalled($pluginname)) {
+			$pm->activate($pluginname);
+			$pm->LoadPlugins();
 		}
-	}
+		$plugin = $pm->GetPluginObject($pluginname);
+		$plugin->installDatabase();  // and upgrade
+        }
 }
 
 function get_installed_plugins() {

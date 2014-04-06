@@ -89,7 +89,7 @@ if (!$res) {
 
 $output = '';
 while ($data = db_fetch_array ($res)) {
-	print "Processing GroupId ".$data['group_id']." (".$data['group_name'].")\n";
+	($verbose) && print "Processing GroupId ".$data['group_id']." (".$data['group_name'].")\n";
 	$time = $starttime;
 	$etime = $endtime;
 	if ( isset($options['all']) ) {
