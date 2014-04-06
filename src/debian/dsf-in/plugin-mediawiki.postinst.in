@@ -1,8 +1,3 @@
-#! /bin/sh
-# postinst script for @PACKAGE@-plugin-mediawiki
-
-set -e
-
 upgrade_mediawikis () {
     # Upgrade Mediawiki database schemas
     /usr/share/gforge/bin/list-projects-using-plugin.php mediawiki | while read i ; do
@@ -77,25 +72,10 @@ case "$1" in
 	    test -d /var/lib/gforge/plugins/mediawiki/projects/. && \
 	    move_mediawikis
 
-	# Run plugin specific db upgrade
-	if [ -f /usr/share/@OLDPACKAGE@/plugins/@PLUGSHORTNAME@/bin/db-upgrade.pl ]
-	then
-		/usr/share/@OLDPACKAGE@/plugins/@PLUGSHORTNAME@/bin/db-upgrade.pl
-	fi
-	/usr/share/@OLDPACKAGE@/bin/register-plugin $(echo @PLUGSHORTNAME@ | sed 's/-//g') "@PLUGLONGNAME@"
-	/usr/share/@OLDPACKAGE@/bin/normalize_roles.php | grep -v "^Normalizing role" || true
+	/usr/share/gforge/bin/normalize_roles.php | grep -v "^Normalizing role" || true
 	upgrade_mediawikis
 	;;
     
     abort-upgrade|abort-remove|abort-deconfigure)
 	;;
-
-    *)
-        echo "postinst called with unknown argument \`$1'" >&2
-        exit 1
-	;;
 esac
-
-#DEBHELPER#
-
-exit 0
