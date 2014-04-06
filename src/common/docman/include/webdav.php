@@ -68,7 +68,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 	}
 
 	/**
-	 * PROPFIND - use by any webdav client like cadaver
+	 * PROPFIND - use by any webdav client like cadaver / dolphin
 	 * called by HTTP_WebDAV_Server
 	 *
 	 * @param	array	$options	options passed by previous functions in HTTP_WebDAV_Server
@@ -162,16 +162,16 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 				} else {
 					$lastmodifieddate = $arr['createdate'];
 				}
-				$files["files"][$i] = array();
-				$files["files"][$i]["path"] = $path.'/'.$arr['filename'];
-				$files["files"][$i]["props"] = array();
-				$files["files"][$i]["props"][] = $this->mkprop("displayname", $arr['filename']);
-				$files["files"][$i]["props"][] = $this->mkprop("creationdate", $arr['createdate']);
-				$files["files"][$i]["props"][] = $this->mkprop("getlastmodified", $lastmodifieddate);
-				$files["files"][$i]["props"][] = $this->mkprop("lastaccessed", '');
-				$files["files"][$i]["props"][] = $this->mkprop("ishidden", false);
-				$files["files"][$i]["props"][] = $this->mkprop("getcontentlength", $arr['filesize']);
-				$files["files"][$i]["props"][] = $this->mkprop("getcontenttype", $arr['filetype']);
+				$files['files'][$i] = array();
+				$files['files'][$i]['path'] = $path.'/'.$arr['filename'];
+				$files['files'][$i]['props'] = array();
+				$files['files'][$i]['props'][] = $this->mkprop('displayname', $arr['filename']);
+				$files['files'][$i]['props'][] = $this->mkprop('creationdate', $arr['createdate']);
+				$files['files'][$i]['props'][] = $this->mkprop('getlastmodified', $lastmodifieddate);
+				$files['files'][$i]['props'][] = $this->mkprop('lastaccessed', '');
+				$files['files'][$i]['props'][] = $this->mkprop('ishidden', false);
+				$files['files'][$i]['props'][] = $this->mkprop('getcontentlength', $arr['filesize']);
+				$files['files'][$i]['props'][] = $this->mkprop('getcontenttype', $arr['filetype']);
 			}
 		} else {
 			$res = db_query_params('select filename,filetype,filesize,createdate,updatedate from doc_data where group_id = $1 and docid = $2',
@@ -185,16 +185,16 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 			} else {
 				$lastmodifieddate = $arr['createdate'];
 			}
-			$files["files"][0] = array();
-			$files["files"][0]["path"] = $path.'/'.$arr['filename'];
-			$files["files"][0]["props"] = array();
-			$files["files"][0]["props"][] = $this->mkprop("displayname", $arr['filename']);
-			$files["files"][0]["props"][] = $this->mkprop("creationdate", $arr['createdate']);
-			$files["files"][0]["props"][] = $this->mkprop("getlastmodified", $lastmodifieddate);
-			$files["files"][0]["props"][] = $this->mkprop("lastaccessed", '');
-			$files["files"][0]["props"][] = $this->mkprop("ishidden", false);
-			$files["files"][0]["props"][] = $this->mkprop("getcontentlength", $arr['filesize']);
-			$files["files"][0]["props"][] = $this->mkprop("getcontenttype", $arr['filetype']);
+			$files['files'][0] = array();
+			$files['files'][0]['path'] = $path.'/'.$arr['filename'];
+			$files['files'][0]['props'] = array();
+			$files['files'][0]['props'][] = $this->mkprop('displayname', $arr['filename']);
+			$files['files'][0]['props'][] = $this->mkprop('creationdate', $arr['createdate']);
+			$files['files'][0]['props'][] = $this->mkprop('getlastmodified', $lastmodifieddate);
+			$files['files'][0]['props'][] = $this->mkprop('lastaccessed', '');
+			$files['files'][0]['props'][] = $this->mkprop('ishidden', false);
+			$files['files'][0]['props'][] = $this->mkprop('getcontentlength', $arr['filesize']);
+			$files['files'][0]['props'][] = $this->mkprop('getcontenttype', $arr['filetype']);
 		}
 		return '200';
 	}
@@ -276,10 +276,13 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 
 			echo "</ul>";
 			echo "</body></html>\n";
+			//do not set return value... yet. The current implementation is rather buggy.
 		} else {
-			session_redirect('/docman/view.php/'.$group_id.'/'.$analysed_path['docid'].'/'.$analysed_path['filename']);
+			$g = group_get_object($group_id);
+			$d = new Document($g, $analysed_path['docid']);
+			$options['data'] = $d->getFileData();
+			return true;
 		}
-		exit;
 	}
 
 	function PUT(&$options) {
