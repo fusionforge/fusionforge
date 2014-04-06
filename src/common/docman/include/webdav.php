@@ -280,7 +280,14 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		} else {
 			$g = group_get_object($group_id);
 			$d = new Document($g, $analysed_path['docid']);
-			$options['data'] = $d->getFileData();
+			$options['stream'] = fopen($d->getFilePath(), 'rb');
+			$options['mimetype'] = $d->getFileType();
+			$options['size'] = $d->getFileSize();
+			if ($d->getUpdated()) {
+				$options['mtime'] = $d->getUpdated();
+			} else {
+				$options['mtime'] = $d->getCreated();
+			}
 			return true;
 		}
 	}
@@ -301,6 +308,72 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 			return '403';
 		}
 		$this->doWeUseDocman($group_id);
+
+		/**
+		 * 4 is coming from the url: http://yourforge/docman/6/webdav/the/directory
+		 * 1 = http://yourforge
+		 * 2 = docman
+		 * 3 = id group
+		 * 4 = webdav
+		 * the rest is the path /the/directory
+		 */
+		if ( 4 < count($arr_path)) {
+			$subpath = '';
+			for ($i=5; $i<count($arr_path); $i++){
+				$subpath .= '/'.$arr_path[$i];
+			}
+		}
+
+		if (empty($subpath)) {
+			$subpath = '/';
+		}
+
+		$analysed_path = $this->analyse($subpath, $group_id);
+		$g = group_get_object($group_id);
+		if ($analysed_path['isdir']) {
+			$df = new DocumentFactory($g);
+			if ($df->isError())
+				exit_error($df->getErrorMessage(), 'docman');
+
+			$dgf = new DocumentGroupFactory($g);
+			if ($dgf->isError())
+				exit_error($dgf->getErrorMessage(), 'docman');
+
+			$trashnested_groups =& $dgf->getNested();
+			$df->setDocGroupID($analysed_path['doc_group']);
+			$d_arr =& $df->getDocuments();
+			if (is_array($d_arr)) {
+				foreach ($d_arr as $doc) {
+					$trashnested_docs[$doc->getDocGroupID()][] = $doc;
+				}
+			}
+
+			if (is_array($trashnested_groups[$analysed_path['doc_group']])) {
+				foreach ($trashnested_groups[$analysed_path['doc_group']] as $dg) {
+					$localdf = new DocumentFactory($g);
+					$localdf->setDocGroupID($dg->getID());
+					$d_arr =& $localdf->getDocuments();
+					if (is_array($d_arr)) {
+						foreach ($d_arr as $doc) {
+							$trashnested_docs[$doc->getDocGroupID()][] = $doc;
+						}
+					}
+				}
+			}
+			/* set this dirid to trash */
+			$dg = new DocumentGroup($g, $analysed_path['doc_group']);
+			$currentParent = $dg->getParentID();
+			if (!$dg->setStateID('2'))
+				session_redirect($redirecturl.'&error_msg='.urlencode($dg->getErrorMessage()));
+
+			$dm = new DocumentManager($g);
+			if (!$dg->setParentDocGroupId($dm->getTrashID()))
+				session_redirect($redirecturl.'&dirid='.$currentParent.'&error_msg='.urlencode($dg->getErrorMessage()));
+
+		} else {
+			$d = new Document($g, $analysed_path['docid']);
+			$d->trash();
+		}
 	}
 
 	function MKCOL(&$options) {
