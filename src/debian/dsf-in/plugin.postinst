@@ -28,7 +28,7 @@ case "$1" in
 	# Run plugin-specific DB install/upgrade
 	@BINARY_PATH@/upgrade-db.php @PLUGSHORTNAME@
 	# Restart apache if there is some change in config
-	if [ -f /etc/gforge/httpd.conf.d/plugin-@PLUGSHORTNAME@.inc ]
+	if [ -f /etc/gforge/httpd.conf.d/plugin-@PLUGSHORTNAME@.inc ]; then
 	    service apache2 reload
 	fi
 	# Run plugin-specific install
