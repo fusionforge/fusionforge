@@ -4,6 +4,7 @@
 # Copyright 2000 to 2002 by Roland Mas and Christian Bayle for the Sourceforge package
 # Copyright 2002 to 2008 by Roland Mas and Christian Bayle for the Gforge package
 # Copyright 2008 to 2010 by Roland Mas and Christian Bayle for the FusionForge package
+# Copyright (C) 2014  Sylvain Beucler
 
 OLDPACKAGE=gforge
 PACKAGE=fusionforge
