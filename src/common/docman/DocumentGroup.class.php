@@ -238,7 +238,7 @@ class DocumentGroup extends Error {
 				break;
 			}
 			default: {
-				$this->setError( _('Unsupported injected file:') . ' ' .$uploaded_data_type);
+				$this->setError( _('Unsupported injected file')._(': ').$uploaded_data_type);
 				$returned = false;
 			}
 		}
@@ -407,7 +407,7 @@ class DocumentGroup extends Error {
 						array($this->getID(), $userid));
 
 		if (!$result) {
-			$this->setError(_('Unable To Remove Monitor').' : '.db_error());
+			$this->setError(_('Unable To Remove Monitor')._(': ').db_error());
 			return false;
 		}
 		return true;
@@ -428,7 +428,7 @@ class DocumentGroup extends Error {
 							array($this->getID(), $userid));
 
 			if (!$result) {
-				$this->setError(_('Unable To Add Monitor').' : '.db_error());
+				$this->setError(_('Unable To Add Monitor')._(': ').db_error());
 				return false;
 			}
 		}
@@ -444,7 +444,7 @@ class DocumentGroup extends Error {
 		$result = db_query_params('DELETE FROM docgroup_monitored_docman WHERE docgroup_id = $1',
 					array($this->getID()));
 		if (!$result) {
-			$this->setError(_('Unable To Clear Monitor').' : '.db_error());
+			$this->setError(_('Unable To Clear Monitor')._(': ').db_error());
 			return false;
 		}
 		return true;

@@ -89,7 +89,7 @@ class hudson_Widget_JobTestResults extends HudsonJobWidget {
 			$job = $this->job;
 			$test_result = $this->test_result;
 			$html .= '<div style="padding: 20px;">';
-			$html .= ' <a href="/plugins/hudson/?action=view_last_test_result&group_id='.$this->group_id.'&job_id='.$this->job_id.'">'.$test_result->getTestResultPieChart().'</a>';
+			$html .= util_make_link('/plugins/hudson/?action=view_last_test_result&group_id='.$this->group_id.'&job_id='.$this->job_id, $test_result->getTestResultPieChart());
 			$html .= '</div>';
 		} else {
 			if ($this->job != null) {
