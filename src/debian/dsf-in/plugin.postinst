@@ -1,5 +1,5 @@
 #! /bin/sh
-# postinst script for @OLDPACKAGE@-plugin-@PLUGSHORTNAME@
+# postinst script for @PACKAGE@-plugin-@PLUGSHORTNAME@
 #
 # see: dh_installdeb(1)
 
@@ -25,32 +25,20 @@ set -e
 
 case "$1" in
     configure)
-	# Run plugin specific db upgrade
-	if [ -f @PLUGIN_PATH@/@PLUGSHORTNAME@/bin/db-upgrade.pl ]
-	then
-		echo "=== Running @PLUGIN_PATH@/@PLUGSHORTNAME@/bin/db-upgrade.pl ==="
-		@PLUGIN_PATH@/@PLUGSHORTNAME@/bin/db-upgrade.pl
-	fi
-	@BINARY_PATH@/register-plugin $(echo @PLUGSHORTNAME@ | sed 's/-//g') "@PLUGLONGNAME@"
+	# Run plugin-specific DB install/upgrade
+	@BINARY_PATH@/upgrade-db.php @PLUGSHORTNAME@
 	# Restart apache if there is some change in config
 	if [ -f /etc/gforge/httpd.conf.d/plugin-@PLUGSHORTNAME@.inc ]
-	then
-		for flavour in apache apache-perl apache-ssl apache2 ; do
-			if [ -x /usr/sbin/$flavour ]; then
-				invoke-rc.d $flavour reload || true
-	   		fi
-		done
+	    service apache2 reload
 	fi
-	# Run plugin specific install
-	if [ -f @PLUGIN_PATH@/@PLUGSHORTNAME@/bin/install.sh ]
-	then
-		echo "=== Running @PLUGIN_PATH@/@PLUGSHORTNAME@/bin/install.sh configure ==="
-		@PLUGIN_PATH@/@PLUGSHORTNAME@/bin/install.sh configure
+	# Run plugin-specific install
+	if [ -f @PLUGIN_PATH@/@PLUGSHORTNAME@/bin/install.sh ]; then
+	    echo "=== Running @PLUGIN_PATH@/@PLUGSHORTNAME@/bin/install.sh configure ==="
+	    @PLUGIN_PATH@/@PLUGSHORTNAME@/bin/install.sh configure
 	fi
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
-
     ;;
 
     *)
@@ -64,5 +52,3 @@ esac
 #DEBHELPER#
 
 exit 0
-
-

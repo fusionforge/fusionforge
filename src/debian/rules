@@ -39,6 +39,8 @@ ENABLED_PLUGINS:=$(shell sh $(CURDIR)/utils/list-enabled-plugins.sh || echo erro
 ifeq (${ENABLED_PLUGINS},error)
 $(error list-enabled-plugins.sh failed)
 endif
+# Development plugins that we package:
+#ENABLED_PLUGINS+=mailman
 
 PPOSTINST=$(foreach i,$(ENABLED_PLUGINS),debian/$(PACKAGE)-plugin-$i.postinst)
 PPREINST=$(foreach i,$(ENABLED_PLUGINS),debian/$(PACKAGE)-plugin-$i.preinst)
@@ -57,7 +59,7 @@ PLINKSFILES=$(foreach i,$(ENABLED_PLUGINS),$(if $(wildcard plugins/$i/packaging/
 INSTALLFILES=$(patsubst packaging/install/%,debian/$(OLDPACKAGE)-%.install,$(wildcard packaging/install/[a-z]*))
 PINSTALLFILES=$(foreach i,$(ENABLED_PLUGINS),$(if $(wildcard plugins/$i/packaging/install/[a-z]*),debian/$(PACKAGE)-plugin-$i.install))
 
-PTRIGGERSFILES=$(foreach i,$(ENABLED_PLUGINS),$(if $(wildcard plugins/$i/debian/[a-z]*.triggers),debian/$(PACKAGE)-plugin-$i.triggers))
+PTRIGGERSFILES=$(foreach i,$(ENABLED_PLUGINS),$(if $(wildcard plugins/$i/packaging/triggers/[a-z]*),debian/$(PACKAGE)-plugin-$i.triggers))
 
 DOCSFILES=$(patsubst packaging/docs/%,debian/$(OLDPACKAGE)-%.docs,$(wildcard packaging/docs/[a-z]*)) \
 		$(patsubst packaging/docs/%,debian/$(PACKAGE)-%.docs,$(wildcard packaging/docs/[a-z]*))
@@ -97,51 +99,35 @@ conffiles: $(PPOSTINST) $(PPREINST) $(PPRERM) $(PPOSTRM) $(CRONDFILES) $(DIRSFIL
 
 # Construct the plugin's 'postinst' script out of a template in debian/dsf-in/plugin.postinst
 debian/$(PACKAGE)-plugin-%.postinst:
-	PLUGLONGNAME="$$(cat '$(CURDIR)/plugins/$*/NAME')"; \
-	    test -n "$$PLUGLONGNAME" || exit 1; \
-	    srcf='$(CURDIR)/plugins/$*/debian/plugin-$*.postinst'; \
-	    test -e "$$srcf" || srcf='$(CURDIR)/debian/dsf-in/plugin.postinst'; \
-	    $(SED_REPLACE) \
-	    -e 's/@PLUGSHORTNAME@/$*/g' \
-	    -e "s/@PLUGLONGNAME@/$$PLUGLONGNAME/g" \
-	    "$$srcf" >$@ || (rm -f $@; exit 1)
-	if [ -e $(CURDIR)/debian/dsf-in/plugin-$*.postinst.in ] && grep -q '#DEBHELPER#' $@ ; then (sed '/#DEBHELPER#/,$$d' $@ ; echo '#DEBHELPER#' ; cat $(CURDIR)/debian/dsf-in/plugin-$*.postinst.in ; sed '1,/#DEBHELPER#/d' $@) | sponge $@ ; fi
+#	 if [ -e debian/dsf-in/plugin-$*.postinst.in ]; then
+	    $(SED_REPLACE) -e 's/@PLUGSHORTNAME@/$*/g' \
+	        -e '/#DEBHELPER#/r debian/dsf-in/plugin-$*.postinst.in' \
+	        debian/dsf-in/plugin.postinst > $@ ;
+#	 fi
 
 # Construct the plugin's 'preinst' script out of a template in debian/dsf-in/plugin.preinst
 debian/$(PACKAGE)-plugin-%.preinst:
-	PLUGLONGNAME="$$(cat '$(CURDIR)/plugins/$*/NAME')"; \
-	    test -n "$$PLUGLONGNAME" || exit 1; \
-	    srcf='$(CURDIR)/plugins/$*/debian/plugin-$*.preinst'; \
-	    test -e "$$srcf" || srcf='$(CURDIR)/debian/dsf-in/plugin.preinst'; \
-	    $(SED_REPLACE) \
-	    -e 's/@PLUGSHORTNAME@/$*/g' \
-	    -e "s/@PLUGLONGNAME@/$$PLUGLONGNAME/g" \
-	    "$$srcf" >$@ || (rm -f $@; exit 1)
-	if [ -e $(CURDIR)/debian/dsf-in/plugin-$*.preinst.in ] && grep -q '#DEBHELPER#' $@ ; then (sed '/#DEBHELPER#/,$$d' $@ ; echo '#DEBHELPER#' ; cat $(CURDIR)/debian/dsf-in/plugin-$*.preinst.in ; sed '1,/#DEBHELPER#/d' $@) | sponge $@ ; else rm $@ ; fi
+	if [ -e debian/dsf-in/plugin-$*.preinst.in ]; then \
+	    $(SED_REPLACE) -e 's/@PLUGSHORTNAME@/$*/g' \
+	        -e '/#DEBHELPER#/r debian/dsf-in/plugin-$*.preinst.in' \
+	        debian/dsf-in/plugin.preinst > $@ ; \
+	fi
 
 # Construct the plugin's 'prerm' script out of a template in debian/dsf-in/plugin.prerm
 debian/$(PACKAGE)-plugin-%.prerm:
-	PLUGLONGNAME="$$(cat '$(CURDIR)/plugins/$*/NAME')"; \
-	    test -n "$$PLUGLONGNAME" || exit 1; \
-	    srcf='$(CURDIR)/plugins/$*/debian/plugin-$*.prerm'; \
-	    test -e "$$srcf" || srcf='$(CURDIR)/debian/dsf-in/plugin.prerm'; \
-	    $(SED_REPLACE) \
-	    -e 's/@PLUGSHORTNAME@/$*/g' \
-	    -e "s/@PLUGLONGNAME@/$$PLUGLONGNAME/g" \
-	    "$$srcf" >$@ || (rm -f $@; exit 1)
-	if [ -e $(CURDIR)/debian/dsf-in/plugin-$*.prerm.in ] && grep -q '#DEBHELPER#' $@ ; then (sed '/#DEBHELPER#/,$$d' $@ ; echo '#DEBHELPER#' ; cat $(CURDIR)/debian/dsf-in/plugin-$*.prerm.in ; sed '1,/#DEBHELPER#/d' $@) | sponge $@ ; fi
+	if [ -e debian/dsf-in/plugin-$*.prerm.in ]; then \
+	    $(SED_REPLACE) -e 's/@PLUGSHORTNAME@/$*/g' \
+	        -e '/#DEBHELPER#/r debian/dsf-in/plugin-$*.prerm.in' \
+	        debian/dsf-in/plugin.prerm > $@ ; \
+	fi
 
 # Construct the plugin's 'postrm' script out of a template in debian/dsf-in/plugin.postrm
 debian/$(PACKAGE)-plugin-%.postrm:
-	PLUGLONGNAME="$$(cat '$(CURDIR)/plugins/$*/NAME')"; \
-	    test -n "$$PLUGLONGNAME" || exit 1; \
-	    srcf='$(CURDIR)/plugins/$*/debian/plugin-$*.postrm'; \
-	    test -e "$$srcf" || srcf='$(CURDIR)/debian/dsf-in/plugin.postrm'; \
-	    $(SED_REPLACE) \
-	    -e 's/@PLUGSHORTNAME@/$*/g' \
-	    -e "s/@PLUGLONGNAME@/$$PLUGLONGNAME/g" \
-	    "$$srcf" >$@ || (rm -f $@; exit 1)
-	if [ -e $(CURDIR)/debian/dsf-in/plugin-$*.postrm.in ] && grep -q '#DEBHELPER#' $@ ; then (sed '/#DEBHELPER#/,$$d' $@ ; echo '#DEBHELPER#' ; cat $(CURDIR)/debian/dsf-in/plugin-$*.postrm.in ; sed '1,/#DEBHELPER#/d' $@) | sponge $@ ; else rm $@ ; fi
+	if [ -e debian/dsf-in/plugin-$*.postrm.in ]; then \
+	    $(SED_REPLACE) -e 's/@PLUGSHORTNAME@/$*/g' \
+	        -e '/#DEBHELPER#/r debian/dsf-in/plugin-$*.postrm.in' \
+	        debian/dsf-in/plugin.postrm > $@ ; \
+	fi
 
 # Perform substitutions in plugin's cron.d file
 debian/$(PACKAGE)-plugin-%.cron.d:
@@ -169,7 +155,7 @@ debian/$(PACKAGE)-plugin-%.install:
 	$(SED_REPLACE) $(CURDIR)/plugins/$*/packaging/install/plugin-$* > $@
 
 debian/$(PACKAGE)-plugin-%.triggers:
-	$(SED_REPLACE) $(CURDIR)/plugins/$*/debian/plugin-$*.triggers > $@
+	$(SED_REPLACE) $(CURDIR)/plugins/$*/packaging/triggers/plugin-$* > $@
 
 debian/$(OLDPACKAGE)-%.install:
 	$(SED_REPLACE) $(CURDIR)/packaging/install/$* > $@
@@ -256,6 +242,7 @@ clean:
 	rm -f $(CURDIR)/debian/*.install
 	rm -f $(CURDIR)/debian/*.docs
 	rm -f $(CURDIR)/debian/*.examples
+	rm -f $(CURDIR)/debian/*.triggers
 	rm -f $(CURDIR)/debian/*.README.Debian
 	rm -f $(CURDIR)/debian/$(PACKAGE)-config.sgml
 	rm -f $(CURDIR)/debian/$(OLDPACKAGE)-common.manpages
@@ -267,7 +254,14 @@ clean:
 
 	perl $(CURDIR)/deb-specific/dsf-helper.pl --clean
 
-	rm -fr $(CURDIR)/etc/httpd.conf.d-fhs/ $(CURDIR)/etc/httpd.conf.d-opt/ $(CURDIR)/etc/httpd.conf.d-usrlocal/
+	rm -fr $(CURDIR)/etc/httpd.conf.d-fhs/ $(CURDIR)/etc/httpd.conf.d-fhsrh/ \
+	    $(CURDIR)/etc/httpd.conf.d-opt/ $(CURDIR)/etc/httpd.conf.d-usrlocal/
+
+#	Remove mailman files (plugin is in development and not in PLUGINS)
+	rm -f debian/fusionforge-plugin-mailman.*
+#	Remove authcas files (plugin is "disabled for Debian until phpCAS gets packaged")
+#	Necessary if called after patches are applied (typically after a build)
+	rm -f debian/fusionforge-plugin-authcas.*
 
 install: build
 	$(DH) $@
