@@ -1,4 +1,3 @@
-plugins/mantisbt/bin		@PLUGIN_PATH@/mantisbt/
 plugins/mantisbt/action		@PLUGIN_PATH@/mantisbt/
 plugins/mantisbt/common		@PLUGIN_PATH@/mantisbt/
 plugins/mantisbt/controler	@PLUGIN_PATH@/mantisbt/

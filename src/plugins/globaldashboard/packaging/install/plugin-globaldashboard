@@ -1,7 +1,6 @@
 plugins/globaldashboard/common/*                  @PLUGIN_PATH@/globaldashboard/common/
 plugins/globaldashboard/include/*                 @PLUGIN_PATH@/globaldashboard/include/
 plugins/globaldashboard/db/*                      @PLUGIN_PATH@/globaldashboard/db/
-plugins/globaldashboard/bin/*                     @PLUGIN_PATH@/globaldashboard/bin/
 plugins/globaldashboard/www/*                     @PLUGIN_PATH@/globaldashboard/www/
 plugins/globaldashboard/cronjobs/*                @SOURCE_PATH@/cronjobs
 plugins/globaldashboard/etc/plugins/globaldashboard/*     @CONFIG_PATH@/plugins/globaldashboard/
