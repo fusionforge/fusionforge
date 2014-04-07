@@ -231,19 +231,13 @@ for ($i=0; $i<$rows; $i++) {
 			$fh = fopen($tmp,'w');
 			$listConfig = "description = \"$description\"\n" ;
 			$listConfig .= "host_name = '".forge_get_config('lists_host')."'\n" ;
-			if (!$public) {
-				$listConfig .= "archive_private = True\n" ;
-				$listConfig .= "advertised = False\n" ;
-				$listConfig .= "subscribe_policy = 3\n" ;
-				## Reject mails sent by non-members
-				$listConfig .= "generic_nonmember_action = 2\n";
-				## Do not forward auto discard message
-				$listConfig .= "forward_auto_discards = 0\n";
-			} else {
-				$listConfig .= "archive_private = False\n" ;
-				$listConfig .= "advertised = True\n" ;
-				$listConfig .= "subscribe_policy = 1\n" ;
-			}
+			$listConfig .= "archive_private = True\n" ;
+			$listConfig .= "advertised = False\n" ;
+			$listConfig .= "subscribe_policy = 3\n" ;
+			## Reject mails sent by non-members
+			$listConfig .= "generic_nonmember_action = 2\n";
+			## Do not forward auto discard message
+			$listConfig .= "forward_auto_discards = 0\n";
 			fwrite($fh, $listConfig);
 			fclose($fh);
 			$privatize_cmd = escapeshellcmd($path_to_mailman."/bin/config_list -i $tmp $listname");
