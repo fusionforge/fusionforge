@@ -36,6 +36,7 @@
 
 require_once 'HTTP/WebDAV/Server.php';
 require_once $gfcommon.'/docman/DocumentGroup.class.php';
+require_once $gfcommon.'/docman/Document.class.php';
 
 class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 
@@ -82,9 +83,9 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		$this->doWeUseDocman($group_id);
 
 		/**
-		 * 4 is coming from the url: http://yourforge/docman/6/webdav/the/directory
-		 * 1 = http://yourforge
-		 * 2 = docman
+		 * 4 is coming from the url: /docman/view.php/6/webdav/the/directory
+		 * 1 = docman
+		 * 2 = view.php
 		 * 3 = id group
 		 * 4 = webdav
 		 * the rest is the path /the/directory
@@ -212,9 +213,9 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		$this->doWeUseDocman($group_id);
 
 		/**
-		 * 4 is coming from the url: http://yourforge/docman/6/webdav/the/directory
-		 * 1 = http://yourforge
-		 * 2 = docman
+		 * 4 is coming from the url: /docman/view.php/6/webdav/the/directory
+		 * 1 = docman
+		 * 2 = view.php
 		 * 3 = id group
 		 * 4 = webdav
 		 * the rest is the path /the/directory
@@ -299,6 +300,28 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 			return '403';
 		}
 		$this->doWeUseDocman($group_id);
+		$newfilename = $arr_path[count($arr_path) - 1];
+		$dgId = $this->findDgID($arr_path, $group_id);
+		/* Open a file for writing */
+		$tmpfile = sys_get_temp_dir().'/'.uniqid();
+		$fp = fopen($tmpfile, "w");
+		while ($data = fread($options['stream'], 1024))
+			fwrite($fp, $data);
+
+		/* Close the streams */
+		fclose($fp);
+		fclose($options['stream']);
+		$g = group_get_object($group_id);
+		$d = new Document($g);
+		if (strlen($newfilename) < 5) {
+			$title = $newfilename.' '._('(Title must be at least 5 characters.)');
+		} else {
+			$title = $newfilename;
+		}
+		if (!$d->create($newfilename, $options['content_type'], $tmpfile, $dgId, $title, _('Injected by WebDAV')._(': ').date(DATE_ATOM))) {
+			return '409';
+		}
+		return '200';
 	}
 
 	function DELETE(&$options) {
@@ -310,9 +333,9 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		$this->doWeUseDocman($group_id);
 
 		/**
-		 * 4 is coming from the url: http://yourforge/docman/6/webdav/the/directory
-		 * 1 = http://yourforge
-		 * 2 = docman
+		 * 4 is coming from the url: /docman/view.php/6/webdav/the/directory
+		 * 1 = docman
+		 * 2 = view.php
 		 * 3 = id group
 		 * 4 = webdav
 		 * the rest is the path /the/directory
@@ -371,9 +394,12 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 				session_redirect($redirecturl.'&dirid='.$currentParent.'&error_msg='.urlencode($dg->getErrorMessage()));
 
 		} else {
-			$d = new Document($g, $analysed_path['docid']);
-			$d->trash();
+			if ($analysed_path['docid']) {
+				$d = new Document($g, $analysed_path['docid']);
+				$d->trash();
+			}
 		}
+		return '404';
 	}
 
 	function MKCOL(&$options) {
@@ -434,8 +460,8 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 	/**
 	 * analyse - find if the path is a file or a directory
 	 *
-	 * @param	string	$path the path to analyse
-	 * @param	int	$group_id group id
+	 * @param	string	$path		the path to analyse
+	 * @param	int	$group_id	group id
 	 * @return	array	the analysed path
 	 */
 	function analyse($path, $group_id) {
@@ -460,8 +486,8 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 	/**
 	 * whatIsIt - do the analyse
 	 *
-	 * @param	string	$string	the path to analyse
-	 * @param	int		$group_id	group id
+	 * @param	string	$string		the path to analyse
+	 * @param	int	$group_id	group id
 	 * @param	array	$path_array	the previous path analysed
 	 * @return	array	the path analysed
 	 */
