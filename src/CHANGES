@@ -1,5 +1,5 @@
 Fusionforge-X.X:
-* Docman: Basic Webdav write mkcol, delete, put support (TrivialDev)
+* Docman: Basic Webdav write mkcol, delete, put, move support (TrivialDev)
 
 FusionForge-5.3:
 * Widget: MyArtifacts Enhancement : add monitored artifacts (TrivialDev)
