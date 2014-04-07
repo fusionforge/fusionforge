@@ -158,7 +158,7 @@ class DocumentGroup extends Error {
 		if ($parent_doc_group) {
 			/* update the parent */
 			$parentDg = new DocumentGroup($this->Group, $parent_doc_group);
-			$parentDg->update($parentDg->getName(), $parentDg->getParentID(), 1, 0);
+			$parentDg->update($parentDg->getName(), $parentDg->getParentID(), 1);
 		}
 		$this->sendNotice(true);
 		return true;
@@ -197,7 +197,7 @@ class DocumentGroup extends Error {
 
 		/* update the parent */
 		$parentDg = new DocumentGroup($this->Group, $this->getParentID());
-		$parentDg->update($parentDg->getName(), $parentDg->getParentID(), 1, 1);
+		$parentDg->update($parentDg->getName(), $parentDg->getParentID(), 1);
 		/* is there any subdir ? */
 		$subdir = db_query_params('select doc_group from doc_groups where parent_doc_group = $1 and group_id = $2',
 					array($doc_groupid, $project_group_id));
