@@ -393,10 +393,12 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 			if (!$dg->setParentDocGroupId($dm->getTrashID()))
 				session_redirect($redirecturl.'&dirid='.$currentParent.'&error_msg='.urlencode($dg->getErrorMessage()));
 
+			return '200';
 		} else {
 			if ($analysed_path['docid']) {
 				$d = new Document($g, $analysed_path['docid']);
 				$d->trash();
+				return '200';
 			}
 		}
 		return '404';
