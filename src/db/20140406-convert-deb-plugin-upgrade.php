@@ -71,3 +71,7 @@ while($row = db_fetch_array($res)) {
 	print "  Dropping {$row['relname']}\n";
 	db_drop_table_if_exists($row['relname']);
 }
+
+// Report to upgrade-db.php
+echo "SUCCESS\n";
+exit(0);
