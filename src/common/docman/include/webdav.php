@@ -318,7 +318,13 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		} else {
 			$title = $newfilename;
 		}
-		if (!$d->create($newfilename, $options['content_type'], $tmpfile, $dgId, $title, _('Injected by WebDAV')._(': ').date(DATE_ATOM))) {
+		if (function_exists('finfo_open')) {
+			$finfo = finfo_open(FILEINFO_MIME_TYPE);
+			$uploaded_data_type = finfo_file($finfo, $tmpfile);
+		} else {
+			$uploaded_data_type = $options['content_type'];
+		}
+		if (!$d->create($newfilename, $uploaded_data_type, $tmpfile, $dgId, $title, _('Injected by WebDAV')._(': ').date(DATE_ATOM))) {
 			@unlink($tmpfile);
 			return '409';
 		}
