@@ -80,8 +80,6 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		$arr_path = explode('/', rtrim($options['path'], '/'));
 		$group_id = $arr_path[3];
 
-		$this->doWeUseDocman($group_id);
-
 		/**
 		 * 4 is coming from the url: /docman/view.php/6/webdav/the/directory
 		 * 1 = docman
@@ -210,8 +208,6 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		$arr_path = explode('/', rtrim($options['path'], '/'));
 		$group_id = $arr_path[3];
 
-		$this->doWeUseDocman($group_id);
-
 		/**
 		 * 4 is coming from the url: /docman/view.php/6/webdav/the/directory
 		 * 1 = docman
@@ -299,7 +295,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		if (!forge_check_perm('docman', $group_id, 'approve')) {
 			return '403';
 		}
-		$this->doWeUseDocman($group_id);
+
 		$newfilename = $arr_path[count($arr_path) - 1];
 		$dgId = $this->findDgID($arr_path, $group_id);
 		/* Open a file for writing */
@@ -338,7 +334,6 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		if (!forge_check_perm('docman', $group_id, 'approve')) {
 			return '403';
 		}
-		$this->doWeUseDocman($group_id);
 
 		/**
 		 * 4 is coming from the url: /docman/view.php/6/webdav/the/directory
@@ -418,7 +413,6 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		if (!forge_check_perm('docman', $group_id, 'approve')) {
 			return '403';
 		}
-		$this->doWeUseDocman($group_id);
 
 		$coltocreate = $arr_path[count($arr_path) - 1];
 		$dgId = $this->findDgID($arr_path, $group_id);
@@ -438,6 +432,11 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 
 	function MOVE(&$options) {
 		$arr_path = explode('/', rtrim($options['path'], '/'));
+		$group_id = $arr_path[3];
+		if (!forge_check_perm('docman', $group_id, 'approve')) {
+			return '403';
+		}
+
 		if (empty($options['dest'])) {
 			//ok... need to find the destination
 			//let's try with dest_url
@@ -449,17 +448,12 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 			$arr_dest = explode('/', rtrim($options['dest'], '/'));
 		}
 
-
-		$group_id = $arr_path[3];
-		if (!forge_check_perm('docman', $group_id, 'approve')) {
-			return '403';
-		}
 		$arr_diff1 = array_diff($arr_dest, $arr_path);
 		$arr_diff2 = array_diff($arr_path, $arr_dest);
 		if ((count($arr_diff1) == 0) && (count($arr_diff2) == 0)) {
 			return '403';
 		}
-		$this->doWeUseDocman($group_id);
+
 		/**
 		 * 4 is coming from the url: /docman/view.php/6/webdav/the/directory
 		 * 1 = docman

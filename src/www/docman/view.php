@@ -6,7 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2010-2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -156,7 +156,7 @@ if (is_numeric($docid)) {
 		/* we need the group id for check authentification. */
 		$_SERVER["AUTH_TYPE"] = $group_id;
 		if (!isset($_SERVER['PHP_AUTH_USER'])) {
-			header('WWW-Authenticate: Basic realm="Webdav Access" (For anonymous access : click enter)');
+			header('WWW-Authenticate: Basic realm="Webdav Access (No anonymous access)"');
 			header('HTTP/1.0 401 Unauthorized');
 			echo _('Webdav Access Canceled by user');
 			die();
