@@ -31,6 +31,7 @@ case "$1" in
 	    echo "gforge: $server_admin" >> /etc/aliases.gforge-new
 	fi
 
+	if [ ! -e /etc/postfix/main.cf ]; then cp /usr/share/postfix/main.cf.debian /etc/postfix/main.cf; fi
 	cp -a /etc/postfix/main.cf /etc/postfix/main.cf.gforge-new
 
 	perl -pi -e's/SOURCEFORGE_DOMAINS/GFORGE_DOMAINS/;' \
