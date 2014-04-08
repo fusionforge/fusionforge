@@ -676,19 +676,20 @@ class GitPlugin extends SCMPlugin {
 		if (!is_dir($path)) {
 			return array();
 		}
+		if (file_exists("$path/HEAD")) {
+			return array($path);
+		}
 		$list = array();
 		$entries = scandir($path);
 		foreach ($entries as $entry) {
-			$fullname = $path . "/" . $entry;
 			if (($entry == ".") or ($entry == ".."))
 				continue;
+			$fullname = $path . "/" . $entry;
 			if (is_dir($fullname)) {
 				if (is_link($fullname))
 					continue;
 				$result = $this->getRepositories($fullname);
 				$list = array_merge($list, $result);
-			} elseif ($entry == "HEAD") {
-				$list[] = $path;
 			}
 		}
 		return $list;
