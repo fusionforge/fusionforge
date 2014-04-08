@@ -55,9 +55,9 @@ if (db_check_table_exists('plugin_scmhook_meta_data')) {
 // Convert headermenu
 if (db_check_table_exists('plugin_headermenu_meta_data')) {
 	print "  Converting headermenu, db version 0.1\n";
-	foreach(['headermenu:20120930-addoutermenusupport.sql',
+	foreach(array('headermenu:20120930-addoutermenusupport.sql',
 		 'headermenu:20121231-reorderentry.sql',
-		 'headermenu:20130120-addprojectcolumn.sql'] as $filename)
+		 'headermenu:20130120-addprojectcolumn.sql') as $filename)
 		db_query_params("INSERT INTO database_changes VALUES ($1)", array($filename));
 }
 
