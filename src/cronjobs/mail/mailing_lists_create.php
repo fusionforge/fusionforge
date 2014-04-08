@@ -47,6 +47,8 @@ if (is_dir(forge_get_config('mailman_path'))) {
 	exit;
 }
 
+$custom_file = forge_get_config('custom_path').'/mailman-config_list.conf';
+
 $res = db_query_params('SELECT users.user_name,email,mail_group_list.list_name,
 			mail_group_list.password,mail_group_list.status,
 			mail_group_list.group_list_id,mail_group_list.is_public,
@@ -118,6 +120,7 @@ for ($i=0; $i<$rows; $i++) {
 				$listConfig .= "subscribe_policy = 1\n" ;
 			}
 			fwrite($fh, $listConfig);
+			if (is_readable($custom_file)) fwrite($fh, file_get_contents($custom_file));
 			fclose($fh);
 			$config_cmd = escapeshellcmd($path_to_mailman."/bin/config_list -i $tmp $listname");
 			passthru($config_cmd, $failed);
@@ -158,6 +161,7 @@ for ($i=0; $i<$rows; $i++) {
 			$listConfig .= "advertised = True\n";
 			$listConfig .= "subscribe_policy = 1\n";
 		}
+		if (is_readable($custom_file)) fwrite($fh, file_get_contents($custom_file));
 		fwrite($fh, $listConfig);
 		fclose($fh);
 		$config_cmd = escapeshellcmd($path_to_mailman."/bin/config_list -i $tmp $listname");
@@ -231,19 +235,13 @@ for ($i=0; $i<$rows; $i++) {
 			$fh = fopen($tmp,'w');
 			$listConfig = "description = \"$description\"\n" ;
 			$listConfig .= "host_name = '".forge_get_config('lists_host')."'\n" ;
-			if (!$public) {
-				$listConfig .= "archive_private = True\n" ;
-				$listConfig .= "advertised = False\n" ;
-				$listConfig .= "subscribe_policy = 3\n" ;
-				## Reject mails sent by non-members
-				$listConfig .= "generic_nonmember_action = 2\n";
-				## Do not forward auto discard message
-				$listConfig .= "forward_auto_discards = 0\n";
-			} else {
-				$listConfig .= "archive_private = False\n" ;
-				$listConfig .= "advertised = True\n" ;
-				$listConfig .= "subscribe_policy = 1\n" ;
-			}
+			$listConfig .= "archive_private = True\n" ;
+			$listConfig .= "advertised = False\n" ;
+			$listConfig .= "subscribe_policy = 3\n" ;
+			## Reject mails sent by non-members
+			$listConfig .= "generic_nonmember_action = 2\n";
+			## Do not forward auto discard message
+			$listConfig .= "forward_auto_discards = 0\n";
 			fwrite($fh, $listConfig);
 			fclose($fh);
 			$privatize_cmd = escapeshellcmd($path_to_mailman."/bin/config_list -i $tmp $listname");
