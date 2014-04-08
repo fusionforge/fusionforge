@@ -488,7 +488,7 @@ class scmhookPlugin extends Plugin {
 			}
 		}
 		if (count($hooksPostReceive)) {
-			echo hml_e('h3', array(), _('post-receive Hooks'), false);
+			echo html_e('h3', array(), _('post-receive Hooks'), false);
 			$tabletop = array('', _('Hook Name'), _('Description'));
 			$classth = array('unsortable', '', '');
 			echo $HTML->listTableTop($tabletop, false, 'sortable_scmhook_post-receive', 'sortable', $classth);
