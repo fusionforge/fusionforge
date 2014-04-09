@@ -280,6 +280,7 @@ class Plugin extends Error {
 			echo "<strong>";
 			printf(_("Use %s"), $this->text);
 			echo "</strong>";
+			echo " ";
 			echo html_image($imgStatus, '16', '16',array('alt'=>$title, 'title'=>$title, 'class'=>'tabtitle-sw'));
 			echo "</td>\n";
 			echo "</tr>\n";
