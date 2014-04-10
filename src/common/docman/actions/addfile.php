@@ -66,10 +66,6 @@ if (!forge_check_perm('docman', $g->getID(), 'submit')) {
 	session_redirect($redirecturl.'&warning_msg='.urlencode($return_msg));
 }
 
-if ($error_msg) {
-	session_redirect($baseurl.'&error_msg='.urlencode($error_msg));
-}
-
 if (!$doc_group) {
 	//cannot add a doc unless an appropriate group is provided
 	$return_msg = _('No valid folder was selected.');
