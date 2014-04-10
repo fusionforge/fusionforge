@@ -5,7 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -36,12 +36,12 @@ $urlredirect = '/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid;
 // plugin projects-hierarchy handler
 if ($childgroup_id) {
 	$g = group_get_object($childgroup_id);
-	$urlredirect = '/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&childgroup_id='.$childgroup_id;
+	$urlredirect .= '&childgroup_id='.$childgroup_id;
 }
 
 if (!forge_check_perm('docman', $g->getID(), 'approve')) {
 	$return_msg = _('Document Manager Action Denied.');
-	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
+	session_redirect($urlredirect.'&warning_msg='.urlencode($return_msg));
 }
 
 $groupname = getStringFromRequest('groupname');
@@ -50,53 +50,15 @@ $dg = new DocumentGroup($g, $dirid);
 if ($dg->isError())
 	session_redirect($urlredirect.'&error_msg='.urlencode($dg->getErrorMessage()));
 
+$currentParentID = $dg->getParentID();
 if (!$dg->update($groupname, $parent_dirid))
 	session_redirect($urlredirect.'&error_msg='.urlencode($dg->getErrorMessage()));
 
-if ($dg->getState() == 2) {
-	/**
-	 * we need to update stateid for the content
-	 * Get the document groups info
-	 */
-	$df = new DocumentFactory($g);
-	if ($df->isError())
-		exit_error($df->getErrorMessage(), 'docman');
-
-	$dgf = new DocumentGroupFactory($g);
-	if ($dgf->isError())
-		exit_error($dgf->getErrorMessage(), 'docman');
-
-	$trashnested_groups =& $dgf->getNested(2);
-
-	$df->setDocGroupID($dirid);
-	$d_arr =& $df->getDocuments();
-
-	$trashnested_docs = array();
-	/* put the doc objects into an array keyed of the docgroup */
-	if (is_array($d_arr)) {
-		foreach ($d_arr as $doc) {
-			$trashnested_docs[$doc->getDocGroupID()][] = $doc;
-		}
-	}
-
-	if (is_array($trashnested_groups[$dirid])) {
-		foreach ($trashnested_groups[$dirid] as $ndg) {
-			$localdf = new DocumentFactory($g);
-			$localdf->setDocGroupID($ndg->getID());
-			$d_arr =& $localdf->getDocuments();
-			if (is_array($d_arr)) {
-				foreach ($d_arr as $doc) {
-					$trashnested_docs[$doc->getDocGroupID()][] = $doc;
-				}
-			}
-		}
-	}
-
-	docman_recursive_stateid($dirid, $trashnested_groups, $trashnested_docs, 1);
+$dm = new DocumentManager($g);
+if ($dg->getState() == 2 && ($currentParentID == $dm->getTrashID())) {
+	if (!$dg->setStateID('1', true))
+		session_redirect($urlredirect.'&error_msg='.urlencode($dg->getErrorMessage()));
 }
-
-if (!$dg->setStateID('1'))
-	session_redirect($urlredirect.'&error_msg='.urlencode($dg->getErrorMessage()));
 
 $return_msg = sprintf(_('Documents folder %s updated successfully'), $dg->getName());
 if ($childgroup_id)

@@ -997,14 +997,17 @@ class Document extends Error {
 	 * @return	boolean	success or not.
 	 */
 	function trash() {
-		$this->setState('2');
-		$dm = new DocumentManager($this->Group);
-		$this->setDocGroupID($dm->getTrashID());
-		$this->setLock(0);
-		$this->setReservedBy(0);
-		$this->sendNotice(false);
-		$this->clearMonitor();
-		return true;
+		if (!$this->getLocked() || ((time() - $this->getLockdate()) > 600)) {
+			$this->setState('2');
+			$dm = new DocumentManager($this->Group);
+			$this->setDocGroupID($dm->getTrashID());
+			$this->setLock(0);
+			$this->setReservedBy(0);
+			$this->sendNotice(false);
+			$this->clearMonitor();
+			return true;
+		}
+		return false;
 	}
 
 

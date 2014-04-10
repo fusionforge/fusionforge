@@ -122,7 +122,7 @@ jQuery(document).ready(function() {
 if ($DocGroupName) {
 	$content = _('Document Folder')._(': ').html_e('i', array(), $DocGroupName, false).'&nbsp;';
 	if ($DocGroupName != '.trash') {
-		$content .= util_make_link('#', html_image('docman/configure-directory.png', 22, 22, array('alt' => _('Edit'))), array('id' => 'docman-editdirectory', 'class' => 'tabtitle', 'title' => _('Edit this folder')), true);
+		$content .= util_make_link('#', html_image('docman/configure-directory.png', 22, 22, array('alt' => _('Edit'))), array('id' => 'docman-editdirectory', 'class' => 'tabtitle', 'title' => _('Edit this folder'), 'onclick' => 'javascript:controllerListTrash.toggleEditDirectoryView({lockIntervalDelay: 60000, doc_group:'.$ndg->getID().', groupId:'.$ndg->Group->getID().', docManURL:\''.util_make_uri('/docman').'\'})' ), true);
 		$content .= util_make_link($redirecturl.'&action=deldir', html_image('docman/delete-directory.png', 22, 22, array('alt' => _('Delete folder'))), array('id' => 'docman-deletedirectory', 'class' => 'tabtitle', 'title' => _('Delete permanently this folder and his content.')));
 	}
 	echo html_e('h3', array('class' => 'docman_h3'), $content, false);

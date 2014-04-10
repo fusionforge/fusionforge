@@ -5,7 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013-2014 Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -47,53 +47,11 @@ if ($childgroup_id) {
 	$g = group_get_object($childgroup_id);
 }
 
-/* when moving a document group to trash, it's recursive and it's applied to documents that belong to these document groups */
-/* Get the document groups info */
-$df = new DocumentFactory($g);
-if ($df->isError())
-	exit_error($df->getErrorMessage(), 'docman');
-
-$dgf = new DocumentGroupFactory($g);
-if ($dgf->isError())
-	exit_error($dgf->getErrorMessage(), 'docman');
-
-$trashnested_groups =& $dgf->getNested();
-
-$df->setDocGroupID($dirid);
-$d_arr =& $df->getDocuments();
-
-$trashnested_docs = array();
-/* put the doc objects into an array keyed of the docgroup */
-if (is_array($d_arr)) {
-	foreach ($d_arr as $doc) {
-		$trashnested_docs[$doc->getDocGroupID()][] = $doc;
-	}
-}
-
-if (is_array($trashnested_groups[$dirid])) {
-	foreach ($trashnested_groups[$dirid] as $dg) {
-		$localdf = new DocumentFactory($g);
-		$localdf->setDocGroupID($dg->getID());
-		$d_arr =& $localdf->getDocuments();
-		if (is_array($d_arr)) {
-			foreach ($d_arr as $doc) {
-				$trashnested_docs[$doc->getDocGroupID()][] = $doc;
-			}
-		}
-	}
-}
-
-/* set to trash content of this dirid */
-docman_recursive_stateid($dirid, $trashnested_groups, $trashnested_docs, 2);
-
 /* set this dirid to trash */
 $dg = new DocumentGroup($g, $dirid);
 $currentParent = $dg->getParentID();
-if (!$dg->setStateID('2'))
-	session_redirect($redirecturl.'&error_msg='.urlencode($dg->getErrorMessage()));
 
-$dm = new DocumentManager($g);
-if (!$dg->setParentDocGroupId($dm->getTrashID()))
+if (!$dg->trash())
 	session_redirect($redirecturl.'&dirid='.$currentParent.'&error_msg='.urlencode($dg->getErrorMessage()));
 
 $return_msg = sprintf(_('Documents folder %s moved to trash successfully.'),$dg->getName());

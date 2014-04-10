@@ -357,51 +357,17 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		$analysed_path = $this->analyse($subpath, $group_id);
 		$g = group_get_object($group_id);
 		if ($analysed_path['isdir']) {
-			$df = new DocumentFactory($g);
-			if ($df->isError())
-				exit_error($df->getErrorMessage(), 'docman');
-
-			$dgf = new DocumentGroupFactory($g);
-			if ($dgf->isError())
-				exit_error($dgf->getErrorMessage(), 'docman');
-
-			$trashnested_groups =& $dgf->getNested();
-			$df->setDocGroupID($analysed_path['doc_group']);
-			$d_arr =& $df->getDocuments();
-			if (is_array($d_arr)) {
-				foreach ($d_arr as $doc) {
-					$trashnested_docs[$doc->getDocGroupID()][] = $doc;
-				}
-			}
-
-			if (is_array($trashnested_groups[$analysed_path['doc_group']])) {
-				foreach ($trashnested_groups[$analysed_path['doc_group']] as $dg) {
-					$localdf = new DocumentFactory($g);
-					$localdf->setDocGroupID($dg->getID());
-					$d_arr =& $localdf->getDocuments();
-					if (is_array($d_arr)) {
-						foreach ($d_arr as $doc) {
-							$trashnested_docs[$doc->getDocGroupID()][] = $doc;
-						}
-					}
-				}
-			}
-			/* set this dirid to trash */
+			/* set this doc_group to trash */
 			$dg = new DocumentGroup($g, $analysed_path['doc_group']);
-			$currentParent = $dg->getParentID();
-			if (!$dg->setStateID('2'))
-				session_redirect($redirecturl.'&error_msg='.urlencode($dg->getErrorMessage()));
+			if ($dg->trash())
+				return '200';
 
-			$dm = new DocumentManager($g);
-			if (!$dg->setParentDocGroupId($dm->getTrashID()))
-				session_redirect($redirecturl.'&dirid='.$currentParent.'&error_msg='.urlencode($dg->getErrorMessage()));
-
-			return '200';
+			return '423';
 		} else {
 			if ($analysed_path['docid']) {
 				$d = new Document($g, $analysed_path['docid']);
-				$d->trash();
-				return '200';
+				if ($d->trash())
+					return '200';
 			}
 		}
 		return '404';

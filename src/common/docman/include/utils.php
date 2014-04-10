@@ -73,21 +73,3 @@ function docman_fill_zip($zip, $nested_groups, $document_factory, $docgroup = 0,
 	}
 	return true;
 }
-
-function docman_recursive_stateid($docgroup, $nested_groups, $nested_docs, $stateid = 2) {
-	$localdocgroup_arr = array();
-	$localdocgroup_arr[] = $docgroup;
-	if (is_array(@$nested_groups[$docgroup])) {
-		foreach ($nested_groups[$docgroup] as $dg) {
-			$dg->setStateID($stateid);
-			$localdocgroup_arr[] = $dg->getID();
-		}
-	}
-	foreach ($localdocgroup_arr as $docgroup_id) {
-		if (isset($nested_docs[$docgroup_id]) && is_array($nested_docs[$docgroup_id])) {
-			foreach ($nested_docs[$docgroup_id] as $d) {
-				$d->setState($stateid);
-			}
-		}
-	}
-}

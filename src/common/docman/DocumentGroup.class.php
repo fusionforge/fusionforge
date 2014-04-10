@@ -682,10 +682,69 @@ class DocumentGroup extends Error {
 	 * setStateID - set the state id of this document group.
 	 *
 	 * @param	int	$stateid	State ID.
+	 * @param	bool	$recursive	set the state id recursively. (i.e. move the directory and his content to trash)
 	 * @return	boolean	success or not.
 	 * @access	public
 	 */
-	function setStateID($stateid) {
+	function setStateID($stateid, $recursive = false) {
+		if ($recursive) {
+			$df = new DocumentFactory($this->Group);
+			if ($df->isError())
+				exit_error($df->getErrorMessage(), 'docman');
+
+			$dgf = new DocumentGroupFactory($this->Group);
+			if ($dgf->isError())
+				exit_error($dgf->getErrorMessage(), 'docman');
+
+			$trashnested_groups =& $dgf->getNested();
+
+			$df->setDocGroupID($this->getID());
+			$d_arr =& $df->getDocuments();
+
+			$trashnested_docs = array();
+			/* put the doc objects into an array keyed of the docgroup */
+			if (is_array($d_arr)) {
+				foreach ($d_arr as $doc) {
+					$trashnested_docs[$doc->getDocGroupID()][] = $doc;
+				}
+			}
+
+			if (is_array($trashnested_groups[$this->getID()])) {
+				foreach ($trashnested_groups[$this->getID()] as $dg) {
+					$localdf = new DocumentFactory($this->Group);
+					$localdf->setDocGroupID($dg->getID());
+					$d_arr =& $localdf->getDocuments();
+					if (is_array($d_arr)) {
+						foreach ($d_arr as $doc) {
+							$trashnested_docs[$doc->getDocGroupID()][] = $doc;
+						}
+					}
+				}
+			}
+
+			$localdocgroup_arr = array();
+			$localdocgroup_arr[] = $this->getID();
+			if (is_array(@$trashnested_groups[$docgroup])) {
+				foreach ($trashnested_groups[$docgroup] as $dg) {
+					if (!$dg->setStateID($stateid))
+						return false;
+					$localdocgroup_arr[] = $dg->getID();
+				}
+			}
+
+			foreach ($localdocgroup_arr as $docgroup_id) {
+				if (isset($trashnested_docs[$docgroup_id]) && is_array($trashnested_docs[$docgroup_id])) {
+					foreach ($trashnested_docs[$docgroup_id] as $d) {
+						if (!$d->setState($stateid))
+							return false;
+					}
+				}
+			}
+
+			$dm = new DocumentManager($this->Group);
+			if (!$this->setParentDocGroupId($dm->getTrashID()))
+				return false;
+		}
 		return $this->setValueinDB(array('stateid'), array($stateid));
 	}
 
@@ -738,6 +797,20 @@ class DocumentGroup extends Error {
 		return true;
 	}
 
+	/**
+	 * trash - move this directory and his contents to trash
+	 *
+	 * @return	bool	success or not.
+	 */
+	function trash() {
+		if (!$this->getLocked() || ((time() - $this->getLockdate()) > 600)) {
+			//we need to move recursively all docs and all doc_groups in trash
+			// aka setStateID to 2.
+			if ($this->setStateID(2, true))
+				return true;
+		}
+		return false;
+	}
 	/**
 	 * injectZip - private method to inject a zip archive tree and files
 	 *
