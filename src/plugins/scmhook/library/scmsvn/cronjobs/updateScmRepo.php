@@ -187,10 +187,11 @@ class ScmSvnUpdateScmRepo {
 				fwrite($file, file_get_contents(dirname(__FILE__).'/../skel/post-commit/head'));
 				$string = '';
 				foreach($newHooksPostCommit as $newHookPostCommit) {
-					$string .= $newHookPostCommit->getHookCmd()."\n";
+					$string .= $newHookPostCommit->getHookCmd()." || error=1\n";
 				}
 				$string .= "\n";
 				fwrite($file, $string);
+				fwrite($file, file_get_contents(dirname(__FILE__).'/../skel/post-commit/tail'));
 				fclose($file);
 				copy('/tmp/post-commit-'.$unixname.'.tmp', $svndir_root.'/hooks/post-commit');
 				chmod($svndir_root.'/hooks/post-commit', 0755);
