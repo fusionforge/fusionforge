@@ -66,7 +66,7 @@ class Document extends Error {
 			return;
 		}
 		if ($Group->isError()) {
-			$this->setError('Document: '. $Group->getErrorMessage());
+			$this->setError('Document'._(': ').$Group->getErrorMessage());
 			return;
 		}
 		$this->Group =& $Group;
@@ -79,7 +79,7 @@ class Document extends Error {
 			} else {
 				$this->data_array =& $arr;
 				if ($this->data_array['group_id'] != $this->Group->getID()) {
-					$this->setError('Document: '. _('group_id in db result does not match Group Object'));
+					$this->setError('Document'._(': ')._('group_id in db result does not match Group Object'));
 					$this->data_array = null;
 					return;
 				}
@@ -195,14 +195,14 @@ class Document extends Error {
 					return false;
 				}
 			} else {
-				$this->setError(_('Error Adding Document:').' '._('Not a file').' '.$filename);
+				$this->setError(_('Error Adding Document')._(': ')._('Not a file').' '.$filename);
 				db_rollback();
 				return false;
 			}
 		}
 
 		if (!$result || !$docid) {
-			$this->setError(_('Error Adding Document:').' '.db_error().$result);
+			$this->setError(_('Error Adding Document')._(': ').db_error().$result);
 			if ($filesize) {
 				DocumentStorage::instance()->rollback();
 			}
@@ -222,7 +222,7 @@ class Document extends Error {
 		if ($perm->isDocEditor()) {
 			$localDg = new DocumentGroup($this->Group, $doc_group);
 			if (!$localDg->update($localDg->getName(), $localDg->getParentID(), 1)) {
-				$this->setError(_('Error updating document group:').$localDg->getErrorMessage());
+				$this->setError(_('Error updating document group')._(': ').$localDg->getErrorMessage());
 				if ($filesize) {
 					DocumentStorage::instance()->rollback();
 				}
@@ -587,7 +587,7 @@ class Document extends Error {
 						array($this->getID(), $userid));
 
 		if (!$result) {
-			$this->setError(_('Unable To Remove Monitor').' : '.db_error());
+			$this->setError(_('Unable To Remove Monitor')._(': ').db_error());
 			return false;
 		}
 		return true;
@@ -608,7 +608,7 @@ class Document extends Error {
 							array($this->getID(), $userid));
 
 			if (!$result) {
-				$this->setError(_('Unable To Add Monitor').' : '.db_error());
+				$this->setError(_('Unable To Add Monitor')._(': ').db_error());
 				return false;
 			}
 		}
@@ -624,7 +624,7 @@ class Document extends Error {
 		$result = db_query_params('DELETE FROM docdata_monitored_docman WHERE doc_id = $1',
 					array($this->getID()));
 		if (!$result) {
-			$this->setError(_('Unable To Clear Monitor').' : '.db_error());
+			$this->setError(_('Unable To Clear Monitor')._(': ').db_error());
 			return false;
 		}
 		return true;
@@ -637,7 +637,7 @@ class Document extends Error {
 	 * @return	boolean	success or not.
 	 */
 	function setState($stateid) {
-		return $this->setValueinDB('stateid', $stateid);
+		return $this->setValueinDB(array('stateid'), array($stateid));
 	}
 
 
@@ -648,7 +648,7 @@ class Document extends Error {
 	 * @return	boolean	success or not.
 	 */
 	function setDocGroupID($newdocgroupid) {
-		return $this->setValueinDB('doc_group', $newdocgroupid);
+		return $this->setValueinDB(array('doc_group'), array($newdocgroupid));
 	}
 
 	/**
@@ -662,19 +662,9 @@ class Document extends Error {
 	 * @return	boolean	success or not.
 	 */
 	function setLock($stateLock, $userid = NULL, $thistime = 0) {
-		$res = db_query_params('UPDATE doc_data SET
-					locked = $1,
-					locked_by = $2,
-					lockdate = $3
-					WHERE group_id = $4
-					AND docid = $5',
-					array($stateLock,
-						$userid,
-						$thistime,
-						$this->Group->getID(),
-						$this->getID())
-					);
-		if (!$res || db_affected_rows($res) < 1) {
+		$colArr = array('locked', 'locked_by', 'lockdate');
+		$valArr = array($stateLock, $userid, $thistime);
+		if (!$this->setValueinDB($colArr, $valArr)) {
 			$this->setOnUpdateError(_('Document lock failed').' '.db_error());
 			return false;
 		}
@@ -692,17 +682,9 @@ class Document extends Error {
 	 * @return	boolean	success
 	 */
 	function setReservedBy($statusReserved, $idReserver = NULL) {
-		$res = db_query_params('UPDATE doc_data SET
-					reserved = $1,
-					reserved_by = $2
-					WHERE group_id = $3
-					AND docid = $4',
-					array($statusReserved,
-						$idReserver,
-						$this->Group->getID(),
-						$this->getID())
-					);
-		if (!$res || db_affected_rows($res) < 1) {
+		$colArr = array('reserved', 'reserved_by');
+		$valArr = array($statusReserved, $idReserver);
+		if (!$this->setValueinDB($colArr, $valArr)) {
 			$this->setOnUpdateError(_('Document reservation failed').' '.db_error());
 			return false;
 		}
@@ -854,40 +836,16 @@ class Document extends Error {
 		}
 
 		db_begin();
-		$res = db_query_params('UPDATE doc_data SET
-					title=$1,
-					description=$2,
-					stateid=$3,
-					doc_group=$4,
-					filetype=$5,
-					filename=$6,
-					updatedate=$7,
-					locked=$8,
-					locked_by=$9
-					WHERE group_id=$10
-					AND docid=$11',
-					array(htmlspecialchars($title),
-						htmlspecialchars($description),
-						$stateid,
-						$doc_group,
-						$filetype,
-						$filename,
-						time(),
-						0,
-						NULL,
-						$this->Group->getID(),
-						$this->getID())
-					);
-
-		if (!$res || db_affected_rows($res) < 1) {
-			$this->setOnUpdateError(db_error());
+		$colArr = array('title', 'description', 'stateid', 'doc_group', 'filetype', 'filename', 'updatedate', 'locked', 'locked_by');
+		$valArr = array(htmlspecialchars($title), htmlspecialchars($description), $stateid, $doc_group, $filetype, $filename, time(), 0, NULL);
+		if (!$this->setValueinDB($colArr, $valArr)) {
 			db_rollback();
 			return false;
 		}
 
 		$localDg = new DocumentGroup($this->Group, $doc_group);
 		if (!$localDg->update($localDg->getName(), $localDg->getParentID(), 1)) {
-			$this->setOnUpdateError(_('Error updating document group:').$localDg->getErrorMessage());
+			$this->setOnUpdateError(_('Error updating document group')._(': ').$localDg->getErrorMessage());
 			db_rollback();
 			return false;
 		}
@@ -901,15 +859,9 @@ class Document extends Error {
 				$kwords = '';
 			}
 
-			$res = db_query_params('UPDATE doc_data SET filesize=$1, data_words=$2 WHERE group_id=$3 AND docid=$4',
-						array(filesize($data),
-							$kwords,
-							$this->Group->getID(),
-							$this->getID())
-						);
-
-			if (!$res || db_affected_rows($res) < 1) {
-				$this->setOnUpdateError(db_error());
+			$colArr = array('filesize', 'data_words');
+			$valArr = array(filesize($data), $kwords);
+			if (!$this->setValueinDB($colArr, $valArr)) {
 				db_rollback();
 				return false;
 			}
@@ -979,7 +931,7 @@ class Document extends Error {
 		$bcc      = '';
 
 		$subject="[" . forge_get_config('forge_name') ."] ".util_unconvert_htmlspecialchars($doc_name);
-		$body = "\nA new document has been uploaded and waiting to be approved by you:".
+		$body = "\n"._('A new document has been uploaded and waiting to be approved by you')._(': ').
 		"\n".util_make_url('/docman/?group_id='.$group_id.'&view=admin').
 		"\nBy: " . $name . "\n";
 
@@ -1005,8 +957,8 @@ class Document extends Error {
 			}
 		}
 		if (strlen($bcc) > 0) {
-			util_send_message('',$subject,$body,"noreply@".forge_get_config('web_host'),
-				$bcc,'Docman',$extra_headers);
+			util_send_message('', $subject, $body, "noreply@".forge_get_config('web_host'),
+					$bcc, 'Docman', $extra_headers);
 		}
 		return true;
 	}
@@ -1026,7 +978,7 @@ class Document extends Error {
 		$result = db_query_params('DELETE FROM doc_data WHERE docid=$1',
 						array($this->getID()));
 		if (!$result) {
-			$this->setError(_('Error Deleting Document:').' '.db_error());
+			$this->setError(_('Error Deleting Document')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -1076,38 +1028,59 @@ class Document extends Error {
 	/**
 	 * setValueinDB - private function to update columns in db
 	 *
-	 * @param	string	$column	the column to update
-	 * @param	int	$value	the value to store
+	 * @param	array	$colArr	the columns to update in array form array('col1', col2')
+	 * @param	int	$valArr	the values to store in array form array('val1', 'val2')
 	 * @return	boolean	success or not
 	 * @access	private
 	 */
-	private function setValueinDB($column, $value) {
-		switch ($column) {
-			case 'stateid':
-			case 'doc_group': {
-				$qpa = db_construct_qpa();
-				$qpa = db_construct_qpa($qpa, 'UPDATE doc_data SET ');
-				$qpa = db_construct_qpa($qpa, $column);
-				$qpa = db_construct_qpa($qpa, '=$1
-								WHERE group_id=$2
-								AND docid=$3',
-								array($value,
-									$this->Group->getID(),
-									$this->getID()));
-				$res = db_query_qpa($qpa);
-				if (!$res || db_affected_rows($res) < 1) {
-					$this->setOnUpdateError(db_error().print_r($qpa));
+	private function setValueinDB($colArr, $valArr) {
+		if ((count($colArr) != count($valArr)) || !count($colArr) || !count($valArr)) {
+			$this->setOnUpdateError(_('wrong parameters'));
+			return false;
+		}
+		$qpa = db_construct_qpa();
+		$qpa = db_construct_qpa($qpa, 'UPDATE doc_data SET ');
+		for ($i = 0; $i < count($colArr); $i++) {
+			switch ($colArr[$i]) {
+				case 'filesize':
+				case 'data_words':
+				case 'reserved':
+				case 'reserved_by':
+				case 'title':
+				case 'description':
+				case 'filetype':
+				case 'filename':
+				case 'updatedate':
+				case 'stateid':
+				case 'doc_group':
+				case 'locked':
+				case 'locked_by':
+				case 'lockdate': {
+					if ($i) {
+						$qpa = db_construct_qpa($qpa, ',');
+					}
+					$qpa = db_construct_qpa($qpa, $colArr[$i]);
+					$qpa = db_construct_qpa($qpa, '=$1 ', array($valArr[$i]));
+					break;
+				}
+				default: {
+					$this->setOnUpdateError(_('wrong column name'));
 					return false;
 				}
-				break;
 			}
-			default:
-				$this->setOnUpdateError(_('wrong column name'));
-				return false;
+		}
+		$qpa = db_construct_qpa($qpa, ' WHERE group_id=$1
+						AND docid=$2',
+						array($this->Group->getID(),
+							$this->getID()));
+		$res = db_query_qpa($qpa);
+		if (!$res || db_affected_rows($res) < 1) {
+			$this->setOnUpdateError(db_error());
+			return false;
 		}
 		$localDg = new DocumentGroup($this->Group, $this->getDocGroupID());
 		if (!$localDg->update($localDg->getName(), $localDg->getParentID(), 1)) {
-			$this->setError(_('Error updating document group:').$localDg->getErrorMessage());
+			$this->setError(_('Error updating document group')._(': ').$localDg->getErrorMessage());
 			return false;
 		}
 		$this->sendNotice(false);

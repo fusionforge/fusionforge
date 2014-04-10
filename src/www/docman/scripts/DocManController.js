@@ -54,9 +54,6 @@ DocManListFileController.prototype =
 	/*! Binds the controls to the actions
 	 */
 	bindControls: function() {
-		if (typeof(this.params.buttonEditDirectory) != 'undefined') {
-			this.params.buttonEditDirectory.click(jQuery.proxy(this, "toggleEditDirectoryView"));
-		}
 		if (typeof(this.params.buttonAddItem) != 'undefined') {
 			this.params.buttonAddItem.click(jQuery.proxy(this, "toggleAddItemView"));
 		}
@@ -113,9 +110,10 @@ DocManListFileController.prototype =
 					var id = jQuery('#docid').attr('value');
 					jQuery.get(this.params.docManURL, {
 						group_id:	this.params.groupId,
-						action:		'lockfile',
+						action:		'lock',
 						lock:		0,
-						fileid:		id,
+						itemid:		id,
+						type:		'file',
 						childgroup_id:	this.params.childGroupId
 					});
 					clearInterval(this.lockInterval[id]);
@@ -125,9 +123,10 @@ DocManListFileController.prototype =
 					var id = jQuery('#docid').attr('value');
 					jQuery.get(this.params.docManURL, {
 						group_id:	this.params.groupId,
-						action:		'lockfile',
+						action:		'lock',
 						lock:		0,
-						fileid:		id,
+						itemid:		id,
+						type:		'file',
 						childgroup_id:	this.params.childGroupId
 					});
 					clearInterval(this.lockInterval[id]);
@@ -139,9 +138,10 @@ DocManListFileController.prototype =
 			var id = jQuery('#docid').attr('value');
 			jQuery.get(this.params.docManURL, {
 				group_id:	this.params.groupId,
-				action:		'lockfile',
+				action:		'lock',
 				lock:		0,
-				fileid:		id,
+				itemid:		id,
+				type:		'file',
 				childgroup_id:	this.params.childGroupId
 			});
 			clearInterval(this.lockInterval[id]);
@@ -150,7 +150,8 @@ DocManListFileController.prototype =
 
 	/*! toggle edit group view div visibility
 	 */
-	toggleEditDirectoryView: function() {
+	toggleEditDirectoryView: function(docparams) {
+		this.docparams = docparams;
 		if (!this.params.divEditDirectory.is(":visible")) {
 			this.params.divEditDirectory.show();
 			if (typeof(this.params.divAddItem) != 'undefined') {
@@ -159,11 +160,29 @@ DocManListFileController.prototype =
 			computeHeight = this.params.divRight.height() + this.params.divEditDirectory.height();
 			currentLeftHeight = this.params.divLeft.height();
 			this.params.divLeft.height(currentLeftHeight + this.params.divEditDirectory.height());
+			jQuery.get(this.docparams.docManURL, {
+				group_id:	this.docparams.groupId,
+				action:		'lock',
+				lock:		1,
+				type:		'dir',
+				itemid:	this.docparams.doc_group,
+				childgroup_id:	this.docparams.childGroupId
+			});
+			this.lockInterval[this.docparams.doc_group] = setInterval("jQuery.get('" + this.docparams.docManURL + "', {group_id:"+this.docparams.groupId+",action:'lock',lock:1,type:'dir',itemid:"+this.docparams.doc_group+",childgroup_id:"+this.docparams.childGroupId+"})",this.docparams.lockIntervalDelay);
 		} else {
 			this.params.divEditDirectory.hide();
 			computeHeight = this.params.divRight.height() - this.params.divEditDirectory.height();
 			currentLeftHeight = this.params.divLeft.height();
 			this.params.divLeft.height(currentLeftHeight - this.params.divEditDirectory.height());
+			jQuery.get(this.docparams.docManURL, {
+				group_id:	this.docparams.groupId,
+				action:		'lock',
+				lock:		0,
+				type:		'dir',
+				itemid:	this.docparams.doc_group,
+				childgroup_id:	this.docparams.childGroupId
+			});
+			clearInterval(this.lockInterval[this.docparams.doc_group]);
 		}
 		if (typeof(this.params.divLeft) != 'undefined' && typeof(this.params.divRight) != 'undefined') {
 			if (this.params.divLeft.height() > computeHeight) {
@@ -257,12 +276,13 @@ DocManListFileController.prototype =
 
 		jQuery.get(this.docparams.docManURL, {
 				group_id:	this.docparams.groupId,
-				action:		'lockfile',
+				action:		'lock',
 				lock:		1,
-				fileid:		this.docparams.id,
+				type:		'dir',
+				itemid:		this.docparams.id,
 				childgroup_id:	this.docparams.childGroupId
 			});
-		this.lockInterval[this.docparams.id] = setInterval("jQuery.get('" + this.docparams.docManURL + "', {group_id:"+this.docparams.groupId+",action:'lockfile',lock:1,fileid:"+this.docparams.id+",childgroup_id:"+this.docparams.childGroupId+"})",this.docparams.lockIntervalDelay);
+		this.lockInterval[this.docparams.id] = setInterval("jQuery.get('" + this.docparams.docManURL + "', {group_id:"+this.docparams.groupId+",action:'lock',lock:1,type:'file',itemid:"+this.docparams.id+",childgroup_id:"+this.docparams.childGroupId+"})",this.docparams.lockIntervalDelay);
 		jQuery(this.params.divEditFile).dialog("open");
 
 		return false;

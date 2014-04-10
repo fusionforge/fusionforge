@@ -3,7 +3,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2014 Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -35,20 +35,33 @@ if (!forge_check_perm('docman', $group_id, 'approve')) {
 	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
 }
 
-$fileid = getIntFromRequest('fileid');
+$itemid = getIntFromRequest('itemid');
 $lock = getIntFromRequest('lock');
+$type = getStringfromRequest('type');
 $childgroup_id = getIntFromRequest('childgroup_id');
 if ($childgroup_id) {
 	$g = group_get_object($childgroup_id);
 }
-$d = new Document($g, $fileid);
+switch ($type) {
+	case 'file': {
+		$objectType = new Document($g, $itemid);
+		break;
+	}
+	case 'dir': {
+		$objectType = new DocumentGroup($g, $itemid);
+		break;
+	}
+	default: {
+		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode(_('Lock failed')._(': ')._('Missing Type')));
+	}
+}
 
-if ($d->isError())
-	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($d->getErrorMessage()));
+if ($objectType->isError())
+	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($objectType->getErrorMessage()));
 
 if ($lock == 0) {
-	echo $d->setLock($lock);
+	echo $objectType->setLock($lock);
 } else {
-	echo $d->setLock($lock, $LUSER->getID(), time());
+	echo $objectType->setLock($lock, $LUSER->getID(), time());
 }
 exit;

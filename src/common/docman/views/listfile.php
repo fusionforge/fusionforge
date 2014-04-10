@@ -160,22 +160,34 @@ echo html_ac(html_ap() - 1);
 if ($DocGroupName) {
 	$headerPath = '';
 	if ($childgroup_id) {
-		$headerPath .= _('Subproject')._(': ').util_make_link('/docman/?group_id='.$g->getID(),$g->getPublicName()).' ';
+		$headerPath .= _('Subproject')._(': ').util_make_link('/docman/?group_id='.$g->getID(), $g->getPublicName()).' ';
 	}
 	$headerPath .= _('Path')._(': ').html_e('i', array(), $dgpath, false);
 	echo html_e('h2', array(), $headerPath, false);
 	echo html_ao('h3', array('class' => 'docman_h3'));
-	echo html_e('span', array(), _('Document Folder')._(': ').html_e('i',array(),$DocGroupName, false).'&nbsp;', false);
-	if (forge_check_perm('docman', $ndg->Group->getID(), 'approve')) {
-		echo util_make_link('#', html_image('docman/configure-directory.png', 22, 22, array('alt' => 'edit')), array('class' => 'tabtitle', 'id' => 'docman-editdirectory', 'title' => _('Edit this folder')), true);
-		echo util_make_link($redirecturl.'&action=trashdir', html_image('docman/trash-empty.png', 22, 22, array('alt' => 'trashdir')), array('class' => 'tabtitle', 'id' => 'docman-trashdirectory', 'title' => _('Move this folder and his content to trash')));
-		if (!isset($nested_docs[$dirid]) && !isset($nested_groups[$dirid]) && !isset($nested_pending_docs[$dirid])) {
-			echo util_make_link($redirecturl.'&action=deldir', html_image('docman/delete-directory.png', 22, 22, array('alt' => 'deldir')), array('class' => 'tabtitle', 'id' => 'docman-deletedirectory', 'title' => _('Permanently delete this folder')));
+	echo html_e('span', array(), _('Document Folder')._(': ').html_e('i', array(), $DocGroupName, false).'&nbsp;', false);
+	/* should we steal the lock on file ? */
+	if ($ndg->getLocked()) {
+		if ($ndg->getLockedBy() == $u->getID()) {
+			$ndg->setLock(0);
+		/* if you change the 60000 value below, please update here too */
+		} elseif ((time() - $ndg->getLockdate()) > 600) {
+			$ndg->setLock(0);
 		}
 	}
+	if (!$ndg->getLocked()) {
+		if (forge_check_perm('docman', $ndg->Group->getID(), 'approve')) {
+			echo html_e('input', array('type' => 'hidden', 'id' => 'doc_group_id', 'value' => $ndg->getID()));
+			echo util_make_link('#', html_image('docman/configure-directory.png', 22, 22, array('alt' => 'edit')), array('class' => 'tabtitle', 'id' => 'docman-editdirectory', 'title' => _('Edit this folder'), 'onclick' => 'javascript:controllerListFile.toggleEditDirectoryView({lockIntervalDelay: 60000, doc_group:'.$ndg->getID().', groupId:'.$ndg->Group->getID().', docManURL:\''.util_make_uri('/docman').'\'})' ), true);
+			echo util_make_link($redirecturl.'&action=trashdir', html_image('docman/trash-empty.png', 22, 22, array('alt' => 'trashdir')), array('class' => 'tabtitle', 'id' => 'docman-trashdirectory', 'title' => _('Move this folder and his content to trash')));
+			if (!isset($nested_docs[$dirid]) && !isset($nested_groups[$dirid]) && !isset($nested_pending_docs[$dirid])) {
+				echo util_make_link($redirecturl.'&action=deldir', html_image('docman/delete-directory.png', 22, 22, array('alt' => 'deldir')), array('class' => 'tabtitle', 'id' => 'docman-deletedirectory', 'title' => _('Permanently delete this folder')));
+			}
+		}
 
-	if (forge_check_perm('docman', $group_id, 'submit')) {
-		echo util_make_link('#', html_image('docman/insert-directory.png', 22, 22, array('alt' => 'additem')), array('class' => 'tabtitle', 'id' => 'docman-additem', 'title' => _('Add a new item in this folder')), true);
+		if (forge_check_perm('docman', $group_id, 'submit')) {
+			echo util_make_link('#', html_image('docman/insert-directory.png', 22, 22, array('alt' => 'additem')), array('class' => 'tabtitle', 'id' => 'docman-additem', 'title' => _('Add a new item in this folder')), true);
+		}
 	}
 
 	$numFiles = $ndg->getNumberOfDocuments(1);
@@ -221,6 +233,15 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 	$time_new = 604800;
 	foreach ($nested_docs[$dirid] as $d) {
 		$cells = array();
+		/* should we steal the lock on file ? */
+		if ($d->getLocked()) {
+			if ($d->getLockedBy() == $u->getID()) {
+				$d->setLock(0);
+			/* if you change the 60000 value below, please update here too */
+			} elseif ((time() - $d->getLockdate()) > 600) {
+				$d->setLock(0);
+			}
+		}
 		if (!$d->getLocked() && !$d->getReserved()) {
 			$cells[][] = html_e('input', array('type' => 'checkbox', 'value' => $d->getID(), 'class' => 'checkeddocidactive tabtitle-w', 'title' => _('Select / Deselect this document for massaction'), 'onchange' => 'controllerListFile.checkgeneral("active")'));
 		} else {
@@ -279,15 +300,6 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 
 		if (forge_check_perm('docman', $group_id, 'approve')) {
 			$nextcell = '';
-			/* should we steal the lock on file ? */
-			if ($d->getLocked()) {
-				if ($d->getLockedBy() == $u->getID()) {
-					$d->setLock(0);
-				/* if you change the 60000 value below, please update here too */
-				} elseif ((time() - $d->getLockdate()) > 600) {
-					$d->setLock(0);
-				}
-			}
 			$editfileaction = '/docman/?action=editfile&fromview=listfile&dirid='.$d->getDocGroupID();
 			if (isset($GLOBALS['childgroup_id']) && $GLOBALS['childgroup_id']) {
 				$editfileaction .= '&childgroup_id='.$GLOBALS['childgroup_id'];
@@ -295,7 +307,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 			$editfileaction .= '&group_id='.$GLOBALS['group_id'];
 			if (!$d->getLocked() && !$d->getReserved()) {
 				$nextcell .= util_make_link($redirecturl.'&action=trashfile&fileid='.$d->getID(), html_image('docman/trash-empty.png', 22, 22, array('alt' => _('Move this document to trash'))), array('class' => 'tabtitle-ne', 'title' => _('Move this document to trash')));
-				$nextcell .= util_make_link('#', html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this document'))), array('onclick' => 'javascript:controllerListFile.toggleEditFileView({action:\''.util_make_uri($editfileaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json').', docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').', title:\''.addslashes($d->getName()).'\', filename:\''.$d->getFilename().'\', description:\''.addslashes($d->getDescription()).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', isHtml:\''.$d->isHtml().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri("docman").'\'})', 'class' => 'tabtitle-ne', 'title' => _('Edit this document')), true);
+				$nextcell .= util_make_link('#', html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this document'))), array('onclick' => 'javascript:controllerListFile.toggleEditFileView({action:\''.util_make_uri($editfileaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json').', docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').', title:\''.addslashes($d->getName()).'\', filename:\''.$d->getFilename().'\', description:\''.addslashes($d->getDescription()).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', isHtml:\''.$d->isHtml().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri('/docman').'\'})', 'class' => 'tabtitle-ne', 'title' => _('Edit this document')), true);
 				if (session_loggedin()) {
 					$nextcell .= util_make_link($redirecturl.'&action=reservefile&fileid='.$d->getID(), html_image('docman/reserve-document.png', 22, 22, array('alt' => _('Reserve this document'))), array('class' => 'tabtitle-ne', 'title' => _('Reserve this document for later edition')));
 				}
@@ -306,7 +318,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 					}
 				} else {
 					$nextcell .= util_make_link($redirecturl.'&action=trashfile&fileid='.$d->getID(), html_image('docman/trash-empty.png', 22, 22, array('alt' => _('Move this document to trash'))), array('class' => 'tabtitle-ne', 'title' => _('Move this document to trash')));
-					$nextcell .= util_make_link('#', html_image('docman/edit-file.png', 22 ,22, array('alt' => _('Edit this document'))), array('onclick' => 'javascript:controllerListFile.toggleEditFileView({action:\''.util_make_uri($editfileaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json').', docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').', title:\''.addslashes($d->getName()).'\', filename:\''.$d->getFilename().'\', description:\''.addslashes($d->getDescription()).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', isHtml:\''.$d->isHtml().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri("docman").'\'})', 'class' => 'tabtitle-ne', 'title' => _('Edit this document')), true);
+					$nextcell .= util_make_link('#', html_image('docman/edit-file.png', 22 ,22, array('alt' => _('Edit this document'))), array('onclick' => 'javascript:controllerListFile.toggleEditFileView({action:\''.util_make_uri($editfileaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json').', docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').', title:\''.addslashes($d->getName()).'\', filename:\''.$d->getFilename().'\', description:\''.addslashes($d->getDescription()).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', isHtml:\''.$d->isHtml().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri('/docman').'\'})', 'class' => 'tabtitle-ne', 'title' => _('Edit this document')), true);
 					$nextcell .= util_make_link($redirecturl.'&action=releasefile&fileid='.$d->getID(), html_image('docman/release-document.png', 22, 22, array('alt' => _('Release reservation'))), array('class' => 'tabtitle-ne', 'title' => _('Release reservation')));
 				}
 			}

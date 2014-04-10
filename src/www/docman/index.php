@@ -82,7 +82,7 @@ switch ($action) {
 	case "forcereindexenginesearch":
 	case "getfile":
 	case "injectzip":
-	case "lockfile":
+	case "lock":
 	case "monitorfile":
 	case "monitordirectory":
 	case "releasefile":

@@ -73,7 +73,7 @@ class DocumentGroup extends Error {
 			if (is_array($data)) {
 				$this->data_array =& $data;
 				if ($this->data_array['group_id'] != $this->Group->getID()) {
-					$this->setError('DocumentGroup: '. _('group_id in db result does not match Group Object'));
+					$this->setError('DocumentGroup'._(': '). _('group_id in db result does not match Group Object'));
 					$this->data_array = null;
 					return;
 				}
@@ -144,7 +144,7 @@ class DocumentGroup extends Error {
 		if ($result && db_affected_rows($result) > 0) {
 			$this->clearError();
 		} else {
-			$this->setError(_('Error Adding Folder:').' '.db_error());
+			$this->setError(_('Error Adding Folder')._(': ').db_error());
 			return false;
 		}
 
@@ -505,15 +505,9 @@ class DocumentGroup extends Error {
 		}
 
 		$user_id = ((session_loggedin()) ? user_getid() : 100);
-		$result = db_query_params('UPDATE doc_groups SET groupname=$1, parent_doc_group=$2, updatedate=$3, created_by=$4 WHERE doc_group=$5 AND group_id=$6',
-						array(htmlspecialchars($name),
-							$parent_doc_group,
-							time(),
-							$user_id,
-							$this->getID(),
-							$this->Group->getID())
-					);
-		if ($result && db_affected_rows($result) > 0) {
+		$colArr = array('groupname', 'parent_doc_group', 'updatedate', 'created_by', 'locked', 'locked_by');
+		$valArr = array(htmlspecialchars($name), $parent_doc_group, time(), $user_id, 0, NULL);
+		if ($this->setValueinDB($colArr, $valArr)) {
 			$parentDg = new DocumentGroup($this->Group, $parent_doc_group);
 			if ($parentDg->getParentID())
 				$parentDg->update($parentDg->getName(), $parentDg->getParentID(), 1);
@@ -692,7 +686,7 @@ class DocumentGroup extends Error {
 	 * @access	public
 	 */
 	function setStateID($stateid) {
-		return $this->setValueinDB('stateid', $stateid);
+		return $this->setValueinDB(array('stateid'), array($stateid));
 	}
 
 	/**
@@ -703,7 +697,7 @@ class DocumentGroup extends Error {
 	 * @access	public
 	 */
 	function setParentDocGroupId($parentDocGroupId) {
-		return $this->setValueinDB('parent_doc_group', $parentDocGroupId);
+		return $this->setValueinDB(array('parent_doc_group'), array($parentDocGroupId));
 	}
 
 	/**
@@ -848,36 +842,103 @@ class DocumentGroup extends Error {
 	}
 
 	/**
+	 * getLocked - get the lock status of this doc_group.
+	 *
+	 * @return	int	The lock status of this doc_group.
+	 */
+	function getLocked() {
+		return $this->data_array['locked'];
+	}
+
+	/**
+	 * getLockdate - get the lock time of this doc_group.
+	 *
+	 * @return	int	The lock time of this doc_group.
+	 */
+	function getLockdate() {
+		return $this->data_array['lockdate'];
+	}
+
+	/**
+	 * getLockedBy - get the user id who set lock on this doc_group.
+	 *
+	 * @return	int	The user id who set lock on this doc_group.
+	 */
+	function getLockedBy() {
+		return $this->data_array['locked_by'];
+	}
+
+	/**
+	 * setLock - set the locking status of the document.
+	 *
+	 * @param	int	$stateLock	the status to be set
+	 * @param	string	$userid		the lock owner
+	 * @param	int	$thistime	the epoch time
+	 * @internal	param	\The $int status of the lock.
+	 * @internal	param	\The $int userid who set the lock.
+	 * @return	boolean	success or not.
+	 */
+	function setLock($stateLock, $userid = NULL, $thistime = 0) {
+		$colArr = array('locked', 'locked_by', 'lockdate');
+		$valArr = array($stateLock, $userid, $thistime);
+		if (!$this->setValueinDB($colArr, $valArr)) {
+			return false;
+		}
+		$this->data_array['locked'] = $stateLock;
+		$this->data_array['locked_by'] = $userid;
+		$this->data_array['lockdate'] = $thistime;
+		return true;
+	}
+
+	/**
 	 * setValueinDB - private function to update columns in db
 	 *
-	 * @param	string	$column	the column to update
-	 * @param	int	$value	the value to store
+	 * @param	array	$colArr	the columns to update in array form array('col1', col2')
+	 * @param	int	$valArr	the values to store in array form array('val1', 'val2')
 	 * @return	boolean	success or not
 	 * @access	private
 	 */
-	private function setValueinDB($column, $value) {
-		switch ($column) {
-			case "stateid":
-			case "parent_doc_group": {
-				$qpa = db_construct_qpa();
-				$qpa = db_construct_qpa($qpa, 'UPDATE doc_groups SET ');
-				$qpa = db_construct_qpa($qpa, $column);
-				$qpa = db_construct_qpa($qpa, '=$1
-								WHERE group_id=$2
-								AND doc_group=$3',
-								array($value,
-									$this->Group->getID(),
-									$this->getID()));
-				$res = db_query_qpa($qpa);
-				if (!$res || db_affected_rows($res) < 1) {
-					$this->setOnUpdateError(db_error().print_r($res));
+	private function setValueinDB($colArr, $valArr) {
+		if ((count($colArr) != count($valArr)) || !count($colArr) || !count($valArr)) {
+			$this->setOnUpdateError(_('wrong parameters'));
+			return false;
+		}
+		$qpa = db_construct_qpa();
+		$qpa = db_construct_qpa($qpa, 'UPDATE doc_groups SET ');
+		for ($i = 0; $i < count($colArr); $i++) {
+			switch ($colArr[$i]) {
+				case 'groupname':
+				case 'parent_doc_group':
+				case 'updatedate':
+				case 'created_by':
+				case 'locked':
+				case 'locked_by':
+				case 'stateid':
+				case 'parent_doc_group':
+				case 'locked':
+				case 'locked_by':
+				case 'lockdate': {
+					if ($i) {
+						$qpa = db_construct_qpa($qpa, ',');
+					}
+					$qpa = db_construct_qpa($qpa, $colArr[$i]);
+					$qpa = db_construct_qpa($qpa, '=$1 ', array($valArr[$i]));
+					break;
+				}
+				default: {
+					$this->setOnUpdateError(_('wrong column name'));
 					return false;
 				}
-				break;
 			}
-			default:
-				$this->setOnUpdateError(_('wrong column name'));
-				return false;
+		}
+		$qpa = db_construct_qpa($qpa, ' WHERE group_id=$1
+						AND doc_group=$2',
+						array($this->Group->getID(),
+							$this->getID()));
+		$res = db_query_qpa($qpa);
+		if (!$res || db_affected_rows($res) < 1) {
+			$this->setOnUpdateError(db_error());
+			return false;
 		}
 		return true;
 	}
