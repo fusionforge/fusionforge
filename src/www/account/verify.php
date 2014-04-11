@@ -36,6 +36,7 @@ if (getStringFromRequest('submit')) {
 	if (!$loginname) {
 		exit_missing_param('',array(_('UserName')),'my');
 	}
+	$loginname = strtolower($loginname);
 
 	$u = user_get_object_by_name($loginname);
 	if (!$u && forge_get_config('require_unique_email')) {
