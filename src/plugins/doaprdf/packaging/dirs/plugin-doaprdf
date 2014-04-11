@@ -1,4 +1,3 @@
-etc/gforge/plugins/doaprdf
 @PLUGIN_PATH@/doaprdf/cgi-bin
 @PLUGIN_PATH@/doaprdf/common
 @PLUGIN_PATH@/doaprdf/www

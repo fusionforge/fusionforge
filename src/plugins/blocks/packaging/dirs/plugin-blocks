@@ -1,4 +1,3 @@
-etc/gforge/plugins/blocks
 @PLUGIN_PATH@/blocks
 @PLUGIN_PATH@/blocks/common
 @PLUGIN_PATH@/blocks/www

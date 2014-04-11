@@ -99,7 +99,7 @@ if ($argc == 2) {
 			$pm->LoadPlugins();
 		}
 		$plugin = $pm->GetPluginObject($pluginname);
-		$plugin->installDatabase();  // and upgrade
+		$plugin->install();  // and upgrade
         }
 }
 

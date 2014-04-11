@@ -1,4 +1,3 @@
-etc/gforge/plugins/soapadmin
 @PLUGIN_PATH@/soapadmin/cgi-bin
 @PLUGIN_PATH@/soapadmin/common
 @PLUGIN_PATH@/soapadmin/www

@@ -1,3 +1,2 @@
-etc/gforge/plugins/scmcpold
 @PLUGIN_PATH@/scmcpold/common
 @DATA_PATH@/chroot/scmrepos/cpold

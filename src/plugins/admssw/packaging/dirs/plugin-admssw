@@ -1,4 +1,3 @@
-etc/gforge/plugins/admssw
 @PLUGIN_PATH@/admssw/cgi-bin
 @PLUGIN_PATH@/admssw/common
 @PLUGIN_PATH@/admssw/www
