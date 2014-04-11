@@ -1,0 +1,62 @@
+┌──────────┐
+│ recvhook │
+└──────────┘
+
+This git repository took out the contributed post-receive hook
+from git.git with its full history and aims to continue to fix
+and develop it. There is also FusionForge/Evolvis integration,
+in a separate branch.
+
+This repository is hosted on evolvis.org (a public FusionForge
+instance by tarent). We mirror it on github for popularity, as
+shown below. Development of the hook is partially sponsored by
+tarent, FreeWRT (now The MirOS Project), Teckids.
+
+• https://evolvis.org/plugins/scmgit/cgi-bin/gitweb.cgi?p=evolvis-platfrm/recvhook.git
+• https://github.com/mirabilos/recvhook
+
+Please do steer new contributions to Evolvis.
+
+Links:
+• https://evolvis.org/
+  ‣ start page of the public Evolvis instance
+• https://evolvis.org/projects/evolvis-platfrm/
+  ‣ project page for developing Evolvis itself
+• https://fusionforge.org/
+  ‣ EvolvisForge’s upstream, FusionForge
+• http://www.tarent.de/
+  ‣ tarent solutions GmbH, sponsoring part of this
+• http://mako.cc/writing/hill-free_tools.html
+  ‣ why you should *not* be using github!
+• http://mako.cc/copyrighteous/freedom-for-users-not-for-software
+
+┌───────────────┐
+│ Documentation │
+└───────────────┘
+
+This script is basically a replacement for the script
+that came with git, except you will not see the annoying
+“[SCM] ” præfix in eMails any more, and have to change
+a few configuration settings:
+
+• hooks.showrev ⇒ clear this, use our default
+• hooks.diffopts ⇒ clear this, use our default
+
+There are notable new settings:
+
+• hooks.replyto (sets a Reply-To: header)
+• hooks.shortdesc (used in the Subject: header instead
+  of the content of the description file)
+• hooks.kgbconffile (full path to a configuration file
+  for kgb-client, triggers on-push IRC notifications)
+
+There’s also noticeable effort to fix umlauts and
+other nōn-ASCII characters in eMails – as long as
+you use UTF-8 in your commits, of course.
+
+For more information, please read the script directly.
+If there will ever be frequently asked questions, I’ll
+amend this documentation section though ☺
+
+bye,
+//mirabilos
