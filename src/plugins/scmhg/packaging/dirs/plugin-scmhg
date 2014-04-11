@@ -1,3 +1,2 @@
-etc/gforge/plugins/scmhg
 @PLUGIN_PATH@/scmhg/common
 @DATA_PATH@/chroot/scmrepos/hg

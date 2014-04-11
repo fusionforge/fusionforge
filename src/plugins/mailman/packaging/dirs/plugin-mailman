@@ -1,4 +1,3 @@
-etc/gforge/plugins/mailman
 @PLUGIN_PATH@/mailman/cgi-bin
 @PLUGIN_PATH@/mailman/common
 @PLUGIN_PATH@/mailman/www

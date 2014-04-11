@@ -1,4 +1,3 @@
-etc/gforge/plugins/extsubproj
 @PLUGIN_PATH@/extsubproj/actions
 @PLUGIN_PATH@/extsubproj/common
 @PLUGIN_PATH@/extsubproj/view

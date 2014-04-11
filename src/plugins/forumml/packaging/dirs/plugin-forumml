@@ -1,4 +1,3 @@
-etc/gforge/plugins/forumml
 @PLUGIN_PATH@/forumml/cgi-bin
 @PLUGIN_PATH@/forumml/common
 @PLUGIN_PATH@/forumml/www

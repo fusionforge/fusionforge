@@ -1,3 +1,2 @@
-etc/gforge/plugins/oauthprovider
 @PLUGIN_PATH@/oauthprovider/common
 @PLUGIN_PATH@/oauthprovider/www

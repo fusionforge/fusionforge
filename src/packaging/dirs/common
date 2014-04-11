@@ -6,4 +6,5 @@ etc/@PACKAGE@/config.ini.d
 @SOURCE_PATH@/common
 usr/share/locale
 usr/sbin
+@CONFIG_PATH@/plugins
 @DATA_PATH@/www/plugins
