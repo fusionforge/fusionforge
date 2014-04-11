@@ -15,7 +15,13 @@ tarent, FreeWRT (now The MirOS Project), Teckids.
 • https://evolvis.org/plugins/scmgit/cgi-bin/gitweb.cgi?p=evolvis-platfrm/recvhook.git
 • https://github.com/mirabilos/recvhook
 
-Please do steer new contributions to Evolvis.
+Please do steer new contributions to Evolvis. Development will
+be done in the “standalone” branch which can then be merged to
+both “master” (for visibility) and “forge” (further integrati‐
+ve and development work). Ensure the live branches and release
+tags always only have the hook script (not this README file or
+the LICENCE file) in them, since other repositories merge them
+using the subtree strategy regularily.
 
 Links:
 • https://evolvis.org/
@@ -29,6 +35,9 @@ Links:
 • http://mako.cc/writing/hill-free_tools.html
   ‣ why you should *not* be using github!
 • http://mako.cc/copyrighteous/freedom-for-users-not-for-software
+  ‣ more on that
+• https://www.kernel.org/pub/software/scm/git/docs/howto/using-merge-subtree.html
+  ‣ merge this script into your own repository
 
 ┌───────────────┐
 │ Documentation │
