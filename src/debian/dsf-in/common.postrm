@@ -20,9 +20,7 @@ case "$1" in
     purge)
 	rm -rf @DATA_PATH@
 	[ -d @CONFIG_PATH@ ] && rm -rf @CONFIG_PATH@
-	for i in config.ini.d/debian-install-secrets.ini config.ini.d/debian-install.ini fusionforge.conf ; do
-	    [ -e /etc/@PACKAGE@/$i ] && rm /etc/@PACKAGE@/$i
-	done
+	[ -d @SOURCE_PATH@/www/plugins ] && rm -rf @SOURCE_PATH@/www/plugins
 	;;
     remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
 	;;

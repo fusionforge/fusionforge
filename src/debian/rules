@@ -282,6 +282,12 @@ install: build
 
 	chmod 755 $(CURDIR)/debian/$(OLDPACKAGE)-db-postgresql/$(SOURCE_PATH)/db/*.php
 
+#	Allow plugin activate/deactivate from plugin manager
+	chmod 775      $(CURDIR)/debian/$(OLDPACKAGE)-common/$(SOURCE_PATH)/www/plugins/
+	chgrp www-data $(CURDIR)/debian/$(OLDPACKAGE)-common/$(SOURCE_PATH)/www/plugins/
+	chmod 775      $(CURDIR)/debian/$(OLDPACKAGE)-common/etc/gforge/plugins/
+	chgrp www-data $(CURDIR)/debian/$(OLDPACKAGE)-common/etc/gforge/plugins/
+
 	rm $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/$(SOURCE_PATH)/www/scm/viewvc/bin/cgi/viewvc-strace.sh
 
 	find $(CURDIR)/debian/$(OLDPACKAGE)-common/$(SOURCE_PATH)/common/docman/engine/ -type f -name \*.php -not -name \*.inc.php -exec chmod 0755 {} \;
