@@ -1,12 +1,10 @@
 FusionForge plugins
 -------------------
 
-These plugins should be tested and working.
-
-Others live in ../../plugins/ and may not (yet) be.
-
-Feel free to check
+Check
 https://fusionforge.org/plugins/mediawiki/wiki/fusionforge/index.php/Plugins
+and src/docs/README.Plugins
 for more details about FusionForge plugins.
 
--- Olivier Berger
+Plugin status is specified in each plugin's 'etc/pluginname.ini' file,
+ideally 'plugin_status = valid'.
