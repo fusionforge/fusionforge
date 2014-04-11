@@ -596,34 +596,6 @@ class DocumentGroup extends Error {
 	}
 
 	/**
-	 * hasSubgroup - Checks if this group has a specified subgroup associated to it
-	 *
-	 * @param	array	$nested_groups		Array of nested groups information, fetched from DocumentGroupFactory class
-	 * @param	int	$doc_subgroup_id	ID of the subgroup
-	 * @return	boolean	success
-	 * @access	public
-	 */
-	function hasSubgroup(&$nested_groups, $doc_subgroup_id) {
-		$doc_group_id = $this->getID();
-
-		if (is_array(@$nested_groups[$doc_group_id])) {
-			$count = count($nested_groups[$doc_group_id]);
-			for ($i=0; $i < $count; $i++) {
-				// child is a match?
-				if ($nested_groups[$doc_group_id][$i]->getID() == $doc_subgroup_id) {
-					return true;
-				} else {
-					// recursively check if this child has this subgroup
-					if ($nested_groups[$doc_group_id][$i]->hasSubgroup($nested_groups, $doc_subgroup_id)) {
-						return true;
-					}
-				}
-			}
-		}
-		return false;
-	}
-
-	/**
 	 * getSubgroup - Return the ids of any sub folders (first level only) in specific folder
 	 *
 	 * @param	int	$docGroupId	ID of the specific folder
@@ -806,8 +778,13 @@ class DocumentGroup extends Error {
 		if (!$this->getLocked() || ((time() - $this->getLockdate()) > 600)) {
 			//we need to move recursively all docs and all doc_groups in trash
 			// aka setStateID to 2.
-			if ($this->setStateID(2, true))
-				return true;
+			if (!$this->setStateID(2, true))
+				return false;
+
+			$this->setLock(0);
+			$this->sendNotice(false);
+			$this->clearMonitor();
+			return true;
 		}
 		return false;
 	}
