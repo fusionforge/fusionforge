@@ -1,19 +1,33 @@
 #!/usr/bin/env perl
 
+# Note: FusionForge slight change:
+#-$sendmail = "/usr/sbin/sendmail";
+#+$sendmail = $ENV{SENDMAIL} || "/usr/sbin/sendmail";
+
 # ====================================================================
-# commit-email.pl: send a commit email for commit REVISION in
-# repository REPOS to some email addresses.
+# This script is deprecated.  The Subversion developers recommend
+# using mailer.py for post-commit and post-revprop change
+# notifications.  If you wish to improve or add features to a
+# post-commit notification script, please do that work on mailer.py.
+# See http://svn.apache.org/repos/asf/subversion/trunk/tools/hook-scripts/mailer .
+# ====================================================================
+
+# ====================================================================
+# commit-email.pl: send a notification email describing either a
+# commit or a revprop-change action on a Subversion repository.
 #
 # For usage, see the usage subroutine or run the script with no
 # command line arguments.
 #
-# $HeadURL: http://svn.collab.net/repos/svn/branches/1.1.x/tools/hook-scripts/commit-email.pl.in $
-# $LastChangedDate: 2010-11-02 21:19:18 +0100 (mar. 02 nov. 2010) $
-# $LastChangedBy: vargenau $
-# $LastChangedRevision: 11339 $
-#    
+# This script requires Subversion 1.2.0 or later.
+#
+# $HeadURL: https://svn.apache.org/repos/asf/subversion/trunk/contrib/hook-scripts/commit-email.pl.in $
+# $LastChangedDate: 2010-01-29 00:24:20 +0100 (ven. 29 janv. 2010) $
+# $LastChangedBy: neels $
+# $LastChangedRevision: 904301 $
+#
 # ====================================================================
-# Copyright (c) 2000-2004 CollabNet.  All rights reserved.
+# Copyright (c) 2000-2006 CollabNet.  All rights reserved.
 #
 # This software is licensed as described in the file COPYING, which
 # you should have received as part of this distribution.  The terms
@@ -36,6 +50,7 @@ BEGIN {
 
 use strict;
 use Carp;
+use POSIX qw(strftime);
 my ($sendmail, $smtp_server);
 
 ######################################################################
@@ -45,6 +60,7 @@ my ($sendmail, $smtp_server);
 # You should define exactly one of these two configuration variables,
 # leaving the other commented out, to select which method of sending
 # email should be used.
+# Using --stdout on the command line overrides both.
 $sendmail = $ENV{SENDMAIL} || "/usr/sbin/sendmail";
 #$smtp_server = "127.0.0.1";
 
@@ -121,6 +137,7 @@ my $author;
 my $propname;
 
 my $mode = 'commit';
+my $date;
 my $diff_file;
 
 # Use the reference to the first project to populate.
@@ -137,7 +154,9 @@ my %opt_to_hash_key = ('--from' => 'from_address',
                        '-m'     => '',
                        '-r'     => 'reply_to',
                        '-s'     => 'subject_prefix',
-                       '--diff' => '');
+                       '--summary' => '',
+                       '--diff' => '',
+                       '--stdout' => '');
 
 while (@ARGV)
   {
@@ -151,7 +170,7 @@ while (@ARGV)
           }
 
         my $value;
-        if ($arg ne '--revprop-change')
+        if ($arg ne '--revprop-change' and $arg ne '--stdout' and $arg ne '--summary')
           {
             unless (@ARGV)
               {
@@ -198,6 +217,14 @@ while (@ARGV)
             elsif ($arg eq '--diff')
               {
                 $current_project->{show_diff} = parse_boolean($value);
+              }
+            elsif ($arg eq '--stdout')
+              {
+                $current_project->{stdout} = 1;
+              }
+            elsif ($arg eq '--summary')
+              {
+                $current_project->{summary} = 1;
               }
             else
               {
@@ -341,6 +368,7 @@ foreach my $line (@svnlooklines)
 # Declare variables which carry information out of the inner scope of
 # the conditional blocks below.
 my $subject_base;
+my $subject_logbase;
 my @body;
 # $author - declared above for use as a command line parameter in
 #   revprop-change mode.  In commit mode, gets filled in below.
@@ -353,7 +381,7 @@ if ($mode eq 'commit')
     # Get the author, date, and log from svnlook.
     my @infolines = &read_from_process($svnlook, 'info', $repos, '-r', $rev);
     $author = shift @infolines;
-    my $date = shift @infolines;
+    $date = shift @infolines;
     shift @infolines;
     my @log = map { "$_\n" } @infolines;
 
@@ -418,6 +446,9 @@ if ($mode eq 'commit')
       {
         $subject_base = "r$rev - $dirlist";
       }
+    my $summary = @log ? $log[0] : '';
+    chomp($summary);
+    $subject_logbase = "r$rev - $summary";
 
     # Put together the body of the log message.
     push(@body, "Author: $author\n");
@@ -511,9 +542,11 @@ foreach my $project (@project_settings_list)
     my $log_file        = $project->{log_file};
     my $reply_to        = $project->{reply_to};
     my $subject_prefix  = $project->{subject_prefix};
-    my $subject         = $subject_base;
+    my $summary         = $project->{summary};
     my $diff_wanted     = ($project->{show_diff} and $mode eq 'commit');
+    my $stdout          = $project->{stdout};
 
+    my $subject         = $summary ? $subject_logbase : $subject_base;
     if ($subject_prefix =~ /\w/)
       {
         $subject = "$subject_prefix $subject";
@@ -528,13 +561,21 @@ foreach my $project (@project_settings_list)
       {
         $mail_from = "$mail_from\@$hostname";
       }
-    elsif (defined $smtp_server)
+    elsif (defined $smtp_server and ! $stdout)
       {
         die "$0: use of either `-h' or `--from' is mandatory when ",
             "sending email using direct SMTP.\n";
       }
 
     my @head;
+    my $formatted_date;
+    if ($stdout)
+      {
+        $formatted_date = strftime('%a %b %e %X %Y', localtime());
+        push(@head, "From $mail_from $formatted_date\n");
+      }
+    $formatted_date = strftime('%a, %e %b %Y %X %z', localtime());
+    push(@head, "Date: $formatted_date\n");
     push(@head, "To: $to\n");
     push(@head, "From: $mail_from\n");
     push(@head, "Subject: $subject\n");
@@ -581,7 +622,12 @@ foreach my $project (@project_settings_list)
         @difflines = map { /[\r\n]+$/ ? $_ : "$_\n" } @difflines;
       }
 
-    if (defined $sendmail and @email_addresses)
+    if ($stdout)
+      {
+        print @head, @body;
+        print @difflines if $diff_wanted;
+      }
+    elsif (defined $sendmail and @email_addresses)
       {
         # Open a pipe to sendmail.
         my $command = "$sendmail -f'$mail_from' $userlist";
@@ -599,7 +645,8 @@ foreach my $project (@project_settings_list)
       }
     elsif (defined $smtp_server and @email_addresses)
       {
-        my $smtp = Net::SMTP->new($smtp_server);
+        my $smtp = Net::SMTP->new($smtp_server)
+          or die "$0: error opening SMTP session to `$smtp_server': $!\n";
         handle_smtp_error($smtp, $smtp->mail($mail_from));
         handle_smtp_error($smtp, $smtp->recipient(@email_addresses));
         handle_smtp_error($smtp, $smtp->data());
@@ -649,14 +696,16 @@ sub usage
       "  $0 --revprop-change REPOS REVNUM USER PROPNAME [-d diff_file] \\\n",
       "    [[-m regex] [options] [email_addr ...]] ...\n",
       "options are:\n",
+      "  -m regex              Regular expression to match committed path\n",
       "  --from email_address  Email address for 'From:' (overrides -h)\n",
       "  -h hostname           Hostname to append to author for 'From:'\n",
       "  -l logfile            Append mail contents to this log file\n",
-      "  -m regex              Regular expression to match committed path\n",
       "  -r email_address      Email address for 'Reply-To:'\n",
       "  -s subject_prefix     Subject line prefix\n",
+      "  --summary             Use first line of commit log in subject\n",
       "  --diff y|n            Include diff in message (default: y)\n",
       "                        (applies to commit mode only)\n",
+      "  --stdout              Spit the message in mbox format to stdout.\n",
       "\n",
       "This script supports a single repository with multiple projects,\n",
       "where each project receives email only for actions that affect that\n",
@@ -665,10 +714,9 @@ sub usage
       "contains modifications to a path that matches the regular\n",
       "expression, then the action applies to the project.\n",
       "\n",
-      "Any of the following -h, -l, -r, -s and --diff command line options\n",
-      "and following email addresses are associated with this project.  The\n",
-      "next -m resets the -h, -l, -r, -s and --diff command line options\n",
-      "and the list of email addresses.\n",
+      "Any of the following email addresses and command line options\n",
+      "(other than -d) are associated with this project, until the next -m,\n",
+      "which resets the options and the list of email addresses.\n",
       "\n",
       "To support a single project conveniently, the script initializes\n",
       "itself with an implicit -m . rule that matches any modifications\n",
@@ -696,7 +744,8 @@ sub new_project
           match_regex     => '.',
           reply_to        => '',
           subject_prefix  => '',
-          show_diff       => 1};
+          show_diff       => 1,
+          stdout          => 0};
 }
 
 sub parse_boolean
@@ -715,17 +764,37 @@ sub safe_read_from_pipe
       croak "$0: safe_read_from_pipe passed no arguments.\n";
     }
 
-  my $pid = open(SAFE_READ, '-|');
-  unless (defined $pid)
+  my $openfork_available = $^O ne "MSWin32";
+  if ($openfork_available) # We can fork on this system.
     {
-      die "$0: cannot fork: $!\n";
+      my $pid = open(SAFE_READ, '-|');
+      unless (defined $pid)
+        {
+          die "$0: cannot fork: $!\n";
+        }
+      unless ($pid)
+        {
+          open(STDERR, ">&STDOUT")
+            or die "$0: cannot dup STDOUT: $!\n";
+          exec(@_)
+            or die "$0: cannot exec `@_': $!\n";
+        }
     }
-  unless ($pid)
+  else  # Running on Windows.  No fork.
     {
-      open(STDERR, ">&STDOUT")
-        or die "$0: cannot dup STDOUT: $!\n";
-      exec(@_)
-        or die "$0: cannot exec `@_': $!\n";
+      my @commandline = ();
+      my $arg;
+
+      while ($arg = shift)
+        {
+          $arg =~ s/\"/\\\"/g;
+          if ($arg eq "" or $arg =~ /\s/) { $arg = "\"$arg\""; }
+          push(@commandline, $arg);
+        }
+
+      # Now do the pipe.
+      open(SAFE_READ, "@commandline |")
+        or die "$0: cannot pipe to command: $!\n";
     }
   my @output;
   while (<SAFE_READ>)
