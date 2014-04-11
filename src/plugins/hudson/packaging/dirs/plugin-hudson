@@ -1,4 +1,3 @@
-etc/gforge/plugins/hudson
 @PLUGIN_PATH@/hudson/cgi-bin
 @PLUGIN_PATH@/hudson/common
 @PLUGIN_PATH@/hudson/www

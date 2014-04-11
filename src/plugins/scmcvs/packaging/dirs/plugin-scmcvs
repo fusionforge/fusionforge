@@ -1,4 +1,3 @@
-etc/gforge/plugins/scmcvs
 @PLUGIN_PATH@/scmcvs/bin
 @PLUGIN_PATH@/scmcvs/sbin
 @PLUGIN_PATH@/scmcvs/common
