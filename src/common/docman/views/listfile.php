@@ -141,6 +141,7 @@ jQuery(document).ready(function() {
 		groupId:		<?php echo $group_id ?>,
 		divAddItem:		jQuery('#additem'),
 		divEditDirectory:	jQuery('#editdocgroup'),
+		divMoveFile:		jQuery('#movefile'),
 		buttonAddItem:		jQuery('#docman-additem'),
 		buttonEditDirectory:	jQuery('#docman-editdirectory'),
 		docManURL:		'<?php echo util_make_uri('/docman') ?>',
@@ -178,7 +179,7 @@ if ($DocGroupName) {
 	if (!$ndg->getLocked()) {
 		if (forge_check_perm('docman', $ndg->Group->getID(), 'approve')) {
 			echo html_e('input', array('type' => 'hidden', 'id' => 'doc_group_id', 'value' => $ndg->getID()));
-			echo util_make_link('#', html_image('docman/configure-directory.png', 22, 22, array('alt' => 'edit')), array('class' => 'tabtitle', 'id' => 'docman-editdirectory', 'title' => _('Edit this folder'), 'onclick' => 'javascript:controllerListFile.toggleEditDirectoryView({lockIntervalDelay: 60000, doc_group:'.$ndg->getID().', groupId:'.$ndg->Group->getID().', docManURL:\''.util_make_uri('/docman').'\'})' ), true);
+			echo util_make_link('#', html_image('docman/configure-directory.png', 22, 22, array('alt' => 'edit')), array('class' => 'tabtitle', 'id' => 'docman-editdirectory', 'title' => _('Edit this folder'), 'onclick' => 'javascript:controllerListFile.toggleEditDirectoryView({lockIntervalDelay: 60000, doc_group:'.$ndg->getID().'})' ), true);
 			echo util_make_link($redirecturl.'&action=trashdir', html_image('docman/trash-empty.png', 22, 22, array('alt' => 'trashdir')), array('class' => 'tabtitle', 'id' => 'docman-trashdirectory', 'title' => _('Move this folder and his content to trash')));
 			if (!isset($nested_docs[$dirid]) && !isset($nested_groups[$dirid]) && !isset($nested_pending_docs[$dirid])) {
 				echo util_make_link($redirecturl.'&action=deldir', html_image('docman/delete-directory.png', 22, 22, array('alt' => 'deldir')), array('class' => 'tabtitle', 'id' => 'docman-deletedirectory', 'title' => _('Permanently delete this folder')));
@@ -252,7 +253,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 			}
 		}
 		switch ($d->getFileType()) {
-			case "URL": {
+			case 'URL': {
 				$cells[][] =  util_make_link($d->getFileName(), html_image($d->getFileTypeImage(), '22', '22', array('alt' => $d->getFileType())), array('class' => 'tabtitle-nw', 'title' => _('Visit this link')), true);
 				break;
 			}
@@ -287,8 +288,8 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 			$cells[][] = $d->getStateName();
 		}
 		switch ($d->getFileType()) {
-			case "URL": {
-				$cells[][] = "--";
+			case 'URL': {
+				$cells[][] = '--';
 				break;
 			}
 			default: {
@@ -347,10 +348,16 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 			echo util_make_link('#', html_image('docman/release-document.png', 22, 22, array('alt' => _('Release reservation'))) , array('class' => 'tabtitle-ne', 'onclick' => 'window.location.href=\''.util_make_uri($redirecturl.'&action=releasefile&fileid=\'+controllerListFile.buildUrlByCheckbox("active")'), 'title' => _('Release reservation')), true);
 			echo util_make_link('#', html_image('docman/monitor-adddocument.png', 22, 22, array('alt' => _('Monitor'))), array('class' => 'tabtitle-ne', 'onclick' => 'window.location.href=\''.util_make_uri($redirecturl.'&action=monitorfile&option=add&fileid=\'+controllerListFile.buildUrlByCheckbox("active")'), 'title' => _('Monitor')), true);
 			echo util_make_link('#', html_image('docman/monitor-removedocument.png', 22, 22, array('alt' => _('Stop Monitoring'))), array('class' => 'tabtitle-ne', 'onclick' => 'window.location.href=\''.util_make_uri($redirecturl.'&action=monitorfile&option=remove&fileid=\'+controllerListFile.buildUrlByCheckbox("active")'), 'title' => _('Stop Monitoring')), true);
+			echo util_make_link('#', html_image('docman/move-document.png', 22, 22, array('alt' => _('Move files to another folder'))), array('class' => 'tabtitle-ne', 'onclick' => 'javascript:controllerListFile.toggleMoveFileView({})', 'title' => _('Move files to another folder')), true);
 		}
 	}
 	echo util_make_link('#', html_image('docman/download-directory-zip.png', 22, 22, array('alt' => _('Download as a ZIP'))) , array('class' => 'tabtitle', 'onclick' => 'window.location.href=\''.util_make_uri('/docman/view.php/'.$group_id.'/zip/selected/'.$dirid.'/\'+controllerListFile.buildUrlByCheckbox("active")'), 'title' => _('Download as a ZIP')), true);
 	echo html_ac(html_ap() - 3);
+	if (forge_check_perm('docman', $ndg->Group->getID(), 'approve') && session_loggedin()) {
+		echo html_ao('div', array('class' => 'docman_div_include hide', 'id' => 'movefile'));
+		include ($gfcommon.'docman/views/movefile.php');
+		echo html_ac(html_ap() - 1);
+	}
 } else {
 	if ($dirid) {
 		echo $HTML->information(_('No documents.'));

@@ -160,22 +160,22 @@ DocManListFileController.prototype =
 			computeHeight = this.params.divRight.height() + this.params.divEditDirectory.height();
 			currentLeftHeight = this.params.divLeft.height();
 			this.params.divLeft.height(currentLeftHeight + this.params.divEditDirectory.height());
-			jQuery.get(this.docparams.docManURL, {
-				group_id:	this.docparams.groupId,
+			jQuery.get(this.params.docManURL, {
+				group_id:	this.params.groupId,
 				action:		'lock',
 				lock:		1,
 				type:		'dir',
 				itemid:	this.docparams.doc_group,
 				childgroup_id:	this.docparams.childGroupId
 			});
-			this.lockInterval[this.docparams.doc_group] = setInterval("jQuery.get('" + this.docparams.docManURL + "', {group_id:"+this.docparams.groupId+",action:'lock',lock:1,type:'dir',itemid:"+this.docparams.doc_group+",childgroup_id:"+this.docparams.childGroupId+"})",this.docparams.lockIntervalDelay);
+			this.lockInterval[this.docparams.doc_group] = setInterval("jQuery.get('" + this.params.docManURL + "', {group_id:"+this.params.groupId+",action:'lock',lock:1,type:'dir',itemid:"+this.docparams.doc_group+",childgroup_id:"+this.docparams.childGroupId+"})",this.docparams.lockIntervalDelay);
 		} else {
 			this.params.divEditDirectory.hide();
 			computeHeight = this.params.divRight.height() - this.params.divEditDirectory.height();
 			currentLeftHeight = this.params.divLeft.height();
 			this.params.divLeft.height(currentLeftHeight - this.params.divEditDirectory.height());
-			jQuery.get(this.docparams.docManURL, {
-				group_id:	this.docparams.groupId,
+			jQuery.get(this.params.docManURL, {
+				group_id:	this.params.groupId,
 				action:		'lock',
 				lock:		0,
 				type:		'dir',
@@ -288,6 +288,23 @@ DocManListFileController.prototype =
 		return false;
 	},
 
+	toggleMoveFileView: function(params) {
+		if (!this.params.divMoveFile.is(':visible')) {
+			this.params.divMoveFile.show();
+			jQuery('#movefileinput').val(function() {
+					var CheckedBoxes = new Array();
+					for (var h = 0; h < jQuery('input:checked').length; h++) {
+						if (typeof(jQuery('input:checked')[h].className) != 'undefined' && jQuery('input:checked')[h].className.match('checkeddocidactive')) {
+							CheckedBoxes.push(jQuery('input:checked')[h].value);
+						}
+					}
+					return CheckedBoxes;
+				});
+		} else {
+			this.params.divMoveFile.hide();
+		}
+	},
+
 	/*! build list of id, comma separated
 	 */
 	buildUrlByCheckbox: function(id) {
@@ -318,6 +335,7 @@ DocManListFileController.prototype =
 		if (jQuery(this).attr('checked', false)) {
 			jQuery('#checkall'+id).attr('checked', false);
 			jQuery('#massaction'+id).hide();
+			jQuery('#movefile').hide();
 		}
 		for (var h = 0; h < jQuery("input:checked").length; h++) {
 			if (typeof(jQuery("input:checked")[h].className) != "undefined" && jQuery("input:checked")[h].className.match('checkeddocid'+id)) {

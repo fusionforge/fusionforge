@@ -71,29 +71,30 @@ $childgroup_id = getIntFromRequest('childgroup_id');
 /* everything sounds ok, now let do the job */
 $action = getStringFromRequest('action');
 switch ($action) {
-	case "addfile":
-	case "addsubdocgroup":
-	case "deldir":
-	case "delfile":
-	case "editdocgroup":
-	case "editfile":
-	case "emptytrash":
-	case "enforcereserve":
-	case "forcereindexenginesearch":
-	case "getfile":
-	case "injectzip":
-	case "lock":
-	case "monitorfile":
-	case "monitordirectory":
-	case "releasefile":
-	case "reservefile":
-	case "trashdir":
-	case "trashfile":
-	case "updatecreateonline":
-	case "updateenginesearch":
-	case "updatewebdavinterface":
-	case "validatefile": {
-		include ($gfcommon."docman/actions/$action.php");
+	case 'addfile':
+	case 'addsubdocgroup':
+	case 'deldir':
+	case 'delfile':
+	case 'editdocgroup':
+	case 'editfile':
+	case 'emptytrash':
+	case 'enforcereserve':
+	case 'forcereindexenginesearch':
+	case 'getfile':
+	case 'injectzip':
+	case 'lock':
+	case 'monitorfile':
+	case 'monitordirectory':
+	case 'movefile':
+	case 'releasefile':
+	case 'reservefile':
+	case 'trashdir':
+	case 'trashfile':
+	case 'updatecreateonline':
+	case 'updateenginesearch':
+	case 'updatewebdavinterface':
+	case 'validatefile': {
+		include ($gfcommon.'docman/actions/'.$action.'.php');
 		break;
 	}
 }
