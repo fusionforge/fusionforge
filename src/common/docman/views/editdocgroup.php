@@ -44,7 +44,7 @@ if (!forge_check_perm('docman', $group_id, 'approve')) {
 $actionurl = '/docman/?group_id='.$group_id.'&action=editdocgroup';
 if ($childgroup_id) {
 	$g = group_get_object($childgroup_id);
-	$actionurl = '/docman/?group_id='.$group_id.'&action=editdocgroup&childgroup_id='.$childgroup_id;
+	$actionurl .= '&childgroup_id='.$childgroup_id;
 }
 
 $dg = new DocumentGroup($g, $dirid);
