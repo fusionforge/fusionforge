@@ -387,17 +387,6 @@ class Theme extends Layout {
 	}
 
 	/**
-	 * getThemeIdFromName()
-	 *
-	 * @param	string	$dirname	the dirname of the theme
-	 * @return	int		the theme id
-	 */
-	function getThemeIdFromName($dirname) {
-		$res = db_query_params ('SELECT theme_id FROM themes WHERE dirname=$1', array($dirname));
-		return db_result($res, 0, 'theme_id');
-	}
-
-	/**
 	 * headerJS() - creates the JS headers and calls the plugin javascript hook
 	 * @todo generalize this
 	 */

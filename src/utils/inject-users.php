@@ -22,6 +22,11 @@
 require (dirname (__FILE__).'/../common/include/env.inc.php');
 require_once $gfcommon.'include/pre.php';
 
+$themeId = getThemeIdFromName(forge_get_config('default_theme'));
+if (!$themeId) {
+	print "Error: missing theme id";
+	exit(1);
+}
 db_begin ();
 
 /*
@@ -45,7 +50,7 @@ while (! feof ($f)) {
 	$u = new GFUser () ;
 
 	$r = $u->create ($login, $fname, $lname, $password, $password, $email,
-			 1, 0, 1, 'UTC', '', '', 1,
+			 1, 0, 1, 'UTC', '', '', getThemeIdFromName(forge_get_config('default_theme')),
 			 'shell', '', '', '', '', '', 'US', false);
 
 	if (!$r) {

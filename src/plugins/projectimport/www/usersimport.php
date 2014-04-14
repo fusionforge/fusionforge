@@ -202,7 +202,7 @@ class UsersImportPage extends FileManagerPage {
 					$firstname = $user_obj->getFirstname();
 					$lastname = $user_obj->getLastname();
 
-					$theme_id=$this->html_generator->getThemeIdFromName(forge_get_config('default_theme'));
+					$theme_id = getThemeIdFromName(forge_get_config('default_theme'));
 					$password1 = substr(md5($GLOBALS['session_ser'] . time() . util_randbytes()), 0, 8);
 					$password2 = $password1;
 					$language_id = language_name_to_lang_id (choose_language_from_context ());

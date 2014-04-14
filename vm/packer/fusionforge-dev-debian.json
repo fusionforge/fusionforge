@@ -58,7 +58,7 @@
 					"1"
 				]
 			],
-			"vm_name": "fusionforge-dev"
+			"vm_name": "fusionforge-dev-debian"
 		},
 		{
 			"type": "qemu",
@@ -73,7 +73,7 @@
 			"http_directory": "http",
 			"ssh_username": "root",
 			"ssh_password": "vagrant",
-			"vm_name": "fusionforge-dev",
+			"vm_name": "fusionforge-dev-debian",
 			"boot_command": [
 				"<esc><wait>",
 				"auto ",

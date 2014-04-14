@@ -999,18 +999,6 @@ if (isset($params['group']) && $params['group']) {
 		}
 	}
 
-	/**
-	 * getThemeIdFromName()
-	 *
-	 * @param	string  $dirname	the dirname of the theme
-	 * @return	int	the theme id
-	 */
-	function getThemeIdFromName($dirname) {
-		$res = db_query_params ('SELECT theme_id FROM themes WHERE dirname=$1',
-				array ($dirname));
-		return db_result($res,0,'theme_id');
-	}
-
 	function confirmBox($msg, $params, $buttons, $image='*none*') {
 		if ($image == '*none*') {
 			$image = html_image('stop.png','48','48',array());
