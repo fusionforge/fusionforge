@@ -115,21 +115,6 @@ Description: collaborative development tool - web vhosts (using Apache)
  This package contains the files needed to run project vhosts
  FusionForge on an Apache webserver.
 
-Package: gforge-web-apache
-Architecture: all
-Section: oldlibs
-Priority: extra
-Depends: gforge-web-apache2, ${misc:Depends}
-Description: transitional package to gforge-web-apache2
- FusionForge provides many tools to aid collaboration in a
- development project, such as bug-tracking, task management,
- mailing-lists, SCM repository, forums, support request helper,
- web/FTP hosting, release management, etc. All these services are
- integrated into one web site and managed through a web interface.
- .
- This dummy package exists only as a means to make transitions
- to apache2 easier. You can safely uninstall it.
-
 Package: gforge-db-postgresql
 Architecture: all
 Depends: gforge-common, postgresql (>= 8.4), perl, libdbi-perl, libdbd-pg-perl, libmime-base64-perl, libhtml-parser-perl, libtext-autoformat-perl, libmail-sendmail-perl, libsort-versions-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, php5-cli, php5-pgsql, ${misc:Depends}
