@@ -1807,6 +1807,18 @@ function getselfhref($p = array(), $return_encoded = true) {
 	return util_gethref(false, $p, $return_encoded);
 }
 
+/**
+ * getThemeIdFromName()
+ *
+ * @param	string  $dirname	the dirname of the theme
+ * @return	int	the theme id
+ */
+function getThemeIdFromName($dirname) {
+	$res = db_query_params ('SELECT theme_id FROM themes WHERE dirname=$1',
+			array ($dirname));
+	return db_result($res,0,'theme_id');
+}
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"

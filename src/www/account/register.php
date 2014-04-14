@@ -58,7 +58,7 @@ if (forge_get_config('use_ssl') && !session_issecure()) {
 }
 
 if (!$theme_id || !is_numeric($theme_id)) {
-	$theme_id=$HTML->getThemeIdFromName(forge_get_config('default_theme'));
+	$theme_id = getThemeIdFromName(forge_get_config('default_theme'));
 }
 
 if (getStringFromRequest('submit')) {
