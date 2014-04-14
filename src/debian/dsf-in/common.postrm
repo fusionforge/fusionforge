@@ -18,7 +18,7 @@ set -e
 
 case "$1" in
     purge)
-	rm -rf @DATA_PATH@
+	rm -rf @DATA_PATH@ || true  # don't fail if /var/lib/gforge is a mount point
 	[ -d @CONFIG_PATH@ ] && rm -rf @CONFIG_PATH@
 	[ -d @SOURCE_PATH@/www/plugins ] && rm -rf @SOURCE_PATH@/www/plugins
 	;;
