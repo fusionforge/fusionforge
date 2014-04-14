@@ -42,3 +42,6 @@ utils/forge_wrapper	                 @BINARY_PATH@/
 #
 # plugins/sysauthpgsql/common          usr/share/@OLDPACKAGE@/plugins/sysauthpgsql/
 # plugins/sysauthpgsql/etc/*.ini 	    etc/@PACKAGE@/config.ini.d/
+#
+# Upgrade main database or plugins tables
+db/upgrade-db.php			@BINARY_PATH@/
