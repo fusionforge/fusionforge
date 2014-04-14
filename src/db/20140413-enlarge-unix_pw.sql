@@ -5,7 +5,7 @@ DROP VIEW nss_shadow;
 DROP VIEW nss_passwd;
 
 -- Increase field size (40->128)
-ALTER TABLE users ALTER unix_pw TYPE character varying(128) not null default '';
+ALTER TABLE users ALTER unix_pw TYPE character varying(128);
 
 -- Need to recreate the related views :/ (2)
 CREATE VIEW nss_shadow AS SELECT user_name AS login, unix_pw AS passwd, 'n'::bpchar AS expired, 'n'::bpchar AS pwchange
