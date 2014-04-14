@@ -50,7 +50,8 @@
           "--cpus",
           "1"
         ]
-      ]
+      ],
+      "vm_name": "fusionforge-dev-centos"
     }
   ],
   "post-processors": [
