@@ -61,7 +61,6 @@ db/201*.php				@SOURCE_PATH@/db/
 db/FTI*.sql				@SOURCE_PATH@/db/
 db/schema-convergence*.sql		@SOURCE_PATH@/db/
 #
-db/upgrade-db.php			@BINARY_PATH@/
 utils/inject-users.php @BINARY_PATH@/
 utils/inject-groups.php @BINARY_PATH@/
 utils/inject-files.php @BINARY_PATH@/
