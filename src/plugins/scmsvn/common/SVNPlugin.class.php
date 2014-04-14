@@ -519,6 +519,11 @@ class SVNPlugin extends SCMPlugin {
 	}
 
 	function generateSnapshots($params) {
+		$us = forge_get_config('use_scm_snapshots') ;
+		$ut = forge_get_config('use_scm_tarballs') ;
+		if (!$us && !$ut) {
+			return false ;
+		}
 
 		$project = $this->checkParams($params);
 		if (!$project) {
@@ -566,24 +571,28 @@ class SVNPlugin extends SCMPlugin {
 		system ("mkdir -p $tmp") ;
 		$code = 0 ;
 		system ("svn ls file://$repo/trunk > /dev/null 2> /dev/null", $code) ;
-		if ($code == 0) {
-			system ("cd $tmp ; svn export file://$repo/trunk $dir > /dev/null 2>&1") ;
-			system ("tar cCf $tmp - $dir |".forge_get_config('compression_method')."> $tmp/snapshot") ;
-			chmod ("$tmp/snapshot", 0644) ;
-			copy ("$tmp/snapshot", $snapshot) ;
-			unlink ("$tmp/snapshot") ;
-			system ("rm -rf $tmp/$dir") ;
-		} else {
-			if (is_file($snapshot)) {
-				unlink ($snapshot) ;
+		if ($us) {
+			if ($code == 0) {
+				system ("cd $tmp ; svn export file://$repo/trunk $dir > /dev/null 2>&1") ;
+				system ("tar cCf $tmp - $dir |".forge_get_config('compression_method')."> $tmp/snapshot") ;
+				chmod ("$tmp/snapshot", 0644) ;
+				copy ("$tmp/snapshot", $snapshot) ;
+				unlink ("$tmp/snapshot") ;
+				system ("rm -rf $tmp/$dir") ;
+			} else {
+				if (is_file($snapshot)) {
+					unlink ($snapshot) ;
+				}
 			}
 		}
 
-		system ("tar cCf $toprepo - ".$project->getUnixName() ."|".forge_get_config('compression_method')."> $tmp/tarball") ;
-		chmod ("$tmp/tarball", 0644) ;
-		copy ("$tmp/tarball", $tarball) ;
-		unlink ("$tmp/tarball") ;
-		system ("rm -rf $tmp") ;
+		if ($ut) {
+			system ("tar cCf $toprepo - ".$project->getUnixName() ."|".forge_get_config('compression_method')."> $tmp/tarball") ;
+			chmod ("$tmp/tarball", 0644) ;
+			copy ("$tmp/tarball", $tarball) ;
+			unlink ("$tmp/tarball") ;
+			system ("rm -rf $tmp") ;
+		}
 	}
 
 	function activity($params) {

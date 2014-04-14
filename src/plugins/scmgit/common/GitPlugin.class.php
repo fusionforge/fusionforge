@@ -831,6 +831,11 @@ class GitPlugin extends SCMPlugin {
 	}
 
 	function generateSnapshots($params) {
+		$us = forge_get_config('use_scm_snapshots') ;
+		$ut = forge_get_config('use_scm_tarballs') ;
+		if (!$us && !$ut) {
+			return false ;
+		}
 
 		$project = $this->checkParams($params);
 		if (!$project) {
@@ -880,17 +885,20 @@ class GitPlugin extends SCMPlugin {
 		if ($tmp == '') {
 			return false;
 		}
-		$today = date('Y-m-d');
-		system("GIT_DIR=\"$repo\" git archive --format=tar --prefix=$group_name-scm-$today/ HEAD |".forge_get_config('compression_method')." > $tmp/snapshot");
-		chmod("$tmp/snapshot", 0644);
-		copy("$tmp/snapshot", $snapshot);
-		unlink("$tmp/snapshot");
-
-		system("tar cCf $toprepo - ".$project->getUnixName() ."|".forge_get_config('compression_method')."> $tmp/tarball");
-		chmod("$tmp/tarball", 0644);
-		copy("$tmp/tarball", $tarball);
-		unlink("$tmp/tarball");
-		system("rm -rf $tmp");
+		if ($us) {
+			$today = date('Y-m-d');
+			system("GIT_DIR=\"$repo\" git archive --format=tar --prefix=$group_name-scm-$today/ HEAD |".forge_get_config('compression_method')." > $tmp/snapshot");
+			chmod("$tmp/snapshot", 0644);
+			copy("$tmp/snapshot", $snapshot);
+			unlink("$tmp/snapshot");
+		}
+		if ($ut) {
+			system("tar cCf $toprepo - ".$project->getUnixName() ."|".forge_get_config('compression_method')."> $tmp/tarball");
+			chmod("$tmp/tarball", 0644);
+			copy("$tmp/tarball", $tarball);
+			unlink("$tmp/tarball");
+			system("rm -rf $tmp");
+		}
 	}
 
 	/**

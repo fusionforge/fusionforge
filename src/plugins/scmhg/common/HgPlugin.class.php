@@ -388,6 +388,12 @@ class HgPlugin extends SCMPlugin {
 	}
 
 	function generateSnapshots($params) {
+		$us = forge_get_config('use_scm_snapshots') ;
+		$ut = forge_get_config('use_scm_tarballs') ;
+		if (!$us && !$ut) {
+			return false ;
+		}
+
 		$project = $this->checkParams($params);
 		if (!$project) {
 			return false;
@@ -421,11 +427,13 @@ class HgPlugin extends SCMPlugin {
 		if ($tmp == '') {
 			return false;
 		}
-		system("tar cCf $toprepo - ".$project->getUnixName() ."|".forge_get_config('compression_method')."> $tmp/tarball") ;
-		chmod("$tmp/tarball", 0644);
-		copy("$tmp/tarball", $tarball);
-		unlink("$tmp/tarball");
-		system("rm -rf $tmp");
+		if ($ut) {
+			system("tar cCf $toprepo - ".$project->getUnixName() ."|".forge_get_config('compression_method')."> $tmp/tarball") ;
+			chmod("$tmp/tarball", 0644);
+			copy("$tmp/tarball", $tarball);
+			unlink("$tmp/tarball");
+			system("rm -rf $tmp");
+		}
 	}
 
 	function gatherStats($params) {
