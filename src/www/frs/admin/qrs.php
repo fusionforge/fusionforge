@@ -105,7 +105,8 @@ if (getStringFromRequest('submit')) {
 
 				$ret = frs_add_file_from_form ($frsr, $type_id, $processor_id, $release_date,
 							       $userfile, $ftp_filename, $manual_filename) ;
-				if ($ret != true) {
+
+				if ($ret !== true) {
 					db_rollback() ;
 					exit_error ($ret,'frs') ;
 				}
