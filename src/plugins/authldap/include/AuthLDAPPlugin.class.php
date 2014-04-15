@@ -52,7 +52,6 @@ class AuthLDAPPlugin extends ForgeAuthPlugin {
 	}
 
 	function syncAccountInfo($params) {
-		global $HTML;
 		if (!$this->syncDataOn($params['event'])) {
 			return true;
 		}
