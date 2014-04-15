@@ -5,7 +5,7 @@
  * Copyright (c) Xerox Corporation, Codendi 2007-2008.
  * @author Marc Nazarian <marc.nazarian@xrce.xerox.com>
  * Copyright (C) 2010-2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013-2014, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -32,12 +32,12 @@ class hudsonPlugin extends Plugin {
 		$this->name = "hudson";
 		$this->text = _('Hudson/Jenkins'); // To show in the tabs, use...
 		$this->_addHook("user_personal_links"); //to make a link to the user's personal part of the plugin
-		$this->_addHook("usermenu") ;
+		//$this->_addHook("usermenu") ;
 		$this->_addHook("groupmenu");	// To put into the project tabs
 		$this->_addHook("groupisactivecheckbox") ; // The "use ..." checkbox in editgroupinfo
 		$this->_addHook("groupisactivecheckboxpost") ; //
-		$this->_addHook("userisactivecheckbox") ; // The "use ..." checkbox in user account
-		$this->_addHook("userisactivecheckboxpost") ; //
+		//$this->_addHook("userisactivecheckbox") ; // The "use ..." checkbox in user account
+		//$this->_addHook("userisactivecheckboxpost") ; //
 		$this->_addHook("project_admin_plugins"); // to show up in the admin page fro group
 		$this->_addHook('javascript',  false);
 		$this->_addHook('cssfile', 'cssFile', false);
@@ -56,14 +56,14 @@ class hudsonPlugin extends Plugin {
 
 	function CallHook ($hookname, &$params) {
 		global $G_SESSION,$HTML;
-		if ($hookname == "usermenu") {
-			$text = $this->text; // this is what shows in the tab
-			if ($G_SESSION->usesPlugin("hudson")) {
-				$param = '?type=user&;id=' . $G_SESSION->getId() . '&pluginname=' . $this->name; // we indicate the part we're calling is the user one
-				echo ' | ' . $HTML->PrintSubMenu (array ($text),
-						array ('/plugins/hudson/index.php' . $param ));
-			}
-		} elseif ($hookname == "groupmenu") {
+// 		if ($hookname == "usermenu") {
+// 			$text = $this->text; // this is what shows in the tab
+// 			if ($G_SESSION->usesPlugin("hudson")) {
+// 				$param = '?type=user&amp;id=' . $G_SESSION->getId()."&amp;pluginname=".$this->name; // we indicate the part we're calling is the user one
+// 				echo $HTML->PrintSubMenu(array($text), array('/plugins/hudson/index.php'.$param));
+// 			}
+// 		} elseif ($hookname == "groupmenu") {
+		if ($hookname == "groupmenu") {
 			$group_id=$params['group'];
 			$project = group_get_object($group_id);
 			if (!$project || !is_object($project)) {
