@@ -253,7 +253,7 @@ function frs_add_file_from_form ($release, $type_id, $processor_id, $release_dat
 
 	if ($filechecks) {
 		if (strlen($fname) < 3)
-			exit_error('Error',_('Name is too short. It must be at least 3 characters.'));
+			return _('Name is too short. It must be at least 3 characters.');
 		if (!$move) {
 			$tmp = tempnam ('', '') ;
 			copy ($infile, $tmp) ;
@@ -261,12 +261,12 @@ function frs_add_file_from_form ($release, $type_id, $processor_id, $release_dat
 		}
 		$frsf = new FRSFile($release);
 		if (!$frsf || !is_object($frsf)) {
-			exit_error(_('Could Not Get FRSFile'),'frs');
+			return _('Could Not Get FRSFile');
 		} elseif ($frsf->isError()) {
-			exit_error($frsf->getErrorMessage(),'frs');
+			return $frsf->getErrorMessage();
 		} else {
 			if (!$frsf->create($fname,$infile,$type_id,$processor_id,$release_date)) {
-				exit_error($frsf->getErrorMessage(),'frs');
+				return $frsf->getErrorMessage();
 			}
 			return true ;
 		}
