@@ -24,7 +24,7 @@ if ! dpkg -l loggerhead | grep -q ^ii ; then
 fi
 
 aptitude update
-if dpkg -l fusionforge-full | grep -q ^ii ; then
+if dpkg -l fusionforge-$variant | grep -q ^ii ; then
     # Already installed, upgrading
     UCF_FORCE_CONFFNEW=yes LANG=C DEBIAN_FRONTEND=noninteractive aptitude -y dist-upgrade
 else
