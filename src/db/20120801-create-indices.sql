@@ -8,6 +8,7 @@ ALTER TABLE artifact_monitor DROP COLUMN id;
 ALTER TABLE artifact_monitor ADD FOREIGN KEY (user_id) REFERENCES users(user_id);
 DROP SEQUENCE artifact_monitor_id_seq;
 
+DELETE FROM docdata_monitored_docman WHERE doc_id NOT IN (SELECT docid FROM doc_data);
 ALTER TABLE docdata_monitored_docman DROP COLUMN monitor_id;
 ALTER TABLE docdata_monitored_docman ADD PRIMARY KEY (doc_id, user_id);
 ALTER TABLE docdata_monitored_docman ADD FOREIGN KEY (user_id) REFERENCES users(user_id);
@@ -26,6 +27,7 @@ ALTER TABLE forum_monitored_forums ADD FOREIGN KEY (user_id) REFERENCES users(us
 ALTER TABLE forum_monitored_forums ADD FOREIGN KEY (forum_id) REFERENCES forum_group_list(group_forum_id);
 DROP SEQUENCE forum_monitored_forums_pk_seq;
 
+DELETE FROM user_diary_monitor WHERE user_id NOT IN (SELECT user_id FROM users);
 DROP INDEX userdiarymon_useridmonitoredid;
 ALTER TABLE user_diary_monitor ADD FOREIGN KEY (user_id) REFERENCES users(user_id);
 ALTER TABLE user_diary_monitor ADD FOREIGN KEY (monitored_user) REFERENCES users(user_id);
