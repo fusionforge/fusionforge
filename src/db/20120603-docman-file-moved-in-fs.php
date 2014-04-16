@@ -47,17 +47,20 @@ $ds = new DocumentStorage();
 $tmp = tempnam('/tmp', 'docman');
 
 while($row = db_fetch_array($res)) {
-	$res2 = db_query_params ('SELECT filesize, data FROM doc_data WHERE docid=$1', 
+	$res2 = db_query_params ('SELECT data FROM doc_data WHERE docid=$1',
 		array($row['docid'])) ;
 	$row2 = db_fetch_array($res2);
-	$ret = file_put_contents($tmp, base64_decode($row2['data']));
+	$data = base64_decode($row2['data']);
+	// Not using column 'filesize', since we saw 2 installs where it was wrong
+	$size = strlen($data); // strlen == nb of bytes, not chars
+	$ret = file_put_contents($tmp, $data);
 	if ($ret === false) {
 		echo "UPGRADE ERROR: file_put_contents($tmp) error: returned false\n";
 		$ds->rollback();
 		exit(1);
 	}
-	if ($ret != $row2['filesize']) {
-		echo "UPGRADE ERROR: file_put_contents($tmp) size error: ($ret != ".$row2['filesize'].")\n";
+	if ($ret != $size) {
+		echo "UPGRADE ERROR: file_put_contents($tmp) size error: ($ret != ".$size.")\n";
 		$ds->rollback();
 		exit(1);
 	}
