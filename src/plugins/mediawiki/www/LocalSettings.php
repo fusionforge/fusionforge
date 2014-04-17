@@ -63,7 +63,7 @@ $project_dir = forge_get_config('projects_path', 'mediawiki') . "/"
 	. $fusionforgeproject ;
 
 if (!is_dir($project_dir)) {
-	exit_error (sprintf(_('Mediawiki for project %s not created yet, please wait for a few minutes.'), $fusionforgeproject.':'.$project_dir)) ;
+	exit_error (sprintf(_('Mediawiki for project %s not created yet, please wait for a few minutes.'), $fusionforgeproject.':'.$project_dir) . "\n") ;
 }
 
 $path = array( $IP, "$IP/includes", "$IP/languages" );
