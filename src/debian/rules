@@ -326,7 +326,7 @@ install: build
 	find $(addprefix $(CURDIR)/debian/, $(shell dh_listpackages)) -name nusoap.php | xargs -r rm
 
 # 	Remove some Jquery files from binary packages (provided by libjs-jquery-*)
-	for i in jquery jquery-ui jquery-tipsy; do find -type d $(addprefix $(CURDIR)/debian/, $(shell dh_listpackages)) -path */vendor/$$i ; done | xargs -r rm
+	for i in jquery jquery-ui jquery-tipsy; do find $(addprefix $(CURDIR)/debian/, $(shell dh_listpackages)) -type d -path */vendor/$$i ; done | xargs -r rm -rf
 
 # 	Remove potential SCM artefacts from binary packages
 	find $(addprefix $(CURDIR)/debian/, $(shell dh_listpackages)) -name .svn -or -name {arch} -or -name .arch-ids -or -name .bzr -or -name .cvsignore | xargs -r rm -rf
