@@ -1,6 +1,18 @@
 fusionforge (5.3-0) UNRELEASED; urgency=medium
 
+  [ Roland Mas ]
   * New upstream release.
+
+  [ Sylvain Beucler ]
+  * Trim plugins install scripts by using upstream upgrade-db.php,
+    drop register-plugin/unregister-plugin
+  * fusionforge-plugins-scmhook: added in fusionforge-full
+  * fusionforge-plugins-hudson: trim dependencies
+  * gforge-common: can be purged when /var/lib/gforge is a mount point
+  * gforge-mta-postif: install default Debian postfix configuration if
+    there's none
+  * gforge-web-apache: dropped dummy package
+  * gforge-web-apache2: remove unused cronolog dependency
 
  -- Roland Mas <lolando@debian.org>  Wed, 02 Apr 2014 16:32:32 +0200
 
