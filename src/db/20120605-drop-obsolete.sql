@@ -1,3 +1,5 @@
+DROP VIEW IF EXISTS users_with_cvsflags_vw;
+DROP VIEW IF EXISTS groups_with_svn_vw;
 DROP TABLE user_group;
 DROP TABLE role_setting ;
 DROP TABLE role;
