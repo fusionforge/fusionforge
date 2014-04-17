@@ -64,7 +64,6 @@ my $query = "SELECT group_name,summary,details
 	WHERE is_approved = 0 
 	AND n.group_id=g.group_id
 	AND n.post_date > '$old_date'
-	AND g.is_public=1
 	AND g.status='A'
 	ORDER BY post_date";
 
