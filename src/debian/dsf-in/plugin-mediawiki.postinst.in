@@ -72,7 +72,6 @@ case "$1" in
 	    test -d /var/lib/gforge/plugins/mediawiki/projects/. && \
 	    move_mediawikis
 
-	/usr/share/gforge/bin/normalize_roles.php | grep -v "^Normalizing role" || true
 	upgrade_mediawikis
 	;;
     
