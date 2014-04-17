@@ -2,7 +2,7 @@ Source: fusionforge
 Section: devel
 Priority: optional
 Maintainer: Roland Mas <lolando@debian.org>
-Uploaders: Christian Bayle <bayle@debian.org>, Olivier Berger <obergix@debian.org>
+Uploaders: Christian Bayle <bayle@debian.org>, Olivier Berger <obergix@debian.org>, Sylvain Beucler <beuc@debian.org>
 Build-Depends-Indep: sharutils, docbook-to-man, devscripts, gettext, isoquery, iso-codes
 Build-Depends: debhelper (>= 7), quilt (>= 0.40), perl, confget, moreutils
 Standards-Version: 3.9.4
@@ -88,7 +88,7 @@ Description: collaborative development tool - shared files
 
 Package: gforge-web-apache2
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, libapache2-mod-php5, php5-cgi, php5-pgsql, php5-gd, perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, cronolog, python, ssl-cert, libnusoap-php, libphp-simplepie, php-http, libjs-jquery, libjs-jquery-tipsy, libjs-jquery-ui, libjs-jquery-ui-theme-overcast, javascript-common, ${misc:Depends}
+Depends: gforge-common, gforge-db-postgresql | gforge-db, libapache2-mod-php5, php5-cgi, php5-pgsql, php5-gd, perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, python, ssl-cert, libnusoap-php, libphp-simplepie, php-http, libjs-jquery, libjs-jquery-tipsy, libjs-jquery-ui, libjs-jquery-ui-theme-overcast, javascript-common, ${misc:Depends}
 Recommends: locales | locales-all
 Provides: gforge-web
 Conflicts: gforge-web
