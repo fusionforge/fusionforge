@@ -240,6 +240,7 @@ installandrundb()
 	cat > $pghba <<-EOF
 # FUSIONFORGE
 local all all trust
+host all all 127.0.0.1/32 trust
 EOF
 	msg green " * Restarting PostgreSQL..."
 	$pgservice stop
