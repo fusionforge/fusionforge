@@ -424,6 +424,7 @@ function session_redirect_uri($loc) {
  * @param  string $loc    Absolute path within the site
  */
 function session_redirect($loc) {
+	util_save_messages();
 	session_redirect_uri(util_make_url($loc));
 	exit;
 }

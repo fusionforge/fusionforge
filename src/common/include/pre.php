@@ -306,10 +306,12 @@ if (getenv('FUSIONFORGE_NO_DB') != 'true' and forge_get_config('database_name') 
 	setup_gettext_from_context();
 }
 
-
 $feedback = htmlspecialchars(getStringFromRequest('feedback', $feedback));
 $error_msg = htmlspecialchars(getStringFromRequest('error_msg', $error_msg));
 $warning_msg = htmlspecialchars(getStringFromRequest('warning_msg', $warning_msg));
+if (empty($feedback) && empty($error_msg) && empty($warning_msg)) {
+	util_init_messages();
+}
 
 /*
 RESERVED VARIABLES
