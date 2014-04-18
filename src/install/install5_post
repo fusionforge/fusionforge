@@ -31,7 +31,7 @@ install5_post_suse()
 	chkconfig -s postgresql on
 
 	# Apache settings: modules
-	for m in dav dav_svn authz_svn ssl; do
+	for m in dav dav_svn authz_svn ssl macro authz_groupfile; do
 		a2enmod $m
 		a2enflag $m
 	done
@@ -73,7 +73,7 @@ install5_post_debian()
         done
 
 	# Apache settings: modules
-	for m in dav dav_svn authz_svn ssl; do
+	for m in dav dav_svn authz_svn ssl macro authz_groupfile; do
 		a2enmod $m
 	done
 
