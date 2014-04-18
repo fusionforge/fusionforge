@@ -8,7 +8,7 @@
  * Copyright 2011, Roland Mas
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * Copyright 2012, Thorsten Glaser - tarent solutions GmbH
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -55,21 +55,21 @@ $childgroup_id = getIntFromRequest('childgroup_id');
 if ($childgroup_id) {
 	$redirecturl .= '&childgroup_id='.$childgroup_id;
 	if (!forge_check_perm('docman', $childgroup_id, 'submit')) {
-		$return_msg = _('Document Manager Action Denied.');
-		session_redirect($redirecturl.'&warning_msg='.urlencode($return_msg));
+		$warning_msg = _('Document Manager Action Denied.');
+		session_redirect($redirecturl);
 	}
 	$g = group_get_object($childgroup_id);
 }
 
 if (!forge_check_perm('docman', $g->getID(), 'submit')) {
-	$return_msg = _('Document Manager Action Denied.');
-	session_redirect($redirecturl.'&warning_msg='.urlencode($return_msg));
+	$warning_msg = _('Document Manager Action Denied.');
+	session_redirect($redirecturl);
 }
 
 if (!$doc_group) {
 	//cannot add a doc unless an appropriate group is provided
-	$return_msg = _('No valid folder was selected.');
-	session_redirect($baseurl.'&error_msg='.urlencode($return_msg));
+	$error_msg = _('No valid folder was selected.');
+	session_redirect($baseurl);
 }
 
 if (!$title || !$description || (!$uploaded_data && !$file_url && !$manual_path && (!$editor && !$name))) {
@@ -86,10 +86,11 @@ if (!$title || !$description || (!$uploaded_data && !$file_url && !$manual_path 
 $d = new Document($g);
 
 if (!$d || !is_object($d)) {
-	$return_msg= _('Error getting blank document.');
-	session_redirect($baseurl.'&error_msg='.urlencode($return_msg));
+	$error_msg = _('Error getting blank document.');
+	session_redirect($baseurl);
 } elseif ($d->isError()) {
-	session_redirect($baseurl.'&error_msg='.urlencode($d->getErrorMessage()));
+	$error_msg = $d->getErrorMessage();
+	session_redirect($baseurl);
 }
 
 switch ($type) {
@@ -99,8 +100,8 @@ switch ($type) {
 		$sanitizer = new TextSanitizer();
 		$filecontent = $sanitizer->SanitizeHtml($filecontent);
 		if (strlen($filecontent) < 1) {
-			$return_msg = _('Error getting blank document.');
-			session_redirect($baseurl.'&error_msg='.urlencode($return_msg));
+			$error_msg = _('Error getting blank document.');
+			session_redirect($baseurl);
 		}
 		$data = tempnam("/tmp", "docman");
 		$fh = fopen($data, 'w');
@@ -117,8 +118,8 @@ switch ($type) {
 	}
 	case 'httpupload' : {
 		if (!is_uploaded_file($uploaded_data['tmp_name'])) {
-		$return_msg = _('Invalid file name.');
-			session_redirect($baseurl.'&error_msg='.urlencode($return_msg));
+			$error_msg = _('Invalid file name.');
+			session_redirect($baseurl);
 		}
 
 		if (function_exists('finfo_open')) {
@@ -145,16 +146,16 @@ switch ($type) {
 	}
 	case 'manualupload' : {
 		if (!forge_get_config('use_manual_uploads')) {
-			$return_msg = _('Manual uploads disabled.');
-			session_redirect($baseurl.'&error_msg='.urlencode($return_msg));
+			$error_msg = _('Manual uploads disabled.');
+			session_redirect($baseurl);
 		}
 
-		$incoming = forge_get_config('groupdir_prefix')."/".$g->getUnixName()."/incoming";
+		$incoming = forge_get_config('groupdir_prefix').'/'.$g->getUnixName().'/incoming';
 		$filename = $incoming.'/'.$manual_path;
 
 		if (!util_is_valid_filename($manual_path) || !is_file($filename)) {
-			$return_msg = _('Invalid file name.');
-			session_redirect($baseurl.'&error_msg='.urlencode($return_msg));
+			$error_msg = _('Invalid file name.');
+			session_redirect($baseurl);
 		}
 
 		if (function_exists('finfo_open')) {
@@ -169,16 +170,17 @@ switch ($type) {
 		break;
 	}
 	default: {
-		$return_msg = _('Unknown type submission.');
-		session_redirect($baseurl.'&error_msg='.urlencode($return_msg));
+		$error_msg = _('Unknown type submission.');
+		session_redirect($baseurl);
 	}
 }
 
 if (!$d->create($uploaded_data_name, $uploaded_data_type, $data, $doc_group, $title, $description, $stateid)) {
+	$error_msg = $d->getErrorMessage();
 	if (forge_check_perm('docman', $group_id, 'approve')) {
-		session_redirect($redirecturl.'&error_msg='.urlencode($d->getErrorMessage()));
+		session_redirect($redirecturl);
 	} else {
-		session_redirect($baseurl.'&error_msg='.urlencode($d->getErrorMessage()));
+		session_redirect($baseurl);
 	}
 } else {
 	if ($type == 'editor') {
@@ -186,10 +188,10 @@ if (!$d->create($uploaded_data_name, $uploaded_data_type, $data, $doc_group, $ti
 		setcookie("gforgecurrentdocdata", "", time() - 3600);
 	}
 	if (forge_check_perm('docman', $group_id, 'approve')) {
-		$return_msg = sprintf(_('Document %s submitted successfully.'), $d->getFilename());
-		session_redirect($redirecturl.'&feedback='.urlencode($return_msg));
+		$feedback = sprintf(_('Document %s submitted successfully.'), $d->getFilename());
+		session_redirect($redirecturl);
 	} else {
-		$return_msg = sprintf(_('Document %s has been successfully uploaded and is waiting to be approved.'),$d->getFilename());
-		session_redirect($baseurl.'&feedback='.urlencode($return_msg));
+		$feedback = sprintf(_('Document %s has been successfully uploaded and is waiting to be approved.'), $d->getFilename());
+		session_redirect($baseurl);
 	}
 }

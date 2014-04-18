@@ -36,15 +36,15 @@ $childgroup_id = getIntFromRequest('childgroup_id');
 if ($childgroup_id) {
 	$redirecturl .= '&childgroup_id='.$childgroup_id;
 	if (!forge_check_perm('docman', $childgroup_id, 'submit')) {
-		$return_msg = _('Document Manager Action Denied.');
-		session_redirect($redirecturl.'&warning_msg='.urlencode($return_msg));
+		$warning_msg = _('Document Manager Action Denied.');
+		session_redirect($redirecturl);
 	}
 	$g = group_get_object($childgroup_id);
 }
 
 if (!forge_check_perm('docman', $g->getID(), 'approve')) {
-	$return_msg = _('Document Manager Action Denied.');
-	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
+	$warning_msg = _('Document Manager Action Denied.');
+	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
 }
 
 $arr_fileid = explode(',', getStringFromRequest('fileid'));
@@ -52,14 +52,13 @@ $moveto_dirid = getIntFromRequest('moveto_dirid');
 foreach ($arr_fileid as $fileid) {
 	if (!empty($fileid)) {
 		$d = new Document($g, $fileid);
-		if ($d->isError())
-			session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($d->getErrorMessage()));
-
-		if (!$d->update($d->getFilename(), $d->getFileType(), NULL, $moveto_dirid, $d->getName(), $d->getDescription(), $d->getStateID()))
-			session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($d->getErrorMessage()));
+		if ($d->isError() || !$d->update($d->getFilename(), $d->getFileType(), NULL, $moveto_dirid, $d->getName(), $d->getDescription(), $d->getStateID())) {
+			$error_msg = $d->getErrorMessage();
+			session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
+		}
 	}
 }
 
 $count = count($arr_fileid);
-$return_msg = sprintf(ngettext('%s document moved.', '%s documents moved.', $count), $count);
-session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&feedback='.urlencode($return_msg));
+$feedback = sprintf(ngettext('%s document moved.', '%s documents moved.', $count), $count);
+session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);

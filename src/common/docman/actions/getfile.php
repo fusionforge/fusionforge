@@ -49,8 +49,8 @@ switch ($fromview) {
 }
 
 if (!forge_check_perm('docman', $group_id, 'approve')) {
-	$return_msg = _('Document Manager Action Denied.');
-	session_redirect($urlparam.'&warning_msg='.urlencode($return_msg));
+	$warning_msg = _('Document Manager Action Denied.');
+	session_redirect($urlparam);
 }
 
 $fileid = getIntFromRequest('fileid');
@@ -60,8 +60,10 @@ if ($childgroup_id) {
 	$g = group_get_object($childgroup_id);
 }
 $d = new Document($g, $fileid);
-if ($d->isError())
-	session_redirect($urlparam.'&error_msg='.urlencode($d->getErrorMessage()));
+if ($d->isError()) {
+	$error_msg = $d->getErrorMessage();
+	session_redirect($urlparam);
+}
 
 $filearray = array();
 if ($details) {

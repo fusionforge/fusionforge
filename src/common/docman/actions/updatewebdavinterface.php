@@ -3,6 +3,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -24,19 +25,21 @@
 /* please do not add require here: use www/docman/index.php to add require */
 
 if (!forge_check_perm('docman', $group_id, 'admin')) {
-	$return_msg= _('Document Manager Action Denied.');
-	session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
+	$warning_msg = _('Document Manager Action Denied.');
+	session_redirect('/docman/?group_id='.$group_id);
 }
 
 if ($_POST['status']) {
 	$status = 1;
-	$return_msg = _('Webdav Interface updated successfully: Active.');
+	$feedback = _('Webdav Interface updated successfully: Active.');
 } else {
 	$status = 0;
-	$return_msg = _('Webdav Interface updated successfully: Off.');
+	$feedback = _('Webdav Interface updated successfully: Off.');
 }
 
-if (!$g->setDocmanWebdav($status))
-	session_redirect('/docman/?group_id='.$group_id.'&view=admin&warning_msg='.urlencode($g->getErrorMessage()));
+if (!$g->setDocmanWebdav($status)) {
+	$warning_msg = $g->getErrorMessage();
+	session_redirect('/docman/?group_id='.$group_id.'&view=admin');
+}
 
-session_redirect('/docman/?group_id='.$group_id.'&view=admin&feedback='.urlencode($return_msg));
+session_redirect('/docman/?group_id='.$group_id.'&view=admin');

@@ -32,16 +32,16 @@ global $group_id; // id of group
 
 $redirecturl = '/docman/?group_id='.$group_id.'&view=listfile';
 if (!forge_check_perm('docman', $group_id, 'approve')) {
-	$return_msg = _('Document Manager Action Denied.');
-	session_redirect($redirecturl.'&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
+	$warning_msg = _('Document Manager Action Denied.');
+	session_redirect($redirecturl.'&dirid='.$dirid);
 }
 
 // plugin projects-hierarchy handler
 $childgroup_id = getIntFromRequest('childgroup_id');
 if ($childgroup_id) {
 	if (!forge_check_perm('docman', $childgroup_id, 'approve')) {
-		$return_msg = _('Document Manager Action Denied.');
-		session_redirect($redirecturl.'&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
+		$warning_msg = _('Document Manager Action Denied.');
+		session_redirect($redirecturl.'&dirid='.$dirid);
 	}
 	$redirecturl .= '&childgroup_id='.$childgroup_id;
 	$g = group_get_object($childgroup_id);
@@ -51,8 +51,10 @@ if ($childgroup_id) {
 $dg = new DocumentGroup($g, $dirid);
 $currentParent = $dg->getParentID();
 
-if (!$dg->trash())
-	session_redirect($redirecturl.'&dirid='.$currentParent.'&error_msg='.urlencode($dg->getErrorMessage()));
+if (!$dg->trash()) {
+	$error_msg = $dg->getErrorMessage();
+	session_redirect($redirecturl.'&dirid='.$currentParent);
+}
 
-$return_msg = sprintf(_('Documents folder %s moved to trash successfully.'),$dg->getName());
-session_redirect($redirecturl.'&dirid='.$currentParent.'&feedback='.urlencode($return_msg));
+$feedback = sprintf(_('Documents folder %s moved to trash successfully.'), $dg->getName());
+session_redirect($redirecturl.'&dirid='.$currentParent);

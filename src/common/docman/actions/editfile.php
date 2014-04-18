@@ -5,7 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -51,8 +51,8 @@ switch ($fromview) {
 }
 
 if (!forge_check_perm('docman', $g->getID(), 'approve')) {
-	$return_msg = _('Document Manager Action Denied.');
-	session_redirect($urlparam.'&warning_msg='.urlencode($return_msg));
+	$warning_msg = _('Document Manager Action Denied.');
+	session_redirect($urlparam);
 }
 
 $docid = getIntFromRequest('docid');
@@ -65,12 +65,16 @@ $stateid = getIntFromRequest('stateid');
 $filetype = getStringFromRequest('filetype');
 $editor = getStringFromRequest('editor');
 
-if (!$docid)
-	session_redirect($urlparam.'&warning_msg='.urlencode(_('No document found to update')));
+if (!$docid) {
+	$warning_msg = _('No document found to update');
+	session_redirect($urlparam);
+}
 
 $d= new Document($g, $docid);
-if ($d->isError())
-	session_redirect($urlparam.'&error_msg='.urlencode($d->getErrorMessage()));
+if ($d->isError()) {
+	$error_msg = $d->getErrorMessage();
+	session_redirect($urlparam);
+}
 
 $sanitizer = new TextSanitizer();
 $details = $sanitizer->SanitizeHtml($details);
@@ -86,8 +90,8 @@ if (($editor) && ($d->getFileData() != $details) && (!$uploaded_data['name'])) {
 
 } elseif (!empty($uploaded_data) && $uploaded_data['name']) {
 	if (!is_uploaded_file($uploaded_data['tmp_name'])) {
-		$return_msg = sprintf(_('Invalid file attack attempt %s.'), $uploaded_data['name']);
-		session_redirect($urlparam.'&error_msg='.urlencode($return_msg));
+		$error_msg = sprintf(_('Invalid file attack attempt %s.'), $uploaded_data['name']);
+		session_redirect($urlparam);
 	}
 	$data = $uploaded_data['tmp_name'];
 	$filename = $uploaded_data['name'];
@@ -106,8 +110,10 @@ if (($editor) && ($d->getFileData() != $details) && (!$uploaded_data['name'])) {
 	$filetype = $d->getFileType();
 }
 
-if (!$d->update($filename, $filetype, $data, $doc_group, $title, $description, $stateid))
-	session_redirect($urlparam.'&error_msg='.urlencode($d->getErrorMessage()));
+if (!$d->update($filename, $filetype, $data, $doc_group, $title, $description, $stateid)) {
+	$error_msg = $d->getErrorMessage();
+	session_redirect($urlparam);
+}
 
-$return_msg = sprintf(_('Document %s updated successfully.'), $filename);
-session_redirect($urlparam.'&feedback='.urlencode($return_msg));
+$feedback = sprintf(_('Document %s updated successfully.'), $filename);
+session_redirect($urlparam);

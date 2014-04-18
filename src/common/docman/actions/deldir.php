@@ -6,6 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -40,17 +41,16 @@ if ($childgroup_id) {
 }
 
 if (!forge_check_perm('docman', $g->getID(), 'approve')) {
-	$return_msg = _('Document Manager Action Denied.');
-	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
+	$warning_msg = _('Document Manager Action Denied.');
+	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
 }
 
 $dg = new DocumentGroup($g, $dirid);
 
-if ($dg->isError())
-	session_redirect($urlredirect.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));
-
-if (!$dg->delete($dirid, $g->getID()))
-	session_redirect($urlredirect.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));
+if ($dg->isError() || !$dg->delete($dirid, $g->getID())) {
+	$error_msg = $dg->getErrorMessage();
+	session_redirect($urlredirect.'&view=listfile&dirid='.$dirid);
+}
 
 if ($dg->getState() != 2) {
 	$parentId = $dg->getParentID();
@@ -60,5 +60,5 @@ if ($dg->getState() != 2) {
 	$view='listtrashfile';
 }
 
-$return_msg = sprintf(_('Document folder %s deleted successfully.'),$dg->getName());
-session_redirect($urlredirect.'&view='.$view.'&dirid='.$parentId.'&feedback='.urlencode($return_msg));
+$feedback = sprintf(_('Document folder %s deleted successfully.'), $dg->getName());
+session_redirect($urlredirect.'&view='.$view.'&dirid='.$parentId);

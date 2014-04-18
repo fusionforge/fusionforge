@@ -3,7 +3,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013,2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -29,15 +29,15 @@ global $dirid; //id of doc_group
 global $group_id; // id of group
 
 if ( !forge_check_perm('docman', $group_id, 'approve')) {
-	$return_msg = _('Document Manager Action Denied.');
-	session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
+	$warning_msg = _('Document Manager Action Denied.');
+	session_redirect('/docman/?group_id='.$group_id);
 }
 
 $dm = new DocumentManager(group_get_object($group_id));
 if (!$dm->cleanTrash()) {
 	$error_msg = _('Unable to clean trash');
-	session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($error_msg));
+	session_redirect('/docman/?group_id='.$group_id);
 }
 
-$return_msg = _('Emptied Trash successfully.');
-session_redirect('/docman/?group_id='.$group_id.'&view=listfile&feedback='.urlencode($return_msg));
+$feedback = _('Emptied Trash successfully.');
+session_redirect('/docman/?group_id='.$group_id.'&view=listfile');

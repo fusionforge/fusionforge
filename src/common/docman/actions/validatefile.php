@@ -37,24 +37,23 @@ if ($childgroup_id) {
 }
 
 if (!forge_check_perm('docman', $g->getID(), 'approve')) {
-	$return_msg = _('Document Manager Action Denied.');
-	session_redirect($urlredirect.'&warning_msg='.urlencode($return_msg));
+	$warning_msg = _('Document Manager Action Denied.');
+	session_redirect($urlredirect);
 }
 
 $arr_fileid = explode(',', getStringFromRequest('fileid'));
 foreach ($arr_fileid as $fileid) {
 	if (!empty($fileid)) {
 		$d = new Document($g, $fileid);
-		if ($d->isError())
-			session_redirect($urlredirect.'&error_msg='.urlencode($d->getErrorMessage()));
-
-		if (!$d->setState('1'))
-			session_redirect($urlredirect.'&error_msg='.urlencode($d->getErrorMessage()));
+		if ($d->isError() || !$d->setState('1')) {
+			$error_msg = $d->getErrorMessage();
+			session_redirect($urlredirect);
+		}
 	} else {
 		$warning_msg = _('No action to perform');
-		session_redirect($urlredirect.'&warning_msg='.urlencode($warning_msg));
+		session_redirect($urlredirect);
 	}
 }
 $count = count($arr_fileid);
-$return_msg = sprintf(ngettext('%s document validated successfully.', '%s documents validated successfully.', $count), $count);
-session_redirect($urlredirect.'&feedback='.urlencode($return_msg));
+$feedback = sprintf(ngettext('%s document validated successfully.', '%s documents validated successfully.', $count), $count);
+session_redirect($urlredirect);
