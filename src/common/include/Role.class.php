@@ -350,8 +350,6 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	 * @return	boolean	True on success or false on failure.
 	 */
 	function setUser($user_id) {
-		global $SYS;
-
 		if ($this->Group == NULL) {
 			if (!forge_check_global_perm ('forge_admin')) {
 				$this->setPermissionDeniedError();
