@@ -3,6 +3,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -26,31 +27,28 @@
 global $g; // group object
 global $group_id; // id of group
 
+$doc_group = getIntFromRequest('dirid');
+
 if (!forge_check_perm('docman', $group_id, 'approve')) {
-	$return_msg = _('Document Manager Action Denied.');
+	$warning_msg = _('Document Manager Action Denied.');
 	if ($doc_group) {
-		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$doc_group.'&warning_msg='.urlencode($return_msg));
+		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$doc_group);
 	} else {
-		session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
+		session_redirect('/docman/?group_id='.$group_id);
 	}
 }
 
-$doc_group = getIntFromRequest('dirid');
 $uploaded_zip = getUploadedFile('uploaded_zip');
 $dg = new DocumentGroup($g, $doc_group);
 
-if ($dg->isError())
-	session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($dg->getErrorMessage()));
-
-if (!$dg->injectArchive($uploaded_zip)) {
-	$return_msg = $dg->getErrorMessage();
-	$return_url = '/docman/?group_id='.$group_id.'&error_msg='.urlencode($return_msg);
-} else {
-	$return_msg = _('Archive injected successfully.');
-	$return_url = '/docman/?group_id='.$group_id.'&feedback='.urlencode($return_msg);
+if ($dg->isError() || !$dg->injectArchive($uploaded_zip)) {
+	$error_msg = $dg->getErrorMessage();
+	session_redirect('/docman/?group_id='.$group_id);
 }
 
+$return_url = '/docman/?group_id='.$group_id;
 if ($doc_group)
 	$return_url .= '&dirid='.$doc_group;
 
+$feedback = _('Archive injected successfully.');
 session_redirect($return_url);

@@ -40,28 +40,34 @@ if ($childgroup_id) {
 }
 
 if (!forge_check_perm('docman', $g->getID(), 'approve')) {
-	$return_msg = _('Document Manager Action Denied.');
-	session_redirect($urlredirect.'&warning_msg='.urlencode($return_msg));
+	$warning_msg = _('Document Manager Action Denied.');
+	session_redirect($urlredirect);
 }
 
 $groupname = getStringFromRequest('groupname');
 $parent_dirid = getIntFromRequest('parent_dirid');
 $dg = new DocumentGroup($g, $dirid);
-if ($dg->isError())
-	session_redirect($urlredirect.'&error_msg='.urlencode($dg->getErrorMessage()));
+if ($dg->isError()) {
+	$error_msg = $dg->getErrorMessage();
+	session_redirect($urlredirect);
+}
 
 $currentParentID = $dg->getParentID();
-if (!$dg->update($groupname, $parent_dirid))
-	session_redirect($urlredirect.'&error_msg='.urlencode($dg->getErrorMessage()));
+if (!$dg->update($groupname, $parent_dirid)) {
+	$error_msg = $dg->getErrorMessage();
+	session_redirect($urlredirect);
+}
 
 $dm = new DocumentManager($g);
 if ($dg->getState() == 2 && ($currentParentID == $dm->getTrashID())) {
-	if (!$dg->setStateID('1', true))
-		session_redirect($urlredirect.'&error_msg='.urlencode($dg->getErrorMessage()));
+	if (!$dg->setStateID('1', true)) {
+		$error_msg = $dg->getErrorMessage();
+		session_redirect($urlredirect);
+	}
 }
 
-$return_msg = sprintf(_('Documents folder %s updated successfully'), $dg->getName());
+$feedback = sprintf(_('Documents folder %s updated successfully'), $dg->getName());
 if ($childgroup_id)
-	$return_msg .= ' '.sprintf(_('on project %s'), $g->getPublicName());
+	$feedback .= ' '.sprintf(_('on project %s'), $g->getPublicName());
 
-session_redirect($urlredirect.'&feedback='.urlencode($return_msg));
+session_redirect($urlredirect);

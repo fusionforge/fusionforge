@@ -3,6 +3,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -27,16 +28,18 @@ global $g; //group object
 global $group_id; // id of group
 
 if ( !forge_check_perm('docman', $group_id, 'admin')) {
-	$return_msg = _('Document Manager Action Denied.');
-	session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
+	$warning_msg = _('Document Manager Action Denied.');
+	session_redirect('/docman/?group_id='.$group_id);
 }
 
 if ($_POST['status']) {
 	$status = 1;
-	$return_msg = _('Search Engine Reindex Forced: search results will be available within 24 h.');
+	$feedback = _('Search Engine Reindex Forced: search results will be available within 24 h.');
 }
 
-if (!$g->setDocmanForceReindexSearch($status))
-	session_redirect('/docman/?group_id='.$group_id.'&view=admin&error_msg='.urlencode($g->getErrorMessage()));
+if (!$g->setDocmanForceReindexSearch($status)) {
+	$error_msg = $g->getErrorMessage();
+	session_redirect('/docman/?group_id='.$group_id.'&view=admin');
+}
 
-session_redirect('/docman/?group_id='.$group_id.'&view=admin&feedback='.urlencode($return_msg));
+session_redirect('/docman/?group_id='.$group_id.'&view=admin');

@@ -3,7 +3,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -30,21 +30,24 @@ global $group_id; // id of group
 global $LUSER; // User object
 
 if (!forge_check_perm('docman', $group_id, 'approve')) {
-	$return_msg = _('Document Manager Action Denied.');
-	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
+	$warning_msg = _('Document Manager Action Denied.');
+	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
 }
 
 $arr_fileid = explode(',', getStringFromRequest('fileid'));
-$return_msg = _('Document(s)').' ';
+$feedback = _('Document(s)').' ';
 foreach ($arr_fileid as $fileid) {
 	$d = new Document($g, $fileid);
-	$return_msg .= $d->getFilename().' ';
-	if ($d->isError())
-		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($d->getErrorMessage()));
+	$feedback .= $d->getFilename().' ';
+	if ($d->isError()) {
+		$error_msg = $d->getErrorMessage();
+		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
+	}
 
-	if (!$d->setReservedBy('1', $LUSER->getID()))
-		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($d->getErrorMessage()));
-
+	if (!$d->setReservedBy('1', $LUSER->getID())) {
+		$error_msg = $d->getErrorMessage();
+		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
+	}
 }
-$return_msg .= _('reserved successfully.');
-session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&feedback='.urlencode($return_msg));
+$feedback .= _('reserved successfully.');
+session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);

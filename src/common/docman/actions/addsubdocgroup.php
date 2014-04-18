@@ -5,7 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2011, Franck Villaume - TrivialDev
+ * Copyright 2011,2014, Franck Villaume - TrivialDev
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
@@ -45,24 +45,23 @@ if ($childgroup_id) {
 }
 
 if (!forge_check_perm('docman', $g->getID(), 'approve')) {
-	$return_msg = _('Document Manager Action Denied.');
-	session_redirect($urlredirect.'&warning_msg='.urlencode($return_msg));
+	$warning_msg = _('Document Manager Action Denied.');
+	session_redirect($urlredirect);
 }
 
 $groupname = trim(getStringFromRequest('groupname'));
 
 $dg = new DocumentGroup($g);
 
-if ($dg->isError())
-	session_redirect($urlredirect.'&error_msg='.urlencode($dg->getErrorMessage()));
-
-if (!$dg->create($groupname, $dirid))
-	session_redirect($urlredirect.'&error_msg='.urlencode($dg->getErrorMessage()));
-
-if ($dirid) {
-	$return_msg = _('Document subfolder successfully created.');
-	session_redirect($urlredirect.'&feedback='.urlencode($return_msg));
+if ($dg->isError() || !$dg->create($groupname, $dirid)) {
+	$error_msg = $dg->getErrorMessage();
+	session_redirect($urlredirect);
 }
 
-$return_msg = _('Document folder successfully created.');
-session_redirect($urlredirect.'&view=listfile&dirid='.$dg->getID().'&feedback='.urlencode($return_msg));
+if ($dirid) {
+	$feedback = _('Document subfolder successfully created.');
+	session_redirect($urlredirect);
+}
+
+$feedback = _('Document folder successfully created.');
+session_redirect($urlredirect.'&view=listfile&dirid='.$dg->getID());

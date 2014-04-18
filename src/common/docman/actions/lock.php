@@ -31,8 +31,8 @@ global $LUSER; // User object
 $sysdebug_enable = false;
 
 if (!forge_check_perm('docman', $group_id, 'approve')) {
-	$return_msg = _('Document Manager Action Denied.');
-	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
+	$warning_msg = _('Document Manager Action Denied.');
+	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
 }
 
 $itemid = getIntFromRequest('itemid');
@@ -52,12 +52,15 @@ switch ($type) {
 		break;
 	}
 	default: {
-		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode(_('Lock failed')._(': ')._('Missing Type')));
+		$error_msg = _('Lock failed')._(': ')._('Missing Type');
+		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
 	}
 }
 
-if ($objectType->isError())
-	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($objectType->getErrorMessage()));
+if ($objectType->isError()) {
+	$error_msg  = $objectType->getErrorMessage();
+	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
+}
 
 if ($lock == 0) {
 	echo $objectType->setLock($lock);

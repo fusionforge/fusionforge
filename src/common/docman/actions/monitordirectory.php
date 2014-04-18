@@ -3,7 +3,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -29,53 +29,48 @@ global $group_id; // id of group
 global $LUSER; // User object
 
 if (!forge_check_perm('docman', $group_id, 'read')) {
-	$return_msg = _('Document Manager Action Denied.');
-	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
+	$warning_msg = _('Document Manager Action Denied.');
+	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
 }
 
 $directoryid = getStringFromRequest('directoryid');
 $option = getStringFromRequest('option');
-$return_msg = _('Folder').' ';
+$feedback = _('Folder').' ';
 switch ($option) {
-	case "add": {
+	case 'add': {
 		if (!empty($directoryid)) {
 			$dg = new DocumentGroup($g, $directoryid);
-			$return_msg .= $dg->getName()._(': ');
-
-			if ($dg->isError())
-				session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));
-
-			if (!$dg->addMonitoredBy($LUSER->getID()))
-				session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));
+			$feedback .= $dg->getName()._(': ');
+			if ($dg->isError() || !$dg->addMonitoredBy($LUSER->getID())) {
+				$error_msg = $dg->getErrorMessage();
+				session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
+			}
 		} else {
 			$warning_msg = _('No action to perform');
-			session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($warning_msg));
+			session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
 		}
-		$return_msg .= _('Monitoring Started');
+		$feedback .= _('Monitoring Started');
 		break;
 	}
-	case "remove": {
+	case 'remove': {
 		if (!empty($directoryid)) {
 			$dg = new DocumentGroup($g, $directoryid);
-			$return_msg .= $dg->getName().' ';
-
-			if ($dg->isError())
-				session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));
-
-			if (!$dg->removeMonitoredBy($LUSER->getID()))
-				session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));
-
+			$feedback .= $dg->getName().' ';
+			if ($dg->isError() || !$dg->removeMonitoredBy($LUSER->getID())) {
+				$error_msg = $dg->getErrorMessage();
+				session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
+			}
 		} else {
 			$warning_msg = _('No action to perform');
-			session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($warning_msg));
+			session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
 		}
-		$return_msg .= _('Monitoring Stopped');
+		$feedback .= _('Monitoring Stopped');
 		break;
 	}
 	default: {
 		$error_msg = _('Docman: monitoring action unknown.');
-		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($error_msg));
+		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
 	}
 }
 
-session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&feedback='.urlencode($return_msg));
+session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
