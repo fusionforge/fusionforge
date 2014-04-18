@@ -66,7 +66,7 @@ jQuery(document).ready(function() {
 		$time_new = 604800;
 		foreach ($nested_pending_docs[$dirid] as $d) {
 			$cells = array();
-			$cells[][] = html_e('input', array('type' => 'checkbox', 'value' => $d->getID(), 'class' => 'checkeddocidpending', 'onchange' => 'controllerListPending.checkgeneral("pending")'));
+			$cells[][] = html_e('input', array('type' => 'checkbox', 'value' => $d->getID(), 'class' => 'checkeddocidpending tabtitle-w', 'title' => _('Select / Deselect this document for massaction'), 'onchange' => 'controllerListPending.checkgeneral("pending")'));
 			switch ($d->getFileType()) {
 				case "URL": {
 					$cells[][] = util_make_link($d->getFileName(), html_image($d->getFileTypeImage(), '22', '22', array('alt'=>$d->getFileType())), array('class' => 'tabtitle-nw', 'title' => _('Visit this link')), true);
