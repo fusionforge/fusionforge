@@ -81,6 +81,7 @@ deps_debian() {
 	apt-get -y --force-yes install python-moinmoin python-psycopg2 python-pygments libapache2-mod-wsgi
 	apt-get -y --force-yes install mediawiki
 	apt-get -y --force-yes install git gitweb
+	apt-get -y --force-yes install libapache2-mpm-itk
 	a2enmod headers
 	a2enmod proxy
 	a2enmod ssl
