@@ -97,6 +97,14 @@ class GitPlugin extends SCMPlugin {
 		for ($i=0; $i<$rows; $i++) {
 			$repo_list[] = db_result($result,$i,'repo_name');
 		}
+		$clone_commands = array();
+		foreach ($repo_list as $repo_name) {
+			$clone_commands[] = 'git clone '.util_make_url('/anonscm/git/'.$project->getUnixName().'/'.$repo_name.'.git');
+			if (forge_get_config('use_smarthttp', 'scmgit')) {
+				$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
+				$clone_commands[] = 'git clone '.$protocol.'://'.forge_get_config('scm_host').'/git/'.$project->getUnixName().'/'.$repo_name.'.git';
+			}
+		}
 
 		$b = '<h2>' . ngettext('Anonymous Access to the Git repository',
 				       'Anonymous Access to the Git repositories',
@@ -109,9 +117,9 @@ class GitPlugin extends SCMPlugin {
 
 		$b .= '</p>';
 
-		foreach ($repo_list as $repo_name) {
+		foreach ($clone_commands as $cmd) {
 			$b .= '<p>';
-			$b .= '<tt>git clone '.util_make_url('/anonscm/git/'.$project->getUnixName().'/'.$repo_name.'.git').'</tt><br />';
+			$b .= '<tt>'.$cmd.'</tt><br />';
 			$b .= '</p>';
 		}
 
@@ -157,12 +165,13 @@ class GitPlugin extends SCMPlugin {
 			$repo_list[] = db_result($result,$i,'repo_name');
 		}
 
+		$b = '';
 		if (session_loggedin()) {
 			$u = user_get_object(user_getid());
 			$d = $u->getUnixName();
 			if (forge_get_config('use_ssh', 'scmgit')) {
-				$b = '<h2>';
-				$b = ngettext('Developer Access to the Git repository via SSH',
+				$b .= '<h2>';
+				$b .= ngettext('Developer Access to the Git repository via SSH',
 						       'Developer Access to the Git repositories via SSH',
 						       count($repo_list));
 				$b .= '</h2>';
@@ -178,10 +187,29 @@ class GitPlugin extends SCMPlugin {
 				foreach ($repo_list as $repo_name) {
 					$b .= '<p><tt>git clone git+ssh://'.$d.'@' . $project->getSCMBox() . '/'. forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git</tt></p>';
 				}
-			} elseif (forge_get_config('use_dav', 'scmgit')) {
+			}
+			if (forge_get_config('use_smarthttp', 'scmgit')) {
+				$b .= '<h2>';
+				$b .= ngettext('Developer Access to the Git repository via “smart HTTP”',
+					      'Developer Access to the Git repositories via “smart HTTP”',
+					      count($repo_list));
+				$b .= '</h2>';
+				$b .= '<p>';
+				$b .= ngettext('Only project developers can access the Git repository via this method.',
+					       'Only project developers can access the Git repositories via this method.',
+					       count($repo_list));
+				$b .= ' ';
+				$b .= _('Enter your site password when prompted.');
+				$b .= '</p>';
 				$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
-				$b = '<h2>';
-				$b = ngettext('Developer Access to the Git repository via HTTP',
+				foreach ($repo_list as $repo_name) {
+					$b .= '<p><tt>git clone '.$protocol.'://'.$d.'@' . forge_get_config('scm_host').'/authgit/'.$d.'/'.$project->getUnixName() .'/'. $repo_name .'.git</tt></p>';
+				}
+			}
+			if (forge_get_config('use_dav', 'scmgit')) {
+				$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
+				$b .= '<h2>';
+				$b .= ngettext('Developer Access to the Git repository via HTTP',
 						       'Developer Access to the Git repositories via HTTP',
 						       count($repo_list));
 				$b .= '</h2>';
@@ -217,9 +245,28 @@ class GitPlugin extends SCMPlugin {
 				foreach ($repo_list as $repo_name) {
 					$b .= '<p><tt>git clone git+ssh://<i>'._('developername').'</i>@' . $project->getSCMBox() . '/'. forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git</tt></p>';
 				}
-			} elseif (forge_get_config('use_dav', 'scmgit')) {
-				$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
+			}
+			if (forge_get_config('use_smarthttp', 'scmgit')) {
 				$b = '<h2>';
+				$b = ngettext('Developer Access to the Git repository via “smart HTTP”',
+					      'Developer Access to the Git repositories via “smart HTTP”',
+					      count($repo_list));
+				$b .= '</h2>';
+				$b .= '<p>';
+				$b .= ngettext('Only project developers can access the Git repository via this method.',
+					       'Only project developers can access the Git repositories via this method.',
+					       count($repo_list));
+				$b .= ' ';
+				$b .= _('Enter your site password when prompted.');
+				$b .= '</p>';
+				$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
+				foreach ($repo_list as $repo_name) {
+					$b .= '<p><tt>git clone '.$protocol.'://<i>'._('developername').'</i>@' . forge_get_config('scm_host').'/authgit/<i>'._('developername').'</i>/'.$project->getUnixName() .'/'. $repo_name .'.git</tt></p>';
+				}
+			}
+			if (forge_get_config('use_dav', 'scmgit')) {
+				$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
+				$b .= '<h2>';
 				$b .= ngettext('Developer Access to the Git repository via HTTP',
 						       'Developer Access to the Git repositories via HTTP',
 						       count($repo_list));
@@ -237,8 +284,8 @@ class GitPlugin extends SCMPlugin {
 			}
 		}
 
-		if (!isset($b)) {
-			$b = '<h2>'._('Developer Git Access').'</h2>';
+		if ($b == '') {
+			$b .= '<h2>'._('Developer Git Access').'</h2>';
 			$b .= '<p class="error">Error: No access protocol has been allowed for the Git plugin in scmgit.ini: : use_ssh and use_dav are disabled</p>';
 		}
 
@@ -401,6 +448,7 @@ class GitPlugin extends SCMPlugin {
 			system("git clone --bare --quiet $main_repo $repodir");
 			system("chown -R $user_name $repodir");
 			system("GIT_DIR=\"$repodir\" git update-server-info");
+			system("GIT_DIR=\"$repodir\" git config http.receivepack true");
 			if (is_file("$repodir/hooks/post-update.sample")) {
 				rename("$repodir/hooks/post-update.sample",
 					"$repodir/hooks/post-update");
@@ -454,6 +502,7 @@ class GitPlugin extends SCMPlugin {
 			$output .= join("<br />", $result);
 			$result = '';
 			exec("GIT_DIR=\"$tmp_repo\" git update-server-info", $result);
+			exec("GIT_DIR=\"$tmp_repo\" git config http.receivepack true", $result);
 			$output .= join("<br />", $result);
 			if (is_file("$tmp_repo/hooks/post-update.sample")) {
 				rename("$tmp_repo/hooks/post-update.sample",
@@ -531,6 +580,7 @@ class GitPlugin extends SCMPlugin {
 					system("GIT_DIR=\"$repodir\" git init --quiet --bare --shared=group");
 				}
 				system("GIT_DIR=\"$repodir\" git update-server-info");
+				system("GIT_DIR=\"$repodir\" git config http.receivepack true");
 				if (is_file("$repodir/hooks/post-update.sample")) {
 					rename("$repodir/hooks/post-update.sample",
 						"$repodir/hooks/post-update");
@@ -628,26 +678,25 @@ class GitPlugin extends SCMPlugin {
 			mkdir($config_dir, 0755, true);
 		}
 		$fname = $config_dir . '/gitweb.conf';
-		$config_f = fopen($fname.'.new', 'w');
+		$f = fopen($fname.'.new', 'w');
 		$rootdir = forge_get_config('repos_path', 'scmgit');
-		fwrite($config_f, "\$projectroot = '$rootdir';\n");
-		fwrite($config_f, "\$projects_list = '$config_dir/gitweb.list';\n");
-		fwrite($config_f, "@git_base_url_list = ('". util_make_url('/anonscm/git') . "');\n");
-		fwrite($config_f, "\$logo = '". util_make_url('/plugins/scmgit/git-logo.png') . "';\n");
-		fwrite($config_f, "\$favicon = '". util_make_url('/plugins/scmgit/git-favicon.png')."';\n");
-		fwrite($config_f, "\$stylesheet = '". util_make_url('/plugins/scmgit/gitweb.css')."';\n");
-		fwrite($config_f, "\$javascript = '". util_make_url('/plugins/scmgit/gitweb.js')."';\n");
-		fwrite($config_f, "\$prevent_xss = 'true';\n");
-		fwrite($config_f, "\$feature{'actions'}{'default'} = [('project home', '" .
-		    util_make_url('/plugins/scmgit/?func=grouppage/%n') .
-		    "', 'summary')];\n");
-		fclose($config_f);
+		fwrite($f, "\$projectroot = '$rootdir';\n");
+		fwrite($f, "\$projects_list = '$config_dir/gitweb.list';\n");
+		fwrite($f, "@git_base_url_list = ('". util_make_url('/anonscm/git') . "');\n");
+		fwrite($f, "\$logo = '". util_make_url('/plugins/scmgit/git-logo.png') . "';\n");
+		fwrite($f, "\$favicon = '". util_make_url('/plugins/scmgit/git-favicon.png')."';\n");
+		fwrite($f, "\$stylesheet = '". util_make_url('/plugins/scmgit/gitweb.css')."';\n");
+		fwrite($f, "\$javascript = '". util_make_url('/plugins/scmgit/gitweb.js')."';\n");
+		fwrite($f, "\$prevent_xss = 'true';\n");
+		fwrite($f, "\$feature{'actions'}{'default'} = [('project home', '" .
+		       util_make_url('/plugins/scmgit/?func=grouppage/%n') .
+		       "', 'summary')];\n");
+		fclose($f);
 		chmod($fname.'.new', 0644);
 		rename($fname.'.new', $fname);
 
 		$fname = $config_dir . '/gitweb.list';
 		$f = fopen($fname.'.new', 'w');
-
 		$engine = RBACEngine::getInstance();
 		foreach ($list as $project) {
 			$repos = $this->getRepositories($rootdir . "/" .  $project->getUnixName());
@@ -670,6 +719,74 @@ class GitPlugin extends SCMPlugin {
 		fclose($f);
 		chmod($fname.'.new', 0644);
 		rename($fname.'.new', $fname);
+
+		if (forge_get_config('use_smarthttp', 'scmgit')) {
+			$gitusers = array();
+			
+			$config_fname = forge_get_config('data_path').'/scmgit-auth.inc';
+			$config_f = fopen($config_fname.'.new', 'w');
+			
+			$user_fname = forge_get_config('data_path').'/scmgit-userfile';
+			$user_f = fopen($user_fname.'.new', 'w');
+			
+			$group_fname = forge_get_config('data_path').'/scmgit-groupfile';
+			$group_f = fopen($group_fname.'.new', 'w');
+			
+			fwrite($config_f, '');
+			
+			foreach ($groups as $project) {
+				if ( !$project->isActive()) {
+					continue;
+				}
+				if ( !$project->usesSCM()) {
+					continue;
+				}
+				$rusers = $engine->getUsersByAllowedAction('scm',$project->getID(),'read');
+				fwrite($group_f, $project->getUnixName().':');
+				foreach ($rusers as $user) {
+					$gitusers[$user->getID()] = $user;
+					fwrite($group_f, ' '.$user->getUnixName());
+				}
+				fwrite($group_f, "\n");
+				
+				$wusers = $engine->getUsersByAllowedAction('scm',$project->getID(),'write');
+				fwrite($group_f, 'scm_'.$project->getUnixName().':');
+				foreach ($wusers as $user) {
+					fwrite($group_f, ' '.$user->getUnixName());
+				}
+				fwrite($group_f, "\n");
+				
+				
+				if ($project->enableAnonSCM()) {
+					fwrite($config_f, 'Use ScmgitProjectWithAnon '.$project->getUnixName().'
+');
+				} else {
+					fwrite($config_f, 'Use ScmgitProjectWithoutAnon '.$project->getUnixName().'
+');
+				}
+				
+				fwrite($config_f, "\n");
+			}
+			$password_data = '';
+			foreach ($gitusers as $user) {
+				$password_data .= $user->getUnixName().':'.$user->getUnixPasswd()."\n";
+				fwrite($config_f, 'Use ScmgitUser '.$user->getUnixName().'
+');
+			}
+			fwrite($user_f, $password_data);
+			
+			fclose($config_f);
+			chmod($config_fname.'.new', 0644);
+			rename($config_fname.'.new', $config_fname);
+			
+			fclose($group_f);
+			chmod($group_fname.'.new', 0644);
+			rename($group_fname.'.new', $group_fname);
+			
+			fclose($user_f);
+			chmod($user_fname.'.new', 0644);
+			rename($user_fname.'.new', $user_fname);
+		}
 	}
 
 	function getRepositories($path) {
