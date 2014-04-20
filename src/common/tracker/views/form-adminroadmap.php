@@ -4,6 +4,7 @@
  *
  * Copyright 2011, Alcatel-Lucent
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -189,20 +190,16 @@ if ($set_roadmap_failed ||
 		$atfh->header(array('title' => _('Update roadmap'), 'modal' => 1));
 	}
 
-	?>
-	<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;admin_roadmap=1' ?>" method="post">
-	<?php
-	echo '<p>'._('Name'). _(': ') . '<input required="required" type="text" name="roadmap_name" value="'.$roadmap->getName().'" size="40" /></p>';
-
-	if ($roadmap_id) {
-		echo '<input type="hidden" name="roadmap_id" value="'.$roadmap_id.'" />';
-	}
-
 	$at_arr = $atfh->getArtifactTypes();
 
 	if (!$at_arr || count($at_arr) < 1) {
 		echo $HTML->information(_('No trackers have been set up.'));
 	} else {
+		echo '<form action="/tracker/admin/?group_id='.$group_id.'&amp;admin_roadmap=1" method="post">';
+		echo '<p>'._('Name'). _(': ') . '<input required="required" type="text" name="roadmap_name" value="'.$roadmap->getName().'" size="40" /></p>';
+		if ($roadmap_id) {
+			echo '<input type="hidden" name="roadmap_id" value="'.$roadmap_id.'" />';
+		}
 		echo '<table>'."\n";
 		foreach ($at_arr as $artifact_type) {
 			if (!is_object($artifact_type)) {
