@@ -87,7 +87,7 @@ if (!empty($name) && !empty($linkmenu)) {
 				session_redirect($redirect_url);
 			}
 			$warning_msg = _('Missing Link URL or HTML Page.');
-			session_redirect($redirect_url));
+			session_redirect($redirect_url);
 		}
 	}
 }
