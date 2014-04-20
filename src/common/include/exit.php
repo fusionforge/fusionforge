@@ -71,25 +71,23 @@ function exit_no_group() {
 /**
  * exit_missing_param() - Exit with missing required parameters error
  *
- * @param	string	$url	URL, usually $_SERVER['HTTP_REFERER']
+ * @param	string	$url		URL, usually $_SERVER['HTTP_REFERER']
  * @param	array	$missing_params	array of missing parameters
- * @param	string	$toptab needed for navigation
+ * @param	string	$toptab		needed for navigation
  */
 function exit_missing_param($url = '', $missing_params = array(), $toptab = '') {
+	global $error_msg;
 	if (!empty($missing_params)) {
-		$error = _('Missing Required Parameters')._(': ');
+		$error_msg = _('Missing Required Parameters')._(': ');
 		foreach ($missing_params as $missing_param) {
-			$error .= $missing_param.' ';
+			$error_msg .= $missing_param.' ';
 		}
 	} else {
-		$error = sprintf(_('Missing Required Parameters'));
+		$error_msg = sprintf(_('Missing Required Parameters'));
 	}
 	$redirect_url = util_find_relative_referer($url);
 	if (!empty($redirect_url)) {
-		if (strpos($redirect_url,'?')) {
-			session_redirect($redirect_url.'&error_msg='.urlencode($error));
-		}
-		session_redirect($redirect_url.'?error_msg='.urlencode($error));
+		session_redirect($redirect_url);
 	} else {
 		exit_error($error, $toptab);
 	}

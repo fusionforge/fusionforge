@@ -57,7 +57,7 @@ try {
 //     }
 } catch (SoapFault $soapFault) {
 	$error_msg = _('Task failed')._(': ').$version_data['name'].' '.$soapFault->faultstring;
-	session_redirect('plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&error_msg='.urlencode($error_msg));
+	session_redirect('plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name);
 }
 $feedback = _('Task succeeded.');
-session_redirect('plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&feedback='.urlencode($feedback));
+session_redirect('plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name);

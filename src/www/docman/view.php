@@ -138,16 +138,16 @@ if (is_numeric($docid)) {
 			if(!readfile_chunked($file)) {
 				@unlink($file);
 				$error_msg = _('Unable to download backup file');
-				session_redirect('/docman/?group_id='.$group_id.'&view=admin&error_msg='.urlencode($error_msg));
+				session_redirect('/docman/?group_id='.$group_id.'&view=admin');
 			}
 			@unlink($file);
 		} else {
 			$warning_msg = _('No documents to backup.');
-			session_redirect('/docman/?group_id='.$group_id.'&view=admin&warning_msg='.urlencode($warning_msg));
+			session_redirect('/docman/?group_id='.$group_id.'&view=admin');
 		}
 	} else {
 		$warning_msg = _('ZIP extension is missing: no backup function');
-		session_redirect('/docman/?group_id='.$group_id.'&view=admin&warning_msg='.urlencode($warning_msg));
+		session_redirect('/docman/?group_id='.$group_id.'&view=admin');
 	}
 } elseif ($docid === 'webdav') {
 	if (forge_get_config('use_webdav') && $g->useWebDav()) {
@@ -165,7 +165,7 @@ if (is_numeric($docid)) {
 		$server->ServeRequest();
 	} else {
 		$warning_msg = _('No Webdav interface enabled.');
-		session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($warning_msg));
+		session_redirect('/docman/?group_id='.$group_id);
 	}
 } elseif ($docid === 'zip') {
 	session_require_perm('docman', $group_id, 'read');
@@ -227,12 +227,12 @@ if (is_numeric($docid)) {
 				if(!readfile_chunked($file)) {
 					unlink($file);
 					$error_msg = _('Unable to download ZIP archive');
-					session_redirect('/docman/?group_id='.$group_id.'&view=admin&error_msg='.urlencode($error_msg));
+					session_redirect('/docman/?group_id='.$group_id.'&view=admin');
 				}
 				unlink($file);
 			} else {
 				$warning_msg = _('This documents folder is empty.');
-				session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($warning_msg));
+				session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
 			}
 		} elseif ( $arr[5] === 'selected' ) {
 			$dirid = $arr[6];
@@ -267,7 +267,7 @@ if (is_numeric($docid)) {
 					$zip->close();
 					unlink($file);
 					$warning_msg = _('No action to perform');
-					session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($warning_msg));
+					session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
 				}
 			}
 			if ( !$zip->close()) {
@@ -283,7 +283,7 @@ if (is_numeric($docid)) {
 			if(!readfile_chunked($file)) {
 				unlink($file);
 				$error_msg = _('Unable to download ZIP archive');
-				session_redirect('/docman/?group_id='.$group_id.'&view=admin&error_msg='.urlencode($error_msg));
+				session_redirect('/docman/?group_id='.$group_id.'&view=admin');
 			}
 			unlink($file);
 		} else {

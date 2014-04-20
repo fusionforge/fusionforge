@@ -3,7 +3,7 @@
  * MantisBT plugin
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2014 Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -30,16 +30,16 @@ global $password;
 $deleteCategory = getStringFromRequest('deleteCategory');
 
 if ($deleteCategory) {
-    try {
-	    $clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
-	    $clientSOAP->__soapCall('mc_project_delete_category', array("username" => $username, "password" => $password, "p_project_id" => $mantisbtConf['id_mantisbt'], "p_category_name" => $deleteCategory));
-    } catch (SoapFault $soapFault) {
-        $msg = _('Task failed')._(': ').$soapFault->faultstring;
-        session_redirect('plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&error_msg='.urlencode($msg));
-    }
-    $feedback = sprintf(_('Category %s deleted successfully.'), $deleteCategory);
-    session_redirect('plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&feedback='.urlencode($feedback));
+	try {
+		$clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+		$clientSOAP->__soapCall('mc_project_delete_category', array("username" => $username, "password" => $password, "p_project_id" => $mantisbtConf['id_mantisbt'], "p_category_name" => $deleteCategory));
+	} catch (SoapFault $soapFault) {
+		$error_msg = _('Task failed')._(': ').$soapFault->faultstring;
+		session_redirect('plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name);
+	}
+	$feedback = sprintf(_('Category %s deleted successfully.'), $deleteCategory);
+	session_redirect('plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name);
 } else {
-    $warning = _('Missing parameters to delete category.');
-    session_redirect('plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&warning_msg='.urlencode($warning));
+	$warning_msg = _('Missing parameters to delete category.');
+	session_redirect('plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name);
 }

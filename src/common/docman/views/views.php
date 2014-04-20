@@ -22,8 +22,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 if (!forge_check_perm('docman', $group_id, 'read')) {
-	$return_msg= _('Document Manager Access Denied');
-	session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
+	$warning_msg = _('Document Manager Access Denied');
+	session_redirect('/docman/?group_id='.$group_id);
 }
 
 $view = getStringFromRequest('view', 'listfile');

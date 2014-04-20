@@ -270,7 +270,8 @@ if (getStringFromRequest('add_forum')) {
 		if ($fm->updatemsg($forum_id,$posted_by,$subject,$body,$post_date,$is_followup_to,$thread_id,$has_followups,$most_recent_date)) {
 			$feedback .= _('Message Edited Successfully');
 		} else {
-			session_redirect('/forum/admin/index.php?editmsg='.$msg_id.'&group_id='.$group_id.'&thread_id='.$thread_id.'&forum_id='.$forum_id.'&error_msg='.urlencode($fm->getErrorMessage()));
+			$error_msg = $fm->getErrorMessage();
+			session_redirect('/forum/admin/index.php?editmsg='.$msg_id.'&group_id='.$group_id.'&thread_id='.$thread_id.'&forum_id='.$forum_id);
 		}
 		forum_header(array('title'=>_('Edit a Message')));
 		echo '<p>'.util_make_link('/forum/forum.php?forum_id=' . $forum_id, _("Return to the forum")) ;

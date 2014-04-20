@@ -65,13 +65,12 @@ if (getStringFromRequest('submit')) {
 		} else {
 			$feedback = _('Successfully Deleted Role');
 			$group->addHistory(_('Deleted Role'), $role_name);
-			session_redirect('/project/admin/users.php?group_id='.$group_id.'&feedback='.urlencode($feedback));
+			session_redirect('/project/admin/users.php?group_id='.$group_id);
 		}
 	} else {
-		$error_msg = _('Error: Please check “I am Sure” to confirm or return to previous page to cancel.');
+		$error_msg = _('Error')._(': ')._('Please check “I am Sure” to confirm or return to previous page to cancel.');
 	}
-
-	session_redirect('/project/admin/users.php?group_id='.$group_id.'&error_msg='.urlencode($error_msg));
+	session_redirect('/project/admin/users.php?group_id='.$group_id);
 }
 
 $title = sprintf(_('Permanently Delete Role %s'), $role->getName());

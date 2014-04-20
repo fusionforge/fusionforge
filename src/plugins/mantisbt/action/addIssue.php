@@ -3,7 +3,7 @@
  * MantisBT Plugin
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2014 Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -45,7 +45,7 @@ try {
 	$listStatus= $clientSOAP->__soapCall('mc_enum_status', array("username" => $username, "password" => $password));
 } catch (SoapFault $soapFault) {
 	$error_msg = _('Task failed')._(': ').$soapFault->faultstring;
-	session_redirect('plugins/mantisbt/?type='.$type.'&group_id='.$group_id.'&pluginname=mantisbt&view=viewIssues&error_msg='.urlencode($feedback));
+	session_redirect('plugins/mantisbt/?type='.$type.'&group_id='.$group_id.'&pluginname=mantisbt&view=viewIssues');
 }
 foreach($listSeverities as $key => $severity){
 	if (getStringFromRequest('severite') == $severity->name){
@@ -123,9 +123,9 @@ $defect['version'] = getStringFromRequest('version');
 
 try {
 	$newIdBug = $clientSOAP->__soapCall('mc_issue_add', array("username" => $username, "password" => $password, "issue" => $defect));
-	$feedback = _('Ticket '.$newIdBug.' created successfully.');
-	session_redirect('plugins/mantisbt/?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$newIdBug.'&view=viewIssue&feedback='.urlencode($feedback));
+	$feedback = sprintf(_('Ticket %s created successfully.'), $newIdBug);
+	session_redirect('plugins/mantisbt/?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$newIdBug.'&view=viewIssue');
 } catch (SoapFault $soapFault) {
 	$error_msg = _('Task failed')._(': ').$soapFault->faultstring;
-	session_redirect('plugins/mantisbt/?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&error_msg='.urlencode($error_msg));
+	session_redirect('plugins/mantisbt/?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name);
 }

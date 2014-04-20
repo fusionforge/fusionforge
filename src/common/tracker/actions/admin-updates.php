@@ -87,7 +87,7 @@ if (getStringFromRequest('add_extrafield')) {
 			$ath->setBrowseList(join(',', $arr));
 			$feedback .= _('Custom Field Deleted');
 			$deleteextrafield=false;
-			session_redirect('/tracker/admin/?group_id='.$group_id.'&atid='.$atid.'&add_extrafield=1&feedback='.urlencode($feedback));
+			session_redirect('/tracker/admin/?group_id='.$group_id.'&atid='.$atid.'&add_extrafield=1');
 		}
 	}
 
@@ -550,7 +550,7 @@ if (getStringFromRequest('add_extrafield')) {
 	$atw = new ArtifactWorkflow($ath, $field_id);
 
 	if (!isset($wk[100])) {
-		$error_msg .= _('Error: Initial values not saved, no initial state given.').'<br />';
+		$error_msg .= _('Error')._(': ')._('Initial values not saved, no initial state given.').'<br />';
 	} else {
 		// Save values for the submit form (from=100).
 		$atw->saveNextNodes('100', array_keys($wk[100]));

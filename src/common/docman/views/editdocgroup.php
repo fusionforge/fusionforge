@@ -36,8 +36,8 @@ global $dm; // the Document Manager object
 global $HTML;
 
 if (!forge_check_perm('docman', $group_id, 'approve')) {
-	$return_msg= _('Document Manager Access Denied');
-	session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
+	$warning_msg = _('Document Manager Access Denied');
+	session_redirect('/docman/?group_id='.$group_id);
 }
 
 // plugin projects-hierarchy
@@ -48,8 +48,10 @@ if ($childgroup_id) {
 }
 
 $dg = new DocumentGroup($g, $dirid);
-if ($dg->isError())
-	session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($dg->getErrorMessage()));
+if ($dg->isError()) {
+	$error_msg = $dg->getErrorMessage();
+	session_redirect('/docman/?group_id='.$group_id);
+}
 
 echo html_ao('div', array('class' => 'docmanDivIncluded'));
 echo $HTML->openForm(array('name' => 'editgroup', 'action' => util_make_uri($actionurl), 'method' => 'post'));

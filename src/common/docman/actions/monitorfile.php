@@ -54,11 +54,10 @@ switch ($option) {
 		foreach ($arr_fileid as $fileid) {
 			if (!empty($fileid)) {
 				$d = new Document($g, $fileid);
-				if ($d->isError())
-					session_redirect($redirecturl.'&error_msg='.urlencode($d->getErrorMessage()));
-
-				if (!$d->addMonitoredBy($LUSER->getID()))
-					session_redirect($redirecturl.'&error_msg='.urlencode($d->getErrorMessage()));
+				if ($d->isError() || !$d->addMonitoredBy($LUSER->getID())) {
+					$error_msg = $d->getErrorMessage();
+					session_redirect($redirecturl);
+				}
 			} else {
 				$warning_msg = _('No action to perform');
 				session_redirect($redirecturl);
@@ -72,12 +71,10 @@ switch ($option) {
 		foreach ($arr_fileid as $fileid) {
 			if (!empty($fileid)) {
 				$d = new Document($g, $fileid);
-				if ($d->isError())
-					session_redirect($redirecturl.'&error_msg='.urlencode($d->getErrorMessage()));
-
-				if (!$d->removeMonitoredBy($LUSER->getID()))
-					session_redirect($redirecturl.'&error_msg='.urlencode($d->getErrorMessage()));
-
+				if ($d->isError() || !$d->removeMonitoredBy($LUSER->getID())) {
+					$error_msg = $d->getErrorMessage();
+					session_redirect($redirecturl);
+				}
 			} else {
 				$warning_msg = _('No action to perform');
 				session_redirect($redirecturl);
@@ -88,7 +85,7 @@ switch ($option) {
 		break;
 	}
 	default: {
-		$error_msg = _('Docman: monitoring action unknown.');
+		$error_msg = _('Docman')._(': ')._('monitoring action unknown.');
 		session_redirect($redirecturl);
 	}
 }

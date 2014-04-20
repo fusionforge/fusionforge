@@ -43,7 +43,7 @@ switch ($type) {
 	}
 	default: {
 		$error_msg = _('No type found.');
-		session_redirect('plugins/mantisbt/&error_msg='.urlencode($error_msg));
+		session_redirect('plugins/mantisbt/');
 	}
 }
 
@@ -177,8 +177,8 @@ try {
 	$clientSOAP->__soapCall('mc_issue_update', array("username" => $username, "password" => $password, "issue_id" => $idBug, "issue" => $defect));
 } catch (SoapFault $soapFault) {
 	$error_msg = _('Task failed')._(': ').$soapFault->faultstring;
-	session_redirect($redirect_url.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&view=viewIssue&error_msg='.urlencode($feedback));
+	session_redirect($redirect_url.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&view=viewIssue');
 }
 
 $feedback = _('Task succeeded.');
-session_redirect($redirect_url.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&view=viewIssue&feedback='.urlencode($feedback));
+session_redirect($redirect_url.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&view=viewIssue');

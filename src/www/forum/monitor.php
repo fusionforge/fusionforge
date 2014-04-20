@@ -69,13 +69,15 @@ if ($forum_id && $group_id) {
 		if (!$f->stopMonitor()) {
 			exit_error($f->getErrorMessage(),'forums');
 		} else {
-			session_redirect('/forum/forum.php?forum_id='.$forum_id.'&group_id='.$group_id.'&feedback='.urlencode(_('Forum Monitoring Deactivated')));
+			$feedback = _('Forum Monitoring Deactivated');
+			session_redirect('/forum/forum.php?forum_id='.$forum_id.'&group_id='.$group_id);
 		}
 	} elseif(getIntFromRequest('start')) {
 		if (!$f->setMonitor()) {
 			exit_error($f->getErrorMessage(),'forums');
 		} else {
-			session_redirect('/forum/forum.php?forum_id='.$forum_id.'&group_id='.$group_id.'&feedback='.urlencode(_('Forum Monitoring Started')));
+			$feedback = _('Forum Monitoring Started');
+			session_redirect('/forum/forum.php?forum_id='.$forum_id.'&group_id='.$group_id);
 		}
 	}
 } else {

@@ -28,8 +28,8 @@ $url = urldecode(getStringFromRequest('url'));
 
 if (!$pluginExtSubProj->delExtSubProj($group_id, $url)) {
 	$error_msg = _('Failed to delete subproject.');
-	session_redirect('/plugins/'.$pluginExtSubProj->name.'/?type=admin&group_id='.$group_id.'&pluginname='.$pluginExtSubProj->name.'&error_msg='.urlencode($error_msg));
+	session_redirect('/plugins/'.$pluginExtSubProj->name.'/?type=admin&group_id='.$group_id.'&pluginname='.$pluginExtSubProj->name);
 }
 
 $feedback = _('Subproject successfully deleted.');
-session_redirect('/plugins/'.$pluginExtSubProj->name.'/?type=admin&group_id='.$group_id.'&pluginname='.$pluginExtSubProj->name.'&feedback='.urlencode($feedback));
+session_redirect('/plugins/'.$pluginExtSubProj->name.'/?type=admin&group_id='.$group_id.'&pluginname='.$pluginExtSubProj->name);

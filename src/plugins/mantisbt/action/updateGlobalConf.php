@@ -31,8 +31,8 @@ $confArr['soap_password'] = getStringFromRequest('soap_password');
 
 if (!$mantisbt->updateGlobalConf($confArr)) {
 	$error_msg = _('Failed to update global configuration.');
-	session_redirect('/plugins/mantisbt/?type=globaladmin&pluginname='.$mantisbt->name.'&error_msg='.urlencode($error_msg));
+	session_redirect('/plugins/mantisbt/?type=globaladmin&pluginname='.$mantisbt->name);
 }
 
 $feedback = _('MantisBT global configuration successfully updated.');
-session_redirect('/plugins/mantisbt/?type=globaladmin&pluginname='.$mantisbt->name.'&feedback='.urlencode($feedback));
+session_redirect('/plugins/mantisbt/?type=globaladmin&pluginname='.$mantisbt->name);

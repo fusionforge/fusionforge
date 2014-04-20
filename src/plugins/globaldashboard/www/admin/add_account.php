@@ -1,24 +1,25 @@
 <?php
 /**
-* Copyright 2011, Sabri LABBENE - Institut Télécom
-*
-*
-* This file is part of FusionForge.
-*
-* FusionForge is free software; you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation; either version 2 of the License, or
-* (at your option) any later version.
-*
-* FusionForge is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License along
-* with this program; if not, write to the Free Software Foundation, Inc.,
-* 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-*/
+ * Copyright 2011, Sabri LABBENE - Institut Télécom
+ * Copyright 2014, Franck Villaume - TrivialDev
+ * http://fusionforge.org
+ *
+ * This file is part of FusionForge.
+ *
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
 
 require_once '../../../env.inc.php';
 require_once $gfwww.'include/pre.php';
@@ -38,7 +39,8 @@ $artifacts_discovery = getIntFromPost('artifacts_discovery_method');
 
 $user = session_get_user();
 if($user->getID() != $user_id) {
-	session_redirect( '/plugins/globaldashboard/admin/manage_accounts.php?type=user&id='.$user_id.'&pluginname=globaldashboard&error_msg='. urlencode(_('You can add remote accounts ONLY for yourself !!!')));
+	$error_msg = _('You can add remote accounts ONLY for yourself !!!')
+	session_redirect( '/plugins/globaldashboard/admin/manage_accounts.php?type=user&id='.$user_id.'&pluginname=globaldashboard');
 }
 
 $t_account_table = "plugin_globaldashboard_user_forge_account";
@@ -67,10 +69,13 @@ if($result) {
 				."VALUES ( $1, $2, $3)";
 	$disc_result = db_query_params($t_disc_query, array(db_insertid($result, $t_account_table, 'account_id'), $projects_discovery, $artifacts_discovery));
 	if($disc_result) {
-		session_redirect( '/plugins/globaldashboard/admin/manage_accounts.php?type=user&id='.$user_id.'&pluginname=globaldashboard&feedback='. urlencode(_('Remote Account successfully created')));
+		$feedback = _('Remote Account successfully created')
+		session_redirect('/plugins/globaldashboard/admin/manage_accounts.php?type=user&id='.$user_id.'&pluginname=globaldashboard');
 	} else {
-		session_redirect( '/plugins/globaldashboard/admin/manage_accounts.php?type=user&id='.$user_id.'&pluginname=globaldashboard&error_msg='. urlencode(printf('Remote account created but unable to create remote associated discovery parameters: '.db_error())));
+		$error_msg = _('Remote account created but unable to create remote associated discovery parameters')._(': ').db_error();
+		session_redirect('/plugins/globaldashboard/admin/manage_accounts.php?type=user&id='.$user_id.'&pluginname=globaldashboard');
 	}
 } else {
-	session_redirect( '/plugins/globaldashboard/admin/manage_accounts.php?type=user&id='.$user_id.'&pluginname=globaldashboard&error_msg='. urlencode(printf('Unable to create remote account: '.db_error())));
+	$error_msg = _('Unable to create remote account')._(': ').db_error();
+	session_redirect('/plugins/globaldashboard/admin/manage_accounts.php?type=user&id='.$user_id.'&pluginname=globaldashboard');
 }

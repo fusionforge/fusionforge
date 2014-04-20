@@ -30,10 +30,10 @@ $linkStatus = getIntFromRequest('linkstatus');
 if (!empty($idLink)) {
 	if ($webanalytics->updateLinkStatus($idLink, $linkStatus)) {
 		$feedback = _('Link Status updated');
-		session_redirect('plugins/'.$webanalytics->name.'/?type=globaladmin&feedback='.urlencode($feedback));
+		session_redirect('plugins/'.$webanalytics->name.'/?type=globaladmin');
 	}
 	$error_msg = _('Task failed');
-	session_redirect('plugins/'.$webanalytics->name.'/?type=globaladmin&error_msg='.urlencode($error_msg));
+	session_redirect('plugins/'.$webanalytics->name.'/?type=globaladmin');
 }
 $warning_msg = _('Missing Link or status to be updated.');
-session_redirect('plugins/'.$webanalytics->name.'/?type=globaladmin&warning_msg='.urlencode($warning_msg));
+session_redirect('plugins/'.$webanalytics->name.'/?type=globaladmin');

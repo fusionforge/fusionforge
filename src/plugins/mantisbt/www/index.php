@@ -72,10 +72,7 @@ switch ($type) {
 		$view = getStringFromRequest('view');
 		if ($mantisbtConf['id_mantisbt'] === 0) {
 			$warning_msg = _('The mantisbt plugin for this project is not initialized.');
-			$redirect_url = '/plugins/'.$mantisbt->name.'/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&view=init&warning_msg='.urlencode($warning_msg);
-			if ($error_msg) {
-				$redirect_url .= '&error_msg='.urlencode($error_msg);
-			}
+			$redirect_url = '/plugins/'.$mantisbt->name.'/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&view=init';
 			session_redirect($redirect_url);
 		}
 
@@ -89,7 +86,7 @@ switch ($type) {
 					$password = $mantisbtUserConf['password'];
 				} else {
 					$warning_msg = _('Your mantisbt user is not initialized.');
-					session_redirect('/plugins/'.$mantisbt->name.'/?type=user&pluginname='.$mantisbt->name.'&view=inituser&warning_msg='.urlencode($warning_msg));
+					session_redirect('/plugins/'.$mantisbt->name.'/?type=user&pluginname='.$mantisbt->name.'&view=inituser');
 				}
 				$action = getStringFromRequest('action');
 			}
@@ -168,10 +165,7 @@ switch ($type) {
 				$password = $mantisbtConf['password'];
 			}  else {
 				$warning_msg = _('Your mantisbt user is not initialized.');
-				$redirect_url = '/plugins/'.$mantisbt->name.'/?type=user&pluginname='.$mantisbt->name.'&view=inituser&warning_msg='.urlencode($warning_msg);
-				if ($error_msg) {
-					$redirect_url .= '&error_msg='.urlencode($error_msg);
-				}
+				$redirect_url = '/plugins/'.$mantisbt->name.'/?type=user&pluginname='.$mantisbt->name.'&view=inituser';
 				session_redirect($redirect_url);
 			}
 		}
@@ -238,10 +232,7 @@ switch ($type) {
 		if ($view != 'init' && $action != 'init') {
 			if ($mantisbtConf['id_mantisbt'] === 0) {
 				$warning_msg = _('The mantisbt plugin for this project is not initialized.');
-				$redirect_url = '/plugins/'.$mantisbt->name.'/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&view=init&warning_msg='.urlencode($warning_msg);
-				if ($error_msg) {
-					$redirect_url .= '&error_msg='.urlencode($error_msg);
-				}
+				$redirect_url = '/plugins/'.$mantisbt->name.'/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&view=init';
 				session_redirect($redirect_url);
 			}
 
@@ -256,7 +247,7 @@ switch ($type) {
 			// no user init ? we shoud force this user to init his account
 			if (!isset($username) || !isset($password)) {
 				$warning_msg = _('Your mantisbt user is not initialized.');
-				session_redirect('/plugins/'.$mantisbt->name.'/?type=user&pluginname='.$mantisbt->name.'&view=inituser&warning_msg='.urlencode($warning_msg));
+				session_redirect('/plugins/'.$mantisbt->name.'/?type=user&pluginname='.$mantisbt->name.'&view=inituser');
 			}
 		}
 

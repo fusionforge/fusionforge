@@ -3,6 +3,8 @@
  * Global Role Delete Page
  *
  * Copyright 2011, Roland Mas
+ * Copyright 2014, Franck Villaume - TrivialDev
+ * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -23,12 +25,14 @@
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 
+global $error_msg;
+
 $role_id = getIntFromRequest('role_id');
 
 session_require_global_perm ('forge_admin') ;
 
 if (!$role_id) {
-	session_redirect('/admin');
+	session_redirect('/admin/');
 }
 
 $role = RBACEngine::getInstance()->getRoleById($role_id);
@@ -44,17 +48,16 @@ if ($role->getHomeProject() != NULL) {
 }
 
 if (getStringFromRequest('submit')) {
-	$error_msg = '';
 	if (getIntFromRequest('sure')) {
 		if (!$role->delete()) {
 			$error_msg = _('Error')._(': ').$role->getErrorMessage();
 		} else {
 			$feedback = _('Successfully Deleted Role');
-			session_redirect('/admin/index.php?feedback='.urlencode($feedback));
+			session_redirect('/admin/');
 		}
 	} else {
-		$error_msg = _('Error: Please confirm the deletion of the role.');
+		$error_msg = _('Error')._(': ')._('Please confirm the deletion of the role.');
 	}
 
-	session_redirect('/admin/globalroleedit.php?role_id='.$role_id.'&error_msg='.urlencode($error_msg));
+	session_redirect('/admin/globalroleedit.php?role_id='.$role_id);
 }

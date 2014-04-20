@@ -32,8 +32,8 @@ $confArr['globalconf'] = getIntFromRequest('globalconf');
 
 if (!$projectsHierarchy->updateConf($group_id, $confArr)) {
 	$error_msg = _('Failed to update configuration.');
-	session_redirect('/plugins/'.$projectsHierarchy->name.'/?type=admin&group_id='.$group_id.'&pluginname='.$projectsHierarchy->name.'&error_msg='.urlencode($error_msg));
+	session_redirect('/plugins/'.$projectsHierarchy->name.'/?type=admin&group_id='.$group_id.'&pluginname='.$projectsHierarchy->name);
 }
 
 $feedback = _('Projects Hierarchy configuration successfully updated.');
-session_redirect('/plugins/'.$projectsHierarchy->name.'/?type=admin&group_id='.$group_id.'&pluginname='.$projectsHierarchy->name.'&feedback='.urlencode($feedback));
+session_redirect('/plugins/'.$projectsHierarchy->name.'/?type=admin&group_id='.$group_id.'&pluginname='.$projectsHierarchy->name);

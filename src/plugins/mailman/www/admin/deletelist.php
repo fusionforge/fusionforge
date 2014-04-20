@@ -19,7 +19,7 @@ require_once '../mailman_utils.php';
 $request =& HTTPRequest::instance();
 $group_id = $request->get('group_id');
 
-$feedback = '';
+global $feedback;
 
 if (!$group_id) {
 	exit_no_group();
@@ -43,7 +43,8 @@ if ($request->exist('submit')) {
 	if (!$ml->deleteList($sure,$really_sure)) {
 		exit_error('Error',$ml->getErrorMessage());
 	} else {
-		htmlRedirect('/plugins/mailman/index.php?group_id='.$group_id.'&feedback=DELETED');
+		$feedback = _('Deleted')
+		session_redirect('/plugins/mailman/index.php?group_id='.$group_id);
 	}
 }
 
