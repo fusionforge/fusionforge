@@ -39,7 +39,7 @@ $artifacts_discovery = getIntFromPost('artifacts_discovery_method');
 
 $user = session_get_user();
 if($user->getID() != $user_id) {
-	$error_msg = _('You can add remote accounts ONLY for yourself !!!')
+	$error_msg = _('You can add remote accounts ONLY for yourself !!!');
 	session_redirect( '/plugins/globaldashboard/admin/manage_accounts.php?type=user&id='.$user_id.'&pluginname=globaldashboard');
 }
 
@@ -69,7 +69,7 @@ if($result) {
 				."VALUES ( $1, $2, $3)";
 	$disc_result = db_query_params($t_disc_query, array(db_insertid($result, $t_account_table, 'account_id'), $projects_discovery, $artifacts_discovery));
 	if($disc_result) {
-		$feedback = _('Remote Account successfully created')
+		$feedback = _('Remote Account successfully created');
 		session_redirect('/plugins/globaldashboard/admin/manage_accounts.php?type=user&id='.$user_id.'&pluginname=globaldashboard');
 	} else {
 		$error_msg = _('Remote account created but unable to create remote associated discovery parameters')._(': ').db_error();

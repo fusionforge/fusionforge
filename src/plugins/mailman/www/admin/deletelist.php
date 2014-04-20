@@ -43,7 +43,7 @@ if ($request->exist('submit')) {
 	if (!$ml->deleteList($sure,$really_sure)) {
 		exit_error('Error',$ml->getErrorMessage());
 	} else {
-		$feedback = _('Deleted')
+		$feedback = _('Deleted');
 		session_redirect('/plugins/mailman/index.php?group_id='.$group_id);
 	}
 }

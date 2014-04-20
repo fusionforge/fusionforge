@@ -52,7 +52,7 @@ if (!empty($name) && !empty($linkmenu)) {
 					session_redirect($redirect_url);
 				} else {
 					$error_msg = _('Provided Link is not a valid URL.');
-					session_redirect($redirect_url));
+					session_redirect($redirect_url);
 				}
 			}
 			$warning_msg = _('Missing Link URL.');

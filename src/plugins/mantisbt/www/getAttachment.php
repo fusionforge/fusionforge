@@ -82,7 +82,7 @@ if ($idAttachment) {
 		$clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
 		$content = $clientSOAP->__soapCall('mc_issue_attachment_get', array("username" => $username, "password" => $password, "issue_attachment_id" => $idAttachment));
 	} catch (SoapFault $soapFault) {
-		$error_msg = $soapFault->faultstring
+		$error_msg = $soapFault->faultstring;
 		session_redirect('plugins/mantisbt/?type=group&group_id='.$group_id.'&pluginname=mantisbt');
 	}
 
