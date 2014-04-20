@@ -239,7 +239,7 @@ class Layout extends Error {
 	 */
 	function header($params) {
 		$this->headerStart($params);
-		echo "<body>\n";
+		echo html_ao('body');
 		$this->bodyHeader($params);
 	}
 
@@ -529,7 +529,7 @@ if (isset($params['group']) && $params['group']) {
 
 		plugin_hook('webanalytics_url');
 
-		echo "</body>\n";
+		echo html_ac(html_ap() -1);
 		echo "</html>\n";
 	}
 
