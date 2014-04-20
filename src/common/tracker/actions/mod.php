@@ -196,7 +196,7 @@ echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 		</td>
 	</tr>
 	<tr><td colspan="2">
-		<div id="edit" style="display:none;">
+		<div id="edit" class="hide">
 		<strong><?php echo _('Detailed description') ?><?php echo utils_requiredField(); ?><?php echo _(': ') ?><?php echo notepad_button('document.forms.trackermodform.description') ?></strong>
 		<br />
 		<textarea id="tracker-description" required="required" name="description" rows="30" cols="79" title="<?php echo html_get_tooltip_description('description') ?>"><?php echo $ah->getDetails(); ?></textarea>
