@@ -237,6 +237,12 @@ class CmController extends Zend_Rest_Controller {
 		return $class;
 	}
 
+        public function headAction(){
+ 
+          //$this->_forward('index');
+ 
+	}
+
 	public function getAction(){
 		switch (TRACKER_TYPE) {
 				case 'mantis':
