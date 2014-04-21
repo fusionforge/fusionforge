@@ -344,7 +344,11 @@ class DarcsPlugin extends SCMPlugin {
 			}
 		}
 
-		$fname = '/etc/gforge/plugins/scmdarcs/config.py' ;
+		$config_dir = forge_get_config('config_path').'/plugins/scmdarcs';
+		if (!is_dir($config_dir)) {
+			mkdir($config_dir, 0755, true);
+		}
+		$fname = $config_dir.'/config.py' ;
 
 		$f = fopen ($fname.'.new', 'w') ;
 
