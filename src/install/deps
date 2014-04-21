@@ -128,19 +128,37 @@ deps_suse() {
 
 	# TODO: automate next
 	msg red "You Must Install htmlpurifier manually."
+
 }
 
 deps_opensuse() {
 	msg green "Installing Packages with yast"
-	yast -i php5 apache2-prefork apache2-mod_php5 cvs mailman perl-IPC-Run perl-URI php5 php5-curl php5-gd php5-gettext php5-pgsql postfix postgresql postgresql-contrib postgresql-libs postgresql-server rcs openssh subversion subversion-server wget viewvc git gitweb
+	# check for newer suse
+	release=`awk '{print $2}' /etc/SuSE-release | head -n 1`
+        if [ $release = "13.1" ]; then
+		modules="php5 apache2-prefork apache2-mod_php5 cvs mailman perl-IPC-Run perl-URI php5-curl php5-gd php5-gettext php5-pgsql postfix postgresql92 postgresql-libs postgresql92-server postgresql92-contrib rcs openssh subversion subversion-server wget viewvc git git-web"
+	else
+		modules="php5 apache2-prefork apache2-mod_php5 cvs mailman perl-IPC-Run perl-URI php5 php5-curl php5-gd php5-gettext php5-pgsql postfix postgresql postgresql-contrib postgresql-libs postgresql-server rcs openssh subversion subversion-server wget viewvc git gitweb"
+	fi
+	yast -i ${modules}
 
 	msg green "Restarting PostgreSQL..."
 	rcpostgresql restart
 	msg green "Restarting Apache..."
 	rcapache2 restart
 
-	# TODO: automate next
-	msg red "You Must Install htmlpurifier manually."
+	if [ $release = "13.1" ]; then
+		msg green "Installing htmlpurifier with pear"
+		pear channel-discover htmlpurifier.org
+		pear install hp/HTMLPurifier
+
+		# make symlinks to meet standards
+		ln -s /usr/share/php5/PEAR /usr/share/pear
+		ln -s /usr/share/php5 /usr/share/php
+	else
+		# TODO: automate next
+		msg red "You Must Install htmlpurifier manually."
+	fi
 }
 
 addFusionForgeYumRepo() {

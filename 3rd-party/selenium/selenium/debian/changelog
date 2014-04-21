@@ -1,5 +1,5 @@
-selenium (2.21.0-1) unstable; urgency=low
+selenium (2.35.0-1) unstable; urgency=low
 
   * Initial release 
 
- -- Christian Bayle <bayle@debian.org>  Tue, 02 Oct 2012 00:41:34 +0200
+ -- Roland Mas <lolando@debian.org>  Fri, 14 Feb 2014 17:13:35 +0100
