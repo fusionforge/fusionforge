@@ -114,7 +114,7 @@ if (($fo = fopen(dirname(__FILE__) . '/../utils/default_page.php', 'r'))) {
 
 /* create user homes */
 $dirs = array_flip(glob("$hpfx/*/"));
-$res = db_query_params('SELECT login FROM nss_passwd', array());
+$res = db_query_params('SELECT DISTINCT(user_name) FROM nss_usergroups', array());
 foreach(util_result_column_to_array($res,0) as $uname) {
 	$uhome = "$hpfx/$uname/";
 	if (!isset($dirs[$uhome])) {
