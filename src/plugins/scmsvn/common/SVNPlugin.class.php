@@ -365,6 +365,7 @@ class SVNPlugin extends SCMPlugin {
 			}
 
 			$access_data .= "\n";
+			$engine->invalidateRoleCaches();  // caching all roles takes ~1GB RAM for 5K projects/15K users
 		}
 
 		foreach ($svnusers as $user_id => $user) {

@@ -54,8 +54,9 @@ $res = db_query_params('SELECT users.user_name,email,mail_group_list.list_name,
 			mail_group_list.group_list_id,mail_group_list.is_public,
 			mail_group_list.description
 			FROM mail_group_list,users
-			WHERE mail_group_list.list_admin=users.user_id',
-			array ());
+			WHERE mail_group_list.list_admin=users.user_id
+			AND mail_group_list.status != $1',
+			array (MAIL__MAILING_LIST_IS_CONFIGURED));
 $err .= db_error();
 
 $rows = db_numrows($res);
