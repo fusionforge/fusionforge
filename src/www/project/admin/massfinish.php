@@ -46,8 +46,8 @@ if (getStringFromRequest('finished')) {
 	for ($i=0; $i<count($keys); $i++) {
 		$group->addUser($keys[$i],$addrole[$keys[$i]]);
 	}
-    $feedback = _('Successful');
-	session_redirect('/project/admin/index.php?group_id='.$group_id.'&feedback='.urlencode($feedback));
+	$feedback = _('Successful');
+	session_redirect('/project/admin/index.php?group_id='.$group_id);
 }
 
 if (!$accumulated_ids) {
@@ -68,7 +68,7 @@ echo '
 <form action="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'" method="post">';
 
 if (!$res || db_numrows($res) < 1) {
-	echo "No Matching Users Found";
+	echo _('No Matching Users Found');
 } else {
 
 	$titles[]=_('Real Name');

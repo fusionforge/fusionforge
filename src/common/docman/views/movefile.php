@@ -31,8 +31,8 @@ global $dm; // the Document Manager object
 global $HTML;
 
 if (!forge_check_perm('docman', $group_id, 'approve')) {
-	$return_msg= _('Document Manager Access Denied');
-	session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
+	$warning_msg = _('Document Manager Access Denied');
+	session_redirect('/docman/?group_id='.$group_id);
 }
 
 // plugin projects-hierarchy

@@ -46,17 +46,17 @@ if (!empty($name) && !empty($linkmenu)) {
 				if (util_check_url($link)) {
 					if ($headermenu->addLink($link, $name, $description, $linkmenu)) {
 						$feedback = _('Task succeeded.');
-						session_redirect($redirect_url.'&feedback='.urlencode($feedback));
+						session_redirect($redirect_url);
 					}
 					$error_msg = _('Task failed');
-					session_redirect($redirect_url.'&error_msg='.urlencode($error_msg));
+					session_redirect($redirect_url);
 				} else {
 					$error_msg = _('Provided Link is not a valid URL.');
-					session_redirect($redirect_url.'&error_msg='.urlencode($error_msg));
+					session_redirect($redirect_url);
 				}
 			}
 			$warning_msg = _('Missing Link URL.');
-			session_redirect($redirect_url.'&warning_msg='.urlencode($warning_msg));
+			session_redirect($redirect_url);
 			break;
 		}
 		case 'outermenu':
@@ -69,27 +69,27 @@ if (!empty($name) && !empty($linkmenu)) {
 					}
 					if ($headermenu->addLink($link, $name, $description, $linkmenu, $linktype, $group_id)) {
 						$feedback = _('Task succeeded.');
-						session_redirect($redirect_url.'&feedback='.urlencode($feedback));
+						session_redirect($redirect_url);
 					}
 					$error_msg = _('Task failed');
-					session_redirect($redirect_url.'&error_msg='.urlencode($error_msg));
+					session_redirect($redirect_url);
 				} else {
 					$error_msg = _('Provided Link is not a valid URL.');
-					session_redirect($redirect_url.'&error_msg='.urlencode($error_msg));
+					session_redirect($redirect_url);
 				}
 			}
 			if (!empty($htmlcode)) {
 				if ($headermenu->addLink('', $name, $description, $linkmenu, 'htmlcode', $group_id, $htmlcode)) {
 					$feedback = _('Task succeeded.');
-					session_redirect($redirect_url.'&feedback='.urlencode($feedback));
+					session_redirect($redirect_url);
 				}
 				$error_msg = _('Task failed');
-				session_redirect($redirect_url.'&error_msg='.urlencode($error_msg));
+				session_redirect($redirect_url);
 			}
 			$warning_msg = _('Missing Link URL or HTML Page.');
-			session_redirect($redirect_url.'&warning_msg='.urlencode($warning_msg));
+			session_redirect($redirect_url);
 		}
 	}
 }
 $warning_msg = _('No link to create or name missing.');
-session_redirect($redirect_url.'&warning_msg='.urlencode($warning_msg));
+session_redirect($redirect_url);

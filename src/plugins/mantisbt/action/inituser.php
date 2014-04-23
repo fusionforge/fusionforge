@@ -32,8 +32,8 @@ $confArr['mantisbt_useglobal'] = getIntFromRequest('mantisbtuseglobal');
 
 if (!$mantisbt->initializeUser($confArr)) {
 	$error_msg = _('Failed to initialize user.').' '.$user->getErrorMessage();
-	session_redirect('/plugins/mantisbt/?type=user&pluginname='.$mantisbt->name.'&error_msg='.urlencode($error_msg));
+	session_redirect('/plugins/mantisbt/?type=user&pluginname='.$mantisbt->name);
 }
 
 $feedback = _('MantisBT User successfully initialized.');
-session_redirect('/plugins/mantisbt/?type=user&pluginname='.$mantisbt->name.'&feedback='.urlencode($feedback));
+session_redirect('/plugins/mantisbt/?type=user&pluginname='.$mantisbt->name);

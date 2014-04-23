@@ -113,10 +113,11 @@ class Theme extends Layout {
 		echo html_ao('div', array('class' => 'footer'));
 		echo $this->navigation->getPoweredBy();
 		echo $this->navigation->getShowSource();
-		echo '<div style="clear:both"></div>'."\n";
+		echo html_e('div', array('style' => 'clear:both'), '', false);
 		echo html_ac(html_ap() -1);
 		plugin_hook('webanalytics_url');
-		echo '</body></html>' . "\n";
+		echo html_ac(html_ap() -1);
+		echo '</html>' . "\n";
 	}
 
 	/**

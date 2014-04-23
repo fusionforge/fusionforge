@@ -33,8 +33,8 @@ global $nested_groups;
 global $redirecturl; // built url from listfile.php (handle the hierarchy)
 
 if (!forge_check_perm('docman', $g->getID(), 'approve')) {
-	$return_msg= _('Document Manager Access Denied');
-	session_redirect($redirecturl.'&warning_msg='.urlencode($return_msg));
+	$warning_msg = _('Document Manager Access Denied');
+	session_redirect($redirecturl);
 }
 
 if (!isset($nested_pending_docs)) {

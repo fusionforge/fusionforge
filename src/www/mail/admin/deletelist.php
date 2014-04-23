@@ -56,7 +56,7 @@ if (getStringFromPost('submit')) {
 		exit_error($ml->getErrorMessage(),'home');
 	} else {
 		$feedback= _('Mailing List Successfully deleted');
-		session_redirect('/mail/admin/?group_id='.$group_id.'&feedback='.urlencode($feedback));
+		session_redirect('/mail/admin/?group_id='.$group_id);
 	}
 }
 

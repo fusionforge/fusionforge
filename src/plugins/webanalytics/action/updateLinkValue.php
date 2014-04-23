@@ -31,8 +31,8 @@ $name = getStringFromRequest('name');
 if (!empty($idLink) && !empty($link)) {
 	if ($webanalytics->updateLink($idLink, $link, $name)) {
 		$feedback = _('Link updated');
-		session_redirect('plugins/'.$webanalytics->name.'/?type=globaladmin&feedback='.urlencode($feedback));
+		session_redirect('plugins/'.$webanalytics->name.'/?type=globaladmin');
 	}
 	$error_msg = _('Task failed');
-	session_redirect('plugins/'.$webanalytics->name.'/?type=globaladmin&error_msg='.urlencode($error_msg));
+	session_redirect('plugins/'.$webanalytics->name.'/?type=globaladmin');
 }

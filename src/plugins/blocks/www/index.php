@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * Copyright (C) 2006 Alain Peyrat, Alcatel-Lucent
  * Copyright (C) 2010 Alain Peyrat <aljeux@free.fr>
  * Copyright (C) 2012-2014 Alain Peyrat - Alcatel-Lucent
@@ -266,8 +266,8 @@ if ($type == 'admin') {
 					array($activate[$b], $id, $b));
 		}
 	}
-	$msg = _('Block Saved');
-	session_redirect('/plugins/blocks/index.php?id='.$id.'&type=admin&pluginname=blocks&feedback='.urlencode($msg));
+	$feedback = _('Block Saved');
+	session_redirect('/plugins/blocks/index.php?id='.$id.'&type=admin&pluginname=blocks');
 } elseif ($type == 'configure') {
 	blocks_Project_Header(array('title'=>'Edit Block','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));
 	// DO THE STUFF FOR THE PROJECT ADMINISTRATION PART HERE
@@ -353,8 +353,8 @@ if ($type == 'admin') {
 				WHERE group_id=$2 AND name=$3',
 				array($body, $id, htmlspecialchars($name)));
 	}
-	$msg = $name .' : '. _('Block configuration saved');
-	session_redirect('/plugins/blocks/index.php?id='.$id.'&type=admin&pluginname=blocks&feedback='.urlencode($msg));
+	$feedback = $name .' : '. _('Block configuration saved');
+	session_redirect('/plugins/blocks/index.php?id='.$id.'&type=admin&pluginname=blocks');
 }
 
 site_project_footer();

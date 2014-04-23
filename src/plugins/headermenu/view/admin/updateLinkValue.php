@@ -109,6 +109,6 @@ if (is_array($linkValues)) {
 	echo $HTML->closeForm();
 	echo html_e('span', array(), sprintf(_('Fields marked with %s are mandatory.'), utils_requiredField()), false);
 } else {
-	$error_msg = _('Cannot retrieve value for this link:').' '.$linkId;
-	session_redirect($redirect_url.'&error_msg='.urlencode($error_msg));
+	$error_msg = _('Cannot retrieve value for this link')._(': ').$linkId;
+	session_redirect($redirect_url);
 }

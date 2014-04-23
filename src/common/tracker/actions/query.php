@@ -74,7 +74,7 @@ if (getStringFromRequest('submit')) {
 		}
 		$aq->makeDefault();
 		$query_id=$aq->getID();
-		session_redirect('/tracker/?atid='.$atid.'&group_id='.$group_id.'&func=browse&feedback='.urlencode($feedback));
+		session_redirect('/tracker/?atid='.$atid.'&group_id='.$group_id.'&func=browse');
 	//
 /*
 	// Make the displayed query the default
@@ -123,7 +123,7 @@ if (getStringFromRequest('submit')) {
 		}
 		$aq->makeDefault();
 		$query_id=$aq->getID();
-		session_redirect('/tracker/?atid='.$atid.'&group_id='.$group_id.'&func=browse&feedback='.urlencode($feedback));
+		session_redirect('/tracker/?atid='.$atid.'&group_id='.$group_id.'&func=browse');
 	//
 	//	Just load the query
 	//
@@ -146,14 +146,11 @@ if (getStringFromRequest('submit')) {
 		}
 		if (!$aq->delete()) {
 			$error_msg .= $aq->getErrorMessage();
-            $ret_msg = '&error_msg='.urlencode($error_msg);
 		} else {
 			$feedback .= _('Query Deleted');;
-            $ret_msg = '&feedback='.urlencode($feedback);
 		}
 		$query_id=0;
-		session_redirect('/tracker/?atid='.$atid.'&group_id='.$group_id.'&func=browse'.$ret_msg);
-		exit;
+		session_redirect('/tracker/?atid='.$atid.'&group_id='.$group_id.'&func=browse');
 	} else {
 		exit_error(_('Missing Build Query Action'),'tracker');
 	}

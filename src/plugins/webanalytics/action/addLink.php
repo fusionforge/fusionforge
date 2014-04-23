@@ -30,10 +30,10 @@ $name = getStringFromRequest('name');
 if (!empty($link) && !empty($name)) {
 	if ($webanalytics->addLink($link, $name)) {
 		$feedback = _('Task succeeded.');
-		session_redirect('plugins/'.$webanalytics->name.'/?type=globaladmin&feedback='.urlencode($feedback));
+		session_redirect('plugins/'.$webanalytics->name.'/?type=globaladmin');
 	}
 	$error_msg = _('Task failed');
-	session_redirect('plugins/'.$webanalytics->name.'/?type=globaladmin&error_msg='.urlencode($error_msg));
+	session_redirect('plugins/'.$webanalytics->name.'/?type=globaladmin');
 }
 $warning_msg = _('Missing Link URL or name.');
-session_redirect('plugins/'.$webanalytics->name.'/?type=globaladmin&warning_msg='.urlencode($warning_msg));
+session_redirect('plugins/'.$webanalytics->name.'/?type=globaladmin');

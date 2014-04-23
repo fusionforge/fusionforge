@@ -74,7 +74,7 @@ if ($mantisbtUserConf) {
 // no user init ? we shoud force this user to init his account
 if (!isset($username) || !isset($password)) {
 	$warning_msg = _('Your mantisbt user is not initialized.');
-	session_redirect('/plugins/'.$mantisbt->name.'/?type=user&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&view=inituser&warning_msg='.urlencode($warning_msg));
+	session_redirect('/plugins/'.$mantisbt->name.'/?type=user&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&view=inituser');
 }
 
 if ($idAttachment) {
@@ -82,7 +82,8 @@ if ($idAttachment) {
 		$clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
 		$content = $clientSOAP->__soapCall('mc_issue_attachment_get', array("username" => $username, "password" => $password, "issue_attachment_id" => $idAttachment));
 	} catch (SoapFault $soapFault) {
-		session_redirect('plugins/mantisbt/?type=group&group_id='.$group_id.'&pluginname=mantisbt&error_msg='.urlencode($soapFault->faultstring));
+		$error_msg = $soapFault->faultstring;
+		session_redirect('plugins/mantisbt/?type=group&group_id='.$group_id.'&pluginname=mantisbt');
 	}
 
 	header( 'Content-Disposition: filename="'.urlencode($arr[6]).'"' );

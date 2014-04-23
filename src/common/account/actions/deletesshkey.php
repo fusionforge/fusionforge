@@ -25,10 +25,11 @@ global $u;
 $keyid = getStringFromRequest('keyid');
 if (is_numeric($keyid)) {
 	if (!$u->deleteAuthorizedKey($keyid)) {
-		session_redirect('/account/?&error_msg='.urlencode($u->getErrorMessage()));
+		$error_msg = $u->getErrorMessage();
+		session_redirect('/account/');
 	}
 	$feedback = _('SSH Key deleted successfully.');
-	session_redirect('/account/?&feedback='.urlencode($feedback));
+	session_redirect('/account/');
 }
 
 session_redirect('/account/');

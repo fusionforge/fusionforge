@@ -51,8 +51,8 @@ if ($dgf->isError())
 	exit_error($dgf->getErrorMessage(), 'docman');
 
 if (!forge_check_perm('docman', $group_id, 'submit')) {
-	$return_msg = _('Document Manager Action Denied.');
-	session_redirect($redirecturl.'&warning_msg='.urlencode($return_msg));
+	$warning_msg = _('Document Manager Action Denied.');
+	session_redirect($redirecturl);
 }
 echo html_ao('script', array('type' => 'text/javascript'));
 ?>
@@ -80,8 +80,10 @@ echo html_ao('div', array('class' => 'docmanDivIncluded'));
 if ($dgf->getNested() == NULL) {
 	$dg = new DocumentGroup($g);
 
-	if ($dg->isError())
-		session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($dg->getErrorMessage()));
+	if ($dg->isError()) {
+		$error_msg = $dg->getErrorMessage();
+		session_redirect('/docman/?group_id='.$group_id);
+	}
 
 	if ($dg->create('Uncategorized Submissions')) {
 		session_redirect('/docman/?group_id='.$group_id.'&view=additem');

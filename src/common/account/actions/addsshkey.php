@@ -30,25 +30,27 @@ $uploaded_filekey = getUploadedFile('uploaded_filekey');
 if (strlen($authorized_key)) {
 	checkKeys($authorized_key);
 	if (!$u->addAuthorizedKey($authorized_key)) {
-		session_redirect('/account/?&error_msg='.urlencode($u->getErrorMessage()));
+		$error_msg = $u->getErrorMessage();
+		session_redirect('/account/');
 	}
 	$feedback = _('SSH Key added successfully.');
-	session_redirect('/account/?&feedback='.urlencode($feedback));
+	session_redirect('/account/');
 }
 
 if (!is_uploaded_file($uploaded_filekey['tmp_name'])) {
-	$return_msg = _('Invalid file name.');
-	session_redirect('/account/?&error_msg='.urlencode($return_msg));
+	$error_msg = _('Invalid file name.');
+	session_redirect('/account/');
 }
 
 $payload = fread(fopen($uploaded_filekey['tmp_name'], 'r'), $uploaded_filekey['size']);
 if (strlen($payload)) {
 	checkKeys($payload);
 	if (!$u->addAuthorizedKey($payload)) {
-		session_redirect('/account/?&error_msg='.urlencode($u->getErrorMessage()));
+		$error_msg = $u->getErrorMessage();
+		session_redirect('/account/');
 	}
 	$feedback = _('SSH Key added successfully.');
-	session_redirect('/account/?&feedback='.urlencode($feedback));
+	session_redirect('/account/');
 }
 
 session_redirect('/account/');

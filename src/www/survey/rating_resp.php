@@ -53,12 +53,12 @@ if (!session_loggedin()) {
 						 $response,
 						 time()));
 		if (!$result) {
-			$error_msg .= _('Insert Error').db_error();
-			session_redirect('/&error_msg='.urlencode($error_msg));
+			$error_msg .= _('Insert Error')._(': ').db_error();
+			session_redirect('/');
 		} else {
 			$feedback .= _('Vote registered');
 			$warning_msg .= _('If you vote again, your old vote will be erased.');
-			session_redirect('/&feedback='.urlencode($feedback).'&warning_msg='.urlencode($warning_msg));
+			session_redirect('/');
 		}
 	} else {
 		exit_missing_param('',array(_('Vote ID'),_('Response'),_('Flag')),'survey');

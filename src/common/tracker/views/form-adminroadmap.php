@@ -4,6 +4,7 @@
  *
  * Copyright 2011, Alcatel-Lucent
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -189,20 +190,16 @@ if ($set_roadmap_failed ||
 		$atfh->header(array('title' => _('Update roadmap'), 'modal' => 1));
 	}
 
-	?>
-	<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;admin_roadmap=1' ?>" method="post">
-	<?php
-	echo '<p>'._('Name'). _(': ') . '<input required="required" type="text" name="roadmap_name" value="'.$roadmap->getName().'" size="40" /></p>';
-
-	if ($roadmap_id) {
-		echo '<input type="hidden" name="roadmap_id" value="'.$roadmap_id.'" />';
-	}
-
 	$at_arr = $atfh->getArtifactTypes();
 
 	if (!$at_arr || count($at_arr) < 1) {
 		echo $HTML->information(_('No trackers have been set up.'));
 	} else {
+		echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&admin_roadmap=1', 'method' => 'post'));
+		echo '<p>'._('Name'). _(': ') . '<input required="required" type="text" name="roadmap_name" value="'.$roadmap->getName().'" size="40" /></p>';
+		if ($roadmap_id) {
+			echo '<input type="hidden" name="roadmap_id" value="'.$roadmap_id.'" />';
+		}
 		echo '<table>'."\n";
 		foreach ($at_arr as $artifact_type) {
 			if (!is_object($artifact_type)) {
@@ -236,7 +233,7 @@ if ($set_roadmap_failed ||
 			<input type="submit" name="set_roadmap" value="'._('Submit').'" />
 			<input type="submit" name="cancel" formnovalidate="formnovalidate" value="'._('Cancel').'" />
 			</p>'."\n";
-		echo '</form>'."\n";
+		echo $HTML->closeForm();
 	}
 	$ihm = true;
 }
@@ -380,11 +377,11 @@ if (getIntFromRequest('manage_release') ||
 						($pos + 1).'&#160;--&gt;&#160;<input type="text" name="order['.$release_order[$pos].']" value="" size="3" maxlength="3" />'.
 						'</td>'."\n".
 						'<td class="align-center">'.'&#160;&#160;&#160;'.
-						'<a href="index.php?group_id='.$group_id.'&amp;roadmap_id='.$roadmap_id.
-						'&amp;admin_roadmap=1&amp;updownorder_release=1&amp;old_pos='.$pos.'&amp;new_pos='.(($pos == count($release_order) - 1) ? $pos : $pos + 1).'">'.html_image('ic/btn_up.png','19','18',array('alt'=>"Up")).'</a>'.
+						util_make_link('/tracker/admin/?group_id='.$group_id.'&roadmap_id='.$roadmap_id.'&admin_roadmap=1&updownorder_release=1&old_pos='.$pos.'&new_pos='.(($pos == count($release_order) - 1) ? $pos : $pos + 1),
+								html_image('ic/btn_up.png','19','18',array('alt'=>"Up"))).
 						'&#160;&#160;'.
-						'<a href="index.php?group_id='.$group_id.'&amp;roadmap_id='.$roadmap_id.
-						'&amp;admin_roadmap=1&amp;updownorder_release=1&amp;old_pos='.$pos.'&amp;new_pos='.(($pos == 0) ? $pos : $pos - 1).'">'.html_image('ic/btn_down.png','19','18',array('alt'=>"Down")).'</a>'.
+						util_make_link('/tracker/admin/?group_id='.$group_id.'&roadmap_id='.$roadmap_id.'&admin_roadmap=1&updownorder_release=1&old_pos='.$pos.'&new_pos='.(($pos == 0) ? $pos : $pos - 1),
+								html_image('ic/btn_down.png','19','18',array('alt'=>"Down"))).
 						'</td>'."\n".
 						'</tr>'."\n";
 		}
@@ -421,13 +418,10 @@ if (getIntFromRequest('manage_release') ||
 		}
 		else {
 			echo '<p>'._('No tracker is selected for this roadmap').'.</p>';
-			echo '<p>'.sprintf(_('You can <a href="%s">select tracker(s) for this roadmap</a>.'),
-						'index.php?group_id='.$group_id.'&amp;roadmap_id='.$roadmap_id.
-						'&amp;admin_roadmap=1&amp;update_roadmap=1').'</p>';
+			echo '<p>'._('You can '). util_make_link('/tracker/admin/?group_id='.$group_id.'&roadmap_id='.$roadmap_id.'&admin_roadmap=1&update_roadmap=1', _('select tracker(s) for this roadmap')).
+				'</p>';
 		}
-		echo '<p>
-			<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;admin_roadmap=1'.'">'.
-			_('Return to list of roadmaps').'</a>'.
+		echo '<p>'.util_make_link('/tracker/admin/?group_id='.$group_id.'&admin_roadmap=1', _('Return to list of roadmaps')).
 			'</p>'."\n";
 
 		$ihm = true;
@@ -441,8 +435,8 @@ if (! isset($ihm) || $ihm !== true) {
 
 	$roadmap_factory = new RoadmapFactory($group);
 	$roadmaps = $roadmap_factory->getRoadmaps();
+	echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id, 'method' => 'post'));
 	?>
-	<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>" method="post">
 	<input type="hidden" name="admin_roadmap" value="1" />
 	<?php
 	$pos = 0;
@@ -469,15 +463,12 @@ if (! isset($ihm) || $ihm !== true) {
 					'</td>'."\n".
 					*/
 					'<td class="align-center">'.
-					'<a href="index.php?group_id='.$group_id.'&amp;roadmap_id='.$roadmap->getID().
-					'&amp;admin_roadmap=1&amp;update_roadmap=1">'.
-					html_image('ic/forum_edit.gif','','',array('alt' => _('Modify roadmap'), 'title' => _('Modify roadmap'))).'</a>'."\n".
-					'<a href="index.php?group_id='.$group_id.'&amp;roadmap_id='.$roadmap->getID().
-					'&amp;admin_roadmap=1&amp;manage_release=1">'.
-					html_image('ic/survey-question-add.png','','',array('alt' => _('Manage releases'), 'title' => _('Manage releases'))).'</a>'."\n".
-					'<a href="index.php?group_id='.$group_id.'&amp;roadmap_id='.$roadmap->getID().
-					'&amp;admin_roadmap=1&amp;delete_roadmap=1">'.
-					html_image('ic/trash.png','','',array('alt' => _('Delete roadmap'), 'title' => _('Delete roadmap'))).'</a>'.
+					util_make_link('/tracker/admin/?group_id='.$group_id.'&roadmap_id='.$roadmap->getID().'&admin_roadmap=1&update_roadmap=1',
+							html_image('ic/forum_edit.gif','','',array('alt' => _('Modify roadmap'), 'title' => _('Modify roadmap')))).
+					util_make_link('/tracker/admin/?group_id='.$group_id.'&roadmap_id='.$roadmap->getID().'&admin_roadmap=1&manage_release=1',
+							html_image('ic/survey-question-add.png','','',array('alt' => _('Manage releases'), 'title' => _('Manage releases')))).
+					util_make_link('/tracker/admin/?group_id='.$group_id.'&roadmap_id='.$roadmap->getID().'&admin_roadmap=1&delete_roadmap=1',
+							html_image('ic/trash.png','','',array('alt' => _('Delete roadmap'), 'title' => _('Delete roadmap')))).
 					'</td>'."\n".
 					'</tr>'."\n";
 			$pos++;
@@ -503,7 +494,8 @@ if (! isset($ihm) || $ihm !== true) {
 		echo '<input type="submit" name="set_roadmap_state" value="'._('Update').'" />'."\n";
 	}
 	echo '<input type="submit" name="new_roadmap" value="'._('New Roadmap').'" />'."\n";
-	echo '</p></form>'."\n";
+	echo '</p>';
+	echo $HTML->closeForm();
 }
 
 $atfh->footer();

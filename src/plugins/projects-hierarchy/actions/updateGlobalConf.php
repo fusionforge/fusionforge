@@ -31,8 +31,8 @@ $confArr['delegate'] = 0;
 
 if (!$projectsHierarchy->updateGlobalConf($confArr)) {
 	$error_msg = _('Failed to update global configuration.');
-	session_redirect('/plugins/'.$projectsHierarchy->name.'/?type=globaladmin&error_msg='.urlencode($error_msg));
+	session_redirect('/plugins/'.$projectsHierarchy->name.'/?type=globaladmin');
 }
 
 $feedback = _('Projects Hierarchy global configuration successfully updated.');
-session_redirect('/plugins/'.$projectsHierarchy->name.'/?type=globaladmin&feedback='.urlencode($feedback));
+session_redirect('/plugins/'.$projectsHierarchy->name.'/?type=globaladmin');

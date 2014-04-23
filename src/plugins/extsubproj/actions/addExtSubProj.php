@@ -29,8 +29,8 @@ $confArr['newsubprojecturl'] = getStringFromRequest('newsubprojecturl');
 
 if (!$pluginExtSubProj->addExtSubProj($group_id, $confArr['newsubprojecturl'])) {
 	$error_msg = _('Failed to add subproject.');
-	session_redirect('/plugins/'.$pluginExtSubProj->name.'/?type=admin&group_id='.$group_id.'&pluginname='.$pluginExtSubProj->name.'&error_msg='.urlencode($error_msg));
+	session_redirect('/plugins/'.$pluginExtSubProj->name.'/?type=admin&group_id='.$group_id.'&pluginname='.$pluginExtSubProj->name);
 }
 
 $feedback = _('Subproject successfully added.');
-session_redirect('/plugins/'.$pluginExtSubProj->name.'/?type=admin&group_id='.$group_id.'&pluginname='.$pluginExtSubProj->name.'&feedback='.urlencode($feedback));
+session_redirect('/plugins/'.$pluginExtSubProj->name.'/?type=admin&group_id='.$group_id.'&pluginname='.$pluginExtSubProj->name);

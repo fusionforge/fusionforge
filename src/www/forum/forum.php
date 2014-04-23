@@ -108,7 +108,8 @@ if ($forum_id) {
 
 		if (!$fm->create($subject, $body, $thread_id, $is_followup_to,$has_attach) || $fm->isError()) {
 			form_release_key(getStringFromRequest("form_key"));
-			session_redirect('/forum/new.php?forum_id='.$forum_id.'&group_id='.$group_id.'&error_msg='.urlencode($fm->getErrorMessage()));
+			$error_msg = $fm->getErrorMessage();
+			session_redirect('/forum/new.php?forum_id='.$forum_id.'&group_id='.$group_id);
 		} else {
 			if ($fm->isPending() ) {
 				$feedback = _('Message Queued for moderation -> Please wait until the admin approves/rejects it');

@@ -330,20 +330,21 @@ class projects_hierarchyPlugin extends Plugin {
 	 */
 	function redirect($http_referer, $type, $message) {
 		switch ($type) {
-			case 'warning_msg':
-			case 'error_msg':
-			case 'feedback': {
+			case 'warning_msg': {
+				$warning_msg = $message;
 				break;
 			}
+			case 'feedback': {
+				$feedback = $message;
+				break;
+			}
+			case 'error_msg':
 			default: {
-				$type = 'error_msg';
+				$error_msg = $message;
 			}
 		}
 		$url = util_find_relative_referer($http_referer);
-		if (strpos($url,'?')) {
-			session_redirect($url.'&'.$type.'='.urlencode($message));
-		}
-		session_redirect($url.'?'.$type.'='.urlencode($message));
+		session_redirect($url);
 	}
 
 	/**

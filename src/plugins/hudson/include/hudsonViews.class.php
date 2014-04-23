@@ -403,7 +403,7 @@ class hudsonViews extends Views {
 
 		echo '<a href="#" onclick="jQuery(\'#hudson_add_job\').slideToggle(); return false;">' . getIcon("ic/add.png") . ' '._("Add job").'</a>';
 		echo ' '.$this->_getHelp('HudsonService', true);
-		echo '<div id="hudson_add_job" style="display:none" >';
+		echo '<div id="hudson_add_job" class="hide" >';
 		echo ' <form action="">'."\n";
 		echo '   <label for="hudson_job_url">'._("Job URL:").'</label>'."\n";
 		echo '   <input id="hudson_job_url" name="hudson_job_url" type="url" size="64" placeholder="http://myCIserver/hudson/job/myJob" required="required" pattern="https?://.+" title="http[s]://myCIserver/hudson/job/myjob" />'."\n";

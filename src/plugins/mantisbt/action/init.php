@@ -3,7 +3,7 @@
  * MantisBT plugin
  *
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -35,8 +35,10 @@ $confArr['soap_password'] = getStringFromRequest('soap_password');
 $confArr['mantisbtcreate'] = getIntFromRequest('mantisbtcreate');
 $confArr['mantisbtname'] = getStringFromRequest('mantisbtname');
 
-if (!$mantisbt->initialize($group_id, $confArr))
-	session_redirect('/plugins/'.$mantisbt->name.'/?type=group&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&error_msg='.urlencode($group->getErrorMessage()));
+if (!$mantisbt->initialize($group_id, $confArr)) {
+	$error_msg = $group->getErrorMessage();
+	session_redirect('/plugins/'.$mantisbt->name.'/?type=group&group_id='.$group_id.'&pluginname='.$mantisbt->name);
+}
 
 $feedback = _('MantisBT plugin successfully initialized.');
-session_redirect('/plugins/'.$mantisbt->name.'/?type=group&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&feedback='.urlencode($feedback));
+session_redirect('/plugins/'.$mantisbt->name.'/?type=group&group_id='.$group_id.'&pluginname='.$mantisbt->name);

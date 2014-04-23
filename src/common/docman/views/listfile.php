@@ -39,8 +39,8 @@ $linkmenu = 'listfile';
 $baseredirecturl = '/docman/?group_id='.$group_id;
 $redirecturl = $baseredirecturl.'&view='.$linkmenu.'&dirid='.$dirid;
 if (!forge_check_perm('docman', $group_id, 'read')) {
-	$return_msg= _('Document Manager Access Denied');
-	session_redirect($baseredirecturl.'&warning_msg='.urlencode($return_msg));
+	$warning_msg = _('Document Manager Access Denied');
+	session_redirect($baseredirecturl);
 }
 
 echo html_ao('div', array('id' => 'leftdiv'));
@@ -51,8 +51,8 @@ echo html_ac(html_ap() - 1);
 $childgroup_id = getIntFromRequest('childgroup_id');
 if ($childgroup_id) {
 	if (!forge_check_perm('docman', $childgroup_id, 'read')) {
-		$return_msg= _('Document Manager Access Denied');
-		session_redirect($baseredirecturl.'&warning_msg='.urlencode($return_msg));
+		$warning_msg = _('Document Manager Access Denied');
+		session_redirect($baseredirecturl);
 	}
 	$redirecturl .= '&childgroup_id='.$childgroup_id;
 	$g = group_get_object($childgroup_id);
@@ -99,11 +99,12 @@ if ($dirid) {
 	$DocGroupName = $ndg->getName();
 	$dgpath = $ndg->getPath(true, false);
 	if (!$DocGroupName) {
-		session_redirect($baseredirecturl.'&error_msg='.urlencode($g->getErrorMessage()));
+		$error_msg = $g->getErrorMessage();
+		session_redirect($baseredirecturl);
 	}
 	if ($ndg->getState() != 1) {
 		$error_msg = _('Invalid folder');
-		session_redirect($baseredirecturl.'&view=listfile&error_msg='.urlencode($error_msg));
+		session_redirect($baseredirecturl.'&view=listfile');
 	}
 }
 

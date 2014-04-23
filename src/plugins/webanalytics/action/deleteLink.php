@@ -29,10 +29,10 @@ $idLink = getIntFromRequest('linkid');
 if (!empty($idLink)) {
 	if ($webanalytics->deleteLink($idLink)) {
 		$feedback = _('Link deleted');
-		session_redirect('plugins/'.$webanalytics->name.'/?type=globaladmin&feedback='.urlencode($feedback));
+		session_redirect('plugins/'.$webanalytics->name.'/?type=globaladmin');
 	}
 	$error_msg = _('Task failed');
-	session_redirect('plugins/'.$webanalytics->name.'/?type=globaladmin&error_msg='.urlencode($error_msg));
+	session_redirect('plugins/'.$webanalytics->name.'/?type=globaladmin');
 }
 $warning_msg = _('Missing Link to be deleted.');
-session_redirect('plugins/'.$webanalytics->name.'/?type=globaladmin&warning_msg='.urlencode($warning_msg));
+session_redirect('plugins/'.$webanalytics->name.'/?type=globaladmin');
