@@ -141,6 +141,7 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 	}
 
 	public function invalidateRoleCaches () {
+		$this->_cached_roles = array();
 		$this->_cached_available_roles = NULL;
 		$this->_cached_global_roles = NULL;
 		$this->_cached_public_roles = NULL;

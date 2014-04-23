@@ -81,23 +81,24 @@ if (!($hpfx = forge_get_config('homedir_prefix'))) {
 	// this should be set in configuration
 	exit();
 }
+rtrim($hpfx, '/');
 
 if (!is_dir($hpfx)) {
 	@mkdir($hpfx, 0755, true);
 }
 
 if (forge_get_config('use_ftp_uploads')) {
-	if (!($fpfx = forge_get_config('ftp_upload_dir'))) {
+	if (!($ftp_pfx = forge_get_config('ftp_upload_dir'))) {
 		// this should be set in the configuration
 		exit();
 	}
 
-	if (!is_dir($fpfx)) {
-		@mkdir($fpfx, 0755, true);
+	if (!is_dir($ftp_pfx)) {
+		@mkdir($ftp_pfx, 0755, true);
 	}
 } else {
 	/* signal that we do not use FTP */
-	$fpfx = false;
+	$ftp_pfx = false;
 }
 
 /* read in the group home template file */
@@ -112,30 +113,24 @@ if (($fo = fopen(dirname(__FILE__) . '/../utils/default_page.php', 'r'))) {
 }
 
 /* create user homes */
-
-$active_projects = group_get_active_projects();
-$unames = array();
-foreach ($active_projects as $project) {
-	foreach ($project->getUsers() as $u) {
-		$unames[] = $u->getUnixName();
+$dirs = array_flip(glob("$hpfx/*/"));
+$res = db_query_params('SELECT DISTINCT(user_name) FROM nss_usergroups', array());
+foreach(util_result_column_to_array($res,0) as $uname) {
+	$uhome = "$hpfx/$uname/";
+	if (!isset($dirs[$uhome])) {
+		mkdir($uhome);
+		chown($uhome, $uname);
+		chgrp($uhome, USER_DEFAULT_GROUP);
 	}
-}
-$unames = array_unique($unames);
-foreach ($unames as $uname) {
-	$uhome = $hpfx . "/" . $uname;
-	if (!is_dir($uhome)) {
-		@mkdir($uhome);
-	}
-	system("chown $uname:" . USER_DEFAULT_GROUP . " " . $uhome);
 }
 
 /* create project/group homes */
+$res = db_query_params('SELECT unix_group_name, group_name FROM groups WHERE status=$1', array('A'));
+while ($row = pg_fetch_array($res)) {
+	$groupname = $row['unix_group_name'] ;
 
-foreach ($active_projects as $project) {
-	$groupname = $project->getUnixName() ;
-
-	if ($fpfx && !is_dir($fpfx . '/' . $groupname)) {
-		@mkdir($fpfx . '/' . $groupname);
+	if ($ftp_pfx && !is_dir($ftp_pfx . '/' . $groupname)) {
+		@mkdir($ftp_pfx . '/' . $groupname);
 		//XXX chown/chgrp/chmod?
 	}
 
@@ -153,11 +148,11 @@ foreach ($active_projects as $project) {
 			    str_replace('##purpose##',
 			    _('Please replace this file with your own website'),
 			    str_replace('##welcome_to##',
-			    sprintf(_('Welcome to %s'), $project->getPublicName()),
+			    sprintf(_('Welcome to %s'), $row['group_name']),
 			    str_replace('##body##',
 			    _("We're Sorry but this Project hasn't uploaded their personal webpage yet.").'<br />'.
 			    sprintf(_('Please check back soon for updates or visit <a href="%s">the project page</a>.'),
-			    util_make_url('/projects/' . $project->getUnixName())),
+			    util_make_url('/projects/' . $row['unix_group_name'])),
 			    $contents)))));
 			fclose($fw);
 		}
