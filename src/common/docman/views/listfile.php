@@ -144,6 +144,7 @@ jQuery(document).ready(function() {
 		divEditDirectory:	jQuery('#editdocgroup'),
 		divMoveFile:		jQuery('#movefile'),
 		buttonAddItem:		jQuery('#docman-additem'),
+		buttonTrashDirectory:	jQuery('#docman-trashdirectory'),
 		buttonEditDirectory:	jQuery('#docman-editdirectory'),
 		docManURL:		'<?php echo util_make_uri('/docman') ?>',
 		divLeft:		jQuery('#leftdiv'),
@@ -152,7 +153,11 @@ jQuery(document).ready(function() {
 		divEditFile:		jQuery('#editFile'),
 		divEditTitle:		'<?php echo _('Edit document dialog box') ?>',
 		enableResize:		true,
-		page:			'listfile'
+		page:			'listfile',
+		docgroupId:		<?php echo $dirid ?>,
+		lockIntervalDelay:	60000,
+		imgroot:		'<?php echo $HTML->imgroot ?>',
+		lockedAction:		'<?php echo _('Action currently locked by another user.') ?>'
 	});
 });
 
@@ -172,7 +177,7 @@ if ($DocGroupName) {
 	if ($ndg->getLocked()) {
 		if ($ndg->getLockedBy() == $u->getID()) {
 			$ndg->setLock(0);
-		/* if you change the 60000 value below, please update here too */
+		/* if you change the 60000 lockIntervalDelay value, please update here too */
 		} elseif ((time() - $ndg->getLockdate()) > 600) {
 			$ndg->setLock(0);
 		}
@@ -180,7 +185,7 @@ if ($DocGroupName) {
 	if (!$ndg->getLocked()) {
 		if (forge_check_perm('docman', $ndg->Group->getID(), 'approve')) {
 			echo html_e('input', array('type' => 'hidden', 'id' => 'doc_group_id', 'value' => $ndg->getID()));
-			echo util_make_link('#', html_image('docman/configure-directory.png', 22, 22, array('alt' => 'edit')), array('class' => 'tabtitle', 'id' => 'docman-editdirectory', 'title' => _('Edit this folder'), 'onclick' => 'javascript:controllerListFile.toggleEditDirectoryView({lockIntervalDelay: 60000, doc_group:'.$ndg->getID().'})' ), true);
+			echo util_make_link('#', html_image('docman/configure-directory.png', 22, 22, array('alt' => 'edit')), array('class' => 'tabtitle', 'id' => 'docman-editdirectory', 'title' => _('Edit this folder'), 'onclick' => 'javascript:controllerListFile.toggleEditDirectoryView()' ), true);
 			echo util_make_link($redirecturl.'&action=trashdir', html_image('docman/trash-empty.png', 22, 22, array('alt' => 'trashdir')), array('class' => 'tabtitle', 'id' => 'docman-trashdirectory', 'title' => _('Move this folder and his content to trash')));
 			if (!isset($nested_docs[$dirid]) && !isset($nested_groups[$dirid]) && !isset($nested_pending_docs[$dirid])) {
 				echo util_make_link($redirecturl.'&action=deldir', html_image('docman/delete-directory.png', 22, 22, array('alt' => 'deldir')), array('class' => 'tabtitle', 'id' => 'docman-deletedirectory', 'title' => _('Permanently delete this folder')));

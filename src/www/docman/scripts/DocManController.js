@@ -116,7 +116,16 @@ DocManListFileController.prototype =
 						type:		'file',
 						childgroup_id:	this.params.childGroupId
 					});
+					jQuery.get(this.params.docManURL, {
+						group_id:	this.params.groupId,
+						action:		'lock',
+						lock:		0,
+						itemid:		this.params.docgroupId,
+						type:		'dir',
+						childgroup_id:	this.params.childGroupId
+					});
 					clearInterval(this.lockInterval[id]);
+					clearInterval(this.lockInterval[this.params.docgroupId]);
 					jQuery(modalId).dialog( "close" );
 				}, this),
 				Cancel: jQuery.proxy(function() {
@@ -129,8 +138,17 @@ DocManListFileController.prototype =
 						type:		'file',
 						childgroup_id:	this.params.childGroupId
 					});
+					jQuery.get(this.params.docManURL, {
+						group_id:	this.params.groupId,
+						action:		'lock',
+						lock:		0,
+						itemid:		this.params.docgroupId,
+						type:		'dir',
+						childgroup_id:	this.params.childGroupId
+					});
 					clearInterval(this.lockInterval[id]);
-					jQuery(modalId).dialog( "close" );
+					clearInterval(this.lockInterval[this.params.docgroupId]);
+					jQuery(modalId).dialog('close');
 				}, this)
 			}
 		});
@@ -144,31 +162,52 @@ DocManListFileController.prototype =
 				type:		'file',
 				childgroup_id:	this.params.childGroupId
 			});
+			jQuery.get(this.params.docManURL, {
+				group_id:	this.params.groupId,
+				action:		'lock',
+				lock:		0,
+				itemid:		this.params.docgroupId,
+				type:		'dir',
+				childgroup_id:	this.params.childGroupId
+			});
 			clearInterval(this.lockInterval[id]);
+			clearInterval(this.lockInterval[this.params.docgroupId]);
 		}, this));
 	},
 
 	/*! toggle edit group view div visibility
 	 */
-	toggleEditDirectoryView: function(docparams) {
-		this.docparams = docparams;
+	toggleEditDirectoryView: function() {
 		if (!this.params.divEditDirectory.is(":visible")) {
-			this.params.divEditDirectory.show();
-			if (typeof(this.params.divAddItem) != 'undefined') {
-				this.params.divAddItem.hide();
-			}
-			computeHeight = this.params.divRight.height() + this.params.divEditDirectory.height();
-			currentLeftHeight = this.params.divLeft.height();
-			this.params.divLeft.height(currentLeftHeight + this.params.divEditDirectory.height());
-			jQuery.get(this.params.docManURL, {
-				group_id:	this.params.groupId,
-				action:		'lock',
-				lock:		1,
-				type:		'dir',
-				itemid:	this.docparams.doc_group,
-				childgroup_id:	this.docparams.childGroupId
-			});
-			this.lockInterval[this.docparams.doc_group] = setInterval("jQuery.get('" + this.params.docManURL + "', {group_id:"+this.params.groupId+",action:'lock',lock:1,type:'dir',itemid:"+this.docparams.doc_group+",childgroup_id:"+this.docparams.childGroupId+"})",this.docparams.lockIntervalDelay);
+			jQuery.getJSON(this.params.docManURL + '/?group_id=' + this.params.groupId + '&action=lock&type=dir&itemid=' + this.params.docgroupId, jQuery.proxy(function(data){
+				if (data) {
+					jQuery('#maindiv').prepend('<div class="actionresult"><p id="validateLinkMessage" class="warning_msg">'+this.params.lockedAction+'</p></div>');
+				} else {
+					this.params.divEditDirectory.show();
+					if (typeof(this.params.divAddItem) != 'undefined') {
+						this.params.divAddItem.hide();
+					}
+					computeHeight = this.params.divRight.height() + this.params.divEditDirectory.height();
+					currentLeftHeight = this.params.divLeft.height();
+					this.params.divLeft.height(currentLeftHeight + this.params.divEditDirectory.height());
+					jQuery.get(this.params.docManURL, {
+						group_id:	this.params.groupId,
+						action:		'lock',
+						lock:		1,
+						type:		'dir',
+						itemid:		this.params.docgroupId,
+						childgroup_id:	this.params.childGroupId
+					});
+					this.lockInterval[this.params.docgroupId] = setInterval("jQuery.get('" + this.params.docManURL + "', {group_id:"+this.params.groupId+",action:'lock',lock:1,type:'dir',itemid:"+this.params.docgroupId+",childgroup_id:"+this.params.childGroupId+"})", this.params.lockIntervalDelay);
+					if (typeof(this.params.divLeft) != 'undefined' && typeof(this.params.divRight) != 'undefined') {
+						if (this.params.divLeft.height() > computeHeight) {
+							jQuery('#views').height(this.params.divLeft.height());
+						} else {
+							jQuery('#views').height(computeHeight);
+						}
+					}
+				}
+			}, this));
 		} else {
 			this.params.divEditDirectory.hide();
 			computeHeight = this.params.divRight.height() - this.params.divEditDirectory.height();
@@ -179,16 +218,16 @@ DocManListFileController.prototype =
 				action:		'lock',
 				lock:		0,
 				type:		'dir',
-				itemid:	this.docparams.doc_group,
-				childgroup_id:	this.docparams.childGroupId
+				itemid:		this.params.docgroupId,
+				childgroup_id:	this.params.childGroupId
 			});
-			clearInterval(this.lockInterval[this.docparams.doc_group]);
-		}
-		if (typeof(this.params.divLeft) != 'undefined' && typeof(this.params.divRight) != 'undefined') {
-			if (this.params.divLeft.height() > computeHeight) {
-				jQuery('#views').height(this.params.divLeft.height());
-			} else {
-				jQuery('#views').height(computeHeight);
+			clearInterval(this.lockInterval[this.params.docgroupId]);
+			if (typeof(this.params.divLeft) != 'undefined' && typeof(this.params.divRight) != 'undefined') {
+				if (this.params.divLeft.height() > computeHeight) {
+					jQuery('#views').height(this.params.divLeft.height());
+				} else {
+					jQuery('#views').height(computeHeight);
+				}
 			}
 		}
 		return false;
@@ -198,22 +237,53 @@ DocManListFileController.prototype =
 	 */
 	toggleAddItemView: function() {
 		if (!this.params.divAddItem.is(":visible")) {
-			this.params.divAddItem.show();
-			this.params.divEditDirectory.hide();
-			computeHeight = this.params.divRight.height() + jQuery(this.params.divAddItem).height();
-			currentLeftHeight = this.params.divLeft.height();
-			this.params.divLeft.height(currentLeftHeight + jQuery(this.params.divAddItem).height());
+			jQuery.getJSON(this.params.docManURL + '/?group_id=' + this.params.groupId + '&action=lock&type=dir&itemid=' + this.params.docgroupId, jQuery.proxy(function(data){
+				if (data) {
+					jQuery('#maindiv').prepend('<div class="actionresult"><p id="validateLinkMessage" class="warning_msg">'+this.params.lockedAction+'</p></div>');
+				} else {
+					jQuery.get(this.params.docManURL, {
+						group_id:	this.params.groupId,
+						action:		'lock',
+						lock:		1,
+						type:		'dir',
+						itemid:		this.params.docgroupId,
+						childgroup_id:	this.params.childGroupId
+					});
+					this.lockInterval[this.params.docgroupId] = setInterval("jQuery.get('" + this.params.docManURL + "', {group_id:"+this.params.groupId+",action:'lock',lock:1,type:'dir',itemid:"+this.params.docgroupId+",childgroup_id:"+this.params.childGroupId+"})",this.params.lockIntervalDelay);
+					this.params.divAddItem.show();
+					this.params.divEditDirectory.hide();
+					computeHeight = this.params.divRight.height() + jQuery(this.params.divAddItem).height();
+					currentLeftHeight = this.params.divLeft.height();
+					this.params.divLeft.height(currentLeftHeight + jQuery(this.params.divAddItem).height());
+					if (typeof(this.params.divLeft) != 'undefined' && typeof(this.params.divRight) != 'undefined') {
+						if (this.params.divLeft.height() > computeHeight) {
+							jQuery('#views').height(this.params.divLeft.height());
+						} else {
+							jQuery('#views').height(computeHeight);
+						}
+					}
+				}
+			}, this));
 		} else {
+			jQuery.get(this.params.docManURL, {
+				group_id:	this.params.groupId,
+				action:		'lock',
+				lock:		0,
+				type:		'dir',
+				itemid:		this.params.docgroupId,
+				childgroup_id:	this.params.childGroupId
+			});
+			clearInterval(this.lockInterval[this.params.docgroupId]);
 			this.params.divAddItem.hide();
 			computeHeight = this.params.divRight.height() - jQuery(this.params.divAddItem).height();
 			currentLeftHeight = this.params.divLeft.height();
 			this.params.divLeft.height(currentLeftHeight - jQuery(this.params.divAddItem).height());
-		}
-		if (typeof(this.params.divLeft) != 'undefined' && typeof(this.params.divRight) != 'undefined') {
-			if (this.params.divLeft.height() > computeHeight) {
-				jQuery('#views').height(this.params.divLeft.height());
-			} else {
-				jQuery('#views').height(computeHeight);
+			if (typeof(this.params.divLeft) != 'undefined' && typeof(this.params.divRight) != 'undefined') {
+				if (this.params.divLeft.height() > computeHeight) {
+					jQuery('#views').height(this.params.divLeft.height());
+				} else {
+					jQuery('#views').height(computeHeight);
+				}
 			}
 		}
 		return false;
@@ -237,7 +307,7 @@ DocManListFileController.prototype =
 		if (this.docparams.isURL) {
 			jQuery('#uploadnewroweditfile').hide();
 			jQuery('#fileurlroweditfile').show();
-			jQuery('#fileurlroweditfile').find('input').attr("required", "required");
+			jQuery('#fileurlroweditfile').find('input').attr('required', 'required');
 			jQuery('#fileurlroweditfile').find('input').val(this.docparams.filename);
 		} else {
 			jQuery('#fileurlroweditfile').hide();
@@ -257,16 +327,16 @@ DocManListFileController.prototype =
 		}
 		jQuery('#doc_group').empty();
 		jQuery.each(this.docparams.docgroupDict, function(key, value) {
-			jQuery('#doc_group').append(jQuery("<option>").text(key).attr("value",value));
+			jQuery('#doc_group').append(jQuery('<option>').text(key).attr('value',value));
 		});
-		jQuery('#doc_group option[value='+this.docparams.docgroupId+']').attr("selected", "selected");
+		jQuery('#doc_group option[value='+this.docparams.docgroupId+']').attr('selected', 'selected');
 		jQuery('#stateid').empty();
 		jQuery.each(this.docparams.statusDict, function(key, value) {
-			jQuery('#stateid').append(jQuery("<option>").text(key).attr("value",value));
+			jQuery('#stateid').append(jQuery('<option>').text(key).attr('value',value));
 		});
-		jQuery('#stateid option[value='+this.docparams.statusId+']').attr("selected", "selected");
+		jQuery('#stateid option[value='+this.docparams.statusId+']').attr('selected', 'selected');
 		if (this.docparams.isText) {
-			jQuery.getJSON(this.docparams.docManURL + '/?group_id=' + this.docparams.groupId + '&action=getfile&fileid=' + this.docparams.id , jQuery.proxy(function(data){
+			jQuery.getJSON(this.docparams.docManURL + '/?group_id=' + this.docparams.groupId + '&action=getfile&type=file&itemid=' + this.docparams.id , jQuery.proxy(function(data){
 				if (data) {
 					jQuery('#defaulteditzone').text(data.body);
 				}
@@ -279,11 +349,12 @@ DocManListFileController.prototype =
 				action:		'lock',
 				lock:		1,
 				type:		'dir',
-				itemid:		this.docparams.id,
+				itemid:		this.docparams.docgroupId,
 				childgroup_id:	this.docparams.childGroupId
 			});
 		this.lockInterval[this.docparams.id] = setInterval("jQuery.get('" + this.docparams.docManURL + "', {group_id:"+this.docparams.groupId+",action:'lock',lock:1,type:'file',itemid:"+this.docparams.id+",childgroup_id:"+this.docparams.childGroupId+"})",this.docparams.lockIntervalDelay);
-		jQuery(this.params.divEditFile).dialog("open");
+		this.lockInterval[this.docparams.docgroupId] = setInterval("jQuery.get('" + this.docparams.docManURL + "', {group_id:"+this.docparams.groupId+",action:'lock',lock:1,type:'dir',itemid:"+this.docparams.docgroupId+",childgroup_id:"+this.docparams.childGroupId+"})",this.docparams.lockIntervalDelay);
+		jQuery(this.params.divEditFile).dialog('open');
 
 		return false;
 	},
@@ -309,9 +380,9 @@ DocManListFileController.prototype =
 	 */
 	buildUrlByCheckbox: function(id) {
 		var CheckedBoxes = new Array();
-		for (var h = 0; h < jQuery("input:checked").length; h++) {
-			if (typeof(jQuery("input:checked")[h].className) != "undefined" && jQuery("input:checked")[h].className.match('checkeddocid'+id)) {
-				CheckedBoxes.push(jQuery("input:checked")[h].value);
+		for (var h = 0; h < jQuery('input:checked').length; h++) {
+			if (typeof(jQuery('input:checked')[h].className) != 'undefined' && jQuery('input:checked')[h].className.match('checkeddocid'+id)) {
+				CheckedBoxes.push(jQuery('input:checked')[h].value);
 			}
 		}
 		return CheckedBoxes;

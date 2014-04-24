@@ -780,6 +780,7 @@ class DocumentGroup extends Error {
 			$this->clearMonitor();
 			return true;
 		}
+		$this->setError(_('Unable to move this folder to trash. Folder locked.'));
 		return false;
 	}
 	/**
@@ -855,8 +856,8 @@ class DocumentGroup extends Error {
 							// ugly hack in case of ppl injecting zip at / when there is not directory in the ZIP file...
 							// force upload in the first directory of the tree ...
 							if (!$this->getID()) {
-									$subGroupArrID = $this->getSubgroup(0);
-									$this->data_array['doc_group'] = $subGroupArrID[0];
+								$subGroupArrID = $this->getSubgroup(0);
+								$this->data_array['doc_group'] = $subGroupArrID[0];
 							}
 							if (strlen($dir_arr[$i]) < 5) {
 								$filename = $dir_arr[$i].' '._('(Title must be at least 5 characters.)');
@@ -914,6 +915,7 @@ class DocumentGroup extends Error {
 
 	/**
 	 * setLock - set the locking status of the doc_group.
+	 * recursive call. we lock all subfolders...
 	 *
 	 * @param	int	$stateLock	the status to be set
 	 * @param	string	$userid		the lock owner
@@ -931,6 +933,11 @@ class DocumentGroup extends Error {
 		$this->data_array['locked'] = $stateLock;
 		$this->data_array['locked_by'] = $userid;
 		$this->data_array['lockdate'] = $thistime;
+		$subGroupArray = $this->getSubgroup($this->getID(), $this->getState());
+		foreach ($subGroupArray as $docgroupId) {
+			$ndg = new DocumentGroup($this->Group, $docgroupId);
+			$ndg->setLock($stateLock, $userid, $thistime);
+		}
 		return true;
 	}
 

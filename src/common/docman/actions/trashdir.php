@@ -53,7 +53,7 @@ $currentParent = $dg->getParentID();
 
 if (!$dg->trash()) {
 	$error_msg = $dg->getErrorMessage();
-	session_redirect($redirecturl.'&dirid='.$currentParent);
+	session_redirect($redirecturl.'&dirid='.$dirid);
 }
 
 $feedback = sprintf(_('Documents folder %s moved to trash successfully.'), $dg->getName());
