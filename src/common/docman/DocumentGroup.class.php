@@ -516,7 +516,7 @@ class DocumentGroup extends Error {
 			$this->sendNotice(false);
 			return true;
 		} else {
-			$this->setOnUpdateError(sprintf(_('Error: %s'), db_error()));
+			$this->setOnUpdateError(_('Error')._(': '). db_error());
 			return false;
 		}
 	}
@@ -668,54 +668,46 @@ class DocumentGroup extends Error {
 			if ($dgf->isError())
 				exit_error($dgf->getErrorMessage(), 'docman');
 
-			$trashnested_groups =& $dgf->getNested();
+			$nested_groups =& $dgf->getNested($this->getState());
 
 			$df->setDocGroupID($this->getID());
 			$d_arr =& $df->getDocuments();
 
-			$trashnested_docs = array();
+			$nested_docs = array();
 			/* put the doc objects into an array keyed of the docgroup */
 			if (is_array($d_arr)) {
 				foreach ($d_arr as $doc) {
-					$trashnested_docs[$doc->getDocGroupID()][] = $doc;
-				}
-			}
-
-			if (is_array($trashnested_groups[$this->getID()])) {
-				foreach ($trashnested_groups[$this->getID()] as $dg) {
-					$localdf = new DocumentFactory($this->Group);
-					$localdf->setDocGroupID($dg->getID());
-					$d_arr =& $localdf->getDocuments();
-					if (is_array($d_arr)) {
-						foreach ($d_arr as $doc) {
-							$trashnested_docs[$doc->getDocGroupID()][] = $doc;
-						}
-					}
+					$nested_docs[$doc->getDocGroupID()][] = $doc;
 				}
 			}
 
 			$localdocgroup_arr = array();
 			$localdocgroup_arr[] = $this->getID();
-			if (is_array(@$trashnested_groups[$docgroup])) {
-				foreach ($trashnested_groups[$docgroup] as $dg) {
+			if (is_array($nested_groups[$this->getID()])) {
+				foreach ($nested_groups[$this->getID()] as $dg) {
 					if (!$dg->setStateID($stateid))
 						return false;
+
 					$localdocgroup_arr[] = $dg->getID();
+					$localdf = new DocumentFactory($this->Group);
+					$localdf->setDocGroupID($dg->getID());
+					$d_arr =& $localdf->getDocuments();
+					if (is_array($d_arr)) {
+						foreach ($d_arr as $doc) {
+							$nested_docs[$doc->getDocGroupID()][] = $doc;
+						}
+					}
 				}
 			}
 
 			foreach ($localdocgroup_arr as $docgroup_id) {
-				if (isset($trashnested_docs[$docgroup_id]) && is_array($trashnested_docs[$docgroup_id])) {
-					foreach ($trashnested_docs[$docgroup_id] as $d) {
+				if (isset($nested_docs[$docgroup_id]) && is_array($nested_docs[$docgroup_id])) {
+					foreach ($nested_docs[$docgroup_id] as $d) {
 						if (!$d->setState($stateid))
 							return false;
 					}
 				}
 			}
-
-			$dm = new DocumentManager($this->Group);
-			if (!$this->setParentDocGroupId($dm->getTrashID()))
-				return false;
 		}
 		return $this->setValueinDB(array('stateid'), array($stateid));
 	}
@@ -781,6 +773,8 @@ class DocumentGroup extends Error {
 			if (!$this->setStateID(2, true))
 				return false;
 
+			$dm = new DocumentManager($this->Group);
+			$this->setParentDocGroupId($dm->getTrashID());
 			$this->setLock(0);
 			$this->sendNotice(false);
 			$this->clearMonitor();
@@ -919,7 +913,7 @@ class DocumentGroup extends Error {
 	}
 
 	/**
-	 * setLock - set the locking status of the document.
+	 * setLock - set the locking status of the doc_group.
 	 *
 	 * @param	int	$stateLock	the status to be set
 	 * @param	string	$userid		the lock owner
