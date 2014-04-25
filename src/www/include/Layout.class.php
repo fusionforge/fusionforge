@@ -419,6 +419,8 @@ class Layout extends Error {
 
 		$this->quickNav();
 
+		plugin_hook('message', array());
+
 		?></td>
 		<td></td>
 	</tr>
