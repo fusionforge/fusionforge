@@ -46,6 +46,9 @@ define('DB_USER', getenv('DB_USER'));
 define('DB_PASSWORD', '@@FFDB_PASS@@');
 define('DB_INIT_CMD', "$FORGE_HOME/tests/func/db_reload.sh >>/var/log/db_reload_selenium.log 2>&1");
 
+// Prefix for commands to run
+define('RUN_COMMAND_PREFIX', '');
+
 // Cronjob wrapper script location
 print "Looking for forge_run_job script...\n";
 if (is_executable ("$FORGE_HOME/bin/forge_run_job")) {
