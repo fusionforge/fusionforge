@@ -24,11 +24,12 @@
  * Separate logs for each project homepages.
  * Best used with mod_vhost_alias and a shared CustomLog directive.
  * Not creating log directories because of faked hostnames.
+ * Caution: this will be run as root.  Keep it simple.
  */
 
 if (count($argv) < 3) {
 	echo "Usage: {$argv[0]} dir_template project_pregexp\n";
-	echo "   ex: CustomLog \"||{$argv[0]} /home/groups/%/logs/access.log /([-_a-zA-Z0-9]+)\.yourforge\.tld/\" combined\n";
+	echo "   ex: CustomLog \"||{$argv[0]} /home/logs/%/raw/access.log /([-_a-zA-Z0-9]+)\.yourforge\.tld/\" combined\n";
         exit(1);
 }
 $dir_template   = $argv[1];
