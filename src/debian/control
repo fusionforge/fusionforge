@@ -491,6 +491,19 @@ Description: Mediawiki plugin for FusionForge
  .
  This plugin allows each project to embed Mediawiki under a tab.
 
+Package: fusionforge-plugin-message
+Architecture: all
+Depends: gforge-web-apache2, ${misc:Depends}
+Description: Message plugin for FusionForge
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This plugin allows the site administrator to display a message banner
+ on all pages, e.g. for maintenance announcements.
+
 Package: fusionforge-plugin-moinmoin
 Architecture: all
 Depends: gforge-common (>= 4.8), gforge-db-postgresql (>= 4.8) | gforge-db, gforge-web-apache2 (>= 4.8) | gforge-web, python-moinmoin, python-psycopg2, libapache2-mod-wsgi, php5-cli, ${misc:Depends}

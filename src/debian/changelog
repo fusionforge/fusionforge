@@ -8,6 +8,7 @@ fusionforge (5.3-0) UNRELEASED; urgency=medium
     drop register-plugin/unregister-plugin
   * fusionforge-plugins-scmhook: added in fusionforge-full
   * fusionforge-plugins-hudson: trim dependencies
+  * fusionforge-plugins-message: initial packaging
   * gforge-common: can be purged when /var/lib/gforge is a mount point
   * gforge-mta-postif: install default Debian postfix configuration if
     there's none
