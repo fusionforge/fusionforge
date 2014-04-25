@@ -1,0 +1,4 @@
+Package: @PACKAGE@-plugin-message
+Architecture: all
+Depends: @OLDPACKAGE@-web-apache2, ${misc:Depends}
+Description: Message plugin for FusionForge
