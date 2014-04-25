@@ -715,6 +715,7 @@ class GitPlugin extends SCMPlugin {
 			fclose($fa);
 			chmod($faname.'.new', 0644);
 			rename($faname.'.new', $faname);
+			$engine->invalidateRoleCaches();  // caching all roles takes ~1GB RAM for 5K projects/15K users
 		}
 		fclose($f);
 		chmod($fname.'.new', 0644);
