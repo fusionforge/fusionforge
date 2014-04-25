@@ -39,14 +39,17 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 	    
 		// Run the cronjob to create repositories
 		$this->cron("create_scm_repos.php");
+		$this->cron("homedirs.php");
+		$this->reload_apache();
+		$this->reload_nscd();
 
 		// Get the address of the repo
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
-		$p = $this->getText("//tt[contains(.,'git clone http')]");
+		$p = $this->getText("//tt[contains(.,'git clone http') and contains(.,'".FORGE_ADMIN_USERNAME."@')]");
 		$p = preg_replace(",^git clone ,", "", $p);
-		$p = preg_replace(",://.*@,", "://root@", $p);
+		$p = preg_replace(",@,", ":".FORGE_ADMIN_PASSWORD."@", $p);
 
 		// Create a local clone, add stuff, push it to the repo
 		$t = exec("mktemp -d /tmp/gitTest.XXXXXX");
