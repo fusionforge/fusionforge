@@ -102,7 +102,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 
 	protected function runCommand($cmd)
 	{
-		system($cmd);
+		system(RUN_COMMAND_PREFIX.$cmd);
 	}
 
 	protected function db($sql)
@@ -118,6 +118,18 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	protected function cron_for_plugin($cmd, $plugin)
 	{
 		$this->runCommand(RUN_JOB_PATH."forge_run_plugin_job $plugin $cmd");
+	}
+
+	protected function reload_apache()
+	{
+		$this->runCommand("service apache2 reload > /dev/null 2>&1 || service httpd reload > /dev/null 2>&1");
+		sleep (3); // Give it some time to become available again
+	}
+
+	protected function reload_nscd()
+	{
+		$this->runCommand("service unscd restart > /dev/null 2>&1 || service nscd restart > /dev/null 2>&1");
+		sleep (1); // Give it some time to wake up
 	}
 
 	protected function init() {
@@ -419,6 +431,17 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->open( ROOT . '/projects/' . $unix_name) ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("This is the public description for $project."));
+	}
+
+	protected function uploadSshKey () {
+		$keys = file(getenv('HOME').'/.ssh/id_rsa.pub');
+		$k = $keys[0];
+		$this->assertEquals(count($keys), 1);
+
+		$this->clickAndWait("link=My Account");
+		$this->clickAndWait("link=Edit Keys");
+		$this->type("authorized_key", $k);
+		$this->clickAndWait("submit");
 	}
 }
 

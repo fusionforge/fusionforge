@@ -36,9 +36,14 @@ class ScmGitSSHTest extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=Source Code Admin");
 		$this->click("//input[@name='scmradio' and @value='scmgit']");
 		$this->clickAndWait("submit");
+
+		$this->uploadSshKey();
 	    
 		// Run the cronjob to create repositories
 		$this->cron("create_scm_repos.php");
+		$this->cron("homedirs.php");
+		$this->cron("ssh_create.php");
+		$this->reload_nscd();
 
 		// Get the address of the repo
 		$this->open(ROOT);
@@ -46,7 +51,6 @@ class ScmGitSSHTest extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=SCM");
 		$p = $this->getText("//tt[contains(.,'git clone git+ssh')]");
 		$p = preg_replace(",^git clone ,", "", $p);
-		$p = preg_replace(",://.*@,", "://root@", $p);
 
 		// Create a local clone, add stuff, push it to the repo
 		$t = exec("mktemp -d /tmp/gitTest.XXXXXX");
