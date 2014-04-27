@@ -454,7 +454,7 @@ echo '
 	</form>
 	</div>';
 if ($af->query_type == 'default') {
-	echo '<div class="tabbertab tabbertabdefault" title="'._('Default').'">';
+	echo '<div class="tabbertab tabbertabdefault" >';
 	echo '<strong>';
 	echo sprintf(_('Viewing only opened records by default, use “%1$s” or “%2$s” to change.'),
 				_('Advanced queries'),
