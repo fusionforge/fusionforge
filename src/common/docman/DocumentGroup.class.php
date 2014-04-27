@@ -639,7 +639,7 @@ class DocumentGroup extends Error {
 					$browselink .= '&childgroup_id='.$GLOBALS['childgroup_id'];
 				}
 				$browselink .= '&group_id='.$this->Group->getID();
-				$returnPath .= '/'.util_make_link($browselink, $this->getName(), array('title' => _('Browse this folder'), 'class' => 'tabtitle'));
+				$returnPath .= '/'.util_make_link($browselink, $this->getName(), array('title' => _('Browse this folder')));
 			} else {
 				$returnPath .= '/'.$this->getName();
 			}

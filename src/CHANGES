@@ -1,5 +1,7 @@
 Fusionforge-X.X:
-* Docman: Basic Webdav write mkcol, delete, put, move support (TrivialDev)
+* [#658] Docman: Basic Webdav write mkcol, delete, put, move support (TrivialDev)
+* [#657] Docman: Add move mass actions (TrivialDev)
+* [#656] General: drop tipsy plugin, use standard jQuery UI tooltip already provided (TrivialDev)
 
 FusionForge-5.3:
 * Widget: MyArtifacts Enhancement : add monitored artifacts (TrivialDev)

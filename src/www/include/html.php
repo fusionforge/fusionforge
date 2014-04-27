@@ -135,7 +135,7 @@ function html_blankimage($height, $width) {
 function html_abs_image($url, $width, $height, $args) {
 	global $use_tooltips;
 	$args['src'] = $url;
-	if (!$use_tooltips && isset($args['title']) && isset($args['class']) && preg_match('/tabtitle/', $args['class'])) {
+	if (!$use_tooltips && isset($args['title'])) {
 		$args['title'] = '';
 	}
 	if (!isset($args['alt'])) {
@@ -432,13 +432,6 @@ function html_get_tooltip_description($element_name) {
 
 function html_use_jquery() {
 	use_javascript('/scripts/jquery/jquery-1.8.3.js');
-}
-
-function html_use_tooltips() {
-	html_use_jquery();
-	use_javascript('/scripts/jquery-tipsy/src/javascripts/jquery.tipsy.js');
-	use_javascript('/js/jquery-common.js');
-	use_stylesheet('/scripts/jquery-tipsy/src/stylesheets/tipsy.css');
 }
 
 function html_use_storage() {
@@ -986,29 +979,29 @@ function site_user_header($params) {
 
 	$arr_t[] = _('My Personal Page');
 	$arr_l[] = '/my/';
-	$arr_attr[] = array('title' => _('View your personal page, a selection of widgets to follow the informations from projects.'), 'class' => 'tabtitle-nw');
+	$arr_attr[] = array('title' => _('View your personal page, a selection of widgets to follow the informations from projects.'));
 
 	if (forge_get_config('use_tracker')) {
 		$arr_t[] = _('My Trackers Dashboard');
 		$arr_l[] = '/my/dashboard.php';
-		$arr_attr[] = array('title' => _('View your tasks and artifacts.'), 'class' => 'tabtitle');
+		$arr_attr[] = array('title' => _('View your tasks and artifacts.'));
 	}
 
 	if (forge_get_config('use_diary')) {
 		$arr_t[] = _('My Diary and Notes');
 		$arr_l[] = '/my/diary.php';
-		$arr_attr[] = array('title' => _('Manage your diary. Add, modify or delete your notes.'), 'class' => 'tabtitle');
+		$arr_attr[] = array('title' => _('Manage your diary. Add, modify or delete your notes.'));
 	}
 
 	$arr_t[] = _('My Account');
 	$arr_l[] = '/account/';
-	$arr_attr[] = array('title' => _('Manage your account. Change your password, select your preferences.'), 'class' => 'tabtitle');
+	$arr_attr[] = array('title' => _('Manage your account. Change your password, select your preferences.'));
 
 	if (!forge_get_config('project_registration_restricted')
 			|| forge_check_global_perm('approve_projects', '')) {
 		$arr_t[] = _('Register Project');
 		$arr_l[] = '/register/';
-		$arr_attr[] = array('title' => _('Register a new project in forge, following the workflow.'), 'class' => 'tabtitle');
+		$arr_attr[] = array('title' => _('Register a new project in forge, following the workflow.'));
 	}
 
 	echo ($HTML->printSubMenu($arr_t, $arr_l, $arr_attr));
@@ -1094,7 +1087,7 @@ function relative_date($date) {
  */
 function html_eo($name, $attrs = array()) {
 	global $use_tooltips, $html_autoclose_pos;
-	if (!$use_tooltips && isset($attrs['title']) && isset($attrs['class']) && preg_match('/tabtitle/', $attrs['class'])) {
+	if (!$use_tooltips && isset($attrs['title'])) {
 		$attrs['title'] = '';
 	}
 	$rv = '';
@@ -1134,7 +1127,7 @@ function html_eo($name, $attrs = array()) {
  */
 function html_e($name, $attrs = array(), $content = "", $shortform = true) {
 	global $use_tooltips, $html_autoclose_pos;
-	if (!$use_tooltips && isset($attrs['title']) && isset($attrs['class']) && preg_match('/tabtitle/', $attrs['class'])) {
+	if (!$use_tooltips && isset($attrs['title'])) {
 		$attrs['title'] = '';
 	}
 	$rv = '';

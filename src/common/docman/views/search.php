@@ -43,8 +43,8 @@ $subprojectsIncluded = getStringFromPost('includesubprojects');
 $allchecked = "";
 $onechecked = "";
 $insideDocumentsCheckbox = "";
-$attrsInputSearchAll = array('type' => 'radio', 'name' => 'search_type', 'required' => 'required', 'value' => 'all', 'class' => 'tabtitle-nw', 'title' => _('All searched words are mandatory'));
-$attrsInputSearchOne = array('type' => 'radio', 'name' => 'search_type', 'required' => 'required', 'value' => 'one', 'class' => 'tabtitle', 'title' => _('At least one word must be found'));
+$attrsInputSearchAll = array('type' => 'radio', 'name' => 'search_type', 'required' => 'required', 'value' => 'all', 'title' => _('All searched words are mandatory'));
+$attrsInputSearchOne = array('type' => 'radio', 'name' => 'search_type', 'required' => 'required', 'value' => 'one', 'title' => _('At least one word must be found'));
 
 if (getStringFromPost('search_type') == "one") {
 	$attrsInputSearchOne['checked'] = 'checked';
@@ -63,7 +63,7 @@ echo html_ao('div', array('id' => 'docman_search_query_ckeckbox'));
 echo html_e('input', $attrsInputSearchAll)._('With all the words');
 echo html_e('input', $attrsInputSearchOne)._('With at least one of words');
 if ($g->useDocmanSearch()) {
-	$attrsInputInsideDocs = array('type' => 'checkbox', 'name'  => 'insideDocuments', 'value' => 1, 'class' => 'tabtitle', 'title' => _('Filename and contents are used to match searched words'));
+	$attrsInputInsideDocs = array('type' => 'checkbox', 'name'  => 'insideDocuments', 'value' => 1, 'title' => _('Filename and contents are used to match searched words'));
 	if ($insideDocuments)
 		$attrsInputInsideDocs['checked'] = 'checked';
 	echo html_e('input', $attrsInputInsideDocs)._('Inside documents');
@@ -73,7 +73,7 @@ if ($g->usesPlugin('projects-hierarchy')) {
 	$projectIDsArray = $projectsHierarchy->getFamily($group_id, 'child', true, 'validated');
 }
 if (isset($projectIDsArray) && is_array($projectIDsArray)) {
-	$attrsInputIncludeSubprojects = array('type' => 'checkbox', 'name'  => 'includesubprojects', 'value' => 1, 'class' => 'tabtitle', 'title' => _('search into childs following project hierarchy'));
+	$attrsInputIncludeSubprojects = array('type' => 'checkbox', 'name'  => 'includesubprojects', 'value' => 1, 'title' => _('search into childs following project hierarchy'));
 	if ($subprojectsIncluded)
 		$attrsInputIncludeSubprojects['checked'] = 'checked';
 	echo html_e('input', $attrsInputIncludeSubprojects)._('Include child projects');
@@ -158,7 +158,7 @@ if ($searchString) {
 			$cells[][] = $item["statename"];
 			$nextcell = '';
 			if ($localProject->getUnixName() != $g->getUnixName()) {
-				$nextcell .= util_make_link('/docman/?group_id='.$localProject->getID(), $localProject->getPublicName(), array('title' => _('Browse document manager for this project.'), 'class' => 'tabtitle-nw')).'::';
+				$nextcell .= util_make_link('/docman/?group_id='.$localProject->getID(), $localProject->getPublicName(), array('title' => _('Browse document manager for this project.'))).'::';
 			}
 			$nextcell .= html_e('i', array(), $docGroupObject->getPath(true, true), false);
 			$cells[][] = $nextcell;

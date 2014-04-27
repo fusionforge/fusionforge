@@ -188,13 +188,13 @@ class DocumentManager extends Error {
 				}
 
 				if ($nbDocs && (!isset($nbDocsPending) || $nbDocsPending == 0) && (!isset($nbDocsHidden) || $nbDocsHidden == 0) && (!isset($nbDocsPrivate) || $nbDocsPrivate) && (!isset($nbDocsTrashed) || $nbDocsTrashed)) {
-					$nbDocsLabel = html_e('span', array('class' => 'tabtitle-nw', 'title' => _('Number of documents in this folder')), '('.$nbDocs.')', false);
+					$nbDocsLabel = html_e('span', array('title' => _('Number of documents in this folder')), '('.$nbDocs.')', false);
 				}
 				if (isset($nbDocsPending) && isset($nbDocsHidden) && isset($nbDocsPrivate)) {
-					$nbDocsLabel = html_e('span', array('class' => 'tabtitle-nw', 'title' => _('Number of documents in this folder per status. active/pending/hidden/private')), '('.$nbDocs.'/'.$nbDocsPending.'/'.$nbDocsHidden.'/'.$nbDocsPrivate.')', false);
+					$nbDocsLabel = html_e('span', array('title' => _('Number of documents in this folder per status. active/pending/hidden/private')), '('.$nbDocs.'/'.$nbDocsPending.'/'.$nbDocsHidden.'/'.$nbDocsPrivate.')', false);
 				}
 				if (isset($nbDocsTrashed)) {
-					$nbDocsLabel = html_e('span', array('class' => 'tabtitle-nw', 'title' => _('Number of deleted documents in this folder')), '('.$nbDocsTrashed.')', false);
+					$nbDocsLabel = html_e('span', array('title' => _('Number of deleted documents in this folder')), '('.$nbDocsTrashed.')', false);
 				}
 				if ($localDg->getName() != '.trash') {
 					$lititle = '';
@@ -208,7 +208,7 @@ class DocumentManager extends Error {
 						}
 						$lititle .= _('Last Modified')._(': ').relative_date($localDg->getLastModifyDate());
 					}
-					echo html_ao('li', array('id' => 'leaf-'.$subGroupIdValue, 'class' => $liclass)).util_make_link($link, $localDg->getName(), array('class'=>'tabtitle-nw', 'title'=>$lititle)).$nbDocsLabel;
+					echo html_ao('li', array('id' => 'leaf-'.$subGroupIdValue, 'class' => $liclass)).util_make_link($link, $localDg->getName(), array('title'=>$lititle)).$nbDocsLabel;
 				} else {
 					echo html_ao('li', array('id' => 'leaf-'.$subGroupIdValue, 'class' => $liclass)).util_make_link($link, $localDg->getName()).$nbDocsLabel;
 				}

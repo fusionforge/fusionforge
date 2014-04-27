@@ -46,13 +46,13 @@ function scm_header($params) {
 	if (session_loggedin()) {
 		$params['TITLES'][] = _('View Source Code');
 		$params['DIRS'][] = '/scm/?group_id='.$params['group'];
-		$params['TOOLTIPS'][] = array('title' => _('Online Source code browsing'), 'class' => 'tabtitle');
+		$params['TOOLTIPS'][] = array('title' => _('Online Source code browsing'));
 		$params['TITLES'][] = _('Reporting');
 		$params['DIRS'][] = '/scm/reporting/?group_id='.$params['group'];
-		$params['TOOLTIPS'][] = array('title' => _('Global statistics on this SCM repository'), 'class' => 'tabtitle');
+		$params['TOOLTIPS'][] = array('title' => _('Global statistics on this SCM repository'));
 		$params['TITLES'][] = _('Administration');
 		$params['DIRS'][] = '/scm/admin/?group_id='.$params['group'];
-		$params['TOOLTIPS'][] = array('title' => _('Administration page : enable / disable options'), 'class' => 'tabtitle');
+		$params['TOOLTIPS'][] = array('title' => _('Administration page : enable / disable options'));
 
 		if (forge_check_perm('project_admin', $project->getID())) {
 			$params['submenu'] = $HTML->subMenu(

@@ -27,8 +27,8 @@ class MantisBTPlugin extends Plugin {
 
 	function __construct() {
 		$this->Plugin();
-		$this->name = "mantisbt";
-		$this->text = "MantisBT"; // To show in the tabs, use...
+		$this->name = 'mantisbt';
+		$this->text = 'MantisBT'; // To show in the tabs, use...
 		$this->_addHook('user_personal_links'); //to make a link to the user's personal part of the plugin
 		$this->_addHook('usermenu');
 		$this->_addHook('groupmenu'); // To put into the project tabs
@@ -51,7 +51,7 @@ class MantisBTPlugin extends Plugin {
 			case "usermenu": {
 				if ($G_SESSION->usesPlugin($this->name)) {
 					$param = '?type=user&user_id=' . $G_SESSION->getId() . '&pluginname=' . $this->name; // we indicate the part we're calling is the user one
-					echo $HTML->PrintSubMenu(array($this->text), array('/plugins/mantisbt/index.php' . $param), array(array('class'=> 'tabtitle', 'title' => _('Personal MantisBT page'))));
+					echo $HTML->PrintSubMenu(array($this->text), array('/plugins/mantisbt/index.php' . $param), array(array('title' => _('Personal MantisBT page'))));
 				}
 				$returned = true;
 				break;
@@ -88,7 +88,7 @@ class MantisBTPlugin extends Plugin {
 				if ($user->usesPlugin($this->name)) {
 					echo '<p>';
 					$arr_t = array();
-					$arr_t[] = array('title' => _('Manage your mantisbt account and follow your tickets'), 'class' => 'tabtitle');
+					$arr_t[] = array('title' => _('Manage your mantisbt account and follow your tickets'));
 					echo util_make_link('/plugins/'.$this->name.'/?user_id='.$userid.'&type=user&pluginname='.$this->name, _('View Personal MantisBT'), $arr_t);
 					echo '</p>';
 				}
@@ -101,7 +101,7 @@ class MantisBTPlugin extends Plugin {
 				$group = group_get_object($group_id);
 				if ($group->usesPlugin($this->name)) {
 					echo '<p>';
-					echo util_make_link("/plugins/mantisbt/?group_id=$group_id&type=admin&pluginname=".$this->name, _('View Admin MantisBT'), array('class' => 'tabtitle', 'title' => _('MantisBT administration page')));
+					echo util_make_link("/plugins/mantisbt/?group_id=$group_id&type=admin&pluginname=".$this->name, _('View Admin MantisBT'), array('title' => _('MantisBT administration page')));
 					echo '</p>';
 				}
 				$returned = true;
@@ -395,16 +395,16 @@ class MantisBTPlugin extends Plugin {
 		$labelPage[] = "/plugins/".$this->name."/?type=group&group_id=".$group_id."&pluginname=".$this->name."&view=roadmap";
 		$labelPage[] = "/plugins/".$this->name."/?type=group&group_id=".$group_id."&pluginname=".$this->name;
 		$labelAttr = array();
-		$labelAttr[] = array('title' => _('View the roadmap, per version tickets'), 'id' => 'roadmapView', 'class' => 'tabtitle-nw');
-		$labelAttr[] = array('title' => _('View all tickets.'), 'id' => 'ticketView', 'class' => 'tabtitle');
+		$labelAttr[] = array('title' => _('View the roadmap, per version tickets'), 'id' => 'roadmapView');
+		$labelAttr[] = array('title' => _('View all tickets.'), 'id' => 'ticketView');
 		$userperm = $group->getPermission();
 		if ($userperm->isAdmin()) {
 			$labelTitle[] = _('Administration');
 			$labelPage[] = "/plugins/".$this->name."/?type=admin&group_id=".$group_id."&pluginname=".$this->name;
 			$labelTitle[] = _('Statistics');
 			$labelPage[] = "/plugins/".$this->name."/?type=admin&group_id=".$group_id."&pluginname=".$this->name."&view=stat";
-			$labelAttr[] = array('title' => _('Manage versions, categories and general configuration.'), 'id' => 'adminView', 'class' => 'tabtitle');
-			$labelAttr[] = array('title' => _('View global statistics.'), 'id' => 'statView', 'class' => 'tabtitle');
+			$labelAttr[] = array('title' => _('Manage versions, categories and general configuration.'), 'id' => 'adminView');
+			$labelAttr[] = array('title' => _('View global statistics.'), 'id' => 'statView');
 		}
 
 		echo $HTML->subMenu($labelTitle, $labelPage, $labelAttr);
@@ -689,7 +689,7 @@ class MantisBTPlugin extends Plugin {
 	}
 
 	function getAdminOptionLink() {
-		return util_make_link('/plugins/'.$this->name.'/?type=globaladmin', _('Global MantisBT admin'), array('class' => 'tabtitle', 'title' => _('Direct link to global configuration of this plugin')));
+		return util_make_link('/plugins/'.$this->name.'/?type=globaladmin', _('Global MantisBT admin'), array('title' => _('Direct link to global configuration of this plugin')));
 	}
 
 

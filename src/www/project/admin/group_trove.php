@@ -71,8 +71,6 @@ if (getStringFromRequest('submit') && getStringFromRequest('root1')) {
 	session_redirect('/project/admin/?group_id='.$group_id);
 }
 
-html_use_tooltips();
-
 project_admin_header(array('title'=>_('Edit Trove Categorization'),'group'=>$group_id));
 
 ?>

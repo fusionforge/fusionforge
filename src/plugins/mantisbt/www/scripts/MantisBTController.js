@@ -23,7 +23,6 @@
 
 /*! MantisBTInitController
  * @param groupId the current FusionForge groupID
- * @param tipsyElements [{selector: "name", options:{delayIn: 1000, delayOut: 1000, fade: true, gravity: 's'}}]
  */
 MantisBTInitController = function(params)
 {

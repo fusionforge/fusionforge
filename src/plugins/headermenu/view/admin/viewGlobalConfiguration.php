@@ -75,14 +75,14 @@ if (sizeof($linksHeaderMenuArray)) {
 		$cells[][] = htmlspecialchars($link['name']);
 		$cells[][] = htmlspecialchars($link['description']);
 		if ($link['is_enable']) {
-			$cells[][] = html_image('docman/validate.png', 22, 22, array('alt'=>_('link is on'), 'class'=>'tabtitle', 'title'=>_('link is on')));
-			$content = util_make_link($actionurl.'&action=updateLinkStatus&linkid='.$link['id_headermenu'].'&linkstatus=0', html_image('docman/release-document.png', 22, 22, array('alt' => _('Desactivate this link'))), array('class' => 'tabtitle-ne', 'title' => _('Desactivate this link')));
+			$cells[][] = html_image('docman/validate.png', 22, 22, array('alt'=>_('link is on'), 'title'=>_('link is on')));
+			$content = util_make_link($actionurl.'&action=updateLinkStatus&linkid='.$link['id_headermenu'].'&linkstatus=0', html_image('docman/release-document.png', 22, 22, array('alt' => _('Desactivate this link'))), array('title' => _('Desactivate this link')));
 		} else {
-			$cells[][] = html_image('docman/delete-directory.png', 22, 22, array('alt'=>_('link is off'), 'class'=>'tabtitle', 'title'=>_('link is off')));
-			$content = util_make_link($actionurl.'&action=updateLinkStatus&linkid='.$link['id_headermenu'].'&linkstatus=1', html_image('docman/reserve-document.png', 22, 22, array('alt' => _('Activate this link'))), array('class' => 'tabtitle-ne', 'title' => _('Activate this link')));
+			$cells[][] = html_image('docman/delete-directory.png', 22, 22, array('alt'=>_('link is off'),'title'=>_('link is off')));
+			$content = util_make_link($actionurl.'&action=updateLinkStatus&linkid='.$link['id_headermenu'].'&linkstatus=1', html_image('docman/reserve-document.png', 22, 22, array('alt' => _('Activate this link'))), array('title' => _('Activate this link')));
 		}
-		$content .= util_make_link($actionurl.'&view=updateLinkValue&linkid='.$link['id_headermenu'], html_image('docman/edit-file.png', 22, 22, array('alt' => _('Edit this link'))), array('class' => 'tabtitle-ne', 'title' => _('Edit this link')));
-		$content .= util_make_link($actionurl.'&action=deleteLink&linkid='.$link['id_headermenu'], html_image('docman/trash-empty.png', 22, 22, array('alt' => _('Delete this link'))), array('class' => 'tabtitle-ne', 'title' => _('Delete this link')));
+		$content .= util_make_link($actionurl.'&view=updateLinkValue&linkid='.$link['id_headermenu'], html_image('docman/edit-file.png', 22, 22, array('alt' => _('Edit this link'))), array('title' => _('Edit this link')));
+		$content .= util_make_link($actionurl.'&action=deleteLink&linkid='.$link['id_headermenu'], html_image('docman/trash-empty.png', 22, 22, array('alt' => _('Delete this link'))), array('title' => _('Delete this link')));
 		$cells[][] = $content;
 		echo $HTML->multiTableRow(array('id' => $link['id_headermenu']), $cells);
 	}
@@ -109,14 +109,14 @@ if (sizeof($linksOuterMenuArray)) {
 		$cells[][] = htmlspecialchars($link['name']);
 		$cells[][] = htmlspecialchars($link['description']);
 		if ($link['is_enable']) {
-			$cells[][] = html_image('docman/validate.png', 22, 22, array('alt'=>_('link is on'), 'class'=>'tabtitle', 'title'=>_('link is on')));
-			$content = util_make_link($actionurl.'&action=updateLinkStatus&linkid='.$link['id_headermenu'].'&linkstatus=0', html_image('docman/release-document.png', 22, 22, array('alt'=>_('Desactivate this link'))), array('class' => 'tabtitle-ne', 'title' => _('Desactivate this link')));
+			$cells[][] = html_image('docman/validate.png', 22, 22, array('alt'=>_('link is on'), 'title'=>_('link is on')));
+			$content = util_make_link($actionurl.'&action=updateLinkStatus&linkid='.$link['id_headermenu'].'&linkstatus=0', html_image('docman/release-document.png', 22, 22, array('alt'=>_('Desactivate this link'))), array('title' => _('Desactivate this link')));
 		} else {
-			$cells[][] = html_image('docman/delete-directory.png', 22, 22, array('alt'=>_('link is off'), 'class'=>'tabtitle', 'title'=>_('link is off')));
-			$content = util_make_link($actionurl.'&action=updateLinkStatus&linkid='.$link['id_headermenu'].'&linkstatus=1', html_image('docman/reserve-document.png', 22, 22, array('alt'=>_('Activate this link'))), array('class' => 'tabtitle-ne', 'title' => _('Activate this link')));
+			$cells[][] = html_image('docman/delete-directory.png', 22, 22, array('alt'=>_('link is off'), 'title'=>_('link is off')));
+			$content = util_make_link($actionurl.'&action=updateLinkStatus&linkid='.$link['id_headermenu'].'&linkstatus=1', html_image('docman/reserve-document.png', 22, 22, array('alt'=>_('Activate this link'))), array('title' => _('Activate this link')));
 		}
-		$content .= util_make_link($actionurl.'&view=updateLinkValue&linkid='.$link['id_headermenu'], html_image('docman/edit-file.png',22,22, array('alt'=>_('Edit this link'))), array('class' => 'tabtitle-ne', 'title' => _('Edit this link')));
-		$content .= util_make_link($actionurl.'&action=deleteLink&linkid='.$link['id_headermenu'], html_image('docman/trash-empty.png',22,22, array('alt'=>_('Delete this link'))), array('class' => 'tabtitle-ne', 'title' => _('Delete this link')));
+		$content .= util_make_link($actionurl.'&view=updateLinkValue&linkid='.$link['id_headermenu'], html_image('docman/edit-file.png',22,22, array('alt'=>_('Edit this link'))), array('title' => _('Edit this link')));
+		$content .= util_make_link($actionurl.'&action=deleteLink&linkid='.$link['id_headermenu'], html_image('docman/trash-empty.png',22,22, array('alt'=>_('Delete this link'))), array('title' => _('Delete this link')));
 		$cells[][] = $content;
 		echo $HTML->multiTableRow(array('id' => $link['id_headermenu']), $cells);
 	}

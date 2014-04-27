@@ -64,7 +64,7 @@ class headermenuPlugin extends Plugin {
 				$project = group_get_object($group_id);
 				if ($project->usesPlugin($this->name)) {
 					echo '<p>'.util_make_link('/plugins/'.$this->name.'/?type=projectadmin&group_id='.$group_id,
-					     _('Menu Tabs Manager Admin'), array('class' => 'tabtitle', 'title' => _('Add/Remove/Activate/Desactivate tabs'))) . '</p>';
+					     _('Menu Tabs Manager Admin'), array('title' => _('Add/Remove/Activate/Desactivate tabs'))) . '</p>';
 				}
 				break;
 			}
@@ -109,7 +109,7 @@ class headermenuPlugin extends Plugin {
 	}
 
 	function getAdminOptionLink() {
-		return util_make_link('/plugins/'.$this->name.'/?type=globaladmin', _('Global HeaderMenu admin'), array('class' => 'tabtitle', 'title' => _('Direct link to global configuration of this plugin')));
+		return util_make_link('/plugins/'.$this->name.'/?type=globaladmin', _('Global HeaderMenu admin'), array('title' => _('Direct link to global configuration of this plugin')));
 	}
 
 	/**

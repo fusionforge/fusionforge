@@ -46,19 +46,19 @@ class ArtifactTypeFactoryHtml extends ArtifactTypeFactory {
 
 		$labels = array(_('View Trackers'));
 		$links  = array('/tracker/?group_id='.$group_id);
-		$attr   = array(array('title' => _('Get the list of available trackers'), 'class' => 'tabtitle-nw'));
+		$attr   = array(array('title' => _('Get the list of available trackers')));
 		$labels[] = _('Roadmap');
 		$links[]  = '/tracker/roadmap.php?group_id='.$group_id;
-		$attr[]   = array('title' => _('Display configured roadmaps'), 'class' => 'tabtitle');
+		$attr[]   = array('title' => _('Display configured roadmaps'));
 		if (session_loggedin()) {
 			$labels[] = _('Reporting');
 			$links[]  = '/tracker/reporting/?group_id='.$group_id;
-			$attr[]   = array('title' => _('Various graph of statistics.'), 'class' => 'tabtitle');
+			$attr[]   = array('title' => _('Various graph of statistics.'));
 			$perm = $this->Group->getPermission();
 			if ($perm && is_object($perm) && !$perm->isError() && $perm->isPMAdmin()) {
 				$labels[] = _('Administration');
 				$links[]  = '/tracker/admin/?group_id='.$group_id;
-				$attr[]   = array('title' => _('Global administration for trackers. Create, clone, workflow, fields ...'), 'class' => 'tabtitle');
+				$attr[]   = array('title' => _('Global administration for trackers. Create, clone, workflow, fields ...'));
 			}
 		}
 

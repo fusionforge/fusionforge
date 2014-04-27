@@ -36,15 +36,6 @@ var controller;
 
 jQuery(document).ready(function() {
 	controllerMantisBTInit = new MantisBTInitController({
-		tipsyElements:		[
-						{selector: 'mantisbtinit-global', options:{gravity: 'w', delayIn: 500, delayOut: 0, fade: true}},
-						{selector: '#mantisbtinit-url', options:{gravity: 'w', delayIn: 500, delayOut: 0, fade: true}},
-						{selector: '#mantisbtinit-user', options:{gravity: 'w', delayIn: 500, delayOut: 0, fade: true}},
-						{selector: '#mantisbtinit-password', options:{gravity: 'w', delayIn: 500, delayOut: 0, fade: true}},
-						{selector: '#mantisbtinit-create', options:{gravity: 'w', delayIn: 500, delayOut: 0, fade: true}},
-						{selector: '#mantisbtinit-name', options:{gravity: 'w', delayIn: 500, delayOut: 0, fade: true}},
-						{selector: '#mantisbtinit-syncroles', options:{gravity: 'w', delayIn: 500, delayOut: 0, fade: true}},
-					],
 		checkboxGlobalConf:	jQuery('#mantisbtglobalconf'),
 		checkboxCreate:		jQuery('#mantisbtcreate'),
 		inputName:		jQuery('#mantisbtname'),

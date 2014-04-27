@@ -24,38 +24,6 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-jQuery(function() {
-	if ( typeof(jQuery(window).tipsy) == 'function') {
-		jQuery('#tracker-monitor').tipsy({gravity: 'n', html: true, delayIn: 1000, delayOut: 500, fade: true});
-		jQuery('#tracker-summary').tipsy({gravity: 'w', delayIn: 1000, delayOut: 500, fade: true});
-		jQuery('#tracker-assigned_to').tipsy({gravity: 'w', delayIn: 1000, delayOut: 500, fade: true});
-		jQuery('#tracker-priority').tipsy({gravity: 'w', html: true, delayIn: 1000, delayOut: 500, fade: true});
-		jQuery('#tracker-status_id').tipsy({gravity: 'w', html: true, delayIn: 1000, delayOut: 500, fade: true});
-		jQuery('#tracker-description').tipsy({gravity: 'w', html: true, delayIn: 1000, delayOut: 500, fade: true});
-		jQuery('#tracker-canned_response').tipsy({gravity: 'w', html: true, delayIn: 1000, delayOut: 500, fade: true});
-		jQuery('#tracker-comment').tipsy({gravity: 'w', delayIn: 1000, delayOut: 500, fade: true});
-		jQuery('#tracker-new_artifact_type_id').tipsy({gravity: 'w', html:true, delayIn: 1000, delayOut: 500, fade: true});
-		jQuery('#tracker-manage-roles').tipsy({gravity: 'w', delayIn: 1000, delayOut: 500, fade: true});
-		jQuery('#tracker-vote').tipsy({gravity: 'w', delayIn: 1000, delayOut: 500, fade: true});
-		jQuery('#tracker-votes').tipsy({gravity: 'n', delayIn: 1000, delayOut: 500, fade: true});
-		jQuery('.forum_monitor').tipsy({gravity: 'n', html:true, delayIn: 1000, delayOut: 500, fade: true});
-		jQuery('.forum_save_place').tipsy({gravity: 'n', html:true, delayIn: 1000, delayOut: 500, fade: true});
-		jQuery('.forum_start_thread').tipsy({gravity: 'n', html:true, delayIn: 1000, delayOut: 500, fade: true});
-
-		jQuery('.forum_reply').tipsy({gravity: 'n', html:true, delayIn: 1000, delayOut: 500, fade: true});
-		jQuery('.forum_move').tipsy({gravity: 'ne', html:true, delayIn: 1000, delayOut: 500, fade: true});
-		jQuery('.forum_edit').tipsy({gravity: 'ne', html:true, delayIn: 1000, delayOut: 500, fade: true});
-		jQuery('.forum_delete').tipsy({gravity: 'ne', html:true, delayIn: 1000, delayOut: 500, fade: true});
-		jQuery('.forum_attach').tipsy({gravity: 'ne', html:true, delayIn: 1000, delayOut: 500, fade: true});
-		jQuery('.forum_attach_add').tipsy({gravity: 'ne', html:true, delayIn: 1000, delayOut: 500, fade: true});
-		jQuery('.forum_attach_edit').tipsy({gravity: 'ne', html:true, delayIn: 1000, delayOut: 500, fade: true});
-		jQuery('.forum_attach_delete').tipsy({gravity: 'ne', html:true, delayIn: 1000, delayOut: 500, fade: true});
-
-		jQuery('select.trove-nodes').tipsy({gravity: 'w', html:true, delayIn: 1000, delayOut: 500, fade: true});
-		jQuery('span.trove-nodes').tipsy({gravity: 'n', html:true, delayIn: 1000, delayOut: 500, fade: true});
-	}
-});
-
 jQuery(document).ready(function(){
 
 	// Show button and hide help text on load

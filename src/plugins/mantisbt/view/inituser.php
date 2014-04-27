@@ -27,25 +27,6 @@
 global $use_tooltips;
 global $type;
 
-?>
-
-<script type="text/javascript">
-var controller;
-
-jQuery(document).ready(function() {
-	controllerMantisBTInitUser = new MantisBTInitUserController({
-		tipsyElements:		[
-						{selector: '#mantisbtinit-user', options:{gravity: 'w', delayIn: 500, delayOut: 0, fade: true}},
-						{selector: '#mantisbtinit-password', options:{gravity: 'w', delayIn: 500, delayOut: 0, fade: true}},
-						{selector: '#mantisbtinit-create', options:{gravity: 'w', delayIn: 500, delayOut: 0, fade: true}},
-					],
-	});
-});
-
-</script>
-
-<?php
-
 echo '<form method="POST" Action="?type='.$type.'&pluginname='.$mantisbt->name.'&action=inituser" >';
 echo '<table>';
 echo '<tr><td><label id="mantisbtuseglobal-user" ';

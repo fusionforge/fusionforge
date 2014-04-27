@@ -37,7 +37,7 @@ if (!$projectsHierarchyProjectConf) {
 
 	echo '<tr><td><label id="projectsHierarchy-tree" ';
 	if ($use_tooltips)
-		echo 'class="tabtitle-nw" title="'._('Enable visibily in hierarchy tree.').'"';
+		echo 'title="'._('Enable visibily in hierarchy tree.').'"';
 	echo ' >'._('Enable Tree').'</label></td><td><input type="checkbox" name="tree" value="1"';
 	if ($projectsHierarchyProjectConf['tree'])
 		echo 'checked="checked" ';
@@ -46,7 +46,7 @@ if (!$projectsHierarchyProjectConf) {
 
 	echo '<tr><td><label id="projectsHierarchy-docman" ';
 	if ($use_tooltips)
-		echo 'class="tabtitle-nw" title="'._('Enable hierarchy in docman browsing. Direct access to docman features in parent docman tab.').'"';
+		echo 'title="'._('Enable hierarchy in docman browsing. Direct access to docman features in parent docman tab.').'"';
 	echo ' >'._('Enable Docman.').'</label></td><td><input type="checkbox" name="docman" value="1"';
 	if ($projectsHierarchyProjectConf['docman'])
 		echo 'checked="checked" ';
@@ -55,7 +55,7 @@ if (!$projectsHierarchyProjectConf) {
 
 	echo '<tr><td><label id="projectsHierarchy-delegate" ';
 	if ($use_tooltips)
-		echo 'class="tabtitle-nw" title="'._('Enable full rights and configuration delegation to parent.').'"';
+		echo 'title="'._('Enable full rights and configuration delegation to parent.').'"';
 	echo ' >'._('Enable delegate').'</label></td><td><input type="checkbox" name="delegate" value="1"';
 	if ($projectsHierarchyProjectConf['delegate'])
 		echo 'checked="checked" ';
@@ -63,7 +63,7 @@ if (!$projectsHierarchyProjectConf) {
 	echo '/></td></tr>';
 	echo '<tr><td><label id="projectsHierarchy-globalconf" ';
 	if ($use_tooltips)
-		echo 'class="tabtitle-nw" title="'._('Use forge global configuration. Superseed any configuration done at project level.').'"';
+		echo 'title="'._('Use forge global configuration. Superseed any configuration done at project level.').'"';
 	echo ' >'._('Use forge global configuration').'</label></td><td><input type="checkbox" name="globalconf" value="1"';
 	if ($projectsHierarchyProjectConf['globalconf'])
 		echo 'checked="checked" ';

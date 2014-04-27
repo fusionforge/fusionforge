@@ -36,7 +36,6 @@ Alias /images/ {core/source_path}/www/images/
 Alias /scripts/coolfieldset/ {core/source_path}/vendor/coolfieldset/
 Alias /scripts/jquery/ {core/source_path}/vendor/jquery/
 Alias /scripts/jquery-ui/ {core/source_path}/vendor/jquery-ui/
-Alias /scripts/jquery-tipsy/ {core/source_path}/vendor/jquery-tipsy/
 Alias /scripts/jquery-storage/ {core/source_path}/vendor/jquery-storage/
 Alias /scripts/jquery-simpletreemenu/ {core/source_path}/vendor/jquery-simpletreemenu/
 Alias /scripts/jquery-jqplot/ {core/source_path}/vendor/jquery-jqplot/

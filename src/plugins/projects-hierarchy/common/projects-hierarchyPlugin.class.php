@@ -89,7 +89,7 @@ class projects_hierarchyPlugin extends Plugin {
 				$group = group_get_object($group_id);
 				if ($group->usesPlugin($this->name)) {
 					echo '<p>';
-					echo util_make_link('/plugins/'.$this->name.'/?group_id='.$group_id.'&type=admin&pluginname='.$this->name, _('Hierarchy Admin'), array('class'=>'tabtitle', 'title'=>_('Configure the projets-hierarchy plugin (docman, tree, delegate, globalconf features)')));
+					echo util_make_link('/plugins/'.$this->name.'/?group_id='.$group_id.'&type=admin&pluginname='.$this->name, _('Hierarchy Admin'), array('title'=>_('Configure the projets-hierarchy plugin (docman, tree, delegate, globalconf features)')));
 					echo '</p>';
 				}
 				$returned = true;
@@ -115,8 +115,8 @@ class projects_hierarchyPlugin extends Plugin {
 					if (isset($hierarchy_used)) {
 						$hierarMenuTitle[] = _('Per Category');
 						$hierarMenuTitle[] = _('Per Hierarchy');
-						$hierarMenuAttr[] = array('title' => _('Browse per category the available projects. Some projects might not appear here they do not choose any categories'), 'class' => 'tabtitle-nw');
-						$hierarMenuAttr[] = array('title' => _('Browse per hierarchy. Projects can share relationship between projects, as father and sons'), 'class' => 'tabtitle');
+						$hierarMenuAttr[] = array('title' => _('Browse per category the available projects. Some projects might not appear here they do not choose any categories'));
+						$hierarMenuAttr[] = array('title' => _('Browse per hierarchy. Projects can share relationship between projects, as father and sons'));
 						$hierarMenuUrl[] = '/softwaremap/trove_list.php?cat=c';
 						$hierarMenuUrl[] = '/softwaremap/trove_list.php?cat=h';
 						echo ($HTML->subMenu($hierarMenuTitle, $hierarMenuUrl, $hierarMenuAttr));
@@ -593,7 +593,7 @@ class projects_hierarchyPlugin extends Plugin {
 	 * @access	public
 	 */
 	function getAdminOptionLink() {
-		return util_make_link('/plugins/'.$this->name.'/?type=globaladmin',_('Global Hierarchy admin'), array('class'=>'tabtitle', 'title'=>_('Configure the projets-hierarchy plugin (docman, tree, delegate, globalconf features)')));
+		return util_make_link('/plugins/'.$this->name.'/?type=globaladmin',_('Global Hierarchy admin'), array('title'=>_('Configure the projets-hierarchy plugin (docman, tree, delegate, globalconf features)')));
 	}
 
 	/**

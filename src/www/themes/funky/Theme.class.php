@@ -222,19 +222,11 @@ class Theme extends Layout {
 		if ($use_tooltips) {
 			echo html_ao('script', array('type' => 'text/javascript'));
 			echo '	//<![CDATA[
-				if (typeof(jQuery(window).tipsy) == \'function\') {
-					jQuery(document).ready(
-						function() {
-							jQuery(\'.tabtitle\').tipsy({delayIn: 500, delayOut: 0, fade: true});
-							jQuery(\'.tabtitle-nw\').tipsy({gravity: \'nw\', delayIn: 500, delayOut: 0, fade: true});
-							jQuery(\'.tabtitle-ne\').tipsy({gravity: \'ne\', delayIn: 500, delayOut: 0, fade: true});
-							jQuery(\'.tabtitle-w\').tipsy({gravity: \'w\', delayIn: 500, delayOut: 0, fade: true});
-							jQuery(\'.tabtitle-e\').tipsy({gravity: \'e\', delayIn: 500, delayOut: 0, fade: true});
-							jQuery(\'.tabtitle-sw\').tipsy({gravity: \'sw\', delayIn: 500, delayOut: 0, fade: true});
-							jQuery(\'.tabtitle-se\').tipsy({gravity: \'se\', delayIn: 500, delayOut: 0, fade: true});
-						}
-					);
-				}
+				jQuery(document).ready(
+					function() {
+						jQuery(document).tooltip();
+					}
+				);
 			//]]>'."\n";
 			echo html_ac(html_ap() -1);
 		}
@@ -259,22 +251,15 @@ class Theme extends Layout {
 			$attrs['class'] = 'tg-middle';
 			$attrs['style'] = 'width:'.$tabwidth.'%';
 			$return .= html_ao('td', $attrs);
-			if ($i == 0) {
-				$class_a = 'tabtitle-nw';
-			} else if ( $i == ($count - 1)) {
-				$class_a = 'tabtitle-ne';
-			} else {
-				$class_a = 'tabtitle';
-			}
 			$return .= html_ao('a', array('href' => $TABS_DIRS[$i], 'id' => md5($TABS_DIRS[$i])));
 			$attrs = array();
 			if ($selected == $i)
 				$attrs['class'] = 'selected';
 
 			$return .= html_ao('span', $attrs);
-			$attrs = array('title' => $TABS_TOOLTIPS[$i], 'class' => $class_a);
+			$attrs = array('title' => $TABS_TOOLTIPS[$i]);
 			if ($nested)
-				$attrs['class'] .= ' nested';
+				$attrs['class'] = 'nested';
 
 			$return .= html_e('span', $attrs, $TABS_TITLES[$i], false);
 			$return .= html_ac(html_ap() - 3);
@@ -406,7 +391,6 @@ class Theme extends Layout {
 			echo "\n".'//]]'."\n";
 			echo html_ac(html_ap() -1);
 		}
-		html_use_tooltips();
 		html_use_storage();
 		html_use_coolfieldset();
 		html_use_jqueryui();
