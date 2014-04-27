@@ -345,10 +345,10 @@ echo '
 //]]></script>
 <div id="tabber" class="tabber">
 	<ul>
-	<li><a href="#tabber-advancedquery">'._('Advanced queries').'</a></li>
-	<li><a href="#tabber-simplefiltering">'._('Simple Filtering and Sorting').'</a></li>
+	<li><a href="#tabber-advancedquery" title="'._('Use project project queries or build and use your own queries.').'">'._('Advanced queries').'</a></li>
+	<li><a href="#tabber-simplefiltering" title="'._('Filtering by assignee, state, priority.').'">'._('Simple Filtering and Sorting').'</a></li>
 	</ul>
-	<div id="tabber-advancedquery" title="'._('Advanced queries').'">';
+	<div id="tabber-advancedquery">';
 
 if (session_loggedin()) {
 	$res = db_query_params ('SELECT artifact_query_id,query_name, CASE WHEN query_type>0 THEN 1 ELSE 0 END as type
@@ -414,7 +414,7 @@ if (db_numrows($res)>0) {
 }
 echo '
 	</div>
-	<div id="tabber-simplefiltering" title="'._('Simple Filtering and Sorting').'">
+	<div id="tabber-simplefiltering">
 	<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&amp;atid='.$ath->getID().'" method="post">
 	<input type="hidden" name="query_id" value="-1" />
 	<input type="hidden" name="set" value="custom" />
