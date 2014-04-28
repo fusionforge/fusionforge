@@ -66,7 +66,7 @@ if ! [ -e .ssh/id_rsa.pub ] ; then
     ssh-keygen -f .ssh/id_rsa -N ''
     cat .ssh/id_rsa.pub >> .ssh/authorized_keys
 fi
-if ! grep -q StrictHostKeyChecking .ssh/config ; then
+if ! [ -e .ssh/config ] || ! grep -q StrictHostKeyChecking .ssh/config ; then
     echo StrictHostKeyChecking no >> .ssh/config
 fi
 
