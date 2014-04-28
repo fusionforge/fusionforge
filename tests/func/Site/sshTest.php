@@ -35,6 +35,7 @@ class SSHTest extends FForge_SeleniumTestCase
 		$this->cron("ssh_create.php");
 
 		$verbose = 0;
+		$v = '';
 		if ($verbose) {
 			system("echo 'Trying SSH' 1>&2", $ret);
 			$v = "-v";
