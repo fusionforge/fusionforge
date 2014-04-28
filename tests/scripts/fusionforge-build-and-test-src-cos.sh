@@ -6,7 +6,7 @@ get_config
 
 export FORGE_HOME=/opt/gforge
 export HOST=$1
-export FILTER="TarCentosTests.php"
+export FILTER="Testsuite-src-cos.php"
 
 case $HOST in
     centos5.local)
