@@ -21,7 +21,7 @@
 
 require_once dirname(dirname(__FILE__)).'/Testing/SeleniumGforge.php';
 
-class ScmGitSSHTest extends FForge_SeleniumTestCase
+class SSHTest extends FForge_SeleniumTestCase
 {
 	function testSSH()
 	{
