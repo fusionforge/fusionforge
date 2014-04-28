@@ -53,6 +53,8 @@ class ScmGitSSHTest extends FForge_SeleniumTestCase
 		$p = preg_replace(",^git clone ,", "", $p);
 
 		// Create a local clone, add stuff, push it to the repo
+		system("git config --global core.askpass ''", $ret);
+		$this->assertEquals($ret, 0);
 		$t = exec("mktemp -d /tmp/gitTest.XXXXXX");
 		system("cd $t && git clone --quiet $p", $ret);
 		$this->assertEquals($ret, 0);
