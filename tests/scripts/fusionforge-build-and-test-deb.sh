@@ -23,7 +23,7 @@ case $HOST in
 	;;
 esac	
 
-export FILTER="DEBDebian70Tests.php"
+export FILTER="Testsuite-deb.php"
 
 prepare_workspace
 
