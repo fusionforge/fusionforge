@@ -34,10 +34,16 @@ class SSHTest extends FForge_SeleniumTestCase
 		$this->cron("homedirs.php");
 		$this->cron("ssh_create.php");
 
-		system("echo 'Trying SSH' 1>&2", $ret);
-		system("ssh -v ".FORGE_ADMIN_USERNAME."@".HOST." true", $ret);
+		$verbose = 0;
+		if ($verbose) {
+			system("echo 'Trying SSH' 1>&2", $ret);
+			$v = "-v";
+		}
+		system("ssh $v ".FORGE_ADMIN_USERNAME."@".HOST." true", $ret);
 		$this->assertEquals($ret, 0);
-		system("echo 'End of SSH run' 1>&2", $ret);
+		if ($verbose) {
+			system("echo 'End of SSH run' 1>&2", $ret);
+		}
 	}
 
 	/**
