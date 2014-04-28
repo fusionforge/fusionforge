@@ -144,6 +144,7 @@ jQuery(document).ready(function() {
 		divEditDirectory:	jQuery('#editdocgroup'),
 		divMoveFile:		jQuery('#movefile'),
 		buttonAddItem:		jQuery('#docman-additem'),
+		buttonTrashDirectory:	jQuery('#docman-trashdirectory'),
 		buttonEditDirectory:	jQuery('#docman-editdirectory'),
 		docManURL:		'<?php echo util_make_uri('/docman') ?>',
 		divLeft:		jQuery('#leftdiv'),
@@ -152,7 +153,11 @@ jQuery(document).ready(function() {
 		divEditFile:		jQuery('#editFile'),
 		divEditTitle:		'<?php echo _('Edit document dialog box') ?>',
 		enableResize:		true,
-		page:			'listfile'
+		page:			'listfile',
+		docgroupId:		<?php echo $dirid ?>,
+		lockIntervalDelay:	60000,
+		imgroot:		'<?php echo $HTML->imgroot ?>',
+		lockedAction:		'<?php echo _('Action currently locked by another user.') ?>'
 	});
 });
 
@@ -172,7 +177,7 @@ if ($DocGroupName) {
 	if ($ndg->getLocked()) {
 		if ($ndg->getLockedBy() == $u->getID()) {
 			$ndg->setLock(0);
-		/* if you change the 60000 value below, please update here too */
+		/* if you change the 60000 lockIntervalDelay value, please update here too */
 		} elseif ((time() - $ndg->getLockdate()) > 600) {
 			$ndg->setLock(0);
 		}
@@ -180,15 +185,15 @@ if ($DocGroupName) {
 	if (!$ndg->getLocked()) {
 		if (forge_check_perm('docman', $ndg->Group->getID(), 'approve')) {
 			echo html_e('input', array('type' => 'hidden', 'id' => 'doc_group_id', 'value' => $ndg->getID()));
-			echo util_make_link('#', html_image('docman/configure-directory.png', 22, 22, array('alt' => 'edit')), array('class' => 'tabtitle', 'id' => 'docman-editdirectory', 'title' => _('Edit this folder'), 'onclick' => 'javascript:controllerListFile.toggleEditDirectoryView({lockIntervalDelay: 60000, doc_group:'.$ndg->getID().'})' ), true);
-			echo util_make_link($redirecturl.'&action=trashdir', html_image('docman/trash-empty.png', 22, 22, array('alt' => 'trashdir')), array('class' => 'tabtitle', 'id' => 'docman-trashdirectory', 'title' => _('Move this folder and his content to trash')));
+			echo util_make_link('#', html_image('docman/configure-directory.png', 22, 22, array('alt' => 'edit')), array('id' => 'docman-editdirectory', 'title' => _('Edit this folder'), 'onclick' => 'javascript:controllerListFile.toggleEditDirectoryView()' ), true);
+			echo util_make_link($redirecturl.'&action=trashdir', html_image('docman/trash-empty.png', 22, 22, array('alt' => 'trashdir')), array('id' => 'docman-trashdirectory', 'title' => _('Move this folder and his content to trash')));
 			if (!isset($nested_docs[$dirid]) && !isset($nested_groups[$dirid]) && !isset($nested_pending_docs[$dirid])) {
-				echo util_make_link($redirecturl.'&action=deldir', html_image('docman/delete-directory.png', 22, 22, array('alt' => 'deldir')), array('class' => 'tabtitle', 'id' => 'docman-deletedirectory', 'title' => _('Permanently delete this folder')));
+				echo util_make_link($redirecturl.'&action=deldir', html_image('docman/delete-directory.png', 22, 22, array('alt' => 'deldir')), array('id' => 'docman-deletedirectory', 'title' => _('Permanently delete this folder')));
 			}
 		}
 
 		if (forge_check_perm('docman', $group_id, 'submit')) {
-			echo util_make_link('#', html_image('docman/insert-directory.png', 22, 22, array('alt' => 'additem')), array('class' => 'tabtitle', 'id' => 'docman-additem', 'title' => _('Add a new item in this folder')), true);
+			echo util_make_link('#', html_image('docman/insert-directory.png', 22, 22, array('alt' => 'additem')), array('id' => 'docman-additem', 'title' => _('Add a new item in this folder')), true);
 		}
 	}
 
@@ -196,7 +201,7 @@ if ($DocGroupName) {
 	if (forge_check_perm('docman', $group_id, 'approve'))
 		$numPendingFiles = $ndg->getNumberOfDocuments(3);
 	if ($numFiles || (isset($numPendingFiles) && $numPendingFiles))
-		echo util_make_link('/docman/view.php/'.$ndg->Group->getID().'/zip/full/'.$dirid, html_image('docman/download-directory-zip.png',22,22,array('alt'=>'downloadaszip')), array('class' => 'tabtitle', 'title' => _('Download this folder as a ZIP')));
+		echo util_make_link('/docman/view.php/'.$ndg->Group->getID().'/zip/full/'.$dirid, html_image('docman/download-directory-zip.png',22,22,array('alt'=>'downloadaszip')), array('title' => _('Download this folder as a ZIP')));
 
 	if (session_loggedin()) {
 		if ($ndg->isMonitoredBy($u->getID())) {
@@ -206,7 +211,7 @@ if ($DocGroupName) {
 			$option = 'add';
 			$titleMonitor = _('Start monitoring this folder');
 		}
-		echo util_make_link($redirecturl.'&action=monitordirectory&option='.$option.'&directoryid='.$ndg->getID(), html_image('docman/monitor-'.$option.'document.png',22,22,array('alt'=>$titleMonitor)), array('class' => 'tabtitle-ne', 'title' => $titleMonitor));
+		echo util_make_link($redirecturl.'&action=monitordirectory&option='.$option.'&directoryid='.$ndg->getID(), html_image('docman/monitor-'.$option.'document.png',22,22,array('alt'=>$titleMonitor)), array('title' => $titleMonitor));
 	}
 	echo html_ac(html_ap() - 1);
 
@@ -224,7 +229,7 @@ if ($DocGroupName) {
 }
 
 if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
-	$tabletop = array(html_e('input', array('id' => 'checkallactive', 'type' => 'checkbox', 'title' => _('Select / Deselect all documents for massaction'), 'class' => 'tabtitle-w', 'onchange' => 'controllerListFile.checkAll("checkeddocidactive", "active")')), '', _('File Name'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'), _('View'));
+	$tabletop = array(html_e('input', array('id' => 'checkallactive', 'type' => 'checkbox', 'title' => _('Select / Deselect all documents for massaction'), 'onchange' => 'controllerListFile.checkAll("checkeddocidactive", "active")')), '', _('File Name'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'), _('View'));
 	$classth = array('unsortable', 'unsortable', '', '', '', '', '', '', '', '');
 	if (forge_check_perm('docman', $ndg->Group->getID(), 'approve')) {
 		$tabletop[] = _('Actions');
@@ -245,26 +250,26 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 			}
 		}
 		if (!$d->getLocked() && !$d->getReserved()) {
-			$cells[][] = html_e('input', array('type' => 'checkbox', 'value' => $d->getID(), 'class' => 'checkeddocidactive tabtitle-w', 'title' => _('Select / Deselect this document for massaction'), 'onchange' => 'controllerListFile.checkgeneral("active")'));
+			$cells[][] = html_e('input', array('type' => 'checkbox', 'value' => $d->getID(), 'class' => 'checkeddocidactive', 'title' => _('Select / Deselect this document for massaction'), 'onchange' => 'controllerListFile.checkgeneral("active")'));
 		} else {
 			if (session_loggedin() && ($d->getReservedBy() != $u->getID())) {
 				$cells[][] = html_e('input', array('type' => 'checkbox', 'name' => 'disabled', 'disabled' => 'disabled'));
 			} else {
-				$cells[][] = html_e('input', array('type' => 'checkbox', 'value' => $d->getID(), 'class' => 'checkeddocidactive tabtitle-w', 'title' => _('Select / Deselect this document for massaction'), 'onchange' => 'controllerListFile.checkgeneral("active")'));
+				$cells[][] = html_e('input', array('type' => 'checkbox', 'value' => $d->getID(), 'class' => 'checkeddocidactive', 'title' => _('Select / Deselect this document for massaction'), 'onchange' => 'controllerListFile.checkgeneral("active")'));
 			}
 		}
 		switch ($d->getFileType()) {
 			case 'URL': {
-				$cells[][] =  util_make_link($d->getFileName(), html_image($d->getFileTypeImage(), '22', '22', array('alt' => $d->getFileType())), array('class' => 'tabtitle-nw', 'title' => _('Visit this link')), true);
+				$cells[][] =  util_make_link($d->getFileName(), html_image($d->getFileTypeImage(), '22', '22', array('alt' => $d->getFileType())), array('title' => _('Visit this link')), true);
 				break;
 			}
 			default: {
-				$cells[][] =  util_make_link('/docman/view.php/'.$d->Group->getID().'/'.$d->getID().'/'.urlencode($d->getFileName()), html_image($d->getFileTypeImage(), '22', '22', array('alt' => $d->getFileType())), array('class' => 'tabtitle-nw', 'title' => _('View this document')));
+				$cells[][] =  util_make_link('/docman/view.php/'.$d->Group->getID().'/'.$d->getID().'/'.urlencode($d->getFileName()), html_image($d->getFileTypeImage(), '22', '22', array('alt' => $d->getFileType())), array('title' => _('View this document')));
 			}
 		}
 		$nextcell = '';
 		if (($d->getUpdated() && $time_new > (time() - $d->getUpdated())) || $time_new > (time() - $d->getCreated())) {
-			$nextcell = html_image('docman/new.png', '14', '14', array('alt' => _('new'), 'class' => 'tabtitle-ne', 'title' => _('Created or updated since less than 7 days'))).'&nbsp;';
+			$nextcell = html_image('docman/new.png', '14', '14', array('alt' => _('new'), 'title' => _('Created or updated since less than 7 days'))).'&nbsp;';
 		}
 		$cells[] = array($nextcell.$d->getFileName(), 'style' => 'word-wrap: break-word; max-width: 250px;');
 		$cells[] = array($d->getName(), 'style' => 'word-wrap: break-word; max-width: 250px;');
@@ -277,7 +282,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		}
 		$nextcell = '';
 		if ($d->getReserved()) {
-			$nextcell = html_image('docman/document-reserved.png', '22', '22', array('alt' => _('Reserved Document'), 'class' => 'tabtitle', 'title' => _('Reserved Document')));
+			$nextcell = html_image('docman/document-reserved.png', '22', '22', array('alt' => _('Reserved Document'), 'title' => _('Reserved Document')));
 			$reserved_by = $d->getReservedBy();
 			if ($reserved_by) {
 				$user = user_get_object($reserved_by);
@@ -308,20 +313,20 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 			}
 			$editfileaction .= '&group_id='.$GLOBALS['group_id'];
 			if (!$d->getLocked() && !$d->getReserved()) {
-				$nextcell .= util_make_link($redirecturl.'&action=trashfile&fileid='.$d->getID(), html_image('docman/trash-empty.png', 22, 22, array('alt' => _('Move this document to trash'))), array('class' => 'tabtitle-ne', 'title' => _('Move this document to trash')));
-				$nextcell .= util_make_link('#', html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this document'))), array('onclick' => 'javascript:controllerListFile.toggleEditFileView({action:\''.util_make_uri($editfileaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json').', docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').', title:\''.addslashes($d->getName()).'\', filename:\''.$d->getFilename().'\', description:\''.addslashes($d->getDescription()).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', isHtml:\''.$d->isHtml().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri('/docman').'\'})', 'class' => 'tabtitle-ne', 'title' => _('Edit this document')), true);
+				$nextcell .= util_make_link($redirecturl.'&action=trashfile&fileid='.$d->getID(), html_image('docman/trash-empty.png', 22, 22, array('alt' => _('Move this document to trash'))), array('title' => _('Move this document to trash')));
+				$nextcell .= util_make_link('#', html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this document'))), array('onclick' => 'javascript:controllerListFile.toggleEditFileView({action:\''.util_make_uri($editfileaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json').', docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').', title:\''.addslashes($d->getName()).'\', filename:\''.$d->getFilename().'\', description:\''.addslashes($d->getDescription()).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', isHtml:\''.$d->isHtml().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri('/docman').'\'})', 'title' => _('Edit this document')), true);
 				if (session_loggedin()) {
-					$nextcell .= util_make_link($redirecturl.'&action=reservefile&fileid='.$d->getID(), html_image('docman/reserve-document.png', 22, 22, array('alt' => _('Reserve this document'))), array('class' => 'tabtitle-ne', 'title' => _('Reserve this document for later edition')));
+					$nextcell .= util_make_link($redirecturl.'&action=reservefile&fileid='.$d->getID(), html_image('docman/reserve-document.png', 22, 22, array('alt' => _('Reserve this document'))), array('title' => _('Reserve this document for later edition')));
 				}
 			} else {
 				if (session_loggedin() && $d->getReservedBy() != $u->getID()) {
 					if (forge_check_perm('docman', $ndg->Group->getID(), 'admin')) {
-						$nextcell .= util_make_link($redirecturl.'&action=enforcereserve&fileid='.$d->getID(), html_image('docman/enforce-document.png',22,22,array('alt'=>_('Enforce reservation'))), array('class' => 'tabtitle-ne', 'title' => _('Enforce reservation')));
+						$nextcell .= util_make_link($redirecturl.'&action=enforcereserve&fileid='.$d->getID(), html_image('docman/enforce-document.png',22,22,array('alt'=>_('Enforce reservation'))), array('title' => _('Enforce reservation')));
 					}
 				} else {
-					$nextcell .= util_make_link($redirecturl.'&action=trashfile&fileid='.$d->getID(), html_image('docman/trash-empty.png', 22, 22, array('alt' => _('Move this document to trash'))), array('class' => 'tabtitle-ne', 'title' => _('Move this document to trash')));
-					$nextcell .= util_make_link('#', html_image('docman/edit-file.png', 22 ,22, array('alt' => _('Edit this document'))), array('onclick' => 'javascript:controllerListFile.toggleEditFileView({action:\''.util_make_uri($editfileaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json').', docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').', title:\''.addslashes($d->getName()).'\', filename:\''.$d->getFilename().'\', description:\''.addslashes($d->getDescription()).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', isHtml:\''.$d->isHtml().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri('/docman').'\'})', 'class' => 'tabtitle-ne', 'title' => _('Edit this document')), true);
-					$nextcell .= util_make_link($redirecturl.'&action=releasefile&fileid='.$d->getID(), html_image('docman/release-document.png', 22, 22, array('alt' => _('Release reservation'))), array('class' => 'tabtitle-ne', 'title' => _('Release reservation')));
+					$nextcell .= util_make_link($redirecturl.'&action=trashfile&fileid='.$d->getID(), html_image('docman/trash-empty.png', 22, 22, array('alt' => _('Move this document to trash'))), array('title' => _('Move this document to trash')));
+					$nextcell .= util_make_link('#', html_image('docman/edit-file.png', 22 ,22, array('alt' => _('Edit this document'))), array('onclick' => 'javascript:controllerListFile.toggleEditFileView({action:\''.util_make_uri($editfileaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json').', docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').', title:\''.addslashes($d->getName()).'\', filename:\''.$d->getFilename().'\', description:\''.addslashes($d->getDescription()).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', isHtml:\''.$d->isHtml().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri('/docman').'\'})', 'title' => _('Edit this document')), true);
+					$nextcell .= util_make_link($redirecturl.'&action=releasefile&fileid='.$d->getID(), html_image('docman/release-document.png', 22, 22, array('alt' => _('Release reservation'))), array('title' => _('Release reservation')));
 				}
 			}
 			if (session_loggedin()) {
@@ -332,7 +337,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 					$option = 'add';
 					$titleMonitor = _('Start monitoring this document');
 				}
-				$nextcell .= util_make_link($redirecturl.'&action=monitorfile&option='.$option.'&fileid='.$d->getID(), html_image('docman/monitor-'.$option.'document.png', 22, 22, array('alt' => $titleMonitor)), array('class' => 'tabtitle-ne', 'title' => $titleMonitor));
+				$nextcell .= util_make_link($redirecturl.'&action=monitorfile&option='.$option.'&fileid='.$d->getID(), html_image('docman/monitor-'.$option.'document.png', 22, 22, array('alt' => $titleMonitor)), array('title' => $titleMonitor));
 			}
 			$cells[][] = $nextcell;
 		}
@@ -341,18 +346,18 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 	echo $HTML->listTableBottom();
 	echo html_ao('p');
 	echo html_ao('span', array('id' => 'massactionactive', 'class' => 'hide'));
-	echo html_e('span', array('class' => 'tabtitle', 'id' => 'docman-massactionmessage', 'title' => _('Actions availables for selected documents, you need to check at least one document to get actions')), _('Mass actions for selected documents:'), false);
+	echo html_e('span', array('id' => 'docman-massactionmessage', 'title' => _('Actions availables for selected documents, you need to check at least one document to get actions')), _('Mass actions for selected documents:'), false);
 	if (forge_check_perm('docman', $ndg->Group->getID(), 'approve')) {
-		echo util_make_link('#', html_image('docman/trash-empty.png', 22, 22, array('alt' => _('Move to trash'))), array('onclick' => 'window.location.href=\''.util_make_uri($redirecturl.'&action=trashfile&fileid=\'+controllerListFile.buildUrlByCheckbox("active")'), 'class' => 'tabtitle-ne', 'title' => _('Move to trash')), true);
+		echo util_make_link('#', html_image('docman/trash-empty.png', 22, 22, array('alt' => _('Move to trash'))), array('onclick' => 'window.location.href=\''.util_make_uri($redirecturl.'&action=trashfile&fileid=\'+controllerListFile.buildUrlByCheckbox("active")'), 'title' => _('Move to trash')), true);
 		if (session_loggedin()) {
-			echo util_make_link('#', html_image('docman/reserve-document.png', 22, 22, array('alt' => _('Reserve'))), array('onclick' => 'window.location.href=\''.util_make_uri($redirecturl.'&action=reservefile&fileid=\'+controllerListFile.buildUrlByCheckbox("active")'), 'class' => 'tabtitle-ne', 'title' => _('Reserve for later edition')), true);
-			echo util_make_link('#', html_image('docman/release-document.png', 22, 22, array('alt' => _('Release reservation'))) , array('class' => 'tabtitle-ne', 'onclick' => 'window.location.href=\''.util_make_uri($redirecturl.'&action=releasefile&fileid=\'+controllerListFile.buildUrlByCheckbox("active")'), 'title' => _('Release reservation')), true);
-			echo util_make_link('#', html_image('docman/monitor-adddocument.png', 22, 22, array('alt' => _('Monitor'))), array('class' => 'tabtitle-ne', 'onclick' => 'window.location.href=\''.util_make_uri($redirecturl.'&action=monitorfile&option=add&fileid=\'+controllerListFile.buildUrlByCheckbox("active")'), 'title' => _('Monitor')), true);
-			echo util_make_link('#', html_image('docman/monitor-removedocument.png', 22, 22, array('alt' => _('Stop Monitoring'))), array('class' => 'tabtitle-ne', 'onclick' => 'window.location.href=\''.util_make_uri($redirecturl.'&action=monitorfile&option=remove&fileid=\'+controllerListFile.buildUrlByCheckbox("active")'), 'title' => _('Stop Monitoring')), true);
-			echo util_make_link('#', html_image('docman/move-document.png', 22, 22, array('alt' => _('Move files to another folder'))), array('class' => 'tabtitle-ne', 'onclick' => 'javascript:controllerListFile.toggleMoveFileView({})', 'title' => _('Move files to another folder')), true);
+			echo util_make_link('#', html_image('docman/reserve-document.png', 22, 22, array('alt' => _('Reserve'))), array('onclick' => 'window.location.href=\''.util_make_uri($redirecturl.'&action=reservefile&fileid=\'+controllerListFile.buildUrlByCheckbox("active")'), 'title' => _('Reserve for later edition')), true);
+			echo util_make_link('#', html_image('docman/release-document.png', 22, 22, array('alt' => _('Release reservation'))) , array('onclick' => 'window.location.href=\''.util_make_uri($redirecturl.'&action=releasefile&fileid=\'+controllerListFile.buildUrlByCheckbox("active")'), 'title' => _('Release reservation')), true);
+			echo util_make_link('#', html_image('docman/monitor-adddocument.png', 22, 22, array('alt' => _('Monitor'))), array('onclick' => 'window.location.href=\''.util_make_uri($redirecturl.'&action=monitorfile&option=add&fileid=\'+controllerListFile.buildUrlByCheckbox("active")'), 'title' => _('Monitor')), true);
+			echo util_make_link('#', html_image('docman/monitor-removedocument.png', 22, 22, array('alt' => _('Stop Monitoring'))), array('onclick' => 'window.location.href=\''.util_make_uri($redirecturl.'&action=monitorfile&option=remove&fileid=\'+controllerListFile.buildUrlByCheckbox("active")'), 'title' => _('Stop Monitoring')), true);
+			echo util_make_link('#', html_image('docman/move-document.png', 22, 22, array('alt' => _('Move files to another folder'))), array('onclick' => 'javascript:controllerListFile.toggleMoveFileView({})', 'title' => _('Move files to another folder')), true);
 		}
 	}
-	echo util_make_link('#', html_image('docman/download-directory-zip.png', 22, 22, array('alt' => _('Download as a ZIP'))) , array('class' => 'tabtitle', 'onclick' => 'window.location.href=\''.util_make_uri('/docman/view.php/'.$group_id.'/zip/selected/'.$dirid.'/\'+controllerListFile.buildUrlByCheckbox("active")'), 'title' => _('Download as a ZIP')), true);
+	echo util_make_link('#', html_image('docman/download-directory-zip.png', 22, 22, array('alt' => _('Download as a ZIP'))) , array('onclick' => 'window.location.href=\''.util_make_uri('/docman/view.php/'.$group_id.'/zip/selected/'.$dirid.'/\'+controllerListFile.buildUrlByCheckbox("active")'), 'title' => _('Download as a ZIP')), true);
 	echo html_ac(html_ap() - 3);
 	if (forge_check_perm('docman', $ndg->Group->getID(), 'approve') && session_loggedin()) {
 		echo html_ao('div', array('class' => 'docman_div_include hide', 'id' => 'movefile'));

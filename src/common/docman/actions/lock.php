@@ -36,7 +36,9 @@ if (!forge_check_perm('docman', $group_id, 'approve')) {
 }
 
 $itemid = getIntFromRequest('itemid');
-$lock = getIntFromRequest('lock');
+// hack to use this action as a getLocked action.
+// if the param lock is missing, then we return the status of the lock.
+$lock = getIntFromRequest('lock', 2);
 $type = getStringfromRequest('type');
 $childgroup_id = getIntFromRequest('childgroup_id');
 if ($childgroup_id) {
@@ -62,9 +64,14 @@ if ($objectType->isError()) {
 	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
 }
 
-if ($lock == 0) {
+if ($lock === 0) {
+	//release the lock
 	echo $objectType->setLock($lock);
-} else {
+} elseif ($lock === 1) {
+	//set the lock
 	echo $objectType->setLock($lock, $LUSER->getID(), time());
+} elseif ($lock === 2) {
+	//get the current status of the lock
+	echo $objectType->getLocked();
 }
 exit;

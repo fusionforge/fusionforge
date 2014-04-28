@@ -52,11 +52,11 @@ jQuery(document).ready(function() {
 echo html_ac(html_ap() - 1);
 echo html_ao('div', array('id' => 'tabs'));
 echo html_ao('ul');
-echo html_e('li', array(), util_make_link('#tabs-new-document', _('New Document'), array('id' => 'tab-new-document', 'class' => 'tabtitle', 'title' => _('Submit a new document in this folder.')), true), false);
+echo html_e('li', array(), util_make_link('#tabs-new-document', _('New Document'), array('id' => 'tab-new-document', 'title' => _('Submit a new document in this folder.')), true), false);
 
 if (forge_check_perm('docman', $group_id, 'approve')) {
-	echo html_e('li', array(), util_make_link('#tabs-new-folder', _('New Folder'), array('id' => 'tab-new-folder', 'class' => 'tabtitle', 'title' => _('Create a folder based on this name.')), true), false);
-	echo html_e('li', array(), util_make_link('#tabs-inject-tree', _('Inject Tree'), array('id' => 'tab-inject-tree', 'class' => 'tabtitle', 'title' => _('Create a full folders tree using an compressed archive. Only ZIP format support.')), true), false);
+	echo html_e('li', array(), util_make_link('#tabs-new-folder', _('New Folder'), array('id' => 'tab-new-folder', 'title' => _('Create a folder based on this name.')), true), false);
+	echo html_e('li', array(), util_make_link('#tabs-inject-tree', _('Inject Tree'), array('id' => 'tab-inject-tree', 'title' => _('Create a full folders tree using an compressed archive. Only ZIP format support.')), true), false);
 }
 
 echo html_ac(html_ap() -1);

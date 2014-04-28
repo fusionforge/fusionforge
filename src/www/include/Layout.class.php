@@ -419,6 +419,8 @@ class Layout extends Error {
 
 		$this->quickNav();
 
+		plugin_hook('message', array());
+
 		?></td>
 		<td></td>
 	</tr>
@@ -1366,19 +1368,19 @@ if (isset($params['group']) && $params['group']) {
 		if (forge_get_config('use_project_tags')) {
 			$subMenuTitle[] = _('Tag Cloud');
 			$subMenuUrl[] = '/softwaremap/tag_cloud.php';
-			$subMenuAttr[] = array('title' => _('Browse per tags defined by the projects.'), 'class' => 'tabtitle-nw');
+			$subMenuAttr[] = array('title' => _('Browse per tags defined by the projects.'));
 		}
 
 		if (forge_get_config('use_trove')) {
 			$subMenuTitle[] = _('Project Tree');
 			$subMenuUrl[] = '/softwaremap/trove_list.php';
-			$subMenuAttr[] = array('title' => _('Browse by Category'), 'class' => 'tabtitle');
+			$subMenuAttr[] = array('title' => _('Browse by Category'));
 		}
 
 		if (forge_get_config('use_project_full_list')) {
 			$subMenuTitle[] = _('Project List');
 			$subMenuUrl[] = '/softwaremap/full_list.php';
-			$subMenuAttr[] = array('title' => _('Complete listing of available projects.'), 'class' => 'tabtitle');
+			$subMenuAttr[] = array('title' => _('Complete listing of available projects.'));
 		}
 
 		// Allow plugins to add more softwaremap submenu entries

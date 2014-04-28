@@ -122,8 +122,6 @@ if (session_loggedin()) {
 		exit_no_group();
 	}
 
-	html_use_tooltips();
-
 	/*
 		Show the submit form
 	*/

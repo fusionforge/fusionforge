@@ -27,8 +27,6 @@
 global $group;
 global $atid;
 
-html_use_tooltips();
-
 //
 //	Create the ArtifactType object
 //

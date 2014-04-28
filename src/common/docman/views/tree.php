@@ -61,7 +61,7 @@ if (isset($projectIDsArray) && is_array($projectIDsArray)) {
 		if ($groupObject->usesDocman() && $projectsHierarchy->getDocmanStatus($groupObject->getID())
 			&& forge_check_perm('docman', $groupObject->getID(), 'read')) {
 			echo html_e('hr');
-			echo html_e('h5', array(), _('Child project')._(': ').util_make_link('/docman/?group_id='.$groupObject->getID(),$groupObject->getPublicName(), array('class'=>'tabtitle', 'title'=>_('Browse document manager for this project.'))), false);
+			echo html_e('h5', array(), _('Child project')._(': ').util_make_link('/docman/?group_id='.$groupObject->getID(),$groupObject->getPublicName(), array('title'=>_('Browse document manager for this project.'))), false);
 			$dmc = new DocumentManager($groupObject);
 			echo html_ao('ul', array('id' => $groupObject->getUnixname().'-tree'));
 			$dmc->getTree($dirid, $linkmenu);

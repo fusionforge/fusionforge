@@ -516,7 +516,7 @@ class DocumentGroup extends Error {
 			$this->sendNotice(false);
 			return true;
 		} else {
-			$this->setOnUpdateError(sprintf(_('Error: %s'), db_error()));
+			$this->setOnUpdateError(_('Error')._(': '). db_error());
 			return false;
 		}
 	}
@@ -639,7 +639,7 @@ class DocumentGroup extends Error {
 					$browselink .= '&childgroup_id='.$GLOBALS['childgroup_id'];
 				}
 				$browselink .= '&group_id='.$this->Group->getID();
-				$returnPath .= '/'.util_make_link($browselink, $this->getName(), array('title' => _('Browse this folder'), 'class' => 'tabtitle'));
+				$returnPath .= '/'.util_make_link($browselink, $this->getName(), array('title' => _('Browse this folder')));
 			} else {
 				$returnPath .= '/'.$this->getName();
 			}
@@ -668,54 +668,46 @@ class DocumentGroup extends Error {
 			if ($dgf->isError())
 				exit_error($dgf->getErrorMessage(), 'docman');
 
-			$trashnested_groups =& $dgf->getNested();
+			$nested_groups =& $dgf->getNested($this->getState());
 
 			$df->setDocGroupID($this->getID());
 			$d_arr =& $df->getDocuments();
 
-			$trashnested_docs = array();
+			$nested_docs = array();
 			/* put the doc objects into an array keyed of the docgroup */
 			if (is_array($d_arr)) {
 				foreach ($d_arr as $doc) {
-					$trashnested_docs[$doc->getDocGroupID()][] = $doc;
-				}
-			}
-
-			if (is_array($trashnested_groups[$this->getID()])) {
-				foreach ($trashnested_groups[$this->getID()] as $dg) {
-					$localdf = new DocumentFactory($this->Group);
-					$localdf->setDocGroupID($dg->getID());
-					$d_arr =& $localdf->getDocuments();
-					if (is_array($d_arr)) {
-						foreach ($d_arr as $doc) {
-							$trashnested_docs[$doc->getDocGroupID()][] = $doc;
-						}
-					}
+					$nested_docs[$doc->getDocGroupID()][] = $doc;
 				}
 			}
 
 			$localdocgroup_arr = array();
 			$localdocgroup_arr[] = $this->getID();
-			if (is_array(@$trashnested_groups[$docgroup])) {
-				foreach ($trashnested_groups[$docgroup] as $dg) {
+			if (is_array($nested_groups[$this->getID()])) {
+				foreach ($nested_groups[$this->getID()] as $dg) {
 					if (!$dg->setStateID($stateid))
 						return false;
+
 					$localdocgroup_arr[] = $dg->getID();
+					$localdf = new DocumentFactory($this->Group);
+					$localdf->setDocGroupID($dg->getID());
+					$d_arr =& $localdf->getDocuments();
+					if (is_array($d_arr)) {
+						foreach ($d_arr as $doc) {
+							$nested_docs[$doc->getDocGroupID()][] = $doc;
+						}
+					}
 				}
 			}
 
 			foreach ($localdocgroup_arr as $docgroup_id) {
-				if (isset($trashnested_docs[$docgroup_id]) && is_array($trashnested_docs[$docgroup_id])) {
-					foreach ($trashnested_docs[$docgroup_id] as $d) {
+				if (isset($nested_docs[$docgroup_id]) && is_array($nested_docs[$docgroup_id])) {
+					foreach ($nested_docs[$docgroup_id] as $d) {
 						if (!$d->setState($stateid))
 							return false;
 					}
 				}
 			}
-
-			$dm = new DocumentManager($this->Group);
-			if (!$this->setParentDocGroupId($dm->getTrashID()))
-				return false;
 		}
 		return $this->setValueinDB(array('stateid'), array($stateid));
 	}
@@ -781,11 +773,14 @@ class DocumentGroup extends Error {
 			if (!$this->setStateID(2, true))
 				return false;
 
+			$dm = new DocumentManager($this->Group);
+			$this->setParentDocGroupId($dm->getTrashID());
 			$this->setLock(0);
 			$this->sendNotice(false);
 			$this->clearMonitor();
 			return true;
 		}
+		$this->setError(_('Unable to move this folder to trash. Folder locked.'));
 		return false;
 	}
 	/**
@@ -861,8 +856,8 @@ class DocumentGroup extends Error {
 							// ugly hack in case of ppl injecting zip at / when there is not directory in the ZIP file...
 							// force upload in the first directory of the tree ...
 							if (!$this->getID()) {
-									$subGroupArrID = $this->getSubgroup(0);
-									$this->data_array['doc_group'] = $subGroupArrID[0];
+								$subGroupArrID = $this->getSubgroup(0);
+								$this->data_array['doc_group'] = $subGroupArrID[0];
 							}
 							if (strlen($dir_arr[$i]) < 5) {
 								$filename = $dir_arr[$i].' '._('(Title must be at least 5 characters.)');
@@ -919,7 +914,8 @@ class DocumentGroup extends Error {
 	}
 
 	/**
-	 * setLock - set the locking status of the document.
+	 * setLock - set the locking status of the doc_group.
+	 * recursive call. we lock all subfolders...
 	 *
 	 * @param	int	$stateLock	the status to be set
 	 * @param	string	$userid		the lock owner
@@ -937,6 +933,11 @@ class DocumentGroup extends Error {
 		$this->data_array['locked'] = $stateLock;
 		$this->data_array['locked_by'] = $userid;
 		$this->data_array['lockdate'] = $thistime;
+		$subGroupArray = $this->getSubgroup($this->getID(), $this->getState());
+		foreach ($subGroupArray as $docgroupId) {
+			$ndg = new DocumentGroup($this->Group, $docgroupId);
+			$ndg->setLock($stateLock, $userid, $thistime);
+		}
 		return true;
 	}
 

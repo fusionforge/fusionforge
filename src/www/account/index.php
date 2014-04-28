@@ -301,8 +301,8 @@ if (forge_get_config('use_shell')) {
 	echo $HTML->boxTop(_('Shell Account Information')."");
 	if ($u->getUnixStatus() == 'A') {
 		print '&nbsp;
-	<br />'._('Shell box').': <strong>'.$u->getUnixBox().'</strong>
-	<br />'._('SSH Shared Authorized Keys').': <strong>';
+	<br />'._('Shell box')._(': ').'<strong>'.$u->getUnixBox().'</strong>
+	<br />'._('SSH Shared Authorized Keys')._(': ').'<strong>';
 		global $HTML;
 		$sshKeysArray = $u->getAuthorizedKeys();
 		if (is_array($sshKeysArray) && count($sshKeysArray)) {
@@ -310,25 +310,24 @@ if (forge_get_config('use_shell')) {
 			$classth = array('', '', '', '', '');
 			echo $HTML->listTableTop($tabletop, false, 'sortable_sshkeys_listlinks', 'sortable', $classth);
 			foreach($sshKeysArray as $sshKey) {
-				echo '<tr>';
-				echo '<td>'.$sshKey['name'].'</td>';
-				echo '<td>'.$sshKey['algorithm'].'</td>';
-				echo '<td>'.$sshKey['fingerprint'].'</td>';
-				echo '<td>'.date(_('Y-m-d H:i'), $sshKey['upload']).'</td>';
+				$cells = array();
+				$cells[][] = $sshKey['name'];
+				$cells[][] = $sshKey['algorithm'];
+				$cells[][] = $sshKey['fingerprint'];
+				$cells[][] = date(_('Y-m-d H:i'), $sshKey['upload']);
 				if ($sshKey['deploy']) {
-					$image = html_image('docman/validate.png', 22, 22, array('alt'=>_('ssh key is deployed.'), 'class'=>'tabtitle', 'title'=>_('ssh key is deployed.')));
+					$cells[][] = html_image('docman/validate.png', 22, 22, array('alt'=>_('ssh key is deployed.'), 'title'=>_('ssh key is deployed.')));
 				} else {
-					$image = html_image('waiting.png', 22, 22, array('alt'=>_('ssh key is not deployed yet.'), 'class'=>'tabtitle', 'title'=>_('ssh key is not deployed yet.')));
+					$cells[][] = html_image('waiting.png', 22, 22, array('alt'=>_('ssh key is not deployed yet.'), 'title'=>_('ssh key is not deployed yet.')));
 				}
-				echo '<td>'.$image.'</td>';
-				echo '</tr>';
+				echo $HTML->multiTableRow(array(), $cells);
 			}
 			echo $HTML->listTableBottom();
 		} else {
 			print '0';
 		}
 		print '</strong>';
-		print '<br />' . util_make_link("account/editsshkeys.php",_('Edit Keys'));
+		print '<br />' . util_make_link('/account/editsshkeys.php', _('Edit Keys'));
 	} else {
 		echo $HTML->warning_msg(_('Shell Account deactivated'));
 	}
@@ -340,8 +339,7 @@ if (forge_get_config('use_shell')) {
 </tr>
 
 </table>
-<span><?php echo sprintf(_('%s Mandatory fields'), utils_requiredField())?></span>
-
+<?php echo $HTML->addRequiredFieldsInfoBox() ?>
 <p class="align-center">
 <input type="submit" name="submit" value="<?php echo _('Update'); ?>" />
 <input type="reset" name="reset" value="<?php echo _('Reset Changes'); ?>" />

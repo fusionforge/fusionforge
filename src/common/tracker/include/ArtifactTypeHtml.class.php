@@ -51,37 +51,37 @@ class ArtifactTypeHtml extends ArtifactType {
 
 		$labels[] = _("View Trackers");
 		$links[]  = '/tracker/?group_id='.$group_id;
-		$attr[]   = array('title' => _('Get the list of available trackers'), 'class' => 'tabtitle-nw');
+		$attr[]   = array('title' => _('Get the list of available trackers'));
 		$labels[] = $this->getName();
 		$links[]  = '/tracker/?func=browse&group_id='.$group_id.'&atid='. $this->getID();
-		$attr[]   = array('title' => _('Browse this tracker.'), 'class' => 'tabtitle');
+		$attr[]   = array('title' => _('Browse this tracker.'));
 		$labels[] = _('Export CSV');
 		$links[]  = '/tracker/?func=csv&group_id='.$group_id.'&atid='. $this->getID();
-		$attr[]   = array('title' => _('Download data from this tracker as csv file.'), 'class' => 'tabtitle');
+		$attr[]   = array('title' => _('Download data from this tracker as csv file.'));
 		if (forge_check_perm ('tracker',$this->getID(),'submit')) {
 			$labels[] = _('Submit New');
 			$links[]  = '/tracker/?func=add&group_id='.$group_id.'&atid='. $this->getID();
-			$attr[]   = array('title' => _('Add a new issue.'), 'class' => 'tabtitle');
+			$attr[]   = array('title' => _('Add a new issue.'));
 		}
 
 		if (session_loggedin()) {
 			$labels[] = _('Reporting');
 			$links[]  = '/tracker/reporting/?group_id='.$group_id.'&atid='. $this->getID();
-			$attr[]   = array('title' => _('Various graph about statistics.'), 'class' => 'tabtitle');
+			$attr[]   = array('title' => _('Various graph about statistics.'));
 			if ($this->isMonitoring()) {
 				$labels[] = _('Stop Monitor');
 				$links[]  = '/tracker/?group_id='.$group_id.'&atid='. $this->getID().'&func=monitor&stop=1';
-				$attr[]   = array('title' => _('Remove this tracker from your monitoring.'), 'class' => 'tabtitle');
+				$attr[]   = array('title' => _('Remove this tracker from your monitoring.'));
 			} else {
 				$labels[] = _('Monitor');
 				$links[]  = '/tracker/?group_id='.$group_id.'&atid='. $this->getID().'&func=monitor&start=1';
-				$attr[]   = array('title' => _('Add this tracker from your monitoring.'), 'class' => 'tabtitle');
+				$attr[]   = array('title' => _('Add this tracker from your monitoring.'));
 			}
 
 			if (forge_check_perm ('tracker', $this->getID(), 'manager')) {
 				$labels[] = _('Administration');
 				$links[]  = '/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID();
-				$attr[]   = array('title' => _('Global administration for trackers. Create, clone, workflow, fields ...'), 'class' => 'tabtitle');
+				$attr[]   = array('title' => _('Global administration for trackers. Create, clone, workflow, fields ...'));
 			}
 		}
 

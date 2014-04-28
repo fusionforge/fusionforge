@@ -40,10 +40,10 @@ class ScmGitSSHTest extends FForge_SeleniumTestCase
 		$this->uploadSshKey();
 	    
 		// Run the cronjob to create repositories
+		$this->reload_nscd();
 		$this->cron("create_scm_repos.php");
 		$this->cron("homedirs.php");
 		$this->cron("ssh_create.php");
-		$this->reload_nscd();
 
 		// Get the address of the repo
 		$this->open(ROOT);
@@ -53,6 +53,8 @@ class ScmGitSSHTest extends FForge_SeleniumTestCase
 		$p = preg_replace(",^git clone ,", "", $p);
 
 		// Create a local clone, add stuff, push it to the repo
+		system("git config --global core.askpass ''", $ret);
+		$this->assertEquals($ret, 0);
 		$t = exec("mktemp -d /tmp/gitTest.XXXXXX");
 		system("cd $t && git clone --quiet $p", $ret);
 		$this->assertEquals($ret, 0);

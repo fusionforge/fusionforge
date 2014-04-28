@@ -63,7 +63,7 @@ class quota_managementPlugin extends Plugin {
 				$params['labels'][] = _ ('Quota');
 				$group_id = $params['group'];
 				$params['links'][] = '/plugins/quota_management/index.php?id='.$group_id.'&type=admin&pluginname='.$this->name;
-				$params['attr_r'][] = array('class' => 'tabtitle', 'title' => _('View the quota_management Administration'));
+				$params['attr_r'][] = array('title' => _('View the quota_management Administration'));
 				$returned = true;
 				break;
 			}

@@ -273,7 +273,7 @@ class Plugin extends Error {
 			echo "</td>\n";
 			$pluginObject = plugin_get_object($this->name);
 			if (method_exists($pluginObject, 'getPluginDescription')) {
-				echo '<td class="tabtitle" title="'.$description = $pluginObject->getPluginDescription().'">';
+				echo '<td title="'.$description = $pluginObject->getPluginDescription().'">';
 			} else {
 				echo "</td>\n";
 			}
@@ -281,7 +281,7 @@ class Plugin extends Error {
 			printf(_("Use %s"), $this->text);
 			echo "</strong>";
 			echo " ";
-			echo html_image($imgStatus, '16', '16',array('alt'=>$title, 'title'=>$title, 'class'=>'tabtitle-sw'));
+			echo html_image($imgStatus, '16', '16',array('alt'=>$title, 'title'=>$title));
 			echo "</td>\n";
 			echo "</tr>\n";
 		}

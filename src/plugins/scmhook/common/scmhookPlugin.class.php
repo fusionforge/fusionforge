@@ -312,7 +312,7 @@ class scmhookPlugin extends Plugin {
 				}
 				echo '</td><td';
 				if (!$hookPreCommit->isAvailable())
-					echo ' class="tabtitle-w" title="'.$hookPreCommit->getDisabledMessage().'"';
+					echo ' title="'.$hookPreCommit->getDisabledMessage().'"';
 
 				echo ' >';
 				echo $hookPreCommit->getName();
@@ -355,7 +355,7 @@ class scmhookPlugin extends Plugin {
 				}
 				echo '</td><td';
 				if (!$hook->isAvailable())
-					echo ' class="tabtitle-w" title="'.$hook->getDisabledMessage().'"';
+					echo ' title="'.$hook->getDisabledMessage().'"';
 
 				echo ' >';
 				echo $hook->getName();
@@ -399,7 +399,7 @@ class scmhookPlugin extends Plugin {
 				}
 				echo '</td><td';
 				if (!$hookPostCommit->isAvailable())
-					echo ' class="tabtitle-w" title="'.$hookPostCommit->getDisabledMessage().'"';
+					echo ' title="'.$hookPostCommit->getDisabledMessage().'"';
 
 				echo ' >';
 				echo $hookPostCommit->getName();
@@ -461,7 +461,7 @@ class scmhookPlugin extends Plugin {
 
 				echo '</td><td';
 				if (!$hookServePushPullBundle->isAvailable())
-					echo ' class="tabtitle-w" title="'.$hookServePushPullBundle->getDisabledMessage().'"';
+					echo ' title="'.$hookServePushPullBundle->getDisabledMessage().'"';
 
 				echo ' >';
 				echo $hookServePushPullBundle->getName();
@@ -522,7 +522,7 @@ class scmhookPlugin extends Plugin {
 
 				echo '</td><td';
 				if (!$hookPostReceive->isAvailable())
-					echo ' class="tabtitle-w" title="'.$hookPostReceive->getDisabledMessage().'"';
+					echo ' title="'.$hookPostReceive->getDisabledMessage().'"';
 
 				echo ' >';
 				echo $hookPostReceive->getName();

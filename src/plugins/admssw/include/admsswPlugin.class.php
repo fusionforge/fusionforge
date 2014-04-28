@@ -137,7 +137,7 @@ class admsswPlugin extends Plugin {
 
 		$params['TITLES'][] = _('ADMS.SW meta-data');
 		$params['URLS'][] = '/plugins/'. $this->name .'/index.php';
-		$params['ATTRS'][] = array('title' => _('ADMS.SW RDF meta-data about forge projects.'), 'class' => 'tabtitle');
+		$params['ATTRS'][] = array('title' => _('ADMS.SW RDF meta-data about forge projects.'));
 	}
 
 	/**

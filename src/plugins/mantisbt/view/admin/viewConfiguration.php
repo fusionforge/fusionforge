@@ -34,13 +34,6 @@ var controller;
 
 jQuery(document).ready(function() {
 	controllerMantisBTAdminViewControler = new MantisBTAdminViewController({
-		tipsyElements:		[
-						{selector: '#mantisbtinit-global', options:{gravity: 'w', delayIn: 500, delayOut: 0, fade: true}},
-						{selector: '#mantisbtinit-url', options:{gravity: 'w', delayIn: 500, delayOut: 0, fade: true}},
-						{selector: '#mantisbtinit-user', options:{gravity: 'w', delayIn: 500, delayOut: 0, fade: true}},
-						{selector: '#mantisbtinit-password', options:{gravity: 'w', delayIn: 500, delayOut: 0, fade: true}},
-						{selector: '#mantisbtinit-syncroles', options:{gravity: 'w', delayIn: 500, delayOut: 0, fade: true}},
-					],
 		checkboxGlobalConf:	jQuery('#mantisbtglobalconf'),
 		inputUrl:		jQuery('#mantisbturl'),
 		inputUser:		jQuery('#mantisbtuser'),

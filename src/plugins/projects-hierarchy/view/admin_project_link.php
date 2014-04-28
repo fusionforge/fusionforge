@@ -33,7 +33,7 @@ if (sizeof($childs)) {
 	foreach ($childs as $child) {
 		$childGroup = group_get_object($child);
 		echo '<form method="post" action="/plugins/'.$projectsHierarchy->name.'/?type=group&pluginname='.$projectsHierarchy->name.'&action=removeChild&id='.$group_id.'&child_id='.$childGroup->getID().'">';
-		echo util_make_link('/projects/'.$childGroup->getUnixName(),$childGroup->getPublicName(),array('title'=>_('Browse this project'), 'class'=>'tabtitle-nw'));
+		echo util_make_link('/projects/'.$childGroup->getUnixName(),$childGroup->getPublicName(),array('title'=>_('Browse this project')));
 		echo '<input type="submit" value="'._('Remove child project').'">';
 		echo '</form>';
 	}
@@ -43,7 +43,7 @@ $parent = $projectsHierarchy->getFamily($group_id, 'parent', false, 'validated')
 if (sizeof($parent)) {
 	$parentGroup = group_get_object($parent[0]);
 	echo '<form method="post" action="/plugins/'.$projectsHierarchy->name.'/?type=group&pluginname='.$projectsHierarchy->name.'&action=removeParent&id='.$group_id.'&parent_id='.$parentGroup->getID().'">';
-	echo util_make_link('/projects/'.$parentGroup->getUnixName(),$parentGroup->getPublicName(),array('title'=>_('Browse this project'), 'class'=>'tabtitle-nw'));
+	echo util_make_link('/projects/'.$parentGroup->getUnixName(),$parentGroup->getPublicName(),array('title'=>_('Browse this project')));
 	echo '<input type="submit" value="'._('Remove parent project').'">';
 	echo '</form>';
 }
@@ -65,7 +65,7 @@ if (sizeof($pendingParent)) {
 	$pendingParentGroup = group_get_object($pendingParent[0]);
 	echo '<form method="post" action="/plugins/'.$projectsHierarchy->name.'/?type=group&pluginname='.$projectsHierarchy->name.'&action=validateRelationship&id='.$group_id.'&relation=parent">';
 	echo '<input type="hidden" name="validation_id" value="'.$pendingParent[0].'" />';
-	echo _('Validate parent').' '.util_make_link('/projects/'.$pendingParentGroup->getUnixName(), $pendingParentGroup->getPublicName(), array('title'=>_('Browse this project'), 'class'=>'tabtitle'));
+	echo _('Validate parent').' '.util_make_link('/projects/'.$pendingParentGroup->getUnixName(), $pendingParentGroup->getPublicName(), array('title'=>_('Browse this project')));
 	echo html_build_select_box_from_arrays(array(1,0), array(_('Yes'), _('No')), 'validation_status', 'xzxz', false);
 	echo '<input type="submit" value="'. _('Send') .'" />';
 	echo '</form>';
@@ -77,7 +77,7 @@ if (sizeof($pendingChilds)) {
 		$pendingChildGroup = group_get_object($pendingChild);
 		echo '<form method="post" action="/plugins/'.$projectsHierarchy->name.'/?type=group&pluginname='.$projectsHierarchy->name.'&action=validateRelationship&id='.$group_id.'&relation=child">';
 		echo '<input type="hidden" name="validation_id" value="'.$pendingChild.'" />';
-		echo _('Validate child').' '.util_make_link('/projects/'.$pendingChildGroup->getUnixName(), $pendingChildGroup->getPublicName(), array('title'=>_('Browse this project'), 'class'=>'tabtitle'));
+		echo _('Validate child').' '.util_make_link('/projects/'.$pendingChildGroup->getUnixName(), $pendingChildGroup->getPublicName(), array('title'=>_('Browse this project')));
 		echo html_build_select_box_from_arrays(array(1,0), array(_('Yes'), _('No')), 'validation_status', 'xzxz', false);
 		echo '<input type="submit" value="'. _('Send') .'" />';
 		echo '</form>';

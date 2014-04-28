@@ -86,14 +86,14 @@ $headerLinks = array(
 );
 
 $headerClass = array(
-	'tabtitle',
-	'tabtitle',
-	'tabtitle',
-	'tabtitle',
-	'tabtitle',
-	'tabtitle',
-	'tabtitle',
-	'tabtitle',
+	'',
+	'',
+	'',
+	'',
+	'',
+	'',
+	'',
+	'',
 );
 
 $headerTitle = array(
@@ -152,7 +152,7 @@ foreach ($rows as $grp) {
 		$time_display = date(_('Y-m-d H:i'),$grp['register_time']);
 	}
 	$cells = array();
-	$cells[][] = util_make_link('/admin/groupedit.php?group_id='.$grp['group_id'], $grp['group_name'], array('tabtitle-w', 'title' => _('Click to edit this project.')));
+	$cells[][] = util_make_link('/admin/groupedit.php?group_id='.$grp['group_id'], $grp['group_name'], array('title' => _('Click to edit this project.')));
 	$cells[][] = $time_display;
 	$cells[][] = $grp['unix_group_name'];
 	$cells[] = array($grp['status'], 'class' => $status);

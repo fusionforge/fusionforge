@@ -66,14 +66,14 @@ jQuery(document).ready(function() {
 		$time_new = 604800;
 		foreach ($nested_pending_docs[$dirid] as $d) {
 			$cells = array();
-			$cells[][] = html_e('input', array('type' => 'checkbox', 'value' => $d->getID(), 'class' => 'checkeddocidpending tabtitle-w', 'title' => _('Select / Deselect this document for massaction'), 'onchange' => 'controllerListPending.checkgeneral("pending")'));
+			$cells[][] = html_e('input', array('type' => 'checkbox', 'value' => $d->getID(), 'class' => 'checkeddocidpending', 'title' => _('Select / Deselect this document for massaction'), 'onchange' => 'controllerListPending.checkgeneral("pending")'));
 			switch ($d->getFileType()) {
 				case "URL": {
-					$cells[][] = util_make_link($d->getFileName(), html_image($d->getFileTypeImage(), '22', '22', array('alt'=>$d->getFileType())), array('class' => 'tabtitle-nw', 'title' => _('Visit this link')), true);
+					$cells[][] = util_make_link($d->getFileName(), html_image($d->getFileTypeImage(), '22', '22', array('alt'=>$d->getFileType())), array('title' => _('Visit this link')), true);
 					break;
 				}
 				default: {
-					$cells[][] = util_make_link('/docman/view.php/'.$g->getID().'/'.$d->getID().'/'.urlencode($d->getFileName()), html_image($d->getFileTypeImage(), '22', '22', array('alt'=>$d->getFileType())), array('class' => 'tabtitle-nw', 'title' => _('View this document')));
+					$cells[][] = util_make_link('/docman/view.php/'.$g->getID().'/'.$d->getID().'/'.urlencode($d->getFileName()), html_image($d->getFileTypeImage(), '22', '22', array('alt'=>$d->getFileType())), array('title' => _('View this document')));
 				}
 			}
 			$nextcell = '';
@@ -106,17 +106,17 @@ jQuery(document).ready(function() {
 				$editfileaction .= '&childgroup_id='.$GLOBALS['childgroup_id'];
 			}
 			$editfileaction .= '&group_id='.$GLOBALS['group_id'];
-			$nextcell .= util_make_link('#', html_image('docman/edit-file.png', 22, 22, array('alt' => _('Edit this document'))), array('class' => 'tabtitle-ne', 'onclick' => 'javascript:controllerListPending.toggleEditFileView({action:\''.util_make_uri($editfileaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json').', docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').', title:\''.htmlspecialchars($d->getName()).'\', filename:\''.$d->getFilename().'\', description:\''.htmlspecialchars($d->getDescription()).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri("docman").'\'})', 'title' => _('Edit this document')), true);
-			$nextcell .= util_make_link('#', html_image('docman/validate.png', 22, 22, array('alt' => _('Activate in this folder'))), array('class' => 'tabtitle', 'onclick' => 'window.location.href=\''.util_make_uri($redirecturl.'&action=validatefile&fileid='.$d->getID()), 'title' => _('Activate in this folder')), true);
+			$nextcell .= util_make_link('#', html_image('docman/edit-file.png', 22, 22, array('alt' => _('Edit this document'))), array('onclick' => 'javascript:controllerListPending.toggleEditFileView({action:\''.util_make_uri($editfileaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json').', docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').', title:\''.htmlspecialchars($d->getName()).'\', filename:\''.$d->getFilename().'\', description:\''.htmlspecialchars($d->getDescription()).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri("docman").'\'})', 'title' => _('Edit this document')), true);
+			$nextcell .= util_make_link('#', html_image('docman/validate.png', 22, 22, array('alt' => _('Activate in this folder'))), array('onclick' => 'window.location.href=\''.util_make_uri($redirecturl.'&action=validatefile&fileid='.$d->getID()), 'title' => _('Activate in this folder')), true);
 			$cells[][] = $nextcell;
 			echo $HTML->multiTableRow(array(), $cells);
 		}
 		echo $HTML->listTableBottom();
 		echo html_ao('p');
 		echo html_ao('span', array('id' => 'massactionpending', 'class' => 'hide'));
-		echo html_e('span', array('class' => 'tabtitle-nw', 'id' => 'docman-massactionpendingmessage', 'title' => _('Actions availables for selected documents, you need to check at least one document to get actions')), _('Mass actions for selected pending documents:'), false);
-		echo util_make_link('#', html_image('docman/download-directory-zip.png', 22, 22, array('alt'=>_('Download as a ZIP'))), array('class' => 'tabtitle', 'onclick' => 'window.location.href=\''.util_make_uri('/docman/view.php/'.$g->getID().'/zip/selected/'.$dirid.'/\'+controllerListPending.buildUrlByCheckbox("pending")'), 'title' => _('Download as a ZIP')), true);
-		echo util_make_link('#', html_image('docman/validate.png', 22, 22, array('alt' => _('Activate in this folder'))), array('class' => 'tabtitle', 'onclick' => 'window.location.href=\''.util_make_uri($redirecturl.'&action=validatefile&fileid=\'+controllerListPending.buildUrlByCheckbox("pending")'), 'title' => _('Activate in this folder')), true);
+		echo html_e('span', array('id' => 'docman-massactionpendingmessage', 'title' => _('Actions availables for selected documents, you need to check at least one document to get actions')), _('Mass actions for selected pending documents:'), false);
+		echo util_make_link('#', html_image('docman/download-directory-zip.png', 22, 22, array('alt'=>_('Download as a ZIP'))), array('onclick' => 'window.location.href=\''.util_make_uri('/docman/view.php/'.$g->getID().'/zip/selected/'.$dirid.'/\'+controllerListPending.buildUrlByCheckbox("pending")'), 'title' => _('Download as a ZIP')), true);
+		echo util_make_link('#', html_image('docman/validate.png', 22, 22, array('alt' => _('Activate in this folder'))), array('onclick' => 'window.location.href=\''.util_make_uri($redirecturl.'&action=validatefile&fileid=\'+controllerListPending.buildUrlByCheckbox("pending")'), 'title' => _('Activate in this folder')), true);
 		echo html_ac(html_ap() - 3);
 	}
 }

@@ -68,8 +68,6 @@ function printnode ($nodeid,$text) {
 
 // ########################################################
 
-html_use_tooltips();
-
 site_admin_header(array('title'=>_('Browse Trove Tree')));
 
 printnode(0,'root');

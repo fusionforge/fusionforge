@@ -24,6 +24,7 @@ class DEBDebian60Tests
 		// Selenium tests
 		if (!defined('DB_INIT_CMD')) { define('PROJECTA','true'); }
 		$suite->addTestFiles(glob("func/Site/*Test.php"));
+//		$suite->addTestFiles(glob("func/SSH/*Test.php"));
 		$suite->addTestFiles(glob("func/Trackers/*Test.php"));
 		$suite->addTestFiles(glob("func/Tasks/*Test.php"));
 		$suite->addTestFiles(glob("func/Docs/*Test.php"));

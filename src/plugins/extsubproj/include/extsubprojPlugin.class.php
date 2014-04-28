@@ -64,7 +64,7 @@ class extsubprojPlugin extends Plugin {
 	* @access	public
 	*/
 	function getAdminOptionLink() {
-		return util_make_link('/plugins/'.$this->name.'/?type=globaladmin&pluginname='.$this->name,_('External subprojects admin'), array('class'=>'tabtitle', 'title'=>_('Configure the External subprojects plugin')));
+		return util_make_link('/plugins/'.$this->name.'/?type=globaladmin&pluginname='.$this->name,_('External subprojects admin'), array('title'=>_('Configure the External subprojects plugin')));
 	}
 	/**
 	* getProjectAdminLink - return the project admin link url
@@ -73,7 +73,7 @@ class extsubprojPlugin extends Plugin {
 	* @access	public
 	*/
 	function getProjectAdminLink($group_id) {
-		return util_make_link('/plugins/'.$this->name.'/?group_id='.$group_id.'&type=admin&pluginname='.$this->name, _('External subprojects admin'), array('class'=>'tabtitle', 'title'=>_('Configure the External subprojects plugin')));
+		return util_make_link('/plugins/'.$this->name.'/?group_id='.$group_id.'&type=admin&pluginname='.$this->name, _('External subprojects admin'), array('title'=>_('Configure the External subprojects plugin')));
 	}
 	function getProjectAdminAddExtSubProjAction($group_id) {
 		return '/plugins/'.$this->name.'/?group_id='.$group_id.'&type=admin&pluginname='.$this->name.'&action=addExtSubProj';
