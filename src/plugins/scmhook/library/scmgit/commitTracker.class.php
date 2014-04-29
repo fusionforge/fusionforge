@@ -27,7 +27,7 @@
 global $gfplugins;
 require_once $gfplugins.'scmhook/common/scmhook.class.php';
 
-class commitTracker extends scmhook {
+class GitCommitTracker extends scmhook {
 	var $group;
 	var $disabledMessage;
 
