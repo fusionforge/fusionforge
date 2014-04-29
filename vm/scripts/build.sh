@@ -16,12 +16,12 @@
 #set -x
 
 
-# Build dependencies
+# Install build dependencies
 aptitude -y install mini-dinstall dput devscripts equivs
 mk-build-deps -i /usr/src/fusionforge/src/debian/control -t 'apt-get -y' -r
 
 
-# Populate the repo
+# Populate a local Debian packages repository for APT managed with mini-dinstall
 #rm -rf /usr/src/debian-repository
 mkdir -p /usr/src/debian-repository
 
@@ -67,7 +67,7 @@ apt-key add /usr/src/debian-repository/key.asc
 
 mini-dinstall -b
 
-
+# Configure debian package building tools so as to use the local repo
 if [ ! -f /root/.dput.cf ]; then
     cat > /root/.dput.cf <<EOF
 [local]
@@ -88,7 +88,7 @@ DEBUILD_DPKG_BUILDPACKAGE_OPTS=-i
 EOF
 fi
 
-
+# Finally, build the FusionForge packages
 cd /usr/src/fusionforge/src
 f=$(mktemp)
 cp debian/changelog $f
@@ -105,8 +105,10 @@ fi
 dch --newversion $(dpkg-parsechangelog | sed -n 's/^Version: \([0-9.]\+\(\~rc[0-9]\)\?\).*/\1/p')+$(date +%Y%m%d%H%M)-1 --distribution local --force-distribution "Autobuilt."
 debuild --no-lintian --no-tgz-check -us -uc -tc  # using -tc so 'bzr st' is readable
 
+# Install built packages into the local repo
 debrelease -f local
 mv $f debian/changelog
 
+# Declare the repo so that packages become installable
 echo 'deb file:///usr/src/debian-repository local/' > /etc/apt/sources.list.d/local.list
 apt-get update

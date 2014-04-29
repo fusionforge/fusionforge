@@ -13,6 +13,7 @@ aptitude -y dist-upgrade
 
 set -e
 
+# Then update the checked-out sources of FusionForge
 cd /usr/src/fusionforge/
 # If using bzr, or git, update accordingly
 if [ -d .bzr/ ] ; then
