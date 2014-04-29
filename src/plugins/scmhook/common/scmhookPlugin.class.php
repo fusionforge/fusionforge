@@ -152,12 +152,12 @@ class scmhookPlugin extends Plugin {
 			$sql_vals[] = $group_id;
 			$sql_vars[] = '$'.$i;
 			$table = 'plugin_scmhook_scmsvn_'.strtolower($hook->getClassname());
-			db_query_params('BEGIN', array());
+			db_begin();
 			db_query_params('DELETE FROM '.$table.' WHERE group_id=$1', array($group_id));
 			db_query_params('INSERT INTO '.$table.' (' . implode(',', $sql_cols)
 					. ') VALUES (' . implode(',', $sql_vars) . ')',
 					$sql_vals);
-			db_query_params('COMMIT', array());
+			db_commit();
 		}
 
 		if (!$res)
