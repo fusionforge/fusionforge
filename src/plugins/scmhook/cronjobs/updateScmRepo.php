@@ -50,7 +50,9 @@ if (! $res) {
 }
 
 $scmhookPlugin = new scmhookPlugin;
-while ($row = db_fetch_array($res)) {
+$rows = array();
+while ($row = db_fetch_array($res)) $rows[] = $row;
+foreach($rows as $row) {
 	$group_id = $row['group_id'];
 	$scm_box = $row['scm_box'];
 	$scmtype = '';
@@ -129,3 +131,8 @@ while ($row = db_fetch_array($res)) {
 }
 
 cron_debug("INFO end of updateScmRepo main cronjob");
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
