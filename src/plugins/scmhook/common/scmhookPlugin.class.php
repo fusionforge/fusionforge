@@ -5,6 +5,7 @@
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2012-2014, Franck Villaume - TrivialDev
  * Copyright 2012, Benoit Debaenst - TrivialDev
+ * Copyright 2014, Sylvain Beucler - Inria
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -105,6 +106,7 @@ class scmhookPlugin extends Plugin {
 	function update($params) {
 		$group_id = $params['group_id'];
 		$hooksString = '';
+		$hooks = $this->getAvailableHooks($group_id);
 		foreach($params as $key => $value) {
 			if ($key == strstr($key, 'scm')) {
 				$hookname = preg_replace('/scm[a-z][a-z]+_/','',$key);
@@ -119,6 +121,44 @@ class scmhookPlugin extends Plugin {
 		}
 		$res = db_query_params('UPDATE plugin_scmhook set hooks = $1, need_update = 1 where id_group = $2',
 					array($hooksString, $group_id));
+
+		// Save parameters
+		foreach($hooks as $hook) {
+			$hook_params = $hook->getParams();
+			if (count($hook_params) == 0)
+				continue;
+			// Build 3 arrays for inconvenient db_query_params()
+			$i = 1;
+			$sql_cols = array_keys($hook_params);
+			$sql_vals = array();
+			$sql_vars = array();
+			foreach($hook_params as $pname => $pconf) {
+				$val = $params["scmsvn_{$hook->getClassname()}_$pname"];
+				// Validation
+				switch($pconf['type']) {
+				case 'emails':
+					$emails = array_map('trim', explode(',', $val));
+					$strict = true;
+					$invalid = array_search(false, array_map('validate_email', $emails), $strict) !== false;
+					if ($invalid)
+						exit_error($hook->getName() . _(": ") . _("invalid e-mails"). ' ' . $val);
+					$val = implode(',', $emails);
+				}
+				$sql_vals[] = $val;
+				$sql_vars[] = '$'.$i;
+				$i++;
+			}
+			$sql_cols[] = 'group_id';
+			$sql_vals[] = $group_id;
+			$sql_vars[] = '$'.$i;
+			$table = 'plugin_scmhook_scmsvn_'.strtolower($hook->getClassname());
+			db_query_params('BEGIN', array());
+			db_query_params('DELETE FROM '.$table.' WHERE group_id=$1', array($group_id));
+			db_query_params('INSERT INTO '.$table.' (' . implode(',', $sql_cols)
+					. ') VALUES (' . implode(',', $sql_vars) . ')',
+					$sql_vals);
+			db_query_params('COMMIT', array());
+		}
 
 		if (!$res)
 			return false;
@@ -141,7 +181,7 @@ class scmhookPlugin extends Plugin {
 			echo '<h2>'._('Enable Repository Hooks').'</h2>';
 			switch ($scm) {
 				case "scmsvn": {
-					$this->displayScmSvnHook($hooksAvailable, $statusDeploy, $hooksEnabled);
+					$this->displayScmSvnHook($hooksAvailable, $statusDeploy, $hooksEnabled, $group_id);
 					break;
 				}
 				case "scmhg": {
@@ -254,160 +294,74 @@ class scmhookPlugin extends Plugin {
 		return true;
 	}
 
-	function displayScmSvnHook($hooksAvailable, $statusDeploy, $hooksEnabled) {
+
+	function displayScmSvnHook($hooksAvailable, $statusDeploy, $hooksEnabled, $group_id) {
 		global $HTML;
-		$hooksPreCommit = array();
-		$hooksPreRevPropChange = array();
-		$hooksPostCommit = array();
-		foreach ($hooksAvailable as $hook) {
-			switch ($hook->getHookType()) {
-				case "pre-commit": {
-					$hooksPreCommit[] = $hook;
-					break;
-				}
-				case "pre-revprop-change": {
-					$hooksPreRevPropChange[] = $hook;
-					break;
-				}
-				case "post-commit": {
-					$hooksPostCommit[] = $hook;
-					break;
-				}
-				default: {
-					//byebye hook.... we do not know you...
-					break;
-				}
-			}
-		}
-		if (count($hooksPreCommit)) {
-			echo html_e('h3', array(), _('pre-commit Hooks'), false);
-			$tabletop = array('', _('Hook Name'), _('Description'));
-			$classth = array('unsortable', '', '');
-			echo $HTML->listTableTop($tabletop, false, 'sortable_scmhook_precommit', 'sortable', $classth);
-			foreach ($hooksPreCommit as $hookPreCommit) {
-				$isdisabled = 0;
-				if (! empty($hookPreCommit->onlyGlobalAdmin) && ! Permission::isGlobalAdmin()) {
-					echo '<tr class="hide" ><td>';
-				}
-				else {
-					echo '<tr><td>';
-				}
-				echo '<input type="checkbox" ';
-				echo 'name="'.$hookPreCommit->getLabel().'_'.$hookPreCommit->getClassname().'" ';
-				if (in_array($hookPreCommit->getClassname(), $hooksEnabled))
-					echo ' checked="checked"';
-
-				if ($statusDeploy) {
-					$isdisabled = 1;
-					echo ' disabled="disabled"';
-				}
-				if (!$isdisabled && !$hookPreCommit->isAvailable())
-					echo ' disabled="disabled"';
-
-				echo ' />';
-				if (in_array($hookPreCommit->getClassname(), $hooksEnabled) && $statusDeploy) {
-					echo '<input type="hidden" ';
-					echo 'name="'.$hookPreCommit->getLabel().'_'.$hookPreCommit->getClassname().'" ';
-					echo 'value="on" />';
-				}
-				echo '</td><td';
-				if (!$hookPreCommit->isAvailable())
-					echo ' title="'.$hookPreCommit->getDisabledMessage().'"';
-
-				echo ' >';
-				echo $hookPreCommit->getName();
-				echo '</td><td>';
-				echo $hookPreCommit->getDescription();
-				echo '</td></tr>';
-			}
-			echo $HTML->listTableBottom();
-		}
-		if (count($hooksPreRevPropChange)) {
-			echo html_e('h3', array(), _('pre-revprop-change Hooks'), false);
-			$tabletop = array('', _('Hook Name'), _('Description'));
-			$classth = array('unsortable', '', '');
-			echo $HTML->listTableTop($tabletop, false, 'sortable_scmhook_precommit', 'sortable', $classth);
-			foreach ($hooksPreRevPropChange as $hook) {
-				$isdisabled = 0;
-				if (! empty($hook->onlyGlobalAdmin) && ! Permission::isGlobalAdmin()) {
-					echo '<tr class="hide;" ><td>';
-				}
-				else {
-					echo '<tr><td>';
-				}
-				echo '<input type="checkbox" ';
-				echo 'name="'.$hook->getLabel().'_'.$hook->getClassname().'" ';
-				if (in_array($hook->getClassname(), $hooksEnabled))
-					echo ' checked="checked"';
-
-				if ($statusDeploy) {
-					$isdisabled = 1;
-					echo ' disabled="disabled"';
-				}
-				if (!$isdisabled && !$hook->isAvailable())
-					echo ' disabled="disabled"';
-
-				echo ' />';
-				if (in_array($hook->getClassname(), $hooksEnabled) && $statusDeploy) {
-					echo '<input type="hidden" ';
+		// Group available hooks by type
+		$hooks_by_type = array();
+		foreach ($hooksAvailable as $hook)
+			$hooks_by_type[$hook->getHookType()][] = $hook;
+		// Display available hooks, in specific order
+		foreach (array('pre-commit', 'pre-revprop-change', 'post-commit') as $hooktype) {
+			$hooks = $hooks_by_type[$hooktype];
+			if (count($hooks)) {
+				echo html_e('h3', array(), sprintf(_('%s Hooks'), $hooktype), false);
+				$tabletop = array('', _('Hook'), _('Description'));
+				$classth = array('unsortable', '', '');
+				echo $HTML->listTableTop($tabletop, false, "sortable_scmhook_$hooktype", 'sortable', $classth);
+				foreach ($hooks as $hook) {
+					$isdisabled = 0;
+					if (! empty($hook->onlyGlobalAdmin) && ! Permission::isGlobalAdmin()) {
+						echo '<tr class="hide" ><td>';
+					}
+					else {
+						echo '<tr><td>';
+					}
+					echo '<input type="checkbox" ';
 					echo 'name="'.$hook->getLabel().'_'.$hook->getClassname().'" ';
-					echo 'value="on" />';
-				}
-				echo '</td><td';
-				if (!$hook->isAvailable())
-					echo ' title="'.$hook->getDisabledMessage().'"';
+					if (in_array($hook->getClassname(), $hooksEnabled))
+						echo ' checked="checked"';
 
-				echo ' >';
-				echo $hook->getName();
-				echo '</td><td>';
-				echo $hook->getDescription();
-				echo '</td></tr>';
+					if ($statusDeploy) {
+						$isdisabled = 1;
+						echo ' disabled="disabled"';
+					}
+					if (!$isdisabled && !$hook->isAvailable())
+						echo ' disabled="disabled"';
+
+					echo ' />';
+					if (in_array($hook->getClassname(), $hooksEnabled) && $statusDeploy) {
+						echo '<input type="hidden" ';
+						echo 'name="'.$hook->getLabel().'_'.$hook->getClassname().'" ';
+						echo 'value="on" />';
+					}
+					echo '</td><td';
+					if (!$hook->isAvailable())
+						echo ' title="'.$hook->getDisabledMessage().'"';
+
+					echo ' >';
+					echo $hook->getName();
+					echo '</td><td>';
+					echo $hook->getDescription();
+					echo '</td></tr>';
+					$table = 'plugin_scmhook_scmsvn_'.strtolower($hook->getClassname());
+					if (db_check_table_exists($table)) {
+						$res = db_query_params('SELECT * FROM '.$table.' WHERE group_id=$1', array($group_id));
+						$values = db_fetch_array($res);
+						foreach ($hook->getParams() as $pname => $pconf) {
+							echo "<tr><td></td><td>{$pconf['description']}</td><td>";
+							$val = ($values[$pname] != null) ? $values[$pname] : $pconf['default'];
+							switch($pconf['type']) {
+							case 'emails':
+								print "<input type='text' name='scmsvn_{$hook->getClassname()}_$pname' value='$val' size=40/>";
+								break;
+							}
+							echo '</td></tr>';
+						}
+					}
+				}
+				echo $HTML->listTableBottom();
 			}
-			echo $HTML->listTableBottom();
-		}
-		if (count($hooksPostCommit)) {
-			echo '<h3>'._('post-commit Hooks').'</h3>';
-			$tabletop = array('', _('Hook Name'), _('Description'));
-			$classth = array('unsortable', '', '');
-			echo $HTML->listTableTop($tabletop, false, 'sortable_scmhook_postcommit', 'sortable', $classth);
-			foreach ($hooksPostCommit as $hookPostCommit) {
-				$isdisabled = 0;
-				if (! empty($hookPostCommit->onlyGlobalAdmin) && ! Permission::isGlobalAdmin()) {
-					echo '<tr class="hide" ><td>';
-				}
-				else {
-					echo '<tr><td>';
-				}
-				echo '<input type="checkbox" ';
-				echo 'name="'.$hookPostCommit->getLabel().'_'.$hookPostCommit->getClassname().'" ';
-				if (in_array($hookPostCommit->getClassname(), $hooksEnabled))
-					echo ' checked="checked"';
-
-				if ($statusDeploy) {
-					$isdisabled = 1;
-					echo ' disabled="disabled"';
-				}
-
-				if (!$isdisabled && !$hookPostCommit->isAvailable())
-					echo ' disabled="disabled"';
-
-				echo ' />';
-				if (in_array($hookPostCommit->getClassname(), $hooksEnabled) && $statusDeploy) {
-					echo '<input type="hidden" ';
-					echo 'name="'.$hookPostCommit->getLabel().'_'.$hookPostCommit->getClassname().'" ';
-					echo 'value="on" />';
-				}
-				echo '</td><td';
-				if (!$hookPostCommit->isAvailable())
-					echo ' title="'.$hookPostCommit->getDisabledMessage().'"';
-
-				echo ' >';
-				echo $hookPostCommit->getName();
-				echo '</td><td>';
-				echo $hookPostCommit->getDescription();
-				echo '</td></tr>';
-			}
-			echo $HTML->listTableBottom();
 		}
 	}
 

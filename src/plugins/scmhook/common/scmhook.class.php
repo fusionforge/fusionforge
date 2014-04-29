@@ -74,4 +74,13 @@ class scmhook {
 	function getDisabledMessage() {
 		return _('Feature not implemented.');
 	}
+
+	function getParams() {
+		return array();
+	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
