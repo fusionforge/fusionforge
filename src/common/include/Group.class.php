@@ -310,6 +310,7 @@ class Group extends Error {
 			$this->setError(_('Group object already exists.'));
 			return false;
 		} elseif (!$this->validateGroupName($group_name)) {
+			$this->setError(_('Invalid project name'));
 			return false;
 		} elseif (!account_groupnamevalid($unix_name)) {
 			$this->setError(_('Invalid Unix Name.'));
