@@ -23,11 +23,11 @@ variant=${1:-full}
 if ! dpkg -l loggerhead | grep -q ^ii ; then
     wget -c http://snapshot.debian.org/archive/debian/20121107T152130Z/pool/main/l/loggerhead/loggerhead_1.19%7Ebzr477-1_all.deb
     aptitude install gdebi-core
-    # FIXME : why not dpkg -i ? ... fix or explain...
+    # install loggerhead with its dependencies
     gdebi --non-interactive loggerhead_1.19~bzr477-1_all.deb
 fi
 
-# Install FusionForge packages (by default, the fusionforge-full meta-package and all dependencies
+# Install FusionForge packages (by default, the fusionforge-full meta-package and all dependencies)
 aptitude update
 if dpkg -l fusionforge-$variant | grep -q ^ii ; then
     # Already installed, upgrading
