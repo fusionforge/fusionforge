@@ -25,4 +25,4 @@ aptitude -y install php5-cli phpunit phpunit-selenium
 #    ./setup-provider-test.sh
 #fi
 
-/usr/src/fusionforge/tests/scripts/phpunit.sh DEBDebian70Tests.php
+/usr/src/fusionforge/tests/scripts/phpunit.sh Testsuite-deb.php
