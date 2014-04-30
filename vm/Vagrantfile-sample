@@ -8,24 +8,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #config.vm.box_url = "packer/fusionforge-dev-debian.box"
   config.vm.box_url = "http://fusionforge.fusionforge.org/sandbox/fusionforge-dev-debian.box"
 
-  # This uses a private IP address for the guest, instead of the
-  # default NAT in virtualbox guests (change the IP address to an
-  # unused one on your network)
+  # Guest network: private IP address:
   config.vm.network :private_network, ip: "192.168.35.11"
-
-  # Alternatively, you may keep the default NAT networking, but define
-  # more port redirections, with :
+  # Alternatively, with port redirections (cf. README):
   #config.vm.network :forwarded_port, guest: 80,  host: 8080
   #config.vm.network :forwarded_port, guest: 443, host: 8443
-  # in which case you'll change /etc/gforge/config.ini.d/zzzz-local.ini to add :
-  #  [core]
-  #  web_host = localhost
-  #  https_port = 4443
 
   # Mount work repositories inside the VM:
   #config.vm.synced_folder "..", "/usr/src/fusionforge"
   #config.vm.synced_folder "../src", "/usr/share/gforge"
 
+  # Display graphics window, useful for running the Selenium testsuite
   config.vm.provider :virtualbox do |vb|
       vb.gui = true
   end
