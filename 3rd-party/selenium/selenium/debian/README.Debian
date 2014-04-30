@@ -1,6 +1,7 @@
-selenium for Debian
--------------------
+Unofficial packaging of selenium for Debian
+-------------------------------------------
 
-<possible notes regarding this package - if none, delete this file>
+This is a quick and dirty packaging, to install selenium, until
+someone has done a proper package (see RFP #626545).
 
- -- Christian Bayle <bayle@debian.org>  Tue, 02 Oct 2012 00:41:34 +0200
+ -- Olivier Berger <obergix@debian.org>, Tue, 29 Apr 2014 17:17:26 +0200

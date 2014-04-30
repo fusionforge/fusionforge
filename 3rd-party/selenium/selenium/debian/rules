@@ -1,6 +1,6 @@
 #!/usr/bin/make -f
 # -*- makefile -*-
-# Sample debian/rules that uses debhelper.
+# debian/rules that uses debhelper.
 # This file was originally written by Joey Hess and Craig Small.
 # As a special exception, when this file is copied by dh-make into a
 # dh-make output file, you may use that output file without restriction.
@@ -8,6 +8,16 @@
 
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
+
+# Elements for regeneration of the orig tarball using the get-orig-source target
+PKD  = $(abspath $(dir $(MAKEFILE_LIST)))/
+PKG  = $(word 2,$(shell dpkg-parsechangelog -l$(PKD)/changelog | grep ^Source))
+VER ?= $(shell dpkg-parsechangelog -l$(PKD)/changelog | perl -ne 'print $$1 if m{^Version:\s+(?:\d+:)?(\d.*)(?:\-\d+.*)};')
+
+.PHONY: get-orig-source
+get-orig-source:  $(info I: $(PKG)_$(VER))
+	@echo "# Downloading..."
+	[ -f $(PKD)../../selenium_$(VER).orig.tar.gz ] || (cd $(PKD)/../../ ; wget -O - http://selenium.googlecode.com/files/selenium-server-standalone-$(VER).jar > selenium/selenium-server.jar ; tar cvzf selenium_$(VER).orig.tar.gz selenium/selenium-server.jar)
 
 %:
 	dh $@ 

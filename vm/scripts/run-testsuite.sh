@@ -1,19 +1,17 @@
 #!/bin/bash
 
-# Selenium dependencies
-aptitude -y install default-jre iceweasel
 
-# Build selenium
-aptitude -y install cowbuilder
-mkdir -p ~/builder/cow/
-DISTROLIST=wheezy /usr/src/fusionforge/tests/scripts/manage-cowbuilder.sh
+# Build an unofficial package for selenium and install it
+if ! dpkg -l selenium | grep -q ^ii ; then
+    cd /usr/src/fusionforge/3rd-party/selenium/selenium
+    debian/rules get-orig-source
+    debuild --no-lintian --no-tgz-check -us -uc
+    dpkg -i /usr/src/fusionforge/3rd-party/selenium/selenium_*_all.deb
 
-mkdir -p /usr/src/build/debian/conf/
-aptitude -y install reprepro
-echo -e "Codename: wheezy\nArchitectures: amd64 source\nComponents: main" > /usr/src/build/debian/conf/distributions
-cd /usr/src/fusionforge/3rd-party/selenium
-make
-dpkg -i /usr/src/build/debian/pool/main/s/selenium/selenium_*_all.deb
+    # Selenium dependencies
+    aptitude -y install default-jre iceweasel
+
+fi
 
 
 # Test dependencies
