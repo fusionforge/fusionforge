@@ -38,7 +38,6 @@ if (!$res) {
 $data = forge_get_config('data_path');
 if (!is_dir($data)) {
 	system("mkdir -p $data");
-	system("chown ".forge_get_config('apache_user').':'.forge_get_config('apache_group')." $data");
 	system("chmod 0700 $data");
 }
 
@@ -71,5 +70,7 @@ while($row = db_fetch_array($res)) {
 $as->commit();
 
 db_query_params ('UPDATE artifact_file SET bin_data=$1', array(''));
+
+system("chown -R ".forge_get_config('apache_user').':'.forge_get_config('apache_group')." $data");
 
 echo "SUCCESS\n";
