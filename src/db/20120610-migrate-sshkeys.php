@@ -51,16 +51,16 @@ while($row = db_fetch_array($res)) {
 		$fingerprint = $returnExecExploded[1];
 		$now = time();
 		$explodedKey = explode(' ', $key);
-		$res = db_query_params('insert into sshkeys (userid, fingerprint, upload, sshkey, name, algorithm)
+		$res_insert = db_query_params('insert into sshkeys (userid, fingerprint, upload, sshkey, name, algorithm)
 							values ($1, $2, $3, $4, $5, $6)',
 					array($row['user_id'], $fingerprint, $now, $key, $explodedKey[2], $explodedKey[0]));
-		if (!$res) {
+		if (!$res_insert) {
 			echo 'UPGRADE ERROR: '.db_error();
 			db_rollback();
 			exit(1);
 		}
 	}
-	$res = db_query_params('update users set authorized_keys = $1 where user_id = $2',
+	db_query_params('update users set authorized_keys = $1 where user_id = $2',
 				array('', $row['user_id']));
 }
 db_commit();
