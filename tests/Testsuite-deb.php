@@ -1,4 +1,7 @@
 <?php
+
+/* Main entry point for the Debian packages functionnal test suite */
+
 if (!defined('PHPUnit_MAIN_METHOD')) {
 	define('PHPUnit_MAIN_METHOD', 'AllTests::main');
 }

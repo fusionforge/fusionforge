@@ -22,8 +22,9 @@ variant=${1:-full}
 # a more recent dependency
 if ! dpkg -l loggerhead | grep -q ^ii ; then
     wget -c http://snapshot.debian.org/archive/debian/20121107T152130Z/pool/main/l/loggerhead/loggerhead_1.19%7Ebzr477-1_all.deb
-    aptitude install gdebi-core
     # install loggerhead with its dependencies
+    # we need gdebi to make sure dependencies are installed too (simple dpkg -i won't)
+    aptitude install gdebi-core
     gdebi --non-interactive loggerhead_1.19~bzr477-1_all.deb
 fi
 

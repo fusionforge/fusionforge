@@ -67,3 +67,6 @@ RPM3RD=http://buildbot.fusionforge.org/job/3rd-party-rpm/ws/build/redhat/
 #fgcos51=lxc:centos5::
 #fgdeb51=lxc:debian6::
 
+# Local Variables:
+# mode: sh
+# End:

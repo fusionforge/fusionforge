@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# This script runs the preferred functionnal test suite, using phpunit
+# and Selenium, which will test the Web interface of FusionForge in a
+# controlled Firefox browser.
 
 # Build an unofficial package for selenium and install it
 if ! dpkg -l selenium | grep -q ^ii ; then
@@ -23,4 +26,5 @@ aptitude -y install php5-cli phpunit phpunit-selenium
 #    ./setup-provider-test.sh
 #fi
 
+# Now, start the functionnal test suite using phpunit and selenium
 /usr/src/fusionforge/tests/scripts/phpunit.sh Testsuite-deb.php

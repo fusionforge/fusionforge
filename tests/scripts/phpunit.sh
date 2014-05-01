@@ -19,15 +19,20 @@ fi
 scriptdir=$(dirname $0)
 FORGE_HOME=$(cd $scriptdir/../..; pwd)
 cd $FORGE_HOME
+
+# Initialize defaults
 [ ! -f tests/config/default ] || . tests/config/default
 [ ! -f tests/config/phpunit ] || . tests/config/phpunit
+
 SELENIUM_RC_DIR=/var/log
 SELENIUM_RC_URL=${HUDSON_URL}job/${JOB_NAME}/ws/reports
 SELENIUM_RC_HOST=`hostname -f`
 HOST=`hostname -f`
+# the PHP file provided through CONFIG_PHP will be loaded inside the functionnal test suite with require_once, in SeleniumRemoteSuite.php
 CONFIG_PHP=func/config.php
 export SELENIUM_RC_DIR SELENIUM_RC_URL SELENIUM_RC_HOST HOST DB_NAME DB_USER CONFIG_PHP
 
+# Add definitions for the PHP functionnal test suite
 cat <<-EOF >tests/func/config.php
 <?php
 // Host where selenium-rc is running
@@ -44,6 +49,7 @@ define ('ROOT', '');
 define('DB_NAME', getenv('DB_NAME'));
 define('DB_USER', getenv('DB_USER'));
 define('DB_PASSWORD', '@@FFDB_PASS@@');
+// Command which will reload a clean database at each SeleniumTestCase start
 define('DB_INIT_CMD', "$FORGE_HOME/tests/func/db_reload.sh >>/var/log/db_reload_selenium.log 2>&1");
 
 // Prefix for commands to run
@@ -108,7 +114,7 @@ if [ $i = $timeout ] ; then
     exit 1
 fi
 
-echo "Running PHPunit tests"
+echo "Running PHPunit tests from $testsuite"
 retcode=0
 cd tests
 phpunit --verbose --stop-on-failure --log-junit $SELENIUM_RC_DIR/phpunit-selenium.xml $@ $testsuite || retcode=$?

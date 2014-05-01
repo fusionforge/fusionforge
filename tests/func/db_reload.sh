@@ -1,4 +1,7 @@
 #! /bin/sh
+
+# Reinitialize contents of the database to pass new tests (using the backup made in from /root/dump)
+
 if [ $# -eq 1 ]
 then
 	database=$1
