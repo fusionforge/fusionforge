@@ -46,5 +46,13 @@ else
     /usr/share/gforge/bin/forge_set_password admin myadmin
     a2dissite default
     invoke-rc.d apache2 restart
+
+    # Backup the DB, so that it can be restored for the test suite to run
     su - postgres -c "pg_dumpall" > /root/dump
+    invoke-rc.d postgresql stop
+    if [ -d /var/lib/postgresql.backup ]; then
+        rm -fr /var/lib/postgresql.backup
+    fi
+    cp -a --reflink=auto /var/lib/postgresql /var/lib/postgresql.backup
+    invoke-rc.d postgresql start
 fi

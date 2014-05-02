@@ -2,6 +2,8 @@
 
 # Reinitialize contents of the database to pass new tests (using the backup made in from /root/dump)
 
+# define some convenience functions
+
 is_db_up () {
     echo "select count(*) from users;" | su - postgres -c "psql $database" > /dev/null 2>&1
 }
@@ -76,6 +78,7 @@ stop_apache () {
     fi
 }
 
+# Now the main program
 
 if [ $# -eq 1 ]
 then
@@ -108,21 +111,41 @@ fi
 stop_apache
 
 stop_database
-sleep 5
-start_database
 
-echo "Dropping database $database"
-su - postgres -c "dropdb -e $database"
+# If the backup is there, restore it (it should now have been created by install.sh)
+if [ -d /var/lib/postgresql.backup ]; then
 
-if [ -f /root/dump ]
-then
-	echo "Restore database from dump file: psql -f- < /root/dump"
-	su - postgres -c "psql -f-" < /root/dump > /var/log/pg_restore.log 2>/var/log/pg_restore.err
+    echo "Restore database from files backup (/var/lib/postgresql.backup/)"
+    rm -rf /var/lib/postgresql
+    cp -a --reflink=auto /var/lib/postgresql.backup /var/lib/postgresql
+
 else
-	# TODO: reinit the db from scratch and create the dump
-	echo "Couldn't restore the database: No /root/dump found"
-	exit 2
+    # We will restore from the dump, then perform a backup so that it's there next time
+    sleep 3
+    start_database
+
+    # install.sh should have created it, if not, then nothing much we can do
+    if [ -f /root/dump ]
+    then
+        echo "Dropping database $database"
+        su - postgres -c "dropdb -e $database"
+
+ 	echo "Restore database from dump file: psql -f- < /root/dump"
+ 	su - postgres -c "psql -f-" < /root/dump > /var/log/pg_restore.log 2>/var/log/pg_restore.err
+
+        # Perform a file backup which will now be faster to restore, next time (align with new install.sh behaviour)
+        stop_database
+        echo "Perform files backup to /var/lib/postgresql.backup/"
+        cp -a --reflink=auto /var/lib/postgresql /var/lib/postgresql.backup
+
+    else
+ 	# TODO: reinit the db from scratch and create the dump
+ 	echo "Couldn't restore the database: No /root/dump found"
+ 	exit 2
+    fi
 fi
+
+start_database
 
 start_apache
 
