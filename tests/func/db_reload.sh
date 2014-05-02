@@ -2,6 +2,81 @@
 
 # Reinitialize contents of the database to pass new tests (using the backup made in from /root/dump)
 
+is_db_up () {
+    echo "select count(*) from users;" | su - postgres -c "psql $database" > /dev/null 2>&1
+}
+
+start_database () {
+
+    echo "Starting the database"
+    if type invoke-rc.d 2>/dev/null
+    then
+	invoke-rc.d postgresql start
+    else
+	service postgresql start
+    fi
+
+    echo "Waiting for database to be up..."
+    i=0
+    while [ $i -lt 10 ] && ! is_db_up ; do
+        echo "...not yet ($(date))..."
+        i=$(( $i + 1 ))
+        sleep 5
+    done
+    if is_db_up ; then
+        echo "...OK"
+    else
+        echo "... FAIL: database still down?"
+    fi
+}
+
+stop_database () {
+
+    echo "Stopping the database"
+    if type invoke-rc.d 2>/dev/null
+    then
+	invoke-rc.d postgresql stop
+    else
+	service postgresql stop
+    fi
+
+    echo "Waiting for database to be down..."
+    i=0
+    while [ $i -lt 10 ] && is_db_up ; do
+        echo "...not yet ($(date))..."
+        i=$(( $i + 1 ))
+        sleep 5
+    done
+    if ! is_db_up ; then
+        echo "...OK"
+    else
+        echo "... FAIL: database still up?"
+    fi
+}
+
+start_apache () {
+
+    echo "Starting apache"
+    if type invoke-rc.d 2>/dev/null
+    then
+    	invoke-rc.d apache2 start
+    else
+    	service httpd start
+    fi
+}
+
+stop_apache () {
+
+    echo "Stopping apache"
+    if type invoke-rc.d 2>/dev/null
+    then
+	invoke-rc.d apache2 stop
+    else
+	service httpd stop
+    fi
+}
+
+
 if [ $# -eq 1 ]
 then
 	database=$1
@@ -30,61 +105,11 @@ else
 	echo "Forge database is $database"
 fi
 
-echo "Stopping apache"
-if type invoke-rc.d 2>/dev/null
-then
-	invoke-rc.d apache2 stop
-else
-	service httpd stop
-fi
+stop_apache
 
-is_db_up () {
-    echo "select count(*) from users;" | su - postgres -c "psql $database" > /dev/null 2>&1
-}
-
-echo "Stopping the database"
-if type invoke-rc.d 2>/dev/null
-then
-	invoke-rc.d postgresql stop
-else
-	service postgresql stop
-fi
-
-echo "Waiting for database to be down..."
-i=0
-while [ $i -lt 10 ] && is_db_up ; do
-    echo "...not yet ($(date))..."
-    i=$(( $i + 1 ))
-    sleep 5
-done
-if ! is_db_up ; then
-    echo "...OK"
-else
-    echo "... FAIL: database still up?"
-fi
-
+stop_database
 sleep 5
-
-echo "Starting the database"
-if type invoke-rc.d 2>/dev/null
-then
-	invoke-rc.d postgresql start
-else
-	service postgresql start
-fi
-
-echo "Waiting for database to be up..."
-i=0
-while [ $i -lt 10 ] && ! is_db_up ; do
-    echo "...not yet ($(date))..."
-    i=$(( $i + 1 ))
-    sleep 5
-done
-if is_db_up ; then
-    echo "...OK"
-else
-    echo "... FAIL: database still down?"
-fi
+start_database
 
 echo "Dropping database $database"
 su - postgres -c "dropdb -e $database"
@@ -99,13 +124,7 @@ else
 	exit 2
 fi
 
-echo "Starting apache"
-if type invoke-rc.d 2>/dev/null
-then
-	invoke-rc.d apache2 start
-else
-	service httpd start
-fi
+start_apache
 
 echo "Flushing/restarting nscd"
 rm -f /var/cache/nscd/* || true
