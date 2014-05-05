@@ -34,8 +34,8 @@ class DEBDebian60Tests
 		$suite->addTestFiles(glob("func/PluginsMoinMoin/*Test.php"));
 //		$suite->addTestFiles(glob("func/PluginsOnlineHelp/*Test.php"));
 //		$suite->addTestFiles(glob("func/PluginsScmBzr/*Test.php"));
-//		$suite->addTestFiles(glob("func/PluginsScmGit/*Test.php"));
-//		$suite->addTestFiles(glob("func/PluginsScmSvn/*Test.php"));
+		$suite->addTestFiles(glob("func/PluginsScmGit/gitWUITest.php"));
+		$suite->addTestFiles(glob("func/PluginsScmSvn/svnWUITest.php"));
 		$suite->addTestFiles(glob("func/RBAC/*Test.php"));
 		$suite->addTestFiles(glob("func/Surveys/*Test.php"));
 		$suite->addTestFiles(glob("func/Search/*Test.php"));
