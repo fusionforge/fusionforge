@@ -153,7 +153,7 @@ class SVNPlugin extends SCMPlugin {
 				$b .= ' ';
 				$b .= _('Enter your site password when prompted.');
 				$b .= '</p>';
-				$b .= '<p><tt>svn checkout --username '.$d.' http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. $this->getBoxForProject($project) . $this->svn_root_dav .'/'.$project->getUnixName().$module.'</tt></p>' ;
+				$b .= '<p><tt>svn checkout --username '.$d.' http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. forge_get_config('scm_host'). '/authsvn/'.$d.'/'.$project->getUnixName().$module.'</tt></p>' ;
 			}
 		} else {
 			if (forge_get_config('use_ssh', 'scmsvn')) {
@@ -337,6 +337,9 @@ class SVNPlugin extends SCMPlugin {
 			return true;
 		}
 
+		$config_fname = forge_get_config('data_path').'/scmsvn-auth.inc';
+		$config_f = fopen($config_fname.'.new', 'w');
+			
 		$access_data = '';
 		$password_data = '';
 		$engine = RBACEngine::getInstance() ;
@@ -371,10 +374,22 @@ class SVNPlugin extends SCMPlugin {
 
 			$access_data .= "\n";
 			$engine->invalidateRoleCaches();  // caching all roles takes ~1GB RAM for 5K projects/15K users
+
+			if ($project->enableAnonSCM()) {
+				fwrite($config_f, 'Use ScmsvnProjectWithAnon '.$project->getUnixName().'
+');
+			} else {
+				fwrite($config_f, 'Use ScmsvnProjectWithoutAnon '.$project->getUnixName().'
+');
+			}
+			
+			fwrite($config_f, "\n");
 		}
 
 		foreach ($svnusers as $user_id => $user) {
 			$password_data .= $user->getUnixName().':'.$user->getUnixPasswd()."\n";
+			fwrite($config_f, 'Use ScmsvnUser '.$user->getUnixName().'
+');
 		}
 		$password_data .= forge_get_config('anonsvn_login', 'scmsvn').":".htpasswd_apr1_md5(forge_get_config('anonsvn_password', 'scmsvn'))."\n";
 
@@ -391,6 +406,10 @@ class SVNPlugin extends SCMPlugin {
 		fclose($f);
 		chmod($fname.'.new', 0644);
 		rename($fname.'.new', $fname);
+
+		fclose($config_f);
+		chmod($config_fname.'.new', 0644);
+		rename($config_fname.'.new', $config_fname);
 	}
 
 	function gatherStats($params) {
