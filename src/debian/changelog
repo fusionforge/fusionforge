@@ -15,6 +15,8 @@ fusionforge (5.3-0) UNRELEASED; urgency=medium
   * gforge-web-apache: dropped dummy package
   * gforge-web-apache2: remove unused cronolog dependency
   * gforge-web-apache2: actually remove bundled jquery/jquery-ui/jquery-tipsy
+  * gforge-web-apache2: create attachments directories
+    /var/lib/gforge/docman and /var/lib/gforge/tracker
 
  -- Roland Mas <lolando@debian.org>  Wed, 02 Apr 2014 16:32:32 +0200
 

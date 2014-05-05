@@ -57,8 +57,14 @@ case "$1" in
 
 	db_stop
 
-        # Setup our FRS
-	chown www-data:www-data @DATA_PATH@/download
+	# Setup Docman/FRS/Tracker attachments
+	# (not done in debian/rules because dpkg ignores existing dirs, cf. DP10.9[1])
+	chown www-data: @DATA_PATH@/docman
+	chmod 700       @DATA_PATH@/docman
+	chown www-data: @DATA_PATH@/download
+	chmod 700       @DATA_PATH@/download
+	chown www-data: @DATA_PATH@/tracker
+	chmod 700       @DATA_PATH@/tracker
 
 	# Enable required modules
 	DEBIAN_FRONTEND=noninteractive a2enmod php5 || true
