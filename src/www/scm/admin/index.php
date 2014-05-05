@@ -106,13 +106,17 @@ if (getStringFromRequest('create_repository') && getStringFromRequest('submit'))
 	$SCMFactory = new SCMFactory();
 	$scm_plugins = $SCMFactory->getSCMs();
 
+	$scm_changed = false;
 	if (in_array($scmradio, $scm_plugins)) {
 		foreach ($scm_plugins as $plugin) {
 			$myPlugin = plugin_get_object($plugin);
 			if ($scmradio == $myPlugin->name) {
-				$group->setPluginUse($myPlugin->name, 1);
-				if ($myPlugin->getDefaultServer()) {
-					$group->setSCMBox($myPlugin->getDefaultServer());
+				if (!$group->usesPlugin($myPlugin->name)) {
+					$group->setPluginUse($myPlugin->name, 1);
+					if ($myPlugin->getDefaultServer()) {
+						$group->setSCMBox($myPlugin->getDefaultServer());
+					}
+					$scm_changed = true;
 				}
 			} else {
 				$group->setPluginUse($myPlugin->name, 0);
@@ -120,7 +124,10 @@ if (getStringFromRequest('create_repository') && getStringFromRequest('submit'))
 		}
 	}
 
-	plugin_hook("scm_admin_update", $hook_params);
+	// Don't call scm plugin update if their form wasn't displayed
+	// to avoid processing an apparently empty form and reset configuration
+	if (!$scm_changed)
+		plugin_hook("scm_admin_update", $hook_params);
 }
 
 $hook_params = array();
