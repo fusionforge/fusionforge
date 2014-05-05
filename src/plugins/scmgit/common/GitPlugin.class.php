@@ -734,8 +734,6 @@ class GitPlugin extends SCMPlugin {
 			$group_fname = forge_get_config('data_path').'/scmgit-groupfile';
 			$group_f = fopen($group_fname.'.new', 'w');
 			
-			fwrite($config_f, '');
-			
 			foreach ($groups as $project) {
 				if ( !$project->isActive()) {
 					continue;
