@@ -8,7 +8,7 @@
 @DATA_PATH@/scmsnapshots
 @DATA_PATH@/docman
 @DATA_PATH@/download
-@DATA_PATH@/trackers
+@DATA_PATH@/tracker
 @DATA_PATH@/etc
 var/cache/@OLDPACKAGE@
 @LOG_PATH@
