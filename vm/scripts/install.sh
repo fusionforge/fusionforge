@@ -23,6 +23,11 @@ if ! dpkg -l loggerhead | grep -q ^ii ; then
     gdebi --non-interactive loggerhead_1.19~bzr477-1_all.deb
 fi
 
+# Install locales-all which is a Recommends and not a Depends
+if ! dpkg -l locales-all | grep -q ^ii ; then
+    aptitude install locales-all
+fi
+
 aptitude update
 if dpkg -l fusionforge-$variant | grep -q ^ii ; then
     # Already installed, upgrading
