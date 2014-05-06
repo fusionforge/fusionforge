@@ -2753,7 +2753,7 @@ msgstr "Ficheiro actual"
 #: common/forum/ForumHTML.class.php:317 common/forum/ForumHTML.class.php:350
 msgid "Use the “Browse” button to find the file you want to attach"
 msgstr ""
-"Empregue o botón de  \"Explorar\" para atopar o ficheiro que quere anexar"
+"Empregue o botón de “Explorar” para atopar o ficheiro que quere anexar"
 
 #: common/forum/ForumHTML.class.php:320 common/forum/ForumHTML.class.php:353
 msgid "File to upload"
@@ -5462,8 +5462,8 @@ msgid ""
 "remember you need to set up categories, groups, and permission for each "
 "type, which can get time-consuming."
 msgstr ""
-"Aos rexistros chámaselles \"tipos de artefactos\" e ás pezas individuais dos "
-"datos \"artefactos\". \"Erros\" pode ser un tipo de artefacto, mentres que "
+"Aos rexistros chámaselles “tipos de artefactos” e ás pezas individuais dos "
+"datos “artefactos”. “Erros” pode ser un tipo de artefacto, mentres que "
 "un informe de erro sería un artefacto. Pode crear tantos tipos de artefactos "
 "como queira, pero recorde que terá que configurar as categorías, grupos e "
 "permisos para cada tipo, o que pode levar moito tempo."
@@ -5498,12 +5498,12 @@ msgstr "Días ata que se acabe o tempo dos elementos pendentes do rexistro"
 #: common/tracker/actions/admin-ind.php:154
 #: common/tracker/views/form-updatetracker.php:89
 msgid "Free form text for the “Submit New” page"
-msgstr "Texto de formulario libre para a páxina de \"enviar un novo elemento\""
+msgstr "Texto de formulario libre para a páxina de “enviar un novo elemento”"
 
 #: common/tracker/actions/admin-ind.php:157
 #: common/tracker/views/form-updatetracker.php:95
 msgid "Free form text for the Browse page"
-msgstr "Texto de formulario libre para a páxina de \"navegar polos elementos\""
+msgstr "Texto de formulario libre para a páxina de “navegar polos elementos”"
 
 #: common/tracker/actions/admin-ind.php:160
 #: common/tracker/include/build_submission_form.php:55
@@ -6030,7 +6030,7 @@ msgid ""
 msgstr ""
 "Se desexa aplicar os cambios a todos os elementos seleccionados, use estes "
 "controis para cambiar as súas propiedades e prema unha vez en "
-"\"Actualización masiva\"."
+"“Actualización masiva”."
 
 #: common/tracker/actions/browse.php:780 common/tracker/actions/browse.php:791
 #: common/tracker/actions/browse.php:795 www/include/html.php:361
@@ -11651,9 +11651,8 @@ msgid ""
 "It will take <span class=\"important\">few minutes</span> for your list to "
 "be created."
 msgstr ""
-"<p>As listas noméanse deste xeito:<br /><strong>nomeproxecto-nomelista@ "
-"%1$s</strong></p><p>Levará <span class=\"important\">de 6 a 24 horas</span> "
-"crear esta lista.</p>"
+"Levará <span class=\"important\">de 6 a 24 horas</span> "
+"crear esta lista."
 
 #: plugins/mailman/www/admin/index.php:134 www/mail/admin/index.php:154
 msgid "Unable to get the lists"
@@ -13921,7 +13920,7 @@ msgstr "Administración do xestor de cotas"
 #: plugins/quota_management/www/quota_admin.php:54
 #, fuzzy
 msgid "Input error: Hard quota must be greater than soft quota"
-msgstr "Erro de entrada: A cota \"hard\" ten que ser superior a cota \"soft\""
+msgstr "Erro de entrada: A cota “hard” ten que ser superior a cota “soft”"
 
 #: plugins/quota_management/www/quota_admin.php:61
 msgid "Successfully updated quota"
@@ -15610,7 +15609,7 @@ msgid ""
 "account. Visiting the URL will allow you to change your password online and "
 "login."
 msgstr ""
-"Cando prema a seguir \"Enviar o hash do contrasinal perdido\" enviaráselle "
+"Cando prema a seguir “Enviar o hash do contrasinal perdido” enviaráselle "
 "unha ligazón ao correo con que se rexistrou. Nesta ligazón hai unha "
 "confirmación hash de 128-bit para a súa conta. Se visita esta ligazón, "
 "poderá mudar o seu contrasinal en liña, e iniciar sesión."
@@ -15649,14 +15648,14 @@ msgid ""
 "confirmation email."
 msgstr ""
 "Introduza un nome de usuario ou enderezo de correo electrónico e prema en "
-"\"Enviar\" para que se lle volva enviar un correo electrónico de "
+"“Enviar” para que se lle volva enviar un correo electrónico de "
 "confirmación."
 
 #: www/account/pending-resend.php:58
 msgid ""
 "Fill in a user name and click “Submit” to resend the confirmation email."
 msgstr ""
-"Introduza un nome de usuario e prema en \"Enviar\" para que se lle volva "
+"Introduza un nome de usuario e prema en “Enviar” para que se lle volva "
 "enviar un correo electrónico de confirmación."
 
 #: www/account/register.php:77
@@ -18634,7 +18633,7 @@ msgid ""
 "You can monitor or un-monitor this item by clicking the “Monitor” button."
 msgstr ""
 "Pode monitorizar ou deixar de monitorizar este elemento ao premer o botón "
-"\"Monitorizar\"."
+"“Monitorizar”."
 
 #: www/include/html.php:423
 msgid ""
@@ -18959,7 +18958,7 @@ msgstr ""
 "A caixa de valoración entre pares mostra todas as medias de puntuación (e "
 "niveis de resposta) para cada criterio individual. Debido ao procesamento "
 "que sería necesario, estas cifras inclúen respostas de usuarios tanto "
-"\"fiábeis\" como \"non fiábeis\"."
+"“fiábeis” como “non fiábeis”."
 
 #: www/include/user_home.php:175
 #, php-format
@@ -18967,7 +18966,7 @@ msgid ""
 "The “Sitewide Rank” field shows the user's rank compared to all ranked %s "
 "users."
 msgstr ""
-"A \"clasificación global\" mostra a clasificación do usuario comparada coa "
+"A “clasificación global” mostra a clasificación do usuario comparada coa "
 "de todos os usuarios puntuados de %1$s."
 
 #: www/include/user_home.php:179
@@ -18975,7 +18974,7 @@ msgid ""
 "The “Aggregate Score” shows an average, weighted overall score, based on "
 "trusted-responses only."
 msgstr ""
-"A \"puntuación agregada\" mostra unha puntuación media ponderada baseada só "
+"A “puntuación agregada” mostra unha puntuación media ponderada baseada só "
 "en respostas fiábeis."
 
 #: www/include/user_home.php:183
@@ -18984,7 +18983,7 @@ msgid ""
 "developers will be given (between 1 and 1.5) -- higher rated user's "
 "responses are given more weight."
 msgstr ""
-"O campo de \"importancia persoal\" mostra o peso que terán as puntuacións de "
+"O campo de “importancia persoal” mostra o peso que terán as puntuacións de "
 "outros desenvolvedores (entre 1 e 1,5) -- as respostas dos usuarios ben "
 "puntuados teñen máis peso."
 
@@ -18997,7 +18996,7 @@ msgid ""
 "disappear from your user page."
 msgstr ""
 "Se non quere formar parte do sistema de clasificación entre iguais (isto "
-"impediríalle puntuar e ser puntuado), vaia á <a href=\"%2$s\">súa páxina de "
+"impediríalle puntuar e ser puntuado), vaia á <a href=\"/account/\">súa páxina de "
 "mantemento de conta</a>. Se escolle non participar, eliminaranse "
 "permanentemente as súas puntuacións a outros usuarios, e a caixa de "
 "clasificación enre iguais desaparecerá da súa páxina de usuario."
@@ -20776,7 +20775,7 @@ msgstr "A data non é válida"
 #, fuzzy
 msgid "Invalid type: Type not in onemonth, threemonth, currentyear, comingyear"
 msgstr ""
-"O tipo non é \"un-mes\", \"tres-meses\", \"este-ano\" ou \"próximo-ano\""
+"O tipo non é “un-mes”, “tres-meses”, “este-ano” ou “próximo-ano”"
 
 #: www/pm/calendar.php:86 www/pm/include/ProjectGroupHTML.class.php:175
 msgid "January"
@@ -21050,7 +21049,7 @@ msgstr "Información de páxina"
 #: www/pm/detail_task.php:55 www/pm/mod_task.php:108
 #, fuzzy
 msgid "Subscribe to task"
-msgstr "Subscritores ás \"Actualizacións do sitio\" "
+msgstr ""
 
 #: www/pm/detail_task.php:66 www/pm/mod_task.php:115
 msgid "Original Comment"
@@ -21430,12 +21429,11 @@ msgid "Add New Database"
 msgstr "Engadir unha base de datos nova"
 
 #: www/project/admin/database.php:162
-#, fuzzy
 msgid ""
 "Clicking on “create” will schedule the creation of the database, and email "
 "the details to the project administrators"
 msgstr ""
-"Ao premer en \"crear\" programarase a creación da base de datos e "
+"Ao premer en “crear” programarase a creación da base de datos e "
 "enviaráselle por correo electrónico os detalles á administración do proxecto"
 
 #: www/project/admin/database.php:164
