@@ -8947,7 +8947,7 @@ msgstr ""
 #: plugins/authldap/www/post-login.php:113
 #, fuzzy, php-format
 msgid "<a href=\"%1$s\">[Resend Confirmation Email]</a>"
-msgstr "Altres informacions"
+msgstr ""
 
 #: plugins/authldap/www/post-login.php:115
 #, php-format
@@ -15150,9 +15150,9 @@ msgid "Congratulations. You have changed your password."
 msgstr ""
 
 #: www/account/change_pw.php:81
-#, fuzzy, php-format
+#, php-format
 msgid "You should now <a href=\"%s\">Return to User Prefs</a>."
-msgstr "Ara haurieu de %1$s tornar a UserPrefs %2$s."
+msgstr "Ara haurieu de <a href=\"%s\">tornar a UserPrefs</a>."
 
 #: www/account/change_pw.php:88 www/account/index.php:153
 #: www/admin/userlist.php:150
@@ -24202,15 +24202,6 @@ msgid "No User Name Provided"
 msgstr "Nom d'usuari"
 
 #, fuzzy
-#~ msgid "Error: %s"
-#~ msgstr "Error: %s"
-
-#, fuzzy
-#~ msgid "View project <a href=\"%s\">Statistics</a>"
-#~ msgstr ""
-#~ "Podrieu enviar missatges si fossiu <a href=\"%s\">iniciant sessió</a>."
-
-#, fuzzy
 #~ msgid "Massmail admin"
 #~ msgstr "Administració de les llistes de correu"
 
@@ -24547,10 +24538,6 @@ msgstr "Nom d'usuari"
 
 #~ msgid "Message:"
 #~ msgstr "Missatge:"
-
-#, fuzzy
-#~ msgid "You could post if you were <a href=\"%1$s\">logged in</a>."
-#~ msgstr "Podrieu enviar missatges si fossiu %1$s iniciant sessió a %2$s"
 
 #, fuzzy
 #~ msgid "Posted by:"
@@ -27080,7 +27067,7 @@ msgstr "Nom d'usuari"
 
 #~ msgid "Please give more comprehensive licensing description"
 #~ msgstr ""
-#~ "Si us plau, doneu-nos una descripció més comprensible de la llicència\""
+#~ "Si us plau, doneu-nos una descripció més comprensible de la llicència"
 
 #, fuzzy
 #~ msgid "Mailing lists"
