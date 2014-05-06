@@ -3693,9 +3693,7 @@ msgstr "Administration du site"
 #: common/include/Navigation.class.php:297
 msgid ""
 "Administration Submenu to handle global configuration, users & projects."
-msgstr ""
-"Sous-menu d'adminsitration, pour gérer la configuration globale, les "
-"utilisateurs et les projets."
+msgstr "Sous-menu d'administration, pour gérer la configuration globale, les utilisateurs et les projets."
 
 #: common/include/Navigation.class.php:305
 msgid "Statistics about visits, users & projects in time frame."
