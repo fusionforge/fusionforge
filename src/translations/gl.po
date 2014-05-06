@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-06 14:28+0200\n"
+"POT-Creation-Date: 2014-05-06 16:44+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -371,7 +371,7 @@ msgstr "Detalles da tarefa"
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:648
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:650
 #: plugins/scmhg/common/HgPlugin.class.php:656
-#: plugins/scmhook/common/scmhookPlugin.class.php:144
+#: plugins/scmhook/common/scmhookPlugin.class.php:145
 #: www/account/index.php:200 www/account/index.php:304
 #: www/account/index.php:305 www/account/lostlogin.php:84
 #: www/account/register.php:212 www/account/verify.php:58
@@ -990,9 +990,9 @@ msgstr ""
 #: plugins/oauthprovider/www/consumer.php:109
 #: plugins/oauthprovider/www/consumer_update_page.php:64
 #: plugins/scmhg/common/HgPlugin.class.php:658
-#: plugins/scmhook/common/scmhookPlugin.class.php:309
-#: plugins/scmhook/common/scmhookPlugin.class.php:385
-#: plugins/scmhook/common/scmhookPlugin.class.php:446
+#: plugins/scmhook/common/scmhookPlugin.class.php:310
+#: plugins/scmhook/common/scmhookPlugin.class.php:386
+#: plugins/scmhook/common/scmhookPlugin.class.php:447
 #: www/forum/admin/index.php:116 www/forum/admin/index.php:158
 #: www/forum/index.php:71 www/mail/admin/index.php:203
 #: www/mail/admin/index.php:236 www/mail/index.php:80
@@ -2752,8 +2752,7 @@ msgstr "Ficheiro actual"
 
 #: common/forum/ForumHTML.class.php:317 common/forum/ForumHTML.class.php:350
 msgid "Use the “Browse” button to find the file you want to attach"
-msgstr ""
-"Empregue o botón de “Explorar” para atopar o ficheiro que quere anexar"
+msgstr "Empregue o botón de “Explorar” para atopar o ficheiro que quere anexar"
 
 #: common/forum/ForumHTML.class.php:320 common/forum/ForumHTML.class.php:353
 msgid "File to upload"
@@ -5463,8 +5462,8 @@ msgid ""
 "type, which can get time-consuming."
 msgstr ""
 "Aos rexistros chámaselles “tipos de artefactos” e ás pezas individuais dos "
-"datos “artefactos”. “Erros” pode ser un tipo de artefacto, mentres que "
-"un informe de erro sería un artefacto. Pode crear tantos tipos de artefactos "
+"datos “artefactos”. “Erros” pode ser un tipo de artefacto, mentres que un "
+"informe de erro sería un artefacto. Pode crear tantos tipos de artefactos "
 "como queira, pero recorde que terá que configurar as categorías, grupos e "
 "permisos para cada tipo, o que pode levar moito tempo."
 
@@ -6029,8 +6028,8 @@ msgid ""
 "to change their properties and click once on “Mass Update”."
 msgstr ""
 "Se desexa aplicar os cambios a todos os elementos seleccionados, use estes "
-"controis para cambiar as súas propiedades e prema unha vez en "
-"“Actualización masiva”."
+"controis para cambiar as súas propiedades e prema unha vez en “Actualización "
+"masiva”."
 
 #: common/tracker/actions/browse.php:780 common/tracker/actions/browse.php:791
 #: common/tracker/actions/browse.php:795 www/include/html.php:361
@@ -11651,8 +11650,7 @@ msgid ""
 "It will take <span class=\"important\">few minutes</span> for your list to "
 "be created."
 msgstr ""
-"Levará <span class=\"important\">de 6 a 24 horas</span> "
-"crear esta lista."
+"Levará <span class=\"important\">de 6 a 24 horas</span> crear esta lista."
 
 #: plugins/mailman/www/admin/index.php:134 www/mail/admin/index.php:154
 msgid "Unable to get the lists"
@@ -14747,50 +14745,50 @@ msgstr ""
 msgid "Feature not implemented."
 msgstr "Aínda non está implementado."
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:144
+#: plugins/scmhook/common/scmhookPlugin.class.php:145
 #, fuzzy
 msgid "invalid e-mails"
 msgstr "O enderezo de correo electrónico non é válido."
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:179
+#: plugins/scmhook/common/scmhookPlugin.class.php:180
 msgid "Hooks management update process waiting ..."
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:181
+#: plugins/scmhook/common/scmhookPlugin.class.php:182
 #, fuzzy
 msgid "Enable Repository Hooks"
 msgstr "Historial do repositorio"
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:196
+#: plugins/scmhook/common/scmhookPlugin.class.php:197
 msgid "SCM Type not supported yet by scmhook"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:202
+#: plugins/scmhook/common/scmhookPlugin.class.php:203
 #, fuzzy
 msgid "No hooks available"
 msgstr "Non hai estatísticas dispoñibles"
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:308
+#: plugins/scmhook/common/scmhookPlugin.class.php:309
 #, php-format
 msgid "%s Hooks"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:309
+#: plugins/scmhook/common/scmhookPlugin.class.php:310
 #, fuzzy
 msgid "Hook"
 msgstr "Nome do rol"
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:384
+#: plugins/scmhook/common/scmhookPlugin.class.php:385
 msgid "serve-push-pull-bundle Hooks"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:385
-#: plugins/scmhook/common/scmhookPlugin.class.php:446
+#: plugins/scmhook/common/scmhookPlugin.class.php:386
+#: plugins/scmhook/common/scmhookPlugin.class.php:447
 #, fuzzy
 msgid "Hook Name"
 msgstr "Nome do rol"
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:445
+#: plugins/scmhook/common/scmhookPlugin.class.php:446
 msgid "post-receive Hooks"
 msgstr ""
 
@@ -14910,7 +14908,7 @@ msgstr ""
 msgid "Developer Subversion Access via DAV"
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:659
+#: plugins/scmsvn/common/SVNPlugin.class.php:664
 #, fuzzy
 msgid "Subversion Commits"
 msgstr "Navegar polo repositorio Subversion"
@@ -15648,8 +15646,7 @@ msgid ""
 "confirmation email."
 msgstr ""
 "Introduza un nome de usuario ou enderezo de correo electrónico e prema en "
-"“Enviar” para que se lle volva enviar un correo electrónico de "
-"confirmación."
+"“Enviar” para que se lle volva enviar un correo electrónico de confirmación."
 
 #: www/account/pending-resend.php:58
 msgid ""
@@ -18966,16 +18963,16 @@ msgid ""
 "The “Sitewide Rank” field shows the user's rank compared to all ranked %s "
 "users."
 msgstr ""
-"A “clasificación global” mostra a clasificación do usuario comparada coa "
-"de todos os usuarios puntuados de %1$s."
+"A “clasificación global” mostra a clasificación do usuario comparada coa de "
+"todos os usuarios puntuados de %1$s."
 
 #: www/include/user_home.php:179
 msgid ""
 "The “Aggregate Score” shows an average, weighted overall score, based on "
 "trusted-responses only."
 msgstr ""
-"A “puntuación agregada” mostra unha puntuación media ponderada baseada só "
-"en respostas fiábeis."
+"A “puntuación agregada” mostra unha puntuación media ponderada baseada só en "
+"respostas fiábeis."
 
 #: www/include/user_home.php:183
 msgid ""
@@ -18996,8 +18993,8 @@ msgid ""
 "disappear from your user page."
 msgstr ""
 "Se non quere formar parte do sistema de clasificación entre iguais (isto "
-"impediríalle puntuar e ser puntuado), vaia á <a href=\"/account/\">súa páxina de "
-"mantemento de conta</a>. Se escolle non participar, eliminaranse "
+"impediríalle puntuar e ser puntuado), vaia á <a href=\"/account/\">súa "
+"páxina de mantemento de conta</a>. Se escolle non participar, eliminaranse "
 "permanentemente as súas puntuacións a outros usuarios, e a caixa de "
 "clasificación enre iguais desaparecerá da súa páxina de usuario."
 
@@ -20774,8 +20771,7 @@ msgstr "A data non é válida"
 #: www/pm/calendar.php:64
 #, fuzzy
 msgid "Invalid type: Type not in onemonth, threemonth, currentyear, comingyear"
-msgstr ""
-"O tipo non é “un-mes”, “tres-meses”, “este-ano” ou “próximo-ano”"
+msgstr "O tipo non é “un-mes”, “tres-meses”, “este-ano” ou “próximo-ano”"
 
 #: www/pm/calendar.php:86 www/pm/include/ProjectGroupHTML.class.php:175
 msgid "January"
@@ -21047,7 +21043,6 @@ msgid "Task Detail Information (JSON)"
 msgstr "Información de páxina"
 
 #: www/pm/detail_task.php:55 www/pm/mod_task.php:108
-#, fuzzy
 msgid "Subscribe to task"
 msgstr ""
 
@@ -21433,8 +21428,8 @@ msgid ""
 "Clicking on “create” will schedule the creation of the database, and email "
 "the details to the project administrators"
 msgstr ""
-"Ao premer en “crear” programarase a creación da base de datos e "
-"enviaráselle por correo electrónico os detalles á administración do proxecto"
+"Ao premer en “crear” programarase a creación da base de datos e enviaráselle "
+"por correo electrónico os detalles á administración do proxecto"
 
 #: www/project/admin/database.php:164
 msgid "Database Type"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-06 14:28+0200\n"
+"POT-Creation-Date: 2014-05-06 16:44+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -362,7 +362,7 @@ msgstr "Falló Tarea"
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:648
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:650
 #: plugins/scmhg/common/HgPlugin.class.php:656
-#: plugins/scmhook/common/scmhookPlugin.class.php:144
+#: plugins/scmhook/common/scmhookPlugin.class.php:145
 #: www/account/index.php:200 www/account/index.php:304
 #: www/account/index.php:305 www/account/lostlogin.php:84
 #: www/account/register.php:212 www/account/verify.php:58
@@ -974,9 +974,9 @@ msgstr ""
 #: plugins/oauthprovider/www/consumer.php:109
 #: plugins/oauthprovider/www/consumer_update_page.php:64
 #: plugins/scmhg/common/HgPlugin.class.php:658
-#: plugins/scmhook/common/scmhookPlugin.class.php:309
-#: plugins/scmhook/common/scmhookPlugin.class.php:385
-#: plugins/scmhook/common/scmhookPlugin.class.php:446
+#: plugins/scmhook/common/scmhookPlugin.class.php:310
+#: plugins/scmhook/common/scmhookPlugin.class.php:386
+#: plugins/scmhook/common/scmhookPlugin.class.php:447
 #: www/forum/admin/index.php:116 www/forum/admin/index.php:158
 #: www/forum/index.php:71 www/mail/admin/index.php:203
 #: www/mail/admin/index.php:236 www/mail/index.php:80
@@ -14261,47 +14261,47 @@ msgstr "Clonar: "
 msgid "Feature not implemented."
 msgstr "No implementado"
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:144
+#: plugins/scmhook/common/scmhookPlugin.class.php:145
 #, fuzzy
 msgid "invalid e-mails"
 msgstr "Dirección de correo electrónico inválida"
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:179
+#: plugins/scmhook/common/scmhookPlugin.class.php:180
 msgid "Hooks management update process waiting ..."
 msgstr "Proceso de actualización en la gestión de Hooks esperando ..."
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:181
+#: plugins/scmhook/common/scmhookPlugin.class.php:182
 msgid "Enable Repository Hooks"
 msgstr "Activar Hooks Repositorio"
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:196
+#: plugins/scmhook/common/scmhookPlugin.class.php:197
 msgid "SCM Type not supported yet by scmhook"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:202
+#: plugins/scmhook/common/scmhookPlugin.class.php:203
 msgid "No hooks available"
 msgstr "No hay hooks disponibles"
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:308
+#: plugins/scmhook/common/scmhookPlugin.class.php:309
 #, php-format
 msgid "%s Hooks"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:309
+#: plugins/scmhook/common/scmhookPlugin.class.php:310
 #, fuzzy
 msgid "Hook"
 msgstr "Nombre de Hook"
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:384
+#: plugins/scmhook/common/scmhookPlugin.class.php:385
 msgid "serve-push-pull-bundle Hooks"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:385
-#: plugins/scmhook/common/scmhookPlugin.class.php:446
+#: plugins/scmhook/common/scmhookPlugin.class.php:386
+#: plugins/scmhook/common/scmhookPlugin.class.php:447
 msgid "Hook Name"
 msgstr "Nombre de Hook"
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:445
+#: plugins/scmhook/common/scmhookPlugin.class.php:446
 msgid "post-receive Hooks"
 msgstr ""
 
@@ -14422,7 +14422,7 @@ msgstr ""
 msgid "Developer Subversion Access via DAV"
 msgstr "Acceso Desarrolladores Subersion via DAV"
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:659
+#: plugins/scmsvn/common/SVNPlugin.class.php:664
 #, fuzzy
 msgid "Subversion Commits"
 msgstr "Navegador Repositorio Subversion"
@@ -15153,8 +15153,8 @@ msgid ""
 "Fill in a user name or email address and click “Submit” to resend the "
 "confirmation email."
 msgstr ""
-"Rellene el nombre usuario ó la dirección email y haga click en «Enviar» "
-"para que se reenvíe el email de confirmación."
+"Rellene el nombre usuario ó la dirección email y haga click en «Enviar» para "
+"que se reenvíe el email de confirmación."
 
 #: www/account/pending-resend.php:58
 #, fuzzy
@@ -22983,8 +22983,8 @@ msgid ""
 "browser preferences"
 msgstr ""
 "Esta es una lista de preferencias elegidas por los usuarios en sus "
-"«preferencias de usuario»; no incluye lenguages que son elegidos via "
-"cookies o preferencias del navegador"
+"«preferencias de usuario»; no incluye lenguages que son elegidos via cookies "
+"o preferencias del navegador"
 
 #: www/stats/index.php:32
 #, php-format

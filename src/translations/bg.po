@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-06 14:28+0200\n"
+"POT-Creation-Date: 2014-05-06 16:44+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -357,7 +357,7 @@ msgstr "Дата на публикуване"
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:648
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:650
 #: plugins/scmhg/common/HgPlugin.class.php:656
-#: plugins/scmhook/common/scmhookPlugin.class.php:144
+#: plugins/scmhook/common/scmhookPlugin.class.php:145
 #: www/account/index.php:200 www/account/index.php:304
 #: www/account/index.php:305 www/account/lostlogin.php:84
 #: www/account/register.php:212 www/account/verify.php:58
@@ -687,9 +687,8 @@ msgid "A new document has been uploaded and waiting to be approved by you"
 msgstr ""
 
 #: common/docman/Document.class.php:981
-#, fuzzy
 msgid "Error Deleting Document"
-msgstr "Грешка при получаването на "
+msgstr "Грешка при получаването на"
 
 #: common/docman/Document.class.php:1041
 #: common/docman/DocumentGroup.class.php:954
@@ -950,9 +949,9 @@ msgstr ""
 #: plugins/oauthprovider/www/consumer.php:109
 #: plugins/oauthprovider/www/consumer_update_page.php:64
 #: plugins/scmhg/common/HgPlugin.class.php:658
-#: plugins/scmhook/common/scmhookPlugin.class.php:309
-#: plugins/scmhook/common/scmhookPlugin.class.php:385
-#: plugins/scmhook/common/scmhookPlugin.class.php:446
+#: plugins/scmhook/common/scmhookPlugin.class.php:310
+#: plugins/scmhook/common/scmhookPlugin.class.php:386
+#: plugins/scmhook/common/scmhookPlugin.class.php:447
 #: www/forum/admin/index.php:116 www/forum/admin/index.php:158
 #: www/forum/index.php:71 www/mail/admin/index.php:203
 #: www/mail/admin/index.php:236 www/mail/index.php:80
@@ -2173,9 +2172,8 @@ msgstr ""
 #: common/forum/AttachManager.class.php:155 www/forum/admin/index.php:327
 #: www/forum/admin/index.php:333 www/forum/admin/index.php:397
 #: www/forum/admin/monitor.php:44
-#, fuzzy
 msgid "Could Not Get Forum Object"
-msgstr "Разрешение не беше получено"
+msgstr ""
 
 #: common/forum/AttachManager.class.php:148
 #: common/forum/ForumAdmin.class.php:68 common/forum/ForumAdmin.class.php:328
@@ -2288,9 +2286,8 @@ msgid "%s does not use the Forum tool."
 msgstr ""
 
 #: common/forum/ForumAdmin.class.php:60 www/forum/admin/index.php:365
-#, fuzzy
 msgid "Move Thread"
-msgstr "Нишка"
+msgstr ""
 
 #: common/forum/ForumAdmin.class.php:81 www/forum/admin/index.php:103
 #, fuzzy
@@ -2403,9 +2400,8 @@ msgid "Update"
 msgstr ""
 
 #: common/forum/ForumAdmin.class.php:394
-#, fuzzy
 msgid "Forum deleted"
-msgstr "Регистрацията е изтрита"
+msgstr ""
 
 #: common/forum/ForumAdmin.class.php:413 www/forum/forum.php:71
 #: www/forum/message.php:74
@@ -2722,14 +2718,14 @@ msgid "Receive comments via email"
 msgstr ""
 
 #: common/forum/ForumHTML.class.php:631
-#, fuzzy, php-format
+#, php-format
 msgid "You could post if you were <a href=\"%s\">logged in</a>."
-msgstr "Вие публикувате анонимно защото не сте"
+msgstr ""
 
 #: common/forum/ForumHTML.class.php:633
-#, fuzzy, php-format
+#, php-format
 msgid "Please <a href=\"%s\">log in</a>"
-msgstr "Вие публикувате анонимно защото не сте"
+msgstr ""
 
 #: common/forum/ForumMessage.class.php:88
 msgid "Group_forum_id in db result does not match Forum Object"
@@ -3230,9 +3226,9 @@ msgid "Could not get permission."
 msgstr "Разрешение не беше получено."
 
 #: common/include/Group.class.php:449
-#, fuzzy, php-format
+#, php-format
 msgid "Error: Cannot change group properties: %s"
-msgstr "Грешка при добавянето на форум"
+msgstr ""
 
 #: common/include/Group.class.php:530
 #, php-format
@@ -3403,16 +3399,14 @@ msgid "Error: project_assigned_to %d: %s"
 msgstr ""
 
 #: common/include/Group.class.php:2148
-#, fuzzy
 msgid "Removed User"
-msgstr "Премахване"
+msgstr ""
 
 #: common/include/Group.class.php:2170 www/admin/globalroledelete.php:41
 #: www/admin/globalroleedit.php:44 www/project/admin/roledelete.php:47
 #: www/project/admin/roleedit.php:55
-#, fuzzy
 msgid "Could Not Get Role"
-msgstr "Разрешение не беше получено"
+msgstr ""
 
 #: common/include/Group.class.php:2173
 #, fuzzy, php-format
@@ -3725,14 +3719,12 @@ msgid "Home"
 msgstr "Начало"
 
 #: common/include/Navigation.class.php:235 www/reporting/index.php:33
-#, fuzzy
 msgid "Main Page"
-msgstr "Оценка на уменията на потребителя"
+msgstr ""
 
 #: common/include/Navigation.class.php:238
-#, fuzzy
 msgid "My Page"
-msgstr "Моята страница"
+msgstr ""
 
 #: common/include/Navigation.class.php:240
 msgid "Your Page, widgets selected by you to follow your items."
@@ -3771,9 +3763,8 @@ msgstr ""
 #: plugins/quota_management/www/quota_admin.php:38
 #: plugins/quota_management/www/quota.php:36 www/admin/globalroleedit.php:30
 #: www/admin/index.php:39 www/admin/vhost.php:109
-#, fuzzy
 msgid "Site Admin"
-msgstr "Администриране"
+msgstr ""
 
 #: common/include/Navigation.class.php:297
 msgid ""
@@ -3804,9 +3795,8 @@ msgstr "Администриране"
 #: common/include/Navigation.class.php:401 www/admin/approve-pending.php:139
 #: www/admin/groupedit.php:99 www/admin/useredit.php:276
 #: www/admin/useredit.php:307
-#, fuzzy
 msgid "Project Admin"
-msgstr "Администратори"
+msgstr ""
 
 #: common/include/Navigation.class.php:417 www/activity/index.php:98
 #: www/activity/index.php:193 www/activity/index.php:288
@@ -3845,9 +3835,8 @@ msgid "Mailing Lists"
 msgstr "Пощенски списъци"
 
 #: common/include/Navigation.class.php:477
-#, fuzzy
 msgid "Project Management."
-msgstr "Проекти на потребителя"
+msgstr ""
 
 #: common/include/Navigation.class.php:491
 #: common/reporting/report_utils.php:140 common/reporting/report_utils.php:676
@@ -3856,9 +3845,8 @@ msgid "Docs"
 msgstr "Документи"
 
 #: common/include/Navigation.class.php:492 www/index_std.php:40
-#, fuzzy
 msgid "Document Management."
-msgstr "Преглед на документите"
+msgstr ""
 
 #: common/include/Navigation.class.php:506
 #: common/widget/Widget_ProjectPublicAreas.class.php:171
@@ -3871,9 +3859,8 @@ msgid "Online surveys, project needs your point of view."
 msgstr ""
 
 #: common/include/Navigation.class.php:522
-#, fuzzy
 msgid "Flash head line from the project."
-msgstr "Вие не сте член на никой активен проект"
+msgstr ""
 
 #: common/include/Navigation.class.php:536 common/include/rbac_texts.php:197
 #: common/widget/Widget_MyLatestSvnCommits.class.php:108
@@ -3926,9 +3913,8 @@ msgid "Use %s"
 msgstr ""
 
 #: common/include/Plugin.class.php:349
-#, fuzzy
 msgid "No description available."
-msgstr "Няма статистика"
+msgstr ""
 
 #: common/include/PluginManager.class.php:230
 msgid ""
@@ -3946,14 +3932,12 @@ msgid "Posted data is too large. %1$s exceeds the maximum size of %2$s"
 msgstr ""
 
 #: common/include/RBAC.php:195
-#, fuzzy
 msgid "Cannot link to home project"
-msgstr "Вие не сте член на никой активен проект"
+msgstr ""
 
 #: common/include/RBAC.php:230
-#, fuzzy
 msgid "Cannot unlink from home project"
-msgstr "Вие не сте член на никой активен проект"
+msgstr ""
 
 #: common/include/RBAC.php:607
 msgid "UNKNOWN (internal error, report bug to FusionForge)"
@@ -4350,9 +4334,8 @@ msgid "Data about current and past states of the repository."
 msgstr ""
 
 #: common/include/SCMPlugin.class.php:255
-#, fuzzy
 msgid "Enable Anonymous Read Access"
-msgstr "Анонимно FTP пространство"
+msgstr ""
 
 #: common/include/SCMPlugin.class.php:307
 #, php-format
@@ -4417,9 +4400,8 @@ msgid "No admin users ?"
 msgstr ""
 
 #: common/include/Storage.class.php:56
-#, fuzzy
 msgid "Cannot create directory:"
-msgstr "Име на документа"
+msgstr ""
 
 #: common/include/Storage.class.php:66
 #, php-format
@@ -4432,9 +4414,8 @@ msgid "Not a File %1$s or not a directory %2$s."
 msgstr ""
 
 #: common/include/User.class.php:246
-#, fuzzy
 msgid "User Not Found"
-msgstr "Няма намерени обяви"
+msgstr ""
 
 #: common/include/User.class.php:306
 #, fuzzy
@@ -4462,9 +4443,8 @@ msgid "Passwords do not match"
 msgstr "Паролата и потвърждението и не съвпадат"
 
 #: common/include/User.class.php:332
-#, fuzzy
 msgid "Invalid Password"
-msgstr "Грешна парола:"
+msgstr "Грешна парола"
 
 #: common/include/User.class.php:337
 msgid "Invalid Unix Name (must not contain uppercase characters)"
@@ -4570,14 +4550,12 @@ msgid "Error: You cannot set pending status if user is suspend or active"
 msgstr ""
 
 #: common/include/User.class.php:746
-#, fuzzy
 msgid "Error: Cannot Update User Status:"
-msgstr "Разрешение не беше получено"
+msgstr ""
 
 #: common/include/User.class.php:939 common/include/User.class.php:991
-#, fuzzy
 msgid "User with this email already exists."
-msgstr "Това потребителско име вече е заето."
+msgstr ""
 
 #: common/include/User.class.php:1099
 #, php-format
@@ -4692,14 +4670,12 @@ msgid "TiB"
 msgstr ""
 
 #: common/include/utils.php:1302
-#, fuzzy
 msgid "Error: a mailing list with the same email address already exists."
-msgstr "Това потребителско име вече е заето."
+msgstr ""
 
 #: common/include/utils.php:1320
-#, fuzzy
 msgid "Error: a forum with the same email address already exists."
-msgstr "Това потребителско име вече е заето."
+msgstr ""
 
 #: common/mail/MailingList.class.php:126
 #: plugins/mailman/include/MailmanList.class.php:142
@@ -4722,9 +4698,8 @@ msgstr ""
 
 #: common/mail/MailingList.class.php:177
 #: plugins/mailman/include/MailmanList.class.php:163
-#, fuzzy
 msgid "Error Creating mailing list"
-msgstr "Грешка при получаването на "
+msgstr ""
 
 #: common/mail/MailingList.class.php:192
 #, php-format
@@ -4784,9 +4759,8 @@ msgid "%s does not use the Project Management tool"
 msgstr ""
 
 #: common/pm/ProjectTask.class.php:144 common/pm/ProjectTask.class.php:943
-#, fuzzy
 msgid "summary"
-msgstr "Държава:"
+msgstr ""
 
 #: common/pm/ProjectTask.class.php:145
 msgid "details"
@@ -4802,9 +4776,8 @@ msgid "hours"
 msgstr ""
 
 #: common/pm/ProjectTask.class.php:148 common/pm/ProjectTask.class.php:946
-#, fuzzy
 msgid "start date"
-msgstr "Дневникът е обновен"
+msgstr ""
 
 #: common/pm/ProjectTask.class.php:149 common/pm/ProjectTask.class.php:947
 msgid "end date"
@@ -4812,14 +4785,12 @@ msgstr ""
 
 #: common/pm/ProjectTask.class.php:150 common/pm/ProjectTask.class.php:949
 #: www/pm/ganttpage.php:250
-#, fuzzy
 msgid "category"
-msgstr "Категория"
+msgstr "категория"
 
 #: common/pm/ProjectTask.class.php:235
-#, fuzzy
 msgid "Invalid Task ID"
-msgstr "Грешна парола"
+msgstr ""
 
 #: common/pm/ProjectTask.class.php:948
 #, fuzzy
@@ -4940,9 +4911,8 @@ msgid "Other"
 msgstr ""
 
 #: common/reporting/report_utils.php:248 common/reporting/report_utils.php:375
-#, fuzzy
 msgid "No selected area."
-msgstr "Регистрацията е изтрита"
+msgstr ""
 
 #: common/reporting/report_utils.php:261
 msgid "Avg Time Open (in days)"
@@ -4958,9 +4928,8 @@ msgid "Total Still Open"
 msgstr ""
 
 #: common/reporting/report_utils.php:311 common/reporting/report_utils.php:362
-#, fuzzy
 msgid "Tracker Activity"
-msgstr "Тракер"
+msgstr ""
 
 #: common/reporting/report_utils.php:386
 msgid "Per assignee"
@@ -4990,9 +4959,8 @@ msgstr ""
 #: common/reporting/report_utils.php:994
 #: common/reporting/report_utils.php:1061
 #: common/reporting/report_utils.php:1167
-#, fuzzy
 msgid "No data to display."
-msgstr "Няма въпроси към това проучване"
+msgstr ""
 
 #: common/reporting/report_utils.php:611 plugins/authopenid/www/index.php:38
 #: plugins/authwebid/www/index.php:35 www/account/change_email-complete.php:52
@@ -5002,9 +4970,8 @@ msgstr "Няма въпроси към това проучване"
 #: www/admin/database.php:61 www/admin/unsubscribe.php:76
 #: www/admin/useredit.php:43 www/admin/userlist.php:44
 #: www/docman/index.php:105
-#, fuzzy
 msgid "Could Not Get User"
-msgstr "Разрешение не беше получено"
+msgstr ""
 
 #: common/reporting/report_utils.php:702
 #, fuzzy
@@ -5012,19 +4979,16 @@ msgid "Task open"
 msgstr "Дата на публикуване"
 
 #: common/reporting/report_utils.php:703
-#, fuzzy
 msgid "Task close"
-msgstr "Тракер"
+msgstr ""
 
 #: common/reporting/report_utils.php:710
-#, fuzzy
 msgid "Tracker items opened"
-msgstr "Тракер"
+msgstr ""
 
 #: common/reporting/report_utils.php:711
-#, fuzzy
 msgid "Tracker items closed"
-msgstr "Това потребителско име вече е заето."
+msgstr ""
 
 #: common/reporting/report_utils.php:951
 msgid "Support Requests"
@@ -5077,9 +5041,8 @@ msgid "Update Failed: Survey Title Required"
 msgstr ""
 
 #: common/survey/Survey.class.php:113
-#, fuzzy
 msgid "Update Failed: Survey Questions Required"
-msgstr "Няма въпроси към това проучване"
+msgstr ""
 
 #: common/survey/Survey.class.php:167 common/survey/Survey.class.php:200
 msgid "The Survey data is not filled"
@@ -5379,9 +5342,8 @@ msgstr ""
 #: common/tracker/actions/admin-updates.php:131
 #: common/tracker/actions/admin-updates.php:153
 #: www/tracker/admin/index.php:187
-#, fuzzy
 msgid "Unable to create ArtifactCanned Object"
-msgstr "Грешка при създаването на "
+msgstr ""
 
 #: common/tracker/actions/admin-updates.php:139
 msgid "Canned Response Inserted"
@@ -5398,9 +5360,8 @@ msgid "ArtifactType could not be created"
 msgstr ""
 
 #: common/tracker/actions/admin-updates.php:191
-#, fuzzy
 msgid "Copy into Tracker: "
-msgstr "Анонимно FTP пространство"
+msgstr ""
 
 #: common/tracker/actions/admin-updates.php:252
 msgid "Custom Field updated"
@@ -5426,9 +5387,8 @@ msgid "Error cloning fields: "
 msgstr ""
 
 #: common/tracker/actions/admin-updates.php:301
-#, fuzzy
 msgid "Successfully Cloned Tracker Fields "
-msgstr "Паролата сменена успешно"
+msgstr ""
 
 #: common/tracker/actions/admin-updates.php:324
 #: common/tracker/actions/admin-updates.php:446
@@ -5439,9 +5399,8 @@ msgid "Tracker Updated"
 msgstr ""
 
 #: common/tracker/actions/admin-updates.php:476
-#, fuzzy
 msgid "Renderer Updated"
-msgstr "Дневникът е обновен"
+msgstr ""
 
 #: common/tracker/actions/admin-updates.php:553
 msgid "Initial values not saved, no initial state given."
@@ -5525,9 +5484,8 @@ msgstr ""
 #: common/tracker/actions/browse.php:202 common/tracker/actions/browse.php:595
 #: common/tracker/actions/query.php:197
 #: common/tracker/views/form-customizelist.php:47
-#, fuzzy
 msgid "Last Modified Date"
-msgstr "Дневникът е обновен"
+msgstr ""
 
 #: common/tracker/actions/browse.php:203 common/tracker/actions/browse.php:583
 #: common/tracker/actions/query.php:198
@@ -5722,9 +5680,8 @@ msgstr ""
 
 #: common/tracker/actions/browse.php:759 common/tracker/actions/browse.php:803
 #: www/pm/browse_task.php:397 www/pm/browse_task.php:430
-#, fuzzy
 msgid "Mass Update"
-msgstr "Дневникът е обновен"
+msgstr ""
 
 #: common/tracker/actions/browse.php:763 www/pm/browse_task.php:399
 msgid ""
@@ -5763,19 +5720,16 @@ msgid ""
 msgstr ""
 
 #: common/tracker/actions/csv.php:82
-#, fuzzy
 msgid "Export as a CSV file"
-msgstr "Няма статистика"
+msgstr ""
 
 #: common/tracker/actions/csv.php:84 www/pm/csv.php:82
-#, fuzzy
 msgid "Selected CSV Format:"
-msgstr "Обновяване на бележка"
+msgstr ""
 
 #: common/tracker/actions/csv.php:86
-#, fuzzy
 msgid "Download CSV file"
-msgstr "Няма статистика"
+msgstr ""
 
 #: common/tracker/actions/deleteartifact.php:32
 msgid "Delete artifact"
@@ -5806,9 +5760,8 @@ msgstr ""
 #: www/frs/admin/editrelease.php:394 www/pm/admin/index.php:380
 #: www/pm/deletetask.php:45 www/project/admin/roledelete.php:90
 #: www/reporting/rebuild.php:63
-#, fuzzy
 msgid "I am Sure"
-msgstr "Добавяне на проучване"
+msgstr ""
 
 #: common/tracker/actions/detail.php:70
 #: common/tracker/actions/mod-limited.php:77 common/tracker/actions/mod.php:81
@@ -5824,9 +5777,8 @@ msgstr ""
 
 #: common/tracker/actions/detail.php:77
 #: common/tracker/actions/mod-limited.php:84 common/tracker/actions/mod.php:89
-#, fuzzy
 msgid "Cast Vote"
-msgstr "Фамилия:"
+msgstr ""
 
 #: common/tracker/actions/detail.php:85
 #: common/tracker/actions/mod-limited.php:100
@@ -5899,9 +5851,8 @@ msgstr "Обновяване на бележка"
 
 #: common/tracker/actions/format_csv.php:70
 #: common/tracker/actions/format_csv.php:107 www/pm/format_csv.php:82
-#, fuzzy
 msgid "Separator"
-msgstr "Категория"
+msgstr ""
 
 #: common/tracker/actions/format_csv.php:75 www/pm/format_csv.php:87
 msgid "Comma (char: “,”)"
@@ -6022,19 +5973,16 @@ msgid "Use Canned Response"
 msgstr ""
 
 #: common/tracker/actions/query.php:73
-#, fuzzy
 msgid "Query Successfully Created"
-msgstr "Паролата сменена успешно"
+msgstr ""
 
 #: common/tracker/actions/query.php:122
-#, fuzzy
 msgid "Query Updated"
-msgstr "Дневникът е обновен"
+msgstr ""
 
 #: common/tracker/actions/query.php:150
-#, fuzzy
 msgid "Query Deleted"
-msgstr "Регистрацията е изтрита"
+msgstr ""
 
 #: common/tracker/actions/query.php:155
 msgid "Missing Build Query Action"
@@ -6070,9 +6018,8 @@ msgid "Type of query"
 msgstr ""
 
 #: common/tracker/actions/query.php:324
-#, fuzzy
 msgid "Private query"
-msgstr "Регистрирани проекти"
+msgstr ""
 
 #: common/tracker/actions/query.php:326
 msgid "Project level query (query is public)"
@@ -6134,9 +6081,8 @@ msgid "Could Not Get ProjectTaskFactory"
 msgstr ""
 
 #: common/tracker/actions/taskmgr.php:81 common/tracker/actions/taskmgr.php:98
-#, fuzzy
 msgid "No Available Tasks Found"
-msgstr "Няма въпроси към това проучване"
+msgstr ""
 
 #: common/tracker/actions/taskmgr.php:103
 #: common/tracker/actions/taskmgr.php:158
@@ -6152,9 +6098,8 @@ msgstr ""
 
 #: common/tracker/actions/taskmgr.php:108
 #: common/tracker/actions/taskmgr.php:162 www/reporting/timeadd.php:199
-#, fuzzy
 msgid "Tasks Project"
-msgstr "Моите Проекти"
+msgstr ""
 
 #: common/tracker/actions/taskmgr.php:112 www/project/report/index.php:232
 #: www/reporting/usersummary.php:105
@@ -6178,9 +6123,9 @@ msgid "Create New Task"
 msgstr ""
 
 #: common/tracker/actions/tracker.php:96
-#, fuzzy, php-format
+#, php-format
 msgid "Item %s successfully created"
-msgstr "Създадено успешно"
+msgstr ""
 
 #: common/tracker/actions/tracker.php:108
 #, php-format
@@ -6301,49 +6246,40 @@ msgid "Message Body Is Required"
 msgstr ""
 
 #: common/tracker/Artifact.class.php:236
-#, fuzzy
 msgid "Error remapping status"
-msgstr "Грешка при създаването на "
+msgstr ""
 
 #: common/tracker/Artifact.class.php:308
-#, fuzzy
 msgid "Invalid Artifact ID"
-msgstr "Грешна парола"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:524
-#, fuzzy
 msgid "Error deleting extra field data: "
-msgstr "Грешка при получаването на "
+msgstr ""
 
 #: common/tracker/Artifact.class.php:535
-#, fuzzy
 msgid "Error deleting file from db: "
-msgstr "Грешка при създаването на "
+msgstr ""
 
 #: common/tracker/Artifact.class.php:543
-#, fuzzy
 msgid "Error deleting message: "
-msgstr "Грешка при добавянето на форум"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:551
-#, fuzzy
 msgid "Error deleting history: "
-msgstr "Информация за проекта"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:559
-#, fuzzy
 msgid "Error deleting monitor: "
-msgstr "Грешка при добавянето на форум"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:567
-#, fuzzy
 msgid "Error deleting artifact: "
-msgstr "Грешка при получаването на "
+msgstr ""
 
 #: common/tracker/Artifact.class.php:578 common/tracker/Artifact.class.php:588
-#, fuzzy
 msgid "Error updating artifact counts: "
-msgstr "Информация за проекта"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:609
 #, fuzzy
@@ -6355,9 +6291,8 @@ msgid "Invalid assigned person: must be a technician"
 msgstr ""
 
 #: common/tracker/Artifact.class.php:983
-#, fuzzy
 msgid "Could not move to new Artifact Type"
-msgstr "Разрешение не беше получено"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:995
 #, php-format
@@ -6369,9 +6304,8 @@ msgid "Removal of old artifact_extra_field_data failed: "
 msgstr ""
 
 #: common/tracker/Artifact.class.php:1177
-#, fuzzy
 msgid "Could Not Create Canned Response Object"
-msgstr "Разрешение не беше получено"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:1190
 msgid "Unable to Use Canned Response"
@@ -6382,9 +6316,8 @@ msgid "Nothing Changed - Update Cancelled"
 msgstr ""
 
 #: common/tracker/Artifact.class.php:1238
-#, fuzzy
 msgid "Error updating assigned_to in artifact: "
-msgstr "Информация за проекта"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:1313
 #: common/tracker/Artifact.class.php:1323
@@ -6402,15 +6335,13 @@ msgid "A field name is required"
 msgstr ""
 
 #: common/tracker/ArtifactExtraField.class.php:112
-#, fuzzy
 msgid "Type of custom field not selected"
-msgstr "Регистрацията е изтрита"
+msgstr ""
 
 #: common/tracker/ArtifactExtraField.class.php:124
 #: common/tracker/ArtifactExtraField.class.php:413
-#, fuzzy
 msgid "Field name already exists"
-msgstr "Това потребителско име вече е заето."
+msgstr ""
 
 #: common/tracker/ArtifactExtraField.class.php:129
 msgid "Invalid size/maxlength for text field"
@@ -6489,9 +6420,8 @@ msgstr ""
 
 #: common/tracker/ArtifactExtraFieldElement.class.php:129
 #: common/tracker/ArtifactExtraFieldElement.class.php:249
-#, fuzzy
 msgid "Element name already exists"
-msgstr "Това потребителско име вече е заето."
+msgstr ""
 
 #: common/tracker/ArtifactFile.class.php:125
 msgid "ArtifactFile: File, name, type, size are required"
@@ -6499,19 +6429,16 @@ msgstr ""
 
 #: common/tracker/ArtifactHistory.class.php:53
 #: common/tracker/ArtifactMessage.class.php:53
-#, fuzzy
 msgid "Invalid Artifact"
-msgstr "Грешна парола"
+msgstr ""
 
 #: common/tracker/ArtifactHistory.class.php:82
-#, fuzzy
 msgid "Invalid ArtifactHistory ID"
-msgstr "Грешна парола"
+msgstr ""
 
 #: common/tracker/ArtifactMessage.class.php:89
-#, fuzzy
 msgid "Error: Logged In User Bug Could Not Get User Object"
-msgstr "Разрешение не беше получено"
+msgstr ""
 
 #: common/tracker/ArtifactMessage.class.php:92
 msgid "Logged In: YES"
@@ -6522,9 +6449,8 @@ msgid "Logged In: NO"
 msgstr ""
 
 #: common/tracker/ArtifactMessage.class.php:139
-#, fuzzy
 msgid "Invalid ArtifactMessage ID"
-msgstr "Грешна парола"
+msgstr ""
 
 #: common/tracker/ArtifactQuery.class.php:148
 #: common/tracker/ArtifactQuery.class.php:742
@@ -6543,9 +6469,8 @@ msgid ""
 msgstr ""
 
 #: common/tracker/ArtifactQuery.class.php:342
-#, fuzzy
 msgid "Invalid Last Modified Date Range"
-msgstr "Дневникът е обновен"
+msgstr ""
 
 #: common/tracker/ArtifactQuery.class.php:358
 msgid "Invalid Open Date Range"
@@ -6611,9 +6536,9 @@ msgid "Backward Relations"
 msgstr ""
 
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:43
-#, fuzzy, php-format
+#, php-format
 msgid "Trackers for %s"
-msgstr "Форуми за %s"
+msgstr ""
 
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:47
 #: common/tracker/include/ArtifactTypeHtml.class.php:52
@@ -6799,9 +6724,8 @@ msgid "No Canned Responses set up in this Project"
 msgstr ""
 
 #: common/tracker/views/form-addcanned.php:65
-#, fuzzy
 msgid "Add New Canned Response"
-msgstr "Разрешение не беше получено"
+msgstr ""
 
 #: common/tracker/views/form-addcanned.php:67
 #: common/tracker/views/form-updatecanned.php:38
@@ -6851,9 +6775,8 @@ msgstr ""
 #: common/tracker/views/form-addextrafieldoption.php:84
 #: common/tracker/views/form-adminroadmap.php:411
 #: common/tracker/views/form-customizelist.php:112
-#, fuzzy
 msgid "Reorder"
-msgstr "Премахване"
+msgstr ""
 
 #: common/tracker/views/form-addextrafieldoption.php:89
 msgid "Alphabetical order"
@@ -6984,14 +6907,12 @@ msgid "Delete template"
 msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:60 www/tracker/roadmap.php:176
-#, fuzzy
 msgid "Could Not Get ArtifactTypeFactoryHtml"
-msgstr "Разрешение не беше получено"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:73
-#, fuzzy
 msgid "Cannot create or rename roadmap"
-msgstr "Създаване на пакет"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:73
 msgid "name is empty"
@@ -7003,9 +6924,8 @@ msgid "Roadmap %s created"
 msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:83
-#, fuzzy
 msgid "Cannot create roadmap: "
-msgstr "Дневникът е обновен"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:91
 #, php-format
@@ -7013,29 +6933,24 @@ msgid "Roadmap %s renamed to %s"
 msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:94
-#, fuzzy
 msgid "Cannot rename roadmap: "
-msgstr "Дневникът е обновен"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:101
-#, fuzzy
 msgid "Cannot set roadmap: "
-msgstr "Дневникът е обновен"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:125
-#, fuzzy
 msgid "Cannot set roadmap state: "
-msgstr "Дневникът е обновен"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:129
-#, fuzzy
 msgid "Cannot set default value: "
-msgstr "Дневникът е обновен"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:132
-#, fuzzy
 msgid "Roadmap configuration is updated"
-msgstr "Невалиден хеш за потвърждение"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:144
 #, php-format
@@ -7076,9 +6991,8 @@ msgid "Yes"
 msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:187
-#, fuzzy
 msgid "Create a new roadmap"
-msgstr "Създаване на пакет"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:190
 #, fuzzy
@@ -7090,15 +7004,14 @@ msgid "No trackers have been set up."
 msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:220
-#, fuzzy
 msgid "Not used"
-msgstr "Няма намерени обяви"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:251 www/tracker/roadmap.php:202
 #: www/tracker/roadmap.php:212 www/tracker/roadmap.php:224
-#, fuzzy, php-format
+#, php-format
 msgid "roadmap %s is not available"
-msgstr "Име на документа"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:279
 #: common/tracker/views/form-adminroadmap.php:366
@@ -7149,9 +7062,8 @@ msgid "Return to list of roadmaps"
 msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:432
-#, fuzzy
 msgid "Manage roadmaps"
-msgstr "Последно издадени пакети"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:434
 msgid "You can define a new roadmap or edit an existing one here."
@@ -7166,9 +7078,8 @@ msgid "Enable"
 msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:481
-#, fuzzy
 msgid "Roadmap name"
-msgstr "Истинско Име"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:482
 msgid "Default"
@@ -7223,9 +7134,8 @@ msgid ""
 msgstr ""
 
 #: common/tracker/views/form-customizelist.php:127
-#, fuzzy
 msgid "Add New Field"
-msgstr "Добавяне"
+msgstr ""
 
 #: common/tracker/views/form-deleteextrafieldelement.php:46
 #, php-format
@@ -7256,9 +7166,9 @@ msgid "I am Really Sure"
 msgstr ""
 
 #: common/tracker/views/form-deletetracker.php:24
-#, fuzzy, php-format
+#, php-format
 msgid "Permanently Delete Tracker %s"
-msgstr "Изтриване на съобщение"
+msgstr ""
 
 #: common/tracker/views/form-deletetracker.php:34
 msgid ""
@@ -7295,9 +7205,9 @@ msgid "Modify Canned Responses In %s"
 msgstr ""
 
 #: common/tracker/views/form-updateextrafieldelement.php:47
-#, fuzzy, php-format
+#, php-format
 msgid "Update a custom field element in %s"
-msgstr "Регистрацията е изтрита"
+msgstr ""
 
 #: common/tracker/views/form-updateextrafieldelement.php:70
 #: common/tracker/views/form-updateextrafield.php:104
@@ -7376,9 +7286,8 @@ msgid "Initial values"
 msgstr ""
 
 #: common/tracker/views/form-workflow.php:68
-#, fuzzy
 msgid "From Value"
-msgstr "Име на форума"
+msgstr ""
 
 #: common/tracker/views/form-workflow.php:121 www/project/admin/users.php:371
 msgid "Edit Roles"
@@ -7397,14 +7306,13 @@ msgstr "Предпочитания"
 
 #: common/widget/Widget.class.php:366
 #: plugins/extsubproj/include/extsubproj_Widget_SubProjects.class.php:35
-#, fuzzy
 msgid "General"
-msgstr "Тракер"
+msgstr ""
 
 #: common/widget/WidgetLayoutManager.class.php:182
-#, fuzzy, php-format
+#, php-format
 msgid "DB Error: %s"
-msgstr "Грешка при добавянето на форум"
+msgstr ""
 
 #: common/widget/WidgetLayoutManager.class.php:261
 #: common/widget/WidgetLayoutManager.class.php:270
@@ -7438,14 +7346,12 @@ msgstr ""
 #: common/widget/WidgetLayoutManager.class.php:574
 #: plugins/hudson/include/HudsonJobWidget.class.php:65
 #: plugins/hudson/include/HudsonJobWidget.class.php:89
-#, fuzzy
 msgid "Already used"
-msgstr "Нишка"
+msgstr ""
 
 #: common/widget/WidgetLayoutManager.class.php:722
-#, fuzzy
 msgid "Your dashboard has been updated."
-msgstr "Съобщението е изпратено"
+msgstr ""
 
 #: common/widget/Widget_MyAdmin.class.php:35
 msgid "Pending administrative tasks"
@@ -7462,9 +7368,8 @@ msgid "Groups in <a href=\"%s\"><strong>P</strong> (pending) Status</a>"
 msgstr ""
 
 #: common/widget/Widget_MyAdmin.class.php:90
-#, fuzzy
 msgid "Site News Approval"
-msgstr "Общо за целия проект"
+msgstr ""
 
 #: common/widget/Widget_MyArtifacts.class.php:52
 msgid "My Artifacts"
@@ -7475,14 +7380,12 @@ msgid "assigned to me [A]"
 msgstr ""
 
 #: common/widget/Widget_MyArtifacts.class.php:101
-#, fuzzy
 msgid "submitted by me [S]"
-msgstr "Изпращане на новини"
+msgstr ""
 
 #: common/widget/Widget_MyArtifacts.class.php:102
-#, fuzzy
 msgid "monitored by me [M]"
-msgstr "Изпращане на новини"
+msgstr ""
 
 #: common/widget/Widget_MyArtifacts.class.php:103
 msgid "assigned to or submitted by me [AS]"
@@ -7493,9 +7396,8 @@ msgid "assigned to or monitored by me [AM]"
 msgstr ""
 
 #: common/widget/Widget_MyArtifacts.class.php:105
-#, fuzzy
 msgid "submitted by or monitored by me [SM]"
-msgstr "Изпращане на новини"
+msgstr ""
 
 #: common/widget/Widget_MyArtifacts.class.php:106
 msgid "assigned to or submitted by or monitored by me [ASM]"
@@ -7526,14 +7428,12 @@ msgid "Assigned"
 msgstr ""
 
 #: common/widget/Widget_MyArtifacts.class.php:244
-#, fuzzy
 msgid "Submitted"
-msgstr "Изпращане на новини"
+msgstr ""
 
 #: common/widget/Widget_MyArtifacts.class.php:250
-#, fuzzy
 msgid "Monitored"
-msgstr "Наблюдавани Форуми"
+msgstr ""
 
 #: common/widget/Widget_MyArtifacts.class.php:259
 msgid "Browse this artefact"
@@ -7600,14 +7500,12 @@ msgid "List SVN commits you have done, by project."
 msgstr ""
 
 #: common/widget/Widget_MyMonitoredDocuments.class.php:39
-#, fuzzy
 msgid "Monitored Documents"
-msgstr "Наблюдавани Форуми"
+msgstr ""
 
 #: common/widget/Widget_MyMonitoredDocuments.class.php:48
-#, fuzzy
 msgid "You are not monitoring any documents."
-msgstr "Не наблюдавате никакви форуми."
+msgstr ""
 
 #: common/widget/Widget_MyMonitoredDocuments.class.php:48
 msgid ""
@@ -7719,9 +7617,8 @@ msgstr "Моите Проекти"
 #: common/widget/Widget_MyProjects.class.php:52
 #: common/widget/Widget_MyProjects.class.php:122
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:47
-#, fuzzy
 msgid "You're not a member of any project"
-msgstr "Вие не сте член на никой активен проект"
+msgstr "Вие не сте член на никой проект"
 
 #: common/widget/Widget_MyProjects.class.php:86
 #, fuzzy
@@ -7824,32 +7721,28 @@ msgid "Allow you to view the project description"
 msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:42
-#, fuzzy
 msgid "Last 4 weeks Documents Manager Activity"
-msgstr "Преглед на документите"
+msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:88
 msgid "new files [F]"
 msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:89
-#, fuzzy
 msgid "new directories [D]"
-msgstr "Редактиране на папка"
+msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:90
-#, fuzzy
 msgid "updated files [U]"
-msgstr "Обновяване на парола"
+msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:91
 msgid "new and update Files [FU]"
 msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:92
-#, fuzzy
 msgid "new files and directories [FD]"
-msgstr "Редактиране на папка"
+msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:93
 msgid "new and update files and directories [FUD]"
@@ -7870,16 +7763,14 @@ msgstr "Пакети"
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:131
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:145
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:162
-#, fuzzy
 msgid "updated Files"
-msgstr "Обновяване на парола"
+msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:137
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:153
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:163
-#, fuzzy
 msgid "new Directories"
-msgstr "Редактиране на папка"
+msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:167
 msgid "3 weeks ago"
@@ -7895,15 +7786,13 @@ msgid "Last Week"
 msgstr "Фамилия:"
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:167
-#, fuzzy
 msgid "Current Week"
-msgstr "Версия"
+msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:196
 #: common/widget/Widget_ProjectLatestDocuments.class.php:130
-#, fuzzy
 msgid "Browse Documents Manager"
-msgstr "Преглед на документите"
+msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:216
 msgid ""
@@ -8133,9 +8022,8 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:154
-#, fuzzy
 msgid "There are no subprojects available"
-msgstr "Проекти на потребителя"
+msgstr ""
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:173
 msgid "surveys"
@@ -8235,23 +8123,20 @@ msgid "forge not using vhost"
 msgstr ""
 
 #: cronjobs/create_vhosts.php:37
-#, fuzzy
 msgid "Unable to get list of projects with vhost: "
-msgstr "Грешка при създаването на "
+msgstr ""
 
 #: cronjobs/create_vhosts.php:41
-#, fuzzy
 msgid "httpd server not restarted"
-msgstr "Това потребителско име вече е заето."
+msgstr ""
 
 #: cronjobs/create_vhosts.php:68
 msgid "httpd server automatically restarted"
 msgstr ""
 
 #: cronjobs/create_vhosts.php:72
-#, fuzzy
 msgid " vhost created."
-msgstr "Дневникът е обновен"
+msgstr ""
 
 #: cronjobs/homedirs.php:147
 msgid "Default Web Page for groups that haven't setup their page yet"
@@ -8434,14 +8319,12 @@ msgid ""
 msgstr ""
 
 #: plugins/admssw/www/index.php:43
-#, fuzzy
 msgid "Public projects:"
-msgstr "Тема:"
+msgstr ""
 
 #: plugins/admssw/www/index.php:46
-#, fuzzy
 msgid "short index"
-msgstr "Проекти на потребителя"
+msgstr ""
 
 #: plugins/admssw/www/index.php:47
 #, fuzzy
@@ -8665,14 +8548,13 @@ msgstr ""
 
 #: plugins/authopenid/www/index.php:114
 #: plugins/authwebid/include/AuthWebIDPlugin.class.php:317
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot delete identity: %s"
-msgstr "Дневникът е обновен"
+msgstr ""
 
 #: plugins/authopenid/www/index.php:117 plugins/authwebid/www/index.php:82
-#, fuzzy
 msgid "Identity successfully deleted"
-msgstr "Създадено успешно"
+msgstr ""
 
 #: plugins/authopenid/www/index.php:122
 #, php-format
@@ -8684,9 +8566,8 @@ msgid "My OpenID identities"
 msgstr ""
 
 #: plugins/authopenid/www/index.php:128 plugins/authopenid/www/index.php:134
-#, fuzzy
 msgid "Add new identity"
-msgstr "Публикуване на документ"
+msgstr ""
 
 #: plugins/authopenid/www/index.php:130
 msgid "You can add your own OpenID identities in the form below."
@@ -8697,9 +8578,8 @@ msgid "OpenID identity URL:"
 msgstr ""
 
 #: plugins/authopenid/www/index.php:143
-#, fuzzy
 msgid "Add identity"
-msgstr "Добавяне"
+msgstr ""
 
 #: plugins/authopenid/www/index.php:149
 msgid "Identity"
@@ -14178,49 +14058,49 @@ msgstr ""
 msgid "Feature not implemented."
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:144
+#: plugins/scmhook/common/scmhookPlugin.class.php:145
 #, fuzzy
 msgid "invalid e-mails"
 msgstr "Невалиден Email Адрес"
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:179
+#: plugins/scmhook/common/scmhookPlugin.class.php:180
 msgid "Hooks management update process waiting ..."
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:181
+#: plugins/scmhook/common/scmhookPlugin.class.php:182
 msgid "Enable Repository Hooks"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:196
+#: plugins/scmhook/common/scmhookPlugin.class.php:197
 msgid "SCM Type not supported yet by scmhook"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:202
+#: plugins/scmhook/common/scmhookPlugin.class.php:203
 #, fuzzy
 msgid "No hooks available"
 msgstr "Няма статистика"
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:308
+#: plugins/scmhook/common/scmhookPlugin.class.php:309
 #, php-format
 msgid "%s Hooks"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:309
+#: plugins/scmhook/common/scmhookPlugin.class.php:310
 #, fuzzy
 msgid "Hook"
 msgstr "Вашето Име"
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:384
+#: plugins/scmhook/common/scmhookPlugin.class.php:385
 msgid "serve-push-pull-bundle Hooks"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:385
-#: plugins/scmhook/common/scmhookPlugin.class.php:446
+#: plugins/scmhook/common/scmhookPlugin.class.php:386
+#: plugins/scmhook/common/scmhookPlugin.class.php:447
 #, fuzzy
 msgid "Hook Name"
 msgstr "Вашето Име"
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:445
+#: plugins/scmhook/common/scmhookPlugin.class.php:446
 msgid "post-receive Hooks"
 msgstr ""
 
@@ -14334,7 +14214,7 @@ msgstr ""
 msgid "Developer Subversion Access via DAV"
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:659
+#: plugins/scmsvn/common/SVNPlugin.class.php:664
 msgid "Subversion Commits"
 msgstr ""
 
@@ -15240,7 +15120,6 @@ msgstr ""
 
 #: www/activity/index.php:302 www/export/rss20_activity.php:113
 #: www/register/index.php:248
-#, fuzzy
 msgid "Source Code"
 msgstr ""
 
@@ -17686,7 +17565,6 @@ msgid "File Module ID"
 msgstr ""
 
 #: www/frs/reporting/downloads.php:91
-#, fuzzy
 msgid "File Release Reporting"
 msgstr ""
 
@@ -18791,7 +18669,7 @@ msgid "Existing mailing lists"
 msgstr ""
 
 #: www/mail/admin/index.php:224
-#, fuzzy, php-format
+#, php-format
 msgid "Update Mailing List %s"
 msgstr ""
 
@@ -19095,7 +18973,6 @@ msgid "No News Found"
 msgstr "Няма намерени новини"
 
 #: www/news/news_utils.php:40
-#, fuzzy
 msgid "View News"
 msgstr ""
 
@@ -21122,7 +20999,6 @@ msgid "Source Code Admin"
 msgstr "Тракер"
 
 #: www/project/admin/tools.php:342
-#, fuzzy
 msgid "File Release System Admin"
 msgstr ""
 
@@ -21793,12 +21669,10 @@ msgid "Error: Site has SCM but no plugins registered"
 msgstr ""
 
 #: www/scm/include/scm_utils.php:47
-#, fuzzy
 msgid "View Source Code"
 msgstr ""
 
 #: www/scm/include/scm_utils.php:49
-#, fuzzy
 msgid "Online Source code browsing"
 msgstr ""
 
@@ -21831,12 +21705,11 @@ msgid ""
 msgstr ""
 
 #: www/scm/index.php:48
-#, fuzzy, php-format
+#, php-format
 msgid "Source Code Repository for %s"
 msgstr ""
 
 #: www/scm/reporting/index.php:35
-#, fuzzy
 msgid "SCM Repository Reporting"
 msgstr ""
 
@@ -21954,7 +21827,6 @@ msgid "Search All"
 msgstr "Търси"
 
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:70
-#, fuzzy
 msgid "Search for documents"
 msgstr ""
 
@@ -22690,7 +22562,6 @@ msgid "%s Sitewide Aggregate Statistics"
 msgstr "GForge статистика"
 
 #: www/stats/index.php:60
-#, fuzzy
 msgid "Other statistics"
 msgstr ""
 
@@ -22932,7 +22803,6 @@ msgid "Show Results"
 msgstr "Резултати"
 
 #: www/survey/include/SurveyHTML.class.php:83
-#, fuzzy
 msgid "Views Surveys"
 msgstr ""
 

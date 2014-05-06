@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-06 14:28+0200\n"
+"POT-Creation-Date: 2014-05-06 16:44+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -359,7 +359,7 @@ msgstr "Tâche échouée"
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:648
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:650
 #: plugins/scmhg/common/HgPlugin.class.php:656
-#: plugins/scmhook/common/scmhookPlugin.class.php:144
+#: plugins/scmhook/common/scmhookPlugin.class.php:145
 #: www/account/index.php:200 www/account/index.php:304
 #: www/account/index.php:305 www/account/lostlogin.php:84
 #: www/account/register.php:212 www/account/verify.php:58
@@ -956,9 +956,9 @@ msgstr ""
 #: plugins/oauthprovider/www/consumer.php:109
 #: plugins/oauthprovider/www/consumer_update_page.php:64
 #: plugins/scmhg/common/HgPlugin.class.php:658
-#: plugins/scmhook/common/scmhookPlugin.class.php:309
-#: plugins/scmhook/common/scmhookPlugin.class.php:385
-#: plugins/scmhook/common/scmhookPlugin.class.php:446
+#: plugins/scmhook/common/scmhookPlugin.class.php:310
+#: plugins/scmhook/common/scmhookPlugin.class.php:386
+#: plugins/scmhook/common/scmhookPlugin.class.php:447
 #: www/forum/admin/index.php:116 www/forum/admin/index.php:158
 #: www/forum/index.php:71 www/mail/admin/index.php:203
 #: www/mail/admin/index.php:236 www/mail/index.php:80
@@ -14098,50 +14098,50 @@ msgstr "Cloné de :"
 msgid "Feature not implemented."
 msgstr "Pas encore implémenté."
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:144
+#: plugins/scmhook/common/scmhookPlugin.class.php:145
 #, fuzzy
 msgid "invalid e-mails"
 msgstr "Adresse de messagerie non valide "
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:179
+#: plugins/scmhook/common/scmhookPlugin.class.php:180
 msgid "Hooks management update process waiting ..."
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:181
+#: plugins/scmhook/common/scmhookPlugin.class.php:182
 #, fuzzy
 msgid "Enable Repository Hooks"
 msgstr "Navigateur de dépôt Darcs"
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:196
+#: plugins/scmhook/common/scmhookPlugin.class.php:197
 msgid "SCM Type not supported yet by scmhook"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:202
+#: plugins/scmhook/common/scmhookPlugin.class.php:203
 #, fuzzy
 msgid "No hooks available"
 msgstr "Pas de statistiques disponibles"
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:308
+#: plugins/scmhook/common/scmhookPlugin.class.php:309
 #, php-format
 msgid "%s Hooks"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:309
+#: plugins/scmhook/common/scmhookPlugin.class.php:310
 #, fuzzy
 msgid "Hook"
 msgstr "Nom du rôle"
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:384
+#: plugins/scmhook/common/scmhookPlugin.class.php:385
 msgid "serve-push-pull-bundle Hooks"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:385
-#: plugins/scmhook/common/scmhookPlugin.class.php:446
+#: plugins/scmhook/common/scmhookPlugin.class.php:386
+#: plugins/scmhook/common/scmhookPlugin.class.php:447
 #, fuzzy
 msgid "Hook Name"
 msgstr "Nom du rôle"
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:445
+#: plugins/scmhook/common/scmhookPlugin.class.php:446
 msgid "post-receive Hooks"
 msgstr ""
 
@@ -14259,7 +14259,7 @@ msgstr ""
 msgid "Developer Subversion Access via DAV"
 msgstr "Accès Subversion pour les développeurs via Webdav"
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:659
+#: plugins/scmsvn/common/SVNPlugin.class.php:664
 msgid "Subversion Commits"
 msgstr "Envois Subversion"
 
