@@ -50,9 +50,7 @@ if (! $res) {
 }
 
 $scmhookPlugin = new scmhookPlugin;
-$rows = array();
-while ($row = db_fetch_array($res)) $rows[] = $row;
-foreach($rows as $row) {
+while ($row = db_fetch_array($res)) {
 	$group_id = $row['group_id'];
 	$scm_box = $row['scm_box'];
 	$scmtype = '';
@@ -77,8 +75,8 @@ foreach($rows as $row) {
 			$params['hooksString'] = $row['hooks'];
 			$params['scm_root'] = forge_get_config('repos_path', 'scmsvn') . '/' . $group->getUnixName();
 			if ($scmsvncronjob->updateScmRepo($params)) {
-				$res = db_query_params('UPDATE plugin_scmhook set need_update = $1 where id_group = $2', array(0, $group_id));
-				if (!$res) {
+				$res_update = db_query_params('UPDATE plugin_scmhook set need_update = $1 where id_group = $2', array(0, $group_id));
+				if (!$res_update) {
 					$returnvalue = false;
 				}
 			}
@@ -93,8 +91,8 @@ foreach($rows as $row) {
 			$params['hooksString'] = $row['hooks'];
 			$params['scm_root'] = forge_get_config('repos_path', 'scmhg') . '/' . $group->getUnixName();
 			if ($scmhgcronjob->updateScmRepo($params)) {
-				$res = db_query_params('UPDATE plugin_scmhook set need_update = $1 where id_group = $2', array(0, $group_id));
-				if (!$res) {
+				$res_update = db_query_params('UPDATE plugin_scmhook set need_update = $1 where id_group = $2', array(0, $group_id));
+				if (!$res_update) {
 					$returnvalue = false;
 				}
 			}
@@ -109,8 +107,8 @@ foreach($rows as $row) {
 			$params['hooksString'] = $row['hooks'];
 			$params['scm_root'] = forge_get_config('repos_path', 'scmgit') . '/' . $group->getUnixName() . '/' . $group->getUnixName() . '.git' ;
 			if ($scmgitcronjob->updateScmRepo($params)) {
-				$res = db_query_params('UPDATE plugin_scmhook set need_update = $1 where id_group = $2', array(0, $group_id));
-				if (!$res) {
+				$res_update = db_query_params('UPDATE plugin_scmhook set need_update = $1 where id_group = $2', array(0, $group_id));
+				if (!$res_update) {
 					$returnvalue = false;
 				}
 			}
