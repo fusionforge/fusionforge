@@ -128,7 +128,7 @@ function EndLoadDump(&$request)
     if (isa($WikiTheme, 'WikiTheme_fusionforge')) {
         echo "</div>\n";
         echo "</div>\n";
-        echo "</article>\n";
+        echo "</main>\n";
         echo "</div>\n";
     } elseif (isa($WikiTheme, 'WikiTheme_Sidebar')
         or isa($WikiTheme, 'WikiTheme_MonoBook')
