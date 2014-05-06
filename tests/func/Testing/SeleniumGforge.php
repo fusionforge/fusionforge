@@ -130,7 +130,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 
 	protected function reload_nscd()
 	{
-		$this->runCommand("service unscd restart > /dev/null 2>&1 || service nscd restart > /dev/null 2>&1");
+		$this->runCommand("service unscd restart > /dev/null 2>&1 || service nscd restart > /dev/null 2>&1 || true");
 		sleep (1); // Give it some time to wake up
 	}
 
