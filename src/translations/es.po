@@ -2684,7 +2684,7 @@ msgstr "Fichero actual"
 
 #: common/forum/ForumHTML.class.php:317 common/forum/ForumHTML.class.php:350
 msgid "Use the “Browse” button to find the file you want to attach"
-msgstr "Use el botón “Navegar” para buscar el fichero que quiere adjuntar"
+msgstr "Use el botón «Navegar» para buscar el fichero que quiere adjuntar"
 
 #: common/forum/ForumHTML.class.php:320 common/forum/ForumHTML.class.php:353
 msgid "File to upload"
@@ -2888,7 +2888,7 @@ msgid ""
 "Filename can only be alphanumeric and “-”, “_”, “+”, “.”, “~” characters."
 msgstr ""
 "El nombre del archivo sólo puede contener caracteres alfanuméricos y los "
-"siguientes caracteres “-”, “_”, “+”, “.”, “~”."
+"siguientes caracteres «-», «_», «+», «.», «~»."
 
 #: common/frs/FRSFile.class.php:135
 msgid "FRSFile appears to be invalid."
@@ -3018,7 +3018,7 @@ msgstr "[%1$s Release] %2$s"
 #, php-format
 msgid "Project %1$s (%2$s) has released a new version of package “%3$s”."
 msgstr ""
-"El proyecto %1$s (%2$s) ha publicado una nueva versión del paquete “%3$s”."
+"El proyecto %1$s (%2$s) ha publicado una nueva versión del paquete «%3$s»."
 
 #: common/frs/FRSRelease.class.php:294
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:131
@@ -3154,7 +3154,7 @@ msgstr "El nombre está reservado para el DNS."
 #: common/include/account.php:126
 msgid "Group name cannot contain underscore for DNS reasons."
 msgstr ""
-"El nombre del grupo no se puede tener el \"underscore\" por razones del DNS."
+"El nombre del grupo no se puede tener el «underscore» por razones del DNS."
 
 #: common/include/account.php:323
 #, php-format
@@ -5284,7 +5284,7 @@ msgstr "Sistema de seguimiento de peticiones creado correctamente"
 
 #: common/tracker/actions/admin-ind.php:52 www/pm/admin/index.php:82
 msgid "Please configure also the roles (by default, it's “No Access”)"
-msgstr "Por favor configure también los roles (por defecto es “No permitido”)"
+msgstr "Por favor configure también los roles (por defecto es «No permitido»)"
 
 #: common/tracker/actions/admin-ind.php:63 common/tracker/actions/ind.php:31
 msgid "Could Not Get ArtifactTypeFactory"
@@ -5328,8 +5328,8 @@ msgid ""
 "remember you need to set up categories, groups, and permission for each "
 "type, which can get time-consuming."
 msgstr ""
-"Los seguimientos se denominan “Artifact Types” y partes individuales de "
-"datos son “Artifacts”. “Bugs” debe de ser de un tipo Artifact, mientras un "
+"Los seguimientos se denominan «Artifact Types» y partes individuales de "
+"datos son «Artifacts». «Bugs» debe de ser de un tipo Artifact, mientras un "
 "reporting de bug deberia ser un Artifact. Puedes crear tantos Tipos de "
 "Artifacts como desees, pero recuerda necesitas configurar categorias, "
 "grupos, y permisos para cada tipo, que puedan requerir gasto de tiempo."
@@ -5364,12 +5364,12 @@ msgstr "Tiempo límite en días para peticiones pendientes"
 #: common/tracker/actions/admin-ind.php:154
 #: common/tracker/views/form-updatetracker.php:89
 msgid "Free form text for the “Submit New” page"
-msgstr "Texto libre para la página \"añade un nuevo elemento\""
+msgstr "Texto libre para la página «añade un nuevo elemento»"
 
 #: common/tracker/actions/admin-ind.php:157
 #: common/tracker/views/form-updatetracker.php:95
 msgid "Free form text for the Browse page"
-msgstr "Texto libre para la página \"navega por los elementos\""
+msgstr "Texto libre para la página «navega por los elementos»"
 
 #: common/tracker/actions/admin-ind.php:160
 #: common/tracker/include/build_submission_form.php:55
@@ -5799,7 +5799,7 @@ msgstr "Navegacion Rápida"
 #, php-format
 msgid "Viewing only opened records by default, use “%1$s” or “%2$s” to change."
 msgstr ""
-"Ver solamente registros abiertos por defecto, usar “%1$s” o '“%2$s”' para "
+"Ver solamente registros abiertos por defecto, usar «%1$s» o '«%2$s»' para "
 "cambiarlo."
 
 #: common/tracker/actions/browse.php:560 www/pm/browse_task.php:228
@@ -5880,8 +5880,8 @@ msgid ""
 "to change their properties and click once on “Mass Update”."
 msgstr ""
 "Si deseas aplicar cambios a todos los elementos seleccionados, usa estos "
-"controles para cambiar sus propiedades y pulsa una vez en “Actualización "
-"Masiva”."
+"controles para cambiar sus propiedades y pulsa una vez en «Actualización "
+"Masiva»."
 
 #: common/tracker/actions/browse.php:780 common/tracker/actions/browse.php:791
 #: common/tracker/actions/browse.php:795 www/include/html.php:361
@@ -6208,7 +6208,7 @@ msgstr "Borrar Consulta"
 #: common/tracker/actions/query.php:314
 #, php-format
 msgid "Note: The default project query is currently “%s”."
-msgstr "Nota: La consulta por defecto del proyecto es actualmente “%s”."
+msgstr "Nota: La consulta por defecto del proyecto es actualmente «%s»."
 
 #: common/tracker/actions/query.php:317
 msgid "Note: There is no default project query defined."
@@ -6921,7 +6921,7 @@ msgstr "Usuario no válido"
 #: common/tracker/Roadmap.class.php:103
 #, php-format
 msgid "“%s” roadmap already exists"
-msgstr "“%s” roadmap ya existe"
+msgstr "«%s» roadmap ya existe"
 
 #: common/tracker/views/form-addcanned.php:29
 #, php-format
@@ -7493,7 +7493,7 @@ msgid ""
 "“Status”."
 msgstr ""
 "Para crear un flujo de trabajo, primero debe crear un campo personalizado "
-"del tipo “Status”."
+"del tipo «Status»."
 
 #: common/tracker/views/form-workflow.php:34
 msgid "Internal error: Illegal number of status fields (WKFL01)."
@@ -7859,7 +7859,7 @@ msgid ""
 "You can monitor files by visiting a project's “Summary Page” and clicking on "
 "the appropriate icon in the files section."
 msgstr ""
-"Puede monitorizar ficheros visitando la pagina de “Pagina Sumario” y "
+"Puede monitorizar ficheros visitando la pagina de «Pagina Sumario» y "
 "pulsando en el icono correcpondiente en la seccion de ficheros."
 
 #: common/widget/Widget_MyMonitoredFp.class.php:104
@@ -8682,7 +8682,7 @@ msgstr ""
 #: plugins/authopenid/include/AuthOpenIDPlugin.class.php:78
 #: plugins/authwebid/include/AuthWebIDPlugin.class.php:103
 msgid "Cookies must be enabled past this point."
-msgstr "Las \"cookies\" deben de estar habilitados pasado este punto."
+msgstr "Las «cookies» deben de estar habilitados pasado este punto."
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:75
 #: www/account/pending-resend.php:65 www/account/verify.php:77
@@ -8917,7 +8917,7 @@ msgstr "El plugin OpenID no ha sido activado para la cuenta del usuario."
 #: plugins/authwebid/www/post-login.php:85
 #, php-format
 msgid "Unknown user with identity “%s”"
-msgstr "Usuario desconocido con identidad “%s”"
+msgstr "Usuario desconocido con identidad «%s»"
 
 #: plugins/authwebid/include/AuthWebIDPlugin.class.php:82
 #, php-format
@@ -10312,14 +10312,14 @@ msgstr "Introduzca las palabras de búsqueda arriba"
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:112
 #, php-format
 msgid "No matches found for “%s”"
-msgstr "Ninguna coincidencia encontrada para “%s”"
+msgstr "Ninguna coincidencia encontrada para «%s»"
 
 #: plugins/globalsearch/www/index.php:162
 #: www/search/include/renderers/HtmlGroupSearchRenderer.class.php:69
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:111
 #, php-format
 msgid "Search results for “%s”"
-msgstr "Resultados de la búsqueda de “%s”"
+msgstr "Resultados de la búsqueda de «%s»"
 
 #: plugins/globalsearch/www/index.php:166 www/admin/grouplist.php:67
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:45
@@ -10720,7 +10720,7 @@ msgstr "Por favor espere 1 hora para que los triggers se actualicen."
 msgid "Spaces are not allowed in job name. They were replaced by “_”."
 msgstr ""
 "Los espacios no están permitidos en un nombre de trabajo. Deben reemplazarse "
-"por “_”."
+"por «_»."
 
 #: plugins/hudson/include/hudsonActions.class.php:81
 msgid "Unable to update Hudson job"
@@ -12428,7 +12428,7 @@ msgstr "Error en curl: "
 #: plugins/oauthconsumer/www/get_access_token.php:137
 #, fuzzy
 msgid "New request token received!"
-msgstr "Nueva peticion de  token recivida!"
+msgstr "Nueva peticion de token recivida!"
 
 #: plugins/oauthconsumer/www/get_access_token.php:138
 #, fuzzy
@@ -12778,7 +12778,7 @@ msgstr "Por favor seleccione un fichero existente ó suba nuevo fichero"
 #: plugins/projectimport/common/UploadedFiles.class.php:388
 #, php-format
 msgid "File “%s” uploaded and pre-selected"
-msgstr "El fichero “%s” subido y pre-seleccionado"
+msgstr "El fichero «%s» subido y pre-seleccionado"
 
 #: plugins/projectimport/common/UploadedFiles.class.php:397
 msgid "The uploaded file exceeds the upload_max_filesize directive in php.ini"
@@ -12831,17 +12831,17 @@ msgstr "Usuarios localizado en fichero importado"
 #: plugins/projectimport/www/index.php:282
 #, php-format
 msgid "Found matching existing forge user with same login “%s”"
-msgstr "Localizado usuario que coincide con el mismo login “%s”"
+msgstr "Localizado usuario que coincide con el mismo login «%s»"
 
 #: plugins/projectimport/www/index.php:295
 #, php-format
 msgid "Found matching existing forge user “%s” with same email “%s”"
-msgstr "Localizado usuario ya creado \"%s\" con el mismo email “%s”"
+msgstr "Localizado usuario ya creado «%s» con el mismo email «%s»"
 
 #: plugins/projectimport/www/index.php:301
 #, php-format
 msgid "Failed to find existing user matching imported user “%s”"
-msgstr "Fallo en encontrar usuario coincidente con usuario importado “%s”"
+msgstr "Fallo en encontrar usuario coincidente con usuario importado «%s»"
 
 #: plugins/projectimport/www/index.php:317
 msgid "Optionally change for another existing user"
@@ -12923,13 +12923,13 @@ msgid ""
 "Imported user “%s” (role “%s”), mapped as “%s” which is not yet in the "
 "project: need to add it as role “%s”."
 msgstr ""
-"El usuario “%s” (rol “%s”) importado, se ha enlazado como “%s” que no esta "
-"todavia en el proyecto : se necesita agregarle el rol “%s”."
+"El usuario «%s» (rol «%s») importado, se ha enlazado como «%s» que no esta "
+"todavia en el proyecto : se necesita agregarle el rol «%s»."
 
 #: plugins/projectimport/www/index.php:483
 #, php-format
 msgid "Failed to find mapped user “%s”"
-msgstr "Fallo en localizar usuario mapeado “%s”"
+msgstr "Fallo en localizar usuario mapeado «%s»"
 
 #: plugins/projectimport/www/index.php:564
 msgid "Details of imported project: "
@@ -14175,13 +14175,10 @@ msgid "Use Mercurial as Source Code Management tool. Offer DAV or SSH access."
 msgstr ""
 
 #: plugins/scmhg/common/HgPlugin.class.php:61
-#, fuzzy
 msgid ""
 "Another short Introduction can be found at <a href=\"http://hginit.com/"
 "\">http://hginit.com/</a>"
 msgstr ""
-"Documentación para Git disponible en <a·href=\"http://git-scm.com/\">http://"
-"git-scm.com/</a>."
 
 #: plugins/scmhg/common/HgPlugin.class.php:68
 msgid "Anonymous Mercurial Access"
@@ -15119,7 +15116,7 @@ msgid ""
 "account. Visiting the URL will allow you to change your password online and "
 "login."
 msgstr ""
-"Pulsando “Enviar la clave Hash de la contraseña” siguiente enviará una URL a "
+"Pulsando «Enviar la clave Hash de la contraseña» siguiente enviará una URL a "
 "la dirección de correo de su cuenta. Esta URL es un hash de confirmación de "
 "128-bit para su cuenta. Visitando la URL permitirá cambiar su contraseña "
 "online y acceder."
@@ -15156,7 +15153,7 @@ msgid ""
 "Fill in a user name or email address and click “Submit” to resend the "
 "confirmation email."
 msgstr ""
-"Rellene el nombre usuario ó la dirección email  y haga click en “Enviar” "
+"Rellene el nombre usuario ó la dirección email y haga click en «Enviar» "
 "para que se reenvíe el email de confirmación."
 
 #: www/account/pending-resend.php:58
@@ -15164,7 +15161,7 @@ msgstr ""
 msgid ""
 "Fill in a user name and click “Submit” to resend the confirmation email."
 msgstr ""
-"Rellene el nombre usuario y haga click en “Enviar” para que se reenvíe el "
+"Rellene el nombre usuario y haga click en «Enviar» para que se reenvíe el "
 "email de confirmación"
 
 #: www/account/register.php:77
@@ -15711,7 +15708,7 @@ msgstr "No puedo agregar al usurio a este tipo de rol"
 
 #: www/admin/globalroleedit.php:120
 msgid "Error: You did not tick the “really remove” box!"
-msgstr "Error: No ha marcado la casilla “borrar realmente”!"
+msgstr "Error: No ha marcado la casilla «borrar realmente»!"
 
 #: www/admin/globalroleedit.php:128
 #, php-format
@@ -15815,9 +15812,9 @@ msgid ""
 "public, <%1$s>link<%2$s> the global role “Anonymous/not logged in” then <"
 "%3$s>give<%4$s> it “Project visibility” permissions."
 msgstr ""
-"Con PFO-RBAC, la propiedad “is_public” se ha eliminado. En cambio para hacer "
-"un proyecto público, <%1$s>enlace<%2$s> el rol global “Anonymus/not logged "
-"in” y <%3$s>asigna<%4$s>."
+"Con PFO-RBAC, la propiedad «is_public» se ha eliminado. En cambio para hacer "
+"un proyecto público, <%1$s>enlace<%2$s> el rol global «Anonymous/not logged "
+"in» y <%3$s>asigna<%4$s>."
 
 #: www/admin/groupedit.php:150 www/admin/grouplist.php:74
 msgid "Template?"
@@ -16132,11 +16129,11 @@ msgstr "(selecciona)"
 
 #: www/admin/massmail.php:119
 msgid "Subscribers to “Site Updates”"
-msgstr "Subscriptores de “Actualizacion de Sitio”"
+msgstr "Subscriptores de «Actualizacion de Sitio»"
 
 #: www/admin/massmail.php:120
 msgid "Subscribers to “Additional Community Mailings”"
-msgstr "Subscritores a “Listas de Correo Adicional Comunidad”"
+msgstr "Subscritores a «Listas de Correo Adicional Comunidad»"
 
 #: www/admin/massmail.php:121
 msgid "All Project Developers"
@@ -16326,7 +16323,7 @@ msgstr "Administración del sitio: Editar respuestas de rechazo"
 #: www/admin/responses_admin.php:36
 #, php-format
 msgid "You cannot %s “None”!"
-msgstr "No puede %s “None”!"
+msgstr "No puede %s «None»!"
 
 #: www/admin/responses_admin.php:74
 msgid "Edited Response"
@@ -16350,7 +16347,7 @@ msgstr "Respuesta borrada"
 
 #: www/admin/responses_admin.php:110
 msgid "If you are not sure then why did you click “Delete”?"
-msgstr "Si no estas seguro ¿porque pulsaste “borrar”?"
+msgstr "Si no estas seguro ¿porque pulsaste «Borrar»?"
 
 #: www/admin/responses_admin.php:111
 msgid "By the way, I didn't delete... just in case..."
@@ -16625,7 +16622,7 @@ msgid ""
 "account (N)”"
 msgstr ""
 "Estado Unix actualizado mientras se mirroreaba el web, por el contrario "
-"tiene el valor “No tiene cuenta Unix (N)”"
+"tiene el valor «No tiene cuenta Unix (N)»"
 
 #: www/admin/useredit.php:253
 msgid "Projects Membership"
@@ -17351,7 +17348,7 @@ msgstr "Comenzar Nuevo Tema para : "
 #: www/forum/save.php:55
 msgid "Forum Position Saved. New messages will be highlighted when you return"
 msgstr ""
-"Su posición en el foro está guardada.  Mensajes nuevos estarán subrayados "
+"Su posición en el foro está guardada. Mensajes nuevos estarán subrayados "
 "cuando regreses."
 
 #: www/frs/admin/deletepackage.php:48 www/frs/admin/deleterelease.php:50
@@ -17424,7 +17421,7 @@ msgstr "Fichero Borrado"
 
 #: www/frs/admin/editrelease.php:195
 msgid "File not deleted: you did not check “I am Sure”"
-msgstr "Fichero no borrado no ha marcado “Estoy Seguro”"
+msgstr "Fichero no borrado no ha marcado «Estoy Seguro»"
 
 #: www/frs/admin/editrelease.php:211
 msgid "File Updated"
@@ -17933,11 +17930,11 @@ msgid ""
 "respond with an admin-defined amount of time (default is 14 days) then the "
 "item is given a status of “Deleted”."
 msgstr ""
-"Puede poner el estado en “Pendiente” si está esperando una respuesta del "
+"Puede poner el estado en «Pendiente» si está esperando una respuesta del "
 "autor del registro. Cuando el autor responde el estado es automáticamente "
-"cambiado a 'Abierto'. Sin embargo, si el autor no responde durante un tiempo "
+"cambiado a «Abierto». Sin embargo, si el autor no responde durante un tiempo "
 "definido (por defecto son 14 días) entonces el elemento se le pone en un "
-"estado de “Borrado”."
+"estado de «Borrado»."
 
 #: www/include/html.php:387
 msgid "Tracker category"
@@ -18010,8 +18007,8 @@ msgid ""
 "If you are a project admin you can click the “Manage Canned Responses” link "
 "to define your own canned responses"
 msgstr ""
-"Si eres un administrador de proyectos pulsa el enlace de “Gestionar "
-"Respuestas Estándar” para definir sus propias repuestas almacenadas o tipo."
+"Si eres un administrador de proyectos pulsa el enlace de «Gestionar "
+"Respuestas Estándar» para definir sus propias repuestas almacenadas o tipo."
 
 #: www/include/html.php:411
 msgid ""
@@ -18052,7 +18049,7 @@ msgstr ""
 #: www/include/html.php:421
 msgid ""
 "You can monitor or un-monitor this item by clicking the “Monitor” button."
-msgstr "Puede des/monitorizar. este elemento pulsando en el boton “Monitor”."
+msgstr "Puede des/monitorizar. este elemento pulsando en el boton “Monitor»."
 
 #: www/include/html.php:423
 msgid ""
@@ -18377,7 +18374,7 @@ msgstr ""
 "La casilla de evaluación muestra las puntuaciones (y niveles de respuesta) "
 "para cada criterio individual. Debido a las formulas y el proceso requerido "
 "para hacerlo, estos numeros incorporan respuestas tanto de usuarios "
-"“validados” y “no validados”."
+"«validados» y «no validados»."
 
 #: www/include/user_home.php:175
 #, php-format
@@ -18385,7 +18382,7 @@ msgid ""
 "The “Sitewide Rank” field shows the user's rank compared to all ranked %s "
 "users."
 msgstr ""
-"El “Ranking del sitio” muestra las puntuaciones del usuario comparadas a las "
+"El «Ranking del sitio» muestra las puntuaciones del usuario comparadas a las "
 "de todos los puntuados %s."
 
 #: www/include/user_home.php:179
@@ -18393,7 +18390,7 @@ msgid ""
 "The “Aggregate Score” shows an average, weighted overall score, based on "
 "trusted-responses only."
 msgstr ""
-"La “Puntuación de Agregación” muestra la media ponderada, basada en las "
+"La «Puntuación de Agregación» muestra la media ponderada, basada en las "
 "respuestas de los validados solamente."
 
 #: www/include/user_home.php:183
@@ -18402,7 +18399,7 @@ msgid ""
 "developers will be given (between 1 and 1.5) -- higher rated user's "
 "responses are given more weight."
 msgstr ""
-"La “Importancio Personal” muetra la puntuación que los usuarios dan a otros "
+"La «Importancio Personal» muetra la puntuación que los usuarios dan a otros "
 "desarrolladores (entre 1 y 1.5) -- los mas valorados obtendrán mas "
 "puntuaciones."
 
@@ -19120,7 +19117,7 @@ msgid ""
 "If marked as public, your entry will be mailed to any monitoring users when "
 "it is first submitted."
 msgstr ""
-"Si su apunte está marcado \"Público\", su apunte se le enviará por correo a "
+"Si su apunte está marcado «Público», su apunte se le enviará por correo a "
 "los usuarios que están monitorizando su diario."
 
 #: www/my/diary.php:213
@@ -19316,7 +19313,7 @@ msgid ""
 "You may also post “help wanted” notes if your project needs help."
 msgstr ""
 "Puede enviar noticias acerca de su proyecto si es el admin de su proyecto. "
-"Tambien puede enviar un mensaje de “busqueda de ayuda” si el proyecto "
+"Tambien puede enviar un mensaje de «busqueda de ayuda» si el proyecto "
 "necesita ayuda."
 
 #: www/news/submit.php:137
@@ -19608,7 +19605,7 @@ msgstr "Edición de Habilidades para el Trabajo"
 
 #: www/people/editprofile.php:151
 msgid "Change the required fields, and press “Done” at the bottom of the page"
-msgstr "Cambie los campos requeridos, y pulse “Hecho” al final de la página"
+msgstr "Cambie los campos requeridos, y pulse «Hecho» al final de la página"
 
 #: www/people/editprofile.php:156
 msgid "Done"
@@ -20095,7 +20092,7 @@ msgstr "No se encontraron subproyectos"
 #: www/pm/admin/index.php:424
 msgid "You may add new Subprojects using the “Add a Subproject” link above."
 msgstr ""
-"Usted puede añadir subproyectos usando el enlace “Añadir subproyecto” de "
+"Usted puede añadir subproyectos usando el enlace «Añadir subproyecto» de "
 "arriba."
 
 #: www/pm/admin/index.php:428
@@ -20684,7 +20681,7 @@ msgid ""
 "Note that same task can be assigned to several technicians. Such task will "
 "be counted for each of them."
 msgstr ""
-"Indicar que la misma tarea puede ser asignada a varios tecnicos.  Tales "
+"Indicar que la misma tarea puede ser asignada a varios tecnicos. Tales "
 "tareas contarán para cada uno."
 
 #: www/pm/task.php:69
@@ -20810,7 +20807,7 @@ msgid ""
 "Clicking on “create” will schedule the creation of the database, and email "
 "the details to the project administrators"
 msgstr ""
-"Pulsado en “crear” programará la creación de la base de datos, y enviará un "
+"Pulsado en «crear» programará la creación de la base de datos, y enviará un "
 "correo con los detalles a los admins del proyecto"
 
 #: www/project/admin/database.php:164
@@ -20944,7 +20941,7 @@ msgid ""
 msgstr ""
 "Selecciona hasta tres localizaciones para este proyecto en el arbol de "
 "categorias Trove. Si el proyecto no necesita ninguna de estas "
-"localizaciones, simplemente seleccione “Ninguno Seleccionado”."
+"localizaciones, simplemente seleccione «Ninguno Seleccionado»."
 
 #: www/project/admin/group_trove.php:78
 msgid ""
@@ -21053,7 +21050,7 @@ msgid ""
 msgstr ""
 "Marca la casilla junto al usuario(s) que quiera agregar. Tus selecciones se "
 "mantendrán si pulsas alguna de las letras. Cuando hayas acabado , pulsa "
-"“Finalizar” para elegir los roles de los usuarios que estas agregando."
+"«Finalizar» para elegir los roles de los usuarios que estas agregando."
 
 #: www/project/admin/massadd.php:77
 msgid ""
@@ -21082,7 +21079,7 @@ msgstr "No se indicaron IDs"
 
 #: www/project/admin/massfinish.php:66
 msgid "Choose the role for each user and then press “Add All”."
-msgstr "Elija el rol de cada usuario y presione “Añadir todos”."
+msgstr "Elija el rol de cada usuario y presione «Añadir todos»."
 
 #: www/project/admin/massfinish.php:96
 msgid "Add All"
@@ -21207,7 +21204,7 @@ msgstr "Borrar rol"
 msgid ""
 "Please check “I am Sure” to confirm or return to previous page to cancel."
 msgstr ""
-"Error: Por favor elige “Estoy seguro” para confirmar or vuelve a la página "
+"Error: Por favor elige «Estoy seguro» para confirmar or vuelve a la página "
 "anterior para cancelar."
 
 #: www/project/admin/roledelete.php:76
@@ -21478,7 +21475,7 @@ msgid ""
 "will be synced to the project webservers - such that <em>yourhost.org</em> "
 "will display the material at <em>%1$s.%2$s</em>."
 msgstr ""
-"Pulsar en “Crear” programará la creación de un Virtual Host.  Este se "
+"Pulsar en «Crear» programará la creación de un Virtual Host.  Este se "
 "sincronizará con los servidores web - como <em>tudominio.org</em> mostrará "
 "el material en <em>%1$s.%2$s</em>."
 
@@ -21633,7 +21630,7 @@ msgid ""
 "is descriptive, and has no arbitrary restrictions (except min 3 characters "
 "and max 40 characters)."
 msgstr ""
-"Deberia comenzar con asignarle un nombre al proyecto. El “Nombre Completo” "
+"Deberia comenzar con asignarle un nombre al proyecto. El «Nombre Completo» "
 "es descriptivo, y no tiene restricciones iniciales (excepto el limite de "
 "3-40 caracteres)."
 
@@ -21674,7 +21671,7 @@ msgid ""
 "In addition to full project name, you will need to choose short, “Unix” name "
 "for your project."
 msgstr ""
-"Además del nombre completo debe elegir un nombre corto, “Unix” para el "
+"Además del nombre completo debe elegir un nombre corto, «Unix» para el "
 "proyecto."
 
 #: www/register/index.php:219
@@ -21682,7 +21679,7 @@ msgid ""
 "The “Unix Name” has several restrictions because it is used in so many "
 "places around the site. They are:"
 msgstr ""
-"El “Nombre Unix” tiene restricciones por que se utilizará en muchas partes "
+"El «Nombre Unix» tiene restricciones por que se utilizará en muchas partes "
 "del sistema. Son:"
 
 #: www/register/index.php:221
@@ -21910,8 +21907,8 @@ msgid ""
 "If you are sure you want to rebuild all the reporting tables, check the “I "
 "am Sure” box and click the button below."
 msgstr ""
-"Si esta seguro que quiere reconstruir las tablas de reporte, marca “Estoy "
-"Seguro” y pulsa el botón siguiente."
+"Si esta seguro que quiere reconstruir las tablas de reporte, marca «Estoy "
+"Seguro» y pulsa el botón siguiente."
 
 #: www/reporting/rebuild.php:56
 msgid "This could take a couple minutes, so DO NOT CLICK MORE THAN ONCE."
@@ -21992,7 +21989,7 @@ msgid ""
 "“Testing”."
 msgstr ""
 "Puede crear categorias para el tiempo consumido cuando completando una tarea "
-"en particular. Ejemplos : “Reuniones”, “Escribiendo codigo”, “Pruebas”."
+"en particular. Ejemplos : «Reuniones», «Escribiendo codigo», «Pruebas»."
 
 #: www/reporting/useract.php:68 www/reporting/usertime.php:66
 msgid ""
@@ -22376,7 +22373,7 @@ msgid ""
 "The “Snippet Version ID” is the unique ID number that is shown next to a "
 "specific version of a snippet on the browse pages."
 msgstr ""
-"La “Version Recorte ID” es el identificador único ID que se muestra junto a "
+"La “Version Recorte ID» es el identificador único ID que se muestra junto a "
 "la versión específica de un recorte de código en las páginas mostradas."
 
 #: www/snippet/add_snippet_to_package.php:141
@@ -22588,7 +22585,7 @@ msgstr "Cambios desde la última versión:"
 msgid ""
 "Download a raw-text version of this code by clicking on “Download Version”"
 msgstr ""
-"Descargar una versión texto de este código pulsando en “Descargar Versión”"
+"Descargar una versión texto de este código pulsando en «Descargar Versión»"
 
 #: www/snippet/detail.php:109
 msgid "Latest Snippet Version: "
@@ -22648,7 +22645,7 @@ msgid ""
 "You can create a “new snippet”, then post additional versions of that "
 "snippet quickly and easily."
 msgstr ""
-"Ha podido crear un “nuevo recorte”, luego publica versiones adicionales de "
+"Ha podido crear un «nuevo recorte», luego publica versiones adicionales de "
 "este recorte rapida y facilmente."
 
 #: www/snippet/index.php:54
@@ -22656,7 +22653,7 @@ msgid ""
 "Once you have snippets posted, you can then create a “Package” of snippets. "
 "That package can contain multiple, specific versions of other snippets."
 msgstr ""
-"Una vez que tus recortes han sido publicados, puedes crear un “Paquete” de "
+"Una vez que tus recortes han sido publicados, puedes crear un «Paquete» de "
 "recortes. El paquete puede contener varias, versiones específicas de otros "
 "recortes."
 
@@ -22705,7 +22702,7 @@ msgid ""
 "<strong>Then</strong> use the “Add Snippets to Package” link to add files to "
 "your package."
 msgstr ""
-"<strong>Luego</strong> use el enlace “Agregar recortes al Paquete” para "
+"<strong>Luego</strong> use el enlace «Agregar recortes al Paquete» para "
 "agregar ficheros a su paquete."
 
 #: www/snippet/package.php:138
@@ -22986,7 +22983,7 @@ msgid ""
 "browser preferences"
 msgstr ""
 "Esta es una lista de preferencias elegidas por los usuarios en sus "
-"\"preferencias de usuario\"; no incluye lenguages que son elegidos via "
+"«preferencias de usuario»; no incluye lenguages que son elegidos via "
 "cookies o preferencias del navegador"
 
 #: www/stats/index.php:32
