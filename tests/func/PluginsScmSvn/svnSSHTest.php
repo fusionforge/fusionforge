@@ -40,10 +40,10 @@ class ScmSvnSSHTest extends FForge_SeleniumTestCase
 		$this->uploadSshKey();
 	    
 		// Run the cronjob to create repositories
+		$this->reload_nscd();
 		$this->cron("create_scm_repos.php");
 		$this->cron("homedirs.php");
 		$this->cron("ssh_create.php");
-		$this->reload_nscd();
 
 		// Get the address of the repo
 		$this->open(ROOT);
