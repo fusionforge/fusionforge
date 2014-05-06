@@ -3672,9 +3672,8 @@ msgstr ""
 #: common/widget/Widget_MyMonitoredFp.class.php:119
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:169
 #: www/export/rss20_activity.php:146
-#, fuzzy
 msgid "File Release System"
-msgstr "Модул \"Пакети\""
+msgstr ""
 
 #: common/include/group_section_texts.php:34
 #: common/include/Navigation.class.php:521 plugins/blocks/www/index.php:157
@@ -4229,9 +4228,8 @@ msgid "Submit documents"
 msgstr "Публикуване на документ"
 
 #: common/include/rbac_texts.php:166
-#, fuzzy
 msgid "Approve documents"
-msgstr "Модул \"Форуми\""
+msgstr ""
 
 #: common/include/rbac_texts.php:167
 #, fuzzy
@@ -4253,9 +4251,8 @@ msgid "Publish files"
 msgstr "Общодостъпни места"
 
 #: common/include/rbac_texts.php:180
-#, fuzzy
 msgid "Forge statistics"
-msgstr "Модул \"Статистики\""
+msgstr ""
 
 #: common/include/rbac_texts.php:182
 #, fuzzy
@@ -4358,9 +4355,9 @@ msgid "Enable Anonymous Read Access"
 msgstr "Анонимно FTP пространство"
 
 #: common/include/SCMPlugin.class.php:307
-#, fuzzy, php-format
+#, php-format
 msgid "No repository %s exists"
-msgstr "Модул \"Статистики\""
+msgstr ""
 
 #: common/include/SCMPlugin.class.php:338
 #: plugins/scmhg/common/HgPlugin.class.php:615
@@ -4751,9 +4748,9 @@ msgstr ""
 
 #: common/mail/MailingList.class.php:211
 #: plugins/mailman/www/mailman_utils.php:38
-#, fuzzy, php-format
+#, php-format
 msgid "%s New Mailing List"
-msgstr "Модул \"Пощенски списъци\""
+msgstr ""
 
 #: common/mail/MailingList.class.php:231
 #: common/mail/MailingListFactory.class.php:103
@@ -6620,9 +6617,8 @@ msgstr "Форуми за %s"
 
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:47
 #: common/tracker/include/ArtifactTypeHtml.class.php:52
-#, fuzzy
 msgid "View Trackers"
-msgstr "Модул \"Тракер\""
+msgstr ""
 
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:49
 #: common/tracker/include/ArtifactTypeHtml.class.php:54
@@ -7860,9 +7856,8 @@ msgid "new and update files and directories [FUD]"
 msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:94
-#, fuzzy
 msgid "Display statistics:"
-msgstr "Модул \"Статистики\""
+msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:126
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:144
@@ -7955,14 +7950,13 @@ msgstr "Проекти на потребителя"
 
 #: common/widget/Widget_ProjectInfo.class.php:84
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:404
-#, fuzzy
 msgid "Statistics"
-msgstr "Модул \"Статистики\""
+msgstr "Статистики"
 
 #: common/widget/Widget_ProjectInfo.class.php:86
-#, fuzzy, php-format
+#, php-format
 msgid " or <a href=\"%s\">Activity</a>"
-msgstr "Вие публикувате анонимно защото не сте"
+msgstr ""
 
 #: common/widget/Widget_ProjectInfo.class.php:88
 #, php-format
@@ -8616,9 +8610,9 @@ msgid "LDAP server unreachable"
 msgstr ""
 
 #: plugins/authldap/www/post-login.php:113
-#, fuzzy, php-format
+#, php-format
 msgid "<a href=\"%1$s\">[Resend Confirmation Email]</a>"
-msgstr "Регистриране на нов проект"
+msgstr ""
 
 #: plugins/authldap/www/post-login.php:115
 #, php-format
@@ -9595,9 +9589,8 @@ msgid "Submitted on"
 msgstr "Изпращане на новини"
 
 #: plugins/forumml/include/forummlPlugin.class.php:108
-#, fuzzy
 msgid "This project's mailing lists"
-msgstr "Модул \"Пощенски списъци\""
+msgstr ""
 
 #: plugins/forumml/include/forummlPlugin.class.php:157
 #, fuzzy
@@ -11533,9 +11526,8 @@ msgid "Manage versions, categories and general configuration."
 msgstr ""
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:407
-#, fuzzy
 msgid "View global statistics."
-msgstr "Модул \"Статистики\""
+msgstr ""
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:446
 msgid "Site Global MantisBT Admin"
@@ -12141,9 +12133,8 @@ msgid "<a href=\"%s\">Download</a> the nightly created XML dump (backup) here."
 msgstr ""
 
 #: plugins/mediawiki/www/plugin_admin.php:173
-#, fuzzy
 msgid "This project's wiki logo: $wgLogo"
-msgstr "Модул \"Пощенски списъци\""
+msgstr ""
 
 #: plugins/mediawiki/www/plugin_admin.php:176
 #, fuzzy
@@ -13104,9 +13095,8 @@ msgid "Add label"
 msgstr "Добавяне на роля"
 
 #: plugins/projects-hierarchy/actions/addChild.php:32
-#, fuzzy
 msgid "This project already has a parent"
-msgstr "Модул \"Управление на задачи\""
+msgstr ""
 
 #: plugins/projects-hierarchy/actions/addChild.php:35
 #, fuzzy
@@ -13861,9 +13851,8 @@ msgid ""
 msgstr ""
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:194
-#, fuzzy
 msgid "No repositories to browse"
-msgstr "Модул \"Статистики\""
+msgstr ""
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:212
 #: plugins/scmgit/common/GitPlugin.class.php:358
@@ -14459,9 +14448,8 @@ msgid "Wiki Admin"
 msgstr "Администриране"
 
 #: plugins/wiki/common/WikiPlugin.class.php:91
-#, fuzzy
 msgid "This project's wiki"
-msgstr "Модул \"Пощенски списъци\""
+msgstr ""
 
 #: plugins/wiki/common/WikiPlugin.class.php:209
 msgid "List of active wikis in Forge"
@@ -14689,9 +14677,9 @@ msgid "Congratulations. You have changed your password."
 msgstr ""
 
 #: www/account/change_pw.php:81
-#, fuzzy, php-format
+#, php-format
 msgid "You should now <a href=\"%s\">Return to User Prefs</a>."
-msgstr "Сега трябва да се %1$s върнете в личните предпочитания %2$s."
+msgstr ""
 
 #: www/account/change_pw.php:88 www/account/index.php:153
 #: www/admin/userlist.php:150
@@ -15254,7 +15242,7 @@ msgstr ""
 #: www/register/index.php:248
 #, fuzzy
 msgid "Source Code"
-msgstr "Модул \"Допитвания\""
+msgstr ""
 
 #: www/activity/index.php:303
 msgid "scm commit: "
@@ -17700,7 +17688,7 @@ msgstr ""
 #: www/frs/reporting/downloads.php:91
 #, fuzzy
 msgid "File Release Reporting"
-msgstr "Модул \"Пакети\""
+msgstr ""
 
 #: www/frs/reporting/downloads.php:123 www/project/stats/index.php:120
 #: www/reporting/groupadded.php:53 www/reporting/groupcum.php:53
@@ -18805,7 +18793,7 @@ msgstr ""
 #: www/mail/admin/index.php:224
 #, fuzzy, php-format
 msgid "Update Mailing List %s"
-msgstr "Модул \"Пощенски списъци\""
+msgstr ""
 
 #: www/mail/admin/index.php:254 www/project/admin/tools.php:324
 #, fuzzy
@@ -19109,7 +19097,7 @@ msgstr "Няма намерени новини"
 #: www/news/news_utils.php:40
 #, fuzzy
 msgid "View News"
-msgstr "Модул \"Новини\""
+msgstr ""
 
 #: www/news/news_utils.php:185
 msgid "Read More/Comment"
@@ -21064,51 +21052,50 @@ msgstr "Моите Проекти"
 
 #: www/project/admin/tools.php:165
 msgid "Use Forums"
-msgstr "Модул \"Форуми\""
+msgstr "Използвайте Форума"
 
 #: www/project/admin/tools.php:178
-#, fuzzy
 msgid "Use Trackers"
-msgstr "Модул \"Тракер\""
+msgstr "Използвайте Тракери"
 
 #: www/project/admin/tools.php:191
 msgid "Use Mailing Lists"
-msgstr "Модул \"Пощенски списъци\""
+msgstr "Използвайте Пощенски списъци"
 
 #: www/project/admin/tools.php:204
 #, fuzzy
 msgid "Use Tasks"
-msgstr "Модул \"Тракер\""
+msgstr "Използвайте Тракер"
 
 #: www/project/admin/tools.php:217
 #, fuzzy
 msgid "Use Documents"
-msgstr "Модул \"Форуми\""
+msgstr "Използвайте Форуми"
 
 #: www/project/admin/tools.php:230
 msgid "Use Surveys"
-msgstr "Модул \"Допитвания\""
+msgstr "Използвайте Допитвания"
 
 #: www/project/admin/tools.php:243
 msgid "Use News"
-msgstr "Модул \"Новини\""
+msgstr "Използвайте Новини"
 
 #: www/project/admin/tools.php:256
 #, fuzzy
 msgid "Use Source Code"
-msgstr "Модул \"Допитвания\""
+msgstr "Използвайте Допитвания"
 
 #: www/project/admin/tools.php:269
 msgid "Use File Release System"
-msgstr "Модул \"Пакети\""
+msgstr "Използвайте Пакети"
 
 #: www/project/admin/tools.php:282
 msgid "Use FTP"
-msgstr "Модул \"FTP\""
+msgstr "Използвайте FTP"
 
 #: www/project/admin/tools.php:291
 msgid "Use Statistics"
-msgstr "Модул \"Статистики\""
+msgstr "Използвайте Статистики"
 
 #: www/project/admin/tools.php:315
 msgid "Tool Admin"
@@ -21137,7 +21124,7 @@ msgstr "Тракер"
 #: www/project/admin/tools.php:342
 #, fuzzy
 msgid "File Release System Admin"
-msgstr "Модул \"Пакети\""
+msgstr ""
 
 #: www/project/admin/users.php:104 www/project/admin/users.php:141
 #: www/project/admin/users.php:154
@@ -21459,7 +21446,7 @@ msgid ""
 "Summary page, in search results, etc. (at least 10 characters)"
 msgstr ""
 "Това е описанието на Вашия проект, което ще се визуализира на страницата "
-"\"Резюме\", в резултатите от търсене и т.н. Максималната допустима дължина е "
+"“Резюме”, в резултатите от търсене и т.н. Максималната допустима дължина е "
 "255 символа."
 
 #: www/register/index.php:218
@@ -21808,12 +21795,12 @@ msgstr ""
 #: www/scm/include/scm_utils.php:47
 #, fuzzy
 msgid "View Source Code"
-msgstr "Модул \"Допитвания\""
+msgstr ""
 
 #: www/scm/include/scm_utils.php:49
 #, fuzzy
 msgid "Online Source code browsing"
-msgstr "Модул \"Допитвания\""
+msgstr ""
 
 #: www/scm/include/scm_utils.php:52
 msgid "Global statistics on this SCM repository"
@@ -21846,12 +21833,12 @@ msgstr ""
 #: www/scm/index.php:48
 #, fuzzy, php-format
 msgid "Source Code Repository for %s"
-msgstr "Модул \"Пакети\""
+msgstr ""
 
 #: www/scm/reporting/index.php:35
 #, fuzzy
 msgid "SCM Repository Reporting"
-msgstr "Модул \"Пакети\""
+msgstr ""
 
 #: www/scm/reporting/index.php:37
 msgid "Commits Over Time"
@@ -21969,7 +21956,7 @@ msgstr "Търси"
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:70
 #, fuzzy
 msgid "Search for documents"
-msgstr "Модул \"Форуми\""
+msgstr ""
 
 #: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:53
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:48
@@ -22705,7 +22692,7 @@ msgstr "GForge статистика"
 #: www/stats/index.php:60
 #, fuzzy
 msgid "Other statistics"
-msgstr "Модул \"Статистики\""
+msgstr ""
 
 #: www/stats/lastlogins.php:44
 msgid "No records found. Database error: "
@@ -22947,7 +22934,7 @@ msgstr "Резултати"
 #: www/survey/include/SurveyHTML.class.php:83
 #, fuzzy
 msgid "Views Surveys"
-msgstr "Модул \"Допитвания\""
+msgstr ""
 
 #: www/survey/include/SurveyHTML.class.php:114
 #, fuzzy
@@ -23434,10 +23421,6 @@ msgstr "Дневникът е обновен"
 #: www/users:35
 msgid "No User Name Provided"
 msgstr ""
-
-#, fuzzy
-#~ msgid "View project <a href=\"%s\">Statistics</a>"
-#~ msgstr "Вие публикувате анонимно защото не сте"
 
 #, fuzzy
 #~ msgid "Error forum not found: "
@@ -24077,10 +24060,6 @@ msgstr ""
 #~ msgstr "Въпросът е твърде кратък"
 
 #, fuzzy
-#~ msgid "Your HTML Code."
-#~ msgstr "Модул \"Допитвания\""
-
-#, fuzzy
 #~ msgid "Add a new link"
 #~ msgstr "Публикуване на документ"
 
@@ -24390,12 +24369,6 @@ msgstr ""
 
 #~ msgid "Active Features"
 #~ msgstr "Активни инструменти"
-
-#~ msgid "Use Project/Task Manager"
-#~ msgstr "Модул \"Управление на задачи\""
-
-#~ msgid "Use Doc Mgr"
-#~ msgstr "Модул \"Документация\""
 
 #, fuzzy
 #~ msgid "Question inserted"
