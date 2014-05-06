@@ -107,20 +107,21 @@ class scmhookPlugin extends Plugin {
 		$group_id = $params['group_id'];
 		$hooksString = '';
 		$hooks = $this->getAvailableHooks($group_id);
+		$available_hooknames = array();
+		foreach ($hooks as $hook)
+			$available_hooknames[] = $hook->getClassname();
+
+		$enabled_hooknames = array();
 		foreach($params as $key => $value) {
-			if ($key == strstr($key, 'scm')) {
+			if ($value == 'on' && $key == strstr($key, 'scm')) {
 				$hookname = preg_replace('/scm[a-z][a-z]+_/','',$key);
-				if ($key != $hookname) {	//handle the case of scm_enable_anonymous
-					if (strlen($hooksString)) {
-						$hooksString .= '|'.$hookname;
-					} else {
-						$hooksString .= $hookname;
-					}
+				if (in_array($hookname, $available_hooknames) !== FALSE) {
+					$enabled_hooknames[] = $hookname;
 				}
 			}
 		}
 		$res = db_query_params('UPDATE plugin_scmhook set hooks = $1, need_update = 1 where id_group = $2',
-					array($hooksString, $group_id));
+				       array(implode('|', $enabled_hooknames), $group_id));
 
 		// Save parameters
 		foreach($hooks as $hook) {
