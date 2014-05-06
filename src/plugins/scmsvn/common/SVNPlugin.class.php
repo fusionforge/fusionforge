@@ -272,7 +272,12 @@ class SVNPlugin extends SCMPlugin {
 			return false;
 		}
 
-		$repo = forge_get_config('repos_path', 'scmsvn') . '/' . $project->getUnixName();
+		$repo_prefix = forge_get_config('repos_path', 'scmsvn');
+		if (!is_dir($repo_prefix) && !mkdir($repo_prefix, 0755, true)) {
+			return false;
+		}
+
+		$repo = $repo_prefix . '/' . $project->getUnixName();
 
 		if (!is_dir ($repo) || !is_file ("$repo/format")) {
 			if (!mkdir($repo, 0700, true)) {
