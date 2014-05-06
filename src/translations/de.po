@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-06 14:28+0200\n"
+"POT-Creation-Date: 2014-05-06 15:00+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -18424,6 +18424,8 @@ msgstr "Tracker Gruppe"
 msgid ""
 "The Sort By option allows you to determine how the browse results are sorted."
 msgstr ""
+"Die Sortieroption erlaubt Ihnen zu bestimmen, wie die Browse-Ergebnisse "
+"sortiert werden."
 
 #: www/include/html.php:393
 msgid ""
@@ -18529,9 +18531,9 @@ msgid ""
 "comments to this item, or submitted, or are assigned this item, you will "
 "also get emails for those reasons as well!"
 msgstr ""
-"Achtung!</strong> Dadurch erhalten Sie zusätzliche E-Mails. Wenn Sie diesem "
-"Gegenstand Kommentare hinzufügen, den Gegenstand eingereicht oder beauftragt "
-"haben, erhalten Sie aus diesen Gründen ebenfalls E-Mails."
+"<strong>Achtung!</strong> Dadurch erhalten Sie zusätzliche E-Mails. Wenn Sie "
+"diesem Gegenstand Kommentare hinzufügen, den Gegenstand eingereicht oder "
+"beauftragt haben, erhalten Sie aus diesen Gründen ebenfalls E-Mails."
 
 #: www/include/html.php:425
 msgid ""
@@ -19634,7 +19636,7 @@ msgid "You Have No Diary Entries"
 msgstr "Sie haben keine Terminkalendereinträge"
 
 #: www/my/rmproject.php:60
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "You cannot remove yourself from this project, because you are admin of it. "
 "You should ask other admin to reset your admin privilege first. If you are "
@@ -23267,16 +23269,21 @@ msgid ""
 "interface. Before creating your package, make sure all your snippets are in "
 "place and you have made a note of the snippet ID's."
 msgstr ""
+"Sie könne mit Hilfe dieses Interfaces bestehende Schnipsel zu Paketen "
+"gruppieren. Bevor Sie Ihr Paket erstellen vergewissern Sie sich dass alle "
+"Schnipsel bereitliegen und Sie sich alle Schnipsel-IDs notiert haben."
 
 #: www/snippet/package.php:135
 msgid "Create the package using this form."
-msgstr ""
+msgstr "Nutzen Sie zum Erzeugen des Pakets dieses Formular."
 
 #: www/snippet/package.php:136
 msgid ""
 "<strong>Then</strong> use the “Add Snippets to Package” link to add files to "
 "your package."
 msgstr ""
+"<strong>Dann</strong>nutzen Sie den “Schnipsel zum Paket hinzufügen” Link um "
+"Ihrem Paket Dateien hinzuzufügen."
 
 #: www/snippet/package.php:138
 msgid ""
@@ -24674,16 +24681,6 @@ msgstr "Kein Benutzername angegeben"
 #~ msgid "Role name"
 #~ msgstr "Rollenname"
 
-#, fuzzy
-#~ msgid ""
-#~ "Lists are named in this manner:<br /><strong>projectname-listname@%1$s</"
-#~ "strong></p><p>It will take <span class=\"important\">few minutes</span> "
-#~ "for your list to be created."
-#~ msgstr ""
-#~ "<p>Listen werden folgendermaßen benannt:<br /><strong> projectname-"
-#~ "listname@%1$s</strong></p><p> Es dauert <span class=\"important\">6-24 "
-#~ "Stunden</span>bis die Liste angelegt ist.</p>"
-
 #~ msgid ""
 #~ "You can administrate lists from here. Please note that private lists can "
 #~ "still be viewed by members of your project, but are not listed on %1$s."
@@ -24707,45 +24704,6 @@ msgstr "Kein Benutzername angegeben"
 #, fuzzy
 #~ msgid "Error updating: "
 #~ msgstr "Fehler beim Aktualisieren"
-
-#, fuzzy
-#~ msgid ""
-#~ "<h3>Create a new tracker</h3><p>You can use this system to track "
-#~ "virtually any kind of data, with each tracker having separate user, "
-#~ "group, category, and permission lists. You can also easily move items "
-#~ "between trackers when needed.</p><p>Trackers are referred to as "
-#~ "\"Artifact Types\" and individual pieces of data are \"Artifacts\". \"Bugs"
-#~ "\" might be an Artifact Type, whiles a bug report would be an Artifact. "
-#~ "You can create as many Artifact Types as you want, but remember you need "
-#~ "to set up categories, groups, and permission for each type, which can get "
-#~ "time-consuming.</p>"
-#~ msgstr ""
-#~ "<h3>Legen Sie einen neuen Tracker an</h3><p>Sie können dieses System "
-#~ "nutzen um praktisch alle Arten von Daten zu verfolgen, wobei jeder "
-#~ "Tracker separate Nutzer-, Gruppe-, Kategorie- und Erlaubnis-Listen haben "
-#~ "kann. Sie können, falls nötig, Objekte auch einfach zwischen Trackern "
-#~ "verschieben.</p><p>Tracker werden als \"Artefakt-Typen\", einzelne "
-#~ "Datenelemente als \"Artefakte\" bezeichnet.  \"Bugs\" können ein Artefakt-"
-#~ "Typ sein, während ein Bugbericht ein Artefakt ist. Sie können so viele "
-#~ "Artefakt Typen erzeugen wie Sie möchten, aber denken Sie daran, Sie "
-#~ "müssen für jeden Typ Kategorien, Gruppen und Erlaubnisse einstellen; dies "
-#~ "kann sehr Zeitaufwändig werden."
-
-#~ msgid ""
-#~ "Your project registration for %3$s has been denied.\n"
-#~ "\n"
-#~ "Project Full Name:  %1$s\n"
-#~ "Project Unix Name:  %2$s\n"
-#~ "\n"
-#~ "Reasons for negative decision:\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Ihre Projekt-Registrierung für %3$s wurde verweigert.\n"
-#~ "\n"
-#~ "Vollständiger Projekt-Name:  %1$sn Unix-Name des Projektes:  %2$s\n"
-#~ "\n"
-#~ "Gründe für die negative Entscheidung:\n"
-#~ "\n"
 
 #, fuzzy
 #~ msgid "Could Not Create File Object: "
@@ -24782,21 +24740,6 @@ msgstr "Kein Benutzername angegeben"
 
 #~ msgid "[add new]"
 #~ msgstr "[Neu hinzufügen]"
-
-#, fuzzy
-#~ msgid ""
-#~ "<strong>Admin:</strong> If you wish to apply changes to all items "
-#~ "selected above, use these controls to change their properties and click "
-#~ "once on \"Mass Update\"."
-#~ msgstr ""
-#~ "<strong>Admin:</strong> Wenn Sie bei allen oben ausgewählten Positionen "
-#~ "Änderungen durchführen möchten, nutzen Sie diese Bedienungselemente um "
-#~ "ihre Eigenschaften zu ändern und klicken Sie anschliessend auf \"Massen-"
-#~ "Update\"."
-
-#, fuzzy
-#~ msgid "Forum: "
-#~ msgstr "Forum"
 
 #~ msgid ""
 #~ "Viewing only opened records by default, use 'Advanced queries' or 'Simple "
@@ -24862,14 +24805,6 @@ msgstr "Kein Benutzername angegeben"
 #~ msgid "FRSFile Name Must Be At Least 3 Characters"
 #~ msgstr "FRSFile Name muss mindestens 3 Zeichen haben"
 
-#, fuzzy
-#~ msgid ""
-#~ "Filename can only be alphanumeric and \"-\" \"_\" \"+\" \".\" \"~\" "
-#~ "characters."
-#~ msgstr ""
-#~ "Für Dateinamen können ausschließlich alphanumerische und \"-\" \"_\" \"."
-#~ "\" Zeichen verwendet werden."
-
 #~ msgid "Subject:"
 #~ msgstr "Betreff:"
 
@@ -24901,12 +24836,6 @@ msgstr "Kein Benutzername angegeben"
 
 #~ msgid "Skills edit"
 #~ msgstr "Qualifikationen ändern"
-
-#~ msgid ""
-#~ "Change the required fields, and press \"Done\" at the bottom of the page"
-#~ msgstr ""
-#~ "Ändern Sie die benötigten Felder und klicken Sie \"Erledigt\" am Ende der "
-#~ "Seite an."
 
 #~ msgid "Failed to delete any skills"
 #~ msgstr "Löschung sämtlicher Qualifikationen fehlgeschlagen"
@@ -24980,15 +24909,6 @@ msgstr "Kein Benutzername angegeben"
 #~ msgid "Existing Diary And Note Entries"
 #~ msgstr "Existierender Terminkalender und Notizeinträge"
 
-#, fuzzy
-#~ msgid ""
-#~ "Lists are named in this manner:<br /><strong>projectname-listname@%1$s</"
-#~ "strong>"
-#~ msgstr ""
-#~ "<p>Listen werden folgendermaßen benannt:<br /><strong> projectname-"
-#~ "listname@%1$s</strong></p><p> Es dauert <span class=\"important\">6-24 "
-#~ "Stunden</span>bis die Liste angelegt ist.</p>"
-
 #~ msgid "Mailing list"
 #~ msgstr "Mailingliste"
 
@@ -25014,39 +24934,6 @@ msgstr "Kein Benutzername angegeben"
 
 #~ msgid "Permanently delete this subproject and all its data."
 #~ msgstr "Das Unterprojekt und all seine Daten dauerhaft löschen."
-
-#~ msgid ""
-#~ "You can set the status to 'Pending' if you are waiting for a response "
-#~ "from the tracker item author.  When the author responds the status is "
-#~ "automatically reset to that of 'Open'. Otherwise, if the author doesn't "
-#~ "respond with an admin-defined amount of time (default is 14 days) then "
-#~ "the item is given a status of 'Deleted'."
-#~ msgstr ""
-#~ "Sie können den Status auf \"Schwebend\" setzen, wenn Sie auf eine Antwort "
-#~ "des Tracker-Element-Autors warten möchten.  Wenn der Autor antwortet, "
-#~ "wird der Status automatisch wieder auf \"Offen\" gesetzt. Andernfalls, "
-#~ "wenn der Autor nicht in der vom Administrator vorgegebenen Zeit antwortet "
-#~ "(vorgegeben sind 14 Tage), dann wechselt der Status zu 'Gelöscht'."
-
-#~ msgid ""
-#~ "If you are a project admin you can click the 'Manage Canned Responses' "
-#~ "link to define your own canned responses"
-#~ msgstr ""
-#~ "Wenn Sie ein Projektadministrator sind, können Sie auf den 'Manage Canned "
-#~ "Responses' Link klicken, um Ihre eigenen vorgespeicherten Antworten zu "
-#~ "definieren."
-
-#~ msgid ""
-#~ "The Sort By option allows you to determine how the browse results are "
-#~ "sorted.<br /><br />  You can sort by ID, Priority, Summary, Open Date, "
-#~ "Close Date, Submitter, or Assignee.  You can also have the results sorted "
-#~ "in Ascending or Descending order."
-#~ msgstr ""
-#~ "Die Sortieroption erlaubt Ihnen zu bestimmen, wie die Browse-Ergebnisse "
-#~ "sortiert werden.<br /><br />  Sie können nach ID, Priorität, "
-#~ "Zusammenfassung, Eröffnungsdatum, Schließdatum, Einsender oder nach dem "
-#~ "Verantworlichem sortieren.  Sie können die Ergebnisse auch nach "
-#~ "aufsteigender- oder absteigender Reihenfolge sortieren."
 
 #~ msgid ""
 #~ "The Data Type option determines the type of tracker item this is.  Since "
@@ -25083,19 +24970,6 @@ msgstr "Kein Benutzername angegeben"
 #~ "Support oder Programmfehler Meldungen.<br /><br /> Wenn Sie ein "
 #~ "Projektadministrator sind, können Sie auf den '(admin)' Link klicken, um "
 #~ "Ihre eigenen vorgespeicherten Antworten zu definieren."
-
-#, fuzzy
-#~ msgid ""
-#~ "You can monitor or un-monitor this item by clicking the \"Monitor\" "
-#~ "button. <br /><br /><strong>Note!</strong> this will send you additional "
-#~ "email. If you add comments to this item, or submitted, or are assigned "
-#~ "this item, you will also get emails for those reasons as well!"
-#~ msgstr ""
-#~ "Sie können diesen Gegenstand beobachten oder dies stoppen, indem Sie auf "
-#~ "den \"Monitor\" Knopf klicken. <br /><br /><strong>Achtung!</strong> "
-#~ "Dadurch erhalten Sie zusätzliche E-Mails. Wenn Sie diesem Gegenstand "
-#~ "Kommentare hinzufügen, den Gegenstand eingereicht oder beauftragt haben, "
-#~ "erhalten Sie aus diesen Gründen ebenfalls E-Mails."
 
 #~ msgid "Now Monitoring Artifact"
 #~ msgstr "Überwachung aktiviert"
@@ -25412,11 +25286,6 @@ msgstr "Kein Benutzername angegeben"
 #~ msgid "Status:"
 #~ msgstr "Status"
 
-#~ msgid "Use the \"Browse\" button to find the file you want to attach"
-#~ msgstr ""
-#~ "Nutzen Sie den \"Browse\" Knopf um die Datei zu finden, die Sie anhängen "
-#~ "möchten."
-
 #~ msgid "No Stats Available"
 #~ msgstr "Keine Statistiken verfügbar"
 
@@ -25480,24 +25349,6 @@ msgstr "Kein Benutzername angegeben"
 #~ msgstr "Bitte %1$s einloggen %2$s"
 
 #, fuzzy
-#~ msgid ""
-#~ "If you would like to contribute to this project by becoming a developer, "
-#~ "contact one of the project admins, designated in bold text below."
-#~ msgstr ""
-#~ "<p>Wenn Sie an diesem Projekt mitwirken möchten, kontaktieren Sie einen "
-#~ "der Projektadministratoren, die fett dargestellt sind.<br/><br/>"
-
-#, fuzzy
-#~ msgid ""
-#~ "The \"Snippet Version ID\" is the unique ID number that is shown next to "
-#~ "a specific version of a snippet on the browse pages."
-#~ msgstr ""
-#~ "Sie können dieses Formular immer wieder benutzen um Ihrem Paket Schnipsel "
-#~ "hinzuzufügen.</p><p> Die \"Schnipsel Version ID\" ist die einzigartige ID-"
-#~ "Nummer die auf den Suchseiten neben einer spezifischen Schnipsel-Version "
-#~ "angegeben wird."
-
-#, fuzzy
 #~ msgid "Error - Could Not Update User Unix Status: "
 #~ msgstr "Fehler - Konnte den Unix Gruppen Status nicht aktualisieren: %s"
 
@@ -25522,14 +25373,6 @@ msgstr "Kein Benutzername angegeben"
 
 #~ msgid "I'm Sure"
 #~ msgstr "Ich bin sicher"
-
-#, fuzzy
-#~ msgid ""
-#~ "You may add new Subprojects using the \"Add a Subproject\" link above."
-#~ msgstr ""
-#~ "<h2>Keine Projekte gefunden</h2><p>Keine für diese Gruppe gefunden. Sie "
-#~ "können neue Projekte hinzufügen, indem Sie den \"Projekt hinzufügen\" "
-#~ "Link oben nutzen.</p>"
 
 #~ msgid "Add forum"
 #~ msgstr "Forum hinzufügen"
@@ -25707,14 +25550,6 @@ msgstr "Kein Benutzername angegeben"
 #~ msgid "I am sure"
 #~ msgstr "Ich bin sicher"
 
-#~ msgid ""
-#~ "If you are sure you want to rebuild all the reporting tables, check the "
-#~ "\"I am sure\" box and click the button below."
-#~ msgstr ""
-#~ "Wenn Sie sicher sind, dass Sie alle Berichtsverzeichnisse neu erstellen "
-#~ "möchten, wählen Sie das \"Ich bin sicher\" Kästchen aus und klicken Sie "
-#~ "auf den Knopf darunter."
-
 #~ msgid "Months"
 #~ msgstr "Monate"
 
@@ -25723,15 +25558,6 @@ msgstr "Kein Benutzername angegeben"
 
 #~ msgid "Days"
 #~ msgstr "Tage"
-
-#~ msgid ""
-#~ "You can create categories for how time might be spent when completing a "
-#~ "particular task. Examples of categories include \"Meeting\", \"Coding\", "
-#~ "\"Testing\"."
-#~ msgstr ""
-#~ "Sie können Kategorien anlegen wie Zeit verwendet werden kann um einen "
-#~ "festgelegte Aufgabe fertigzustellen. Beispiele für solche Kategorien sind "
-#~ "\"Meeting\", \"Code schreiben\", \"Testen\"."
 
 #~ msgid "New Additions, by Day"
 #~ msgstr "Neue Ergänzugen, am Tag"
@@ -25763,15 +25589,6 @@ msgstr "Kein Benutzername angegeben"
 
 #~ msgid "View All Comments"
 #~ msgstr "Alle Kommentare zeigen"
-
-#~ msgid ""
-#~ "We're Sorry but this Project hasn't yet uploaded their personal webpage "
-#~ "yet. <br /> Please check back soon for updates or visit <a href=\"%s"
-#~ "\">the project page</a>."
-#~ msgstr ""
-#~ "Es tut uns Leid, doch dieses Projekt hat bisher keine eigene Website "
-#~ "hochgeladen. <br />Für Updates schauen Sie bitte erneut vorbei oder "
-#~ "besuchen Sie <a href=\"%s\"> die Projektseite</a>."
 
 #~ msgid "ERROR: DB: Could not change group properties: %s"
 #~ msgstr ""
@@ -25811,10 +25628,6 @@ msgstr "Kein Benutzername angegeben"
 #~ msgid "Invalid Group Object"
 #~ msgstr "Kein gültiges Gruppenobjekt"
 
-#, fuzzy
-#~ msgid "No Valid Artifact Type"
-#~ msgstr "Kein Objekt: \"ArtifactType\": %d"
-
 #~ msgid "No Valid Forum Object"
 #~ msgstr "Forennachricht: Kein gültiges Foren-Objekt"
 
@@ -25835,15 +25648,6 @@ msgstr "Kein Benutzername angegeben"
 
 #~ msgid "Field “Path” is required."
 #~ msgstr "Ein Feldname ist erforderlich."
-
-#~ msgid ""
-#~ "This page allows you to export the items using an Excel or CSV (<a href="
-#~ "\"http://en.wikipedia.org/wiki/Comma-separated_values\">Comma Separated "
-#~ "Values</a>) File."
-#~ msgstr ""
-#~ "Diese Seite erlaubt Ihnen eine CVS-Datei zu nutzen um alle Aufgaben zu "
-#~ "exportieren oder importieren (<a href=\"http://en.wikipedia.org/wiki/"
-#~ "Comma-separated_values\">Comma Separated Values</a>)."
 
 #~ msgid "Sorry, no match for “%s”."
 #~ msgstr "Keine Treffer für »%s« gefunden."
@@ -27786,30 +27590,6 @@ msgstr "Kein Benutzername angegeben"
 #~ "die Erzeugung eines Virtual Hosts planen. Dies wird mit den Projekt-"
 #~ "Webservern synchronisiert werde - so daß <em>yourhost.org</em> das "
 #~ "Material unter <em>%4$s.%5$s</em> anzeigt."
-
-#, fuzzy
-#~ msgid ""
-#~ "<p>You can group together existing snippets into a package using this "
-#~ "interface. Before creating your package, make sure all your snippets are "
-#~ "in place and you have made a note of the snippet ID's.</p><ol><li>Create "
-#~ "the package using this form.</li><li><strong>Then</strong> use the \"Add "
-#~ "Snippets to Package\" link to add files to your package.</li></"
-#~ "ol><p><span class=\"important\">Note:</span> You can submit a new version "
-#~ "of an existing package by browsing the library and using the link on the "
-#~ "existing package. You should only use this page if you are submitting an "
-#~ "entirely new package."
-#~ msgstr ""
-#~ "<p>Sie könne mit Hilfe dieses Interfaces bestehende Schnipsel zu Paketen "
-#~ "gruppieren. Bevor Sie Ihr Paket erstellen vergewissern Sie sich dass alle "
-#~ "Schnipsel bereitliegen und Sie sich alle Schnipsel-IDs notiert haben.</"
-#~ "p><ol><li>Nutzen Sie zum Erzeugen des Pakets dieses Formular. </"
-#~ "li><li><strong>Dann</strong>nutzen Sie den \"Schnipsel zum Paket "
-#~ "hinzufügen\" Link um Ihrem Paket Dateien hinzuzufügen.</li></"
-#~ "ol><p><spanclass=\"important\">Beachten Sie:</span> Sie können eine neue "
-#~ "Version eines existierenden Paketes einreichen, indem Sie die Bibliothek "
-#~ "durchsuchen und den Link aus dem bereits bestehenden Paket nutzen. Sie "
-#~ "sollten diese Seite nur nutzen, wenn Sie ein komplett neues Paket "
-#~ "erstellen möchten."
 
 #~ msgid "%1$s Site Statistics"
 #~ msgstr "%1$s Seitenstatistiken"
