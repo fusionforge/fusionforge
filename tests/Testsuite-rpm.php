@@ -32,6 +32,7 @@ class RPMCentosTests
 //		$suite->addTestFiles(glob("func/PluginsMediawiki/*Test.php"));
 //		$suite->addTestFiles(glob("func/PluginsMoinMoin/*Test.php"));
 		$suite->addTestFiles(glob("func/PluginsOnlineHelp/*Test.php"));
+//		$suite->addTestFiles(glob("func/SSH/*Test.php"));
 //		$suite->addTestFiles(glob("func/PluginsScmBzr/*Test.php"));
 		$suite->addTestFiles(glob("func/PluginsScmGit/gitWUITest.php"));
 		$suite->addTestFiles(glob("func/PluginsScmSvn/svnWUITest.php"));
