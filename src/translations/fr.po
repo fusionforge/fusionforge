@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-06 16:44+0200\n"
+"POT-Creation-Date: 2014-05-06 18:34+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -588,9 +588,8 @@ msgid "Document already published in this folder"
 msgstr "Document déjà publié dans ce dossier"
 
 #: common/docman/Document.class.php:198 common/docman/Document.class.php:205
-#, fuzzy
 msgid "Error Adding Document"
-msgstr "Erreur lors de l'ajout du document :"
+msgstr "Erreur lors de l'ajout du document"
 
 #: common/docman/Document.class.php:198
 msgid "Not a file"
@@ -602,9 +601,8 @@ msgstr "Erreur lors de la récupération du document"
 
 #: common/docman/Document.class.php:225 common/docman/Document.class.php:848
 #: common/docman/Document.class.php:1086
-#, fuzzy
 msgid "Error updating document group"
-msgstr "Erreur lors de la mise à jour du groupe de documents :"
+msgstr "Erreur lors de la mise à jour du groupe de documents"
 
 #: common/docman/Document.class.php:252
 msgid "Document: Invalid docid"
@@ -689,9 +687,8 @@ msgstr ""
 "Le document %s a été soumis avec succès et est en attente de validation."
 
 #: common/docman/Document.class.php:981
-#, fuzzy
 msgid "Error Deleting Document"
-msgstr "Erreur lors de la suppression du document :"
+msgstr "Erreur lors de la suppression du document"
 
 #: common/docman/Document.class.php:1041
 #: common/docman/DocumentGroup.class.php:954
@@ -728,14 +725,12 @@ msgid "Folder name already exists"
 msgstr "Ce nom de dossier existe déjà"
 
 #: common/docman/DocumentGroup.class.php:147
-#, fuzzy
 msgid "Error Adding Folder"
-msgstr "Erreur lors de l'ajout d'un dossier :"
+msgstr "Erreur lors de l'ajout d'un dossier"
 
 #: common/docman/DocumentGroup.class.php:241
-#, fuzzy
 msgid "Unsupported injected file"
-msgstr "Ce type de fichier ne peut être injecté :"
+msgstr "Ce type de fichier ne peut être injecté"
 
 #: common/docman/DocumentGroup.class.php:259
 msgid "Invalid Document Folder ID"
@@ -894,9 +889,8 @@ msgstr ""
 
 #: common/docman/include/webdav.php:249 common/docman/include/webdav.php:260
 #: common/docman/include/webdav.php:506 common/docman/include/webdav.php:551
-#, fuzzy
 msgid "webdav db error"
-msgstr "Erreur WebDAV :"
+msgstr "Erreur WebDAV"
 
 #: common/docman/include/webdav.php:323
 #, fuzzy
@@ -2856,9 +2850,8 @@ msgstr ""
 "que « - », « _ », « + », « ~ »,  et « . »."
 
 #: common/frs/FRSFile.class.php:135
-#, fuzzy
 msgid "FRSFile appears to be invalid."
-msgstr "Le fichier semble invalide"
+msgstr "Le fichier semble invalide."
 
 #: common/frs/FRSFile.class.php:151 common/frs/FRSFile.class.php:434
 msgid "That filename already exists in this project space"
@@ -5499,10 +5492,8 @@ msgid "Renderer Updated"
 msgstr "Moteur de rendu mis à jour"
 
 #: common/tracker/actions/admin-updates.php:553
-#, fuzzy
 msgid "Initial values not saved, no initial state given."
-msgstr ""
-"Erreur : valeurs initiales non sauvegardées et pas d'état initial spécifié."
+msgstr "Valeurs initiales non sauvegardées, pas d'état initial spécifié."
 
 #: common/tracker/actions/admin-updates.php:557
 msgid "Initial values saved."
@@ -9884,9 +9875,8 @@ msgid "Remote Account successfully deleted"
 msgstr "Compte distant supprimé avec succès"
 
 #: plugins/globaldashboard/www/admin/delete_account.php:45
-#, fuzzy
 msgid "Unable to delete remote account"
-msgstr "Impossible de supprimer la tâche Hudson"
+msgstr "Impossible de supprimer le compte distant"
 
 #: plugins/globaldashboard/www/admin/edit_account_page.php:55
 msgid "Remote Account Management"
@@ -16777,9 +16767,8 @@ msgstr ""
 "correspond à un document inactif."
 
 #: www/docman/view.php:293
-#, fuzzy
 msgid "PHP ZIP extension is missing."
-msgstr "L'extension PHP est manquante."
+msgstr "L'extension PHP ZIP est manquante."
 
 #: www/export/index.php:29
 msgid "Exports Available"
@@ -16896,9 +16885,9 @@ msgid "Add This Forum"
 msgstr "Ajouter ce forum"
 
 #: www/forum/admin/index.php:127 www/forum/admin/index.php:168
-#, fuzzy, php-format
+#, php-format
 msgid "%s Mandatory fields"
-msgstr "Champs obligatoires"
+msgstr "%s Champs obligatoires"
 
 #: www/forum/admin/index.php:137
 msgid "Change forum status"
@@ -19754,7 +19743,7 @@ msgstr "Identifiant invalide"
 
 #: www/people/people_utils.php:398
 msgid "No categories found."
-msgstr "Aucune catégorie trouvée"
+msgstr "Aucune catégorie trouvée."
 
 #: www/people/people_utils.php:444
 msgid "Date Opened"
@@ -21078,12 +21067,11 @@ msgid "Deleted Role"
 msgstr "Supprimer le rôle"
 
 #: www/project/admin/roledelete.php:71
-#, fuzzy
 msgid ""
 "Please check “I am Sure” to confirm or return to previous page to cancel."
 msgstr ""
-"Erreur : veuillez cocher « Je confirme » ou retourner à la page précédente "
-"pour annuler."
+"Veuillez cocher « Je confirme » ou retourner à la page précédente pour "
+"annuler."
 
 #: www/project/admin/roledelete.php:76
 #, php-format
