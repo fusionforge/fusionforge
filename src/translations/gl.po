@@ -6,7 +6,7 @@
 # Antón Méixome <meixome@mancomun.org>, 2009.
 msgid ""
 msgstr ""
-"Project-Id-Version: FusionForge 5.2\n"
+"Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-06 16:44+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
