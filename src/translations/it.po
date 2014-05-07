@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-06 16:44+0200\n"
+"POT-Creation-Date: 2014-05-07 10:30+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -581,6 +581,13 @@ msgstr[1] "Aggiornato con successo"
 #: common/tracker/ArtifactTypes.class.php:54
 msgid "No Valid Group Object"
 msgstr "Nessun oggetto Group valido"
+
+#: common/docman/Document.class.php:69 common/docman/Document.class.php:82
+#: common/docman/views/reporting.php:163 common/docman/views/search.php:143
+#: www/activity/index.php:350
+#, fuzzy
+msgid "Document"
+msgstr "Usa Forum"
 
 #: common/docman/Document.class.php:82
 #: common/docman/DocumentGroup.class.php:76 common/forum/Forum.class.php:139
@@ -2149,12 +2156,6 @@ msgstr "Mese"
 #: www/stats/site_stats_utils.php:470 www/top/toplist.php:49
 msgid "Downloads"
 msgstr "Download"
-
-#: common/docman/views/reporting.php:163 common/docman/views/search.php:143
-#: www/activity/index.php:350
-#, fuzzy
-msgid "Document"
-msgstr "Usa Forum"
 
 #: common/docman/views/reporting.php:163
 #: plugins/oauthprovider/www/access_tokens.php:58

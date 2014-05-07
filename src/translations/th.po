@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-06 16:44+0200\n"
+"POT-Creation-Date: 2014-05-07 10:30+0200\n"
 "PO-Revision-Date: 2013-06-03 17:16+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -550,6 +550,12 @@ msgstr[0] ""
 #: common/tracker/ArtifactTypeFactory.class.php:59
 #: common/tracker/ArtifactTypes.class.php:54
 msgid "No Valid Group Object"
+msgstr ""
+
+#: common/docman/Document.class.php:69 common/docman/Document.class.php:82
+#: common/docman/views/reporting.php:163 common/docman/views/search.php:143
+#: www/activity/index.php:350
+msgid "Document"
 msgstr ""
 
 #: common/docman/Document.class.php:82
@@ -2024,11 +2030,6 @@ msgstr ""
 #: www/stats/site_stats_utils.php:360 www/stats/site_stats_utils.php:414
 #: www/stats/site_stats_utils.php:470 www/top/toplist.php:49
 msgid "Downloads"
-msgstr ""
-
-#: common/docman/views/reporting.php:163 common/docman/views/search.php:143
-#: www/activity/index.php:350
-msgid "Document"
 msgstr ""
 
 #: common/docman/views/reporting.php:163
