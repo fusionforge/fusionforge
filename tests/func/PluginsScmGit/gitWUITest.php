@@ -25,6 +25,8 @@ class ScmGitWUITest extends FForge_SeleniumTestCase
 {
 	function testScmGitWUI()
 	{
+		$this->skip_on_src_installs();
+
 		$this->activatePlugin('scmgit');
 		$this->populateStandardTemplate('empty');
 		$this->init();

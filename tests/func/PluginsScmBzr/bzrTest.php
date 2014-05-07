@@ -26,7 +26,7 @@ class ScmBzrTest extends FForge_SeleniumTestCase
 	function testScmBzr()
 	{
 		$this->skip_on_rpm_installs();
-		$this->skip_on_centos();
+		$this->skip_on_src_installs();
 
 		$this->activatePlugin('scmbzr');
 		$this->populateStandardTemplate('empty');
