@@ -8,7 +8,7 @@ if (!@include_once 'PHPUnit/Autoload.php') {
 	require_once 'PHPUnit/TextUI/TestRunner.php';
 }
 
-require_once 'func/Testing/DEBSeleniumRemoteSuite.php';
+require_once 'func/Testing/SeleniumRemoteSuite.php';
 
 class DEBDebian60Tests
 {
@@ -19,7 +19,7 @@ class DEBDebian60Tests
 
 	public static function suite()
 	{
-		$suite = new DEBSeleniumRemoteSuite('PHPUnit');
+		$suite = new SeleniumRemoteSuite('PHPUnit');
 
 		// Selenium tests
 		if (!defined('DB_INIT_CMD')) { define('PROJECTA','true'); }

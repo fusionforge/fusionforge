@@ -7,7 +7,7 @@ if (!@include_once 'PHPUnit/Autoload.php') {
 	require_once 'PHPUnit/Framework.php';
 	require_once 'PHPUnit/TextUI/TestRunner.php';
 }
-require_once 'func/Testing/RPMSeleniumRemoteSuite.php';
+require_once 'func/Testing/SeleniumRemoteSuite.php';
 
 class RPMCentosTests
 {
@@ -18,7 +18,7 @@ class RPMCentosTests
 
 	public static function suite()
 	{
-		$suite = new RPMSeleniumRemoteSuite('PHPUnit');
+		$suite = new SeleniumRemoteSuite('PHPUnit');
 
 		// Selenium tests
 		$suite->addTestFiles(glob("func/Site/*Test.php"));
