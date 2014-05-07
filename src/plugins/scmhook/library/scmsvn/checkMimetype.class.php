@@ -24,7 +24,7 @@
 global $gfplugins;
 require_once $gfplugins.'scmhook/common/scmhook.class.php';
 
-class checkMimetype extends scmhook {
+class SvnCheckMimetype extends scmhook {
 	function __construct() {
 		$this->name = "Check Mimetype";
 		$this->description = _('Verify if commited files have svn:mimetype set up correctly.');

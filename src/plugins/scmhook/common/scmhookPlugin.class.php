@@ -246,7 +246,7 @@ class scmhookPlugin extends Plugin {
 		foreach ($listHooks as $hook) {
 			if (!stristr($hook,'~')) {
 				include_once dirname(__FILE__).'/../library/'.$scm.'/'.$hook;
-				$hookClassName = preg_replace('/.class.php/','', $hook);
+				$hookClassName = preg_replace('/^scm/','', $scm).preg_replace('/.class.php/','', $hook);
 				$hookObject = new $hookClassName;
 				$validHooks[] = $hookObject;
 			}

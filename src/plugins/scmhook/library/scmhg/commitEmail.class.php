@@ -26,7 +26,7 @@
 global $gfplugins;
 require_once $gfplugins.'scmhook/common/scmhook.class.php';
 
-class commitEmail extends scmhook {
+class HgCommitEmail extends scmhook {
 	var $group;
 	var $disabledMessage;
 

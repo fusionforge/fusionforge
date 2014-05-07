@@ -23,7 +23,7 @@
 global $gfplugins;
 require_once $gfplugins.'scmhook/common/scmhook.class.php';
 
-class checkLog extends scmhook {
+class SvnCheckLog extends scmhook {
 	function __construct() {
 		$this->name = "Check log";
 		$this->description = _('Commit message must not be empty.');

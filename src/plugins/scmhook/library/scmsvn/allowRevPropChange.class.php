@@ -24,7 +24,7 @@
 global $gfplugins;
 require_once $gfplugins.'scmhook/common/scmhook.class.php';
 
-class allowRevPropChange extends scmhook {
+class SvnAllowRevPropChange extends scmhook {
 	function __construct() {
 		$this->name        = "Allow RevProp Changes";
 		$this->description = _('Allow SCM committers to change revision properties.');

@@ -22,7 +22,7 @@
 global $gfplugins;
 require_once $gfplugins.'scmhook/common/scmhook.class.php';
 
-class postReceiveEmail extends scmhook {
+class GitPostReceiveEmail extends scmhook {
 	var $group;
 	var $disabledMessage;
 
