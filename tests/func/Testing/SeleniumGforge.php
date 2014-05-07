@@ -446,33 +446,38 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->clickAndWait("submit");
 	}
 
+	protected function skip_test($msg) {
+		$this->captureScreenshotOnFailure = false; 
+		$this->markTestSkipped($msg);
+	}
+
 	protected function skip_on_rpm_installs($msg='Skipping on installations from RPM') {
 		if (INSTALL_METHOD == 'rpm') {
-			$this->markTestSkipped($msg);
+			$this->skip_test($msg);
 		}
 	}
 
 	protected function skip_on_deb_installs($msg='Skipping on installations from *.deb') {
 		if (INSTALL_METHOD == 'deb') {
-			$this->markTestSkipped($msg);
+			$this->skip_test($msg);
 		}
 	}
 
 	protected function skip_on_src_installs($msg='Skipping on installations from source') {
 		if (INSTALL_METHOD == 'src') {
-			$this->markTestSkipped($msg);
+			$this->skip_test($msg);
 		}
 	}
 
 	protected function skip_on_centos($msg='Skipping on CentOS platforms') {
 		if (INSTALL_OS == 'centos') {
-			$this->markTestSkipped($msg);
+			$this->skip_test($msg);
 		}
 	}
 
 	protected function skip_on_debian($msg='Skipping on Debian platforms') {
 		if (INSTALL_OS == 'debian') {
-			$this->markTestSkipped($msg);
+			$this->skip_test($msg);
 		}
 	}
 }
