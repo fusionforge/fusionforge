@@ -69,7 +69,10 @@ if (is_executable ("$FORGE_HOME/bin/forge_run_job")) {
 } else {
     print "Neither $FORGE_HOME/bin/forge_run_job, nor $FORGE_HOME/utils/forge_run_job, nor $FORGE_HOME/src/utils/forge_run_job seem to be executable, strange.\n";
     exit(1);
-}   
+}
+
+define('INSTALL_METHOD', getenv('INSTALL_METHOD'));
+define('INSTALL_OS', getenv('INSTALL_OS'));
 
 // this should be an existing user of the forge together with its password
 // (the password should be different from 'myadmin')

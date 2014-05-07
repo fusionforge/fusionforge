@@ -8,6 +8,10 @@ then
 	exit 1
 fi
 
+TEST_ENV="$2"
+INSTALL_METHOD=${TEST_ENV%/*}
+INSTALL_OS=${TEST_ENV#*/}
+
 # Find $TEST_HOME
 relativescriptpath=`dirname $0`
 TEST_HOME=$(cd $relativescriptpath/..;pwd)
@@ -46,7 +50,7 @@ fi
 cat > /root/.vnc/xstartup<<EOF
 #! /bin/bash
 : > /root/phpunit.exitcode
-$TEST_HOME/scripts/phpunit.sh $TEST_SUITE &> /var/log/phpunit.log &
+INSTALL_METHOD=$INSTALL_METHOD INSTALL_OS=$INSTALL_OS $TEST_HOME/scripts/phpunit.sh $TEST_SUITE &> /var/log/phpunit.log &
 echo \$! > /root/phpunit.pid
 wait %1
 echo \$? > /root/phpunit.exitcode
