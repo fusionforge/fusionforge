@@ -1,21 +1,9 @@
 <?php
-if (!defined('PHPUnit_MAIN_METHOD')) {
-	define('PHPUnit_MAIN_METHOD', 'AllTests::main');
-}
 
-if (!@include_once 'PHPUnit/Autoload.php') {
-	require_once 'PHPUnit/Framework.php';
-	require_once 'PHPUnit/TextUI/TestRunner.php';
-}
-require_once 'func/Testing/SeleniumRemoteSuite.php';
+require_once 'TestsuiteCommon.php';
 
-class TestsuiteSrcCOS
+class TestsuiteSrcCOS extends TestsuiteCommon
 {
-	public static function main()
-	{
-		PHPUnit_TextUI_TestRunner::run(self::suite());
-	}
-
 	public static function suite()
 	{
 		$suite = new SeleniumRemoteSuite('PHPUnit');
