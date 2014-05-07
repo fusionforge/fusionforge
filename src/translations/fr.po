@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-07 10:30+0200\n"
+"POT-Creation-Date: 2014-05-07 11:08+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -685,10 +685,8 @@ msgid "For more info, visit:"
 msgstr "Pour plus d'informations, visitez :"
 
 #: common/docman/Document.class.php:934
-#, fuzzy
 msgid "A new document has been uploaded and waiting to be approved by you"
-msgstr ""
-"Le document %s a été soumis avec succès et est en attente de validation."
+msgstr "Un nouveau document a été soumis et est en attente de validation"
 
 #: common/docman/Document.class.php:981
 msgid "Error Deleting Document"
@@ -1842,9 +1840,8 @@ msgid "Stop Monitoring"
 msgstr "Arrêter la surveillance"
 
 #: common/docman/views/listfile.php:357
-#, fuzzy
 msgid "Move files to another folder"
-msgstr "Déplacer la discussion dans un autre forum"
+msgstr "Déplacer les fichiers dans un autre dossier"
 
 #: common/docman/views/listfile.php:360
 #: common/docman/views/listtrashfile.php:195
@@ -1987,9 +1984,8 @@ msgid "Activate in this folder"
 msgstr "Activer dans ce dossier"
 
 #: common/docman/views/pendingfiles.php:117
-#, fuzzy
 msgid "Mass actions for selected pending documents:"
-msgstr "Actions en attente sur les documents sélectionnés :"
+msgstr "Actions collectives sur les documents en attente sélectionnés :"
 
 #: common/docman/views/reporting.php:88
 #: common/tracker/include/ArtifactTypeHtml.class.php:333
@@ -3218,9 +3214,8 @@ msgid "Group object already exists."
 msgstr "L'objet Group existe déjà."
 
 #: common/include/Group.class.php:313
-#, fuzzy
 msgid "Invalid project name"
-msgstr "Nom de fichier invalide."
+msgstr "Nom de projet invalide"
 
 #: common/include/Group.class.php:316 common/include/User.class.php:342
 #: common/include/User.class.php:402
@@ -9861,9 +9856,8 @@ msgid ""
 msgstr ""
 
 #: plugins/globaldashboard/www/admin/add_account.php:79
-#, fuzzy
 msgid "Unable to create remote account"
-msgstr "Impossible de créer un projet dans Mantisbt"
+msgstr "Impossible de créer le compte distant"
 
 #: plugins/globaldashboard/www/admin/delete_account.php:33
 msgid "You can remove only YOUR remote accounts !!!"
@@ -9968,9 +9962,8 @@ msgstr ""
 
 #: plugins/globaldashboard/www/admin/edit_account.php:78
 #: plugins/globaldashboard/www/admin/edit_account.php:82
-#, fuzzy
 msgid "Unable to update remote account"
-msgstr "Impossible de mettre à jour la tâche Hudson"
+msgstr "Impossible de mettre à jour le compte distant"
 
 #: plugins/globaldashboard/www/admin/manage_accounts.php:54
 #: plugins/globaldashboard/www/index.php:38
@@ -10406,9 +10399,8 @@ msgid "Fields marked with %s are mandatory."
 msgstr "Les champs marqués avec %s sont obligatoires."
 
 #: plugins/headermenu/view/admin/updateLinkValue.php:112
-#, fuzzy
 msgid "Cannot retrieve value for this link"
-msgstr "Impossible de supprimer un utilisateur de ce type de rôle."
+msgstr "Impossible de récupérer la valeur pour ce lien"
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:46
 msgid "Outermenu Link Order successfully validated"
@@ -10546,9 +10538,8 @@ msgstr ""
 "formulaire ci-dessous."
 
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:138
-#, fuzzy
 msgid "Display URL as iframe"
-msgstr "affichée dans un cadre en ligne"
+msgstr "Afficher l'URL dans un cadre en ligne"
 
 #: plugins/helloworld/include/helloworldPlugin.class.php:106
 msgid "View Personal HelloWorld"
@@ -10962,9 +10953,8 @@ msgstr ""
 "généralement bonne ou pas."
 
 #: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:82
-#, fuzzy
 msgid "Last Build"
-msgstr "Dernière fabrication :"
+msgstr "Dernière fabrication"
 
 #: plugins/hudson/include/hudson_Widget_JobTestResults.class.php:47
 #, php-format
@@ -11063,9 +11053,8 @@ msgstr ""
 "du widget."
 
 #: plugins/mailman/include/MailmanList.class.php:407
-#, fuzzy
 msgid "Error On Query:"
-msgstr "Erreur lors de la mise à jour :"
+msgstr "Erreur dans la requête :"
 
 #: plugins/mailman/include/MailmanList.class.php:435
 msgid "Missing params"
@@ -11330,9 +11319,9 @@ msgid "Missing category name"
 msgstr "Nom du catégorie manquant"
 
 #: plugins/mantisbt/action/addIssue.php:126
-#, fuzzy, php-format
+#, php-format
 msgid "Ticket %s created successfully."
-msgstr "Outil de suivi créé avec succès"
+msgstr "Outil de suivi %s créé avec succès."
 
 #: plugins/mantisbt/action/addNote.php:57
 msgid "Note added successfully."
@@ -19234,9 +19223,8 @@ msgid "Skill Inserted"
 msgstr "Compétence ajoutée"
 
 #: www/people/admin/index.php:73
-#, fuzzy
 msgid "Missing skill name."
-msgstr "Nom du rôle manquant"
+msgstr "Nom du compétence manquant."
 
 #: www/people/admin/index.php:86
 msgid "Add/Change Categories"
@@ -20784,9 +20772,8 @@ msgid "Del"
 msgstr "Suppr"
 
 #: www/project/admin/group_trove.php:43
-#, fuzzy
 msgid "Changed Trove"
-msgstr "Modifié"
+msgstr "Arbre modifié"
 
 #: www/project/admin/group_trove.php:70
 msgid "Trove Update Success"
@@ -21309,7 +21296,7 @@ msgstr "%s n'est pas un nom d'hôte valide"
 #: www/project/admin/vhost.php:97
 #, fuzzy
 msgid "Could not delete VHOST entry:"
-msgstr "Impossible de supprimer un onglet : %s"
+msgstr "Impossible de supprimer un onglet :"
 
 #: www/project/admin/vhost.php:99
 msgid "VHOST deleted"
@@ -22778,11 +22765,11 @@ msgid "Remove This Filter"
 msgstr "Supprimer ce filtre"
 
 #: www/softwaremap/trove_list.php:200 www/trove/index.php:152
-#, fuzzy, php-format
+#, php-format
 msgid "%s projects"
 msgid_plural "%s project"
-msgstr[0] "Projets : %s"
-msgstr[1] "Projets : %s"
+msgstr[0] "%s projet"
+msgstr[1] "%s projets"
 
 #: www/softwaremap/trove_list.php:219 www/trove/index.php:95
 msgid "Browse By"
