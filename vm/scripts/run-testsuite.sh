@@ -27,4 +27,4 @@ aptitude -y install php5-cli phpunit phpunit-selenium
 #fi
 
 # Now, start the functionnal test suite using phpunit and selenium
-/usr/src/fusionforge/tests/scripts/phpunit.sh Testsuite-deb.php
+/usr/src/fusionforge/tests/scripts/phpunit.sh deb/debian
