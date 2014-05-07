@@ -1,26 +1,20 @@
 #! /bin/sh
 
-TEST_SUITE="$1"
+TEST_ENV="$1"
 # Test arg
-if [ -z "$TEST_SUITE" ]
+if [ -z "$TEST_ENV" ]
 then
-	echo "Usage : $0 <TEST_SUITE>"
+	echo "Usage: $0 <TEST_ENV>"
+	echo "  examples: src/debian, deb/debian, rpm/centos"
 	exit 1
 fi
 
-TEST_ENV="$2"
 INSTALL_METHOD=${TEST_ENV%/*}
 INSTALL_OS=${TEST_ENV#*/}
 
 # Find $TEST_HOME
 relativescriptpath=`dirname $0`
 TEST_HOME=$(cd $relativescriptpath/..;pwd)
-
-if [ ! -f "$TEST_HOME/$TEST_SUITE" ]
-then
-	echo "Test suite $TEST_SUITE not found"
-	exit 2
-fi
 
 # Check vncserver
 if ! type vncserver 2>/dev/null
@@ -50,7 +44,7 @@ fi
 cat > /root/.vnc/xstartup<<EOF
 #! /bin/bash
 : > /root/phpunit.exitcode
-INSTALL_METHOD=$INSTALL_METHOD INSTALL_OS=$INSTALL_OS $TEST_HOME/scripts/phpunit.sh $TEST_SUITE &> /var/log/phpunit.log &
+INSTALL_METHOD=$INSTALL_METHOD INSTALL_OS=$INSTALL_OS $TEST_HOME/scripts/phpunit.sh &> /var/log/phpunit.log &
 echo \$! > /root/phpunit.pid
 wait %1
 echo \$? > /root/phpunit.exitcode

@@ -19,7 +19,7 @@ case $HOST in
 	;;
 esac	
 
-export FILTER="Testsuite-src-deb.php"
+export FILTER="src/debian"
 
 get_config $@
 prepare_workspace
@@ -63,7 +63,7 @@ EOF
 # Run tests
 retcode=0
 echo "Run phpunit test on $HOST in $FORGE_HOME"
-ssh root@$HOST "$FORGE_HOME/tests/func/vncxstartsuite.sh $FILTER"
+ssh root@$HOST "$FORGE_HOME/tests/func/vncxstartsuite.sh src/debian"
 retcode=$?
 rsync -av root@$HOST:/var/log/ $WORKSPACE/reports/
 

@@ -27,6 +27,9 @@ class PluginMoinMoin extends FForge_SeleniumTestCase
 	
 	function testMoinMoin()
 	{
+		$this->skip_on_rpm_installs();
+		$this->skip_on_centos();
+
 		$this->activatePlugin('moinmoin');
 		
 		$this->populateStandardTemplate('empty');

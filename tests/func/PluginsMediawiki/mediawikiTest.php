@@ -27,6 +27,9 @@ class PluginMediawiki extends FForge_SeleniumTestCase
 	
 	function testMediawiki()
 	{
+		$this->skip_on_rpm_installs();
+		$this->skip_on_centos();
+
 		$this->activatePlugin('mediawiki');
 		
 		$this->populateStandardTemplate('empty');

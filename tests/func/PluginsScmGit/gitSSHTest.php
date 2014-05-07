@@ -25,6 +25,9 @@ class ScmGitSSHTest extends FForge_SeleniumTestCase
 {
 	function testScmGitSSH()
 	{
+		$this->skip_on_rpm_installs();
+		$this->skip_on_src_installs();
+
 		$this->activatePlugin('scmgit');
 		$this->populateStandardTemplate('empty');
 		$this->init();

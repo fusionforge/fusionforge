@@ -1,19 +1,10 @@
 #! /bin/sh
 
-if [ $# -ge 1 ]
-then
-        testsuite=$1
-	shift
-else
-        echo "You must give the testsuite to run :"
-	echo "	- DEBDebian70Tests.php"
-	echo "	- RPMCentosTests.php"
-	echo "	- TarCentosTests.php"
-fi
-if [ "x$testsuite" = "x" ]
-then
-        echo "Forge test suite not found"
-        exit 1
+INSTALL_METHOD=$INSTALL_METHOD INSTALL_OS=$INSTALL_OS 
+
+if [ -z "$INSTALL_METHOD" ] || [ -z "$INSTALL_OS" ] ; then
+    echo INSTALL_METHOD and INSTALL_OS required
+    echo Example: INSTALL_METHOD=src INSTALL_OS=centos $0
 fi
 
 scriptdir=$(dirname $0)
@@ -117,10 +108,10 @@ if [ $i = $timeout ] ; then
     exit 1
 fi
 
-echo "Running PHPunit tests from $testsuite"
+echo "Running PHPunit tests"
 retcode=0
 cd tests
-phpunit --verbose --stop-on-failure --log-junit $SELENIUM_RC_DIR/phpunit-selenium.xml $@ $testsuite || retcode=$?
+phpunit --verbose --stop-on-failure --log-junit $SELENIUM_RC_DIR/phpunit-selenium.xml $@ Testsuite.php || retcode=$?
 cd ..
 # on debian
 killall -9 firefox-bin

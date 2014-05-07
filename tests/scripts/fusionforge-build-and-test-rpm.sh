@@ -6,7 +6,8 @@ get_config
 
 export FORGE_HOME=/usr/share/gforge
 export HOST=$1
-export FILTER="Testsuite-rpm.php"
+
+export FILTER="rpm/centos"
 
 case $HOST in
     centos5.local)
@@ -85,7 +86,7 @@ EOF
 # Run tests
 retcode=0
 echo "Run phpunit test on $HOST in $FORGE_HOME"
-ssh root@$HOST "$FORGE_HOME/tests/func/vncxstartsuite.sh $FILTER"
+ssh root@$HOST "$FORGE_HOME/tests/func/vncxstartsuite.sh rpm/centos"
 retcode=$?
 rsync -av root@$HOST:/var/log/ $WORKSPACE/reports/
 scp root@$HOST:/tmp/gforge-*.log $WORKSPACE/reports/

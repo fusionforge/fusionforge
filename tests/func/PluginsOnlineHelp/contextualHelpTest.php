@@ -47,6 +47,8 @@ class ContextualHelp extends FForge_SeleniumTestCase
 {
 	function testContextualHelp()
 	{
+		$this->skip_on_debian();
+		
 		$this->init();
 		$this->activatePlugin('online_help');
 		$this->login ('admin');
