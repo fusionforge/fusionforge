@@ -41,6 +41,10 @@ install4_config(){
 install4_config_redhat()
 {
 	install4_config
+
+	defaults=$(FUSIONFORGE_NO_PLUGINS=true forge_get_config config_path)/config.ini.d/defaults.ini
+	sed -i -e s's/^apache_user = .*/apache_user = apache/' $defaults
+	sed -i -e s's/^apache_group = .*/apache_group = apache/' $defaults
 }
 
 install4_config_suse()
