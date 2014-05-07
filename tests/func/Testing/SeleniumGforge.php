@@ -458,7 +458,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		}
 	}
 
-	protected function skip_on_src_installs($msg='Skipping on installations from *.deb') {
+	protected function skip_on_src_installs($msg='Skipping on installations from source') {
 		if (INSTALL_METHOD == 'src') {
 			$this->markTestSkipped($msg);
 		}
