@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-07 11:08+0200\n"
+"POT-Creation-Date: 2014-05-07 18:03+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -694,9 +694,8 @@ msgstr "Erreur lors de la suppression du document"
 
 #: common/docman/Document.class.php:1041
 #: common/docman/DocumentGroup.class.php:954
-#, fuzzy
 msgid "wrong parameters"
-msgstr "Il manque des paramètres"
+msgstr "paramètres erronés"
 
 #: common/docman/Document.class.php:1070
 #: common/docman/DocumentGroup.class.php:980
@@ -892,12 +891,11 @@ msgstr ""
 #: common/docman/include/webdav.php:249 common/docman/include/webdav.php:260
 #: common/docman/include/webdav.php:506 common/docman/include/webdav.php:551
 msgid "webdav db error"
-msgstr "Erreur WebDAV"
+msgstr "Erreur Webdav"
 
 #: common/docman/include/webdav.php:323
-#, fuzzy
 msgid "Injected by WebDAV"
-msgstr "Injecté par ZIP :"
+msgstr "Injecté par WebDAV"
 
 #: common/docman/views/addfile.php:92
 msgid "You MUST first create at least one folder to store your document."
@@ -1491,10 +1489,11 @@ msgid "OPTIONAL Upload new file"
 msgstr "Optionnel : déposer un nouveau fichier"
 
 #: common/docman/views/help.php:38
-#, fuzzy
 msgid ""
 "Documents parsing is also available thru webdav. Only for registred users."
-msgstr "La navigation des documents est également possible par WebDAV."
+msgstr ""
+"La navigation des documents est également possible par WebDAV. Uniquement "
+"pour les utilisateurs enregistrés."
 
 #: common/docman/views/help.php:39
 msgid "Direct Webdav URL"
@@ -2101,9 +2100,8 @@ msgid "Date"
 msgstr "Date"
 
 #: common/docman/views/reporting.php:175
-#, fuzzy
 msgid "Anonymous user"
-msgstr "Utilisateurs anonymes"
+msgstr "Utilisateur anonyme"
 
 #: common/docman/views/search.php:46
 msgid "All searched words are mandatory"
@@ -4197,44 +4195,36 @@ msgid "Read only + Vote"
 msgstr "Lecture seule + vote"
 
 #: common/include/rbac_texts.php:86 common/include/rbac_texts.php:132
-#, fuzzy
 msgid "Technician (no read access, no submitting) + Vote"
-msgstr "Technicien (sans accès en lecture, sans soumission)"
+msgstr "Technicien (sans accès en lecture, sans soumission) + vote"
 
 #: common/include/rbac_texts.php:87 common/include/rbac_texts.php:133
-#, fuzzy
 msgid "Technician (no submitting) + Vote"
-msgstr "Technicien (pas de soumission)"
+msgstr "Technicien (pas de soumission) + vote"
 
 #: common/include/rbac_texts.php:88 common/include/rbac_texts.php:134
-#, fuzzy
 msgid "Manager (no read access, no submitting) + Vote"
-msgstr "Manager (sans accès en lecture, sans soumission)"
+msgstr "Manager (sans accès en lecture, sans soumission) + vote"
 
 #: common/include/rbac_texts.php:89 common/include/rbac_texts.php:135
-#, fuzzy
 msgid "Manager (no submitting) + Vote"
-msgstr "Manager (sans soumission)"
+msgstr "Manager (sans soumission) + vote"
 
 #: common/include/rbac_texts.php:90 common/include/rbac_texts.php:136
-#, fuzzy
 msgid "Tech & manager (no read access, no submitting) + Vote"
-msgstr "Technicien et manager (sans accès en lecture, sans soumission)"
+msgstr "Technicien et manager (sans accès en lecture, sans soumission) + vote"
 
 #: common/include/rbac_texts.php:91 common/include/rbac_texts.php:137
-#, fuzzy
 msgid "Tech & manager (no submitting) + Vote"
-msgstr "Technicien et manager (sans soumission)"
+msgstr "Technicien et manager (sans soumission) + vote"
 
 #: common/include/rbac_texts.php:92 common/include/rbac_texts.php:138
-#, fuzzy
 msgid "Submit only + Vote"
-msgstr "Soumission uniquement"
+msgstr "Soumission uniquement + vote"
 
 #: common/include/rbac_texts.php:93 common/include/rbac_texts.php:139
-#, fuzzy
 msgid "Read & submit + Vote"
-msgstr "Accès en lecture et soumission"
+msgstr "Accès en lecture et soumission + vote"
 
 #: common/include/rbac_texts.php:94 common/include/rbac_texts.php:140
 msgid "Technician (no read access) + Vote"
