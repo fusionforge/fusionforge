@@ -55,6 +55,7 @@ class AuthBuiltinPlugin extends ForgeAuthPlugin {
 	 * @return boolean
 	 */
 	function displayAuthForm(&$params) {
+		global $HTML;
 		if (!$this->isRequired() && !$this->isSufficient()) {
 			return true;
 		}
@@ -63,29 +64,29 @@ class AuthBuiltinPlugin extends ForgeAuthPlugin {
 
 		$result = '';
 
-		$result .= '<p>';
-		$result .= _('Cookies must be enabled past this point.');
-		$result .= '</p>';
-
-		$result .= '<form action="' . util_make_url('/plugins/authbuiltin/post-login.php') . '" method="post">
-<input type="hidden" name="form_key" value="' . form_generate_key() . '"/>
-<input type="hidden" name="return_to" value="' . htmlspecialchars(stripslashes($return_to)) . '" />
-<p>';
+		$result .= html_e('p', array(), _('Cookies must be enabled past this point.'), false);
+		$result .= $HTML->openForm(array('action' => util_make_uri('/plugins/authbuiltin/post-login.php'), 'method' => 'post'));
+		$result .= html_e('input', array('type' => 'hidden', 'name' => 'form_key', 'value' => form_generate_key()));
+		$result .= html_e('input', array('type' => 'hidden', 'name' => 'return_to', 'value' => htmlspecialchars(stripslashes($return_to))));
+		$result .= html_ao('p');
 		if (forge_get_config('require_unique_email')) {
 			$result .= _('Login name or email address')._(':');
 		} else {
 			$result .= _('Login Name')._(':');
 		}
-		$result .= '<br /><input type="text" name="form_loginname" value="' . htmlspecialchars(stripslashes($loginname)) . '" required="required" /></p><p>' . _('Password')._(':') . '<br /><input type="password" name="form_pw" required="required" /></p><p><input type="submit" name="login" value="' . _('Login') . '" />
-</p>
-</form>' ;
-
-		$result .= '<p>' . util_make_link('/account/lostpw.php', _('[Lost your password?]')) . '</p>';
+		$result .= html_e('br').html_e('input', array('type' => 'text', 'name' => 'form_loginname', 'value' => htmlspecialchars(stripslashes($loginname)), 'required' => 'required'));
+		$result .= html_ac(html_ap() -1);
+		$result .= html_ao('p')._('Password')._(':');
+		$result .= html_e('br').html_e('input', array('type' => 'password', 'name' => 'form_pw', 'required' => 'required'));
+		$result .= html_ac(html_ap() -1);
+		$result .= html_e('p', array(), html_e('input', array('type' => 'submit', 'name' => 'login', 'value' => _('Login'))), false);
+		$result .= $HTML->closeForm();
+		$result .= html_e('p', array(), util_make_link('/account/lostpw.php', _('[Lost your password?]')));
 		// hide "new account" item if restricted to admin
 		if (!forge_get_config ('user_registration_restricted')) {
-			$result .= '<p>' . util_make_link('/account/register.php', _('New Account')) . '</p>';
+			$result .= html_e('p', array(), util_make_link('/account/register.php', _('New Account')));
 		}
-		$result .= '<p>' . util_make_link('/account/pending-resend.php', _('Resend confirmation email to a pending account')) . '</p>';
+		$result .= html_e('p', array(), util_make_link('/account/pending-resend.php', _('Resend confirmation email to a pending account')));
 
 		$params['html_snippets'][$this->name] = $result;
 	}
