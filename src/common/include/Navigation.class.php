@@ -203,11 +203,11 @@ class Navigation extends Error {
 				$url .= urlencode(getStringFromServer('REQUEST_URI'));
 			}
 			$res['titles'][] = _('Log In');
-			$res['urls'][] = util_make_uri($url);
+			$res['urls'][] = util_make_url($url);
 
 			if (!forge_get_config ('user_registration_restricted')) {
 				$res['titles'][] = _('New Account');
-				$res['urls'][] = util_make_uri('/account/register.php');
+				$res['urls'][] = util_make_url('/account/register.php');
 			}
 		}
 		return $res;
