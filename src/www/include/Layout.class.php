@@ -697,24 +697,25 @@ if (isset($params['group']) && $params['group']) {
 			} else {
 				sortProjectList($groups);
 
-				echo html_ao('form', array('id' => 'quicknavform', 'name' => 'quicknavform', 'action' => ''));
-				echo html_ao('div');
-				echo html_ao('select', array('name' => 'quicknav', 'id' => 'quicknav', 'onchange' => 'location.href=document.quicknavform.quicknav.value'));
-				echo html_e('option', array('value' => ''), _('Quick Jump To...'), false);
+				$result = html_ao('form', array('id' => 'quicknavform', 'name' => 'quicknavform', 'action' => ''));
+				$result .= html_ao('div');
+				$result .= html_ao('select', array('name' => 'quicknav', 'id' => 'quicknav', 'onchange' => 'location.href=document.quicknavform.quicknav.value'));
+				$result .= html_e('option', array('value' => ''), _('Quick Jump To...'), false);
 
 				foreach ($groups as $g) {
 					$group_id = $g->getID();
 					$menu = $this->navigation->getProjectMenu($group_id);
-					echo html_e('option', array('value' => $menu['starturl']), $menu['name'], true);
+					$result .= html_e('option', array('value' => $menu['starturl']), $menu['name'], true);
 					for ($j = 0; $j < count($menu['urls']); $j++) {
-						echo html_e('option', array('value' => $menu['urls'][$j]), '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$menu['titles'][$j], true);
+						$result .= html_e('option', array('value' => $menu['urls'][$j]), '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$menu['titles'][$j], true);
 						if (@$menu['adminurls'][$j]) {
-							echo  html_e('option', array('value' => $menu['adminurls'][$j]), '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'._('Admin'), true);
+							$result .= html_e('option', array('value' => $menu['adminurls'][$j]), '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'._('Admin'), true);
 						}
 					}
 				}
-				echo html_ac(html_ap() - 3);
+				$result .= html_ac(html_ap() - 3);
 			}
+			return $result;
 		}
 	}
 
@@ -839,7 +840,7 @@ if (isset($params['group']) && $params['group']) {
 	}
 
 	function searchBox() {
-		echo $this->navigation->getSearchBox();
+		return $this->navigation->getSearchBox();
 	}
 
 	/**

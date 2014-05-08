@@ -26,9 +26,6 @@
 
 require_once $gfwww.'include/Layout.class.php';
 
-define('TOP_TAB_HEIGHT', 30);
-define('BOTTOM_TAB_HEIGHT', 22);
-
 class Theme extends Layout {
 
 	function Theme() {
@@ -53,26 +50,22 @@ class Theme extends Layout {
 			$params['title'] = $params['title'] . " - ".forge_get_config('forge_name');
 		}
 
-		echo html_ao('table', array('id' => 'header', 'class' => 'fullwidth'));
-		echo html_ao('tr');
-		echo html_ao('td', array('id' => 'header-col1'));
-		echo util_make_link('/', html_image('/header/top-logo.png', null, null, array('alt'=>'FusionForge Home')));
-		echo html_ac(html_ap() -1);
-		echo html_ao('td', array('id' => 'header-col2'));
-
+		echo $this->listTableTop(array(), array(), 'fullwidth', 'header');
+		$cells = array();
+		$cells[] = array(util_make_link('/', html_image('/header/top-logo.png', null, null, array('alt'=>'FusionForge Home'))), 'id' => 'header-col1');
 		$items = $this->navigation->getUserLinks();
 		for ($j = 0; $j < count($items['titles']); $j++) {
 			$links[] = util_make_link($items['urls'][$j], $items['titles'][$j], array('class' => 'userlink'), true);
 		}
-		echo implode(' | ', $links);
+		$params['links'] = &$links;
 		plugin_hook('headermenu', $params);
-
-		echo html_ac(html_ap() -2);
-		echo html_ao('tr');
-		echo html_ao('td', array('id' => 'header-line2', 'colspan' => 2));
-		$this->quickNav();
-		$this->searchBox();
-		echo html_ac(html_ap() -3);
+		$template = isset($params['template']) ?  $params['template'] : ' | ';
+		$cells[] = array(implode($template, $links), 'id' => 'header-col2');
+		echo $this->multiTableRow(array(), $cells);
+		$cells = array();
+		$cells[] = array($this->quickNav().$this->searchBox(), 'id' => 'header-line2', 'colspan' => 2);
+		echo $this->multiTableRow(array(), $cells);
+		echo $this->listTableBottom();
 		$this->outerTabs($params);
 		echo '<!-- inner tabs -->' . "\n";
 		echo html_ao('div', array('class' => 'innertabs'));

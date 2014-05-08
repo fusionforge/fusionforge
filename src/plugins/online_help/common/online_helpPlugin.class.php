@@ -83,10 +83,7 @@ class online_helpPlugin extends Plugin {
 			$guide .= 'index.html';
 		}
 
-		$guide = util_make_link('javascript:help_window(\''.$guide.'\')', _('Get Help'), array(), true);
-
-		$template = isset($params['template']) ?  $params['template'] : ' | {menu}';
-		echo str_replace('{menu}', $guide, $template);
+		$params['links'][] = util_make_link('javascript:help_window(\''.$guide.'\')', _('Get Help'), array(), true);
 	}
 }
 
