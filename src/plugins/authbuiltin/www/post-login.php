@@ -83,10 +83,8 @@ if ($login) {
 		}
 		if ($return_to) {
 			session_redirect($return_to);
-			exit;
 		} else {
 			session_redirect('/my');
-			exit;
 		}
 	} else {
 		if ($form_loginname && $form_pw) {
