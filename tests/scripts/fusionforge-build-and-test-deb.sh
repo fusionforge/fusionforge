@@ -113,6 +113,11 @@ if [ "$DIST" = wheezy ] ; then
     ssh root@$HOST "apt-get update"
     ssh root@$HOST "UCF_FORCE_CONFFNEW=yes DEBIAN_FRONTEND=noninteractive LANG=C apt-get -o debug::pkgproblemresolver=true -y --force-yes install loggerhead python"
     ssh root@$HOST "rm /etc/apt/sources.list.d/jessie.list"
+
+    ssh root@$HOST "echo \"deb $DEBMIRROR wheezy-backports main\" >> /etc/apt/sources.list.d/wheezy-backports.list"
+    ssh root@$HOST "apt-get update"
+    ssh root@$HOST "UCF_FORCE_CONFFNEW=yes DEBIAN_FRONTEND=noninteractive LANG=C apt-get -o debug::pkgproblemresolver=true -y --force-yes install -t wheezy-backports libjs-jquery-ui"
+    ssh root@$HOST "rm /etc/apt/sources.list.d/wheezy-backports.list"
 fi
 
 ssh root@$HOST "echo \"deb $DEBMIRROR $DIST main\" > /etc/apt/sources.list"
