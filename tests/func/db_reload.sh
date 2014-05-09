@@ -112,12 +112,21 @@ stop_apache
 
 stop_database
 
-# If the backup is there, restore it (it should now have been created by install.sh)
-if [ -d /var/lib/postgresql.backup ]; then
+if [ -d /var/lib/postgresql ] ; then
+    dbdir=/var/lib/postgresql
+elif [ -d /var/lib/pgsql ] ; then
+    dbdir=/var/lib/pgsql
+else
+    echo "Database dir not found"
+    exit 1
+fi
 
-    echo "Restore database from files backup (/var/lib/postgresql.backup/)"
-    rm -rf /var/lib/postgresql
-    cp -a --reflink=auto /var/lib/postgresql.backup /var/lib/postgresql
+# If the backup is there, restore it (it should now have been created by install.sh)
+if [ -d $dbdir.backup ]; then
+
+    echo "Restore database from files backup ($dbdir.backup/)"
+    rm -rf $dbdir
+    cp -a --reflink=auto $dbdir.backup $dbdir
 
 else
     # We will restore from the dump, then perform a backup so that it's there next time
@@ -135,8 +144,8 @@ else
 
         # Perform a file backup which will now be faster to restore, next time (align with new install.sh behaviour)
         stop_database
-        echo "Perform files backup to /var/lib/postgresql.backup/"
-        cp -a --reflink=auto /var/lib/postgresql /var/lib/postgresql.backup
+        echo "Perform files backup to $dbdir.backup/"
+        cp -a --reflink=auto $dbdir $dbdir.backup
 
     else
  	# TODO: reinit the db from scratch and create the dump
