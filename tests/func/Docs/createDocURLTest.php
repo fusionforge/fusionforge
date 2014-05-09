@@ -63,7 +63,6 @@ class CreateDocURL extends FForge_SeleniumTestCase
 		$this->type("title", "My document");
 		$this->type("//input[@name='description']", "L'année dernière à Noël, 3 < 4, 中国 \" <em>, père & fils");
 		$this->click("//input[@name='type' and @value='pasteurl']");
-		sleep(1);
 		$this->type("//input[@name='file_url']", URL."/terms.php");
 		$this->clickAndWait("submit");
 		$this->assertTextPresent("Document ".URL."/terms.php submitted successfully");
