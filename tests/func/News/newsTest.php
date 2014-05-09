@@ -148,10 +148,9 @@ class CreateNews extends FForge_SeleniumTestCase
 	}
 
 	/*
-	 * Test multiple post of the news (reload).
-	 * Test skipped due to manual intervention required.
+	 * Test multiple post of the news (reload or back+resubmit).
 	 */
-	function skiptestPreventMultiplePost()
+	function testPreventMultiplePost()
 	{
 		// Create a simple news.
 		$this->init();
@@ -162,12 +161,10 @@ class CreateNews extends FForge_SeleniumTestCase
 		$this->type("details", "hello DEF with a long detail.\n");
 		$this->clickAndWait("submit");
 		$this->assertTextPresent("News Added.");
-		$this->chooseOkOnNextConfirmation();
-		// Problem, a confirmation window is displayed and I didn't found
-		// the way to automatically click on the Ok button.
-		$this->refresh();
-		$this->waitForPageToLoad("30000");
-		$this->assertTextPresent("Error - double submit");
+		$this->goBack();
+		sleep(1);
+		$this->clickAndWait("submit");
+		$this->assertTextPresent("Please avoid double-clicking");
 	}
 
 }
