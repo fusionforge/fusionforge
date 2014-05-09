@@ -23,7 +23,9 @@ class Testsuite
 
 		// Selenium tests
 		if (!defined('DB_INIT_CMD')) { define('PROJECTA','true'); }
-		$suite->addTestFiles(glob("func/*/*Test.php"));
+		$files = glob("func/*/*Test.php");
+		natsort($files);
+		$suite->addTestFiles($files);
 
 		return $suite;
 	}
