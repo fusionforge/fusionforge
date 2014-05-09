@@ -46,39 +46,38 @@ require_once dirname(dirname(__FILE__)).'/Testing/SeleniumGforge.php';
 
 class TopTester extends FForge_SeleniumTestCase
 {
-    function skiptestWalkInTop()
+    function testWalkInTop()
     {
-		$this->populateStandardTemplate('forums');
-		$this->init();
+	    $this->populateStandardTemplate('forums');
+	    $this->init();
 
-		$this->clickAndWait("link=Forums");
-		$this->clickAndWait("link=open-discussion");
-		$this->clickAndWait("link=Start New Thread");
-		$this->type("subject", "Message1");
-		$this->type("body", "Text1");
-		$this->clickAndWait("submit");
-		$this->assertTextPresent("Message Posted Successfully");
+	    $this->clickAndWait("link=Forums");
+	    $this->clickAndWait("link=open-discussion");
+	    $this->clickAndWait("link=Start New Thread");
+	    $this->type("subject", "Message1");
+	    $this->type("body", "Text1");
+	    $this->clickAndWait("submit");
+	    $this->assertTextPresent("Message Posted Successfully");
 
-		sleep(1);
-		$this->cron("project_weekly_metric.php");
+	    $this->cron("project_weekly_metric.php");
 
-		// Test that from the main page we access the most active this week.
-		$this->clickAndWait("link=Home");
-		$this->clickAndWait("link=[More]");
-		$this->assertTextPresent("Most Active This Week");
+	    // Test that from the main page we access the most active this week.
+	    $this->clickAndWait("link=Home");
+	    $this->clickAndWait("link=All project activities");
+	    $this->assertTextPresent("Most Active This Week");
 
-    	// Test that we can return back to all the tops.
-		$this->clickAndWait("link=[View Other Top Categories]");
-		$this->assertTextPresent("We track many project usage statistics");
+	    // Test that we can return back to all the tops.
+	    $this->clickAndWait("link=[View Other Top Categories]");
+	    $this->assertTextPresent("We track many project usage statistics");
 
-    	// Test that we can go the view the most active all time.
-		$this->clickAndWait("link=Most Active All Time");
-		$this->assertTextPresent("Most Active All Time");
+	    // Test that we can go the view the most active all time.
+	    $this->clickAndWait("link=Most Active All Time");
+	    $this->assertTextPresent("Most Active All Time");
 
-    	// Return back to tops.
-		$this->clickAndWait("link=[View Other Top Categories]");
-		$this->clickAndWait("link=Top Downloads");
-		$this->assertTextPresent("Rank");
+	    // Return back to tops.
+	    $this->clickAndWait("link=[View Other Top Categories]");
+	    $this->clickAndWait("link=Top Downloads");
+	    $this->assertTextPresent("Rank");
     }
 }
 
