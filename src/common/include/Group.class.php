@@ -1902,6 +1902,16 @@ class Group extends Error {
 			return false;
 		}
 
+		// Remove users & delete roles from this project
+		$members = $this->getMembers();
+		foreach ($members as $userObject) {
+			$this->removeUser($userObject->getID());
+		}
+		$localRolesId = $this->getRolesId(false);
+		foreach ($localRolesId as $localRoleId) {
+			$roleObject = new Role($this, $localRoleId);
+			$roleObject->delete();
+		}
 		// Delete entry in groups.
 		$res = db_query_params('DELETE FROM groups WHERE group_id=$1',
 					array($this->getID()));
@@ -2737,9 +2747,10 @@ if there is anything we can do to help you.
 	/**
 	 * getRolesId - Get Ids of the roles of the group.
 	 *
+	 * @param	bool	all role ids or local role ids only. Default is all role ids
 	 * @return	array	Role ids of this group.
 	 */
-	function getRolesId() {
+	function getRolesId($global = true) {
 		$role_ids = array();
 
 		$res = db_query_params('SELECT role_id FROM pfo_role WHERE home_group_id=$1',
@@ -2747,10 +2758,12 @@ if there is anything we can do to help you.
 		while ($arr = db_fetch_array($res)) {
 			$role_ids[] = $arr['role_id'];
 		}
-		$res = db_query_params('SELECT role_id FROM role_project_refs WHERE group_id=$1',
-					array($this->getID()));
-		while ($arr = db_fetch_array($res)) {
-			$role_ids[] = $arr['role_id'];
+		if ($global) {
+			$res = db_query_params('SELECT role_id FROM role_project_refs WHERE group_id=$1',
+						array($this->getID()));
+			while ($arr = db_fetch_array($res)) {
+				$role_ids[] = $arr['role_id'];
+			}
 		}
 
 		return array_unique($role_ids);
