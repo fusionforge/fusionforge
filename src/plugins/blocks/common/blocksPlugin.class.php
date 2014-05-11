@@ -1,9 +1,10 @@
 <?php
 
-/*
+/**
  * Copyright (C) 2006 Alain Peyrat, Alcatel-Lucent
  * Copyright (C) 2010 Alain Peyrat <aljeux@free.fr>
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -22,7 +23,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-/*
+/**
  * Standard Alcatel-Lucent disclaimer for contributing to open source
  *
  * "The provided file ("Contribution") has not been tested and/or
@@ -62,7 +63,7 @@ class blocksPlugin extends Plugin {
 		// this displays the link in the project admin options page to it's blocks administration
 		$group = group_get_object($params['group_id']);
 		if ($group && $group->usesPlugin ( $this->name )) {
-			echo '<p><a href="/plugins/blocks/index.php?id=' . $group->getID() . '&amp;type=admin&amp;pluginname=' . $this->name . '">' . _("Blocks Admin") . '</a></p>';
+			echo html_e('p', array(), util_make_link('/plugins/blocks/index.php?id='.$group->getID().'&type=admin&pluginname='.$this->name, _('Blocks Admin')));
 		}
 	}
 
@@ -116,8 +117,8 @@ class blocksPlugin extends Plugin {
 		} elseif ($content) {
 			return $this->parseContent($content).'<br />';
 		} else {
-			return "<table width=\"100%\" border=\"1\" cellpadding=\"0\" cellspacing=\"0\">" .
-					"<tr><td align=\"center\">block: $name</td></tr></table><br />";
+			return '<table width="100%" border="1" cellpadding="0" cellspacing="0">'.
+					'<tr><td align="center">block: '.$name.'</td></tr></table><br />';
 		}
 	}
 

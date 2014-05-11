@@ -71,7 +71,7 @@ class gravatarPlugin extends Plugin {
 
 			$url .= $hash.'?s='. $image_size;
 			$class = 'img-shadow-'.$size;
-			$code = '<div class="'.$class.'"><img src="'.$url.'" class="gravatar" alt="" /></div>';
+			$code = '<div class="'.$class.'">'.html_abs_image($url, 0, 0, array('class' => 'gravatar')).'</div>';
 			if ($size == 'l' && (user_getid() == $user_id)) {
 				$code .= '<div class="align-center"><i><a href="http://www.gravatar.com/">'._('Change face').'</a></i></div>';
 			}

@@ -4,6 +4,7 @@
  * Copyright 2003-2009, Roland Mas
  * Copyright 2004, GForge, LLC
  * Copyright (C) 2010-2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -118,10 +119,7 @@ class CCasePlugin extends SCMPlugin {
 				echo '</p>';
 				$browse_url = "http://" . $this->GetGroupServer($group_id) . "/ccweb" ;
 				// $browse_url = $browse_url . "?vob_tag=".$vob_tag ;
-				echo "<p>";
-				printf ('<a href="%1$s">%2$s</a>', $browse_url, _('Browse the ClearCase tree')) ;
-				echo "</p>";
-
+				echo html_e('p', array(), util_make_link($browse_url, _('Browse the ClearCase tree')));
 				echo $HTML->boxBottom();
 			}
 

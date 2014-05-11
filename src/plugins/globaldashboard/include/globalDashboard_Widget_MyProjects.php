@@ -31,7 +31,7 @@ class globalDashboard_Widget_MyProjects extends Widget {
 	}
 
 	function getTitle() {
-		return _("Projects on remote Software Forges");
+		return _('Projects on remote Software Forges');
 	}
 
 	function getCategory() {
@@ -39,7 +39,7 @@ class globalDashboard_Widget_MyProjects extends Widget {
 	}
 
 	function getDescription() {
-		return _("Lists user projects hosted on remote forge systems");
+		return _('Lists user projects hosted on remote forge systems');
 	}
 
 	function getContent() {
@@ -83,12 +83,9 @@ class globalDashboard_Widget_MyProjects extends Widget {
 				$i = 0;
 				foreach ($remote_account_projs as $remote_proj) {
 					$project_url = $account['forge_account_domain'] . '/projects/'. $remote_proj['unix_group_name'];
-					$html = $html . '
-					<tr>
-						<td>
-							<img src="'. $favicon_url.'" />    <a class="resourceOslcPopupTrigger" href="'. $project_url .'">'. $remote_proj['group_name'] .'</a>
-						</td>
-					</tr>';
+					$cells = array();
+					$cells[] = html_abs_img($favicon_url, 0, 0, array()).util_make_link($project_url, $remote_proj['group_name'], array('class' => 'resourceOslcPopupTrigger'), true);
+					$html .= $HTML->multiTableRow(array(), $cells);
 				}
 			}
 			$html .= $HTML->listTableBottom();

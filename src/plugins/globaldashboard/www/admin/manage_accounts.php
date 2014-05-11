@@ -77,22 +77,17 @@ function listStoredRemoteAccounts($user_id) {
 		echo '<fieldset>';
 		echo '<legend> ' . _('Stored remote accounts') . ' </legend>';
 		$html = '';
-		$tablearr = array(_("User Name"), _("Remote site"), _("User account URL"), _("Action") );
+		$tablearr = array(_("User Name"), _("Remote site"), _("User account URL"), _("Actions"));
 		$html .= $HTML->listTableTop($tablearr);
 		$i = 0;
 		foreach ($accounts as $account) {
-			$html = $html . '
-				<tr ' . $HTML->boxGetAltRowStyle($i++) . '>
-				<td><a href="'.$account['forge_account_uri'].'">'.$account['forge_account_login_name'].'</a>
-				</td>
-				<td><a href="'.$account['forge_account_domain'].'">'.$account['forge_account_domain'].'</a>
-				</td>
-				<td><a href="'.$account['forge_account_uri'].'">'.$account['forge_account_uri'].'</a>
-				</td>
-				<td><a href="/plugins/globaldashboard/admin/edit_account_page.php?type=user&id='.$user_id.'&pluginname=globaldashboard&action=edit&account_id='.$account['account_id'].'">   '. _("Edit") . '    </a>
-					<a href="/plugins/globaldashboard/admin/delete_account.php?account_id='.$account['account_id'].'&user_id='.$account['user_id'].'">   '. _("Delete") . ' </a>
-				</td>
-				</tr>';
+			$cells = array();
+			$cells[][] = util_make_link($account['forge_account_uri'], $account['forge_account_login_name'], array(), true);
+			$cells[][] = util_make_link($account['forge_account_domain'], $account['forge_account_domain'], array(), true);
+			$cells[][] = util_make_link($account['forge_account_uri'], $account['forge_account_uri'], array(), true);
+			$cells[][] = util_make_link('/plugins/globaldashboard/admin/edit_account_page.php?type=user&id='.$user_id.'&pluginname=globaldashboard&action=edit&account_id='.$account['account_id'], _('Edit'), array()).
+					util_make_link('/plugins/globaldashboard/admin/delete_account.php?account_id='.$account['account_id'].'&user_id='.$account['user_id'], _('Delete'), array());
+			$html .= $HTML->multitableRow(array('class' => $HTML->boxGetAltRowStyle($i++, true)), $cells);
 		}
 		$html .= $HTML->listTableBottom();
 		echo $html;
