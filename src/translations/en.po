@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 14:33+0200\n"
+"POT-Creation-Date: 2014-05-12 16:31+0200\n"
 "PO-Revision-Date: 2009-01-13 16:27+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -14089,8 +14089,8 @@ msgstr ""
 msgid "Member since"
 msgstr ""
 
-#: www/account/index.php:146 www/admin/useredit.php:130
-#: www/include/user_profile.php:68
+#: www/account/index.php:146 www/admin/unsubscribe.php:114
+#: www/admin/useredit.php:130 www/include/user_profile.php:68
 msgid "User Id"
 msgstr ""
 
@@ -15590,10 +15590,6 @@ msgstr ""
 
 #: www/admin/unsubscribe.php:99
 msgid "Show users matching pattern"
-msgstr ""
-
-#: www/admin/unsubscribe.php:114
-msgid "user_id"
 msgstr ""
 
 #: www/admin/unsubscribe.php:118

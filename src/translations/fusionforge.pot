@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 14:42+0200\n"
+"POT-Creation-Date: 2014-05-12 16:41+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14083,8 +14083,8 @@ msgstr ""
 msgid "Member since"
 msgstr ""
 
-#: www/account/index.php:146 www/admin/useredit.php:130
-#: www/include/user_profile.php:68
+#: www/account/index.php:146 www/admin/unsubscribe.php:114
+#: www/admin/useredit.php:130 www/include/user_profile.php:68
 msgid "User Id"
 msgstr ""
 
@@ -15578,10 +15578,6 @@ msgstr ""
 
 #: www/admin/unsubscribe.php:99
 msgid "Show users matching pattern"
-msgstr ""
-
-#: www/admin/unsubscribe.php:114
-msgid "user_id"
 msgstr ""
 
 #: www/admin/unsubscribe.php:118

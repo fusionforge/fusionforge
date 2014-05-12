@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 14:33+0200\n"
+"POT-Creation-Date: 2014-05-12 16:31+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -4761,7 +4761,7 @@ msgstr "Inserimento fallito"
 #: common/include/User.class.php:443
 #, fuzzy
 msgid "Could Not Get User Id: "
-msgstr "Impossibile completare l'operazione"
+msgstr ""
 
 #: common/include/User.class.php:477
 #, fuzzy, php-format
@@ -15356,8 +15356,8 @@ msgstr "Modifica il mio profilo delle competenze"
 msgid "Member since"
 msgstr "Registrato il"
 
-#: www/account/index.php:146 www/admin/useredit.php:130
-#: www/include/user_profile.php:68
+#: www/account/index.php:146 www/admin/unsubscribe.php:114
+#: www/admin/useredit.php:130 www/include/user_profile.php:68
 msgid "User Id"
 msgstr "Id utente"
 
@@ -16980,10 +16980,6 @@ msgstr ""
 #: www/admin/unsubscribe.php:99
 msgid "Show users matching pattern"
 msgstr "Visualizza utenti che soddisfano il prototipo"
-
-#: www/admin/unsubscribe.php:114
-msgid "user_id"
-msgstr "Id utente"
 
 #: www/admin/unsubscribe.php:118
 msgid "Site Mail."
@@ -24888,10 +24884,6 @@ msgstr "Non è stato inserito alcun file"
 
 #~ msgid "Member since:"
 #~ msgstr "Data registrazione:"
-
-#, fuzzy
-#~ msgid "User Id:"
-#~ msgstr "Id utente"
 
 #~ msgid "Login name:"
 #~ msgstr "Nome login:"

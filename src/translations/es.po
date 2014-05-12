@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 14:33+0200\n"
+"POT-Creation-Date: 2014-05-12 16:31+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -14951,10 +14951,10 @@ msgstr "Editar mi Perfil de Aptitudes"
 msgid "Member since"
 msgstr "Miembro desde"
 
-#: www/account/index.php:146 www/admin/useredit.php:130
-#: www/include/user_profile.php:68
+#: www/account/index.php:146 www/admin/unsubscribe.php:114
+#: www/admin/useredit.php:130 www/include/user_profile.php:68
 msgid "User Id"
-msgstr "Id Usuario"
+msgstr "Id del Usuario"
 
 #: www/account/index.php:158 www/account/register.php:177
 msgid "First Name"
@@ -16200,7 +16200,7 @@ msgstr "Administración de Sitio: Cambiar Clave Usuario"
 #: www/admin/passedit.php:82
 #, fuzzy, php-format
 msgid "You have changed successfully the password of %1$s (%2$s)."
-msgstr "Ha cambiado la contraseña de %2$s (%3$s)."
+msgstr "Ha cambiado la contraseña de %1$s (%2$s)."
 
 #: www/admin/passedit.php:83
 #, php-format
@@ -16560,10 +16560,6 @@ msgstr ""
 #: www/admin/unsubscribe.php:99
 msgid "Show users matching pattern"
 msgstr "Mostrar los usuarios coincidentes"
-
-#: www/admin/unsubscribe.php:114
-msgid "user_id"
-msgstr "id_del_usuario"
 
 #: www/admin/unsubscribe.php:118
 msgid "Site Mail."
@@ -24599,9 +24595,6 @@ msgstr "No ha proporcionado el nombre de usuario"
 
 #~ msgid "Member since:"
 #~ msgstr "Miembro desde:"
-
-#~ msgid "User Id:"
-#~ msgstr "ID Usuario:"
 
 #~ msgid "Login name:"
 #~ msgstr "Nombre de usuario:"

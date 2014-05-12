@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 14:33+0200\n"
+"POT-Creation-Date: 2014-05-12 16:31+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -4710,9 +4710,8 @@ msgid "Insert Error"
 msgstr ""
 
 #: common/include/User.class.php:443
-#, fuzzy
 msgid "Could Not Get User Id: "
-msgstr "No s'ha pogut completar l'operació"
+msgstr ""
 
 #: common/include/User.class.php:477
 #, fuzzy, php-format
@@ -15337,10 +15336,10 @@ msgstr "Edita el meu perfil de coneixements"
 msgid "Member since"
 msgstr "Membre des de"
 
-#: www/account/index.php:146 www/admin/useredit.php:130
-#: www/include/user_profile.php:68
+#: www/account/index.php:146 www/admin/unsubscribe.php:114
+#: www/admin/useredit.php:130 www/include/user_profile.php:68
 msgid "User Id"
-msgstr "Id usuari"
+msgstr "Id d'usuari"
 
 #: www/account/index.php:158 www/account/register.php:177
 msgid "First Name"
@@ -16968,10 +16967,6 @@ msgstr ""
 #: www/admin/unsubscribe.php:99
 msgid "Show users matching pattern"
 msgstr "Mostra els usuaris coincidents amb el patró"
-
-#: www/admin/unsubscribe.php:114
-msgid "user_id"
-msgstr "Id d'usuari"
 
 #: www/admin/unsubscribe.php:118
 msgid "Site Mail."
@@ -24840,10 +24835,6 @@ msgstr "Nom d'usuari"
 
 #~ msgid "Member since:"
 #~ msgstr "Membre des de:"
-
-#, fuzzy
-#~ msgid "User Id:"
-#~ msgstr "Id usuari"
 
 #~ msgid "Login name:"
 #~ msgstr "Nom d'inici de sessió:"

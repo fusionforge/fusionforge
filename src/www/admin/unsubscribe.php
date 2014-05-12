@@ -111,7 +111,7 @@ if ($pattern) {
 
 	$title=array();
 	$title[]='&nbsp;';
-	$title[]=_('user_id');
+	$title[]=_('User Id');
 	$title[]=_('User Name');
 	$title[]=_('Real Name');
 	$title[]=_('Email');

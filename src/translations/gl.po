@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 14:33+0200\n"
+"POT-Creation-Date: 2014-05-12 16:31+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -15441,8 +15441,8 @@ msgstr "Editar o meu perfil de habelencias"
 msgid "Member since"
 msgstr "Membro desde"
 
-#: www/account/index.php:146 www/admin/useredit.php:130
-#: www/include/user_profile.php:68
+#: www/account/index.php:146 www/admin/unsubscribe.php:114
+#: www/admin/useredit.php:130 www/include/user_profile.php:68
 msgid "User Id"
 msgstr "ID de usuario"
 
@@ -17085,10 +17085,6 @@ msgstr ""
 #: www/admin/unsubscribe.php:99
 msgid "Show users matching pattern"
 msgstr "Amosar os usuarios que coinciden co patrón"
-
-#: www/admin/unsubscribe.php:114
-msgid "user_id"
-msgstr "ID de usuario"
 
 #: www/admin/unsubscribe.php:118
 msgid "Site Mail."
@@ -25243,10 +25239,6 @@ msgstr "Non se introduciu un nome de usuario"
 
 #~ msgid "Member since:"
 #~ msgstr "Membro desde: "
-
-#, fuzzy
-#~ msgid "User Id:"
-#~ msgstr "ID de usuario "
 
 #~ msgid "Login name:"
 #~ msgstr "Nome de usuario: "

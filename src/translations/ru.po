@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 14:33+0200\n"
+"POT-Creation-Date: 2014-05-12 16:31+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -15529,8 +15529,8 @@ msgstr "Дополнить информацию о личном опыте ра�
 msgid "Member since"
 msgstr "Участник с"
 
-#: www/account/index.php:146 www/admin/useredit.php:130
-#: www/include/user_profile.php:68
+#: www/account/index.php:146 www/admin/unsubscribe.php:114
+#: www/admin/useredit.php:130 www/include/user_profile.php:68
 msgid "User Id"
 msgstr "Id участника"
 
@@ -17183,10 +17183,6 @@ msgstr ""
 #: www/admin/unsubscribe.php:99
 msgid "Show users matching pattern"
 msgstr "Отобразить участников соответствующих маске"
-
-#: www/admin/unsubscribe.php:114
-msgid "user_id"
-msgstr "Идентификатор пользователя"
 
 #: www/admin/unsubscribe.php:118
 msgid "Site Mail."
@@ -25301,10 +25297,6 @@ msgstr "Имя участника обязательно"
 
 #~ msgid "Member since:"
 #~ msgstr "Дата регистрации участника:"
-
-#, fuzzy
-#~ msgid "User Id:"
-#~ msgstr "Id участника"
 
 #~ msgid "Login name:"
 #~ msgstr "Регистрационное имя:"

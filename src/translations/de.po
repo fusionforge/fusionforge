@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 14:33+0200\n"
+"POT-Creation-Date: 2014-05-12 16:31+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -15320,8 +15320,8 @@ msgstr "Bearbeite mein Qualifikationsprofil"
 msgid "Member since"
 msgstr "Mitglied seit"
 
-#: www/account/index.php:146 www/admin/useredit.php:130
-#: www/include/user_profile.php:68
+#: www/account/index.php:146 www/admin/unsubscribe.php:114
+#: www/admin/useredit.php:130 www/include/user_profile.php:68
 msgid "User Id"
 msgstr "Benutzer-ID"
 
@@ -16966,10 +16966,6 @@ msgstr ""
 #: www/admin/unsubscribe.php:99
 msgid "Show users matching pattern"
 msgstr "Zeige Benutzer, die mit der Zeichenfolge übereinstimmen"
-
-#: www/admin/unsubscribe.php:114
-msgid "user_id"
-msgstr "Benutzer_ID"
 
 #: www/admin/unsubscribe.php:118
 msgid "Site Mail."
@@ -24370,10 +24366,6 @@ msgstr "Aktualisierung nicht möglich"
 msgid "No User Name Provided"
 msgstr "Kein Benutzername angegeben"
 
-#, fuzzy
-#~ msgid "Error: %s"
-#~ msgstr "Fehler"
-
 #~ msgid "View project <a href=\"%s\">Statistics</a>"
 #~ msgstr "Betrachte Projekt <a href=\"%s\" >Statistics</a>"
 
@@ -25123,10 +25115,6 @@ msgstr "Kein Benutzername angegeben"
 
 #~ msgid "Member since:"
 #~ msgstr "Mitglied seit:"
-
-#, fuzzy
-#~ msgid "User Id:"
-#~ msgstr "Benutzer-ID"
 
 #~ msgid "Login name:"
 #~ msgstr "Anmelde-Name:"

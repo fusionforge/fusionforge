@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 14:33+0200\n"
+"POT-Creation-Date: 2014-05-12 16:31+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -14746,8 +14746,8 @@ msgstr "Éditer mon profil de compétences"
 msgid "Member since"
 msgstr "Membre depuis le"
 
-#: www/account/index.php:146 www/admin/useredit.php:130
-#: www/include/user_profile.php:68
+#: www/account/index.php:146 www/admin/unsubscribe.php:114
+#: www/admin/useredit.php:130 www/include/user_profile.php:68
 msgid "User Id"
 msgstr "Identifiant d'utilisateur"
 
@@ -16353,10 +16353,6 @@ msgstr ""
 #: www/admin/unsubscribe.php:99
 msgid "Show users matching pattern"
 msgstr "Montrer les utilisateurs correspondant au motif"
-
-#: www/admin/unsubscribe.php:114
-msgid "user_id"
-msgstr "Identifiant utilisateur"
 
 #: www/admin/unsubscribe.php:118
 msgid "Site Mail."
@@ -24451,9 +24447,6 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 
 #~ msgid "Member since:"
 #~ msgstr "Membre depuis le :"
-
-#~ msgid "User Id:"
-#~ msgstr "Identifiant d'utilisateur"
 
 #~ msgid "Login name:"
 #~ msgstr "Nom du compte :"

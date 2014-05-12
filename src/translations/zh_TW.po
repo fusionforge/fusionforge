@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 14:33+0200\n"
+"POT-Creation-Date: 2014-05-12 16:31+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -15334,8 +15334,8 @@ msgstr "編輯我的個人能力"
 msgid "Member since"
 msgstr "帳號建立日期"
 
-#: www/account/index.php:146 www/admin/useredit.php:130
-#: www/include/user_profile.php:68
+#: www/account/index.php:146 www/admin/unsubscribe.php:114
+#: www/admin/useredit.php:130 www/include/user_profile.php:68
 msgid "User Id"
 msgstr "使用者編號"
 
@@ -16941,10 +16941,6 @@ msgstr ""
 #: www/admin/unsubscribe.php:99
 msgid "Show users matching pattern"
 msgstr "顯示符合條件的使用者"
-
-#: www/admin/unsubscribe.php:114
-msgid "user_id"
-msgstr "使用者編號"
 
 #: www/admin/unsubscribe.php:118
 msgid "Site Mail."
@@ -24766,10 +24762,6 @@ msgstr "帳號"
 
 #~ msgid "Member since:"
 #~ msgstr "帳號建立日期"
-
-#, fuzzy
-#~ msgid "User Id:"
-#~ msgstr "使用者編號"
 
 #~ msgid "Login name:"
 #~ msgstr "使用者名稱："

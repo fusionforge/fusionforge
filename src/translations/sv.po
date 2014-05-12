@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 14:33+0200\n"
+"POT-Creation-Date: 2014-05-12 16:31+0200\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -15105,8 +15105,8 @@ msgstr "Redigera min kompetensprofil"
 msgid "Member since"
 msgstr "Medlem sedan"
 
-#: www/account/index.php:146 www/admin/useredit.php:130
-#: www/include/user_profile.php:68
+#: www/account/index.php:146 www/admin/unsubscribe.php:114
+#: www/admin/useredit.php:130 www/include/user_profile.php:68
 msgid "User Id"
 msgstr "Användar-ID"
 
@@ -16708,10 +16708,6 @@ msgstr ""
 #: www/admin/unsubscribe.php:99
 msgid "Show users matching pattern"
 msgstr "Visa användarnas matchande mönster"
-
-#: www/admin/unsubscribe.php:114
-msgid "user_id"
-msgstr "användar-ID"
 
 #: www/admin/unsubscribe.php:118
 msgid "Site Mail."
@@ -24460,10 +24456,6 @@ msgstr "Användarenamn"
 
 #~ msgid "Member since:"
 #~ msgstr "Medlem sedan"
-
-#, fuzzy
-#~ msgid "User Id:"
-#~ msgstr "Användar-ID"
 
 #~ msgid "Login name:"
 #~ msgstr "Inloggningsnamn:"
