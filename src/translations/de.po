@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 14:22+0200\n"
+"POT-Creation-Date: 2014-05-12 14:33+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -371,8 +371,8 @@ msgstr "Auftragsdetails"
 #: plugins/scmhg/common/HgPlugin.class.php:656
 #: plugins/scmhook/common/scmhookPlugin.class.php:145
 #: plugins/webanalytics/view/admin/updateLinkValue.php:53
-#: www/account/index.php:200 www/account/index.php:304
-#: www/account/index.php:305 www/account/lostlogin.php:84
+#: www/account/index.php:200 www/account/index.php:303
+#: www/account/index.php:304 www/account/lostlogin.php:84
 #: www/account/register.php:212 www/account/verify.php:58
 #: www/admin/approve-pending.php:193 www/admin/approve-pending.php:195
 #: www/admin/database.php:155 www/admin/database.php:160
@@ -1406,25 +1406,28 @@ msgstr ""
 #: www/account/change_pw.php:99 www/account/change_pw.php:105
 #: www/account/index.php:130 www/account/index.php:142
 #: www/account/index.php:146 www/account/index.php:151
+#: www/account/index.php:158 www/account/index.php:167
 #: www/account/index.php:176 www/account/index.php:188
 #: www/account/index.php:207 www/account/index.php:216
-#: www/account/index.php:226 www/account/index.php:235
-#: www/account/index.php:244 www/account/lostpw.php:89
+#: www/account/index.php:225 www/account/index.php:234
+#: www/account/index.php:243 www/account/lostpw.php:89
 #: www/account/pending-resend.php:65 www/account/pending-resend.php:67
-#: www/account/register.php:171 www/account/register.php:203
-#: www/account/register.php:223 www/account/register.php:229
-#: www/account/register.php:235 www/account/register.php:241
-#: www/account/verify.php:77 www/account/verify.php:79
-#: www/account/verify.php:87 www/activity/index.php:193
-#: www/activity/index.php:198 www/activity/index.php:203
-#: www/admin/groupedit.php:107 www/admin/groupedit.php:150
-#: www/admin/groupedit.php:170 www/admin/massmail.php:115
-#: www/admin/massmail.php:133 www/admin/massmail.php:136
-#: www/admin/massmail.php:161 www/admin/pending-news.php:137
-#: www/admin/pending-news.php:139 www/admin/pending-news.php:145
-#: www/admin/pending-news.php:147 www/admin/trove/trove_cat_add.php:77
-#: www/admin/trove/trove_cat_add.php:110 www/admin/trove/trove_cat_add.php:112
-#: www/admin/trove/trove_cat_add.php:114
+#: www/account/register.php:152 www/account/register.php:159
+#: www/account/register.php:165 www/account/register.php:171
+#: www/account/register.php:177 www/account/register.php:184
+#: www/account/register.php:203 www/account/register.php:223
+#: www/account/register.php:229 www/account/register.php:235
+#: www/account/register.php:241 www/account/verify.php:77
+#: www/account/verify.php:79 www/account/verify.php:87
+#: www/activity/index.php:193 www/activity/index.php:198
+#: www/activity/index.php:203 www/admin/groupedit.php:107
+#: www/admin/groupedit.php:150 www/admin/groupedit.php:170
+#: www/admin/massmail.php:115 www/admin/massmail.php:133
+#: www/admin/massmail.php:136 www/admin/massmail.php:161
+#: www/admin/pending-news.php:137 www/admin/pending-news.php:139
+#: www/admin/pending-news.php:145 www/admin/pending-news.php:147
+#: www/admin/trove/trove_cat_add.php:77 www/admin/trove/trove_cat_add.php:110
+#: www/admin/trove/trove_cat_add.php:112 www/admin/trove/trove_cat_add.php:114
 #: www/admin/trove/trove_cat_edit.php:115
 #: www/admin/trove/trove_cat_edit.php:141
 #: www/admin/trove/trove_cat_edit.php:144
@@ -1641,7 +1644,7 @@ msgstr ""
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:96
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:148
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:215
-#: www/account/index.php:244 www/account/register.php:171
+#: www/account/index.php:243 www/account/register.php:171
 #: www/people/editjob.php:52 www/people/editjob.php:74
 #: www/people/editprofile.php:107 www/people/people_utils.php:442
 #: www/people/skills_utils.php:50 www/pm/admin/index.php:190
@@ -1806,7 +1809,7 @@ msgstr ""
 #: plugins/forumml/include/ForumMLHtmlSearchRenderer.class.php:52
 #: plugins/hudson/include/HudsonBuild.class.php:115
 #: www/account/editsshkeys.php:58 www/account/index.php:143
-#: www/account/index.php:317 www/admin/cronman.php:77
+#: www/account/index.php:316 www/admin/cronman.php:77
 #: www/admin/grouplist.php:152 www/admin/massmail.php:176
 #: www/admin/search.php:90 www/admin/search.php:169 www/admin/userlist.php:125
 #: www/developer/diary.php:56 www/developer/diary.php:87
@@ -2486,7 +2489,7 @@ msgstr "Version"
 #: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:53
 #: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:74
 #: plugins/webanalytics/view/admin/updateLinkValue.php:45
-#: www/account/index.php:344 www/account/lostlogin.php:107
+#: www/account/index.php:343 www/account/lostlogin.php:107
 #: www/admin/groupedit.php:223 www/admin/trove/trove_cat_edit.php:150
 #: www/admin/useredit.php:236 www/admin/useredit.php:315
 #: www/admin/vhost.php:186 www/forum/admin/index.php:162
@@ -7002,7 +7005,7 @@ msgstr "Prozent fertig: %d%%"
 #: plugins/scmgit/common/GitPlugin.class.php:356
 #: plugins/scmsvn/common/SVNPlugin.class.php:222
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:32
-#: www/account/editsshkeys.php:50 www/account/index.php:309
+#: www/account/editsshkeys.php:50 www/account/index.php:308
 #: www/admin/useredit.php:262 www/admin/useredit.php:292
 #: www/project/admin/editimages.php:265 www/reporting/usersummary.php:104
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:44
@@ -7709,7 +7712,7 @@ msgid "Configuring allowed roles for the transitions from %1$s to %2$s"
 msgstr "Konfigurieren Sie erlaube Rollen für den Übergang von %1$s zu %2$s"
 
 #: common/widget/Widget.class.php:100 plugins/mailman/www/mailman_utils.php:56
-#: plugins/mailman/www/mailman_utils.php:126 www/account/index.php:255
+#: plugins/mailman/www/mailman_utils.php:126 www/account/index.php:254
 #: www/include/Layout.class.php:1313
 msgid "Preferences"
 msgstr "Einstellungen"
@@ -15194,29 +15197,29 @@ msgstr ""
 msgid "Available keys"
 msgstr ""
 
-#: www/account/editsshkeys.php:50 www/account/index.php:309
+#: www/account/editsshkeys.php:50 www/account/index.php:308
 msgid "Algorithm"
 msgstr ""
 
-#: www/account/editsshkeys.php:50 www/account/index.php:309
+#: www/account/editsshkeys.php:50 www/account/index.php:308
 msgid "Fingerprint"
 msgstr ""
 
-#: www/account/editsshkeys.php:50 www/account/index.php:309
+#: www/account/editsshkeys.php:50 www/account/index.php:308
 #: www/project/admin/editimages.php:264
 msgid "Uploaded"
 msgstr "Hochgeladen"
 
-#: www/account/editsshkeys.php:50 www/account/index.php:309
+#: www/account/editsshkeys.php:50 www/account/index.php:308
 #, fuzzy
 msgid "Ready ?"
 msgstr "Lesen"
 
-#: www/account/editsshkeys.php:60 www/account/index.php:319
+#: www/account/editsshkeys.php:60 www/account/index.php:318
 msgid "ssh key is deployed."
 msgstr ""
 
-#: www/account/editsshkeys.php:62 www/account/index.php:321
+#: www/account/editsshkeys.php:62 www/account/index.php:320
 msgid "ssh key is not deployed yet."
 msgstr ""
 
@@ -15323,12 +15326,12 @@ msgid "User Id"
 msgstr "Benutzer-ID"
 
 #: www/account/index.php:158 www/account/register.php:177
-msgid "First Name:"
-msgstr "Vorname:"
+msgid "First Name"
+msgstr "Vorname"
 
 #: www/account/index.php:167 www/account/register.php:184
-msgid "Last Name:"
-msgstr "Nachname:"
+msgid "Last Name"
+msgstr "Nachname"
 
 #: www/account/index.php:176 www/snippet/package.php:156
 #: www/snippet/snippet_utils.php:187 www/snippet/snippet_utils.php:221
@@ -15366,17 +15369,17 @@ msgstr "Adresse"
 msgid "Address (continued)"
 msgstr ""
 
-#: www/account/index.php:226 www/account/register.php:235
+#: www/account/index.php:225 www/account/register.php:235
 #: www/include/user_profile.php:132
 msgid "Phone"
 msgstr "Telefon:"
 
-#: www/account/index.php:235 www/account/register.php:241
+#: www/account/index.php:234 www/account/register.php:241
 #: www/include/user_profile.php:143
 msgid "Fax"
 msgstr "Fax"
 
-#: www/account/index.php:262 www/account/register.php:250
+#: www/account/index.php:261 www/account/register.php:250
 msgid ""
 "Receive Email about Site Updates <em>(Very low traffic and includes security "
 "notices. Highly Recommended.)</em>"
@@ -15384,11 +15387,11 @@ msgstr ""
 "Erhalte Emails über Seiten-Updates <em>(Sehr sehr wenige und sie enthalten "
 "Sicherheitshinweise. Diese Option wird sehr empfohlen.)</em>"
 
-#: www/account/index.php:270 www/account/register.php:256
+#: www/account/index.php:269 www/account/register.php:256
 msgid "Receive additional community mailings. <em>(Low traffic.)</em>"
 msgstr "Erhalte außerplanmäßige Community-Mailings. <em>(Sehr wenige.)</em>"
 
-#: www/account/index.php:279
+#: www/account/index.php:278
 #, php-format
 msgid ""
 "Participate in peer ratings. <em>(Allows you to rate other users using "
@@ -15402,33 +15405,33 @@ msgstr ""
 "\">Benutzerseite</a> wenn Sie ausgewählt haben an Bewertungen "
 "teilzunehmen.)</em>"
 
-#: www/account/index.php:288
+#: www/account/index.php:287
 msgid ""
 "Enable tooltips. Small help texts displayed on mouse over links, images."
 msgstr ""
 
-#: www/account/index.php:301
+#: www/account/index.php:300
 msgid "Shell Account Information"
 msgstr "Kommandozeilen-Account Information"
 
-#: www/account/index.php:304
+#: www/account/index.php:303
 msgid "Shell box"
 msgstr "Kommandozeilen-Box"
 
-#: www/account/index.php:305
+#: www/account/index.php:304
 msgid "SSH Shared Authorized Keys"
 msgstr "gemeinsam benutzte, authorisierte CVS/SSH Schlüssel"
 
-#: www/account/index.php:330
+#: www/account/index.php:329
 msgid "Edit Keys"
 msgstr "Bearbeite Schlüssel"
 
-#: www/account/index.php:332
+#: www/account/index.php:331
 #, fuzzy
 msgid "Shell Account deactivated"
 msgstr "Kommandozeilen-Account Information"
 
-#: www/account/index.php:345
+#: www/account/index.php:344
 msgid "Reset Changes"
 msgstr "Änderungen zurücksetzen"
 
@@ -15613,16 +15616,16 @@ msgstr ""
 "automatisch generiert):"
 
 #: www/account/register.php:152
-msgid "Login Name (do not use uppercase letters):"
+msgid "Login Name (do not use uppercase letters)"
 msgstr "Anmelde-Name (keine Großbuchstaben):"
 
 #: www/account/register.php:159
-msgid "Password (min. 6 chars):"
+msgid "Password (min. 6 chars)"
 msgstr "Passwort (mind. 6 Buchstaben):"
 
 #: www/account/register.php:165
-msgid "Password (repeat):"
-msgstr "Passwort (Wiederholung):"
+msgid "Password (repeat)"
+msgstr "Passwort (Wiederholung)"
 
 #: www/account/register.php:191
 msgid "Language Choice:"

@@ -139,23 +139,23 @@ echo $HTML->boxTop(_('Account options'));
 <table class="infotable">
 
 <tr class="top">
-<td><?php echo _('Member since')._(':'); ?> </td>
+<td><?php echo _('Member since')._(':'); ?></td>
 <td><?php print date(_('Y-m-d H:i'),$u->getAddDate()); ?></td>
 </tr>
 <tr class="top">
-<td><?php echo _('User Id')._(':'); ?> </td>
+<td><?php echo _('User Id')._(':'); ?></td>
 <td><?php print $u->getID(); ?></td>
 </tr>
 
 <tr class="top">
-<td><?php echo _('Login Name')._(':'); ?> </td>
+<td><?php echo _('Login Name')._(':'); ?></td>
 <td><?php print $u->getUnixName(); ?>
 <br /><a href="change_pw.php"><?php echo _('Change Password'); ?></a>
 </td>
 </tr>
 
 <tr>
-<td><?php echo _('First Name:').utils_requiredField(); ?></td>
+<td><?php echo _('First Name').utils_requiredField()._(':'); ?></td>
 <td>
     <label for="firstname">
         <input id="firstname" required="required" type="text" name="firstname" value="<?php print $u->getFirstName(); ?>"/>
@@ -164,7 +164,7 @@ echo $HTML->boxTop(_('Account options'));
 </tr>
 
 <tr>
-<td><?php echo _('Last Name:').utils_requiredField(); ?></td>
+<td><?php echo _('Last Name').utils_requiredField()._(':'); ?></td>
 <td>
     <label for="lastname">
         <input id="lastname" required="required" type="text" name="lastname" value="<?php print $u->getLastName(); ?>"/>
@@ -173,38 +173,38 @@ echo $HTML->boxTop(_('Account options'));
 </tr>
 
 <tr>
-<td><?php echo _('Language')._(':'); ?> </td>
+<td><?php echo _('Language')._(':'); ?></td>
 <td><?php echo html_get_language_popup ('language',$u->getLanguage()); ?>
 </td>
 </tr>
 
 <tr>
-<td><?php echo _('Timezone:'); ?> </td>
+<td><?php echo _('Timezone:'); ?></td>
 <td><?php echo html_get_timezone_popup('timezone', $u->getTimeZone()); ?>
 </td>
 </tr>
 
 <tr>
-<td><?php echo _('Theme')._(':'); ?> </td>
+<td><?php echo _('Theme')._(':'); ?></td>
 <td><?php echo html_get_theme_popup('theme_id', $u->getThemeID()); ?>
 </td>
 </tr>
 
 <tr>
-<td><?php echo _('Country:'); ?> </td>
+<td><?php echo _('Country:'); ?></td>
 <td><?php echo html_get_ccode_popup('ccode', $u->getCountryCode()); ?>
 </td>
 </tr>
 
 <tr>
-<td><?php echo _('Email Address') . _(': '); ?> </td>
+<td><?php echo _('Email Address')._(': '); ?></td>
 <td><?php print $u->getEmail(); ?>
 <br /><a href="change_email.php">[<?php echo _('Change Email Address'); ?>]</a>
 </td>
 </tr>
 
 <tr>
-<td><?php echo _('Address') . _(':'); ?></td>
+<td><?php echo _('Address')._(':'); ?></td>
 <td>
     <label for="address">
         <input id="address" type="text" name="address" value="<?php echo $u->getAddress(); ?>" size="80"/>
@@ -213,12 +213,11 @@ echo $HTML->boxTop(_('Account options'));
 </tr>
 
 <tr>
-<td><?php echo _('Address (continued)') . _(':'); ?></td>
+<td><?php echo _('Address (continued)')._(':'); ?></td>
 <td>
     <label for="address2">
         <input id="address2" type="text" name="address2" value="<?php echo $u->getAddress2(); ?>" size="80"/>
     </label>
-
 </td>
 </tr>
 

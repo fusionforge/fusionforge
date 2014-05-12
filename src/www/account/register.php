@@ -149,20 +149,20 @@ site_header(array('title'=>_('User Account Registration')));
 if (forge_get_config('require_unique_email')) {
 	echo _('Login Name (no uppercase letters; leave empty to have it generated automatically):');
 } else {
-	echo _('Login Name (do not use uppercase letters):'); echo utils_requiredField();
+	echo _('Login Name (do not use uppercase letters)').utils_requiredField()._(':');
 } ?><br />
     <label for="unix_name">
         <input id="unix_name" type="text" required="required" name="unix_name" value="<?php print(htmlspecialchars($unix_name)); ?>"/>
     </label>
 </p>
 <p>
-<?php echo _('Password (min. 6 chars):'); echo utils_requiredField(); ?><br />
+<?php echo _('Password (min. 6 chars)').utils_requiredField()._(':'); ?>
     <label for="password1">
         <input id="password1" type="password" required="required" name="password1"/>
     </label>
 </p>
 <p>
-<?php echo _('Password (repeat):'); echo utils_requiredField(); ?><br />
+<?php echo _('Password (repeat)').utils_requiredField()._(':'); ?><br />
     <label for="password2">
         <input id="password2" type="password" required="required" name="password2"/>
     </label>
@@ -174,14 +174,14 @@ if (forge_get_config('require_unique_email')) {
     </label>
 </p>
 <p>
-<?php echo _('First Name:'); echo utils_requiredField(); ?><br />
+<?php echo _('First Name').utils_requiredField()._(':'); ?><br />
     <label for="firstname">
         <input id="firstname" required="required" size="30" type="text" name="firstname"
                value="<?php print(htmlspecialchars($firstname)); ?>"/>
     </label>
 </p>
 <p>
-<?php echo _('Last Name:'); echo utils_requiredField(); ?><br />
+<?php echo _('Last Name').utils_requiredField()._(':'); ?>
     <label for="lastname">
         <input id="lastname" required="required" size="30" type="text" name="lastname"
                value="<?php print(htmlspecialchars($lastname)); ?>"/>
