@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 17:49+0200\n"
+"POT-Creation-Date: 2014-05-12 17:56+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -817,7 +817,8 @@ msgstr "Unix名稱重複"
 #: www/forum/admin/pendingmsgdetail.php:51
 #: www/forum/admin/pendingmsgdetail.php:53 www/mail/admin/index.php:154
 #: www/mail/admin/index.php:260 www/project/admin/roledelete.php:64
-#: www/project/admin/roledelete.php:71
+#: www/project/admin/roledelete.php:71 www/project/admin/vhost.php:42
+#: www/project/admin/vhost.php:44
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:103
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:89
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:91
@@ -1473,7 +1474,8 @@ msgstr "分組名稱將被用作標題，所以它應該相應的格式化。"
 #: www/project/admin/database.php:164 www/project/admin/editimages.php:222
 #: www/project/admin/editimages.php:226 www/project/admin/editimages.php:230
 #: www/project/admin/editimages.php:250 www/project/admin/editimages.php:253
-#: www/project/admin/index.php:257 www/project/stats/index.php:107
+#: www/project/admin/index.php:257 www/project/admin/vhost.php:42
+#: www/project/admin/vhost.php:44 www/project/stats/index.php:107
 #: www/project/stats/index.php:108 www/project/stats/index.php:109
 #: www/project/stats/index.php:110 www/register/index.php:239
 #: www/register/index.php:250 www/reporting/groupadded.php:65
@@ -21805,11 +21807,6 @@ msgstr ""
 #: www/project/admin/users.php:480
 msgid "Link external role"
 msgstr ""
-
-#: www/project/admin/vhost.php:42 www/project/admin/vhost.php:44
-#, fuzzy
-msgid "Error:"
-msgstr "錯誤"
 
 #: www/project/admin/vhost.php:60
 #, fuzzy

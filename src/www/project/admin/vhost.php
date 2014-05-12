@@ -39,9 +39,9 @@ session_require_perm ('project_admin', $group_id) ;
 $group = group_get_object($group_id);
 
 if (!$group || !is_object($group)) {
-        exit_error(_('Error:'),'Error creating group object');
+	exit_error(_('Error')._(':'), 'Error creating group object');
 } elseif ($group->isError()) {
-        exit_error(_('Error:'),$group->getErrorMessage());
+	exit_error(_('Error')._(':'), $group->getErrorMessage());
 }
 
 if (getStringFromRequest('createvhost')) {
