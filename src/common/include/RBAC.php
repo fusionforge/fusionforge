@@ -285,7 +285,7 @@ abstract class BaseRole extends Error {
 		// TODO: document perms_array
 		$this->perms_array=array();
 		while ($arr = db_fetch_array($res)) {
-			$this->perms_array[$arr['section_name']][$arr['ref_id']] = $arr['perm_val'];
+			$this->perms_array[$arr['section_name']][$arr['ref_id']] = intval($arr['perm_val']);
 		}
 
 		return true;
@@ -755,9 +755,10 @@ abstract class BaseRole extends Error {
 	 * @param	string	$role_name	The name of the role.
 	 * @param	array	$data		A multi-dimensional array of data in this format: $data['section_name']['ref_id']=$val
 	 * @param	boolean	$check_perms	Perform permission checking
+	 * @param	boolean	$update_sys	Update system users & groups membership
 	 * @return	boolean	True on success or false on failure.
 	 */
-	function update($role_name,$data,$check_perms=true) {
+	function update($role_name,$data,$check_perms=true,$update_sys=true) {
 		global $SYS;
 		if ($check_perms) {
 			if ($this->getHomeProject() == NULL) {
@@ -779,29 +780,37 @@ abstract class BaseRole extends Error {
 			$this->setName($role_name) ;
 		}
 
-		$res = db_prepare ('DELETE FROM pfo_role_setting WHERE role_id=$1 AND section_name=$2 AND ref_id=$3',
-				   'delete_from_pfo_role_setting');
+		db_prepare ('INSERT INTO pfo_role_setting (role_id, section_name, ref_id, perm_val) VALUES ($1, $2, $3, $4)',
+			    'insert_into_pfo_role_setting');
+		db_prepare ('DELETE FROM pfo_role_setting WHERE role_id=$1 AND section_name=$2 AND ref_id=$3',
+			    'delete_from_pfo_role_setting');
+		db_prepare ('UPDATE pfo_role_setting SET perm_val=$4 WHERE role_id=$1 AND section_name=$2 AND ref_id=$3',
+			    'update_pfo_role_setting');
 
-		$res = db_prepare ('INSERT INTO pfo_role_setting (role_id, section_name, ref_id, perm_val) VALUES ($1, $2, $3, $4)',
-				   'insert_into_pfo_role_setting');
+		// Don't remove unknown permissions (e.g. forums permissions while forums are currently disabled)
+		//foreach ($this->perms_array as $sect => &$refs)
+		//	foreach ($refs as $refid => $value)
+		//		if (!isset($data[$sect][$refid]) or $data[$sect][$refid] != $value)
+		//			db_execute('delete_from_pfo_role_setting', array($role_id, $sect, $refid));
 
-		foreach ($data as $sect => $refs) {
+		// Insert new/changed permissions
+		foreach ($data as $sect => &$refs) {
 			foreach ($refs as $refid => $value) {
-				$res = db_execute ('delete_from_pfo_role_setting',
-						   array ($role_id,
-							  $sect,
-							  $refid)) ;
-				$res = db_execute ('insert_into_pfo_role_setting',
-						   array ($role_id,
-							  $sect,
-							  $refid,
-							  $value)) ;
-				$this->perms_array[$sect][$refid] = $value;
+				if (!isset($this->perms_array[$sect][$refid])) {
+					// new permission
+					db_execute('insert_into_pfo_role_setting',
+						   array($role_id, $sect, $refid, $value));
+				} else if ($this->perms_array[$sect][$refid] != $value) {
+					// changed permission
+					db_execute('update_pfo_role_setting',
+						   array($role_id, $sect, $refid, $value));
+				}
 			}
 		}
 
-		$res = db_unprepare ('insert_into_pfo_role_setting');
-		$res = db_unprepare ('delete_from_pfo_role_setting');
+		db_unprepare ('insert_into_pfo_role_setting');
+		db_unprepare ('delete_from_pfo_role_setting');
+		db_unprepare ('update_pfo_role_setting');
 
 		$hook_params = array ();
 		$hook_params['role'] =& $this;
@@ -812,10 +821,12 @@ abstract class BaseRole extends Error {
 		db_commit();
 		$this->fetchData($this->getID());
 
-		foreach ($this->getUsers() as $u) {
-			if (!$SYS->sysCheckCreateUser($u->getID())) {
-				$this->setError($SYS->getErrorMessage());
-				return false;
+		if ($update_sys) {
+			foreach ($this->getUsers() as $u) {
+				if (!$SYS->sysCheckCreateUser($u->getID())) {
+					$this->setError($SYS->getErrorMessage());
+					return false;
+				}
 			}
 		}
 
@@ -902,22 +913,19 @@ abstract class BaseRole extends Error {
 
 		// ...tracker-related settings
 		$new_pa['tracker'] = array () ;
-		foreach ($projects as $p) {
-			if (!$p->usesTracker()) {
-				continue;
-			}
-			$atf = new ArtifactTypeFactory ($p) ;
-			if (!$atf->isError()) {
-				$trackerids = $atf->getAllArtifactTypeIds () ;
-				foreach ($trackerids as $tid) {
-					if (array_key_exists ('tracker', $this->perms_array)
-					    && array_key_exists ($tid, $this->perms_array['tracker']) ) {
-						$new_pa['tracker'][$tid] = $this->perms_array['tracker'][$tid] ;
-					} elseif (array_key_exists ('new_tracker', $this->perms_array)
-						  && array_key_exists ($p->getID(), $this->perms_array['new_tracker']) ) {
-						$new_pa['tracker'][$tid] = $new_pa['new_tracker'][$p->getID()] ;
-					}
-				}
+		// Direct query to avoid querying each project - especially for global roles
+		foreach ($projects as $p)
+			$project_ids[] = $p->getID();
+		$res = db_query_params('SELECT group_artifact_id FROM artifact_group_list JOIN groups USING (group_id)'
+				       . ' WHERE use_tracker=1 AND group_id IN ('.implode(',', $project_ids).')', array());
+		while ($row = db_fetch_array($res)) {
+			$tid = $row['group_artifact_id'];
+			if (array_key_exists ('tracker', $this->perms_array)
+			    && array_key_exists ($tid, $this->perms_array['tracker']) ) {
+				$new_pa['tracker'][$tid] = $this->perms_array['tracker'][$tid] ;
+			} elseif (array_key_exists ('new_tracker', $this->perms_array)
+				  && array_key_exists ($p->getID(), $this->perms_array['new_tracker']) ) {
+				$new_pa['tracker'][$tid] = $new_pa['new_tracker'][$p->getID()] ;
 			}
 		}
 
@@ -964,7 +972,7 @@ abstract class BaseRole extends Error {
 		}
 
 		// Save
-		$this->update ($this->getName(), $new_pa, false) ;
+		$this->update ($this->getName(), $new_pa, false, false) ;
 		return true;
 	}
 }
