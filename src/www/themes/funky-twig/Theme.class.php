@@ -210,62 +210,31 @@ class Theme extends Layout {
 	}
 
 	function tabGenerator($TABS_DIRS, $TABS_TITLES, $TABS_TOOLTIPS, $nested=false,  $selected=false, $sel_tab_bgcolor='WHITE',  $total_width='100%') {
-		$count = count($TABS_DIRS);
-
-		if ($count < 1) {
-			return '';
-		}
-
 		global $use_tooltips;
 
-		if ($use_tooltips) {
-			echo html_ao('script', array('type' => 'text/javascript'));
-			echo '	//<![CDATA[
-				jQuery(document).ready(
-					function() {
-						jQuery(document).tooltip();
-					}
+		$template = $this->twig->loadTemplate('Tabs.html');
+
+		$vars = array('use_tooltips' => $use_tooltips,
+			      'nested' => $nested,
+			      'total_width' => $total_width);
+
+		$tabs = array();
+		for ($i = 0; $i < count($TABS_DIRS); $i++) {
+			$tab = array('href' => $TABS_DIRS[$i],
+				     'id' => md5($TABS_DIRS[$i]),
+				     'title' => $TABS_TITLES[$i],
+				     'tooltip' => $TABS_TOOLTIPS[$i]
 				);
-			//]]>'."\n";
-			echo html_ac(html_ap() -1);
+			if ($i == $selected) {
+				$tab['selected'] = true;
+			} else {
+				$tab['selected'] = false;
+			}
+			$tabs[] = $tab;
 		}
+		$vars['tabs'] = $tabs;
 
-		$return = '<!-- start tabs -->'."\n";
-		$attrs = array('class' => 'tabGenerator fullwidth');
-
-		if ($total_width != '100%')
-			$attrs['style'] = 'width:' . $total_width;
-
-		$return .= html_ao('table', $attrs);
-		$return .= html_ao('tr');
-
-		$accumulated_width = 0;
-
-		for ($i = 0; $i < $count; $i++) {
-			$tabwidth = intval(ceil(($i+1)*100/$count)) - $accumulated_width;
-			$accumulated_width += $tabwidth;
-
-			// middle part
-			$attrs = array();
-			$attrs['class'] = 'tg-middle';
-			$attrs['style'] = 'width:'.$tabwidth.'%';
-			$return .= html_ao('td', $attrs);
-			$return .= html_ao('a', array('href' => $TABS_DIRS[$i], 'id' => md5($TABS_DIRS[$i])));
-			$attrs = array();
-			if ($selected == $i)
-				$attrs['class'] = 'selected';
-
-			$return .= html_ao('span', $attrs);
-			$attrs = array('title' => $TABS_TOOLTIPS[$i]);
-			if ($nested)
-				$attrs['class'] = 'nested';
-
-			$return .= html_e('span', $attrs, $TABS_TITLES[$i], false);
-			$return .= html_ac(html_ap() - 3);
-		}
-
-		$return .= html_ac(html_ap() -2).'<!-- end tabs -->'."\n";
-		return $return;
+		return $template->render($vars);
 	}
 
 	/**

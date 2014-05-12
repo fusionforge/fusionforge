@@ -1,0 +1,29 @@
+{% if use_tooltips %}<script type="text/javascript">
+	//<![CDATA[
+		jQuery(document).ready(
+			function() {
+				jQuery(document).tooltip();
+			}
+		);
+	//]]>'."\n";
+</script>{% endif %}
+<!-- start tabs -->
+{% set attrs = { 'class': 'tabGenerator fullwidth' } %}
+<table{% for k,v in attrs %} {{ k }}="{{ v }}"{% endfor %}{% if total_width != '100%' %} style = "width: {{ total_width }}"{% endif %}
+>
+<tr>
+{% set accumulated_width = 0 %}
+{% for tab in tabs %}
+  {% set tabwidth = loop.index * 100 / loop.length - accumulated_width %}
+  {% set accumulated_width = accumulated_width + tabwidth %}
+  {% set attrs = { 'class': 'tg-middle', 'style': "width: #{tabwidth}%" } %}
+  <td{% for k,v in attrs %} {{ k }}="{{ v }}"{% endfor %}>
+  <a href="{{ tab.href }}" id="{{ tab.id }}">
+  <span{% if tab.selected %} class="selected"{% endif %}>
+  <span title="{{ tab.tooltip }}"{% if nested %} class="nested"{% endif %}>{{ tab.title }}</span>
+  </span>
+  </td>
+{% endfor %}
+</tr>
+</table>
+<!-- end tabs -->
