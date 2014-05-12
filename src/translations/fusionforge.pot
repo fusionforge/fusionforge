@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 14:18+0200\n"
+"POT-Creation-Date: 2014-05-12 14:22+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -357,6 +357,7 @@ msgstr ""
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:650
 #: plugins/scmhg/common/HgPlugin.class.php:656
 #: plugins/scmhook/common/scmhookPlugin.class.php:145
+#: plugins/webanalytics/view/admin/updateLinkValue.php:53
 #: www/account/index.php:200 www/account/index.php:304
 #: www/account/index.php:305 www/account/lostlogin.php:84
 #: www/account/register.php:212 www/account/verify.php:58
@@ -9980,6 +9981,7 @@ msgid "Fields marked with %s are mandatory."
 msgstr ""
 
 #: plugins/headermenu/view/admin/updateLinkValue.php:112
+#: plugins/webanalytics/view/admin/updateLinkValue.php:53
 msgid "Cannot retrieve value for this link"
 msgstr ""
 
@@ -13685,10 +13687,6 @@ msgstr ""
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:32
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:64
 msgid "Standard JavaScript Tracking code"
-msgstr ""
-
-#: plugins/webanalytics/view/admin/updateLinkValue.php:53
-msgid "Cannot retrieve value for this link:"
 msgstr ""
 
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:31

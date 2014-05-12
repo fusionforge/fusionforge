@@ -50,6 +50,6 @@ if (is_array($linkValues)) {
 	echo $HTML->closeForm();
 	echo $HTML->addRequiredFieldsInfoBox();
 } else {
-	$error_msg = _('Cannot retrieve value for this link:').' '.$linkId;
+	$error_msg = _('Cannot retrieve value for this link')._(': ').$linkId;
 	session_redirect('plugins/'.$webanalytics->name.'/?type=globaladmin');
 }
