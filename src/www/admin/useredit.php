@@ -260,7 +260,7 @@ $projects = $u->getGroups();
 
 $title = array();
 $title[] = _('Name');
-$title[] = _('Unix name');
+$title[] = _('Unix Name');
 $title[] = _('Operations');
 
 $i = 0;
@@ -290,7 +290,7 @@ echo '<h2>'._('Add membership to new projects').'</h2>';
 $addToNewProjectsTableTitle = array();
 $addToNewProjectsTableTitle[] = '';
 $addToNewProjectsTableTitle[] = _('Name');
-$addToNewProjectsTableTitle[] = _('Unix name');
+$addToNewProjectsTableTitle[] = _('Unix Name');
 $addToNewProjectsTableTitle[] = _('Operations');
 $addToNewProjectsTableTitle[] = _('Select role');
 $fullListProjectsQueryResult = db_query_params('SELECT group_id from groups where status = $1 and is_template = 0', array('A'));

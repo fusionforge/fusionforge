@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 16:31+0200\n"
+"POT-Creation-Date: 2014-05-12 16:49+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -16204,6 +16204,7 @@ msgid "Register Time"
 msgstr "注册时间"
 
 #: www/admin/grouplist.php:69 www/admin/search.php:150
+#: www/admin/useredit.php:263 www/admin/useredit.php:293
 #: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:75
 #: www/register/index.php:239 www/register/index.php:241
 #, fuzzy
@@ -17003,11 +17004,6 @@ msgstr "Unix帐号状态更新反映自网站的状态，除非它的设置值�
 #, fuzzy
 msgid "Projects Membership"
 msgstr "项目成员列表"
-
-#: www/admin/useredit.php:263 www/admin/useredit.php:293
-#, fuzzy
-msgid "Unix name"
-msgstr "Unix帐号"
 
 #: www/admin/useredit.php:264 www/admin/useredit.php:294
 #: www/admin/vhost.php:176 www/project/admin/database.php:207

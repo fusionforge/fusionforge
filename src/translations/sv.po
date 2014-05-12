@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 16:31+0200\n"
+"POT-Creation-Date: 2014-05-12 16:49+0200\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -16000,6 +16000,7 @@ msgid "Register Time"
 msgstr ""
 
 #: www/admin/grouplist.php:69 www/admin/search.php:150
+#: www/admin/useredit.php:263 www/admin/useredit.php:293
 #: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:75
 #: www/register/index.php:239 www/register/index.php:241
 #, fuzzy
@@ -16794,11 +16795,6 @@ msgstr ""
 #, fuzzy
 msgid "Projects Membership"
 msgstr "Projektmedlemslista"
-
-#: www/admin/useredit.php:263 www/admin/useredit.php:293
-#, fuzzy
-msgid "Unix name"
-msgstr "Unixnamn"
 
 #: www/admin/useredit.php:264 www/admin/useredit.php:294
 #: www/admin/vhost.php:176 www/project/admin/database.php:207

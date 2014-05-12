@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 16:31+0200\n"
+"POT-Creation-Date: 2014-05-12 16:49+0200\n"
 "PO-Revision-Date: 2013-06-03 17:16+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -14898,6 +14898,7 @@ msgid "Register Time"
 msgstr ""
 
 #: www/admin/grouplist.php:69 www/admin/search.php:150
+#: www/admin/useredit.php:263 www/admin/useredit.php:293
 #: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:75
 #: www/register/index.php:239 www/register/index.php:241
 msgid "Unix Name"
@@ -15633,10 +15634,6 @@ msgstr ""
 
 #: www/admin/useredit.php:253
 msgid "Projects Membership"
-msgstr ""
-
-#: www/admin/useredit.php:263 www/admin/useredit.php:293
-msgid "Unix name"
 msgstr ""
 
 #: www/admin/useredit.php:264 www/admin/useredit.php:294
