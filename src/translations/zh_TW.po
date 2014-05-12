@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 16:49+0200\n"
+"POT-Creation-Date: 2014-05-12 16:58+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -20484,6 +20484,7 @@ msgstr "瀏覽任務"
 
 #: www/pm/browse_task.php:129 www/pm/browse_task.php:247
 #: www/pm/ganttpage.php:165 www/pm/include/ProjectTaskHTML.class.php:72
+#: www/pm/t_lookup.php:35
 msgid "Task Id"
 msgstr "任務編號"
 
@@ -21128,11 +21129,6 @@ msgstr "編號"
 #: www/pm/t_follow.php:42
 msgid "no task with id :"
 msgstr ""
-
-#: www/pm/t_lookup.php:35
-#, fuzzy
-msgid "Task ID"
-msgstr "任務編號"
 
 #: www/pm/t_lookup.php:41
 msgid "No Task with ID: "
@@ -24077,10 +24073,6 @@ msgstr "大量更新"
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "帳號"
-
-#, fuzzy
-#~ msgid "View project <a href=\"%s\">Statistics</a>"
-#~ msgstr "您只有 %1$s 登入 %2$s 之後才能發表"
 
 #, fuzzy
 #~ msgid "Massmail admin"

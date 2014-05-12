@@ -32,7 +32,7 @@ $tid = getIntFromRequest('tid');
 if (!$tid)
 	$tid = util_path_info_last_numeric_component();
 if (!$tid) {
-    exit_missing_param('',array(_('Task ID')),'pm');
+    exit_missing_param('',array(_('Task Id')),'pm');
 }
 
 $tinfo = getGroupProjectIdGroupId($tid);

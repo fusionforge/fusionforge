@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 16:49+0200\n"
+"POT-Creation-Date: 2014-05-12 16:58+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -20120,6 +20120,7 @@ msgstr "Hojear tareas"
 
 #: www/pm/browse_task.php:129 www/pm/browse_task.php:247
 #: www/pm/ganttpage.php:165 www/pm/include/ProjectTaskHTML.class.php:72
+#: www/pm/t_lookup.php:35
 msgid "Task Id"
 msgstr "Id Tarea"
 
@@ -20751,10 +20752,6 @@ msgstr "TID"
 #: www/pm/t_follow.php:42
 msgid "no task with id :"
 msgstr "no hay tareas con id :"
-
-#: www/pm/t_lookup.php:35
-msgid "Task ID"
-msgstr "Id Tarea"
 
 #: www/pm/t_lookup.php:41
 msgid "No Task with ID: "

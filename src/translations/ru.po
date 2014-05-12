@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 16:49+0200\n"
+"POT-Creation-Date: 2014-05-12 16:58+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -20833,6 +20833,7 @@ msgstr "Обзор задач"
 
 #: www/pm/browse_task.php:129 www/pm/browse_task.php:247
 #: www/pm/ganttpage.php:165 www/pm/include/ProjectTaskHTML.class.php:72
+#: www/pm/t_lookup.php:35
 msgid "Task Id"
 msgstr "Id задачи"
 
@@ -21475,11 +21476,6 @@ msgstr ""
 #: www/pm/t_follow.php:42
 msgid "no task with id :"
 msgstr ""
-
-#: www/pm/t_lookup.php:35
-#, fuzzy
-msgid "Task ID"
-msgstr "Id задачи"
 
 #: www/pm/t_lookup.php:41
 msgid "No Task with ID: "
@@ -24501,16 +24497,6 @@ msgstr "Глобальное изменение"
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "Имя участника обязательно"
-
-#, fuzzy
-#~ msgid "Error: %s"
-#~ msgstr "Ошибка"
-
-#, fuzzy
-#~ msgid "View project <a href=\"%s\">Statistics</a>"
-#~ msgstr ""
-#~ "Посмотреть <a href=\"/project/stats/?group_id=%1$s\">статистику</a> или "
-#~ "<a href=\"/project/report/?group_id=%1$s\">активность проекта.</a>"
 
 #~ msgid "Massmail admin"
 #~ msgstr "Админ рассылок"

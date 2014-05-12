@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 16:49+0200\n"
+"POT-Creation-Date: 2014-05-12 16:58+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -20651,6 +20651,7 @@ msgstr "Aufträge durchsuchen"
 
 #: www/pm/browse_task.php:129 www/pm/browse_task.php:247
 #: www/pm/ganttpage.php:165 www/pm/include/ProjectTaskHTML.class.php:72
+#: www/pm/t_lookup.php:35
 msgid "Task Id"
 msgstr "Auftrags-ID"
 
@@ -21301,11 +21302,6 @@ msgstr "ID"
 #: www/pm/t_follow.php:42
 msgid "no task with id :"
 msgstr ""
-
-#: www/pm/t_lookup.php:35
-#, fuzzy
-msgid "Task ID"
-msgstr "Auftrags-ID"
 
 #: www/pm/t_lookup.php:41
 msgid "No Task with ID: "
