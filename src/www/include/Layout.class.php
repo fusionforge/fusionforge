@@ -1421,6 +1421,27 @@ if (isset($params['group']) && $params['group']) {
 	function addRequiredFieldsInfoBox() {
 		return html_e('p', array(), sprintf(_('Fields marked with %s are mandatory.'), utils_requiredField()), false);
 	}
+
+	function makeLink($path, $text, $extra_params = false, $absolute = false) {
+		global $use_tooltips;
+		$attrs = array();
+		if (is_array($extra_params)) {
+			foreach ($extra_params as $key => $value) {
+				if ($key != 'title') {
+					$attrs[$key] = $value;
+				}
+				if ($key == 'title' && $use_tooltips) {
+					$attrs[$key] = $value;
+				}
+			}
+		}
+		if ($absolute) {
+			$attrs['href'] = $path;
+		} else {
+			$attrs['href'] = util_make_uri($path);
+		}
+		return html_e('a', $attrs, $text, true);
+	}
 }
 
 // Local Variables:

@@ -41,7 +41,7 @@ class Theme extends Layout {
 		$this->addStylesheet('/scripts/jquery-ui/css/overcast/jquery-ui-1.10.4.custom.css');
 
 		$this->twig_loader = new Twig_Loader_Filesystem(forge_get_config('themes_root').'/funky-twig/templates');
-		$this->$twig = new Twig_Environment($this->twig_loader);
+		$this->twig = new Twig_Environment($this->twig_loader);
 
 	}
 
@@ -405,6 +405,30 @@ class Theme extends Layout {
 			//]]>'."\n";
 		echo html_ac(html_ap() -1);
 	}
+
+	function makeLink($path, $text, $extra_params = false, $absolute = false) {
+		global $use_tooltips;
+
+		$template = $this->twig->loadTemplate('Link.html');
+
+		if (!is_array($extra_params)) {
+			$extra_params = array();
+		}
+
+		if ($absolute) {
+			$href = $path;
+		} else {
+			$href = util_make_uri($path);
+		}
+
+		$vars = array('href' => $href,
+			      'text' => $text,
+			      'extra_params' => $extra_params,
+			      'use_tooltips' => $use_tooltips);
+
+		return $template->render($vars);
+	}
+
 }
 
 // Local Variables:

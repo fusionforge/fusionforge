@@ -1,0 +1,1 @@
+<a href="{{ href }}"{% for k,v in extra_params %}{% if k != 'title' or use_tooltips %} {{ k }}="{{ v }}"{% endif %}{% endfor %}>{{ text|raw }}</a>
