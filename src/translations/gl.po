@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 17:11+0200\n"
+"POT-Creation-Date: 2014-05-12 17:27+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -4289,9 +4289,9 @@ msgid "Task managers administration"
 msgstr "Administración do xestor de proxectos/tarefas"
 
 #: common/include/rbac_texts.php:66 common/include/rbac_texts.php:187
-#, fuzzy
-msgid "Forums administration"
-msgstr "Foros: Administración"
+#: www/forum/admin/attachments.php:42 www/forum/admin/index.php:427
+msgid "Forums Administration"
+msgstr "Foros Administración"
 
 #: common/include/rbac_texts.php:69 common/include/rbac_texts.php:101
 #: common/include/rbac_texts.php:109 common/include/rbac_texts.php:115
@@ -17621,10 +17621,6 @@ msgstr "Volver"
 #: www/export/search_plugin.php:18
 msgid "Search in project"
 msgstr "Procurar en todo o proxecto"
-
-#: www/forum/admin/attachments.php:42 www/forum/admin/index.php:427
-msgid "Forums Administration"
-msgstr "Foros Administración"
 
 #: www/forum/admin/index.php:120 www/forum/admin/index.php:154
 msgid "Email All Posts To:"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 17:11+0200\n"
+"POT-Creation-Date: 2014-05-12 17:27+0200\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -4274,9 +4274,9 @@ msgid "Task managers administration"
 msgstr "Azpiproiektu edota Atazen administrazioa"
 
 #: common/include/rbac_texts.php:66 common/include/rbac_texts.php:187
-#, fuzzy
-msgid "Forums administration"
-msgstr "Foroak: administrazioa"
+#: www/forum/admin/attachments.php:42 www/forum/admin/index.php:427
+msgid "Forums Administration"
+msgstr "Foroak administrazioa"
 
 #: common/include/rbac_texts.php:69 common/include/rbac_texts.php:101
 #: common/include/rbac_texts.php:109 common/include/rbac_texts.php:115
@@ -17459,10 +17459,6 @@ msgstr ""
 msgid "Search in project"
 msgstr "Izar proiektuak"
 
-#: www/forum/admin/attachments.php:42 www/forum/admin/index.php:427
-msgid "Forums Administration"
-msgstr "Foroak administrazioa"
-
 #: www/forum/admin/index.php:120 www/forum/admin/index.php:154
 msgid "Email All Posts To:"
 msgstr "Posta elektronikoz A Mezu guztiak bidali:"
@@ -24113,10 +24109,6 @@ msgstr "Ezin da eguneratu"
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "Ez da erabiltzaile-izenik eman"
-
-#, fuzzy
-#~ msgid "View project <a href=\"%s\">Statistics</a>"
-#~ msgstr "%1$s %2$s erregistratua bazaude mezua bidali ahal izango zenuke."
 
 #, fuzzy
 #~ msgid "Massmail admin"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 17:11+0200\n"
+"POT-Creation-Date: 2014-05-12 17:27+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -4222,9 +4222,9 @@ msgid "Task managers administration"
 msgstr ""
 
 #: common/include/rbac_texts.php:66 common/include/rbac_texts.php:187
-#, fuzzy
-msgid "Forums administration"
-msgstr "게시판: 관리"
+#: www/forum/admin/attachments.php:42 www/forum/admin/index.php:427
+msgid "Forums Administration"
+msgstr "게시판 관리"
 
 #: common/include/rbac_texts.php:69 common/include/rbac_texts.php:101
 #: common/include/rbac_texts.php:109 common/include/rbac_texts.php:115
@@ -17049,10 +17049,6 @@ msgstr ""
 #, fuzzy
 msgid "Search in project"
 msgstr "상위 프로젝트"
-
-#: www/forum/admin/attachments.php:42 www/forum/admin/index.php:427
-msgid "Forums Administration"
-msgstr "게시판 관리"
 
 #: www/forum/admin/index.php:120 www/forum/admin/index.php:154
 msgid "Email All Posts To:"

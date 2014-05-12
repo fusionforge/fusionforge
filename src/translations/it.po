@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 17:11+0200\n"
+"POT-Creation-Date: 2014-05-12 17:27+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -4305,8 +4305,8 @@ msgid "Task managers administration"
 msgstr "Amministrazione Progetto/Attività"
 
 #: common/include/rbac_texts.php:66 common/include/rbac_texts.php:187
-#, fuzzy
-msgid "Forums administration"
+#: www/forum/admin/attachments.php:42 www/forum/admin/index.php:427
+msgid "Forums Administration"
 msgstr "Amministrazione forum"
 
 #: common/include/rbac_texts.php:69 common/include/rbac_texts.php:101
@@ -17515,10 +17515,6 @@ msgstr ""
 msgid "Search in project"
 msgstr "Ricerca all'interno di tutto il progetto"
 
-#: www/forum/admin/attachments.php:42 www/forum/admin/index.php:427
-msgid "Forums Administration"
-msgstr "Amministrazione forum"
-
 #: www/forum/admin/index.php:120 www/forum/admin/index.php:154
 msgid "Email All Posts To:"
 msgstr "Invia tutti i messaggi a:"
@@ -24225,6 +24221,7 @@ msgstr "Aggiornamento multiplo"
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "Non è stato inserito alcun file"
+
 
 #, fuzzy
 #~ msgid "Massmail admin"

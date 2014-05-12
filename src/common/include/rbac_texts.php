@@ -63,7 +63,7 @@ function setup_rbac_strings () {
 								  'pm_admin0' => _('No administrative access'),
 								  'pm_admin1' => _('Task managers administration'),
 								  'forum_admin0' => _('No administrative access'),
-								  'forum_admin1' => _('Forums administration'),
+								  'forum_admin1' => _('Forums Administration'),
 
 								  'tracker0' => _('No Access'),
 								  'tracker1' => _('Read only'),
@@ -184,7 +184,7 @@ function setup_rbac_strings () {
 
 								    'tracker_admin' => _('Trackers administration'),
 								    'pm_admin' => _('Task managers administration'),
-								    'forum_admin' => _('Forums administration'),
+								    'forum_admin' => _('Forums Administration'),
 
 								    'tracker' => _('Tracker'),
 								    'pm' => _('Tasks'),

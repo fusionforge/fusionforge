@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 17:11+0200\n"
+"POT-Creation-Date: 2014-05-12 17:27+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -4266,7 +4266,8 @@ msgid "Task managers administration"
 msgstr "Projekt/Task-Manager Administration"
 
 #: common/include/rbac_texts.php:66 common/include/rbac_texts.php:187
-msgid "Forums administration"
+#: www/forum/admin/attachments.php:42 www/forum/admin/index.php:427
+msgid "Forums Administration"
 msgstr "Foren Administration"
 
 #: common/include/rbac_texts.php:69 common/include/rbac_texts.php:101
@@ -17507,10 +17508,6 @@ msgstr "Gehe zurück"
 #: www/export/search_plugin.php:18
 msgid "Search in project"
 msgstr "Projekt durchsuchen"
-
-#: www/forum/admin/attachments.php:42 www/forum/admin/index.php:427
-msgid "Forums Administration"
-msgstr "Foren Administration"
 
 #: www/forum/admin/index.php:120 www/forum/admin/index.php:154
 msgid "Email All Posts To:"
