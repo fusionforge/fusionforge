@@ -73,7 +73,7 @@ DocManListFileController.prototype =
 			(this.params.divLeft.height() > this.params.divRight.height()) ? mainheight = this.params.divLeft.height() : mainheight = this.params.divRight.height();
 		} else {
 			var fixwidth = 0;
-			if (jQuery('#editFile')) {
+			if (jQuery('#editFile').length) {
 				fixwidth = jQuery('#editFile').height() - jQuery('#resourcePopupContainer').height();
 				if ( fixwidth < 0) {
 					fixwidth = 0;
