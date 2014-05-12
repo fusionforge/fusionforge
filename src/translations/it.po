@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 17:56+0200\n"
+"POT-Creation-Date: 2014-05-12 18:36+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -17685,10 +17685,9 @@ msgstr ""
 msgid "Message Posted Successfully"
 msgstr "Messaggio inserito con successo"
 
-#: www/forum/forum.php:136 www/forum/message.php:91
-#, fuzzy
-msgid "Error getting new forum messageFactory"
-msgstr "Errore nella creazione del forum"
+#: www/forum/forum.php:136 www/forum/message.php:91 www/forum/myforums.php:106
+msgid "Error getting new ForumMessageFactory"
+msgstr ""
 
 #: www/forum/forum.php:174
 msgid "Nested"
@@ -17809,10 +17808,6 @@ msgstr "Non hai nessun forum monitorato"
 #, fuzzy
 msgid "New Content?"
 msgstr "Nuovo account"
-
-#: www/forum/myforums.php:106
-msgid "Error getting new ForumMessageFactory"
-msgstr ""
 
 #: www/forum/new.php:64
 #, fuzzy

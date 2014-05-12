@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 17:56+0200\n"
+"POT-Creation-Date: 2014-05-12 18:36+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -17885,9 +17885,8 @@ msgstr ""
 msgid "Message Posted Successfully"
 msgstr "Сообщение успешно добавлено"
 
-#: www/forum/forum.php:136 www/forum/message.php:91
-#, fuzzy
-msgid "Error getting new forum messageFactory"
+#: www/forum/forum.php:136 www/forum/message.php:91 www/forum/myforums.php:106
+msgid "Error getting new ForumMessageFactory"
 msgstr "Ошибка получения нового сообщения форума"
 
 #: www/forum/forum.php:174
@@ -18006,10 +18005,6 @@ msgstr "У вас нет избранных форумов для получен
 #: www/forum/myforums.php:73
 msgid "New Content?"
 msgstr "Новое содержимое"
-
-#: www/forum/myforums.php:106
-msgid "Error getting new ForumMessageFactory"
-msgstr "Ошибка получения нового сообщения форума"
 
 #: www/forum/new.php:64
 #, fuzzy

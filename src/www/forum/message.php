@@ -88,7 +88,7 @@ if ($msg_id) {
 
 	$fmf = new ForumMessageFactory($f);
 	if (!$fmf || !is_object($fmf)) {
-		exit_error(_('Error getting new forum messageFactory'),'forums');
+		exit_error(_('Error getting new ForumMessageFactory'),'forums');
 	} elseif ($fmf->isError()) {
 		exit_error($fmf->getErrorMessage(),'forums');
 	}

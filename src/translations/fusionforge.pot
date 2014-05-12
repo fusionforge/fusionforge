@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 17:58+0200\n"
+"POT-Creation-Date: 2014-05-12 18:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16219,8 +16219,8 @@ msgstr ""
 msgid "Message Posted Successfully"
 msgstr ""
 
-#: www/forum/forum.php:136 www/forum/message.php:91
-msgid "Error getting new forum messageFactory"
+#: www/forum/forum.php:136 www/forum/message.php:91 www/forum/myforums.php:106
+msgid "Error getting new ForumMessageFactory"
 msgstr ""
 
 #: www/forum/forum.php:174
@@ -16331,10 +16331,6 @@ msgstr ""
 
 #: www/forum/myforums.php:73
 msgid "New Content?"
-msgstr ""
-
-#: www/forum/myforums.php:106
-msgid "Error getting new ForumMessageFactory"
 msgstr ""
 
 #: www/forum/new.php:64

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 17:56+0200\n"
+"POT-Creation-Date: 2014-05-12 18:36+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -17231,9 +17231,8 @@ msgstr ""
 msgid "Message Posted Successfully"
 msgstr "El mensaje ha sido publicado con éxito"
 
-#: www/forum/forum.php:136 www/forum/message.php:91
-#, fuzzy
-msgid "Error getting new forum messageFactory"
+#: www/forum/forum.php:136 www/forum/message.php:91 www/forum/myforums.php:106
+msgid "Error getting new ForumMessageFactory"
 msgstr "Error cargando nuevo ForumMessageFactory"
 
 #: www/forum/forum.php:174
@@ -17348,10 +17347,6 @@ msgstr "No ha marcado para seguir ningún foro"
 #: www/forum/myforums.php:73
 msgid "New Content?"
 msgstr "¿Nuevo Contenido?"
-
-#: www/forum/myforums.php:106
-msgid "Error getting new ForumMessageFactory"
-msgstr "Error cargando nuevo ForumMessageFactory"
 
 #: www/forum/new.php:64
 msgid "Start New Topic for: "

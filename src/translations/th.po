@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 17:56+0200\n"
+"POT-Creation-Date: 2014-05-12 18:36+0200\n"
 "PO-Revision-Date: 2013-06-03 17:16+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -16194,8 +16194,8 @@ msgstr ""
 msgid "Message Posted Successfully"
 msgstr ""
 
-#: www/forum/forum.php:136 www/forum/message.php:91
-msgid "Error getting new forum messageFactory"
+#: www/forum/forum.php:136 www/forum/message.php:91 www/forum/myforums.php:106
+msgid "Error getting new ForumMessageFactory"
 msgstr ""
 
 #: www/forum/forum.php:174
@@ -16306,10 +16306,6 @@ msgstr ""
 
 #: www/forum/myforums.php:73
 msgid "New Content?"
-msgstr ""
-
-#: www/forum/myforums.php:106
-msgid "Error getting new ForumMessageFactory"
 msgstr ""
 
 #: www/forum/new.php:64

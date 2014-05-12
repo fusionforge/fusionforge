@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 17:56+0200\n"
+"POT-Creation-Date: 2014-05-12 18:36+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -17675,9 +17675,9 @@ msgstr ""
 msgid "Message Posted Successfully"
 msgstr "Nachricht erfolgreich abgeschickt"
 
-#: www/forum/forum.php:136 www/forum/message.php:91
+#: www/forum/forum.php:136 www/forum/message.php:91 www/forum/myforums.php:106
 #, fuzzy
-msgid "Error getting new forum messageFactory"
+msgid "Error getting new ForumMessageFactory"
 msgstr "Fehler beim Einholen neuer Forennachrichten"
 
 #: www/forum/forum.php:174
@@ -17795,11 +17795,6 @@ msgstr "Sie haben keine Foren auf Beobachtung"
 #: www/forum/myforums.php:73
 msgid "New Content?"
 msgstr "Neuer Inhalt?"
-
-#: www/forum/myforums.php:106
-#, fuzzy
-msgid "Error getting new ForumMessageFactory"
-msgstr "Fehler beim Einholen neuer Forennachrichten"
 
 #: www/forum/new.php:64
 #, fuzzy
