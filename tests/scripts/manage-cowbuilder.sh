@@ -7,7 +7,7 @@ cd $absolutetestspath
 BUILDERDIR=$(./scripts/builder_get_config.sh BUILDERDIR)
 
 # Prepare and/or update cowbuilder caches
-DISTROLIST=${DISTROLIST:-"squeeze wheezy jessie"}
+DISTROLIST=${DISTROLIST:-"wheezy jessie"}
 DEBMIRROR=${DEBMIRROR:-"http://cdn.debian.net/debian"}
 
 [ -d $BUILDERDIR/config ] || mkdir $BUILDERDIR/config
