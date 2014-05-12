@@ -81,14 +81,14 @@ if ($msg_id) {
 
 	$fm=new ForumMessage($f,$msg_id);
 	if (!$fm || !is_object($fm)) {
-		exit_error(_('Error getting new ForumMessage'),'forums');
+		exit_error(_('Error getting new forum message'),'forums');
 	} elseif ($fm->isError()) {
 		exit_error($fm->getErrorMessage(),'forums');
 	}
 
 	$fmf = new ForumMessageFactory($f);
 	if (!$fmf || !is_object($fmf)) {
-		exit_error(_('Error getting new ForumMessageFactory'),'forums');
+		exit_error(_('Error getting new forum messageFactory'),'forums');
 	} elseif ($fmf->isError()) {
 		exit_error($fmf->getErrorMessage(),'forums');
 	}

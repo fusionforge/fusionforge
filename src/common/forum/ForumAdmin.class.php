@@ -416,9 +416,9 @@ class ForumAdmin extends Error {
 						}
 						$fm = new ForumMessage($f); // pending = false
 						if (!$fm || !is_object($fm)) {
-							exit_error(_('Error getting new ForumMessage'),'forums');
+							exit_error(_('Error getting new forum message'),'forums');
 						} elseif ($fm->isError()) {
-							exit_error(_('Error getting new ForumMessage')._(': ').$fm->getErrorMessage(),'forums');
+							exit_error(_('Error getting new forum message')._(': ').$fm->getErrorMessage(),'forums');
 						}
 						$group_forum_id = db_result($res1,0,"group_forum_id");
 						$subject = db_result($res1,0,"subject");

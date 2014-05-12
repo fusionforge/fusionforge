@@ -87,10 +87,10 @@ if ($forum_id) {
 		$fm = new ForumMessage($f);
 		if (!$fm || !is_object($fm)) {
 			form_release_key(getStringFromRequest("form_key"));
-			exit_error(_('Error getting new ForumMessage'), 'forums');
+			exit_error(_('Error getting new forum message'), 'forums');
 		} elseif ($fm->isError()) {
 			form_release_key(getStringFromRequest("form_key"));
-			exit_error(_('Error getting new ForumMessage'._(': ').$fm->getErrorMessage()), 'forums');
+			exit_error(_('Error getting new forum message'._(': ').$fm->getErrorMessage()), 'forums');
 		}
 
 		if (getStringFromRequest('_body_content_type') == 'html') {
@@ -133,7 +133,7 @@ if ($forum_id) {
 	$fmf = new ForumMessageFactory($f);
 	if (!$fmf || !is_object($fmf)) {
 		form_release_key(getStringFromRequest("form_key"));
-		exit_error(_('Error getting new ForumMessageFactory'), 'forums');
+		exit_error(_('Error getting new forum messageFactory'), 'forums');
 	} elseif ($fmf->isError()) {
 		form_release_key(getStringFromRequest("form_key"));
 		exit_error($fmf->getErrorMessage(), 'forums');

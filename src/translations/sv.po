@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 17:31+0200\n"
+"POT-Creation-Date: 2014-05-12 17:49+0200\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2512,11 +2512,11 @@ msgid "Error getting new Forum"
 msgstr "Fel vid tillägg i forum"
 
 #: common/forum/ForumAdmin.class.php:419 common/forum/ForumAdmin.class.php:421
-#: www/forum/admin/pendingmsgdetail.php:57
+#: www/forum/admin/index.php:253 www/forum/admin/pendingmsgdetail.php:57
 #: www/forum/admin/pendingmsgdetail.php:59 www/forum/forum.php:90
 #: www/forum/forum.php:93 www/forum/message.php:84
 #, fuzzy
-msgid "Error getting new ForumMessage"
+msgid "Error getting new forum message"
 msgstr "Fel vid tillägg i forum"
 
 #: common/forum/ForumAdmin.class.php:433
@@ -17291,10 +17291,6 @@ msgid ""
 msgstr ""
 "VARNING! Du är på väg att radera ett meddelande och alla dess uppföljare!!"
 
-#: www/forum/admin/index.php:253
-msgid "Error getting new forum message"
-msgstr ""
-
 #: www/forum/admin/index.php:271
 msgid "Message Edited Successfully"
 msgstr ""
@@ -17404,9 +17400,10 @@ msgstr ""
 msgid "Message Posted Successfully"
 msgstr "Inlämning av inlägg lyckades"
 
-#: www/forum/forum.php:136 www/forum/message.php:91 www/forum/myforums.php:106
-msgid "Error getting new ForumMessageFactory"
-msgstr ""
+#: www/forum/forum.php:136 www/forum/message.php:91
+#, fuzzy
+msgid "Error getting new forum messageFactory"
+msgstr "Fel vid tillägg i forum"
 
 #: www/forum/forum.php:174
 msgid "Nested"
@@ -17523,6 +17520,10 @@ msgstr ""
 
 #: www/forum/myforums.php:73
 msgid "New Content?"
+msgstr ""
+
+#: www/forum/myforums.php:106
+msgid "Error getting new ForumMessageFactory"
 msgstr ""
 
 #: www/forum/new.php:64
@@ -24501,10 +24502,6 @@ msgstr "Användarenamn"
 #, fuzzy
 #~ msgid "Group_id in db result does not match Group Object."
 #~ msgstr "Grupp-ID i db-resultatet motsvarar inte gruppobjektet"
-
-#, fuzzy
-#~ msgid "Error getting new ForumMessage: "
-#~ msgstr "Fel vid tillägg i forum"
 
 #~ msgid "Mass update"
 #~ msgstr "Mass uppdatering"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 17:31+0200\n"
+"POT-Creation-Date: 2014-05-12 17:49+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -2515,12 +2515,11 @@ msgid "Error getting new Forum"
 msgstr "Fehler beim Suchen eines neuen Forums"
 
 #: common/forum/ForumAdmin.class.php:419 common/forum/ForumAdmin.class.php:421
-#: www/forum/admin/pendingmsgdetail.php:57
+#: www/forum/admin/index.php:253 www/forum/admin/pendingmsgdetail.php:57
 #: www/forum/admin/pendingmsgdetail.php:59 www/forum/forum.php:90
 #: www/forum/forum.php:93 www/forum/message.php:84
-#, fuzzy
-msgid "Error getting new ForumMessage"
-msgstr "Fehler beim Einholen einer neuen Forennachricht"
+msgid "Error getting new forum message"
+msgstr "Fehler beim Einholen neuer Forennachrichten"
 
 #: common/forum/ForumAdmin.class.php:433
 #, fuzzy
@@ -17566,10 +17565,6 @@ msgstr ""
 "WARNUNG! Sie sind dabei, eine Nachricht und ihre Antworten für immer zu "
 "löschen!!"
 
-#: www/forum/admin/index.php:253
-msgid "Error getting new forum message"
-msgstr "Fehler beim Einholen neuer Forennachrichten"
-
 #: www/forum/admin/index.php:271
 msgid "Message Edited Successfully"
 msgstr "Nachricht erfolgreich bearbeitet"
@@ -17678,10 +17673,10 @@ msgstr ""
 msgid "Message Posted Successfully"
 msgstr "Nachricht erfolgreich abgeschickt"
 
-#: www/forum/forum.php:136 www/forum/message.php:91 www/forum/myforums.php:106
+#: www/forum/forum.php:136 www/forum/message.php:91
 #, fuzzy
-msgid "Error getting new ForumMessageFactory"
-msgstr "Fehler beim Einholen einer neuer ForumMessageFactory"
+msgid "Error getting new forum messageFactory"
+msgstr "Fehler beim Einholen neuer Forennachrichten"
 
 #: www/forum/forum.php:174
 msgid "Nested"
@@ -17798,6 +17793,11 @@ msgstr "Sie haben keine Foren auf Beobachtung"
 #: www/forum/myforums.php:73
 msgid "New Content?"
 msgstr "Neuer Inhalt?"
+
+#: www/forum/myforums.php:106
+#, fuzzy
+msgid "Error getting new ForumMessageFactory"
+msgstr "Fehler beim Einholen neuer Forennachrichten"
 
 #: www/forum/new.php:64
 #, fuzzy
@@ -25175,10 +25175,6 @@ msgstr "Kein Benutzername angegeben"
 #, fuzzy
 #~ msgid "Group_id in db result does not match Group Object."
 #~ msgstr "Group_id Datenbank-Ergebnis stimmt nicht mit Gruppen-Objekt überein"
-
-#, fuzzy
-#~ msgid "Error getting new ForumMessage: "
-#~ msgstr "Fehler beim Einholen einer neuen Forennachricht:"
 
 #, fuzzy
 #~ msgid "Enable tree"

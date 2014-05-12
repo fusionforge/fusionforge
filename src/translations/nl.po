@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 17:31+0200\n"
+"POT-Creation-Date: 2014-05-12 17:49+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2518,11 +2518,11 @@ msgid "Error getting new Forum"
 msgstr "Fout bij het toevoegen van een forum"
 
 #: common/forum/ForumAdmin.class.php:419 common/forum/ForumAdmin.class.php:421
-#: www/forum/admin/pendingmsgdetail.php:57
+#: www/forum/admin/index.php:253 www/forum/admin/pendingmsgdetail.php:57
 #: www/forum/admin/pendingmsgdetail.php:59 www/forum/forum.php:90
 #: www/forum/forum.php:93 www/forum/message.php:84
 #, fuzzy
-msgid "Error getting new ForumMessage"
+msgid "Error getting new forum message"
 msgstr "Fout bij het toevoegen van een forum"
 
 #: common/forum/ForumAdmin.class.php:433
@@ -17575,10 +17575,6 @@ msgid ""
 msgstr ""
 "LET OP! Je gaat nu een bericht met alle comments permanent verwijderen!!"
 
-#: www/forum/admin/index.php:253
-msgid "Error getting new forum message"
-msgstr ""
-
 #: www/forum/admin/index.php:271
 msgid "Message Edited Successfully"
 msgstr ""
@@ -17688,9 +17684,10 @@ msgstr ""
 msgid "Message Posted Successfully"
 msgstr "Bericht geplaatst"
 
-#: www/forum/forum.php:136 www/forum/message.php:91 www/forum/myforums.php:106
-msgid "Error getting new ForumMessageFactory"
-msgstr ""
+#: www/forum/forum.php:136 www/forum/message.php:91
+#, fuzzy
+msgid "Error getting new forum messageFactory"
+msgstr "Fout bij het toevoegen van een forum"
 
 #: www/forum/forum.php:174
 msgid "Nested"
@@ -17811,6 +17808,10 @@ msgstr "Je monitort nu geen forums"
 #, fuzzy
 msgid "New Content?"
 msgstr "Nieuw account"
+
+#: www/forum/myforums.php:106
+msgid "Error getting new ForumMessageFactory"
+msgstr ""
 
 #: www/forum/new.php:64
 #, fuzzy
@@ -24992,10 +24993,6 @@ msgstr "Gebruikersnaam"
 #, fuzzy
 #~ msgid "Group_id in db result does not match Group Object."
 #~ msgstr "Groep ID in database resultaat komt niet overeen met groep object"
-
-#, fuzzy
-#~ msgid "Error getting new ForumMessage: "
-#~ msgstr "Fout bij het toevoegen van een forum"
 
 #, fuzzy
 #~ msgid "Enable tree"

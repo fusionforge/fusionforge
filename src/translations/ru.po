@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 17:31+0200\n"
+"POT-Creation-Date: 2014-05-12 17:49+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2538,10 +2538,10 @@ msgid "Error getting new Forum"
 msgstr "Ошибка при создании форума"
 
 #: common/forum/ForumAdmin.class.php:419 common/forum/ForumAdmin.class.php:421
-#: www/forum/admin/pendingmsgdetail.php:57
+#: www/forum/admin/index.php:253 www/forum/admin/pendingmsgdetail.php:57
 #: www/forum/admin/pendingmsgdetail.php:59 www/forum/forum.php:90
 #: www/forum/forum.php:93 www/forum/message.php:84
-msgid "Error getting new ForumMessage"
+msgid "Error getting new forum message"
 msgstr "Ошибка получения нового сообщения форума"
 
 #: common/forum/ForumAdmin.class.php:433
@@ -17774,10 +17774,6 @@ msgid ""
 "comments!!"
 msgstr "Внимание! Вы хотите удалить сообщение и все следующие за ним !!"
 
-#: www/forum/admin/index.php:253
-msgid "Error getting new forum message"
-msgstr "Ошибка получения сообщения форума"
-
 #: www/forum/admin/index.php:271
 msgid "Message Edited Successfully"
 msgstr "Сообщение отредактировано"
@@ -17887,8 +17883,9 @@ msgstr ""
 msgid "Message Posted Successfully"
 msgstr "Сообщение успешно добавлено"
 
-#: www/forum/forum.php:136 www/forum/message.php:91 www/forum/myforums.php:106
-msgid "Error getting new ForumMessageFactory"
+#: www/forum/forum.php:136 www/forum/message.php:91
+#, fuzzy
+msgid "Error getting new forum messageFactory"
 msgstr "Ошибка получения нового сообщения форума"
 
 #: www/forum/forum.php:174
@@ -18007,6 +18004,10 @@ msgstr "У вас нет избранных форумов для получен
 #: www/forum/myforums.php:73
 msgid "New Content?"
 msgstr "Новое содержимое"
+
+#: www/forum/myforums.php:106
+msgid "Error getting new ForumMessageFactory"
+msgstr "Ошибка получения нового сообщения форума"
 
 #: www/forum/new.php:64
 #, fuzzy
@@ -25346,9 +25347,6 @@ msgstr "Имя участника обязательно"
 #, fuzzy
 #~ msgid "Group_id in db result does not match Group Object."
 #~ msgstr "Идентификатор группы в базе не соответствует объекту"
-
-#~ msgid "Error getting new ForumMessage: "
-#~ msgstr "Ошибка получения нового сообщения форума:"
 
 #, fuzzy
 #~ msgid "Enable tree"

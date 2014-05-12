@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 17:31+0200\n"
+"POT-Creation-Date: 2014-05-12 17:49+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -2462,11 +2462,11 @@ msgid "Error getting new Forum"
 msgstr "Error obteniendo el foro nuevo"
 
 #: common/forum/ForumAdmin.class.php:419 common/forum/ForumAdmin.class.php:421
-#: www/forum/admin/pendingmsgdetail.php:57
+#: www/forum/admin/index.php:253 www/forum/admin/pendingmsgdetail.php:57
 #: www/forum/admin/pendingmsgdetail.php:59 www/forum/forum.php:90
 #: www/forum/forum.php:93 www/forum/message.php:84
-msgid "Error getting new ForumMessage"
-msgstr "Error obteniendo el nuevo ForumMessage."
+msgid "Error getting new forum message"
+msgstr "Error obteniendo nuevos mensajes del foro"
 
 #: common/forum/ForumAdmin.class.php:433
 msgid "Pending message released"
@@ -17127,10 +17127,6 @@ msgid ""
 msgstr ""
 "¡CUIDADO! ¡Vas a eliminar permanentemente un mensaje y todas sus respuestas!"
 
-#: www/forum/admin/index.php:253
-msgid "Error getting new forum message"
-msgstr "Error obteniendo nuevos mensajes del foro"
-
 #: www/forum/admin/index.php:271
 msgid "Message Edited Successfully"
 msgstr "Mensaje Editado Correctamente"
@@ -17233,8 +17229,9 @@ msgstr ""
 msgid "Message Posted Successfully"
 msgstr "El mensaje ha sido publicado con éxito"
 
-#: www/forum/forum.php:136 www/forum/message.php:91 www/forum/myforums.php:106
-msgid "Error getting new ForumMessageFactory"
+#: www/forum/forum.php:136 www/forum/message.php:91
+#, fuzzy
+msgid "Error getting new forum messageFactory"
 msgstr "Error cargando nuevo ForumMessageFactory"
 
 #: www/forum/forum.php:174
@@ -17349,6 +17346,10 @@ msgstr "No ha marcado para seguir ningún foro"
 #: www/forum/myforums.php:73
 msgid "New Content?"
 msgstr "¿Nuevo Contenido?"
+
+#: www/forum/myforums.php:106
+msgid "Error getting new ForumMessageFactory"
+msgstr "Error cargando nuevo ForumMessageFactory"
 
 #: www/forum/new.php:64
 msgid "Start New Topic for: "
@@ -24650,9 +24651,6 @@ msgstr "No ha proporcionado el nombre de usuario"
 #~ msgstr ""
 #~ "Group_id en Grupo los resultados de la Base de Datos no coincide con el "
 #~ "Objeto de"
-
-#~ msgid "Error getting new ForumMessage: "
-#~ msgstr "Error obteniendo el nuevo ForumMessage."
 
 #~ msgid "Enable tree"
 #~ msgstr "Activa arbol"

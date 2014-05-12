@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 17:31+0200\n"
+"POT-Creation-Date: 2014-05-12 17:49+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2523,11 +2523,11 @@ msgid "Error getting new Forum"
 msgstr "新增討論區錯誤"
 
 #: common/forum/ForumAdmin.class.php:419 common/forum/ForumAdmin.class.php:421
-#: www/forum/admin/pendingmsgdetail.php:57
+#: www/forum/admin/index.php:253 www/forum/admin/pendingmsgdetail.php:57
 #: www/forum/admin/pendingmsgdetail.php:59 www/forum/forum.php:90
 #: www/forum/forum.php:93 www/forum/message.php:84
 #, fuzzy
-msgid "Error getting new ForumMessage"
+msgid "Error getting new forum message"
 msgstr "新增討論區錯誤"
 
 #: common/forum/ForumAdmin.class.php:433
@@ -17525,10 +17525,6 @@ msgid ""
 "comments!!"
 msgstr "警告！您打算永久地刪除一個文章以及所有對它的回覆！！"
 
-#: www/forum/admin/index.php:253
-msgid "Error getting new forum message"
-msgstr ""
-
 #: www/forum/admin/index.php:271
 msgid "Message Edited Successfully"
 msgstr ""
@@ -17638,9 +17634,10 @@ msgstr ""
 msgid "Message Posted Successfully"
 msgstr "文章發表成功"
 
-#: www/forum/forum.php:136 www/forum/message.php:91 www/forum/myforums.php:106
-msgid "Error getting new ForumMessageFactory"
-msgstr ""
+#: www/forum/forum.php:136 www/forum/message.php:91
+#, fuzzy
+msgid "Error getting new forum messageFactory"
+msgstr "新增討論區錯誤"
 
 #: www/forum/forum.php:174
 msgid "Nested"
@@ -17761,6 +17758,10 @@ msgstr ""
 #, fuzzy
 msgid "New Content?"
 msgstr "新帳號"
+
+#: www/forum/myforums.php:106
+msgid "Error getting new ForumMessageFactory"
+msgstr ""
 
 #: www/forum/new.php:64
 #, fuzzy
@@ -24814,7 +24815,7 @@ msgstr "帳號"
 #~ msgstr "資料庫中的群組編號與群組物件不一致"
 
 #, fuzzy
-#~ msgid "Error getting new ForumMessage: "
+#~ msgid "Error getting new forum message: "
 #~ msgstr "新增討論區錯誤"
 
 #, fuzzy

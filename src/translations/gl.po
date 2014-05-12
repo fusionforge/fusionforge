@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 17:31+0200\n"
+"POT-Creation-Date: 2014-05-12 17:49+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -2524,10 +2524,10 @@ msgid "Error getting new Forum"
 msgstr "Produciuse un erro ao obter o novo foro"
 
 #: common/forum/ForumAdmin.class.php:419 common/forum/ForumAdmin.class.php:421
-#: www/forum/admin/pendingmsgdetail.php:57
+#: www/forum/admin/index.php:253 www/forum/admin/pendingmsgdetail.php:57
 #: www/forum/admin/pendingmsgdetail.php:59 www/forum/forum.php:90
 #: www/forum/forum.php:93 www/forum/message.php:84
-msgid "Error getting new ForumMessage"
+msgid "Error getting new forum message"
 msgstr "Produciuse un erro ao obter a nova mensaxe de foro"
 
 #: common/forum/ForumAdmin.class.php:433
@@ -17677,10 +17677,6 @@ msgid ""
 msgstr ""
 "AVISO! Vai eliminar permanentemente unha mensaxe e todas as súas respostas!!"
 
-#: www/forum/admin/index.php:253
-msgid "Error getting new forum message"
-msgstr "Produciuse un erro ao obter a nova mensaxe de foro"
-
 #: www/forum/admin/index.php:271
 msgid "Message Edited Successfully"
 msgstr "A mensaxe editouse correctamente"
@@ -17789,8 +17785,9 @@ msgstr ""
 msgid "Message Posted Successfully"
 msgstr "Mensaxe publicada correctamente"
 
-#: www/forum/forum.php:136 www/forum/message.php:91 www/forum/myforums.php:106
-msgid "Error getting new ForumMessageFactory"
+#: www/forum/forum.php:136 www/forum/message.php:91
+#, fuzzy
+msgid "Error getting new forum messageFactory"
 msgstr "Produciuse un erro ao obter o novo ForumMessageFactory"
 
 #: www/forum/forum.php:174
@@ -17908,6 +17905,10 @@ msgstr "Non ten foros monitorizados"
 #: www/forum/myforums.php:73
 msgid "New Content?"
 msgstr "Contido novo?"
+
+#: www/forum/myforums.php:106
+msgid "Error getting new ForumMessageFactory"
+msgstr "Produciuse un erro ao obter o novo ForumMessageFactory"
 
 #: www/forum/new.php:64
 #, fuzzy
@@ -25298,9 +25299,6 @@ msgstr "Non se introduciu un nome de usuario"
 #, fuzzy
 #~ msgid "Group_id in db result does not match Group Object."
 #~ msgstr "O group_id na base de datos non coincide co obxecto do grupo"
-
-#~ msgid "Error getting new ForumMessage: "
-#~ msgstr "Produciuse un erro ao obter a nova mensaxe de foro:"
 
 #, fuzzy
 #~ msgid "Enable tree"

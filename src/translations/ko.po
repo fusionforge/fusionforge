@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 17:31+0200\n"
+"POT-Creation-Date: 2014-05-12 17:49+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2502,11 +2502,11 @@ msgid "Error getting new Forum"
 msgstr "게시판을 추가할 때 오류가 발생하였습니다."
 
 #: common/forum/ForumAdmin.class.php:419 common/forum/ForumAdmin.class.php:421
-#: www/forum/admin/pendingmsgdetail.php:57
+#: www/forum/admin/index.php:253 www/forum/admin/pendingmsgdetail.php:57
 #: www/forum/admin/pendingmsgdetail.php:59 www/forum/forum.php:90
 #: www/forum/forum.php:93 www/forum/message.php:84
 #, fuzzy
-msgid "Error getting new ForumMessage"
+msgid "Error getting new forum message"
 msgstr "게시판을 추가할 때 오류가 발생하였습니다."
 
 #: common/forum/ForumAdmin.class.php:433
@@ -17101,10 +17101,6 @@ msgid ""
 "comments!!"
 msgstr "경고! 지워진 글은 복구할 수 없으며 답글까지 함께 지워집니다!"
 
-#: www/forum/admin/index.php:253
-msgid "Error getting new forum message"
-msgstr ""
-
 #: www/forum/admin/index.php:271
 msgid "Message Edited Successfully"
 msgstr ""
@@ -17213,9 +17209,10 @@ msgstr ""
 msgid "Message Posted Successfully"
 msgstr "성공적으로 글이 게시되었습니다."
 
-#: www/forum/forum.php:136 www/forum/message.php:91 www/forum/myforums.php:106
-msgid "Error getting new ForumMessageFactory"
-msgstr ""
+#: www/forum/forum.php:136 www/forum/message.php:91
+#, fuzzy
+msgid "Error getting new forum messageFactory"
+msgstr "게시판을 추가할 때 오류가 발생하였습니다."
 
 #: www/forum/forum.php:174
 msgid "Nested"
@@ -17333,6 +17330,10 @@ msgstr ""
 #, fuzzy
 msgid "New Content?"
 msgstr "사용자 등록"
+
+#: www/forum/myforums.php:106
+msgid "Error getting new ForumMessageFactory"
+msgstr ""
 
 #: www/forum/new.php:64
 #, fuzzy
@@ -24008,10 +24009,6 @@ msgstr "사용자ID"
 #, fuzzy
 #~ msgid "Group_id in db result does not match Group Object."
 #~ msgstr "데이터베이스의 그룹ID가 그룹 객체와 맞지 않습니다."
-
-#, fuzzy
-#~ msgid "Error getting new ForumMessage: "
-#~ msgstr "게시판을 추가할 때 오류가 발생하였습니다."
 
 #~ msgid "Mass update"
 #~ msgstr "대량 갱신"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 17:31+0200\n"
+"POT-Creation-Date: 2014-05-12 17:49+0200\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2524,11 +2524,11 @@ msgid "Error getting new Forum"
 msgstr "Foroa sortzean gertatutako akatsa"
 
 #: common/forum/ForumAdmin.class.php:419 common/forum/ForumAdmin.class.php:421
-#: www/forum/admin/pendingmsgdetail.php:57
+#: www/forum/admin/index.php:253 www/forum/admin/pendingmsgdetail.php:57
 #: www/forum/admin/pendingmsgdetail.php:59 www/forum/forum.php:90
 #: www/forum/forum.php:93 www/forum/message.php:84
 #, fuzzy
-msgid "Error getting new ForumMessage"
+msgid "Error getting new forum message"
 msgstr "Foroa sortzean gertatutako akatsa"
 
 #: common/forum/ForumAdmin.class.php:433
@@ -17512,10 +17512,6 @@ msgid ""
 "comments!!"
 msgstr "¡ARGI! ¡Mezua bere erantzun guztiekin ezabatzera zoaz erabat!"
 
-#: www/forum/admin/index.php:253
-msgid "Error getting new forum message"
-msgstr ""
-
 #: www/forum/admin/index.php:271
 msgid "Message Edited Successfully"
 msgstr ""
@@ -17625,9 +17621,10 @@ msgstr ""
 msgid "Message Posted Successfully"
 msgstr "Mezua arrakastaz aldatu da"
 
-#: www/forum/forum.php:136 www/forum/message.php:91 www/forum/myforums.php:106
-msgid "Error getting new ForumMessageFactory"
-msgstr ""
+#: www/forum/forum.php:136 www/forum/message.php:91
+#, fuzzy
+msgid "Error getting new forum messageFactory"
+msgstr "Foroa sortzean gertatutako akatsa"
 
 #: www/forum/forum.php:174
 msgid "Nested"
@@ -17748,6 +17745,10 @@ msgstr ""
 #, fuzzy
 msgid "New Content?"
 msgstr "Kontu berria"
+
+#: www/forum/myforums.php:106
+msgid "Error getting new ForumMessageFactory"
+msgstr ""
 
 #: www/forum/new.php:64
 #, fuzzy
@@ -24793,10 +24794,6 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #~ msgid "Group_id in db result does not match Group Object."
 #~ msgstr ""
 #~ "Group_id -ko datu basearen erantzunak ez datoz taldearen objektuarekin bat"
-
-#, fuzzy
-#~ msgid "Error getting new ForumMessage: "
-#~ msgstr "Foroa sortzean gertatutako akatsa"
 
 #, fuzzy
 #~ msgid "Could not get ProjectTaskFactory"
