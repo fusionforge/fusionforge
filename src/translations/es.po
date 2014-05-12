@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 18:36+0200\n"
+"POT-Creation-Date: 2014-05-12 18:41+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -6975,8 +6975,10 @@ msgid "Add/Update Custom Field Elements in %s"
 msgstr "Añadir/Actualizar elementos del campo personalizad en %s"
 
 #: common/tracker/views/form-addextrafieldoption.php:39
+#: common/tracker/views/form-addextrafield.php:115
 #: common/tracker/views/form-updateextrafieldelement.php:51
-msgid "Custom field name"
+#: common/tracker/views/form-updateextrafield.php:52
+msgid "Custom Field Name"
 msgstr "Nombre del campo personalizado"
 
 #: common/tracker/views/form-addextrafieldoption.php:47
@@ -7068,11 +7070,6 @@ msgstr "No ha definido ningún campo personalizado"
 #: common/tracker/views/form-addextrafield.php:110
 msgid "Add New Custom Field"
 msgstr "Añadir campo personalizado"
-
-#: common/tracker/views/form-addextrafield.php:115
-#: common/tracker/views/form-updateextrafield.php:52
-msgid "Custom Field Name"
-msgstr "Nombre del campo personalizado"
 
 #: common/tracker/views/form-addextrafield.php:119
 #: common/tracker/views/form-updateextrafield.php:96

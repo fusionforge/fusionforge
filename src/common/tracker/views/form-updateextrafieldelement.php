@@ -48,7 +48,7 @@ if (!$ac || !is_object($ac)) {
 		$ath->adminHeader(array('title'=>$title));
 
 ?>
-			<h2><?php echo _('Custom field name')._(': ').$ac->getName() ?></h2>
+			<h2><?php echo _('Custom Field Name')._(': ').$ac->getName() ?></h2>
 			<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post">
 			<input type="hidden" name="update_opt" value="y" />
 			<input type="hidden" name="id" value="<?php echo $ao->getID(); ?>" />

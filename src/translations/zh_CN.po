@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 18:36+0200\n"
+"POT-Creation-Date: 2014-05-12 18:41+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -7113,9 +7113,10 @@ msgid "Add/Update Custom Field Elements in %s"
 msgstr ""
 
 #: common/tracker/views/form-addextrafieldoption.php:39
+#: common/tracker/views/form-addextrafield.php:115
 #: common/tracker/views/form-updateextrafieldelement.php:51
-#, fuzzy
-msgid "Custom field name"
+#: common/tracker/views/form-updateextrafield.php:52
+msgid "Custom Field Name"
 msgstr "订制栏位名称"
 
 #: common/tracker/views/form-addextrafieldoption.php:47
@@ -7209,11 +7210,6 @@ msgstr "您没有定义任何的订制栏位"
 #: common/tracker/views/form-addextrafield.php:110
 msgid "Add New Custom Field"
 msgstr "添加新订制栏位"
-
-#: common/tracker/views/form-addextrafield.php:115
-#: common/tracker/views/form-updateextrafield.php:52
-msgid "Custom Field Name"
-msgstr "订制栏位名称"
 
 #: common/tracker/views/form-addextrafield.php:119
 #: common/tracker/views/form-updateextrafield.php:96

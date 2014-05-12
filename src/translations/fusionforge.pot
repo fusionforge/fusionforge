@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 18:38+0200\n"
+"POT-Creation-Date: 2014-05-12 18:43+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -6596,8 +6596,10 @@ msgid "Add/Update Custom Field Elements in %s"
 msgstr ""
 
 #: common/tracker/views/form-addextrafieldoption.php:39
+#: common/tracker/views/form-addextrafield.php:115
 #: common/tracker/views/form-updateextrafieldelement.php:51
-msgid "Custom field name"
+#: common/tracker/views/form-updateextrafield.php:52
+msgid "Custom Field Name"
 msgstr ""
 
 #: common/tracker/views/form-addextrafieldoption.php:47
@@ -6687,11 +6689,6 @@ msgstr ""
 
 #: common/tracker/views/form-addextrafield.php:110
 msgid "Add New Custom Field"
-msgstr ""
-
-#: common/tracker/views/form-addextrafield.php:115
-#: common/tracker/views/form-updateextrafield.php:52
-msgid "Custom Field Name"
 msgstr ""
 
 #: common/tracker/views/form-addextrafield.php:119

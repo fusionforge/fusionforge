@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 18:36+0200\n"
+"POT-Creation-Date: 2014-05-12 18:41+0200\n"
 "PO-Revision-Date: 2009-01-13 16:27+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -6598,8 +6598,10 @@ msgid "Add/Update Custom Field Elements in %s"
 msgstr ""
 
 #: common/tracker/views/form-addextrafieldoption.php:39
+#: common/tracker/views/form-addextrafield.php:115
 #: common/tracker/views/form-updateextrafieldelement.php:51
-msgid "Custom field name"
+#: common/tracker/views/form-updateextrafield.php:52
+msgid "Custom Field Name"
 msgstr ""
 
 #: common/tracker/views/form-addextrafieldoption.php:47
@@ -6689,11 +6691,6 @@ msgstr ""
 
 #: common/tracker/views/form-addextrafield.php:110
 msgid "Add New Custom Field"
-msgstr ""
-
-#: common/tracker/views/form-addextrafield.php:115
-#: common/tracker/views/form-updateextrafield.php:52
-msgid "Custom Field Name"
 msgstr ""
 
 #: common/tracker/views/form-addextrafield.php:119

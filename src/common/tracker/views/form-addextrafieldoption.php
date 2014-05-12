@@ -36,7 +36,7 @@
 		$title = sprintf(_('Add/Update Custom Field Elements in %s'), $ath->getName());
 		$ath->adminHeader(array('title'=>$title));
 
-		echo '<h2>'._('Custom field name')._(': ').$ac->getName().'</h2>';
+		echo '<h2>'._('Custom Field Name')._(': ').$ac->getName().'</h2>';
 		$rows=count($efearr);
 		if ($rows > 0) {
 
