@@ -25,6 +25,8 @@
  */
 
 require_once $gfwww.'include/Layout.class.php';
+require_once 'Twig/Autoloader.php';
+Twig_Autoloader::register();
 
 class Theme extends Layout {
 
@@ -37,6 +39,10 @@ class Theme extends Layout {
 		$this->addStylesheet('/themes/funky/css/theme.css');
 		$this->addStylesheet('/themes/funky/css/theme-pages.css');
 		$this->addStylesheet('/scripts/jquery-ui/css/overcast/jquery-ui-1.10.4.custom.css');
+
+		$this->twig_loader = new Twig_Loader_Filesystem(forge_get_config('themes_root').'/funky-twig/templates');
+		$this->$twig = new Twig_Environment($this->twig_loader);
+
 	}
 
 	function bodyHeader($params) {
