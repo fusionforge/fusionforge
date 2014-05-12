@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 17:29+0200\n"
+"POT-Creation-Date: 2014-05-12 17:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1045,6 +1045,7 @@ msgstr ""
 #: common/widget/Widget_ProjectLatestDocuments.class.php:74
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:108
 #: plugins/mantisbt/view/viewAttachment.php:50
+#: plugins/scmhook/library/scmgit/commitTracker.class.php:134
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:128
 #: www/frs/admin/editrelease.php:296 www/frs/admin/editrelease.php:357
 #: www/frs/admin/qrs.php:192 www/frs/index.php:203
@@ -13555,10 +13556,6 @@ msgstr ""
 
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:103
 msgid "Related Git commits"
-msgstr ""
-
-#: plugins/scmhook/library/scmgit/commitTracker.class.php:134
-msgid "Filename"
 msgstr ""
 
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:134

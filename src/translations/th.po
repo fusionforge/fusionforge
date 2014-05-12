@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 17:27+0200\n"
+"POT-Creation-Date: 2014-05-12 17:31+0200\n"
 "PO-Revision-Date: 2013-06-03 17:16+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -1041,6 +1041,7 @@ msgstr ""
 #: common/widget/Widget_ProjectLatestDocuments.class.php:74
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:108
 #: plugins/mantisbt/view/viewAttachment.php:50
+#: plugins/scmhook/library/scmgit/commitTracker.class.php:134
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:128
 #: www/frs/admin/editrelease.php:296 www/frs/admin/editrelease.php:357
 #: www/frs/admin/qrs.php:192 www/frs/index.php:203
@@ -13534,10 +13535,6 @@ msgstr ""
 
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:103
 msgid "Related Git commits"
-msgstr ""
-
-#: plugins/scmhook/library/scmgit/commitTracker.class.php:134
-msgid "Filename"
 msgstr ""
 
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:134

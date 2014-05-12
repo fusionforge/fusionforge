@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 17:27+0200\n"
+"POT-Creation-Date: 2014-05-12 17:31+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1104,6 +1104,7 @@ msgstr "您必须登录"
 #: common/widget/Widget_ProjectLatestDocuments.class.php:74
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:108
 #: plugins/mantisbt/view/viewAttachment.php:50
+#: plugins/scmhook/library/scmgit/commitTracker.class.php:134
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:128
 #: www/frs/admin/editrelease.php:296 www/frs/admin/editrelease.php:357
 #: www/frs/admin/qrs.php:192 www/frs/index.php:203
@@ -14730,10 +14731,6 @@ msgstr "无法添加已经启用的数据库"
 #, fuzzy
 msgid "Related Git commits"
 msgstr "提交"
-
-#: plugins/scmhook/library/scmgit/commitTracker.class.php:134
-msgid "Filename"
-msgstr "文件名称"
 
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:134
 #: www/pm/browse_task.php:202 www/pm/ganttpage.php:186

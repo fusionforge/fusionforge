@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 17:27+0200\n"
+"POT-Creation-Date: 2014-05-12 17:31+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1109,6 +1109,7 @@ msgstr "Devi essere loggato"
 #: common/widget/Widget_ProjectLatestDocuments.class.php:74
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:108
 #: plugins/mantisbt/view/viewAttachment.php:50
+#: plugins/scmhook/library/scmgit/commitTracker.class.php:134
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:128
 #: www/frs/admin/editrelease.php:296 www/frs/admin/editrelease.php:357
 #: www/frs/admin/qrs.php:192 www/frs/index.php:203
@@ -14773,10 +14774,6 @@ msgid "Related Git commits"
 msgstr "Attività correlate"
 
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:134
-msgid "Filename"
-msgstr "Nome file"
-
-#: plugins/scmhook/library/scmgit/commitTracker.class.php:134
 #: www/pm/browse_task.php:202 www/pm/ganttpage.php:186
 #: www/snippet/snippet_utils.php:118
 msgid "Browse"
@@ -24221,7 +24218,6 @@ msgstr "Aggiornamento multiplo"
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "Non è stato inserito alcun file"
-
 
 #, fuzzy
 #~ msgid "Massmail admin"
