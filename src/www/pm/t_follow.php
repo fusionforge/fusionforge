@@ -39,7 +39,7 @@ if (!$tid) {
 $tinfo = getGroupProjectIdGroupId($tid);
 
 if (!$tinfo) {
-    exit_error(_('no task with id :').$tid,'pm');
+    exit_error(_('No Task with ID: ').$tid,'pm');
 }
 
 session_redirect('/pm/task.php?func=detailtask&project_task_id='.$tinfo['project_task_id'].'&group_id='.$tinfo['group_id'].'&group_project_id='.$tinfo['group_project_id']);

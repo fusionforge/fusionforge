@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 17:01+0200\n"
+"POT-Creation-Date: 2014-05-12 17:13+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19496,11 +19496,7 @@ msgstr ""
 msgid "TID"
 msgstr ""
 
-#: www/pm/t_follow.php:42
-msgid "no task with id :"
-msgstr ""
-
-#: www/pm/t_lookup.php:41
+#: www/pm/t_follow.php:42 www/pm/t_lookup.php:41
 msgid "No Task with ID: "
 msgstr ""
 
