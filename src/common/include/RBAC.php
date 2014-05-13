@@ -7,6 +7,7 @@
  * Copyright 2012-2014, Franck Villaume - TrivialDev
  * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
  * Copyright 2013, French Ministry of National Education
+ * Copyright 2014, Inria (Sylvain Beucler)
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
