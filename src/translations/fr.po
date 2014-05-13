@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-13 10:32+0200\n"
+"POT-Creation-Date: 2014-05-13 11:06+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -5497,7 +5497,7 @@ msgstr "Moteur de rendu mis à jour"
 
 #: common/tracker/actions/admin-updates.php:553
 msgid "Initial values not saved, no initial state given."
-msgstr "Valeurs initiales non sauvegardées, pas d'état initial spécifié."
+msgstr "valeurs initiales non sauvegardées et pas d'état initial spécifié."
 
 #: common/tracker/actions/admin-updates.php:557
 msgid "Initial values saved."
@@ -7658,9 +7658,8 @@ msgstr ""
 "dans le répertoire."
 
 #: common/widget/Widget_MyMonitoredDocuments.class.php:90
-#, fuzzy
 msgid "Stop monitoring this document?"
-msgstr "Ne plus surveiller ce document"
+msgstr "Ne plus surveiller ce document ?"
 
 #: common/widget/Widget_MyMonitoredDocuments.class.php:94
 #: common/widget/Widget_MyMonitoredForums.class.php:133
@@ -15047,11 +15046,11 @@ msgstr ""
 
 #: www/account/register.php:152
 msgid "Login Name (do not use uppercase letters)"
-msgstr "Nom du compte (ne pas utiliser de majuscules) :"
+msgstr "Nom du compte (ne pas utiliser de majuscules)"
 
 #: www/account/register.php:159
 msgid "Password (min. 6 chars)"
-msgstr "Mot de passe (6 caractères minimum) :"
+msgstr "Mot de passe (6 caractères minimum)"
 
 #: www/account/register.php:165
 msgid "Password (repeat)"
@@ -19211,9 +19210,8 @@ msgid "Category Inserted"
 msgstr "Catégorie ajoutée"
 
 #: www/people/admin/index.php:60
-#, fuzzy
 msgid "Missing category name."
-msgstr "Le nom du projet est manquant."
+msgstr "Le nom de la catégorie est manquant."
 
 #: www/people/admin/index.php:70
 msgid "Skill Inserted"
@@ -19221,7 +19219,7 @@ msgstr "Compétence ajoutée"
 
 #: www/people/admin/index.php:73
 msgid "Missing skill name."
-msgstr "Nom du compétence manquant."
+msgstr "Le nom de la compétence est manquant."
 
 #: www/people/admin/index.php:86
 msgid "Add/Change Categories"
@@ -19920,9 +19918,8 @@ msgid "Subproject Name"
 msgstr "Nom du sous-projet"
 
 #: www/pm/admin/index.php:354
-#, fuzzy
 msgid "Category Administration"
-msgstr "Administration des catégories de postes"
+msgstr "Administration des catégories"
 
 #: www/pm/admin/index.php:368 www/pm/admin/index.php:390
 msgid "Permanently delete this subproject and all its data"
@@ -21060,14 +21057,12 @@ msgid "You are about to permanently delete role %s"
 msgstr "Vous êtes sur le point de supprimer définitivement le rôle %s."
 
 #: www/project/admin/roleedit.php:96
-#, fuzzy
 msgid "Added Role"
-msgstr "Ajouter un rôle"
+msgstr "Rôle ajouté"
 
 #: www/project/admin/roleedit.php:106
-#, fuzzy
 msgid "Updated Role"
-msgstr "Nouvelle valeur"
+msgstr "Rôle mis à jour"
 
 #: www/project/admin/roleedit.php:113
 msgid "New Role"
@@ -21205,18 +21200,16 @@ msgid "Role linked successfully"
 msgstr "Le rôle a été référencé"
 
 #: www/project/admin/users.php:192
-#, fuzzy
 msgid "Linked Role"
-msgstr "Déréférencer le rôle"
+msgstr "Le rôle a été lié"
 
 #: www/project/admin/users.php:205
 msgid "Role unlinked successfully"
 msgstr "Le rôle a été déréférencé"
 
 #: www/project/admin/users.php:206
-#, fuzzy
 msgid "Unlinked Role"
-msgstr "Déréférencer le rôle"
+msgstr "Le rôle a été déréférencé"
 
 #: www/project/admin/users.php:216
 #, php-format
