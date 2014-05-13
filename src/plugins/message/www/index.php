@@ -46,7 +46,7 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'admin/admin_utils.php';
 
 $message= getStringFromRequest('body');
-if ($message) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$res = db_query_params('SELECT message FROM plugin_message', array());
 	if (!$res || db_numrows($res)==0) {
 		db_query_params('INSERT INTO plugin_message (message) VALUES ($1)', array($message));

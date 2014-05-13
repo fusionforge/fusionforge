@@ -53,10 +53,10 @@ class messagePlugin extends Plugin {
 
 	function message() {
 		$res = db_query_params('SELECT message FROM plugin_message', array());
-		if ($res && db_numrows($res)>0) {
+		if ($res && db_numrows($res)>0 && $message=db_result($res, 0, 'message')) {
 			echo '<div id="message_box">';
 			echo html_image("ic/close.png", '', '', array('alt'=>_('Close'), 'id'=>'message_close', 'style'=>'float:right;cursor:pointer'));
-			echo db_result($res, 0, 'message');
+			echo $message;
 			echo '</div>';
 		}
 	}
