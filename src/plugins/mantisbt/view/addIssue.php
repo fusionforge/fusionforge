@@ -132,7 +132,7 @@ if (!isset($errorPage)){
 	echo	'<table>';
 	echo		'<tr>';
 	echo 			'<td width="20%">'._('Summary').' * <span style="font-weight:normal">'._('(128 char max)').'</span></td>';
-	echo			'<td><input type="text" name="resume" MAXLENGTH="128" style="width:99%;"></td>';
+	echo			'<td><input type="text" name="resume" maxlength="128" style="width:99%;"></td>';
 	echo		'</tr>';
 	echo		'<tr>';
 	echo 			'<td>'._('Description').' *</td>';
