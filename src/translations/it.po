@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 18:41+0200\n"
+"POT-Creation-Date: 2014-05-13 09:29+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -241,6 +241,8 @@ msgstr "Dettagli dell'attività"
 #: common/forum/ForumHTML.class.php:589
 #: common/forum/ForumMessage.class.php:667 common/frs/FRSFile.class.php:187
 #: common/frs/FRSFile.class.php:440 common/frs/FRSPackage.class.php:295
+#: common/frs/FRSPackageFactory.class.php:55
+#: common/frs/FRSPackageFactory.class.php:98
 #: common/include/Error.class.php:206 common/include/exit.php:81
 #: common/include/Group.class.php:2644 common/include/Group.class.php:2645
 #: common/include/Group.class.php:2646 common/include/Group.class.php:2698
@@ -566,6 +568,7 @@ msgstr[1] "Aggiornato con successo"
 #: common/docman/DocumentManager.class.php:57 common/forum/Forum.class.php:108
 #: common/forum/ForumFactory.class.php:52 common/frs/FRSFile.class.php:394
 #: common/frs/FRSPackage.class.php:103
+#: common/frs/FRSPackageFactory.class.php:51
 #: common/include/GroupJoinRequest.class.php:65
 #: common/include/Permission.class.php:102
 #: common/mail/MailingList.class.php:65
@@ -1113,7 +1116,7 @@ msgstr "Devi essere loggato"
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:134
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:128
 #: www/frs/admin/editrelease.php:296 www/frs/admin/editrelease.php:357
-#: www/frs/admin/qrs.php:192 www/frs/index.php:203
+#: www/frs/admin/qrs.php:192 www/frs/index.php:168
 msgid "File Name"
 msgstr "Nome file"
 
@@ -1728,7 +1731,7 @@ msgstr "Stato"
 #: common/docman/views/listfile.php:232
 #: common/docman/views/listtrashfile.php:137
 #: common/docman/views/pendingfiles.php:63
-#: common/tracker/include/ArtifactTypeHtml.class.php:377 www/frs/index.php:205
+#: common/tracker/include/ArtifactTypeHtml.class.php:377 www/frs/index.php:170
 #: www/project/admin/editimages.php:267
 msgid "Size"
 msgstr "Dimensione"
@@ -1826,7 +1829,7 @@ msgstr ""
 #: www/developer/diary.php:56 www/developer/diary.php:87
 #: www/export/rss20_docman.php:135 www/export/rss20_docman.php:137
 #: www/export/tracker.php:107 www/forum/index.php:89 www/forum/message.php:129
-#: www/forum/myforums.php:155 www/frs/index.php:174 www/frs/index.php:233
+#: www/forum/myforums.php:155 www/frs/index.php:151 www/frs/index.php:197
 #: www/include/html.php:1070 www/news/news_utils.php:149
 #: www/news/news_utils.php:269 www/people/people_utils.php:463
 #: www/people/viewjob.php:77 www/pm/browse_task.php:283
@@ -2192,7 +2195,7 @@ msgstr "Utente"
 #: www/admin/cronman.php:42 www/admin/massmail.php:158
 #: www/developer/diary.php:81 www/forum/forum.php:249
 #: www/forum/message.php:163 www/frs/admin/showreleases.php:101
-#: www/frs/index.php:204 www/frs/reporting/downloads.php:197
+#: www/frs/index.php:169 www/frs/reporting/downloads.php:197
 #: www/news/admin/news_admin_utils.php:57 www/pm/calendar.php:264
 #: www/pm/include/ProjectTaskHTML.class.php:149
 #: www/pm/include/ProjectTaskHTML.class.php:189
@@ -3079,6 +3082,16 @@ msgstr "Nome non valido"
 #: common/frs/FRSPackage.class.php:540
 msgid "Cannot open the file archive."
 msgstr ""
+
+#: common/frs/FRSPackageFactory.class.php:59
+#, php-format
+msgid "%s does not use the FRS tool"
+msgstr ""
+
+#: common/frs/FRSPackageFactory.class.php:98
+#, fuzzy
+msgid "Error Getting FRS"
+msgstr "Errore richiedendo %1$s"
 
 #: common/frs/FRSRelease.class.php:83
 #, fuzzy
@@ -4216,22 +4229,22 @@ msgstr "Ricerca all'interno di tutto il progetto"
 msgid "UNKNOWN (internal error, report bug to FusionForge)"
 msgstr ""
 
-#: common/include/RBAC.php:827
+#: common/include/RBAC.php:838
 #, php-format
 msgid "%s (global role)"
 msgstr ""
 
-#: common/include/RBAC.php:831
+#: common/include/RBAC.php:842
 #, fuzzy, php-format
 msgid "%s (in project %s)"
 msgstr "%1$s progetti"
 
-#: common/include/RBAC.php:1146
+#: common/include/RBAC.php:1154
 #, fuzzy
 msgid "Anonymous/not logged in"
 msgstr "Devi essere collegato"
 
-#: common/include/RBAC.php:1194
+#: common/include/RBAC.php:1202
 #, fuzzy
 msgid "Any user logged in"
 msgstr "Devi essere collegato"
@@ -7226,7 +7239,7 @@ msgstr "Campi personalizzati definiti"
 #: common/tracker/views/form-addextrafield.php:45
 #: plugins/mantisbt/view/admin/editVersion.php:64
 #: plugins/mantisbt/view/admin/viewVersion.php:52 www/admin/database.php:101
-#: www/admin/massmail.php:156 www/frs/index.php:208
+#: www/admin/massmail.php:156 www/frs/index.php:173
 #: www/people/editprofile.php:107 www/people/editprofile.php:277
 #: www/people/skills_utils.php:49 www/people/skills_utils.php:154
 #: www/project/stats/index.php:108 www/reporting/groupadded.php:65
@@ -8395,7 +8408,7 @@ msgid "Package"
 msgstr "Pacchetto"
 
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:139
-#: www/frs/index.php:136
+#: www/frs/index.php:118
 msgid "Monitor this package"
 msgstr "Tieni sotto controllo questo package"
 
@@ -18198,29 +18211,34 @@ msgstr ""
 msgid "Release New File Version"
 msgstr "Rilascia nuova versione di un file"
 
-#: www/frs/index.php:89
+#: www/frs/index.php:68
+#, fuzzy
+msgid "Could Not Get FRSPackageFactory"
+msgstr "Impossibile completare l'operazione"
+
+#: www/frs/index.php:75
 msgid "Project Filelist"
 msgstr "File rilasciati per il progetto"
 
-#: www/frs/index.php:94
+#: www/frs/index.php:80
 msgid "No File Packages"
 msgstr "Non è definito alcun pacchetto di file"
 
-#: www/frs/index.php:95
+#: www/frs/index.php:81
 #, fuzzy
 msgid "There are no file packages defined for this project."
 msgstr "Sei già un membro di questo progetto."
 
-#: www/frs/index.php:99
+#: www/frs/index.php:85
 msgid "Below is a list of all files of the project."
 msgstr "Qui trovi l'elenco di tutti i file del progetto."
 
-#: www/frs/index.php:101
+#: www/frs/index.php:87
 msgid ""
 "The release you have chosen is <span class=\"selected\">highlighted</span>."
 msgstr ""
 
-#: www/frs/index.php:103
+#: www/frs/index.php:89
 msgid ""
 "Before downloading, you may want to read Release Notes and ChangeLog "
 "(accessible by clicking on release version)."
@@ -18228,41 +18246,41 @@ msgstr ""
 "Prima di scaricare il file, leggi le note di rilascio e il Changelog "
 "(accessibile cliccando sulla versione della release)."
 
-#: www/frs/index.php:111
+#: www/frs/index.php:97
 msgid "To create a new release click here."
 msgstr "Clicca qui per creare una nuova release."
 
-#: www/frs/index.php:132
+#: www/frs/index.php:114
 #, fuzzy
 msgid "Stop monitoring this package"
 msgstr "Tieni sotto controllo questo package"
 
-#: www/frs/index.php:154 www/frs/index.php:225
+#: www/frs/index.php:133 www/frs/index.php:190
 msgid "No releases"
 msgstr "Nessuna release"
 
-#: www/frs/index.php:158
+#: www/frs/index.php:137
 msgid "Download latest release as ZIP:"
 msgstr ""
 
-#: www/frs/index.php:161
+#: www/frs/index.php:140
 msgid "This link always points to the newest release as a ZIP file."
 msgstr ""
 
-#: www/frs/index.php:206
+#: www/frs/index.php:171
 msgid "D/L"
 msgstr "D/L"
 
-#: www/frs/index.php:207
+#: www/frs/index.php:172
 msgid "Arch"
 msgstr "Architettura"
 
-#: www/frs/index.php:209
+#: www/frs/index.php:174
 #, fuzzy
 msgid "Latest"
 msgstr "Ultime Notizie"
 
-#: www/frs/index.php:238
+#: www/frs/index.php:202
 #, fuzzy
 msgid "Latest version"
 msgstr "Ultime Notizie"
@@ -25074,10 +25092,6 @@ msgstr "Non è stato inserito alcun file"
 #~ msgstr "Errore - Prima devi selezionare un utente da monitorare"
 
 #, fuzzy
-#~ msgid "Could Not Get FRSPackage"
-#~ msgstr "Impossibile completare l'operazione"
-
-#, fuzzy
 #~ msgid "%1$s to %2$s"
 #~ msgstr "Fatti %1$s riconoscere %2$s, per favore"
 
@@ -26430,10 +26444,6 @@ msgstr "Non è stato inserito alcun file"
 #, fuzzy
 #~ msgid "Error Getting Release"
 #~ msgstr "Errore nella creazione  del progetto"
-
-#, fuzzy
-#~ msgid "Error Getting File"
-#~ msgstr "Errore richiedendo %1$s"
 
 #~ msgid "SUBMIT ONLY ONCE"
 #~ msgstr "INSERIRE SOLO UNA VOLTA"
