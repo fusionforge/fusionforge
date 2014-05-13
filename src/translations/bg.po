@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-13 09:29+0200\n"
+"POT-Creation-Date: 2014-05-13 09:41+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -4274,7 +4274,7 @@ msgstr "Администриране"
 #: common/include/rbac_texts.php:193
 #, fuzzy
 msgid "Default for new trackers"
-msgstr "Създаване на пакет"
+msgstr ""
 
 #: common/include/rbac_texts.php:194
 msgid "Default for new task managers"
@@ -4292,7 +4292,7 @@ msgstr "Преглед на документите"
 #: common/include/Role.class.php:82
 #, fuzzy
 msgid "Cannot set a role name to empty"
-msgstr "Създаване на пакет"
+msgstr ""
 
 #: common/include/Role.class.php:91 common/include/Role.class.php:99
 #: common/include/Role.class.php:181 common/include/Role.class.php:189
@@ -5152,9 +5152,9 @@ msgid "Manage your roadmaps."
 msgstr "Последно издадени пакети"
 
 #: common/tracker/actions/admin-ind.php:130
-#, fuzzy
-msgid "Create a new tracker"
-msgstr "Създаване на пакет"
+#: common/tracker/actions/admin-tracker.php:36
+msgid "Create a new tracker."
+msgstr ""
 
 #: common/tracker/actions/admin-ind.php:131
 msgid ""
@@ -5263,11 +5263,6 @@ msgstr "Наблюдавани Форуми"
 #: common/tracker/include/ArtifactTypeHtml.class.php:106
 msgid "New Tracker"
 msgstr ""
-
-#: common/tracker/actions/admin-tracker.php:36
-#, fuzzy
-msgid "Create a new tracker."
-msgstr "Създаване на пакет"
 
 #: common/tracker/actions/admin-tracker.php:40
 #: common/tracker/include/ArtifactTypeHtml.class.php:109
@@ -9875,7 +9870,7 @@ msgstr ""
 #: plugins/globaldashboard/www/admin/manage_accounts.php:108
 #, fuzzy
 msgid "Create a new remote account"
-msgstr "Създаване на пакет"
+msgstr ""
 
 #: plugins/globaldashboard/www/help.php:52
 msgid "Global Dashboard Help"
@@ -15178,7 +15173,7 @@ msgstr "Проекти на потребителя"
 #: www/admin/admin_table.php:40
 #, fuzzy, php-format
 msgid "Create a new %s below:"
-msgstr "Създаване на пакет"
+msgstr ""
 
 #: www/admin/admin_table.php:92 www/admin/admin_table.php:276
 #, fuzzy, php-format
@@ -17394,7 +17389,7 @@ msgstr "Издаване на нов пакет"
 #: www/frs/admin/index.php:139
 #, fuzzy
 msgid "Releases of Packages"
-msgstr "Създаване на пакет"
+msgstr ""
 
 #: www/frs/admin/index.php:140
 msgid "A release of a package can contain multiple files."
@@ -17426,9 +17421,8 @@ msgid "Add Release"
 msgstr ""
 
 #: www/frs/admin/index.php:197
-#, fuzzy
 msgid "Create New Package"
-msgstr "Създаване на пакет"
+msgstr "Създаване на нов пакет"
 
 #: www/frs/admin/index.php:201
 msgid "New Package Name"
@@ -23561,10 +23555,6 @@ msgstr ""
 
 #~ msgid "No Stats Available"
 #~ msgstr "Няма статистика"
-
-#, fuzzy
-#~ msgid "No group_id set."
-#~ msgstr "Създаване на нова папка"
 
 #, fuzzy
 #~ msgid "Error - Could Not Update User Email: "

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-13 09:38+0200\n"
+"POT-Creation-Date: 2014-05-13 10:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -5028,7 +5028,8 @@ msgid "Manage your roadmaps."
 msgstr ""
 
 #: common/tracker/actions/admin-ind.php:130
-msgid "Create a new tracker"
+#: common/tracker/actions/admin-tracker.php:36
+msgid "Create a new tracker."
 msgstr ""
 
 #: common/tracker/actions/admin-ind.php:131
@@ -5136,10 +5137,6 @@ msgstr ""
 #: common/tracker/actions/admin-tracker.php:34
 #: common/tracker/include/ArtifactTypeHtml.class.php:106
 msgid "New Tracker"
-msgstr ""
-
-#: common/tracker/actions/admin-tracker.php:36
-msgid "Create a new tracker."
 msgstr ""
 
 #: common/tracker/actions/admin-tracker.php:40

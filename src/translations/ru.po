@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-13 09:29+0200\n"
+"POT-Creation-Date: 2014-05-13 09:41+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -5476,9 +5476,9 @@ msgid "Manage your roadmaps."
 msgstr "Новый файловый релиз"
 
 #: common/tracker/actions/admin-ind.php:130
-#, fuzzy
-msgid "Create a new tracker"
-msgstr "Создать пакет"
+#: common/tracker/actions/admin-tracker.php:36
+msgid "Create a new tracker."
+msgstr "Создать новый трекер."
 
 #: common/tracker/actions/admin-ind.php:131
 msgid ""
@@ -5600,11 +5600,6 @@ msgstr "Администрирование"
 #: common/tracker/include/ArtifactTypeHtml.class.php:106
 msgid "New Tracker"
 msgstr "Новый трекер"
-
-#: common/tracker/actions/admin-tracker.php:36
-#, fuzzy
-msgid "Create a new tracker."
-msgstr "Создать пакет"
 
 #: common/tracker/actions/admin-tracker.php:40
 #: common/tracker/include/ArtifactTypeHtml.class.php:109
@@ -24857,7 +24852,7 @@ msgstr "Имя участника обязательно"
 
 #, fuzzy
 #~ msgid ""
-#~ "<h3>Create a new tracker</h3><p>You can use this system to track "
+#~ "<p>You can use this system to track "
 #~ "virtually any kind of data, with each tracker having separate user, "
 #~ "group, category, and permission lists. You can also easily move items "
 #~ "between trackers when needed.</p><p>Trackers are referred to as "
@@ -24867,7 +24862,7 @@ msgstr "Имя участника обязательно"
 #~ "to set up categories, groups, and permission for each type, which can get "
 #~ "time-consuming.</p>"
 #~ msgstr ""
-#~ "<h3>Создать новый трекер</h3><p>Вы можете использовать эту систему для "
+#~ "<p>Вы можете использовать эту систему для "
 #~ "отслеживания практически любого рода данных, причем каждый трекер, "
 #~ "имеющий отдельного пользователя, группы, категории, и списки доступов. А "
 #~ "также Вы можете легко перемещать части между трекерами по необходимости.</"

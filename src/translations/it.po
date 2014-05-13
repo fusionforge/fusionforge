@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-13 09:29+0200\n"
+"POT-Creation-Date: 2014-05-13 09:57+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -5480,9 +5480,9 @@ msgid "Manage your roadmaps."
 msgstr "Nuovi file rilasciati"
 
 #: common/tracker/actions/admin-ind.php:130
-#, fuzzy
-msgid "Create a new tracker"
-msgstr "Crea un pacchetto"
+#: common/tracker/actions/admin-tracker.php:36
+msgid "Create a new tracker."
+msgstr ""
 
 #: common/tracker/actions/admin-ind.php:131
 msgid ""
@@ -5593,11 +5593,6 @@ msgstr "Amministrazione"
 #: common/tracker/include/ArtifactTypeHtml.class.php:106
 msgid "New Tracker"
 msgstr "Aggiungi tipi elementi"
-
-#: common/tracker/actions/admin-tracker.php:36
-#, fuzzy
-msgid "Create a new tracker."
-msgstr "Crea un pacchetto"
 
 #: common/tracker/actions/admin-tracker.php:40
 #: common/tracker/include/ArtifactTypeHtml.class.php:109

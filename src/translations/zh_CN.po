@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-13 09:29+0200\n"
+"POT-Creation-Date: 2014-05-13 09:41+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -5431,8 +5431,9 @@ msgid "Manage your roadmaps."
 msgstr "新发布"
 
 #: common/tracker/actions/admin-ind.php:130
+#: common/tracker/actions/admin-tracker.php:36
 #, fuzzy
-msgid "Create a new tracker"
+msgid "Create a new tracker."
 msgstr "创建一个软件包"
 
 #: common/tracker/actions/admin-ind.php:131
@@ -5542,11 +5543,6 @@ msgstr "管理部门"
 #: common/tracker/include/ArtifactTypeHtml.class.php:106
 msgid "New Tracker"
 msgstr "添加定制类型"
-
-#: common/tracker/actions/admin-tracker.php:36
-#, fuzzy
-msgid "Create a new tracker."
-msgstr "创建一个软件包"
 
 #: common/tracker/actions/admin-tracker.php:40
 #: common/tracker/include/ArtifactTypeHtml.class.php:109

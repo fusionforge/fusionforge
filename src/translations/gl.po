@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-13 09:29+0200\n"
+"POT-Creation-Date: 2014-05-13 09:41+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -4781,7 +4781,7 @@ msgid ""
 msgstr ""
 "Grazas por rexistrarse na páxina de %3$s. Creouse unha conta\n"
 "co nome de usuario %1$s para vostede. Para\n"
-"completar o seu rexistro,visite o seguinte URL: \n"
+"completar o seu rexistro, visite o seguinte URL: \n"
 "\n"
 "<%2$s>\n"
 "\n"
@@ -5220,11 +5220,11 @@ msgstr "Solicitude de funcionalidade "
 
 #: common/reporting/report_utils.php:175 common/reporting/report_utils.php:954
 msgid "Other Trackers"
-msgstr "Outros rexistros "
+msgstr "Outros rexistros"
 
 #: common/reporting/report_utils.php:183 common/reporting/report_utils.php:955
 msgid "Forum Messages"
-msgstr "Mensaxes en foros "
+msgstr "Mensaxes en foros"
 
 #: common/reporting/report_utils.php:228 www/snippet/snippet_utils.php:38
 #: www/snippet/snippet_utils.php:64
@@ -5465,9 +5465,9 @@ msgid "Manage your roadmaps."
 msgstr "Xestionar etiquetas"
 
 #: common/tracker/actions/admin-ind.php:130
-#, fuzzy
-msgid "Create a new tracker"
-msgstr "Crear un paquete "
+#: common/tracker/actions/admin-tracker.php:36
+msgid "Create a new tracker."
+msgstr "Crear un novo rexistro."
 
 #: common/tracker/actions/admin-ind.php:131
 msgid ""
@@ -5583,11 +5583,6 @@ msgstr "Administración"
 #: common/tracker/include/ArtifactTypeHtml.class.php:106
 msgid "New Tracker"
 msgstr "Novo rexistro"
-
-#: common/tracker/actions/admin-tracker.php:36
-#, fuzzy
-msgid "Create a new tracker."
-msgstr "Crear un paquete "
 
 #: common/tracker/actions/admin-tracker.php:40
 #: common/tracker/include/ArtifactTypeHtml.class.php:109
@@ -5965,11 +5960,11 @@ msgid "Quick Browse"
 msgstr "Navegación rápida"
 
 #: common/tracker/actions/browse.php:459
-#, fuzzy, php-format
+#, php-format
 msgid "Viewing only opened records by default, use “%1$s” or “%2$s” to change."
 msgstr ""
-"De xeito predefinido, so se mostran rexistros abertos. Empregue 'Consultas "
-"avanzadas' ou 'Filtrado e ordenamento simples' para cambiar."
+"De xeito predefinido, so se mostran rexistros abertos. Empregue “"
+"%1$s” ou “%2$s” para cambiar."
 
 #: common/tracker/actions/browse.php:560 www/pm/browse_task.php:228
 msgid "Check all"
@@ -24748,7 +24743,7 @@ msgstr "Non se introduciu un nome de usuario"
 
 #, fuzzy
 #~ msgid ""
-#~ "<h3>Create a new tracker</h3><p>You can use this system to track "
+#~ "You can use this system to track "
 #~ "virtually any kind of data, with each tracker having separate user, "
 #~ "group, category, and permission lists. You can also easily move items "
 #~ "between trackers when needed.</p><p>Trackers are referred to as "
@@ -24758,7 +24753,7 @@ msgstr "Non se introduciu un nome de usuario"
 #~ "to set up categories, groups, and permission for each type, which can get "
 #~ "time-consuming.</p>"
 #~ msgstr ""
-#~ "<h3>Crear un novo rexistro</h3><p>Pode usar este sistema para rexistrar, "
+#~ "<p>Pode usar este sistema para rexistrar, "
 #~ "virtualmente, calquera tipo de datos, tendo cada rexistro listas "
 #~ "separadas de usuarios, grupos, categorías e permisos. Tamén pode mover "
 #~ "elementos entre rexistros facilmente cando o precise.</p><p>Aos rexistros "

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-13 09:29+0200\n"
+"POT-Creation-Date: 2014-05-13 09:41+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -5432,8 +5432,9 @@ msgid "Manage your roadmaps."
 msgstr "Kennzeichen verwalten"
 
 #: common/tracker/actions/admin-ind.php:130
-msgid "Create a new tracker"
-msgstr "Einen neuen Tracker anlegen"
+#: common/tracker/actions/admin-tracker.php:36
+msgid "Create a new tracker."
+msgstr "Einen neuen Tracker anlegen."
 
 #: common/tracker/actions/admin-ind.php:131
 msgid ""
@@ -5549,10 +5550,6 @@ msgstr "Administration"
 #: common/tracker/include/ArtifactTypeHtml.class.php:106
 msgid "New Tracker"
 msgstr "Neuer Tracker"
-
-#: common/tracker/actions/admin-tracker.php:36
-msgid "Create a new tracker."
-msgstr "Einen neuen Tracker anlegen."
 
 #: common/tracker/actions/admin-tracker.php:40
 #: common/tracker/include/ArtifactTypeHtml.class.php:109
