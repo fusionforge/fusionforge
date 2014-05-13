@@ -457,18 +457,18 @@ msgid "Docman: monitoring action unknown."
 msgstr "Action de surveillance inconnue."
 
 #: common/docman/actions/monitorfile.php:67
-#, fuzzy, php-format
+#, php-format
 msgid "Monitoring %s document started."
 msgid_plural "Monitoring %s documents started."
-msgstr[0] "Suivi démarré."
-msgstr[1] "Suivi démarré."
+msgstr[0] "Surveillance démarrée pour %s document."
+msgstr[1] "Surveillance démarrée pour %s documents."
 
 #: common/docman/actions/monitorfile.php:84
-#, fuzzy, php-format
+#, php-format
 msgid "Monitoring %s document stopped."
 msgid_plural "Monitoring %s documents stopped."
-msgstr[0] "La surveillance a été arrêtée"
-msgstr[1] "La surveillance a été arrêtée"
+msgstr[0] "Surveillance arrêtée pour %s document."
+msgstr[1] "Surveillance arrêtée pour %s documents."
 
 #: common/docman/actions/monitorfile.php:88
 #: common/docman/Document.class.php:912
@@ -477,16 +477,15 @@ msgid "Docman"
 msgstr ""
 
 #: common/docman/actions/monitorfile.php:88
-#, fuzzy
 msgid "monitoring action unknown."
-msgstr "Action de surveillance inconnue."
+msgstr "action de surveillance inconnue."
 
 #: common/docman/actions/movefile.php:63
-#, fuzzy, php-format
+#, php-format
 msgid "%s document moved."
 msgid_plural "%s documents moved."
-msgstr[0] "Aucun document."
-msgstr[1] "Aucun document."
+msgstr[0] "%s document déplacé."
+msgstr[1] "%s document déplacés."
 
 #: common/docman/actions/releasefile.php:46
 msgid "released successfully."
@@ -1041,13 +1040,13 @@ msgid "Enter a valid URL"
 msgstr "Entrez une URL valide"
 
 #: common/docman/views/addfile.php:145
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Pick a file already uploaded (by SFTP or SCP) to the <a href=\"%1$s"
 "\">project's incoming directory</a> (%2$s)."
 msgstr ""
 "Choisissez un fichier que vous avez préalablement copié (en SFTP ou SCP) "
-"dans <a href=\"%2$s\">le répertoire d'entrée du projet</a> (%1$s)."
+"dans <a href=\"%1$s\">le répertoire d'entrée du projet</a> (%2$s)."
 
 #: common/docman/views/addfile.php:148
 #, php-format
@@ -1969,9 +1968,8 @@ msgid "Docman module administration."
 msgstr "Administration du gestionnaire de documents."
 
 #: common/docman/views/movefile.php:49
-#, fuzzy
 msgid "Move files to"
-msgstr "nouveaux fichiers [F]"
+msgstr "Déplacer les fichiers vers"
 
 #: common/docman/views/movefile.php:51
 #: plugins/oauthconsumer/www/callback.php:25
@@ -2799,7 +2797,7 @@ msgstr ""
 "%s"
 
 #: common/forum/ForumMessage.class.php:661
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "\n"
 "Or reply to this e-mail entering your response between the following "
@@ -2809,7 +2807,7 @@ msgid ""
 "%1$s"
 msgstr ""
 "\n"
-"Ou répondez par e-mail en saisissant votre réponse entre les marqueurs "
+"Ou répondez par courriel en saisissant votre réponse entre les marqueurs "
 "suivants :\n"
 "%1$s\n"
 "(tapez votre réponse ici)\n"
@@ -4342,24 +4340,21 @@ msgid "Documentation manager"
 msgstr "Gestionnaire de documentation"
 
 #: common/include/Role.class.php:82
-#, fuzzy
 msgid "Cannot set a role name to empty"
 msgstr "Impossible de créer un rôle avec un nom vide"
 
 #: common/include/Role.class.php:91 common/include/Role.class.php:99
 #: common/include/Role.class.php:181 common/include/Role.class.php:189
-#, fuzzy
 msgid "Cannot create a role with this name (already used)"
-msgstr "Impossible de créer un rôle avec un nom vide"
+msgstr "Impossible de créer un rôle avec ce nom (déjà utilisé)"
 
 #: common/include/Role.class.php:172
 msgid "Cannot create a role with an empty name"
 msgstr "Impossible de créer un rôle avec un nom vide"
 
 #: common/include/Role.class.php:305
-#, fuzzy
 msgid "Cannot remove a non empty role."
-msgstr "Impossible de supprimer le label : %s"
+msgstr "Impossible de supprimer un rôle non vide."
 
 #: common/include/SCMPlugin.class.php:145
 msgid "Unimplemented SCM plugin."
@@ -5592,21 +5587,18 @@ msgstr "Responsable"
 
 #: common/tracker/actions/browse.php:206 common/tracker/actions/browse.php:597
 #: common/tracker/views/form-customizelist.php:48
-#, fuzzy
 msgid "# Votes"
-msgstr "Votes"
+msgstr "Nb de voix"
 
 #: common/tracker/actions/browse.php:207 common/tracker/actions/browse.php:599
 #: common/tracker/views/form-customizelist.php:49
-#, fuzzy
 msgid "# Voters"
-msgstr "Votes"
+msgstr "Nb de votants"
 
 #: common/tracker/actions/browse.php:208
 #: common/tracker/views/form-customizelist.php:50
-#, fuzzy
 msgid "% Votes"
-msgstr "Votes"
+msgstr "%s voix"
 
 #: common/tracker/actions/browse.php:227 common/tracker/actions/query.php:216
 #: www/pm/browse_task.php:151
@@ -5873,9 +5865,8 @@ msgstr ""
 
 #: common/tracker/actions/detail.php:77
 #: common/tracker/actions/mod-limited.php:84 common/tracker/actions/mod.php:89
-#, fuzzy
 msgid "Cast Vote"
-msgstr "Dernière date"
+msgstr "Voter"
 
 #: common/tracker/actions/detail.php:85
 #: common/tracker/actions/mod-limited.php:100
@@ -10573,9 +10564,8 @@ msgid "View Personal HelloWorld"
 msgstr "Voir le HelloWorld personnel"
 
 #: plugins/helloworld/include/helloworldPlugin.class.php:116
-#, fuzzy
 msgid "HelloWorld Admin"
-msgstr "La boîte à outils de l'administrateur"
+msgstr "Administration du HelloWorld"
 
 #: plugins/helloworld/include/HelloWorldPluginDescriptor.class.php:29
 msgid "HelloWorld"
@@ -10885,11 +10875,11 @@ msgstr "Flux RSS de toutes les constructions de la tâche %s"
 
 #: plugins/hudson/include/hudsonViews.class.php:346
 msgid "SVN commit will trigger a build"
-msgstr "Une validation SVN déclenchera une construction."
+msgstr "Une validation SVN déclenchera une construction"
 
 #: plugins/hudson/include/hudsonViews.class.php:353
 msgid "CVS commit will trigger a build"
-msgstr "Une validation CVS déclenchera une construction."
+msgstr "Une validation CVS déclenchera une construction"
 
 #: plugins/hudson/include/hudsonViews.class.php:371
 msgid "Edit this job"
