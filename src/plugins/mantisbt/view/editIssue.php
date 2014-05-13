@@ -211,7 +211,7 @@ if (!isset($errorPage)){
 	echo	'<br/>';
 	echo	'<table>';
 	echo		'<tr>';
-	echo			'<td width="20%">'._('Summary').'&nbsp;<span style="font-weight:normal">'._('(max128 char )').'</span></td>';
+	echo			'<td width="20%">'._('Summary').'&nbsp;<span style="font-weight:normal">'._('(128 char max)').'</span></td>';
 	echo			'<td><input type="text" value="'.htmlspecialchars($defect->summary,ENT_QUOTES).'" name="resume" MAXLENGTH="128" style="width:99%"></td>';
 	echo		'</tr>';
 	echo		'<tr>';

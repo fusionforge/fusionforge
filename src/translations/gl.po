@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-13 10:24+0200\n"
+"POT-Creation-Date: 2014-05-13 10:32+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -12164,6 +12164,7 @@ msgid "No version defined"
 msgstr "Non se definiron categorías"
 
 #: plugins/mantisbt/view/addIssue.php:134
+#: plugins/mantisbt/view/editIssue.php:214
 msgid "(128 char max)"
 msgstr ""
 
@@ -12339,10 +12340,6 @@ msgstr ""
 #, fuzzy
 msgid "Target"
 msgstr "Grande"
-
-#: plugins/mantisbt/view/editIssue.php:214
-msgid "(max128 char )"
-msgstr ""
 
 #: plugins/mantisbt/view/init.php:72
 msgid "If this project does NOT exist in MantisBT, do you want to create it ?"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-13 10:24+0200\n"
+"POT-Creation-Date: 2014-05-13 10:32+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -11785,6 +11785,7 @@ msgid "No version defined"
 msgstr "No hay versiones definidas"
 
 #: plugins/mantisbt/view/addIssue.php:134
+#: plugins/mantisbt/view/editIssue.php:214
 msgid "(128 char max)"
 msgstr "(128 car max)"
 
@@ -11942,10 +11943,6 @@ msgstr "Solucionado en "
 #: plugins/mantisbt/view/viewIssue.php:64
 msgid "Target"
 msgstr "Objetivo"
-
-#: plugins/mantisbt/view/editIssue.php:214
-msgid "(max128 char )"
-msgstr "(max128 car )"
 
 #: plugins/mantisbt/view/init.php:72
 msgid "If this project does NOT exist in MantisBT, do you want to create it ?"

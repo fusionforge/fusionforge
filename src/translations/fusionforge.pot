@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-13 10:24+0200\n"
+"POT-Creation-Date: 2014-05-13 10:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -11128,6 +11128,7 @@ msgid "No version defined"
 msgstr ""
 
 #: plugins/mantisbt/view/addIssue.php:134
+#: plugins/mantisbt/view/editIssue.php:214
 msgid "(128 char max)"
 msgstr ""
 
@@ -11281,10 +11282,6 @@ msgstr ""
 #: plugins/mantisbt/view/editIssue.php:179
 #: plugins/mantisbt/view/viewIssue.php:64
 msgid "Target"
-msgstr ""
-
-#: plugins/mantisbt/view/editIssue.php:214
-msgid "(max128 char )"
 msgstr ""
 
 #: plugins/mantisbt/view/init.php:72
