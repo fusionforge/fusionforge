@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-13 10:14+0200\n"
+"POT-Creation-Date: 2014-05-13 10:24+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -19088,7 +19088,7 @@ msgstr ""
 msgid "Add browsing capability for user personal repository (TrivialDev)"
 msgstr ""
 
-#: www/index_std.php:89
+#: www/index_std.php:89 www/index_std.php:121
 msgid "Basic activity support (TrivialDev)"
 msgstr ""
 
@@ -19178,10 +19178,6 @@ msgstr ""
 msgid ""
 "Private projects can now be browsed with viewvc, using user rights "
 "management (TrivialDev)."
-msgstr ""
-
-#: www/index_std.php:121
-msgid "Basic activity support (TrivialDev)."
 msgstr ""
 
 #: www/index_std.php:124

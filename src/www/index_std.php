@@ -118,7 +118,7 @@ require_once $gfcommon.'include/FusionForge.class.php';
 <li><?php print _('scmsvn:'); ?>
   <ul>
   <li><?php print _('Private projects can now be browsed with viewvc, using user rights management (TrivialDev).') ?></li>
-  <li><?php print _('Basic activity support (TrivialDev).') ?></li>
+  <li><?php print _('Basic activity support (TrivialDev)') ?></li>
   </ul>
 </li>
 <li><?php print _('Trackers: New view to display roadmaps view for trackers (Alcatel-Lucent)') ?></li>
