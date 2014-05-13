@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-13 09:41+0200\n"
+"POT-Creation-Date: 2014-05-13 10:14+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -9477,9 +9477,10 @@ msgid "Use the Contribution Tracker plugin"
 msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:94
+#: plugins/contribtracker/www/global_admin.php:231
 #, fuzzy
-msgid "Contribution Tracker admin"
-msgstr "Админ трекера"
+msgid "Contribution tracker administration"
+msgstr "Управление подсистемой работы с документами"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:106
 #, fuzzy
@@ -9623,11 +9624,6 @@ msgstr "Невозможно добавить запись в базу данн�
 #, fuzzy
 msgid "Invalid actor"
 msgstr "Неверно указан год"
-
-#: plugins/contribtracker/www/global_admin.php:231
-#, fuzzy
-msgid "Contribution tracker administration"
-msgstr "Управление подсистемой работы с документами"
 
 #: plugins/contribtracker/www/global_admin.php:235
 #, fuzzy
@@ -24852,25 +24848,24 @@ msgstr "Имя участника обязательно"
 
 #, fuzzy
 #~ msgid ""
-#~ "<p>You can use this system to track "
-#~ "virtually any kind of data, with each tracker having separate user, "
-#~ "group, category, and permission lists. You can also easily move items "
-#~ "between trackers when needed.</p><p>Trackers are referred to as "
-#~ "\"Artifact Types\" and individual pieces of data are \"Artifacts\". \"Bugs"
-#~ "\" might be an Artifact Type, whiles a bug report would be an Artifact. "
-#~ "You can create as many Artifact Types as you want, but remember you need "
-#~ "to set up categories, groups, and permission for each type, which can get "
-#~ "time-consuming.</p>"
+#~ "<p>You can use this system to track virtually any kind of data, with each "
+#~ "tracker having separate user, group, category, and permission lists. You "
+#~ "can also easily move items between trackers when needed.</p><p>Trackers "
+#~ "are referred to as \"Artifact Types\" and individual pieces of data are "
+#~ "\"Artifacts\". \"Bugs\" might be an Artifact Type, whiles a bug report "
+#~ "would be an Artifact. You can create as many Artifact Types as you want, "
+#~ "but remember you need to set up categories, groups, and permission for "
+#~ "each type, which can get time-consuming.</p>"
 #~ msgstr ""
-#~ "<p>Вы можете использовать эту систему для "
-#~ "отслеживания практически любого рода данных, причем каждый трекер, "
-#~ "имеющий отдельного пользователя, группы, категории, и списки доступов. А "
-#~ "также Вы можете легко перемещать части между трекерами по необходимости.</"
-#~ "p><p>Трекеры связаны меж собой по \"Типам образцов\" и по индивидуальным "
-#~ "частям данных \"Образцов\". \"Баги\" так-же могут быть как признак типа "
-#~ "образца, баг-рипорты в качестве образцов должны приниматся с учетом "
-#~ "создания отдельных категориийм, групп, и уровней доступов, для каждого "
-#~ "типа, которые могут затрачивать значительно больше времени."
+#~ "<p>Вы можете использовать эту систему для отслеживания практически любого "
+#~ "рода данных, причем каждый трекер, имеющий отдельного пользователя, "
+#~ "группы, категории, и списки доступов. А также Вы можете легко перемещать "
+#~ "части между трекерами по необходимости.</p><p>Трекеры связаны меж собой "
+#~ "по \"Типам образцов\" и по индивидуальным частям данных \"Образцов\". "
+#~ "\"Баги\" так-же могут быть как признак типа образца, баг-рипорты в "
+#~ "качестве образцов должны приниматся с учетом создания отдельных "
+#~ "категориийм, групп, и уровней доступов, для каждого типа, которые могут "
+#~ "затрачивать значительно больше времени."
 
 #~ msgid ""
 #~ "Your project registration for %3$s has been denied.\n"

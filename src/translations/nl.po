@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-13 09:41+0200\n"
+"POT-Creation-Date: 2014-05-13 10:14+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -9382,9 +9382,10 @@ msgid "Use the Contribution Tracker plugin"
 msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:94
+#: plugins/contribtracker/www/global_admin.php:231
 #, fuzzy
-msgid "Contribution Tracker admin"
-msgstr "Tracker beheer"
+msgid "Contribution tracker administration"
+msgstr "Documentmanager beheer"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:106
 #, fuzzy
@@ -9528,11 +9529,6 @@ msgstr "Kan geen database element toevoegen"
 #, fuzzy
 msgid "Invalid actor"
 msgstr "Ongeldige gebruiker"
-
-#: plugins/contribtracker/www/global_admin.php:231
-#, fuzzy
-msgid "Contribution tracker administration"
-msgstr "Documentmanager beheer"
 
 #: plugins/contribtracker/www/global_admin.php:235
 #, fuzzy

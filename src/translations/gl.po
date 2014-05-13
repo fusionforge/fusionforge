@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-13 09:41+0200\n"
+"POT-Creation-Date: 2014-05-13 10:14+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -5963,8 +5963,8 @@ msgstr "Navegación rápida"
 #, php-format
 msgid "Viewing only opened records by default, use “%1$s” or “%2$s” to change."
 msgstr ""
-"De xeito predefinido, so se mostran rexistros abertos. Empregue “"
-"%1$s” ou “%2$s” para cambiar."
+"De xeito predefinido, so se mostran rexistros abertos. Empregue “%1$s” ou "
+"“%2$s” para cambiar."
 
 #: common/tracker/actions/browse.php:560 www/pm/browse_task.php:228
 msgid "Check all"
@@ -9445,9 +9445,10 @@ msgid "Use the Contribution Tracker plugin"
 msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:94
+#: plugins/contribtracker/www/global_admin.php:231
 #, fuzzy
-msgid "Contribution Tracker admin"
-msgstr "Administración do rexistro "
+msgid "Contribution tracker administration"
+msgstr "Administración da xestión de documentos"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:106
 #, fuzzy
@@ -9589,11 +9590,6 @@ msgstr "Non se pode eliminar a entrada de separador: %s"
 #, fuzzy
 msgid "Invalid actor"
 msgstr "O ano non é válido"
-
-#: plugins/contribtracker/www/global_admin.php:231
-#, fuzzy
-msgid "Contribution tracker administration"
-msgstr "Administración da xestión de documentos"
 
 #: plugins/contribtracker/www/global_admin.php:235
 #, fuzzy
@@ -24743,25 +24739,24 @@ msgstr "Non se introduciu un nome de usuario"
 
 #, fuzzy
 #~ msgid ""
-#~ "You can use this system to track "
-#~ "virtually any kind of data, with each tracker having separate user, "
-#~ "group, category, and permission lists. You can also easily move items "
-#~ "between trackers when needed.</p><p>Trackers are referred to as "
-#~ "\"Artifact Types\" and individual pieces of data are \"Artifacts\". \"Bugs"
-#~ "\" might be an Artifact Type, whiles a bug report would be an Artifact. "
-#~ "You can create as many Artifact Types as you want, but remember you need "
-#~ "to set up categories, groups, and permission for each type, which can get "
-#~ "time-consuming.</p>"
+#~ "You can use this system to track virtually any kind of data, with each "
+#~ "tracker having separate user, group, category, and permission lists. You "
+#~ "can also easily move items between trackers when needed.</p><p>Trackers "
+#~ "are referred to as \"Artifact Types\" and individual pieces of data are "
+#~ "\"Artifacts\". \"Bugs\" might be an Artifact Type, whiles a bug report "
+#~ "would be an Artifact. You can create as many Artifact Types as you want, "
+#~ "but remember you need to set up categories, groups, and permission for "
+#~ "each type, which can get time-consuming.</p>"
 #~ msgstr ""
-#~ "<p>Pode usar este sistema para rexistrar, "
-#~ "virtualmente, calquera tipo de datos, tendo cada rexistro listas "
-#~ "separadas de usuarios, grupos, categorías e permisos. Tamén pode mover "
-#~ "elementos entre rexistros facilmente cando o precise.</p><p>Aos rexistros "
-#~ "chámaselles \"tipos de artefactos\" e ás pezas individuais dos datos "
-#~ "\"artefactos\". \"Erros\" pode ser un tipo de artefacto, mentres que un "
-#~ "informe de erro sería un artefacto. Pode crear tantos tipos de artefactos "
-#~ "como queira, pero recorde que terá que configurar as categorías, grupos e "
-#~ "permisos para cada tipo, o que pode levar moito tempo."
+#~ "<p>Pode usar este sistema para rexistrar, virtualmente, calquera tipo de "
+#~ "datos, tendo cada rexistro listas separadas de usuarios, grupos, "
+#~ "categorías e permisos. Tamén pode mover elementos entre rexistros "
+#~ "facilmente cando o precise.</p><p>Aos rexistros chámaselles \"tipos de "
+#~ "artefactos\" e ás pezas individuais dos datos \"artefactos\". \"Erros\" "
+#~ "pode ser un tipo de artefacto, mentres que un informe de erro sería un "
+#~ "artefacto. Pode crear tantos tipos de artefactos como queira, pero "
+#~ "recorde que terá que configurar as categorías, grupos e permisos para "
+#~ "cada tipo, o que pode levar moito tempo."
 
 #~ msgid ""
 #~ "Your project registration for %3$s has been denied.\n"

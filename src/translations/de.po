@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-13 09:41+0200\n"
+"POT-Creation-Date: 2014-05-13 10:14+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -9402,8 +9402,9 @@ msgid "Use the Contribution Tracker plugin"
 msgstr "Nutzen Sie das Contribution Tracker Plugin"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:94
-msgid "Contribution Tracker admin"
-msgstr "Contribution Tracker Administrator"
+#: plugins/contribtracker/www/global_admin.php:231
+msgid "Contribution tracker administration"
+msgstr "Contribution Tracker Administration"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:106
 msgid "Latest Major Contributions"
@@ -9537,10 +9538,6 @@ msgstr "Ein nicht existierendes Objekt kann nicht aktualisiert werden."
 #: plugins/contribtracker/www/index.php:126
 msgid "Invalid actor"
 msgstr "Ungültiger Teilnehmer"
-
-#: plugins/contribtracker/www/global_admin.php:231
-msgid "Contribution tracker administration"
-msgstr "Contribution Tracker Administration"
 
 #: plugins/contribtracker/www/global_admin.php:235
 msgid "Existing actors"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-13 09:41+0200\n"
+"POT-Creation-Date: 2014-05-13 10:14+0200\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -9258,9 +9258,10 @@ msgid "Use the Contribution Tracker plugin"
 msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:94
+#: plugins/contribtracker/www/global_admin.php:231
 #, fuzzy
-msgid "Contribution Tracker admin"
-msgstr "Ordningslista admin"
+msgid "Contribution tracker administration"
+msgstr "Administration av dokumentansvarig"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:106
 #, fuzzy
@@ -9399,11 +9400,6 @@ msgstr ""
 #, fuzzy
 msgid "Invalid actor"
 msgstr "Ogiltig användare"
-
-#: plugins/contribtracker/www/global_admin.php:231
-#, fuzzy
-msgid "Contribution tracker administration"
-msgstr "Administration av dokumentansvarig"
 
 #: plugins/contribtracker/www/global_admin.php:235
 #, fuzzy

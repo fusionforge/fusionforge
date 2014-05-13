@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-13 09:41+0200\n"
+"POT-Creation-Date: 2014-05-13 10:14+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -9365,9 +9365,10 @@ msgid "Use the Contribution Tracker plugin"
 msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:94
+#: plugins/contribtracker/www/global_admin.php:231
 #, fuzzy
-msgid "Contribution Tracker admin"
-msgstr "追蹤管理"
+msgid "Contribution tracker administration"
+msgstr "文件管理員管理"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:106
 #, fuzzy
@@ -9511,11 +9512,6 @@ msgstr "無法增加資料庫分類"
 #, fuzzy
 msgid "Invalid actor"
 msgstr "不正確會員"
-
-#: plugins/contribtracker/www/global_admin.php:231
-#, fuzzy
-msgid "Contribution tracker administration"
-msgstr "文件管理員管理"
 
 #: plugins/contribtracker/www/global_admin.php:235
 #, fuzzy

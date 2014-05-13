@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-13 09:41+0200\n"
+"POT-Creation-Date: 2014-05-13 10:14+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -9111,7 +9111,8 @@ msgid "Use the Contribution Tracker plugin"
 msgstr "Utiliser le plugin de suivi de contributions"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:94
-msgid "Contribution Tracker admin"
+#: plugins/contribtracker/www/global_admin.php:231
+msgid "Contribution tracker administration"
 msgstr "Administration de l'outil de suivi des contributions"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:106
@@ -9246,10 +9247,6 @@ msgstr "Impossible de mettre à jour un objet qui n'existe pas."
 #: plugins/contribtracker/www/index.php:126
 msgid "Invalid actor"
 msgstr "Acteur invalide"
-
-#: plugins/contribtracker/www/global_admin.php:231
-msgid "Contribution tracker administration"
-msgstr "Administration de l'outil de suivi des contributions"
 
 #: plugins/contribtracker/www/global_admin.php:235
 msgid "Existing actors"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-13 09:41+0200\n"
+"POT-Creation-Date: 2014-05-13 10:14+0200\n"
 "PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -9170,9 +9170,10 @@ msgid "Use the Contribution Tracker plugin"
 msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:94
+#: plugins/contribtracker/www/global_admin.php:231
 #, fuzzy
-msgid "Contribution Tracker admin"
-msgstr "Anonymous FTP スペース"
+msgid "Contribution tracker administration"
+msgstr "ドキュメントマネージャ管理"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:106
 msgid "Latest Major Contributions"
@@ -9308,11 +9309,6 @@ msgstr ""
 #, fuzzy
 msgid "Invalid actor"
 msgstr "無効なオペレーション"
-
-#: plugins/contribtracker/www/global_admin.php:231
-#, fuzzy
-msgid "Contribution tracker administration"
-msgstr "ドキュメントマネージャ管理"
 
 #: plugins/contribtracker/www/global_admin.php:235
 msgid "Existing actors"

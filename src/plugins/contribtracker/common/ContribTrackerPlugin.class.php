@@ -91,7 +91,7 @@ class ContribTrackerPlugin extends Plugin {
 			$group = group_get_object($group_id);
 			if ( $group->usesPlugin ( $this->name ) ) {
 				echo util_make_link ("/plugins/".$this->name."/project_admin.php?group_id=".$group->getID(),
-						     _('Contribution Tracker admin')) ;
+						     _('Contribution tracker administration')) ;
 				echo '</p>';
 			}
 		}
