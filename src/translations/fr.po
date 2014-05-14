@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-14 16:43+0200\n"
+"POT-Creation-Date: 2014-05-14 17:11+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -722,7 +722,7 @@ msgstr "Le nom est obligatoire"
 #: common/docman/DocumentGroup.class.php:110
 #: common/docman/DocumentGroup.class.php:490
 msgid "Invalid Documents Folder parent ID"
-msgstr "Identifiant du dossier parent invalide"
+msgstr "N° du dossier parent invalide"
 
 #: common/docman/DocumentGroup.class.php:131
 msgid "Folder name already exists"
@@ -738,7 +738,7 @@ msgstr "Ce type de fichier ne peut être injecté"
 
 #: common/docman/DocumentGroup.class.php:259
 msgid "Invalid Document Folder ID"
-msgstr "Numéro de dossier de documents invalide"
+msgstr "N° de dossier de documents invalide"
 
 #: common/docman/DocumentGroup.class.php:502
 msgid "Documents Folder name already exists"
@@ -4872,7 +4872,7 @@ msgstr "catégorie"
 
 #: common/pm/ProjectTask.class.php:235
 msgid "Invalid Task ID"
-msgstr "Identifiant de tâche invalide"
+msgstr "N° de tâche invalide"
 
 #: common/pm/ProjectTask.class.php:948
 msgid "status"
@@ -5468,7 +5468,7 @@ msgstr "Élément mis à jour"
 
 #: common/tracker/actions/admin-updates.php:296
 msgid "Clone ID"
-msgstr "Identifiant de l'outil à cloner"
+msgstr "N° de l'outil à cloner"
 
 #: common/tracker/actions/admin-updates.php:299
 msgid "Error cloning fields: "
@@ -5904,7 +5904,7 @@ msgstr "Envois"
 #: common/tracker/include/ArtifactHtml.class.php:215
 #: www/snippet/addversion.php:99 www/snippet/addversion.php:222
 msgid "Changes"
-msgstr "Changements"
+msgstr "Modifications"
 
 #: common/tracker/actions/detail.php:174
 #: common/tracker/actions/mod-limited.php:199 www/pm/mod_task.php:127
@@ -6339,7 +6339,7 @@ msgstr "Erreur lors de la mise en correspondance du statut"
 
 #: common/tracker/Artifact.class.php:308
 msgid "Invalid Artifact ID"
-msgstr "Numéro d'identifiant invalide"
+msgstr "N° d'identifiant invalide"
 
 #: common/tracker/Artifact.class.php:524
 msgid "Error deleting extra field data: "
@@ -6415,7 +6415,7 @@ msgstr "Champ supplémentaire supprimé"
 
 #: common/tracker/Artifact.class.php:1796
 msgid "User ID not passed"
-msgstr "Numéro d'utilisateur manquant"
+msgstr "N° d'utilisateur manquant"
 
 #: common/tracker/ArtifactExtraField.class.php:108
 #: common/tracker/ArtifactExtraField.class.php:404
@@ -6445,7 +6445,7 @@ msgstr ""
 
 #: common/tracker/ArtifactExtraField.class.php:239
 msgid "Invalid ArtifactExtraField ID"
-msgstr "Numéro d'ArtifactExtraField invalide"
+msgstr "N° d'ArtifactExtraField invalide"
 
 #: common/tracker/ArtifactExtraField.class.php:345
 #: common/tracker/views/form-addextrafield.php:125
@@ -6526,7 +6526,7 @@ msgstr "Élément invalide"
 
 #: common/tracker/ArtifactHistory.class.php:82
 msgid "Invalid ArtifactHistory ID"
-msgstr "Identifiant d'ArtifactHistory invalide"
+msgstr "N° d'ArtifactHistory invalide"
 
 #: common/tracker/ArtifactMessage.class.php:89
 msgid "Error: Logged In User Bug Could Not Get User Object"
@@ -6542,7 +6542,7 @@ msgstr "Non-connecté"
 
 #: common/tracker/ArtifactMessage.class.php:139
 msgid "Invalid ArtifactMessage ID"
-msgstr "Identifiant d'ArtifactMessage invalide"
+msgstr "N° d'ArtifactMessage invalide"
 
 #: common/tracker/ArtifactQuery.class.php:148
 #: common/tracker/ArtifactQuery.class.php:742
@@ -9174,7 +9174,7 @@ msgstr "Erreur lors de la création de l'objet en base de données : %s."
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:804
 #, php-format
 msgid "Could not get ID from object in database: %s."
-msgstr "Impossible d'obtenir l'identifiant d'un objet en base de données : %s."
+msgstr "Impossible d'obtenir le n° d'un objet en base de données : %s."
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:326
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:433
@@ -10101,7 +10101,7 @@ msgstr "ajouter nouveau"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:214
 msgid "Forge ID"
-msgstr "Identifiant de la forge"
+msgstr "N° de la forge"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:227
 msgid "edit"
@@ -10125,7 +10125,7 @@ msgstr "Erreur lors de l'analyse des données"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:251
 msgid "Unknown status ID"
-msgstr "Identifiant de statut inconnu"
+msgstr "N° de statut inconnu"
 
 #: plugins/globalsearch/common/GlobalsearchPlugin.class.php:38
 msgid "Admin Associated Forges"
@@ -10637,7 +10637,7 @@ msgstr ""
 #: plugins/hudson/include/hudson.class.php:91
 #: plugins/hudson/include/hudson.class.php:104
 msgid "Missing Hudson job ID"
-msgstr "Il manque le numéro de tâche Hudson"
+msgstr "Il manque le n° de tâche Hudson"
 
 #: plugins/hudson/include/hudson.class.php:135
 msgid "Hudson service is not enabled"
@@ -15513,7 +15513,7 @@ msgstr "Erreur : vous n'avez pas coché la case « réellement supprimer »."
 #: www/admin/globalroleedit.php:128
 #, php-format
 msgid "User %s removed successfully"
-msgstr "Utilisateur %s enlevé avec succès"
+msgstr "Utilisateur %s supprimé avec succès"
 
 #: www/admin/globalroleedit.php:132
 #, php-format
@@ -16960,16 +16960,16 @@ msgstr "Pas d'utilisateurs surveillant ce forum"
 #: www/forum/admin/pendingmsgdetail.php:42 www/forum/monitor.php:84
 #: www/forum/new.php:72 www/forum/save.php:59
 msgid "Forum ID"
-msgstr "Identifiant de forum"
+msgstr "N° de forum"
 
 #: www/forum/admin/pendingmsgdetail.php:42 www/forum/monitor.php:84
 #: www/forum/new.php:72 www/forum/save.php:59 www/frs/monitor.php:71
 msgid "Project ID"
-msgstr "Identifiant de projet"
+msgstr "N° de projet"
 
 #: www/forum/admin/pendingmsgdetail.php:42
 msgid "Message ID"
-msgstr "Identifiant de message"
+msgstr "N° de message"
 
 #: www/forum/admin/pendingmsgdetail.php:63 www/forum/attachment.php:152
 #: www/forum/forum.php:153 www/forum/message.php:103 www/forum/myforums.php:99
@@ -17470,7 +17470,7 @@ msgstr ""
 
 #: www/frs/admin/qrs.php:150
 msgid "Package ID"
-msgstr "Identifiant du paquet"
+msgstr "N° du paquet"
 
 #: www/frs/admin/qrs.php:157
 msgid "No File Types Available"
@@ -17587,7 +17587,7 @@ msgstr "Erreur lors de l'accès à un paquet."
 
 #: www/frs/monitor.php:71
 msgid "File Module ID"
-msgstr "Identifiant du module de fichier"
+msgstr "N° du module de fichier"
 
 #: www/frs/reporting/downloads.php:91
 msgid "File Release Reporting"
@@ -17661,9 +17661,8 @@ msgid "All the ranking"
 msgstr "Tout le classement"
 
 #: www/include/features_boxes.php:151
-#, fuzzy
 msgid "Public Hosted Projects"
-msgstr "Projets hébergés"
+msgstr "Projets publics hébergés"
 
 #: www/include/features_boxes.php:159
 msgid "Registered Users"
@@ -17749,7 +17748,7 @@ msgid ""
 "Assignee.  You can also have the results sorted in Ascending or Descending "
 "order."
 msgstr ""
-"Vous pouvez trier par identifiant, priorité, résumé, date d'ouverture, date "
+"Vous pouvez trier par n°, priorité, résumé, date d'ouverture, date "
 "de fermeture, auteur, responsable. Vous pouvez aussi trier les résultats par "
 "ordre croissant ou décroissant."
 
@@ -18872,7 +18871,7 @@ msgstr "Titre du favori"
 
 #: www/my/bookmark_edit.php:30
 msgid "Bookmark ID"
-msgstr "Identifiant du favori"
+msgstr "N° du favori"
 
 #: www/my/bookmark_edit.php:38
 msgid "Bookmark Updated"
@@ -19349,7 +19348,7 @@ msgstr ""
 
 #: www/people/editjob.php:129
 msgid "Job ID"
-msgstr "Identifiant de poste"
+msgstr "N° de poste"
 
 #: www/people/editjob.php:135
 #, php-format
@@ -19651,7 +19650,7 @@ msgstr "Encore ..."
 
 #: www/people/people_utils.php:96
 msgid "Must select a skill ID"
-msgstr "Vous devez choisir un numéro de compétence."
+msgstr "Vous devez choisir un n° de compétence."
 
 #: www/people/people_utils.php:105
 msgid "Error inserting into skill inventory: "
@@ -19706,7 +19705,7 @@ msgstr "Erreur: cette compétence est déjà dans votre référentiel."
 
 #: www/people/people_utils.php:282 www/people/people_utils.php:291
 msgid "Invalid ID"
-msgstr "Identifiant invalide"
+msgstr "N° invalide"
 
 #: www/people/people_utils.php:398
 msgid "No categories found."
@@ -19956,7 +19955,7 @@ msgstr "Afficher les tâches"
 #: www/pm/ganttpage.php:165 www/pm/include/ProjectTaskHTML.class.php:72
 #: www/pm/t_lookup.php:35
 msgid "Task Id"
-msgstr "Numéro de tâche"
+msgstr "N° de tâche"
 
 #: www/pm/browse_task.php:164
 msgid "Detailed"
@@ -20521,11 +20520,11 @@ msgstr ""
 
 #: www/pm/task.php:69
 msgid "Group ID"
-msgstr "Identifiant de projet"
+msgstr "N° de projet"
 
 #: www/pm/task.php:72
 msgid "Group Project ID"
-msgstr "Identifiant de sous-projet"
+msgstr "N° de projet"
 
 #: www/pm/task.php:104 www/pm/task.php:170 www/pm/task.php:305
 #: www/pm/task.php:327 www/pm/task.php:344 www/pm/task.php:376
@@ -20566,11 +20565,11 @@ msgstr "Tâche supprimée avec succès"
 
 #: www/pm/t_follow.php:36
 msgid "TID"
-msgstr "Identifiant de tâche"
+msgstr "N° de tâche"
 
 #: www/pm/t_follow.php:42 www/pm/t_lookup.php:41
 msgid "No Task with ID: "
-msgstr "Aucune tâche d'identifiant : "
+msgstr "Aucune tâche de n° : "
 
 #: www/pm/uploadcsv.php:34
 msgid "Warning!"
@@ -20899,7 +20898,7 @@ msgstr "Avec succès"
 
 #: www/project/admin/massfinish.php:54
 msgid "No IDs Were Passed"
-msgstr "Aucun identifiant passé"
+msgstr "Aucun n° passé"
 
 #: www/project/admin/massfinish.php:66
 msgid "Choose the role for each user and then press “Add All”."
@@ -22321,7 +22320,7 @@ msgstr "Aucun échantillon trouvé."
 #: www/snippet/browse.php:86 www/snippet/detail.php:66
 #: www/snippet/snippet_utils.php:143
 msgid "Snippet ID"
-msgstr "Numéro d'identification de l'échantillon"
+msgstr "N° de l'échantillon"
 
 #: www/snippet/browse.php:88
 msgid "Creator"
