@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-13 14:47+0200\n"
+"POT-Creation-Date: 2014-05-14 18:11+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -608,9 +608,8 @@ msgid "Document already published in this folder"
 msgstr "Documento ya publicado en este directorio"
 
 #: common/docman/Document.class.php:198 common/docman/Document.class.php:205
-#, fuzzy
 msgid "Error Adding Document"
-msgstr "Error añadiendo documento:"
+msgstr "Error añadiendo documento"
 
 #: common/docman/Document.class.php:198
 #, fuzzy
@@ -623,9 +622,8 @@ msgstr "Hubo un error obteniendo el documento"
 
 #: common/docman/Document.class.php:225 common/docman/Document.class.php:848
 #: common/docman/Document.class.php:1086
-#, fuzzy
 msgid "Error updating document group"
-msgstr "Error actualizando el grupo del documento:"
+msgstr "Error actualizando el grupo del documento"
 
 #: common/docman/Document.class.php:252
 msgid "Document: Invalid docid"
@@ -712,9 +710,8 @@ msgid "A new document has been uploaded and waiting to be approved by you"
 msgstr "Documento %s enviado con éxito y esperando aprobación."
 
 #: common/docman/Document.class.php:981
-#, fuzzy
 msgid "Error Deleting Document"
-msgstr "Hubo un error eliminando el documento:"
+msgstr "Hubo un error eliminando el documento"
 
 #: common/docman/Document.class.php:1041
 #: common/docman/DocumentGroup.class.php:954
@@ -751,14 +748,12 @@ msgid "Folder name already exists"
 msgstr "El nombre del directorio ya existe"
 
 #: common/docman/DocumentGroup.class.php:147
-#, fuzzy
 msgid "Error Adding Folder"
-msgstr "Error Agregando Directorio:"
+msgstr "Error Agregando Directorio"
 
 #: common/docman/DocumentGroup.class.php:241
-#, fuzzy
 msgid "Unsupported injected file"
-msgstr "Fichero no soportado por el trabajo:"
+msgstr "Fichero no soportado por el trabajo"
 
 #: common/docman/DocumentGroup.class.php:259
 msgid "Invalid Document Folder ID"
@@ -925,9 +920,8 @@ msgstr ""
 
 #: common/docman/include/webdav.php:249 common/docman/include/webdav.php:260
 #: common/docman/include/webdav.php:506 common/docman/include/webdav.php:551
-#, fuzzy
 msgid "webdav db error"
-msgstr "error base de datos webdav:"
+msgstr "error base de datos webdav"
 
 #: common/docman/include/webdav.php:323
 msgid "Injected by WebDAV"
@@ -1071,7 +1065,7 @@ msgid "Enter a valid URL"
 msgstr ""
 
 #: common/docman/views/addfile.php:145
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Pick a file already uploaded (by SFTP or SCP) to the <a href=\"%1$s"
 "\">project's incoming directory</a> (%2$s)."
@@ -5614,9 +5608,8 @@ msgid "Renderer Updated"
 msgstr "Actualización de "
 
 #: common/tracker/actions/admin-updates.php:553
-#, fuzzy
 msgid "Initial values not saved, no initial state given."
-msgstr "Error: Valores iniciales no grabados, no proporcionado estado inicial."
+msgstr "Valores iniciales no grabados, no proporcionado estado inicial."
 
 #: common/tracker/actions/admin-updates.php:557
 msgid "Initial values saved."
@@ -8385,7 +8378,7 @@ msgstr "1 minuto"
 #: common/widget/Widget_Rss.class.php:208
 #, php-format
 msgid "%d minutes ago"
-msgstr "Hace %d minuto(s)"
+msgstr "Hace %d minutos"
 
 #: common/widget/Widget_Rss.class.php:210
 msgid "About one hour"
@@ -10005,9 +9998,8 @@ msgid "Remote Account successfully deleted"
 msgstr "Cuenta Remota borrada correctamente"
 
 #: plugins/globaldashboard/www/admin/delete_account.php:45
-#, fuzzy
 msgid "Unable to delete remote account"
-msgstr "Imposible borrar cuenta remota: "
+msgstr "Imposible borrar cuenta remota"
 
 #: plugins/globaldashboard/www/admin/edit_account_page.php:55
 msgid "Remote Account Management"
@@ -12836,14 +12828,12 @@ msgid "Missing a temporary folder."
 msgstr "No localizada carpeta temporal."
 
 #: plugins/projectimport/common/UploadedFiles.class.php:407
-#, fuzzy
 msgid "Failed to write file to disk."
-msgstr "Fallo en la escritura del fichero al disco"
+msgstr "Fallo en la escritura del fichero al disco."
 
 #: plugins/projectimport/common/UploadedFiles.class.php:409
-#, fuzzy
 msgid "File upload stopped by extension."
-msgstr "Subida del fichero parada por la extension"
+msgstr "Subida del fichero parada por la extension."
 
 #: plugins/projectimport/common/UploadedFiles.class.php:411
 #, php-format
@@ -13877,7 +13867,7 @@ msgstr "Adds"
 
 #: plugins/scmcvs/www/acl.php:44
 msgid "Invalid CVS repository: "
-msgstr "Repositorio CVS invalido : "
+msgstr "Repositorio CVS invalido: "
 
 #: plugins/scmcvs/www/acl.php:47
 msgid "Invalid username: "
@@ -14216,13 +14206,12 @@ msgid "Anonymous Mercurial Access"
 msgstr "Acceso anónimo Mercurial"
 
 #: plugins/scmhg/common/HgPlugin.class.php:74
-#, fuzzy
 msgid ""
 "This project's Mercurial repository can be checked out through anonymous "
 "access with the following command:"
 msgstr ""
-"Este repositorio Git del proyecto puede ser descargado a través de un acceso "
-"anónimo con el siguiente comando."
+"Este repositorio Mercurial del proyecto puede ser descargado a través de un "
+"acceso anónimo con el siguiente comando:"
 
 #: plugins/scmhg/common/HgPlugin.class.php:78
 #: plugins/scmsvn/common/SVNPlugin.class.php:120
@@ -14242,7 +14231,7 @@ msgstr ""
 #: plugins/scmhg/common/HgPlugin.class.php:139
 #, fuzzy
 msgid "Developer Mercurial Access via HTTP"
-msgstr "Acceso Desarrolladores Mercurial via SSH"
+msgstr "Acceso Desarrolladores Mercurial via HTTP"
 
 #: plugins/scmhg/common/HgPlugin.class.php:113
 #: plugins/scmhg/common/HgPlugin.class.php:142
@@ -16964,9 +16953,8 @@ msgid "No document to display - invalid or inactive document number."
 msgstr "No hay documento para mostrar - numero documento invalido o inactivo."
 
 #: www/docman/view.php:293
-#, fuzzy
 msgid "PHP ZIP extension is missing."
-msgstr "La extension PHP no se encuentra."
+msgstr "La extension PHP ZIP no se encuentra."
 
 #: www/export/index.php:29
 msgid "Exports Available"
@@ -18061,7 +18049,7 @@ msgstr ""
 #: www/include/html.php:421
 msgid ""
 "You can monitor or un-monitor this item by clicking the “Monitor” button."
-msgstr "Puede des/monitorizar. este elemento pulsando en el boton “Monitor»."
+msgstr "Puede des/monitorizar. este elemento pulsando en el boton «Monitor»."
 
 #: www/include/html.php:423
 msgid ""
@@ -18165,15 +18153,15 @@ msgstr[1] "Hace %d segundos"
 #, php-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
-msgstr[0] "Hace %d minuto(s)"
-msgstr[1] "Hace %d minuto(s)"
+msgstr[0] "Hace %d minuto"
+msgstr[1] "Hace %d minutos"
 
 #: www/include/html.php:1060
-#, fuzzy, php-format
+#, php-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
-msgstr[0] "hace %d hora(s)"
-msgstr[1] "hace %d hora(s)"
+msgstr[0] "hace %d hora"
+msgstr[1] "hace %d horas"
 
 #: www/include/html.php:1064
 #, php-format
@@ -18183,11 +18171,11 @@ msgstr[0] "Hace %d día(s)"
 msgstr[1] "Hace %d día(s)"
 
 #: www/include/html.php:1068
-#, fuzzy, php-format
+#, php-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
-msgstr[0] "hace %d semana(s)"
-msgstr[1] "hace %d semana(s)"
+msgstr[0] "hace %d semana"
+msgstr[1] "hace %d semanas"
 
 #: www/include/html.php:1316
 #, php-format
@@ -19090,11 +19078,11 @@ msgid "To stop monitoring this user, visit the following link:"
 msgstr "Para dejar de monitorizarlo, visite:"
 
 #: www/my/diary.php:119
-#, fuzzy, php-format
+#, php-format
 msgid "email sent to %s monitoring user"
 msgid_plural "email sent to %s monitoring users"
 msgstr[0] "email enviado a ·%s usuario de monitorización"
-msgstr[1] "email enviado a ·%s usuario de monitorización"
+msgstr[1] "email enviado a ·%s usuarios de monitorización"
 
 #: www/my/diary.php:124
 msgid "email not sent - no one monitoring"
@@ -19865,9 +19853,8 @@ msgid "Invalid ID"
 msgstr "ID no válida"
 
 #: www/people/people_utils.php:398
-#, fuzzy
 msgid "No categories found."
-msgstr "No se encontraron categorías"
+msgstr "No se encontraron categorías."
 
 #: www/people/people_utils.php:444
 msgid "Date Opened"
@@ -21201,11 +21188,10 @@ msgid "Deleted Role"
 msgstr "Borrar rol"
 
 #: www/project/admin/roledelete.php:71
-#, fuzzy
 msgid ""
 "Please check “I am Sure” to confirm or return to previous page to cancel."
 msgstr ""
-"Error: Por favor elige «Estoy seguro» para confirmar or vuelve a la página "
+" Por favor elige «Estoy seguro» para confirmar or vuelve a la página "
 "anterior para cancelar."
 
 #: www/project/admin/roledelete.php:76
@@ -22330,7 +22316,6 @@ msgstr ""
 "Error: Solo el creador de una versión de paquete puede añadir recortes a el."
 
 #: www/snippet/add_snippet_to_package.php:84 www/snippet/addversion.php:40
-#, fuzzy
 msgid "Error: snippet does not exist"
 msgstr "Error: Este recorte no existe"
 
@@ -22409,7 +22394,6 @@ msgid "Paste the Code Here"
 msgstr "Pegue el código aquí"
 
 #: www/snippet/addversion.php:128
-#, fuzzy
 msgid "Error: snippet_package does not exist"
 msgstr "Error: el paquete del recorte no existe"
 
