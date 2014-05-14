@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-13 12:17+0200\n"
+"POT-Creation-Date: 2014-05-14 16:43+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3901,33 +3901,33 @@ msgstr ""
 msgid "Posted data is too large. %1$s exceeds the maximum size of %2$s"
 msgstr ""
 
-#: common/include/RBAC.php:195
+#: common/include/RBAC.php:196
 msgid "Cannot link to home project"
 msgstr ""
 
-#: common/include/RBAC.php:230
+#: common/include/RBAC.php:231
 msgid "Cannot unlink from home project"
 msgstr ""
 
-#: common/include/RBAC.php:607
+#: common/include/RBAC.php:608
 msgid "UNKNOWN (internal error, report bug to FusionForge)"
 msgstr ""
 
-#: common/include/RBAC.php:838
+#: common/include/RBAC.php:839
 #, php-format
 msgid "%s (global role)"
 msgstr ""
 
-#: common/include/RBAC.php:842
+#: common/include/RBAC.php:843
 #, php-format
 msgid "%s (in project %s)"
 msgstr ""
 
-#: common/include/RBAC.php:1154
+#: common/include/RBAC.php:1155
 msgid "Anonymous/not logged in"
 msgstr ""
 
-#: common/include/RBAC.php:1202
+#: common/include/RBAC.php:1203
 msgid "Any user logged in"
 msgstr ""
 

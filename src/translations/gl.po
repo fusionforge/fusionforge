@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-13 10:32+0200\n"
+"POT-Creation-Date: 2014-05-13 14:47+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -4201,34 +4201,34 @@ msgstr ""
 msgid "Posted data is too large. %1$s exceeds the maximum size of %2$s"
 msgstr ""
 
-#: common/include/RBAC.php:195
+#: common/include/RBAC.php:196
 msgid "Cannot link to home project"
 msgstr ""
 
-#: common/include/RBAC.php:230
+#: common/include/RBAC.php:231
 msgid "Cannot unlink from home project"
 msgstr ""
 
-#: common/include/RBAC.php:607
+#: common/include/RBAC.php:608
 msgid "UNKNOWN (internal error, report bug to FusionForge)"
 msgstr ""
 
-#: common/include/RBAC.php:838
+#: common/include/RBAC.php:839
 #, php-format
 msgid "%s (global role)"
 msgstr ""
 
-#: common/include/RBAC.php:842
+#: common/include/RBAC.php:843
 #, fuzzy, php-format
 msgid "%s (in project %s)"
 msgstr "Proxectos de %1$s"
 
-#: common/include/RBAC.php:1154
+#: common/include/RBAC.php:1155
 #, fuzzy
 msgid "Anonymous/not logged in"
 msgstr "Debe ter iniciado sesión primeiro"
 
-#: common/include/RBAC.php:1202
+#: common/include/RBAC.php:1203
 #, fuzzy
 msgid "Any user logged in"
 msgstr "Debe ter iniciado sesión primeiro"

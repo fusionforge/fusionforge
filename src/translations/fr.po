@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-13 11:06+0200\n"
+"POT-Creation-Date: 2014-05-14 16:43+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -4042,33 +4042,33 @@ msgid "Posted data is too large. %1$s exceeds the maximum size of %2$s"
 msgstr ""
 "La taille des données fournies (%1$s) dépasse la limite autorisée (%2$s)."
 
-#: common/include/RBAC.php:195
+#: common/include/RBAC.php:196
 msgid "Cannot link to home project"
 msgstr "Impossible de se lier au projet"
 
-#: common/include/RBAC.php:230
+#: common/include/RBAC.php:231
 msgid "Cannot unlink from home project"
 msgstr "Impossible de se délier du projet"
 
-#: common/include/RBAC.php:607
+#: common/include/RBAC.php:608
 msgid "UNKNOWN (internal error, report bug to FusionForge)"
 msgstr ""
 
-#: common/include/RBAC.php:838
+#: common/include/RBAC.php:839
 #, php-format
 msgid "%s (global role)"
 msgstr "%s (rôle global)"
 
-#: common/include/RBAC.php:842
+#: common/include/RBAC.php:843
 #, php-format
 msgid "%s (in project %s)"
 msgstr "%s (dans le projet %s)"
 
-#: common/include/RBAC.php:1154
+#: common/include/RBAC.php:1155
 msgid "Anonymous/not logged in"
 msgstr "Anonyme/non connecté"
 
-#: common/include/RBAC.php:1202
+#: common/include/RBAC.php:1203
 msgid "Any user logged in"
 msgstr "Tout utilisateur connecté"
 
@@ -6246,9 +6246,9 @@ msgid "Updated Successfully"
 msgstr "Mis à jour avec succès"
 
 #: common/tracker/actions/tracker.php:265
-#, fuzzy, php-format
+#, php-format
 msgid "Could not get Project Task for %d"
-msgstr "Erreur lors de la création de l'objet ProjectTask."
+msgstr "Impossible de récupérer la tâche pour %d"
 
 #: common/tracker/actions/tracker.php:291
 #: common/tracker/actions/tracker.php:310
@@ -6414,9 +6414,8 @@ msgid "Status Custom Field Must Be Set"
 msgstr "Champ supplémentaire supprimé"
 
 #: common/tracker/Artifact.class.php:1796
-#, fuzzy
 msgid "User ID not passed"
-msgstr "Utilisateur inactif"
+msgstr "Numéro d'utilisateur manquant"
 
 #: common/tracker/ArtifactExtraField.class.php:108
 #: common/tracker/ArtifactExtraField.class.php:404
@@ -7148,11 +7147,8 @@ msgid "You can "
 msgstr "Vous pouvez "
 
 #: common/tracker/views/form-adminroadmap.php:421
-#, fuzzy
 msgid "select tracker(s) for this roadmap"
-msgstr ""
-"Vous pouvez <a href=\"%s\">sélectionner un ou plusieurs traceurs pour cette "
-"feuille de route</a>."
+msgstr "sélectionner un ou plusieurs traceurs pour cette feuille de route</a>"
 
 #: common/tracker/views/form-adminroadmap.php:424
 msgid "Return to list of roadmaps"
@@ -7971,9 +7967,8 @@ msgid "Activity Ranking: <strong>%d</strong>"
 msgstr "Rang d'activité : <strong>%d</strong>"
 
 #: common/widget/Widget_ProjectInfo.class.php:84
-#, fuzzy
 msgid "View project"
-msgstr "Voir les sous-projets"
+msgstr "Voir le projet"
 
 #: common/widget/Widget_ProjectInfo.class.php:84
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:404
@@ -15523,7 +15518,7 @@ msgstr "Utilisateur %s enlevé avec succès"
 #: www/admin/globalroleedit.php:132
 #, php-format
 msgid "Error while removing user %s from role"
-msgstr "Erreur lors de la révocation d'un rôle de l'utilisateur %s."
+msgstr "Erreur lors de la révocation d'un rôle de l'utilisateur %s"
 
 #: www/admin/globalroleedit.php:138
 msgid "Cannot remove user from this type of role"
