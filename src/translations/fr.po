@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-14 17:11+0200\n"
+"POT-Creation-Date: 2014-05-14 18:37+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -6339,7 +6339,7 @@ msgstr "Erreur lors de la mise en correspondance du statut"
 
 #: common/tracker/Artifact.class.php:308
 msgid "Invalid Artifact ID"
-msgstr "N° d'identifiant invalide"
+msgstr "N° d'élément invalide"
 
 #: common/tracker/Artifact.class.php:524
 msgid "Error deleting extra field data: "
@@ -17748,8 +17748,8 @@ msgid ""
 "Assignee.  You can also have the results sorted in Ascending or Descending "
 "order."
 msgstr ""
-"Vous pouvez trier par n°, priorité, résumé, date d'ouverture, date "
-"de fermeture, auteur, responsable. Vous pouvez aussi trier les résultats par "
+"Vous pouvez trier par n°, priorité, résumé, date d'ouverture, date de "
+"fermeture, auteur, responsable. Vous pouvez aussi trier les résultats par "
 "ordre croissant ou décroissant."
 
 #: www/include/html.php:395
@@ -21027,7 +21027,7 @@ msgstr "Supprimer le rôle"
 msgid ""
 "Please check “I am Sure” to confirm or return to previous page to cancel."
 msgstr ""
-"Veuillez cocher « Je confirme » ou retourner à la page précédente pour "
+"veuillez cocher « Je confirme » ou retourner à la page précédente pour "
 "annuler."
 
 #: www/project/admin/roledelete.php:76
