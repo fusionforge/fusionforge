@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-13 14:47+0200\n"
+"POT-Creation-Date: 2014-05-14 17:41+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -519,8 +519,8 @@ msgstr "Dokument erfolgreich übermittelt."
 #, fuzzy, php-format
 msgid "%s document moved to trash successfully."
 msgid_plural "%s documents moved to trash successfully."
-msgstr[0] "Dokument erfolgreich übermittelt"
-msgstr[1] "Dokument erfolgreich übermittelt"
+msgstr[0] "Dokument erfolgreich übermittelt."
+msgstr[1] "Dokument erfolgreich übermittelt."
 
 #: common/docman/actions/updatecreateonline.php:34
 #, fuzzy
@@ -617,9 +617,8 @@ msgid "Document already published in this folder"
 msgstr "Neue Dokumentation übermitteln"
 
 #: common/docman/Document.class.php:198 common/docman/Document.class.php:205
-#, fuzzy
 msgid "Error Adding Document"
-msgstr "Fehler beim Hinzufügen Dokument:"
+msgstr "Fehler beim Hinzufügen Dokument"
 
 #: common/docman/Document.class.php:198
 msgid "Not a file"
@@ -632,9 +631,8 @@ msgstr "Fehler beim Löschen eines Elements"
 
 #: common/docman/Document.class.php:225 common/docman/Document.class.php:848
 #: common/docman/Document.class.php:1086
-#, fuzzy
 msgid "Error updating document group"
-msgstr "Fehler beim Aktualisieren der Dokumenten-Gruppe:"
+msgstr "Fehler beim Aktualisieren der Dokumenten-Gruppe"
 
 #: common/docman/Document.class.php:252
 #, fuzzy
@@ -728,7 +726,7 @@ msgstr ""
 #: common/docman/Document.class.php:981
 #, fuzzy
 msgid "Error Deleting Document"
-msgstr "Fehler beim Löschen eines Elements:"
+msgstr "Fehler beim Löschen eines Elements"
 
 #: common/docman/Document.class.php:1041
 #: common/docman/DocumentGroup.class.php:954
@@ -771,7 +769,7 @@ msgstr "Dieser Feldname existiert bereits"
 #: common/docman/DocumentGroup.class.php:147
 #, fuzzy
 msgid "Error Adding Folder"
-msgstr "Fehler beim Anlegen eines Forums:"
+msgstr "Fehler beim Anlegen eines Forums"
 
 #: common/docman/DocumentGroup.class.php:241
 msgid "Unsupported injected file"
@@ -2965,9 +2963,8 @@ msgstr ""
 "»~« Zeichen verwendet werden."
 
 #: common/frs/FRSFile.class.php:135
-#, fuzzy
 msgid "FRSFile appears to be invalid."
-msgstr "FRSFile scheint ungültig zu sein"
+msgstr "FRSFile scheint ungültig zu sein."
 
 #: common/frs/FRSFile.class.php:151 common/frs/FRSFile.class.php:434
 msgid "That filename already exists in this project space"
@@ -5719,8 +5716,7 @@ msgstr "Renderer hochgeladen"
 #: common/tracker/actions/admin-updates.php:553
 #, fuzzy
 msgid "Initial values not saved, no initial state given."
-msgstr ""
-"FEHLER: Ausgangswerte nicht gespeichert, kein Ausgangszustand existiert."
+msgstr "Ausgangswerte nicht gespeichert, kein Ausgangszustand existiert."
 
 #: common/tracker/actions/admin-updates.php:557
 msgid "Initial values saved."
@@ -8964,9 +8960,8 @@ msgid "Login via CAS"
 msgstr "Mit CAS einloggen"
 
 #: plugins/authcas/www/post-login.php:83
-#, fuzzy
 msgid "Your account "
-msgstr "%1$s Account-Registrierung"
+msgstr ""
 
 #: plugins/authhttpd/include/AuthHTTPDPlugin.class.php:67
 msgid "Login via HTTP authentication"
@@ -10671,15 +10666,13 @@ msgstr ""
 
 #: plugins/headermenu/action/addLink.php:58
 #: plugins/headermenu/action/updateLinkValue.php:57
-#, fuzzy
 msgid "Missing Link URL."
-msgstr "Fehlende Parameter"
+msgstr ""
 
 #: plugins/headermenu/action/addLink.php:89
 #: plugins/headermenu/action/updateLinkValue.php:84
-#, fuzzy
 msgid "Missing Link URL or HTML Page."
-msgstr "Fehlende Parameter"
+msgstr ""
 
 #: plugins/headermenu/action/addLink.php:94
 msgid "No link to create or name missing."
@@ -10804,9 +10797,8 @@ msgstr "Felder, die mit %s markiert sind, sind Pflichtfelder."
 
 #: plugins/headermenu/view/admin/updateLinkValue.php:112
 #: plugins/webanalytics/view/admin/updateLinkValue.php:53
-#, fuzzy
 msgid "Cannot retrieve value for this link"
-msgstr "Kann das Kennzeichen nicht entfernen: %s"
+msgstr ""
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:46
 #, fuzzy
@@ -12155,7 +12147,7 @@ msgstr "Das Passwort lautet 'anonsvn'"
 #: plugins/mantisbt/view/admin/viewCategorie.php:44
 #, fuzzy
 msgid "Manage categories"
-msgstr "Verwalte Zeitverfolgungskategorien"
+msgstr "Kategorien hinzufügen"
 
 #: plugins/mantisbt/view/admin/viewCategorie.php:61
 msgid "Rename"
@@ -15617,11 +15609,11 @@ msgstr ""
 
 #: www/account/register.php:152
 msgid "Login Name (do not use uppercase letters)"
-msgstr "Anmelde-Name (keine Großbuchstaben):"
+msgstr "Anmelde-Name (keine Großbuchstaben)"
 
 #: www/account/register.php:159
 msgid "Password (min. 6 chars)"
-msgstr "Passwort (mind. 6 Buchstaben):"
+msgstr "Passwort (mind. 6 Buchstaben)"
 
 #: www/account/register.php:165
 msgid "Password (repeat)"
@@ -16114,9 +16106,9 @@ msgid "Error: You did not tick the “really remove” box!"
 msgstr ""
 
 #: www/admin/globalroleedit.php:128
-#, fuzzy, php-format
+#, php-format
 msgid "User %s removed successfully"
-msgstr "Benutzer erfolgreich gelöscht"
+msgstr "Benutzer %s erfolgreich entfernt"
 
 #: www/admin/globalroleedit.php:132
 #, fuzzy, php-format
@@ -16643,7 +16635,6 @@ msgid "Newsbytes Rejected."
 msgstr "NewsByte abgelehnt."
 
 #: www/admin/pending-news.php:113 www/project/admin/tools.php:336
-#, fuzzy
 msgid "News Admin"
 msgstr "News-Admin"
 
@@ -17679,7 +17670,7 @@ msgstr "Nachricht erfolgreich abgeschickt"
 #: www/forum/forum.php:136 www/forum/message.php:91 www/forum/myforums.php:106
 #, fuzzy
 msgid "Error getting new ForumMessageFactory"
-msgstr "Fehler beim Einholen neuer Forennachrichten"
+msgstr "Fehler beim Einholen einer neuer ForumMessageFactory"
 
 #: www/forum/forum.php:174
 msgid "Nested"
@@ -20380,16 +20371,15 @@ msgstr "In den Bestand der Qualifikationen hinzugefügt"
 #: www/people/people_utils.php:224
 #, fuzzy
 msgid "Error: Skill already in your inventory."
-msgstr "FEHLER - Qualifikation schon in Ihrem Bestand"
+msgstr "Fehler - Qualifikation schon in Ihrem Bestand"
 
 #: www/people/people_utils.php:282 www/people/people_utils.php:291
 msgid "Invalid ID"
 msgstr "Ungültige ID"
 
 #: www/people/people_utils.php:398
-#, fuzzy
 msgid "No categories found."
-msgstr "Keine Kategorien gefunden"
+msgstr "Keine Kategorien gefunden."
 
 #: www/people/people_utils.php:444
 msgid "Date Opened"
@@ -22904,7 +22894,6 @@ msgstr ""
 "hinzufügen."
 
 #: www/snippet/add_snippet_to_package.php:84 www/snippet/addversion.php:40
-#, fuzzy
 msgid "Error: snippet does not exist"
 msgstr "Fehler - Dieses Schnipsel existiert nicht"
 
@@ -22985,7 +22974,6 @@ msgid "Paste the Code Here"
 msgstr "Fügen Sie den Code hier ein"
 
 #: www/snippet/addversion.php:128
-#, fuzzy
 msgid "Error: snippet_package does not exist"
 msgstr "Fehler - Schnipsel Paket existiert nicht"
 
@@ -23110,7 +23098,6 @@ msgid "Item Removed From Package"
 msgstr ""
 
 #: www/snippet/delete.php:84
-#, fuzzy
 msgid "Error: That snippet does not exist."
 msgstr "Fehler - Dieses Schnipsel existiert nicht."
 
