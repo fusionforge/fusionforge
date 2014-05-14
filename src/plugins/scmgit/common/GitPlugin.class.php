@@ -398,8 +398,7 @@ class GitPlugin extends SCMPlugin {
 			chmod($repodir, 02750);
 		}
 		if (!is_file("$repodir/HEAD") && !is_dir("$repodir/objects") && !is_dir("$repodir/refs")) {
-			system("git clone --bare --quiet $main_repo $repodir");
-			system("chown -R $user_name $repodir");
+			system("git clone --bare --quiet --no-hardlinks $main_repo $repodir");
 			system("GIT_DIR=\"$repodir\" git update-server-info");
 			if (is_file("$repodir/hooks/post-update.sample")) {
 				rename("$repodir/hooks/post-update.sample",
