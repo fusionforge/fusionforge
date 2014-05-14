@@ -917,8 +917,8 @@ abstract class BaseRole extends Error {
 		// Direct query to avoid querying each project - especially for global roles
 		foreach ($projects as $p)
 			$project_ids[] = $p->getID();
-		$res = db_query_params('SELECT group_artifact_id FROM artifact_group_list JOIN groups USING (group_id)'
-				       . ' WHERE use_tracker=1 AND group_id IN ('.implode(',', $project_ids).')', array());
+		$res = db_query_params('SELECT group_artifact_id FROM artifact_group_list JOIN groups USING (group_id) WHERE use_tracker=1 AND group_id=ANY($1)', 
+				       array(db_int_array_to_any_clause($project_ids)));
 		while ($row = db_fetch_array($res)) {
 			$tid = $row['group_artifact_id'];
 			if (array_key_exists ('tracker', $this->perms_array)
