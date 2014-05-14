@@ -148,14 +148,14 @@ EOF
 		if [ $BASH_VERSINFO -ge 4 ] ; then
 		    # Fast version, with cache, for Bash >= 4
 		    if grep -q {$v} $ftmp ; then
-			var_cache[$v]=${var_cache[$v]:-$(forge_get_config ${v##*/} ${v%%/*})}
-			sed -i -e s,{$v},${var_cache[$v]},g $ftmp
+			var_cache[$v]="${var_cache[$v]:-$(forge_get_config ${v##*/} ${v%%/*})}"
+			sed -i -e "s,{$v},${var_cache[$v]},g" $ftmp
 		    fi
 		else
 		    # Bash 3... no cache, slower
 		    if grep -q {$v} $ftmp ; then
-			curvar=$(forge_get_config ${v##*/} ${v%%/*})
-			sed -i -e s,{$v},$curvar,g $ftmp
+			curvar="$(forge_get_config ${v##*/} ${v%%/*})"
+			sed -i -e "s,{$v},$curvar,g" $ftmp
 		    fi
 		fi
 	    done
