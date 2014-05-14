@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-13 14:47+0200\n"
+"POT-Creation-Date: 2014-05-14 18:25+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2438,7 +2438,6 @@ msgid "Forum Info Updated Successfully"
 msgstr "Informazioni forum aggiornate con successo"
 
 #: common/forum/ForumAdmin.class.php:208
-#, fuzzy
 msgid "Forum added successfully"
 msgstr "Forum creato con successo"
 
@@ -2849,7 +2848,7 @@ msgstr "Invia messaggio"
 #: common/forum/ForumHTML.class.php:619
 #, fuzzy
 msgid "Anonymously"
-msgstr "Spazio FTP anonimo"
+msgstr "Anonimo"
 
 #: common/forum/ForumHTML.class.php:620
 msgid "Receive comments via email"
@@ -2979,9 +2978,8 @@ msgstr ""
 "“.”, “~”."
 
 #: common/frs/FRSFile.class.php:135
-#, fuzzy
 msgid "FRSFile appears to be invalid."
-msgstr "Il file sembra non essere valido"
+msgstr "Il file sembra non essere valido."
 
 #: common/frs/FRSFile.class.php:151 common/frs/FRSFile.class.php:434
 msgid "That filename already exists in this project space"
@@ -14111,9 +14109,9 @@ msgstr ""
 #: plugins/scmhg/common/HgPlugin.class.php:123
 #: plugins/scmsvn/common/SVNPlugin.class.php:136
 #: plugins/scmsvn/common/SVNPlugin.class.php:161
-#, fuzzy, php-format
+#, php-format
 msgid "Developer %s Access via SSH"
-msgstr "Sviluppatori (test)"
+msgstr ""
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:104
 #: plugins/scmbzr/common/BzrPlugin.class.php:116
@@ -15627,11 +15625,11 @@ msgstr ""
 
 #: www/account/register.php:152
 msgid "Login Name (do not use uppercase letters)"
-msgstr "Login (non usare maiuscole):"
+msgstr "Login (non usare maiuscole)"
 
 #: www/account/register.php:159
 msgid "Password (min. 6 chars)"
-msgstr "Password (minimo 6 caratteri):"
+msgstr "Password (minimo 6 caratteri)"
 
 #: www/account/register.php:165
 msgid "Password (repeat)"
@@ -16655,7 +16653,6 @@ msgid "Newsbytes Rejected."
 msgstr "News rifiutata."
 
 #: www/admin/pending-news.php:113 www/project/admin/tools.php:336
-#, fuzzy
 msgid "News Admin"
 msgstr "Amministrazione News"
 
@@ -18071,9 +18068,8 @@ msgstr ""
 "rilasci, oppure in qualunque modo ti sia comodo."
 
 #: www/frs/admin/index.php:132
-#, fuzzy
 msgid "An example of packages:"
-msgstr "Aggiungi frammenti ai package"
+msgstr "Esempio di pacchetto:"
 
 #: www/frs/admin/index.php:134
 msgid "Your Packages:"
@@ -19892,18 +19888,18 @@ msgid "Continue >>"
 msgstr "Continua >>"
 
 #: www/people/editjob.php:61
-#, fuzzy, php-format
+#, php-format
 msgid "Job insert failed: %s"
-msgstr "Inserimento fallito"
+msgstr "Inserimento Posizione fallita: %s"
 
 #: www/people/editjob.php:65
 msgid "Job inserted successfully"
 msgstr "Posizione inserita"
 
 #: www/people/editjob.php:80
-#, fuzzy, php-format
+#, php-format
 msgid "Job update failed: %s"
-msgstr "Aggiornamento fallito"
+msgstr "Aggiornamento posizione fallita: %s"
 
 #: www/people/editjob.php:82 www/people/editjob.php:96
 msgid "Job updated successfully"
@@ -20308,9 +20304,8 @@ msgid "Invalid ID"
 msgstr "ID non valido"
 
 #: www/people/people_utils.php:398
-#, fuzzy
 msgid "No categories found."
-msgstr "Nessuna categoria trovata"
+msgstr "Nessuna categoria trovata."
 
 #: www/people/people_utils.php:444
 msgid "Date Opened"
@@ -22800,7 +22795,6 @@ msgstr ""
 "frammenti."
 
 #: www/snippet/add_snippet_to_package.php:84 www/snippet/addversion.php:40
-#, fuzzy
 msgid "Error: snippet does not exist"
 msgstr "Errore - Questo frammento non esiste"
 
