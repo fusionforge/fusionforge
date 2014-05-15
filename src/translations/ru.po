@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-13 14:47+0200\n"
+"POT-Creation-Date: 2014-05-15 11:53+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2777,8 +2777,8 @@ msgstr "Текущий файл"
 #: common/forum/ForumHTML.class.php:317 common/forum/ForumHTML.class.php:350
 msgid "Use the “Browse” button to find the file you want to attach"
 msgstr ""
-"Воспользуйтесь клавишей \"Обзор\" для указания пути к файлу который вы "
-"желаете прикрепить"
+"Воспользуйтесь клавишей “Обзор” для указания пути к файлу который вы желаете "
+"прикрепить"
 
 #: common/forum/ForumHTML.class.php:320 common/forum/ForumHTML.class.php:353
 msgid "File to upload"
@@ -2971,9 +2971,8 @@ msgid ""
 msgstr "Имя файла должно содержать только цифры и буквы"
 
 #: common/frs/FRSFile.class.php:135
-#, fuzzy
 msgid "FRSFile appears to be invalid."
-msgstr "FRS файл неисправен"
+msgstr "FRS файл неисправен."
 
 #: common/frs/FRSFile.class.php:151 common/frs/FRSFile.class.php:434
 msgid "That filename already exists in this project space"
@@ -3382,20 +3381,18 @@ msgid "Unix name already taken."
 msgstr "Такое название для проекта уже занято."
 
 #: common/include/Group.class.php:326
-#, fuzzy
 msgid ""
 "Please describe your Registration Project Purpose and Summarization in a "
 "more comprehensive manner."
 msgstr ""
 "Опишите в ясной и краткой форме цели регистрации проекта, описание неболее "
-"семисот букв "
+"семисот букв."
 
 #: common/include/Group.class.php:329
-#, fuzzy
 msgid ""
 "The Registration Project Purpose and Summarization text is too long. Please "
 "make it smaller than 1500 characters."
-msgstr "Слижком длинное описание назначения проекта, сократите до 1500 байт"
+msgstr "Слижком длинное описание назначения проекта, сократите до 1500 байт."
 
 #: common/include/Group.class.php:332 common/include/Group.class.php:586
 msgid "Describe in a more comprehensive manner your project."
@@ -3752,7 +3749,6 @@ msgid "Could not find user who has submitted the project."
 msgstr "Автор проекта не найден."
 
 #: common/include/Group.class.php:2689
-#, fuzzy
 msgid "There is no administrator to send the mail to."
 msgstr "Нет администратора, которому отправить емайл."
 
@@ -6052,9 +6048,8 @@ msgstr "* Запрос составлен > %s дней назад"
 
 #: common/tracker/actions/browse.php:759 common/tracker/actions/browse.php:803
 #: www/pm/browse_task.php:397 www/pm/browse_task.php:430
-#, fuzzy
 msgid "Mass Update"
-msgstr "Глобальное изменение"
+msgstr "Измененить все"
 
 #: common/tracker/actions/browse.php:763 www/pm/browse_task.php:399
 msgid ""
@@ -6062,7 +6057,7 @@ msgid ""
 "to change their properties and click once on “Mass Update”."
 msgstr ""
 "Если Вы желаете изменить во всех выделенных частях выше, используйте "
-"управление свойствами нажав \"Измененить все\"."
+"управление свойствами нажав “Измененить все”."
 
 #: common/tracker/actions/browse.php:780 common/tracker/actions/browse.php:791
 #: common/tracker/actions/browse.php:795 www/include/html.php:361
@@ -8830,7 +8825,7 @@ msgstr ""
 #: www/softwaremap/full_list.php:70
 #, fuzzy, php-format
 msgid "<strong>%d</strong> projects in result set."
-msgstr "<strong>%1$s</strong> проектов выделено."
+msgstr "<strong>%d</strong> проектов выделено."
 
 #: plugins/admssw/include/admsswPlugin.class.php:645
 #: plugins/admssw/www/projectturtle.php:52 plugins/admssw/www/trove.php:46
@@ -10707,7 +10702,7 @@ msgstr ""
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:231
 #: www/search/include/renderers/HtmlSearchRenderer.class.php:104
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:112
-#, fuzzy, php-format
+#, php-format
 msgid "No matches found for “%s”"
 msgstr "Ничего не найдено для “%s”"
 
@@ -10716,7 +10711,7 @@ msgstr "Ничего не найдено для “%s”"
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:111
 #, php-format
 msgid "Search results for “%s”"
-msgstr "Результат поиска для <em>%s</em>"
+msgstr "Результат поиска для “%s”"
 
 #: plugins/globalsearch/www/index.php:166 www/admin/grouplist.php:67
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:45
@@ -11792,7 +11787,7 @@ msgstr "Добавить списки рассылки"
 #: plugins/mailman/www/index.php:39 www/mail/index.php:54
 #, fuzzy, php-format
 msgid "Mailing Lists for %s"
-msgstr "Список рассылки для %1$s"
+msgstr "Список рассылки для %s"
 
 #: plugins/mailman/www/index.php:55 www/mail/index.php:69
 #, php-format
@@ -15338,7 +15333,7 @@ msgstr "Пароли не совпадают."
 #: www/account/change_pw.php:66 www/admin/passedit.php:73
 #, fuzzy
 msgid "Could not change password: "
-msgstr "Изменение пароля"
+msgstr "Изменение пароля: "
 
 #: www/account/change_pw.php:69
 msgid "Successfully Changed Password"
@@ -15429,7 +15424,6 @@ msgid "Add a new ssh key"
 msgstr "Добавить новую задачу"
 
 #: www/account/editsshkeys.php:72
-#, fuzzy
 msgid ""
 "To avoid having to type your password every time for your CVS/SSH developer "
 "account, you may upload your public key(s) here and they will be placed on "
@@ -15456,14 +15450,13 @@ msgstr ""
 "доступа SSH."
 
 #: www/account/editsshkeys.php:74
-#, fuzzy
 msgid ""
 "Important: Make sure there are no line breaks. After submitting, verify that "
 "the number of keys in your file is what you expected."
 msgstr ""
 "ОБРАТИТЕ ВНИМАНИЕ: Убедитесь в отсутствии переноса строки внутри "
 "авторизационного ключа. За исключением переноса строки между ключами, "
-"проверьте еще раз количество ключей в Вашем файле.</em>"
+"проверьте еще раз количество ключей в Вашем файле."
 
 #: www/account/editsshkeys.php:79
 msgid ""
@@ -15714,7 +15707,7 @@ msgid ""
 "account. Visiting the URL will allow you to change your password online and "
 "login."
 msgstr ""
-"Нажатием на \"Отправить персональный ключ\" будет отправлено письмо на "
+"Нажатием на “Отправить ХЕШ утеряного пароля” будет отправлено письмо на "
 "указаный Вами при регистрации емайл. В теле письма ссылка со 128-битным "
 "ключем для вашей учетной записи. Следуя по ссылке Вы активируете вашу "
 "учетную запись и вам будет предложено выбрать новый пароль, сменив пароль "
@@ -15815,15 +15808,15 @@ msgstr ""
 
 #: www/account/register.php:152
 msgid "Login Name (do not use uppercase letters)"
-msgstr "Имя пользователя (только нижний регистр):"
+msgstr "Имя пользователя (только нижний регистр)"
 
 #: www/account/register.php:159
 msgid "Password (min. 6 chars)"
-msgstr "Пароль (минимум 6 символов):"
+msgstr "Пароль (минимум 6 символов)"
 
 #: www/account/register.php:165
 msgid "Password (repeat)"
-msgstr "Пароль (подтверждение):"
+msgstr "Пароль (подтверждение)"
 
 #: www/account/register.php:191
 msgid "Language Choice:"
@@ -15888,7 +15881,6 @@ msgid "Credentials you entered do not correspond to valid account."
 msgstr "Указаная учетная запись не найдена."
 
 #: www/account/verify.php:58
-#, fuzzy
 msgid "Error while activating account"
 msgstr "Ошибка при авторизации"
 
@@ -15998,19 +15990,19 @@ msgstr "Название проекта"
 #: www/admin/admin_table.php:40
 #, fuzzy, php-format
 msgid "Create a new %s below:"
-msgstr "Создать %1$s ниже:"
+msgstr "Создать %s ниже:"
 
 #: www/admin/admin_table.php:92 www/admin/admin_table.php:276
 #, fuzzy, php-format
 msgid "%s successfully added."
-msgstr "%1$s добавлена."
+msgstr "%s добавлена."
 
 #: www/admin/admin_table.php:113
 #, fuzzy, php-format
 msgid ""
 "You cannot delete the processor %s since it is currently referenced in a "
 "file release."
-msgstr "До окончания релиза, удаление %1$s заблокировано."
+msgstr "До окончания релиза, удаление %s заблокировано."
 
 #: www/admin/admin_table.php:122
 #, fuzzy, php-format
@@ -16018,7 +16010,7 @@ msgid ""
 "You can't delete the license %s since it is currently referenced in a "
 "project."
 msgstr ""
-"Удаление или изменение лицензии %1$s заблокировано из-за её использования в "
+"Удаление или изменение лицензии %s заблокировано из-за её использования в "
 "проекте."
 
 #: www/admin/admin_table.php:130
@@ -16026,29 +16018,29 @@ msgstr ""
 msgid ""
 "You cannot delete the language %s since it is currently referenced in a user "
 "profile."
-msgstr "Удаление языка %1$s блокировано связью с аккаунтом участника."
+msgstr "Удаление языка %s блокировано связью с аккаунтом участника."
 
 #: www/admin/admin_table.php:139
 #, fuzzy, php-format
 msgid ""
 "You cannot delete the theme %s since it is currently referenced in a user "
 "profile."
-msgstr "Удаление языка %1$s блокировано связью с аккаунтом участника."
+msgstr "Удаление языка %s блокировано связью с аккаунтом участника."
 
 #: www/admin/admin_table.php:150
 #, fuzzy, php-format
 msgid "Are you sure you want to delete this %s?"
-msgstr "Подтвердите удаление %1$s?"
+msgstr "Подтвердите удаление %s?"
 
 #: www/admin/admin_table.php:179
 #, fuzzy, php-format
 msgid "%s successfully deleted."
-msgstr "%1$s удалено."
+msgstr "%s удалено."
 
 #: www/admin/admin_table.php:200
 #, fuzzy, php-format
 msgid "Modify the %s below:"
-msgstr "Изменить %1$s ниже:"
+msgstr "Изменить %s ниже:"
 
 #: www/admin/admin_table.php:255
 #, fuzzy, php-format
@@ -16058,7 +16050,7 @@ msgstr "%1$s изменено."
 #: www/admin/admin_table.php:347
 #, fuzzy, php-format
 msgid "Edit the %ss Table"
-msgstr "Редактировать таблицу %1$ss"
+msgstr "Редактировать таблицу %ss"
 
 #: www/admin/approve-pending.php:48 www/project/admin/tools.php:34
 #: www/snapshots.php:43 www/tarballs.php:44
@@ -16073,7 +16065,7 @@ msgstr "Утверждаемая группа: %s"
 #: www/admin/approve-pending.php:58
 #, fuzzy, php-format
 msgid "Error when approving Project: %s"
-msgstr "Утверждаемая группа: %1$s"
+msgstr "Утверждаемая группа: %s"
 
 #: www/admin/approve-pending.php:89
 #, fuzzy
@@ -16748,11 +16740,11 @@ msgstr "(выбор)"
 
 #: www/admin/massmail.php:119
 msgid "Subscribers to “Site Updates”"
-msgstr "Подписчики на \"обновления сайта\""
+msgstr "Подписчики на “обновления сайта”"
 
 #: www/admin/massmail.php:120
 msgid "Subscribers to “Additional Community Mailings”"
-msgstr "Подписчики на \"дополнительные рассылки комьюнити\""
+msgstr "Подписчики на “дополнительные рассылки комьюнити”"
 
 #: www/admin/massmail.php:121
 msgid "All Project Developers"
@@ -17059,12 +17051,10 @@ msgid "New category short name (no spaces, Unix-like)"
 msgstr "Новая категория (без пробелов, в Unix-стиле)"
 
 #: www/admin/trove/trove_cat_add.php:112
-#, fuzzy
 msgid "New category full name (maximum length is 80 chars)"
 msgstr "Название новой категории (не более 80 символов)"
 
 #: www/admin/trove/trove_cat_add.php:114
-#, fuzzy
 msgid "New category description (maximum length is 255 chars)"
 msgstr "Описание новой категории (не более 255 символов)"
 
@@ -17232,7 +17222,7 @@ msgstr "Статус аккаунта сайта"
 
 #: www/admin/useredit.php:188
 msgid "Unix Account Status"
-msgstr "Статус аккаутнта UNIX"
+msgstr "Статус аккаутнта Unix"
 
 #: www/admin/useredit.php:197
 msgid "Unix Shell:"
@@ -17262,8 +17252,8 @@ msgid ""
 "Unix status updated mirroring web status, unless it has value “No Unix "
 "account (N)”"
 msgstr ""
-"Статус UNIX отражает статус сайта, безполезно если значение 'Нет аккаунта "
-"UNIX'"
+"Статус Unix отражает статус сайта, безполезно если значение 'Нет аккаунта "
+"Unix'"
 
 #: www/admin/useredit.php:253
 #, fuzzy
@@ -18595,7 +18585,7 @@ msgstr ""
 #: www/include/filechecks.php:178
 #, fuzzy
 msgid "File does not exist. You must supply a filename."
-msgstr " Вы должны указать имя"
+msgstr "Вы должны указать имя."
 
 #: www/include/filechecks.php:182
 #, php-format
@@ -18621,10 +18611,10 @@ msgid ""
 "respond with an admin-defined amount of time (default is 14 days) then the "
 "item is given a status of “Deleted”."
 msgstr ""
-"Вы можете установить статус в ' Незакончен ' если вы ожидаете ответа от "
-"автора части в трекере.  Когда автор ответит, статус автоматичесски перейдет "
-"в состояние 'Открыт'. Иначе, если автор неотвечает в течении двух недель, то "
-"часть перейдет в состояние 'Удалено'."
+"Вы можете установить статус в “Незакончен” если вы ожидаете ответа от автора "
+"части в трекере.  Когда автор ответит, статус автоматичесски перейдет в "
+"состояние “Открыт”. Иначе, если автор неотвечает в течении двух недель, то "
+"часть перейдет в состояние “Удалено”."
 
 #: www/include/html.php:387
 msgid "Tracker category"
@@ -18733,7 +18723,7 @@ msgid ""
 "You can monitor or un-monitor this item by clicking the “Monitor” button."
 msgstr ""
 "Вы можете включить или выключить получение новостей с этой части нажатием "
-"\"Наблюдать\" в выделенной части."
+"“Наблюдать” в выделенной части."
 
 #: www/include/html.php:423
 msgid ""
@@ -19075,7 +19065,7 @@ msgid ""
 "The “Sitewide Rank” field shows the user's rank compared to all ranked %s "
 "users."
 msgstr ""
-"Поля\"Рангов\"  показывают относительные соотношения между участниками "
+"Поля“Рангов”  показывают относительные соотношения между участниками "
 "учавствующими в рейтингах %1$s участников."
 
 #: www/include/user_home.php:179
@@ -19083,7 +19073,7 @@ msgid ""
 "The “Aggregate Score” shows an average, weighted overall score, based on "
 "trusted-responses only."
 msgstr ""
-"Позиция \"Общего Счета\" показывает усредненное значение, взвешенное по "
+"Позиция “Общего Счета” показывает усредненное значение, взвешенное по "
 "суммарному счету, основываясь только на респектабельных участниках."
 
 #: www/include/user_home.php:183
@@ -19092,7 +19082,7 @@ msgid ""
 "developers will be given (between 1 and 1.5) -- higher rated user's "
 "responses are given more weight."
 msgstr ""
-"Позиции \"Персонального значения\" отображают весомость участника по оценкам "
+"Позиции “Персонального значения” отображают весомость участника по оценкам "
 "разработчиков (между 1 и 1.5) -- высшего рейтинга, дающего наибольшую "
 "весомость."
 
@@ -19112,7 +19102,7 @@ msgstr ""
 "удалится с вашей страницы."
 
 #: www/include/user_home.php:196
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "You opted-out from peer rating system, otherwise you would have a chance to "
 "rate the user. Refer to <a href=\"%s\">your account maintenance page</a> for "
@@ -19674,7 +19664,7 @@ msgstr "Не удалось получить список %s"
 #: www/mail/index.php:98
 #, fuzzy, php-format
 msgid "%s Archives"
-msgstr "%1$s Архивы"
+msgstr "%s Архивы"
 
 #: www/mail/index.php:101
 msgid "Subscribe/Unsubscribe/Preferences"
@@ -20000,9 +19990,8 @@ msgid "News Added."
 msgstr "Новости добавлены."
 
 #: www/news/submit.php:115
-#, fuzzy
 msgid "Error: both subject and body are required."
-msgstr "Все параметры обязательны к заполнению"
+msgstr "Все параметры обязательны к заполнению."
 
 #: www/news/submit.php:129
 #, fuzzy
@@ -20025,7 +20014,7 @@ msgid ""
 "will have to be approved by a member of the %1$s news team before they will "
 "appear on the %1$s home page."
 msgstr ""
-"на страницу \"Вакансии и проектам нужны разработчики\", Все сообщения с "
+"на страницу “Вакансии и проектам нужны разработчики”, Все сообщения с "
 "<strong>Вашего проекта</strong> и для <strong>Вашего проекта</strong> будут "
 "суммированы на статистику Вашего проекта %1$s."
 
@@ -20378,7 +20367,7 @@ msgstr "Пользователь не существует"
 
 #: www/people/editprofile.php:237
 msgid "Edit Public Permissions"
-msgstr "<h1>Страница настроек Ваших публично отображаемых уровнях опыта.</h1>"
+msgstr "Страница настроек Ваших публично отображаемых уровнях опыта."
 
 #: www/people/editprofile.php:239
 msgid ""
@@ -20461,6 +20450,9 @@ msgid ""
 "The %s Project Help Wanted board is for non-commercial, project volunteer "
 "openings. Commercial use is prohibited."
 msgstr ""
+"Заглавная страница сайта %s предназначена для обмена информацией о вакантных "
+"ролях в проектах некомерчесского использования. <strong>Комерчесское "
+"использование <u>ЗАПРЕЩЕНО</u></strong>."
 
 #: www/people/index.php:66
 msgid ""
@@ -20468,22 +20460,33 @@ msgid ""
 "whichever comes first. (Project administrators may always re-post expired "
 "openings.)"
 msgstr ""
+"Срок действия объявлений о вакантных должностях : две недели, или до момента "
+"снятия объявления его автором. Администраторы проектов могут продлять "
+"действие объявлений о вакансиях в своих проектах."
 
 #: www/people/index.php:70
 msgid ""
 "Browse through the category menu to find projects looking for your help."
 msgstr ""
+"Если Вы желаете найти себе проект к котрому сможете присоединится и "
+"учавствовать в его разработке, то поиск вакантных мест упрощен выбором в "
+"пунктах меню."
 
 #: www/people/index.php:74
 msgid ""
 "If you're a project admin, log in and submit help wanted requests through "
 "your project administration page."
 msgstr ""
+"Если вы являетесь администратором, и подавали объявление о приеме в проект "
+"разработчиков, авторизировавшись Вы можете принять заявления от желающих "
+"присоединится к вашему проекту зайдя на страницу управления вашим проектом."
 
 #: www/people/index.php:78
 msgid ""
 "To suggest new job categories, submit a request via the support manager."
 msgstr ""
+"Для принятия предложений из других категорий вакансий, примите запросы "
+"воспользовавшись мененджером поддержки."
 
 #: www/people/index.php:83
 msgid "Last posts"
@@ -20557,9 +20560,8 @@ msgid "Invalid ID"
 msgstr "Неверный указатель"
 
 #: www/people/people_utils.php:398
-#, fuzzy
 msgid "No categories found."
-msgstr "Не найдено категорий"
+msgstr "Не найдено категорий."
 
 #: www/people/people_utils.php:444
 msgid "Date Opened"
@@ -20809,7 +20811,7 @@ msgstr "Для проекта нет сообщений"
 msgid "You may add new Subprojects using the “Add a Subproject” link above."
 msgstr ""
 "Не найдено для этой группы. Вы модете добавить новый проект воспользовавшись "
-"\"Добавить проект\" в выделенной выше ссылке."
+"“Добавить проект” в выделенной выше ссылке."
 
 #: www/pm/admin/index.php:428
 #, fuzzy
@@ -21525,8 +21527,8 @@ msgid ""
 "Clicking on “create” will schedule the creation of the database, and email "
 "the details to the project administrators"
 msgstr ""
-"Нажав на клавишу \"Создать\" в очередь создания будет поставлено создание "
-"базы, и на емайл будут разосланы детали о продукте"
+"Нажав на клавишу “оздать” в очередь создания будет поставлено создание базы, "
+"и на емайл будут разосланы детали о продукте"
 
 #: www/project/admin/database.php:164
 msgid "Database Type"
@@ -21779,8 +21781,10 @@ msgid ""
 "will be preserved if you click any of the letters below. When done, click "
 "“Finish” to choose the roles for the users you are adding."
 msgstr ""
-"После того, как этот шаг закончен, нажмите “Завершить” для подтверждения и "
-"перехода к выбору ролей участников в Вашем проекте."
+"Выберите из списка участников для добавления в Ваш проект, выбор будет "
+"сохранен если Вы перейдете к выбору другого участника ниже. После того, как "
+"этот шаг закончен, нажмите “Завершить” для подтверждения и перехода к выбору "
+"ролей участников в Вашем проекте."
 
 #: www/project/admin/massadd.php:77
 msgid ""
@@ -22208,9 +22212,8 @@ msgid "Virtual Host Management"
 msgstr "Управление виртуальным хостингом"
 
 #: www/project/admin/vhost.php:108
-#, fuzzy
 msgid "Add New Virtual Host"
-msgstr "Добавить виртуальный хост"
+msgstr "Добавить новый виртуальный хост"
 
 #: www/project/admin/vhost.php:111
 #, php-format
@@ -22219,6 +22222,9 @@ msgid ""
 "<em>yourhost.org</em> at <strong>%1$s.%2$s</strong>.  %3$s does not "
 "currently host mail (i.e. cannot be an MX) or DNS</strong>."
 msgstr ""
+"для добавления просто укажите <strong>CNAME</strong> для <em>yourhost.org</"
+"em> от <strong>%1$s.%2$s</strong>.  %3$s но это не ваш емейл (недопустимо "
+"смешанное MX) или DNS</strong>."
 
 #: www/project/admin/vhost.php:115
 #, php-format
@@ -22227,6 +22233,9 @@ msgid ""
 "will be synced to the project webservers - such that <em>yourhost.org</em> "
 "will display the material at <em>%1$s.%2$s</em>."
 msgstr ""
+"Указав на “Создать” будет поставлено в очередь на создание виртуального "
+"хоста.  Это будет синхронизироваться к проекту как вебсервер <em>yourhost."
+"org</em> и будет отображать содержимое из <em>%1$s.%2$s</em>."
 
 #: www/project/admin/vhost.php:123
 msgid "New Virtual Host <em>(e.g. vhost.org)</em>"
@@ -22450,7 +22459,7 @@ msgstr ""
 #: www/register/index.php:225
 #, fuzzy
 msgid "must be a valid Unix username;"
-msgstr "Неверное имя (UNIX)"
+msgstr "Неверное имя (Unix)"
 
 #: www/register/index.php:226
 msgid "cannot match one of our reserved domains;"
@@ -22491,10 +22500,9 @@ msgid ""
 "You can choose among different SCM for your project, but just one (or none "
 "at all). Please select the SCM system you want to use."
 msgstr ""
-"Вы можете выбрать один из двух типов системы управления версиями "
-"<strong>SCM</strong> для Вашего проекта: <strong>svn</strong> или "
-"<strong>cvs</strong> (рекомендуется SVN). Пожалуйста выберите систему SCM, "
-"которую Вы хотите использовать."
+"Вы можете выбрать один из двух типов системы управления версиями SCM для "
+"Вашего проекта: svn или cvs (рекомендуется SVN). Пожалуйста выберите систему "
+"SCM, которую Вы хотите использовать."
 
 #: www/register/index.php:252 www/register/index.php:254
 #, fuzzy
@@ -22636,16 +22644,20 @@ msgid ""
 "Occasionally, if cronjobs failed or the database was damaged, you may have "
 "to rebuild the reporting tables."
 msgstr ""
+"Иногда, если при повреждении базы данных, Вам, вероятно, придется "
+"восстановить таблицы сообщений."
 
 #: www/reporting/rebuild.php:53
 msgid ""
 "If you are sure you want to rebuild all the reporting tables, check the “I "
 "am Sure” box and click the button below."
 msgstr ""
+"Если Вы уверены, что Вы хотите восстановить все сообщения таблицы, нажмите "
+"“Я уверен”."
 
 #: www/reporting/rebuild.php:56
 msgid "This could take a couple minutes, so DO NOT CLICK MORE THAN ONCE."
-msgstr ""
+msgstr "Это займет несколько минут, так что НЕ ЩЕЛКАЙТЕ ДВАЖДЫ."
 
 #: www/reporting/rebuild.php:67
 msgid "Press ONLY ONCE"
@@ -23078,7 +23090,6 @@ msgid "Error: Only the creator of a package version can add snippets to it."
 msgstr "Только владелец пакета может назначить версию для него."
 
 #: www/snippet/add_snippet_to_package.php:84 www/snippet/addversion.php:40
-#, fuzzy
 msgid "Error: snippet does not exist"
 msgstr "Ошибка - отрезок несуществует"
 
@@ -23158,13 +23169,12 @@ msgid "Paste the Code Here"
 msgstr "Вставить код здесь"
 
 #: www/snippet/addversion.php:128
-#, fuzzy
 msgid "Error: snippet_package does not exist"
 msgstr "Ошибка - пакет отрезков не существует"
 
 #: www/snippet/addversion.php:155 www/snippet/package.php:75
 msgid "Error doing snippet package version insert"
-msgstr "ОШИБКА НАЗНАЧЕНИЯ ВЕРСИИ ПАКЕТУ!"
+msgstr "Ошибка назначения версии пакету!"
 
 #: www/snippet/addversion.php:156
 msgid "New snippet package"
@@ -23378,18 +23388,26 @@ msgid ""
 "The purpose of this archive is to let you share your code snippets, scripts, "
 "and functions with the Open Source Software Community."
 msgstr ""
+"Назначение данной страницы архивов библиотеки, скриптов, заметок и отдельных "
+"частей открытого исходного кода, функций, с другими участниками и "
+"пользователями Сообщества Программного Обеспечения Открытого Типа."
 
 #: www/snippet/index.php:52
 msgid ""
 "You can create a “new snippet”, then post additional versions of that "
 "snippet quickly and easily."
 msgstr ""
+"Здесь Вы можете создать “новую страничку к библиотеке”, которая возможно "
+"будет полезна другим пользователям."
 
 #: www/snippet/index.php:54
 msgid ""
 "Once you have snippets posted, you can then create a “Package” of snippets. "
 "That package can contain multiple, specific versions of other snippets."
 msgstr ""
+"Как только ваша страничка примечаний оформлена, Вы можете создать “буклет” с "
+"примечаниями и вырезками. Такой буклет может содержать разделы по тематикам, "
+"различным версиям вырезок."
 
 #: www/snippet/index.php:56
 #, fuzzy
@@ -23424,16 +23442,21 @@ msgid ""
 "interface. Before creating your package, make sure all your snippets are in "
 "place and you have made a note of the snippet ID's."
 msgstr ""
+"Воспользовавшись этим интерфейсом Вы можете группировать существующие "
+"вырезки кусков сырцов в один пакет. Перед созданием пакета убедитесь, что "
+"все вырезки имеют примечания и идентификаторы."
 
 #: www/snippet/package.php:135
 msgid "Create the package using this form."
-msgstr ""
+msgstr "Воспользовавшись этой  формой создайте пакет."
 
 #: www/snippet/package.php:136
 msgid ""
 "<strong>Then</strong> use the “Add Snippets to Package” link to add files to "
 "your package."
 msgstr ""
+"<strong>После создания</strong> воспользуйтесь “Добавить вырезки в пакет” "
+"связав для добавления в ваш пакет."
 
 #: www/snippet/package.php:138
 msgid ""
@@ -23442,6 +23465,10 @@ msgid ""
 "package. You should only use this page if you are submitting an entirely new "
 "package."
 msgstr ""
+"<span class=\"important\">Примечание:</span> Вы можете установить новую "
+"версию существующего пакета в библиотеке воспользовавшись навигацией и "
+"связать с существующим пакетом. Вы должны пользоватся только этой страницей "
+"если Вы."
 
 #: www/snippet/package.php:143
 #, fuzzy
@@ -23564,8 +23591,6 @@ msgstr ""
 "Вы можете размещать части кода и делить его со всеми людьми по всему миру. "
 "Просто заполните эту информацию. <strong>Дайте хорошее описание.</strong> и "
 "<strong>прокомментируйте ваш код</strong>, чтобы остальные могли понять его."
-"</p><p><span class=\"important\">Примечание:</span> Вы можете принять новую "
-"версию существующего кусочка кода, исследовав "
 
 #: www/snippet/submit.php:93
 #, fuzzy
@@ -23574,11 +23599,8 @@ msgid ""
 "existing snippet by browsing the library. You should only use this page if "
 "you are submitting an entirely new script or function."
 msgstr ""
-"Вы можете размещать части кода и делить его со всеми людьми по всему миру. "
-"Просто заполните эту информацию. <strong>Дайте хорошее описание.</strong> и "
-"<strong>прокомментируйте ваш код</strong>, чтобы остальные могли понять его."
-"</p><p><span class=\"important\">Примечание:</span> Вы можете принять новую "
-"версию существующего кусочка кода, исследовав "
+"<span class=\"important\">Примечание:</span> Вы можете принять новую версию "
+"существующего кусочка кода, исследовав "
 
 #: www/snippet/submit.php:114
 msgid "Script Type"
@@ -23609,9 +23631,9 @@ msgstr "(<strong>%1$s</strong> открыто / <strong>%2$s</strong> всего
 #, fuzzy, php-format
 msgid "<strong>%d</strong> project in result set."
 msgid_plural "<strong>%d</strong> projects in result set."
-msgstr[0] "<strong>%1$s</strong> проектов выделено."
-msgstr[1] "<strong>%1$s</strong> проекта выделено."
-msgstr[2] "<strong>%1$s</strong> проект выделен."
+msgstr[0] "<strong>%d</strong> проектов выделено."
+msgstr[1] "<strong>%d</strong> проекта выделено."
+msgstr[2] "<strong>%d</strong> проект выделен."
 
 #: www/softwaremap/tag_cloud.php:98
 #, php-format
@@ -23864,22 +23886,24 @@ msgstr "Лицензия не выбрана"
 
 #: www/survey/admin/index.php:58
 msgid "It's simple to create a survey."
-msgstr ""
+msgstr "Создание опросов."
 
 #: www/survey/admin/index.php:62
 msgid "Create questions and comments using the forms above."
-msgstr ""
+msgstr "Создайте опрос и прокоментируйте в краткой форме суть вопроса."
 
 #: www/survey/admin/index.php:65
 msgid ""
 "Create a survey, listing the questions in order (choose from <strong>your</"
 "strong> list of questions)."
 msgstr ""
+"При создание опроса, перечислите порядок в списке (выберите <strong>ваш</"
+"strong>перечень вопросов)."
 
 #: www/survey/admin/index.php:68
 #, php-format
 msgid "Link to the survey using this format: %s where XX is the survey number"
-msgstr ""
+msgstr "Постройте связь к опросу используя формат: %s где XX номер опроса"
 
 #: www/survey/admin/index.php:73
 #, php-format
@@ -24121,7 +24145,7 @@ msgstr[2] "Просмотреть все %s коментарии"
 #: www/survey/index.php:48
 #, fuzzy, php-format
 msgid "Surveys for %s"
-msgstr "Источник из %1$s"
+msgstr "Источник из %s"
 
 #: www/survey/index.php:60
 #, fuzzy
@@ -24133,6 +24157,9 @@ msgid ""
 "The information collected in these surveys will never be sold to third "
 "parties or used to solicit you to purchase any goods or services."
 msgstr ""
+"Информация, собранная при этих разработках никогда не будет продаваться "
+"третьим лицам или использоваться, чтобы требовать Вас купить любые товары "
+"или услуги."
 
 #: www/survey/privacy.php:44
 msgid ""
@@ -24140,24 +24167,34 @@ msgid ""
 "developers being surveyed. That profile will help visitors to the site "
 "understand the quality of a given project."
 msgstr ""
+"Эта информация собирается, чтобы строить профиль проектов и рассматриваемых "
+"разработчиков. Этот профиль поможет посетителям автора проекта оценивать "
+"качество данного проекта."
 
 #: www/survey/privacy.php:47
 msgid ""
 "The ID's of those who answer surveys are suppressed and not viewable by "
 "project administrators or the public or third parties."
 msgstr ""
+"авторизация тех, кто отвечает на обзоры, скрыта и не контролируется "
+"администраторами или публикой или третьими лицами."
 
 #: www/survey/privacy.php:50
 msgid ""
 "The information gathered is used only in aggregate form, not to single out "
 "specific users or developers."
 msgstr ""
+"собранная информация используется только в совокупной форме, не выбирать "
+"определенных пользователей или разработчиков."
 
 #: www/survey/privacy.php:53
 msgid ""
 "If any changes are made to this policy, it will affect only future data that "
 "is collected and the user will of course have the ability to 'opt-out'."
 msgstr ""
+"Если какие-нибудь изменения будут сделаны к этой политике, то это затронет "
+"только будущие разработки, которые будут собраны, и участник будет иметь "
+"возможность к уклонению от ответственности."
 
 #: www/survey/rating_resp.php:59
 msgid "Vote registered"
