@@ -87,7 +87,6 @@ if (getStringFromRequest('delete_user') != '') {
 			$projectRoleid = getIntFromRequest('role_id-'.$project_id_to_add);
 			$projectObjectAction = group_get_object($project_id_to_add);
 			if (!$projectObjectAction->addUser((int)$u->getID(), $projectRoleid)) {
-				echo $projectObjectAction->getErrorMessage().$u->getID();
 				$error_msgMembership .= $projectObjectAction->getErrorMessage().'<br/>';
 			} else {
 				$feedbackMembership .= _("Added Successfully to project ").$projectObjectAction->getPublicName().'<br/>';
