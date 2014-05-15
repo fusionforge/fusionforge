@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-13 14:47+0200\n"
+"POT-Creation-Date: 2014-05-15 11:10+0200\n"
 "PO-Revision-Date: 2009-02-01 14:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -732,9 +732,8 @@ msgid "Folder name already exists"
 msgstr ""
 
 #: common/docman/DocumentGroup.class.php:147
-#, fuzzy
 msgid "Error Adding Folder"
-msgstr "Erro Adicionando Fórum:"
+msgstr "Erro Adicionando Fórum"
 
 #: common/docman/DocumentGroup.class.php:241
 msgid "Unsupported injected file"
@@ -1068,8 +1067,9 @@ msgid "File Name"
 msgstr "Nome do Arquivo"
 
 #: common/docman/views/addfile.php:178
+#, fuzzy
 msgid "Documents folder that document belongs in"
-msgstr ""
+msgstr "Grupo ao qual o documento pertence em"
 
 #: common/docman/views/addfile.php:184
 msgid "Status of that document"
@@ -1493,7 +1493,7 @@ msgstr ""
 
 #: common/docman/views/editfile.php:77
 msgid "OPTIONAL Upload new file"
-msgstr ""
+msgstr "OPCIONAL Carregar novo arquivo"
 
 #: common/docman/views/help.php:38
 msgid ""
@@ -2257,9 +2257,8 @@ msgstr ""
 #: common/forum/AttachManager.class.php:179
 #: common/forum/AttachManager.class.php:265
 #: common/forum/AttachManager.class.php:321
-#, fuzzy
 msgid "Could not get message id"
-msgstr "Não pude obter a permissão."
+msgstr ""
 
 #: common/forum/AttachManager.class.php:195
 #: common/forum/AttachManager.class.php:285
@@ -2330,8 +2329,8 @@ msgstr ""
 #, fuzzy, php-format
 msgid "%s message deleted"
 msgid_plural "%s messages deleted"
-msgstr[0] "%s inserida com sucesso."
-msgstr[1] "%s inserida com sucesso."
+msgstr[0] "%s mensagens deletadas"
+msgstr[1] "%s mensagens deletadas"
 
 #: common/forum/ForumAdmin.class.php:255 www/reporting/timeadd.php:67
 #: www/survey/admin/question.php:80 www/tracker/admin/index.php:238
@@ -2544,7 +2543,7 @@ msgstr ""
 #: common/forum/ForumFactory.class.php:192
 #, fuzzy
 msgid "Thread not found"
-msgstr "Enquete não encontrada."
+msgstr "Enquete não encontrada"
 
 #: common/forum/ForumHTML.class.php:58 common/include/rbac_texts.php:191
 #: www/activity/index.php:322 www/forum/forum.php:158 www/forum/index.php:71
@@ -2773,7 +2772,7 @@ msgstr "Nenhum Objeto ParentMessage válido"
 #: common/forum/ForumMessage.class.php:577
 #, fuzzy
 msgid "Invalid Message Id"
-msgstr "Enviar Mensagem"
+msgstr "ID Inválido"
 
 #: common/forum/ForumMessage.class.php:659
 #, php-format
@@ -2831,9 +2830,8 @@ msgid ""
 msgstr ""
 
 #: common/frs/FRSFile.class.php:135
-#, fuzzy
 msgid "FRSFile appears to be invalid."
-msgstr "FRSFile Aparenta ser inválido"
+msgstr "FRSFile Aparenta ser inválido."
 
 #: common/frs/FRSFile.class.php:151 common/frs/FRSFile.class.php:434
 msgid "That filename already exists in this project space"
@@ -2849,9 +2847,8 @@ msgid "Error Adding Release: "
 msgstr "Erro Adicionando Fórum:"
 
 #: common/frs/FRSFile.class.php:232
-#, fuzzy
 msgid "Invalid file_id"
-msgstr "Nome completo inválido"
+msgstr "file_id inválido"
 
 #: common/frs/FRSFile.class.php:416 common/frs/FRSPackage.class.php:400
 #: common/frs/FRSRelease.class.php:438 common/include/Error.class.php:167
@@ -2860,13 +2857,12 @@ msgstr "Nome completo inválido"
 #: www/admin/pending-news.php:106 www/news/admin/index.php:93
 #, php-format
 msgid "Error On Update: %s"
-msgstr ""
+msgstr "Erro Ao Atualizar: %s"
 
 #: common/frs/FRSFileProcessorType.class.php:61
 #: common/frs/FRSFileType.class.php:68
-#, fuzzy
 msgid "Invalid type_id"
-msgstr "Operação inválida"
+msgstr "type_id inválido"
 
 #: common/frs/FRSPackage.class.php:143 common/frs/FRSPackage.class.php:375
 #: common/frs/FRSRelease.class.php:121 common/frs/FRSRelease.class.php:399
@@ -2888,9 +2884,8 @@ msgid "Error Adding Package: "
 msgstr "Erro Adicionando Fórum:"
 
 #: common/frs/FRSPackage.class.php:209
-#, fuzzy
 msgid "Invalid package_id"
-msgstr "Operação inválida"
+msgstr "package_id inválido"
 
 #: common/frs/FRSPackage.class.php:327
 msgid "Error On querying monitor count: "
@@ -2952,9 +2947,8 @@ msgid "Error Adding Release: Name Already Exists"
 msgstr ""
 
 #: common/frs/FRSRelease.class.php:187
-#, fuzzy
 msgid "Invalid release_id"
-msgstr "Senha Inválida:"
+msgstr "release_id inválido"
 
 #: common/frs/FRSRelease.class.php:286
 #, php-format
@@ -3147,10 +3141,13 @@ msgid "Exiting with error"
 msgstr "Saindo com erro"
 
 #: common/include/exit.php:50
+#, fuzzy
 msgid ""
 "Permission denied. This project's administrator will have to grant you "
 "permission to view this page."
 msgstr ""
+"O administrador desse projeto terá que lhe dar permissão para que veja essa "
+"página."
 
 #: common/include/exit.php:68
 msgid ""
@@ -3197,11 +3194,11 @@ msgstr "Versão"
 
 #: common/include/Group.class.php:257
 msgid "Group Not Found"
-msgstr ""
+msgstr "Grupo Não Encontrado"
 
 #: common/include/Group.class.php:310
 msgid "Group object already exists."
-msgstr ""
+msgstr "Objeto Grupo já existe."
 
 #: common/include/Group.class.php:313
 #, fuzzy
@@ -3215,18 +3212,16 @@ msgstr "Nome Unix Inválido."
 
 #: common/include/Group.class.php:319 common/include/Group.class.php:323
 #: common/include/User.class.php:346
-#, fuzzy
 msgid "Unix name already taken."
-msgstr "Nome unix já selecionado"
+msgstr "Nome Unix já selecionado."
 
 #: common/include/Group.class.php:326
-#, fuzzy
 msgid ""
 "Please describe your Registration Project Purpose and Summarization in a "
 "more comprehensive manner."
 msgstr ""
 "Por favor descreva o propósito do seu registro de uma maneira mais "
-"compreensível"
+"compreensível."
 
 #: common/include/Group.class.php:329
 msgid ""
@@ -4393,6 +4388,7 @@ msgstr ""
 #, php-format
 msgid "File %1$s cannot be moved to the permanent location: %2$s."
 msgstr ""
+"O arquivo %1$s não pode ser movido para a localização permanente: %2$s."
 
 #: common/include/Storage.class.php:70
 #, php-format
@@ -4401,7 +4397,7 @@ msgstr ""
 
 #: common/include/User.class.php:246
 msgid "User Not Found"
-msgstr ""
+msgstr "Usuário Não Encontrado"
 
 #: common/include/User.class.php:306
 msgid "You must supply a theme"
@@ -4737,15 +4733,15 @@ msgstr ""
 
 #: common/pm/ProjectTask.class.php:144 common/pm/ProjectTask.class.php:943
 msgid "summary"
-msgstr ""
+msgstr "resumo"
 
 #: common/pm/ProjectTask.class.php:145
 msgid "details"
-msgstr ""
+msgstr "detalhe"
 
 #: common/pm/ProjectTask.class.php:146 common/pm/ProjectTask.class.php:944
 msgid "priority"
-msgstr ""
+msgstr "prioridade"
 
 #: common/pm/ProjectTask.class.php:147 common/pm/ProjectTask.class.php:945
 msgid "hours"
@@ -4762,7 +4758,7 @@ msgstr ""
 #: common/pm/ProjectTask.class.php:150 common/pm/ProjectTask.class.php:949
 #: www/pm/ganttpage.php:250
 msgid "category"
-msgstr ""
+msgstr "categoria"
 
 #: common/pm/ProjectTask.class.php:235
 #, fuzzy
@@ -5022,11 +5018,11 @@ msgstr ""
 
 #: common/survey/Survey.class.php:109 common/survey/Survey.class.php:157
 msgid "Update Failed: Survey Title Required"
-msgstr ""
+msgstr "Atualização Falhou: Título da Enquete Requerido"
 
 #: common/survey/Survey.class.php:113
 msgid "Update Failed: Survey Questions Required"
-msgstr ""
+msgstr "Atualização Falhou: Questões da Enquete Requeridas"
 
 #: common/survey/Survey.class.php:167 common/survey/Survey.class.php:200
 msgid "The Survey data is not filled"
@@ -5657,7 +5653,7 @@ msgstr "* Destaca requisições > %s Dias de Idade"
 #: common/tracker/actions/browse.php:759 common/tracker/actions/browse.php:803
 #: www/pm/browse_task.php:397 www/pm/browse_task.php:430
 msgid "Mass Update"
-msgstr ""
+msgstr "Atualização em massa"
 
 #: common/tracker/actions/browse.php:763 www/pm/browse_task.php:399
 msgid ""
@@ -7881,7 +7877,7 @@ msgstr ""
 
 #: common/widget/Widget_ProjectMembers.class.php:33
 msgid "Project Members"
-msgstr ""
+msgstr "Membros de Projeto"
 
 #: common/widget/Widget_ProjectMembers.class.php:48
 msgid "Project Admins"
@@ -7919,7 +7915,7 @@ msgstr "Home Page do Projeto"
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:75
 msgid "There are no trackers available"
-msgstr ""
+msgstr "Não há nenhum rastreador disponível"
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:87
 #: www/include/project_summary.php:142
@@ -8331,7 +8327,7 @@ msgstr ""
 #: www/include/user_profile.php:87
 #, fuzzy
 msgid "Login Name"
-msgstr "Nome de login:"
+msgstr "Nome de login"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:79
 #: plugins/authldap/include/AuthLDAPPlugin.class.php:209
@@ -11224,7 +11220,7 @@ msgstr ""
 
 #: plugins/mantisbt/controler/filter_roadmap.php:48
 msgid "Versions:"
-msgstr ""
+msgstr "Versões:"
 
 #: plugins/mantisbt/controler/filter_roadmap.php:62
 #: plugins/mantisbt/controler/filter_roadmap.php:94
@@ -13897,9 +13893,8 @@ msgid "Wiki Admin"
 msgstr "Administrador do Site"
 
 #: plugins/wiki/common/WikiPlugin.class.php:91
-#, fuzzy
 msgid "This project's wiki"
-msgstr "%1$s projetos"
+msgstr ""
 
 #: plugins/wiki/common/WikiPlugin.class.php:209
 msgid "List of active wikis in Forge"
@@ -13990,7 +13985,7 @@ msgstr "Página Solicitada não Encontrada (Erro 404)"
 #: www/account/change_email-complete.php:36 www/account/lostlogin.php:38
 #: www/account/unsubscribe.php:36
 msgid "Confirm Hash"
-msgstr ""
+msgstr "Confirmar hash"
 
 #: www/account/change_email-complete.php:45 www/account/lostlogin.php:47
 #: www/account/unsubscribe.php:45
@@ -14000,7 +13995,7 @@ msgstr "Esta hash de confirmação já existe."
 #: www/account/change_email-complete.php:48 www/account/lostlogin.php:50
 #: www/account/unsubscribe.php:48
 msgid "Invalid confirmation hash."
-msgstr ""
+msgstr "Hash de confirmação inválido."
 
 #: www/account/change_email-complete.php:61
 msgid "Email Change Complete"
@@ -14117,9 +14112,9 @@ msgid "Congratulations. You have changed your password."
 msgstr ""
 
 #: www/account/change_pw.php:81
-#, php-format
+#, fuzzy, php-format
 msgid "You should now <a href=\"%s\">Return to User Prefs</a>."
-msgstr ""
+msgstr "Você deveria agora <a href=\"%s\">Retornar para UserPrefs</a>."
 
 #: www/account/change_pw.php:88 www/account/index.php:153
 #: www/admin/userlist.php:150
@@ -14497,10 +14492,14 @@ msgid "You have registered the %1$s account on %2$s."
 msgstr ""
 
 #: www/account/register.php:118
+#, fuzzy
 msgid ""
 "A confirmation email is being sent to verify the submitted email address. "
 "Visiting the link sent in this email will activate the account."
 msgstr ""
+"Será enviado a você um e-mail de confirmação para verificar seu endereço de "
+"e-mail. Ao visitar o link enviado para você nesse e-mail você irá ativar a "
+"sua conta."
 
 #: www/account/register.php:121
 #, php-format
@@ -14521,15 +14520,15 @@ msgstr ""
 
 #: www/account/register.php:152
 msgid "Login Name (do not use uppercase letters)"
-msgstr "Nome de Login (não use letras maiúsculas):"
+msgstr "Nome de Login (não use letras maiúsculas)"
 
 #: www/account/register.php:159
 msgid "Password (min. 6 chars)"
-msgstr "Senha (mín. 6 caracteres):"
+msgstr "Senha (mín. 6 caracteres)"
 
 #: www/account/register.php:165
 msgid "Password (repeat)"
-msgstr "Senha (repita):"
+msgstr "Senha (repita)"
 
 #: www/account/register.php:191
 msgid "Language Choice:"
@@ -15681,12 +15680,11 @@ msgstr "Novo nome curto de categoria (sem espaços, Unix-like)"
 
 #: www/admin/trove/trove_cat_add.php:112
 msgid "New category full name (maximum length is 80 chars)"
-msgstr ""
+msgstr "Novo nome completo de categoria (máx. de 80 caracteres)"
 
 #: www/admin/trove/trove_cat_add.php:114
-#, fuzzy
 msgid "New category description (maximum length is 255 chars)"
-msgstr "Nova descrição de categoria (VARCHAR 255)"
+msgstr "Nova descrição de categoria (máx. de 255 caracteres)"
 
 #: www/admin/trove/trove_cat_edit.php:47
 msgid "Error: a category cannot be the same as its own parent: "
@@ -15713,11 +15711,11 @@ msgstr "Novo nome curto de categoria (sem espaços, Unix-like)"
 
 #: www/admin/trove/trove_cat_edit.php:144
 msgid "Category full name (maximum length is 80 chars)"
-msgstr ""
+msgstr "Nome completo de categoria (máx. de 80 caracteres)"
 
 #: www/admin/trove/trove_cat_edit.php:147
 msgid "Category description (maximum length is 255 chars)"
-msgstr ""
+msgstr "Descrição de categoria (máx. de 255 caracteres)"
 
 #: www/admin/trove/trove_cat_list.php:71
 msgid "Browse Trove Tree"
@@ -16023,7 +16021,7 @@ msgstr "Dir CGI"
 
 #: www/admin/vhost.php:194
 msgid "No such VHOST: "
-msgstr ""
+msgstr "VHOST não encontrado: "
 
 #: www/developer/diary.php:39
 msgid "User could not be found."
@@ -16091,9 +16089,10 @@ msgid "Error: Choose a User To Monitor First"
 msgstr "Erro - Escolha um Usuário para Monitrar Primeiro"
 
 #: www/developer/rate.php:34
+#, fuzzy
 msgid ""
 "Ratings turned off. You chose not to participate in the peer rating system"
-msgstr ""
+msgstr "Você escolheu não participar do sistema de pontuação comparativa"
 
 #: www/developer/rate.php:52
 msgid "Invalid rate value"
@@ -16791,10 +16790,8 @@ msgid "Click here to "
 msgstr ""
 
 #: www/frs/admin/index.php:123
-#, fuzzy
 msgid "quick-release a file"
-msgstr ""
-"Clique aqui para %1$s liberar rapidamente (quick-release) um arquivo %2$s"
+msgstr "liberar rapidamente (quick-release) um arquivo"
 
 #: www/frs/admin/index.php:129
 msgid "Help about Packages and Releases"
@@ -16802,47 +16799,51 @@ msgstr ""
 
 #: www/frs/admin/index.php:130
 msgid "Packages"
-msgstr ""
+msgstr "Pacotes"
 
 #: www/frs/admin/index.php:131
 msgid ""
 "You can use packages to group different file releases together, or use them "
 "however you like."
 msgstr ""
+"Você pode usar pacotes para agrupar diferentes liberações de arquivos, ou "
+"usá-las da forma que melhor convier."
 
 #: www/frs/admin/index.php:132
 msgid "An example of packages:"
-msgstr ""
+msgstr "Um exemplo de pacotes:"
 
 #: www/frs/admin/index.php:134
 msgid "Your Packages:"
-msgstr ""
+msgstr "Seus Pacotes:"
 
 #: www/frs/admin/index.php:136
 msgid "Define your packages"
-msgstr ""
+msgstr "Defina seus pacotes"
 
 #: www/frs/admin/index.php:137
 msgid "Create new releases of packages"
-msgstr ""
+msgstr "Crie novas liberações dos pacotes"
 
 #: www/frs/admin/index.php:139
 msgid "Releases of Packages"
-msgstr ""
+msgstr "Liberações de Pacotes"
 
 #: www/frs/admin/index.php:140
 msgid "A release of a package can contain multiple files."
-msgstr ""
+msgstr "Uma liberação de um pacote pode conter múltiplos arquivos."
 
 #: www/frs/admin/index.php:141
 msgid "Examples of Releases"
-msgstr ""
+msgstr "Exemplos de Liberações"
 
 #: www/frs/admin/index.php:143
 msgid ""
 "You can create new releases of packages by clicking on <strong>Add/Edit "
 "Releases</strong> next to your package name"
 msgstr ""
+"Você pode criar novas liberações de pacotes clicando em <strong>Adicionar/"
+"Editar Liberações</strong> próximo ao nome do seu pacote."
 
 #: www/frs/admin/index.php:158 www/frs/admin/showreleases.php:99
 msgid "Package name"
@@ -17143,11 +17144,11 @@ msgid ""
 "respond with an admin-defined amount of time (default is 14 days) then the "
 "item is given a status of “Deleted”."
 msgstr ""
-"Você pode mudar o estado para 'Pendente' se você está esperando uma resposta "
-"do ítem de rastreamento autor.  Quando o autor responder o estado será "
-"automaticamente reconfigurado para  'Aberto'. Entretanto, se o autor não "
+"Você pode mudar o estado para “Pendente” se você está esperando uma resposta "
+"do ítem de rastreamento autor. Quando o autor responder o estado será "
+"automaticamente reconfigurado para “Aberto”. Entretanto, se o autor não "
 "responder no prazo estipulado pelo administrador (o padrão é 14 dias) então "
-"será atribuído a ele o estado de 'Apagado'."
+"será atribuído a ele o estado de “Apagado”."
 
 #: www/include/html.php:387
 msgid "Tracker category"
@@ -18253,7 +18254,7 @@ msgstr ""
 
 #: www/my/diary.php:136
 msgid "Error Adding Item: "
-msgstr ""
+msgstr "Erro Adicionando Ítem: "
 
 #: www/my/diary.php:151
 msgid "Entry not found or does not belong to you"
@@ -18784,7 +18785,7 @@ msgstr[1] ""
 
 #: www/people/editprofile.php:205
 msgid "This action cannot be undone."
-msgstr ""
+msgstr "Essa ação não pode ser desfeita."
 
 #: www/people/editprofile.php:206
 msgid "Are you <strong>sure</strong> you wish to continue?"
@@ -18886,6 +18887,8 @@ msgid ""
 "The %s Project Help Wanted board is for non-commercial, project volunteer "
 "openings. Commercial use is prohibited."
 msgstr ""
+"O quadro Precisa-se de Ajuda do Projeto %s é para propósitos não comerciais, "
+"ofertas para voluntários de projeto. Seu uso comercial é proibido."
 
 #: www/people/index.php:66
 msgid ""
@@ -18893,22 +18896,31 @@ msgid ""
 "whichever comes first. (Project administrators may always re-post expired "
 "openings.)"
 msgstr ""
+"Listagens de projeto permanecem funcionando por duas semanas, ou até que "
+"sejam fechadas pelo seu remetente, o que ocorrer primeiro. (Administradores "
+"de projeto podem sempre re-enviar ofertas expiradas.)"
 
 #: www/people/index.php:70
 msgid ""
 "Browse through the category menu to find projects looking for your help."
 msgstr ""
+"Navegue pelo menu de categorias para encontrar projetos procurando por sua "
+"ajuda."
 
 #: www/people/index.php:74
 msgid ""
 "If you're a project admin, log in and submit help wanted requests through "
 "your project administration page."
 msgstr ""
+"Se você é um administrador de projeto, faça login e envie requisições de "
+"ajuda através da página de administração do projeto."
 
 #: www/people/index.php:78
 msgid ""
 "To suggest new job categories, submit a request via the support manager."
 msgstr ""
+"Para sugerir novas categorias de trabalho, envie uma solicitação através do "
+"gerenciador de suporte."
 
 #: www/people/index.php:83
 msgid "Last posts"
@@ -18979,9 +18991,8 @@ msgid "Invalid ID"
 msgstr "ID Inválido"
 
 #: www/people/people_utils.php:398
-#, fuzzy
 msgid "No categories found."
-msgstr "Nenhuma Categoria Encontrada"
+msgstr "Nenhuma Categoria Encontrada."
 
 #: www/people/people_utils.php:444
 msgid "Date Opened"
@@ -19132,10 +19143,13 @@ msgid "Add a new subproject"
 msgstr ""
 
 #: www/pm/admin/index.php:276
+#, fuzzy
 msgid ""
 "Add a new subproject to the Tasks. <strong>This is different than adding a "
 "task to a subproject.</strong>"
 msgstr ""
+"Adicionar um novo projeto ao Gerenciador de Projeto/Tarefa. <strong>Isso é "
+"diferente de adicionar uma tarefa a um projeto.</strong>"
 
 #: www/pm/admin/index.php:282
 msgid "New Subproject Name"
@@ -19194,10 +19208,13 @@ msgid "Add a Subproject"
 msgstr ""
 
 #: www/pm/admin/index.php:417
+#, fuzzy
 msgid ""
 "Add a subproject, which can contain a set of tasks. This is different than "
 "creating a new task."
 msgstr ""
+"Adicionar um projeto, que pode conter um conjunto de tarefas. Isso é "
+"diferente de criar uma nova tarefa."
 
 #: www/pm/admin/index.php:423
 msgid "No Subprojects Found in this Project"
@@ -19328,12 +19345,12 @@ msgstr ""
 
 #: www/pm/calendar.php:125
 msgid "Calendar"
-msgstr ""
+msgstr "Calendário"
 
 #: www/pm/calendar.php:140
 #, php-format
 msgid "Task summary: %s"
-msgstr ""
+msgstr "Resumo da Tarefa: %s"
 
 #: www/pm/calendar.php:143
 #, php-format
@@ -19590,9 +19607,8 @@ msgid "start"
 msgstr ""
 
 #: www/pm/ganttpage.php:253
-#, fuzzy
 msgid "end"
-msgstr "pt"
+msgstr ""
 
 #: www/pm/ganttpage.php:254
 msgid "dur."
@@ -20332,7 +20348,7 @@ msgstr "Usar Fóruns"
 
 #: www/project/admin/tools.php:178
 msgid "Use Trackers"
-msgstr ""
+msgstr "Usar Rastreador"
 
 #: www/project/admin/tools.php:191
 msgid "Use Mailing Lists"
@@ -20340,7 +20356,7 @@ msgstr "Usar Listas de Correio"
 
 #: www/project/admin/tools.php:204
 msgid "Use Tasks"
-msgstr ""
+msgstr "Usar Tarefas"
 
 #: www/project/admin/tools.php:217
 msgid "Use Documents"
@@ -20673,7 +20689,7 @@ msgid "Project Purpose And Summarization"
 msgstr ""
 
 #: www/register/index.php:200
-#, php-format
+#, fuzzy, php-format
 msgid ""
 "Please provide detailed, accurate description of your project and what %1$s "
 "resources and in which way you plan to use. This description will be the "
@@ -20682,6 +20698,12 @@ msgid ""
 "description will not be used as a public description of your project. It "
 "must be written in English. From 10 to 1500 characters."
 msgstr ""
+"Por favor forneça de forma detalhada, a descrição completa do seu projeto e "
+"de quais recursos do %1$s você planeja fazer uso. Essa descrição irá ser a "
+"base para a aprovação ou rejeição da hospedagem do seu projeto no %1$s, e "
+"posteriormente, para ter certeza de que você está usando os serviços da "
+"forma como propôs. Essa descrição não será usada como descrição pública do "
+"seu projeto. Ela precisa estar escrita em Português ou Inglês."
 
 #: www/register/index.php:208 www/register/index.php:213
 msgid "Project Public Description"
@@ -21304,7 +21326,6 @@ msgstr ""
 "ele."
 
 #: www/snippet/add_snippet_to_package.php:84 www/snippet/addversion.php:40
-#, fuzzy
 msgid "Error: snippet does not exist"
 msgstr "Erro - Aquele snippet não existe"
 
@@ -22079,11 +22100,14 @@ msgid ""
 "Create a survey, listing the questions in order (choose from <strong>your</"
 "strong> list of questions)."
 msgstr ""
+"Crieuma enquete, listando as questões em ordem (escolha apartir da "
+"<strong>sua</strong> lista de questões)."
 
 #: www/survey/admin/index.php:68
 #, php-format
 msgid "Link to the survey using this format: %s where XX is the survey number"
 msgstr ""
+"Ligue-as a sua enquete usando esse formato: %s onde XX é o número da enquete"
 
 #: www/survey/admin/index.php:73
 #, php-format
@@ -22096,11 +22120,11 @@ msgstr ""
 
 #: www/survey/admin/question.php:55
 msgid "Edit a Question"
-msgstr ""
+msgstr "Editar Uma Questão"
 
 #: www/survey/admin/question.php:55
 msgid "Add a Question"
-msgstr ""
+msgstr "Adicionar Uma Questão"
 
 #: www/survey/admin/question.php:67 www/survey/admin/show_results.php:93
 msgid "Cannot get Survey Question"
@@ -22319,6 +22343,8 @@ msgid ""
 "The information collected in these surveys will never be sold to third "
 "parties or used to solicit you to purchase any goods or services."
 msgstr ""
+"As informações coletadas nessa pesquisa não serão vendidas para terceiros ou "
+"usadas para pedir que você compre quaisquer benefícios ou serviços."
 
 #: www/survey/privacy.php:44
 msgid ""
@@ -22326,24 +22352,34 @@ msgid ""
 "developers being surveyed. That profile will help visitors to the site "
 "understand the quality of a given project."
 msgstr ""
+"Essa informação está sendo coletada para construir um perfil do projeto e "
+"dos desenvolvedores que estão sendo pesquisados. Esse perfil irá ajudar os "
+"visitantes do site a entender a qualidade do projeto em questão."
 
 #: www/survey/privacy.php:47
 msgid ""
 "The ID's of those who answer surveys are suppressed and not viewable by "
 "project administrators or the public or third parties."
 msgstr ""
+"As IDs daqueles que respondem as enquetes são suprimidas e não são visíveis "
+"pelos administradores de projeto ou pelo público ou por terceiros."
 
 #: www/survey/privacy.php:50
 msgid ""
 "The information gathered is used only in aggregate form, not to single out "
 "specific users or developers."
 msgstr ""
+"A informação coletada é usada de forma agregada, não por usuários ou "
+"desenvolvedores específicos."
 
 #: www/survey/privacy.php:53
 msgid ""
 "If any changes are made to this policy, it will affect only future data that "
 "is collected and the user will of course have the ability to 'opt-out'."
 msgstr ""
+"Se quaisquer alterações forem feitas nessa política, elas afetarão apenas os "
+"dados coletados no futuro e o usuário terá obviamente o direito de 'não "
+"respondê-las'."
 
 #: www/survey/rating_resp.php:59
 msgid "Vote registered"
@@ -22373,6 +22409,8 @@ msgstr "Nome Da Enquete"
 msgid ""
 "For some reason, the Project ID or Survey ID did not make it to this page"
 msgstr ""
+"Por alguma razão a ID do Grupo ou a ID da Enquete não fizeram isso para essa "
+"página"
 
 #: www/survey/survey_resp.php:43
 msgid "Survey Complete"
