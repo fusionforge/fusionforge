@@ -69,17 +69,6 @@ if (getStringFromRequest('delete_user') != '') {
 		exit_error( _('Could Not Complete Operation: ').$u->getErrorMessage(),'admin');
 	}
 
-	if ($u->getUnixStatus() != 'N') {
-		$u->setUnixStatus($status);
-	} else {
-		if (count($u->getGroups())>0 && $u->isActive()) {
-			$u->setUnixStatus('A');
-		}else{
-			// make sure that user doesn't have LDAP entry
-			$u->setUnixStatus('N');
-		}
-	}
-
 	if (is_array($addToProjectArray)) {
 		foreach($addToProjectArray as $project_id_to_add) {
 			$feedbackMembership = '';
@@ -98,6 +87,17 @@ if (getStringFromRequest('delete_user') != '') {
 					$gjr->delete(true);
 				}
 			}
+		}
+	}
+
+	if ($u->getUnixStatus() == 'A') {
+		$u->setUnixStatus($status);
+	} else {
+		if (count($u->getGroups())>0 && $u->isActive()) {
+			$u->setUnixStatus('A');
+		}else{
+			// make sure that user doesn't have LDAP entry
+			$u->setUnixStatus('N');
 		}
 	}
 
