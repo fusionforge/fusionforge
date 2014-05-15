@@ -1592,7 +1592,7 @@ class Artifact extends Error {
 
 		if ($type == 1 || $type == 2) {
 			$body .= "\nYou can respond by visiting: ".
-				"\n".util_make_url ('/tracker/?atid='. $this->ArtifactType->getID() .
+				"\n".util_make_url ('/tracker/?func=detail&atid='. $this->ArtifactType->getID() .
 					    "&aid=". $this->getID() .
 					    "&group_id=". $this->ArtifactType->Group->getID()) .
 				"\nOr by replying to this e-mail entering your response between the following markers: ".
