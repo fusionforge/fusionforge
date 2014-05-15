@@ -2962,7 +2962,7 @@ msgstr "Объект опросов отсутствует"
 #: common/frs/FRSFile.class.php:121 common/frs/include/frs_utils.php:256
 #: common/include/account.php:66
 msgid "Name is too short. It must be at least 3 characters."
-msgstr "Слижком короткое имя,  минимум 3 буквы"
+msgstr "Слижком короткое имя, минимум 3 буквы."
 
 #: common/frs/FRSFile.class.php:125
 #, fuzzy
@@ -3211,19 +3211,19 @@ msgstr "Вы добавили участника в проект"
 
 #: common/include/account.php:34
 msgid "Password must be at least 6 characters."
-msgstr "Пароль должен быть минимум из 6 букв"
+msgstr "Пароль должен быть минимум из 6 букв."
 
 #: common/include/account.php:60
 msgid "There cannot be any spaces in the login name."
-msgstr "Пробелы в имени недомустимы"
+msgstr "Пробелы в имени недомустимы."
 
 #: common/include/account.php:70
 msgid "Name is too long. It must be less than 15 characters."
-msgstr "Слижком длинное имя, максимум 15 букв"
+msgstr "Слижком длинное имя, максимум 15 букв."
 
 #: common/include/account.php:75
 msgid "Illegal character in name."
-msgstr "Запрещенные симолы в имени"
+msgstr "Запрещенные симолы в имени."
 
 #: common/include/account.php:84
 #, fuzzy
@@ -3241,11 +3241,11 @@ msgstr "Имя зарезервировано для CVS."
 
 #: common/include/account.php:121
 msgid "Name is reserved for DNS purposes."
-msgstr "Имя зарезервировано для DNS назначений"
+msgstr "Имя зарезервировано для DNS назначений."
 
 #: common/include/account.php:126
 msgid "Group name cannot contain underscore for DNS reasons."
-msgstr "В имени группы нельзя использовать знаки подчеркивания"
+msgstr "В имени группы нельзя использовать знаки подчеркивания."
 
 #: common/include/account.php:323
 #, php-format
@@ -3279,7 +3279,7 @@ msgstr "Ошибка"
 #: www/survey/admin/show_results_individual.php:37
 #: www/survey/admin/show_results.php:68 www/survey/admin/survey.php:55
 msgid "Permission denied."
-msgstr "Доступ запрещен"
+msgstr "Доступ запрещен."
 
 #: common/include/Error.class.php:142 common/include/User.class.php:350
 #: common/include/User.class.php:931 common/include/User.class.php:983
@@ -3320,7 +3320,7 @@ msgstr "Доступ к группе запрещен."
 
 #: common/include/exit.php:102
 msgid "The Site Administrator has turned off this feature."
-msgstr "Управляющий сайтом отключил дополнение"
+msgstr "Управляющий сайтом отключил дополнение."
 
 #: common/include/exit.php:111
 #, fuzzy
@@ -3399,7 +3399,7 @@ msgstr "Слижком длинное описание назначения пр
 
 #: common/include/Group.class.php:332 common/include/Group.class.php:586
 msgid "Describe in a more comprehensive manner your project."
-msgstr "Создайте описание проекта в наиболее краткой и ясной форме"
+msgstr "Создайте описание проекта в наиболее краткой и ясной форме."
 
 #: common/include/Group.class.php:374
 #, php-format
@@ -3413,7 +3413,7 @@ msgstr "Нет группы: %s"
 
 #: common/include/Group.class.php:428 common/include/Group.class.php:511
 msgid "Could not get permission."
-msgstr "Ошибка уровня доступа"
+msgstr "Ошибка уровня доступа."
 
 #: common/include/Group.class.php:449
 #, php-format
@@ -3577,7 +3577,7 @@ msgstr "Ошибка получения объекта участника: %s"
 
 #: common/include/Group.class.php:1992
 msgid "User is not active. Only active users can be added."
-msgstr "Добавлены в группу могут быть только активные участники"
+msgstr "Добавлены в группу могут быть только активные участники."
 
 #: common/include/Group.class.php:2004
 msgid "Error Getting Role Object"
@@ -3846,7 +3846,7 @@ msgstr "Запрос на присоединение к проекту %1$s"
 #: common/include/GroupJoinRequest.class.php:234
 #, php-format
 msgid "%1$s (%2$s) has requested to join your project."
-msgstr "Запрос присоединения к проекту от участника %1$s (%2$s)"
+msgstr "Запрос присоединения к проекту от участника %1$s (%2$s)."
 
 #: common/include/GroupJoinRequest.class.php:237
 #, php-format
@@ -4745,7 +4745,7 @@ msgid ""
 "login."
 msgstr ""
 "В базе сайта такой емейл уже существует, воспользуйтесь службой "
-"восстановления пароля"
+"восстановления пароля."
 
 #: common/include/User.class.php:436 common/survey/Survey.class.php:129
 #: common/tracker/actions/admin-updates.php:114
@@ -6285,7 +6285,7 @@ msgstr ""
 #: common/tracker/actions/ind.php:50
 msgid "Choose a tracker and you can browse/edit/add items to it."
 msgstr ""
-"Выберите из списка трекер, в котором Вы будете добавлять или изменять задачи"
+"Выберите из списка трекер, в котором Вы будете добавлять или изменять задачи."
 
 #: common/tracker/actions/ind.php:54
 #: plugins/mantisbt/view/admin/StatPerStatus.php:49
@@ -7176,7 +7176,7 @@ msgid ""
 "common artifact requests."
 msgstr ""
 "Задайте удобную форму главноых сообщений для частоого использования при "
-"поиске поддерживающую основные запросы образца"
+"поиске поддерживающую основные запросы образца."
 
 #: common/tracker/views/form-addcanned.php:76
 #: common/tracker/views/form-updatecanned.php:48
@@ -11803,7 +11803,7 @@ msgstr "Не найдено списков для %s"
 msgid "Project administrators use the admin link to request mailing lists."
 msgstr ""
 "Администраторы проекта пользуются административной ссылкой для запроса "
-"списка рассылок"
+"списка рассылок."
 
 #: plugins/mailman/www/index.php:64
 msgid ""
@@ -15333,7 +15333,7 @@ msgstr "Вы должны иметь пароль минимум из 6 букв
 #: www/account/change_pw.php:61 www/account/lostlogin.php:66
 #: www/admin/passedit.php:65
 msgid "New passwords do not match."
-msgstr "Пароли не совпадают"
+msgstr "Пароли не совпадают."
 
 #: www/account/change_pw.php:66 www/admin/passedit.php:73
 #, fuzzy
@@ -15683,7 +15683,7 @@ msgid ""
 "password:"
 msgstr ""
 "Если Вы запрашивали о подтверждении Вашей регистрации, следуйте "
-"нижеприведенной ссылке следуя по ней."
+"нижеприведенной ссылке следуя по ней:"
 
 #: www/account/lostpw.php:72
 #, fuzzy
@@ -15885,7 +15885,7 @@ msgstr "Ошибка в подтверждении, несоответствие
 
 #: www/account/verify.php:56
 msgid "Credentials you entered do not correspond to valid account."
-msgstr "Указаная учетная запись не найдена"
+msgstr "Указаная учетная запись не найдена."
 
 #: www/account/verify.php:58
 #, fuzzy
@@ -16226,7 +16226,7 @@ msgstr "добавлено к активной базе данных"
 
 #: www/admin/database.php:82
 msgid "Unable to insert already active database."
-msgstr "Добавление к базе блокировано"
+msgstr "Добавление к базе блокировано."
 
 #: www/admin/database.php:86
 msgid "Site Admin: Groups' DB Maintenance"
@@ -16984,7 +16984,7 @@ msgstr "Если Вы не уверены, тогда зачем вы нажим
 
 #: www/admin/responses_admin.php:111
 msgid "By the way, I didn't delete... just in case..."
-msgstr "к стати, я не удалил... просто в случае... "
+msgstr "к стати, я не удалил... просто в случае..."
 
 #: www/admin/responses_admin.php:120
 msgid "Added Response"
@@ -16992,7 +16992,7 @@ msgstr "Отзыв добавлен"
 
 #: www/admin/responses_admin.php:125
 msgid "Create New Response:"
-msgstr "Создать новый отзыв"
+msgstr "Создать новый отзыв:"
 
 #: www/admin/search.php:41
 msgid "Admin Search Results"
@@ -17183,11 +17183,11 @@ msgstr "Отобразить участников соответствующих
 
 #: www/admin/unsubscribe.php:118
 msgid "Site Mail."
-msgstr "Почта Сайта"
+msgstr "Почта Сайта."
 
 #: www/admin/unsubscribe.php:119
 msgid "Comm. Mail."
-msgstr "Почта Сообщества"
+msgstr "Почта Сообщества."
 
 #: www/admin/useredit.php:34
 msgid "No Unix account (N)"
@@ -17601,7 +17601,7 @@ msgstr ""
 
 #: www/docman/view.php:290 www/docman/view.php:296
 msgid "No document to display - invalid or inactive document number."
-msgstr "Нет документов для показа"
+msgstr "Нет документов для показа."
 
 #: www/docman/view.php:293
 msgid "PHP ZIP extension is missing."
@@ -18413,7 +18413,7 @@ msgstr "Нет файлов"
 
 #: www/frs/index.php:81
 msgid "There are no file packages defined for this project."
-msgstr "Выделенный объект не имеет пакетов"
+msgstr "Выделенный объект не имеет пакетов."
 
 #: www/frs/index.php:85
 msgid "Below is a list of all files of the project."
@@ -18607,7 +18607,7 @@ msgid ""
 "This drop-down box represents the person to which a tracker item is assigned."
 msgstr ""
 "Это раскрывающееся окно представляет список на кого может быть назначено "
-"задание в трекере"
+"задание в трекере."
 
 #: www/include/html.php:383
 msgid "This drop-down box represents the current status of a tracker item."
@@ -19988,7 +19988,7 @@ msgstr ""
 
 #: www/news/submit.php:78
 msgid "Submitting news from the news group is not allowed."
-msgstr "Ваши новости блокированы"
+msgstr "Ваши новости блокированы."
 
 #: www/news/submit.php:107
 #, fuzzy
@@ -20444,7 +20444,7 @@ msgstr "Служба поиска вакансий"
 
 #: www/people/index.php:46
 msgid "Here is a list of positions available for this project."
-msgstr "Список вакантных позиций для этого проекта"
+msgstr "Список вакантных позиций для этого проекта."
 
 #: www/people/index.php:52
 msgid " as "
@@ -20453,7 +20453,7 @@ msgstr ""
 #: www/people/index.php:54
 msgid "Click job titles for more detailed descriptions."
 msgstr ""
-"Для детального ознакомления с типом работы выберите интересующий Вас пункт"
+"Для детального ознакомления с типом работы выберите интересующий Вас пункт."
 
 #: www/people/index.php:62
 #, php-format
@@ -20611,7 +20611,7 @@ msgstr "Просмотр профиля участника"
 
 #: www/people/viewprofile.php:64
 msgid "This user has set his/her profile to private."
-msgstr "Учетная запись этого участника скрыта"
+msgstr "Учетная запись этого участника скрыта."
 
 #: www/people/viewprofile.php:69
 msgid "Skills profile for"
@@ -21016,7 +21016,7 @@ msgstr ""
 
 #: www/pm/csv.php:88 www/pm/uploadcsv.php:44
 msgid "Choose a file in the proper .csv format for uploading."
-msgstr "Укажите файл в формате .csv для отправки"
+msgstr "Укажите файл в формате .csv для отправки."
 
 #: www/pm/csv.php:95
 msgid ""
@@ -21322,7 +21322,7 @@ msgid ""
 "You should choose only tasks which must be completed before this task can "
 "start."
 msgstr ""
-"Вы должны выбрать только те задачи, которые должны быть закончены ранее этой"
+"Вы должны выбрать только те задачи, которые должны быть закончены ранее этой."
 
 #: www/pm/mod_task.php:262 www/reporting/index.php:69
 #: www/reporting/timeadd.php:104 www/reporting/timeadd.php:220
@@ -23099,7 +23099,7 @@ msgstr "ОШИБКА УКАЗАНИЯ ВЕРСИИ ВЫРЕЗКИ"
 
 #: www/snippet/add_snippet_to_package.php:112 www/snippet/addversion.php:75
 msgid "Snippet Version Added Successfully."
-msgstr "Отрезок версии добавлен"
+msgstr "Отрезок версии добавлен."
 
 #: www/snippet/add_snippet_to_package.php:115 www/snippet/addversion.php:78
 #: www/snippet/addversion.php:199 www/snippet/package.php:123
@@ -23331,7 +23331,7 @@ msgstr ""
 
 #: www/snippet/detail.php:109
 msgid "Latest Snippet Version: "
-msgstr "Последняя версия отрезков"
+msgstr "Последняя версия отрезков: "
 
 #: www/snippet/detail.php:118 www/snippet/detail.php:199
 msgid "Submit a new version"
@@ -23671,7 +23671,7 @@ msgstr "Аргумент файла не верен."
 
 #: www/source.php:53
 msgid "Cannot find specified file to display."
-msgstr "Файл для отображения не найден"
+msgstr "Файл для отображения не найден."
 
 #: www/source.php:56
 #, php-format
@@ -23759,7 +23759,7 @@ msgstr "Проекты в категории хранилища:"
 
 #: www/stats/site_stats_utils.php:130
 msgid "OR enter Special Project List:"
-msgstr "Или укажите специальный лист проекта"
+msgstr "Или укажите специальный лист проекта:"
 
 #: www/stats/site_stats_utils.php:132
 msgid "<strong>comma separated</strong> group_id's)"
@@ -23800,7 +23800,7 @@ msgstr "Отмечено"
 
 #: www/stats/site_stats_utils.php:330
 msgid "Query returned no valid data."
-msgstr "Ответ на запрос искажен"
+msgstr "Ответ на запрос искажен."
 
 #: www/stats/site_stats_utils.php:354
 #, php-format
@@ -24104,7 +24104,7 @@ msgstr "Опросы были окончены"
 
 #: www/survey/include/SurveyHTML.class.php:474
 msgid "Warning - you are about to vote a second time on this survey."
-msgstr "Вторичное голосование недопустимо"
+msgstr "Вторичное голосование недопустимо."
 
 #: www/survey/include/SurveyHTML.class.php:592
 msgid "No Votes"
@@ -24165,7 +24165,7 @@ msgstr "Голосование зарегистрировано"
 
 #: www/survey/rating_resp.php:60
 msgid "If you vote again, your old vote will be erased."
-msgstr "Если вы голосуете еще раз, предидущее Ваше решение будет изменено"
+msgstr "Если вы голосуете еще раз, предидущее Ваше решение будет изменено."
 
 #: www/survey/rating_resp.php:64
 #, fuzzy
@@ -24280,7 +24280,7 @@ msgstr ""
 
 #: www/top/topusers.php:52
 msgid "Information about highest ranked users is not available."
-msgstr "Нет информации об участниках высшего ранга "
+msgstr "Нет информации об участниках высшего ранга."
 
 #: www/top/topusers.php:55
 msgid "Top users"
