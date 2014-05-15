@@ -87,7 +87,6 @@ if (getStringFromRequest('delete_user') != '') {
 			$projectRoleid = getIntFromRequest('role_id-'.$project_id_to_add);
 			$projectObjectAction = group_get_object($project_id_to_add);
 			if (!$projectObjectAction->addUser((int)$u->getID(), $projectRoleid)) {
-				echo $projectObjectAction->getErrorMessage().$u->getID();
 				$error_msgMembership .= $projectObjectAction->getErrorMessage().'<br/>';
 			} else {
 				$feedbackMembership .= _("Added Successfully to project ").$projectObjectAction->getPublicName().'<br/>';
@@ -286,14 +285,14 @@ if ($i > 0) {
 	echo '<p>'._('This user is not a member of any project.').'</p>';
 }
 
-echo '<h2>'._('Add membership to new projects').'</h2>';
+echo '<h2>'._('Add membership to new projects').' '._('(100 shown)').'</h2>';
 $addToNewProjectsTableTitle = array();
 $addToNewProjectsTableTitle[] = '';
 $addToNewProjectsTableTitle[] = _('Name');
 $addToNewProjectsTableTitle[] = _('Unix Name');
 $addToNewProjectsTableTitle[] = _('Operations');
 $addToNewProjectsTableTitle[] = _('Select role');
-$fullListProjectsQueryResult = db_query_params('SELECT group_id from groups where status = $1 and is_template = 0', array('A'));
+$fullListProjectsQueryResult = db_query_params('SELECT group_id from groups where status = $1 and is_template = 0 LIMIT 100', array('A'));
 if ($fullListProjectsQueryResult) {
 	echo $GLOBALS['HTML']->listTableTop($addToNewProjectsTableTitle);
 	while ($projectQueryResult = db_fetch_array($fullListProjectsQueryResult)) {
