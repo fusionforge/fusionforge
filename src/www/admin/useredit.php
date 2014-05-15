@@ -286,14 +286,14 @@ if ($i > 0) {
 	echo '<p>'._('This user is not a member of any project.').'</p>';
 }
 
-echo '<h2>'._('Add membership to new projects').'</h2>';
+echo '<h2>'._('Add membership to new projects').' '._('(100 shown)').'</h2>';
 $addToNewProjectsTableTitle = array();
 $addToNewProjectsTableTitle[] = '';
 $addToNewProjectsTableTitle[] = _('Name');
 $addToNewProjectsTableTitle[] = _('Unix name');
 $addToNewProjectsTableTitle[] = _('Operations');
 $addToNewProjectsTableTitle[] = _('Select role');
-$fullListProjectsQueryResult = db_query_params('SELECT group_id from groups where status = $1 and is_template = 0', array('A'));
+$fullListProjectsQueryResult = db_query_params('SELECT group_id from groups where status = $1 and is_template = 0 LIMIT 100', array('A'));
 if ($fullListProjectsQueryResult) {
 	echo $GLOBALS['HTML']->listTableTop($addToNewProjectsTableTitle);
 	while ($projectQueryResult = db_fetch_array($fullListProjectsQueryResult)) {
