@@ -4177,14 +4177,12 @@ msgid "Posted data is too large. %1$s exceeds the maximum size of %2$s"
 msgstr ""
 
 #: common/include/RBAC.php:196
-#, fuzzy
 msgid "Cannot link to home project"
-msgstr "Unixname des Projekts:"
+msgstr ""
 
 #: common/include/RBAC.php:231
-#, fuzzy
 msgid "Cannot unlink from home project"
-msgstr "Alle Tracker für meine Projekte"
+msgstr ""
 
 #: common/include/RBAC.php:608
 msgid "UNKNOWN (internal error, report bug to FusionForge)"
@@ -4699,13 +4697,12 @@ msgid "Passwords do not match"
 msgstr "Die Passwörter sind nicht identisch"
 
 #: common/include/User.class.php:332
-#, fuzzy
 msgid "Invalid Password"
-msgstr "Ungültiges Passwort:"
+msgstr "Ungültiges Passwort"
 
 #: common/include/User.class.php:337
 msgid "Invalid Unix Name (must not contain uppercase characters)"
-msgstr "Unix-Name (keine Großbuchstaben)"
+msgstr "Ungültiges Unix-Name (keine Großbuchstaben)"
 
 #: common/include/User.class.php:360
 msgid ""
@@ -4801,7 +4798,7 @@ msgstr "Konnte News Forum: %d nicht löschen"
 #: common/include/User.class.php:639
 #, fuzzy
 msgid "Error: Cannot Update User Object:"
-msgstr "Fehler - Konnte den Unix Gruppen Status nicht aktualisieren: %s"
+msgstr "Fehler - Konnte den Unix Gruppen Status nicht aktualisieren:"
 
 #: common/include/User.class.php:733
 #, fuzzy
@@ -4815,7 +4812,7 @@ msgstr ""
 #: common/include/User.class.php:746
 #, fuzzy
 msgid "Error: Cannot Update User Status:"
-msgstr "Fehler - Konnte den Unix Gruppen Status nicht aktualisieren: %s"
+msgstr "Fehler - Konnte den Unix Gruppen Status nicht aktualisieren:"
 
 #: common/include/User.class.php:939 common/include/User.class.php:991
 msgid "User with this email already exists."
@@ -6035,7 +6032,7 @@ msgid ""
 "File. This format can be used to view your entries using your favorite "
 "spreadsheet software."
 msgstr ""
-"Diese Seite erlaubt Ihnen eine CVS-Datei zu nutzen um alle Aufgaben zu "
+"Diese Seite erlaubt Ihnen eine CSV-Datei zu nutzen um alle Aufgaben zu "
 "exportieren oder importieren (<a href=\"http://en.wikipedia.org/wiki/Comma-"
 "separated_values\">Comma Separated Values</a>). Dieses Format kann genutzt "
 "werden um Aufgaben in MS Excel zu betrachten."
@@ -22021,9 +22018,8 @@ msgid "Virtual Host Management"
 msgstr "Virtual Host Management"
 
 #: www/project/admin/vhost.php:108
-#, fuzzy
 msgid "Add New Virtual Host"
-msgstr "Virtuellen Host hinzufügen"
+msgstr "Neuen Virtual Host hinzufügen"
 
 #: www/project/admin/vhost.php:111
 #, php-format
@@ -22031,7 +22027,10 @@ msgid ""
 "To add a new virtual host - simply point a <strong>CNAME</strong> for "
 "<em>yourhost.org</em> at <strong>%1$s.%2$s</strong>.  %3$s does not "
 "currently host mail (i.e. cannot be an MX) or DNS</strong>."
-msgstr ""
+msgstr "Um einen neuen Virtual Host hinzuzufügen "
+"erstellen Sie einfach einen <strong>CNAME</trong> für <em>yourhost.org</"
+"em> in <strong>%1$s.%2$s</strong>. %3$s hostet momentan keine Mails (kann "
+"also kein MX sein) oder DNS</strong>."
 
 #: www/project/admin/vhost.php:115
 #, php-format
@@ -22039,7 +22038,7 @@ msgid ""
 "Clicking on “Create” will schedule the creation of the Virtual Host.  This "
 "will be synced to the project webservers - such that <em>yourhost.org</em> "
 "will display the material at <em>%1$s.%2$s</em>."
-msgstr ""
+msgstr "Ein Klick auf »erzeugen« wird die Erzeugung eines Virtual Hosts planen. Dies wird mit den Projekt-Webservern synchronisiert werde - so daß <em>yourhost.org</em> das Material unter <em>%1$s.%2$s</em> anzeigt."
 
 #: www/project/admin/vhost.php:123
 msgid "New Virtual Host <em>(e.g. vhost.org)</em>"
@@ -22235,69 +22234,69 @@ msgstr ""
 msgid ""
 "In addition to full project name, you will need to choose short, “Unix” name "
 "for your project."
-msgstr ""
+msgstr "Zusätzlich zum vollständigen Projektnamen, "
+"müssen Sie einen kurzen »Unix« Namen für Ihr Projekt wählen."
 
 #: www/register/index.php:219
 msgid ""
 "The “Unix Name” has several restrictions because it is used in so many "
 "places around the site. They are:"
-msgstr ""
+msgstr "Der "
+"»Unix Name« hat mehrere Einschränkungen, da er an vielen Stellen auf "
+"der Website benutzt wird. Diese sind:"
 
 #: www/register/index.php:221
-#, fuzzy
 msgid "cannot match the Unix name of any other project;"
-msgstr "Unixname des Projekts:"
+msgstr "Er darf keinem anderen Projektnamen gleichen"
 
 #: www/register/index.php:222
 msgid "must be between 3 and 15 characters in length;"
-msgstr ""
+msgstr "Er muss zwischen 3 und 15 Zeichen lang sein"
 
 #: www/register/index.php:223
 msgid ""
 "must be in lower case (upper case letters will be converted to lower case);"
-msgstr ""
+msgstr "Er muss in Kleinbuchstaben geschrieben sein;"
 
 #: www/register/index.php:224
 msgid "can only contain characters, numbers, and dashes;"
-msgstr ""
+msgstr "Er darf nur Buchstaben, Zahlen und Striche enthalten"
 
 #: www/register/index.php:225
-#, fuzzy
 msgid "must be a valid Unix username;"
-msgstr "Ungültiger Unixname"
+msgstr "Er muss ein gültiger Unix Nutzernamen sein"
 
 #: www/register/index.php:226
 msgid "cannot match one of our reserved domains;"
-msgstr ""
+msgstr "Er darf nicht wie eine unserer reservierten Domains lauten"
 
 #: www/register/index.php:227
-#, fuzzy
 msgid "Unix name will never change for this project;"
-msgstr "Unixname des Projekts:"
+msgstr "Der Unix Name für ein Projekt wird sich niemals ändern"
 
 #: www/register/index.php:229
 msgid ""
 "Your Unix name is important, however, because it will be used for many "
 "things, including:"
-msgstr ""
+msgstr "Ihr Unix Name ist äußerst wichtig, da er für viele Dinge verwendet wird, darunter:"
 
 #: www/register/index.php:231
 #, php-format
 msgid "a web site at <tt>unixname.%s</tt>,"
-msgstr ""
+msgstr "Eine Website unter <tt>unixname.%1$s</tt>,"
 
 #: www/register/index.php:232
 msgid "the URL of your source code repository,"
-msgstr ""
+msgstr "die URL der SCM Repository,"
 
 #: www/register/index.php:234
 #, php-format
 msgid "shell access to <span class=\"tt\">unixname.%s</span>,"
-msgstr ""
+msgstr "Shell Zugang zu <span class=\"tt\">unixname.%s</span>,"
 
 #: www/register/index.php:236
 msgid "search engines throughout the site."
-msgstr ""
+msgstr "Suchmaschinen auf der gesamten Site."
 
 #: www/register/index.php:249
 msgid ""
@@ -24468,32 +24467,12 @@ msgstr "Kein Benutzername angegeben"
 #~ msgid "Trackers Admin"
 #~ msgstr "Tracker Admin"
 
-#~ msgid ""
-#~ "Read/write access to Mercurial tree is allowed for authenticated users. "
-#~ "SSH must be installed on your client machine. Enter your site password "
-#~ "when prompted."
-#~ msgstr ""
-#~ "Ausschliesslich Projektentwickler können mit dieser Methode auf den "
-#~ "Mercurial - Baum zugreifen. SSH muss auf Ihrem Client-Rechner installiert "
-#~ "sein. Geben Sie nach der Aufforderung Ihr Site-Passwort ein."
-
 #, fuzzy
 #~ msgid "Substitute <em>developername</em> with the proper values."
 #~ msgstr "Ersetzen Sie <em>developername</em> durch den korrekten Wert."
 
 #~ msgid "Developer Mercurial Access via SSH"
 #~ msgstr "Mercurial Entwicklerzugang über SSH"
-
-#~ msgid ""
-#~ "Only project developers can access the Mercurial tree via this method. "
-#~ "SSH must be installed on your client machine. Substitute "
-#~ "<em>developername</em> with the proper value. Enter your site password "
-#~ "when prompted."
-#~ msgstr ""
-#~ "Ausschliesslich Projektentwickler können mit dieser Methode auf den "
-#~ "Mercurial - Baum zugreifen. SSH muss auf Ihrem Client-Rechner installiert "
-#~ "sein. Ersetzen Sie <em>developername</em> durch den korrekten Wert. Geben "
-#~ "Sie nach der Aufforderung Ihr Site-Passwort ein."
 
 #~ msgid "Account Maintenance"
 #~ msgstr "Accountverwaltung"
@@ -25752,18 +25731,6 @@ msgstr "Kein Benutzername angegeben"
 #~ msgid "Invalid confirmation hash"
 #~ msgstr "Ungültiger Hash-Wert der Bestätigung"
 
-#, fuzzy
-#~ msgid ""
-#~ "Congratulations, you have re-set your account password. You may <a href="
-#~ "\"%1$s\">login</a> to the site now."
-#~ msgstr ""
-#~ "<h2>Passwort verändert</h2><p>Glückwunsch, Sie haben Ihr Account Passwort "
-#~ "zurückgesetzt. Sie können nun auf der Seite <a href=\"%1$s\">einloggen</"
-#~ "a>.</p>"
-
-#~ msgid "ERROR"
-#~ msgstr "Fehler"
-
 #~ msgid "New Password (min. 6 chars)"
 #~ msgstr "Neues Passwort (mind. 6 Buchstaben)"
 
@@ -26086,21 +26053,6 @@ msgstr "Kein Benutzername angegeben"
 
 #, fuzzy
 #~ msgid ""
-#~ "Clicking \"Send Lost PW Hash\" below will email a URL to the email "
-#~ "address we have on file for you. In this URL is a 128-bit confirmation "
-#~ "hash for your account. Visiting the URL will allow you to change your "
-#~ "password online and login."
-#~ msgstr ""
-#~ "<p>Hey... Ihr Paßwort zu verlieren ist eine ernste Angelegenheit! Es "
-#~ "kompromittiert die Sicherheit Ihres Accounts, Ihrer Projekte und dieser "
-#~ "Seite.</p><p>Klicken Sie auf \"Send Lost PW Hash\" unten um einen Link "
-#~ "per E-Mail an Ihre gespeicherte Mailadresse zu erhalten. Dieser Link "
-#~ "beinhaltet einen 128-bit Bestätigungs-Hash für Ihren Account. Wenn Sie "
-#~ "den Link anklicken, erhalten Sie die Gelegenheit Ihr Passwort Online zu "
-#~ "ändern und einzuloggen.</p>"
-
-#, fuzzy
-#~ msgid ""
 #~ "Project %1$s (%2$s) has released a new version of package \"%3$s\".\n"
 #~ "\n"
 #~ "Release note:\n"
@@ -26209,20 +26161,6 @@ msgstr "Kein Benutzername angegeben"
 #~ msgstr "Ungültiger Benutzer: %s"
 
 #~ msgid ""
-#~ "This project's Git repository can be cloned and fetched through anonymous "
-#~ "or read access with the following command."
-#~ msgstr ""
-#~ "Das Git Repository dieses Projektes kann durch einen anonymen Zugang mit "
-#~ "dem folgenden Kommando ausgecheckt werden."
-
-#~ msgid ""
-#~ "This project's Git repository can be cloned and fetched with the "
-#~ "following command."
-#~ msgstr ""
-#~ "Das Git Repository dieses Projektes kann durch einen anonymen Zugang mit "
-#~ "dem folgenden Kommando ausgecheckt werden."
-
-#~ msgid ""
 #~ "To avoid having to type your password every time for your CVS/SSH "
 #~ "developer account, you may upload your public key(s) here and they will "
 #~ "be placed on the CVS server in your ~/.ssh/authorized_keys file. This is "
@@ -26281,38 +26219,8 @@ msgstr "Kein Benutzername angegeben"
 #~ msgid "Displaying %1$s per page. Projects sorted by alphabetical order."
 #~ msgstr "Pro Seite werden %1$s angezeigt. Projekte sortiert nach Alphabet."
 
-#, fuzzy
-#~ msgid ""
-#~ "Only project developers can access the Bazaar branches via this method. "
-#~ "Enter your site password when prompted."
-#~ msgstr ""
-#~ "<p><strong>Bazaar Entwicklerzugang über SSH</strong></"
-#~ "p><p>Ausschliesslich Projektentwickler können mit dieser Methode auf die "
-#~ "Bazaar Branches zugreifen. SSH muss auf Ihrem Client-Rechner installiert "
-#~ "sein. Geben Sie nach der Aufforderung Ihr Site-Passwort ein.</p>"
-
-#, fuzzy
-#~ msgid ""
-#~ "Only project developers can access the Bazaar branches via this method. "
-#~ msgstr ""
-#~ "<p><strong>Bazaar Entwicklerzugang über SSH</strong></"
-#~ "p><p>Ausschliesslich Projektentwickler können mit dieser Methode auf die "
-#~ "Bazaar Branches zugreifen. SSH muss auf Ihrem Client-Rechner installiert "
-#~ "sein. Ersetzen Sie <em>developername</em> durch den korrekten Wert. Geben "
-#~ "Sie nach der Aufforderung Ihr Site-Passwort ein.</p>"
-
 #~ msgid "Bazaar Repository Browser"
 #~ msgstr "Bazaar Repository Browser"
-
-#, fuzzy
-#~ msgid ""
-#~ "Browsing the Bazaar tree gives you a view into the current status of this "
-#~ "project's code. You may also view the complete histories of any file in "
-#~ "the repository."
-#~ msgstr ""
-#~ "<p>Wenn Sie den Bazaar Baum durchsuchen, erhalten Sie Einblick in den "
-#~ "gegenwärtigen Stand des Projekt-Codes. Sie können zudem die vollständige "
-#~ "Historie aller Files im Repository einsehen.</p>"
 
 #~ msgid "Browse Bazaar Repository"
 #~ msgstr "Durchsuche Bazaar Repository"
@@ -26330,54 +26238,6 @@ msgstr "Kein Benutzername angegeben"
 #~ msgid "<a href=\"%1$s\">Browse</a> CCase tree"
 #~ msgstr "<a href=\"%1$s\">Durchsuchen</a> CCase Baum"
 
-#, fuzzy
-#~ msgid ""
-#~ "<p><strong>Developer CPOLD Access via SSH</strong></p><p>Only project "
-#~ "developers can access the CPOLD tree via this method. SSH must be "
-#~ "installed on your client machine. Enter your site password when prompted."
-#~ "</p>"
-#~ msgstr ""
-#~ "<p><strong>Entwickler CPOLD Zugang über SSH</strong></"
-#~ "p><p>Ausschliesslich Projektentwickler können mit dieser Methode auf den "
-#~ "CPOLD Baum zugreifen. SSH muss auf Ihrem Client-Rechner installiert sein. "
-#~ "Geben Sie nach der Aufforderung Ihr Site-Passwort ein.</p>"
-
-#, fuzzy
-#~ msgid ""
-#~ "<p><strong>Developer CPOLD Access via SSH</strong></p><p>Only project "
-#~ "developers can access the CPOLD tree via this method. SSH must be "
-#~ "installed on your client machine. Substitute <em>developername</em> with "
-#~ "the proper value. Enter your site password when prompted.</p>"
-#~ msgstr ""
-#~ "<p><strong>CPOLD Entwicklerzugang über SSH</strong></p><p>Ausschliesslich "
-#~ "Projektentwickler können mit dieser Methode auf den CPOLD Baum zugreifen. "
-#~ "SSH muss auf Ihrem Client-Rechner installiert sein. Ersetzen Sie "
-#~ "<em>developername</em> durch den korrekten Wert. Geben Sie nach der "
-#~ "Aufforderung Ihr Site-Passwort ein.</p>"
-
-#, fuzzy
-#~ msgid ""
-#~ "Only project developers can access the CVS tree via this method. SSH must "
-#~ "be installed on your client machine. Substitute <em>modulename</em> with "
-#~ "the proper values. Enter your site password when prompted."
-#~ msgstr ""
-#~ "<p><strong>CVS Entwicklerzugang über SSH</strong></p><p>Ausschliesslich "
-#~ "Projektentwickler können mit dieser Methode auf den CVS Baum zugreifen. "
-#~ "SSH muss auf Ihrem Client-Rechner installiert sein. Ersetzen Sie "
-#~ "<em>modulename</em> durch den korrekten Wert. Geben Sie nach der "
-#~ "Aufforderung Ihr Site-Passwort ein.</p>"
-
-#, fuzzy
-#~ msgid ""
-#~ "Only project developers can access the CVS tree via this method. SSH must "
-#~ "be installed on your client machine. Substitute <em>modulename</em> and "
-#~ msgstr ""
-#~ "<p><strong>CVS Entwicklerzugang über SSH</strong></p><p>Ausschliesslich "
-#~ "Projektentwickler können mit dieser Methode auf den CVS Baum zugreifen. "
-#~ "SSH muss auf Ihrem Client-Rechner installiert sein. Ersetzen Sie "
-#~ "<em>modulename</em> und <em>developername</em> durch die korrekten Werte. "
-#~ "Geben Sie nach der Aufforderung Ihr Site-Passwort ein.</p>"
-
 #~ msgid "CVS Repository Browser"
 #~ msgstr "SCM Repository Browser"
 
@@ -26391,48 +26251,8 @@ msgstr "Kein Benutzername angegeben"
 #~ msgid "Browse Darcs Repository "
 #~ msgstr "Durchsuche Darcs Repository "
 
-#, fuzzy
-#~ msgid ""
-#~ "Only project developers can access the SVN tree via this method. SSH must "
-#~ "be installed on your client machine. Enter your site password when "
-#~ "prompted."
-#~ msgstr ""
-#~ "<p><strong>Subversion Entwicklerzugang über SSH</strong></"
-#~ "p><p>Ausschliesslich Projektentwickler können mit dieser Methode auf den "
-#~ "SVN - Baum zugreifen. SSH muss auf Ihrem Client-Rechner installiert sein."
-#~ "Geben Sie nach der Aufforderung Ihr Site-Passwort ein.</p>"
-
-#, fuzzy
-#~ msgid ""
-#~ "Only project developers can access the SVN tree via this method. SSH must "
-#~ "be installed on your client machine. Substitute <em>developername</em> "
-#~ msgstr ""
-#~ "<p><strong>Git Entwicklerzugang über SSH</strong></p><p>Nur "
-#~ "Projektentwickler können den Git-Baum über diese Methode erreichen. SSH "
-#~ "muss auf Ihrem Client installiert sein. Ersetzen Sie <em>developername</"
-#~ "em> mit den korrekten Werten. Geben Sie nach Aufforderung Ihr Site-"
-#~ "Passwort ein.</p>"
-
-#, fuzzy
-#~ msgid "Only project developers can access the SVN tree via this method. "
-#~ msgstr ""
-#~ "<p><strong>Subversion Entwicklerzugang über DAV</strong></"
-#~ "p><p>Ausschliesslich Projektentwickler können mit dieser Methode auf den "
-#~ "SVN - Baum zugreifen. Ersetzen Sie <em>developername</em> durch den "
-#~ "korrekten Wert. Geben Sie nach der Aufforderung Ihr Site-Passwort ein.</p>"
-
 #~ msgid "Subversion Repository Browser"
 #~ msgstr "Subversion Repository Browser"
-
-#, fuzzy
-#~ msgid ""
-#~ "Browsing the Subversion tree gives you a view into the current status of "
-#~ "this project's code. You may also view the complete histories of any file "
-#~ "in the repository."
-#~ msgstr ""
-#~ "<p>Wenn Sie den Subversion-Baum durchsuchen, erhalten Sie Einblick in den "
-#~ "aktuellen Status des Projekt-Codes. Sie können zudem die vollständige "
-#~ "Historie aller Files im Repository einsehen.</p>"
 
 #~ msgid "Browse Subversion Repository"
 #~ msgstr "Durchsuche Subversion Repository"
@@ -26631,10 +26451,6 @@ msgstr "Kein Benutzername angegeben"
 #, fuzzy
 #~ msgid "Menu Type"
 #~ msgstr "Link-Typ"
-
-#, fuzzy
-#~ msgid "Your HTML Code."
-#~ msgstr "Quellcode"
 
 #, fuzzy
 #~ msgid "Add a new link"
@@ -26875,10 +26691,6 @@ msgstr "Kein Benutzername angegeben"
 #, fuzzy
 #~ msgid " Archives"
 #~ msgstr "%1$s Archive"
-
-#, fuzzy
-#~ msgid "This Mercurial plugin is not completed yet."
-#~ msgstr "<p>Dieses Mercurial Plugin ist noch nicht fertiggestellt.</p>"
 
 #, fuzzy
 #~ msgid "Could not update SSH authorized keys: %s"
@@ -27203,38 +27015,6 @@ msgstr "Kein Benutzername angegeben"
 #~ "Beobachter. Wenn der Beobachter zum Beispiel CVS lesen kann, dann kann "
 #~ "dies jede andere Rolle in dem Projekt auch."
 
-#, fuzzy
-#~ msgid ""
-#~ "<p>In addition to full project name, you will need to choose short,\"Unix"
-#~ "\" name for your project.</p><p>The \"Unix Name\" has several "
-#~ "restrictions because it is used in so many places around the site. They "
-#~ "are:</p><ul><li>Cannot match the unix name of any other project</"
-#~ "li><li>Must be between 3 and 15 characters in length</li><li>Must be in "
-#~ "lower case</li><li>Can only contain characters, numbers, and dashes</"
-#~ "li><li>Must be a valid unix username</li><li>Cannot match one of our "
-#~ "reserved domains</li><li>Unix name will never change for this project</"
-#~ "li></ul><p/>Your unix name is important, however, because it will be used "
-#~ "for many things, including:<ul><li>A web site at <tt>unixname.%1$s</tt></"
-#~ "li><li>A CVS Repository root of <tt>/cvsroot/unixname</tt> at <tt>cvs."
-#~ "unixname.%1$s</tt></li><li>Shell access to <tt>unixname.%1$s</tt></"
-#~ "li><li>Search engines throughout the site</li></ul><p>Unix Name:</p>"
-#~ msgstr ""
-#~ "<h3>4. Unix Projektname</h3>Zusätzlich zum vollständigen Projektnamen, "
-#~ "müssen Sie einen kurzen \"Unix\" Namen für Ihr Projekt wählen.<p/> Der "
-#~ "\"Unix Name\" hat mehrere Einschränkungen, da er an vielen Stellen auf "
-#~ "der Website benutzt wird. Diese sind: <ul><li>Er darf keinem anderen "
-#~ "Projektnamen gleichen</ li><li>Er muss zwischen 3 und 15 Zeichen lang "
-#~ "seinli><li> Er muss in Kleinbuchstaben geschrieben sein</li><li>Er darf "
-#~ "nur Buchstaben, Zahlen und Striche enthalten</ li><li>Er muss ein "
-#~ "gültiger Unix Nutzernamen sein</li><li>Er darf nicht wie eine unserer "
-#~ "reservierten Domains lauten</li><li>Der Unix Name für ein Projekt wird "
-#~ "sich niemals ändern</li></ul><p/>Ihr Unix Name ist äußerst wichtig, da er "
-#~ "für viele Dinge verwendet wird, darunter:<ul><li>Eine Website unter "
-#~ "<tt>unixname.%1$s</tt></li><li>Eine CVS Repository Root <tt>/cvsroot/"
-#~ "unixname</tt> at <tt>cvs.unixname.%1$s</tt></li><li>Shell Zugang zu "
-#~ "<tt>unixname.%1$s</tt></li><li>Suchmaschinen auf der gesamten Site</li></"
-#~ "ul><p/>Unix Name:<br/>"
-
 #~ msgid "Search in"
 #~ msgstr "Suche in"
 
@@ -27402,39 +27182,6 @@ msgstr "Kein Benutzername angegeben"
 #~ msgid "Not Object: SurveyQuestion: %d"
 #~ msgstr "Umfragefrage %d ist kein Objekt."
 
-#~ msgid ""
-#~ "<p><strong>Developer Darcs Access via SSH</strong></p><p>Only project "
-#~ "developers can access the Darcs tree via this method. SSH must be "
-#~ "installed on your client machine. Substitute <em>developername</em> with "
-#~ "the proper values. Enter your site password when prompted.</p>"
-#~ msgstr ""
-#~ "<p><strong>Darcs Entwicklerzugang über SSH</strong></p><p>Ausschliesslich "
-#~ "Projektentwickler können mit dieser Methode auf den Darcs - Baum "
-#~ "zugreifen. SSH muss auf Ihrem Client-Rechner installiert sein. Ersetzen "
-#~ "Sie <em>developername</em> durch den korrekten Wert. Geben Sie nach der "
-#~ "Aufforderung Ihr Site-Passwort ein.</p>"
-
-#~ msgid ""
-#~ "<p><strong>Anonymous Mercurial Access</strong></p><p>This project's "
-#~ "Mercurial repository can be checked out through anonymous access with the "
-#~ "following command.</p>"
-#~ msgstr ""
-#~ "<p><strong>Anonymer Mercurial Zugang</strong></p><p>Das Mercurial "
-#~ "Repository dieses Projektes kann durch einen anonymen Zugang mit dem "
-#~ "folgenden Kommando ausgecheckt werden.</p>"
-
-#~ msgid ""
-#~ "<p><strong>Developer Subversion Access via SSH</strong></p><p>Only "
-#~ "project developers can access the SVN tree via this method. SSH must be "
-#~ "installed on your client machine. Substitute <em>developername</em> with "
-#~ "the proper values. Enter your site password when prompted.</p>"
-#~ msgstr ""
-#~ "<p><strong>Subversion Entwicklerzugang über SSH</strong></"
-#~ "p><p>Ausschliesslich Projektentwickler können mit dieser Methode auf den "
-#~ "SVN - Baum zugreifen. SSH muss auf Ihrem Client-Rechner installiert sein. "
-#~ "Ersetzen Sie <em>developername</em> durch den korrekten Wert. Geben Sie "
-#~ "nach der Aufforderung Ihr Site-Passwort ein.</p>"
-
 #~ msgid "View Personal webcalendar"
 #~ msgstr "Betrachte persönlichen Webkalender"
 
@@ -27488,30 +27235,6 @@ msgstr "Kein Benutzername angegeben"
 #~ "Sie müssen ein Administrator des Projektes sein, das Sie bearbeiten "
 #~ "möchten oder ein Mitglied des %s News-Teams."
 
-#~ msgid ""
-#~ "<p>The %1$s Project Help Wanted board is for non-commercial, project "
-#~ "volunteer openings. Commercial use is prohibited.</p><p>Project listings "
-#~ "remain live for two weeks, or until closed by the poster, whichever comes "
-#~ "first. (Project administrators may always re-post expired openings.)</"
-#~ "p><p>Browse through the category menu to find projects looking for your "
-#~ "help.</p><p>If you're a project admin, log in and submit help wanted "
-#~ "requests through your project administration page.</p><p>To suggest new "
-#~ "job categories, submit a request via the support manager.</p>"
-#~ msgstr ""
-#~ "<p>Das %1$s Projekthilfe-Gesucht Brett ist für nicht-kommerzielle, "
-#~ "Freiwillige Projekt Eröffungen. Kommerzieller Gebrauch ist verboten.</"
-#~ "p><p>Projekt Auflistungen bleiben 2 Wochen lang live oder bis sie vom "
-#~ "Eröffner geschlossen werden. (Projekt Administratoren können immer "
-#~ "Neuigkeiten zu geschlossenen Eröffungen schreiben.)</p><p>Durchsuchen Sie "
-#~ "das Kategoriemenü, um Projekte zu finden, die nach Hilfe suchen.</"
-#~ "p><p>Falls Sie ein Projektadministrator sind, loggen Sie sich ein und "
-#~ "schreiben Hilfegesuche mithilfe der Administrationsseite.</p><p>Um neue "
-#~ "Jobkateforien vorzuschlagen, schreibe eine Bitte via Support-Manager.</p>"
-
-#, fuzzy
-#~ msgid "Subprojects and Tasks"
-#~ msgstr "Name des Unterprojektes"
-
 #~ msgid "Group information updated"
 #~ msgstr "Gruppeninformationen aktualisiert"
 
@@ -27535,26 +27258,6 @@ msgstr "Kein Benutzername angegeben"
 
 #~ msgid "Use Tracker"
 #~ msgstr "Benutze Tracker"
-
-#, fuzzy
-#~ msgid ""
-#~ "<strong><span style=\"text-decoration:underline\">Add New Virtual Host</"
-#~ "span></strong><p>To add a new virtual host - simply point a "
-#~ "<strong>CNAME</strong> for <em>yourhost.org</em> at <strong>%1$s.%2$s</"
-#~ "strong>.  %3$s does not currently host mail (i.e. cannot be an MX) or "
-#~ "DNS</strong>.  <p>Clicking on \"create\" will schedule the creation of "
-#~ "the Virtual Host.  This will be synced to the project webservers - such "
-#~ "that <em>yourhost.org</em> will display the material at <em>%4$s.%5$s</"
-#~ "em>."
-#~ msgstr ""
-#~ "<strong><span style=\"text-decoration:underline\">Neuen Virtual Host "
-#~ "hinzufügen</span></strong><p>Um einen neuen Virtual Host hinzuzufügen "
-#~ "erstellen Sie einfach einen <strong>CNAME</trong> für <em>yourhost.org</"
-#~ "em> in <strong>%1$s.%2$s</strong>. %3$s hostet momentan keine Mails (kann "
-#~ "also kein MX sein) oder DNS</strong>. <p>Ein Klick auf  \"erzeugen\" wird "
-#~ "die Erzeugung eines Virtual Hosts planen. Dies wird mit den Projekt-"
-#~ "Webservern synchronisiert werde - so daß <em>yourhost.org</em> das "
-#~ "Material unter <em>%4$s.%5$s</em> anzeigt."
 
 #~ msgid "%1$s Site Statistics"
 #~ msgstr "%1$s Seitenstatistiken"
@@ -27639,33 +27342,6 @@ msgstr "Kein Benutzername angegeben"
 #~ msgid_plural "%1$s surveys found"
 #~ msgstr[0] "%1$s Umfrage gefunden"
 #~ msgstr[1] "%1$s Umfragen gefunden"
-
-#~ msgid ""
-#~ "<p>The information collected in these surveys will never be sold to third "
-#~ "parties or used to solicit you to purchase any goods or services.</"
-#~ "p><p>This information is being gathered to build a profile of the "
-#~ "projects and developers being surveyed. That profile will help visitors "
-#~ "to the site understand the quality of a given project.</p><p>The ID's of "
-#~ "those who answer surveys are suppressed and not viewable by project "
-#~ "administrators or the public or third parties.</p><p>The information "
-#~ "gathered is used only in aggregate form, not to single out specific users "
-#~ "or developers.</p><p>If any changes are made to this policy, it will "
-#~ "affect only future data that is collected and the user will of course "
-#~ "have the ability to 'opt-out'."
-#~ msgstr ""
-#~ "<p>Die Informationen, die in diesen Umfragen gesammelt werden, werden "
-#~ "weder an dritte Personen verkauft noch werden Ihnen Waren oder Leistungen "
-#~ "anbeworben.</p><p>Diese Informationen werden gesammelt, um ein Profil der "
-#~ "Projekte und Entwickler zu entwerfen, die an der Umfrage teilgenommen "
-#~ "haben. Das Profil wird den Besuchern dieser Seite helfen, die Qualität "
-#~ "eines Projektes zu verstehen.</p><p>Die ID's derjenigen, die an der "
-#~ "Umfrage teilgenommen haben, werden unterdrückt und sind für "
-#~ "Projektadministratoren, die Öffentlichkeit oder dritte Personen nicht "
-#~ "einsehbar.</p><p>Die gesammelten Informationen wird nur in Gesamtform "
-#~ "genutzt und nicht um besondere Benutzer oder Entwickler auszuwählen.</"
-#~ "p><p>Wenn sich etwas an dieser Verfahrensweise ändert, wird dies nur "
-#~ "Auswirkungen auf zukünftig gesammelte Daten haben und der Benutzer wird "
-#~ "natürlich die Möglichkeit zum Ausloggen haben."
 
 #~ msgid "Top Projects"
 #~ msgstr "Top-Projekte"
@@ -27863,17 +27539,6 @@ msgstr "Kein Benutzername angegeben"
 #~ msgid "Must Choose A Message First"
 #~ msgstr "Sie müssen zuerst eine Nachricht auswählen"
 
-#~ msgid ""
-#~ "Step 2: Add Files To This Release</h3><p>Now, choose a file to upload "
-#~ "into the system. The maximum file size is determined by the site "
-#~ "administrator, but defaults to 2MB. If you need to upload large files, "
-#~ "contact your site administrator.</p>"
-#~ msgstr ""
-#~ "Schritt 2: Dateien zu dieser Version hinzufügen</h3><p>Wählen Sie nun "
-#~ "eine Datei, zum Hochladen ins System. Die maximale Seitengröße wird vom "
-#~ "Seitenadministrator bestimmt, aber Standard sind 2MB. Falls Sie große "
-#~ "Dateien hochladen müssen, kontaktieren Sie Ihren Seitenadministrator.</p>"
-
 #~ msgid "File Released: You May Choose To Edit the Release Now"
 #~ msgstr "Datei freigegeben: Sie können die Version nun bearbeiten"
 
@@ -28000,29 +27665,6 @@ msgstr "Kein Benutzername angegeben"
 #~ msgid "Invalid File Argument"
 #~ msgstr "Ungültiges Dateiargument"
 
-#~ msgid ""
-#~ "Other statistics:<ul><li><a href=\"i18n.php\">I18n Statistics</a></li></"
-#~ "ul>"
-#~ msgstr ""
-#~ "Andere Statistiken:<ul><li><a href=\"i18n.php\">I18n Statistics</a></li></"
-#~ "ul>"
-
-#~ msgid "UPDATE SUCCESSFUL"
-#~ msgstr "UPDATE ERFOLGREICH"
-
-#~ msgid ""
-#~ "<p>It's simple to create a survey.<ol><li>Create questions and comments "
-#~ "using the forms above.</li><li>Create a survey, listing the questions in "
-#~ "order (choose from <strong>your</strong> list of questions).</li><li>Link "
-#~ "to the survey using this format: %1$s where XX is the survey number"
-#~ msgstr ""
-#~ "<p>Es ist einfach eine Umfrage zu erstellen.<ol><li>Erstellen Sie Fragen "
-#~ "und Kommentare, indem Sie die Formulare benutzen.</li><li>Erstellen Sie "
-#~ "eine Umfrage, die Fragen nach Reihenfolge aufgelistet (wählen Sie "
-#~ "aus<strong>Ihrer</strong> Fragenliste).</li><li>Verlinken Sie die "
-#~ "Umfrage, indem Sie dieses Format benutzen: %1$s , wobei XX die "
-#~ "Umfragenummer ist"
-
 #~ msgid "This Group Has Turned Off Surveys."
 #~ msgstr "Diese Gruppe hat die Umfragefunktion abgeschaltet."
 
@@ -28031,9 +27673,6 @@ msgstr "Kein Benutzername angegeben"
 
 #~ msgid "Click to return to previous page"
 #~ msgstr "Klicken Sie um auf die vorherige Seite zurückzukommen"
-
-#~ msgid "ERROR!!! MISSING PARAMS"
-#~ msgstr "Fehler!!! Fehlende Parameter"
 
 #~ msgid "Error - For some reason group_id and/or survey_id did not make it he"
 #~ msgstr ""
@@ -28055,42 +27694,6 @@ msgstr "Kein Benutzername angegeben"
 
 #~ msgid "Postal address"
 #~ msgstr "Postalische Adresse"
-
-#~ msgid ""
-#~ "<p><strong>Developer Bazaar Access via SSH</strong></p><p>Only project "
-#~ "developers can access the Bazaar branches via this method. SSH must be "
-#~ "installed on your client machine. Substitute <em>developername</em> with "
-#~ "the proper values. Enter your site password when prompted.</p>"
-#~ msgstr ""
-#~ "<p><strong>Bazaar Entwicklerzugang über SSH</strong></p><p>Nur "
-#~ "Projektentwickler können die Bazaar Branches über diese Methode "
-#~ "erreichen. SSH muss auf Ihrem Client installiert sein. Ersetzen Sie "
-#~ "<em>developername</em> mit den korrekten Werten. Geben Sie nach "
-#~ "Aufforderung Ihr Site-Passwort ein.</p>"
-
-#~ msgid ""
-#~ "<p><strong>Developer CPOLD Access via SSH</strong></p><p>Only project "
-#~ "developers can access the CPOLD tree via this method. SSH must be "
-#~ "installed on your client machine. Substitute <em>developername</em> with "
-#~ "the proper values. Enter your site password when prompted.</p>"
-#~ msgstr ""
-#~ "<p><strong>CPOLD Entwicklerzugang über SSH</strong></p><p>Nur "
-#~ "Projektentwickler können den CPOLD-Baum über diese Methode erreichen. SSH "
-#~ "muss auf Ihrem Client installiert sein. Ersetzen Sie <em>developername</"
-#~ "em> mit den korrekten Werten. Geben Sie nach Aufforderung Ihr Site-"
-#~ "Passwort ein.</p>"
-
-#~ msgid ""
-#~ "<p><strong>Developer Mercurial Access via SSH</strong></p><p>Only project "
-#~ "developers can access the Mercurial tree via this method. SSH must be "
-#~ "installed on your client machine. Substitute <em>developername</em> with "
-#~ "the proper values. Enter your site password when prompted.</p>"
-#~ msgstr ""
-#~ "<p><strong>Mercurial Entwicklerzugang über SSH</strong></p><p>Nur "
-#~ "Projektentwickler können den Mercurial-Baum über diese Methode erreichen. "
-#~ "SSH muss auf Ihrem Client installiert sein. Ersetzen Sie "
-#~ "<em>developername</em> mit den korrekten Werten. Geben Sie nach "
-#~ "Aufforderung Ihr Site-Passwort ein.</p>"
 
 #~ msgid "RSS/XML Exports"
 #~ msgstr "RSS/XML-Exporte"
@@ -28292,329 +27895,6 @@ msgstr "Kein Benutzername angegeben"
 
 #~ msgid "I'm sorry, there is no such page as %s."
 #~ msgstr "Leider gibt es keine solche Seite %s."
-
-# word substitution order changes here
-#~ msgid "Differences between %s and %s of %s."
-#~ msgstr "Zeilenweiser Vergleich von %3$s, von %1$s mit %2$s."
-
-# versandet (=full of sand) ;)
-# weitergeleitet von
-#~ msgid "(Redirected from %s)"
-#~ msgstr "(Weitergeleitet von %s)"
-
-#~ msgid ""
-#~ "Some of the changes could not automatically be combined.  Please look for "
-#~ "sections beginning with “%s”, and ending with “%s”.  You will need to "
-#~ "edit those sections by hand before you click Save."
-#~ msgstr ""
-#~ "Einige der Änderungen konnten nicht automatisch miteinander verbunden "
-#~ "werden. Bitte suchen Sie nach den Teilen, die mit »%s« anfangen und mit "
-#~ "»%s« enden. Sie müssen diese Teile von Hand bearbeiten, bevor Sie auf "
-#~ "Speichern klicken."
-
-#~ msgid "Author will be logged as %s."
-#~ msgstr "%s wird als Autor aufgenommen."
-
-#~ msgid "Created directory “%s” for the page dump..."
-#~ msgstr "Ein Verzeichnis »%s« wurde erzeugt, um die Dateien abzulegen..."
-
-#~ msgid "Using directory “%s”"
-#~ msgstr "Das Verzeichnis »%s« wird verwendet"
-
-#~ msgid "saved as %s"
-#~ msgstr "gespeichert als %s"
-
-#~ msgid "%s bytes written"
-#~ msgstr "%s Bytes geschrieben"
-
-#~ msgid "from %s"
-#~ msgstr "von %s"
-
-#~ msgid "has edit conflicts - overwriting anyway"
-#~ msgstr ""
-#~ "hat unauflösbare Konflikte beim Speichern - wird ungeprüft überschrieben"
-
-#~ msgid "has edit conflicts - skipped"
-#~ msgstr "hat unauflösbare Konflikte beim Speichern - übersprungen"
-
-#~ msgid "content is identical to current version %d - no new revision created"
-#~ msgstr ""
-#~ "Inhalt ist identisch mit der aktuellen Version %d - keine neue Version "
-#~ "erzeugt"
-
-#~ msgid "- version %d saved to database as version %d"
-#~ msgstr "- version %d in der Datenbank gespeichert als Version %d."
-
-#~ msgid "%s is disallowed on this wiki."
-#~ msgstr "»%s« ist auf diesem Wiki nicht zugelassen."
-
-# Missing PagePermission:| access | pagename
-#~ msgid "%s %s %s is disallowed on this wiki for %s user “%s” (level: %s)."
-#~ msgstr ""
-#~ "%s %s »%s« ist auf diesem Wiki für %s Benutzer »%s« (Level: %s) nicht "
-#~ "zugelassen."
-
-#~ msgid "List of pages owned by [%s] (%d total):"
-#~ msgstr "Liste der Seiten owned by [%s] (%d insgesamt):"
-
-#~ msgid "List of pages last edited by [%s] (%d total):"
-#~ msgstr "Liste der Seiten last edited by [%s] (%d insgesamt):"
-
-#~ msgid "List of pages created by [%s] (%d total):"
-#~ msgstr "Liste der Seiten erzeugt von [%s] (%d insgesamt):"
-
-#~ msgid "Elapsed time: %s s"
-#~ msgstr "Dauer: %s s"
-
-#~ msgid "General Auth Settings"
-#~ msgstr "Allgemeine Authentifizierungs-Einstellungen"
-
-#~ msgid "History of all major and minor edits by %s to page %s."
-#~ msgstr ""
-#~ "Verlaufsprotokoll aller großen und kleinen Änderungen von %s der Seite %s."
-
-#~ msgid ""
-#~ "History of all major and minor modifications for any page edited by %s."
-#~ msgstr ""
-#~ "Verlaufsprotokoll aller großen und kleinen Änderungen aller Seiten, die "
-#~ "von %s bearbeitet wurden."
-
-#~ msgid "Querying backend directly for “%s”"
-#~ msgstr "DB Debug Informationen von der Seite »%s«"
-
-#~ msgid "No other page links to %s yet."
-#~ msgstr "Noch keine Seiten sind mit %s verlinkt."
-
-#~ msgid "One page would link to %s:"
-#~ msgstr "Eine Seite würde mit %s verlinkt sein:"
-
-#~ msgid "%s pages would link to %s:"
-#~ msgstr "%s Seiten würden mit %s verlinkt sein:"
-
-#~ msgid "only %d pages displayed"
-#~ msgstr "nur %d Seiten angezeigt"
-
-#~ msgid "These page titles match fuzzy with “%s”"
-#~ msgstr "Diese Seitentitel sind das Ergebnis der FuzzySuche nach »%s«."
-
-#~ msgid "%s parameter missing"
-#~ msgstr "%s Argument fehlt"
-
-#~ msgid "These pages share an initial or final title word with “%s”"
-#~ msgstr ""
-#~ "Diese Seiten teilen sich einen Wordteil am Anfang oder Ende mit »%s«"
-
-#~ msgid "“%s” is no ModeratedPage anymore."
-#~ msgstr "“%s” ist keine ModeratierteSeite mehr."
-
-#~ msgid "The %d least popular pages of this wiki:"
-#~ msgstr "Die %d selten besuchten Seiten dieses Wikis:"
-
-# "Page dump" (Speicherauszug?) den WikiQuelltext von (Seitenname)
-#~ msgid "Preview: Page dump of %s"
-#~ msgstr "Vorschau: Seitendump von %s"
-
-#~ msgid "Check any two boxes then %s."
-#~ msgstr "Wählen Sie zwei Versionen aus, dann %s."
-
-#~ msgid "%s is only allowed in locked pages."
-#~ msgstr "%s wird/werden nur in gesperrten Seiten erlaubt."
-
-#~ msgid "The %d most recent %s during the past day are listed below."
-#~ msgstr ""
-#~ "Die %d jüngste %s innerhalb des letzten Tages sind unten aufgelistet."
-
-#~ msgid "The %d most recent %s during the past %s days are listed below."
-#~ msgstr ""
-#~ "Die %d jüngste %s innerhalb der letzten %s Tage sind unten aufgelistet."
-
-#~ msgid "The %d most recent %s are listed below."
-#~ msgstr "Die %d jüngste %s sind unten aufgelistet."
-
-#~ msgid "The %d oldest %s during the past day are listed below."
-#~ msgstr ""
-#~ "Die %d älteste %s innerhalb des letzten Tages sind unten aufgelistet."
-
-#~ msgid "The %d oldest %s during the past %s days are listed below."
-#~ msgstr ""
-#~ "Die %d älteste %s innerhalb der letzten %s Tage sind unten aufgelistet."
-
-#~ msgid "The %d oldest %s are listed below."
-#~ msgstr "Die %d älteste %s sind unten aufgelistet."
-
-#~ msgid "The most recent %s during the past day are listed below."
-#~ msgstr "Die jüngste %s innerhalb des letzten Tages sind unten aufgelistet."
-
-#~ msgid "The most recent %s during the past %s days are listed below."
-#~ msgstr ""
-#~ "Die jüngste %s innerhalb der letzten %s Tage sind unten aufgelistet."
-
-#~ msgid "All %s are listed below."
-#~ msgstr "Alle %s sind unten aufgelistet."
-
-#~ msgid "Recursive redirect to self: “%s”"
-#~ msgstr "Eigenbezogene Selbstrückleitung: »%s«"
-
-#~ msgid " (to pages linked from \"%s\")"
-#~ msgstr "(auf Seiten verlinkt von \"%s\")"
-
-# Transclude is distinct from IncludePage
-#~ msgid "Transcluded from %s"
-#~ msgstr "Eingebetteter Text von %s"
-
-#~ msgid ""
-#~ "Your translated text doesn't yet appear in this %s, but the Administrator "
-#~ "will pick it up and add to the installation."
-#~ msgstr ""
-#~ "Dein übersetzter Text erscheint noch nicht in %s, aber ein Administrator "
-#~ "wird sich darum kümmern."
-
-#~ msgid "Your translation is stored in %s"
-#~ msgstr "Deine Übersetzung ist in %s abgespeichert"
-
-#~ msgid "From english to %s: "
-#~ msgstr "Von Englisch nach %s: "
-
-#~ msgid "Included from %s:"
-#~ msgstr "Eingefügter Text von %s:"
-
-#~ msgid "Files with extension %s are not allowed."
-#~ msgstr "Dateien mit der Endung %s sind nicht erlaubt."
-
-#~ msgid "Access denied to change page “%s”."
-#~ msgstr "Zugang verweigert um Seite “%s” zu ändern."
-
-#~ msgid "change page “%s” to markup type “%s”."
-#~ msgstr "Formatierung der Seite “%s” auf “%s” geändert."
-
-#~ msgid "Also pages which have been deleted at least %s days."
-#~ msgstr "Auch Seiten, die in den letzten %s Tagen gelöscht wurden."
-
-#~ msgid "Replaced “%s” with “%s” in page “%s”."
-#~ msgstr "“%s” mit “%s” in Seite “%s” ersetzt."
-
-#~ msgid "Selected page “%s” passed to “%s”."
-#~ msgstr "Ausgewählte Seite »%s« an »%s« übergeben."
-
-#~ msgid "ACL not changed for page “%s”."
-#~ msgstr "ACL für Seite “%s” nicht geändert."
-
-#~ msgid "Deleted %s pages with invalid names:"
-#~ msgstr "%s Seiten mit ungültigen Namen gelöscht:"
-
-#~ msgid "Deleted %s unreferenced pages:"
-#~ msgstr "%s unverlinkte Seiten entfernt:"
-
-#~ msgid "%s on %s:"
-#~ msgstr "%s um %s:"
-
-#~ msgid "WikiForm: %s: unknown action"
-#~ msgstr "WikiForm: %s: unbekannte Aktion"
-
-#~ msgid ""
-#~ "Since you started the deletion process, someone has saved a new version "
-#~ "of %s.  Please check to make sure you still want to permanently remove "
-#~ "the page from the database."
-#~ msgstr ""
-#~ "Während Sie den Löschungsprozess begonnen haben, hat jemand anderer eine "
-#~ "neue Version von %s gespeichert. Bitte entscheiden Sie ob Sie die Seite "
-#~ "noch von der Datenbank permanent löschen wollen."
-
-#~ msgid "I'm sorry.  Version %d of %s is not in the database."
-#~ msgstr "Leider ist keine Version %d von %s in der Datenbank."
-
-#~ msgid "%4d  %s\n"
-#~ msgstr "%4d  %s\n"
-
-#~ msgid "Oops! Revision %s of %s seems to have been deleted!"
-#~ msgstr "Hoppla! Es scheint, die Version %s von %s wurde gelöscht!"
-
-#~ msgid "Method “%s” not implemented in this GROUP_METHOD %s"
-#~ msgstr "Methode »%s« in GROUP_METHOD %s nicht implementiert"
-
-#~ msgid "Undefined method %s for special group %s"
-#~ msgstr "Undefinierte Methode %s für Spezialgruppe %s"
-
-#~ msgid "Never edited"
-#~ msgstr "Noch nie bearbeitet."
-
-#~ msgid "Owner: %s"
-#~ msgstr "Besitzer: %s"
-
-#~ msgid "See %s tips for editing."
-#~ msgstr "Siehe %s Tips fürs Edieren."
-
-#~ msgid "Page Execution took %s seconds"
-#~ msgstr "Ausführung dieser Seite dauerte %s Sekunden"
-
-#~ msgid "Comment modified on %s by %s"
-#~ msgstr "Kommentare am %s geändert von %s"
-
-#~ msgid "Comments on %s by %s."
-#~ msgstr "Kommentar zu %s von %s."
-
-#~ msgid "You are signed in as %s"
-#~ msgstr "Sie sind angemeldet als %s"
-
-#~ msgid "1 word"
-#~ msgstr "1 Wort"
-
-#~ msgid "Our users created a total of %d pages."
-#~ msgstr "Unsere Benutzer erzeugten insgesamt %d Seiten."
-
-#~ msgid "We have a total of %d registered users."
-#~ msgstr "Wir haben insgesamt %d registrierte Benutzer."
-
-#~ msgid "Most users ever online was %d at %s."
-#~ msgstr "Die meisten Besucher online waren %d am %s."
-
-#~ msgid "Admin is also online."
-#~ msgstr "Administrator ist auch online."
-
-#~ msgid "This data is based on users active over the past %s."
-#~ msgstr "Diese Daten basieren auf den Benutzern für die letzten %s."
-
-#~ msgid "Sorry, no dynamic DB Session support."
-#~ msgstr "Leider! Dynamische DB Session Unterstützung nicht vorhanden."
-
-#~ msgid "Hide %s:"
-#~ msgstr "%s verstecken:"
-
-#~ msgid "Add %s hours to the server's local time when reporting times."
-#~ msgstr ""
-#~ "Addieren Sie %s Stunden zur lokalen Serverzeit, bei jeder Zeitanzeige (z."
-#~ "B. NeuesteÄnderungen)."
-
-#~ msgid "The current time at the server is %s."
-#~ msgstr "Die Uhrzeit am Server ist gerade %s."
-
-#~ msgid "With the current offset, this would be reported as %s."
-#~ msgstr "Mit dem eingegebenen Zeit-Unterschied, würde die Zeit %s angezeigt."
-
-#~ msgid ""
-#~ "I'm just doing minor edits. Please divert the usual logging to %s instead."
-#~ msgstr "Ich mache nur kleinere Änderungen. Protokolliere stattdessen in %s."
-
-#~ msgid "I am Really Sure."
-#~ msgstr "Ich bin wirklich sicher."
-
-#~ msgid "I am Sure."
-#~ msgstr "Ich bin sicher."
-
-#~ msgid ""
-#~ "\n"
-#~ "Or reply to this e-mail entering your response between the following "
-#~ "markers: \n"
-#~ "%1$s\n"
-#~ "(enter your response here)\n"
-#~ "%1$s"
-#~ msgstr ""
-#~ "\n"
-#~ "Oder Beantworten Sie auf diese E-Mail indem Sie Ihre Antwort zwischen den "
-#~ "folgenden Markierungen eingeben: \n"
-#~ "%1$s\n"
-#~ "(Geben Sie Ihren Antworttext hier ein)\n"
-#~ "%1$s"
 
 #~ msgid "You cannot register an account unless you accept the terms of use."
 #~ msgstr ""
