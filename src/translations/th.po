@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-16 14:04+0200\n"
+"POT-Creation-Date: 2014-05-16 18:30+0200\n"
 "PO-Revision-Date: 2013-06-03 17:16+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -413,11 +413,11 @@ msgstr ""
 #: www/tracker/admin/index.php:190 www/tracker/reporting/index.php:128
 #: www/tracker/reporting/index.php:130 www/tracker/reporting/index.php:132
 #: www/tracker/reporting/index.php:134 www/tracker/reporting/index.php:136
-#: www/tracker/roadmap.php:176 www/tracker/roadmap.php:202
-#: www/tracker/roadmap.php:212 www/tracker/roadmap.php:224
-#: www/tracker/roadmap.php:239 www/tracker/roadmap.php:415
-#: www/tracker/roadmap.php:423 www/tracker/roadmap.php:436
-#: www/tracker/roadmap.php:469
+#: www/tracker/roadmap.php:176 www/tracker/roadmap.php:205
+#: www/tracker/roadmap.php:215 www/tracker/roadmap.php:227
+#: www/tracker/roadmap.php:242 www/tracker/roadmap.php:418
+#: www/tracker/roadmap.php:426 www/tracker/roadmap.php:439
+#: www/tracker/roadmap.php:472
 #, php-format
 msgid ": "
 msgstr ""
@@ -780,9 +780,9 @@ msgstr ""
 #: www/survey/admin/show_results.php:82 www/survey/admin/show_results.php:93
 #: www/survey/admin/show_results.php:95 www/survey/admin/show_results.php:142
 #: www/survey/admin/show_results.php:144 www/tracker/admin/index.php:190
-#: www/tracker/roadmap.php:176 www/tracker/roadmap.php:202
-#: www/tracker/roadmap.php:212 www/tracker/roadmap.php:224
-#: www/tracker/roadmap.php:239 www/trove/TroveCategory.class.php:71
+#: www/tracker/roadmap.php:176 www/tracker/roadmap.php:205
+#: www/tracker/roadmap.php:215 www/tracker/roadmap.php:227
+#: www/tracker/roadmap.php:242 www/trove/TroveCategory.class.php:71
 #: www/trove/TroveCategory.class.php:97 www/trove/TroveCategory.class.php:109
 msgid "Error"
 msgstr ""
@@ -876,7 +876,7 @@ msgstr ""
 #: www/admin/pluginman.php:264 www/include/html.php:320
 #: www/include/html.php:581 www/include/html.php:645 www/include/html.php:668
 #: www/include/html.php:693 www/include/html.php:745 www/pm/format_csv.php:106
-#: www/pm/ganttpage.php:159 www/tracker/roadmap.php:441
+#: www/pm/ganttpage.php:159 www/tracker/roadmap.php:444
 msgid "None"
 msgstr ""
 
@@ -5122,7 +5122,7 @@ msgstr ""
 #: www/register/index.php:317 www/snippet/add_snippet_to_package.php:167
 #: www/snippet/addversion.php:110 www/snippet/addversion.php:229
 #: www/snippet/package.php:176 www/snippet/submit.php:145
-#: www/survey/include/SurveyHTML.class.php:554 www/tracker/roadmap.php:445
+#: www/survey/include/SurveyHTML.class.php:554 www/tracker/roadmap.php:448
 msgid "Submit"
 msgstr ""
 
@@ -5314,7 +5314,7 @@ msgstr ""
 #: common/tracker/actions/browse.php:99
 #: common/tracker/actions/downloadcsv.php:38
 #: common/tracker/actions/taskmgr.php:142 www/pm/admin/index.php:401
-#: www/pm/index.php:48 www/pm/task.php:86 www/tracker/roadmap.php:334
+#: www/pm/index.php:48 www/pm/task.php:86 www/tracker/roadmap.php:337
 msgid "Could Not Get Factory"
 msgstr ""
 
@@ -6413,8 +6413,8 @@ msgstr ""
 
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:50
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:392
-#: www/tracker/roadmap.php:90 www/tracker/roadmap.php:406
-#: www/tracker/roadmap.php:415
+#: www/tracker/roadmap.php:90 www/tracker/roadmap.php:409
+#: www/tracker/roadmap.php:418
 msgid "Roadmap"
 msgstr ""
 
@@ -6844,7 +6844,7 @@ msgstr ""
 msgid "Update roadmap"
 msgstr ""
 
-#: common/tracker/views/form-adminroadmap.php:196 www/tracker/roadmap.php:258
+#: common/tracker/views/form-adminroadmap.php:196 www/tracker/roadmap.php:261
 msgid "No trackers have been set up."
 msgstr ""
 
@@ -6852,8 +6852,8 @@ msgstr ""
 msgid "Not used"
 msgstr ""
 
-#: common/tracker/views/form-adminroadmap.php:251 www/tracker/roadmap.php:202
-#: www/tracker/roadmap.php:212 www/tracker/roadmap.php:224
+#: common/tracker/views/form-adminroadmap.php:251 www/tracker/roadmap.php:205
+#: www/tracker/roadmap.php:215 www/tracker/roadmap.php:227
 #, php-format
 msgid "roadmap %s is not available"
 msgstr ""
@@ -15518,7 +15518,7 @@ msgstr ""
 
 #: www/admin/unsubscribe.php:58 www/admin/userlist.php:69
 #: www/include/tool_reports.php:53 www/stats/site_stats_utils.php:142
-#: www/tracker/roadmap.php:428 www/tracker/roadmap.php:440
+#: www/tracker/roadmap.php:431 www/tracker/roadmap.php:443
 msgid "All"
 msgstr ""
 
@@ -22069,62 +22069,62 @@ msgstr ""
 msgid "Tracker Activity Reporting"
 msgstr ""
 
-#: www/tracker/roadmap.php:191 www/tracker/roadmap.php:231
+#: www/tracker/roadmap.php:194 www/tracker/roadmap.php:234
 msgid "No roadmap available"
 msgstr ""
 
-#: www/tracker/roadmap.php:192
+#: www/tracker/roadmap.php:195
 msgid ""
 "The roadmap provides a short view on the trackers by viewing all tickets "
 "related to a release."
 msgstr ""
 
-#: www/tracker/roadmap.php:193
+#: www/tracker/roadmap.php:196
 #, php-format
 msgid ""
 "If you have project administrator rights, you can easily <a href=\"%s"
 "\">create roadmaps</a>."
 msgstr ""
 
-#: www/tracker/roadmap.php:239
+#: www/tracker/roadmap.php:242
 #, php-format
 msgid "release %s is not available"
 msgstr ""
 
-#: www/tracker/roadmap.php:410
+#: www/tracker/roadmap.php:413
 msgid "Display options"
 msgstr ""
 
-#: www/tracker/roadmap.php:423
+#: www/tracker/roadmap.php:426
 msgid "Number of release(s) to display"
 msgstr ""
 
-#: www/tracker/roadmap.php:432 www/tracker/roadmap.php:646
+#: www/tracker/roadmap.php:435 www/tracker/roadmap.php:649
 #, php-format
 msgid "Return to last release(s)"
 msgstr ""
 
-#: www/tracker/roadmap.php:436
+#: www/tracker/roadmap.php:439
 msgid "Display graphs"
 msgstr ""
 
-#: www/tracker/roadmap.php:438
+#: www/tracker/roadmap.php:441
 msgid "Only last"
 msgstr ""
 
-#: www/tracker/roadmap.php:453
+#: www/tracker/roadmap.php:456
 msgid "No release available"
 msgstr ""
 
-#: www/tracker/roadmap.php:472
+#: www/tracker/roadmap.php:475
 msgid "Display as text"
 msgstr ""
 
-#: www/tracker/roadmap.php:513
+#: www/tracker/roadmap.php:516
 msgid "No data for this release"
 msgstr ""
 
-#: www/tracker/roadmap.php:539
+#: www/tracker/roadmap.php:542
 msgid "Unknown"
 msgstr ""
 
