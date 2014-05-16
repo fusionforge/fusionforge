@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-16 18:30+0200\n"
+"POT-Creation-Date: 2014-05-16 18:33+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -5475,6 +5475,10 @@ msgid ""
 "tracker having separate user, group, category, and permission lists. You can "
 "also easily move items between trackers when needed."
 msgstr ""
+"Pode usar este sistema para rexistrar, virtualmente, calquera tipo de datos, "
+"tendo cada rexistro listas separadas de usuarios, grupos, categorías e "
+"permisos. Tamén pode mover elementos entre rexistros facilmente cando o "
+"precise."
 
 #: common/tracker/actions/admin-ind.php:132
 msgid ""
@@ -14128,9 +14132,8 @@ msgid ""
 "This project's Bazaar repository can be checked out through anonymous access "
 "with the following command."
 msgstr ""
-"<p><strong>Acceso anónimo vía Subversion</strong></p><p> Pódese descargar o "
-"repositorio SVN deste proxecto a través de acceso anónimo coas seguintes "
-"ordes.</p>"
+"Pódese descargar o repositorio SVN deste proxecto a través de acceso anónimo "
+"coas seguintes ordes."
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:101
 #: plugins/scmbzr/common/BzrPlugin.class.php:113
@@ -14321,8 +14324,8 @@ msgstr "Habilitar acceso anónimo"
 #, fuzzy, php-format
 msgid "This project's CPOLD repository can be accessep anonymously at %s."
 msgstr ""
-"<p><strong>Acceso anónimo por Bazaar</strong></p><p>Pódese acceder "
-"anonimamente ao repositorio Bazaar deste proxecto a través de HTTP.</p>"
+"Pódese acceder anonimamente ao repositorio Bazaar deste proxecto a través de "
+"HTTP."
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:66
 #, php-format
@@ -14411,9 +14414,8 @@ msgid ""
 "This project's Darcs repository can be checked out through anonymous access "
 "with the following command."
 msgstr ""
-"<p><strong>Acceso anónimo vía Subversion</strong></p><p> Pódese descargar o "
-"repositorio SVN deste proxecto a través de acceso anónimo coas seguintes "
-"ordes.</p>"
+"Pódese descargar o repositorio SVN deste proxecto a través de acceso anónimo "
+"coas seguintes ordes."
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:194
 #, fuzzy
@@ -14464,13 +14466,11 @@ msgid_plural ""
 "This project's Git repositories can be checked out through anonymous access "
 "with the following commands."
 msgstr[0] ""
-"<p><strong>Acceso anónimo vía Subversion</strong></p><p> Pódese descargar o "
-"repositorio SVN deste proxecto a través de acceso anónimo coas seguintes "
-"ordes.</p>"
+"Pódese descargar o repositorio SVN deste proxecto a través de acceso anónimo "
+"coas seguintes ordes."
 msgstr[1] ""
-"<p><strong>Acceso anónimo vía Subversion</strong></p><p> Pódese descargar o "
-"repositorio SVN deste proxecto a través de acceso anónimo coas seguintes "
-"ordes.</p>"
+"Pódese descargar o repositorio SVN deste proxecto a través de acceso anónimo "
+"coas seguintes ordes."
 
 #: plugins/scmgit/common/GitPlugin.class.php:126
 #, fuzzy
@@ -18069,17 +18069,17 @@ msgstr "Enviar/actualizar "
 #: www/frs/admin/editrelease.php:291
 #, fuzzy
 msgid "Add Files To This Release"
-msgstr "3.º paso: edite os ficheiros nesta versión"
+msgstr "Edite os ficheiros nesta versión"
 
 #: www/frs/admin/editrelease.php:292
 msgid "Now, choose a file to upload into the system."
-msgstr ""
+msgstr "Agora, elixa un ficheiro para enviar ao sistema."
 
 #: www/frs/admin/editrelease.php:301 www/frs/admin/qrs.php:201
-#, fuzzy, php-format
+#, php-format
 msgid "Alternatively, you can use FTP to upload a new file at %s."
 msgstr ""
-"De xeito alternativo, pode empregar o FTP para enviar un ficheiro novo a %1$s"
+"De xeito alternativo, pode empregar o FTP para enviar un ficheiro novo a %s."
 
 #: www/frs/admin/editrelease.php:321
 msgid ""
@@ -18162,63 +18162,61 @@ msgid "Help about Packages and Releases"
 msgstr ""
 
 #: www/frs/admin/index.php:130
-#, fuzzy
 msgid "Packages"
-msgstr "Paquete "
+msgstr "Paquetes"
 
 #: www/frs/admin/index.php:131
 msgid ""
 "You can use packages to group different file releases together, or use them "
 "however you like."
 msgstr ""
+"Pode usar os paquetes para agrupar diferentes versións de ficheiros ou "
+"usalos como desexar."
 
 #: www/frs/admin/index.php:132
-#, fuzzy
 msgid "An example of packages:"
-msgstr "Engadir un fragmento ao paquete"
+msgstr "Un exemplo de paquetes é o seguinte:"
 
 #: www/frs/admin/index.php:134
-#, fuzzy
 msgid "Your Packages:"
-msgstr "Paquete:"
+msgstr "Os seus paquetes:"
 
 #: www/frs/admin/index.php:136
 msgid "Define your packages"
-msgstr ""
+msgstr "Definir os seus paquetes"
 
 #: www/frs/admin/index.php:137
-#, fuzzy
 msgid "Create new releases of packages"
-msgstr "Para crear unha liberación nova, prema aquí."
+msgstr "Crear versións novas dos paquetes"
 
 #: www/frs/admin/index.php:139
-#, fuzzy
 msgid "Releases of Packages"
-msgstr "Notas da publicación"
+msgstr "Versións dos paquetes"
 
 #: www/frs/admin/index.php:140
 msgid "A release of a package can contain multiple files."
-msgstr ""
+msgstr "Unha versión dun paquete pode conter diferentes ficheiros."
 
 #: www/frs/admin/index.php:141
-#, fuzzy
 msgid "Examples of Releases"
-msgstr "Últimas publicacións de ficheiros"
+msgstr "Algúns exemplos de versións posíbeis son os seguintes"
 
 #: www/frs/admin/index.php:143
 msgid ""
 "You can create new releases of packages by clicking on <strong>Add/Edit "
 "Releases</strong> next to your package name"
 msgstr ""
+"Pode crear novas versións dos paquetes ao premer en <strong>Engadir/editar "
+"versións</strong> que está a continuación do seu nome de paquete."
 
 #: www/frs/admin/index.php:158 www/frs/admin/showreleases.php:99
 msgid "Package name"
-msgstr "Nome de paquete "
+msgstr "Nome de paquete"
 
 #: www/frs/admin/index.php:160 www/frs/admin/index.php:203
 #: www/people/editprofile.php:241
 msgid "Publicly Viewable"
-msgstr "Visíbel publicamente "
+msgstr "Visíbel publicamente"
 
 #: www/frs/admin/index.php:171
 msgid "Add Release"
@@ -20364,6 +20362,8 @@ msgid ""
 "The %s Project Help Wanted board is for non-commercial, project volunteer "
 "openings. Commercial use is prohibited."
 msgstr ""
+"O taboleiro de solicitudes de axuda de %1$s é para vacantes de traballo "
+"voluntario e non comerciais en proxectos. O uso comercial está prohibido."
 
 #: www/people/index.php:66
 msgid ""
@@ -20371,22 +20371,31 @@ msgid ""
 "whichever comes first. (Project administrators may always re-post expired "
 "openings.)"
 msgstr ""
+"Os listados dos proxectos permanecerán dúas semanas, ou ta que sexan "
+"cerradas por quen as escribiu, o que ocorra antes. (Os administradores de "
+"proxectos sempre poderán volver a publicar vacantes que expiraran.)"
 
 #: www/people/index.php:70
 msgid ""
 "Browse through the category menu to find projects looking for your help."
 msgstr ""
+"Navegue polo menú de categorías para atopar proxectos que estean buscando "
+"axuda."
 
 #: www/people/index.php:74
 msgid ""
 "If you're a project admin, log in and submit help wanted requests through "
 "your project administration page."
 msgstr ""
+"Se é vostede un administrador dun proxecto, inicie sesión e envíe "
+"solicitudes de axuda a través da páxina de administración do proxecto."
 
 #: www/people/index.php:78
 msgid ""
 "To suggest new job categories, submit a request via the support manager."
 msgstr ""
+"Para propoñer novas categorías de traballos, envíe unha solicitude a través "
+"do xestor de asistencia."
 
 #: www/people/index.php:83
 msgid "Last posts"
@@ -21188,24 +21197,25 @@ msgid "No Changes Have Been Made"
 msgstr "Non se realizaron cambios"
 
 #: www/pm/index.php:58
-#, fuzzy, php-format
+#, php-format
 msgid "Subprojects for %s"
-msgstr "Fonte de %1$s"
+msgstr "Subproxectos de %s"
 
 #: www/pm/index.php:63
-#, fuzzy
 msgid "No Subprojects Found"
-msgstr "Non se achou un grupo de proxecto "
+msgstr "Non se atoparon subproxectos"
 
 #: www/pm/index.php:64
 msgid "No subprojects have been set up, or you cannot view them."
-msgstr ""
+msgstr "Non se configuraron subproxectos, ou non os pode ver."
 
 #: www/pm/index.php:65
 msgid ""
 "The Admin for this project will have to set up subprojects using the admin "
 "page."
 msgstr ""
+"A administración deste proxecto terá que configurar os proxectos usando a "
+"páxina de administración"
 
 #: www/pm/index.php:68
 msgid "Choose a Subproject and you can browse/edit/add tasks to it."
@@ -22110,6 +22120,10 @@ msgid ""
 "<em>yourhost.org</em> at <strong>%1$s.%2$s</strong>.  %3$s does not "
 "currently host mail (i.e. cannot be an MX) or DNS</strong>."
 msgstr ""
+"Para engadir un equipo virtual novo, simplemente dirixa un  <strong>CNAME</"
+"strong> para <em>o_seu_equipo.org</em> en <strong>%1$s.%2$s</strong>.  %3$s "
+"non aloxa correo actualmente (é dicir, non pode ser un MX) nin tampouco DNS</"
+"strong>."
 
 #: www/project/admin/vhost.php:115
 #, php-format
@@ -22118,6 +22132,9 @@ msgid ""
 "will be synced to the project webservers - such that <em>yourhost.org</em> "
 "will display the material at <em>%1$s.%2$s</em>."
 msgstr ""
+"Clicking on \"create\" will schedule the creation of the Virtual Host.  This "
+"will be synced to the project webservers - such that <em>yourhost.org</em> "
+"will display the material at <em>%1$s.%2$s</em>."
 
 #: www/project/admin/vhost.php:123
 msgid "New Virtual Host <em>(e.g. vhost.org)</em>"
@@ -22313,55 +22330,58 @@ msgid ""
 "In addition to full project name, you will need to choose short, “Unix” name "
 "for your project."
 msgstr ""
+"Ademais do nome completo do proxecto, necesita escoller un nome corto, \"unix"
+"\", para o seu proxecto."
 
 #: www/register/index.php:219
 msgid ""
 "The “Unix Name” has several restrictions because it is used in so many "
 "places around the site. They are:"
 msgstr ""
+"O “nome Unix” ten varias restricións debido a que se emprega en moitos "
+"lugares en todo o sitio web. As restricións son:"
 
 #: www/register/index.php:221
-#, fuzzy
 msgid "cannot match the Unix name of any other project;"
-msgstr "Nome unix do proxecto:"
+msgstr "Non pode coincidir co nome unix doutro proxecto"
 
 #: www/register/index.php:222
 msgid "must be between 3 and 15 characters in length;"
-msgstr ""
+msgstr "Debe ter entre 3 e 15 caracteres de lonxitude"
 
 #: www/register/index.php:223
 msgid ""
 "must be in lower case (upper case letters will be converted to lower case);"
-msgstr ""
+msgstr "Debe estar en minúsculas"
 
 #: www/register/index.php:224
 msgid "can only contain characters, numbers, and dashes;"
-msgstr ""
+msgstr "Só pode conter letras, números e guións"
 
 #: www/register/index.php:225
-#, fuzzy
 msgid "must be a valid Unix username;"
-msgstr "O nome unix non é válido"
+msgstr "Debe ser un nome de usuario unix válido"
 
 #: www/register/index.php:226
 msgid "cannot match one of our reserved domains;"
-msgstr ""
+msgstr "Non pode coincidir co nome dalgún dos nosos dominios"
 
 #: www/register/index.php:227
-#, fuzzy
 msgid "Unix name will never change for this project;"
-msgstr "Nome unix do proxecto:"
+msgstr "O nome unix nunca cambiará para este proxecto"
 
 #: www/register/index.php:229
 msgid ""
 "Your Unix name is important, however, because it will be used for many "
 "things, including:"
 msgstr ""
+"No entanto, o seu nome unix é importante porque se usará para moitas cousas, "
+"incluíndo:"
 
 #: www/register/index.php:231
 #, php-format
 msgid "a web site at <tt>unixname.%s</tt>,"
-msgstr ""
+msgstr "Un sitio web en  <tt>unixname.%1$s</tt>"
 
 #: www/register/index.php:232
 msgid "the URL of your source code repository,"
@@ -22370,11 +22390,11 @@ msgstr ""
 #: www/register/index.php:234
 #, php-format
 msgid "shell access to <span class=\"tt\">unixname.%s</span>,"
-msgstr ""
+msgstr "Acceso de consola a <tt>unixname.%1$s</tt>"
 
 #: www/register/index.php:236
 msgid "search engines throughout the site."
-msgstr ""
+msgstr "Motores de busca ao longo de todo o sitio"
 
 #: www/register/index.php:249
 msgid ""
@@ -22385,9 +22405,8 @@ msgstr ""
 "proxecto, pero só un. Escolla o sistema de xestión de código que quere usar."
 
 #: www/register/index.php:252 www/register/index.php:254
-#, fuzzy
 msgid "No SCM"
-msgstr "SCM "
+msgstr ""
 
 #: www/register/index.php:268
 #, fuzzy
@@ -22517,25 +22536,28 @@ msgid "Successfully Rebuilt"
 msgstr "Eliminouse correctamente "
 
 #: www/reporting/rebuild.php:47
-#, fuzzy
 msgid "Reporting System Initialization"
-msgstr "Sistema de informe de tarefas"
+msgstr "Inicialización do sistema de informes"
 
 #: www/reporting/rebuild.php:50
 msgid ""
 "Occasionally, if cronjobs failed or the database was damaged, you may have "
 "to rebuild the reporting tables."
 msgstr ""
+"Ás veces, se fallan as tarefas de cron ou se dana a base de datos, pode ter "
+"que reconstruír as táboas de informes."
 
 #: www/reporting/rebuild.php:53
 msgid ""
 "If you are sure you want to rebuild all the reporting tables, check the “I "
 "am Sure” box and click the button below."
 msgstr ""
+"Se está seguro de que quere reconstruír as táboas de informes, marque a "
+"caixa de “estou seguro” e prema o botón de embaixo."
 
 #: www/reporting/rebuild.php:56
 msgid "This could take a couple minutes, so DO NOT CLICK MORE THAN ONCE."
-msgstr ""
+msgstr "Isto pode levar un par de minutos, así que NON PREMA MÁIS DUNHA VEZ."
 
 #: www/reporting/rebuild.php:67
 msgid "Press ONLY ONCE"
@@ -22599,7 +22621,7 @@ msgstr "Semana de inicio"
 #: www/survey/admin/survey.php:71 www/survey/admin/survey.php:83
 #, fuzzy
 msgid "Update Successful"
-msgstr "Actualizouse correctamente "
+msgstr "Actualizouse correctamente"
 
 #: www/reporting/timecategory.php:69
 msgid "Time Code"
@@ -23278,27 +23300,33 @@ msgid ""
 "The purpose of this archive is to let you share your code snippets, scripts, "
 "and functions with the Open Source Software Community."
 msgstr ""
+"O propósito deste arquivo é permitirlle compartir fragmentos de código, "
+"scripts, e funcións coa comunidade de código aberto."
 
 #: www/snippet/index.php:52
 msgid ""
 "You can create a “new snippet”, then post additional versions of that "
 "snippet quickly and easily."
 msgstr ""
+"Pode crear un “fragmento novo”, e despois publicar versións adicionais dese "
+"fragmento de xeito rápido e sinxelo."
 
 #: www/snippet/index.php:54
 msgid ""
 "Once you have snippets posted, you can then create a “Package” of snippets. "
 "That package can contain multiple, specific versions of other snippets."
 msgstr ""
+"Unha vez que teña publicados fragmentos, pode crear un “paquete” de "
+"fragmentos. Ese paquete pode conter versións múltiples e específicas de "
+"outros fragmentos."
 
 #: www/snippet/index.php:56
-#, fuzzy
 msgid "Browse Snippets"
-msgstr "Fragmentos"
+msgstr "Navegar polos fragmentos"
 
 #: www/snippet/index.php:58
 msgid "You can browse the snippet library quickly:"
-msgstr ""
+msgstr "Pode navegar pola biblioteca de fragmentos de xeito rápido:"
 
 #: www/snippet/index.php:64
 msgid "Browse by Language"
@@ -23324,16 +23352,21 @@ msgid ""
 "interface. Before creating your package, make sure all your snippets are in "
 "place and you have made a note of the snippet ID's."
 msgstr ""
+"Pode agrupar fragmentos existentes nun paquete usando esta interface. Antes "
+"de crear o seu paquete, asegúrese de que todos os fragmentos están no seu "
+"sitio e que anotou os ID dos fragmentos."
 
 #: www/snippet/package.php:135
 msgid "Create the package using this form."
-msgstr ""
+msgstr "Cree o paquete usando este formulario."
 
 #: www/snippet/package.php:136
 msgid ""
 "<strong>Then</strong> use the “Add Snippets to Package” link to add files to "
 "your package."
 msgstr ""
+"<strong>Logo</strong> use a ligazón de “engadir fragmentos ao paquete” para "
+"engadir ficheiros ao paquete."
 
 #: www/snippet/package.php:138
 msgid ""
@@ -23342,6 +23375,10 @@ msgid ""
 "package. You should only use this page if you are submitting an entirely new "
 "package."
 msgstr ""
+"<span class=\"important\">Nota:</span> Pode enviar unha versión nova dun "
+"paquete existente navegando pola biblioteca e usando a ligazón no paquete "
+"existente. Só debe usar esta páxina se está a enviar un paquete enteiramente "
+"novo."
 
 #: www/snippet/package.php:143
 #, fuzzy
@@ -23757,22 +23794,26 @@ msgstr "Administración do proxecto "
 
 #: www/survey/admin/index.php:58
 msgid "It's simple to create a survey."
-msgstr ""
+msgstr "Crear unha enquisa é moi simple."
 
 #: www/survey/admin/index.php:62
 msgid "Create questions and comments using the forms above."
-msgstr ""
+msgstr "Cree preguntas e comentarios empregando os formularios de arriba."
 
 #: www/survey/admin/index.php:65
 msgid ""
 "Create a survey, listing the questions in order (choose from <strong>your</"
 "strong> list of questions)."
 msgstr ""
+"Cree unha enquisa ao relacionar as preguntas en orde (elíxaa na <strong>súa</"
+"strong> listaxe de preguntas)."
 
 #: www/survey/admin/index.php:68
 #, php-format
 msgid "Link to the survey using this format: %s where XX is the survey number"
 msgstr ""
+"Faga unha ligazón á enquisa usando este formato: %s onde XX é o número da "
+"enquisa"
 
 #: www/survey/admin/index.php:73
 #, php-format
@@ -24025,6 +24066,9 @@ msgid ""
 "The information collected in these surveys will never be sold to third "
 "parties or used to solicit you to purchase any goods or services."
 msgstr ""
+"A información compilada nestas enquisas non se venderá nunca a terceiras "
+"partes nin tampouco se usará para lle solicitar que compre ningunha cousa ou "
+"servizo."
 
 #: www/survey/privacy.php:44
 msgid ""
@@ -24032,24 +24076,34 @@ msgid ""
 "developers being surveyed. That profile will help visitors to the site "
 "understand the quality of a given project."
 msgstr ""
+"Esta información compílase para crear un perfil dos proxectos e dos "
+"desenvolvedores a que se lle fai a enquisa. Este perfil axudará os "
+"visitantes a coñeceren a calidade dun proxecto."
 
 #: www/survey/privacy.php:47
 msgid ""
 "The ID's of those who answer surveys are suppressed and not viewable by "
 "project administrators or the public or third parties."
 msgstr ""
+"Os ID das persoas que responden as preguntas suprimiranse e os "
+"administradores dos proxectos, o público en xeral e terceiras persoas non os "
+"poderán ver."
 
 #: www/survey/privacy.php:50
 msgid ""
 "The information gathered is used only in aggregate form, not to single out "
 "specific users or developers."
 msgstr ""
+"A información so se emprega como agregada, non como información individual "
+"ou específica de usuarios e desenvolvedores."
 
 #: www/survey/privacy.php:53
 msgid ""
 "If any changes are made to this policy, it will affect only future data that "
 "is collected and the user will of course have the ability to 'opt-out'."
 msgstr ""
+"Se se realizar algún cambio nesta política, só afectará aos datos futuros "
+"que se recompilaren e o usuario poderá, por suposto, negarse ao cubrir'"
 
 #: www/survey/rating_resp.php:59
 msgid "Vote registered"
@@ -24700,16 +24754,6 @@ msgstr "Non se introduciu un nome de usuario"
 #~ msgid "Role name"
 #~ msgstr "Nome do rol"
 
-#, fuzzy
-#~ msgid ""
-#~ "Lists are named in this manner:<br /><strong>projectname-listname@%1$s</"
-#~ "strong></p><p>It will take <span class=\"important\">few minutes</span> "
-#~ "for your list to be created."
-#~ msgstr ""
-#~ "<p>As listas noméanse deste xeito:<br /><strong>nomeproxecto-nomelista@ "
-#~ "%1$s</strong></p><p>Levará <span class=\"important\">de 6 a 24 horas</"
-#~ "span> crear esta lista.</p>"
-
 #~ msgid ""
 #~ "You can administrate lists from here. Please note that private lists can "
 #~ "still be viewed by members of your project, but are not listed on %1$s."
@@ -24733,27 +24777,6 @@ msgstr "Non se introduciu un nome de usuario"
 #, fuzzy
 #~ msgid "Error updating: "
 #~ msgstr "Produciuse un erro ao actualizar"
-
-#, fuzzy
-#~ msgid ""
-#~ "You can use this system to track virtually any kind of data, with each "
-#~ "tracker having separate user, group, category, and permission lists. You "
-#~ "can also easily move items between trackers when needed.</p><p>Trackers "
-#~ "are referred to as \"Artifact Types\" and individual pieces of data are "
-#~ "\"Artifacts\". \"Bugs\" might be an Artifact Type, whiles a bug report "
-#~ "would be an Artifact. You can create as many Artifact Types as you want, "
-#~ "but remember you need to set up categories, groups, and permission for "
-#~ "each type, which can get time-consuming.</p>"
-#~ msgstr ""
-#~ "<p>Pode usar este sistema para rexistrar, virtualmente, calquera tipo de "
-#~ "datos, tendo cada rexistro listas separadas de usuarios, grupos, "
-#~ "categorías e permisos. Tamén pode mover elementos entre rexistros "
-#~ "facilmente cando o precise.</p><p>Aos rexistros chámaselles \"tipos de "
-#~ "artefactos\" e ás pezas individuais dos datos \"artefactos\". \"Erros\" "
-#~ "pode ser un tipo de artefacto, mentres que un informe de erro sería un "
-#~ "artefacto. Pode crear tantos tipos de artefactos como queira, pero "
-#~ "recorde que terá que configurar as categorías, grupos e permisos para "
-#~ "cada tipo, o que pode levar moito tempo."
 
 #~ msgid ""
 #~ "Your project registration for %3$s has been denied.\n"
@@ -24993,15 +25016,6 @@ msgstr "Non se introduciu un nome de usuario"
 #~ msgid "Existing Diary And Note Entries"
 #~ msgstr "Entradas existentes de diario e de notas "
 
-#, fuzzy
-#~ msgid ""
-#~ "Lists are named in this manner:<br /><strong>projectname-listname@%1$s</"
-#~ "strong>"
-#~ msgstr ""
-#~ "<p>As listas noméanse deste xeito:<br /><strong>nomeproxecto-nomelista@ "
-#~ "%1$s</strong></p><p>Levará <span class=\"important\">de 6 a 24 horas</"
-#~ "span> crear esta lista.</p>"
-
 #~ msgid "Mailing list"
 #~ msgstr "Lista de correo"
 
@@ -25053,21 +25067,6 @@ msgstr "Non se introduciu un nome de usuario"
 #~ msgstr ""
 #~ "Se vostede leva a administración dun proxecto, pode premer a ligazón "
 #~ "'(admin)' para definir as súas propias respostas almacenadas"
-
-#~ msgid ""
-#~ "This drop-down box represents the current status of a tracker item.<br /"
-#~ "><br />You can set the status to 'Pending' if you are waiting for a "
-#~ "response from the tracker item author.  When the author responds the "
-#~ "status is automatically reset to that of 'Open'. Otherwise, if the author "
-#~ "doesn't respond with an admin-defined amount of time (default is 14 days) "
-#~ "then the item is given a status of 'Deleted'."
-#~ msgstr ""
-#~ "Esta listaxe despregábel representa o estado actual dun elemento de "
-#~ "rexistro.<br /><br />Pode configurar o estado como pendente se está a "
-#~ "agardar unha resposta do autor do elemento de rexistro. Despois de o "
-#~ "autor responder, o estado restáurase a 'aberto'. Pola contra, se o autor "
-#~ "non responde nun tempo definido (14 días, como valor predeterminado) o "
-#~ "elemento recibe o estado de eliminado. "
 
 #~ msgid ""
 #~ "The Sort By option allows you to determine how the browse results are "
@@ -25462,48 +25461,6 @@ msgstr "Non se introduciu un nome de usuario"
 
 #~ msgid "Error - Choose a User To Monitor First"
 #~ msgstr "Erro - elixa, primeiro, un usuario para monitorizar "
-
-#, fuzzy
-#~ msgid "%1$s to %2$s"
-#~ msgstr "Por favor, %1$s inicie a sesión %2$s"
-
-#, fuzzy
-#~ msgid ""
-#~ "If you would like to contribute to this project by becoming a developer, "
-#~ "contact one of the project admins, designated in bold text below."
-#~ msgstr ""
-#~ "<p>Se quere contribuír con este proxecto e ser un desenvolvedor, contacte "
-#~ "co seu administrador, en negra no texto inferior.</p>"
-
-#, fuzzy
-#~ msgid ""
-#~ "The \"Snippet Version ID\" is the unique ID number that is shown next to "
-#~ "a specific version of a snippet on the browse pages."
-#~ msgstr ""
-#~ "Pode empregar este formulario para engadir fragmentos de código ao seu "
-#~ "paquete sucesivamente..</p><p>Un \"ID de versión de fragmento de código\" "
-#~ "é un ID único que se amosa xunto coas versións específicas dun fragmento "
-#~ "de código nas páxinas de navegación. "
-
-#, fuzzy
-#~ msgid "Error - Could Not Update User Unix Status: "
-#~ msgstr "ERRO - Non foi posíbel actualizar o estado Unix de grupo: %s"
-
-#, fuzzy
-#~ msgid "Error - Could Not Update User Email: "
-#~ msgstr "ERRO - Non foi posíbel actualizar o estado Unix de grupo: %s"
-
-#, fuzzy
-#~ msgid "Error - Could Not Update User Email And Hash: "
-#~ msgstr "ERRO - Non foi posíbel actualizar o estado Unix de grupo: %s"
-
-#, fuzzy
-#~ msgid "Error - Could Not Update real name of user : "
-#~ msgstr "ERRO - Non foi posíbel actualizar o estado Unix de grupo: %s"
-
-#, fuzzy
-#~ msgid "Error - Could Not Delete User SSH Key:"
-#~ msgstr "ERRO - Non foi posíbel actualizar o estado Unix de grupo: %s"
 
 #~ msgid "%1$s Project Denied"
 #~ msgstr "O proxecto %1$s foi denegado "
@@ -25936,18 +25893,6 @@ msgstr "Non se introduciu un nome de usuario"
 #~ msgid "Invalid confirmation hash"
 #~ msgstr "O hash de confirmación non é válido "
 
-#, fuzzy
-#~ msgid ""
-#~ "Congratulations, you have re-set your account password. You may <a href="
-#~ "\"%1$s\">login</a> to the site now."
-#~ msgstr ""
-#~ "<h2>Cambiouse o contrasinal</h2><p>Parabéns, acaba de restabelecer o seu "
-#~ "contrasinal da conta. Pode <a href=\"%1$s\">acceder</a> ao sitio agora.</"
-#~ "p> "
-
-#~ msgid "ERROR"
-#~ msgstr "Erro "
-
 #~ msgid "New Password (min. 6 chars)"
 #~ msgstr "Contrasinal novo (mín. 6 caracteres)"
 
@@ -26266,20 +26211,6 @@ msgstr "Non se introduciu un nome de usuario"
 
 #, fuzzy
 #~ msgid ""
-#~ "Clicking \"Send Lost PW Hash\" below will email a URL to the email "
-#~ "address we have on file for you. In this URL is a 128-bit confirmation "
-#~ "hash for your account. Visiting the URL will allow you to change your "
-#~ "password online and login."
-#~ msgstr ""
-#~ "<p>Teña coidado... xa que perder o seu contrasinal é un problema serio. "
-#~ "Este feito compromete a seguranza da súa conta e deste sitio.</p><p>Cando "
-#~ "prema a seguir \"Enviar o hash do contrasinal perdido\" enviaráselle unha "
-#~ "ligazón ao correo con que se rexistrou. Nesta ligazón hai unha "
-#~ "confirmación hash de 128-bit para a súa conta. Se visita esta ligazón, "
-#~ "poderá mudar o seu contrasinal en liña, e iniciar sesión.</p> "
-
-#, fuzzy
-#~ msgid ""
 #~ "Project %1$s (%2$s) has released a new version of package \"%3$s\".\n"
 #~ "\n"
 #~ "Release note:\n"
@@ -26373,13 +26304,6 @@ msgstr "Non se introduciu un nome de usuario"
 
 #~ msgid "Invalid user name: %s"
 #~ msgstr "Usuario non válido: %s"
-
-#~ msgid ""
-#~ "This project's Subversion repository can be checked out through anonymous "
-#~ "access with the following command."
-#~ msgstr ""
-#~ "Pódese descargar o repositorio SVN deste proxecto a través de acceso "
-#~ "anónimo coas seguintes ordes."
 
 #~ msgid ""
 #~ "Authorized keys:<br /><em>Important: Make sure there are no line breaks "
@@ -27165,37 +27089,6 @@ msgstr "Non se introduciu un nome de usuario"
 #~ "observador ten acceso de lectura ao CVS, tamén o terá calquera outro rol "
 #~ "do proxecto."
 
-#, fuzzy
-#~ msgid ""
-#~ "<p>In addition to full project name, you will need to choose short,\"Unix"
-#~ "\" name for your project.</p><p>The \"Unix Name\" has several "
-#~ "restrictions because it is used in so many places around the site. They "
-#~ "are:</p><ul><li>Cannot match the unix name of any other project</"
-#~ "li><li>Must be between 3 and 15 characters in length</li><li>Must be in "
-#~ "lower case</li><li>Can only contain characters, numbers, and dashes</"
-#~ "li><li>Must be a valid unix username</li><li>Cannot match one of our "
-#~ "reserved domains</li><li>Unix name will never change for this project</"
-#~ "li></ul><p/>Your unix name is important, however, because it will be used "
-#~ "for many things, including:<ul><li>A web site at <tt>unixname.%1$s</tt></"
-#~ "li><li>A CVS Repository root of <tt>/cvsroot/unixname</tt> at <tt>cvs."
-#~ "unixname.%1$s</tt></li><li>Shell access to <tt>unixname.%1$s</tt></"
-#~ "li><li>Search engines throughout the site</li></ul><p>Unix Name:</p>"
-#~ msgstr ""
-#~ "<h3>4. Nome unix do proxecto</h3>Ademais do nome completo do proxecto, "
-#~ "necesita escoller un nome corto, \"unix\", para o seu proxecto.<p/> O "
-#~ "\"nome unix\" ten varias restricións debido a que se emprega en moitos "
-#~ "lugares en todo o sitio web. As restricións son:<ul><li>Non pode "
-#~ "coincidir co nome unix doutro proxecto</li><li>Debe ter entre 3 e 15 "
-#~ "caracteres de lonxitude</li><li>Debe estar en minúsculas</li><li>Só pode "
-#~ "conter letras, números e guións</li><li>Debe ser un nome de usuario unix "
-#~ "válido</li><li>Non pode coincidir co nome dalgún dos nosos dominios</"
-#~ "li><li>O nome unix nunca cambiará para este proxecto</li></ul><p/>No "
-#~ "entanto, o seu nome unix é importante porque se usará para moitas cousas, "
-#~ "incluíndo:<ul><li>Un sitio web en  <tt>unixname.%1$s</tt></li><li>Un "
-#~ "repositorio de CVS <tt>/cvsroot/unixname</tt> en <tt>cvs.unixname.%1$s</"
-#~ "tt></li><li>Acceso de consola a <tt>unixname.%1$s</tt></li><li>Motores de "
-#~ "busca ao longo de todo o sitio</li></ul><p/>Nome unix:<br/>"
-
 #~ msgid "Search in"
 #~ msgstr "Procurar en "
 
@@ -27364,29 +27257,6 @@ msgstr "Non se introduciu un nome de usuario"
 #~ msgid "Not Object: SurveyQuestion: %d"
 #~ msgstr "Non é un obxecto: Pregunta de Enquisa: %d"
 
-#, fuzzy
-#~ msgid ""
-#~ "<p><strong>Developer Darcs Access via SSH</strong></p><p>Only project "
-#~ "developers can access the Darcs tree via this method. SSH must be "
-#~ "installed on your client machine. Substitute <em>developername</em> with "
-#~ "the proper values. Enter your site password when prompted.</p>"
-#~ msgstr ""
-#~ "<p><strong>Acceso por SSH a Bazaar para desenvolvedores</strong></p><p>Só "
-#~ "os desenvolvedores do proxecto poden acceder ás ramas de Bazaar por este "
-#~ "método. Ten que ter instalado SSH na máquina cliente. Substitúa "
-#~ "<em>nome_do_desenvolvedor</em> polos valores axeitados. Introduza o seu "
-#~ "contrasinal cando se lle solicite.</p>"
-
-#, fuzzy
-#~ msgid ""
-#~ "<p><strong>Anonymous Mercurial Access</strong></p><p>This project's "
-#~ "Mercurial repository can be checked out through anonymous access with the "
-#~ "following command.</p>"
-#~ msgstr ""
-#~ "<p><strong>Acceso anónimo vía Subversion</strong></p><p> Pódese descargar "
-#~ "o repositorio SVN deste proxecto a través de acceso anónimo coas "
-#~ "seguintes ordes.</p>"
-
 #~ msgid "View Personal webcalendar"
 #~ msgstr "Ver o calendario web persoal"
 
@@ -27439,32 +27309,6 @@ msgstr "Non se introduciu un nome de usuario"
 #~ "Ten que ser administrador do proxecto que está a editar ou un membro do "
 #~ "equipo de Novas de %s."
 
-#~ msgid ""
-#~ "<p>The %1$s Project Help Wanted board is for non-commercial, project "
-#~ "volunteer openings. Commercial use is prohibited.</p><p>Project listings "
-#~ "remain live for two weeks, or until closed by the poster, whichever comes "
-#~ "first. (Project administrators may always re-post expired openings.)</"
-#~ "p><p>Browse through the category menu to find projects looking for your "
-#~ "help.</p><p>If you're a project admin, log in and submit help wanted "
-#~ "requests through your project administration page.</p><p>To suggest new "
-#~ "job categories, submit a request via the support manager.</p>"
-#~ msgstr ""
-#~ "<p>O taboleiro de solicitudes de axuda de %1$s é para vacantes de "
-#~ "traballo voluntario e non comerciais en proxectos. O uso comercial está "
-#~ "prohibido.</p><p>Os listados dos proxectos permanecerán dúas semanas, ou "
-#~ "ta que sexan cerradas por quen as escribiu, o que ocorra antes. (Os "
-#~ "administradores de proxectos sempre poderán volver a publicar vacantes "
-#~ "que expiraran.)</p><p>Navegue polo menú de categorías para atopar "
-#~ "proxectos que estean buscando axuda.</p><p>Se é vostede un administrador "
-#~ "dun proxecto, inicie sesión e envíe solicitudes de axuda a través da "
-#~ "páxina de administración do proxecto.</p><p>Para propoñer novas "
-#~ "categorías de traballos, envíe unha solicitude a través do xestor de "
-#~ "asistencia.</p>"
-
-#, fuzzy
-#~ msgid "Subprojects and Tasks"
-#~ msgstr "Nome do subproxecto"
-
 #~ msgid "Group information updated"
 #~ msgstr "Actualizouse a información de grupo"
 
@@ -27488,64 +27332,6 @@ msgstr "Non se introduciu un nome de usuario"
 
 #~ msgid "Use Tracker"
 #~ msgstr "Usar o rexistro"
-
-#~ msgid ""
-#~ "<strong><span style=\"text-decoration:underline\">Add New Virtual Host</"
-#~ "span></strong><p>To add a new virtual host - simply point a "
-#~ "<strong>CNAME</strong> for <em>yourhost.org</em> at <strong>%1$s.%2$s</"
-#~ "strong>.  %3$s does not currently host mail (i.e. cannot be an MX) or "
-#~ "DNS</strong>.  <p>Clicking on \"create\" will schedule the creation of "
-#~ "the Virtual Host.  This will be synced to the project webservers - such "
-#~ "that <em>yourhost.org</em> will display the material at <em>%4$s.%5$s</"
-#~ "em>."
-#~ msgstr ""
-#~ "<strong><span style=\"text- :underline\">Engadir un novo equipo virtual</"
-#~ "span></strong><p>Para engadir un equipo virtual novo, simplemente dirixa "
-#~ "un  <strong>CNAME</strong> para <em>o_seu_equipo.org</em> en <strong>%1$s."
-#~ "%2$s</strong>.  %3$s non aloxa correo actualmente (é dicir, non pode ser "
-#~ "un MX) nin tampouco DNS</strong>.  <p>Ao premer en \"crear\" programarase "
-#~ "a creación do equipo virtual.  Isto sincronizarase cos servidores web do "
-#~ "proxecto - de xeito que <em>o_seu_equipo.org</em> mostrará o material que "
-#~ "hai en <em>%4$s.%5$s</em>."
-
-#~ msgid ""
-#~ "<p>The purpose of this archive is to let you share your code snippets, "
-#~ "scripts,\tand functions with the Open Source Software Community.</"
-#~ "p><p>You can create a \"new snippet\", then post additional versions of "
-#~ "that snippet quickly and easily.</p><p>Once you have snippets posted, you "
-#~ "can then create a \"Package\" of snippets. That package can contain "
-#~ "multiple, specific versions of other snippets.</p><p>&nbsp;</p><h3>Browse "
-#~ "Snippets</h3>\t<p>You can browse the snippet library quickly:</p>"
-#~ msgstr ""
-#~ "<p>O propósito deste arquivo é permitirlle compartir fragmentos de "
-#~ "código, scripts,\te funcións coa comunidade de código aberto.</p><p>Pode "
-#~ "crear un \"fragmento novo\", e despois publicar versións adicionais dese "
-#~ "fragmento de xeito rápido e sinxelo.</p><p>Unha vez que teña publicados "
-#~ "fragmentos, pode crear un \"paquete\" de fragmentos. Ese paquete pode "
-#~ "conter versións múltiples e específicas de outros fragmentos.</p><p>&nbsp;"
-#~ "</p><h3>Navegar polos fragmentos</h3>\t<p>Pode navegar pola biblioteca de "
-#~ "fragmentos de xeito rápido:</p>"
-
-#~ msgid ""
-#~ "<p>You can group together existing snippets into a package using this "
-#~ "interface. Before creating your package, make sure all your snippets are "
-#~ "in place and you have made a note of the snippet ID's.</p><ol><li>Create "
-#~ "the package using this form.</li><li><strong>Then</strong> use the \"Add "
-#~ "Snippets to Package\" link to add files to your package.</li></"
-#~ "ol><p><span class=\"important\">Note:</span> You can submit a new version "
-#~ "of an existing package by browsing the library and using the link on the "
-#~ "existing package. You should only use this page if you are submitting an "
-#~ "entirely new package."
-#~ msgstr ""
-#~ "<p>Pode agrupar fragmentos existentes nun paquete usando esta interface. "
-#~ "Antes de crear o seu paquete, asegúrese de que todos os fragmentos están "
-#~ "no seu sitio e que anotou os ID dos fragmentos.</p><ol><li>Cree o paquete "
-#~ "usando este formulario.</li><li><strong>Logo</strong> use a ligazón de "
-#~ "\"engadir fragmentos ao paquete\" para engadir ficheiros ao paquete.</"
-#~ "li></ol><p><span class=\"important\">Nota:</span> Pode enviar unha "
-#~ "versión nova dun paquete existente navegando pola biblioteca e usando a "
-#~ "ligazón no paquete existente. Só debe usar esta páxina se está a enviar "
-#~ "un paquete enteiramente novo."
 
 #~ msgid "%1$s Site Statistics"
 #~ msgstr "Estatísticas do sitio de %1$s"
@@ -27616,32 +27402,6 @@ msgstr "Non se introduciu un nome de usuario"
 #~ msgid_plural "%1$s surveys found"
 #~ msgstr[0] "Atopouse %1$s enquisa"
 #~ msgstr[1] "Atopáronse %1$s enquisas"
-
-#~ msgid ""
-#~ "<p>The information collected in these surveys will never be sold to third "
-#~ "parties or used to solicit you to purchase any goods or services.</"
-#~ "p><p>This information is being gathered to build a profile of the "
-#~ "projects and developers being surveyed. That profile will help visitors "
-#~ "to the site understand the quality of a given project.</p><p>The ID's of "
-#~ "those who answer surveys are suppressed and not viewable by project "
-#~ "administrators or the public or third parties.</p><p>The information "
-#~ "gathered is used only in aggregate form, not to single out specific users "
-#~ "or developers.</p><p>If any changes are made to this policy, it will "
-#~ "affect only future data that is collected and the user will of course "
-#~ "have the ability to 'opt-out'."
-#~ msgstr ""
-#~ "<p>A información compilada nestas enquisas non se venderá nunca a "
-#~ "terceiras partes nin tampouco se usará para lle solicitar que compre "
-#~ "ningunha cousa ou servizo.</p><p>Esta información compílase para crear un "
-#~ "perfil dos proxectos e dos desenvolvedores a que se lle fai a enquisa. "
-#~ "Este perfil axudará os visitantes a coñeceren a calidade dun proxecto.</"
-#~ "p><p>Os ID das persoas que responden as preguntas suprimiranse e os "
-#~ "administradores dos proxectos, o público en xeral e terceiras persoas non "
-#~ "os poderán ver.</p><p>A información so se emprega como agregada, non como "
-#~ "información individual ou específica de usuarios e desenvolvedores.</"
-#~ "p><p>Se se realizar algún cambio nesta política, só afectará aos datos "
-#~ "futuros que se recompilaren e o usuario poderá, por suposto, negarse ao "
-#~ "cubrir'."
 
 #~ msgid "Top Projects"
 #~ msgstr "Proxectos destacados"
@@ -27744,26 +27504,6 @@ msgstr "Non se introduciu un nome de usuario"
 #~ msgid "Missing parameter, You must give proper subject to the mailing"
 #~ msgstr "Falta un parámetro; debe porlle un asunto axeitado ao correo "
 
-#~ msgid ""
-#~ "Here you can activate / deactivate Site wide plugins which are in the "
-#~ "plugins/ folder. Then, you should activate them also per project, per "
-#~ "user or whatever the plugin specifically applies to.<br /><span class="
-#~ "\"important\">Be careful because some groups/users can be using the "
-#~ "plugin. Deactivating it will remove the plugin from all users/groups.<br /"
-#~ ">Be EXTRA careful running the SQL init script when a plugin has been "
-#~ "deactivated prior use (and you want to re-activate) because some scripts "
-#~ "have DROP TABLE statements</span><br /><br />"
-#~ msgstr ""
-#~ "Nesta páxina pode activar ou desactivar os complementos que están no "
-#~ "cartafol de complementos. Despois tamén os poderá activar por proxecto, "
-#~ "por usuario ou o que o complemento aplica.<br /><span class=\"important"
-#~ "\">Teña coidado xa que algúns grupos ou usuarios poden estar a usar un "
-#~ "complemento e ao desactivalo pode eliminalo de todos os grupos ou "
-#~ "usuarios.<br />Teña, tamén, un COIDADO ESPECIAL ao executar a script Init "
-#~ "de SQL cando un complemento foi desactivado antes de o usar (e precisa "
-#~ "volvelo activar) xa que algúns scripts teñen unha sentenza DROP TABLE "
-#~ "(eliminar táboa)</span><br /><br />"
-
 #~ msgid "Groups Membership"
 #~ msgstr "Participación en grupos "
 
@@ -27835,17 +27575,6 @@ msgstr "Non se introduciu un nome de usuario"
 
 #~ msgid "Must Choose A Message First"
 #~ msgstr "Primeiro debe elixir unha mensaxe "
-
-#~ msgid ""
-#~ "Step 2: Add Files To This Release</h3><p>Now, choose a file to upload "
-#~ "into the system. The maximum file size is determined by the site "
-#~ "administrator, but defaults to 2MB. If you need to upload large files, "
-#~ "contact your site administrator.</p>"
-#~ msgstr ""
-#~ "2.º paso: engada ficheiros a esta versión</h3><p>Agora, elixa un ficheiro "
-#~ "para enviar ao sistema. O tamaño máximo do ficheiro está determinado polo "
-#~ "administrador do sitio, mais o valor predefinido é 2MB. Se precisa enviar "
-#~ "ficheiros máis grandes, contacte coa Administración.</p> "
 
 #~ msgid "File Released: You May Choose To Edit the Release Now"
 #~ msgstr "Ficheiro publicado: pode elixir editar agora a publicación"
@@ -27941,16 +27670,6 @@ msgstr "Non se introduciu un nome de usuario"
 #~ msgid "Project/Task Manager: Subprojects And Tasks"
 #~ msgstr "Proxecto/xestor de tarefas: Subproxectos e tarefas"
 
-#~ msgid ""
-#~ "<h1>No Subprojects Found</h1><p><strong>No subprojects have been set up, "
-#~ "or you cannot view them.<p><span class=\"important\">The Admin for this "
-#~ "project will have to set up projects using the admin page</span></strong>"
-#~ msgstr ""
-#~ "<h1>Non se atoparon subproxectos</h1><p><strong>Non se configuraron "
-#~ "subproxectos, ou non os pode ver.<p><span class=\"important\">A "
-#~ "administración deste proxecto terá que configurar os proxectos usando a "
-#~ "páxina de administración</span></strong>"
-
 #~ msgid "Group Trove Information"
 #~ msgstr "Información da categorización de grupo"
 
@@ -27986,21 +27705,6 @@ msgstr "Non se introduciu un nome de usuario"
 #~ msgstr ""
 #~ "Outras estatísticas:<ul><li><a href=\"i18n.php\">Estatísticas de "
 #~ "internacionalización</a></li></ul>"
-
-#~ msgid "UPDATE SUCCESSFUL"
-#~ msgstr "ACTUALIZOUSE CORRECTAMENTE"
-
-#~ msgid ""
-#~ "<p>It's simple to create a survey.<ol><li>Create questions and comments "
-#~ "using the forms above.</li><li>Create a survey, listing the questions in "
-#~ "order (choose from <strong>your</strong> list of questions).</li><li>Link "
-#~ "to the survey using this format: %1$s where XX is the survey number"
-#~ msgstr ""
-#~ "<p>Crear unha enquisa é moi simple.<ol><li>Cree preguntas e comentarios "
-#~ "empregando os formularios de arriba.</li><li>Cree unha enquisa ao "
-#~ "relacionar as preguntas en orde (elíxaa na <strong>súa</strong> listaxe "
-#~ "de preguntas).</li><li>Faga unha ligazón á enquisa usando este formato: "
-#~ "%1$s onde XX é o número da enquisa"
 
 #~ msgid "This Group Has Turned Off Surveys."
 #~ msgstr "Este grupo desactivou as enquisas"
@@ -28241,16 +27945,6 @@ msgstr "Non se introduciu un nome de usuario"
 #~ msgid "Developer Info"
 #~ msgstr "Información do desenvolvedor "
 
-#~ msgid ""
-#~ "<p>Mailing lists provided via a GForge version of <a href=\"http://www."
-#~ "list.org/\">GNU Mailman</a>. Thanks to the Mailman and <a href=\"http://"
-#~ "www.python.org/\">Python</a> crews for excellent software.</p>"
-#~ msgstr ""
-#~ "<p>As listas de correo fornéceas unha versión para GForge de <a href="
-#~ "\"http://www.list.org/\">GNU Mailman</a>. Agradecemos á xente de Mailman "
-#~ "e de <a href=\"http://www.python.org/\">Python</a> polo seu excelente "
-#~ "software.</p>"
-
 #~ msgid "Software/Group"
 #~ msgstr "Software/grupo"
 
@@ -28280,16 +27974,6 @@ msgstr "Non se introduciu un nome de usuario"
 #~ msgid "Download The Nightly Bazaar Tree Snapshot"
 #~ msgstr "Descargar a instantánea nocturna da árbore Bazaar"
 
-#~ msgid ""
-#~ "<strong>Browse the CVS Tree</strong><p>Browsing the CVS tree gives you a "
-#~ "great view into the current status of this project's code. You may also "
-#~ "view the complete histories of any file in the repository.</p>"
-#~ msgstr ""
-#~ "<strong>Navegar pola árbore CVS</strong><p>A navegación pola árbore CVS "
-#~ "permite unha ollada fantástica ao estado actual do código do proxecto. "
-#~ "Tamén pode ver o historial completo de calquera ficheiro do repositorio.</"
-#~ "p>"
-
 #~ msgid "You project is private and so, you can't turn Anonymous Access on"
 #~ msgstr ""
 #~ "O seu proxecto é privado e, polo tanto, non pode habilitar o acceso "
@@ -28299,59 +27983,11 @@ msgstr "Non se introduciu un nome de usuario"
 #~ msgstr "Descargar a instantánea nocturna da árbore SVN"
 
 #~ msgid ""
-#~ "<strong>Browse the Subversion Tree</strong><p>Browsing the SVN tree gives "
-#~ "you a great view into the current status of this project's code. You may "
-#~ "also view the complete histories of any file in the repository.</p>"
-#~ msgstr ""
-#~ "<strong>Navegar pola árbore de Subversion</strong><p> A navegación pola "
-#~ "árbore SVN permite unha ollada fantástica do estado actual do código do "
-#~ "proxecto. Tamén pode ver o historial completo de calquera ficheiro do "
-#~ "repositorio.</p>"
-
-#~ msgid ""
-#~ "<h3>Packages</h3><p>You can use packages to group different file releases "
-#~ "together, or use them however you like. <p><h4>An example of packages:</"
-#~ "h4><p><strong>Mysql-win</strong><br /><strong>Mysql-unix</strong><br /"
-#~ "><strong>Mysql-odbc</strong><p><h4>Your Packages:</h4><p><ol><li>Define "
-#~ "your packages</li><li>Create new releases of packages</li></"
-#~ "ol><p><h3>Releases of Packages</h3><p>A release of a package can contain "
-#~ "multiple files.<p><h4>Examples of Releases</h4><p><strong>3.22.1</"
-#~ "strong><br /><strong>3.22.2</strong><br /><strong>3.22.3</strong><br /"
-#~ "><p>You can create new releases of packages by clicking on <strong>Add/"
-#~ "Edit Releases</strong> next to your package name.<p>"
-#~ msgstr ""
-#~ "<h3>Paquetes</h3><p>Pode usar os paquetes para agrupar diferentes "
-#~ "versións de ficheiros ou usalos como desexar. <p><h4>Un exemplo de "
-#~ "paquetes é o seguinte:</h4><strong>Mysql-win</strong><br /><strong>Mysql-"
-#~ "unix</strong><br /><strong>Mysql-odbc</strong><p><h4>Os seus paquetes:</"
-#~ "h4><p><ol><li>Definir os seus paquetes</li><li>Crear versións novas dos "
-#~ "paquetes</li></ol><p><h3>Versións dos paquetes</h3><p>Unha versión dun "
-#~ "paquete pode conter diferentes ficheiros.<p><h4>Algúns exemplos de "
-#~ "versións posíbeis son os seguintes</h4><p><strong>3.22.1</strong><br /"
-#~ "><strong>3.22.2</strong><br /><strong>3.22.3</strong><br /><p>Pode crear "
-#~ "novas versións dos paquetes ao premer en <strong>Engadir/editar versións</"
-#~ "strong> que está a continuación do seu nome de paquete.<p> "
-
-#~ msgid ""
 #~ "As there is only one SCM system, then this will be selected "
 #~ "automatically. <strong>%1$s</strong> will be selected."
 #~ msgstr ""
 #~ "Como só hai un sistema de xestión de código fonte, seleccionarase "
 #~ "automaticamente. Escollerase <strong>%1$s</strong>."
-
-#~ msgid ""
-#~ "<h3>Reporting System Initialization</h3><p>Occasionally, if cronjobs "
-#~ "failed or the database was damaged, you may have to rebuild the reporting "
-#~ "tables.<p>If you are sure you want to rebuild all the reporting tables, "
-#~ "check the \"I'm Sure\" box and click the button below.<p>This could take "
-#~ "a couple minutes, so DO NOT CLICK MORE THAN ONCE.<p>"
-#~ msgstr ""
-#~ "<h3>Inicialización do sistema de informes</h3><p>Ás veces, se fallan as "
-#~ "tarefas de cron ou se dana a base de datos, pode ter que reconstruír as "
-#~ "táboas de informes.<p>Se está seguro de que quere reconstruír as táboas "
-#~ "de informes, marque a caixa de \"estou seguro\" e prema o botón de "
-#~ "embaixo.<p>Isto pode levar un par de minutos, así que NON PREMA MÁIS "
-#~ "DUNHA VEZ.<p>"
 
 #~ msgid "Error doing insert"
 #~ msgstr "Produciuse un erro ao inserir"
@@ -28439,24 +28075,6 @@ msgstr "Non se introduciu un nome de usuario"
 #~ msgid "Forum monitoring deactivated"
 #~ msgstr "Monitorización do foro desactivada"
 
-#~ msgid ""
-#~ "<p>The purpose of this archive is to let you share your code snippets, "
-#~ "scripts,\tand functions with the Open Source Software Community.</"
-#~ "p><p>You can create a \"new snippet\", then post additional versions of "
-#~ "that snippet quickly and easily.</p><p>Once you have snippets posted, you "
-#~ "can then create a \"Package\" of snippets. That package can contain "
-#~ "multiple, specific versions of other snippets.</p><p></p><h3>Browse "
-#~ "Snippets</h3>\t<p>You can browse the snippet library quickly:</p>"
-#~ msgstr ""
-#~ "<p>O propósito deste arquivo é permitirlle compartir fragmentos de "
-#~ "código, scripts,\te funcións coa comunidade de código aberto.</p><p>Pode "
-#~ "crear un \"fragmento novo\", e despois publicar versións adicionais dese "
-#~ "fragmento de xeito rápido e sinxelo.</p><p>Unha vez que teña publicados "
-#~ "fragmentos, pode crear un \"paquete\" de fragmentos. Ese paquete pode "
-#~ "conter versións múltiples e específicas de outros fragmentos.</p><p></"
-#~ "p><h3>Navegar polos fragmentos</h3>\t<p>Pode navegar pola biblioteca de "
-#~ "fragmentos de xeito rápido:</p>"
-
 #~ msgid "No valid Group Object"
 #~ msgstr "O obxecto de grupo non é válido"
 
@@ -28490,54 +28108,3 @@ msgstr "Non se introduciu un nome de usuario"
 
 #~ msgid "Mailing List Exists with same name"
 #~ msgstr "Xa existe unha lista de correo co mesmo nome"
-
-#~ msgid ""
-#~ "This drop-down box represents the current status of a tracker item.<br /"
-#~ "><br />You can set the status to “Pending” if you are waiting for a "
-#~ "response from the tracker item author.  When the author responds the "
-#~ "status is automatically reset to that of “Open”. Otherwise, if the author "
-#~ "doesn't respond with an admin-defined amount of time (default is 14 days) "
-#~ "then the item is given a status of “Deleted”."
-#~ msgstr ""
-#~ "Esta listaxe despregábel representa o estado actual dun elemento de "
-#~ "rexistro.<br /><br />Pode configurar o estado como pendente se está a "
-#~ "agardar unha resposta do autor do elemento de rexistro. Despois de o "
-#~ "autor responder, o estado restáurase a 'aberto'. Pola contra, se o autor "
-#~ "non responde nun tempo definido (14 días, como valor predeterminado) o "
-#~ "elemento recibe o estado de eliminado. "
-
-#~ msgid ""
-#~ "<p>The purpose of this archive is to let you share your code snippets, "
-#~ "scripts,\tand functions with the Open Source Software Community.</"
-#~ "p><p>You can create a \"new snippet\", then post additional versions of "
-#~ "that snippet quickly and easily.</p><p>Once you have snippets posted, you "
-#~ "can then create a “Package” of snippets. That package can contain "
-#~ "multiple, specific versions of other snippets.</p><p></p><h3>Browse "
-#~ "Snippets</h3>\t<p>You can browse the snippet library quickly:</p>"
-#~ msgstr ""
-#~ "<p>O propósito deste arquivo é permitirlle compartir fragmentos de "
-#~ "código, scripts,\te funcións coa comunidade de código aberto.</p><p>Pode "
-#~ "crear un \"fragmento novo\", e despois publicar versións adicionais dese "
-#~ "fragmento de xeito rápido e sinxelo.</p><p>Unha vez que teña publicados "
-#~ "fragmentos, pode crear un \"paquete\" de fragmentos. Ese paquete pode "
-#~ "conter versións múltiples e específicas de outros fragmentos.</p><p></"
-#~ "p><h3>Navegar polos fragmentos</h3>\t<p>Pode navegar pola biblioteca de "
-#~ "fragmentos de xeito rápido:</p>"
-
-#~ msgid ""
-#~ "<p>The purpose of this archive is to let you share your code snippets, "
-#~ "scripts,\tand functions with the Open Source Software Community.</"
-#~ "p><p>You can create a \"new snippet\", then post additional versions of "
-#~ "that snippet quickly and easily.</p><p>Once you have snippets posted, you "
-#~ "can then create a “Package” of snippets. That package can contain "
-#~ "multiple, specific versions of other snippets.</p><p>&nbsp;</p><h3>Browse "
-#~ "Snippets</h3>\t<p>You can browse the snippet library quickly:</p>"
-#~ msgstr ""
-#~ "<p>O propósito deste arquivo é permitirlle compartir fragmentos de "
-#~ "código, scripts,\te funcións coa comunidade de código aberto.</p><p>Pode "
-#~ "crear un \"fragmento novo\", e despois publicar versións adicionais dese "
-#~ "fragmento de xeito rápido e sinxelo.</p><p>Unha vez que teña publicados "
-#~ "fragmentos, pode crear un \"paquete\" de fragmentos. Ese paquete pode "
-#~ "conter versións múltiples e específicas de outros fragmentos.</p><p>&nbsp;"
-#~ "</p><h3>Navegar polos fragmentos</h3>\t<p>Pode navegar pola biblioteca de "
-#~ "fragmentos de xeito rápido:</p>"
