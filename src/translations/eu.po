@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-16 18:30+0200\n"
+"POT-Creation-Date: 2014-05-16 18:32+0200\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -17905,11 +17905,11 @@ msgstr "Bidali/Berritu"
 #: www/frs/admin/editrelease.php:291
 #, fuzzy
 msgid "Add Files To This Release"
-msgstr "3º urratsa: Bertsio honetan fitxeroak aldatu"
+msgstr "Bertsio honetan fitxeroak aldatu"
 
 #: www/frs/admin/editrelease.php:292
 msgid "Now, choose a file to upload into the system."
-msgstr ""
+msgstr "Sistemara bidaliko den fitxeroa aukeratu."
 
 #: www/frs/admin/editrelease.php:301 www/frs/admin/qrs.php:201
 #, php-format
@@ -18006,6 +18006,8 @@ msgid ""
 "You can use packages to group different file releases together, or use them "
 "however you like."
 msgstr ""
+"Paketeak erabili ditzakezu fitxero bertsioa ezberdinak elkartzeko edo "
+"nahiago dituzun bezela erabili."
 
 #: www/frs/admin/index.php:132
 #, fuzzy
@@ -20142,6 +20144,9 @@ msgid ""
 "The %s Project Help Wanted board is for non-commercial, project volunteer "
 "openings. Commercial use is prohibited."
 msgstr ""
+"%s proiektuan laguntza eskaerak egiteko oharren oholak ez du helburu "
+"komertzialik, baizik bolondresei lankidetzarako aukerak eskeintzen dizkio. "
+"Erabilpen komertziala galerazita dago."
 
 #: www/people/index.php:66
 msgid ""
@@ -20149,22 +20154,31 @@ msgid ""
 "whichever comes first. (Project administrators may always re-post expired "
 "openings.)"
 msgstr ""
+"Proiektuen zerrendak bi astez kaleratzen dira edo eskatzen duenak ezabatu "
+"arte (lehen gertatzen dena). Proiektuen administrariak beti argitaratu "
+"dezakete berriro igarotako edozein eskaera."
 
 #: www/people/index.php:70
 msgid ""
 "Browse through the category menu to find projects looking for your help."
 msgstr ""
+"Kategorien menuetatik nabigatu zure laguntza behar duten proiektuak "
+"aurkitzeko."
 
 #: www/people/index.php:74
 msgid ""
 "If you're a project admin, log in and submit help wanted requests through "
 "your project administration page."
 msgstr ""
+"Proiektu baten administraria bazara, atzitu eta laguntza eskaera bidali zure "
+"proiektuko administrazio orritik."
 
 #: www/people/index.php:78
 msgid ""
 "To suggest new job categories, submit a request via the support manager."
 msgstr ""
+"Lan kategoria berriak proposatzeko, bidali eskaera gune hau sostengatzen "
+"duen arduradunari."
 
 #: www/people/index.php:83
 msgid "Last posts"
@@ -23493,22 +23507,26 @@ msgstr "Ez duzu lizentzia mota aukeratu"
 
 #: www/survey/admin/index.php:58
 msgid "It's simple to create a survey."
-msgstr ""
+msgstr "Inkesta bat sortzea erreza da."
 
 #: www/survey/admin/index.php:62
 msgid "Create questions and comments using the forms above."
-msgstr ""
+msgstr "Galderak eta azalpenak sortu gorako formulario erabiltzen."
 
 #: www/survey/admin/index.php:65
 msgid ""
 "Create a survey, listing the questions in order (choose from <strong>your</"
 "strong> list of questions)."
 msgstr ""
+"Inkesta bat sortu, ordenean galderak zerrendatzen (aukera itzazu "
+"<strong>zure</strong> galdera zerrendatik)."
 
 #: www/survey/admin/index.php:68
 #, php-format
 msgid "Link to the survey using this format: %s where XX is the survey number"
 msgstr ""
+"Inkestarekin bat egin ondorengo formatua erabiliaz: %1$s non XX inkestaren "
+"zenbakia den"
 
 #: www/survey/admin/index.php:73
 #, php-format
@@ -23761,6 +23779,8 @@ msgid ""
 "The information collected in these surveys will never be sold to third "
 "parties or used to solicit you to purchase any goods or services."
 msgstr ""
+"Inkesta honetan jasotako informazioa ez inoiz da hirugarren bati salduko, "
+"ezta erabiliko ere erosteko eskakizunik egiteko."
 
 #: www/survey/privacy.php:44
 msgid ""
@@ -23768,24 +23788,34 @@ msgid ""
 "developers being surveyed. That profile will help visitors to the site "
 "understand the quality of a given project."
 msgstr ""
+"Informazio hau jasotzearen helburua, inkesta egiten zaien lankideen profila "
+"egituratzea da. Profil honi esker bisitariak gune honetako proiektu baten "
+"kalitatea jakin dezake."
 
 #: www/survey/privacy.php:47
 msgid ""
 "The ID's of those who answer surveys are suppressed and not viewable by "
 "project administrators or the public or third parties."
 msgstr ""
+"Inkestak erantzuten dituzten pertsonen identifikadorea ez du proiektuaren "
+"administrariak, ez jende arruntak ez eta hirugarre batzuk ikusten."
 
 #: www/survey/privacy.php:50
 msgid ""
 "The information gathered is used only in aggregate form, not to single out "
 "specific users or developers."
 msgstr ""
+"Informazio orokorki erabiltzen da, alegia ez da erabiltzaileen edo lankideen "
+"banakako informazioa erakusten."
 
 #: www/survey/privacy.php:53
 msgid ""
 "If any changes are made to this policy, it will affect only future data that "
 "is collected and the user will of course have the ability to 'opt-out'."
 msgstr ""
+"Politika honetan aldaketik badago, etorkizunean jasoko diren datuei bakarrik "
+"eragingo die eta erabiltzaileak informazioa ez emateko eskubide osoa izango "
+"du"
 
 #: www/survey/rating_resp.php:59
 msgid "Vote registered"
@@ -26241,27 +26271,6 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #~ msgid "Short Name"
 #~ msgstr "Izen laburra"
 
-#~ msgid ""
-#~ "<p>The %1$s Project Help Wanted board is for non-commercial, project "
-#~ "volunteer openings. Commercial use is prohibited.</p><p>Project listings "
-#~ "remain live for two weeks, or until closed by the poster, whichever comes "
-#~ "first. (Project administrators may always re-post expired openings.)</"
-#~ "p><p>Browse through the category menu to find projects looking for your "
-#~ "help.</p><p>If you're a project admin, log in and submit help wanted "
-#~ "requests through your project administration page.</p><p>To suggest new "
-#~ "job categories, submit a request via the support manager.</p>"
-#~ msgstr ""
-#~ "<p>%1$s proiektuan laguntza eskaerak egiteko oharren oholak ez du helburu "
-#~ "komertzialik, baizik bolondresei lankidetzarako aukerak eskeintzen "
-#~ "dizkio. Erabilpen komertziala galerazita dago.</p><p>Proiektuen zerrendak "
-#~ "bi astez kaleratzen dira edo eskatzen duenak ezabatu arte (lehen "
-#~ "gertatzen dena). Proiektuen administrariak beti argitaratu dezakete "
-#~ "berriro igarotako edozein eskaera.</p><p>Kategorien menuetatik nabigatu "
-#~ "zure laguntza behar duten proiektuak aurkitzeko.</p><p>Proiektu baten "
-#~ "administraria bazara, atzitu eta laguntza eskaera bidali zure proiektuko "
-#~ "administrazio orritik.</p><p>Lan kategoria berriak proposatzeko, bidali "
-#~ "eskaera gune hau sostengatzen duen arduradunari.</p>"
-
 #, fuzzy
 #~ msgid "Subprojects and Tasks"
 #~ msgstr "Azpiprojektua"
@@ -26360,31 +26369,6 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #~ msgid_plural "%1$s surveys found"
 #~ msgstr[0] "%1$s bilatutako inkestak"
 #~ msgstr[1] "%1$s bilatutako inkestak"
-
-#~ msgid ""
-#~ "<p>The information collected in these surveys will never be sold to third "
-#~ "parties or used to solicit you to purchase any goods or services.</"
-#~ "p><p>This information is being gathered to build a profile of the "
-#~ "projects and developers being surveyed. That profile will help visitors "
-#~ "to the site understand the quality of a given project.</p><p>The ID's of "
-#~ "those who answer surveys are suppressed and not viewable by project "
-#~ "administrators or the public or third parties.</p><p>The information "
-#~ "gathered is used only in aggregate form, not to single out specific users "
-#~ "or developers.</p><p>If any changes are made to this policy, it will "
-#~ "affect only future data that is collected and the user will of course "
-#~ "have the ability to 'opt-out'."
-#~ msgstr ""
-#~ "<p>Inkesta honetan jasotako informazioa ez inoiz da hirugarren bati "
-#~ "salduko, ezta erabiliko ere erosteko eskakizunik egiteko.</"
-#~ "p><p>Informazio hau jasotzearen helburua, inkesta egiten zaien lankideen "
-#~ "profila egituratzea da. Profil honi esker bisitariak gune honetako "
-#~ "proiektu baten kalitatea jakin dezake.</p><p>Inkestak erantzuten dituzten "
-#~ "pertsonen identifikadorea ez du proiektuaren administrariak, ez jende "
-#~ "arruntak ez eta hirugarre batzuk ikusten.</p><p>Informazio orokorki "
-#~ "erabiltzen da, alegia ez da erabiltzaileen edo lankideen banakako "
-#~ "informazioa erakusten.</p><p>Politika honetan aldaketik badago, "
-#~ "etorkizunean jasoko diren datuei bakarrik eragingo die eta erabiltzaileak "
-#~ "informazioa ez emateko eskubide osoa izango du"
 
 #~ msgid "Top Projects"
 #~ msgstr "Izar proiektuak"
@@ -26518,17 +26502,6 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #~ msgid "Must Choose A Message First"
 #~ msgstr "Lehenengo mezua aukeratu behar duzu"
 
-#~ msgid ""
-#~ "Step 2: Add Files To This Release</h3><p>Now, choose a file to upload "
-#~ "into the system. The maximum file size is determined by the site "
-#~ "administrator, but defaults to 2MB. If you need to upload large files, "
-#~ "contact your site administrator.</p>"
-#~ msgstr ""
-#~ "2º urratsa: Bertsio honi fitxeroak gehitu</h3><p>Sistemara bidaliko den "
-#~ "fitxeroa aukeratu. Fitxeroaren gehinezko tamaina gunearen administrariak "
-#~ "ezartzen du; jatorriz 2MB-ekoa da. Fitxero handiagoak bidali behar "
-#~ "badituzu sistemaren administrariarekin harremanetan jarri.</p>"
-
 #~ msgid "File Released: You May Choose To Edit the Release Now"
 #~ msgstr "Argitaratutako fitxeroa: orain argitaratzeko aukeratu ezazu"
 
@@ -26620,29 +26593,11 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #~ msgid "Invalid File Argument"
 #~ msgstr "Fitxero baliogabea"
 
-#~ msgid "UPDATE SUCCESSFUL"
-#~ msgstr "Ongi eguneratua"
-
-#~ msgid ""
-#~ "<p>It's simple to create a survey.<ol><li>Create questions and comments "
-#~ "using the forms above.</li><li>Create a survey, listing the questions in "
-#~ "order (choose from <strong>your</strong> list of questions).</li><li>Link "
-#~ "to the survey using this format: %1$s where XX is the survey number"
-#~ msgstr ""
-#~ "<p>Inkesta bat sortzea erreza da.<ol><li>Galderak eta azalpenak sortu "
-#~ "gorako formulario erabiltzen.</li><li>Inkesta bat sortu, ordenean "
-#~ "galderak zerrendatzen (aukera itzazu <strong>zure</strong> galdera "
-#~ "zerrendatik).</li><li>Inkestarekin bat egin ondorengo formatua erabiliaz: "
-#~ "%1$s non XX inkestaren zenbakia den"
-
 #~ msgid "You must be logged in to vote"
 #~ msgstr "Bozkatzeko izenpetua egon behar duzu"
 
 #~ msgid "Click to return to previous page"
 #~ msgstr "Aurreko orrira itzultzeko egin klik hemen"
-
-#~ msgid "ERROR!!! MISSING PARAMS"
-#~ msgstr "¡Akatsa! Parametroak falta dira"
 
 #~ msgid "Error - For some reason group_id and/or survey_id did not make it he"
 #~ msgstr ""
@@ -26749,30 +26704,6 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #~ msgid "News Data"
 #~ msgstr "Data gabe"
 
-#~ msgid ""
-#~ "<h3>Packages</h3><p>You can use packages to group different file releases "
-#~ "together, or use them however you like. <p><h4>An example of packages:</"
-#~ "h4><p><strong>Mysql-win</strong><br /><strong>Mysql-unix</strong><br /"
-#~ "><strong>Mysql-odbc</strong><p><h4>Your Packages:</h4><p><ol><li>Define "
-#~ "your packages</li><li>Create new releases of packages</li></"
-#~ "ol><p><h3>Releases of Packages</h3><p>A release of a package can contain "
-#~ "multiple files.<p><h4>Examples of Releases</h4><p><strong>3.22.1</"
-#~ "strong><br /><strong>3.22.2</strong><br /><strong>3.22.3</strong><br /"
-#~ "><p>You can create new releases of packages by clicking on <strong>Add/"
-#~ "Edit Releases</strong> next to your package name.<p>"
-#~ msgstr ""
-#~ "<h3>Paketeak</h3><p>Paketeak erabili ditzakezu fitxero bertsioa "
-#~ "ezberdinak elkartzeko edo nahiago dituzun bezela erabili. <p><h4>Paketeen "
-#~ "adibide bat:</h4><p><strong>Mysql-win</strong><br /><strong>Mysql-unix</"
-#~ "strong><br /><strong>Mysql-odbc</strong><p><h4>Zure paketeak:</"
-#~ "h4><p><ol><li>Zure paketeak definitu</li><li>Paketeen bertsio berri bat "
-#~ "sortu</li></ol><p><h3>Paketeen bertsioak</h3><p>Pakete baten barne "
-#~ "fitxero ugari egon daitezke.<p><h4>Bertsioen adibideak</"
-#~ "h4><p><strong>3.22.1</strong><br /><strong>3.22.2</strong><br /"
-#~ "><strong>3.22.3</strong><br /><p>Pakete berrien bertsioak sortu ditzakezu "
-#~ "<strong>Bertsioak gehitu/argitaratu</strong> sakatzean paketearen "
-#~ "izenaren ostean.<p>"
-
 #, fuzzy
 #~ msgid " (<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
 #~ msgid_plural " (<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
@@ -26812,28 +26743,6 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #, fuzzy
 #~ msgid "Patch Submissions"
 #~ msgstr "Dokumentu berrien argitalpena"
-
-#, fuzzy
-#~ msgid "<h3>3. License</h3>"
-#~ msgstr ""
-#~ "<h3>3. Lizentzia</h3> <p><strong><em>Zure proiektua webgunea bezela "
-#~ "erabili nahi baduzu, mesedez, aukeratu \"Webgunea bakarrik\" beherako "
-#~ "zerrendan.</em></strong><p>%1$s kode irekiko proiektuen garapenerako "
-#~ "sustatu da. Gauzak errazteko hona hemen kode irekiko adibide batzuk <a "
-#~ "href=\"http://www.opensource.org\">Open Source Initiative</a> zure "
-#~ "lizentzia aukeratzeko. <p>Hala ere, jakinaren gainean gaude badaudela "
-#~ "beste lizentzia batzuk agian hobeto egokitzen direnak zure beharretara. "
-#~ "OSI Certified ez den beste lizentzia bat aukeratuz gero mesedez erabaki "
-#~ "horren arrazoiak eman iezazkiguzu. <p> Lizentziaren hautateka erabaki "
-#~ "garrantzitsu bat da. Mesedez har ezazu era askotako lizentzien baldintzak "
-#~ "irakurtzeko beta erabakia hartu baino lehen. <p> Beranduago lizentzia "
-#~ "aldatu dezakezu, betiere legeak onartzen badizu. Zure bertsio orriak "
-#~ "aldaketa horiek adierazi behar ditu argi eta garbi. Zure sailkapen mapa "
-#~ "orria ongi eguneratua egon behar du. <em>Mesedez gogoratu lizentzien "
-#~ "aldaketak ez direla atzeraeraginezkoak (adibidez, ez aldatu jadanik "
-#~ "OpenSource lizentziapean dauden bertsioak).</em> <p>%1$s ez da zure "
-#~ "lizentziarekin zerikusia duten lege desadostasunaz arduratzen."
-#~ "<p><strong>Lizentziak</strong>"
 
 #~ msgid "Opn"
 #~ msgstr "Opn"
