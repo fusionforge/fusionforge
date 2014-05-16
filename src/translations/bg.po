@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-15 18:26+0200\n"
+"POT-Creation-Date: 2014-05-16 14:04+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1376,9 +1376,9 @@ msgstr ""
 #: www/admin/trove/trove_cat_edit.php:115
 #: www/admin/trove/trove_cat_edit.php:141
 #: www/admin/trove/trove_cat_edit.php:144
-#: www/admin/trove/trove_cat_edit.php:147 www/admin/useredit.php:129
-#: www/admin/useredit.php:138 www/admin/useredit.php:147
-#: www/admin/useredit.php:156 www/admin/useredit.php:210
+#: www/admin/trove/trove_cat_edit.php:147 www/admin/useredit.php:133
+#: www/admin/useredit.php:142 www/admin/useredit.php:151
+#: www/admin/useredit.php:160 www/admin/useredit.php:214
 #: www/admin/vhost.php:143 www/forum/admin/index.php:112
 #: www/forum/admin/index.php:116 www/forum/admin/index.php:150
 #: www/frs/admin/editrelease.php:229 www/frs/admin/editrelease.php:233
@@ -2229,7 +2229,7 @@ msgstr ""
 #: plugins/scmgit/common/GitPlugin.class.php:1134
 #: www/admin/admin_table.php:158 www/admin/admin_table.php:318
 #: www/admin/massmail.php:172 www/admin/responses_admin.php:46
-#: www/admin/trove/trove_cat_edit.php:150 www/admin/useredit.php:230
+#: www/admin/trove/trove_cat_edit.php:150 www/admin/useredit.php:234
 #: www/admin/userlist.php:139 www/admin/userlist.php:141
 #: www/forum/admin/index.php:186 www/frs/admin/deletepackage.php:74
 #: www/frs/admin/deleterelease.php:76 www/frs/admin/index.php:181
@@ -2400,7 +2400,7 @@ msgstr ""
 #: plugins/webanalytics/view/admin/updateLinkValue.php:45
 #: www/account/index.php:343 www/account/lostlogin.php:107
 #: www/admin/groupedit.php:223 www/admin/trove/trove_cat_edit.php:150
-#: www/admin/useredit.php:235 www/admin/useredit.php:314
+#: www/admin/useredit.php:239 www/admin/useredit.php:313
 #: www/admin/vhost.php:186 www/forum/admin/index.php:162
 #: www/frs/admin/editrelease.php:359 www/frs/admin/index.php:180
 #: www/mail/admin/index.php:239 www/mail/admin/index.php:292
@@ -3816,7 +3816,7 @@ msgid "Admin"
 msgstr "Администриране"
 
 #: common/include/Navigation.class.php:401 www/admin/approve-pending.php:139
-#: www/admin/groupedit.php:99 www/admin/useredit.php:275
+#: www/admin/groupedit.php:99 www/admin/useredit.php:278
 #: www/admin/useredit.php:306
 msgid "Project Admin"
 msgstr ""
@@ -4989,7 +4989,7 @@ msgstr ""
 #: www/account/editsshkeys.php:39 www/account/index.php:38
 #: www/account/lostlogin.php:54 www/account/unsubscribe.php:54
 #: www/admin/database.php:61 www/admin/unsubscribe.php:76
-#: www/admin/useredit.php:43 www/admin/userlist.php:44
+#: www/admin/useredit.php:46 www/admin/userlist.php:44
 #: www/docman/index.php:105
 msgid "Could Not Get User"
 msgstr ""
@@ -6664,7 +6664,7 @@ msgstr ""
 #: plugins/scmsvn/common/SVNPlugin.class.php:222
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:32
 #: www/account/editsshkeys.php:50 www/account/index.php:308
-#: www/admin/useredit.php:261 www/admin/useredit.php:291
+#: www/admin/useredit.php:265 www/admin/useredit.php:292
 #: www/project/admin/editimages.php:265 www/reporting/usersummary.php:104
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:44
 #: www/sendmessage.php:76
@@ -9074,7 +9074,7 @@ msgstr "Проекти на потребителя"
 #: plugins/oauthprovider/www/consumer.php:114
 #: plugins/oauthprovider/www/consumer_update_page.php:69
 #: www/admin/search.php:77 www/admin/unsubscribe.php:117
-#: www/admin/useredit.php:210 www/forum/admin/monitor.php:64
+#: www/admin/useredit.php:214 www/forum/admin/monitor.php:64
 #: www/sendmessage.php:76
 msgid "Email"
 msgstr ""
@@ -9756,7 +9756,7 @@ msgstr "Регистрацията не е активна"
 #: plugins/globaldashboard/www/admin/manage_accounts.php:111
 #: www/account/verify.php:38 www/admin/globalroleedit.php:150
 #: www/admin/search.php:75 www/admin/unsubscribe.php:115
-#: www/admin/useredit.php:138 www/project/admin/users.php:301
+#: www/admin/useredit.php:142 www/project/admin/users.php:301
 #: www/project/memberlist.php:50
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:44
 #: www/stats/lastlogins.php:49 www/top/topusers.php:63
@@ -14696,7 +14696,7 @@ msgstr ""
 "да създадете свои собствени проекти."
 
 #: www/account/index.php:103 www/admin/groupedit.php:74
-#: www/admin/useredit.php:109
+#: www/admin/useredit.php:112
 msgid "Updated"
 msgstr ""
 
@@ -14723,7 +14723,7 @@ msgid "Member since"
 msgstr ""
 
 #: www/account/index.php:146 www/admin/unsubscribe.php:114
-#: www/admin/useredit.php:129 www/include/user_profile.php:68
+#: www/admin/useredit.php:133 www/include/user_profile.php:68
 msgid "User Id"
 msgstr "Потребителско ID"
 
@@ -15549,8 +15549,8 @@ msgid "Permanently Delete Project"
 msgstr ""
 
 #: www/admin/groupedit.php:115 www/admin/groupedit.php:127
-#: www/admin/index.php:166 www/admin/useredit.php:162
-#: www/admin/useredit.php:168
+#: www/admin/index.php:166 www/admin/useredit.php:166
+#: www/admin/useredit.php:172
 msgid "Pending (P)"
 msgstr ""
 
@@ -15559,8 +15559,8 @@ msgid "Incomplete (I)"
 msgstr ""
 
 #: www/admin/groupedit.php:126 www/admin/index.php:164
-#: www/admin/useredit.php:35 www/admin/useredit.php:163
-#: www/admin/useredit.php:169 www/admin/useredit.php:173
+#: www/admin/useredit.php:38 www/admin/useredit.php:167
+#: www/admin/useredit.php:173 www/admin/useredit.php:177
 msgid "Active (A)"
 msgstr ""
 
@@ -15607,7 +15607,7 @@ msgid "Register Time"
 msgstr ""
 
 #: www/admin/grouplist.php:69 www/admin/search.php:150
-#: www/admin/useredit.php:262 www/admin/useredit.php:292
+#: www/admin/useredit.php:266 www/admin/useredit.php:293
 #: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:75
 #: www/register/index.php:239 www/register/index.php:241
 msgid "Unix Name"
@@ -16145,7 +16145,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: www/admin/search.php:76 www/admin/unsubscribe.php:116
-#: www/admin/useredit.php:147 www/forum/admin/monitor.php:64
+#: www/admin/useredit.php:151 www/forum/admin/monitor.php:64
 #: www/include/user_profile.php:92 www/project/admin/massadd.php:90
 #: www/project/admin/massfinish.php:74
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:45
@@ -16310,102 +16310,102 @@ msgstr ""
 msgid "Comm. Mail."
 msgstr ""
 
-#: www/admin/useredit.php:34
+#: www/admin/useredit.php:37
 msgid "No Unix account (N)"
 msgstr ""
 
-#: www/admin/useredit.php:36 www/admin/useredit.php:164
-#: www/admin/useredit.php:170 www/admin/useredit.php:174
+#: www/admin/useredit.php:39 www/admin/useredit.php:168
+#: www/admin/useredit.php:174 www/admin/useredit.php:178
 msgid "Suspended (S)"
 msgstr ""
 
-#: www/admin/useredit.php:37 www/admin/useredit.php:54
-#: www/admin/useredit.php:165
+#: www/admin/useredit.php:40 www/admin/useredit.php:57
+#: www/admin/useredit.php:169
 msgid "Deleted (D)"
 msgstr ""
 
-#: www/admin/useredit.php:52 www/admin/useredit.php:69
+#: www/admin/useredit.php:55 www/admin/useredit.php:72
 #, fuzzy
 msgid "Could Not Complete Operation: "
 msgstr "Разрешение не беше получено"
 
-#: www/admin/useredit.php:57
+#: www/admin/useredit.php:60
 msgid ""
 "Please check the confirmation box if you really want to delete this user."
 msgstr ""
 
-#: www/admin/useredit.php:92
+#: www/admin/useredit.php:84
 #, fuzzy
 msgid "Added Successfully to project "
 msgstr "Моите Проекти"
 
-#: www/admin/useredit.php:116
+#: www/admin/useredit.php:119
 msgid "Site Admin: User Info"
 msgstr ""
 
-#: www/admin/useredit.php:120
+#: www/admin/useredit.php:123
 msgid "Account Information"
 msgstr ""
 
-#: www/admin/useredit.php:156
+#: www/admin/useredit.php:160
 msgid "Web account status"
 msgstr ""
 
-#: www/admin/useredit.php:187
+#: www/admin/useredit.php:191
 msgid "Unix Account Status"
 msgstr ""
 
-#: www/admin/useredit.php:196
+#: www/admin/useredit.php:200
 msgid "Unix Shell:"
 msgstr ""
 
-#: www/admin/useredit.php:219
+#: www/admin/useredit.php:223
 msgid "Current confirm hash:"
 msgstr ""
 
-#: www/admin/useredit.php:229
+#: www/admin/useredit.php:233
 msgid "I want to delete this user"
 msgstr ""
 
-#: www/admin/useredit.php:237
+#: www/admin/useredit.php:241
 msgid ""
 "This pages allows to change only direct properties of user object. To edit "
 "properties pertinent to user within specific project, visit admin page of "
 "that project (below)."
 msgstr ""
 
-#: www/admin/useredit.php:244
+#: www/admin/useredit.php:248
 msgid ""
 "Unix status updated mirroring web status, unless it has value “No Unix "
 "account (N)”"
 msgstr ""
 
-#: www/admin/useredit.php:252
+#: www/admin/useredit.php:256
 #, fuzzy
 msgid "Projects Membership"
 msgstr "Общо за целия проект"
 
-#: www/admin/useredit.php:263 www/admin/useredit.php:293
+#: www/admin/useredit.php:267 www/admin/useredit.php:294
 #: www/admin/vhost.php:176 www/project/admin/database.php:207
 #: www/project/admin/vhost.php:141
 msgid "Operations"
 msgstr ""
 
-#: www/admin/useredit.php:285 www/include/user_home.php:99
+#: www/admin/useredit.php:286 www/include/user_home.php:99
 #, fuzzy
 msgid "This user is not a member of any project."
 msgstr "Този разработчик не е член на никой проект."
 
-#: www/admin/useredit.php:288
+#: www/admin/useredit.php:289
 #, fuzzy
 msgid "Add membership to new projects"
 msgstr "Моите Проекти"
 
-#: www/admin/useredit.php:288
+#: www/admin/useredit.php:289
 msgid "(100 shown)"
 msgstr ""
 
-#: www/admin/useredit.php:294
+#: www/admin/useredit.php:295
 #, fuzzy
 msgid "Select role"
 msgstr "Файл"
