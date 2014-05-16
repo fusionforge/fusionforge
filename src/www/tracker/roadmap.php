@@ -177,6 +177,9 @@ if (!$atfh || !is_object($atfh) || $atfh->isError()) {
 
 $template = getIntFromRequest('template', 0);
 $ajax = getIntFromRequest('ajax', 0);
+if ($ajax) {
+	$sysdebug_enable = false;
+}
 
 $roadmap_name = getStringFromRequest('roadmap_name');
 $roadmap_id = getIntFromRequest('roadmap_id', 0);
@@ -616,7 +619,7 @@ if (!$at_arr || count($at_arr) < 1) {
 			});
 
 			function updatePage() {
-				jQuery('#div_roadmap').empty().append('<div class="align-center"><img src="<?php echo $gfwww ?>/images/ajax-loader.gif" /></div>');
+				jQuery('#div_roadmap').empty().append('<div class="align-center"><img src="/images/ajax-loader.gif" /></div>');
 				jQuery.ajax({
 					type: 'POST',
 					url: 'roadmap.php',

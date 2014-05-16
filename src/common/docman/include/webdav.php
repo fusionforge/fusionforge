@@ -35,7 +35,7 @@
  */
 
 require_once 'HTTP/WebDAV/Server.php';
-require_once $gfcommon.'/docman/DocumentGroup.class.php';
+require_once $gfcommon.'docman/DocumentGroup.class.php';
 
 class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 

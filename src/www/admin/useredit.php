@@ -69,17 +69,6 @@ if (getStringFromRequest('delete_user') != '') {
 		exit_error( _('Could Not Complete Operation: ').$u->getErrorMessage(),'admin');
 	}
 
-	if ($u->getUnixStatus() != 'N') {
-		$u->setUnixStatus($status);
-	} else {
-		if (count($u->getGroups())>0 && $u->isActive()) {
-			$u->setUnixStatus('A');
-		}else{
-			// make sure that user doesn't have LDAP entry
-			$u->setUnixStatus('N');
-		}
-	}
-
 	if (is_array($addToProjectArray)) {
 		foreach($addToProjectArray as $project_id_to_add) {
 			$feedbackMembership = '';
@@ -98,6 +87,17 @@ if (getStringFromRequest('delete_user') != '') {
 					$gjr->delete(true);
 				}
 			}
+		}
+	}
+
+	if ($u->getUnixStatus() == 'A') {
+		$u->setUnixStatus($status);
+	} else {
+		if (count($u->getGroups())>0 && $u->isActive()) {
+			$u->setUnixStatus('A');
+		}else{
+			// make sure that user doesn't have LDAP entry
+			$u->setUnixStatus('N');
 		}
 	}
 
@@ -272,7 +272,7 @@ foreach ($projects as $p) {
 		<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i++).'>
 		<td>'.util_unconvert_htmlspecialchars(htmlspecialchars($p->getPublicName())).'</td>
 		<td>'.$p->getUnixName().'</td>
-		<td width="40%">'.util_make_link('/project/admin/?group_id='.$p->getID(),'['._('Project Admin')).']</td>
+		<td width="40%">'.util_make_link('/project/admin/?group_id='.$p->getID(),'['._('Project Admin').']').'</td>
 		</tr>
 	';
 	$userProjectsIdArray[] = $p->getID();
@@ -303,7 +303,7 @@ if ($fullListProjectsQueryResult) {
 				<td><input type="checkbox" name="group_id_add_member[]" value="'.$projectObject->getID().'">
 				<td>'.util_unconvert_htmlspecialchars(htmlspecialchars($projectObject->getPublicName())).'</td>
 				<td>'.$projectObject->getUnixName().'</td>
-				<td>'.util_make_link ('/project/admin/?group_id='.$projectObject->getID(),'['._('Project Admin')).']</td>
+				<td>'.util_make_link ('/project/admin/?group_id='.$projectObject->getID(),'['._('Project Admin').']').'</td>
 				<td>'.role_box($projectObject->getID(),'role_id-'.$projectObject->getID()).'</td>
 				</tr>
 			';
