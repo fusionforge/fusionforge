@@ -5,6 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright 2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -27,6 +28,8 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/account.php';
 require_once $gfwww.'admin/admin_utils.php';
 require_once $gfwww.'include/role_utils.php';
+
+global $HTML;
 
 session_require_global_perm('forge_admin');
 
@@ -119,7 +122,8 @@ site_admin_header(array('title'=>$title));
 ?>
 <h2><?php echo _('Account Information'); ?></h2>
 
-<form method="post" action="<?php echo getStringFromServer('PHP_SELF'); ?>">
+<?php
+echo $HTML->openForm(array('method' => 'post', 'action' => getStringFromServer('PHP_SELF'))); ?>
 <input type="hidden" name="action" value="update_user" />
 <input type="hidden" name="user_id" value="<?php print $user_id; ?>" />
 
@@ -266,21 +270,18 @@ $i = 0;
 $userProjectsIdArray = array();
 foreach ($projects as $p) {
 	if ($i == 0) {
-		echo $GLOBALS['HTML']->listTableTop($title);
+		echo $HTML->listTableTop($title);
 	}
-	print '
-		<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i++).'>
-		<td>'.util_unconvert_htmlspecialchars(htmlspecialchars($p->getPublicName())).'</td>
-		<td>'.$p->getUnixName().'</td>
-		<td width="40%">'.util_make_link('/project/admin/?group_id='.$p->getID(),'['._('Project Admin').']').'</td>
-		</tr>
-	';
+	$cells = array();
+	$cells[][] = util_unconvert_htmlspecialchars(htmlspecialchars($p->getPublicName()));
+	$cells[][] = $p->getUnixName();
+	$cells[] = array(util_make_link('/project/admin/?group_id='.$p->getID(),'['._('Project Admin').']'), 'width' => '40%');
+	echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i++, true)), $cells);
 	$userProjectsIdArray[] = $p->getID();
-	$i++;
 }
 
 if ($i > 0) {
-	echo $GLOBALS['HTML']->listTableBottom();
+	echo $HTML->listTableBottom();
 } else {
 	echo '<p>'._('This user is not a member of any project.').'</p>';
 }
@@ -294,25 +295,23 @@ $addToNewProjectsTableTitle[] = _('Operations');
 $addToNewProjectsTableTitle[] = _('Select role');
 $fullListProjectsQueryResult = db_query_params('SELECT group_id from groups where status = $1 and is_template = 0 LIMIT 100', array('A'));
 if ($fullListProjectsQueryResult) {
-	echo $GLOBALS['HTML']->listTableTop($addToNewProjectsTableTitle);
+	echo $HTML->listTableTop($addToNewProjectsTableTitle);
 	while ($projectQueryResult = db_fetch_array($fullListProjectsQueryResult)) {
 		$projectObject = group_get_object($projectQueryResult['group_id']);
 		if (!in_array($projectObject->getID(), $userProjectsIdArray)) {
-			print '
-				<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i++).'>
-				<td><input type="checkbox" name="group_id_add_member[]" value="'.$projectObject->getID().'">
-				<td>'.util_unconvert_htmlspecialchars(htmlspecialchars($projectObject->getPublicName())).'</td>
-				<td>'.$projectObject->getUnixName().'</td>
-				<td>'.util_make_link ('/project/admin/?group_id='.$projectObject->getID(),'['._('Project Admin').']').'</td>
-				<td>'.role_box($projectObject->getID(),'role_id-'.$projectObject->getID()).'</td>
-				</tr>
-			';
+			$cells = array();
+			$cells[][] = '<input type="checkbox" name="group_id_add_member[]" value="'.$projectObject->getID().'">';
+			$cells[][] = util_unconvert_htmlspecialchars(htmlspecialchars($projectObject->getPublicName()));
+			$cells[][] = $projectObject->getUnixName();
+			$cells[][] = util_make_link('/project/admin/?group_id='.$projectObject->getID(),'['._('Project Admin').']');
+			$cells[][] = role_box($projectObject->getID(),'role_id-'.$projectObject->getID());
+			echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i++, true)), $cells);
 		}
 	}
-	echo $GLOBALS['HTML']->listTableBottom();
+	echo $HTML->listTableBottom();
 }
 echo '<br/><input type="submit" name="submit" value="'. _('Update').'" />';
-echo '</form>';
+echo $HTML->closeForm();
 
 site_admin_footer();
 
