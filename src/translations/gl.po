@@ -21215,7 +21215,7 @@ msgid ""
 "page."
 msgstr ""
 "A administración deste proxecto terá que configurar os proxectos usando a "
-"páxina de administración"
+"páxina de administración."
 
 #: www/pm/index.php:68
 msgid "Choose a Subproject and you can browse/edit/add tasks to it."
@@ -22394,7 +22394,7 @@ msgstr "Acceso de consola a <tt>unixname.%1$s</tt>"
 
 #: www/register/index.php:236
 msgid "search engines throughout the site."
-msgstr "Motores de busca ao longo de todo o sitio"
+msgstr "Motores de busca ao longo de todo o sitio."
 
 #: www/register/index.php:249
 msgid ""
@@ -24103,7 +24103,7 @@ msgid ""
 "is collected and the user will of course have the ability to 'opt-out'."
 msgstr ""
 "Se se realizar algún cambio nesta política, só afectará aos datos futuros "
-"que se recompilaren e o usuario poderá, por suposto, negarse ao cubrir'"
+"que se recompilaren e o usuario poderá, por suposto, negarse ao cubrir'."
 
 #: www/survey/rating_resp.php:59
 msgid "Vote registered"

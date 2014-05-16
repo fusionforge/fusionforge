@@ -23815,7 +23815,7 @@ msgid ""
 msgstr ""
 "Politika honetan aldaketik badago, etorkizunean jasoko diren datuei bakarrik "
 "eragingo die eta erabiltzaileak informazioa ez emateko eskubide osoa izango "
-"du"
+"du."
 
 #: www/survey/rating_resp.php:59
 msgid "Vote registered"
