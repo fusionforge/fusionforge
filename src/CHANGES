@@ -19,6 +19,9 @@ Fusionforge-5.3.1:
 * Security: harden account name validation to detect trailing newlines (Inria)
 * Plugin scmhook: fix configuration reset when switching back&forth between SCM (Inria)
 * Plugin message: handle empty site message (Inria)
+* Admin User: fix unix_status [#666](TrivialDev)
+* Tracker: fix email link in notification [#668] (TrivialDev)
+* Tracker: fix 404 in roadmap ajax call ([#675] TrivialDev)
 
 FusionForge-5.3:
 * Widget: MyArtifacts Enhancement : add monitored artifacts (TrivialDev)
