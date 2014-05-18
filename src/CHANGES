@@ -23,6 +23,7 @@ Fusionforge-5.3.1:
 * Tracker: fix email link in notification [#668] (TrivialDev)
 * Tracker: fix 404 in roadmap ajax call [#675] (TrivialDev)
 * Docman: fix massaction with IE8 [#642] (TrivialDev)
+* Docman: fix empty root folder in zipfile [#640] (TrivialDev)
 
 FusionForge-5.3:
 * Widget: MyArtifacts Enhancement : add monitored artifacts (TrivialDev)
