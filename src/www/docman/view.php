@@ -131,7 +131,10 @@ if (is_numeric($docid)) {
 			}
 
 			header('Content-disposition: attachment; filename="'.$filename.'"');
-			header('Content-type: application/zip');
+			// please do not set the Content-type: it breaks IE support.
+			if (!preg_match('/trident/i', $_SERVER['HTTP_USER_AGENT'])) {
+				header('Content-type: application/zip');
+			}
 			header("Content-Transfer-Encoding: binary");
 			ob_end_clean();
 
@@ -220,7 +223,10 @@ if (is_numeric($docid)) {
 				}
 
 				header('Content-disposition: attachment; filename="'.$filename.'"');
-				header('Content-type: application/zip');
+				// please do not set the Content-type: it breaks IE support.
+				if (!preg_match('/trident/i', $_SERVER['HTTP_USER_AGENT'])) {
+					header('Content-type: application/zip');
+				}
 				header("Content-Transfer-Encoding: binary");
 				ob_end_clean();
 
@@ -276,7 +282,10 @@ if (is_numeric($docid)) {
 			}
 
 			header('Content-disposition: attachment; filename="'.$filename.'"');
-			header('Content-type: application/zip');
+			// please do not set the Content-type: it breaks IE support.
+			if (!preg_match('/trident/i', $_SERVER['HTTP_USER_AGENT'])) {
+				header('Content-type: application/zip');
+			}
 			header("Content-Transfer-Encoding: binary");
 			ob_end_clean();
 

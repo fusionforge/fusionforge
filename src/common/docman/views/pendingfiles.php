@@ -60,13 +60,13 @@ jQuery(document).ready(function() {
 	if (isset($nested_pending_docs[$dirid]) && is_array($nested_pending_docs[$dirid])) {
 		echo html_ao('div', array('class' => 'docmanDiv'));
 		echo html_e('h4', array('class' => 'docman_h4'), _('Pending files'), false);
-		$tabletop = array(html_e('input', array('id' => 'checkallpending', 'type' => 'checkbox', 'onchange' => 'controllerListPending.checkAll("checkeddocidpending", "pending")')), '', _('File Name'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'), _('Actions'));
+		$tabletop = array(html_e('input', array('id' => 'checkallpending', 'type' => 'checkbox', 'onClick' => 'controllerListPending.checkAll("checkeddocidpending", "pending")')), '', _('File Name'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'), _('Actions'));
 		$classth = array('unsortable', 'unsortable', '', '', '', '', '', '', '', 'unsortable');
 		echo $HTML->listTableTop($tabletop, array(), 'sortable_docman_listfile', 'sortable', $classth);
 		$time_new = 604800;
 		foreach ($nested_pending_docs[$dirid] as $d) {
 			$cells = array();
-			$cells[][] = html_e('input', array('type' => 'checkbox', 'value' => $d->getID(), 'class' => 'checkeddocidpending', 'title' => _('Select / Deselect this document for massaction'), 'onchange' => 'controllerListPending.checkgeneral("pending")'));
+			$cells[][] = html_e('input', array('type' => 'checkbox', 'value' => $d->getID(), 'class' => 'checkeddocidpending', 'title' => _('Select / Deselect this document for massaction'), 'onClick' => 'controllerListPending.checkgeneral("pending")'));
 			switch ($d->getFileType()) {
 				case "URL": {
 					$cells[][] = util_make_link($d->getFileName(), html_image($d->getFileTypeImage(), '22', '22', array('alt'=>$d->getFileType())), array('title' => _('Visit this link')), true);
