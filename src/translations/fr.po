@@ -21430,7 +21430,7 @@ msgid ""
 "Your project has been automatically approved. You should receive an email "
 "containing further information shortly."
 msgstr ""
-"Votre projet a automatiquement approuvé. Vous devriez recevoir prochainement "
+"Votre projet a été automatiquement approuvé. Vous devriez recevoir prochainement "
 "un courriel contenant des informations supplémentaires."
 
 #: www/register/index.php:181
