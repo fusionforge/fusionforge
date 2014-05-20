@@ -139,7 +139,7 @@ if ($DocGroupName) {
 }
 
 if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
-	$tabletop = array('<input id="checkallactive" title="'._('Select / Deselect all documents for massaction').'" class="tabtitle-w" type="checkbox" onchange="controllerListTrash.checkAll(\'checkeddocidactive\', \'active\')" />', '', _('File Name'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'), _('Actions'));
+	$tabletop = array('<input id="checkallactive" title="'._('Select / Deselect all documents for massaction').'" class="tabtitle-w" type="checkbox" onClick="controllerListTrash.checkAll(\'checkeddocidactive\', \'active\')" />', '', _('File Name'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'), _('Actions'));
 	$classth = array('unsortable', 'unsortable', '', '', '', '', '', '', '', 'unsortable');
 	echo '<div class="docmanDiv">';
 	echo $HTML->listTableTop($tabletop, false, 'sortable_docman_listfile', 'sortable', $classth);
@@ -147,7 +147,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 	foreach ($nested_docs[$dirid] as $d) {
 		echo '<tr>';
 		echo '<td>';
-		echo '<input title="'._('Select / Deselect this document for massaction').'" class="checkeddocidactive tabtitle-w" type="checkbox" value="'.$d->getID().'" onchange="controllerListTrash.checkgeneral(\'active\')" />';
+		echo '<input title="'._('Select / Deselect this document for massaction').'" class="checkeddocidactive tabtitle-w" type="checkbox" value="'.$d->getID().'" onClick="controllerListTrash.checkgeneral(\'active\')" />';
 		echo '</td>';
 		switch ($d->getFileType()) {
 			case "URL": {

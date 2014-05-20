@@ -216,7 +216,7 @@ if ($DocGroupName) {
 }
 
 if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
-	$tabletop = array('<input id="checkallactive" type="checkbox" title="'._('Select / Deselect all documents for massaction').'" class="tabtitle-w" onchange="controllerListFile.checkAll(\'checkeddocidactive\', \'active\')" />', '', _('File Name'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'), _('View'));
+	$tabletop = array('<input id="checkallactive" type="checkbox" title="'._('Select / Deselect all documents for massaction').'" class="tabtitle-w" onClick="controllerListFile.checkAll(\'checkeddocidactive\', \'active\')" />', '', _('File Name'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'), _('View'));
 	$classth = array('unsortable', 'unsortable', '', '', '', '', '', '', '', '');
 	if (forge_check_perm('docman', $ndg->Group->getID(), 'approve')) {
 		$tabletop[] = _('Actions');
@@ -229,12 +229,12 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		echo '<tr>';
 		echo '<td>';
 		if (!$d->getLocked() && !$d->getReserved()) {
-			echo '<input type="checkbox" value="'.$d->getID().'" class="checkeddocidactive tabtitle-w" title="'._('Select / Deselect this document for massaction').'" onchange="controllerListFile.checkgeneral(\'active\')" />';
+			echo '<input type="checkbox" value="'.$d->getID().'" class="checkeddocidactive tabtitle-w" title="'._('Select / Deselect this document for massaction').'" onClick="controllerListFile.checkgeneral(\'active\')" />';
 		} else {
 			if (session_loggedin() && ($d->getReservedBy() != $u->getID())) {
 				echo '<input type="checkbox" name="disabled" disabled="disabled" />';
 			} else {
-				echo '<input type="checkbox" value="'.$d->getID().'" class="checkeddocidactive tabtitle-w" title="'._('Select / Deselect this document for massaction').'"" onchange="controllerListFile.checkgeneral(\'active\')" />';
+				echo '<input type="checkbox" value="'.$d->getID().'" class="checkeddocidactive tabtitle-w" title="'._('Select / Deselect this document for massaction').'"" onClick="controllerListFile.checkgeneral(\'active\')" />';
 			}
 		}
 		echo '</td>';

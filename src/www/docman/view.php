@@ -6,7 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2010-2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -131,7 +131,10 @@ if (is_numeric($docid)) {
 			}
 
 			header('Content-disposition: attachment; filename="'.$filename.'"');
-			header('Content-type: application/zip');
+			// please do not set the Content-type: it breaks IE support.
+			if (!preg_match('/trident/i', $_SERVER['HTTP_USER_AGENT'])) {
+				header('Content-type: application/zip');
+			}
 			header("Content-Transfer-Encoding: binary");
 			ob_end_clean();
 
@@ -220,7 +223,10 @@ if (is_numeric($docid)) {
 				}
 
 				header('Content-disposition: attachment; filename="'.$filename.'"');
-				header('Content-type: application/zip');
+				// please do not set the Content-type: it breaks IE support.
+				if (!preg_match('/trident/i', $_SERVER['HTTP_USER_AGENT'])) {
+					header('Content-type: application/zip');
+				}
 				header("Content-Transfer-Encoding: binary");
 				ob_end_clean();
 
@@ -276,7 +282,10 @@ if (is_numeric($docid)) {
 			}
 
 			header('Content-disposition: attachment; filename="'.$filename.'"');
-			header('Content-type: application/zip');
+			// please do not set the Content-type: it breaks IE support.
+			if (!preg_match('/trident/i', $_SERVER['HTTP_USER_AGENT'])) {
+				header('Content-type: application/zip');
+			}
 			header("Content-Transfer-Encoding: binary");
 			ob_end_clean();
 
