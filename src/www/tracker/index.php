@@ -69,6 +69,9 @@ if ($group->isError()) {
 		exit_error($group->getErrorMessage(),'tracker');
 	}
 }
+if (!$group->usesTracker()) {
+	exit_project_disabled();
+}
 
 if (getStringFromRequest('rtype') == 'ajax') {
 	include $gfcommon.'tracker/actions/ajax.php';
