@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-20 14:08+0200\n"
-"PO-Revision-Date: 2013-06-03 17:17+0100\n"
+"PO-Revision-Date: 2014-05-21 22:47+0200\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2922,9 +2922,8 @@ msgid "Error Updating Package: Name Already Exists"
 msgstr "Impossible de mettre à jour le paquet : ce nom existe déjà"
 
 #: common/frs/FRSPackage.class.php:407
-#, fuzzy
 msgid "Error Updating Package: Couldn't fetch data"
-msgstr "Erreur lors de la mise à jour du nom du champ"
+msgstr "Erreur lors de la mise à jour du paquet: impossible de récupérer les données"
 
 #: common/frs/FRSPackage.class.php:417
 msgid "Error Updating Package: Directory Already Exists"
@@ -2963,9 +2962,8 @@ msgid "Error Getting FRS"
 msgstr "Erreur lors de l'accès à un fichier."
 
 #: common/frs/FRSRelease.class.php:83
-#, fuzzy
 msgid "Invalid FRS Package Object"
-msgstr "Projet invalide"
+msgstr "Objet Paquet FRS invalide"
 
 #: common/frs/FRSRelease.class.php:143
 msgid "Error Adding Release: Name Already Exists"
@@ -3302,9 +3300,9 @@ msgid "Error updating project information: %s"
 msgstr "Erreur lors de la mise à jour des informations sur le projet : %s"
 
 #: common/include/Group.class.php:638
-#, fuzzy, php-format
+#, php-format
 msgid "Error updating project information: use_docman %s"
-msgstr "Erreur lors de la mise à jour des informations sur le projet : %s"
+msgstr "Erreur lors de la mise à jour des informations sur le projet : use_docman %s"
 
 #: common/include/Group.class.php:665
 msgid "Error updating project information in plugin_hook group_update"
@@ -4671,9 +4669,9 @@ msgid ""
 msgstr ""
 
 #: common/include/User.class.php:1746
-#, fuzzy, php-format
+#, php-format
 msgid "New %1$s User"
-msgstr "L'équipe de %1$s"
+msgstr "Nouvel Utilisateur %1$s"
 
 #: common/include/utils.php:206 common/mail/Mail.class.php:38
 msgid "UTF-8"
@@ -10502,7 +10500,7 @@ msgstr "Enregistrer l'ordre"
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:93
 msgid "No tabs available for headermenu"
-msgstr "Pas de statistiques disponibles"
+msgstr "Aucun onglet disponible pour headermenu"
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:97
 msgid "Manage available tabs in outermenu"
