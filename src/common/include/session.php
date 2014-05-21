@@ -39,7 +39,7 @@ $G_SESSION = false;
 /**
  * Get session id
  */
-$session_ser = getStringFromCookie('session_ser');
+$session_ser = '';
 
 /**
  *	session_build_session_token() - Construct session token for the user
