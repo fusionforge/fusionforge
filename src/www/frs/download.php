@@ -85,6 +85,14 @@ $expl_pathinfo = explode('/', $pathinfo);
 
 $mode = $expl_pathinfo[3];
 
+// .../download.php/123/foo.tar.gz (5.1 backward compatibility)
+if (ctype_digit($mode)) {
+	$mode = 'file';
+	$expl_pathinfo = array_merge(array_slice($expl_pathinfo, 0, 3),
+				     array($mode),
+				     array_slice($expl_pathinfo, 3));
+}
+
 switch ($mode) {
 case 'file':
 	// .../download.php/file/123/foo.tar.gz
@@ -194,6 +202,9 @@ case 'latestfile':
 	send_file ($filename, $filepath, $file_id);
 
 	break;
+
+default:
+	exit_error(_('Invalid download mode'));
 }
 
 // Local Variables:
