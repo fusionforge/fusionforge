@@ -1,24 +1,46 @@
-#!/bin/sh
+#!/bin/mksh
 #
-# Copyright 2013, Benoit Debaenst - TrivialDev
-# Part of FusionForge. Licenced under GNU GPLv2 or later.
+# Copyright © 2013
+#	Thorsten “mirabilos” Glaser <thorsten.glaser@teckids.org>
+# Copyright © 2011, 2012, 2013, 2014
+#	Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
 #
 # Copyright (c) 2007 Andy Parkins
 #
-# An example hook script to mail out commit update information.  This hook
-# sends emails listing new revisions to the repository introduced by the
-# change being reported.  The rule is that (for branch updates) each commit
-# will appear on one email and one email only.
+# This code is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License version 2 as
+# published by the Free Software Foundation.
+#
+# An example hook script to mail out commit update information.
+#
+# NOTE: This script is no longer under active development.  There
+# is another script, git-multimail, which is more capable and
+# configurable and is largely backwards-compatible with this script;
+# please see "contrib/hooks/multimail/".  For instructions on how to
+# migrate from post-receive-email to git-multimail, please see
+# "README.migrate-from-post-receive-email" in that directory.
+#
+# This hook sends emails listing new revisions to the repository
+# introduced by the change being reported.  The rule is that (for
+# branch updates) each commit will appear on one email and one email
+# only.
 #
 # This hook is stored in the contrib/hooks directory.  Your distribution
 # will have put this somewhere standard.  You should make this script
 # executable then link to it in the repository you would like to use it in.
-# For example, on debian the hook is stored in
-# /usr/share/doc/git-core/contrib/hooks/post-receive-email:
+# For example, on Debian the hook is stored in
+# /usr/share/git-core/contrib/hooks/post-receive-email
+# but as /etc/gforge/plugins/scmgit/post-receive-email.sh in FusionForge.
 #
 #  chmod a+x post-receive-email
 #  cd /path/to/your/repository.git
-#  ln -sf /usr/share/doc/git-core/contrib/hooks/post-receive-email hooks/post-receive
+#  ln -sf /usr/share/git-core/contrib/hooks/post-receive-email hooks/post-receive
+#  # or
+#  ln -sf /etc/gforge/plugins/scmgit/post-receive-email.sh hooks/post-receive
+#  # but that can only be used for a Forge-controlled repository
+#
+# This hook script needs the “en_US.UTF-8” locale set up on the server.
+# The MirBSD Korn Shell (mksh) must be installed as /bin/mksh and usable.
 #
 # This hook script assumes it is enabled on the central repository of a
 # project, with all users pushing only to it and not between each other.  It
@@ -42,22 +64,43 @@
 #   This is the list that all pushes of annotated tags will go to.  Leave it
 #   blank to default to the mailinglist field.  The announce emails lists
 #   the short log summary of the changes since the last annotated tag.
+# hooks.replyto
+#   If set, replies are requested to be directed to this eMail address.
 # hooks.envelopesender
 #   If set then the -f option is passed to sendmail to allow the envelope
-#   sender address to be set
+#   sender address to be set.  This is also used as Header From.
 # hooks.emailprefix
-#   All emails have their subjects prefixed with this prefix, or "[SCM]"
-#   if emailprefix is unset, to aid filtering
+#   If set, e.g. to '[SCM] ', all eMails have their subjects prefixed
+#   with this string to aid filtering.
+# hooks.shortdesc
+#   If set, this is used in the Subject instead of the description file.
 # hooks.showrev
 #   The shell command used to format each revision in the email, with
 #   "%s" replaced with the commit id.  Defaults to "git rev-list -1
 #   --pretty %s", displaying the commit id, author, date and log
 #   message.  To list full patches separated by a blank line, you
-#   could set this to "git show -C %s; echo".
+#   could set this to "git show -C %s; echo". If you do that, make
+#   sure to remove the "-p" from hooks.diffopts to avoid getting
+#   two sets of diffs (the showrev diff is per commit, whereas the
+#   diffopts patch will show what really happened in the push as
+#   one diff).
 #   To list a gitweb/cgit URL *and* a full patch for each change set, use this:
 #     "t=%s; printf 'http://.../?id=%%s' \$t; echo;echo; git show -C \$t; echo"
 #   Be careful if "..." contains things that will be expanded by shell "eval"
 #   or printf.
+# hooks.emailmaxlines
+#   The maximum number of lines that should be included in the generated
+#   email body. If not specified, there is no limit.
+#   Lines beyond the limit are suppressed and counted, and a final
+#   line is added indicating the number of suppressed lines.
+# hooks.diffopts
+#   Alternate options for the git diff-tree invocation that shows changes.
+#   Default is "-p --stat --summary --find-copies-harder". Remove -p from
+#   those options to skil including a unified diff of changes in addition
+#   to the summary output. See hooks.showrev for more discussion on this.
+# hooks.kgbconffile
+#   Full path to a configuration file for kgb-client, or unset/empty.
+#   If set, kgb-client will be invoked.
 #
 # Notes
 # -----
@@ -66,22 +109,23 @@
 # give information for debugging.
 #
 
+# ---------------------------- Environment Sanitisation
+
+nl='
+'
+unset LANGUAGE LC_ALL
+export LANG=C LC_ADDRESS=C LC_COLLATE=C LC_CTYPE=en_US.UTF-8 \
+    LC_IDENTIFICATION=C LC_MEASUREMENT=C LC_MESSAGES=C \
+    LC_MONETARY=C LC_NAME=C LC_NUMERIC=C LC_PAPER=C \
+    LC_TELEPHONE=C LC_TIME=C
+
 # ---------------------------- Functions
 
 #
-# Top level email generation function.  This decides what type of update
-# this is and calls the appropriate body-generation routine after outputting
-# the common header
+# Function to prepare for email generation. This decides what type
+# of update this is and whether an email should even be generated.
 #
-# Note this function doesn't actually generate any email output, that is
-# taken care of by the functions it calls:
-#  - generate_email_header
-#  - generate_create_XXXX_email
-#  - generate_update_XXXX_email
-#  - generate_delete_XXXX_email
-#  - generate_email_footer
-#
-generate_email()
+prep_for_email()
 {
 	# --- Arguments
 	oldrev=$(git rev-parse $1)
@@ -144,19 +188,24 @@ generate_email()
 			refname_type="branch"
 			short_refname=${refname##refs/heads/}
 			;;
+		refs/changes/*,commit)
+			# Gerrit
+			refname_type="review change"
+			short_refname=${refname##refs/}
+			;;
 		refs/remotes/*,commit)
 			# tracking branch
 			refname_type="tracking branch"
 			short_refname=${refname##refs/remotes/}
 			echo >&2 "*** Push-update of tracking branch, $refname"
 			echo >&2 "***  - no email generated."
-			exit 0
+			return 1
 			;;
 		*)
 			# Anything else (is there anything else?)
 			echo >&2 "*** Unknown type of update to $refname ($rev_type)"
 			echo >&2 "***  - no email generated"
-			exit 1
+			return 1
 			;;
 	esac
 
@@ -172,9 +221,32 @@ generate_email()
 		esac
 		echo >&2 "*** $config_name is not set so no email will be sent"
 		echo >&2 "*** for $refname update $oldrev->$newrev"
-		exit 0
+		return 1
 	fi
 
+	return 0
+}
+
+#
+# Top level email generation function.  This calls the appropriate
+# body-generation routine after outputting the common header.
+#
+# Note this function doesn't actually generate any email output, that is
+# taken care of by the functions it calls:
+#  - generate_email_header
+#  - generate_create_XXXX_email
+#  - generate_update_XXXX_email
+#  - generate_delete_XXXX_email
+#  - generate_email_footer
+#
+# Note also that this function cannot 'exit' from the script; when this
+# function is running (in hook script mode), the send_mail() function
+# is already executing in another process, connected via a pipe, and
+# if this function exits without, whatever has been generated to that
+# point will be sent as an email... even if nothing has been generated.
+#
+generate_email()
+{
 	# Email parameters
 	# The email subject will contain the best description of the ref
 	# that we can build from the parameters
@@ -195,7 +267,12 @@ generate_email()
 		fn_name=atag
 		;;
 	esac
-	generate_${change_type}_${fn_name}_email
+
+	if [ -z "$maxlines" ]; then
+		generate_${change_type}_${fn_name}_email
+	else
+		generate_${change_type}_${fn_name}_email | limit_lines $maxlines
+	fi
 
 	generate_email_footer
 }
@@ -204,14 +281,22 @@ generate_email_header()
 {
 	# --- Email (all stdout will be the email)
 	# Generate header
+
+	routing_headers="To: $recipients"
+	[[ -n $envelopesender ]] && routing_headers="From: $envelopesender${nl}$routing_headers"
+	[[ -n $replyto ]] && routing_headers="$routing_headers${nl}Reply-To: $replyto"
+
 	cat <<-EOF
-	To: $recipients
-	Subject: ${emailprefix}$projectdesc $refname_type $short_refname ${change_type}d. $describe
-	Content-Type: text/plain; charset=utf-8
+	MIME-Version: 1.0
+	Content-Type: text/plain; charset=UTF-8
+	Content-Transfer-Encoding: 8bit
+	$routing_headers
 	X-Git-Refname: $refname
 	X-Git-Reftype: $refname_type
 	X-Git-Oldrev: $oldrev
 	X-Git-Newrev: $newrev
+	$(perl -Mutf8 -MEncode -e "print encode('MIME-Q', 'Subject: ${emailprefix}$shortdesc $refname_type $short_refname ${change_type}d. $describe');")
+	Auto-Submitted: auto-generated
 
 	This is an automated email from the git hooks/post-receive script. It was
 	generated because a ref change was pushed to the repository containing
@@ -378,7 +463,7 @@ generate_update_branch_email()
 			echo "            \\"
 			echo "             O -- O -- O ($oldrev)"
 			echo ""
-			echo "The removed revisions are not necessarilly gone - if another reference"
+			echo "The removed revisions are not necessarily gone - if another reference"
 			echo "still refers to them they will stay in the repository."
 			rewind_only=1
 		else
@@ -425,7 +510,7 @@ generate_update_branch_email()
 	# non-fast-forward updates.
 	echo ""
 	echo "Summary of changes:"
-	git diff-tree --stat --summary --find-copies-harder $oldrev..$newrev
+	git diff-tree $diffopts $oldrev..$newrev
 }
 
 #
@@ -435,8 +520,8 @@ generate_delete_branch_email()
 {
 	echo "       was  $oldrev"
 	echo ""
-	echo $LOGEND
-	git show -s --pretty=oneline $oldrev
+	echo $LOGBEGIN
+	git diff-tree -s --always --encoding=UTF-8 --pretty=oneline $oldrev
 	echo $LOGEND
 }
 
@@ -512,11 +597,11 @@ generate_atag_email()
 		# performed on them
 		if [ -n "$prevtag" ]; then
 			# Show changes since the previous release
-			git rev-list --pretty=short "$prevtag..$newrev" | git shortlog
+			git shortlog --encoding=UTF-8 "$prevtag..$newrev"
 		else
 			# No previous tag, show all the changes since time
 			# began
-			git rev-list --pretty=short $newrev | git shortlog
+			git shortlog --encoding=UTF-8 $newrev
 		fi
 		;;
 	*)
@@ -535,8 +620,8 @@ generate_delete_atag_email()
 {
 	echo "       was  $oldrev"
 	echo ""
-	echo $LOGEND
-	git show -s --pretty=oneline $oldrev
+	echo $LOGBEGIN
+	git diff-tree -s --always --encoding=UTF-8 --pretty=oneline $oldrev
 	echo $LOGEND
 }
 
@@ -582,7 +667,7 @@ generate_general_email()
 	echo ""
 	if [ "$newrev_type" = "commit" ]; then
 		echo $LOGBEGIN
-		git show --no-color --root -s --pretty=medium $newrev
+		git diff-tree -s --always --encoding=UTF-8 --pretty=medium $newrev
 		echo $LOGEND
 	else
 		# What can we do here?  The tag marks an object that is not
@@ -600,8 +685,8 @@ generate_delete_general_email()
 {
 	echo "       was  $oldrev"
 	echo ""
-	echo $LOGEND
-	git show -s --pretty=oneline $oldrev
+	echo $LOGBEGIN
+	git diff-tree -s --always --encoding=UTF-8 --pretty=oneline $oldrev
 	echo $LOGEND
 }
 
@@ -646,9 +731,32 @@ show_new_revisions()
 }
 
 
+limit_lines()
+{
+	lines=0
+	skipped=0
+	while IFS="" read -r line; do
+		lines=$((lines + 1))
+		if [ $lines -gt $1 ]; then
+			skipped=$((skipped + 1))
+		else
+			printf "%s\n" "$line"
+		fi
+	done
+	if [ $skipped -ne 0 ]; then
+		echo "... $skipped lines suppressed ..."
+	fi
+}
+
+
 send_mail()
 {
-	if [ -n "$envelopesender" ]; then
+	local x=$(cat; echo x)
+
+	x=${x%x}
+	[[ -n $x ]] || return 1
+
+	print -nr -- "$x" | if [ -n "$envelopesender" ]; then
 		/usr/sbin/sendmail -t -f "$envelopesender"
 	else
 		/usr/sbin/sendmail -t
@@ -670,7 +778,7 @@ if [ -z "$GIT_DIR" ]; then
 	exit 1
 fi
 
-projectdesc=$(sed -ne '1p' "$GIT_DIR/description")
+projectdesc=$(sed -ne '1p' "$GIT_DIR/description" 2>/dev/null)
 # Check if the description is unchanged from it's default, and shorten it to
 # a more manageable length if it is
 if expr "$projectdesc" : "Unnamed repository.*$" >/dev/null
@@ -681,8 +789,15 @@ fi
 recipients=$(git config hooks.mailinglist)
 announcerecipients=$(git config hooks.announcelist)
 envelopesender=$(git config hooks.envelopesender)
-emailprefix=$(git config hooks.emailprefix || echo '[SCM] ')
+emailprefix=$(git config hooks.emailprefix)
 custom_showrev=$(git config hooks.showrev)
+maxlines=$(git config hooks.emailmaxlines)
+diffopts=$(git config hooks.diffopts)
+: ${diffopts:="-p --stat --summary --find-copies-harder"}
+kgbconffile=$(git config hooks.kgbconffile)
+replyto=$(git config hooks.replyto)
+shortdesc=$(git config hooks.shortdesc)
+: ${shortdesc:=$projectdesc}
 
 # --- Main loop
 # Allow dual mode: run from the command line just like the update hook, or
@@ -691,10 +806,17 @@ if [ -n "$1" -a -n "$2" -a -n "$3" ]; then
 	# Output to the terminal in command line mode - if someone wanted to
 	# resend an email; they could redirect the output to sendmail
 	# themselves
-	PAGER= generate_email $2 $3 $1
+	prep_for_email $2 $3 $1 && PAGER= generate_email
 else
+	ilines=
 	while read oldrev newrev refname
 	do
-		generate_email $oldrev $newrev $refname | send_mail
+		ilines="$ilines$oldrev $newrev $refname$nl"
+		prep_for_email $oldrev $newrev $refname || continue
+		generate_email $maxlines | send_mail
 	done
+	if [[ -n $kgbconffile && -s $kgbconffile ]]; then
+		print -nr -- "$ilines" | kgb-client \
+		    --conf "$kgbconffile" --repository git --git-reflog -
+	fi
 fi

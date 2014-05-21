@@ -569,12 +569,11 @@ foreach my $project (@project_settings_list)
 
     my @head;
     my $formatted_date;
+    $formatted_date = strftime("%a, %d %b %Y %H:%M:%S %z", localtime());  # RFC 2822
     if ($stdout)
       {
-        $formatted_date = strftime('%a %b %e %X %Y', localtime());
         push(@head, "From $mail_from $formatted_date\n");
       }
-    $formatted_date = strftime('%a, %e %b %Y %X %z', localtime());
     push(@head, "Date: $formatted_date\n");
     push(@head, "To: $to\n");
     push(@head, "From: $mail_from\n");
