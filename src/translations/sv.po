@@ -1,7 +1,6 @@
-# Swedish translations for FusionForge package.
-# Copyright © 2008-2013 FusionForge Team
+# Swedish translations for FusionForge.
+# Copyright © 2008-2013 FusionForge Team (msgids)
 # This file is distributed under the same license as the FusionForge package.
-# Automatically generated
 #
 msgid ""
 msgstr ""
