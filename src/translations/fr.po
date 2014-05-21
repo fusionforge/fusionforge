@@ -1,5 +1,5 @@
 # French translations for FusionForge.
-# Copyright © 2008-2013 FusionForge Team (msgids)
+# Copyright © 2008-2014 FusionForge Team (msgids)
 # This file is distributed under the same license as the FusionForge package.
 # Roland Mas <lolando@debian.org>, 2002, 2003, 2009, 2010, 2011, 2012.
 # Christian Bayle <chris@bayle.eu>, 2002, 2003.
@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: fusionforge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-02-07 16:12+0100\n"
-"PO-Revision-Date: 2014-05-21 20:00+0200\n"
+"PO-Revision-Date: 2014-05-21 23:01+0200\n"
 "Last-Translator: Sylvain Beucler <beuc@beuc.net>\n"
 "Language-Team: French <traduc@traduc.org>\n"
 "Language: fr\n"
@@ -635,7 +635,7 @@ msgstr "Le nom est obligatoire"
 #: common/docman/DocumentGroup.class.php:110
 #: common/docman/DocumentGroup.class.php:490
 msgid "Invalid Documents Folder parent ID"
-msgstr "Identifiant du dossier parent invalide"
+msgstr "N° du dossier parent invalide"
 
 #: common/docman/DocumentGroup.class.php:131
 msgid "Folder name already exists"
@@ -651,7 +651,7 @@ msgstr "Ce type de fichier ne peut être injecté :"
 
 #: common/docman/DocumentGroup.class.php:259
 msgid "Invalid Document Folder ID"
-msgstr "Numéro de dossier de documents invalide"
+msgstr "N° de dossier de documents invalide"
 
 #: common/docman/DocumentGroup.class.php:502
 msgid "Documents Folder name already exists"
@@ -2577,7 +2577,7 @@ msgid ""
 "%1$s"
 msgstr ""
 "\n"
-"Ou répondez par e-mail en saisissant votre réponse entre les marqueurs suivants :\n"
+"Ou répondez par courriel en saisissant votre réponse entre les marqueurs suivants :\n"
 "%1$s\n"
 "(tapez votre réponse ici)\n"
 "%1$s"
@@ -2683,7 +2683,6 @@ msgid "Error Updating Package: Name Already Exists"
 msgstr "Impossible de mettre à jour le paquet : ce nom existe déjà"
 
 #: common/frs/FRSPackage.class.php:407
-#, fuzzy
 msgid "Error Updating Package: Couldn't fetch data"
 msgstr "Erreur lors de la mise à jour du paquet: impossible de récupérer les données"
 
@@ -2713,7 +2712,6 @@ msgid "Cannot open the file archive."
 msgstr "Erreur lors de l'ouverture de l'archive."
 
 #: common/frs/FRSRelease.class.php:83
-#, fuzzy
 msgid "Invalid FRS Package Object"
 msgstr "Objet Paquet FRS invalide"
 
@@ -3012,7 +3010,7 @@ msgid "Error updating project information: %s"
 msgstr "Erreur lors de la mise à jour des informations sur le projet : %s"
 
 #: common/include/Group.class.php:637
-#, fuzzy, php-format
+#, php-format
 msgid "Error updating project information: use_docman %s"
 msgstr "Erreur lors de la mise à jour des informations sur le projet : use_docman %s"
 
@@ -3654,7 +3652,7 @@ msgstr "Nouvelles rapides à propos du projet."
 #: www/stats/site_stats_utils.php:242 www/stats/site_stats_utils.php:365
 #: www/stats/site_stats_utils.php:420
 msgid "SCM"
-msgstr "Sources"
+msgstr "Code source"
 
 #: common/include/Navigation.class.php:544
 msgid "Source Content Management, peer-review and source discovery."
@@ -3874,44 +3872,36 @@ msgid "Tech & manager"
 msgstr "Technicien et manager"
 
 #: common/include/rbac_texts.php:84 common/include/rbac_texts.php:122
-#, fuzzy
 msgid "No access + Vote"
-msgstr "Aucun accès"
+msgstr "Aucun accès + vote"
 
 #: common/include/rbac_texts.php:85 common/include/rbac_texts.php:123
-#, fuzzy
 msgid "Read only + Vote"
-msgstr "Lecture seule"
+msgstr "Lecture seule + vote"
 
 #: common/include/rbac_texts.php:86 common/include/rbac_texts.php:124
-#, fuzzy
 msgid "Technician (no read access) + Vote"
-msgstr "Technicien (sans accès en lecture)"
+msgstr "Technicien (sans accès en lecture) + vote"
 
 #: common/include/rbac_texts.php:87 common/include/rbac_texts.php:125
-#, fuzzy
 msgid "Technician + Vote"
-msgstr "Technicien"
+msgstr "Technicien + vote"
 
 #: common/include/rbac_texts.php:88 common/include/rbac_texts.php:126
-#, fuzzy
 msgid "Manager (no read access) + Vote"
-msgstr "Manager (sans accès en lecture)"
+msgstr "Manager (sans accès en lecture) + vote"
 
 #: common/include/rbac_texts.php:89 common/include/rbac_texts.php:127
-#, fuzzy
 msgid "Manager + Vote"
-msgstr "Gérer les rôles"
+msgstr "Manager + vote"
 
 #: common/include/rbac_texts.php:90 common/include/rbac_texts.php:128
-#, fuzzy
 msgid "Tech & manager (no read access) + Vote"
-msgstr "Technicien et manager (pas d'accès en lecture)"
+msgstr "Technicien et manager (pas d'accès en lecture) + vote"
 
 #: common/include/rbac_texts.php:91 common/include/rbac_texts.php:129
-#, fuzzy
 msgid "Tech & manager + Vote"
-msgstr "Technicien et manager"
+msgstr "Technicien et manager + vote"
 
 #: common/include/rbac_texts.php:102 common/include/rbac_texts.php:140
 msgid "Moderated post"
@@ -3982,15 +3972,13 @@ msgid "Documentation manager"
 msgstr "Gestionnaire de documentation"
 
 #: common/include/Role.class.php:82
-#, fuzzy
 msgid "Cannot set a role name to empty"
-msgstr "Impossible de mettre le nom du rôle à vide"
+msgstr "Impossible de créer un rôle avec un nom vide"
 
 #: common/include/Role.class.php:91 common/include/Role.class.php:99
 #: common/include/Role.class.php:181 common/include/Role.class.php:189
-#, fuzzy
 msgid "Cannot create a role with this name (already used)"
-msgstr "Impossible de créer un rôle de ce nom (déjà utilisé)"
+msgstr "Impossible de créer un rôle avec ce nom (déjà utilisé)"
 
 #: common/include/Role.class.php:172
 msgid "Cannot create a role with an empty name"
@@ -3998,7 +3986,7 @@ msgstr "Impossible de créer un rôle avec un nom vide"
 
 #: common/include/Role.class.php:305
 msgid "Cannot remove a non empty role."
-msgstr "Impossible de supprimer un rôle non-vide : %s"
+msgstr "Impossible de supprimer un rôle non vide."
 
 #: common/include/SCMPlugin.class.php:145
 msgid "Unimplemented SCM plugin."
@@ -4502,7 +4490,7 @@ msgstr "catégorie"
 
 #: common/pm/ProjectTask.class.php:235
 msgid "Invalid Task ID"
-msgstr "Identifiant de tâche invalide"
+msgstr "N° de tâche invalide"
 
 #: common/pm/ProjectTask.class.php:947
 msgid "status"
@@ -5064,7 +5052,7 @@ msgstr "Élément mis à jour"
 
 #: common/tracker/actions/admin-updates.php:282
 msgid "Clone ID"
-msgstr "Identifiant de l'outil à cloner"
+msgstr "N° de l'outil à cloner"
 
 #: common/tracker/actions/admin-updates.php:285
 msgid "Error cloning fields: "
@@ -5184,17 +5172,17 @@ msgstr "Responsable"
 #: common/tracker/actions/browse.php:204 common/tracker/actions/browse.php:582
 #: common/tracker/views/form-customizelist.php:48
 msgid "# Votes"
-msgstr "Nb Votes"
+msgstr "Nb de voix"
 
 #: common/tracker/actions/browse.php:205 common/tracker/actions/browse.php:584
 #: common/tracker/views/form-customizelist.php:49
 msgid "# Voters"
-msgstr "Nb Votants"
+msgstr "Nb de votants"
 
 #: common/tracker/actions/browse.php:206
 #: common/tracker/views/form-customizelist.php:50
 msgid "% Votes"
-msgstr "% Votes"
+msgstr "%s voix"
 
 #: common/tracker/actions/browse.php:225 common/tracker/actions/query.php:219
 msgid "Ascending"
@@ -5334,7 +5322,7 @@ msgstr "Tâches liées"
 #: common/tracker/actions/browse.php:586
 #, fuzzy
 msgid "% Voted"
-msgstr "% Vote"
+msgstr "Aucun vote"
 
 #: common/tracker/actions/browse.php:713
 #, php-format
@@ -5495,7 +5483,7 @@ msgstr "Envois"
 #: common/tracker/include/ArtifactHtml.class.php:215
 #: www/snippet/addversion.php:99 www/snippet/addversion.php:222
 msgid "Changes"
-msgstr "Changements"
+msgstr "Modifications"
 
 #: common/tracker/actions/format_csv.php:53 www/pm/format_csv.php:48
 msgid "Update CSV Format"
@@ -5808,9 +5796,9 @@ msgid "Updated Successfully"
 msgstr "Mis à jour avec succès"
 
 #: common/tracker/actions/tracker.php:267
-#, fuzzy, php-format
+#, php-format
 msgid "Could not get Project Task for %d"
-msgstr "Erreur lors de la création de l'objet ProjectTask."
+msgstr "Impossible de récupérer la tâche pour %d"
 
 #: common/tracker/actions/tracker.php:293
 #: common/tracker/actions/tracker.php:312
@@ -5876,9 +5864,8 @@ msgstr "le titre et le corps du message sont obligatoires"
 
 #: common/tracker/Artifact.class.php:150
 #: common/tracker/ArtifactExtraField.class.php:68
-#, fuzzy
 msgid "Invalid Artifact Type"
-msgstr "Numéro d'identifiant invalide"
+msgstr "Type d'élément invalide"
 
 #: common/tracker/Artifact.class.php:162
 msgid "Only project members can view private artifact types"
@@ -5902,7 +5889,7 @@ msgstr "Erreur lors de la mise en correspondance du statut"
 
 #: common/tracker/Artifact.class.php:309
 msgid "Invalid Artifact ID"
-msgstr "Numéro d'identifiant invalide"
+msgstr "N° d'élément invalide"
 
 #: common/tracker/Artifact.class.php:525
 msgid "Error deleting extra field data: "
@@ -5977,9 +5964,8 @@ msgid "Status Custom Field Must Be Set"
 msgstr "Champ supplémentaire supprimé"
 
 #: common/tracker/Artifact.class.php:1797
-#, fuzzy
 msgid "User ID not passed"
-msgstr "Utilisateur inactif"
+msgstr "N° d'utilisateur manquant"
 
 #: common/tracker/ArtifactExtraField.class.php:105
 #: common/tracker/ArtifactExtraField.class.php:380
@@ -6009,7 +5995,7 @@ msgstr ""
 
 #: common/tracker/ArtifactExtraField.class.php:234
 msgid "Invalid ArtifactExtraField ID"
-msgstr "Numéro d'ArtifactExtraField invalide"
+msgstr "N° d'ArtifactExtraField invalide"
 
 #: common/tracker/ArtifactExtraField.class.php:322
 #: common/tracker/views/form-addextrafield.php:124
@@ -6079,14 +6065,12 @@ msgstr "Fichier-trace : un nom de fichier, un type, une taille, et une donnée s
 
 #: common/tracker/ArtifactHistory.class.php:53
 #: common/tracker/ArtifactMessage.class.php:53
-#, fuzzy
 msgid "Invalid Artifact"
-msgstr "Numéro d'identifiant invalide"
+msgstr "Élément invalide"
 
 #: common/tracker/ArtifactHistory.class.php:82
-#, fuzzy
 msgid "Invalid ArtifactHistory ID"
-msgstr "Numéro d'identifiant invalide"
+msgstr "N° d'ArtifactHistory invalide"
 
 #: common/tracker/ArtifactMessage.class.php:89
 msgid "Error: Logged In User Bug Could Not Get User Object"
@@ -6094,16 +6078,15 @@ msgstr ""
 
 #: common/tracker/ArtifactMessage.class.php:92
 msgid "Logged In: YES"
-msgstr "connecté"
+msgstr "Connecté"
 
 #: common/tracker/ArtifactMessage.class.php:98
 msgid "Logged In: NO"
-msgstr "non-connecté"
+msgstr "Non-connecté"
 
 #: common/tracker/ArtifactMessage.class.php:139
-#, fuzzy
 msgid "Invalid ArtifactMessage ID"
-msgstr "Numéro d'identifiant invalide"
+msgstr "N° d'ArtifactMessage invalide"
 
 #: common/tracker/ArtifactQuery.class.php:148
 #: common/tracker/ArtifactQuery.class.php:742
@@ -6181,7 +6164,7 @@ msgstr "Ancienne valeur"
 
 #: common/tracker/include/ArtifactHtml.class.php:186
 msgid "No Changes Have Been Made to This Item"
-msgstr "Aucun changement"
+msgstr "Aucun changement pour cet élément"
 
 #: common/tracker/include/ArtifactHtml.class.php:211
 msgid "Backward Relations"
@@ -7771,7 +7754,7 @@ msgstr "<strong>%d</strong> projets trouvés."
 #: plugins/admssw/www/projectturtle.php:52 plugins/admssw/www/trove.php:46
 #, fuzzy
 msgid "To access this RDF document, you may use, for instance:"
-msgstr "Vous ne pouvez accéder à ce document, il est dans l'état : "
+msgstr "Vous ne pouvez accéder à ce document, il est dans l'état :"
 
 #: plugins/admssw/include/admsswPlugin.class.php:649
 msgid "This may redirect to several pages documents in case of too big number of results (observing the LDP paging specifications)."
@@ -8399,7 +8382,7 @@ msgstr "Erreur lors de la création de l'objet en base de données : %s."
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:804
 #, php-format
 msgid "Could not get ID from object in database: %s."
-msgstr "Impossible d'obtenir l'identifiant d'un objet en base de données : %s."
+msgstr "Impossible d'obtenir le n° d'un objet en base de données : %s."
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:326
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:433
@@ -9292,7 +9275,7 @@ msgstr "ajouter nouveau"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:213
 msgid "Forge ID"
-msgstr "Identifiant de la forge"
+msgstr "N° de la forge"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:226
 msgid "edit"
@@ -9316,7 +9299,7 @@ msgstr "Erreur lors de l'analyse des données"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:250
 msgid "Unknown status ID"
-msgstr "Identifiant de statut inconnu"
+msgstr "N° de statut inconnu"
 
 #: plugins/globalsearch/common/GlobalsearchPlugin.class.php:38
 msgid "Admin Associated Forges"
@@ -9679,7 +9662,7 @@ msgstr "Enregistrer l'ordre"
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:90
 msgid "No tabs available for headermenu"
-msgstr "Pas de statistiques disponibles"
+msgstr "Aucun onglet disponible pour headermenu"
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:94
 msgid "Manage available tabs in outermenu"
@@ -9729,9 +9712,8 @@ msgid "View Personal HelloWorld"
 msgstr "Voir le HelloWorld personnel"
 
 #: plugins/helloworld/include/helloworldPlugin.class.php:116
-#, fuzzy
 msgid "HelloWorld Admin"
-msgstr "La boîte à outils de l'administrateur"
+msgstr "Administration du HelloWorld"
 
 #: plugins/helloworld/include/HelloWorldPluginDescriptor.class.php:29
 msgid "HelloWorld"
@@ -9804,7 +9786,7 @@ msgstr "Il manque l'URL de la tâche Hudson (par exemple : http://monserveur/hud
 #: plugins/hudson/include/hudson.class.php:90
 #: plugins/hudson/include/hudson.class.php:103
 msgid "Missing Hudson job ID"
-msgstr "Il manque le numéro de tâche Hudson"
+msgstr "Il manque le n° de tâche Hudson"
 
 #: plugins/hudson/include/hudson.class.php:134
 msgid "Hudson service is not enabled"
@@ -10036,11 +10018,11 @@ msgstr "Flux RSS de toutes les constructions de la tâche %s"
 
 #: plugins/hudson/include/hudsonViews.class.php:341
 msgid "SVN commit will trigger a build"
-msgstr "Une validation SVN déclenchera une construction."
+msgstr "Une validation SVN déclenchera une construction"
 
 #: plugins/hudson/include/hudsonViews.class.php:348
 msgid "CVS commit will trigger a build"
-msgstr "Une validation CVS déclenchera une construction."
+msgstr "Une validation CVS déclenchera une construction"
 
 #: plugins/hudson/include/hudsonViews.class.php:366
 msgid "Edit this job"
@@ -10186,9 +10168,8 @@ msgid "Shows an overview of all the jobs associated with this project. You can a
 msgstr "Affiche un résumé de toutes les tâches associées à ce projet.  Vous pouvez toujours choisir les tâches à afficher en utilisant le lien de préférences du widget."
 
 #: plugins/mailman/include/MailmanList.class.php:407
-#, fuzzy
 msgid "Error On Query:"
-msgstr "Erreur lors de la mise à jour :"
+msgstr "Erreur dans la requête :"
 
 #: plugins/mailman/include/MailmanList.class.php:435
 msgid "Missing params"
@@ -10226,9 +10207,9 @@ msgid "My Monitored Lists"
 msgstr "Mes listes surveillées"
 
 #: plugins/mailman/include/mailmanPlugin.class.php:195
-#, fuzzy, php-format
+#, php-format
 msgid "Not Object: MailmanList: %d"
-msgstr "Pas un objet MailingList (%d)"
+msgstr "Pas un objet MailingList: %d"
 
 #: plugins/mailman/include/mailmanPlugin.class.php:210
 #: utils/fixscripts/populate_template_project.php:204
@@ -10419,9 +10400,8 @@ msgid "Re-create"
 msgstr "Recréer"
 
 #: plugins/mailman/www/mailman_utils.php:179
-#, fuzzy
 msgid "Administrate from Mailman"
-msgstr "Administration"
+msgstr "Administrer de Mailman"
 
 #: plugins/mantisbt/action/addCategory.php:42
 msgid "Category added successfully"
@@ -10543,14 +10523,12 @@ msgid "MantisBT administration page"
 msgstr "Administration des listes de diffusion"
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:188
-#, fuzzy
 msgid "Unable to create user in Mantisbt"
-msgstr "Erreur lors de la création d'un objet ProjectCategory"
+msgstr "Impossible de créer un utilisateur dans Mantisbt"
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:223
-#, fuzzy
 msgid "Unable to create project in Mantisbt"
-msgstr "Erreur lors de la création d'un objet ProjectCategory"
+msgstr "Impossible de créer un projet dans Mantisbt"
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:234
 #: plugins/projectimport/www/index.php:628 www/admin/search.php:176
@@ -10727,9 +10705,8 @@ msgstr ""
 #: plugins/mantisbt/view/addIssue.php:141
 #: plugins/mantisbt/view/editIssue.php:221
 #: plugins/mantisbt/view/viewIssue.php:116
-#, fuzzy
 msgid "Additional Informations"
-msgstr "Informations personnelles"
+msgstr "Informations additionnelles"
 
 #: plugins/mantisbt/view/addOrEditNote.php:52
 msgid "Modify note"
@@ -11696,18 +11673,16 @@ msgid "type"
 msgstr "type"
 
 #: plugins/projectimport/common/UploadedFiles.class.php:168
-#, fuzzy
 msgid "selected ?"
-msgstr "date sélectionnée"
+msgstr "sélectionné ?"
 
 #: plugins/projectimport/common/UploadedFiles.class.php:359
-#, fuzzy
 msgid "Please select only one file"
-msgstr "Vous devez sélectionner un fichier"
+msgstr "Vous devez sélectionner un seul fichier"
 
 #: plugins/projectimport/common/UploadedFiles.class.php:364
 msgid "File not found on server"
-msgstr "Fichier non trouvé sur le serveur."
+msgstr "Fichier non trouvé sur le serveur"
 
 #: plugins/projectimport/common/UploadedFiles.class.php:377
 msgid "Please either select existing file OR upload new file"
@@ -11831,9 +11806,8 @@ msgid "Matching new project members roles"
 msgstr ""
 
 #: plugins/projectimport/www/index.php:424
-#, fuzzy
 msgid "New project member"
-msgstr "Nom du projet"
+msgstr "Nouveau membre du projet"
 
 #: plugins/projectimport/www/index.php:425
 msgid "Imported users mapped to it"
@@ -11884,14 +11858,12 @@ msgid "Select a file or upload a new one"
 msgstr ""
 
 #: plugins/projectimport/www/index.php:691
-#, fuzzy
 msgid "Please upload a file"
-msgstr "Fichier déjà importé"
+msgstr "Veuillez déposer un fichier"
 
 #: plugins/projectimport/www/index.php:717
-#, fuzzy
 msgid "You cannot import project unless you are an admin on that project"
-msgstr "Vous ne pouvez soumettre une annonce sans être administrateur de ce projet"
+msgstr "Vous ne pouvez importer un projet sans être administrateur de ce projet"
 
 #: plugins/projectimport/www/projectsimport.php:43
 msgid "Missing require to use this plugin. You need OpenDocument.php"
@@ -11910,9 +11882,8 @@ msgid "Created project"
 msgstr "Projet créé"
 
 #: plugins/projectimport/www/usersimport.php:72
-#, fuzzy
 msgid "Users importer"
-msgstr "Statistiques sur le temps consommé par les utilisateurs"
+msgstr "Importation d'utilisateurs"
 
 #: plugins/projectimport/www/usersimport.php:220
 msgid "Failed to create user"
@@ -12098,31 +12069,28 @@ msgid "Projects Hierarchy global configuration successfully updated."
 msgstr ""
 
 #: plugins/projects-hierarchy/actions/updateProjectConf.php:34
-#, fuzzy
 msgid "Failed to update configuration."
-msgstr "Incapable de mettre à jour les favoris."
+msgstr "Incapable de mettre à jour la configuration."
 
 #: plugins/projects-hierarchy/actions/updateProjectConf.php:38
 msgid "Projects Hierarchy configuration successfully updated."
 msgstr ""
 
 #: plugins/projects-hierarchy/actions/validateRelationship.php:33
-#, fuzzy
 msgid "Task done."
-msgstr "Numéro de tâche."
+msgstr "Tâche effectuée."
 
 #: plugins/projects-hierarchy/actions/validateRelationship.php:35
-#, fuzzy
 msgid "Failed to do task."
-msgstr "Échec lors de l'ajout de la compétence."
+msgstr "Échec de la tâche."
 
 #: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:31
 msgid "Project Hierarchy"
-msgstr "Hiérarchie des projets."
+msgstr "Hiérarchie des projets"
 
 #: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:92
 msgid "Hierarchy Admin"
-msgstr "Administration du greffon de hiérarchie de projets."
+msgstr "Administration de la hiérarchie de projets"
 
 #: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:92
 #: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:610
@@ -13684,9 +13652,9 @@ msgstr "Compte shell désactivé"
 
 #: www/account/index.php:341 www/forum/admin/index.php:128
 #: www/forum/admin/index.php:168
-#, fuzzy, php-format
+#, php-format
 msgid "%s Mandatory fields"
-msgstr "Champs obligatoires"
+msgstr "%s Champs obligatoires"
 
 #: www/account/index.php:345
 msgid "Reset Changes"
@@ -14236,12 +14204,12 @@ msgstr "Erreur : vous n'avez pas coché la case « réellement supprimer »."
 #: www/admin/globalroleedit.php:126
 #, php-format
 msgid "User %s removed successfully"
-msgstr "Utilisateur %s enlevé avec succès"
+msgstr "Utilisateur %s supprimé avec succès"
 
 #: www/admin/globalroleedit.php:130
 #, php-format
 msgid "Error while removing user %s from role"
-msgstr "Erreur lors de la révocation d'un rôle de l'utilisateur %s."
+msgstr "Erreur lors de la révocation d'un rôle de l'utilisateur %s"
 
 #: www/admin/globalroleedit.php:136
 msgid "Cannot remove user from this type of role"
@@ -15395,9 +15363,8 @@ msgid "Source Code"
 msgstr "Code source"
 
 #: www/export/rss20_activity.php:196
-#, fuzzy
 msgid "Error: No group selected"
-msgstr "Erreur lors du refus d'un projet : "
+msgstr "Erreur : pas de projet sélectionné"
 
 #: www/export/rss20_docman.php:78
 msgid "Please supply a Group ID with the request."
@@ -15529,7 +15496,7 @@ msgstr "ATTENTION ! Vous allez détruire un message et tous les messages qui lu
 
 #: www/forum/admin/index.php:253
 msgid "Error getting new forum message"
-msgstr "Erreur lors de la récupération du message"
+msgstr "Erreur en accédant à un message de forum"
 
 #: www/forum/admin/index.php:271
 msgid "Message Edited Successfully"
@@ -15583,16 +15550,16 @@ msgstr "Nom complet"
 #: www/forum/admin/pendingmsgdetail.php:42 www/forum/monitor.php:82
 #: www/forum/new.php:72 www/forum/save.php:58
 msgid "Forum ID"
-msgstr "Identifiant de forum"
+msgstr "N° de forum"
 
 #: www/forum/admin/pendingmsgdetail.php:42 www/forum/monitor.php:82
 #: www/forum/new.php:72 www/forum/save.php:58 www/frs/monitor.php:71
 msgid "Project ID"
-msgstr "Identifiant de projet"
+msgstr "N° de projet"
 
 #: www/forum/admin/pendingmsgdetail.php:42
 msgid "Message ID"
-msgstr "Identifiant de message"
+msgstr "N° de message"
 
 #: www/forum/admin/pendingmsgdetail.php:63 www/forum/attachment.php:154
 #: www/forum/forum.php:151 www/forum/message.php:101 www/forum/myforums.php:96
@@ -16031,7 +15998,7 @@ msgstr "Vous pouvez maintenant <a href=\"%1$s\"><strong>ajouter des fichiers</st
 
 #: www/frs/admin/qrs.php:149
 msgid "Package ID"
-msgstr "Identifiant du paquet"
+msgstr "N° du paquet"
 
 #: www/frs/admin/qrs.php:156
 msgid "No File Types Available"
@@ -16133,7 +16100,7 @@ msgstr "Erreur lors de l'accès à un paquet."
 
 #: www/frs/monitor.php:71
 msgid "File Module ID"
-msgstr "Identifiant du module de fichier"
+msgstr "N° du module de fichier"
 
 #: www/frs/reporting/downloads.php:89
 msgid "File Release Reporting"
@@ -16273,7 +16240,7 @@ msgstr "L'option 'Trier par' vous permet de préciser l'ordre dans lequel sont a
 
 #: www/include/html.php:395
 msgid "You can sort by ID, Priority, Summary, Open Date, Close Date, Submitter, or Assignee.  You can also have the results sorted in Ascending or Descending order."
-msgstr "Vous pouvez trier par identifiant, priorité, résumé, date d'ouverture, date de fermeture, auteur, responsable. Vous pouvez aussi trier les résultats par ordre croissant ou décroissant."
+msgstr "Vous pouvez trier par n°, priorité, résumé, date d'ouverture, date de fermeture, auteur, responsable. Vous pouvez aussi trier les résultats par ordre croissant ou décroissant."
 
 #: www/include/html.php:397
 msgid "The Data Type option determines the type of tracker item this is.  Since the tracker rolls into one the bug, patch, support, etc... managers you need to be able to determine which one of these an item should belong."
@@ -17112,7 +17079,7 @@ msgstr "Titre du favori"
 
 #: www/my/bookmark_edit.php:29
 msgid "Bookmark ID"
-msgstr "Identifiant du favori"
+msgstr "N° du favori"
 
 #: www/my/bookmark_edit.php:37
 msgid "Bookmark Updated"
@@ -17384,18 +17351,16 @@ msgid "Category Inserted"
 msgstr "Catégorie ajoutée"
 
 #: www/people/admin/index.php:58
-#, fuzzy
 msgid "Missing category name."
-msgstr "Le nom du projet est manquant."
+msgstr "Le nom de la catégorie est manquant."
 
 #: www/people/admin/index.php:68
 msgid "Skill Inserted"
 msgstr "Compétence ajoutée"
 
 #: www/people/admin/index.php:71
-#, fuzzy
 msgid "Missing skill name."
-msgstr "Nom du rôle manquant"
+msgstr "Le nom de la compétence est manquant."
 
 #: www/people/admin/index.php:84
 msgid "Add/Change Categories"
@@ -17531,12 +17496,12 @@ msgstr "La mise à jour de cette compétence pour ce poste a échoué - mauvais 
 
 #: www/people/editjob.php:129
 msgid "Job ID"
-msgstr "Identifiant de poste"
+msgstr "N° de poste"
 
 #: www/people/editjob.php:135
 #, php-format
 msgid "Job skill delete failed: %s"
-msgstr "La compétence demandée pour ce poste n'a pas été correctement suuprimée : %s"
+msgstr "La compétence n'a pas été correctement supprimée : %s"
 
 #: www/people/editjob.php:137
 msgid "Job skill deleted successfully"
@@ -17547,9 +17512,9 @@ msgid "Job skill delete failed - wrong project_id"
 msgstr "La suppression de cette compétence pour ce poste a échoué - mauvais numéro d'identification de projet"
 
 #: www/people/editjob.php:153
-#, fuzzy, php-format
+#, php-format
 msgid "Posting fetch failed: %s"
-msgstr "La récupération de l'affectation a échoué : %s"
+msgstr "La récupération du message a échoué : %s"
 
 #: www/people/editjob.php:154
 msgid "No such posting for this project"
@@ -17631,7 +17596,7 @@ msgstr "Compétence mise à jour"
 
 #: www/people/editprofile.php:150 www/people/editprofile.php:151
 msgid "Edit Skills"
-msgstr "Édition des compétences"
+msgstr "Modification des compétences"
 
 #: www/people/editprofile.php:152
 msgid "Change the required fields, and press “Done” at the bottom of the page"
@@ -17799,7 +17764,7 @@ msgstr "Encore ..."
 
 #: www/people/people_utils.php:95
 msgid "Must select a skill ID"
-msgstr "Vous devez choisir un numéro de compétence."
+msgstr "Vous devez choisir un n° de compétence."
 
 #: www/people/people_utils.php:104
 msgid "Error inserting into skill inventory: "
@@ -17815,7 +17780,7 @@ msgstr "Erreur: la compétence demandée est toujours dans votre référentiel."
 
 #: www/people/people_utils.php:114 www/people/people_utils.php:226
 msgid "You must be logged in first"
-msgstr "Vous devez être logué d'abord"
+msgstr "Vous devez d'abord vous identifier"
 
 #: www/people/people_utils.php:128 www/people/people_utils.php:158
 #: www/people/people_utils.php:241 www/people/people_utils.php:303
@@ -17849,18 +17814,16 @@ msgid "Added to job inventory"
 msgstr "Ajouté à l'inventaire de compétences"
 
 #: www/people/people_utils.php:221
-#, fuzzy
 msgid "Error: Skill already in your inventory."
-msgstr "Erreur: la compétence demandée est toujours dans votre référentiel."
+msgstr "Erreur: cette compétence est déjà dans votre référentiel."
 
 #: www/people/people_utils.php:278 www/people/people_utils.php:287
 msgid "Invalid ID"
-msgstr "Identifiant invalide"
+msgstr "N° invalide"
 
 #: www/people/people_utils.php:393
-#, fuzzy
 msgid "No categories found."
-msgstr "Aucune catégorie trouvée"
+msgstr "Aucune catégorie trouvée."
 
 #: www/people/people_utils.php:438
 msgid "Date Opened"
@@ -17876,14 +17839,12 @@ msgid "None Found"
 msgstr "Aucune demande trouvée"
 
 #: www/people/skills_utils.php:40
-#, fuzzy
 msgid "No skills listed."
-msgstr "Aucune compétence n'est en place"
+msgstr "Aucune compétence n'est en place."
 
 #: www/people/skills_utils.php:41
-#, fuzzy
 msgid "This user has not entered any skills."
-msgstr "Cet utilisateur ne fait partie d'aucun projet."
+msgstr "Cet utilisateur n'a entré aucune compétence."
 
 #: www/people/viewjob.php:54
 #, fuzzy
@@ -18029,9 +17990,8 @@ msgid "Subproject Name"
 msgstr "Nom du sous-projet"
 
 #: www/pm/admin/index.php:358
-#, fuzzy
 msgid "Category Administration"
-msgstr "Administration des catégories de postes"
+msgstr "Administration des catégories"
 
 #: www/pm/admin/index.php:372 www/pm/admin/index.php:394
 msgid "Permanently delete this subproject and all its data"
@@ -18072,7 +18032,7 @@ msgstr "Afficher les tâches"
 #: www/pm/browse_task.php:124 www/pm/browse_task.php:228
 #: www/pm/ganttpage.php:164 www/pm/include/ProjectTaskHTML.class.php:73
 msgid "Task Id"
-msgstr "Numéro de tâche"
+msgstr "N° de tâche"
 
 #: www/pm/browse_task.php:145
 msgid "Detailed"
@@ -18613,11 +18573,11 @@ msgstr "Notez que des tâches peuvent être confiées à plusieurs responsables.
 
 #: www/pm/task.php:69
 msgid "Group ID"
-msgstr "Identifiant de projet"
+msgstr "N° de projet"
 
 #: www/pm/task.php:72
 msgid "Group Project ID"
-msgstr "Identifiant de sous-projet"
+msgstr "N° de projet"
 
 #: www/pm/task.php:104 www/pm/task.php:171 www/pm/task.php:306
 #: www/pm/task.php:328 www/pm/task.php:345 www/pm/task.php:377
@@ -18658,7 +18618,7 @@ msgstr "Tâche supprimée avec succès"
 
 #: www/pm/t_follow.php:36
 msgid "TID"
-msgstr "Identifiant de tâche"
+msgstr "N° de tâche"
 
 #: www/pm/t_follow.php:42
 msgid "no task with id :"
@@ -18670,7 +18630,7 @@ msgstr "Identifiant de tâche"
 
 #: www/pm/t_lookup.php:41
 msgid "No Task with ID: "
-msgstr "Aucune tâche d'identifiant : "
+msgstr "Aucune tâche de n° : "
 
 #: www/pm/uploadcsv.php:34
 msgid "Warning!"
@@ -18943,7 +18903,7 @@ msgstr "Avec succès"
 
 #: www/project/admin/massfinish.php:54
 msgid "No IDs Were Passed"
-msgstr "Aucun identifiant passé"
+msgstr "Aucun n° passé"
 
 #: www/project/admin/massfinish.php:66
 msgid "Choose the role for each user and then press “Add All”."
@@ -19358,7 +19318,7 @@ msgstr "Erreur lors de l'approbation : %s"
 
 #: www/register/index.php:159
 msgid "Your project has been automatically approved. You should receive an email containing further information shortly."
-msgstr "Votre projet a automatiquement approuvé. Vous devriez recevoir prochainement un courriel contenant des informations supplémentaires."
+msgstr "Votre projet a été automatiquement approuvé. Vous devriez recevoir prochainement un courriel contenant des informations supplémentaires."
 
 #: www/register/index.php:178
 msgid "To apply for project registration, you should fill in basic information about it. Please read descriptions below carefully and provide complete and comprehensive data. All fields below are mandatory."
@@ -19539,7 +19499,7 @@ msgstr "Résumé des statistiques d'un utilisateur"
 
 #: www/reporting/index.php:82
 msgid "Administrative"
-msgstr "Administration"
+msgstr "Administratif"
 
 #: www/reporting/index.php:84
 msgid "Initialize / Rebuild Reporting Tables"
@@ -19675,7 +19635,7 @@ msgstr ""
 
 #: www/scm/admin/index.php:153
 msgid "Note: Changing the repository does not delete the previous repository.  It only affects the information displayed under the SCM tab."
-msgstr "Note : Changer de dépôt ne supprime pas le dépôt précédent. Cela n'affecte que les informations affichées dans l'onglet « Sources »."
+msgstr "Note : Changer de dépôt ne supprime pas le dépôt précédent. Cela n'affecte que les informations affichées dans l'onglet « Code source »."
 
 #: www/scm/admin/index.php:169
 msgid "Error: Site has SCM but no plugins registered"
@@ -19936,7 +19896,6 @@ msgid "Error: Only the creator of a package version can add snippets to it."
 msgstr "Erreur: seul le créateur d'une version de paquet peut lui ajouter des échantillons."
 
 #: www/snippet/add_snippet_to_package.php:83 www/snippet/addversion.php:40
-#, fuzzy
 msgid "Error: snippet does not exist"
 msgstr "Erreur: cet échantillon n'existe pas"
 
@@ -20006,7 +19965,6 @@ msgid "Paste the Code Here"
 msgstr "Coller le code ici"
 
 #: www/snippet/addversion.php:128
-#, fuzzy
 msgid "Error: snippet_package does not exist"
 msgstr "Erreur: ce paquet d'échantillons n'existe pas"
 
@@ -20078,7 +20036,7 @@ msgstr "Aucun échantillon trouvé."
 #: www/snippet/browse.php:84 www/snippet/detail.php:63
 #: www/snippet/snippet_utils.php:142
 msgid "Snippet ID"
-msgstr "Numéro d'identification de l'échantillon"
+msgstr "N° de l'échantillon"
 
 #: www/snippet/browse.php:86
 msgid "Creator"
@@ -20093,43 +20051,36 @@ msgid "Snippets"
 msgstr "Échantillons"
 
 #: www/snippet/delete.php:33
-#, fuzzy
 msgid "Delete Snippets"
-msgstr "Échantillons de code"
+msgstr "Supprimer des échantillons de code"
 
 #: www/snippet/delete.php:49
-#, fuzzy
 msgid "Error: Only the creator of a package version can delete snippets from it."
-msgstr "Erreur: seul le créateur d'une version de paquet peut lui ajouter des échantillons."
+msgstr "Erreur: seul le créateur d'une version de paquet peut en supprimer des échantillons."
 
 #: www/snippet/delete.php:61
-#, fuzzy
 msgid "Error: That snippet does not exist in this package."
-msgstr "Erreur - Cet extrait de code n'existe pas"
+msgstr "Erreur: cet échantillon de code n'xiste pas dans ce paquet."
 
 #: www/snippet/delete.php:65
 msgid "Item Removed From Package"
 msgstr ""
 
 #: www/snippet/delete.php:81
-#, fuzzy
 msgid "Error: That snippet does not exist."
-msgstr "Erreur - Cet extrait de code n'existe pas"
+msgstr "Erreur: cet échantillon n'existe pas."
 
 #: www/snippet/delete.php:100
-#, fuzzy
 msgid "Snippet Removed"
-msgstr "Numéro d'identification de l'échantillon"
+msgstr "Échantillon supprimé"
 
 #: www/snippet/delete.php:118
-#, fuzzy
 msgid "Error: Only the creator of a package version can delete it."
-msgstr "Erreur: seul le créateur d'une version de paquet peut lui ajouter des échantillons."
+msgstr "Erreur: seul le créateur d'une version de paquet peut le supprimer."
 
 #: www/snippet/delete.php:144
-#, fuzzy
 msgid "Package Removed"
-msgstr "Nom du paquet"
+msgstr "Paquet supprimé"
 
 #: www/snippet/delete.php:149
 msgid "Error: mangled URL?"
@@ -20426,9 +20377,9 @@ msgid "Remove This Filter"
 msgstr "Supprimer ce filtre"
 
 #: www/softwaremap/trove_list.php:200 www/trove/index.php:152
-#, php-format
+#, fuzzy, php-format
 msgid "%s projects"
-msgstr "Projets : %s"
+msgstr "%s projet"
 
 #: www/softwaremap/trove_list.php:219 www/trove/index.php:95
 msgid "Browse By"
@@ -20479,7 +20430,7 @@ msgstr ""
 #: www/stats/i18n.php:32
 #, php-format
 msgid "%s I18n Statistics: Languages Distributions"
-msgstr "Statistiques du site %s : répartition par langue"
+msgstr "Statistiques d'internationalisation du site %s : répartition par langue"
 
 #: www/stats/i18n.php:54
 msgid "Total Non-English"
@@ -20707,7 +20658,7 @@ msgstr "Sondage introuvable"
 
 #: www/survey/admin/show_results.php:122
 msgid "No Survey Question is found"
-msgstr "Aucune question trouvée"
+msgstr "Aucune question de sondage trouvée"
 
 #: www/survey/admin/survey.php:72
 msgid "Survey Added"
