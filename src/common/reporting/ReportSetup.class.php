@@ -1042,10 +1042,14 @@ class ReportSetup extends Report {
 		return db_query_params ('
 		INSERT INTO rep_user_act_weekly (user_id, week, tracker_opened, tracker_closed,
 				forum, docs, cvs_commits, tasks_opened, tasks_closed)
-		SELECT user_id,$1::int AS week, sum(tracker_opened) AS tracker_opened,
-				sum(tracker_closed) AS tracker_closed, sum(forum) AS forum,
-				sum(docs) AS docs, sum(cvs_commits) AS cvs_commits,
-				sum(tasks_opened) AS tasks_opened, sum(tasks_closed) AS tasks_closed
+		SELECT user_id,$1::int AS week,
+		sum(tracker_opened) AS tracker_opened,
+		sum(tracker_closed) AS tracker_closed,
+		sum(forum) AS forum,
+		sum(docs) AS docs,
+		sum(cvs_commits) AS cvs_commits,
+		sum(tasks_opened) AS tasks_opened,
+		sum(tasks_closed) AS tasks_closed
 		FROM rep_user_act_daily
 		WHERE DAY BETWEEN $1 AND $2
 		GROUP BY user_id,week',
@@ -1259,9 +1263,12 @@ class ReportSetup extends Report {
 			tracker_closed, forum, docs, downloads, cvs_commits, tasks_opened,
 			tasks_closed)
 	SELECT group_id, $1::int AS week, sum(tracker_opened) AS tracker_opened,
-			sum(tracker_closed) AS tracker_closed, sum(forum) AS forum,
-			sum(docs) AS docs, sum(downloads) AS downloads,
-			sum(cvs_commits) AS cvs_commits, sum(tasks_opened) AS tasks_opened,
+			sum(tracker_closed) AS tracker_closed,
+			sum(forum) AS forum,
+			sum(docs) AS docs,
+			sum(downloads) AS downloads,
+			sum(cvs_commits) AS cvs_commits,
+			sum(tasks_opened) AS tasks_opened,
 			sum(tasks_closed) AS tasks_closed
 	FROM rep_group_act_daily
 	WHERE DAY BETWEEN $1 AND $2
@@ -1306,8 +1313,10 @@ class ReportSetup extends Report {
 			tracker_closed, forum, docs, downloads, cvs_commits, tasks_opened,
 			tasks_closed)
 	SELECT group_id, $1::int AS month, sum(tracker_opened) AS tracker_opened,
-			sum(tracker_closed) AS tracker_closed, sum(forum) AS forum,
-			sum(docs) AS docs, sum(downloads) AS downloads,
+			sum(tracker_closed) AS tracker_closed,
+			sum(forum) AS forum,
+			sum(docs) AS docs,
+			sum(downloads) AS downloads,
 			sum(cvs_commits) AS cvs_commits,
 			sum(tasks_opened) AS tasks_opened,
 			sum(tasks_closed) AS tasks_closed
