@@ -45,7 +45,7 @@ case "$1" in
 require ("/usr/share/gforge/lib/include.pl") ;
 my $l;
 while ($l = <>) { 
-  last if l =~ /^\s*mydestination/ ;
+  last if $l =~ /^\s*mydestination/ ;
   print $l;
 };
 chomp $l;
