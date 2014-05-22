@@ -55,11 +55,11 @@ if ($rows > 0) {
 				$efarr[$i]['extra_field_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
 				' ['._('Edit').']</a>'.
 			'<a href="'.getStringFromServer('PHP_SELF').'?deleteextrafield=1&amp;id='.
-	$efarr[$i]['extra_field_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
-	' ['._('Delete').']</a>'.
+						$efarr[$i]['extra_field_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
+						' ['._('Delete').']</a>'.
 			'<a href="'.getStringFromServer('PHP_SELF').'?copy_opt=1&amp;id='.
-	$efarr[$i]['extra_field_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
-	' ['._('Copy').']</a>'.
+						$efarr[$i]['extra_field_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
+						' ['._('Copy').']</a>'.
 			"</td>\n";
 		echo '<td>'.$eftypes[$efarr[$i]['field_type']]."</td>\n";
 		/*
