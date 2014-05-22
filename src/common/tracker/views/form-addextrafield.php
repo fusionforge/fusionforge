@@ -112,7 +112,7 @@ echo "<h2>"._('Add New Custom Field')."</h2>";
 <form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post">
 <p>
 <input type="hidden" name="add_extrafield" value="y" />
-<strong><?php echo _('Custom Field Name')._(':').utils_requiredField(); ?></strong><br />
+<strong><?php echo _('Custom Field Name').utils_requiredField()._(':'); ?></strong><br />
 <input type="text" name="name" value="" size="15" maxlength="30" required="required" />
 </p>
 <p>
@@ -148,7 +148,7 @@ echo "<h2>"._('Add New Custom Field')."</h2>";
 echo $HTML->warning_msg(_('Warning: this add new custom field'));
 ?>
 <p>
-<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" />
+<input type="submit" name="post_changes" value="<?php echo _('Add Custom Field') ?>" />
 </p>
 </form>
 <?php
