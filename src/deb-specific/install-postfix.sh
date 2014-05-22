@@ -137,7 +137,8 @@ if ($seen_gf_block == 0) {
 
 if ($seen_alias_maps == 0) {
 	print "### GFORGE ADDITION - The following virtual_alias_maps line can be moved and this line removed ###\n";
-	print "virtual_alias_maps = pgsql:pgsql_gforge_users\n";
+	# Using proxy: so that Postfix daemons can access PostgreSQL from within their chroot
+	print "virtual_alias_maps = proxy:pgsql:pgsql_gforge_users\n";
 };
 if ($seen_transport_maps == 0) {
 	print "### GFORGE ADDITION - The following transport_maps line can be moved and this line removed ###\n";
