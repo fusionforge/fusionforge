@@ -1,5 +1,5 @@
-# Galician Translations for FusionForge
-# Copyright © 2008-2013 FusionForge Team
+# Galician Translations for FusionForge.
+# Copyright © 2008-2013 FusionForge Team (msgids)
 # This file is distributed under the same license as the FusionForge package.
 #
 # José Manuel Castroagudín Silva <chavescesures@gmail.com>, 2009.

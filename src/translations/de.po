@@ -1,14 +1,13 @@
 # German translations for FusionForge.
-# Copyright © 2008-2013 FusionForge Team
+# Copyright © 2008-2013 FusionForge Team (msgids)
 # This file is distributed under the same license as the FusionForge package.
-# Automatically generated
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-02-07 16:11+0100\n"
-"PO-Revision-Date: 2014-04-29 13:54+0200\n"
+"PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
 "Language: de\n"

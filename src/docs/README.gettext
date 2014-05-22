@@ -213,10 +213,6 @@ so on.
 app), Kbabel (this ones is Qt), and Pootle (web-based).  Emacs
 aficionados will, no doubt, use their favourite editor's PO-mode.
 
-  Note that the Debian internationalisation team have been kind enough
-to host FusionForge translations on their Pootle instance.  It is
-therefore recommended that translators register an account on
-https://pootle.debian.net/ and use it for their work.  Pootle has a
-web-based interface, but it also allows translators to download and
-upload the *.po files for those who prefer working locally with the
-other tools.
+  Note that FusionForge is included in the Translation Project.
+Translations should happen there as part of the language translation
+team.  See http://translationproject.org/
