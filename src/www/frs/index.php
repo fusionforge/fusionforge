@@ -30,8 +30,28 @@ require_once $gfcommon.'frs/include/frs_utils.php';
 require_once $gfcommon.'frs/FRSPackageFactory.class.php';
 
 global $HTML;
+/* are we using frs ? */
+if (!forge_get_config('use_frs'))
+	exit_disabled('home');
 
 $group_id = getIntFromRequest('group_id');
+/* validate group */
+if (!$group_id)
+	exit_no_group();
+
+$g = group_get_object($group_id);
+if (!$g || !is_object($g))
+	exit_no_group();
+
+/* is this group using FRS ? */
+if (!$g->usesFRS())
+	exit_disabled();
+
+if ($g->isError())
+	exit_error($g->getErrorMessage(), 'frs');
+
+session_require_perm('frs', $group_id, 'read_public');
+
 $release_id = getIntFromRequest('release_id');
 
 // Allow alternate content-type rendering by hook
@@ -57,13 +77,8 @@ if($content_type != $default_content_type) {
 	exit(0);
 }
 
-$cur_group = group_get_object($group_id);
 
-if (!$cur_group) {
-	exit_no_group();
-}
-
-$fpFactory = new FRSPackageFactory($cur_group);
+$fpFactory = new FRSPackageFactory($g);
 if (!$fpFactory || !is_object($fpFactory)) {
 	exit_error(_('Could Not Get FRSPackageFactory'), 'frs');
 } elseif ($fpFactory->isError()) {
