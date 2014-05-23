@@ -116,8 +116,7 @@ class SVNPlugin extends SCMPlugin {
 			$b .= '<tt>svn checkout svn://'.$this->getBoxForProject($project).$this->svn_root_fs.'/'.$project->getUnixName().$module.'</tt><br />';
 		}
 		if (forge_get_config('use_dav', 'scmsvn')) {
-			$b .= '<tt>svn checkout --username '.forge_get_config('anonsvn_login', 'scmsvn').' http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://' . $this->getBoxForProject($project). $this->svn_root_dav .'/'. $project->getUnixName() .$module.'</tt><br />';
-			$b .= _('The password is ').forge_get_config('anonsvn_password', 'scmsvn').'<br />';
+				$b .= '<p><tt>svn checkout http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. forge_get_config('scm_host'). '/svn/'.$project->getUnixName().$module.'</tt></p>' ;
 		}
 		$b .= '</p>';
 		return $b;
