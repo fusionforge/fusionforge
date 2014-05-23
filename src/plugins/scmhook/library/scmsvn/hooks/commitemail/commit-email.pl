@@ -1,8 +1,8 @@
 #!/usr/bin/env perl
 
-# Note: FusionForge slight change:
-#-$sendmail = "/usr/sbin/sendmail";
-#+$sendmail = $ENV{SENDMAIL} || "/usr/sbin/sendmail";
+# Note: FusionForge changes:
+# - $sendmail = "/usr/sbin/sendmail" => $ENV{SENDMAIL} || "/usr/sbin/sendmail";
+# - use cut_array() to limit body size to ~40KB (default Mailman limit)
 
 # ====================================================================
 # This script is deprecated.  The Subversion developers recommend
@@ -39,6 +39,25 @@
 # individuals.  For exact contribution history, see the revision
 # history and logs, available at http://subversion.tigris.org/.
 # ====================================================================
+
+sub cut_array
+{
+    my $data_ref = shift @_;
+    my $max_size = shift @_;
+    my @new_data = ();
+    my $line;
+    my $total_size = 0;
+
+    for $line (@{$data_ref}) {
+        $total_size += length ($line);
+        if ($total_size > $max_size) {
+	    push @new_data, "\n[...]";
+            return @new_data;
+        }
+        push @new_data, $line;
+    }
+    return @new_data;
+}
 
 # Turn on warnings the best way depending on the Perl version.
 BEGIN {
@@ -632,8 +651,8 @@ foreach my $project (@project_settings_list)
         my $command = "$sendmail -f'$mail_from' $userlist";
         if (open(SENDMAIL, "| $command"))
           {
-            print SENDMAIL @head, @body;
-            print SENDMAIL @difflines if $diff_wanted;
+            print SENDMAIL @head, cut_array (\@body, 3000);
+            print SENDMAIL cut_array (\@difflines, 39000) if $diff_wanted;
             close SENDMAIL
               or warn "$0: error in closing `$command' for writing: $!\n";
           }
@@ -649,10 +668,10 @@ foreach my $project (@project_settings_list)
         handle_smtp_error($smtp, $smtp->mail($mail_from));
         handle_smtp_error($smtp, $smtp->recipient(@email_addresses));
         handle_smtp_error($smtp, $smtp->data());
-        handle_smtp_error($smtp, $smtp->datasend(@head, @body));
+        handle_smtp_error($smtp, $smtp->datasend(@head,cut_array(\@body, 3000)));
         if ($diff_wanted)
           {
-            handle_smtp_error($smtp, $smtp->datasend(@difflines));
+            handle_smtp_error($smtp, $smtp->datasend(cut_array(\@difflines, 39000)));
           }
         handle_smtp_error($smtp, $smtp->dataend());
         handle_smtp_error($smtp, $smtp->quit());
