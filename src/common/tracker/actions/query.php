@@ -240,7 +240,7 @@ $changed_arr[]= 3600 * 24 * 30;// 1 month
 //
 //	get queries for this user
 //
-$res = db_query_params ('SELECT artifact_query_id,query_name FROM artifact_query WHERE user_id=$1 AND group_artifact_id=$2',
+$res = db_query_params('SELECT artifact_query_id,query_name FROM artifact_query WHERE user_id=$1 AND group_artifact_id=$2',
 			array(user_getid(),
 			      $ath->getID()));
 

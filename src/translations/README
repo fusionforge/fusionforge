@@ -1,0 +1,6 @@
+Latest translations can be grabbed from the Translation Project using:
+
+  rsync -Lrtvz  translationproject.org::tp/latest/fusionforge/  ./
+
+See http://translationproject.org/html/maintainers.html
+and http://translationproject.org/domain/fusionforge.html

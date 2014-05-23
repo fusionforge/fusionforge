@@ -1,14 +1,17 @@
-# French translations for FusionForge package.
-# Copyright © 2008-2014 FusionForge Team
+# French translations for FusionForge.
+# Copyright © 2008-2014 FusionForge Team (msgids)
 # This file is distributed under the same license as the FusionForge package.
-# Automatically generated
-#
+# Roland Mas <lolando@debian.org>, 2002, 2003, 2009, 2010, 2011, 2012.
+# Christian Bayle <chris@bayle.eu>, 2002, 2003.
+# Guillaume Smet <guillaume.smet@gmail.com> 2003, 2004, 2005.
+# Marc-Etienne Vargenau <marc-etienne.vargenau@alcatel-lucent.com>, 2013, 2014.
+# Sylvain Beucler <beuc@beuc.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-16 18:30+0200\n"
-"PO-Revision-Date: 2013-06-03 17:17+0100\n"
+"POT-Creation-Date: 2014-05-20 14:08+0200\n"
+"PO-Revision-Date: 2014-05-21 22:47+0200\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -474,7 +477,7 @@ msgstr[1] "Surveillance arrêtée pour %s documents."
 #: common/docman/Document.class.php:912
 #: common/docman/DocumentGroup.class.php:758
 msgid "Docman"
-msgstr ""
+msgstr "Docman"
 
 #: common/docman/actions/monitorfile.php:88
 msgid "monitoring action unknown."
@@ -1911,6 +1914,8 @@ msgstr "Ajouter un nouvel élément"
 msgid ""
 "Add a new item such as file, create directory, inject a ZIP at root level."
 msgstr ""
+"Ajouter un nouvel élément par ex. fichier, créer un dossier, injecter un ZIP "
+"à la racine"
 
 #: common/docman/views/menu.php:55 common/docman/views/search.php:60
 #: common/include/Navigation.class.php:176
@@ -2148,7 +2153,7 @@ msgstr "À l'intérieur des documents"
 
 #: common/docman/views/search.php:76
 msgid "search into childs following project hierarchy"
-msgstr ""
+msgstr "chercher dans les fils en suivant la hiérarchie projet"
 
 #: common/docman/views/search.php:79 plugins/mantisbt/controler/filter.php:92
 msgid "Include child projects"
@@ -2298,7 +2303,7 @@ msgstr "Fichier publié avec succès"
 #: common/forum/ForumFactory.class.php:60 www/forum/admin/index.php:58
 #, php-format
 msgid "%s does not use the Forum tool."
-msgstr ""
+msgstr "%s n'utilise pas l'outil Forum."
 
 #: common/forum/ForumAdmin.class.php:60 www/forum/admin/index.php:365
 msgid "Move Thread"
@@ -2917,9 +2922,8 @@ msgid "Error Updating Package: Name Already Exists"
 msgstr "Impossible de mettre à jour le paquet : ce nom existe déjà"
 
 #: common/frs/FRSPackage.class.php:407
-#, fuzzy
 msgid "Error Updating Package: Couldn't fetch data"
-msgstr "Erreur lors de la mise à jour du nom du champ"
+msgstr "Erreur lors de la mise à jour du paquet: impossible de récupérer les données"
 
 #: common/frs/FRSPackage.class.php:417
 msgid "Error Updating Package: Directory Already Exists"
@@ -2958,9 +2962,8 @@ msgid "Error Getting FRS"
 msgstr "Erreur lors de l'accès à un fichier."
 
 #: common/frs/FRSRelease.class.php:83
-#, fuzzy
 msgid "Invalid FRS Package Object"
-msgstr "Projet invalide"
+msgstr "Objet Paquet FRS invalide"
 
 #: common/frs/FRSRelease.class.php:143
 msgid "Error Adding Release: Name Already Exists"
@@ -3297,9 +3300,9 @@ msgid "Error updating project information: %s"
 msgstr "Erreur lors de la mise à jour des informations sur le projet : %s"
 
 #: common/include/Group.class.php:638
-#, fuzzy, php-format
+#, php-format
 msgid "Error updating project information: use_docman %s"
-msgstr "Erreur lors de la mise à jour des informations sur le projet : %s"
+msgstr "Erreur lors de la mise à jour des informations sur le projet : use_docman %s"
 
 #: common/include/Group.class.php:665
 msgid "Error updating project information in plugin_hook group_update"
@@ -4666,9 +4669,9 @@ msgid ""
 msgstr ""
 
 #: common/include/User.class.php:1746
-#, fuzzy, php-format
+#, php-format
 msgid "New %1$s User"
-msgstr "L'équipe de %1$s"
+msgstr "Nouvel Utilisateur %1$s"
 
 #: common/include/utils.php:206 common/mail/Mail.class.php:38
 msgid "UTF-8"
@@ -10497,7 +10500,7 @@ msgstr "Enregistrer l'ordre"
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:93
 msgid "No tabs available for headermenu"
-msgstr ""
+msgstr "Aucun onglet disponible pour headermenu"
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:97
 msgid "Manage available tabs in outermenu"
@@ -12253,8 +12256,9 @@ msgstr ""
 #: plugins/oauthconsumer/www/provider_edit.php:54
 #: plugins/oauthconsumer/www/providers.php:14
 #: plugins/oauthconsumer/www/providers.php:93
+#, fuzzy
 msgid "Request Token URL"
-msgstr ""
+msgstr "Demander à rejoindre le projet"
 
 #: plugins/oauthconsumer/www/get_access_token.php:60
 #: plugins/oauthconsumer/www/provider_edit.php:59
@@ -12298,8 +12302,9 @@ msgid "Request Token Key"
 msgstr "Demander un jeton"
 
 #: plugins/oauthconsumer/www/get_access_token.php:139
+#, fuzzy
 msgid "Request Token Secret"
-msgstr ""
+msgstr "Demander à rejoindre le projet"
 
 #: plugins/oauthconsumer/www/get_access_token.php:158
 msgid "Step 2: "
@@ -12521,8 +12526,9 @@ msgid "Authorized"
 msgstr "Autorisé"
 
 #: plugins/oauthprovider/www/request_tokens.php:118
+#, fuzzy
 msgid "No request tokens were found!"
-msgstr ""
+msgstr "Aucune question trouvée"
 
 #: plugins/oauthprovider/www/token_deny.php:57
 msgid "Authorization Denied"
@@ -21430,8 +21436,8 @@ msgid ""
 "Your project has been automatically approved. You should receive an email "
 "containing further information shortly."
 msgstr ""
-"Votre projet a été automatiquement approuvé. Vous devriez recevoir prochainement "
-"un courriel contenant des informations supplémentaires."
+"Votre projet a été automatiquement approuvé. Vous devriez recevoir "
+"prochainement un courriel contenant des informations supplémentaires."
 
 #: www/register/index.php:181
 msgid ""

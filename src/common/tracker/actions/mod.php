@@ -168,7 +168,7 @@ echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 		<?php
 		echo $ath->technicianBox('assigned_to', $ah->getAssignedTo() );
 		echo " ";
-		echo util_make_link ('/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&update_users=1', '('._('Admin').')');
+		echo util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&update_users=1', '('._('Admin').')');
 		?>
 		</td><td>
 		<strong><?php echo _('Priority'). _(': ') ?></strong><br />
@@ -189,7 +189,7 @@ echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 		$ath->renderRelatedTasks($group, $ah);
 	?>
 	<tr>
-		<td colspan="2"><strong><?php echo _('Summary')._(':'); ?><?php echo utils_requiredField(); ?></strong><br />
+		<td colspan="2"><strong><?php echo _('Summary').utils_requiredField()._(':') ?></strong><br />
 		<input id="tracker-summary" required="required" title="<?php echo _('The summary text-box represents a short tracker item summary. Useful when browsing through several tracker items.') ?>" type="text" name="summary" size="70" value="<?php
 			echo $ah->getSummary();
 			?>" maxlength="255" />
