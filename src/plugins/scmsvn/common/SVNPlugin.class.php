@@ -377,9 +377,6 @@ class SVNPlugin extends SCMPlugin {
 			if ($project->enableAnonSCM()) {
 				fwrite($config_f, 'Use ScmsvnProjectWithAnon '.$project->getUnixName().'
 ');
-			} else {
-				fwrite($config_f, 'Use ScmsvnProjectWithoutAnon '.$project->getUnixName().'
-');
 			}
 			
 			fwrite($config_f, "\n");
