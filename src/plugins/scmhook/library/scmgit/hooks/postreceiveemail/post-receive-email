@@ -762,6 +762,7 @@ send_mail()
 	else
 		/usr/sbin/sendmail -t
 	fi
+	unset send_mail_x
 }
 
 # ---------------------------- main()
