@@ -75,6 +75,9 @@ HUDSON_URL=$HUDSON_URL
 JOB_NAME=$JOB_NAME
 EOF
 
+# Add alias to /etc/hosts
+ssh root@$HOST 'sed -i -e "s/^$(hostname -i).*/& $(forge_get_config scm_host)/" /etc/hosts'
+ 
 # Run tests
 retcode=0
 echo "Run phpunit test on $HOST in $FORGE_HOME"
