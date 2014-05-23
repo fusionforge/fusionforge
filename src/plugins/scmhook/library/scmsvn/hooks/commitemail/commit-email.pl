@@ -652,7 +652,7 @@ foreach my $project (@project_settings_list)
         if (open(SENDMAIL, "| $command"))
           {
             print SENDMAIL @head, cut_array (\@body, 3000);
-            print SENDMAIL cut_array (\@difflines, 39000) if $diff_wanted;
+            print SENDMAIL cut_array (\@difflines, 37000) if $diff_wanted;
             close SENDMAIL
               or warn "$0: error in closing `$command' for writing: $!\n";
           }
@@ -671,7 +671,7 @@ foreach my $project (@project_settings_list)
         handle_smtp_error($smtp, $smtp->datasend(@head,cut_array(\@body, 3000)));
         if ($diff_wanted)
           {
-            handle_smtp_error($smtp, $smtp->datasend(cut_array(\@difflines, 39000)));
+            handle_smtp_error($smtp, $smtp->datasend(cut_array(\@difflines, 37000)));
           }
         handle_smtp_error($smtp, $smtp->dataend());
         handle_smtp_error($smtp, $smtp->quit());
