@@ -1,4 +1,4 @@
-#!/bin/mksh
+#!/bin/sh
 #
 # Copyright © 2013
 #	Thorsten “mirabilos” Glaser <thorsten.glaser@teckids.org>
@@ -35,12 +35,9 @@
 #  chmod a+x post-receive-email
 #  cd /path/to/your/repository.git
 #  ln -sf /usr/share/git-core/contrib/hooks/post-receive-email hooks/post-receive
-#  # or
-#  ln -sf /etc/gforge/plugins/scmgit/post-receive-email.sh hooks/post-receive
-#  # but that can only be used for a Forge-controlled repository
 #
 # This hook script needs the “en_US.UTF-8” locale set up on the server.
-# The MirBSD Korn Shell (mksh) must be installed as /bin/mksh and usable.
+# The FusionForge version works with a POSIX shell.
 #
 # This hook script assumes it is enabled on the central repository of a
 # project, with all users pushing only to it and not between each other.  It
@@ -114,10 +111,14 @@
 nl='
 '
 unset LANGUAGE LC_ALL
-export LANG=C LC_ADDRESS=C LC_COLLATE=C LC_CTYPE=en_US.UTF-8 \
+LANG=C LC_ADDRESS=C LC_COLLATE=C LC_CTYPE=en_US.UTF-8 \
     LC_IDENTIFICATION=C LC_MEASUREMENT=C LC_MESSAGES=C \
     LC_MONETARY=C LC_NAME=C LC_NUMERIC=C LC_PAPER=C \
     LC_TELEPHONE=C LC_TIME=C
+export LANG LC_ADDRESS LC_COLLATE LC_CTYPE \
+    LC_IDENTIFICATION LC_MEASUREMENT LC_MESSAGES \
+    LC_MONETARY LC_NAME LC_NUMERIC LC_PAPER \
+    LC_TELEPHONE LC_TIME
 
 # ---------------------------- Functions
 
@@ -283,8 +284,8 @@ generate_email_header()
 	# Generate header
 
 	routing_headers="To: $recipients"
-	[[ -n $envelopesender ]] && routing_headers="From: $envelopesender${nl}$routing_headers"
-	[[ -n $replyto ]] && routing_headers="$routing_headers${nl}Reply-To: $replyto"
+	test -n "$envelopesender" && routing_headers="From: $envelopesender${nl}$routing_headers"
+	test -n "$replyto" && routing_headers="$routing_headers${nl}Reply-To: $replyto"
 
 	cat <<-EOF
 	MIME-Version: 1.0
@@ -751,12 +752,12 @@ limit_lines()
 
 send_mail()
 {
-	local x=$(cat; echo x)
+	send_mail_x=$(cat; echo x)
 
-	x=${x%x}
-	[[ -n $x ]] || return 1
+	send_mail_x=${send_mail_x%x}
+	test -n "$send_mail_x" || return 1
 
-	print -nr -- "$x" | if [ -n "$envelopesender" ]; then
+	printf '%s' "$send_mail_x" | if [ -n "$envelopesender" ]; then
 		/usr/sbin/sendmail -t -f "$envelopesender"
 	else
 		/usr/sbin/sendmail -t
@@ -815,8 +816,8 @@ else
 		prep_for_email $oldrev $newrev $refname || continue
 		generate_email $maxlines | send_mail
 	done
-	if [[ -n $kgbconffile && -s $kgbconffile ]]; then
-		print -nr -- "$ilines" | kgb-client \
+	if test -n "$kgbconffile" && test -s "$kgbconffile"; then
+		printf '%s' "$ilines" | kgb-client \
 		    --conf "$kgbconffile" --repository git --git-reflog -
 	fi
 fi
