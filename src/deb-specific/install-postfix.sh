@@ -177,7 +177,7 @@ if ($seen_transport_maps == 0) {
 	perl -e '
 require ("/usr/share/gforge/lib/include.pl") ;
 while ($l = <>) { 
-  last if l =~ /^\s*mydestination/ ;
+  last if $l =~ /^\s*mydestination/ ;
   print $l;
 };
 chomp $l ;
