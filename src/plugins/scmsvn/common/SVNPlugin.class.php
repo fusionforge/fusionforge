@@ -116,8 +116,7 @@ class SVNPlugin extends SCMPlugin {
 			$b .= '<tt>svn checkout svn://'.$this->getBoxForProject($project).$this->svn_root_fs.'/'.$project->getUnixName().$module.'</tt><br />';
 		}
 		if (forge_get_config('use_dav', 'scmsvn')) {
-			$b .= '<tt>svn checkout --username '.forge_get_config('anonsvn_login', 'scmsvn').' http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://' . $this->getBoxForProject($project). $this->svn_root_dav .'/'. $project->getUnixName() .$module.'</tt><br />';
-			$b .= _('The password is ').forge_get_config('anonsvn_password', 'scmsvn').'<br />';
+				$b .= '<p><tt>svn checkout http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. forge_get_config('scm_host'). '/anonscm/svn/'.$project->getUnixName().$module.'</tt></p>' ;
 		}
 		$b .= '</p>';
 		return $b;
@@ -153,7 +152,7 @@ class SVNPlugin extends SCMPlugin {
 				$b .= ' ';
 				$b .= _('Enter your site password when prompted.');
 				$b .= '</p>';
-				$b .= '<p><tt>svn checkout --username '.$d.' http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. forge_get_config('scm_host'). '/authsvn/'.$d.'/'.$project->getUnixName().$module.'</tt></p>' ;
+				$b .= '<p><tt>svn checkout --username '.$d.' http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. forge_get_config('scm_host'). '/authscm/'.$d.'/svn/'.$project->getUnixName().$module.'</tt></p>' ;
 			}
 		} else {
 			if (forge_get_config('use_ssh', 'scmsvn')) {
@@ -182,7 +181,7 @@ class SVNPlugin extends SCMPlugin {
 				$b .= ' ';
 				$b .= _('Enter your site password when prompted.');
 				$b .= '</p>';
-				$b .= '<p><tt>svn checkout --username <i>'._('developername').'</i> http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. $this->getBoxForProject($project) . $this->svn_root_dav .'/'.$project->getUnixName().$module.'</tt></p>' ;
+				$b .= '<p><tt>svn checkout --username <i>'._('developername').'</i> http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. forge_get_config('scm_host'). '/authscm/<i>'._('developername').'</i>/svn/'.$project->getUnixName().$module.'</tt></p>' ;
 			}
 		}
 		return $b;
@@ -377,9 +376,6 @@ class SVNPlugin extends SCMPlugin {
 
 			if ($project->enableAnonSCM()) {
 				fwrite($config_f, 'Use ScmsvnProjectWithAnon '.$project->getUnixName().'
-');
-			} else {
-				fwrite($config_f, 'Use ScmsvnProjectWithoutAnon '.$project->getUnixName().'
 ');
 			}
 			
