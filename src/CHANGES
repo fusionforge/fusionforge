@@ -29,6 +29,7 @@ Fusionforge-5.3.1:
 * Security: harden account name validation to detect trailing newlines (Inria)
 * Plugin scmhook: fix configuration reset when switching back&forth between SCM (Inria)
 * Plugin message: handle empty site message (Inria)
+* Plugin mediawiki: fix icon in project page link (Inria)
 * Admin User: fix unix_status [#666](TrivialDev)
 
 FusionForge-5.3:
