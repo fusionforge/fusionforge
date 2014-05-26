@@ -21,6 +21,7 @@ Fusionforge-5.3.1:
 * Home directories creation: optimize memory usage (Inria)
 * User SSH keys (ssh_create.php): deploy keys as-needed, mark deployed keys in the web interface, purge deleted keys (Inria)
 * SCM repositories creation: optimize memory usage (Inria)
+* SCM SVN: 'svnroot-access' update: abort in case of DB error rather than writing an incomplete file [#678] (Inria)
 * SCM Git: fix personal repositories creation which failed in some configurations (Inria)
 * SCM Git: optimize sub-repositories detection time (Inria)
 * Mailing lists: site-wide list configuration override in core:config_path/custom/mailman-config_list.conf (Inria)
@@ -39,6 +40,7 @@ Fusionforge-5.3.1:
 * Tracker: fix 404 in roadmap ajax call [#675] (TrivialDev)
 * Docman: fix massaction with IE8 [#642] (TrivialDev)
 * Docman: fix empty root folder in zipfile [#640] (TrivialDev)
+* Plugin mediawiki: fix icon in project page link (Inria)
 
 FusionForge-5.3:
 * Widget: MyArtifacts Enhancement : add monitored artifacts (TrivialDev)
