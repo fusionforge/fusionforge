@@ -5,10 +5,10 @@
 SetEnv GIT_PROJECT_ROOT {scmgit/repos_path}
 SetEnv GIT_HTTP_EXPORT_ALL
 
-ScriptAlias /git/ /usr/lib/git-core/git-http-backend/
-ScriptAliasMatch ^/authgit/[^/]+/(.*) /usr/lib/git-core/git-http-backend/$1
+ScriptAlias /anonscm/git/ /usr/lib/git-core/git-http-backend/
+ScriptAliasMatch ^/authscm/[^/]+/git/(.*) /usr/lib/git-core/git-http-backend/$1
 
-<LocationMatch "^/authgit/">
+<LocationMatch "^/authscm/[^/]+/git/">
   AuthType Basic
   AuthName "SCM for {core/forge_name}"
   AuthUserFile {core/data_path}/scmgit-userfile

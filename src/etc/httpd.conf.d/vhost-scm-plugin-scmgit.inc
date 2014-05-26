@@ -1,2 +1,2 @@
-SetEnvIf Request_URI ^/authgit/([^/]+)/ ITKUID=$1
-SetEnvIf Request_URI ^/authgit/([^/]+)/([^/]+)/ ITKGID=$2
+SetEnvIf Request_URI ^/authscm/([^/]+)/git/ ITKUID=$1
+SetEnvIf Request_URI ^/authscm/([^/]+)/git/([^/]+)/ ITKGID=$2

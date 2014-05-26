@@ -102,7 +102,7 @@ class GitPlugin extends SCMPlugin {
 			$clone_commands[] = 'git clone '.util_make_url('/anonscm/git/'.$project->getUnixName().'/'.$repo_name.'.git');
 			if (forge_get_config('use_smarthttp', 'scmgit')) {
 				$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
-				$clone_commands[] = 'git clone '.$protocol.'://'.forge_get_config('scm_host').'/git/'.$project->getUnixName().'/'.$repo_name.'.git';
+				$clone_commands[] = 'git clone '.$protocol.'://'.forge_get_config('scm_host').'/anonscm/git/'.$project->getUnixName().'/'.$repo_name.'.git';
 			}
 		}
 
@@ -203,7 +203,7 @@ class GitPlugin extends SCMPlugin {
 				$b .= '</p>';
 				$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
 				foreach ($repo_list as $repo_name) {
-					$b .= '<p><tt>git clone '.$protocol.'://'.$d.'@' . forge_get_config('scm_host').'/authgit/'.$d.'/'.$project->getUnixName() .'/'. $repo_name .'.git</tt></p>';
+					$b .= '<p><tt>git clone '.$protocol.'://'.$d.'@' . forge_get_config('scm_host').'/authscm/'.$d.'/git/'.$project->getUnixName() .'/'. $repo_name .'.git</tt></p>';
 				}
 			}
 			if (forge_get_config('use_dav', 'scmgit')) {
@@ -261,7 +261,7 @@ class GitPlugin extends SCMPlugin {
 				$b .= '</p>';
 				$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
 				foreach ($repo_list as $repo_name) {
-					$b .= '<p><tt>git clone '.$protocol.'://<i>'._('developername').'</i>@' . forge_get_config('scm_host').'/authgit/<i>'._('developername').'</i>/'.$project->getUnixName() .'/'. $repo_name .'.git</tt></p>';
+					$b .= '<p><tt>git clone '.$protocol.'://<i>'._('developername').'</i>@' . forge_get_config('scm_host').'/authscm/<i>'._('developername').'</i>/git/'.$project->getUnixName() .'/'. $repo_name .'.git</tt></p>';
 				}
 			}
 			if (forge_get_config('use_dav', 'scmgit')) {

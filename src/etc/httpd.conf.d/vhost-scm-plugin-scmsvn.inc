@@ -1,2 +1,2 @@
-SetEnvIf Request_URI ^/authsvn/([^/]+)/ ITKUID=$1
-SetEnvIf Request_URI ^/authsvn/([^/]+)/([^/]+)/ ITKGID=$2
+SetEnvIf Request_URI ^/authscm/([^/]+)/svn/ ITKUID=$1
+SetEnvIf Request_URI ^/authscm/([^/]+)/svn/([^/]+)/ ITKGID=$2
