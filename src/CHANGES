@@ -15,6 +15,7 @@ Fusionforge-5.3.1:
 * Tracker: fix 404 in roadmap ajax call [#675] (TrivialDev)
 * Tracker: user-friendly error message when tracker is not enabled in a project (Inria)
 * Forum: fix database error in rare conditions when saving position (Inria)
+* Forum: fix incorrect access check to post moderation (Inria)
 * Web UI: Fix issue with old cookie that prevented user login after upgrade (Inria)
 * Plugin activation/desactivation (including switching VCS): optimize role normalization (Inria)
 * Home directories creation: optimize memory usage (Inria)
