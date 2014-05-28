@@ -125,13 +125,13 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	protected function reload_apache()
 	{
 		$this->runCommand("service apache2 reload > /dev/null 2>&1 || service httpd reload > /dev/null 2>&1");
-		sleep (3); // Give it some time to become available again
+		sleep (5); // Give it some time to become available again
 	}
 
 	protected function reload_nscd()
 	{
 		$this->runCommand("service unscd restart > /dev/null 2>&1 || service nscd restart > /dev/null 2>&1 || true");
-		sleep (1); // Give it some time to wake up
+		sleep (5); // Give it some time to wake up
 	}
 
 	protected function init() {
