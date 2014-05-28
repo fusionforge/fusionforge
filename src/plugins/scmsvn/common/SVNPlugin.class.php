@@ -328,7 +328,7 @@ class SVNPlugin extends SCMPlugin {
 		}
 	}
 
-	function updateRepositoryList($params) {
+	function updateRepositoryList(&$params) {
 		$groups = $this->getGroups();
 
 		// Update WebDAV stuff
@@ -354,6 +354,10 @@ class SVNPlugin extends SCMPlugin {
 			$access_data .= '[' . $project->getUnixName() . ":/]\n";
 
 			$users = $engine->getUsersByAllowedAction('scm',$project->getID(),'read');
+			if ($users === false) {
+				$params['output'] .= $engine->getErrorMessage();
+				return false;
+			}
 			foreach ($users as $user) {
 				$svnusers[$user->getID()] = $user;
 				if (forge_check_perm_for_user($user,

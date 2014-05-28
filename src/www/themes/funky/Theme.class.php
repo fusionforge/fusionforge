@@ -210,20 +210,6 @@ class Theme extends Layout {
 			return '';
 		}
 
-		global $use_tooltips;
-
-		if ($use_tooltips) {
-			echo html_ao('script', array('type' => 'text/javascript'));
-			echo '	//<![CDATA[
-				jQuery(document).ready(
-					function() {
-						jQuery(document).tooltip();
-					}
-				);
-			//]]>'."\n";
-			echo html_ac(html_ap() -1);
-		}
-
 		$return = '<!-- start tabs -->'."\n";
 		$attrs = array('class' => 'tabGenerator fullwidth');
 
@@ -370,8 +356,9 @@ class Theme extends Layout {
 	 * @todo generalize this
 	 */
 	function headerJS() {
-		echo html_e('script', array('type' => 'text/javascript', 'src' => util_make_uri('/js/common.js')), '', false);
+		global $use_tooltips;
 
+		echo html_e('script', array('type' => 'text/javascript', 'src' => util_make_uri('/js/common.js')), '', false);
 		plugin_hook("javascript_file");
 
 		// invoke the 'javascript' hook for custom javascript addition
@@ -398,6 +385,17 @@ class Theme extends Layout {
 			});
 			//]]>'."\n";
 		echo html_ac(html_ap() -1);
+		if ($use_tooltips) {
+			echo html_ao('script', array('type' => 'text/javascript'));
+			echo '	//<![CDATA[
+				jQuery(document).ready(
+					function() {
+						jQuery(document).tooltip();
+					}
+				);
+			//]]>'."\n";
+			echo html_ac(html_ap() -1);
+		}
 	}
 }
 

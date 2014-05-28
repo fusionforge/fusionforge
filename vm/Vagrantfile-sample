@@ -20,6 +20,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Display graphics window, useful for running the Selenium testsuite
   config.vm.provider :virtualbox do |vb|
-      vb.gui = true
+    vb.gui = true
+    #vb.memory = 512
+    #vb.customize ["modifyvm", :id, "--cpus", "1"]
   end
 end
