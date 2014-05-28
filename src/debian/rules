@@ -304,14 +304,7 @@ install: build
 	cp $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/$(SOURCE_PATH)/etc/httpd.conf-fhs $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf
 
 # 	Remove those that need to be generated at install time
-	rm $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf.d/secrets.inc
-	rm $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf.d/vhost-list.inc
-	rm $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf.d/vhost-scm.inc
-	rm $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf.d/vhost-main.inc
-	rm $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf.d/vhost-projects.inc
-	rm $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf.d/projects-in-mainvhost.inc
-	rm $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf.d/plugin-scmsvn.inc
-	rm $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf.d/plugin-sysauthldap-secrets.inc
+	grep -l {[a-z_]*/[a-z_]*} $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf.d/* | xargs rm
 
 # 	Remove Windows files
 	rm -rf $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/usr/share/*/www/scm/viewvc/windows

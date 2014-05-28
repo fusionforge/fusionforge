@@ -1,0 +1,23 @@
+case "$1" in
+    configure)
+	    for i in plugin-sysauthldap-secrets.inc ; do
+		if [ -e /etc/gforge/httpd.conf.d/$i ] ; then
+		    sed -i -e s,/usr/share/gforge/src,/usr/share/gforge,g /etc/gforge/httpd.conf.d/$i
+		else
+		    cp /usr/share/gforge/etc/httpd.conf.d-fhs/$i /etc/gforge/httpd.conf.d/$i
+		    case $i in
+			*secrets*)
+			    chmod 600 /etc/gforge/httpd.conf.d/$i
+			    ;;
+		    esac
+		fi
+		if grep -q {[a-z_]*/[a-z_]*} /etc/gforge/httpd.conf.d/$i ; then
+		    PATH=/usr/share/gforge/bin:$PATH manage-apache-config.sh install $i
+		    mv /etc/gforge/httpd.conf.d/$i.generated /etc/gforge/httpd.conf.d/$i
+		fi
+	    done
+	;;
+    
+    abort-upgrade|abort-remove|abort-deconfigure)
+	;;
+esac
