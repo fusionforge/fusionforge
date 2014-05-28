@@ -5,8 +5,8 @@ Maintainer: Roland Mas <lolando@debian.org>
 Uploaders: Christian Bayle <bayle@debian.org>, Olivier Berger <obergix@debian.org>, Sylvain Beucler <beuc@debian.org>
 Build-Depends-Indep: sharutils, docbook-to-man, devscripts, gettext, isoquery, iso-codes
 Build-Depends: debhelper (>= 7), quilt (>= 0.40), perl, confget, moreutils
-Standards-Version: 3.9.4
+Standards-Version: 3.9.5
 Homepage: https://fusionforge.org/
-Vcs-Bzr: https://fusionforge.org/anonscm/bzr/deb-packaging/unstable/
-Vcs-Browser: https://fusionforge.org/scm/loggerhead/deb-packaging/unstable/
+Vcs-Git: https://fusionforge.org/anonscm/git/deb-packaging/deb-packaging.git
+Vcs-Browser: https://fusionforge.org/scm/browser.php?group_id=9
 XB-Apport: No
