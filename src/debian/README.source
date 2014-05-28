@@ -1,49 +1,34 @@
 The Debian-specific package sources are managed in a dedicated
 repository hosted on upstream's forge (Debian maintainers are
-currently also usptream developers) (see Vcs-Bzr for details).  
-This BZR repo contains a full copy of upstream sources, and is synced
-as need be.
+currently also upstream developers) (see Vcs-Git for details).
+This repo contains a full, synchronized copy of upstream sources.
 
-Source Package Format is 1.0.
-
-The orig tarball is constructed from upstream's sources top-level dir,
-depending on the version being present in the Debian packaging BZR
-repo, using src/utils/make-debian-orig.sh.
-
-
-fusionforge_5.1.orig.tar.gz is in sync with upstream's "v5.1" svn tag (rev. 13667)
-
-
-Packages of 5.1 are snapshots of the upstream svn branch "Branch_5_1",
-i.e. the source package's diffs include "non packaging" changes
-outside debian/ too, as direct patches to upstream sources.
-
-More precisely :
- - fusionforge-5.1.1-2 is in sync with upstream SVN contents as of rev. 14705;
- - fusionforge-5.1.1-1 is in sync with upstream SVN contents as of rev. 14498;
- - fusionforge-5.1-7 is in sync with upstream SVN contents as of rev. 14445;
- - fusionforge-5.1-6 is in sync with upstream SVN contents as of rev. 14319;
- - fusionforge-5.1-5 is in sync with upstream SVN contents as of rev. 14267;
- - fusionforge-5.1-4 is in sync with upstream SVN contents as of rev. 14120;
- - fusionforge-5.1-3 is in sync with upstream SVN contents as of rev. 14089;
- - fusionforge-5.1-2 is in sync with upstream SVN contents as of rev. 14087;
- - fusionforge-5.1-1 is in sync with upstream SVN contents as of rev. 14081.
-
-
-In addition to the above, this package uses quilt.  For more details,
-install the quilt package and consult
-/usr/share/doc/quilt/README.source.
+Packages of 5.3 are snapshots of the upstream branch "Branch_5_3".
+They include the full debian/ directory as well as a "debian-specific"
+directory which should be merged upstream.
 
 The following may provide more details on variations between the
 upstream main version and Debian's packaging :
 http://patch-tracker.debian.org/package/fusionforge
 
- -- Olivier Berger <obergix@debian.org>, Mon, 19 Aug 2013 14:50:53 +0200
-
+In addition to the above, this package uses quilt.  For more details,
+install the quilt package and consult
+/usr/share/doc/quilt/README.source.
 
 The debian/control file is generated. If the build process modifies
 it, you can commit the resulting file in the VCS repository.  There's
 no way to generate it before debuild or debclean is called, so we keep
 it in the repository.
 
- -- Sylvain Beucler <beuc@debian.org>, Sun, 16 Mar 2014 16:24:53 +0100
+The orig tarball is constructed from upstream's sources top-level dir,
+depending on the version being present in the Debian packaging repo,
+using src/deb-specific/make-debian-orig.sh.
+
+So a new release would be:
+VERSION=...
+src/deb-specific/make-debian-orig.sh
+tar xzf fusionforge_$VERSION.orig.tar.gz
+cd fusionforge-$VERSION/
+cp -a ../src/debian .
+debuild
+git tag debian/$VERSION

@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/bash -e
 
 # Creates the .orig tarball corresponding to the upstream archive,
 # base of the Debian packaging.
@@ -32,8 +32,14 @@ if [ -e ../fusionforge_$u.orig.tar.gz ] ; then
     exit 1
 fi
 
-git archive --format=tar --prefix=fusionforge-$u/ $tag > ../fusionforge_$u.orig.tar
-if tar tf ../fusionforge_$u.orig.tar | grep -q fusionforge-$u/debian ; then
-    tar -f ../fusionforge_$u.orig.tar --delete fusionforge-$u/debian
-fi
-gzip ../fusionforge_$u.orig.tar
+# Make the tarball using git-archive(1)
+# Remove debian/, as well as plugins/fckeditor and plugins/wiki:
+# we don't package them and they include sourceless files (#736107)
+# TODO: don't bother with debian/ when moving to format "3.0 (quilt)"
+git archive --format=tar --prefix=fusionforge-$u/ $tag | tar x
+(
+  cd fusionforge-$u/
+  rm -rf debian/ plugins/{fckeditor,wiki}/ etc/config.ini.d/{fckeditor,wiki}.ini etc/httpd.conf.d/plugin-{fckeditor,wiki}.inc
+)
+tar czf ../fusionforge_$u.orig.tar.gz --owner 0 --group 0 fusionforge-$u/
+rm -rf fusionforge-$u/

@@ -4,6 +4,8 @@ fusionforge (5.3+20140522-0) UNRELEASED; urgency=medium
   * gforge-mta-postfix: use proxy:pgsql: rather than pgsql: so that
     Postfix daemons can access PostgreSQL from within their chroot
   * gforge-mta-postfix: don't overwrite 'mydestination'
+  * Remove plugins 'fckeditor' and 'wiki' from source to avoid source-less
+    files issue (closes: #736107).
 
  -- Sylvain Beucler <beuc@debian.org>  Thu, 22 May 2014 10:39:52 +0200
 
