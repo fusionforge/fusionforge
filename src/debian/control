@@ -7,8 +7,8 @@ Build-Depends-Indep: sharutils, docbook-to-man, devscripts, gettext, isoquery, i
 Build-Depends: debhelper (>= 7), quilt (>= 0.40), perl, confget, moreutils
 Standards-Version: 3.9.4
 Homepage: https://fusionforge.org/
-Vcs-Bzr: https://fusionforge.org/anonscm/bzr/deb-packaging/unstable/
-Vcs-Browser: https://fusionforge.org/scm/loggerhead/deb-packaging/unstable/
+Vcs-Git: https://fusionforge.org/anonscm/git/deb-packaging/deb-packaging.git
+Vcs-Browser: https://fusionforge.org/scm/browser.php?group_id=9
 XB-Apport: No
 
 Package: fusionforge-standard
