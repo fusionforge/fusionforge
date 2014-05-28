@@ -4,4 +4,5 @@ Conflicts: sourceforge, @OLDPACKAGE@-cvs, @OLDPACKAGE@-common (<< ${source:Versi
 Replaces: @OLDPACKAGE@
 Provides: @OLDPACKAGE@
 Depends: debconf (>= 1.0.32) | debconf-2.0, ucf, @OLDPACKAGE@-common (>=${source:Version}), @OLDPACKAGE@-web-apache2 | @OLDPACKAGE@-web, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, ${misc:Depends}
+Recommends: @OLDPACKAGE@-lists-mailman
 Description: FusionForge collaborative development tool - minimal metapackage
