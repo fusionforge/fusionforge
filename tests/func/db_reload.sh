@@ -121,6 +121,14 @@ else
     exit 1
 fi
 
+for i in arch bzr cvs darcs git hg svn ; do
+    repopath=`FUSIONFORGE_NO_PLUGINS=true forge_get_config repos_path scm$i`
+    if [ -d $repopath ] && ls $repopath | grep -q .. ; then
+	echo "Removing $i repositories"
+	rm -rf $repopath/*
+    fi
+done
+
 # If the backup is there, restore it (it should now have been created by install.sh)
 if [ -d $dbdir.backup ]; then
 
