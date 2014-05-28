@@ -8,6 +8,7 @@ Fusionforge-5.3.1:
 * Tracker: fix email link in notification [#668] (TrivialDev)
 * Tracker: fix 404 in roadmap ajax call [#675] (TrivialDev)
 * Tracker: user-friendly error message when tracker is not enabled in a project (Inria)
+* Tracker: fix file size for text attachments (Inria)
 * Forum: fix database error in rare conditions when saving position (Inria)
 * Forum: fix incorrect access check to post moderation (Inria)
 * Web UI: Fix issue with old cookie that prevented user login after upgrade (Inria)
