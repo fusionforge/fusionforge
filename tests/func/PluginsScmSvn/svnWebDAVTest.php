@@ -55,12 +55,15 @@ class ScmSvnWebDAVTest extends FForge_SeleniumTestCase
 		$auth = "--username ".FORGE_ADMIN_USERNAME." --password ".FORGE_ADMIN_PASSWORD;
 		system("cd $t && svn checkout $auth $p projecta", $ret);
 		$this->assertEquals($ret, 0);
-
+		sleep(2);
 		system("echo 'this is a simple text' > $t/projecta/mytext.txt");
 		system("cd $t/projecta && svn add mytext.txt && svn commit $auth -m'Adding file'", $ret);
+		$this->assertEquals($ret, 0);
+		sleep(2);
 		system("echo 'another simple text' >> $t/projecta/mytext.txt");
 		system("cd $t/projecta && svn commit $auth -m'Modifying file'", $ret);
 		$this->assertEquals($ret, 0);
+		sleep(2);
 
 		// Check that the changes appear in svnweb
 		$this->open(ROOT);
