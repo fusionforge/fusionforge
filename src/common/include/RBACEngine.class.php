@@ -241,6 +241,8 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 
 	public function getUsersByAllowedAction ($section, $reference, $action = NULL) {
 		$roles = $this->getRolesByAllowedAction ($section, $reference, $action);
+		if ($roles === false)  // Error
+			return false;
 		$user_ids = array ();
 		foreach ($roles as $role) {
 			foreach ($role->getUsers() as $user) {

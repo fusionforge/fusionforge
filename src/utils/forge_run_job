@@ -22,6 +22,9 @@
  * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
+
+// Don't try to connect to the DB, just spawning a cronjob
+putenv('FUSIONFORGE_NO_DB=true');
         
 require (dirname(__FILE__).'/../common/include/env.inc.php');
 require_once $gfcommon.'include/pre.php';
@@ -63,6 +66,10 @@ $cmdline = $script;
 while ($arg = array_shift($argv)) {
 	$cmdline .= ' '.escapeshellarg($arg);
 }
+
+// Clean-up env
+putenv('FUSIONFORGE_NO_DB');
+putenv('FUSIONFORGE_NO_PLUGINS');
 	
 system ("$cmdline\n");
 

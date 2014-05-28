@@ -42,7 +42,7 @@ if ( (!$forum_id) || (!$group_id) || (!$msg_id) ) {
 	exit_missing_param('',array(_('Forum ID'),_('Project ID'),_('Message ID')),'forums');
 }
 
-session_require_perm ('forum', $group_id, 'moderate') ;
+session_require_perm ('forum', $forum_id, 'moderate') ;
 
 //print the message
 $g =& $fa->GetGroupObject();

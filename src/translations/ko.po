@@ -1,14 +1,13 @@
-# Korean translations for FusionForge package.
-# Copyright © 2008-2013 FusionForge Team
+# Korean translations for FusionForge.
+# Copyright © 2008-2013 FusionForge Team (msgids)
 # This file is distributed under the same license as the FusionForge package.
-# Automatically generated
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-02-07 16:11+0100\n"
-"PO-Revision-Date: 2014-04-29 13:54+0200\n"
+"PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
 "Language: ko\n"

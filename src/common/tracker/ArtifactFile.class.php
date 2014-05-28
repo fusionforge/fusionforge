@@ -142,14 +142,6 @@ class ArtifactFile extends Error {
 			$time = time();
 		}
 
-		// If $filetype is "text/plain", $bin_data convert UTF-8 encoding.
-		if (strcasecmp($filetype,"text/plain") === 0 &&
-		    function_exists('mb_convert_encoding') &&
-		    function_exists('mb_detect_encoding')) {
-			$bin_data = mb_convert_encoding($bin_data,'UTF-8',mb_detect_encoding($bin_data, "auto"));
-			$filesize = strlen($bin_data);
-		}
-
 		db_begin();
 
 		$res = db_query_params ('INSERT INTO artifact_file
