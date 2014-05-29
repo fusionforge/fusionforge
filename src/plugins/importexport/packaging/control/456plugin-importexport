@@ -1,0 +1,7 @@
+Package: @PACKAGE@-plugin-importexport
+Architecture: all
+Depends: @OLDPACKAGE@-common, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, @OLDPACKAGE@-web-apache2 | @OLDPACKAGE@-web, @OLDPACKAGE@-shell-postgresql | @OLDPACKAGE@-shell, php5-cli, ${misc:Depends}
+Provides: @OLDPACKAGE@-plugin-importexport
+Conflicts: @OLDPACKAGE@-plugin-importexport
+Replaces: @OLDPACKAGE@-plugin-importexport
+Description: Allows interoperability of the forge data - Import Export plugin

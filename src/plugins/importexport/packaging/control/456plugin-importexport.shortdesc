@@ -1,0 +1,4 @@
+This is an import export plugin for the FusionForge platform.
+It enables interopreability and enables the export of a project
+data in various formats. It also enables the import of data exported
+from other platforms.
