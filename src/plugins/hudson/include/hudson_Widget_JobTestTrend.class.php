@@ -27,6 +27,8 @@ require_once 'HudsonTestResult.class.php';
 
 class hudson_Widget_JobTestTrend extends HudsonJobWidget {
 
+	var $content;
+
 	function hudson_Widget_JobTestTrend($owner_type, $owner_id) {
 		$request =& HTTPRequest::instance();
 		if ($owner_type == WidgetLayoutManager::OWNER_TYPE_USER) {
@@ -38,14 +40,25 @@ class hudson_Widget_JobTestTrend extends HudsonJobWidget {
 		}
 		$this->Widget($this->widget_id);
 		$this->setOwner($owner_id, $owner_type);
+		if ($this->widget_id == 'plugin_hudson_project_jobtesttrend' && forge_check_perm('hudson', $this->group_id, 'read')) {
+			$this->content['title'] = '';
+			if ($this->job) {
+				$this->content['title'] = sprintf(_('%s Test Result Trend'), $this->job->getName());
+			} else {
+				$this->content['title'] = _('Test Result Trend');
+			}
+		} else {
+			$this->content['title'] = '';
+			if ($this->job) {
+				$this->content['title'] = sprintf(_('%s Test Result Trend'), $this->job->getName());
+			} else {
+				$this->content['title'] = _('Test Result Trend');
+			}
+		}
 	}
 
 	function getTitle() {
-		if ($this->job) {
-			return sprintf(_('%s Test Result Trend'), $this->job->getName());
-		} else {
-			return _('Test Result Trend');
-		}
+		return $this->content['title'];
 	}
 
 	function getDescription() {
@@ -94,5 +107,9 @@ class hudson_Widget_JobTestTrend extends HudsonJobWidget {
 			}
 		}
 		return $html;
+	}
+
+	function isAvailable() {
+		return isset($this->content['title']);
 	}
 }
