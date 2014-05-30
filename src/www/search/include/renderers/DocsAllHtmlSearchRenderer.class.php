@@ -4,7 +4,7 @@
  *
  * Copyright 2004 (c) Dominik Haas, GForge Team
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013,2014 Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of National Education
  * http://fusionforge.org
  *
@@ -87,11 +87,11 @@ class DocsAllHtmlSearchRenderer extends HtmlSearchRenderer {
 		$rowColor = 0;
 		for($i = 0; $i < $rowsCount; $i++) {
 			//section changed
-			$currentDocGroup = db_result($result, $i, 'project_name');
-			$currentDocGroupObject = group_get_object_by_publicname($currentDocGroup);
-			if(!forge_check_perm('project_read', $currentDocGroupObject->getID())) {
+			if(!forge_check_perm('docman', db_result($result, $i, 'project_name'), 'read')) {
 				continue;
 			}
+			$currentDocGroup = db_result($result, $i, 'project_name');
+			$currentDocGroupObject = group_get_object_by_publicname($currentDocGroup);
 			if ($lastDocGroup != $currentDocGroup) {
 				$return .= '<tr><td>'.html_image('ic/home16b.png', '10', '12', array('border' => '0')).'<b>'.util_make_link('/docman/?group_id='.$currentDocGroupObject->getID(),$currentDocGroup).'</b></td><td colspan="3">&nbsp;</td></tr>';
 				$lastDocGroup = $currentDocGroup;
