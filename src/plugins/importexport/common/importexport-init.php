@@ -20,7 +20,18 @@
  */
 
 global $gfplugins;
-require_once $gfplugins.'importexport/include/importexportPlugin.class.php' ;
+$required = $gfplugins.'importexport/include/importexportPlugin.class.php';
+
+// TODO: Fix the require issue.
+// Although file exists, it isn't readable(!?).
+// Tried copying the file, linking it, even adding the plugin in the DB(!?).
+// relative - absolute paths..same behaviour I am missing smthng here...
+if (file_exists($required) && is_readable($required)) {
+	require_once $required;
+}
+else {
+	return;
+}
 
 $importexportPluginObject = new importexportPlugin ;
 

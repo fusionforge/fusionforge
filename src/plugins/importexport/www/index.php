@@ -8,102 +8,145 @@
  * This is an example to watch things in action. You can obviously modify things and logic as you see fit
  */
 
-require_once '../../env.inc.php';
-require_once $gfwww.'include/pre.php';
-require_once $gfconfig.'plugins/importexport/config.php';
+require_once '../../../www/env.inc.php';
+require_once $gfcommon.'include/pre.php';
+require_once $gfwww.'admin/admin_utils.php';
 
-// the header that displays for the user portion of the plugin
-function importexport_Project_Header($params) {
-	global $DOCUMENT_ROOT,$HTML,$id;
-	$params['toptab']='importexport';
-	$params['group']=$id;
-	/*
-		Show horizontal links
+site_admin_header(array('title'=>_('Import/Export')));
+
+//$plugin = plugin_get_object('importexport');
+//$plugin_id = $plugin->getID();
+$func = getStringFromRequest('func');
+
+//$type = getStringFromRequest('type');
+//$id = getStringFromRequest('id');
+
+   /**
+	* defaultView - Renders when plugin is accessed with no arguments.
+	*
 	*/
-	site_project_header($params);
-}
+	function defaultView()
+	{
+		// TODO: Add the actions in a class to automate this.
+		echo '<br />';
+		echo '<h2>'._('Available Actions').'</h2>';
 
-// the header that displays for the project portion of the plugin
-function importexport_User_Header($params) {
-	global $DOCUMENT_ROOT,$HTML,$user_id;
-	$params['toptab']='importexport';
-	$params['user']=$user_id;
-	/*
-	 Show horizontal links
-	 */
-	site_user_header($params);
-}
-
-	$user = session_get_user(); // get the session user
-
-	if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
-		exit_error("Invalid User", "Cannot Process your request for this user.");
+		echo '<h3>'._('Import').'</h3>';
+		echo '<ul>';
+		echo '<li>';
+		echo util_make_link ('/plugins/importexport/?func=import_from_platform&',
+			      _('[Import Data from a different platform.]')) ;
+		echo '</li>';
+		echo '<li>';
+		echo util_make_link ('/plugins/importexport/?func=show_import_options',
+			      _('[Show available data for import, from a specific project]')) ;
+		echo '</li>';
+		echo '<li>';
+		echo util_make_link ('/plugins/importexport/?func=select_project_to_import_into',
+			      _('[Select the projects to import into]')) ;
+		echo '</li>';
+		echo '</ul>';
+		echo '<br />';
+		
+		echo '<h3>'._('Export').'</h3>';
+		echo '<ul>';
+		echo '<li>';
+		echo util_make_link ('/plugins/importexport/?func=importData&',
+			      _('[Export Data from a different platform.]')) ;
+		echo '</li>';
+		echo '<li>';
+		echo util_make_link ('/plugins/importexport/?func=show_export_options',
+			      _('[Show available data for export, from all projects]')) ;
+		echo '</li>';
+		echo '<li>';
+		echo util_make_link ('/plugins/importexport/?func=select_export',
+			      _('[Select a project to export its data]')) ;
+		echo '</li>';
+		echo '</ul>';
+		
 	}
 
-	$type = getStringFromRequest('type');
-	$id = getStringFromRequest('id');
-	$pluginname = getStringFromRequest('pluginname');
+	function importData()
+	{
+		echo util_make_link ('/plugins/importexport/?func=import_project&label_id=',
+			      _('[Import Data]')) ;
+		echo util_make_link ('/plugins/importexport/?func=export_project&project_id=',
+			      _('[Export Data from a specific project]')) ;
+	}
 
-	if (!$type) {
-		exit_error("Cannot Process your request","No TYPE specified"); // you can create items in Base.tab and customize this messages
-	} elseif (!$id) {
-		exit_error("Cannot Process your request","No ID specified");
-	} else {
-		if ($type == 'group') {
-			$group = group_get_object($id);
-			if ( !$group) {
-				exit_error("Invalid Project", "Inexistent Project");
-			}
-			if ( ! ($group->usesPlugin ( $pluginname )) ) {//check if the group has the importexport plugin active
-				exit_error("Error", "First activate the $pluginname plugin through the Project's Admin Interface");
-			}
-			$userperm = $group->getPermission();//we'll check if the user belongs to the group (optional)
-			if ( !$userperm->IsMember()) {
-				exit_error("Access Denied", "You are not a member of this project");
-			}
-			// other perms checks here...
-			importexport_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));
-			// DO THE STUFF FOR THE PROJECT PART HERE
-			echo "We are in the Project importexport plugin <br>";
-			echo "Greetings from planet " . $world; // $world comes from the config file in /etc
-		} elseif ($type == 'user') {
-			$realuser = user_get_object($id);//
-			if (!($realuser) || !($realuser->usesPlugin($pluginname))) {
-				exit_error("Error", "First activate the User's $pluginname plugin through Account Manteinance Page");
-			}
-			if ( (!$user) || ($user->getID() != $id)) { // if someone else tried to access the private importexport part of this user
-				exit_error("Access Denied", "You cannot access other user's personal $pluginname");
-			}
-			importexport_User_Header(array('title'=>'My '.$pluginname,'pagename'=>"$pluginname",'sectionvals'=>array($realuser->getUnixName())));
-			// DO THE STUFF FOR THE USER PART HERE
-			echo "We are in the User importexport plugin <br>";
-			echo "Greetings from planet " . $world; // $world comes from the config file in /etc
-		} elseif ($type == 'admin') {
-			$group = group_get_object($id);
-			if ( !$group) {
-				exit_error("Invalid Project", "Inexistent Project");
-			}
-			if ( ! ($group->usesPlugin ( $pluginname )) ) {//check if the group has the importexport plugin active
-				exit_error("Error", "First activate the $pluginname plugin through the Project's Admin Interface");
-			}
-			$userperm = $group->getPermission();//we'll check if the user belongs to the group
-			if ( !$userperm->IsMember()) {
-				exit_error("Access Denied", "You are not a member of this project");
-			}
-			//only project admin can access here
-			if ( $userperm->isAdmin() ) {
-				importexport_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));
-				// DO THE STUFF FOR THE PROJECT ADMINISTRATION PART HERE
-				echo "We are in the Project importexport plugin <font color=\"#ff0000\">ADMINISTRATION</font> <br>";
-				echo "Greetings from planet " . $world; // $world comes from the config file in /etc
-			} else {
-				exit_error("Access Denied", "You are not a project Admin");
-			}
+	function import_from_platform()
+	{
+		echo '<h2>'._('Import Data From Another Platform').'</h2>';
+		?>
+		<br />
+		<form name="importFromPlatform" method="post"  enctype="multipart/form-data" action="<?php echo util_make_url ('/plugins/importexport/?import_from_paltform', _('Upload file')) ; ?>">
+		<p>
+				 <?php echo _('Import from')._(': '); ?>
+		
+		<select type=select name="import_from">
+			<option value="Platform1">
+				Platform 1
+			</option>
+			<option value="Platform2">
+				Platform 2
+			</option>
+			<option value="Platform3">
+				Platform 3
+			</option>
+		</select>
+		</p><p>
+		<?php echo _('Import into project')._(': '); ?>
+		<select type=select name="import_into">
+			<option value="Project1">
+				Project 1
+			</option>
+			<option value="Project2">
+				Project 2
+			</option>
+			<option value="Project3">
+				Project 3
+			</option>
+		</select>
+	</p><p>
+		<?php echo _('Select file to import from')._(': '); ?>
+		<input type="file" name="importfrom" size="chars"> 
+	</p>
+	<?php echo util_make_link ('/plugins/importexport/',
+			      _('[Cancel]')) ; ?>
+		<input type="hidden" name="func" value="import">
+		<input type="submit" value="<?php echo _('Import') ?>">
+		<input type="hidden" value="<?php echo ''; ?>" name=label_id>
+		</form>
+		<?php
+	}
+
+	switch ($func) {
+		case 'import_from_platform':{
+			import_from_platform();
+			break;
+		}
+		case 'show_import_options':{
+			
+			break;
+		}
+		case 'select_import':{
+			
+			break;
+		}
+		case 'select_import':{
+			
+			break;
+		}
+		case 'import_project':{
+			
+			break;
+		}
+		default:{
+			defaultView();
+			break;
 		}
 	}
-
 	site_project_footer();
-
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"

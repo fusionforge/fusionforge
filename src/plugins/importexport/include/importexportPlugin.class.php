@@ -22,18 +22,25 @@
  */
 
 class importexportPlugin extends Plugin {
-	public function __construct($id=0) {
-		$this->Plugin($id) ;
+	public function __construct() {
+		$this->Plugin();
 		$this->name = "importexport";
-		$this->text = "importexport!"; // To show in the tabs, use...
-		$this->_addHook("user_personal_links");//to make a link to the user's personal part of the plugin
+		$this->text = _("Import/Export"); // To show in the tabs, use...
+
+/*		$this->_addHook("user_personal_links");//to make a link to the user's personal part of the plugin
 		$this->_addHook("usermenu");
 		$this->_addHook("groupmenu");	// To put into the project tabs
+*/
+		$this->_addHook('site_admin_option_hook');
+
+/*		$this->_addHook('project_admin_plugins');
 		$this->_addHook("groupisactivecheckbox"); // The "use ..." checkbox in editgroupinfo
 		$this->_addHook("groupisactivecheckboxpost"); //
 		$this->_addHook("userisactivecheckbox"); // The "use ..." checkbox in user account
 		$this->_addHook("userisactivecheckboxpost"); //
 		$this->_addHook("project_admin_plugins"); // to show up in the admin page fro group
+		$this->_addHook('group_delete');
+*/
 	}
 
 	function CallHook ($hookname, &$params) {
@@ -43,7 +50,7 @@ class importexportPlugin extends Plugin {
 			if ($G_SESSION->usesPlugin("importexport")) {
 				$param = '?type=user&id=' . $G_SESSION->getId() . '&pluginname=' . $this->name; // we indicate the part we're calling is the user one
 				echo $HTML->PrintSubMenu (array ($text),
-						  array ('/plugins/importexport/index.php' . $param ));
+						array ('/plugins/importexport/index.php' . $param ));
 
 			}
 		} elseif ($hookname == "groupmenu") {
@@ -103,7 +110,7 @@ class importexportPlugin extends Plugin {
 			if ($user->usesPlugin($this->name)) {
 				echo '	<p>' ;
 				echo util_make_link ("/plugins/importexport/index.php?id=$userid&type=user&pluginname=".$this->name,
-						     _('View Personal importexport')
+							_('View Personal importexport')
 					);
 				echo '</p>';
 			}
@@ -113,12 +120,16 @@ class importexportPlugin extends Plugin {
 			$group = group_get_object($group_id);
 			if ( $group->usesPlugin ( $this->name ) ) {
 				echo '<p>'.util_make_link ("/plugins/importexport/admin/index.php?id=".$group->getID().'&type=admin&pluginname='.$this->name,
-						     _('importexport Admin')).'</p>' ;
+							_('importexport Admin')).'</p>' ;
 			}
 		}
-		elseif ($hookname == "blahblahblah") {
-			// ...
+		elseif ($hookname == "site_admin_option_hook") {
+			echo '<li>'.$this->getAdminOptionLink().'</li>';
 		}
+	}
+
+	function getAdminOptionLink() {
+		return util_make_link('/plugins/'.$this->name.'/?type=globaladmin', _('Import/Export admin'), array('title' => _('Direct link to global configuration of this plugin')));
 	}
 }
 

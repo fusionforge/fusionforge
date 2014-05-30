@@ -1,4 +1,5 @@
-CREATE TABLE plugin_importexport_sample_data (
-	domain text,
-	ip_address text
+CREATE TABLE plugin_importexport_meta_data (
+	plugin_id text,
+	active boolean,
+	version text
 ) ;

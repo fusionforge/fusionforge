@@ -10,7 +10,7 @@
 
 require_once '../../../env.inc.php';
 require_once $gfwww.'include/pre.php';
-require_once $gfconfig.'plugins/importexport/config.php';
+//require_once $gfconfig.'plugins/importexport/config.php';
 
 // the header that displays for the user portion of the plugin
 function importexport_Project_Header($params) {
@@ -42,7 +42,7 @@ function importexport_User_Header($params) {
 
 	$type = getStringFromRequest('type');
 	$id = getStringFromRequest('id');
-	$pluginname = getStringFromRequest('pluginname');
+	$pluginname = getStringFromRequest('importexport');
 
 	if (!$type) {
 		exit_error("Cannot Process your request","No TYPE specified"); // you can create items in Base.tab and customize this messages

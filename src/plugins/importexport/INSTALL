@@ -1,0 +1,10 @@
+How to install importexport plugin.
+
+Currently the plugin is in development and many fields need to be experimented with, so do not trust the code to be fuctional at all times.
+
+* Make all the appropriate links to the installation of fusionforge.
+	$fusionforge/plugins -> $source/src/plugins/importexport/
+	$fusionforge/www/plugins/ -> $source/src/plugins/importexport
+	$fusionforge/common/ -> $source/src/plugins/importexport/common/
+	$fusionforge/etc/ -> $source/src/plugins/importexport/etc
+* You do not need to run the database script, since it is not yet used.
