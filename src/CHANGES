@@ -45,6 +45,7 @@ Fusionforge-5.3.1:
 * Plugin mediawiki: fix icon in project page link (Inria)
 * Plugin hudson: fix roles access in widgets [#683] (TrivialDev)
 * Admin User: fix unix_status [#666] (TrivialDev)
+* Search: fix roles based access to documents using the search engine [#682] (TrivialDev)
 
 FusionForge-5.3:
 * Widget: MyArtifacts Enhancement : add monitored artifacts (TrivialDev)
