@@ -32,6 +32,7 @@ Fusionforge-5.3.1:
 * Plugin scmhook: fix configuration reset when switching back&forth between SCM (Inria)
 * Plugin message: handle empty site message (Inria)
 * Plugin mediawiki: fix icon in project page link (Inria)
+* Plugin hudson: fix roles access in widgets [#683] (TrivialDev)
 * Admin User: fix unix_status [#666](TrivialDev)
 
 FusionForge-5.3:
