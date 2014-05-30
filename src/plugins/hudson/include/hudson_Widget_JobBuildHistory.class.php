@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
+ * Copyright 2014, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -25,6 +26,8 @@ require_once 'HudsonJob.class.php';
 
 class hudson_Widget_JobBuildHistory extends HudsonJobWidget {
 
+	var $content;
+
 	function hudson_Widget_JobBuildHistory($owner_type, $owner_id) {
 		$request =& HTTPRequest::instance();
 		if ($owner_type == WidgetLayoutManager::OWNER_TYPE_USER) {
@@ -36,16 +39,25 @@ class hudson_Widget_JobBuildHistory extends HudsonJobWidget {
 		}
 		$this->Widget($this->widget_id);
 		$this->setOwner($owner_id, $owner_type);
+		if ($this->widget_id == 'plugin_hudson_project_jobbuildhistory' && forge_check_perm('hudson', $this->group_id, 'read')) {
+			$this->content['title'] = '';
+			if ($this->job) {
+				$this->content['title'] .= sprintf(_("%s Builds History"), $this->job->getName());
+			} else {
+				$this->content['title'] .= _("Builds History");
+			}
+		} else {
+			$this->content['title'] = '';
+			if ($this->job) {
+				$this->content['title'] .= sprintf(_("%s Builds History"), $this->job->getName());
+			} else {
+				$this->content['title'] .= _("Builds History");
+			}
+		}
 	}
 
 	function getTitle() {
-		$title = '';
-		if ($this->job) {
-			$title .= sprintf(_("%s Builds History"), $this->job->getName());
-		} else {
-			$title .= _("Builds History");
-		}
-		return  $title;
+		return $this->content['title'];
 	}
 
 	function getDescription() {
@@ -94,5 +106,9 @@ class hudson_Widget_JobBuildHistory extends HudsonJobWidget {
 		} else {
 			return null;
 		}
+	}
+
+	function isAvailable() {
+		return isset($this->content['title']);
 	}
 }

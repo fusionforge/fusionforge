@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
+ * Copyright 2014, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -32,6 +33,7 @@ class hudson_Widget_ProjectJobsOverview extends HudsonOverviewWidget {
 	var $_all_status;
 	var $_global_status;
 	var $_global_status_icon;
+	var $content;
 
 	function hudson_Widget_ProjectJobsOverview($plugin) {
 		$this->Widget('plugin_hudson_project_jobsoverview');
@@ -48,6 +50,13 @@ class hudson_Widget_ProjectJobsOverview extends HudsonOverviewWidget {
 				'red' => 0,
 			);
 			$this->computeGlobalStatus();
+		}
+		if (forge_check_perm('hudson', $this->group_id, 'read')) {
+			$this->content['title'] = '';
+			if ($this->_use_global_status == "true") {
+				$this->content['title'] = '<img src="'.$this->_global_status_icon.'" title="'.$this->_global_status.'" alt="'.$this->_global_status.'" /> ';
+			}
+			$this->content['title'] .= _("Hudson Jobs");
 		}
 	}
 
@@ -69,12 +78,7 @@ class hudson_Widget_ProjectJobsOverview extends HudsonOverviewWidget {
 	}
 
 	function getTitle() {
-		$title = '';
-		if ($this->_use_global_status == "true") {
-			$title = '<img src="'.$this->_global_status_icon.'" title="'.$this->_global_status.'" alt="'.$this->_global_status.'" /> ';
-		}
-		$title .= _("Hudson Jobs");
-		return  $title;
+		return $this->content['title'];
 	}
 
 	function getDescription() {
@@ -115,5 +119,9 @@ class hudson_Widget_ProjectJobsOverview extends HudsonOverviewWidget {
 			$html .= '</table>';
 			return $html;
 		}
+	}
+
+	function isAvailable() {
+		return isset($this->content['title']);
 	}
 }
