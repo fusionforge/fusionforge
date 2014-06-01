@@ -6,6 +6,7 @@ Fusionforge-X.X:
 * [#664] General: Update the jQuery & jQuery UI frameworks (TrivialDev)
 * [#669] General: feedback, error_msg, warning_msg are now store in cookie. (TrivialDev)
 * Plugin scmhook: Update git post-receive eMail hook (tarent solutions GmbH, Teckids e.V.)
+* [#684] Widget Public Area: display FRS link (TrivialDev)
 
 Fusionforge-5.3.1:
 * Docman: Basic Webdav write mkcol support (TrivialDev)
