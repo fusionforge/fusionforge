@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2014 Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is a part of Fusionforge.
@@ -54,7 +54,7 @@ class Widget_ProjectPublicAreas extends Widget {
 		if ($project->usesTracker()) {
 			echo '<div class="public-area-box">'."\n";
 			$link_content = $HTML->getFollowPic(_('Tracker')) . ' ' . _('Tracker');
-			echo util_make_link ( '/tracker/?group_id=' . $group_id, $link_content);
+			echo util_make_link('/tracker/?group_id=' . $group_id, $link_content);
 
 			$result=db_query_params ('SELECT agl.*,aca.count,aca.open_count
 					FROM artifact_group_list agl
@@ -82,7 +82,7 @@ class Widget_ProjectPublicAreas extends Widget {
 					$tracker_stdzd_uri = util_make_url('/tracker/cm/project/'. $project->getUnixName() .'/atid/'. $group_artifact_id);
 					echo "\t".'<li about="'. $tracker_stdzd_uri . '" typeof="sioc:Container">'."\n";
 					print '<span rel="http://www.w3.org/2002/07/owl#sameAs">'."\n";
-					echo util_make_link ('/tracker/?atid='. $group_artifact_id . '&group_id='.$group_id.'&func=browse',$row['name']) . ' ' ;
+					echo util_make_link('/tracker/?atid='. $group_artifact_id . '&group_id='.$group_id.'&func=browse', $row['name']) . ' ' ;
 					echo "</span>\n"; // /owl:sameAs
 					printf(ngettext('(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', '(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', $row['open_count']), $row['open_count'], $row['count']);
 					echo '<br />';
@@ -109,7 +109,7 @@ class Widget_ProjectPublicAreas extends Widget {
 			}
 
 			$link_content = $HTML->getForumPic('') . ' ' . _('Public Forums');
-			echo util_make_link ( '/forum/?group_id=' . $group_id, $link_content);
+			echo util_make_link('/forum/?group_id=' . $group_id, $link_content);
 			print ' (';
 			printf(ngettext("<strong>%d</strong> message","<strong>%d</strong> messages",$messages_count),$messages_count);
 			print ' ' . _('in') . ' ';
@@ -124,7 +124,17 @@ class Widget_ProjectPublicAreas extends Widget {
 			echo '<div class="public-area-box">';
 			$link_content = $HTML->getDocmanPic('') . ' ' . _('DocManager: Project Documentation');
 			//	<a rel="sioc:container_of" xmlns:sioc="http://rdfs.org/sioc/ns#" href="'.util_make_url ('/docman/?group_id='.$group_id).'">';
-			print util_make_link( '/docman/?group_id='.$group_id, $link_content);
+			echo util_make_link('/docman/?group_id='.$group_id, $link_content);
+			echo '</div>';
+		}
+
+		// ##################### FRS
+
+		if ($project->usesFRS()) {
+			echo '<div class="public-area-box">';
+			$link_content = $HTML->getDownloadPic('') . ' ' . _('Files');
+			//	<a rel="sioc:container_of" xmlns:sioc="http://rdfs.org/sioc/ns#" href="'.util_make_url ('/frs/?group_id='.$group_id).'">';
+			echo util_make_link('/frs/?group_id='.$group_id, $link_content);
 			echo '</div>';
 		}
 
@@ -133,7 +143,7 @@ class Widget_ProjectPublicAreas extends Widget {
 		if ($project->usesMail()) {
 			echo '<div class="public-area-box">';
 			$link_content = $HTML->getMailPic('') . ' ' . _('Mailing Lists');
-			print util_make_link( '/mail/?group_id='.$group_id, $link_content);
+			print util_make_link('/mail/?group_id='.$group_id, $link_content);
 			$n = project_get_mail_list_count($group_id);
 			echo ' ';
 			printf(ngettext('(<strong>%s</strong> public mailing list)', '(<strong>%s</strong> public mailing lists)', $n), $n);
@@ -145,7 +155,7 @@ class Widget_ProjectPublicAreas extends Widget {
 		if ($project->usesPm()) {
 			echo '<div class="public-area-box">';
 			$link_content = $HTML->getPmPic('') . ' ' . _('Tasks');
-			print util_make_link( '/pm/?group_id='.$group_id, $link_content);
+			echo util_make_link('/pm/?group_id='.$group_id, $link_content);
 
 			$pgf = new ProjectGroupFactory ($project);
 			$pgs = $pgf->getProjectGroups();
@@ -156,7 +166,7 @@ class Widget_ProjectPublicAreas extends Widget {
 				echo "\n".'<ul class="task-manager">';
 				foreach ($pgs as $pg) {
 					echo "\n\t<li>";
-					print util_make_link ('/pm/task.php?group_project_id='.$pg->getID().'&group_id='.$group_id.'&func=browse',$pg->getName());
+					echo util_make_link('/pm/task.php?group_project_id='.$pg->getID().'&group_id='.$group_id.'&func=browse',$pg->getName());
 					echo '</li>' ;
 				}
 				echo "\n</ul>";
@@ -169,7 +179,7 @@ class Widget_ProjectPublicAreas extends Widget {
 		if ($project->usesSurvey()) {
 			echo '<div class="public-area-box">'."\n";
 			$link_content = $HTML->getSurveyPic('') . ' ' . _('Surveys');
-			echo util_make_link( '/survey/?group_id='.$group_id, $link_content);
+			echo util_make_link('/survey/?group_id='.$group_id, $link_content);
 			echo ' (<strong>'. project_get_survey_count($group_id) .'</strong> ' . _('surveys').')';
 			echo "\n</div>\n";
 		}
@@ -181,7 +191,7 @@ class Widget_ProjectPublicAreas extends Widget {
 
 			$link_content = $HTML->getScmPic('') . ' ' . _('SCM Repository');
 			//	print '<hr size="1" /><a rel="doap:repository" href="'.util_make_url ('/scm/?group_id='.$group_id).'">';
-			print util_make_link( '/scm/?group_id='.$group_id, $link_content);
+			echo util_make_link('/scm/?group_id='.$group_id, $link_content);
 
 			$hook_params = array () ;
 			$hook_params['group_id'] = $group_id ;
@@ -205,9 +215,9 @@ class Widget_ProjectPublicAreas extends Widget {
 				$link_content = $HTML->getFtpPic('') . ' ' . _('Anonymous FTP Space');
 				//		print '<a rel="doap:anonymous root" href="ftp://' . $project->getUnixName() . '.' . forge_get_config('web_host') . '/pub/'. $project->getUnixName() .'/">';
 				if (forge_get_config('use_project_vhost')) {
-					print util_make_link('ftp://' . $project->getUnixName() . '.' . forge_get_config('web_host') . '/pub/'. $project->getUnixName(), $link_content, false, true);
+					echo util_make_link('ftp://' . $project->getUnixName() . '.' . forge_get_config('web_host') . '/pub/'. $project->getUnixName(), $link_content, false, true);
 				} else {
-					print util_make_link('ftp://' . forge_get_config('web_host') . '/pub/'. $project->getUnixName(), $link_content, false, true);
+					echo util_make_link('ftp://' . forge_get_config('web_host') . '/pub/'. $project->getUnixName(), $link_content, false, true);
 				}
 				echo "\n</div>\n";
 			}
