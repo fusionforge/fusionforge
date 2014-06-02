@@ -1,4 +1,3 @@
-#! /usr/bin/php
 <?php
 /**
  * Extra field alias - Create aliases for the extra fields
