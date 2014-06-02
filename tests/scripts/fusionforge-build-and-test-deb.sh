@@ -115,10 +115,8 @@ if [ "$DIST" = wheezy ] ; then
     # ssh root@$HOST "rm /etc/apt/sources.list.d/jessie.list"
 
     # Grab a more recent loggerhead (without pulling everything)
-    if ! dpkg -l loggerhead | grep -q ^ii ; then
-	wget -c http://snapshot.debian.org/archive/debian/20121107T152130Z/pool/main/l/loggerhead/loggerhead_1.19%7Ebzr477-1_all.deb
-	aptitude install gdebi-core
-	gdebi --non-interactive loggerhead_1.19~bzr477-1_all.deb
+    if ! ssh root@$HOST dpkg -l loggerhead | grep -q ^ii ; then
+	ssh root@$HOST "wget -c http://snapshot.debian.org/archive/debian/20121107T152130Z/pool/main/l/loggerhead/loggerhead_1.19%7Ebzr477-1_all.deb; aptitude install gdebi-core; gdebi --non-interactive loggerhead_1.19~bzr477-1_all.deb"
     fi
 fi
 
