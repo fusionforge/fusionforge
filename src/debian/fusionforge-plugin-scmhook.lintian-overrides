@@ -1,0 +1,5 @@
+# Templates, not real executables
+fusionforge-plugin-scmhook: script-not-executable usr/share/gforge/plugins/scmhook/library/scmgit/skel/post-receive/head
+fusionforge-plugin-scmhook: script-not-executable usr/share/gforge/plugins/scmhook/library/scmsvn/skel/post-commit/head
+fusionforge-plugin-scmhook: script-not-executable usr/share/gforge/plugins/scmhook/library/scmsvn/skel/pre-commit/head
+fusionforge-plugin-scmhook: script-not-executable usr/share/gforge/plugins/scmhook/library/scmsvn/skel/pre-revprop-change/head
