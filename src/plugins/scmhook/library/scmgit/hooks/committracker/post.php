@@ -121,6 +121,7 @@ $git_tracker_debug = 0;
 chdir($repo_path);
 
 $UserName = trim(`git log -n 1 --format=%an $newrev`);
+$email    = trim(`git log -n 1 --format=%ae $newrev`);
 $date     = trim(`git log -n 1 --format=%ai $newrev`);
 $log      = trim(`git log -n 1 --format=%s $newrev`);
 $changed  = trim(`git log -n 1 --format=%b --name-only -p $newrev`);
@@ -131,6 +132,7 @@ if (isset($git_tracker_debug) && $git_tracker_debug == 1) {
 	fwrite($file,"arg :  " . print_r($argv,true) . " \n");
 	fwrite($file,"rev :  " . $newrev . " \n");
 	fwrite($file,"username :  " . $UserName . " \n");
+	fwrite($file,"email :  " . $email . " \n");
 	fwrite($file,"date :  " . $date . " \n");
 	fwrite($file,"log  :  " . $log . " \n");
 	fwrite($file,"changed :  " . $changed . " \n");
@@ -185,6 +187,7 @@ $i = 0;
 foreach ( $files as $onefile )
 {
 	$SubmitVars[$i]["UserName"]        = $UserName;
+	$SubmitVars[$i]["Email"]           = $email;
 	$SubmitVars[$i]["Repository"]      = $repo_path;
 	$SubmitVars[$i]["FileName"]        = $onefile['name'];
 	$SubmitVars[$i]["PrevVersion"]     = $onefile['previous'];
@@ -198,4 +201,4 @@ foreach ( $files as $onefile )
 
 $vars['data'] = urlencode(serialize($SubmitVars));
 $snoopy->submit($SubmitUrl, $vars);
-?>
+// echo $snoopy->results;
