@@ -2,7 +2,9 @@ fusionforge (5.3+20140603-1) unstable; urgency=medium
 
   [ Sylvain Beucler ]
   * New upstream  following the 5.3 upstream release.
-    (closes: #674660, #606076, #551928, #692583, #711098, #711095, #660200, #678025, #396164, #649184, #597709, #677329, #649989, #649894, #606439).
+    (closes: #674660, #606076, #551928, #692583, #711098)
+    (closes: #711095, #660200, #678025, #396164, #649184)
+    (closes: #597709, #677329, #649989, #649894, #606439).
   * gforge-mta-postfix: use proxy:pgsql: rather than pgsql: so that
     Postfix daemons can access PostgreSQL from within their chroot
   * gforge-mta-postfix: don't overwrite 'mydestination'
@@ -17,12 +19,16 @@ fusionforge (5.3+20140603-1) unstable; urgency=medium
   * Bump Standards to 3.9.5 (no changes).
   * Fix permissions or remove shebang when not needed
     (fixes 'executable-not-elf-or-script').
-  * gforge-db-remote: depend on ${misc:Depends} (fixes 'debhelper-but-no-misc-depends')
-  * Precise debhelper version (fixes 'debhelper-overrides-need-versioned-build-depends').
+  * gforge-db-remote: depend on ${misc:Depends}
+    (fixes 'debhelper-but-no-misc-depends')
+  * Precise debhelper version (fixes
+    'debhelper-overrides-need-versioned-build-depends').
   * Install ini files directly in /etc/fusionforge/, not through the
     /etc/gforge/* symlinks (fixes 'binaries-have-file-conflict')
-  * gforge-common: add Lintian overrides for group-writable 'non-standard-dir-perm'
-  * fusionforge-plugin-scmhook: add Lintian overrides for 'script-not-executable' on template files
+  * gforge-common: add Lintian overrides for group-writable
+    'non-standard-dir-perm'
+  * fusionforge-plugin-scmhook: add Lintian overrides for
+    'script-not-executable' on template files
   * fusionforge-plugin-admssw: word-wrap description (fixes
     'extended-description-line-too-long')
   * gforge-plugin-extratabs, gforge-plugin-globalsearch,
