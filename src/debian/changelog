@@ -1,7 +1,7 @@
 fusionforge (5.3+20140603-1) unstable; urgency=medium
 
   [ Sylvain Beucler ]
-  * New upstream  following the 5.3 upstream release.
+  * New upstream snapshot following the 5.3 upstream release.
     (closes: #674660, #606076, #551928, #692583, #711098)
     (closes: #711095, #660200, #678025, #396164, #649184)
     (closes: #597709, #677329, #649989, #649894, #606439).
