@@ -43,3 +43,6 @@ git archive --format=tar --prefix=fusionforge-$u/ $tag | tar x
 )
 tar czf ../fusionforge_$u.orig.tar.gz --owner 0 --group 0 fusionforge-$u/
 rm -rf fusionforge-$u/
+
+# Note: you need to build the package with:
+#debuild -i'etc|plugins'
