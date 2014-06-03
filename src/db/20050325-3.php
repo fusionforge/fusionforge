@@ -1,4 +1,3 @@
-#! /usr/bin/php
 <?php
 /**
  * GForge Extra Field Conversion Script
