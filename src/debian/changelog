@@ -1,7 +1,7 @@
-fusionforge (5.3+20140603-0) UNRELEASED; urgency=medium
+fusionforge (5.3+20140603-1) unstable; urgency=medium
 
   [ Sylvain Beucler ]
-  * New upstream release following the 5.3 upstream release.
+  * New upstream  following the 5.3 upstream release.
     (closes: #674660, #606076, #551928, #692583, #711098, #711095, #660200, #678025, #396164, #649184, #597709, #677329, #649989, #649894, #606439).
   * gforge-mta-postfix: use proxy:pgsql: rather than pgsql: so that
     Postfix daemons can access PostgreSQL from within their chroot
