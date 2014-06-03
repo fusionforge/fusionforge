@@ -235,51 +235,6 @@ Description: collaborative development tool - mailing-lists (using Mailman)
  .
  This package controls the interaction between FusionForge and Mailman.
 
-Package: gforge-plugin-extratabs
-Architecture: all
-Section: oldlibs
-Priority: extra
-Depends: fusionforge-plugin-headermenu, ${misc:Depends}
-Description: Headermenu plugin for FusionForge (transitional package)
- This package is only present for transitional purposes and can be
- safely removed.
-
-Package: gforge-plugin-globalsearch
-Architecture: all
-Section: oldlibs
-Priority: extra
-Depends: fusionforge-plugin-globalsearch, ${misc:Depends}
-Description: Globalsearch plugin for FusionForge (transitional package)
- This package is only present for transitional purposes and can be
- safely removed.
-
-Package: gforge-plugin-mediawiki
-Architecture: all
-Section: oldlibs
-Priority: extra
-Depends: fusionforge-plugin-mediawiki, ${misc:Depends}
-Description: Mediawiki plugin for FusionForge (transitional package)
- This package is only present for transitional purposes and can be
- safely removed.
-
-Package: gforge-plugin-projectlabels
-Architecture: all
-Section: oldlibs
-Priority: extra
-Depends: fusionforge-plugin-projectlabels, ${misc:Depends}
-Description: Projectlabels plugin for FusionForge (transitional package)
- This package is only present for transitional purposes and can be
- safely removed.
-
-Package: gforge-plugin-scmgit
-Architecture: all
-Section: oldlibs
-Priority: extra
-Depends: fusionforge-plugin-scmgit, ${misc:Depends}
-Description: Git plugin for FusionForge (transitional package)
- This package is only present for transitional purposes and can be
- safely removed.
-
 Package: fusionforge-plugin-admssw
 Architecture: all
 Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, php-http, fusionforge-plugin-doaprdf, libgraphite-php, ${misc:Depends}

@@ -1,4 +1,4 @@
-fusionforge (5.3+20140522-0) UNRELEASED; urgency=medium
+fusionforge (5.3+20140603-0) UNRELEASED; urgency=medium
 
   [ Sylvain Beucler ]
   * New upstream release following the 5.3 upstream release.
@@ -25,8 +25,12 @@ fusionforge (5.3+20140522-0) UNRELEASED; urgency=medium
   * fusionforge-plugin-scmhook: add Lintian overrides for 'script-not-executable' on template files
   * fusionforge-plugin-admssw: word-wrap description (fixes
     'extended-description-line-too-long')
+  * gforge-plugin-extratabs, gforge-plugin-globalsearch,
+    gforge-plugin-mediawiki, gforge-plugin-projectlabels,
+    gforge-plugin-scmgit: removed old transitional packages
+    (closes: #749935)
 
- -- Sylvain Beucler <beuc@debian.org>  Thu, 22 May 2014 10:39:52 +0200
+ -- Sylvain Beucler <beuc@debian.org>  Tue, 03 Jun 2014 16:27:56 +0200
 
 fusionforge (5.3+20140506-1) unstable; urgency=medium
 
