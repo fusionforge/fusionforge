@@ -9,7 +9,7 @@
 # svn export http://selenium.googlecode.com/svn/trunk selenium
 #
 
-MAJOR=2.35.0
+MAJOR=2.42.2
 MINOR=1
 SELENIUMURL=http://selenium.googlecode.com/files/selenium-server-standalone-$(MAJOR).jar
 
