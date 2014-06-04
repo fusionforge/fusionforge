@@ -1,4 +1,4 @@
-fusionforge (5.3+20140603-1) unstable; urgency=medium
+fusionforge (5.3+20140604-1) unstable; urgency=medium
 
   [ Sylvain Beucler ]
   * New upstream snapshot following the 5.3 upstream release.
@@ -36,7 +36,7 @@ fusionforge (5.3+20140603-1) unstable; urgency=medium
     gforge-plugin-scmgit: removed old transitional packages
     (closes: #749935)
 
- -- Sylvain Beucler <beuc@debian.org>  Tue, 03 Jun 2014 16:27:56 +0200
+ -- Sylvain Beucler <beuc@debian.org>  Wed, 04 Jun 2014 09:45:30 +0200
 
 fusionforge (5.3+20140506-1) unstable; urgency=medium
 
