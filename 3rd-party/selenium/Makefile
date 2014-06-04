@@ -21,7 +21,7 @@ dist:
 	reprepro -Vb $(REPOPATH)/debian --ignore=wrongdistribution --ignore=missingfile include $(DIST) $(BUILDRESULT)/$(CHANGEFILE)
 
 $(BUILDPLACE)/$(DSCFILE): $(BUILDPLACE)/selenium_$(UPSTREAM).orig.tar.gz
-	cd $(BUILDPLACE) ; dch -b -v $(VERS) -D unstable "Autobuilt from Selenium $(UPSTREAM) jar" ; dpkg-source -b selenium
+	cd $(BUILDPLACE)/selenium ; dch -b -v $(VERS) -D unstable "Autobuilt from Selenium $(UPSTREAM) jar" ; cd .. ; dpkg-source -b selenium
 
 $(BUILDPLACE)/selenium/selenium-server.jar: $(BUILDPLACE)/selenium/debian selenium.include
 	[ -d $@ ] || wget -O - $(SELENIUMURL) > $@
