@@ -138,10 +138,10 @@ if ( $isForm ) {
 <?php if ($isForm and $user->mayChangePass()) { ?>
   <tr><td colspan="2"><h2><?php echo ($request->getPref('passwd') ?  _("Change Password") :  _("Set Password")) ?></h2></td></tr>
 
-    <tr><td align="right"><?php echo _("New password") . _(":")?></td>
+    <tr><td class="align-right"><?php echo _("New password") . _(":")?></td>
         <td><input type="password" name="pref[passwd]" size="16" maxlength="16" class="text" value="" /></td>
         <td></td></tr>
-    <tr><td align="right"><?php echo _("Type it again") . _(":")?></td>
+    <tr><td class="align-right"><?php echo _("Type it again") . _(":")?></td>
         <td><input type="password" name="pref[passwd2]" size="16" maxlength="16" class="text" value="" /></td>
         <td></td></tr>
 <?php } ?>

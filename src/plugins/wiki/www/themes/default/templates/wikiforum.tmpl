@@ -18,14 +18,14 @@ $CDATE = $WikiTheme->formatDateTime($FORUM_CTIME);
   <table class="wikiforum wikiforum-list">
     <caption><?php echo _("New Topic")?>  &nbsp;&nbsp; <?php echo _("Post new")?> </caption>
     <col class="label" width="10%" /><col width="100%" />
-    <tr><th align="center"><?php echo _("Author")?></th><th align="center"><?php echo _("Message")?></th></tr>
+    <tr><th class="align-center"><?php echo _("Author")?></th><th class="align-center"><?php echo _("Message")?></th></tr>
 
     <tr>
-      <td align="left"><?php echo WikiLink($FORUM_CREATOR, 'if_known')?></td>
+      <td class="align-left"><?php echo WikiLink($FORUM_CREATOR, 'if_known')?></td>
       <td>
         <table class="wikiforum wikiforum-message">
-          <tr><td align="left"><?php echo fmt("Posted: %s",$CDATE)?></td>
-              <td align="right"><?php echo _("Reply")?></td></tr>
+          <tr><td class="align-left"><?php echo fmt("Posted: %s",$CDATE)?></td>
+              <td class="align-right"><?php echo _("Reply")?></td></tr>
           <tr><td><?php echo $CONTENT ?></td></tr>
         </table>
      </td>

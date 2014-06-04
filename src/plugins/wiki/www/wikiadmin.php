@@ -147,12 +147,12 @@ if (!$type) {
                 $desc = $wc->getWikiConfigDescription($c);
 
                 print "<tr>\n<td>$desc</td>\n" .
-                    "<td align=\"center\">" .
+                    '<td class="align-center">' .
                     "<input type=\"checkbox\" name=\"config[$c]\" value=\"1\"$checked /></td>\n" .
                     "</tr>\n";
             }
             print "</table>\n";
-            print "<p align=\"right\"><input type=\"submit\" value=\"" .
+            print '<p class="align-right"><input type="submit" value="' .
                 _("Save Configuration") .
                 "\" /></p>";
             print "</form>\n";

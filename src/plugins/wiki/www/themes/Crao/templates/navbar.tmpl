@@ -7,7 +7,7 @@
 <?php } ?>
 <div id="navbuttons">
 <table width="fullwidth">
-<tr class="middle"><td align="left">
+<tr class="middle"><td class="align-left">
 <?php echo WikiLink(_("RecentChanges"), "button") ?>
 <?php if (!empty($revision)) { ?>
 <?php echo $SEP?><?php echo Button("RelatedChanges", _("RelatedChanges")) ?>
@@ -15,7 +15,7 @@
 <?php echo $SEP?><?php echo Button(_("BackLinks"), _("BackLinks")) ?>
 <?php } ?>
 </td>
-<td align="right" width="150">
+<td class="align-right" width="150">
    <div id="search">
     <?php if (!empty($user) && $user->isSignedIn()) { ?>
      <?php echo WikiLink(_("UserPreferences"),'button',_("Preferences")) ?><?php echo $SEP?>
@@ -44,7 +44,7 @@
    title="<?php echo _("LiveSearch")?>" 
    onKeypress="liveSearchStart()"
    onblur="setTimeout('closeResults()',2000); if (this.value == '') {this.value = '<?php echo _("Search")?>';}" />
-   </div><br /><div align="left" id="LSResult"></div>
+   </div><br /><div class="align-left" id="LSResult"></div>
 <?php } else { ?>
    title="<?php echo _("TitleSearch")?>" />
    </div>
