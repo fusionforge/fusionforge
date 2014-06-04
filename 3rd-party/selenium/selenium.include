@@ -10,5 +10,5 @@ UPSTREAM=$(MAJOR).$(MINOR).$(MICRO)
 SELENIUMURL=http://selenium-release.storage.googleapis.com/$(MAJOR).$(MINOR)/selenium-server-standalone-$(UPSTREAM).jar
 
 DEBIANVERSION=1
-VERS=$(UPSTREAM)-$(DEBIANVERSION)
+VERS=$(UPSTREAM)+$(DIST)-$(DEBIANVERSION)
 
