@@ -6,7 +6,7 @@
   <input type="hidden" name="pagename" value="<?php echo _("TitleSearch")?>" />
 <?php } ?>
 <div id="navbuttons">
-<table width="fullwidth">
+<table class="fullwidth">
 <tr class="middle"><td class="align-left">
 <?php echo WikiLink(_("RecentChanges"), "button") ?>
 <?php if (!empty($revision)) { ?>
@@ -15,7 +15,7 @@
 <?php echo $SEP?><?php echo Button(_("BackLinks"), _("BackLinks")) ?>
 <?php } ?>
 </td>
-<td class="align-right" width="150">
+<td class="align-right; width:150px">
    <div id="search">
     <?php if (!empty($user) && $user->isSignedIn()) { ?>
      <?php echo WikiLink(_("UserPreferences"),'button',_("Preferences")) ?><?php echo $SEP?>
