@@ -66,6 +66,7 @@ htdocs/deb-repo/timestamp
 src/www/scm/viewvc/viewvc.org/*.tar.gz
 src/www/scm/viewvc/viewvc.org/*.zip
 *~
+result/*.tar.bz2
 # Debian packaging:
 /*.dsc
 /*.tar.gz
