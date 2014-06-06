@@ -1,4 +1,3 @@
-#! /usr/bin/php
 <?php
 /**
  * GForge Group Role Generator

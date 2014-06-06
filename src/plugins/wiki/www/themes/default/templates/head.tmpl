@@ -12,11 +12,7 @@
 <?php if (!empty($PAGE_KEYWORDS)) { ?>
 <meta name="keywords" content="<?php echo $PAGE_KEYWORDS?>" />
 <?php } ?>
-<meta name="language" content="<?php echo $GLOBALS['LANG']?>" />
-<meta name="document-type" content="Public" />
-<meta name="document-rating" content="General" />
 <meta name="generator" content="PhpWiki" />
-<meta name="PHPWIKI_VERSION" content="<?php echo PHPWIKI_VERSION?>" />
 <base href="<?php echo PHPWIKI_BASE_URL?>" />
 <link rel="shortcut icon" href="<?php echo $WikiTheme->getImageURL('favicon.ico')?>" />
 <?php /* The next few lines are wrapped in an odd manner to allow gettext string extraction: cd locale;make */ ?>
@@ -62,31 +58,18 @@ _("RecentChanges"), array('format' => 'atom'))?>" />
        */ ?>
 <?php if (!$user->isSignedIn()) {
       /* For users not signed in */ ?>
-<link rel="bookmark" title="<?php echo 
-_("SandBox")?>" href="<?php echo WikiURL(
-_("SandBox"))?>" />
-<link rel="bookmark" title="<?php echo 
-_("WikiWikiWeb")?>" href="<?php echo WikiURL(
-_("WikiWikiWeb"))?>" />
 <?php } ?>
 <link rel="alternate" type="application/x-wiki" title="Edit this page!" href="<?php echo WikiURL($page,array('action'=>'edit')) ?>" />
 <?php if ($user->isAdmin()) {
       /* Only for the Administrator */ ?>
-<link rel="bookmark" title="<?php echo 
-_("PhpWikiAdministration")?>" href="<?php echo WikiURL(
-_("PhpWikiAdministration"))?>" />
 <?php } ?>
 <?php if ($user->isSignedIn()) {
       /* For signed-in users */ ?>
-<link rel="bookmark" title="<?php echo 
-_("UserPreferences")?>" href="<?php echo WikiURL(
-_("UserPreferences"))?>" />
 <?php /* User's calendar page
        */
       $UserCalPageTitle = $user->getId() . SUBPAGE_SEPARATOR ._("Calendar");
       $UserCalPageUrl = WikiURL($UserCalPageTitle);
       ?>
-<link rel="bookmark" title="<?php echo $UserCalPageTitle ?>" href="<?php echo $UserCalPageUrl ?>" />
 <?php /* Today's calendar page for the user if it exists
        */
       $UserCalPageTodayTitle = $UserCalPageTitle . SUBPAGE_SEPARATOR . strftime("%Y-%m-%d", time()); //FIXME
@@ -94,7 +77,6 @@ _("UserPreferences"))?>" />
       if ($dbi->isWikiPage($UserCalPageTodayTitle)) {
           $UserCalPageTodayUrl = WikiURL($UserCalPageTodayTitle);
           ?>
-<link rel="bookmark" title="<?php echo $UserCalPageTodayTitle ?>" href="<?php echo $UserCalPageTodayUrl ?>" />
 <?php } ?>
 <?php } //end of links for signed-in user ?>
 <?php echo $WikiTheme->getCSS() ?><?php

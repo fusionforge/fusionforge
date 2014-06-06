@@ -1,4 +1,4 @@
-Date: Fri, 16 Dec 2011 12:42:36 +0000
+Date: Wed,  4 Jun 2014 15:23:23 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FChartPlugin;
@@ -11,8 +11,7 @@ The **Chart** [[Help:WikiPlugin|plugin]] allows to easily draw simple graphs on 
 Three graph formats are possible: line, bar and pie. In pie mode, negative values are ignored.
 
 The browser must support SVG in order graphs to be displayed.
-If you are using Internet Explorer 6 + Adobe SVGviewer (often included
-by default with Windows XP) or SVG-enabled Firefox (2.0 or above)
+If you are using a recent browser (Firefox, Opera, Chrome, Safari)
 then you should see the examples.
 
 == Usage ==

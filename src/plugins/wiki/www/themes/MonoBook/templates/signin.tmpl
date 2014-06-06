@@ -8,13 +8,13 @@
   <li><?php echo WikiLink($id . "/Discussion", 'auto' ,_("My Discussion")) ?></li>
   <li><?php echo WikiLink(_("UserPreferences"), "",_("My Preferences")) ?></li>
   <li><?php echo WikiLink(_("MyRecentChanges"), "",_("My Changes")) ?></li>
-  <li><?php echo HTML::a(array('href'=>'?auth[logout]=1'),$sp,_("Logout"),$sp) ?></li>
+  <li><?php echo HTML::a(array('href'=>'?'.urlencode('auth[logout]').'=1'),$sp,_("Logout"),$sp) ?></li>
   <?php } else { ?>
   <!-- Login or Register -->
   <?php if ($id) { ?>
     <li id="pt-userpage"><?php echo WikiLink($id, 'auto', HTML($sp,$id,$sp)) ?></li>
   <?php } ?>
-  <li id="pt-login"><?php echo HTML::a(array('href'=>'?auth[login]=1'),$sp,_("Sign In"),$sp) ?></li>
+  <li id="pt-login"><?php echo HTML::a(array('href'=>'?'.urlencode('auth[login]').'=1'),$sp,_("Sign In"),$sp) ?></li>
   <?php } ?>
  </ul>
 </div></div>

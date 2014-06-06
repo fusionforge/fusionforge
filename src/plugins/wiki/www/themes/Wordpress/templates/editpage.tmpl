@@ -14,7 +14,7 @@
       accept-charset="UTF-8">
   <?php if (!empty($_GET['start_debug'])) echo '<input type="hidden" name="start_debug" value="1">'; ?>
 <table class="toolbar fullwidth">
-<tr align="bottom">
+<tr class="bottom">
   <td>
     <?php echo $PAGE_LOCKED_MESSAGE ?>
     <?php echo $CONCURRENT_UPDATE_MESSAGE ?>
@@ -33,7 +33,7 @@
 </table>
 <table class="fullwidth">
     <tr><td><?php echo $EDIT_TOOLBAR ?></td>
-        <td align="right"><div id="editarea-size">
+        <td class="align-right"><div id="editarea-size">
     <?php echo _("Size").':'?>
     <label for="pref-editHeight"><b><?php echo _("H")?></b></label> <?php echo $HEIGHT_PREF?> 
     <label for="pref-editWidth"><b><?php echo _("W")?></b></label> <?php echo $WIDTH_PREF?>

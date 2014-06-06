@@ -2,7 +2,11 @@ Fusionforge-X.X:
 * [#658] Docman: Basic Webdav write mkcol, delete, put, move support (TrivialDev)
 * [#657] Docman: Add move mass actions (TrivialDev)
 * [#656] General: drop tipsy plugin, use standard jQuery UI tooltip already provided (TrivialDev)
-* Update git post-receive eMail hook (tarent solutions GmbH, Teckids e.V.)
+* [#663] General: FusionForge Theme & jQuery UI theme sync (TrivialDev)
+* [#664] General: Update the jQuery & jQuery UI frameworks (TrivialDev)
+* [#669] General: feedback, error_msg, warning_msg are now store in cookie. (TrivialDev)
+* Plugin scmhook: Update git post-receive eMail hook (tarent solutions GmbH, Teckids e.V.)
+* [#684] Widget Public Area: display FRS link (TrivialDev)
 
 Fusionforge-5.3.1:
 * Docman: Basic Webdav write mkcol support (TrivialDev)
@@ -37,14 +41,11 @@ Fusionforge-5.3.1:
 * Security: harden account name validation to detect trailing newlines (Inria)
 * Plugin scmhook: fix configuration reset when switching back&forth between SCM (Inria)
 * Plugin message: handle empty site message (Inria)
-* Admin User: fix unix_status [#666] (TrivialDev)
-* Tracker: fix email link in notification [#668] (TrivialDev)
-* Tracker: fix 404 in roadmap ajax call [#675] (TrivialDev)
-* Docman: fix massaction with IE8 [#642] (TrivialDev)
-* Docman: fix empty root folder in zipfile [#640] (TrivialDev)
 * Plugin mediawiki: fix icon in project page link (Inria)
 * Plugin hudson: fix roles access in widgets [#683] (TrivialDev)
 * Admin User: fix unix_status [#666] (TrivialDev)
+* Search: fix roles based access to documents using the search engine [#682] (TrivialDev)
+* Forum: disable monitoring when not logged [#686] (TrivialDev)
 
 FusionForge-5.3:
 * Widget: MyArtifacts Enhancement : add monitored artifacts (TrivialDev)

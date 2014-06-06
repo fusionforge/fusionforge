@@ -1,4 +1,4 @@
-Date: Fri,  7 Dec 2012 14:58:45 +0000
+Date: Wed,  4 Jun 2014 15:23:23 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FAsciiSVGPlugin;
@@ -13,8 +13,8 @@ Requires ENABLE_XHTML_XML = true
 
 Syntax: [[http://www1.chapman.edu/~jipsen/svg/asciisvgcommands.html]]
 
-If you are using Internet Explorer 6 + Adobe SVGviewer (often included
-by default with Windows XP) or SVG-enabled Firefox (2.0 or above)
+The browser must support SVG in order graphs to be displayed.
+If you are using a recent browser (Firefox, Opera, Chrome, Safari)
 then you should see the examples.
 
 == Usage ==

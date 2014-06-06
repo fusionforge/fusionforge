@@ -102,6 +102,7 @@ if [ $? -eq 0 ]; then
     echo "WARNING: It is likely that the mounted /tmp could be too short. If you experience a build error bellow, Try make some room on the FS and reboot, first."
 fi
 
+debian/rules debian/control  # re-gen debian/control from packaging/*
 dch --newversion $(dpkg-parsechangelog | sed -n 's/^Version: \([0-9.]\+\(\~rc[0-9]\)\?\).*/\1/p')+$(date +%Y%m%d%H%M)-1 --distribution local --force-distribution "Autobuilt."
 debuild --no-lintian --no-tgz-check -us -uc -tc  # using -tc so 'bzr st' is readable
 

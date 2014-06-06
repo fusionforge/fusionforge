@@ -69,7 +69,6 @@ class RssWriter2 extends RssWriter
     {
         header("Content-Type: application/rss+xml; charset=" . RSS_ENCODING);
         echo('<' . '?xml version="1.0" encoding="' . RSS_ENCODING . '"?' . ">\n");
-        //printf("<!-- generator=\"PhpWiki-%s\" -->\n", PHPWIKI_VERSION);
         //RSS2 really is 0.92
         echo '<!DOCTYPE rss SYSTEM "http://my.netscape.com/publish/formats/rss-0.92.dtd">', "\n";
         echo "<!DOCTYPE rss [<!ENTITY % HTMLlat1 PUBLIC \"-//W3C//ENTITIES Latin 1 for XHTML//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml-lat1.ent\">\n";

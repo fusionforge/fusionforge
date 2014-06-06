@@ -1557,7 +1557,7 @@ class PageList
         }
         $table = HTML::table(array('class' => 'fullwidth pagelist'));
         if ($caption) {
-            $table->pushContent(HTML::caption(array('align' => 'top'), $caption));
+            $table->pushContent(HTML::caption(array('class' => 'top'), $caption));
         }
 
         $row = HTML::tr();

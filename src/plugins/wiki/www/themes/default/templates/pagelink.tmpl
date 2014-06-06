@@ -12,15 +12,15 @@ if ($WikiTheme->DUMP_MODE) {
 }
 ?>
 <tr><td style="width:100%" colspan="<?php echo $COLS ?>"><table class="fullwidth wikipaging"><tr class="wikipaging">
-  <td class="wikipaging<?php echo $PREV ? "-enabled" : "-disabled" ?>" align="left">
+  <td class="align-left wikipaging<?php echo $PREV ? "-enabled" : "-disabled" ?>">
       <?php echo $PREV ? HTML::a(array('href'=>$FIRST_LINK), "|<<") : "|<<" ?>
       &nbsp;
       <?php echo $PREV ? HTML::a(array('href'=>$PREV_LINK), "<< " . _("Prev")) : "<<" ?>
   </td>
-  <td class="wikipaging-enabled" align="center">
+  <td class="wikipaging-enabled align-center">
       <?php echo fmt(" - %d / %d - ", $ACTPAGE, $NUMPAGES) ?>
   </td>
-  <td class="wikipaging<?php echo $NEXT ? "-enabled" : "-disabled" ?>" align="right">
+  <td class="align-right wikipaging<?php echo $NEXT ? "-enabled" : "-disabled" ?>">
       <?php echo $NEXT ? HTML::a(array('href'=>$NEXT_LINK), _("Next") . " >>") : ">>" ?>
       &nbsp;
       <?php echo $NEXT ? HTML::a(array('href'=>$LAST_LINK), ">>|") : ">>|" ?>

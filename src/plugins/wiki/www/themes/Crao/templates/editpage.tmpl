@@ -6,9 +6,9 @@
      <?php echo fmt("Please continue editing.  (You'll find your %s at the bottom of the page.)",
           /* HTML::a(array("href" => "#editarea"), */ _("edit area") /*)  */) ?>
   </p>
-  <hr class="printer" noshade="noshade" />
+  <hr class="printer" />
   <?php echo $PREVIEW_CONTENT ?>
-  <hr class="printer" noshade="noshade" />
+  <hr class="printer" />
 <?php } ?>
 <?php echo $PAGE_LOCKED_MESSAGE ?>
 <?php echo $CONCURRENT_UPDATE_MESSAGE ?>
@@ -31,7 +31,7 @@
   <br class="clear-floats" />
   <table class="fullwidth">
     <tr><td><?php echo $EDIT_TOOLBAR ?></td>
-        <td align="right"><div id="editarea-size">
+        <td class="align-right"><div id="editarea-size">
     <?php echo _("Size").':'?>
     <label for="pref-editHeight"><b><?php echo _("H")?></b></label> <?php echo $HEIGHT_PREF?> 
     <label for="pref-editWidth"><b><?php echo _("W")?></b></label> <?php echo $WIDTH_PREF?>
@@ -68,7 +68,7 @@
     <?php echo $AUTHOR_MESSAGE?>
     <label><?php echo Template('signin', array('FORMNAME' => 'editpage')) ?></label>
   </fieldset>
-<hr noshade="noshade" />
+<hr />
 <div class="wiki-edithelp">
 <!-- FIXME: do we need this at all?  If so, it could probably be moved to TextFormattingRules -->
 <p><?php echo fmt("See %s tips for editing.", WikiLink(_("Help")."/"._("GoodStyle"))) ?></p>

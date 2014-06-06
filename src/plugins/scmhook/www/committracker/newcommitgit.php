@@ -47,6 +47,7 @@ if(is_array($SubmittedVars)) {
 	foreach ($SubmittedVars as $SubmittedVar) {
 		$Configs[$i] = array();
 		$Configs[$i]['UserName']        = $SubmittedVar['UserName'];
+		$Configs[$i]['Email']           = $SubmittedVar['Email'];
 		//$Configs[$i]['UserName']        = 'def_admin';   use this to make tests, just replace with a gforge user
 		$Configs[$i]['Repository']      = $SubmittedVar['Repository'];
 		$Configs[$i]['FileName']        = $SubmittedVar['FileName'];
@@ -78,6 +79,7 @@ function parseConfig(&$Config)
 	$Result['check'] = true;
 	$Repository = $Config['Repository'];
 	$UserName = $Config['UserName'];
+	$email = $Config['Email'];
 
 	if($repos_path[strlen($repos_path)-1]!='/') {
 		$repos_path.='/';
@@ -107,8 +109,20 @@ function parseConfig(&$Config)
 
 	if (!$Result['user'] || !is_object($Result['user']) ||
 		$Result['user']->isError() || !$Result['user']->isActive()) {
-		$Result['check'] = false;
-		$Result['error'] = 'Invalid User';
+
+		// Try searching using real name or email address instead.
+		$res=db_query_params('SELECT user_name FROM users WHERE lower(realname)=$1 OR lower(email)=$2',
+			array(strtolower($UserName), strtolower($email)));
+		if ($res && db_numrows($res) > 0) {
+			$Config['UserName'] = db_result($res,0,'user_name');
+			$Result['user'] = user_get_object_by_name($Config['UserName']);
+		}
+
+		if (!$Result['user'] || !is_object($Result['user']) ||
+			$Result['user']->isError() || !$Result['user']->isActive()) {
+			$Result['check'] = false;
+			$Result['error'] = 'Invalid User';
+		}
 	}
 	return $Result;
 }
