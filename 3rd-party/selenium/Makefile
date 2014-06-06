@@ -20,8 +20,8 @@ $(BUILDRESULT)/$(CHANGEFILE): $(BUILDPLACE)/$(DSCFILE)
 dist:
 	reprepro -Vb $(REPOPATH)/debian --ignore=wrongdistribution --ignore=missingfile include $(DIST) $(BUILDRESULT)/$(CHANGEFILE)
 
-$(BUILDPLACE)/$(DSCFILE): $(BUILDPLACE)/selenium_$(MAJOR).orig.tar.gz
-	cd $(BUILDPLACE) ; dpkg-source -b selenium
+$(BUILDPLACE)/$(DSCFILE): $(BUILDPLACE)/selenium_$(UPSTREAM).orig.tar.gz
+	cd $(BUILDPLACE)/selenium ; dch -b -v $(VERS) -D unstable "Autobuilt from Selenium $(UPSTREAM) jar" ; cd .. ; dpkg-source -b selenium
 
 $(BUILDPLACE)/selenium/selenium-server.jar: $(BUILDPLACE)/selenium/debian selenium.include
 	[ -d $@ ] || wget -O - $(SELENIUMURL) > $@
@@ -29,7 +29,7 @@ $(BUILDPLACE)/selenium/selenium-server.jar: $(BUILDPLACE)/selenium/debian seleni
 $(BUILDPLACE)/selenium/debian:
 	[ -d $@ ] || cp -r selenium $(BUILDPLACE)
 
-$(BUILDPLACE)/selenium_$(MAJOR).orig.tar.gz: $(BUILDPLACE)/selenium/selenium-server.jar
+$(BUILDPLACE)/selenium_$(UPSTREAM).orig.tar.gz: $(BUILDPLACE)/selenium/selenium-server.jar
 	[ -d $@ ] || (cd $(BUILDPLACE) ; tar cvzf $@ selenium/selenium-server.jar)
 
 clean:

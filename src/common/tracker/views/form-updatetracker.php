@@ -50,12 +50,14 @@ $ath->adminHeader(array('title'=>sprintf(_('Update settings for %s'),
 		?>
 	</p>
 	<p>
-		<strong><?php echo _('Description')._(':'); ?></strong><br />
+		<label for="description">
+			<strong><?php echo _('Description').utils_requiredField()._(':'); ?></strong><br />
+		</label>
 		<?php if ($ath->getDataType()) {
 			echo $ath->getDescription();
 		} else {
 			?>
-			<input type="text" name="description" value="<?php echo $ath->getDescription(); ?>" size="50" />
+			<input type="text" id="description" name="description" required="required" value="<?php echo $ath->getDescription(); ?>" size="50" />
 			<?php
 		}
 		?>

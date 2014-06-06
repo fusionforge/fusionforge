@@ -17,11 +17,11 @@ git config --global color.branch auto
 # Install sources
 if [ -e /etc/debian_version ]; then
     apt-get -y --force-yes install git
-    repo='git://fusionforge.org/deb-packaging/deb-packaging.git -b debian/master'
+    repo='git://fusionforge.org/deb-packaging/deb-packaging.git -b debian/5.3'
 else
     echo "TODO: instructions for CentOS" >> /etc/issue
     yum -y install git
-    repo=git://fusionforge.org/fusionforge/fusionforge.git
+    repo='git://fusionforge.org/fusionforge/fusionforge.git -b Branch_5_3'
 fi
 
 cd /usr/src/

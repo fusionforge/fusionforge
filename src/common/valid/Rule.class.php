@@ -25,26 +25,26 @@
  */
 class Rule {
 	/**
-	* @access private
-	*/
+	 * @access private
+	 */
 	var $error;
 
 	/**
-	* Check if $val is a valid not.
-	*
-	* @param  String  $val Value to check.
-	* @return Boolean
-	*/
+	 * Check if $val is a valid not.
+	 *
+	 * @param  String  $val Value to check.
+	 * @return Boolean
+	 */
 	function isValid($val) {
 		trigger_error(get_class($this).'::isValid() => Not yet implemented', E_USER_ERROR);
 	}
 
 	/**
-	* Default error message if rule is not apply on value.
-	*
-	* @param  string  $key Value to check.
-	* @return boolean
-	*/
+	 * Default error message if rule is not apply on value.
+	 *
+	 * @param  string  $key Value to check.
+	 * @return boolean
+	 */
 	function getErrorMessage($key) {
 		return $this->error;
 	}

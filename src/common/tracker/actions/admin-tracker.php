@@ -67,12 +67,12 @@ echo _('Create/change generic response messages for the tracker.');
 echo '</p>';
 
 echo '<p>';
-echo util_make_link ('/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&clone_tracker=1', '<strong>'._('Apply Template Tracker').'</strong>');
+echo util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&clone_tracker=1', '<strong>'._('Apply Template Tracker').'</strong>');
 echo '<br />';
 echo _('Duplicate parameters and fields from a template trackers in this one.');
 echo '</p>';
 
-echo '<p>' . util_make_link ('/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&delete=1', '<strong>'._('Delete').'</strong>');
+echo '<p>'.util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&delete=1', '<strong>'._('Delete').'</strong>');
 echo '<br />';
 echo _('Permanently delete this tracker.');
 echo '</p>';

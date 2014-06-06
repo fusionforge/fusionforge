@@ -70,7 +70,7 @@ if (!$ac || !is_object($ac)) {
 			echo $HTML->warning_msg(_('It is not recommended that you change the custom field name because other things are dependent upon it. When you change the custom field name, all related items will be changed to the new name.'));
 			?>
 			<p>
-			<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
+			<input type="submit" name="post_changes" value="<?php echo _('Update') ?>" /></p>
 			</form>
 		<?php
 		$ath->footer();

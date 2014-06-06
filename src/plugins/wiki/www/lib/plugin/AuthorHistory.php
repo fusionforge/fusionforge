@@ -105,7 +105,7 @@ class WikiPlugin_AuthorHistory
         if (!($page == 'all')) {
             $p = $dbi->getPage($page);
 
-            $thead->pushContent(HTML::tr(HTML::th(array('align' => 'right'),
+            $thead->pushContent(HTML::tr(HTML::th(array('class' => 'align-right'),
                     _("Version")),
                 $includeminor ? HTML::th(_("Minor")) : "",
                 HTML::th(_("Author")),
@@ -123,13 +123,13 @@ class WikiPlugin_AuthorHistory
                     $difflink = Button(array('action' => 'diff',
                             'previous' => 'minor'),
                         $rev->getversion(), $rev);
-                    $tr = HTML::tr(HTML::td(array('align' => 'right'),
+                    $tr = HTML::tr(HTML::td(array('class' => 'align-right'),
                             $difflink, $nbsp),
                         $includeminor ? (HTML::td($nbsp, ($isminor ? "minor" : "major"), $nbsp)) : "",
                         HTML::td($nbsp, WikiLink($rev->get('author'),
                             'if_known'), $nbsp),
                         HTML::td($nbsp, $rev->get('summary')),
-                        HTML::td(array('align' => 'right'),
+                        HTML::td(array('class' => 'align-right'),
                             $WikiTheme->formatdatetime($rev->get('mtime')))
                     );
 
@@ -147,7 +147,7 @@ class WikiPlugin_AuthorHistory
             //search all pages for all edits by this author
 
             $thead->pushContent(HTML::tr(HTML::th(_("Page Name")),
-                HTML::th(array('align' => 'right'),
+                HTML::th(array('class' => 'align-right'),
                     _("Version")),
                 $includeminor ? HTML::th(_("Minor")) : "",
                 HTML::th(_("Summary")),
@@ -169,11 +169,11 @@ class WikiPlugin_AuthorHistory
                             HTML::td($nbsp,
                                 ($isminor ? $rev->_pagename : WikiLink($rev->_pagename, 'auto'))
                             ),
-                            HTML::td(array('align' => 'right'),
+                            HTML::td(array('class' => 'align-right'),
                                 $difflink, $nbsp),
                             $includeminor ? (HTML::td($nbsp, ($isminor ? "minor" : "major"), $nbsp)) : "",
                             HTML::td($nbsp, $rev->get('summary')),
-                            HTML::td(array('align' => 'right'),
+                            HTML::td(array('class' => 'align-right'),
                                 $WikiTheme->formatdatetime($rev->get('mtime')), $nbsp)
                         );
 

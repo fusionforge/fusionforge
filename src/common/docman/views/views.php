@@ -39,7 +39,4 @@ switch ($view) {
 		include ($gfcommon.'docman/views/'.$view.'.php');
 		break;
 	}
-	default: {
-		include ($gfcommon.'docman/views/help.php');
-	}
 }

@@ -91,7 +91,7 @@ for ($i=0; $i<$rows; $i++) {
 	if ($status == MAIL__MAILING_LIST_IS_REQUESTED) {	// New list?
 		$err .= "Creating Mailing List: $listname\n";
 		//$lcreate_cmd = $path_to_mailman."/bin/newlist -q $listname@".forge_get_config('lists_host')." $email $listpassword &> /dev/null";
-		$lcreate_cmd = $path_to_mailman."/bin/newlist -q $listname $email $listpassword";
+		$lcreate_cmd = $path_to_mailman."/bin/newlist -q $listname $email $listpassword >/dev/null";
 		$err .= "Command to be executed is $lcreate_cmd\n";
 		passthru($lcreate_cmd, $failed);
 		if ($failed) {
@@ -131,7 +131,7 @@ for ($i=0; $i<$rows; $i++) {
 				continue;
 			}
 			$fixurl_cmd = escapeshellcmd($path_to_mailman."/bin/withlist -l -r fix_url $listname -u ".forge_get_config('lists_host'));
-			passthru($fixurl_cmd, $failed);
+			passthru("$fixurl_cmd >/dev/null 2>/dev/null", $failed);
 			if (!$failed) {
 				db_query_params('UPDATE mail_group_list set status=$1 WHERE status=$2 and group_list_id=$3',
 						array(MAIL__MAILING_LIST_IS_CONFIGURED,
@@ -302,7 +302,7 @@ for($k = 0; $k < $rows; $k++) {
 		break;
 	}
 
-	$rm_cmd = forge_get_config('mailman_path')."/bin/rmlist -a $deleted_mail_list";
+	$rm_cmd = forge_get_config('mailman_path')."/bin/rmlist -a $deleted_mail_list >/dev/null";
 	$err .= "Command to be executed is $rm_cmd";
 	passthru($rm_cmd, $failed);
 	if($failed) {

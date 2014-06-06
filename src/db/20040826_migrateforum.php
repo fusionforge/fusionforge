@@ -1,4 +1,3 @@
-#! /usr/bin/php
 <?php
 /**
  * GForge Forum Renamer - forum names are now unix-format for email gateway

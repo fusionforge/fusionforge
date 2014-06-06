@@ -98,7 +98,7 @@ if (count($data) == 0) {
 	echo $HTML->information(_('There have been no viewed documents for this project yet.'));
 } else {
 	echo html_ao('script', array('type' => 'text/javascript'));
-	echo '//<![CDATA[';
+	echo '//<![CDATA['."\n";
 	echo 'var ticks = new Array();';
 	echo 'var values = new Array();';
 	$arr =& $report->getMonthStartArr();

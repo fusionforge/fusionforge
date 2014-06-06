@@ -244,7 +244,7 @@ body.sidebar h2 {
 }
 
 /* Action buttons */
-a.wikiaction, a.wiki-rc-action, a.wikiunsafe,
+a.wiki-rc-action, a.wikiunsafe,
 input.wikiaction, input.button, input.wikiadmin {
     text-decoration: none;
     /* don't wrap text buttons */

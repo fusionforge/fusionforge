@@ -62,6 +62,8 @@ And more lorem ipsum too.");
 		$this->assertTrue($this->isTextPresent("lorem ipsum"));
 		$this->assertTrue($this->isElementPresent("//h1[contains(.,'Bleh')]"));
 		$this->assertTrue($this->isElementPresent("//h2[contains(.,'Blahblah')]"));
+
+		system("rm -rf /var/lib/gforge/plugins/mediawiki/projects/projecta/");
 	}
 }
 

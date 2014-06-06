@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
+ * Copyright 2014, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -27,6 +28,7 @@ require_once 'HudsonTestResult.class.php';
 class hudson_Widget_JobTestResults extends HudsonJobWidget {
 
 	var $test_result;
+	var $content;
 
 	function hudson_Widget_JobTestResults($owner_type, $owner_id) {
 		$request =& HTTPRequest::instance();
@@ -39,19 +41,31 @@ class hudson_Widget_JobTestResults extends HudsonJobWidget {
 		}
 		$this->Widget($this->widget_id);
 		$this->setOwner($owner_id, $owner_type);
+		if ($this->widget_id == 'plugin_hudson_project_jobtestresults' && forge_check_perm('hudson', $this->group_id, 'read')) {
+			$this->content['title'] = '';
+			if ($this->job && $this->test_result) {
+				$this->content['title'] .= vsprintf(_('%1$s Test Results (%2$s / %3$s)'),
+						array($this->job->getName(), $this->test_result->getPassCount(), $this->test_result->getTotalCount()));
+			} elseif ($this->job && ! $this->test_result) {
+				$this->content['title'] .= sprintf(_('%s Test Results'), $this->job->getName());
+			} else {
+				$this->content['title'] .= _('Test Results');
+			}
+		} else {
+			$this->content['title'] = '';
+			if ($this->job && $this->test_result) {
+				$this->content['title'] .= vsprintf(_('%1$s Test Results (%2$s / %3$s)'),
+						array($this->job->getName(), $this->test_result->getPassCount(), $this->test_result->getTotalCount()));
+			} elseif ($this->job && ! $this->test_result) {
+				$this->content['title'] .= sprintf(_('%s Test Results'), $this->job->getName());
+			} else {
+				$this->content['title'] .= _('Test Results');
+			}
+		}
 	}
 
 	function getTitle() {
-		$title = '';
-		if ($this->job && $this->test_result) {
-			$title .= vsprintf(_('%1$s Test Results (%2$s / %3$s)'),
-					array($this->job->getName(), $this->test_result->getPassCount(), $this->test_result->getTotalCount()));
-		} elseif ($this->job && ! $this->test_result) {
-			$title .= sprintf(_('%s Test Results'), $this->job->getName());
-		} else {
-			$title .= _('Test Results');
-		}
-		return  $title;
+		return $this->content['title'];
 	}
 
 	function getDescription() {
@@ -99,5 +113,9 @@ class hudson_Widget_JobTestResults extends HudsonJobWidget {
 			}
 		}
 		return $html;
+	}
+
+	function isAvailable() {
+		return isset($this->content['title']);
 	}
 }

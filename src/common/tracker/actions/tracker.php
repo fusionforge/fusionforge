@@ -456,7 +456,6 @@ switch (getStringFromRequest('func')) {
 		break;
 	}
 
-
 	//
 	//	Show delete form
 	//

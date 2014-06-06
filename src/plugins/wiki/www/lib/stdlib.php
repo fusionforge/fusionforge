@@ -138,9 +138,11 @@ function MangleXmlIdentifier($str)
     if (!$str) {
         return 'empty.';
     }
-
-    return preg_replace('/[^-_:A-Za-z0-9]|(?<=^)[^A-Za-z]/e',
-        "'.' . sprintf('%02x', ord('\\0'))",
+    return preg_replace_callback(
+        '/[^-_:A-Za-z0-9]|(?<=^)[^A-Za-z]/',
+        function ($m) {
+            return '.' . sprintf('%02x', ord('$m'));
+        },
         $str);
 }
 
