@@ -109,10 +109,11 @@ ssh root@$HOST "UCF_FORCE_CONFFNEW=yes DEBIAN_FRONTEND=noninteractive LANG=C apt
 
 if [ "$DIST" = wheezy ] ; then
     ssh root@$HOST "UCF_FORCE_CONFFNEW=yes DEBIAN_FRONTEND=noninteractive LANG=C apt-get -o debug::pkgproblemresolver=true -y --force-yes install javascript-common"
-    ssh root@$HOST "echo \"deb $DEBMIRROR jessie main\" >> /etc/apt/sources.list.d/jessie.list"
-    ssh root@$HOST "apt-get update"
-    ssh root@$HOST "UCF_FORCE_CONFFNEW=yes DEBIAN_FRONTEND=noninteractive LANG=C apt-get -o debug::pkgproblemresolver=true -y --force-yes install loggerhead python"
-    ssh root@$HOST "rm /etc/apt/sources.list.d/jessie.list"
+
+    # Grab a more recent loggerhead (without pulling everything)
+    if ! ssh root@$HOST dpkg -l loggerhead | grep -q ^ii ; then
+	ssh root@$HOST "apt-get -y --force-yes install wget gdebi-core;wget -c http://snapshot.debian.org/archive/debian/20121107T152130Z/pool/main/l/loggerhead/loggerhead_1.19%7Ebzr477-1_all.deb; gdebi --non-interactive loggerhead_1.19~bzr477-1_all.deb"
+    fi
 fi
 
 ssh root@$HOST "echo \"deb $DEBMIRROR $DIST main\" > /etc/apt/sources.list"

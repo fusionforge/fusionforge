@@ -6,7 +6,7 @@
  * Copyright 2002, Tim Perdue - GForge, LLC
  * Copyright 2010 (c) Franck Villaume - Capgemini
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013,2014 Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -62,7 +62,9 @@ if ($group_id) {
 
 //	echo _('<p>Choose a forum and you can browse, search, and post messages.<p>');
 
-	echo $HTML->printsubMenu(array(_("My Monitored Forums")), array("/forum/myforums.php?group_id=$group_id"), false);
+	if (session_loggedin()) {
+		echo $HTML->printsubMenu(array(_("My Monitored Forums")), array("/forum/myforums.php?group_id=$group_id"), false);
+	}
 
 	plugin_hook("blocks", "forum index");
 

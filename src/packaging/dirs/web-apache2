@@ -1,4 +1,3 @@
-@CONFIG_PATH@/custom
 @CONFIG_PATH@/languages-local
 @CONFIG_PATH@/templates
 @BINARY_PATH@
