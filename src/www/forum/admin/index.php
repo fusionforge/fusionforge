@@ -111,11 +111,11 @@ if (getStringFromRequest('add_forum')) {
 			<input type="hidden" name="group_id" value="'.$group_id.'" />
 			<input type="hidden" name="form_key" value="' . form_generate_key() . '" />
 			<strong>'._('Forum Name')._(':').utils_requiredField().'</strong><br />
-			<input type="text" name="forum_name" required="required" value="" size="20" maxlength="30" />
+			<input type="text" name="forum_name" required="required" value="" size="20" maxlength="30" pattern=".{3,}" />
 			</p>
 			<p>
 			<strong>'._('Description')._(':').utils_requiredField().'</strong><br />
-			<input type="text" name="description" required="required" value="" size="40" maxlength="80" />
+			<input type="text" name="description" required="required" value="" size="40" maxlength="80" pattern=".{10,}" />
 			</p>
 			<p>
 			<strong>'._('Email All Posts To:').'</strong><br />
