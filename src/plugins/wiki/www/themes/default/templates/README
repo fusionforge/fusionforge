@@ -1,5 +1,3 @@
-$Id: README 7589 2010-07-02 07:31:33Z vargenau $
-
 The template structure and syntax has completely changed with 1.3.3. 
 See lib/Template.php for more, esp. the defined global php variables.
 ($request, $user, $page, $Theme and some action specific local vars.)
