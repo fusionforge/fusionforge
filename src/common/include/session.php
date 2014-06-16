@@ -377,8 +377,11 @@ function session_cookie($name, $value, $domain='', $expiration=0) {
  *	@param		string	Absolute URI
  *	@return never returns
  */
-function session_redirect_uri($loc) {
-	sysdebug_off("Status: 301 Moved Permanently", true, 301);
+function session_redirect_uri($loc, $permanent=true) {
+	if ($permanent)
+		sysdebug_off("Status: 301 Moved Permanently", true, 301);
+	else
+		sysdebug_off("Status: 303 See Other", true, 303);
 	header("Location: ${loc}", true);
 	echo "\nPlease go to ${loc} instead!\n";
 	exit;
@@ -390,8 +393,8 @@ function session_redirect_uri($loc) {
  *	@param		string	Absolute path within the site
  *	@return never returns
  */
-function session_redirect($loc) {
-	session_redirect_uri(util_make_url($loc));
+function session_redirect($loc, $permanent=true) {
+	session_redirect_uri(util_make_url($loc), $permanent);
 }
 
 /**
