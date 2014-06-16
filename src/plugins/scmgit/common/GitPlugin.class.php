@@ -399,7 +399,7 @@ class GitPlugin extends SCMPlugin {
 		}
 		if (!is_file("$repodir/HEAD") && !is_dir("$repodir/objects") && !is_dir("$repodir/refs")) {
 			// 'cd $root' because git will abort if e.g. we're in a 0700 /root after setuid
-			system("cd $root;git clone --bare --quiet --no-hardlinks $main_repo $repodir");
+			system("cd $root;git clone --bare --quiet --no-hardlinks $main_repo $repodir 2>&1 >/dev/null | grep -v 'warning: You appear to have cloned an empty repository.' >&2");
 			system("GIT_DIR=\"$repodir\" git update-server-info");
 			if (is_file("$repodir/hooks/post-update.sample")) {
 				rename("$repodir/hooks/post-update.sample",
@@ -526,7 +526,7 @@ class GitPlugin extends SCMPlugin {
 			$repodir = $root . '/' .  $repo_name . '.git';
 			if (!is_file("$repodir/HEAD") && !is_dir("$repodir/objects") && !is_dir("$repodir/refs")) {
 				if ($clone_url != '') {
-					system("cd $root;git clone --quiet --bare $clone_url $repodir");
+					system("cd $root;git clone --quiet --bare $clone_url $repodir 2>&1 >/dev/null | grep -v 'warning: You appear to have cloned an empty repository.' >&2");
 				} else {
 					system("GIT_DIR=\"$repodir\" git init --quiet --bare --shared=group");
 				}

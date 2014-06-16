@@ -1,5 +1,6 @@
 Fusionforge-5.3.2:
 * Software map: fix "value too long for type character varying(255)" error in cron db_trove_maint.php (Inria)
+* SCM Git: suppress 'warning: You appear to have cloned an empty repository.' in create_scm_repos.php (Inria)
 
 Fusionforge-5.3.1:
 * Docman: Basic Webdav write mkcol support (TrivialDev)
