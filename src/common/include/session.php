@@ -383,7 +383,14 @@ function session_redirect_uri($loc, $permanent=true) {
 	else
 		sysdebug_off("Status: 303 See Other", true, 303);
 	header("Location: ${loc}", true);
-	echo "\nPlease go to ${loc} instead!\n";
+	header("Content-type: text/html");
+	echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"' .
+	    ' "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">' . "\n" .
+	    '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><head>' .
+	    "\n <title>Redirection</title>\n</head><body>\n" .
+	    "<p>Please go to " . html_e('a', array(
+		'href' => $loc,
+	    ), util_html_encode($loc)) . " instead!</p>\n</body></html>\n";
 	exit;
 }
 
