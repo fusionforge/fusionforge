@@ -405,7 +405,7 @@ function session_cookie($name, $value, $domain='', $expiration=0) {
  *	@return never returns
  */
 function session_redirect_external($url) {
-	session_redirect_uri($url);
+	session_redirect_uri($url, false);
 }
 function session_redirect_uri($loc, $permanent=true) {
 	if ($permanent)
