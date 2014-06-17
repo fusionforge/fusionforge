@@ -20,29 +20,12 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-/**
- * The SyntaxHighlighter plugin passes all its arguments through a C++
- * highlighter called "highlight" (available at http://www.andre-simon.de/).
- *
- * @author: alecthomas
- */
-if (!defined('HIGHLIGHT_EXE'))
-    define('HIGHLIGHT_EXE', 'highlight');
-// highlight requires two subdirs themes and langDefs somewhere.
-// Best by highlight.conf in $HOME, but the webserver user usually
-// doesn't have a $HOME
-if (!defined('HIGHLIGHT_DATA_DIR'))
-    if (isWindows())
-        define('HIGHLIGHT_DATA_DIR', 'f:\cygnus\usr\local\share\highlight');
-    else
-        define('HIGHLIGHT_DATA_DIR', '/usr/share/highlight');
-
 class WikiPlugin_SyntaxHighlighter
     extends WikiPlugin
 {
     function getDescription()
     {
-        return _("Source code syntax highlighter (via http://www.andre-simon.de).");
+        return _("Source code syntax highlighter (via http://highlightjs.org/).");
     }
 
     function managesValidators()
@@ -66,80 +49,16 @@ class WikiPlugin_SyntaxHighlighter
         $this->source = $argstr;
     }
 
-    function newFilterThroughCmd($input, $commandLine)
-    {
-        $descriptorspec = array(
-            0 => array("pipe", "r"), // stdin is a pipe that the child will read from
-            1 => array("pipe", "w"), // stdout is a pipe that the child will write to
-            2 => array("pipe", "w"), // stdout is a pipe that the child will write to
-        );
-
-        $process = proc_open("$commandLine", $descriptorspec, $pipes);
-        if (is_resource($process)) {
-            // $pipes now looks like this:
-            // 0 => writeable handle connected to child stdin
-            // 1 => readable  handle connected to child stdout
-            // 2 => readable  handle connected to child stderr
-            fwrite($pipes[0], $input);
-            fclose($pipes[0]);
-            $buf = "";
-            while (!feof($pipes[1])) {
-                $buf .= fgets($pipes[1], 1024);
-            }
-            fclose($pipes[1]);
-            $stderr = '';
-            while (!feof($pipes[2])) {
-                $stderr .= fgets($pipes[2], 1024);
-            }
-            fclose($pipes[2]);
-            // It is important that you close any pipes before calling
-            // proc_close in order to avoid a deadlock
-            proc_close($process);
-            if (empty($buf)) {
-                printXML($this->error($stderr));
-            }
-            return $buf;
-        }
-        return '';
-    }
-
     function run($dbi, $argstr, &$request, $basepage)
     {
         extract($this->getArgs($argstr, $request));
         $source =& $this->source;
-        if (empty($syntax)) {
-            return $this->error(sprintf(_("A required argument “%s” is missing."), 'syntax'));
-        }
         if (empty($source)) {
             return HTML::div(array('class' => "error"),
                    "Please provide source code to SyntaxHighlighter plugin");
         }
-        $args = "";
-        if (defined('HIGHLIGHT_DATA_DIR')) {
-            $args .= " --data-dir " . HIGHLIGHT_DATA_DIR;
-        }
-        if ($number != 0) {
-            $args .= " -l";
-        }
-        if ($wrap != 0) {
-            $args .= " -V";
-        }
         $html = HTML();
-        if (!empty($color) and !preg_match('/^[\w-]+$/', $color)) {
-            $html->pushContent($this->error(fmt("invalid %s ignored", 'color')));
-            $color = false;
-        }
-        if (!empty($color)) {
-            $args .= " --style $color --inline-css";
-        }
-        if (!empty($style)) {
-            $args .= " -F $style";
-        }
-        $commandLine = HIGHLIGHT_EXE . "$args -q -X -f -S $syntax";
-        $code = $this->newFilterThroughCmd($source, $commandLine);
-        if (empty($code)) {
-            return $this->error(fmt("Couldn't start commandline “%s”", $commandLine));
-        }
+        $code = "\n<code>\n".htmlspecialchars($source)."\n</code>\n";
         $pre = HTML::pre(HTML::raw($code));
         $html->pushContent($pre);
         return HTML($html);
