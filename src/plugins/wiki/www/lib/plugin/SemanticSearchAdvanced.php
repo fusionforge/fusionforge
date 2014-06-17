@@ -115,12 +115,12 @@ class WikiPlugin_SemanticSearchAdvanced
             $instructions, HTML::br(),
             HTML::table(array('class' => 'fullwidth'),
                 HTML::tr(HTML::td(_("Page Name")._(': '), $pagefilter),
-                    HTML::td(array('align' => 'right'),
+                    HTML::td(array('class' => 'align-right'),
                         $help)),
                 HTML::tr(HTML::td(array('colspan' => 2),
                     $querybox))),
             HTML::br(),
-            HTML::div(array('align' => 'center'), $submit));
+            HTML::div(array('class' => 'align-center'), $submit));
         return $form;
     }
 
