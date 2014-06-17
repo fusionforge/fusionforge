@@ -1,4 +1,4 @@
-Date: Fri,  7 Dec 2012 15:16:29 +0000
+Date: Thu, 12 Jun 2014 17:57:14 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FCalendarPlugin;
@@ -30,7 +30,7 @@ will get you:
 ! Description
 ! Default value
 |-
-| colspan="3" align="center" | **Selection of Month**
+| colspan="3" class="align-center" | **Selection of Month**
 |-
 | **year**
 | Specify the year for the calendar.
@@ -44,7 +44,7 @@ will get you:
 | Added to //month//. Can be used to include several months worth of calendars on a single wiki page.
 | 0
 |-
-| colspan="3" align="center" | **"Day Page" Names**
+| colspan="3" class="align-center" | **"Day Page" Names**
 |-
 | **date_format**
 | [[php-function:strftime|strftime]] style format string used to generate page names for the "day pages."
@@ -54,7 +54,7 @@ will get you:
 | Prepended to the date (formatted per //date_format//) to generate the "day page" names.
 | The default value is =~[pagename]/=.
 |-
-| colspan="3" align="center" | **Appearance**
+| colspan="3" class="align-center" | **Appearance**
 |-
 | **month_format**
 | [[php-function:strftime|strftime]] style format string used to generate the title of the calendar.
