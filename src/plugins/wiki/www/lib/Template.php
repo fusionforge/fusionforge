@@ -188,7 +188,7 @@ class Template
         $pre->printXML();
     }
 
-    private function _errorHandler($error)
+    public function _errorHandler($error)
     {
         //if (!preg_match('/: eval\(\)\'d code$/', $error->errfile))
         //    return false;
