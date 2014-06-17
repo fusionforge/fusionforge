@@ -92,15 +92,15 @@ class WikiPlugin_Calendar
                 'title' => _("Next Month")),
             '>');
 
-        $row = HTML::tr(HTML::td(array('align' => 'left'), $prev),
-            HTML::td(array('align' => 'center'),
+        $row = HTML::tr(HTML::td(array('class' => 'align-left'), $prev),
+            HTML::td(array('class' => 'align-center'),
                 HTML::strong(array('class' => 'cal-header'),
                     strftime($args['month_format'],
                         $time))),
-            HTML::td(array('align' => 'right'), $next));
+            HTML::td(array('class' => 'align-right'), $next));
 
         return HTML::tr(HTML::td(array('colspan' => $args['display_weeknum'] ? 8 : 7,
-                'align' => 'center'),
+                'class' => 'align-center'),
             HTML::table(array('class' => 'cal-header fullwidth'), $row)));
     }
 
@@ -117,12 +117,10 @@ class WikiPlugin_Calendar
         $row = HTML::tr();
         $row->setattr('class', 'cal-dayname');
         if ($this->args['display_weeknum'])
-            $row->pushContent(HTML::td(array('class' => 'cal-dayname',
-                    'align' => 'center'),
+            $row->pushContent(HTML::td(array('class' => 'cal-dayname align-center'),
                 _("Wk")));
         for ($i = 0; $i < 7; $i++) {
-            $row->pushContent(HTML::td(array('class' => 'cal-dayname',
-                    'align' => 'center'),
+            $row->pushContent(HTML::td(array('class' => 'cal-dayname align-center'),
                 strftime($fs, $time)));
             $time += SECONDS_PER_DAY;
         }
@@ -137,7 +135,7 @@ class WikiPlugin_Calendar
             $time);
         $t = localtime($time, 1);
 
-        $td = HTML::td(array('align' => 'center'));
+        $td = HTML::td(array('class' => 'align-center'));
 
         $mday = $t['tm_mday'];
         if ($mday == $this->_today) {
