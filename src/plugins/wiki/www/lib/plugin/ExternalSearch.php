@@ -42,7 +42,7 @@ class WikiPlugin_ExternalSearch
         //fixme: better description
     }
 
-    private function getInterWikiUrl(&$request)
+    private function getInterWikiUrl()
     {
         $intermap = getInterwikiMap();
         $map = $intermap->_map;
@@ -83,7 +83,7 @@ class WikiPlugin_ExternalSearch
         if (in_array('url', array_keys($posted))) {
             $s = $posted['s'];
             $this->_url = $posted['url'];
-            $this->getInterWikiUrl($request);
+            $this->getInterWikiUrl();
             if (strstr($this->_url, '%s')) {
                 $this->_url = sprintf($this->_url, $s);
             } else
@@ -99,7 +99,7 @@ class WikiPlugin_ExternalSearch
         if ($formsize < 1)
             $formsize = 30;
         $this->_url = $url;
-        $this->getInterWikiUrl($request);
+        $this->getInterWikiUrl();
         $form = HTML::form(array('action' => $request->getPostURL(),
                 'method' => 'post',
                 //'class'  => 'class', //fixme
