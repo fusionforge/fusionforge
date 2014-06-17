@@ -3,9 +3,6 @@
  * Code for writing the HTML subset of XML.
  * @author: Jeff Dairiki
  *
- * This code is now php5 compatible. --2004-04-19 23:51:43 rurban
- * Specialized for php-5.3: added public static 2010-06-07 09:51:37 rurban
- *
  * Todo: Add support for a JavaScript backend, a php2js compiler.
  * HTML::div(array('onclick' => 'HTML::div(...)'))
  */
@@ -17,7 +14,6 @@ if (class_exists("HtmlElement"))
 /**
  * An XML element.
  */
-//apd_set_session_trace(35);
 
 class HtmlElement extends XmlElement
 {
@@ -68,16 +64,16 @@ class HtmlElement extends XmlElement
 
     /** Add a "tooltip" to an element.
      *
-     * @param $tooltip_text string The tooltip text.
+     * @param string $tooltip_text The tooltip text.
+     * @param string $accesskey.
      */
-    function addTooltip($tooltip_text, $accesskey = null)
+    function addTooltip($tooltip_text, $accesskey = '')
     {
         $this->setAttr('title', $tooltip_text);
         if ($accesskey) $this->setAccesskey($accesskey);
 
         // FIXME: this should be initialized from title by an onLoad() function.
         //        (though, that may not be possible.)
-        $qtooltip = str_replace("'", "\\'", $tooltip_text);
         $this->setAttr('onmouseover',
             sprintf('window.status="%s"; return true;',
                 addslashes($tooltip_text)));
@@ -299,6 +295,48 @@ class HTML extends HtmlElement
     public static function small( /*...*/)
     {
         $el = new HtmlElement('small');
+        return $el->_init2(func_get_args());
+    }
+
+    public static function abbr( /*...*/)
+    {
+        $el = new HtmlElement('abbr');
+        return $el->_init2(func_get_args());
+    }
+
+    public static function acronym( /*...*/)
+    {
+        $el = new HtmlElement('acronym');
+        return $el->_init2(func_get_args());
+    }
+
+    public static function cite( /*...*/)
+    {
+        $el = new HtmlElement('cite');
+        return $el->_init2(func_get_args());
+    }
+
+    public static function code( /*...*/)
+    {
+        $el = new HtmlElement('code');
+        return $el->_init2(func_get_args());
+    }
+
+    public static function dfn( /*...*/)
+    {
+        $el = new HtmlElement('dfn');
+        return $el->_init2(func_get_args());
+    }
+
+    public static function kbd( /*...*/)
+    {
+        $el = new HtmlElement('kbd');
+        return $el->_init2(func_get_args());
+    }
+
+    public static function samp( /*...*/)
+    {
+        $el = new HtmlElement('samp');
         return $el->_init2(func_get_args());
     }
 
@@ -580,7 +618,7 @@ HTML::_setTagProperty(HTMLTAG_INLINE,
 /**
  * Generate hidden form input fields.
  *
- * @param $query_args hash  A hash mapping names to values for the hidden inputs.
+ * @param array $query_args A hash mapping names to values for the hidden inputs.
  * Values in the hash can themselves be hashes.  The will result in hidden inputs
  * which will reconstruct the nested structure in the resulting query args as
  * processed by PHP.
@@ -597,6 +635,8 @@ HTML::_setTagProperty(HTMLTAG_INLINE,
  *  <input type="hidden" name="y[a]" value = "aval" />
  *  <input type="hidden" name="y[b]" value = "bval" />
  *
+ * @param bool $pfx
+ * @param array $exclude
  * @return object An XmlContent object containing the inputs.
  */
 function HiddenInputs($query_args, $pfx = false, $exclude = array())
@@ -619,11 +659,11 @@ function HiddenInputs($query_args, $pfx = false, $exclude = array())
 /** Generate a <script> tag containing javascript.
  *
  * @param string $js  The javascript.
- * @param string $script_args  (optional) hash of script tags options
+ * @param array $script_args  (optional) hash of script tags options
  *                             e.g. to provide another version or the defer attr
  * @return HtmlElement A <script> element.
  */
-function JavaScript($js, $script_args = false)
+function JavaScript($js, $script_args = array())
 {
     $default_script_args = array( //'version' => 'JavaScript', // not xhtml conformant
         'type' => 'text/javascript');
