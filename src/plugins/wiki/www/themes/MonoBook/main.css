@@ -1006,7 +1006,7 @@ special external link styling */
     white-space: nowrap;
 }
 
-.portlet h5 {
+.portlet h2 {
     background-color: transparent;
     padding: 0 1em 0 0.5em;
     text-transform: lowercase;

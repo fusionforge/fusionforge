@@ -7,7 +7,7 @@
   $isBrowse = $request->getArg('action') == 'browse';
 ?>
 <div class="portlet" id="p-cactions">
-  <h5><?php echo _("Views") ?></h5>
+  <h2><?php echo _("Views") ?></h2>
   <ul>
     <?php if (!string_ends_with($pagename, SUBPAGE_SEPARATOR._("Discussion"))) { ?>
       <?php $talk = new WikiPageName('Talk:'.$pagename); ?>
@@ -57,7 +57,7 @@
   </ul>
 </div>
 <div class="portlet" id="p-tbx">
-  <h5><?php echo _("Special Actions") ?></h5>
+  <h2><?php echo _("Special Actions") ?></h2>
   <div class="pBody">
   <ul>
     <?php if ( $user->isSignedIn() ) { ?>
