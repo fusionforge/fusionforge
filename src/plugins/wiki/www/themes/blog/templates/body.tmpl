@@ -1,26 +1,20 @@
-<body <?php echo $WikiTheme->getMoreAttr('body') ?>>
-<!--{{{ Page-->
+<body <?php echo $WikiTheme->getMoreAttr('body') ?> >
 <div id="page">
 <?php echo Template('top') ?>
 
 <?php // $CONTENT includes browse.tmpl ?>
-<!--{{{ PageTitle-->
 <div id="pagetitle">
 <h1 id="pagetitleText"><?php echo $HEADER ?></h1></div>
-<!--}}}-->
 <div id="bodyContent">
 <?php echo $CONTENT?>
 </div>
 
-<!--{{{ Bottom errors and debugging info-->
 <div id="bottom">
 <?php echo Template('bottom') ?>
 </div>
-<!--}}}-->
-<!--{{{ Footer-->
 <div id="footer">
 <?php echo Template('browse-footer') ?>
-</div><!--}}} Footer-->
+</div>
 
-</div><!--}}} Page-->
+</div>
 </body>
