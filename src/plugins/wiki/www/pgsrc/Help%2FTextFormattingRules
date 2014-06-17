@@ -1,4 +1,4 @@
-Date: Mon,  8 Jul 2013 17:58:18 +0000
+Date: Fri, 13 Jun 2014 11:12:56 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FTextFormattingRules;
@@ -97,7 +97,7 @@ Allowed colors are:
 {| class="bordered"
 |-
 | %color=aqua% aqua %%
-| bgcolor="#565c5e" | %color=beige% beige %%
+| style="background-color:#565c5e" | %color=beige% beige %%
 | %color=black% black %%
 | %color=blue% blue %%
 | %color=brown% brown %%
@@ -108,7 +108,7 @@ Allowed colors are:
 | %color=gray% gray %%
 |-
 | %color=green% green %%
-| bgcolor="#565c5e" | %color=ivory% ivory %%
+| style="background-color:#565c5e" | %color=ivory% ivory %%
 | %color=indigo% indigo %%
 | %color=lime% lime %%
 | %color=magenta% magenta %%
@@ -122,11 +122,11 @@ Allowed colors are:
 | %color=red% red %%
 | %color=salmon% salmon %%
 | %color=silver% silver %%
-| bgcolor="#565c5e" | %color=snow% snow %%
+| style="background-color:#565c5e" | %color=snow% snow %%
 | %color=teal% teal %%
 | %color=turquoise% turquoise %%
 | %color=violet% violet %%
-| bgcolor="#565c5e" | %color=white% white %%
+| style="background-color:#565c5e" | %color=white% white %%
 | %color=yellow% yellow %%
 |}
 
