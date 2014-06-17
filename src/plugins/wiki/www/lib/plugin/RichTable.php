@@ -54,7 +54,7 @@ class WikiPlugin_RichTable
                 if (in_array($key, array("id", "class", "title", "style",
                     "bgcolor", "frame", "rules", "border",
                     "cellspacing", "cellpadding",
-                    "summary", "align", "width"))
+                    "align", "width"))
                 ) {
                     $table->setAttr($key, $value);
                 }

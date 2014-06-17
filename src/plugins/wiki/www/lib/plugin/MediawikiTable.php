@@ -102,7 +102,7 @@ class WikiPlugin_MediawikiTable
                 if (in_array($key, array("id", "class", "title", "style",
                     "bgcolor", "frame", "rules", "border",
                     "cellspacing", "cellpadding",
-                    "summary", "align", "width"))
+                    "align", "width"))
                 ) {
                     $table->setAttr($key, $value);
                 }
@@ -151,12 +151,6 @@ class WikiPlugin_MediawikiTable
                     }
                 }
                 continue;
-            }
-
-            // Table summary
-            if (substr($line, 0, 2) == "|=") {
-                $line = substr($line, 2);
-                $table->setAttr("summary", trim($line));
             }
 
             // Table caption
