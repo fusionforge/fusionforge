@@ -78,7 +78,7 @@ class WikiPlugin_WikiAdminUtils
         return $this->_makeButton($request, $args, $label);
     }
 
-    private function _makeButton(&$request, $args, $label)
+    protected function _makeButton(&$request, $args, $label)
     {
         $args['return_url'] = $request->getURLtoSelf();
         return HTML::form(array('action' => $request->getPostURL(),
@@ -134,7 +134,7 @@ class WikiPlugin_WikiAdminUtils
         // FIXME: this should be moved into WikiDB::normalize() or something...
         $dbi = $request->getDbh();
         $count = 0;
-        $list = HTML::ol(array('align' => 'left'));
+        $list = HTML::ol(array('class' => 'align-left'));
         $pages = $dbi->getAllPages('include_empty'); // Do we really want the empty ones too?
         while (($page = $pages->next())) {
             $pagename = $page->getName();
@@ -150,7 +150,7 @@ class WikiPlugin_WikiAdminUtils
             return _("No pages with bad names had to be deleted.");
         else {
             return HTML(fmt("Deleted %d pages with invalid names:", $count),
-                HTML::div(array('align' => 'left'), $list));
+                HTML::div(array('class' => 'align-left'), $list));
         }
     }
 
@@ -162,7 +162,7 @@ class WikiPlugin_WikiAdminUtils
         $dbi = $request->getDbh();
         $count = 0;
         $notpurgable = 0;
-        $list = HTML::ol(array('align' => 'left'));
+        $list = HTML::ol(array('class' => 'align-left'));
         $pages = $dbi->getAllPages('include_empty');
         while (($page = $pages->next())) {
             if (!$page->exists()
@@ -185,7 +185,7 @@ class WikiPlugin_WikiAdminUtils
             return _("No empty, unreferenced pages were found.");
         else
             return HTML(fmt("Deleted %d unreferenced pages:", $count),
-                HTML::div(array('align' => 'left'), $list),
+                HTML::div(array('class' => 'align-left'), $list),
                 ($notpurgable ?
                     fmt("The %d not-purgable pages/links are links in some page(s). You might want to edit them.",
                         $notpurgable)
@@ -205,7 +205,7 @@ class WikiPlugin_WikiAdminUtils
             return _("No old _cached_html pagedata found.");
         else {
             return HTML(fmt("Converted successfully %d pages", $count),
-                HTML::div(array('align' => 'left'), $list));
+                HTML::div(array('class' => 'align-left'), $list));
         }
     }
 
