@@ -235,7 +235,7 @@ class WikiPlugin_WikiAdminSetAcl
         }
         $perm_tree = pagePermissions($name);
         $table = pagePermissionsAclFormat($perm_tree, !empty($pages));
-        $header->pushContent(HTML::strong(_("Selected Pages: ")), HTML::tt(join(', ', $pages)), HTML::br());
+        $header->pushContent(HTML::strong(_("Selected Pages: ")), HTML::samp(join(', ', $pages)), HTML::br());
         $first_page = $GLOBALS['request']->_dbi->getPage($name);
         $owner = $first_page->getOwner();
         list($type, $perm) = pagePermissionsAcl($perm_tree[0], $perm_tree);
@@ -245,8 +245,8 @@ class WikiPlugin_WikiAdminSetAcl
         elseif ($type == 'page')
             $type = _("individual page permission"); elseif ($type == 'default')
             $type = _("default page permission");
-        $header->pushContent(HTML::strong(_("Type") . _(": ")), HTML::tt($type), HTML::br());
-        $header->pushContent(HTML::strong(_("ACL") . _(": ")), HTML::tt($perm->asAclLines()), HTML::br());
+        $header->pushContent(HTML::strong(_("Type") . _(": ")), HTML::samp($type), HTML::br());
+        $header->pushContent(HTML::strong(_("ACL") . _(": ")), HTML::samp($perm->asAclLines()), HTML::br());
 
         $header->pushContent(HTML::p(HTML::strong(_("Description") . _(": ")),
             _("Selected Grant checkboxes allow access, unselected checkboxes deny access."),

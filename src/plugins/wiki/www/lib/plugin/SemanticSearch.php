@@ -155,7 +155,7 @@ class WikiPlugin_SemanticSearch
                 (HTML::tr(
                     HTML::td($pagefilter, _(": ")),
                     HTML::td($relation),
-                    HTML::td(HTML::strong(HTML::tt('  ::  '))),
+                    HTML::td(HTML::strong(HTML::samp('  ::  '))),
                     HTML::td($queryrel),
                     HTML::td($nbsp, $relsubmit, $nbsp, $enhancements)))));
 
@@ -332,7 +332,7 @@ class WikiPlugin_SemanticSearch
             $relquery = $this->regex_query($attribute, $args['case_exact'], $args['regex']);
             if (!in_array($attr_op, $this->_supported_operators)) {
                 return HTML($form, $this->error(fmt("Illegal operator: %s",
-                    HTML::tt($attr_op))));
+                    HTML::samp($attr_op))));
             }
             $s_base = preg_replace("/,/", "", $s);
             $units = new Units();
@@ -379,7 +379,7 @@ class WikiPlugin_SemanticSearch
             } else {
                 $querydesc = $attribute . " " . $attr_op . " " . $s;
                 return HTML($form, $this->error(fmt("Only text operators can be used with strings: %s",
-                    HTML::tt($querydesc))));
+                    HTML::samp($querydesc))));
 
             }
             if ($linkquery) {

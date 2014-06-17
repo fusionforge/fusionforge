@@ -1,4 +1,4 @@
-Date: Fri,  4 Feb 2011 16:44:25 +0000
+Date: Thu, 12 Jun 2014 17:37:12 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FHelloWorldPlugin;
@@ -69,7 +69,7 @@ extends WikiPlugin
 
         // Any text that is returned will not be further transformed,
         // so use html where necessary.
-        $html = HTML::tt(fmt('%s: %s', $salutation, WikiLink($name, 'auto')),
+        $html = HTML::samp(fmt('%s: %s', $salutation, WikiLink($name, 'auto')),
                          THE_END);
         return $html;
     }
