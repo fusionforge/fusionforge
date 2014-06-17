@@ -405,11 +405,21 @@ function session_cookie($name, $value, $domain='', $expiration=0) {
  *	@param		string	Absolute URI
  *	@return never returns
  */
-function session_redirect_uri($loc) {
+function session_redirect_uri($loc, $permanent=true) {
 	util_save_messages();
-	sysdebug_off("Status: 301 Moved Permanently", true, 301);
+	if ($permanent)
+		sysdebug_off("Status: 301 Moved Permanently", true, 301);
+	else
+		sysdebug_off("Status: 303 See Other", true, 303);
 	header("Location: ${loc}", true);
-	echo "\nPlease go to ${loc} instead!\n";
+	header("Content-type: text/html");
+	echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"' .
+	    ' "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">' . "\n" .
+	    '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><head>' .
+	    "\n <title>Redirection</title>\n</head><body>\n" .
+	    "<p>Please go to " . html_e('a', array(
+		'href' => $loc,
+	    ), util_html_encode($loc)) . " instead!</p>\n</body></html>\n";
 	exit;
 }
 
@@ -418,8 +428,8 @@ function session_redirect_uri($loc) {
  *
  * @param  string $loc    Absolute path within the site
  */
-function session_redirect($loc) {
-	session_redirect_uri(util_make_url($loc));
+function session_redirect($loc, $permanent=true) {
+	session_redirect_uri(util_make_url($loc), $permanent);
 	exit;
 }
 
@@ -431,9 +441,7 @@ function session_redirect($loc) {
  */
 function session_redirect_external($url) {
 	util_save_messages();
-	header('Location: '.$url);
-	print("\n\n");
-	exit;
+	session_redirect_uri($url, false);
 }
 
 /**

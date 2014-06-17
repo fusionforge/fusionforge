@@ -58,7 +58,9 @@ if (!$ah || !is_object($ah)) {
 		exit_error($afh->getErrorMessage(),'tracker');
 	} else {
 		Header('Content-disposition: filename="'.str_replace('"', '', $afh->getName()).'"');
-		Header("Content-type: ".$afh->getType());
+		/* SECURITY: do not serve as $afh->getType() but application/octet-stream */
+		header('X-Content-Type-Options: nosniff');
+		header('Content-Type: application/octet-stream');
 		header("Content-length: ".$afh->getSize());
 
 		readfile_chunked($afh->getFile());
