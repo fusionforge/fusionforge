@@ -72,7 +72,7 @@ class WikiGroup
     /**
      * Initializes a WikiGroup object which should never happen.  Use:
      * $group = &WikiGroup::getGroup();
-     * @param object $request The global WikiRequest object -- ignored.
+     * @param bool $not_current
      */
     function WikiGroup($not_current = false)
     {
@@ -103,7 +103,7 @@ class WikiGroup
     /**
      * Static method to return the WikiGroup subclass used in this wiki.  Controlled
      * by the constant GROUP_METHOD.
-     * @param  object $request The global WikiRequest object.
+     * @param  bool $not_current The global WikiRequest object.
      * @return object Subclass of WikiGroup selected via GROUP_METHOD.
      */
     function getGroup($not_current = false)
@@ -387,7 +387,7 @@ class WikiGroup
      * @param  string $user  Username to add to the group (default = current user).
      * @return bool   On true user was added, false if not.
      */
-    function setMemberOf($group, $user = false)
+    function setMemberOf($group, $user = '')
     {
         trigger_error(__sprintf("Method “%s” not implemented in this GROUP_METHOD %s",
                 'setMemberOf', GROUP_METHOD),
@@ -404,7 +404,7 @@ class WikiGroup
      * @param  string $user  Username to remove from the group (default = current user).
      * @return bool   On true user was removed, false if not.
      */
-    function removeMemberOf($group, $user = false)
+    function removeMemberOf($group, $user = '')
     {
         trigger_error(__sprintf("Method “%s” not implemented in this GROUP_METHOD %s",
                 'removeMemberOf', GROUP_METHOD),
@@ -425,13 +425,9 @@ class GroupNone extends WikiGroup
 
     /**
      * Constructor
-     *
-     * Ignores the parameter provided.
-     * @param object $request The global WikiRequest object - ignored.
      */
     function GroupNone()
     {
-        //$this->request = &$GLOBALS['request'];
         return;
     }
 
@@ -455,7 +451,6 @@ class GroupNone extends WikiGroup
      * Determines all of the groups of which the current user is a member.
      *
      * The group is ignored and an empty array (a member of no groups) is returned.
-     * @param  string $group Name of the group to check for membership (ignored).
      * @return array  Array of groups to which the user belongs (always empty).
      */
     function getAllGroupsIn()
@@ -492,7 +487,6 @@ class GroupWikiPage extends WikiGroup
      * Constructor
      *
      * Initializes the three superclass instance variables
-     * @param object $request The global WikiRequest object.
      */
     function GroupWikiPage()
     {
@@ -535,6 +529,7 @@ class GroupWikiPage extends WikiGroup
      * Private method to take a WikiDB_Page and parse to determine if the
      * current_user is a member of the group.
      * @param object $group_page WikiDB_Page object for the group's page
+     * @param bool $strict
      * @return boolean True if user is a member, else false.
      * @access private
      */
@@ -562,7 +557,6 @@ class GroupWikiPage extends WikiGroup
      *
      * Checks the root Group page ('CategoryGroup') for the list of all groups,
      * then checks each group to see if the current user is a member.
-     * @param  string $group Name of the group to check for membership.
      * @return array  Array of groups to which the user belongs.
      */
     function getAllGroupsIn()
@@ -633,8 +627,6 @@ class GroupDb extends WikiGroup
 
     /**
      * Constructor
-     *
-     * @param object $request The global WikiRequest object. ignored
      */
     function GroupDb()
     {
@@ -711,7 +703,6 @@ class GroupDb_PearDB extends GroupDb
      * Determines all of the groups of which the current user is a member.
      *
      * then checks each group to see if the current user is a member.
-     * @param  string $group Name of the group to check for membership.
      * @return array  Array of groups to which the user belongs.
      */
     function getAllGroupsIn()
@@ -804,7 +795,6 @@ class GroupDb_ADODB extends GroupDb
      * Determines all of the groups of which the current user is a member.
      * then checks each group to see if the current user is a member.
      *
-     * @param  string $group Name of the group to check for membership.
      * @return array  Array of groups to which the user belongs.
      */
     function getAllGroupsIn()
@@ -868,8 +858,6 @@ class GroupFile extends WikiGroup
 
     /**
      * Constructor
-     *
-     * @param object $request The global WikiRequest object.
      */
     function GroupFile()
     {
@@ -929,7 +917,6 @@ class GroupFile extends WikiGroup
      * Determines all of the groups of which the current user is a member.
      *
      * then checks each group to see if the current user is a member.
-     * @param  string $group Name of the group to check for membership.
      * @return array  Array of groups to which the user belongs.
      */
     function getAllGroupsIn()
@@ -987,8 +974,6 @@ class GroupLdap extends WikiGroup
 
     /**
      * Constructor
-     *
-     * @param object $request The global WikiRequest object.
      */
     function GroupLdap()
     {
@@ -999,7 +984,7 @@ class GroupLdap extends WikiGroup
         if (!defined("LDAP_AUTH_HOST")) {
             trigger_error(sprintf(_("%s not defined"), "LDAP_AUTH_HOST"),
                 E_USER_WARNING);
-            return false;
+            return;
         }
         // We should ignore multithreaded environments, not generally windows.
         // CGI does work.
@@ -1008,7 +993,7 @@ class GroupLdap extends WikiGroup
             dl("ldap" . defined('PHP_SHLIB_SUFFIX') ? PHP_SHLIB_SUFFIX : DLL_EXT);
             if (!function_exists('ldap_connect')) {
                 trigger_error(_("No LDAP in this PHP version"), E_USER_WARNING);
-                return false;
+                return;
             }
         }
         if (!defined("LDAP_BASE_DN"))
@@ -1051,13 +1036,10 @@ class GroupLdap extends WikiGroup
     /**
      * Determines all of the groups of which the current user is a member.
      *
-     * @param  string $group Name of the group to check for membership.
      * @return array  Array of groups to which the user belongs.
      */
     function getAllGroupsIn()
     {
-        //$request = &$this->request;
-        //$username = $this->_getUserName();
         $membership = array();
 
         $specialgroups = $this->specialGroups();

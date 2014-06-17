@@ -87,6 +87,7 @@ class DebugTimer
 
     /**
      * @param  string $which One of 'real', 'utime', 'stime', 'cutime', 'sutime'
+     * @param bool $now
      * @return float  Seconds.
      */
     function getTime($which = 'real', $now = false)

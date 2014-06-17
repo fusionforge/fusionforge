@@ -431,10 +431,10 @@ class PhpError
 
     /**
      * Construct a new PhpError.
-     * @param $errno   int
-     * @param $errstr  string
-     * @param $errfile string
-     * @param $errline int
+     * @param int $errno
+     * @param string $errstr
+     * @param string $errfile
+     * @param int $errline
      */
     function PhpError($errno, $errstr, $errfile, $errline)
     {
@@ -587,8 +587,10 @@ class PhpWikiError extends PhpError
 {
     /**
      * Construct a new PhpError.
-     * @param $errno   int
-     * @param $errstr  string
+     * @param int $errno
+     * @param string $errstr
+     * @param string $errfile
+     * @param int $errline
      */
     function PhpWikiError($errno, $errstr, $errfile, $errline)
     {

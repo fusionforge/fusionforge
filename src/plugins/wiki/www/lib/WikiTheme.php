@@ -143,7 +143,7 @@ function WikiLink($page_or_rev, $type = 'known', $label = false)
  *
  * This is a convenience function.
  *
- * @param $action string
+ * @param string $action
  * One of <dl>
  * <dt>[action]</dt><dd>Perform action (e.g. 'edit') on the selected page.</dd>
  * <dt>[ActionPage]</dt><dd>Run the actionpage (e.g. 'BackLinks') on the selected page.</dd>
@@ -154,11 +154,11 @@ function WikiLink($page_or_rev, $type = 'known', $label = false)
  * </pre></dd>
  * </dl>
  *
- * @param $label string
+ * @param string $label
  * A label for the button.  If ommited, a suitable default (based on the valued of $action)
  * will be picked.
  *
- * @param $page_or_rev mixed
+ * @param mixed $page_or_rev
  * Which page (& version) to perform the action on.
  * Can be one of:<dl>
  * <dt>A string</dt><dd>The pagename.</dd>
@@ -166,8 +166,12 @@ function WikiLink($page_or_rev, $type = 'known', $label = false)
  * <dt>A WikiDB_PageRevision object</dt><dd>A specific version of the page.</dd>
  * </dl>
  * ($Page_or_rev is ignored for submit buttons.)
+ *
+ * @param array $options
+ *
+ * @return object
  */
-function Button($action, $label = false, $page_or_rev = false, $options = false)
+function Button($action, $label = '', $page_or_rev = false, $options = array())
 {
     global $WikiTheme;
 
@@ -432,9 +436,9 @@ class WikiTheme
     /**
      * Format the "last modified" message for a page revision.
      *
-     * @param $revision object A WikiDB_PageRevision object.
+     * @param object $revision A WikiDB_PageRevision object.
      *
-     * @param $show_version bool Should the page version number
+     * @param string $show_version Should the page version number
      * be included in the message.  (If this argument is omitted,
      * then the version number will be shown only iff the revision
      * is not the current one.
@@ -934,10 +938,12 @@ class WikiTheme
      * designated page, otherwise the button links to the most recent
      * version of the page.
      *
+     * @param array $options
+     *
      * @return object A Button object.
      */
-    function makeActionButton($action, $label = false,
-                              $page_or_rev = false, $options = false)
+    function makeActionButton($action, $label = '',
+                              $page_or_rev = false, $options = array())
     {
         extract($this->_get_name_and_rev($page_or_rev));
 
@@ -1002,16 +1008,20 @@ class WikiTheme
      *
      * Use linkExistingWikiWord, or LinkWikiWord for normal links.
      *
-     * @param $page_or_rev mixed The page to link to.  This can be
+     * @param mixed $page_or_rev The page to link to.  This can be
      * given as a string (the page name), a WikiDB_Page object, or as
      * WikiDB_PageRevision object.  If given as a WikiDB_PageRevision
      * object, the button will link to a specific version of the
      * designated page, otherwise the button links to the most recent
      * version of the page.
      *
+     * @param string $label
+     *
+     * @param string $action
+     *
      * @return object A Button object.
      */
-    function makeLinkButton($page_or_rev, $label = false, $action = false)
+    function makeLinkButton($page_or_rev, $label = '', $action = '')
     {
         extract($this->_get_name_and_rev($page_or_rev));
 
@@ -1516,7 +1526,7 @@ else window.onload = downloadJSAtOnload;');
             $this->addMoreAttr('body', 'LiveSearch',
                 HTML::Raw(" onload=\"liveSearchInit()"));
             $this->addMoreHeaders(JavaScript('var liveSearchURI="'
-                . WikiURL(_("TitleSearch"), false, true) . '";'));
+                . WikiURL(_("TitleSearch"), array(), true) . '";'));
             $this->addMoreHeaders(JavaScript('', array
             ('src' => $this->_findData('livesearch.js'))));
             $already = 1;
@@ -1678,12 +1688,12 @@ class Button extends HtmlElement
 {
     /** Constructor
      *
-     * @param $text string The text for the button.
-     * @param $url string The url (href) for the button.
-     * @param $class string The CSS class for the button.
-     * @param $options array Additional attributes for the &lt;input&gt; tag.
+     * @param string $text The text for the button.
+     * @param string $url The url (href) for the button.
+     * @param string $class The CSS class for the button.
+     * @param array $options  Additional attributes for the &lt;input&gt; tag.
      */
-    function Button($text, $url, $class = false, $options = false)
+    function Button($text, $url, $class = '', $options = array())
     {
         global $request;
         $this->_init('a', array('href' => $url));
@@ -1718,7 +1728,7 @@ class ImageButton extends Button
      * @param $img_url string URL for button's image.
      * @param $img_attr array Additional attributes for the &lt;img&gt; tag.
      */
-    function ImageButton($text, $url, $class, $img_url, $img_attr = false)
+    function ImageButton($text, $url, $class, $img_url, $img_attr = array())
     {
         $this->__construct('a', array('href' => $url));
         if ($class)
@@ -1750,7 +1760,7 @@ class SubmitButton extends HtmlElement
      * @param $class string The CSS class for the button.
      * @param $options array Additional attributes for the &lt;input&gt; tag.
      */
-    function SubmitButton($text, $name = false, $class = false, $options = false)
+    function SubmitButton($text, $name = '', $class = '', $options = array())
     {
         $this->__construct('input', array('type' => 'submit',
             'value' => $text));
@@ -1779,7 +1789,7 @@ class SubmitImageButton extends SubmitButton
      * @param $img_url string URL for button's image.
      * @param $img_attr array Additional attributes for the &lt;img&gt; tag.
      */
-    function SubmitImageButton($text, $name = false, $class = false, $img_url, $img_attr = false)
+    function SubmitImageButton($text, $name = '', $class = '', $img_url, $img_attr = array())
     {
         $this->__construct('input', array('type' => 'image',
             'src' => $img_url,

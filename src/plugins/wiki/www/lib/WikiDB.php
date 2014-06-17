@@ -217,6 +217,7 @@ class WikiDB
      * @access public
      * @param string $pagename Name of page to delete.
      * @see purgePage
+     * @return mixed
      */
     function deletePage($pagename)
     {
@@ -410,7 +411,7 @@ class WikiDB
      *
      * @access public
      *
-     * @param hash $params This hash is used to specify various optional
+     * @param array $params This hash is used to specify various optional
      *   parameters:
      * <dl>
      * <dt> limit
@@ -432,7 +433,7 @@ class WikiDB
      * @return WikiDB_PageRevisionIterator A WikiDB_PageRevisionIterator
      * containing the matching revisions.
      */
-    function mostRecent($params = false)
+    function mostRecent($params = array())
     {
         $result = $this->_backend->most_recent($params);
         return new WikiDB_PageRevisionIterator($this, $result);
@@ -441,6 +442,8 @@ class WikiDB
     /**
      * @access public
      *
+     * @param string $exclude_from
+     * @param string $exclude
      * @param string $sortby Optional. "+-column,+-column2".
      *        If false the result is faster in natural order.
      * @param string $limit Optional. Encoded as "$offset,$count".
@@ -451,7 +454,6 @@ class WikiDB
     function wantedPages($exclude_from = '', $exclude = '', $sortby = '', $limit = '')
     {
         return $this->_backend->wanted_pages($exclude_from, $exclude, $sortby, $limit);
-        //return new WikiDB_PageIterator($this, $result);
     }
 
     /**
@@ -460,8 +462,8 @@ class WikiDB
      *
      * @access public
      *
-     * @param $pages  object A TextSearchQuery object.
-     * @param $search object A TextSearchQuery object.
+     * @param object $pages   A TextSearchQuery object.
+     * @param object $search  A TextSearchQuery object.
      * @param string $linktype One of "linkto", "linkfrom", "relation", "attribute".
      *   linktype parameter:
      * <dl>
@@ -474,7 +476,7 @@ class WikiDB
      * <dt> "attribute"
      *    <dd> the first part in a <>:=<> link
      * </dl>
-     * @param $relation object An optional TextSearchQuery to match the
+     * @param mixed $relation An optional TextSearchQuery to match the
      * relation name. Ignored on simple in-out links.
      *
      * @return Iterator A generic iterator containing links to pages or values.
@@ -490,7 +492,9 @@ class WikiDB
      * for the SemanticSearch autocompletion.
      *
      * @access public
-     *
+     * @param bool $also_attributes
+     * @param bool $only_attributes
+     * @param bool $sorted
      * @return array of strings
      */
     function listRelations($also_attributes = false, $only_attributes = false, $sorted = true)
@@ -1027,7 +1031,11 @@ class WikiDB_Page
      * (You can defeat this check by setting $version to
      * {@link WIKIDB_FORCE_CREATE} --- not usually recommended.)
      *
-     * @param hash $meta Meta-data for new revision.
+     * @param array $meta Meta-data for new revision.
+     *
+     * @param mixed $formatted
+     *
+     * @return mixed
      */
     function save($wikitext, $version, $meta, $formatted = null)
     {
@@ -1100,7 +1108,7 @@ class WikiDB_Page
      * Get the most recent revision of a page.
      *
      * @access public
-     *
+     * @param bool $need_content
      * @return WikiDB_PageRevision The current WikiDB_PageRevision object.
      */
     function getCurrentRevision($need_content = true)
@@ -1129,8 +1137,8 @@ class WikiDB_Page
      *
      * @access public
      *
-     * @param integer $version Which revision to get.
-     *
+     * @param int $version Which revision to get.
+     * @param bool $need_content
      * @return WikiDB_PageRevision The requested WikiDB_PageRevision object, or
      * false if the requested revision does not exist in the {@link WikiDB}.
      * Note that version zero of any page always exists.
@@ -1161,8 +1169,10 @@ class WikiDB_Page
      *
      * @access public
      *
-     * @param integer $version Find most recent revision before this version.
+     * @param bool|int $version Find most recent revision before this version.
      *  You can also use a WikiDB_PageRevision object to specify the $version.
+     *
+     * @param bool $need_content
      *
      * @return WikiDB_PageRevision The requested WikiDB_PageRevision object, or false if the
      * requested revision does not exist in the {@link WikiDB}.  Note that
@@ -1213,8 +1223,13 @@ class WikiDB_Page
      *
      * @access public
      *
-     * @param boolean $reversed Which links to find: true for backlinks (default).
-     *
+     * @param bool $reversed Which links to find: true for backlinks (default).
+     * @param bool $include_empty
+     * @param string $sortby
+     * @param string $limit
+     * @param string $sortby
+     * @param string $exclude
+     * @param bool $want_relations
      * @return WikiDB_PageIterator A WikiDB_PageIterator containing
      * all matching pages.
      */
@@ -1656,8 +1671,7 @@ class WikiDB_PageRevision
     /**
      * Get the transformed content of a page.
      *
-     * @param string $pagetype Override the page-type of the revision.
-     *
+     * @param bool $pagetype_override
      * @return object An XmlContent-like object containing the page transformed
      * contents.
      */

@@ -217,10 +217,11 @@ function MailifyPage($page, $nversions = 1)
  * dirs are allowed for zipdump and htmldump, not for dumpserial
  *
  *
- * @param $pagename string Pagename.
+ * @param string $pagename Pagename.
+ * @param string $action.
  * @return string Filename for page.
  */
-function FilenameForPage($pagename, $action = false)
+function FilenameForPage($pagename, $action = '')
 {
     $enc = rawurlencode($pagename);
     if (!$action) {

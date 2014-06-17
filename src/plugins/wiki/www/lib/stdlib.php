@@ -163,10 +163,10 @@ function getCookieName()
  *               If a WikiDB_Page object function will extract the name to link to.
  *               If a WikiDB_PageRevision object function will extract the name to link to.
  * @param array $args
- * @param boolean $get_abs_url Default value is false.
+ * @param bool $get_abs_url Default value is false.
  * @return string The absolute URL to the page passed as $pagename.
  */
-function WikiURL($pagename, $args = '', $get_abs_url = false)
+function WikiURL($pagename, $args = array(), $get_abs_url = false)
 {
     global $request, $WikiTheme;
     $anchor = false;
@@ -308,7 +308,7 @@ function IconForLink($protocol_or_url)
  *                          - 'front' display at left
  *                          - 'after' display at right
  *
- * @param string $protocol_or_url Protocol or URL.  Used to determine the
+ * @param string $proto_or_url Protocol or URL.  Used to determine the
  * proper icon.
  * @param string $text The text.
  * @return XmlContent.
@@ -819,10 +819,10 @@ class WikiPageName
      * This can be a relative subpage name (like '/SubPage'),
      * or can be the empty string to refer to the $basename.
      *
-     * @param string $anchor For links to anchors in page.
-     *
      * @param mixed $basename Page name from which to interpret
      * relative or other non-fully-specified page names.
+     *
+     * @param mixed $anchor For links to anchors in page.
      */
     function WikiPageName($name, $basename = false, $anchor = false)
     {
@@ -1091,13 +1091,13 @@ function NoSuchRevision(&$request, $page, $version)
 /**
  * Get time offset for local time zone.
  *
- * @param $time time_t Get offset for this time. Default: now.
- * @param $no_colon boolean Don't put colon between hours and minutes.
+ * @param int $time Get offset for this time. Default: now.
+ * @param bool $no_colon Don't put colon between hours and minutes.
  * @return string Offset as a string in the format +HH:MM.
  */
-function TimezoneOffset($time = false, $no_colon = false)
+function TimezoneOffset($time = 0, $no_colon = false)
 {
-    if ($time === false)
+    if ($time == 0)
         $time = time();
     $secs = date('Z', $time);
 
@@ -1116,12 +1116,12 @@ function TimezoneOffset($time = false, $no_colon = false)
 /**
  * Format time in ISO-8601 format.
  *
- * @param $time time_t Time.  Default: now.
+ * @param int $time Time.  Default: now.
  * @return string Date and time in ISO-8601 format.
  */
-function Iso8601DateTime($time = false)
+function Iso8601DateTime($time = 0)
 {
-    if ($time === false)
+    if ($time == 0)
         $time = time();
     $tzoff = TimezoneOffset($time);
     $date = date('Y-m-d', $time);
@@ -1132,12 +1132,12 @@ function Iso8601DateTime($time = false)
 /**
  * Format time in RFC-2822 format.
  *
- * @param $time time_t Time.  Default: now.
+ * @param int $time Time.  Default: now.
  * @return string Date and time in RFC-2822 format.
  */
-function Rfc2822DateTime($time = false)
+function Rfc2822DateTime($time = 0)
 {
-    if ($time === false)
+    if ($time == 0)
         $time = time();
     return date('D, j M Y H:i:s ', $time) . TimezoneOffset($time, 'no colon');
 }
@@ -1145,12 +1145,12 @@ function Rfc2822DateTime($time = false)
 /**
  * Format time in RFC-1123 format.
  *
- * @param $time time_t Time.  Default: now.
+ * @param int $time Time.  Default: now.
  * @return string Date and time in RFC-1123 format.
  */
-function Rfc1123DateTime($time = false)
+function Rfc1123DateTime($time = 0)
 {
-    if ($time === false)
+    if ($time == 0)
         $time = time();
     return gmdate('D, d M Y H:i:s \G\M\T', $time);
 }
@@ -1200,12 +1200,12 @@ function ParseRfc1123DateTime($timestr)
 /**
  * Format time to standard 'ctime' format.
  *
- * @param $time time_t Time.  Default: now.
+ * @param int $time Time.  Default: now.
  * @return string Date and time.
  */
-function CTime($time = false)
+function CTime($time = 0)
 {
-    if ($time === false)
+    if ($time == 0)
         $time = time();
     return date("D M j H:i:s Y", $time);
 }
@@ -1217,7 +1217,7 @@ function CTime($time = false)
  *
  * @param $bytes       int.  Default: 0.
  * @param $longformat  bool. Default: false.
- * @return class FormattedText (XmlElement.php).
+ * @return FormattedText (XmlElement.php).
  */
 function ByteFormatter($bytes = 0, $longformat = false)
 {
@@ -1726,17 +1726,13 @@ class Alert
 {
     /** Constructor
      *
-     * @param object $request
      * @param mixed  $head    Header ("title") for alert box.
      * @param mixed  $body    The text in the alert box.
-     * @param hash   $buttons An array mapping button labels to URLs.
+     * @param array  $buttons An array mapping button labels to URLs.
      *    The default is a single "Okay" button pointing to $request->getURLtoSelf().
      */
-    function Alert($head, $body, $buttons = false)
+    function Alert($head, $body, $buttons = array())
     {
-        if ($buttons === false)
-            $buttons = array();
-
         if (is_array($body)) {
             $html = HTML::ol();
             foreach ($body as $li) {

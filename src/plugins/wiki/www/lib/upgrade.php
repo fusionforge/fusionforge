@@ -1052,14 +1052,8 @@ class UpgradeEntry
     /**
      * Add an upgrade item to be checked.
      *
-     * @param $parent object The parent Upgrade class to inherit the version properties
-     * @param $key string    A short unique key to store success in the WikiDB
-     * @param $fixed_with double @see phpwiki_version() number
-     * @param $header string Optional header to be printed always even if not applicable
-     * @param $applicable WikiCallback Optional callback boolean applicable()
-     * @param $notice string Description of the check
-     * @param $method WikiCallback Optional callback array method(array)
-     * //param All other args are passed to $method
+     * @param object $parent The parent Upgrade class to inherit the version properties
+     * @param array $params
      */
     function UpgradeEntry(&$parent, $params)
     {
