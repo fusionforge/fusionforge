@@ -24,13 +24,13 @@ If you use different markup or need to apply highlighting dynamically, read
 
 - You can download your own customized version of "highlight.pack.js" or
   use the hosted one as described on the download page:
-  <http://softwaremaniacs.org/soft/highlight/en/download/>
+  <http://highlightjs.org/download/>
 
 - Style themes are available in the download package or as hosted files.
   To create a custom style for your site see the class reference in the file
-  [classref.txt][cr] from the downloaded package.
+  [CSS classes reference][cr] from the downloaded package.
 
-[cr]: http://github.com/isagalaev/highlight.js/blob/master/classref.txt
+[cr]: http://highlightjs.readthedocs.org/en/latest/css-classes-reference.html
 
 
 ## node.js
@@ -42,7 +42,7 @@ installable from NPM:
 
 Alternatively, you can build it from the source with only languages you need:
 
-    python tools/build.py -tnode lang1 lang2 ..
+    python3 tools/build.py -tnode lang1 lang2 ..
 
 Using the library:
 
@@ -56,6 +56,31 @@ hljs.highlight(lang, code).value;
 hljs.highlightAuto(code).value;
 ```
 
+
+## AMD
+
+Highlight.js can be used with an AMD loader.  You will need to build it from
+source in order to do so:
+
+```bash
+$ python3 tools/build.py -tamd lang1 lang2 ..
+```
+
+Which will generate a `build/highlight.pack.js` which will load as an AMD
+module with support for the built languages and can be used like so:
+
+```javascript
+require(["highlight.js/build/highlight.pack"], function(hljs){
+
+  // If you know the language
+  hljs.highlight(lang, code).value;
+
+  // Automatic language detection
+  hljs.highlightAuto(code).value;
+});
+```
+
+
 ## Tab replacement
 
 You can replace TAB ('\x09') characters used for indentation in your code
@@ -64,9 +89,9 @@ styling:
 
 ```html
 <script type="text/javascript">
-  hljs.tabReplace = '    '; // 4 spaces
+  hljs.configure({tabReplace: '    '}); // 4 spaces
   // ... or
-  hljs.tabReplace = '<span class="indent">\t</span>';
+  hljs.configure({tabReplace: '<span class="indent">\t</span>'});
 
   hljs.initHighlightingOnLoad();
 </script>
@@ -75,9 +100,9 @@ styling:
 ## Custom initialization
 
 If you use different markup for code blocks you can initialize them manually
-with `highlightBlock(code, tabReplace, useBR)` function. It takes a DOM element
-containing the code to highlight and optionally a string with which to replace
-TAB characters.
+with `highlightBlock(code)` function. It takes a DOM element containing the
+code to highlight and optionally a string with which to replace TAB
+characters.
 
 Initialization using, for example, jQuery might look like this:
 
@@ -92,11 +117,11 @@ the page. Just make sure you don't do it twice for already highlighted
 blocks.
 
 If your code container relies on `<br>` tags instead of line breaks (i.e. if
-it's not `<pre>`) pass `true` into the third parameter of `highlightBlock`
-to make highlight.js use `<br>` in the output:
+it's not `<pre>`) set the `useBR` option to `true`:
 
 ```javascript
-$('div.code').each(function(i, e) {hljs.highlightBlock(e, null, true)});
+hljs.configure({useBR: true});
+$('div.code').each(function(i, e) {hljs.highlightBlock(e)});
 ```
 
 
@@ -135,9 +160,8 @@ on a site.
 
 ## Meta
 
-- Version: 7.3
-- URL:     http://softwaremaniacs.org/soft/highlight/en/
-- Author:  Ivan Sagalaev (<maniac@softwaremaniacs.org>)
+- Version: 8.0
+- URL:     http://highlightjs.org/
 
 For the license terms see LICENSE files.
-For the list of contributors see AUTHORS.en.txt file.
+For authors and contributors see AUTHORS.en.txt file.
