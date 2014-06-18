@@ -146,10 +146,12 @@ if(forge_get_config('use_activity')) {
 ?>
 <tr>
 <td>
-<input type="checkbox" name="use_activity" value="1" <?php echo c($group->usesActivity()); ?> />
+<input type="checkbox" id="use_activity" name="use_activity" value="1" <?php echo c($group->usesActivity()); ?> />
 </td>
 <td>
+<label for="use_activity">
 <strong><?php echo _('Use Project Activity') ?></strong>
+</label>
 </td>
 </tr>
 <?php
@@ -159,10 +161,12 @@ if(forge_get_config('use_forum')) {
 ?>
 <tr>
 <td>
-<input type="checkbox" name="use_forum" value="1" <?php echo c($group->usesForum()); ?> />
+<input type="checkbox" id="use_forum" name="use_forum" value="1" <?php echo c($group->usesForum()); ?> />
 </td>
 <td>
+<label for="use_forum">
 <strong><?php echo _('Use Forums') ?></strong>
+</label>
 </td>
 </tr>
 <?php
@@ -172,10 +176,12 @@ if(forge_get_config('use_tracker')) {
 ?>
 <tr>
 <td>
-<input type="checkbox" name="use_tracker" value="1" <?php echo c($group->usesTracker()); ?> />
+<input type="checkbox" id="use_tracker" name="use_tracker" value="1" <?php echo c($group->usesTracker()); ?> />
 </td>
 <td>
+<label for="use_tracker">
 <strong><?php echo _('Use Trackers') ?></strong>
+</label>
 </td>
 </tr>
 <?php
@@ -185,10 +191,12 @@ if(forge_get_config('use_mail')) {
 ?>
 <tr>
 <td>
-<input type="checkbox" name="use_mail" value="1" <?php echo c($group->usesMail()); ?> />
+<input type="checkbox" id="use_mail" name="use_mail" value="1" <?php echo c($group->usesMail()); ?> />
 </td>
 <td>
+<label for="use_mail">
 <strong><?php echo _('Use Mailing Lists') ?></strong>
+</label>
 </td>
 </tr>
 <?php
@@ -198,10 +206,12 @@ if(forge_get_config('use_pm')) {
 ?>
 <tr>
 <td>
-<input type="checkbox" name="use_pm" value="1" <?php echo c($group->usesPM()); ?> />
+<input type="checkbox" id="use_pm" name="use_pm" value="1" <?php echo c($group->usesPM()); ?> />
 </td>
 <td>
+<label for="use_pm">
 <strong><?php echo _('Use Tasks') ?></strong>
+</label>
 </td>
 </tr>
 <?php
@@ -211,10 +221,12 @@ if(forge_get_config('use_docman')) {
 ?>
 <tr>
 <td>
-<input type="checkbox" name="use_docman" value="1" <?php echo c($group->usesDocman()); ?> />
+<input type="checkbox" id="use_docman" name="use_docman" value="1" <?php echo c($group->usesDocman()); ?> />
 </td>
 <td>
+<label for="use_docman">
 <strong><?php echo _('Use Documents') ?></strong>
+</label>
 </td>
 </tr>
 <?php
@@ -224,10 +236,12 @@ if(forge_get_config('use_survey')) {
 ?>
 <tr>
 <td>
-<input type="checkbox" name="use_survey" value="1" <?php echo c($group->usesSurvey()); ?> />
+<input type="checkbox" id="use_survey" name="use_survey" value="1" <?php echo c($group->usesSurvey()); ?> />
 </td>
 <td>
+<label for="use_survey">
 <strong><?php echo _('Use Surveys') ?></strong>
+</label>
 </td>
 </tr>
 <?php
@@ -237,10 +251,12 @@ if(forge_get_config('use_news')) {
 ?>
 <tr>
 <td>
-<input type="checkbox" name="use_news" value="1" <?php echo c($group->usesNews()); ?> />
+<input type="checkbox" id="use_news" name="use_news" value="1" <?php echo c($group->usesNews()); ?> />
 </td>
 <td>
+<label for="use_news">
 <strong><?php echo _('Use News') ?> </strong>
+</label>
 </td>
 </tr>
 <?php
@@ -250,10 +266,12 @@ if(forge_get_config('use_scm')) {
 ?>
 <tr>
 <td>
-<input type="checkbox" name="use_scm" value="1" <?php echo c($group->usesSCM()); ?> />
+<input type="checkbox" id="use_scm" name="use_scm" value="1" <?php echo c($group->usesSCM()); ?> />
 </td>
 <td>
+<label for="use_scm">
 <strong><?php echo _('Use Source Code') ?></strong>
+</label>
 </td>
 </tr>
 <?php
@@ -263,10 +281,12 @@ if(forge_get_config('use_frs')) {
 ?>
 <tr>
 <td>
-<input type="checkbox" name="use_frs" value="1" <?php echo c($group->usesFRS()); ?> />
+<input type="checkbox" id="use_frs" name="use_frs" value="1" <?php echo c($group->usesFRS()); ?> />
 </td>
 <td>
+<label for="use_frs">
 <strong><?php echo _('Use File Release System') ?></strong>
+</label>
 </td>
 </tr>
 <?php
@@ -276,19 +296,23 @@ if(forge_get_config('use_ftp')) {
 ?>
 <tr>
 <td>
-<input type="checkbox" name="use_ftp" value="1" <?php echo c($group->usesFTP()); ?> />
+<input type="checkbox" id="use_ftp" name="use_ftp" value="1" <?php echo c($group->usesFTP()); ?> />
 </td>
 <td>
+<label for="use_ftp">
 <strong><?php echo _('Use FTP') ?></strong>
+</label>
 </td>
 </tr>
 <?php } ?>
 <tr>
 <td>
-<input type="checkbox" name="use_stats" value="1" <?php echo c($group->usesStats()); ?> />
+<input type="checkbox" id="use_stats" name="use_stats" value="1" <?php echo c($group->usesStats()); ?> />
 </td>
 <td>
+<label for="use_stats">
 <strong><?php echo _('Use Statistics') ?></strong>
+</label>
 </td>
 </tr>
 
