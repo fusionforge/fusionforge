@@ -241,7 +241,12 @@ class PageType_interwikimap extends PageType
         else
             $url .= $page_enc;
 
-        $url = str_replace(' ', '%20', $url);
+        // Encode spaces in '[[Help:Reini Urban]]'
+        // but not in '[[Upload:logo.jpg size=40x25 align=center]]'
+        if ($moniker != 'Upload') {
+            $url = str_replace(' ', '%20', $url);
+        }
+
         $link = HTML::a(array('href' => $url));
 
         if (!$linktext) {
