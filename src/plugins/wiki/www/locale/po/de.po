@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PhpWiki 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-11 16:07+0100\n"
+"POT-Creation-Date: 2014-06-17 18:33+0200\n"
 "PO-Revision-Date: 2000-10-31 02:23+0200\n"
 "Last-Translator: Reini Urban <rurban@x-ray.at>, Carsten Klapp "
 "<carstenklapp@users.sourceforge.net>, Helmer Pardun <pardunpress@t-online."
@@ -1802,6 +1802,10 @@ msgstr ""
 msgid "Simple Sample Plugin."
 msgstr "Zusatzprogramm Minimalbeispiel."
 
+#, php-format
+msgid "%s, %s"
+msgstr ""
+
 msgid "Convert HTML markup into wiki markup."
 msgstr ""
 
@@ -2846,10 +2850,6 @@ msgstr ""
 msgid "Retrieving from external url %s wiki.getRecentChanges(%s)..."
 msgstr ""
 
-# ie. no pages found
-msgid "<unknown>"
-msgstr "<unbekannt>"
-
 msgid " skipped"
 msgstr " ausgelassen"
 
@@ -2887,12 +2887,8 @@ msgstr "gleiche Seiteninalt"
 msgid "FAILED"
 msgstr "FEHLER"
 
-msgid "Source code syntax highlighter (via http://www.andre-simon.de)."
+msgid "Source code syntax highlighter (via http://highlightjs.org/)."
 msgstr ""
-
-#, php-format
-msgid "invalid %s ignored"
-msgstr "ungültiges %s ignoriert"
 
 msgid "Provide access to PhpWiki's lower level system information."
 msgstr ""
@@ -3431,6 +3427,10 @@ msgstr "%d Benutzer Online"
 
 msgid "Guest"
 msgstr "Gast"
+
+# ie. no pages found
+msgid "<unknown>"
+msgstr "<unbekannt>"
 
 #, php-format
 msgid "%d minutes"
@@ -5277,6 +5277,10 @@ msgstr "GuterStil"
 msgid "See %s tips for editing."
 msgstr "Siehe %s Tips fürs Edieren."
 
+#, fuzzy
+msgid "Help/TextFormattingRules"
+msgstr "TextFormatierungsRegeln"
+
 msgid "Synopsis"
 msgstr "Übersicht"
 
@@ -6095,6 +6099,9 @@ msgstr "Sidebar"
 
 msgid "Edit this page"
 msgstr "Diese Seite bearbeiten"
+
+#~ msgid "invalid %s ignored"
+#~ msgstr "ungültiges %s ignoriert"
 
 #~ msgid "Version %s"
 #~ msgstr "Version %s."
