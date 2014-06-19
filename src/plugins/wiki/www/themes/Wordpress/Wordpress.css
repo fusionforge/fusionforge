@@ -23,6 +23,10 @@
     text-decoration: line-through;
 }
 
+.big {
+    font-size: larger;
+}
+
 .align-left {
     text-align: left;
 }

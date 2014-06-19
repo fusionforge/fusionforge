@@ -860,6 +860,9 @@ class Markup_html_emphasis extends BalancedMarkup
     function markup($match, $body)
     {
         $tag = substr($match, 1, -1);
+        if (($tag == 'big') || ($tag == 'strike') || ($tag == 'tt')) {
+            return new HtmlElement('span', array('class' => $tag), $body);
+        }
         return new HtmlElement($tag, $body);
     }
 }
