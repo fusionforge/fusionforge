@@ -5,13 +5,6 @@
   (to be tested in both Pear and ADODB)
 * revert of Patch 3024787 by Sébastien Le Callonnec (caused an SQL syntax error)
 
-== Others==
-* Minimizer for JS/CSS
-** no "make clean" in themes
-** "make clean" does not work in themes with no Javascript
-** in MonoBook, IEFixes.js cannot be minimized, yuicompressor-2.4.2 gives syntax errors
-* plugin Video does not work (code reverted to r7204 to make it work again)
-
 ----
 
 short-term TODO:

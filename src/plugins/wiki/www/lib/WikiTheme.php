@@ -1356,12 +1356,6 @@ else window.onload = downloadJSAtOnload;');
         $this->addAlternateCSS(_("Top & bottom toolbars"), 'phpwiki-topbottombars.css');
         $this->addAlternateCSS(_("Modern"), 'phpwiki-modern.css');
 
-        if (isBrowserIE()) {
-            $this->addMoreHeaders($this->_CSSlink(0,
-                $this->_findFile('IEFixes.css'), 'all'));
-            $this->addMoreHeaders("\n");
-        }
-
         /**
          * The logo image appears on every page and links to the HomePage.
          */
