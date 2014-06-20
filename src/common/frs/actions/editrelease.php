@@ -121,4 +121,3 @@ if ($exec_changes == true) {
 }
 
 session_redirect('/frs/?group_id='.$group_id.'&view=editrelease&release_id='.$release_id.'&package_id='.$package_id);
-
