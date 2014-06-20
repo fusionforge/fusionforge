@@ -107,7 +107,7 @@ if (is_array($linkValues)) {
 				'<input type="submit" value="'. _('Update') .'" />'.
 				'<input type="submit" name="submit" value="'. _('Cancel') .'" formnovalidate="formnovalidate" />', false);
 	echo $HTML->closeForm();
-	echo html_e('span', array(), sprintf(_('Fields marked with %s are mandatory.'), utils_requiredField()), false);
+	echo $HTML->addRequiredFieldsInfoBox();
 } else {
 	$error_msg = _('Cannot retrieve value for this link')._(': ').$linkId;
 	session_redirect($redirect_url);
