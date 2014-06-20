@@ -651,13 +651,13 @@ if (isset($params['group']) && $params['group']) {
 			$count = count($titleArray);
 			for ($i = 0; $i < $count; $i++) {
 				$thAttrs = array();
-				if ($thOtherAttrsArray && $thOtherAttrsArray[$i]) {
+				if ($thOtherAttrsArray && isset($thOtherAttrsArray[$i])) {
 					$thAttrs = $thOtherAttrsArray[$i];
 				}
-				if ($thClassArray && $thClassArray[$i]) {
+				if ($thClassArray && isset($thClassArray[$i])) {
 					$thAttrs['class'] = $thClassArray[$i];
 				}
-				if ($thTitleArray && $thTitleArray[$i]) {
+				if ($thTitleArray && isset($thTitleArray[$i])) {
 					$thAttrs['title'] = $thTitleArray[$i];
 				}
 				$cell = $titleArray[$i];
@@ -1038,6 +1038,13 @@ if (isset($params['group']) && $params['group']) {
 			';
 	}
 
+	function jQueryUIconfirmBox($id = 'dialog-confirm', $title = 'Confirm your action', $message = 'Do you confirm your action?') {
+		$htmlcode = html_ao('div', array('id' => $id, 'title' => $title, 'class' => 'hide'));
+		$htmlcode .= html_e('p', array(), html_e('span', array('class' => 'ui-icon ui-icon-alert', 'style' => 'float:left; margin:0 7px 20px 0;'), '', false).$message);
+		$htmlcode .= html_ac(html_ap() -1);
+		return $htmlcode;
+	}
+
 	function html_input($name, $id = '', $label = '', $type = 'text', $value = '', $extra_params = '') {
 		if (!$id) {
 			$id = $name;
@@ -1217,6 +1224,14 @@ if (isset($params['group']) && $params['group']) {
 		return $this->getPicto('ic/mail16w.png', $title, $alt);
 	}
 
+	function getStartMonitoringPic($title = '', $alt = '') {
+		return $this->getPicto('ic/startmonitor.png', $title, $alt);
+	}
+
+	function getStopMonitoringPic($title = '', $alt = '') {
+		return $this->getPicto('ic/stopmonitor.png', $title, $alt);
+	}
+
 	function getReleaseNotesPic($title = '', $alt = '') {
 		return $this->getPicto('ic/manual16c.png', $title, $alt);
 	}
@@ -1262,11 +1277,15 @@ if (isset($params['group']) && $params['group']) {
 		return $this->getPicto('ic/ftp16b.png', $title, $alt);
 	}
 
+	function getDeletePic($title = '', $alt = '') {
+		return $this->getPicto('ic/delete.png', $title, $alt);
+	}
+
 	function getPicto($url, $title, $alt, $width = '20', $height = '20') {
 		if (!$alt) {
 			$alt = $title;
 		}
-		return html_image($url, $width, $height, array('title'=>$title, 'alt'=>$alt));
+		return html_image($url, $width, $height, array('title' => $title, 'alt' => $alt));
 	}
 
 	/**

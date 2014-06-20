@@ -4,7 +4,7 @@
  *
  * Copyright 2002, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
- * Copyright 2012-2013, Franck Villaume - TrivialDev
+ * Copyright 2012-2014, Franck Villaume - TrivialDev
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -38,7 +38,7 @@ function &frsfile_get_object($file_id, $data=false) {
 		if ($data) {
 					//the db result handle was passed in
 		} else {
-			$res = db_query_params ('SELECT * FROM frs_file WHERE file_id=$1',
+			$res = db_query_params ('SELECT * FROM frs_file_vw WHERE file_id=$1',
 						array ($file_id)) ;
 			if (db_numrows($res)<1 ) {
 				$FRSFILE_OBJ['_'.$file_id.'_']=false;
@@ -156,7 +156,7 @@ class FRSFile extends Error {
 		if (!is_dir($path_name)) {
 			mkdir($path_name, 0755, true);
 		} else {
-			if ( fileperms($path_name) != 0x4755 ) {
+			if (fileperms($path_name) != 0x4755) {
 				chmod($path_name, 0755);
 			}
 		}
@@ -164,7 +164,7 @@ class FRSFile extends Error {
 		if (!is_dir($path_name)) {
 			mkdir($path_name, 0755);
 		} else {
-			if ( fileperms($path_name) != 0x4755 ) {
+			if (fileperms($path_name) != 0x4755) {
 				chmod($path_name, 0755);
 			}
 		}
@@ -172,7 +172,7 @@ class FRSFile extends Error {
 		if (!is_dir($path_name)) {
 			mkdir($path_name, 0755);
 		} else {
-			if ( fileperms($path_name) != 0x4755 ) {
+			if (fileperms($path_name) != 0x4755) {
 				chmod($path_name, 0755);
 			}
 		}
@@ -189,9 +189,9 @@ class FRSFile extends Error {
 		}
 
 		if (!$release_time) {
-			$release_time=time();
+			$release_time = time();
 		}
-		$file_size=filesize("$newfilelocation$name");
+		$file_size = filesize("$newfilelocation$name");
 
 		db_begin();
 		$result = db_query_params('INSERT INTO frs_file(release_id,filename,release_time,type_id,processor_id,file_size,post_date) VALUES ($1,$2,$3,$4,$5,$6,$7)',
@@ -207,7 +207,7 @@ class FRSFile extends Error {
 			db_rollback();
 			return false;
 		}
-		$this->file_id=db_insertid($result,'frs_file','file_id');
+		$this->file_id = db_insertid($result,'frs_file','file_id');
 		if (!$this->fetchData($this->file_id)) {
 			db_rollback();
 			return false;
@@ -348,23 +348,23 @@ class FRSFile extends Error {
 			return false;
 		}
 
-		$file=forge_get_config('upload_dir').'/'.
-			$this->FRSRelease->FRSPackage->Group->getUnixName() . '/' .
+		$file = forge_get_config('upload_dir').'/'.
+			$this->FRSRelease->FRSPackage->Group->getUnixName().'/'.
 			$this->FRSRelease->FRSPackage->getFileName().'/'.
 			$this->FRSRelease->getFileName().'/'.
 			$this->getName();
 			if (file_exists($file))
 				unlink($file);
-		$result = db_query_params ('DELETE FROM frs_file WHERE file_id=$1',
-					   array ($this->getID())) ;
+		$result = db_query_params('DELETE FROM frs_file WHERE file_id=$1',
+					   array($this->getID()));
 		if (!$result || db_affected_rows($result) < 1) {
 			$this->setError("frsDeleteFile()::2 ".db_error());
 			return false;
 		} else {
-			db_query_params ('DELETE FROM frs_dlstats_file WHERE file_id=$1',
-						array ($this->getID())) ;
-			db_query_params ('DELETE FROM frs_dlstats_filetotal_agg WHERE file_id=$1',
-						array ($this->getID())) ;
+			db_query_params('DELETE FROM frs_dlstats_file WHERE file_id=$1',
+						array ($this->getID()));
+			db_query_params('DELETE FROM frs_dlstats_filetotal_agg WHERE file_id=$1',
+						array ($this->getID()));
 			$this->FRSRelease->FRSPackage->createNewestReleaseFilesAsZip();
 			return true;
 		}
@@ -405,12 +405,12 @@ class FRSFile extends Error {
 
 		// Update database
 		db_begin();
-		$res = db_query_params ('UPDATE frs_file SET type_id=$1,processor_id=$2,release_time=$3,release_id=$4 WHERE file_id=$5',
-					array ($type_id,
-					       $processor_id,
-					       $release_time,
-					       $release_id,
-					       $this->getID())) ;
+		$res = db_query_params('UPDATE frs_file SET type_id=$1,processor_id=$2,release_time=$3,release_id=$4 WHERE file_id=$5',
+					array($type_id,
+						$processor_id,
+						$release_time,
+						$release_id,
+						$this->getID()));
 
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setError(sprintf(_('Error On Update: %s'), db_error()));
