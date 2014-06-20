@@ -115,9 +115,7 @@ html_use_jquerysplitter();
 use_javascript('/docman/scripts/DocManController.js');
 use_javascript('/js/sortable.js');
 
-$title = _('Documents for ').$g->getPublicName();
-
-site_project_header(array('title'=>$title, 'group'=>$group_id, 'toptab'=>'docman'));
+site_project_header(array('title'=> _('Documents for ').$g->getPublicName(), 'group'=>$group_id, 'toptab'=>'docman'));
 
 echo html_ao('div', array('id' => 'menu'));
 include ($gfcommon.'docman/views/menu.php');
