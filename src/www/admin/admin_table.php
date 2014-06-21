@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 (c) Franck Villaume - Capgemini
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2014 Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -47,10 +47,11 @@ function admin_table_add($table, $unit, $primary_key) {
 
 		for ($i = 0; $i < $cols; $i++) {
 			$fieldname = db_fieldname($result, $i);
-			$fields[] = $fieldname;
-
-			echo '<tr><td><strong>'.$fieldname.'</strong></td>';
-			echo '<td><input type="text" name="'.$fieldname.'" value="" /></td></tr>';
+			if ($fieldname != $primary_key) {
+				$fields[] = $fieldname;
+				echo '<tr><td><strong>'.$fieldname.'</strong></td>';
+				echo '<td><input type="text" name="'.$fieldname.'" value="" required="required" /></td></tr>';
+			}
 		}
 		echo '</table><input type="submit" value="'._('Add').'" />
 			<input type="hidden" name="__fields__" value="'.implode(',',$fields).'" />
