@@ -3,6 +3,7 @@ Fusionforge-5.3.2:
 * SCM Git: suppress 'warning: You appear to have cloned an empty repository.' in create_scm_repos.php (Inria)
 * SCM Git: handle bad encoding when gathering stats (Inria)
 * Plugin mediawiki: fix paths in import/export scripts (Inria)
+* Admin: fix edit table themes, fix frs_processor sequence [#691] (TrivialDev)
 
 Fusionforge-5.3.1:
 * Docman: Basic Webdav write mkcol support (TrivialDev)
