@@ -385,7 +385,7 @@ class FRSPackage extends Error {
 						array ($this->Group->getID(),
 						       htmlspecialchars($name))) ;
 			if (db_numrows($res)) {
-				$this->setError(_('Error Updating Package: Name Already Exists'));
+				$this->setError(_('Error Updating Package')._(': ')._('Name Already Exists'));
 				return false;
 			}
 		}
@@ -397,14 +397,14 @@ class FRSPackage extends Error {
 					       $this->Group->getID(),
 					       $this->getID())) ;
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError(sprintf(_('Error On Update: %s'), db_error()));
+			$this->setError(_('Error On Update')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
 
 		$olddirname = $this->getFileName();
 		if(!$this->fetchData($this->getID())){
-			$this->setError(_("Error Updating Package: Couldn't fetch data"));
+			$this->setError(_("Error Updating Package")._(': ')._("Couldn't fetch data"));
 			db_rollback();
 			return false;
 		}
@@ -414,12 +414,12 @@ class FRSPackage extends Error {
 
 		if(($olddirname!=$newdirname)){
 			if(is_dir($newdirlocation)){
-				$this->setError(_('Error Updating Package: Directory Already Exists'));
+				$this->setError(_('Error Updating Package')._(': ')._('Directory Already Exists'));
 				db_rollback();
 				return false;
 			} else {
 				if(!@rename($olddirlocation,$newdirlocation)) {
-					$this->setError(_("Error Updating Package: Couldn't rename dir"));
+					$this->setError(_("Error Updating Package")._(': ')._("Couldn't rename dir"));
 					db_rollback();
 					return false;
 				}
