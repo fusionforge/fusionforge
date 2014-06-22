@@ -1787,7 +1787,6 @@ class SubmitImageButton extends SubmitButton
     {
         $this->__construct('input', array('type' => 'image',
             'src' => $img_url,
-            'value' => $text,
             'alt' => $text));
         if ($name)
             $this->setAttr('name', $name);
