@@ -442,7 +442,7 @@ class FRSRelease extends Error {
 
 		$oldfilename = $this->getFileName();
 		if(!$this->fetchData($this->getID())){
-			$this->setError(_("Error Updating Release: Couldn't fetch data"));
+			$this->setError(_('Error Updating Release')._(': ')._("Couldn't fetch data"));
 			db_rollback();
 			return false;
 		}
@@ -452,12 +452,12 @@ class FRSRelease extends Error {
 
 		if (($oldfilename!=$newfilename) && is_dir($olddirlocation)) {
 			if (is_dir($newdirlocation)) {
-				$this->setError(_('Error Updating Release: Directory Already Exists'));
+				$this->setError(_('Error Updating Release')._(': ')._('Directory Already Exists'));
 				db_rollback();
 				return false;
 			} else {
 				if(!rename($olddirlocation, $newdirlocation)) {
-					$this->setError(_("Error Updating Release: Couldn't rename dir"));
+					$this->setError(_('Error Updating Release')._(': ')._("Couldn't rename dir"));
 					db_rollback();
 					return false;
 				}

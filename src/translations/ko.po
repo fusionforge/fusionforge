@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-23 14:11+0200\n"
+"POT-Creation-Date: 2014-06-23 14:25+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -237,21 +237,23 @@ msgstr "임무 세부사항"
 #: common/forum/ForumHTML.class.php:525 common/forum/ForumHTML.class.php:586
 #: common/forum/ForumHTML.class.php:589
 #: common/forum/ForumMessage.class.php:667 common/frs/FRSFile.class.php:187
-#: common/frs/FRSFile.class.php:440 common/frs/FRSPackage.class.php:295
+#: common/frs/FRSFile.class.php:440 common/frs/FRSPackage.class.php:158
+#: common/frs/FRSPackage.class.php:169 common/frs/FRSPackage.class.php:295
 #: common/frs/FRSPackage.class.php:388 common/frs/FRSPackage.class.php:400
 #: common/frs/FRSPackage.class.php:407 common/frs/FRSPackage.class.php:417
 #: common/frs/FRSPackage.class.php:422
 #: common/frs/FRSPackageFactory.class.php:55
 #: common/frs/FRSPackageFactory.class.php:98
-#: common/frs/views/editrelease.php:97 common/frs/views/editrelease.php:104
-#: common/frs/views/editrelease.php:131 common/frs/views/listpackages.php:106
-#: common/frs/views/qrs.php:67 common/frs/views/shownotes.php:51
-#: common/include/Error.class.php:206 common/include/exit.php:82
-#: common/include/Group.class.php:2644 common/include/Group.class.php:2645
-#: common/include/Group.class.php:2646 common/include/Group.class.php:2698
-#: common/include/Group.class.php:2699 common/include/Group.class.php:2702
-#: common/include/Group.class.php:2706 common/include/Group.class.php:2716
-#: common/include/Group.class.php:2717
+#: common/frs/FRSRelease.class.php:445 common/frs/FRSRelease.class.php:455
+#: common/frs/FRSRelease.class.php:460 common/frs/views/editrelease.php:97
+#: common/frs/views/editrelease.php:104 common/frs/views/editrelease.php:131
+#: common/frs/views/listpackages.php:106 common/frs/views/qrs.php:67
+#: common/frs/views/shownotes.php:51 common/include/Error.class.php:206
+#: common/include/exit.php:82 common/include/Group.class.php:2644
+#: common/include/Group.class.php:2645 common/include/Group.class.php:2646
+#: common/include/Group.class.php:2698 common/include/Group.class.php:2699
+#: common/include/Group.class.php:2702 common/include/Group.class.php:2706
+#: common/include/Group.class.php:2716 common/include/Group.class.php:2717
 #: common/include/GroupJoinRequest.class.php:298
 #: common/include/Navigation.class.php:68 common/include/User.class.php:350
 #: common/include/User.class.php:436 common/include/User.class.php:1411
@@ -3140,14 +3142,15 @@ msgstr "릴리즈 이름은 3글자 이상이어야 합니다."
 msgid "Package Name can only be alphanumeric"
 msgstr "패키지 이름은 숫자/영문으로만 이루어져야 합니다."
 
-#: common/frs/FRSPackage.class.php:158
+#: common/frs/FRSPackage.class.php:158 common/frs/FRSPackage.class.php:169
 #, fuzzy
-msgid "Error Adding Package: Name Already Exists"
-msgstr "사용자 ID가 이미 존재합니다."
+msgid "Error Adding Package"
+msgstr "게시판을 추가할 때 오류가 발생하였습니다."
 
-#: common/frs/FRSPackage.class.php:169
-msgid "Error Adding Package: "
-msgstr ""
+#: common/frs/FRSPackage.class.php:158 common/frs/FRSPackage.class.php:388
+#, fuzzy
+msgid "Name Already Exists"
+msgstr "사용자 ID가 이미 존재합니다."
 
 #: common/frs/FRSPackage.class.php:209
 #, fuzzy
@@ -3165,27 +3168,22 @@ msgstr "그룹 객체 생성 오류"
 msgid "Error Updating Package"
 msgstr "게시판을 추가할 때 오류가 발생하였습니다."
 
-#: common/frs/FRSPackage.class.php:388
-#, fuzzy
-msgid "Name Already Exists"
-msgstr "사용자 ID가 이미 존재합니다."
-
 #: common/frs/FRSPackage.class.php:400
 #, fuzzy
 msgid "Error On Update"
 msgstr "갱신 오류:"
 
-#: common/frs/FRSPackage.class.php:407
+#: common/frs/FRSPackage.class.php:407 common/frs/FRSRelease.class.php:445
 #, fuzzy
 msgid "Couldn't fetch data"
 msgstr "권한을 가져올 수 없습니다."
 
-#: common/frs/FRSPackage.class.php:417
+#: common/frs/FRSPackage.class.php:417 common/frs/FRSRelease.class.php:455
 #, fuzzy
 msgid "Directory Already Exists"
 msgstr "사용자 ID가 이미 존재합니다."
 
-#: common/frs/FRSPackage.class.php:422
+#: common/frs/FRSPackage.class.php:422 common/frs/FRSRelease.class.php:460
 #, fuzzy
 msgid "Couldn't rename dir"
 msgstr "사용자 ID가 이미 존재합니다."
@@ -3275,19 +3273,11 @@ msgstr ""
 msgid "Error On Update: Name Already Exists"
 msgstr "사용자 ID가 이미 존재합니다."
 
-#: common/frs/FRSRelease.class.php:445
-msgid "Error Updating Release: Couldn't fetch data"
-msgstr ""
-
-#: common/frs/FRSRelease.class.php:455
-#, fuzzy
-msgid "Error Updating Release: Directory Already Exists"
-msgstr "사용자 ID가 이미 존재합니다."
-
+#: common/frs/FRSRelease.class.php:445 common/frs/FRSRelease.class.php:455
 #: common/frs/FRSRelease.class.php:460
 #, fuzzy
-msgid "Error Updating Release: Couldn't rename dir"
-msgstr "사용자 ID가 이미 존재합니다."
+msgid "Error Updating Release"
+msgstr "그룹 객체 생성 오류"
 
 #: common/frs/include/frs_utils.php:97 common/frs/include/frs_utils.php:120
 msgid "Error: group id required"
@@ -23663,6 +23653,18 @@ msgid "No User Name Provided"
 msgstr "사용자ID"
 
 #, fuzzy
+#~ msgid "Error Adding Package: Name Already Exists"
+#~ msgstr "사용자 ID가 이미 존재합니다."
+
+#, fuzzy
+#~ msgid "Error Updating Release: Directory Already Exists"
+#~ msgstr "사용자 ID가 이미 존재합니다."
+
+#, fuzzy
+#~ msgid "Error Updating Release: Couldn't rename dir"
+#~ msgstr "사용자 ID가 이미 존재합니다."
+
+#, fuzzy
 #~ msgid "Error Updating Package: Name Already Exists"
 #~ msgstr "사용자 ID가 이미 존재합니다."
 
@@ -24876,10 +24878,6 @@ msgstr "사용자ID"
 #, fuzzy
 #~ msgid "Anonymous & Non Project Users"
 #~ msgstr "익명 FTP 공간"
-
-#, fuzzy
-#~ msgid "Error Getting Release"
-#~ msgstr "그룹 객체 생성 오류"
 
 #~ msgid "SUBMIT ONLY ONCE"
 #~ msgstr "한번만 클릭하세요."

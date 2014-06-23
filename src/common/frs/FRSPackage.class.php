@@ -155,7 +155,7 @@ class FRSPackage extends Error {
 					array ($this->Group->getID(),
 					       htmlspecialchars($name))) ;
 		if (db_numrows($res)) {
-			$this->setError(_('Error Adding Package: Name Already Exists'));
+			$this->setError(_('Error Adding Package')._(': ')._('Name Already Exists'));
 			return false;
 		}
 
@@ -166,7 +166,7 @@ class FRSPackage extends Error {
 						  1,
 						  $is_public)) ;
 		if (!$result) {
-			$this->setError(_('Error Adding Package: ').db_error());
+			$this->setError(_('Error Adding Package')._(': ').db_error());
 			db_rollback();
 			return false;
 		}

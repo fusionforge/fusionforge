@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-23 14:11+0200\n"
+"POT-Creation-Date: 2014-06-23 14:25+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -231,21 +231,23 @@ msgstr "Falló Tarea"
 #: common/forum/ForumHTML.class.php:525 common/forum/ForumHTML.class.php:586
 #: common/forum/ForumHTML.class.php:589
 #: common/forum/ForumMessage.class.php:667 common/frs/FRSFile.class.php:187
-#: common/frs/FRSFile.class.php:440 common/frs/FRSPackage.class.php:295
+#: common/frs/FRSFile.class.php:440 common/frs/FRSPackage.class.php:158
+#: common/frs/FRSPackage.class.php:169 common/frs/FRSPackage.class.php:295
 #: common/frs/FRSPackage.class.php:388 common/frs/FRSPackage.class.php:400
 #: common/frs/FRSPackage.class.php:407 common/frs/FRSPackage.class.php:417
 #: common/frs/FRSPackage.class.php:422
 #: common/frs/FRSPackageFactory.class.php:55
 #: common/frs/FRSPackageFactory.class.php:98
-#: common/frs/views/editrelease.php:97 common/frs/views/editrelease.php:104
-#: common/frs/views/editrelease.php:131 common/frs/views/listpackages.php:106
-#: common/frs/views/qrs.php:67 common/frs/views/shownotes.php:51
-#: common/include/Error.class.php:206 common/include/exit.php:82
-#: common/include/Group.class.php:2644 common/include/Group.class.php:2645
-#: common/include/Group.class.php:2646 common/include/Group.class.php:2698
-#: common/include/Group.class.php:2699 common/include/Group.class.php:2702
-#: common/include/Group.class.php:2706 common/include/Group.class.php:2716
-#: common/include/Group.class.php:2717
+#: common/frs/FRSRelease.class.php:445 common/frs/FRSRelease.class.php:455
+#: common/frs/FRSRelease.class.php:460 common/frs/views/editrelease.php:97
+#: common/frs/views/editrelease.php:104 common/frs/views/editrelease.php:131
+#: common/frs/views/listpackages.php:106 common/frs/views/qrs.php:67
+#: common/frs/views/shownotes.php:51 common/include/Error.class.php:206
+#: common/include/exit.php:82 common/include/Group.class.php:2644
+#: common/include/Group.class.php:2645 common/include/Group.class.php:2646
+#: common/include/Group.class.php:2698 common/include/Group.class.php:2699
+#: common/include/Group.class.php:2702 common/include/Group.class.php:2706
+#: common/include/Group.class.php:2716 common/include/Group.class.php:2717
 #: common/include/GroupJoinRequest.class.php:298
 #: common/include/Navigation.class.php:68 common/include/User.class.php:350
 #: common/include/User.class.php:436 common/include/User.class.php:1411
@@ -3097,15 +3099,15 @@ msgstr "FRSPackage El nombre debe tener al menos 3 caracteres"
 msgid "Package Name can only be alphanumeric"
 msgstr "El nombre del paquete sólo puede ser alfanumérico"
 
-#: common/frs/FRSPackage.class.php:158
+#: common/frs/FRSPackage.class.php:158 common/frs/FRSPackage.class.php:169
 #, fuzzy
-msgid "Error Adding Package: Name Already Exists"
-msgstr "El nombre de elemento ya existe"
-
-#: common/frs/FRSPackage.class.php:169
-#, fuzzy
-msgid "Error Adding Package: "
+msgid "Error Adding Package"
 msgstr "Error Agregando a Base de Datos: "
+
+#: common/frs/FRSPackage.class.php:158 common/frs/FRSPackage.class.php:388
+#, fuzzy
+msgid "Name Already Exists"
+msgstr "La lista de correo ya EXISTE"
 
 #: common/frs/FRSPackage.class.php:209
 #, fuzzy
@@ -3123,27 +3125,22 @@ msgstr "Error borrando monitor: "
 msgid "Error Updating Package"
 msgstr "Fue un error creando el foro."
 
-#: common/frs/FRSPackage.class.php:388
-#, fuzzy
-msgid "Name Already Exists"
-msgstr "La lista de correo ya EXISTE"
-
 #: common/frs/FRSPackage.class.php:400
 #, fuzzy
 msgid "Error On Update"
 msgstr "Error en la actualización:"
 
-#: common/frs/FRSPackage.class.php:407
+#: common/frs/FRSPackage.class.php:407 common/frs/FRSRelease.class.php:445
 #, fuzzy
 msgid "Couldn't fetch data"
 msgstr "No puedo obtener datos de la sesión del usuario"
 
-#: common/frs/FRSPackage.class.php:417
+#: common/frs/FRSPackage.class.php:417 common/frs/FRSRelease.class.php:455
 #, fuzzy
 msgid "Directory Already Exists"
 msgstr "La lista de correo ya EXISTE"
 
-#: common/frs/FRSPackage.class.php:422
+#: common/frs/FRSPackage.class.php:422 common/frs/FRSRelease.class.php:460
 #, fuzzy
 msgid "Couldn't rename dir"
 msgstr "No se pudo obtener el id del mensaje"
@@ -3237,20 +3234,11 @@ msgstr ""
 msgid "Error On Update: Name Already Exists"
 msgstr "El nombre de elemento ya existe"
 
-#: common/frs/FRSRelease.class.php:445
-#, fuzzy
-msgid "Error Updating Release: Couldn't fetch data"
-msgstr "Error actualizando un nombre de caja"
-
-#: common/frs/FRSRelease.class.php:455
-#, fuzzy
-msgid "Error Updating Release: Directory Already Exists"
-msgstr "El nombre de elemento ya existe"
-
+#: common/frs/FRSRelease.class.php:445 common/frs/FRSRelease.class.php:455
 #: common/frs/FRSRelease.class.php:460
 #, fuzzy
-msgid "Error Updating Release: Couldn't rename dir"
-msgstr "El nombre de elemento ya existe"
+msgid "Error Updating Release"
+msgstr "Error obteniendo el objeto rol"
 
 #: common/frs/include/frs_utils.php:97 common/frs/include/frs_utils.php:120
 msgid "Error: group id required"
@@ -23838,6 +23826,22 @@ msgid "No User Name Provided"
 msgstr "No ha proporcionado el nombre de usuario"
 
 #, fuzzy
+#~ msgid "Error Adding Package: Name Already Exists"
+#~ msgstr "El nombre de elemento ya existe"
+
+#, fuzzy
+#~ msgid "Error Updating Release: Couldn't fetch data"
+#~ msgstr "Error actualizando un nombre de caja"
+
+#, fuzzy
+#~ msgid "Error Updating Release: Directory Already Exists"
+#~ msgstr "El nombre de elemento ya existe"
+
+#, fuzzy
+#~ msgid "Error Updating Release: Couldn't rename dir"
+#~ msgstr "El nombre de elemento ya existe"
+
+#, fuzzy
 #~ msgid "Error Updating Package: Name Already Exists"
 #~ msgstr "El nombre de elemento ya existe"
 
@@ -26585,10 +26589,6 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, fuzzy
 #~ msgid "Anonymous & Non Project Users"
 #~ msgstr "Espacio FTP Anónimo"
-
-#, fuzzy
-#~ msgid "Error Getting Release"
-#~ msgstr "Error obteniendo el objeto rol"
 
 #~ msgid "SUBMIT ONLY ONCE"
 #~ msgstr "Haga click una vez solamente."

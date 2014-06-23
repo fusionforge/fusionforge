@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-23 14:11+0200\n"
+"POT-Creation-Date: 2014-06-23 14:25+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -226,21 +226,23 @@ msgstr "Дата на публикуване"
 #: common/forum/ForumHTML.class.php:525 common/forum/ForumHTML.class.php:586
 #: common/forum/ForumHTML.class.php:589
 #: common/forum/ForumMessage.class.php:667 common/frs/FRSFile.class.php:187
-#: common/frs/FRSFile.class.php:440 common/frs/FRSPackage.class.php:295
+#: common/frs/FRSFile.class.php:440 common/frs/FRSPackage.class.php:158
+#: common/frs/FRSPackage.class.php:169 common/frs/FRSPackage.class.php:295
 #: common/frs/FRSPackage.class.php:388 common/frs/FRSPackage.class.php:400
 #: common/frs/FRSPackage.class.php:407 common/frs/FRSPackage.class.php:417
 #: common/frs/FRSPackage.class.php:422
 #: common/frs/FRSPackageFactory.class.php:55
 #: common/frs/FRSPackageFactory.class.php:98
-#: common/frs/views/editrelease.php:97 common/frs/views/editrelease.php:104
-#: common/frs/views/editrelease.php:131 common/frs/views/listpackages.php:106
-#: common/frs/views/qrs.php:67 common/frs/views/shownotes.php:51
-#: common/include/Error.class.php:206 common/include/exit.php:82
-#: common/include/Group.class.php:2644 common/include/Group.class.php:2645
-#: common/include/Group.class.php:2646 common/include/Group.class.php:2698
-#: common/include/Group.class.php:2699 common/include/Group.class.php:2702
-#: common/include/Group.class.php:2706 common/include/Group.class.php:2716
-#: common/include/Group.class.php:2717
+#: common/frs/FRSRelease.class.php:445 common/frs/FRSRelease.class.php:455
+#: common/frs/FRSRelease.class.php:460 common/frs/views/editrelease.php:97
+#: common/frs/views/editrelease.php:104 common/frs/views/editrelease.php:131
+#: common/frs/views/listpackages.php:106 common/frs/views/qrs.php:67
+#: common/frs/views/shownotes.php:51 common/include/Error.class.php:206
+#: common/include/exit.php:82 common/include/Group.class.php:2644
+#: common/include/Group.class.php:2645 common/include/Group.class.php:2646
+#: common/include/Group.class.php:2698 common/include/Group.class.php:2699
+#: common/include/Group.class.php:2702 common/include/Group.class.php:2706
+#: common/include/Group.class.php:2716 common/include/Group.class.php:2717
 #: common/include/GroupJoinRequest.class.php:298
 #: common/include/Navigation.class.php:68 common/include/User.class.php:350
 #: common/include/User.class.php:436 common/include/User.class.php:1411
@@ -3039,14 +3041,15 @@ msgstr "Името на FRSPackage трябва да бъде поне 3 сим�
 msgid "Package Name can only be alphanumeric"
 msgstr ""
 
-#: common/frs/FRSPackage.class.php:158
-msgid "Error Adding Package: Name Already Exists"
-msgstr ""
-
-#: common/frs/FRSPackage.class.php:169
+#: common/frs/FRSPackage.class.php:158 common/frs/FRSPackage.class.php:169
 #, fuzzy
-msgid "Error Adding Package: "
+msgid "Error Adding Package"
 msgstr "Грешка при добавянето на бележка"
+
+#: common/frs/FRSPackage.class.php:158 common/frs/FRSPackage.class.php:388
+#, fuzzy
+msgid "Name Already Exists"
+msgstr "Това потребителско име вече е заето."
 
 #: common/frs/FRSPackage.class.php:209
 msgid "Invalid package_id"
@@ -3062,27 +3065,22 @@ msgstr ""
 msgid "Error Updating Package"
 msgstr "Грешка при добавянето на форум"
 
-#: common/frs/FRSPackage.class.php:388
-#, fuzzy
-msgid "Name Already Exists"
-msgstr "Това потребителско име вече е заето."
-
 #: common/frs/FRSPackage.class.php:400
 #, fuzzy
 msgid "Error On Update"
 msgstr "Грешка при Обновяване:"
 
-#: common/frs/FRSPackage.class.php:407
+#: common/frs/FRSPackage.class.php:407 common/frs/FRSRelease.class.php:445
 #, fuzzy
 msgid "Couldn't fetch data"
 msgstr "Разрешение не беше получено"
 
-#: common/frs/FRSPackage.class.php:417
+#: common/frs/FRSPackage.class.php:417 common/frs/FRSRelease.class.php:455
 #, fuzzy
 msgid "Directory Already Exists"
 msgstr "Това потребителско име вече е заето."
 
-#: common/frs/FRSPackage.class.php:422
+#: common/frs/FRSPackage.class.php:422 common/frs/FRSRelease.class.php:460
 msgid "Couldn't rename dir"
 msgstr ""
 
@@ -3165,17 +3163,11 @@ msgstr ""
 msgid "Error On Update: Name Already Exists"
 msgstr ""
 
-#: common/frs/FRSRelease.class.php:445
-msgid "Error Updating Release: Couldn't fetch data"
-msgstr ""
-
-#: common/frs/FRSRelease.class.php:455
-msgid "Error Updating Release: Directory Already Exists"
-msgstr ""
-
+#: common/frs/FRSRelease.class.php:445 common/frs/FRSRelease.class.php:455
 #: common/frs/FRSRelease.class.php:460
-msgid "Error Updating Release: Couldn't rename dir"
-msgstr ""
+#, fuzzy
+msgid "Error Updating Release"
+msgstr "Грешка при получаването на %1$s"
 
 #: common/frs/include/frs_utils.php:97 common/frs/include/frs_utils.php:120
 msgid "Error: group id required"
@@ -24252,10 +24244,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Anonymous & Non Project Users"
 #~ msgstr "Анонимно FTP пространство"
-
-#, fuzzy
-#~ msgid "Error Getting Release"
-#~ msgstr "Грешка при получаването на %1$s"
 
 #~ msgid "SUBMIT ONLY ONCE"
 #~ msgstr "Записване"

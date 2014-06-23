@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-23 14:11+0200\n"
+"POT-Creation-Date: 2014-06-23 14:25+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -238,21 +238,23 @@ msgstr "Detall de la tasca"
 #: common/forum/ForumHTML.class.php:525 common/forum/ForumHTML.class.php:586
 #: common/forum/ForumHTML.class.php:589
 #: common/forum/ForumMessage.class.php:667 common/frs/FRSFile.class.php:187
-#: common/frs/FRSFile.class.php:440 common/frs/FRSPackage.class.php:295
+#: common/frs/FRSFile.class.php:440 common/frs/FRSPackage.class.php:158
+#: common/frs/FRSPackage.class.php:169 common/frs/FRSPackage.class.php:295
 #: common/frs/FRSPackage.class.php:388 common/frs/FRSPackage.class.php:400
 #: common/frs/FRSPackage.class.php:407 common/frs/FRSPackage.class.php:417
 #: common/frs/FRSPackage.class.php:422
 #: common/frs/FRSPackageFactory.class.php:55
 #: common/frs/FRSPackageFactory.class.php:98
-#: common/frs/views/editrelease.php:97 common/frs/views/editrelease.php:104
-#: common/frs/views/editrelease.php:131 common/frs/views/listpackages.php:106
-#: common/frs/views/qrs.php:67 common/frs/views/shownotes.php:51
-#: common/include/Error.class.php:206 common/include/exit.php:82
-#: common/include/Group.class.php:2644 common/include/Group.class.php:2645
-#: common/include/Group.class.php:2646 common/include/Group.class.php:2698
-#: common/include/Group.class.php:2699 common/include/Group.class.php:2702
-#: common/include/Group.class.php:2706 common/include/Group.class.php:2716
-#: common/include/Group.class.php:2717
+#: common/frs/FRSRelease.class.php:445 common/frs/FRSRelease.class.php:455
+#: common/frs/FRSRelease.class.php:460 common/frs/views/editrelease.php:97
+#: common/frs/views/editrelease.php:104 common/frs/views/editrelease.php:131
+#: common/frs/views/listpackages.php:106 common/frs/views/qrs.php:67
+#: common/frs/views/shownotes.php:51 common/include/Error.class.php:206
+#: common/include/exit.php:82 common/include/Group.class.php:2644
+#: common/include/Group.class.php:2645 common/include/Group.class.php:2646
+#: common/include/Group.class.php:2698 common/include/Group.class.php:2699
+#: common/include/Group.class.php:2702 common/include/Group.class.php:2706
+#: common/include/Group.class.php:2716 common/include/Group.class.php:2717
 #: common/include/GroupJoinRequest.class.php:298
 #: common/include/Navigation.class.php:68 common/include/User.class.php:350
 #: common/include/User.class.php:436 common/include/User.class.php:1411
@@ -3141,15 +3143,15 @@ msgstr "El nom de FRSPackage ha de tenir 3 caràcters com a mínim"
 msgid "Package Name can only be alphanumeric"
 msgstr "El nom del paquet només pot ser alfanumèric"
 
-#: common/frs/FRSPackage.class.php:158
+#: common/frs/FRSPackage.class.php:158 common/frs/FRSPackage.class.php:169
 #, fuzzy
-msgid "Error Adding Package: Name Already Exists"
-msgstr "Aquest nom d'usuari ja existeix."
-
-#: common/frs/FRSPackage.class.php:169
-#, fuzzy
-msgid "Error Adding Package: "
+msgid "Error Adding Package"
 msgstr "Error a l'afegir una base de dades"
+
+#: common/frs/FRSPackage.class.php:158 common/frs/FRSPackage.class.php:388
+#, fuzzy
+msgid "Name Already Exists"
+msgstr "La llista ja existeix"
 
 #: common/frs/FRSPackage.class.php:209
 msgid "Invalid package_id"
@@ -3166,27 +3168,22 @@ msgstr "Error al crear un objecte de grup"
 msgid "Error Updating Package"
 msgstr "Error afegint un fòrum"
 
-#: common/frs/FRSPackage.class.php:388
-#, fuzzy
-msgid "Name Already Exists"
-msgstr "La llista ja existeix"
-
 #: common/frs/FRSPackage.class.php:400
 #, fuzzy
 msgid "Error On Update"
 msgstr "Error a l'actualitzar:"
 
-#: common/frs/FRSPackage.class.php:407
+#: common/frs/FRSPackage.class.php:407 common/frs/FRSRelease.class.php:445
 #, fuzzy
 msgid "Couldn't fetch data"
 msgstr "No s'ha pogut obtenir permís"
 
-#: common/frs/FRSPackage.class.php:417
+#: common/frs/FRSPackage.class.php:417 common/frs/FRSRelease.class.php:455
 #, fuzzy
 msgid "Directory Already Exists"
 msgstr "La llista ja existeix"
 
-#: common/frs/FRSPackage.class.php:422
+#: common/frs/FRSPackage.class.php:422 common/frs/FRSRelease.class.php:460
 #, fuzzy
 msgid "Couldn't rename dir"
 msgstr "Aquest nom d'usuari ja existeix."
@@ -3276,20 +3273,11 @@ msgstr ""
 msgid "Error On Update: Name Already Exists"
 msgstr "Aquest nom d'usuari ja existeix."
 
-#: common/frs/FRSRelease.class.php:445
-#, fuzzy
-msgid "Error Updating Release: Couldn't fetch data"
-msgstr "Error a l'actualitzar un nom de camp extra"
-
-#: common/frs/FRSRelease.class.php:455
-#, fuzzy
-msgid "Error Updating Release: Directory Already Exists"
-msgstr "Aquest nom d'usuari ja existeix."
-
+#: common/frs/FRSRelease.class.php:445 common/frs/FRSRelease.class.php:455
 #: common/frs/FRSRelease.class.php:460
 #, fuzzy
-msgid "Error Updating Release: Couldn't rename dir"
-msgstr "Aquest nom d'usuari ja existeix."
+msgid "Error Updating Release"
+msgstr "Error al crear un objecte de grup"
 
 #: common/frs/include/frs_utils.php:97 common/frs/include/frs_utils.php:120
 msgid "Error: group id required"
@@ -24305,6 +24293,22 @@ msgid "No User Name Provided"
 msgstr "Nom d'usuari"
 
 #, fuzzy
+#~ msgid "Error Adding Package: Name Already Exists"
+#~ msgstr "Aquest nom d'usuari ja existeix."
+
+#, fuzzy
+#~ msgid "Error Updating Release: Couldn't fetch data"
+#~ msgstr "Error a l'actualitzar un nom de camp extra"
+
+#, fuzzy
+#~ msgid "Error Updating Release: Directory Already Exists"
+#~ msgstr "Aquest nom d'usuari ja existeix."
+
+#, fuzzy
+#~ msgid "Error Updating Release: Couldn't rename dir"
+#~ msgstr "Aquest nom d'usuari ja existeix."
+
+#, fuzzy
 #~ msgid "Error Updating Package: Name Already Exists"
 #~ msgstr "Aquest nom d'usuari ja existeix."
 
@@ -26424,10 +26428,6 @@ msgstr "Nom d'usuari"
 #, fuzzy
 #~ msgid "Anonymous & Non Project Users"
 #~ msgstr "Espai FTP anònim"
-
-#, fuzzy
-#~ msgid "Error Getting Release"
-#~ msgstr "Error al crear un objecte de grup"
 
 #~ msgid "SUBMIT ONLY ONCE"
 #~ msgstr "TRAMET NOMÉS UN COP"
