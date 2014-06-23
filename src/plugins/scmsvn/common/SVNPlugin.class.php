@@ -430,7 +430,6 @@ class SVNPlugin extends SCMPlugin {
 
 			$repo = forge_get_config('repos_path', 'scmsvn') . '/' . $project->getUnixName();
 			if (!is_dir ($repo) || !is_file ("$repo/format")) {
-				echo "No repository $repo\n";
 				db_rollback();
 				return false;
 			}
