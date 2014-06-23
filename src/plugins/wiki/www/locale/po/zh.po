@@ -6292,12 +6292,6 @@ msgstr "編輯此頁面"
 #~ msgid "This plugin is currently under development and does not work!"
 #~ msgstr "此 plugin 正在開發還不能運作!"
 
-#~ msgid "Chmod to permission:"
-#~ msgstr "改變權限為:"
-
-#~ msgid "(ugo : rwx)"
-#~ msgstr "(ugo : rwx)"
-
 #, fuzzy
 #~ msgid "period"
 #~ msgstr "版本 %d"

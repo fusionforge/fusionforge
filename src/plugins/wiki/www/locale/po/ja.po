@@ -6160,10 +6160,6 @@ msgstr "ページを編集しています。"
 #~ msgstr "貴方個人の言語を選択"
 
 #, fuzzy
-#~ msgid "WikiAdminChmod"
-#~ msgstr "管理"
-
-#, fuzzy
 #~ msgid "period"
 #~ msgstr "バージョン %d"
 

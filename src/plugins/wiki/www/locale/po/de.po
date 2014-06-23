@@ -6129,9 +6129,6 @@ msgstr "Diese Seite bearbeiten"
 #~ msgid "Select the pages to change:"
 #~ msgstr "Wählen Sie die Seiten zum Ändern:"
 
-#~ msgid "Chmod to permission:"
-#~ msgstr "Ändere auf Berechtigung:"
-
 #, fuzzy
 #~ msgid "History of all major edits by %s to page %s."
 #~ msgstr ""
