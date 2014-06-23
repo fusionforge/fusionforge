@@ -827,7 +827,6 @@ function _DumpHtmlToDir($target, $page_iter, $exclude = false)
                 and ($from = $WikiTheme->_findFile(basename($css_file), true))
                     and basename($from)
             ) {
-                // TODO: fix @import url(main.css);
                 if ($directory) {
                     $target = "$directory/" . basename($css_file);
                     if ($silent)
