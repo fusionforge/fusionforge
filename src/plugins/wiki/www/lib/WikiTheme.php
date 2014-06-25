@@ -1915,6 +1915,9 @@ class RelatedExternalLinksBox extends SidebarBox
 
 function listAvailableThemes()
 {
+    if (THEME == 'fusionforge') {
+        return array(THEME);
+    }
     $available_themes = array();
     $dir_root = 'themes';
     if (defined('PHPWIKI_DIR'))
@@ -1922,14 +1925,15 @@ function listAvailableThemes()
     $dir = dir($dir_root);
     if ($dir) {
         while ($entry = $dir->read()) {
-            if (is_dir($dir_root . '/' . $entry)
-                and file_exists($dir_root . '/' . $entry . '/themeinfo.php')
-            ) {
+            // 'fusionforge' cannot be selected as standalone theme
+            if (($entry != 'fusionforge') and (is_dir($dir_root . '/' . $entry)
+                and file_exists($dir_root . '/' . $entry . '/themeinfo.php'))) {
                 array_push($available_themes, $entry);
             }
         }
         $dir->close();
     }
+    natcasesort($available_themes);
     return $available_themes;
 }
 
@@ -1947,6 +1951,7 @@ function listAvailableLanguages()
         }
         $dir->close();
     }
+    natcasesort($available_languages);
     return $available_languages;
 }
 

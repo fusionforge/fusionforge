@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PhpWiki 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-17 18:33+0200\n"
+"POT-Creation-Date: 2014-06-25 18:08+0200\n"
 "PO-Revision-Date: 2000-02-01 00:50-0500\n"
 "Last-Translator: Pablo Roca <proca@clavo.net>\n"
 "Language-Team: \n"
@@ -2904,8 +2904,7 @@ msgstr ""
 msgid "Current language"
 msgstr ""
 
-#, php-format
-msgid "Default language: “%s”"
+msgid "Default language"
 msgstr ""
 
 #, php-format
@@ -2915,8 +2914,7 @@ msgstr ""
 msgid "Current theme"
 msgstr ""
 
-#, php-format
-msgid "Default theme: “%s”"
+msgid "Default theme"
 msgstr ""
 
 #, php-format
@@ -5145,9 +5143,8 @@ msgstr "BuenEstilo"
 msgid "See %s tips for editing."
 msgstr "%s tips para editar."
 
-#, fuzzy
 msgid "Help/TextFormattingRules"
-msgstr "ReglasDeFormatoDeTexto"
+msgstr "Ayuda/ReglasDeFormatoDeTexto"
 
 msgid "Synopsis"
 msgstr "Sinopsis"
@@ -5912,12 +5909,16 @@ msgstr ""
 msgid "Edit this page"
 msgstr "Corrija esta página"
 
-#~ msgid "Version %s"
-#~ msgstr "Versión %s"
-
 #, fuzzy
 #~ msgid "Prediction: %s"
 #~ msgstr "Editar: %s"
+
+#, fuzzy
+#~ msgid "Prediction: %.1f"
+#~ msgstr "Editar: %s"
+
+#~ msgid "Version %s"
+#~ msgstr "Versión %s"
 
 #, fuzzy
 #~ msgid "%s not found"

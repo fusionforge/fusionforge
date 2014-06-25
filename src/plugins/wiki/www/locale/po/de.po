@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PhpWiki 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-17 18:33+0200\n"
+"POT-Creation-Date: 2014-06-25 18:08+0200\n"
 "PO-Revision-Date: 2000-10-31 02:23+0200\n"
 "Last-Translator: Reini Urban <rurban@x-ray.at>, Carsten Klapp "
 "<carstenklapp@users.sourceforge.net>, Helmer Pardun <pardunpress@t-online."
@@ -2989,9 +2989,8 @@ msgstr "%d Sprache gesamt: "
 msgid "Current language"
 msgstr "Ausgewählte Sprache"
 
-#, php-format
-msgid "Default language: “%s”"
-msgstr "Standardsprache für dieses Wiki: »%s«"
+msgid "Default language"
+msgstr "Standardsprache für dieses Wiki"
 
 #, php-format
 msgid "Total of %d themes: "
@@ -3000,9 +2999,8 @@ msgstr "%d Benutzeroberfläche gesamt: "
 msgid "Current theme"
 msgstr "Ausgewählte Darstellung"
 
-#, php-format
-msgid "Default theme: “%s”"
-msgstr "Darstellung des Systems: »%s«"
+msgid "Default theme"
+msgstr "Darstellung des Systems"
 
 #, php-format
 msgid "unknown argument “%s” to SystemInfo"
@@ -5277,9 +5275,8 @@ msgstr "GuterStil"
 msgid "See %s tips for editing."
 msgstr "Siehe %s Tips fürs Edieren."
 
-#, fuzzy
 msgid "Help/TextFormattingRules"
-msgstr "TextFormatierungsRegeln"
+msgstr "Hilfe/TextFormatierungsRegeln"
 
 msgid "Synopsis"
 msgstr "Übersicht"
@@ -6100,6 +6097,18 @@ msgstr "Sidebar"
 msgid "Edit this page"
 msgstr "Diese Seite bearbeiten"
 
+# (Wrong Translation; sorry, but the German term for edit is NOT
+# editieren, but  e d i e r e n).
+#, fuzzy
+#~ msgid "Prediction: %s"
+#~ msgstr "Bearbeite: %s"
+
+# (Wrong Translation; sorry, but the German term for edit is NOT
+# editieren, but  e d i e r e n).
+#, fuzzy
+#~ msgid "Prediction: %.1f"
+#~ msgstr "Bearbeite: %s"
+
 #~ msgid "invalid %s ignored"
 #~ msgstr "ungültiges %s ignoriert"
 
@@ -6108,12 +6117,6 @@ msgstr "Diese Seite bearbeiten"
 
 #~ msgid "Original (1.2 or 1.0)"
 #~ msgstr "Original (1,2 oder 1,0)"
-
-# (Wrong Translation; sorry, but the German term for edit is NOT
-# editieren, but  e d i e r e n).
-#, fuzzy
-#~ msgid "Prediction: %s"
-#~ msgstr "Bearbeite: %s"
 
 #, fuzzy
 #~ msgid "%s not found"

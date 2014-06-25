@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PhpWiki 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-17 18:33+0200\n"
+"POT-Creation-Date: 2014-06-25 18:08+0200\n"
 "PO-Revision-Date: 2005-02-12 16:23+0100\n"
 "Last-Translator: Antonio Bonifati ant[(at)]monitor.deis.unical.it\n"
 "Language-Team: \n"
@@ -2877,8 +2877,7 @@ msgstr ""
 msgid "Current language"
 msgstr ""
 
-#, php-format
-msgid "Default language: “%s”"
+msgid "Default language"
 msgstr ""
 
 #, php-format
@@ -2888,8 +2887,7 @@ msgstr ""
 msgid "Current theme"
 msgstr ""
 
-#, php-format
-msgid "Default theme: “%s”"
+msgid "Default theme"
 msgstr ""
 
 #, php-format
@@ -5081,9 +5079,8 @@ msgstr "BuonStile"
 msgid "See %s tips for editing."
 msgstr "Vedere %s consigli per le modifiche."
 
-#, fuzzy
 msgid "Help/TextFormattingRules"
-msgstr "RegoleFormattazioneTesto"
+msgstr "Aiuto/RegoleFormattazioneTesto"
 
 msgid "Synopsis"
 msgstr "Sommario"
@@ -5847,15 +5844,19 @@ msgstr ""
 msgid "Edit this page"
 msgstr ""
 
+#, fuzzy
+#~ msgid "Prediction: %s"
+#~ msgstr "Modifica: %s"
+
+#, fuzzy
+#~ msgid "Prediction: %.1f"
+#~ msgstr "Modifica: %s"
+
 #~ msgid "_PreferencesInfo"
 #~ msgstr "_PreferenzeInfo"
 
 #~ msgid "Version %s"
 #~ msgstr "Versione %s"
-
-#, fuzzy
-#~ msgid "Prediction: %s"
-#~ msgstr "Modifica: %s"
 
 #, fuzzy
 #~ msgid "%s not found"

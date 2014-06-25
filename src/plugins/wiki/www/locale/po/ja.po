@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PhpWiki 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-17 18:33+0200\n"
+"POT-Creation-Date: 2014-06-25 18:08+0200\n"
 "PO-Revision-Date: 2003-06-07 09:01+0900\n"
 "Last-Translator: Tadashi Jokagi <webmaster@elf.no-ip.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2927,8 +2927,7 @@ msgstr ""
 msgid "Current language"
 msgstr "現在の言語"
 
-#, php-format
-msgid "Default language: “%s”"
+msgid "Default language"
 msgstr ""
 
 #, php-format
@@ -2938,9 +2937,8 @@ msgstr "総テーマ数: %d"
 msgid "Current theme"
 msgstr "現在のテーマ"
 
-#, php-format
-msgid "Default theme: “%s”"
-msgstr "デフォルトテーマ: %s"
+msgid "Default theme"
+msgstr "デフォルトテーマ"
 
 #, php-format
 msgid "unknown argument “%s” to SystemInfo"
@@ -6093,6 +6091,14 @@ msgstr "スライドバー"
 msgid "Edit this page"
 msgstr "ページを編集しています。"
 
+#, fuzzy
+#~ msgid "Prediction: %s"
+#~ msgstr "編集: %s"
+
+#, fuzzy
+#~ msgid "Prediction: %.1f"
+#~ msgstr "編集: %s"
+
 #~ msgid "Use old markup"
 #~ msgstr "古いマークアップを使用"
 
@@ -6142,14 +6148,6 @@ msgstr "ページを編集しています。"
 
 #~ msgid "Version %s"
 #~ msgstr "バージョン %s"
-
-#, fuzzy
-#~ msgid "Prediction: %s"
-#~ msgstr "編集: %s"
-
-#, fuzzy
-#~ msgid "Prediction: %.1f"
-#~ msgstr "編集: %s"
 
 #, fuzzy
 #~ msgid "%s not found"

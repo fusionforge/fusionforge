@@ -457,7 +457,7 @@ class WikiPlugin_SystemInfo
             . implode(', ', $available_languages) . ". "
             . _("Current language") . _(": ") . $GLOBALS['LANG']
             . ((DEFAULT_LANGUAGE != $GLOBALS['LANG'])
-                ? ". " . sprintf(_("Default language: “%s”"), DEFAULT_LANGUAGE)
+                ? ". " . _("Default language") . _(": ") . DEFAULT_LANGUAGE
                 : '');
     }
 
@@ -470,7 +470,7 @@ class WikiPlugin_SystemInfo
             . implode(', ', $available_themes) . ". "
             . _("Current theme") . _(": ") . $WikiTheme->_name
             . ((THEME != $WikiTheme->_name)
-                ? ". " . sprintf(_("Default theme: “%s”"), THEME)
+                ? ". " . _("Default theme") . _(": ") . THEME
                 : '');
     }
 

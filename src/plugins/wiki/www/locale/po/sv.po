@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PhpWiki 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-17 18:33+0200\n"
+"POT-Creation-Date: 2014-06-25 18:08+0200\n"
 "PO-Revision-Date: 2001-01-27 01:58+0200\n"
 "Last-Translator: Jon Åslund <jooon@hem.passagen.se>\n"
 "Language-Team: \n"
@@ -2863,8 +2863,7 @@ msgstr ""
 msgid "Current language"
 msgstr ""
 
-#, php-format
-msgid "Default language: “%s”"
+msgid "Default language"
 msgstr ""
 
 #, php-format
@@ -2874,8 +2873,7 @@ msgstr ""
 msgid "Current theme"
 msgstr ""
 
-#, php-format
-msgid "Default theme: “%s”"
+msgid "Default theme"
 msgstr ""
 
 #, php-format
@@ -5065,9 +5063,8 @@ msgstr "BraStil"
 msgid "See %s tips for editing."
 msgstr "%s: Redigeringstips."
 
-#, fuzzy
 msgid "Help/TextFormattingRules"
-msgstr "Textformateringsregler"
+msgstr "Hjälp/Textformateringsregler"
 
 msgid "Synopsis"
 msgstr "Översikt"
@@ -5833,6 +5830,10 @@ msgstr ""
 
 #, fuzzy
 #~ msgid "Prediction: %s"
+#~ msgstr "Redigera: %s"
+
+#, fuzzy
+#~ msgid "Prediction: %.1f"
 #~ msgstr "Redigera: %s"
 
 #, fuzzy
