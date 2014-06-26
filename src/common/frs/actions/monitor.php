@@ -29,50 +29,81 @@ global $HTML;
 
 $sysdebug_enable = false;
 
+$ajax = getIntFromRequest('ajax', 1);
+
 $result = array();
 if (!forge_check_perm('frs', $group_id, 'read_public')) {
-	$result['html'] = $HTML->warning_msg(_('FRS Action Denied.'));
-	echo json_encode($result);
-	exit;
+	$warning_msg = _('FRS Action Denied.');
+	if ($ajax) {
+		$result['html'] = $HTML->warning_msg($warning_msg);
+		echo json_encode($result);
+		exit;
+	} else {
+		session_redirect('/frs/?group_id='.$group_id);
+	}
 }
 
 $package_id = getIntFromRequest('package_id');
+$redirect_url = getStringFromRequest('redirect_url', '/my/');
 
 if ($package_id) {
 	$frsp = new FRSPackage($g, $package_id);
 	if (!$frsp || !is_object($frsp)) {
-		$result['html'] = $HTML->error_msg(_('Error Getting FRSPackage'));
-		echo json_encode($result);
-		exit;
+		$error_msg = _('Error Getting FRSPackage');
+		if ($ajax) {
+			$result['html'] = $HTML->error_msg($error_msg);
+			echo json_encode($result);
+			exit;
+		} else {
+			session_redirect('/frs/?group_id='.$group_id);
+		}
 	} elseif ($frsp->isError()) {
-		$result['html'] = $HTML->error_msg($frsp->getErrorMessage());
-		echo json_encode($result);
-		exit;
+		$error_msg = $frsp->getErrorMessage();
+		if ($ajax) {
+			$result['html'] = $HTML->error_msg($error_msg);
+			echo json_encode($result);
+			exit;
+		} else {
+			session_redirect('/frs/?group_id='.$group_id);
+		}
 	}
 	$monitorStatus = getIntFromRequest('status');
 	$url = '/frs/?group_id='.$frsp->Group->getID().'&package_id='.$package_id.'&action=monitor';
 	if ($monitorStatus) {
 		if ($frsp->setMonitor()) {
-			$url .= '&status=0';
-			$result['html'] = $HTML->feedback(_('Monitoring started successfuly'));
-			$result['action'] = 'javascript:controllerFRS.doAction({action:\''.$url.'\', id:\'pkgid'.$package_id.'\'})';
-			$result['property'] = 'onclick';
-			$result['img'] = $HTML->getStopMonitoringPic($frsp->getName().' - '._('Stop monitoring this package'));
-			echo json_encode($result);
-			exit;
+			if ($ajax) {
+				$url .= '&status=0';
+				$result['html'] = $HTML->feedback(_('Monitoring started successfuly'));
+				$result['action'] = 'javascript:controllerFRS.doAction({action:\''.$url.'\', id:\'pkgid'.$package_id.'\'})';
+				$result['property'] = 'onclick';
+				$result['img'] = $HTML->getStopMonitoringPic($frsp->getName().' - '._('Stop monitoring this package'));
+				echo json_encode($result);
+				exit;
+			} else {
+				session_redirect($redirect_url);
+			}
 		}
 	} else {
 		if ($frsp->stopMonitor()) {
-			$url .= '&status=1';
-			$result['html'] = $HTML->feedback(_('Monitoring stopped successfuly'));
-			$result['action'] = 'javascript:controllerFRS.doAction({action:\''.$url.'\', id:\'pkgid'.$package_id.'\'})';
-			$result['property'] = 'onclick';
-			$result['img'] = $HTML->getStartMonitoringPic($frsp->getName().' - '._('Start monitoring this package'));
-			echo json_encode($result);
-			exit;
+			if ($ajax) {
+				$url .= '&status=1';
+				$result['html'] = $HTML->feedback(_('Monitoring stopped successfuly'));
+				$result['action'] = 'javascript:controllerFRS.doAction({action:\''.$url.'\', id:\'pkgid'.$package_id.'\'})';
+				$result['property'] = 'onclick';
+				$result['img'] = $HTML->getStartMonitoringPic($frsp->getName().' - '._('Start monitoring this package'));
+				echo json_encode($result);
+				exit;
+			} else {
+				session_redirect($redirect_url);
+			}
 		}
 	}
 }
-$result['html'] = $HTML->error_msg(_('Missing package_id'));
-echo json_encode($result);
-exit;
+$error_msg = _('Missing package_id');
+if ($ajax) {
+	$result['html'] = $HTML->error_msg($error_msg);
+	echo json_encode($result);
+	exit;
+} else {
+	session_redirect('/frs/?group_id='.$group_id);
+}

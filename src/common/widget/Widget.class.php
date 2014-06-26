@@ -25,7 +25,7 @@ require_once 'common/widget/Widget_MySurveys.class.php';
 require_once 'common/widget/Widget_MyProjects.class.php';
 require_once 'common/widget/Widget_MyBookmarks.class.php';
 require_once 'common/widget/Widget_MyMonitoredForums.class.php';
-//require_once('common/widget/Widget_MyMonitoredFp.class.php');
+require_once('common/widget/Widget_MyMonitoredFp.class.php');
 require_once 'common/widget/Widget_MyLatestSvnCommits.class.php';
 require_once 'common/widget/Widget_MyProjectsLastDocuments.class.php';
 require_once 'common/widget/Widget_MyArtifacts.class.php';
@@ -213,10 +213,10 @@ require_once 'common/widget/Widget_MyMonitoredDocuments.class.php';
 				break;/*
 			case 'mysrs':
 				$o = new Widget_MySrs();
-				break;
+				break;*/
 			case 'mymonitoredfp':
 				$o = new Widget_MyMonitoredFp();
-				break;
+				break;/*
 			case 'mylatestsvncommits':
 				$o = new Widget_MyLatestSvnCommits();
 				break;
