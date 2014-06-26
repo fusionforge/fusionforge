@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PhpWiki 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-11 16:07+0100\n"
+"POT-Creation-Date: 2014-06-26 10:14+0200\n"
 "PO-Revision-Date: 2004-06-22 21:10+0200\n"
 "Last-Translator: Pierrick Meignen <meignen.pierrick@wanadoo.fr>, Roland "
 "Trique <roland.trique@free.fr>, Stéphane Gourichon <stephane.gourichon@lip6."
@@ -2827,13 +2827,6 @@ msgstr "même contenu"
 msgid "FAILED"
 msgstr "ÉCHEC"
 
-msgid "Source code syntax highlighter (via http://www.andre-simon.de)."
-msgstr ""
-
-#, php-format
-msgid "invalid %s ignored"
-msgstr "%s non valable ignoré"
-
 msgid "Provide access to PhpWiki's lower level system information."
 msgstr "Affiche les informations de bas niveau pour PhpWiki."
 
@@ -3257,18 +3250,6 @@ msgstr ""
 
 msgid "Rate"
 msgstr "Note"
-
-msgid "Display video in Flash or HTML5."
-msgstr "Afficher une vidéo en Flash ou HTML5."
-
-msgid "Both 'url' or 'file' parameters missing."
-msgstr ""
-
-msgid "Choose only one of 'url' or 'file' parameters."
-msgstr ""
-
-msgid "Your browser does not understand the HTML 5 video tag."
-msgstr ""
 
 msgid ""
 "Visualizes the Wiki structure in a graph using the 'dot' commandline tool "
@@ -5991,6 +5972,12 @@ msgstr ""
 
 msgid "Edit this page"
 msgstr "Modifier cette page"
+
+#~ msgid "invalid %s ignored"
+#~ msgstr "%s non valable ignoré"
+
+#~ msgid "Display video in Flash or HTML5."
+#~ msgstr "Afficher une vidéo en Flash ou HTML5."
 
 #~ msgid "Imdb"
 #~ msgstr "Imdb"

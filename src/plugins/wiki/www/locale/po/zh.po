@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PhpWiki 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-11 16:07+0100\n"
+"POT-Creation-Date: 2014-06-26 10:14+0200\n"
 "PO-Revision-Date: 2004-04-21 10:08+0800\n"
 "Last-Translator: DruryL <druryl@user.sourceforge.net>\n"
 "Language-Team: DruryL <druryl@users.sourceforge.net>\n"
@@ -2918,13 +2918,6 @@ msgstr "下載頁面內容"
 msgid "FAILED"
 msgstr ""
 
-msgid "Source code syntax highlighter (via http://www.andre-simon.de)."
-msgstr ""
-
-#, php-format
-msgid "invalid %s ignored"
-msgstr ""
-
 msgid "Provide access to PhpWiki's lower level system information."
 msgstr "提供存取 PhpWiki 下層系統資訊."
 
@@ -3345,19 +3338,6 @@ msgid "Pred"
 msgstr ""
 
 msgid "Rate"
-msgstr ""
-
-msgid "Display video in Flash or HTML5."
-msgstr ""
-
-#, fuzzy
-msgid "Both 'url' or 'file' parameters missing."
-msgstr "%s 或 %s 參數遺漏"
-
-msgid "Choose only one of 'url' or 'file' parameters."
-msgstr ""
-
-msgid "Your browser does not understand the HTML 5 video tag."
 msgstr ""
 
 msgid ""
@@ -6206,6 +6186,10 @@ msgstr "搜尋"
 
 msgid "Edit this page"
 msgstr "編輯此頁面"
+
+#, fuzzy
+#~ msgid "Both 'url' or 'file' parameters missing."
+#~ msgstr "%s 或 %s 參數遺漏"
 
 #~ msgid "Use old markup"
 #~ msgstr "使用舊標記"
