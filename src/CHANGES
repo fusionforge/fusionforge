@@ -4,6 +4,7 @@ Fusionforge-5.3.2:
 * Stats: handle bad encoding when gathering Git stats, remove spurious warning when SVN repository isn't created yet (Inria)
 * Admin: fix edit table themes, fix frs_processor sequence [#691] (TrivialDev)
 * User SSH keys (ssh_create.php): fix harmless warning when user removes all her keys (Inria)
+* Mailing lists: handle quotes in description
 * Plugin mediawiki: fix paths in import/export scripts (Inria)
 * Plugin fckeditor: dropped in favor of ckeditor
 
