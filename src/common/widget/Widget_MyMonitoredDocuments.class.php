@@ -2,7 +2,7 @@
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
  * Copyright 2010, Franck Villaume - Capgemini
- * Copyright 2011-2013, Franck Villaume - TrivialDev
+ * Copyright 2011-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is a part of FusionForge.
@@ -45,10 +45,10 @@ class Widget_MyMonitoredDocuments extends Widget {
 		$result=db_query_params('select DISTINCT groups.group_name, docdata_vw.group_id from groups, docdata_vw, docdata_monitored_docman where docdata_monitored_docman.doc_id = docdata_vw.docid and groups.group_id = docdata_vw.group_id and docdata_monitored_docman.user_id = $1',array(user_getid()));
 		$rows=db_numrows($result);
 		if (!$result || $rows < 1) {
-			$html_my_monitored_documents .= $HTML->warning_msg(_('You are not monitoring any documents.')).'<p>' . _("If you monitor documents, you will be sent new update in the form of an email.") . '</p><p>' . _("You can monitor documents by clicking on the appropriate icon action in the directory itself.") . '</p>';
+			$html_my_monitored_documents .= $HTML->warning_msg(_('You are not monitoring any documents.')).html_e('p', array(), _("If you monitor documents, you will be sent new update in the form of an email.")).html_e('p', array(), _("You can monitor documents by clicking on the appropriate icon action in the directory itself."));
 		} else {
 			$request =& HTTPRequest::instance();
-			$html_my_monitored_documents .= '<table style="width:100%">';
+			$html_my_monitored_documents .= $HTML->listTableTop();
 			$vItemId = new Valid_UInt('hide_item_id');
 			$vItemId->required();
 			if($request->valid($vItemId)) {
@@ -87,14 +87,15 @@ class Widget_MyMonitoredDocuments extends Widget {
 							util_make_link('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$doc_group, stripslashes(db_result($result2,$i,'filename'))).'</td>'.
 							'<td class="align-center">'.
 							util_make_link('/docman/?group_id='.$group_id.'&action=monitorfile&option=remove&view=listfile&dirid='.$doc_group.'&fileid='.$docid,
-							'<img src="'.$HTML->imgroot.'ic/trash.png" height="16" width="16" "alt="'._("Stop Monitoring").'" />', array('onClick' => 'return confirm("'._("Stop monitoring this document?").'")')).'</td></tr>';
+								$HTML->getDeletePic(_('Stop Monitoring'), _('Stop Monitoring'), array('onClick' => 'return confirm("'._('Stop monitoring this document?').'")')))
+							.'</td></tr>';
 					}
 				}
 
 				$html_hdr .= '['.$rows2.($count_new ? ", <b>".sprintf(_('%s new'), $count_new)."</b>]" : ']').'</td></tr>';
 				$html_my_monitored_documents .= $html_hdr.$html;
 			}
-			$html_my_monitored_documents .= '</table>';
+			$html_my_monitored_documents .= $HTML->listTableBottom();
 		}
 		return $html_my_monitored_documents;
 	}

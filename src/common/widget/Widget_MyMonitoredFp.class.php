@@ -96,7 +96,7 @@ class Widget_MyMonitoredFp extends Widget {
 						$cells = array();
 						$url = '/frs/?group_id='.$group_id.'&package_id='.db_result($result2,$i,'filemodule_id').'&action=monitor&status=0&ajax=0';
 						$title = db_result($result2,$i,'name').' - '._('Stop monitoring this package');
-						$package_monitor = util_make_link($url, $HTML->getDeletePic($title));
+						$package_monitor = util_make_link($url, $HTML->getDeletePic($title, $title, array('onClick' => 'return confirm("'._('Stop monitoring this package?').'")')));
 						$cells[] = array('    - '.util_make_link('/frs/?group_id='.$group_id, db_result($result2,$i,'name')), 'width' => '99%');
 						$cells[][] = $package_monitor;
 						$html .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);

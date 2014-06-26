@@ -68,10 +68,10 @@ class Widget_MyMonitoredForums extends Widget {
 		$glist = array_unique($glist);
 		$rows=count($glist);
 		if (!$result || $rows < 1) {
-			$html_my_monitored_forums .= $HTML->warning_msg(_('You are not monitoring any forums.')).'<p>' . _("If you monitor forums, you will be sent new posts in the form of an email, with a link to the new message.") . '</p><p>' . _("You can monitor forums by clicking on the appropriate menu item in the discussion forum itself.") . '</p>';
+			$html_my_monitored_forums .= $HTML->warning_msg(_('You are not monitoring any forums.')).html_e('p', array(), _("If you monitor forums, you will be sent new posts in the form of an email, with a link to the new message.")).html_e('p', array(), _("You can monitor forums by clicking on the appropriate menu item in the discussion forum itself."));
 		} else {
 			$request =& HTTPRequest::instance();
-			$html_my_monitored_forums .= '<table style="width:100%">';
+			$html_my_monitored_forums .= $HTML->listTableTop();
 			foreach ($glist as $group) {
 				list($group_id, $group_name) = unserialize($group);
 
@@ -124,8 +124,7 @@ class Widget_MyMonitoredForums extends Widget {
 					util_make_link('/forum/forum.php?forum_id='.$group_forum_id, $flist[$i]['forum_name']).'</td>'.
 					'<td class="align-center">'.
 					util_make_link('/forum/monitor.php?forum_id='.$group_forum_id.'&group_id='.$group_id.'&stop=1',
-							'<img src="'.$HTML->imgroot.'ic/trash.png" height="16" width="16" alt="'._("Stop Monitoring").'" />',
-							array('onClick' => 'return confirm("'._('Stop monitoring this Forum?').'")')).
+							$HTML->getDeletePic(_('Stop Monitoring'), _('Stop Monitoring'), array('onClick' => 'return confirm("'._('Stop monitoring this forum?').'")'))).
 					'</td></tr>';
 					}
 				}
@@ -133,7 +132,7 @@ class Widget_MyMonitoredForums extends Widget {
 				$html_hdr .= '['.$rows2.($count_new ? ", <b>".sprintf(_('%s new'), $count_new)."</b>]" : ']').'</td></tr>';
 				$html_my_monitored_forums .= $html_hdr.$html;
 			}
-			$html_my_monitored_forums .= '</table>';
+			$html_my_monitored_forums .= $HTML->listTableBottom();
 		}
 		return $html_my_monitored_forums;
 	}
