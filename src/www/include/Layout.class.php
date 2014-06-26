@@ -1285,7 +1285,8 @@ if (isset($params['group']) && $params['group']) {
 		$otherAttr['title'] = $title;
 		if (!$alt) {
 			$otherAttr['alt'] = $title;
-			$alt = $title;
+		} else {
+			$otherAttr['alt'] = $alt;
 		}
 		return html_image($url, $width, $height, $otherAttr);
 	}
