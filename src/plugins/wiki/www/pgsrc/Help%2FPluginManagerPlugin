@@ -57,7 +57,6 @@ not provided with ~PhpWiki or PHP, such as
 * [[http://graphviz.org/ | graphviz]] for the [[Help:GraphVizPlugin|GraphViz]] plugin and [[Help:VisualWikiPlugin|VisualWiki]] plugin,
 * [[http://ploticus.sourceforge.net/ | ploticus]] for the [[Help:PloticusPlugin|Ploticus]] plugin,
 * [[http://phpweather.sf.net | phpweather]] for the [[Help:PhpWeatherPlugin|PhpWeather]] plugin,
-* [[http://www.andre-simon.de/ | highlight]] for the [[Help:SyntaxHighlighterPlugin|SyntaxHighlighter]] plugin,
 * USE_DB_SESSION = true (default for the peardb, adodb or dba backends) for the [[Help:WhoIsOnlinePlugin|WhoIsOnline]] plugin,
 * --with-xml support (with expat or libxml2) for the [[Help:RssFeedPlugin|RssFeed]] plugin (~ProjectSummary, ~RecentReleases) and ~HtmlParser support (~ImportHtml, ~HtmlAreaEditing),
 * PHP Mail functionality (php.ini: SMTP + sendmail_from on Windows or sendmail_path) for email PhpWiki:PageChangeNotifications and ModeratedPage's,
