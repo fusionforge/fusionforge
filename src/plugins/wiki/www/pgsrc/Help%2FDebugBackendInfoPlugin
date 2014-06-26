@@ -1,4 +1,4 @@
-Date: Fri,  7 Dec 2012 15:16:29 +0000
+Date: Thu, 26 Jun 2014 12:01:34 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FDebugBackendInfoPlugin;
@@ -21,8 +21,20 @@ cleared everything out though.
 
 == Arguments ==
 
-page _(default: current pagename)_:
-  The page to execute upon.
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **page**
+| The page to execute upon
+| Current pagename
+|-
+| **notallversions**
+|
+| 0
+|}
 
 == Example ==
 

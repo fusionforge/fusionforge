@@ -1,4 +1,4 @@
-Date: Fri,  7 Dec 2012 15:16:29 +0000
+Date: Thu, 26 Jun 2014 12:01:34 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FDebugAuthInfoPlugin;
@@ -21,8 +21,16 @@ cleared everything out though.
 
 == Arguments ==
 
-userid:
-  default: current user
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **userid**
+| Id of user to debug
+| Current user
+|}
 
 == Example ==
 

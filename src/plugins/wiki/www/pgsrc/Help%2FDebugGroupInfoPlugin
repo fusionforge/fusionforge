@@ -1,4 +1,4 @@
-Date: Thu,  9 Dec 2010 14:51:45 +0000
+Date: Thu, 26 Jun 2014 12:01:34 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FDebugGroupInfoPlugin;
@@ -21,8 +21,7 @@ cleared everything out though.
 
 == Arguments ==
 
-page _(default: current pagename)_:
-  The page to execute upon.
+None
 
 == Example ==
 

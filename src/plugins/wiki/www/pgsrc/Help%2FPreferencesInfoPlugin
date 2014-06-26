@@ -1,4 +1,4 @@
-Date: Fri,  7 Dec 2012 14:58:45 +0000
+Date: Thu, 26 Jun 2014 12:01:34 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FPreferencesInfoPlugin;
@@ -15,11 +15,20 @@ Plugin to display the current preferences without auth check.
 
 == Arguments ==
 
-page _(default: current pagename)_:
-  The page to execute upon.
-
-userid _(default: current userid)_:
-  The user name.
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **page**
+| The page to execute upon
+| Current pagename
+|-
+| **userid**
+| The user name
+| Current userid
+|}
 
 == Example ==
 

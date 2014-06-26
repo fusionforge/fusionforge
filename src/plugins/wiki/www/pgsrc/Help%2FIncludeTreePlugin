@@ -1,4 +1,4 @@
-Date: Fri,  7 Dec 2012 14:58:45 +0000
+Date: Thu, 26 Jun 2014 12:01:34 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FIncludeTreePlugin;
@@ -6,7 +6,7 @@ Content-Type: application/x-phpwiki;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-Dynamic Category Tree
+Display Dynamic Category Tree.
 
 == Usage ==
 
@@ -16,11 +16,63 @@ Dynamic Category Tree
 
 == Arguments ==
 
-TBD
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **exclude**
+|
+|
+|-
+| **include_self**
+|
+| 0
+|-
+| **noheader**
+|
+| 0
+|-
+| **page**
+|
+| The current page
+|-
+| **description**
+| Override default Description. Printed as header.
+|
+|-
+| **reclimit**
+|
+| 2
+|-
+| **info**
+|
+| false
+|-
+| **direction**
+| Get BackLinks or forward links (links listed on the page)
+| back
+|-
+| **firstreversed**
+| If true, get BackLinks for the first page and forward links for the rest.  Only applicable when direction = 'forward'.
+| flase
+|-
+| **excludeunknown**
+| If true (default) then exclude any mentioned pages which don't exist yet.  Only applicable when direction = 'forward'.
+| true
+|-
+| **dtree**
+|
+| true
+|}
+
 
 == Example ==
 
-TBD
+{{{
+<<IncludeTree>>
+}}}
 
 == Author ==
 * [[Help:Reini Urban|Reini Urban]]
