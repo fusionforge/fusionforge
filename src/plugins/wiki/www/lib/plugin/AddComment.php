@@ -97,7 +97,7 @@ function togglecomments(a) {
     a.title='" . _("Click to display all comments") . "';
   }
 }"));
-            $html->pushContent(HTML::h4(HTML::a(array('name' => 'comment-header',
+            $html->pushContent(HTML::h4(HTML::a(array('id' => 'comment-header',
                     'class' => 'wikiaction',
                     'title' => _("Click to display"),
                     'onclick' => "togglecomments(this)"),

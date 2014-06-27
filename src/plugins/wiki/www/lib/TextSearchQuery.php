@@ -260,7 +260,7 @@ class TextSearchQuery
 
     function sql()
     {
-        return '%' . $this->_sql_quote($this->word) . '%';
+        return '%' . $this->sql_quote($this->word) . '%';
     }
 
     /**
@@ -634,7 +634,7 @@ class TextSearchQuery_node
         return $this->word;
     }
 
-    protected function sql_quote()
+    function sql_quote()
     {
         global $request;
         $word = preg_replace('/(?=[%_\\\\])/', "\\", $this->word);

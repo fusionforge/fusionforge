@@ -41,26 +41,25 @@ class Widget_MyBookmarks extends Widget {
 		global $HTML;
 		$html_my_bookmarks = '';
 		$result = db_query_params("SELECT bookmark_url, bookmark_title, bookmark_id from user_bookmarks where ".
-					"user_id=$1 ORDER BY bookmark_title",array( user_getid() ));
+					"user_id=$1 ORDER BY bookmark_title",array(user_getid()));
 		$rows = db_numrows($result);
 		if (!$result || $rows < 1) {
 			$html_my_bookmarks .= $HTML->warning_msg(_('You currently do not have any bookmarks saved'));
 			$html_my_bookmarks .= db_error();
 		} else {
-			$html_my_bookmarks .= '<table class="fullwidth">';
+			$html_my_bookmarks .= $HTML->listTableTop();
 			for ($i=0; $i<$rows; $i++) {
-				$html_my_bookmarks .= '<tr '. $HTML->boxGetAltRowStyle($i) .'><td>';
-				$html_my_bookmarks .= util_make_link(db_result($result,$i,'bookmark_url'), db_result($result,$i,'bookmark_title'), array(), true);
-				$html_my_bookmarks .= '<small>'.util_make_link('/my/bookmark_edit.php?bookmark_id='.db_result($result,$i,'bookmark_id'), '['._('Edit').']').'</small></td>';
-				$html_my_bookmarks .= '<td style="text-align:right">';
-				$html_my_bookmarks .= util_make_link('/my/bookmark_delete.php?bookmark_id='.db_result($result,$i,'bookmark_id'),
-								'<img src="'.$HTML->imgroot.'ic/trash.png" height="16" width="16" alt="'._('Delete').'" />',
-								array('onClick' => 'return confirm("'._("Delete this bookmark?").'")'));
-				$html_my_bookmarks .= '</td></tr>';
+				$cells = array();
+				$cells[][] = util_make_link(db_result($result,$i,'bookmark_url'), db_result($result,$i,'bookmark_title'), array(), true).
+						html_e('small', array(), util_make_link('/my/bookmark_edit.php?bookmark_id='.db_result($result,$i,'bookmark_id'), '['._('Edit').']'));
+				$cells[] = array(util_make_link('/my/bookmark_delete.php?bookmark_id='.db_result($result,$i,'bookmark_id'),
+						$HTML->getDeletePic(_('Delete'), _('Delete'), array('onClick' => 'return confirm("'._('Delete this bookmark?').'")'))),
+						'style' => 'text-align:right');
+				$html_my_bookmarks .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
 			}
-			$html_my_bookmarks .= '</table>';
+			$html_my_bookmarks .= $HTML->listTableBottom();
 		}
-		$html_my_bookmarks .= '<div style="text-align:center; font-size:0.8em;">'.util_make_link('/my/bookmark_add.php', '['._('Add a bookmark').']').'</div>';
+		$html_my_bookmarks .= html_e('div', array('style' => 'text-align:center; font-size:0.8em;'), util_make_link('/my/bookmark_add.php', '['._('Add a bookmark').']'));
 		return $html_my_bookmarks;
 	}
 

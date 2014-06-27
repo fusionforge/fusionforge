@@ -1,0 +1,51 @@
+Date: Thu, 26 Jun 2014 12:01:34 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FDebugAuthInfoPlugin;
+  flags=PAGE_LOCKED;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+Administrative plugin, used to debug auth problems and settings.
+This plugin is only for testing purposes.
+If DEBUG has no _DEBUG_LOGIN bit set, only the admin user can call it,
+which is of no real use.
+
+Warning! This may display DB and user passwords in cleartext. We think we
+cleared everything out though.
+
+== Usage ==
+{{{
+<<DebugAuthInfo userid||=AdminUser>>
+}}}
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **userid**
+| Id of user to debug
+| Current user
+|}
+
+== Example ==
+
+See [[DebugAuthInfo]]
+
+== Authors ==
+* [[Help:Jeff Dairiki|Jeff Dairiki]]
+* [[Help:Reini Urban|Reini Urban]]
+
+== See Also ==
+* [[DebugAuthInfo]] is the corresponding [[Help:ActionPage]].
+* [[Help:DebugGroupInfoPlugin]]
+* [[Help:DebugBackendInfoPlugin]]
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

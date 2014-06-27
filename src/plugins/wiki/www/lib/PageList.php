@@ -1677,13 +1677,13 @@ class PageList
             for ($i = $offset; $i < $offset + $count; $i += $length) {
                 $this->_saveOptions(array('cols' => 0, 'paging' => 'none'));
                 $this->_pages = array_slice($this->_pages, $i, $length);
-                $cols->pushContent(HTML::td( /*array('width' => $width),*/
-                    $this->_generateList()));
+                $cols->pushContent(HTML::td($this->_generateList()));
                 $this->_restoreOptions();
             }
             // speed up table rendering by defining colgroups
             $out->pushContent(HTML::table(HTML::colgroup
-                (array('span' => $this->_options['cols'], 'width' => $width)),
+                (array('span' => $this->_options['cols'],
+                       'style' => 'width: '.$width)),
                 $cols));
             return $out;
         }

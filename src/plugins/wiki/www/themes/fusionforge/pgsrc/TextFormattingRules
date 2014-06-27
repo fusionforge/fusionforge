@@ -1,4 +1,4 @@
-Date: Fri, 10 Sep 2010 13:47:11 +0000
+Date: Fri, 20 Jun 2014 16:00:51 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=TextFormattingRules;
@@ -19,7 +19,7 @@ Content-Transfer-Encoding: binary
 **Preventing linking:** Prefix with "##~~##": ##~~~DoNotHyperlink##. \\
 **Misc:** "##~\~\##" makes a linebreak, "##~----##" makes a horizontal rule. \\
 **Allowed HTML tags:** <b>b</b> <big>big</big> <i>i</i>
-<small>small</small> ##tt## <em>em</em> <strong>strong</strong>
+<small>small</small> <tt>tt</tt> <em>em</em> <strong>strong</strong>
 <s>s</s> <strike>strike</strike>
 <abbr>abbr</abbr> <acronym>acronym</acronym> <cite>cite</cite>
 <code>code</code> <dfn>dfn</dfn> <kbd>kbd</kbd> <samp>samp</samp>

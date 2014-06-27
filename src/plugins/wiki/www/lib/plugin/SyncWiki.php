@@ -116,7 +116,6 @@ class WikiPlugin_SyncWiki
             //$ol = HTML::ol();
             $done = array();
             foreach ($pagelist as $ext) {
-                $reaction = _("<unknown>");
                 // compare existance and dates with local page
                 $extdate = iso8601_decode($ext['lastModified']->scalar, 1);
                 // TODO: urldecode ???
@@ -130,7 +129,7 @@ class WikiPlugin_SyncWiki
                     // check date of latest revision if there's one, and > mergepoint
                     if (($ourrev->getVersion() > 1) and ($ourrev->get('mtime') > $merge_point)) {
                         // our was deleted after sync, and changed after last sync.
-                        $this->_addConflict('delete', $args, $our, $extdate);
+                        $this->_addConflict('delete', $args, $our);
                         $reaction = (_(" skipped") . " (" . "locally deleted or moved" . ")");
                     } else {
                         $reaction = $this->_import($args, $our, $extdate);
@@ -143,14 +142,14 @@ class WikiPlugin_SyncWiki
                     } elseif ($extdate > $ourdate and $ourdate >= $merge_point) {
                         $rel = '>';
                         // our is older then external but newer than last sync
-                        $reaction = $this->_addConflict('import', $args, $our, $extdate);
+                        $reaction = $this->_addConflict('import', $args, $our);
                     } elseif ($extdate < $ourdate and $extdate < $merge_point) {
                         $rel = '>';
                         $reaction = $this->_export($args, $our);
                     } elseif ($extdate < $ourdate and $extdate >= $merge_point) {
                         $rel = '>';
                         // our is newer and external is also newer
-                        $reaction = $this->_addConflict('export', $args, $our, $extdate);
+                        $reaction = $this->_addConflict('export', $args, $our);
                     } else {
                         $rel = '==';
                         $reaction = _("same date");
@@ -193,7 +192,7 @@ class WikiPlugin_SyncWiki
                         $reaction = $this->_export($args, $our);
                     } elseif ($extdate < $ourdate and $extdate >= $merge_point) {
                         // our newer and external newer
-                        $reaction = $this->_addConflict($args, $our, $extdate);
+                        $reaction = $this->_addConflict('', $args, $our);
                     }
                 } else {
                     $reaction = 'xmlrpc error';
@@ -260,7 +259,7 @@ class WikiPlugin_SyncWiki
         closedir($dh);
     }
 
-    private function _addConflict($what, $args, $our, $extdate = null)
+    private function _addConflict($what, $args, $our)
     {
         $pagename = $our->getName();
         $meb = Button(array('action' => $args['action'],

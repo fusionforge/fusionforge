@@ -79,7 +79,7 @@ class WikiPlugin_PhpHighlight
 
         /* Remove empty span tags. */
         foreach (array($string, $comment, $keyword, $bg, $default, $html) as $color) {
-            $search = "<span style=\"color: $color\"></span>";
+            $search = '<span style="color: '.$color.'></span>';
             $str = str_replace($search, '', $str);
         }
 

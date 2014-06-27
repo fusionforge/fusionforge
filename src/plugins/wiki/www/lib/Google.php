@@ -254,7 +254,7 @@ class Google
      *
      * The return type for cached pages is base64 encoded text.
      *
-     * @params string url - full URL to the page to retrieve
+     * @param string $url - full URL to the page to retrieve
      * @return string full text of the cached page
      */
     function doGetCachedPage($url)

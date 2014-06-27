@@ -50,7 +50,7 @@ if (!forge_check_perm('docman', $g->getID(), 'read')) {
 $arr_fileid = explode(',', getStringFromRequest('fileid'));
 $option = getStringFromRequest('option');
 switch ($option) {
-	case 'add': {
+	case 'start': {
 		foreach ($arr_fileid as $fileid) {
 			if (!empty($fileid)) {
 				$d = new Document($g, $fileid);
@@ -67,7 +67,7 @@ switch ($option) {
 		$feedback = sprintf(ngettext('Monitoring %s document started.', 'Monitoring %s documents started.', $count), $count);
 		break;
 	}
-	case 'remove': {
+	case 'stop': {
 		foreach ($arr_fileid as $fileid) {
 			if (!empty($fileid)) {
 				$d = new Document($g, $fileid);

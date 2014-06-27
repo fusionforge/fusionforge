@@ -272,13 +272,13 @@ class WikiPlugin_WikiPoll
                 else
                     list($percent, $count, $all) = $this->getResult($page, $i, 1);
                 $print = sprintf(_("  %d%% (%d/%d)"), $percent, $count, $all);
-                $html->pushContent(HTML::tr(HTML::th(array('colspan' => 4, 'align' => 'left'), $q)));
+                $html->pushContent(HTML::tr(HTML::th(array('colspan' => 4, 'class' => 'align-left'), $q)));
                 $html->pushContent(HTML::tr(HTML::td($checkbox),
                     HTML::td($a),
                     HTML::td($this->bar($percent)),
                     HTML::td($print)));
             } else {
-                $html->pushContent(HTML::tr(HTML::th(array('colspan' => 4, 'align' => 'left'), $q)));
+                $html->pushContent(HTML::tr(HTML::th(array('colspan' => 4, 'class' => 'align-left'), $q)));
                 $row = HTML();
                 if (!$readonly)
                     $this->storeResult($page, $i, $answers[$i]);

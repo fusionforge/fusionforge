@@ -125,8 +125,8 @@ class Theme extends Layout {
 		if ($id) {
 			$id = $this->toSlug($id);
 			$idid = $id;
-			$idtitle = $id.'-title"';
-			$idtcont = $id.'-title-content"';
+			$idtitle = $id.'-title';
+			$idtcont = $id.'-title-content';
 		} else {
 			$idid = "";
 			$idtitle = "";

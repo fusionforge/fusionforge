@@ -1,7 +1,7 @@
 /**
  * headerMenu Plugin Js Controller
  *
- * Copyright 2012-2013, Franck Villaume - TrivialDev
+ * Copyright 2012-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -101,43 +101,41 @@ HeaderMenuController.prototype =
 	},
 
 	validateOutLinkOrder: function() {
-		var linkOrder = jQuery(".sortable_outermenu_listlinks tbody").sortable('toArray').toString();
-		jQuery.get(this.params.headerMenuUrl,
+		var linkOrder = this.params.tableOutTbLink.sortable('toArray').toString();
+		jQuery.getJSON(this.params.headerMenuUrl,
 				{
 					action:		'validateOrder',
 					linkorder:	linkOrder,
 					type:		'globaladmin'
 				},
 				jQuery.proxy(function(data) {
-						jQuery('.feedback').remove();
-						jQuery('.error').remove();
-						if (data == 0) {
-							jQuery('#maindiv').prepend('<div class="actionresult"><p id="validateLinkMessage" class="feedback">'+this.params.validMessOut+'</p></div>');
-						} else {
-							jQuery('#maindiv').prepend('<p id="validateLinkMessage" class="error">'+this.params.errMessOut+'</p>');
+						jQuery('#maindiv > .feedback').remove();
+						jQuery('#maindiv > .error').remove();
+						jQuery('#maindiv > .warning_msg').remove();
+						if (typeof data.html != 'undefined') {
+							jQuery('#maindiv').prepend(data.html);
 						}
-                        jQuery("#linkorderoutervalidatebutton").hide();
+						this.params.validOutButton.hide();
 					}, this)
 			);
 	},
 
 	validateHeaLinkOrder: function() {
-		var linkOrder = jQuery(".sortable_headermenu_listlinks tbody").sortable('toArray').toString();
-		jQuery.get(this.params.headerMenuUrl,
+		var linkOrder = this.params.tableHeaTbLink.sortable('toArray').toString();
+		jQuery.getJSON(this.params.headerMenuUrl,
 				{
 					action:		'validateOrder',
 					linkorder:	linkOrder,
 					type:		'globaladmin'
 				},
 				jQuery.proxy(function(data) {
-						jQuery('.feedback').remove();
-						jQuery('.error').remove();
-						if (data == 0) {
-							jQuery('#maindiv').prepend('<div class="actionresult"><p id="validateLinkMessage" class="feedback">'+this.params.validMessHea+'</p></div>');
-						} else {
-							jQuery('#maindiv').prepend('<p id="validateLinkMessage" class="error">'+this.params.errMessHea+'</p>');
+						jQuery('#maindiv > .feedback').remove();
+						jQuery('#maindiv > .error').remove();
+						jQuery('#maindiv > .warning_msg').remove();
+						if (typeof data.html != 'undefined') {
+							jQuery('#maindiv').prepend(data.html);
 						}
-                        jQuery("#linkorderheadervalidatebutton").hide();
+						this.params.validHeaButton.hide();
 					}, this)
 			);
 	}
@@ -190,7 +188,7 @@ GroupMenuController.prototype =
 
 	validateProjectLinkOrder: function() {
 		var linkOrder = jQuery("#sortable").find("tbody").sortable('toArray').toString();
-		jQuery.get(this.params.headerMenuUrl,
+		jQuery.getJSON(this.params.headerMenuUrl,
 				{
 					group_id:	this.params.groupId,
 					action:		'validateOrder',
@@ -198,17 +196,15 @@ GroupMenuController.prototype =
 					type:		'projectadmin'
 				},
 				jQuery.proxy(function(data) {
-						jQuery('.feedback').remove();
-						jQuery('.error').remove();
-						if (data == 0) {
-							jQuery('#maindiv').prepend('<div class="actionresult"><p id="validateLinkMessage" class="feedback">'+this.params.validMessage+'</p></div>');
-						} else {
-							jQuery('#maindiv').prepend('<p id="validateLinkMessage" class="error">'+this.params.errorMessage+'</p>');
+						jQuery('#maindiv > .feedback').remove();
+						jQuery('#maindiv > .error').remove();
+						jQuery('#maindiv > .warning_msg').remove();
+						if (typeof data.html != 'undefined') {
+							jQuery('#maindiv').prepend(data.html);
 						}
 						this.params.validateButton.hide();
 					}, this)
 			);
-
 	}
 };
 

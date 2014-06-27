@@ -64,7 +64,8 @@ class Template
         $orig[] = '/<\?php echo (.*?)\?>/s';
         $repl[] = '<?php $this->_print(\1);?>';
 
-        return preg_replace($orig, $repl, $template);
+        // Avoid PHP 5.5 warning about /e
+        return @preg_replace($orig, $repl, $template);
     }
 
     private function _mungePlugin($pi)
@@ -188,7 +189,7 @@ class Template
         $pre->printXML();
     }
 
-    private function _errorHandler($error)
+    public function _errorHandler($error)
     {
         //if (!preg_match('/: eval\(\)\'d code$/', $error->errfile))
         //    return false;

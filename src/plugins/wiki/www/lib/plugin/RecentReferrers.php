@@ -53,7 +53,7 @@ class WikiPlugin_RecentReferrers extends WikiPlugin
         $args = $this->getArgs($argstr, $request);
         $table = HTML::table(array('class' => 'pagelist'));
         if (!$args['noheader'] and !empty($args['caption']))
-            $table->pushContent(HTML::caption(array('align' => 'top'), $args['caption']));
+            $table->pushContent(HTML::caption(array('style' => 'caption-side:top'), $args['caption']));
         $limit = $args['limit'];
         $accesslog =& $request->_accesslog;
         if ($logiter = $accesslog->get_referer($limit, "external_only")

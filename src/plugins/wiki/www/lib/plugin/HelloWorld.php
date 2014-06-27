@@ -24,9 +24,9 @@
  * A simple demonstration WikiPlugin.
  *
  * Usage:
- * <<HelloWorld?>
+ * <<HelloWorld>>
  * <<HelloWorld
- *          salutation="Greetings, "
+ *          salutation="Greetings"
  *          name=Wikimeister
  * >>
  * <<HelloWorld salutation=Hi >>
@@ -48,8 +48,8 @@ class WikiPlugin_HelloWorld
     // Establish default values for each of this plugin's arguments.
     function getDefaultArguments()
     {
-        return array('salutation' => "Hello,",
-            'name' => "World");
+        return array('salutation' => "Hello",
+                     'name' => "World");
     }
 
     function run($dbi, $argstr, &$request, $basepage)
@@ -58,7 +58,7 @@ class WikiPlugin_HelloWorld
 
         // Any text that is returned will not be further transformed,
         // so use html where necessary.
-        $html = HTML::tt(fmt('%s: %s', $salutation, WikiLink($name, 'auto')),
+        $html = HTML::samp(fmt('%s, %s', $salutation, WikiLink($name, 'auto')),
             THE_END);
         return $html;
     }

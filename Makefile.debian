@@ -225,12 +225,6 @@ lucid:    # Simply build lucid packages #
 rlucid:   # Make a lucid repository #
 	$(MAKE) repoubu UBUNTULIST=1lucid
 
-#:======== Other and Multiple Builds ============#
-documentor_path=/tmp
-documentor_url=http://downloads.sourceforge.net/project/phpdocu/PhpDoc/phpDocumentor-1.4.3/PhpDocumentor-1.4.3.tgz
-documentor_file=PhpDocumentor-1.4.3.tgz
-documentor_subdir=PhpDocumentor-1.4.3
-
 #
 # FUSIONFORGE
 #
@@ -238,32 +232,12 @@ documentor_subdir=PhpDocumentor-1.4.3
 orig:   # Make Debian package .orig tarball #
 	$(MAKE) $(TARBALLS)/$(ORIGFILE)
 
-#
-# PHPDOCUMENTOR
-#
-# Get phpdocumentor, install phpdocumentor, build $(PKGNAME) phpdoc
-phpdoc: $(PKGDIR)/docs/phpdoc/docs
-
 doc:
 	(cd src/docs/docbook ; make debian TARGET=$(CURDIR)/build/docs/docbook/)
 
 cleandoc:
 	(cd src/docs/docbook ; make clean TARGET=$(CURDIR)/build/docs/docbook/)
 
-phpdocumentor_get:
-	[ ! -f $(documentor_path)/$(documentor_file) ] && \
-        cd $(documentor_path) && \
-        wget $(documentor_url) || true
-phpdocumentor_unpack: phpdocumentor_get
-	[ ! -d $(documentor_path)/$(documentor_subdir) ] && \
-        cd $(documentor_path) && \
-        tar -xvzf $(documentor_file) || true
-$(documentor_path)/$(documentor_subdir)/patched: phpdocumentor_unpack
-	cd $(documentor_path)/$(documentor_subdir) && \
-        patch < $(CURDIR)/$(PKGDIR)/docs/phpdoc/phpDocumentor.ini.patch \
-        && touch $(documentor_path)/$(documentor_subdir)/patched
-$(PKGDIR)/docs/phpdoc/docs: $(documentor_path)/$(documentor_subdir)/patched
-	cd $(PKGDIR)/docs/phpdoc/ && ./makedoc.sh
 
 #
 # Build with cowbuilder or pbuilder

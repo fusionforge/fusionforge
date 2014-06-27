@@ -864,7 +864,7 @@ class WikiDB_backend_search_sql extends WikiDB_backend_search
     function _fulltext_match_clause($node)
     {
         // force word-style %word% for fulltext search
-        $word = '%' . $node->_sql_quote($node->word) . '%';
+        $word = '%' . $node->sql_quote($node->word) . '%';
         // eliminate stoplist words
         if ($this->isStoplisted($node))
             return "1=1"; // and (pagename or 1) => and 1

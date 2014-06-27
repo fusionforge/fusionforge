@@ -54,7 +54,7 @@ class WikiPlugin_Diff
 
         global $WikiTheme;
 
-        $row = HTML::tr(HTML::td(array('align' => 'right'), $label));
+        $row = HTML::tr(HTML::td(array('class' => 'align-right'), $label));
         if ($rev) {
             $author = $rev->get('author');
             $dbi = $request->getDbh();

@@ -133,9 +133,6 @@ class WikiTheme_blog extends WikiTheme
 
         // override sidebar definitions:
         $this->setDefaultCSS(_("blog"), 'Kubrick.css');
-        if (isBrowserIE()) {
-            $this->addMoreHeaders($this->_CSSlink(0, $this->_findFile('IEFixes.css'), 'all'));
-        }
         $this->addButtonAlias(_("(diff)"), "[diff]");
         $this->addButtonAlias("...", "alltime");
 

@@ -54,7 +54,7 @@ class WikiPlugin_WatchPage
     // This could be expanded as in Mediawiki to a list of each page with a remove button.
     function showWatchList($pagelist)
     {
-        return HTML::strong(HTML::tt(empty($pagelist) ? _("<empty>") : $pagelist));
+        return HTML::strong(HTML::samp(empty($pagelist) ? _("<empty>") : $pagelist));
     }
 
     function addpagelist($page, $pagelist)

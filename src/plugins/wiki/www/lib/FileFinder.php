@@ -20,7 +20,7 @@ class FileFinder
      *
      * @param $path array A list of directories in which to search for files.
      */
-    function FileFinder($path = false)
+    function FileFinder($path = array())
     {
         $this->_pathsep = $this->_get_syspath_separator();
         if (!isset($this->_path) and $path === false)
@@ -32,6 +32,7 @@ class FileFinder
      * Find file.
      *
      * @param $file string File to search for.
+     * @param bool $missing_okay
      * @return string The filename (including path), if found, otherwise false.
      */
     function findFile($file, $missing_okay = false)
@@ -139,6 +140,7 @@ class FileFinder
      * So if there's any '\' in the path, either fix them to '/' (not in Win95 or FAT?)
      * or use '\' for ours.
      *
+     * @param string $path
      * @access private
      * @return string path_separator.
      */

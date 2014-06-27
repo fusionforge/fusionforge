@@ -82,6 +82,10 @@ form.wikiadmin input[type=file] {
     text-decoration: line-through;
 }
 
+.big {
+    font-size: larger;
+}
+
 .align-left {
     text-align: left;
 }

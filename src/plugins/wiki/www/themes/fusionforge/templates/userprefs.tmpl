@@ -115,64 +115,6 @@ $DoubleClickCB = HTML::input(array('type' => 'checkbox',
                                   'name' => 'pref[doubleClickEdit]',
                                   'value' => '1',
                                   'checked' => (bool) $pref->get('doubleClickEdit')));
-if (!function_exists('selectedOption')) {
-  function selectedOption ($value, $label = false) {
-    return HTML::option(array('value' => $value,'selected'=>"selected"), ($label ? $label : $value) . "\n");
-  }
-  function unselectedOption ($value, $label = false) {
-    return HTML::option(array('value' => $value), ($label ? $label : $value) . "\n");
-  }
-}
-
-$SelectThemes = ''; $SelectLanguages = '';
-$SelectThemesDesc = ''; $SelectLanguagesDesc = '';
-if ( $isForm ) {
-    $SelectOptions = HTML();
-    if (!empty($available_themes) and is_array($available_themes)) {
-        if (!$pref->get('theme') or $pref->get('theme') == THEME)
-            $SelectOptions->pushContent(selectedOption("",_("<system theme>")));
-        else
-            $SelectOptions->pushContent(unselectedOption("",_("<system theme>")));
-        foreach ($available_themes as $theme) {
-            if ($theme == $pref->get('theme') and $theme != THEME)
-                $SelectOptions->pushContent(selectedOption($theme));
-            else
-                $SelectOptions->pushContent(unselectedOption($theme));
-        }
-        $SelectThemes = HTML::select(array('name' => "pref[theme]",'id' => 'theme'),
-                                     $SelectOptions);
-        $SelectThemesDesc = _("Personal theme:");
-    }
-
-    $SelectOptions = HTML();
-    if (!empty($available_languages) and is_array($available_languages)) {
-        if (!$pref->get('lang') or $pref->get('lang') == DEFAULT_LANGUAGE)
-            $SelectOptions->pushContent(selectedOption("",_("<system language>")));
-        else
-            $SelectOptions->pushContent(unselectedOption("",_("<system language>")));
-        foreach ($available_languages as $lang) {
-            if ($lang == $pref->get('lang') and $lang != DEFAULT_LANGUAGE)
-                $SelectOptions->pushContent(selectedOption($lang));
-            else
-                $SelectOptions->pushContent(unselectedOption($lang));
-        }
-        $SelectLanguages = HTML::select(array('name' => "pref[lang]",'id' => 'lang'),
-                                        $SelectOptions);
-        $SelectLanguagesDesc = _("Personal language:");
-    } else {
-        if ($SelectThemes == '') {
-            $appearance = false;
-            $SelectThemesDesc = '';
-            $SelectLanguagesDesc = '';
-        }
-    }
-} else {
-    $SelectThemesDesc = _("Personal theme:");
-    $SelectLanguagesDesc = _("Personal language:");
-    $SelectThemes = $pref->get('theme');
-    $SelectLanguages = $pref->get('lang');
-}
-
 ?>
 <?php echo $errmsg ?>
 
