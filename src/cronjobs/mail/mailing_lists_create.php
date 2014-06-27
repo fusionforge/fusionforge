@@ -106,8 +106,8 @@ for ($i=0; $i<$rows; $i++) {
 			echo db_error();
 			$tmp = tempnam(forge_get_config('data_path'), "tmp");
 			$fh = fopen($tmp,'w');
-			$listConfig = "# -*- coding: iso-8859-1 -*-\n";
-			$listConfig .= "description = \"$description\"\n" ;
+			fwrite($fh, "# -*- coding: iso-8859-1 -*-\n");
+			$listConfig = "description = \"$description\"\n" ;
 			$listConfig .= "host_name = '".forge_get_config('lists_host')."'\n" ;
 			if (!$public) {
 				$listConfig .= "archive_private = True\n" ;
@@ -149,8 +149,8 @@ for ($i=0; $i<$rows; $i++) {
 	} elseif ($status == MAIL__MAILING_LIST_IS_CREATED) {
 		$tmp = tempnam(forge_get_config('data_path'), "tmp");
 		$fh = fopen($tmp,'w');
-		$listConfig = "# -*- coding: iso-8859-1 -*-\n";
-		$listConfig .= "description = \"$description\"\n" ;
+		fwrite($fh, "# -*- coding: iso-8859-1 -*-\n");
+		$listConfig = "description = \"$description\"\n" ;
 		$listConfig .= "host_name = '".forge_get_config('lists_host')."'\n";
 		if (!$public) {
 			$listConfig .= "archive_private = True\n";
