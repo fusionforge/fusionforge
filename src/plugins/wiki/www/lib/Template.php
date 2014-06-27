@@ -64,7 +64,8 @@ class Template
         $orig[] = '/<\?php echo (.*?)\?>/s';
         $repl[] = '<?php $this->_print(\1);?>';
 
-        return preg_replace($orig, $repl, $template);
+        // Avoid PHP 5.5 warning about /e
+        return @preg_replace($orig, $repl, $template);
     }
 
     private function _mungePlugin($pi)
