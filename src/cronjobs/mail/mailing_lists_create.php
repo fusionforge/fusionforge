@@ -106,8 +106,8 @@ for ($i=0; $i<$rows; $i++) {
 			echo db_error();
 			$tmp = tempnam(forge_get_config('data_path'), "tmp");
 			$fh = fopen($tmp,'w');
-			fwrite($fh, "# -*- coding: iso-8859-1 -*-\n");
-			$listConfig = "description = \"$description\"\n" ;
+			$listConfig = "# -*- coding: iso-8859-1 -*-\n";
+			$listConfig .= "description = \"$description\"\n" ;
 			$listConfig .= "host_name = '".forge_get_config('lists_host')."'\n" ;
 			if (!$public) {
 				$listConfig .= "archive_private = True\n" ;
@@ -146,11 +146,11 @@ for ($i=0; $i<$rows; $i++) {
 			}
 		}
 		$mailingListIds[] = $grouplistid;
-	} elseif ($status == MAIL__MAILING_LIST_IS_CREATED) {
+	} elseif ($status == MAIL__MAILING_LIST_IS_CREATED) {  // created but not configured
 		$tmp = tempnam(forge_get_config('data_path'), "tmp");
 		$fh = fopen($tmp,'w');
-		fwrite($fh, "# -*- coding: iso-8859-1 -*-\n");
-		$listConfig = "description = \"$description\"\n" ;
+		$listConfig = "# -*- coding: iso-8859-1 -*-\n";
+		$listConfig .= "description = \"$description\"\n" ;
 		$listConfig .= "host_name = '".forge_get_config('lists_host')."'\n";
 		if (!$public) {
 			$listConfig .= "archive_private = True\n";
@@ -165,8 +165,8 @@ for ($i=0; $i<$rows; $i++) {
 			$listConfig .= "advertised = True\n";
 			$listConfig .= "subscribe_policy = 1\n";
 		}
-		if (is_readable($custom_file)) fwrite($fh, file_get_contents($custom_file));
 		fwrite($fh, $listConfig);
+		if (is_readable($custom_file)) fwrite($fh, file_get_contents($custom_file));
 		fclose($fh);
 		$config_cmd = escapeshellcmd($path_to_mailman."/bin/config_list -i $tmp $listname");
 		passthru($config_cmd, $failed);
