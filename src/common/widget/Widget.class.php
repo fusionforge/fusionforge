@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2014, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -95,15 +95,15 @@ require_once 'common/widget/Widget_MyMonitoredDocuments.class.php';
 		return '';
 	}
 	function getPreferencesForm($layout_id, $owner_id, $owner_type) {
-		$prefs  = '';
-		$prefs .= '<form method="post" action="'.util_make_uri('/widgets/widget.php?owner='. $owner_type.$owner_id .'&action=update&name['. $this->id .']='. $this->getInstanceId() .'&content_id='. $this->getInstanceId() .'&layout_id='. $layout_id).'">';
-		$prefs .= '<fieldset><legend>'. _("Preferences") .'</legend>';
+		global $HTML;
+		$prefs  = $HTML->openForm(array('method' => 'post', 'action' => util_make_uri('/widgets/widget.php?owner='. $owner_type.$owner_id .'&action=update&name['. $this->id .']='. $this->getInstanceId() .'&content_id='. $this->getInstanceId() .'&layout_id='. $layout_id)));
+		$prefs .= html_ao('fieldset').html_e('legend', array(), _('Preferences'));
 		$prefs .= $this->getPreferences();
-		$prefs .= '<br />';
-		$prefs .= '<input type="submit" name="cancel" value="'. _("Cancel") .'" /> ';
-		$prefs .= '<input type="submit" value="'. _("Submit") .'" />';
-		$prefs .= '</fieldset>';
-		$prefs .= '</form>';
+		$prefs .= html_e('br');
+		$prefs .= html_e('input', array('type' => 'submit', 'name' => 'cancel', 'value' => _('Cancel')));
+		$prefs .= html_e('input', array('type' => 'submit', 'value' => _('Submit')));
+		$prefs .= html_ac(html_ap() - 1);
+		$prefs .= $HTML->closeForm();
 		return $prefs;
 	}
 	function getInstallPreferences() {

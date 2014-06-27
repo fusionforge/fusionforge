@@ -35,10 +35,11 @@ class Widget_MyAdmin extends Widget {
 		return _('Pending administrative tasks');
 	}
 	function getContent() {
+		global $HTML;
 		$i = 0;
-		$html_my_admin = '<table class="fullwidth">';
+		$html_my_admin = $HTML->listTableTop();
 
-		if (forge_check_global_perm ('forge_admin')) {
+		if (forge_check_global_perm('forge_admin')) {
 			$res = db_query_params("SELECT count(*) AS count FROM users WHERE status='P' OR status='V' OR status='W'",array());
 			$row = db_fetch_array($res);
 			$pending_users = $row['count'];
@@ -48,13 +49,13 @@ class Widget_MyAdmin extends Widget {
 
 			$html_my_admin .= $this->_get_admin_row(
 				$i++,
-				vsprintf(_('Users in <a href="%s"><strong>P</strong> (pending) Status</a>'), array("/admin/userlist.php?status=P")),
+				vsprintf(_('Users in <a href="%s"><strong>P</strong> (pending) Status</a>'), array(util_make_uri('/admin/userlist.php?status=P'))),
 				$pending_users,
 				$this->_get_color($pending_users)
 			);
 		}
 
-		if (forge_check_global_perm ('approve_projects')) {
+		if (forge_check_global_perm('approve_projects')) {
 			$res = db_query_params('SELECT count(*) AS count FROM groups
 			WHERE group_id > 4
 			    AND status = $1
@@ -66,13 +67,13 @@ class Widget_MyAdmin extends Widget {
 
 			$html_my_admin .= $this->_get_admin_row(
 				$i++,
-				vsprintf(_('Groups in <a href="%s"><strong>P</strong> (pending) Status</a>'), array("/admin/approve-pending.php")),
+				vsprintf(_('Groups in <a href="%s"><strong>P</strong> (pending) Status</a>'), array(util_make_uri('/admin/approve-pending.php'))),
 				$pending_projects,
 				$this->_get_color($pending_projects)
 			);
 		}
 
-		if (forge_check_global_perm ('approve_news')) {
+		if (forge_check_global_perm('approve_news')) {
 			$old_date = time()-60*60*24*30;
 			$res = db_query_params('SELECT groups.group_id,id,post_date,summary,
 				group_name,unix_group_name
@@ -92,7 +93,7 @@ class Widget_MyAdmin extends Widget {
 				$this->_get_color($pending_news)
 			);
 		}
-		$html_my_admin .= '</table>';
+		$html_my_admin .= $HTML->listTableBottom();
 
 		return $html_my_admin;
 	}
@@ -100,7 +101,11 @@ class Widget_MyAdmin extends Widget {
 		return $nb == 0 ? 'green' : 'orange';
 	}
 	function _get_admin_row($i, $text, $value, $bgcolor, $textcolor = 'white') {
+		global $HTML;
 		$i=$i++;
-		return '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td>'. $text .'</td><td style="white-space:nowrap; width:20%; background:'. $bgcolor .'; color:'. $textcolor .'; padding: 2px 8px; font-weight:bold; text-align:center;">'. $value .'</td></tr>';
+		$cells = array();
+		$cells[][] = $text;
+		$cells[] = array($value, 'style' => 'white-space:nowrap; width:20%; background:'. $bgcolor .'; color:'. $textcolor .'; padding: 2px 8px; font-weight:bold; text-align:center;');
+		return $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
 	}
 }

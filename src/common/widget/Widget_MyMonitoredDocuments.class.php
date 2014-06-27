@@ -71,28 +71,27 @@ class Widget_MyMonitoredDocuments extends Widget {
 				}
 
 				list($hide_now,$count_diff,$hide_url) = my_hide_url('document',$group_id,$hide_item_id,$rows2,$hide_document);
-
-				$html_hdr = '<tr class="boxitem"><td colspan="2">'.
-				$hide_url.util_make_link('/docman/?group_id='.$group_id, db_result($result,$j,'group_name')).'&nbsp;&nbsp;&nbsp;&nbsp;';
-
-				$html = '';
 				$count_new = max(0, $count_diff);
+				$cells = array();
+				$cells[] = array($hide_url.util_make_link('/docman/?group_id='.$group_id, db_result($result,$j,'group_name')).'&nbsp;&nbsp;&nbsp;&nbsp;'.
+						'['.$rows2.($count_new ? ', '.html_e('b', array(), sprintf(_('%s new'), $count_new).']') : ']'), 'colspan' => 2);
+				$html_hdr = $HTML->multiTableRow(array('class' => 'boxitem'), $cells);
+				$html = '';
 				for ($i = 0; $i < $rows2; $i++) {
 					if (!$hide_now) {
+						$cells = array();
 						$doc_group = db_result($result2,$i,'doc_group');
 						$docid = db_result($result2,$i,'docid');
-						$html .= '
-							<tr '. $HTML->boxGetAltRowStyle($i) .'><td style="width:99%">'.
-							'&nbsp;&nbsp;&nbsp;-&nbsp;'.
-							util_make_link('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$doc_group, stripslashes(db_result($result2,$i,'filename'))).'</td>'.
-							'<td class="align-center">'.
-							util_make_link('/docman/?group_id='.$group_id.'&action=monitorfile&option=remove&view=listfile&dirid='.$doc_group.'&fileid='.$docid,
-								$HTML->getDeletePic(_('Stop Monitoring'), _('Stop Monitoring'), array('onClick' => 'return confirm("'._('Stop monitoring this document?').'")')))
-							.'</td></tr>';
+						$cells[] = array('&nbsp;&nbsp;&nbsp;-&nbsp;'.util_make_link('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$doc_group, stripslashes(db_result($result2,$i,'filename'))), 'style' => 'width:99%');
+						$cells[] = array(util_make_link('/docman/?group_id='.$group_id.'&action=monitorfile&option=stop&view=listfile&dirid='.$doc_group.'&fileid='.$docid,
+								$HTML->getDeletePic(_('Stop Monitoring'), _('Stop Monitoring'), array('onClick' => 'return confirm("'._('Stop monitoring this document?').'")'))),
+								'class' => 'align-center');
+						$html .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
+
 					}
 				}
 
-				$html_hdr .= '['.$rows2.($count_new ? ", <b>".sprintf(_('%s new'), $count_new)."</b>]" : ']').'</td></tr>';
+
 				$html_my_monitored_documents .= $html_hdr.$html;
 			}
 			$html_my_monitored_documents .= $HTML->listTableBottom();
