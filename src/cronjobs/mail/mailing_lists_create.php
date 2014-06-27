@@ -77,7 +77,7 @@ for ($i=0; $i<$rows; $i++) {
 	$public = db_result($res,$i,'is_public');
 	$status = db_result($res,$i,'status');
 	$description = db_result($res, $i, 'description');
-	$description = str_replace('"', '\"', $description);
+	$description = str_replace('"', '\"', utf8_decode($description));
 
 	$listname = trim($listname);
 	if (!$listname) {
@@ -106,7 +106,8 @@ for ($i=0; $i<$rows; $i++) {
 			echo db_error();
 			$tmp = tempnam(forge_get_config('data_path'), "tmp");
 			$fh = fopen($tmp,'w');
-			$listConfig = "description = \"$description\"\n" ;
+			$listConfig = "# -*- coding: iso-8859-1 -*-\n";
+			$listConfig .= "description = \"$description\"\n" ;
 			$listConfig .= "host_name = '".forge_get_config('lists_host')."'\n" ;
 			if (!$public) {
 				$listConfig .= "archive_private = True\n" ;
@@ -148,7 +149,8 @@ for ($i=0; $i<$rows; $i++) {
 	} elseif ($status == MAIL__MAILING_LIST_IS_CREATED) {
 		$tmp = tempnam(forge_get_config('data_path'), "tmp");
 		$fh = fopen($tmp,'w');
-		$listConfig = "description = \"$description\"\n" ;
+		$listConfig = "# -*- coding: iso-8859-1 -*-\n";
+		$listConfig .= "description = \"$description\"\n" ;
 		$listConfig .= "host_name = '".forge_get_config('lists_host')."'\n";
 		if (!$public) {
 			$listConfig .= "archive_private = True\n";
@@ -183,7 +185,8 @@ for ($i=0; $i<$rows; $i++) {
 		$tmp = tempnam(forge_get_config('data_path'), "tmp");
 		$tmp = tempnam(forge_get_config('data_path'), "tmp");
 		$fh = fopen($tmp,'w');
-		$listConfig = "description = \"$description\"\n" ;
+		$listConfig = "# -*- coding: iso-8859-1 -*-\n";
+		$listConfig .= "description = \"$description\"\n" ;
 		$listConfig .= "host_name = '".forge_get_config('lists_host')."'\n" ;
 		if (!$public) {
 			$listConfig .= "archive_private = True\n" ;
@@ -235,7 +238,8 @@ for ($i=0; $i<$rows; $i++) {
 			$err .= "Privatizing ".$listname."\n";
 			$tmp = tempnam(forge_get_config('data_path'), "tmp");
 			$fh = fopen($tmp,'w');
-			$listConfig = "description = \"$description\"\n" ;
+			$listConfig = "# -*- coding: iso-8859-1 -*-\n";
+			$listConfig .= "description = \"$description\"\n" ;
 			$listConfig .= "host_name = '".forge_get_config('lists_host')."'\n" ;
 			$listConfig .= "archive_private = True\n" ;
 			$listConfig .= "advertised = False\n" ;
