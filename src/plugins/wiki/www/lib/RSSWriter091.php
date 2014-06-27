@@ -104,7 +104,7 @@ class _RecentChanges_RssFormatter091
     {
         global $request;
 
-        $rc_url = WikiURL($request->getArg('pagename'), false, 'absurl');
+        $rc_url = WikiURL($request->getArg('pagename'), array(), 'absurl');
 
         return array('title' => WIKI_NAME,
             'description' => _("RecentChanges"),

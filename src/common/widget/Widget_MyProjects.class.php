@@ -51,7 +51,7 @@ class Widget_MyProjects extends Widget {
 		if (count ($groups) < 1) {
 			$html_my_projects .= $HTML->warning_msg(_("You're not a member of any project"));
 		} else {
-			$html_my_projects .= '<table style="width:100%">';
+			$html_my_projects .= $HTML->listTableTop();
 			$i = 0;
 			$ra = RoleAnonymous::getInstance();
 			foreach ($groups as $g) {
@@ -90,7 +90,7 @@ class Widget_MyProjects extends Widget {
 					$html_my_projects .= '</td><td>&nbsp;</td></tr>';
 				}
 			}
-			$html_my_projects .= '</table>';
+			$html_my_projects .= $HTML->listTableBottom();
 			if (isset($private_shown) && $private_shown) {
 				$html_my_projects .= '
 					<span>(*)&nbsp;<em>'._('Private project').'</em></span>';
@@ -127,15 +127,15 @@ class Widget_MyProjects extends Widget {
 		foreach ($projects as $project) {
 			$pid = $project->getID();
 			$title = $project->getPublicName();
-			$url = util_make_url('/projects/' . $project->getUnixName());
+			$url = util_make_uri('/projects/' . $project->getUnixName());
 
-			if ( !RoleAnonymous::getInstance()->hasPermission('project_read',$pid)) {
+			if ( !RoleAnonymous::getInstance()->hasPermission('project_read', $pid)) {
 				$title .= ' (*)';
 			}
 
 			$desc = "Project: $url\n";
-			if (forge_check_perm ('project_admin', $pid)) {
-				$desc .= '<br />Admin: '. util_make_url('/project/admin/?group_id='.$pid);
+			if (forge_check_perm('project_admin', $pid)) {
+				$desc .= '<br />Admin: '. util_make_uri('/project/admin/?group_id='.$pid);
 			}
 
 			$rss->addItem(array(

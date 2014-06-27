@@ -115,10 +115,10 @@ function pagePermissionsSimpleFormat($perm_tree, $owner, $group = false)
     }
     */
     if ($type == 'page')
-        return HTML::tt(HTML::strong($perm->asRwxString($owner, $group)));
+        return HTML::samp(HTML::strong($perm->asRwxString($owner, $group)));
     elseif ($type == 'default')
-        return HTML::tt($perm->asRwxString($owner, $group)); elseif ($type == 'inherited') {
-        return HTML::tt(array('class' => 'inherited', 'style' => 'color:#aaa;'),
+        return HTML::samp($perm->asRwxString($owner, $group)); elseif ($type == 'inherited') {
+        return HTML::samp(array('class' => 'inherited', 'style' => 'color:#aaa;'),
             $perm->asRwxString($owner, $group));
     }
 }

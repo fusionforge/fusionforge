@@ -1,12 +1,23 @@
 Fusionforge-X.X:
 * [#658] Docman: Basic Webdav write mkcol, delete, put, move support (TrivialDev)
 * [#657] Docman: Add move mass actions (TrivialDev)
+* [#692] FRS: Reorganise code (TrivialDev)
+* [#697] FRS: Enable widget "My monitored packages" (TrivialDev)
 * [#656] General: drop tipsy plugin, use standard jQuery UI tooltip already provided (TrivialDev)
 * [#663] General: FusionForge Theme & jQuery UI theme sync (TrivialDev)
 * [#664] General: Update the jQuery & jQuery UI frameworks (TrivialDev)
 * [#669] General: feedback, error_msg, warning_msg are now store in cookie. (TrivialDev)
 * Plugin scmhook: Update git post-receive eMail hook (tarent solutions GmbH, Teckids e.V.)
 * [#684] Widget Public Area: display FRS link (TrivialDev)
+
+Fusionforge-5.3.2:
+* Software map: fix "value too long for type character varying(255)" error in cron db_trove_maint.php (Inria)
+* SCM Git: suppress 'warning: You appear to have cloned an empty repository.' in create_scm_repos.php (Inria)
+* Stats: handle bad encoding when gathering Git stats, remove spurious warning when SVN repository isn't created yet (Inria)
+* Admin: fix edit table themes, fix frs_processor sequence [#691] (TrivialDev)
+* User SSH keys (ssh_create.php): fix harmless warning when user removes all her keys (Inria)
+* Plugin mediawiki: fix paths in import/export scripts (Inria)
+* Plugin fckeditor: dropped in favor of ckeditor
 
 Fusionforge-5.3.1:
 * Docman: Basic Webdav write mkcol support (TrivialDev)

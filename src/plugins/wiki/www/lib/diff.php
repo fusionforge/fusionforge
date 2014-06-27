@@ -149,7 +149,7 @@ class HtmlUnifiedDiffFormatter extends UnifiedDiffFormatter
     function _start_block($header)
     {
         $this->_block = HTML::div(array('class' => 'block'),
-            HTML::tt($header));
+            HTML::samp($header));
     }
 
     function _end_block()
@@ -167,7 +167,7 @@ class HtmlUnifiedDiffFormatter extends UnifiedDiffFormatter
             if ($elem)
                 $line = new HtmlElement($elem, $line);
             $div->pushContent(HTML::div(array('class' => $class),
-                HTML::tt(array('class' => 'prefix'),
+                HTML::samp(array('class' => 'prefix'),
                     $prefix),
                 $line, HTML::raw('&nbsp;')));
         }
@@ -203,7 +203,7 @@ function PageInfoRow($label, $rev, &$request, $is_current = false)
 {
     global $WikiTheme;
 
-    $row = HTML::tr(HTML::td(array('align' => 'right'), $label));
+    $row = HTML::tr(HTML::td(array('class' => 'align-right'), $label));
     if ($rev) {
         $author = $rev->get('author');
         $dbi = $request->getDbh();

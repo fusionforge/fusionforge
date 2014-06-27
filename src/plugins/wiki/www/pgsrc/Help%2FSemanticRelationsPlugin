@@ -1,4 +1,4 @@
-Date: Fri,  7 Dec 2012 14:58:45 +0000
+Date: Thu, 26 Jun 2014 12:01:34 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FSemanticRelationsPlugin;
@@ -6,7 +6,7 @@ Content-Type: application/x-phpwiki;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-_short description_
+Display the list of relations and attributes on this page.
 
 == Usage ==
 {{{
@@ -15,8 +15,37 @@ _short description_
 
 == Arguments ==
 
-page _(default: current pagename)_:
-  The page to execute upon.
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **page**
+| Which pages (glob allowed)
+| Current page
+|-
+| **relations**
+| Which relations
+| All
+|-
+| **attributes**
+| Which attributes
+| All
+|-
+| **units**
+|
+|
+|-
+| **noheader**
+|
+| false
+|-
+| **nohelp**
+|
+| false
+|}
+
 
 == Example ==
 

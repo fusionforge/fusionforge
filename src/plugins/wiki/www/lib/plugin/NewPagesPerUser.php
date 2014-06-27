@@ -96,7 +96,8 @@ class WikiPlugin_NewPagesPerUser
             $pages[$monthnum]['author'][$author]['pages'][] = $pagename;
         }
         $iter->free();
-        $html = HTML::table(HTML::col(array('span' => 2, 'align' => 'left')));
+        $html = HTML::table(HTML::col(array('span' => 2,
+                                            'class' => 'align-left')));
         $nbsp = HTML::raw('&nbsp;');
         krsort($pages);
         foreach ($pages as $monthname => $parr) {

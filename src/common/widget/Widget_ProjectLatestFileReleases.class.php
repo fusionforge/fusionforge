@@ -20,6 +20,7 @@
  */
 
 require_once 'Widget.class.php';
+require_once $gfcommon.'frs/FRSPackageFactory.class.php';
 
 /**
  * Widget_ProjectLatestFileReleases
@@ -44,118 +45,76 @@ class Widget_ProjectLatestFileReleases extends Widget {
 	function getContent() {
 		$request =& HTTPRequest::instance();
 		$pm = ProjectManager::instance();
-		$group_id=$request->get('group_id');
+		$group_id = $request->get('group_id');
 		$project = $pm->getProject($group_id);
-		$unix_group_name = $project->getUnixName();
 		global $HTML;
 
-		//
-		//  Members of projects can see all packages
-		//  Non-members can only see public packages
-		//
-		$public_required = 1;
-		if (session_loggedin() &&
-		    (user_ismember($group_id) || forge_check_global_perm('forge_admin'))) {
-			$public_required = 0 ;
-		}
-
-		$res_files = db_query_params ('SELECT frs_package.package_id,frs_package.name AS package_name,frs_release.name AS release_name,frs_release.release_id AS release_id,frs_release.release_date AS release_date
-			FROM frs_package,frs_release
-			WHERE frs_package.package_id=frs_release.package_id
-			AND frs_package.group_id=$1
-			AND frs_release.status_id=1
-			AND frs_package.status_id=1
-			AND (frs_package.is_public=1 OR 1 != $2)
-			ORDER BY frs_package.package_id,frs_release.release_date DESC',
-			array ($group_id,
-				$public_required));
-		$rows_files=db_numrows($res_files);
-		if (!$res_files || $rows_files < 1) {
-			echo db_error();
-			// No releases
-			echo $HTML->warning_msg(_('This Project Has Not Released Any Files'));
-
+		$frspf = new FRSPackageFactory($project);
+		$frsps = $frspf->getFRSs();
+		if (count($frsps) < 1) {
+			echo $HTML->warning_msg(_('This project has not released any files'));
 		} else {
-			echo '
-				<table summary="Latest file releases" class="width-100p100">
-					<tr class="table-header">
-						<th class="align-left" scope="col">
-							'._('Package').'
-						</th>
-						<th scope="col">
-							'._('Version').'
-						</th>
-						<th scope="col">
-							'._('Date').'
-						</th>
-						<th scope="col">
-							'._('Notes').'
-						</th>
-						<th scope="col">
-							'._('Monitor').'
-						</th>
-						<th scope="col">
-							'._('Download').'
-						</th>
-					</tr>';
-			/*
-				This query actually contains ALL releases of all packages
-				We will test each row and make sure the package has changed before printing the row
-			*/
-			for ($f=0; $f<$rows_files; $f++) {
-				if (db_result($res_files,$f,'package_id')==db_result($res_files,($f-1),'package_id')) {
-					//same package as last iteration - don't show this release
-				} else {
-					$rel_date = getdate (db_result ($res_files, $f, 'release_date'));
-					$package_name = db_result($res_files, $f, 'package_name');
-					$package_release = db_result($res_files,$f,'release_name');
-					echo '
-						<tr class="align-center">
-						<td class="align-left">
-							<strong>' . $package_name . '</strong>
-						</td>';
-					// Releases to display
-//print '<div about="" xmlns:sioc="http://rdfs.org/sioc/ns#" rel="container_of" resource="'.util_make_link('/frs/?group_id='.$group_id.'&release_id='.db_result($res_files,$f,'release_id').'">';
-					echo '
-						<td>'
-						.$package_release.'
-						</td>
-						<td>'
-						. $rel_date["month"] . ' ' . $rel_date["mday"] . ', ' . $rel_date["year"] .
-						'</td>
-						<td class="align-center">';
-//echo '</div>';
-
-					// -> notes
-					// accessibility: image is a link, so alt must be unique in page => construct a unique alt
-					$tmp_alt = $package_name . " - " . _('Release Notes');
-					$link = '/frs/shownotes.php?group_id=' . $group_id . '&amp;release_id=' . db_result($res_files, $f, 'release_id');
-					$link_content = $HTML->getReleaseNotesPic($tmp_alt, $tmp_alt);
-					echo util_make_link ($link, $link_content);
-					echo '</td>
-						<td class="align-center">';
-
-					// -> monitor
-					$tmp_alt = $package_name . " - " . _('Monitor this package');
-					$link = '/frs/monitor.php?filemodule_id=' .  db_result($res_files,$f,'package_id') . '&amp;group_id='.$group_id.'&amp;start=1';
-					$link_content = $HTML->getMonitorPic($tmp_alt, $tmp_alt);
-					echo util_make_link ($link, $link_content);
-					echo '</td>
-						<td class="align-center">';
-
-					// -> download
-					$tmp_alt = $package_name." ".$package_release." - ". _('Download');
-					$link_content = $HTML->getDownloadPic($tmp_alt, $tmp_alt);
-					$t_link_anchor = $HTML->toSlug($package_name)."-".$HTML->toSlug($package_release)."-title-content";
-					$link = '/frs/?group_id=' . $group_id . '&amp;release_id=' . db_result($res_files, $f, 'release_id')."#".$t_link_anchor;
-					echo util_make_link ($link, $link_content);
-					echo '</td>
-					</tr>';
-				}
+			use_javascript('/frs/scripts/FRSController.js');
+			echo $HTML->getJavascripts();
+			echo html_ao('script', array('type' => 'text/javascript'));
+			?>
+			//<![CDATA[
+			var controllerFRS;
+			jQuery(document).ready(function() {
+				controllerFRS = new FRSController();
+			});
+			//]]>
+			<?php
+			echo html_ac(html_ap() - 1);
+			$titleArr = array(_('Package'), _('Version'), _('Date'), _('Notes'));
+			if (session_loggedin()) {
+				$titleArr[] = _('Monitor');
 			}
-			echo '</table>';
+			$titleArr[] = _('Download');
+			use_javascript('/js/sortable.js');
+			echo $HTML->getJavascripts();
+			echo $HTML->listTableTop($titleArr, false, 'sortable_widget_frs_listpackage full', 'sortable');
+			foreach ($frsps as $key => $frsp) {
+				$frsr = $frsp->getNewestRelease();
+				$rel_date = $frsr->getReleaseDate();
+				$package_name = $frsp->getName();
+				$package_release = $frsr->getName();
+				$cells = array();
+				$cells[] = array(html_e('strong', array(), $package_name), 'class' => 'align-left');
+				$cells[][] = $package_release;
+				$cells[][] = date(_('Y-m-d'), $rel_date);
+
+				// -> notes
+				// accessibility: image is a link, so alt must be unique in page => construct a unique alt
+				$tmp_alt = $package_name . " - " . _('Release Notes');
+				$link = '/frs/?group_id=' . $group_id . '&view=shownotes&release_id='.$frsr->getID();
+				$link_content = $HTML->getReleaseNotesPic($tmp_alt, $tmp_alt);
+				$cells[] = array(util_make_link($link, $link_content), 'class' => 'align-center');
+				// -> monitor
+				if (session_loggedin()) {
+					$url = '/frs/?group_id='.$group_id.'&package_id='.$frsp->getID().'&action=monitor';
+					if($frsp->isMonitoring()) {
+						$title = $package_name . " - " . _('Stop monitoring this package');
+						$url .= '&status=0';
+						$image = $HTML->getStopMonitoringPic($title);
+					} else {
+						$title = $package_name . " - " . _('Start monitoring this package');
+						$url .= '&status=1';
+						$image = $HTML->getStartMonitoringPic($title);
+					}
+					$cells[] = array(util_make_link('#', $image, array('id' => 'pkgid'.$frsp->getID(), 'onclick' => 'javascript:controllerFRS.doAction({action:\''.$url.'\', id:\'pkgid'.$frsp->getID().'\'})'), true), 'class' => 'align-center');
+				}
+				// -> download
+				$tmp_alt = $package_name." ".$package_release." - ". _('Download');
+				$link_content = $HTML->getDownloadPic($tmp_alt, $tmp_alt);
+				$t_link_anchor = $HTML->toSlug($package_name)."-".$HTML->toSlug($package_release)."-title-content";
+				$link = '/frs/?group_id=' . $group_id . '&amp;release_id='.$frsr->getID()."#".$t_link_anchor;
+				$cells[] = array(util_make_link ($link, $link_content), 'class' => 'align-center');
+				echo $HTML->multiTableRow(array(), $cells);
+			}
+			echo $HTML->listTableBottom();
 		}
-		echo '<div class="underline-link">'.util_make_link('/frs/?group_id='.$group_id, _('View All Project Files')).'</div>';
+		echo html_e('div', array('class' => 'underline-link'), util_make_link('/frs/?group_id='.$group_id, _('View All Project Files')));
 	}
 
 	function isAvailable() {

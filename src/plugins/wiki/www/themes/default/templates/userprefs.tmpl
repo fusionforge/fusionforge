@@ -62,45 +62,49 @@ if (!function_exists('selectedOption')) {
 
 $SelectThemes = ''; $SelectLanguages = '';
 $SelectThemesDesc = ''; $SelectLanguagesDesc = '';
-if ( $isForm ) {
+if ($isForm) {
     $SelectOptions = HTML();
     if (!empty($available_themes) and is_array($available_themes)) {
-    if (!$pref->get('theme') or $pref->get('theme') == THEME)
-        $SelectOptions->pushContent(selectedOption("",_("<system theme>")));
-    else
-        $SelectOptions->pushContent(unselectedOption("",_("<system theme>")));
-    foreach ($available_themes as $theme) {
-        if ($theme == $pref->get('theme') and $theme != THEME)
-        $SelectOptions->pushContent(selectedOption($theme));
-        else
-        $SelectOptions->pushContent(unselectedOption($theme));
-    }
-    $SelectThemes = HTML::select(array('name' => "pref[theme]",'id' => 'theme'),
-                     $SelectOptions);
-    $SelectThemesDesc = _("Personal theme:");
+        if (!$pref->get('theme') or $pref->get('theme') == THEME) {
+            $SelectOptions->pushContent(selectedOption("",_("<system theme>")));
+        } else {
+            $SelectOptions->pushContent(unselectedOption("",_("<system theme>")));
+        }
+        foreach ($available_themes as $theme) {
+            if ($theme == $pref->get('theme') and $theme != THEME) {
+                $SelectOptions->pushContent(selectedOption($theme));
+            } else {
+                $SelectOptions->pushContent(unselectedOption($theme));
+            }
+        }
+        $SelectThemes = HTML::select(array('name' => "pref[theme]",'id' => 'theme'),
+                         $SelectOptions);
+        $SelectThemesDesc = _("Personal theme:");
     }
 
     $SelectOptions = HTML();
     if (!empty($available_languages) and is_array($available_languages)) {
-    if (!$pref->get('lang') or $pref->get('lang') == DEFAULT_LANGUAGE)
-        $SelectOptions->pushContent(selectedOption("",_("<system language>")));
-    else
-        $SelectOptions->pushContent(unselectedOption("",_("<system language>")));
-    foreach ($available_languages as $lang) {
-        if ($lang == $pref->get('lang') and $lang != DEFAULT_LANGUAGE)
-        $SelectOptions->pushContent(selectedOption($lang));
-        else
-        $SelectOptions->pushContent(unselectedOption($lang));
-    }
-    $SelectLanguages = HTML::select(array('name' => "pref[lang]",'id' => 'lang'),
-                    $SelectOptions);
-    $SelectLanguagesDesc = _("Personal language:");
+        if (!$pref->get('lang') or $pref->get('lang') == DEFAULT_LANGUAGE) {
+            $SelectOptions->pushContent(selectedOption("",_("<system language>")));
+        } else {
+            $SelectOptions->pushContent(unselectedOption("",_("<system language>")));
+        }
+        foreach ($available_languages as $lang) {
+            if ($lang == $pref->get('lang') and $lang != DEFAULT_LANGUAGE) {
+                $SelectOptions->pushContent(selectedOption($lang));
+            } else {
+                $SelectOptions->pushContent(unselectedOption($lang));
+            }
+        }
+        $SelectLanguages = HTML::select(array('name' => "pref[lang]",'id' => 'lang'),
+                        $SelectOptions);
+        $SelectLanguagesDesc = _("Personal language:");
     } else {
-    if ($SelectThemes == '') {
-        $appearance = false;
-        $SelectThemesDesc = '';
-        $SelectLanguagesDesc = '';
-    }
+        if ($SelectThemes == '') {
+            $appearance = false;
+            $SelectThemesDesc = '';
+            $SelectLanguagesDesc = '';
+        }
     }
 } else {
     $SelectThemesDesc = _("Personal theme:");

@@ -145,7 +145,7 @@ class WikiPlugin_WikiAdminDeleteAcl
             if ($checked) $pages[] = $name;
         }
 
-        $header->pushContent(HTML::strong(_("Selected Pages: ")), HTML::tt(join(', ', $pages)), HTML::br());
+        $header->pushContent(HTML::strong(_("Selected Pages: ")), HTML::samp(join(', ', $pages)), HTML::br());
         return $header;
     }
 }

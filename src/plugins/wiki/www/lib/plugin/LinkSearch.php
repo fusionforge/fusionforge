@@ -116,7 +116,7 @@ function dirsign_switch() {
             $hiddenfield,
             $instructions, HTML::br(),
             $pagefilter,
-            HTML::strong(HTML::tt(array('id' => 'dirsign'), $dirsign)),
+            HTML::strong(HTML::samp(array('id' => 'dirsign'), $dirsign)),
             $query,
             HTML::raw('&nbsp;'), $direction,
             HTML::raw('&nbsp;'), $submit);

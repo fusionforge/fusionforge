@@ -35,7 +35,8 @@
 class Request_AccessLog
 {
     /**
-     * @param $logfile string  Log file name.
+     * @param string $logfile Log file name.
+     * @param bool $do_sql
      */
     function Request_AccessLog($logfile, $do_sql = false)
     {
@@ -297,7 +298,7 @@ class Request_AccessLogEntry
      *
      * This is a static member function.
      *
-     * @param $time integer Unix timestamp (defaults to current time).
+     * @param int|bool $time Unix timestamp (defaults to current time).
      * @return string Zone offset, e.g. "-0800" for PST.
      */
     function _zone_offset($time = false)
@@ -320,7 +321,7 @@ class Request_AccessLogEntry
      *
      * This is a static member function.
      *
-     * @param $time integer Unix timestamp (defaults to current time).
+     * @param int|bool $time Unix timestamp (defaults to current time).
      * @return string Formatted date & time.
      */
     function _ncsa_time($time = false)

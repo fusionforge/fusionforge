@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PhpWiki 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-11 16:07+0100\n"
+"POT-Creation-Date: 2014-06-25 18:08+0200\n"
 "PO-Revision-Date: 2000-10-31 02:23+0200\n"
 "Last-Translator: Reini Urban <rurban@x-ray.at>, Carsten Klapp "
 "<carstenklapp@users.sourceforge.net>, Helmer Pardun <pardunpress@t-online."
@@ -1802,6 +1802,10 @@ msgstr ""
 msgid "Simple Sample Plugin."
 msgstr "Zusatzprogramm Minimalbeispiel."
 
+#, php-format
+msgid "%s, %s"
+msgstr ""
+
 msgid "Convert HTML markup into wiki markup."
 msgstr ""
 
@@ -2846,10 +2850,6 @@ msgstr ""
 msgid "Retrieving from external url %s wiki.getRecentChanges(%s)..."
 msgstr ""
 
-# ie. no pages found
-msgid "<unknown>"
-msgstr "<unbekannt>"
-
 msgid " skipped"
 msgstr " ausgelassen"
 
@@ -2887,12 +2887,8 @@ msgstr "gleiche Seiteninalt"
 msgid "FAILED"
 msgstr "FEHLER"
 
-msgid "Source code syntax highlighter (via http://www.andre-simon.de)."
+msgid "Source code syntax highlighter (via http://highlightjs.org/)."
 msgstr ""
-
-#, php-format
-msgid "invalid %s ignored"
-msgstr "ungültiges %s ignoriert"
 
 msgid "Provide access to PhpWiki's lower level system information."
 msgstr ""
@@ -2993,9 +2989,8 @@ msgstr "%d Sprache gesamt: "
 msgid "Current language"
 msgstr "Ausgewählte Sprache"
 
-#, php-format
-msgid "Default language: “%s”"
-msgstr "Standardsprache für dieses Wiki: »%s«"
+msgid "Default language"
+msgstr "Standardsprache für dieses Wiki"
 
 #, php-format
 msgid "Total of %d themes: "
@@ -3004,9 +2999,8 @@ msgstr "%d Benutzeroberfläche gesamt: "
 msgid "Current theme"
 msgstr "Ausgewählte Darstellung"
 
-#, php-format
-msgid "Default theme: “%s”"
-msgstr "Darstellung des Systems: »%s«"
+msgid "Default theme"
+msgstr "Darstellung des Systems"
 
 #, php-format
 msgid "unknown argument “%s” to SystemInfo"
@@ -3431,6 +3425,10 @@ msgstr "%d Benutzer Online"
 
 msgid "Guest"
 msgstr "Gast"
+
+# ie. no pages found
+msgid "<unknown>"
+msgstr "<unbekannt>"
 
 #, php-format
 msgid "%d minutes"
@@ -5277,6 +5275,9 @@ msgstr "GuterStil"
 msgid "See %s tips for editing."
 msgstr "Siehe %s Tips fürs Edieren."
 
+msgid "Help/TextFormattingRules"
+msgstr "Hilfe/TextFormatierungsRegeln"
+
 msgid "Synopsis"
 msgstr "Übersicht"
 
@@ -6096,17 +6097,26 @@ msgstr "Sidebar"
 msgid "Edit this page"
 msgstr "Diese Seite bearbeiten"
 
-#~ msgid "Version %s"
-#~ msgstr "Version %s."
-
-#~ msgid "Original (1.2 or 1.0)"
-#~ msgstr "Original (1,2 oder 1,0)"
-
 # (Wrong Translation; sorry, but the German term for edit is NOT
 # editieren, but  e d i e r e n).
 #, fuzzy
 #~ msgid "Prediction: %s"
 #~ msgstr "Bearbeite: %s"
+
+# (Wrong Translation; sorry, but the German term for edit is NOT
+# editieren, but  e d i e r e n).
+#, fuzzy
+#~ msgid "Prediction: %.1f"
+#~ msgstr "Bearbeite: %s"
+
+#~ msgid "invalid %s ignored"
+#~ msgstr "ungültiges %s ignoriert"
+
+#~ msgid "Version %s"
+#~ msgstr "Version %s."
+
+#~ msgid "Original (1.2 or 1.0)"
+#~ msgstr "Original (1,2 oder 1,0)"
 
 #, fuzzy
 #~ msgid "%s not found"
@@ -6121,9 +6131,6 @@ msgstr "Diese Seite bearbeiten"
 
 #~ msgid "Select the pages to change:"
 #~ msgstr "Wählen Sie die Seiten zum Ändern:"
-
-#~ msgid "Chmod to permission:"
-#~ msgstr "Ändere auf Berechtigung:"
 
 #, fuzzy
 #~ msgid "History of all major edits by %s to page %s."

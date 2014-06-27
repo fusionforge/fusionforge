@@ -41,13 +41,13 @@ class Widget_MyMonitoredForums extends Widget {
 	function getContent() {
 		global $HTML;
 		$html_my_monitored_forums = '';
-		$sql="SELECT DISTINCT groups.group_id, groups.group_name,
+		$sql = "SELECT DISTINCT groups.group_id, groups.group_name,
 			forum_group_list.group_forum_id, forum_group_list.forum_name ".
-		"FROM groups,forum_group_list,forum_monitored_forums ".
-		"WHERE groups.group_id=forum_group_list.group_id ".
-		"AND groups.status = 'A' ".
-		"AND forum_group_list.group_forum_id=forum_monitored_forums.forum_id ".
-		"AND forum_monitored_forums.user_id=$1 ";
+			"FROM groups,forum_group_list,forum_monitored_forums ".
+			"WHERE groups.group_id=forum_group_list.group_id ".
+			"AND groups.status = 'A' ".
+			"AND forum_group_list.group_forum_id=forum_monitored_forums.forum_id ".
+			"AND forum_monitored_forums.user_id=$1 ";
 		$um = UserManager::instance();
 		$current_user = $um->getCurrentUser();
 		if ($current_user->getStatus()=='S') {
@@ -57,7 +57,7 @@ class Widget_MyMonitoredForums extends Widget {
 		//$sql .= "GROUP BY groups.group_id ORDER BY groups.group_id ASC LIMIT 100";
 		$sql .= "ORDER BY groups.group_id ASC LIMIT 100";
 
-		$result=db_query_params($sql,array(user_getid()));
+		$result = db_query_params($sql, array(user_getid()));
 		$glist = array();
 		while ($r = db_fetch_array($result)) {
 			if (forge_check_perm('project', $r['group_id'], 'read')
@@ -66,12 +66,12 @@ class Widget_MyMonitoredForums extends Widget {
 			}
 		}
 		$glist = array_unique($glist);
-		$rows=count($glist);
+		$rows = count($glist);
 		if (!$result || $rows < 1) {
-			$html_my_monitored_forums .= $HTML->warning_msg(_('You are not monitoring any forums.')).'<p>' . _("If you monitor forums, you will be sent new posts in the form of an email, with a link to the new message.") . '</p><p>' . _("You can monitor forums by clicking on the appropriate menu item in the discussion forum itself.") . '</p>';
+			$html_my_monitored_forums .= $HTML->warning_msg(_('You are not monitoring any forums.')).html_e('p', array(), _("If you monitor forums, you will be sent new posts in the form of an email, with a link to the new message.")).html_e('p', array(), _("You can monitor forums by clicking on the appropriate menu item in the discussion forum itself."));
 		} else {
 			$request =& HTTPRequest::instance();
-			$html_my_monitored_forums .= '<table style="width:100%">';
+			$html_my_monitored_forums .= $HTML->listTableTop();
 			foreach ($glist as $group) {
 				list($group_id, $group_name) = unserialize($group);
 
@@ -109,31 +109,26 @@ class Widget_MyMonitoredForums extends Widget {
 				}
 
 				list($hide_now,$count_diff,$hide_url) = my_hide_url('forum',$group_id,$hide_item_id,$rows2,$hide_forum);
-
-				$html_hdr = '<tr class="boxitem"><td colspan="2">'.
-				$hide_url.util_make_link('/forum/?group_id='.$group_id, $group_name).'    ';
-
-				$html = '';
 				$count_new = max(0, $count_diff);
+				$cells = array();
+				$cells[] = array($hide_url.util_make_link('/forum/?group_id='.$group_id, $group_name).'    ['.$rows2.($count_new ? ', '.html_e('b', array(), sprintf(_('%s new'), $count_new)).']' : ']'),
+						'colspan' => 2);
+				$html_hdr = $HTML->multiTableRow(array('class' => 'boxitem'), $cells);
+				$html = '';
 				for ($i=0; $i<$rows2; $i++) {
 					if (!$hide_now) {
 						$group_forum_id = $flist[$i]['group_forum_id'];
-						$html .= '
-					<tr '.$HTML->boxGetAltRowStyle($i) .'"><td style="width:99%">'.
-					'&nbsp;&nbsp;&nbsp;-&nbsp;'.
-					util_make_link('/forum/forum.php?forum_id='.$group_forum_id, $flist[$i]['forum_name']).'</td>'.
-					'<td class="align-center">'.
-					util_make_link('/forum/monitor.php?forum_id='.$group_forum_id.'&group_id='.$group_id.'&stop=1',
-							'<img src="'.$HTML->imgroot.'ic/trash.png" height="16" width="16" alt="'._("Stop Monitoring").'" />',
-							array('onClick' => 'return confirm("'._('Stop monitoring this Forum?').'")')).
-					'</td></tr>';
+						$cells = array();
+						$cells[] = array('&nbsp;&nbsp;&nbsp;-&nbsp;'.util_make_link('/forum/forum.php?forum_id='.$group_forum_id, $flist[$i]['forum_name']), 'style' => 'width:99%');
+						$cells[] = array(util_make_link('/forum/monitor.php?forum_id='.$group_forum_id.'&group_id='.$group_id.'&stop=1',
+										$HTML->getDeletePic(_('Stop Monitoring'), _('Stop Monitoring'), array('onClick' => 'return confirm("'._('Stop monitoring this forum?').'")'))),
+								'class' => 'align-center');
+						$html .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
 					}
 				}
-
-				$html_hdr .= '['.$rows2.($count_new ? ", <b>".sprintf(_('%s new'), $count_new)."</b>]" : ']').'</td></tr>';
 				$html_my_monitored_forums .= $html_hdr.$html;
 			}
-			$html_my_monitored_forums .= '</table>';
+			$html_my_monitored_forums .= $HTML->listTableBottom();
 		}
 		return $html_my_monitored_forums;
 	}

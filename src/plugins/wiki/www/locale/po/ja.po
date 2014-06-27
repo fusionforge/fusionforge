@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PhpWiki 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-11 16:07+0100\n"
+"POT-Creation-Date: 2014-06-25 18:08+0200\n"
 "PO-Revision-Date: 2003-06-07 09:01+0900\n"
 "Last-Translator: Tadashi Jokagi <webmaster@elf.no-ip.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1772,6 +1772,10 @@ msgstr ""
 msgid "Simple Sample Plugin."
 msgstr ""
 
+#, php-format
+msgid "%s, %s"
+msgstr ""
+
 msgid "Convert HTML markup into wiki markup."
 msgstr ""
 
@@ -2790,10 +2794,6 @@ msgstr ""
 msgid "Retrieving from external url %s wiki.getRecentChanges(%s)..."
 msgstr ""
 
-#, fuzzy
-msgid "<unknown>"
-msgstr "<なし>"
-
 msgid " skipped"
 msgstr ""
 
@@ -2831,11 +2831,7 @@ msgstr ""
 msgid "FAILED"
 msgstr ""
 
-msgid "Source code syntax highlighter (via http://www.andre-simon.de)."
-msgstr ""
-
-#, php-format
-msgid "invalid %s ignored"
+msgid "Source code syntax highlighter (via http://highlightjs.org/)."
 msgstr ""
 
 msgid "Provide access to PhpWiki's lower level system information."
@@ -2931,8 +2927,7 @@ msgstr ""
 msgid "Current language"
 msgstr "現在の言語"
 
-#, php-format
-msgid "Default language: “%s”"
+msgid "Default language"
 msgstr ""
 
 #, php-format
@@ -2942,9 +2937,8 @@ msgstr "総テーマ数: %d"
 msgid "Current theme"
 msgstr "現在のテーマ"
 
-#, php-format
-msgid "Default theme: “%s”"
-msgstr "デフォルトテーマ: %s"
+msgid "Default theme"
+msgstr "デフォルトテーマ"
 
 #, php-format
 msgid "unknown argument “%s” to SystemInfo"
@@ -3364,6 +3358,10 @@ msgstr ""
 
 msgid "Guest"
 msgstr ""
+
+#, fuzzy
+msgid "<unknown>"
+msgstr "<なし>"
 
 #, php-format
 msgid "%d minutes"
@@ -5273,6 +5271,9 @@ msgstr ""
 msgid "See %s tips for editing."
 msgstr ""
 
+msgid "Help/TextFormattingRules"
+msgstr ""
+
 msgid "Synopsis"
 msgstr "要約"
 
@@ -6090,6 +6091,14 @@ msgstr "スライドバー"
 msgid "Edit this page"
 msgstr "ページを編集しています。"
 
+#, fuzzy
+#~ msgid "Prediction: %s"
+#~ msgstr "編集: %s"
+
+#, fuzzy
+#~ msgid "Prediction: %.1f"
+#~ msgstr "編集: %s"
+
 #~ msgid "Use old markup"
 #~ msgstr "古いマークアップを使用"
 
@@ -6141,24 +6150,12 @@ msgstr "ページを編集しています。"
 #~ msgstr "バージョン %s"
 
 #, fuzzy
-#~ msgid "Prediction: %s"
-#~ msgstr "編集: %s"
-
-#, fuzzy
-#~ msgid "Prediction: %.1f"
-#~ msgstr "編集: %s"
-
-#, fuzzy
 #~ msgid "%s not found"
 #~ msgstr "%s: ファイルが見つかりません。"
 
 #, fuzzy
 #~ msgid "Select the pages to change:"
 #~ msgstr "貴方個人の言語を選択"
-
-#, fuzzy
-#~ msgid "WikiAdminChmod"
-#~ msgstr "管理"
 
 #, fuzzy
 #~ msgid "period"

@@ -25,7 +25,7 @@ global $HTML;
 global $headermenu;
 global $type;
 
-$actionurl = '/plugins/'.$headermenu->name.'?type='.$type;
+$actionurl = '/plugins/'.$headermenu->name.'/?type='.$type;
 echo html_ao('script', array('type' => 'text/javascript'));
 ?>
 //<![CDATA[
@@ -43,10 +43,6 @@ jQuery(document).ready(function() {
 		tableHeaTbLink: jQuery('.sortable_headermenu_listlinks tbody'),
 		validOutButton:	jQuery('#linkorderoutervalidatebutton'),
 		validHeaButton:	jQuery('#linkorderheadervalidatebutton'),
-		validMessOut:	'<?php echo _('Outermenu Link Order successfully validated') ?>',
-		validMessHea:	'<?php echo _('Headermenu Link Order successfully validated') ?>',
-		errMessOut:	'<?php echo _('Error in Outermenu Link Order validation') ?>',
-		errMessHea:	'<?php echo _('Error in Headermenu Link Order validation') ?>'
 	});
 });
 
@@ -132,22 +128,22 @@ echo $HTML->information(_('You can add specific tabs in outermenu (main tab) or 
 echo $HTML->openForm(array('method' => 'POST', 'name' => 'addLink', 'action' => util_make_uri($actionurl.'&action=addLink')));
 echo $HTML->listTableTop();
 $cells = array();
-$cells[] = array(_('Displayed Name')._(':'), 'style' => 'text-align:right');
-$cells[][] = '<input required="required" name="name" type="text" maxlength="255" />';
+$cells[] = array(_('Displayed Name').utils_requiredField()._(':'), 'style' => 'text-align:right');
+$cells[][] = '<input required="required" name="name" type="text" maxlength="255" value="" size="40" placeholder="'._('the displayed name in menu').'" />';
 echo $HTML->multiTableRow(array(), $cells);
 $cells = array();
-$cells[] = array(_('Description')._(':'), 'style' => 'text-align:right');
-$cells[][] = '<input name="description" type="text" maxlength="255" />';
+$cells[] = array(_('Description').utils_requiredField()._(':'), 'style' => 'text-align:right');
+$cells[][] = '<input name="description" type="text" maxlength="255" value="" size="40" placeholder="'._('the description, used by the tooltip system').'" />';
 echo $HTML->multiTableRow(array(), $cells);
 $cells = array();
-$cells[] = array(_('Menu Location')._(':'), 'style' => 'text-align:right');
+$cells[] = array(_('Menu Location').utils_requiredField()._(':'), 'style' => 'text-align:right');
 $vals = array('headermenu', 'outermenu');
 $texts = array('headermenu', 'outermenu');
 $select_name = 'linkmenu';
 $cells[][] = html_build_radio_buttons_from_arrays($vals, $texts, $select_name, 'headermenu', false);
 echo $HTML->multiTableRow(array(), $cells);
 $cells = array();
-$cells[] = array(_('Tab Type')._(':'), 'style' => 'text-align:right');
+$cells[] = array(_('Tab Type').utils_requiredField()._(':'), 'style' => 'text-align:right');
 $texts = array('URL', 'HTML Page');
 $vals = array('url', 'htmlcode');
 $select_name = 'typemenu';
@@ -165,10 +161,11 @@ $cells[][] = $params['content'];
 echo $HTML->multiTableRow(array('id' => 'trhtmlcode', 'class' => 'hide'), $cells);
 $cells = array();
 $cells[] = array(_('URL')._(':'), 'style' => 'text-align:right');
-$cells[][] = '<input name="link" type="text" maxlength="255" />';
+$cells[][] = '<input name="link" type="url" maxlength="255" size="40" />';
 echo $HTML->multiTableRow(array('id' => 'urlcode', 'class' => 'hide'), $cells);
 $cells = array();
 $cells[] = array('<input type="submit" value="'. _('Add') .'" />', 'colspan' => 2);
 echo $HTML->multiTableRow(array(), $cells);
 echo $HTML->listTableBottom();
 echo $HTML->closeForm();
+echo $HTML->addRequiredFieldsInfoBox();

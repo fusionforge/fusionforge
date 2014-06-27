@@ -22,6 +22,7 @@ class DbSession
      * be extracted.
      *
      * @param string $table
+     * @return bool|DbSession
      * Name of SQL table containing session data.
      */
     function DbSession(&$dbh, $table = 'session')

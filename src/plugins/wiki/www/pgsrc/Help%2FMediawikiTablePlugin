@@ -1,4 +1,4 @@
-Date: Tue,  9 Nov 2010 14:24:02 +0000
+Date: Fri, 13 Jun 2014 16:12:42 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FMediawikiTablePlugin;
@@ -13,15 +13,10 @@ The plugin is not meant to be called directly, just use the syntax below to inse
 
 * The table starts with a line ##{|##.
 * An optional table caption is made with a line starting with a pipe and a plus sign ##|+## followed by the caption.
-* An optional table summary is made with a line starting with a pipe and an equal sign ##|=## followed by the summary.
 * A table row starts with a pipe and a hyphen: ##|-##.
 * A table cell starts with a pipe on a new line, or a double bar ##||## on the same line.
 * A header table cell starts with an exclamation mark, or a double exclamation mark ##!!## on the same line.
 * The table ends with a line ##|}##.
-
-The summary syntax is an extension to the Mediawiki syntax.
-You can also simply put the summary as an attribute to the table.
-The summary is necessary to be able to create accessible tables.
 
 If the first row of the table as made with header cells only, this row will be put in a //thead//.
 In that case, this row will be repeated on every page when printing the table.
@@ -76,7 +71,6 @@ If you specify ##class="nobreak"##, the table will not be cut when printed (if y
 
 {| border="1" style="width: 100%"
 |+ style="font-weight: bold; font-size: 150%;" | This is the table caption
-|= This is the table summary
 |- style="white-space: nowrap"
 ! Header 1
 ! Header 2
@@ -94,7 +88,6 @@ The above table is rendered from:
 {{{
 {| border="1" style="width: 100%"
 |+ style="font-weight: bold; font-size: 150%;" | This is the table caption
-|= This is the table summary
 |- style="white-space: nowrap"
 ! Header 1
 ! Header 2

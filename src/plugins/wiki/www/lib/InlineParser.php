@@ -464,8 +464,7 @@ function LinkBracketLink($bracketlink)
     if ($hash) {
         // It's an anchor, not a link...
         $id = MangleXmlIdentifier($link);
-        return HTML::a(array('name' => $id, 'id' => $id),
-            $bar ? $label : $link);
+        return HTML::a(array('id' => $id), $bar ? $label : $link);
     }
 
     if (preg_match("#^(" . ALLOWED_PROTOCOLS . "):#", $link)) {
@@ -861,6 +860,9 @@ class Markup_html_emphasis extends BalancedMarkup
     function markup($match, $body)
     {
         $tag = substr($match, 1, -1);
+        if (($tag == 'big') || ($tag == 'strike') || ($tag == 'tt')) {
+            return new HtmlElement('span', array('class' => $tag), $body);
+        }
         return new HtmlElement($tag, $body);
     }
 }
@@ -912,10 +914,8 @@ class Markup_html_abbr extends BalancedMarkup
 
     function markup($match, $body)
     {
-        if (substr($match, 1, 4) == 'abbr')
-            $tag = 'abbr';
-        else
-            $tag = 'acronym';
+        // 'acronym' is deprecated in HTML 5, replace by 'abbr'
+        $tag = 'abbr';
         $rest = substr($match, 1 + strlen($tag), -1);
         $attrs = parse_attributes($rest);
         // Remove attributes other than title and lang

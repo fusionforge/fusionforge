@@ -30,11 +30,11 @@ class TransformedText extends CacheableMarkup
      *
      * @param WikiDB_Page $page
      * @param string      $text          The packed page revision content.
-     * @param hash        $meta          The version meta-data.
+     * @param array       $meta          The version meta-data.
      * @param string      $type_override For markup of page using a different
      *        pagetype than that specified in its version meta-data.
      */
-    function TransformedText($page, $text, $meta, $type_override = false)
+    function TransformedText($page, $text, $meta, $type_override = '')
     {
         $pagetype = false;
         if ($type_override)
@@ -74,10 +74,10 @@ class PageType
      *
      * This is a static member function.
      *
-     * @param  string   $pagetype Name of the page type.
+     * @param  string   $name Name of the page type.
      * @return PageType An object which is a subclass of PageType.
      */
-    function GetPageType($name = false)
+    function GetPageType($name = '')
     {
         if (!$name)
             $name = 'wikitext';
@@ -106,7 +106,7 @@ class PageType
      *
      * @param  WikiDB_Page $page
      * @param  string      $text
-     * @param  hash        $meta Version meta-data
+     * @param  array       $meta Version meta-data
      * @return XmlContent  The transformed page text.
      */
     function transform(&$page, &$text, $meta)
@@ -240,6 +240,12 @@ class PageType_interwikimap extends PageType
             $url = sprintf($url, $page_enc);
         else
             $url .= $page_enc;
+
+        // Encode spaces in '[[Help:Reini Urban]]'
+        // but not in '[[Upload:logo.jpg size=40x25 align=center]]'
+        if ($moniker != 'Upload') {
+            $url = str_replace(' ', '%20', $url);
+        }
 
         $link = HTML::a(array('href' => $url));
 
@@ -432,7 +438,7 @@ class PageFormatter_interwikimap extends PageFormatter
             HTML::th($url_attr, _("InterWiki Address"))));
         foreach ($map as $moniker => $interurl) {
             $rows[] = HTML::tr(HTML::td($mon_attr, new Cached_WikiLinkIfKnown($moniker)),
-                HTML::td($url_attr, HTML::tt($interurl)));
+                HTML::td($url_attr, HTML::samp($interurl)));
         }
 
         return HTML::table(array('class' => 'interwiki-map'),

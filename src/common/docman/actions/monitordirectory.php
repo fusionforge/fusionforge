@@ -37,7 +37,7 @@ $directoryid = getStringFromRequest('directoryid');
 $option = getStringFromRequest('option');
 $feedback = _('Folder').' ';
 switch ($option) {
-	case 'add': {
+	case 'start': {
 		if (!empty($directoryid)) {
 			$dg = new DocumentGroup($g, $directoryid);
 			$feedback .= $dg->getName()._(': ');
@@ -52,7 +52,7 @@ switch ($option) {
 		$feedback .= _('Monitoring Started');
 		break;
 	}
-	case 'remove': {
+	case 'stop': {
 		if (!empty($directoryid)) {
 			$dg = new DocumentGroup($g, $directoryid);
 			$feedback .= $dg->getName().' ';

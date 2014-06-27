@@ -203,7 +203,7 @@ class WikiPlugin_PreferenceApp
         for ($i = 0; $i < count($pageids); $i++) {
             $total_cans = 0;
             for ($j = 0; $j < count($people); $j++) {
-                $td = HTML::td(array('align' => 'right'));
+                $td = HTML::td(array('class' => 'align-right'));
                 $cans_per_soda = $peopleTotals[$people[$j]][$pageids[$i]];
                 $total_cans = $total_cans + $cans_per_soda;
                 $outputArray[$people[$j]][$pageids[$i]] = $cans_per_soda;
@@ -255,23 +255,23 @@ class WikiPlugin_PreferenceApp
             if ($total_voters == "") {
                 $total_voters = "-";
             }
-            $td = HTML::td(array('align' => 'right'));
+            $td = HTML::td(array('class' => 'align-right'));
             $td->pushContent($total_cans);
             $tr->pushContent($td);
-            $td = HTML::td(array('align' => 'right'));
+            $td = HTML::td(array('class' => 'align-right'));
             $td->pushContent($total_voters);
             $tr->pushContent($td);
             $table->pushContent($tr);
         }
 
         $tr = HTML::tr();
-        $td = HTML::td(array('align' => 'left'));
+        $td = HTML::td(array('class' => 'align-left'));
         $td->pushContent(HTML::strong(_("Total Budget")));
         $tr->pushContent($td);
         $cans_total = 0;
         $total_voters = 0;
         for ($i = 0; $i < count($people); $i++) {
-            $td = HTML::td(array('align' => 'right'));
+            $td = HTML::td(array('class' => 'align-right'));
             $cans_for_soda = 0;
             foreach ($pageids as $page) {
                 $cans_for_soda = $cans_for_soda + $outputArray[$people[$i]][$page];

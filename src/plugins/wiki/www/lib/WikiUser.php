@@ -76,8 +76,9 @@ class WikiUser
      *
      * Populates the instance variables and calls $this->_ok()
      * to ensure that the parameters are valid.
+     * @param Request $request
      * @param mixed   $userid    String of username or WikiUser object.
-     * @param integer $authlevel Authorization level.
+     * @param int|bool $authlevel Authorization level.
      */
     function WikiUser(&$request, $userid = false, $authlevel = false)
     {

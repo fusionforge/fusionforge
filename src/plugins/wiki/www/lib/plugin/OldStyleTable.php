@@ -58,7 +58,6 @@ class WikiPlugin_OldStyleTable
             'cellpadding' => '1',
             'cellspacing' => '1',
             'border' => '1',
-            'summary' => '',
         );
     }
 
@@ -92,7 +91,7 @@ class WikiPlugin_OldStyleTable
         $table = HTML::table($table_args);
         if (!empty($caption))
             $table->pushContent(HTML::caption($caption));
-        if (preg_match("/^\s*(cellpadding|cellspacing|border|caption|summary)/", $lines[0]))
+        if (preg_match("/^\s*(cellpadding|cellspacing|border|caption)/", $lines[0]))
             $lines[0] = '';
         foreach ($lines as $line) {
             if (!$line)
@@ -132,11 +131,11 @@ class WikiPlugin_OldStyleTable
                 $attr['rowspan'] = strlen($m[2]) + 1;
 
             if ($m[3] == '^')
-                $attr['align'] = 'center';
+                $attr['class'] = 'align-center';
             else if ($m[3] == '>')
-                $attr['align'] = 'right';
+                $attr['class'] = 'align-right';
             else
-                $attr['align'] = 'left';
+                $attr['class'] = 'align-left';
 
             $content = TransformInline($m[4], $basepage);
 

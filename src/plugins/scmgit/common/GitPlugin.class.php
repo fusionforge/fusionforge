@@ -400,7 +400,7 @@ class GitPlugin extends SCMPlugin {
 		}
 		if (!is_file("$repodir/HEAD") && !is_dir("$repodir/objects") && !is_dir("$repodir/refs")) {
 			// 'cd $root' because git will abort if e.g. we're in a 0700 /root after setuid
-			system("cd $root;git clone --bare --quiet --no-hardlinks $main_repo $repodir");
+			system("cd $root; LC_ALL=C git clone --bare --quiet --no-hardlinks $main_repo $repodir 2>&1 >/dev/null | grep -v 'warning: You appear to have cloned an empty repository.' >&2");
 			system("GIT_DIR=\"$repodir\" git update-server-info");
 			if (is_file("$repodir/hooks/post-update.sample")) {
 				rename("$repodir/hooks/post-update.sample",
@@ -527,7 +527,7 @@ class GitPlugin extends SCMPlugin {
 			$repodir = $root . '/' .  $repo_name . '.git';
 			if (!is_file("$repodir/HEAD") && !is_dir("$repodir/objects") && !is_dir("$repodir/refs")) {
 				if ($clone_url != '') {
-					system("cd $root;git clone --quiet --bare $clone_url $repodir");
+					system("cd $root; LC_ALL=C git clone --quiet --bare $clone_url $repodir 2>&1 >/dev/null | grep -v 'warning: You appear to have cloned an empty repository.' >&2");
 				} else {
 					system("GIT_DIR=\"$repodir\" git init --quiet --bare --shared=group");
 				}
@@ -746,6 +746,10 @@ class GitPlugin extends SCMPlugin {
 			$last_user    = "";
 			while (!feof($pipe) && $data = fgets($pipe)) {
 				$line = trim($data);
+				// Drop bad UTF-8 - it's quite hard to make git output non-UTF-8
+				// (e.g. by enforcing an unknown encoding) - but some users do!
+				// and this makes PostgreSQL choke
+				$line = preg_replace('/[^(\x20-\x7F)]/','', $line);
 				if (strlen($line) > 0) {
 					$result = preg_match("/^(?P<name>.+) <(?P<mail>.+)>/", $line, $matches);
 					if ($result) {

@@ -55,7 +55,7 @@ class Widget_MyProjectsLastDocuments extends Widget {
 			} else {
 				$hide_item_id = null;
 			}
-			$html_my_projects .= '<table style="width:100%">';
+			$html_my_projects .= $HTML->listTableTop();
 			$i = 0;
 			foreach ($groups as $g) {
 				if ($g->usesDocman()) {
@@ -123,7 +123,7 @@ class Widget_MyProjectsLastDocuments extends Widget {
 					$html_my_projects .= $html_hdr.$html;
 				}
 			}
-			$html_my_projects .= '</table>';
+			$html_my_projects .= $HTML->listTableBottom();
 		}
 		return $html_my_projects;
 	}

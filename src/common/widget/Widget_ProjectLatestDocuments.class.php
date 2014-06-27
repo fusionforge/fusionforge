@@ -71,13 +71,15 @@ class Widget_ProjectLatestDocuments extends Widget {
 			// No documents
 			echo $HTML->warning_msg(_('This project has not published any documents.'));
 		} else {
+			use_javascript('/js/sortable.js');
+			echo $HTML->getJavascripts();
 			$tabletop = array(_('Date'), _('File Name'), _('Title'), _('Author'), _('Path'));
 			if (session_loggedin() && (user_ismember($group_id) ||
 			    forge_check_global_perm('forge_admin'))) {
 				$tabletop[] = _('Status');
 			}
-			echo $HTML->listTableTop($tabletop, false, 'sortable_widget_docman_listfile', 'sortable');
-			for ($f=0; $f<$rows_files; $f++) {
+			echo $HTML->listTableTop($tabletop, false, 'sortable_widget_docman_listfile full', 'sortable');
+			for ($f=0; $f < $rows_files; $f++) {
 				$updatedate = db_result($res_files, $f, 'updatedate');
 				$createdate = db_result($res_files, $f, 'createdate');
 				$realdate = ($updatedate >= $createdate) ? $updatedate : $createdate;
@@ -100,34 +102,21 @@ class Widget_ProjectLatestDocuments extends Widget {
 						$docurl = util_make_link('/docman/view.php/'.$group_id.'/'.$docid.'/'.urlencode($filename), '<strong>'.$filename.'</strong>');
 					}
 				}
-				echo '
-					<tr '. $HTML->boxGetAltRowStyle($f+1) .'>
-						<td>'
-							. date(_('Y-m-d'),$realdate) .
-						'</td>
-						<td>'
-							.$docurl.'
-						</td>
-						<td>'
-							.$title.'
-						</td>
-						<td >'
-							. make_user_link($user_name, $realname) .
-						'</td>
-						<td>'
-							. $path .
-						'</td>';
+				$cells = array();
+				$cells[][] = date(_('Y-m-d'),$realdate);
+				$cells[][] = $docurl;
+				$cells[][] = $title;
+				$cells[][] = make_user_link($user_name, $realname);
+				$cells[][] = $path;
 				if (session_loggedin() && (user_ismember($group_id) ||
 				    forge_check_global_perm('forge_admin'))) {
-					echo	'<td>'
-							. $statename .
-						'</td>';
+					$cells[][] = $statename;
 				}
-				echo	'</tr>';
+				echo $HTML->multiTableRow(array(), $cells);
 			}
 			echo $HTML->listTableBottom();
 		}
-		echo '<div class="underline-link">'.util_make_link('/docman/?group_id='.$group_id, _('Browse Documents Manager')) . '</div>';
+		echo html_e('div', array('class' => 'underline-link'), util_make_link('/docman/?group_id='.$group_id, _('Browse Documents Manager')));
 	}
 
 	function isAvailable() {

@@ -2,7 +2,7 @@
 /**
  * headermenu plugin : validateOrder action
  *
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -22,16 +22,18 @@
  */
 
 global $headermenu;
+global $HTML;
 
 $sysdebug_enable = false;
 
 $linksOrder = getStringFromRequest('linkorder');
-$returnValue = 1;
+$returnValue = array();
+$returnValue['html'] = $HTML->error(_('Error in Link Order validation'));
 
 if ($linksOrder && strlen($linksOrder)) {
 	$linksOrderArr = explode(',', $linksOrder);
 	if ($headermenu->setLinksOrder($linksOrderArr))
-		$returnValue = 0;
+		$returnValue['html'] = $HTML->feedback(_('Link Order successfully validated'));
 }
-echo $returnValue;
+echo json_encode($returnValue);
 exit;

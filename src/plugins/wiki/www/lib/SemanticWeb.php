@@ -132,7 +132,7 @@ class RdfWriter extends RssWriter // in fact it should be rewritten to be other 
         $this->_uris_seen = array();
         $this->_items = array();
 
-        $this->wiki_xmlns_xml = WikiURL(_("UriResolver") . "?", false, true);
+        $this->wiki_xmlns_xml = WikiURL(_("UriResolver") . "?", array(), true);
         $this->wiki_xmlns_url = PHPWIKI_BASE_URL;
 
         $this->pre_ns_buffer =

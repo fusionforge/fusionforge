@@ -271,6 +271,10 @@ pre {
     text-decoration: line-through;
 }
 
+.big {
+    font-size: larger;
+}
+
 .align-left {
     text-align: left;
 }
@@ -993,10 +997,9 @@ special external link styling */
     white-space: nowrap;
 }
 
-.portlet h5 {
+.portlet h2 {
     background-color: transparent;
     padding: 0 1em 0 0.5em;
-    /*text-transform: lowercase;*/
     display: inline;
     font-size: 91%;
     height: 16px;
@@ -1005,7 +1008,7 @@ special external link styling */
     white-space: nowrap;
 }
 
-.portlet h5 img {
+.portlet h2 img {
     padding: 0;
     margin: 0;
     top: 0;

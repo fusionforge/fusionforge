@@ -65,7 +65,7 @@ class Widget_MySurveys extends Widget {
 		} else {
 			global $HTML;
 			$request =& HTTPRequest::instance();
-			$html_my_surveys .= '<table style="width:100%">';
+			$html_my_surveys .= $HTML->listTableTop();
 			foreach ($projects as $project) {
 				$group_id = $project->getID();
 				$surveyfacto = new SurveyFactory($project);
@@ -132,7 +132,7 @@ class Widget_MySurveys extends Widget {
 				$html_hdr .= '['.count($surveys).($count_new ? ", <b>".sprintf(_('%d new'), $count_new)."</b>]" : ']').'</td></tr>';
 				$html_my_surveys .= $html_hdr.$html;
 			}
-			$html_my_surveys .= '</table>';
+			$html_my_surveys .= $HTML->listTableBottom();
 		}
 		$this->content = $html_my_surveys;
 	}

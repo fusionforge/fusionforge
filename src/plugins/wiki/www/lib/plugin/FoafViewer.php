@@ -188,8 +188,8 @@ class WikiPlugin_FoafViewer
     /**
      * Renders array elements as HTML. May be used recursively.
      *
-     * @param $array Source array
-     * @param $index Element Index to use.
+     * @param array $array Source array
+     * @param int $index Element Index to use.
      * @param null $dc
      * @return \RawXml
      * @todo Make sure it can look more than 1 layer deep

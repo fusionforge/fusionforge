@@ -1,16 +1,9 @@
-<body<?php echo $WikiTheme->getMoreAttr('body') ?>>
+<body <?php echo $WikiTheme->getMoreAttr('body') ?> >
 
 <!-- Page title -->
 <h1 id="header"><?php echo $HEADER ?></h1>
 
 <!-- Page title and logo -->
-<!--
-<h1><a class="wikilink"
-       href="<?php echo WikiURL(HOME_PAGE)?>"
-       ><img src="<?php echo $WikiTheme->getImageURL('logo')?>"
-             alt="<?php echo fmt(_("%s: %s"), WIKI_NAME, HOME_PAGE) ?>"
-             align="bottom" /></a> <?php echo $HEADER?></h1>
--->
 <?php echo $CONTENT ?>
 <?php echo Template('navbar') ?>
 <!-- RELATEDPAGES were here. -->

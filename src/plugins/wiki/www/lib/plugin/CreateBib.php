@@ -119,7 +119,7 @@ class WikiPlugin_CreateBib
         $dump_button = $WikiTheme->makeButton("To File",
             $dump_url, 'foo');
 
-        $html = HTML::div(array('class' => 'bib', 'align' => 'left'));
+        $html = HTML::div(array('class' => 'bib align-left'));
         $html->pushContent($dump_button, ' ');
         $list = HTML::pre(array('id' => 'biblist', 'class' => 'bib'));
 

@@ -1,9 +1,4 @@
 <?php if (!$WikiTheme->DUMP_MODE) { ?>
-<?php /* I would like not to have to use these tables, and managed to
-       * get this stuff to work more or less correctly using
-       * CSSs float:left; and float:right;.  However float:right; seems
-       * to cause MSIE4.01/NT to hang. 
-       * So, we use tables...  */ ?>
 <table class="fullwidth">
 <tr class="baseline">
   <td>
@@ -50,10 +45,6 @@
   </div>
   </td>
 <?php if (empty($NOSIGNIN)) { ?>
-<?php
-/* class="top" is not ideal here but required to get reasonable alignment
-   with the other action buttons in some browsers, like OmniWeb and Safari
-   (therefore probably Konquorer too) */ ?>
   <td class="align-right top">
     <div id="signin"><?php echo Template('signin') ?></div>
   </td>

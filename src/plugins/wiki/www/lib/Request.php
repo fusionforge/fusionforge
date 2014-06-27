@@ -22,7 +22,7 @@
 
 class Request
 {
-	public $args = array();
+    public $args = array();
 
     function Request()
     {
@@ -866,6 +866,7 @@ class Request_AccessLog
 {
     /**
      * @param $logfile string  Log file name.
+     * @param bool $do_sql
      */
     function Request_AccessLog($logfile, $do_sql = false)
     {
@@ -1123,10 +1124,10 @@ class Request_AccessLogEntry
      *
      * This is a static member function.
      *
-     * @param $time integer Unix timestamp (defaults to current time).
+     * @param int $time Unix timestamp (defaults to current time).
      * @return string Zone offset, e.g. "-0800" for PST.
      */
-    function _zone_offset($time = false)
+    function _zone_offset($time = 0)
     {
         if (!$time)
             $time = time();
@@ -1146,10 +1147,10 @@ class Request_AccessLogEntry
      *
      * This is a static member function.
      *
-     * @param $time integer Unix timestamp (defaults to current time).
+     * @param int $time Unix timestamp (defaults to current time).
      * @return string Formatted date & time.
      */
-    function _ncsa_time($time = false)
+    function _ncsa_time($time = 0)
     {
         if (!$time)
             $time = time();

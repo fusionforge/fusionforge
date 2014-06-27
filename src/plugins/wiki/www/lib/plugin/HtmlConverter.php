@@ -52,8 +52,7 @@ class WikiPlugin_HtmlConverter extends WikiPlugin
             'name' => 'MAX_FILE_SIZE',
             'value' => MAX_UPLOAD_SIZE)));
         $contents->pushContent(HTML::input(array('name' => 'userfile',
-            'type' => 'file',
-            'size' => '50')));
+            'type' => 'file')));
         $contents->pushContent(HTML::raw(" "));
         $contents->pushContent(HTML::input(array('value' => _("Convert"),
             'type' => 'submit')));

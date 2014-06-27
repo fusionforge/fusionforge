@@ -161,7 +161,7 @@ class WikiPlugin_DebugAuthInfo
                         $val = $heading;
                     }
                 }
-                $rows[] = HTML::tr(HTML::td(array('align' => 'right',
+                $rows[] = HTML::tr(HTML::td(array('class' => 'align-right',
                             'bgcolor' => '#ccc',
                             'style' => 'color:#000000'),
                         HTML(HTML::raw('&nbsp;'), $key,

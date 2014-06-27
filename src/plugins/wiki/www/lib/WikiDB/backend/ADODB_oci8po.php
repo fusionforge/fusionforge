@@ -166,7 +166,7 @@ class WikiDB_backend_ADODB_oci8_search
         if ($this->isStoplisted($node))
             return "1=1";
         $page = $node->sql();
-        $exactword = $node->_sql_quote($node->word);
+        $exactword = $node->sql_quote($node->word);
         return ($this->_case_exact
             ? "pagename LIKE '$page' OR DBMS_LOB.INSTR(content, '$exactword') > 0"
             : "LOWER(pagename) LIKE '$page' OR DBMS_LOB.INSTR(content, '$exactword') > 0");

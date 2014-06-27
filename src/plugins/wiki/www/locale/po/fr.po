@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PhpWiki 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-11 16:07+0100\n"
+"POT-Creation-Date: 2014-06-25 18:08+0200\n"
 "PO-Revision-Date: 2004-06-22 21:10+0200\n"
 "Last-Translator: Pierrick Meignen <meignen.pierrick@wanadoo.fr>, Roland "
 "Trique <roland.trique@free.fr>, Stéphane Gourichon <stephane.gourichon@lip6."
@@ -1771,6 +1771,10 @@ msgstr ""
 msgid "Simple Sample Plugin."
 msgstr "Exemple simple de greffon."
 
+#, php-format
+msgid "%s, %s"
+msgstr ""
+
 msgid "Convert HTML markup into wiki markup."
 msgstr ""
 
@@ -1848,7 +1852,7 @@ msgstr ""
 msgid "List page names which share an initial or final title word with “%s”."
 msgstr ""
 "Affiche la liste des pages qui partagent un mot initial ou final dans leur "
-"titre avec %s."
+"titre avec « %s »."
 
 #, php-format
 msgid "Page names with prefix “%s”"
@@ -2218,11 +2222,11 @@ msgstr ""
 
 #, php-format
 msgid "Unable to find src=“%s”"
-msgstr "Impossible de trouver src=%s"
+msgstr "Impossible de trouver src=« %s »"
 
 #, php-format
 msgid "Unable to read src=“%s”"
-msgstr "Impossible de lire src=%s"
+msgstr "Impossible de lire src=« %s »"
 
 msgid "PHP syntax highlighting."
 msgstr "Coloration syntaxique du PHP."
@@ -2787,9 +2791,6 @@ msgstr ""
 msgid "Retrieving from external url %s wiki.getRecentChanges(%s)..."
 msgstr ""
 
-msgid "<unknown>"
-msgstr "<inconnu>"
-
 msgid " skipped"
 msgstr " ignoré"
 
@@ -2827,12 +2828,8 @@ msgstr "même contenu"
 msgid "FAILED"
 msgstr "ÉCHEC"
 
-msgid "Source code syntax highlighter (via http://www.andre-simon.de)."
+msgid "Source code syntax highlighter (via http://highlightjs.org/)."
 msgstr ""
-
-#, php-format
-msgid "invalid %s ignored"
-msgstr "%s non valable ignoré"
 
 msgid "Provide access to PhpWiki's lower level system information."
 msgstr "Affiche les informations de bas niveau pour PhpWiki."
@@ -2926,14 +2923,13 @@ msgstr "%d greffons au total : "
 
 #, php-format
 msgid "Total of %d languages: "
-msgstr "%d langages au total : "
+msgstr "%d langues au total : "
 
 msgid "Current language"
 msgstr "Ma langue"
 
-#, php-format
-msgid "Default language: “%s”"
-msgstr "Langue par défaut : « %s »"
+msgid "Default language"
+msgstr "Langue par défaut"
 
 #, php-format
 msgid "Total of %d themes: "
@@ -2942,9 +2938,8 @@ msgstr "%d thèmes au total: "
 msgid "Current theme"
 msgstr "Mon thème"
 
-#, php-format
-msgid "Default theme: “%s”"
-msgstr "Thème par défaut : « %s »"
+msgid "Default theme"
+msgstr "Thème par défaut"
 
 #, php-format
 msgid "unknown argument “%s” to SystemInfo"
@@ -2963,22 +2958,22 @@ msgid "Cache statistics"
 msgstr "Statistiques de cache"
 
 msgid "Page statistics"
-msgstr "Statistiques de page"
+msgstr "Statistiques de pages"
 
 msgid "User statistics"
-msgstr "Statistiques d'utilisateur"
+msgstr "Statistiques d'utilisateurs"
 
 msgid "Hit statistics"
 msgstr "Statistiques de visites"
 
 msgid "Harddisc usage"
-msgstr ""
+msgstr "Utilisation du disque"
 
 msgid "Expiry parameters"
-msgstr "Expiration des paramètres"
+msgstr "Paramètres d'expiration"
 
 msgid "Wikiname regexp"
-msgstr "regexp du WikiNom"
+msgstr "Expression rationnelle du WikiNom"
 
 msgid "Allowed protocols"
 msgstr "Protocoles autorisés"
@@ -2990,7 +2985,7 @@ msgid "Available plugins"
 msgstr "Greffons disponibles"
 
 msgid "Supported languages"
-msgstr "Langages supportés"
+msgstr "Langues supportées"
 
 msgid "Supported themes"
 msgstr "Thèmes supportés"
@@ -3093,7 +3088,7 @@ msgstr "TraductionsContribuées"
 
 #, php-format
 msgid "Translate “%s” to “%s” in *%s*"
-msgstr "Traduire de “%s” à “%s” en *%s*"
+msgstr "Traduire de « %s » à « %s » en *%s*"
 
 #, php-format
 msgid "Translate %s to %s in %s"
@@ -3148,7 +3143,7 @@ msgstr "ACCÈS REFUSÉ : Vous devez être connecté pour télécharger."
 
 #, php-format
 msgid "Error uploading “%s”"
-msgstr "ERREUR en déposant « %s »"
+msgstr "Erreur en déposant « %s »"
 
 #, php-format
 msgid "Files with extension %s are not allowed."
@@ -3372,6 +3367,9 @@ msgstr "%d utilisateurs en ligne"
 
 msgid "Guest"
 msgstr "Invité"
+
+msgid "<unknown>"
+msgstr "<inconnu>"
 
 #, php-format
 msgid "%d minutes"
@@ -3651,15 +3649,15 @@ msgstr "ACL inchangée pour la page « %s »."
 
 #, php-format
 msgid "ACL changed for page “%s”"
-msgstr "ACL modifiée pour la page « %s »."
+msgstr "ACL modifiée pour la page « %s »"
 
 #, php-format
 msgid "to “%s”."
-msgstr ""
+msgstr "à « %s »."
 
 #, php-format
 msgid "ACL changed for page “%s” from “%s” to “%s”."
-msgstr ""
+msgstr "ACL modifiée pour la page « %s » de « %s » à « %s »."
 
 msgid "Invalid ACL"
 msgstr "ACL invalide"
@@ -5196,6 +5194,9 @@ msgstr "StyleCorrect"
 msgid "See %s tips for editing."
 msgstr "Voir les conseils pour éditer les pages dans %s."
 
+msgid "Help/TextFormattingRules"
+msgstr "Aide/RèglesDeFormatageDesTextes"
+
 msgid "Synopsis"
 msgstr "Vue d'ensemble"
 
@@ -5992,17 +5993,20 @@ msgstr ""
 msgid "Edit this page"
 msgstr "Modifier cette page"
 
-#~ msgid "Imdb"
-#~ msgstr "Imdb"
-
-#~ msgid "Version %s"
-#~ msgstr "Version %s"
-
 #~ msgid "Prediction: %s"
 #~ msgstr "Prédiction : %s"
 
 #~ msgid "Prediction: %.1f"
 #~ msgstr "Prédiction : %.1f"
+
+#~ msgid "invalid %s ignored"
+#~ msgstr "%s non valable ignoré"
+
+#~ msgid "Imdb"
+#~ msgstr "Imdb"
+
+#~ msgid "Version %s"
+#~ msgstr "Version %s"
 
 #, fuzzy
 #~ msgid "%s not found"

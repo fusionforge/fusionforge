@@ -74,6 +74,7 @@ class SearchEngines
      * the method determines the name of the search engine, it's URL, and the search keywords
      * used in the search. This information is returned in an associative array with the following
      * keys:
+     * @param string $url
      * @returns array engine, engine_url, query
      * @public
      */

@@ -191,7 +191,7 @@ class WikiPlugin_TeX2png
         // or mathematical expression is wrong
         switch ($this->isMathExp($text)) {
             case 0: // not a mathematical expression
-                $html = HTML::tt(array('class' => 'tex',
+                $html = HTML::samp(array('class' => 'tex',
                     'style' => 'color:red;'), $text);
                 break;
             case 1: // an inlined mathematical expression
@@ -203,7 +203,7 @@ class WikiPlugin_TeX2png
                 $html = HTML::img(array('class' => 'tex',
                     'src' => $url,
                     'alt' => $text));
-                $html = HTML::div(array('align' => 'center'), $html);
+                $html = HTML::div(array('class' => 'align-center'), $html);
                 break;
             default:
                 break;

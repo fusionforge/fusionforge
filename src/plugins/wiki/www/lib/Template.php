@@ -9,7 +9,7 @@ class Template
     /**
      * name optionally of form "theme/template" to include parent templates in children
      */
-    function Template($name, &$request, $args = false)
+    function Template($name, &$request, $args = array())
     {
         global $WikiTheme;
 
@@ -49,7 +49,7 @@ class Template
             $this->_locals = array();
     }
 
-    function _munge_input($template)
+    private function _munge_input($template)
     {
 
         // Convert < ?plugin expr ? > to < ?php $this->_printPluginPI("expr"); ? >
@@ -64,10 +64,11 @@ class Template
         $orig[] = '/<\?php echo (.*?)\?>/s';
         $repl[] = '<?php $this->_print(\1);?>';
 
-        return preg_replace($orig, $repl, $template);
+        // Avoid PHP 5.5 warning about /e
+        return @preg_replace($orig, $repl, $template);
     }
 
-    function _mungePlugin($pi)
+    private function _mungePlugin($pi)
     {
         // HACK ALERT: PHP's preg_replace, with the /e option seems to
         // escape both single and double quotes with backslashes.
@@ -78,7 +79,7 @@ class Template
             "'" . str_replace("'", "\'", $pi) . "'");
     }
 
-    function _printPlugin($pi)
+    private function _printPlugin($pi)
     {
         include_once 'lib/WikiPlugin.php';
         static $loader;
@@ -89,7 +90,7 @@ class Template
         $this->_print($loader->expandPI($pi, $this->_request, $this, $this->_basepage));
     }
 
-    function _print($val)
+    private function _print($val)
     {
         if (isa($val, 'Template')) {
             $this->_expandSubtemplate($val);
@@ -98,7 +99,7 @@ class Template
         }
     }
 
-    function _expandSubtemplate(&$template)
+    private function _expandSubtemplate(&$template)
     {
         // FIXME: big hack!
         //if (!$template->_request)
@@ -117,19 +118,16 @@ class Template
      * Substitute HTML replacement text for tokens in template.
      *
      * Constructs a new WikiTemplate based upon the named template.
-     *
      * @access public
-     *
-     * @param $token string Name of token to substitute for.
-     *
-     * @param $replacement string Replacement HTML text.
+     * @param string $varname Name of token to substitute for.
+     * @param string $value Replacement HTML text.
      */
-    function replace($varname, $value)
+    public function replace($varname, $value)
     {
         $this->_locals[$varname] = $value;
     }
 
-    function printExpansion($defaults = false)
+    public function printExpansion($defaults = false)
     {
         if (!is_array($defaults)) // HTML object or template object
             $defaults = array('CONTENT' => $defaults);
@@ -161,7 +159,7 @@ class Template
     // Find a way to do template expansion less memory intensive and faster.
     // 1.3.4 needed no memory at all for dumphtml, now it needs +15MB.
     // Smarty? As before?
-    function getExpansion($defaults = false)
+    public function getExpansion($defaults = false)
     {
         ob_start();
         $this->printExpansion($defaults);
@@ -170,18 +168,18 @@ class Template
         return $xml;
     }
 
-    function printXML()
+    public function printXML()
     {
         $this->printExpansion();
     }
 
-    function asXML()
+    public function asXML()
     {
         return $this->getExpansion();
     }
 
     // Debugging:
-    function _dump_template()
+    private function _dump_template()
     {
         $lines = explode("\n", $this->_munge_input($this->_tmpl));
         $pre = HTML::pre();
@@ -191,7 +189,7 @@ class Template
         $pre->printXML();
     }
 
-    function _errorHandler($error)
+    public function _errorHandler($error)
     {
         //if (!preg_match('/: eval\(\)\'d code$/', $error->errfile))
         //    return false;
@@ -230,7 +228,7 @@ class Template
  *   new Template(...)
  * </pre>
  */
-function Template($name, $args = false)
+function Template($name, $args = array())
 {
     global $request;
     return new Template($name, $request, $args);
@@ -246,14 +244,14 @@ function alreadyTemplateProcessed($name)
  * Make and expand the top-level template.
  *
  *
- * @param $content mixed html content to put into the page
- * @param $title string page title
- * @param $page_revision object A WikiDB_PageRevision object or false
- * @param $args hash Extract args for top-level template
+ * @param mixed $content html content to put into the page
+ * @param string $title page title
+ * @param object|bool $page_revision A WikiDB_PageRevision object or false
+ * @param array $args hash Extract args for top-level template
  *
  * @return string HTML expansion of template.
  */
-function GeneratePage($content, $title, $page_revision = false, $args = false)
+function GeneratePage($content, $title, $page_revision = false, $args = array())
 {
     global $request;
 
@@ -274,7 +272,7 @@ function GeneratePage($content, $title, $page_revision = false, $args = false)
  * For dumping pages as html to a file.
  * Used for action=dumphtml,action=ziphtml,format=pdf,format=xml
  */
-function GeneratePageasXML($content, $title, $page_revision = false, $args = false)
+function GeneratePageasXML($content, $title, $page_revision = false, $args = array())
 {
     global $request;
 

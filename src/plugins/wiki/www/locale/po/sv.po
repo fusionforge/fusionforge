@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PhpWiki 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-11 16:07+0100\n"
+"POT-Creation-Date: 2014-06-25 18:08+0200\n"
 "PO-Revision-Date: 2001-01-27 01:58+0200\n"
 "Last-Translator: Jon Åslund <jooon@hem.passagen.se>\n"
 "Language-Team: \n"
@@ -1736,6 +1736,10 @@ msgstr ""
 msgid "Simple Sample Plugin."
 msgstr ""
 
+#, php-format
+msgid "%s, %s"
+msgstr ""
+
 msgid "Convert HTML markup into wiki markup."
 msgstr ""
 
@@ -2726,9 +2730,6 @@ msgstr ""
 msgid "Retrieving from external url %s wiki.getRecentChanges(%s)..."
 msgstr ""
 
-msgid "<unknown>"
-msgstr ""
-
 msgid " skipped"
 msgstr ""
 
@@ -2766,11 +2767,7 @@ msgstr "Samma innehåll"
 msgid "FAILED"
 msgstr ""
 
-msgid "Source code syntax highlighter (via http://www.andre-simon.de)."
-msgstr ""
-
-#, php-format
-msgid "invalid %s ignored"
+msgid "Source code syntax highlighter (via http://highlightjs.org/)."
 msgstr ""
 
 msgid "Provide access to PhpWiki's lower level system information."
@@ -2866,8 +2863,7 @@ msgstr ""
 msgid "Current language"
 msgstr ""
 
-#, php-format
-msgid "Default language: “%s”"
+msgid "Default language"
 msgstr ""
 
 #, php-format
@@ -2877,8 +2873,7 @@ msgstr ""
 msgid "Current theme"
 msgstr ""
 
-#, php-format
-msgid "Default theme: “%s”"
+msgid "Default theme"
 msgstr ""
 
 #, php-format
@@ -3289,6 +3284,9 @@ msgid "%d online users"
 msgstr ""
 
 msgid "Guest"
+msgstr ""
+
+msgid "<unknown>"
 msgstr ""
 
 #, php-format
@@ -5065,6 +5063,9 @@ msgstr "BraStil"
 msgid "See %s tips for editing."
 msgstr "%s: Redigeringstips."
 
+msgid "Help/TextFormattingRules"
+msgstr "Hjälp/Textformateringsregler"
+
 msgid "Synopsis"
 msgstr "Översikt"
 
@@ -5829,6 +5830,10 @@ msgstr ""
 
 #, fuzzy
 #~ msgid "Prediction: %s"
+#~ msgstr "Redigera: %s"
+
+#, fuzzy
+#~ msgid "Prediction: %.1f"
 #~ msgstr "Redigera: %s"
 
 #, fuzzy

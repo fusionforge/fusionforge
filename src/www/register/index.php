@@ -254,13 +254,18 @@ if (forge_get_config('use_scm') && count($scm_plugins) > 0) {
 		echo '<td><input type="radio" name="scm" value="noscm" />'._('No SCM').'</td>';
 	}
 	foreach($scm_plugins as $plugin) {
-		$myPlugin= plugin_get_object($plugin);
-		echo '<td><input type="radio" name="scm" ';
+		$myPlugin = plugin_get_object($plugin);
+		echo "<td>\n";
+		echo '<input id="'.$myPlugin->name.'" type="radio" name="scm" ';
 		echo 'value="'.$myPlugin->name.'"';
 		if ($scm && strcmp($scm, $myPlugin->name) == 0) {
 			echo ' checked="checked"';
 		}
-		echo ' />'.$myPlugin->text.'</td>';
+		echo ' />';
+		echo '<label for="'.$myPlugin->name.'">';
+		echo $myPlugin->text;
+		echo '</label>';
+		echo "\n</td>\n";
 	}
 	echo '</tr></tbody></table>'."\n";
 }
