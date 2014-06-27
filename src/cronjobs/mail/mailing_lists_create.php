@@ -77,6 +77,7 @@ for ($i=0; $i<$rows; $i++) {
 	$public = db_result($res,$i,'is_public');
 	$status = db_result($res,$i,'status');
 	$description = db_result($res, $i, 'description');
+	$description = str_replace('"', '\"', $description);
 
 	$listname = trim($listname);
 	if (!$listname) {
