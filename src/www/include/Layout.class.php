@@ -1277,15 +1277,18 @@ if (isset($params['group']) && $params['group']) {
 		return $this->getPicto('ic/ftp16b.png', $title, $alt);
 	}
 
-	function getDeletePic($title = '', $alt = '') {
-		return $this->getPicto('ic/delete.png', $title, $alt);
+	function getDeletePic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/delete.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
-	function getPicto($url, $title, $alt, $width = '20', $height = '20') {
+	function getPicto($url, $title, $alt, $width = '20', $height = '20', $otherAttr = array()) {
+		$otherAttr['title'] = $title;
 		if (!$alt) {
-			$alt = $title;
+			$otherAttr['alt'] = $title;
+		} else {
+			$otherAttr['alt'] = $alt;
 		}
-		return html_image($url, $width, $height, array('title' => $title, 'alt' => $alt));
+		return html_image($url, $width, $height, $otherAttr);
 	}
 
 	/**

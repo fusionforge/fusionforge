@@ -65,7 +65,7 @@ foreach (array_keys($users) as $user_id)
 
 foreach ($users as $user_id => &$v) {
 	$username = $v['username'];
-	$sshkeys = join("\n", $v['keys']) . "\n";
+	$sshkeys = array_key_exists('keys', $v) ? (join("\n", $v['keys']) . "\n") : '';
 
 	$dir = forge_get_config('homedir_prefix').'/'.$username;
 	if (util_is_root_dir($dir)) {
