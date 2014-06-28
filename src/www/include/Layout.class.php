@@ -1348,7 +1348,7 @@ if (isset($params['group']) && $params['group']) {
 		}
 		echo html_ao('div', array('class' => 'widget_content', 'style' => $style));
 		if (!$readonly && $display_preferences) {
-			echo '<div class="widget_preferences">'. $widget->getPreferencesForm($layout_id, $owner_id, $owner_type) . "</div>\n";
+			echo html_e('div', array('class' => 'widget_preferences'), $widget->getPreferencesForm($layout_id, $owner_id, $owner_type));
 		}
 		if ($widget->isAjax()) {
 			echo html_ao('div', array('id' => $element_id.'-ajax'));
