@@ -177,13 +177,6 @@ Manages links to external subprojects on remote forges.
 # %description plugin-forumml
 # ForumML integes mailing lists as forums in FusionForge
 
-%package plugin-fckeditor
-Summary: FCKEditor plugin for FusionForge
-Group: Development/Tools
-Requires: %{name} >= %{version}, php
-%description plugin-fckeditor
-FCKEditor is a WYSIWYG text editor that displays within a web browser.
-
 %package plugin-foafprofiles
 Summary: FOAF profile for forge users
 Group: Development/Tools
@@ -562,9 +555,6 @@ done
 
 # plugin: extsubproj
 %{__ln_s} ../../plugins/extsubproj/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/extsubproj
-
-# plugin: fckeditor
-%{__ln_s} ../../plugins/fckeditor/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/fckeditor
 
 # plugin: forumml
 # %{__ln_s} ../../plugins/forumml/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/forumml
@@ -952,11 +942,6 @@ fi
 %files plugin-extsubproj
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/extsubproj.ini
 %{FORGE_DIR}/plugins/extsubproj
-
-%files plugin-fckeditor
-%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/fckeditor.ini
-%{FORGE_DIR}/plugins/fckeditor
-%{FORGE_DIR}/www/plugins/fckeditor
 
 %files plugin-foafprofiles
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/foafprofiles.ini
