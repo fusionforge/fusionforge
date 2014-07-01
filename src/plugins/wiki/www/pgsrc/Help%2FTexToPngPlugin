@@ -1,4 +1,4 @@
-Date: Thu, 26 Jun 2014 12:01:34 +0000
+Date: Tue,  1 Jul 2014 16:09:46 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FTexToPngPlugin;
@@ -6,7 +6,7 @@ Content-Type: application/x-phpwiki;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-Converts TeX to an image. May be used to embed formulas in PhpWiki.
+Converts TeX to an image. May be used to embed formulas in ~PhpWiki.
 
 == Usage ==
 {{{

@@ -1,4 +1,4 @@
-Date: Thu,  9 Dec 2010 14:51:45 +0000
+Date: Tue,  1 Jul 2014 16:09:46 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2Ftext2pngPlugin;
@@ -20,22 +20,44 @@ This is a really simple and stupid plugin, which might need some work.
 
 == Arguments ==
 
-text:
-  some text to display
-lang:
-  language subdirectory
-_force:
-  set to 1 to recreate the image
-fontsize:
-  18. with GD1 it's the pixelsize, with GD2 the pointsize
-with_shadow:
-  1
-fontcolor:
-  #000000
-shadowcolor:
-  #AFAFAF
-backcolor:
-  #ffffff
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **text**
+| some text to display
+|
+|-
+| **lang**
+| language subdirectory
+|
+|-
+| **force**
+| set to 1 to recreate the image
+|
+|-
+| **fontsize**
+|
+| 18. with GD1 it's the pixelsize, with GD2 the pointsize
+|-
+| **with_shadow**
+|
+| 1
+|-
+| **fontcolor**
+|
+| #000000
+|-
+| **shadowcolor**
+|
+| #AFAFAF
+|-
+| **backcolor**
+|
+| #ffffff
+|}
 
 === Configurable Options ===
 
@@ -46,8 +68,6 @@ See the sourcecode. You'd probably need to adjust $ttfont and text2png_debug.
 {{{
 <<text2png text='Hello WikiWorld!'>>
 }}}
-would produce:
-<<text2png text='Hello WikiWorld!'>>
 
 == See Also ==
 * [[Help:TeX2PngPlugin]]

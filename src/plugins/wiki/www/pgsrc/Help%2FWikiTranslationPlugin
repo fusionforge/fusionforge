@@ -1,4 +1,4 @@
-Date: Fri,  7 Dec 2012 14:58:45 +0000
+Date: Tue,  1 Jul 2014 16:26:56 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FWikiTranslationPlugin;
@@ -22,22 +22,44 @@ Current favorite: translate.google.com if from_lang = en or fr
 
 All [[Help:PageList|PageList]] arguments, plus the following ones:
 
-languages:
-  comma delimited string of de,en,sv,...
-string:
-  string defined in a <lang>.po file to be translated
-page:
-  A whole page to translate by the currently defined external translation service.
-what:
-  One of pages, buttons, plugins or wikiwords
-match:
-  Filter. Default: *
-from_lang:
-  Override the current lang.
-nolinks:
-  Do not display any links (for development only)
-noT:
-  Do not display the T link (for development only)
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **languages**
+| comma delimited string of de,en,sv,...
+|
+|-
+| **string**
+| string defined in a <lang>.po file to be translated
+|
+|-
+| **page**
+| A whole page to translate by the currently defined external translation service.
+|
+|-
+| **what**
+| One of pages, buttons, plugins or wikiwords
+|
+|-
+| **match**
+| Filter
+| *
+|-
+| **from_lang**
+| Override the current lang.
+|
+|-
+| **nolinks**
+| Do not display any links (for development only)
+|
+|-
+| **noT**
+| Do not display the T link (for development only)
+|
+|}
 
 == Example ==
 
