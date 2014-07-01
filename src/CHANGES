@@ -5,6 +5,7 @@ Fusionforge-5.3.2:
 * Admin: fix edit table themes, fix frs_processor sequence [#691] (TrivialDev)
 * User SSH keys (ssh_create.php): fix harmless warning when user removes all her keys (Inria)
 * Mailing lists: handle quotes and accents in description (Inria)
+* News: don't send requests for frontpage display for private projects (Inria)
 * Plugin mediawiki: fix paths in import/export scripts (Inria)
 * Plugin fckeditor: dropped in favor of ckeditor
 

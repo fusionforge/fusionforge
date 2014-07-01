@@ -78,8 +78,17 @@ $sth->finish() or die "Problems with the query '$query' in DB";
 $dbh->commit or die $dbh->errstr;
 
 foreach my $newsnotapprob (@results_array) {
-	$therearenews = 1;
 	my ($group_name, $summary, $details) = @{$newsnotapprob};
+
+	my $query = "SELECT COUNT(*) FROM pfo_role_setting prs, groups g
+          WHERE prs.role_id=1 AND prs.section_name = 'project_read' AND prs.perm_val = 1
+            AND prs.ref_id = g.group_id AND g.unix_group_name = '$group_name'";
+	my $c = $dbh->prepare($query);
+	$c->execute();
+	my $is_public = (int($c->fetchrow()) > 0);
+	next if (!$is_public);
+
+	$therearenews = 1;
 	my $title = "$group_name: $summary\n";
 	$emailformatted .= autoformat $title, {  all => 1, left=>0, right=>78 };
 	$emailformatted .= "----------------------------------------------------------------------\n";
