@@ -305,9 +305,10 @@ class WikiPlugin_WikiBlog
         if ($type == 'wikiblog')
             $basepage = "Blog";
         elseif ($type == 'comment')
-            $basepage = "Comment"; elseif ($type == 'wikiforum')
-            $basepage = substr($summary, 0, 12);
-        //$basepage = _("Message"); // FIXME: we use now the first 12 chars of the summary
+            $basepage = "Comment";
+        elseif ($type == 'wikiforum')
+            // $basepage = substr($summary, 0, 12);
+            $basepage = _("Message"); // FIXME: we use now the first 12 chars of the summary
         return $basepage;
     }
 
