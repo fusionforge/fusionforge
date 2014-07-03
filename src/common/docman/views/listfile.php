@@ -1,3 +1,4 @@
+
 <?php
 /**
  * FusionForge Documentation Manager
@@ -156,7 +157,6 @@ jQuery(document).ready(function() {
 		page:			'listfile',
 		docgroupId:		<?php echo $dirid ?>,
 		lockIntervalDelay:	60000,
-		imgroot:		'<?php echo $HTML->imgroot ?>',
 		lockedAction:		'<?php echo _('Action currently locked by another user.') ?>'
 	});
 });

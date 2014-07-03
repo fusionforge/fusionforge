@@ -181,6 +181,9 @@ DocManListFileController.prototype =
 		if (!this.params.divEditDirectory.is(":visible")) {
 			jQuery.getJSON(this.params.docManURL + '/?group_id=' + this.params.groupId + '&action=lock&type=dir&itemid=' + this.params.docgroupId, jQuery.proxy(function(data){
 				if (data) {
+					jQuery('#maindiv > .feedback').remove();
+					jQuery('#maindiv > .error').remove();
+					jQuery('#maindiv > .warning_msg').remove();
 					jQuery('#maindiv').prepend('<div class="actionresult"><p id="validateLinkMessage" class="warning_msg">'+this.params.lockedAction+'</p></div>');
 				} else {
 					this.params.divEditDirectory.show();
