@@ -290,7 +290,6 @@ class WikiPlugin_PageDump
         // remove deleted values from array
         for ($i = 0; $i < count($array); $i++) {
             if (trim($array[$i]) != "zzzjunk") { //nasty, fixme
-                //trigger_error("'$array[$i]'");//debugging
                 $return[] = $array[$i];
             }
         }

@@ -83,7 +83,6 @@ class WikiPlugin_SiteMap
         static $VisitedPages = array();
 
         $startpagename = $startpage->getName();
-        //trigger_error("DEBUG: recursivelyGetBackLinks( $startpagename , $level )");
         if ($level == $reclimit)
             return $pagearr;
         if (in_array($startpagename, $VisitedPages))
@@ -110,7 +109,6 @@ class WikiPlugin_SiteMap
         static $VisitedPages = array();
 
         $startpagename = $startpage->getName();
-        //trigger_error("DEBUG: recursivelyGetLinks( $startpagename , $level )");
         if ($level == $reclimit)
             return $pagearr;
         if (in_array($startpagename, $VisitedPages))
@@ -118,7 +116,6 @@ class WikiPlugin_SiteMap
         array_push($VisitedPages, $startpagename);
         $reversed = (($this->firstreversed)
             && ($startpagename == $this->initialpage));
-        //trigger_error("DEBUG: \$reversed = $reversed");
         $pagelinks = $startpage->getLinks($reversed);
         while ($link = $pagelinks->next()) {
             $linkpagename = $link->getName();

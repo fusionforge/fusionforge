@@ -219,9 +219,6 @@ class WikiPlugin_CreateToc
                 }
             }
         }
-        // Do not trigger error, it happens e.g. for "<<CreateToc pagename=AnotherPage>>"
-        // trigger_error("Heading <$h> $heading </$h> not found\n", E_USER_NOTICE);
-
         return 0;
     }
 
