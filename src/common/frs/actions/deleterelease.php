@@ -31,7 +31,7 @@ $sysdebug_enable = false;
 $result = array();
 
 if (!forge_check_perm('frs', $group_id, 'write')) {
-	$result['html'] = $HTML->warning(_('FRS Action Denied.'));
+	$result['html'] = $HTML->warning_msg(_('FRS Action Denied.'));
 	echo json_encode($result);
 	exit;
 }
