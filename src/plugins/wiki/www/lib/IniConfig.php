@@ -700,18 +700,18 @@ function fixup_static_configs($file)
     $AllAllowedPlugins[] = 'WikiFormRich';
     $AllAllowedPlugins[] = 'WikiPoll';
     $AllAllowedPlugins[] = 'YouTube';
+        $AllAllowedPlugins[] = 'DebugGroupInfo';
+        $AllAllowedPlugins[] = 'DebugAuthInfo';
+        $AllAllowedPlugins[] = 'DebugBackendInfo';
 
     // The FUSIONFORGE theme omits them
     if (!(defined('FUSIONFORGE') and FUSIONFORGE)) {
         $AllAllowedPlugins[] = 'AnalyseAccessLogSql';
-        $AllAllowedPlugins[] = 'DebugAuthInfo';
-        $AllAllowedPlugins[] = 'DebugBackendInfo';
         $AllAllowedPlugins[] = 'CacheTest';
         $AllAllowedPlugins[] = 'CategoryPage';
         $AllAllowedPlugins[] = 'FoafViewer';
         $AllAllowedPlugins[] = 'FrameInclude';
         $AllAllowedPlugins[] = 'GraphViz';
-        $AllAllowedPlugins[] = 'DebugGroupInfo';
         $AllAllowedPlugins[] = 'HtmlConverter';
         $AllAllowedPlugins[] = 'JabberPresence';
         $AllAllowedPlugins[] = 'ListPages';
