@@ -186,7 +186,7 @@ class ProjectTaskFactory extends Error {
 		$rows = db_numrows($result);
 		$this->fetched_rows=$rows;
 		if (db_error()) {
-			$this->setError('Database Error: '.db_error().$sql);
+			$this->setError('Database Error: '.db_error());
 			return false;
 		}
 

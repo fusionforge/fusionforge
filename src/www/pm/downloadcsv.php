@@ -97,7 +97,7 @@ if (!$ptf || !is_object($ptf)) {
 } elseif ($ptf->isError()) {
     exit_error($ptf->getErrorMessage(),'pm');
 }
-$ptf->order='external_id';
+$ptf->order='project_task_external_order.external_id';
 $pt_arr =& $ptf->getTasks();
 if ($ptf->isError()) {
     exit_error($ptf->getErrorMessage(),'pm');
