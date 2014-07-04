@@ -156,8 +156,7 @@ jQuery(document).ready(function() {
 		enableResize:		true,
 		page:			'listfile',
 		docgroupId:		<?php echo $dirid ?>,
-		lockIntervalDelay:	60000,
-		lockedAction:		'<?php echo _('Action currently locked by another user.') ?>'
+		lockIntervalDelay:	60000
 	});
 });
 
@@ -173,7 +172,7 @@ if ($DocGroupName) {
 	echo html_e('h2', array(), $headerPath, false);
 	echo html_ao('h3', array('class' => 'docman_h3'));
 	echo html_e('span', array(), _('Document Folder')._(': ').html_e('i', array(), $DocGroupName, false).'&nbsp;', false);
-	/* should we steal the lock on file ? */
+	/* should we steal the lock on folder ? */
 	if ($ndg->getLocked()) {
 		if ($ndg->getLockedBy() == $u->getID()) {
 			$ndg->setLock(0);
