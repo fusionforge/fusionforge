@@ -1,4 +1,4 @@
-Date: Wed, 30 Jan 2013 14:39:50 +0000
+Date: Mon,  7 Jul 2014 14:09:37 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=ReleaseNotes;
@@ -8,11 +8,18 @@ Content-Transfer-Encoding: binary
 
 <<CreateToc with_toclink||=1 headers||=1,2,3>>
 
-== 1.4.0 2013-??-?? Reini Urban, Marc-Etienne Vargenau, Sabri Labbenes, Sébastien Le Callonnec ==
+== 1.5.0 2014-??-?? Marc-Etienne Vargenau ==
+
+~PhpWiki 1.5.0 needs at least PHP 5.3. It is compatible with PHP 5.3, 5.4 and 5.5.
 
 * Fix bad display in Toolbox menu (Sidebar and Monobook themes) reported by Harold Hallikainen
 * Fix Captcha problem reported by Harold Hallikainen
 * Merge OldTextFormattingRules into TextFormattingRules
+* ~SyntaxHighlighter plugin is now implemented with [[http://highlightjs.org/]] instead of [[http://www.andre-simon.de]].
+
+== 1.4.0 2014-??-?? Reini Urban, Marc-Etienne Vargenau, Sabri Labbenes, Sébastien Le Callonnec ==
+
+~PhpWiki 1.4.0 is the same as ~PhpWiki 1.4.0RC1. It is the last release compatible with PHP 4.
 
 == 1.4.0RC1 2010-09-17 Reini Urban, Marc-Etienne Vargenau, Sabri Labbenes, Sébastien Le Callonnec ==
 

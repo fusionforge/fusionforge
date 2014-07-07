@@ -1660,10 +1660,6 @@ $properties["MY_JABBER_ID"] =
     new _define_commented_optional('MY_JABBER_ID'); //
 $properties["PHPWEATHER_BASE_DIR"] =
     new _define_commented_optional('PHPWEATHER_BASE_DIR'); //
-$properties["HIGHLIGHT_EXE"] =
-    new _define_commented_optional('HIGHLIGHT_EXE'); // /usr/local/bin/highlight
-$properties["HIGHLIGHT_DATA_DIR"] =
-    new _define_commented_optional('HIGHLIGHT_DATA_DIR'); // /usr/share/highlight
 
 $properties["Part Eight"] =
     new part('_part8', $SEPARATOR . "\n", "
