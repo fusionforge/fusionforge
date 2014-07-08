@@ -1059,9 +1059,8 @@ class Document extends Error {
 	/**
 	 * downloadUp - insert download stats
 	 *
-	 * @access	private
 	 */
-	private function downloadUp() {
+	function downloadUp() {
 		if (session_loggedin()) {
 			$s =& session_get_user();
 			$us = $s->getID();
