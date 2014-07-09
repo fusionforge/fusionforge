@@ -92,8 +92,8 @@ if (is_numeric($docid)) {
 
 	$file_path = $d->getFilePath();
 	$length = filesize($file_path);
+	$d->downloadUp();
 	header("Content-length: $length");
-
 	readfile_chunked($file_path);
 
 } elseif ($docid === 'backup') {
