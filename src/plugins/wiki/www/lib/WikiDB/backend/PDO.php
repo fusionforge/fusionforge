@@ -129,7 +129,7 @@ class WikiDB_backend_PDO
         }
         $sth = $this->_dbh->prepare("SELECT version()");
         $sth->execute();
-        $this->_serverinfo['version'] = $sth->fetchSingle();
+        $this->_serverinfo['version'] = $sth->fetchColumn();
         $this->commit(); // required to match the try catch block above!
 
         $prefix = isset($dbparams['prefix']) ? $dbparams['prefix'] : '';
@@ -225,7 +225,7 @@ class WikiDB_backend_PDO
             . "   AND pagename=?");
         $sth->bindParam(1, $pagename, PDO_PARAM_STR, 100);
         if ($sth->execute())
-            return $sth->fetchSingle();
+            return $sth->fetchColumn();
         else
             return false;
     }
@@ -248,7 +248,7 @@ class WikiDB_backend_PDO
         $sth = $dbh->exec("SELECT count(*)"
             . " FROM $nonempty_tbl, $page_tbl"
             . " WHERE $nonempty_tbl.id=$page_tbl.id");
-        return $sth->fetchSingle();
+        return $sth->fetchColumn();
     }
 
     function increaseHitCount($pagename)
@@ -342,7 +342,7 @@ class WikiDB_backend_PDO
         $sth = $dbh->prepare("SELECT cached_html FROM $page_tbl WHERE pagename=? LIMIT 1");
         $sth->bindParam(1, $pagename, PDO_PARAM_STR, 100);
         $sth->execute();
-        return $sth->fetchSingle(PDO_FETCH_NUM);
+        return $sth->fetchColumn(PDO_FETCH_NUM);
     }
 
     function set_cached_html($pagename, $data)
@@ -377,7 +377,7 @@ class WikiDB_backend_PDO
         $page_tbl = $this->_table_names['page_tbl'];
         $sth = $dbh->prepare("SELECT id FROM $page_tbl WHERE pagename=? LIMIT 1");
         $sth->bindParam(1, $pagename, PDO_PARAM_STR, 100);
-        $id = $sth->fetchSingle();
+        $id = $sth->fetchColumn();
         if (!$create_if_missing) {
             return $id;
         }
@@ -395,7 +395,7 @@ class WikiDB_backend_PDO
                 $this->beginTransaction();
                 $sth = $dbh->prepare("SELECT MAX(id) FROM $page_tbl");
                 $sth->execute();
-                $id = $sth->fetchSingle();
+                $id = $sth->fetchColumn();
                 $sth = $dbh->prepare("INSERT INTO $page_tbl"
                     . " (id,pagename,hits)"
                     . " VALUES (?,?,0)");
@@ -423,7 +423,7 @@ class WikiDB_backend_PDO
             . " LIMIT 1");
         $sth->bindParam(1, $pagename, PDO_PARAM_STR, 100);
         $sth->execute();
-        return $sth->fetchSingle();
+        return $sth->fetchColumn();
     }
 
     function get_previous_version($pagename, $version)
@@ -440,7 +440,7 @@ class WikiDB_backend_PDO
         $sth->bindParam(1, $pagename, PDO_PARAM_STR, 100);
         $sth->bindParam(2, $version, PDO_PARAM_INT);
         $sth->execute();
-        return $sth->fetchSingle();
+        return $sth->fetchColumn();
     }
 
     /**
@@ -674,7 +674,7 @@ class WikiDB_backend_PDO
             $this->set_links($pagename, false);
             $sth = $dbh->prepare("SELECT COUNT(*) FROM $link_tbl WHERE linkto=$id");
             $sth->execute();
-            if ($sth->fetchSingle()) {
+            if ($sth->fetchColumn()) {
                 // We're still in the link table (dangling link) so we can't delete this
                 // altogether.
                 $dbh->query("UPDATE $page_tbl SET hits=0, pagedata='' WHERE id=$id");
@@ -732,7 +732,7 @@ class WikiDB_backend_PDO
                     . " WHERE ISNULL($nonempty_tbl.id) AND"
                     . " ISNULL($version_tbl.id) AND $page_tbl.id=$id");
                 $sth1->execute();
-                if ($sth1->fetchSingle()) {
+                if ($sth1->fetchColumn()) {
                     $dbh->query("DELETE FROM $page_tbl WHERE id=$id"); // this purges the link
                     $dbh->query("DELETE FROM $recent_tbl WHERE id=$id"); // may fail
                 }
@@ -805,7 +805,7 @@ class WikiDB_backend_PDO
         $sth->bindParam(1, $pagename, PDO_PARAM_STR, 100);
         $sth->bindParam(2, $link, PDO_PARAM_STR, 100);
         $sth->execute();
-        return $sth->fetchSingle();
+        return $sth->fetchColumn();
     }
 
     function get_all_pages($include_empty = false, $sortby = '', $limit = '', $exclude = '')

@@ -100,7 +100,7 @@ class DbSession_PDO
         $table = $this->_table;
         $sth = $dbh->prepare("SELECT sess_data FROM $table WHERE sess_id=?");
         $sth->bindParam(1, $id, PDO_PARAM_STR, 32);
-        if ($sth->execute()) $res = $sth->fetchSingle();
+        if ($sth->execute()) $res = $sth->fetchColumn();
         else $res = '';
         $this->_disconnect();
         if (!empty($res) and isa($dbh, 'ADODB_postgres64'))

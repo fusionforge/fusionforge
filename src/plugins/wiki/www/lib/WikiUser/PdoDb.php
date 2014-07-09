@@ -144,7 +144,7 @@ class _PdoDbPassUser
                 trigger_error("SQL Error: " . $e->getMessage(), E_USER_WARNING);
                 return false;
             }
-            if ($this->_authselect->fetchSingle())
+            if ($this->_authselect->fetchColumn())
                 return true;
         } else {
             if (!$dbi->getAuthParam('auth_user_exists'))
@@ -153,7 +153,7 @@ class _PdoDbPassUser
             $this->_authcheck = $dbh->prepare($dbi->getAuthParam('auth_check'));
             $this->_authcheck->bindParam("userid", $this->_userid, PDO_PARAM_STR, 48);
             $this->_authcheck->execute();
-            if ($this->_authcheck->fetchSingle())
+            if ($this->_authcheck->fetchColumn())
                 return true;
         }
         // User does not exist yet.
