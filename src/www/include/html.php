@@ -431,7 +431,7 @@ function html_get_tooltip_description($element_name) {
 }
 
 function html_use_jquery() {
-	use_javascript('/scripts/jquery/jquery-1.8.3.js');
+	use_javascript('/scripts/jquery/jquery-1.10.2.js');
 }
 
 function html_use_storage() {
@@ -454,8 +454,7 @@ function html_use_coolfieldset() {
 
 function html_use_jqueryui() {
 	html_use_jquery();
-	use_javascript('/scripts/jquery-ui/js/jquery-ui-1.9.2.custom.js');
-	use_stylesheet('/scripts/jquery-ui/css/overcast/jquery-ui-1.9.2.custom.css');
+	use_javascript('/scripts/jquery-ui/js/jquery-ui-1.10.4.js');
 }
 
 function html_use_jqueryjqplot() {

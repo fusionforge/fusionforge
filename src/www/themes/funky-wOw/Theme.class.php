@@ -36,6 +36,7 @@ class Theme extends Layout {
 		$this->imgroot = $this->imgbaseurl;
 		$this->addStylesheet('/themes/funky-wOw/css/theme.css');
 		$this->addStylesheet('/themes/funky-wOw/css/theme-pages.css');
+		$this->addStylesheet('/scripts/jquery-ui/css/sunny/jquery-ui-1.10.4.custom.css');
 	}
 
 	function bodyHeader($params) {
