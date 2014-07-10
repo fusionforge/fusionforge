@@ -473,7 +473,7 @@ class ArtifactFactory extends Error {
 	function getArtifactsByReleases($extra_field_id, $releases) {
 		$artifacts = array();
 
-		$sql = 'SELECT a.*
+		$sql = 'SELECT DISTINCT a.*
 		FROM artifact_extra_field_data aefd, artifact_extra_field_elements aefe, artifact_vw a
 		WHERE aefd.extra_field_id=aefe.extra_field_id
 		AND CAST (aefd.field_data AS integer)=aefe.element_id

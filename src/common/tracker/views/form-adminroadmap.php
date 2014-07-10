@@ -220,7 +220,7 @@ if ($set_roadmap_failed ||
 				echo '<option value="0"'.(! $field_id ? ' selected="selected"' : '').' >'._('Not used').'</option>'."\n";
 				$extra_fields = $ath->getExtraFields( array(ARTIFACT_EXTRAFIELD_FILTER_INT));
 				foreach ($extra_fields as $extra_field) {
-					if ($extra_field['field_type'] != ARTIFACT_EXTRAFIELDTYPE_CHECKBOX && $extra_field['field_type'] != ARTIFACT_EXTRAFIELDTYPE_MULTISELECT) {
+					if ($extra_field['field_type'] != ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) {
 						echo '<option value="'.$extra_field['extra_field_id'].'"'.($extra_field['extra_field_id'] == $field_id ? ' selected="selected"' : '').' >'.$extra_field['field_name'].'</option>'."\n";
 					}
 				}

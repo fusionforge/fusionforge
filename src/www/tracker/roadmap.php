@@ -361,46 +361,48 @@ if (!$at_arr || count($at_arr) < 1) {
 
 			foreach($art_arr as $artifact) {
 				$extra_data = $artifact->getExtraFieldDataText();
-				$release_value = $extra_data[$field_id]['value'];
+				$release_value = explode(',',$extra_data[$field_id]['value']);
 
-				if ($selected_release && $release_value != $selected_release) {
+				if ($selected_release && !in_array($selected_release, $release_value)) {
 					continue;
 				}
 
-				$custom_status_name = $artifact->getCustomStatusName();
-				$artifact_id = $artifact->getID();
+				foreach ($release_value as $release_value_id) {
+					$custom_status_name = $artifact->getCustomStatusName();
+					$artifact_id = $artifact->getID();
 
-				@$rmap[$release_value][$artifact_type_name] .= $templates[$template]['begin_ticket'];
+					@$rmap[$release_value_id][$artifact_type_name] .= $templates[$template]['begin_ticket'];
 
-				// Icon
-				if ($artifact->getStatusID() == 1) {
-					$icon = html_image('ic/ticket-open.png','','',array('alt' => $custom_status_name, 'title' => $custom_status_name));
+					// Icon
+					if ($artifact->getStatusID() == 1) {
+						$icon = html_image('ic/ticket-open.png','','',array('alt' => $custom_status_name, 'title' => $custom_status_name));
+					}
+					else {
+						$icon = html_image('ic/ticket-closed.png','','',array('alt' => $custom_status_name, 'title' => $custom_status_name));
+					}
+					$rmap[$release_value_id][$artifact_type_name] .= sprintf($templates[$template]['ticket_icon'], $icon);
+
+					// Artifact id
+					$rmap[$release_value_id][$artifact_type_name] .= sprintf($templates[$template]['ticket_id'],
+							dirname(getStringFromServer('PHP_SELF')).'/?func=detail&amp;aid='.$artifact_id .
+								'&amp;group_id='. $group_id .'&amp;atid='.$ath->getID(),
+							$artifact_id);
+
+					// Summary
+					$rmap[$release_value_id][$artifact_type_name] .= sprintf($templates[$template]['ticket_summary'],
+							htmlentities($artifact->getDetails(), ENT_COMPAT, 'UTF-8'),
+							$artifact->getSummary());
+
+					$rmap[$release_value_id][$artifact_type_name] .= $templates[$template]['end_ticket'];
+
+					// Graph
+					@$rel_states[$release_value_id][$artifact->getStatusID()]['count']++;
+					$rel_states[$release_value_id][$artifact->getStatusID()]['name'] = $artifact->getStatusName();
+					@$total_rel_states[$release_value_id]++;
+					@$rel_art_states[$release_value_id][$artifact_type_name][$custom_status_name]['count']++;
+					$rel_art_states[$release_value_id][$artifact_type_name][$custom_status_name]['name'] = $custom_status_name;
+					@$total_rel_art_states[$release_value_id][$artifact_type_name]++;
 				}
-				else {
-					$icon = html_image('ic/ticket-closed.png','','',array('alt' => $custom_status_name, 'title' => $custom_status_name));
-				}
-				$rmap[$release_value][$artifact_type_name] .= sprintf($templates[$template]['ticket_icon'], $icon);
-
-				// Artifact id
-				$rmap[$release_value][$artifact_type_name] .= sprintf($templates[$template]['ticket_id'],
-						dirname(getStringFromServer('PHP_SELF')).'/?func=detail&amp;aid='.$artifact_id .
-							'&amp;group_id='. $group_id .'&amp;atid='.$ath->getID(),
-						$artifact_id);
-
-				// Summary
-				$rmap[$release_value][$artifact_type_name] .= sprintf($templates[$template]['ticket_summary'],
-						htmlentities($artifact->getDetails(), ENT_COMPAT, 'UTF-8'),
-						$artifact->getSummary());
-
-				$rmap[$release_value][$artifact_type_name] .= $templates[$template]['end_ticket'];
-
-				// Graph
-				@$rel_states[$release_value][$artifact->getStatusID()]['count']++;
-				$rel_states[$release_value][$artifact->getStatusID()]['name'] = $artifact->getStatusName();
-				@$total_rel_states[$release_value]++;
-				@$rel_art_states[$release_value][$artifact_type_name][$custom_status_name]['count']++;
-				$rel_art_states[$release_value][$artifact_type_name][$custom_status_name]['name'] = $custom_status_name;
-				@$total_rel_art_states[$release_value][$artifact_type_name]++;
 			}
 		}
 	}
