@@ -4,7 +4,9 @@
  *
  * Portions Copyright 1999-2001 (c) VA Linux Systems
  * The rest Copyright 2002-2004 (c) GForge Team
+ * Coyright 2005, Daniel Perez
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -23,13 +25,10 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-/* attachment download
-	by Daniel Perez - 2005
-*/
-
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'forum/ForumHTML.class.php';
+require_once $gfcommon.'forum/ForumStorage.class.php';
 
 /**
  *  goodbye - Just prints a message and a close button.
@@ -65,57 +64,58 @@ if (!$g || !is_object($g) || $g->isError()) {
 
 $f=new Forum($g,$forum_id);
 if (!$f || !is_object($f)) {
-	exit_error(_('Error getting Forum'),'forums');
+	exit_error(_('Error getting Forum'), 'forums');
 } elseif ($f->isError()) {
-	exit_error($f->getErrorMessage(),'forums');
+	exit_error($f->getErrorMessage(), 'forums');
 }
 
 if ($delete == "yes") {
-	session_require_perm ('forum', $f->getID(), 'post') ;
+	session_require_perm('forum', $f->getID(), 'post') ;
 
 	//only the user that created the attach  or forum admin can delete it (safecheck)
 	if (!$pending) { //pending messages aren't deleted from this page
-		$res = db_query_params ('SELECT userid FROM forum_attachment WHERE attachmentid=$1',
-			array ($attachid));
+		$res = db_query_params('SELECT userid FROM forum_attachment WHERE attachmentid=$1',
+					array($attachid));
 	} else {
-		$res = false ;
+		$res = false;
 	}
 	if ( (!$res) ) {
 		exit_error("Attachment Download error: ".db_error(),'forums');
 	}
 	if (! ((db_result($res,0,'userid') == user_getid()) || (forge_check_perm ('forum_admin', $f->Group->getID()))) ) {
 		goodbye(_('You cannot delete this attachment'));
-	}	else {
+	} else {
 		if (!$pending) {
-			if (db_query_params ('DELETE FROM forum_attachment WHERE attachmentid=$1',
-			array($attachid))) {
+			if (db_query_params('DELETE FROM forum_attachment WHERE attachmentid=$1',
+						array($attachid))) {
+				ForumStorage::instance()->delete($attachid)->commit();
 				goodbye(_('Attachment deleted'));
 			} else {
-				exit_error(db_error(),'forums');
+				exit_error(db_error(), 'forums');
 			}
 		}
 	}
 }
 
-if ($edit=="yes") {
-	session_require_perm ('forum', $f->getID(), 'post') ;
+if ($edit == "yes") {
+	session_require_perm('forum', $f->getID(), 'post') ;
 
 	//only the user that created the attach  or forum admin can edit it (safecheck)
 	if (!$pending) { //pending messages aren't deleted from this page
 		$res = db_query_params ('SELECT filename FROM forum_attachment WHERE attachmentid=$1',
-			array ($attachid));
-		$res2 = db_query_params ('SELECT posted_by FROM forum WHERE msg_id=$1',
-			array ($msg_id));
+					array($attachid));
+		$res2 = db_query_params('SELECT posted_by FROM forum WHERE msg_id=$1',
+					array($msg_id));
 	} else {
-		$res = false ;
-		$res2 = false ;
+		$res = false;
+		$res2 = false;
 	}
 	if ( (!$res) || (!$res2) ) {
-		exit_error("Attachment error:".db_error(),'forums');
+		exit_error("Attachment error:".db_error(), 'forums');
 	}
-	if (! ((db_result($res2,0,'posted_by') == user_getid()) || (forge_check_perm ('forum_admin', $f->Group->getID()))) ) {
+	if (! ((db_result($res2, 0, 'posted_by') == user_getid()) || (forge_check_perm('forum_admin', $f->Group->getID())))) {
 		goodbye(_('You cannot edit this attachment'));
-	}	else {
+	} else {
 		if ($doedit=="1") {
 			//actually edit the attach and save the info
 			forum_header(array('title'=>_('Attachments')));
@@ -141,24 +141,24 @@ if ($edit=="yes") {
 			foreach ($am->Getmessages() as $item) {
 				$feedback .= "<br />" . $item;
 			}
-			goodbye("Attachment saved");
+			goodbye(_('Attachment saved'));
 			forum_footer();
 			exit();
 		} else {
 			//show the form to edit the attach
-			forum_header(array('title'=>_('Attachments')));
+			forum_header(array('title' => _('Attachments')));
 			$fh = new ForumHTML($f);
 			if (!$fh || !is_object($fh)) {
-				exit_error(_('Error getting new ForumHTML'),'forums');
+				exit_error(_('Error getting new ForumHTML'), 'forums');
 			} elseif ($fh->isError()) {
-				exit_error($fh->getErrorMessage(),'forums');
+				exit_error($fh->getErrorMessage(), 'forums');
 			}
-			if (!db_result($res,0,'filename')) {
-				$filename = _("No attach found");
+			if (!db_result($res, 0, 'filename')) {
+				$filename = _('No attachment found');
 			} else {
-				$filename = db_result($res,0,'filename');
+				$filename = db_result($res, 0, 'filename');
 			}
-			echo $fh->LinkAttachEditForm($filename,$group_id,$forum_id,$attachid,$msg_id);
+			echo $fh->LinkAttachEditForm($filename, $group_id, $forum_id, $attachid, $msg_id);
 			forum_footer();
 			exit();
 		}
@@ -166,33 +166,34 @@ if ($edit=="yes") {
 	}
 }
 
-session_require_perm ('forum', $f->getID(), 'read') ;
+session_require_perm('forum', $f->getID(), 'read');
 
 if (!$attachid) {
 	exit_missing_param();
 }
 
-if ($pending=="yes") {
-	$res = db_query_params ('SELECT * FROM forum_pending_attachment WHERE attachmentid=$1',
-			array ($attachid));
+if ($pending == "yes") {
+	$res = db_query_params('SELECT * FROM forum_pending_attachment WHERE attachmentid=$1',
+			array($attachid));
 } else {
-	$res = db_query_params ('SELECT * FROM forum_attachment WHERE attachmentid=$1',
-			array ($attachid));
+	$res = db_query_params('SELECT * FROM forum_attachment WHERE attachmentid=$1',
+			array($attachid));
 }
 
 if (!$res || !db_numrows($res) ) {
 	exit_error("Attachment Download error: ".db_error(),'forums');
 }
-$extension = substr(strrchr(strtolower(db_result($res,0,'filename')), '.'), 1);
+
+$sysdebug_enable = false;
 
 $last = gmdate('D, d M Y H:i:s', db_result($res,0,'dateline'));
 header('Last-Modified: ' . $last . ' GMT');
 header('ETag: "' . db_result($res,0,'attachmentid').db_result($res,0,'filehash') . '"');
-
+$extension = substr(strrchr(strtolower(db_result($res,0,'filename')), '.'), 1);
 if ($extension != 'txt') {
 	header("Content-disposition: inline; filename=\"" . db_result($res,0,'filename') . "\"");
 	header('Content-transfer-encoding: binary');
-}	else {
+} else {
 	header("Content-disposition: attachment; filename=\"" . db_result($res,0,'filename') . "\"");
 }
 
@@ -205,16 +206,12 @@ if ($mimetype) {
 	header('Content-type: application/octet-stream');
 }
 
-$filedata = base64_decode(db_result($res,0,'filedata'));
-for ($i = 0; $i < strlen($filedata); $i = $i+100) {
-   $acum = substr($filedata, $i, 100);
-   echo $acum;
-}
-
+readfile_chunked(ForumStorage::instance()->get($attachid));
 flush();
+
 //increase the attach count
 if (!$pending) { //we don't care for the pending attach counter, it's just for administrative purposes
-	db_query_params ('UPDATE forum_attachment SET counter=counter+1 WHERE attachmentid=$1',
+	db_query_params('UPDATE forum_attachment SET counter=counter+1 WHERE attachmentid=$1',
 			array($attachid));
 }
 

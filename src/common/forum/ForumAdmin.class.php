@@ -7,6 +7,7 @@
  * Copyright 2005 (c) Daniel Perez
  * Copyright 2010 (c) Franck Villaume - Capgemini
  * Copyright (C) 2010-2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -37,24 +38,22 @@ class ForumAdmin extends Error {
 			$this->g = group_get_object($group_id);
 			$this->p =& $this->g->getPermission();
 			if (!$this->g->usesForum()) {
-				$this->setError(sprintf(_('%s does not use the Forum tool.'),
-				    $this->g->getPublicName()));
+				$this->setError(sprintf(_('%s does not use the Forum tool.'), $this->g->getPublicName()));
 				return;
 			}
 		}
 	}
 
 	/**
-	 *  PrintAdminMessageOptions - prints the different administrator options for a message
+	 * PrintAdminMessageOptions - prints the different administrator options for a message
 	 *
-	 *	@param   int	$msg_id		The Message ID
-	 *	@param   int	$group_id	The Project ID
-	 *	@param   int	$thread_id	The Thread ID : to return to the message if the user cancels (forumhtml only, not message.php)
-	 *	@param   int	$forum_id	The Forum ID : to return to the message if the user cancels (forumhtml only, not message.php)
-	 *	@param	 int	$return_to_message
-	 *	@return  string	The HTML output
+	 * @param	int	$msg_id		The Message ID
+	 * @param	int	$group_id	The Project ID
+	 * @param	int	$thread_id	The Thread ID : to return to the message if the user cancels (forumhtml only, not message.php)
+	 * @param	int	$forum_id	The Forum ID : to return to the message if the user cancels (forumhtml only, not message.php)
+	 * @param	int	$return_to_message
+	 * @return	string	The HTML output
 	 */
-
 	function PrintAdminMessageOptions($msg_id,$group_id,$thread_id=0,$forum_id=0,$return_to_message=0) {
 
 		$return = util_make_link('/forum/admin/?movethread='.$thread_id.'&msg_id='.$msg_id.'&group_id='.$group_id.'&forum_id='.$forum_id.'&return_to_message='.$return_to_message, html_image('ic/forum_move.gif', '37', '15', array('alt' => _('Move Thread'))));
@@ -71,47 +70,44 @@ class ForumAdmin extends Error {
 	}
 
 	/**
-	 *  PrintAdminOptions - prints the different administrator option for the forums (heading).
+	 * PrintAdminOptions - prints the different administrator option for the forums (heading).
 	 *
 	 */
-
 	function PrintAdminOptions() {
 		global $group_id, $forum_id;
-
-		echo '<p>'.util_make_link('/forum/admin/?group_id='.$group_id.'&add_forum=1', _('Add Forum'));
-		echo ' | '.util_make_link('/forum/admin/pending.php?action=view_pending&group_id='.$group_id, _('Manage Pending Messages')).'<br /></p>';
+		echo html_e('p', array(), util_make_link('/forum/admin/?group_id='.$group_id.'&add_forum=1', _('Add Forum')).
+			' | '.util_make_link('/forum/admin/pending.php?action=view_pending&group_id='.$group_id, _('Manage Pending Messages')).'<br />');
 	}
 
 	/**
-	 *  PrintAdminOptions - prints the administrator option for an individual forum, to link to the pending messages management
+	 * PrintAdminOptions - prints the administrator option for an individual forum, to link to the pending messages management
 	 *
-	 *	@param 	int		$forum_id	The Forum ID.
+	 * @param	int	$forum_id	The Forum ID.
 	 */
-
 	function PrintAdminPendingOption($forum_id) {
-		echo '<p>'.util_make_link('/forum/admin/pending.php?action=view_pending&group_id='.$this->group_id.'&forum_id='.$forum_id, _('Manage Pending Messages')).'<br /></p>';
+		echo html_e('p', array(), util_make_link('/forum/admin/pending.php?action=view_pending&group_id='.$this->group_id.'&forum_id='.$forum_id, _('Manage Pending Messages')).'<br />');
 	}
 
 	/**
-	 *  GetPermission - Gets the permission for the user
+	 * GetPermission - Gets the permission for the user
 	 *
-	 *  @return  object	 The permission
+	 * @return	object	 The permission
 	 */
 	function &GetPermission() {
 		return $this->p;
 	}
 
 	/**
-	 *  GetGroupObject - Gets the group object of the forum
+	 * GetGroupObject - Gets the group object of the forum
 	 *
-	 *  @return  object	 The group obj
+	 * @return	object	 The group obj
 	 */
 	function &GetGroupObject() {
 		return $this->g;
 	}
 
 	/**
-	 *  isGroupAdmin - checks whether the authorized user is a group admin for the forums. The user must be authenticated
+	 * isGroupAdmin - checks whether the authorized user is a group admin for the forums. The user must be authenticated
 	 *
 	 */
 	function isGroupAdmin() {
@@ -119,12 +115,11 @@ class ForumAdmin extends Error {
 	}
 
 	/**
-	 *  Authorized - authorizes and returns true if the user is authorized for the group, or false.
+	 * Authorized - authorizes and returns true if the user is authorized for the group, or false.
 	 *
-	 *  @param  string	 $group_id	The group id.
-	 *	@return bool
+	 * @param	string	 $group_id	The group id.
+	 * @return	bool
 	 */
-
 	function Authorized($group_id) {
 		if (!$group_id) {
 			$this->setGroupIdError();
@@ -149,15 +144,15 @@ class ForumAdmin extends Error {
 	}
 
 	/**
-	 *  ExecuteAction - Executes the action passed as parameter
+	 * ExecuteAction - Executes the action passed as parameter
 	 *
-	 *  @param  string	 $action	action to execute.
-	 *	@return string
+	 * @param	string	 $action	action to execute.
+	 * @return	string
 	 */
-	function ExecuteAction ($action) {
+	function ExecuteAction($action) {
 		global $HTML;
 
-		$feedback='';
+		$feedback = '';
 		if ($action == "change_status") { //change a forum
 			$forum_name = getStringFromRequest('forum_name');
 			$description = getStringFromRequest('description');
@@ -166,14 +161,14 @@ class ForumAdmin extends Error {
 			/*
 				Change a forum
 			*/
-			$f=new Forum($this->g,$group_forum_id);
+			$f = new Forum($this->g, $group_forum_id);
 			if (!$f || !is_object($f)) {
-				exit_error(_('Error getting Forum'),'forums');
+				exit_error(_('Error getting Forum'), 'forums');
 			} elseif ($f->isError()) {
-				exit_error($f->getErrorMessage(),'forums');
+				exit_error($f->getErrorMessage(), 'forums');
 			}
 
-			session_require_perm ('forum_admin', $f->Group->getID()) ;
+			session_require_perm('forum_admin', $f->Group->getID());
 
 			if (!$f->update($forum_name,$description,$send_all_posts_to)) {
 				exit_error($f->getErrorMessage(),'forums');
@@ -298,13 +293,13 @@ class ForumAdmin extends Error {
 					return false;
 				}
 			}
-			/* ]]> */</script>
-			<form name="pending" action="'.util_make_uri('forum/admin/pending.php').'" method="post">
+			/* ]]> */</script>';
+			echo $HTML->openForm(array('name' => 'pending', 'action' => util_make_uri('forum/admin/pending.php'), 'method' => 'post'));
+			echo '
 			<input type="hidden" name="action" value="update_pending" />
 			<input type="hidden" name="form_key" value="' . form_generate_key() . '" />
 			<input type="hidden" name="group_id" value="' . getIntFromRequest("group_id") . '" />
 			<input type="hidden" name="forum_id" value="' . $forum_id . '" />
-
 			';
 
 			echo html_build_select_box_from_assoc($moderated_forums,'forum_id',$forum_id);
@@ -315,7 +310,7 @@ class ForumAdmin extends Error {
 			$title[] = _('Message');
 			$title[] = "Action";
 
-			$res = db_query_params ('SELECT msg_id,subject,pm.group_forum_id,gl.forum_name FROM forum_pending_messages pm, forum_group_list gl WHERE pm.group_forum_id=$1 AND pm.group_forum_id=gl.group_forum_id AND gl.group_forum_id=$2',
+			$res = db_query_params('SELECT msg_id,subject,pm.group_forum_id,gl.forum_name FROM forum_pending_messages pm, forum_group_list gl WHERE pm.group_forum_id=$1 AND pm.group_forum_id=gl.group_forum_id AND gl.group_forum_id=$2',
 			array ($forum_id,
 				$forum_id));
 			if (!$res) {
@@ -336,10 +331,6 @@ class ForumAdmin extends Error {
 			$i = 2;
 			echo $HTML->listTableTop($title);
 			while ($onemsg = db_fetch_array($res)) {
-
-				//$url = 'pendingmsgdetail.php?msg_id=' . $onemsg[msg_id];
-				//<a href=\"javascript:msgdetail('$url');\">$onemsg[subject]</a>
-				$url = "http://www.google.com";
 				echo "
 				<tr " . $HTML->boxGetAltRowStyle($i++). ">
 					<td>$onemsg[forum_name]</td>
@@ -352,8 +343,8 @@ class ForumAdmin extends Error {
 			echo '
 			<input type="hidden" name="msgids" value="' . $ids . '" />
 			<p class="align-right"><input type="submit" onclick="return confirmDel();" name="update" value="' . _('Update') . '" /></p>
-			</form>
 			';
+			echo $HTML->closeForm();
 		}
 		if ($action == "update_pending") {
 			$group_id = getIntFromRequest("group_id");
@@ -379,13 +370,13 @@ class ForumAdmin extends Error {
 						//delete
 						db_begin();
 						if (!db_query_params ('DELETE FROM forum_pending_attachment WHERE msg_id=$1',
-			array ($msgids[$i]))) {
+									array ($msgids[$i]))) {
 							$error_msg .= "DB Error: ". db_error();
 							db_rollback();
 							break;
 						}
-						if (!db_query_params ('DELETE FROM forum_pending_messages WHERE msg_id=$1',
-			array ($msgids[$i]))) {
+						if (!db_query_params('DELETE FROM forum_pending_messages WHERE msg_id=$1',
+									array ($msgids[$i]))) {
 							$error_msg .= "DB Error: ". db_error();
 							db_rollback();
 							break;
@@ -397,13 +388,13 @@ class ForumAdmin extends Error {
 					case 3 : {
 						//release
 						$res1 = db_query_params ('SELECT * FROM forum_pending_messages WHERE msg_id=$1',
-			array ($msgids[$i]));
+									array ($msgids[$i]));
 						if (!$res1) {
 							$error_msg .= "DB Error " . db_error() . "<br />";
 							break;
 						}
 						$res2 = db_query_params ('SELECT * FROM forum_pending_attachment WHERE msg_id=$1',
-			array ($msgids[$i]));
+									array ($msgids[$i]));
 						if (!$res2) {
 							$error_msg .= "DB Error " . db_error() . "<br />";
 							break;
@@ -484,13 +475,13 @@ class ForumAdmin extends Error {
 							//delete the message and attach
 							db_begin();
 							if (!db_query_params ('DELETE FROM forum_pending_attachment WHERE msg_id=$1',
-			array ($msgids[$i]))) {
+										array ($msgids[$i]))) {
 								$error_msg .= "DB Error: ". db_error();
 								db_rollback();
 								break;
 							}
 							if (!db_query_params ('DELETE FROM forum_pending_messages WHERE msg_id=$1',
-			array ($msgids[$i]))) {
+										array ($msgids[$i]))) {
 								$error_msg .= "DB Error: ". db_error();
 								db_rollback();
 								break;
