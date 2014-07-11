@@ -28,10 +28,10 @@ require_once $gfcommon.'tracker/ArtifactExtraFieldElement.class.php';
 
 	/**
 	* Gets an ArtifactType object from the artifact type id
-	* 
+	*
 	* @param artType_id	the ArtifactType id
 	* @param res	the DB handle if passed in (optional)
-	* @return	the ArtifactType object	
+	* @return	the ArtifactType object
 	*/
 	function &artifactType_get_object($artType_id,$res=false) {
 		global $ARTIFACTTYPE_OBJ;
@@ -51,7 +51,7 @@ require_once $gfcommon.'tracker/ArtifactExtraFieldElement.class.php';
 			}
 		}
 		return $ARTIFACTTYPE_OBJ["_".$artType_id."_"];
-	}	
+	}
 
 function artifacttype_get_groupid ($artifact_type_id) {
 	global $ARTIFACTTYPE_OBJ;
@@ -90,7 +90,7 @@ class ArtifactType extends Error {
 	 * @var		array	extra_field
 	 */
 	var $extra_field;
-	
+
 	/**
 	 * Technicians db resource ID.
 	 *
@@ -204,7 +204,7 @@ class ArtifactType extends Error {
 			$this->setError(_('ArtifactType: Name, Description, Due Period, and Status Timeout are required'));
 			return false;
 		}
-		
+
 		if ($email_address) {
 			$invalid_emails = validate_emails($email_address);
 			if (count($invalid_emails) > 0) {
@@ -219,9 +219,9 @@ class ArtifactType extends Error {
 		$email_all = ((!$email_all) ? 0 : $email_all);
 
 		db_begin();
-		
-		$res = db_query_params ('INSERT INTO 
-			artifact_group_list 
+
+		$res = db_query_params ('INSERT INTO
+			artifact_group_list
 			(group_id,
 			name,
 			description,
@@ -233,8 +233,8 @@ class ArtifactType extends Error {
 			status_timeout,
 			submit_instructions,
 			browse_instructions,
-			datatype) 
-			VALUES 
+			datatype)
+			VALUES
 			($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)',
 					array ($this->Group->getID(),
 					       htmlspecialchars($name),
@@ -250,7 +250,7 @@ class ArtifactType extends Error {
 					       $datatype)) ;
 
 		$id = db_insertid($res,'artifact_group_list','group_artifact_id');
-		
+
 		if (!$res || !$id) {
 			$this->setError('ArtifactType: '.db_error());
 			db_rollback();
@@ -386,7 +386,7 @@ class ArtifactType extends Error {
 	function getName() {
 		return $this->data_array['name'];
 	}
-	
+
 	/**
 	 * getFormattedName - formatted name of this ArtifactType
 	 *
@@ -397,7 +397,7 @@ class ArtifactType extends Error {
 		$name = strtolower($name);
 		return $name;
 	}
-	
+
 	/**
 	 * getUnixName - returns the name used by email gateway
 	 *
@@ -406,7 +406,7 @@ class ArtifactType extends Error {
 	function getUnixName() {
 		return strtolower($this->Group->getUnixName()).'-'.$this->getFormattedName();
 	}
-	
+
 	/**
 	 * getReturnEmailAddress() - return the return email address for notification emails
 	 *
@@ -513,7 +513,7 @@ class ArtifactType extends Error {
 				}
 				$status_id=db_result($res,0,'status_id');
 			}
-			
+
 			if ($status_id < 1 || $status_id > 4) {
 				echo "INVALID STATUS REMAP: $status_id FROM SELECTED ELEMENT: $element_id";
 				return false;
@@ -578,7 +578,7 @@ class ArtifactType extends Error {
 		if (!session_loggedin()) {
 			return false;
 		}
-		$result = db_query_params ('SELECT count(*) AS count FROM artifact_type_monitor 
+		$result = db_query_params ('SELECT count(*) AS count FROM artifact_type_monitor
 			WHERE user_id=$1 AND group_artifact_id=$2',
 					   array (user_getid(),
 						  $this->getID())) ;
@@ -610,11 +610,11 @@ class ArtifactType extends Error {
 		} else {
 			$filter = '';
 		}
-		if (!isset($this->extra_fields["$filter"])) {
-			$this->extra_fields["$filter"] = array();
+		if (!isset($this->extra_fields[$filter])) {
+			$this->extra_fields[$filter] = array();
 			if (count($types)) {
 				$res = db_query_params ('SELECT *
-				FROM artifact_extra_field_list 
+				FROM artifact_extra_field_list
 				WHERE group_artifact_id=$1
                                 AND field_type = ANY ($2)
 				ORDER BY field_type ASC',
@@ -622,17 +622,17 @@ class ArtifactType extends Error {
 							       db_int_array_to_any_clause ($types))) ;
 			} else {
 				$res = db_query_params ('SELECT *
-				FROM artifact_extra_field_list 
+				FROM artifact_extra_field_list
 				WHERE group_artifact_id=$1
 				ORDER BY field_type ASC',
 							array ($this->getID())) ;
 			}
 			while($arr = db_fetch_array($res)) {
-				$this->extra_fields["$filter"][$arr['extra_field_id']] = $arr;
+				$this->extra_fields[$filter][$arr['extra_field_id']] = $arr;
 			}
 		}
-			
-		return $this->extra_fields["$filter"];
+
+		return $this->extra_fields[$filter];
 	}
 
 	/**
@@ -694,7 +694,7 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *	getExtraFieldName - Get a box name using the box ID 
+	 *	getExtraFieldName - Get a box name using the box ID
 	 *
 	 *	@param  int 	id of an extra field.
 	 *	@return string	name of extra field.
@@ -705,8 +705,8 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *	getExtraFieldElements - List of possible admin configured 
-	 *	extra field elements. This function is used to 
+	 *	getExtraFieldElements - List of possible admin configured
+	 *	extra field elements. This function is used to
 	 *	present the boxes and choices on the main Add/Update page.
 	 *
 	 *	@param	int	id of the extra field
@@ -732,7 +732,7 @@ class ArtifactType extends Error {
 //				return;
 //			}
 		}
-				
+
 		return $this->extra_field[$id];
 	}
 
@@ -817,13 +817,13 @@ class ArtifactType extends Error {
 		}
 		db_begin();
 		db_query_params ('DELETE FROM artifact_extra_field_data
-			WHERE EXISTS (SELECT artifact_id FROM artifact 
+			WHERE EXISTS (SELECT artifact_id FROM artifact
 			WHERE group_artifact_id=$1
 			AND artifact.artifact_id=artifact_extra_field_data.artifact_id)',
 				 array ($this->getID())) ;
 //echo '0.1'.db_error();
 		db_query_params ('DELETE FROM artifact_extra_field_elements
-			WHERE EXISTS (SELECT extra_field_id FROM artifact_extra_field_list 
+			WHERE EXISTS (SELECT extra_field_id FROM artifact_extra_field_list
 			WHERE group_artifact_id=$1
 			AND artifact_extra_field_list.extra_field_id = artifact_extra_field_elements.extra_field_id)',
 				 array ($this->getID())) ;
@@ -832,7 +832,7 @@ class ArtifactType extends Error {
 			WHERE group_artifact_id=$1',
 			array ($this->getID())) ;
 //echo '0.3'.db_error();
-		db_query_params ('DELETE FROM artifact_canned_responses 
+		db_query_params ('DELETE FROM artifact_canned_responses
 			WHERE group_artifact_id=$1',
 				 array ($this->getID())) ;
 //echo '1'.db_error();
@@ -841,25 +841,25 @@ class ArtifactType extends Error {
 				 array ($this->getID())) ;
 //echo '5'.db_error();
 		db_query_params ('DELETE FROM artifact_file
-			WHERE EXISTS (SELECT artifact_id FROM artifact 
+			WHERE EXISTS (SELECT artifact_id FROM artifact
 			WHERE group_artifact_id=$1
 			AND artifact.artifact_id=artifact_file.artifact_id)',
 				 array ($this->getID())) ;
 //echo '6'.db_error();
 		db_query_params ('DELETE FROM artifact_message
-			WHERE EXISTS (SELECT artifact_id FROM artifact 
+			WHERE EXISTS (SELECT artifact_id FROM artifact
 			WHERE group_artifact_id=$1
 			AND artifact.artifact_id=artifact_message.artifact_id)',
 				 array ($this->getID())) ;
 //echo '7'.db_error();
 		db_query_params ('DELETE FROM artifact_history
-			WHERE EXISTS (SELECT artifact_id FROM artifact 
+			WHERE EXISTS (SELECT artifact_id FROM artifact
 			WHERE group_artifact_id=$1
 			AND artifact.artifact_id=artifact_history.artifact_id)',
 				 array ($this->getID())) ;
 //echo '8'.db_error();
 		db_query_params ('DELETE FROM artifact_monitor
-			WHERE EXISTS (SELECT artifact_id FROM artifact 
+			WHERE EXISTS (SELECT artifact_id FROM artifact
 			WHERE group_artifact_id=$1
 			AND artifact.artifact_id=artifact_monitor.artifact_id)',
 				 array ($this->getID())) ;
@@ -872,7 +872,7 @@ class ArtifactType extends Error {
 			WHERE group_artifact_id=$1',
 				 array ($this->getID())) ;
 //echo '11'.db_error();
-		
+
 		db_commit();
 
 		$this->Group->normalizeAllRoles () ;
@@ -888,7 +888,7 @@ class ArtifactType extends Error {
 	function getCannedResponses() {
 		if (!isset($this->cannedresponses_res)) {
 			$this->cannedresponses_res = db_query_params ('SELECT id,title
-				FROM artifact_canned_responses 
+				FROM artifact_canned_responses
 				WHERE group_artifact_id=$1',
 								      array ($this->getID()));
 		}
@@ -898,7 +898,7 @@ class ArtifactType extends Error {
 	/**
 	 *	getStatuses - returns a result set of statuses.
 	 *
-	 *	These statuses are either the default open/closed or any number of 
+	 *	These statuses are either the default open/closed or any number of
 	 *	custom statuses that are stored in the extra fields. On insert/update
 	 *	to an artifact the status_id is remapped from the extra_field_element_id to
 	 *	the standard open/closed id.
@@ -955,12 +955,12 @@ class ArtifactType extends Error {
 			$name=$this->getName();
 			$description=$this->getDescription();
 		}
-		
+
 		if (!$name || !$description || !$due_period || !$status_timeout) {
 			$this->setError(_('ArtifactType: Name, Description, Due Period, and Status Timeout are required'));
 			return false;
 		}
-		
+
 		$result = db_query_params('SELECT count(*) AS count FROM artifact_group_list WHERE group_id=$1 AND name=$2 AND group_artifact_id!=$3',
 								  array ($this->Group->getID(), $name, $this->getID()));
 		if (! $result) {
@@ -971,7 +971,7 @@ class ArtifactType extends Error {
 			$this->setError(_('Tracker name already used'));
 			return false;
 		}
-		
+
 		if ($email_address) {
 			$invalid_emails = validate_emails($email_address);
 			if (count($invalid_emails) > 0) {
@@ -980,10 +980,10 @@ class ArtifactType extends Error {
 			}
 		}
 
-		$email_all = ((!$email_all) ? 0 : $email_all); 
-		$use_resolution = ((!$use_resolution) ? 0 : $use_resolution); 
+		$email_all = ((!$email_all) ? 0 : $email_all);
+		$use_resolution = ((!$use_resolution) ? 0 : $use_resolution);
 
-		$res = db_query_params  ('UPDATE artifact_group_list SET 
+		$res = db_query_params  ('UPDATE artifact_group_list SET
 			name=$1,
 			description=$2,
 			email_all_updates=$3,
@@ -1021,7 +1021,7 @@ class ArtifactType extends Error {
 	 */
 	function getBrowseList() {
 		$list = $this->data_array['browse_list'];
-		
+
 		// remove status_id in the browse list if a custom status exists
 		if (count($this->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_STATUS))) > 0) {
       $arr = explode(',', $list);
@@ -1041,7 +1041,7 @@ class ArtifactType extends Error {
 	 *	@return	boolean	success.
 	 */
 	function setBrowseList($list) {
-		$res=db_query_params ('UPDATE artifact_group_list 
+		$res=db_query_params ('UPDATE artifact_group_list
 		    SET browse_list=$1
 			WHERE group_artifact_id=$2',
 			array($list,
