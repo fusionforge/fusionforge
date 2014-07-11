@@ -24,6 +24,7 @@ Fusionforge-5.3.2:
 * Plugin fckeditor: dropped in favor of ckeditor
 * Docman: fix download count [#702] (TrivialDev)
 * Tracker: fix translation support [#688] (TrivialDev)
+* Projects: fix Project name with html [#687] (TrivialDev)
 
 Fusionforge-5.3.1:
 * Docman: Basic Webdav write mkcol support (TrivialDev)
