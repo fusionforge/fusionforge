@@ -9,6 +9,7 @@ Fusionforge-5.3.2:
 * Plugin mediawiki: fix paths in import/export scripts (Inria)
 * Plugin fckeditor: dropped in favor of ckeditor
 * Docman: fix download count [#702] (TrivialDev)
+* Tracker: fix translation support [#688] (TrivialDev)
 
 Fusionforge-5.3.1:
 * Docman: Basic Webdav write mkcol support (TrivialDev)
