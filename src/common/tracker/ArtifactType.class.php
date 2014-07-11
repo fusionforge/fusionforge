@@ -618,8 +618,8 @@ class ArtifactType extends Error {
 		} else {
 			$filter = '';
 		}
-		if (!isset($this->extra_fields["$filter"])) {
-			$this->extra_fields["$filter"] = array();
+		if (!isset($this->extra_fields[$filter])) {
+			$this->extra_fields[$filter] = array();
 			if (count($types)) {
 				$res = db_query_params ('SELECT *
 				FROM artifact_extra_field_list
@@ -636,11 +636,11 @@ class ArtifactType extends Error {
 							array ($this->getID())) ;
 			}
 			while($arr = db_fetch_array($res)) {
-				$this->extra_fields["$filter"][$arr['extra_field_id']] = $arr;
+				$this->extra_fields[$filter][$arr['extra_field_id']] = $arr;
 			}
 		}
 
-		return $this->extra_fields["$filter"];
+		return $this->extra_fields[$filter];
 	}
 
 	/**
