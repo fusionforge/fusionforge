@@ -517,7 +517,7 @@ class Group extends Error {
 		}
 
 		// Validate some values
-		if ($this->getPublicName() != $group_name) {
+		if ($this->getPublicName() != htmlspecialchars($group_name)) {
 			if (!$this->validateGroupName($group_name)) {
 				return false;
 			}
