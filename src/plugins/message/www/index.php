@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (C) 2011 Alain Peyrat, Alcatel-Lucent
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -45,13 +45,22 @@ require_once dirname(__FILE__)."/../../env.inc.php";
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'admin/admin_utils.php';
 
+global $HTML;
+global $feedback;
+
 $message= getStringFromRequest('body');
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$res = db_query_params('SELECT message FROM plugin_message', array());
 	if (!$res || db_numrows($res)==0) {
 		db_query_params('INSERT INTO plugin_message (message) VALUES ($1)', array($message));
+		$feedback = _('New message available.');
 	} else {
 		db_query_params('UPDATE plugin_message SET message=$1', array($message));
+		if (!empty($message)) {
+			$feedback = _('Message updated.');
+		} else {
+			$feedback = _('Message removed.');
+		}
 	}
 } else {
 	$res = db_query_params('SELECT message FROM plugin_message', array());
@@ -60,12 +69,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	}
 }
 
-site_admin_header(array('title'=>_('Global Message Administration')));
+site_admin_header(array('title' => _('Global Message Administration')));
 
-print _("Edit the message as you want. If you activate the HTML editor, you will be able to use WYSIWYG formatting (bold, colors...)");
+echo html_e('p', array(), _('Edit the message as you want. If you activate the HTML editor, you will be able to use WYSIWYG formatting (bold, colors...)'));
 
-print "<p/><center>";
-print "<form action=\"/plugins/message/\" method=\"post\">";
+print "<center>";
+echo $HTML->openForm(array('action' => '/plugins/message/', 'method' => 'post'));
 
 $params['body'] = $message;
 $params['width'] = "800";
@@ -75,7 +84,7 @@ plugin_hook_by_reference("text_editor", $params);
 echo $params['content'];
 
 print "<br /><br /><input type=\"submit\" value=\"" ._("Save") ."\" />";
-print "</form>";
+echo $HTML->closeForm();
 print "</center>";
 
 site_admin_footer($params);
