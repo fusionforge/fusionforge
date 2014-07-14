@@ -462,7 +462,6 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 			}
 			break;
 		case 'new_forum':
-			$t = forum_get_object ($reference);
 			$result = array_merge ($result, $this->_getRolesIdByAllowedAction ('forum_admin', $reference));
 			break;
 		}
