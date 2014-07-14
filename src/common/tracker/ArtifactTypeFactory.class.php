@@ -83,7 +83,7 @@ class ArtifactTypeFactory extends Error {
 	/**
 	 * getAllArtifactTypeIds - return a list of tracker ids.
 	 *
-	 * @return	array	The array of ArtifactType objects.
+	 * @return	array	The array of ArtifactType object ids.
 	 */
 	function &getAllArtifactTypeIds() {
 		$result = array () ;
