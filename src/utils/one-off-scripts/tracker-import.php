@@ -2,7 +2,7 @@
 /*-
  * one-off script to import tracker items (limited)
  *
- * Copyright © 2012, 2013
+ * Copyright © 2012, 2013, 2014
  *	Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
  * All rights reserved.
  *
@@ -38,8 +38,8 @@ require_once $gfcommon.'tracker/ArtifactCanned.class.php';
 require_once $gfcommon.'tracker/ArtifactTypeFactory.class.php';
 
 function usage($rc=1) {
-	echo "Usage: .../tracker-import.php 123 <t_123.json\n" .
-	    "\twhere 123 is the group_artifact_id of the tracker to append to\n";
+	echo "E: Usage: .../tracker-import.php 123 <t_123.json\n" .
+	    "N: where 123 is the group_artifact_id of the tracker to append to\n";
 	exit($rc);
 }
 
@@ -59,93 +59,247 @@ if (!($trk = util_nat0($argv1))) {
 /* read input and ensure it’s a JSON Array or Object */
 $iv = false;
 if (!minijson_decode(file_get_contents('php://stdin'), $iv)) {
-	echo "input is invalid JSON: $iv\n";
+	echo "E: input is invalid JSON: $iv\n";
 	die;
 }
 if (!is_array($iv)) {
-	echo "input top-level element is not an Array or Object\n";
+	echo "E: input top-level element is not an Array or Object\n";
 	die;
 }
 
 /* validate input elements */
-define('IT_STR', 0);
-define('IT_NUM', 1);
-define('IT_ARR', 2);
+define('IT_STR', 1);
+define('IT_LST', 2);	// list (Array or Object) of many
+define('IT_ARR', 3);	// Object with key/value check
+define('IT_NAT', 4);	// ∈ ℕ₀
+define('IT_ANY', 5);	// even NULL
+define('IP_REQ', 1);
+define('IP_OPT', 2);
+define('ICK_NO', 1);	// unchecked
+define('ICK_SC', 2);	// schema check (only IT_LST[*] and IT_ARR)
+define('ICK_FN', 3);	// function (false=bad, true=ok, array=rpl)
+
+/* ICK_FN called with (parent, fieldname, value, IT_*, IP_*); */
 
 /*
  * These are the fields we require in each entry. Note how we only
  * list those we actually import; so, if you change the below code
  * to import more, list them here, too.
  */
-$required_fields = array(
-	array(IT_STR, "_rpl_itempermalink"),
-	array(IT_STR, "details"),
-	array(IT_NUM, "last_modified_date"),
-	array(IT_NUM, "open_date"),
-	array(IT_NUM, "priority"),
-	array(IT_NUM, "submitted_by"),
-	array(IT_STR, "submitted_unixname"),
-	array(IT_STR, "summary"),
+$schema_changelog = array(
+	array("by",			IT_STR, IP_REQ, ICK_NO, 0),
+	array("entrydate",		IT_NAT, IP_REQ, ICK_NO, 0),
+	array("field_name",		IT_STR, IP_REQ, ICK_NO, 0),
+	array("new_value",		IT_STR, IP_OPT, ICK_NO, 0),
+	array("old_value",		IT_STR, IP_REQ, ICK_NO, 0),
+    );
+$schema_comments = array(
+	array("adddate",		IT_NAT, IP_REQ, ICK_NO, 0),
+	array("body",			IT_STR, IP_REQ, ICK_NO, 0),
+	array("from_email",		IT_STR, IP_REQ, ICK_NO, 0),
+	array("from_user",		IT_STR, IP_OPT, ICK_NO, 0),
+    );
+$schema_extrafields = array(
+	array("alias",			IT_STR, IP_OPT, ICK_NO, 0),
+	array("type",			IT_NAT, IP_REQ, ICK_NO, 0),
+	array("value",			IT_ANY, IP_REQ, ICK_NO, 0),
+    );
+$schema_votes = array(
+	array("votage_percent",		IT_NAT, IP_REQ, ICK_NO, 0),
+	array("voters",			IT_NAT, IP_REQ, ICK_NO, 0),
+	array("votes",			IT_NAT, IP_REQ, ICK_NO, 0),
+    );
+$schema_item = array(
+	array("_rpl_itempermalink",	IT_STR, IP_REQ, ICK_NO, 0),
+	array("_rpl_taskpermalink",	IT_STR, IP_OPT, ICK_NO, 0),	// ignored
+	array("_votes",			IT_ARR, IP_OPT, ICK_SC, $schema_votes),
+	array("assigned_email",		IT_STR, IP_OPT, ICK_NO, 0),
+	array("assigned_realname",	IT_STR, IP_OPT, ICK_NO, 0),
+	array("assigned_to",		IT_NAT, IP_OPT, ICK_NO, 0),
+	array("assigned_unixname",	IT_STR, IP_OPT, ICK_NO, 0),
+	array("close_date",		IT_NAT, IP_OPT, ICK_NO, 0),//…
+	array("details",		IT_STR, IP_REQ, ICK_NO, 0),
+	array("last_modified_date",	IT_NAT, IP_REQ, ICK_NO, 0),
+	array("open_date",		IT_NAT, IP_REQ, ICK_NO, 0),
+	array("priority",		IT_NAT, IP_REQ, ICK_NO, 0),
+	array("status_id",		IT_NAT, IP_OPT, ICK_NO, 0),//…
+	array("status_name",		IT_STR, IP_OPT, ICK_NO, 0),//…
+	array("submitted_by",		IT_NAT, IP_REQ, ICK_NO, 0),
+	array("submitted_email",	IT_STR, IP_OPT, ICK_NO, 0),
+	array("submitted_realname",	IT_STR, IP_OPT, ICK_NO, 0),
+	array("submitted_unixname",	IT_STR, IP_REQ, ICK_NO, 0),
+	array("summary",		IT_STR, IP_REQ, ICK_NO, 0),
+	array("~changelog",		IT_LST, IP_OPT, ICK_SC, $schema_changelog),
+	array("~comments",		IT_LST, IP_OPT, ICK_SC, $schema_comments),
+	array("~extrafields",		IT_LST, IP_OPT, ICK_SC, $schema_extrafields),
     );
 
-
-$ic = count($iv);
-echo "$ic tracker items to consider\n";
-
-/*
- * iterate over all elements in the top-level Array or Object,
- * ensuring each is a JSON Object and has all required fields
- */
-foreach ($iv as $k => $v) {
+function jsn_check_one($v, $schema, &$errstr, $nested) {
 	if (!is_array($v)) {
-		echo "item $k is not an Object\n";
-		die;
-	}
-	foreach ($required_fields as $r) {
-		if (!isset($v[$r[1]])) {
-			echo "item $k missing required field: " . $r[1] . "\n";
-			die;
+		$s = "not an Object";
+		$in = "";
+ jsn_check_false:
+		if (!$errstr) {
+			/* do not overwrite previous one */
+			$errstr = "item " . $nested . " " . ($in ? (
+			    ($ip == IP_REQ ? "required" : "optional") .
+			    " field " . $in . " ") : "") . "is " . $s;
 		}
-		switch ($r[0]) {
+		return false;
+	}
+	$rv = array();
+	foreach ($schema as $rule) {
+		list($in, $it, $ip, $ick, $icfn) = $rule;
+		if (!array_key_exists($in, $v)) {
+			if ($ip == IP_REQ) {
+				$s = "missing";
+				goto jsn_check_false;
+			}
+			/* optional field */
+			continue;
+		}
+		if (($v[$in] === NULL) && ($it != IT_ANY)) {
+			$s = "NULL";
+			goto jsn_check_move;
+		}
+		$vv = $v[$in];
+		switch ($it) {
 		case IT_STR:
-			/* test for scalar (not Array or Object) Value */
-			if (is_array($v[$r[1]])) {
-				echo "item $k field " . $r[1] .
-				    " is not a scalar!\n";
-				die;
+			if (is_array($vv)) {
+				$s = "not a scalar";
+				goto jsn_check_move;
 			}
+			$vv = "" . $vv;
 			break;
-		case IT_NUM:
-			/* test for scalar (not Array or Object) Value */
-			if (is_array($v[$r[1]])) {
-				echo "item $k field " . $r[1] .
-				    " is not a scalar!\n";
-				die;
-			}
-			/* test Value for integer >= 0 */
-			if (util_nat0($v[$r[1]]) === false) {
-				echo "item $k field " . $r[1] .
-				    " is not a positive-or-zero integer!\n";
-				die;
-			}
-			break;
+		case IT_LST:
+			/*
+			 * without ICK_SC this can also be an
+			 * array of e.g. strings, so we do not
+			 * check for array of arrays
+			 */
 		case IT_ARR:
-			/* test Value is a JSON Array or Object */
-			if (!is_array($v[$r[1]])) {
-				echo "item $k field " . $r[1] .
-				    " is not an array!\n";
-				die;
+			/* no other checks if ICK_NO */
+			if (!is_array($vv)) {
+				$s = "not an array";
+				goto jsn_check_move;
 			}
+			break;
+		case IT_NAT:
+			if (is_array($vv)) {
+				$s = "not a scalar";
+				goto jsn_check_move;
+			}
+			$vv = "" . $vv;
+			if (($tmp = util_nat0($vv)) === false) {
+				$s = "not a positive-or-zero integer";
+				goto jsn_check_move;
+			}
+			$vv = $tmp;
+			break;
+		case IT_ANY:
 			break;
 		default:
 			/* someone made a boo-boo editing this script */
-			echo "internal error: unknown type " . $r[0] .
-			    " for required field: " . $r[1] . "\n";
+			echo "E: internal error: unknown type " .
+			    $it . " for " . $nested . "." . $in . "\n";
 			die;
 		}
+		switch ($ick) {
+		case ICK_NO:
+			$ickres = true;
+			break;
+		case ICK_SC:
+			$s = "failing schema check";
+			switch ($it) {
+			case IT_ARR:
+				$ickres = jsn_check_one($vv, $icfn,
+				    $errstr, $nested . "." . $in);
+				break;
+			case IT_LST:
+				$ickres = array();
+				foreach ($vv as $ick_k => $ick_v) {
+					$icktmp = jsn_check_one($ick_v,
+					    $icfn, $errstr, $nested . "." .
+					    $in . "[" . $ick_k . "]");
+					if ($icktmp === false) {
+						$ickres = false;
+						break;
+					}
+					$ickres[$ick_k] =
+					    ($icktmp === true) ?
+					    $ick_v : $icktmp;
+				}
+				break;
+			default:
+				echo "E: internal error: ICK_SC type " .
+				    $it . " for " . $nested . "." . $in . "\n";
+				die;
+			}
+			break;
+		case ICK_FN:
+			$s = "failing user function check";
+			$ickres = call_user_func($icfn, $nested,
+			    $in, $vv, $it, $ip);
+			break;
+		default:
+			/* someone made a boo-boo editing this script */
+			echo "E: internal error: unknown check " .
+			    $ick . " for " . $nested . "." . $in . "\n";
+			die;
+		}
+		if ($ickres === false) {
+			/* $s set in the switch immediately above */
+ jsn_check_move:
+			if ($ip == IP_REQ)
+				goto jsn_check_false;
+			if (!$errstr) {
+				/* do not overwrite previous one */
+				$errstr = "item " . $nested . " " . ($in ? (
+				    ($ip == IP_REQ ? "required" : "optional") .
+				    " field " . $in . " ") : "") . "is " . $s;
+			}
+			echo "W: $errstr\n";
+			$errstr = "";
+		} else
+			$rv[$in] = ($ickres === true) ? $vv : $ickres;
 	}
+	$em = array();
+	foreach ($v as $vk => $vv) {
+		if (!array_key_exists($vk, $rv)) {
+			/* not yet seen => unknown */
+			$em[$vk] = $vv;
+		}
+	}
+	if ($em)
+		$rv['~~not-in-schema'] = $em;
+	return $rv;
 }
-echo "syntactically ok\n";
+
+function jsn_check($arr, $schema, &$errstr, $nested="") {
+	$rv = array();
+	if ($nested)
+		$nested .= ".";
+	foreach ($arr as $k => $v) {
+		if (($rv[$k] = jsn_check_one($v, $schema, $errstr,
+		    $nested . $k)) === false)
+			return false;
+	}
+	return $rv;
+}
+
+$ic = count($iv);
+echo "I: $ic tracker items to consider\n";
+
+$xs = "";
+$tmp = jsn_check($iv, $schema_item, $xs);
+if ($xs) {
+	echo "E: $xs\n";
+	die;
+}
+$iv = $tmp;
+unset($tmp);
+$ic = count($iv);
+echo "I: $ic items are syntactically ok\n";
 
 /* begin the import for sure */
 
@@ -155,7 +309,7 @@ $now = time();
 /* get the Tracker */
 $at =& artifactType_get_object($trk);
 if (!$at || !is_object($at) || $at->isError()) {
-	echo "cannot get tracker object\n";
+	echo "E: cannot get tracker object\n";
 	die;
 }
 
@@ -177,8 +331,67 @@ if ($at->usesCustomStatuses()) {
 $i = 0;
 db_begin();
 foreach ($iv as $k => $v) {
-	echo "importing $k (" . ++$i . "/$ic)\n";
+	echo "I: importing $k (" . ++$i . "/$ic)\n";
 	$importData = array();
+	$missingData = array();
+	if (isset($v["~~not-in-schema"]))
+		$missingData['unrecognised JSON slots'] = $v["~~not-in-schema"];
+	if (isset($v["_votes"]))
+		$missingData['votes'] = $v["_votes"]["votes"] . "/" .
+		    $v["_votes"]["voters"] . " (" .
+		    $v["_votes"]["votage_percent"] . "%)";
+	if ((isset($v["assigned_email"]) || isset($v["assigned_realname"]) ||
+	    isset($v["assigned_to"]) || isset($v["assigned_unixname"])) &&
+	    (!isset($v["assigned_to"]) || ($v["assigned_to"] != 100)) &&
+	    util_ifsetor($v["assigned_realname"]) != "Nobody" &&
+	    util_ifsetor($v["assigned_unixname"]) != "None") {
+		$missingData['assignee'] = array();
+		if (isset($v["assigned_email"]))
+			$missingData['assignee']['email'] = $v["assigned_email"];
+		if (isset($v["assigned_realname"]))
+			$missingData['assignee']['realname'] = $v["assigned_realname"];
+		if (isset($v["assigned_to"]))
+			$missingData['assignee']['uid'] = $v["assigned_to"];
+		if (isset($v["assigned_unixname"]))
+			$missingData['assignee']['unixname'] = $v["assigned_unixname"];
+	}
+	$missingData['status'] = array();
+	if (isset($v["close_date"]))
+		$missingData['status']['close date'] = $v["close_date"];
+	if (isset($v["status_id"]) || isset($v["status_name"])) {
+		$missingData['status']['forge'] = array();
+		if (isset($v["status_id"]))
+			$missingData['status']['forge']['mapping'] =
+			    $v["status_id"];
+		if (isset($v["status_name"]))
+			$missingData['status']['forge']['status'] =
+			    $v["status_name"];
+	}
+	if (isset($v["~extrafields"])) {
+		/* for now */
+		$missingData['extrafields'] = $v["~extrafields"];
+		/* search for custom status */
+		$fe = false;
+		foreach ($missingData['extrafields'] as $fn => $tmp) {
+			if ($tmp["type"] == 7) {
+				$fe = $fn;
+				break;
+			}
+		}
+		if ($fe) {
+			$tmp = $missingData['extrafields'][$fe];
+			$missingData['status']['user'] = array(
+				'field' => $fe,
+				'status' => $tmp["value"],
+			    );
+			if (isset($tmp["alias"]))
+				$missingData['status']['user']['alias'] =
+				    $tmp["alias"];
+			unset($missingData['extrafields'][$fe]);
+		}
+	}
+	if (!$missingData['status'])
+		unset($missingData['status']);
 
 	/* get all standard data fields (we use) */
 
@@ -195,19 +408,47 @@ foreach ($iv as $k => $v) {
 	    is_object($submitter) && !($submitter->isError())) {
 		/* map the unixname of the submitter to our local user */
 		$importData['user'] = $submitter->getID();
+	} elseif (($submitter =
+	    user_get_object_by_email($v["submitted_email"])) &&
+	    is_object($submitter) && !($submitter->isError())) {
+		/* map the eMail address of the submitter to our local user */
+		$importData['user'] = $submitter->getID();
 	} else {
-		/* submitted by Nobody, though we ignore the email */
+		$submitter = false;
+		/* submitted by Nobody */
 		$importData['user'] = 100;
+	}
+	/* store away original data of submitter */
+	$missingData['submitter'] = array(
+		'uid' => $v["submitted_by"],
+		'email' => $v["submitted_email"],
+		'realname' => $v["submitted_realname"],
+		'unixname' => $v["submitted_unixname"],
+	    );
+	if ($submitter !== false) {
+		/* compare original and new data */
+		if ($missingData['submitter']['uid'] == $submitter->getID())
+			unset($missingData['submitter']['uid']);
+		if ($missingData['submitter']['email'] == $submitter->getEmail())
+			unset($missingData['submitter']['email']);
+		if ($missingData['submitter']['realname'] == $submitter->getRealName())
+			unset($missingData['submitter']['realname']);
+		if ($missingData['submitter']['unixname'] == $submitter->getUnixName())
+			unset($missingData['submitter']['unixname']);
+		/* all equal? */
+		if (!$missingData['submitter'])
+			unset($missingData['submitter']);
 	}
 
 	/* prepend the old permalink in front of the details */
-	$details = "Imported from: " . str_replace('#', sprintf('%d', $k),
-	    $v["_rpl_itempermalink"]) . "\n\n" . $details;
+	$old_permalink = str_replace('#', sprintf('%d', $k),
+	    $v["_rpl_itempermalink"]);
+	$details = "Imported from: " . $old_permalink . "\n\n" . $details;
 
 	/* instantiate a new item */
 	$ah = new Artifact($at);
 	if (!$ah || !is_object($ah) || $ah->isError()) {
-		echo "cannot get the object\n";
+		echo "E: cannot get the object\n";
 		db_rollback();
 		die;
 	}
@@ -215,13 +456,113 @@ foreach ($iv as $k => $v) {
 	/* actually create the item */
 	if (!$ah->create($summary, $details, $assigned_to, $priority,
 	    $extra_fields, $importData)) {
-		echo "cannot import: " . $ah->getErrorMessage() . "\n";
+		echo "E: cannot import: " . $ah->getErrorMessage() . "\n";
 		db_rollback();
 		die;
 	}
+
+	/* import comments */
+	if (isset($v["~comments"])) {
+		foreach ($v["~comments"] as $tmp) {
+			$fe = $tmp["from_email"];
+			$fu = util_ifsetor($tmp["from_user"], "");
+			if (isset($tmp["from_user"]) &&
+			    ($tu = user_get_object_by_name($fu)) &&
+			    is_object($tu) && !($tu->isError())) {
+				/* nothing */;
+			} elseif (($tu =
+			    user_get_object_by_email($fe)) &&
+			    is_object($tu) && !($tu->isError())) {
+				/* nothing */;
+			} else
+				$tu = false;
+			if ($tu) {
+				if ($tu->getEmail() == $fe)
+					$fe = "";
+				if ($tu->getUnixName() == $fu)
+					$fu = "";
+				$fi = $tu->getID();
+			} else
+				$fi = 100;
+			if ($fe || $fu) {
+				$fb = "Originally submitted by ";
+				if ($fu)
+					$fb .= $fu . " ";
+				if ($fe)
+					$fb .= "<" . $fe . ">";
+				$fb .= "\n\n";
+			} else
+				$fb = "";
+			if (!db_query_params('INSERT INTO artifact_message
+				(artifact_id,submitted_by,from_email,adddate,body)
+				VALUES ($1,$2,$3,$4,$5)',
+			    array(
+				$ah->getID(),
+				$fi,
+				($tu ? $tu->getEmail() : $tmp["from_email"]),
+				$tmp["adddate"],
+				htmlspecialchars($fb . $tmp["body"]),
+			    ))) {
+				echo "E: cannot add comment: " .
+				    db_error() . "\n";
+				db_rollback();
+				die;
+			}
+		}
+	}
+
+	/* import changelogs */
+	if (isset($v["~changelog"])) {
+		foreach ($v["~changelog"] as $tmp) {
+			$importData = array();
+			$importData['time'] = (int)$tmp["entrydate"];
+			if (($tu = user_get_object_by_name($tmp["by"])) &&
+			    is_object($tu) && !($tu->isError())) {
+				$importData['user'] = $tu->getID();
+			} else {
+				$importData['user'] = 100;
+			}
+			if (!$ah->addHistory($tmp["field_name"],
+			    $tmp["old_value"],
+			    util_ifsetor($tmp["new_value"], ""),
+			    $importData)) {
+				echo "E: cannot add history entry: " .
+				    db_error() . "\n";
+				db_rollback();
+				die;
+			}
+		}
+	}
+
+	/* note import fallout */
+	if ($missingData && !($ah->addMessage('"Lost data importing from ' .
+	    $old_permalink . "\" =\t" . minijson_encode($missingData)))) {
+		echo "E: cannot add message: " . $ah->getErrorMessage() .
+		    " / " . db_error() . "\n";
+		db_rollback();
+		die;
+	}
+
 	/* log the import action */
-	$ah->addHistory("last-modified-before-import", date('Y-m-d H:i',
-	    $v["last_modified_date"]), $now);
+	if (!$ah->addHistory("-last-modified-then-import",
+	    date('Y-m-d H:i:s', $v["last_modified_date"]),
+	    date('Y-m-d H:i:s', $now))) {
+		echo "E: cannot seal history entry: " . db_error() . "\n";
+		db_rollback();
+		die;
+	}
+	if (!db_query_params('UPDATE artifact
+		SET last_modified_date=$2
+		WHERE artifact_id=$1',
+	    array(
+		$ah->getID(),
+		$now,
+	    ))) {
+		echo "E: cannot seal entry mtime: " . db_error() . "\n";
+		db_rollback();
+		die;
+	}
+	echo "D: imported $k as " . $ah->getID() . "\n";
 }
 db_commit();
-echo "ok\n";
+echo "I: done\n";
