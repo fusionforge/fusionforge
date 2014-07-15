@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PhpWiki 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-25 18:08+0200\n"
+"POT-Creation-Date: 2014-07-15 12:24+0200\n"
 "PO-Revision-Date: 2004-04-21 10:08+0800\n"
 "Last-Translator: DruryL <druryl@user.sourceforge.net>\n"
 "Language-Team: DruryL <druryl@users.sourceforge.net>\n"
@@ -534,12 +534,11 @@ msgstr ""
 msgid "Edited by: %s"
 msgstr "由 %s 編輯"
 
-msgid "LoadDump"
+msgid "Loaded the following pages:"
 msgstr ""
 
-#, php-format
-msgid "PageChange Notification of %s sent to %s"
-msgstr "%s 的 PageChange 通知已送給 %s"
+msgid "LoadDump"
+msgstr ""
 
 #, php-format
 msgid "PageChange Notification Error: Couldn't send %s to %s"
@@ -2917,9 +2916,6 @@ msgstr "下載頁面內容"
 msgid "FAILED"
 msgstr ""
 
-msgid "Source code syntax highlighter (via http://highlightjs.org/)."
-msgstr ""
-
 msgid "Provide access to PhpWiki's lower level system information."
 msgstr "提供存取 PhpWiki 下層系統資訊."
 
@@ -3338,19 +3334,6 @@ msgid "Pred"
 msgstr ""
 
 msgid "Rate"
-msgstr ""
-
-msgid "Display video in Flash or HTML5."
-msgstr ""
-
-#, fuzzy
-msgid "Both 'url' or 'file' parameters missing."
-msgstr "%s 或 %s 參數遺漏"
-
-msgid "Choose only one of 'url' or 'file' parameters."
-msgstr ""
-
-msgid "Your browser does not understand the HTML 5 video tag."
 msgstr ""
 
 msgid ""
@@ -6050,9 +6033,6 @@ msgstr ""
 msgid " (non %s users)."
 msgstr ""
 
-msgid "Views"
-msgstr ""
-
 #, fuzzy
 msgid "Watch"
 msgstr "寬度"
@@ -6199,6 +6179,13 @@ msgstr "搜尋"
 
 msgid "Edit this page"
 msgstr "編輯此頁面"
+
+#~ msgid "PageChange Notification of %s sent to %s"
+#~ msgstr "%s 的 PageChange 通知已送給 %s"
+
+#, fuzzy
+#~ msgid "Both 'url' or 'file' parameters missing."
+#~ msgstr "%s 或 %s 參數遺漏"
 
 #, fuzzy
 #~ msgid "Prediction: %s"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PhpWiki 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-25 18:08+0200\n"
+"POT-Creation-Date: 2014-07-15 12:24+0200\n"
 "PO-Revision-Date: 2005-02-12 16:23+0100\n"
 "Last-Translator: Antonio Bonifati ant[(at)]monitor.deis.unical.it\n"
 "Language-Team: \n"
@@ -519,12 +519,11 @@ msgstr ""
 msgid "Edited by: %s"
 msgstr "Modifica: %s"
 
-msgid "LoadDump"
+msgid "Loaded the following pages:"
 msgstr ""
 
-#, php-format
-msgid "PageChange Notification of %s sent to %s"
-msgstr "Pagini la notifica del cambiamento di %s trasmesso a %s"
+msgid "LoadDump"
+msgstr ""
 
 #, php-format
 msgid "PageChange Notification Error: Couldn't send %s to %s"
@@ -2781,9 +2780,6 @@ msgstr ""
 msgid "FAILED"
 msgstr ""
 
-msgid "Source code syntax highlighter (via http://highlightjs.org/)."
-msgstr ""
-
 msgid "Provide access to PhpWiki's lower level system information."
 msgstr ""
 
@@ -3188,18 +3184,6 @@ msgid "Pred"
 msgstr ""
 
 msgid "Rate"
-msgstr ""
-
-msgid "Display video in Flash or HTML5."
-msgstr ""
-
-msgid "Both 'url' or 'file' parameters missing."
-msgstr ""
-
-msgid "Choose only one of 'url' or 'file' parameters."
-msgstr ""
-
-msgid "Your browser does not understand the HTML 5 video tag."
 msgstr ""
 
 msgid ""
@@ -5708,9 +5692,6 @@ msgstr ""
 msgid " (non %s users)."
 msgstr ""
 
-msgid "Views"
-msgstr ""
-
 msgid "Watch"
 msgstr ""
 
@@ -5843,6 +5824,9 @@ msgstr ""
 
 msgid "Edit this page"
 msgstr ""
+
+#~ msgid "PageChange Notification of %s sent to %s"
+#~ msgstr "Pagini la notifica del cambiamento di %s trasmesso a %s"
 
 #, fuzzy
 #~ msgid "Prediction: %s"

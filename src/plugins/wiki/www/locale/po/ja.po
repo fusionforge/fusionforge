@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PhpWiki 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-25 18:08+0200\n"
+"POT-Creation-Date: 2014-07-15 12:24+0200\n"
 "PO-Revision-Date: 2003-06-07 09:01+0900\n"
 "Last-Translator: Tadashi Jokagi <webmaster@elf.no-ip.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -508,11 +508,10 @@ msgstr ""
 msgid "Edited by: %s"
 msgstr "編集: %s"
 
-msgid "LoadDump"
+msgid "Loaded the following pages:"
 msgstr ""
 
-#, php-format
-msgid "PageChange Notification of %s sent to %s"
+msgid "LoadDump"
 msgstr ""
 
 #, php-format
@@ -2831,9 +2830,6 @@ msgstr ""
 msgid "FAILED"
 msgstr ""
 
-msgid "Source code syntax highlighter (via http://highlightjs.org/)."
-msgstr ""
-
 msgid "Provide access to PhpWiki's lower level system information."
 msgstr ""
 
@@ -3244,18 +3240,6 @@ msgstr ""
 #, fuzzy
 msgid "Rate"
 msgstr "名称"
-
-msgid "Display video in Flash or HTML5."
-msgstr ""
-
-msgid "Both 'url' or 'file' parameters missing."
-msgstr ""
-
-msgid "Choose only one of 'url' or 'file' parameters."
-msgstr ""
-
-msgid "Your browser does not understand the HTML 5 video tag."
-msgstr ""
 
 msgid ""
 "Visualizes the Wiki structure in a graph using the 'dot' commandline tool "
@@ -5944,10 +5928,6 @@ msgid " (non %s users)."
 msgstr ""
 
 #, fuzzy
-msgid "Views"
-msgstr "ソースを見る"
-
-#, fuzzy
 msgid "Watch"
 msgstr "幅"
 
@@ -6090,6 +6070,10 @@ msgstr "スライドバー"
 
 msgid "Edit this page"
 msgstr "ページを編集しています。"
+
+#, fuzzy
+#~ msgid "Views"
+#~ msgstr "ソースを見る"
 
 #, fuzzy
 #~ msgid "Prediction: %s"
