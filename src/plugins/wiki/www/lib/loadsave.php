@@ -105,17 +105,15 @@ function EndLoadDump(&$request)
             $all_users = array_unique(array_merge($all_users, $userids));
         }
         $editedby = sprintf(_("Edited by: %s"), $request->_user->getId());
-        $content = "Loaded the following pages:\n" . join("\n", $pages);
-        if (mail(join(',', $all_emails), "[" . WIKI_NAME . "] " . _("LoadDump"),
+        $content = _("Loaded the following pages:") . "\n" . join("\n", $pages);
+        if (!mail(join(',', $all_emails), "[" . WIKI_NAME . "] " . _("LoadDump"),
             _("LoadDump") . "\n" .
                 $editedby . "\n\n" .
                 $content)
-        )
-            trigger_error(sprintf(_("PageChange Notification of %s sent to %s"),
-                join("\n", $pages), join(',', $all_users)), E_USER_NOTICE);
-        else
+        ) {
             trigger_error(sprintf(_("PageChange Notification Error: Couldn't send %s to %s"),
                 join("\n", $pages), join(',', $all_users)), E_USER_WARNING);
+        }
         unset($pages);
         unset($all_emails);
         unset($all_users);
