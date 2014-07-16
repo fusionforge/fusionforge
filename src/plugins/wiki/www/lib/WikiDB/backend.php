@@ -864,15 +864,17 @@ class WikiDB_backend_search_sql extends WikiDB_backend_search
     function _fulltext_match_clause($node)
     {
         // force word-style %word% for fulltext search
-        $word = '%' . $node->sql_quote($node->word) . '%';
+        $dbh = &$this->_dbh;
+        $word = '%' . $dbh->escapeSimple($word) . '%';
         // eliminate stoplist words
-        if ($this->isStoplisted($node))
+        if ($this->isStoplisted($node)) {
             return "1=1"; // and (pagename or 1) => and 1
-        else
+        } else {
             return $this->_pagename_match_clause($node)
                 // probably convert this MATCH AGAINST or SUBSTR/POSITION without wildcards
                 . ($this->_case_exact ? " OR content LIKE '$word'"
                     : " OR LOWER(content) LIKE '$word'");
+        }
     }
 }
 

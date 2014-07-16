@@ -1,4 +1,4 @@
-Date: Fri, 11 Jan 2013 11:16:51 +0000
+Date: Wed, 16 Jul 2014 15:48:13 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FFullTextSearchPlugin;
@@ -15,7 +15,8 @@ The **~FullTextSearch** [[Help:WikiPlugin|plugin]] searches the content of all p
 
 == Arguments ==
 
-All [[Help:PageList|PageList]] arguments, plus the following ones:
+All [[Help:PageList|PageList]] arguments (except //paganame//),
+plus the following ones:
 
 {| class="bordered"
 |-

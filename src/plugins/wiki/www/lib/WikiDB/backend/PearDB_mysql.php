@@ -215,6 +215,8 @@ class WikiDB_backend_PearDB_mysql_search
     function _pagename_match_clause($node)
     {
         $word = $node->sql();
+        $dbh = &$this->_dbh;
+        $word = $dbh->escapeSimple($word);
         if ($node->op == 'REGEX') { // posix regex extensions
             return "pagename REGEXP '$word'";
         } else {

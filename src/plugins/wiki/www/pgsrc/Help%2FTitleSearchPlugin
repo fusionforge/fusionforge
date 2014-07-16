@@ -1,4 +1,4 @@
-Date: Fri,  7 Dec 2012 14:58:45 +0000
+Date: Wed, 16 Jul 2014 15:48:13 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FTitleSearchPlugin;
@@ -18,7 +18,8 @@ otherwise the found page list is displayed.
 
 == Arguments ==
 
-All [[Help:PageList|PageList]] arguments, plus the following ones:
+All [[Help:PageList|PageList]] arguments (except //paganame//),
+plus the following ones:
 
 {| class="bordered"
 |-

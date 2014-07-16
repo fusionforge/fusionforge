@@ -96,10 +96,11 @@ class TextSearchQuery
      */
     function TextSearchQuery($search_query, $case_exact = false, $regex = 'auto')
     {
-        if ($regex == 'none' or !$regex)
+        if ($regex == 'none' or !$regex) {
             $this->_regex = 0;
-        elseif (defined("TSQ_REGEX_" . strtoupper($regex)))
-            $this->_regex = constant("TSQ_REGEX_" . strtoupper($regex)); else {
+        } elseif (defined("TSQ_REGEX_" . strtoupper($regex))) {
+            $this->_regex = constant("TSQ_REGEX_" . strtoupper($regex));
+        } else {
             trigger_error(fmt("Unsupported argument: %s=%s", 'regex', $regex));
             $this->_regex = 0;
         }
