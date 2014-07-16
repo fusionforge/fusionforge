@@ -872,7 +872,7 @@ class Artifact extends Error {
 		}
 		$qpa = db_construct_qpa ($qpa,
 					 'WHERE artifact_id=$1 AND group_artifact_id=$2',
-					 array ($this->getID(), $artifact_type_id)) ;
+					 array ($this->getID(), $this->ArtifactType->getID())) ;
 		$result=db_query_qpa($qpa);
 
 		if (!$result || db_affected_rows($result) < 1) {
