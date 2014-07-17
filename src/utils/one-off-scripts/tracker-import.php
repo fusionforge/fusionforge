@@ -373,7 +373,7 @@ $efaliases = array();
 foreach ($eflist as $ef) {
 	$efid = (int)$ef["extra_field_id"];
 	$efnames[$ef["field_name"]] = $efid;
-	if (isset($ef["alias"]))
+	if (util_ifsetor($ef["alias"]))
 		$efaliases[preg_replace('/^@/', '', $ef["alias"])] = $efid;
 	$efelems[$efid] = array();
 	foreach ($at->getExtraFieldElements($efid) as $efelem) {
@@ -414,9 +414,10 @@ foreach ($iv as $k => $v) {
 	$missingData = array();
 	$tbd_thislinks = array();
 	$new_extra_fields = $extra_fields;
-	if (isset($v["~~not-in-schema"]))
+	if (util_ifsetor($v["~~not-in-schema"]))
 		$missingData['unrecognised JSON slots'] = $v["~~not-in-schema"];
-	if (isset($v["_votes"]))
+	if (isset($v["_votes"]) && ($v["_votes"]["votes"] ||
+	    $v["_votes"]["voters"] || $v["_votes"]["votage_percent"]))
 		$missingData['votes'] = $v["_votes"]["votes"] . "/" .
 		    $v["_votes"]["voters"] . " (" .
 		    $v["_votes"]["votage_percent"] . "%)";
@@ -438,16 +439,16 @@ foreach ($iv as $k => $v) {
 	$missingData['status'] = array();
 	if (util_ifsetor($v["close_date"]))
 		$missingData['status']['close date'] = $v["close_date"];
-	if (isset($v["status_id"]) || isset($v["status_name"])) {
+	if (util_ifsetor($v["status_id"]) || util_ifsetor($v["status_name"])) {
 		$missingData['status']['forge'] = array();
-		if (isset($v["status_id"]))
+		if (util_ifsetor($v["status_id"]))
 			$missingData['status']['forge']['mapping'] =
 			    $v["status_id"];
-		if (isset($v["status_name"]))
+		if (util_ifsetor($v["status_name"]))
 			$missingData['status']['forge']['status'] =
 			    $v["status_name"];
 	}
-	if (isset($v["~extrafields"])) {
+	if (util_ifsetor($v["~extrafields"])) {
 		$efx = $v["~extrafields"];
 		/* search for custom status */
 		$fe = false;
@@ -471,7 +472,7 @@ foreach ($iv as $k => $v) {
 				'field' => $fe,
 				'status' => $tmp["value"],
 			    );
-			if (isset($tmp["alias"]))
+			if (util_ifsetor($tmp["alias"]))
 				$missingData['status']['user']['alias'] =
 				    $tmp["alias"];
 			unset($efx[$fe]);
@@ -792,12 +793,11 @@ foreach ($iv as $k => $v) {
 	}
 
 	/* import comments */
-	if (isset($v["~comments"])) {
+	if (util_ifsetor($v["~comments"])) {
 		foreach ($v["~comments"] as $tmp) {
 			$fe = $tmp["from_email"];
 			$fu = util_ifsetor($tmp["from_user"], "");
-			if (isset($tmp["from_user"]) &&
-			    ($tu = user_get_object_by_name($fu)) &&
+			if ($fu && ($tu = user_get_object_by_name($fu)) &&
 			    is_object($tu) && !($tu->isError())) {
 				/* nothing */;
 			} elseif (($tu =
@@ -842,7 +842,7 @@ foreach ($iv as $k => $v) {
 	}
 
 	/* import changelogs */
-	if (isset($v["~changelog"])) {
+	if (util_ifsetor($v["~changelog"])) {
 		foreach ($v["~changelog"] as $tmp) {
 			$importData = array();
 			$importData['time'] = (int)$tmp["entrydate"];
@@ -865,7 +865,7 @@ foreach ($iv as $k => $v) {
 	}
 
 	/* import files */
-	if (isset($v["~files"])) {
+	if (util_ifsetor($v["~files"])) {
 		$missingData['lost files'] = array();
 		foreach ($v["~files"] as $tmp) {
 			$importData = array();
@@ -906,7 +906,7 @@ foreach ($iv as $k => $v) {
 	}
 
 	/* import backlinks (from dst only; mixed are handled in tbd_links) */
-	if (isset($v["~backlinks"])) {
+	if (util_ifsetor($v["~backlinks"])) {
 		/* put into arrays */
 		$fi = array();
 		foreach ($v["~backlinks"] as $tmp) {
@@ -968,7 +968,7 @@ foreach ($iv as $k => $v) {
 	}
 
 	/* import task relationships */
-	if (isset($v["~related_tasks"])) {
+	if (util_ifsetor($v["~related_tasks"])) {
 		$fb = "Task relationships:\n";
 		foreach ($v["~related_tasks"] as $tmp) {
 			$fb .= "\n" . str_replace('#', sprintf('%d', $tmp),
