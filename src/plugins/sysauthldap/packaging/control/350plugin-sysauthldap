@@ -1,5 +1,5 @@
 Package: @PACKAGE@-plugin-sysauthldap
 Architecture: all
-Depends: @OLDPACKAGE@-common, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, php5-cli, php5-ldap, ${misc:Depends}
+Depends: @OLDPACKAGE@-common, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, @OLDPACKAGE@-web-apache2, php5-cli, php5-ldap, ${misc:Depends}
 Recommends: slapd, ldap-utils
 Description: collaborative development tool - system authentication via LDAP
