@@ -18,7 +18,7 @@ require_once 'lib/WysiwygEdit.php';
 class WysiwygEdit_Wikiwyg extends WysiwygEdit
 {
 
-    function WysiwygEdit_Wikiwyg()
+    function __construct()
     {
         global $request, $LANG;
         $this->_transformer_tags = false;

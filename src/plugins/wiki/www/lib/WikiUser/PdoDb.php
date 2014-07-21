@@ -64,7 +64,7 @@ class _PdoDbPassUser
             $dbh =& $this->_auth_dbi;
             $db_result = $dbh->query(sprintf($this->_prefs->_select, $dbh->quote($this->_userid)));
             // patched by frederik@pandora.be
-            $prefs = $db_result->fetch(PDO_FETCH_BOTH);
+            $prefs = $db_result->fetch(PDO::FETCH_BOTH);
             $prefs_blob = @$prefs["prefs"];
             if ($restored_from_db = $this->_prefs->retrieve($prefs_blob)) {
                 $this->_prefs->updatePrefs($restored_from_db);
@@ -138,7 +138,7 @@ class _PdoDbPassUser
                 and $this->_authselect
         ) {
             try {
-                $this->_authselect->bindParam("userid", $this->_userid, PDO_PARAM_STR, 48);
+                $this->_authselect->bindParam("userid", $this->_userid, PDO::PARAM_STR, 48);
                 $this->_authselect->execute();
             } catch (PDOException $e) {
                 trigger_error("SQL Error: " . $e->getMessage(), E_USER_WARNING);
@@ -151,7 +151,7 @@ class _PdoDbPassUser
                 trigger_error(fmt("%s is missing", 'DBAUTH_AUTH_USER_EXISTS'),
                     E_USER_WARNING);
             $this->_authcheck = $dbh->prepare($dbi->getAuthParam('auth_check'));
-            $this->_authcheck->bindParam("userid", $this->_userid, PDO_PARAM_STR, 48);
+            $this->_authcheck->bindParam("userid", $this->_userid, PDO::PARAM_STR, 48);
             $this->_authcheck->execute();
             if ($this->_authcheck->fetchColumn())
                 return true;
@@ -174,8 +174,8 @@ class _PdoDbPassUser
         ) {
             $passwd = $GLOBALS['HTTP_POST_VARS']['auth']['passwd'];
             try {
-                $this->_authcreate->bindParam("userid", $this->_userid, PDO_PARAM_STR, 48);
-                $this->_authcreate->bindParam("password", $passwd, PDO_PARAM_STR, 48);
+                $this->_authcreate->bindParam("userid", $this->_userid, PDO::PARAM_STR, 48);
+                $this->_authcreate->bindParam("password", $passwd, PDO::PARAM_STR, 48);
                 $rs = $this->_authselect->execute();
             } catch (PDOException $e) {
                 trigger_error("SQL Error: " . $e->getMessage(), E_USER_WARNING);
@@ -210,9 +210,9 @@ class _PdoDbPassUser
         //NOTE: for auth_crypt_method='crypt'  defined('ENCRYPTED_PASSWD',true) must be set
         if ($this->_auth_crypt_method == 'crypt') {
             try {
-                $this->_authselect->bindParam("userid", $this->_userid, PDO_PARAM_STR, 48);
+                $this->_authselect->bindParam("userid", $this->_userid, PDO::PARAM_STR, 48);
                 $this->_authselect->execute();
-                $rs = $this->_authselect->fetch(PDO_FETCH_BOTH);
+                $rs = $this->_authselect->fetch(PDO::FETCH_BOTH);
             } catch (PDOException $e) {
                 trigger_error("SQL Error: " . $e->getMessage(), E_USER_WARNING);
                 return false;
@@ -221,10 +221,10 @@ class _PdoDbPassUser
             $result = $this->_checkPass($submitted_password, $stored_password);
         } else {
             try {
-                $this->_authselect->bindParam("password", $submitted_password, PDO_PARAM_STR, 48);
-                $this->_authselect->bindParam("userid", $this->_userid, PDO_PARAM_STR, 48);
+                $this->_authselect->bindParam("password", $submitted_password, PDO::PARAM_STR, 48);
+                $this->_authselect->bindParam("userid", $this->_userid, PDO::PARAM_STR, 48);
                 $this->_authselect->execute();
-                $rs = $this->_authselect->fetch(PDO_FETCH_BOTH);
+                $rs = $this->_authselect->fetch(PDO::FETCH_BOTH);
             } catch (PDOException $e) {
                 trigger_error("SQL Error: " . $e->getMessage(), E_USER_WARNING);
                 return false;
@@ -277,8 +277,8 @@ class _PdoDbPassUser
                 $submitted_password = crypt($submitted_password);
         }
         try {
-            $this->_authupdate->bindParam("password", $submitted_password, PDO_PARAM_STR, 48);
-            $this->_authupdate->bindParam("userid", $this->_userid, PDO_PARAM_STR, 48);
+            $this->_authupdate->bindParam("password", $submitted_password, PDO::PARAM_STR, 48);
+            $this->_authupdate->bindParam("userid", $this->_userid, PDO::PARAM_STR, 48);
             $this->_authupdate->execute();
         } catch (PDOException $e) {
             trigger_error("SQL Error: " . $e->getMessage(), E_USER_WARNING);

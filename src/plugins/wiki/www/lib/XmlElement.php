@@ -206,10 +206,9 @@ class XmlContent
  */
 class XmlElement extends XmlContent
 {
-    function XmlElement($tagname /* , $attr_or_content , ...*/)
+    function __construct($tagname /* , $attr_or_content , ...*/)
     {
-        //FIXME: php5 incompatible
-        $this->XmlContent();
+        parent::__construct();
         $this->_init(func_get_args());
     }
 

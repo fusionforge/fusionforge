@@ -12,16 +12,13 @@ class WikiDB_backend_ADODB_oci8po
 {
     public $_prefix;
 
-    /**
-     * Constructor.
-     */
-    function WikiDB_backend_ADODB_oci8po($dbparams)
+    function __construct($dbparams)
     {
         // Lowercase Assoc arrays
         define('ADODB_ASSOC_CASE', 0);
 
         // Backend constructor
-        $this->WikiDB_backend_ADODB($dbparams);
+        parent::__construct($dbparams);
 
         // Empty strings are NULLS in Oracle
         $this->_expressions['notempty'] = "IS NOT NULL";

@@ -49,10 +49,10 @@ require_once 'lib/WikiDB/backend/PearDB_pgsql.php';
 class WikiDB_backend_PearDB_ffpgsql
     extends WikiDB_backend_PearDB_pgsql
 {
-    function WikiDB_backend_PearDB_ffpgsql($dbparams)
+    function __construct($dbparams)
     {
         $dbparams['dsn'] = str_replace('ffpgsql:', 'pgsql:', $dbparams['dsn']);
-        parent::WikiDB_backend_PearDB_pgsql($dbparams);
+        parent::__construct($dbparams);
 
         $p = strlen(PAGE_PREFIX) + 1;
         $page_tbl = $this->_table_names['page_tbl'];

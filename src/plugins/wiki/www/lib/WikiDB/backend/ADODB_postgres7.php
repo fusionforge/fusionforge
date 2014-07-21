@@ -17,12 +17,9 @@ if (!defined("USE_BYTEA")) // see schemas/psql-initialize.sql
 class WikiDB_backend_ADODB_postgres7
     extends WikiDB_backend_ADODB
 {
-    /**
-     * Constructor.
-     */
-    function WikiDB_backend_ADODB_postgres7($dbparams)
+    function __construct($dbparams)
     {
-        $this->WikiDB_backend_ADODB($dbparams);
+        parent::__construct($dbparams);
         if (!$this->_dbh->_connectionID) return;
 
         $this->_serverinfo = $this->_dbh->ServerInfo();

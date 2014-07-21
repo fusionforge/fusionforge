@@ -812,8 +812,7 @@ class WikiPageName
      */
     public $anchor;
 
-    /** Constructor
-     *
+    /**
      * @param mixed $name Page name.
      * WikiDB_Page, WikiDB_PageRevision, or string.
      * This can be a relative subpage name (like '/SubPage'),
@@ -824,7 +823,7 @@ class WikiPageName
      *
      * @param mixed $anchor For links to anchors in page.
      */
-    function WikiPageName($name, $basename = false, $anchor = false)
+    function __construct($name, $basename = false, $anchor = false)
     {
         if (is_string($name)) {
             $this->shortName = $name;
@@ -1724,14 +1723,13 @@ function isActionPage($filename)
  */
 class Alert
 {
-    /** Constructor
-     *
+    /**
      * @param mixed  $head    Header ("title") for alert box.
      * @param mixed  $body    The text in the alert box.
      * @param array  $buttons An array mapping button labels to URLs.
      *    The default is a single "Okay" button pointing to $request->getURLtoSelf().
      */
-    function Alert($head, $body, $buttons = array())
+    function __construct($head, $body, $buttons = array())
     {
         if (is_array($body)) {
             $html = HTML::ol();

@@ -217,7 +217,7 @@ class _PageList_Column_ratingvalue extends _PageList_Column
  */
 class _PageList_Column_ratingwidget extends _PageList_Column_custom
 {
-    function _PageList_Column_ratingwidget($params)
+    function __construct($params)
     {
         $this->_pagelist =& $params[3];
         $this->_PageList_Column($params[0], $params[1], $params[2]);

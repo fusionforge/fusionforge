@@ -17,10 +17,7 @@ class WikiDB_cvs
 {
     public $_backend;
 
-    /**
-     * Constructor requires the DB parameters.
-     */
-    function WikiDB_cvs($dbparams)
+    function __construct($dbparams)
     {
         if (loadPhpExtension('cvsclient'))
             $this->_backend = new WikiDB_backend_cvsclient($dbparams);

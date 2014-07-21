@@ -422,11 +422,7 @@ class WikiGroup
  */
 class GroupNone extends WikiGroup
 {
-
-    /**
-     * Constructor
-     */
-    function GroupNone()
+    function __construct()
     {
         return;
     }
@@ -482,13 +478,10 @@ class GroupNone extends WikiGroup
  */
 class GroupWikiPage extends WikiGroup
 {
-
     /**
-     * Constructor
-     *
      * Initializes the three superclass instance variables
      */
-    function GroupWikiPage()
+    function __construct()
     {
         //$this->request = &$GLOBALS['request'];
         $this->username = $this->_getUserName();
@@ -531,9 +524,8 @@ class GroupWikiPage extends WikiGroup
      * @param object $group_page WikiDB_Page object for the group's page
      * @param bool $strict
      * @return boolean True if user is a member, else false.
-     * @access private
      */
-    function _inGroupPage($group_page, $strict = false)
+    private function _inGroupPage($group_page, $strict = false)
     {
         $group_revision = $group_page->getCurrentRevision();
         if ($group_revision->hasDefaultContents()) {
@@ -625,10 +617,7 @@ class GroupDb extends WikiGroup
 
     public $_is_member, $_group_members, $_user_groups;
 
-    /**
-     * Constructor
-     */
-    function GroupDb()
+    function __construct()
     {
         global $DBAuthParams, $DBParams;
         //$this->request = &$GLOBALS['request'];
@@ -855,11 +844,7 @@ class GroupDb_ADODB extends GroupDb
  */
 class GroupFile extends WikiGroup
 {
-
-    /**
-     * Constructor
-     */
-    function GroupFile()
+    function __construct()
     {
         //$this->request = &$GLOBALS['request'];
         $this->username = $this->_getUserName();
@@ -971,11 +956,7 @@ class GroupFile extends WikiGroup
  */
 class GroupLdap extends WikiGroup
 {
-
-    /**
-     * Constructor
-     */
-    function GroupLdap()
+    function __construct()
     {
         //$this->request = &$GLOBALS['request'];
         $this->username = $this->_getUserName();

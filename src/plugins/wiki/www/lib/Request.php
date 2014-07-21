@@ -1044,8 +1044,6 @@ class Request_AccessLog
 class Request_AccessLogEntry
 {
     /**
-     * Constructor.
-     *
      * The log entry will be automatically appended to the log file or
      * SQL table when the current request terminates.
      *
@@ -1060,9 +1058,8 @@ class Request_AccessLogEntry
      *    $log_entry->push($request);
      * </pre>
      *
-     *
      */
-    function Request_AccessLogEntry(&$accesslog)
+    function __construct(&$accesslog)
     {
         $this->_accesslog = $accesslog;
         $this->logfile = $accesslog->logfile;

@@ -8,16 +8,13 @@ require_once 'lib/WikiDB/backend/ADODB.php';
 class WikiDB_backend_ADODB_mssqlnative
     extends WikiDB_backend_ADODB
 {
-    /**
-     * Constructor.
-     */
-    function WikiDB_backend_ADODB_mssqlnative($dbparams)
+    function __construct($dbparams)
     {
         // Lowercase Assoc arrays
         define('ADODB_ASSOC_CASE', 0);
 
         // Backend constructor
-        $this->WikiDB_backend_ADODB($dbparams);
+        parent::__construct($dbparams);
 
         // Empty strings in MSSQL?  NULLS?
         $this->_expressions['notempty'] = "NOT LIKE ''";

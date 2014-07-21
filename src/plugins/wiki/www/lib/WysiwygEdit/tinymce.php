@@ -19,7 +19,7 @@ require_once 'lib/WysiwygEdit.php';
 class WysiwygEdit_tinymce extends WysiwygEdit
 {
 
-    function WysiwygEdit_tinymce()
+    function __construct()
     {
         $this->_transformer_tags = false;
         $this->BasePath = DATA_PATH . '/themes/default/tiny_mce/';

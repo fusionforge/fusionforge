@@ -52,7 +52,7 @@ class WikiRequest extends Request
 {
     public $_dbi;
 
-    function WikiRequest()
+    function __construct()
     {
         $this->_dbi = WikiDB::open($GLOBALS['DBParams']);
         // first mysql request costs [958ms]! [670ms] is mysql_connect()
@@ -433,9 +433,8 @@ class WikiRequest extends Request
      * Fails silently.
      *
      * @param $userid string Userid to attempt to sign in as.
-     * @access private
      */
-    function _signIn($userid)
+    private function _signIn($userid)
     {
         if (ENABLE_USER_NEW) {
             if (!$this->_user)

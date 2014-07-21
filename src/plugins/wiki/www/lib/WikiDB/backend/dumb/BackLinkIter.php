@@ -11,7 +11,7 @@ require_once 'lib/WikiDB/backend.php';
 class WikiDB_backend_dumb_BackLinkIter
     extends WikiDB_backend_iterator
 {
-    function WikiDB_backend_dumb_BackLinkIter(&$backend, &$all_pages, $pagename)
+    function __construct(&$backend, &$all_pages, $pagename)
     {
         $this->_pages = $all_pages;
         $this->_backend = &$backend;

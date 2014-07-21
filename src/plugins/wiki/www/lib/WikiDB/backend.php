@@ -292,12 +292,18 @@ class WikiDB_backend
     /**
      * Find pages which link to or are linked from a page.
      *
-     * @param $pagename string Page name.
-     * @param $reversed boolean True to get backlinks.
+     * @param string    $pagename  Page name.
+     * @param bool      $reversed True to get backlinks.
+     * @param bool      $include_empty
+     * @param string    $sortby
+     * @param string    $limit
+     * @param string    $exclude
+     * @param bool      $want_relations
      *
      * FIXME: array or iterator?
      * @return object A WikiDB_backend_iterator.
      */
+
     function get_links($pagename, $reversed, $include_empty = false,
                        $sortby = '', $limit = '', $exclude = '')
     {
@@ -323,9 +329,7 @@ class WikiDB_backend
      * Pages should be returned in alphabetical order if that is
      * feasable.
      *
-     * @access protected
-     *
-     * @param $include_defaulted boolean
+     * @param bool $include_defaulted
      * If set, even pages with no content will be returned
      * --- but still only if they have at least one revision (not
      * counting the default revision 0) entered in the database.
@@ -334,9 +338,12 @@ class WikiDB_backend
      * are not returned as these pages are considered to be
      * non-existing.
      *
+     * @param bool $orderby
+     * @param string $limit
+     * @param string $exclude
      * @return object A WikiDB_backend_iterator.
      */
-    function get_all_pages($include_defaulted, $orderby = false, $limit = '', $exclude = '')
+    protected function get_all_pages($include_defaulted, $orderby = false, $limit = '', $exclude = '')
     {
         trigger_error("virtual", E_USER_ERROR);
     }
@@ -345,21 +352,23 @@ class WikiDB_backend
      * Title or full text search.
      *
      * Pages should be returned in alphabetical order if that is
-     * feasable.
+     * feasible.
      *
-     * @access protected
-     *
-     * @param $search object A TextSearchQuery object describing the parsed query string,
+     * @param object $search object A TextSearchQuery object describing the parsed query string,
      *                       with efficient methods for SQL and PCRE match.
      *
-     * @param $fullsearch boolean If true, a full text search is performed,
+     * @param bool $fulltext If true, a full text search is performed,
      *  otherwise a title search is performed.
+     *
+     * @param string $sortby
+     * @param string $limit
+     * @param string $exclude
      *
      * @return object A WikiDB_backend_iterator.
      *
      * @see WikiDB::titleSearch
      */
-    function text_search($search, $fulltext = false, $sortby = '',
+    protected function text_search($search, $fulltext = false, $sortby = '',
                          $limit = '', $exclude = '')
     {
         // This method implements a simple linear search
@@ -377,17 +386,16 @@ class WikiDB_backend
 
     /**
      *
-     * @access protected
-     * @param $pages     object A TextSearchQuery object.
-     * @param $linkvalue object A TextSearchQuery object for the linkvalues
+     * @param object $pages      A TextSearchQuery object.
+     * @param object $linkvalue  A TextSearchQuery object for the link values
      *                          (linkto, relation or backlinks or attribute values).
-     * @param $linktype  string One of the 4 linktypes.
-     * @param $relation  object A TextSearchQuery object or false.
-     * @param $options   array Currently ignored. hash of sortby, limit, exclude.
+     * @param string $linktype   One of the 4 link types.
+     * @param object|bool $relation   A TextSearchQuery object or false.
+     * @param array $options    Currently ignored. hash of sortby, limit, exclude.
      * @return object A WikiDB_backend_iterator.
      * @see WikiDB::linkSearch
      */
-    function link_search($pages, $linkvalue, $linktype, $relation = false, $options = array())
+    protected function link_search($pages, $linkvalue, $linktype, $relation = false, $options = array())
     {
         include_once 'lib/WikiDB/backend/dumb/LinkSearchIter.php';
         $pageiter = $this->text_search($pages);
@@ -400,11 +408,11 @@ class WikiDB_backend
      * Find the pages with the highest hit counts.  The pages should
      * be returned in reverse order by hit count.
      *
-     * @access protected
-     * @param  integer $limit No more than this many pages
+     * @param  int $limit No more than this many pages
+     * @param  string $sortby
      * @return object  A WikiDB_backend_iterator.
      */
-    function most_popular($limit, $sortby = '-hits')
+    protected function most_popular($limit, $sortby = '-hits')
     {
         // This is method fetches all pages, then
         // sorts them by hit count.
@@ -420,13 +428,12 @@ class WikiDB_backend
     /**
      * Find recent changes.
      *
-     * @access protected
-     * @param $params hash See WikiDB::mostRecent for a description
+     * @param object $params hash See WikiDB::mostRecent for a description
      *  of parameters which can be included in this hash.
      * @return object A WikiDB_backend_iterator.
      * @see WikiDB::mostRecent
      */
-    function most_recent($params)
+    protected function most_recent($params)
     {
         // This method is very inefficient and searches through
         // all pages for the most recent changes.
@@ -505,6 +512,7 @@ class WikiDB_backend
      *   trigger_error("Message goes here.", E_USER_WARNING);
      * </pre>
      *
+     * @param bool $args
      * @return boolean True iff database is in a consistent state.
      */
     function check($args = false)
@@ -518,6 +526,7 @@ class WikiDB_backend
      * This should put the database into a consistent state.
      * (I.e. rebuild indexes, etc...)
      *
+     * @param bool $args
      * @return boolean True iff successful.
      */
     function rebuild($args = false)
@@ -671,7 +680,6 @@ class WikiDB_backend
 
     function write_accesslog(&$entry)
     {
-        global $request;
         if (!$this->isSQL()) return;
         $dbh = &$this->_dbh;
         $log_tbl = $entry->_accesslog->logtable;
@@ -865,6 +873,7 @@ class WikiDB_backend_search_sql extends WikiDB_backend_search
     {
         // force word-style %word% for fulltext search
         $dbh = &$this->_dbh;
+        $word = strtolower($node->word);
         $word = '%' . $dbh->escapeSimple($word) . '%';
         // eliminate stoplist words
         if ($this->isStoplisted($node)) {

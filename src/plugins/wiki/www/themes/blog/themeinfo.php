@@ -46,7 +46,7 @@ require_once 'lib/WikiTheme.php';
 class WikiTheme_blog extends WikiTheme
 {
 
-    function WikiTheme_blog($theme_name = 'blog')
+    function __construct($theme_name = 'blog')
     {
         $this->WikiTheme($theme_name);
         $this->calendarInit(true);

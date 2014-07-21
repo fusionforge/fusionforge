@@ -30,14 +30,11 @@ require_once 'lib/WikiDB/backend/flatfile.php';
  */
 class WikiDB_flatfile extends WikiDB
 {
-    /**
-     * Constructor requires the DB parameters.
-     */
-    function WikiDB_flatfile($dbparams)
+    function __construct($dbparams)
     {
         $backend = new WikiDB_backend_flatfile($dbparams);
         $backend->_wikidb =& $this;
-        $this->WikiDB($backend, $dbparams);
+        parent::__construct($backend, $dbparams);
 
         if (empty($dbparams['directory'])
             || preg_match('@^/tmp\b@', $dbparams['directory'])

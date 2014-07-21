@@ -9,12 +9,9 @@ require_once 'lib/WikiDB/backend/PearDB.php';
 class WikiDB_backend_PearDB_mysql
     extends WikiDB_backend_PearDB
 {
-    /**
-     * Constructor.
-     */
-    function WikiDB_backend_PearDB_mysql($dbparams)
+    function __construct($dbparams)
     {
-        $this->WikiDB_backend_PearDB($dbparams);
+        parent::__construct($dbparams);
         if (DB::isError($this->_dbh)) return;
         //$this->_serverinfo = $this->_dbh->ServerInfo();
         $row = $this->_dbh->GetOne("SELECT version()");

@@ -11,10 +11,7 @@ require_once 'lib/WikiDB/backend/ADODB.php';
 class WikiDB_backend_ADODB_sqlite
     extends WikiDB_backend_ADODB
 {
-    /**
-     * Constructor.
-     */
-    function WikiDB_backend_ADODB_sqlite($dbparams)
+    function __construct($dbparams)
     {
         $parsed = parseDSN($dbparams['dsn']);
         if (!file_exists($parsed['database'])) {

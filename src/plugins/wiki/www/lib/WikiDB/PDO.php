@@ -18,7 +18,7 @@ require_once 'lib/WikiDB.php';
  */
 class WikiDB_PDO extends WikiDB
 {
-    function WikiDB_PDO($dbparams)
+    function __construct($dbparams)
     {
         if (is_array($dbparams['dsn']))
             $backend = $dbparams['dsn']['phptype'];
@@ -33,7 +33,7 @@ class WikiDB_PDO extends WikiDB
         include_once("lib/WikiDB/backend/$backend.php");
         $backend_class = "WikiDB_backend_$backend";
         $backend = new $backend_class($dbparams);
-        $this->WikiDB($backend, $dbparams);
+        parent::__construct($backend, $dbparams);
     }
 
     /**
@@ -83,7 +83,7 @@ class WikiDB_PDO extends WikiDB
 
     // SQL result: for simple select or create/update queries
     // returns the database specific resource type
-    function genericSqlQuery($sql, $args = false)
+    function genericSqlQuery($sql, $args = array())
     {
         try {
             $sth = $this->_backend->_dbh->prepare($sql);
@@ -93,7 +93,7 @@ class WikiDB_PDO extends WikiDB
                 }
             }
             if ($sth->execute())
-                $result = $sth->fetch(PDO_FETCH_BOTH);
+                $result = $sth->fetch(PDO::FETCH_BOTH);
             else
                 return false;
         } catch (PDOException $e) {

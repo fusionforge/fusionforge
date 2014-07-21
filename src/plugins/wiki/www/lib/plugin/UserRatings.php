@@ -195,11 +195,11 @@ class WikiPlugin_UserRatings
 
         // augment columns
         //$preds = new _PageList_Column_prediction('prediction', _("Pred"), 'right', $dimension, $allowed_users);
-        $preds = array('_PageList_column_prediction', 'custom:prediction', _("Pred"), 'right', ' ', $allowed_users);
+        $preds = array('_PageList_Column_prediction', 'custom:prediction', _("Pred"), 'right', ' ', $allowed_users);
         $pagelist->addColumnObject($preds);
 
         //$widget = new _PageList_Column_ratingwidget('ratingwidget', _("Rate"), 'left', $dimension);
-        $widget = array('_PageList_column_ratingwidget', 'custom:ratingwidget', _("Rate"), 'center');
+        $widget = array('_PageList_Column_ratingwidget', 'custom:ratingwidget', _("Rate"), 'center');
         $pagelist->addColumnObject($widget);
 
         $noRatingUsers = array();

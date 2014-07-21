@@ -115,7 +115,7 @@ require_once 'lib/Units.php';
  */
 class RdfWriter extends RssWriter // in fact it should be rewritten to be other way round.
 {
-    function RdfWriter(&$request, &$pagelist)
+    function __construct(&$request, &$pagelist)
     {
         $this->_request =& $request;
         $this->_pagelist =& $pagelist;
@@ -296,7 +296,7 @@ class SemanticAttributeSearchQuery
      * We need to detect units from the freetext query:
      * population > 1 million
      */
-    function SemanticAttributeSearchQuery($search_query, $placeholders, $unit = '')
+    function __construct($search_query, $placeholders, $unit = '')
     {
         $this->NumericSearchQuery($search_query, $placeholders);
         $this->_units = new Units();
@@ -309,12 +309,11 @@ class SemanticAttributeSearchQuery
      * This version unifies the attribute values from the database to a
      * numeric basevalue before comparison. (area:=963.6km^2 => 9.366e+08 m^2)
      *
-     * @access private
      * @param $value number   A numerical value: integer, float or string.
      * @param $x string       The variable name to be replaced in the query.
      * @return string
      */
-    function _bind($value, $x)
+    private function _bind($value, $x)
     {
         $ori_value = $value;
         $value = preg_replace("/,/", "", $value);

@@ -12,7 +12,7 @@ require_once 'lib/WikiDB.php';
  */
 class WikiDB_ADODB extends WikiDB
 {
-    function WikiDB_ADODB($dbparams)
+    function __construct($dbparams)
     {
         $backend = 'ADODB';
         if (is_array($dbparams['dsn']))
@@ -35,7 +35,7 @@ class WikiDB_ADODB extends WikiDB
         $backend_class = "WikiDB_backend_" . $backend;
         $backend = new $backend_class($dbparams);
         if (!$backend->_dbh->_connectionID) return false;
-        $this->WikiDB($backend, $dbparams);
+        parent::__construct($backend, $dbparams);
     }
 
     /**

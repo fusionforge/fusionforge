@@ -10,13 +10,10 @@ require_once 'lib/WikiDB/backend/PearDB_pgsql.php';
 class WikiDB_backend_PearDB_oci8
     extends WikiDB_backend_PearDB_pgsql
 {
-    /**
-     * Constructor
-     */
-    function WikiDB_backend_PearDB_oci8($dbparams)
+    function __construct($dbparams)
     {
         // Backend constructor
-        $this->WikiDB_backend_PearDB($dbparams);
+        parent::__construct($dbparams);
         if (DB::isError($this->_dbh)) return;
 
         // Empty strings are NULLS
