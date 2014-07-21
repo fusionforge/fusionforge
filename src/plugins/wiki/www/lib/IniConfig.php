@@ -700,9 +700,9 @@ function fixup_static_configs($file)
     $AllAllowedPlugins[] = 'WikiFormRich';
     $AllAllowedPlugins[] = 'WikiPoll';
     $AllAllowedPlugins[] = 'YouTube';
-        $AllAllowedPlugins[] = 'DebugGroupInfo';
-        $AllAllowedPlugins[] = 'DebugAuthInfo';
-        $AllAllowedPlugins[] = 'DebugBackendInfo';
+    $AllAllowedPlugins[] = 'DebugGroupInfo';
+    $AllAllowedPlugins[] = 'DebugAuthInfo';
+    $AllAllowedPlugins[] = 'DebugBackendInfo';
 
     // The FUSIONFORGE theme omits them
     if (!(defined('FUSIONFORGE') and FUSIONFORGE)) {
