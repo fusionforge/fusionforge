@@ -779,7 +779,7 @@ function fixup_static_configs($file)
     // If user has not defined DATA_PATH, we want to use relative URLs.
     if (!defined('DATA_PATH')) {
         // fix similar to the one suggested by jkalmbach for
-        // installations in the webrootdir, like "http://phpwiki.org/HomePage"
+        // installations in the webrootdir, like "http://phpwiki.fr/HomePage"
         if (!defined('SCRIPT_NAME'))
             define('SCRIPT_NAME', deduce_script_name());
         $temp = dirname(SCRIPT_NAME);

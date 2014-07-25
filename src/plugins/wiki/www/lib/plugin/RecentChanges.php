@@ -749,7 +749,7 @@ class _RecentChanges_SideBarFormatter
 
         printf("<body class=\"sidebar\">\n");
         $html->PrintXML();
-        echo '<a href="http://www.feedvalidator.org/check.cgi?url=http://phpwiki.org/RecentChanges?format=rss"><img src="themes/default/buttons/valid-rss.png" alt="[Valid RSS]" title="Validate the RSS feed" width="44" height="15" /></a>';
+        echo '<a href="http://www.feedvalidator.org/check.cgi?url=http://phpwiki.fr/RecentChanges?format=rss"><img src="themes/default/buttons/valid-rss.png" alt="[Valid RSS]" title="Validate the RSS feed" width="44" height="15" /></a>';
         printf("\n</body>\n");
         printf("</html>\n");
 

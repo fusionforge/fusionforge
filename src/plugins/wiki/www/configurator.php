@@ -1464,7 +1464,7 @@ $properties["AUTHORPAGE_TITLE"] =
     new _define_commented_optional('AUTHORPAGE_TITLE', "The PhpWiki Programming Team", "
 Default Author Names");
 $properties["AUTHORPAGE_URL"] =
-    new _define_commented_optional('AUTHORPAGE_URL', "http://phpwiki.org/ThePhpWikiProgrammingTeam", "
+    new _define_commented_optional('AUTHORPAGE_URL', "http://phpwiki.fr/ThePhpWikiProgrammingTeam", "
 Default Author URL");
 
 $properties["TOC_FULL_SYNTAX"] =

@@ -15,7 +15,7 @@ You might also be interested in the [[Help:IncludePagePlugin|IncludePage]] plugi
 To include a page from another site, use the **src** attribute:
 
 {{{
-<<FrameInclude src="http://phpwiki.org/">>
+<<FrameInclude src="http://phpwiki.fr/">>
 }}}
 
 To include a page from within this wiki, use the **page** attribute:
