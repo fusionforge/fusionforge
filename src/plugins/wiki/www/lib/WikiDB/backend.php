@@ -395,7 +395,7 @@ class WikiDB_backend
      * @return object A WikiDB_backend_iterator.
      * @see WikiDB::linkSearch
      */
-    protected function link_search($pages, $linkvalue, $linktype, $relation = false, $options = array())
+    public function link_search($pages, $linkvalue, $linktype, $relation = false, $options = array())
     {
         include_once 'lib/WikiDB/backend/dumb/LinkSearchIter.php';
         $pageiter = $this->text_search($pages);
