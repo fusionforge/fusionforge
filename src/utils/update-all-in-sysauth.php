@@ -1,7 +1,7 @@
 #!/usr/bin/php -f
 
 <?php
-require "/usr/share/gforge/common/include/env.inc.php";
+require `forge_get_config source_path`.'/common/include/env.inc.php';
 require_once $gfcommon."include/pre.php";
 
 foreach (user_get_all_users() as $u) {

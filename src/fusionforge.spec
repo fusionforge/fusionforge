@@ -6,6 +6,7 @@
 #
 # Copyright (C) 2010-2012 Alain Peyrat
 # Copyrght 2013, Franck Villaume - TrivialDev
+# Copyrght 2014, Roland Mas
 #
 
 # Global Definitions
@@ -23,7 +24,19 @@
 %define FORGE_DIR       %{_datadir}/gforge
 %define FORGE_CONF_DIR  %{_sysconfdir}/gforge
 %define FORGE_LANG_DIR  %{_datadir}/locale
-%define FORGE_VAR_LIB   %{_var}/lib/gforge
+%define FORGE_DATA_PATH %{_var}/lib/gforge
+%define FORGE_CHROOT_PATH %{FORGE_DATA_PATH}/chroot
+%define FORGE_PLUGINS_LIB_DIR       %{FORGE_DIR}/plugins
+%define FORGE_PLUGINS_CONF_DIR        %{FORGE_CONF_DIR}/plugins
+
+# If that works, then a better way would be the following:
+# %define FORGE_DIR       %(utils/forge_get_config_basic fhsrh source_path)
+# %define FORGE_CONF_DIR  %(utils/forge_get_config_basic fhsrh config_path)
+# %define FORGE_LANG_DIR  %{_datadir}/locale
+# %define FORGE_DATA_PATH   %(utils/forge_get_config_basic fhsrh data_path)
+# %define FORGE_CHROOT_PATH   %(utils/forge_get_config_basic fhsrh chroot)
+# %define FORGE_PLUGINS_LIB_DIR         %(utils/forge_get_config_basic fhsrh plugins_path)
+# %define FORGE_PLUGINS_CONF_DIR        %{FORGE_CONF_DIR}/plugins
 
 %define reloadhttpd() /etc/init.d/httpd httpd reload >/dev/null 2>&1
 
@@ -435,18 +448,18 @@ webanalytics plugin for FusionForge.
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/httpd.d
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/httpd.conf.d
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d
-%{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/plugins
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_PLUGINS_CONF_DIR}
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_LANG_DIR}
-%{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_VAR_LIB}
-%{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_VAR_LIB}/upload
-%{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_VAR_LIB}/scmtarballs
-%{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_VAR_LIB}/scmsnapshots
-%{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_VAR_LIB}/homedirs
-%{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_VAR_LIB}/dumps
-%{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_VAR_LIB}/etc
-%{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_VAR_LIB}/chroot/scmrepos/svn
-%{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_VAR_LIB}/chroot/scmrepos/cvs
-%{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_VAR_LIB}/plugins/mediawiki
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DATA_PATH}
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DATA_PATH}/upload
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DATA_PATH}/scmtarballs
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DATA_PATH}/scmsnapshots
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DATA_PATH}/homedirs
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DATA_PATH}/dumps
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DATA_PATH}/etc
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_CHROOT_PATH}/scmrepos/svn
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_CHROOT_PATH}/scmrepos/cvs
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DATA_PATH}/plugins/mediawiki
 %{__install} -m 755 -d $RPM_BUILD_ROOT/home/groups
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{_var}/log/gforge
 # mock mediawiki directory because we symlink GForge skin to Monobook
@@ -466,7 +479,7 @@ search_and_replace "/opt/gforge" "%{FORGE_DIR}"
 %{__cp} -a * $RPM_BUILD_ROOT/%{FORGE_DIR}/
 
 # Create project vhost space symlink
-%{__ln_s} /home/groups $RPM_BUILD_ROOT/%{FORGE_VAR_LIB}/homedirs/groups
+%{__ln_s} /home/groups $RPM_BUILD_ROOT/%{FORGE_DATA_PATH}/homedirs/groups
 # install restricted shell for cvs accounts
 %{__cp} -a plugins/scmcvs/bin/cvssh.pl $RPM_BUILD_ROOT/bin/
 
@@ -476,7 +489,7 @@ search_and_replace "/opt/gforge" "%{FORGE_DIR}"
 %{__cp} -a etc/config.ini-fhsrh $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini
 %{__cp} -a etc/httpd.conf-fhsrh $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/z-gforge.conf
 #%{__cp} -a etc/gforge-httpd.conf.example $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/z-gforge.conf
-#%{__sed} -i -e 's|.*php_value[[:space:]]*include_path.*$|\tphp_value\tinclude_path ".:/usr/share/gforge/www/include:/usr/share/gforge:/etc/gforge:/usr/share/gforge/common:/usr/share/gforge/www:/usr/share/gforge/plugins"|' $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/z-gforge.conf
+#%{__sed} -i -e 's|.*php_value[[:space:]]*include_path.*$|\tphp_value\tinclude_path ".:%{FORGE_DIR}/www/include:%{FORGE_DIR}:%{FORGE_CONF_DIR}:%{FORGE_DIR}/common:%{FORGE_DIR}/www:%{FORGE_PLUGINS_LIB_DIR}"|' $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/z-gforge.conf
 
 %{__sed} -i -e 's!www-data!apache!g' $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini
 %{__sed} -i -e 's!lists.$core/web_host!$core/web_host!g' $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini
@@ -516,20 +529,20 @@ WHICH_VERSION=%{version}-%{release}
 %{__rm} -fr $RPM_BUILD_ROOT/%{FORGE_DIR}/packaging
 %{__rm} -fr $RPM_BUILD_ROOT/%{FORGE_DIR}/deb-specific
 %{__rm} -fr $RPM_BUILD_ROOT/%{FORGE_DIR}/rpm-specific
-%{__rm} -fr $RPM_BUILD_ROOT/%{FORGE_DIR}/plugins/*/packaging
-%{__rm} -fr $RPM_BUILD_ROOT/%{FORGE_DIR}/plugins/*/*.spec
+%{__rm} -fr $RPM_BUILD_ROOT/%{FORGE_PLUGINS_LIB_DIR}/*/packaging
+%{__rm} -fr $RPM_BUILD_ROOT/%{FORGE_PLUGINS_LIB_DIR}/*/*.spec
 
 
 ### Plugin setup ###
 for i in $(utils/list-enabled-plugins.sh --disabled) ; do
-    %{__rm} -rf $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/$i
+    %{__rm} -rf $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/$i
 done
 
-%{__cp} $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/*/etc/*.ini $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/
-%{__cp} $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/*/etc/cron.d/* $RPM_BUILD_ROOT%{_sysconfdir}/cron.d/
-%{__cp} $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/*/etc/httpd.d/* $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/httpd.d/
-%{__cp} $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/*/etc/httpd.conf.d/* $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/httpd.conf.d/
-%{__cp} -rp $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/*/etc/plugins/* $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/plugins/
+%{__cp} $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/*/etc/*.ini $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/
+%{__cp} $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/*/etc/cron.d/* $RPM_BUILD_ROOT%{_sysconfdir}/cron.d/
+%{__cp} $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/*/etc/httpd.d/* $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/httpd.d/
+%{__cp} $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/*/etc/httpd.conf.d/* $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/httpd.conf.d/
+%{__cp} -rp $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/*/etc/plugins/* $RPM_BUILD_ROOT%{FORGE_PLUGINS_CONF_DIR}/
 
 # plugin: authbuiltin (internal plugin)
 %{__ln_s} ../../plugins/authbuiltin/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/authbuiltin
@@ -564,23 +577,23 @@ done
 
 # plugin: mediawiki
 %{__ln_s} ../../plugins/mediawiki/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/mediawiki
-%{__ln_s} /usr/share/mediawiki/api.php $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/www/
-%{__ln_s} /usr/share/mediawiki/extensions $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/www/
-%{__ln_s} /usr/share/mediawiki/img_auth.php $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/www/
-%{__ln_s} /usr/share/mediawiki/includes $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/www/
-%{__ln_s} /usr/share/mediawiki/index.php $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/www/
-%{__ln_s} /usr/share/mediawiki/languages $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/www/
-%{__ln_s} /usr/share/mediawiki/maintenance/ $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/www/
-%{__ln_s} /usr/share/mediawiki/opensearch_desc.php $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/www/
-%{__ln_s} /usr/share/mediawiki/profileinfo.php $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/www/
-%{__ln_s} /usr/share/mediawiki/redirect.php $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/www/
-%{__ln_s} /usr/share/mediawiki/StartProfiler.php $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/www/
-%{__ln_s} /usr/share/mediawiki/thumb.php $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/www/
-%{__ln_s} /usr/share/mediawiki/trackback.php $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/www/
-%{__ln_s} /usr/share/mediawiki/skins $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/www/
-%{__ln_s} /usr/share/mediawiki $RPM_BUILD_ROOT/var/lib/gforge/plugins/mediawiki/master
-%{__ln_s} /usr/share/gforge/plugins/mediawiki/mediawiki-skin/FusionForge.php $RPM_BUILD_ROOT/usr/share/mediawiki/skins/
-%{__ln_s} /usr/share/gforge/plugins/mediawiki/mediawiki-skin/fusionforge $RPM_BUILD_ROOT/usr/share/mediawiki/skins/
+%{__ln_s} /usr/share/mediawiki/api.php $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki/extensions $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki/img_auth.php $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki/includes $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki/index.php $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki/languages $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki/maintenance/ $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki/opensearch_desc.php $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki/profileinfo.php $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki/redirect.php $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki/StartProfiler.php $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki/thumb.php $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki/trackback.php $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki/skins $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki $RPM_BUILD_ROOT%{FORGE_DATA_PATH}/plugins/mediawiki/master
+%{__ln_s} %{FORGE_PLUGINS_LIB_DIR}/mediawiki/mediawiki-skin/FusionForge.php $RPM_BUILD_ROOT/usr/share/mediawiki/skins/
+%{__ln_s} %{FORGE_PLUGINS_LIB_DIR}/mediawiki/mediawiki-skin/fusionforge $RPM_BUILD_ROOT/usr/share/mediawiki/skins/
 
 # plugin: moinmoin
 %{__ln_s} ../../plugins/moinmoin/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/moinmoin
@@ -615,10 +628,10 @@ done
 
 # plugin: scmgit
 %{__ln_s} ../../plugins/scmgit/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/scmgit
-%{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/scmgit/www/cgi-bin
-%{__ln_s} /usr/share/gitweb/gitweb.cgi $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/scmgit/www/cgi-bin/gitweb.cgi
-%{__ln_s} /usr/share/gitweb/static/gitweb.css $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/scmgit/www/gitweb.css
-%{__ln_s} /usr/share/gitweb/static/gitweb.js $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/scmgit/www/gitweb.js
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/scmgit/www/cgi-bin
+%{__ln_s} /usr/share/gitweb/gitweb.cgi $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/scmgit/www/cgi-bin/gitweb.cgi
+%{__ln_s} /usr/share/gitweb/static/gitweb.css $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/scmgit/www/gitweb.css
+%{__ln_s} /usr/share/gitweb/static/gitweb.js $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/scmgit/www/gitweb.js
 
 # plugin: scmhg
 
@@ -708,8 +721,8 @@ if [ "$1" -eq "1" ]; then
 	HOSTNAME=`hostname -f`
 	#%{__sed} -i -e "s!gforge.company.com!$HOSTNAME!g" %{FORGE_CONF_DIR}/local.inc
 	#%{__sed} -i -e "s!gforge.company.com!$HOSTNAME!g" /etc/httpd/conf.d/z-gforge.conf
-	[ -d %{FORGE_VAR_LIB}/etc ] || mkdir %{FORGE_VAR_LIB}/etc
-	touch %{FORGE_VAR_LIB}/etc/httpd.vhosts
+	[ -d %{FORGE_DATA_PATH}/etc ] || mkdir %{FORGE_DATA_PATH}/etc
+	touch %{FORGE_DATA_PATH}/etc/httpd.vhosts
 
 	%{__sed} -i -e "s/^#ServerName (.*):80/ServerName $HOSTNAME:80/" /etc/httpd/conf/httpd.conf
 
@@ -774,10 +787,10 @@ if [ "$1" -eq "0" ]; then
 fi
 
 %post plugin-aselectextauth
-/usr/bin/psql -U %{dbuser} %{dbname} -f %{FORGE_DIR}/plugins/aselectextauth/db/install_aselectextauth.psql
+/usr/bin/psql -U %{dbuser} %{dbname} -f %{FORGE_PLUGINS_LIB_DIR}/aselectextauth/db/install_aselectextauth.psql
 
 %preun plugin-aselectextauth
-/usr/bin/psql -U %{dbuser} %{dbname} -f %{FORGE_DIR}/plugins/aselectextauth/db/uninstall_aselectextauth.psql
+/usr/bin/psql -U %{dbuser} %{dbname} -f %{FORGE_PLUGINS_LIB_DIR}/aselectextauth/db/uninstall_aselectextauth.psql
 
 %clean
 [ "$RPM_BUILD_ROOT" != "/" ] && %{__rm} -rf $RPM_BUILD_ROOT
@@ -789,7 +802,7 @@ fi
 #%attr(0660, %{httpduser}, gforge) %config(noreplace) %{FORGE_CONF_DIR}/local.inc
 #%attr(0640, %{httpduser}, %{httpdgroup}) %config(noreplace) %{_sysconfdir}/httpd/conf.d/z-gforge.conf
 %attr(0644, root, root) %{_sysconfdir}/cron.d/%{name}
-%attr(0775, %{httpduser}, %{httpdgroup}) %dir %{FORGE_VAR_LIB}/upload
+%attr(0775, %{httpduser}, %{httpdgroup}) %dir %{FORGE_DATA_PATH}/upload
 %attr(755, root, %{httpdgroup}) %dir %{FORGE_DIR}
 # Files under %{FORGE_DIR}
 %{FORGE_DIR}/AUTHORS*
@@ -801,7 +814,7 @@ fi
 %{FORGE_DIR}/README*
 %{FORGE_DIR}/fusionforge.spec
 %{FORGE_DIR}/install-ng
-%{FORGE_DIR}/plugins/README
+%{FORGE_PLUGINS_LIB_DIR}/README
 # Directories under %{FORGE_DIR}
 %{FORGE_DIR}/backend
 %{FORGE_DIR}/common
@@ -865,11 +878,11 @@ fi
 #%{FORGE_DIR}/www/plugins/online_help
 #%{FORGE_DIR}/www/plugins/projects-hierarchy
 #%{FORGE_DIR}/www/plugins/quota_management
-%dir %{FORGE_DIR}/plugins
-%{FORGE_DIR}/plugins/env.inc.php
-#%{FORGE_DIR}/plugins/online_help
-#%{FORGE_DIR}/plugins/projects-hierarchy
-#%{FORGE_DIR}/plugins/quota_management
+%dir %{FORGE_PLUGINS_LIB_DIR}
+%{FORGE_PLUGINS_LIB_DIR}/env.inc.php
+#%{FORGE_PLUGINS_LIB_DIR}/online_help
+#%{FORGE_PLUGINS_LIB_DIR}/projects-hierarchy
+#%{FORGE_PLUGINS_LIB_DIR}/quota_management
 %{FORGE_LANG_DIR}
 %dir %{FORGE_CONF_DIR}
 #%config(noreplace) %{FORGE_CONF_DIR}/httpd.secrets
@@ -879,224 +892,224 @@ fi
 %{_sysconfdir}/httpd/conf.d/z-gforge.conf
 %{FORGE_CONF_DIR}/config.ini.d/defaults.ini
 %{FORGE_CONF_DIR}/config.ini
-%dir %attr(0775,root,%{httpdgroup}) %{FORGE_CONF_DIR}/plugins
-%dir %{FORGE_VAR_LIB}/scmtarballs
-%dir %{FORGE_VAR_LIB}/scmsnapshots
-%dir %{FORGE_VAR_LIB}/dumps
-%{FORGE_VAR_LIB}/homedirs
+%dir %attr(0775,root,%{httpdgroup}) %{FORGE_PLUGINS_CONF_DIR}
+%dir %{FORGE_DATA_PATH}/scmtarballs
+%dir %{FORGE_DATA_PATH}/scmsnapshots
+%dir %{FORGE_DATA_PATH}/dumps
+%{FORGE_DATA_PATH}/homedirs
 %dir %{_var}/log/gforge
 /home/groups
 /bin/cvssh.pl
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/authbuiltin.ini
-%{FORGE_DIR}/plugins/authbuiltin
+%{FORGE_PLUGINS_LIB_DIR}/authbuiltin
 
 %files plugin-admssw
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/admssw.ini
-%{FORGE_DIR}/plugins/admssw
+%{FORGE_PLUGINS_LIB_DIR}/admssw
 
 %files plugin-aselectextauth
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/aselectextauth.ini
-%{FORGE_DIR}/plugins/aselectextauth
+%{FORGE_PLUGINS_LIB_DIR}/aselectextauth
 
 %files plugin-authcas
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/authcas.ini
-%{FORGE_DIR}/plugins/authcas
+%{FORGE_PLUGINS_LIB_DIR}/authcas
 %{FORGE_DIR}/www/plugins/authcas
 
 %files plugin-authhttpd
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/authhttpd.ini
-%{FORGE_DIR}/plugins/authhttpd
+%{FORGE_PLUGINS_LIB_DIR}/authhttpd
 %{FORGE_DIR}/www/plugins/authhttpd
 
 # %files plugin-authopenid
 # %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/authopenid.ini
-# %{FORGE_DIR}/plugins/authopenid
+# %{FORGE_PLUGINS_LIB_DIR}/authopenid
 
 %files plugin-ckeditor
-%{FORGE_DIR}/plugins/ckeditor
+%{FORGE_PLUGINS_LIB_DIR}/ckeditor
 %{FORGE_CONF_DIR}/httpd.conf.d/plugin-ckeditor.inc
 
 %files plugin-cvssyncmail
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/cvssyncmail.ini
-%{FORGE_DIR}/plugins/cvssyncmail
+%{FORGE_PLUGINS_LIB_DIR}/cvssyncmail
 
 %files plugin-cvstracker
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/cvstracker.ini
-%{FORGE_DIR}/plugins/cvstracker
+%{FORGE_PLUGINS_LIB_DIR}/cvstracker
 %{FORGE_DIR}/www/plugins/cvstracker
-%attr(-,%{httpduser},%{httpdgroup}) %{FORGE_CONF_DIR}/plugins/cvstracker
+%attr(-,%{httpduser},%{httpdgroup}) %{FORGE_PLUGINS_CONF_DIR}/cvstracker
 
 %files plugin-compactpreview
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/compactpreview.ini
-%{FORGE_DIR}/plugins/compactpreview
+%{FORGE_PLUGINS_LIB_DIR}/compactpreview
 
 %files plugin-doaprdf
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/doaprdf.ini
-%{FORGE_DIR}/plugins/doaprdf
+%{FORGE_PLUGINS_LIB_DIR}/doaprdf
 
 %files plugin-externalsearch
-%config(noreplace) %{FORGE_CONF_DIR}/plugins/externalsearch/
+%config(noreplace) %{FORGE_PLUGINS_CONF_DIR}/externalsearch/
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/externalsearch.ini
-%{FORGE_DIR}/plugins/externalsearch
+%{FORGE_PLUGINS_LIB_DIR}/externalsearch
 
 %files plugin-extsubproj
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/extsubproj.ini
-%{FORGE_DIR}/plugins/extsubproj
+%{FORGE_PLUGINS_LIB_DIR}/extsubproj
 
 %files plugin-foafprofiles
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/foafprofiles.ini
-%{FORGE_DIR}/plugins/foafprofiles
+%{FORGE_PLUGINS_LIB_DIR}/foafprofiles
 
 # %files plugin-forumml
 # %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/forumml.ini
-# %{FORGE_DIR}/plugins/forumml
+# %{FORGE_PLUGINS_LIB_DIR}/forumml
 # %{FORGE_DIR}/www/plugins/forumml
 
 %files plugin-gravatar
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/gravatar.ini
-%{FORGE_DIR}/plugins/gravatar
+%{FORGE_PLUGINS_LIB_DIR}/gravatar
 
 %files plugin-headermenu
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/headermenu.ini
-%{FORGE_DIR}/plugins/headermenu
+%{FORGE_PLUGINS_LIB_DIR}/headermenu
 %{FORGE_DIR}/www/plugins/headermenu
 
 %files plugin-hudson
-%config(noreplace) %{FORGE_CONF_DIR}/plugins/hudson/
+%config(noreplace) %{FORGE_PLUGINS_CONF_DIR}/hudson/
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/hudson.ini
 %{FORGE_CONF_DIR}/httpd.d/62plugin-hudson
-%{FORGE_DIR}/plugins/hudson
+%{FORGE_PLUGINS_LIB_DIR}/hudson
 %{FORGE_DIR}/www/plugins/hudson
 
 %files plugin-authldap
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/authldap.ini
-%{FORGE_DIR}/plugins/authldap
+%{FORGE_PLUGINS_LIB_DIR}/authldap
 
 %files plugin-mediawiki
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/mediawiki.ini
 %{_sysconfdir}/cron.d/fusionforge-plugin-mediawiki
 %{FORGE_CONF_DIR}/httpd.d/61plugin-mediawiki
-%{FORGE_DIR}/plugins/mediawiki/
+%{FORGE_PLUGINS_LIB_DIR}/mediawiki/
 %{FORGE_DIR}/www/plugins/mediawiki
-%{FORGE_VAR_LIB}/plugins/mediawiki
+%{FORGE_DATA_PATH}/plugins/mediawiki
 /usr/share/mediawiki/skins/FusionForge.php
 /usr/share/mediawiki/skins/fusionforge
 
 %files plugin-moinmoin
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/moinmoin.ini
-%config(noreplace) %{FORGE_CONF_DIR}/plugins/moinmoin/
-%{FORGE_DIR}/plugins/moinmoin/
+%config(noreplace) %{FORGE_PLUGINS_CONF_DIR}/moinmoin/
+%{FORGE_PLUGINS_LIB_DIR}/moinmoin/
 %{FORGE_DIR}/www/plugins/moinmoin
 
 %files plugin-message
-%{FORGE_DIR}/plugins/message
+%{FORGE_PLUGINS_LIB_DIR}/message
 %{FORGE_DIR}/www/plugins/message
 
 %files plugin-online_help
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/online_help.ini
-%{FORGE_DIR}/plugins/online_help
+%{FORGE_PLUGINS_LIB_DIR}/online_help
 %{FORGE_DIR}/www/plugins/online_help
 
 # %files plugin-oslc
-# %config(noreplace) %{FORGE_CONF_DIR}/plugins/oslc/
+# %config(noreplace) %{FORGE_PLUGINS_CONF_DIR}/oslc/
 # %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/oslc.ini
 # %{FORGE_CONF_DIR}/httpd.d/plugin-oslc.inc
-# %{FORGE_DIR}/plugins/oslc
+# %{FORGE_PLUGINS_LIB_DIR}/oslc
 # %{FORGE_DIR}/www/plugins/oslc
 
 # %files plugin-projectimport
-# %config(noreplace) %{FORGE_CONF_DIR}/plugins/projectimport/
+# %config(noreplace) %{FORGE_PLUGINS_CONF_DIR}/projectimport/
 # %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/projectimport.ini
-# %{FORGE_DIR}/plugins/projectimport
+# %{FORGE_PLUGINS_LIB_DIR}/projectimport
 # %{FORGE_DIR}/www/plugins/projectimport
 
 # %files plugin-projects-hierarchy
 # %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/projects-hierarchy.ini
-# %{FORGE_DIR}/plugins/projects-hierarchy
+# %{FORGE_PLUGINS_LIB_DIR}/projects-hierarchy
 # %{FORGE_DIR}/www/plugins/projects-hierarchy
 
 %files plugin-quota_management
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/quota_management.ini
-%{FORGE_DIR}/plugins/quota_management
+%{FORGE_PLUGINS_LIB_DIR}/quota_management
 %{FORGE_DIR}/www/plugins/quota_management
 
 %files plugin-scmarch
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/scmarch.ini
-%{FORGE_DIR}/plugins/scmarch
+%{FORGE_PLUGINS_LIB_DIR}/scmarch
 
 %files plugin-scmbzr
-%config(noreplace) %{FORGE_CONF_DIR}/plugins/scmbzr/
+%config(noreplace) %{FORGE_PLUGINS_CONF_DIR}/scmbzr/
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/scmbzr.ini
-%{FORGE_DIR}/plugins/scmbzr
+%{FORGE_PLUGINS_LIB_DIR}/scmbzr
 
 %files plugin-scmdarcs
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/scmdarcs.ini
-%{FORGE_DIR}/plugins/scmdarcs
+%{FORGE_PLUGINS_LIB_DIR}/scmdarcs
 
 %files plugin-scmgit
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/scmgit.ini
 %{FORGE_CONF_DIR}/httpd.conf.d/plugin-scmgit-dav.inc
-%{FORGE_DIR}/plugins/scmgit
+%{FORGE_PLUGINS_LIB_DIR}/scmgit
 %{FORGE_DIR}/www/plugins/scmgit
 
 %files plugin-scmhg
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/scmhg.ini
-%{FORGE_DIR}/plugins/scmhg
+%{FORGE_PLUGINS_LIB_DIR}/scmhg
 
 %files plugin-scmhook
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/scmhook.ini
-%{FORGE_DIR}/plugins/scmhook
+%{FORGE_PLUGINS_LIB_DIR}/scmhook
 
 %files plugin-scmccase
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/scmccase.ini
-%{FORGE_DIR}/plugins/scmccase
+%{FORGE_PLUGINS_LIB_DIR}/scmccase
 
 %files plugin-scmcvs
-%config(noreplace) %{FORGE_CONF_DIR}/plugins/scmcvs/
+%config(noreplace) %{FORGE_PLUGINS_CONF_DIR}/scmcvs/
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/scmcvs.ini
 %{_sysconfdir}/cron.d/%{name}-plugin-scmcvs
 %{FORGE_CONF_DIR}/httpd.d/30virtualcvs
 %{FORGE_CONF_DIR}/httpd.d/31virtualcvs.ssl
-%{FORGE_DIR}/plugins/scmcvs
+%{FORGE_PLUGINS_LIB_DIR}/scmcvs
 %{FORGE_DIR}/www/plugins/scmcvs
-%{FORGE_VAR_LIB}/chroot/scmrepos/cvs
+%{FORGE_CHROOT_PATH}/scmrepos/cvs
 
 %files plugin-scmsvn
-%config(noreplace) %{FORGE_CONF_DIR}/plugins/scmsvn/
+%config(noreplace) %{FORGE_PLUGINS_CONF_DIR}/scmsvn/
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/scmsvn.ini
-%{FORGE_DIR}/plugins/scmsvn
+%{FORGE_PLUGINS_LIB_DIR}/scmsvn
 %{FORGE_DIR}/www/plugins/scmsvn
-%{FORGE_VAR_LIB}/chroot/scmrepos/svn
+%{FORGE_CHROOT_PATH}/scmrepos/svn
 
 %files plugin-blocks
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/blocks.ini
-%{FORGE_DIR}/plugins/blocks
+%{FORGE_PLUGINS_LIB_DIR}/blocks
 %{FORGE_DIR}/www/plugins/blocks
 
 %files plugin-wiki
-%config(noreplace) %{FORGE_CONF_DIR}/plugins/wiki/
+%config(noreplace) %{FORGE_PLUGINS_CONF_DIR}/wiki/
 %{_sysconfdir}/cron.d/%{name}-plugin-wiki
 %{FORGE_CONF_DIR}/httpd.conf.d/plugin-wiki.inc
-%{FORGE_DIR}/plugins/wiki
+%{FORGE_PLUGINS_LIB_DIR}/wiki
 %{FORGE_DIR}/www/wiki
 
 %files plugin-projectlabels
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/projectlabels.ini
-%{FORGE_DIR}/plugins/projectlabels
+%{FORGE_PLUGINS_LIB_DIR}/projectlabels
 %{FORGE_DIR}/www/plugins/projectlabels
 
 %files plugin-contribtracker
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/contribtracker.ini
-%{FORGE_DIR}/plugins/contribtracker
+%{FORGE_PLUGINS_LIB_DIR}/contribtracker
 %{FORGE_DIR}/www/plugins/contribtracker
 
 %files plugin-globalsearch
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/globalsearch.ini
-%{FORGE_DIR}/plugins/globalsearch
+%{FORGE_PLUGINS_LIB_DIR}/globalsearch
 %{FORGE_DIR}/www/plugins/globalsearch
 
 # %files plugin-mailman
-# %config(noreplace) %{FORGE_CONF_DIR}/plugins/mailman/
+# %config(noreplace) %{FORGE_PLUGINS_CONF_DIR}/mailman/
 # %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/mailman.ini
 # %{FORGE_CONF_DIR}/httpd.d/plugin-oslc.inc
 # %{FORGE_CONF_DIR}/httpd.d/62plugin-list-mailman
@@ -1104,24 +1117,24 @@ fi
 # %{FORGE_CONF_DIR}/httpd.d/20list
 # %{FORGE_CONF_DIR}/httpd.d/20zlist.vhost
 # %{FORGE_CONF_DIR}/httpd.d/21list.vhost.ssl
-# %{FORGE_DIR}/plugins/mailman
+# %{FORGE_PLUGINS_LIB_DIR}/mailman
 # %{FORGE_DIR}/www/plugins/mailman
 
 # %files plugin-mantisbt
-# %config(noreplace) %{FORGE_CONF_DIR}/plugins/mantisbt/
+# %config(noreplace) %{FORGE_PLUGINS_CONF_DIR}/mantisbt/
 # %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/mantisbt.ini
-# %{FORGE_DIR}/plugins/mantisbt
+# %{FORGE_PLUGINS_LIB_DIR}/mantisbt
 # %{FORGE_DIR}/www/plugins/mantisbt
 
 # %files plugin-oauthprovider
 # %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/oauthprovider.ini
-# %config(noreplace) %{FORGE_CONF_DIR}/plugins/oauthprovider/
+# %config(noreplace) %{FORGE_PLUGINS_CONF_DIR}/oauthprovider/
 # %{FORGE_CONF_DIR}/httpd.d/62plugin-oauthprovider
-# %{FORGE_DIR}/plugins/oauthprovider
+# %{FORGE_PLUGINS_LIB_DIR}/oauthprovider
 
 %files plugin-webanalytics
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/webanalytics.ini
-%{FORGE_DIR}/plugins/webanalytics
+%{FORGE_PLUGINS_LIB_DIR}/webanalytics
 %{FORGE_DIR}/www/plugins/webanalytics
 
 %changelog

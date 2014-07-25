@@ -1,3 +1,3 @@
-@PLUGIN_PATH@/globaldashboard/cgi-bin
-@PLUGIN_PATH@/globaldashboard/common
-@PLUGIN_PATH@/globaldashboard/www
+@PLUGINS_PATH@/globaldashboard/cgi-bin
+@PLUGINS_PATH@/globaldashboard/common
+@PLUGINS_PATH@/globaldashboard/www

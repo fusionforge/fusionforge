@@ -14,8 +14,13 @@ use DBI;
 #$> = $uid;
 
 #require("base64.pl");  # Include all the predefined functions
-require("/usr/lib/gforge/lib/include.pl");  # Include all the predefined functions
-$chroot="/var/lib/gforge/chroot";
+my $source_path = `forge_get_config source_path`;
+chomp $source_path;
+
+require ("$source_path/lib/include.pl") ; # Include all the predefined functions 
+
+$chroot = forge_get_config ('chroot');
+
 #CB#&db_connect;
 if ( "$sys_dbname" ne "gforge" || "$sys_dbuser" ne "gforge" ) {
 $dbh ||= DBI->connect("DBI:Pg:dbname=$sys_dbname","$sys_dbuser","$sys_dbpasswd");

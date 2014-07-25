@@ -2,7 +2,7 @@
 
 # $Debian: cvs/debian/cvs-pserver,v 1.1 2001/04/20 16:00:54 epg Exp $
 
-CHROOTDIR=/var/lib/gforge/chroot
+CHROOTDIR=$(forge_get_config chroot)
 CVSROOT=cvsroot # without leading "/"!
 CVSREADONLYFS=yes
 export CVSREADONLYFS

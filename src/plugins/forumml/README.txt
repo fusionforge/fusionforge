@@ -37,7 +37,7 @@ $> /usr/share/codendi/plugins/forumml/bin/ml_arch_2_DB.pl
 run 'mail_2_DBFF.php' script.
 1st argument: list name
 2nd argument: 2
-$> /usr/bin/php -q -d include_path=.:/etc/gforge:/usr/share/gforge:/usr/share/gforge/www/include:/usr/share/gforge/plugins forumml/bin/mail_2_DBFF.php mylistname 2
+$> /usr/bin/php -q -d include_path=.:@CONFIG_PATH@:@SOURCE_PATH@:@SOURCE_PATH@/www/include:@PLUGINS_PATH@ forumml/bin/mail_2_DBFF.php mylistname 2
 
 ## To import ML archives of all projects, for which the plugin is enabled
 run 'ml_arch_2_DBFF.pl' script:

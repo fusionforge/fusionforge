@@ -15,8 +15,8 @@ SOURCE_PATH=`forge_get_config_basic $FLAVOUR source_path`
 export SOURCE_PATH
 BINARY_PATH=`forge_get_config_basic $FLAVOUR binary_path`
 export BINARY_PATH
-PLUGIN_PATH=`forge_get_config_basic $FLAVOUR plugins_path`
-export PLUGIN_PATH
+PLUGINS_PATH=`forge_get_config_basic $FLAVOUR plugins_path`
+export PLUGINS_PATH
 DATA_PATH=`forge_get_config_basic $FLAVOUR data_path`
 export DATA_PATH
 CONFIG_PATH=`forge_get_config_basic $FLAVOUR config_path`
@@ -24,7 +24,7 @@ export CONFIG_PATH
 LOG_PATH=`forge_get_config_basic $FLAVOUR log_path`
 export LOG_PATH
 
-SEARCH_PATH=${SEARCH_PATH:-"${CONFIG_PATH} ${PLUGIN_PATH}"}
+SEARCH_PATH=${SEARCH_PATH:-"${CONFIG_PATH} ${PLUGINS_PATH}"}
 
 substitute(){
 	file=$1
@@ -40,7 +40,7 @@ substitute(){
 	cat $file | \
 		sed -e "s:@SOURCE_PATH@:${SOURCE_PATH}:g" \
 		-e "s:@BINARY_PATH@:${BINARY_PATH}:g" \
-		-e "s:@PLUGIN_PATH@:${PLUGIN_PATH}:g" \
+		-e "s:@PLUGINS_PATH@:${PLUGINS_PATH}:g" \
 		-e "s:@DATA_PATH@:${DATA_PATH}:g" \
 		-e "s:@CONFIG_PATH@:${CONFIG_PATH}:g" \
 		-e "s:@LOG_PATH@:${LOG_PATH}:g" \

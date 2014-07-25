@@ -33,20 +33,27 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-root
 Requires: perl-IPC-Run
 %endif
 
-#Globals defines for fusionforge
-%define FFORGE_DIR              %{_datadir}/gforge
-%define FFORGE_CONF_DIR         %{_sysconfdir}/gforge
-%define FFORGE_SBIN_DIR         %{_sbindir}
-%define FFORGE_BIN_DIR          %{FFORGE_DIR}/bin
-%define PLUGINS_LIB_DIR         %{FFORGE_DIR}/plugins
-%define PLUGINS_CONF_DIR        %{FFORGE_CONF_DIR}/plugins
-%define SBIN_DIR				%{_sbindir}
+%define FORGE_DIR       %{_datadir}/gforge
+%define FORGE_CONF_DIR  %{_sysconfdir}/gforge
+%define FORGE_LANG_DIR  %{_datadir}/locale
+%define FORGE_DATA_PATH %{_var}/lib/gforge
+%define FORGE_CHROOT_PATH %{FORGE_DATA_PATH}/chroot
+%define FORGE_PLUGINS_LIB_DIR       %{FORGE_DIR}/plugins
+%define FORGE_PLUGINS_CONF_DIR        %{FORGE_CONF_DIR}/plugins
+
+# If that works, then a better way would be the following:
+# %define FORGE_DIR       %(utils/forge_get_config_basic fhsrh source_path)
+# %define FORGE_CONF_DIR  %(utils/forge_get_config_basic fhsrh config_path)
+# %define FORGE_LANG_DIR  %{_datadir}/locale
+# %define FORGE_DATA_PATH   %(utils/forge_get_config_basic fhsrh data_path)
+# %define FORGE_CHROOT_PATH   %(utils/forge_get_config_basic fhsrh chroot)
+# %define FORGE_PLUGINS_LIB_DIR         %(utils/forge_get_config_basic fhsrh plugins_path)
+# %define FORGE_PLUGINS_CONF_DIR        %{FORGE_CONF_DIR}/plugins
 
 #specific define for plugins
-%define PLUGIN_LIB              %{PLUGINS_LIB_DIR}/%{plugin}
-%define PLUGIN_CONF             %{PLUGINS_CONF_DIR}/%{plugin}
-%define PLUGIN_DUMP				/var/lib/gforge/dumps
-
+%define FORGE_PLUGIN_LIB              %{FORGE_PLUGINS_LIB_DIR}/%{plugin}
+%define FORGE_PLUGIN_CONF             %{FORGE_PLUGINS_CONF_DIR}/%{plugin}
+%define FORGE_PLUGIN_DUMP				%{FORGE_VAR_LIB}/dumps
 
 %description
 This plugin contains the Subversion subsystem of FusionForge. It allows
@@ -62,42 +69,42 @@ some control over it to the project's administrator.
 # cleaning build environment
 [ "$RPM_BUILD_ROOT" != "/" ] && rm -rf $RPM_BUILD_ROOT
 
-# copying all needed stuff to %{PLUGIN_LIB}
-install -m 755 -d $RPM_BUILD_ROOT/%{PLUGIN_LIB}
+# copying all needed stuff to %{FORGE_PLUGIN_LIB}
+install -m 755 -d $RPM_BUILD_ROOT/%{FORGE_PLUGIN_LIB}
 for dir in bin common; do
-        cp -rp $dir $RPM_BUILD_ROOT/%{PLUGIN_LIB}/
+        cp -rp $dir $RPM_BUILD_ROOT/%{FORGE_PLUGIN_LIB}/
 done;
-#chmod 755 $RPM_BUILD_ROOT/%{PLUGIN_LIB}/bin/*
+#chmod 755 $RPM_BUILD_ROOT/%{FORGE_PLUGIN_LIB}/bin/*
 
 # installing configuration file
-install -m 755 -d  $RPM_BUILD_ROOT/%{FFORGE_CONF_DIR}/
-install -m 755 -d $RPM_BUILD_ROOT/%{PLUGIN_CONF}
-cp -rp etc/plugins/%{plugin}/* $RPM_BUILD_ROOT/%{PLUGIN_CONF}/
+install -m 755 -d  $RPM_BUILD_ROOT/%{FORGE_CONF_DIR}/
+install -m 755 -d $RPM_BUILD_ROOT/%{FORGE_PLUGIN_CONF}
+cp -rp etc/plugins/%{plugin}/* $RPM_BUILD_ROOT/%{FORGE_PLUGIN_CONF}/
 
 # installing dumps repository
-install -m 755 -d $RPM_BUILD_ROOT/%{PLUGIN_DUMP}
+install -m 755 -d $RPM_BUILD_ROOT/%{FORGE_PLUGIN_DUMP}
 
 %pre
 
 %post
 if [ "$1" = "1" ] ; then
 	# link the plugin www rep to be accessed by web
-	#ln -s %{PLUGIN_LIB}/www %{FFORGE_DIR}/www/plugins/%{plugin}
+	#ln -s %{FORGE_PLUGIN_LIB}/www %{FORGE_DIR}/www/plugins/%{plugin}
         
     # register plugin in database
-    %{FFORGE_BIN_DIR}/register-plugin %{plugin} SVN &> /dev/null
+    %{FORGE_BIN_DIR}/register-plugin %{plugin} SVN &> /dev/null
     
     perl -pi -e "
-	s/sys_use_scm=false/sys_use_scm=true/g" %{FFORGE_CONF_DIR}/gforge.conf
+	s/sys_use_scm=false/sys_use_scm=true/g" %{FORGE_CONF_DIR}/gforge.conf
 		
-	CHROOT=`grep '^gforge_chroot=' %{FFORGE_CONF_DIR}/gforge.conf | sed 's/.*=\s*\(.*\)/\1/'`
+	CHROOT=`grep '^gforge_chroot=' %{FORGE_CONF_DIR}/gforge.conf | sed 's/.*=\s*\(.*\)/\1/'`
 	if [ ! -d $CHROOT/svnroot ] ; then
 		mkdir -p $CHROOT/svnroot
 	fi
 	ln -s $CHROOT/svnroot /svnroot
 	
 	#configuration svn
-	/usr/share/gforge/plugins/scmsvn/bin/install-svn.sh configure
+	%{FORGE_PLUGIN_LIB}/bin/install-svn.sh configure
 
 else
         # upgrade
@@ -107,7 +114,7 @@ fi
 %postun
 if [ "$1" = "0" ] ; then
         # unregister plugin in database
-        %{FFORGE_BIN_DIR}/unregister-plugin %{plugin}
+        %{FORGE_BIN_DIR}/unregister-plugin %{plugin}
         
 else
         # upgrade
@@ -120,10 +127,10 @@ fi
 %files
 %defattr(-, root, root)
 %doc README
-%{PLUGIN_CONF}
-%attr(0750, root, root) %{PLUGIN_LIB}/bin/install-svn.sh
-%{PLUGIN_LIB}/common
-%attr(0744, gforge, gforge) %{PLUGIN_DUMP}
+%{FORGE_PLUGIN_CONF}
+%attr(0750, root, root) %{FORGE_PLUGIN_LIB}/bin/install-svn.sh
+%{FORGE_PLUGIN_LIB}/common
+%attr(0744, gforge, gforge) %{FORGE_PLUGIN_DUMP}
 
 %changelog
 * Mon Jan 09 2006 Nicolas Quienot <nquienot@linagora.com>

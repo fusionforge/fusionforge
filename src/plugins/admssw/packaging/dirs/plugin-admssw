@@ -1,3 +1,3 @@
-@PLUGIN_PATH@/admssw/cgi-bin
-@PLUGIN_PATH@/admssw/common
-@PLUGIN_PATH@/admssw/www
+@PLUGINS_PATH@/admssw/cgi-bin
+@PLUGINS_PATH@/admssw/common
+@PLUGINS_PATH@/admssw/www

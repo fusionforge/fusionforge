@@ -1,6 +1,6 @@
-plugins/scmhook/common/*	@PLUGIN_PATH@/scmhook/common/
-plugins/scmhook/www/*		@PLUGIN_PATH@/scmhook/www/
-plugins/scmhook/db/*		@PLUGIN_PATH@/scmhook/db/
-plugins/scmhook/library/*	@PLUGIN_PATH@/scmhook/library/
-plugins/scmhook/etc/*.ini	etc/@PACKAGE@/config.ini.d/
-plugins/scmhook/cronjobs/*	@PLUGIN_PATH@/scmhook/cronjobs/
+plugins/scmhook/common/*	@PLUGINS_PATH@/scmhook/common/
+plugins/scmhook/www/*		@PLUGINS_PATH@/scmhook/www/
+plugins/scmhook/db/*		@PLUGINS_PATH@/scmhook/db/
+plugins/scmhook/library/*	@PLUGINS_PATH@/scmhook/library/
+plugins/scmhook/etc/*.ini	@CONFIG_PATH@/config.ini.d/
+plugins/scmhook/cronjobs/*	@PLUGINS_PATH@/scmhook/cronjobs/

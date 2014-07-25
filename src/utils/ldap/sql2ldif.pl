@@ -8,9 +8,14 @@
 
 use DBI;
 
-#require("base64.pl");  # Include all the predefined functions
-require("/usr/share/gforge/lib/include.pl");  # Include all the predefined functions
-$chroot="/var/lib/gforge/chroot";
+my $source_path = `forge_get_config source_path`;
+chomp $source_path;
+
+require ("$source_path/lib/include.pl") ; # Include all the predefined functions 
+
+my $chroot = `forge_get_config chroot`;
+chomp $chroot;
+
 &db_connect;
 
 #

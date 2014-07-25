@@ -1,7 +1,7 @@
-deb-specific/update-user-group-ssh.sh  @PLUGIN_PATH@/scmcvs/bin/
-plugins/scmcvs/bin/*                   @PLUGIN_PATH@/scmcvs/bin/
-plugins/scmcvs/sbin/*                  @PLUGIN_PATH@/scmcvs/sbin/
-plugins/scmcvs/common/*                @PLUGIN_PATH@/scmcvs/common/
-plugins/scmcvs/cronjobs/*              @PLUGIN_PATH@/scmcvs/cronjobs/
+deb-specific/update-user-group-ssh.sh  @PLUGINS_PATH@/scmcvs/bin/
+plugins/scmcvs/bin/*                   @PLUGINS_PATH@/scmcvs/bin/
+plugins/scmcvs/sbin/*                  @PLUGINS_PATH@/scmcvs/sbin/
+plugins/scmcvs/common/*                @PLUGINS_PATH@/scmcvs/common/
+plugins/scmcvs/cronjobs/*              @PLUGINS_PATH@/scmcvs/cronjobs/
 plugins/scmcvs/etc/plugins/scmcvs/*    @CONFIG_PATH@/plugins/scmcvs/
-plugins/scmcvs/etc/*.ini 	       etc/@PACKAGE@/config.ini.d/
+plugins/scmcvs/etc/*.ini 	       @CONFIG_PATH@/config.ini.d/

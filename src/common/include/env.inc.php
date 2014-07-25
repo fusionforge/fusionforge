@@ -72,6 +72,9 @@ if (getenv('FORGE_CONFIG_PATH') && file_exists(getenv('FORGE_CONFIG_PATH').'/con
 } elseif (file_exists($fusionforge_basedir.'/config/config.ini')) {
 	$gfcgfile = 'config.ini';
 	$gfconfig = $fusionforge_basedir.'/config/';
+} elseif (is_dir('/etc/fusionforge')) {
+	$gfcgfile = 'config.ini';
+	$gfconfig = '/etc/fusionforge/';
 } elseif (is_dir('/etc/gforge')) {
 	$gfcgfile = 'config.ini';
 	$gfconfig = '/etc/gforge/';

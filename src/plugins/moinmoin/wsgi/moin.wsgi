@@ -1,17 +1,20 @@
 # -*- coding: iso-8859-1 mode:python -*-
 """
-    MoinMoin - mod_wsgi driver scrip for integration with FusionForge
+    MoinMoin - mod_wsgi driver script for integration with FusionForge
 
     @copyright: 2011 by Roland Mas
     @license: GNU GPL, see COPYING for details.
 """
 
-import sys, os
+import sys, os, re
 from MoinMoin import log
 
-sys.path.insert(0, '/var/lib/gforge/plugins/moinmoin/wikidata')
-sys.path.insert(0, '/usr/share/gforge/plugins/moinmoin/lib')
+data_path = os.popen('forge_get_config data_path').read().strip()
+source_path = ospopen('forge_get_config source_path').read().strip()
 
-log.load_config('/etc/gforge/plugins/moinmoin/moinmoin.conf')
+sys.path.insert(0, data_path + '/plugins/moinmoin/wikidata')
+sys.path.insert(0, source_path + '/plugins/moinmoin/lib')
+
+log.load_config('/etc/fusionforge/plugins/moinmoin/moinmoin.conf')
 from MoinMoin.web.serving import make_application
 application = make_application(shared=True)

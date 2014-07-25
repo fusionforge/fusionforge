@@ -1,5 +1,5 @@
-@PLUGIN_PATH@/scmdarcs/cgi-bin
-@PLUGIN_PATH@/scmdarcs/common
-@PLUGIN_PATH@/scmdarcs/www
-usr/share/gforge/www/plugins
+@PLUGINS_PATH@/scmdarcs/cgi-bin
+@PLUGINS_PATH@/scmdarcs/common
+@PLUGINS_PATH@/scmdarcs/www
+@SOURCE_PATH@/www/plugins
 @DATA_PATH@/chroot/scmrepos/darcs

@@ -1,5 +1,5 @@
 # Must create /var/lib/codendi/plugins/mediawiki/master
-# Done in /usr/share/gforge/plugins/mediawiki/cronjobs/create-wikis.php
+# Done in @PLUGINS_PATH@/mediawiki/cronjobs/create-wikis.php
 # Theme
 # ln -s /usr/share/codendi/plugins/mediawiki/mediawiki-skin/FusionForge.php /usr/share/mediawiki115/skins/
 # ln -s /usr/share/codendi/plugins/mediawiki/mediawiki-skin/fusionforge /usr/share/mediawiki115/skins/

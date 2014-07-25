@@ -87,7 +87,7 @@ search_conf_file PHP "$PHP_ETC_SEARCH"
 PHP_ETC_LIST="$RESULT"
 export APACHE_ETC_LIST GFORGE_ETC_LIST PHP_ETC_LIST
 
-[ -z "$gforgebin" ] && gforgebin="/usr/share/gforge/bin"
+gforgebin=$(forge_get_config binary_path)
 set $GFORGE_ETC_LIST
 gforgeconffile=$1
 echo Using $gforgeconffile

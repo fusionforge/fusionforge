@@ -27,8 +27,8 @@
 
 //
 //	This script will read in a list existing mailing lists, then add the new lists
-//	and, finally, create the lists in a /var/lib/gforge/dumps/mailman-aliases file
-//	The /var/lib/gforge/dumps/mailman-aliases file will then be read by the mailaliases.php file
+//	and, finally, create the lists in a @DATA_PATH@/dumps/mailman-aliases file
+//	The @DATA_PATH@/dumps/mailman-aliases file will then be read by the mailaliases.php file
 //
 
 require dirname(__FILE__).'/../../www/env.inc.php';

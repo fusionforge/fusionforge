@@ -206,7 +206,7 @@ dropdbifexists()
 {
 	if [ -z "$1" ]
 	then
-		export PATH=$PATH:/usr/share/gforge/bin/:/usr/share/gforge/utils:/opt/gforge/utils
+		export PATH=$PATH:$fusionforge_bin_dir:$fusionforge_dir/utils:/opt/gforge/utils
 		database=`FUSIONFORGE_NO_PLUGINS=true forge_get_config database_name`
 	else
 		database=$1
