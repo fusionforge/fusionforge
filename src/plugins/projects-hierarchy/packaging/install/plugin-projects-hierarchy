@@ -1,7 +1,7 @@
-plugins/projects-hierarchy/common/*                  @PLUGIN_PATH@/projects-hierarchy/common/
-plugins/projects-hierarchy/view/*                  @PLUGIN_PATH@/projects-hierarchy/view/
-plugins/projects-hierarchy/actions/*                  @PLUGIN_PATH@/projects-hierarchy/actions/
-plugins/projects-hierarchy/include/*                  @PLUGIN_PATH@/projects-hierarchy/include/
-plugins/projects-hierarchy/www/*                     @PLUGIN_PATH@/projects-hierarchy/www/
-plugins/projects-hierarchy/etc/*.ini 	   			etc/@PACKAGE@/config.ini.d/
-plugins/projects-hierarchy/db/*                      @PLUGIN_PATH@/projects-hierarchy/db/
+plugins/projects-hierarchy/common/*                  @PLUGINS_PATH@/projects-hierarchy/common/
+plugins/projects-hierarchy/view/*                  @PLUGINS_PATH@/projects-hierarchy/view/
+plugins/projects-hierarchy/actions/*                  @PLUGINS_PATH@/projects-hierarchy/actions/
+plugins/projects-hierarchy/include/*                  @PLUGINS_PATH@/projects-hierarchy/include/
+plugins/projects-hierarchy/www/*                     @PLUGINS_PATH@/projects-hierarchy/www/
+plugins/projects-hierarchy/etc/*.ini 	   			@CONFIG_PATH@/config.ini.d/
+plugins/projects-hierarchy/db/*                      @PLUGINS_PATH@/projects-hierarchy/db/

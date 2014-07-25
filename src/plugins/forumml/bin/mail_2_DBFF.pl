@@ -38,6 +38,15 @@ sub validate_listname {
 
 use strict;
 
+my $plugins_path = `forge_get_config plugins_path`;
+chomp $plugins_path;
+
+my $config_path = `forge_get_config config_path`;
+chomp $config_path;
+
+my $source_path = `forge_get_config source_path`;
+chomp $source_path;
+
 # Set default path (required by taint mode)
 $ENV{'PATH'} = '/usr/bin:/bin';
 # Hook log file
@@ -48,7 +57,7 @@ open STDOUT, ">>", $logfile or die "cannot append to '$logfile': $!\n";
 open STDERR, ">&STDOUT" or die "cannot append STDERR to STDOUT: $!\n";
 
 # Search if there are lists we shouldn't treat
-my $conf = '/usr/share/gforge/plugins/forumml/etc/forumml.inc';
+my $conf = "$plugins_path/forumml/etc/forumml.inc";
 if (-f $conf) {
     # Get the variable defined in forumml.inc
     my @exc_lists;
@@ -87,7 +96,7 @@ while (defined($_ = <STDIN>)) {
 close(OUT);
 
 # Get PHP_PARAMS variable from php-laucher.sh
-my $PHP_PARAMS="-q -d include_path=.:/etc/gforge:/usr/share/gforge:/usr/share/gforge/www/include:/usr/share/gforge/plugins";
+my $PHP_PARAMS="-q -d include_path=.:$config_path:$source_path:$source_path/www/include:$plugins_path";
 #open(PHP_LAUNCHER, "</usr/share/codendi/src/utils/php-launcher.sh");
 #while (<PHP_LAUNCHER>) {
 #    if (m/^[ ]*PHP_PARAMS="(.*)"$/) {
@@ -98,7 +107,7 @@ my $PHP_PARAMS="-q -d include_path=.:/etc/gforge:/usr/share/gforge:/usr/share/gf
 #close(PHP_LAUNCHER);
 
 # store mail in ForumML DB
-exec "/usr/bin/php $PHP_PARAMS /usr/share/gforge/plugins/forumml/bin/mail_2_DBFF.php $listname 1 $temp";
+exec "/usr/bin/php $PHP_PARAMS $plugins_path/forumml/bin/mail_2_DBFF.php $listname 1 $temp";
 
 close STDOUT;
 close STDERR;

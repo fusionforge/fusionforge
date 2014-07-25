@@ -78,5 +78,5 @@ fi
 mvn clean
 
 ##surefire reports for the OSLC testsuite results##
-ln -s /root/fusionforge-Branch_5_1/src/plugins/oslc/tests/provider-test/target/site /usr/share/gforge/plugins/oslc/www/surefire
+ln -s /root/fusionforge-Branch_5_1/src/plugins/oslc/tests/provider-test/target/site $(forge_get_config plugins_path)/oslc/www/surefire
 

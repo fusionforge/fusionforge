@@ -1,1 +1,1 @@
-@SOURCE_PATH@/www/env.inc.php @PLUGIN_PATH@/env.inc.php
+@SOURCE_PATH@/www/env.inc.php @PLUGINS_PATH@/env.inc.php

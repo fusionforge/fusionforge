@@ -1,8 +1,8 @@
-plugins/globaldashboard/common/*                  @PLUGIN_PATH@/globaldashboard/common/
-plugins/globaldashboard/include/*                 @PLUGIN_PATH@/globaldashboard/include/
-plugins/globaldashboard/db/*                      @PLUGIN_PATH@/globaldashboard/db/
-plugins/globaldashboard/www/*                     @PLUGIN_PATH@/globaldashboard/www/
+plugins/globaldashboard/common/*                  @PLUGINS_PATH@/globaldashboard/common/
+plugins/globaldashboard/include/*                 @PLUGINS_PATH@/globaldashboard/include/
+plugins/globaldashboard/db/*                      @PLUGINS_PATH@/globaldashboard/db/
+plugins/globaldashboard/www/*                     @PLUGINS_PATH@/globaldashboard/www/
 plugins/globaldashboard/cronjobs/*                @SOURCE_PATH@/cronjobs
 plugins/globaldashboard/etc/plugins/globaldashboard/*     @CONFIG_PATH@/plugins/globaldashboard/
 plugins/globaldashboard/etc/httpd.d/*             @SOURCE_PATH@/etc/httpd.d/
-plugins/globaldashboard/etc/globaldashboard.ini	             etc/@PACKAGE@/config.ini.d/
+plugins/globaldashboard/etc/globaldashboard.ini	             @CONFIG_PATH@/config.ini.d/

@@ -5,7 +5,7 @@ install5_post_redhat()
 	# Post installation fixes.
 	perl -spi -e "s/^#ServerName (.*):80/ServerName $hostname:80/" /etc/httpd/conf/httpd.conf
 	# Disable ssl
-	perl -spi -e "s/^Include/#Include/" /etc/gforge/httpd.conf.d/ssl-on.inc
+	perl -spi -e "s/^Include/#Include/" $(forge_get_config config_path)/httpd.conf.d/ssl-on.inc
 	
 	chkconfig httpd on
 	chkconfig postgresql on
@@ -50,25 +50,25 @@ install5_post_suse()
 
 install5_post_debian()
 {
-        if [ ! -e /etc/gforge/ssl-cert.pem ] || [ ! -e /etc/gforge/ssl-cert.key ] ; then
+        if [ ! -e $(forge_get_config config_path)/ssl-cert.pem ] || [ ! -e $(forge_get_config config_path)/ssl-cert.key ] ; then
             # Uh-oh, no SSL cert, let's make sure at least a dummy one exists.
             if [ ! -e /etc/ssl/certs/ssl-cert-snakeoil.pem ] || [ ! -e /etc/ssl/private/ssl-cert-snakeoil.key ] ; then
                 # What, not even the snakeoil cert is there?  Let's generate it
                 make-ssl-cert generate-default-snakeoil
             fi
             # Right.  At this point, it should be safe to set the symlinks.
-            ln -s /etc/ssl/certs/ssl-cert-snakeoil.pem /etc/gforge/ssl-cert.pem
-            ln -s /etc/ssl/private/ssl-cert-snakeoil.key /etc/gforge/ssl-cert.key
+            ln -s /etc/ssl/certs/ssl-cert-snakeoil.pem $(forge_get_config config_path)/ssl-cert.pem
+            ln -s /etc/ssl/private/ssl-cert-snakeoil.key $(forge_get_config config_path)/ssl-cert.key
         fi
 
         for i in secrets.inc vhost-list.inc vhost-main.inc vhost-projects.inc ; do
-            if [ ! -e /etc/gforge/httpd.conf.d/$i ] ; then
-                cp /opt/gforge/etc/httpd.conf.d-opt/$i /etc/gforge/httpd.conf.d/$i
+            if [ ! -e $(forge_get_config config_path)/httpd.conf.d/$i ] ; then
+                cp /opt/gforge/etc/httpd.conf.d-opt/$i $(forge_get_config config_path)/httpd.conf.d/$i
                 if [ $i = "secrets.inc" ] ; then
-                    chmod 700 /etc/gforge/httpd.conf.d/$i
+                    chmod 700 $(forge_get_config config_path)/httpd.conf.d/$i
                 fi
                 PATH=/opt/gforge/utils:$PATH manage-apache-config.sh install
-                mv /etc/gforge/httpd.conf.d/$i.generated /etc/gforge/httpd.conf.d/$i
+                mv $(forge_get_config config_path)/httpd.conf.d/$i.generated $(forge_get_config config_path)/httpd.conf.d/$i
             fi
         done
 

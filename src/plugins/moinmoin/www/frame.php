@@ -32,7 +32,7 @@ $params['sectionvals'] = array ($group->getPublicName());
 
 site_project_header($params);
 
-if (file_exists ('/var/lib/gforge/plugins/moinmoin/wikidata/'.$group->getUnixName().'.py')) {
+if (file_exists (forge_get_config('data_path').'/plugins/moinmoin/wikidata/'.$group->getUnixName().'.py')) {
 	echo '<iframe src="'.util_make_url('/plugins/moinmoin/'.$group->getUnixName().'/FrontPage').'" frameborder="0" width=100% height=700></iframe>' ;
 } else {
 	print '<h2>'._('Wiki not created yet, please wait for a few minutes.').'</h2>';

@@ -3,7 +3,7 @@
 # Configure CVS for Sourceforge
 # Christian Bayle, Roland Mas, debian-sf (Sourceforge for Debian)
 
-PATH=/usr/share/gforge/bin:/usr/share/fusionforge/bin:$PATH
+PATH=$(forge_get_config binary_path):$PATH
 source_path=`forge_get_config source_path`
 log_path=`forge_get_config log_path`
 data_path=`forge_get_config data_path`

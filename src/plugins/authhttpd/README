@@ -5,7 +5,7 @@ This is the external HTTPD authentication plugin for FusionForge.
 
 Installation:
 
-- files from include/ go to @PLUGIN_PATH@/authhttpd/include/
+- files from include/ go to @PLUGINS_PATH@/authhttpd/include/
 - files from www/ go to @SOURCE_PATH@/www/plugins/authhttpd/
 
 Setup:

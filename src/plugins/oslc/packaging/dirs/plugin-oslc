@@ -1,4 +1,4 @@
-etc/gforge/httpd.conf.d
-@PLUGIN_PATH@/oslc/cgi-bin
-@PLUGIN_PATH@/oslc/common
-@PLUGIN_PATH@/oslc/www
+@CONFIG_PATH@/httpd.conf.d
+@PLUGINS_PATH@/oslc/cgi-bin
+@PLUGINS_PATH@/oslc/common
+@PLUGINS_PATH@/oslc/www

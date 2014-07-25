@@ -1,3 +1,3 @@
-plugins/doaprdf/common/*                  @PLUGIN_PATH@/doaprdf/common/
-plugins/doaprdf/include/*                 @PLUGIN_PATH@/doaprdf/include/
-plugins/doaprdf/etc/doaprdf.ini	             etc/@PACKAGE@/config.ini.d/
+plugins/doaprdf/common/*                  @PLUGINS_PATH@/doaprdf/common/
+plugins/doaprdf/include/*                 @PLUGINS_PATH@/doaprdf/include/
+plugins/doaprdf/etc/doaprdf.ini	             @CONFIG_PATH@/config.ini.d/

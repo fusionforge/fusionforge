@@ -6,12 +6,12 @@
 #
 
 # Change path to the GForge directory.
-FUSIONFORGE="/usr/share/gforge"
+FUSIONFORGE=@SOURCE_PATH@
 
 # Change paths to the GForge directory.
 # Don't reference $GFORGE because this won't work!
 # You may need to change the pathname to php CLI (command line interface)
-PHP="/usr/bin/php -q -d include_path=.:/etc/gforge:/usr/share/gforge:/usr/share/gforge/www/include"
+PHP="/usr/bin/php -q -d include_path=.:@CONFIG_PATH@:@SOURCE_PATH@:@SOURCE_PATH@/www/include"
 
 # Don't mail command output to anyone.
 MAILTO=""
@@ -19,9 +19,9 @@ MAILTO=""
 #
 #       Create the /etc/* files : only usefull if the sys_account_manager_type=UNIX
 #
-#10 * * * * root $PHP $FUSIONFORGE/plugins/scmcvs/cronjobs/usergroup.php
+#10 * * * * root $PHP @PLUGINS_PATH@/scmcvs/cronjobs/usergroup.php
 
 #
 #       Create the blank cvs trees
 #
-20 * * * * root $PHP $FUSIONFORGE/plugins/scmcvs/cronjobs/cvs.php
+20 * * * * root $PHP @PLUGINS_PATH@/scmcvs/cronjobs/cvs.php

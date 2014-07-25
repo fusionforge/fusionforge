@@ -15,7 +15,7 @@ cachedir=/var/cache/gforge/loggerhead
 
 case "$1" in
     configure)
-	PATH=/usr/share/gforge/bin:/usr/share/fusionforge/bin:$PATH
+	PATH=$(forge_get_config binary_path):$PATH
 	repos_path=$(forge_get_config repos_path scmbzr)
 	web_host=$(forge_get_config web_host)
 	url_prefix=$(forge_get_config url_prefix)

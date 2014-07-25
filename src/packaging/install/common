@@ -1,8 +1,8 @@
-etc/config.ini-fhs                     etc/@PACKAGE@
-etc/config.ini.d/defaults.ini          etc/@PACKAGE@/config.ini.d/
-etc/config.ini.d/debug.ini             etc/@PACKAGE@/config.ini.d/
-etc/config.ini.d/zzzz-local.ini        etc/@PACKAGE@/config.ini.d/
-etc/custom                     	       etc/@PACKAGE@/
+etc/config.ini-fhs                     @CONFIG_PATH@
+etc/config.ini.d/defaults.ini          @CONFIG_PATH@/config.ini.d/
+etc/config.ini.d/debug.ini             @CONFIG_PATH@/config.ini.d/
+etc/config.ini.d/zzzz-local.ini        @CONFIG_PATH@/config.ini.d/
+etc/custom                     	       @CONFIG_PATH@/
 deb-specific/cvssh                     bin/
 #
 deb-specific/install-chroot.sh         @BINARY_PATH@/
@@ -26,9 +26,9 @@ cronjobs/generate_scm_snapshots.php    @SOURCE_PATH@/cronjobs/
 utils/default_page.php                 @SOURCE_PATH@/utils/
 locales/*                              usr/share/locale/
 #
-plugins/authbuiltin/common          @PLUGIN_PATH@/authbuiltin/
-plugins/authbuiltin/www             @PLUGIN_PATH@/authbuiltin/
-plugins/authbuiltin/etc/*.ini 	    etc/@PACKAGE@/config.ini.d/
+plugins/authbuiltin/common          @PLUGINS_PATH@/authbuiltin/
+plugins/authbuiltin/www             @PLUGINS_PATH@/authbuiltin/
+plugins/authbuiltin/etc/*.ini 	    @CONFIG_PATH@/config.ini.d/
 #
 utils/list-admins.php                  @BINARY_PATH@/
 utils/list-projects-using-plugin.php   @BINARY_PATH@/
@@ -38,7 +38,7 @@ utils/httpd_log_demux.php              @BINARY_PATH@/
 utils/forge_wrapper	                 @BINARY_PATH@/
 #
 # plugins/sysauthpgsql/common          usr/share/@OLDPACKAGE@/plugins/sysauthpgsql/
-# plugins/sysauthpgsql/etc/*.ini 	    etc/@PACKAGE@/config.ini.d/
+# plugins/sysauthpgsql/etc/*.ini 	    @CONFIG_PATH@/config.ini.d/
 #
 # Upgrade main database or plugins tables
 db/upgrade-db.php			@BINARY_PATH@/
