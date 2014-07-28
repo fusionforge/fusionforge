@@ -43,8 +43,7 @@ foreach ($argv as $project) {
     system("rm -rf $project_dir");
   }
 
-  $schema = "plugin_mediawiki_$project";
-  strtr($schema, "-", "_");
+  $schema = strtr("plugin_mediawiki_$project", "-", "_");
   echo "  Dropping database schema $schema.\n";
   $res = db_query_params("DROP SCHEMA $schema CASCADE", array());
   if (!$res) {
