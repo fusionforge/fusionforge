@@ -10,7 +10,7 @@ import sys, os, re
 from MoinMoin import log
 
 data_path = os.popen('forge_get_config data_path').read().strip()
-source_path = ospopen('forge_get_config source_path').read().strip()
+source_path = os.popen('forge_get_config source_path').read().strip()
 
 sys.path.insert(0, data_path + '/plugins/moinmoin/wikidata')
 sys.path.insert(0, source_path + '/plugins/moinmoin/lib')
