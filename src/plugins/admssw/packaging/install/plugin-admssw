@@ -1,4 +1,4 @@
-plugins/admssw/common/*                  @PLUGIN_PATH@/admssw/common/
-plugins/admssw/include/*                 @PLUGIN_PATH@/admssw/include/
-plugins/admssw/etc/admssw.ini	             etc/@PACKAGE@/config.ini.d/
-plugins/admssw/www/* @PLUGIN_PATH@/admssw/www/
+plugins/admssw/common/*                  @PLUGINS_PATH@/admssw/common/
+plugins/admssw/include/*                 @PLUGINS_PATH@/admssw/include/
+plugins/admssw/etc/admssw.ini	             @CONFIG_PATH@/config.ini.d/
+plugins/admssw/www/* @PLUGINS_PATH@/admssw/www/

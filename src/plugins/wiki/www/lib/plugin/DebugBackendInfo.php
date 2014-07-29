@@ -41,6 +41,16 @@ class WikiPlugin_DebugBackendInfo
     {
         $args = $this->getArgs($argstr, $request);
         extract($args);
+        if (empty($userid) or $userid == $request->_user->UserName()) {
+            $user = $request->_user;
+            $userid = $user->UserName();
+        } else {
+            $user = WikiUser($userid);
+        }
+        if (!$user->isAdmin() and !(DEBUG && _DEBUG_LOGIN)) {
+            $request->_notAuthorized(WIKIAUTH_ADMIN);
+            $this->disabled("! user->isAdmin");
+        }
         if (empty($page))
             return $this->error("page missing");
 
@@ -49,7 +59,7 @@ class WikiPlugin_DebugBackendInfo
         $this->readonly_pagemeta = array();
         $this->hidden_pagemeta = array('_cached_html');
 
-        $html = HTML(HTML::h3(fmt("Querying backend directly for “%s”",
+        $html = HTML(HTML::h2(fmt("Querying backend directly for “%s”",
             $page)));
 
         $table = HTML::table(array('class' => 'bordered'));
@@ -159,20 +169,20 @@ class WikiPlugin_DebugBackendInfo
         $rows = array();
         if ($heading)
             $rows[] = HTML::tr(array(
-                    'style' => 'color:#000;background-color:#ffcccc'),
+                    'style' => 'color:black; background-color:#ffcccc'),
                 HTML::td(array('colspan' => 2,
-                        'style' => 'color:#000'),
+                        'style' => 'color:black'),
                     $heading));
         if (!is_array($hash)) return array();
         ksort($hash);
         foreach ($hash as $key => $val) {
             if ($this->chunk_split and is_string($val)) $val = chunk_split($val);
             $rows[] = HTML::tr(HTML::td(array('class' => 'align-right',
-                        'style' => 'color:#000;background-color:#ccc'),
+                        'style' => 'color:black; background-color:#ccc'),
                     HTML(HTML::raw('&nbsp;'), $key,
                         HTML::raw('&nbsp;'))),
                 HTML::td(array(
-                        'style' => 'color:#000;background-color:#fff'),
+                        'style' => 'color:black; background-color:white'),
                     $this->_showvalue($key, $val, $prefix))
             );
         }

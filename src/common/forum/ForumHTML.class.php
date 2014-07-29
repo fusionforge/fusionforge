@@ -48,7 +48,7 @@ function forum_header($params) {
 	if ($forum_id) {
 		// Check if this is a news item, to display it at the top of the page
 		$result = db_query_params('SELECT submitted_by, post_date, group_id, forum_id, summary, details FROM news_bytes WHERE forum_id=$1',
-					   array ($forum_id));
+					   array($forum_id));
 
 		if (db_numrows($result) == 1) {
 
@@ -130,10 +130,10 @@ function forum_header($params) {
 	}
 
 	$pluginManager = plugin_manager_get_object();
-	if ($f && $pluginManager->PluginIsInstalled('blocks') && plugin_hook ("blocks", "forum_".$f->getName()))
+	if ($f && $pluginManager->PluginIsInstalled('blocks') && plugin_hook("blocks", "forum_".$f->getName()))
 		echo '<br />';
 
-	if (session_loggedin() ) {
+	if (session_loggedin()) {
 		if ($f) {
 			if ($f->isMonitoring()) {
 				echo util_make_link('/forum/monitor.php?forum_id='.$forum_id.'&group_id='.$group_id.'&stop=1',
@@ -188,12 +188,12 @@ class ForumHTML extends Error {
 	}
 
 	/**
-	 * Function showPendingMessage
+	 * showPendingMessage - get the HTML code of a pending message
 	 *
 	 * @param	object	$msg	The message.
 	 * @return	string	return the html output
 	 */
-	function showPendingMessage ( &$msg) {
+	function showPendingMessage(&$msg) {
 		global $HTML,$group_id;
 
 		$am = new AttachManager();
@@ -227,7 +227,7 @@ class ForumHTML extends Error {
 
 	}
 
-	function showNestedMessage ( &$msg ) {
+	function showNestedMessage(&$msg) {
 		/*
 
 		accepts a database result handle to display a single message
@@ -289,7 +289,7 @@ class ForumHTML extends Error {
 	}
 
 	/**
-	 *  LinkAttachEditForm - Returns the link to the attach form for editing
+	 * LinkAttachEditForm - Returns the link to the attach form for editing
 	 *
 	 * @param	string	$filename	Filename
 	 * @param	int	$group_id	group id
@@ -298,7 +298,6 @@ class ForumHTML extends Error {
 	 * @param	int	$msg_id		msg id
 	 * @return	string The HTML output
 	 */
-
 	function LinkAttachEditForm($filename,$group_id,$forum_id,$attachid,$msg_id) {
 		global $HTML;
 		$return_val = '
@@ -478,12 +477,11 @@ class ForumHTML extends Error {
 	}
 
 	/**
-	 *  showEditForm - Prints the form to edit a message
+	 * showEditForm - Prints the form to edit a message
 	 *
-	 *	@param 	int	$msg The Message
-	 *	@return	The HTML output echoed
+	 * @param	int	$msg The Message
+	 * @return	The HTML output echoed
 	 */
-
 	function showEditForm(&$msg) {
 		$thread_id = $msg->getThreadID();
 		$msg_id = $msg->getID();

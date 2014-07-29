@@ -34,7 +34,7 @@ require_once 'themes/MonoBook/themeinfo.php';
 class WikiTheme_Sidebar extends WikiTheme_MonoBook
 {
 
-    function WikiTheme_Sidebar($theme_name = 'Sidebar')
+    function __construct($theme_name = 'Sidebar')
     {
         $this->WikiTheme($theme_name);
         //$this->calendarInit(true);

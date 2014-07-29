@@ -15,7 +15,10 @@
 use DBI;
 use Quota;
 
-require("/usr/share/gforge/lib/include.pl");
+my $source_path = `forge_get_config source_path`;
+chomp $source_path;
+
+require ("$source_path/lib/include.pl") ; # Include all the predefined functions 
 
 my $BLOCK_SIZE=$ENV{'BLOCK_SIZE'} || 1024;
 

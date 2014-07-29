@@ -73,19 +73,19 @@ class WikiDB_backend_PDO_oci8
             . " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
         // Either use unixtime as %d (long), or the native timestamp format.
         $sth->bindParam(1, date('d-M-Y H:i:s', $entry->time));
-        $sth->bindParam(2, $entry->host, PDO_PARAM_STR, 100);
-        $sth->bindParam(3, $entry->user, PDO_PARAM_STR, 50);
-        $sth->bindParam(4, $entry->request_method, PDO_PARAM_STR, 10);
-        $sth->bindParam(5, $entry->request, PDO_PARAM_STR, 255);
-        $sth->bindParam(6, $entry->request_args, PDO_PARAM_STR, 255);
-        $sth->bindParam(7, $entry->request_uri, PDO_PARAM_STR, 255);
-        $sth->bindParam(8, $entry->_ncsa_time($entry->time), PDO_PARAM_STR, 28);
-        $sth->bindParam(9, $entry->time, PDO_PARAM_INT);
-        $sth->bindParam(10, $entry->status, PDO_PARAM_INT);
-        $sth->bindParam(11, $entry->size, PDO_PARAM_INT);
-        $sth->bindParam(12, $entry->referer, PDO_PARAM_STR, 255);
-        $sth->bindParam(13, $entry->user_agent, PDO_PARAM_STR, 255);
-        $sth->bindParam(14, $entry->duration, PDO_PARAM_FLOAT);
+        $sth->bindParam(2, $entry->host, PDO::PARAM_STR, 100);
+        $sth->bindParam(3, $entry->user, PDO::PARAM_STR, 50);
+        $sth->bindParam(4, $entry->request_method, PDO::PARAM_STR, 10);
+        $sth->bindParam(5, $entry->request, PDO::PARAM_STR, 255);
+        $sth->bindParam(6, $entry->request_args, PDO::PARAM_STR, 255);
+        $sth->bindParam(7, $entry->request_uri, PDO::PARAM_STR, 255);
+        $sth->bindParam(8, $entry->_ncsa_time($entry->time), PDO::PARAM_STR, 28);
+        $sth->bindParam(9, $entry->time, PDO::PARAM_INT);
+        $sth->bindParam(10, $entry->status, PDO::PARAM_INT);
+        $sth->bindParam(11, $entry->size, PDO::PARAM_INT);
+        $sth->bindParam(12, $entry->referer, PDO::PARAM_STR, 255);
+        $sth->bindParam(13, $entry->user_agent, PDO::PARAM_STR, 255);
+        $sth->bindParam(14, $entry->duration, PDO::PARAM_FLOAT);
         $sth->execute();
     }
 }

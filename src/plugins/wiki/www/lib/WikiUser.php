@@ -61,9 +61,6 @@ function UpgradeUser($olduser, $user)
     }
 }
 
-/**
- *
- */
 class WikiUser
 {
     public $_userid = false;
@@ -72,15 +69,13 @@ class WikiUser
     public $_authmethod = '', $_authhow = '';
 
     /**
-     * Constructor.
-     *
      * Populates the instance variables and calls $this->_ok()
      * to ensure that the parameters are valid.
      * @param Request $request
      * @param mixed   $userid    String of username or WikiUser object.
      * @param int|bool $authlevel Authorization level.
      */
-    function WikiUser(&$request, $userid = false, $authlevel = false)
+    function __construct(&$request, $userid = false, $authlevel = false)
     {
         $this->_request =& $request;
         $this->_dbi =& $this->_request->getDbh();
@@ -618,10 +613,9 @@ class _UserPreference
 class _UserPreference_numeric
     extends _UserPreference
 {
-    function _UserPreference_numeric($default, $minval = false,
-                                     $maxval = false)
+    function __construct($default, $minval = false, $maxval = false)
     {
-        $this->_UserPreference((double)$default);
+        parent::__construct((double)$default);
         $this->_minval = (double)$minval;
         $this->_maxval = (double)$maxval;
     }
@@ -640,10 +634,9 @@ class _UserPreference_numeric
 class _UserPreference_int
     extends _UserPreference_numeric
 {
-    function _UserPreference_int($default, $minval = false, $maxval = false)
+    function __construct($default, $minval = false, $maxval = false)
     {
-        $this->_UserPreference_numeric((int)$default, (int)$minval,
-            (int)$maxval);
+        parent::__construct((int)$default, (int)$minval, (int)$maxval);
     }
 
     function sanify($value)
@@ -655,9 +648,9 @@ class _UserPreference_int
 class _UserPreference_bool
     extends _UserPreference
 {
-    function _UserPreference_bool($default = false)
+    function __construct($default = false)
     {
-        $this->_UserPreference((bool)$default);
+        parent::__construct((bool)$default);
     }
 
     function sanify($value)
@@ -685,9 +678,9 @@ class _UserPreference_bool
 class _UserPreference_language
     extends _UserPreference
 {
-    function _UserPreference_language($default = DEFAULT_LANGUAGE)
+    function __construct($default = DEFAULT_LANGUAGE)
     {
-        $this->_UserPreference($default);
+        parent::__construct($default);
     }
 
     // FIXME: check for valid locale
@@ -705,9 +698,9 @@ class _UserPreference_language
 class _UserPreference_theme
     extends _UserPreference
 {
-    function _UserPreference_theme($default = THEME)
+    function __construct($default = THEME)
     {
-        $this->_UserPreference($default);
+        parent::__construct($default);
     }
 
     function sanify($value)

@@ -37,7 +37,7 @@ class WikiPlugin_RssFeed
     {
         return array('feed' => "",
             'description' => "",
-            'url' => "", //"http://phpwiki.org/RecentChanges?format=rss",
+            'url' => "", //"http://phpwiki.fr/RecentChanges?format=rss",
             'maxitem' => 0,
             'titleonly' => false,
             'debug' => false,

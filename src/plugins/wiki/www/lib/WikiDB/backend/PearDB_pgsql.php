@@ -17,7 +17,7 @@ Since 1.3.12 changed to use:
 class WikiDB_backend_PearDB_pgsql
     extends WikiDB_backend_PearDB
 {
-    function WikiDB_backend_PearDB_pgsql($dbparams)
+    function __construct($dbparams)
     {
         // The pgsql handler of (at least my version of) the PEAR::DB
         // library generates three warnings when a database is opened:
@@ -32,7 +32,7 @@ class WikiDB_backend_PearDB_pgsql
 
         global $ErrorManager;
         $ErrorManager->pushErrorHandler(new WikiMethodCb($this, '_pgsql_open_error'));
-        $this->WikiDB_backend_PearDB($dbparams);
+        parent::__construct($dbparams);
         $ErrorManager->popErrorHandler();
     }
 

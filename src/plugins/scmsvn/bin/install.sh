@@ -3,8 +3,6 @@
 # Configure Subversion for Sourceforge
 # Roland Mas, Gforge
 
-
-
 set -e
 
 if [ $(id -u) != 0 ] ; then
@@ -12,10 +10,7 @@ if [ $(id -u) != 0 ] ; then
     exec su -c "$0 $1"
 fi
 
-gforge_chroot=$(
-	PATH=/usr/share/gforge/bin:/usr/share/fusionforge/bin:$PATH
-	forge_get_config chroot
-    )
+gforge_chroot=$(forge_get_config chroot)
 
 case "$1" in
     configure)

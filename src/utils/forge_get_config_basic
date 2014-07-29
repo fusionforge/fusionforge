@@ -30,4 +30,16 @@
 # So this is the very short shell version for package build purpose
 pathfromarvg0=`dirname $0`
 curpath=`cd $pathfromarvg0;pwd`
-grep ^$2 $curpath/../etc/config.ini-$1 | cut -d= -f2 | xargs echo
+
+variant=$1
+
+getcorevar () {
+    grep ^$1 $curpath/../etc/config.ini-$variant ../etc/config.ini.d/defaults.ini| cut -d= -f2 | xargs echo
+}
+
+res=$(getcorevar $2)
+while echo "$res" | grep -q '\$core/' ; do
+    e=$(perl -e '$r=q!'$res'!;$r=~s,.*\$core/(\w+).*,$1,;print "$r\n";')
+    res=$(echo $res | sed -e "s,\$core/$e,$($0 $1 $e foo),")
+done
+echo $res

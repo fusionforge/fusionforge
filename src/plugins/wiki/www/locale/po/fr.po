@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PhpWiki 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-25 18:08+0200\n"
+"POT-Creation-Date: 2014-07-15 12:24+0200\n"
 "PO-Revision-Date: 2004-06-22 21:10+0200\n"
 "Last-Translator: Pierrick Meignen <meignen.pierrick@wanadoo.fr>, Roland "
 "Trique <roland.trique@free.fr>, Stéphane Gourichon <stephane.gourichon@lip6."
@@ -527,12 +527,11 @@ msgstr "AdministrationDePhpWiki"
 msgid "Edited by: %s"
 msgstr "Modifié par : %s"
 
+msgid "Loaded the following pages:"
+msgstr ""
+
 msgid "LoadDump"
 msgstr "RécupérationDeLaPage"
-
-#, php-format
-msgid "PageChange Notification of %s sent to %s"
-msgstr "La notification de changement de la page %s a été envoyée à %s"
 
 #, php-format
 msgid "PageChange Notification Error: Couldn't send %s to %s"
@@ -2828,9 +2827,6 @@ msgstr "même contenu"
 msgid "FAILED"
 msgstr "ÉCHEC"
 
-msgid "Source code syntax highlighter (via http://highlightjs.org/)."
-msgstr ""
-
 msgid "Provide access to PhpWiki's lower level system information."
 msgstr "Affiche les informations de bas niveau pour PhpWiki."
 
@@ -3252,18 +3248,6 @@ msgstr ""
 
 msgid "Rate"
 msgstr "Note"
-
-msgid "Display video in Flash or HTML5."
-msgstr "Afficher une vidéo en Flash ou HTML5."
-
-msgid "Both 'url' or 'file' parameters missing."
-msgstr ""
-
-msgid "Choose only one of 'url' or 'file' parameters."
-msgstr ""
-
-msgid "Your browser does not understand the HTML 5 video tag."
-msgstr ""
 
 msgid ""
 "Visualizes the Wiki structure in a graph using the 'dot' commandline tool "
@@ -5855,9 +5839,6 @@ msgstr "The projet est partagé avec des utilisateurs extérieurs"
 msgid " (non %s users)."
 msgstr " (hors %s)."
 
-msgid "Views"
-msgstr "Vues"
-
 msgid "Watch"
 msgstr "Surveiller"
 
@@ -5992,6 +5973,15 @@ msgstr ""
 
 msgid "Edit this page"
 msgstr "Modifier cette page"
+
+#~ msgid "PageChange Notification of %s sent to %s"
+#~ msgstr "La notification de changement de la page %s a été envoyée à %s"
+
+#~ msgid "Display video in Flash or HTML5."
+#~ msgstr "Afficher une vidéo en Flash ou HTML5."
+
+#~ msgid "Views"
+#~ msgstr "Vues"
 
 #~ msgid "Prediction: %s"
 #~ msgstr "Prédiction : %s"

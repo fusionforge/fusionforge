@@ -96,10 +96,11 @@ class TextSearchQuery
      */
     function TextSearchQuery($search_query, $case_exact = false, $regex = 'auto')
     {
-        if ($regex == 'none' or !$regex)
+        if ($regex == 'none' or !$regex) {
             $this->_regex = 0;
-        elseif (defined("TSQ_REGEX_" . strtoupper($regex)))
-            $this->_regex = constant("TSQ_REGEX_" . strtoupper($regex)); else {
+        } elseif (defined("TSQ_REGEX_" . strtoupper($regex))) {
+            $this->_regex = constant("TSQ_REGEX_" . strtoupper($regex));
+        } else {
             trigger_error(fmt("Unsupported argument: %s=%s", 'regex', $regex));
             $this->_regex = 0;
         }
@@ -303,7 +304,7 @@ class NullTextSearchQuery extends TextSearchQuery
      *
      * @see TextSearchQuery
      */
-    function NullTextSearchQuery()
+    function __construct()
     {
     }
 
@@ -362,12 +363,11 @@ class NumericSearchQuery
      * So always when the placeholder is an array, the names of the target struct must match
      * and all vars be defined. Use the method can_match($struct) therefore.
      *
-     * @access public
      * @param $search_query string   A numerical query with placeholders as variable.
      * @param $placeholders array or string  All placeholders in the query must be defined
      *     here, and will be replaced by the matcher.
      */
-    function NumericSearchQuery($search_query, $placeholders)
+    public function NumericSearchQuery($search_query, $placeholders)
     {
         // added some basic security checks against user input
         $this->_query = $search_query;
@@ -491,7 +491,6 @@ class NumericSearchQuery
      * Strip non-numeric chars from the variable (as the groupseperator) and replace
      * it in the symbolic query for evaluation.
      *
-     * @access private
      * @param $value number   A numerical value: integer, float or string.
      * @param $x string       The variable name to be replaced in the query.
      * @return string
@@ -519,12 +518,11 @@ class NumericSearchQuery
      * With an array of placeholders we need a hash to check against, if all required names are given.
      * Purpose: Be silent about missing vars, just return false.
     `*
-     * @access public
      * @param string $variables string or hash of name => value  The keys must satisfy all placeholders in the definition.
      * We want the full hash and not just the keys because a hash check is faster than the array of keys check.
      * @return boolean
      */
-    function can_match(&$variables)
+    public function can_match(&$variables)
     {
         if (empty($this->_query))
             return false;
@@ -547,11 +545,10 @@ class NumericSearchQuery
      * With one placeholder we need just a number.
      * With an array of placeholders we need a hash.
      *
-     * @access public
      * @param $variable number or array of name => value  The keys must satisfy all placeholders in the definition.
      * @return boolean
      */
-    function match(&$variable)
+    public function match(&$variable)
     {
         $p =& $this->_placeholders;
         $this->workquery = $this->_query;
@@ -651,7 +648,7 @@ class TextSearchQuery_node_word
     public $op = "WORD";
     public $_op = TSQ_TOK_WORD;
 
-    function TextSearchQuery_node_word($word)
+    function __construct($word)
     {
         $this->word = $word;
     }
@@ -861,7 +858,7 @@ class TextSearchQuery_node_binop
 {
     public $_op = TSQ_TOK_BINOP;
 
-    function TextSearchQuery_node_binop($leaves)
+    function __construct($leaves)
     {
         $this->leaves = $leaves;
     }

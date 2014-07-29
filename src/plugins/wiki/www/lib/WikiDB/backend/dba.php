@@ -6,7 +6,7 @@ require_once 'lib/DbaDatabase.php';
 class WikiDB_backend_dba
     extends WikiDB_backend_dbaBase
 {
-    function WikiDB_backend_dba($dbparams)
+    function __construct($dbparams)
     {
         $directory = '/tmp';
         $prefix = 'wiki_';

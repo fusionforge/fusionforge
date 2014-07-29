@@ -57,7 +57,7 @@ if ($package_id) {
 		echo json_encode($result);
 		exit;
 	}
-	$result['html'] = $HTML->feedback(_('Pacakge successfully deleted'));
+	$result['html'] = $HTML->feedback(_('Package successfully deleted'));
 	$result['deletedom'] = 'pkgid'.$package_id;
 }
 

@@ -23,12 +23,13 @@
 
 class Units
 {
-    function Units()
+    function __construct()
     {
         if (DISABLE_UNITS)
             $this->errcode = 1;
         elseif (defined("UNITS_EXE")) // ignore dynamic check
-            $this->errcode = 0; else
+            $this->errcode = 0;
+        else
             exec("units m2", $o, $this->errcode);
     }
 

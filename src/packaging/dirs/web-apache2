@@ -1,7 +1,7 @@
 @CONFIG_PATH@/languages-local
 @CONFIG_PATH@/templates
 @BINARY_PATH@
-@PLUGIN_PATH@
+@PLUGINS_PATH@
 @SOURCE_PATH@/www
 @DATA_PATH@/scmtarballs
 @DATA_PATH@/scmsnapshots

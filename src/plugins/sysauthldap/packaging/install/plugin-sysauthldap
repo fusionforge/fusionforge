@@ -1,4 +1,4 @@
-plugins/sysauthldap/bin             usr/share/@OLDPACKAGE@/plugins/sysauthldap/
-plugins/sysauthldap/common          usr/share/@OLDPACKAGE@/plugins/sysauthldap/
-plugins/sysauthldap/gforge.schema   usr/share/@OLDPACKAGE@/plugins/sysauthldap/
-plugins/sysauthldap/etc/*.ini 	    etc/@PACKAGE@/config.ini.d/
+plugins/sysauthldap/bin             @PLUGINS_PATH@/sysauthldap/
+plugins/sysauthldap/common          @PLUGINS_PATH@/sysauthldap/
+plugins/sysauthldap/gforge.schema   @PLUGINS_PATH@/sysauthldap/
+plugins/sysauthldap/etc/*.ini 	    @CONFIG_PATH@/config.ini.d/

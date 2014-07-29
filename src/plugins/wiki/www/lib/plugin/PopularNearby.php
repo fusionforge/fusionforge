@@ -95,15 +95,13 @@ class WikiPlugin_PopularNearby
      *   mode=incoming: $pages iter and $direction=true
      *   mode=outgoing: $pages iter and $direction=false
      *
-     * @access private
-     *
      * @param $pages array of WikiDB_Page's or a Page_iterator
      * @param $direction boolean: true if incoming links
      *
      * @param int $limit
      * @return Array of sorted links
      */
-    function sortedLinks($pages, $direction = false, $limit = 5)
+    private function sortedLinks($pages, $direction = false, $limit = 5)
     {
         $links = array();
         if (is_array($pages)) {

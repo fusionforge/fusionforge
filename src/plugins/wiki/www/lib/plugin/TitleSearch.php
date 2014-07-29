@@ -47,8 +47,8 @@ class WikiPlugin_TitleSearch
 
     function getDefaultArguments()
     {
-        return array_merge
-        (
+        // All PageList::supportedArgs, except 'pagename'
+        $args = array_merge(
             PageList::supportedArgs(), // paging and more.
             array('s' => false,
                 'auto_redirect' => false,
@@ -59,6 +59,8 @@ class WikiPlugin_TitleSearch
                 'regex' => 'auto',
                 'format' => false,
             ));
+         unset($args['pagename']);
+         return $args;
     }
 
     // info arg allows multiple columns
@@ -70,6 +72,10 @@ class WikiPlugin_TitleSearch
         $args = $this->getArgs($argstr, $request);
         if (empty($args['s'])) {
             return HTML();
+        }
+
+        if (empty($args['sortby'])) {
+            $args['sortby'] = '';
         }
 
         // ^S != S*   ^  matches only beginning of phrase, not of word.

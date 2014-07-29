@@ -1281,6 +1281,10 @@ if (isset($params['group']) && $params['group']) {
 		return $this->getPicto('ic/delete.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
+	function getConfigurePic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/configure.png', $title, $alt, 20, 20, $otherAttr);
+	}
+
 	function getPicto($url, $title, $alt, $width = '20', $height = '20', $otherAttr = array()) {
 		$otherAttr['title'] = $title;
 		if (!$alt) {
@@ -1348,7 +1352,7 @@ if (isset($params['group']) && $params['group']) {
 		}
 		echo html_ao('div', array('class' => 'widget_content', 'style' => $style));
 		if (!$readonly && $display_preferences) {
-			echo '<div class="widget_preferences">'. $widget->getPreferencesForm($layout_id, $owner_id, $owner_type) . "</div>\n";
+			echo html_e('div', array('class' => 'widget_preferences'), $widget->getPreferencesForm($layout_id, $owner_id, $owner_type));
 		}
 		if ($widget->isAjax()) {
 			echo html_ao('div', array('id' => $element_id.'-ajax'));

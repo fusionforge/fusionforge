@@ -1,3 +1,3 @@
-etc/gforge/httpd.d
-@PLUGIN_PATH@/scmhook/common
-@PLUGIN_PATH@/scmhook/www
+@CONFIG_PATH@/httpd.d
+@PLUGINS_PATH@/scmhook/common
+@PLUGINS_PATH@/scmhook/www

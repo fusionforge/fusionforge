@@ -42,7 +42,7 @@ install4_config_redhat()
 {
 	install4_config
 
-	export PATH=$PATH:/usr/share/gforge/bin/:/usr/share/gforge/utils:/opt/gforge/utils
+	export PATH=$PATH:$fusionforge_bin_dir:$fusionforge_dir/utils:/opt/gforge/utils
 	defaults=$(FUSIONFORGE_NO_PLUGINS=true forge_get_config config_path)/config.ini.d/defaults.ini
 	sed -i -e 's/^apache_user = .*/apache_user = apache/' $defaults
 	sed -i -e 's/^apache_group = .*/apache_group = apache/' $defaults

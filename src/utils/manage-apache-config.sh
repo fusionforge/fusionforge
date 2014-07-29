@@ -28,22 +28,33 @@ case $1 in
 	    exit 1
 	fi
 
-	# FHS like paths (for Debian packages, etc.)
-	mkdir -p httpd.conf.d-fhs
-	for i in httpd.conf.d/*.inc httpd.conf.d/*.conf ; do
-	    sed -e 's,{core/config_path},/etc/gforge,g' \
-		-e 's,{core/source_path},/usr/share/gforge,g' \
-		-e 's,{core/data_path},/var/lib/gforge,g' \
-		-e 's,{core/log_path},/var/log/gforge,g' \
-		-e 's,{core/chroot},/var/lib/gforge/chroot,g' \
-		-e 's,{core/custom_path},/etc/gforge/custom,g' \
-		-e 's,{core/url_prefix},/,g' \
-		-e 's,{mediawiki/src_path},/usr/share/mediawiki,g' \
-		-e 's,{core/mailman_path},/var/lib/mailman,g' \
-		$i > httpd.conf.d-fhs/$(basename $i)
-	done
-	message="FHS like paths"
-	cat > httpd.conf.d-fhs/README.generated <<EOF
+	for j in fhs fhsrh opt usrlocal ; do
+	    mkdir -p httpd.conf.d-$j
+	    for i in httpd.conf.d/*.inc httpd.conf.d/*.conf ; do
+		sed -e "s,{core/config_path},$(../utils/forge_get_config_basic $j config_path),g" \
+		    -e "s,{core/source_path},$(../utils/forge_get_config_basic $j source_path),g" \
+		    -e "s,{core/data_path},$(../utils/forge_get_config_basic $j data_path),g" \
+		    -e "s,{core/log_path},$(../utils/forge_get_config_basic $j log_path),g" \
+		    -e "s,{core/chroot},/var/l$(../utils/forge_get_config_basic $j chroot},/var),g" \
+		    -e "s,{core/custom_path},$(../utils/forge_get_config_basic $j custom_path),g" \
+		    -e "s,{core/url_prefix},$(../utils/forge_get_config_basic $j url_prefix),g" \
+		    -e "s,{core/mailman_path},$(../utils/forge_get_config_basic $j mailman_path),g" \
+		    -e "s,{core/groupdir_prefix},$(../utils/forge_get_config_basic $j groupdir_prefix),g" \
+		    -e 's,{mediawiki/src_path},/usr/share/mediawiki,g' \
+		$i > httpd.conf.d-$j/$(basename $i)
+	    done
+	    case $j in
+		fhs|fhsrh)
+		    message="FHS like paths"
+		    ;;
+		opt)
+		    message="/opt like paths"
+		    ;;
+		usrlocal)
+		    message="/usr/local like paths"
+		    ;;
+	    esac
+	    cat > httpd.conf.d-fhs/README.generated <<EOF
 Attention developers : contents of this directory are *generated
 files* for $message.
 
@@ -51,77 +62,10 @@ See ../README.httpd-conf-d-flavours for more details
 
 -- OlivierBerger
 EOF
-
-	# FHS like paths (for Redhat packages, etc.)
-	mkdir -p httpd.conf.d-fhsrh
-	for i in httpd.conf.d/*.inc httpd.conf.d/*.conf ; do
-	    sed -e 's,{core/config_path},/etc/gforge,g' \
-		-e 's,{core/source_path},/usr/share/gforge/src,g' \
-		-e 's,{core/data_path},/var/lib/gforge,g' \
-		-e 's,{core/log_path},/var/log/gforge,g' \
-		-e 's,{core/chroot},/var/lib/gforge/chroot,g' \
-		-e 's,{core/custom_path},/etc/gforge/custom,g' \
-		-e 's,{core/url_prefix},/,g' \
-		-e 's,{core/groupdir_prefix},/var/lib/gforge/chroot/home/groups,g' \
-		-e 's,{mediawiki/src_path},/usr/share/mediawiki,g' \
-		-e 's,{scmsvn/repos_path},/var/lib/gforge/chroot/scmrepos/svn,g' \
-		-e 's,{core/mailman_path},/usr/lib/mailman,g' \
-		$i > httpd.conf.d-fhsrh/$(basename $i)
 	done
-	message="FHS like paths"
-	cat > httpd.conf.d-fhsrh/README.generated <<EOF
-Attention developers : contents of this directory are *generated
-files* for $message.
 
-See ../README.httpd-conf-d-flavours for more details
-
--- OlivierBerger
-EOF
-
-	# /opt like paths
-	mkdir -p httpd.conf.d-opt
-	for i in httpd.conf.d/*.inc httpd.conf.d/*.conf ; do
-	    sed -e 's,{core/config_path},/etc/gforge,g' \
-		-e 's,{core/source_path},/opt/gforge,g' \
-		-e 's,{core/data_path},/var/lib/gforge,g' \
-		-e 's,{core/log_path},/var/log/gforge,g' \
-		-e 's,{core/chroot},/var/lib/gforge/chroot,g' \
-		-e 's,{core/custom_path},/etc/gforge/custom,g' \
-		-e 's,{core/url_prefix},/,g' \
-		-e 's,{core/groupdir_prefix},/var/lib/gforge/chroot/home/groups,g' \
-		-e 's,{mediawiki/src_path},/usr/share/mediawiki,g' \
-		-e 's,{scmsvn/repos_path},/var/lib/gforge/svnroot,g' \
-		-e 's,{core/mailman_path},/usr/lib/mailman,g' \
-		$i > httpd.conf.d-opt/$(basename $i)
-	done
 	message="/opt like paths"
 	cat > httpd.conf.d-opt/README.generated <<EOF
-Attention developers : contents of this directory are *generated
-files* for $message.
-
-See ../README.httpd-conf-d-flavours for more details
-
--- OlivierBerger
-EOF
-	
-	# /usr/local like paths
-	mkdir -p httpd.conf.d-usrlocal
-	for i in httpd.conf.d/*.inc httpd.conf.d/*.conf ; do
-	    sed -e 's,{core/config_path},/etc/gforge,g' \
-		-e 's,{core/source_path},/usr/local/share/gforge/src,g' \
-		-e 's,{core/data_path},/var/local/lib/gforge,g' \
-		-e 's,{core/log_path},/var/log/gforge,g' \
-		-e 's,{core/chroot},/var/local/lib/gforge/chroot,g' \
-		-e 's,{core/custom_path},/etc/gforge/custom,g' \
-		-e 's,{core/url_prefix},/,g' \
-		-e 's,{core/groupdir_prefix},/var/local/lib/gforge/chroot/home/groups,g' \
-		-e 's,{mediawiki/src_path},/usr/share/mediawiki,g' \
-		-e 's,{scmsvn/repos_path},/var/lib/gforge/chroot/scmrepos/svn,g' \
-		-e 's,{core/mailman_path},/usr/lib/mailman,g' \
-		$i > httpd.conf.d-usrlocal/$(basename $i)
-	done
-	message="/usr/local like paths"
-	cat > httpd.conf.d-usrlocal/README.generated <<EOF
 Attention developers : contents of this directory are *generated
 files* for $message.
 

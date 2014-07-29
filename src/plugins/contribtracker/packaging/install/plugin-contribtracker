@@ -1,4 +1,4 @@
-plugins/contribtracker/common/* @PLUGIN_PATH@/contribtracker/common/
-plugins/contribtracker/db/* @PLUGIN_PATH@/contribtracker/db/
-plugins/contribtracker/etc/*.ini etc/@PACKAGE@/config.ini.d/
-plugins/contribtracker/www/* @PLUGIN_PATH@/contribtracker/www/
+plugins/contribtracker/common/* @PLUGINS_PATH@/contribtracker/common/
+plugins/contribtracker/db/* @PLUGINS_PATH@/contribtracker/db/
+plugins/contribtracker/etc/*.ini @CONFIG_PATH@/config.ini.d/
+plugins/contribtracker/www/* @PLUGINS_PATH@/contribtracker/www/

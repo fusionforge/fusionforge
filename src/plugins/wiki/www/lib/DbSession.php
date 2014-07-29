@@ -15,8 +15,6 @@
 class DbSession
 {
     /**
-     * Constructor
-     *
      * @param mixed $dbh
      * DB handle, or WikiDB object (from which the DB handle will
      * be extracted.
@@ -25,7 +23,7 @@ class DbSession
      * @return bool|DbSession
      * Name of SQL table containing session data.
      */
-    function DbSession(&$dbh, $table = 'session')
+    function __construct(&$dbh, $table = 'session')
     {
         // Check for existing DbSession handler
         $db_type = $dbh->getParam('dbtype');
@@ -36,14 +34,13 @@ class DbSession
             if (class_exists($class)) {
                 // dba has no ->_dbh, so this is used for the session link
                 $this->_backend = new $class($dbh->_backend->_dbh, $table);
-                return $this;
+                return;
             }
         }
         //Fixme: E_USER_WARNING ignored!
         trigger_error(sprintf(_("Your WikiDB DB backend “%s” cannot be used for DbSession.") . " " .
                 _("Set USE_DB_SESSION to false."),
             $db_type), E_USER_WARNING);
-        return false;
     }
 
     function currentSessions()

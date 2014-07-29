@@ -29,12 +29,9 @@ define('DO_FULL_LOCK', false);
 class WikiDB_backend_ADODB_mysql
     extends WikiDB_backend_ADODB
 {
-    /**
-     * Constructor.
-     */
-    function WikiDB_backend_ADODB_mysql($dbparams)
+    function __construct($dbparams)
     {
-        $this->WikiDB_backend_ADODB($dbparams);
+        parent::__construct($dbparams);
         if (!$this->_dbh->_connectionID) return;
 
         $this->_serverinfo = $this->_dbh->ServerInfo();

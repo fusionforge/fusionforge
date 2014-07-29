@@ -939,7 +939,7 @@ function pingBack($params)
  */
 class XmlRpcServer extends xmlrpc_server
 {
-    function XmlRpcServer($request = false)
+    function __construct($request = false)
     {
         global $wiki_dmap;
         foreach ($wiki_dmap as $name => $val) {

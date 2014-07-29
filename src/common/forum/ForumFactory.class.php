@@ -76,12 +76,12 @@ class ForumFactory extends Error {
 	function &getAllForumIds() {
 		$result = array () ;
 		$res = db_query_params('SELECT group_forum_id FROM forum_group_list
-WHERE group_forum_id NOT IN (
-	SELECT group_forum_id FROM forum_group_list WHERE group_forum_id IN (
-		SELECT forum_id FROM news_bytes))
-AND group_id=$1
-ORDER BY group_forum_id',
-			array ($this->Group->getID()));
+					WHERE group_forum_id NOT IN (
+						SELECT group_forum_id FROM forum_group_list WHERE group_forum_id IN (
+							SELECT forum_id FROM news_bytes))
+					AND group_id=$1
+					ORDER BY group_forum_id',
+					array($this->Group->getID()));
 		if (!$res) {
 			return $result ;
 		}
@@ -94,7 +94,7 @@ ORDER BY group_forum_id',
 	function &getAllForumIdsWithNews() {
 		$result = array () ;
 		$res = db_query_params('SELECT group_forum_id FROM forum_group_list WHERE group_id=$1 ORDER BY group_forum_id',
-			array ($this->Group->getID()));
+					array($this->Group->getID()));
 		if (!$res) {
 			return $result ;
 		}
@@ -105,17 +105,17 @@ ORDER BY group_forum_id',
 	}
 
 	/**
-	 *	getForums - get an array of Forum objects for this Group.
+	 * getForums - get an array of Forum objects for this Group.
 	 *
-	 *	@return	array	The array of Forum objects.
+	 * @return	array	The array of Forum objects.
 	 */
 	function &getForums() {
 		if ($this->forums) {
 			return $this->forums;
 		}
 
-		$this->forums = array () ;
-		$ids = $this->getAllForumIds() ;
+		$this->forums = array();
+		$ids = $this->getAllForumIds();
 
 		if (!empty($ids) ) {
 			foreach ($ids as $id) {
@@ -128,9 +128,9 @@ ORDER BY group_forum_id',
 	}
 
 	/**
-	 *	getForumsAdmin - get an array of all (public, private and suspended) Forum objects for this Group.
+	 * getForumsAdmin - get an array of all (public, private and suspended) Forum objects for this Group.
 	 *
-	 *	@return	array	The array of Forum objects.
+	 * @return	array	The array of Forum objects.
 	 */
 	function &getForumsAdmin() {
 		if ($this->forums) {
@@ -142,10 +142,10 @@ ORDER BY group_forum_id',
 				$this->setError(_("You don't have a permission to access this page"));
 				$this->forums = false;
 			} else {
-				$result = db_query_params ('SELECT * FROM forum_group_list_vw
-WHERE group_id=$1
-ORDER BY group_forum_id',
-							   array ($this->Group->getID())) ;
+				$result = db_query_params('SELECT * FROM forum_group_list_vw
+							WHERE group_id=$1
+							ORDER BY group_forum_id',
+							array($this->Group->getID())) ;
 			}
 		} else {
 			$this->setError(_("You don't have a permission to access this page"));
@@ -165,24 +165,23 @@ ORDER BY group_forum_id',
 		return $this->forums;
 	}
 
-    /**
-     *    moveThread - move thread in another forum
-     *
-     * @param $group_forum_id
-     * @param $thread_id
-     * @param bool $old_forum_id
-     * @internal param \The $string forum ID
-     * @internal param \The $int thread_id of the tread to change.
-     * @internal param \The $string old forum ID
-     *
-     *    Note:
-     *   old forum ID is useless if forum_agg_msg_count table is no longer used
-     *
-     * @return boolean success.
-     */
+	/**
+	 * moveThread - move thread in another forum
+	 *
+	 * @param	$group_forum_id
+	 * @param	$thread_id
+	 * @param	bool $old_forum_id
+	 * @internal	param \The $string forum ID
+	 * @internal	param \The $int thread_id of the tread to change.
+	 * @internal	param \The $string old forum ID
+	 *
+	 * Note: old forum ID is useless if forum_agg_msg_count table is no longer used
+	 *
+	 * @return boolean success.
+	 */
 	function moveThread($group_forum_id,$thread_id,$old_forum_id = false) {
 		$res = db_query_params('UPDATE forum SET group_forum_id=$1 WHERE thread_id=$2',
-			array($group_forum_id, $thread_id));
+					array($group_forum_id, $thread_id));
 		if (!$res) {
 			$this->setError(db_error());
 			return false;
@@ -194,53 +193,48 @@ ORDER BY group_forum_id',
 			}
 		}
 
-		if ($old_forum_id !== false)
-		{
+		if ($old_forum_id !== false) {
 			// Update forum_agg_msg_count table
 			// Note: if error(s) are raised it's certainly because forum_agg_msg_count
 			//		is no longer used and updated. So, error(s) are not catched
 			// Update row of old forum id
 			$res = db_query_params('SELECT count FROM forum_agg_msg_count WHERE group_forum_id=$1',
-				array($old_forum_id));
+						array($old_forum_id));
 			if ($res && db_numrows($res)) {
 				// Update row
 				$count = db_result($res, 0, 'count');
 				$count -= $msg_count;
 				if ($count < 0) $count = 0;
 				$res = db_query_params('UPDATE forum_agg_msg_count SET count=$1 WHERE group_forum_id=$2',
-					array($count, $old_forum_id));
-			}
-			else {
+							array($count, $old_forum_id));
+			} else {
 				// Error because row doesn't exist... insert it
 				$res = db_query_params('SELECT COUNT(*) AS count FROM forum WHERE group_forum_id=$1',
-					array($old_forum_id));
+							array($old_forum_id));
 				if ($res && db_numrows($res)) {
 					$count = db_result($res, 0, 'count');
 					$res = db_query_params('INSERT INTO forum_agg_msg_count (group_forum_id, count) VALUES ($1,$2)',
-						array($old_forum_id, $count));
+								array($old_forum_id, $count));
 				}
 			}
 
 			// Update row of new forum id
 			$res = db_query_params('SELECT count FROM forum_agg_msg_count WHERE group_forum_id=$1',
-				array($group_forum_id));
+						array($group_forum_id));
 			if ($res && db_numrows($res)) {
 				// Update row
 				$count = db_result($res, 0, 'count');
 				$count += $msg_count;
 				$res = db_query_params('UPDATE forum_agg_msg_count SET count=$1 WHERE group_forum_id=$2',
-					array($count, $group_forum_id));
-			}
-			else {
+							array($count, $group_forum_id));
+			} else {
 				// Insert row
 				$res = db_query_params('INSERT INTO forum_agg_msg_count (group_forum_id, count) VALUES ($1,$2)',
-					array($group_forum_id, $msg_count));
+							array($group_forum_id, $msg_count));
 			}
 		}
-
 		return true;
 	}
-
 }
 
 // Local Variables:

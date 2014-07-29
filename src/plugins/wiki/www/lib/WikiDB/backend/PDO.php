@@ -30,7 +30,7 @@ class WikiDB_backend_PDO
     extends WikiDB_backend
 {
 
-    function WikiDB_backend_PDO($dbparams)
+    function __construct($dbparams)
     {
         $this->_dbparams = $dbparams;
         if (strstr($dbparams['dsn'], "://")) { // pear DB syntax
@@ -95,9 +95,9 @@ class WikiDB_backend_PDO
             $this->_dbh = new PDO($dbparams['dsn'],
                 $this->_parsedDSN['username'],
                 $this->_parsedDSN['password'],
-                array(PDO_ATTR_AUTOCOMMIT => true,
-                    PDO_ATTR_TIMEOUT => DATABASE_TIMEOUT,
-                    PDO_ATTR_PERSISTENT => !empty($parsed['persistent'])
+                array(PDO::ATTR_AUTOCOMMIT => true,
+                    PDO::ATTR_TIMEOUT => DATABASE_TIMEOUT,
+                    PDO::ATTR_PERSISTENT => !empty($parsed['persistent'])
                         or DATABASE_PERSISTENT
                 ));
         } catch (PDOException $e) {
@@ -118,7 +118,7 @@ class WikiDB_backend_PDO
         }
         $this->_dsn = $dbparams['dsn'];
         $this->_dbh->databaseType = $driver;
-        $this->_dbh->setAttribute(PDO_ATTR_CASE, PDO_CASE_NATURAL);
+        $this->_dbh->setAttribute(PDO::ATTR_CASE, PDO::CASE_NATURAL);
         // Use the faster FETCH_NUM, with some special ASSOC based exceptions.
 
         $this->_hasTransactions = true;
@@ -129,7 +129,7 @@ class WikiDB_backend_PDO
         }
         $sth = $this->_dbh->prepare("SELECT version()");
         $sth->execute();
-        $this->_serverinfo['version'] = $sth->fetchSingle();
+        $this->_serverinfo['version'] = $sth->fetchColumn();
         $this->commit(); // required to match the try catch block above!
 
         $prefix = isset($dbparams['prefix']) ? $dbparams['prefix'] : '';
@@ -190,7 +190,7 @@ class WikiDB_backend_PDO
     {
         $sth = $this->_dbh->prepare($sql);
         if ($sth->execute())
-            return $sth->fetch(PDO_FETCH_BOTH);
+            return $sth->fetch(PDO::FETCH_BOTH);
         else
             return false;
     }
@@ -223,9 +223,9 @@ class WikiDB_backend_PDO
             . " FROM $nonempty_tbl, $page_tbl"
             . " WHERE $nonempty_tbl.id=$page_tbl.id"
             . "   AND pagename=?");
-        $sth->bindParam(1, $pagename, PDO_PARAM_STR, 100);
+        $sth->bindParam(1, $pagename, PDO::PARAM_STR, 100);
         if ($sth->execute())
-            return $sth->fetchSingle();
+            return $sth->fetchColumn();
         else
             return false;
     }
@@ -238,7 +238,7 @@ class WikiDB_backend_PDO
             . " FROM $nonempty_tbl, $page_tbl"
             . " WHERE $nonempty_tbl.id=$page_tbl.id"
             . " LIMIT 1");
-        return $sth->fetchAll(PDO_FETCH_NUM);
+        return $sth->fetchAll(PDO::FETCH_NUM);
     }
 
     function numPages($filter = false, $exclude = '')
@@ -248,7 +248,7 @@ class WikiDB_backend_PDO
         $sth = $dbh->exec("SELECT count(*)"
             . " FROM $nonempty_tbl, $page_tbl"
             . " WHERE $nonempty_tbl.id=$page_tbl.id");
-        return $sth->fetchSingle();
+        return $sth->fetchColumn();
     }
 
     function increaseHitCount($pagename)
@@ -258,7 +258,7 @@ class WikiDB_backend_PDO
         $sth = $dbh->prepare("UPDATE $page_tbl SET hits=hits+1"
             . " WHERE pagename=?"
             . " LIMIT 1");
-        $sth->bindParam(1, $pagename, PDO_PARAM_STR, 100);
+        $sth->bindParam(1, $pagename, PDO::PARAM_STR, 100);
         $sth->execute();
     }
 
@@ -271,9 +271,9 @@ class WikiDB_backend_PDO
         $page_tbl = $this->_table_names['page_tbl'];
         $sth = $dbh->prepare("SELECT id,pagename,hits,pagedata FROM $page_tbl"
             . " WHERE pagename=? LIMIT 1");
-        $sth->bindParam(1, $pagename, PDO_PARAM_STR, 100);
+        $sth->bindParam(1, $pagename, PDO::PARAM_STR, 100);
         $sth->execute();
-        $row = $sth->fetch(PDO_FETCH_NUM);
+        $row = $sth->fetch(PDO::FETCH_NUM);
         return $row ? $this->_extract_page_data($row[3], $row[2]) : false;
     }
 
@@ -296,8 +296,8 @@ class WikiDB_backend_PDO
             // have a record in the page table.  Since it's just the
             // hit count, who cares?
             $sth = $dbh->prepare("UPDATE $page_tbl SET hits=? WHERE pagename=? LIMIT 1");
-            $sth->bindParam(1, $newdata['hits'], PDO_PARAM_INT);
-            $sth->bindParam(2, $pagename, PDO_PARAM_STR, 100);
+            $sth->bindParam(1, $newdata['hits'], PDO::PARAM_INT);
+            $sth->bindParam(2, $pagename, PDO::PARAM_STR, 100);
             $sth->execute();
             return;
         }
@@ -323,9 +323,9 @@ class WikiDB_backend_PDO
             . " SET hits=?, pagedata=?"
             . " WHERE pagename=?"
             . " LIMIT 1");
-        $sth->bindParam(1, $hits, PDO_PARAM_INT);
-        $sth->bindParam(2, $this->_serialize($data), PDO_PARAM_LOB);
-        $sth->bindParam(3, $pagename, PDO_PARAM_STR, 100);
+        $sth->bindParam(1, $hits, PDO::PARAM_INT);
+        $sth->bindParam(2, $this->_serialize($data), PDO::PARAM_LOB);
+        $sth->bindParam(3, $pagename, PDO::PARAM_STR, 100);
         if ($sth->execute()) {
             $this->commit();
             return true;
@@ -340,9 +340,9 @@ class WikiDB_backend_PDO
         $dbh = &$this->_dbh;
         $page_tbl = $this->_table_names['page_tbl'];
         $sth = $dbh->prepare("SELECT cached_html FROM $page_tbl WHERE pagename=? LIMIT 1");
-        $sth->bindParam(1, $pagename, PDO_PARAM_STR, 100);
+        $sth->bindParam(1, $pagename, PDO::PARAM_STR, 100);
         $sth->execute();
-        return $sth->fetchSingle(PDO_FETCH_NUM);
+        return $sth->fetchColumn(PDO::FETCH_NUM);
     }
 
     function set_cached_html($pagename, $data)
@@ -354,8 +354,8 @@ class WikiDB_backend_PDO
             . " SET cached_html=?"
             . " WHERE pagename=?"
             . " LIMIT 1");
-        $sth->bindParam(1, $data, PDO_PARAM_STR);
-        $sth->bindParam(2, $pagename, PDO_PARAM_STR, 100);
+        $sth->bindParam(1, $data, PDO::PARAM_STR);
+        $sth->bindParam(2, $pagename, PDO::PARAM_STR, 100);
         $sth->execute();
     }
 
@@ -376,8 +376,8 @@ class WikiDB_backend_PDO
         $dbh = &$this->_dbh;
         $page_tbl = $this->_table_names['page_tbl'];
         $sth = $dbh->prepare("SELECT id FROM $page_tbl WHERE pagename=? LIMIT 1");
-        $sth->bindParam(1, $pagename, PDO_PARAM_STR, 100);
-        $id = $sth->fetchSingle();
+        $sth->bindParam(1, $pagename, PDO::PARAM_STR, 100);
+        $id = $sth->fetchColumn();
         if (!$create_if_missing) {
             return $id;
         }
@@ -388,20 +388,20 @@ class WikiDB_backend_PDO
                 $sth = $dbh->prepare("INSERT INTO $page_tbl"
                     . " (id,pagename)"
                     . " VALUES (NULL,?)");
-                $sth->bindParam(1, $pagename, PDO_PARAM_STR, 100);
+                $sth->bindParam(1, $pagename, PDO::PARAM_STR, 100);
                 $sth->execute();
                 $id = $dbh->lastInsertId();
             } else {
                 $this->beginTransaction();
                 $sth = $dbh->prepare("SELECT MAX(id) FROM $page_tbl");
                 $sth->execute();
-                $id = $sth->fetchSingle();
+                $id = $sth->fetchColumn();
                 $sth = $dbh->prepare("INSERT INTO $page_tbl"
                     . " (id,pagename,hits)"
                     . " VALUES (?,?,0)");
                 $id++;
-                $sth->bindParam(1, $id, PDO_PARAM_INT);
-                $sth->bindParam(2, $pagename, PDO_PARAM_STR, 100);
+                $sth->bindParam(1, $id, PDO::PARAM_INT);
+                $sth->bindParam(2, $pagename, PDO::PARAM_STR, 100);
                 if ($sth->execute())
                     $this->commit();
                 else
@@ -421,9 +421,9 @@ class WikiDB_backend_PDO
             . " WHERE $page_tbl.id=$recent_tbl.id"
             . "  AND pagename=?"
             . " LIMIT 1");
-        $sth->bindParam(1, $pagename, PDO_PARAM_STR, 100);
+        $sth->bindParam(1, $pagename, PDO::PARAM_STR, 100);
         $sth->execute();
-        return $sth->fetchSingle();
+        return $sth->fetchColumn();
     }
 
     function get_previous_version($pagename, $version)
@@ -437,10 +437,10 @@ class WikiDB_backend_PDO
             . "  AND version < ?"
             . " ORDER BY version DESC"
             . " LIMIT 1");
-        $sth->bindParam(1, $pagename, PDO_PARAM_STR, 100);
-        $sth->bindParam(2, $version, PDO_PARAM_INT);
+        $sth->bindParam(1, $pagename, PDO::PARAM_STR, 100);
+        $sth->bindParam(2, $version, PDO::PARAM_INT);
         $sth->execute();
-        return $sth->fetchSingle();
+        return $sth->fetchColumn();
     }
 
     /**
@@ -476,10 +476,10 @@ class WikiDB_backend_PDO
             . "  AND pagename=?"
             . "  AND version=?"
             . " LIMIT 1");
-        $sth->bindParam(1, $pagename, PDO_PARAM_STR, 100);
-        $sth->bindParam(2, $version, PDO_PARAM_INT);
+        $sth->bindParam(1, $pagename, PDO::PARAM_STR, 100);
+        $sth->bindParam(2, $version, PDO::PARAM_INT);
         $sth->execute();
-        $row = $sth->fetch(PDO_FETCH_NUM);
+        $row = $sth->fetch(PDO::FETCH_NUM);
         return $row ? $this->_extract_version_data_num($row, $want_content) : false;
     }
 
@@ -552,28 +552,28 @@ class WikiDB_backend_PDO
             $sth = $dbh->prepare("REPLACE INTO $version_tbl"
                 . " (id,version,mtime,minor_edit,content,versiondata)"
                 . " VALUES(?,?,?,?,?,?)");
-            $sth->bindParam(1, $id, PDO_PARAM_INT);
-            $sth->bindParam(2, $version, PDO_PARAM_INT);
-            $sth->bindParam(3, $mtime, PDO_PARAM_INT);
-            $sth->bindParam(4, $minor_edit, PDO_PARAM_INT);
-            $sth->bindParam(5, $content, PDO_PARAM_STR, 100);
-            $sth->bindParam(6, $this->_serialize($data), PDO_PARAM_STR, 100);
+            $sth->bindParam(1, $id, PDO::PARAM_INT);
+            $sth->bindParam(2, $version, PDO::PARAM_INT);
+            $sth->bindParam(3, $mtime, PDO::PARAM_INT);
+            $sth->bindParam(4, $minor_edit, PDO::PARAM_INT);
+            $sth->bindParam(5, $content, PDO::PARAM_STR, 100);
+            $sth->bindParam(6, $this->_serialize($data), PDO::PARAM_STR, 100);
             $rs = $sth->execute();
         } else {
             $sth = $dbh->prepare("DELETE FROM $version_tbl"
                 . " WHERE id=? AND version=?");
-            $sth->bindParam(1, $id, PDO_PARAM_INT);
-            $sth->bindParam(2, $version, PDO_PARAM_INT);
+            $sth->bindParam(1, $id, PDO::PARAM_INT);
+            $sth->bindParam(2, $version, PDO::PARAM_INT);
             $sth->execute();
             $sth = $dbh->prepare("INSERT INTO $version_tbl"
                 . " (id,version,mtime,minor_edit,content,versiondata)"
                 . " VALUES(?,?,?,?,?,?)");
-            $sth->bindParam(1, $id, PDO_PARAM_INT);
-            $sth->bindParam(2, $version, PDO_PARAM_INT);
-            $sth->bindParam(3, $mtime, PDO_PARAM_INT);
-            $sth->bindParam(4, $minor_edit, PDO_PARAM_INT);
-            $sth->bindParam(5, $content, PDO_PARAM_STR, 100);
-            $sth->bindParam(6, $this->_serialize($data), PDO_PARAM_STR, 100);
+            $sth->bindParam(1, $id, PDO::PARAM_INT);
+            $sth->bindParam(2, $version, PDO::PARAM_INT);
+            $sth->bindParam(3, $mtime, PDO::PARAM_INT);
+            $sth->bindParam(4, $minor_edit, PDO::PARAM_INT);
+            $sth->bindParam(5, $content, PDO::PARAM_STR, 100);
+            $sth->bindParam(6, $this->_serialize($data), PDO::PARAM_STR, 100);
             $rs = $sth->execute();
         }
         $this->_update_recent_table($id);
@@ -636,12 +636,12 @@ class WikiDB_backend_PDO
             $insert = $dbh->prepare("INSERT INTO $version_tbl"
                 . " (id,version,mtime,minor_edit,content,versiondata)"
                 . " VALUES(?,?,?,?,?,?)");
-            $insert->bindParam(1, $id, PDO_PARAM_INT);
-            $insert->bindParam(2, $version + 1, PDO_PARAM_INT);
-            $insert->bindParam(3, $mtime, PDO_PARAM_INT);
-            $insert->bindParam(4, 0, PDO_PARAM_INT);
-            $insert->bindParam(5, '', PDO_PARAM_STR, 100);
-            $insert->bindParam(6, $this->_serialize($meta), PDO_PARAM_STR, 100);
+            $insert->bindParam(1, $id, PDO::PARAM_INT);
+            $insert->bindParam(2, $version + 1, PDO::PARAM_INT);
+            $insert->bindParam(3, $mtime, PDO::PARAM_INT);
+            $insert->bindParam(4, 0, PDO::PARAM_INT);
+            $insert->bindParam(5, '', PDO::PARAM_STR, 100);
+            $insert->bindParam(6, $this->_serialize($meta), PDO::PARAM_STR, 100);
             if ($insert->execute()
                 and $dbh->query("DELETE FROM $nonempty_tbl WHERE id=$id")
                     and $this->set_links($pagename, false)
@@ -674,7 +674,7 @@ class WikiDB_backend_PDO
             $this->set_links($pagename, false);
             $sth = $dbh->prepare("SELECT COUNT(*) FROM $link_tbl WHERE linkto=$id");
             $sth->execute();
-            if ($sth->fetchSingle()) {
+            if ($sth->fetchColumn()) {
                 // We're still in the link table (dangling link) so we can't delete this
                 // altogether.
                 $dbh->query("UPDATE $page_tbl SET hits=0, pagedata='' WHERE id=$id");
@@ -724,7 +724,7 @@ class WikiDB_backend_PDO
             $sth = $dbh->prepare("SELECT $link_tbl.linkto as id FROM $link_tbl" .
                 " WHERE linkfrom=$pageid");
             $sth->execute();
-            foreach ($sth->fetchAll(PDO_FETCH_NUM) as $id) {
+            foreach ($sth->fetchAll(PDO::FETCH_NUM) as $id) {
                 // ...check if the page is empty and has no version
                 $sth1 = $dbh->prepare("SELECT $page_tbl.id FROM $page_tbl"
                     . " LEFT JOIN $nonempty_tbl USING (id) "
@@ -732,7 +732,7 @@ class WikiDB_backend_PDO
                     . " WHERE ISNULL($nonempty_tbl.id) AND"
                     . " ISNULL($version_tbl.id) AND $page_tbl.id=$id");
                 $sth1->execute();
-                if ($sth1->fetchSingle()) {
+                if ($sth1->fetchColumn()) {
                     $dbh->query("DELETE FROM $page_tbl WHERE id=$id"); // this purges the link
                     $dbh->query("DELETE FROM $recent_tbl WHERE id=$id"); // may fail
                 }
@@ -779,9 +779,9 @@ class WikiDB_backend_PDO
             . $exclude
             . $orderby
             . $limit);
-        $sth->bindParam(1, $pagename, PDO_PARAM_STR, 100);
+        $sth->bindParam(1, $pagename, PDO::PARAM_STR, 100);
         $sth->execute();
-        $result = $sth->fetch(PDO_FETCH_BOTH);
+        $result = $sth->fetch(PDO::FETCH_BOTH);
         return new WikiDB_backend_PDO_iter($this, $result, $this->page_tbl_field_list);
     }
 
@@ -802,10 +802,10 @@ class WikiDB_backend_PDO
             . " WHERE linkfrom=linker.id AND linkto=linkee.id"
             . " AND $have.pagename=?"
             . " AND $want.pagename=?");
-        $sth->bindParam(1, $pagename, PDO_PARAM_STR, 100);
-        $sth->bindParam(2, $link, PDO_PARAM_STR, 100);
+        $sth->bindParam(1, $pagename, PDO::PARAM_STR, 100);
+        $sth->bindParam(2, $link, PDO::PARAM_STR, 100);
         $sth->execute();
-        return $sth->fetchSingle();
+        return $sth->fetchColumn();
     }
 
     function get_all_pages($include_empty = false, $sortby = '', $limit = '', $exclude = '')
@@ -857,7 +857,7 @@ class WikiDB_backend_PDO
         }
         $sth = $dbh->prepare($sql . $limit);
         $sth->execute();
-        $result = $sth->fetch(PDO_FETCH_BOTH);
+        $result = $sth->fetch(PDO::FETCH_BOTH);
         return new WikiDB_backend_PDO_iter($this, $result, $this->page_tbl_field_list);
     }
 
@@ -899,7 +899,7 @@ class WikiDB_backend_PDO
             . $orderby
             . $limit);
         $sth->execute();
-        $result = $sth->fetch(PDO_FETCH_NUM);
+        $result = $sth->fetch(PDO::FETCH_NUM);
         $iter = new WikiDB_backend_PDO_iter($this, $result, $field_list);
         $iter->stoplisted = $searchobj->stoplisted;
         return $iter;
@@ -952,7 +952,7 @@ class WikiDB_backend_PDO
             $sth = $dbh->prepare($sql);
         }
         $sth->execute();
-        $result = $sth->fetch(PDO_FETCH_NUM);
+        $result = $sth->fetch(PDO::FETCH_NUM);
         return new WikiDB_backend_PDO_iter($this, $result, $this->page_tbl_field_list);
     }
 
@@ -1023,7 +1023,7 @@ class WikiDB_backend_PDO
             $sth = $dbh->prepare($sql);
         }
         $sth->execute();
-        $result = $sth->fetch(PDO_FETCH_NUM);
+        $result = $sth->fetch(PDO::FETCH_NUM);
         return new WikiDB_backend_PDO_iter($this, $result,
             array_merge($this->page_tbl_field_list, $this->version_tbl_field_list));
     }
@@ -1066,7 +1066,7 @@ class WikiDB_backend_PDO
             $sth = $dbh->prepare($sql);
         }
         $sth->execute();
-        $result = $sth->fetch(PDO_FETCH_NUM);
+        $result = $sth->fetch(PDO::FETCH_NUM);
         return new WikiDB_backend_PDO_iter($this, $result, array('pagename', 'wantedfrom'));
     }
 
@@ -1093,8 +1093,8 @@ class WikiDB_backend_PDO
                 $dbh->query("UPDATE $link_tbl SET linkto=$id WHERE linkto=$new");
             }
             $sth = $dbh->prepare("UPDATE $page_tbl SET pagename=? WHERE id=?");
-            $sth->bindParam(1, $to, PDO_PARAM_STR, 100);
-            $sth->bindParam(2, $id, PDO_PARAM_INT);
+            $sth->bindParam(1, $to, PDO::PARAM_STR, 100);
+            $sth->bindParam(2, $id, PDO::PARAM_INT);
             $sth->execute();
         }
         $this->unlock(array('page'));
@@ -1164,10 +1164,8 @@ class WikiDB_backend_PDO
      *
      * Calls can be nested.  The tables won't be unlocked until
      * _unlock_database() is called as many times as _lock_database().
-     *
-     * @access protected
      */
-    function lock($tables, $write_lock = true)
+    public function lock($tables, $write_lock = true)
     {
         if ($this->_lock_count++ == 0) {
             $this->_current_lock = $tables;
@@ -1191,14 +1189,12 @@ class WikiDB_backend_PDO
     /**
      * Release a write lock on the tables in the SQL database.
      *
-     * @access protected
-     *
      * @param $force boolean Unlock even if not every call to lock() has been matched
      * by a call to unlock().
      *
      * @see _lock_database
      */
-    function unlock($tables = false, $force = false)
+    public function unlock($tables = false, $force = false)
     {
         if ($this->_lock_count == 0) {
             $this->_current_lock = false;
@@ -1309,20 +1305,20 @@ class WikiDB_backend_PDO
             . "request_file,request_uri,request_time,status,bytes_sent,referer,agent,request_duration)"
             . " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
         // Either use unixtime as %d (long), or the native timestamp format.
-        $sth->bindParam(1, $entry->time, PDO_PARAM_INT);
-        $sth->bindParam(2, $entry->host, PDO_PARAM_STR, 100);
-        $sth->bindParam(3, $entry->user, PDO_PARAM_STR, 50);
-        $sth->bindParam(4, $entry->request_method, PDO_PARAM_STR, 10);
-        $sth->bindParam(5, $entry->request, PDO_PARAM_STR, 255);
-        $sth->bindParam(6, $entry->request_args, PDO_PARAM_STR, 255);
-        $sth->bindParam(7, $entry->request_uri, PDO_PARAM_STR, 255);
-        $sth->bindParam(8, $entry->_ncsa_time($entry->time), PDO_PARAM_STR, 28);
-        $sth->bindParam(9, $entry->time, PDO_PARAM_INT);
-        $sth->bindParam(10, $entry->status, PDO_PARAM_INT);
-        $sth->bindParam(11, $entry->size, PDO_PARAM_INT);
-        $sth->bindParam(12, $entry->referer, PDO_PARAM_STR, 255);
-        $sth->bindParam(13, $entry->user_agent, PDO_PARAM_STR, 255);
-        $sth->bindParam(14, $entry->duration, PDO_PARAM_FLOAT);
+        $sth->bindParam(1, $entry->time, PDO::PARAM_INT);
+        $sth->bindParam(2, $entry->host, PDO::PARAM_STR, 100);
+        $sth->bindParam(3, $entry->user, PDO::PARAM_STR, 50);
+        $sth->bindParam(4, $entry->request_method, PDO::PARAM_STR, 10);
+        $sth->bindParam(5, $entry->request, PDO::PARAM_STR, 255);
+        $sth->bindParam(6, $entry->request_args, PDO::PARAM_STR, 255);
+        $sth->bindParam(7, $entry->request_uri, PDO::PARAM_STR, 255);
+        $sth->bindParam(8, $entry->_ncsa_time($entry->time), PDO::PARAM_STR, 28);
+        $sth->bindParam(9, $entry->time, PDO::PARAM_INT);
+        $sth->bindParam(10, $entry->status, PDO::PARAM_INT);
+        $sth->bindParam(11, $entry->size, PDO::PARAM_INT);
+        $sth->bindParam(12, $entry->referer, PDO::PARAM_STR, 255);
+        $sth->bindParam(13, $entry->user_agent, PDO::PARAM_STR, 255);
+        $sth->bindParam(14, $entry->duration, PDO::PARAM_FLOAT);
         $sth->execute();
     }
 }
@@ -1330,7 +1326,7 @@ class WikiDB_backend_PDO
 class WikiDB_backend_PDO_generic_iter
     extends WikiDB_backend_iterator
 {
-    function WikiDB_backend_PDO_generic_iter($backend, $query_result, $field_list = NULL)
+    function __construct($backend, $query_result, $field_list = NULL)
     {
         $this->_backend = &$backend;
         $this->_result = $query_result;
@@ -1352,7 +1348,7 @@ class WikiDB_backend_PDO_generic_iter
         if (!is_object($result)) {
             return false;
         }
-        return $result->fetch(PDO_FETCH_BOTH);
+        return $result->fetch(PDO::FETCH_BOTH);
     }
 
     function free()
@@ -1373,7 +1369,7 @@ class WikiDB_backend_PDO_iter
             return false;
         }
         $this->_backend = &$backend;
-        $rec = $result->fetch(PDO_FETCH_ASSOC);
+        $rec = $result->fetch(PDO::FETCH_ASSOC);
 
         if (isset($rec['pagedata']))
             $rec['pagedata'] = $backend->_extract_page_data($rec['pagedata'], $rec['hits']);

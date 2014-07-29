@@ -71,7 +71,7 @@ class WikiDB_backend_ADODB
     extends WikiDB_backend
 {
 
-    function WikiDB_backend_ADODB($dbparams)
+    function __construct($dbparams)
     {
         $parsed = parseDSN($dbparams['dsn']);
         $this->_dbparams = $dbparams;
@@ -1207,10 +1207,8 @@ class WikiDB_backend_ADODB
      *
      * Calls can be nested.  The tables won't be unlocked until
      * _unlock_database() is called as many times as _lock_database().
-     *
-     * @access protected
      */
-    function lock($tables, $write_lock = true)
+    public function lock($tables, $write_lock = true)
     {
         $this->_dbh->StartTrans();
         if ($this->_lock_count++ == 0) {
@@ -1230,14 +1228,12 @@ class WikiDB_backend_ADODB
     /**
      * Release a write lock on the tables in the SQL database.
      *
-     * @access protected
-     *
      * @param $force boolean Unlock even if not every call to lock() has been matched
      * by a call to unlock().
      *
      * @see _lock_database
      */
-    function unlock($tables = false, $force = false)
+    public function unlock($tables = false, $force = false)
     {
         if ($this->_lock_count == 0) {
             $this->_current_lock = false;
@@ -1333,7 +1329,7 @@ class WikiDB_backend_ADODB
 class WikiDB_backend_ADODB_generic_iter
     extends WikiDB_backend_iterator
 {
-    function WikiDB_backend_ADODB_generic_iter($backend, $query_result, $field_list = NULL)
+    function __construct($backend, $query_result, $field_list = NULL)
     {
         $this->_backend = &$backend;
         $this->_result = $query_result;

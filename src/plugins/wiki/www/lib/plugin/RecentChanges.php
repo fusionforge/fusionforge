@@ -749,7 +749,7 @@ class _RecentChanges_SideBarFormatter
 
         printf("<body class=\"sidebar\">\n");
         $html->PrintXML();
-        echo '<a href="http://www.feedvalidator.org/check.cgi?url=http://phpwiki.org/RecentChanges?format=rss"><img src="themes/default/buttons/valid-rss.png" alt="[Valid RSS]" title="Validate the RSS feed" width="44" height="15" /></a>';
+        echo '<a href="http://www.feedvalidator.org/check.cgi?url=http://phpwiki.fr/RecentChanges?format=rss"><img src="themes/default/buttons/valid-rss.png" alt="[Valid RSS]" title="Validate the RSS feed" width="44" height="15" /></a>';
         printf("\n</body>\n");
         printf("</html>\n");
 
@@ -1088,13 +1088,12 @@ class _RecentChanges_AtomFormatter
  */
 class NonDeletedRevisionIterator extends WikiDB_PageRevisionIterator
 {
-    /** Constructor
-     *
+    /**
      * @param $revisions object a WikiDB_PageRevisionIterator.
      * @param bool $check_current_revision
      * @return void
      */
-    function NonDeletedRevisionIterator($revisions, $check_current_revision = true)
+    function __construct($revisions, $check_current_revision = true)
     {
         $this->_revisions = $revisions;
         $this->_check_current_revision = $check_current_revision;
@@ -1124,11 +1123,10 @@ class NonDeletedRevisionIterator extends WikiDB_PageRevisionIterator
  */
 class NewPageRevisionIterator extends WikiDB_PageRevisionIterator
 {
-    /** Constructor
-     *
+    /**
      * @param $revisions object a WikiDB_PageRevisionIterator.
      */
-    function NewPageRevisionIterator($revisions)
+    function __construct($revisions)
     {
         $this->_revisions = $revisions;
     }
@@ -1455,9 +1453,9 @@ class WikiPlugin_RecentChanges
 class OptionsButtonBars extends HtmlElement
 {
 
-    function OptionsButtonBars($plugin_args)
+    function __construct($plugin_args)
     {
-        $this->__construct('fieldset', array('class' => 'wiki-rc-action'));
+        parent::__construct('fieldset', array('class' => 'wiki-rc-action'));
 
         // Add ShowHideFolder button
         $icon = $GLOBALS['WikiTheme']->_findData('images/folderArrowOpen.png');

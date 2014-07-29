@@ -1,4 +1,4 @@
-@PLUGIN_PATH@/contribtracker/bin
-@PLUGIN_PATH@/contribtracker/common
-@PLUGIN_PATH@/contribtracker/db
-@PLUGIN_PATH@/contribtracker/www
+@PLUGINS_PATH@/contribtracker/bin
+@PLUGINS_PATH@/contribtracker/common
+@PLUGINS_PATH@/contribtracker/db
+@PLUGINS_PATH@/contribtracker/www

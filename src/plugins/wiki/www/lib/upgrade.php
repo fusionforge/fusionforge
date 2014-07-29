@@ -701,9 +701,8 @@ CREATE TABLE $log_tbl (
      *
      * A wrong DBADMIN user will not be able to connect
      * @see _is_false_error, ErrorManager
-     * @access private
      */
-    function _dbpermission_filter($err)
+    private function _dbpermission_filter($err)
     {
         if ($err->isWarning()) {
             global $ErrorManager;

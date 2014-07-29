@@ -1,5 +1,5 @@
-@PLUGIN_PATH@/scmsvn/bin
-@PLUGIN_PATH@/scmsvn/common
+@PLUGINS_PATH@/scmsvn/bin
+@PLUGINS_PATH@/scmsvn/common
 @DATA_PATH@/chroot/scmrepos/svn
 @DATA_PATH@/dumps
 @LOG_PATH@/svn

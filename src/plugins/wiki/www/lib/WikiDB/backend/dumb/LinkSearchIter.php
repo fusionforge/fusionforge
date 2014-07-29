@@ -38,8 +38,8 @@
 class WikiDB_backend_dumb_LinkSearchIter
     extends WikiDB_backend_iterator
 {
-    function WikiDB_backend_dumb_LinkSearchIter(&$backend, &$pageiter, $search, $linktype,
-                                                $relation = false, $options = array())
+    function __construct(&$backend, &$pageiter, $search, $linktype,
+                         $relation = false, $options = array())
     {
         $this->_backend = &$backend;
         $this->_pages = $pageiter;

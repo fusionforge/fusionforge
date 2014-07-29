@@ -1,3 +1,4 @@
+
 <?php
 /**
  * FusionForge Documentation Manager
@@ -155,9 +156,7 @@ jQuery(document).ready(function() {
 		enableResize:		true,
 		page:			'listfile',
 		docgroupId:		<?php echo $dirid ?>,
-		lockIntervalDelay:	60000,
-		imgroot:		'<?php echo $HTML->imgroot ?>',
-		lockedAction:		'<?php echo _('Action currently locked by another user.') ?>'
+		lockIntervalDelay:	60000
 	});
 });
 
@@ -173,7 +172,7 @@ if ($DocGroupName) {
 	echo html_e('h2', array(), $headerPath, false);
 	echo html_ao('h3', array('class' => 'docman_h3'));
 	echo html_e('span', array(), _('Document Folder')._(': ').html_e('i', array(), $DocGroupName, false).'&nbsp;', false);
-	/* should we steal the lock on file ? */
+	/* should we steal the lock on folder ? */
 	if ($ndg->getLocked()) {
 		if ($ndg->getLockedBy() == $u->getID()) {
 			$ndg->setLock(0);
@@ -185,7 +184,7 @@ if ($DocGroupName) {
 	if (!$ndg->getLocked()) {
 		if (forge_check_perm('docman', $ndg->Group->getID(), 'approve')) {
 			echo html_e('input', array('type' => 'hidden', 'id' => 'doc_group_id', 'value' => $ndg->getID()));
-			echo util_make_link('#', html_image('docman/configure-directory.png', 22, 22, array('alt' => 'edit')), array('id' => 'docman-editdirectory', 'title' => _('Edit this folder'), 'onclick' => 'javascript:controllerListFile.toggleEditDirectoryView()' ), true);
+			echo util_make_link('#', $HTML->getConfigurePic('', _('Edit')), array('id' => 'docman-editdirectory', 'title' => _('Edit this folder'), 'onclick' => 'javascript:controllerListFile.toggleEditDirectoryView()'), true);
 			echo util_make_link($redirecturl.'&action=trashdir', $HTML->getDeletePic('', 'trashdir'), array('id' => 'docman-trashdirectory', 'title' => _('Move this folder and his content to trash')));
 			if (!isset($nested_docs[$dirid]) && !isset($nested_groups[$dirid]) && !isset($nested_pending_docs[$dirid])) {
 				echo util_make_link($redirecturl.'&action=deldir', html_image('docman/delete-directory.png', 22, 22, array('alt' => 'deldir')), array('id' => 'docman-deletedirectory', 'title' => _('Permanently delete this folder')));

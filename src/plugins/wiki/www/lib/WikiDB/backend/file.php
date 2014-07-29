@@ -53,7 +53,7 @@ class WikiDB_backend_file
     public $_page_version_data; // temporarily stores the versiondata (via _loadVersionData)
     public $_latest_versions; // temporarily stores the latest version-numbers (for every pagename)
 
-    function WikiDB_backend_file($dbparam)
+    function __construct($dbparam)
     {
         $this->data_dir = $dbparam['directory'];
         if (file_exists($this->data_dir) and is_file($this->data_dir))
@@ -399,10 +399,8 @@ class WikiDB_backend_file
 
     /**
      * Rename all files for this page
-     *
-     * @access protected   Via WikiDB
      */
-    function rename_page($pagename, $to)
+    public function rename_page($pagename, $to)
     {
         $version = _getLatestVersion($pagename);
         foreach ($this->_dir_names as $type => $path) {
@@ -581,8 +579,6 @@ class WikiDB_backend_file
      * Pages should be returned in alphabetical order if that is
      * feasable.
      *
-     * @access protected
-     *
      * @param $include_defaulted boolean
      * If set, even pages with no content will be returned
      * --- but still only if they have at least one revision (not
@@ -594,7 +590,7 @@ class WikiDB_backend_file
      *
      * @return object A WikiDB_backend_iterator.
      */
-    function get_all_pages($include_empty = false, $sortby = '', $limit = '', $exclude = '')
+    public function get_all_pages($include_empty = false, $sortby = '', $limit = '', $exclude = '')
     {
         require_once 'lib/PageList.php';
         $this->_loadLatestVersions();
@@ -732,7 +728,7 @@ class WikiDB_backend_file
 
 class WikiDB_backend_file_iter extends WikiDB_backend_iterator
 {
-    function WikiDB_backend_file_iter(&$backend, &$query_result, $options = array())
+    function __construct(&$backend, &$query_result, $options = array())
     {
         $this->_backend = &$backend;
         $this->_result = $query_result;

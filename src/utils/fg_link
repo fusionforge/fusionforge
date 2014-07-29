@@ -18,8 +18,8 @@ SOURCE_PATH=`forge_get_config_basic $FLAVOUR source_path`
 export SOURCE_PATH
 BINARY_PATH=`forge_get_config_basic $FLAVOUR binary_path`
 export BINARY_PATH
-PLUGIN_PATH=`forge_get_config_basic $FLAVOUR plugins_path`
-export PLUGIN_PATH
+PLUGINS_PATH=`forge_get_config_basic $FLAVOUR plugins_path`
+export PLUGINS_PATH
 DATA_PATH=`forge_get_config_basic $FLAVOUR data_path`
 export DATA_PATH
 CONFIG_PATH=`forge_get_config_basic $FLAVOUR config_path`
@@ -33,7 +33,7 @@ case $FORMAT in
 		grep -v "^$" | \
 		sed -e "s:@SOURCE_PATH@:${SOURCE_PATH}:g" \
 		-e "s:@BINARY_PATH@:${BINARY_PATH}:g" \
-		-e "s:@PLUGIN_PATH@:${PLUGIN_PATH}:g" \
+		-e "s:@PLUGINS_PATH@:${PLUGINS_PATH}:g" \
 		-e "s:@DATA_PATH@:${DATA_PATH}:g" \
 		-e "s:@CONFIG_PATH@:${CONFIG_PATH}:g" \
 		-e "s:@LOG_PATH@:${LOG_PATH}:g" \
@@ -46,7 +46,7 @@ case $FORMAT in
 		grep -v "^$" | \
 		sed -e "s:@SOURCE_PATH@:${SOURCE_PATH}:g" \
 		-e "s:@BINARY_PATH@:${BINARY_PATH}:g" \
-		-e "s:@PLUGIN_PATH@:${PLUGIN_PATH}:g" \
+		-e "s:@PLUGINS_PATH@:${PLUGINS_PATH}:g" \
 		-e "s:@DATA_PATH@:${DATA_PATH}:g" \
 		-e "s:@CONFIG_PATH@:${CONFIG_PATH}:g" \
 		-e "s:@LOG_PATH@:${LOG_PATH}:g" \
@@ -56,7 +56,7 @@ case $FORMAT in
 		grep -v "^$" | \
 		sed -e "s:@SOURCE_PATH@:%{FORGE_DIR}:g" \
 		-e "s:@BINARY_PATH@:${BINARY_PATH}:g" \
-		-e "s:@PLUGIN_PATH@:${PLUGIN_PATH}:g" \
+		-e "s:@PLUGINS_PATH@:${PLUGINS_PATH}:g" \
 		-e "s:@DATA_PATH@:${DATA_PATH}:g" \
 		-e "s:@CONFIG_PATH@:${CONFIG_PATH}:g" \
 		-e "s:@LOG_PATH@:${LOG_PATH}:g" \

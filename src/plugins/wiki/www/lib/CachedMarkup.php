@@ -26,7 +26,7 @@ require_once 'lib/Units.php';
 class CacheableMarkup extends XmlContent
 {
 
-    function CacheableMarkup($content, $basepage)
+    function __construct($content, $basepage)
     {
         $this->_basepage = $basepage;
         $this->_buf = '';
@@ -354,7 +354,7 @@ class Cached_InlinedImage extends Cached_DynamicContent
 class Cached_WikiLink extends Cached_Link
 {
 
-    function Cached_WikiLink($page, $label = false, $anchor = false)
+    function __construct($page, $label = false, $anchor = false)
     {
         $this->_page = $page;
         /* ":DontStoreLink" */
@@ -442,7 +442,7 @@ class Cached_WikiLink extends Cached_Link
 
 class Cached_WikiLinkIfKnown extends Cached_WikiLink
 {
-    function Cached_WikiLinkIfKnown($moniker)
+    function __construct($moniker)
     {
         $this->_page = $moniker;
     }
@@ -460,7 +460,7 @@ class Cached_WikiLinkIfKnown extends Cached_WikiLink
 
 class Cached_SpellCheck extends Cached_WikiLink
 {
-    function Cached_SpellCheck($word, $suggs)
+    function __construct($word, $suggs)
     {
         $this->_page = $word;
         $this->suggestions = $suggs;
@@ -478,7 +478,7 @@ class Cached_SpellCheck extends Cached_WikiLink
 
 class Cached_PhpwikiURL extends Cached_DynamicContent
 {
-    function Cached_PhpwikiURL($url, $label)
+    function __construct($url, $label)
     {
         $this->_url = $url;
         if ($label)
@@ -529,7 +529,7 @@ class Cached_PhpwikiURL extends Cached_DynamicContent
 class Cached_SemanticLink extends Cached_WikiLink
 {
 
-    function Cached_SemanticLink($url, $label = false)
+    function __construct($url, $label = false)
     {
         $this->_url = $url;
         if ($label && $label != $url)
@@ -665,7 +665,7 @@ class Cached_SemanticLink extends Cached_WikiLink
  */
 class Cached_SearchHighlight extends Cached_DynamicContent
 {
-    function Cached_SearchHighlight($word, $engine)
+    function __construct($word, $engine)
     {
         $this->_word = $word;
         $this->engine = $engine;
@@ -682,7 +682,7 @@ class Cached_SearchHighlight extends Cached_DynamicContent
 class Cached_ExternalLink extends Cached_Link
 {
 
-    function Cached_ExternalLink($url, $label = false)
+    function __construct($url, $label = false)
     {
         $this->_url = $url;
         if ($label && $label != $url)
@@ -728,7 +728,7 @@ class Cached_ExternalLink extends Cached_Link
 class Cached_InterwikiLink extends Cached_ExternalLink
 {
 
-    function Cached_InterwikiLink($link, $label = false)
+    function __construct($link, $label = false)
     {
         $this->_link = $link;
         if ($label)
@@ -822,7 +822,7 @@ class Cached_UserLink extends Cached_WikiLink
 class Cached_PluginInvocation extends Cached_DynamicContent
 {
 
-    function Cached_PluginInvocation($pi)
+    function __construct($pi)
     {
         $this->_pi = $pi;
         $loader = $this->_getLoader();

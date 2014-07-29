@@ -10,9 +10,8 @@ class DbSession_PDO
 {
     public $_backend_type = "PDO";
 
-    function DbSession_PDO($dbh, $table)
+    function __construct($dbh, $table)
     {
-
         $this->_dbh = $dbh;
         $this->_table = $table;
 
@@ -24,7 +23,6 @@ class DbSession_PDO
             array(&$this, 'write'),
             array(&$this, 'destroy'),
             array(&$this, 'gc'));
-        return $this;
     }
 
     function & _connect()
@@ -36,7 +34,7 @@ class DbSession_PDO
             $this->_dbh =& $db->_dbh;
             $this->_backend =& $db;
         }
-        return $dbh->_dbh;
+        return $dbh;
     }
 
     function query($sql)
@@ -46,7 +44,7 @@ class DbSession_PDO
 
     function quote($string)
     {
-        return $this->_backend->quote($sql);
+        return $this->_backend->quote($string);
     }
 
     function _disconnect()
@@ -63,9 +61,8 @@ class DbSession_PDO
      * @param  string  $session_name a name of the concrete file
      * @return boolean true just a variable to notify PHP that everything
      * is good.
-     * @access private
      */
-    function open($save_path, $session_name)
+    public function open($save_path, $session_name)
     {
         //$this->log("_open($save_path, $session_name)");
         return true;
@@ -78,9 +75,8 @@ class DbSession_PDO
      *
      * @return boolean true just a variable to notify PHP that everything
      * is good.
-     * @access private
      */
-    function close()
+    public function close()
     {
         //$this->log("_close()");
         return true;
@@ -91,26 +87,31 @@ class DbSession_PDO
      *
      * @param  string $id an id of current session
      * @return string
-     * @access private
      */
-    function read($id)
+    public function read($id)
     {
         //$this->log("_read($id)");
         $dbh = $this->_connect();
         $table = $this->_table;
         $sth = $dbh->prepare("SELECT sess_data FROM $table WHERE sess_id=?");
-        $sth->bindParam(1, $id, PDO_PARAM_STR, 32);
-        if ($sth->execute()) $res = $sth->fetchSingle();
-        else $res = '';
+        $sth->bindParam(1, $id, PDO::PARAM_STR, 32);
+        if ($sth->execute()) {
+            $res = $sth->fetchColumn();
+        } else {
+            $res = '';
+        }
         $this->_disconnect();
-        if (!empty($res) and isa($dbh, 'ADODB_postgres64'))
+        if (!empty($res) and isa($dbh, 'ADODB_postgres64')) {
             $res = base64_decode($res);
+        }
         if (strlen($res) > 4000) {
             trigger_error("Overlarge session data! " . strlen($res) .
                 " gt. 4000", E_USER_WARNING);
             $res = preg_replace('/s:6:"_cache";O:12:"WikiDB_cache".+}$/', "", $res);
             $res = preg_replace('/s:12:"_cached_html";s:.+",s:4:"hits"/', 's:4:"hits"', $res);
-            if (strlen($res) > 4000) $res = '';
+            if (strlen($res) > 4000) {
+                $res = '';
+            }
         }
         return $res;
     }
@@ -129,11 +130,10 @@ class DbSession_PDO
      * @param  string  $sess_data
      * @return boolean true if data saved successfully  and false
      * otherwise.
-     * @access private
      */
-    function write($id, $sess_data)
+    public function write($id, $sess_data)
     {
-        if (defined("WIKI_XMLRPC") or defined("WIKI_SOAP")) return;
+        if (defined("WIKI_XMLRPC") or defined("WIKI_SOAP")) return false;
 
         $dbh = $this->_connect();
         $table = $this->_table;
@@ -143,20 +143,20 @@ class DbSession_PDO
         if (isa($dbh, 'ADODB_postgres64'))
             $sess_data = base64_encode($sess_data);
 
-        /* AffectedRows with sessions seems to be instable on certain platforms.
+        /* AffectedRows with sessions seems to be unstable on certain platforms.
          * Enable the safe and slow USE_SAFE_DBSESSION then.
          */
         if (USE_SAFE_DBSESSION) {
             $this->_backend->beginTransaction();
             $rs = $this->query("DELETE FROM $table"
-                . " WHERE sess_id=$qid");
+                . " WHERE sess_id=$id");
             $sth = $dbh->prepare("INSERT INTO $table"
                 . " (sess_id, sess_data, sess_date, sess_ip)"
                 . " VALUES (?, ?, ?, ?)");
-            $sth->bindParam(1, $id, PDO_PARAM_STR, 32);
-            $sth->bindParam(2, $sess_data, PDO_PARAM_LOB);
-            $sth->bindParam(3, $time, PDO_PARAM_INT);
-            $sth->bindParam(4, $GLOBALS['request']->get('REMOTE_ADDR'), PDO_PARAM_STR, 15);
+            $sth->bindParam(1, $id, PDO::PARAM_STR, 32);
+            $sth->bindParam(2, $sess_data, PDO::PARAM_LOB);
+            $sth->bindParam(3, $time, PDO::PARAM_INT);
+            $sth->bindParam(4, $GLOBALS['request']->get('REMOTE_ADDR'), PDO::PARAM_STR, 15);
             if ($result = $sth->execute()) {
                 $this->_backend->commit();
             } else {
@@ -166,19 +166,19 @@ class DbSession_PDO
             $sth = $dbh->prepare("UPDATE $table"
                 . " SET sess_data=?, sess_date=?, sess_ip=?"
                 . " WHERE sess_id=?");
-            $sth->bindParam(1, $sess_data, PDO_PARAM_LOB);
-            $sth->bindParam(2, $time, PDO_PARAM_INT);
-            $sth->bindParam(3, $GLOBALS['request']->get('REMOTE_ADDR'), PDO_PARAM_STR, 15);
-            $sth->bindParam(4, $id, PDO_PARAM_STR, 32);
+            $sth->bindParam(1, $sess_data, PDO::PARAM_LOB);
+            $sth->bindParam(2, $time, PDO::PARAM_INT);
+            $sth->bindParam(3, $GLOBALS['request']->get('REMOTE_ADDR'), PDO::PARAM_STR, 15);
+            $sth->bindParam(4, $id, PDO::PARAM_STR, 32);
             $result = $sth->execute(); // implicit affected rows
             if ($result === false or $result < 1) { // false or int > 0
                 $sth = $dbh->prepare("INSERT INTO $table"
                     . " (sess_id, sess_data, sess_date, sess_ip)"
                     . " VALUES (?, ?, ?, ?)");
-                $sth->bindParam(1, $id, PDO_PARAM_STR, 32);
-                $sth->bindParam(2, $sess_data, PDO_PARAM_LOB);
-                $sth->bindParam(3, $time, PDO_PARAM_INT);
-                $sth->bindParam(4, $GLOBALS['request']->get('REMOTE_ADDR'), PDO_PARAM_STR, 15);
+                $sth->bindParam(1, $id, PDO::PARAM_STR, 32);
+                $sth->bindParam(2, $sess_data, PDO::PARAM_LOB);
+                $sth->bindParam(3, $time, PDO::PARAM_INT);
+                $sth->bindParam(4, $GLOBALS['request']->get('REMOTE_ADDR'), PDO::PARAM_STR, 15);
                 $result = $sth->execute();
             }
         }
@@ -193,14 +193,13 @@ class DbSession_PDO
      *
      * @param  string  $id
      * @return boolean true
-     * @access private
      */
-    function destroy($id)
+    public function destroy($id)
     {
         $table = $this->_table;
         $dbh = $this->_connect();
         $sth = $dbh->prepare("DELETE FROM $table WHERE sess_id=?");
-        $sth->bindParam(1, $id, PDO_PARAM_STR, 32);
+        $sth->bindParam(1, $id, PDO::PARAM_STR, 32);
         $sth->execute();
         $this->_disconnect();
         return true;
@@ -211,15 +210,14 @@ class DbSession_PDO
      *
      * @param  int     $maxlifetime session's time to live.
      * @return boolean true
-     * @access private
      */
-    function gc($maxlifetime)
+    public function gc($maxlifetime)
     {
         $table = $this->_table;
         $threshold = time() - $maxlifetime;
         $dbh = $this->_connect();
         $sth = $dbh->prepare("DELETE FROM $table WHERE sess_date < ?");
-        $sth->bindParam(1, $threshold, PDO_PARAM_INT);
+        $sth->bindParam(1, $threshold, PDO::PARAM_INT);
         $sth->execute();
         $this->_disconnect();
         return true;
@@ -236,7 +234,7 @@ class DbSession_PDO
         if (!$sth->execute()) {
             return $sessions;
         }
-        while ($row = $sth->fetch(PDO_FETCH_NUM)) {
+        while ($row = $sth->fetch(PDO::FETCH_NUM)) {
             $data = $row[0];
             $date = $row[1];
             $ip = $row[2];

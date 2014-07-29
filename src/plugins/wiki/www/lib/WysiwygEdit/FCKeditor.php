@@ -18,7 +18,7 @@ require_once 'lib/WysiwygEdit.php';
 class WysiwygEdit_FCKeditor extends WysiwygEdit
 {
 
-    function WysiwygEdit_FCKeditor()
+    function __construct()
     {
         global $LANG;
         $this->_transformer_tags = false;

@@ -1464,7 +1464,7 @@ $properties["AUTHORPAGE_TITLE"] =
     new _define_commented_optional('AUTHORPAGE_TITLE', "The PhpWiki Programming Team", "
 Default Author Names");
 $properties["AUTHORPAGE_URL"] =
-    new _define_commented_optional('AUTHORPAGE_URL', "http://phpwiki.org/ThePhpWikiProgrammingTeam", "
+    new _define_commented_optional('AUTHORPAGE_URL', "http://phpwiki.fr/ThePhpWikiProgrammingTeam", "
 Default Author URL");
 
 $properties["TOC_FULL_SYNTAX"] =
@@ -1660,10 +1660,6 @@ $properties["MY_JABBER_ID"] =
     new _define_commented_optional('MY_JABBER_ID'); //
 $properties["PHPWEATHER_BASE_DIR"] =
     new _define_commented_optional('PHPWEATHER_BASE_DIR'); //
-$properties["HIGHLIGHT_EXE"] =
-    new _define_commented_optional('HIGHLIGHT_EXE'); // /usr/local/bin/highlight
-$properties["HIGHLIGHT_DATA_DIR"] =
-    new _define_commented_optional('HIGHLIGHT_DATA_DIR'); // /usr/share/highlight
 
 $properties["Part Eight"] =
     new part('_part8', $SEPARATOR . "\n", "

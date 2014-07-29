@@ -7,7 +7,7 @@ class WikiDB_backend_PearDB
 {
     public $_dbh;
 
-    function WikiDB_backend_PearDB($dbparams)
+    function __construct($dbparams)
     {
         // Find and include PEAR's DB.php. maybe we should force our private version again...
         // if DB would have exported its version number, it would be easier.
@@ -1005,10 +1005,8 @@ class WikiDB_backend_PearDB
      *
      * Calls can be nested.  The tables won't be unlocked until
      * _unlock_database() is called as many times as _lock_database().
-     *
-     * @access protected
      */
-    function lock($tables = false, $write_lock = true)
+    public function lock($tables = false, $write_lock = true)
     {
         if ($this->_lock_count++ == 0)
             $this->_lock_tables($write_lock);
@@ -1025,14 +1023,12 @@ class WikiDB_backend_PearDB
     /**
      * Release a write lock on the tables in the SQL database.
      *
-     * @access protected
-     *
      * @param $force boolean Unlock even if not every call to lock() has been matched
      * by a call to unlock().
      *
      * @see _lock_database
      */
-    function unlock($tables = false, $force = false)
+    public function unlock($tables = false, $force = false)
     {
         if ($this->_lock_count == 0)
             return;
@@ -1073,11 +1069,9 @@ class WikiDB_backend_PearDB
     /**
      * Callback for PEAR (DB) errors.
      *
-     * @access protected
-     *
      * @param A PEAR_error object.
      */
-    function _pear_error_callback($error)
+    public function _pear_error_callback($error)
     {
         if ($this->_is_false_error($error))
             return;
@@ -1095,10 +1089,9 @@ class WikiDB_backend_PearDB
      * return any data.  (So when a "LOCK" command doesn't return any data,
      * DB reports it as an error, when in fact, it's not.)
      *
-     * @access private
      * @return bool True iff error is not really an error.
      */
-    function _is_false_error($error)
+    private function _is_false_error($error)
     {
         if ($error->getCode() != DB_ERROR)
             return false;
@@ -1148,9 +1141,8 @@ class WikiDB_backend_PearDB
      * errors and notices.  This is an error callback (for use with
      * ErrorManager which will filter out those spurious messages.)
      * @see _is_false_error, ErrorManager
-     * @access private
      */
-    function _pear_notice_filter($err)
+    private function _pear_notice_filter($err)
     {
         return ($err->isNotice()
             && preg_match('|DB[/\\\\]common.php$|', $err->errfile)
@@ -1222,7 +1214,7 @@ class WikiDB_backend_PearDB
 class WikiDB_backend_PearDB_generic_iter
     extends WikiDB_backend_iterator
 {
-    function WikiDB_backend_PearDB_generic_iter($backend, $query_result, $field_list = NULL)
+    function __construct($backend, $query_result, $field_list = NULL)
     {
         if (DB::isError($query_result)) {
             // This shouldn't happen, I thought.

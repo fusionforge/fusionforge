@@ -45,12 +45,9 @@ function wiki_assert_handler($file, $line, $code)
 class ErrorManager
 {
     /**
-     * Constructor.
-     *
      * As this is a singleton class, you should never call this.
-     * @access private
      */
-    function ErrorManager()
+    function __construct()
     {
         $this->_handlers = array();
         $this->_fatal_handler = false;
@@ -62,10 +59,9 @@ class ErrorManager
 
     /**
      * Get mask indicating which errors are currently being postponed.
-     * @access public
      * @return int The current postponed error mask.
      */
-    function getPostponedErrorMask()
+    public function getPostponedErrorMask()
     {
         return $this->_postpone_mask;
     }
@@ -78,10 +74,9 @@ class ErrorManager
      * When you set this mask, any queue errors which do not match the new
      * mask are reported.
      *
-     * @access public
      * @param $newmask int The new value for the mask.
      */
-    function setPostponedErrorMask($newmask)
+    public function setPostponedErrorMask($newmask)
     {
         $this->_postpone_mask = $newmask;
         if (function_exists('PrintXML'))
@@ -93,9 +88,8 @@ class ErrorManager
 
     /**
      * Report any queued error messages.
-     * @access public
      */
-    function flushPostponedErrors()
+    public function flushPostponedErrors()
     {
         if (function_exists('PrintXML'))
             PrintXML($this->_flush_errors());
@@ -106,9 +100,8 @@ class ErrorManager
     /**
      * Get rid of all pending error messages in case of all non-html
      * - pdf or image - output.
-     * @access public
      */
-    function destroyPostponedErrors()
+    public function destroyPostponedErrors()
     {
         $this->_postponed_errors = array();
     }
@@ -181,19 +174,17 @@ class ErrorManager
      *                             handler. This allows the handler to
      *                             "adjust" the error message.
      * </dl>
-     * @access public
      * @param $handler WikiCallback  Handler to call.
      */
-    function pushErrorHandler($handler)
+    public function pushErrorHandler($handler)
     {
         array_unshift($this->_handlers, $handler);
     }
 
     /**
      * Pop an error handler off the handler stack.
-     * @access public
      */
-    function popErrorHandler()
+    public function popErrorHandler()
     {
         return array_shift($this->_handlers);
     }
@@ -205,10 +196,9 @@ class ErrorManager
      * gets passed one argument: a PhpError object describing the
      * fatal error.
      *
-     * @access public
      * @param $handler WikiCallback  Callback to call on fatal errors.
      */
-    function setFatalHandler($handler)
+    public function setFatalHandler($handler)
     {
         $this->_fatal_handler = $handler;
     }
@@ -219,10 +209,9 @@ class ErrorManager
      * The error is passed through any registered error handlers, and
      * then either reported or postponed.
      *
-     * @access public
      * @param $error object A PhpError object.
      */
-    function handleError($error)
+    public function handleError($error)
     {
         static $in_handler;
 
@@ -317,10 +306,7 @@ class ErrorManager
         $this->handleError(new PhpWikiError($errno, $msg, '?', '?'));
     }
 
-    /**
-     * @access private
-     */
-    function _die($error)
+    private function _die($error)
     {
         global $WikiTheme;
         //echo "\n\n<html><body>";
@@ -333,10 +319,7 @@ class ErrorManager
         }
     }
 
-    /**
-     * @access private
-     */
-    function _flush_errors($keep_mask = 0)
+    private function _flush_errors($keep_mask = 0)
     {
         $errors = &$this->_postponed_errors;
         if (empty($errors)) return '';
@@ -430,13 +413,12 @@ class PhpError
     public $errline;
 
     /**
-     * Construct a new PhpError.
      * @param int $errno
      * @param string $errstr
      * @param string $errfile
      * @param int $errline
      */
-    function PhpError($errno, $errstr, $errfile, $errline)
+    function __construct($errno, $errstr, $errfile, $errline)
     {
         $this->errno = $errno;
         $this->errstr = $errstr;
@@ -586,15 +568,14 @@ class PhpError
 class PhpWikiError extends PhpError
 {
     /**
-     * Construct a new PhpError.
      * @param int $errno
      * @param string $errstr
      * @param string $errfile
      * @param int $errline
      */
-    function PhpWikiError($errno, $errstr, $errfile, $errline)
+    function __construct($errno, $errstr, $errfile, $errline)
     {
-        $this->PhpError($errno, $errstr, $errfile, $errline);
+        parent::__construct($errno, $errstr, $errfile, $errline);
     }
 
     function _getDetail()
@@ -612,11 +593,10 @@ class PhpWikiError extends PhpError
  */
 class PhpErrorOnce extends PhpError
 {
-
-    function PhpErrorOnce($errno, $errstr, $errfile, $errline)
+    function __construct($errno, $errstr, $errfile, $errline)
     {
         $this->_count = 1;
-        $this->PhpError($errno, $errstr, $errfile, $errline);
+        parent::__construct($errno, $errstr, $errfile, $errline);
     }
 
     function _sameError($error)

@@ -24,7 +24,7 @@
 include_once 'lib/RssWriter.php';
 class RSSWriter091 extends RSSWriter
 {
-    function RSSWriter091()
+    function __construct()
     {
         $this->XmlElement('rss', array('version' => "0.91"));
         $this->_items = array();

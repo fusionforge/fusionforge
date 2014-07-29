@@ -72,7 +72,7 @@ class WikiDB_backend_cvs
      * repository or assumed to exist. If on the other hand the parameter
      * already exists, then it is not overwritten.
      */
-    function WikiDB_backend_cvs($dbparam)
+    function __construct($dbparam)
     {
         // setup all the instance values.
         $this->_docDir = $dbparam{CVS_DOC_DIR};
@@ -956,9 +956,9 @@ class Cvs_Backend_Full_Search_Iterator
     public $_searchString = '';
     public $_docDir = "";
 
-    function Cvs_Backend_Title_Search_Iterator($arrayValue = Array(),
-                                               $searchString = "",
-                                               $documentDir = ".")
+    function __construct($arrayValue = array(),
+                         $searchString = "",
+                         $documentDir = ".")
     {
         $this->Cvs_Backend_Array_Iterator($arrayValue);
         $_searchString = $searchString;
@@ -1002,10 +1002,10 @@ class Cvs_Backend_Title_Search_Iterator
 {
     public $_searchString = '';
 
-    function Cvs_Backend_Title_Search_Iterator($arrayValue = Array(),
-                                               $searchString = "")
+    function __construct($arrayValue = array(),
+                         $searchString = "")
     {
-        $this->Cvs_Backend_Array_Iterator($arrayValue);
+        parent::__construct($arrayValue);
         $_searchString = $searchString;
     }
 

@@ -5,7 +5,7 @@
  */
 
 // see lib/stdlib.php: phpwiki_version()
-define('PHPWIKI_VERSION', '1.4.0');
+define('PHPWIKI_VERSION', '1.5.0');
 
 /**
  * Returns true if current php version is at mimimum a.b.c

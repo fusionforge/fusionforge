@@ -141,17 +141,14 @@ if ( count($FRSPackages) < 1) {
 				$cell_data[] = _('Latest');
 
 				// Switch whether release_id exists and/or release_id == package_release['release_id']
-				if ( ! $release_id ) {
+				if (!$release_id || $release_id == $package_release_id) {
 					// no release_id
-					echo $HTML->listTableTop($cell_data, '', false);
-				} elseif ( $release_id==$package_release_id ) {
-					// release_id is current one
-					echo $HTML->listTableTop($cell_data, '', true);
+					echo $HTML->listTableTop($cell_data);
 				} else {
 				// release_id but not current one => dont print anything here
 				}
 
-				if ( ! $release_id || $release_id == $package_release_id ) {
+				if ( !$release_id || $release_id == $package_release_id ) {
 					// no release_id OR no release_id OR release_id is current one
 					if ( !$res_files || $num_files < 1 ) {
 						$cells = array();

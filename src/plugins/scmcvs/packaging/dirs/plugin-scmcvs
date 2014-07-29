@@ -1,5 +1,5 @@
-@PLUGIN_PATH@/scmcvs/bin
-@PLUGIN_PATH@/scmcvs/sbin
-@PLUGIN_PATH@/scmcvs/common
+@PLUGINS_PATH@/scmcvs/bin
+@PLUGINS_PATH@/scmcvs/sbin
+@PLUGINS_PATH@/scmcvs/common
 @DATA_PATH@/chroot/scmrepos/cvs
 @LOG_PATH@/cvs

@@ -8,7 +8,6 @@
   $mayChange = mayAccessPage('change', $pagename);
 ?>
 <div class="portlet" id="p-cactions">
-  <h2><?php echo _("Views") ?></h2>
   <ul>
     <?php if ($request->getArg('action') != "") { ?>
       <?php echo ActionButton("browse", _("View Page"), false, array('title' => _("View Page")." [alt-c]")) ?>

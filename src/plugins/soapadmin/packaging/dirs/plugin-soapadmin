@@ -1,3 +1,3 @@
-@PLUGIN_PATH@/soapadmin/cgi-bin
-@PLUGIN_PATH@/soapadmin/common
-@PLUGIN_PATH@/soapadmin/www
+@PLUGINS_PATH@/soapadmin/cgi-bin
+@PLUGINS_PATH@/soapadmin/common
+@PLUGINS_PATH@/soapadmin/www

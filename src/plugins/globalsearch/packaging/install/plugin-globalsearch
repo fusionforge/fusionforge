@@ -1,4 +1,4 @@
-plugins/globalsearch/bin/* @PLUGIN_PATH@/globalsearch/bin/
-plugins/globalsearch/db/* @PLUGIN_PATH@/globalsearch/db/
-plugins/globalsearch/common/* @PLUGIN_PATH@/globalsearch/common/
-plugins/globalsearch/www/* @PLUGIN_PATH@/globalsearch/www/
+plugins/globalsearch/bin/* @PLUGINS_PATH@/globalsearch/bin/
+plugins/globalsearch/db/* @PLUGINS_PATH@/globalsearch/db/
+plugins/globalsearch/common/* @PLUGINS_PATH@/globalsearch/common/
+plugins/globalsearch/www/* @PLUGINS_PATH@/globalsearch/www/

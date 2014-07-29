@@ -107,14 +107,11 @@ class WikiPlugin_PhpHighlight
         static $MAXLEN = 7;
         foreach (array($string, $comment, $keyword, $bg, $default, $html) as $color) {
             $length = strlen($color);
-            //trigger_error(sprintf(_("DEBUG: color “%s” is length %d."), $color, $length), E_USER_NOTICE);
             if (($length == 7 || $length == 4) && substr($color, 0, 1) == "#"
                 && "#" == preg_replace("/[a-fA-F0-9]/", "", $color)
             ) {
-                //trigger_error(sprintf(_("DEBUG: color “%s” appears to be hex."), $color), E_USER_NOTICE);
                 // stop checking, ok to go
             } elseif (($length < $MAXLEN + 1) && in_array($color, $html4colors)) {
-                //trigger_error(sprintf(_("DEBUG color “%s” appears to be an HTML 4 color."), $color), E_USER_NOTICE);
                 // stop checking, ok to go
             } else {
                 trigger_error(sprintf(_("Invalid color: %s"),

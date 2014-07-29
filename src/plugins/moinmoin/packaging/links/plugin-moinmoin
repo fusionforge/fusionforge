@@ -1,1 +1,1 @@
-@PLUGIN_PATH@/moinmoin/wsgi/moin.wsgi	@DATA_PATH@/plugins/moinmoin/wikidata/moin.wsgi
+@PLUGINS_PATH@/moinmoin/wsgi/moin.wsgi	@DATA_PATH@/plugins/moinmoin/wikidata/moin.wsgi

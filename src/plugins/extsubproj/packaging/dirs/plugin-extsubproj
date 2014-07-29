@@ -1,4 +1,4 @@
-@PLUGIN_PATH@/extsubproj/actions
-@PLUGIN_PATH@/extsubproj/common
-@PLUGIN_PATH@/extsubproj/view
-@PLUGIN_PATH@/extsubproj/www
+@PLUGINS_PATH@/extsubproj/actions
+@PLUGINS_PATH@/extsubproj/common
+@PLUGINS_PATH@/extsubproj/view
+@PLUGINS_PATH@/extsubproj/www

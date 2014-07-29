@@ -11,10 +11,10 @@ You can have those libraries by installing their respectives Debian packages:
 zendframework, php-pear, php-http
 
 Plugin installation and activation :
- * Copy the plugin root directory into your /usr/share/gforge/plugins directory.
+ * Copy the plugin root directory into your @PLUGINS_PATH@ directory.
  * Login as forge admin and activate the plugin from the Plugin Manager page in forge's admin section. 
  * Activate the plugin for your project (from your project's Admin -> Tools page)
- * Don't forget to update your php include_path in your /etc/gforge/httpd.conf file
+ * Don't forget to update your php include_path in your @CONFIG_PATH@/httpd.conf file
  
 
 How to test that installation is correct :

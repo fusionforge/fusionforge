@@ -28,7 +28,7 @@
  * via plugins anyway, so…
  */
 
-require '/usr/share/gforge/common/include/env.inc.php';
+require `forge_get_config source_path`.'/common/include/env.inc.php';
 require_once $gfcommon."include/pre.php";
 require_once $gfcommon.'include/minijson.php';
 require_once $gfcommon.'tracker/Artifact.class.php';

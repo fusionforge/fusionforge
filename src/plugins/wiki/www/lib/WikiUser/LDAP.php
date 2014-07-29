@@ -113,11 +113,10 @@ class _LDAPPassUser
      * Apply LDAP_SEARCH_FIELD and optionally LDAP_SEARCH_FILTER.
      *
      * @param string $userid username, unquoted in the current charset.
-     * @access private
      * @return string The 3rd argument to ldap_search()
      * @see http://www.faqs.org/rfcs/rfc4514.html LDAP String Representation of Distinguished Names
      */
-    function _searchparam($userid)
+    private function _searchparam($userid)
     {
         $euserid = $this->_stringEscape($userid);
         // Need to set the right root search information. See config/config.ini

@@ -2,8 +2,11 @@
 
 my $world ;
 
-do "/etc/gforge/plugins/soapadmin/world.conf"
-    or die "Cannot read /etc/gforge/plugins/soapadmin/world.conf" ;
+my $config_path = `forge_get_config config_path`;
+chomp $config_path;
+
+do "$config_path/plugins/soapadmin/world.conf"
+    or die "Cannot read $config_path/plugins/soapadmin/world.conf" ;
 
 print STDOUT "Hello $world on STDOUT!\n" ;
 print STDERR "Hello $world on STDERR!\n" ;
