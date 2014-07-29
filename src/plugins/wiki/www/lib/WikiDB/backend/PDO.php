@@ -241,6 +241,9 @@ class WikiDB_backend_PDO
         return $sth->fetchAll(PDO::FETCH_NUM);
     }
 
+    /*
+     * filter (nonempty pages) currently ignored
+     */
     function numPages($filter = false, $exclude = '')
     {
         $dbh = &$this->_dbh;
@@ -369,7 +372,6 @@ class WikiDB_backend_PDO
                 return $cache[$pagename];
             }
         }
-
         // attributes play this game.
         if ($pagename === '') return 0;
 
@@ -661,6 +663,10 @@ class WikiDB_backend_PDO
         }
     }
 
+    /**
+     * Delete page completely from the database.
+     * I'm not sure if this is what we want. Maybe just delete the revisions
+     */
     function purge_page($pagename)
     {
         $dbh = &$this->_dbh;
@@ -696,6 +702,10 @@ class WikiDB_backend_PDO
     //function update_versiondata($pagename, $version, $data) {
     //}
 
+    /*
+     * Update link table.
+     * on DEBUG: delete old, deleted links from page
+     */
     function set_links($pagename, $links)
     {
         // Update link table.
@@ -748,7 +758,8 @@ class WikiDB_backend_PDO
      *
      * Optimization: save request->_dbi->_iwpcache[] to avoid further iswikipage checks
      * (linkExistingWikiWord or linkUnknownWikiWord)
-     * This is called on every page header GleanDescription, so we can store all the existing links.
+     * This is called on every page header GleanDescription, so we can store all the
+     * existing links.
      */
     function get_links($pagename, $reversed = true, $include_empty = false,
                        $sortby = '', $limit = '', $exclude = '')
@@ -862,9 +873,10 @@ class WikiDB_backend_PDO
     }
 
     /**
-     * Title search.
+     * Title and fulltext search.
      */
-    function text_search($search, $fullsearch = false, $sortby = '', $limit = '', $exclude = '')
+    function text_search($search, $fullsearch = false,
+                         $sortby = '', $limit = '', $exclude = '')
     {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
@@ -891,11 +903,10 @@ class WikiDB_backend_PDO
         } else {
             $callback = new WikiMethodCb($searchobj, "_pagename_match_clause");
         }
-
         $search_clause = $search->makeSqlClauseObj($callback);
         $sth = $dbh->prepare("SELECT $fields FROM $table"
             . " WHERE $join_clause"
-            . " AND ($search_clause)"
+            . "  AND ($search_clause)"
             . $orderby
             . $limit);
         $sth->execute();
@@ -1051,11 +1062,11 @@ class WikiDB_backend_PDO
              left join page on(link.linkto=page.id) left join nonempty on(link.linkto=nonempty.id)
              where isnull(nonempty.id) and linked.id=link.linkfrom;
         */
-        $sql = "SELECT p.pagename, pp.pagename as wantedfrom"
+        $sql = "SELECT p.pagename, pp.pagename AS wantedfrom"
             . " FROM $page_tbl p JOIN $link_tbl linked"
             . " LEFT JOIN $page_tbl pp ON linked.linkto = pp.id"
             . " LEFT JOIN $nonempty_tbl ne ON linked.linkto = ne.id"
-            . " WHERE ne.id is NULL"
+            . " WHERE ne.id IS NULL"
             . " AND p.id = linked.linkfrom"
             . $exclude_from
             . $exclude
@@ -1151,10 +1162,10 @@ class WikiDB_backend_PDO
             . " SELECT $recent_tbl.id"
             . " FROM $recent_tbl, $version_tbl"
             . " WHERE $recent_tbl.id=$version_tbl.id"
-            . "       AND version=latestversion"
+            . "  AND version=latestversion"
             // We have some specifics here (Oracle)
             //. "  AND content<>''"
-            . "  AND content $notempty"
+            . "  AND content $notempty" // On Oracle not just "<>''"
             . ($pageid ? " AND $recent_tbl.id=$pageid" : ""));
         $this->unlock(array('nonempty'));
     }
