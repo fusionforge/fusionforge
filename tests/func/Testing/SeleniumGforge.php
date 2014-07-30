@@ -114,12 +114,12 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 
 	protected function cron($cmd)
 	{
-		$this->runCommand(RUN_JOB_PATH."forge_run_job $cmd");
+		$this->runCommand(RUN_JOB_PATH."/forge_run_job $cmd");
 	}
 
 	protected function cron_for_plugin($cmd, $plugin)
 	{
-		$this->runCommand(RUN_JOB_PATH."forge_run_plugin_job $plugin $cmd");
+		$this->runCommand(RUN_JOB_PATH."/forge_run_plugin_job $plugin $cmd");
 	}
 
 	protected function reload_apache()
