@@ -16,7 +16,9 @@ if ! dpkg -l selenium | grep -q ^ii ; then
 
 fi
 
-(echo [mediawiki]; echo unbreak_frames=yes) > /etc/gforge/config.ini.d/zzz-buildbot.ini
+config_path=$(cd /usr/src/fusionforge;utils/forge_get_config_basic fhs config_path)
+
+(echo [mediawiki]; echo unbreak_frames=yes) > $config_path/config.ini.d/zzz-buildbot.ini
 
 # Test dependencies
 aptitude -y install php5-cli phpunit phpunit-selenium
