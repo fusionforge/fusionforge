@@ -42,10 +42,12 @@ ssh root@$HOST "$FORGE_HOME/install-ng --auto --reinit"
 echo "Dump freshly installed database"
 ssh root@$HOST "su - postgres -c \"pg_dumpall\" > /root/dump"
 
+config_path=$(ssh root@$HOST forge_get_config config_path)
+
 echo "Set use_ssl=no"
-ssh root@$HOST "(echo [core];echo use_ssl=no;echo use_fti=no) > /etc/gforge/config.ini.d/zzz-zbuildbot.ini"
-ssh root@$HOST "(echo [moinmoin];echo use_frame=no) >> /etc/gforge/config.ini.d/zzz-buildbot.ini"
-ssh root@$HOST "(echo [mediawiki];echo unbreak_frames=yes) >> /etc/gforge/config.ini.d/zzz-buildbot.ini"
+ssh root@$HOST "(echo [core];echo use_ssl=no;echo use_fti=no) > $config_path/config.ini.d/zzz-zbuildbot.ini"
+ssh root@$HOST "(echo [moinmoin];echo use_frame=no) >> $config_path/config.ini.d/zzz-buildbot.ini"
+ssh root@$HOST "(echo [mediawiki];echo unbreak_frames=yes) >> $config_path/config.ini.d/zzz-buildbot.ini"
 
 # Stop cron
 echo "Stop cron daemon"

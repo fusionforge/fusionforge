@@ -127,12 +127,15 @@ ssh root@$HOST "apt-get update"
 
 # Install fusionforge
 ssh root@$HOST "UCF_FORCE_CONFFNEW=yes DEBIAN_FRONTEND=noninteractive LANG=C apt-get -o debug::pkgproblemresolver=true -y --force-yes install rsync postgresql-contrib fusionforge-full"
+
+config_path=$(ssh root@$HOST forge_get_config config_path)
+
 echo "Set forge admin password"
 ssh root@$HOST "/usr/share/gforge/bin/forge_set_password $FORGE_ADMIN_USERNAME $FORGE_ADMIN_PASSWORD"
 ssh root@$HOST "LANG=C a2dissite default ; LANG=C a2dissite 000-default ; LANG=C invoke-rc.d apache2 reload"
-ssh root@$HOST "(echo [core];echo use_ssl=no) > /etc/gforge/config.ini.d/zzz-buildbot.ini"
-ssh root@$HOST "(echo [moinmoin];echo use_frame=no) >> /etc/gforge/config.ini.d/zzz-buildbot.ini"
-ssh root@$HOST "(echo [mediawiki];echo unbreak_frames=yes) >> /etc/gforge/config.ini.d/zzz-buildbot.ini"
+ssh root@$HOST "(echo [core];echo use_ssl=no) > $config_path/config.ini.d/zzz-buildbot.ini"
+ssh root@$HOST "(echo [moinmoin];echo use_frame=no) >> $config_path/config.ini.d/zzz-buildbot.ini"
+ssh root@$HOST "(echo [mediawiki];echo unbreak_frames=yes) >> $config_path/config.ini.d/zzz-buildbot.ini"
 ssh root@$HOST "[ -e /var/lib/gforge/.bazaar/bazaar.conf ] && sed -i -e s,https://,http://,g /var/lib/gforge/.bazaar/bazaar.conf"
 ssh root@$HOST "service nscd restart"
 
