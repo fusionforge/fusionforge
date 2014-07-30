@@ -71,7 +71,7 @@ then
 fi
 if [ -z "$GFORGE_ETC_SEARCH" ] 
 then 
-	GFORGE_ETC_SEARCH="/etc/gforge/httpd.conf"
+	GFORGE_ETC_SEARCH="$(forge_get_config config_path)/httpd.conf"
 fi
 if [ -z "$PHP_ETC_SEARCH" ] 
 then 
