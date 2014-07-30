@@ -47,7 +47,7 @@ ssh root@$HOST "$FORGE_HOME/install-ng --auto --reinit"
 echo "Dump freshly installed database"
 ssh root@$HOST "su - postgres -c \"pg_dumpall\" > /root/dump"
 
-config_path=$(ssh root@$HOST forge_get_config config_path)
+config_path=$(ssh root@$HOST $FORGE_HOME/utils/forge_get_config config_path)
 
 echo "Set use_ssl=no"
 ssh root@$HOST "(echo [core];echo use_ssl=no;echo use_fti=no) > $config_path/config.ini.d/zzz-zbuildbot.ini"
