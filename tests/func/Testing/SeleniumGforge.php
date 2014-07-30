@@ -282,7 +282,8 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	protected function initSvn($project='ProjectA', $user=FORGE_ADMIN_USERNAME)
 	{
 		// Remove svnroot directory before creating the project.
-		$repo = '/var/lib/gforge/chroot/scmrepos/svn/'.strtolower($project);
+		$forge_get_config = RUN_JOB_PATH."/forge_get_config";
+		$repo = `$forge_get_config chroot`.'/scmrepos/svn/'.strtolower($project);
 		if (is_dir($repo)) {
 			system("rm -fr $repo");
 		}
