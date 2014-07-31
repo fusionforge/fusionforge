@@ -43,7 +43,7 @@
  * ALONE BASIS."
  */
 
-require_once dirname(dirname(__FILE__)).'/Testing/SeleniumGforge.php';
+require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
 
 class CreateProject extends FForge_SeleniumTestCase
 {
