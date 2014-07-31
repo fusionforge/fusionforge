@@ -517,7 +517,7 @@ abstract class BaseRole extends Error {
 			break ;
 
 		case 'frs':
-			if ($this->hasPermission('frs_admin', frspackage_get_groupid($reference))) {
+			if ($this->hasPermission('frs_admin', frspackage_get_groupid($reference), 'admin')) {
 				return 4;
 			} elseif (!$this->hasPermission('project_read', frspackage_get_groupid($reference))) {
 				return 0;
@@ -525,7 +525,7 @@ abstract class BaseRole extends Error {
 			return $value ;
 			break ;
 		case 'new_frs':
-			if ($this->hasPermission('frs_admin', $reference)) {
+			if ($this->hasPermission('frs_admin', $reference, 'admin')) {
 				return 4;
 			} elseif (!$this->hasPermission('project_read', $reference)) {
 				return 0;
@@ -644,7 +644,6 @@ abstract class BaseRole extends Error {
 
         function hasPermission($section, $reference, $action = NULL) {
 		$result = false ;
-
 		$value = $this->getSetting ($section, $reference) ;
 		$min = PHP_INT_MAX ;
 		$mask = 0 ;

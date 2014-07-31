@@ -458,7 +458,7 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 			break;
 		case 'frs':
 			$t = frspackage_get_object($reference);
-			$result = array_merge($result, $this->_getRolesIdByAllowedAction('frs_admin', $t->Group->getID()));
+			$result = array_merge($result, $this->_getRolesIdByAllowedAction('frs_admin', $t->Group->getID(), 'admin'));
 			break;
 		case 'new_tracker':
 			if ($action != 'tech' && $action != 'vote') {
@@ -474,7 +474,7 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 			$result = array_merge ($result, $this->_getRolesIdByAllowedAction ('forum_admin', $reference));
 			break;
 		case 'new_frs':
-			$result = array_merge($result, $this->_getRolesIdByAllowedAction('frs_admin', $reference));
+			$result = array_merge($result, $this->_getRolesIdByAllowedAction('frs_admin', $reference, 'admin'));
 			break;
 		}
 
