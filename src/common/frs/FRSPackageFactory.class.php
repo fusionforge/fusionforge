@@ -85,7 +85,7 @@ class FRSPackageFactory extends Error {
 		$ids = $this->getAllPackagesIds();
 
 		foreach ($ids as $id) {
-			if (forge_check_perm ('frs', $id, 'read')) {
+			if (forge_check_perm('frs', $id, 'read')) {
 				$this->FRSs[] = new FRSPackage($this->Group, $id);
 			}
 		}

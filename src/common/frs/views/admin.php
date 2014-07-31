@@ -92,6 +92,7 @@ if (count($FRSPackages) == 0) {
 	$title_arr[] = _('Package name');
 	$title_arr[] = _('Status');
 	$title_arr[] = _('Publicly Viewable');
+	$title_arr[] = _('Actions');
 
 	echo $HTML->listTableTop($title_arr);
 	foreach ($FRSPackages as $key => $FRSPackage) {

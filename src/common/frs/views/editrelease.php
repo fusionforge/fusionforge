@@ -43,9 +43,9 @@ session_require_perm('frs', $package_id, 'file');
 //
 $frsp = new FRSPackage($g, $package_id);
 if (!$frsp || !is_object($frsp)) {
-	exit_error(_('Could Not Get FRS Package'),'frs');
+	exit_error(_('Could Not Get FRS Package'), 'frs');
 } elseif ($frsp->isError()) {
-	exit_error($frsp->getErrorMessage(),'frs');
+	exit_error($frsp->getErrorMessage(), 'frs');
 }
 
 //
@@ -53,9 +53,9 @@ if (!$frsp || !is_object($frsp)) {
 //
 $frsr = new FRSRelease($frsp,$release_id);
 if (!$frsr || !is_object($frsr)) {
-	exit_error(_('Could Not Get FRS Release'),'frs');
+	exit_error(_('Could Not Get FRS Release'), 'frs');
 } elseif ($frsr->isError()) {
-	exit_error($frsr->getErrorMessage(),'frs');
+	exit_error($frsr->getErrorMessage(), 'frs');
 }
 
 echo html_ao('script', array('type' => 'text/javascript'));
