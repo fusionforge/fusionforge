@@ -67,4 +67,3 @@ if ($package_id && $package_name) {
 }
 echo json_encode($result);
 exit;
-
