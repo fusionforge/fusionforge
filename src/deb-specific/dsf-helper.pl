@@ -137,7 +137,7 @@ if ($ARGV[0] && $ARGV[0] eq "--clean") {
        $dest =~ s/\@FORGENAME\@/$forge_name/g ;
        $dest =~ s:\@SOURCE_PATH\@:$source_path:g ;
        $dest =~ s:\@BINARY_PATH\@:$binary_path:g ;
-       $dest =~ s:\@PLUGIN_PATH\@:$plugin_path:g ;
+       $dest =~ s:\@PLUGINS_PATH\@:$plugin_path:g ;
        $dest =~ s:\@DATA_PATH\@:$data_path:g ;
        $dest =~ s:\@CONFIG_PATH\@:$config_path:g ;
        $dest =~ s:\@LOG_PATH\@:$log_path:g ;

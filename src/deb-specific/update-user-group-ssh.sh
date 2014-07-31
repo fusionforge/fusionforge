@@ -12,31 +12,13 @@ else
     lockfile-touch $LOCK &
     LOCKPID=$!
     trap "kill $LOCKPID ; lockfile-remove $LOCK" exit
-        
-	# Fill ldap tables
-	# Should be safe to comment this soon
-	# Be sure the system user are created before creating homes
-	# when using nss-ldap
-#	[ -x /usr/share/gforge/bin/install-ldap.sh ] && \
-#		/usr/share/gforge/bin/install-ldap.sh update > /dev/null 2>&1
 
-	[ -d /var/lib/gforge/dumps ] || \
-	mkdir /var/lib/gforge/dumps && \
-	chown gforge:gforge /var/lib/gforge/dumps
+	[ -d $(forge_get_config data_path)/dumps ] || \
+	mkdir $(forge_get_config data_path)/dumps && \
+	chown gforge:gforge $(forge_get_config data_path)/dumps
 
-	/usr/share/gforge/bin/user_dump_update.pl
-	/usr/share/gforge/bin/group_dump_update.pl
-	/usr/share/gforge/bin/ssh_dump_update.pl
-	/usr/share/gforge/bin/mailfwd_update.pl
-	#[ -f /usr/share/gforge/bin/cvs_dump.pl ] && su -s /bin/sh gforge -c /usr/share/gforge/bin/cvs_dump.pl || true
-	#[ -f /usr/share/gforge/bin/cvs_update.pl ] && /usr/share/gforge/bin/cvs_update.pl || true
-
-	#CB#su gforge -c /usr/share/gforge/bin/dump_database.pl -s /bin/sh
-	#CB#su gforge -c /usr/share/gforge/bin/ssh_dump.pl -s /bin/sh
-
-	# Create user, groups and cvs archives
-	#CB#/usr/share/gforge/bin/new_parse.pl
-
-	# Fill ssh authorized_keys
-	#CB#/usr/share/gforge/bin/ssh_create.pl
+	$(forge_get_config binary_path)/user_dump_update.pl
+	$(forge_get_config binary_path)/group_dump_update.pl
+	$(forge_get_config binary_path)/ssh_dump_update.pl
+	$(forge_get_config binary_path)/mailfwd_update.pl
 fi

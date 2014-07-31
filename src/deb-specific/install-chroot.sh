@@ -23,33 +23,25 @@ configure)
 	    bin \
 	    cvsroot \
 	    dev \
-	    etc \
 	    etc/pam.d \
 	    etc/security \
-	    home \
 	    home/groups \
 	    home/users \
-	    lib \
 	    lib/security \
-	    lib64 \
 	    lib64/security \
-	    usr \
 	    usr/bin \
 	    usr/lib \
-	    var \
-	    var/lib \
-	    var/lib/gforge \
-	    var/run \
+	    $(forge_get_config data_path) \
 	    var/run/postgresql \
 	    var/run/sshd \
 	    ; do
-		test -d "$CHROOTDIR/$dir" || mkdir "$CHROOTDIR/$dir"
+		test -d "$CHROOTDIR/$dir" || mkdir -p "$CHROOTDIR/$dir"
 	done
 	rm -rf "$CHROOTDIR/tmp"
 	install -d -m 1777 "$CHROOTDIR/tmp"
-	[ -L "$CHROOTDIR/var/lib/gforge/chroot" ] && rm "$CHROOTDIR/var/lib/gforge/chroot"
-	[ -d "$CHROOTDIR/var/lib/gforge/chroot" ] && rmdir "$CHROOTDIR/var/lib/gforge/chroot"
-	ln -s ../../.. "$CHROOTDIR/var/lib/gforge/chroot"
+	[ -L "$CHROOTDIR$CHROOTDIR" ] && rm "$CHROOTDIR$CHROOTDIR"
+	[ -d "$CHROOTDIR$CHROOTDIR" ] && rmdir "$CHROOTDIR$CHROOTDIR"
+	ln -s ../../.. "$CHROOTDIR$CHROOTDIR"
 
 	# Copy needed binaries
 	# For testing /bin/ls /bin/su
@@ -114,9 +106,9 @@ configure)
 	# For /dev/log
 	if [ -e /etc/default/syslogd ] \
 	    && [ ! -e /etc/rsyslog.conf ] \
-	    && ! grep -q "^SYSLOGD.*/var/lib/gforge/chroot/dev/log.*" /etc/default/syslogd ; then
+	    && ! grep -q "^SYSLOGD.*$CHROOTDIR/dev/log.*" /etc/default/syslogd ; then
 		echo '######################################################################################################'
-		echo 'WARNING: you must have SYSLOGD="-p /dev/log -a /var/lib/gforge/chroot/dev/log" in /etc/default/syslogd'
+		echo 'WARNING: you must have SYSLOGD="-p /dev/log -a $CHROOTDIR/dev/log" in /etc/default/syslogd'
 		echo 'To have cvs pserver running correctly'
 		echo '######################################################################################################'
 	fi

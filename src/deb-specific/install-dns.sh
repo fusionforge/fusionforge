@@ -18,10 +18,11 @@ case "$1" in
 	ip_address=`forge_get_config ip_address`
 	# export domain_name=$1
 	# export ip_address=$2
+	data_path=$(forge_get_config data_path)
   	if ! grep -q "// Next line inserted by GForge install" /etc/bind/named.conf.gforge-new ; then
 	    cat >> /etc/bind/named.conf.gforge-new <<-EOF
 // Next line inserted by GForge install
-zone "$domain_name" { type master; file "/var/lib/gforge/bind/dns.zone"; };
+zone "$domain_name" { type master; file "$data_path/bind/dns.zone"; };
 EOF
   	fi
 	;;
@@ -36,17 +37,17 @@ EOF
  	done
 
 	if [ "$sys_simple_dns" = "false" ]; then
-  	    echo "Creating /var/lib/gforge/bind/dns.head"
-  	    eval "cat /var/lib/gforge/bind/dns.head.template $sedexpr > /var/lib/gforge/bind/dns.head"
-	    cp /var/lib/gforge/bind/dns.head /var/lib/gforge/bind/dns.zone
-	    chown -R gforge:gforge /var/lib/gforge/bind
+  	    echo "Creating $data_path/bind/dns.head"
+  	    eval "cat $data_path/bind/dns.head.template $sedexpr > $data_path/bind/dns.head"
+	    cp $data_path/bind/dns.head $data_path/bind/dns.zone
+	    chown -R gforge:gforge $data_path/bind
 
-	    /usr/share/gforge/bin/dns_conf.pl
+	    $(forge_get_config binary_path)/dns_conf.pl
 	else
-            [ -f /var/lib/gforge/bind/dns.head ] && echo "Removing /var/lib/gforge/bind/dns.head" && \
-	    rm /var/lib/gforge/bind/dns.head
-  	    echo "Creating /var/lib/gforge/bind/dns.zone"
-  	    eval "cat /var/lib/gforge/bind/dns.simple.template $sedexpr > /var/lib/gforge/bind/dns.zone"
+            [ -f $data_path/bind/dns.head ] && echo "Removing $data_path/bind/dns.head" && \
+	    rm $data_path/bind/dns.head
+  	    echo "Creating $data_path/bind/dns.zone"
+  	    eval "cat $data_path/bind/dns.simple.template $sedexpr > $data_path/bind/dns.zone"
 	fi
 
   	echo "DNS Config is not complete:"

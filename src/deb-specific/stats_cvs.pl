@@ -13,8 +13,13 @@ use POSIX qw( strftime );
 
 # For the database
 use DBI;
-require("/usr/share/gforge/lib/include.pl");
-my $cvsroot = "/var/lib/gforge/chroot/cvsroot";
+
+my $source_path = `forge_get_config source_path`;
+chomp $source_path;
+
+require ("$source_path/lib/include.pl") ; # Include all the predefined functions 
+
+my $cvsroot = forge_get_config("chroot")."/cvsroot";
 my $verbose = 1;
 $|=0 if $verbose;
 $|++;

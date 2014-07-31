@@ -35,7 +35,11 @@ case "$1" in
 	tmp1=$(mktemp /tmp/$pattern)
 	# First, get the list of local domains right
 	perl -e '
-require ("/usr/share/gforge/lib/include.pl") ;
+my $source_path = `forge_get_config source_path`;
+chomp $source_path;
+
+require ("$source_path/lib/include.pl") ; # Include all the predefined functions 
+
 $seen_sf_domains = 0 ;
 while (($l = <>) !~ /^\s*local_domains/) {
   print $l;
@@ -51,7 +55,11 @@ while ($l = <>) { print $l; };
 	tmp2=$(mktemp /tmp/$pattern)
 	# Second, insinuate our forwarding rules in the directors section
 	perl -e '
-require ("/usr/share/gforge/lib/include.pl") ;
+my $source_path = `forge_get_config source_path`;
+chomp $source_path;
+
+require ("$source_path/lib/include.pl") ; # Include all the predefined functions 
+
 
 $sf_block = "# BEGIN SOURCEFORGE BLOCK -- DO NOT EDIT #
 # You may move this block around to accomodate your local needs as long as you

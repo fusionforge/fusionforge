@@ -22,8 +22,11 @@ use vars qw/$sys_default_domain $sys_scm_host
 sub debug ( $ ) ;
 sub convert_column_to_charset ( $$$$$ ) ;
 
-require ("/usr/share/gforge/lib/include.pl") ; # Include a few predefined functions 
-require ("/usr/share/gforge/lib/sqlparser.pm") ; # Our magic SQL parser
+my $source_path = `forge_get_config source_path`;
+chomp $source_path;
+
+require ("$source_path/lib/include.pl") ; # Include all the predefined functions 
+require ("$source_path/lib/sqlparser.pm") ; # Our magic SQL parser
 
 debug "You'll see some debugging info during this installation." ;
 debug "Do not worry unless told otherwise." ;

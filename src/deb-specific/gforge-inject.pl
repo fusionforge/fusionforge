@@ -26,7 +26,11 @@ use vars qw/$sys_default_domain $sys_scm_host
     $skill_list/ ;
 
 sub debug ( $ ) ;
-require ("/usr/share/gforge/lib/include.pl") ;
+
+my $source_path = `forge_get_config source_path`;
+chomp $source_path;
+
+require ("$source_path/lib/include.pl") ; # Include all the predefined functions 
 
 ###
 # Local customisation
