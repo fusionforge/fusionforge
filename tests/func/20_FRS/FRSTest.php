@@ -26,7 +26,6 @@ class CreateFRS extends FForge_SeleniumTestCase
 	function testCreateFRSPackage()
 	{
 		$this->init();
-		$this->gotoProject('ProjectA');
 		$this->clickAndWait("link=Files");
 		$this->assertFalse($this->isTextPresent("Permission denied."));
 		$this->assertTrue($this->isTextPresent("Administration"));

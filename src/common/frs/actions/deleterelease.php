@@ -1,6 +1,6 @@
 <?php
 /**
- * FusionForge FRS: Add release Action
+ * FusionForge FRS: Delete release Action
  *
  * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org/
@@ -23,18 +23,28 @@
 
  /* please do not add require here : use www/frs/index.php to add require */
 /* global variables used */
-global $group_id; // id of group
-global $g; // group object
 global $HTML;
 
 $sysdebug_enable = false;
 $result = array();
 
-if (!forge_check_perm('frs', $group_id, 'write')) {
-	$result['html'] = $HTML->warning_msg(_('FRS Action Denied.'));
-	echo json_encode($result);
-	exit;
-}
+$package_id = getIntFromRequest('package_id');
 
+if (!$package_id) {
+	$result['html'] = $HTML->warning_msg(_('Missing package_id'));
+} elseif (!forge_check_perm('frs', $package_id, 'release')) {
+	$result['html'] = $HTML->error_msg(_('FRS Action Denied.'));
+} else {
+	$release_id = getIntFromRequest('release_id');
+	$sure = getIntFromRequest('sure');
+	$really_sure = getIntFromRequest('really_sure');
+	$frsr = frsrelease_get_object($release_id);
+	if (!$frsr->delete($sure, $really_sure)) {
+		$result['html'] = $HTML->error_msg($frsr->getErrorMessage());
+	} else {
+		$result['html'] = $HTML->feedback(_('Release successfully deleted.'));
+		$result['deletedom'] = 'releaseid'.$release_id;
+	}
+}
 echo json_encode($result);
 exit;

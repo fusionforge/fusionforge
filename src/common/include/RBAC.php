@@ -26,7 +26,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require 'PFO-RBAC.interface.php';
+require $gfcommon.'include/PFO-RBAC.interface.php';
+require_once $gfcommon.'frs/FRSPackageFactory.class.php';
 
 // Code shared between classes
 
@@ -69,19 +70,20 @@ abstract class BaseRole extends Error {
 			'tracker_admin' => array(0, 1),
 			'pm_admin' => array(0, 1),
 			'forum_admin' => array(0, 1),
+			'frs_admin' => array(0, 1, 2),
 
 			'tracker' => array(0, 1, 9, 11, 13, 15, 25, 27, 29, 31),
 			'pm' => array(0, 1, 3, 5, 7),
 			'forum' => array(0, 1, 2, 3, 4),
+			'frs' => array(0, 1, 2, 3, 4),
 
 			'new_tracker' => array(0, 1, 9, 11, 13, 15, 25, 27, 29, 31),
 			'new_pm' => array(0, 1, 3, 5, 7),
 			'new_forum' => array(0, 1, 2, 3, 4),
+			'new_frs' => array(0, 1, 2, 3, 4),
 
 			'scm' => array (0, 1, 2),
 			'docman' => array (0, 1, 2, 3, 4),
-			'frs' => array (0, 1, 2, 3),
-
 			);
 
 		// Global permissions
@@ -96,7 +98,8 @@ abstract class BaseRole extends Error {
 		$this->defaults = array(
 			'Admin' => array(            'project_admin'=> 1,
 						     'project_read' => 1,
-						     'frs' => 2,
+						     'frs_admin' => 2,
+						     'new_frs' => 4,
 						     'scm' => 2,
 						     'docman' => 3,
 						     'forum_admin' => 1,
@@ -107,7 +110,8 @@ abstract class BaseRole extends Error {
 						     'new_pm' => 7,
 				),
 			'Senior Developer' => array( 'project_read' => 1,
-						     'frs' => 2,
+						     'frs_admin' => 1,
+						     'new_frs' => 4,
 						     'scm' => 2,
 						     'docman' => 3,
 						     'forum_admin' => 1,
@@ -118,7 +122,8 @@ abstract class BaseRole extends Error {
 						     'new_pm' => 7,
 				),
 			'Junior Developer' => array( 'project_read' => 1,
-						     'frs' => 2,
+						     'frs_admin' => 1,
+						     'new_frs' => 3,
 						     'scm' => 2,
 						     'docman' => 2,
 						     'new_forum' => 3,
@@ -126,14 +131,16 @@ abstract class BaseRole extends Error {
 						     'new_pm' => 3,
 				),
 			'Doc Writer' => array(       'project_read' => 1,
-						     'frs' => 2,
+						     'frs_admin' => 1,
+						     'new_frs' => 1,
 						     'docman' => 4,
 						     'new_forum' => 3,
 						     'new_tracker' => 9,
 						     'new_pm' => 1,
 				),
 			'Support Tech' => array(     'project_read' => 1,
-						     'frs' => 2,
+						     'frs_admin' => 1,
+						     'new_frs' => 1,
 						     'docman' => 1,
 						     'new_forum' => 3,
 						     'tracker_admin' => 1,
@@ -317,7 +324,7 @@ abstract class BaseRole extends Error {
 		$result = array();
 		$group_id = $project->getID();
 
-		$sections = array ('project_read', 'project_admin', 'frs', 'scm', 'docman', 'tracker_admin', 'new_tracker') ;
+		$sections = array ('project_read', 'project_admin', 'frs_admin', 'new_frs', 'scm', 'docman', 'tracker_admin', 'new_tracker') ;
 		foreach ($sections as $section) {
 			$result[$section][$group_id] = $this->getVal ($section, $group_id) ;
 		}
@@ -331,6 +338,17 @@ abstract class BaseRole extends Error {
 				}
 			}
 			array_push ($sections,'tracker');
+		}
+
+		if ($project->usesFRS()) {
+			$frspf = new FRSPackageFactory($project);
+			if (!$frspf->isError()) {
+				$pkgids = $frspf->getAllPackagesIds();
+				foreach ($pkgids as $pkgid) {
+					$result['frs'][$pkgid] = $this->getVal ('frs',$pkgid);
+				}
+			}
+			array_push($sections,'frs');
 		}
 
 		/*XXX merge from Branch_5_1: maybe this also only if usesForum? */
@@ -467,13 +485,13 @@ abstract class BaseRole extends Error {
 		case 'pm_admin':
 		case 'forum_admin':
 			if ($this->hasPermission('project_admin', $reference)) {
-				return 1 ;
+				return 1;
 			} elseif (!$this->hasPermission('project_read', $reference)) {
 				return 0;
 			}
 			return $value ;
 			break ;
-
+		case 'frs_admin':
 		case 'scm':
 			if ($this->hasPermission('project_admin', $reference)) {
 				return 2 ;
@@ -493,14 +511,21 @@ abstract class BaseRole extends Error {
 			break ;
 
 		case 'frs':
-			if ($this->hasPermission('project_admin', $reference)) {
-				return 3 ;
+			if ($this->hasPermission('frs_admin', frspackage_get_groupid($reference))) {
+				return 4;
+			} elseif (!$this->hasPermission('project_read', frspackage_get_groupid($reference))) {
+				return 0;
+			}
+			return $value ;
+			break ;
+		case 'new_frs':
+			if ($this->hasPermission('frs_admin', $reference)) {
+				return 4;
 			} elseif (!$this->hasPermission('project_read', $reference)) {
 				return 0;
 			}
 			return $value ;
 			break ;
-
 		case 'forum':
 			if ($this->hasPermission('forum_admin', forum_get_groupid($reference))) {
 				return 4 ;
@@ -670,19 +695,33 @@ abstract class BaseRole extends Error {
 			}
 			break ;
 
-		case 'frs':
+		case 'frs_admin':
 			switch ($action) {
-			case 'read_public':
-				return ($value >= 1) ;
-				break ;
-			case 'read_private':
-				return ($value >= 2) ;
-				break ;
-			case 'write':
-				return ($value >= 3) ;
-				break ;
+			case 'read':
+				return ($value >= 1);
+				break;
+			case 'admin':
+				return ($value >= 2);
+				break;
 			}
-			break ;
+			break;
+		case 'frs':
+		case 'new_frs':
+			switch ($action) {
+			case 'read':
+				return ($value >= 1);
+				break;
+			case 'file':
+				return ($value >= 2);
+				break;
+			case 'release':
+				return ($value >= 3);
+				break;
+			case 'admin':
+				return ($value >= 4);
+				break;
+			}
+			break;
 
 		case 'forum':
 		case 'new_forum':
@@ -896,7 +935,7 @@ abstract class BaseRole extends Error {
 
 		// Add missing settings
 		// ...project-wide settings
-		$arr = array ('project_read', 'project_admin', 'frs', 'scm', 'docman', 'tracker_admin', 'new_tracker', 'forum_admin', 'new_forum', 'pm_admin', 'new_pm') ;
+		$arr = array ('project_read', 'project_admin', 'frs_admin', 'new_frs', 'scm', 'docman', 'tracker_admin', 'new_tracker', 'forum_admin', 'new_forum', 'pm_admin', 'new_pm') ;
 		foreach ($projects as $p) {
 			foreach ($arr as $section) {
 				$this->normalizePermsForSection ($new_pa, $section, $p->getID()) ;
@@ -917,7 +956,7 @@ abstract class BaseRole extends Error {
 		// Direct query to avoid querying each project - especially for global roles
 		foreach ($projects as $p)
 			$project_ids[] = $p->getID();
-		$res = db_query_params('SELECT group_artifact_id FROM artifact_group_list JOIN groups USING (group_id) WHERE use_tracker=1 AND group_id=ANY($1)', 
+		$res = db_query_params('SELECT group_artifact_id FROM artifact_group_list JOIN groups USING (group_id) WHERE use_tracker=1 AND group_id=ANY($1)',
 				       array(db_int_array_to_any_clause($project_ids)));
 		while ($row = db_fetch_array($res)) {
 			$tid = $row['group_artifact_id'];
@@ -972,6 +1011,24 @@ abstract class BaseRole extends Error {
 			}
 		}
 
+		// ...frs-related settings
+		$new_pa['frs'] = array();
+		foreach ($projects as $p) {
+			if (!$p->usesFRS()) {
+				continue;
+			}
+			$frspf = new FRSPackageFactory($p);
+			if (!$frspf->isError()) {
+				$frspids = $frspf->getAllPackagesIds();
+				foreach ($frspids as $frspid) {
+					if (array_key_exists('frs', $this->perms_array) && array_key_exists($frspid, $this->perms_array['frs'])) {
+						$new_pa['frs'][$frspid] = $this->perms_array['frs'][$frspid] ;
+					} elseif (array_key_exists('new_frs', $this->perms_array) && array_key_exists($p->getID(), $this->perms_array['new_frs']) ) {
+						$new_pa['frs'][$frspid] = $new_pa['new_frs'][$p->getID()] ;
+					}
+				}
+			}
+		}
 		// Save
 		$this->update ($this->getName(), $new_pa, false, false) ;
 		return true;

@@ -30,29 +30,41 @@ global $g; // group object
 global $feedback; // feedback message
 global $error_msg; // error message
 
-if (!forge_check_perm('frs', $group_id, 'write')) {
-	$warning_msg = _('FRS Action Denied.');
-	session_redirect('/frs/?group_id='.$group_id);
-}
+$sysdebug_enable = false;
+$result = array();
 
 $package_id = getIntFromRequest('package_id');
+
+if (!forge_check_perm('frs', $package_id, 'admin')) {
+	$result['html'] = $HTML->error_msg(_('FRS Action Denied.'));
+	echo json_encode($result);
+	exit;
+}
+
 $package_name = htmlspecialchars(trim(getStringFromRequest('package_name')));
-$is_public = getIntFromRequest('is_public');
 $status_id = getIntFromRequest('status_id');
+
+$result['html'] = $HTML->error_msg(_('Missing package_id or package_name'));
 
 if ($package_id && $package_name) {
 	$frsp = new FRSPackage($g, $package_id);
 	if (!$frsp || !is_object($frsp)) {
-		exit_error(_('Could Not Get FRS Package'), 'frs');
+		$result['html'] = $HTML->error_msg(_('Error Getting FRSPackage'));
+		echo json_encode($result);
+		exit;
 	} elseif ($frsp->isError()) {
-		exit_error($frsp->getErrorMessage(), 'frs');
+		$result['html'] = $HTML->error_msg($frsp->getErrorMessage());
+		echo json_encode($result);
+		exit;
 	}
-	if (!$frsp->update($package_name, $status_id, $is_public)) {
-		$error_msg = $frsp->getErrorMessage();
+	if (!$frsp->update($package_name, $status_id)) {
+		$result['html'] = $HTML->error_msg($frsp->getErrorMessage());
+		echo json_encode($result);
+		exit;
 	} else {
-		$feedback = _('Updated Package');
+		$result['html'] = $HTML->feedback(_('Package successfully updated'));
 	}
-} else {
-	$error_msg = _('Missing package_id or package_name');
 }
-session_redirect('/frs/?group_id='.$group_id.'&view=admin');
+echo json_encode($result);
+exit;
+

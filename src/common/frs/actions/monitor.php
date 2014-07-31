@@ -30,9 +30,10 @@ global $HTML;
 $sysdebug_enable = false;
 
 $ajax = getIntFromRequest('ajax', 1);
+$package_id = getIntFromRequest('package_id');
 
 $result = array();
-if (!forge_check_perm('frs', $group_id, 'read_public')) {
+if (!forge_check_perm('frs', $package_id, 'read')) {
 	$warning_msg = _('FRS Action Denied.');
 	if ($ajax) {
 		$result['html'] = $HTML->warning_msg($warning_msg);
@@ -43,7 +44,6 @@ if (!forge_check_perm('frs', $group_id, 'read_public')) {
 	}
 }
 
-$package_id = getIntFromRequest('package_id');
 $redirect_url = getStringFromRequest('redirect_url', '/my/');
 
 if ($package_id) {

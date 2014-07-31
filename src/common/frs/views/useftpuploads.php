@@ -26,7 +26,7 @@
 global $content; // the preexistant html content
 global $upload_dir; // the upload diretory of the project
 
-$localcontent .= sprintf(_('Alternatively, you can use FTP to upload a new file at %s.'), forge_get_config('ftp_upload_host'));
+$localcontent = sprintf(_('Alternatively, you can use FTP to upload a new file at %s.'), forge_get_config('ftp_upload_host'));
 $localcontent .= html_e('br');
 $localcontent .= _('Choose an FTP file instead of uploading')._(':').html_e('br');
 $ftp_files_arr = frs_filterfiles(ls($upload_dir, true));

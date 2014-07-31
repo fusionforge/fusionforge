@@ -26,32 +26,39 @@
 global $HTML; // html object
 global $group_id; // id of group
 
-if (!forge_check_perm('frs', $group_id, 'read_public')) {
-	$warning_msg = _('FRS Access Denied');
+if (!forge_check_perm('frs_admin', $group_id, 'read')) {
+	$error_msg = _('FRS Access Denied');
 	session_redirect('/frs/?group_id='.$group_id);
 }
+
+$fpFactory = new FRSPackageFactory($g);
+if (!$fpFactory || !is_object($fpFactory)) {
+	exit_error(_('Could Not Get FRSPackageFactory'), 'frs');
+} elseif ($fpFactory->isError()) {
+	exit_error($fpFactory->getErrorMessage(), 'frs');
+}
+
+$permissionlevel = $fpFactory->getPermissionOfASpecificUser();
 
 /* create the submenu following role, rules and content */
 $menu_text = array();
 $menu_links = array();
 $menu_attr = array();
 
-if (forge_check_perm('frs', $group_id, 'write')) {
-	$menu_text = array(
-			_('View File Releases'),
-			_('Reporting'),
-			_('Administration')
-			);
-	$menu_links = array(
-			'/frs/?group_id='.$group_id,
-			'/frs/?view=reporting&group_id='.$group_id,
-			'/frs/?view=admin&group_id='.$group_id
-			);
-	$menu_attr = array(
-			NULL,
-			NULL,
-			NULL
-			);
+switch ($permissionlevel) {
+	case 'file': {
+		$menu_text = array(_('View File Releases'), _('Administration'));
+		$menu_links = array('/frs/?group_id='.$group_id, '/frs/?view=admin&group_id='.$group_id);
+		$menu_attr = array(NULL,NULL);
+		break;
+	}
+	case 'release':
+	case 'admin': {
+		$menu_text = array(_('View File Releases'),_('Reporting'),_('Administration'));
+		$menu_links = array('/frs/?group_id='.$group_id,'/frs/?view=reporting&group_id='.$group_id,'/frs/?view=admin&group_id='.$group_id);
+		$menu_attr = array(NULL,NULL,NULL);
+		break;
+	}
 }
 
 if (count($menu_text)) {

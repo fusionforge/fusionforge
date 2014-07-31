@@ -5,7 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
  * Copyright 2010 (c) FusionForge Team
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -67,14 +67,14 @@ function send_file($filename, $filepath, $file_id = NULL, $mode = NULL) {
 
 	$ip = getStringFromServer('REMOTE_ADDR');
 	if ($mode != 'latestzip') {
-		db_query_params("INSERT INTO frs_dlstats_file (ip_address,file_id,month,day,user_id) VALUES ($1, $2, $3, $4, $5)", array($ip,$file_id,date('Ym'),date('d'),$us));
+		db_query_params('INSERT INTO frs_dlstats_file (ip_address,file_id,month,day,user_id) VALUES ($1, $2, $3, $4, $5)', array($ip,$file_id,date('Ym'),date('d'),$us));
 	} else {
 		// here $file_id is a package_id
 		$Package = frspackage_get_object($file_id);
 		$release = $Package->getNewestRelease();
 		$files = $release->getFiles();
 		foreach ($files as $fileObject) {
-			db_query_params("INSERT INTO frs_dlstats_file (ip_address,file_id,month,day,user_id) VALUES ($1, $2, $3, $4, $5)", array($ip, $fileObject->getID(), date('Ym'), date('d'), $us));
+			db_query_params('INSERT INTO frs_dlstats_file (ip_address,file_id,month,day,user_id) VALUES ($1, $2, $3, $4, $5)', array($ip, $fileObject->getID(), date('Ym'), date('d'), $us));
 		}
 	}
 }
@@ -133,11 +133,7 @@ case 'file':
 	$Release = $File->FRSRelease;
 	$Package = $Release->FRSPackage;
 	$Group = $Package->Group;
-	if ($Package->isPublic()) {
-		session_require_perm('frs', $Package->Group->getID(), 'read_public');
-	} else {
-		session_require_perm('frs', $Package->Group->getID(), 'read_private');
-	}
+	session_require_perm('frs', $Package->getID(), 'read');
 
 	$filename = $File->getName();
 	$filepath = forge_get_config('upload_dir').'/'.$Group->getUnixName().'/'.$Package->getFileName().'/'.$Release->getFileName().'/'.$filename;
@@ -157,15 +153,11 @@ case 'latestzip':
 		session_redirect404();
 	}
 
-	if ($Package->isPublic()) {
-		session_require_perm('frs', $Package->Group->getID(), 'read_public');
-	} else {
-		session_require_perm('frs', $Package->Group->getID(), 'read_private');
-	}
+	session_require_perm('frs', $Package->getID(), 'read');
 
 	$filename = $Package->getNewestReleaseZipName();
 	$filepath = $Package->getNewestReleaseZipPath();
-	send_file ($filename, $filepath, $package_id, $mode);
+	send_file($filename, $filepath, $package_id, $mode);
 
 	break;
 
@@ -190,11 +182,7 @@ case 'latestfile':
 	$Release = $File->FRSRelease;
 	$Package = $Release->FRSPackage;
 	$Group = $Package->Group;
-	if ($Package->isPublic()) {
-		session_require_perm('frs', $Package->Group->getID(), 'read_public');
-	} else {
-		session_require_perm('frs', $Package->Group->getID(), 'read_private');
-	}
+	session_require_perm('frs', $Package->getID(), 'read');
 
 	$filename = $File->getName();
 	$filepath = forge_get_config('upload_dir').'/'.$Group->getUnixName().'/'.$Package->getFileName().'/'.$Release->getFileName().'/'.$filename;

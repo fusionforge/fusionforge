@@ -56,7 +56,7 @@ if (!$g->usesFRS())
 if ($g->isError())
 	exit_error($g->getErrorMessage(), 'frs');
 
-session_require_perm('frs', $group_id, 'read_public');
+session_require_perm('frs_admin', $group_id, 'read');
 
 $release_id = getIntFromRequest('release_id');
 
@@ -102,6 +102,7 @@ switch ($action) {
 }
 
 html_use_jqueryui();
+html_use_coolfieldset();
 use_javascript('/frs/scripts/FRSController.js');
 
 site_project_header(array('title' => _('Project Filelist for ').$g->getPublicName(), 'group' => $group_id, 'toptab' => 'frs'));

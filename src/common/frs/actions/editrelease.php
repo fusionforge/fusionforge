@@ -31,12 +31,13 @@ global $warning_msg; // warning message
 global $feedback; // feedback message
 global $error_msg; // error message
 
-if (!forge_check_perm('frs', $group_id, 'write')) {
+$package_id = getIntFromRequest('package_id');
+
+if (!forge_check_perm('frs', $package_id, 'release')) {
 	$warning_msg = _('FRS Action Denied.');
 	session_redirect('/frs/?group_id='.$group_id);
 }
 
-$package_id = getIntFromRequest('package_id');
 $release_id = getIntFromRequest('release_id');
 $release_date = getStringFromRequest('release_date');
 $release_name = getStringFromRequest('release_name');

@@ -6,6 +6,7 @@
  * Copyright 2002-2004, GForge, LLC
  * Copyright 2009, Roland Mas
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright 2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -152,7 +153,16 @@ class Permission extends Error {
 	 *  @return	boolean	is_release_technician.
 	 */
 	function isReleaseTechnician() {
-		return forge_check_perm ('frs', $this->group_id, 'write');
+		return forge_check_perm('frs', $this->group_id, 'admin');
+	}
+
+	/**
+	 *  isFRSAdmin - whether the current user has FRS admin perms.
+	 *
+	 *  @return	boolean	is_frs_admin.
+	 */
+	function isFRSAdmin() {
+		return forge_check_perm('frs_admin', $this->group_id, 'admin');
 	}
 
 	/**

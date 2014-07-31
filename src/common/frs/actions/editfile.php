@@ -29,7 +29,8 @@ global $warning_msg; // warning message
 global $feedback; // feedback message
 global $error_msg; // error message
 
-if (!forge_check_perm('frs', $group_id, 'write')) {
+$package_id = getIntFromRequest('package_id');
+if (!forge_check_perm('frs', $package_id, 'file')) {
 	$warning_msg = _('FRS Action Denied.');
 	session_redirect('/frs/?group_id='.$group_id);
 }
@@ -41,7 +42,6 @@ $new_release_id = getIntFromRequest('new_release_id');
 $release_time = getStringFromRequest('release_time');
 $group_id = getIntFromRequest('group_id');
 $release_id = getIntFromRequest('release_id');
-$package_id = getIntFromRequest('package_id');
 $im_sure = getStringFromRequest('im_sure');
 
 $frsf = frsfile_get_object($file_id);
@@ -53,7 +53,7 @@ if (!$frsf || !is_object($frsf)) {
 	//$date_list = split('[- :]',$release_time,5);
 	//$release_time = mktime($date_list[3],$date_list[4],0,$date_list[1],$date_list[2],$date_list[0]);
 	$release_time = strtotime($release_time);
-	if (!$frsf->update($type_id,$processor_id,$release_time,$new_release_id)) {
+	if (!$frsf->update($type_id, $processor_id, $release_time, $new_release_id)) {
 		$error_msg = $frsf->getErrorMessage();
 	} else {
 		$feedback .= _('File Updated');

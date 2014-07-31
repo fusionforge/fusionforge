@@ -81,29 +81,67 @@ class FRSPackageFactory extends Error {
 			return $this->FRSs;
 		}
 
-		if (session_loggedin()) {
-			if (user_ismember($this->Group->getID()) || forge_check_global_perm('forge_admin')) {
-				$pub_sql='';
-			} else {
-				$pub_sql=' AND is_public=1 ';
-			}
-		} else {
-			$pub_sql=' AND is_public=1 ';
-		}
+		$this->FRSs = array();
+		$ids = $this->getAllPackagesIds();
 
-		$sql = "SELECT * FROM frs_package WHERE group_id=$1 AND status_id='1' $pub_sql ORDER BY name";
-		$result = db_query_params($sql, array($this->Group->getID()));
-
-		if (!$result) {
-			$this->setError(_('Error Getting FRS')._(': ').db_error());
-			return false;
-		} else {
-			$this->FRSs = array();
-			while ($arr = db_fetch_array($result)) {
-				$this->FRSs[] = new FRSPackage($this->getGroup(), $arr['package_id'], $arr);
+		foreach ($ids as $id) {
+			if (forge_check_perm ('frs', $id, 'read')) {
+				$this->FRSs[] = new FRSPackage($this->Group, $id);
 			}
 		}
 		return $this->FRSs;
+	}
+
+	/**
+	 * getAllPackagesIds - return a list of package ids.
+	 *
+	 * @return	array	The array of package object ids.
+	 */
+	function &getAllPackagesIds() {
+		$result = array();
+		$res = db_query_params('SELECT package_id FROM frs_package
+					WHERE group_id=$1
+					ORDER BY package_id ASC',
+					array ($this->Group->getID()));
+		if (!$res) {
+			return $result;
+		}
+		while ($arr = db_fetch_array($res)) {
+			$result[] = $arr['package_id'];
+		}
+		return $result;
+	}
+
+	function getPermissionOfASpecificUser() {
+		$admin = false;
+		$release = false;
+		$file = false;
+		$read = false;
+		$pkgids = $this->getAllPackagesIds();
+		foreach ($pkgids as $pkgid) {
+			if (forge_check_perm('frs', $pkgid, 'read')) {
+				$read = true;
+			}
+			if (forge_check_perm('frs', $pkgid, 'file')) {
+				$file = true;
+			}
+			if (forge_check_perm('frs', $pkgid, 'release')) {
+				$release = true;
+			}
+			if (forge_check_perm('frs', $pkgid, 'admin')) {
+				$admin = true;
+			}
+		}
+		if ($admin) {
+			return 'admin';
+		} elseif ($release) {
+			return 'release';
+		} elseif ($file) {
+			return 'file';
+		} elseif ($read) {
+			return 'read';
+		}
+		return NULL;
 	}
 
 }

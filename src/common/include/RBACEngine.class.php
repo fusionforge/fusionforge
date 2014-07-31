@@ -4,6 +4,7 @@
  *
  * Copyright 2010, Roland Mas
  * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
+ * Copyright 2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -277,6 +278,7 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 		case 'forum_admin':
 			$qpa = db_construct_qpa($qpa, 'AND perm_val = 1');
 			break;
+		case 'frs_admin':
 		case 'forge_stats':
 			switch ($action) {
 			case 'ANY':
@@ -327,14 +329,17 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 			case 'ANY':
 				$qpa = db_construct_qpa($qpa, 'AND perm_val != 0');
 				break;
-			case 'read_public':
+			case 'read':
 				$qpa = db_construct_qpa($qpa, 'AND perm_val >= 1');
 				break;
-			case 'read_private':
+			case 'file':
 				$qpa = db_construct_qpa($qpa, 'AND perm_val >= 2');
 				break;
-			case 'write':
+			case 'release':
 				$qpa = db_construct_qpa($qpa, 'AND perm_val >= 3');
+				break;
+			case 'admin':
+				$qpa = db_construct_qpa($qpa, 'AND perm_val >= 4');
 				break;
 			}
 			break;
@@ -432,7 +437,7 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 		case 'forum_admin':
 		case 'scm':
 		case 'docman':
-		case 'frs':
+		case 'frs_admin':
 			$result = array_merge ($result, $this->_getRolesIdByAllowedAction ('project_admin', $reference));
 			break;
 		case 'tracker':
@@ -451,6 +456,10 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 			$t = forum_get_object ($reference);
 			$result = array_merge ($result, $this->_getRolesIdByAllowedAction ('forum_admin', $t->Group->getID()));
 			break;
+		case 'frs':
+			$t = frspackage_get_object($reference);
+			$result = array_merge($result, $this->_getRolesIdByAllowedAction('frs_admin', $t->Group->getID()));
+			break;
 		case 'new_tracker':
 			if ($action != 'tech' && $action != 'vote') {
 				$result = array_merge ($result, $this->_getRolesIdByAllowedAction ('tracker_admin', $reference));
@@ -463,6 +472,9 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 			break;
 		case 'new_forum':
 			$result = array_merge ($result, $this->_getRolesIdByAllowedAction ('forum_admin', $reference));
+			break;
+		case 'new_frs':
+			$result = array_merge($result, $this->_getRolesIdByAllowedAction('frs_admin', $reference));
 			break;
 		}
 
