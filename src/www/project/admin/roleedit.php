@@ -280,7 +280,7 @@ for ($i=0; $i<count($keys); $i++) {
 									$role->getVal($keys[$i],db_result($res,$q,'package_id')),
 									false,
 									false);
-			echo $HTML->multiTableRow(array('style' => $HTML->boxGetAltRowStyle($j++, true)), $cells);
+			echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($j++, true)), $cells);
 		}
 
 //

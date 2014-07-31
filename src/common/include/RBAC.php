@@ -324,7 +324,7 @@ abstract class BaseRole extends Error {
 		$result = array();
 		$group_id = $project->getID();
 
-		$sections = array ('project_read', 'project_admin', 'frs_admin', 'new_frs', 'scm', 'docman', 'tracker_admin', 'new_tracker') ;
+		$sections = array ('project_read', 'project_admin', 'scm', 'docman', 'tracker_admin', 'new_tracker') ;
 		foreach ($sections as $section) {
 			$result[$section][$group_id] = $this->getVal ($section, $group_id) ;
 		}
@@ -339,6 +339,11 @@ abstract class BaseRole extends Error {
 			}
 			array_push ($sections,'tracker');
 		}
+		$sections_frs = array('frs_admin', 'new_frs');
+		foreach ($sections_frs as $section_frs) {
+			$result[$section_frs][$group_id] = $this->getVal($section_frs, $group_id);
+		}
+		$sections = array_merge($sections, $sections_frs);
 
 		if ($project->usesFRS()) {
 			$frspf = new FRSPackageFactory($project);
@@ -350,6 +355,7 @@ abstract class BaseRole extends Error {
 			}
 			array_push($sections,'frs');
 		}
+		$sections = array_merge($sections, $sections_frs);
 
 		/*XXX merge from Branch_5_1: maybe this also only if usesForum? */
 		$sections_forum = array('forum_admin', 'new_forum');
@@ -935,7 +941,7 @@ abstract class BaseRole extends Error {
 
 		// Add missing settings
 		// ...project-wide settings
-		$arr = array ('project_read', 'project_admin', 'frs_admin', 'new_frs', 'scm', 'docman', 'tracker_admin', 'new_tracker', 'forum_admin', 'new_forum', 'pm_admin', 'new_pm') ;
+		$arr = array ('project_read', 'project_admin', 'scm', 'docman', 'frs_admin', 'new_frs', 'tracker_admin', 'new_tracker', 'forum_admin', 'new_forum', 'pm_admin', 'new_pm') ;
 		foreach ($projects as $p) {
 			foreach ($arr as $section) {
 				$this->normalizePermsForSection ($new_pa, $section, $p->getID()) ;
