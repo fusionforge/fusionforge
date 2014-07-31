@@ -42,7 +42,7 @@
  * ALONE BASIS."
  */
 
-require_once dirname(dirname(__FILE__)).'/Testing/SeleniumGforge.php';
+require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
 
 class CreateNews extends FForge_SeleniumTestCase
 {
