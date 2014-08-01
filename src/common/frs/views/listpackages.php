@@ -37,7 +37,7 @@ if (!$fpFactory || !is_object($fpFactory)) {
 	exit_error($fpFactory->getErrorMessage(), 'frs');
 }
 
-$FRSPackages = $fpFactory->getFRSs();
+$FRSPackages = $fpFactory->getFRSs(true);
 
 if (count($FRSPackages) < 1) {
 	echo $HTML->information(_('There are no file packages defined for this project.'));

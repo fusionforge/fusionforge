@@ -74,15 +74,16 @@ class FRSPackageFactory extends Error {
 	/**
 	 * getFRSs - get an array of FRS objects for this Group.
 	 *
+	 * @param	bool	$status	limite the search to active packages. Default is false.
 	 * @return	array	The array of FRS objects.
 	 */
-	function getFRSs() {
+	function getFRSs($status = false) {
 		if (isset($this->FRSs) && is_array($this->FRSs)) {
 			return $this->FRSs;
 		}
 
 		$this->FRSs = array();
-		$ids = $this->getAllPackagesIds();
+		$ids = $this->getAllPackagesIds($status);
 
 		foreach ($ids as $id) {
 			if (forge_check_perm('frs', $id, 'read')) {
@@ -95,14 +96,19 @@ class FRSPackageFactory extends Error {
 	/**
 	 * getAllPackagesIds - return a list of package ids.
 	 *
+	 * @param	bool	$status	limite the search to active packages. Default is false.
 	 * @return	array	The array of package object ids.
 	 */
-	function &getAllPackagesIds() {
+	function &getAllPackagesIds($status = false) {
 		$result = array();
-		$res = db_query_params('SELECT package_id FROM frs_package
-					WHERE group_id=$1
-					ORDER BY package_id ASC',
-					array ($this->Group->getID()));
+		$qpa = db_construct_qpa();
+		$qpa = db_construct_qpa($qpa, 'SELECT package_id FROM frs_package WHERE group_id=$1 ',
+					array($this->Group->getID()));
+		if ($status)
+			$qpa = db_construct_qpa($qpa, 'AND status_id=$1', array(1));
+
+		$qpa = db_construct_qpa($qpa, 'ORDER BY package_id ASC');
+		$res = db_query_qpa($qpa);
 		if (!$res) {
 			return $result;
 		}
