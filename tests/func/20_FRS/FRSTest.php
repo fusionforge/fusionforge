@@ -31,7 +31,7 @@ class CreateFRS extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("Administration"));
 		$this->clickAndWait("link=Administration");
 		$this->type("//input[@name='package_name']", "My Package Name");
-		$this->clickAndWait("//input[@name='submit' and @value='Create This Package']");
+		$this->clickAndWait("//input[@name='submit' and @value='Create']");
 		$this->assertTextPresent("Added Package");
 	}
 }
