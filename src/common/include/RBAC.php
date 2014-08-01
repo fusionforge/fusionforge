@@ -642,7 +642,7 @@ abstract class BaseRole extends Error {
 		return $role_vals[$section];
 	}
 
-        function hasPermission($section, $reference, $action = NULL) {
+	function hasPermission($section, $reference, $action = NULL) {
 		$result = false ;
 		$value = $this->getSetting ($section, $reference) ;
 		$min = PHP_INT_MAX ;
