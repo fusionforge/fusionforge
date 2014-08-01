@@ -2,7 +2,7 @@
 /**
  * Copyright 2010-2011, Roland Mas
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013-2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -386,16 +386,16 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->click ("//td/form/div[contains(.,'Junior Developer')]/../div/input[@value='Edit Permissions']") ;
 		$this->waitForPageToLoad("30000");
 
-		$this->select("//select[contains(@name,'data[frs]')]", "label=View public packages only");
+		$this->select("//select[contains(@name,'data[frs_admin]')]", "label=FRS access");
 		$this->select("//select[contains(@name,'data[docman]')]", "label=Read only");
 		$this->click ("//input[@value='Submit']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertSelected("//select[contains(@name,'data[docman]')]", "Read only");
-		$this->assertSelected("//select[contains(@name,'data[frs]')]", "View public packages only");
-		$this->select("//select[contains(@name,'data[frs]')]", "label=View all packages");
+		$this->assertSelected("//select[contains(@name,'data[frs_admin]')]", "FRS access");
+		$this->select("//select[contains(@name,'data[new_frs]')]", "label=Read only");
 		$this->click ("//input[@value='Submit']") ;
 		$this->waitForPageToLoad("30000");
-		$this->assertSelected("//select[contains(@name,'data[frs]')]", "View all packages");
+		$this->assertSelected("//select[contains(@name,'data[new_frs]')]", "Read only");
 
 		// Check that SD is technician on trackers but DM isn't
 		$this->click("link=Tracker");
