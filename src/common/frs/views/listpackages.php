@@ -63,7 +63,7 @@ if (count($FRSPackages) < 1) {
 
 	// check the permissions and see if this user is a release manager.
 	// If so, offer the opportunity to create a release
-	if (forge_check_perm('frs', $group_id, 'write')) {
+	if (forge_check_perm('frs_admin', $group_id, 'admin')) {
 		echo html_e('p', array(), util_make_link('/frs/?view=qrs&group_id='.$group_id, _('To create a new release click here.')));
 	}
 
