@@ -132,6 +132,9 @@ class FRSPackageFactory extends Error {
 				$admin = true;
 			}
 		}
+		if (forge_check_perm('frs_admin', $this->Group->getID(), 'admin')) {
+			$admin = true;
+		}
 		if ($admin) {
 			return 'admin';
 		} elseif ($release) {
