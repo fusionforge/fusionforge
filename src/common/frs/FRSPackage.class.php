@@ -297,7 +297,8 @@ class FRSPackage extends Error {
 	 * @return	boolean	is_public.
 	 */
 	function isPublic() {
-		return $this->data_array['is_public'];
+		$ra = RoleAnonymous::getInstance();
+		return $ra->hasPermission('frs', $this->getID(), 'read');
 	}
 
 	/**
