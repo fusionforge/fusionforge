@@ -1,2 +1,2 @@
-plugins/scmhg/common/*             @PLUGIN_PATH@/scmhg/common/
-plugins/scmhg/etc/*.ini		  etc/@PACKAGE@/config.ini.d/
+plugins/scmhg/common/*             @PLUGINS_PATH@/scmhg/common/
+plugins/scmhg/etc/*.ini		  @CONFIG_PATH@/config.ini.d/

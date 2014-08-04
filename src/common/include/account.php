@@ -218,7 +218,7 @@ function account_get_user_default_shell() {
  * @return	array	Available shells
  */
 function account_getavailableshells($add_user_default_shell = TRUE) {
-	// we'd better use the shells defined inside the 'chroot' in /var/lib/gforge/chroot/etc/shells it it exists
+	// we'd better use the shells defined inside the 'chroot' in {core/chroot}/etc/shells it it exists
 	$chroot = forge_get_config('chroot');
 	$shells_file = $chroot.'/etc/shells';
 	if(! file_exists($shells_file) ) {
@@ -276,7 +276,7 @@ function account_shellselects($current) {
 		}
 	}
 	if (!$found) {
-		// add the current option but unselectable -> defaults to cvssh if no other option in /var/lib/gforge/chroot/etc/shells
+		// add the current option but unselectable -> defaults to cvssh if no other option in {core/chroot}/etc/shells
 		$html .= "<option value=\"$current\" disabled=\"disabled\">$current</option>\n";
 	}
 	echo $html;

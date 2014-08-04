@@ -19,7 +19,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once 'func/Testing/SeleniumGforge.php';
+require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
 
 class Trove extends FForge_SeleniumTestCase
 {

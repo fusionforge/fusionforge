@@ -30,13 +30,13 @@ questions please feel free to visit http://fusionforge.org/
 
 Decompress the plugin tarball and place it into your plugins directory. 
 Usually, this would be in a location like /opt/gforge/gforge/plugins/cvstracker
-Whereever you place it, be sure your /etc/gforge/local.inc file has 
+Whereever you place it, be sure your @CONFIG_PATH@/local.inc file has 
 $sys_plugins_path pointing to the plugins directory.
 
 The cvstracker/etc/plugins/cvstracker/config.php should be copied and edited 
 to 
 
-	/etc/gforge/plugins/cvstracker/config.php
+	@CONFIG_PATH@/plugins/cvstracker/config.php
 
 The 'Site Admin' tab on the GForge web interface now has a 'Plugin Manager' 
 page where you can activate plugins on a sitewide basis. Be sure to do that

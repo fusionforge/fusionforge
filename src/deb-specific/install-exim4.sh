@@ -67,7 +67,11 @@ case "$1" in
       cp -a $m $cfg_gforge_main
 
       perl -e '
-require ("/usr/share/gforge/lib/include.pl") ;
+my $source_path = `forge_get_config source_path`;
+chomp $source_path;
+
+require ("$source_path/lib/include.pl") ; # Include all the predefined functions 
+
 $seen_gf_domains = 0;
 while (($l = <>) !~ /^\s*domainlist\s*local_domains/) {
   print $l;
@@ -89,7 +93,10 @@ while (<>) { print unless m/^hide pgsql_servers/; };
     # Second, insinuate our forwarding rules in the directors section
 
     perl -e '
-require ("/usr/share/gforge/lib/include.pl") ;
+my $source_path = `forge_get_config source_path`;
+chomp $source_path;
+
+require ("$source_path/lib/include.pl") ; # Include all the predefined functions 
 
 my $gf_block = "# BEGIN GFORGE BLOCK -- DO NOT EDIT #
 # You may move this block around to accomodate your local needs as long as you

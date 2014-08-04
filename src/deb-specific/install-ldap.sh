@@ -196,7 +196,7 @@ configure_slapd(){
 	    /etc/ldap/schema/cosine.schema \
 	    /etc/ldap/schema/inetorgperson.schema \
 	    /etc/ldap/schema/nis.schema \
-	    /etc/gforge/gforge.schema
+	    $(forge_get_config config_path)/gforge.schema
 	  do
 	  if ! grep -q "^include[ 	]*$schema" /etc/ldap/slapd.conf.gforge-new ; then
 	      echo "include	$schema	#Added by GForge install" >> $tmpfile
@@ -358,7 +358,7 @@ EOF
     tmpldifadd=$(mktemp $tmpfile_pattern)
     tmpldifmod=$(mktemp $tmpfile_pattern)
     dc=$(echo $gforge_base_dn | cut -d, -f1 | cut -d= -f2)
-    su -s /bin/sh gforge -c /usr/share/gforge/bin/sql2ldif.pl >> $tmpldif
+    su -s /bin/sh gforge -c $(forge_get_config binary_path)/sql2ldif.pl >> $tmpldif
     # echo "Filling LDAP with database"
     if ! eval "ldapadd -r -c -D '$robot_dn' -x -w'$robot_passwd' -f $tmpldif > $tmpldifadd 2>&1" ; then
         # Some entries could not be added (already there)
@@ -590,13 +590,13 @@ case "$1" in
 	admin_regexp="^cn=admin, *$admin_regexp"
 	get_our_entries () {
 	    {		# List candidates...
-		/usr/share/gforge/bin/sql2ldif.pl \
+		$(forge_get_config binary_path)/sql2ldif.pl \
 		    | grep "^dn:" \
 		    | sed 's/^dn: *//' \
 		    | grep -v "^dc=" \
 		    | grep -v "^ou=" \
 		    | grep -v "$admin_regexp"
-		/usr/share/gforge/bin/sql2ldif.pl \
+		$(forge_get_config binary_path)/sql2ldif.pl \
 		    | grep "^dn:" \
 		    | sed 's/^dn: *//' \
 		    | grep -v "^dc=" \

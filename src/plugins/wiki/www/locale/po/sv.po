@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PhpWiki 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-11 16:07+0100\n"
+"POT-Creation-Date: 2014-06-26 10:14+0200\n"
 "PO-Revision-Date: 2001-01-27 01:58+0200\n"
 "Last-Translator: Jon Åslund <jooon@hem.passagen.se>\n"
 "Language-Team: \n"
@@ -2766,13 +2766,6 @@ msgstr "Samma innehåll"
 msgid "FAILED"
 msgstr ""
 
-msgid "Source code syntax highlighter (via http://www.andre-simon.de)."
-msgstr ""
-
-#, php-format
-msgid "invalid %s ignored"
-msgstr ""
-
 msgid "Provide access to PhpWiki's lower level system information."
 msgstr ""
 
@@ -3179,18 +3172,6 @@ msgid "Pred"
 msgstr ""
 
 msgid "Rate"
-msgstr ""
-
-msgid "Display video in Flash or HTML5."
-msgstr ""
-
-msgid "Both 'url' or 'file' parameters missing."
-msgstr ""
-
-msgid "Choose only one of 'url' or 'file' parameters."
-msgstr ""
-
-msgid "Your browser does not understand the HTML 5 video tag."
 msgstr ""
 
 msgid ""

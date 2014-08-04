@@ -1,2 +1,2 @@
-@PLUGIN_PATH@/oauthconsumer/common
-@PLUGIN_PATH@/oauthconsumer/www
+@PLUGINS_PATH@/oauthconsumer/common
+@PLUGINS_PATH@/oauthconsumer/www

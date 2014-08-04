@@ -227,7 +227,6 @@ ${POT_FILE}: ../lib/plugin/SiteMap.php
 ${POT_FILE}: ../lib/plugin/SpellCheck.php
 ${POT_FILE}: ../lib/plugin/SqlResult.php
 ${POT_FILE}: ../lib/plugin/SyncWiki.php
-${POT_FILE}: ../lib/plugin/SyntaxHighlighter.php
 ${POT_FILE}: ../lib/plugin/SystemInfo.php
 ${POT_FILE}: ../lib/plugin/Template.php
 ${POT_FILE}: ../lib/plugin/TeX2png.php
@@ -241,7 +240,6 @@ ${POT_FILE}: ../lib/plugin/UpLoad.php
 ${POT_FILE}: ../lib/plugin/UriResolver.php
 ${POT_FILE}: ../lib/plugin/UserPreferences.php
 ${POT_FILE}: ../lib/plugin/UserRatings.php
-${POT_FILE}: ../lib/plugin/Video.php
 ${POT_FILE}: ../lib/plugin/VisualWiki.php
 ${POT_FILE}: ../lib/plugin/WantedPagesOld.php
 ${POT_FILE}: ../lib/plugin/WantedPages.php

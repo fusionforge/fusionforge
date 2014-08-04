@@ -10,13 +10,16 @@ use vars qw/$dbh @reqlist $thdir/ ;
 
 sub debug ( $ ) ;
 
-require ("/usr/share/gforge/lib/include.pl") ; # Include all the predefined functions 
+my $source_path = `forge_get_config source_path`;
+chomp $source_path;
+
+require ("$source_path/lib/include.pl") ; # Include all the predefined functions 
 
 &db_connect ;
 
 if ($#ARGV < 0) {
     debug "Usage: unregister-theme <dirname>" ;
-    debug "The theme must be in /usr/share/gforge/www/themes/<dirname>/" ;
+    debug "The theme must be in $source_path/www/themes/<dirname>/" ;
     exit 1 ;
 }
 

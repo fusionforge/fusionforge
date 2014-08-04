@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PhpWiki 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-11 16:07+0100\n"
+"POT-Creation-Date: 2014-06-26 10:14+0200\n"
 "PO-Revision-Date: 2000-10-31 02:23+0200\n"
 "Last-Translator: Reini Urban <rurban@x-ray.at>, Carsten Klapp "
 "<carstenklapp@users.sourceforge.net>, Helmer Pardun <pardunpress@t-online."
@@ -2887,13 +2887,6 @@ msgstr "gleiche Seiteninalt"
 msgid "FAILED"
 msgstr "FEHLER"
 
-msgid "Source code syntax highlighter (via http://www.andre-simon.de)."
-msgstr ""
-
-#, php-format
-msgid "invalid %s ignored"
-msgstr "ungültiges %s ignoriert"
-
 msgid "Provide access to PhpWiki's lower level system information."
 msgstr ""
 
@@ -3320,19 +3313,6 @@ msgstr ""
 
 msgid "Rate"
 msgstr "Bewerte"
-
-msgid "Display video in Flash or HTML5."
-msgstr ""
-
-# (??? Parameter = Hilfsgröße!!!Bezugseinheit!!! Bezugsgröße!!!)
-msgid "Both 'url' or 'file' parameters missing."
-msgstr ""
-
-msgid "Choose only one of 'url' or 'file' parameters."
-msgstr ""
-
-msgid "Your browser does not understand the HTML 5 video tag."
-msgstr ""
 
 msgid ""
 "Visualizes the Wiki structure in a graph using the 'dot' commandline tool "
@@ -6095,6 +6075,9 @@ msgstr "Sidebar"
 
 msgid "Edit this page"
 msgstr "Diese Seite bearbeiten"
+
+#~ msgid "invalid %s ignored"
+#~ msgstr "ungültiges %s ignoriert"
 
 #~ msgid "Version %s"
 #~ msgstr "Version %s."

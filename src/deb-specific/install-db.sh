@@ -264,14 +264,14 @@ EOF
 	fi
 
 	# Install/upgrade the database contents (tables and data)
-	/usr/share/gforge/bin/old-db-upgrade.pl 2>&1 | grep -v ^NOTICE: | grep -v ^DETAIL: | grep -v ^WARNING: \
+	$(forge_get_config source_path)/bin/old-db-upgrade.pl 2>&1 | grep -v ^NOTICE: | grep -v ^DETAIL: | grep -v ^WARNING: \
 	    && p=${PIPESTATUS[0]} \
 	    || p=${PIPESTATUS[0]}
 	if [ $p != 0 ] ; then
 	    exit $p
 	fi
 
-	/usr/share/gforge/bin/upgrade-db.php
+	$(forge_get_config source_path)/bin/upgrade-db.php
 
 	if [ "$need_admin_pw" = "true" ] ; then
 	    exit 100
@@ -297,7 +297,7 @@ EOF
 	if [ "x$2" != "x" ] ;then
 		DUMPFILE=$2
 	else
-		DUMPFILE=/var/lib/gforge/dumps/db_dump
+		DUMPFILE=$(forge_get_config data_path)/dumps/db_dump
 	fi
 	if [ "x$3" != "x" ] ;then
 		DB=$3
@@ -339,7 +339,7 @@ EOF
 	if [ "x$2" != "x" ] ;then
 		RESTFILE=$2
 	else
-		RESTFILE=/var/lib/gforge/dumps/db_dump
+		RESTFILE=$(forge_get_config data_path)/dumps/db_dump
 	fi
 	echo "Restoring $RESTFILE"
 	su -s /bin/sh postgres -c "dropdb $db_name" || true

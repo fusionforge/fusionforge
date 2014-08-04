@@ -3,7 +3,7 @@ INSTALLATION of cvssyncmail Plugin
 If the directory where the plugins are is /opt/gforge/gforge/plugins you should end up 
 	with /opt/gforge/gforge/plugins/cvssyncmail and all the files in it
 
-Be sure that your /etc/gforge/local.inc has a sys_plugins_path set to that location.
+Be sure that your @CONFIG_PATH@/local.inc has a sys_plugins_path set to that location.
 
 The 'Site Admin' tab now has a 'Plugin Manager' link, which can be used to activate /
 deactivate plugins. Be sure to activate them if you want them to be available to 

@@ -1,4 +1,4 @@
-plugins/projectlabels/common/*	@PLUGIN_PATH@/projectlabels/common/
-plugins/projectlabels/db/*	@PLUGIN_PATH@/projectlabels/db/
-plugins/projectlabels/www/*	@PLUGIN_PATH@/projectlabels/www/
-plugins/projectlabels/etc/*.ini etc/@PACKAGE@/config.ini.d/
+plugins/projectlabels/common/*	@PLUGINS_PATH@/projectlabels/common/
+plugins/projectlabels/db/*	@PLUGINS_PATH@/projectlabels/db/
+plugins/projectlabels/www/*	@PLUGINS_PATH@/projectlabels/www/
+plugins/projectlabels/etc/*.ini @CONFIG_PATH@/config.ini.d/

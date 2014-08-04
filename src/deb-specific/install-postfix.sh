@@ -31,6 +31,7 @@ case "$1" in
 	    echo "gforge: $server_admin" >> /etc/aliases.gforge-new
 	fi
 
+	if [ ! -e /etc/postfix/main.cf ]; then cp /usr/share/postfix/main.cf.debian /etc/postfix/main.cf; fi
 	cp -a /etc/postfix/main.cf /etc/postfix/main.cf.gforge-new
 
 	perl -pi -e's/SOURCEFORGE_DOMAINS/GFORGE_DOMAINS/;' \
@@ -41,10 +42,14 @@ case "$1" in
 	tmp1=$(mktemp /tmp/$pattern)
 	# First, get the list of local domains right - add gforge domains to 'mydestination'
 	perl -e '
-require ("/usr/share/gforge/lib/include.pl") ;
+my $source_path = `forge_get_config source_path`;
+chomp $source_path;
+
+require ("$source_path/lib/include.pl") ; # Include all the predefined functions 
+
 my $l;
 while ($l = <>) { 
-  last if l =~ /^\s*mydestination/ ;
+  last if $l =~ /^\s*mydestination/ ;
   print $l;
 };
 chomp $l;
@@ -58,7 +63,11 @@ while ($l = <>) { print $l; };
 ' < /etc/postfix/main.cf.gforge-new > $tmp1
 	grep -q '^[[:space:]]*relay_domains' $tmp1 || echo 'relay_domains = $mydestination' >>$tmp1
 	perl -i -e '
-require ("/usr/share/gforge/lib/include.pl") ;
+my $source_path = `forge_get_config source_path`;
+chomp $source_path;
+
+require ("$source_path/lib/include.pl") ; # Include all the predefined functions 
+
 my $l;
 while (($l = <>) !~ /^\s*relay_domains/) { print $l; };
 chomp $l;
@@ -69,7 +78,10 @@ while ($l = <>) { print $l; };
 	tmp2=$(mktemp /tmp/$pattern)
 	# Second, insinuate our forwarding rules in the directors section
 	perl -e '
-require ("/usr/share/gforge/lib/include.pl") ;
+my $source_path = `forge_get_config source_path`;
+chomp $source_path;
+
+require ("$source_path/lib/include.pl") ; # Include all the predefined functions 
 
 my $gf_block;
 my $l;
@@ -95,6 +107,7 @@ mailman_destination_recipient_limit = 1
 $seen_gf_block = 0;
 $seen_alias_maps = 0;
 $seen_transport_maps = 0;
+$data_path = forge_get_config("data_path");
 while ($l = <>) {
 	if ($l =~ /^\s*virtual_alias_maps/) {
 		chomp $l;
@@ -105,7 +118,7 @@ while ($l = <>) {
 		$seen_alias_maps = 1;
 	} elsif ($l =~ /^\s*transport_maps/) {
 		chomp $l;
-		$l .= ", hash:/var/lib/gforge/etc/postfix-transport" unless ($l =~ /^[^#]*hash:\/var\/lib\/gforge\/etc\/postfix-transport/);
+		$l .= ", hash:$data_path/etc/postfix-transport" unless ($l =~ m,^[^#]*hash:$data_path/etc/postfix-transport,);
 		print "$l\n";
 		$seen_transport_maps = 1;
 	} elsif ($l =~ /^\s*\#\#\# BEGIN GFORGE BLOCK \-\- DO NOT EDIT \#\#\#/) {
@@ -136,11 +149,12 @@ if ($seen_gf_block == 0) {
 
 if ($seen_alias_maps == 0) {
 	print "### GFORGE ADDITION - The following virtual_alias_maps line can be moved and this line removed ###\n";
-	print "virtual_alias_maps = pgsql:pgsql_gforge_users\n";
+	# Using proxy: so that Postfix daemons can access PostgreSQL from within their chroot
+	print "virtual_alias_maps = proxy:pgsql:pgsql_gforge_users\n";
 };
 if ($seen_transport_maps == 0) {
 	print "### GFORGE ADDITION - The following transport_maps line can be moved and this line removed ###\n";
-	print "transport_maps = hash:/var/lib/gforge/etc/postfix-transport\n";
+	print "transport_maps = hash:$data_path/etc/postfix-transport\n";
 };
 ' < $tmp1 > $tmp2
 	rm $tmp1
@@ -150,8 +164,8 @@ if ($seen_transport_maps == 0) {
     
     configure)
 	[ -x /usr/bin/newaliases ] && newaliases
-	echo "$(forge_get_config lists_host) mailman:" > /var/lib/gforge/etc/postfix-transport
-	postmap /var/lib/gforge/etc/postfix-transport	
+	echo "$(forge_get_config lists_host) mailman:" > $(forge_get_config data_path)/etc/postfix-transport
+	postmap $(forge_get_config data_path)/etc/postfix-transport	
 	;;
     
     purge-files)
@@ -173,9 +187,13 @@ if ($seen_transport_maps == 0) {
 	tmp1=$(mktemp /tmp/$pattern)
 	# First, replace the list of local domains
 	perl -e '
-require ("/usr/share/gforge/lib/include.pl") ;
+my $source_path = `forge_get_config source_path`;
+chomp $source_path;
+
+require ("$source_path/lib/include.pl") ; # Include all the predefined functions 
+
 while ($l = <>) { 
-  last if l =~ /^\s*mydestination/ ;
+  last if $l =~ /^\s*mydestination/ ;
   print $l;
 };
 chomp $l ;
@@ -190,7 +208,11 @@ if ($l =~ /^(\s*mydestination\s*=\s*)(\S.*)/) {
 while ($l = <>) { print $l; };
 ' < /etc/postfix/main.cf.gforge-new > $tmp1
 	grep -q '^[[:space:]]*relay_domains' $tmp1 && perl -i -e '
-require ("/usr/share/gforge/lib/include.pl") ;
+my $source_path = `forge_get_config source_path`;
+chomp $source_path;
+
+require ("$source_path/lib/include.pl") ; # Include all the predefined functions 
+
 while (($l = <>) !~ /^\s*relay_domains/) {
   print $l;
 };

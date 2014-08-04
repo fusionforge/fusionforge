@@ -2,7 +2,7 @@
 
 set -e
 
-/usr/share/gforge/bin/prepare-vhosts-file.pl
+$(forge_get_config binary_path)/prepare-vhosts-file.pl
 
 case "$1" in
 	--norestart)

@@ -1,9 +1,9 @@
-FFDIR=/usr/share/gforge
-MWCRON=/usr/share/gforge/plugins/mediawiki/cronjobs
+FFDIR=@SOURCE_PATH@
+MWCRON=@PLUGINS_PATH@/mediawiki/cronjobs
 FFUSER=gforge
 
 # You may need to change the pathname to php CLI (command line interface)
-PHP="/usr/bin/php -q -d include_path=.:/etc/gforge:/usr/share/gforge:/usr/share/gforge/www/include:/usr/share/gforge/plugins"
+PHP="/usr/bin/php -q -d include_path=.:@CONFIG_PATH@:@SOURCE_PATH@:@SOURCE_PATH@/www/include:@PLUGINS_PATH@"
 
 # Don't mail command output to anyone.
 MAILTO=""

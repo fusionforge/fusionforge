@@ -134,7 +134,7 @@ appropriate place, and printing the appropriate link whenever your
 CallHook() method is called from that place.
 
   Registering your plugin is done by providing a
-/usr/share/gforge/plugins/<pluginname>/include/<pluginname>-init.php.
+@PLUGINS_PATH@/<pluginname>/include/<pluginname>-init.php.
 It will be parsed by the PluginManager object.  That file should
 contain a call to register_plugin(), passing it an object of the
 appropriate class.  See the helloworld plugin for an example.
@@ -146,7 +146,7 @@ I rely on you plugins developers to provide more ideas :-)
 
 - Plugin-specific web pages should reside either in the /plugin/*/
 URL-space (that is, plugin "foo" will probably put its files in
-/usr/share/gforge/www/plugins/foo/) or (if the web interface is not
+@SOURCE_PATH@/www/plugins/foo/) or (if the web interface is not
 written in PHP) in /plugin/*/cgi-bin/ URL-space (files in
 /usr/lib/sourceforge/cgi-bin/plugins/foo/).
 

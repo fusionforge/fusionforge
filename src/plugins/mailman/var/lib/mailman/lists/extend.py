@@ -13,7 +13,9 @@ import sys
 
 def extendMemberAdaptor(list):
     from iniparse import INIConfig
-    cfg = INIConfig(open('/etc/gforge/config.ini.d/mailman.ini'))
+    f = popen('forge_get_config config_path')
+    path = f.read().strip()
+    cfg = INIConfig(open(path + '/config.ini.d/mailman.ini'))
     dbparam={}
     #Config to connect to database
     dbparam['dbhost'] = cfg['mailman']['dbhost']

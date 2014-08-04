@@ -4,7 +4,10 @@
 #		     scripts can process it without needing to access the database.
 use DBI;
 
-require("/usr/share/gforge/lib/include.pl");  # Include all the predefined functions
+my $source_path = `forge_get_config source_path`;
+chomp $source_path;
+
+require ("$source_path/lib/include.pl") ; # Include all the predefined functions 
 
 # Run as gforge
 my($name,$passwd,$uid,$gid,$quota,$comment,$gcos,$dir,$shell) = getpwnam("gforge");
@@ -50,7 +53,7 @@ while ($ln = pop(@userdump_array)) {
 	chop($ln);
 	($uid, $gid, $status, $username, $shell, $passwd, $realname) = split(":", $ln);
 	$username =~ tr/A-Z/a-z/;
-	$user_exists = (-d $homedir_prefix .'/'. $username || -f "/var/lib/gforge/tmp/$username.tar.gz");
+	$user_exists = (-d $homedir_prefix .'/'. $username || -f (forge_get_config("data_path")."/tmp/$username.tar.gz"));
 	
 	if ($status eq 'A' && $user_exists) {
 		update_user($uid, $gid, $username, $realname, $shell, $passwd);
@@ -194,15 +197,16 @@ sub update_user {
 #############################
 sub delete_user {
 	my $username = shift(@_);
-	
-	my $alreadydone=(-f "/var/lib/gforge/tmp/$username.tar.gz");
+	my $data_path = forge_get_config("data_path");
+	my $alreadydone=(-f "$data_path/tmp/$username.tar.gz");
 	if (!$alreadydone) {
 		my $oldmask = umask(077);
 		if ($verbose) {
 			print("Deleting User : $username\n");
 		}
-		run_verbose("/bin/mv /var/lib/gforge/chroot/home/users/$username /var/lib/gforge/chroot/home/users/deleted_$username");
-		run_verbose("cd / && /bin/tar -cf - /var/lib/gforge/chroot/home/users/deleted_$username | /bin/gzip -n9 >/var/lib/gforge/tmp/$username.tar.gz && /bin/rm -rf /var/lib/gforge/chroot/home/users/deleted_$username");
+		my $chroot = forge_get_config("chroot");
+		run_verbose("/bin/mv $chroot/home/users/$username $chroot/home/users/deleted_$username");
+		run_verbose("cd / && /bin/tar -cf - $chroot/home/users/deleted_$username | /bin/gzip -n9 > $data_path/tmp/$username.tar.gz && /bin/rm -rf $chroot/home/users/deleted_$username");
 		umask($oldmask);
 	}
 }

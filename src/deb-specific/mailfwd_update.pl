@@ -9,6 +9,11 @@
 use DBI;
 use English;
 
+my $source_path = `forge_get_config source_path`;
+chomp $source_path;
+
+require ("$source_path/lib/include.pl") ; # Include all the predefined functions 
+
 ## Become this effective user (EUID/EGID) and perform this action.
 ##
 ## This protect against symlink attacks; they are inevitable when
@@ -64,7 +69,6 @@ sub GetUserUidGid {
     return ($uid,$gid);
 }
 
-require("/usr/share/gforge/lib/include.pl");  # Include all the predefined functions
 # Run as gforge
 my($name,$passwd,$uid,$gid,$quota,$comment,$gcos,$dir,$shell) = getpwnam("gforge");
 $> = $uid;

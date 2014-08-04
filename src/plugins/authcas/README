@@ -12,8 +12,8 @@ accounts with the same login. This could leak to account hijacking.
 
 Installation:
 
-- files from include/ go to /usr/share/gforge/plugins/authcas/include/
-- files from www/ go to /usr/share/gforge/www/plugins/authcas/
+- files from include/ go to @PLUGINS_PATH@/authcas/include/
+- files from www/ go to @SOURCE_PATH@/www/plugins/authcas/
 
 Setup:
 
@@ -36,7 +36,7 @@ the phpCAS library works for your server with the corresponding
 settings (compare the post-login.php code with the one in
 simple_example.php, check the /tmp logs with setDebug on, etc.).
 
- -- Olivier Berger <obergix@debian.org>, Fri, 15 Jun 2012 17:45:23 +0200
+ -- Roland Mas <lolando@debian.org>, Tue, 22 Jul 2014 12:07:19 +0200
 
 External requirement:
 

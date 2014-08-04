@@ -8,7 +8,9 @@
 ########################
 # global configuration #
 ########################
-$config{'database_include'} 	= '/etc/gforge/database.inc';		# database include file
+my $config_path = `forge_get_config config_path`;
+chomp $config_path;
+$config{'database_include'} 	= "$config_path/database.inc";		# database include file
 $config{'lock_file'}		= '/tmp/sf-backend';		# lockfile location
 $config{'log_file'}		= '/home/dummy/backend.log';	# logfile location
 $config{'group_dir_prefix'} 	= '/home/groups';		# prefix for group directories

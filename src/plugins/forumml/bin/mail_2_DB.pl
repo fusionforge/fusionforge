@@ -41,15 +41,27 @@ use strict;
 # Set default path (required by taint mode)
 $ENV{'PATH'} = '/usr/bin:/bin';
 
+my $plugins_path = `forge_get_config plugins_path`;
+chomp $plugins_path;
+
+my $config_path = `forge_get_config config_path`;
+chomp $config_path;
+
+my $source_path = `forge_get_config source_path`;
+chomp $source_path;
+
+my $log_path = `forge_get_config log_path`;
+chomp $log_path;
+
 # Hook log file
-my $logfile = "/var/log/gforge/forumml/hook.log";
+my $logfile = "$log_path/forumml/hook.log";
 
 # Redirect outputs
 open STDOUT, ">>", $logfile or die "cannot append to '$logfile': $!\n";
 open STDERR, ">&STDOUT" or die "cannot append STDERR to STDOUT: $!\n";
 
 # Search if there are lists we shouldn't treat
-my $conf = '/etc/codendi/plugins/forumml/etc/forumml.inc';
+my $conf = "$config_path/plugins/forumml/etc/forumml.inc";
 if (-f $conf) {
     # Get the variable defined in forumml.inc
     my @exc_lists;
@@ -89,7 +101,7 @@ close(OUT);
 
 # Get PHP_PARAMS variable from php-laucher.sh
 my $PHP_PARAMS="";
-open(PHP_LAUNCHER, "</usr/share/codendi/src/utils/php-launcher.sh");
+open(PHP_LAUNCHER, "<$source_path/src/utils/php-launcher.sh");
 while (<PHP_LAUNCHER>) {
     if (m/^[ ]*PHP_PARAMS="(.*)"$/) {
 	$PHP_PARAMS=$1;
@@ -99,7 +111,7 @@ while (<PHP_LAUNCHER>) {
 close(PHP_LAUNCHER);
 
 # store mail in ForumML DB
-exec "/usr/bin/php $PHP_PARAMS /usr/share/codendi/plugins/forumml/bin/mail_2_DB.php $listname 1 $temp";
+exec "/usr/bin/php $PHP_PARAMS $plugins_path/forumml/bin/mail_2_DB.php $listname 1 $temp";
 
 close STDOUT;
 close STDERR;

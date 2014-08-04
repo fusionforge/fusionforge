@@ -29,8 +29,17 @@ Only projects that enabled ForumML plugin are concerned by this migration.
 
 =cut
 
+my $plugins_path = `forge_get_config plugins_path`;
+chomp $plugins_path;
+
+my $config_path = `forge_get_config config_path`;
+chomp $config_path;
+
+my $source_path = `forge_get_config source_path`;
+chomp $source_path;
+
 # Search if there are lists we shouldn't treat
-my $conf = '/usr/share/gforge/plugins/forumml/etc/forumml.inc';
+my $conf = "$plugins_path/forumml/etc/forumml.inc";
 my %excluded_list;
 if (-f $conf) {
     # Get the variable defined in forumml.inc
@@ -50,12 +59,13 @@ if (-f $conf) {
 }
 
 # Get PHP_PARAMS variable from php-laucher.sh
-my $PHP_PARAMS="-q -d include_path=.:/etc/gforge:/usr/share/gforge:/usr/share/gforge/www/include:/usr/share/gforge/plugins";
+my $PHP_PARAMS="-q -d include_path=.:$config_path:$source_path:$source_path/www/include:$plugins_path";
 
 #use strict;
 use DBI;
 
-require ("/usr/share/gforge/lib/include.pl") ;
+require ("$source_path/lib/include.pl") ; # Include all the predefined functions 
+
 my $dbh = DBI->connect("DBI:Pg:host=localhost ;dbname=$sys_dbname ; user= $sys_dbuser ; password=$sys_dbpasswd") or die "Couldn't connect to database: " . DBI->errstr;
 
 
@@ -66,6 +76,6 @@ $req->execute();
 while (my ($list_name,$group_id) = $req->fetchrow()) {
     if(! exists $excluded_list{$list_name}) {
 	print "Processing ".$list_name." mailing-list ...\n ";
-	system("/usr/bin/php $PHP_PARAMS /usr/share/gforge/plugins/forumml/bin/mail_2_DBFF.php $list_name 2");
+	system("/usr/bin/php $PHP_PARAMS $plugins_path/forumml/bin/mail_2_DBFF.php $list_name 2");
     }
 }

@@ -1,2 +1,2 @@
-/usr/lib/cgi-bin/darcsweb.cgi @PLUGIN_PATH@/scmdarcs/cgi-bin/darcsweb.cgi
+/usr/lib/cgi-bin/darcsweb.cgi @PLUGINS_PATH@/scmdarcs/cgi-bin/darcsweb.cgi
 /usr/share/darcsweb @SOURCE_PATH@/www/plugins/scmdarcs

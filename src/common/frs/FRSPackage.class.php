@@ -536,7 +536,7 @@ class FRSPackage extends Error {
 			$zipPath = $this->getNewestReleaseZipPath();
 			$filesPath = forge_get_config('upload_dir').'/'.$this->Group->getUnixName().'/'.$this->getFileName().'/'.$release->getFileName();
 
-			if ($zip->open($zipPath, ZIPARCHIVE::OVERWRITE)!==true) {
+			if ($zip->open($zipPath, ZIPARCHIVE::OVERWRITE)!=true) {
 				exit_error(_('Cannot open the file archive.').' '.$zipPath.'.');
 			}
 

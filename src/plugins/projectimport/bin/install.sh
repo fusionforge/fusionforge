@@ -13,7 +13,7 @@ fi
 
 case "$1" in
     configure)
-	chown www-data:www-data /var/lib/gforge/plugins/projectimport
+	chown www-data:www-data $(forge_get_config data_path)/plugins/projectimport
 	;;
 
     *)

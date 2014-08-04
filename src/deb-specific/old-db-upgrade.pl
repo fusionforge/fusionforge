@@ -23,8 +23,11 @@ use vars qw/$sys_default_domain $sys_scm_host
     $server_admin $domain_name
     $libdir $sqldir/ ;
 
-$libdir="/usr/share/gforge/lib";
-$sqldir="/usr/share/gforge/db";
+my $source_path = `forge_get_config source_path`;
+chomp $source_path;
+
+$libdir="$source_path/lib";
+$sqldir="$source_path/db";
 require ("$libdir/sqlparser.pm") ; # Our magic SQL parser
 require ("$libdir/sqlhelper.pm") ; # Our SQL functions
 require ("$libdir/include.pl");  # Some other functions
@@ -1210,19 +1213,6 @@ eval {
     }
 
     &update_with_sql("20050115", "4.0.2-0+3") ;
-#
-# We got this at upgrade
-#
-#DBD::Pg::st execute failed: ERREUR:  la relation avec l'OID 387345 n'existe pas at /usr/share/gforge/bin/db-upgrade.pl line 1970.
-#Transaction aborted because DBD::Pg::st execute failed: ERREUR:  la relation avec l'OID 387345 n'existe pas at /usr/share/gforge/bin/db-upgrade.pl line 1970.
-#Transaction aborted because DBD::Pg::st execute failed: ERREUR:  la relation avec l'OID 387345 n'existe pas at /usr/share/gforge/bin/db-upgrade.pl line 1970.
-#Last SQL query was:
-#update project_task SET last_modified_date=EXTRACT(EPOCH FROM now())::integer;
-#(end of query)
-#Your database schema is at version 4.0.2-0+5
-#
-# This is a hack to disconnect and reconnect the DB and solve the problem
-#
     $dbh->rollback ;
     &db_disconnect ;
     &db_connect ;

@@ -68,7 +68,7 @@ while($row = db_fetch_array($res)) {
 	}
 	$ret = $ds->store($row['docid'], $tmp);
 	if (!$ret) {
-		echo "UPGRADE ERROR: $ret: ".$as->getErrorMessage()."\n";
+		echo "UPGRADE ERROR: $ret: ".$ds->getErrorMessage()."\n";
 		$ds->rollback();
 		exit(1);
 	}

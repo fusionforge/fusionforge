@@ -7,7 +7,11 @@
 use DBI;
 use Time::Local;
 use POSIX qw( strftime );
-require("/usr/share/gforge/lib/include.pl");  # Include all the predefined functions
+
+my $source_path = `forge_get_config source_path`;
+chomp $source_path;
+
+require ("$source_path/lib/include.pl") ; # Include all the predefined functions 
 
 #######################
 ##  CONF VARS

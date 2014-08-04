@@ -153,7 +153,7 @@ function &group_get_objects_by_name($groupname_arr) {
 
 function group_get_object_by_publicname($groupname) {
 	$res = db_query_params('SELECT * FROM groups WHERE lower(group_name) LIKE $1',
-				array(htmlspecialchars(strtolower($groupname))));
+				array(htmlspecialchars(html_entity_decode(strtolower($groupname)))));
 	return group_get_object(db_result($res, 0, 'group_id'), $res);
 }
 
@@ -517,7 +517,7 @@ class Group extends Error {
 		}
 
 		// Validate some values
-		if ($this->getPublicName() != $group_name) {
+		if ($this->getPublicName() != htmlspecialchars($group_name)) {
 			if (!$this->validateGroupName($group_name)) {
 				return false;
 			}

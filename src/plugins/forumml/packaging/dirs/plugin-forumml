@@ -1,6 +1,6 @@
-@PLUGIN_PATH@/forumml/cgi-bin
-@PLUGIN_PATH@/forumml/common
-@PLUGIN_PATH@/forumml/www
+@PLUGINS_PATH@/forumml/cgi-bin
+@PLUGINS_PATH@/forumml/common
+@PLUGINS_PATH@/forumml/www
 var/spool/forumml
 @DATA_PATH@/forumml
 @LOG_PATH@

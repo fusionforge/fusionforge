@@ -346,7 +346,7 @@ if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
 		<td class="top"><strong>'._('Submitter')._(': ').'</strong><br />'. $submitter_box .'</td>
 		<td class="top"><strong>'._('Assignee')._(': ').'</strong><br />'. $tech_box .'</td>
 	</tr>';
-	$ath->renderExtraFields($extra_fields,true,'None',true,'Any',array(),false,'QUERY');
+	$ath->renderExtraFields($extra_fields,true,'none',true,'Any',array(),false,'QUERY');
 
 	// Compute the list of fields which can be sorted.
 	// Currently, only scalar artifacts are taken.
