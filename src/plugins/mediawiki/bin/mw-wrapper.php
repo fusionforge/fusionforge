@@ -1,11 +1,11 @@
-#! /usr/bin/php -f
+#!/usr/bin/php
 <?php
 /*-
  * FusionForge/Mediawiki integration
  *
  * Copyright © 2010
  *	Roland Mas
- * Copyright © 2012
+ * Copyright © 2012, 2014
  *	Thorsten Glaser <t.glaser@tarent.de>
  * All rights reserved.
  *
