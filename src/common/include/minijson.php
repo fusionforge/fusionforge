@@ -2,7 +2,7 @@
 /**
  * Minimal complete JSON generator and parser for FusionForge
  *
- * Copyright © 2010, 2011, 2012
+ * Copyright © 2010, 2011, 2012, 2014
  *	Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
  * All rights reserved.
  *
@@ -200,6 +200,42 @@ function minijson_encode($x, $ri="", $depth=32) {
 			if ($si !== false)
 				$rs .= $si;
 			$rs .= minijson_encode((string)$v, false, $depth);
+			if ($ri === false)
+				$rs .= ":";
+			else
+				$rs .= ": ";
+			$rs .= minijson_encode($x[$v], $si, $depth);
+		}
+		if ($ri !== false)
+			$rs .= "\n" . $ri;
+		$rs .= "}";
+		return $rs;
+	}
+	if (is_object($x)) {
+		/* PHP objects are mostly like associative arrays */
+		$x = (array)$x;
+		$k = array();
+		foreach (array_keys($x) as $v) {
+			/* protected and private members have NULs there */
+			$k[$v] = preg_replace('/^\0([a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*|\*)\0(.)/',
+			    '\\\\$1\\\\$2', $v);
+		}
+		$si = $ri === false ? false : $ri . "  ";
+		$first = true;
+		$rs = "{";
+		if ($ri !== false)
+			$rs .= "\n";
+		asort($k, SORT_STRING);
+		foreach ($k as $v => $s) {
+			if ($first)
+				$first = false;
+			elseif ($ri === false)
+				$rs .= ",";
+			else
+				$rs .= ",\n";
+			if ($si !== false)
+				$rs .= $si;
+			$rs .= minijson_encode($s, false, $depth);
 			if ($ri === false)
 				$rs .= ":";
 			else
