@@ -427,6 +427,13 @@ Requires: %{name} >= %{version}, php, postgresql
 %description plugin-webanalytics
 webanalytics plugin for FusionForge.
 
+%package plugin-sysauthldap
+Summary: sysauthldap plugin for FusionForge
+Group: Development/Tools
+Requires: %{name} >= %{version}, php, postgresql
+%description plugin-sysauthldap
+sysauthldap plugin for FusionForge. 
+
 %prep
 %setup -q
 
@@ -536,6 +543,7 @@ WHICH_VERSION=%{version}-%{release}
 ### Plugin setup ###
 for i in $(utils/list-enabled-plugins.sh --disabled) ; do
     %{__rm} -rf $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/$i
+    %{__rm} -rf $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/$i.ini
 done
 
 %{__cp} $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/*/etc/*.ini $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/
@@ -860,7 +868,6 @@ fi
 %{FORGE_DIR}/www/register
 %{FORGE_DIR}/www/reporting
 %{FORGE_DIR}/www/scm
-%{FORGE_DIR}/www/scripts
 %{FORGE_DIR}/www/search
 %{FORGE_DIR}/www/snippet
 %{FORGE_DIR}/www/soap
@@ -928,6 +935,7 @@ fi
 %files plugin-ckeditor
 %{FORGE_PLUGINS_LIB_DIR}/ckeditor
 %{FORGE_CONF_DIR}/httpd.conf.d/plugin-ckeditor.inc
+%{FORGE_CONF_DIR}/config.ini.d/ckeditor.ini
 
 %files plugin-cvssyncmail
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/cvssyncmail.ini
@@ -937,7 +945,7 @@ fi
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/cvstracker.ini
 %{FORGE_PLUGINS_LIB_DIR}/cvstracker
 %{FORGE_DIR}/www/plugins/cvstracker
-%attr(-,%{httpduser},%{httpdgroup}) %{FORGE_PLUGINS_CONF_DIR}/cvstracker
+# %attr(-,%{httpduser},%{httpdgroup}) %{FORGE_PLUGINS_CONF_DIR}/cvstracker
 
 %files plugin-compactpreview
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/compactpreview.ini
@@ -994,6 +1002,7 @@ fi
 %{FORGE_DATA_PATH}/plugins/mediawiki
 /usr/share/mediawiki/skins/FusionForge.php
 /usr/share/mediawiki/skins/fusionforge
+%config(noreplace) %{FORGE_PLUGINS_CONF_DIR}/mediawiki/
 
 %files plugin-moinmoin
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/moinmoin.ini
@@ -1004,6 +1013,7 @@ fi
 %files plugin-message
 %{FORGE_PLUGINS_LIB_DIR}/message
 %{FORGE_DIR}/www/plugins/message
+%{FORGE_CONF_DIR}/config.ini.d/message.ini
 
 %files plugin-online_help
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/online_help.ini
@@ -1137,7 +1147,14 @@ fi
 %{FORGE_PLUGINS_LIB_DIR}/webanalytics
 %{FORGE_DIR}/www/plugins/webanalytics
 
+%files plugin-sysauthldap
+%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/sysauthldap.ini
+%{FORGE_PLUGINS_LIB_DIR}/sysauthldap
+
 %changelog
+* Mon Aug 04 2014 - Roland Mas <lolando@debian.org> - 5.3.1-1
+- Adapted for 5.3
+
 * Thu Jun 07 2012 - Alain Peyrat <aljeux@free.fr> - 5.1.90-1
 - Adapted for 5.2 with new install scripts.
 
@@ -1151,7 +1168,7 @@ fi
 - Adapted to changes to .ini configuration file.
 - Lots of new plugins added.
 
-* Tue May 13 2010 - Bond Masuda <bond.masuda@JLBond.com> - 4.8.3-2
+* Thu May 13 2010 - Bond Masuda <bond.masuda@JLBond.com> - 4.8.3-2
 - fixed plugin symlinks and plugin directory permissions
 - patched mediawiki, webcalendar plugins
 - patch to fix various references to global variables
