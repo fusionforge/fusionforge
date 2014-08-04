@@ -33,7 +33,7 @@ class Widget_ProjectLatestFileReleases extends Widget {
 		$request =& HTTPRequest::instance();
 		$pm = ProjectManager::instance();
 		$project = $pm->getProject($request->get('group_id'));
-		if ($project && $this->canBeUsedByProject($project)) {
+		if ($project && $this->canBeUsedByProject($project) && forge_check_perm('frs', $project->getID(), 'read')) {
 			$this->content['title'] = _('Latest File Releases');
 		}
 	}
@@ -52,7 +52,7 @@ class Widget_ProjectLatestFileReleases extends Widget {
 		$frspf = new FRSPackageFactory($project);
 		$frsps = $frspf->getFRSs();
 		if (count($frsps) < 1) {
-			echo $HTML->warning_msg(_('This project has not released any files'));
+			echo $HTML->warning_msg(_('This project has not released any files.'));
 		} else {
 			use_javascript('/frs/scripts/FRSController.js');
 			echo $HTML->getJavascripts();
@@ -76,41 +76,43 @@ class Widget_ProjectLatestFileReleases extends Widget {
 			echo $HTML->listTableTop($titleArr, false, 'sortable_widget_frs_listpackage full', 'sortable');
 			foreach ($frsps as $key => $frsp) {
 				$frsr = $frsp->getNewestRelease();
-				$rel_date = $frsr->getReleaseDate();
-				$package_name = $frsp->getName();
-				$package_release = $frsr->getName();
-				$cells = array();
-				$cells[] = array(html_e('strong', array(), $package_name), 'class' => 'align-left');
-				$cells[][] = $package_release;
-				$cells[][] = date(_('Y-m-d'), $rel_date);
+				if ($frsr !== false) {
+					$rel_date = $frsr->getReleaseDate();
+					$package_name = $frsp->getName();
+					$package_release = $frsr->getName();
+					$cells = array();
+					$cells[] = array(html_e('strong', array(), $package_name), 'class' => 'align-left');
+					$cells[][] = $package_release;
+					$cells[][] = date(_('Y-m-d'), $rel_date);
 
-				// -> notes
-				// accessibility: image is a link, so alt must be unique in page => construct a unique alt
-				$tmp_alt = $package_name . " - " . _('Release Notes');
-				$link = '/frs/?group_id=' . $group_id . '&view=shownotes&release_id='.$frsr->getID();
-				$link_content = $HTML->getReleaseNotesPic($tmp_alt, $tmp_alt);
-				$cells[] = array(util_make_link($link, $link_content), 'class' => 'align-center');
-				// -> monitor
-				if (session_loggedin()) {
-					$url = '/frs/?group_id='.$group_id.'&package_id='.$frsp->getID().'&action=monitor';
-					if($frsp->isMonitoring()) {
-						$title = $package_name . " - " . _('Stop monitoring this package');
-						$url .= '&status=0';
-						$image = $HTML->getStopMonitoringPic($title);
-					} else {
-						$title = $package_name . " - " . _('Start monitoring this package');
-						$url .= '&status=1';
-						$image = $HTML->getStartMonitoringPic($title);
+					// -> notes
+					// accessibility: image is a link, so alt must be unique in page => construct a unique alt
+					$tmp_alt = $package_name . " - " . _('Release Notes');
+					$link = '/frs/?group_id=' . $group_id . '&view=shownotes&release_id='.$frsr->getID();
+					$link_content = $HTML->getReleaseNotesPic($tmp_alt, $tmp_alt);
+					$cells[] = array(util_make_link($link, $link_content), 'class' => 'align-center');
+					// -> monitor
+					if (session_loggedin()) {
+						$url = '/frs/?group_id='.$group_id.'&package_id='.$frsp->getID().'&action=monitor';
+						if($frsp->isMonitoring()) {
+							$title = $package_name . " - " . _('Stop monitoring this package');
+							$url .= '&status=0';
+							$image = $HTML->getStopMonitoringPic($title);
+						} else {
+							$title = $package_name . " - " . _('Start monitoring this package');
+							$url .= '&status=1';
+							$image = $HTML->getStartMonitoringPic($title);
+						}
+						$cells[] = array(util_make_link('#', $image, array('id' => 'pkgid'.$frsp->getID(), 'onclick' => 'javascript:controllerFRS.doAction({action:\''.$url.'\', id:\'pkgid'.$frsp->getID().'\'})'), true), 'class' => 'align-center');
 					}
-					$cells[] = array(util_make_link('#', $image, array('id' => 'pkgid'.$frsp->getID(), 'onclick' => 'javascript:controllerFRS.doAction({action:\''.$url.'\', id:\'pkgid'.$frsp->getID().'\'})'), true), 'class' => 'align-center');
+					// -> download
+					$tmp_alt = $package_name." ".$package_release." - ". _('Download');
+					$link_content = $HTML->getDownloadPic($tmp_alt, $tmp_alt);
+					$t_link_anchor = $HTML->toSlug($package_name)."-".$HTML->toSlug($package_release)."-title-content";
+					$link = '/frs/?group_id=' . $group_id . '&amp;release_id='.$frsr->getID()."#".$t_link_anchor;
+					$cells[] = array(util_make_link ($link, $link_content), 'class' => 'align-center');
+					echo $HTML->multiTableRow(array(), $cells);
 				}
-				// -> download
-				$tmp_alt = $package_name." ".$package_release." - ". _('Download');
-				$link_content = $HTML->getDownloadPic($tmp_alt, $tmp_alt);
-				$t_link_anchor = $HTML->toSlug($package_name)."-".$HTML->toSlug($package_release)."-title-content";
-				$link = '/frs/?group_id=' . $group_id . '&amp;release_id='.$frsr->getID()."#".$t_link_anchor;
-				$cells[] = array(util_make_link ($link, $link_content), 'class' => 'align-center');
-				echo $HTML->multiTableRow(array(), $cells);
 			}
 			echo $HTML->listTableBottom();
 		}

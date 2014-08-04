@@ -1,4 +1,4 @@
-Date: Mon,  8 Jul 2013 17:59:07 +0000
+Date: Tue, 29 Jul 2014 10:42:12 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.5.0)
 Content-Type: application/x-phpwiki;
   pagename=PhpWikiBeheer;
@@ -24,7 +24,7 @@ or call the available ~WikiAdmin actions directly:
 
 == User Management
 
-PhpWiki:EmailVerification is currently non-strict, leaving some possible holes, which can be
+EmailVerification is currently non-strict, leaving some possible holes, which can be
 administrated below.
 
   This button will show a list of all users with registered emails and buttons to set the

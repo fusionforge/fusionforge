@@ -23,42 +23,34 @@
 
 /* please do not add require here : use www/frs/index.php to add require */
 /* global variables used */
-global $group_id; // id of group
 global $g; // group object
 global $HTML;
 
 $sysdebug_enable = false;
 $result = array();
 
-if (!forge_check_perm('frs', $group_id, 'write')) {
-	$result['html'] = $HTML->warning_msg(_('FRS Action Denied.'));
-	echo json_encode($result);
-	exit;
-}
-
 $package_id = getIntFromRequest('package_id');
-$result['html'] = $HTML->error_msg(_('Missing package_id'));
 
-if ($package_id) {
+if (!$package_id) {
+	$result['html'] = $HTML->warning_msg(_('Missing package_id'));
+} elseif (!forge_check_perm('frs', $package_id, 'admin')) {
+	$result['html'] = $HTML->error_msg(_('FRS Action Denied.'));
+} else {
 	$frsp = new FRSPackage($g, $package_id);
 	if (!$frsp || !is_object($frsp)) {
 		$result['html'] = $HTML->error_msg(_('Error Getting FRSPackage'));
-		echo json_encode($result);
-		exit;
 	} elseif ($frsp->isError()) {
 		$result['html'] = $HTML->error_msg($frsp->getErrorMessage());
-		echo json_encode($result);
-		exit;
+	} else {
+		$sure = getIntFromRequest('sure');
+		$really_sure = getIntFromRequest('really_sure');
+		if (!$frsp->delete($sure, $really_sure)) {
+			$result['html'] = $HTML->error_msg($frsp->getErrorMessage());
+		} else {
+			$result['html'] = $HTML->feedback(_('Package successfully deleted.'));
+			$result['deletedom'] = 'pkgid'.$package_id;
+		}
 	}
-	$sure = getIntFromRequest('sure');
-	$really_sure = getIntFromRequest('really_sure');
-	if (!$frsp->delete($sure, $really_sure)) {
-		$result['html'] = $HTML->error_msg($frsp->getErrorMessage());
-		echo json_encode($result);
-		exit;
-	}
-	$result['html'] = $HTML->feedback(_('Package successfully deleted'));
-	$result['deletedom'] = 'pkgid'.$package_id;
 }
 
 echo json_encode($result);

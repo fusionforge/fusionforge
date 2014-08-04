@@ -31,7 +31,7 @@ global $warning_msg; // warning message
 global $feedback; // feedback message
 global $error_msg; // error message
 
-if (!forge_check_perm('frs', $group_id, 'write')) {
+if (!forge_check_perm('frs_admin', $group_id, 'admin')) {
 	$warning_msg = _('FRS Action Denied.');
 	session_redirect('/frs/?group_id='.$group_id);
 }
@@ -46,7 +46,7 @@ if ($package_name) {
 	} elseif ($frsp->isError()) {
 		exit_error($frsp->getErrorMessage(), 'frs');
 	}
-	if (!$frsp->create($package_name, $is_public)) {
+	if (!$frsp->create($package_name)) {
 		$error_msg = $frsp->getErrorMessage();
 	} else {
 		$feedback .= _('Added Package');

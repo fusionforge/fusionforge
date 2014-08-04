@@ -47,10 +47,13 @@ chomp $config_path;
 my $source_path = `forge_get_config source_path`;
 chomp $source_path;
 
+my $log_path = `forge_get_config log_path`;
+chomp $log_path;
+
 # Set default path (required by taint mode)
 $ENV{'PATH'} = '/usr/bin:/bin';
 # Hook log file
-my $logfile = "/var/log/gforge/forumml/hook.log";
+my $logfile = "$log_path/forumml/hook.log";
 
 # Redirect outputs
 open STDOUT, ">>", $logfile or die "cannot append to '$logfile': $!\n";

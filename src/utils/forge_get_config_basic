@@ -34,7 +34,7 @@ curpath=`cd $pathfromarvg0;pwd`
 variant=$1
 
 getcorevar () {
-    grep ^$1 $curpath/../etc/config.ini-$variant ../etc/config.ini.d/defaults.ini| cut -d= -f2 | xargs echo
+    grep ^$1 $curpath/../etc/config.ini-$variant $curpath/../etc/config.ini.d/defaults.ini| cut -d= -f2 | xargs echo
 }
 
 res=$(getcorevar $2)

@@ -19,20 +19,19 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once dirname(dirname(__FILE__)).'/Testing/SeleniumGforge.php';
+require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
 
 class CreateFRS extends FForge_SeleniumTestCase
 {
 	function testCreateFRSPackage()
 	{
 		$this->init();
-		$this->gotoProject('ProjectA');
 		$this->clickAndWait("link=Files");
 		$this->assertFalse($this->isTextPresent("Permission denied."));
 		$this->assertTrue($this->isTextPresent("Administration"));
 		$this->clickAndWait("link=Administration");
 		$this->type("//input[@name='package_name']", "My Package Name");
-		$this->clickAndWait("//input[@name='submit' and @value='Create This Package']");
+		$this->clickAndWait("//input[@name='submit' and @value='Create']");
 		$this->assertTextPresent("Added Package");
 	}
 }

@@ -11,7 +11,7 @@ case "$1" in
 		chown -R gforge:gforge $prefix/$i
 	    fi
 	done
-	chown gforge /etc/fusionforge/config.ini.d/debian-install-secrets.ini
+	chown gforge $(forge_get_config config_path)/config.ini.d/debian-install-secrets.ini
 	if ! [ -e $dataprefix/moinmoin.log ] ; then
 	    touch $dataprefix/moinmoin.log
 	    chown gforge $dataprefix/moinmoin.log

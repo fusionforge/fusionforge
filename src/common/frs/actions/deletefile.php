@@ -23,40 +23,29 @@
 
 /* please do not add require here : use www/frs/index.php to add require */
 /* global variables used */
-global $group_id; // id of group
-global $g; // group object
 global $HTML;
 
 $sysdebug_enable = false;
 $result = array();
 
-if (!forge_check_perm('frs', $group_id, 'write')) {
-	$result['html'] = $HTML->warning_msg(_('FRS Action Denied.'));
-	echo json_encode($result);
-	exit;
-}
-
+$package_id = getIntFromRequest('package_id');
 $file_id = getIntFromRequest('file_id');
-$result['html'] = $HTML->error_msg(_('Missing file_id'));
-
-if ($file_id) {
+if (!forge_check_perm('frs', $package_id, 'file')) {
+	$result['html'] = $HTML->error_msg(_('FRS Action Denied.'));
+} elseif ($file_id) {
 	$frsf = frsfile_get_object($file_id);
-		if (!$frsf || !is_object($frsf)) {
+	if (!$frsf || !is_object($frsf)) {
 		$result['html'] = $HTML->error_msg(_('Error Getting FRSPackage'));
-		echo json_encode($result);
-		exit;
 	} elseif ($frsf->isError()) {
 		$result['html'] = $HTML->error_msg($frsf->getErrorMessage());
-		echo json_encode($result);
-		exit;
-	}
-	if (!$frsf->delete()) {
+	} elseif (!$frsf->delete()) {
 		$result['html'] = $HTML->error_msg($frsf->getErrorMessage());
-		echo json_encode($result);
-		exit;
+	} else {
+		$result['html'] = $HTML->feedback(_('File successfully deleted.'));
+		$result['deletedom'] = 'fileid'.$file_id;
 	}
-	$result['html'] = $HTML->feedback(_('File successfully deleted.'));
-	$result['deletedom'] = 'fileid'.$file_id;
+} else {
+	$result['html'] = $HTML->error_msg(_('Missing file_id'));
 }
 
 echo json_encode($result);

@@ -28,12 +28,7 @@ global $group_id; // id of group
 global $g; // group object
 global $warning_msg; // warning message
 
-// check the permissions and see if this user is a release manager.
-// If so, he can create a release
-session_require_perm('frs', $group_id, 'write');
-
 $package_id = getIntFromRequest('package_id');
-
 $frspf = new FRSPackageFactory($g);
 $packages = $frspf->getFRSs();
 if (!count($packages)) {
@@ -50,7 +45,7 @@ $packageIds = array();
 $packageNames = array();
 foreach ($packages as $onepackage) {
 	$packageIds[] = $onepackage->getID();
-	$packageNames[] = $onepackage->getName();
+	$packageNames[] = html_entity_decode($onepackage->getName());
 }
 $cells[][] = html_build_select_box_from_arrays($packageIds, $packageNames, 'package_id', $package_id, false).'&nbsp;&nbsp;'.sprintf(_('Or %1$s create a new package %2$s'), '<a href="'.util_make_url ('/frs/?view=admin&group_id='.$group_id).'">', '</a>');
 echo $HTML->multiTableRow(array(), $cells);
@@ -64,7 +59,7 @@ $cells[][] = html_e('input', array('type' => 'text', 'name' => 'release_date', '
 $cells = array();
 $cells[][] = html_e('strong', array(), _('File Name')._(':'));
 $content = $HTML->information(sprintf(_('You can probably not upload files larger than about %.2f MiB in size.'), human_readable_bytes(util_get_maxuploadfilesize()))).
-		_('Upload a new file')._(': ').hmtl_e('input', array('type' => 'file', 'name' => 'userfile', 'size' => 30));
+		_('Upload a new file')._(': ').html_e('input', array('type' => 'file', 'name' => 'userfile', 'size' => 30));
 if (forge_get_config('use_ftp_uploads')) {
 	include ($gfcommon.'frs/views/useftpuploads.php');
 }

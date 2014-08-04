@@ -4,8 +4,8 @@
  *
  * Copyright 2002, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
- * Copyright 2012-2014, Franck Villaume - TrivialDev
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2012-2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -38,16 +38,15 @@ function &frsfile_get_object($file_id, $data=false) {
 		if ($data) {
 					//the db result handle was passed in
 		} else {
-			$res = db_query_params ('SELECT * FROM frs_file_vw WHERE file_id=$1',
-						array ($file_id)) ;
-			if (db_numrows($res)<1 ) {
+			$res = db_query_params('SELECT * FROM frs_file_vw WHERE file_id=$1', array($file_id));
+			if (db_numrows($res) < 1) {
 				$FRSFILE_OBJ['_'.$file_id.'_']=false;
 				return false;
 			}
 			$data = db_fetch_array($res);
 		}
 		$FRSRelease = frsrelease_get_object($data['release_id']);
-		$FRSFILE_OBJ['_'.$file_id.'_']= new FRSFile($FRSRelease,$data['file_id'],$data);
+		$FRSFILE_OBJ['_'.$file_id.'_']= new FRSFile($FRSRelease,$data['file_id'], $data);
 	}
 	return $FRSFILE_OBJ['_'.$file_id.'_'];
 }
@@ -136,7 +135,7 @@ class FRSFile extends Error {
 			return false;
 		}
 
-		if (!forge_check_perm ('frs', $this->FRSRelease->FRSPackage->Group->getID(), 'write')) {
+		if (!forge_check_perm('frs', $this->FRSRelease->FRSPackage->getID(), 'file')) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -144,11 +143,11 @@ class FRSFile extends Error {
 		//
 		//	Filename must be unique in this release
 		//
-		$resfile = db_query_params ('SELECT filename FROM frs_file WHERE filename=$1 AND release_id=$2',
-					    array ($name,
-						   $this->FRSRelease->getId())) ;
+		$resfile = db_query_params('SELECT filename FROM frs_file WHERE filename=$1 AND release_id=$2',
+					    array($name,
+						  $this->FRSRelease->getId()));
 		if (!$resfile || db_numrows($resfile) > 0) {
-			$this->setError(_('That filename already exists in this project space').' '.db_error());
+			$this->setError(_('That filename already exists in this release').' '.db_error());
 			return false;
 		}
 
@@ -207,7 +206,7 @@ class FRSFile extends Error {
 			db_rollback();
 			return false;
 		}
-		$this->file_id = db_insertid($result,'frs_file','file_id');
+		$this->file_id = db_insertid($result, 'frs_file', 'file_id');
 		if (!$this->fetchData($this->file_id)) {
 			db_rollback();
 			return false;
@@ -343,7 +342,7 @@ class FRSFile extends Error {
 	 * @return	boolean	success.
 	 */
 	function delete() {
-		if (!forge_check_perm ('frs', $this->FRSRelease->FRSPackage->Group->getID(), 'write')) {
+		if (!forge_check_perm ('frs', $this->FRSRelease->FRSPackage->getID(), 'file')) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -353,18 +352,17 @@ class FRSFile extends Error {
 			$this->FRSRelease->FRSPackage->getFileName().'/'.
 			$this->FRSRelease->getFileName().'/'.
 			$this->getName();
-			if (file_exists($file))
-				unlink($file);
-		$result = db_query_params('DELETE FROM frs_file WHERE file_id=$1',
-					   array($this->getID()));
+
+		if (file_exists($file))
+			unlink($file);
+
+		$result = db_query_params('DELETE FROM frs_file WHERE file_id=$1', array($this->getID()));
 		if (!$result || db_affected_rows($result) < 1) {
 			$this->setError("frsDeleteFile()::2 ".db_error());
 			return false;
 		} else {
-			db_query_params('DELETE FROM frs_dlstats_file WHERE file_id=$1',
-						array ($this->getID()));
-			db_query_params('DELETE FROM frs_dlstats_filetotal_agg WHERE file_id=$1',
-						array ($this->getID()));
+			db_query_params('DELETE FROM frs_dlstats_file WHERE file_id=$1', array($this->getID()));
+			db_query_params('DELETE FROM frs_dlstats_filetotal_agg WHERE file_id=$1', array($this->getID()));
 			$this->FRSRelease->FRSPackage->createNewestReleaseFilesAsZip();
 			return true;
 		}
@@ -380,13 +378,13 @@ class FRSFile extends Error {
 	 * @return	boolean		success.
 	 */
 	function update($type_id,$processor_id,$release_time,$release_id=false) {
-		if (!forge_check_perm ('frs', $this->FRSRelease->FRSPackage->Group->getID(), 'write')) {
+		if (!forge_check_perm('frs', $this->FRSRelease->FRSPackage->getID(), 'file')) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
 
 		// Sanity checks
-		if ( $release_id ) {
+		if ($release_id) {
 			// Check that the new FRSRelease id exists
 			if ($FRSRelease=frsrelease_get_object($release_id)) {
 				// Check that the new FRSRelease id belongs to the group of this FRSFile
@@ -413,7 +411,7 @@ class FRSFile extends Error {
 						$this->getID()));
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError(sprintf(_('Error On Update: %s'), db_error()));
+			$this->setError(_('Error On Update').(': ').db_error());
 			db_rollback();
 			return false;
 		}

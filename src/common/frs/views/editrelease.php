@@ -36,16 +36,16 @@ if (!$package_id || !$release_id) {
 	session_redirect('/frs/?view=admin&group_id='.$group_id);
 }
 
-session_require_perm('frs', $group_id, 'write');
+session_require_perm('frs', $package_id, 'file');
 
 //
 //  Get the package
 //
 $frsp = new FRSPackage($g, $package_id);
 if (!$frsp || !is_object($frsp)) {
-	exit_error(_('Could Not Get FRS Package'),'frs');
+	exit_error(_('Could Not Get FRS Package'), 'frs');
 } elseif ($frsp->isError()) {
-	exit_error($frsp->getErrorMessage(),'frs');
+	exit_error($frsp->getErrorMessage(), 'frs');
 }
 
 //
@@ -53,9 +53,9 @@ if (!$frsp || !is_object($frsp)) {
 //
 $frsr = new FRSRelease($frsp,$release_id);
 if (!$frsr || !is_object($frsr)) {
-	exit_error(_('Could Not Get FRS Release'),'frs');
+	exit_error(_('Could Not Get FRS Release'), 'frs');
 } elseif ($frsr->isError()) {
-	exit_error($frsr->getErrorMessage(),'frs');
+	exit_error($frsr->getErrorMessage(), 'frs');
 }
 
 echo html_ao('script', array('type' => 'text/javascript'));
@@ -74,53 +74,54 @@ echo html_e('h2', array(), _('Edit Release for the package').' '.$frsp->getName(
 /*
  * Show the forms for each part
  */
-echo $HTML->openForm(array('enctype' => 'multipart/form-data', 'method' => 'post', 'action' => util_make_uri('/frs/?group_id='.$group_id.'&release_id='.$release_id.'&package_id='.$package_id.'&action=editrelease')));
-echo $HTML->listTableTop();
-$cells = array();
-$cells[][] = '<strong>'._('Release Date')._(':').'</strong>';
-$cells[][] = '<input type="text" name="release_date" value="'.date('Y-m-d H:i',$frsr->getReleaseDate()).'" size="16" maxlength="16" />';
-echo $HTML->multiTableRow(array(), $cells);
-$cells = array();
-$cells[][] = '<strong>'._('Release Name').utils_requiredField()._(':').'</strong>';
-$cells[][] = '<input type="text" name="release_name" value="'.$frsr->getName().'" required="required" pattern=".{3,}" title="'._('At least 3 characters').'" />';
-echo $HTML->multiTableRow(array(), $cells);
-$cells = array();
-$cells[][] = '<strong>'._('Status')._(':').'</strong>';
-$cells[][] = frs_show_status_popup('status_id',$frsr->getStatus());
-echo $HTML->multiTableRow(array(), $cells);
-$cells = array();
-$cells[] = array(_('Edit the Release Notes or Change Log for this release of this package. These changes will apply to all files attached to this release.').'<br/>'.
-		_('You can either upload the release notes and change log individually, or paste them in together below.'), 'colspan' => 2);
-echo $HTML->multiTableRow(array(), $cells);
-$cells = array();
-$cells[] = array('<strong>'._('Upload Release Notes')._(':').'</strong>'.
-		'('._('max upload size')._(': ').human_readable_bytes(util_get_maxuploadfilesize()).')', 'colspan' => 2);
-echo $HTML->multiTableRow(array(), $cells);
-$cells = array();
-$cells[] = array('<input type="file" name="uploaded_notes" size="30" />', 'colspan' => 2);
-echo $HTML->multiTableRow(array(), $cells);
-$cells = array();
-$cells[] = array('<strong>'._('Upload Change Log')._(':').'</strong>'.
-		'('._('max upload size')._(': ').human_readable_bytes(util_get_maxuploadfilesize()).')', 'colspan' => 2);
-echo $HTML->multiTableRow(array(), $cells);
-$cells = array();
-$cells[] = array('<input type="file" name="uploaded_changes" />', 'colspan' => 2);
-echo $HTML->multiTableRow(array(), $cells);
-$cells = array();
-$cells[] = array('<strong>'._('Paste The Notes In')._(':').'</strong><br/>'.
-		'<textarea name="release_notes" rows="10" cols="60">'.$frsr->getNotes().'</textarea>', 'colspan' => 2);
-echo $HTML->multiTableRow(array(), $cells);
-$cells = array();
-$cells[] = array('<strong>'._('Paste The Change Log In')._(':').'</strong><br/>'.
-		'<textarea name="release_changes" rows="10" cols="60">'.$frsr->getChanges().'</textarea>', 'colspan' => 2);
-echo $HTML->multiTableRow(array(), $cells);
-$cells = array();
-$cells[] = array('<input type="checkbox" name="preformatted" value="1" '.(($frsr->getPreformatted())?'checked="checked"':'').' />'._('Preserve my pre-formatted text').
-		'<p><input type="submit" name="submit" value="'._('Submit/Refresh').'" /></p>', 'colspan' => 2);
-echo $HTML->multiTableRow(array(), $cells);
-echo $HTML->listTableBottom();
-echo $HTML->closeForm();
-
+if (forge_check_perm('frs', $package_id, 'admin')) {
+	echo $HTML->openForm(array('enctype' => 'multipart/form-data', 'method' => 'post', 'action' => util_make_uri('/frs/?group_id='.$group_id.'&release_id='.$release_id.'&package_id='.$package_id.'&action=editrelease')));
+	echo $HTML->listTableTop();
+	$cells = array();
+	$cells[][] = '<strong>'._('Release Date')._(':').'</strong>';
+	$cells[][] = '<input type="text" name="release_date" value="'.date('Y-m-d H:i',$frsr->getReleaseDate()).'" size="16" maxlength="16" />';
+	echo $HTML->multiTableRow(array(), $cells);
+	$cells = array();
+	$cells[][] = '<strong>'._('Release Name').utils_requiredField()._(':').'</strong>';
+	$cells[][] = '<input type="text" name="release_name" value="'.$frsr->getName().'" required="required" pattern=".{3,}" title="'._('At least 3 characters').'" />';
+	echo $HTML->multiTableRow(array(), $cells);
+	$cells = array();
+	$cells[][] = '<strong>'._('Status')._(':').'</strong>';
+	$cells[][] = frs_show_status_popup('status_id',$frsr->getStatus());
+	echo $HTML->multiTableRow(array(), $cells);
+	$cells = array();
+	$cells[] = array(_('Edit the Release Notes or Change Log for this release of this package. These changes will apply to all files attached to this release.').'<br/>'.
+			_('You can either upload the release notes and change log individually, or paste them in together below.'), 'colspan' => 2);
+	echo $HTML->multiTableRow(array(), $cells);
+	$cells = array();
+	$cells[] = array('<strong>'._('Upload Release Notes')._(':').'</strong>'.
+			'('._('max upload size')._(': ').human_readable_bytes(util_get_maxuploadfilesize()).')', 'colspan' => 2);
+	echo $HTML->multiTableRow(array(), $cells);
+	$cells = array();
+	$cells[] = array('<input type="file" name="uploaded_notes" size="30" />', 'colspan' => 2);
+	echo $HTML->multiTableRow(array(), $cells);
+	$cells = array();
+	$cells[] = array('<strong>'._('Upload Change Log')._(':').'</strong>'.
+			'('._('max upload size')._(': ').human_readable_bytes(util_get_maxuploadfilesize()).')', 'colspan' => 2);
+	echo $HTML->multiTableRow(array(), $cells);
+	$cells = array();
+	$cells[] = array('<input type="file" name="uploaded_changes" />', 'colspan' => 2);
+	echo $HTML->multiTableRow(array(), $cells);
+	$cells = array();
+	$cells[] = array('<strong>'._('Paste The Notes In')._(':').'</strong><br/>'.
+			'<textarea name="release_notes" rows="10" cols="60">'.$frsr->getNotes().'</textarea>', 'colspan' => 2);
+	echo $HTML->multiTableRow(array(), $cells);
+	$cells = array();
+	$cells[] = array('<strong>'._('Paste The Change Log In')._(':').'</strong><br/>'.
+			'<textarea name="release_changes" rows="10" cols="60">'.$frsr->getChanges().'</textarea>', 'colspan' => 2);
+	echo $HTML->multiTableRow(array(), $cells);
+	$cells = array();
+	$cells[] = array('<input type="checkbox" name="preformatted" value="1" '.(($frsr->getPreformatted())?'checked="checked"':'').' />'._('Preserve my pre-formatted text').
+			'<p><input type="submit" name="submit" value="'._('Submit/Refresh').'" /></p>', 'colspan' => 2);
+	echo $HTML->multiTableRow(array(), $cells);
+	echo $HTML->listTableBottom();
+	echo $HTML->closeForm();
+}
 echo html_e('hr');
 echo html_e('h2', array(), _('Add Files To This Release'));
 echo html_e('p', array(), _('Now, choose a file to upload into the system.'));
@@ -157,8 +158,8 @@ echo $HTML->closeForm();
 // Get a list of files associated with this release
 $files = $frsr->getFiles();
 if(count($files)) {
-	echo '<hr />';
-	echo '<h2>'._('Edit Files In This Release').'</h2>';
+	echo html_e('hr');
+	echo html_e('h2', array(), _('Edit Files In This Release'));
 	print(_('Once you have added files to this release you <strong>must</strong> update each of these files with the correct information or they will not appear on your download summary page.')."\n");
 	$title_arr[] = _('File Name');
 	$title_arr[] = _('Processor');
@@ -189,4 +190,4 @@ if(count($files)) {
 }
 
 echo $HTML->jQueryUIconfirmBox('confirmbox1', _('Delete file'), _('You are about to delete permanently this file. Are you sure? This action is definitive.'));
-echo '<p>' . sprintf(ngettext('There is %s user monitoring this package.', 'There are %s users monitoring this package.', $frsp->getMonitorCount()), $frsp->getMonitorCount()) . '</p>';
+echo html_e('p', array(), sprintf(ngettext('There is %s user monitoring this package.', 'There are %s users monitoring this package.', $frsp->getMonitorCount()), $frsp->getMonitorCount()));

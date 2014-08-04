@@ -1,4 +1,4 @@
-Date: Mon,  8 Jul 2013 17:59:05 +0000
+Date: Tue, 29 Jul 2014 10:42:12 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.5.0)
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FInterWiki;
@@ -39,7 +39,7 @@ pourtant cette page n'apparaîtra pas dans la liste des rétroliens de
 CategoryCategory.
 
 Le terme "~InterWiki" se réfère aussi à un concept plus large. Voir
-[[PhpWiki:InterWikiSearch]] pour plus de liens.
+[[InterWikiSearch]] pour plus de liens.
 
 <noinclude>
 ----

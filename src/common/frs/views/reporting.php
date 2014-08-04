@@ -53,7 +53,7 @@ $package_id = getIntFromRequest('package_id');
 $start = getIntFromRequest('start');
 $end = getIntFromRequest('end');
 
-session_require_perm('frs', $group_id, 'write');
+session_require_perm('frs_admin', $group_id, 'read');
 
 $report = new Report();
 if ($report->isError()) {

@@ -117,10 +117,17 @@ class Upgrade
     {
         echo "<h2>", sprintf(_("Check for necessary %s updates"), _("ActionPage")), "</h2>\n";
         // 1.3.13 before we pull in all missing pages, we rename existing ones
-        $this->_rename_page_helper(_("_AuthInfo"), _("DebugAuthInfo"));
+        $this->_rename_page_helper("_AuthInfo", "DebugAuthInfo");
+        $this->_rename_page_helper("Help/_AuthInfoPlugin", "Help/DebugAuthInfoPlugin");
+        $this->_rename_page_helper("_GroupInfo", "DebugGroupInfo");
+        $this->_rename_page_helper("Help/_GroupInfoPlugin", "Help/DebugGroupInfoPlugin");
+        $this->_rename_page_helper("_BackendInfo", "DebugBackendInfo");
+        $this->_rename_page_helper("Help/_BackendInfoPlugin", "Help/DebugBackendInfoPlugin");
+        $this->_rename_page_helper("Help/_WikiTranslationPlugin", "Help/WikiTranslationPlugin");
+        $this->_rename_page_helper("Help/Advice Mediawiki users", "Help/Advice for Mediawiki users");
         // this is in some templates. so we keep the old name
         //$this->_rename_page_helper($this->dbi, _("DebugInfo"), _("DebugBackendInfo"));
-        $this->_rename_page_helper(_("_GroupInfo"), _("GroupAuthInfo")); //never officially existed
+        $this->_rename_page_helper("_GroupInfo", "GroupAuthInfo"); //never officially existed
         $this->_rename_page_helper("InterWikiKarte", "InterWikiListe"); // german only
 
         $path = FindFile('pgsrc');
@@ -702,7 +709,7 @@ CREATE TABLE $log_tbl (
      * A wrong DBADMIN user will not be able to connect
      * @see _is_false_error, ErrorManager
      */
-    private function _dbpermission_filter($err)
+    public function _dbpermission_filter($err)
     {
         if ($err->isWarning()) {
             global $ErrorManager;

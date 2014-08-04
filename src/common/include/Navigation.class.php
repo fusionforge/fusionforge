@@ -568,8 +568,8 @@ class Navigation extends Error {
 				$menu['titles'][] = _('Files');
 				$menu['tooltips'][] = _('All published files organized per version.');
 				$menu['urls'][] = util_make_uri('/frs/?group_id=' . $group_id);
-				if (forge_check_perm ('frs', $group_id, 'write')) {
-					$menu['adminurls'][] = util_make_uri('/frs/admin/?group_id='.$group_id);
+				if (forge_check_perm ('frs_admin', $group_id, 'admin')) {
+					$menu['adminurls'][] = util_make_uri('/frs/?view=admin&group_id='.$group_id);
 				} else {
 					$menu['adminurls'][] = false;
 				}
