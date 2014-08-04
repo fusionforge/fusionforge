@@ -30,12 +30,12 @@
 %define FORGE_PLUGINS_CONF_DIR        %{FORGE_CONF_DIR}/plugins
 
 # If that works, then a better way would be the following:
-# %define FORGE_DIR       %(utils/forge_get_config_basic fhsrh source_path)
-# %define FORGE_CONF_DIR  %(utils/forge_get_config_basic fhsrh config_path)
+# %define FORGE_DIR       %(src/utils/forge_get_config_basic fhsrh source_path)
+# %define FORGE_CONF_DIR  %(src/utils/forge_get_config_basic fhsrh config_path)
 # %define FORGE_LANG_DIR  %{_datadir}/locale
-# %define FORGE_DATA_PATH   %(utils/forge_get_config_basic fhsrh data_path)
-# %define FORGE_CHROOT_PATH   %(utils/forge_get_config_basic fhsrh chroot)
-# %define FORGE_PLUGINS_LIB_DIR         %(utils/forge_get_config_basic fhsrh plugins_path)
+# %define FORGE_DATA_PATH   %(src/utils/forge_get_config_basic fhsrh data_path)
+# %define FORGE_CHROOT_PATH   %(src/utils/forge_get_config_basic fhsrh chroot)
+# %define FORGE_PLUGINS_LIB_DIR         %(src/utils/forge_get_config_basic fhsrh plugins_path)
 # %define FORGE_PLUGINS_CONF_DIR        %{FORGE_CONF_DIR}/plugins
 
 %define reloadhttpd() /etc/init.d/httpd httpd reload >/dev/null 2>&1
