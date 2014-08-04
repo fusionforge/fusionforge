@@ -1,2 +1,2 @@
-plugins/scmarch/common/*             @PLUGIN_PATH@/scmarch/common/
-plugins/scmarch/etc/*.ini	     etc/@PACKAGE@/config.ini.d/
+plugins/scmarch/common/*             @PLUGINS_PATH@/scmarch/common/
+plugins/scmarch/etc/*.ini	     @CONFIG_PATH@/config.ini.d/

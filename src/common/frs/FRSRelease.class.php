@@ -5,6 +5,7 @@
  * Copyright 2002, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -38,8 +39,8 @@ function frsrelease_get_object($release_id, $data = array()) {
 		if ($data) {
 			//the db result handle was passed in
 		} else {
-			$res = db_query_params ('SELECT * FROM frs_release WHERE release_id=$1',
-						array ($release_id)) ;
+			$res = db_query_params('SELECT * FROM frs_release WHERE release_id=$1',
+						array ($release_id));
 			if (db_numrows($res)<1 ) {
 				$FRSRELEASE_OBJ['_'.$release_id.'_']=false;
 				return false;
@@ -116,9 +117,9 @@ class FRSRelease extends Error {
 	 * @param	int	$release_date	The unix date of the release.
 	 * @return	boolean	success.
 	 */
-	function create($name,$notes,$changes,$preformatted,$release_date=false) {
+	function create($name, $notes, $changes, $preformatted, $release_date = false) {
 		if (strlen($name) < 3) {
-			$this->setError(_('FRSPackage Name Must Be At Least 3 Characters'));
+			$this->setError(_('FRSRelease Name Must Be At Least 3 Characters'));
 			return false;
 		}
 
@@ -128,7 +129,7 @@ class FRSRelease extends Error {
 			$preformatted = 0;
 		}
 
-		if (!forge_check_perm ('frs', $this->FRSPackage->Group->getID(), 'write')) {
+		if (!forge_check_perm('frs', $this->FRSPackage->getID(), 'release')) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -145,15 +146,15 @@ class FRSRelease extends Error {
 		}
 
 		db_begin();
-		$result=db_query_params ('INSERT INTO frs_release(package_id,notes,changes,preformatted,name,release_date,released_by,status_id) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
-					 array ($this->FRSPackage->getId(),
+		$result=db_query_params('INSERT INTO frs_release(package_id,notes,changes,preformatted,name,release_date,released_by,status_id) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
+					array($this->FRSPackage->getId(),
 						htmlspecialchars($notes),
 						htmlspecialchars($changes),
 						$preformatted,
 						htmlspecialchars($name),
 						$release_date,
 						user_getid(),
-						1)) ;
+						1));
 		if (!$result) {
 			$this->setError(_('Error Adding Release: ').db_error());
 			db_rollback();
@@ -180,9 +181,8 @@ class FRSRelease extends Error {
 	 * @return	bool	success.
 	 */
 	function fetchData($release_id) {
-		$res = db_query_params ('SELECT * FROM frs_release WHERE release_id=$1 AND package_id=$2',
-					array ($release_id,
-						   $this->FRSPackage->getID())) ;
+		$res = db_query_params('SELECT * FROM frs_release WHERE release_id=$1 AND package_id=$2',
+					array($release_id, $this->FRSPackage->getID())) ;
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError(_('Invalid release_id'));
 			return false;
@@ -300,14 +300,14 @@ class FRSRelease extends Error {
 							. "\n\n"
 							. _('You can download it by following this link')._(':')
 							. "\n\n"
-							. util_make_url ("/frs/?group_id=". $this->FRSPackage->Group->getID() ."&release_id=". $this->getID())
+							. util_make_url('/frs/?group_id='.$this->FRSPackage->Group->getID().'&release_id='.$this->getID())
 							. "\n\n"
 							. sprintf(_('You receive this email because you requested to be notified when new '
 										. 'versions of this package were released. If you don\'t wish to be '
 										. 'notified in the future, please login to %s and click this link:'),
 										forge_get_config('forge_name'))
 							. "\n\n"
-							. util_make_url ("/frs/monitor.php?filemodule_id=".$this->FRSPackage->getID()."&group_id=".$this->FRSPackage->Group->getID()."&stop=1");
+							. util_make_url('/frs/monitor.php?filemodule_id='.$this->FRSPackage->getID()."&group_id=".$this->FRSPackage->Group->getID()."&stop=1");
 //		$text = util_line_wrap($text);
 		if (count($arr)) {
 			util_handle_message(array_unique($arr),$subject,$text);
@@ -322,7 +322,7 @@ class FRSRelease extends Error {
 	 * @return	FRSFile	new FRSFile object.
 	 */
 	protected function newFRSFile($file_id, $data) {
-		return new FRSFile($this,$file_id, $data);
+		return new FRSFile($this, $file_id, $data);
 	}
 
 	/**
@@ -332,11 +332,11 @@ class FRSRelease extends Error {
 	 */
 	function &getFiles() {
 		if (!is_array($this->release_files) || count($this->release_files) < 1) {
-			$this->release_files=array();
-			$res = db_query_params ('SELECT * FROM frs_file_vw WHERE release_id=$1',
-						array ($this->getID())) ;
+			$this->release_files = array();
+			$res = db_query_params('SELECT * FROM frs_file_vw WHERE release_id=$1',
+						array($this->getID())) ;
 			while ($arr = db_fetch_array($res)) {
-				$this->release_files[]=$this->newFRSFile($arr['file_id'],$arr);
+				$this->release_files[] = $this->newFRSFile($arr['file_id'], $arr);
 			}
 		}
 		return $this->release_files;
@@ -354,14 +354,14 @@ class FRSRelease extends Error {
 			$this->setMissingParamsError(_('Please tick all checkboxes.'));
 			return false;
 		}
-		if (!forge_check_perm ('frs', $this->FRSPackage->Group->getID(), 'write')) {
+		if (!forge_check_perm('frs', $this->FRSPackage->getID(), 'release')) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
 		$f =& $this->getFiles();
-		for ($i=0; $i<count($f); $i++) {
+		for ($i = 0; $i < count($f); $i++) {
 			if (!is_object($f[$i]) || $f[$i]->isError() || !$f[$i]->delete()) {
-				$this->setError('File Error: '.$f[$i]->getName().':'.$f[$i]->getErrorMessage());
+				$this->setError(_('File Error')._(': ').$f[$i]->getName().':'.$f[$i]->getErrorMessage());
 				return false;
 			}
 		}
@@ -372,7 +372,7 @@ class FRSRelease extends Error {
 
 		// double-check we're not trying to remove root dir
 		if (util_is_root_dir($dir)) {
-			$this->setError(_('Release delete error: trying to delete root dir'));
+			$this->setError(_('Release delete error')._(': ')._('trying to delete root dir'));
 			return false;
 		}
 		rmdir($dir);
@@ -400,7 +400,7 @@ class FRSRelease extends Error {
 			return false;
 		}
 
-		if (!forge_check_perm('frs', $this->FRSPackage->Group->getID(), 'write')) {
+		if (!forge_check_perm('frs', $this->FRSPackage->getID(), 'release')) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -416,14 +416,14 @@ class FRSRelease extends Error {
 						array ($this->FRSPackage->getID(),
 							   htmlspecialchars($name))) ;
 			if (db_numrows($res)) {
-				$this->setError(_('Error On Update: Name Already Exists'));
+				$this->setError(_('Error On Update')._(': ')._('Name Already Exists'));
 				return false;
 			}
 		}
 		db_begin();
 		$res = db_query_params ('UPDATE frs_release SET	name=$1,status_id=$2,notes=$3,
-			changes=$4,preformatted=$5,release_date=$6,released_by=$7
-			WHERE package_id=$8 AND release_id=$9',
+					changes=$4,preformatted=$5,release_date=$6,released_by=$7
+					WHERE package_id=$8 AND release_id=$9',
 					array (htmlspecialchars($name),
 						   $status,
 						   htmlspecialchars($notes),
@@ -435,7 +435,7 @@ class FRSRelease extends Error {
 						   $this->getID())) ;
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError(sprintf(_('Error On Update: %s'), db_error()));
+			$this->setError(_('Error On Update')._(': ').db_error());
 			db_rollback();
 			return false;
 		}

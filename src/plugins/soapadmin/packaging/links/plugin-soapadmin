@@ -1,1 +1,1 @@
-/usr/share/php/log4php @PLUGIN_PATH@/soapadmin/www/log4php
+/usr/share/php/log4php @PLUGINS_PATH@/soapadmin/www/log4php

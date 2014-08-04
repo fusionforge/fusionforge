@@ -1,5 +1,5 @@
-Date: Fri,  7 Dec 2012 19:05:42 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
+Date: Tue, 29 Jul 2014 10:42:12 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.5.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FPluginManagerPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -59,7 +59,7 @@ not provided with ~PhpWiki or PHP, such as
 * [[http://phpweather.sf.net | phpweather]] for the [[Help:PhpWeatherPlugin|PhpWeather]] plugin,
 * USE_DB_SESSION = true (default for the peardb, adodb or dba backends) for the [[Help:WhoIsOnlinePlugin|WhoIsOnline]] plugin,
 * --with-xml support (with expat or libxml2) for the [[Help:RssFeedPlugin|RssFeed]] plugin (~ProjectSummary, ~RecentReleases) and ~HtmlParser support (~ImportHtml, ~HtmlAreaEditing),
-* PHP Mail functionality (php.ini: SMTP + sendmail_from on Windows or sendmail_path) for email PhpWiki:PageChangeNotifications and ModeratedPage's,
+* PHP Mail functionality (php.ini: SMTP + sendmail_from on Windows or sendmail_path) for email PageChangeNotifications and ModeratedPage's,
 * a [[http://www.google.com/apis/ | Google license key]] for the [[Help:GooglePluginPlugin|GooglePlugin]] plugin,
 * optionally apache/mod_log_{my}sql for fast, external log analysis if ACCESS_LOG_SQL=1 (Referer, Abuse Prevention).
   See ##lib/Request.php## and http://www.outoforder.cc/projects/apache/mod_log_sql/

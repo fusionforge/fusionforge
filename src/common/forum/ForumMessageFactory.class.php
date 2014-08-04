@@ -31,14 +31,14 @@ class ForumMessageFactory extends Error {
 	/**
 	 * The Forum object.
 	 *
-	 * @var	 object  $Forum.
+	 * @var	object  $Forum.
 	 */
 	var $Forum;
 
 	/**
 	 * The forum_messages array.
 	 *
-	 * @var  array  forum_messages.
+	 * @var	array  forum_messages.
 	 */
 	var $forum_messages;
 	var $style;
@@ -47,10 +47,10 @@ class ForumMessageFactory extends Error {
 	var $fetched_rows;
 
 	/**
-	 *  Constructor.
+	 * Constructor.
 	 *
-	 *	@param	object	$Forum	The Forum object to which this ForumMessageFactory is associated.
-	 *	@return	boolean	success.
+	 * @param	object	$Forum	The Forum object to which this ForumMessageFactory is associated.
+	 * @return	boolean	success.
 	 */
 	function ForumMessageFactory(&$Forum) {
 		$this->Error();
@@ -63,17 +63,16 @@ class ForumMessageFactory extends Error {
 			return false;
 		}
 		$this->Forum =& $Forum;
-
 		return true;
 	}
 
 	/**
-	 *	setup - call this function before getThreaded/nested/etc to set up the user preferences.
+	 * setup - call this function before getThreaded/nested/etc to set up the user preferences.
 	 *
-	 *	@param	int    $offset   The number of rows to skip.
-	 *	@param	string $style    The style of forum, whether it's nested, ultimate, etc.
-	 *	@param	int	   $max_rows The maximum number of rows to return.
-	 *	@param	int	   $set      Whether to set these prefs into the database - use "custom".
+	 * @param	int    $offset   The number of rows to skip.
+	 * @param	string $style    The style of forum, whether it's nested, ultimate, etc.
+	 * @param	int	   $max_rows The maximum number of rows to return.
+	 * @param	int	   $set      Whether to set these prefs into the database - use "custom".
 	 */
 	function setup($offset,$style,$max_rows,$set) {
 //echo "<br />offset: $offset| style: $style|max_rows: $max_rows|set: $set+";
@@ -127,9 +126,9 @@ class ForumMessageFactory extends Error {
 	}
 
 	/**
-	 *	getStyle - the style of forum this is - nested/ultimate/etc.
+	 * getStyle - the style of forum this is - nested/ultimate/etc.
 	 *
-	 *	@return	string	The style.
+	 * @return	string	The style.
 	 */
 	function getStyle() {
 		return $this->style;
@@ -147,7 +146,7 @@ class ForumMessageFactory extends Error {
 			if ($row[$i]) {
 				$msg_arr["".$row[$i]->getParentID().""][] =& $row[$i];
 			}
-	  	}
+		}
 		return $msg_arr;
 	}
 
@@ -163,17 +162,17 @@ class ForumMessageFactory extends Error {
 		}
 		if (isset ($thread_id) && is_numeric($thread_id)) {
 			$result = db_query_params ('SELECT * FROM forum_user_vw
-		WHERE group_forum_id=$1
-                  AND thread_id=$2
-		ORDER BY most_recent_date DESC',
+							WHERE group_forum_id=$1
+							AND thread_id=$2
+							ORDER BY most_recent_date DESC',
 						   array ($this->Forum->getID(),
 							  $thread_id),
 						   $this->max_rows+25,
 						   $this->offset);
 		} else {
 			$result = db_query_params ('SELECT * FROM forum_user_vw
-		WHERE group_forum_id=$1
-		ORDER BY most_recent_date DESC',
+							WHERE group_forum_id=$1
+							ORDER BY most_recent_date DESC',
 						   array ($this->Forum->getID()),
 						   $this->max_rows+25,
 						   $this->offset);
@@ -194,7 +193,7 @@ class ForumMessageFactory extends Error {
 	}
 
 	/**
-	 *    getThreaded - Return an array of ForumMessage objects arranged for threaded forum views.
+	 * getThreaded - Return an array of ForumMessage objects arranged for threaded forum views.
 	 *
 	 * @param	bool	$thread_id
 	 * @return	array	The array of ForumMessages.
@@ -205,17 +204,17 @@ class ForumMessageFactory extends Error {
 		}
 		if (isset ($thread_id) && is_numeric($thread_id)) {
 			$result = db_query_params ('SELECT * FROM forum_user_vw
-		WHERE group_forum_id=$1
-                  AND thread_id=$2
-		ORDER BY most_recent_date DESC',
+							WHERE group_forum_id=$1
+							AND thread_id=$2
+							ORDER BY most_recent_date DESC',
 						   array ($this->Forum->getID(),
 							  $thread_id),
 						   $this->max_rows+25,
 						   $this->offset);
 		} else {
 			$result = db_query_params ('SELECT * FROM forum_user_vw
-		WHERE group_forum_id=$1
-		ORDER BY most_recent_date DESC',
+							WHERE group_forum_id=$1
+							ORDER BY most_recent_date DESC',
 						   array ($this->Forum->getID()),
 						   $this->max_rows+25,
 						   $this->offset);
@@ -223,7 +222,7 @@ class ForumMessageFactory extends Error {
 		$rows = db_numrows($result);
 		$this->fetched_rows=$rows;
 		if (!$result) {
-			$this->setError('Error when fetching messages '.db_error());
+			$this->setError(_('Error when fetching messages ').db_error());
 			return false;
 		} elseif ($rows < 1) {
 			$this->forum_messages = array();
@@ -236,29 +235,29 @@ class ForumMessageFactory extends Error {
 	}
 
 	/**
-	 *	getFlat - Return an array of ForumMessage objects arranged for flat forum views.
+	 * getFlat - Return an array of ForumMessage objects arranged for flat forum views.
 	 *
-	 *	@param	int|bool	$thread_id
-	 *	@return	array		The array of ForumMessages.
+	 * @param	int|bool	$thread_id
+	 * @return	array		The array of ForumMessages.
 	 */
 	function &getFlat($thread_id=false) {
 		if ($this->forum_messages) {
 			return $this->forum_messages;
 		}
 		if (isset ($thread_id) && is_numeric($thread_id)) {
-			$result = db_query_params ('SELECT * FROM forum_user_vw
-		WHERE group_forum_id=$1
-                  AND thread_id=$2
-		ORDER BY msg_id DESC',
-						   array ($this->Forum->getID(),
+			$result = db_query_params('SELECT * FROM forum_user_vw
+							WHERE group_forum_id=$1
+							AND thread_id=$2
+							ORDER BY msg_id DESC',
+						   array($this->Forum->getID(),
 							  $thread_id),
 						   $this->max_rows+25,
 						   $this->offset);
 		} else {
-			$result = db_query_params ('SELECT * FROM forum_user_vw
-		WHERE group_forum_id=$1
-		ORDER BY msg_id DESC',
-						   array ($this->Forum->getID()),
+			$result = db_query_params('SELECT * FROM forum_user_vw
+							WHERE group_forum_id=$1
+							ORDER BY msg_id DESC',
+						   array($this->Forum->getID()),
 						   $this->max_rows+25,
 						   $this->offset);
 		}

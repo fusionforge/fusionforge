@@ -47,8 +47,6 @@ class WikiDB
      * arguments to determine the proper subclass of WikiDB to
      * instantiate, and then it instantiates it.
      *
-     * @access public
-     *
      * @param hash $dbparams Database configuration parameters.
      * Some pertinent parameters are:
      * <dl>
@@ -98,7 +96,7 @@ class WikiDB
      *
      * @return WikiDB A WikiDB object.
      **/
-    function open($dbparams)
+    public function open($dbparams)
     {
         $dbtype = $dbparams{'dbtype'};
         include_once("lib/WikiDB/$dbtype.php");
@@ -108,12 +106,9 @@ class WikiDB
     }
 
     /**
-     * Constructor.
-     *
-     * @access private
      * @see open()
      */
-    function WikiDB(&$backend, $dbparams)
+    function __construct(&$backend, $dbparams)
     {
         $this->_backend =& $backend;
         // don't do the following with the auth_dsn!
@@ -142,10 +137,8 @@ class WikiDB
      * Closing a WikiDB invalidates all <tt>WikiDB_Page</tt>s,
      * <tt>WikiDB_PageRevision</tt>s and <tt>WikiDB_PageIterator</tt>s
      * which have been obtained from it.
-     *
-     * @access public
      */
-    function close()
+    public function close()
     {
         $this->_backend->close();
         $this->_cache->close();
@@ -157,11 +150,10 @@ class WikiDB
      * A {@link WikiDB} consists of the (infinite) set of all possible pages,
      * therefore this method never fails.
      *
-     * @access public
      * @param  string      $pagename Which page to get.
      * @return WikiDB_Page The requested WikiDB_Page.
      */
-    function getPage($pagename)
+    public function getPage($pagename)
     {
         static $error_displayed = false;
         $pagename = (string)$pagename;
@@ -195,12 +187,11 @@ class WikiDB
      * however isWikiPage may be implemented in a more efficient
      * manner in certain back-ends.
      *
-     * @access public
      * @param  string  $pagename string Which page to check.
      * @return boolean True if the page actually exists with
      * non-default contents in the WikiDataBase.
      */
-    function isWikiPage($pagename)
+    public function isWikiPage($pagename)
     {
         $page = $this->getPage($pagename);
         return ($page and $page->exists());
@@ -214,12 +205,11 @@ class WikiDB
      *
      * Note: purgePage() effectively destroys all revisions of the page from the WikiDB.
      *
-     * @access public
      * @param string $pagename Name of page to delete.
      * @see purgePage
      * @return mixed
      */
-    function deletePage($pagename)
+    public function deletePage($pagename)
     {
         if (!empty($this->readonly)) {
             trigger_error("readonly database", E_USER_WARNING);
@@ -252,11 +242,10 @@ class WikiDB
 
     /**
      * Completely remove the page from the WikiDB, without undo possibility.
-     * @access public
      * @param string $pagename Name of page to delete.
      * @see deletePage
      */
-    function purgePage($pagename)
+    public function purgePage($pagename)
     {
         if (!empty($this->readonly)) {
             trigger_error("readonly database", E_USER_WARNING);
@@ -272,8 +261,6 @@ class WikiDB
      *
      * Gets the set of all pages with non-default contents.
      *
-     * @access public
-     *
      * @param bool $include_empty Optional. Normally pages whose most
      * recent revision has empty content are considered to be
      * non-existant. Unless $include_defaulted is set to true, those
@@ -287,7 +274,7 @@ class WikiDB
      * @return WikiDB_PageIterator A WikiDB_PageIterator which contains all pages
      *     in the WikiDB which have non-default contents.
      */
-    function getAllPages($include_empty = false, $sortby = '', $limit = '', $exclude = '')
+    public function getAllPages($include_empty = false, $sortby = '', $limit = '', $exclude = '')
     {
         $result = $this->_backend->get_all_pages($include_empty, $sortby, $limit,
             $exclude);
@@ -299,15 +286,13 @@ class WikiDB
     }
 
     /**
-     * @access public
-     *
      * @param boolean $include_empty If true include also empty pages
      * @param string  $exclude:      comma-separated list of pagenames.
      *             TBD: array of pagenames
      * @return integer
      *
      */
-    function numPages($include_empty = false, $exclude = '')
+    public function numPages($include_empty = false, $exclude = '')
     {
         if (method_exists($this->_backend, 'numPages'))
             // FIXME: currently are all args ignored.
@@ -331,7 +316,6 @@ class WikiDB
      * practical to do so.
      * TODO: Sort by ranking. Only postgresql with tsearch2 can do ranking so far.
      *
-     * @access public
      * @param TextSearchQuery $search A TextSearchQuery object
      * @param string $sortby Optional. "+-column,+-column2".
      *        If false the result is faster in natural order.
@@ -341,7 +325,7 @@ class WikiDB
      * @return WikiDB_PageIterator A WikiDB_PageIterator containing the matching pages.
      * @see TextSearchQuery
      */
-    function titleSearch($search, $sortby = 'pagename', $limit = '', $exclude = '')
+    public function titleSearch($search, $sortby = 'pagename', $limit = '', $exclude = '')
     {
         $result = $this->_backend->text_search($search, false, $sortby, $limit, $exclude);
         $options = array('exclude' => $exclude,
@@ -361,8 +345,6 @@ class WikiDB
      * practical to do so.
      * TODO: Sort by ranking. Only postgresql with tsearch2 can do ranking so far.
      *
-     * @access public
-     *
      * @param TextSearchQuery $search A TextSearchQuery object.
      * @param string $sortby Optional. "+-column,+-column2".
      *        If false the result is faster in natural order.
@@ -372,7 +354,7 @@ class WikiDB
      * @return WikiDB_PageIterator A WikiDB_PageIterator containing the matching pages.
      * @see TextSearchQuery
      */
-    function fullSearch($search, $sortby = 'pagename', $limit = '', $exclude = '')
+    public function fullSearch($search, $sortby = 'pagename', $limit = '', $exclude = '')
     {
         $result = $this->_backend->text_search($search, true, $sortby, $limit, $exclude);
         return new WikiDB_PageIterator($this, $result,
@@ -387,8 +369,6 @@ class WikiDB
      *
      * Pages are returned in reverse order by hit count.
      *
-     * @access public
-     *
      * @param int $limit The maximum number of pages to return.
      * Set $limit to zero to return all pages.  If $limit < 0, pages will
      * be sorted in decreasing order of popularity.
@@ -398,7 +378,7 @@ class WikiDB
      * @return WikiDB_PageIterator A WikiDB_PageIterator containing the matching
      * pages.
      */
-    function mostPopular($limit = 20, $sortby = '-hits')
+    public function mostPopular($limit = 20, $sortby = '-hits')
     {
         $result = $this->_backend->most_popular($limit, $sortby);
         return new WikiDB_PageIterator($this, $result);
@@ -408,8 +388,6 @@ class WikiDB
      * Find recent page revisions.
      *
      * Revisions are returned in reverse order by creation time.
-     *
-     * @access public
      *
      * @param array $params This hash is used to specify various optional
      *   parameters:
@@ -433,15 +411,13 @@ class WikiDB
      * @return WikiDB_PageRevisionIterator A WikiDB_PageRevisionIterator
      * containing the matching revisions.
      */
-    function mostRecent($params = array())
+    public function mostRecent($params = array())
     {
         $result = $this->_backend->most_recent($params);
         return new WikiDB_PageRevisionIterator($this, $result);
     }
 
     /**
-     * @access public
-     *
      * @param string $exclude_from
      * @param string $exclude
      * @param string $sortby Optional. "+-column,+-column2".
@@ -451,7 +427,7 @@ class WikiDB
      * @return Iterator A generic iterator containing rows of
      *         (duplicate) pagename, wantedfrom.
      */
-    function wantedPages($exclude_from = '', $exclude = '', $sortby = '', $limit = '')
+    public function wantedPages($exclude_from = '', $exclude = '', $sortby = '', $limit = '')
     {
         return $this->_backend->wanted_pages($exclude_from, $exclude, $sortby, $limit);
     }
@@ -459,8 +435,6 @@ class WikiDB
     /**
      * Generic interface to the link table. Esp. useful to search for rdf triples as in
      * SemanticSearch and ListRelations.
-     *
-     * @access public
      *
      * @param object $pages   A TextSearchQuery object.
      * @param object $search  A TextSearchQuery object.
@@ -482,7 +456,7 @@ class WikiDB
      * @return Iterator A generic iterator containing links to pages or values.
      *                  hash of "pagename", "linkname", "linkvalue.
      */
-    function linkSearch($pages, $search, $linktype, $relation = false)
+    public function linkSearch($pages, $search, $linktype, $relation = false)
     {
         return $this->_backend->link_search($pages, $search, $linktype, $relation);
     }
@@ -491,13 +465,12 @@ class WikiDB
      * Return a simple list of all defined relations (and attributes), mainly
      * for the SemanticSearch autocompletion.
      *
-     * @access public
      * @param bool $also_attributes
      * @param bool $only_attributes
      * @param bool $sorted
      * @return array of strings
      */
-    function listRelations($also_attributes = false, $only_attributes = false, $sorted = true)
+    public function listRelations($also_attributes = false, $only_attributes = false, $sorted = true)
     {
         if (method_exists($this->_backend, "list_relations"))
             return $this->_backend->list_relations($also_attributes, $only_attributes, $sorted);
@@ -525,13 +498,12 @@ class WikiDB
     /**
      * Call the appropriate backend method.
      *
-     * @access public
      * @param  string  $from            Page to rename
      * @param  string  $to              New name
      * @param  boolean $updateWikiLinks If the text in all pages should be replaced.
      * @return boolean true or false
      */
-    function renamePage($from, $to, $updateWikiLinks = false)
+    public function renamePage($from, $to, $updateWikiLinks = false)
     {
         if (!empty($this->readonly)) {
             trigger_error("readonly database", E_USER_WARNING);
@@ -647,8 +619,6 @@ class WikiDB
      * NOTE: this is currently implemented in a hackish and
      * not very efficient manner.
      *
-     * @access public
-     *
      * @param string $key Which meta data to get.
      * Some reserved meta-data keys are:
      * <dl>
@@ -658,7 +628,7 @@ class WikiDB
      * @return scalar The requested value, or false if the requested data
      * is not set.
      */
-    function get($key)
+    public function get($key)
     {
         if (!$key || $key[0] == '%')
             return false;
@@ -682,12 +652,11 @@ class WikiDB
      * not very efficient manner.
      *
      * @see get
-     * @access public
      *
      * @param string $key    Meta-data key to set.
      * @param string $newval New value.
      */
-    function set($key, $newval)
+    public function set($key, $newval)
     {
         if (!empty($this->readonly)) {
             trigger_error("readonly database", E_USER_WARNING);
@@ -795,11 +764,9 @@ class WikiDB_Page
     /**
      * Get the name of the wiki page.
      *
-     * @access public
-     *
      * @return string The page name.
      */
-    function getName()
+    public function getName()
     {
         return $this->_pagename;
     }
@@ -821,12 +788,10 @@ class WikiDB_Page
      * Deletes the specified revision of the page.
      * It is a fatal error to attempt to delete the current revision.
      *
-     * @access public
-     *
      * @param integer $version Which revision to delete.  (You can also
      *  use a WikiDB_PageRevision object here.)
      */
-    function deleteRevision($version)
+    public function deleteRevision($version)
     {
         if ($this->_wikidb->readonly) {
             trigger_error("readonly database", E_USER_WARNING);
@@ -932,8 +897,6 @@ class WikiDB_Page
     /**
      * Create a new revision of a {@link WikiDB_Page}.
      *
-     * @access public
-     *
      * @param int $version Version number for new revision.
      * To ensure proper serialization of edits, $version must be
      * exactly one higher than the current latest version.
@@ -950,7 +913,7 @@ class WikiDB_Page
      * @return WikiDB_PageRevision Returns the new WikiDB_PageRevision object. If
      * $version was incorrect, returns false
      */
-    function createRevision($version, &$content, $metadata, $links)
+    public function createRevision($version, &$content, $metadata, $links)
     {
         if ($this->_wikidb->readonly) {
             trigger_error("readonly database", E_USER_WARNING);
@@ -1107,11 +1070,10 @@ class WikiDB_Page
     /**
      * Get the most recent revision of a page.
      *
-     * @access public
      * @param bool $need_content
      * @return WikiDB_PageRevision The current WikiDB_PageRevision object.
      */
-    function getCurrentRevision($need_content = true)
+    public function getCurrentRevision($need_content = true)
     {
         $backend = &$this->_wikidb->_backend;
         $cache = &$this->_wikidb->_cache;
@@ -1135,15 +1097,13 @@ class WikiDB_Page
     /**
      * Get a specific revision of a WikiDB_Page.
      *
-     * @access public
-     *
      * @param int $version Which revision to get.
      * @param bool $need_content
      * @return WikiDB_PageRevision The requested WikiDB_PageRevision object, or
      * false if the requested revision does not exist in the {@link WikiDB}.
      * Note that version zero of any page always exists.
      */
-    function getRevision($version, $need_content = true)
+    public function getRevision($version, $need_content = true)
     {
         $cache = &$this->_wikidb->_cache;
         $pagename = &$this->_pagename;
@@ -1167,8 +1127,6 @@ class WikiDB_Page
      * This method find the most recent revision before a specified
      * version.
      *
-     * @access public
-     *
      * @param bool|int $version Find most recent revision before this version.
      *  You can also use a WikiDB_PageRevision object to specify the $version.
      *
@@ -1179,7 +1137,7 @@ class WikiDB_Page
      * unless $version is greater than zero, a revision (perhaps version zero,
      * the default revision) will always be found.
      */
-    function getRevisionBefore($version = false, $need_content = true)
+    public function getRevisionBefore($version = false, $need_content = true)
     {
         $backend = &$this->_wikidb->_backend;
         $pagename = &$this->_pagename;
@@ -1221,8 +1179,6 @@ class WikiDB_Page
      * as 'linkrelation' key as pagename. See WikiDB_PageIterator::next
      *   if (isset($next['linkrelation']))
      *
-     * @access public
-     *
      * @param bool $reversed Which links to find: true for backlinks (default).
      * @param bool $include_empty
      * @param string $sortby
@@ -1233,7 +1189,7 @@ class WikiDB_Page
      * @return WikiDB_PageIterator A WikiDB_PageIterator containing
      * all matching pages.
      */
-    function getLinks($reversed = true, $include_empty = false, $sortby = '',
+    public function getLinks($reversed = true, $include_empty = false, $sortby = '',
                       $limit = '', $exclude = '', $want_relations = false)
     {
         $backend = &$this->_wikidb->_backend;
@@ -1318,8 +1274,6 @@ class WikiDB_Page
     /**
      * Access WikiDB_Page non version-specific meta-data.
      *
-     * @access public
-     *
      * @param string $key Which meta data to get.
      * Some reserved meta-data keys are:
      * <dl>
@@ -1341,7 +1295,7 @@ class WikiDB_Page
      * @return scalar The requested value, or false if the requested data
      * is not set.
      */
-    function get($key)
+    public function get($key)
     {
         $cache = &$this->_wikidb->_cache;
         $backend = &$this->_wikidb->_backend;
@@ -1381,12 +1335,11 @@ class WikiDB_Page
      * Set page meta-data.
      *
      * @see get
-     * @access public
      *
      * @param string $key    Meta-data key to set.
      * @param string $newval New value.
      */
-    function set($key, $newval)
+    public function set($key, $newval)
     {
         $cache = &$this->_wikidb->_cache;
         $backend = &$this->_wikidb->_backend;
@@ -1436,10 +1389,8 @@ class WikiDB_Page
      *
      * Note that this method may be implemented in more efficient ways
      * in certain backends.
-     *
-     * @access public
      */
-    function increaseHitCount()
+    public function increaseHitCount()
     {
         if ($this->_wikidb->readonly) {
             trigger_error("readonly database", E_USER_NOTICE);
@@ -1458,11 +1409,9 @@ class WikiDB_Page
      *
      * This is really only for debugging.
      *
-     * @access public
-     *
      * @return string Printable representation of the WikiDB_Page.
      */
-    function asString()
+    public function asString()
     {
         ob_start();
         printf("[%s:%s\n", get_class($this), $this->getName());
@@ -1474,13 +1423,12 @@ class WikiDB_Page
     }
 
     /**
-     * @access private
      * @param int|object $version_or_pagerevision
      * Takes either the version number (and int) or a WikiDB_PageRevision
      * object.
      * @return integer The version number.
      */
-    function _coerce_to_version($version_or_pagerevision)
+    private function _coerce_to_version($version_or_pagerevision)
     {
         if (method_exists($version_or_pagerevision, "getContent"))
             $version = $version_or_pagerevision->getVersion();
@@ -1578,11 +1526,9 @@ class WikiDB_PageRevision
     /**
      * Get the WikiDB_Page which this revision belongs to.
      *
-     * @access public
-     *
      * @return WikiDB_Page The WikiDB_Page which this revision belongs to.
      */
-    function getPage()
+    public function getPage()
     {
         return new WikiDB_Page($this->_wikidb, $this->_pagename);
     }
@@ -1590,11 +1536,9 @@ class WikiDB_PageRevision
     /**
      * Get the version number of this revision.
      *
-     * @access public
-     *
      * @return integer The version number of this revision.
      */
-    function getVersion()
+    public function getVersion()
     {
         return $this->_version;
     }
@@ -1609,11 +1553,9 @@ class WikiDB_PageRevision
      *   Describe [ThisPage] here.
      * </pre>
      *
-     * @access public
-     *
      * @return boolean Returns true if the page has default content.
      */
-    function hasDefaultContents()
+    public function hasDefaultContents()
     {
         $data = &$this->_data;
         if (!isset($data['%content'])) return true;
@@ -1624,12 +1566,10 @@ class WikiDB_PageRevision
     /**
      * Get the content as an array of lines.
      *
-     * @access public
-     *
      * @return array An array of lines.
      * The lines should contain no trailing white space.
      */
-    function getContent()
+    public function getContent()
     {
         return explode("\n", $this->getPackedContent());
     }
@@ -1637,11 +1577,9 @@ class WikiDB_PageRevision
     /**
      * Get the pagename of the revision.
      *
-     * @access public
-     *
      * @return string pagename.
      */
-    function getPageName()
+    public function getPageName()
     {
         return $this->_pagename;
     }
@@ -1654,11 +1592,9 @@ class WikiDB_PageRevision
     /**
      * Determine whether revision is the latest.
      *
-     * @access public
-     *
      * @return boolean True iff the revision is the latest (most recent) one.
      */
-    function isCurrent()
+    public function isCurrent()
     {
         if (!isset($this->_iscurrent)) {
             $page = $this->getPage();
@@ -1736,12 +1672,10 @@ class WikiDB_PageRevision
     /**
      * Get the content as a string.
      *
-     * @access public
-     *
      * @return string The page content.
      * Lines are separated by new-lines.
      */
-    function getPackedContent()
+    public function getPackedContent()
     {
         $data = &$this->_data;
 
@@ -1815,9 +1749,6 @@ class WikiDB_PageRevision
     /**
      * Get meta-data for this revision.
      *
-     *
-     * @access public
-     *
      * @param string $key Which meta-data to access.
      *
      * Some reserved revision meta-data keys are:
@@ -1854,7 +1785,7 @@ class WikiDB_PageRevision
      * @return string The requested value, or false if the requested value
      * is not defined.
      */
-    function get($key)
+    public function get($key)
     {
         if (!$key || $key[0] == '%')
             return false;
@@ -1882,11 +1813,9 @@ class WikiDB_PageRevision
      *
      * This is really only for debugging.
      *
-     * @access public
-     *
      * @return string Printable representation of the WikiDB_Page.
      */
-    function asString()
+    public function asString()
     {
         ob_start();
         printf("[%s:%d\n", get_class($this), $this->get('version'));
@@ -1927,11 +1856,9 @@ class WikiDB_PageIterator
     /**
      * Get next WikiDB_Page in sequence.
      *
-     * @access public
-     *
      * @return WikiDB_Page The next WikiDB_Page in the sequence.
      */
-    function next()
+    public function next()
     {
         if (!($next = $this->_iter->next())) {
             return false;
@@ -1978,10 +1905,8 @@ class WikiDB_PageIterator
      * (I.e. if you iterate through all the pages in the sequence,
      * you do not need to call free() --- you only need to call it
      * if you stop before the end of the iterator is reached.)
-     *
-     * @access public
      */
-    function free()
+    public function free()
     {
         // $this->_iter->free();
     }
@@ -2074,12 +1999,10 @@ class WikiDB_PageRevisionIterator
     /**
      * Get next WikiDB_PageRevision in sequence.
      *
-     * @access public
-     *
      * @return WikiDB_PageRevision
      * The next WikiDB_PageRevision in the sequence.
      */
-    function next()
+    public function next()
     {
         if (!($next = $this->_revisions->next()))
             return false;
@@ -2121,10 +2044,8 @@ class WikiDB_PageRevisionIterator
      * (I.e. if you iterate through all the revisions in the sequence,
      * you do not need to call free() --- you only need to call it
      * if you stop before the end of the iterator is reached.)
-     *
-     * @access public
      */
-    function free()
+    public function free()
     {
         $this->_revisions->free();
     }

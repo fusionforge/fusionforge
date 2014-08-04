@@ -71,7 +71,7 @@ class WikiDB_backend_ADODB
     extends WikiDB_backend
 {
 
-    function WikiDB_backend_ADODB($dbparams)
+    function __construct($dbparams)
     {
         $parsed = parseDSN($dbparams['dsn']);
         $this->_dbparams = $dbparams;
@@ -141,7 +141,6 @@ class WikiDB_backend_ADODB
                     '(lock_count = $this->_lock_count)' . "\n<br />",
                 E_USER_WARNING);
         }
-//      $this->_dbh->setErrorHandling(PEAR_ERROR_PRINT);        // prevent recursive loops.
         $this->unlock(false, 'force');
 
         $this->_dbh->close();
@@ -289,7 +288,6 @@ class WikiDB_backend_ADODB
 
     function _get_pageid($pagename, $create_if_missing = false)
     {
-
         // check id_cache
         global $request;
         $cache =& $request->_dbi->_cache->_id_cache;
@@ -355,11 +353,11 @@ class WikiDB_backend_ADODB
         extract($this->_table_names);
         // Use SELECTLIMIT for maximum portability
         $rs = $dbh->SelectLimit(sprintf("SELECT version"
-                    . " FROM $version_tbl, $page_tbl"
-                    . " WHERE $version_tbl.id=$page_tbl.id"
-                    . "  AND pagename=%s"
-                    . "  AND version < %d"
-                    . " ORDER BY version DESC",
+            . " FROM $version_tbl, $page_tbl"
+            . " WHERE $version_tbl.id=$page_tbl.id"
+            . "  AND pagename=%s"
+            . "  AND version < %d"
+            . " ORDER BY version DESC",
                 $dbh->qstr($pagename),
                 $version),
             1);
@@ -394,10 +392,10 @@ class WikiDB_backend_ADODB
                 . "$version_tbl.versiondata as versiondata";
         }
         $row = $dbh->GetRow(sprintf("SELECT $fields"
-                . " FROM $page_tbl, $version_tbl"
-                . " WHERE $page_tbl.id=$version_tbl.id"
-                . "  AND pagename=%s"
-                . "  AND version=%d",
+            . " FROM $page_tbl, $version_tbl"
+            . " WHERE $page_tbl.id=$version_tbl.id"
+            . "  AND pagename=%s"
+            . "  AND version=%d",
             $dbh->qstr($pagename), $version));
         return $row ? $this->_extract_version_data_num($row, $want_content) : false;
     }
@@ -555,6 +553,10 @@ class WikiDB_backend_ADODB
         }
     }
 
+    /**
+     * Delete page completely from the database.
+     * I'm not sure if this is what we want. Maybe just delete the revisions
+     */
     function purge_page($pagename)
     {
         $dbh = &$this->_dbh;
@@ -595,6 +597,7 @@ class WikiDB_backend_ADODB
      */
     function set_links($pagename, $links)
     {
+        // Update link table.
         // FIXME: optimize: mysql can do this all in one big INSERT/REPLACE.
 
         $dbh = &$this->_dbh;
@@ -837,9 +840,6 @@ class WikiDB_backend_ADODB
         return $row[0];
     }
 
-    /*
-     *
-     */
     function get_all_pages($include_empty = false, $sortby = '', $limit = '', $exclude = '')
     {
         $dbh = &$this->_dbh;
@@ -932,11 +932,10 @@ class WikiDB_backend_ADODB
         } else {
             $callback = new WikiMethodCb($searchobj, "_pagename_match_clause");
         }
-
         $search_clause = $search->makeSqlClauseObj($callback);
         $sql = "SELECT $fields FROM $table"
             . " WHERE $join_clause"
-            . " AND ($search_clause)"
+            . "  AND ($search_clause)"
             . $orderby;
         if ($limit) {
             // extract from,count from limit
@@ -1095,15 +1094,15 @@ class WikiDB_backend_ADODB
          all empty pages, independent of linkstatus:
            select pagename as empty from page left join nonempty using(id) where is null(nonempty.id);
          only all empty pages, which have a linkto:
-            select page.pagename, linked.pagename as wantedfrom from link, page linked
-              left join page on link.linkto=page.id left join nonempty on link.linkto=nonempty.id
-              where nonempty.id is null and linked.id=link.linkfrom;
+           select page.pagename, linked.pagename as wantedfrom from link, page linked
+             left join page on link.linkto=page.id left join nonempty on link.linkto=nonempty.id
+             where nonempty.id is null and linked.id=link.linkfrom;
         */
-        $sql = "SELECT p.pagename, pp.pagename as wantedfrom"
+        $sql = "SELECT p.pagename, pp.pagename AS wantedfrom"
             . " FROM $page_tbl p, $link_tbl linked"
             . " LEFT JOIN $page_tbl pp ON (linked.linkto = pp.id)"
             . " LEFT JOIN $nonempty_tbl ne ON (linked.linkto = ne.id)"
-            . " WHERE ne.id is NULL"
+            . " WHERE ne.id IS NULL"
             . " AND (p.id = linked.linkfrom)"
             . $exclude_from
             . $exclude
@@ -1194,7 +1193,7 @@ class WikiDB_backend_ADODB
             . " SELECT $recent_tbl.id"
             . " FROM $recent_tbl, $version_tbl"
             . " WHERE $recent_tbl.id=$version_tbl.id"
-            . " AND version=latestversion"
+            . "  AND version=latestversion"
             // We have some specifics here (Oracle)
             //. "  AND content<>''"
             . "  AND content $notempty" // On Oracle not just "<>''"
@@ -1207,10 +1206,8 @@ class WikiDB_backend_ADODB
      *
      * Calls can be nested.  The tables won't be unlocked until
      * _unlock_database() is called as many times as _lock_database().
-     *
-     * @access protected
      */
-    function lock($tables, $write_lock = true)
+    public function lock($tables, $write_lock = true)
     {
         $this->_dbh->StartTrans();
         if ($this->_lock_count++ == 0) {
@@ -1230,14 +1227,12 @@ class WikiDB_backend_ADODB
     /**
      * Release a write lock on the tables in the SQL database.
      *
-     * @access protected
-     *
      * @param $force boolean Unlock even if not every call to lock() has been matched
      * by a call to unlock().
      *
      * @see _lock_database
      */
-    function unlock($tables = false, $force = false)
+    public function unlock($tables = false, $force = false)
     {
         if ($this->_lock_count == 0) {
             $this->_current_lock = false;
@@ -1333,7 +1328,7 @@ class WikiDB_backend_ADODB
 class WikiDB_backend_ADODB_generic_iter
     extends WikiDB_backend_iterator
 {
-    function WikiDB_backend_ADODB_generic_iter($backend, $query_result, $field_list = NULL)
+    function __construct($backend, $query_result, $field_list = NULL)
     {
         $this->_backend = &$backend;
         $this->_result = $query_result;

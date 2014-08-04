@@ -85,14 +85,11 @@ class WikiPlugin_AuthorHistory
     {
         $this->_args = $this->getArgs($argstr, $request);
         extract($this->_args);
-        //trigger_error("1 p= $page a= $author");
         if ($page && $page == 'username') //FIXME: use [username]!!!!!
             $page = $author;
-        //trigger_error("2 p= $page a= $author");
         if (!$page || !$author) //user not signed in or no author specified
             return '';
         //$pagelist = new PageList($info, $exclude);
-        ///////////////////////////
 
         $nbsp = HTML::raw('&nbsp;');
 

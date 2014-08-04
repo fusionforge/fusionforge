@@ -29,16 +29,16 @@ global $warning_msg; // warning message
 global $feedback; // feedback message
 global $error_msg; // error message
 
-
-if (!forge_check_perm('frs', $group_id, 'write')) {
-	$warning_msg = _('FRS Action Denied.');
-	session_redirect('/frs/?group_id='.$group_id);
-}
-
 $package_id = getIntFromRequest('package_id');
+
 if (!$package_id) {
 	$error_msg = _('Missing package_id');
 	session_redirect('/frs/?group_id='.$group_id.'&view=admin');
+}
+
+if (!forge_check_perm('frs', $package_id, 'release')) {
+	$error_msg = _('FRS Action Denied.');
+	session_redirect('/frs/?group_id='.$group_id);
 }
 
 $frsp = new FRSPackage($g, $package_id);

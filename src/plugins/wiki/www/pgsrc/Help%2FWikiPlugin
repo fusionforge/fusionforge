@@ -1,5 +1,5 @@
-Date: Fri, 11 Jan 2013 11:16:51 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
+Date: Tue, 29 Jul 2014 10:42:12 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.5.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FWikiPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -92,7 +92,7 @@ library. ~PageList provides automatic support for those arguments.
 *exclude* and *pages* accept a list of pages. Either as comma-separated list,
 supporting glob-style wildcards, or via the ##<!plugin-list pluginname ~[args~] !>##
 invocation syntax, where pluginname might be any plugin returning a [[Help:PageList|PageList]].
-See PhpWiki:PluginList.
+See PluginList.
 
 Since most plugins return a ~PageList, this ~PageList is also a common
 input parameter for other plugins, actions or formats.
@@ -150,7 +150,7 @@ optionally also
 
   getAlt(), getImageType(), embedMap(), embedImg(), embedObject()
 
-See the config.ini PLUGIN_CACHED_* settings and PhpWiki:WikiPluginCached
+See the config.ini PLUGIN_CACHED_* settings and WikiPluginCached
 
 === Action Pages ===
 
@@ -161,7 +161,7 @@ An **action** is together with the **pagename** argument the basic
 It can both be GET or POST actions. Actions are untranslated, always
 English, pagenames can be localized.
 Basic (and old) actions are all lowercase, like edit, browse, remove, ...
-Newer actions in [[PhpWiki:CamelCase]] are invoked via plugins on their
+Newer actions in ~CamelCase are invoked via plugins on their
 specific action page.
 
 We decoupled actions from plugins via action pages for the following

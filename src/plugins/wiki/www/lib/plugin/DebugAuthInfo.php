@@ -56,7 +56,7 @@ class WikiPlugin_DebugAuthInfo
             $this->disabled("! user->isAdmin");
         }
 
-        $html = HTML(HTML::h3(fmt("General Auth Settings")));
+        $html = HTML(HTML::h2(fmt("General Auth Settings")));
         $table = HTML::table(array('class' => 'bordered'));
         $table->pushContent($this->show_hash("AUTH DEFINES",
             $this->buildConstHash(
@@ -89,7 +89,7 @@ class WikiPlugin_DebugAuthInfo
         unset($DBAuthParams['dummy']);
         $table->pushContent($this->show_hash("\$DBAuthParams[]", $DBAuthParams));
         $html->pushContent($table);
-        $html->pushContent(HTML(HTML::h3(fmt("Personal Auth Settings for “%s”", $userid))));
+        $html->pushContent(HTML(HTML::h2(fmt("Personal Auth Settings for “%s”", $userid))));
         if (!$user) {
             $html->pushContent(HTML::p(fmt("No userid")));
         } else {
@@ -131,9 +131,9 @@ class WikiPlugin_DebugAuthInfo
 
         if ($heading)
             $rows[] = HTML::tr(array(
-                    'style' => 'color:#000;background-color:#ffcccc'),
+                    'style' => 'color:black; background-color:#ffcccc'),
                 HTML::td(array('colspan' => 2,
-                        'style' => 'color:#000'),
+                        'style' => 'color:black'),
                     $heading));
         if (is_object($hash))
             $hash = obj2hash($hash);
@@ -162,12 +162,11 @@ class WikiPlugin_DebugAuthInfo
                     }
                 }
                 $rows[] = HTML::tr(HTML::td(array('class' => 'align-right',
-                            'bgcolor' => '#ccc',
-                            'style' => 'color:#000000'),
+                            'style' => 'color:black; background-color:#ccc'),
                         HTML(HTML::raw('&nbsp;'), $key,
                             HTML::raw('&nbsp;'))),
-                    HTML::td(array('bgcolor' => '#fff',
-                            'style' => 'color:#000000'),
+                    HTML::td(array(
+                            'style' => 'color:black; background-color:white'),
                         $val ? $val : HTML::raw('&nbsp;'))
                 );
                 //if (empty($seen[$key])) $seen[$key] = 1;

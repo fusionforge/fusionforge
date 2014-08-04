@@ -4,6 +4,7 @@
  *
  * Copyright 2004, GForge, LLC
  * Copyright 2009-2011, Roland Mas
+ * Copyright 2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -275,6 +276,16 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 				}
 				for ($j=0; $j<db_numrows($res); $j++) {
 					$data['tracker'][db_result($res, $j, 'group_artifact_id')]= $v;
+				}
+			} elseif ($k == 'new_frs') {
+				$res = db_query_params('SELECT package_id FROM frs_package WHERE group_id=$1',
+								array($this->Group->getID()));
+				if (!$res) {
+					$this->setError('Error: FRS'.db_error());
+					return false;
+				}
+				for ($j=0; $j<db_numrows($res); $j++) {
+					$data['frs'][db_result($res, $j, 'package_id')]= $v;
 				}
 			}
 		}

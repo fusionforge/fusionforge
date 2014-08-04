@@ -50,7 +50,7 @@ RedirectMatch 301 ^({sys_urlprefix}plugins/mediawiki/wiki/[-a-zA-Z0-9_]*)/*$ $1/
         AliasMatch ^{sys_urlprefix}plugins/mediawiki/wiki/[-a-zA-Z0-9_]*/api.php {usr_share_gforge}/www/plugins/mediawiki/api.php
         AliasMatch ^{sys_urlprefix}plugins/mediawiki/wiki/[-a-zA-Z0-9_]*/index.php {usr_share_gforge}/www/plugins/mediawiki/index.php
         AliasMatch ^{sys_urlprefix}plugins/mediawiki/wiki/([-a-zA-Z0-9_]*)/images/(.*) {var_lib_gforge}/plugins/mediawiki/projects/$1/images/$2
-	AliasMatch ^{sys_urlprefix}plugins/mediawiki/wiki/([-a-zA-Z0-9_]*)/skins/(.*) /usr/share/gforge/www/plugins/mediawiki/skins/$2
+	AliasMatch ^{sys_urlprefix}plugins/mediawiki/wiki/([-a-zA-Z0-9_]*)/skins/(.*) {usr_share_gforge}/www/plugins/mediawiki/skins/$2
 
 6. Add the cronjob in etc/cron.d/mediawiki to the FusionForge
    crontab. To do that, the script "setup" might be helpful.

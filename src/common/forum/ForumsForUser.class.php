@@ -36,10 +36,10 @@ class ForumsForUser extends Error {
 	var $User;
 
 	/**
-	 *  Constructor.
+	 * Constructor.
 	 *
-	 *	@param	$user   object	The Group object to which this forum is associated.
-	 * @return bool
+	 * @param	$user   object	The Group object to which this forum is associated.
+	 * @return	bool
 	 */
 	function ForumsForUser(&$user) {
 		$this->User =& $user;
@@ -48,19 +48,19 @@ class ForumsForUser extends Error {
 	}
 
 	/**
-	*       getMonitoredForums
-	*
-	*       @return Forum[] The array of Forums
-	*
-	*/
+	 * getMonitoredForums
+	 *
+	 * @return	Forum[]	The array of Forums
+	 *
+	 */
 	function getMonitoredForums() {
 		$forums = array();
 		$result = db_query_params ('SELECT groups.group_name,groups.group_id,forum_group_list.group_forum_id,forum_group_list.forum_name
-		     FROM groups,forum_group_list,forum_monitored_forums
-		     WHERE groups.group_id=forum_group_list.group_id AND groups.status=$1
-		     AND forum_group_list.group_forum_id=forum_monitored_forums.forum_id
-		     AND forum_monitored_forums.user_id=$2
-                     ORDER BY group_name DESC',
+						FROM groups,forum_group_list,forum_monitored_forums
+						WHERE groups.group_id=forum_group_list.group_id AND groups.status=$1
+						AND forum_group_list.group_forum_id=forum_monitored_forums.forum_id
+						AND forum_monitored_forums.user_id=$2
+						ORDER BY group_name DESC',
 					   array ('A',
 						  $this->User->getID())) ;
 		$rows=db_numrows($result);
@@ -81,7 +81,6 @@ class ForumsForUser extends Error {
 		}
 		return $forums;
 	}
-
 }
 
 // Local Variables:

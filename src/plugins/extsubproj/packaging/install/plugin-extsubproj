@@ -1,7 +1,7 @@
-plugins/extsubproj/actions/*                  @PLUGIN_PATH@/extsubproj/actions/
-plugins/extsubproj/common/*                  @PLUGIN_PATH@/extsubproj/common/
-plugins/extsubproj/view/*                  @PLUGIN_PATH@/extsubproj/view/
-plugins/extsubproj/include/*                 @PLUGIN_PATH@/extsubproj/include/
-plugins/extsubproj/db/*                      @PLUGIN_PATH@/extsubproj/db/
-plugins/extsubproj/www/*                     @PLUGIN_PATH@/extsubproj/www/
-plugins/extsubproj/etc/extsubproj.ini	             etc/@PACKAGE@/config.ini.d/
+plugins/extsubproj/actions/*                  @PLUGINS_PATH@/extsubproj/actions/
+plugins/extsubproj/common/*                  @PLUGINS_PATH@/extsubproj/common/
+plugins/extsubproj/view/*                  @PLUGINS_PATH@/extsubproj/view/
+plugins/extsubproj/include/*                 @PLUGINS_PATH@/extsubproj/include/
+plugins/extsubproj/db/*                      @PLUGINS_PATH@/extsubproj/db/
+plugins/extsubproj/www/*                     @PLUGINS_PATH@/extsubproj/www/
+plugins/extsubproj/etc/extsubproj.ini	             @CONFIG_PATH@/config.ini.d/

@@ -1,2 +1,2 @@
-@PLUGIN_PATH@/compactpreview/common
-@PLUGIN_PATH@/compactpreview/www
+@PLUGINS_PATH@/compactpreview/common
+@PLUGINS_PATH@/compactpreview/www

@@ -11,10 +11,12 @@ if [ $(id -u) != 0 ] ; then
 fi
 
 # directory to backup
-BDIR="/var/lib/gforge/chroot /var/lib/mailman /etc"
+data_path=$(forge_get_config data_path)
+chroot=$(forge_get_config chroot)
+BDIR="$chroot /var/lib/mailman /etc"
 PATTERNS="mailman postgresql exim4 gforge"
 
-DEST="/var/lib/gforge/backup"
+DEST="$data_path/backup"
 
 # BACKUPDIR=`date --date yesterday +%A`
 BACKUPDIR=`date +%A`
@@ -36,8 +38,8 @@ rmdir $DEST/emptydir
 rsync $OPTS $BDIR $DEST/current
 
 export FUSIONFORGE_NO_PLUGINS=true
-COMPRESSOR=$(/usr/share/gforge/bin/forge_get_compressor)
-EXTENSION=$(/usr/share/gforge/bin/forge_get_compressed_extension)
+COMPRESSOR=$($(forge_get_config binary_path)/forge_get_compressor)
+EXTENSION=$($(forge_get_config binary_path)/forge_get_compressed_extension)
 
 echo "Dumping database"
 su -s /bin/bash postgres -c "pg_dump -F c -d gforge" | $COMPRESSOR > ${DEST}/postgres/gforge.dump${EXTENSION}

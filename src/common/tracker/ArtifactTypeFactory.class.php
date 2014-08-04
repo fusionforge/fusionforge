@@ -83,11 +83,11 @@ class ArtifactTypeFactory extends Error {
 	/**
 	 * getAllArtifactTypeIds - return a list of tracker ids.
 	 *
-	 * @return	array	The array of ArtifactType objects.
+	 * @return	array	The array of ArtifactType object ids.
 	 */
 	function &getAllArtifactTypeIds() {
 		$result = array () ;
-		$res = db_query_params ('SELECT * FROM artifact_group_list_vw
+		$res = db_query_params ('SELECT group_artifact_id FROM artifact_group_list_vw
 			WHERE group_id=$1
 			ORDER BY group_artifact_id ASC',
 					array ($this->Group->getID())) ;

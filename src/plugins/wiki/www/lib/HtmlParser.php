@@ -49,7 +49,7 @@ class HtmlParser
      *  dialect: "PhpWiki2", "PhpWiki"
      *  possible more dialects: MediaWiki, kwiki, c2
      */
-    function HtmlParser($dialect = "PhpWiki2", $encoding = '')
+    function __construct($dialect = "PhpWiki2", $encoding = '')
     {
         $classname = "HtmlParser_" . $dialect;
         if (class_exists($classname))
@@ -225,7 +225,7 @@ class HtmlParser
 class HtmlParser_PhpWiki2
     extends HtmlParser
 {
-    function HtmlParser_PhpWiki2()
+    function __construct()
     {
         $this->_handlers =
             array('html' => '',

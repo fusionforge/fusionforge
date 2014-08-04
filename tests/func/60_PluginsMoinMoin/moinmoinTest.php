@@ -19,7 +19,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once dirname(dirname(__FILE__)).'/Testing/SeleniumGforge.php';
+require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
 
 class PluginMoinMoin extends FForge_SeleniumTestCase
 {

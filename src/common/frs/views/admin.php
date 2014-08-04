@@ -30,8 +30,9 @@
 global $HTML; // html object
 global $group_id; // id of group
 global $g; // group object
+global $permissionlevel;
 
-if ( !forge_check_perm('frs', $group_id, 'write')) {
+if (!forge_check_perm('frs_admin', $group_id, 'read')) {
 	$warning_msg = _('FRS Access Denied');
 	session_redirect('/frs/?group_id='.$group_id);
 }
@@ -47,7 +48,9 @@ $FRSPackages = $fpFactory->getFRSs();
 
 if (count($FRSPackages) > 0) {
 	echo html_e('h2', array(), _('QRS'));
-	echo html_e('p', array(), _('Click here to ').util_make_link('/frs/?view=qrs&group_id='.$group_id, _('quick-release a file')));
+	if ($permissionlevel == 'admin') {
+		echo html_e('p', array(), _('Click here to ').util_make_link('/frs/?view=qrs&group_id='.$group_id, _('quick-release a file')));
+	}
 }
 
 echo html_ao('script', array('type' => 'text/javascript'));
@@ -61,8 +64,9 @@ jQuery(document).ready(function() {
 <?php
 echo html_ac(html_ap() - 1);
 
-echo html_ao('fieldset');
+echo html_ao('fieldset', array('class' => 'coolfieldset', 'id' => 'fieldset1_closed'));
 echo html_e('legend', array(), _('Help about Packages and Releases'));
+echo html_ao('div');
 echo html_e('h3', array(), _('Packages'));
 echo html_e('p', array(), _('You can use packages to group different file releases together, or use them however you like.'));
 echo html_e('h4', array(), _('An example of packages')._(':'));
@@ -77,7 +81,7 @@ echo html_e('p', array(), _('A release of a package can contain multiple files.'
 echo html_e('h4', array(), _('Examples of releases')._(':'));
 echo html_e('p', array(), html_e('strong', array(), '3.22.1').html_e('br').html_e('strong', array(), '3.22.2').html_e('br').html_e('strong', array(), '3.22.3'));
 echo html_e('p', array(), _('You can create new releases of packages by clicking on <strong>Add/Edit Releases</strong> next to your package name.'));
-echo html_ac(html_ap() -1);
+echo html_ac(html_ap() -2);
 
 //Show a list of existing packages for this project so they can be edited
 if (count($FRSPackages) == 0) {
@@ -88,25 +92,38 @@ if (count($FRSPackages) == 0) {
 	$title_arr[] = _('Package name');
 	$title_arr[] = _('Status');
 	$title_arr[] = _('Publicly Viewable');
+	$title_arr[] = _('Actions');
 
-	echo $HTML->openForm(array('action' => util_make_uri('/frs/?group_id='.$group_id.'&action=updatepackage'), 'method' => 'post'));
 	echo $HTML->listTableTop($title_arr);
 	foreach ($FRSPackages as $key => $FRSPackage) {
 		$cells = array();
-		$content = util_make_link('/frs/?view=qrs&package_id='.$FRSPackage->getID().'&group_id='.$group_id, '<strong>['._('Add Release').']</strong>');
-		if (count($FRSPackage->getReleases())) {
+		$content = '';
+		if (forge_check_perm('frs', $FRSPackage->getID(), 'release')) {
+			$content = util_make_link('/frs/?view=qrs&package_id='.$FRSPackage->getID().'&group_id='.$group_id, '<strong>['._('Add Release').']</strong>');
+		}
+		if (forge_check_perm('frs', $FRSPackage->getID(), 'file') && count($FRSPackage->getReleases()))  {
 			$content .= util_make_link('/frs/?view=showreleases&package_id='.$FRSPackage->getID().'&group_id='.$group_id, '<strong>['._('Edit Releases').']</strong>');
 		}
 		$cells[] = array($content, 'style' => 'white-space: nowrap;', 'align' => 'center');
-		$cells[][] = html_e('input', array('type' => 'hidden', 'name' => 'package_id', 'value' => $FRSPackage->getID())).html_e('input', array('type' => 'text', 'name' => 'package_name', 'value' => $FRSPackage->getName(), 'size' => 20, 'maxlength' => 60, 'required' => 'required', 'pattern' => '.{3,}', 'title' => _('At least 3 characters')));
-		$cells[][] = frs_show_status_popup('status_id', $FRSPackage->getStatus());
-		$cells[][] = frs_show_public_popup('is_public', $FRSPackage->isPublic());
-		$deleteUrlAction = util_make_uri('/frs/?action=deletepackage&package_id='.$FRSPackage->getID().'&group_id='.$group_id);
-		$cells[][] = html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Update'))).util_make_link('#', $HTML->getDeletePic(_('Delete this package'), _('Delete package')), array('onclick' => 'javascript:controllerFRS.toggleConfirmBox({idconfirmbox: \'confirmbox1\', do: \''._('Delete the package').' '.$FRSPackage->getName().'\', cancel: \''._('Cancel').'\', height: 150, width: 300, action: \''.$deleteUrlAction.'\'})' ), true);
+		$package_nameInputAttr = array('type' => 'text', 'name' => 'package_name', 'value' => html_entity_decode($FRSPackage->getName()), 'size' => 20, 'maxlength' => 60, 'required' => 'required', 'pattern' => '.{3,}', 'title' => _('At least 3 characters'));
+		if (!forge_check_perm('frs', $FRSPackage->getID(), 'admin')) {
+			$package_nameInputAttr['disabled'] = 'disabled';
+		}
+		$cells[][] = html_e('input', $package_nameInputAttr);
+		if (forge_check_perm('frs', $FRSPackage->getID(), 'admin')) {
+			$cells[][] = frs_show_status_popup('status_id', $FRSPackage->getStatus());
+			$cells[][] = frs_show_public_popup('is_public', $FRSPackage->isPublic());
+			$deleteUrlAction = util_make_uri('/frs/?action=deletepackage&package_id='.$FRSPackage->getID().'&group_id='.$group_id);
+			$cells[][] = html_e('input', array('type' => 'button', 'name' => 'submit', 'value' => _('Update'), 'onclick' => 'javascript:controllerFRS.updatePackage({rowid: \'#pkgid'.$FRSPackage->getID().'\', action: \''.util_make_uri('/frs/?group_id='.$group_id.'&action=updatepackage&package_id='.$FRSPackage->getID()).'\'})')).
+					util_make_link('#', $HTML->getDeletePic(_('Delete this package'), _('Delete package')), array('onclick' => 'javascript:controllerFRS.toggleConfirmBox({idconfirmbox: \'confirmbox1\', do: \''._('Delete the package').' '.html_entity_decode($FRSPackage->getName()).'\', cancel: \''._('Cancel').'\', height: 150, width: 300, action: \''.$deleteUrlAction.'\'})' ), true);
+		} else {
+			$cells[][] = $FRSPackage->getStatusName();
+			$cells[][] = $FRSPackage->isPublic();
+			$cells[][] = '';
+		}
 		echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($key, true), 'id' => 'pkgid'.$FRSPackage->getID()), $cells);
 	}
 	echo $HTML->listTableBottom();
-	echo $HTML->closeForm();
 }
 
 echo $HTML->jQueryUIconfirmBox('confirmbox1', _('Delete package'), _('You are about to delete permanently this package. Are you sure? This action is definitive.'));
@@ -114,14 +131,11 @@ echo $HTML->jQueryUIconfirmBox('confirmbox1', _('Delete package'), _('You are ab
 /*
 	form to create a new package
 */
-
-echo html_ao('fieldset');
-echo html_e('legend', array(), _('Create New Package'));
-echo $HTML->openForm(array('action' => util_make_uri('/frs/?group_id='.$group_id.'&action=addpackage'), 'method' => 'post'));
-echo html_e('p', array(), html_e('strong', array(), _('New Package Name')._(':')).html_e('input', array('type' => 'text', 'name' => 'package_name', 'size' => 20, 'maxlength' => 30, 'required' => 'required', 'pattern' => '.{3,}', 'title' => _('At least 3 characters'))));
-echo html_e('p', array(), html_e('strong', array(), _('Publicly Viewable')._(':')).
-			html_e('input', array('type' => 'radio', 'name' => 'is_public', 'value' => 1, 'checked' => 'checked'))._('Public').
-			html_e('input', array('type' => 'radio', 'name' => 'is_public', 'value' => 0))._('Private'));
-echo html_e('p', array(), html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Create This Package'))));
-echo $HTML->closeForm();
-echo html_ac(html_ap() - 1);
+if (forge_check_perm('frs_admin', $group_id, 'admin')) {
+	echo html_ao('fieldset');
+	echo html_e('legend', array(), _('Create New Package'));
+	echo $HTML->openForm(array('action' => util_make_uri('/frs/?group_id='.$group_id.'&action=addpackage'), 'method' => 'post'));
+	echo html_e('p', array(), html_e('strong', array(), _('New Package Name')._(':')).html_e('input', array('type' => 'text', 'name' => 'package_name', 'size' => 20, 'maxlength' => 30, 'required' => 'required', 'pattern' => '.{3,}', 'title' => _('At least 3 characters'))).html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Create'))));
+	echo $HTML->closeForm();
+	echo html_ac(html_ap() - 1);
+}

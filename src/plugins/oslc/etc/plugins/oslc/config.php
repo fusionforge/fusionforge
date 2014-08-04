@@ -36,7 +36,7 @@ switch (TRACKER_TYPE) {
 	case 'demo':
 		break;
 	case 'fusionforge':
-		define('APPLICATION_PATH', '/usr/share/gforge/plugins/oslc/include/oslc-zend/application');
+		define('APPLICATION_PATH', forge_get_config('plugins_path').'/oslc/include/oslc-zend/application');
 		/*require(APPLICATION_PATH.'/../../../../www/env.inc.php');
 	    require_once $gfwww.'include/pre.php';*/
 		break;

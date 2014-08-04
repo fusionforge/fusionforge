@@ -1,5 +1,5 @@
-Date: Mon,  8 Jul 2013 17:59:07 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
+Date: Tue, 29 Jul 2014 10:42:12 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.5.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FInterWiki;
   flags="";
@@ -29,7 +29,7 @@ RFC:2822, and ISBN:020171499X.
 而無須建立 back-reference(向後參考).因此, Category:Category 連結到
 CategoryCategory 頁面,此頁面將不顯示 CategoryCategory 的 back-links(向後連結).
 
-這個字眼 "InterWiki" 也涉及了廣義的觀念. 參閱 PhpWiki:InterWikiSearch 取得
+這個字眼 "InterWiki" 也涉及了廣義的觀念. 參閱 InterWikiSearch 取得
 更多連結.
 
 <noinclude>

@@ -118,7 +118,6 @@ class Template
      * Substitute HTML replacement text for tokens in template.
      *
      * Constructs a new WikiTemplate based upon the named template.
-     * @access public
      * @param string $varname Name of token to substitute for.
      * @param string $value Replacement HTML text.
      */

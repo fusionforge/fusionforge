@@ -4,6 +4,7 @@
  *
  * Copyright 2007-2010, Roland Mas
  * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
+ * Copyright 2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -64,6 +65,9 @@ function setup_rbac_strings () {
 								  'pm_admin1' => _('Task managers administration'),
 								  'forum_admin0' => _('No administrative access'),
 								  'forum_admin1' => _('Forums Administration'),
+								  'frs_admin0' => _('No access'),
+								  'frs_admin1' => _('FRS access'),
+								  'frs_admin2' => _('FRS administrator'),
 
 								  'tracker0' => _('No Access'),
 								  'tracker1' => _('Read only'),
@@ -165,10 +169,17 @@ function setup_rbac_strings () {
 								  'docman2' => _('Submit documents'),
 								  'docman3' => _('Approve documents'),
 								  'docman4' => _('Doc manager administration'),
-								  'frs0' => _('No Access'),
-								  'frs1' => _('View public packages only'),
-								  'frs2' => _('View all packages'),
-								  'frs3' => _('Publish files'),
+
+								  'frs0' => _('No access'),
+								  'frs1' => _('Read only'),
+								  'frs2' => _('Files management'),
+								  'frs3' => _('Files & releases management'),
+								  'frs4' => _('Package admin'),
+								  'new_frs0' => _('No access'),
+								  'new_frs1' => _('Read only'),
+								  'new_frs2' => _('Files management'),
+								  'new_frs3' => _('Files & releases management'),
+								  'new_frs4' => _('Package admin'),
 								  )
 		);
 
@@ -184,20 +195,21 @@ function setup_rbac_strings () {
 
 								    'tracker_admin' => _('Trackers administration'),
 								    'pm_admin' => _('Task managers administration'),
-								    'forum_admin' => _('Forums Administration'),
+								    'forum_admin' => _('Forums administration'),
+								    'frs_admin' => _('FRS access level'),
 
 								    'tracker' => _('Tracker'),
 								    'pm' => _('Tasks'),
 								    'forum' => _('Forum'),
+								    'frs' => _('Package'),
 
 								    'new_tracker' => _('Default for new trackers'),
 								    'new_pm' => _('Default for new task managers'),
 								    'new_forum' => _('Default for new forums'),
+								    'new_frs' => _('Default for new packages'),
 
 								    'scm' => _('SCM'),
 								    'docman' => _('Documentation manager'),
-								    'frs' => _('Files'),
-
 								    )
 		) ;
 	plugin_hook ("role_translate_strings") ;

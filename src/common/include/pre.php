@@ -28,7 +28,6 @@ require_once $gfcommon.'include/utils.php';
 // Declare and init variables to store messages
 util_init_messages();
 
-require_once $gfcommon.'include/escapingUtils.php';
 require_once $gfcommon.'include/config.php';
 
 if (isset($_SERVER) && array_key_exists('PHP_SELF', $_SERVER) && $_SERVER['PHP_SELF']) {

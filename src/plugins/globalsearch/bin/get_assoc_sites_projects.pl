@@ -17,7 +17,10 @@ use Unicode::String qw(latin1 utf8);
 
 use strict;
 
-require("/usr/share/gforge/lib/include.pl");  # Include all predefined functions
+my $source_path = `forge_get_config source_path`;
+chomp $source_path;
+
+require ("$source_path/lib/include.pl") ; # Include all the predefined functions 
 
 # DB 
 #-------------------------------------------------------------------------------

@@ -1,5 +1,5 @@
-Date: Fri, 10 Sep 2010 13:46:13 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
+Date: Tue, 29 Jul 2014 10:42:12 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.5.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FCalendarListPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -7,7 +7,7 @@ Content-Type: application/x-phpwiki;
 Content-Transfer-Encoding: binary
 
 The **~CalendarList** [[Help:WikiPlugin|plugin]] is used in conjunction with the [[Help:CalendarPlugin|Calendar]] plugin.
-It was written for those who use a wiki as a [[PhpWiki:PersonalWiki|personal information manager]].
+It was written for those who use a wiki as a personal information manager.
 
 Just click any date in the calendar, edit the for that date, then come back to
 this page. The event should be listed below the calendar.

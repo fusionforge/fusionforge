@@ -1,4 +1,4 @@
-plugins/authwebid/include   @PLUGIN_PATH@/authwebid/
-plugins/authwebid/www       @PLUGIN_PATH@/authwebid/
-plugins/authwebid/etc/*.ini etc/@PACKAGE@/config.ini.d/
-plugins/authwebid/db/*      @PLUGIN_PATH@/authwebid/db/
+plugins/authwebid/include   @PLUGINS_PATH@/authwebid/
+plugins/authwebid/www       @PLUGINS_PATH@/authwebid/
+plugins/authwebid/etc/*.ini @CONFIG_PATH@/config.ini.d/
+plugins/authwebid/db/*      @PLUGINS_PATH@/authwebid/db/

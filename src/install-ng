@@ -5,7 +5,7 @@
 # Usage: ./install-ng <hostname>
 #
 # This will install all the fusionforge code in $FORGE_HOME
-# Configuration is stored in /etc/gforge
+# Configuration is stored in /etc/fusionforge
 #
 # Currently supported:
 # * Red Hat 5 / CentOS 5
@@ -16,7 +16,6 @@
 #
 # Copyright 2014, Franck Villaume - TrivialDev
 #
-FORGE_HOME=/opt/gforge
 
 usage(){
 	echo "Usage: $1 [-r|-h|-a|--reinit|--help|--auto|--deps|--files|--database|--config] [<hostname>]"
@@ -78,17 +77,23 @@ fi
 	
 echo "Using hostname=$hostname"
 
+install_loc=opt
+
 # Load some script
 scriptdir=`cd \`dirname $0\`; pwd`
 . $scriptdir/install/detect_os
+FORGE_HOME=$($scriptdir/utils/forge_get_config_basic $install_loc source_path)
 
 FUSIONFORGE_DEFAULT_SRC_DIR=$(cd $(dirname $0); pwd)
 FUSIONFORGE_DEFAULT_DIR=$FORGE_HOME
+cd $FUSIONFORGE_DEFAULT_SRC_DIR
+export PATH=$FUSIONFORGE_DEFAULT_SRC_DIR/utils:$PATH
 fusionforge_src_dir=${FUSIONFORGE_SRC_DIR:-$FUSIONFORGE_DEFAULT_SRC_DIR}
-fusionforge_dir=${FUSIONFORGE_DIR:-$FUSIONFORGE_DEFAULT_DIR}
-fusionforge_data_dir=${FUSIONFORGE_DATA_DIR:-/var/lib/gforge}
-fusionforge_log_dir=${FUSIONFORGE_LOG_DIR:-/var/log/gforge}
-fusionforge_etc_dir=${FUSIONFORGE_ETC_DIR:-/etc/gforge}
+fusionforge_dir=${FUSIONFORGE_DIR:-$(utils/forge_get_config_basic $install_loc source_path)}
+fusionforge_bin_dir=${FUSIONFORGE_DATA_DIR:-$(utils/forge_get_config_basic $install_loc binary_path)}
+fusionforge_data_dir=${FUSIONFORGE_DATA_DIR:-$(utils/forge_get_config_basic $install_loc data_path)}
+fusionforge_log_dir=${FUSIONFORGE_LOG_DIR:-$(utils/forge_get_config_basic $install_loc log_path)}
+fusionforge_etc_dir=${FUSIONFORGE_ETC_DIR:-$(utils/forge_get_config_basic $install_loc config_path)}
 
 # Call to detect_os, this will set $type and $distrib
 os=$(detect_os)
@@ -123,13 +128,13 @@ fi
 if $REINIT
 then
 	echo "Reinit the database"
-	rm -f /etc/gforge/install_completed
+	rm -f $fusionforge_etc_dir/install_completed
 	dropdbifexists $FFORGE_DB
 fi
 
 if [ -d "$FORGE_HOME" ]
 then
-	if [ -f "/etc/gforge/install_completed" ]
+	if [ -f "$fusionforge_etc_dir/install_completed" ]
 	then
 		mode="update"
 		echo "Upgrading previous installation ...";
@@ -172,8 +177,8 @@ else
 	fi
 fi
 
-echo "check /etc/gforge/local.inc for $hostname specific FusionForge settings"
+echo "check $fusionforge_etc_dir/local.inc for $hostname specific FusionForge settings"
 echo "Write INSTALL COMPLETED"
-date >> /etc/gforge/install_completed
-ls -al /etc/gforge/install_completed
+date >> $fusionforge_etc_dir/install_completed
+ls -al $fusionforge_etc_dir/install_completed
 

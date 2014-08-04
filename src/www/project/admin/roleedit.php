@@ -269,20 +269,18 @@ for ($i=0; $i<count($keys); $i++) {
 //
 //	File release system - each package can be public/private
 //
-	} elseif ($keys[$i] == 'frspackage') {
-
-		$res=db_query_params ('SELECT package_id,name,is_public
-			FROM frs_package WHERE group_id=$1',
-			array($group_id));
-		for ($q=0; $q<db_numrows($res); $q++) {
-			echo '<tr '. $HTML->boxGetAltRowStyle($j++) . '>
-			<td>'.$rbac_edit_section_names[$keys[$i]].'</td>
-			<td>'.db_result($res,$q,'name').'</td>
-			<td>'.html_build_select_box_from_assoc(
-				$role->getRoleVals($keys[$i]),
-				"data[".$keys[$i]."][".db_result($res,$q,'package_id')."]",
-				$role->getVal($keys[$i],db_result($res,$q,'package_id')),
-				false, false ).'</td></tr>';
+	} elseif ($keys[$i] == 'frs') {
+		$res = db_query_params('SELECT package_id,name FROM frs_package WHERE group_id=$1', array($group_id));
+		for ($q = 0; $q < db_numrows($res); $q++) {
+			$cells = array();
+			$cells[][] = $rbac_edit_section_names[$keys[$i]];
+			$cells[][] = db_result($res,$q,'name');
+			$cells[][] = html_build_select_box_from_assoc($role->getRoleVals($keys[$i]),
+									"data[".$keys[$i]."][".db_result($res,$q,'package_id')."]",
+									$role->getVal($keys[$i],db_result($res,$q,'package_id')),
+									false,
+									false);
+			echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($j++, true)), $cells);
 		}
 
 //

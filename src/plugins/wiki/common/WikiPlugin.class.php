@@ -111,6 +111,7 @@ class FusionForgeWikiPlugin extends Plugin {
 			if (defined('PHPWIKI_BASE_URL')) {
 				use_stylesheet('/wiki/themes/fusionforge/fusionforge.css');
 				use_stylesheet('/wiki/themes/fusionforge/fusionforge-print.css', 'print');
+                use_stylesheet('/wiki/highlight.js/styles/github.css');
 
 				echo '    <link rel="alternate" type="application/x-wiki" title="Edit this page!" href="'.$_SERVER['PHP_SELF'].'?action=edit" />';
 				echo "\n".'    <link rel="alternate stylesheet" type="text/css" href="/wiki/themes/fusionforge/fusionforge-fullscreen.css" media="screen" title="Fullscreen" />';

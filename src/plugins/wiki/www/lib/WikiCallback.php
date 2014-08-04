@@ -24,9 +24,8 @@ class WikiCallback
      * the first element should contain (a reference to) the object, the second
      * element should be a string containing the name of the method to be invoked.
      * @return object Returns the appropriate subclass of WikiCallback.
-     * @access public
      */
-    function callback($pearCb)
+    public function callback($pearCb)
     {
         if (is_string($pearCb))
             return new WikiFunctionCb($pearCb);
@@ -43,9 +42,8 @@ class WikiCallback
      * @param ? mixed This method takes a variable number of arguments (zero or more).
      * The callback function is called with the specified arguments.
      * @return mixed The return value of the callback.
-     * @access public
      */
-    function call()
+    public function call()
     {
         return $this->call_array(func_get_args());
     }
@@ -56,9 +54,8 @@ class WikiCallback
      * @param $args array Contains the arguments to be passed to the callback.
      * @return mixed The return value of the callback.
      * @see call_user_func_array.
-     * @access public
      */
-    function call_array($args)
+    public function call_array($args)
     {
         trigger_error('pure virtual', E_USER_ERROR);
     }
@@ -69,9 +66,8 @@ class WikiCallback
      * @return string The name of the callback function.
      *  (This value is suitable for passing as the callback parameter
      *   to a number of different Pear functions and methods.)
-     * @access public
      */
-    function toPearCb()
+    public function toPearCb()
     {
         trigger_error('pure virtual', E_USER_ERROR);
     }
@@ -84,12 +80,9 @@ class WikiFunctionCb
     extends WikiCallback
 {
     /**
-     * Constructor
-     *
      * @param $functionName string Name of global function to call.
-     * @access public
      */
-    function WikiFunctionCb($functionName)
+    public function __construct($functionName)
     {
         $this->functionName = $functionName;
     }
@@ -112,13 +105,10 @@ class WikiMethodCb
     extends WikiCallback
 {
     /**
-     * Constructor
-     *
      * @param $object object Object on which to invoke method.
      * @param $methodName string Name of method to call.
-     * @access public
      */
-    function WikiMethodCb(&$object, $methodName)
+    function __construct(&$object, $methodName)
     {
         $this->object = &$object;
         $this->methodName = $methodName;
@@ -143,14 +133,11 @@ class WikiAnonymousCb
     extends WikiCallback
 {
     /**
-     * Constructor
-     *
      * @param $args string Argument declarations
      * @param $code string Function body
      * @see create_function().
-     * @access public
      */
-    function WikiAnonymousCb($args, $code)
+    function __construct($args, $code)
     {
         $this->function = create_function($args, $code);
     }

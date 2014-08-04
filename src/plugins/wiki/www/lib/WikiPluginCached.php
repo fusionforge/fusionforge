@@ -69,12 +69,11 @@ class WikiPluginCached extends WikiPlugin
      * @param array $argarray all parameters (including those set to
      *                        default values) of the plugin call to be
      *                        prepared
-     * @access private
      * @return array(id,url)
      *
      * TODO: check if args is needed at all (on lost cache)
      */
-    function genUrl($cache, $argarray)
+    private function genUrl($cache, $argarray)
     {
         global $request;
         //$cacheparams = $GLOBALS['CacheParams'];
@@ -125,7 +124,6 @@ class WikiPluginCached extends WikiPlugin
      * Have a close look on the arguments and required return values,
      * however. </b>
      *
-     * @access protected
      * @param  WikiDB  $dbi      database abstraction class
      * @param  string  $argstr   plugin arguments in the call from PhpWiki
      * @param  Request $request
@@ -136,7 +134,7 @@ class WikiPluginCached extends WikiPlugin
      * @see #getImage
      * @see #getMap
      */
-    function run($dbi, $argstr, &$request, $basepage)
+    public function run($dbi, $argstr, &$request, $basepage)
     {
         $cache = $this->newCache();
         //$cacheparams = $GLOBALS['CacheParams'];
@@ -262,7 +260,6 @@ class WikiPluginCached extends WikiPlugin
      * Sets the type of the plugin to html, image or map
      * production
      *
-     * @access protected
      * @return int determines the plugin to produce either html,
      *             an image or an image map; uses on of the
      *             following predefined values
@@ -273,7 +270,7 @@ class WikiPluginCached extends WikiPlugin
      *             <li>PLUGIN_CACHED_MAP</li>
      *             </ul>
      */
-    function getPluginType()
+    protected function getPluginType()
     {
         return PLUGIN_CACHED_IMG_ONDEMAND;
     }
@@ -284,7 +281,6 @@ class WikiPluginCached extends WikiPlugin
      * <code>getPluginType</code> is set to
      * PLUGIN_CACHED_IMG_INLINE or PLUGIN_CACHED_IMG_ONDEMAND.
      *
-     * @access protected pure virtual
      * @param  WikiDB $dbi             database abstraction class
      * @param  array $argarray         complete (!) arguments to produce
      *                                image. It is not necessary to call
@@ -293,7 +289,7 @@ class WikiPluginCached extends WikiPlugin
      * @return mixed imagehandle image handle if successful
      *                                false if an error occured
      */
-    function getImage($dbi, $argarray, $request)
+    protected function getImage($dbi, $argarray, $request)
     {
         trigger_error('WikiPluginCached::getImage: pure virtual function in file '
             . __FILE__ . ' line ' . __LINE__, E_USER_ERROR);
@@ -308,7 +304,6 @@ class WikiPluginCached extends WikiPlugin
      * sufficient, the expire time is ignored and removing
      * is determined by the last "touch" of the entry.
      *
-     * @access protected virtual
      * @param  WikiDB $dbi            database abstraction class
      * @param  array $argarray        complete (!) arguments. It is
      *                                not necessary to call
@@ -317,7 +312,7 @@ class WikiPluginCached extends WikiPlugin
      * @return string format: '+seconds'
      *                                '0' never expires
      */
-    function getExpire($dbi, $argarray, $request)
+    protected function getExpire($dbi, $argarray, $request)
     {
         return '0'; // persist forever
     }
@@ -326,7 +321,6 @@ class WikiPluginCached extends WikiPlugin
      * Decides the image type of an image output.
      * Always used unless plugin type is PLUGIN_CACHED_HTML.
      *
-     * @access protected virtual
      * @param  WikiDB $dbi            database abstraction class
      * @param  array $argarray        complete (!) arguments. It is
      *                                not necessary to call
@@ -334,7 +328,7 @@ class WikiPluginCached extends WikiPlugin
      * @param  Request $request
      * @return string 'png', 'jpeg' or 'gif'
      */
-    function getImageType(&$dbi, $argarray, &$request)
+    protected function getImageType(&$dbi, $argarray, &$request)
     {
         if (in_array($argarray['imgtype'], preg_split('/\s*:\s*/', PLUGIN_CACHED_IMGTYPES)))
             return $argarray['imgtype'];
@@ -346,7 +340,6 @@ class WikiPluginCached extends WikiPlugin
      * Produces the alt text for an image.
      * <code> &lt;img src=... alt="getAlt(...)"&gt; </code>
      *
-     * @access protected virtual
      * @param  WikiDB $dbi            database abstraction class
      * @param  array $argarray        complete (!) arguments. It is
      *                                not necessary to call
@@ -354,7 +347,7 @@ class WikiPluginCached extends WikiPlugin
      * @param  Request $request
      * @return string "alt" description of the image
      */
-    function getAlt($dbi, $argarray, $request)
+    protected function getAlt($dbi, $argarray, $request)
     {
         return '<?plugin ' . $this->getName() . ' ' . $this->glueArgs($argarray) . '?>';
     }
@@ -364,7 +357,6 @@ class WikiPluginCached extends WikiPlugin
      * This method is only called if the plugin_type is set to
      * PLUGIN_CACHED_HTML.
      *
-     * @access protected pure virtual
      * @param  WikiDB $dbi            database abstraction class
      * @param  array $argarray        complete (!) arguments to produce
      *                                image. It is not necessary to call
@@ -374,7 +366,7 @@ class WikiPluginCached extends WikiPlugin
      * @return string html to be printed in place of the plugin command
      *                                false if an error occured
      */
-    function getHtml($dbi, $argarray, $request, $basepage)
+    protected function getHtml($dbi, $argarray, $request, $basepage)
     {
         trigger_error('WikiPluginCached::getHtml: pure virtual function in file '
             . __FILE__ . ' line ' . __LINE__, E_USER_ERROR);
@@ -385,7 +377,6 @@ class WikiPluginCached extends WikiPlugin
      * This method is only called if the plugin_type is set to
      * PLUGIN_CACHED_HTML.
      *
-     * @access protected pure virtual
      * @param  WikiDB $dbi            database abstraction class
      * @param  array $argarray        complete (!) arguments to produce
      *                                image. It is not necessary to call
@@ -397,7 +388,7 @@ class WikiPluginCached extends WikiPlugin
      *                                image.
      *                                array(false,false) if an error occured
      */
-    function getMap($dbi, $argarray, $request)
+    protected function getMap($dbi, $argarray, $request)
     {
         trigger_error('WikiPluginCached::getHtml: pure virtual function in file '
             . __FILE__ . ' line ' . __LINE__, E_USER_ERROR);
@@ -409,7 +400,6 @@ class WikiPluginCached extends WikiPlugin
      * Creates an HTML map hyperlinked to the image specified
      * by url and containing the hotspots given by map.
      *
-     * @access private
      * @param  $id       string  unique id for the plugin call
      * @param  $url      string  url pointing to the image part of the map
      * @param  $map      string  &lt;area&gt; tags defining active
@@ -421,7 +411,7 @@ class WikiPluginCached extends WikiPlugin
      * @param  $request  Request
      * @return string html output
      */
-    function embedMap($id, $url, $map, &$dbi, $argarray, &$request)
+    private function embedMap($id, $url, $map, &$dbi, $argarray, &$request)
     {
         // id is not unique if the same map is produced twice
         $key = substr($id, 0, 8) . substr(microtime(), 0, 6);
@@ -438,7 +428,6 @@ class WikiPluginCached extends WikiPlugin
      * url and produces an alternative text for non-graphical
      * browsers.
      *
-     * @access private
      * @param  string $url        url pointing to the image part of the map
      * @param  WikiDB $dbi        database abstraction class
      * @param  array $argarray    complete (!) arguments to produce
@@ -447,7 +436,7 @@ class WikiPluginCached extends WikiPlugin
      * @param  Request $request
      * @return string html output
      */
-    function embedImg($url, $dbi, $argarray, $request)
+    private function embedImg($url, $dbi, $argarray, $request)
     {
         return HTML::img(array(
             'src' => $url,
@@ -488,10 +477,9 @@ class WikiPluginCached extends WikiPlugin
      * Creates one static PEAR Cache object and returns copies afterwards.
      * FIXME: There should be references returned
      *
-     * @access static protected
      * @return Cache copy of the cache object
      */
-    function newCache()
+    static public function newCache()
     {
         static $staticcache;
 
@@ -525,13 +513,12 @@ class WikiPluginCached extends WikiPlugin
      * Determines whether a needed image type may is available
      * from the GD library and gives an alternative otherwise.
      *
-     * @access public static
      * @param string $wish    one of 'png', 'gif', 'jpeg', 'jpg'
      * @return string the image type to be used ('png', 'gif', 'jpeg')
      *                        'html' in case of an error
      */
 
-    function decideImgType($wish)
+    public static function decideImgType($wish)
     {
         if ($wish == 'html') return $wish;
         if ($wish == 'jpg') {
@@ -575,14 +562,13 @@ class WikiPluginCached extends WikiPlugin
      * Note that there is no check if the image can
      * be written.
      *
-     * @access  public static
      * @param   string $imgtype    'png', 'gif' or 'jpeg'
      * @param   string $imghandle  image handle containing the image
      * @param   string $imgfile    file name of the image to be produced
      * @return void
      * @see     decideImageType
      */
-    function writeImage($imgtype, $imghandle, $imgfile = '')
+    public static function writeImage($imgtype, $imghandle, $imgfile = '')
     {
         if ($imgtype != 'html') {
             $func = "Image" . strtoupper($imgtype);
@@ -598,11 +584,10 @@ class WikiPluginCached extends WikiPlugin
      * Sends HTTP Header for some predefined file types.
      * There is no parameter check.
      *
-     * @access  public static
      * @param   string $doctype 'gif', 'png', 'jpeg', 'html'
      * @return void
      */
-    function writeHeader($doctype)
+    public static function writeHeader($doctype)
     {
         static $IMAGEHEADER = array(
             'gif' => 'Content-type: image/gif',
@@ -623,11 +608,10 @@ class WikiPluginCached extends WikiPlugin
      * This should only be used for displaying plugin options for
      * the quoting of arguments is not safe, yet.
      *
-     * @access public static
      * @param  array $argarray    contains all arguments to be converted
      * @return string concated arguments
      */
-    function glueArgs($argarray)
+    public static function glueArgs($argarray)
     {
         if (!empty($argarray)) {
             $argstr = '';
@@ -647,7 +631,6 @@ class WikiPluginCached extends WikiPlugin
      * Extracts the cache entry id from the url and the plugin call
      * parameters if available.
      *
-     * @access private static
      * @param  string $id            return value. Image is stored under this id.
      * @param  string $plugincall    return value. Only returned if present in url.
      *                               Contains all parameters to reconstruct
@@ -660,7 +643,7 @@ class WikiPluginCached extends WikiPlugin
      *                               Param id and param plugincall are
      *                               also return values.
      */
-    function checkCall1(&$id, &$plugincall, $cache, $request, $errorformat)
+    private static function checkCall1(&$id, &$plugincall, $cache, $request, $errorformat)
     {
         $id = $request->getArg('id');
         $plugincall = rawurldecode($request->getArg('args'));
@@ -682,14 +665,13 @@ class WikiPluginCached extends WikiPlugin
      * Extracts the parameters necessary to reconstruct the plugin
      * call needed to produce the requested image.
      *
-     * @access static private
      * @param  $plugincall string   reference to serialized array containing both
      *                             name and parameters of the plugin call
      * @param  $request    Request  ???
      * @return bool false if an error occurs, true otherwise.
      *
      */
-    function checkCall2(&$plugincall, $request)
+    static private function checkCall2(&$plugincall, $request)
     {
         // if plugincall wasn't sent by URL, it must have been
         // stored in a session var instead and we can retreive it from there
@@ -710,7 +692,6 @@ class WikiPluginCached extends WikiPlugin
 
     /**
      * Creates an image or image map depending on the plugin type.
-     * @access static private
      * @param  $content array             reference to created array which overwrite the keys
      *                                   'image', 'imagetype' and possibly 'html'
      * @param  $plugin  WikiPluginCached  plugin which is called to create image or map
@@ -720,7 +701,7 @@ class WikiPluginCached extends WikiPlugin
      * @param  $errorformat string        outputs errors in 'png', 'gif', 'jpg' or 'html'
      * @return bool error status; true=ok; false=error
      */
-    function produceImage(&$content, $plugin, $dbi, $argarray, $request, $errorformat)
+    private function produceImage(&$content, $plugin, $dbi, $argarray, $request, $errorformat)
     {
         $plugin->resetError();
         $content['html'] = $imagehandle = false;
@@ -821,13 +802,12 @@ class WikiPluginCached extends WikiPlugin
      * Main function for obtaining images from cache or generating on-the-fly
      * from parameters sent by url or session vars.
      *
-     * @access static public
      * @param  WikiDB $dbi                 handle to database
      * @param  Request $request            ???
      * @param  string $errorformat         outputs errors in 'png', 'gif', 'jpeg' or 'html'
      * @return bool
      */
-    function fetchImageFromCache($dbi, $request, $errorformat = 'png')
+    public function fetchImageFromCache($dbi, $request, $errorformat = 'png')
     {
         $cache = $this->newCache();
         $errorformat = $this->decideImgType($errorformat);
@@ -896,10 +876,9 @@ class WikiPluginCached extends WikiPlugin
      * done before invoking any abstract creation routines like
      * <code>getImage</code>.
      *
-     * @access private
      * @return void
      */
-    function resetError()
+    protected function resetError()
     {
         $this->_errortext = '';
     }
@@ -907,10 +886,9 @@ class WikiPluginCached extends WikiPlugin
     /**
      * Returns all accumulated error messages.
      *
-     * @access protected
      * @return string error messages printed with <code>complain</code>.
      */
-    function getError()
+    protected function getError()
     {
         return $this->_errortext;
     }
@@ -920,12 +898,11 @@ class WikiPluginCached extends WikiPlugin
      * by WikiPluginCached. This should be used for any errors
      * that occur during data (html,image,map) creation.
      *
-     * @access protected
      * @param  string $addtext errormessage to be printed (separate
      *                         multiple lines with '\n')
      * @return void
      */
-    function complain($addtext)
+    protected function complain($addtext)
     {
         $this->_errortext .= $addtext;
     }
@@ -934,12 +911,11 @@ class WikiPluginCached extends WikiPlugin
      * Outputs the error as image if possible or as html text
      * if wished or html header has already been sent.
      *
-     * @access static protected
      * @param  string $imgtype 'png', 'gif', 'jpeg' or 'html'
      * @param  string $errortext guess what?
      * @return void
      */
-    function printError($imgtype, $errortext)
+    protected function printError($imgtype, $errortext)
     {
         $imgtype = $this->decideImgType($imgtype);
 
@@ -971,7 +947,6 @@ class WikiPluginCached extends WikiPlugin
      * values may be smaller if the chosen font is to big for there
      * is further restriction to 600 pixel in width and 350 in height.
      *
-     * @access static public
      * @param  $txt     string  multi line text to be converted
      * @param  $fontnr  integer number (1-5) telling gd which internal font to use;
      *                         I recommend font 2 for errors and 4 for help texts.
@@ -979,7 +954,7 @@ class WikiPluginCached extends WikiPlugin
      * @param  $bgcol   array   background color; array(red,green,blue)
      * @return string image handle for gd routines
      */
-    function text2img($txt, $fontnr, $textcol, $bgcol)
+    static public function text2img($txt, $fontnr, $textcol, $bgcol)
     {
         // basic (!) output for error handling
 

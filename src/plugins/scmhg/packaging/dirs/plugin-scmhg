@@ -1,2 +1,2 @@
-@PLUGIN_PATH@/scmhg/common
+@PLUGINS_PATH@/scmhg/common
 @DATA_PATH@/chroot/scmrepos/hg

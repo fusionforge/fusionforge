@@ -246,11 +246,9 @@ class RatingsDb extends WikiDB
      * @param ratee  The page id of the ratee, i.e. page being rated.
      * @param dimension  The rating dimension id.
      *
-     * @access public
-     *
      * @return true upon success
      */
-    function delete_rating($rater, $ratee, $dimension)
+    public function delete_rating($rater, $ratee, $dimension)
     {
         if (RATING_STORAGE == 'SQL') {
             $this->sql_delete_rating($rater, $ratee, $dimension);
@@ -269,11 +267,9 @@ class RatingsDb extends WikiDB
      * @param dimension  The rating dimension id.
      * @param rating The rating value (a float).
      *
-     * @access public
-     *
      * @return true upon success
      */
-    function rate($rater, $ratee, $rateeversion, $dimension, $rating)
+    public function rate($rater, $ratee, $rateeversion, $dimension, $rating)
     {
         if (RATING_STORAGE == 'SQL') {
             $page = $this->_dbi->getPage($pagename);
@@ -486,10 +482,9 @@ class RatingsDb extends WikiDB
     }
 
     /**
-     * @access private
      * @return result ressource, suitable to the iterator
      */
-    function _sql_get_rating_result($dimension = null, $rater = null, $ratee = null,
+    private function _sql_get_rating_result($dimension = null, $rater = null, $ratee = null,
                                     $orderby = null, $pageinfo = "ratee")
     {
         // pageinfo must be 'rater' or 'ratee'
@@ -552,11 +547,9 @@ class RatingsDb extends WikiDB
      * @param ratee  The page id of the ratee, i.e. page being rated.
      * @param dimension  The rating dimension id.
      *
-     * @access public
-     *
      * @return true upon success
      */
-    function sql_delete_rating($rater, $ratee, $dimension)
+    public function sql_delete_rating($rater, $ratee, $dimension)
     {
         //$dbh = &$this->_dbi;
         $dbi = &$this->_sqlbackend;
@@ -584,12 +577,9 @@ class RatingsDb extends WikiDB
      * @param dimension  The rating dimension id.
      * @param rating The rating value (a float).
      *
-     * @access public
-     *
      * @return true upon success
      */
-    //               ($this->userid, $this->pagename, $page->version, $this->dimension, $rating);
-    function sql_rate($rater, $ratee, $rateeversion, $dimension, $rating)
+    public function sql_rate($rater, $ratee, $rateeversion, $dimension, $rating)
     {
         $dbi = &$this->_sqlbackend;
         extract($dbi->_table_names);

@@ -74,36 +74,83 @@ class FRSPackageFactory extends Error {
 	/**
 	 * getFRSs - get an array of FRS objects for this Group.
 	 *
+	 * @param	bool	$status	limite the search to active packages. Default is false.
 	 * @return	array	The array of FRS objects.
 	 */
-	function getFRSs() {
+	function getFRSs($status = false) {
 		if (isset($this->FRSs) && is_array($this->FRSs)) {
 			return $this->FRSs;
 		}
 
-		if (session_loggedin()) {
-			if (user_ismember($this->Group->getID()) || forge_check_global_perm('forge_admin')) {
-				$pub_sql='';
-			} else {
-				$pub_sql=' AND is_public=1 ';
-			}
-		} else {
-			$pub_sql=' AND is_public=1 ';
-		}
+		$this->FRSs = array();
+		$ids = $this->getAllPackagesIds($status);
 
-		$sql = "SELECT * FROM frs_package WHERE group_id=$1 AND status_id='1' $pub_sql ORDER BY name";
-		$result = db_query_params($sql, array($this->Group->getID()));
-
-		if (!$result) {
-			$this->setError(_('Error Getting FRS')._(': ').db_error());
-			return false;
-		} else {
-			$this->FRSs = array();
-			while ($arr = db_fetch_array($result)) {
-				$this->FRSs[] = new FRSPackage($this->getGroup(), $arr['package_id'], $arr);
+		foreach ($ids as $id) {
+			if (forge_check_perm('frs', $id, 'read')) {
+				$this->FRSs[] = new FRSPackage($this->Group, $id);
 			}
 		}
 		return $this->FRSs;
+	}
+
+	/**
+	 * getAllPackagesIds - return a list of package ids.
+	 *
+	 * @param	bool	$status	limite the search to active packages. Default is false.
+	 * @return	array	The array of package object ids.
+	 */
+	function &getAllPackagesIds($status = false) {
+		$result = array();
+		$qpa = db_construct_qpa();
+		$qpa = db_construct_qpa($qpa, 'SELECT package_id FROM frs_package WHERE group_id=$1 ',
+					array($this->Group->getID()));
+		if ($status)
+			$qpa = db_construct_qpa($qpa, 'AND status_id=$1', array(1));
+
+		$qpa = db_construct_qpa($qpa, 'ORDER BY package_id ASC');
+		$res = db_query_qpa($qpa);
+		if (!$res) {
+			return $result;
+		}
+		while ($arr = db_fetch_array($res)) {
+			$result[] = $arr['package_id'];
+		}
+		return $result;
+	}
+
+	function getPermissionOfASpecificUser() {
+		$admin = false;
+		$release = false;
+		$file = false;
+		$read = false;
+		$pkgids = $this->getAllPackagesIds();
+		foreach ($pkgids as $pkgid) {
+			if (forge_check_perm('frs', $pkgid, 'read')) {
+				$read = true;
+			}
+			if (forge_check_perm('frs', $pkgid, 'file')) {
+				$file = true;
+			}
+			if (forge_check_perm('frs', $pkgid, 'release')) {
+				$release = true;
+			}
+			if (forge_check_perm('frs', $pkgid, 'admin')) {
+				$admin = true;
+			}
+		}
+		if (forge_check_perm('frs_admin', $this->Group->getID(), 'admin')) {
+			$admin = true;
+		}
+		if ($admin) {
+			return 'admin';
+		} elseif ($release) {
+			return 'release';
+		} elseif ($file) {
+			return 'file';
+		} elseif ($read) {
+			return 'read';
+		}
+		return NULL;
 	}
 
 }

@@ -510,7 +510,6 @@ class WikiPlugin_VisualWiki
      * static workaround on broken Cache or broken dot executable,
      * called only if debug=static.
      *
-     * @access private
      * @param string $url
      * @param WikiDB $dbi
      * @param array $argarray
@@ -524,7 +523,7 @@ class WikiPlugin_VisualWiki
      *                          WikiPlugin->getArgs anymore.
      * @return string html output
      */
-    function embedImg($url, &$dbi, $argarray, &$request)
+    private function embedImg($url, &$dbi, $argarray, &$request)
     {
         if (!VISUALWIKI_ALLOWOPTIONS)
             $argarray = $this->defaultarguments();

@@ -4,3 +4,8 @@
 <?php if (DEBUG & _DEBUG_VERBOSE) { ?><?php echo Template('debug') ?><?php } ?>
 <?php } ?>
 <!--/span-->
+<script type="text/javascript" src="<?php echo DATA_PATH ?>/highlight.js/highlight.pack.js"></script>
+<script>
+    hljs.tabReplace = '    ';
+    hljs.initHighlightingOnLoad();
+</script>

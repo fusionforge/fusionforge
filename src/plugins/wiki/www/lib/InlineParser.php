@@ -79,14 +79,13 @@ class RegexpSet_match
  */
 class RegexpSet
 {
-    /** Constructor
-     *
+    /**
      * @param array $regexps A list of regular expressions.  The
      * regular expressions should not include any sub-pattern groups
      * "(...)".  (Anonymous groups, like "(?:...)", as well as
      * look-ahead and look-behind assertions are okay.)
      */
-    function RegexpSet($regexps)
+    function __construct($regexps)
     {
         assert($regexps);
         $this->_regexps = array_unique($regexps);
@@ -544,7 +543,7 @@ class Markup_bracketlink extends SimpleMarkup
 
 class Markup_spellcheck extends SimpleMarkup
 {
-    function Markup_spellcheck()
+    function __construct()
     {
         $this->suggestions = $GLOBALS['request']->getArg('suggestions');
     }
@@ -567,7 +566,7 @@ class Markup_spellcheck extends SimpleMarkup
 
 class Markup_searchhighlight extends SimpleMarkup
 {
-    function Markup_searchhighlight()
+    function __construct()
     {
         $result = $GLOBALS['request']->_searchhighlight;
         require_once 'lib/TextSearchQuery.php';
@@ -1215,7 +1214,7 @@ class Markup_html_entities extends SimpleMarkup
 {
     //public $_match_regexp = '(: \.\.\.|\-\-|\-\-\-|\(C\) )';
 
-    function Markup_html_entities()
+    function __construct()
     {
         $this->_entities = array('...' => '&#133;',
             '--' => '&ndash;',
@@ -1415,9 +1414,9 @@ class InlineTransformer
 
 class LinkTransformer extends InlineTransformer
 {
-    function LinkTransformer()
+    function __construct()
     {
-        $this->InlineTransformer(array('escape', 'wikicreolebracketlink', 'bracketlink', 'url',
+        parent::__construct(array('escape', 'wikicreolebracketlink', 'bracketlink', 'url',
             'semanticlink', 'interwiki', 'wikiword',
         ));
     }
@@ -1425,9 +1424,9 @@ class LinkTransformer extends InlineTransformer
 
 class NowikiTransformer extends InlineTransformer
 {
-    function NowikiTransformer()
+    function __construct()
     {
-        $this->InlineTransformer
+        parent::__construct
         (array('linebreak',
             'html_emphasis', 'html_abbr', 'plugin', 'plugin_wikicreole',
             'isonumchars', 'isohexchars', /*'html_entities',*/

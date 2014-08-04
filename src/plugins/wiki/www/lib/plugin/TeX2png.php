@@ -181,8 +181,7 @@ class WikiPlugin_TeX2png
                 $this->createTexFile($texfile, $text);
                 $this->createPngFile($this->imagepath, $imagename);
             } else {
-                $error_html = _("TeX imagepath not writable.");
-                trigger_error($error_html, E_USER_NOTICE);
+                return HTML::span(array('class' => 'error'), _("TeX imagepath not writable."));
             }
         }
 

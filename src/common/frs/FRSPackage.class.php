@@ -6,7 +6,7 @@
  * Copyright 2009, Roland Mas
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2012-2013, Franck Villaume - TrivialDev
+ * Copyright 2012-2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -28,13 +28,15 @@ require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'frs/FRSRelease.class.php';
 
 /**
- * @param Group $Group
- * @return array
+ * get_frs_packages - get all FRS packages for a specific project
+ *
+ * @param	Group	$Group
+ * @return	array
  */
 function get_frs_packages($Group) {
 	$ps = array();
-	$res = db_query_params ('SELECT * FROM frs_package WHERE group_id=$1',
-				array ($Group->getID())) ;
+	$res = db_query_params('SELECT * FROM frs_package WHERE group_id=$1',
+				array($Group->getID())) ;
 	if (db_numrows($res) > 0) {
 		while($arr = db_fetch_array($res)) {
 			$ps[]=new FRSPackage($Group, $arr['package_id'], $arr);
@@ -56,17 +58,33 @@ function frspackage_get_object($package_id, $data=false) {
 		if ($data) {
 			//the db result handle was passed in
 		} else {
-			$res = db_query_params ('SELECT * FROM frs_package WHERE package_id=$1',
-						array ($package_id)) ;
-			if (db_numrows($res)<1) {
+			$res = db_query_params('SELECT * FROM frs_package WHERE package_id=$1',
+						array($package_id)) ;
+			if (db_numrows($res) < 1) {
 				return false;
 			}
 			$data = db_fetch_array($res);
 		}
 		$Group = group_get_object($data['group_id']);
-		$FRSPACKAGE_OBJ['_'.$package_id.'_']= new FRSPackage($Group,$data['package_id'],$data);
+		$FRSPACKAGE_OBJ['_'.$package_id.'_']= new FRSPackage($Group,$data['package_id'], $data);
 	}
 	return $FRSPACKAGE_OBJ['_'.$package_id.'_'];
+}
+
+/**
+ * frspackage_get_groupid - get the project id from a package id
+ *
+ * @param	integer	$package_id	the package id
+ * @return	integer the project id
+ */
+function frspackage_get_groupid($package_id) {
+	$res = db_query_params('SELECT group_id FROM frs_package WHERE package_id=$1',
+				array($package_id));
+	if (!$res || db_numrows($res) < 1) {
+		return false;
+	}
+	$arr = db_fetch_array($res);
+	return $arr['group_id'];
 }
 
 class FRSPackage extends Error {
@@ -132,12 +150,10 @@ class FRSPackage extends Error {
 	 * create - create a new FRSPackage in the database.
 	 *
 	 * @param	$name
-	 * @param	int	$is_public
 	 * @internal	param	\The $string name of this package.
-	 * @internal	param	\Whether $boolean it's public or not. 1=public 0=private.
 	 * @return	boolean	success.
 	 */
-	function create($name, $is_public = 1) {
+	function create($name) {
 
 		if (strlen($name) < 3) {
 			$this->setError(_('FRSPackage Name Must Be At Least 3 Characters'));
@@ -146,31 +162,30 @@ class FRSPackage extends Error {
 		if (!util_is_valid_filename($name)) {
 			$this->setError(_('Package Name can only be alphanumeric'));
 		}
-		if (!forge_check_perm ('frs', $this->Group->getID(), 'write')) {
+		if (!forge_check_perm('frs_admin', $this->Group->getID(), 'admin')) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
 
-		$res = db_query_params ('SELECT * FROM frs_package WHERE group_id=$1 AND name=$2',
-					array ($this->Group->getID(),
-					       htmlspecialchars($name))) ;
+		$res = db_query_params('SELECT * FROM frs_package WHERE group_id=$1 AND name=$2',
+					array($this->Group->getID(),
+						htmlspecialchars($name)));
 		if (db_numrows($res)) {
 			$this->setError(_('Error Adding Package')._(': ')._('Name Already Exists'));
 			return false;
 		}
 
 		db_begin();
-		$result = db_query_params ('INSERT INTO frs_package(group_id,name,status_id,is_public) VALUES ($1,$2,$3,$4)',
-					   array ($this->Group->getId(),
-						  htmlspecialchars($name),
-						  1,
-						  $is_public)) ;
+		$result = db_query_params('INSERT INTO frs_package(group_id, name, status_id) VALUES ($1,$2,$3)',
+					array($this->Group->getId(),
+						htmlspecialchars($name),
+						1));
 		if (!$result) {
 			$this->setError(_('Error Adding Package')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
-		$this->package_id=db_insertid($result,'frs_package','package_id');
+		$this->package_id = db_insertid($result,'frs_package','package_id');
 		if (!$this->fetchData($this->package_id)) {
 			db_rollback();
 			return false;
@@ -190,6 +205,9 @@ class FRSPackage extends Error {
 			// this 2 should normally silently fail (because it's called with the apache user) but if it's root calling the create() method, then the owner and group for the directory should be changed
 			@chown($newdirlocation, forge_get_config('apache_user'));
 			@chgrp($newdirlocation, forge_get_config('apache_group'));
+
+			// add role entry
+			$this->Group->normalizeAllRoles();
 			db_commit();
 			return true;
 		}
@@ -202,9 +220,8 @@ class FRSPackage extends Error {
 	 * @return	boolean	success.
 	 */
 	function fetchData($package_id) {
-		$res = db_query_params ('SELECT * FROM frs_package WHERE package_id=$1 AND group_id=$2',
-					array ($package_id,
-					       $this->Group->getID())) ;
+		$res = db_query_params('SELECT * FROM frs_package WHERE package_id=$1 AND group_id=$2',
+					array($package_id, $this->Group->getID()));
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError(_('Invalid package_id'));
 			return false;
@@ -260,12 +277,28 @@ class FRSPackage extends Error {
 	}
 
 	/**
+	 * getStatusName - get the status name of this package based on his status_id.
+	 *
+	 * @return	string	The status name.
+	 */
+	function getStatusName() {
+		$res = db_query_params('SELECT * FROM frs_status', array());
+		while ($arr = db_fetch_array($res)) {
+			if ($arr['status_id'] == $this->getStatus()) {
+				return $arr['name'];
+			}
+		}
+		return NULL;
+	}
+
+	/**
 	 * isPublic - whether non-group-members can view.
 	 *
 	 * @return	boolean	is_public.
 	 */
 	function isPublic() {
-		return $this->data_array['is_public'];
+		$ra = RoleAnonymous::getInstance();
+		return $ra->hasPermission('frs', $this->getID(), 'read');
 	}
 
 	/**
@@ -278,9 +311,8 @@ class FRSPackage extends Error {
 			$this->setError(_('You can only monitor if you are logged in.'));
 			return false;
 		}
-		$result = db_query_params ('SELECT * FROM filemodule_monitor WHERE user_id=$1 AND filemodule_id=$2',
-					   array (user_getid(),
-						  $this->getID())) ;
+		$result = db_query_params('SELECT * FROM filemodule_monitor WHERE user_id=$1 AND filemodule_id=$2',
+					array (user_getid(), $this->getID()));
 
 		if (!$result || db_numrows($result) < 1) {
 			/*
@@ -367,20 +399,19 @@ class FRSPackage extends Error {
 	 *
 	 * @param	string	$name		The name of this package.
 	 * @param	int	$status		The status_id of this package from frs_status table.
-	 * @param	int	$is_public	public or private : 1 or 0
 	 * @return	boolean success.
 	 */
-	function update($name, $status, $is_public = 1) {
+	function update($name, $status) {
 		if (strlen($name) < 3) {
 			$this->setError(_('FRSPackage Name Must Be At Least 3 Characters'));
 			return false;
 		}
 
-		if (!forge_check_perm('frs', $this->Group->getID(), 'write')) {
+		if (!forge_check_perm('frs', $this->getID(), 'admin')) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
-		if($this->getName()!=htmlspecialchars($name)) {
+		if($this->getName() != htmlspecialchars($name)) {
 			$res = db_query_params ('SELECT * FROM frs_package WHERE group_id=$1 AND name=$2',
 						array ($this->Group->getID(),
 						       htmlspecialchars($name))) ;
@@ -390,12 +421,11 @@ class FRSPackage extends Error {
 			}
 		}
 		db_begin();
-		$res = db_query_params('UPDATE frs_package SET	name=$1, status_id=$2, is_public=$3 WHERE group_id=$4 AND package_id=$5',
+		$res = db_query_params('UPDATE frs_package SET name=$1, status_id=$2 WHERE group_id=$3 AND package_id=$4',
 					array (htmlspecialchars($name),
 					       $status,
-					       $is_public,
 					       $this->Group->getID(),
-					       $this->getID())) ;
+					       $this->getID()));
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setError(_('Error On Update')._(': ').db_error());
 			db_rollback();
@@ -404,7 +434,7 @@ class FRSPackage extends Error {
 
 		$olddirname = $this->getFileName();
 		if(!$this->fetchData($this->getID())){
-			$this->setError(_("Error Updating Package")._(': ')._("Couldn't fetch data"));
+			$this->setError(_('Error Updating Package')._(': ')._("Couldn't fetch data"));
 			db_rollback();
 			return false;
 		}
@@ -419,7 +449,7 @@ class FRSPackage extends Error {
 				return false;
 			} else {
 				if(!@rename($olddirlocation,$newdirlocation)) {
-					$this->setError(_("Error Updating Package")._(': ')._("Couldn't rename dir"));
+					$this->setError(_('Error Updating Package')._(': ')._("Couldn't rename dir"));
 					db_rollback();
 					return false;
 				}
@@ -470,18 +500,18 @@ class FRSPackage extends Error {
 			$this->setMissingParamsError(_('Please tick all checkboxes.'));
 			return false;
 		}
-		if (!forge_check_perm ('frs', $this->Group->getID(), 'write')) {
+		if (!forge_check_perm('frs', $this->getID(), 'admin')) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
 		$r =& $this->getReleases();
-		for ($i=0; $i<count($r); $i++) {
+		for ($i = 0; $i<count($r); $i++) {
 			if (!is_object($r[$i]) || $r[$i]->isError() || !$r[$i]->delete($sure, $really_sure)) {
-				$this->setError(_('Release Error: ').$r[$i]->getName().':'.$r[$i]->getErrorMessage());
+				$this->setError(_('Release Error')._(': ').$r[$i]->getName()._(': ').$r[$i]->getErrorMessage());
 				return false;
 			}
 		}
-		$dir=forge_get_config('upload_dir').'/'.
+		$dir = forge_get_config('upload_dir').'/'.
 			$this->Group->getUnixName() . '/' .
 			$this->getFileName().'/';
 
@@ -495,9 +525,9 @@ class FRSPackage extends Error {
 		if (is_dir($dir))
 			rmdir($dir);
 
-		db_query_params ('DELETE FROM frs_package WHERE package_id=$1 AND group_id=$2',
+		db_query_params('DELETE FROM frs_package WHERE package_id=$1 AND group_id=$2',
 				 array ($this->getID(),
-					$this->Group->getID())) ;
+					$this->Group->getID()));
 		return true;
 	}
 
@@ -507,10 +537,9 @@ class FRSPackage extends Error {
 	 *
 	 * @return	object	FRSRelease
 	 */
-
-	function getNewestRelease() {
+	public function getNewestRelease() {
 		$result = db_query_params('SELECT MAX(release_id) AS release_id FROM frs_release WHERE package_id=$1',
-					  array ($this->getID())) ;
+					  array ($this->getID()));
 
 		if ($result && db_numrows($result) == 1) {
 			$row = db_fetch_array($result);
@@ -522,13 +551,18 @@ class FRSPackage extends Error {
 	}
 
 	public function getNewestReleaseZipName() {
-		return $this->getFileName()."-latest.zip";
+		return $this->getFileName().'-latest.zip';
 	}
 
-	public function getNewestReleaseZipPath () {
+	public function getNewestReleaseZipPath() {
 		return forge_get_config('upload_dir').'/'.$this->Group->getUnixName().'/'.$this->getFileName().'/'.$this->getNewestReleaseZipName();
 	}
 
+	/**
+	 * createNewestReleaseFilesAsZip - create the Zip Archive of the package
+	 *
+	 * @return	bool true on success even if the php ZipArchive does not exist
+	 */
 	public function createNewestReleaseFilesAsZip(){
 		$release = $this->getNewestRelease();
 		if ($release && class_exists('ZipArchive')) {
@@ -536,19 +570,25 @@ class FRSPackage extends Error {
 			$zipPath = $this->getNewestReleaseZipPath();
 			$filesPath = forge_get_config('upload_dir').'/'.$this->Group->getUnixName().'/'.$this->getFileName().'/'.$release->getFileName();
 
-			if ($zip->open($zipPath, ZIPARCHIVE::OVERWRITE)!=true) {
-				exit_error(_('Cannot open the file archive.').' '.$zipPath.'.');
+			if ($zip->open($zipPath, ZIPARCHIVE::OVERWRITE) !== true) {
+				$this->setError(_('Cannot open the file archive')._(': ').$zipPath.'.');
+				return false;
 			}
 
 			$files = $release->getFiles();
-
 			foreach ($files as $f) {
 				$filePath = $filesPath.'/'.$f->getName();
-				$zip->addFile($filePath,$f->getName());
+				if ($zip->addFile($filePath, $f->getName()) !== true) {
+					$this->setError(_('Cannot add file to the file archive')._(': ').$zipPath.'.');
+					return false;
+				}
 			}
-
-			$zip->close();
+			if ($zip->close() !== true) {
+				$this->setError(_('Cannot close the file archive')._(': ').$zipPath.'.');
+				return false;
+			}
 		}
+		return true;
 	}
 
 	public function deleteNewestReleaseFilesAsZip() {

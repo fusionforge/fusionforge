@@ -46,7 +46,7 @@ class ForumMessage extends Error {
 	var $Forum;
 
 	/**
-	 *  Constructor.
+	 * Constructor.
 	 *
 	 * @param	object		$Forum		The Forum object to which this ForumMessage is associated.
 	 * @param	bool|int	$msg_id		The message_id.
@@ -95,16 +95,16 @@ class ForumMessage extends Error {
 		return true;
 	}
 
-/**
-	*	insertmoderated - inserts the message into the table for moderation (forum_pending_messages)
-	 *	@param	string	$subject			The subject of the message.
-	 *	@param	string	$body				The body of the message.
-	 *	@param	int		$thread_id			The thread_id of the message, if known.
-	 *	@param	int		$is_followup_to 	The message_id of the parent message, if any.
-	 *	@param 	int		$user_id		The id of the user that is posting the message
-	 *	@return	boolean success.
-	*/
-
+	/**
+	 * insertmoderated - inserts the message into the table for moderation (forum_pending_messages)
+	 *
+	 * @param	string	$subject			The subject of the message.
+	 * @param	string	$body				The body of the message.
+	 * @param	int		$thread_id			The thread_id of the message, if known.
+	 * @param	int		$is_followup_to 	The message_id of the parent message, if any.
+	 * @param 	int		$user_id		The id of the user that is posting the message
+	 * @return	boolean success.
+	 */
 	function insertmoderated($subject, $body, $thread_id=0, $is_followup_to=0,$user_id) {
 		if (!$thread_id) {
 			$thread_id=$this->Forum->getNextThreadID();
@@ -153,19 +153,19 @@ class ForumMessage extends Error {
 	}
 
 	/**
-	*	insertreleasedmsg - inserts the released message into the main table (forum)
-	 *	@param 	string	$group_forum_id	The Forum id
-	 *	@param	string	$subject		The subject of the message.
-	 *	@param	string	$body			The body of the message.
-	 *	@param	string	$post_date		The post date
-	 *	@param	int		$thread_id		The thread_id of the message
-	 *	@param	int		$is_followup_to	The message_id of the parent message, if any.
-	 *	@param 	int		$posted_by		The id of the user that is posting the message
-	 *	@param 	int		$has_followups	has followups?
-	 *	@param 	int		$most_recent_date	most recent date
-	 *	@return	bool	success.
-	*/
-
+	 * insertreleasedmsg - inserts the released message into the main table (forum)
+	 *
+	 * @param	string	$group_forum_id	The Forum id
+	 * @param	string	$subject		The subject of the message.
+	 * @param	string	$body			The body of the message.
+	 * @param	string	$post_date		The post date
+	 * @param	int		$thread_id		The thread_id of the message
+	 * @param	int		$is_followup_to	The message_id of the parent message, if any.
+	 * @param	int		$posted_by		The id of the user that is posting the message
+	 * @param	int		$has_followups	has followups?
+	 * @param	int		$most_recent_date	most recent date
+	 * @return	bool	success.
+	 */
 	function insertreleasedmsg($group_forum_id, $subject, $body, $post_date, $thread_id,
 							   $is_followup_to, $posted_by, $has_followups, $most_recent_date) {
 		if ($is_followup_to != 0) {
@@ -238,19 +238,18 @@ class ForumMessage extends Error {
 		}
 	}
 
-
-
 	/**
-	*	insertmsg - inserts the message into the main table (forum)
-	 *	@param	string	$subject			The subject of the message.
-	 *	@param	string	$body				The body of the message.
-	 *	@param	int		$thread_id			The thread_id of the message, if known.
-	 *	@param	int		$is_followup_to		The message_id of the parent message, if any.
-	 *	@param 	int		$user_id			The id of the user that is posting the message
-	 *	@param  bool	$has_attach			Whether the message has an attach associated. Defaults to false
-	 *	@param	int		$timestamp			The timestamp of the message to insert, defaults to 0.
-	 *	@return	boolean success.
-	*/
+	 * insertmsg - inserts the message into the main table (forum)
+	 *
+	 * @param	string	$subject			The subject of the message.
+	 * @param	string	$body				The body of the message.
+	 * @param	int		$thread_id			The thread_id of the message, if known.
+	 * @param	int		$is_followup_to		The message_id of the parent message, if any.
+	 * @param	int		$user_id			The id of the user that is posting the message
+	 * @param	bool	$has_attach			Whether the message has an attach associated. Defaults to false
+	 * @param	int		$timestamp			The timestamp of the message to insert, defaults to 0.
+	 * @return	boolean success.
+	 */
 	function insertmsg($subject, $body, $thread_id=0, $is_followup_to=0,
 					   $user_id, $has_attach=false, $timestamp=0) {
 		if ($timestamp == 0){
@@ -342,15 +341,15 @@ class ForumMessage extends Error {
 	}
 
 	/**
-	 *	create - use this function to create a new message in the database.
+	 * create - use this function to create a new message in the database.
 	 *
-	 *	@param	string	$subject		The subject of the message.
-	 *	@param	string	$body			The body of the message.
-	 *	@param	int		$thread_id		The thread_id of the message, if known.
-	 *	@param	int		$is_followup_to	The message_id of the parent message, if any.
-	 *	@param  bool	$has_attach		Whether the message has an attach associated. Defaults to false
-	 *	@param	int		$timestamp		The timestamp of the message to create. Defaults to 0, meaning the timestamp used for this message will be "time()"
-	 *	@return	boolean success.
+	 * @param	string	$subject		The subject of the message.
+	 * @param	string	$body			The body of the message.
+	 * @param	int		$thread_id		The thread_id of the message, if known.
+	 * @param	int		$is_followup_to	The message_id of the parent message, if any.
+	 * @param	bool	$has_attach		Whether the message has an attach associated. Defaults to false
+	 * @param	int		$timestamp		The timestamp of the message to create. Defaults to 0, meaning the timestamp used for this message will be "time()"
+	 * @return	boolean success.
 	 */
 	function create($subject, $body, $thread_id=0, $is_followup_to=0, $has_attach=false, $timestamp = 0) {
 		if (!strlen(trim($body)) || !strlen(trim($subject))) {
@@ -394,10 +393,10 @@ class ForumMessage extends Error {
 	}
 
 	/**
-	 *  fetchData - re-fetch the data for this forum_message from the database.
+	 * fetchData - re-fetch the data for this forum_message from the database.
 	 *
-	 *  @param  int	 $msg_id	The message ID.
-	 *  @return boolean	success.
+	 * @param	int	 $msg_id	The message ID.
+	 * @return	boolean	success.
 	 */
 	function fetchData($msg_id) {
 		$res = db_query_params ('SELECT * FROM forum_user_vw WHERE msg_id=$1 AND group_forum_id=$2',
@@ -412,10 +411,10 @@ class ForumMessage extends Error {
 	}
 
 	/**
-	 *  fetchModeratedData - re-fetch the data for this forum_message from the database, for pending messages
+	 * fetchModeratedData - re-fetch the data for this forum_message from the database, for pending messages
 	 *
-	 *  @param  int	 The message ID.
-	 *  @return boolean	success.
+	 * @param	int	 The message ID.
+	 * @return	boolean	success.
 	 */
 	function fetchModeratedData($msg_id) {
 		$res = db_query_params ('SELECT * FROM forum_pending_user_vw WHERE msg_id=$1 AND group_forum_id=$2',
@@ -430,128 +429,127 @@ class ForumMessage extends Error {
 	}
 
 	/**
-	 *	getForum - get the Forum object this ForumMessage is associated with.
+	 * getForum - get the Forum object this ForumMessage is associated with.
 	 *
-	 *	@return	object	The Forum object.
+	 * @return	object	The Forum object.
 	 */
 	function &getForum() {
 		return $this->Forum;
 	}
 
 	/**
-	 *	getID - get this message_id.
+	 * getID - get this message_id.
 	 *
-	 *	@return	int	The message_id.
+	 * @return	int	The message_id.
 	 */
 	function getID() {
 		return $this->data_array['msg_id'];
 	}
 
 	/**
-	 *	getPosterName - get the unix user_name of this message's poster.
+	 * getPosterName - get the unix user_name of this message's poster.
 	 *
-	 *	@return	string	The poster's unix name.
+	 * @return	string	The poster's unix name.
 	 */
 	function getPosterName() {
 		return $this->data_array['user_name'];
 	}
 
 	/**
-	 *	getPosterID - get this user_id of this message's poster.
+	 * getPosterID - get this user_id of this message's poster.
 	 *
-	 *	@return	int	The user_id.
+	 * @return	int	The user_id.
 	 */
 	function getPosterID() {
 		return $this->data_array['posted_by'];
 	}
 
 	/**
-	 *	getPosterRealName - get the real name of this message's poster.
+	 * getPosterRealName - get the real name of this message's poster.
 	 *
-	 *	@return	string	The real name.
+	 * @return	string	The real name.
 	 */
 	function getPosterRealName() {
 		return $this->data_array['realname'];
 	}
 
 	/**
-	 *	getSubject - get the subject of this message.
+	 * getSubject - get the subject of this message.
 	 *
-	 *	@return	string	The subject.
+	 * @return	string	The subject.
 	 */
 	function getSubject() {
 		return $this->data_array['subject'];
 	}
 
 	/**
-	 *	getBody - get the body of this message.
+	 * getBody - get the body of this message.
 	 *
-	 *	@return	String	The body.
+	 * @return	String	The body.
 	 */
 	function getBody() {
 		return $this->data_array['body'];
 	}
 
 	/**
-	 *	getPostDate - get the post date of this message.
+	 * getPostDate - get the post date of this message.
 	 *
-	 *	@return	int	The post date.
+	 * @return	int	The post date.
 	 */
 	function getPostDate() {
 		return $this->data_array['post_date'];
 	}
 
 	/**
-	 *	getParentID - get the id of the parent message, if this is a followup.
+	 * getParentID - get the id of the parent message, if this is a followup.
 	 *
-	 *	@return	int	The parent id.
+	 * @return	int	The parent id.
 	 */
 	function getParentID() {
 		return $this->data_array['is_followup_to'];
 	}
 
 	/**
-	 *	isPending - is the message pending, awaiting moderation?
+	 * isPending - is the message pending, awaiting moderation?
 	 *
-	 *	@return	int	awaits_moderation
+	 * @return	int	awaits_moderation
 	 */
 	function isPending() {
 		return $this->awaits_moderation;
 	}
 
 	/**
-	 *	getThreadID - get the thread_id of the message.
+	 * getThreadID - get the thread_id of the message.
 	 *
-	 *	@return	int	The thread_id.
+	 * @return	int	The thread_id.
 	 */
 	function getThreadID() {
 		return $this->data_array['thread_id'];
 	}
 
 	/**
-	 *	getMostRecentDate - get the date of the most recent followup.
+	 * getMostRecentDate - get the date of the most recent followup.
 	 *
-	 *	@return	int	The date of the most recent followup.
+	 * @return	int	The date of the most recent followup.
 	 */
 	function getMostRecentDate() {
 		return $this->data_array['most_recent_date'];
 	}
 
 	/**
-	 *	hasFollowups - whether this message has any followups.
+	 * hasFollowups - whether this message has any followups.
 	 *
-	 *	@return boolean has_followups.
+	 * @return boolean has_followups.
 	 */
 	function hasFollowups() {
 		return $this->data_array['has_followups'];
 	}
 
 	/**
-	 *	hasAttach - whether this message has an attachment.
+	 * hasAttach - whether this message has an attachment.
 	 *
-	 *	@return boolean has_attach.
+	 * @return boolean has_attach.
 	 */
-
 	function hasAttach() {
 		if ($this->isPending()) {
 			$res = db_query_params ('SELECT attachmentid FROM forum_pending_attachment WHERE msg_id=$1',
@@ -567,9 +565,9 @@ class ForumMessage extends Error {
 	}
 
 	/**
-	 *	delete - Delete this message and its followups.
+	 * delete - Delete this message and its followups.
 	 *
-	 *	@return	int	The count of deleted messages.
+	 * @return	int	The count of deleted messages.
 	 */
 	function delete() {
 		$msg_id=$this->getID();
@@ -608,10 +606,10 @@ class ForumMessage extends Error {
 	}
 
 	/**
-	 *	removebbcode - workaround to remove bbcode tags.
+	 * removebbcode - workaround to remove bbcode tags.
 	 *
-     * @param string $text
-	 * @return string	converted text
+	 * @param	string	$text
+	 * @return	string	converted text
 	 */
 	function removebbcode($text) {
 		//$replaced =  preg_replace("/\[[_a-zA-Z]:.+\](.+)\[\/[_a-zA-Z]:.*\]/","$1",$text);
@@ -620,11 +618,10 @@ class ForumMessage extends Error {
 	}
 
 	/**
-	 *	sendNotice - contains the logic to send out email followups when a message is posted.
+	 * sendNotice - contains the logic to send out email followups when a message is posted.
 	 *
-	 *	@param  boolean	$has_attach Whether the message has an attach associated. Defaults to false
-	 *
-	 *	@return boolean success.
+	 * @param	boolean	$has_attach	Whether the message has an attach associated. Defaults to false
+	 * @return	boolean	success.
 	 */
 	function sendNotice($has_attach=false) {
 		$ids = $this->Forum->getMonitoringIDs();
@@ -715,17 +712,17 @@ Or reply to this e-mail entering your response between the following markers:
 	}
 
 	/**
-	 *	sendNewModeratedMsgNotice - contains the logic to send out email notifications to the forum admins when a new moderated message is posted
+	 * sendNewModeratedMsgNotice - contains the logic to send out email notifications to the forum admins when a new moderated message is posted
 	 *
-	 *	@return boolean success.
+	 * @return	boolean	success.
 	 */
 	function sendNewModeratedMsgNotice() {
-		$ids = array () ;
-		$engine = RBACEngine::getInstance () ;
-		$moderators = $engine->getUsersByAllowedAction ('forum', $this->Forum->getID(), 'moderate') ;
+		$ids = array();
+		$engine = RBACEngine::getInstance();
+		$moderators = $engine->getUsersByAllowedAction('forum', $this->Forum->getID(), 'moderate');
 
 		foreach ($moderators as $m) {
-			$ids[] = $m->getID () ;
+			$ids[] = $m->getID();
 		}
 
 		//
@@ -782,19 +779,18 @@ Or reply to this e-mail entering your response between the following markers:
 	}
 
 	/**
-	 *	updatemsg - impacts in the DB the new content of the message
+	 * updatemsg - impacts in the DB the new content of the message
 	 *
-	 *	@param	string	$group_forum_id		The forum ID
-	 *	@param 	int		$posted_by			The id of the user that is posting the message
-	 *	@param	string	$subject			The subject of the message.
-	 *	@param	string	$body				The body of the message.
-	 *	@param	string	$post_date			The post date
-	 *	@param	int		$is_followup_to		The message_id of the parent message, if any.
-	 *	@param	int		$thread_id			The thread_id of the message, if known.
-	 *	@param	int		$has_followups		has followups?
-	 *	@param	string	$most_recent_date	The most recent date.
-	 *
-	 *	@return boolean success.
+	 * @param	string	$group_forum_id		The forum ID
+	 * @param 	int	$posted_by		The id of the user that is posting the message
+	 * @param	string	$subject		The subject of the message.
+	 * @param	string	$body			The body of the message.
+	 * @param	string	$post_date		The post date
+	 * @param	int	$is_followup_to		The message_id of the parent message, if any.
+	 * @param	int	$thread_id		The thread_id of the message, if known.
+	 * @param	int	$has_followups		has followups?
+	 * @param	string	$most_recent_date	The most recent date.
+	 * @return	boolean success.
 	 */
 	function updatemsg($group_forum_id, $posted_by, $subject, $body,
 					   $post_date, $is_followup_to, $thread_id, $has_followups, $most_recent_date) {
@@ -831,11 +827,10 @@ Or reply to this e-mail entering your response between the following markers:
 	}
 
 	/**
-	 *	sendAttachNotice - contains the logic to send out email attachement followups when a message is posted.
+	 * sendAttachNotice - contains the logic to send out email attachement followups when a message is posted.
 	 *
-	 *	@param int	$attach_id	- The id of the file that has been attached
-	 *
-	 *	@return boolean success.
+	 * @param	int	$attach_id	- The id of the file that has been attached
+	 * @return	boolean	success.
 	 */
 	function sendAttachNotice($attach_id) {
 		if ($attach_id) {
@@ -886,7 +881,6 @@ Or reply to this e-mail entering your response between the following markers:
 			util_send_message('',$subject,$body,"noreply@".forge_get_config('web_host'),$BCC,'Forum',$extra_headers);
 			return true;
 		}
-
 		return false;
 	}
 }

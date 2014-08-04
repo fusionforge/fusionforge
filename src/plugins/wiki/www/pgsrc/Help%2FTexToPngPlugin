@@ -1,12 +1,12 @@
-Date: Thu, 26 Jun 2014 12:01:34 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
+Date: Tue, 29 Jul 2014 10:42:12 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.5.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FTexToPngPlugin;
   flags=PAGE_LOCKED;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-Converts TeX to an image. May be used to embed formulas in PhpWiki.
+Converts TeX to an image. May be used to embed formulas in ~PhpWiki.
 
 == Usage ==
 {{{
@@ -22,27 +22,27 @@ Converts TeX to an image. May be used to embed formulas in PhpWiki.
 ! Default value
 |-
 | **tex**
-|
+| TeX Commands (default: text mode), use $...$ for inline math formula style and $$...$$ for large formula style
 |
 |-
 | **magstep**
-|
+| magnify image by (1.2 to the magstep)
 |
 |-
 | **img**
-|
+| Image type (png, jpeg or gif), if chosen image type is not available use the first possible from png, gif, jpeg (in that order)
 | png
 |-
 | **subslash**
-| on or off
+| on or off: substitute slashes by backslashes (to avoid the backslash bug of the database pear interface)
 | off
 |-
 | **antialias**
-| on or off
+| on or off: render ps to img with antialias option. This produces higher quality output but is slower and needs more disk space.
 |
 |-
 | **transparent**
-| on or off
+| on or off: produce transparent background instead of white background. Seems to be buggy (in pstoimg - not my fault)
 |
 |-
 | **center**
@@ -51,16 +51,30 @@ Converts TeX to an image. May be used to embed formulas in PhpWiki.
 |}
 
 
-== Example ==
+== Examples ==
 
+This produces a little help screen:
 {{{
 <<TexToPng>>
 }}}
 
 <<TexToPng>>
 
+A simple formula:
+{{{
+<<TexToPng tex="$x^2$" >>
+}}}
+
+<<TexToPng tex="$x^2$" >>
+
+A more complex formula:
+{{{
+<<TexToPng tex="$$/int^/infty_{-/infty} dx {1 /over /sqrt {x^2+1}}$$" subslash="on" >>
+}}}
+<<TexToPng tex="$$/int^/infty_{-/infty} dx {1 /over /sqrt {x^2+1}}$$" subslash="on" >>
+
 == Author ==
-* [[Help:Reini Urban|Reini Urban]]
+* Johannes Große
 
 == See Also ==
 

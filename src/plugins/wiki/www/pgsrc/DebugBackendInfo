@@ -1,0 +1,10 @@
+Date: Tue, 29 Jul 2014 10:42:12 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.5.0)
+Content-Type: application/x-phpwiki;
+  pagename=DebugBackendInfo;
+  flags=PAGE_LOCKED;
+  acl="view:_AUTHENTICATED; edit:_AUTHENTICATED; create:_AUTHENTICATED,_BOGOUSER; list:_AUTHENTICATED; remove:_ADMIN,_OWNER; change:_ADMIN,_OWNER; dump:_EVERY";
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+<<DebugBackendInfo>>

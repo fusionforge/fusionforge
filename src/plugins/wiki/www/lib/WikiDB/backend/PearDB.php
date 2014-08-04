@@ -1,5 +1,25 @@
 <?php
 
+/*
+ * Copyright 2002,2004,2005,2006 $ThePhpWikiProgrammingTeam
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
+
 require_once 'lib/WikiDB/backend.php';
 
 class WikiDB_backend_PearDB
@@ -7,7 +27,7 @@ class WikiDB_backend_PearDB
 {
     public $_dbh;
 
-    function WikiDB_backend_PearDB($dbparams)
+    function __construct($dbparams)
     {
         // Find and include PEAR's DB.php. maybe we should force our private version again...
         // if DB would have exported its version number, it would be easier.
@@ -92,7 +112,8 @@ class WikiDB_backend_PearDB
         if (!$this->_dbh)
             return;
         if ($this->_lock_count) {
-            trigger_error("WARNING: database still locked " . '(lock_count = $this->_lock_count)' . "\n<br />",
+            trigger_error("WARNING: database still locked " .
+                    '(lock_count = $this->_lock_count)' . "\n<br />",
                 E_USER_WARNING);
         }
         $this->_dbh->setErrorHandling(PEAR_ERROR_PRINT); // prevent recursive loops.
@@ -106,13 +127,13 @@ class WikiDB_backend_PearDB
     }
 
     /*
-     * Test fast wikipage.
+     * Fast test for wikipage.
      */
     function is_wiki_page($pagename)
     {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
-        return $dbh->getOne(sprintf("SELECT $page_tbl.id as id"
+        return $dbh->getOne(sprintf("SELECT $page_tbl.id AS id"
                 . " FROM $nonempty_tbl, $page_tbl"
                 . " WHERE $nonempty_tbl.id=$page_tbl.id"
                 . "   AND pagename='%s'",
@@ -128,6 +149,9 @@ class WikiDB_backend_PearDB
             . " WHERE $nonempty_tbl.id=$page_tbl.id");
     }
 
+    /*
+     * filter (nonempty pages) currently ignored
+     */
     function numPages($filter = false, $exclude = '')
     {
         $dbh = &$this->_dbh;
@@ -245,7 +269,6 @@ class WikiDB_backend_PearDB
 
     function _get_pageid($pagename, $create_if_missing = false)
     {
-
         // check id_cache
         global $request;
         $cache =& $request->_dbi->_cache->_id_cache;
@@ -328,14 +351,13 @@ class WikiDB_backend_PearDB
         extract($this->_table_names);
         extract($this->_expressions);
 
-        assert(is_string($pagename) and $pagename != "");
+        assert(is_string($pagename) and $pagename != '');
         assert($version > 0);
 
-        //trigger_error("GET_REVISION $pagename $version $want_content", E_USER_NOTICE);
         // FIXME: optimization: sometimes don't get page data?
         if ($want_content) {
             $fields = $this->page_tbl_fields
-                . ",$page_tbl.pagedata as pagedata,"
+                . ",$page_tbl.pagedata AS pagedata,"
                 . $this->version_tbl_fields;
         } else {
             $fields = $this->page_tbl_fields . ","
@@ -384,10 +406,8 @@ class WikiDB_backend_PearDB
             unset($query_result['versiondata']);
             $data['%pagedata'] = $this->_extract_page_data($query_result);
         }
-
         return $data;
     }
-
 
     /**
      * Create a new revision of a page.
@@ -406,7 +426,6 @@ class WikiDB_backend_PearDB
 
         $content = isset($data['%content']) ? (string)$data['%content'] : '';
         unset($data['%content']);
-
         unset($data['%pagedata']);
 
         $this->lock();
@@ -440,7 +459,6 @@ class WikiDB_backend_PearDB
         if (($id = $this->_get_pageid($pagename))) {
             $dbh->query("DELETE FROM $version_tbl"
                 . " WHERE id=$id AND version=$version");
-
             $this->_update_recent_table($id);
             // This shouldn't be needed (as long as the latestversion
             // never gets deleted.)  But, let's be safe.
@@ -512,10 +530,14 @@ class WikiDB_backend_PearDB
     //function update_versiondata($pagename, $version, $data) {
     //}
 
+    /*
+     * Update link table.
+     * on DEBUG: delete old, deleted links from page
+     */
     function set_links($pagename, $links)
     {
         // Update link table.
-        // FIXME: optimize: mysql can do this all in one big INSERT.
+        // FIXME: optimize: mysql can do this all in one big INSERT/REPLACE.
 
         $dbh = &$this->_dbh;
         extract($this->_table_names);
@@ -720,7 +742,6 @@ class WikiDB_backend_PearDB
             $callback = new WikiMethodCb($searchobj, "_pagename_match_clause");
         }
         $search_clause = $search->makeSqlClauseObj($callback);
-
         $sql = "SELECT $fields FROM $table"
             . " WHERE $join_clause"
             . "  AND ($search_clause)"
@@ -808,7 +829,6 @@ class WikiDB_backend_PearDB
         } else {
             $result = $dbh->query($sql);
         }
-
         return new WikiDB_backend_PearDB_iter($this, $result);
     }
 
@@ -991,12 +1011,11 @@ class WikiDB_backend_PearDB
             . " SELECT $recent_tbl.id"
             . " FROM $recent_tbl, $version_tbl"
             . " WHERE $recent_tbl.id=$version_tbl.id"
-            . "       AND version=latestversion"
+            . "  AND version=latestversion"
             // We have some specifics here (Oracle)
             //. "  AND content<>''"
             . "  AND content $notempty"
             . ($pageid ? " AND $recent_tbl.id=$pageid" : ""));
-
         $this->unlock();
     }
 
@@ -1005,10 +1024,8 @@ class WikiDB_backend_PearDB
      *
      * Calls can be nested.  The tables won't be unlocked until
      * _unlock_database() is called as many times as _lock_database().
-     *
-     * @access protected
      */
-    function lock($tables = false, $write_lock = true)
+    public function lock($tables = false, $write_lock = true)
     {
         if ($this->_lock_count++ == 0)
             $this->_lock_tables($write_lock);
@@ -1025,17 +1042,16 @@ class WikiDB_backend_PearDB
     /**
      * Release a write lock on the tables in the SQL database.
      *
-     * @access protected
-     *
      * @param $force boolean Unlock even if not every call to lock() has been matched
      * by a call to unlock().
      *
      * @see _lock_database
      */
-    function unlock($tables = false, $force = false)
+    public function unlock($tables = false, $force = false)
     {
-        if ($this->_lock_count == 0)
+        if ($this->_lock_count == 0) {
             return;
+        }
         if (--$this->_lock_count <= 0 || $force) {
             $this->_unlock_tables();
             $this->_lock_count = 0;
@@ -1049,7 +1065,6 @@ class WikiDB_backend_PearDB
     {
         trigger_error("virtual", E_USER_ERROR);
     }
-
 
     /**
      * Serialize data
@@ -1073,11 +1088,9 @@ class WikiDB_backend_PearDB
     /**
      * Callback for PEAR (DB) errors.
      *
-     * @access protected
-     *
      * @param A PEAR_error object.
      */
-    function _pear_error_callback($error)
+    public function _pear_error_callback($error)
     {
         if ($this->_is_false_error($error))
             return;
@@ -1095,10 +1108,9 @@ class WikiDB_backend_PearDB
      * return any data.  (So when a "LOCK" command doesn't return any data,
      * DB reports it as an error, when in fact, it's not.)
      *
-     * @access private
      * @return bool True iff error is not really an error.
      */
-    function _is_false_error($error)
+    private function _is_false_error($error)
     {
         if ($error->getCode() != DB_ERROR)
             return false;
@@ -1148,9 +1160,8 @@ class WikiDB_backend_PearDB
      * errors and notices.  This is an error callback (for use with
      * ErrorManager which will filter out those spurious messages.)
      * @see _is_false_error, ErrorManager
-     * @access private
      */
-    function _pear_notice_filter($err)
+    private function _pear_notice_filter($err)
     {
         return ($err->isNotice()
             && preg_match('|DB[/\\\\]common.php$|', $err->errfile)
@@ -1222,7 +1233,7 @@ class WikiDB_backend_PearDB
 class WikiDB_backend_PearDB_generic_iter
     extends WikiDB_backend_iterator
 {
-    function WikiDB_backend_PearDB_generic_iter($backend, $query_result, $field_list = NULL)
+    function __construct($backend, $query_result, $field_list = NULL)
     {
         if (DB::isError($query_result)) {
             // This shouldn't happen, I thought.
@@ -1282,7 +1293,6 @@ class WikiDB_backend_PearDB_generic_iter
 class WikiDB_backend_PearDB_iter
     extends WikiDB_backend_PearDB_generic_iter
 {
-
     function next()
     {
         $backend = &$this->_backend;

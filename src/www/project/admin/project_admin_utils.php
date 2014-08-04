@@ -6,6 +6,7 @@
  * Copyright 2002-2004 (c) GForge Team
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Coyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -140,18 +141,20 @@ function group_add_history ($field_name,$old_value,$group_id) {
 
 */
 
-function show_grouphistory ($group_id) {
-	/*
-		show the group_history rows that are relevant to
-		this group_id
-	*/
+/**
+ * show_grouphistory - show the group_history rows that are relevant to this group_id
+ *
+ * @param	integer	$group_id	the group id
+ */
+function show_grouphistory($group_id) {
+	global $HTML;
 
 	$result=group_get_history($group_id);
 	$rows=db_numrows($result);
 
 	if ($rows > 0) {
 
-		echo '<p>'._('This log will show who made significant changes to your project and when').'</p>';
+		echo html_e('p', array(), _('This log will show who made significant changes to your project and when'));
 
 		$title_arr=array();
 		$title_arr[]=_('Field');
@@ -159,30 +162,29 @@ function show_grouphistory ($group_id) {
 		$title_arr[]=_('Date');
 		$title_arr[]=_('By');
 
-		echo $GLOBALS['HTML']->listTableTop ($title_arr);
+		echo $HTML->listTableTop ($title_arr);
 		for ($i=0; $i < $rows; $i++) {
-			$field=db_result($result, $i, 'field_name');
-			echo '
-			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td>'.$field.'</td><td>';
+			$field = db_result($result, $i, 'field_name');
+			$cells = array();
+			$cells[][] = $field;
 
 			if (is_numeric(db_result($result, $i, 'old_value'))) {
 				if (preg_match("/[Uu]ser/i", $field)) {
-					echo user_getname(db_result($result, $i, 'old_value'));
+					$cells[][] = user_getname(db_result($result, $i, 'old_value'));
 				} else {
-					echo db_result($result, $i, 'old_value');
+					$cells[][] = db_result($result, $i, 'old_value');
 				}
 			} else {
-				echo db_result($result, $i, 'old_value');
+				$cells[][] = db_result($result, $i, 'old_value');
 			}
-			echo '</td>'.
-				'<td>'.date(_('Y-m-d H:i'),db_result($result, $i, 'adddate')).'</td>'.
-				'<td>'.db_result($result, $i, 'user_name').'</td></tr>';
+			$cells[][] = date(_('Y-m-d H:i'),db_result($result, $i, 'adddate'));
+			$cells[][] = db_result($result, $i, 'user_name');
+			echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
 		}
-
-		echo $GLOBALS['HTML']->listTableBottom();
+		echo $HTML->listTableBottom();
 
 	} else {
-		echo '<p>'._('No changes').'</p>';
+		echo html_e('p', array(), _('No changes'));
 	}
 }
 

@@ -1,6 +1,6 @@
 <?php // <hr class="printer" /> ?>
     <div class="visualClear"></div>
-    <div id="f-poweredbyico"><a href="http://www.phpwiki.org/"><img src="<?php echo $WikiTheme->getImageURL("poweredby_phpwiki_51x31.png") ?>" alt="Powered by PhpWiki" /></a></div>
+    <div id="f-poweredbyico"><a href="http://www.phpwiki.fr/"><img src="<?php echo $WikiTheme->getImageURL("poweredby_phpwiki_51x31.png") ?>" alt="Powered by PhpWiki" /></a></div>
     <ul id="f-list">
       <li id="f-lastmod"> <?php echo $WikiTheme->getOwnerMessage($page) ?>  <?php echo $WikiTheme->getLastModifiedMessage($revision) ?> <?php echo $WikiTheme->getAuthorMessage($revision) ?> </li>
 	  
@@ -8,19 +8,19 @@
 <?php if ($request->_dbi->isWikiPage(_("Copyrights"))) { ?>
       <?php echo WikiLink(_("Copyrights")) ?>
 <?php } else { ?>
-      <a class="internal" href="http://www.phpwiki.org/Copyrights" title ="PhpWiki:Copyrights">Copyrights</a>
+      <a class="internal" href="http://www.phpwiki.fr/Copyrights" title ="PhpWiki:Copyrights">Copyrights</a>
 <?php } ?>
 </b> for details).<br /></li>
 <?php if ($request->_dbi->isWikiPage(_("About".WIKI_NAME))) { ?>
       <?php echo WikiLink(_("About".WIKI_NAME)) ?>
 <?php } else { ?>
-      <li id="f-about"><a href="http://www.phpwiki.org/PhpWiki" title ="PhpWiki:About">About PhpWiki</a></li>
+      <li id="f-about"><a href="http://www.phpwiki.fr/PhpWiki" title ="PhpWiki:About">About PhpWiki</a></li>
 <?php } ?>
       <li id="f-disclaimer">
 <?php if ($request->_dbi->isWikiPage(_("GeneralDisclaimer"))) { ?>
       <?php echo WikiLink(_("GeneralDisclaimer")) ?>
 <?php } else { ?>
-      <a href="http://www.phpwiki.org/GeneralDisclaimer" title ="PhpWiki:Disclaimer">Disclaimer</a>
+      <a href="http://www.phpwiki.fr/GeneralDisclaimer" title ="PhpWiki:Disclaimer">Disclaimer</a>
 <?php } ?>
 </li>
     </ul>

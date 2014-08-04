@@ -10,7 +10,7 @@ cosmetic fixes applied by Roland Mas <lolando@debian.org>.
 HOW DOES THEMING WORK?
 ----------------------
 Themes are done by overloading the Layout class you can find in
-/usr/share/gforge/www/include/
+@SOURCE_PATH@/www/include/
 
 This is done by the "$HTML = new Theme();" line in the theme_sysinit
 function (www/include/theme.php):

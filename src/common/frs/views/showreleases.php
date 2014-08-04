@@ -30,6 +30,7 @@ global $HTML; // html object
 global $group_id; // id of group
 global $g; // group object
 global $warning_msg; // warning message
+global $error_msg; // error message
 
 $package_id = getIntFromRequest('package_id');
 
@@ -38,45 +39,51 @@ if (!$package_id) {
 	session_redirect('/frs/?view=admin&group_id='.$group_id);
 }
 
-session_require_perm('frs', $group_id, 'write');
+if (!forge_check_perm('frs', $package_id, 'file')) {
+	$error_msg = _('Permission denied');
+	session_redirect('/frs/?view=admin&group_id='.$group_id);
+}
 
 $frsp = new FRSPackage($g, $package_id);
 if (!$frsp || !is_object($frsp)) {
-	exit_error(_('Could Not Get FRS Package'),'frs');
+	exit_error(_('Could Not Get FRS Package'), 'frs');
 } elseif ($frsp->isError()) {
-	exit_error($frsp->getErrorMessage(),'frs');
+	exit_error($frsp->getErrorMessage(), 'frs');
 }
 
 $rs = $frsp->getReleases();
 if (count($rs) < 1) {
-	exit_error(_('No Releases Of This Package Are Available'), 'frs');
+	echo $HTML->information_('No releases of this package are available.');
+} else {
+	echo html_ao('script', array('type' => 'text/javascript'));
+	?>
+	//<![CDATA[
+	var controllerFRS;
+	jQuery(document).ready(function() {
+		controllerFRS = new FRSController();
+	});
+	//]]>
+	<?php
+	echo html_ac(html_ap() - 1);
+
+	// Display a list of releases in this package
+	echo html_e('h2', array(), _('Available Releases for the package').' '.$frsp->getName());
+
+	$title_arr=array(_('Release Name'), _('Date'), _('Actions'));
+
+	echo $HTML->listTableTop($title_arr);
+	for ($i = 0; $i < count($rs); $i++) {
+		$cells = array();
+		$cells[][] = $rs[$i]->getName();
+		$cells[][] = date('Y-m-d H:i',$rs[$i]->getReleaseDate());
+		$content = util_make_link('/frs/?view=editrelease&group_id='.$group_id.'&package_id='.$package_id.'&release_id='.$rs[$i]->getID(), '['._('Edit').']');
+		if (forge_check_perm('frs', $package_id, 'release')) {
+			$deleteUrlAction = util_make_uri('/frs/?action=deleterelease&package_id='.$package_id.'&group_id='.$group_id.'&release_id='.$rs[$i]->getID());
+			$content .= util_make_link('#', $HTML->getDeletePic(_('Delete this release'), _('Delete release')), array('onclick' => 'javascript:controllerFRS.toggleConfirmBox({idconfirmbox: \'confirmbox1\', do: \''._('Delete the release').' '.$rs[$i]->getName().'\', cancel: \''._('Cancel').'\', height: 150, width: 300, action: \''.$deleteUrlAction.'\'})' ), true);
+		}
+		$cells[][] = $content;
+		echo $HTML->multiTableRow(array('id' => 'releaseid'.$rs[$i]->getID(), 'class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
+	}
+	echo $HTML->listTableBottom();
+	echo $HTML->jQueryUIconfirmBox('confirmbox1', _('Delete release'), _('You are about to delete permanently this release. Are you sure? This action is definitive.'));
 }
-
-echo html_ao('script', array('type' => 'text/javascript'));
-?>
-//<![CDATA[
-var controllerFRS;
-jQuery(document).ready(function() {
-	controllerFRS = new FRSController();
-});
-//]]>
-<?php
-echo html_ac(html_ap() - 1);
-
-// Display a list of releases in this package
-echo html_e('h2', array(), _('Available Releases for the package').' '.$frsp->getName());
-
-$title_arr=array(_('Release Name'), _('Date'), _('Actions'));
-
-echo $HTML->listTableTop($title_arr);
-for ($i = 0; $i < count($rs); $i++) {
-	$cells = array();
-	$cells[][] = $rs[$i]->getName();
-	$cells[][] = date('Y-m-d H:i',$rs[$i]->getReleaseDate());
-	$deleteUrlAction = util_make_uri('/frs/?action=deleterelease&package_id='.$package_id.'&group_id='.$group_id.'&release_id='.$rs[$i]->getID());
-	$cells[][] = util_make_link('/frs/?view=editrelease&group_id='.$group_id.'&package_id='.$package_id.'&release_id='.$rs[$i]->getID(), '['._('Edit').']')
-			.util_make_link('#', $HTML->getDeletePic(_('Delete this release'), _('Delete release')), array('onclick' => 'javascript:controllerFRS.toggleConfirmBox({idconfirmbox: \'confirmbox1\', do: \''._('Delete the release').' '.$rs[$i]->getName().'\', cancel: \''._('Cancel').'\', height: 150, width: 300, action: \''.$deleteUrlAction.'\'})' ), true);
-	echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
-}
-echo $HTML->listTableBottom();
-echo $HTML->jQueryUIconfirmBox('confirmbox1', _('Delete release'), _('You are about to delete permanently this release. Are you sure? This action is definitive.'));

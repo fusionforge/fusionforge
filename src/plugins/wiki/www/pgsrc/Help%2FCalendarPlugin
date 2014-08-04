@@ -1,5 +1,5 @@
-Date: Thu, 12 Jun 2014 17:57:14 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
+Date: Tue, 29 Jul 2014 10:42:12 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.5.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FCalendarPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -7,7 +7,7 @@ Content-Type: application/x-phpwiki;
 Content-Transfer-Encoding: binary
 
 The **Calendar** [[Help:WikiPlugin|plugin]] can be used to generate a monthly calendar in a
-wiki page. It's handy for [[PhpWiki:PersonalWiki|personal wikis]].
+wiki page. It's handy for personal wikis.
 
 Individual dates in the calendar link to specially named wiki pages.
 The names for the "day pages" are by default formed by appending the

@@ -70,7 +70,7 @@ class _HWLDF_WordAccumulator
 
 class WordLevelDiff extends MappedDiff
 {
-    function WordLevelDiff($orig_lines, $final_lines)
+    function __construct($orig_lines, $final_lines)
     {
         list ($orig_words, $orig_stripped) = $this->_split($orig_lines);
         list ($final_words, $final_stripped) = $this->_split($final_lines);
@@ -129,9 +129,9 @@ class WordLevelDiff extends MappedDiff
  */
 class HtmlUnifiedDiffFormatter extends UnifiedDiffFormatter
 {
-    function HtmlUnifiedDiffFormatter($context_lines = 4)
+    function __construct($context_lines = 4)
     {
-        $this->UnifiedDiffFormatter($context_lines);
+        parent::__construct($context_lines);
     }
 
     function _start_diff()

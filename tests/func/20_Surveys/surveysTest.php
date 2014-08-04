@@ -41,7 +41,7 @@
  * ALONE BASIS."
  */
 
-require_once dirname(dirname(__FILE__)).'/Testing/SeleniumGforge.php';
+require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
 
 class Surveys extends FForge_SeleniumTestCase
 {

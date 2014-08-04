@@ -6,7 +6,7 @@
  * Copyright 2009-2013, Roland Mas
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2010-2012, Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2013, Franck Villaume - TrivialDev
+ * Copyright 2012-2014, Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of National Education
  * http://fusionforge.org
  *
@@ -153,7 +153,7 @@ function &group_get_objects_by_name($groupname_arr) {
 
 function group_get_object_by_publicname($groupname) {
 	$res = db_query_params('SELECT * FROM groups WHERE lower(group_name) LIKE $1',
-				array(htmlspecialchars(strtolower($groupname))));
+				array(htmlspecialchars(html_entity_decode(strtolower($groupname)))));
 	return group_get_object(db_result($res, 0, 'group_id'), $res);
 }
 
@@ -518,7 +518,7 @@ class Group extends Error {
 		}
 
 		// Validate some values
-		if ($this->getPublicName() != $group_name) {
+		if ($this->getPublicName() != htmlspecialchars($group_name)) {
 			if (!$this->validateGroupName($group_name)) {
 				return false;
 			}
@@ -2440,6 +2440,7 @@ class Group extends Error {
 						$newp = new FRSPackage($this);
 						$nname = $this->replaceTemplateStrings($o->getName());
 						$newp->create ($nname, $o->isPublic());
+						$id_mappings['frs'][$o->getID()] = $newp->getID();
 					}
 				}
 			}
@@ -2489,12 +2490,12 @@ class Group extends Error {
 				}
 				$oldsettings = $oldrole->getSettingsForProject ($template);
 
-				$sections = array('project_read', 'project_admin', 'frs', 'scm', 'docman', 'tracker_admin', 'new_tracker', 'forum_admin', 'new_forum', 'pm_admin', 'new_pm');
+				$sections = array('project_read', 'project_admin', 'scm', 'docman', 'tracker_admin', 'new_tracker', 'forum_admin', 'new_forum', 'pm_admin', 'new_pm', 'frs_admin', 'new_frs');
 				foreach ($sections as $section) {
 					$newrole->setSetting ($section, $this->getID(), $oldsettings[$section][$template->getID()]);
 				}
 
-				$sections = array('tracker', 'pm', 'forum');
+				$sections = array('tracker', 'pm', 'forum', 'frs');
 				foreach ($sections as $section) {
 					if (isset ($oldsettings[$section])) {
 						foreach ($oldsettings[$section] as $k => $v) {

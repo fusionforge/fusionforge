@@ -49,8 +49,8 @@ class WikiPlugin_FullTextSearch
 
     function getDefaultArguments()
     {
-        return array_merge
-        (
+        // All PageList::supportedArgs, except 'pagename'
+        $args = array_merge(
             PageList::supportedArgs(), // paging and more.
             array('s' => false,
                 'hilight' => true,
@@ -60,6 +60,8 @@ class WikiPlugin_FullTextSearch
                 'noheader' => false,
                 'exclude' => false, // comma-separated list of glob
                 'quiet' => true)); // be less verbose
+         unset($args['pagename']);
+         return $args;
     }
 
     function run($dbi, $argstr, &$request, $basepage)

@@ -124,8 +124,6 @@ class WikiPlugin_Transclude
      * This is used to resize the iframe to fit the content.
      * Currently it only works if the transcluded document comes
      * from the same server as the wiki server.
-     *
-     * @access private
      */
     private function _js()
     {

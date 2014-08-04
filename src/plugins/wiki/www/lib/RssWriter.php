@@ -11,7 +11,7 @@
  */
 class RssWriter extends XmlElement
 {
-    function RssWriter()
+    function __construct()
     {
         $this->XmlElement('rdf:RDF',
             array('xmlns' => "http://purl.org/rss/1.0/",

@@ -1,5 +1,5 @@
-Date: Fri, 10 Sep 2010 13:46:13 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
+Date: Tue, 29 Jul 2014 10:42:12 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.5.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FTeX2pngPlugin;
   flags=PAGE_LOCKED;
@@ -21,12 +21,12 @@ gives
 == Arguments ==
 
 There is only one argument which is the text of the mathematical
-expression. This text *must be* enclosed by a dollar $ within a
+expression. This text **must be** enclosed by a dollar $ within a
 paragraph or two dollars $$ on a separate line. In the last case,
 all is centered.
 
 To write mathematical formulae, the syntax is the one
-of [LaTeX | http://www.latex-project.org].
+of [[http://www.latex-project.org | LaTeX]].
 
 == Caveats ==
 
@@ -39,26 +39,32 @@ possible to display raw text as <<TeX2png text="$\textrm{\LaTeX}$">> by using :
 <<TeX2png text="$\textrm{\LaTeX}$">>
 }}}
 
-This* [[Help:WikiPlugin|plugin]] is not able to produce sophisticated mathematicals texts
+This [[Help:WikiPlugin|plugin]] is not able to produce sophisticated mathematicals texts
 with links, cross references... For that, you can use for example
-[LaTeX2html|http://www.latex2html.org/].
+[[http://www.latex2html.org/ | LaTeX2html]].
 
 == Examples ==
 
 Some Greeks letters : <<TeX2png text="$\alpha$">>, <<TeX2png text="$\beta$">>, ... and a formula <<TeX2png text="$\sum_{i=1}^n \frac1{i^2}=\frac{\pi^2}{6}$">> to test display in a paragraph.
 
-*Exercise 1* Consider the function <<TeX2png text="$$f(x)=(x^2-4x+3)^{1/2}$$">>
+=== Exercise 1 ===
 
-#Give the largest real domain for which f(x) is well defined.
-#Give a domain on which the function is one-to-one. Using this domain derive a formula for the inverse function <<TeX2png text="$f^{-1}(x)$">>.
-#Calculate the derivative f'(x).
+Consider the function:
 
-*Exercise 2* Consider the function :
+<<TeX2png text="$$f(x)=(x^2-4x+3)^{1/2}$$">>
+
+# Give the largest real domain for which f(x) is well defined.
+# Give a domain on which the function is one-to-one. Using this domain derive a formula for the inverse function <<TeX2png text="$f^{-1}(x)$">>.
+# Calculate the derivative f'(x).
+
+=== Exercise 2 ===
+
+Consider the function:
 
 <<TeX2png text="$$f(x) = \int_0^x e^{-t^2}\,dt, x\in\mathbb R$$">>
 
-#Show that for all r > 0 :<<TeX2png text="$$\frac{\pi}{2}\int_0^r t  e^{-t^2}\,dt \leq \int_0^r e^{-x^2}\,dx \int_0^r e^{-y^2}\,dy \leq \frac{\pi}{2} \int_0^{\sqrt{2} r} t e^{-t^2}\,dt$$">> *Help* : you can use polar coordinates.
-#Hence find the limit of <<TeX2png text="$f(x)$">> as x tends <<TeX2png text="to $\infty$">>.
+# Show that for all r > 0 :<<TeX2png text="$$\frac{\pi}{2}\int_0^r t  e^{-t^2}\,dt \leq \int_0^r e^{-x^2}\,dx \int_0^r e^{-y^2}\,dy \leq \frac{\pi}{2} \int_0^{\sqrt{2} r} t e^{-t^2}\,dt$$">> **Help**: you can use polar coordinates.
+# Hence find the limit of <<TeX2png text="$f(x)$">> as x tends <<TeX2png text="to $\infty$">>.
 
 <noinclude>
 ----

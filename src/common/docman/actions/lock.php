@@ -27,6 +27,7 @@
 global $dirid; //id of doc_group
 global $group_id; // id of group
 global $LUSER; // User object
+global $HTML;
 
 $sysdebug_enable = false;
 
@@ -72,6 +73,14 @@ if ($lock === 0) {
 	echo $objectType->setLock($lock, $LUSER->getID(), time());
 } elseif ($lock === 2) {
 	//get the current status of the lock
-	echo $objectType->getLocked();
+	if (getIntFromRequest('json')) {
+		$result = array();
+		if ($objectType->getLocked()) {
+			$result['html'] = $HTML->warning_msg(_('Action currently locked by another user.'));
+		}
+		echo json_encode($result);
+	} else {
+		echo $objectType->getLocked();
+	}
 }
 exit;

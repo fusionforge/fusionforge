@@ -1,5 +1,5 @@
-Alias /plugins/oslc/ /usr/share/gforge/plugins/oslc/www/
-<Directory /usr/share/gforge/plugins/oslc/www/>
+Alias /plugins/oslc/ @PLUGINS_PATH@/oslc/www/
+<Directory @PLUGINS_PATH@/oslc/www/>
 	Options FollowSymLinks
 	Order allow,deny
 	allow from all
@@ -11,5 +11,5 @@ Alias /plugins/oslc/ /usr/share/gforge/plugins/oslc/www/
 	RewriteCond %{REQUEST_FILENAME} -d
 	RewriteRule ^.*$ - [NC,L]
 	RewriteRule ^.*$ index.php [NC,L]
-	Include /etc/gforge/httpd.conf.d/secrets.inc
+	Include @CONFIG_PATH@/httpd.conf.d/secrets.inc
 </Directory>

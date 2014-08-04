@@ -1,2 +1,2 @@
-@PLUGIN_PATH@/helloworld/common
-@PLUGIN_PATH@/helloworld/www
+@PLUGINS_PATH@/helloworld/common
+@PLUGINS_PATH@/helloworld/www

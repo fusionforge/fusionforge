@@ -44,10 +44,9 @@ class HtmlElement extends XmlElement
     }
 
     /**
-     * @access protected
      * This is used by the static factory methods is class HTML.
      */
-    function _init2($args)
+    protected function _init2($args)
     {
         if ($args) {
             if (is_array($args[0]))

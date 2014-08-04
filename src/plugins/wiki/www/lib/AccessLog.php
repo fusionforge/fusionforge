@@ -58,7 +58,7 @@ class Request_AccessLog
 
         if ($do_sql) {
             if (!$request->_dbi->isSQL()) {
-                trigger_error("Unsupported database backend for ACCESS_LOG_SQL.\nNeed DATABASE_TYPE=SQL or ADODB or PDO");
+                trigger_error("Unsupported database backend for ACCESS_LOG_SQL. Need DATABASE_TYPE=SQL or ADODB or PDO.");
             } else {
                 global $DBParams;
                 //$this->_dbi =& $request->_dbi;
@@ -218,8 +218,6 @@ class Request_AccessLog
 class Request_AccessLogEntry
 {
     /**
-     * Constructor.
-     *
      * The log entry will be automatically appended to the log file or
      * SQL table when the current request terminates.
      *
@@ -234,9 +232,8 @@ class Request_AccessLogEntry
      *    $log_entry->push($request);
      * </pre>
      *
-     *
      */
-    function Request_AccessLogEntry(&$accesslog)
+    function __construct(&$accesslog)
     {
         $this->_accesslog = $accesslog;
         $this->logfile = $accesslog->logfile;

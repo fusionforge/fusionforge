@@ -1,8 +1,8 @@
-plugins/mantisbt/action		@PLUGIN_PATH@/mantisbt/
-plugins/mantisbt/common		@PLUGIN_PATH@/mantisbt/
-plugins/mantisbt/controler	@PLUGIN_PATH@/mantisbt/
-plugins/mantisbt/db		@PLUGIN_PATH@/mantisbt/
-plugins/mantisbt/view		@PLUGIN_PATH@/mantisbt/
-plugins/mantisbt/www		@PLUGIN_PATH@/mantisbt/
-plugins/mantisbt/etc/plugins/mantisbt/*  etc/gforge/plugins/mantisbt/
-plugins/mantisbt/etc/*.ini 	     etc/@PACKAGE@/config.ini.d/
+plugins/mantisbt/action		@PLUGINS_PATH@/mantisbt/
+plugins/mantisbt/common		@PLUGINS_PATH@/mantisbt/
+plugins/mantisbt/controler	@PLUGINS_PATH@/mantisbt/
+plugins/mantisbt/db		@PLUGINS_PATH@/mantisbt/
+plugins/mantisbt/view		@PLUGINS_PATH@/mantisbt/
+plugins/mantisbt/www		@PLUGINS_PATH@/mantisbt/
+plugins/mantisbt/etc/plugins/mantisbt/*  @CONFIG_PATH@/plugins/mantisbt/
+plugins/mantisbt/etc/*.ini 	     @CONFIG_PATH@/config.ini.d/

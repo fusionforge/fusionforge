@@ -1,7 +1,7 @@
 <?php
 
 // Where the attachments are located
-$forumml_dir = "/var/lib/gforge/forumml";
+$forumml_dir = forge_get_config("data_path")."/forumml";
 
 // Where the temporary mail file is stored
 $forumml_tmp = "/var/spool/forumml";

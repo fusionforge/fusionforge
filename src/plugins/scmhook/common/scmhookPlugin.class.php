@@ -105,6 +105,11 @@ class scmhookPlugin extends Plugin {
 
 	function update($params) {
 		$group_id = $params['group_id'];
+
+                $group = group_get_object($group_id);
+                if (!$group->usesPlugin($this->name))
+                    return;
+
 		$hooksString = '';
 		$hooks = $this->getAvailableHooks($group_id);
 		$available_hooknames = array();
@@ -128,6 +133,8 @@ class scmhookPlugin extends Plugin {
 			$hook_params = $hook->getParams();
 			if (count($hook_params) == 0)
 				continue;
+                        if (!array_search($hook->getClassname(), $enabled_hooknames))
+                                continue;
 			// Build 3 arrays for inconvenient db_query_params()
 			$i = 1;
 			$sql_cols = array_keys($hook_params);

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PhpWiki 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-25 18:08+0200\n"
+"POT-Creation-Date: 2014-07-15 12:24+0200\n"
 "PO-Revision-Date: 2000-10-31 02:23+0200\n"
 "Last-Translator: Reini Urban <rurban@x-ray.at>, Carsten Klapp "
 "<carstenklapp@users.sourceforge.net>, Helmer Pardun <pardunpress@t-online."
@@ -540,12 +540,11 @@ msgstr "PhpWikiSystemverwalten"
 msgid "Edited by: %s"
 msgstr "Bearbeitet von: %s"
 
+msgid "Loaded the following pages:"
+msgstr ""
+
 msgid "LoadDump"
 msgstr "SeiteLaden"
-
-#, php-format
-msgid "PageChange Notification of %s sent to %s"
-msgstr "SeitenÄnderung Benachrichtigung von %s an %s gesendet"
 
 #, php-format
 msgid "PageChange Notification Error: Couldn't send %s to %s"
@@ -2887,9 +2886,6 @@ msgstr "gleiche Seiteninalt"
 msgid "FAILED"
 msgstr "FEHLER"
 
-msgid "Source code syntax highlighter (via http://highlightjs.org/)."
-msgstr ""
-
 msgid "Provide access to PhpWiki's lower level system information."
 msgstr ""
 
@@ -3314,19 +3310,6 @@ msgstr ""
 
 msgid "Rate"
 msgstr "Bewerte"
-
-msgid "Display video in Flash or HTML5."
-msgstr ""
-
-# (??? Parameter = Hilfsgröße!!!Bezugseinheit!!! Bezugsgröße!!!)
-msgid "Both 'url' or 'file' parameters missing."
-msgstr ""
-
-msgid "Choose only one of 'url' or 'file' parameters."
-msgstr ""
-
-msgid "Your browser does not understand the HTML 5 video tag."
-msgstr ""
 
 msgid ""
 "Visualizes the Wiki structure in a graph using the 'dot' commandline tool "
@@ -5946,9 +5929,6 @@ msgstr ""
 msgid " (non %s users)."
 msgstr ""
 
-msgid "Views"
-msgstr ""
-
 msgid "Watch"
 msgstr ""
 
@@ -6096,6 +6076,9 @@ msgstr "Sidebar"
 
 msgid "Edit this page"
 msgstr "Diese Seite bearbeiten"
+
+#~ msgid "PageChange Notification of %s sent to %s"
+#~ msgstr "SeitenÄnderung Benachrichtigung von %s an %s gesendet"
 
 # (Wrong Translation; sorry, but the German term for edit is NOT
 # editieren, but  e d i e r e n).
