@@ -57,7 +57,7 @@ ssh root@$HOST "FFORGE_DB=$DB_NAME FFORGE_USER=gforge FFORGE_ADMIN_USER=$FORGE_A
 
 config_path=$(ssh root@$HOST forge_get_config config_path)
 
-ssh root@$HOST '(echo [core];echo use_ssl=no) > $config_path/config.ini.d/zzz-buildbot.ini'
+ssh root@$HOST "(echo [core];echo use_ssl=no) > $config_path/config.ini.d/zzz-buildbot.ini"
 ssh root@$HOST "(echo [moinmoin];echo use_frame=no) >> $config_path/config.ini.d/zzz-buildbot.ini"
 ssh root@$HOST "(echo [mediawiki];echo unbreak_frames=yes) >> $config_path/config.ini.d/zzz-buildbot.ini"
 ssh root@$HOST "su - postgres -c \"pg_dumpall\" > /root/dump"
