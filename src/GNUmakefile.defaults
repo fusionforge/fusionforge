@@ -1,0 +1,4 @@
+# Using Automake conventions and best practices
+DESTDIR=
+PREFIX=/usr/local
+PKGDATADIR=$(PREFIX)/share/fusionforge
