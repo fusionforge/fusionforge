@@ -33,7 +33,7 @@ class RPMCentosTests
 		$suite->addTestFiles(glob("func/PluginsOnlineHelp/*Test.php"));
 //		$suite->addTestFiles(glob("func/SSH/*Test.php"));
 //		$suite->addTestFiles(glob("func/PluginsScmBzr/*Test.php"));
-		$suite->addTestFiles(glob("func/PluginsScmGit/gitWUITest.php"));
+//		$suite->addTestFiles(glob("func/PluginsScmGit/gitWUITest.php"));
 		$suite->addTestFiles(glob("func/PluginsScmSvn/svnWUITest.php"));
 		$suite->addTestFiles(glob("func/RBAC/*Test.php"));
 		$suite->addTestFiles(glob("func/Surveys/*Test.php"));
