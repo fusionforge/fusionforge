@@ -449,7 +449,9 @@ sysauthldap plugin for FusionForge.
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{_sysconfdir}/cron.d
 %{__install} -m 755 -d $RPM_BUILD_ROOT/bin
+%{__install} -m 755 -d $RPM_BUILD_ROOT/usr/bin
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DIR}
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_BINARY_PATH}
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DIR}/vendor
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DIR}/www
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins
@@ -488,10 +490,10 @@ search_and_replace "/opt/gforge" "%{FORGE_DIR}"
 %{__cp} -a * $RPM_BUILD_ROOT/%{FORGE_DIR}/
 
 # Install utils
-%{__ln_s} %{FORGE_DIR}/utils %{FORGE_BINARY_PATH}
-%{__ln_s} %{FORGE_BINARY_PATH}/forge_wrapper usr/bin/forge_get_config
-%{__ln_s} %{FORGE_BINARY_PATH}/forge_wrapper usr/bin/forge_run_job
-%{__ln_s} %{FORGE_BINARY_PATH}/forge_wrapper usr/bin/forge_run_plugin_job
+%{__ln_s} %{FORGE_DIR}/utils ${RPM_BUILD_ROOT}%{FORGE_BINARY_PATH}
+%{__ln_s} %{FORGE_BINARY_PATH}/forge_wrapper ${RPM_BUILD_ROOT}/usr/bin/forge_get_config
+%{__ln_s} %{FORGE_BINARY_PATH}/forge_wrapper ${RPM_BUILD_ROOT}/usr/bin/forge_run_job
+%{__ln_s} %{FORGE_BINARY_PATH}/forge_wrapper ${RPM_BUILD_ROOT}/usr/bin/forge_run_plugin_job
 
 # Create project vhost space symlink
 %{__ln_s} /home/groups $RPM_BUILD_ROOT/%{FORGE_DATA_PATH}/homedirs/groups
@@ -832,6 +834,7 @@ fi
 %{FORGE_DIR}/install-ng
 %{FORGE_PLUGINS_LIB_DIR}/README
 # Directories under %{FORGE_DIR}
+%{FORGE_BINARY_PATH}
 %{FORGE_DIR}/backend
 %{FORGE_DIR}/common
 #%{FORGE_DIR}/contrib
@@ -915,6 +918,9 @@ fi
 %dir %{_var}/log/gforge
 /home/groups
 /bin/cvssh.pl
+/usr/bin/forge_get_config
+/usr/bin/forge_run_job
+/usr/bin/forge_run_plugin_job
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/authbuiltin.ini
 %{FORGE_PLUGINS_LIB_DIR}/authbuiltin
 
