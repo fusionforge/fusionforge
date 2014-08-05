@@ -532,7 +532,7 @@ EOF
     return 0
 }
 
-options=$(getopt -o hp:n:c -l help,path:,name:,clean -- "$@")
+options=$(getopt -o hp:n:c -l help,path:,rootfs:,name:,clean -- "$@")
 if [ $? -ne 0 ]; then
     usage $(basename $0)
     exit 1
