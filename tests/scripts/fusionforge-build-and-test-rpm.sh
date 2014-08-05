@@ -55,9 +55,9 @@ if [ $VM = centos6 ] ; then
 fi
 ssh root@$HOST "FFORGE_DB=$DB_NAME FFORGE_USER=gforge FFORGE_ADMIN_USER=$FORGE_ADMIN_USERNAME FFORGE_ADMIN_PASSWORD=$FORGE_ADMIN_PASSWORD export FFORGE_DB FFORGE_USER FFORGE_ADMIN_USER FFORGE_ADMIN_PASSWORD; yum install -y --skip-broken fusionforge fusionforge-plugin-scmsvn fusionforge-plugin-online_help fusionforge-plugin-extratabs fusionforge-plugin-authldap fusionforge-plugin-scmgit fusionforge-plugin-blocks"
 
-config_path=$(ssh root@$HOST $FORGE_HOME/utils/forge_get_config config_path)
+config_path=$(ssh root@$HOST forge_get_config config_path)
 
-ssh root@$HOST '(echo [core];echo use_ssl=no) > $config_path/config.ini.d/zzz-buildbot.ini'
+ssh root@$HOST "(echo [core];echo use_ssl=no) > $config_path/config.ini.d/zzz-buildbot.ini"
 ssh root@$HOST "(echo [moinmoin];echo use_frame=no) >> $config_path/config.ini.d/zzz-buildbot.ini"
 ssh root@$HOST "(echo [mediawiki];echo unbreak_frames=yes) >> $config_path/config.ini.d/zzz-buildbot.ini"
 ssh root@$HOST "su - postgres -c \"pg_dumpall\" > /root/dump"
