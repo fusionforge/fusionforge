@@ -451,7 +451,6 @@ sysauthldap plugin for FusionForge.
 %{__install} -m 755 -d $RPM_BUILD_ROOT/bin
 %{__install} -m 755 -d $RPM_BUILD_ROOT/usr/bin
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DIR}
-%{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_BINARY_PATH}
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DIR}/vendor
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DIR}/www
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins
