@@ -649,7 +649,7 @@ done
 %{__ln_s} /usr/share/gitweb/gitweb.cgi $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/scmgit/www/cgi-bin/gitweb.cgi
 %{__ln_s} /usr/share/gitweb/static/gitweb.css $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/scmgit/www/gitweb.css
 %{__ln_s} /usr/share/gitweb/static/gitweb.js $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/scmgit/www/gitweb.js
-
+%{__rm} $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/httpd.conf.d/plugin-scmgit-dav.inc
 # plugin: scmhg
 
 # plugin: blocks
@@ -1071,7 +1071,7 @@ fi
 
 %files plugin-scmgit
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/scmgit.ini
-%{FORGE_CONF_DIR}/httpd.conf.d/plugin-scmgit-dav.inc
+# %{FORGE_CONF_DIR}/httpd.conf.d/plugin-scmgit-dav.inc
 %{FORGE_PLUGINS_LIB_DIR}/scmgit
 %{FORGE_DIR}/www/plugins/scmgit
 
