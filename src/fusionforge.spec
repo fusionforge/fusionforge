@@ -886,7 +886,6 @@ fi
 %{FORGE_DIR}/www/stats
 %{FORGE_DIR}/www/support
 %{FORGE_DIR}/www/survey
-%{FORGE_DIR}/www/tabber
 %{FORGE_DIR}/www/themes
 %{FORGE_DIR}/www/top
 %{FORGE_DIR}/www/tracker
