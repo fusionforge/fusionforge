@@ -24,6 +24,7 @@
 %define FORGE_DIR       %{_datadir}/gforge
 %define FORGE_CONF_DIR  %{_sysconfdir}/gforge
 %define FORGE_LANG_DIR  %{_datadir}/locale
+%define FORGE_BINARY_PATH       %{_datadir}/gforge/bin
 %define FORGE_DATA_PATH %{_var}/lib/gforge
 %define FORGE_CHROOT_PATH %{FORGE_DATA_PATH}/chroot
 %define FORGE_PLUGINS_LIB_DIR       %{FORGE_DIR}/plugins
@@ -33,6 +34,7 @@
 # %define FORGE_DIR       %(src/utils/forge_get_config_basic fhsrh source_path)
 # %define FORGE_CONF_DIR  %(src/utils/forge_get_config_basic fhsrh config_path)
 # %define FORGE_LANG_DIR  %{_datadir}/locale
+# %define FORGE_BINARY_PATH       %(src/utils/forge_get_config_basic fhsrh binary_path)
 # %define FORGE_DATA_PATH   %(src/utils/forge_get_config_basic fhsrh data_path)
 # %define FORGE_CHROOT_PATH   %(src/utils/forge_get_config_basic fhsrh chroot)
 # %define FORGE_PLUGINS_LIB_DIR         %(src/utils/forge_get_config_basic fhsrh plugins_path)
@@ -484,6 +486,12 @@ search_and_replace "/opt/gforge" "%{FORGE_DIR}"
 
 # Installing gforge
 %{__cp} -a * $RPM_BUILD_ROOT/%{FORGE_DIR}/
+
+# Install utils
+%{__ln_s} %{FORGE_DIR}/utils %{FORGE_BINARY_PATH}
+%{__ln_s} %{FORGE_BINARY_PATH}/forge_wrapper usr/bin/forge_get_config
+%{__ln_s} %{FORGE_BINARY_PATH}/forge_wrapper usr/bin/forge_run_job
+%{__ln_s} %{FORGE_BINARY_PATH}/forge_wrapper usr/bin/forge_run_plugin_job
 
 # Create project vhost space symlink
 %{__ln_s} /home/groups $RPM_BUILD_ROOT/%{FORGE_DATA_PATH}/homedirs/groups
