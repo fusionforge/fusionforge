@@ -1,4 +1,22 @@
+# Included by all GNUmakefile's to get the same defaults
 # Using Automake conventions and best practices
 DESTDIR=
-PREFIX=/usr/local
-PKGDATADIR=$(PREFIX)/share/fusionforge
+prefix=/usr/local
+pkgdatadir=$(prefix)/share/fusionforge
+
+# Let's slightly divert from Automake convention and use distro dirs:
+#sysconfdir=$(prefix)/etc
+#localstatedir=$(prefix)/var
+sysconfdir=/etc
+localstatedir=/var
+
+# Derived paths
+# TODO: override them from forge_get_config ?
+config_path=$(sysconfdir)/fusionforge
+data_path=$(localstatedir)/lib/fusionforge
+log_path=$(localstatedir)/log/fusionforge
+
+# Common distro usage will be:
+# make DESTDIR=/tmp/build prefix=/usr
+
+httpd_service=apache2
