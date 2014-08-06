@@ -5,6 +5,9 @@ DESTDIR=
 prefix=/usr/local
 pkgdatadir=$(prefix)/share/fusionforge
 
+# Common distro usage will be:
+# make DESTDIR=/tmp/build prefix=/usr
+
 # Let's slightly divert from Automake convention and use distro dirs:
 #sysconfdir=$(prefix)/etc
 #localstatedir=$(prefix)/var
@@ -17,7 +20,5 @@ config_path=$(sysconfdir)/fusionforge
 data_path=$(localstatedir)/lib/fusionforge
 log_path=$(localstatedir)/log/fusionforge
 
-# Common distro usage will be:
-# make DESTDIR=/tmp/build prefix=/usr
-
-httpd_service=apache2
+# No way to detect Apache's distro integration, so let's hard-code:
+httpd_service:=$(shell if [ -e /etc/redhat-release ]; then echo 'httpd'; else echo 'apache2'; fi)
