@@ -123,7 +123,7 @@ fi
 
 for i in arch bzr cvs darcs git hg svn ; do
     repopath=`FUSIONFORGE_NO_PLUGINS=true forge_get_config repos_path scm$i`
-    if [ -d $repopath ] && ls $repopath | grep -q .. ; then
+    if [ -d "$repopath" ] && ls $repopath | grep -q .. ; then
 	echo "Removing $i repositories"
 	rm -rf $repopath/*
     fi
