@@ -103,7 +103,7 @@ if (forge_get_config('use_ftp_uploads')) {
 
 /* read in the group home template file */
 $contents = '';
-if (($fo = fopen(dirname(__FILE__) . '/../utils/default_page.php', 'r'))) {
+if (($fo = fopen(dirname(__FILE__) . '/../templates/default_page.php', 'r'))) {
 	while (!feof($fo)) {
 		$contents .= fread($fo, 8192);
 	}
