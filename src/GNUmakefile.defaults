@@ -1,3 +1,4 @@
+# -*- Makefile -*-
 # Included by all GNUmakefile's to get the same defaults
 # Using Automake conventions and best practices
 DESTDIR=
