@@ -1,5 +1,5 @@
 include GNUmakefile.defaults
-VERSION=$(shell cat VERSION)
+VERSION:=$(shell cat VERSION)
 
 ## Step 1: build files
 all:
@@ -23,7 +23,7 @@ install-core: base-dirs
 	cp -a VERSION bin common cronjobs db etc lib templates vendor www $(DESTDIR)$(pkgdatadir)/
 	$(MAKE) -C locale DESTDIR=$(DESTDIR) PREFIX=$(PREFIX) install
 
-PLUGINS=$(shell utils/list-enabled-plugins.sh)
+PLUGINS:=$(shell utils/list-enabled-plugins.sh)
 PLUGINS_INSTALL_TARGETS=$(addprefix install-plugin-,$(PLUGINS))
 install-plugins: $(PLUGINS_INSTALL_TARGETS)
 
