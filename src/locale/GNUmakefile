@@ -25,5 +25,8 @@ clean:
 	rm -rf $(LINGUAS)
 
 install: all
-	install -d -m 755 $(DESTDIR)/$(PREFIX)/share/locale/
-	cp -a $(LINGUAS) $(DESTDIR)/$(PREFIX)/share/locale/
+	install -d -m 755 $(DESTDIR)$(prefix)/share/locale/
+	cp -a $(LINGUAS) $(DESTDIR)$(prefix)/share/locale/
+
+uninstall:
+	rm -rf $(DESTDIR)$(prefix)/share/locale/*/LC_MESSAGES/fusionforge.mo
