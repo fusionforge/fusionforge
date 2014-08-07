@@ -11,7 +11,7 @@ require_once $gfcommon.'include/sqlparser.php';
 
 echo "Entering  upgrade-db.php\n";
 
-$db_path = dirname(__FILE__).'/';
+$db_path = dirname(__FILE__).'/../db/';
 $date = -1;
 $version = '';
 
@@ -36,11 +36,6 @@ if (!$res) { // db error
 } else { // get the start date from the db
 	$date = (int) db_result($res, 0, 'db_start_date');
 	$version = db_result($res, 0, 'db_version');
-}
-
-if (!apply_fixes($version)) {
-	show("ERROR applying fixes to version $version!\n");
-	exit(1);
 }
 
 // Upgrade main database if no argument or if all)
@@ -123,7 +118,7 @@ function get_scripts($dir) {
 					if (strlen($name) >= 8) {
 						$date_aux = substr($name, 0, 8);
 						$type_aux = substr($file, $pos + 1);
-						if ((int) $date_aux > 20000000 && ($type_aux=='sql' || $type_aux=='php') && strpos($file, 'debian') === false) {
+						if ($type_aux=='sql' || $type_aux=='php') {
 							$data[] = array('date'=>$date_aux, 'filename'=>$file, 'ext'=>$type_aux);
 						}
 					}
@@ -171,20 +166,13 @@ function run_script($script) {
 		}
 
 	} elseif ($ext == 'sql') {
-		if (//$filename == '20021124-3_gforge-debian-sf-sync.sql' ||
-			$filename == '20021223-drops.sql') {
-//20021223-drops.sql
-echo "\nskipping $filename";
+		// run the sql script
+		$queries = array();
+		if (run_sql_script($filename)) {
+			show(realpath($db_path.$filename)." ran correctly\n\n");
 			$return = true;
 		} else {
-			// run the sql script
-			$queries = array();
-			if (run_sql_script($filename)) {
-				show(realpath($db_path.$filename)." ran correctly\n\n");
-				$return = true;
-			} else {
-				show(realpath($db_path.$filename)." FAILED!\n\n");
-			}
+			show(realpath($db_path.$filename)." FAILED!\n\n");
 		}
 	} else {
 		// something went wrong
@@ -225,98 +213,6 @@ function run_sql_script($filename) {
 		}
 	}
 
-	// Patch for some 3.0preX versions
-	if ($filename == '20021216.sql') {
-		db_query_params ('SELECT setval($1, (SELECT MAX(theme_id) FROM themes), true)',
-			array('themes_theme_id_key')) ;
-
-		show("Applying fix for some 3.0preX versions\n");
-	}
-
-	//db_commit();
-	return true;
-}
-
-function apply_fixes($version) {
-	$queries = array();
-	if ($version == 'sfee3.3') {
-		$res = db_query_params('SELECT COUNT(*) AS applied FROM database_changes WHERE filename=$1', array ('sfee3.3fixes')) ;
-		if ($res && db_result($res, 0, 'applied') == '0') {
-			show("Converting SFEE3.3 to SFEE3.0\n");
-			run_script(array('filename'=>'sfee3.3-3.0-1.sql','ext'=>'sql'));
-			run_script(array('filename'=>'sfee3.3-3.0-2.php','ext'=>'php'));
-			run_script(array('filename'=>'sfee3.3-3.0-3.sql','ext'=>'sql'));
-			show("Converting SFEE3.0 to SF2.6\n");
-//sfee3.0-sf26-1.sql
-			run_script(array('filename'=>'sfee3.0-sf26-1.sql','ext'=>'sql'));
-			run_script(array('filename'=>'sfee3.0-sf26-2.php','ext'=>'php'));
-			$queries[] = "INSERT INTO database_changes (filename) VALUES ('sfee3.3fixes')";
-		}
-	} elseif ($version == 'sfee3.0') {
-		$res = db_query_params ('SELECT COUNT(*) AS applied FROM database_changes WHERE filename=$1',
-					array ('sfee3.0fixes')) ;
-		if ($res && db_result($res, 0, 'applied') == '0') {
-			run_script(array('filename'=>'sfee3.0-sf26-1.sql','ext'=>'sql'));
-			run_script(array('filename'=>'sfee3.0-sf26-2.php','ext'=>'php'));
-			$queries[] = "INSERT INTO database_changes (filename) VALUES ('sfee3.0fixes')";
-		}
-	} elseif ($version == '2.5') {
-		$res = db_query_params ('SELECT COUNT(*) AS applied FROM database_changes WHERE filename=$1',
-					array ('2.5fixes'));
-		if ($res && db_result($res, 0, 'applied') == '0') {
-			show("Applying fixes for version 2.5\n");
-			$queries[] = "ALTER TABLE project_task ADD CONSTRAINT project_task_group_project_id_f CHECK (1 = 1)";
-			$queries[] = "INSERT INTO database_changes (filename) VALUES ('2.5fixes')";
-		}
-	} elseif ($version == '2.6') {
-		$res = db_query_params ('SELECT COUNT(*) AS applied FROM database_changes WHERE filename=$1',
-					array ('2.6fixes')) ;
-		if ($res && db_result($res, 0, 'applied') == '0') {
-			show("Applying fixes for version 2.6\n");
-			$queries[] = "ALTER TABLE project_task ADD CONSTRAINT project_task_group_project_id_f CHECK (1 = 1)";
-			$queries[] = "INSERT INTO database_changes (filename) VALUES ('2.6fixes')";
-		}
-	} elseif ($version == '3.0pre5') {
-		$res = db_query_params ('SELECT COUNT(*) AS applied FROM database_changes WHERE filename=$1',
-					array ('3.0pre5fixes')) ;
-		if ($res && db_result($res, 0, 'applied') == '0') {
-			show("Applying fixes for version 3.0pre5\n");
-			if (!run_sql_script('fix-gforge3.0pre5.sql')) {
-				show("Error applying fixes for version 3.0pre5\n");
-				//exit(1);
-			}
-			$queries[] = "INSERT INTO database_changes (filename) VALUES ('3.0pre5fixes')";
-		}
-	} elseif ($version == '3.0pre6') {
-		$res = db_query_params ('SELECT COUNT(*) AS applied FROM database_changes WHERE filename=$1', array ('3.0pre6fixes')) ;
-		if ($res && db_result($res, 0, 'applied') == '0') {
-			show("Applying fixes for version 3.0pre6\n");
-			$queries[] = "ALTER TABLE project_task ADD CONSTRAINT project_task_group_project_id_f CHECK (1 = 1)";
-			$queries[] = "INSERT INTO database_changes (filename) VALUES ('3.0pre6fixes')";
-		}
-	} elseif ($version == '3.0pre7') {
-		$res = db_query_params ('SELECT COUNT(*) AS applied FROM database_changes WHERE filename=$1',
-					array ('3.0pre7fixes')) ;
-		if ($res && db_result($res, 0, 'applied') == '0') {
-			show("Applying fixes for version 3.0pre7\n");
-			$queries[] = "ALTER TABLE project_task ADD CONSTRAINT project_task_group_project_id_f CHECK (1 = 1)";
-			$queries[] = "INSERT INTO database_changes (filename) VALUES ('3.0pre7fixes')";
-		}
-	} elseif ($version == '4.7') {
-		run_script(array('filename'=>'20070924-project-perm.sql','ext'=>'sql'));
-		run_script(array('filename'=>'20070924-forum-perm.sql','ext'=>'sql'));
-		run_script(array('filename'=>'20070924-artifact-perm.sql','ext'=>'sql'));
-	}
-
-	//db_begin();
-	foreach ($queries as $query) {
-		$res = db_query_params($query, array());
-		if (!$res) {
-			show("ERROR: ".db_error()."\n");
-	//		db_rollback();
-			return false;
-		}
-	}
 	//db_commit();
 	return true;
 }
@@ -341,5 +237,3 @@ function show($text) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

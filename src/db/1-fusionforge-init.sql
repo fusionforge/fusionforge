@@ -7904,7 +7904,7 @@ CREATE TABLE database_changes (
 );
 
 
-ALTER TABLE public.database_changes OWNER TO gforge;
+-- ALTER TABLE public.database_changes OWNER TO gforge;
 
 --
 -- Name: database_startpoint; Type: TABLE; Schema: public; Owner: gforge; Tablespace:
@@ -7916,7 +7916,7 @@ CREATE TABLE database_startpoint (
 );
 
 
-ALTER TABLE public.database_startpoint OWNER TO gforge;
+-- ALTER TABLE public.database_startpoint OWNER TO gforge;
 
 --
 -- Data for Name: database_startpoint; Type: TABLE DATA; Schema: public; Owner: gforge
