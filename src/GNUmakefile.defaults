@@ -23,6 +23,5 @@ log_path=$(localstatedir)/log/fusionforge
 
 # No way to detect Apache's distro integration, so let's hard-code:
 httpd_service:=$(shell if [ -e /etc/redhat-release ]; then echo 'httpd'; else echo 'apache2'; fi)
+
 user=fusionforge
-database_name=fusionforge
-database_user=fusionforge
