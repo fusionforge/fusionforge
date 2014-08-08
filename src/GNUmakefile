@@ -51,6 +51,7 @@ install-config: install-base-dirs
 
 install-core: install-base-dirs install-config
 	cp -a VERSION bin common cronjobs db lib templates vendor www $(DESTDIR)$(pkgdatadir)/
+	install -d -m 755 $(DESTDIR)$(pkgdatadir)/www/plugins/
 	$(MAKE) -C locale DESTDIR=$(DESTDIR) PREFIX=$(PREFIX) install
 	ln -nfs $(pkgdatadir)/bin/forge_get_config $(DESTDIR)$(prefix)/bin/forge_get_config
 	ln -nfs $(pkgdatadir)/bin/forge_run_jon $(DESTDIR)$(prefix)/bin/forge_run_job
@@ -62,8 +63,8 @@ install-plugins: $(PLUGINS_INSTALL_TARGETS)
 
 install-plugin-%: plugins/% install-base-dirs
 #	Source files
-	install -d -m 755 $(DESTDIR)$(pkgdatadir)/plugins/$*
-	cd plugins/$* && cp -a $$(ls | grep -v '^(etc|packaging)$$') $(DESTDIR)$(pkgdatadir)/plugins/
+	install -d -m 755 $(DESTDIR)$(pkgdatadir)/plugins/$*/
+	cd plugins/$* && cp -a $$(ls | grep -v '^(etc|packaging)$$') $(DESTDIR)$(pkgdatadir)/plugins/$*/
 #	Initial config files
 	cp -a plugins/$*/etc/$*.ini $(DESTDIR)$(config_path)/config.ini.d/; \
 	if [ -d plugins/$*/etc/plugins/$* ]; then \
@@ -94,18 +95,20 @@ post-install-db:
 	$(pkgdatadir)/bin/upgrade-db.php
 
 PLUGINS_POST_INSTALL_TARGETS=$(addprefix post-install-plugin-,$(PLUGINS))
+# TODO: some plugins require others to be installed first
+# e.g. admssw <- doaprdf
 post-install-plugins: $(PLUGINS_POST_INSTALL_TARGETS)
 post-install-plugin-%:
 #	Run plugin-specific DB install/upgrade
 	$(pkgdatadir)/bin/upgrade-db.php $*
 #	Restart apache if there is some change in config
 #	TODO: manage this with manage-apache-config.sh
-	if [ -f $(config_path)/httpd.conf.d/plugin-$*.inc ]; then
-	    service $(httpd_service) reload
+	if [ -f $(config_path)/httpd.conf.d/plugin-$*.inc ]; then \
+	    service $(httpd_service) reload; \
 	fi
 #	Run plugin-specific install
-	if [ -f $(pkgdatadir)/plugins/bin/install.sh ]; then
-	    $(pkgdatadir)/plugins/bin/install.sh configure
+	if [ -f $(pkgdatadir)/plugins/bin/install.sh ]; then \
+	    $(pkgdatadir)/plugins/bin/install.sh configure; \
 	fi
 
 clean:
