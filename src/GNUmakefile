@@ -23,8 +23,8 @@ database_host=127.0.0.1
 database_port=5432
 database_name=fusionforge
 database_user=fusionforge
-database_password:=$(shell (head -c100 /dev/urandom; date +"%s:%N") | md5sum | cut -b-32)
-session_key:=$(shell (head -c100 /dev/urandom; date +"%s:%N") | md5sum | cut -b-32)
+database_password:=$(shell (head -c100 /dev/urandom; date +"%s:%N") | md5sum | cut -d' ' -f1)
+session_key:=$(shell (head -c100 /dev/urandom; date +"%s:%N") | md5sum | cut -d' ' -f1)
 
 install-config: install-base-dirs
 #	Install initial configuration without overwriting
@@ -47,17 +47,16 @@ install-config: install-base-dirs
 			-e 's,@session_key@,$(session_key),' \
 			> $(DESTDIR)$(config_path)/config.ini.d/secrets.ini; \
 	fi
-#	TODO: httpd.conf.d
 
 install-core: install-base-dirs install-config
-	cp -a VERSION bin common cronjobs db lib templates vendor www $(DESTDIR)$(pkgdatadir)/
+	cp -a VERSION bin common cronjobs db post-install.d templates vendor www lib $(DESTDIR)$(pkgdatadir)/
 	install -d -m 755 $(DESTDIR)$(pkgdatadir)/www/plugins/
 	$(MAKE) -C locale DESTDIR=$(DESTDIR) PREFIX=$(PREFIX) install
 	ln -nfs $(pkgdatadir)/bin/forge_get_config $(DESTDIR)$(prefix)/bin/forge_get_config
 	ln -nfs $(pkgdatadir)/bin/forge_run_jon $(DESTDIR)$(prefix)/bin/forge_run_job
 	ln -nfs $(pkgdatadir)/bin/forge_run_plugin_job $(DESTDIR)$(prefix)/bin/forge_run_plugin_job
 
-PLUGINS:=$(shell utils/list-enabled-plugins.sh)
+PLUGINS:=$(shell bin/list-enabled-plugins.sh)
 PLUGINS_INSTALL_TARGETS=$(addprefix install-plugin-,$(PLUGINS))
 install-plugins: $(PLUGINS_INSTALL_TARGETS)
 
@@ -86,30 +85,16 @@ uninstall:
 
 
 ## Step 3: configure & update system
-post-install: post-install-user post-install-db post-install-plugins
-post-install-user:
-	if ! getent passwd $(user) >/dev/null; then useradd $(user) -s /bin/false -d $(data_path); fi
-post-install-db:
-	post-install.d/db-configure.sh
-	post-install.d/db-populate.sh
-	$(pkgdatadir)/bin/upgrade-db.php
+post-install: post-install-core post-install-plugins
+post-install-core:
+	$(pkgdatadir)/post-install.d/core.sh
 
 PLUGINS_POST_INSTALL_TARGETS=$(addprefix post-install-plugin-,$(PLUGINS))
 # TODO: some plugins require others to be installed first
 # e.g. admssw <- doaprdf
 post-install-plugins: $(PLUGINS_POST_INSTALL_TARGETS)
 post-install-plugin-%:
-#	Run plugin-specific DB install/upgrade
-	$(pkgdatadir)/bin/upgrade-db.php $*
-#	Restart apache if there is some change in config
-#	TODO: manage this with manage-apache-config.sh
-	if [ -f $(config_path)/httpd.conf.d/plugin-$*.inc ]; then \
-	    service $(httpd_service) reload; \
-	fi
-#	Run plugin-specific install
-	if [ -f $(pkgdatadir)/plugins/bin/install.sh ]; then \
-	    $(pkgdatadir)/plugins/bin/install.sh configure; \
-	fi
+	$(pkgdatadir)/post-install.d/plugin.sh $*
 
 clean:
 	$(MAKE) -C locale/ clean
