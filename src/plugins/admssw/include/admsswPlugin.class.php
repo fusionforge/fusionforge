@@ -70,6 +70,13 @@ class admsswPlugin extends Plugin {
 
 		// Add the doaprdf plugin's namespaces
 		$doaprdfplugin = plugin_get_object ("doaprdf");
+		if ($doaprdfplugin == NULL)
+		{
+			// FIXME: constructor use of plugin_get_object
+			// requires 'doaprdf' to be listed before
+			// 'admssw' _in the plugins DB table_.
+			return;
+		}
 		$ns = $doaprdfplugin->doapNameSpaces();
 		foreach($ns as $s => $u)
 		{
