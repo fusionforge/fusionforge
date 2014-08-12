@@ -40,7 +40,7 @@ if (!$res) {
 $enableRestart = false;
 $httpdRestartedMsg = _('httpd server not restarted');
 
-$inTemplateVhostFile = forge_get_config('source_path').'/etc/templates/httpd.vhosts';
+$inTemplateVhostFile = forge_get_config('source_path').'/templates/httpd.vhosts.tmpl';
 $outVhostsFile = forge_get_config('config_path').'/httpd.conf.d/httpd.vhosts';
 $logPath = forge_get_config('log_path');
 $groupdirPrefix = forge_get_config('groupdir_prefix');

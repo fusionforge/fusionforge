@@ -14,9 +14,6 @@ for i in httpd.conf httpd.conf.d/*; do
 	*secrets*) chmod 600 $i;;
     esac
 done
-# Ensure vhosts file exists - cf. 40-vhosts-extra.conf
-mkdir -p -m 755 $data_path/etc/
-touch $data_path/etc/httpd.vhosts
 
 # Hard-coded detection of distro-specific Apache conf layout
 httpd_service=$(if [ -e /etc/redhat-release ]; then echo 'httpd'; else echo 'apache2'; fi)
