@@ -661,7 +661,7 @@ if (isset($params['group']) && $params['group']) {
 					$thAttrs['title'] = $thTitleArray[$i];
 				}
 				$cell = $titleArray[$i];
-				if ($linksArray) {
+				if ($linksArray && isset($linksArray[$i])) {
 					$cell = util_make_link($linksArray[$i], $titleArray[$i]);
 				}
 				$return .= html_e('th', $thAttrs, $cell, false);
