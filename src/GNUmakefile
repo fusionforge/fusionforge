@@ -47,6 +47,13 @@ install-config: install-base-dirs
 			-e 's,@session_key@,$(session_key),' \
 			> $(DESTDIR)$(config_path)/config.ini.d/secrets.ini; \
 	fi
+	chmod 600 $(DESTDIR)$(config_path)/config.ini.d/secrets.ini
+#	TODO: support 'db_get @PACKAGE@/shared/web_host' ?
+	if [ ! -e $(DESTDIR)$(config_path)/config.ini.d/post-install.ini ]; then \
+		sed templates/post-install.ini \
+			-e 's,@web_host@,$(hostname -f),' \
+			> $(DESTDIR)$(config_path)/config.ini.d/post-install.ini; \
+	fi
 
 install-core: install-base-dirs install-config
 	cp -a VERSION bin common cronjobs db post-install.d templates vendor www lib $(DESTDIR)$(pkgdatadir)/
