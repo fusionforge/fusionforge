@@ -56,7 +56,7 @@ install-core: install-base-dirs install-config
 	ln -nfs $(pkgdatadir)/bin/forge_run_jon $(DESTDIR)$(prefix)/bin/forge_run_job
 	ln -nfs $(pkgdatadir)/bin/forge_run_plugin_job $(DESTDIR)$(prefix)/bin/forge_run_plugin_job
 
-PLUGINS:=$(shell bin/list-enabled-plugins.sh)
+PLUGINS:=$(shell utils/list-valid-plugins.sh)
 PLUGINS_INSTALL_TARGETS=$(addprefix install-plugin-,$(PLUGINS))
 install-plugins: $(PLUGINS_INSTALL_TARGETS)
 
@@ -89,11 +89,10 @@ post-install: post-install-core post-install-plugins
 post-install-core:
 	$(pkgdatadir)/post-install.d/core.sh
 
-PLUGINS_POST_INSTALL_TARGETS=$(addprefix post-install-plugin-,$(PLUGINS))
-# TODO: some plugins require others to be installed first
-# e.g. admssw <- doaprdf
+PLUGINS_INSTALLED:=$(ls $(data_path)/plugins)
+PLUGINS_POST_INSTALL_TARGETS=$(addprefix post-install-plugin-,$(PLUGINS_INSTALLED))
 post-install-plugins: $(PLUGINS_POST_INSTALL_TARGETS)
-post-install-plugin-%:
+post-install-plugin-%: $(data_path)/plugins/%/
 	$(pkgdatadir)/post-install.d/plugin.sh $*
 
 clean:

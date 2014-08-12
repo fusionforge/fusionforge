@@ -10,6 +10,7 @@ if [ -z "$1" ]; then
 fi
 
 # Run plugin-specific DB install/upgrade
+# TODO: don't automatically enable the plugin, esp. for non-packaged installs
 $source_path/bin/upgrade-db.php $1
 
 # Restart apache if there is some change in config
