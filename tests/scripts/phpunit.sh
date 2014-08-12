@@ -110,20 +110,20 @@ if [ $i = $timeout ] ; then
     cat $t
     echo -----
     echo "Trying again."
-fi
-PATH=/usr/lib/iceweasel:$PATH LANG=C java -jar /usr/share/selenium/selenium-server.jar -trustAllSSLCertificates -singleWindow > $t 2>&1 &
-i=0
-while [ $i -lt $timeout ] && ! netstat -tnl 2>/dev/null | grep -q :4444 ; do
-    sleep 1
-    i=$(($i+1))
-done
-if [ $i = $timeout ] ; then
-    echo "Selenium failed to start within $timeout seconds:"
-    echo -----
-    cat $t
-    echo -----
-    echo "Giving up."
-    exit 1
+    PATH=/usr/lib/iceweasel:$PATH LANG=C java -jar /usr/share/selenium/selenium-server.jar -trustAllSSLCertificates -singleWindow > $t 2>&1 &
+    i=0
+    while [ $i -lt $timeout ] && ! netstat -tnl 2>/dev/null | grep -q :4444 ; do
+	sleep 1
+	i=$(($i+1))
+    done
+    if [ $i = $timeout ] ; then
+	echo "Selenium failed to start within $timeout seconds:"
+	echo -----
+	cat $t
+	echo -----
+	echo "Giving up."
+	exit 1
+    fi
 fi
 
 echo "Running PHPunit tests"
