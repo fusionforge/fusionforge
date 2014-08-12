@@ -30,13 +30,14 @@ install-config: install-base-dirs
 #	Install initial configuration without overwriting
 	cp -a --no-clobber etc/config.ini.d/* $(DESTDIR)$(config_path)/config.ini.d/
 	if [ ! -e $(DESTDIR)$(config_path)/config.ini ]; then \
-		sed templates/config.ini \
+		sed etc/config.ini \
 			-e 's,@source_path@,$(pkgdatadir),' \
 			-e 's,@data_path@,$(data_path),' \
 			-e 's,@config_path@,$(config_path),' \
 			-e 's,@log_path@,$(log_path),' \
 			> $(DESTDIR)$(config_path)/config.ini; \
 	fi
+#	TODO: install the following at post-install time
 	if [ ! -e $(DESTDIR)$(config_path)/config.ini.d/secrets.ini ]; then \
 		sed templates/secrets.ini \
 			-e 's,@database_host@,$(database_host),' \
