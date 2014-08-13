@@ -18,16 +18,9 @@ install-base-dirs:
 	install -d -m 755 $(DESTDIR)$(config_path)/plugins/
 	install -d -m 755 $(DESTDIR)$(sysconfdir)/cron.d/
 
-# Initial values for generating secrets.ini
-database_host=127.0.0.1
-database_port=5432
-database_name=fusionforge
-database_user=fusionforge
-database_password:=$(shell (head -c100 /dev/urandom; date +"%s:%N") | md5sum | cut -d' ' -f1)
-session_key:=$(shell (head -c100 /dev/urandom; date +"%s:%N") | md5sum | cut -d' ' -f1)
-
 install-config: install-base-dirs
-#	Install initial configuration without overwriting
+#	Install initial configuration (without overwriting)
+#	Required for post-install scripts
 	cp -a --no-clobber etc/config.ini.d/* $(DESTDIR)$(config_path)/config.ini.d/
 	if [ ! -e $(DESTDIR)$(config_path)/config.ini ]; then \
 		sed etc/config.ini \
@@ -36,24 +29,6 @@ install-config: install-base-dirs
 			-e 's,@config_path@,$(config_path),' \
 			-e 's,@log_path@,$(log_path),' \
 			> $(DESTDIR)$(config_path)/config.ini; \
-	fi
-#	TODO: install the following at post-install time
-	if [ ! -e $(DESTDIR)$(config_path)/config.ini.d/secrets.ini ]; then \
-		sed templates/secrets.ini \
-			-e 's,@database_host@,$(database_host),' \
-			-e 's,@database_port@,$(database_port),' \
-			-e 's,@database_name@,$(database_name),' \
-			-e 's,@database_user@,$(database_user),' \
-			-e 's,@database_password@,$(database_password),' \
-			-e 's,@session_key@,$(session_key),' \
-			> $(DESTDIR)$(config_path)/config.ini.d/secrets.ini; \
-	fi
-	chmod 600 $(DESTDIR)$(config_path)/config.ini.d/secrets.ini
-#	TODO: support 'db_get @PACKAGE@/shared/web_host' ?
-	if [ ! -e $(DESTDIR)$(config_path)/config.ini.d/post-install.ini ]; then \
-		sed templates/post-install.ini \
-			-e 's,@web_host@,$(hostname -f),' \
-			> $(DESTDIR)$(config_path)/config.ini.d/post-install.ini; \
 	fi
 
 install-core: install-base-dirs install-config

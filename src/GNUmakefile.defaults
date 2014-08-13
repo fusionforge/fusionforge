@@ -15,10 +15,6 @@ sysconfdir=/etc
 localstatedir=/var
 
 # Derived paths
-# TODO: override them from forge_get_config ?
-#       must not be overridable during a package build
 config_path=$(sysconfdir)/fusionforge
 data_path=$(localstatedir)/lib/fusionforge
 log_path=$(localstatedir)/log/fusionforge
-
-user=fusionforge
