@@ -35,7 +35,7 @@ case $1 in
 		    -e "s,{core/source_path},$(../utils/forge_get_config_basic $j source_path),g" \
 		    -e "s,{core/data_path},$(../utils/forge_get_config_basic $j data_path),g" \
 		    -e "s,{core/log_path},$(../utils/forge_get_config_basic $j log_path),g" \
-		    -e "s,{core/chroot},/var/l$(../utils/forge_get_config_basic $j chroot},/var),g" \
+		    -e "s,{core/chroot},$(../utils/forge_get_config_basic $j chroot),g" \
 		    -e "s,{core/custom_path},$(../utils/forge_get_config_basic $j custom_path),g" \
 		    -e "s,{core/url_prefix},$(../utils/forge_get_config_basic $j url_prefix),g" \
 		    -e "s,{core/mailman_path},$(../utils/forge_get_config_basic $j mailman_path),g" \

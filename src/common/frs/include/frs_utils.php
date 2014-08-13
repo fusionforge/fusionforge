@@ -26,18 +26,6 @@
  */
 
 /**
- * frs_show_public_popup - pop-up select box of public / private frs statuses
- *
- * @param	string	$name		default value 'is_public'
- * @param	string	$checked_val	default value 'xzxz'
- * @return	string	html code
- */
-function frs_show_public_popup($name = 'is_public', $checked_val = 'xzxz') {
-	$FRS_PUBLIC_RES = array('private', 'public');
-	return html_build_select_box_from_array($FRS_PUBLIC_RES, $name, $checked_val, false);
-}
-
-/**
  * frs_show_status_popup - pop-up select box of supported frs statuses
  *
  * @param	string	$name		default value 'status_id'
