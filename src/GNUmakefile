@@ -21,6 +21,7 @@ install-base-dirs:
 install-config: install-base-dirs
 #	Install initial configuration (without overwriting)
 #	Required for post-install scripts
+#	TODO: chown to root:root
 	cp -a --no-clobber etc/config.ini.d/* $(DESTDIR)$(config_path)/config.ini.d/
 	if [ ! -e $(DESTDIR)$(config_path)/config.ini ]; then \
 		sed etc/config.ini \
@@ -72,10 +73,10 @@ post-install: post-install-core post-install-plugins
 post-install-core:
 	$(pkgdatadir)/post-install.d/core.sh
 
-PLUGINS_INSTALLED:=$(ls $(data_path)/plugins)
+PLUGINS_INSTALLED:=$(shell ls $(pkgdatadir)/plugins)
 PLUGINS_POST_INSTALL_TARGETS=$(addprefix post-install-plugin-,$(PLUGINS_INSTALLED))
 post-install-plugins: $(PLUGINS_POST_INSTALL_TARGETS)
-post-install-plugin-%: $(data_path)/plugins/%/
+post-install-plugin-%: $(pkgdatadir)/plugins/%/
 	$(pkgdatadir)/post-install.d/plugin.sh $*
 
 clean:

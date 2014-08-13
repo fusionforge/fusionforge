@@ -6,12 +6,12 @@ config_path=$(forge_get_config config_path)
 data_path=$(forge_get_config data_path)
 
 cd $source_path/templates/
-for i in httpd.conf httpd.conf.d/*; do
-    if ! [ -e $config_path/$i ]; then
+for i in httpd.conf $(ls httpd.conf.d/*); do
+    if [ ! -e $config_path/$i ]; then
 	$source_path/post-install.d/httpd-expand-conf.php $i $config_path/$i
     fi
     case $i in
-	*secrets*) chmod 600 $i;;
+	*secrets*) chmod 600 $config_path/$i;;
     esac
 done
 
@@ -24,4 +24,4 @@ fi
 if [ -e /etc/redhat-release ]; then
     ln -nfs $config_path/httpd.conf /etc/httpd/conf.d/fusionforge.conf
 fi
-service $httpd_service restart
+service $httpd_service reload
