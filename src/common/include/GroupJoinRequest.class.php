@@ -50,14 +50,14 @@ class GroupJoinRequest extends Error {
 
 	var $Group;
 
-    /**
-     *  Constructor.
-     *
-     * @param bool|Group $Group   $Group   The Group object.
-     * @param bool|int $user_id The user_id.
-     * @param array|bool $arr     The associative array of data.
-     * @return \GroupJoinRequest
-     */
+	/**
+	 *  Constructor.
+	 *
+	 * @param	bool|Group	$Group		The Group object.
+	 * @param	bool|int	$user_id	The user_id.
+	 * @param	array|bool	$arr		The associative array of data.
+	 * @return	\GroupJoinRequest
+	 */
 	function __construct($Group = false, $user_id = false, $arr = false) {
 		$this->error();
 
@@ -91,10 +91,10 @@ class GroupJoinRequest extends Error {
 	/**
 	 * create - create a new GroupJoinRequest in the database.
 	 *
-	 * @param int    $user_id    user_id.
-	 * @param string $comments   comments.
-	 * @param bool   $send_email whether to send an email to the admin(s)
-	 * @return boolean Success.
+	 * @param	int	$user_id	user_id.
+	 * @param	string	$comments	comments.
+	 * @param	bool	$send_email	whether to send an email to the admin(s)
+	 * @return	boolean	Success.
 	 */
 	function create($user_id, $comments, $send_email = true) {
 		$v = new Validator();
@@ -149,11 +149,11 @@ class GroupJoinRequest extends Error {
 	}
 
 	/**
-	 *  fetchData - re-fetch the data for this GroupJoinRequest from the database.
+	 * fetchData - re-fetch the data for this GroupJoinRequest from the database.
 	 *
-	 * @param  int  $group_id The group_id.
-	 * @param  int  $user_id  The user_id.
-	 * @return     boolean success.
+	 * @param	int	$group_id	The group_id.
+	 * @param	int	$user_id	The user_id.
+	 * @return	boolean	success.
 	 */
 	function fetchData($group_id, $user_id) {
 		$res = db_query_params('SELECT * FROM group_join_request WHERE user_id=$1 AND group_id=$2',
@@ -169,54 +169,54 @@ class GroupJoinRequest extends Error {
 	}
 
 	/**
-	 *      getID - get this GroupJoinRequest ID
+	 * getID - get this GroupJoinRequest ID
 	 *
-	 * @return int The group_id.
+	 * @return	int	The group_id.
 	 */
 	function getID() {
 		return $this->data_array['group_id'];
 	}
 
 	/**
-	 *      getGroup - get the group object.
+	 * getGroup - get the group object.
 	 *
-	 * @return Group The Group.
+	 * @return	Group	The Group.
 	 */
 	function &getGroup() {
 		return $this->Group;
 	}
 
 	/**
-	 *      getUserId - get the field user_id.
+	 * getUserId - get the field user_id.
 	 *
-	 * @return int The field.
+	 * @return	int	The field.
 	 */
 	function getUserId() {
 		return $this->data_array['user_id'];
 	}
 
 	/**
-	 *      getComments - get the field comments.
+	 * getComments - get the field comments.
 	 *
-	 * @return string  The field.
+	 * @return	string	The field.
 	 */
 	function getComments() {
 		return $this->data_array['comments'];
 	}
 
 	/**
-	 *      getRequestDate - get the field request_date.
+	 * getRequestDate - get the field request_date.
 	 *
-	 * @return int The field.
+	 * @return	int	The field.
 	 */
 	function getRequestDate() {
 		return $this->data_array['request_date'];
 	}
 
 	/**
-	 *    sendJoinNotice() -
+	 * sendJoinNotice() - send mail notification to project admin when user requests to join the project
 	 *
-	 * @return boolean    true/false.
+	 * @return	boolean	true/false.
 	 */
 	function sendJoinNotice() {
 		$user =& session_get_user();
@@ -249,9 +249,9 @@ class GroupJoinRequest extends Error {
 	}
 
 	/**
-	 *    reject()
+	 * reject() - reject the join and send a notification to the user
 	 *
-	 * @return    boolean    success.
+	 * @return	boolean	success.
 	 */
 	function reject() {
 		$user = user_get_object($this->getUserId());
@@ -264,7 +264,7 @@ class GroupJoinRequest extends Error {
 	}
 
 	/**
-	 *    send_accept_mail()
+	 * send_accept_mail() - send a notification to the user on accept
 	 *
 	 */
 	function send_accept_mail() {
@@ -277,10 +277,10 @@ class GroupJoinRequest extends Error {
 	}
 
 	/**
-	 *    delete() - delete this row from the database.
+	 * delete() - delete this row from the database.
 	 *
-	 * @param    boolean    $sure I'm Sure.
-	 * @return    boolean    true/false.
+	 * @param	boolean	$sure	I'm Sure.
+	 * @return	boolean	true/false.
 	 */
 	function delete($sure) {
 		if (!$sure) {
