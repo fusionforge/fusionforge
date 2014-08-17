@@ -72,6 +72,7 @@ class MoinMoinPlugin extends Plugin {
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][]=$this->text;
 				$params['DIRS'][]=$this->getWikiUrl($project);
+				$params['TOOLTIPS'][] = _('MoinMoin Space')
 			}
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
 		} elseif ($hookname == "groupisactivecheckbox") {
