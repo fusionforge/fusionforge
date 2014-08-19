@@ -1,5 +1,5 @@
 #!/bin/bash -x
-# Post-install .ini configuration
+# Post-install .ini configuration, params vary for each install
 # (all other .ini configuration is done at install time)
 
 source_path=$(forge_get_config source_path)
@@ -8,7 +8,7 @@ config_path=$(forge_get_config config_path)
 # TODO: support 'db_get @PACKAGE@/shared/web_host' ?
 if [ ! -e $config_path/config.ini.d/post-install.ini ]; then \
 	sed $source_path/templates/post-install.ini \
-		-e 's,@web_host@,$(hostname -f),' \
+		-e "s,@web_host@,$(hostname -f)," \
 		> $config_path/config.ini.d/post-install.ini; \
 fi
 

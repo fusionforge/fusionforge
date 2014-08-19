@@ -30,6 +30,8 @@ install-config: install-base-dirs
 			-e 's,@data_path@,$(data_path),' \
 			-e 's,@config_path@,$(config_path),' \
 			-e 's,@log_path@,$(log_path),' \
+			-e 's,@apache_user@,$(apache_user),' \
+			-e 's,@apache_group@,$(apache_group),' \
 			> $(DESTDIR)$(config_path)/config.ini; \
 	fi
 
@@ -40,6 +42,9 @@ install-core: install-base-dirs install-config
 	ln -nfs $(pkgdatadir)/bin/forge_get_config $(DESTDIR)$(prefix)/bin/forge_get_config
 	ln -nfs $(pkgdatadir)/bin/forge_run_jon $(DESTDIR)$(prefix)/bin/forge_run_job
 	ln -nfs $(pkgdatadir)/bin/forge_run_plugin_job $(DESTDIR)$(prefix)/bin/forge_run_plugin_job
+	install -d -m 700 $(data_path)/docman/
+	install -d -m 700 $(data_path)/download/
+	install -d -m 700 $(data_path)/tracker/
 
 PLUGINS:=$(shell utils/list-valid-plugins.sh)
 PLUGINS_INSTALL_TARGETS=$(addprefix install-plugin-,$(PLUGINS))

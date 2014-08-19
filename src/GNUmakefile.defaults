@@ -19,3 +19,8 @@ localstatedir=/var
 config_path=$(sysconfdir)/fusionforge
 data_path=$(localstatedir)/lib/fusionforge
 log_path=$(localstatedir)/log/fusionforge
+
+# Hard-coded detection of distro-specific Apache user
+apache_user:=$(shell if [ -e /etc/redhat-release ]; then echo 'apache'; else echo 'www-data'; fi)
+apache_group:=$(shell if [ -e /etc/redhat-release ]; then echo 'apache'; else echo 'www-data'; fi)
+# TODO: SuSE = wwwrun/www?
