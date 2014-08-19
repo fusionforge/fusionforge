@@ -3,6 +3,12 @@
 # Configure CVS for Sourceforge
 # Christian Bayle, Roland Mas, debian-sf (Sourceforge for Debian)
 
+if [ ! -e /etc/debian_version ]; then
+    echo "CVS installation script only supported on Debian"
+    echo "Please consider switching to a maintained SCM"
+    exit 0
+fi
+
 PATH=$(forge_get_config binary_path):$PATH
 source_path=`forge_get_config source_path`
 log_path=`forge_get_config log_path`
