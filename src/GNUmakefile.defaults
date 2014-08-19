@@ -4,6 +4,7 @@
 DESTDIR=
 prefix=/usr/local
 pkgdatadir=$(prefix)/share/fusionforge
+localedir=$(prefix)/share/locale
 
 # Common distro usage will be:
 # make DESTDIR=/tmp/build prefix=/usr

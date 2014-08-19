@@ -26,6 +26,7 @@ install-config: install-base-dirs
 	if [ ! -e $(DESTDIR)$(config_path)/config.ini ]; then \
 		sed etc/config.ini \
 			-e 's,@source_path@,$(pkgdatadir),' \
+			-e 's,@gettext_path@,$(localedir),' \
 			-e 's,@data_path@,$(data_path),' \
 			-e 's,@config_path@,$(config_path),' \
 			-e 's,@log_path@,$(log_path),' \
