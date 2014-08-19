@@ -10,8 +10,8 @@ data_path=$(forge_get_config data_path)
 # Forge system user
 # TODO: make this a configuration option, or ditch the user
 # TODO: move me out of this script
-user=gforge
-if ! getent passwd $user >/dev/null; then useradd $user -s /bin/false -d $data_path; fi
+#user=gforge
+#if ! getent passwd $user >/dev/null; then useradd $user -s /bin/false -d $data_path; fi
 
 # Post-install .ini configuration
 $source_path/post-install.d/ini.sh
