@@ -24,4 +24,4 @@ fi
 if [ -e /etc/redhat-release ]; then
     ln -nfs $config_path/httpd.conf /etc/httpd/conf.d/fusionforge.conf
 fi
-service $httpd_service reload
+service $httpd_service reload >/dev/null || true

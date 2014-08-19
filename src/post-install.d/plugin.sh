@@ -29,7 +29,7 @@ for i in $(ls httpd.conf.d/*); do
 done
 # Hard-coded detection of distro-specific Apache conf layout
 httpd_service=$(if [ -e /etc/redhat-release ]; then echo 'httpd'; else echo 'apache2'; fi)
-service $httpd_service reload
+service $httpd_service reload >/dev/null || true
 )
 
 
