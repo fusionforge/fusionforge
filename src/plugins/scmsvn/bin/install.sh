@@ -1,28 +1,26 @@
 #! /bin/sh
-#
-# Configure Subversion for Sourceforge
-# Roland Mas, Gforge
+# Configure Subversion
 
 set -e
 
 if [ $(id -u) != 0 ] ; then
-    echo "You must be root to run this, please enter passwd"
-    exec su -c "$0 $1"
+    echo "You must be root to run this"
 fi
 
-gforge_chroot=$(forge_get_config chroot)
+scmsvn_serve_root=$(forge_get_config serve_root scmsvn)
 
 case "$1" in
     configure)
         echo "Modifying inetd for Subversion server"
-        # First, dedupe the commented lines
-	update-inetd --remove svnserve || true
-	update-inetd --remove svn || true
-        update-inetd --add  "svn stream tcp nowait.400 scm-gforge /usr/bin/svnserve svnserve -i -r $gforge_chroot"
+	if [ -x /usr/sbin/update-inetd ]; then
+	    update-inetd --remove svn || true
+            update-inetd --add  "svn stream tcp nowait.400 scm-gforge /usr/bin/svnserve svnserve -i -r $scmsvn_serve_root"
+	else
+	    echo "TODO: xinetd support"
+	fi
 	;;
 
     purge)
-	update-inetd --remove svnserve || true
 	update-inetd --remove svn || true
 	;;
 
