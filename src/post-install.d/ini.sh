@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 # Post-install .ini configuration, params vary for each install
 # (all other .ini configuration is done at install time)
 
