@@ -20,6 +20,10 @@ config_path=$(sysconfdir)/fusionforge
 data_path=$(localstatedir)/lib/fusionforge
 log_path=$(localstatedir)/log/fusionforge
 
+# Tools
+INSTALL=install
+CP_R=cp -r --preserve=timestamps
+
 # Hard-coded detection of distro-specific Apache user
 apache_user:=$(shell if [ -e /etc/redhat-release ]; then echo 'apache'; else echo 'www-data'; fi)
 apache_group:=$(shell if [ -e /etc/redhat-release ]; then echo 'apache'; else echo 'www-data'; fi)

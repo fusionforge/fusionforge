@@ -52,4 +52,5 @@ sed $source_path/templates/post-install-secrets.ini \
     -e "s,@database_password@,$database_password," \
     -e "s,@session_key@,$session_key," \
     > $config_path/config.ini.d/post-install-secrets.ini
+# Note: ^^^ password+key leaked in 'ps', alternatives?
 chmod 600 $config_path/config.ini.d/post-install-secrets.ini
