@@ -36,7 +36,7 @@ install-config: install-base-dirs
 			> $(DESTDIR)$(config_path)/config.ini; \
 	fi
 
-install-common: install-config
+install-common: install-config install-plugin-authbuiltin
 	$(MAKE) -C locale DESTDIR=$(DESTDIR) PREFIX=$(PREFIX) install
 	$(CP_R) VERSION bin common cronjobs post-install.d templates lib $(DESTDIR)$(pkgdatadir)/
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(prefix)/bin/
