@@ -111,7 +111,7 @@ database.
 
 %package db-remote
 Summary: collaborative development tool - database (remote and already installed)
-Provides: %{name}-db
+Provides: %{name}-db = %{version}
 %description db-remote
 FusionForge provides many tools to aid collaboration in a
 development project, such as bug-tracking, task management,
