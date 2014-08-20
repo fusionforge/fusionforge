@@ -37,7 +37,7 @@ install-config: install-base-dirs
 
 install-common: install-config
 	$(MAKE) -C locale DESTDIR=$(DESTDIR) PREFIX=$(PREFIX) install
-	$(CP_R) VERSION bin common cronjobs post-install.d templates vendor lib $(DESTDIR)$(pkgdatadir)/
+	$(CP_R) VERSION bin common cronjobs post-install.d templates lib $(DESTDIR)$(pkgdatadir)/
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(prefix)/bin/
 	ln -nfs $(pkgdatadir)/bin/forge_get_config $(DESTDIR)$(prefix)/bin/forge_get_config
 	ln -nfs $(pkgdatadir)/bin/forge_run_jon $(DESTDIR)$(prefix)/bin/forge_run_job
@@ -47,10 +47,10 @@ install-db: install-base-dirs
 	$(CP_R) db $(DESTDIR)$(pkgdatadir)/
 
 install-web: install-base-dirs
-	$(CP_R) www $(DESTDIR)$(pkgdatadir)/
-	$(INSTALL) -d -m 00755 $(DESTDIR)$(pkgdatadir)/www/plugins/
+	$(CP_R) vendor www $(DESTDIR)$(pkgdatadir)/
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/docman/
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/download/
+	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/forum/
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/tracker/
 
 install-core: install-base-dirs install-common install-web install-db

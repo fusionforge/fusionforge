@@ -30,7 +30,12 @@ apache_user=$(forge_get_config apache_user)
 apache_group=$(forge_get_config apache_group)
 chown $apache_user: $data_path/docman/
 chown $apache_user: $data_path/download/
+chown $apache_user: $data_path/forum/
 chown $apache_user: $data_path/tracker/
+
+# Plugins activation from the web UI
+install -d -m 00755 $source_path/www/plugins/
+chown $apache_user: $source_path/www/plugins/
 
 # Enable required modules
 if [ -x /usr/sbin/a2enmod ]; then
