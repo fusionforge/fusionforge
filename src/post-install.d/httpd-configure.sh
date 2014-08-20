@@ -55,5 +55,5 @@ else
 fi
 
 # Hard-coded detection of distro-specific Apache conf layout
-apache_service=$(if [ -e /etc/redhat-release ]; then echo 'httpd'; else echo 'apache2'; fi)
+apache_service=$(forge_get_config apache_service)
 service $apache_service reload >/dev/null || true

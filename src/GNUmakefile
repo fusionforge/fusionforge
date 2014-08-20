@@ -32,6 +32,7 @@ install-config: install-base-dirs
 			-e 's,@log_path@,$(log_path),' \
 			-e 's,@apache_user@,$(apache_user),' \
 			-e 's,@apache_group@,$(apache_group),' \
+			-e 's,@apache_service@,$(apache_service),' \
 			> $(DESTDIR)$(config_path)/config.ini; \
 	fi
 
