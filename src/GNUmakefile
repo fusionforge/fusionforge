@@ -43,6 +43,7 @@ install-common: install-config
 	ln -nfs $(pkgdatadir)/bin/forge_get_config $(DESTDIR)$(prefix)/bin/forge_get_config
 	ln -nfs $(pkgdatadir)/bin/forge_run_jon $(DESTDIR)$(prefix)/bin/forge_run_job
 	ln -nfs $(pkgdatadir)/bin/forge_run_plugin_job $(DESTDIR)$(prefix)/bin/forge_run_plugin_job
+	$(INSTALL) -d -m 00755 $(DESTDIR)$(log_path)/
 
 install-db: install-base-dirs
 	$(CP_R) db $(DESTDIR)$(pkgdatadir)/
@@ -89,13 +90,16 @@ post-install: post-install-core post-install-plugins
 post-install-core:
 	$(pkgdatadir)/post-install.d/core.sh
 
-PLUGINS_INSTALLED:=$(shell ls $(pkgdatadir)/plugins)
+PLUGINS_INSTALLED:=$(shell ls $(pkgdatadir)/plugins 2>/dev/null)
 PLUGINS_POST_INSTALL_TARGETS=$(addprefix post-install-plugin-,$(PLUGINS_INSTALLED))
 post-install-plugins: $(PLUGINS_POST_INSTALL_TARGETS)
 post-install-plugin-%: $(pkgdatadir)/plugins/%/
 	$(pkgdatadir)/post-install.d/plugin.sh $*
 
 clean:
+#	nothing for now
+#	not removing pre-built .mo files in e.g. 'debclean'
+dist-clean:
 	$(MAKE) -C locale/ clean
 
 
