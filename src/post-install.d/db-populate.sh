@@ -37,5 +37,12 @@ cat <<EOF > $PGPASSFILE
 $database_host:$database_port:$database_name:$database_user:$database_password
 EOF
 psql -h $database_host -p $database_port -U $database_user $database_name < $source_path/db/1-fusionforge-init.sql
+psql -h $database_host -p $database_port -U $database_user $database_name <<EOF
+INSERT INTO users (user_name, realname, firstname, lastname, email,
+    user_pw, unix_pw, status, theme_id)
+  VALUES ('admin', 'Forge Admin', 'Forge', 'Admin', 'root@localhost.localdomain',
+    'INVALID', 'INVALID', 'A', (SELECT theme_id FROM themes WHERE dirname='funky'));
+EOF
 rm -f $PGPASSFILE
 unset PGPASSFILE
+forge_make_admin admin
