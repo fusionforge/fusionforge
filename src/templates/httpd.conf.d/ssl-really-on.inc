@@ -1,4 +1,6 @@
-<IfModule mod_ssl.c>
+# Not using IfModule: the name changes between distros
+# and user can disable SSL in ssl-on.inc
+#<IfModule mod_ssl.c>
   SSLEngine on
   
   SSLCertificateFile {core/config_path}/ssl-cert.pem
@@ -14,7 +16,7 @@
   </Directory>
   
   SetEnvIf User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown
-</IfModule>
+#</IfModule>
 
 <IfModule apache_ssl.c>
   SSLEnable
