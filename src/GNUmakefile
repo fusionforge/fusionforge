@@ -40,9 +40,11 @@ install-common: install-config install-plugin-authbuiltin
 	$(MAKE) -C locale DESTDIR=$(DESTDIR) PREFIX=$(PREFIX) install
 	$(CP_R) VERSION bin common cronjobs post-install.d templates lib $(DESTDIR)$(pkgdatadir)/
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(prefix)/bin/
-	ln -nfs $(pkgdatadir)/bin/forge_get_config $(DESTDIR)$(prefix)/bin/forge_get_config
-	ln -nfs $(pkgdatadir)/bin/forge_run_jon $(DESTDIR)$(prefix)/bin/forge_run_job
-	ln -nfs $(pkgdatadir)/bin/forge_run_plugin_job $(DESTDIR)$(prefix)/bin/forge_run_plugin_job
+	ln -nfs $(pkgdatadir)/bin/forge_get_config $(DESTDIR)$(prefix)/bin/
+	ln -nfs $(pkgdatadir)/bin/forge_run_job $(DESTDIR)$(prefix)/bin/
+	ln -nfs $(pkgdatadir)/bin/forge_run_plugin_job $(DESTDIR)$(prefix)/bin/
+	ln -nfs $(pkgdatadir)/bin/forge_make_admin $(DESTDIR)$(prefix)/bin/
+	ln -nfs $(pkgdatadir)/bin/forge_set_password $(DESTDIR)$(prefix)/bin/
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(log_path)/
 
 install-db: install-base-dirs
