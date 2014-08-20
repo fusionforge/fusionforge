@@ -1,5 +1,5 @@
 Name: fusionforge
-Version: 5.99.50
+Version: 5.3.50
 Release: 1%{?dist}
 Summary: FusionForge collaborative development tool
 
@@ -128,7 +128,7 @@ installs (e.g. plugins activation requires a populated db).
 
 %package web
 Summary: collaborative development tool - web part (using Apache)
-Requires: %{name}-db >= %{version} postgresql-server php-pgsql
+Requires: %{name}-db >= %{version} httpd mod_ssl php php-pgsql
 %description web
 FusionForge provides many tools to aid collaboration in a
 development project, such as bug-tracking, task management,
@@ -180,5 +180,5 @@ This plugin allows each project to embed Mediawiki under a tab.
 
 
 %changelog
-* Tue Aug 19 2014 Sylvain Beucler <sylvain.beucler@inria.fr> - 5.99.50
+* Tue Aug 19 2014 Sylvain Beucler <sylvain.beucler@inria.fr> - 5.3.50
 - Revamp packaging
