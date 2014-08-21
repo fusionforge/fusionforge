@@ -68,7 +68,7 @@ install-shell: install-base-dirs
 	$(CP_R) cronjobs/shell  $(DESTDIR)$(pkgdatadir)/cronjobs/
 	$(CP_R) post-install.d/shell  $(DESTDIR)$(pkgdatadir)/post-install.d/
 
-install-core: install-base-dirs install-common install-web install-db install-shell
+install-core: install-base-dirs install-common install-web install-db
 
 PLUGINS:=$(shell utils/list-valid-plugins.sh)
 PLUGINS_INSTALL_TARGETS=$(addprefix install-plugin-,$(PLUGINS))
@@ -100,8 +100,11 @@ uninstall:
 
 ## Step 3: configure & update system
 post-install: post-install-core post-install-plugins
-post-install-core:
+post-install-core:  # common+db+web
 	$(pkgdatadir)/post-install.d/core.sh
+
+post-install-shell:
+	$(pkgdatadir)/post-install.d/shell/shell.sh
 
 PLUGINS_INSTALLED:=$(shell ls $(pkgdatadir)/plugins 2>/dev/null)
 PLUGINS_POST_INSTALL_TARGETS=$(addprefix post-install-plugin-,$(PLUGINS_INSTALLED))
