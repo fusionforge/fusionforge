@@ -83,12 +83,6 @@ function project_admin_header($params) {
 		$attr_r[] = array('title' => '');
 		$links[] = '/project/admin/vhost.php?group_id='.$group_id;
 	}
-	if(forge_get_config('use_project_database')) {
-		$labels[] = _('Database Admin');
-		//TODO: set the title.
-		$attr_r[] = array('title' => '');
-		$links[] = '/project/admin/database.php?group_id='.$group_id;
-	}
 	if ($project->usesStats()) {
 		$labels[] = _('Stats');
 		//TODO: set the title.
@@ -186,46 +180,6 @@ function show_grouphistory($group_id) {
 	} else {
 		echo html_e('p', array(), _('No changes'));
 	}
-}
-
-/*
-	prdb_namespace_seek - check that a projects' potential db name hasn't
-	already been used.  If it has - add a 1..20 to the end of it.  If it
-	iterates through twenty times and still fails - namespace depletion -
-	throw an error.
-
- */
-function prdb_namespace_seek($namecheck) {
-
-	$query = 'SELECT * FROM prdb_dbs WHERE dbname=$1';
-
-	$res_dbl = db_query_params($query, array($namecheck));
-
-	if (db_numrows($res_dbl) > 0) {
-		//crap, we're going to have issues
-		$curr_num = 1;
-
-		while ((db_numrows($res_dbl) > 0) && ($curr_num < 20)) {
-
-			$curr_num++;
-			$namecheck .= $namecheck.$curr_num;
-
-			$res_dbl = db_query_params($query, array($namecheck));
-		}
-
-		// if we reached 20, then the namespace is depleted - eject eject
-		if ($curr_num == 20) {
-			exit_error(_('Failed to find namespace for database'),'home');
-		}
-
-	}
-	return $namecheck;
-
-} //end prdb_namespace_seek()
-
-function random_pwgen() {
-	return (substr(strtr(base64_encode(util_randbytes(9)), '+', '.'),
-		       0, 10));
 }
 
 function permissions_blurb() {
