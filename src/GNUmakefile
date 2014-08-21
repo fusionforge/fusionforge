@@ -12,6 +12,7 @@ install: all install-core install-plugins
 # Directories required for stand-alone plugin install
 install-base-dirs:
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(pkgdatadir)/
+	$(INSTALL) -d -m 00755 $(DESTDIR)$(pkgdatadir)/cronjobs/
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(pkgdatadir)/plugins/
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(config_path)/config.ini.d/
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(config_path)/httpd.conf.d/
@@ -38,7 +39,8 @@ install-config: install-base-dirs
 
 install-common: install-config install-plugin-authbuiltin
 	$(MAKE) -C locale DESTDIR=$(DESTDIR) PREFIX=$(PREFIX) install
-	$(CP_R) VERSION bin common cronjobs post-install.d templates lib $(DESTDIR)$(pkgdatadir)/
+	$(CP_R) VERSION bin common post-install.d templates lib $(DESTDIR)$(pkgdatadir)/
+	$(CP_R) cronjobs/scm $(DESTDIR)$(pkgdatadir)/cronjobs/  # no dedicated 'scm' package now
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(prefix)/bin/
 	ln -nfs $(pkgdatadir)/bin/forge_get_config $(DESTDIR)$(prefix)/bin/
 	ln -nfs $(pkgdatadir)/bin/forge_run_job $(DESTDIR)$(prefix)/bin/
@@ -49,6 +51,7 @@ install-common: install-config install-plugin-authbuiltin
 
 install-db: install-base-dirs
 	$(CP_R) db $(DESTDIR)$(pkgdatadir)/
+	$(CP_R) cronjobs/db  $(DESTDIR)$(pkgdatadir)/cronjobs/
 
 install-web: install-base-dirs
 	$(CP_R) vendor www $(DESTDIR)$(pkgdatadir)/

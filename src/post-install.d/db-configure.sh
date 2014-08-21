@@ -1,5 +1,5 @@
 #!/bin/bash
-# Configure PostgreSQL
+# Configure local PostgreSQL server
 
 database_name=$(forge_get_config database_name)
 database_user=$(forge_get_config database_user)
