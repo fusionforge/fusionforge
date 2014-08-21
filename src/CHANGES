@@ -1,16 +1,17 @@
 Fusionforge-5.3.2:
 * Software map: fix "value too long for type character varying(255)" error in cron db_trove_maint.php (Inria)
-* SCM Git: suppress 'warning: You appear to have cloned an empty repository.' in create_scm_repos.php (Inria)
-* Stats: handle bad encoding when gathering Git stats, remove spurious warning when SVN repository isn't created yet (Inria)
+* Projects: fix Project name with html [#687] (TrivialDev)
+* Projects: don't display admins if their account is suspended (Inria)
 * Admin: fix edit table themes, fix frs_processor sequence [#691] (TrivialDev)
+* SCM Git: suppress 'warning: You appear to have cloned an empty repository.' in create_scm_repos.php (Inria)
 * User SSH keys (ssh_create.php): fix harmless warning when user removes all her keys (Inria)
-* Mailing lists: handle quotes and accents in description (Inria)
 * News: don't send requests for frontpage display for private projects (Inria)
-* Plugin mediawiki: fix paths in import/export scripts (Inria)
-* Plugin fckeditor: dropped in favor of ckeditor
 * Docman: fix download count [#702] (TrivialDev)
 * Tracker: fix translation support [#688] (TrivialDev)
-* Projects: fix Project name with html [#687] (TrivialDev)
+* Mailing lists: handle quotes and accents in description (Inria)
+* Stats: handle bad encoding when gathering Git stats, remove spurious warning when SVN repository isn't created yet (Inria)
+* Plugin mediawiki: fix paths in import/export scripts (Inria)
+* Plugin fckeditor: dropped in favor of ckeditor
 
 Fusionforge-5.3.1:
 * Docman: Basic Webdav write mkcol support (TrivialDev)
