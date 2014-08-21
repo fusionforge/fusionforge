@@ -8,7 +8,7 @@ data_path=$(forge_get_config data_path)
 cd $source_path/templates/
 for i in httpd.conf $(ls httpd.conf.d/*); do
     if [ ! -e $config_path/$i ]; then
-	$source_path/post-install.d/httpd-expand-conf.php $i $config_path/$i
+	$source_path/post-install.d/web/expand-conf.php $i $config_path/$i
     fi
     case $i in
 	*secrets*) chmod 600 $config_path/$i;;

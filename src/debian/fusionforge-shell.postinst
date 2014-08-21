@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # postinst script for fusionforge
 #
 # see: dh_installdeb(1)
@@ -20,7 +20,13 @@ set -e
 
 case "$1" in
     configure)
-        $(forge_get_config source_path)/post-install.d/web/configure.sh
+	DESTDIR=$(mktemp -d)
+        $(forge_get_config source_path)/post-install.d/shell/shell.sh configure $DESTDIR
+	for i in $(find $DESTDIR -type f); do
+	    ucf $i ${i#$DESTDIR}
+	    ucfr -f fusionforge-shell ${i#$DESTDIR}
+	done
+	rm -rf $DESTDIR/
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

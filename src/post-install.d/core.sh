@@ -13,10 +13,10 @@ source_path=$(forge_get_config source_path)
 #if ! getent passwd $user >/dev/null; then useradd $user -s /bin/false -d $data_path; fi
 
 # Post-install .ini configuration
-$source_path/post-install.d/ini.sh
+$source_path/post-install.d/common/ini.sh
 
 # Database
-$source_path/post-install.d/db.sh
+$source_path/post-install.d/db/db.sh
 
 # Apache
-$source_path/post-install.d/httpd-configure.sh
+$source_path/post-install.d/web/configure.sh

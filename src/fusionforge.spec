@@ -53,6 +53,7 @@ install_listfiles common
 %find_lang %{name}
 # Install plugins
 install_listfiles db
+install_listfiles shell
 install_listfiles web
 install_listfiles plugin-authhttpd
 install_listfiles plugin-mediawiki
@@ -89,7 +90,7 @@ subpackages.
 %doc AUTHORS* CHANGES COPYING INSTALL.TXT NEWS README
 %doc docs/*
 %post common
-%{_datadir}/%{name}/post-install.d/ini.sh
+%{_datadir}/%{name}/post-install.d/common/ini.sh
 
 
 %package db
@@ -106,7 +107,7 @@ This package installs, configures and maintains the FusionForge
 database.
 %files db -f db.rpmfiles
 %post db
-%{_datadir}/%{name}/post-install.d/db.sh
+%{_datadir}/%{name}/post-install.d/db/db.sh
 
 
 %package db-remote
@@ -126,9 +127,32 @@ installs (e.g. plugins activation requires a populated db).
 %files db-remote
 
 
+%package shell
+Summary: collaborative development tool - shell accounts (using PostgreSQL)
+Requires: %{name}-common >= %{version} php openssh-server nscd
+#Requires: libnss-pgsql  # Fedora-only?
+%description shell
+FusionForge provides many tools to aid collaboration in a
+development project, such as bug-tracking, task management,
+mailing-lists, SCM repository, forums, support request helper,
+web/FTP hosting, release management, etc. All these services are
+integrated into one web site and managed through a web interface.
+
+This package provides shell accounts authenticated via the PostGreSQL
+database to FusionForge users.
+%files shell -f shell.rpmfiles
+%post shell
+%{_datadir}/%{name}/post-install.d/shell/shell.sh configure
+%preun shell
+if [ $1 -eq 0 ] ; then
+    %{_datadir}/%{name}/post-install.d/shell/shell.sh remove
+    %{_datadir}/%{name}/post-install.d/shell/shell.sh purge
+fi
+
+
 %package web
 Summary: collaborative development tool - web part (using Apache)
-Requires: %{name}-db >= %{version} httpd mod_ssl php php-pgsql
+Requires: %{name}-common >= %{version} %{name}-db >= %{version} httpd mod_ssl php php-pgsql
 %description web
 FusionForge provides many tools to aid collaboration in a
 development project, such as bug-tracking, task management,
@@ -140,7 +164,7 @@ This package contains the files needed to run the web part of
 FusionForge on an Apache webserver.
 %files web -f web.rpmfiles
 %post web
-%{_datadir}/%{name}/post-install.d/httpd-configure.sh
+%{_datadir}/%{name}/post-install.d/web/configure.sh
 
 
 %package plugin-authhttpd

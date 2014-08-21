@@ -14,6 +14,7 @@ install-base-dirs:
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(pkgdatadir)/
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(pkgdatadir)/cronjobs/
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(pkgdatadir)/plugins/
+	$(INSTALL) -d -m 00755 $(DESTDIR)$(pkgdatadir)/post-install.d/
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(config_path)/config.ini.d/
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(config_path)/httpd.conf.d/
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(config_path)/plugins/
@@ -39,8 +40,9 @@ install-config: install-base-dirs
 
 install-common: install-config install-plugin-authbuiltin
 	$(MAKE) -C locale DESTDIR=$(DESTDIR) PREFIX=$(PREFIX) install
-	$(CP_R) VERSION bin common post-install.d templates lib $(DESTDIR)$(pkgdatadir)/
+	$(CP_R) VERSION bin common templates lib $(DESTDIR)$(pkgdatadir)/
 	$(CP_R) cronjobs/scm $(DESTDIR)$(pkgdatadir)/cronjobs/  # no dedicated 'scm' package now
+	$(CP_R) post-install.d/common $(DESTDIR)$(pkgdatadir)/post-install.d/
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(prefix)/bin/
 	ln -nfs $(pkgdatadir)/bin/forge_get_config $(DESTDIR)$(prefix)/bin/
 	ln -nfs $(pkgdatadir)/bin/forge_run_job $(DESTDIR)$(prefix)/bin/
@@ -52,6 +54,7 @@ install-common: install-config install-plugin-authbuiltin
 install-db: install-base-dirs
 	$(CP_R) db $(DESTDIR)$(pkgdatadir)/
 	$(CP_R) cronjobs/db  $(DESTDIR)$(pkgdatadir)/cronjobs/
+	$(CP_R) post-install.d/db  $(DESTDIR)$(pkgdatadir)/post-install.d/
 
 install-web: install-base-dirs
 	$(CP_R) vendor www $(DESTDIR)$(pkgdatadir)/
@@ -59,8 +62,13 @@ install-web: install-base-dirs
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/download/
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/forum/
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/tracker/
+	$(CP_R) post-install.d/web  $(DESTDIR)$(pkgdatadir)/post-install.d/
 
-install-core: install-base-dirs install-common install-web install-db
+install-shell: install-base-dirs
+	$(CP_R) cronjobs/shell  $(DESTDIR)$(pkgdatadir)/cronjobs/
+	$(CP_R) post-install.d/shell  $(DESTDIR)$(pkgdatadir)/post-install.d/
+
+install-core: install-base-dirs install-common install-web install-db install-shell
 
 PLUGINS:=$(shell utils/list-valid-plugins.sh)
 PLUGINS_INSTALL_TARGETS=$(addprefix install-plugin-,$(PLUGINS))
