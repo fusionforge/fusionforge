@@ -33,7 +33,7 @@ if (!$group_id && $form_grp) {
 	$group_id = $form_grp;
 }
 
-session_require_perm($group_id, 'project_read');
+session_require_perm('project_read', $group_id);
 
 site_project_header(array('title'=>_('Project Member List'),'group'=>$group_id,'toptab'=>'memberlist'));
 
