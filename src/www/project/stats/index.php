@@ -113,7 +113,6 @@ echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method'
 </table>
 <?php
 echo $HTML->closeForm();
-<?php
 if ($start == $end) {
 	echo $HTML->error_msg(_('Start and end dates must be different'));
 } elseif (!report_actgraph('project', $SPAN, $start, $end, $group_id, $area)) {
