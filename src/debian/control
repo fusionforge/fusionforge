@@ -25,7 +25,7 @@ Description: FusionForge collaborative development tool - standard metapackage
 
 Package: fusionforge-common
 Architecture: all
-Depends: php5-cli, php-htmlpurifier, ${misc:Depends}
+Depends: php5-cli, php-htmlpurifier, python, ${misc:Depends}
 Description: collaborative development tool - shared files
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
@@ -70,7 +70,7 @@ Description: collaborative development tool - database (remote)
 
 Package: fusionforge-web
 Architecture: all
-Depends: fusionforge-db, libapache2-mod-php5, php5-pgsql, ${misc:Depends}
+Depends: fusionforge-db, libapache2-mod-php5, php5-pgsql, python, ${misc:Depends}
 Recommends: locales-all
 Description: collaborative development tool - web part (using Apache)
  FusionForge provides many tools to aid collaboration in a
@@ -100,7 +100,7 @@ Description: collaborative development tool - HTTPD authentication plugin
 
 Package: fusionforge-plugin-mediawiki
 Architecture: all
-Depends: fusionforge-web, mediawiki (>= 1:1.19.1-2~exp2), ${misc:Depends}
+Depends: fusionforge-web, mediawiki (>= 1:1.19.1-2~exp2), php5-cli, ${misc:Depends}
 Description: Mediawiki plugin for FusionForge
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
