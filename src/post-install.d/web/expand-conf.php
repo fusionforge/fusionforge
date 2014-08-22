@@ -5,7 +5,7 @@
 // Don't try to connect to the DB, just reading config files
 putenv('FUSIONFORGE_NO_DB=true');
 
-require (dirname(__FILE__).'/../common/include/env.inc.php');
+require (dirname(__FILE__).'/../../common/include/env.inc.php');
 require_once $gfcommon.'include/pre.php';
 
 if (count($argv) != 3) {
