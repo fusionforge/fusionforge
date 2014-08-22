@@ -301,6 +301,13 @@ class FRSPackage extends Error {
 		return $ra->hasPermission('frs', $this->getID(), 'read');
 	}
 
+	function getPublicLabel() {
+		if ($this->isPublic()) {
+			return _('public');
+		}
+		return _('private');
+	}
+
 	/**
 	 * setMonitor - Add the current user to the list of people monitoring this package.
 	 *

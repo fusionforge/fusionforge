@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -25,6 +26,8 @@
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 
+global $HTML;
+
 $group_id = getIntFromGet("group_id");
 $form_grp = getIntFromGet("form_grp");
 
@@ -32,18 +35,19 @@ if (!$group_id && $form_grp) {
 	$group_id = $form_grp;
 }
 
+session_require_perm('project_read', $group_id);
+
 site_project_header(array('title'=>_('Project Member List'),'group'=>$group_id,'toptab'=>'memberlist'));
 
-echo '<p>' . _('If you would like to contribute to this project by becoming a member, contact one of the project admins, designated in bold text below.') . '</p>';
+echo html_e('p', array(), _('If you would like to contribute to this project by becoming a member, contact one of the project admins, designated in bold text below.'));
 
 // beginning of the user descripion block
 $project = group_get_object($group_id);
 $project_stdzd_uri = util_make_url_g ($project->getUnixName(), $group_id);
 $usergroup_stdzd_uri = $project_stdzd_uri.'members/';
-print '<div about="'. $usergroup_stdzd_uri .'" typeof="sioc:UserGroup">';
-print '<span rel="http://www.w3.org/2002/07/owl#sameAs" resource=""></span>';
-print '<span rev="sioc:has_usergroup" resource="'. $project_stdzd_uri . '"></span>';
-print '</div>';
+$content = html_e('span', array('rel' => 'http://www.w3.org/2002/07/owl#sameAs', 'resource' => ''), '', false);
+$content .= html_e('span', array('rev' => 'sioc:has_usergroup', 'resource' => $project_stdzd_uri), '', false);
+echo html_e('div', array('about' => $usergroup_stdzd_uri, 'typeof' => 'sioc:UserGroup'), $content);
 
 $title_arr=array();
 $title_arr[]=_('Member');
@@ -53,39 +57,25 @@ if(forge_get_config('use_people')) {
 	$title_arr[]=_('Skills');
 }
 
-echo $GLOBALS['HTML']->listTableTop ($title_arr);
+echo $HTML->listTableTop($title_arr);
 
 // list members
 $members = $project->getUsers() ;
 
 $i=0;
 foreach ($members as $user) {
-	echo '<tr '.$HTML->boxGetAltRowStyle($i++).'>'."\n";
+	$cells = array();
 	// RDFa
-	$member_uri = util_make_url_u ($user->getUnixName(),$user->getID());
-	echo "		<td>\n";
-	print '<div about="'. $member_uri .'" typeof="sioc:UserAccount">';
-	print '<span rev="sioc:has_member" resource="'. $usergroup_stdzd_uri .'"></span>';
-	print '<span property="sioc:name" content="'. $user->getUnixName() .'"></span>';
-	if ( RBACEngine::getInstance()->isActionAllowedForUser($user,'project_admin',$project->getID())) {
-//                echo '<div rev="doap:developer" typeof="doap:Project" xmlns:doap="http://usefulinc.com/ns/doap#">';
-		echo '<strong>'.$user->getRealName().'</strong>';
-//                echo '</div>';
+	$member_uri = util_make_url_u($user->getUnixName(), $user->getID());
+	$content = html_e('span', array('rev' => 'sioc:has_member', 'resource' => $usergroup_stdzd_uri), '', false);
+	$content .= html_e('span', array('property' => 'sioc:name', 'content' => $user->getUnixName()), '', false);
+	if (RBACEngine::getInstance()->isActionAllowedForUser($user, 'project_admin', $project->getID())) {
+		$content .= html_e('strong', array(), $user->getRealName());
 	} else {
-//		echo '<div rev="doap:maintainer" typeof="doap:Project" xmlns:doap="http://usefulinc.com/ns/doap#">';
-		echo $user->getRealName();
-//                echo '</div>';
+		$content .= $user->getRealName();
 	}
-	echo "</div>\n";
-	echo '</td>';
-
-	/*
-        print '<span property ="dc:Identifier" content="'.$user->getID().'">';
-        echo '</span>';
-        print '<span property="foaf:accountName" content="'.$user->getUnixName().'">';
-        echo '</span>';
-        print '<span property="fusionforge:has_job" content="'.$role_string.'">';
-        echo '</span>';*/
+	$cells[][] = html_e('div', array('about' => $member_uri, 'typeof' => 'sioc:UserAccount'), $content);
+	$cells[][] = util_display_user($user->getUnixName(),$user->getID(),$user->getUnixName(), 's');
 
 	$roles = RBACEngine::getInstance()->getAvailableRolesForUser ($user) ;
 	sortRoleList ($roles) ;
@@ -96,17 +86,13 @@ foreach ($members as $user) {
 		}
 	}
 	$role_string = implode (', ', $role_names) ;
-
-	echo '<td>';
-	echo util_display_user($user->getUnixName(),$user->getID(),$user->getUnixName(), 's');
-	echo '</td>';
-	echo '<td class="align-center">'.$role_string.'</td>';
+	$cells[] = array($role_string, 'class' => 'align-center');
 	if (forge_get_config('use_people')) {
-		echo '<td class="align-center">'.util_make_link('/people/viewprofile.php?user_id='.$user->getID(),_('View')).'</td>';
+		$cells[] = array(util_make_link('/people/viewprofile.php?user_id='.$user->getID(), _('View')), 'class' => 'align-center');
 	}
-	echo '</tr>';
+	echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i++, true)), $cells);
 }
 // end of community member description block
-echo $GLOBALS['HTML']->listTableBottom();
+echo $HTML->listTableBottom();
 
 site_project_footer();

@@ -227,14 +227,10 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 	<?php plugin_hook("site_admin_option_hook", array()); ?>
 </ul>
 
-<?php if(forge_get_config('use_project_database') || forge_get_config('use_project_vhost') || forge_get_config('use_people')) { ?>
+<?php if(forge_get_config('use_project_vhost') || forge_get_config('use_people')) { ?>
 <ul>
 	<?php if(forge_get_config('use_project_vhost')) { ?>
 		<li><?php echo util_make_link('/admin/vhost.php', _('Virtual Host Admin Tool')); ?></li>
-	<?php
-	}
-	if(forge_get_config('use_project_database')) { ?>
-		<li><?php echo util_make_link('/admin/database.php', _('Project Database Administration')); ?></li>
 	<?php }
 	if(forge_get_config('use_people')) { ?>
 		<li><?php echo util_make_link('/people/admin/', _('Job / Categories Administration')); ?></li>

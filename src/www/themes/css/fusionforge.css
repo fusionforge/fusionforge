@@ -3,6 +3,7 @@
  *
  * Copyright 2009 Matthieu Faure // Open-s.com
  * Copyright 2010 Franck Villaume - Capgemini
+ * Copyright 2014 Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -818,6 +819,14 @@ legend {
 
 .float_left {
 	float: left;
+}
+
+.float_right {
+	float: right;
+}
+
+.clear_both {
+	clear: both;
 }
 
 aside.left {

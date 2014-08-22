@@ -57,11 +57,8 @@ $SPAN = getIntFromRequest('SPAN', REPORT_TYPE_MONTHLY);
 $start = getIntFromRequest('start');
 $end = getIntFromRequest('end');
 
-/*
- * Set the start date to birth of the project.
- */
-$res = db_query_params('SELECT register_time FROM groups WHERE group_id=$1', array($group_id));
-$report->site_start_date = db_result($res,0,'register_time');
+// Set the start date to birth of the project.
+$report->site_start_date = $group->getStartDate();
 
 if (!$start || !$end) $z =& $report->getMonthStartArr();
 
@@ -100,8 +97,8 @@ project_admin_header(array('title'=>sprintf(_('Project Statistics for %s'), $gro
 //
 // BEGIN PAGE CONTENT CODE
 //
+echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'get'));
 ?>
-<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 <table class="centered">
 <tr>
 <td><strong><?php echo _('Area')._(':'); ?></strong><br /><?php echo report_area_box('area',$area,$group); ?></td>
@@ -114,12 +111,12 @@ project_admin_header(array('title'=>sprintf(_('Project Statistics for %s'), $gro
 </td>
 </tr>
 </table>
-</form>
 <?php
+echo $HTML->closeForm();
 if ($start == $end) {
 	echo $HTML->error_msg(_('Start and end dates must be different'));
 } elseif (!report_actgraph('project', $SPAN, $start, $end, $group_id, $area)) {
-		echo $HTML->error_msg(_('Error during graphic computation.'));
+	echo $HTML->error_msg(_('Error during graphic computation.'));
 }
 
 site_project_footer();
