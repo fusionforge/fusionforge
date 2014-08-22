@@ -11,4 +11,4 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
-PS1='DEV:[\u@\h \W]\$'
+PS1='DEV:[\u@\h \W]\$ '
