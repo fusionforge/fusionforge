@@ -102,9 +102,10 @@ if [ $? -eq 0 ]; then
     echo "WARNING: It is likely that the mounted /tmp could be too short. If you experience a build error bellow, Try make some room on the FS and reboot, first."
 fi
 
-debian/rules debian/control  # re-gen debian/control from packaging/*
+debian/rules debian/control  # re-gen debian/control
 dch --newversion $(dpkg-parsechangelog | sed -n 's/^Version: \([0-9.]\+\(\~rc[0-9]\)\?\).*/\1/p')+$(date +%Y%m%d%H%M)-1 --distribution local --force-distribution "Autobuilt."
-debuild --no-lintian --no-tgz-check -us -uc -tc  # using -tc so 'bzr st' is readable
+#debuild --no-lintian --no-tgz-check -us -uc -tc  # using -tc so 'bzr st' is readable
+make dist && \mv fusionforge-5.3.50.tar.bz2 ../fusionforge_5.3.50.orig.tar.bz2 && debuild
 
 # Install built packages into the local repo
 debrelease -f local
