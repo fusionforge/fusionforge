@@ -20,10 +20,16 @@ if su - postgres -c "psql $database_name" </dev/null 2>/dev/null; then
 fi
 
 # Create DB user
-su - postgres -c 'createuser -SDR fusionforge'
+su - postgres -c "createuser -SDR $database_user"
 database_password_quoted=$(echo $database_password | sed -e "s/'/''/")
 su - postgres -c psql <<EOF
 ALTER ROLE $database_user WITH PASSWORD '$database_password_quoted' ;
+EOF
+su - postgres -c "createuser -SDR ${database_user}_nss"
+su - postgres -c 'psql fusionforge' <<EOF
+GRANT SELECT ON nss_passwd TO ${database_user}_nss;
+GRANT SELECT ON nss_groups TO ${database_user}_nss;
+GRANT SELECT ON nss_usergroups TO ${database_user}_nss;
 EOF
 
 # Create database
