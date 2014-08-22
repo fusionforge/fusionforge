@@ -99,20 +99,20 @@ uninstall:
 
 
 ## Step 3: configure & update system
-# not relying on 'prefix' for post-install:
-source_path:=$(shell forge_get_config source_path)
+# not relying on 'prefix' for post-install (for no-install/dev setups)
+fgc_source_path:=$(shell forge_get_config source_path)
 post-install: post-install-core post-install-plugins
 post-install-core:  # common+db+web
-	$(source_path)/post-install.d/core.sh
+	$(fgc_source_path)/post-install.d/core.sh
 
 post-install-shell:
-	$(source_path)/post-install.d/shell/shell.sh configure
+	$(fgc_source_path)/post-install.d/shell/shell.sh configure
 
-PLUGINS_INSTALLED:=$(shell ls $(source_path)/plugins 2>/dev/null)
+PLUGINS_INSTALLED:=$(shell ls $(fgc_source_path)/plugins 2>/dev/null)
 PLUGINS_POST_INSTALL_TARGETS=$(addprefix post-install-plugin-,$(PLUGINS_INSTALLED))
 post-install-plugins: $(PLUGINS_POST_INSTALL_TARGETS)
-post-install-plugin-%: $(source_path)/plugins/%/
-	$(source_path)/post-install.d/common/plugin.sh $*
+post-install-plugin-%: $(fgc_source_path)/plugins/%/
+	$(fgc_source_path)/post-install.d/common/plugin.sh $*
 
 
 ## TODO: make uninstall? make purge?
