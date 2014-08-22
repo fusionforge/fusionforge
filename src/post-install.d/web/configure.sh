@@ -64,6 +64,11 @@ if [ -x /usr/sbin/a2dissite ]; then
     a2dissite default
 fi
 
+# Start web server on boot
+if [ -e /etc/redhat-release ]; then
+    chkconfig httpd on
+fi
+
 # Hard-coded detection of distro-specific Apache conf layout
 apache_service=$(forge_get_config apache_service)
 if service $apache_service status; then
