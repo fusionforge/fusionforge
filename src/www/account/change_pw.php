@@ -67,52 +67,26 @@ if (getStringFromRequest('submit')) {
 	}
 
 	site_user_header(array('title'=>_('Successfully Changed Password')));
-	?>
-
-	<?php
-	print '<h2>';
-	printf(_('%s Password Change Confirmation'), forge_get_config ('forge_name'));
-	print '</h2>';
-
+	echo html_e('h2', array(), sprintf(_('%s Password Change Confirmation'), forge_get_config ('forge_name')));
 	echo $HTML->feedback(_('Congratulations. You have changed your password.'));
-	?>
-
-	<p>
-		 <?php printf(_('You should now <a href="%s">Return to User Prefs</a>.'),
-			      util_make_url('/account/')) ?>
-	</p>
-
-	<?php
+	echo html_e('p', array(), sprintf(_('You should now <a href="%s">Return to User Prefs</a>.'), util_make_url('/account/')));
 } else {
 	// Show change form
 	site_user_header(array('title'=>_('Change Password')));
-	?>
-
-	<form action="<?php echo util_make_url('/account/change_pw.php'); ?>" method="post">
-	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
-	<p><?php echo _('Old Password')._(':').utils_requiredField() ?>
-	<br />
-	<label for="old_passwd">
-		<input id="old_passwd" type="password" name="old_passwd" required="required" />
-	</label>
-	</p>
-	<p><?php echo _('New Password (at least 6 chars)')._(':').utils_requiredField() ?>
-	<br />
-	<label for="passwd">
-		<input id="passwd" type="password" name="passwd" required="required" pattern=".{6,}" />
-	</label>
-	</p>
-	<p><?php echo _('New Password (repeat)')._(':').utils_requiredField() ?>
-	<br />
-	<label for="passwd2">
-		<input id="passwd2" type="password" name="passwd2" required="required" pattern=".{6,}" />
-	</label>
-	</p>
-	<p>
-		<input type="submit" name="submit" value="<?php echo _('Update password') ?>" />
-	</p>
-	</form>
-	<?php
+	echo $HTML->openForm(array('action' => util_make_uri('/account/change_pw.php'), 'method' => 'post'));
+	echo html_e('input', array('type' => 'hidden', 'name' => 'form_key', 'value' => form_generate_key()));
+	echo html_e('p', array(), _('Old Password')._(':').utils_requiredField().
+				html_e('br').
+				html_e('label', array('for' => 'old_passwd'), html_e('input',array('id' => 'old_passwd', 'type' => 'password', 'name' => 'old_passwd', 'required'=> 'required'))));
+	echo html_e('p', array(), _('New Password (at least 6 chars)')._(':').utils_requiredField().
+				html_e('br').
+				html_e('label', array('for' => 'passwd'). html_e('input', array('id' => 'passwd', 'type' => 'password', 'name' => 'passwd', 'required' => 'required', 'pattern' => '.{6,}'))));
+	echo html_e('p', array(), _('New Password (repeat)')._(':').utils_requiredField().
+				html_e('br').
+				html_e('label', array('for' => 'passwd2'), html_e('input', array('id' => 'passwd2', 'type' => 'password', 'name' => 'passwd2', 'required' => 'required', 'pattern' => '.{6,}'))));
+	echo html_e('p', array(), html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Update password'))));
+	echo $HTML->closeForm();
+	echo $HTML->addRequiredFieldsInfoBox();
 }
 
 site_user_footer();
