@@ -17,7 +17,7 @@
 
 
 # Install build dependencies
-aptitude -y install mini-dinstall dput devscripts equivs
+aptitude -y install mini-dinstall dput devscripts equivs pbzip2
 mk-build-deps -i /usr/src/fusionforge/src/debian/control -t 'apt-get -y' -r
 
 
@@ -25,8 +25,7 @@ mk-build-deps -i /usr/src/fusionforge/src/debian/control -t 'apt-get -y' -r
 #rm -rf /usr/src/debian-repository
 mkdir -p /usr/src/debian-repository
 
-if [ ! -f /root/.mini-dinstall.conf ]; then
-    cat >/root/.mini-dinstall.conf <<EOF
+cat >/root/.mini-dinstall.conf <<EOF
 [DEFAULT]
 archivedir = /usr/src/debian-repository
 archive_style = flat
@@ -34,14 +33,13 @@ archive_style = flat
 verify_sigs = 0
 
 generate_release = 1
-release_signscript = /usr/src/fusionforge/vm/scripts/mini-dinstall-sign.sh
+release_signscript = /usr/src/fusionforge/tests/scripts/deb/mini-dinstall-sign.sh
 
 max_retry_time = 3600
 mail_on_success = false
 
 [local]
 EOF
-fi
 
 export GNUPGHOME=/usr/src/gnupg
 if [ ! -e $GNUPGHOME ]; then
@@ -103,9 +101,11 @@ if [ $? -eq 0 ]; then
 fi
 
 debian/rules debian/control  # re-gen debian/control
-dch --newversion $(dpkg-parsechangelog | sed -n 's/^Version: \([0-9.]\+\(\~rc[0-9]\)\?\).*/\1/p')+$(date +%Y%m%d%H%M)-1 --distribution local --force-distribution "Autobuilt."
-#debuild --no-lintian --no-tgz-check -us -uc -tc  # using -tc so 'bzr st' is readable
-make dist && \mv fusionforge-5.3.50.tar.bz2 ../fusionforge_5.3.50.orig.tar.bz2 && debuild
+version=$(dpkg-parsechangelog | sed -n 's/^Version: \([0-9.]\+\(\~rc[0-9]\)\?\).*/\1/p')+$(date +%Y%m%d%H%M)
+dch --newversion $version-1 --distribution local --force-distribution "Autobuilt."
+make dist
+mv fusionforge-$(make version).tar.bz2 ../fusionforge_$version.orig.tar.bz2
+debuild -us -uc -tc  # using -tc so 'git status' is readable
 
 # Install built packages into the local repo
 debrelease -f local

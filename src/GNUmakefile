@@ -100,7 +100,7 @@ uninstall:
 
 ## Step 3: configure & update system
 # not relying on 'prefix' for post-install (for no-install/dev setups)
-fgc_source_path:=$(shell forge_get_config source_path)
+fgc_source_path:=$(shell forge_get_config source_path 2>/dev/null)
 post-install: post-install-core post-install-plugins
 post-install-core:  # common+db+web
 	$(fgc_source_path)/post-install.d/core.sh
