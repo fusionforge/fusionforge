@@ -62,7 +62,7 @@ echo html_e('p', array(), ngettext('You can request to join a project by clickin
 echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF').'?group_id='.$group_id, 'method' => 'post'));
 echo html_e('p', array(), ngettext('You must send a comment to the administrator:', 'You must send a comment to the administrators:',$nbadmins).utils_requiredField());
 echo html_e('textarea', array('name' => 'comments', 'required' => 'required', 'rows' => 15, 'cols' => 60), $comments);
-echo html_e('p', array(), html_e('input', 'type' => 'submit', 'name' => 'submit', 'value' => _('Submit')));
+echo html_e('p', array(), html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Submit'))));
 echo $HTML->closeForm();
 echo $HTML->addRequiredFieldsInfoBox();
 site_project_footer();
