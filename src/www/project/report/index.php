@@ -26,6 +26,7 @@
 require_once '../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'tracker/ArtifactsForUser.class.php';
+require_once $gfcommon.'pm/ProjectTasksForUser.class.php';
 
 global $HTML;
 
@@ -183,28 +184,16 @@ foreach ($group->getUsers() as $member) {
 		}
 		echo $HTML->multiTableRow(array('class' => 'priority'.$artifact->getPriority()), $cells);
 	}
-	$task_group=db_query_params("SELECT ptv.*,g.group_name,pgl.project_name
-				FROM project_task_vw ptv,
-					project_assigned_to pat,
-					groups g,
-					project_group_list pgl
-				WHERE ptv.project_task_id=pat.project_task_id
-					AND pgl.group_id=$1
-					AND g.group_id=$1
-					AND pgl.group_project_id=ptv.group_project_id
-					AND ptv.status_id=1
-					AND pat.assigned_to_id=$2
-				ORDER BY group_name,project_name",
-				array($group_id, $member->getID()));
-
-	while ( $task_type = db_fetch_array($task_group) ) {
-		if ( $task_type['percent_complete'] != 100 ) {
+	$ptfu = new ProjectTasksForUser($member);
+	$tasks = $ptfu->getTasksByGroupProjectName();
+	foreach ($tasks as $task) {
+		if ($task-> getPercentComplete() != 100) {
 			$cells = array();
-			$cells[][] = util_make_link('/pm/task.php?func=detailtask&project_task_id='. $task_type['project_task_id'].'&group_id='.$group_id.'&group_project_id='.$task_type['group_project_id'],_('Task').' '.$task_type['project_task_id']);
-			$cells[][] = $task_type['summary'];
-			$cells[][] = GetTime(time()-$task_type['start_date']);
-			$cells[][] = $task_type['percent_complete'].'% '._('done');
-			echo $HTML->multiTableRow(array('class' => 'priority'.$task_type['priority']), $cells);
+			$cells[][] = util_make_link('/pm/task.php?func=detailtask&project_task_id='. $task->getID().'&group_id='.$group_id.'&group_project_id='.$task->ProjectGroup->getID(),_('Task').' '.$task->getID());
+			$cells[][] = $task->getSummary();
+			$cells[][] = GetTime(time()-$task->getStartDate());
+			$cells[][] = $task->getPercentComplete().'% '._('done');
+			echo $HTML->multiTableRow(array('class' => 'priority'.$task->getPriority()), $cells);
 		}
 	}
 	$cells = array();
