@@ -1,4 +1,0 @@
-@BINARY_PATH@
-@DATA_PATH@/etc
-@DATA_PATH@/etc/templates
-@CONFIG_PATH@/templates

@@ -1,4 +1,0 @@
-Package: @OLDPACKAGE@-web-apache2-vhosts
-Architecture: all
-Depends: @OLDPACKAGE@-web-apache2, php5-cli, ${misc:Depends}
-Description: collaborative development tool - web vhosts (using Apache)

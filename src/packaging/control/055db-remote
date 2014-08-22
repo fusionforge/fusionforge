@@ -1,6 +1,0 @@
-Package: @OLDPACKAGE@-db-remote
-Architecture: all
-Provides: @OLDPACKAGE@-db
-Conflicts: @OLDPACKAGE@-db
-Depends: ${misc:Depends}
-Description: collaborative development tool - database (remote)
