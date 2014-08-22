@@ -25,6 +25,7 @@
 
 require_once '../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
+require_once $gfcommon.'tracker/ArtifactsForUser.class.php';
 
 global $HTML;
 
@@ -165,35 +166,22 @@ foreach ($group->getUsers() as $member) {
 	echo $HTML->multiTableRow(array(), $cells);
 
 	// print out all the artifacts assigned to this person
-	$artifact_group=db_query_params("SELECT group_artifact_id, name
-				FROM artifact_group_list
-				WHERE group_id=$1
-				ORDER BY group_artifact_id DESC", array($group_id));
-
-	while ( $artifact_type =db_fetch_array($artifact_group) ) {
-		$artifacts=db_query_params("SELECT * FROM artifact_vw
-					WHERE assigned_to=$1
-					AND status_id='1'
-					AND group_artifact_id=$2
-					ORDER BY priority DESC", array($member->getID(), $artifact_type['group_artifact_id']));
-
-		$num_artifacts=db_numrows($artifacts);
-		for ($m=0; $m < $num_artifacts; $m++) {
-			$cells = array();
-			$cells[][] = util_make_link('/tracker/?func=detail&aid='. db_result($artifacts, $m, 'artifact_id') .'&group_id='.$group_id.'&atid='.$artifact_type['group_artifact_id'], $artifact_type['name'].' '.db_result($artifacts, $m, 'artifact_id'));
-			$cells[][] = db_result($artifacts, $m, 'summary');
-			$cells[][] = GetTime( time() - db_result($artifacts, $m, 'open_date'));
-
-			$messages = db_query_params("select adddate FROM artifact_message_user_vw ".
+	$afu = new ArtifactsForUser($member);
+	$artifacts = $afu->getAssignedArtifactsByGroup();
+	foreach ($artifacts as $artifact) {
+		$cells = array();
+		$cells[][] = util_make_link('/tracker/?func=detail&aid='. $artifact->getID() .'&group_id='.$group_id.'&atid='.$artifact->ArtifactType->getID(), $artifact->ArtifactType->getName().' '.$artifact->getID());
+		$cells[][] = $artifact->getSummary();
+		$cells[][] = GetTime( time() - $artifact->getOpenDate());
+		$messages = db_query_params("select adddate FROM artifact_message_user_vw ".
 						"WHERE artifact_id=$1 ".
-						"ORDER by adddate DESC", array(db_result($artifacts, $m, 'artifact_id')));
-			if ( db_numrows($messages)) {
-				$cells[][] = GetTime( time () - db_result($messages, 0, 'adddate'));
-			} else {
-				$cells[][] = GetTime( time () - db_result($artifacts, $m, 'open_date'));;
-			}
-			echo $HTML->multiTableRow(array('class' => 'priority'.db_result($artifacts, $m, 'priority')), $cells);
-                }
+						"ORDER by adddate DESC", array($artifact->getID()));
+		if ( db_numrows($messages)) {
+			$cells[][] = GetTime(time() - db_result($messages, 0, 'adddate'));
+		} else {
+			$cells[][] = GetTime(time() - $artifact->getOpenDate());;
+		}
+		echo $HTML->multiTableRow(array('class' => 'priority'.$artifact->getPriority()), $cells);
 	}
 	$task_group=db_query_params("SELECT ptv.*,g.group_name,pgl.project_name
 				FROM project_task_vw ptv,
