@@ -5,7 +5,7 @@
  * This page should be accessed with confirmation URL sent to user in email
  *
  * Copyright 1999-2001 (c) VA Linux Systems
- * Copyright 2010 (c) Franck Villaume
+ * Copyright 2010,2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -49,9 +49,9 @@ if (db_numrows($res_user) < 1) {
 }
 $u = user_get_object(db_result($res_user, 0, 'user_id'), $res_user);
 if (!$u || !is_object($u)) {
-    exit_error(_('Could Not Get User'),'home');
+	exit_error(_('Could Not Get User'),'home');
 } elseif ($u->isError()) {
-    exit_error($u->getErrorMessage(),'my');
+	exit_error($u->getErrorMessage(),'my');
 }
 
 if (!$u->setEmail($u->getNewEmail())) {
@@ -59,17 +59,8 @@ if (!$u->setEmail($u->getNewEmail())) {
 }
 
 site_user_header(array('title'=>_('Email Change Complete')));
-?>
-
-<p>
-<?php
-printf (_('Welcome, %1$s. Your email change is complete. Your new email address on file is <strong>%2$s</strong>. Mail sent to &lt;%3$s&gt; will now be forwarded to this account.'),$u->getUnixName(),$u->getEmail(),$u->getUnixName().'@'.forge_get_config('users_host')) ?>
-</p>
-
-<p><?php echo util_make_link ('/',_('Return')); ?></p>
-
-<?php
-
+echo html_e('p', array(), sprintf(_('Welcome, %1$s. Your email change is complete. Your new email address on file is <strong>%2$s</strong>. Mail sent to &lt;%3$s&gt; will now be forwarded to this account.'), $u->getUnixName(), $u->getEmail(), $u->getUnixName().'@'.forge_get_config('users_host')));
+echo html_e('p', array(), util_make_link('/', _('Return')));
 site_user_footer();
 
 // Local Variables:

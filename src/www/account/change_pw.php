@@ -69,7 +69,7 @@ if (getStringFromRequest('submit')) {
 	site_user_header(array('title'=>_('Successfully Changed Password')));
 	echo html_e('h2', array(), sprintf(_('%s Password Change Confirmation'), forge_get_config ('forge_name')));
 	echo $HTML->feedback(_('Congratulations. You have changed your password.'));
-	echo html_e('p', array(), sprintf(_('You should now <a href="%s">Return to User Prefs</a>.'), util_make_url('/account/')));
+	echo html_e('p', array(), sprintf(_('You should now <a href="%s">Return to User Prefs</a>.'), util_make_uri('/account/')));
 } else {
 	// Show change form
 	site_user_header(array('title'=>_('Change Password')));
@@ -80,7 +80,7 @@ if (getStringFromRequest('submit')) {
 				html_e('label', array('for' => 'old_passwd'), html_e('input',array('id' => 'old_passwd', 'type' => 'password', 'name' => 'old_passwd', 'required'=> 'required'))));
 	echo html_e('p', array(), _('New Password (at least 6 chars)')._(':').utils_requiredField().
 				html_e('br').
-				html_e('label', array('for' => 'passwd'). html_e('input', array('id' => 'passwd', 'type' => 'password', 'name' => 'passwd', 'required' => 'required', 'pattern' => '.{6,}'))));
+				html_e('label', array('for' => 'passwd'), html_e('input', array('id' => 'passwd', 'type' => 'password', 'name' => 'passwd', 'required' => 'required', 'pattern' => '.{6,}'))));
 	echo html_e('p', array(), _('New Password (repeat)')._(':').utils_requiredField().
 				html_e('br').
 				html_e('label', array('for' => 'passwd2'), html_e('input', array('id' => 'passwd2', 'type' => 'password', 'name' => 'passwd2', 'required' => 'required', 'pattern' => '.{6,}'))));

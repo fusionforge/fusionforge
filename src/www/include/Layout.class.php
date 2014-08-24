@@ -1077,7 +1077,7 @@ if (isset($params['group']) && $params['group']) {
 		if (!$id) {
 			$id = $name;
 		}
-		$return = html_e('div', array('class' => 'field-holder'));
+		$return = html_ao('div', array('class' => 'field-holder'));
 		$attrs = array('name' => $name, 'id' => $id, 'type' => 'checkbox', 'value' => $value);
 		if ($checked) {
 			$attrs['checked'] = 'checked';
@@ -1091,7 +1091,7 @@ if (isset($params['group']) && $params['group']) {
 		if ($label) {
 			$return .= html_e('label', array('for' => $id), $label, true);
 		}
-		$return .= '</div>';
+		$return .= html_ac(html_ap() -1);
 		return $return;
 	}
 
