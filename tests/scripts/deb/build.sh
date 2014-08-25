@@ -46,7 +46,7 @@ if [ ! -e $GNUPGHOME ]; then
     mkdir -m 700 $GNUPGHOME
     # Quick 'n Dirty hack to get entropy on VMs
     # https://bugs.launchpad.net/ubuntu/+source/gnupg/+bug/706011
-    # (don't do this in prod!)
+    # (don't do this for a public repo!)
     aptitude install -y rng-tools
     echo HRNGDEVICE=/dev/urandom >> /etc/default/rng-tools
     service rng-tools restart
