@@ -37,20 +37,7 @@ if type apt-get 2>/dev/null ; then
     apt-get -y install xfonts-base
 fi
 
-[ -d "/root/.vnc" ] || mkdir /root/.vnc 
-
-# Setup X11 to start phpunit
-cat > /root/.vnc/xstartup<<EOF
-#! /bin/bash
-: > /root/phpunit.exitcode
-INSTALL_METHOD=$INSTALL_METHOD INSTALL_OS=$INSTALL_OS $@ &> /var/log/phpunit.log 2>&1 &
-echo \$! > /root/phpunit.pid
-wait %1
-echo \$? > /root/phpunit.exitcode
-EOF
-chmod +x /root/.vnc/xstartup
-
-# Setup vnc password
+# Setup vnc password - otherwise vncserver prompts it
 vncpasswd <<EOF
 password
 password
@@ -67,15 +54,9 @@ if ! [ -e .ssh/config ] || ! grep -q StrictHostKeyChecking .ssh/config ; then
     echo StrictHostKeyChecking no >> .ssh/config
 fi
 
-# Start vnc server (that will start phpunit)
 vncserver :1
-sleep 5
-pid=$(cat /root/phpunit.pid)
-tail -f /var/log/phpunit.log --pid=$pid
-#wait $pid
-sleep 5
-
-retcode=$(cat /root/phpunit.exitcode)
+DISPLAY=:1 INSTALL_METHOD=$INSTALL_METHOD INSTALL_OS=$INSTALL_OS $@
+retcode=$?
 vncserver -kill :1 || retcode=$?
 
 exit $retcode
