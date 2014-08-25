@@ -10,9 +10,11 @@ Vcs-Git: https://fusionforge.org/anonscm/git/deb-packaging/deb-packaging.git
 Vcs-Browser: https://fusionforge.org/scm/browser.php?group_id=9
 
 
-Package: fusionforge-standard
+Package: fusionforge
 Architecture: all
 Depends: fusionforge-common (=${source:Version}), fusionforge-web, ${misc:Depends}
+Recommends: fusionforge-shell
+Suggests: fusionforge-plugin-mediawiki
 Description: FusionForge collaborative development tool - standard metapackage
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
@@ -20,7 +22,8 @@ Description: FusionForge collaborative development tool - standard metapackage
  web/FTP hosting, release management, etc. All these services are
  integrated into one web site and managed through a web interface.
  .
- This metapackage installs a standard FusionForge site.
+ This metapackage installs a stand-alone FusionForge site.
+ See also the Recommends and Suggests dependencies.
 
 
 Package: fusionforge-common
