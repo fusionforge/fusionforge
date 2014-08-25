@@ -128,14 +128,14 @@ dist-clean:
 ## Developer tools
 
 # tar.bz2 release
-# depends: gettext tar pbzip2
+# depends: gettext tar
 TAR_PREFIX=fusionforge-$(VERSION)
 dist: all
 	rm -rf $(TAR_PREFIX)/
 	mkdir  $(TAR_PREFIX)/
 	$(CP_R) $$(ls -A | grep -v '^\.git' | grep -v $(TAR_PREFIX)) $(TAR_PREFIX)/
 	find $(TAR_PREFIX)/ -name '*~' -print0 | xargs -r0 rm
-	tar cf $(TAR_PREFIX).tar.bz2 --use-compress-prog=pbzip2 $(TAR_PREFIX)/
+	tar cjf $(TAR_PREFIX).tar.bz2 $(TAR_PREFIX)/
 	rm -rf $(TAR_PREFIX)/
 
 version:
