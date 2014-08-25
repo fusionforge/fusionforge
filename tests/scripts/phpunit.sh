@@ -41,7 +41,7 @@ define('DB_NAME', getenv('DB_NAME'));
 define('DB_USER', getenv('DB_USER'));
 define('DB_PASSWORD', '@@FFDB_PASS@@');
 // Command which will reload a clean database at each SeleniumTestCase start
-define('DB_INIT_CMD', "$FORGE_HOME/tests/func/db_reload.sh >>/var/log/db_reload_selenium.log 2>&1");
+define('DB_INIT_CMD', "$FORGE_HOME/tests/func/db_reload.sh 2>&1");
 
 // Prefix for commands to run
 define('RUN_COMMAND_PREFIX', '');
@@ -51,14 +51,14 @@ print "Looking for forge_run_job script...\n";
 if (is_executable ("$FORGE_HOME/bin/forge_run_job")) {
     print "Found in $FORGE_HOME/bin/\n";
     define('RUN_JOB_PATH', "$FORGE_HOME/bin/");
-} elseif (is_executable ("$FORGE_HOME/utils/forge_run_job")) {
-    print "Found in $FORGE_HOME/utils/\n";
-    define('RUN_JOB_PATH', "$FORGE_HOME/utils/");
-} elseif (is_executable ("$FORGE_HOME/src/utils/forge_run_job")) {
-    print "Found in $FORGE_HOME/src/utils/\n";
-    define('RUN_JOB_PATH', "$FORGE_HOME/src/utils/");
+} elseif (is_executable ("$FORGE_HOME/bin/forge_run_job")) {
+    print "Found in $FORGE_HOME/bin/\n";
+    define('RUN_JOB_PATH', "$FORGE_HOME/bin/");
+} elseif (is_executable ("$FORGE_HOME/src/bin/forge_run_job")) {
+    print "Found in $FORGE_HOME/src/bin/\n";
+    define('RUN_JOB_PATH', "$FORGE_HOME/src/bin/");
 } else {
-    print "Neither $FORGE_HOME/bin/forge_run_job, nor $FORGE_HOME/utils/forge_run_job, nor $FORGE_HOME/src/utils/forge_run_job seem to be executable, strange.\n";
+    print "Neither $FORGE_HOME/bin/forge_run_job, nor $FORGE_HOME/bin/forge_run_job, nor $FORGE_HOME/src/bin/forge_run_job seem to be executable, strange.\n";
     exit(1);
 }
 
@@ -96,34 +96,17 @@ EOF
 
 echo "Starting Selenium"
 killall -9 java
-t=$(mktemp)
 timeout=300
-PATH=/usr/lib/iceweasel:$PATH LANG=C java -jar /usr/share/selenium/selenium-server.jar -trustAllSSLCertificates -singleWindow > $t 2>&1 &
+PATH=/usr/lib/iceweasel:$PATH LANG=C java -jar /usr/share/selenium/selenium-server.jar -trustAllSSLCertificates -singleWindow &
+pid=$!
 i=0
-while [ $i -lt $timeout ] && ! netstat -tnl 2>/dev/null | grep -q :4444 ; do
+while [ $i -lt $timeout ] && ! netstat -tnl 2>/dev/null | grep -q :4444 && kill -0 $pid 2>/dev/null; do
     sleep 1
     i=$(($i+1))
 done
-if [ $i = $timeout ] ; then
-    echo "Selenium failed to start within $timeout seconds:"
-    echo -----
-    cat $t
-    echo -----
-    echo "Trying again."
-    PATH=/usr/lib/iceweasel:$PATH LANG=C java -jar /usr/share/selenium/selenium-server.jar -trustAllSSLCertificates -singleWindow > $t 2>&1 &
-    i=0
-    while [ $i -lt $timeout ] && ! netstat -tnl 2>/dev/null | grep -q :4444 ; do
-	sleep 1
-	i=$(($i+1))
-    done
-    if [ $i = $timeout ] ; then
-	echo "Selenium failed to start within $timeout seconds:"
-	echo -----
-	cat $t
-	echo -----
-	echo "Giving up."
-	exit 1
-    fi
+if [ $i = $timeout ] || ! kill -0 $pid 2>/dev/null; then
+    echo "Selenium failed to start."
+    exit 1
 fi
 
 echo "Running PHPunit tests"

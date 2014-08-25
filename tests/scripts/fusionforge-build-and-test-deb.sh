@@ -6,7 +6,6 @@ set -e
 
 get_config
 
-export FORGE_HOME=/usr/share/gforge
 export HOST=$1
 case $HOST in
     debian7.local)
@@ -23,157 +22,34 @@ case $HOST in
 	;;
 esac	
 
-export FILTER="deb/debian"
+#conf=$(mktemp)
+#echo "lxc.network.link = virbr0" > $conf
+#echo "lxc.network.type = veth"  >> $conf
+#wsudo lxc-create -t $VM -n $HOST -t $conf
+#sudo lxc-start -n $HOST -d
+tests/scripts/start_vm -t $VM $HOST
 
-prepare_workspace
-
-CHECKOUTPATH=$(pwd)
-
-COWBUILDERCONFIG=$BUILDERDIR/config/$DIST.config
-
-cd $CHECKOUTPATH/src
-PKGNAME=$(dpkg-parsechangelog | awk '/^Source:/ { print $2 }')
-PKGVERS=$(dpkg-parsechangelog | awk '/^Version:/ { print $2 }')
-MAJOR=${PKGVERS%-*}
-SMAJOR=${MAJOR#*:}
-MINOR=${PKGVERS##*-}
-if [ -d $CHECKOUTPATH/.svn ] ; then
-    MINOR=-$MINOR+svn$(svn info | awk '/^Revision:/ { print $2 }')
-elif [ -d $CHECKOUTPATH/.bzr ] ; then
-    MINOR=-$MINOR+bzr$(bzr revno)
-elif [ -d $CHECKOUTPATH/.git ] ; then
-    MINOR=-$MINOR+git$(git describe --always)
-else
-    MINOR=-$MINOR+$(TZ=UTC date +%Y%m%d%H%M%S)
-fi
-ARCH=$(dpkg-architecture -qDEB_BUILD_ARCH)
-
-# Build out of the source tree
-. $COWBUILDERCONFIG
-CHANGEFILE=${BUILDRESULT}/${PKGNAME}_${SMAJOR}${MINOR}_${ARCH}.changes
-cd $CHECKOUTPATH
-rm -rf $BUILDPLACE/$PKGNAME-$MAJOR
-cp -r src/ $BUILDPLACE/$PKGNAME-$MAJOR
-cd $BUILDPLACE/$PKGNAME-$MAJOR
-dch -b -v $MAJOR$MINOR -D UNRELEASED "This is $DIST-$ARCH autobuild"
-sed -i -e "1s/UNRELEASED/$DIST/" debian/changelog
-debian/rules debian/control
-pdebuild --configfile $COWBUILDERCONFIG --buildresult $BUILDRESULT
-
-cd $BUILDRESULT
-lintian -i $CHANGEFILE
-REPOPATH=$WORKSPACE/build/debian
-
-[ ! -d $REPOPATH ] || rm -r $REPOPATH
-mkdir -p $REPOPATH/conf
-DEFAULTKEY=buildbot@$(hostname -f)
-SIGNKEY=${DEBEMAIL:-$DEFAULTKEY}
-cat > $REPOPATH/conf/distributions <<EOF
-Codename: $DIST
-Suite: $DIST
-Components: main
-UDebComponents: main
-Architectures: amd64 i386 source
-Origin: buildbot.fusionforge.org
-Description: FusionForge autobuilt repository
-SignWith: $SIGNKEY
-EOF
-
-reprepro -Vb $REPOPATH include $DIST $CHANGEFILE
-
-rm ${BUILDPLACE}/${PKGNAME}_${SMAJOR}${MINOR}*
-rm -rf $BUILDPLACE/$PKGNAME-$MAJOR
-
-cd $BUILDRESULT
-cat $CHANGEFILE | sed '1,/^Checksums-Sha1:/d;/^[[:alnum:]]/,$d' | awk '{print $3}' | xargs rm
-rm $CHANGEFILE
-
-cd $CHECKOUTPATH
-
-destroy_vm -t $VM $HOST
-start_vm_if_not_keeped -t $VM $HOST
-setup_debian_3rdparty_repo
+# LXC post-install...
+ssh root@$HOST "echo \"deb $DEBMIRRORSEC $DIST/updates main\" > /etc/apt/sources.list.d/security.list"
+ssh root@$HOST "echo 'APT::Install-Recommends \"false\";' > /etc/apt/apt.conf.d/01InstallRecommends"
+ssh root@$HOST "apt-get update"
 
 # Transfer preseeding
-cat tests/preseed/* | sed s/@FORGE_ADMIN_PASSWORD@/$FORGE_ADMIN_PASSWORD/ | ssh root@$HOST "LANG=C debconf-set-selections"
+#cat tests/preseed/* | sed s/@FORGE_ADMIN_PASSWORD@/$FORGE_ADMIN_PASSWORD/ | ssh root@$HOST "LANG=C debconf-set-selections"
 
-# Setup debian repo
-export DEBMIRROR DEBMIRRORSEC
-ssh root@$HOST "echo \"deb $DEBMIRROR $DIST main\" > /etc/apt/sources.list"
-ssh root@$HOST "echo \"deb $DEBMIRRORSEC $DIST/updates main\" > /etc/apt/sources.list.d/security.list"
-ssh root@$HOST "apt-get update"
-# ssh root@$HOST "UCF_FORCE_CONFFNEW=yes DEBIAN_FRONTEND=noninteractive LANG=C apt-get -o debug::pkgproblemresolver=true -y --force-yes dist-upgrade"
-
-ssh root@$HOST "apt-get update"
-ssh root@$HOST "UCF_FORCE_CONFFNEW=yes DEBIAN_FRONTEND=noninteractive LANG=C apt-get -o debug::pkgproblemresolver=true -y --force-yes install libapache2-mod-wsgi nscd"
-
-if [ "$DIST" = wheezy ] ; then
-    ssh root@$HOST "UCF_FORCE_CONFFNEW=yes DEBIAN_FRONTEND=noninteractive LANG=C apt-get -o debug::pkgproblemresolver=true -y --force-yes install javascript-common"
-
-    # Grab a more recent loggerhead (without pulling everything)
-    if ! ssh root@$HOST dpkg -l loggerhead | grep -q ^ii ; then
-	ssh root@$HOST "apt-get -y --force-yes install wget gdebi-core;wget -c http://snapshot.debian.org/archive/debian/20121107T152130Z/pool/main/l/loggerhead/loggerhead_1.19%7Ebzr477-1_all.deb; gdebi --non-interactive loggerhead_1.19~bzr477-1_all.deb"
-    fi
-
-    ssh root@$HOST "echo \"deb $DEBMIRROR wheezy-backports main\" >> /etc/apt/sources.list.d/wheezy-backports.list"
-    ssh root@$HOST "apt-get update"
-    ssh root@$HOST "UCF_FORCE_CONFFNEW=yes DEBIAN_FRONTEND=noninteractive LANG=C apt-get -o debug::pkgproblemresolver=true -y --force-yes install -t wheezy-backports libjs-jquery-ui"
-    ssh root@$HOST "rm /etc/apt/sources.list.d/wheezy-backports.list"
-fi
-
-ssh root@$HOST "echo \"deb $DEBMIRROR $DIST main\" > /etc/apt/sources.list"
-ssh root@$HOST "apt-get update"
-
-ssh root@$HOST "echo \"deb file:/debian $DIST main\" >> /etc/apt/sources.list"
-scp -r $WORKSPACE/build/debian root@$HOST:/ 
-gpg --export --armor | ssh root@$HOST "apt-key add -"
-sleep 5
-ssh root@$HOST "apt-get update"
-
-# Install fusionforge
-ssh root@$HOST "UCF_FORCE_CONFFNEW=yes DEBIAN_FRONTEND=noninteractive LANG=C apt-get -o debug::pkgproblemresolver=true -y --force-yes install rsync postgresql-contrib fusionforge-full"
-
-config_path=$(ssh root@$HOST forge_get_config config_path)
-data_path=$(ssh root@$HOST forge_get_config data_path)
-
-echo "Set forge admin password"
-ssh root@$HOST "/usr/share/gforge/bin/forge_set_password $FORGE_ADMIN_USERNAME $FORGE_ADMIN_PASSWORD"
-ssh root@$HOST "LANG=C a2dissite default ; LANG=C a2dissite 000-default ; LANG=C invoke-rc.d apache2 reload"
-ssh root@$HOST "(echo [core];echo use_ssl=no) > $config_path/config.ini.d/zzz-buildbot.ini"
-ssh root@$HOST "(echo [moinmoin];echo use_frame=no) >> $config_path/config.ini.d/zzz-buildbot.ini"
-ssh root@$HOST "(echo [mediawiki];echo unbreak_frames=yes) >> $config_path/config.ini.d/zzz-buildbot.ini"
-ssh root@$HOST "[ -e $data_path/.bazaar/bazaar.conf ] && sed -i -e s,https://,http://,g $data_path/.bazaar/bazaar.conf"
-ssh root@$HOST "service nscd restart"
-
-# Dump database
-echo "Dump freshly installed database"
-ssh root@$HOST "su - postgres -c \"pg_dumpall\" > /root/dump"
-
-# Stop cron
-echo "Stop cron daemon"
-ssh root@$HOST "invoke-rc.d cron stop" || true
-
-# Install selenium
-ssh root@$HOST "apt-get -o debug::pkgproblemresolver=true -y install selenium"
-
-# Install selenium tests
-ssh root@$HOST "[ -d $FORGE_HOME ] || mkdir -p $FORGE_HOME"
-rsync -a --delete tests/ root@$HOST:$FORGE_HOME/tests/
-
-# Transfer hudson config
-ssh root@$HOST "cat > $FORGE_HOME/tests/config/phpunit" <<-EOF
-HUDSON_URL=$HUDSON_URL
-JOB_NAME=$JOB_NAME
-EOF
+ssh root@$HOST "apt-get install rsync"
+rsync -av --delete src tests root@$HOST:/usr/src/fusionforge/
+ssh root@$HOST "/usr/src/fusionforge/tests/scripts/deb/build.sh"
+ssh root@$HOST "/usr/src/fusionforge/tests/scripts/deb/install.sh"
+ssh root@$HOST "apt-get install -y fusionforge-shell fusionforge-plugin-mediawiki"
 
 # Run tests
 retcode=0
-echo "Run phpunit test on $HOST in $FORGE_HOME"
-ssh root@$HOST "$FORGE_HOME/tests/func/vncxstartsuite.sh $FILTER" || retcode=$?
-rsync -av root@$HOST:/var/log/ $WORKSPACE/reports/
+echo "Run phpunit test on $HOST"
+ssh root@$HOST "/usr/src/fusionforge/tests/func/vncxstartsuite.sh /usr/src/fusionforge/tests/scripts/deb/run-testsuite.sh" || retcode=$?
 
-cd $CHECKOUTPATH
-for i in *_source.changes ; do echo $i ; echo $(basename $i _source.changes)_*.build ; cat $i | sed -e 0,/^Checksums/d -e /^Checksums/,\$d | awk '{print $3}' ; done | xargs rm || true
+rsync -av root@$HOST:/var/log/ ~/reports/
 
-stop_vm_if_not_keeped -t $VM $@
+lxc-stop -k -n $HOST
+lxc-destroy -n $HOST
 exit $retcode

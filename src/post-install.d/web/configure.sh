@@ -73,4 +73,6 @@ fi
 apache_service=$(forge_get_config apache_service)
 if service $apache_service status; then
     service $apache_service reload
+else
+    service $apache_service restart
 fi

@@ -167,10 +167,4 @@ start_database
 start_apache
 
 echo "Flushing/restarting nscd"
-rm -f /var/cache/nscd/* || true
-if type invoke-rc.d 2>/dev/null
-then
-    invoke-rc.d unscd restart || invoke-rc.d nscd restart || true
-else
-    service unscd restart || service nscd restart || true
-fi
+nscd -i all

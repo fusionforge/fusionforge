@@ -61,7 +61,11 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		}
 		if (defined('DB_INIT_CMD')) {
 			// Reload a fresh database before running this test suite.
-			system(DB_INIT_CMD);
+			$ret = 0;
+			passthru(DB_INIT_CMD, $ret);
+			ob_flush();
+			if ($ret != 0)
+				die('DB_INIT_CMD ('.DB_INIT_CMD.') failed');
 		}
 		$this->reload_nscd();
 
@@ -130,8 +134,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 
 	protected function reload_nscd()
 	{
-		$this->runCommand("service unscd restart > /dev/null 2>&1 || service nscd restart > /dev/null 2>&1 || true");
-		sleep (1); // Give it some time to wake up
+		$this->runCommand("nscd -i all >/dev/null");
 	}
 
 	protected function init() {

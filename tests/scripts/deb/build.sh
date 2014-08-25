@@ -7,18 +7,13 @@
 
 # This script will build the Debian packages to be tested
 
-# Prerequisite : running 'update.sh' and its prerequisites
-
-
-# removed as the grep test below would break otherwise
-#set -e
-
-#set -x
-
+set -e
+export DEBIAN_FRONTEND=noninteractive
 
 # Install build dependencies
-aptitude -y install mini-dinstall dput devscripts equivs pbzip2
-mk-build-deps -i /usr/src/fusionforge/src/debian/control -t 'apt-get -y' -r
+apt-get -y install mini-dinstall dput devscripts fakeroot
+apt-get -y install build-essential \
+     $(grep Build-Depends /usr/src/fusionforge/src/debian/control | sed -e 's/Build-Depends: //' -e 's/(.*)//')
 
 
 # Populate a local Debian packages repository for APT managed with mini-dinstall
@@ -47,7 +42,7 @@ if [ ! -e $GNUPGHOME ]; then
     # Quick 'n Dirty hack to get entropy on VMs
     # https://bugs.launchpad.net/ubuntu/+source/gnupg/+bug/706011
     # (don't do this for a public repo!)
-    aptitude install -y rng-tools
+    apt-get install -y rng-tools
     echo HRNGDEVICE=/dev/urandom >> /etc/default/rng-tools
     service rng-tools restart
     gpg --batch --gen-key <<EOF
@@ -90,16 +85,6 @@ fi
 cd /usr/src/fusionforge/src
 f=$(mktemp)
 cp debian/changelog $f
-
-# The build is likely to fail if /tmp is too short.
-# When filesystem is too much full, the boot scripts mount a tmpfs /tmp that is far too small to allow builds,
-# but still gets unnoticed.
-# We assume here that you didn't change the VM partitions layout and that /tmp is not a mounted partition.
-mount | grep /tmp
-if [ $? -eq 0 ]; then
-    echo "WARNING: It is likely that the mounted /tmp could be too short. If you experience a build error bellow, Try make some room on the FS and reboot, first."
-fi
-
 debian/rules debian/control  # re-gen debian/control
 version=$(dpkg-parsechangelog | sed -n 's/^Version: \([0-9.]\+\(\~rc[0-9]\)\?\).*/\1/p')+$(date +%Y%m%d%H%M)
 dch --newversion $version-1 --distribution local --force-distribution "Autobuilt."

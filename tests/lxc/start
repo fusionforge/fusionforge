@@ -34,12 +34,13 @@ else
 	then
 		echo "lxc.network.ipv4 = $CIDR" >> $tmpconf
 	fi
-	# Next is a bit hacky, the only way I found to pass pubkey to the template
-	# LXC don't allow to pass extra args
 	if [ ! -z "$IPGW" ]
 	then
 		echo "#lxc.network.ipv4.gw = $IPGW" >> $tmpconf
 	fi
+	# Next is a bit hacky, the only way I found to pass pubkey to the template
+	# LXC don't allow to pass extra args
+	# Note: doesn't work with lxc >= 1.0, comments are stripped
 	echo "#lxc.pubkey = $SSHPUBKEY" >> $tmpconf
 	sudo /usr/bin/lxc-create -n $HOST -f $tmpconf -t $TEMPLATE
 	rm -f $tmpconf

@@ -5,29 +5,24 @@
 # controlled Firefox browser.
 
 # Build an unofficial package for selenium and install it
-if ! dpkg -l selenium | grep -q ^ii ; then
-    cd /usr/src/fusionforge/3rd-party/selenium/selenium
-    debian/rules get-orig-source
-    debuild --no-lintian --no-tgz-check -us -uc
-    dpkg -i /usr/src/fusionforge/3rd-party/selenium/selenium_*_all.deb
+if ! dpkg-query -s selenium >/dev/null 2>&1 ; then
+    version=2.35.0
+    mkdir -p /usr/share/selenium/
+    wget -c http://selenium.googlecode.com/files/selenium-server-standalone-$version.jar \
+	-O /usr/share/selenium/selenium-server.jar
 
     # Selenium dependencies
-    aptitude -y install default-jre iceweasel
+    apt-get -y install default-jre iceweasel
 
 fi
 
-config_path=$(cd /usr/src/fusionforge;utils/forge_get_config_basic fhs config_path)
+invoke-rc.d cron stop
 
+config_path=$(forge_get_config config_path)
 (echo [mediawiki]; echo unbreak_frames=yes) > $config_path/config.ini.d/zzz-buildbot.ini
 
 # Test dependencies
-aptitude -y install php5-cli phpunit phpunit-selenium
-
-## If available, install the JUnit OSLC provider test suite
-#if [ -d src/plugins/oslc/tests ]; then
-#    cd /usr/src/fusionforge/src/plugins/oslc/tests
-#    ./setup-provider-test.sh
-#fi
+apt-get -y install phpunit phpunit-selenium
 
 # Now, start the functionnal test suite using phpunit and selenium
 /usr/src/fusionforge/tests/scripts/phpunit.sh deb/debian

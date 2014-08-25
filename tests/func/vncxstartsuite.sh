@@ -4,8 +4,7 @@ TEST_ENV="$1"
 # Test arg
 if [ -z "$TEST_ENV" ]
 then
-	echo "Usage: $0 <TEST_ENV>"
-	echo "  examples: src/debian, deb/debian, rpm/centos"
+	echo "Usage: $0 script"
 	exit 1
 fi
 
@@ -44,7 +43,7 @@ fi
 cat > /root/.vnc/xstartup<<EOF
 #! /bin/bash
 : > /root/phpunit.exitcode
-INSTALL_METHOD=$INSTALL_METHOD INSTALL_OS=$INSTALL_OS $TEST_HOME/scripts/phpunit.sh &> /var/log/phpunit.log &
+INSTALL_METHOD=$INSTALL_METHOD INSTALL_OS=$INSTALL_OS $@ &> /var/log/phpunit.log 2>&1 &
 echo \$! > /root/phpunit.pid
 wait %1
 echo \$? > /root/phpunit.exitcode
