@@ -26,11 +26,6 @@ su - postgres -c psql <<EOF
 ALTER ROLE $database_user WITH PASSWORD '$database_password_quoted' ;
 EOF
 su - postgres -c "createuser -SDR ${database_user}_nss"
-su - postgres -c 'psql fusionforge' <<EOF
-GRANT SELECT ON nss_passwd TO ${database_user}_nss;
-GRANT SELECT ON nss_groups TO ${database_user}_nss;
-GRANT SELECT ON nss_usergroups TO ${database_user}_nss;
-EOF
 
 # Create database
 su - postgres -c "createdb --template template0 --encoding UNICODE $database_name"
@@ -43,12 +38,19 @@ cat <<EOF > $PGPASSFILE
 $database_host:$database_port:$database_name:$database_user:$database_password
 EOF
 psql -h $database_host -p $database_port -U $database_user $database_name < $source_path/db/1-fusionforge-init.sql
+
+$source_path/bin/upgrade-db.php
+
 psql -h $database_host -p $database_port -U $database_user $database_name <<EOF
 INSERT INTO users (user_name, realname, firstname, lastname, email,
     user_pw, unix_pw, status, theme_id)
   VALUES ('admin', 'Forge Admin', 'Forge', 'Admin', 'root@localhost.localdomain',
     'INVALID', 'INVALID', 'A', (SELECT theme_id FROM themes WHERE dirname='funky'));
+GRANT SELECT ON nss_passwd TO ${database_user}_nss;
+GRANT SELECT ON nss_groups TO ${database_user}_nss;
+GRANT SELECT ON nss_usergroups TO ${database_user}_nss;
 EOF
 rm -f $PGPASSFILE
 unset PGPASSFILE
-forge_make_admin admin
+forge_make_admin admin  # set permissions
+# Note: no password defined yet
