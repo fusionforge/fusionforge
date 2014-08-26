@@ -34,8 +34,8 @@ class SSHTest extends FForge_SeleniumTestCase
 	    
 		// Run the cronjobs
 		$this->reload_nscd();
-		$this->cron("homedirs.php");
-		$this->cron("ssh_create.php");
+		$this->cron("shell/homedirs.php");
+		$this->cron("shell/ssh_create.php");
 
 		$verbose = 0;
 		$v = '';

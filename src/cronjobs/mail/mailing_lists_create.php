@@ -31,7 +31,7 @@
 //	The @DATA_PATH@/dumps/mailman-aliases file will then be read by the mailaliases.php file
 //
 
-require dirname(__FILE__).'/../../www/env.inc.php';
+require dirname(__FILE__).'/../../common/include/env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require $gfcommon.'include/cron_utils.php';
 

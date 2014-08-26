@@ -294,7 +294,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->init($project, $user);
 
 		// Run manually the cron for creating the svn structure.
-		$this->cron("create_scm_repos.php");
+		$this->cron("scm/create_scm_repos.php");
 	}
 
 	protected function login($username)

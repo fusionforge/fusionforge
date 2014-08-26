@@ -44,9 +44,9 @@ class ScmGitSSHTest extends FForge_SeleniumTestCase
 	    
 		// Run the cronjob to create repositories
 		$this->reload_nscd();
-		$this->cron("create_scm_repos.php");
-		$this->cron("homedirs.php");
-		$this->cron("ssh_create.php");
+		$this->cron("scm/create_scm_repos.php");
+		$this->cron("shell/homedirs.php");
+		$this->cron("shell/ssh_create.php");
 
 		// Get the address of the repo
 		$this->open(ROOT);
