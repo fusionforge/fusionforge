@@ -1447,6 +1447,34 @@ if (isset($params['group']) && $params['group']) {
 	function addRequiredFieldsInfoBox() {
 		return html_e('p', array(), sprintf(_('Fields marked with %s are mandatory.'), utils_requiredField()), false);
 	}
+
+	/**
+	 * html_list - create the html code:
+	 *	<ol>
+	 *		<li>
+	 *	</ol>
+	 *	or
+	 *	<ul>
+	 *		<li>
+	 *	</ul>
+	 *
+	 * @param	array	$elements	array of args to create li elements
+	 *					format array['content'] = the content to display in li
+	 *						['attrs'] = array of html attrs applied to the li element
+	 * @param	array	$attrs		array of attributes of the ol element. Default empty array.
+	 * @param	string	$type		type of list : ol or ul. Default is ul.
+	 */
+	function html_list($elements, $attrs = array() , $type = 'ul') {
+		$htmlcode = html_ao($type, $attrs);
+		foreach ($elements as $element) {
+			if (!isset($element['attrs'])) {
+				$element['attrs'] = array();
+			}
+			$htmlcode .= html_e('li', $element['attrs'], $element['content']);
+		}
+		$htmlcode .= html_ac(html_ap() -1);
+		return $htmlcode;
+	}
 }
 
 // Local Variables:
