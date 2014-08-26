@@ -8,7 +8,7 @@ BuildArch: noarch
 License: GPLv2+
 URL: http://www.fusionforge.org/
 Source0: http://fusionforge.org/frs/download.php/file/XX/%{name}-%{version}.tar.bz2
-Requires: %{name}-standard
+Requires: %{name}-db-local = %{version}  %{name}-web = %{version}
 
 %description
 FusionForge provides many tools to aid collaboration in a
@@ -16,6 +16,8 @@ development project, such as bug-tracking, task management,
 mailing-lists, SCM repository, forums, support request helper,
 web/FTP hosting, release management, etc. All these services are
 integrated into one web site and managed through a web interface.
+
+This metapackage installs a stand-alone FusionForge site.
 %files
 
 
@@ -49,35 +51,25 @@ install_listfiles common
 (cd %{buildroot} && \
     find .%{_sysconfdir}/%{name} .%{_datadir}/%{name} -type d \
     | sed -e 's,^.,%dir ,'
-    echo %dir %{_localstatedir}/lib/%{name} ) >> common.rpmfiles
+    echo %dir %{_localstatedir}/lib/%{name}  # avoid duplicate dir in all package
+    echo %dir %{_localstatedir}/log/%{name}  # only exists in -common, warning otherwise
+) >> common.rpmfiles
 %find_lang %{name}
 # Install plugins
 install_listfiles db
 install_listfiles shell
 install_listfiles web
 install_listfiles plugin-authhttpd
-install_listfiles plugin-mediawiki
 install_listfiles plugin-scmsvn
+install_listfiles plugin-scmbzr
+install_listfiles plugin-mediawiki
+install_listfiles plugin-moinmoin
 
-
-
-%package standard
-Summary: FusionForge collaborative development tool - standard metapackage
-Requires: %{name}-db %{name}-web
-%description standard
-FusionForge provides many tools to aid collaboration in a
-development project, such as bug-tracking, task management,
-mailing-lists, SCM repository, forums, support request helper,
-web/FTP hosting, release management, etc. All these services are
-integrated into one web site and managed through a web interface.
-
-This metapackage installs a standard FusionForge site.
-%files standard
 
 
 %package common
 Summary: collaborative development tool - shared files
-Requires: php-cli
+Requires: php-cli php-pgsql php-htmlpurifier-htmlpurifier cronie
 %description common
 FusionForge provides many tools to aid collaboration in a
 development project, such as bug-tracking, task management,
@@ -91,13 +83,13 @@ subpackages.
 %doc AUTHORS* CHANGES COPYING INSTALL.TXT NEWS README
 %doc docs/*
 %post common
-%{_datadir}/%{name}/post-install.d/common/ini.sh
+%{_datadir}/%{name}/post-install.d/common/common.sh
 
 
-%package db
+%package db-local
 Summary: collaborative development tool - database (using PostgreSQL)
-Requires: %{name}-common >= %{version} postgresql-server php-pgsql
-%description db
+Requires: %{name}-common = %{version} postgresql-server
+%description db-local
 FusionForge provides many tools to aid collaboration in a
 development project, such as bug-tracking, task management,
 mailing-lists, SCM repository, forums, support request helper,
@@ -106,8 +98,8 @@ integrated into one web site and managed through a web interface.
 
 This package installs, configures and maintains the FusionForge
 database.
-%files db -f db.rpmfiles
-%post db
+%files db-local -f db.rpmfiles
+%post db-local
 %{_datadir}/%{name}/post-install.d/db/db.sh
 
 
@@ -130,7 +122,7 @@ installs (e.g. plugins activation requires a populated db).
 
 %package shell
 Summary: collaborative development tool - shell accounts (using PostgreSQL)
-Requires: %{name}-common >= %{version} php openssh-server nscd
+Requires: %{name}-common = %{version} php openssh-server nscd
 #Requires: libnss-pgsql  # Fedora-only?
 %description shell
 FusionForge provides many tools to aid collaboration in a
@@ -153,7 +145,7 @@ fi
 
 %package web
 Summary: collaborative development tool - web part (using Apache)
-Requires: %{name}-common >= %{version} %{name}-db >= %{version} httpd mod_ssl php php-pgsql
+Requires: %{name}-common = %{version} %{name}-db = %{version} httpd mod_ssl php php-pgsql
 %description web
 FusionForge provides many tools to aid collaboration in a
 development project, such as bug-tracking, task management,
@@ -171,7 +163,7 @@ FusionForge on an Apache webserver.
 %package plugin-authhttpd
 Summary: collaborative development tool - HTTPD authentication plugin
 Group: Development/Tools
-Requires: %{name}-web >= %{version}
+Requires: %{name}-web = %{version}
 %description plugin-authhttpd
 FusionForge provides many tools to aid collaboration in a
 development project, such as bug-tracking, task management,
@@ -184,13 +176,15 @@ FusionForge. It allows Apache authentication to be reused for
 FusionForge, for instance where Kerberos is used.
 %files plugin-authhttpd -f plugin-authhttpd.rpmfiles
 %post plugin-authhttpd
-%{_datadir}/%{name}/post-install.d/plugin.sh authhttpd
+%{_datadir}/%{name}/post-install.d/common/plugin.sh authhttpd configure
+%preun plugin-authhttpd
+%{_datadir}/%{name}/post-install.d/common/plugin.sh authhttpd remove
 
 
 %package plugin-mediawiki
 Summary: collaborative development tool - Mediawiki plugin
 Group: Development/Tools
-Requires: %{name}-web >= %{version} mediawiki
+Requires: %{name}-web = %{version} mediawiki
 %description plugin-mediawiki
 FusionForge provides many tools to aid collaboration in a
 development project, such as bug-tracking, task management,
@@ -201,13 +195,15 @@ integrated into one web site and managed through a web interface.
 This plugin allows each project to embed Mediawiki under a tab.
 %files plugin-mediawiki -f plugin-mediawiki.rpmfiles
 %post plugin-mediawiki
-%{_datadir}/%{name}/post-install.d/plugin.sh mediawiki
+%{_datadir}/%{name}/post-install.d/common/plugin.sh mediawiki configure
+%preun plugin-mediawiki
+%{_datadir}/%{name}/post-install.d/common/plugin.sh mediawiki remove
 
 
 %package plugin-scmsvn
 Summary: collaborative development tool - Subversion plugin
 Group: Development/Tools
-Requires: %{name}-web >= %{version} subversion
+Requires: %{name}-web = %{version} subversion
 %description plugin-scmsvn
 FusionForge provides many tools to aid collaboration in a
 development project, such as bug-tracking, task management,
@@ -220,7 +216,49 @@ each FusionForge project to have its own Subversion repository, and gives
 some control over it to the project's administrator.
 %files plugin-scmsvn -f plugin-scmsvn.rpmfiles
 %post plugin-scmsvn
-%{_datadir}/%{name}/post-install.d/plugin.sh scmsvn
+%{_datadir}/%{name}/post-install.d/common/plugin.sh scmsvn configure
+%preun plugin-scmsvn
+%{_datadir}/%{name}/post-install.d/common/plugin.sh scmsvn remove
+
+
+%package plugin-scmbzr
+Summary: collaborative development tool - Bazaar plugin
+Group: Development/Tools
+Requires: %{name}-web = %{version} bazaar mod_wsgi loggerhead
+%description plugin-scmbzr
+FusionForge provides many tools to aid collaboration in a
+development project, such as bug-tracking, task management,
+mailing-lists, SCM repository, forums, support request helper,
+web/FTP hosting, release management, etc. All these services are
+integrated into one web site and managed through a web interface.
+
+This plugin contains the Bazaar subsystem of FusionForge. It allows each
+FusionForge project to have its own Bazaar repository, and gives some control
+over it to the project's administrator.
+%files plugin-scmbzr -f plugin-scmbzr.rpmfiles
+%post plugin-scmbzr
+%{_datadir}/%{name}/post-install.d/common/plugin.sh scmbzr configure
+%preun plugin-scmbzr
+%{_datadir}/%{name}/post-install.d/common/plugin.sh scmbzr remove
+
+
+%package plugin-moinmoin
+Summary: collaborative development tool - Bazaar plugin
+Group: Development/Tools
+Requires: %{name}-web = %{version} moin mod_wsgi python-psycopg2
+%description plugin-moinmoin
+FusionForge provides many tools to aid collaboration in a
+development project, such as bug-tracking, task management,
+mailing-lists, SCM repository, forums, support request helper,
+web/FTP hosting, release management, etc. All these services are
+integrated into one web site and managed through a web interface.
+
+This plugin allows each project to embed MoinMoinWiki under a tab.
+%files plugin-moinmoin -f plugin-moinmoin.rpmfiles
+%post plugin-moinmoin
+%{_datadir}/%{name}/post-install.d/common/plugin.sh moinmoin configure
+%preun plugin-moinmoin
+%{_datadir}/%{name}/post-install.d/common/plugin.sh moinmoin remove
 
 
 %changelog

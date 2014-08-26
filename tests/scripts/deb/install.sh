@@ -1,15 +1,10 @@
 #! /bin/sh
-
+# Install FusionForge packages from build.sh + dependencies
 
 # Authors :
 #  Roland Mas
 #  Olivier BERGER <olivier.berger@it-sudparis.eu>
 #  Sylvain Beucler
-
-# This script will install the Debian packages to be tested which have been build inside the VM
-
-# Prerequisite : running 'build.sh' and its prerequisites
-
 
 #set -x
 set -e
@@ -33,7 +28,7 @@ fi
 
 # Install FusionForge packages
 apt-get update
-if dpkg -l fusionforge | grep -q ^ii ; then
+if dpkg-query -s fusionforge >/dev/null 2>&1; then
     # Already installed, upgrading
     UCF_FORCE_CONFFNEW=yes LANG=C DEBIAN_FRONTEND=noninteractive apt-get -y dist-upgrade
 else
@@ -42,15 +37,15 @@ else
 
     # Initial configuration
     forge_set_password admin myadmin
-    a2dissite default
-    invoke-rc.d apache2 restart
 
-    # Backup the DB, so that it can be restored for the test suite to run
+    # Backup the DB, so that it can be restored for the test suite
     su - postgres -c "pg_dumpall" > /root/dump
-    invoke-rc.d postgresql stop
-    if [ -d /var/lib/postgresql.backup ]; then
-        rm -fr /var/lib/postgresql.backup
+    service postgresql stop
+    pgdir=/var/lib/postgresql
+    if [ -e /etc/redhat-release ]; then pgdir=/var/lib/pgsql; fi
+    if [ -d $pgdir.backup ]; then
+        rm -fr $pgdir.backup
     fi
-    cp -a --reflink=auto /var/lib/postgresql /var/lib/postgresql.backup
-    invoke-rc.d postgresql start
+    cp -a --reflink=auto $pgdir $pgdir.backup
+    service postgresql start
 fi

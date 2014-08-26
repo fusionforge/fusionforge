@@ -20,7 +20,7 @@ set -e
 
 case "$1" in
     configure)
-        $(forge_get_config source_path)/post-install.d/common/common.sh
+        $(forge_get_config source_path)/post-install.d/common/plugin.sh scmbzr configure
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

@@ -83,11 +83,20 @@ remove_nsswitch()
     sed -i -e 's/#Comment by GForge install#//' /etc/nsswitch.conf
 }
 
+configure_nscd()
+{
+    if [ -e /etc/redhat-release ]; then
+	chkconfig nscd on
+	service nscd start
+    fi
+}
+
 # Main
 case "$1" in
     configure)
 	configure_libnss_pgsql
 	configure_nsswitch
+	configure_nscd
 	;;
     remove)
 	remove_nsswitch

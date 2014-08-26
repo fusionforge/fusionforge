@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 # Call all DB post-install scripts in order
 
 source_path=$(forge_get_config source_path)

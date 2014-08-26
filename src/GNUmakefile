@@ -83,9 +83,6 @@ install-plugin-%: plugins/% install-base-dirs
 	if [ -d plugins/$*/etc/plugins/$* ]; then \
 		$(CP_R) --no-clobber plugins/$*/etc/plugins/$* $(DESTDIR)$(config_path)/plugins/; \
 	fi
-	if [ -d plugins/$*/etc/httpd.conf.d ]; then \
-		$(CP_R) --no-clobber plugins/$*/etc/httpd.conf.d/* $(DESTDIR)$(config_path)/httpd.conf.d/; \
-	fi
 	if [ -d plugins/$*/etc/cron.d ]; then \
 		$(CP_R) --no-clobber plugins/$*/etc/cron.d/* $(DESTDIR)$(sysconfdir)/cron.d/; \
 	fi
@@ -112,7 +109,7 @@ PLUGINS_INSTALLED:=$(shell ls $(fgc_source_path)/plugins 2>/dev/null)
 PLUGINS_POST_INSTALL_TARGETS=$(addprefix post-install-plugin-,$(PLUGINS_INSTALLED))
 post-install-plugins: $(PLUGINS_POST_INSTALL_TARGETS)
 post-install-plugin-%: $(fgc_source_path)/plugins/%/
-	$(fgc_source_path)/post-install.d/common/plugin.sh $*
+	$(fgc_source_path)/post-install.d/common/plugin.sh $* configure
 
 
 ## TODO: make uninstall? make purge?

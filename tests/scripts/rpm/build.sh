@@ -7,7 +7,7 @@ yum install -y gettext tar bzip2 rpm-build  createrepo
 
 # Build package
 cd /usr/src/fusionforge/src/
-mkdir -p ../build/SOURCES/
+mkdir -p ../build/SOURCES/ ../build/SPECS/
 TAR_PREFIX=fusionforge-$(make version)
 make dist && mv $TAR_PREFIX.tar.bz2 ..
 ln -nfs ../../$TAR_PREFIX.tar.bz2 ../build/SOURCES/

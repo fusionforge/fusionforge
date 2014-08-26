@@ -23,9 +23,10 @@ include /usr/share/dpkg/default.mk
 
 override_dh_auto_install:
 	make install-common prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-common
-	make install-db     prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-db
+	make install-db     prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-db-local
 	make install-shell  prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-shell
 	make install-web    prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-web
 	make install-plugin-authhttpd prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-plugin-authhttpd
 	make install-plugin-mediawiki prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-plugin-mediawiki
 	make install-plugin-scmsvn    prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-plugin-scmsvn
+	make install-plugin-scmbzr    prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-plugin-scmbzr

@@ -7,6 +7,10 @@ set -e
 get_config
 
 export HOST=$1
+if [ -z "$HOST" ]; then
+    echo "Usage: $0 vm_hostname"
+    exit 1
+fi
 case $HOST in
     debian7.local)
 	export DIST=wheezy
@@ -37,11 +41,10 @@ ssh root@$HOST "apt-get update"
 # Transfer preseeding
 #cat tests/preseed/* | sed s/@FORGE_ADMIN_PASSWORD@/$FORGE_ADMIN_PASSWORD/ | ssh root@$HOST "LANG=C debconf-set-selections"
 
-ssh root@$HOST "apt-get install rsync"
+ssh root@$HOST "apt-get install -y rsync"
 rsync -av --delete src tests root@$HOST:/usr/src/fusionforge/
 ssh root@$HOST "/usr/src/fusionforge/tests/scripts/deb/build.sh"
 ssh root@$HOST "/usr/src/fusionforge/tests/scripts/deb/install.sh"
-ssh root@$HOST "apt-get install -y fusionforge-shell fusionforge-plugin-mediawiki"
 
 # Run tests
 retcode=0
@@ -50,6 +53,7 @@ ssh root@$HOST "/usr/src/fusionforge/tests/func/vncxstartsuite.sh /usr/src/fusio
 
 rsync -av root@$HOST:/var/log/ ~/reports/
 
-lxc-stop -k -n $HOST
-lxc-destroy -n $HOST
+#stop_vm_if_not_keeped -t $VM $@
+#sudo lxc-stop -k -n $HOST
+#sudo lxc-destroy -n $HOST
 exit $retcode

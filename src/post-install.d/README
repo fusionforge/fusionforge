@@ -1,0 +1,4 @@
+Post-install scripts.
+Can be called from 'make post-install', or by distro packages hooks.
+
+Scripts are "idempotent", aka can safely be run multiple times (Puppet slang)

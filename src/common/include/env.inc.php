@@ -100,6 +100,7 @@ $include_path = join(PATH_SEPARATOR,
 		$fusionforge_basedir.'/vendor',
 		'.',
 		'/usr/share/php',
+		'/usr/share/php/htmlpurifier',
 		'/usr/share/pear'
 	)
 );

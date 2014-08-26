@@ -134,7 +134,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 
 	protected function reload_nscd()
 	{
-		$this->runCommand("nscd -i all >/dev/null");
+		$this->runCommand("(nscd -i passwd && nscd -i group) >/dev/null");
 	}
 
 	protected function init() {

@@ -12,9 +12,9 @@ Vcs-Browser: https://fusionforge.org/scm/browser.php?group_id=9
 
 Package: fusionforge
 Architecture: all
-Depends: fusionforge-common (=${source:Version}), fusionforge-web, ${misc:Depends}
+Depends: fusionforge-common (=${source:Version}), fusionforge-db-local, fusionforge-web, ${misc:Depends}
 Recommends: fusionforge-shell, fusionforge-plugin-scmsvn
-Suggests: fusionforge-plugin-mediawiki
+Suggests: fusionforge-plugin-mediawiki, fusionforge-plugin-moinmoin
 Description: FusionForge collaborative development tool - standard metapackage
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
@@ -28,7 +28,7 @@ Description: FusionForge collaborative development tool - standard metapackage
 
 Package: fusionforge-common
 Architecture: all
-Depends: php5-cli, php5-pgsql, php-htmlpurifier, perl, ${misc:Depends}
+Depends: php5-cli, php5-pgsql, php-htmlpurifier, cron, perl, ${misc:Depends}
 Description: collaborative development tool - shared files
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
@@ -40,7 +40,7 @@ Description: collaborative development tool - shared files
  subpackages.
 
 
-Package: fusionforge-db
+Package: fusionforge-db-local
 Architecture: all
 Depends: fusionforge-common (=${source:Version}), postgresql, php5-cli, ${misc:Depends}
 Description: collaborative development tool - database (using PostgreSQL)
@@ -102,7 +102,7 @@ Description: collaborative development tool - shell accounts (using PostgreSQL)
 
 Package: fusionforge-plugin-authhttpd
 Architecture: all
-Depends: fusionforge-web, ${misc:Depends}
+Depends: fusionforge-web (=${source:Version}), ${misc:Depends}
 Description: collaborative development tool - HTTPD authentication plugin
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
@@ -115,22 +115,9 @@ Description: collaborative development tool - HTTPD authentication plugin
  FusionForge, for instance where Kerberos is used.
 
 
-Package: fusionforge-plugin-mediawiki
-Architecture: all
-Depends: fusionforge-web, mediawiki (>= 1:1.19.1-2~exp2), php5-cli, ${misc:Depends}
-Description: collaborative development tool - Mediawiki plugin
- FusionForge provides many tools to aid collaboration in a
- development project, such as bug-tracking, task management,
- mailing-lists, SCM repository, forums, support request helper,
- web/FTP hosting, release management, etc. All these services are
- integrated into one web site and managed through a web interface.
- .
- This plugin allows each project to embed Mediawiki under a tab.
-
-
 Package: fusionforge-plugin-scmsvn
 Architecture: all
-Depends: fusionforge-web, subversion, subversion-tools, php5-cli, openbsd-inetd | inet-superserver, update-inetd, ${misc:Depends}
+Depends: fusionforge-web (=${source:Version}), subversion, subversion-tools, php5-cli, openbsd-inetd | inet-superserver, update-inetd, ${misc:Depends}
 Description: collaborative development tool - Subversion plugin
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
@@ -141,3 +128,44 @@ Description: collaborative development tool - Subversion plugin
  This plugin contains the Subversion subsystem of FusionForge. It allows
  each FusionForge project to have its own Subversion repository, and gives
  some control over it to the project's administrator.
+
+
+Package: fusionforge-plugin-scmbzr
+Architecture: all
+Depends: fusionforge-web (=${source:Version}), bzr, php5-cli, libapache2-mod-wsgi, loggerhead (>= 1.19~bzr477~), python-pastedeploy, ${misc:Depends}
+Description: collaborative development tool - Bazaar plugin
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This plugin contains the Bazaar subsystem of FusionForge. It allows each
+ FusionForge project to have its own Bazaar repository, and gives some control
+ over it to the project's administrator.
+
+
+Package: fusionforge-plugin-mediawiki
+Architecture: all
+Depends: fusionforge-web (=${source:Version}), mediawiki (>= 1:1.19.1-2~exp2), php5-cli, ${misc:Depends}
+Description: collaborative development tool - Mediawiki plugin
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This plugin allows each project to embed Mediawiki under a tab.
+
+
+Package: fusionforge-plugin-moinmoin
+Architecture: all
+Depends: fusionforge-web (=${source:Version}), python-moinmoin, python-psycopg2, libapache2-mod-wsgi, ${misc:Depends}
+Description: collaborative development tool - MoinMoinWiki plugin
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This plugin allows each project to embed MoinMoinWiki under a tab.

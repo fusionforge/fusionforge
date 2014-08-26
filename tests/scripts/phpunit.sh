@@ -1,6 +1,15 @@
 #! /bin/sh
 
-INSTALL_METHOD=$INSTALL_METHOD INSTALL_OS=$INSTALL_OS 
+TEST_ENV="$1"
+# Test arg
+if [ -z "$TEST_ENV" ]
+then
+	echo "Usage: $0 script"
+	exit 1
+fi
+
+INSTALL_METHOD=${TEST_ENV%/*}
+INSTALL_OS=${TEST_ENV#*/}
 
 if [ -z "$INSTALL_METHOD" ] || [ -z "$INSTALL_OS" ] ; then
     echo INSTALL_METHOD and INSTALL_OS required
@@ -114,10 +123,11 @@ retcode=0
 cd tests
 phpunit --verbose --debug --stop-on-failure --log-junit $SELENIUM_RC_DIR/phpunit-selenium.xml $@ Testsuite.php || retcode=$?
 cd ..
+kill $pid
 # on debian
 killall -9 firefox-bin
 # on centos
 killall -9 firefox
 # kill java stuffs
-killall -QUIT java
+killall -9 java
 exit $retcode
