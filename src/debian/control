@@ -13,7 +13,7 @@ Vcs-Browser: https://fusionforge.org/scm/browser.php?group_id=9
 Package: fusionforge
 Architecture: all
 Depends: fusionforge-common (=${source:Version}), fusionforge-web, ${misc:Depends}
-Recommends: fusionforge-shell
+Recommends: fusionforge-shell, fusionforge-plugin-scmsvn
 Suggests: fusionforge-plugin-mediawiki
 Description: FusionForge collaborative development tool - standard metapackage
  FusionForge provides many tools to aid collaboration in a
@@ -118,7 +118,7 @@ Description: collaborative development tool - HTTPD authentication plugin
 Package: fusionforge-plugin-mediawiki
 Architecture: all
 Depends: fusionforge-web, mediawiki (>= 1:1.19.1-2~exp2), php5-cli, ${misc:Depends}
-Description: Mediawiki plugin for FusionForge
+Description: collaborative development tool - Mediawiki plugin
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
  mailing-lists, SCM repository, forums, support request helper,
@@ -126,3 +126,18 @@ Description: Mediawiki plugin for FusionForge
  integrated into one web site and managed through a web interface.
  .
  This plugin allows each project to embed Mediawiki under a tab.
+
+
+Package: fusionforge-plugin-scmsvn
+Architecture: all
+Depends: fusionforge-web, subversion, subversion-tools, php5-cli, openbsd-inetd | inet-superserver, update-inetd, ${misc:Depends}
+Description: collaborative development tool - Subversion plugin
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This plugin contains the Subversion subsystem of FusionForge. It allows
+ each FusionForge project to have its own Subversion repository, and gives
+ some control over it to the project's administrator.

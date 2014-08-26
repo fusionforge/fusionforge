@@ -57,6 +57,7 @@ install_listfiles shell
 install_listfiles web
 install_listfiles plugin-authhttpd
 install_listfiles plugin-mediawiki
+install_listfiles plugin-scmsvn
 
 
 
@@ -187,7 +188,7 @@ FusionForge, for instance where Kerberos is used.
 
 
 %package plugin-mediawiki
-Summary: Mediawiki plugin for FusionForge
+Summary: collaborative development tool - Mediawiki plugin
 Group: Development/Tools
 Requires: %{name}-web >= %{version} mediawiki
 %description plugin-mediawiki
@@ -201,6 +202,25 @@ This plugin allows each project to embed Mediawiki under a tab.
 %files plugin-mediawiki -f plugin-mediawiki.rpmfiles
 %post plugin-mediawiki
 %{_datadir}/%{name}/post-install.d/plugin.sh mediawiki
+
+
+%package plugin-scmsvn
+Summary: collaborative development tool - Subversion plugin
+Group: Development/Tools
+Requires: %{name}-web >= %{version} subversion
+%description plugin-scmsvn
+FusionForge provides many tools to aid collaboration in a
+development project, such as bug-tracking, task management,
+mailing-lists, SCM repository, forums, support request helper,
+web/FTP hosting, release management, etc. All these services are
+integrated into one web site and managed through a web interface.
+
+This plugin contains the Subversion subsystem of FusionForge. It allows
+each FusionForge project to have its own Subversion repository, and gives
+some control over it to the project's administrator.
+%files plugin-scmsvn -f plugin-scmsvn.rpmfiles
+%post plugin-scmsvn
+%{_datadir}/%{name}/post-install.d/plugin.sh scmsvn
 
 
 %changelog
