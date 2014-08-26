@@ -63,7 +63,10 @@ fi
 if [ -x /usr/sbin/a2dissite ]; then
     a2dissite default
 fi
-
+# Prevent double NameVirtualHost warning
+if [ -e /etc/apache2/ports.conf ]; then
+    sed -i 's/^NameVirtualHost \*:80/#&/' /etc/apache2/ports.conf
+fi
 # Start web server on boot
 if [ -e /etc/redhat-release ]; then
     chkconfig httpd on
