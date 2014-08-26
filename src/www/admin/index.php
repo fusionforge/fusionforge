@@ -147,7 +147,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 		echo util_make_link('/admin/grouplist.php?group_name_search='.$abc_array[$i], $abc_array[$i]).'|';
 	}
 	echo html_e('br');
-	echo $HTML->openForm(array('name'= > 'gpsrch', 'action' => util_make_uri('/admin/search.php'), 'method' => 'post'));
+	echo $HTML->openForm(array('name'=> 'gpsrch', 'action' => util_make_uri('/admin/search.php'), 'method' => 'post'));
 		echo _('Search <em>(groupid, project Unix name, project full name)</em>'); ?>:
 		<input type="text" name="search" />
 		<input type="hidden" name="substr" value="1" />
