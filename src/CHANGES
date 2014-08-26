@@ -9,6 +9,7 @@ Fusionforge-5.3.2:
 * News: don't send requests for frontpage display for private projects (Inria)
 * Docman: fix download count [#702] (TrivialDev)
 * Tracker: fix translation support [#688] (TrivialDev)
+* Tracker: fix custom status extrafield not updateable using mass update [#712] (TrivialDev)
 * Mailing lists: handle quotes and accents in description (Inria)
 * Stats: handle bad encoding when gathering Git stats, remove spurious warning when SVN repository isn't created yet (Inria)
 * Plugin mediawiki: fix paths in import/export scripts (Inria)
