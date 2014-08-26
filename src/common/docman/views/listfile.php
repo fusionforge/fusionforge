@@ -349,7 +349,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 	echo $HTML->listTableBottom();
 	echo html_ao('p');
 	echo html_ao('span', array('id' => 'massactionactive', 'class' => 'hide'));
-	echo html_e('span', array('id' => 'docman-massactionmessage', 'title' => _('Actions availables for selected documents, you need to check at least one document to get actions')), _('Mass actions for selected documents:'), false);
+	echo html_e('span', array('id' => 'docman-massactionmessage', 'title' => _('Actions availables for selected documents, you need to check at least one document to get actions')), _('Mass actions for selected documents')._(':'), false);
 	if (forge_check_perm('docman', $ndg->Group->getID(), 'approve')) {
 		echo util_make_link('#', $HTML->getDeletePic('', _('Move to trash')), array('onclick' => 'window.location.href=\''.util_make_uri($redirecturl.'&action=trashfile&fileid=\'+controllerListFile.buildUrlByCheckbox("active")'), 'title' => _('Move to trash')), true);
 		if (session_loggedin()) {
