@@ -638,14 +638,11 @@ class SVNPlugin extends SCMPlugin {
 					$result['group_id'] = $group_id;
 					$result['ref_id'] = 'viewvc.php/?root='.$project->getUnixName();
 					$result['description'] = htmlspecialchars($message).' (r'.$revisions[$i].')';
-					$result['user_name'] = $users[$i];
 					$userObject = user_get_object_by_name($users[$i]);
 					if (is_a($userObject, 'GFUser')) {
-						$result['realname'] = $userObject->getFirstName().' '.$userObject->getLastName();
-						$result['user_id'] = $userObject->getId();
+						$result['realname'] = util_display_user($userObject->getUnixName(), $userObject->getID(), $userObject->getRealName());
 					} else {
 						$result['realname'] = '';
-						$result['user_id'] = '';
 					}
 					$result['activity_date'] = $times[$i];
 					$result['subref_id'] = '&view=rev&revision='.$revisions[$i];

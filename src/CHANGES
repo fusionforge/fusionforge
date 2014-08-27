@@ -14,6 +14,7 @@ Fusionforge-5.3.2:
 * Stats: handle bad encoding when gathering Git stats, remove spurious warning when SVN repository isn't created yet (Inria)
 * Plugin mediawiki: fix paths in import/export scripts (Inria)
 * Plugin fckeditor: dropped in favor of ckeditor
+* Plugin SCM SVN: fix sql error in activity tab on init log [#715] (TrivialDev)
 
 Fusionforge-5.3.1:
 * Docman: Basic Webdav write mkcol support (TrivialDev)
