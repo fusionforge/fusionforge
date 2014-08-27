@@ -16,6 +16,8 @@
 # php-pear-CAS  # epel
 # php-simplepie # epel or common/rss/simplepie.inc
 
+# postfix: needs to be recompiled, el6 doesn't have pgsql support enabled (conditional in .spec)
+
 # Fedora/RHEL/CentOS version:
 os_version=$(rpm -q --qf "%{VERSION}" $(rpm -q --whatprovides redhat-release))
 
@@ -78,6 +80,8 @@ else
     yum remove -y $DEPS
     yum install -y ~/rpmbuild/RPMS/noarch/php-htmlpurifier-htmlpurifier-*.noarch.rpm
 fi
+
+# TODO: postfix: rebuild from RHEL/CentOS sources with pgsql enabled
 
 # mediawiki (provided by mediawiki119): EPEL
 

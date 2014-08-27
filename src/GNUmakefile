@@ -51,6 +51,7 @@ install-common: install-config install-plugin-authbuiltin
 	ln -nfs $(pkgdatadir)/bin/forge_set_password $(DESTDIR)$(prefix)/bin/
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(log_path)/
 
+install-db-local: install-db
 install-db: install-base-dirs
 	$(CP_R) db $(DESTDIR)$(pkgdatadir)/
 	$(CP_R) cronjobs/db  $(DESTDIR)$(pkgdatadir)/cronjobs/
@@ -67,6 +68,15 @@ install-web: install-base-dirs
 install-shell: install-base-dirs
 	$(CP_R) cronjobs/shell  $(DESTDIR)$(pkgdatadir)/cronjobs/
 	$(CP_R) post-install.d/shell  $(DESTDIR)$(pkgdatadir)/post-install.d/
+
+install-mta-postfix: install-base-dirs
+	$(CP_R) post-install.d/mta-postfix  $(DESTDIR)$(pkgdatadir)/post-install.d/
+
+install-mta-exim4: install-base-dirs
+	$(CP_R) post-install.d/mta-exim4  $(DESTDIR)$(pkgdatadir)/post-install.d/
+
+install-lists: install-base-dirs
+	$(CP_R) cronjobs/lists  $(DESTDIR)$(pkgdatadir)/cronjobs/
 
 install-core: install-base-dirs install-common install-web install-db
 

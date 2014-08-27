@@ -22,11 +22,16 @@ include /usr/share/dpkg/default.mk
 	dh $@
 
 override_dh_auto_install:
-	make install-common prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-common
-	make install-db     prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-db-local
-	make install-shell  prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-shell
-	make install-web    prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-web
-	make install-plugin-authhttpd prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-plugin-authhttpd
-	make install-plugin-mediawiki prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-plugin-mediawiki
+	make install-common      prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-common
+	make install-db-local    prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-db-local
+	make install-web         prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-web
+	make install-shell       prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-shell
+	make install-mta-postfix prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-mta-postfix
+	make install-mta-exim4   prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-mta-exim4
+	make install-plugin-scmgit    prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-plugin-scmgit
 	make install-plugin-scmsvn    prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-plugin-scmsvn
 	make install-plugin-scmbzr    prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-plugin-scmbzr
+	make install-plugin-authhttpd   prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-plugin-authhttpd
+	make install-plugin-blocks      prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-plugin-blocks
+	make install-plugin-mediawiki   prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-plugin-mediawiki
+	make install-plugin-moinmoin    prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-plugin-moinmoin

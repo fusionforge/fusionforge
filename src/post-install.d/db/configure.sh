@@ -22,15 +22,15 @@ fi
 
 # Configure connection
 # Preprend configuration block
-if ! grep -q '^### BEGIN GFORGE BLOCK' $pg_hba; then
+if ! grep -q '^### BEGIN FUSIONFORGE BLOCK' $pg_hba; then
     sed -i -e '1ecat' $pg_hba <<-EOF
-	### BEGIN GFORGE BLOCK -- DO NOT EDIT
-	### END GFORGE BLOCK -- DO NOT EDIT
+	### BEGIN FUSIONFORGE BLOCK -- DO NOT EDIT
+	### END FUSIONFORGE BLOCK -- DO NOT EDIT
 	EOF
 fi
 # Replace configuration block
-sed -i -e '/^### BEGIN GFORGE BLOCK/,/^### END GFORGE BLOCK/ { ' -e 'ecat' -e 'd }' $pg_hba <<EOF
-### BEGIN GFORGE BLOCK -- DO NOT EDIT
+sed -i -e '/^### BEGIN FUSIONFORGE BLOCK/,/^### END FUSIONFORGE BLOCK/ { ' -e 'ecat' -e 'd }' $pg_hba <<EOF
+### BEGIN FUSIONFORGE BLOCK -- DO NOT EDIT
 # user which is used by libnss to access the DB (see /etc/nss-pgsql.conf)
 local $database_name ${database_user}_nss trust
 local $database_name list ident
@@ -38,7 +38,7 @@ local $database_name ${database_user}_mta md5
 # multi-host configuration
 host  $database_name ${database_user}_nss 0.0.0.0/0 trust
 host  $database_name all 0.0.0.0/0 md5
-### END GFORGE BLOCK -- DO NOT EDIT
+### END FUSIONFORGE BLOCK -- DO NOT EDIT
 EOF
 
 # Multi-host connection

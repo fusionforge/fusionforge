@@ -20,7 +20,10 @@ if ! dpkg-query -s selenium >/dev/null 2>&1 ; then
 fi
 
 # Ensure tested components are installed
-UCF_FORCE_CONFFNEW=yes apt-get install -y fusionforge fusionforge-shell fusionforge-plugin-scmsvn fusionforge-plugin-scmbzr fusionforge-plugin-mediawiki fusionforge-plugin-moinmoin
+UCF_FORCE_CONFFNEW=yes apt-get install -y fusionforge fusionforge-shell \
+  fusionforge-plugin-scmgit fusionforge-plugin-scmsvn fusionforge-plugin-scmbzr \
+  fusionforge-plugin-mediawiki fusionforge-plugin-moinmoin \
+  fusionforge-plugin-blocks
 
 service cron stop
 

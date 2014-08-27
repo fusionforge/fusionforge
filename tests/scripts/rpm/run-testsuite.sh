@@ -15,8 +15,10 @@ if ! rpm -q selenium >/dev/null ; then
 fi
 
 # Ensure tested components are installed
-yum install -y fusionforge fusionforge-shell fusionforge-plugin-scmsvn fusionforge-plugin-mediawiki
-# fusionforge-plugin-online_help fusionforge-plugin-extratabs fusionforge-plugin-authldap fusionforge-plugin-scmgit fusionforge-plugin-blocks
+yum install -y fusionforge fusionforge-shell \
+  fusionforge-plugin-scmgit fusionforge-plugin-scmsvn \
+  fusionforge-plugin-mediawiki \
+  fusionforge-plugin-blocks fusionforge-plugin-online_help
 
 service crond stop
 
