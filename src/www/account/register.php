@@ -140,9 +140,8 @@ if (!isset($ccode) || empty($ccode) || !preg_match('/^[a-zA-Z]{2}$/', $ccode)) {
 }
 
 site_header(array('title'=>_('User Account Registration')));
+echo $HTML->openForm(array('action' => util_make_uri('/account/register.php'), 'method' => 'post'));
 ?>
-
-<form action="<?php echo util_make_url('/account/register.php'); ?>" method="post">
 <input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
 <p>
 <?php
@@ -277,7 +276,9 @@ if($toDisplay != "") {
 <p>
 <input type="submit" name="submit" value="<?php echo _('Register'); ?>" />
 </p>
-</form>
+<?php
+echo $HTML->closeForm();
+?>
 <p><a href="pending-resend.php"><?php echo _('Resend confirmation email to a pending account'); ?></a></p>
 
 <?php site_footer();

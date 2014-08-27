@@ -99,7 +99,6 @@ add_config core use_manual_uploads >> $tmp
 add_config core use_news >> $tmp
 add_config core use_people >> $tmp
 add_config core use_pm >> $tmp
-add_config core use_project_database >> $tmp
 add_config core use_project_multimedia >> $tmp
 add_config core use_project_vhost >> $tmp
 add_config core use_ratings >> $tmp

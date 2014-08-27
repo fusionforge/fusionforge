@@ -561,7 +561,7 @@ class PageFormatter_pdf extends PageFormatter
         $pdf = new PDF();
         $pdf->SetTitle($pagename);
         $pdf->SetAuthor($this->_page->get('author'));
-        $pdf->SetCreator(WikiURL($pagename, false, 1));
+        $pdf->SetCreator(WikiURL($pagename, array(), 1));
         $pdf->AliasNbPages();
         $pdf->AddPage();
         //TODO: define fonts

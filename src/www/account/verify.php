@@ -7,7 +7,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010, Franck Villaume - Capgemini
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -27,6 +27,8 @@
 
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
+
+global $HTML;
 
 $confirm_hash = getStringFromRequest('confirm_hash');
 
@@ -66,33 +68,18 @@ if (getStringFromRequest('submit')) {
 
 $HTML->header(array('title'=>_('Verify')));
 
-echo '<p>' . _('In order to complete your registration, login now. Your account will then be activated for normal logins.') . '</p>';
-
-?>
-
-<form action="<?php echo util_make_url('/account/verify.php?confirm_hash='.$confirm_hash); ?>" method="post">
-
-<p><?php
+echo html_e('p', array(), _('In order to complete your registration, login now. Your account will then be activated for normal logins.'));
+echo $HTML->openForm(array('action' => util_make_uri('/account/verify.php?confirm_hash='.$confirm_hash), 'method' => 'post'));
 if (forge_get_config('require_unique_email')) {
-	echo _('Login name or email address')._(':');
+	$content = _('Login name or email address')._(':');
 } else {
-	echo _('Login Name')._(':');
+	$content = _('Login name')._(':');
 }
-?>
-<br />
-<label for="loginname">
-	<input id="loginname" type="text" name="loginname"/>
-</label>
-</p>
-<p><?php echo _('Password')._(':'); ?>
-<br />
-<label for="passwd">
-	<input id="passwd" type="password" name="passwd"/>
-</label>
-</p>
-<input type="hidden" name="confirm_hash" value="<?php print htmlentities($confirm_hash); ?>" />
-<p><input type="submit" name="submit" value="<?php echo _('Login'); ?>" /></p>
-</form>
-
-<?php
+echo html_e('p', array(), $content.html_e('br').html_e('label', array('for' => 'loginname'),
+							html_e('input', array('id' => 'loginname', 'type' => 'text', 'name' => 'loginname'))));
+echo html_e('p', array(), _('Password')._(':').html_e('br').html_e('label', array('for' => 'passwd'),
+							html_e('input', array('id' => 'passwd', 'type' => 'password', 'name' => 'passwd'))));
+echo html_e('input', array('type' => 'hidden', 'name' => 'confirm_hash', 'value' => htmlentities($confirm_hash)));
+echo html_e('p', array(), html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Login'))));
+echo $HTML->closeForm();
 $HTML->footer();

@@ -393,14 +393,14 @@ class WikiPlugin_WikiTranslation
                 if (in_array($from_lang, array('en', 'fr'))) {
                     $url = "http://translate.google.com/translate";
                     $url .= "?langpair=" . urlencode($from_lang . "|" . $to_lang);
-                    $url .= "&u=" . urlencode(WikiURL($pagename, false, true));
+                    $url .= "&u=" . urlencode(WikiURL($pagename, array(), true));
                 }
                 // redirect or transclude?
                 if ($url) {
                     return $request->redirect($url);
                 }
                 return HTML(fmt("TODO: Google can only translate from english and french. Find a translation service for %s to language %s",
-                    WikiURL($pagename, false, true),
+                    WikiURL($pagename, array(), true),
                     $to_lang));
             } else {
                 return $this->error(fmt("%s is empty.", $pagename));

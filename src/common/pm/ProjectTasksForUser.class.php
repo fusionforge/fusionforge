@@ -69,10 +69,10 @@ class ProjectTasksForUser extends Error {
 	}
 
 	/**
-	* getTasksByGroupProjectName - Gets a list of tasks by group project name
-	*
-	* @return	array	An array of ProjectTask objects
-	*/
+	 * getTasksByGroupProjectName - Gets a list of tasks by group project name
+	 *
+	 * @return	array	An array of ProjectTask objects
+	 */
 	function &getTasksByGroupProjectName () {
 		return $this->getTasksFromSQLwithParams ('SELECT ptv.*,g.group_name,pgl.project_name
 			FROM project_task_vw ptv,

@@ -58,7 +58,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 	}
 ?>
 	<br />
-		<form name="usersrch" action="search.php" method="post">
+		<form name="usersrch" action="/admin/search.php" method="post">
 		<?php echo _('Search <em>(userid, username, realname, email)</em>'); ?>:
 		<input type="text" name="search" />
 		<input type="hidden" name="substr" value="1" />
@@ -93,17 +93,17 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 	<ul>
 	<li><?php
 
-		echo '<form action="globalroleedit.php" method="post"><p>';
+		echo $HTML->openForm(array('action' => util_make_uri('/admin/globalroleedit.php'), 'method' => 'post')).'<p>';
 		echo global_role_box('role_id');
-		echo '<input type="submit" name="edit" value="'._("Edit Role").'" /></p></form>';
+		echo '<input type="submit" name="edit" value="'._("Edit Role").'" /></p>'.$HTML->closeForm();
 ?>
 </li>
 <li>
 <?php
 
-		echo '<form action="globalroleedit.php" method="post"><p>';
+		echo $HTML->openForm(array('action' => util_make_uri('/admin/globalroleedit.php'), 'method' => 'post')).'<p>';
 		echo '<input type="text" name="role_name" size="10" value="" required="required" />';
-		echo '<input type="submit" name="add" value="'._("Create Role").'" /></p></form>';
+		echo '<input type="submit" name="add" value="'._("Create Role").'" /></p>'.$HTML->closeForm();
 	?></li>
 </ul>
 </div>
@@ -146,19 +146,18 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 	for ($i=0; $i < count($abc_array); $i++) {
 		echo util_make_link('/admin/grouplist.php?group_name_search='.$abc_array[$i], $abc_array[$i]).'|';
 	}
-?>
-	<br />
-		<form name="gpsrch" action="search.php" method="post">
-		<?php echo _('Search <em>(groupid, project Unix name, project full name)</em>'); ?>:
+	echo html_e('br');
+	echo $HTML->openForm(array('name'=> 'gpsrch', 'action' => util_make_uri('/admin/search.php'), 'method' => 'post'));
+		echo _('Search <em>(groupid, project Unix name, project full name)</em>'); ?>:
 		<input type="text" name="search" />
 		<input type="hidden" name="substr" value="1" />
 		<input type="hidden" name="groupsearch" value="1" />
 		<input type="submit" value="<?php echo _('Search'); ?>" />
-		</form>
+		<?php echo $HTML->closeForm(); ?>
 	</li>
 	<li><?php echo util_make_link('/register/',_('Register New Project')); ?></li>
 	<li><?php echo util_make_link('/admin/approve-pending.php', _('Pending projects (new project approval)')); ?></li>
-	<li><form name="projectsearch" action="search.php">
+	<li><form name="projectsearch" action="/admin/search.php">
 	<?php echo _('Projects with status'); ?>
 	<select name="status">
 			<option value="A"><?php echo _('Active (A)'); ?></option>
@@ -227,14 +226,10 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 	<?php plugin_hook("site_admin_option_hook", array()); ?>
 </ul>
 
-<?php if(forge_get_config('use_project_database') || forge_get_config('use_project_vhost') || forge_get_config('use_people')) { ?>
+<?php if(forge_get_config('use_project_vhost') || forge_get_config('use_people')) { ?>
 <ul>
 	<?php if(forge_get_config('use_project_vhost')) { ?>
 		<li><?php echo util_make_link('/admin/vhost.php', _('Virtual Host Admin Tool')); ?></li>
-	<?php
-	}
-	if(forge_get_config('use_project_database')) { ?>
-		<li><?php echo util_make_link('/admin/database.php', _('Project Database Administration')); ?></li>
 	<?php }
 	if(forge_get_config('use_people')) { ?>
 		<li><?php echo util_make_link('/people/admin/', _('Job / Categories Administration')); ?></li>

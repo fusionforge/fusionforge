@@ -177,7 +177,7 @@ class ArtifactMessage extends Error {
 	 * @return	int	adddate.
 	 */
 	function getAddDate() {
-		return $this->data_array['addate'];
+		return $this->data_array['adddate'];
 	}
 
 	/**

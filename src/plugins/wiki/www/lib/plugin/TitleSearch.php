@@ -103,7 +103,7 @@ class WikiPlugin_TitleSearch
 
         if ($args['auto_redirect'] && ($pagelist->getTotal() == 1)) {
             $page = $pagelist->first();
-            $request->redirect(WikiURL($page->getName(), false, 'absurl'), false);
+            $request->redirect(WikiURL($page->getName(), array(), 'absurl'), false);
         }
 
         return $pagelist;

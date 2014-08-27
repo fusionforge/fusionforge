@@ -3,7 +3,7 @@
  * Change user's email page
  *
  * Copyright 1999-2001 (c) VA Linux Systems
- * Copyright 2010 (c) Franck Villaume
+ * Copyright 2010, 2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -23,6 +23,8 @@
 
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
+
+global $HTML;
 
 session_require_login () ;
 
@@ -66,34 +68,23 @@ if (getStringFromRequest('submit')) {
 
 	site_user_header(array('title'=>_('Email Change Confirmation')));
 
-	print '<p>' . _('An email has been sent to the new address. Follow the instructions in the email to complete the email change.') . '</p>';
-    printf ('<a href="%s">[ Home ]</a>', util_make_url ('/'));
-
-	site_user_footer();
-	exit();
+	echo html_e('p', array(), _('An email has been sent to the new address. Follow the instructions in the email to complete the email change.'));
+	echo util_make_link('/', '[ '._('Home').' ]');
+} else {
+	//show form
+	site_user_header(array('title'=>_('Email change')));
+	echo html_e('p', array(), _('Changing your email address will require confirmation from your new email address, so that we can ensure we have a good email address on file.'));
+	echo html_e('p', array(), _('We need to maintain an accurate email address for each user due to the level of access we grant via this account. If we need to reach a user for issues arriving from a shell or project account, it is important that we be able to do so.'));
+	echo html_e('p', array(), _('Submitting the form below will mail a confirmation URL to the new email address. Visiting this link will complete the email change.'));
+	echo $HTML->openForm(array('action' => util_make_uri('/account/change_email.php'), 'method' => 'post'));
+	echo html_e('p', array(), html_e('input', array('type' => 'hidden', 'name' => 'form_key', 'value' => form_generate_key())).
+				_('New Email Address')._(':').utils_requiredField().
+				html_e('label', array('for' => 'newemail'), html_e('input', array('id' => 'newemail', 'required' => 'required', 'type' => 'email', 'name' => 'newemail', 'maxlength' => 255))).
+				html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Send Confirmation to New Address'))));
+	echo $HTML->closeForm();
+	echo $HTML->addRequiredFieldsInfoBox();
+	echo html_e('p', array(), util_make_link('/', _('Return')));
 }
-
-site_user_header(array('title'=>_('Email change')));
-
-echo '<p>' . _('Changing your email address will require confirmation from your new email address, so that we can ensure we have a good email address on file.') . '</p>';
-echo '<p>' . _('We need to maintain an accurate email address for each user due to the level of access we grant via this account. If we need to reach a user for issues arriving from a shell or project account, it is important that we be able to do so.') . '</p>';
-echo '<p>' . _('Submitting the form below will mail a confirmation URL to the new email address. Visiting this link will complete the email change.') . '</p>';
-?>
-
-<form action="<?php echo util_make_url('/account/change_email.php'); ?>" method="post">
-<p>
-<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
-<?php echo _('New Email Address')._(':'); ?>
-    <label for="newemail">
-        <input id="newemail" required="required" type="email" name="newemail" maxlength="255"/>
-    </label>
-    <input type="submit" name="submit" value="<?php echo _('Send Confirmation to New Address'); ?>" />
-</p>
-</form>
-
-<p><?php echo util_make_link('/', _('Return')); ?></p>
-
-<?php
 site_user_footer();
 
 // Local Variables:

@@ -4,6 +4,7 @@
  *
  * Copyright 2002, GForge, LLC
  * Copyright 2009, Roland Mas
+ * Copyright 2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -34,10 +35,10 @@ class ArtifactsForUser extends Error {
 	var $Artifact;
 
 	/**
-	* __construct - Creates a new ArtifactsForUser object
-	*
-	* @param	object	$user	the User object for which to collect artifacts
-	*/
+	 * __construct - Creates a new ArtifactsForUser object
+	 *
+	 * @param	object	$user	the User object for which to collect artifacts
+	 */
 	function __construct(&$user) {
 		$this->User =& $user;
 	}
@@ -70,30 +71,44 @@ class ArtifactsForUser extends Error {
 	}
 
 	/**
-	* getAssignedArtifactsByGroup - Get the users's assigned artifacts
-	* @return	Artifact[]	The array of Artifacts
-	*/
-	function &getAssignedArtifactsByGroup() {
-		return $this->getArtifactsFromSQLwithParams('SELECT * FROM artifact_vw av WHERE av.assigned_to=$1 AND av.status_id=1 ORDER BY av.group_artifact_id, av.artifact_id DESC',
-							    array($this->User->getID())) ;
+	 * getAssignedArtifactsByGroup - Get the users's assigned artifacts
+	 *
+	 * @param	string		$order	Optional complementary column order
+	 * @param	string		$sort	Default is DESC
+	 * @return	Artifact[]	The array of Artifacts
+	 */
+	function &getAssignedArtifactsByGroup($order = NULL, $sort = 'DESC') {
+		$sqlstring = 'SELECT * FROM artifact_vw av WHERE av.assigned_to=$1 AND av.status_id=1 ORDER BY av.group_artifact_id, av.artifact_id';
+		if ($order) {
+			$sqlstring .= ', '.$order;
+		}
+		$sqlstring .= ' '.$sort;
+
+		return $this->getArtifactsFromSQLwithParams($sqlstring, array($this->User->getID()));
 
 	}
 
 	/**
-	* getSubmittedArtifactsByGroup
-	*
-	* @return	Artifact[]	The array of Artifacts
-	*/
-	function &getSubmittedArtifactsByGroup() {
-		return $this->getArtifactsFromSQLwithParams('SELECT * FROM artifact_vw av WHERE av.submitted_by=$1 AND av.status_id=1 ORDER BY av.group_artifact_id, av.artifact_id DESC',
-							    array($this->User->getID())) ;
+	 * getSubmittedArtifactsByGroup
+	 *
+	 * @param	string		$order	Optional complementary column order
+	 * @param	string		$sort	Default is DESC
+	 * @return	Artifact[]	The array of Artifacts
+	 */
+	function &getSubmittedArtifactsByGroup($order = NULL, $sort = 'DESC') {
+		$sqlstring = 'SELECT * FROM artifact_vw av WHERE av.submitted_by=$1 AND av.status_id=1 ORDER BY av.group_artifact_id, av.artifact_id';
+		if ($order) {
+			$sqlstring .= ', '.$order;
+		}
+		$sqlstring .= ' '.$sort;
+		return $this->getArtifactsFromSQLwithParams($sqlstring, array($this->User->getID()));
 	}
 
 	/**
-	* getMonitoredArtifacts
-	*
-	* @return	Artifact[]	The array of Artifacts
-	*/
+	 * getMonitoredArtifacts
+	 *
+	 * @return	Artifact[]	The array of Artifacts
+	 */
 	function & getMonitoredArtifacts() {
 		$artifacts = array();
 

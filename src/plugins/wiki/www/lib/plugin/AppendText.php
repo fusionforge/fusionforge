@@ -78,7 +78,7 @@ class WikiPlugin_AppendText
         if (empty($args['s'])) {
             if ($request->isPost()) {
                 if ($pagename != _("AppendText"))
-                    return HTML($request->redirect(WikiURL($pagename, false, 'absurl'), false));
+                    return HTML($request->redirect(WikiURL($pagename, array(), 'absurl'), false));
             }
             return HTML();
         }
@@ -133,11 +133,11 @@ class WikiPlugin_AppendText
             // TODO: Just invalidate the cache, if AppendText didn't
             // change anything before.
             //
-            return $request->redirect(WikiURL($pagename, false, 'absurl'), false);
+            return $request->redirect(WikiURL($pagename, array(), 'absurl'), false);
 
             // The user asked to be redirected to the modified page
         } elseif ($args['redirect']) {
-            return $request->redirect(WikiURL($pagename, false, 'absurl'), false);
+            return $request->redirect(WikiURL($pagename, array(), 'absurl'), false);
 
         } else {
             $link = HTML::em(WikiLink($pagename));

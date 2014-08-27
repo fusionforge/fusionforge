@@ -14,17 +14,20 @@ Fusionforge-X.X:
 
 Fusionforge-5.3.2:
 * Software map: fix "value too long for type character varying(255)" error in cron db_trove_maint.php (Inria)
-* SCM Git: suppress 'warning: You appear to have cloned an empty repository.' in create_scm_repos.php (Inria)
-* Stats: handle bad encoding when gathering Git stats, remove spurious warning when SVN repository isn't created yet (Inria)
+* Projects: fix Project name with html [#687] (TrivialDev)
+* Projects: don't display admins if their account is suspended (Inria)
+* Projects: member lists should check permission [#711] (TrivialDev)
 * Admin: fix edit table themes, fix frs_processor sequence [#691] (TrivialDev)
+* SCM Git: suppress 'warning: You appear to have cloned an empty repository.' in create_scm_repos.php (Inria)
 * User SSH keys (ssh_create.php): fix harmless warning when user removes all her keys (Inria)
-* Mailing lists: handle quotes and accents in description (Inria)
 * News: don't send requests for frontpage display for private projects (Inria)
-* Plugin mediawiki: fix paths in import/export scripts (Inria)
-* Plugin fckeditor: dropped in favor of ckeditor
 * Docman: fix download count [#702] (TrivialDev)
 * Tracker: fix translation support [#688] (TrivialDev)
-* Projects: fix Project name with html [#687] (TrivialDev)
+* Tracker: fix custom status extrafield not updateable using mass update [#712] (TrivialDev)
+* Mailing lists: handle quotes and accents in description (Inria)
+* Stats: handle bad encoding when gathering Git stats, remove spurious warning when SVN repository isn't created yet (Inria)
+* Plugin mediawiki: fix paths in import/export scripts (Inria)
+* Plugin fckeditor: dropped in favor of ckeditor
 
 Fusionforge-5.3.1:
 * Docman: Basic Webdav write mkcol support (TrivialDev)
@@ -91,7 +94,7 @@ Plugins:
 * webanalytics: new plugin to add support for piwik or google analytics tool (TrivialDev)
 * scmhook: Support added for pre-revprop-changehooks to change properties (Alcatel-Lucent)
 * scmhook: Add commitEmail support for scmhg plugin (TrivialDev)
-* new admssw plugin to provide ADMS.SW compatible RDF descriptions of projects 
+* new admssw plugin to provide ADMS.SW compatible RDF descriptions of projects
 * blocks: improved with a new HTML widget for the project summary page (Alcatel-Lucent)
 * svntracker : this plugin is superseed by scmhook
 * svncommitemail : this plugin is superseed by scmhook
@@ -117,7 +120,7 @@ FusionForge-5.2:
 * Trackers: New view to display roadmaps view for trackers (Alcatel-Lucent)
 * scmsvn: private project can now be browsed with viewvc using user rights management (TrivialDev).
 * scmsvn: basic activity support (TrivialDev).
-* New doaprdf and foafprofiles plugins which provide RDF descriptions of projects and 
+* New doaprdf and foafprofiles plugins which provide RDF descriptions of projects and
   people (Institut Telecom via COCLICO project)
 
 
@@ -126,7 +129,7 @@ FusionForge-5.1:
 * Docman: new UI (Capgemini)
 * Docman: extract documents and directories as zip archive (Capgemini)
 * Docman: rebirth of URL and online creation documents (better with
-  HTML editor) (Capgemini) 
+  HTML editor) (Capgemini)
 * Docman: new reservation document feature (Capgemini)
 * HTML Editor: available in task PM (Capgemini)
 * Trackers: New progress bar to view completion state (when custom
@@ -216,13 +219,13 @@ FusionForge-5.0:
 * Trackers: The values for 'select box' custom fields can now be reordered (Alcatel-Lucent)
 * Trackers: A workflow on the status field (when overwritten) can be set. Allowed
   transition between values can be defined and allowed per roles (Alcatel-Lucent)
-* Trackers: A new type of extra field has been added: Relation between artifact. 
+* Trackers: A new type of extra field has been added: Relation between artifact.
   This type allow to create a relation between artifacts. Backwards relation can
   also be visible (Alcatel-Lucent)
 * Trackers: Dynamic links added, expressions like [#NNN],[TNNN] are now rendered as
   links for description and comments (Alcatel-Lucent).
 * Trackers: Search improved to allow searching in text fields (Alcatel-Lucent).
-* Trackers: New system to share a search query. Shared queries can be represented 
+* Trackers: New system to share a search query. Shared queries can be represented
   as an URL or bookmarked. It is also possible to define one query as the default
   one (Alcatel-Lucent)
 * Trackers: Custom fields are now preserved (if same name and value) when moving an

@@ -1,6 +1,6 @@
 <?php
 /*
- V5.19  23-Apr-2014  (c) 2000-2014 John Lim (jlim#natsoft.com). All rights reserved.
+ V5.20dev  ??-???-2014  (c) 2000-2014 John Lim (jlim#natsoft.com). All rights reserved.
   Released under both BSD license and Lesser GPL library license.
   Whenever there is any discrepancy between the two licenses,
   the BSD license will take precedence.
@@ -470,13 +470,28 @@ a different OID if a database must be reloaded. */
 		#return "($date+interval'$dayFraction days')";
 	}
 
+	/**
+	 * Generate the SQL to retrieve MetaColumns data
+	 * @param string $table Table name
+	 * @param string $schema Schema name (can be blank)
+	 * @return string SQL statement to execute
+	 */
+	protected function _generateMetaColumnsSQL($table, $schema)
+	{
+		if ($schema) {
+			return sprintf($this->metaColumnsSQL1, $table, $table, $schema);
+		}
+		else {
+			return sprintf($this->metaColumnsSQL, $table, $table, $schema);
+		}
+	}
 
 	// for schema support, pass in the $table param "$schema.$tabname".
 	// converts field names to lowercase, $upper is ignored
 	// see http://phplens.com/lens/lensforum/msgs.php?id=14018 for more info
 	function MetaColumns($table,$normalize=true)
 	{
-	global $ADODB_FETCH_MODE;
+		global $ADODB_FETCH_MODE;
 
 		$schema = false;
 		$false = false;
@@ -488,8 +503,7 @@ a different OID if a database must be reloaded. */
 		$ADODB_FETCH_MODE = ADODB_FETCH_NUM;
 		if ($this->fetchMode !== false) $savem = $this->SetFetchMode(false);
 
-		if ($schema) $rs = $this->Execute(sprintf($this->metaColumnsSQL1,$table,$table,$schema));
-		else $rs = $this->Execute(sprintf($this->metaColumnsSQL,$table,$table,$table));
+		$rs = $this->Execute($this->_generateMetaColumnsSQL($table, $schema));
 		if (isset($savem)) $this->SetFetchMode($savem);
 		$ADODB_FETCH_MODE = $save;
 

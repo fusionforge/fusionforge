@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -24,7 +25,10 @@
 
 require_once '../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
-#require_once('common/tracker/ArtifactGroup.class.php');
+require_once $gfcommon.'tracker/ArtifactsForUser.class.php';
+require_once $gfcommon.'pm/ProjectTasksForUser.class.php';
+
+global $HTML;
 
 function GetTime ($timedifference) {
 
@@ -126,32 +130,25 @@ if (!$group_id && $form_grp) {
 $title = _('Project Member List');
 site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'memberlist'));
 
-echo '<p>';
-echo _('If you would like to contribute to this project by becoming a member, contact one of the project admins, designated in bold text below.');
-echo '</p>';
+echo html_e('p', array(), _('If you would like to contribute to this project by becoming a member, contact one of the project admins, designated in bold text below.'));
 
-        $title_arr=array();
-        $title_arr[]=_('Developer');
-        $title_arr[]=_('Summary');
-        $title_arr[]=_('Open Date');
-        $title_arr[]=_('Last Modified');
-echo $GLOBALS['HTML']->listTableTop ($title_arr);
+$title_arr=array();
+$title_arr[]=_('Developer');
+$title_arr[]=_('Summary');
+$title_arr[]=_('Open Date');
+$title_arr[]=_('Last Modified');
+echo $HTML->listTableTop($title_arr);
 
 // list members
 foreach ($group->getUsers() as $member) {
-	echo '
-		<tr><td>';
+	$cells = array();
 	$link = util_make_link_u ($member->getUnixName(), $member->getID(), $member->getRealName()) ;
 	if ( RBACEngine::getInstance()->isActionAllowedForUser($member,'project_admin',$group->getID())) {
-		echo '<strong>'.$link.'</strong>' ;
+		$cells[][] = html_e('strong', array(), $link);
 	} else {
-		echo $link ;
+		$cells[][] = $link;
 	}
-	echo '
-			</td><td>'.
-		util_make_link ('/sendmessage.php?touser='.$member->getId(),
-				sprintf (_('Contact %s'),$member->getRealName())).'
-			</td>';
+	$cells[][] = util_make_link('/sendmessage.php?touser='.$member->getId(), sprintf(_('Contact %s'), $member->getRealName()));
 	$roles = RBACEngine::getInstance()->getAvailableRolesForUser ($member) ;
 	sortRoleList ($roles) ;
 	$role_names = array () ;
@@ -161,91 +158,49 @@ foreach ($group->getUsers() as $member) {
 		}
 	}
 	$role_string = implode (', ', $role_names) ;
-
-				echo '
-			<td class="align-center">'.$role_string.'
-			</td>';
+	$cells[] = array($role_string, 'class' => 'align-center');
 	if(forge_get_config('use_people')) {
-		echo '
-			<td class="align-center">'.util_make_link('/people/viewprofile.php?user_id='.$member->getID(),_('View')).'
-			</td>';
+		$cells[] = array(util_make_link('/people/viewprofile.php?user_id='.$member->getID(),_('View')), 'class' => 'align-center');
+	} else {
+		$cells[][] = '';
 	}
-	echo '
-		</tr>';
+	echo $HTML->multiTableRow(array(), $cells);
 
 	// print out all the artifacts assigned to this person
-        $artifact_group=db_query_params("SELECT group_artifact_id, name
-                                  FROM artifact_group_list
-                                  WHERE group_id=$1
-                                  ORDER BY group_artifact_id DESC", array($group_id));
-
- 	while ( $artifact_type =db_fetch_array($artifact_group) ) {
-		$artifacts=db_query_params("SELECT * FROM artifact_vw
-                                     WHERE assigned_to=$1
-                                       AND status_id='1'
-                                       AND group_artifact_id=$2
-                                     ORDER BY priority DESC", array($member->getID(), $artifact_type['group_artifact_id']));
-
-                $num_artifacts=db_numrows($artifacts);
-                for ($m=0; $m < $num_artifacts; $m++) {
-			echo '
-		<tr class="priority'.db_result($artifacts, $m, 'priority').'">
-			<td>'.util_make_link('/tracker/?func=detail&aid='. db_result($artifacts, $m, 'artifact_id') .'&group_id='.$group_id.'&atid='.$artifact_type['group_artifact_id'], $artifact_type['name'].' '.db_result($artifacts, $m, 'artifact_id')).'
-			</td>
-			<td>'.db_result($artifacts, $m, 'summary').'</td>';
-			echo '
-			<td>'.GetTime( time() - db_result($artifacts, $m, 'open_date'))	.'
-			</td>';
-
-			$messages=db_query_params("select adddate FROM artifact_message_user_vw ".
+	$afu = new ArtifactsForUser($member);
+	$artifacts = $afu->getAssignedArtifactsByGroup();
+	foreach ($artifacts as $artifact) {
+		$cells = array();
+		$cells[][] = util_make_link('/tracker/?func=detail&aid='. $artifact->getID() .'&group_id='.$group_id.'&atid='.$artifact->ArtifactType->getID(), $artifact->ArtifactType->getName().' '.$artifact->getID());
+		$cells[][] = $artifact->getSummary();
+		$cells[][] = GetTime( time() - $artifact->getOpenDate());
+		$messages = db_query_params("select adddate FROM artifact_message_user_vw ".
 						"WHERE artifact_id=$1 ".
-						"ORDER by adddate DESC", array(db_result($artifacts, $m, 'artifact_id')));
-			if ( db_numrows($messages)) {
-				echo '
-			<td>'. GetTime( time () - db_result($messages, 0, 'adddate')).'</td>';
-			} else {
-				echo '
-			<td>'. GetTime( time () - db_result($artifacts, $m, 'open_date')).'</td>';
-			}
-			echo '
-		</tr>';
-                }
+						"ORDER by adddate DESC", array($artifact->getID()));
+		if ( db_numrows($messages)) {
+			$cells[][] = GetTime(time() - db_result($messages, 0, 'adddate'));
+		} else {
+			$cells[][] = GetTime(time() - $artifact->getOpenDate());;
+		}
+		echo $HTML->multiTableRow(array('class' => 'priority'.$artifact->getPriority()), $cells);
 	}
-	$task_group=db_query_params("SELECT ptv.*,g.group_name,pgl.project_name
-                        FROM project_task_vw ptv,
-                                project_assigned_to pat,
-                                groups g,
-                                project_group_list pgl
-                        WHERE ptv.project_task_id=pat.project_task_id
-                                AND pgl.group_id=$1
-                                AND g.group_id=$1
-                                AND pgl.group_project_id=ptv.group_project_id
-                                AND ptv.status_id=1
-                                AND pat.assigned_to_id=$2
-                        ORDER BY group_name,project_name",
-                        array($group_id, $member->getID()));
-
-	while ( $task_type = db_fetch_array($task_group) ) {
-		if ( $task_type['percent_complete'] != 100 ) {
-                	echo '
-		<tr class="priority'.$task_type['priority'].'">
-			<td>'.util_make_link('/pm/task.php?func=detailtask&project_task_id='. $task_type['project_task_id'].'&group_id='.$group_id.'&group_project_id='.$task_type['group_project_id'],_('Task').' '.$task_type['project_task_id']).'
-			</td>
-			<td>'.$task_type['summary'].'
-			</td>
-			<td>'.GetTime(time()-$task_type['start_date']).'
-			</td>
-			<td>'.$task_type['percent_complete'].'% done'.'
-			</td>
-		</tr>';
+	$ptfu = new ProjectTasksForUser($member);
+	$tasks = $ptfu->getTasksByGroupProjectName();
+	foreach ($tasks as $task) {
+		if ($task-> getPercentComplete() != 100) {
+			$cells = array();
+			$cells[][] = util_make_link('/pm/task.php?func=detailtask&project_task_id='. $task->getID().'&group_id='.$group_id.'&group_project_id='.$task->ProjectGroup->getID(),_('Task').' '.$task->getID());
+			$cells[][] = $task->getSummary();
+			$cells[][] = GetTime(time()-$task->getStartDate());
+			$cells[][] = $task->getPercentComplete().'% '._('done');
+			echo $HTML->multiTableRow(array('class' => 'priority'.$task->getPriority()), $cells);
 		}
 	}
-	echo '
-		<tr>
-			<td></td>
-		</tr>';
+	$cells = array();
+	$cells[] = array('', 'colspan' => 4);
+	echo $HTML->multiTableRow(array(), $cells);
 }
 
-echo $GLOBALS['HTML']->listTableBottom();
+echo $HTML->listTableBottom();
 
 site_project_footer();

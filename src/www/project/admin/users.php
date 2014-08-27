@@ -39,6 +39,8 @@ require_once $gfwww.'include/role_utils.php';
 require_once $gfcommon.'include/account.php';
 require_once $gfcommon.'include/GroupJoinRequest.class.php';
 
+global $HTML;
+
 $group_id = getIntFromRequest('group_id');
 
 session_require_perm ('project_admin', $group_id) ;
@@ -214,214 +216,149 @@ if (getStringFromRequest('submit')) {
 $group->clearError();
 
 project_admin_header(array('title'=>sprintf(_('Members of %s'), $group->getPublicName()),'group'=>$group->getID()));
+echo $HTML->listTableTop();
+$content = '';
+$cells = array();
 
-?>
-
-<table width="100%" cellpadding="2" cellspacing="2">
-	<tr valign="top">
-		<td width="50%"><?php
-		//
-		//	Pending requests
-		//
-		$reqs =& get_group_join_requests($group);
-		if (count($reqs) > 0) {
-			echo $HTML->boxTop(_("Pending Membership Requests"));
-			for ($i=0; $i<count($reqs); $i++) {
-				$user =& user_get_object($reqs[$i]->getUserId());
-				if (!$user || !is_object($user)) {
-					echo "Invalid User";
-				}
-?>
-		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>"
-			method="post">
-		<input type="hidden" name="submit" value="y" />
-		<input type="hidden" name="form_userid" value="<?php echo $user->getId(); ?>" />
-		<input type="hidden" name="form_unix_name" value="<?php echo $user->getUnixName(); ?>" />
-		<table width="100%">
-			<tr>
-				<td style="white-space: nowrap;"><?php
-					echo util_display_user($user->getUnixName(), $user->getId(), $user->getRealName());
-					?>
-				</td>
-				<td style="white-space: nowrap; text-align: right;"><?php
-					echo role_box($group_id,'role_id'); ?>
-				<input type="submit" name="acceptpending"
-					value="<?php echo _("Accept") ?>" />
-				<input type="submit" name="rejectpending"
-					value="<?php echo _("Reject") ?>" />
-				</td>
-			</tr>
-		</table>
-		</form>
-
-		<?php
-			}
-
-			echo $HTML->boxMiddle(_("Add Member"));
-		} else {
-			echo $HTML->boxTop(_("Add Member"));
+// Pending requests
+$reqs =& get_group_join_requests($group);
+if (count($reqs) > 0) {
+	$content .=  $HTML->boxTop(_("Pending Membership Requests"));
+	for ($i = 0; $i < count($reqs); $i++) {
+		$user =& user_get_object($reqs[$i]->getUserId());
+		if (!$user || !is_object($user)) {
+			$content .=  _('Invalid User');
 		}
+		$content .=  $HTML->openForm(array('action' => getStringFromServer('PHP_SELF').'?group_id='.$group_id, 'method' => 'post'));
+		$content .=  html_e('input', array('type' => 'hidden', 'name' => 'submit', 'value' => 'y'));
+		$content .=  html_e('input', array('type' => 'hidden', 'name' => 'form_userid', 'value' => $user->getId()));
+		$content .=  html_e('input', array('type' => 'hidden', 'name' => 'form_unix_name', 'value' => $user->getUnixName()));
+		$content .=  $HTML->listTableTop();
+		$localcells = array();
+		$localcells[] = array(util_display_user($user->getUnixName(), $user->getId(), $user->getRealName()), 'style' => 'white-space: nowrap;');
+		$localcells[] = array(role_box($group_id,'role_id').
+					html_e('input', array('type' => 'submit', 'name' => 'acceptpending', 'value' => _('Accept'))).
+					html_e('input', array('type' => 'submit', 'name' => 'rejectpending', 'value' => _('Reject'))),
+					'style' => 'white-space: nowrap;', 'class' => 'align-right');
+		$content .=  $HTML->multiTableRow(array(), $localcells);
+		$content .=  $HTML->listTableBottom();
+		$content .=  $HTML->closeForm();
+	}
 
-		if (isset($html_code['add_user'])) {
-			echo $html_code['add_user'];
-		} else {
+	$content .=  $HTML->boxMiddle(_("Add Member"));
+} else {
+	$content .=  $HTML->boxTop(_("Add Member"));
+}
 
-			/*
-			 Add member form
-			 */
-			?>
-		<div><form
-			action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>"
-			method="post">
-		<input type="hidden" name="submit" value="y" />
-		<div style="float:left;">
-			<input type="text" name="form_unix_name" size="16" value="" required="required" />
-		</div><div style="float:right;">
-			<?php echo role_box($group_id,'role_id'); ?>
-			<input type="submit" name="adduser" value="<?php echo _("Add Member") ?>" />
-		</div>
-		</form></div>
-		<div style="clear:both;"><?php
-			echo util_make_link('/project/admin/massadd.php?group_id='.$group_id, _('Add Users From List')); ?>
-		</div>
-			<?php
-		}
+if (isset($html_code['add_user'])) {
+	$content .=  $html_code['add_user'];
+} else {
+	// Add member form
+	$content .=  html_ao('div');
+	$content .=  $HTML->openForm(array('action' => getStringFromServer('PHP_SELF').'?group_id='.$group_id, 'method' => 'post'));
+	$content .=  html_e('input', array('type' => 'hidden', 'name' => 'submit', 'value' => 'y'));
+	$content .=  html_e('div', array('class' => 'float_left'), html_e('input', array('type' => 'text', 'name' => 'form_unix_name', 'size' => 16, 'value' => '', 'required' => 'required')));
+	$content .=  html_e('div', array('class' => 'float_right'), role_box($group_id, 'role_id').html_e('input', array('type' => 'submit', 'name' => 'adduser', 'value' => _('Add Member'))));
+	$content .=  $HTML->closeForm();
+	$content .=  html_ac(html_ap() - 1);
+	$content .=  html_e('div', array('class' => 'clear_both'), util_make_link('/project/admin/massadd.php?group_id='.$group_id, _('Add Users From List')));
+}
+$content .=  $HTML->boxMiddle(_("Current Project Members"));
 
-		echo $HTML->boxMiddle(_("Current Project Members"));
+// Show the members of this project
+$members = $group->getUsers();
 
-		/*
-
-		Show the members of this project
-
-		*/
-
-$members = $group->getUsers() ;
-
-echo '<table width="100%"><thead><tr>';
-echo '<th>'._('User Name').'</th>';
-echo '<th>'._('Role').'</th>';
-echo '<th style="text-align:right">'._('Action').'</th>';
-echo '</tr></thead><tbody>';
+$thArray = array(_('User Name'), _('Role'), _('Action'));
+$thClassArray = array('', '', 'align-right');
+$content .=  $HTML->listTableTop($thArray, array(), '', '', $thClassArray);
 
 $i = 0;
 foreach ($members as $user) {
 	$i++;
 
-	$roles = array () ;
+	$roles = array();
 	foreach (RBACEngine::getInstance()->getAvailableRolesForUser ($user) as $role) {
 		if ($role->getHomeProject() && $role->getHomeProject()->getID() == $group->getID()) {
-			$roles[] = $role ;
+			$roles[] = $role;
 		}
 	}
 
-	sortRoleList ($roles) ;
+	sortRoleList($roles);
 
-	$seen = false ;
+	$seen = false;
 	foreach ($roles as $role) {
-		echo '<tr '. $HTML->boxGetAltRowStyle($i) . '>' ;
+		$localcells = array();
 		if (!$seen) {
-			echo '<td style="white-space: nowrap;" rowspan="'.(count($roles)+1).'">';
 			$display = $user->getRealName();
 			if (empty($display)) {
 				$display = $user->getUnixName();
 			}
-			echo util_display_user($user->getUnixName(), $user->getID(), $display);
-			echo "</td>\n";
-			$seen = true ;
+			$localcells[] = array(util_display_user($user->getUnixName(), $user->getID(), $display), 'style' => 'white-space: nowrap;', 'rowspan' => count($roles)+1);
+			$seen = true;
 		}
 
-		echo '<td colspan="2">
-		<div style="float:left;">
-			' . $role->getName() . '
-		</div><div style="float:right;">
-			<form action="'.getStringFromServer('PHP_SELF').'" method="post">
-			<input type="hidden" name="submit" value="y" />
-			<input type="hidden" name="username" value="'.$user->getUnixName() // Functionally ignored, only used for testsuite
-.'" />
-			<input type="hidden" name="user_id" value="'.$user->getID().'" />
-			<input type="hidden" name="group_id" value="'. $group_id .'" />
-			<input type="hidden" name="role_id" value="'.$role->getID().'" />
-			<input type="submit" name="rmuser" value="'._("Remove").'" />
-			</form>
-		</div></td></tr>';
+		$localcells[] = array(html_e('div', array('class' => 'float_left'), $role->getName()).
+					html_e('div', array('class' => 'float_right'), $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post')).
+					html_e('input', array('type' => 'hidden', 'name' => 'submit', 'value' => 'y')).
+					html_e('input', array('type' => 'hidden', 'name' => 'username', 'value' => $user->getUnixName())). // Functionally ignored, only used for testsuite
+					html_e('input', array('type' => 'hidden', 'name' => 'user_id', 'value' => $user->getID())).
+					html_e('input', array('type' => 'hidden', 'name' => 'group_id', 'value' => $group_id)).
+					html_e('input', array('type' => 'hidden', 'name' => 'role_id', 'value' => $role->getID())).
+					html_e('input', array('type' => 'submit', 'name' => 'rmuser', 'value' => _('Remove'))).
+					$HTML->closeForm()), 'colspan' => 2);
+		$content .=  $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $localcells);
 	}
 
-	echo '<tr '. $HTML->boxGetAltRowStyle($i) . '><td colspan="2">
-		<form action="'.getStringFromServer('PHP_SELF').'" method="post">
-		<input type="hidden" name="submit" value="y" />
-		<input type="hidden" name="form_unix_name" value="'.$user->getUnixName().'" />
-		<input type="hidden" name="group_id" value="'. $group_id .'" />
-		<div style="float:left;">
-			' . role_box($group_id,'role_id',$role->getID()) . '
-		</div><div style="float:right;">
-			<input type="submit" name="adduser" value="'._("Grant extra role").'" />
-		</div>
-		</form></td></tr>';
+	$localcells = array();
+	$localcells[] = array($HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post')).
+				html_e('input', array('type' => 'hidden', 'name' => 'submit', 'value' => 'y')).
+				html_e('input', array('type' => 'hidden', 'name' => 'form_unix_name', 'value' => $user->getUnixName())).
+				html_e('input', array('type' => 'hidden', 'name' => 'group_id', 'value' => $group_id)).
+				html_e('div', array('class' => 'float_left'), role_box($group_id,'role_id',$role->getID())).
+				html_e('div', array('class' => 'float_right'), html_e('input', array('type' => 'submit', 'name' => 'adduser', 'value' => _('Grant extra role')))).
+				$HTML->closeForm(), 'colspan' => 2);
+	$content .=  $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $localcells);
 }
-echo '</tbody></table>';
+$content .=  $HTML->listTableBottom();
+$content .=  $HTML->boxBottom();
+$cells[][] = $content;
+$content = '';
 
-		echo $HTML->boxBottom();
+// RBAC Editing Functions
+$content .= $HTML->boxTop(_('Edit Roles'));
+$thArray = array(_('Role Name'), _('Action'));
+$thClassArray = array('', 'align-right');
+$content .=  $HTML->listTableTop($thArray, array(), '', '', $thClassArray);
 
-		?></td>
-		<td><?php
-
-		//
-		//      RBAC Editing Functions
-		//
-		echo $HTML->boxTop(_("Edit Roles"));
-
-echo '<table width="100%"><thead><tr>';
-echo '<th>'._('Role Name').'</th>';
-echo '<th style="text-align:right">'._('Action').'</th>';
-echo '</tr></thead><tbody>';
-
-$roles = $group->getRoles() ;
-sortRoleList ($roles, $group, 'composite') ;
+$roles = $group->getRoles();
+sortRoleList($roles, $group, 'composite');
 
 foreach ($roles as $r) {
-	/* this would work, but only here, not below the foreach */
-	//echo '<tr>
-	//	<td>'.$r->getDisplayableName($group).'</td>
-	//	<td><form action="roleedit.php?group_id='. $group_id .'" method="post">
-	//		<input type="hidden" name="role_id" value="'.$r->getID().'" />
-	//		<input type="submit" name="edit" value="'._("Edit Permissions").'" />
-	//	</form></td>
-	//</tr>';
-	/* but doesn't look as well as using the same method everywhere */
-	echo '<tr><td colspan="2">
-	<form action="roleedit.php?group_id='. $group_id .'" method="post">
-	<div style="float:left;">
-		'.$r->getDisplayableName($group).'
-	</div><div style="float:right;">
-		<input type="hidden" name="role_id" value="'.$r->getID().'" />
-		<input type="submit" name="edit" value="'._("Edit Permissions").'" />
-	</div>
-	</form>';
+	$localcells = array();
+	$localcontent = $HTML->openForm(array('action' => '/project/admin/roleedit.php?group_id='.$group_id, 'method' => 'post')).
+			html_e('div', array('class' => 'float_left'), $r->getDisplayableName($group)).
+			html_e('div', array('class' => 'float_right'), html_e('input', array('type' => 'hidden', 'name' => 'role_id', 'value' => $r->getID())).
+				html_e('input', array('type' => 'submit', 'name' => 'edit', 'value' => _('Edit Permissions')))).
+			$HTML->closeForm();
 
 	if ($r->getHomeProject() != NULL && $r->getHomeProject()->getId() == $group_id) {
-		echo '<form action="roledelete.php?group_id='. $group_id .'" method="post">
-        <div style="float:right;">
-		<input type="hidden" name="role_id" value="'.$r->getID().'" />
-		<input type="submit" name="delete" value="'._("Delete role").'" />
-	</div>
-	</form>';
+		$localcontent .= $HTML->openForm(array('action' => '/project/admin/roledelete.php?group_id='.$group_id , 'method' => 'post')).
+				html_e('div', array('class' => 'float_right'), html_e('input', array('type' => 'hidden', 'name' => 'role_id', 'value' => $r->getID())).
+					html_e('input', array('type' => 'submit', 'name' => 'delete', 'value' => _('Delete role')))).
+				$HTML->closeForm();
 	}
 
-	echo '</td></tr>';
+	$localcells[] = array($localcontent, 'colspan' => 2);
+	$content .=  $HTML->multiTableRow(array(), $localcells);
 }
 
-/* note: we cannot put the form outside of a td here */
-echo '<tr><td colspan="2">
-	<form action="roleedit.php?group_id='. $group_id .'" method="post">
-	<div style="float:left;">
-		<input type="text" name="role_name" size="10" value="" required="required" />
-	</div><div style="float:right;">
-		<input type="submit" name="add" value="'._("Create Role").'" />
-	</div>
-	</form>
-</td></tr>';
-
-echo '</tbody></table>' ;
+$localcells = array();
+$localcells[] = array($HTML->openForm(array('action' => '/project/admin/roleedit.php?group_id='.$group_id, 'method' => 'post')).
+			html_e('div', array('class' => 'float_left'), html_e('input', array('type' => 'text', 'name' => 'role_name', 'size' => 10, 'value' => '', 'required' => 'required'))).
+			html_e('div', array('class' => 'float_right'), html_e('input', array('type' => 'submit', 'name' => 'add', 'value' => _('Create Role')))).
+			$HTML->closeForm(), 'colspan' => 2);
+$content .=  $HTML->multiTableRow(array(), $localcells);
+$content .=  $HTML->listTableBottom();
 
 //TODO: What is the observer ? role_id is a numeric.
 //      Something is missing here.
@@ -432,66 +369,52 @@ echo '</tbody></table>' ;
 //         </form>';
 
 if (count ($used_external_roles)) {
-	echo $HTML->boxMiddle(_("Currently used external roles"));
-echo '<table width="100%"><thead><tr>';
-echo '<th>'._('Role Name').'</th>';
-echo '<th style="text-align:right">'._('Action').'</th>';
-echo '</tr></thead><tbody>';
+	$content .=  $HTML->boxMiddle(_('Currently used external roles'));
+	$thArray = array(_('Role Name'), _('Action'));
+	$thClassArray = array('', 'align-right');
+	$content .=  $HTML->listTableTop($thArray, array(), '', '', $thClassArray);
 
-foreach ($used_external_roles as $r) {
-	echo '<tr><td colspan="2">
-	<form action="'.getStringFromServer('PHP_SELF').'" method="post">
-		<input type="hidden" name="submit" value="y" />
-		<input type="hidden" name="role_id" value="'.$r->getID().'" />
-		<input type="hidden" name="group_id" value="'.$group_id.'" />
-	<div style="float:left;">
-		' . $r->getDisplayableName($group) . '
-	</div><div style="float:right;">
-		<input type="submit" name="unlinkrole" value="'._("Unlink Role").'" />
-	</div>
-	</form>
-</td></tr>';
-}
-echo '</tbody></table>' ;
+	foreach ($used_external_roles as $r) {
+		$localcells = array();
+		$localcells[] = array($HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post')).
+					html_e('input', array('type' => 'hidden', 'name' => 'submit', 'value' => 'y')).
+					html_e('input', array('type' => 'hidden', 'name' => 'role_id', 'value' => $r->getID())).
+					html_e('input', array('type' => 'hidden', 'name' => 'group_id', 'value' => $group_id)).
+					html_e('div', array('class' => 'float_left'), $r->getDisplayableName($group)).
+					html_e('div', array('class' => 'float_right'), html_e('input', array('type' => 'submit', 'name' => 'unlinkrole', 'value' => _('Unlink Role')))).
+					$HTML->closeForm(), 'colspan' => 2);
+		$content .=  $HTML->multiTableRow(array(), $localcells);
 	}
-
-	if (count ($unused_external_roles)) {
-		echo $HTML->boxMiddle(_("Available external roles"));
-echo '<table width="100%"><thead><tr>';
-echo '<th>'._('Role Name').'</th>';
-echo '<th style="text-align:right">'._('Action').'</th>';
-echo '</tr></thead><tbody>';
-
-$ids = array () ;
-$names = array () ;
-foreach ($unused_external_roles as $r) {
-	$ids[] = $r->getID() ;
-	$names[] = $r->getDisplayableName($group) ;
+	$content .=  $HTML->listTableBottom();
 }
-echo '<tr><td colspan="2">
-	<form action="'.getStringFromServer('PHP_SELF').'" method="post">
-	<input type="hidden" name="submit" value="y" />
-	<input type="hidden" name="group_id" value="'.$group_id.'" />
-	<div style="float:left;">
-		';
-echo html_build_select_box_from_arrays($ids,$names,'role_id','',false,'',false,'');
-echo '
-	</div><div style="float:right;">
-		<input type="submit" name="linkrole" value="'._("Link external role").'" />
-	</div>
-	</form>
-</td></tr>';
-echo '</tbody></table>' ;
+
+if (count ($unused_external_roles)) {
+	$content .=  $HTML->boxMiddle(_('Available external roles'));
+	$thArray = array(_('Role Name'), _('Action'));
+	$thClassArray = array('', 'align-right');
+	$content .=  $HTML->listTableTop($thArray, array(), '', '', $thClassArray);
+
+	$ids = array () ;
+	$names = array () ;
+	foreach ($unused_external_roles as $r) {
+		$ids[] = $r->getID() ;
+		$names[] = $r->getDisplayableName($group) ;
 	}
+	$localcells = array();
+	$localcells[] = array($HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post')).
+				html_e('input', array('type' => 'hidden', 'name' => 'submit', 'value' => 'y')).
+				html_e('input', array('type' => 'hidden', 'name' => 'group_id', 'value' => $group_id)).
+				html_e('div', array('class' => 'float_left'), html_build_select_box_from_arrays($ids, $names, 'role_id', '', false, '', false, '')).
+				html_e('div', array('class' => 'float_right'), html_e('input', array('type' => 'submit', 'name' => 'linkrole', 'value' => _('Link external role')))).
+				$HTML->closeForm(), 'colspan' => 2);
+	$content .=  $HTML->multiTableRow(array(), $localcells);
+	$content .=  $HTML->listTableBottom();
+}
 
-echo $HTML->boxBottom();
-?></td>
-	</tr>
-
-</table>
-
-<?php
-
+$content .=  $HTML->boxBottom();
+$cells[][] = $content;
+echo $HTML->multiTableRow(array('valign' => 'top'), $cells);
+echo $HTML->listTableBottom();
 project_admin_footer();
 
 // Local Variables:
