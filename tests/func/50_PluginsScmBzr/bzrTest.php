@@ -21,6 +21,12 @@
 
 require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
 
+//function mysystem($cmd, &$ret=null) {
+//  print "Running: $cmd\n";
+//  ob_flush();
+//  system($cmd, $ret);
+//}
+
 class ScmBzrTest extends FForge_SeleniumTestCase
 {
 	function testScmBzr()
@@ -64,6 +70,7 @@ class ScmBzrTest extends FForge_SeleniumTestCase
 		$p = preg_replace(",/branchname$,", "", $p);
 
 		// Create a local branch, push it to the repo
+		system("bzr whoami 'admin <admin@admin.tld>'");
 		$t = exec("mktemp -d /tmp/bzrTest.XXXXXX");
 		system("cd $t && bzr init --quiet trunk >/dev/null", $ret);
 		$this->assertEquals($ret, 0);
