@@ -23,7 +23,7 @@ if type apt-get 2>/dev/null ; then
 fi
 
 # Setup vnc password - otherwise vncserver prompts it
-vncpasswd <<EOF
+vncpasswd <<EOF >/dev/null
 password
 password
 EOF
