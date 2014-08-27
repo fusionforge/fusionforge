@@ -8,8 +8,8 @@ then
 	exit 1
 fi
 
-INSTALL_METHOD=${TEST_ENV%/*}
-INSTALL_OS=${TEST_ENV#*/}
+export INSTALL_METHOD=${TEST_ENV%/*}
+export INSTALL_OS=${TEST_ENV#*/}
 
 if [ -z "$INSTALL_METHOD" ] || [ -z "$INSTALL_OS" ] ; then
     echo INSTALL_METHOD and INSTALL_OS required
