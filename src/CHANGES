@@ -15,6 +15,7 @@ Fusionforge-5.3.2:
 * Plugin mediawiki: fix paths in import/export scripts (Inria)
 * Plugin fckeditor: dropped in favor of ckeditor
 * Plugin SCM SVN: fix sql error in activity tab on init log [#715] (TrivialDev)
+* Plugin SCM SVN: fix activity tab on empty commit log [#714] (Inria)
 
 Fusionforge-5.3.1:
 * Docman: Basic Webdav write mkcol support (TrivialDev)
