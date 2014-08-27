@@ -160,9 +160,9 @@ class WikiPlugin_CreateToc
             if ($theading)
                 return preg_quote($theading->asXML(), "/");
             else
-                return XmlContent::_quote(preg_quote($heading, "/"));
+                return htmlspecialchars(preg_quote($heading, "/"), ENT_COMPAT, 'UTF-8');
         } else {
-            return XmlContent::_quote(preg_quote($heading, "/"));
+            return htmlspecialchars(preg_quote($heading, "/"), ENT_COMPAT, 'UTF-8');
         }
     }
 
@@ -245,8 +245,8 @@ class WikiPlugin_CreateToc
     // We must omit lines starting with "!" if inside a Mediawiki table
     // (they represent a table header)
     // Feature request: proper nesting; multiple levels (e.g. 1,3)
-    private function extractHeaders(&$content, &$markup, $backlink = 0,
-                            $counter = 0, $levels = false, $firstlevelstyle = 'number', $basepage = '')
+    private function extractHeaders(&$content, &$markup, $backlink,
+                            $counter, $levels, $firstlevelstyle, $basepage)
     {
         if (!$levels) $levels = array(1, 2);
         $tocCounter = $this->initTocCounter();
@@ -425,7 +425,6 @@ class WikiPlugin_CreateToc
             $r = $page->getCurrentRevision();
         }
 
-        $current = $page->getCurrentRevision();
         $content = $r->getContent();
 
         $html = HTML::div(array('class' => 'toc', 'id' => GenerateId("toc")));
