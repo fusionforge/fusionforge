@@ -143,8 +143,7 @@ class WikiPlugin_WatchPage
                     return '';
                 }
                 if ($request->getArg('edit')) {
-                    $request->redirect(WikiURL(_("UserPreferences"),
-                        false, 'absolute_url')); // noreturn
+                    $request->redirect(WikiURL(_("UserPreferences"), array(), 'absolute_url')); // noreturn
                     return '';
                 }
                 $add = $request->getArg('add');

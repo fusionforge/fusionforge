@@ -181,7 +181,7 @@ class WikiPlugin_PhotoAlbum
             $align = 'center';
         }
         if (count($photos) == 0) {
-            return HTML::raw();
+            return HTML::raw('');
         }
 
         if (in_array("sort", $attributes))

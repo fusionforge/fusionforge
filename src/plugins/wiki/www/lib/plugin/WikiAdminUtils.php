@@ -295,7 +295,7 @@ class WikiPlugin_WikiAdminUtils
                     Button('cancel', _("Cancel")))
             );
         }
-    return HTML::raw();
+    return HTML::raw('');
     }
 }
 

@@ -829,7 +829,7 @@ class _RecentChanges_RssFormatter
 
     function pageURI($rev)
     {
-        return WikiURL($rev, '', 'absurl');
+        return WikiURL($rev, array(), 'absurl');
     }
 
     function format($changes)
@@ -878,7 +878,7 @@ class _RecentChanges_RssFormatter
             return false;
 
         return array('title' => WIKI_NAME,
-            'link' => WikiURL(HOME_PAGE, false, 'absurl'),
+            'link' => WikiURL(HOME_PAGE, array(), 'absurl'),
             'url' => $img_url);
     }
 
@@ -887,14 +887,14 @@ class _RecentChanges_RssFormatter
         return array('title' => _("Search"),
             'description' => _("Title Search"),
             'name' => 's',
-            'link' => WikiURL(_("TitleSearch"), false, 'absurl'));
+            'link' => WikiURL(_("TitleSearch"), array(), 'absurl'));
     }
 
     function channel_properties()
     {
         global $request;
 
-        $rc_url = WikiURL($request->getArg('pagename'), false, 'absurl');
+        $rc_url = WikiURL($request->getArg('pagename'), array(), 'absurl');
         extract($this->_args);
         $title = WIKI_NAME;
         $description = $this->title();
@@ -1029,7 +1029,7 @@ class _RecentChanges_AtomFormatter
         $rss = new AtomFeed;
 
         // "channel" is called "feed" in atom
-        $rc_url = WikiURL($request->getArg('pagename'), false, 'absurl');
+        $rc_url = WikiURL($request->getArg('pagename'), array(), 'absurl');
         extract($this->_args);
         $description = $this->title();
         $feed_props = array('title' => $description,
@@ -1089,9 +1089,8 @@ class _RecentChanges_AtomFormatter
 class NonDeletedRevisionIterator extends WikiDB_PageRevisionIterator
 {
     /**
-     * @param $revisions object a WikiDB_PageRevisionIterator.
+     * @param WikiDB_PageRevisionIterator $revisions
      * @param bool $check_current_revision
-     * @return void
      */
     function __construct($revisions, $check_current_revision = true)
     {
@@ -1301,7 +1300,7 @@ class WikiPlugin_RecentChanges
         );
     }
 
-    function getArgs($argstr, $request, $defaults = false)
+    function getArgs($argstr, $request = false, $defaults = array())
     {
         if (!$defaults) $defaults = $this->getDefaultArguments();
         $args = WikiPlugin::getArgs($argstr, $request, $defaults);

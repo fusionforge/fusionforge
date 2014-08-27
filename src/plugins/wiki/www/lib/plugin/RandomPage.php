@@ -76,7 +76,7 @@ class WikiPlugin_RandomPage
             $page = $pagearray[array_rand($pagearray)];
             $pagename = $page->getName();
             if ($redirect)
-                $request->redirect(WikiURL($pagename, false, 'absurl')); // noreturn
+                $request->redirect(WikiURL($pagename, array(), 'absurl')); // noreturn
             if ($hidename)
                 return WikiLink($pagename, false, _("RandomPage"));
             else
