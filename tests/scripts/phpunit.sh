@@ -100,7 +100,6 @@ define ('URL', 'http://'.HOST.'/');
 
 // WSDL of the forges SOAP API
 define ('WSDL_URL', URL.'soap/index.php?wsdl');
-?>
 EOF
 
 echo "Starting Selenium"
