@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PhpWiki 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-15 12:24+0200\n"
+"POT-Creation-Date: 2014-08-27 11:42+0200\n"
 "PO-Revision-Date: 2004-04-21 10:08+0800\n"
 "Last-Translator: DruryL <druryl@user.sourceforge.net>\n"
 "Language-Team: DruryL <druryl@users.sourceforge.net>\n"
@@ -4714,15 +4714,6 @@ msgstr "為 page “%s” 設定 acl."
 msgid "ActionPage"
 msgstr "動作頁面"
 
-msgid "_AuthInfo"
-msgstr ""
-
-msgid "_GroupInfo"
-msgstr ""
-
-msgid "GroupAuthInfo"
-msgstr ""
-
 #, fuzzy, php-format
 msgid "Check for necessary theme %s updates"
 msgstr "為 page “%s” 設定 acl."
@@ -5454,6 +5445,9 @@ msgstr "警告: 你正在編輯較舊的修訂."
 msgid "Saving this page will overwrite the current version."
 msgstr "儲存此頁面將會覆寫掉目前版本."
 
+msgid ":"
+msgstr ":"
+
 msgid "H"
 msgstr "高"
 
@@ -5552,9 +5546,6 @@ msgstr "1 個單字"
 msgid "%s words"
 msgstr "共 %s 字"
 
-msgid ":"
-msgstr ":"
-
 #, fuzzy
 msgid "Saved on"
 msgstr "已存放在:"
@@ -5634,12 +5625,6 @@ msgstr "密碼:"
 
 msgid "Article"
 msgstr ""
-
-msgid "Edit aborted."
-msgstr "編輯中止."
-
-msgid "You have not made any changes so no new version has been saved."
-msgstr "你沒有做任何更動,所以沒有存入任何新版本."
 
 msgid "Switch to detailed list"
 msgstr "切換到明細列表"
@@ -6179,6 +6164,12 @@ msgstr "搜尋"
 
 msgid "Edit this page"
 msgstr "編輯此頁面"
+
+#~ msgid "Edit aborted."
+#~ msgstr "編輯中止."
+
+#~ msgid "You have not made any changes so no new version has been saved."
+#~ msgstr "你沒有做任何更動,所以沒有存入任何新版本."
 
 #~ msgid "PageChange Notification of %s sent to %s"
 #~ msgstr "%s 的 PageChange 通知已送給 %s"
