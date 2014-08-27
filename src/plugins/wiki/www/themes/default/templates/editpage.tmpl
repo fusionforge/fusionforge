@@ -10,21 +10,20 @@
   <?php echo $PREVIEW_CONTENT ?>
   <hr class="printer" />
 <?php } ?>
-
 <?php echo $PAGE_LOCKED_MESSAGE ?>
 <?php echo $CONCURRENT_UPDATE_MESSAGE ?>
-
 <?php if (! $IS_CURRENT) { ?>
   <p class="warning_msg"><strong><?php echo _("Warning: You are editing an old revision.")?>
         <?php echo _("Saving this page will overwrite the current version.")?></strong></p>
 <?php } ?>
 <?php /*
- * FIXME: Hack! 
+ * FIXME: Hack!
  * The funky URL used for the form action parameter is bogus.
  * This is needed, otherwise the redirect to the real browser
  * page won't work with some browsers. (NS4 and Mozilla 0.97 won't accept
  * a redirect from a page to itself.)
- */ ?>
+ */
+?>
 <form method="post" id="editpage" name="editpage"
       action="<?php echo $request->getPostURL() ?>"
       accept-charset="UTF-8">
@@ -34,8 +33,8 @@
   <table class="fullwidth">
     <tr><td><?php echo $EDIT_TOOLBAR ?></td>
         <td class="align-right"><div id="editarea-size">
-    <?php echo _("Size").':'?>
-    <label for="pref-editHeight"><b><?php echo _("H")?></b></label> <?php echo $HEIGHT_PREF?> 
+    <?php echo _("Size")._(":") ?>
+    <label for="pref-editHeight"><b><?php echo _("H")?></b></label> <?php echo $HEIGHT_PREF?>
     <label for="pref-editWidth"><b><?php echo _("W")?></b></label> <?php echo $WIDTH_PREF?>
     <noscript><?php echo Button("submit:", _("Adjust"), 'wikiaction')?></noscript>
   </div></td></tr></table>
@@ -45,7 +44,7 @@
   <a id="editarea"></a><?php echo $EDIT_TEXTAREA?>
 <!-- FIXME: fix layout, move CSS to CSS -->
 <div class="toolbar" style="text-align: center;">
-  <label for="edit-summary"><?php echo _("Summary").':'?></label> <?php echo $SUMMARY_INPUT?>
+  <label for="edit-summary"><?php echo _("Summary")._(":") ?></label> <?php echo $SUMMARY_INPUT ?>
 </div>
 <?php if (ENABLE_CAPTCHA) { ?>
 <div class="toolbar" style="text-align: center;">
@@ -55,7 +54,7 @@
 <?php } ?>
 <table class="toolbar fullwidth">
 <tr class="middle">
-  <td> 
+  <td>
     <?php echo $MINOR_EDIT_CB ?> <label for="edit-minor_edit"><?php echo _("This is a minor change.")?></label><br />
   </td>
   <td class="align-center">
@@ -63,20 +62,20 @@
     <?php echo $WYSIWYG_B?><?php echo $SEP?>
     <?php } ?>
     <?php echo $PREVIEW_B ?>
-    <?php if ($SAVE_B)  { ?> 
-      <?php echo $SEP?><?php echo $SAVE_B ?>
+    <?php if ($SAVE_B) { ?>
+      <?php echo $SEP?> <?php echo $SAVE_B ?>
     <?php } ?>
     <?php echo $SEP?><?php echo $CHANGES_B ?>
   </td>
-  <td>&nbsp; <?php echo $AUTHOR_MESSAGE?></td>
+  <td><?php echo $AUTHOR_MESSAGE?></td>
 </tr>
 <tr>
   <td>
-    <?php if ($user->isAdmin()) { ?> 
-    <?php echo $LOCKED_CB ?> <label for="edit-locked" title="<?php echo _("Make the page read-only?")?>"><?php echo _("Locked")?></label>
-    <?php if (ENABLE_PAGE_PUBLIC) { ?>
-    &nbsp;&nbsp;<?php echo $PUBLIC_CB ?> <label for="edit-public" title="<?php echo _("Export to a separate public area?")?>"><?php echo _("Public")?></label>
-    <?php }} ?>
+    <?php if ($user->isAdmin()) { ?>
+      <?php echo $LOCKED_CB ?> <label for="edit-locked" title="<?php echo _("Make the page read-only?")?>"><?php echo _("Locked")?></label>
+      <?php if (ENABLE_PAGE_PUBLIC) { ?>
+        <?php echo $PUBLIC_CB ?> <label for="edit-public" title="<?php echo _("Export to a separate public area?")?>"><?php echo _("Public")?></label>
+      <?php }} ?>
   </td>
   <td colspan="2" class="align-right">
     <?php if (!$user->isAuthenticated()) { ?>
@@ -88,9 +87,7 @@
 <?php echo $HIDDEN_INPUTS?>
 </form>
 <div style="width:100%;text-align:center;"><?php /*plugin UpLoad autolink=0 mode=edit size=30 */?></div>
-
 <hr />
-
 <div class="wiki-edithelp">
 <!-- FIXME: do we need this at all?  If so, it could probably be moved to TextFormattingRules -->
 <p><?php echo fmt("See %s tips for editing.", WikiLink(_("Help")."/"._("GoodStyle"))) ?></p>

@@ -1,10 +1,12 @@
 <?php if ($page->get('locked') && !$user->isAdmin()) { ?>
   <p class="warning_msg"><strong><?php echo _("Note:")?></strong>
-  <?php echo _("This page has been locked and cannot be edited.")?></p>
+  <?php echo _("This page has been locked and cannot be edited.")?>
+  </p>
 <?php } ?>
 <?php if ($revision and !$revision->isCurrent()) { ?>
   <p class="warning_msg"><?php echo _("You are viewing an old revision of this page.")?>
-  <?php echo Button('viewsource', _("View the current version."), $page)?></p>
+  <?php echo Button('viewsource', _("View the current version."), $page) ?>
+  </p>
 <?php } ?>
 <textarea class="wikiedit"
           name="content"
