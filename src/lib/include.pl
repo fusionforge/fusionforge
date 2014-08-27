@@ -1,83 +1,180 @@
-#!/usr/bin/perl -w
-#
-# SourceForge: Breaking Down the Barriers to Open Source Development
-# Copyright 1999-2000 (c) The SourceForge Crew
-# http://sourceforge.net
+# include.pl - Include file for all the perl scripts that contains reusable functions
 #
 
-########################
-# global configuration #
-########################
-my $config_path = `forge_get_config config_path`;
-chomp $config_path;
-$config{'database_include'} 	= "$config_path/database.inc";		# database include file
-$config{'lock_file'}		= '/tmp/sf-backend';		# lockfile location
-$config{'log_file'}		= '/home/dummy/backend.log';	# logfile location
-$config{'group_dir_prefix'} 	= '/home/groups';		# prefix for group directories
-$config{'user_dir_prefix'} 	= '/home/users';		# prefix for user directories
-$config{'database_dump_dir'}	= '/home/dummy/dumps';		# where are the database dumps kept
-$config{'delete_tar_dir'}	= '/tmp';			# place to stick tarballs of deleted accounts/groups
-$config{'dummy_uid'}		= getpwnam('dummy');		# userid of the dummy user
-$config{'days_since_epoch'} 	= int(time()/3600/24);		# number of days since the epoch
-$config{'hostname'}		= hostname();			# machine hostname
+##############################
+# Global Variables
+##############################
+$dummy_user	=	'scm-gforge';		# unix name of the dummy user
+$dummy_uid	=	getpwnam($dummy_user);	# uid of the dummy user that will own group's files
+$date		=	int(time()/3600/24);	# Get the number of days since 1/1/1970 for /etc/shadow
 
-####################
-# open the logfile #
-####################
-sub open_log_file {
-	open(Log, ">>$config{'log_file'}") || die "Couldn't Open Logfile: $!\n";
-	select(Log);
-	$| = 1;
-	return;
+@possible_paths = (
+    '/usr/share/gforge/bin',
+    '/usr/share/fusionforge/bin',
+    '/usr/local/share/gforge/bin',
+    '/usr/local/share/fusionforge/bin',
+    '/opt/gforge/bin',
+    '/opt/fusionforge/bin',
+    '/usr/bin',
+    '/usr/local/bin') ;
+foreach $p (@possible_paths) {
+	if (-x "$p/forge_get_config") {
+		$fgc = "$p/forge_get_config";
+		last;
+	}
+}
+
+%forge_config_cache = ();
+
+sub forge_get_config ($$) {
+    my $var = shift;
+    my $sec = shift || 'core';
+
+    if (!defined $forge_config_cache{$sec}{$var}) {
+	$forge_config_cache{$sec}{$var} = qx!$fgc $var $sec!;
+	chomp $forge_config_cache{$sec}{$var};
+    }
+    return $forge_config_cache{$sec}{$var};
+}
+
+$sys_default_domain = &forge_get_config ('web_host') ;
+$sys_return_domain = &forge_get_config ('forum_return_domain') ;
+$sys_scm_host = &forge_get_config ('web_host') ;
+$domain_name = &forge_get_config ('web_host') ;
+$sys_users_host = &forge_get_config ('users_host') ;
+$sys_lists_host = &forge_get_config ('lists_host') ;
+$sys_name = &forge_get_config ('forge_name') ;
+$sys_themeroot = &forge_get_config ('themes_root') ;
+$sys_news_group = &forge_get_config ('news_group') ;
+$sys_dbhost = &forge_get_config ('database_host') ;
+$sys_dbport = &forge_get_config ('database_port') ;
+$sys_dbname = &forge_get_config ('database_name') ;
+$sys_dbuser = &forge_get_config ('database_user') ;
+$sys_dbpasswd = &forge_get_config ('database_password') ;
+$sys_ldap_base_dn = &forge_get_config ('ldap_base_dn') ;
+$sys_ldap_host = &forge_get_config ('ldap_host') ;
+$server_admin = &forge_get_config ('admin_email') ;
+$chroot_prefix = &forge_get_config ('chroot') ;
+$homedir_prefix = &forge_get_config ('homedir_prefix') ;
+$grpdir_prefix = &forge_get_config ('groupdir_prefix') ;
+$file_dir = &forge_get_config ('data_path') ;
+$sys_use_ssl = &forge_get_config('use_ssl');
+$sys_urlprefix = &forge_get_config('url_prefix');
+
+##############################
+# Database Connect Functions
+##############################
+sub db_connect ( ) {
+    my $str = "DBI:Pg:dbname=$sys_dbname" ;
+    if ($sys_dbhost ne '') {
+	$str .= ";host=$sys_dbhost" ;
+    }
+    if ($sys_dbport ne '') {
+	$str .= ";port=$sys_dbport" ;
+    }
+    $dbh ||= DBI->connect($str,"$sys_dbuser","$sys_dbpasswd") ;
+    if (! $dbh) {
+	die "Error while connecting to database: $!" ;
+    }
+}
+
+sub db_disconnect ( ) {
+	$dbh->disconnect ;
+	$dbh = "" ;
+}
+
+sub db_drop_table_if_exists {
+    my ($sql, $res, $n, $tn) ;
+    $tn = shift ;
+    $sql = "SELECT COUNT(*) FROM pg_class WHERE relname='$tn'";
+    $res = $dbh->prepare($sql);
+    $res->execute();
+    ($n) = $res->fetchrow() ;
+    $res->finish () ;
+    if ($n != 0) {
+	$sql = "DROP TABLE $tn";
+	$res = $dbh->prepare($sql);
+	$res->execute () ;
+	$res->finish () ;
+    }
 }
 
 ##############################
-# log message to the logfile #
+# File open function, spews the entire file to an array.
 ##############################
-sub logme {
-	my $msg = shift(@_);
-	my $time = strftime "%Y-%m-%d - %T", localtime;
-	print "$time\t$msg\n";
-	return;
-}
-
-##########################
-# exit the script nicely #
-##########################
-sub exit_nicely {
-	&logme("------ Script Ended -------\n");
-	close(Log);
-	exit 0;
-}
-
-#########################################
-# open a file and read it into an array #
-#########################################
-sub open_array {
+sub open_array_file {
 	my $filename = shift(@_);
 
-	# Now read in the file as a big array
-	open (FD, $filename) || die &logme("Can't open $filename: $!");
+	open (FD, $filename) || die "Can't open $filename: $!.\n";
 	@tmp_array = <FD>;
-        close(FD);
+	close(FD);
 
-	&logme("Opened $filename with $@tmp_array Lines");
-        return @tmp_array;
-}               
+	return @tmp_array;
+}
 
-################################
-# write an array out to a file #
-################################
-sub write_array {
-	my ($filename, @filearray) = @_;
+#############################
+# File write function.
+#############################
+sub write_array_file {
+	my ($file_name, @file_array) = @_;
+	my $oldmask = umask(077);
 
-	# Write this array out to $filename
-	open(FD, ">$filename") || die &logme("Can't open $filename: $!");
-	foreach (@filearray) {
+	use File::Temp qw(tempfile);
+	use File::Basename qw(dirname);
+
+	my ($fd, $filename) ;
+	eval { ($fd, $filename) = tempfile( DIR => dirname($file_name), UNLINK => 0) } ;
+
+	umask($oldmask);
+
+	return 1 unless ($fd && $filename) ;
+
+	foreach (@file_array) {
 		if ($_ ne '') {
-			print FD;
+			print $fd $_;
 		}
 	}
-	&logme("Wrote $filename with $#filearray Lines");
-	close(FD);
+
+	close($fd);
+	unless (rename ($filename, $file_name)) {
+		unlink $filename;
+		return 1;
+	}
+	return 0;
+}
+
+#######################
+# Display a backtrace #
+#######################
+sub
+debug_print_backtrace
+{
+	my $i = 1;
+
+	print "Call Trace:\n";
+	while ((my @call_details = (caller($i++)))) {
+		print " + " . $call_details[1] . ":" . $call_details[2] .
+		    " in function " . $call_details[3] . "\n";
+	}
+}
+
+#############################
+# Compatibility functions.
+#############################
+sub util_make_url {
+	my ($path) = @_;
+	my $url;
+
+	if (($sys_use_ssl eq 'true') || ($sys_use_ssl eq '1')) {
+		$url = 'https://';
+	} else {
+		$url = 'http://';
+	}
+
+	$url .= $sys_default_domain . $sys_urlprefix;
+	$url =~ s,/$,,;
+	$path =~ s,^/,,;
+	$url .= '/' . $path;
+
+	return $url;
 }
