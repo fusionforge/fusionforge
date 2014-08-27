@@ -6174,66 +6174,8 @@ msgstr "編輯此頁面"
 #~ msgid "PageChange Notification of %s sent to %s"
 #~ msgstr "%s 的 PageChange 通知已送給 %s"
 
-#, fuzzy
-#~ msgid "Both 'url' or 'file' parameters missing."
-#~ msgstr "%s 或 %s 參數遺漏"
-
-#, fuzzy
-#~ msgid "Prediction: %s"
-#~ msgstr "編輯: %s"
-
-#, fuzzy
-#~ msgid "Prediction: %.1f"
-#~ msgstr "編輯: %s"
-
-#~ msgid "Use old markup"
-#~ msgstr "使用舊標記"
-
-#, fuzzy
-#~ msgid "_PreferencesInfo"
-#~ msgstr "偏好設定"
-
-#~ msgid "Markup"
-#~ msgstr "標記"
-
-#, fuzzy
-#~ msgid "Change the markup type of selected pages."
-#~ msgstr "永久移除選定的頁面."
-
-#, fuzzy
-#~ msgid "Change markup type from %s to %s"
-#~ msgstr "變更國家"
-
-#, fuzzy
-#~ msgid "change page “%s” to markup type “%s”."
-#~ msgstr "改變頁面 “%s” 權限為 “%s”."
-
-#, fuzzy
-#~ msgid "Couldn't change page “%s” to markup type “%s”."
-#~ msgstr "無法為頁面 “%s” 變更權限為 “%s”."
-
-#, fuzzy
-#~ msgid ""
-#~ "Are you sure you want to change the markup type of the selected files?"
-#~ msgstr "你確定你想要永久變更選定的檔案?"
-
-#, fuzzy
-#~ msgid "Change markup type"
-#~ msgstr "變更國家"
-
-#, fuzzy
-#~ msgid "Select the pages to change the markup type"
-#~ msgstr "選擇頁面以進行更名:"
-
-#, fuzzy
-#~ msgid "Change markup to: "
-#~ msgstr "改變密碼"
-
 #~ msgid "Version %s"
 #~ msgstr "版本 %s"
-
-#~ msgid "Original (1.2 or 1.0)"
-#~ msgstr "原始 (1.2 或 1.0)"
 
 #, fuzzy
 #~ msgid "%s not found"
@@ -6241,15 +6183,6 @@ msgstr "編輯此頁面"
 
 #~ msgid "Error: Empty search string."
 #~ msgstr "錯誤: 空白的搜尋字串."
-
-#~ msgid "chmod page “%s” to “%s”."
-#~ msgstr "改變頁面 “%s” 權限為 “%s”."
-
-#~ msgid "Couldn't chmod page “%s” to “%s”."
-#~ msgstr "無法為頁面 “%s” 變更權限為 “%s”."
-
-#~ msgid "Invalid chmod string"
-#~ msgstr "錯誤的 chmod 字串"
 
 #~ msgid "Are you sure you want to permanently change the selected files?"
 #~ msgstr "你確定你想要永久變更選定的檔案?"
@@ -6283,7 +6216,3 @@ msgstr "編輯此頁面"
 #, fuzzy
 #~ msgid "SetExternal"
 #~ msgstr "外部連結"
-
-#, fuzzy
-#~ msgid "AuthInfo"
-#~ msgstr "_AuthInfo"

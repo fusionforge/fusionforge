@@ -5813,17 +5813,6 @@ msgstr ""
 #~ msgid "PageChange Notification of %s sent to %s"
 #~ msgstr "Pagini la notifica del cambiamento di %s trasmesso a %s"
 
-#, fuzzy
-#~ msgid "Prediction: %s"
-#~ msgstr "Modifica: %s"
-
-#, fuzzy
-#~ msgid "Prediction: %.1f"
-#~ msgstr "Modifica: %s"
-
-#~ msgid "_PreferencesInfo"
-#~ msgstr "_PreferenzeInfo"
-
 #~ msgid "Version %s"
 #~ msgstr "Versione %s"
 

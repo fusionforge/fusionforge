@@ -5801,18 +5801,6 @@ msgstr "Zoek"
 msgid "Edit this page"
 msgstr ""
 
-#, fuzzy
-#~ msgid "Prediction: %s"
-#~ msgstr "Verander: %s"
-
-#, fuzzy
-#~ msgid "Prediction: %.1f"
-#~ msgstr "Verander: %s"
-
-#, fuzzy
-#~ msgid "period"
-#~ msgstr "versie %d"
-
 #~ msgid "from %s"
 #~ msgstr "van %s"
 

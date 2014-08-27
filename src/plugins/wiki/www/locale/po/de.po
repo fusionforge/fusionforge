@@ -5479,7 +5479,6 @@ msgstr "Unterseite"
 msgid "Page Type"
 msgstr "Seitentyp"
 
-# Note that this particular text will be displayed as PhpWikiMarkup 2.0.
 #, php-format
 msgid ""
 "You may sign in using any [[Help:AddingPages|WikiWord]] as a user id. (Any "
@@ -6070,18 +6069,6 @@ msgstr "Diese Seite bearbeiten"
 
 #~ msgid "PageChange Notification of %s sent to %s"
 #~ msgstr "SeitenÄnderung Benachrichtigung von %s an %s gesendet"
-
-# (Wrong Translation; sorry, but the German term for edit is NOT
-# editieren, but  e d i e r e n).
-#, fuzzy
-#~ msgid "Prediction: %s"
-#~ msgstr "Bearbeite: %s"
-
-# (Wrong Translation; sorry, but the German term for edit is NOT
-# editieren, but  e d i e r e n).
-#, fuzzy
-#~ msgid "Prediction: %.1f"
-#~ msgstr "Bearbeite: %s"
 
 #~ msgid "invalid %s ignored"
 #~ msgstr "ungültiges %s ignoriert"

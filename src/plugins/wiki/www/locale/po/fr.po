@@ -5983,15 +5983,8 @@ msgstr "Modifier cette page"
 #~ msgid "invalid %s ignored"
 #~ msgstr "%s non valable ignoré"
 
-#~ msgid "Imdb"
-#~ msgstr "Imdb"
-
 #~ msgid "Version %s"
 #~ msgstr "Version %s"
-
-#, fuzzy
-#~ msgid "%s not found"
-#~ msgstr "%s non trouvé dans %s"
 
 #~ msgid "Error: Empty search string."
 #~ msgstr "Erreur : la chaîne à rechercher est vide."
@@ -6015,10 +6008,6 @@ msgstr "Modifier cette page"
 #~ msgstr ""
 #~ "Historique des éditions majeures ou mineures pour n'importe quelle page "
 #~ "éditée par %s."
-
-#, fuzzy
-#~ msgid "name"
-#~ msgstr "Renommer"
 
 #~ msgid "Spell Checker"
 #~ msgstr "Correcteur orthographique"

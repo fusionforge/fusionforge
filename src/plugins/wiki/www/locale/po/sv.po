@@ -5793,19 +5793,3 @@ msgstr ""
 
 msgid "Edit this page"
 msgstr ""
-
-#, fuzzy
-#~ msgid "Prediction: %s"
-#~ msgstr "Redigera: %s"
-
-#, fuzzy
-#~ msgid "Prediction: %.1f"
-#~ msgstr "Redigera: %s"
-
-#, fuzzy
-#~ msgid "%s not found"
-#~ msgstr "%s: fila ingen funna"
-
-#, fuzzy
-#~ msgid "period"
-#~ msgstr "version %d"

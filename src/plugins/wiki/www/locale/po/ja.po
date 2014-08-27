@@ -6053,79 +6053,8 @@ msgstr "スライドバー"
 msgid "Edit this page"
 msgstr "ページを編集しています。"
 
-#, fuzzy
-#~ msgid "_AuthInfo"
-#~ msgstr "編集者:"
-
-#, fuzzy
-#~ msgid "_GroupInfo"
-#~ msgstr "デバグ情報"
-
-#, fuzzy
-#~ msgid "GroupAuthInfo"
-#~ msgstr "編集者:"
-
 #~ msgid "Edit aborted."
 #~ msgstr "編集を中断しました。"
-
-#, fuzzy
-#~ msgid "Views"
-#~ msgstr "ソースを見る"
-
-#, fuzzy
-#~ msgid "Prediction: %s"
-#~ msgstr "編集: %s"
-
-#, fuzzy
-#~ msgid "Prediction: %.1f"
-#~ msgstr "編集: %s"
-
-#~ msgid "Use old markup"
-#~ msgstr "古いマークアップを使用"
-
-#, fuzzy
-#~ msgid "_PreferencesInfo"
-#~ msgstr "参照一覧"
-
-#~ msgid "Markup"
-#~ msgstr "マークアップ"
-
-#, fuzzy
-#~ msgid "Change the markup type of selected pages."
-#~ msgstr "選択ページを全て削除"
-
-#, fuzzy
-#~ msgid "Change markup type from %s to %s"
-#~ msgstr "国名変更"
-
-#, fuzzy
-#~ msgid "change page “%s” to markup type “%s”."
-#~ msgstr "“%s” の削除に成功しました。"
-
-#, fuzzy
-#~ msgid "Couldn't change page “%s” to markup type “%s”."
-#~ msgstr "“%s” の削除に成功しました。"
-
-#, fuzzy
-#~ msgid ""
-#~ "Are you sure you want to change the markup type of the selected files?"
-#~ msgstr "選択ページを全て削除"
-
-#, fuzzy
-#~ msgid "Change markup type"
-#~ msgstr "国名変更"
-
-#, fuzzy
-#~ msgid "Select the pages to change the markup type"
-#~ msgstr "貴方個人の言語を選択"
-
-#, fuzzy
-#~ msgid "Change markup to: "
-#~ msgstr "パスワード変更"
-
-#, fuzzy
-#~ msgid "WikiAdminMarkup"
-#~ msgstr "管理"
 
 #~ msgid "Version %s"
 #~ msgstr "バージョン %s"

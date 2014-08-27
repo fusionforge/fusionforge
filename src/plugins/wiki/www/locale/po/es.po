@@ -5878,14 +5878,6 @@ msgstr "Corrija esta página"
 #~ msgid "PageChange Notification of %s sent to %s"
 #~ msgstr "Pagine la notificación del cambio de %s enviado a %s"
 
-#, fuzzy
-#~ msgid "Prediction: %s"
-#~ msgstr "Editar: %s"
-
-#, fuzzy
-#~ msgid "Prediction: %.1f"
-#~ msgstr "Editar: %s"
-
 #~ msgid "Version %s"
 #~ msgstr "Versión %s"
 
