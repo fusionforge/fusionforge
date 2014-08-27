@@ -298,7 +298,6 @@ class WikiDB_backend
      * @param string    $sortby
      * @param string    $limit
      * @param string    $exclude
-     * @param bool      $want_relations
      *
      * FIXME: array or iterator?
      * @return object A WikiDB_backend_iterator.
