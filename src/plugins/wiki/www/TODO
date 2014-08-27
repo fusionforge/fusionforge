@@ -42,7 +42,6 @@ new:
 * ATOM (experimentally done), TrackBack, PingBack services (take it from DokuWiki)
 * finish Blog theme
 * lang: mapping
-* fix ENABLE_MARKUP_DIVSPAN
 * WikiUser/EMailConfirm (?)
 * ImportMediaWiki, ImportRdf, ImportOwl, ExportMediaWiki, ExportRdf, ExportOwl
 * WikiUser/OpenID (from DokuWiki) - Status::in_work
@@ -94,8 +93,6 @@ already done lately:
   defer header logic
 * don't print php notices and warnings as red errors.
   just green or grey
-* rewrite OldTextFormattingRules, AnciennesR%E8glesDeFormatage
-  for proper importing
 * PageChangeNotification other actions also (rename, remove).
   better subject on create.
 * do all unit tests:
@@ -170,4 +167,3 @@ already done lately:
     * finalize editpage javascript toolbar (80%)
       fix search/replace bug (100%)
     * finalize SOAP support (0%)
-    * better utf-8 support (50%)
