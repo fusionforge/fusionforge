@@ -19,8 +19,7 @@ class RssWriter2 extends RssWriter
 {
     function __construct()
     {
-        $this->XmlElement('rss',
-            array('version' => "2.0"));
+        parent::__construct('rss', array('version' => "2.0"));
 
         // not used. no namespaces should be used.
         $this->_modules = array(
