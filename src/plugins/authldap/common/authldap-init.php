@@ -22,7 +22,7 @@
  */
 
 global $gfplugins;
-require_once $gfplugins.'authldap/include/AuthLDAPPlugin.class.php' ;
+require_once $gfplugins.'authldap/common/AuthLDAPPlugin.class.php' ;
 
 $AuthLDAPPluginObject = new AuthLDAPPlugin ;
 

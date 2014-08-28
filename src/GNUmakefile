@@ -115,7 +115,7 @@ post-install-core:  # common+db+web
 post-install-shell:
 	$(fgc_source_path)/post-install.d/shell/shell.sh configure
 
-PLUGINS_INSTALLED:=$(shell ls $(fgc_source_path)/plugins 2>/dev/null)
+PLUGINS_INSTALLED:=$(wildcard $(fgc_source_path)/plugins)
 PLUGINS_POST_INSTALL_TARGETS=$(addprefix post-install-plugin-,$(PLUGINS_INSTALLED))
 post-install-plugins: $(PLUGINS_POST_INSTALL_TARGETS)
 post-install-plugin-%: $(fgc_source_path)/plugins/%/

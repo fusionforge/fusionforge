@@ -41,7 +41,11 @@ class SVNPlugin extends SCMPlugin {
 	function SVNPlugin() {
 		$this->SCMPlugin();
 		$this->name = 'scmsvn';
-		$this->text = 'Subversion';
+		$this->text = _('Subversion');
+		$this->pkg_desc =
+_("This plugin contains the Subversion subsystem of FusionForge. It allows
+each FusionForge project to have its own Subversion repository, and gives
+some control over it to the project's administrator.");
 		$this->svn_root_fs = '/scmrepos/svn';
 		if (!file_exists($this->svn_root_fs.'/.')) {
 			$this->svn_root_fs = forge_get_config('repos_path',

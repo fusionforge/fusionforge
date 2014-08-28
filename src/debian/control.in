@@ -1,0 +1,132 @@
+Source: fusionforge
+Section: devel
+Priority: optional
+Maintainer: Roland Mas <lolando@debian.org>
+Uploaders: Christian Bayle <bayle@debian.org>, Olivier Berger <obergix@debian.org>, Sylvain Beucler <beuc@debian.org>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.5
+Homepage: https://fusionforge.org/
+Vcs-Git: https://fusionforge.org/anonscm/git/deb-packaging/deb-packaging.git
+Vcs-Browser: https://fusionforge.org/scm/browser.php?group_id=9
+
+
+Package: fusionforge
+Architecture: all
+Depends: fusionforge-common (=${source:Version}), fusionforge-db-local | fusionforge-db, fusionforge-web, ${misc:Depends}
+Recommends: fusionforge-shell, fusionforge-plugin-scmgit, fusionforge-plugin-scmsvn
+Suggests: fusionforge-plugin-mediawiki, fusionforge-plugin-moinmoin, fusionforge-plugin-blocks
+Description: collaborative development tool - standard metapackage
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This metapackage installs a stand-alone FusionForge site.
+ See also the Recommends and Suggests dependencies.
+
+
+Package: fusionforge-common
+Architecture: all
+Depends: php5-cli, php5-pgsql, php-htmlpurifier, cron, perl, ${misc:Depends}
+Description: collaborative development tool - shared files
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This package contains files and programs used by several other
+ subpackages.
+
+
+Package: fusionforge-db-local
+Architecture: all
+Depends: fusionforge-common (=${source:Version}), postgresql, php5-cli, ${misc:Depends}
+Description: collaborative development tool - database (using PostgreSQL)
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This package installs, configures and maintains the FusionForge
+ database.
+
+
+Package: fusionforge-db-remote
+Architecture: all
+Provides: fusionforge-db
+Depends: ${misc:Depends}
+Description: collaborative development tool - database (remote)
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This dummy package tells FusionForge you installed the database on a
+ separate machine.  It preserves the fusionforge-db virtual dependency,
+ to configure the database before depending packages in single-server
+ installs (e.g. plugins activation requires a populated db).
+
+
+Package: fusionforge-web
+Architecture: all
+Depends: fusionforge-common (=${source:Version}), fusionforge-db, php5-cli, libapache2-mod-php5, python, ${misc:Depends}
+Recommends: locales-all
+Description: collaborative development tool - web part (using Apache)
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This package contains the files needed to run the web part of
+ FusionForge on an Apache webserver.
+
+
+Package: fusionforge-shell
+Architecture: all
+Depends: fusionforge-common (=${source:Version}), php5-cli, ucf, libnss-pgsql2, openssh-server, unscd | nscd, ${misc:Depends}
+Description: collaborative development tool - shell accounts (using PostgreSQL)
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This package provides shell accounts authenticated via the PostGreSQL
+ database to FusionForge users.
+
+
+Package: fusionforge-mta-postfix
+Architecture: all
+Depends: fusionforge-common (=${source:Version}), postfix, postfix-pgsql, ${misc:Depends}
+Provides: fusionforge-mta
+Conflicts: fusionforge-mta
+Description: collaborative development tool - mail tools (using Postfix)
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This package configures the Postfix mail transfer agent to run
+ FusionForge.
+
+
+Package: fusionforge-mta-exim4
+Architecture: all
+Depends: fusionforge-common (=${source:Version}), exim4-daemon-heavy, ${misc:Depends}
+Provides: fusionforge-mta
+Conflicts: fusionforge-mta
+Description: collaborative development tool - mail tools (using Exim 4)
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This package configures the Exim 4 mail transfer agent to run
+ FusionForge.

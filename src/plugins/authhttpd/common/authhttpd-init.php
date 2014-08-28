@@ -20,7 +20,7 @@
  */
 
 global $gfplugins;
-require_once $gfplugins.'authhttpd/include/AuthHTTPDPlugin.class.php' ;
+require_once $gfplugins.'authhttpd/common/AuthHTTPDPlugin.class.php' ;
 
 $AuthHTTPDPluginObject = new AuthHTTPDPlugin ;
 

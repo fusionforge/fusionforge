@@ -18,7 +18,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $GLOBALS['gfcommon'].'include/User.class.php';
+require_once $gfcommon.'include/User.class.php';
+require_once $gfcommon.'include/AuthPlugin.class.php';
 
 /**
  * Authentication manager for FusionForge
@@ -29,8 +30,11 @@ class AuthHTTPDPlugin extends ForgeAuthPlugin {
 		global $gfconfig;
 		$this->ForgeAuthPlugin() ;
 		$this->name = "authhttpd";
-		$this->text = "HTTPD authentication";
-
+		$this->text = _("HTTPD authentication");
+		$this->pkg_desc =
+_("This plugin contains an HTTPD authentication mechanism for
+FusionForge. It allows Apache authentication to be reused for
+FusionForge, for instance where Kerberos is used.");
 		$this->_addHook('display_auth_form');
 		$this->_addHook("check_auth_session");
 		$this->_addHook("fetch_authenticated_user");

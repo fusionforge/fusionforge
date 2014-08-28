@@ -28,7 +28,11 @@ class ArchPlugin extends SCMPlugin {
 		global $gfconfig;
 		$this->SCMPlugin () ;
 		$this->name = 'scmarch';
-		$this->text = 'Arch';
+		$this->text = _('Arch');
+		$this->pkg_desc =
+_("This plugin contains the GNU Arch subsystem of FusionForge. It allows
+each FusionForge project to have its own Arch repository, and gives
+some control over it to the project's administrator.");
 		$this->hooks[] = 'scm_generate_snapshots' ;
 
 		$this->register () ;

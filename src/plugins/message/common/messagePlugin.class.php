@@ -33,6 +33,9 @@ class messagePlugin extends Plugin {
 		$this->Plugin() ;
 		$this->name = "message" ;
 		$this->text = _('Message');
+		$this->pkg_desc =
+_("This plugin allows the site administrator to display a message banner
+on all pages, e.g. for maintenance announcements.");
 		$this->hooks[] = 'message';
 		$this->hooks[] = 'htmlhead';
 		$this->hooks[] = 'site_admin_option_hook';

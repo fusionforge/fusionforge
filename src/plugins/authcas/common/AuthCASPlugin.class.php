@@ -19,10 +19,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $GLOBALS['gfcommon'].'include/User.class.php';
-
-// from phpCAS (https://wiki.jasig.org/display/CASC/phpCAS)
-require_once 'CAS.php';
+require_once $gfcommon.'include/User.class.php';
+require_once $gfcommon.'include/AuthPlugin.class.php';
 
 /**
  * Authentication manager for FusionForge CASification
@@ -33,8 +31,11 @@ class AuthCASPlugin extends ForgeAuthPlugin {
 		global $gfconfig;
 		$this->ForgeAuthPlugin() ;
 		$this->name = "authcas";
-		$this->text = "CAS authentication";
-
+		$this->text = _("CAS authentication");
+		$this->pkg_desc =
+_("This plugin contains a CAS authentication mechanism for
+FusionForge. It allows users to authenticate against an external CAS
+server.");
 		$this->_addHook('display_auth_form');
 		$this->_addHook("check_auth_session");
 		$this->_addHook("fetch_authenticated_user");
@@ -49,6 +50,9 @@ class AuthCASPlugin extends ForgeAuthPlugin {
 	private static $init = false;
 
 	function initCAS() {
+		// from phpCAS (https://wiki.jasig.org/display/CASC/phpCAS)
+		require_once 'CAS.php';
+
 		if (self::$init) {
 			return;
 		}

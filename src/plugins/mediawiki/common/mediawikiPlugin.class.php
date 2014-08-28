@@ -37,7 +37,9 @@ class MediaWikiPlugin extends Plugin {
 	function __construct ($id=0) {
 		$this->Plugin($id) ;
 		$this->name = "mediawiki" ;
-		$this->text = "Mediawiki" ; // To show in the tabs, use...
+		$this->text = _("Mediawiki") ; // To show in the tabs, use...
+		$this->pkg_desc =
+_("This plugin allows each project to embed Mediawiki under a tab.");
 		$this->_addHook("groupmenu") ;	// To put into the project tabs
 		$this->_addHook("groupisactivecheckbox") ; // The "use ..." checkbox in editgroupinfo
 		$this->_addHook("groupisactivecheckboxpost") ; //

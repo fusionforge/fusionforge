@@ -1,0 +1,81 @@
+Package: fusionforge-plugin-scmgit
+Depends: git, gitweb
+
+Package: fusionforge-plugin-scmsvn
+Depends: subversion, subversion-tools, openbsd-inetd | inet-superserver, update-inetd
+
+Package: fusionforge-plugin-scmbzr
+Depends: bzr, libapache2-mod-wsgi, loggerhead (>= 1.19~bzr477~), python-pastedeploy
+
+Package: fusionforge-plugin-scmarch
+Depends: tla
+
+Package: fusionforge-plugin-scmcvs
+Depends: php5-cli, libipc-run-perl, rcs, liburi-perl, cvs, python, libphp-snoopy, openbsd-inetd | inet-superserver, update-inetd
+
+Package: fusionforge-plugin-scmdarcs
+Depends: fusionforge-shell, darcs, darcsweb
+
+Package: fusionforge-plugin-scmhg
+Depends: fusionforge-shell-postgresql, mercurial
+
+Package: fusionforge-plugin-mediawiki
+Depends: php5-cli, mediawiki (>= 1:1.19.1-2~exp2)
+
+Package: fusionforge-plugin-moinmoin
+Depends: php5-cli, python-moinmoin, python-psycopg2, libapache2-mod-wsgi
+
+Package: fusionforge-plugin-admssw
+Depends: php-http, fusionforge-plugin-doaprdf, libgraphite-php
+
+Package: fusionforge-plugin-authcas
+Depends: php-cas
+
+Package: fusionforge-plugin-authhttpd
+Depends:
+
+Package: fusionforge-plugin-authldap
+Depends: php5-ldap
+
+Package: fusionforge-plugin-blocks
+Depends:
+
+Package: fusionforge-plugin-compactpreview
+Depends:
+
+Package: fusionforge-plugin-contribtracker
+Depends:
+
+Package: fusionforge-plugin-doaprdf
+Depends: php-http, libarc-php
+
+Package: fusionforge-plugin-extsubproj
+Depends: libarc-php, fusionforge-plugin-compactpreview
+
+Package: fusionforge-plugin-foafprofiles
+Depends:
+
+Package: fusionforge-plugin-globalsearch
+Depends: libxml-rss-perl, libgetopt-mixed-perl, libdbi-perl, libwww-perl, libcrypt-ssleay-perl, libunicode-string-perl
+
+Package: fusionforge-plugin-gravatar
+Depends: 
+
+Package: fusionforge-plugin-headermenu
+Depends:
+
+Package: fusionforge-plugin-hudson
+Depends: php5-cli
+
+Package: fusionforge-plugin-message
+Depends:
+
+Package: fusionforge-plugin-projectlabels
+Depends:
+
+Package: fusionforge-plugin-scmhook
+Depends: php5-cli, libphp-snoopy
+
+Package: fusionforge-plugin-sysauthldap
+Depends: php5-ldap
+Recommends: slapd, ldap-utils

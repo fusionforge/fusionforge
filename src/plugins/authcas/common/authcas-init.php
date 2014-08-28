@@ -20,7 +20,7 @@
  */
 
 global $gfplugins;
-require_once $gfplugins.'authcas/include/AuthCASPlugin.class.php' ;
+require_once $gfplugins.'authcas/common/AuthCASPlugin.class.php' ;
 
 $AuthCASPluginObject = new AuthCASPlugin ;
 

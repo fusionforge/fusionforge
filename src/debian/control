@@ -131,11 +131,10 @@ Description: collaborative development tool - mail tools (using Exim 4)
  This package configures the Exim 4 mail transfer agent to run
  FusionForge.
 
-
 Package: fusionforge-plugin-scmgit
+Depends: fusionforge-common (=${source:Version}), git, gitweb, ${misc:Depends}
 Architecture: all
-Depends: fusionforge-web (=${source:Version}), git, gitweb, php5-cli, ${misc:Depends}
-Description: collaborative development tool - Git plugin
+Description: collaborative development tool - Git
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
  mailing-lists, SCM repository, forums, support request helper,
@@ -146,11 +145,10 @@ Description: collaborative development tool - Git plugin
  FusionForge project to have its own Git repository, and gives some
  control over it to the project's administrator.
 
-
 Package: fusionforge-plugin-scmsvn
+Depends: fusionforge-common (=${source:Version}), subversion, subversion-tools, openbsd-inetd | inet-superserver, update-inetd, ${misc:Depends}
 Architecture: all
-Depends: fusionforge-web (=${source:Version}), subversion, subversion-tools, php5-cli, openbsd-inetd | inet-superserver, update-inetd, ${misc:Depends}
-Description: collaborative development tool - Subversion plugin
+Description: collaborative development tool - Subversion
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
  mailing-lists, SCM repository, forums, support request helper,
@@ -161,11 +159,10 @@ Description: collaborative development tool - Subversion plugin
  each FusionForge project to have its own Subversion repository, and gives
  some control over it to the project's administrator.
 
-
 Package: fusionforge-plugin-scmbzr
+Depends: fusionforge-common (=${source:Version}), bzr, libapache2-mod-wsgi, loggerhead (>= 1.19~bzr477~), python-pastedeploy, ${misc:Depends}
 Architecture: all
-Depends: fusionforge-web (=${source:Version}), bzr, php5-cli, libapache2-mod-wsgi, loggerhead (>= 1.19~bzr477~), python-pastedeploy, ${misc:Depends}
-Description: collaborative development tool - Bazaar plugin
+Description: collaborative development tool - Bazaar
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
  mailing-lists, SCM repository, forums, support request helper,
@@ -176,11 +173,118 @@ Description: collaborative development tool - Bazaar plugin
  FusionForge project to have its own Bazaar repository, and gives some control
  over it to the project's administrator.
 
+Package: fusionforge-plugin-scmarch
+Depends: fusionforge-common (=${source:Version}), tla, ${misc:Depends}
+Architecture: all
+Description: collaborative development tool - Arch
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This plugin contains the GNU Arch subsystem of FusionForge. It allows
+ each FusionForge project to have its own Arch repository, and gives
+ some control over it to the project's administrator.
+
+Package: fusionforge-plugin-scmcvs
+Depends: fusionforge-common (=${source:Version}), php5-cli, libipc-run-perl, rcs, liburi-perl, cvs, python, libphp-snoopy, openbsd-inetd | inet-superserver, update-inetd, ${misc:Depends}
+Architecture: all
+Description: collaborative development tool - CVS
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This plugin contains the CVS subsystem of FusionForge. It allows each
+ FusionForge project to have its own CVS repository, and gives some control
+ over it to the project's administrator.
+
+Package: fusionforge-plugin-scmdarcs
+Depends: fusionforge-common (=${source:Version}), fusionforge-shell, darcs, darcsweb, ${misc:Depends}
+Architecture: all
+Description: collaborative development tool - Darcs
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This plugin contains the Darcs subsystem of FusionForge. It allows each
+ FusionForge project to have its own Darcs repository, and gives some control
+ over it to the project's administrator.
+
+Package: fusionforge-plugin-scmhg
+Depends: fusionforge-common (=${source:Version}), fusionforge-shell-postgresql, mercurial, ${misc:Depends}
+Architecture: all
+Description: collaborative development tool - Mercurial
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This plugin contains the Mercurial (Hg) subsystem of FusionForge. It
+ allows each FusionForge project to have its own Mercurial repository,
+ and gives some control over it to the project's administrator.
+
+Package: fusionforge-plugin-mediawiki
+Depends: fusionforge-common (=${source:Version}), php5-cli, mediawiki (>= 1:1.19.1-2~exp2), ${misc:Depends}
+Architecture: all
+Description: collaborative development tool - Mediawiki
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This plugin allows each project to embed Mediawiki under a tab.
+
+Package: fusionforge-plugin-moinmoin
+Depends: fusionforge-common (=${source:Version}), php5-cli, python-moinmoin, python-psycopg2, libapache2-mod-wsgi, ${misc:Depends}
+Architecture: all
+Description: collaborative development tool - MoinMoinWiki
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This plugin allows each project to embed MoinMoinWiki under a tab.
+
+Package: fusionforge-plugin-admssw
+Depends: fusionforge-common (=${source:Version}), php-http, fusionforge-plugin-doaprdf, libgraphite-php, ${misc:Depends}
+Architecture: all
+Description: collaborative development tool - ADMS.SW
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This plugin provides ADMS.SW additions to the DOAP RDF documents for
+ projects on /projects URLs with content-negociation
+ (application/rdf+xml).
+
+Package: fusionforge-plugin-authcas
+Depends: fusionforge-common (=${source:Version}), php-cas, ${misc:Depends}
+Architecture: all
+Description: collaborative development tool - CAS authentication
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This plugin contains a CAS authentication mechanism for
+ FusionForge. It allows users to authenticate against an external CAS
+ server.
 
 Package: fusionforge-plugin-authhttpd
+Depends: fusionforge-common (=${source:Version}),, ${misc:Depends}
 Architecture: all
-Depends: fusionforge-web (=${source:Version}), ${misc:Depends}
-Description: collaborative development tool - HTTPD authentication plugin
+Description: collaborative development tool - HTTPD authentication
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
  mailing-lists, SCM repository, forums, support request helper,
@@ -191,11 +295,25 @@ Description: collaborative development tool - HTTPD authentication plugin
  FusionForge. It allows Apache authentication to be reused for
  FusionForge, for instance where Kerberos is used.
 
+Package: fusionforge-plugin-authldap
+Depends: fusionforge-common (=${source:Version}), php5-ldap, ${misc:Depends}
+Architecture: all
+Description: collaborative development tool - LDAP authentication
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This plugin contains an LDAP authentication mechanism for
+ FusionForge. It allows users to authenticate against an external LDAP
+ directory, and syncs some of their personal information from LDAP
+ into the FusionForge database.
 
 Package: fusionforge-plugin-blocks
+Depends: fusionforge-common (=${source:Version}),, ${misc:Depends}
 Architecture: all
-Depends: fusionforge-web (=${source:Version}), ${misc:Depends}
-Description: collaborative development tool - Blocks plugin
+Description: collaborative development tool - Blocks
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
  mailing-lists, SCM repository, forums, support request helper,
@@ -206,28 +324,178 @@ Description: collaborative development tool - Blocks plugin
  FusionForge project to have its own Blocks, and gives some
  control over it to the project's administrator.
 
-
-Package: fusionforge-plugin-mediawiki
+Package: fusionforge-plugin-compactpreview
+Depends: fusionforge-common (=${source:Version}),, ${misc:Depends}
 Architecture: all
-Depends: fusionforge-web (=${source:Version}), mediawiki (>= 1:1.19.1-2~exp2), php5-cli, ${misc:Depends}
-Description: collaborative development tool - Mediawiki plugin
+Description: collaborative development tool - CompactPreview!
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
  mailing-lists, SCM repository, forums, support request helper,
  web/FTP hosting, release management, etc. All these services are
  integrated into one web site and managed through a web interface.
  .
- This plugin allows each project to embed Mediawiki under a tab.
+ This plugin adds support for user and project compact-preview
+ (popups) compatible with the OSLC specifications.
 
-
-Package: fusionforge-plugin-moinmoin
+Package: fusionforge-plugin-contribtracker
+Depends: fusionforge-common (=${source:Version}),, ${misc:Depends}
 Architecture: all
-Depends: fusionforge-web (=${source:Version}), python-moinmoin, python-psycopg2, libapache2-mod-wsgi, ${misc:Depends}
-Description: collaborative development tool - MoinMoinWiki plugin
+Description: collaborative development tool - Contribution Tracker
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
  mailing-lists, SCM repository, forums, support request helper,
  web/FTP hosting, release management, etc. All these services are
  integrated into one web site and managed through a web interface.
  .
- This plugin allows each project to embed MoinMoinWiki under a tab.
+ This plugin allows each project to display a list of significant
+ contributions, along with their authors.
+
+Package: fusionforge-plugin-doaprdf
+Depends: fusionforge-common (=${source:Version}), php-http, libarc-php, ${misc:Depends}
+Architecture: all
+Description: collaborative development tool - DoaPRDF!
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This plugin provides DOAP RDF documents for projects on /projects URLs 
+ with content-negociation (application/rdf+xml).
+
+Package: fusionforge-plugin-extsubproj
+Depends: fusionforge-common (=${source:Version}), libarc-php, fusionforge-plugin-compactpreview, ${misc:Depends}
+Architecture: all
+Description: collaborative development tool - External SubProjects
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This plugin contains the extsubproj subsystem of FusionForge. It allows each
+ FusionForge project to have its own extsubproj, and gives some
+ control over it to the project's administrator.
+
+Package: fusionforge-plugin-foafprofiles
+Depends: fusionforge-common (=${source:Version}),, ${misc:Depends}
+Architecture: all
+Description: collaborative development tool - User FOAF Profiles
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This plugin provides FOAF profiles for users on /users URLs 
+ with content-negociation (application/rdf+xml).
+
+Package: fusionforge-plugin-globalsearch
+Depends: fusionforge-common (=${source:Version}), libxml-rss-perl, libgetopt-mixed-perl, libdbi-perl, libwww-perl, libcrypt-ssleay-perl, libunicode-string-perl, ${misc:Depends}
+Architecture: all
+Description: collaborative development tool - Globalsearch
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This plugin contains a cross-FusionForge search engine.  You can
+ declare a list of other FusionForge sites, and search for projects
+ hosted on these forges from your own.
+
+Package: fusionforge-plugin-gravatar
+Depends: fusionforge-common (=${source:Version}), , ${misc:Depends}
+Architecture: all
+Description: collaborative development tool - Gravatar Plugin
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This plugin contains the gravatar plugin of FusionForge. It allows each
+ FusionForge user to have its gravatar icon displayed.
+
+Package: fusionforge-plugin-headermenu
+Depends: fusionforge-common (=${source:Version}),, ${misc:Depends}
+Architecture: all
+Description: collaborative development tool - Menu Tabs Manager
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This plugin allows each project to define extra tabs with arbitrary
+ titles and links.
+
+Package: fusionforge-plugin-hudson
+Depends: fusionforge-common (=${source:Version}), php5-cli, ${misc:Depends}
+Architecture: all
+Description: collaborative development tool - Hudson/Jenkins
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This plugin contains the Hudson subsystem of FusionForge. It allows each
+ FusionForge project to have its own Hudson, and gives some
+ control over it to the project's administrator.
+
+Package: fusionforge-plugin-message
+Depends: fusionforge-common (=${source:Version}),, ${misc:Depends}
+Architecture: all
+Description: collaborative development tool - Message
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This plugin allows the site administrator to display a message banner
+ on all pages, e.g. for maintenance announcements.
+
+Package: fusionforge-plugin-projectlabels
+Depends: fusionforge-common (=${source:Version}),, ${misc:Depends}
+Architecture: all
+Description: collaborative development tool - Project labels
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This can be used to highlight some projects on a forge, for instance
+ for a "project of the month".
+
+Package: fusionforge-plugin-scmhook
+Depends: fusionforge-common (=${source:Version}), php5-cli, libphp-snoopy, ${misc:Depends}
+Architecture: all
+Description: collaborative development tool - Scmhook
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This plugin contains a set of commit hooks (e-mail notifications,
+ tracker integration, conformity...) that can be enabled for each
+ project independently.
+
+Package: fusionforge-plugin-sysauthldap
+Depends: fusionforge-common (=${source:Version}), php5-ldap, ${misc:Depends}
+Recommends: slapd, ldap-utils
+Architecture: all
+Description: collaborative development tool - System authentication via PostgreLDAP
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This plugin maintains data about users, groups and memberships in an
+  LDAP directory that can be used for NSS/PAM system authentication (or
+  for other uses).
+

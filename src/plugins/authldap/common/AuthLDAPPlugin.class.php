@@ -24,7 +24,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $GLOBALS['gfcommon'].'include/User.class.php';
+require_once $gfcommon.'include/User.class.php';
+require_once $gfcommon.'include/AuthPlugin.class.php';
 
 class AuthLDAPPlugin extends ForgeAuthPlugin {
 	protected $saved_login;
@@ -35,8 +36,12 @@ class AuthLDAPPlugin extends ForgeAuthPlugin {
 		global $gfconfig;
 		$this->ForgeAuthPlugin();
 		$this->name = "authldap";
-		$this->text = "LDAP authentication";
-
+		$this->text = _("LDAP authentication");
+		$this->pkg_desc =
+_("This plugin contains an LDAP authentication mechanism for
+FusionForge. It allows users to authenticate against an external LDAP
+directory, and syncs some of their personal information from LDAP
+into the FusionForge database.");
 		$this->_addHook('display_auth_form');
 		$this->_addHook("check_auth_session");
 		$this->_addHook("fetch_authenticated_user");

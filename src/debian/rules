@@ -28,10 +28,10 @@ override_dh_auto_install:
 	make install-shell       prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-shell
 	make install-mta-postfix prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-mta-postfix
 	make install-mta-exim4   prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-mta-exim4
-	make install-plugin-scmgit    prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-plugin-scmgit
-	make install-plugin-scmsvn    prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-plugin-scmsvn
-	make install-plugin-scmbzr    prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-plugin-scmbzr
-	make install-plugin-authhttpd   prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-plugin-authhttpd
-	make install-plugin-blocks      prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-plugin-blocks
-	make install-plugin-mediawiki   prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-plugin-mediawiki
-	make install-plugin-moinmoin    prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-plugin-moinmoin
+	for i in $$(sed -n 's/^Package: fusionforge-plugin-//p' debian/plugins); do \
+		make install-plugin-$$i prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-plugin-$$i; \
+	done
+
+# Needs to be done before 'dpkg-source'
+debian/control: debian/gen_control.sh debian/plugins
+	debian/gen_control.sh

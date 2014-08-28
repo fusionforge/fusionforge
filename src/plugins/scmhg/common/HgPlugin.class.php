@@ -30,7 +30,11 @@ class HgPlugin extends SCMPlugin {
 	function HgPlugin() {
 		$this->SCMPlugin();
 		$this->name = 'scmhg';
-		$this->text = 'Mercurial';
+		$this->text = _('Mercurial');
+		$this->pkg_desc =
+_("This plugin contains the Mercurial (Hg) subsystem of FusionForge. It
+allows each FusionForge project to have its own Mercurial repository,
+and gives some control over it to the project's administrator.");
 		$this->_addHook('scm_browser_page');
 		$this->_addHook('scm_update_repolist');
 		$this->_addHook('scm_generate_snapshots');

@@ -23,6 +23,7 @@
 // This class overloads FRSRelease to add RDF representation, based on ADMS.SW, using ARC2 and Graphite
 
 include_once 'RDFedFRSFile.class.php';
+require_once $gfcommon.'frs/FRSRelease.class.php';
 
 /**
  *	  Factory method which creates a RDFedFRSRelease from an release id
