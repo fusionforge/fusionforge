@@ -12,7 +12,9 @@ case "$2" in
     configure)
 	# Run plugin-specific DB install/upgrade
 	# TODO: don't automatically enable the plugin, esp. for non-packaged installs
-	$source_path/bin/upgrade-db.php $1
+	if [ -x $source_path/post-install.d/db/upgrade.php ]; then
+	    $source_path/post-install.d/db/upgrade.php $1
+	fi
 	
 	# Restart apache if there is some change in config
 	(

@@ -1,0 +1,8 @@
+#!/bin/sh -e
+case "$1" in
+    configure) $(forge_get_config source_path)/post-install.d/common/plugin.sh @plugin@ configure ;;
+    abort-upgrade|abort-remove|abort-deconfigure) ;;
+    *) echo "postinst called with unknown argument \`$1'" >&2; exit 1 ;;
+esac
+#DEBHELPER#
+exit 0

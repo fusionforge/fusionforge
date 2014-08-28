@@ -1,0 +1,8 @@
+#!/bin/sh -e
+case "$1" in
+    remove) $(forge_get_config source_path)/post-install.d/common/plugin.sh @plugin@ remove ;;
+    upgrade|deconfigure|failed-upgrade) ;;
+    *) echo "prerm called with unknown argument \`$1'" >&2; exit 1 ;;
+esac
+#DEBHELPER#
+exit 0
