@@ -1,4 +1,4 @@
-Date: Tue, 29 Jul 2014 10:42:12 +0000
+Date: Tue, 26 Aug 2014 15:16:43 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.5.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FCreateTocPlugin;
@@ -132,7 +132,7 @@ Syntax: a comma-separated list of levels. !!!,!!,! also allowed
 }}}
 
 == See Also ==
-* [[PhpWikiDemo:en/TextFormattingRules]]
+* [[Help:TextFormattingRules]]
 
 == Known Problems ==
 

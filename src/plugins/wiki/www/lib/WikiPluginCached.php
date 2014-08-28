@@ -411,7 +411,7 @@ class WikiPluginCached extends WikiPlugin
      * @param  $request  Request
      * @return string html output
      */
-    private function embedMap($id, $url, $map, &$dbi, $argarray, &$request)
+    protected function embedMap($id, $url, $map, &$dbi, $argarray, &$request)
     {
         // id is not unique if the same map is produced twice
         $key = substr($id, 0, 8) . substr(microtime(), 0, 6);

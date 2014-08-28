@@ -54,7 +54,7 @@ class WikiPlugin_GoTo
             $request->setArg('goto', false);
             $target = $goto['target'];
             if ($dbi->isWikiPage($target))
-                $url = WikiURL($target, 0, 1);
+                $url = WikiURL($target, array(), 1);
             else
                 $url = WikiURL($target, array('action' => 'edit'), 1);
 

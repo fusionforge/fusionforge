@@ -48,7 +48,7 @@ class WikiPlugin_DynamicIncludePage
     function run($dbi, $argstr, &$request, $basepage)
     {
         global $WikiTheme;
-        $args = $this->getArgs($argstr, $request, false);
+        $args = $this->getArgs($argstr, $request, array());
         $page =& $args['page'];
         if (ENABLE_AJAX) {
             if ($args['state'])

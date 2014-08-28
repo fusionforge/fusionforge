@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PhpWiki 1.4.0\n"
+"Project-Id-Version: PhpWiki 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-15 12:24+0200\n"
+"POT-Creation-Date: 2014-08-27 17:33+0200\n"
 "PO-Revision-Date: 2001-01-27 01:58+0200\n"
 "Last-Translator: Jon Åslund <jooon@hem.passagen.se>\n"
 "Language-Team: \n"
@@ -4436,15 +4436,6 @@ msgstr ""
 msgid "ActionPage"
 msgstr ""
 
-msgid "_AuthInfo"
-msgstr ""
-
-msgid "_GroupInfo"
-msgstr ""
-
-msgid "GroupAuthInfo"
-msgstr ""
-
 #, php-format
 msgid "Check for necessary theme %s updates"
 msgstr ""
@@ -5135,6 +5126,9 @@ msgstr ""
 msgid "Saving this page will overwrite the current version."
 msgstr ""
 
+msgid ":"
+msgstr ""
+
 msgid "H"
 msgstr "H"
 
@@ -5229,9 +5223,6 @@ msgstr ""
 msgid "%s words"
 msgstr ""
 
-msgid ":"
-msgstr ""
-
 msgid "Saved on"
 msgstr "Sparade"
 
@@ -5299,12 +5290,6 @@ msgid "Password:"
 msgstr ""
 
 msgid "Article"
-msgstr ""
-
-msgid "Edit aborted."
-msgstr ""
-
-msgid "You have not made any changes so no new version has been saved."
 msgstr ""
 
 msgid "Switch to detailed list"
@@ -5808,19 +5793,3 @@ msgstr ""
 
 msgid "Edit this page"
 msgstr ""
-
-#, fuzzy
-#~ msgid "Prediction: %s"
-#~ msgstr "Redigera: %s"
-
-#, fuzzy
-#~ msgid "Prediction: %.1f"
-#~ msgstr "Redigera: %s"
-
-#, fuzzy
-#~ msgid "%s not found"
-#~ msgstr "%s: fila ingen funna"
-
-#, fuzzy
-#~ msgid "period"
-#~ msgstr "version %d"

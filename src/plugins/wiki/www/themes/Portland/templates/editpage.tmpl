@@ -4,10 +4,9 @@
  * This is needed, otherwise the redirect to the real browser
  * page won't work with some browsers. (NS4 and Mozilla 0.97 won't accept
  * a redirect from a page to itself.)
- *
- */ ?>
-
-<form method="post" name="editpage"
+ */
+?>
+<form method="post" id="editpage" name="editpage"
       action="<?php echo $request->getPostURL() ?>"
       accept-charset="UTF-8">
 <table class="toolbar fullwidth">
@@ -30,7 +29,7 @@
 </table>
 <a id="editarea"><?php echo $EDIT_TEXTAREA?></a>
 <br />
-<?php echo _("Summary")?>: <?php echo $SUMMARY_INPUT ?>
+<?php echo _("Summary")._(":") ?> <?php echo $SUMMARY_INPUT ?>
 <br />
 <?php echo fmt("Author will be logged as %s.", HTML::em($user->getId())) ?>
 <br />

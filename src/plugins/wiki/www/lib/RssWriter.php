@@ -13,7 +13,7 @@ class RssWriter extends XmlElement
 {
     function __construct()
     {
-        $this->XmlElement('rdf:RDF',
+        parent::__construct('rdf:RDF',
             array('xmlns' => "http://purl.org/rss/1.0/",
                 'xmlns:rdf' => 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'));
 

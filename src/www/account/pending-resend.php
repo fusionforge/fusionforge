@@ -3,7 +3,7 @@
  * Resend account activation email with confirmation URL
  *
  * Copyright 1999-2001 (c) VA Linux Systems
- * Copyright 2010-2013, Franck Villaume - TrivialDev
+ * Copyright 2010-2014, Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of National Education
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -25,6 +25,8 @@
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 
+global $HTML;
+
 if (getStringFromRequest('submit')) {
 	$loginname = trim(getStringFromRequest('loginname'));
 	if (!strlen($loginname)) {
@@ -43,7 +45,7 @@ if (getStringFromRequest('submit')) {
 		} else{
 			$u->sendRegistrationEmail();
 			$HTML->header(array('title'=>_('Pending Account')));
-			echo '<p>'. _('Your email confirmation has been resent. Visit the link in this email to complete the registration process.'). '</p>';
+			echo html_e('p', array(), _('Your email confirmation has been resent. Visit the link in this email to complete the registration process.'));
 			$HTML->footer();
 			exit;
 		}
@@ -57,22 +59,16 @@ if (forge_get_config('require_unique_email')) {
 } else {
 	echo _('Fill in a user name and click “Submit” to resend the confirmation email.');
 }
-?>
 
-<form action="<?php echo util_make_url('/account/pending-resend.php'); ?>" method="post">
-<p><?php
+echo $HTML->openForm(array('action' => util_make_uri('/account/pending-resend.php'), 'method' => 'post'));
+
 if (forge_get_config('require_unique_email')) {
-	echo _('Login name or email address')._(':');
+	$content = _('Login name or email address')._(':');
 } else {
-	echo _('Login Name')._(':');
+	$content = _('Login name')._(':');
 }
-?>
-<br />
-<label for="loginname">
-	<input id="loginname" required="required" type="text" name="loginname"/>
-</label>
-</p>
-<p><input type="submit" name="submit" value="<?php echo _('Submit'); ?>" /></p>
-</form>
-
-<?php $HTML->footer();
+echo html_e('p', array(), $content.html_e('br').html_e('label', array('for' => 'loginname'),
+							html_e('input', array('id' => 'loginname', 'required' => 'required', 'type' => 'text', 'name' => 'loginname'))));
+echo html_e('p', array(), html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Submit'))));
+echo $HTML->closeForm();
+$HTML->footer();

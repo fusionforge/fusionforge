@@ -4,10 +4,8 @@
   </p>
   <?php echo $PREVIEW_CONTENT ?>
 <?php } ?>
-
 <?php echo $PAGE_LOCKED_MESSAGE ?>
 <?php echo $CONCURRENT_UPDATE_MESSAGE ?>
-
 <?php if (! $IS_CURRENT) { ?>
   <p class="warning_msg">
       <?php echo _("Warning: You are editing an old revision. Saving this page will overwrite the current version.")?>
@@ -67,14 +65,14 @@
   <table class="fullwidth">
     <tr><td><?php echo $EDIT_TOOLBAR ?></td>
         <td class="align-right"><div id="editarea-size">
-    <?php echo _("Size").':'?>
+    <?php echo _("Size")._(":") ?>
     <label for="pref-editHeight"><b><?php echo _("H")?></b></label> <?php echo $HEIGHT_PREF?>
     <label for="pref-editWidth"><b><?php echo _("W")?></b></label> <?php echo $WIDTH_PREF?>
     <noscript><?php echo Button("submit:", _("Adjust"), 'wikiaction')?></noscript>
   </div></td></tr></table>
   <a id="editarea"></a><?php echo $EDIT_TEXTAREA?>
 <div style="text-align: center;">
-  <label for="edit-summary"><?php echo _("Summary").':'?></label> <?php echo $SUMMARY_INPUT?>
+  <label for="edit-summary"><?php echo _("Summary")._(":") ?></label> <?php echo $SUMMARY_INPUT?>
 </div>
 <table class="fullwidth">
 <tr class="middle">
@@ -106,9 +104,7 @@
 </table>
 <?php echo $HIDDEN_INPUTS?>
 </form>
-
 <hr />
-
 <div class="wiki-edithelp">
 <?php if (WIKI_NAME == "help") { ?>
 <?plugin IncludePage page="Help/TextFormattingRules" section="Synopsis" quiet=1?>

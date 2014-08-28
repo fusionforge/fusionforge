@@ -70,7 +70,7 @@ class WikiPlugin_WikiPoll
         );
     }
 
-    function getArgs($argstr, $request = false, $defaults = false)
+    function getArgs($argstr, $request = false, $defaults = array())
     {
         if ($defaults === false)
             $defaults = $this->getDefaultArguments();

@@ -1,10 +1,9 @@
 REQUIREMENTS
 
-PhpWiki 1.4.0 requires a web server with at least PHP version 5.2.
+PhpWiki 1.5.0 requires a web server with at least PHP version 5.3.
 
 All users of PHP are strongly encouraged to upgrade to
-PHP 5.3.18 (Current stable) this is the supported version
-or if not possible to PHP 5.2.17 (Old stable).
+PHP 5.3.28 or to PHP 5.4 or 5.5.
 
 Visit <http://www.php.net> and <http://php.net/downloads.php> 
 for downloads and information.
@@ -15,8 +14,7 @@ error like "function preg_replace() not defined."
 
 PHP must also be compiled with support for the type of database you
 want to use, i.e. --with-gdbm, --with-db2, --with-db3, --with-msql,
---with-pgsql. (With PHP4 MySQL support is always enabled. With PHP5
-sqlite instead). Consult the PHP installation manual for specific
+--with-pgsql.  Consult the PHP installation manual for specific
 installation and configure options.
 <http://www.php.net/manual/en/installation.php>
 
@@ -61,11 +59,9 @@ under the root of your PhpWiki installation.
 
 0. INSTALLATION
 
-Untar / gzip this file into the directory where you want it to
-live. That's it.
+Unzip this file into the directory where you want it to live. That's it.
 
-bash$ gzip -d phpwiki-X.XX.tar.gz
-bash$ tar -xvf phpwiki-X.XX.tar
+bash$ unzip phpwiki-1.5.0.zip
 
 In the config subdirectory copy 'config-dist.ini' to 'config.ini' and
 edit the settings in 'config.ini' to your liking.

@@ -81,8 +81,8 @@ if (sizeof($linksArray)) {
 		echo $HTML->multiTableRow(array('id' => $link['id_headermenu']), $cells);
 	}
 	echo $HTML->listTableBottom();
-	echo '<input type="button" id="linkordervalidatebutton" value="'._('Save Order').'" class="hide" />';
-	echo '<br/>';
+	echo html_e('input', array('type' => 'button', 'id' => 'linkordervalidatebutton', 'value' => _('Save Order'), 'class' => 'hide'));
+	echo html_e('br');
 }
 
 echo html_e('h2', array(), _('Add new tab'));
@@ -140,5 +140,4 @@ $cells[] = array('<input type="hidden" name="linkmenu" value="groupmenu" /><inpu
 echo $HTML->multiTableRow(array(), $cells);
 echo $HTML->listTableBottom();
 echo $HTML->closeForm();
-
-printf(_('Fields marked with %s are mandatory.'), utils_requiredField());
+echo $HTML->addRequiredFieldsInfoBox();

@@ -5,7 +5,7 @@
 */
 
 $ADODB_LANG_ARRAY = array (
-            'LANG'                      => 'bgutf8',
+            'LANG'                      => 'bg',
             DB_ERROR                    => 'неизвестна грешка',
             DB_ERROR_ALREADY_EXISTS     => 'вече съществува',
             DB_ERROR_CANNOT_CREATE      => 'не може да бъде създадена',

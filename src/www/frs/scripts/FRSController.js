@@ -39,11 +39,25 @@ FRSController.prototype =
 							jQuery('#maindiv > .feedback').remove();
 							jQuery('#maindiv > .error').remove();
 							jQuery('#maindiv > .warning_msg').remove();
-							if (typeof data.html != 'undefined') {
+							if (data.format == 'multi') {
+								var arrayLength = Object.keys(data).length;
+								console.log(arrayLength);
+								for (var i = 0; i < arrayLength; i++) {
+									console.log(data[i]);
+									if (typeof data[i].html != 'undefined') {
+										jQuery('#maindiv').prepend(data[i].html);
+									}
+									if (typeof data[i].deletedom != 'undefined') {
+										jQuery('#'+data[i].deletedom).remove();
+									}
+								}
+							} else {
+								if (typeof data.html != 'undefined') {
 									jQuery('#maindiv').prepend(data.html);
-							}
-							if (typeof data.deletedom != 'undefined') {
-								jQuery('#'+data.deletedom).remove();
+								}
+								if (typeof data.deletedom != 'undefined') {
+									jQuery('#'+data.deletedom).remove();
+								}
 							}
 						}, this));
 					}, this)
@@ -61,15 +75,31 @@ FRSController.prototype =
 			jQuery('#maindiv > .feedback').remove();
 			jQuery('#maindiv > .error').remove();
 			jQuery('#maindiv > .warning_msg').remove();
-			if (typeof data.html != 'undefined') {
-				jQuery('#maindiv').prepend(data.html);
-			}
-			if (typeof data.action != 'undefined') {
-				jQuery('#'+this.params.id).attr(data.property, data.action);
-			}
-			if (typeof data.img != 'undefined') {
-				jQuery('#'+this.params.id+' img').remove();
-				jQuery('#'+this.params.id).append(data.img);
+			if (data.format == 'multi') {
+				var arrayLength = Object.keys(data).length;
+				for (var i = 0; i < arrayLength; i++) {
+					if (typeof data[i].html != 'undefined') {
+						jQuery('#maindiv').prepend(data[i].html);
+					}
+					if (typeof data[i].action != 'undefined') {
+						jQuery('#'+this.params.id).attr(data[i].property, data[i].action);
+					}
+					if (typeof data[i].img != 'undefined') {
+						jQuery('#'+this.params.id+' img').remove();
+						jQuery('#'+this.params.id).append(data[i].img);
+					}
+				}
+			} else {
+				if (typeof data.html != 'undefined') {
+					jQuery('#maindiv').prepend(data.html);
+				}
+				if (typeof data.action != 'undefined') {
+					jQuery('#'+this.params.id).attr(data.property, data.action);
+				}
+				if (typeof data.img != 'undefined') {
+					jQuery('#'+this.params.id+' img').remove();
+					jQuery('#'+this.params.id).append(data.img);
+				}
 			}
 		}, this));
 	},
@@ -85,5 +115,43 @@ FRSController.prototype =
 					jQuery('#maindiv').prepend(data.html);
 			}
 		});
+	},
+
+	/*! build list of id, comma separated
+	 */
+	buildUrlByCheckbox: function(id) {
+		var CheckedBoxes = new Array();
+		for (var h = 0; h < jQuery('input:checked').length; h++) {
+			if (typeof(jQuery('input:checked')[h].className) != 'undefined' && jQuery('input:checked')[h].className.match('checkedrelid'+id)) {
+				CheckedBoxes.push(jQuery('input:checked')[h].value);
+			}
+		}
+		return CheckedBoxes;
+	},
+
+	checkAll: function(id, type) {
+		if (jQuery('#checkall'+type).is(':checked')) {
+			jQuery('.'+id).each(function() {
+				jQuery(this).prop('checked', true);
+				});
+			jQuery('#massaction'+type).show();
+		} else {
+			jQuery('.'+id).each(function() {
+				jQuery(this).prop('checked', false);
+			});
+			jQuery('#massaction'+type).hide();
+		}
+	},
+
+	checkgeneral: function(id) {
+		if (jQuery(this).attr('checked', false)) {
+			jQuery('#checkall'+id).prop('checked', false);
+			jQuery('#massaction'+id).hide();
+		}
+		for (var h = 0; h < jQuery('input:checked').length; h++) {
+			if (typeof(jQuery('input:checked')[h].className) != 'undefined' && jQuery('input:checked')[h].className.match('checkedrelid'+id)) {
+				jQuery('#massaction'+id).show();
+			}
+		}
 	}
 };

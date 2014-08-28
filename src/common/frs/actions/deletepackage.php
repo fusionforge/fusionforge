@@ -29,26 +29,32 @@ global $HTML;
 $sysdebug_enable = false;
 $result = array();
 
-$package_id = getIntFromRequest('package_id');
+$package_id_strings = getStringFromRequest('package_id');
 
-if (!$package_id) {
+if (!$package_id_strings) {
 	$result['html'] = $HTML->warning_msg(_('Missing package_id'));
-} elseif (!forge_check_perm('frs', $package_id, 'admin')) {
-	$result['html'] = $HTML->error_msg(_('FRS Action Denied.'));
 } else {
-	$frsp = new FRSPackage($g, $package_id);
-	if (!$frsp || !is_object($frsp)) {
-		$result['html'] = $HTML->error_msg(_('Error Getting FRSPackage'));
-	} elseif ($frsp->isError()) {
-		$result['html'] = $HTML->error_msg($frsp->getErrorMessage());
-	} else {
-		$sure = getIntFromRequest('sure');
-		$really_sure = getIntFromRequest('really_sure');
-		if (!$frsp->delete($sure, $really_sure)) {
-			$result['html'] = $HTML->error_msg($frsp->getErrorMessage());
+	$package_ids = explode(',', $package_id_strings);
+	$result['format'] = 'multi';
+	foreach ($package_ids as $key => $package_id) {
+		if (forge_check_perm('frs', $package_id, 'admin')) {
+			$frsp = new FRSPackage($g, $package_id);
+			if (!$frsp || !is_object($frsp)) {
+				$result[$key]['html'] = $HTML->error_msg(_('Error Getting FRSPackage'));
+			} elseif ($frsp->isError()) {
+				$result[$key]['html'] = $HTML->error_msg($frsp->getErrorMessage());
+			} else {
+				$sure = getIntFromRequest('sure');
+				$really_sure = getIntFromRequest('really_sure');
+				if (!$frsp->delete($sure, $really_sure)) {
+					$result[$key]['html'] = $HTML->error_msg($frsp->getErrorMessage());
+				} else {
+					$result[$key]['html'] = $HTML->feedback(_('Package successfully deleted.'));
+					$result[$key]['deletedom'] = 'pkgid'.$package_id;
+				}
+			}
 		} else {
-			$result['html'] = $HTML->feedback(_('Package successfully deleted.'));
-			$result['deletedom'] = 'pkgid'.$package_id;
+			$result[$key]['html'] = $HTML->error_msg(_('FRS Action Denied'));
 		}
 	}
 }

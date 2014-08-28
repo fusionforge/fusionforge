@@ -118,7 +118,6 @@ class PageEditor
         elseif ($this->editaction == 'keep_old') {
             // keep old page and do nothing
             $this->_redirectToBrowsePage();
-            //$r->redirect(WikiURL($r->getArg('save_and_redirect_to')));
             return true;
         } elseif ($this->editaction == 'overwrite') {
             // take the new content without diff
@@ -129,7 +128,6 @@ class PageEditor
             $this->request->setArg('merge', 0);
             LoadFileOrDir($this->request);
             $this->_redirectToBrowsePage();
-            //$r->redirect(WikiURL($r->getArg('save_and_redirect_to')));
             return true;
         } elseif ($this->editaction == 'upload') {
             // run plugin UpLoad
@@ -280,28 +278,12 @@ class PageEditor
             }
             // Save failed. No changes made.
             $this->_redirectToBrowsePage();
-            // user will probably not see the rest of this...
-            require_once 'lib/display.php';
-            // force browse of current version:
-            $request->setArg('action', false);
-            $request->setArg('version', false);
-            displayPage($request, 'nochanges');
             return true;
         }
 
         if (!$this->user->isAdmin() and $this->isSpam()) {
             $this->_isSpam = true;
             return false;
-            /*
-            // Save failed. No changes made.
-            $this->_redirectToBrowsePage();
-            // user will probably not see the rest of this...
-            require_once 'lib/display.php';
-            // force browse of current version:
-            $request->setArg('version', false);
-            displayPage($request, 'nochanges');
-            return true;
-            */
         }
 
         $page = &$this->page;
@@ -351,6 +333,7 @@ class PageEditor
             // (below).
             $request->setArg('action', false);
             $this->_redirectToBrowsePage();
+            return true;
         }
 
         // Force browse of current page version.
@@ -733,9 +716,9 @@ class PageEditor
         return $el;
     }
 
-    function _redirectToBrowsePage()
+    private function _redirectToBrowsePage()
     {
-        $this->request->redirect(WikiURL($this->page, false, 'absolute_url'));
+        $this->request->redirect(WikiURL($this->page, array(), 'absolute_url'));
     }
 
     function _restoreState()

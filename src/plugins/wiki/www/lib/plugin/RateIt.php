@@ -282,7 +282,7 @@ var msg_rating_deleted = '" . _("Rating deleted!") . "';
             }
             return $html;
         }
-        return HTML::raw();
+        return HTML::raw('');
     }
 
     // box is used to display a fixed-width, narrow version with common header
@@ -290,7 +290,7 @@ var msg_rating_deleted = '" . _("Rating deleted!") . "';
     {
         if (!$request) $request =& $GLOBALS['request'];
         if (!$request->_user->isSignedIn()) {
-            return HTML::raw();
+            return HTML::raw('');
         }
         if (!isset($args)) $args = array();
         $args['small'] = 1;
@@ -308,16 +308,17 @@ var msg_rating_deleted = '" . _("Rating deleted!") . "';
      *
      * This needs to be put in the <body> section of the page.
      *
-     * @param pagename    Name of the page to rate
-     * @param version     Version of the page to rate (may be "" for current)
-     * @param imgPrefix   Prefix of the names of the images that display the rating
+     * @param string $pagename    Name of the page to rate
+     * @param int $version     Version of the page to rate (may be "" for current)
+     * @param string $imgPrefix   Prefix of the names of the images that display the rating
      *                    You can have two widgets for the same page displayed at
      *                    once iff the imgPrefix-s are different.
-     * @param dimension   Id of the dimension to rate
-     * @param small       Makes a smaller ratings widget if non-false
+     * @param int $dimension   Id of the dimension to rate
+     * @param bool $small       Makes a smaller ratings widget if non-false
      *
      * Limitations: Currently this can only print the current users ratings.
      *              And only the widget, but no value (for buddies) also.
+     * @return $this
      */
     function RatingWidgetHtml($pagename, $version, $imgPrefix, $dimension, $small = false)
     {
