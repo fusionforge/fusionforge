@@ -13,7 +13,8 @@ export DEBIAN_FRONTEND=noninteractive
 # Install build dependencies
 apt-get -y install mini-dinstall dput devscripts fakeroot
 apt-get -y install build-essential \
-     $(grep Build-Depends /usr/src/fusionforge/src/debian/control | sed -e 's/Build-Depends: //' -e 's/(.*)//')
+     $(grep Build-Depends /usr/src/fusionforge/src/debian/control.in | sed -e 's/Build-Depends: //' -e 's/(.*)//')
+apt-get -y install php5-cli  # debian/gen_control.sh
 
 
 # Populate a local Debian packages repository for APT managed with mini-dinstall
@@ -85,8 +86,8 @@ fi
 cd /usr/src/fusionforge/src
 f=$(mktemp)
 cp debian/changelog $f
-debian/rules debian/control  # re-gen debian/control
 version=$(dpkg-parsechangelog | sed -n 's/^Version: \([0-9.]\+\(\~rc[0-9]\)\?\).*/\1/p')+$(date +%Y%m%d%H%M)
+debian/rules debian/control  # re-gen debian/control
 dch --newversion $version-1 --distribution local --force-distribution "Autobuilt."
 make dist
 mv fusionforge-$(make version).tar.bz2 ../fusionforge_$version.orig.tar.bz2
