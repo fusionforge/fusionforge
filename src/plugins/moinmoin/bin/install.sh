@@ -3,20 +3,20 @@
 config_path=$(forge_get_config config_path)
 data_path=$(forge_get_config data_path)
 prefix=$data_path/plugins/moinmoin/wikidata
-moinmoin_user=$(forge_get_config moinmoin_user moinmoin)
+wsgi_user=$(forge_get_config wsgi_user moinmoin)
 
 case "$1" in
     configure)
 	for i in data underlay ; do
 	    if ! [ -e $prefix/$i ] ; then
 		cp -r /usr/share/moin/$i $prefix/
-		chown -R $moinmoin_user: $prefix/$i
+		chown -R $wsgi_user: $prefix/$i
 	    fi
 	done
-	chown $moinmoin_user $config_path/config.ini.d/post-install-secrets.ini  # Ewww...
+	chown $wsgi_user $config_path/config.ini.d/post-install-secrets.ini  # Ewww...
 	if ! [ -e $dataprefix/moinmoin.log ] ; then
 	    touch $dataprefix/moinmoin.log
-	    chown $moinmoin_user $dataprefix/moinmoin.log
+	    chown $wsgi_user $dataprefix/moinmoin.log
 	fi
 	;;
     purge)
