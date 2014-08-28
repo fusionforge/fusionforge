@@ -39,7 +39,7 @@ $database_host:$database_port:$database_name:$database_user:$database_password
 EOF
 psql -h $database_host -p $database_port -U $database_user $database_name < $source_path/db/1-fusionforge-init.sql
 
-$source_path/bin/upgrade-db.php
+$source_path/post-install.d/db/upgrade.php
 
 psql -h $database_host -p $database_port -U $database_user $database_name <<EOF
 INSERT INTO users (user_name, realname, firstname, lastname, email,
