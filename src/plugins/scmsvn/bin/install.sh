@@ -20,11 +20,11 @@ case "$1" in
 	fi
 	;;
 
-    purge)
+    remove)
 	update-inetd --remove svn || true
 	;;
 
     *)
-	echo "Usage: $0 {configure|purge}"
+	echo "Usage: $0 {configure|remove}"
 	exit 1
 esac
