@@ -5,13 +5,13 @@
 // upgrade-db.php all      => Upgrade the main database and active plugins.
 // upgrade-db.php <plugin> => Upgrade only the database of the given active plugin.
 
-require_once dirname(__FILE__).'/../common/include/env.inc.php';
+require_once dirname(__FILE__).'/../../common/include/env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/sqlparser.php';
 
 echo "Entering  upgrade-db.php\n";
 
-$db_path = dirname(__FILE__).'/../db/';
+$db_path = forge_get_config('source_path').'/db/';
 $date = -1;
 $version = '';
 
