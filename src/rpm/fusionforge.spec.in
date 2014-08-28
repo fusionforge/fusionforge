@@ -21,6 +21,10 @@ This metapackage installs a stand-alone FusionForge site.
 %files
 
 
+# Don't compile the .py utils from plugin-moinmoin, the pyc/pyo files are hard to properly package
+%global __os_install_post %(echo '%{__os_install_post}' | sed -e 's!/usr/lib[^[:space:]]*/brp-python-bytecompile[[:space:]].*$!!g')
+
+
 %prep
 %setup -q -n fusionforge-@version@
 
