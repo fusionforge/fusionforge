@@ -12,7 +12,6 @@ htdocs/deb-repo/timestamp
 src/www/scm/viewvc/viewvc.org/*.tar.gz
 src/www/scm/viewvc/viewvc.org/*.zip
 *~
-result/*.tar.bz2
 # Debian packaging:
 /*.dsc
 /*.tar.gz
@@ -23,6 +22,10 @@ result/*.tar.bz2
 /*.upload
 /.pc
 src/.pc
-result/fusionforge-*.tar.bz2
+fusionforge*.orig.tar.bz2
+src/debian/control
+# RPM packaging:
+build
+src/fusionforge.spec
 # Emacs backup files
 *~

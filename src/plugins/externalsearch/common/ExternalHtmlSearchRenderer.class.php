@@ -8,7 +8,7 @@
  *
  */
 
-require_once $gfwww.'search/include/renderers/SearchRenderer.class.php';
+require_once $gfwww.'search/common/renderers/SearchRenderer.class.php';
 
 class ExternalHtmlSearchRenderer extends SearchRenderer {
 

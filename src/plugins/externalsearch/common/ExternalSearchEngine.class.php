@@ -38,7 +38,7 @@ class ExternalSearchEngine extends GroupSearchEngine {
 	}
 
 	function getSearchRenderer($words, $offset, $exact, $parameters) {
-		require_once $gfplugins.'externalsearch/include/ExternalHtmlSearchRenderer.class.php';
+		require_once $gfplugins.'externalsearch/common/ExternalHtmlSearchRenderer.class.php';
 		$renderer = new ExternalHtmlSearchRenderer($type, $this->name, $this->url, $words);
 		return $renderer;
 	}

@@ -19,8 +19,7 @@
  */
 
 global $gfplugins;
-require_once $gfplugins.'aselectextauth/include/ASelectAuthPlugin.class.php' ;
+require_once $gfplugins.'aselectextauth/common/ASelectAuthPlugin.class.php' ;
 
 $ASelectExtAuthPluginObject = new ASelectextauthPlugin ;
-
 register_plugin ($ASelectExtAuthPluginObject) ;

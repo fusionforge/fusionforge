@@ -40,7 +40,7 @@ $method = $argv[2];
 forge_reset_config_item('plugins_path', 'core', dirname(__FILE__).'/../plugins');
 $pm = plugin_manager_get_object();
 $pm->LoadPlugin($pluginname);
-$plugin = $pm->GetPluginObject($pluginname);
+$plugin = plugin_get_object($pluginname);
 if ($plugin == null) {
   file_put_contents('php://stderr', "Couldn't load plugin $pluginname.\n");
   exit(1);

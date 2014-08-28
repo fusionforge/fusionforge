@@ -43,8 +43,8 @@ class SysAuthLDAPPlugin extends SysAuthPlugin {
 		$this->text = _("System authentication via PostgreLDAP");
 		$this->pkg_desc =
 _("This plugin maintains data about users, groups and memberships in an
- LDAP directory that can be used for NSS/PAM system authentication (or
- for other uses).");
+LDAP directory that can be used for NSS/PAM system authentication (or
+for other uses).");
 		$this->ldap_conn = NULL;
 		$this->user_suffix = "Users";
 		$this->group_suffix = "Projects";

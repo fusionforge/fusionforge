@@ -19,12 +19,17 @@
  */
 
 global $gfplugins;
-require_once $gfplugins.'aselectextauth/include/Aselect.class.php';
+require_once $gfplugins.'aselectextauth/common/Aselect.class.php';
 
 class ASelectextauthPlugin extends Plugin {
 	function ASelectextauthPlugin () {
 		$this->Plugin() ;
 		$this->name = "aselectextauth";
+		$this->text = _("A-select external authentication");
+		$this->pkg_desc =
+_("A system plugin for authenticating users in fusionforge. A-Select is a framework
+where users can be authenticated by several means with Authentication
+Service Providers.");
 		$this->hooks[] = "session_set_entry";
 	}
 

@@ -12,7 +12,7 @@
 global $gfwww;
 require_once $gfwww.'search/include/SearchManager.class.php';
 global $gfplugins;
-require_once $gfplugins.'externalsearch/include/ExternalSearchEngine.class.php';
+require_once $gfplugins.'externalsearch/common/ExternalSearchEngine.class.php';
 
 forge_define_config_item('engines_file','externalsearch',
 			 '$core/source_path/plugins/externalsearch/etc/engines.json'
@@ -22,8 +22,12 @@ class ExternalSearchPlugin extends Plugin {
 	function ExternalSearchPlugin() {
 		$this->Plugin();
 		$this->name = 'externalsearch';
-		$this->text = 'External Search';
-
+		$this->text = _('External Search');
+		$this->pkg_desc =
+_("This plugin adds a new search engine to your FusionForge site. It allows
+your users to search your FusionForge site through external search engines
+which have indexed it. You can define search engines you want to use in
+the configuration file.");
 		$this->hooks[] = 'search_engines';
 	}
 

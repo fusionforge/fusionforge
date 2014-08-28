@@ -27,7 +27,9 @@ class webanalyticsPlugin extends Plugin {
 	function __construct() {
 		$this->Plugin() ;
 		$this->name = "webanalytics" ;
-		$this->text = "webanalytics" ;
+		$this->text = _("webanalytics") ;
+		$this->pkg_desc =
+_("webanalytics plugin for FusionForge.");
 		$this->_addHook('webanalytics_url');
 		$this->_addHook('webanalytics_admin');
 		$this->_addHook('site_admin_option_hook');
