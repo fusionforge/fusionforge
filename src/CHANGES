@@ -12,6 +12,7 @@ Fusionforge-5.3.2:
 * Tracker: fix custom status extrafield not updateable using mass update [#712] (TrivialDev)
 * Mailing lists: handle quotes and accents in description (Inria)
 * Stats: handle bad encoding when gathering Git stats, remove spurious warning when SVN repository isn't created yet (Inria)
+* SCM Reporting: fix legend block size exceed graph canvas [#718] (TrivialDev)
 * Plugin mediawiki: fix paths in import/export scripts (Inria)
 * Plugin fckeditor: dropped in favor of ckeditor
 * Plugin SCM SVN: fix sql error in activity tab on init log [#715] (TrivialDev)
