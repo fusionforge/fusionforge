@@ -61,7 +61,7 @@ else
 fi
 
 if [ -x /usr/sbin/a2dissite ]; then
-    a2dissite default
+    a2dissite 000-default
 fi
 # Prevent double NameVirtualHost warning
 if [ -e /etc/apache2/ports.conf ]; then
@@ -74,7 +74,7 @@ fi
 
 # Hard-coded detection of distro-specific Apache conf layout
 apache_service=$(forge_get_config apache_service)
-if service $apache_service status; then
+if service $apache_service status >/dev/null; then
     service $apache_service reload
 else
     service $apache_service restart

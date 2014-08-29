@@ -13,7 +13,7 @@ export DEBIAN_FRONTEND=noninteractive
 # fusionforge-plugin-scmbzr depends on loggerhead (>= 1.19~bzr477~),
 # but wheezy only has 1.19~bzr461-1, so we need to manually "Backport"
 # a more recent dependency
-if grep ^7 /etc/debian_version && ! dpkg-query -s loggerhead >/dev/null 2>&1 ; then
+if grep ^7 /etc/debian_version /dev/null && ! dpkg-query -s loggerhead >/dev/null 2>&1 ; then
     # install loggerhead with its dependencies
     # we need gdebi to make sure dependencies are installed too (simple dpkg -i won't)
     apt-get -y install gdebi-core wget
@@ -28,19 +28,19 @@ fi
 
 # Install FusionForge packages
 apt-get update
-if dpkg-query -s fusionforge >/dev/null 2>&1; then
-    # Already installed, upgrading
-    UCF_FORCE_CONFFNEW=yes LANG=C DEBIAN_FRONTEND=noninteractive apt-get -y dist-upgrade
-else
-    # Initial installation
-    UCF_FORCE_CONFFNEW=yes LANG=C DEBIAN_FRONTEND=noninteractive apt-get -y install fusionforge
+apt-get install -y confget php5-cli php5-pgsql php-htmlpurifier \
+    apache2 postgresql \
+    subversion \
+    mediawiki \
+    python-moinmoin python-psycopg2 libapache2-mod-wsgi
 
-    # Additional components for testsuite
-    UCF_FORCE_CONFFNEW=yes apt-get install -y fusionforge-shell \
-	fusionforge-plugin-scmgit fusionforge-plugin-scmsvn fusionforge-plugin-scmbzr \
-	fusionforge-plugin-mediawiki fusionforge-plugin-moinmoin \
-	fusionforge-plugin-blocks
+cd /usr/src/fusionforge/src/
+make
+make install-base install-shell
+make install-plugin-scmsvn install-plugin-blocks install-plugin-mediawiki install-plugin-moinmoin
+# adapt .ini configuration in /etc/fusionforge/config.ini.d/
+make post-install-base post-install-plugin-scmsvn post-install-plugin-blocks \
+    post-install-plugin-mediawiki post-install-plugin-moinmoin
 
-    # Dump clean DB
-    $(dirname $0)/testsuite-prepare.sh
-fi
+# Dump clean DB
+$(dirname $0)/testsuite-prepare.sh

@@ -2,8 +2,15 @@
 . tests/scripts/common-functions
 . tests/scripts/common-vm
 
-export FORGE_HOME=/opt/gforge
+set -e
+
+get_config
+
 export HOST=$1
+if [ -z "$HOST" ]; then
+    echo "Usage: $0 vm_hostname"
+    exit 1
+fi
 case $HOST in
     debian7.local)
 	export DIST=wheezy
@@ -19,55 +26,24 @@ case $HOST in
 	;;
 esac	
 
-export FILTER="src/debian"
+tests/scripts/start_vm -t $VM $@
 
-get_config $@
-prepare_workspace
-destroy_vm -t $VM $@
-start_vm_if_not_keeped -t $VM $@
-
-setup_debian_3rdparty_repo
-
+# LXC post-install...
+ssh root@$HOST "echo \"deb $DEBMIRRORSEC $DIST/updates main\" > /etc/apt/sources.list.d/security.list"
+ssh root@$HOST "echo 'APT::Install-Recommends \"false\";' > /etc/apt/apt.conf.d/01InstallRecommends"
 ssh root@$HOST "apt-get update"
 
-echo "Sync code on root@$HOST:$FORGE_HOME"
-ssh root@$HOST "[ -d $FORGE_HOME ] || mkdir -p $FORGE_HOME"
-rsync -a --delete src/ root@$HOST:$FORGE_HOME/
-rsync -a --delete tests/ root@$HOST:$FORGE_HOME/tests/
-
-echo "Run Install on $HOST"
-ssh root@$HOST "$FORGE_HOME/install-ng --auto --reinit"
-
-# Dump database
-echo "Dump freshly installed database"
-ssh root@$HOST "su - postgres -c \"pg_dumpall\" > /root/dump"
-
-config_path=$(ssh root@$HOST $FORGE_HOME/utils/forge_get_config config_path)
-
-echo "Set use_ssl=no"
-ssh root@$HOST "(echo [core];echo use_ssl=no;echo use_fti=no) > $config_path/config.ini.d/zzz-zbuildbot.ini"
-ssh root@$HOST "(echo [moinmoin];echo use_frame=no) >> $config_path/config.ini.d/zzz-buildbot.ini"
-ssh root@$HOST "(echo [mediawiki];echo unbreak_frames=yes) >> $config_path/config.ini.d/zzz-buildbot.ini"
-
-# Stop cron
-echo "Stop cron daemon"
-ssh root@$HOST "service crond stop" || true
-
-# Install selenium
-ssh root@$HOST "apt-get -y install selenium"
-
-# Transfer hudson config
-ssh root@$HOST "cat > $FORGE_HOME/tests/config/phpunit" <<-EOF
-HUDSON_URL=$HUDSON_URL
-JOB_NAME=$JOB_NAME
-EOF
+ssh root@$HOST "apt-get install -y rsync"
+rsync -av --delete src tests root@$HOST:/usr/src/fusionforge/
+#ssh root@$HOST "/usr/src/fusionforge/tests/scripts/deb/build.sh"
+ssh root@$HOST "/usr/src/fusionforge/tests/scripts/deb/install-src.sh"
 
 # Run tests
 retcode=0
-echo "Run phpunit test on $HOST in $FORGE_HOME"
-ssh root@$HOST "$FORGE_HOME/tests/func/vncxstartsuite.sh src/debian"
-retcode=$?
-rsync -av root@$HOST:/var/log/ $WORKSPACE/reports/
+echo "Run phpunit test on $HOST"
+ssh root@$HOST "/usr/src/fusionforge/tests/func/vncxstartsuite.sh /usr/src/fusionforge/tests/scripts/deb/run-testsuite.sh src/debian" || retcode=$?
 
-stop_vm_if_not_keeped -t $VM $@
+rsync -av root@$HOST:/var/log/ ~/reports/
+
+#stop_vm_if_not_keeped -t $VM $@
 exit $retcode

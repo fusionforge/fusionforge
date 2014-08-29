@@ -50,11 +50,9 @@ ssh root@$HOST "/usr/src/fusionforge/tests/scripts/deb/install.sh"
 retcode=0
 echo "Run phpunit test on $HOST"
 # TESTGLOB=func/50_PluginsScmGit/gitSSHTest.php
-ssh root@$HOST "/usr/src/fusionforge/tests/func/vncxstartsuite.sh /usr/src/fusionforge/tests/scripts/deb/run-testsuite.sh" || retcode=$?
+ssh root@$HOST "/usr/src/fusionforge/tests/func/vncxstartsuite.sh /usr/src/fusionforge/tests/scripts/deb/run-testsuite.sh deb/debian" || retcode=$?
 
 rsync -av root@$HOST:/var/log/ ~/reports/
 
-#stop_vm_if_not_keeped -t $VM $@
-#sudo lxc-stop -k -n $HOST
-#sudo lxc-destroy -n $HOST
+stop_vm_if_not_keeped -t $VM $@
 exit $retcode

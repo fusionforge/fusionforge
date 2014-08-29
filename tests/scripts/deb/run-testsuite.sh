@@ -19,13 +19,7 @@ if ! dpkg-query -s selenium >/dev/null 2>&1 ; then
     apt-get -y install default-jre iceweasel
 fi
 
-# Ensure tested components are installed
-UCF_FORCE_CONFFNEW=yes apt-get install -y fusionforge fusionforge-shell \
-  fusionforge-plugin-scmgit fusionforge-plugin-scmsvn fusionforge-plugin-scmbzr \
-  fusionforge-plugin-mediawiki fusionforge-plugin-moinmoin \
-  fusionforge-plugin-blocks
-
-service cron stop
+service cron stop || true
 
 config_path=$(forge_get_config config_path)
 (echo [mediawiki]; echo unbreak_frames=yes) > $config_path/config.ini.d/zzz-buildbot.ini
@@ -34,4 +28,4 @@ config_path=$(forge_get_config config_path)
 apt-get -y install phpunit phpunit-selenium
 
 # Now, start the functionnal test suite using phpunit and selenium
-/usr/src/fusionforge/tests/scripts/phpunit.sh deb/debian
+/usr/src/fusionforge/tests/scripts/phpunit.sh $@

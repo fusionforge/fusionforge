@@ -25,7 +25,7 @@ INSTALL=install
 CP_R=cp -r --preserve=timestamps
 
 # Hard-coded detection of distro-specific Apache configuration
-apache_user:=$(shell if [ -e /etc/redhat-release ]; then echo 'apache'; else echo 'www-data'; fi)
-apache_group:=$(shell if [ -e /etc/redhat-release ]; then echo 'apache'; else echo 'www-data'; fi)
-apache_service:=$(shell if [ -e /etc/redhat-release ]; then echo 'httpd'; else echo 'apache2'; fi)
+apache_user=$(shell if [ -e /etc/redhat-release ]; then echo 'apache'; else echo 'www-data'; fi)
+apache_group=$(shell if [ -e /etc/redhat-release ]; then echo 'apache'; else echo 'www-data'; fi)
+apache_service=$(shell if [ -e /etc/redhat-release ]; then echo 'httpd'; else echo 'apache2'; fi)
 # TODO: SuSE = wwwrun/www/??

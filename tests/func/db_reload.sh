@@ -167,4 +167,4 @@ start_database
 start_apache
 
 echo "Flushing/restarting nscd"
-nscd -i passwd && nscd -i group
+nscd -i passwd && nscd -i group || true

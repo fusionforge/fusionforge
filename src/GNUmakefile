@@ -1,13 +1,15 @@
 include GNUmakefile.defaults
 VERSION:=$(shell cat VERSION)
 
+
 ## Step 1: build files
 all:
 	$(MAKE) -C locale/
 
 
+
 ## Step 2: install files
-install: all install-core install-plugins
+install: all install-base install-plugins
 
 # Directories required for stand-alone plugin install
 install-base-dirs:
@@ -78,9 +80,9 @@ install-mta-exim4: install-base-dirs
 install-lists: install-base-dirs
 	$(CP_R) cronjobs/lists  $(DESTDIR)$(pkgdatadir)/cronjobs/
 
-install-core: install-base-dirs install-common install-web install-db
+install-base: install-base-dirs install-common install-web install-db
 
-PLUGINS:=$(shell utils/list-valid-plugins.sh)
+PLUGINS=$(shell utils/list-valid-plugins.sh)
 PLUGINS_INSTALL_TARGETS=$(addprefix install-plugin-,$(PLUGINS))
 install-plugins: $(PLUGINS_INSTALL_TARGETS)
 
@@ -105,17 +107,20 @@ uninstall:
 #	Not removing $(config_path) and $(data_path) on purpose
 
 
+
 ## Step 3: configure & update system
 # not relying on 'prefix' for post-install (for no-install/dev setups)
 fgc_source_path:=$(shell forge_get_config source_path 2>/dev/null)
-post-install: post-install-core post-install-plugins
-post-install-core:  # common+db+web
-	$(fgc_source_path)/post-install.d/core.sh
+post-install: post-install-base post-install-plugins
+post-install-base:
+	$(fgc_source_path)/post-install.d/common/common.sh
+	$(fgc_source_path)/post-install.d/db/db.sh
+	$(fgc_source_path)/post-install.d/web/configure.sh
 
 post-install-shell:
 	$(fgc_source_path)/post-install.d/shell/shell.sh configure
 
-PLUGINS_INSTALLED:=$(wildcard $(fgc_source_path)/plugins)
+PLUGINS_INSTALLED=$(wildcard $(fgc_source_path)/plugins)
 PLUGINS_POST_INSTALL_TARGETS=$(addprefix post-install-plugin-,$(PLUGINS_INSTALLED))
 post-install-plugins: $(PLUGINS_POST_INSTALL_TARGETS)
 post-install-plugin-%: $(fgc_source_path)/plugins/%/
