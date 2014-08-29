@@ -40,7 +40,7 @@ else
 	fusionforge-plugin-scmgit fusionforge-plugin-scmsvn fusionforge-plugin-scmbzr \
 	fusionforge-plugin-mediawiki fusionforge-plugin-moinmoin \
 	fusionforge-plugin-blocks
-
-    # Dump clean DB
-    $(dirname $0)/testsuite-prepare.sh
 fi
+
+# Dump clean DB
+if [ ! -e /root/dump ]; then $(dirname $0)/../../func/db_reload.sh --backup; fi

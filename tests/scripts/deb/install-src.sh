@@ -43,4 +43,4 @@ make post-install-base post-install-plugin-scmsvn post-install-plugin-blocks \
     post-install-plugin-mediawiki post-install-plugin-moinmoin
 
 # Dump clean DB
-$(dirname $0)/testsuite-prepare.sh
+if [ ! -e /root/dump ]; then $(dirname $0)/../../func/db_reload.sh --backup; fi
