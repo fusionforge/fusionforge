@@ -52,6 +52,6 @@ else
     service postgresql reload
 fi
 if [ -x /bin/systemctl ]; then
-    sleep 1  # systemd's postgresql init scripts is stupidly async
+    sleep 5  # systemd's postgresql init scripts is stupidly async
     # if you have a better way that works across distros...
 fi

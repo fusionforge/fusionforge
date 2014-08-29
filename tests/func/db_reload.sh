@@ -50,6 +50,7 @@ start_database () {
         echo "...OK"
     else
         echo "... FAIL: database still down?"
+	ps fauxww
     fi
 }
 
@@ -63,6 +64,7 @@ start_apache () {
 # Backup the DB, so that it can be restored for the test suite
 # Usually called from install.sh right after the first install (clean DB)
 if [ "$1" = "--backup" ]; then
+    set -e
     forge_set_password admin myadmin
     su - postgres -c "pg_dumpall" > /root/dump
     su postgres -c 'psql -c CHECKPOINT'  # flush to disk
