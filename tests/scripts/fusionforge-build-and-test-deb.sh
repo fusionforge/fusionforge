@@ -5,6 +5,7 @@
 set -e
 
 get_config
+prepare_workspace
 
 export HOST=$1
 if [ -z "$HOST" ]; then
@@ -52,7 +53,7 @@ echo "Run phpunit test on $HOST"
 # TESTGLOB=func/50_PluginsScmGit/gitSSHTest.php
 ssh root@$HOST "/usr/src/fusionforge/tests/func/vncxstartsuite.sh /usr/src/fusionforge/tests/scripts/deb/run-testsuite.sh deb/debian" || retcode=$?
 
-rsync -av root@$HOST:/var/log/ ~/reports/
+rsync -av root@$HOST:/var/log/ $WORKSPACE/reports/
 
 stop_vm_if_not_keeped -t $VM $@
 exit $retcode

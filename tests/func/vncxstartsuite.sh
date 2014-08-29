@@ -4,11 +4,11 @@
 if ! type vncserver 2>/dev/null
 then
 	echo "Installing vncserver"
-	if type yum /dev/null 2>&1
+	if type yum >/dev/null 2>&1
 	then
 		yum install -y tigervnc-server
 	fi
-	if type apt-get /dev/null 2>&1
+	if type apt-get >/dev/null 2>&1
 	then
 		apt-get -y install vnc4server
 		apt-get -y install xfonts-base
