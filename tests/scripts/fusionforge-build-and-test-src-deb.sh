@@ -27,7 +27,8 @@ case $HOST in
 	;;
 esac	
 
-tests/scripts/start_vm -t $VM $@
+destroy_vm_if_not_keeped -t $VM $HOST
+start_vm_if_not_keeped -t $VM $HOST
 
 # LXC post-install...
 ssh root@$HOST "echo \"deb $DEBMIRRORSEC $DIST/updates main\" > /etc/apt/sources.list.d/security.list"

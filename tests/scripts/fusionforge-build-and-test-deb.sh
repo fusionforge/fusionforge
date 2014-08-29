@@ -27,12 +27,8 @@ case $HOST in
 	;;
 esac	
 
-#conf=$(mktemp)
-#echo "lxc.network.link = virbr0" > $conf
-#echo "lxc.network.type = veth"  >> $conf
-#wsudo lxc-create -t $VM -n $HOST -t $conf
-#sudo lxc-start -n $HOST -d
-tests/scripts/start_vm -t $VM $HOST
+destroy_vm_if_not_keeped -t $VM $HOST
+start_vm_if_not_keeped -t $VM $HOST
 
 # LXC post-install...
 ssh root@$HOST "echo \"deb $DEBMIRRORSEC $DIST/updates main\" > /etc/apt/sources.list.d/security.list"

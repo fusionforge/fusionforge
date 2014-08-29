@@ -107,9 +107,12 @@ fi
 export VMTEMPLATE VMENGINE CIDR IPGW
 }
 
-destroy_vm()
+destroy_vm_if_not_keeped()
 {
-	tests/scripts/destroy_vm $@ || true
+	if ! $KEEPVM
+	then
+	    tests/scripts/destroy_vm $@ || true
+	fi
 }
 
 start_vm_if_not_keeped()
