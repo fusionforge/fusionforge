@@ -65,9 +65,9 @@ class GitPlugin extends SCMPlugin {
 		}
 
 		if ($project->usesPlugin($this->name) && forge_check_perm('scm', $project->getID(), 'read')) {
-			$result = db_query_params('SELECT sum(commits) AS commits, sum(adds) AS adds FROM stats_cvs_group WHERE group_id=$1',
+			$result = db_query_params('SELECT sum(updates) AS updates, sum(adds) AS adds FROM stats_cvs_group WHERE group_id=$1',
 						array($project->getID()));
-			$commit_num = db_result($result,0,'commits');
+			$commit_num = db_result($result,0,'updates');
 			$add_num    = db_result($result,0,'adds');
 			if (!$commit_num) {
 				$commit_num=0;
@@ -345,11 +345,10 @@ class GitPlugin extends SCMPlugin {
 		global $HTML;
 		$b = '';
 
-		$result = db_query_params('SELECT u.realname, u.user_name, u.user_id, sum(commits) as commits, sum(adds) as adds, sum(adds+commits) as combined FROM stats_cvs_user s, users u WHERE group_id=$1 AND s.user_id=u.user_id AND (commits>0 OR adds >0) GROUP BY u.user_id, realname, user_name, u.user_id ORDER BY combined DESC, realname',
+		$result = db_query_params('SELECT u.realname, u.user_name, u.user_id, sum(updates) as updates, sum(adds) as adds, sum(adds+commits) as combined FROM stats_cvs_user s, users u WHERE group_id=$1 AND s.user_id=u.user_id AND (commits>0 OR adds >0) GROUP BY u.user_id, realname, user_name, u.user_id ORDER BY combined DESC, realname',
 			array($project->getID()));
 
 		if (db_numrows($result) > 0) {
-//			$b .= $HTML->boxMiddle(_('Repository Statistics'));
 
 			$tableHeaders = array(
 			_('Name'),
@@ -359,22 +358,22 @@ class GitPlugin extends SCMPlugin {
 			$b .= $HTML->listTableTop($tableHeaders, false, '', 'repo-history');
 
 			$i = 0;
-			$total = array('adds' => 0, 'commits' => 0);
+			$total = array('adds' => 0, 'updates' => 0);
 
 			while($data = db_fetch_array($result)) {
 				$b .= '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
 				$b .= '<td class="halfwidth">';
 				$b .= util_make_link_u($data['user_name'], $data['user_id'], $data['realname']);
 				$b .= '</td><td class="onequarterwidth align-right">'.$data['adds']. '</td>'.
-					'<td class="onequarterwidth align-right">'.$data['commits'].'</td></tr>';
+					'<td class="onequarterwidth align-right">'.$data['updates'].'</td></tr>';
 				$total['adds'] += $data['adds'];
-				$total['commits'] += $data['commits'];
+				$total['updates'] += $data['updates'];
 				$i++;
 			}
 			$b .= '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
 			$b .= '<td class="halfwidth"><strong>'._('Total').':</strong></td>'.
 				'<td class="onequarterwidth align-right"><strong>'.$total['adds']. '</strong></td>'.
-				'<td class="onequarterwidth align-right"><strong>'.$total['commits'].'</strong></td>';
+				'<td class="onequarterwidth align-right"><strong>'.$total['updates'].'</strong></td>';
 			$b .= '</tr>';
 			$b .= $HTML->listTableBottom();
 		}
@@ -717,9 +716,12 @@ class GitPlugin extends SCMPlugin {
 			$usr_adds    = array();
 			$usr_updates = array();
 			$usr_deletes = array();
+			$usr_commits = array();
 
 			$adds    = 0;
 			$updates = 0;
+			$deletes = 0;
+			$commits = 0;
 
 			$repo = forge_get_config('repos_path', 'scmgit') . '/' . $project->getUnixName() . '/' . $project->getUnixName() . '.git';
 			if (!is_dir($repo) || !is_dir("$repo/refs")) {
@@ -742,12 +744,23 @@ class GitPlugin extends SCMPlugin {
 				return false;
 			}
 
+			$res = db_query_params ('DELETE FROM stats_cvs_user WHERE month=$1 AND day=$2 AND group_id=$3',
+						array ($month_string,
+						       $day,
+						       $project->getID())) ;
+			if(!$res) {
+				echo "Error while cleaning stats_cvs_user\n" ;
+				db_rollback () ;
+				return false ;
+			}
+
 			$last_user    = "";
 			while (!feof($pipe) && $data = fgets($pipe)) {
 				$line = trim($data);
 				// Drop bad UTF-8 - it's quite hard to make git output non-UTF-8
 				// (e.g. by enforcing an unknown encoding) - but some users do!
 				// and this makes PostgreSQL choke
+				// this fix removes tabs in line. the regex used in short-commit stats line has been changed accordingly.
 				$line = preg_replace('/[^(\x20-\x7F)]/','', $line);
 				if (strlen($line) > 0) {
 					$result = preg_match("/^(?P<name>.+) <(?P<mail>.+)>/", $line, $matches);
@@ -759,10 +772,13 @@ class GitPlugin extends SCMPlugin {
 							$usr_adds[$last_user] = 0;
 							$usr_updates[$last_user] = 0;
 							$usr_deletes[$last_user] = 0;
+							$usr_commits[$last_user] = 0;
 						}
+						$commits++;
+						$usr_commits[$last_user]++;
 					} else {
 						// Short-commit stats line
-						$result = preg_match("/^(?P<mode>[AMD])\s+(?P<file>.+)$/", $line, $matches);
+						$result = preg_match("/^(?P<mode>[AMD])(?P<file>.+)$/", $line, $matches);
 						if (!$result) continue;
 						if ($last_user == "") continue;
 						if (!isset($usr_adds[$last_user])) $usr_adds[$last_user] = 0;
@@ -776,20 +792,23 @@ class GitPlugin extends SCMPlugin {
 							$updates++;
 						} elseif ($matches['mode'] == 'D') {
 							$usr_deletes[$last_user]++;
+							$deletes++;
 						}
 					}
 				}
 			}
 
 			// inserting group results in stats_cvs_groups
-			if ($updates > 0 || $adds > 0) {
-				if (!db_query_params('INSERT INTO stats_cvs_group (month,day,group_id,checkouts,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
+			if ($updates > 0 || $adds > 0 || $deletes > 0 || $commits > 0) {
+				if (!db_query_params('INSERT INTO stats_cvs_group (month,day,group_id,checkouts,commits,adds,updates,deletes) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
 						      array($month_string,
 							     $day,
 							     $project->getID(),
 							     0,
+							     $commits,
+							     $adds,
 							     $updates,
-							     $adds))) {
+							     $deletes))) {
 					echo "Error while inserting into stats_cvs_group\n";
 					db_rollback();
 					return false;
@@ -797,7 +816,7 @@ class GitPlugin extends SCMPlugin {
 			}
 
 			// building the user list
-			$user_list = array_unique( array_merge( array_keys( $usr_adds ), array_keys( $usr_updates ) ) );
+			$user_list = array_unique( array_merge( array_keys( $usr_adds ), array_keys( $usr_updates ), array_keys( $usr_deletes ), array_keys( $usr_commits ) ) );
 
 			foreach ($user_list as $user) {
 				// Trying to get user id from user name or email
@@ -814,16 +833,20 @@ class GitPlugin extends SCMPlugin {
 					}
 				}
 
+				$uc = isset($usr_commits[$user]) ? $usr_commits[$user] : 0;
 				$uu = isset($usr_updates[$user]) ? $usr_updates[$user] : 0;
 				$ua = isset($usr_adds[$user]) ? $usr_adds[$user] : 0;
-				if ($uu > 0 || $ua > 0) {
-					if (!db_query_params('INSERT INTO stats_cvs_user (month,day,group_id,user_id,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
+				$ud = isset($usr_deletes[$user]) ? $usr_deletes[$user] : 0;
+				if ($uu > 0 || $ua > 0 || $uc > 0 || $ud > 0) {
+					if (!db_query_params('INSERT INTO stats_cvs_user (month,day,group_id,user_id,commits,adds,updates,deletes) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
 							      array($month_string,
 								     $day,
 								     $project->getID(),
 								     $user_id,
+								     $uc,
+								     $ua,
 								     $uu,
-								     $ua))) {
+								     $ud))) {
 						echo "Error while inserting into stats_cvs_user\n";
 						db_rollback();
 						return false;
@@ -974,7 +997,7 @@ class GitPlugin extends SCMPlugin {
 					$result = array();
 					$result['section'] = 'scm';
 					$result['group_id'] = $group_id;
-					$result['ref_id'] = 'browser.php?group_id='.$group_id;
+					$result['ref_id'] = 'browser.php?group_id='.$group_id.'&commit='.$splitedLine[3];
 					$result['description'] = htmlspecialchars($splitedLine[2]).' (commit '.$splitedLine[3].')';
 					$userObject = user_get_object_by_email($splitedLine[1]);
 					if (is_a($userObject, 'GFUser')) {
