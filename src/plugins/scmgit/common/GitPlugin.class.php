@@ -309,7 +309,11 @@ class GitPlugin extends SCMPlugin {
 				print '<iframe id="scm_iframe" src="'.util_make_url("/plugins/scmgit/cgi-bin/gitweb.cgi?p=".$project->getUnixName().'/users/'.$user->getUnixName().'.git').'" frameborder="0" width=100% ></iframe>';
 				$useautoheight = 1;
 			} elseif ($this->browserDisplayable($project)) {
-				print '<iframe id="scm_iframe" src="'.util_make_url("/plugins/scmgit/cgi-bin/gitweb.cgi?p=".$project->getUnixName().'/'.$project->getUnixName().'.git').'" frameborder="0" width=100% ></iframe>';
+				$iframesrc = "/plugins/scmgit/cgi-bin/gitweb.cgi?p=".$project->getUnixName().'/'.$project->getUnixName().'.git';
+				if ($params['commit']) {
+					$iframesrc .= ';a=log;h='.$params['commit'];
+				}
+				print '<iframe id="scm_iframe" src="'.util_make_url($iframesrc).'" frameborder="0" width=100% ></iframe>';
 				$useautoheight = 1;
 			}
 		}
