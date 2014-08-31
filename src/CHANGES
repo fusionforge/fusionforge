@@ -3,14 +3,18 @@ Fusionforge-X.X:
 * [#657] Docman: Add move mass actions (TrivialDev)
 * [#692] FRS: Reorganise code (TrivialDev)
 * [#697] FRS: Enable widget "My monitored packages" (TrivialDev)
+* [#705] FRS: Provide new role settings (TrivialDev)
+* [#713] FRS: Add delete packages mass action (TrivialDev)
 * [#656] General: drop tipsy plugin, use standard jQuery UI tooltip already provided (TrivialDev)
 * [#663] General: FusionForge Theme & jQuery UI theme sync (TrivialDev)
 * [#664] General: Update the jQuery & jQuery UI frameworks (TrivialDev)
 * [#669] General: feedback, error_msg, warning_msg are now store in cookie. (TrivialDev)
+* [#716] General: Update the jQuery Auto-height plugin (TrivialDev)
 * Plugin scmhook: Update git post-receive eMail hook (tarent solutions GmbH, Teckids e.V.)
 * [#684] Widget Public Area: display FRS link (TrivialDev)
 * [#655] Tracker: enable support for multi-select extrafield in roadmap (TrivialDev)
 * [#662] Forum: store the attached file on FS. (TrivialDev)
+* [#719] Plugin SCM GIT: activity log entry link to commit log in SCM browsing tab (TrivialDev)
 
 Fusionforge-5.3.2:
 * Software map: fix "value too long for type character varying(255)" error in cron db_trove_maint.php (Inria)
