@@ -69,9 +69,9 @@ class SVNPlugin extends SCMPlugin {
 		}
 
 		if ($project->usesPlugin($this->name) && forge_check_perm('scm', $project->getID(), 'read')) {
-			$result = db_query_params('SELECT sum(commits) AS commits, sum(adds) AS adds FROM stats_cvs_group WHERE group_id=$1',
+			$result = db_query_params('SELECT sum(updates) AS updates, sum(adds) AS adds FROM stats_cvs_group WHERE group_id=$1',
 						  array ($project->getID())) ;
-			$commit_num = db_result($result,0,'commits');
+			$commit_num = db_result($result,0,'updates');
 			$add_num    = db_result($result,0,'adds');
 			if (!$commit_num) {
 				$commit_num=0;
@@ -399,8 +399,8 @@ class SVNPlugin extends SCMPlugin {
 
 	function gatherStats($params) {
 		global $last_user, $last_time, $last_tag, $time_ok, $start_time, $end_time,
-			$adds, $deletes, $updates, $date_key,
-			$usr_adds, $usr_deletes, $usr_updates;
+			$adds, $deletes, $updates, $commits, $date_key,
+			$usr_adds, $usr_deletes, $usr_updates, $usr_commits;
 
 		$time_ok = true;
 
@@ -425,8 +425,13 @@ class SVNPlugin extends SCMPlugin {
 
 			$adds    = 0;
 			$updates = 0;
+			$deletes = 0;
+			$commits = 0;
+
 			$usr_adds    = array();
 			$usr_updates = array();
+			$usr_deletes = array();
+			$usr_commits = array();
 
 			$repo = forge_get_config('repos_path', 'scmsvn') . '/' . $project->getUnixName();
 			if (!is_dir ($repo) || !is_file ("$repo/format")) {
@@ -481,14 +486,16 @@ class SVNPlugin extends SCMPlugin {
 			xml_parser_free($xml_parser);
 
 			// inserting group results in stats_cvs_groups
-			if ($updates > 0 || $adds > 0) {
-				if (!db_query_params('INSERT INTO stats_cvs_group (month,day,group_id,checkouts,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
+			if ($updates > 0 || $adds > 0 || $deletes > 0 || $commits > 0) {
+				if (!db_query_params('INSERT INTO stats_cvs_group (month,day,group_id,checkouts,commits,adds,updates,deletes) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
 						      array ($month_string,
 							     $day,
 							     $project->getID(),
 							     0,
+							     $commits,
+							     $adds,
 							     $updates,
-							     $adds))) {
+							     $deletes))) {
 					echo "Error while inserting into stats_cvs_group\n" ;
 					db_rollback();
 					return false;
@@ -496,7 +503,7 @@ class SVNPlugin extends SCMPlugin {
 			}
 
 			// building the user list
-			$user_list = array_unique( array_merge( array_keys( $usr_adds ), array_keys( $usr_updates ) ) );
+			$user_list = array_unique( array_merge( array_keys( $usr_adds ), array_keys( $usr_updates ),  array_keys( $usr_deletes ), array_keys( $usr_commits )) );
 
 			foreach ( $user_list as $user ) {
 				// trying to get user id from user name
@@ -507,16 +514,20 @@ class SVNPlugin extends SCMPlugin {
 					continue;
 				}
 
+				$uc = isset($usr_commits[$user]) ? $usr_commits[$user] : 0 ;
 				$uu = isset($usr_updates[$user]) ? $usr_updates[$user] : 0 ;
 				$ua = isset($usr_adds[$user]) ? $usr_adds[$user] : 0 ;
-				if ($uu > 0 || $ua > 0) {
-					if (!db_query_params ('INSERT INTO stats_cvs_user (month,day,group_id,user_id,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
+				$ud = isset($usr_deletes[$user]) ? $usr_deletes[$user] : 0 ;
+				if ($uu > 0 || $ua > 0 || $uc > 0 || $ud > 0) {
+					if (!db_query_params ('INSERT INTO stats_cvs_user (month,day,group_id,user_id,commits,adds, updates, deletes) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
 							      array ($month_string,
 								     $day,
 								     $project->getID(),
 								     $user_id,
+								     $uc,
+								     $ua,
 								     $uu,
-								     $ua))) {
+								     $ud))) {
 						echo "Error while inserting into stats_cvs_user\n" ;
 						db_rollback () ;
 						return false ;
@@ -606,8 +617,7 @@ class SVNPlugin extends SCMPlugin {
 
 	function activity($params) {
 		global $last_user, $last_time, $last_tag, $time_ok, $start_time, $end_time,
-			$adds, $deletes, $updates, $date_key,
-			$usr_adds, $usr_deletes, $usr_updates,
+			$adds, $deletes, $updates, $commits, $date_key,
 			$messages, $last_message, $times, $revisions, $users;
 		$group_id = $params['group'];
 		$project = group_get_object($group_id);
@@ -637,7 +647,7 @@ class SVNPlugin extends SCMPlugin {
 				}
 			}
 			xml_parser_free($xml_parser);
-			if ($adds > 0 || $updates > 0) {
+			if ($adds > 0 || $updates > 0 || $commits > 0 || $deletes > 0) {
 				$i = 0;
 				foreach ($messages as $message) {
 					$result = array();
@@ -667,12 +677,14 @@ class SVNPlugin extends SCMPlugin {
 // End of class, helper functions now
 
 function SVNPluginCharData($parser, $chars) {
-	global $last_tag, $last_user, $last_time, $start_time, $end_time,
+	global $last_tag, $last_user, $last_time, $start_time, $end_time, $usr_commits, $commits,
 		$time_ok, $user_list, $last_message, $messages, $times, $users;
 	switch ($last_tag) {
 		case "AUTHOR": {
 			$last_user = preg_replace('/[^a-z0-9_-]/', '', strtolower(trim($chars)));
 			$users[] = $last_user;
+			$usr_commits[$last_user] = isset($usr_commits[$last_user]) ? ($usr_commits[$last_user]+1) : 1 ;
+			$commits++;
 			break;
 		}
 		case "DATE": {
@@ -682,12 +694,16 @@ function SVNPluginCharData($parser, $chars) {
 				$time_ok = true;
 			} else {
 				$time_ok = false;
+				$usr_commits[$last_user]--;
+				$commits--;
 			}
 			$times[] = $last_time;
 			break;
 		}
 		case "MSG": {
-                        $messages[count($messages)-1] .= $chars;
+			if ($time_ok === true) {
+				$messages[count($messages)-1] .= $chars;
+			}
                         /* note: there may be more than one msg
 			 * (happen when the message contain accents).
 			 */
@@ -697,8 +713,8 @@ function SVNPluginCharData($parser, $chars) {
 }
 
 function SVNPluginStartElement($parser, $name, $attrs) {
-	global $last_user, $last_time, $last_tag, $time_ok,
-		$adds, $updates, $usr_adds, $usr_updates, $last_message, $messages, $times, $revisions;
+	global $last_user, $last_time, $last_tag, $time_ok, $commits,
+		$adds, $updates, $usr_adds, $usr_updates, $last_message, $messages, $times, $revisions, $deletes, $usr_deletes;
 	$last_tag = $name;
 	switch($name) {
 		case "LOGENTRY": {
@@ -709,7 +725,8 @@ function SVNPluginStartElement($parser, $name, $attrs) {
 			break;
 		}
 		case "PATH": {
-			if ($time_ok) {
+			if ($time_ok === true) {
+
 				if ($attrs['ACTION'] == "M") {
 					$updates++;
 					if ($last_user) {
@@ -720,12 +737,19 @@ function SVNPluginStartElement($parser, $name, $attrs) {
 					if ($last_user) {
 						$usr_adds[$last_user] = isset($usr_adds[$last_user]) ? ($usr_adds[$last_user]+1) : 1 ;
 					}
+				} elseif ($attrs['ACTION'] == 'D') {
+					$deletes++;
+					if ($last_user) {
+						$usr_deletes[$last_user] = isset($usr_deletes[$last_user]) ? ($usr_deletes[$last_user]+1) : 1 ;
+					}
 				}
 			}
 			break;
 		}
                 case "MSG": {
-                        $messages[] = "";
+			if ($time_ok === true) {
+				$messages[] = "";
+			}
 			break;
                 }
 	}
