@@ -41,7 +41,7 @@ stop_database () {
 start_database () {
 
     echo "Starting the database"
-    invoke-rc.d postgresql start
+    service postgresql start
 
     echo "Waiting for database to be up..."
     i=0

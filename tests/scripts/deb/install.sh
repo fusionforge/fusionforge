@@ -13,7 +13,7 @@ export DEBIAN_FRONTEND=noninteractive
 # fusionforge-plugin-scmbzr depends on loggerhead (>= 1.19~bzr477~),
 # but wheezy only has 1.19~bzr461-1, so we need to manually "Backport"
 # a more recent dependency
-if grep ^7 /etc/debian_version && ! dpkg-query -s loggerhead >/dev/null 2>&1 ; then
+if grep ^7 /etc/debian_version > /dev/null && ! dpkg-query -s loggerhead >/dev/null 2>&1 ; then
     # install loggerhead with its dependencies
     # we need gdebi to make sure dependencies are installed too (simple dpkg -i won't)
     apt-get -y install gdebi-core wget

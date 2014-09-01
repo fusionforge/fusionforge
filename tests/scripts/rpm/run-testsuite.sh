@@ -14,13 +14,7 @@ if ! rpm -q selenium >/dev/null ; then
     yum -y install firefox java-1.6.0
 fi
 
-# Ensure tested components are installed
-yum install -y fusionforge fusionforge-shell \
-  fusionforge-plugin-scmgit fusionforge-plugin-scmsvn \
-  fusionforge-plugin-mediawiki \
-  fusionforge-plugin-blocks fusionforge-plugin-online_help
-
-service crond stop
+service crond stop || true
 
 config_path=$(forge_get_config config_path)
 (echo [mediawiki]; echo unbreak_frames=yes) > $config_path/config.ini.d/zzz-buildbot.ini

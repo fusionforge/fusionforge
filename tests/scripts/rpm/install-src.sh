@@ -1,24 +1,5 @@
-# postgresql-server
-# php-cli php-pgsql
-# httpd php
-# nscd  # no unscd T-T
-
-# get_news_notapproved.pl:
-# perl perl-DBI perl-Text-Autoformat perl-Mail-Sendmail
-
-# php-htmlpurifier-htmlpurifier  # fedora
-# htmlpurifier  # pear
-#   pear channel-discover htmlpurifier.org
-#   pear install hp/HTMLPurifier
-#   Note: htmlpurifier required in -common: group->forum->textsanitizer->htmlpurifier
-# arc           # vendor/
-# graphite      # vendor/
-# php-pear-CAS  # epel
-# php-simplepie # epel or common/rss/simplepie.inc
-
-# postfix: needs to be recompiled, el6 doesn't have pgsql support enabled (conditional in .spec)
-
-# mediawiki (provided by mediawiki119): EPEL
+#! /bin/sh
+# Install FusionForge from source
 
 # Fedora/RHEL/CentOS version:
 os_version=$(rpm -q --qf "%{VERSION}" $(rpm -q --whatprovides redhat-release))
@@ -86,15 +67,24 @@ fi
 # TODO: postfix: rebuild from RHEL/CentOS sources with pgsql enabled,
 # so we can test SSH
 
-if rpm -q fusionforge >/dev/null ; then
-    yum upgrade -y
-else
-    # Initial installation
-    yum install -y fusionforge fusionforge-shell \
-	fusionforge-plugin-scmgit fusionforge-plugin-scmsvn \
-	fusionforge-plugin-mediawiki \
-	fusionforge-plugin-blocks fusionforge-plugin-online_help
-fi
+# Install FusionForge packages
+yum install -y make gettext confget php-cli php-pgsql \
+    httpd postgresql \
+    subversion \
+    mediawiki119 \
+    moin mod_wsgi python-psycopg2
+# TODO: replace python-subversion with non-bundled viewvc
+
+cd /usr/src/fusionforge/src/
+make
+make install-base install-shell
+make install-plugin-scmsvn install-plugin-blocks \
+    install-plugin-mediawiki install-plugin-moinmoin \
+    install-plugin-online_help
+# adapt .ini configuration in /etc/fusionforge/config.ini.d/
+make post-install-base post-install-plugin-scmsvn post-install-plugin-blocks \
+    post-install-plugin-mediawiki post-install-plugin-moinmoin \
+    post-install-plugin-online_help
 
 # Dump clean DB
 if [ ! -e /root/dump ]; then $(dirname $0)/../../func/db_reload.sh --backup; fi

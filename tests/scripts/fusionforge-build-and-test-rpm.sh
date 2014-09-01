@@ -5,6 +5,7 @@
 set -e
 
 get_config
+prepare_workspace
 
 export HOST=$1
 if [ -z "$HOST" ]; then
