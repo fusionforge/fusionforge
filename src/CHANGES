@@ -17,6 +17,7 @@ Fusionforge-X.X:
 * [#719] Plugin SCM GIT: activity log entry link to commit log in SCM browsing tab (TrivialDev)
 * [#724] Plugin SCM HG (Mercurial): display the Repository History stats block (TrivialDev)
 * [#725] Plugin SCM HG (Mercurial): add support for project activity tab (TrivialDev)
+* [#726] Plugin SCM HG (Mercurial): activity log entry link to commit log in SCM browsing tab (TrivialDev)
 
 Fusionforge-5.3.2:
 * Software map: fix "value too long for type character varying(255)" error in cron db_trove_maint.php (Inria)

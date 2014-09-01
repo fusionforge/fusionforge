@@ -234,7 +234,13 @@ class HgPlugin extends SCMPlugin {
 		}
 		if ($project->usesPlugin($this->name)) {
 			if ($this->browserDisplayable($project)) {
-				print '<iframe id="scm_iframe" src="'.util_make_url('/plugins/scmhg/cgi-bin/'.$project->getUnixName().'.cgi?p='.$project->getUnixName()).'" frameborder="0" width="100%" ></iframe>';
+				$iframesrc = '/plugins/scmhg/cgi-bin/'.$project->getUnixName().'.cgi';
+				if ($params['commit']) {
+					$iframesrc .= '/rev/'.$params['commit'];
+				} else {
+					$iframesrc .=  '?p='.$project->getUnixName();
+				}
+				print '<iframe id="scm_iframe" src="'.util_make_url($iframesrc).'" frameborder="0" width="100%" ></iframe>';
 				html_use_jqueryautoheight();
 				echo $HTML->getJavascripts();
 				echo '<script type="text/javascript">//<![CDATA[
@@ -656,7 +662,6 @@ class HgPlugin extends SCMPlugin {
 					$line = trim($data);
 					$splitedLine = explode('||', $line);
 					if (sizeof($splitedLine) == 4) {
-						var_dump($splitedLine);
 						$result = array();
 						$result['section'] = 'scm';
 						$result['group_id'] = $group_id;
