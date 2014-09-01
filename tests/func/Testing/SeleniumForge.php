@@ -72,6 +72,10 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->setBrowser('*firefox');
 		$this->setBrowserUrl(URL);
 		$this->setHost(SELENIUM_RC_HOST);
+
+		// Use a sensible default background (instead of Selenium's criminal default to black)
+		// (future-proof - https://github.com/giorgiosironi/phpunit-selenium/commit/07e50f74f3782ce8781527653e6c79aeefd94ada)
+		$this->screenshotBgColor = '#CCFFDD';
 	}
 
 	/**
