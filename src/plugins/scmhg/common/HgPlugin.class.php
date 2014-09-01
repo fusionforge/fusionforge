@@ -35,6 +35,7 @@ class HgPlugin extends SCMPlugin {
 		$this->_addHook('scm_update_repolist');
 		$this->_addHook('scm_generate_snapshots');
 		$this->_addHook('scm_gather_stats');
+		$this->_addHook('activity');
 		$this->register();
 	}
 
@@ -632,6 +633,53 @@ class HgPlugin extends SCMPlugin {
 			}
 		}
 		db_commit();
+	}
+
+	function activity($params) {
+		$group_id = $params['group'];
+		$project = group_get_object($group_id);
+		if (!$project->usesPlugin($this->name)) {
+			return false;
+		}
+		if (in_array('scmhg', $params['show']) || (count($params['show']) < 1)) {
+			$start_time = $params['begin'];
+			$end_time = $params['end'];
+			$repo = forge_get_config('repos_path', 'scmhg') . '/' . $project->getUnixName();
+			if (!is_dir($repo) || !is_dir("$repo/.hg")) {
+				// echo "No repository\n";
+				return false;
+			}
+			$cdir = chdir($repo);
+			if ($cdir) {
+				$pipe = popen("hg log --template '{date|shortdate}||{author|email}||{desc}||{node}\n' -d '$start_time 0 to $end_time 0'", 'r');
+				while (!feof($pipe) && $data = fgets($pipe)) {
+					$line = trim($data);
+					$splitedLine = explode('||', $line);
+					var_dump($splitedLine);
+					if (sizeof($splitedLine) == 4) {
+						var_dump($splitedLine);
+						$result = array();
+						$result['section'] = 'scm';
+						$result['group_id'] = $group_id;
+						$result['ref_id'] = 'browser.php?group_id='.$group_id.'&commit='.$splitedLine[3];
+						$result['description'] = htmlspecialchars($splitedLine[2]).' (changeset '.$splitedLine[3].')';
+						$userObject = user_get_object_by_email($splitedLine[1]);
+						if (is_a($userObject, 'GFUser')) {
+							$result['realname'] = util_display_user($userObject->getUnixName(), $userObject->getID(), $userObject->getRealName());
+						} else {
+							$result['realname'] = '';
+						}
+						$splitedDate = explode('-', $splitedLine[0]);
+						$result['activity_date'] = $splitedDate[0];
+						$result['subref_id'] = '';
+						$params['results'][] = $result;
+					}
+				}
+			}
+		}
+		$params['ids'][] = $this->name;
+		$params['texts'][] = _('Hg Commits');
+		return true;
 	}
 
 	function scm_add_repo(&$params) {
