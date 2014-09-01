@@ -46,7 +46,7 @@ ssh root@$HOST "/usr/src/fusionforge/tests/scripts/deb/install.sh"
 # Run tests
 retcode=0
 echo "Run phpunit test on $HOST"
-# TESTGLOB=func/50_PluginsScmGit/gitSSHTest.php
+# TESTGLOB='func/50_PluginsScmGit/*'
 ssh root@$HOST "/usr/src/fusionforge/tests/func/vncxstartsuite.sh /usr/src/fusionforge/tests/scripts/deb/run-testsuite.sh deb/debian" || retcode=$?
 
 rsync -av root@$HOST:/var/log/ $WORKSPACE/reports/

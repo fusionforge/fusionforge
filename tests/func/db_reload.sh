@@ -137,6 +137,8 @@ done
 # Wikis
 rm -rf $(forge_get_config data_path)/plugins/mediawiki/projects/*
 rm -rf $(forge_get_config data_path)/plugins/moinmoin/wikidata/project*
+# Conf
+rm -f $(forge_get_config config_path)/config.ini.d/zzz-buildbot-*
 
 # If the backup is there, restore it (it should now have been created by install.sh)
 if [ -d $dbdir.backup ]; then

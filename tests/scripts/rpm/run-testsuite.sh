@@ -16,10 +16,6 @@ fi
 
 service crond stop || true
 
-config_path=$(forge_get_config config_path)
-(echo [mediawiki]; echo unbreak_frames=yes) > $config_path/config.ini.d/zzz-buildbot.ini
-(echo [moinmoin]; echo use_frame=no) >> $config_path/config.ini.d/zzz-buildbot.ini
-
 # Test dependencies (EPEL)
 yum install -y php-phpunit-PHPUnit php-phpunit-PHPUnit-Selenium
 

@@ -28,6 +28,11 @@ class ScmSvnSSHTest extends FForge_SeleniumTestCase
 		$this->skip_on_rpm_installs();
 		$this->skip_on_src_installs();
 
+		$forge_get_config = RUN_JOB_PATH."/forge_get_config";
+		$config_path = rtrim(`$forge_get_config config_path`);
+		file_put_contents("$config_path/config.ini.d/zzz-buildbot-svnsshtest",
+				  "[scmsvn]\n"."use_ssh = yes\n"."use_dav = no\n");
+
 		$this->activatePlugin('scmsvn');
 		$this->populateStandardTemplate('empty');
 		$this->init();
