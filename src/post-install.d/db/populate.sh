@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 # Create user and database, and import initial data
 
 database_host=$(forge_get_config database_host)
@@ -19,19 +19,20 @@ if su - postgres -c "psql $database_name" </dev/null 2>/dev/null; then
     exit 0
 fi
 
-# Create DB user
-su - postgres -c "createuser -SDR $database_user"
-database_password_quoted=$(echo $database_password | sed -e "s/'/''/")
-su - postgres -c psql <<EOF
-ALTER ROLE $database_user WITH PASSWORD '$database_password_quoted' ;
-EOF
-su - postgres -c "createuser -SDR ${database_user}_nss"
-
 # Create database
 su - postgres -c "createdb --template template0 --encoding UNICODE $database_name"
 if ! su - postgres -c "createlang -l $database_name" | grep -q plpgsql; then \
     su - postgres -c "createlang plpgsql $database_name"; \
 fi
+
+# Create DB user
+su - postgres -c "createuser -SDR $database_user"
+database_password_quoted=$(echo $database_password | sed -e "s/'/''/")
+su - postgres -c psql <<EOF
+ALTER ROLE $database_user WITH PASSWORD '$database_password_quoted';
+GRANT CREATE ON DATABASE $database_name TO $database_user;  -- for wiki schemas
+EOF
+su - postgres -c "createuser -SDR ${database_user}_nss"
 
 export PGPASSFILE=$(mktemp)
 cat <<EOF > $PGPASSFILE
