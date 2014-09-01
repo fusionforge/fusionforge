@@ -45,6 +45,7 @@ install-common: install-config install-plugin-authbuiltin
 	$(CP_R) VERSION bin common templates lib $(DESTDIR)$(pkgdatadir)/
 	$(CP_R) cronjobs/scm $(DESTDIR)$(pkgdatadir)/cronjobs/  # no dedicated 'scm' package now
 	$(CP_R) post-install.d/common $(DESTDIR)$(pkgdatadir)/post-install.d/
+	$(CP_R) plugins/env.inc.php $(DESTDIR)$(pkgdatadir)/plugins/
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(prefix)/bin/
 	ln -nfs $(pkgdatadir)/bin/forge_get_config $(DESTDIR)$(prefix)/bin/
 	ln -nfs $(pkgdatadir)/bin/forge_run_job $(DESTDIR)$(prefix)/bin/
