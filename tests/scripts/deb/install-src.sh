@@ -38,10 +38,13 @@ apt-get install -y make gettext confget php5-cli php5-pgsql php-htmlpurifier \
 cd /usr/src/fusionforge/src/
 make
 make install-base install-shell
-make install-plugin-scmsvn install-plugin-blocks install-plugin-mediawiki install-plugin-moinmoin
+make install-plugin-scmsvn install-plugin-blocks \
+    install-plugin-mediawiki install-plugin-moinmoin \
+    install-plugin-online_help
 # adapt .ini configuration in /etc/fusionforge/config.ini.d/
 make post-install-base post-install-plugin-scmsvn post-install-plugin-blocks \
-    post-install-plugin-mediawiki post-install-plugin-moinmoin
+    post-install-plugin-mediawiki post-install-plugin-moinmoin \
+    post-install-plugin-online_help
 
 # Dump clean DB
 if [ ! -e /root/dump ]; then $(dirname $0)/../../func/db_reload.sh --backup; fi
