@@ -258,6 +258,9 @@ class HgPlugin extends SCMPlugin {
 			$conf .= "\nstyle = paper";
 			$conf .= "\nallow_push = *"; //every user ( see apache configuration) is allowed to push
 			$conf .= "\nallow_read = *"; // every user is allowed to clone and pull
+			if (!forge_get_config('use_ssl', 'scmhg')) {
+				$conf .= "\npush_ssl = 0";
+			}
 			fwrite($f, $conf);
 			fclose($f);
 			system("chgrp -R $unix_group $repo");
@@ -363,6 +366,9 @@ class HgPlugin extends SCMPlugin {
 				$hgrc .= "\nstyle = paper";
 				$hgrc .= "\nallow_read = ".$read;
 				$hgrc .= "\nallow_push = ".$push;
+				if (!forge_get_config('use_ssl', 'scmhg')) {
+					$hgrc .= "\n".'push_ssl = 0';
+				}
 			}
 
 			$f = fopen($path.'/hgrc.new', 'w');
