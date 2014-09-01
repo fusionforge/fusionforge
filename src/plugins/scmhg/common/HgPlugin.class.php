@@ -166,7 +166,43 @@ class HgPlugin extends SCMPlugin {
 	}
 
 	function getStatsBlock($project) {
-		return ;
+		global $HTML;
+		$b = '';
+
+		$result = db_query_params('SELECT u.realname, u.user_name, u.user_id, sum(updates) as updates, sum(adds) as adds, sum(adds+commits) as combined FROM stats_cvs_user s, users u WHERE group_id=$1 AND s.user_id=u.user_id AND (commits>0 OR adds >0) GROUP BY u.user_id, realname, user_name, u.user_id ORDER BY combined DESC, realname',
+			array($project->getID()));
+
+		if (db_numrows($result) > 0) {
+
+			$tableHeaders = array(
+			_('Name'),
+			_('Adds'),
+			_('Updates')
+			);
+			$b .= $HTML->listTableTop($tableHeaders, false, '', 'repo-history');
+
+			$i = 0;
+			$total = array('adds' => 0, 'updates' => 0);
+
+			while($data = db_fetch_array($result)) {
+				$b .= '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
+				$b .= '<td class="halfwidth">';
+				$b .= util_make_link_u($data['user_name'], $data['user_id'], $data['realname']);
+				$b .= '</td><td class="onequarterwidth align-right">'.$data['adds']. '</td>'.
+					'<td class="onequarterwidth align-right">'.$data['updates'].'</td></tr>';
+				$total['adds'] += $data['adds'];
+				$total['updates'] += $data['updates'];
+				$i++;
+			}
+			$b .= '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
+			$b .= '<td class="halfwidth"><strong>'._('Total').':</strong></td>'.
+				'<td class="onequarterwidth align-right"><strong>'.$total['adds']. '</strong></td>'.
+				'<td class="onequarterwidth align-right"><strong>'.$total['updates'].'</strong></td>';
+			$b .= '</tr>';
+			$b .= $HTML->listTableBottom();
+		}
+
+		return $b;
 	}
 
 	function printShortStats($params) {
