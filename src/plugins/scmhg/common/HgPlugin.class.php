@@ -655,7 +655,6 @@ class HgPlugin extends SCMPlugin {
 				while (!feof($pipe) && $data = fgets($pipe)) {
 					$line = trim($data);
 					$splitedLine = explode('||', $line);
-					var_dump($splitedLine);
 					if (sizeof($splitedLine) == 4) {
 						var_dump($splitedLine);
 						$result = array();
