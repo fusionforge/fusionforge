@@ -72,8 +72,9 @@ class WikiPlugin_WikiPoll
 
     function getArgs($argstr, $request = false, $defaults = array())
     {
-        if ($defaults === false)
+        if (empty($defaults)) {
             $defaults = $this->getDefaultArguments();
+        }
         //Fixme: on POST argstr is empty
         $args = array();
         list ($argstr_args, $argstr_defaults) = $this->parseArgStr($argstr);
