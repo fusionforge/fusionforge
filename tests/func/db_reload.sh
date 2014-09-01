@@ -136,6 +136,7 @@ for i in arch bzr cvs darcs git hg svn ; do
 done
 # Wikis
 rm -rf $(forge_get_config data_path)/plugins/mediawiki/projects/*
+rm -rf $(forge_get_config data_path)/plugins/moinmoin/wikidata/project*
 
 # If the backup is there, restore it (it should now have been created by install.sh)
 if [ -d $dbdir.backup ]; then
