@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/bash -e
 
 config_path=$(forge_get_config config_path)
 data_path=$(forge_get_config data_path)
