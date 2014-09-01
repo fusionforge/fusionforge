@@ -196,7 +196,7 @@ class HgPlugin extends SCMPlugin {
 		}
 		if ($project->usesPlugin($this->name)) {
 			if ($this->browserDisplayable($project)) {
-				print '<iframe src="'.util_make_url('/plugins/scmhg/cgi-bin/'.$project->getUnixName().'.cgi?p='.$project->getUnixName()).'" frameborder="0" width="100%" ></iframe>';
+				print '<iframe id="scm_iframe" src="'.util_make_url('/plugins/scmhg/cgi-bin/'.$project->getUnixName().'.cgi?p='.$project->getUnixName()).'" frameborder="0" width="100%" ></iframe>';
 				html_use_jqueryautoheight();
 				echo $HTML->getJavascripts();
 				echo '<script type="text/javascript">//<![CDATA[
@@ -467,6 +467,17 @@ class HgPlugin extends SCMPlugin {
 				db_rollback();
 				return false;
 			}
+
+			$res = db_query_params ('DELETE FROM stats_cvs_user WHERE month=$1 AND day=$2 AND group_id=$3',
+						array ($month_string,
+						       $day,
+						       $project->getID())) ;
+			if(!$res) {
+				echo "Error while cleaning stats_cvs_user\n" ;
+				db_rollback () ;
+				return false ;
+			}
+
 			//switch into scm_repository and take a look at the log informations
 			$cdir = chdir($repo);
 			if ($cdir) {
