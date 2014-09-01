@@ -16,6 +16,10 @@ stop_apache () {
 }
 
 stop_database () {
+    if [ "$1" = "--force" ]; then
+	# We don't care about data integrity, we're resetting it
+	killall -9 postgres
+    fi
 
     echo "Stopping the database"
     service postgresql stop
@@ -111,7 +115,7 @@ fi
 
 stop_apache
 
-stop_database
+stop_database --force
 
 if [ -d /var/lib/postgresql ] ; then
     dbdir=/var/lib/postgresql
