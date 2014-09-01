@@ -39,6 +39,14 @@ case "$2" in
 	fi
 	;;
 
+    triggered)
+	# Run plugin-specific triggered (e.g. mediawiki)
+	if [ -x $source_path/plugins/$1/bin/install.sh ]; then
+	    echo "Running $source_path/plugins/$1/bin/install.sh triggered"
+	    $source_path/plugins/$1/bin/install.sh triggered "$2"
+	fi
+	;;
+
     remove)
 	# TODO: httpd.conf.d ?
 

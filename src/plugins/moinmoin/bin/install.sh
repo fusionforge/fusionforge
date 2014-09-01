@@ -19,12 +19,12 @@ case "$1" in
 	    chown $wsgi_user $dataprefix/moinmoin.log
 	fi
 	;;
-    purge)
+    remove)
 	for i in data underlay ; do
 	    rm -rf $prefix/$i
 	done
 	;;
     *)
-        echo "Usage: $0 {configure|purge}"
+        echo "Usage: $0 {configure|remove}"
         exit 1
 esac

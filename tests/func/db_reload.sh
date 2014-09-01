@@ -126,6 +126,7 @@ else
     exit 1
 fi
 
+# SCM
 for i in arch bzr cvs darcs git hg svn ; do
     repopath=`FUSIONFORGE_NO_PLUGINS=true forge_get_config repos_path scm$i`
     if [ -d "$repopath" ] && ls $repopath | grep -q .. ; then
@@ -133,6 +134,8 @@ for i in arch bzr cvs darcs git hg svn ; do
 	rm -rf $repopath/*
     fi
 done
+# Wikis
+rm -rf $(forge_get_config data_path)/plugins/mediawiki/projects/*
 
 # If the backup is there, restore it (it should now have been created by install.sh)
 if [ -d $dbdir.backup ]; then

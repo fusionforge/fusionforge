@@ -1,6 +1,7 @@
 #!/bin/sh -e
+pluginctl=$(forge_get_config source_path)/post-install.d/common/plugin.sh
 case "$1" in
-    remove) $(forge_get_config source_path)/post-install.d/common/plugin.sh @plugin@ remove ;;
+    remove) if [ -x $pluginctl ]; then $pluginctl @plugin@ remove; fi ;;
     upgrade|deconfigure|failed-upgrade) ;;
     *) echo "prerm called with unknown argument \`$1'" >&2; exit 1 ;;
 esac

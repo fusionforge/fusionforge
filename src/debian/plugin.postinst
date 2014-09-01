@@ -1,6 +1,8 @@
 #!/bin/sh -e
+pluginctl=$(forge_get_config source_path)/post-install.d/common/plugin.sh
 case "$1" in
-    configure) $(forge_get_config source_path)/post-install.d/common/plugin.sh @plugin@ configure ;;
+    configure) if [ -x $pluginctl ]; then $pluginctl @plugin@ configure; fi ;;
+    triggered) if [ -x $pluginctl ]; then $pluginctl @plugin@ triggered "$2"; fi ;;
     abort-upgrade|abort-remove|abort-deconfigure) ;;
     *) echo "postinst called with unknown argument \`$1'" >&2; exit 1 ;;
 esac
