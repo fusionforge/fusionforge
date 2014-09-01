@@ -2,7 +2,7 @@ Package: fusionforge-plugin-scmgit
 Depends: git, gitweb
 
 Package: fusionforge-plugin-scmsvn
-Depends: subversion, subversion-tools, openbsd-inetd | inet-superserver, update-inetd
+Depends: subversion, subversion-tools, python-subversion, openbsd-inetd | inet-superserver, update-inetd
 
 Package: fusionforge-plugin-scmbzr
 Depends: bzr, libapache2-mod-wsgi, loggerhead (>= 1.19~bzr477~), python-pastedeploy

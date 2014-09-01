@@ -30,9 +30,10 @@ fi
 apt-get update
 apt-get install -y make gettext confget php5-cli php5-pgsql php-htmlpurifier \
     apache2 postgresql \
-    subversion \
+    subversion python-subversion \
     mediawiki \
     python-moinmoin python-psycopg2 libapache2-mod-wsgi
+# TODO: replace python-subversion with non-bundled viewvc
 
 cd /usr/src/fusionforge/src/
 make
