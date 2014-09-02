@@ -68,7 +68,7 @@ fi
 # so we can test SSH
 
 # Install FusionForge packages
-yum install -y make gettext confget php-cli php-pgsql \
+yum install -y make gettext php-cli php-pgsql \
     httpd postgresql \
     subversion \
     mediawiki119 \

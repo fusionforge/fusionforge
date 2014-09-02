@@ -28,7 +28,7 @@ fi
 
 # Install FusionForge packages
 apt-get update
-apt-get install -y make gettext confget php5-cli php5-pgsql php-htmlpurifier \
+apt-get install -y make gettext php5-cli php5-pgsql php-htmlpurifier \
     apache2 postgresql \
     subversion python-subversion \
     mediawiki \

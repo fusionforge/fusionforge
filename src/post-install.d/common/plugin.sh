@@ -10,8 +10,10 @@ fi
 
 case "$2" in
     configure)
-	# Run plugin-specific DB install/upgrade
-	# TODO: don't automatically enable the plugin, esp. for non-packaged installs
+	# Enable plugin
+	$source_path/bin/forge pluginActivate $1
+
+	# Run plugin-specific DB upgrade
 	if [ -x $source_path/post-install.d/db/upgrade.php ]; then
 	    $source_path/post-install.d/db/upgrade.php $1
 	fi

@@ -83,7 +83,7 @@ install-lists: install-base-dirs
 
 install-base: install-base-dirs install-common install-web install-db
 
-PLUGINS=$(shell utils/list-valid-plugins.sh)
+PLUGINS=$(shell cd plugins/ && find * -maxdepth 0 -type d)
 PLUGINS_INSTALL_TARGETS=$(addprefix install-plugin-,$(PLUGINS))
 install-plugins: $(PLUGINS_INSTALL_TARGETS)
 
@@ -111,24 +111,30 @@ uninstall:
 
 ## Step 3: configure & update system
 # not relying on 'prefix' for post-install (for no-install/dev setups)
-fgc_source_path:=$(shell forge_get_config source_path 2>/dev/null)
+post_source_path:=$(shell forge_get_config source_path 2>/dev/null)
 post-install: post-install-base post-install-plugins
 post-install-base:
-	$(fgc_source_path)/post-install.d/common/common.sh
-	$(fgc_source_path)/post-install.d/db/db.sh
-	$(fgc_source_path)/post-install.d/web/configure.sh
+	$(post_source_path)/post-install.d/common/common.sh
+	$(post_source_path)/post-install.d/db/db.sh
+	$(post_source_path)/post-install.d/web/configure.sh
 
 post-install-shell:
-	$(fgc_source_path)/post-install.d/shell/shell.sh configure
+	$(post_source_path)/post-install.d/shell/shell.sh configure
 
-PLUGINS_INSTALLED=$(wildcard $(fgc_source_path)/plugins)
+PLUGINS_INSTALLED:=$(shell cd $(post_source_path)/plugins 2>/dev/null && find * -maxdepth 0 -type d)
 PLUGINS_POST_INSTALL_TARGETS=$(addprefix post-install-plugin-,$(PLUGINS_INSTALLED))
-post-install-plugins: $(PLUGINS_POST_INSTALL_TARGETS)
-post-install-plugin-%: $(fgc_source_path)/plugins/%/
-	$(fgc_source_path)/post-install.d/common/plugin.sh $* configure
+# Not depending on PLUGINS_POST_INSTALL_TARGETS: too many dependencies and non-production plugins
+post-install-plugins:
+	@echo "Please select which plugin you want to configure (if needed):"
+	@for i in $(PLUGINS_INSTALLED); do \
+		echo "  make post-install-plugin-$$i"; \
+	done
+post-install-plugin-%: $(post_source_path)/plugins/%/
+	$(post_source_path)/post-install.d/common/plugin.sh $* configure
 
-
-## TODO: make uninstall? make purge?
+uninstall-plugin-%: $(post_source_path)/plugins/%/
+	$(post_source_path)/post-install.d/common/plugin.sh $* remove
+#	$(post_source_path)/post-install.d/common/plugin.sh $* uninstall
 
 
 clean:
