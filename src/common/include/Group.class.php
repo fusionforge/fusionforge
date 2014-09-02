@@ -1014,7 +1014,15 @@ class Group extends Error {
 				$user_ids[] = $u->getID();
 			}
 		}
-		return user_get_objects(array_unique($user_ids));
+		$active_ids = array();
+		$ids = array_unique ($user_ids);
+		foreach ($ids as $id) {
+			$u = user_get_object ($id);
+			if ($u->isActive()) {
+				$active_ids[] = $u;
+			}
+		}
+		return $active_ids;
 	}
 
 	/*

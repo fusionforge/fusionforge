@@ -1,17 +1,13 @@
 #
-#
 # http://seleniumhq.org/
-# http://seleniumhq.org/projects/remote-control/
-# http://selenium.googlecode.com/svn/trunk/remote/server/
-# see tests/func/README.TXT
-# Get the source code (TODO)
-# #svn export http://selenium.googlecode.com/svn/trunk/remote/server selenium-server
-# svn export http://selenium.googlecode.com/svn/trunk selenium
+# http://docs.seleniumhq.org/download/
 #
 
-MAJOR=2.42.2
-MINOR=1
-SELENIUMURL=http://selenium.googlecode.com/files/selenium-server-standalone-$(MAJOR).jar
+MAJOR=2
+MINOR=42
+MICRO=2
+SELENIUMURL=http://selenium-release.storage.googleapis.com/$(MAJOR).$(MINOR)/selenium-server-standalone-$(MAJOR).$(MINOR).$(MICRO).jar
 
-VERS=$(MAJOR)-$(MINOR)
-
+UPSTREAM=$(MAJOR).$(MINOR).$(MICRO)+$(DIST)
+DEBIANVERSION=1
+VERS=$(UPSTREAM)-$(DEBIANVERSION)

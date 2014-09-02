@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -31,6 +32,8 @@ $form_grp = getIntFromGet("form_grp");
 if (!$group_id && $form_grp) {
 	$group_id = $form_grp;
 }
+
+session_require_perm('project_read', $group_id);
 
 site_project_header(array('title'=>_('Project Member List'),'group'=>$group_id,'toptab'=>'memberlist'));
 

@@ -198,7 +198,8 @@ class ArtifactExtraField extends Error {
 						}
 					}
 				}
-			} elseif (strstr(ARTIFACT_EXTRAFIELD_FILTER_INT,$field_type) !== false) {
+			}
+			if (strstr(ARTIFACT_EXTRAFIELD_FILTER_INT,$field_type) !== false) {
 //
 //	Must insert some default 100 rows for the data table so None queries will work right
 //

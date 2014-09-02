@@ -174,17 +174,17 @@ class HgPlugin extends SCMPlugin {
 			return false;
 		}
 		if ($project->usesPlugin($this->name)  && forge_check_perm('scm', $project->getID(), 'read')) {
-			$result = db_query_params('SELECT sum(commits) AS commits, sum(adds) AS adds FROM stats_cvs_group WHERE group_id=$1',
+			$result = db_query_params('SELECT sum(updates) AS updates, sum(adds) AS adds FROM stats_cvs_group WHERE group_id=$1',
 						array ($project->getID())) ;
-			$commit_num = db_result($result,0,'commits');
+			$update_num = db_result($result,0,'updates');
 			$add_num    = db_result($result,0,'adds');
-			if (!$commit_num) {
-				$commit_num=0;
+			if (!$update_num) {
+				$update_num=0;
 			}
 			if (!$add_num) {
 				$add_num=0;
 			}
-			echo ' (Mercurial: '.sprintf(_('<strong>%1$s</strong> updates, <strong>%2$s</strong> adds'), number_format($commit_num, 0), number_format($add_num, 0)).")";
+			echo ' (Mercurial: '.sprintf(_('<strong>%1$s</strong> updates, <strong>%2$s</strong> adds'), number_format($update_num, 0), number_format($add_num, 0)).")";
 		}
 	}
 
@@ -196,7 +196,7 @@ class HgPlugin extends SCMPlugin {
 		}
 		if ($project->usesPlugin($this->name)) {
 			if ($this->browserDisplayable($project)) {
-				print '<iframe src="'.util_make_url('/plugins/scmhg/cgi-bin/'.$project->getUnixName().'.cgi?p='.$project->getUnixName()).'" frameborder="0" width="100%" ></iframe>';
+				print '<iframe id="scm_iframe" src="'.util_make_url('/plugins/scmhg/cgi-bin/'.$project->getUnixName().'.cgi?p='.$project->getUnixName()).'" frameborder="0" width="100%" ></iframe>';
 				html_use_jqueryautoheight();
 				echo $HTML->getJavascripts();
 				echo '<script type="text/javascript">//<![CDATA[
@@ -258,6 +258,9 @@ class HgPlugin extends SCMPlugin {
 			$conf .= "\nstyle = paper";
 			$conf .= "\nallow_push = *"; //every user ( see apache configuration) is allowed to push
 			$conf .= "\nallow_read = *"; // every user is allowed to clone and pull
+			if (!forge_get_config('use_ssl', 'scmhg')) {
+				$conf .= "\npush_ssl = 0";
+			}
 			fwrite($f, $conf);
 			fclose($f);
 			system("chgrp -R $unix_group $repo");
@@ -363,6 +366,9 @@ class HgPlugin extends SCMPlugin {
 				$hgrc .= "\nstyle = paper";
 				$hgrc .= "\nallow_read = ".$read;
 				$hgrc .= "\nallow_push = ".$push;
+				if (!forge_get_config('use_ssl', 'scmhg')) {
+					$hgrc .= "\n".'push_ssl = 0';
+				}
 			}
 
 			$f = fopen($path.'/hgrc.new', 'w');
@@ -449,8 +455,11 @@ class HgPlugin extends SCMPlugin {
 			$usr_adds    = array();
 			$usr_updates = array();
 			$usr_deletes = array();
+			$usr_commits = array();
 			$adds    = 0;
 			$updates = 0;
+			$deletes = 0;
+			$commits = 0;
 			$repo = forge_get_config('repos_path', 'scmhg') . '/' . $project->getUnixName();
 			if (!is_dir($repo) || !is_dir("$repo/.hg")) {
 				// echo "No repository\n";
@@ -467,6 +476,17 @@ class HgPlugin extends SCMPlugin {
 				db_rollback();
 				return false;
 			}
+
+			$res = db_query_params ('DELETE FROM stats_cvs_user WHERE month=$1 AND day=$2 AND group_id=$3',
+						array ($month_string,
+						       $day,
+						       $project->getID())) ;
+			if(!$res) {
+				echo "Error while cleaning stats_cvs_user\n" ;
+				db_rollback () ;
+				return false ;
+			}
+
 			//switch into scm_repository and take a look at the log informations
 			$cdir = chdir($repo);
 			if ($cdir) {
@@ -491,39 +511,74 @@ class HgPlugin extends SCMPlugin {
 								break;
 						}
 					} else {
-						$last_user = $this->getUser($line);
+						$result = preg_match("/^(?P<name>.+) <(?P<mail>.+)>/", $line, $matches);
+						if ($result) {
+							// Author line
+							$last_user = $matches['name'];
+							$user2email[$last_user] = strtolower($matches['mail']);
+							if (!isset($usr_adds[$last_user])) {
+								$usr_adds[$last_user] = 0;
+								$usr_updates[$last_user] = 0;
+								$usr_deletes[$last_user] = 0;
+								$usr_commits[$last_user] = 0;
+							}
+							$commits++;
+							$usr_commits[$last_user]++;
+						}
 					}
 				}
 				pclose($pipe);
+			}
 
-				// inserting group results in stats_cvs_groups
-				if ($updates > 0 || $adds > 0) {
-					if (!db_query_params('INSERT INTO stats_cvs_group (month, day, group_id, checkouts, commits, adds) VALUES ($1, $2, $3, $4, $5, $6)',
-						array($month_string,
-							$day,
-							$project->getID(),
-							0,
-							$updates,
-							$adds))) {
-						echo "Error while inserting into stats_cvs_group\n";
-						db_rollback();
-						return false;
-					}
+			// inserting group results in stats_cvs_groups
+			if ($updates > 0 || $adds > 0 || $deletes > 0 || $commits > 0) {
+				if (!db_query_params('INSERT INTO stats_cvs_group (month,day,group_id,checkouts,commits,adds,updates,deletes) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
+						      array($month_string,
+							     $day,
+							     $project->getID(),
+							     0,
+							     $commits,
+							     $adds,
+							     $updates,
+							     $deletes))) {
+					echo "Error while inserting into stats_cvs_group\n";
+					db_rollback();
+					return false;
 				}
 			}
+
 			// building the user list
-			$user_list = array_unique(array_merge(array_keys($usr_adds), array_keys($usr_updates)));
-			foreach ( $user_list as $user ) {
-				$uu = $usr_updates[$user] ? $usr_updates[$user] : 0;
-				$ua = $usr_adds[$user] ? $usr_adds[$user] : 0;
-				if ($uu > 0 || $ua > 0) {
-					if (!db_query_params('INSERT INTO stats_cvs_user (month, day, group_id, user_id, commits,adds) VALUES ($1, $2, $3, $4, $5, $6)',
-							array($month_string,
-								$day,
-								$project->getID(),
-								$user,
-								$uu,
-								$ua))) {
+			$user_list = array_unique( array_merge( array_keys( $usr_adds ), array_keys( $usr_updates ), array_keys( $usr_deletes ), array_keys( $usr_commits ) ) );
+
+			foreach ($user_list as $user) {
+				// Trying to get user id from user name or email
+				$u = user_get_object_by_name($user);
+				if ($u) {
+					$user_id = $u->getID();
+				} else {
+					$res=db_query_params('SELECT user_id FROM users WHERE lower(realname)=$1 OR email=$2',
+						array(strtolower($user), $user2email[$user]));
+					if ($res && db_numrows($res) > 0) {
+						$user_id = db_result($res,0,'user_id');
+					} else {
+						continue;
+					}
+				}
+
+				$uc = isset($usr_commits[$user]) ? $usr_commits[$user] : 0;
+				$uu = isset($usr_updates[$user]) ? $usr_updates[$user] : 0;
+				$ua = isset($usr_adds[$user]) ? $usr_adds[$user] : 0;
+				$ud = isset($usr_deletes[$user]) ? $usr_deletes[$user] : 0;
+				if ($uu > 0 || $ua > 0 || $uc > 0 || $ud > 0) {
+					if (!db_query_params('INSERT INTO stats_cvs_user (month,day,group_id,user_id,commits,adds,updates,deletes) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
+							      array($month_string,
+								     $day,
+								     $project->getID(),
+								     $user_id,
+								     $uc,
+								     $ua,
+								     $uu,
+								     $ud))) {
 						echo "Error while inserting into stats_cvs_user\n";
 						db_rollback();
 						return false;

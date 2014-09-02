@@ -212,8 +212,18 @@ function commits_graph($group_id, $days, $chartid) {
 	if (db_numrows($res)) {
 		echo '<script type="text/javascript">//<![CDATA['."\n";
 		echo 'var data'.$chartid.' = new Array();';
+		$i = 1;
+		$lastvalue = 0;
 		while ($row = db_fetch_array($res)) {
-			echo 'data'.$chartid.'.push([\''.htmlentities($row[0]).' ('.$row[1].')\','.$row[1].']);';
+			if ($i <= 10) {
+				echo 'data'.$chartid.'.push([\''.htmlentities($row[0]).' ('.$row[1].')\','.$row[1].']);';
+			} elseif ($i > 10) {
+				$lastvalue += $row[1];
+			}
+			$i++;
+		}
+		if ($i > 10) {
+			echo 'data'.$chartid.'.push([\''._('Others').' ('.$lastvalue.')\','.$lastvalue.']);';
 		}
 		echo 'var plot'.$chartid.';';
 		echo 'jQuery(document).ready(function(){
