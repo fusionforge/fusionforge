@@ -124,7 +124,7 @@ case "$1" in
 	purge_libnss_pgsql
 	;;
     *)
-	echo "Usage: $0 {configure|purge}"
+	echo "Usage: $0 {configure|remove|purge}"
 	exit 1
 	;;
 esac
