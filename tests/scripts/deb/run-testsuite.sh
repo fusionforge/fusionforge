@@ -1,8 +1,23 @@
 #!/bin/bash
-
-# This script runs the preferred functionnal test suite, using phpunit
-# and Selenium, which will test the Web interface of FusionForge in a
-# controlled Firefox browser.
+# Run FusionForge's PHPUnit+Selenium testsuite
+#
+# Copyright (C) 2011  Olivier Berger - Institut Telecom
+# Copyright (C) 2014  Inria (Sylvain Beucler)
+#
+# This file is part of FusionForge. FusionForge is free software;
+# you can redistribute it and/or modify it under the terms of the
+# GNU General Public License as published by the Free Software
+# Foundation; either version 2 of the Licence, or (at your option)
+# any later version.
+#
+# FusionForge is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along
+# with FusionForge; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 set -e
 export DEBIAN_FRONTEND=noninteractive
@@ -22,8 +37,8 @@ fi
 service cron stop || true
 
 # Test dependencies
-apt-get -y install phpunit phpunit-selenium patch psmisc
 # psmisc for db_reload.sh:killall
+apt-get -y install phpunit phpunit-selenium patch psmisc
 patch -N /usr/share/php/PHPUnit/Extensions/SeleniumTestCase.php <<'EOF' || true
 --- /usr/share/php/PHPUnit/Extensions/SeleniumTestCase.php-dist	2014-02-10 19:48:34.000000000 +0000
 +++ /usr/share/php/PHPUnit/Extensions/SeleniumTestCase.php	2014-09-01 10:09:38.823051288 +0000
