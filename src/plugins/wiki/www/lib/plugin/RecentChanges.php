@@ -1302,7 +1302,9 @@ class WikiPlugin_RecentChanges
 
     function getArgs($argstr, $request = false, $defaults = array())
     {
-        if (!$defaults) $defaults = $this->getDefaultArguments();
+        if (empty($defaults)) {
+            $defaults = $this->getDefaultArguments();
+        }
         $args = WikiPlugin::getArgs($argstr, $request, $defaults);
 
         $action = $request->getArg('action');

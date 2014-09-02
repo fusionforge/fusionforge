@@ -39,6 +39,7 @@ and gives some control over it to the project's administrator.");
 		$this->_addHook('scm_update_repolist');
 		$this->_addHook('scm_generate_snapshots');
 		$this->_addHook('scm_gather_stats');
+		$this->_addHook('activity');
 		$this->register();
 	}
 
@@ -170,7 +171,43 @@ and gives some control over it to the project's administrator.");
 	}
 
 	function getStatsBlock($project) {
-		return ;
+		global $HTML;
+		$b = '';
+
+		$result = db_query_params('SELECT u.realname, u.user_name, u.user_id, sum(updates) as updates, sum(adds) as adds, sum(adds+commits) as combined FROM stats_cvs_user s, users u WHERE group_id=$1 AND s.user_id=u.user_id AND (commits>0 OR adds >0) GROUP BY u.user_id, realname, user_name, u.user_id ORDER BY combined DESC, realname',
+			array($project->getID()));
+
+		if (db_numrows($result) > 0) {
+
+			$tableHeaders = array(
+			_('Name'),
+			_('Adds'),
+			_('Updates')
+			);
+			$b .= $HTML->listTableTop($tableHeaders, false, '', 'repo-history');
+
+			$i = 0;
+			$total = array('adds' => 0, 'updates' => 0);
+
+			while($data = db_fetch_array($result)) {
+				$b .= '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
+				$b .= '<td class="halfwidth">';
+				$b .= util_make_link_u($data['user_name'], $data['user_id'], $data['realname']);
+				$b .= '</td><td class="onequarterwidth align-right">'.$data['adds']. '</td>'.
+					'<td class="onequarterwidth align-right">'.$data['updates'].'</td></tr>';
+				$total['adds'] += $data['adds'];
+				$total['updates'] += $data['updates'];
+				$i++;
+			}
+			$b .= '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
+			$b .= '<td class="halfwidth"><strong>'._('Total').':</strong></td>'.
+				'<td class="onequarterwidth align-right"><strong>'.$total['adds']. '</strong></td>'.
+				'<td class="onequarterwidth align-right"><strong>'.$total['updates'].'</strong></td>';
+			$b .= '</tr>';
+			$b .= $HTML->listTableBottom();
+		}
+
+		return $b;
 	}
 
 	function printShortStats($params) {
@@ -179,17 +216,17 @@ and gives some control over it to the project's administrator.");
 			return false;
 		}
 		if ($project->usesPlugin($this->name)  && forge_check_perm('scm', $project->getID(), 'read')) {
-			$result = db_query_params('SELECT sum(commits) AS commits, sum(adds) AS adds FROM stats_cvs_group WHERE group_id=$1',
+			$result = db_query_params('SELECT sum(updates) AS updates, sum(adds) AS adds FROM stats_cvs_group WHERE group_id=$1',
 						array ($project->getID())) ;
-			$commit_num = db_result($result,0,'commits');
+			$update_num = db_result($result,0,'updates');
 			$add_num    = db_result($result,0,'adds');
-			if (!$commit_num) {
-				$commit_num=0;
+			if (!$update_num) {
+				$update_num=0;
 			}
 			if (!$add_num) {
 				$add_num=0;
 			}
-			echo ' (Mercurial: '.sprintf(_('<strong>%1$s</strong> updates, <strong>%2$s</strong> adds'), number_format($commit_num, 0), number_format($add_num, 0)).")";
+			echo ' (Mercurial: '.sprintf(_('<strong>%1$s</strong> updates, <strong>%2$s</strong> adds'), number_format($update_num, 0), number_format($add_num, 0)).")";
 		}
 	}
 
@@ -201,7 +238,13 @@ and gives some control over it to the project's administrator.");
 		}
 		if ($project->usesPlugin($this->name)) {
 			if ($this->browserDisplayable($project)) {
-				print '<iframe src="'.util_make_url('/plugins/scmhg/cgi-bin/'.$project->getUnixName().'.cgi?p='.$project->getUnixName()).'" frameborder="0" width="100%" ></iframe>';
+				$iframesrc = '/plugins/scmhg/cgi-bin/'.$project->getUnixName().'.cgi';
+				if ($params['commit']) {
+					$iframesrc .= '/rev/'.$params['commit'];
+				} else {
+					$iframesrc .=  '?p='.$project->getUnixName();
+				}
+				print '<iframe id="scm_iframe" src="'.util_make_url($iframesrc).'" frameborder="0" width="100%" ></iframe>';
 				html_use_jqueryautoheight();
 				echo $HTML->getJavascripts();
 				echo '<script type="text/javascript">//<![CDATA[
@@ -263,6 +306,9 @@ and gives some control over it to the project's administrator.");
 			$conf .= "\nstyle = paper";
 			$conf .= "\nallow_push = *"; //every user ( see apache configuration) is allowed to push
 			$conf .= "\nallow_read = *"; // every user is allowed to clone and pull
+			if (!forge_get_config('use_ssl', 'scmhg')) {
+				$conf .= "\npush_ssl = 0";
+			}
 			fwrite($f, $conf);
 			fclose($f);
 			system("chgrp -R $unix_group $repo");
@@ -368,6 +414,9 @@ and gives some control over it to the project's administrator.");
 				$hgrc .= "\nstyle = paper";
 				$hgrc .= "\nallow_read = ".$read;
 				$hgrc .= "\nallow_push = ".$push;
+				if (!forge_get_config('use_ssl', 'scmhg')) {
+					$hgrc .= "\n".'push_ssl = 0';
+				}
 			}
 
 			$f = fopen($path.'/hgrc.new', 'w');
@@ -462,8 +511,11 @@ and gives some control over it to the project's administrator.");
 			$usr_adds    = array();
 			$usr_updates = array();
 			$usr_deletes = array();
+			$usr_commits = array();
 			$adds    = 0;
 			$updates = 0;
+			$deletes = 0;
+			$commits = 0;
 			$repo = forge_get_config('repos_path', 'scmhg') . '/' . $project->getUnixName();
 			if (!is_dir($repo) || !is_dir("$repo/.hg")) {
 				// echo "No repository\n";
@@ -480,6 +532,17 @@ and gives some control over it to the project's administrator.");
 				db_rollback();
 				return false;
 			}
+
+			$res = db_query_params ('DELETE FROM stats_cvs_user WHERE month=$1 AND day=$2 AND group_id=$3',
+						array ($month_string,
+						       $day,
+						       $project->getID())) ;
+			if(!$res) {
+				echo "Error while cleaning stats_cvs_user\n" ;
+				db_rollback () ;
+				return false ;
+			}
+
 			//switch into scm_repository and take a look at the log informations
 			$cdir = chdir($repo);
 			if ($cdir) {
@@ -504,39 +567,74 @@ and gives some control over it to the project's administrator.");
 								break;
 						}
 					} else {
-						$last_user = $this->getUser($line);
+						$result = preg_match("/^(?P<name>.+) <(?P<mail>.+)>/", $line, $matches);
+						if ($result) {
+							// Author line
+							$last_user = $matches['name'];
+							$user2email[$last_user] = strtolower($matches['mail']);
+							if (!isset($usr_adds[$last_user])) {
+								$usr_adds[$last_user] = 0;
+								$usr_updates[$last_user] = 0;
+								$usr_deletes[$last_user] = 0;
+								$usr_commits[$last_user] = 0;
+							}
+							$commits++;
+							$usr_commits[$last_user]++;
+						}
 					}
 				}
 				pclose($pipe);
+			}
 
-				// inserting group results in stats_cvs_groups
-				if ($updates > 0 || $adds > 0) {
-					if (!db_query_params('INSERT INTO stats_cvs_group (month, day, group_id, checkouts, commits, adds) VALUES ($1, $2, $3, $4, $5, $6)',
-						array($month_string,
-							$day,
-							$project->getID(),
-							0,
-							$updates,
-							$adds))) {
-						echo "Error while inserting into stats_cvs_group\n";
-						db_rollback();
-						return false;
-					}
+			// inserting group results in stats_cvs_groups
+			if ($updates > 0 || $adds > 0 || $deletes > 0 || $commits > 0) {
+				if (!db_query_params('INSERT INTO stats_cvs_group (month,day,group_id,checkouts,commits,adds,updates,deletes) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
+						      array($month_string,
+							     $day,
+							     $project->getID(),
+							     0,
+							     $commits,
+							     $adds,
+							     $updates,
+							     $deletes))) {
+					echo "Error while inserting into stats_cvs_group\n";
+					db_rollback();
+					return false;
 				}
 			}
+
 			// building the user list
-			$user_list = array_unique(array_merge(array_keys($usr_adds), array_keys($usr_updates)));
-			foreach ( $user_list as $user ) {
-				$uu = $usr_updates[$user] ? $usr_updates[$user] : 0;
-				$ua = $usr_adds[$user] ? $usr_adds[$user] : 0;
-				if ($uu > 0 || $ua > 0) {
-					if (!db_query_params('INSERT INTO stats_cvs_user (month, day, group_id, user_id, commits,adds) VALUES ($1, $2, $3, $4, $5, $6)',
-							array($month_string,
-								$day,
-								$project->getID(),
-								$user,
-								$uu,
-								$ua))) {
+			$user_list = array_unique( array_merge( array_keys( $usr_adds ), array_keys( $usr_updates ), array_keys( $usr_deletes ), array_keys( $usr_commits ) ) );
+
+			foreach ($user_list as $user) {
+				// Trying to get user id from user name or email
+				$u = user_get_object_by_name($user);
+				if ($u) {
+					$user_id = $u->getID();
+				} else {
+					$res=db_query_params('SELECT user_id FROM users WHERE lower(realname)=$1 OR email=$2',
+						array(strtolower($user), $user2email[$user]));
+					if ($res && db_numrows($res) > 0) {
+						$user_id = db_result($res,0,'user_id');
+					} else {
+						continue;
+					}
+				}
+
+				$uc = isset($usr_commits[$user]) ? $usr_commits[$user] : 0;
+				$uu = isset($usr_updates[$user]) ? $usr_updates[$user] : 0;
+				$ua = isset($usr_adds[$user]) ? $usr_adds[$user] : 0;
+				$ud = isset($usr_deletes[$user]) ? $usr_deletes[$user] : 0;
+				if ($uu > 0 || $ua > 0 || $uc > 0 || $ud > 0) {
+					if (!db_query_params('INSERT INTO stats_cvs_user (month,day,group_id,user_id,commits,adds,updates,deletes) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
+							      array($month_string,
+								     $day,
+								     $project->getID(),
+								     $user_id,
+								     $uc,
+								     $ua,
+								     $uu,
+								     $ud))) {
 						echo "Error while inserting into stats_cvs_user\n";
 						db_rollback();
 						return false;
@@ -545,6 +643,51 @@ and gives some control over it to the project's administrator.");
 			}
 		}
 		db_commit();
+	}
+
+	function activity($params) {
+		$group_id = $params['group'];
+		$project = group_get_object($group_id);
+		if (!$project->usesPlugin($this->name)) {
+			return false;
+		}
+		if (in_array('scmhg', $params['show']) || (count($params['show']) < 1)) {
+			$start_time = $params['begin'];
+			$end_time = $params['end'];
+			$repo = forge_get_config('repos_path', 'scmhg') . '/' . $project->getUnixName();
+			if (!is_dir($repo) || !is_dir("$repo/.hg")) {
+				// echo "No repository\n";
+				return false;
+			}
+			$cdir = chdir($repo);
+			if ($cdir) {
+				$pipe = popen("hg log --template '{date|shortdate}||{author|email}||{desc}||{node}\n' -d '$start_time 0 to $end_time 0'", 'r');
+				while (!feof($pipe) && $data = fgets($pipe)) {
+					$line = trim($data);
+					$splitedLine = explode('||', $line);
+					if (sizeof($splitedLine) == 4) {
+						$result = array();
+						$result['section'] = 'scm';
+						$result['group_id'] = $group_id;
+						$result['ref_id'] = 'browser.php?group_id='.$group_id.'&commit='.$splitedLine[3];
+						$result['description'] = htmlspecialchars($splitedLine[2]).' (changeset '.$splitedLine[3].')';
+						$userObject = user_get_object_by_email($splitedLine[1]);
+						if (is_a($userObject, 'GFUser')) {
+							$result['realname'] = util_display_user($userObject->getUnixName(), $userObject->getID(), $userObject->getRealName());
+						} else {
+							$result['realname'] = '';
+						}
+						$splitedDate = explode('-', $splitedLine[0]);
+						$result['activity_date'] = $splitedDate[0];
+						$result['subref_id'] = '';
+						$params['results'][] = $result;
+					}
+				}
+			}
+		}
+		$params['ids'][] = $this->name;
+		$params['texts'][] = _('Hg Commits');
+		return true;
 	}
 
 	function scm_add_repo(&$params) {
