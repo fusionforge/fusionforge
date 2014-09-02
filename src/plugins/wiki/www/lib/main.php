@@ -387,7 +387,8 @@ class WikiRequest extends Request
         if (!empty($HTTP_GET_VARS['start_debug'])) // zend ide support
             return WikiURL($pagename, array('action' => $action, 'start_debug' => 1));
         elseif ($action == 'edit')
-            return WikiURL($pagename); else
+            return WikiURL($pagename); 
+        else
             return WikiURL($pagename, array('action' => $action));
     }
 

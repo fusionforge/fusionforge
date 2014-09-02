@@ -11,4 +11,3 @@ SELENIUMURL=http://selenium-release.storage.googleapis.com/$(MAJOR).$(MINOR)/sel
 UPSTREAM=$(MAJOR).$(MINOR).$(MICRO)+$(DIST)
 DEBIANVERSION=1
 VERS=$(UPSTREAM)-$(DEBIANVERSION)
-

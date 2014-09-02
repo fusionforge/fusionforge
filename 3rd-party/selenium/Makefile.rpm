@@ -7,11 +7,11 @@ REPOPATH:=$(shell ../../tests/scripts/builder_get_config.sh REPOPATH)
 
 #ARCH:=$(shell dpkg-architecture -qDEB_BUILD_ARCH 2>/dev/null)
 
-#RPMBUILD=rpmbuild --quiet --define='_topdir $(BUILDRESULT)' --define='_tmppath %{_topdir}' --define='_sysconfdir /etc' 
-#--define='_rpmdir $(BUILDRESULT)' --define='_sourcedir $(BUILDRESULT)' 
+#RPMBUILD=rpmbuild --quiet --define='_topdir $(BUILDRESULT)' --define='_tmppath %{_topdir}' --define='_sysconfdir /etc'
+#--define='_rpmdir $(BUILDRESULT)' --define='_sourcedir $(BUILDRESULT)'
 
-RPM=selenium-$(MAJOR)-2.noarch.rpm
-TGZ=selenium-$(MAJOR).tgz
+RPM=selenium-$(MAJOR).$(MINOR).$(MICRO)-2.noarch.rpm
+TGZ=selenium-$(MAJOR).$(MINOR).$(MICRO).tgz
 
 BUILDRESULT=$(REPOPATH)/redhat
 BUILDPLACE=$(BUILDERDIR)/buildrpm
@@ -28,6 +28,6 @@ $(BUILDPLACE)/selenium/usr/share/selenium/selenium-server.jar: $(BUILDPLACE)/sel
 
 $(BUILDPLACE)/selenium/usr/share/selenium/:
 	[ -d $@ ] || mkdir -p $@
-	
+
 $(BUILDRESULT):
 	[ -d $@ ] || mkdir -p $@

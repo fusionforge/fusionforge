@@ -29,6 +29,8 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/timezones.php';
 
 global $HTML;
+global $error_msg;
+global $feedback;
 
 session_require_login();
 
@@ -98,14 +100,12 @@ if (getStringFromRequest('submit')) {
 				'',0,$theme_id,$address,$address2,$phone,$fax,$title,$ccode,$use_tooltips)) {
 			form_release_key(getStringFromRequest('form_key'));
 			$error_msg = $u->getErrorMessage();
-			$refresh_url = '/account/?error_msg='.urlencode($error_msg);
 		} else {
 			$feedback = _('Updated');
-			$refresh_url = '/account/?feedback='.urlencode($feedback);
 		}
 
 		if ($refresh) {
-			session_redirect($refresh_url);
+			session_redirect('/account/');
 		}
 	}
 }
@@ -119,24 +119,19 @@ use_javascript('/js/sortable.js');
 $title = _('My Account');
 site_user_header(array('title'=>$title));
 
-echo '<form action="'.util_make_url('/account/').'" method="post">';
-echo '<input type="hidden" name="form_key" value="'.form_generate_key().'"/>';
+echo $HTML->openForm(array('action' => util_make_uri('/account/'), 'method' => 'post'));
+echo html_e('input', array('type' => 'hidden', 'name' => 'form_key', 'value' => form_generate_key()));
 echo $HTML->boxTop(_('Account options'));
+echo html_e('p', array(), _('Welcome').html_e('strong', array(), $u->getRealName()));
+echo html_e('p', array(), _('Account options')._(':'));
+echo html_ao('ul');
+echo html_e('li', array(), util_make_link_u($u->getUnixName(),$u->getId(),html_e('strong', array(), _('View My Profile'))));
+if(forge_get_config('use_people')) {
+	echo html_e('li', array(), util_make_link('/people/editprofile.php', html_e('strong', array(), _('Edit My Skills Profile'))));
+}
+echo html_ac(html_ap() - 1);
+echo $HTML->listTableTop(array(), array(), 'infotable');
 ?>
-
-<p> <?php echo _('Welcome'); ?> <strong><?php print $u->getRealName(); ?></strong>. </p>
-<p>
-
-<?php echo _('Account options')._(':'); ?>
-</p>
-<ul>
-	<li><?php echo util_make_link_u ($u->getUnixName(),$u->getId(),'<strong>'._('View My Profile').'</strong>'); ?></li>
-<?php if(forge_get_config('use_people')) { ?>
-	<li><?php echo util_make_link ('/people/editprofile.php','<strong>'._('Edit My Skills Profile').'</strong>'); ?></li>
-<?php } ?>
-</ul>
-
-<table class="infotable">
 
 <tr class="top">
 <td><?php echo _('Member since')._(':'); ?></td>
@@ -247,8 +242,8 @@ echo $HTML->boxTop(_('Account options'));
     </label>
 </td>
 </tr>
-</table>
 <?php
+echo $HTML->listTableBottom();
 echo $HTML->boxBottom();
 // ############################# Preferences
 echo $HTML->boxTop(_('Preferences'));
@@ -302,7 +297,6 @@ if (forge_get_config('use_shell')) {
 		print '&nbsp;
 	<br />'._('Shell box')._(': ').'<strong>'.$u->getUnixBox().'</strong>
 	<br />'._('SSH Shared Authorized Keys')._(': ').'<strong>';
-		global $HTML;
 		$sshKeysArray = $u->getAuthorizedKeys();
 		if (is_array($sshKeysArray) && count($sshKeysArray)) {
 			$tabletop = array(_('Name'), _('Algorithm'), _('Fingerprint'), _('Uploaded'), _('Ready ?'));
@@ -332,20 +326,11 @@ if (forge_get_config('use_shell')) {
 	}
 	echo $HTML->boxBottom();
 }
-?>
-
-</td>
-</tr>
-
-</table>
-<?php echo $HTML->addRequiredFieldsInfoBox() ?>
-<p class="align-center">
-<input type="submit" name="submit" value="<?php echo _('Update'); ?>" />
-<input type="reset" name="reset" value="<?php echo _('Reset Changes'); ?>" />
-</p>
-</form>
-
-<?php
+echo $HTML->addRequiredFieldsInfoBox();
+echo html_e('p', array('class' => 'align-center'),
+		html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Update'))).
+		html_e('input', array('type' => 'reset', 'name' => 'reset', 'value' => _('Reset Changes'))));
+echo $HTML->closeForm();
 site_user_footer();
 
 // Local Variables:

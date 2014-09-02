@@ -53,7 +53,7 @@ class WikiPlugin_RedirectTo
 
     function run($dbi, $argstr, &$request, $basepage)
     {
-        $args = ($this->getArgs($argstr, $request));
+        $args = $this->getArgs($argstr, $request);
 
         $href = $args['href'];
         $page = $args['page'];

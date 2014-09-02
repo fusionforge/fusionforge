@@ -69,11 +69,12 @@ if (count($rs) < 1) {
 	// Display a list of releases in this package
 	echo html_e('h2', array(), _('Available Releases for the package').' '.$frsp->getName());
 
-	$title_arr=array(_('Release Name'), _('Date'), _('Actions'));
+	$title_arr = array(html_e('input', array('id' => 'checkallactive', 'type' => 'checkbox', 'title' => _('Select / Deselect all releases for massaction'), 'onClick' => 'controllerFRS.checkAll("checkedrelidactive", "active")')), _('Release Name'), _('Date'), _('Actions'));
 
 	echo $HTML->listTableTop($title_arr);
 	for ($i = 0; $i < count($rs); $i++) {
 		$cells = array();
+		$cells[][] = html_e('input', array('type' => 'checkbox', 'value' => $rs[$i]->getID(), 'class' => 'checkedrelidactive', 'title' => _('Select / Deselect this release for massaction'), 'onClick' => 'controllerFRS.checkgeneral("active")'));
 		$cells[][] = $rs[$i]->getName();
 		$cells[][] = date('Y-m-d H:i',$rs[$i]->getReleaseDate());
 		$content = util_make_link('/frs/?view=editrelease&group_id='.$group_id.'&package_id='.$package_id.'&release_id='.$rs[$i]->getID(), '['._('Edit').']');
@@ -85,5 +86,13 @@ if (count($rs) < 1) {
 		echo $HTML->multiTableRow(array('id' => 'releaseid'.$rs[$i]->getID(), 'class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
 	}
 	echo $HTML->listTableBottom();
+	$deleteUrlAction = util_make_uri('/frs/?action=deleterelease&package_id='.$package_id.'&group_id='.$group_id);
+	echo html_ao('p');
+	echo html_ao('span', array('id' => 'massactionactive', 'class' => 'hide'));
+	echo html_e('span', array('id' => 'frs-massactionmessage', 'title' => _('Actions availables for selected releases, you need to check at least one release to get actions')), _('Mass actions for selected releases')._(':'), false);
+	echo util_make_link('#', $HTML->getDeletePic(_('Delete selected release(s)'), _('Delete releases')), array('onclick' => 'javascript:controllerFRS.toggleConfirmBox({idconfirmbox: \'confirmbox1\', do: \''._('Delete the selected release(s)').'\', cancel: \''._('Cancel').'\', height: 150, width: 300, action: \''.$deleteUrlAction.'&release_id=\'+controllerFRS.buildUrlByCheckbox("active")})', 'title' => _('Delete selected release(s)')), true);
+	echo html_ac(html_ap() - 2);
 	echo $HTML->jQueryUIconfirmBox('confirmbox1', _('Delete release'), _('You are about to delete permanently this release. Are you sure? This action is definitive.'));
 }
+
+echo util_make_link('/frs/?view=qrs&package_id='.$package_id.'&group_id='.$group_id, '<strong>['._('Add Release').']</strong>');

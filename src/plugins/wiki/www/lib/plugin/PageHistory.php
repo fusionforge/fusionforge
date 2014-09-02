@@ -241,7 +241,7 @@ class _PageHistory_RssFormatter
     {
         global $request;
 
-        $rc_url = WikiURL($request->getArg('pagename'), false, 'absurl');
+        $rc_url = WikiURL($request->getArg('pagename'), array(), 'absurl');
 
         $title = sprintf(_("%s: %s"),
             WIKI_NAME,

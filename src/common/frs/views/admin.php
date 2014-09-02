@@ -72,10 +72,10 @@ echo html_e('p', array(), _('You can use packages to group different file releas
 echo html_e('h4', array(), _('An example of packages')._(':'));
 echo html_e('p', array(), html_e('strong', array(), 'Mysql-win').html_e('br').html_e('strong', array(), 'Mysql-unix').html_e('br').html_e('strong', array(), 'Mysql-odbc'));
 echo html_e('h4', array(), _('Your Packages')._(':'));
-echo html_ao('ol');
-echo html_e('li', array(), _('Define your packages.'));
-echo html_e('li', array(), _('Create new releases of packages.'));
-echo html_ac(html_ap() -1);
+$lielements = array();
+$lielements[] = array('content' => _('Define your packages'));
+$lielements[] = array('content' => _('Create new releases of packages.'));
+echo $HTML->html_list($lielements, array(), 'ol');
 echo html_e('h3', array(), _('Releases of Packages'));
 echo html_e('p', array(), _('A release of a package can contain multiple files.'));
 echo html_e('h4', array(), _('Examples of releases')._(':'));
@@ -89,6 +89,10 @@ if (count($FRSPackages) == 0) {
 } else {
 	$title_arr = array();
 	$thTitleArray = array();
+	if ($permissionlevel == 'admin') {
+		$title_arr[] = html_e('input', array('id' => 'checkallactive', 'type' => 'checkbox', 'title' => _('Select / Deselect all packages for massaction'), 'onClick' => 'controllerFRS.checkAll("checkedrelidactive", "active")'));
+		$thTitleArray[] = NULL;
+	}
 	$title_arr[] = _('Releases');
 	$thTitleArray[] = NULL;
 	$title_arr[] = _('Package name');
@@ -104,6 +108,11 @@ if (count($FRSPackages) == 0) {
 	echo $HTML->listTableTop($title_arr, array(), '', '', array(), $thTitleArray);
 	foreach ($FRSPackages as $key => $FRSPackage) {
 		$cells = array();
+		if (forge_check_perm('frs', $FRSPackage->getID(), 'admin')) {
+			$cells[][] = html_e('input', array('type' => 'checkbox', 'value' => $FRSPackage->getID(), 'class' => 'checkedrelidactive', 'title' => _('Select / Deselect this package for massaction'), 'onClick' => 'controllerFRS.checkgeneral("active")'));
+		} else {
+			$cells[][] = '';
+		}
 		$content = '';
 		if (forge_check_perm('frs', $FRSPackage->getID(), 'release')) {
 			$content = util_make_link('/frs/?view=qrs&package_id='.$FRSPackage->getID().'&group_id='.$group_id, '<strong>['._('Add Release').']</strong>');
@@ -131,6 +140,14 @@ if (count($FRSPackages) == 0) {
 		echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($key, true), 'id' => 'pkgid'.$FRSPackage->getID()), $cells);
 	}
 	echo $HTML->listTableBottom();
+	if ($permissionlevel == 'admin') {
+		$deleteUrlAction = util_make_uri('/frs/?action=deletepackage&group_id='.$group_id);
+		echo html_ao('p');
+		echo html_ao('span', array('id' => 'massactionactive', 'class' => 'hide'));
+		echo html_e('span', array('id' => 'frs-massactionmessage', 'title' => _('Actions availables for selected packages, you need to check at least one package to get actions')), _('Mass actions for selected packages')._(':'), false);
+		echo util_make_link('#', $HTML->getDeletePic(_('Delete selected package(s)'), _('Delete packages')), array('onclick' => 'javascript:controllerFRS.toggleConfirmBox({idconfirmbox: \'confirmbox1\', do: \''._('Delete the selected package(s)').'\', cancel: \''._('Cancel').'\', height: 150, width: 300, action: \''.$deleteUrlAction.'&package_id=\'+controllerFRS.buildUrlByCheckbox("active")})', 'title' => _('Delete selected package(s)')), true);
+		echo html_ac(html_ap() - 2);
+	}
 }
 
 echo $HTML->jQueryUIconfirmBox('confirmbox1', _('Delete package'), _('You are about to delete permanently this package. Are you sure? This action is definitive.'));

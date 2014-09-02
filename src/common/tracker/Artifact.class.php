@@ -722,7 +722,6 @@ class Artifact extends Error {
 		$res=$this->getMessages();
 		$return = array();
 		while ($arr = db_fetch_array($res)) {
-			//$return[]=new ArtifactMessage($arr['artifact_id'],$arr);
 			$return[] = new ArtifactMessage($this, $arr);
 		}
 		return $return;

@@ -4,6 +4,7 @@
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2010, Antoine Mercadal - Capgemini
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -146,8 +147,6 @@ if (!isset($errorPage)){
 	echo 	'<div align="center">';
 	echo 		'<input type="button" name="submitbutton" value="'._('Submit').'" onclick="validate();">';
 	echo 	'</div>';
-	echo 	'<p>';
-	printf(_('Fields marked with %s are mandatory.'), utils_requiredField());
-	echo 	'</p>';
 	echo 	'</form>';
+	echo $HTML->addRequiredFieldsInfoBox();
 }

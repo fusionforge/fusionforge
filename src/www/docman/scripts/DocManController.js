@@ -397,12 +397,12 @@ DocManListFileController.prototype =
 	checkAll: function(id, type) {
 		if (jQuery('#checkall'+type).is(':checked')) {
 			jQuery('.'+id).each(function() {
-				jQuery(this).attr('checked', true);
+				jQuery(this).prop('checked', true);
 				});
 			jQuery('#massaction'+type).show();
 		} else {
 			jQuery('.'+id).each(function() {
-				jQuery(this).attr('checked', false);
+				jQuery(this).prop('checked', false);
 			});
 			jQuery('#massaction'+type).hide();
 		}
@@ -410,12 +410,12 @@ DocManListFileController.prototype =
 
 	checkgeneral: function(id) {
 		if (jQuery(this).attr('checked', false)) {
-			jQuery('#checkall'+id).attr('checked', false);
+			jQuery('#checkall'+id).prop('checked', false);
 			jQuery('#massaction'+id).hide();
 			jQuery('#movefile').hide();
 		}
-		for (var h = 0; h < jQuery("input:checked").length; h++) {
-			if (typeof(jQuery("input:checked")[h].className) != "undefined" && jQuery("input:checked")[h].className.match('checkeddocid'+id)) {
+		for (var h = 0; h < jQuery('input:checked').length; h++) {
+			if (typeof(jQuery('input:checked')[h].className) != 'undefined' && jQuery('input:checked')[h].className.match('checkeddocid'+id)) {
 				jQuery('#massaction'+id).show();
 			}
 		}

@@ -130,16 +130,16 @@ $DoubleClickCB = HTML::input(array('type' => 'checkbox',
 <legend><strong><?php echo _("User preferences for this project")?></strong></legend>
 <table class="fullwidth">
 
-   <tr><td colspan="2"><h3><?php echo _("E-mail Notification")?></h3></td></tr>
+  <tr><td colspan="2"><h3><?php echo _("E-mail Notification")?></h3></td></tr>
 
-   <tr><td colspan="2">
+  <tr><td colspan="2">
     <?php echo _("Get an e-mail notification at changes of the following pages:")?>
-   </td></tr>
+  </td></tr>
 
-   <tr>
+  <tr>
     <?php if ($isForm) { ?>
       <td><textarea name="pref[notifyPages]" cols="40" rows="6"><?php echo $pref->get('notifyPages')?></textarea></td>
-      <td><p class="hint"><?php echo _("Enter pages separated by space or comma. Wildcards (fileglobbing) allowed.")?></p></td>
+    <td><p class="hint"><?php echo _("Enter pages separated by space or comma. Wildcards (fileglobbing) allowed.")?></p></td>
     <?php } else { ?>
      <td colspan="2"><?php echo $pref->get('notifyPages')?></td>
     <?php } ?>
@@ -153,7 +153,9 @@ $DoubleClickCB = HTML::input(array('type' => 'checkbox',
 
 <table class="fullwidth">
 
-  <tr><td colspan="2"><h3><?php echo _("E-mail Notification")?></h3></td></tr>
+  <tr>
+       <td colspan="2"><h3><?php echo _("E-mail Notification")?></h3></td>
+  </tr>
 
   <tr>
       <td>

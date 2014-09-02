@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PhpWiki 1.4.0\n"
+"Project-Id-Version: PhpWiki 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-15 12:24+0200\n"
+"POT-Creation-Date: 2014-08-27 17:33+0200\n"
 "PO-Revision-Date: 2004-06-22 21:10+0200\n"
 "Last-Translator: Pierrick Meignen <meignen.pierrick@wanadoo.fr>, Roland "
 "Trique <roland.trique@free.fr>, Stéphane Gourichon <stephane.gourichon@lip6."
@@ -4544,15 +4544,6 @@ msgstr ""
 msgid "ActionPage"
 msgstr ""
 
-msgid "_AuthInfo"
-msgstr ""
-
-msgid "_GroupInfo"
-msgstr ""
-
-msgid "GroupAuthInfo"
-msgstr ""
-
 #, php-format
 msgid "Check for necessary theme %s updates"
 msgstr ""
@@ -5269,6 +5260,9 @@ msgstr "Attention : vous modifiez une version archivée."
 msgid "Saving this page will overwrite the current version."
 msgstr "Enregistrer cette page écrasera la version actuelle."
 
+msgid ":"
+msgstr " :"
+
 msgid "H"
 msgstr "H"
 
@@ -5363,9 +5357,6 @@ msgstr "1 mot"
 msgid "%s words"
 msgstr "%s mots"
 
-msgid ":"
-msgstr " :"
-
 msgid "Saved on"
 msgstr "Enregistrée le"
 
@@ -5439,14 +5430,6 @@ msgstr "Mot de passe :"
 
 msgid "Article"
 msgstr ""
-
-msgid "Edit aborted."
-msgstr "Modification annulée."
-
-msgid "You have not made any changes so no new version has been saved."
-msgstr ""
-"Vous n'avez effectué aucun changement, aucune nouvelle version n'a donc été "
-"enregistrée."
 
 msgid "Switch to detailed list"
 msgstr "Aller à la liste détaillée"
@@ -5974,6 +5957,14 @@ msgstr ""
 msgid "Edit this page"
 msgstr "Modifier cette page"
 
+#~ msgid "Edit aborted."
+#~ msgstr "Modification annulée."
+
+#~ msgid "You have not made any changes so no new version has been saved."
+#~ msgstr ""
+#~ "Vous n'avez effectué aucun changement, aucune nouvelle version n'a donc "
+#~ "été enregistrée."
+
 #~ msgid "PageChange Notification of %s sent to %s"
 #~ msgstr "La notification de changement de la page %s a été envoyée à %s"
 
@@ -5992,15 +5983,8 @@ msgstr "Modifier cette page"
 #~ msgid "invalid %s ignored"
 #~ msgstr "%s non valable ignoré"
 
-#~ msgid "Imdb"
-#~ msgstr "Imdb"
-
 #~ msgid "Version %s"
 #~ msgstr "Version %s"
-
-#, fuzzy
-#~ msgid "%s not found"
-#~ msgstr "%s non trouvé dans %s"
 
 #~ msgid "Error: Empty search string."
 #~ msgstr "Erreur : la chaîne à rechercher est vide."
@@ -6024,10 +6008,6 @@ msgstr "Modifier cette page"
 #~ msgstr ""
 #~ "Historique des éditions majeures ou mineures pour n'importe quelle page "
 #~ "éditée par %s."
-
-#, fuzzy
-#~ msgid "name"
-#~ msgstr "Renommer"
 
 #~ msgid "Spell Checker"
 #~ msgstr "Correcteur orthographique"

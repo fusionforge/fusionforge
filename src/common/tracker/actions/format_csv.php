@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (C) 2009 Alain Peyrat, Alcatel-Lucent
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -49,6 +49,7 @@
 
 global $ath;
 global $group_id;
+global $HTML;
 
 $ath->header(array('atid'=>$ath->getID(), 'title'=>_('Update CSV Format')));
 
@@ -59,8 +60,8 @@ $sep = getStringFromRequest('sep', ',');
 <table class="centered">
 	<tr>
 		<td>
-		<fieldset><legend><strong><?php echo _('CSV Format'); ?></strong></legend>
-		<form action="/tracker/" method="get">
+		<fieldset><legend><strong><?php echo _('CSV Format'); ?></strong></legend><?php
+		echo $HTML->openForm(array('action' => util_make_uri('/tracker/'), 'method' => 'get'));?>
 			<input type="hidden" name="group_id" value="<?php echo $group_id ?>" />
 			<input type="hidden" name="atid" value="<?php echo $ath->getID() ?>" />
 			<input type="hidden" name="func" value="csv" />
@@ -96,8 +97,9 @@ $sep = getStringFromRequest('sep', ',');
 				</td>
 			</tr>
 		</table>
-		<input type="submit" name="Submit" /></form>
-		</fieldset>
+		<input type="submit" name="Submit" /><?php
+		echo $HTML->closeForm();
+		?></fieldset>
 		</td>
 	</tr>
 </table>

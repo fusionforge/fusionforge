@@ -1,7 +1,7 @@
 <?php
 
 /**
-  V5.19  23-Apr-2014  (c) 2000-2014 John Lim (jlim#natsoft.com). All rights reserved.
+  V5.20dev  ??-???-2014  (c) 2000-2014 John Lim (jlim#natsoft.com). All rights reserved.
   Released under both BSD license and Lesser GPL library license.
   Whenever there is any discrepancy between the two licenses,
   the BSD license will take precedence.
@@ -24,7 +24,7 @@ class ADODB2_oci8 extends ADODB_DataDict {
 	var $typeX = 'VARCHAR(4000)';
 	var $typeXL = 'CLOB';
 
-	function MetaType($t,$len=-1)
+	function MetaType($t, $len=-1, $fieldobj=false)
 	{
 		if (is_object($t)) {
 			$fieldobj = $t;
@@ -128,7 +128,7 @@ class ADODB2_oci8 extends ADODB_DataDict {
 		return $sql;
 	}
 
-	function AlterColumnSQL($tabname, $flds)
+	function AlterColumnSQL($tabname, $flds, $tableflds='', $tableoptions='')
 	{
 		$f = array();
 		list($lines,$pkey) = $this->_GenFields($flds);
@@ -141,7 +141,7 @@ class ADODB2_oci8 extends ADODB_DataDict {
 		return $sql;
 	}
 
-	function DropColumnSQL($tabname, $flds)
+	function DropColumnSQL($tabname, $flds, $tableflds='', $tableoptions='')
 	{
 		if (!is_array($flds)) $flds = explode(',',$flds);
 		foreach ($flds as $k => $v) $flds[$k] = $this->NameQuote($v);

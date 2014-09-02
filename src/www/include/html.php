@@ -521,7 +521,8 @@ function html_use_jquerysplitter() {
 
 function html_use_jqueryautoheight() {
 	html_use_jquery();
-	use_javascript('/scripts/jquery-auto-height/jquery.iframe-auto-height.plugin.1.9.3.js');
+	use_javascript('/scripts/jquery-auto-height/jquery.iframe-auto-height.plugin.1.9.5.js');
+	use_javascript('/scripts/jquery-auto-height/jquery.browser.js');
 }
 
 /**

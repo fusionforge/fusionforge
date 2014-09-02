@@ -32,18 +32,28 @@ $package_id = getIntFromRequest('package_id');
 
 if (!$package_id) {
 	$result['html'] = $HTML->warning_msg(_('Missing package_id'));
-} elseif (!forge_check_perm('frs', $package_id, 'release')) {
-	$result['html'] = $HTML->error_msg(_('FRS Action Denied.'));
 } else {
-	$release_id = getIntFromRequest('release_id');
+	$release_id_strings = getStringFromRequest('release_id');
 	$sure = getIntFromRequest('sure');
 	$really_sure = getIntFromRequest('really_sure');
-	$frsr = frsrelease_get_object($release_id);
-	if (!$frsr->delete($sure, $really_sure)) {
-		$result['html'] = $HTML->error_msg($frsr->getErrorMessage());
+	if (!$release_id_strings) {
+		$result['html'] = $HTML->warning_msg(_('Missing release_id'));
 	} else {
-		$result['html'] = $HTML->feedback(_('Release successfully deleted.'));
-		$result['deletedom'] = 'releaseid'.$release_id;
+		$release_ids = explode(',', $release_id_strings);
+		$result['format'] = 'multi';
+		foreach ($release_ids as $key => $release_id) {
+			if (forge_check_perm('frs', $package_id, 'release')) {
+				$frsr = frsrelease_get_object($release_id);
+				if (!$frsr->delete($sure, $really_sure)) {
+					$result[$key]['html'] = $HTML->error_msg($frsr->getErrorMessage());
+				} else {
+					$result[$key]['html'] = $HTML->feedback(_('Release successfully deleted.'));
+					$result[$key]['deletedom'] = 'releaseid'.$release_id;
+				}
+			} else {
+				$result[$key]['html'] = $HTML->error_msg(_('FRS Action Denied.'));
+			}
+		}
 	}
 }
 echo json_encode($result);
