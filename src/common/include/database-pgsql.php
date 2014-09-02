@@ -423,7 +423,7 @@ function db_free_result($qhandle) {
  *	@return contents of field from database.
  */
 function db_result($qhandle,$row,$field) {
-	return @pg_result($qhandle,$row,$field);
+	return @pg_fetch_result($qhandle,$row,$field);
 }
 
 /**
