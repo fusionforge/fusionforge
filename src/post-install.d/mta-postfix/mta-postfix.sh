@@ -67,10 +67,10 @@ case "$1" in
 	postmap $data_path/etc/postfix-transport
 
 	if ! grep -q '^### BEGIN FUSIONFORGE BLOCK' /etc/postfix/main.cf; then
-	    cat <<EOF >>/etc/postfix/main.cf
-### BEGIN FUSIONFORGE BLOCK -- DO NOT EDIT
-### END FUSIONFORGE BLOCK -- DO NOT EDIT
-EOF
+	    cat <<-EOF >>/etc/postfix/main.cf
+		### BEGIN FUSIONFORGE BLOCK -- DO NOT EDIT
+		### END FUSIONFORGE BLOCK -- DO NOT EDIT
+		EOF
 	fi
 	sed -i -e '/^### BEGIN FUSIONFORGE BLOCK/,/^### END FUSIONFORGE BLOCK/ { ' -e 'ecat' -e 'd }' \
 	    /etc/postfix/main.cf <<EOF
