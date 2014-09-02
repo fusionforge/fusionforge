@@ -20,7 +20,7 @@ set -e
 
 case "$1" in
     configure)
-        $(forge_get_config source_path)/post-install.d/web/configure.sh
+        $(forge_get_config source_path)/post-install.d/web/web.sh configure
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

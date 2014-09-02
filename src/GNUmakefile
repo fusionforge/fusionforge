@@ -135,7 +135,7 @@ post-install: post-install-base post-install-plugins
 post-install-base:
 	$(post_source_path)/post-install.d/common/common.sh
 	$(post_source_path)/post-install.d/db/db.sh
-	$(post_source_path)/post-install.d/web/configure.sh
+	$(post_source_path)/post-install.d/web/web.sh
 
 post-install-shell:
 	$(post_source_path)/post-install.d/shell/shell.sh configure

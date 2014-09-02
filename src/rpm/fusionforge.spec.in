@@ -162,7 +162,7 @@ This package contains the files needed to run the web part of
 FusionForge on an Apache webserver.
 %files web -f web.rpmfiles
 %post web
-%{_datadir}/%{name}/post-install.d/web/configure.sh
+%{_datadir}/%{name}/post-install.d/web/web.sh configure
 
 
 %package mta-postfix
