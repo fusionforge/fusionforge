@@ -7,9 +7,8 @@
  * a redirect from a page to itself.)
  */
 ?>
-
 <div class="wikitext" id="editform">
-<form method="post" name="editpage" id="editpage"
+<form method="post" id="editpage" name="editpage"
       action="<?php echo $request->getPostURL() ?>"
       accept-charset="UTF-8">
   <?php if (!empty($_GET['start_debug'])) echo '<input type="hidden" name="start_debug" value="1">'; ?>
@@ -34,14 +33,14 @@
 <table class="fullwidth">
     <tr><td><?php echo $EDIT_TOOLBAR ?></td>
         <td class="align-right"><div id="editarea-size">
-    <?php echo _("Size").':'?>
+    <?php echo _("Size")._(":") ?>
     <label for="pref-editHeight"><b><?php echo _("H")?></b></label> <?php echo $HEIGHT_PREF?> 
     <label for="pref-editWidth"><b><?php echo _("W")?></b></label> <?php echo $WIDTH_PREF?>
     <noscript><?php echo Button("submit:", _("Adjust"), 'wikiaction')?></noscript>
   </div></td></tr></table>
 <a id="editarea"></a><?php echo $EDIT_TEXTAREA?>
 <br /><small>
-<?php echo _("Summary")?>: <?php echo $SUMMARY_INPUT ?>
+<?php echo _("Summary")._(":") ?><?php echo $SUMMARY_INPUT ?>
 <br />
 <?php if (ENABLE_CAPTCHA) { ?>
   <?php echo $CAPTCHA_IMAGE ?><br/>

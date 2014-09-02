@@ -1,5 +1,5 @@
 Name: selenium
-Version: 2.21.0
+Version: 2.42.2
 Release: 2
 Summary: Selenium server Jar
 License: Apache 2.0

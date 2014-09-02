@@ -1,5 +1,7 @@
 <?php
-// This template is used for the FrameInclude plugin.
+/*
+ * This template is used for the FrameInclude plugin.
+ */
 
 $topurl = $request->getURLtoSelf(array('frame' => 'header'));
 $boturl = $request->getURLtoSelf(array('frame' => 'footer'));
@@ -12,9 +14,9 @@ printf("<?xml version=\"1.0\" encoding=\"%s\"?>\n", CHARSET);
 <?php echo Template('head') ?>
 
 <frameset rows="<?php echo $ROWS?>">
-  <frame name="header" src="<?php echo $topurl?>" <?php echo $FRAMEARGS ?>/>
+  <frame name="header" src="<?php echo $topurl?>" <?php echo $FRAMEARGS ?> />
   <?php echo $CONTENT_FRAME ?>
-  <frame name="footer" src="<?php echo $boturl?>" <?php echo $FRAMEARGS ?>/>
+  <frame name="footer" src="<?php echo $boturl?>" <?php echo $FRAMEARGS ?> />
   <noframes><?php echo Template('body') ?></noframes>
 </frameset>
 </html>

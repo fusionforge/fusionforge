@@ -411,7 +411,6 @@ ${POT_FILE}: ../themes/default/templates/html.tmpl
 ${POT_FILE}: ../themes/default/templates/info.tmpl
 ${POT_FILE}: ../themes/default/templates/login.tmpl
 ${POT_FILE}: ../themes/default/templates/navbar.tmpl
-${POT_FILE}: ../themes/default/templates/nochanges.tmpl
 ${POT_FILE}: ../themes/default/templates/online.tmpl
 ${POT_FILE}: ../themes/default/templates/pagelink.tmpl
 ${POT_FILE}: ../themes/default/templates/redirect.tmpl

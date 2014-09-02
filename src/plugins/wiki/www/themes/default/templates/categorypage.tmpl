@@ -31,11 +31,7 @@ $link ?> for more ways to navigate or create pages.
 
   $initial_content = "\"This page is in the $bpage category.  You must leave in at least one reference to $bpage in order for this page to be in the $bpage category.  Otherwise, edit this text to describe your page.\"";
 	$adder = "";
-  
-  //if($SELF_ON_CREATE == true){
-  	//$adder = "save_and_redirect_to=\"" . $PAGENAME . "\"";
-  //}	
-  
+
   $this->_printPlugin("<" . "?plugin-form CreatePage " . $adder . " initial_content=" . $initial_content . " ?" . ">");
 ?>
 

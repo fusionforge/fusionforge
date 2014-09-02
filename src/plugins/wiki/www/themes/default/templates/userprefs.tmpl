@@ -176,6 +176,7 @@ if ($isForm) {
   <tr><td colspan="2">
     <?php echo _("Get an e-mail notification at changes of the following pages:")?>
   </td></tr>
+
   <tr>
     <?php if ($isForm) { ?>
       <td><textarea name="pref[notifyPages]" cols="40" rows="6"><?php echo $pref->get('notifyPages')?></textarea></td>
@@ -288,11 +289,12 @@ if ($isForm) {
 </table>
 
 <?php if ($isForm) { ?>
-  <hr />
-  <p><?php echo Button("submit:", _("Update Preferences"), 'wikiadmin')?>
+<hr />
+<p>
+  <?php echo Button("submit:", _("Update Preferences"), 'wikiadmin')?>
   <?php echo Button("submit:delete", _("Reset Preferences"), 'wikiadmin')?>
-  <?php echo Button("submit:cancel", _("Cancel"), 'button')?></p>
-
-<?php echo HiddenInputs($request->getArgs(), false, array('pref')) ?>
+  <?php echo Button("submit:cancel", _("Cancel"), 'button')?>
+  <?php echo HiddenInputs($request->getArgs(), false, array('pref')) ?>
+</p>
 </form>
 <?php } ?>

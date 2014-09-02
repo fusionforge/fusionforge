@@ -6,7 +6,7 @@ if ($user->isAdmin() or $user->getId() == $BLOG_CREATOR) {
     $buttons = HTML::small(array('class' => 'floatleft'),
                            Button('edit', false, $page));
     if ($user->isAdmin()) {
-	$buttons->pushContent($SEP, Button('remove', false, $page));
+        $buttons->pushContent($SEP, Button('remove', false, $page));
     }
 }
 

@@ -32,8 +32,7 @@
 
 class EditToolbar
 {
-
-    function EditToolbar()
+    function __construct()
     {
         global $WikiTheme;
 
@@ -70,10 +69,13 @@ msg_repl_close     = '" . _("Close") . "'
         }
 
         if (ENABLE_EDIT_TOOLBAR) {
+            $init = JavaScript("var data_path = '" . javascript_quote_string(DATA_PATH) . "';\n");
             $js = JavaScript('', array('src' => $WikiTheme->_findData("toolbar.js")));
             if (empty($WikiTheme->_headers_printed)) {
+                $WikiTheme->addMoreHeaders($init);
                 $WikiTheme->addMoreHeaders($js);
             } else { // from an actionpage: WikiBlog, AddComment, WikiForum
+                printXML($init);
                 printXML($js);
                 printXML(JavaScript('define_f()'));
             }
@@ -104,12 +106,12 @@ msg_repl_close     = '" . _("Close") . "'
         }
     }
 
-    function getTokens()
+    public function getTokens()
     {
         return $this->tokens;
     }
 
-    function _generate()
+    private function _generate()
     {
         global $WikiTheme, $request;
 
@@ -174,7 +176,7 @@ msg_repl_close     = '" . _("Close") . "'
                     "sample" => "",
                     "title" => _("Horizontal line")),
                 array("image" => "ed_table.png",
-                    "open" => "\\n{| class=\"bordered\"\\n|+ This is the table caption\\n|= This is the table summary\\n|-\\n! Header A !! Header B !! Header C\\n|-\\n| Cell A1 || Cell B1 || Cell C1\\n|-\\n| Cell A2 || Cell B2 || Cell C2\\n|-\\n| Cell A3 || Cell B3 || Cell C3\\n|}\\n",
+                    "open" => "\\n{| class=\"bordered\"\\n|+ This is the table caption\\n|-\\n! Header A !! Header B !! Header C\\n|-\\n| Cell A1 || Cell B1 || Cell C1\\n|-\\n| Cell A2 || Cell B2 || Cell C2\\n|-\\n| Cell A3 || Cell B3 || Cell C3\\n|}\\n",
                     "close" => "",
                     "sample" => "",
                     "title" => _("Sample table")),
@@ -280,7 +282,7 @@ msg_repl_close     = '" . _("Close") . "'
 
         // Button to add images, display in extra window as popup and insert
         if (TOOLBAR_IMAGE_PULLDOWN)
-            $sr_html = HTML($sr_html, $this->imagePulldown(TOOLBAR_IMAGE_PULLDOWN));
+            $sr_html = HTML($sr_html, $this->imagePulldown());
 
         // don't use document.write for replace, otherwise self.opener is not defined.
         $toolbar_end = "document.writeln(\"</div>\");";
@@ -293,7 +295,7 @@ msg_repl_close     = '" . _("Close") . "'
     }
 
     //result is cached
-    function categoriesPulldown()
+    private function categoriesPulldown()
     {
         global $WikiTheme;
 
@@ -331,7 +333,7 @@ msg_repl_close     = '" . _("Close") . "'
     }
 
     // result is cached. Esp. the args are expensive
-    function pluginPulldown()
+    private function pluginPulldown()
     {
         global $WikiTheme;
         global $AllAllowedPlugins;
@@ -382,7 +384,7 @@ msg_repl_close     = '" . _("Close") . "'
     }
 
     // result is cached. Esp. the args are expensive
-    function pagesPulldown($query, $case_exact = false, $regex = 'auto')
+    private function pagesPulldown($query, $case_exact = false, $regex = 'auto')
     {
         require_once 'lib/TextSearchQuery.php';
         $dbi =& $GLOBALS['request']->_dbi;
@@ -412,9 +414,9 @@ msg_repl_close     = '" . _("Close") . "'
     }
 
     // result is cached. Esp. the args are expensive
-    function imagePulldown($query, $case_exact = false, $regex = 'auto')
+    private function imagePulldown()
     {
-        global $WikiTheme;
+        global $WikiTheme, $request;
 
         $image_dir = getUploadFilePath();
         $pd = new fileSet($image_dir, '*');
@@ -453,13 +455,12 @@ msg_repl_close     = '" . _("Close") . "'
 
     // result is cached. Esp. the args are expensive
     // FIXME!
-    function templatePulldown($query, $case_exact = false, $regex = 'auto')
+    private function templatePulldown($query, $case_exact = false, $regex = 'auto')
     {
         global $request;
         require_once 'lib/TextSearchQuery.php';
         $dbi =& $request->_dbi;
         $page_iter = $dbi->titleSearch(new TextSearchQuery($query, $case_exact, $regex));
-        $count = 0;
         if ($page_iter->count()) {
             global $WikiTheme;
             $pages_js = '';

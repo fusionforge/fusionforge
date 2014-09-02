@@ -5,7 +5,7 @@
 <?php } ?>
 <?php if ($revision and !$revision->isCurrent()) { ?>
   <p class="warning_msg"><?php echo _("You are viewing an old revision of this page.")?>
-  <?php echo Button('edit', _("View the current version."), $page) ?>
+  <?php echo Button('viewsource', _("View the current version."), $page) ?>
   </p>
 <?php } ?>
 <br class="clear-floats" />

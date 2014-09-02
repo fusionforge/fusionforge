@@ -1,7 +1,7 @@
-// Toolbar JavaScript support functions. Taken from mediawiki 
+// Toolbar JavaScript support functions. Taken from mediawiki
 
 // Some "constants"
-var doctype = '<?xml version="1.0" encoding="utf-8"?>\n<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">';
+var doctype = '<!DOCTYPE html>';
 var cssfile = '<link rel="stylesheet" type="text/css" href="'+data_path+'/themes/default/toolbar.css" />';
 
 // Un-trap us from framesets
@@ -22,16 +22,14 @@ function addButton(imageFile, speedTip, func, args) {
   //width=\"23\" height=\"22\"
   document.write(");\"><img src=\""+imageFile+"\" width=\"18\" height=\"18\" border=\"0\" alt=\""+speedTip+"\" title=\""+speedTip+"\">");
   document.write("</a>");
-  return;
 }
 function addTagButton(imageFile, speedTip, tagOpen, tagClose, sampleText) {
   addButton(imageFile, speedTip, "insertTags", [tagOpen, tagClose, sampleText]);
-  return;
 }
 
-// This function generates a popup list to select from. 
+// This function generates a popup list to select from.
 // In an external window so far, but we really want that as acdropdown pulldown, hence the name.
-//   plugins, pagenames, categories, templates. 
+//   plugins, pagenames, categories, templates.
 // Not with document.write because we cannot use self.opener then.
 //function addPulldown(imageFile, speedTip, pages) {
 //  addButton(imageFile, speedTip, "showPulldown", pages);
@@ -44,12 +42,18 @@ function showPulldown(title, pages, okbutton, closebutton, fromid) {
   var h = (screen.height-height)/2;
   var w = (screen.width-width)/2;
   pullwin = window.open('','','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=yes,copyhistory=no,top='+h+',left='+w+',height='+height+',width='+width);
+   // Close the window with Escape key
+   pullwin.onkeydown = function(e){
+       if(e.keyCode === 27){
+           pullwin.window.close();
+       }
+   };
   pullwin.window.document.writeln(doctype);
   pullwin.window.document.writeln('<html>\n<head>\n<title>'+escapeQuotes(title)+'</title>');
   pullwin.window.document.writeln(cssfile);
   pullwin.window.document.writeln('</head>\n<body>');
   pullwin.window.document.writeln('<p>\nYou can double-click to insert.\n</p>');
-  pullwin.window.document.writeln('<form action=\"\"><div id=\"buttons\"><input type=\"button\" value=\"'+okbutton+'\" onclick=\"if(self.opener)self.opener.do_pulldown(document.forms[0].select.value,\''+fromid+'\'); return false;\" /><input type=\"button\" value=\"'+closebutton+'\" onclick=\"self.close(); return false;\" /></div>\n<div>\n<select style=\"margin-top:10px;width:190px;\" name=\"select\" size=\"'+((pages.length>20)?'20':new String(pages.length))+'\" ondblclick=\"if(self.opener)self.opener.do_pulldown(document.forms[0].select.value,\''+fromid+'\'); return false;\">');
+  pullwin.window.document.writeln('<form><div id=\"buttons\"><input type=\"button\" value=\"'+okbutton+'\" onclick=\"if(self.opener)self.opener.do_pulldown(document.forms[0].select.value,\''+fromid+'\'); return false;\" /><input type=\"button\" value=\"'+closebutton+'\" onclick=\"self.close(); return false;\" /></div>\n<div>\n<select style=\"margin-top:10px;width:190px;\" name=\"select\" size=\"'+((pages.length>20)?'20':new String(pages.length))+'\" ondblclick=\"if(self.opener)self.opener.do_pulldown(document.forms[0].select.value,\''+fromid+'\'); return false;\">');
   for (i=0; i<pages.length; i++){
     if (typeof pages[i] == 'string')
       pullwin.window.document.write('<option value="'+pages[i]+'">'+escapeQuotes(pages[i])+'</option>\n');
@@ -63,13 +67,12 @@ function showPulldown(title, pages, okbutton, closebutton, fromid) {
 function do_pulldown(text,fromid) {
     // do special actions dependent on fromid: tb-categories
     if (fromid == 'tb-categories') {
-	var txtarea = document.getElementById('edit-content');
-	text = unescapeSpecial(text);
-	txtarea.value += '\n'+text;
+        var txtarea = document.getElementById('edit-content');
+        text = unescapeSpecial(text);
+        txtarea.value += '\n'+text;
     } else {
-	insertTags(text, '', '\n');
+        insertTags(text, '', '\n');
     }
-    return;
 }
 function addInfobox(infoText) {
   // if no support for changing selection, add a small copy & paste field
@@ -79,8 +82,8 @@ function addInfobox(infoText) {
   if(!document.selection && !is_nav) {
     infoText=escapeQuotesHTML(infoText);
     document.write("<form name='infoform' id='infoform'>"+
-		   "<input size=80 id='infobox' name='infobox' value=\""+
-		   infoText+"\" readonly=\"readonly\"></form>");
+           "<input size=80 id='infobox' name='infobox' value=\""+
+           infoText+"\" readonly=\"readonly\"></form>");
   }
 }
 function escapeQuotes(text) {
@@ -145,9 +148,9 @@ function insertTags(tagOpen, tagClose, sampleText) {
     var myText = (txtarea.value).substring(startPos, endPos);
     if(!myText) { myText=sampleText;}
     if(myText.charAt(myText.length - 1) == " "){ // exclude ending space char, if any
-      subst = tagOpen + myText.substring(0, (myText.length - 1)) + tagClose + " "; 
+      subst = tagOpen + myText.substring(0, (myText.length - 1)) + tagClose + " ";
     } else {
-      subst = tagOpen + myText + tagClose; 
+      subst = tagOpen + myText + tagClose;
     }
     txtarea.value = txtarea.value.substring(0, startPos) + subst + txtarea.value.substring(endPos, txtarea.value.length);
     txtarea.focus();
@@ -198,6 +201,12 @@ function replace() {
    var h = (screen.height-height)/2;
    var w = (screen.width-width)/2;
    replacewin = window.open('','','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=yes,copyhistory=no,top='+h+',left='+w+',height='+height+',width='+width);
+   // Close the window with Escape key
+   replacewin.onkeydown = function(e){
+       if(e.keyCode === 27){
+           replacewin.window.close();
+       }
+   };
    replacewin.window.document.writeln(doctype);
    replacewin.window.document.writeln('<html>\n<head>\n<title>'+msg_repl_title+'</title>');
    replacewin.window.document.writeln(cssfile);

@@ -161,6 +161,7 @@ if(count($files)) {
 	echo html_e('hr');
 	echo html_e('h2', array(), _('Edit Files In This Release'));
 	print(_('Once you have added files to this release you <strong>must</strong> update each of these files with the correct information or they will not appear on your download summary page.')."\n");
+	$title_arr[] = html_e('input', array('id' => 'checkallactive', 'type' => 'checkbox', 'title' => _('Select / Deselect all files for massaction'), 'onClick' => 'controllerFRS.checkAll("checkedrelidactive", "active")'));
 	$title_arr[] = _('File Name');
 	$title_arr[] = _('Processor');
 	$title_arr[] = _('File Type');
@@ -168,18 +169,19 @@ if(count($files)) {
 	$title_arr[] = _('Release Date');
 	$title_arr[] = _('Actions');
 
-	echo $HTML->listTableTop($title_arr, array(), '', '', array(), array(), array(array('style' => 'width: 30%')));
-	echo '<tr><td colspan="6">';
+	echo $HTML->listTableTop($title_arr, array(), '', '', array(), array(), array(array('style' => 'width: 2%'), array('style' => 'width: 30%')));
+	echo '<tr><td colspan="7" style="padding:0px;">';
 	foreach ($files as $key => $file) {
 		echo $HTML->openForm(array('action' => util_make_uri('/frs/?group_id='.$group_id.'&release_id='.$release_id.'&package_id='.$package_id.'&file_id='.$file->getID().'&action=editfile'), 'method' => 'post', 'id' => 'fileid'.$file->getID()));
 		echo $HTML->listTableTop();
 		$cells = array();
+		$cells[] = array(html_e('input', array('type' => 'checkbox', 'value' => $file->getID(), 'class' => 'checkedrelidactive', 'title' => _('Select / Deselect this file for massaction'), 'onClick' => 'controllerFRS.checkgeneral("active")')), 'style' => 'width: 2%; padding: 0px;');
 		$cells[] = array($file->getName(), 'style' => 'white-space: nowrap; width: 30%');
 		$cells[][] = frs_show_processor_popup('processor_id', $file->getProcessorID());
 		$cells[][] = frs_show_filetype_popup('type_id', $file->getTypeID());
 		$cells[][] = frs_show_release_popup($group_id, $name = 'new_release_id', $release_id);
 		$cells[][] = '<input type="text" name="release_time" value="'.date('Y-m-d', $file->getReleaseTime()).'" size="10" maxlength="10" />';
-		$deleteUrlAction = util_make_uri('/frs/?action=deletefile&package_id='.$package_id.'&group_id='.$group_id.'&release_id='.$release_id.'&file_id='.$file->getID());
+		$deleteUrlAction = util_make_uri('/frs/?action=deletefile&package_id='.$package_id.'&group_id='.$group_id.'&file_id='.$file->getID());
 		$cells[][] = '<input type="submit" name="submit" value="'._('Update/Refresh').'" />'.util_make_link('#', $HTML->getDeletePic(_('Delete this file'), _('Delete file')), array('onclick' => 'javascript:controllerFRS.toggleConfirmBox({idconfirmbox: \'confirmbox1\', do: \''._('Delete the file').' '.$file->getName().'\', cancel: \''._('Cancel').'\', height: 150, width: 400, action: \''.$deleteUrlAction.'\'})' ), true);
 		echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($key, true)), $cells);
 		echo $HTML->listTableBottom();
@@ -187,6 +189,12 @@ if(count($files)) {
 	}
 	echo '</td></tr>';
 	echo $HTML->listTableBottom();
+	$deleteUrlAction = util_make_uri('/frs/?action=deletefile&group_id='.$group_id.'&package_id='.$package_id);
+	echo html_ao('p');
+	echo html_ao('span', array('id' => 'massactionactive', 'class' => 'hide'));
+	echo html_e('span', array('id' => 'frs-massactionmessage', 'title' => _('Actions availables for selected files, you need to check at least one file to get actions')), _('Mass actions for selected files')._(':'), false);
+	echo util_make_link('#', $HTML->getDeletePic(_('Delete selected file(s)'), _('Delete files')), array('onclick' => 'javascript:controllerFRS.toggleConfirmBox({idconfirmbox: \'confirmbox1\', do: \''._('Delete the selected file(s)').'\', cancel: \''._('Cancel').'\', height: 150, width: 300, action: \''.$deleteUrlAction.'&file_id=\'+controllerFRS.buildUrlByCheckbox("active")})', 'title' => _('Delete selected file(s)')), true);
+	echo html_ac(html_ap() - 2);
 }
 
 echo $HTML->jQueryUIconfirmBox('confirmbox1', _('Delete file'), _('You are about to delete permanently this file. Are you sure? This action is definitive.'));
