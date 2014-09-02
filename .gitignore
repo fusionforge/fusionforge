@@ -16,6 +16,7 @@ src/www/scm/viewvc/viewvc.org/*.zip
 /*.dsc
 /*.tar.gz
 /*.diff.gz
+/*.debian.tar.xz
 /*.build
 /*.changes
 /*.deb
