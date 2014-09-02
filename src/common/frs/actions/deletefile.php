@@ -29,20 +29,24 @@ $sysdebug_enable = false;
 $result = array();
 
 $package_id = getIntFromRequest('package_id');
-$file_id = getIntFromRequest('file_id');
+$file_ids_string = getStringFromRequest('file_id');
 if (!forge_check_perm('frs', $package_id, 'file')) {
 	$result['html'] = $HTML->error_msg(_('FRS Action Denied.'));
-} elseif ($file_id) {
-	$frsf = frsfile_get_object($file_id);
-	if (!$frsf || !is_object($frsf)) {
-		$result['html'] = $HTML->error_msg(_('Error Getting FRSPackage'));
-	} elseif ($frsf->isError()) {
-		$result['html'] = $HTML->error_msg($frsf->getErrorMessage());
-	} elseif (!$frsf->delete()) {
-		$result['html'] = $HTML->error_msg($frsf->getErrorMessage());
-	} else {
-		$result['html'] = $HTML->feedback(_('File successfully deleted.'));
-		$result['deletedom'] = 'fileid'.$file_id;
+} elseif ($file_ids_string) {
+	$file_ids = explode(',', $file_ids_string);
+	$result['format'] = 'multi';
+	foreach ($file_ids as $key => $file_id) {
+		$frsf = frsfile_get_object($file_id);
+		if (!$frsf || !is_object($frsf)) {
+			$result[$key]['html'] = $HTML->error_msg(_('Error Getting FRSPackage'));
+		} elseif ($frsf->isError()) {
+			$result[$key]['html'] = $HTML->error_msg($frsf->getErrorMessage());
+		} elseif (!$frsf->delete()) {
+			$result[$key]['html'] = $HTML->error_msg($frsf->getErrorMessage());
+		} else {
+			$result[$key]['html'] = $HTML->feedback(_('File successfully deleted.'));
+			$result[$key]['deletedom'] = 'fileid'.$file_id;
+		}
 	}
 } else {
 	$result['html'] = $HTML->error_msg(_('Missing file_id'));
