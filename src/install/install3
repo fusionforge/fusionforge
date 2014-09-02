@@ -250,7 +250,7 @@ EOF
 	/usr/sbin/groupadd $gforge_user;
 
 	msg green " * Creating '$gforge_user' User..."
-	/usr/sbin/useradd -g $gforge_user $gforge_user
+	/usr/sbin/useradd -m -g $gforge_user $gforge_user
 	
 	# Let's give some time for PostgreSQL to start
 	sleep 5 
