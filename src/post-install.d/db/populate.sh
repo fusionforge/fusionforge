@@ -57,15 +57,15 @@ EOF
 # Admin user
 req="SELECT COUNT(*) FROM users WHERE user_name='admin'"
 if [ "$(echo $req | su - postgres -c "psql -At $database_name")" != "1" ]; then
-psql -h $database_host -p $database_port -U $database_user $database_name <<EOF
+    psql -h $database_host -p $database_port -U $database_user $database_name <<EOF
 INSERT INTO users (user_name, realname, firstname, lastname, email,
     user_pw, unix_pw, status, theme_id)
   VALUES ('admin', 'Forge Admin', 'Forge', 'Admin', 'root@localhost.localdomain',
     'INVALID', 'INVALID', 'A', (SELECT theme_id FROM themes WHERE dirname='funky'));
 EOF
-forge_make_admin admin  # set permissions
+    forge_make_admin admin  # set permissions
+    # Note: no password defined yet
 fi
 
 rm -f $PGPASSFILE
 unset PGPASSFILE
-# Note: no password defined yet
