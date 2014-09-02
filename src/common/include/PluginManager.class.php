@@ -117,11 +117,14 @@ class PluginManager extends Error {
 		return false;
 	}
 	function activate($pluginname) {
-		$res = db_query_params('INSERT INTO plugins (plugin_name,plugin_desc) VALUES ($1,$2)',
+		$query_exists = 'SELECT plugin_id, plugin_name FROM plugins WHERE plugin_name=$1';
+		$res = db_query_params($query_exists, array($pluginname));
+		if (db_numrows($res) == 0) {
+			$res = db_query_params('INSERT INTO plugins (plugin_name,plugin_desc) VALUES ($1,$2)',
 				array($pluginname, "This is the $pluginname plugin"));
+		}
 
-		$res = db_query_params ('SELECT plugin_id, plugin_name FROM plugins WHERE plugin_name=$1',
-				array($pluginname));
+		$res = db_query_params($query_exists, array($pluginname));
 		if (db_numrows($res) == 1) {
 			$plugin_id = db_result($res, 0, 'plugin_id');
 			$this->plugins_data[$plugin_id] = db_result($res,0,'plugin_name');

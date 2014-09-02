@@ -60,3 +60,8 @@ if (method_exists($ctl, $action)) {
 } else {
 	$ctl->help();
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
