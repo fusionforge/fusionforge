@@ -130,3 +130,17 @@ Description: collaborative development tool - mail tools (using Exim 4)
  .
  This package configures the Exim 4 mail transfer agent to run
  FusionForge.
+
+
+Package: fusionforge-lists
+Architecture: all
+Depends: fusionforge-common (=${source:Version}), php5-cli, fusionforge-mta-postfix | gforge-mta, mailman, ${misc:Depends}
+Description: collaborative development tool - mailing-lists (using Mailman)
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This package controls the interaction between FusionForge and Mailman.
+

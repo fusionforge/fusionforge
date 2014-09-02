@@ -56,7 +56,7 @@ case "$1" in
 
 	# Transport
 	postfix_append_config 'mydestination' $users_host
-	postfix_append_config 'relay_domains' $lists_hosts
+	postfix_append_config 'relay_domains' $lists_host
 
 	# Forwarding rules
 	postfix_append_config 'virtual_alias_maps' 'proxy:pgsql:pgsql_gforge_users'
@@ -82,7 +82,7 @@ pgsql_gforge_users_user = $(forge_get_config database_user)_mta
 pgsql_gforge_users_password = $(forge_get_config database_user)_mta
 pgsql_gforge_users_dbname = $(forge_get_config database_name)
 pgsql_gforge_users_domain = $users_host
-pgsql_gforge_users_query = SELECT email FROM mta_users WHERE login = '\''%u'\''
+pgsql_gforge_users_query = SELECT email FROM mta_users WHERE login = '%u'
 mailman_destination_recipient_limit = 1
 ### END FUSIONFORGE BLOCK ###
 EOF

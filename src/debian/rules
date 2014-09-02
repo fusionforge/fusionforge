@@ -28,6 +28,7 @@ override_dh_auto_install:
 	make install-shell       prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-shell
 	make install-mta-postfix prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-mta-postfix
 	make install-mta-exim4   prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-mta-exim4
+	make install-lists       prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-lists
 	for i in $$(sed -n 's/^Package: fusionforge-plugin-//p' debian/plugins); do \
 		make install-plugin-$$i prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-plugin-$$i; \
 		sed "s/@plugin@/$$i/" debian/plugin.postinst > debian/fusionforge-plugin-$$i.postinst; \
