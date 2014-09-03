@@ -13,8 +13,8 @@ Vcs-Browser: https://fusionforge.org/scm/browser.php?group_id=9
 Package: fusionforge
 Architecture: all
 Depends: fusionforge-common (=${source:Version}), fusionforge-db-local | fusionforge-db, fusionforge-web, ${misc:Depends}
-Recommends: fusionforge-shell, fusionforge-plugin-scmgit, fusionforge-plugin-scmsvn
-Suggests: fusionforge-plugin-mediawiki, fusionforge-plugin-moinmoin, fusionforge-plugin-blocks
+Recommends: fusionforge-lists, fusionforge-shell, fusionforge-plugin-scmgit, fusionforge-plugin-scmsvn
+Suggests: fusionforge-web-vhosts, fusionforge-plugin-mediawiki, fusionforge-plugin-moinmoin, fusionforge-plugin-blocks
 Description: collaborative development tool - standard metapackage
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
@@ -84,6 +84,20 @@ Description: collaborative development tool - web part (using Apache)
  .
  This package contains the files needed to run the web part of
  FusionForge on an Apache webserver.
+
+
+Package: fusionforge-web-vhosts
+Architecture: all
+Depends: fusionforge-common (=${source:Version}), php5-cli, ${misc:Depends}
+Description: collaborative development tool - web vhosts (using Apache)
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This package contains the files needed to run project vhosts
+ on an Apache webserver.
 
 
 Package: fusionforge-shell

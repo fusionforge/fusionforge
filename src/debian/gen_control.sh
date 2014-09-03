@@ -19,6 +19,7 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 (
+    echo "# GENERATED used $0"
     cat debian/control.in
     echo
     for i in $(sed -n 's/^Package: fusionforge-plugin-//p' debian/plugins); do

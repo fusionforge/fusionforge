@@ -76,8 +76,9 @@ install-common: install-config install-plugin-authbuiltin
 install-db-local: install-db
 install-db: install-base-dirs
 	$(CP_R) db $(DESTDIR)$(pkgdatadir)/
-	$(CP_R) cronjobs/db  $(DESTDIR)$(pkgdatadir)/cronjobs/
-	$(CP_R) post-install.d/db  $(DESTDIR)$(pkgdatadir)/post-install.d/
+	$(CP_R) cronjobs/db $(DESTDIR)$(pkgdatadir)/cronjobs/
+	$(CP_R) etc/cron.d/fusionforge-db $(DESTDIR)$(sysconfdir)/cron.d/
+	$(CP_R) post-install.d/db $(DESTDIR)$(pkgdatadir)/post-install.d/
 
 install-web: install-base-dirs
 	$(CP_R) vendor www $(DESTDIR)$(pkgdatadir)/
@@ -85,20 +86,29 @@ install-web: install-base-dirs
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/download/
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/forum/
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/tracker/
-	$(CP_R) post-install.d/web  $(DESTDIR)$(pkgdatadir)/post-install.d/
+	$(CP_R) post-install.d/web $(DESTDIR)$(pkgdatadir)/post-install.d/
+#	TODO: multiple servers support
+#	(e.g. install scm, lists, vhosts and vhosts-extra separately)
+
+install-web-vhosts: install-base-dirs
+	$(CP_R) cronjobs/web-vhosts $(DESTDIR)$(pkgdatadir)/cronjobs/
+	$(CP_R) etc/cron.d/fusionforge-web-vhosts $(DESTDIR)$(sysconfdir)/cron.d/
+#	TODO: only install 40-vhosts-extra.conf and httpd.vhosts with this module
 
 install-shell: install-base-dirs
-	$(CP_R) cronjobs/shell  $(DESTDIR)$(pkgdatadir)/cronjobs/
-	$(CP_R) post-install.d/shell  $(DESTDIR)$(pkgdatadir)/post-install.d/
+	$(CP_R) cronjobs/shell $(DESTDIR)$(pkgdatadir)/cronjobs/
+	$(CP_R) etc/cron.d/fusionforge-shell $(DESTDIR)$(sysconfdir)/cron.d/
+	$(CP_R) post-install.d/shell $(DESTDIR)$(pkgdatadir)/post-install.d/
 
 install-mta-postfix: install-base-dirs
-	$(CP_R) post-install.d/mta-postfix  $(DESTDIR)$(pkgdatadir)/post-install.d/
+	$(CP_R) post-install.d/mta-postfix $(DESTDIR)$(pkgdatadir)/post-install.d/
 
 install-mta-exim4: install-base-dirs
-	$(CP_R) post-install.d/mta-exim4  $(DESTDIR)$(pkgdatadir)/post-install.d/
+	$(CP_R) post-install.d/mta-exim4 $(DESTDIR)$(pkgdatadir)/post-install.d/
 
 install-lists: install-base-dirs
-	$(CP_R) cronjobs/lists  $(DESTDIR)$(pkgdatadir)/cronjobs/
+	$(CP_R) cronjobs/lists $(DESTDIR)$(pkgdatadir)/cronjobs/
+	$(CP_R) etc/cron.d/fusionforge-lists $(DESTDIR)$(sysconfdir)/cron.d/
 
 install-base: install-base-dirs install-common install-web install-db
 
@@ -170,7 +180,7 @@ dist-clean:
 TAR_PREFIX=fusionforge-$(VERSION)
 dist: all
 	rm -rf $(TAR_PREFIX)/
-	mkdir  $(TAR_PREFIX)/
+	mkdir $(TAR_PREFIX)/
 	$(CP_R) $$(ls -A | grep -v '^\.git' | grep -v $(TAR_PREFIX)) $(TAR_PREFIX)/
 	find $(TAR_PREFIX)/ -name '*~' -print0 | xargs -r0 rm
 	tar cjf $(TAR_PREFIX).tar.bz2 $(TAR_PREFIX)/

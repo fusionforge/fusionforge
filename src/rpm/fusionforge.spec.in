@@ -62,6 +62,7 @@ install_listfiles common
 # Install plugins
 install_listfiles db-local
 install_listfiles web
+install_listfiles web-vhosts
 install_listfiles shell
 install_listfiles mta-postfix
 install_listfiles mta-exim4
@@ -163,6 +164,21 @@ FusionForge on an Apache webserver.
 %files web -f web.rpmfiles
 %post web
 %{_datadir}/%{name}/post-install.d/web/web.sh configure
+
+
+%package web-vhosts
+Summary: collaborative development tool - web vhosts (using Apache)
+Requires: %{name}-common = %{version}, httpd
+%description web-vhosts
+FusionForge provides many tools to aid collaboration in a
+development project, such as bug-tracking, task management,
+mailing-lists, SCM repository, forums, support request helper,
+web/FTP hosting, release management, etc. All these services are
+integrated into one web site and managed through a web interface.
+
+This package contains the files needed to run project vhosts
+on an Apache webserver.
+%files web-vhosts -f web-vhosts.rpmfiles
 
 
 %package mta-postfix
