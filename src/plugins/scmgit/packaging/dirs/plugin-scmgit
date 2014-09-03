@@ -1,4 +1,0 @@
-@PLUGINS_PATH@/scmgit/cgi-bin
-@PLUGINS_PATH@/scmgit/common
-@PLUGINS_PATH@/scmgit/www
-@DATA_PATH@/chroot/scmrepos/git

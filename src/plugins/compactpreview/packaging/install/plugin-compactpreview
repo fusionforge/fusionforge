@@ -1,4 +1,0 @@
-plugins/compactpreview/common/*                  @PLUGINS_PATH@/compactpreview/common/
-plugins/compactpreview/include/*                 @PLUGINS_PATH@/compactpreview/include/
-plugins/compactpreview/www/*                     @PLUGINS_PATH@/compactpreview/www/
-plugins/compactpreview/etc/compactpreview.ini	             @CONFIG_PATH@/config.ini.d/

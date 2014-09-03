@@ -1,4 +1,0 @@
-plugins/authopenid/include   @PLUGINS_PATH@/authopenid/
-plugins/authopenid/www       @PLUGINS_PATH@/authopenid/
-plugins/authopenid/etc/*.ini @CONFIG_PATH@/config.ini.d/
-plugins/authopenid/db/*      @PLUGINS_PATH@/authopenid/db/

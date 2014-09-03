@@ -1,2 +1,0 @@
-plugins/gravatar/common/*		@PLUGINS_PATH@/gravatar/common/
-plugins/gravatar/etc/*.ini		@CONFIG_PATH@/config.ini.d/

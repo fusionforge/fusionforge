@@ -1,3 +1,0 @@
-plugins/authhttpd/include              @PLUGINS_PATH@/authhttpd/
-plugins/authhttpd/www              @PLUGINS_PATH@/authhttpd/
-plugins/authhttpd/etc/*.ini 	     @CONFIG_PATH@/config.ini.d/

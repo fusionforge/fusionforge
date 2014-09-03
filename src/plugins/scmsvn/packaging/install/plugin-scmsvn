@@ -1,4 +1,0 @@
-plugins/scmsvn/bin/*                @PLUGINS_PATH@/scmsvn/bin/
-plugins/scmsvn/common/*             @PLUGINS_PATH@/scmsvn/common/
-plugins/scmsvn/etc/plugins/scmsvn/* @CONFIG_PATH@/plugins/scmsvn/
-plugins/scmsvn/etc/*.ini 	    @CONFIG_PATH@/config.ini.d/

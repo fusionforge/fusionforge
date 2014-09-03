@@ -1,3 +1,0 @@
-plugins/foafprofiles/common/*                  @PLUGINS_PATH@/foafprofiles/common/
-plugins/foafprofiles/include/*                 @PLUGINS_PATH@/foafprofiles/include/
-plugins/foafprofiles/etc/foafprofiles.ini	             @CONFIG_PATH@/config.ini.d/

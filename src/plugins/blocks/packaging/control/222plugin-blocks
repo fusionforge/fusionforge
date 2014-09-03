@@ -1,4 +1,0 @@
-Package: @PACKAGE@-plugin-blocks
-Architecture: all
-Depends: @OLDPACKAGE@-common, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, @OLDPACKAGE@-web-apache2, php5-cli, ${misc:Depends}
-Description: collaborative development tool - Blocks plugin
