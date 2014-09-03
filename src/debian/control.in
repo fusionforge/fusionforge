@@ -73,7 +73,7 @@ Description: collaborative development tool - database (remote)
 
 Package: fusionforge-web
 Architecture: all
-Depends: fusionforge-common (=${source:Version}), fusionforge-db, php5-cli, libapache2-mod-php5, python, ${misc:Depends}
+Depends: fusionforge-common (=${source:Version}), fusionforge-db, php5-cli, libapache2-mod-php5, python, ucf, ${misc:Depends}
 Recommends: locales-all
 Description: collaborative development tool - web part (using Apache)
  FusionForge provides many tools to aid collaboration in a
@@ -88,7 +88,7 @@ Description: collaborative development tool - web part (using Apache)
 
 Package: fusionforge-shell
 Architecture: all
-Depends: fusionforge-common (=${source:Version}), php5-cli, ucf, libnss-pgsql2, openssh-server, unscd | nscd, ${misc:Depends}
+Depends: fusionforge-common (=${source:Version}), php5-cli, libnss-pgsql2, openssh-server, unscd | nscd, ucf, ${misc:Depends}
 Description: collaborative development tool - shell accounts (using PostgreSQL)
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
