@@ -34,13 +34,18 @@ override_dh_auto_install:
 		sed "s/@plugin@/$$i/" debian/plugin.postinst>debian/fusionforge-plugin-$$i.postinst; \
 		sed "s/@plugin@/$$i/" debian/plugin.prerm  > debian/fusionforge-plugin-$$i.prerm; \
 		sed "s/@plugin@/$$i/" debian/plugin.postrm > debian/fusionforge-plugin-$$i.postrm; \
+		if [ -f plugins/$$i/README ]; then \
+			echo plugins/$$i/README > debian/fusionforge-plugin-$$i.docs; \
+		fi; \
 	done
 
 override_dh_clean:
 	dh_clean
 	for i in $$(sed -n 's/^Package: fusionforge-plugin-//p' debian/plugins); do \
-		rm -f debian/fusionforge-plugin-$$i.postinst debian/fusionforge-plugin-$$i.prerm; \
+		rm -f debian/fusionforge-plugin-$$i.postinst debian/fusionforge-plugin-$$i.prerm \
+			debian/fusionforge-plugin-$$i.postrm debian/fusionforge-plugin-$$i.docs ; \
 	done
+	rm -f debian/control
 
 # Needs to be done before 'dpkg-source'
 debian/control: debian/gen_control.sh debian/plugins
