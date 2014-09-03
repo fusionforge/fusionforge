@@ -31,8 +31,9 @@ override_dh_auto_install:
 	make install-lists       prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-lists
 	for i in $$(sed -n 's/^Package: fusionforge-plugin-//p' debian/plugins); do \
 		make install-plugin-$$i prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-plugin-$$i; \
-		sed "s/@plugin@/$$i/" debian/plugin.postinst > debian/fusionforge-plugin-$$i.postinst; \
-		sed "s/@plugin@/$$i/" debian/plugin.prerm > debian/fusionforge-plugin-$$i.prerm; \
+		sed "s/@plugin@/$$i/" debian/plugin.postinst>debian/fusionforge-plugin-$$i.postinst; \
+		sed "s/@plugin@/$$i/" debian/plugin.prerm  > debian/fusionforge-plugin-$$i.prerm; \
+		sed "s/@plugin@/$$i/" debian/plugin.postrm > debian/fusionforge-plugin-$$i.postrm; \
 	done
 
 override_dh_clean:

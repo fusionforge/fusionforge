@@ -28,6 +28,30 @@ fi
 
 case "$2" in
     configure)
+	$0 $1 configure-conffiles
+	$0 $1 configure-exec
+	;;
+
+    configure-conffiles)
+	# Restart apache if there is some change in config
+	if [ ! -d $source_path/plugins/$1/etc/httpd.conf.d/ ]; then exit; fi
+	
+	# Distros may want to install new conffiles using tools such as ucf(1)
+	DESTDIR=$3
+	mkdir -m 755 -p $DESTDIR$config_path/httpd.conf.d/
+	
+	cd $source_path/plugins/$1/etc/
+	for i in $(ls httpd.conf.d/*); do
+	    if [ ! -e $DESTDIR$config_path/$i ]; then
+		$source_path/post-install.d/web/expand-conf.php $i $DESTDIR$config_path/$i
+	    fi
+	    case $i in
+		*secrets*) chmod 600 $DESTDIR$config_path/$i;;
+	    esac
+	done
+	;;
+
+    configure-exec)
 	# Enable plugin
 	$source_path/bin/forge pluginActivate $1
 
@@ -35,27 +59,16 @@ case "$2" in
 	if [ -x $source_path/post-install.d/db/upgrade.php ]; then
 	    $source_path/post-install.d/db/upgrade.php $1
 	fi
-	
-	# Restart apache if there is some change in config
-	(
-	    if [ ! -e $source_path/plugins/$1/etc/httpd.conf.d/ ]; then exit; fi
-	    cd $source_path/plugins/$1/etc/
-	    for i in $(ls httpd.conf.d/*); do
-		if [ ! -e $config_path/$i ]; then
-		    $source_path/post-install.d/web/expand-conf.php $i $config_path/$i
-		fi
-		case $i in
-		    *secrets*) chmod 600 $config_path/$i;;
-		esac
-	    done
-	    # Hard-coded detection of distro-specific Apache conf layout
-	    service $apache_service reload >/dev/null || true
-	)
 
 	# Run plugin-specific install
 	if [ -x $source_path/plugins/$1/bin/install.sh ]; then
 	    echo "Running $source_path/plugins/$1/bin/install.sh configure"
 	    $source_path/plugins/$1/bin/install.sh configure
+	fi
+
+	# Restart Apache if new conffiles were added
+	if [ ! -d $source_path/plugins/$1/etc/httpd.conf.d/ ]; then
+	    service $apache_service reload >/dev/null || true
 	fi
 	;;
 

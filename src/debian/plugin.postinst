@@ -1,10 +1,34 @@
 #!/bin/sh -e
+
+# Skip if plugin.sh was already removed
 pluginctl=$(forge_get_config source_path)/post-install.d/common/plugin.sh
+if [ ! -x $pluginctl ]; then exit 0; fi
+
 case "$1" in
-    configure) if [ -x $pluginctl ]; then $pluginctl @plugin@ configure; fi ;;
-    triggered) if [ -x $pluginctl ]; then $pluginctl @plugin@ triggered "$2"; fi ;;
-    abort-upgrade|abort-remove|abort-deconfigure) ;;
-    *) echo "postinst called with unknown argument \`$1'" >&2; exit 1 ;;
+    configure)
+	DESTDIR=$(mktemp -d)
+	$pluginctl @plugin@ configure-conffiles $DESTDIR
+	for i in $(find $DESTDIR -type f); do
+	    ucf $i ${i#$DESTDIR}
+	    ucfr -f fusionforge-plugin-@plugin@ ${i#$DESTDIR}
+	done
+	rm -rf $DESTDIR/
+	$pluginctl @plugin@ configure-exec
+	;;
+
+    triggered)
+	$pluginctl @plugin@ triggered "$2"
+	;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+	;;
+
+    *)
+	echo "postinst called with unknown argument \`$1'" >&2
+	exit 1
+	;;
 esac
+
 #DEBHELPER#
+
 exit 0
