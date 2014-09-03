@@ -2,11 +2,11 @@
 
 case "$1" in
     purge)
-	ucfq fusionforge-@plugin@ --with-colons \
+	ucfq fusionforge-plugin-@plugin@ --with-colons \
 	    | while IFS=: read i ignored; do
 	    rm -f $i $i.ucf-*
 	    ucf --purge $i
-	    ucfr --purge fusionforge-@plugin@ $i
+	    ucfr --purge fusionforge-plugin-@plugin@ $i
 	done
 	;;
 
