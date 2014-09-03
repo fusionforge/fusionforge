@@ -114,6 +114,7 @@ while [ $i -lt $timeout ] && ! netstat -tnl 2>/dev/null | grep -q :4444 && kill 
 done
 if [ $i = $timeout ] || ! kill -0 $pid 2>/dev/null; then
     echo "Selenium failed to start."
+    netstat -tnl
     exit 1
 fi
 

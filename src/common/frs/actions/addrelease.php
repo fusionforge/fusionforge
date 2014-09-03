@@ -70,7 +70,7 @@ $exec_changes = true;
 
 if (strlen($release_name) >= 3) {
 	// Check for uploaded release notes
-	if ($uploaded_notes['tmp_name']) {
+	if (isset($uploaded_notes['tmp_name']) && $uploaded_notes['tmp_name']) {
 		if (!is_uploaded_file($uploaded_notes['tmp_name'])) {
 			$error_msg = _('Attempted File Upload Attack');
 			session_redirect('/frs/?group_id='.$group_id);
@@ -91,7 +91,7 @@ if (strlen($release_name) >= 3) {
 	}
 
 	// Check for uploaded change logs
-	if ($uploaded_changes['tmp_name']) {
+	if (isset($uploaded_changes['tmp_name']) && $uploaded_changes['tmp_name']) {
 		if (!is_uploaded_file($uploaded_changes['tmp_name'])) {
 			$error_msg = _('Attempted File Upload Attack');
 			session_redirect('/frs/?group_id='.$group_id);
