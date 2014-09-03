@@ -45,7 +45,6 @@ override_dh_clean:
 		rm -f debian/fusionforge-plugin-$$i.postinst debian/fusionforge-plugin-$$i.prerm \
 			debian/fusionforge-plugin-$$i.postrm debian/fusionforge-plugin-$$i.docs ; \
 	done
-	rm -f debian/control
 
 # Needs to be done before 'dpkg-source'
 debian/control: debian/gen_control.sh debian/plugins
