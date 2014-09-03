@@ -608,10 +608,10 @@ done
 %{__ln_s} /usr/share/mediawiki119/StartProfiler.php $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
 %{__ln_s} /usr/share/mediawiki119/thumb.php $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
 %{__ln_s} /usr/share/mediawiki119/trackback.php $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
-%{__ln_s} /usr/share/mediawiki119/skins $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki/skins $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
 %{__ln_s} /usr/share/mediawiki119 $RPM_BUILD_ROOT%{FORGE_DATA_PATH}/plugins/mediawiki/master
-%{__ln_s} %{FORGE_PLUGINS_LIB_DIR}/mediawiki/mediawiki-skin/FusionForge.php $RPM_BUILD_ROOT/usr/share/mediawiki119/skins/
-%{__ln_s} %{FORGE_PLUGINS_LIB_DIR}/mediawiki/mediawiki-skin/fusionforge $RPM_BUILD_ROOT/usr/share/mediawiki119/skins/
+%{__ln_s} %{FORGE_PLUGINS_LIB_DIR}/mediawiki/mediawiki-skin/FusionForge.php $RPM_BUILD_ROOT/usr/share/mediawiki/skins/
+%{__ln_s} %{FORGE_PLUGINS_LIB_DIR}/mediawiki/mediawiki-skin/fusionforge $RPM_BUILD_ROOT/usr/share/mediawiki/skins/
 
 # plugin: moinmoin
 %{__ln_s} ../../plugins/moinmoin/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/moinmoin
