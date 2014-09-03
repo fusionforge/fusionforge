@@ -1467,6 +1467,7 @@ if (isset($params['group']) && $params['group']) {
 			$attrs['href'] = util_make_uri($path);
 		}
 		return html_e('a', $attrs, $text, true);
+	}
 
 	/**
 	 * html_list - create the html code:
