@@ -108,6 +108,7 @@ if [ $i = $timeout ] ; then
     echo "Selenium failed to start within $timeout seconds:"
     echo -----
     cat $t
+    netstat -tnl
     echo -----
     echo "Trying again."
     PATH=/usr/lib/iceweasel:$PATH LANG=C java -jar /usr/share/selenium/selenium-server.jar -trustAllSSLCertificates -singleWindow > $t 2>&1 &
