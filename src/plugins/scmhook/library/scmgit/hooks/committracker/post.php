@@ -33,7 +33,7 @@
 
 require_once dirname(__FILE__).'/../../../../../../common/include/env.inc.php';
 require_once $gfcommon.'include/pre.php';
-require $gfplugins.'scmhook/library/scmgit/hooks/committracker/Snoopy.class.php';
+require 'libphp-snoopy/Snoopy.class.php';
 
 /**
  * usage - It returns the usage and exit program

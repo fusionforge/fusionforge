@@ -32,7 +32,7 @@
 require dirname(__FILE__).'/../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once ($gfcommon.'common/include/utils.php');
-require_once ($gfplugins.'cvstracker/common/Snoopy.class.php');
+require_once ('libphp-snoopy/Snoopy.class.php');
 
 $cvs_binary_version = get_cvs_binary_version () ;
 
