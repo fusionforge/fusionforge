@@ -75,7 +75,7 @@ done
 
 %package common
 Summary: collaborative development tool - shared files
-Requires: php-cli, php-pgsql, php-htmlpurifier-htmlpurifier, cronie
+Requires: php-cli, php-pgsql, php-process, php-htmlpurifier-htmlpurifier, cronie
 %description common
 FusionForge provides many tools to aid collaboration in a
 development project, such as bug-tracking, task management,
