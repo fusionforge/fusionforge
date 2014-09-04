@@ -43,6 +43,8 @@ override_dh_auto_install:
 	rm -rf debian/fusionforge-web/usr/share/fusionforge/vendor/simplepie/
 #	embedded-php-library usr/share/fusionforge/**/Snoopy.class.php -> libphp-snoopy
 	rm -rf debian/fusionforge-web/usr/share/fusionforge/vendor/libphp-snoopy/
+#	extra-license-file usr/share/fusionforge/**/postreceiveemail/LICENCE
+	rm -f debian/fusionforge-plugin-scmhook/usr/share/fusionforge/plugins/scmhook/library/scmgit/hooks/postreceiveemail/LICENCE
 
 override_dh_clean:
 	dh_clean
