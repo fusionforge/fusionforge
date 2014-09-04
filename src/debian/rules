@@ -39,6 +39,8 @@ override_dh_auto_install:
 			echo plugins/$$i/README > debian/fusionforge-plugin-$$i.docs; \
 		fi; \
 	done
+#	embedded-php-library usr/share/fusionforge/vendor/simplepie/simplepie.inc -> libphp-simplepie
+	rm -rf debian/fusionforge-web/usr/share/fusionforge/vendor/simplepie/
 
 override_dh_clean:
 	dh_clean

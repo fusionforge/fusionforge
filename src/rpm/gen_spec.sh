@@ -46,3 +46,4 @@ if [ -z "$autobuild" ]; then autobuild=''; fi
     -e "s/@snapshot@/$snapshot/" \
     -e '/^@plugins@/ { ' -e 'ecat' -e 'd }' \
     rpm/fusionforge.spec.in > fusionforge.spec
+chmod a-w fusionforge.spec

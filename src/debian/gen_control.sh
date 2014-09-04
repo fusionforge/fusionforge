@@ -31,3 +31,5 @@
 	echo
     done
 ) > debian/control
+# Not possible because dpkg-gencontrol requires write permission to read it(!?)
+# chmod a-w debian/control
