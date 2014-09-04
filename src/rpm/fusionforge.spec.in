@@ -129,8 +129,7 @@ installs (e.g. plugins activation requires a populated db).
 
 %package shell
 Summary: collaborative development tool - shell accounts (using PostgreSQL)
-Requires: %{name}-common = %{version}, php, openssh-server nscd
-#Requires: libnss-pgsql  # Fedora-only?
+Requires: %{name}-common = %{version}, php, openssh-server nscd libnss-pgsql
 %description shell
 FusionForge provides many tools to aid collaboration in a
 development project, such as bug-tracking, task management,
