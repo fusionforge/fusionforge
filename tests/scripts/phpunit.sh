@@ -121,7 +121,7 @@ fi
 echo "Running PHPunit tests"
 retcode=0
 cd tests
-phpunit --verbose --debug --stop-on-failure --log-junit $SELENIUM_RC_DIR/phpunit-selenium.xml $@ Testsuite.php || retcode=$?
+phpunit --verbose --debug --stop-on-failure --log-junit $SELENIUM_RC_DIR/phpunit-selenium.xml $@ func_tests.php || retcode=$?
 cd ..
 kill $pid
 # on debian
