@@ -22,7 +22,7 @@ case $HOST in
 	;;
 esac	
 
-destroy_vm -t $VM $HOST
+destroy_vm_if_not_keeped -t $VM $HOST
 start_vm_if_not_keeped -t $VM $HOST
 
 ssh root@$HOST "yum install -y rsync"
