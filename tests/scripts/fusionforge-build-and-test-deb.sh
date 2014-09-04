@@ -27,8 +27,8 @@ case $HOST in
 	;;
 esac	
 
-destroy_vm_if_not_keeped -t $VM $HOST
-start_vm_if_not_keeped -t $VM $HOST
+destroy_vm_if_not_kept -t $VM $HOST
+start_vm_if_not_kept -t $VM $HOST
 
 # LXC post-install...
 ssh root@$HOST "echo \"deb $DEBMIRRORSEC $DIST/updates main\" > /etc/apt/sources.list.d/security.list"
@@ -51,5 +51,5 @@ ssh root@$HOST "/usr/src/fusionforge/tests/func/vncxstartsuite.sh /usr/src/fusio
 
 rsync -av root@$HOST:/var/log/ $WORKSPACE/reports/
 
-stop_vm_if_not_keeped -t $VM $@
+stop_vm_if_not_kept -t $VM $@
 exit $retcode

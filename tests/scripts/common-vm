@@ -107,7 +107,7 @@ fi
 export VMTEMPLATE VMENGINE CIDR IPGW
 }
 
-destroy_vm_if_not_keeped()
+destroy_vm_if_not_kept()
 {
 	if ! $KEEPVM
 	then
@@ -115,7 +115,7 @@ destroy_vm_if_not_keeped()
 	fi
 }
 
-start_vm_if_not_keeped()
+start_vm_if_not_kept()
 {
 	if $KEEPVM
 	then
@@ -132,7 +132,7 @@ start_vm_if_not_keeped()
 	fi
 }
 
-stop_vm_if_not_keeped()
+stop_vm_if_not_kept()
 {
 	if $KEEPVM
 	then
