@@ -86,7 +86,7 @@ fi
 
 # Install FusionForge packages
 yum install -y make gettext php-cli php-pgsql \
-    httpd postgresql-server \
+    httpd mod_ssl postgresql-server \
     subversion \
     mediawiki119 \
     moin mod_wsgi python-psycopg2
