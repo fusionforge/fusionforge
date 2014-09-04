@@ -71,4 +71,5 @@ fi
 if [ -x /bin/systemctl ]; then
     sleep 5  # systemd's postgresql init scripts is stupidly async
     # if you have a better way that works across distros...
+    # Cf. http://bugs.debian.org/759725
 fi
