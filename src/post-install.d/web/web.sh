@@ -45,13 +45,17 @@ case "$1" in
 	;;
 
     configure-exec)
+	apache_user=$(forge_get_config apache_user)
+	apache_group=$(forge_get_config apache_group)
+	apache_service=$(forge_get_config apache_service)
+
 	if [ -x /usr/sbin/a2ensite ]; then
 	    ln -nfs $config_path/httpd.conf /etc/apache2/sites-available/fusionforge.conf
 	    a2ensite fusionforge.conf
 	elif [ -e /etc/redhat-release ]; then
 	    ln -nfs $config_path/httpd.conf /etc/httpd/conf.d/fusionforge.conf
 	else
-	    echo "Note: install $config_path/httpd.conf in your Apache configuration"
+	    echo "*** Note: please install $config_path/httpd.conf in your Apache configuration"
 	fi
 	
 	# Generate SSL cert if needed
@@ -67,8 +71,6 @@ case "$1" in
 	
 	# Setup Docman/FRS/Tracker attachments
 	# (not done in 'make install' because e.g. dpkg ignores existing dirs, cf. DP10.9[1])
-	apache_user=$(forge_get_config apache_user)
-	apache_group=$(forge_get_config apache_group)
 	chown $apache_user: $data_path/docman/
 	chown $apache_user: $data_path/download/
 	chown $apache_user: $data_path/forum/
@@ -79,6 +81,7 @@ case "$1" in
 	
 	# Enable required modules
 	if [ -x /usr/sbin/a2enmod ]; then
+	    a2enmod version || true  # opensuse..
 	    a2enmod php5
 	    a2enmod ssl
 	    a2enmod env
@@ -101,13 +104,12 @@ case "$1" in
 	if [ -e /etc/apache2/ports.conf ]; then
 	    sed -i 's/^NameVirtualHost \*:80/#&/' /etc/apache2/ports.conf
 	fi
+
 	# Start web server on boot
-	if [ -e /etc/redhat-release ]; then
-	    chkconfig httpd on
+	if [ -x /sbin/chkconfig ]; then
+	    chkconfig $apache_service on
 	fi
-	
-	# Hard-coded detection of distro-specific Apache conf layout
-	apache_service=$(forge_get_config apache_service)
+	# Refresh configuration
 	if service $apache_service status >/dev/null; then
 	    service $apache_service reload
 	else
