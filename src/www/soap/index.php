@@ -17,7 +17,7 @@ error_reporting(0);
 
 $uri = 'http://'.forge_get_config('web_host');
 // 1. include client and server
-require_once $gfwww.'soap/nusoap.php';
+require_once $gfcommon.'vendor/nusoap/nusoap.php';
 //$debug = true;
 // 2. instantiate server object
 $server = new soap_server();
