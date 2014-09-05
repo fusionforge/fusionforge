@@ -27,6 +27,10 @@ if [ -e /etc/redhat-release ]; then
     service postgresql initdb >/dev/null
     chkconfig postgresql on
 fi
+if [ -e /etc/SuSE-release ]; then
+    service postgresql start  # creates initial db
+    chkconfig postgresql on
+fi
 
 pg_hba=$(ls /etc/postgresql/*/*/pg_hba.conf /var/lib/pgsql/data/pg_hba.conf 2>/dev/null | tail -1)
 pg_conf=$(ls /etc/postgresql/*/*/postgresql.conf /var/lib/pgsql/data/postgresql.conf 2>/dev/null | tail -1)
