@@ -11,7 +11,7 @@ Package: fusionforge-plugin-scmarch
 Depends: tla
 
 Package: fusionforge-plugin-scmcvs
-Depends: php5-cli, libipc-run-perl, rcs, liburi-perl, cvs, python, libphp-snoopy, openbsd-inetd | inet-superserver, update-inetd
+Depends: php5-cli, rcs, cvs, python, libphp-snoopy, openbsd-inetd | inet-superserver, update-inetd, libipc-run-perl, liburi-perl, ${perl:Depends}
 
 Package: fusionforge-plugin-scmdarcs
 Depends: fusionforge-shell, darcs, darcsweb
@@ -56,7 +56,7 @@ Package: fusionforge-plugin-foafprofiles
 Depends:
 
 Package: fusionforge-plugin-globalsearch
-Depends: libxml-rss-perl, libgetopt-mixed-perl, libdbi-perl, libwww-perl, libcrypt-ssleay-perl, libunicode-string-perl
+Depends: libxml-rss-perl, libgetopt-mixed-perl, libdbi-perl, libwww-perl, libcrypt-ssleay-perl, libunicode-string-perl, ${perl:Depends}
 
 Package: fusionforge-plugin-gravatar
 Depends: 
@@ -76,8 +76,8 @@ Depends:
 # Note: scmhook might need to be manually packaged to allow installing
 # the commit hooks on a separate SCM server
 Package: fusionforge-plugin-scmhook
-Depends: php5-cli, libphp-snoopy
+Depends: php5-cli, libphp-snoopy, ${perl:Depends}
 
 Package: fusionforge-plugin-sysauthldap
 Depends: php5-ldap
-Recommends: slapd, ldap-utils
+Recommends: slapd, ldap-utils, ${perl:Depends}

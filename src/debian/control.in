@@ -42,7 +42,7 @@ Description: collaborative development tool - shared files
 
 Package: fusionforge-db-local
 Architecture: all
-Depends: fusionforge-common (=${source:Version}), postgresql, php5-cli, ${misc:Depends}
+Depends: fusionforge-common (=${source:Version}), postgresql, php5-cli, ${perl:Depends}, ${misc:Depends}
 Description: collaborative development tool - database (using PostgreSQL)
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
