@@ -87,10 +87,9 @@ fi
 # Install FusionForge packages
 yum install -y make gettext php-cli php-pgsql \
     httpd mod_ssl postgresql-server \
-    subversion \
+    subversion viewvc \
     mediawiki119 \
     moin mod_wsgi python-psycopg2
-# TODO: replace python-subversion with non-bundled viewvc
 
 cd /usr/src/fusionforge/src/
 make

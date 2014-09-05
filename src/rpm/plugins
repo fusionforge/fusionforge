@@ -2,7 +2,7 @@
 Requires: git, gitweb
 
 %package plugin-scmsvn
-Requires: subversion
+Requires: subversion, viewvc
 
 %package plugin-scmbzr
 Requires: bazaar, mod_wsgi, loggerhead
