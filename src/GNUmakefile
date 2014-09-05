@@ -142,9 +142,12 @@ uninstall:
 # not relying on 'prefix' for post-install (for no-install/dev setups)
 post_source_path:=$(shell forge_get_config source_path 2>/dev/null)
 post-install: post-install-base post-install-plugins
-post-install-base:
+post-install-base: post-install-common post-install-db post-install-web
+post-install-common:
 	$(post_source_path)/post-install.d/common/common.sh
+post-install-db:
 	$(post_source_path)/post-install.d/db/db.sh
+post-install-web:
 	$(post_source_path)/post-install.d/web/web.sh configure
 
 post-install-shell:
