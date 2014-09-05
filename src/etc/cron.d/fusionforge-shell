@@ -3,7 +3,7 @@
 #
 
 # SCM/user/group update
-15 * * * * root forge_run_job homedirs.php
+15 * * * * root forge_run_job shell/homedirs.php
 
 # SSH keys
-20 * * * * root forge_run_job ssh_create.php
+20 * * * * root forge_run_job shell/ssh_create.php

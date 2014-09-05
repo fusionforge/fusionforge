@@ -1,1 +1,1 @@
-37 7,19 * * * root forge_run_job create-vhosts.php
+37 7,19 * * * root forge_run_job web-vhosts/create-vhosts.php
