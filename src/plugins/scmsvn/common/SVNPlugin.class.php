@@ -369,8 +369,12 @@ class SVNPlugin extends SCMPlugin {
 			}
 
 			if ($project->enableAnonSCM()) {
-				$access_data .= forge_get_config('anonsvn_login', 'scmsvn')." = r\n";
-				$access_data .= "* = r\n";
+				$anonRole = RoleAnonymous::getInstance();
+				if ($anonRole->hasPermission('scm', $project->getID(), 'write')) {
+					$access_data .= forge_get_config('anonsvn_login', 'scmsvn')." = rw\n";
+				} else {
+					$access_data .= forge_get_config('anonsvn_login', 'scmsvn')." = r\n";
+				}
 			}
 
 			$access_data .= "\n";
