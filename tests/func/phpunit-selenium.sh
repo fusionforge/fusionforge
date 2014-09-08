@@ -1,19 +1,22 @@
-#! /bin/sh
+#!/bin/bash
+
+set -e
 
 TEST_ENV="$1"
 # Test arg
 if [ -z "$TEST_ENV" ]
 then
-	echo "Usage: $0 script"
-	exit 1
+       echo "Usage: $0 testsuite_name"
+       exit 1
 fi
 
 export INSTALL_METHOD=${TEST_ENV%/*}
 export INSTALL_OS=${TEST_ENV#*/}
 
 if [ -z "$INSTALL_METHOD" ] || [ -z "$INSTALL_OS" ] ; then
-    echo INSTALL_METHOD and INSTALL_OS required
-    echo Example: INSTALL_METHOD=src INSTALL_OS=centos $0
+    echo "Usage: $0 testsuite_name"
+    echo "Example: $0 src/centos"
+    exit 1
 fi
 
 scriptdir=$(dirname $0)
@@ -21,8 +24,8 @@ FORGE_HOME=$(cd $scriptdir/../..; pwd)
 cd $FORGE_HOME
 
 # Initialize defaults
-[ ! -f tests/config/default ] || . tests/config/default
-[ ! -f tests/config/phpunit ] || . tests/config/phpunit
+. $scriptdir/../buildbot/config/default
+[ ! -f $scriptdir/../buildbot/config/phpunit ] || . $scriptdir/../buildbot/config/phpunit
 
 SELENIUM_RC_DIR=/var/log
 SELENIUM_RC_URL=${HUDSON_URL}job/${JOB_NAME}/ws/reports
@@ -103,17 +106,18 @@ define ('WSDL_URL', URL.'soap/index.php?wsdl');
 EOF
 
 echo "Starting Selenium"
-killall -9 java
+killall -9 java || true
 timeout=300
 PATH=/usr/lib/iceweasel:$PATH LANG=C java -jar /usr/share/selenium/selenium-server.jar -trustAllSSLCertificates -singleWindow &
 pid=$!
 i=0
 while [ $i -lt $timeout ] && ! netstat -tnl 2>/dev/null | grep -q :4444 && kill -0 $pid 2>/dev/null; do
+    echo "Waiting for Selenium..."
     sleep 1
     i=$(($i+1))
 done
 if [ $i = $timeout ] || ! kill -0 $pid 2>/dev/null; then
-    echo "Selenium failed to start."
+    echo "Selenium failed to start!"
     netstat -tnl
     exit 1
 fi

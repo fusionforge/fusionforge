@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/bash
 # Install FusionForge from source
 #
 # Copyright (C) 2011  Roland Mas
@@ -22,31 +22,26 @@
 
 #set -x
 set -e
-export DEBIAN_FRONTEND=noninteractive
+. $(dirname $0)/common-backports
 
-# fusionforge-plugin-scmbzr depends on loggerhead (>= 1.19~bzr477~),
-# but wheezy only has 1.19~bzr461-1, so we need to manually "Backport"
-# a more recent dependency
-if grep -q ^7 /etc/debian_version && ! dpkg-query -s loggerhead >/dev/null 2>&1 ; then
-    # install loggerhead with its dependencies
-    # we need gdebi to make sure dependencies are installed too (simple dpkg -i won't)
-    apt-get -y install gdebi-core wget
-    wget -c http://snapshot.debian.org/archive/debian/20121107T152130Z/pool/main/l/loggerhead/loggerhead_1.19%7Ebzr477-1_all.deb
-    gdebi --non-interactive loggerhead_1.19~bzr477-1_all.deb
-fi
-
-# Install locales-all which is a Recommends and not a Depends
-if ! dpkg -l locales-all | grep -q ^ii ; then
-    apt-get -y install locales-all
-fi
-
-# Install FusionForge packages
-apt-get update
-apt-get install -y make gettext php5-cli php5-pgsql php-htmlpurifier \
-    apache2 postgresql \
+# Install FusionForge dependencies
+if [ -e /etc/debian_version ]; then
+    export DEBIAN_FRONTEND=noninteractive
+    backports_deb
+    apt-get update
+    apt-get install -y make gettext php5-cli php5-pgsql php-htmlpurifier \
+	apache2 locales-all postgresql \
+	subversion viewvc \
+	mediawiki \
+	python-moinmoin libapache2-mod-wsgi python-psycopg2
+else
+    backports_rpm
+    yum install -y make gettext php-cli php-pgsql \
+    httpd mod_ssl postgresql-server \
     subversion viewvc \
-    mediawiki \
-    python-moinmoin libapache2-mod-wsgi python-psycopg2
+    mediawiki119 \
+    moin mod_wsgi python-psycopg2
+fi
 
 cd /usr/src/fusionforge/src/
 make
@@ -60,4 +55,4 @@ make post-install-base post-install-plugin-scmsvn post-install-plugin-blocks \
     post-install-plugin-online_help
 
 # Dump clean DB
-if [ ! -e /root/dump ]; then $(dirname $0)/../../func/db_reload.sh --backup; fi
+if [ ! -e /root/dump ]; then $(dirname $0)/../tests/func/db_reload.sh --backup; fi

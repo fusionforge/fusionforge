@@ -1,21 +1,19 @@
 #! /bin/sh 
 
-scriptdirname=`dirname $0`
-scriptdirparent=`cd $scriptdirname/..;pwd`
-scriptdir=$scriptdirparent/scripts
-configdir=$scriptdirparent/config
-. $scriptdirparent/scripts/common-vm
+scriptdir=$(dirname $0)
+configdir=$scriptdir/config
+. $(dirname $0)/common-vm
 
-read_param_vm $@
+read_param_vm "$@"
 
 # Start script for this engine must exist
-if [ ! -x $scriptdirparent/${VMENGINE}/start ]
+if [ ! -x $scriptdir/${VMENGINE}/start ]
 then 
 	echo "Don't know how to run ${VMENGINE} engine"
-	echo "$scriptdirparent/${VMENGINE}/start not found"
+	echo "$scriptdir/${VMENGINE}/start not found"
 	exit 4
 else
-	$scriptdirparent/${VMENGINE}/start
+	$scriptdir/${VMENGINE}/start
 fi
 
 # Loop until engine is up and ssh is running

@@ -111,7 +111,7 @@ destroy_vm_if_not_kept()
 {
 	if ! $KEEPVM
 	then
-	    tests/scripts/destroy_vm $@ || true
+	    $(dirname $0)/destroy_vm $@ || true
 	fi
 }
 
@@ -120,11 +120,11 @@ start_vm_if_not_kept()
 	if $KEEPVM
 	then
 		# VM can already exist
-		tests/scripts/start_vm $@
+		$(dirname $0)/start_vm $@
 	else
 		# Destroy the VM if found
-		tests/scripts/stop_vm $@ || true
-		if ! tests/scripts/start_vm $@
+		$(dirname $0)/stop_vm $@ || true
+		if ! $(dirname $0)/start_vm $@
 		then
 			echo "Could not start VM";
 			exit 2
@@ -138,7 +138,7 @@ stop_vm_if_not_kept()
 	then
         	echo "Keeping vm $@ alive"
 	else
-        	tests/scripts/stop_vm $@
+        	$(dirname $0)/stop_vm $@
 	fi
 }
 

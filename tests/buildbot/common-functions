@@ -2,11 +2,11 @@
 get_config()
 {
 	echo "Read config from tests/config/default"
-	. tests/config/default
-	if [ -f tests/config/`hostname` ]
+	. $(dirname $0)/config/default
+	if [ -f $(dirname $0)/config/`hostname` ]
 	then
 		echo "Read config from tests/config/`hostname`"
-		 . tests/config/`hostname` 
+		 . $(dirname $0)/config/`hostname` 
 	fi
 	if [ ! -z "$1" ]
 	then
@@ -124,29 +124,4 @@ protect = 0
 gpgcheck = 0
 EOF
 fi
-}
-
-setup_debian_3rdparty_repo()
-{
-if [ -z "$HOST" ] ; then  echo "HOST undefined" ;exit 1; fi
-if [ -z "$DEB3RD" ] ; then  echo "DEB3RD undefined" ; exit 2 ; fi
-if [ -z "$DIST" ] ; then  echo "DIST undefined" ; exit 3 ; fi
-echo "Installing debian 3rd party repo $DEB3RD $DIST on $HOST"
-ssh root@$HOST "echo \"deb $DEB3RD $DIST main\" > /etc/apt/sources.list.d/3rd-party.list"
-wget -q -O - ${DEB3RD}key | ssh root@$HOST "apt-key add -"
-}
-
-setup_redhat_3rdparty_repo()
-{
-if [ -z "$HOST" ] ; then  echo "HOST undefined" ;exit 1; fi
-if [ -z "$RPM3RD" ] ; then  echo "RPM3RD undefined" ; exit 2 ; fi
-echo "Installing redhat 3rd party repo $RPM3RD on $HOST"
-ssh root@$HOST "cat > /etc/yum.repos.d/FusionForge-3rdparty.repo" <<-EOF
-[FusionForge-3rdparty]
-name = Red Hat Enterprise \$releasever - fusionforge.org
-baseurl = $RPM3RD
-enabled = 1
-protect = 0
-gpgcheck = 0
-EOF
 }

@@ -22,24 +22,37 @@
 set -e
 export DEBIAN_FRONTEND=noninteractive
 
-# Build an unofficial package for selenium and install it
-if ! dpkg-query -s selenium >/dev/null 2>&1 ; then
-    version=2.35.0
-    mkdir -p /usr/share/selenium/
-    apt-get install -y wget
-    wget -c http://selenium.googlecode.com/files/selenium-server-standalone-$version.jar \
-	-O /usr/share/selenium/selenium-server.jar
-
-    # Selenium dependencies
-    apt-get -y install default-jre iceweasel
+if [ -z "$1" ]; then
+    echo "Usage:"
+    echo "  $0 src/debian"
+    echo "  $0 deb/debian"
+    echo "  $0 src/centos"
+    echo "  $0 rpm/centos"
+    exit 1
 fi
+
+# Selenium dependencies and test dependencies
+# psmisc for db_reload.sh:killall
+if [ -e /etc/debian_version ]; then
+    apt-get -y install wget default-jre iceweasel
+    apt-get -y install phpunit phpunit-selenium patch psmisc patch
+else
+    yum -y install wget firefox java-1.6.0
+    yum install -y php-phpunit-PHPUnit php-phpunit-PHPUnit-Selenium psmisc patch
+fi
+
+# Install selenium (no packaged version available)
+version=2.39.0
+mkdir -p /usr/share/selenium/
+wget -c http://selenium.googlecode.com/files/selenium-server-standalone-$version.jar \
+    -O /usr/share/selenium/selenium-server.jar
+# Note: with >= 2.39.0:
+# http://selenium-release.storage.googleapis.com/X.YY/selenium-server-standalone-X.YY.Z.jar
 
 service cron stop || true
 
-# Test dependencies
-# psmisc for db_reload.sh:killall
-apt-get -y install phpunit phpunit-selenium patch psmisc
-patch -N /usr/share/php/PHPUnit/Extensions/SeleniumTestCase.php <<'EOF' || true
+# Fix screenshot default black background (/usr/share/{php,pear}) (fix available upstream)
+patch -N /usr/share/*/PHPUnit/Extensions/SeleniumTestCase.php <<'EOF' || true
 --- /usr/share/php/PHPUnit/Extensions/SeleniumTestCase.php-dist	2014-02-10 19:48:34.000000000 +0000
 +++ /usr/share/php/PHPUnit/Extensions/SeleniumTestCase.php	2014-09-01 10:09:38.823051288 +0000
 @@ -1188,7 +1188,7 @@
@@ -53,5 +66,16 @@ patch -N /usr/share/php/PHPUnit/Extensions/SeleniumTestCase.php <<'EOF' || true
                     $this->testId . ".png\n";
 EOF
 
+
+# Setup git+ssh and svn+ssh tests
+mkdir -p ~/.ssh/
+if ! [ -e ~/.ssh/id_rsa.pub ] ; then
+    ssh-keygen -f ~/.ssh/id_rsa -N ''
+    #cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+fi
+if ! [ -e ~/.ssh/config ] || ! grep -q StrictHostKeyChecking ~/.ssh/config ; then
+    echo StrictHostKeyChecking no >> ~/.ssh/config
+fi
+
 # Now, start the functionnal test suite using phpunit and selenium
-/usr/src/fusionforge/tests/scripts/phpunit.sh $@
+$(dirname $0)/../tests/func/phpunit-selenium.sh $@
