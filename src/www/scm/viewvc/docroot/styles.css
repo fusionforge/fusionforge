@@ -3,6 +3,8 @@
 /*******************************/
 
 /*** Standard Tags ***/
+
+/* FusionForge: don't change the outer attributes
 html, body {
   color: #000000;
   background-color: #ffffff;
@@ -34,6 +36,40 @@ table.fixed td {
 tr, td, th { vertical-align: top; }
 th { white-space: nowrap; }
 form { margin: 0; }
+*/
+
+/* FusionForge: ... instead only apply them in context: */
+div.scm {
+  color: #000000;
+  background-color: #ffffff;
+  font-family: sans-serif;
+}
+
+div.scm a:link    { color: #0000ff; }
+div.scm a:visited { color: #880088; }
+div.scm a:active  { color: #0000ff; }
+
+div.scm img { border: none; }
+div.scm table {
+  width: 100%;
+  margin: 0; 
+  border: none;
+}
+div.scm table.auto {
+  width: auto;
+}
+div.scm table.fixed {
+  width: 100%;
+  table-layout: fixed;
+}
+div.scm table.fixed td {
+  overflow: hidden; 
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+div.scm tr, div.scm td, div.scm th { vertical-align: top; }
+div.scm th { white-space: nowrap; }
+div.scm form { margin: 0; }
 
 
 /*** Icons ***/
