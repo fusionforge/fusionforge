@@ -1,6 +1,6 @@
 #!/bin/sh
 # syntax and unit tests (i.e. not func/)
-. tests/scripts/common-functions
+. $(dirname $0)/common-functions
 
 set -e
 
