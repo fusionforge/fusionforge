@@ -27,16 +27,18 @@ set -e
 # Install FusionForge packages
 if [ -e /etc/debian_version ]; then
     export DEBIAN_FRONTEND=noninteractive
+    export UCF_FORCE_CONFFNEW=yes
+    export LANG=C
     backports_deb
     if dpkg-query -s fusionforge >/dev/null 2>&1; then
 	# Already installed, upgrading
-	UCF_FORCE_CONFFNEW=yes LANG=C DEBIAN_FRONTEND=noninteractive apt-get -y dist-upgrade
+	apt-get -y dist-upgrade
     else
 	# Initial installation
-	UCF_FORCE_CONFFNEW=yes LANG=C DEBIAN_FRONTEND=noninteractive apt-get -y install fusionforge
+	apt-get -y install fusionforge
 	
 	# Additional components for testsuite
-	UCF_FORCE_CONFFNEW=yes apt-get install -y fusionforge-shell \
+	apt-get install -y fusionforge-shell \
 	    fusionforge-plugin-scmgit fusionforge-plugin-scmsvn fusionforge-plugin-scmbzr \
 	    fusionforge-plugin-mediawiki fusionforge-plugin-moinmoin \
 	    fusionforge-plugin-blocks locales-all
