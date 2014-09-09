@@ -29,25 +29,6 @@
  * @version   $ID$
  */
 
-define ('SEPARATOR', "\n\t\r\0\x0B");
-
-/**
- *      viewcvs_is_html() - Test if ViewCVS returns HTML.
- *
- *      @return true if the content type of the ViewCVS is text/html.
- */
-function viewcvs_is_html() {
-	$request_uri = getStringFromServer('REQUEST_URI');
-	$query_string = getStringFromServer('QUERY_STRING');
-
-	return (strpos($request_uri,"*checkout*") === false &&
-		strpos($query_string,"view=graphimg") === false &&
-		strpos($query_string,"view=patch") === false &&
-		strpos($query_string,"view=tar") === false &&
-		strpos($request_uri,"*docroot*") === false &&
-		strpos($request_uri,"makepatch=1") === false);
-}
-
 /**
  * make_arg_cmd_safe() - Make strings safe for the command line.
  *

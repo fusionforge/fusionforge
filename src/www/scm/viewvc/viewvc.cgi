@@ -45,7 +45,8 @@ elif os.environ["REPOSITORY_TYPE"] == 'svn':
 
 cfg.general.address = "<a href='mailto:root@"+os.environ["HTTP_HOST"]+"'>root@" + os.environ["HTTP_HOST"]+ "</a>"
 cfg.options.docroot = os.environ["DOCROOT"]
-cfg.options.allow_compress = False
-cfg.options.generate_etags = False
+#cfg.options.allow_compress = False
+#cfg.options.generate_etags = False
+#cfg.options.allowed_views = ['annotate', 'diff', 'markup', 'roots', 'tar', 'co']
 
 viewvc.main(server, cfg)
