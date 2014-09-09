@@ -42,7 +42,7 @@ else
 fi
 
 # Install selenium (no packaged version available)
-version=2.39.0
+version=2.35.0
 mkdir -p /usr/share/selenium/
 wget -c http://selenium.googlecode.com/files/selenium-server-standalone-$version.jar \
     -O /usr/share/selenium/selenium-server.jar
@@ -65,17 +65,6 @@ patch -N /usr/share/*/PHPUnit/Extensions/SeleniumTestCase.php <<'EOF' || true
              return 'Screenshot: ' . $this->screenshotUrl . '/' .
                     $this->testId . ".png\n";
 EOF
-
-
-# Setup git+ssh and svn+ssh tests
-mkdir -p ~/.ssh/
-if ! [ -e ~/.ssh/id_rsa.pub ] ; then
-    ssh-keygen -f ~/.ssh/id_rsa -N ''
-    #cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
-fi
-if ! [ -e ~/.ssh/config ] || ! grep -q StrictHostKeyChecking ~/.ssh/config ; then
-    echo StrictHostKeyChecking no >> ~/.ssh/config
-fi
 
 # Now, start the functionnal test suite using phpunit and selenium
 $(dirname $0)/../tests/func/phpunit-selenium.sh $@

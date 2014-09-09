@@ -444,7 +444,27 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	}
 
 	protected function uploadSshKey () {
-		$keys = file(getenv('HOME').'/.ssh/id_rsa.pub');
+		$sshdir = getenv('HOME') . '/.ssh';
+		if (!file_exists($sshdir)) {
+			mkdir($sshdir, 0777, true);
+		}
+
+		// Avoid OpenSSH host fingerprint prompt
+		$config = $sshdir . '/config';
+		if (!file_exists($config) or
+		    count(preg_grep('/StrictHostKeyChecking/', file($config))) == 0) {
+			$f = fopen($config, 'a');
+			fwrite($f, 'StrictHostKeyChecking no');
+			fclose($f);
+		}
+
+		$privkey = $sshdir . '/id_rsa';
+		$pubkey  = $sshdir . '/id_rsa.pub';
+		if (!file_exists($pubkey)) {
+			system("ssh-keygen -N '' -f $privkey");
+		}
+
+		$keys = file($pubkey);
 		$k = $keys[0];
 		$this->assertEquals(count($keys), 1);
 
