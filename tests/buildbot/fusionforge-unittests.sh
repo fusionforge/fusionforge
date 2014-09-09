@@ -2,7 +2,7 @@
 # syntax and unit tests (i.e. not func/)
 . $(dirname $0)/common-functions
 
-set -e
+set -ex
 
 get_config
 prepare_workspace

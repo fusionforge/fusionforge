@@ -126,12 +126,11 @@ echo "Running PHPunit tests"
 retcode=0
 cd tests
 phpunit --verbose --debug --stop-on-failure --log-junit $SELENIUM_RC_DIR/phpunit-selenium.xml $@ func_tests.php || retcode=$?
-cd ..
+echo "phpunit returned with code $retcode"
+
+set +e
 kill $pid
-# on debian
-killall -9 firefox-bin
-# on centos
-killall -9 firefox
-# kill java stuffs
-killall -9 java
+killall -9 firefox-bin  # debian
+killall -9 firefox      # centos
+killall -9 java         # kill java stuffs
 exit $retcode
