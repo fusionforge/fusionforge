@@ -208,12 +208,12 @@ over it to the project's administrator.");
 
 			system ("bzr init-repo --no-trees $tmp_repo >/dev/null") ;
 			system ("find $tmp_repo/.bzr -type d | xargs chmod g+s") ;
-			system ("chmod -R g+wX,o+rX-w $tmp_repo/.bzr") ;
-			system ("chgrp $unix_group $tmp_repo/.bzr") ;
+			system ("chmod -R g+rwX,o+rX-w $tmp_repo/.bzr") ;
+			system ("chgrp -R $unix_group $tmp_repo/.bzr") ;
 
 			system ("mkdir -p $repo") ;
 			system ("chgrp $unix_group $repo") ;
-			system ("chmod g+s $repo") ;
+			system ("chmod g+ws $repo") ;
 			system ("mv $tmp_repo/.bzr $repo/.bzr");
 			rmdir ($tmp_repo);
 		}
