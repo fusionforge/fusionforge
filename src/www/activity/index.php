@@ -181,6 +181,10 @@ foreach ($show as $showthis) {
 		exit_error(_('Invalid Data Passed to query'), 'home');
 	}
 }
+
+if (count($ids) < 1) {
+	echo $HTML->information(_('No Activity Found'));
+} else {
 ?>
 
 <div id="activity">
@@ -213,173 +217,174 @@ foreach ($show as $showthis) {
 
 <div id="activity_right">
 <?php
-if (count($results) < 1) {
-	echo $HTML->information(_('No Activity Found'));
-} else {
+	if (count($results) < 1) {
+		echo $HTML->information(_('No Activity Found'));
+	} else {
 
-	function date_compare($a, $b)
-	{
-		if ($a['activity_date'] == $b['activity_date']) {
-			return 0;
+		function date_compare($a, $b)
+		{
+			if ($a['activity_date'] == $b['activity_date']) {
+				return 0;
+			}
+			return ($a['activity_date'] > $b['activity_date']) ? -1 : 1;
 		}
-		return ($a['activity_date'] > $b['activity_date']) ? -1 : 1;
-	}
 
-	$cached_perms = array();
-	function check_perm_for_activity($arr) {
-		global $cached_perms;
-		$s = $arr['section'];
-		$ref = $arr['ref_id'];
-		$group_id = $arr['group_id'];
+		$cached_perms = array();
+		function check_perm_for_activity($arr) {
+			global $cached_perms;
+			$s = $arr['section'];
+			$ref = $arr['ref_id'];
+			$group_id = $arr['group_id'];
 
-		if (!isset($cached_perms[$s][$ref])) {
-			switch ($s) {
+			if (!isset($cached_perms[$s][$ref])) {
+				switch ($s) {
+					case 'scm': {
+						$cached_perms[$s][$ref] = forge_check_perm('scm', $group_id, 'read');
+						break;
+					}
+					case 'trackeropen':
+					case 'trackerclose': {
+						$cached_perms[$s][$ref] = forge_check_perm('tracker', $ref, 'read');
+						break;
+					}
+					case 'frsrelease': {
+						$cached_perms[$s][$ref] = forge_check_perm('frs', $group_id, 'read_public');
+						break;
+					}
+					case 'forumpost':
+					case 'news': {
+						$cached_perms[$s][$ref] = forge_check_perm('forum', $ref, 'read');
+						break;
+					}
+					case 'taskopen':
+					case 'taskclose':
+					case 'taskdelete': {
+						$cached_perms[$s][$ref] = forge_check_perm('pm', $ref, 'read');
+						break;
+					}
+					case 'docmannew':
+					case 'docmanupdate':
+					case 'docgroupnew': {
+						$cached_perms[$s][$ref] = forge_check_perm('docman', $group_id, 'read');
+						break;
+					}
+					default: {
+						// Must be a bug somewhere, we're supposed to handle all types
+						$cached_perms[$s][$ref] = false;
+					}
+				}
+			}
+			return $cached_perms[$s][$ref];
+		}
+
+		usort($results, 'date_compare');
+
+		$displayTableTop = 0;
+		$j = 0;
+		$last_day = 0;
+		foreach ($results as $arr) {
+			if (!check_perm_for_activity($arr)) {
+				continue;
+			}
+			if (!$displayTableTop) {
+				$theader = array();
+				$theader[] = _('Time');
+				$theader[] = _('Activity');
+				$theader[] = _('By');
+
+				echo $HTML->listTableTop($theader);
+				$displayTableTop = 1;
+			}
+			if ($last_day != strftime($date_format, $arr['activity_date'])) {
+				//	echo $HTML->listTableBottom($theader);
+				echo '<tr class="tableheading"><td colspan="3">'.strftime($date_format, $arr['activity_date']).'</td></tr>';
+				//	echo $HTML->listTableTop($theader);
+				$last_day=strftime($date_format, $arr['activity_date']);
+			}
+			switch (@$arr['section']) {
 				case 'scm': {
-					$cached_perms[$s][$ref] = forge_check_perm('scm', $group_id, 'read');
+					$icon = html_image('ic/cvs16b.png','','',array('alt'=>_('Source Code')));
+					$url = util_make_link('/scm/'.$arr['ref_id'].$arr['subref_id'],_('scm commit')._(': ').$arr['description']);
 					break;
 				}
-				case 'trackeropen':
+				case 'trackeropen': {
+					$icon = html_image('ic/tracker20g.png','','',array('alt'=>_('Trackers')));
+					$url = util_make_link('/tracker/?func=detail&atid='.$arr['ref_id'].'&aid='.$arr['subref_id'].'&group_id='.$arr['group_id'],_('Tracker Item').' [#'.$arr['subref_id'].'] '.$arr['description'].' '._('Opened'));
+					break;
+				}
 				case 'trackerclose': {
-					$cached_perms[$s][$ref] = forge_check_perm('tracker', $ref, 'read');
+					$icon = html_image('ic/tracker20g.png','','',array('alt'=>_('Trackers')));
+					$url = util_make_link('/tracker/?func=detail&atid='.$arr['ref_id'].'&aid='.$arr['subref_id'].'&group_id='.$arr['group_id'],_('Tracker Item').' [#'.$arr['subref_id'].'] '.$arr['description'].' '._('Closed'));
 					break;
 				}
 				case 'frsrelease': {
-					$cached_perms[$s][$ref] = forge_check_perm('frs', $group_id, 'read_public');
+					$icon = html_image('ic/cvs16b.png','','',array('alt'=>_('Files')));
+					$url = util_make_link('/frs/?release_id='.$arr['subref_id'].'&group_id='.$arr['group_id'],_('FRS Release').' '.$arr['description']);
 					break;
 				}
-				case 'forumpost':
+				case 'forumpost': {
+					$icon = html_image('ic/forum20g.png','','',array('alt'=>_('Forum')));
+					$url = util_make_link('/forum/message.php?msg_id='.$arr['subref_id'].'&group_id='.$arr['group_id'],_('Forum Post').' '.$arr['description']);
+					break;
+				}
 				case 'news': {
-					$cached_perms[$s][$ref] = forge_check_perm('forum', $ref, 'read');
+					$icon = html_image('ic/write16w.png','','',array('alt'=>_('News')));
+					$url = util_make_link('/forum/forum.php?forum_id='.$arr['subref_id'],_('News').' '.$arr['description']);
 					break;
 				}
-				case 'taskopen':
-				case 'taskclose':
+				case 'taskopen': {
+					$icon = html_image('ic/taskman20w.png','','',array('alt'=>_('Tasks')));
+					$url = util_make_link('/pm/task.php?func=detailtask&project_task_id='.$arr['subref_id'].'&group_id='.$arr['group_id'].'&group_project_id='.$arr['ref_id'],_('Tasks').' '.$arr['description']);
+					break;
+				}
+				case 'taskclose': {
+					$icon = html_image('ic/taskman20w.png','','',array('alt'=>_('Tasks')));
+					$url = util_make_link('/pm/task.php?func=detailtask&project_task_id='.$arr['subref_id'].'&group_id='.$arr['group_id'].'&group_project_id='.$arr['ref_id'],_('Tasks').' '.$arr['description']);
+					break;
+				}
+
 				case 'taskdelete': {
-					$cached_perms[$s][$ref] = forge_check_perm('pm', $ref, 'read');
+					$icon = html_image('ic/taskman20w.png','','',array('alt'=>_('Tasks')));
+					$url = util_make_link('/pm/task.php?func=detailtask&project_task_id='.$arr['subref_id'].'&group_id='.$arr['group_id'].'&group_project_id='.$arr['ref_id'],_('Tasks').' '.$arr['description']);
 					break;
 				}
 				case 'docmannew':
-				case 'docmanupdate':
+				case 'docmanupdate': {
+					$icon = html_image('ic/docman16b.png', '', '', array('alt'=>_('Documents')));
+					$url = util_make_link('docman/?group_id='.$arr['group_id'].'&view=listfile&dirid='.$arr['ref_id'],_('Document').' '.$arr['description']);
+					break;
+				}
 				case 'docgroupnew': {
-					$cached_perms[$s][$ref] = forge_check_perm('docman', $group_id, 'read');
+					$icon = html_image('ic/cfolder15.png', '', '', array("alt"=>_('Directory')));
+					$url = util_make_link('docman/?group_id='.$arr['group_id'].'&view=listfile&dirid='.$arr['subref_id'],_('Directory').' '.$arr['description']);
 					break;
 				}
 				default: {
-					// Must be a bug somewhere, we're supposed to handle all types
-					$cached_perms[$s][$ref] = false;
+					$icon = isset($arr['icon']) ? $arr['icon'] : '';
+					$url = '<a href="'.$arr['link'].'">'.$arr['title'].'</a>';
 				}
 			}
+			$cells = array();
+			$cells[][] = date('H:i:s',$arr['activity_date']);
+			$cells[][] = $icon .' '.$url;
+			if (isset($arr['user_name']) && $arr['user_name']) {
+				$cells[][] = util_display_user($arr['user_name'], $arr['user_id'],$arr['realname']);
+			} else {
+				$cells[][] = $arr['realname'];
+			}
+			echo $HTML->multiTableRow(array('style' => $HTML->boxGetAltRowStyle($j++, true)), $cells);
 		}
-		return $cached_perms[$s][$ref];
-	}
-
-	usort($results, 'date_compare');
-
-	$displayTableTop = 0;
-	$j = 0;
-	$last_day = 0;
-	foreach ($results as $arr) {
-		if (!check_perm_for_activity($arr)) {
-			continue;
+		if ($displayTableTop) {
+			echo $HTML->listTableBottom($theader);
 		}
 		if (!$displayTableTop) {
-			$theader = array();
-			$theader[] = _('Time');
-			$theader[] = _('Activity');
-			$theader[] = _('By');
+			echo $HTML->information(_('No Activity Found'));
+		}
+	}
 
-			echo $HTML->listTableTop($theader);
-			$displayTableTop = 1;
-		}
-		if ($last_day != strftime($date_format, $arr['activity_date'])) {
-			//	echo $HTML->listTableBottom($theader);
-			echo '<tr class="tableheading"><td colspan="3">'.strftime($date_format, $arr['activity_date']).'</td></tr>';
-			//	echo $HTML->listTableTop($theader);
-			$last_day=strftime($date_format, $arr['activity_date']);
-		}
-		switch (@$arr['section']) {
-			case 'scm': {
-				$icon = html_image('ic/cvs16b.png','','',array('alt'=>_('Source Code')));
-				$url = util_make_link('/scm/'.$arr['ref_id'].$arr['subref_id'],_('scm commit: ').$arr['description']);
-				break;
-			}
-			case 'trackeropen': {
-				$icon = html_image('ic/tracker20g.png','','',array('alt'=>_('Trackers')));
-				$url = util_make_link('/tracker/?func=detail&atid='.$arr['ref_id'].'&aid='.$arr['subref_id'].'&group_id='.$arr['group_id'],_('Tracker Item').' [#'.$arr['subref_id'].'] '.$arr['description'].' '._('Opened'));
-				break;
-			}
-			case 'trackerclose': {
-				$icon = html_image('ic/tracker20g.png','','',array('alt'=>_('Trackers')));
-				$url = util_make_link('/tracker/?func=detail&atid='.$arr['ref_id'].'&aid='.$arr['subref_id'].'&group_id='.$arr['group_id'],_('Tracker Item').' [#'.$arr['subref_id'].'] '.$arr['description'].' '._('Closed'));
-				break;
-			}
-			case 'frsrelease': {
-				$icon = html_image('ic/cvs16b.png','','',array('alt'=>_('Files')));
-				$url = util_make_link('/frs/?release_id='.$arr['subref_id'].'&group_id='.$arr['group_id'],_('FRS Release').' '.$arr['description']);
-				break;
-			}
-			case 'forumpost': {
-				$icon = html_image('ic/forum20g.png','','',array('alt'=>_('Forum')));
-				$url = util_make_link('/forum/message.php?msg_id='.$arr['subref_id'].'&group_id='.$arr['group_id'],_('Forum Post ').' '.$arr['description']);
-				break;
-			}
-			case 'news': {
-				$icon = html_image('ic/write16w.png','','',array('alt'=>_('News')));
-				$url = util_make_link('/forum/forum.php?forum_id='.$arr['subref_id'],_('News').' '.$arr['description']);
-				break;
-			}
-			case 'taskopen': {
-				$icon = html_image('ic/taskman20w.png','','',array('alt'=>_('Tasks')));
-				$url = util_make_link('/pm/task.php?func=detailtask&project_task_id='.$arr['subref_id'].'&group_id='.$arr['group_id'].'&group_project_id='.$arr['ref_id'],_('Tasks').' '.$arr['description']);
-				break;
-			}
-			case 'taskclose': {
-				$icon = html_image('ic/taskman20w.png','','',array('alt'=>_('Tasks')));
-				$url = util_make_link('/pm/task.php?func=detailtask&project_task_id='.$arr['subref_id'].'&group_id='.$arr['group_id'].'&group_project_id='.$arr['ref_id'],_('Tasks').' '.$arr['description']);
-				break;
-			}
-
-			case 'taskdelete': {
-				$icon = html_image('ic/taskman20w.png','','',array('alt'=>_('Tasks')));
-				$url = util_make_link('/pm/task.php?func=detailtask&project_task_id='.$arr['subref_id'].'&group_id='.$arr['group_id'].'&group_project_id='.$arr['ref_id'],_('Tasks').' '.$arr['description']);
-				break;
-			}
-			case 'docmannew':
-			case 'docmanupdate': {
-				$icon = html_image('ic/docman16b.png', '', '', array('alt'=>_('Documents')));
-				$url = util_make_link('docman/?group_id='.$arr['group_id'].'&view=listfile&dirid='.$arr['ref_id'],_('Document').' '.$arr['description']);
-				break;
-			}
-			case 'docgroupnew': {
-				$icon = html_image('ic/cfolder15.png', '', '', array("alt"=>_('Directory')));
-				$url = util_make_link('docman/?group_id='.$arr['group_id'].'&view=listfile&dirid='.$arr['subref_id'],_('Directory').' '.$arr['description']);
-				break;
-			}
-			default: {
-				$icon = isset($arr['icon']) ? $arr['icon'] : '';
-				$url = '<a href="'.$arr['link'].'">'.$arr['title'].'</a>';
-			}
-		}
-		echo '<tr '. $HTML->boxGetAltRowStyle($j++) . '>
-			<td>'.date('H:i:s',$arr['activity_date']).'</td>
-			<td>'.$icon .' '.$url.'</td><td>';
-		if (isset($arr['user_name']) && $arr['user_name']) {
-			echo util_display_user($arr['user_name'], $arr['user_id'],$arr['realname']);
-		} else {
-			echo $arr['realname'];
-		}
-		echo '</td></tr>';
-	}
-	if ($displayTableTop) {
-		echo $HTML->listTableBottom($theader);
-	}
-	if (!$displayTableTop) {
-		echo $HTML->information(_('No Activity Found'));
-	}
+	echo '</div>';
+	echo '</div>';
 }
-
-echo '</div>';
-echo '</div>';
 
 
 site_project_footer();
