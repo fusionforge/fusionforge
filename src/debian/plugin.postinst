@@ -1,8 +1,6 @@
 #!/bin/sh -e
 
-# Skip if plugin.sh was already removed
 pluginctl=$(forge_get_config source_path)/post-install.d/common/plugin.sh
-if [ ! -x $pluginctl ]; then exit 0; fi
 
 case "$1" in
     configure)
