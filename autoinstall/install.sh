@@ -29,16 +29,17 @@ if [ -e /etc/debian_version ]; then
     export DEBIAN_FRONTEND=noninteractive
     export UCF_FORCE_CONFFNEW=yes
     export LANG=C
+    APT="apt-get -y -o Dpkg::Options::=--force-confnew"
     backports_deb
     if dpkg-query -s fusionforge >/dev/null 2>&1; then
 	# Already installed, upgrading
-	apt-get -y dist-upgrade
+	$APT dist-upgrade
     else
 	# Initial installation
-	apt-get -y install fusionforge
+	$APT install fusionforge
 	
 	# Additional components for testsuite
-	apt-get install -y fusionforge-shell \
+	$APT install fusionforge-shell \
 	    fusionforge-plugin-scmgit fusionforge-plugin-scmsvn fusionforge-plugin-scmbzr \
 	    fusionforge-plugin-mediawiki fusionforge-plugin-moinmoin \
 	    fusionforge-plugin-blocks locales-all
