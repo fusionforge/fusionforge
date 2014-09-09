@@ -34,8 +34,6 @@ require_once dirname(__FILE__).'/../../common/include/env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/sqlparser.php';
 
-echo "Entering  upgrade-db.php\n";
-
 $db_path = forge_get_config('source_path').'/db/';
 $date = -1;
 $version = '';
