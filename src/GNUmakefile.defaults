@@ -20,6 +20,7 @@
 # Using Automake conventions and best practices
 DESTDIR=
 prefix=/usr/local
+bindir=$(prefix)/bin
 pkgdatadir=$(prefix)/share/fusionforge
 localedir=$(prefix)/share/locale
 

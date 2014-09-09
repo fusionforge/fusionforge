@@ -65,20 +65,23 @@ install-common: install-config install-plugin-authbuiltin
 	$(CP_R) cronjobs/scm $(DESTDIR)$(pkgdatadir)/cronjobs/  # no dedicated 'scm' package now
 	$(CP_R) post-install.d/common $(DESTDIR)$(pkgdatadir)/post-install.d/
 	$(CP_R) plugins/env.inc.php $(DESTDIR)$(pkgdatadir)/plugins/
-	$(INSTALL) -d -m 00755 $(DESTDIR)$(prefix)/bin/
-	ln -nfs $(pkgdatadir)/bin/forge_get_config $(DESTDIR)$(prefix)/bin/
-	ln -nfs $(pkgdatadir)/bin/forge_run_job $(DESTDIR)$(prefix)/bin/
-	ln -nfs $(pkgdatadir)/bin/forge_run_plugin_job $(DESTDIR)$(prefix)/bin/
-	ln -nfs $(pkgdatadir)/bin/forge_make_admin $(DESTDIR)$(prefix)/bin/
-	ln -nfs $(pkgdatadir)/bin/forge_set_password $(DESTDIR)$(prefix)/bin/
+	$(INSTALL) -d -m 00755 $(DESTDIR)$(bindir)
+	ln -nfs $(pkgdatadir)/bin/forge_get_config $(DESTDIR)$(bindir)
+	ln -nfs $(pkgdatadir)/bin/forge_run_job $(DESTDIR)$(bindir)
+	ln -nfs $(pkgdatadir)/bin/forge_run_plugin_job $(DESTDIR)$(bindir)
+	ln -nfs $(pkgdatadir)/bin/forge_make_admin $(DESTDIR)$(bindir)
+	ln -nfs $(pkgdatadir)/bin/forge_set_password $(DESTDIR)$(bindir)
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(log_path)/
 
 install-db-local: install-db
 install-db: install-base-dirs
 	$(CP_R) db $(DESTDIR)$(pkgdatadir)/
 	$(CP_R) cronjobs/db $(DESTDIR)$(pkgdatadir)/cronjobs/
-	$(CP_R) etc/cron.d/fusionforge-db $(DESTDIR)$(sysconfdir)/cron.d/
 	$(CP_R) post-install.d/db $(DESTDIR)$(pkgdatadir)/post-install.d/
+	if [ ! -e $(DESTDIR)$(sysconfdir)/cron.d/fusionforge-db ]; then \
+		sed 's,@bindir@,$(bindir),' etc/cron.d/fusionforge-db \
+			> $(DESTDIR)$(sysconfdir)/cron.d/fusionforge-db; \
+	fi
 
 install-web: install-base-dirs
 	$(CP_R) vendor www $(DESTDIR)$(pkgdatadir)/
@@ -92,13 +95,19 @@ install-web: install-base-dirs
 
 install-web-vhosts: install-base-dirs
 	$(CP_R) cronjobs/web-vhosts $(DESTDIR)$(pkgdatadir)/cronjobs/
-	$(CP_R) etc/cron.d/fusionforge-web-vhosts $(DESTDIR)$(sysconfdir)/cron.d/
+	if [ ! -e $(DESTDIR)$(sysconfdir)/cron.d/fusionforge-web-vhosts ]; then \
+		sed 's,@bindir@,$(bindir),' etc/cron.d/fusionforge-web-vhosts \
+			> $(DESTDIR)$(sysconfdir)/cron.d/fusionforge-web-vhosts; \
+	fi
 #	TODO: only install 40-vhosts-extra.conf and httpd.vhosts with this module
 
 install-shell: install-base-dirs
 	$(CP_R) cronjobs/shell $(DESTDIR)$(pkgdatadir)/cronjobs/
-	$(CP_R) etc/cron.d/fusionforge-shell $(DESTDIR)$(sysconfdir)/cron.d/
 	$(CP_R) post-install.d/shell $(DESTDIR)$(pkgdatadir)/post-install.d/
+	if [ ! -e $(DESTDIR)$(sysconfdir)/cron.d/fusionforge-shell ]; then \
+		sed 's,@bindir@,$(bindir),' etc/cron.d/fusionforge-shell \
+			> $(DESTDIR)$(sysconfdir)/cron.d/fusionforge-shell; \
+	fi
 
 install-mta-postfix: install-base-dirs
 	$(CP_R) post-install.d/mta-postfix $(DESTDIR)$(pkgdatadir)/post-install.d/
@@ -108,7 +117,10 @@ install-mta-exim4: install-base-dirs
 
 install-lists: install-base-dirs
 	$(CP_R) cronjobs/lists $(DESTDIR)$(pkgdatadir)/cronjobs/
-	$(CP_R) etc/cron.d/fusionforge-lists $(DESTDIR)$(sysconfdir)/cron.d/
+	if [ ! -e $(DESTDIR)$(sysconfdir)/cron.d/fusionforge-lists ]; then \
+		sed 's,@bindir@,$(bindir),' etc/cron.d/fusionforge-lists \
+			> $(DESTDIR)$(sysconfdir)/cron.d/fusionforge-lists; \
+	fi
 
 install-base: install-base-dirs install-common install-web install-db
 
@@ -125,9 +137,12 @@ install-plugin-%: plugins/% install-base-dirs
 	if [ -d plugins/$*/etc/plugins/$* ]; then \
 		$(CP_R) --no-clobber plugins/$*/etc/plugins/$* $(DESTDIR)$(config_path)/plugins/; \
 	fi
-	if [ -d plugins/$*/etc/cron.d ]; then \
-		$(CP_R) --no-clobber plugins/$*/etc/cron.d/* $(DESTDIR)$(sysconfdir)/cron.d/; \
-	fi
+	for i in $$(ls plugins/$*/etc/cron.d/* 2>/dev/null); do \
+		if [ ! -e $(DESTDIR)$(sysconfdir)/cron.d/$$(basename $$i) ]; then \
+			sed 's,@bindir@,$(bindir),' $$i \
+				> $(DESTDIR)$(sysconfdir)/cron.d/$$(basename $$i); \
+		fi; \
+	done
 #	Custom install
 	if [ -e plugins/$*/GNUmakefile ]; then $(MAKE) -C plugins/$*/ install; fi
 
