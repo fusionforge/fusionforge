@@ -84,21 +84,21 @@ purge_libnss_pgsql(){
 configure_nsswitch()
 {
     if ! grep -q '^passwd:.*pgsql' /etc/nsswitch.conf ; then
-	perl -pi -e "s/^(passwd:[^#\n]*)([^\n]*)/\1 pgsql \2#Added by GForge install\n#Comment by GForge install#\1\2/gs" /etc/nsswitch.conf
+	perl -pi -e "s/^(passwd:[^#\n]*)([^\n]*)/\1 pgsql \2#Added by FusionForge install\n#Comment by FusionForge install#\1\2/gs" /etc/nsswitch.conf
     fi
     if ! grep -q '^group:.*pgsql' /etc/nsswitch.conf ; then
-	perl -pi -e "s/^(group:[^#\n]*)([^\n]*)/\1 pgsql \2#Added by GForge install\n#Comment by GForge install#\1\2/gs" /etc/nsswitch.conf
+	perl -pi -e "s/^(group:[^#\n]*)([^\n]*)/\1 pgsql \2#Added by FusionForge install\n#Comment by FusionForge install#\1\2/gs" /etc/nsswitch.conf
     fi
     if ! grep -q '^shadow:.*pgsql' /etc/nsswitch.conf ; then
-	perl -pi -e "s/^(shadow:[^#\n]*)([^\n]*)/\1 pgsql \2#Added by GForge install\n#Comment by GForge install#\1\2/gs" /etc/nsswitch.conf
+	perl -pi -e "s/^(shadow:[^#\n]*)([^\n]*)/\1 pgsql \2#Added by FusionForge install\n#Comment by FusionForge install#\1\2/gs" /etc/nsswitch.conf
     fi
 }
 
 # Revert /etc/nsswitch.conf
 remove_nsswitch()
 {
-    sed -i -e '/^.*#Added by GForge install/d' /etc/nsswitch.conf
-    sed -i -e 's/#Comment by GForge install#//' /etc/nsswitch.conf
+    sed -i -e '/^.*#Added by FusionForge install/d' /etc/nsswitch.conf
+    sed -i -e 's/#Comment by FusionForge install#//' /etc/nsswitch.conf
 }
 
 configure_nscd()
