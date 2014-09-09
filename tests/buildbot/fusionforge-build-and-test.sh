@@ -57,10 +57,10 @@ else
     ssh root@$HOST "yum install -y rsync"
 fi
 rsync -av --delete autoinstall src tests root@$HOST:/usr/src/fusionforge/
-ssh root@$HOST "/usr/src/fusionforge/autoinstall/build.sh"
 if [ $INSTALL_METHOD = "src" ]; then
     ssh root@$HOST "/usr/src/fusionforge/autoinstall/install-src.sh"
 else
+    ssh root@$HOST "/usr/src/fusionforge/autoinstall/build.sh"
     ssh root@$HOST "/usr/src/fusionforge/autoinstall/install.sh"
 fi
 
