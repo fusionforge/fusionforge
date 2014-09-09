@@ -81,7 +81,7 @@ case "$1" in
 	
 	# Enable required modules
 	if [ -x /usr/sbin/a2enmod ]; then
-	    a2enmod version || true  # opensuse..
+	    a2enmod version 2>/dev/null || true  # opensuse..
 	    a2enmod php5
 	    a2enmod ssl
 	    a2enmod env
@@ -90,9 +90,9 @@ case "$1" in
 	    a2enmod alias
 	    a2enmod dir
 	    a2enmod vhost_alias
+	    a2enmod cgi  # ViewVC bootstrap and gitweb
 	    #a2enmod proxy
 	    #a2enmod proxy_http
-	    #a2enmod cgi
 	else
 	    echo "TODO: enable Apache modules"
 	fi
