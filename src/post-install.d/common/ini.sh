@@ -23,9 +23,10 @@ source_path=$(forge_get_config source_path)
 config_path=$(forge_get_config config_path)
 
 # TODO: support 'db_get @PACKAGE@/shared/web_host' ?
+hostname=$(hostname -f || hostname)
 if [ ! -e $config_path/config.ini.d/post-install.ini ]; then \
 	sed $source_path/templates/post-install.ini \
-		-e "s,@web_host@,$(hostname -f)," \
+		-e "s,@web_host@,$hostname," \
 		> $config_path/config.ini.d/post-install.ini; \
 fi
 
