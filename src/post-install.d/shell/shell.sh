@@ -79,6 +79,17 @@ purge_libnss_pgsql(){
     rm -f /etc/nss-pgsql.conf /etc/nss-pgsql-root.conf
 }
 
+configure_pam() {
+    # Collaborative umask 0022 -> 0002
+    if ! grep -q '^session\s*optional\s*pam_umask.so.*' /etc/pam.d/sshd; then
+	echo 'session    optional     pam_umask.so umask=002  # FusionForge' >> /etc/pam.d/sshd
+    fi
+}
+
+remove_pam() {
+    sed -i -e '/.* # FusionForge/d' /etc/pam.d/sshd
+}
+
 # Modify /etc/nsswitch.conf
 # Not using UCF since we're sed-ing an existing file
 configure_nsswitch()
@@ -115,9 +126,11 @@ case "$1" in
 	configure_libnss_pgsql
 	configure_nsswitch
 	configure_nscd
+	configure_pam
 	;;
     remove)
 	remove_nsswitch
+	remove_pam
 	;;
     purge)
 	# note: can't be called from Debian's postrm - rely on ucfq(1)

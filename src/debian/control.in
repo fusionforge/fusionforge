@@ -102,7 +102,7 @@ Description: collaborative development tool - web vhosts (using Apache)
 
 Package: fusionforge-shell
 Architecture: all
-Depends: fusionforge-common (=${source:Version}), php5-cli, libnss-pgsql2, openssh-server, unscd | nscd, ucf, ${misc:Depends}
+Depends: fusionforge-common (=${source:Version}), php5-cli, libnss-pgsql2, openssh-server, unscd | nscd, libpam-modules, ucf, ${misc:Depends}
 Description: collaborative development tool - shell accounts (using PostgreSQL)
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
