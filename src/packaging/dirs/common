@@ -1,5 +1,5 @@
 bin
-@CONFIG_PATH@/config.ini.d
+etc/@PACKAGE@/config.ini.d
 @CONFIG_PATH@/templates
 @BINARY_PATH@
 @SOURCE_PATH@/lib
