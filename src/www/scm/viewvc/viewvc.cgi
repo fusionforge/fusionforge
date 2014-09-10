@@ -9,9 +9,10 @@ LIBRARY_GLOBS = (
   r"/usr/lib/viewvc/lib",  # Debian
   r"/usr/lib/python2.?/site-packages/viewvc/lib",  # Fedora/CentOS
   r"/srv/viewvc/lib",  # openSUSE
+  r"/usr/share/viewvc/lib",  # mageia
 )
 CONF_GLOBS = (
-  r"/etc/viewvc/viewvc.conf",  # Debian/Fedora/CentOS
+  r"/etc/viewvc/viewvc.conf",  # Debian/Fedora/CentOS/mageia
   r"/srv/viewvc/viewvc.conf",  # openSUSE
 )
 
