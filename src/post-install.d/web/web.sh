@@ -35,7 +35,7 @@ case "$1" in
 
 	cd $source_path/templates/
 	for i in httpd.conf $(ls httpd.conf.d/*); do
-	    if [ ! -e $DESTDIR$config_path/$i ]; then
+	    if [ ! -e $DESTDIR$config_path/$i -o $i = "post-install-secrets.inc" ]; then
 		$source_path/post-install.d/web/expand-conf.php $i $DESTDIR$config_path/$i
 	    fi
 	    case $i in
