@@ -155,7 +155,7 @@ if (forge_get_config('require_unique_email')) {
     </label>
 </p>
 <p>
-<?php echo _('Password (min. 6 chars)').utils_requiredField()._(':'); ?>
+<?php echo _('Password (min. 6 chars)').utils_requiredField()._(':'); ?><br />
     <label for="password1">
         <input id="password1" type="password" required="required" name="password1"/>
     </label>
@@ -180,7 +180,7 @@ if (forge_get_config('require_unique_email')) {
     </label>
 </p>
 <p>
-<?php echo _('Last Name').utils_requiredField()._(':'); ?>
+<?php echo _('Last Name').utils_requiredField()._(':'); ?><br />
     <label for="lastname">
         <input id="lastname" required="required" size="30" type="text" name="lastname"
                value="<?php print(htmlspecialchars($lastname)); ?>"/>
