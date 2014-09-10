@@ -31,7 +31,7 @@
 
 // make sure we're not compressing output if we are making a tarball
 if (isset($_GET['view']) && $_GET['view'] == 'tar') {
-	$no_gz_buffer=true;
+	$no_gz_buffer = true;
 }
 
 require_once '../env.inc.php';
@@ -83,6 +83,10 @@ $external_scm = !forge_get_config('scm_single_host');
 
 if (!forge_check_perm('scm', $Group->getID(), 'read')) {
 	exit_permission_denied('scm');
+}
+
+if (isset($_GET['view']) && ($_GET['view'] == 'tar' || $_GET['view'] == 'co')) {
+	$sysdebug_enable = false;
 }
 
 if ($external_scm) {
@@ -159,6 +163,8 @@ if (isset($content_type) && strpos($content_type, 'text/html') === 0) {
 		'group'=>$Group->getID()));
 	echo $body;
 	scm_footer();
+} elseif (isset($content_type)) {
+	echo $body;
 } else {
 	scm_header(array('title'=>_("SCM Repository"),
 		'group'=>$Group->getID()));
