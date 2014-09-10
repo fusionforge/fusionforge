@@ -15,7 +15,7 @@ SetEnv FORGE_CONFIG_PATH "{core/config_path}"
 
 # Define configuration/env variables for passing passwords and other secrets to PHP
 <Directory {core/source_path}/www>
-  Include {core/config_path}/httpd.conf.d/secrets.inc
+  Include {core/config_path}/httpd.conf.d/post-install-secrets.inc
 </Directory>
 
 <Location /projects>
