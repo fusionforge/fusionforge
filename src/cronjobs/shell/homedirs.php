@@ -136,9 +136,11 @@ while ($row = pg_fetch_array($res)) {
 
 	$ghome = $gpfx . '/' . $groupname;
 	if (!is_dir($ghome)) {
-		@mkdir($ghome);
+		@mkdir($ghome);  // perms not defined here because of umask
+		chmod($ghome, 02771);  // teamwork + access to htdocs/ for apache
 		/* this is safe as this directory still belongs to root */
 		@mkdir($ghome . '/htdocs');
+		chmod($ghome . '/htdocs', 02775);  // access to public pages
 		@mkdir($ghome . '/cgi-bin');
 
 		/* write substituted template to group home */
@@ -161,8 +163,8 @@ while ($row = pg_fetch_array($res)) {
 			@mkdir($ghome . '/incoming');
 		}
 
-		//system('chmod -R ug=rwX,o=rX ' . $ghome);
-		system('chown -R ' . forge_get_config('apache_user') . ':' .$groupname. ' ' . $ghome);
+		system("chown -R root:$groupname $ghome");
+		system("chmod -R g+w $ghome");
 	}
 }
 
