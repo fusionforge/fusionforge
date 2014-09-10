@@ -40,7 +40,7 @@ class Widget_MyMonitoredFp extends Widget {
 			"WHERE groups.group_id=frs_package.group_id ".
 			"AND groups.status = 'A' ".
 			"AND frs_package.package_id=filemodule_monitor.filemodule_id ".
-			"AND filemodule_monitor.user_id=$1";
+			"AND filemodule_monitor.user_id=$1 ";
 		$um = UserManager::instance();
 		$current_user = $um->getCurrentUser();
 		if ($current_user->getStatus()=='S') {
