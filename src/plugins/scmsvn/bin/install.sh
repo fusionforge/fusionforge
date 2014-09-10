@@ -18,6 +18,17 @@ case "$1" in
 	else
 	    echo "TODO: xinetd support"
 	fi
+
+	# Work-around memory leak in mod_dav_svn
+	for conf in /etc/apache2/apache2.conf /etc/httpd/conf/httpd.conf \
+	    /etc/apache2/server-tuning.conf; do
+	    if [ -e $conf ] && type augtool >/dev/null 2>&1; then
+		val=$(augtool "print /files$conf/IfModule[arg='mpm_worker_module' or arg='worker.c']/directive[.='MaxRequestsPerChild']/arg" | sed 's/^.*= "\(.*\)"/\1/')
+		if [ "$val" = "0" ]; then
+		    augtool --autosave "set /files$conf/IfModule[arg='mpm_worker_module' or arg='worker.c']/directive[.='MaxRequestsPerChild']/arg 5000"
+		fi
+	    fi
+	done
 	;;
 
     remove)
