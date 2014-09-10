@@ -234,6 +234,8 @@ integrated into one web site and managed through a web interface.
 
 This package controls the interaction between FusionForge and Mailman.
 %files lists -f lists.rpmfiles
+%post lists
+%{_datadir}/%{name}/post-install.d/lists/lists.sh configure
 
 
 @plugins@

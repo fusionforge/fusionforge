@@ -117,6 +117,7 @@ install-mta-exim4: install-base-dirs
 
 install-lists: install-base-dirs
 	$(CP_R) cronjobs/lists $(DESTDIR)$(pkgdatadir)/cronjobs/
+	$(CP_R) post-install.d/lists $(DESTDIR)$(pkgdatadir)/post-install.d/
 	if [ ! -e $(DESTDIR)$(sysconfdir)/cron.d/fusionforge-lists ]; then \
 		sed 's,@bindir@,$(bindir),' etc/cron.d/fusionforge-lists \
 			> $(DESTDIR)$(sysconfdir)/cron.d/fusionforge-lists; \
@@ -167,6 +168,8 @@ post-install-web:
 
 post-install-shell:
 	$(post_source_path)/post-install.d/shell/shell.sh configure
+post-install-lists:
+	$(post_source_path)/post-install.d/lists/lists.sh configure
 
 PLUGINS_INSTALLED:=$(shell cd $(post_source_path)/plugins 2>/dev/null && find * -maxdepth 0 -type d)
 PLUGINS_POST_INSTALL_TARGETS=$(addprefix post-install-plugin-,$(PLUGINS_INSTALLED))
