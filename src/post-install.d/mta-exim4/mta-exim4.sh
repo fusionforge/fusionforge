@@ -24,11 +24,24 @@ set -e
 
 ####
 # Handle the three configuration types (unsplit, split, manual)
-cfgs_exim4_main="/etc/exim4/exim4.conf.template /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs"
-cfgs_exim4_router="/etc/exim4/exim4.conf.template" # + /etc/exim4/conf.d/router/01_fusionforge_forwards
+# Note: all are available in Debian; CentOS is manual only
+cfgs_exim4_main=''
+cfgs_exim4_router=''
+if [ -e /etc/exim4/exim4.conf.template ]; then
+    cfgs_exim4_main="$cfgs_exim4_main /etc/exim4/exim4.conf.template"
+    cfgs_exim4_router="$cfgs_exim4_router /etc/exim4/exim4.conf.template"
+fi
+if [ -e /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs ]; then
+    cfgs_exim4_main="$cfgs_exim4_main /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs"
+    # + /etc/exim4/conf.d/router/01_fusionforge_forwards entirely generated
+fi
 if [ -e /etc/exim4/exim4.conf ]; then
     cfgs_exim4_main="$cfgs_exim4_main /etc/exim4/exim4.conf"
     cfgs_exim4_router="$cfgs_exim4_router /etc/exim4/exim4.conf"
+fi
+if [ -e /etc/exim/exim.conf ]; then
+    cfgs_exim4_main="$cfgs_exim4_main /etc/exim/exim.conf"
+    cfgs_exim4_router="$cfgs_exim4_router /etc/exim/exim.conf"
 fi
 
 case "$1" in
@@ -59,8 +72,8 @@ EOF
 	done
 
 	# Router configuration
-	# Stand-alone file:
-	cat <<EOF > /etc/exim4/conf.d/router/01_fusionforge_forwards
+	block=$(mktemp)
+	cat <<EOF > $block
 ### BEGIN FUSIONFORGE BLOCK -- DO NOT EDIT ###
 # You may move this block around to accomodate your local needs as long as you
 # keep it in the Directors Configuration section (between the second and the
@@ -164,6 +177,10 @@ forward_for_gforge_lists_unsubscribe:
   group = nogroup
 ### END FUSIONFORGE BLOCK -- DO NOT EDIT
 EOF
+	# Stand-alone file:
+	if [ -d /etc/exim4/conf.d/router/ ]; then
+	    cp $block /etc/exim4/conf.d/router/01_fusionforge_forwards
+	fi
 	# Add the same in the unsplit big file(s)
 	for i in $cfgs_exim4_router; do
 	    if ! grep -q '^### BEGIN FUSIONFORGE BLOCK' $i; then
@@ -174,8 +191,9 @@ EOF
 		EOF
 	    fi
 	    sed -i -e '/^### BEGIN FUSIONFORGE BLOCK/,/^### END FUSIONFORGE BLOCK/ { ' \
-		-e 'ecat' -e 'd }' $i < /etc/exim4/conf.d/router/01_fusionforge_forwards
+		-e 'ecat' -e 'd }' $i < $block
 	done
+	rm -f $block
 	;;
     
     remove)
