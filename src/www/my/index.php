@@ -48,6 +48,9 @@ $sql = "SELECT l.*
 		";
 $res = db_query_params($sql,array('u', $user->getID()));
 $layout_id = db_result($res, 0 , 'id');
+if (!$layout_id) {
+	$layout_id = 1;
+}
 
 $ap = html_ap();
 echo html_ao('ul', array('class' => 'widget_toolbar'));
