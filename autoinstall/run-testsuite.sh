@@ -33,9 +33,10 @@ fi
 
 # Selenium dependencies and test dependencies
 # psmisc for db_reload.sh:killall
+# rsyslog to get e.g. sshd error log
 if [ -e /etc/debian_version ]; then
     apt-get -y install wget default-jre iceweasel
-    apt-get -y install phpunit phpunit-selenium patch psmisc patch
+    apt-get -y install phpunit phpunit-selenium patch psmisc patch rsyslog
 else
     yum -y install wget firefox java-1.6.0
     yum install -y php-phpunit-PHPUnit php-phpunit-PHPUnit-Selenium psmisc patch
