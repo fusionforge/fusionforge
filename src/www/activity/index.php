@@ -372,7 +372,7 @@ if (count($ids) < 1) {
 			} else {
 				$cells[][] = $arr['realname'];
 			}
-			echo $HTML->multiTableRow(array('style' => $HTML->boxGetAltRowStyle($j++, true)), $cells);
+			echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($j++, true)), $cells);
 		}
 		if ($displayTableTop) {
 			echo $HTML->listTableBottom($theader);
