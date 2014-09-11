@@ -1,5 +1,4 @@
 <?php
-
 /**
  * FusionForge ViewCVS PHP wrapper.
  *
@@ -149,9 +148,6 @@ if (count($exploded_content) > 1) {
 } else {
 	$body = $content;
 }
-
-
-
 
 if (!isset($_GET['view'])) {
 	$_GET['view'] = 'none';
