@@ -187,6 +187,13 @@ class Widget_ProjectDocumentsActivity extends Widget {
 							xaxis: {
 								renderer: jQuery.jqplot.CategoryAxisRenderer,
 								ticks: ticks,
+							},
+							yaxis: {
+								min: 0,
+								tickInterval: 1,
+								tickOptions: {
+									formatString: \'%d\',
+								},
 							}
 						}
 					});
