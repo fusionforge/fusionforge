@@ -118,9 +118,41 @@ class Widget_ProjectDocumentsActivity extends Widget {
 		$activitysArray[] = $dm->getActivity($sections, $begin3, $end3);
 		$activitysArray[] = $dm->getActivity($sections, $begin2, $end2);
 		$activitysArray[] = $dm->getActivity($sections, $begin1, $end1);
-		if ( $activitysArray[0]['docmannew'] + $activitysArray[1]['docmannew'] + $activitysArray[2]['docmannew'] + $activitysArray[3]['docmannew'] +
-			$activitysArray[0]['docmanupdate'] + $activitysArray[1]['docmanupdate'] + $activitysArray[2]['docmanupdate'] + $activitysArray[3]['docmanupdate'] +
-			$activitysArray[0]['docgroupnew'] + $activitysArray[1]['docgroupnew'] + $activitysArray[2]['docgroupnew'] + $activitysArray[3]['docgroupnew'] ) {
+		switch ($this->_statistic_show) {
+			case 'F': {
+				$visibility = $activitysArray[0]['docmannew'] + $activitysArray[1]['docmannew'] + $activitysArray[2]['docmannew'] + $activitysArray[3]['docmannew'];
+
+				break;
+			}
+			case 'U': {
+				$visibility = $activitysArray[0]['docmanupdate'] + $activitysArray[1]['docmanupdate'] + $activitysArray[2]['docmanupdate'] + $activitysArray[3]['docmanupdate'];
+
+				break;
+			}
+			case 'D': {
+				$visibility = $activitysArray[0]['docgroupnew'] + $activitysArray[1]['docgroupnew'] + $activitysArray[2]['docgroupnew'] + $activitysArray[3]['docgroupnew'];
+
+				break;
+			}
+			case 'FU': {
+				$visibility = $activitysArray[0]['docmannew'] + $activitysArray[1]['docmannew'] + $activitysArray[2]['docmannew'] + $activitysArray[3]['docmannew'] +
+						$activitysArray[0]['docmanupdate'] + $activitysArray[1]['docmanupdate'] + $activitysArray[2]['docmanupdate'] + $activitysArray[3]['docmanupdate'];
+
+				break;
+			}
+			case 'FD': {
+				$visibility = $activitysArray[0]['docmannew'] + $activitysArray[1]['docmannew'] + $activitysArray[2]['docmannew'] + $activitysArray[3]['docmannew'] +
+						$activitysArray[0]['docgroupnew'] + $activitysArray[1]['docgroupnew'] + $activitysArray[2]['docgroupnew'] + $activitysArray[3]['docgroupnew'];
+
+				break;
+			}
+			default: {
+				$visibility = $activitysArray[0]['docmannew'] + $activitysArray[1]['docmannew'] + $activitysArray[2]['docmannew'] + $activitysArray[3]['docmannew'] +
+						$activitysArray[0]['docmanupdate'] + $activitysArray[1]['docmanupdate'] + $activitysArray[2]['docmanupdate'] + $activitysArray[3]['docmanupdate'] +
+						$activitysArray[0]['docgroupnew'] + $activitysArray[1]['docgroupnew'] + $activitysArray[2]['docgroupnew'] + $activitysArray[3]['docgroupnew'];
+			}
+		}
+		if ($visibility) {
 			echo '<script type="text/javascript">//<![CDATA['."\n";
 			switch($this->_statistic_show) {
 				case 'F':
