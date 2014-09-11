@@ -163,17 +163,11 @@ switch ($_GET['view']) {
 				case (preg_match('/text\/.*/', $content_type) ? true : false):
 				case (preg_match('/.*\/javascript/', $content_type) ? true : false): {
 					header('Content-Type: text/plain');
-					echo $body;
-					break;
-				}
-				default: {
-					echo $body;
 					break;
 				}
 			}
-		} else {
-			echo $body;
 		}
+		echo $body;
 		break;
 	}
 	default: {
