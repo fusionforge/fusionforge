@@ -119,6 +119,7 @@ foreach(util_result_column_to_array($res,0) as $uname) {
 	$uhome = "$hpfx/$uname/";
 	if (!isset($dirs[$uhome])) {
 		mkdir($uhome);
+		chmod($uhome, 0755);
 		chown($uhome, $uname);
 		chgrp($uhome, USER_DEFAULT_GROUP);
 	}
