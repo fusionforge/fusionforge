@@ -85,10 +85,6 @@ if (!forge_check_perm('scm', $Group->getID(), 'read')) {
 	exit_permission_denied('scm');
 }
 
-if (isset($_GET['view']) && ($_GET['view'] == 'tar' || $_GET['view'] == 'co')) {
-	$sysdebug_enable = false;
-}
-
 if ($external_scm) {
 	//$server_script = "/cgi-bin/viewcvs.cgi";
 	$server_script = $GLOBALS["sys_path_to_scmweb"]."/viewcvs.cgi";
@@ -154,22 +150,46 @@ if (count($exploded_content) > 1) {
 	$body = $content;
 }
 
-if (isset($content_type) && strpos($content_type, 'text/html') === 0) {
-	// If we output html and we found the mbstring extension, we
-	// should try to encode the output of ViewCVS in UTF-8
-	if ($charset != 'UTF-8' && extension_loaded('mbstring'))
-		$content = mb_convert_encoding($content, 'UTF-8', $encoding);
-	scm_header(array('title'=>_("SCM Repository"),
-		'group'=>$Group->getID()));
-	echo $body;
-	scm_footer();
-} elseif (isset($content_type)) {
-	echo $body;
-} else {
-	scm_header(array('title'=>_("SCM Repository"),
-		'group'=>$Group->getID()));
-	echo $body;
-	scm_footer();
+
+
+
+if (!isset($_GET['view'])) {
+	$_GET['view'] = 'none';
+}
+
+switch ($_GET['view']) {
+	case 'tar':
+	case 'co':
+	case 'patch': {
+		$sysdebug_enable = false;
+		if (isset($content_type)) {
+			switch ($content_type) {
+				case 'text/html':
+				case 'application/javascript': {
+					echo htmlentities($body);
+					break;
+				}
+				default: {
+					echo $body;
+					break;
+				}
+			}
+		} else {
+			echo $body;
+		}
+		break;
+	}
+	default: {
+		// If we output html and we found the mbstring extension, we
+		// should try to encode the output of ViewCVS in UTF-8
+		if ($charset != 'UTF-8' && extension_loaded('mbstring'))
+			$body = mb_convert_encoding($body, 'UTF-8', $encoding);
+		scm_header(array('title'=>_("SCM Repository"),
+			'group'=>$Group->getID()));
+		echo $body;
+		scm_footer();
+		break;
+	}
 }
 
 // Local Variables:
