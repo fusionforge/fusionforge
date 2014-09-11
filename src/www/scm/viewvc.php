@@ -160,9 +160,10 @@ switch ($_GET['view']) {
 		$sysdebug_enable = false;
 		if (isset($content_type)) {
 			switch ($content_type) {
-				case 'text/html':
-				case 'application/javascript': {
-					echo htmlentities($body);
+				case (preg_match('/text\/.*/', $content_type) ? true : false):
+				case (preg_match('/.*\/javascript/', $content_type) ? true : false): {
+					header('Content-Type: text/plain');
+					echo $body;
 					break;
 				}
 				default: {
