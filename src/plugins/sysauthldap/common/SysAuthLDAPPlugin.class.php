@@ -34,12 +34,17 @@ forge_define_config_item('password', 'sysauthldap', '');
 setconfigfromenv ('sysauthldap', 'ldap_password',
 			 'GForgePluginSysAuthLdapPasswd', NULL) ;
 
+require_once $gfcommon.'include/SysAuthPlugin.class.php';
+
 class SysAuthLDAPPlugin extends SysAuthPlugin {
 	function SysAuthLDAPPlugin () {
 		$this->SysAuthPlugin() ;
 		$this->name = "sysauthldap" ;
-		$this->text = "System authentication via PostgreLDAP";
-
+		$this->text = _("System authentication via PostgreLDAP");
+		$this->pkg_desc =
+_("This plugin maintains data about users, groups and memberships in an
+LDAP directory that can be used for NSS/PAM system authentication (or
+for other uses).");
 		$this->ldap_conn = NULL;
 		$this->user_suffix = "Users";
 		$this->group_suffix = "Projects";

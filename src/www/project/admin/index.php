@@ -69,6 +69,8 @@ if (getStringFromRequest('submit')) {
 	$addTags = getArrayFromRequest('addTags');
 	$new_doc_address = getStringFromRequest('new_doc_address');
 	$send_all_docs = getStringFromRequest('send_all_docs');
+	$new_frs_address = getStringFromRequest('new_frs_address');
+	$send_all_frs = getStringFromRequest('send_all_frs');
 
 	if (trim($tags) != "") {
 		$tags .= ",";
@@ -97,7 +99,9 @@ if (getStringFromRequest('submit')) {
 		$use_stats,
 		$tags,
 		$use_activity,
-		0
+		0,
+		$new_frs_address,
+		$send_all_frs
 	);
 
 	//100 $logo_image_id
@@ -249,17 +253,42 @@ if(forge_get_config('use_news')) {
 <?php
 }
 
+if ((forge_get_config('use_docman') && $group->usesDocman()) || (forge_get_config('use_frs') && $group->usesFRS())) {
+	echo html_e('h2', array(), _('Notifications setup'));
+}
+
 if(forge_get_config('use_docman')) {
 ?>
 <input type="hidden" name="use_docman" value="<?php echo ($group->usesDocman() ? '1' : '0'); ?>" />
-<p>
-<?php echo _('If you wish, you can provide default email addresses to which new submissions will be sent') ?>.<br />
-<strong><?php echo _('New Document Submissions')._(':'); ?></strong><br />
-<input type="email" name="new_doc_address" value="<?php echo $group->getDocEmailAddress(); ?>" size="40" maxlength="250" />
+<?php
+	if ($group->usesDocman()) {
+?>
+	<p>
+	<?php echo _('If you wish, you can provide default email addresses to which new submissions (documents or folders) will be sent') ?>.<br />
+	<strong><?php echo _('New document or folder Submissions')._(':'); ?></strong><br />
+	<input type="email" name="new_doc_address" value="<?php echo $group->getDocEmailAddress(); ?>" size="40" maxlength="250" />
+	<?php echo _('(send on all updates)') ?>
+	<input type="checkbox" name="send_all_docs" value="1" <?php echo c($group->docEmailAll()); ?> />
+	</p>
+	<?php
+	}
+}
+
+if(forge_get_config('use_frs')) {
+?>
+<input type="hidden" name="use_frs" value="<?php echo ($group->usesFRS() ? '1' : '0'); ?>" />
+<?php
+	if ($group->usesFRS()) {
+?>
+	<p>
+<?php echo _('If you wish, you can provide default email addresses to which new FRS (packages, releases or files) will be sent') ?>.<br />
+<strong><?php echo _('New packages, releases, files Submissions')._(':'); ?></strong><br />
+<input type="email" name="new_frs_address" value="<?php echo $group->getFRSEmailAddress(); ?>" size="40" maxlength="250" />
 <?php echo _('(send on all updates)') ?>
-<input type="checkbox" name="send_all_docs" value="1" <?php echo c($group->docEmailAll()); ?> />
+<input type="checkbox" name="send_all_frs" value="1" <?php echo c($group->frsEmailAll()); ?> />
 </p>
 <?php
+	}
 }
 
 if(forge_get_config('use_ftp')) {
@@ -273,11 +302,7 @@ if(forge_get_config('use_tracker')) {
 <input type="hidden" name="use_tracker" value="<?php echo ($group->usesTracker() ? '1' : '0'); ?>" />
 <?php
 }
-
-if(forge_get_config('use_frs')) {
 ?>
-<input type="hidden" name="use_frs" value="<?php echo ($group->usesFRS() ? '1' : '0'); ?>" />
-<?php } ?>
 
 <input type="hidden" name="use_stats" value="<?php echo ($group->usesStats() ? '1' : '0'); ?>" />
 

@@ -59,7 +59,7 @@ class TopTester extends FForge_SeleniumTestCase
 	    $this->clickAndWait("submit");
 	    $this->assertTextPresent("Message Posted Successfully");
 
-	    $this->cron("project_weekly_metric.php");
+	    $this->cron("db/project_weekly_metric.php");
 
 	    // Test that from the main page we access the most active this week.
 	    $this->clickAndWait("link=Home");

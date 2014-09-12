@@ -38,16 +38,16 @@ class Widget_MyMonitoredFp extends Widget {
 		$sql = "SELECT groups.group_name,groups.group_id ".
 			"FROM groups,filemodule_monitor,frs_package ".
 			"WHERE groups.group_id=frs_package.group_id ".
-			"AND groups.status = 'A'".
+			"AND groups.status = 'A' ".
 			"AND frs_package.package_id=filemodule_monitor.filemodule_id ".
-			"AND filemodule_monitor.user_id=$1";
+			"AND filemodule_monitor.user_id=$1 ";
 		$um = UserManager::instance();
 		$current_user = $um->getCurrentUser();
 		if ($current_user->getStatus()=='S') {
 			$projects = $current_user->getProjects();
 			$sql .= 'AND groups.group_id IN ('. implode(',', $projects) .') ';
 		}
-		$sql .= 'GROUP BY groups.group_id ORDER BY groups.group_id ASC LIMIT 100';
+		$sql .= 'GROUP BY groups.group_id, groups.group_name ORDER BY groups.group_id ASC LIMIT 100';
 
 		$result = db_query_params($sql,array(user_getid()));
 		$rows = db_numrows($result);
@@ -64,7 +64,7 @@ class Widget_MyMonitoredFp extends Widget {
 					"WHERE groups.group_id=frs_package.group_id ".
 					"AND groups.group_id=$1 ".
 					"AND frs_package.package_id=filemodule_monitor.filemodule_id ".
-					"AND filemodule_monitor.user_id=$2  LIMIT 100";
+					"AND filemodule_monitor.user_id=$2 LIMIT 100";
 				$result2 = db_query_params($sql2, array($group_id, user_getid()));
 				$rows2 = db_numrows($result2);
 

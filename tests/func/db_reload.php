@@ -1,5 +1,7 @@
 <?php
 /*
+ * Alternative to db_reload.sh with ProjectA caching
+ *
  * Copyright (C) 2008 Alain Peyrat <aljeux@free.fr>
  * Copyright (C) 2009 Alain Peyrat, Alcatel-Lucent
  *

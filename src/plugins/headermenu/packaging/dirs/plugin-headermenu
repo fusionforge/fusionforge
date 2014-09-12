@@ -1,5 +1,0 @@
-@PLUGINS_PATH@/headermenu/action
-@PLUGINS_PATH@/headermenu/common
-@PLUGINS_PATH@/headermenu/lib
-@PLUGINS_PATH@/headermenu/view
-@PLUGINS_PATH@/headermenu/www

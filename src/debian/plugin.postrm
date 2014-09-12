@@ -1,0 +1,24 @@
+#!/bin/sh -e
+
+case "$1" in
+    purge)
+	ucfq fusionforge-plugin-@plugin@ --with-colons \
+	    | while IFS=: read i ignored; do
+	    rm -f $i $i.ucf-*
+	    ucf --purge $i
+	    ucfr --purge fusionforge-plugin-@plugin@ $i
+	done
+	;;
+
+    remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+	;;
+
+    *)
+        echo "postrm called with unknown argument \`$1'" >&2
+        exit 1
+	;;
+esac
+
+#DEBHELPER#
+
+exit 0

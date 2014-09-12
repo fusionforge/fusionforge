@@ -23,6 +23,8 @@
 // This class overloads FRSPackage to add RDF representation, based on ADMS.SW, using ARC2 and Graphite
 
 include_once 'RDFedFRSRelease.class.php';
+require_once $gfcommon.'frs/FRSRelease.class.php';
+require_once $gfcommon.'frs/FRSPackage.class.php';
 
 /**
  *	  Factory method which creates a RDFedFRSPackage from an project/group

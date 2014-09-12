@@ -1,4 +1,0 @@
-deb-specific/install-dns.sh            @BINARY_PATH@/
-deb-specific/dns.head.template         @DATA_PATH@/bind/
-deb-specific/dns.simple.template       @DATA_PATH@/bind/
-deb-specific/dns_conf.pl               @BINARY_PATH@/

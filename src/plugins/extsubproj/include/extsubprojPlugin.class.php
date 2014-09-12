@@ -25,7 +25,11 @@ class extsubprojPlugin extends Plugin {
 	public function __construct($id=0) {
 		$this->Plugin($id) ;
 		$this->name = "extsubproj";
-		$this->text = "External SubProjects"; // To show in the tabs, use...
+		$this->text = _("External SubProjects"); // To show in the tabs, use...
+		$this->pkg_desc =
+_("This plugin contains the extsubproj subsystem of FusionForge. It allows each
+FusionForge project to have its own extsubproj, and gives some
+control over it to the project's administrator.");
 		/*
 		$this->_addHook("user_personal_links");//to make a link to the user's personal part of the plugin
 		$this->_addHook("usermenu");

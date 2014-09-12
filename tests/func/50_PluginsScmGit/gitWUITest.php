@@ -55,7 +55,7 @@ class ScmGitWUITest extends FForge_SeleniumTestCase
 		$this->assertTextPresent("You have now requested a personal Git repository");
 
 		// Run the cronjob to create repositories
-		$this->cron("create_scm_repos.php");
+		$this->cron("scm/create_scm_repos.php");
 
 		$this->clickAndWait("link=SCM");
 		$this->assertTextPresent("Access to your personal repository");
@@ -76,7 +76,7 @@ class ScmGitWUITest extends FForge_SeleniumTestCase
 		$this->assertTextPresent("Repository other-repo is marked for deletion");
 
 		// Run the cronjob to create repositories
-		$this->cron("create_scm_repos.php");
+		$this->cron("scm/create_scm_repos.php");
 
 		$this->open(ROOT.'/plugins/scmgit/cgi-bin/gitweb.cgi?a=project_list;pf=projecta');
 		$this->waitForPageToLoad();

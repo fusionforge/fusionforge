@@ -50,7 +50,7 @@ require_once 'Widget.class.php';
 					return idn_to_unicode($param);
 				}
 			}
-			require_once 'common/rss/simplepie.inc';
+			require_once 'simplepie/simplepie.inc';
 			if (!is_dir(forge_get_config('data_path') .'/rss')) {
 				if (!mkdir(forge_get_config('data_path') .'/rss')) {
 					$content .= $HTML->error_msg(_('Cannot create backend directory. Contact forge administrator.'));
@@ -147,12 +147,7 @@ require_once 'Widget.class.php';
 			$vTitle = new Valid_String('title');
 			$vTitle->required();
 			if (!$request->validInArray('rss', $vTitle)) {
-				if (function_exists('idn_to_utf8()')) {
-					require_once 'simplepie/simplepie.inc';
-				}
-				else {
-					require_once 'common/rss/simplepie.inc';
-				}
+				require_once 'simplepie/simplepie.inc';
 				if (!is_dir(forge_get_config('data_path') .'/rss')) {
 					mkdir(forge_get_config('data_path') .'/rss');
 				}

@@ -1,0 +1,15 @@
+#!/bin/sh -e
+
+# Skip if -common was already removed
+if [ ! -x /usr/bin/forge_get_config ]; then exit 0; fi
+pluginctl=$(forge_get_config source_path)/post-install.d/common/plugin.sh
+if [ -x $pluginctl ]; then exit 0; fi
+
+case "$1" in
+    remove) $pluginctl @plugin@ remove ;;
+    upgrade|deconfigure|failed-upgrade) ;;
+    *) echo "prerm called with unknown argument \`$1'" >&2; exit 1 ;;
+esac
+
+#DEBHELPER#
+exit 0

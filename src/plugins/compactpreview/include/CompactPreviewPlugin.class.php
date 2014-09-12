@@ -26,7 +26,10 @@ class CompactPreviewPlugin extends Plugin {
 	public function __construct($id=0) {
 		$this->Plugin($id) ;
 		$this->name = "compactpreview";
-		$this->text = "CompactPreview!"; // To show in the tabs, use...
+		$this->text = _("CompactPreview!"); // To show in the tabs, use...
+		$this->pkg_desc =
+_("This plugin adds support for user and project compact-preview
+(popups) compatible with the OSLC specifications.");
 		$this->_addHook("user_link_with_tooltip"); // override the way user links are done (for user compact preview support)
 		$this->_addHook("project_link_with_tooltip");
 		$this->_addHook("javascript_file"); // Add js files for oslc plugin

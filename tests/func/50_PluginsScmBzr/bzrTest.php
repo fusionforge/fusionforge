@@ -21,6 +21,12 @@
 
 require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
 
+function mysystem($cmd, &$ret=null) {
+  print "Running: $cmd\n";
+  ob_flush();
+  system($cmd, $ret);
+}
+
 class ScmBzrTest extends FForge_SeleniumTestCase
 {
 	function testScmBzr()
@@ -40,8 +46,13 @@ class ScmBzrTest extends FForge_SeleniumTestCase
 		$this->click("//input[@name='scmradio' and @value='scmbzr']");
 		$this->clickAndWait("submit");
 	    
+		$this->uploadSshKey();
+	    
 		// Run the cronjob to create repositories
-		$this->cron("create_scm_repos.php");
+		$this->reload_nscd();
+		$this->cron("scm/create_scm_repos.php");
+		$this->cron("shell/homedirs.php");
+		$this->cron("shell/ssh_create.php");
 
 		// Check that the repo is present and Loggerhead shows it (even if empty)
 		$this->open(ROOT);
@@ -60,21 +71,21 @@ class ScmBzrTest extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=SCM");
 		$p = $this->getText("//tt[contains(.,'bzr checkout bzr+ssh')]");
 		$p = preg_replace(",^bzr checkout ,", "", $p);
-		$p = preg_replace(",://.*@,", "://root@", $p);
 		$p = preg_replace(",/branchname$,", "", $p);
 
 		// Create a local branch, push it to the repo
+		mysystem("bzr whoami 'admin <admin@admin.tld>'");
 		$t = exec("mktemp -d /tmp/bzrTest.XXXXXX");
-		system("cd $t && bzr init --quiet trunk >/dev/null", $ret);
+		mysystem("cd $t && bzr init --quiet trunk >/dev/null", $ret);
 		$this->assertEquals($ret, 0);
 
-		system("echo 'this is a simple text' > $t/trunk/mytext.txt");
-		system("cd $t/trunk && bzr add --quiet && bzr commit -m'Adding file' --quiet", $ret);
-		system("echo 'another simple text' >> $t/trunk/mytext.txt");
-		system("cd $t/trunk && bzr add --quiet && bzr commit -m'Modifying file' --quiet", $ret);
+		mysystem("echo 'this is a simple text' > $t/trunk/mytext.txt");
+		mysystem("cd $t/trunk && bzr add --quiet && bzr commit -m'Adding file' --quiet", $ret);
+		mysystem("echo 'another simple text' >> $t/trunk/mytext.txt");
+		mysystem("cd $t/trunk && bzr add --quiet && bzr commit -m'Modifying file' --quiet", $ret);
 		$this->assertEquals($ret, 0);
 
-		system("cd $t/trunk && bzr push --quiet $p/trunk", $ret);
+		mysystem("cd $t/trunk && bzr push --quiet $p/trunk", $ret);
 		$this->assertEquals($ret, 0);
 
 		$this->open(ROOT.'/scm/loggerhead/');
@@ -92,7 +103,7 @@ class ScmBzrTest extends FForge_SeleniumTestCase
 		$this->assertTextPresent("Modifying file");
 		$this->assertTextPresent("Adding file");
 
-		system("rm -fr $t");
+		mysystem("rm -fr $t");
 	}
 }
 ?>

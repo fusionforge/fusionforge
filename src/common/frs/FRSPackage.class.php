@@ -208,6 +208,7 @@ class FRSPackage extends Error {
 
 			// add role entry
 			$this->Group->normalizeAllRoles();
+			$this->sendNotice(true);
 			db_commit();
 			return true;
 		}
@@ -390,6 +391,21 @@ class FRSPackage extends Error {
 		}
 	}
 
+	function isMonitoredBy($userid = 'ALL') {
+		if ( $userid == 'ALL' ) {
+			$condition = '';
+		} else {
+			$condition = 'user_id='.$userid.' AND';
+		}
+		$result = db_query_params('SELECT * FROM filemodule_monitor WHERE '.$condition.' filemodule_id=$1',
+						array($this->getID()));
+
+		if (!$result || db_numrows($result) < 1)
+			return false;
+
+		return true;
+	}
+
 	/**
 	 * getMonitorIDs - Return an array of user_id's of the list of people monitoring this package.
 	 *
@@ -464,6 +480,7 @@ class FRSPackage extends Error {
 		}
 		db_commit();
 		$this->createNewestReleaseFilesAsZip();
+		$this->sendNotice();
 		return true;
 	}
 
@@ -602,6 +619,63 @@ class FRSPackage extends Error {
 		if (file_exists($this->getNewestReleaseZipPath()))
 			unlink($this->getNewestReleaseZipPath());
 		return true;
+	}
+
+	/**
+	 * sendNotice - Notifies of package actions
+	 *
+	 * @param	boolean	true = new package (default value)
+	 * @return	bool
+	 */
+	function sendNotice($new = true) {
+		$BCC = $this->Group->getFRSEmailAddress();
+		if ($this->isMonitoredBy('ALL')) {
+			$BCC .= $this->getMonitoredUserEmailAddress();
+		}
+		if (strlen($BCC) > 0) {
+			$session = session_get_user();
+			if ($new) {
+				$status = _('New Package');
+			} else {
+				$status = _('Updated Package').' '._('by').' ' . $session->getRealName();
+			}
+			$subject = '['.$this->Group->getPublicName().'] '.$status.' - '.$this->getName();
+			$body = _('Project')._(': ').$this->Group->getPublicName()."\n";
+			$body .= _('Package')._(': ').$this->getName()."\n";
+			$body .= "\n\n-------------------------------------------------------\n".
+				_('For more info, visit')._(':').
+				"\n\n" . util_make_url('/frs/?group_id='.$this->Group->getID());
+
+			$BCCarray = explode(',',$BCC);
+			foreach ($BCCarray as $dest_email) {
+				util_send_message($dest_email, $subject, $body, 'noreply@'.forge_get_config('web_host'), '', _('FRS'));
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * getMonitoredUserEmailAddress - get the email addresses of users who monitor this file
+	 *
+	 * @return	string	The list of emails comma separated
+	 */
+	function getMonitoredUserEmailAddress() {
+		$result = db_query_params('select users.email from users,filemodule_monitor where users.user_id = filemodule_monitor.user_id and filemodule_monitor.file_id = $1', array ($this->getID()));
+		if (!$result || db_numrows($result) < 1) {
+			return NULL;
+		} else {
+			$values = '';
+			$comma = '';
+			$i = 0;
+			while ($arr = db_fetch_array($result)) {
+				if ( $i > 0 )
+					$comma = ',';
+
+				$values .= $comma.$arr['email'];
+				$i++;
+			}
+		}
+		return $values;
 	}
 }
 

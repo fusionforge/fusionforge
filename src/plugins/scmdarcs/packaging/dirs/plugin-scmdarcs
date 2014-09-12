@@ -1,5 +1,0 @@
-@PLUGINS_PATH@/scmdarcs/cgi-bin
-@PLUGINS_PATH@/scmdarcs/common
-@PLUGINS_PATH@/scmdarcs/www
-@SOURCE_PATH@/www/plugins
-@DATA_PATH@/chroot/scmrepos/darcs

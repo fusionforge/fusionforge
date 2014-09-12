@@ -30,6 +30,9 @@ class FusionForgeWikiPlugin extends Plugin {
 		$this->Plugin() ;
 		$this->name = "wiki" ;
 		$this->text = _("Wiki"); // To show in the tabs, use...
+		$this->pkg_desc =
+_("PhpWiki plugin for FusionForge. Allows for one wiki per project, integrated search,
+page edits displayed on activity tab, and multi-project wiki preferences.");
 		$this->installdir = 'wiki';
 		$this->hooks[] = "groupmenu";
 		$this->hooks[] = "groupisactivecheckbox" ; // The "use ..." checkbox in editgroupinfo

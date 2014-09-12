@@ -1,2 +1,0 @@
-plugins/scmcpold/common/*             @PLUGINS_PATH@/scmcpold/common/
-plugins/scmcpold/etc/plugins/scmcpold/* @CONFIG_PATH@/plugins/scmcpold/

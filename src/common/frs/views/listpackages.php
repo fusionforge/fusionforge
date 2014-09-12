@@ -77,18 +77,21 @@ if (count($FRSPackages) < 1) {
 		$package_id = $FRSPackage->getID();
 		$package_name = $FRSPackage->getName();
 		$url = '/frs/?group_id='.$FRSPackage->Group->getID().'&package_id='.$package_id.'&action=monitor';
-		if($FRSPackage->isMonitoring()) {
-			$title = html_entity_decode($package_name).' - '._('Stop monitoring this package');
-			$url .= '&status=0';
-			$image = $HTML->getStopMonitoringPic($title);
+		if (session_loggedin()) {
+			if($FRSPackage->isMonitoring()) {
+				$title = html_entity_decode($package_name).' - '._('Stop monitoring this package');
+				$url .= '&status=0';
+				$image = $HTML->getStopMonitoringPic($title);
+			} else {
+				$title = html_entity_decode($package_name).' - '._('Start monitoring this package');
+				$url .= '&status=1';
+				$image = $HTML->getStartMonitoringPic($title);
+			}
+			$errorMessage = _('Unable to set monitoring');
+			$package_monitor = util_make_link('#', $image, array('id' => 'pkgid'.$package_id, 'onclick' => 'javascript:controllerFRS.doAction({action:\''.$url.'\', id:\'pkgid'.$package_id.'\'})'), true);
 		} else {
-			$title = html_entity_decode($package_name).' - '._('Start monitoring this package');
-			$url .= '&status=1';
-			$image = $HTML->getStartMonitoringPic($title);
+			$package_monitor = '';
 		}
-		$errorMessage = _('Unable to set monitoring');
-		$package_monitor = util_make_link('#', $image, array('id' => 'pkgid'.$package_id, 'onclick' => 'javascript:controllerFRS.doAction({action:\''.$url.'\', id:\'pkgid'.$package_id.'\'})'), true);
-
 		$package_name_protected = $HTML->toSlug($package_name);
 		echo html_e('h2', array('id' => 'title_'. $package_name_protected), html_entity_decode($package_name).html_e('span', array('class' => 'frs-monitor-package'), $package_monitor));
 

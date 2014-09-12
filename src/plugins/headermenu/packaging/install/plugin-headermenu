@@ -1,6 +1,0 @@
-plugins/headermenu/action/*	@PLUGINS_PATH@/headermenu/action/
-plugins/headermenu/common/* @PLUGINS_PATH@/headermenu/common/
-plugins/headermenu/db/* @PLUGINS_PATH@/headermenu/db/
-plugins/headermenu/view/*	@PLUGINS_PATH@/headermenu/view/
-plugins/headermenu/www/* @PLUGINS_PATH@/headermenu/www/
-plugins/headermenu/etc/*.ini @CONFIG_PATH@/config.ini.d/

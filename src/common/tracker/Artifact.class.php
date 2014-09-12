@@ -1592,12 +1592,15 @@ class Artifact extends Error {
 			$body .= "\nYou can respond by visiting: ".
 				"\n".util_make_url ('/tracker/?func=detail&atid='. $this->ArtifactType->getID() .
 					    "&aid=". $this->getID() .
-					    "&group_id=". $this->ArtifactType->Group->getID()) .
+					    "&group_id=". $this->ArtifactType->Group->getID());
+			if (false) {  // currently not working
+				$body .=
 				"\nOr by replying to this e-mail entering your response between the following markers: ".
 				"\n".ARTIFACT_MAIL_MARKER.
 				"\n(enter your response here, only in plain text format)".
-				"\n".ARTIFACT_MAIL_MARKER.
-				"\n";
+				"\n".ARTIFACT_MAIL_MARKER;
+			}
+			$body .= "\n";
 		}
 
 		$body .= "\n".$this->marker('status',$changes).

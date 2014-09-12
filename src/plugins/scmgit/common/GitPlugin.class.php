@@ -39,7 +39,11 @@ class GitPlugin extends SCMPlugin {
 	function GitPlugin() {
 		$this->SCMPlugin();
 		$this->name = 'scmgit';
-		$this->text = 'Git';
+		$this->text = _('Git');
+		$this->pkg_desc =
+_("This plugin contains the Git subsystem of FusionForge. It allows each
+FusionForge project to have its own Git repository, and gives some
+control over it to the project's administrator.");
 		$this->_addHook('scm_browser_page');
 		$this->_addHook('scm_update_repolist');
 		$this->_addHook('scm_generate_snapshots');

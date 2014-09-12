@@ -32,7 +32,11 @@ class CVSPlugin extends SCMPlugin {
 		global $cvsdir_prefix ;
 		$this->SCMPlugin () ;
 		$this->name = 'scmcvs';
-		$this->text = 'CVS';
+		$this->text = _('CVS');
+		$this->pkg_desc =
+_("This plugin contains the CVS subsystem of FusionForge. It allows each
+FusionForge project to have its own CVS repository, and gives some control
+over it to the project's administrator.");
 		$this->hooks[] = 'scm_browser_page';
 		$this->hooks[] = 'scm_generate_snapshots' ;
 		$this->hooks[] = 'scm_gather_stats' ;

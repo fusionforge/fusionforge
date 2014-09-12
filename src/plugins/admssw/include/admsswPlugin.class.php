@@ -48,7 +48,11 @@ class admsswPlugin extends Plugin {
 	public function __construct($id=0) {
 		$this->Plugin($id) ;
 		$this->name = "admssw";
-		$this->text = "ADMS.SW"; // To show in the tabs, use...
+		$this->text = _("ADMS.SW"); // To show in the tabs, use...
+		$this->pkg_desc =
+_("This plugin provides ADMS.SW additions to the DOAP RDF documents for
+projects on /projects URLs with content-negociation
+(application/rdf+xml).");
 
 		// The standard RDF namespaces that will be used in the plugin
 		$this->ns = array(
@@ -70,6 +74,13 @@ class admsswPlugin extends Plugin {
 
 		// Add the doaprdf plugin's namespaces
 		$doaprdfplugin = plugin_get_object ("doaprdf");
+		if ($doaprdfplugin == NULL)
+		{
+			// FIXME: constructor use of plugin_get_object
+			// requires 'doaprdf' to be listed before
+			// 'admssw' _in the plugins DB table_.
+			return;
+		}
 		$ns = $doaprdfplugin->doapNameSpaces();
 		foreach($ns as $s => $u)
 		{

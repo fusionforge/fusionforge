@@ -1,3 +1,0 @@
-plugins/scmdarcs/common/*               @PLUGINS_PATH@/scmdarcs/common/
-plugins/scmdarcs/db/*		@PLUGINS_PATH@/scmdarcs/db/
-plugins/scmdarcs/etc/*.ini 		@CONFIG_PATH@/config.ini.d/

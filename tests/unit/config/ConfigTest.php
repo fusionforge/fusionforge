@@ -26,7 +26,7 @@ class Config_Tests extends PHPUnit_Framework_TestCase
 		$this->assertEquals('default', forge_get_config ('forge_name', 'core'));
 		$this->assertTrue(forge_get_config ('user_registration_restricted'));
 
-		forge_read_config_file (dirname(__FILE__) . '/../../../src/etc/config.ini-fhs') ;
+		forge_read_config_file (dirname(__FILE__) . '/../../../src/etc/config.ini') ;
 		forge_read_config_file (dirname(__FILE__) . '/../../../src/etc/config.ini.d/defaults.ini') ;
 
 		$this->assertEquals('FusionForge', forge_get_config ('forge_name'));
@@ -44,8 +44,7 @@ class Config_Tests extends PHPUnit_Framework_TestCase
 
 		forge_read_config_dir (dirname(__FILE__) . '/../../../src/etc/config.ini.d') ;
 
-		$this->assertEquals('anonsvn', forge_get_config ('anonsvn_login', 'scmsvn'));
-		$this->assertEquals('/var/lib/gforge/chroot/scmrepos/svn', forge_get_config ('repos_path', 'scmsvn'));
+		$this->assertEquals('/bin/bash', forge_get_config ('user_default_shell', 'core'));
 	}
 
 	/**

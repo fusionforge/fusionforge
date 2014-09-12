@@ -97,9 +97,12 @@ $include_path = join(PATH_SEPARATOR,
 		$fusionforge_basedir,
 		$fusionforge_basedir.'/www/include',
 		$fusionforge_basedir.'/common/include',
+		$fusionforge_basedir.'/vendor',
 		'.',
 		'/usr/share/php',
-		'/usr/share/pear'
+		'/usr/share/php/htmlpurifier',
+		'/usr/share/pear',
+		'/usr/share/php5/PEAR',
 	)
 );
 

@@ -1,0 +1,37 @@
+#! /bin/sh 
+
+scriptdir=$(dirname $0)
+configdir=$scriptdir/config
+. $(dirname $0)/common-vm
+
+read_param_vm "$@"
+
+# Start script for this engine must exist
+if [ ! -x $scriptdir/${VMENGINE}/start ]
+then 
+	echo "Don't know how to run ${VMENGINE} engine"
+	echo "$scriptdir/${VMENGINE}/start not found"
+	exit 4
+else
+	$scriptdir/${VMENGINE}/start
+fi
+
+# Loop until engine is up and ssh is running
+test_host () {
+    ssh -o 'StrictHostKeyChecking=no' "root@$HOST" uname -a >/dev/null 2>&1
+}
+
+echo "Waiting for $HOST to come up..."
+i=0
+while [ $i -lt 10 ] && ! test_host ; do
+    sleep 10
+    i=$(($i+1))
+    echo -n .
+done
+
+if test_host ; then
+    echo " OK"
+else
+    echo " FAIL"
+    exit 1
+fi

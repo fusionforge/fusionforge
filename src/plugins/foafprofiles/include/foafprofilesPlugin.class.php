@@ -31,7 +31,10 @@ class foafprofilesPlugin extends Plugin {
 	public function __construct($id=0) {
 		$this->Plugin($id) ;
 		$this->name = "foafprofiles";
-		$this->text = "User FOAF Profiles"; // To show in the tabs, use...
+		$this->text = _("User FOAF Profiles"); // To show in the tabs, use...
+		$this->pkg_desc =
+_("This plugin provides FOAF profiles for users on /users URLs 
+with content-negociation (application/rdf+xml).");
 		$this->_addHook("script_accepted_types");
 		$this->_addHook("content_negociated_user_home");
 

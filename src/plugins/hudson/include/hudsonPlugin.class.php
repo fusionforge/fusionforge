@@ -31,6 +31,10 @@ class hudsonPlugin extends Plugin {
 		$this->Plugin($id);
 		$this->name = "hudson";
 		$this->text = _('Hudson/Jenkins'); // To show in the tabs, use...
+		$this->pkg_desc =
+_("This plugin contains the Hudson subsystem of FusionForge. It allows each
+FusionForge project to have its own Hudson, and gives some
+control over it to the project's administrator.");
 		$this->_addHook("user_personal_links"); //to make a link to the user's personal part of the plugin
 		//$this->_addHook("usermenu") ;
 		$this->_addHook("groupmenu");	// To put into the project tabs

@@ -35,7 +35,9 @@ class online_helpPlugin extends Plugin {
 	function __construct() {
 		$this->Plugin() ;
 		$this->name = "online_help" ;
-		$this->text = "online_help!" ; // To show in the tabs, use...
+		$this->text = _("online_help!") ; // To show in the tabs, use...
+		$this->pkg_desc =
+_("This is a online_help plugin within FusionForge.");
 		$this->hooks[] = "headermenu"; // to show up in the admin page fro group
 	}
 

@@ -29,7 +29,9 @@ class MoinMoinPlugin extends Plugin {
 	function MoinMoinPlugin () {
 		$this->Plugin() ;
 		$this->name = "moinmoin" ;
-		$this->text = "MoinMoinWiki" ; // To show in the tabs, use...
+		$this->text = _("MoinMoinWiki") ; // To show in the tabs, use...
+		$this->pkg_desc =
+_("This plugin allows each project to embed MoinMoinWiki under a tab.");
 		$this->hooks[] = "groupmenu" ;	// To put into the project tabs
 		$this->hooks[] = "groupisactivecheckbox" ; // The "use ..." checkbox in editgroupinfo
 		$this->hooks[] = "groupisactivecheckboxpost" ; //

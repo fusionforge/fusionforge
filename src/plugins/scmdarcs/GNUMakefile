@@ -1,0 +1,9 @@
+include ../../GNUmakefile.defaults
+
+all:
+	@echo "No default action"
+
+install:
+#	TODO: if darcsweb ever gets packaged outside of Debian, make this generic:
+	ln -nfs /usr/lib/cgi-bin/darcsweb.cgi $(DESTDIR)$(data_path)/plugins/mediawiki/cgi-bin/darcsweb.cgi
+	ln -nfs /usr/share/darcsweb $(DESTDIR)$(source_path)/www/plugins/scmdarcs

@@ -1,0 +1,48 @@
+# Included by all GNUmakefile's to get the same defaults  -*- Makefile -*-
+#
+# Copyright (C) 2014  Inria (Sylvain Beucler)
+#
+# This file is part of FusionForge. FusionForge is free software;
+# you can redistribute it and/or modify it under the terms of the
+# GNU General Public License as published by the Free Software
+# Foundation; either version 2 of the Licence, or (at your option)
+# any later version.
+#
+# FusionForge is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along
+# with FusionForge; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+# Using Automake conventions and best practices
+DESTDIR=
+prefix=/usr/local
+bindir=$(prefix)/bin
+pkgdatadir=$(prefix)/share/fusionforge
+localedir=$(prefix)/share/locale
+
+# Common distro usage will be:
+# make DESTDIR=/tmp/build prefix=/usr
+
+# Let's slightly divert from Automake convention and use distro dirs:
+#sysconfdir=$(prefix)/etc
+#localstatedir=$(prefix)/var
+sysconfdir=/etc
+localstatedir=/var
+
+# Derived paths
+config_path=$(sysconfdir)/fusionforge
+data_path=$(localstatedir)/lib/fusionforge
+log_path=$(localstatedir)/log/fusionforge
+
+# Tools
+INSTALL=install
+CP_R=cp -r --preserve=timestamps
+
+# Hard-coded detection of distro-specific Apache configuration
+apache_user=$(shell if [ -e /etc/redhat-release ]; then echo 'apache'; elif [ -e /etc/SuSE-release ]; then echo 'wwwrun'; else echo 'www-data'; fi)
+apache_group=$(shell if [ -e /etc/redhat-release ]; then echo 'apache'; elif [ -e /etc/SuSE-release ]; then echo 'www'; else echo 'www-data'; fi)
+apache_service=$(shell if [ -e /etc/redhat-release ]; then echo 'httpd'; else echo 'apache2'; fi)

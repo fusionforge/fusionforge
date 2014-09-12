@@ -26,7 +26,8 @@
  */
 
 forge_define_config_item('default_server', 'scmsvn', forge_get_config ('web_host'));
-forge_define_config_item('repos_path', 'scmsvn', forge_get_config('chroot').'/scmrepos/svn');
+forge_define_config_item('repos_path', 'scmsvn', forge_get_config('data_path').'/scmrepos/svn');
+forge_define_config_item('serve_path', 'scmsvn', forge_get_config('repos_path'));
 forge_define_config_item('use_ssh', 'scmsvn', false);
 forge_set_config_item_bool('use_ssh', 'scmsvn');
 forge_define_config_item('use_dav', 'scmsvn', true);
@@ -40,7 +41,11 @@ class SVNPlugin extends SCMPlugin {
 	function SVNPlugin() {
 		$this->SCMPlugin();
 		$this->name = 'scmsvn';
-		$this->text = 'Subversion';
+		$this->text = _('Subversion');
+		$this->pkg_desc =
+_("This plugin contains the Subversion subsystem of FusionForge. It allows
+each FusionForge project to have its own Subversion repository, and gives
+some control over it to the project's administrator.");
 		$this->svn_root_fs = '/scmrepos/svn';
 		if (!file_exists($this->svn_root_fs.'/.')) {
 			$this->svn_root_fs = forge_get_config('repos_path',
@@ -212,7 +217,7 @@ class SVNPlugin extends SCMPlugin {
 		global $HTML ;
 		$b = '' ;
 
-		$result = db_query_params('SELECT u.realname, u.user_name, u.user_id, sum(commits) as commits, sum(adds) as adds, sum(adds+commits) as combined FROM stats_cvs_user s, users u WHERE group_id=$1 AND s.user_id=u.user_id AND (commits>0 OR adds >0) GROUP BY u.user_id, realname, user_name, u.user_id ORDER BY combined DESC, realname',
+		$result = db_query_params('SELECT u.realname, u.user_name, u.user_id, sum(updates) as updates, sum(adds) as adds, sum(adds+commits) as combined FROM stats_cvs_user s, users u WHERE group_id=$1 AND s.user_id=u.user_id AND (commits>0 OR adds >0) GROUP BY u.user_id, realname, user_name, u.user_id ORDER BY combined DESC, realname',
 					  array ($project->getID()));
 
 		if (db_numrows($result) > 0) {
@@ -226,22 +231,22 @@ class SVNPlugin extends SCMPlugin {
 			$b .= $HTML->listTableTop($tableHeaders);
 
 			$i = 0;
-			$total = array('adds' => 0, 'commits' => 0);
+			$total = array('adds' => 0, 'updates' => 0);
 
 			while($data = db_fetch_array($result)) {
 				$b .= '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
 				$b .= '<td width="50%">' ;
 				$b .= util_make_link_u ($data['user_name'], $data['user_id'], $data['realname']) ;
 				$b .= '</td><td width="25%" align="right">'.$data['adds']. '</td>'.
-					'<td width="25%" align="right">'.$data['commits'].'</td></tr>';
+					'<td width="25%" align="right">'.$data['updates'].'</td></tr>';
 				$total['adds'] += $data['adds'];
-				$total['commits'] += $data['commits'];
+				$total['updates'] += $data['updates'];
 				$i++;
 			}
 			$b .= '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
 			$b .= '<td width="50%"><strong>'._('Total')._(':').'</strong></td>'.
 				'<td width="25%" align="right"><strong>'.$total['adds']. '</strong></td>'.
-				'<td width="25%" align="right"><strong>'.$total['commits'].'</strong></td>';
+				'<td width="25%" align="right"><strong>'.$total['updates'].'</strong></td>';
 			$b .= '</tr>';
 			$b .= $HTML->listTableBottom();
 		}
@@ -369,8 +374,12 @@ class SVNPlugin extends SCMPlugin {
 			}
 
 			if ($project->enableAnonSCM()) {
-				$access_data .= forge_get_config('anonsvn_login', 'scmsvn')." = r\n";
-				$access_data .= "* = r\n";
+				$anonRole = RoleAnonymous::getInstance();
+				if ($anonRole->hasPermission('scm', $project->getID(), 'write')) {
+					$access_data .= forge_get_config('anonsvn_login', 'scmsvn')." = rw\n";
+				} else {
+					$access_data .= forge_get_config('anonsvn_login', 'scmsvn')." = r\n";
+				}
 			}
 
 			$access_data .= "\n";

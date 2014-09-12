@@ -27,7 +27,11 @@ class scmhookPlugin extends Plugin {
 	function __construct() {
 		$this->Plugin();
 		$this->name = 'scmhook';
-		$this->text = 'Scmhook'; // To show in the tabs, use...
+		$this->text = _('Scmhook'); // To show in the tabs, use...
+		$this->pkg_desc =
+_("This plugin contains a set of commit hooks (e-mail notifications,
+tracker integration, conformity...) that can be enabled for each
+project independently.");
 		$this->_addHook('groupmenu');	// To put into the project tabs
 		$this->_addHook('groupisactivecheckbox'); // The "use ..." checkbox in editgroupinfo
 		$this->_addHook('groupisactivecheckboxpost'); //

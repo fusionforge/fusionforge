@@ -27,7 +27,9 @@ class quota_managementPlugin extends Plugin {
 	function quota_managementPlugin () {
 		$this->Plugin() ;
 		$this->name = "quota_management";
-		$this->text = "Quota Management"; // To show in the tabs, use...
+		$this->text = _("Quota Management"); // To show in the tabs, use...
+		$this->pkg_desc =
+_("This is a quota_management plugin within FusionForge.");
 		$this->_addHook('groupisactivecheckbox'); // The "use ..." checkbox in editgroupinfo
 		$this->_addHook('groupisactivecheckboxpost'); //
 		$this->_addHook('userisactivecheckbox'); // The "use ..." checkbox in user account

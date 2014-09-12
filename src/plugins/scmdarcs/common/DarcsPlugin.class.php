@@ -30,7 +30,11 @@ class DarcsPlugin extends SCMPlugin {
 		global $gfconfig;
 		$this->SCMPlugin () ;
 		$this->name = 'scmdarcs';
-		$this->text = 'Darcs';
+		$this->text = _('Darcs');
+		$this->pkg_desc =
+_("This plugin contains the Darcs subsystem of FusionForge. It allows each
+FusionForge project to have its own Darcs repository, and gives some control
+over it to the project's administrator.");
 		$this->hooks[] = 'scm_generate_snapshots' ;
 		$this->hooks[] = 'scm_update_repolist' ;
 		$this->hooks[] = 'scm_browser_page' ;

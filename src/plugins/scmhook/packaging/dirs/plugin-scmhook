@@ -1,3 +1,0 @@
-@CONFIG_PATH@/httpd.d
-@PLUGINS_PATH@/scmhook/common
-@PLUGINS_PATH@/scmhook/www

@@ -28,6 +28,9 @@ class gravatarPlugin extends Plugin {
 		$this->Plugin() ;
 		$this->name = "gravatar" ;
 		$this->text = _('Gravatar Plugin');
+		$this->pkg_desc =
+_("This plugin contains the gravatar plugin of FusionForge. It allows each
+FusionForge user to have its gravatar icon displayed.");
 		$this->hooks[] = 'user_logo';
 	}
 

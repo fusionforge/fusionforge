@@ -1,4 +1,0 @@
-@CONFIG_PATH@/httpd.conf.d
-@PLUGINS_PATH@/oslc/cgi-bin
-@PLUGINS_PATH@/oslc/common
-@PLUGINS_PATH@/oslc/www

@@ -1,3 +1,0 @@
-@PLUGINS_PATH@/scmbzr/common
-@DATA_PATH@/chroot/scmrepos/bzr
-@DATA_PATH@/plugins/scmbzr/public-repositories

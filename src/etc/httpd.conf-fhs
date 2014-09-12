@@ -1,5 +1,0 @@
-# Include all FusionForge-related configuration files
-#
-# TODO: add a pointer to documentation about the Apache configuration of FusionForge
-#
-Include /etc/gforge/httpd.conf.d/*.conf

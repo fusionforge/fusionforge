@@ -2,7 +2,7 @@
   "provisioners": [
     {
       "type": "file",
-      "source": "file/bashrc",
+      "source": "file/bashrc-rpm",
       "destination": "/root/.bashrc"
     },
     {

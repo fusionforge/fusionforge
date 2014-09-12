@@ -2,6 +2,7 @@
 # 
 # Configure Loggerhead for FusionForge
 # Roland Mas
+# Inria (Sylvain Beucler)
 
 set -e
 
@@ -10,12 +11,14 @@ if [ `id -u` != 0 ] ; then
     exec su -c "$0 $1"
 fi
 
-configfile=~gforge/.bazaar/bazaar.conf
-cachedir=/var/cache/gforge/loggerhead
+cachedir=/var/cache/fusionforge/loggerhead
+loggerhead_user=$(forge_get_config loggerhead_user scmbzr)
+loggerhead_group=$(forge_get_config loggerhead_group scmbzr)
+# loggerhead.wsgi requires configuration file in ~/.bazaar ..
+configfile=$(getent passwd $loggerhead_user | cut -d: -f6)/.bazaar/bazaar.conf
 
 case "$1" in
     configure)
-	PATH=$(forge_get_config binary_path):$PATH
 	repos_path=$(forge_get_config repos_path scmbzr)
 	web_host=$(forge_get_config web_host)
 	url_prefix=$(forge_get_config url_prefix)
@@ -38,19 +41,19 @@ http_root_dir = '${repos_path}'
 http_user_prefix = '${http_user_prefix}'
 
 # Directory to put cache files in
-http_sql_dir = '/var/cache/gforge/loggerhead'
+http_sql_dir = '/var/cache/fusionforge/loggerhead'
 EOF
 	    mkdir -p $cachedir
-	    chown gforge $cachedir
+	    chown $loggerhead_user $cachedir
 	fi
         ;;
 
-    purge)
+    remove)
 	rm -rf $configfile $cachedir
 	rmdir $(dirname $configfile) || true
         ;;
 
     *)
-        echo "Usage: $0 {configure|purge}"
+        echo "Usage: $0 {configure|remove}"
         exit 1
 esac

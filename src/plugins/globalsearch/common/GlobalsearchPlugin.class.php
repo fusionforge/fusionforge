@@ -27,6 +27,11 @@ class globalSearchPlugin extends Plugin {
 	function globalSearchPlugin() {
 		$this->Plugin();
 		$this->name = "globalsearch";
+		$this->text = _("Globalsearch");
+		$this->pkg_desc =
+_("This plugin contains a cross-FusionForge search engine.  You can
+declare a list of other FusionForge sites, and search for projects
+hosted on these forges from your own.");
 		$this->_addHook('site_admin_option_hook');
 		$this->_addHook('features_boxes_top');
 	}

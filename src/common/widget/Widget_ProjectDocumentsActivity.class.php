@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2014, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -91,7 +91,7 @@ class Widget_ProjectDocumentsActivity extends Widget {
 		$textsArray[] = _('new and update Files'.' [FU]');
 		$textsArray[] = _('new files and directories'.' [FD]');
 		$textsArray[] = _('new and update files and directories'.' [FUD]');
-		$prefs = _("Display statistics:").html_build_select_box_from_arrays($optionsArray, $textsArray, "show", $this->_statistic_show);
+		$prefs = _('Display statistics')._(': ').html_build_select_box_from_arrays($optionsArray, $textsArray, "show", $this->_statistic_show);
 		return $prefs;
 	}
 
@@ -118,82 +118,127 @@ class Widget_ProjectDocumentsActivity extends Widget {
 		$activitysArray[] = $dm->getActivity($sections, $begin3, $end3);
 		$activitysArray[] = $dm->getActivity($sections, $begin2, $end2);
 		$activitysArray[] = $dm->getActivity($sections, $begin1, $end1);
-		echo '<script type="text/javascript">//<![CDATA['."\n";
-		switch($this->_statistic_show) {
-			case 'F':
-				echo 'var s1 = ['.$activitysArray[0]['docmannew'].', '.$activitysArray[1]['docmannew'].', '.$activitysArray[2]['docmannew'].', '.$activitysArray[3]['docmannew'].'];';
-				echo 'var series = [s1];';
-				echo 'var labels = [{label:\''._('new Files').'\'}];';
+		switch ($this->_statistic_show) {
+			case 'F': {
+				$visibility = $activitysArray[0]['docmannew'] + $activitysArray[1]['docmannew'] + $activitysArray[2]['docmannew'] + $activitysArray[3]['docmannew'];
+
 				break;
+			}
 			case 'U': {
-				echo 'var s2 = ['.$activitysArray[0]['docmanupdate'].', '.$activitysArray[1]['docmanupdate'].', '.$activitysArray[2]['docmanupdate'].', '.$activitysArray[3]['docmanupdate'].'];';
-				echo 'var series = [s2];';
-				echo 'var labels = [{label:\''._('updated Files').'\'}];';
+				$visibility = $activitysArray[0]['docmanupdate'] + $activitysArray[1]['docmanupdate'] + $activitysArray[2]['docmanupdate'] + $activitysArray[3]['docmanupdate'];
+
 				break;
 			}
 			case 'D': {
-				echo 'var s3 = ['.$activitysArray[0]['docgroupnew'].', '.$activitysArray[1]['docgroupnew'].', '.$activitysArray[2]['docgroupnew'].', '.$activitysArray[3]['docgroupnew'].'];';
-				echo 'var series = [s3];';
-				echo 'var labels = [{label:\''._('new Directories').'\'}];';
+				$visibility = $activitysArray[0]['docgroupnew'] + $activitysArray[1]['docgroupnew'] + $activitysArray[2]['docgroupnew'] + $activitysArray[3]['docgroupnew'];
+
 				break;
 			}
 			case 'FU': {
-				echo 'var s1 = ['.$activitysArray[0]['docmannew'].', '.$activitysArray[1]['docmannew'].', '.$activitysArray[2]['docmannew'].', '.$activitysArray[3]['docmannew'].'];';
-				echo 'var s2 = ['.$activitysArray[0]['docmanupdate'].', '.$activitysArray[1]['docmanupdate'].', '.$activitysArray[2]['docmanupdate'].', '.$activitysArray[3]['docmanupdate'].'];';
-				echo 'var series = [s1, s2];';
-				echo 'var labels = [{label:\''._('new Files').'\'},
-						{label:\''._('updated Files').'\'}];';
+				$visibility = $activitysArray[0]['docmannew'] + $activitysArray[1]['docmannew'] + $activitysArray[2]['docmannew'] + $activitysArray[3]['docmannew'] +
+						$activitysArray[0]['docmanupdate'] + $activitysArray[1]['docmanupdate'] + $activitysArray[2]['docmanupdate'] + $activitysArray[3]['docmanupdate'];
+
 				break;
 			}
 			case 'FD': {
-				echo 'var s1 = ['.$activitysArray[0]['docmannew'].', '.$activitysArray[1]['docmannew'].', '.$activitysArray[2]['docmannew'].', '.$activitysArray[3]['docmannew'].'];';
-				echo 'var s3 = ['.$activitysArray[0]['docgroupnew'].', '.$activitysArray[1]['docgroupnew'].', '.$activitysArray[2]['docgroupnew'].', '.$activitysArray[3]['docgroupnew'].'];';
-				echo 'var series = [s1, s3];';
-				echo 'var labels = [{label:\''._('new Files').'\'},
-						{label:\''._('new Directories').'\'}];';
+				$visibility = $activitysArray[0]['docmannew'] + $activitysArray[1]['docmannew'] + $activitysArray[2]['docmannew'] + $activitysArray[3]['docmannew'] +
+						$activitysArray[0]['docgroupnew'] + $activitysArray[1]['docgroupnew'] + $activitysArray[2]['docgroupnew'] + $activitysArray[3]['docgroupnew'];
+
 				break;
 			}
 			default: {
-				echo 'var s1 = ['.$activitysArray[0]['docmannew'].', '.$activitysArray[1]['docmannew'].', '.$activitysArray[2]['docmannew'].', '.$activitysArray[3]['docmannew'].'];';
-				echo 'var s2 = ['.$activitysArray[0]['docmanupdate'].', '.$activitysArray[1]['docmanupdate'].', '.$activitysArray[2]['docmanupdate'].', '.$activitysArray[3]['docmanupdate'].'];';
-				echo 'var s3 = ['.$activitysArray[0]['docgroupnew'].', '.$activitysArray[1]['docgroupnew'].', '.$activitysArray[2]['docgroupnew'].', '.$activitysArray[3]['docgroupnew'].'];';
-				echo 'var series = [s1, s2, s3];';
-				echo 'var labels = [{label:\''._('new Files').'\'},
-						{label:\''._('updated Files').'\'},
-						{label:\''._('new Directories').'\'}];';
-				break;
+				$visibility = $activitysArray[0]['docmannew'] + $activitysArray[1]['docmannew'] + $activitysArray[2]['docmannew'] + $activitysArray[3]['docmannew'] +
+						$activitysArray[0]['docmanupdate'] + $activitysArray[1]['docmanupdate'] + $activitysArray[2]['docmanupdate'] + $activitysArray[3]['docmanupdate'] +
+						$activitysArray[0]['docgroupnew'] + $activitysArray[1]['docgroupnew'] + $activitysArray[2]['docgroupnew'] + $activitysArray[3]['docgroupnew'];
 			}
 		}
-		echo 'var ticks = [\''._('3 weeks ago').'\', \''._('2 weeks ago').'\', \''._('Last Week').'\', \''._('Current Week').'\'];';
-		echo 'var plot1;';
-		echo 'jQuery(document).ready(function(){
-				plot1 = jQuery.jqplot(\'chart1\', series, {
-					seriesDefaults: {
-						renderer:jQuery.jqplot.BarRenderer,
-						rendererOptions: {fillToZero: true}
-					},
-					series:
-						labels
-					,
-					legend: {
-						show: true,
-						placement: \'insideGrid\',
-						location: \'ne\'
-					},
-					axes: {
-						xaxis: {
-							renderer: jQuery.jqplot.CategoryAxisRenderer,
-							ticks: ticks,
+		if ($visibility) {
+			echo '<script type="text/javascript">//<![CDATA['."\n";
+			switch($this->_statistic_show) {
+				case 'F':
+					echo 'var s1 = ['.$activitysArray[0]['docmannew'].', '.$activitysArray[1]['docmannew'].', '.$activitysArray[2]['docmannew'].', '.$activitysArray[3]['docmannew'].'];';
+					echo 'var series = [s1];';
+					echo 'var labels = [{label:\''._('new Files').'\'}];';
+					break;
+				case 'U': {
+					echo 'var s2 = ['.$activitysArray[0]['docmanupdate'].', '.$activitysArray[1]['docmanupdate'].', '.$activitysArray[2]['docmanupdate'].', '.$activitysArray[3]['docmanupdate'].'];';
+					echo 'var series = [s2];';
+					echo 'var labels = [{label:\''._('updated Files').'\'}];';
+					break;
+				}
+				case 'D': {
+					echo 'var s3 = ['.$activitysArray[0]['docgroupnew'].', '.$activitysArray[1]['docgroupnew'].', '.$activitysArray[2]['docgroupnew'].', '.$activitysArray[3]['docgroupnew'].'];';
+					echo 'var series = [s3];';
+					echo 'var labels = [{label:\''._('new Directories').'\'}];';
+					break;
+				}
+				case 'FU': {
+					echo 'var s1 = ['.$activitysArray[0]['docmannew'].', '.$activitysArray[1]['docmannew'].', '.$activitysArray[2]['docmannew'].', '.$activitysArray[3]['docmannew'].'];';
+					echo 'var s2 = ['.$activitysArray[0]['docmanupdate'].', '.$activitysArray[1]['docmanupdate'].', '.$activitysArray[2]['docmanupdate'].', '.$activitysArray[3]['docmanupdate'].'];';
+					echo 'var series = [s1, s2];';
+					echo 'var labels = [{label:\''._('new Files').'\'},
+							{label:\''._('updated Files').'\'}];';
+					break;
+				}
+				case 'FD': {
+					echo 'var s1 = ['.$activitysArray[0]['docmannew'].', '.$activitysArray[1]['docmannew'].', '.$activitysArray[2]['docmannew'].', '.$activitysArray[3]['docmannew'].'];';
+					echo 'var s3 = ['.$activitysArray[0]['docgroupnew'].', '.$activitysArray[1]['docgroupnew'].', '.$activitysArray[2]['docgroupnew'].', '.$activitysArray[3]['docgroupnew'].'];';
+					echo 'var series = [s1, s3];';
+					echo 'var labels = [{label:\''._('new Files').'\'},
+							{label:\''._('new Directories').'\'}];';
+					break;
+				}
+				default: {
+					echo 'var s1 = ['.$activitysArray[0]['docmannew'].', '.$activitysArray[1]['docmannew'].', '.$activitysArray[2]['docmannew'].', '.$activitysArray[3]['docmannew'].'];';
+					echo 'var s2 = ['.$activitysArray[0]['docmanupdate'].', '.$activitysArray[1]['docmanupdate'].', '.$activitysArray[2]['docmanupdate'].', '.$activitysArray[3]['docmanupdate'].'];';
+					echo 'var s3 = ['.$activitysArray[0]['docgroupnew'].', '.$activitysArray[1]['docgroupnew'].', '.$activitysArray[2]['docgroupnew'].', '.$activitysArray[3]['docgroupnew'].'];';
+					echo 'var series = [s1, s2, s3];';
+					echo 'var labels = [{label:\''._('new Files').'\'},
+							{label:\''._('updated Files').'\'},
+							{label:\''._('new Directories').'\'}];';
+					break;
+				}
+			}
+			echo 'var ticks = [\''._('3 weeks ago').'\', \''._('2 weeks ago').'\', \''._('Last Week').'\', \''._('Current Week').'\'];';
+			echo 'var plot1;';
+			echo 'jQuery(document).ready(function(){
+					plot1 = jQuery.jqplot(\'chart1\', series, {
+						seriesDefaults: {
+							renderer:jQuery.jqplot.BarRenderer,
+							rendererOptions: {fillToZero: true}
+						},
+						series:
+							labels
+						,
+						legend: {
+							show: true,
+							placement: \'insideGrid\',
+							location: \'ne\'
+						},
+						axes: {
+							xaxis: {
+								renderer: jQuery.jqplot.CategoryAxisRenderer,
+								ticks: ticks,
+							},
+							yaxis: {
+								min: 0,
+								tickInterval: 1,
+								tickOptions: {
+									formatString: \'%d\',
+								},
+							}
 						}
-					}
-				});
-			});';
-		echo 'jQuery(window).resize(function() {
-				plot1.replot( { resetAxes: true } );
-			});'."\n";
-		echo '//]]></script>';
-		echo '<div id="chart1"></div>';
-		echo '<div class="underline-link">' . util_make_link('/docman/?group_id='.$group_id, _('Browse Documents Manager')) . '</div>';
+					});
+				});';
+			echo 'jQuery(window).resize(function() {
+					plot1.replot( { resetAxes: true } );
+				});'."\n";
+			echo '//]]></script>';
+			echo '<div id="chart1"></div>';
+		} else {
+			echo $HTML->information(_('No activity to display'));
+		}
+		echo html_e('div', array('class' => 'underline-link'), util_make_link('/docman/?group_id='.$group_id, _('Browse Documents Manager')));
 	}
 
 	function getTitle() {

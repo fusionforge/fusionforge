@@ -30,6 +30,11 @@ class PluginMediawiki extends FForge_SeleniumTestCase
 		$this->skip_on_rpm_installs();
 		$this->skip_on_centos();
 
+		$forge_get_config = RUN_JOB_PATH."/forge_get_config";
+		$config_path = rtrim(`$forge_get_config config_path`);
+		file_put_contents("$config_path/config.ini.d/zzz-buildbot-mediawikitest",
+				  "[mediawiki]\n"."unbreak_frames=yes\n");
+
 		$this->activatePlugin('mediawiki');
 		
 		$this->populateStandardTemplate('empty');
@@ -62,8 +67,6 @@ And more lorem ipsum too.");
 		$this->assertTrue($this->isTextPresent("lorem ipsum"));
 		$this->assertTrue($this->isElementPresent("//h1[contains(.,'Bleh')]"));
 		$this->assertTrue($this->isElementPresent("//h2[contains(.,'Blahblah')]"));
-
-		system("rm -rf /var/lib/gforge/plugins/mediawiki/projects/projecta/");
 	}
 }
 
