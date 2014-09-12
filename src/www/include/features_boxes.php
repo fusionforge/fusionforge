@@ -113,16 +113,6 @@ function show_top_downloads() {
 	return $return;
 }
 
-function stats_getprojects_active_public() {
-	$ff = new FusionForge();
-	return $ff->getNumberOfPublicHostedProjects();
-}
-
-function stats_getprojects_total() {
-	$ff = new FusionForge();
-	return $ff->getNumberOfHostedProjects();
-}
-
 function stats_getpageviews_total() {
 	$res_count = db_query_params ('SELECT SUM(site_views) AS site, SUM(subdomain_views) AS subdomain FROM stats_site',
 			array());
