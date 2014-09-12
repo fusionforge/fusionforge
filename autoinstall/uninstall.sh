@@ -7,4 +7,4 @@ else
 fi
 service postgresql stop
 rm -rf /usr/share/fusionforge /usr/local/share/fusionforge /etc/fusionforge /var/lib/fusionforge
-rm -rf /root/dump /var/lib/postgresql*/
+rm -rf /root/dump /var/lib/postgresql*/ /var/lib/pgsql*/
