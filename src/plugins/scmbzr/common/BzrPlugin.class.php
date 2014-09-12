@@ -57,9 +57,9 @@ class BzrPlugin extends SCMPlugin {
 		}
 
 		if ($project->usesPlugin($this->name) && forge_check_perm('scm', $project->getID(), 'read')) {
-			$result = db_query_params('SELECT sum(commits) AS commits, sum(adds) AS adds FROM stats_cvs_group WHERE group_id=$1',
+			$result = db_query_params('SELECT sum(updates) AS updates, sum(adds) AS adds FROM stats_cvs_group WHERE group_id=$1',
 						  array ($project->getID())) ;
-			$commit_num = db_result($result,0,'commits');
+			$commit_num = db_result($result,0,'updates');
 			$add_num    = db_result($result,0,'adds');
 			if (!$commit_num) {
 				$commit_num=0;
@@ -298,8 +298,10 @@ class BzrPlugin extends SCMPlugin {
 
                         $updates = 0 ;
                         $adds = 0 ;
-			$usr_updates = array () ;
 			$usr_adds = array () ;
+			$usr_updates = array () ;
+			$usr_deletes = array () ;
+			$usr_commits = array () ;
 
 			$toprepo = forge_get_config('repos_path', 'scmbzr') ;
 			$repo = $toprepo . '/' . $project->getUnixName() ;
@@ -342,6 +344,8 @@ class BzrPlugin extends SCMPlugin {
 			$state = '' ;
 			$curadds = 0 ;
 			$curupdates = 0 ;
+			$curcommits = 0 ;
+			$curdeletes = 0 ;
                         while (! feof ($pipe) &&
                                $line = rtrim (fgets ($pipe))) {
 				if ($line == $sep) {
@@ -381,23 +385,31 @@ class BzrPlugin extends SCMPlugin {
 					case 'added':
 						$curadds++ ;
 						break ;
+					case 'deletes':
+						$curdeletes++ ;
+						break ;
 					}
 				}
+				$curcommits++ ;
 			}
 			if ($curdate == $date) {
 				$adds = $adds + $curadds ;
 				$updates = $updates + $curupdates ;
+				$deletes = $deletes + $curdeletes ;
+				$commits = $commits + $curcommits ;
 			}
 
                         // inserting group results in stats_cvs_groups
-			if ($updates > 0 || $adds > 0) {
-				if (!db_query_params ('INSERT INTO stats_cvs_group (month,day,group_id,checkouts,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
+			if ($updates > 0 || $adds > 0 || $deletes > 0 || $commits > 0) {
+				if (!db_query_params ('INSERT INTO stats_cvs_group (month,day,group_id,checkouts,commits,adds,updates,deletes) VALUES ($1,$2,$3,$4,$5,$6)',
 						      array ($month_string,
 							     $day,
 							     $project->getID(),
 							     0,
+							     $commits,
+							     $adds,
 							     $updates,
-							     $adds))) {
+							     $deletes))) {
 					echo "Error while inserting into stats_cvs_group\n" ;
 					db_rollback () ;
 					return false ;
@@ -405,7 +417,7 @@ class BzrPlugin extends SCMPlugin {
 			}
 
                         // building the user list
-                        $user_list = array_unique( array_merge( array_keys( $usr_adds ), array_keys( $usr_updates ) ) );
+                        $user_list = array_unique( array_merge( array_keys( $usr_adds ), array_keys( $usr_updates ), array_keys( $usr_commits ) ) );
 
                         foreach ( $user_list as $user ) {
                                 // trying to get user id from user name
@@ -416,16 +428,20 @@ class BzrPlugin extends SCMPlugin {
                                         continue;
                                 }
 
+				$uc = $usr_commits[$user] ? $usr_commits[$user] : 0 ;
 				$uu = $usr_updates[$user] ? $usr_updates[$user] : 0 ;
 				$ua = $usr_adds[$user] ? $usr_adds[$user] : 0 ;
-				if ($uu > 0 || $ua > 0) {
-					if (!db_query_params ('INSERT INTO stats_cvs_user (month,day,group_id,user_id,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
+				$ud = $usr_deletess[$user] ? $usr_deletes[$user] : 0 ;
+				if ($uu > 0 || $ua > 0 || $uc > 0 || $ud > 0) {
+					if (!db_query_params ('INSERT INTO stats_cvs_user (month,day,group_id,user_id,commits,adds,updates,deletes) VALUES ($1,$2,$3,$4,$5,$6)',
 							      array ($month_string,
 								     $day,
 								     $project->getID(),
 								     $user_id,
+								     $uc,
+								     $ua,
 								     $uu,
-								     $ua))) {
+								     $ud))) {
 						echo "Error while inserting into stats_cvs_user\n" ;
 						db_rollback () ;
 						return false ;
