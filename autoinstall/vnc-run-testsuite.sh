@@ -1,6 +1,13 @@
 #!/bin/bash
 # Wrapper to run the testsuite in a headless X server
 
+if [ -z "$1" ]; then
+    echo "$(basename $0): run a program in a headless X server"
+    echo "Usage: $0 program [params]"
+    echo "Ex: $0 $(dirname $0)/run-testsuite.sh deb/debian"
+    exit 1
+fi
+
 # Check vncserver
 if ! type vncserver 2>/dev/null
 then
