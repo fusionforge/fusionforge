@@ -439,7 +439,7 @@ projects on /projects URLs with content-negociation
 	 */
 	public function getProjectListSize() {
 		// same as for trove's full list
- 		$projects = get_public_active_projects_asc();
+ 		$projects = group_get_public_active_projects_asc();
 		return count($projects);
 	}
 
@@ -475,7 +475,7 @@ projects on /projects URLs with content-negociation
 		$res->setProp('adms:supportedSchema', 'ADMS.SW v1.0');
 
 		// same as for trove's full list
-		$projects = get_public_active_projects_asc();
+		$projects = group_get_public_active_projects_asc();
 
 		if ( isset($chunk) && isset($chunksize) ) {
 			// TODO : do some checks on $chunk $chunksize values

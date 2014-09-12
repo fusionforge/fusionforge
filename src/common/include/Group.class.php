@@ -163,7 +163,7 @@ function group_get_object_by_publicname($groupname) {
  * @param	int	$max_query_limit Optional Maximum number of rows to limit query length
  * @return	array	List of public active projects
  */
-function get_public_active_projects_asc($max_query_limit = -1) {
+function group_get_public_active_projects_asc($max_query_limit = -1) {
 
 	$res_grp = db_query_params ('
 			SELECT group_id, group_name, unix_group_name, short_description, register_time

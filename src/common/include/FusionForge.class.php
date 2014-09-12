@@ -62,29 +62,9 @@ class FusionForge extends Error {
 	}
 
 	/**
-	 * List full number of hosted projects that anonymous users can see
+	 * List full number of hosted projects, public and private
 	 */
-	function getNumberOfPublicHostedProjects() {
-		$res = db_query_params ('SELECT group_id FROM groups WHERE status=$1',
-				      array ('A'));
-		if (!$res) {
-			$this->setError('Unable to get hosted project count: '.db_error());
-			return false;
-		}
-		$count = 0;
-		$ra = RoleAnonymous::getInstance() ;
-		while ($row = db_fetch_array($res)) {
-			if ($ra->hasPermission('project_read', $row['group_id'])) {
-				$count++;
-			}
-		}
-		return $count;
-	}
-
-	/**
-	 * List full number of hosted projects
-	 */
-	function getNumberOfHostedProjects() {
+	function getNumberOfActiveProjects() {
 		$res = db_query_params ('SELECT count(*) FROM groups WHERE status=$1',
 					array ('A'));
 		if (!$res) {
