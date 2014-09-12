@@ -30,7 +30,7 @@ if [ -e /etc/debian_version ]; then
     backports_deb
     apt-get update
     apt-get install -y make gettext php5-cli php5-pgsql php-htmlpurifier \
-	apache2 locales-all postgresql \
+	apache2 locales-all postgresql libnss-pgsql2 \
 	subversion viewvc \
 	mediawiki \
 	python-moinmoin libapache2-mod-wsgi python-psycopg2
@@ -45,12 +45,13 @@ fi
 
 cd /usr/src/fusionforge/src/
 make
-make install-base install-shell
-make install-plugin-scmsvn install-plugin-blocks \
+make install-base install-shell \
+    install-plugin-scmsvn install-plugin-blocks \
     install-plugin-mediawiki install-plugin-moinmoin \
     install-plugin-online_help
 # adapt .ini configuration in /etc/fusionforge/config.ini.d/
-make post-install-base post-install-plugin-scmsvn post-install-plugin-blocks \
+make post-install-base post-install-shell \
+    post-install-plugin-scmsvn post-install-plugin-blocks \
     post-install-plugin-mediawiki post-install-plugin-moinmoin \
     post-install-plugin-online_help
 
