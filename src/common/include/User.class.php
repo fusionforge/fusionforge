@@ -25,6 +25,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+require_once $gfcommon.'include/MonitorElement.class.php';
+
 $USER_OBJ = array();
 
 /**
@@ -293,7 +295,7 @@ class GFUser extends Error {
 	 * @param	string		$ccode			The users ISO country_code.
 	 * @param	bool		$send_mail		Whether to send an email or not
 	 * @param	bool|int	$tooltips		The users preference for tooltips
-     * @return	bool|int	The newly created user ID
+	 * @return	bool|int	The newly created user ID
 	 *
 	 */
 	function create($unix_name, $firstname, $lastname, $password1, $password2, $email,
@@ -520,6 +522,7 @@ Use one below, but make sure it is entered as the single line.)
 				}
 			}
 
+
 			db_begin();
 			$res = db_query_params('DELETE FROM artifact_monitor WHERE user_id=$1',
 						array($this->getID()));
@@ -535,17 +538,21 @@ Use one below, but make sure it is entered as the single line.)
 				db_rollback();
 				return false;
 			}
-			$res = db_query_params('DELETE FROM forum_monitored_forums WHERE user_id=$1',
-						array($this->getID()));
-			if (!$res) {
-				$this->setError(_('Could Not Delete From forum_monitored_forums:') . ' '.db_error());
+			$MonitorElementObject = new MonitorElement('forum');
+			if (!$MonitorElementObject->clearMonitorForUserId($this->getID())) {
+				$this->setError($MonitorElementObject->getErrorMessage());
 				db_rollback();
 				return false;
 			}
-			$res = db_query_params('DELETE FROM filemodule_monitor WHERE user_id=$1',
-						array($this->getID()));
-			if (!$res) {
-				$this->setError(_('Could Not Delete From filemodule_monitor:') . ' '.db_error());
+			$MonitorElementObject = new MonitorElement('docdata');
+			if (!$MonitorElementObject->clearMonitorForUserId($this->getID())) {
+				$this->setError($MonitorElementObject->getErrorMessage());
+				db_rollback();
+				return false;
+			}
+			$MonitorElementObject = new MonitorElement('docgroup');
+			if (!$MonitorElementObject->clearMonitorForUserId($this->getID())) {
+				$this->setError($MonitorElementObject->getErrorMessage());
 				db_rollback();
 				return false;
 			}
@@ -567,25 +574,25 @@ Use one below, but make sure it is entered as the single line.)
 	 *
 	 * Use specific setter to change other properties.
 	 *
-	 * @param	string	$firstname		The users first name.
-	 * @param	string	$lastname		The users last name.
-	 * @param	int		$language_id	The ID of the users language preference.
-	 * @param	string	$timezone		The users timezone preference.
-	 * @param	string	$mail_site		The users preference for receiving site updates by email.
-	 * @param	string	$mail_va		The users preference for receiving community updates by email.
+	 * @param	string	$firstname	The users first name.
+	 * @param	string	$lastname	The users last name.
+	 * @param	int	$language_id	The ID of the users language preference.
+	 * @param	string	$timezone	The users timezone preference.
+	 * @param	string	$mail_site	The users preference for receiving site updates by email.
+	 * @param	string	$mail_va	The users preference for receiving community updates by email.
 	 * @param	string	$use_ratings	The users preference for being participating in "peer ratings".
-	 * @param	string	$dummy1			ignored	(no longer used)
-	 * @param	int		$dummy2			ignored	(no longer used)
-	 * @param	int		$theme_id		The users theme_id preference.
-	 * @param	string	$address		The users address.
-	 * @param	string	$address2		The users address2.
-	 * @param	string	$phone			The users phone.
-	 * @param	string	$fax			The users fax.
-	 * @param	string	$title			The users title.
-	 * @param	string	$ccode			The users ccode.
-	 * @param	int		$tooltips		The users preference for tooltips.
-	 * @param	string	$email			The users email.
-     * @return bool
+	 * @param	string	$dummy1		ignored	(no longer used)
+	 * @param	int	$dummy2		ignored	(no longer used)
+	 * @param	int	$theme_id	The users theme_id preference.
+	 * @param	string	$address	The users address.
+	 * @param	string	$address2	The users address2.
+	 * @param	string	$phone		The users phone.
+	 * @param	string	$fax		The users fax.
+	 * @param	string	$title		The users title.
+	 * @param	string	$ccode		The users ccode.
+	 * @param	int	$tooltips	The users preference for tooltips.
+	 * @param	string	$email		The users email.
+	 * @return bool
 	 */
 	function update($firstname, $lastname, $language_id, $timezone, $mail_site, $mail_va, $use_ratings,
 					$dummy1, $dummy2, $theme_id, $address, $address2, $phone, $fax, $title,
@@ -723,8 +730,8 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * setStatus - set this user's status.
 	 *
-	 * @param    string    $status Status - P, A, S, or D.
-	 * @return    boolean    success.
+	 * @param	string	$status	Status - P, A, S, or D.
+	 * @return	boolean	success.
 	 */
 	function setStatus($status) {
 
@@ -772,7 +779,7 @@ Use one below, but make sure it is entered as the single line.)
 	 *
 	 * Database field status of 'A' returns true.
 	 *
-	 * @return    boolean is_active.
+	 * @return	boolean	is_active.
 	 */
 	function isActive() {
 		if ($this->getStatus() == 'A') {
@@ -785,7 +792,7 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * getUnixStatus - Status of activation of unix account.
 	 *
-	 * @return string (N)one, (A)ctive, (S)uspended or (D)eleted
+	 * @return	string	(N)one, (A)ctive, (S)uspended or (D)eleted
 	 */
 	function getUnixStatus() {
 		return $this->data_array['unix_status'];
@@ -838,7 +845,7 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * getUnixName - the user's unix_name.
 	 *
-	 * @return    string    This user's unix/login name.
+	 * @return	string	This user's unix/login name.
 	 */
 	function getUnixName() {
 		return strtolower($this->data_array['user_name']);
@@ -847,7 +854,7 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * getUnixPasswd - get the user's password.
 	 *
-	 * @return    string    This user's unix crypted passwd.
+	 * @return	string	This user's unix crypted passwd.
 	 */
 	function getUnixPasswd() {
 		return $this->data_array['unix_pw'];
@@ -856,7 +863,7 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * getUnixBox - the hostname of the unix box this user has an account on.
 	 *
-	 * @return    string    This user's shell login machine.
+	 * @return	string	This user's shell login machine.
 	 */
 	function getUnixBox() {
 		return $this->data_array['unix_box'];
@@ -865,7 +872,7 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * getMD5Passwd - the password.
 	 *
-	 * @return    string    This user's MD5-crypted passwd.
+	 * @return	string	This user's MD5-crypted passwd.
 	 */
 	function getMD5Passwd() {
 		return $this->data_array['user_pw'];
@@ -879,7 +886,7 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * getConfirmHash - the confirm hash in the db.
 	 *
-	 * @return    string    This user's confirmation hash.
+	 * @return	string	This user's confirmation hash.
 	 */
 	function getConfirmHash() {
 		return $this->data_array['confirm_hash'];
@@ -888,7 +895,7 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * getEmail - the user's email address.
 	 *
-	 * @return    string    This user's email address.
+	 * @return	string	This user's email address.
 	 */
 	function getEmail() {
 		return str_replace("\n", "", $this->data_array['email']);
@@ -897,7 +904,7 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * getSha1Email - a SHA1 encoded hash of the email URI (including mailto: prefix)
 	 *
-	 * @return string The SHA1 encoded value for the email
+	 * @return	string	The SHA1 encoded value for the email
 	 */
 	function getSha1Email() {
 		return sha1('mailto:'.$this->getEmail());
@@ -908,7 +915,7 @@ Use one below, but make sure it is entered as the single line.)
 	 *
 	 * getNewEmail is a private operation for email change.
 	 *
-	 * @return    string    This user's new (not yet confirmed) email address.
+	 * @return	string	This user's new (not yet confirmed) email address.
 	 * @private
 	 */
 	function getNewEmail() {
@@ -918,8 +925,8 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * setEmail - set a new email address, which must be confirmed.
 	 *
-	 * @param    string    $email The email address.
-	 * @return    boolean    success.
+	 * @param	string	$email	The email address.
+	 * @return	boolean	success.
 	 */
 	function setEmail($email) {
 
@@ -969,9 +976,9 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * setNewEmailAndHash - setNewEmailAndHash is a private operation for email change.
 	 *
-	 * @param    string    $email The email address.
-	 * @param    string    $hash  The email hash.
-	 * @return    boolean    success.
+	 * @param	string	$email	The email address.
+	 * @param	string	$hash	The email hash.
+	 * @return	boolean	success.
 	 */
 	function setNewEmailAndHash($email, $hash = '') {
 
@@ -1007,7 +1014,7 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * getRealName - get the user's real name.
 	 *
-	 * @return    string    This user's real name.
+	 * @return	string	This user's real name.
 	 */
 	function getRealName() {
 		return $this->data_array['realname'];
@@ -1033,7 +1040,7 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * getFirstName - get the user's first name.
 	 *
-	 * @return    string    This user's first name.
+	 * @return	string	This user's first name.
 	 */
 	function getFirstName() {
 		return $this->data_array['firstname'];
@@ -1042,7 +1049,7 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * getLastName - get the user's last name.
 	 *
-	 * @return    string    This user's last name.
+	 * @return	string	This user's last name.
 	 */
 	function getLastName() {
 		return $this->data_array['lastname'];
@@ -1051,7 +1058,7 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * getAddDate - this user's unix time when account was opened.
 	 *
-	 * @return    int    This user's unix time when account was opened.
+	 * @return	int	This user's unix time when account was opened.
 	 */
 	function getAddDate() {
 		return $this->data_array['add_date'];
@@ -1060,7 +1067,7 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * getTimeZone - this user's timezone setting.
 	 *
-	 * @return    string    This user's timezone setting.
+	 * @return	string	This user's timezone setting.
 	 */
 	function getTimeZone() {
 		return $this->data_array['timezone'];
@@ -1069,7 +1076,7 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * getCountryCode - this user's ccode setting.
 	 *
-	 * @return    string    This user's ccode setting.
+	 * @return	string	This user's ccode setting.
 	 */
 	function getCountryCode() {
 		return $this->data_array['ccode'];
@@ -1078,7 +1085,7 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * getShell - this user's preferred shell.
 	 *
-	 * @return    string    This user's preferred shell.
+	 * @return	string	This user's preferred shell.
 	 */
 	function getShell() {
 		return $this->data_array['shell'];
@@ -1087,8 +1094,8 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * setShell - sets user's preferred shell.
 	 *
-	 * @param    string    $shell The users preferred shell.
-	 * @return    boolean    success.
+	 * @param	string	$shell	The users preferred shell.
+	 * @return	boolean	success.
 	 */
 	function setShell($shell) {
 		global $SYS;
@@ -1126,7 +1133,7 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * getUnixUID() - Get the unix UID of the user
 	 *
-	 * @return    int    This user's UID.
+	 * @return	int	This user's UID.
 	 */
 	function getUnixUID() {
 		return $this->data_array['unix_uid'];
@@ -1135,7 +1142,7 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * getUnixGID() - Get the unix GID of the user
 	 *
-	 * @return    int    This user's GID.
+	 * @return	int	This user's GID.
 	 */
 	function getUnixGID() {
 		return $this->data_array['unix_gid'];
@@ -1144,7 +1151,7 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * getLanguage - this user's language_id from supported_languages table.
 	 *
-	 * @return    int    This user's language_id.
+	 * @return	int	This user's language_id.
 	 */
 	function getLanguage() {
 		return $this->data_array['language'];
@@ -1153,7 +1160,7 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * getAddress - get this user's address.
 	 *
-	 * @return    text    This user's address.
+	 * @return	text	This user's address.
 	 */
 	function getAddress() {
 		return $this->data_array['address'];
@@ -1162,7 +1169,7 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * getAddress2 - get this user's address2.
 	 *
-	 * @return    text    This user's address2.
+	 * @return	text	This user's address2.
 	 */
 	function getAddress2() {
 		return $this->data_array['address2'];
@@ -1171,7 +1178,7 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * getPhone - get this person's phone number.
 	 *
-	 * @return    text    This user's phone number.
+	 * @return	text	This user's phone number.
 	 */
 	function getPhone() {
 		return $this->data_array['phone'];
@@ -1180,7 +1187,7 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * getFax - get this person's fax number.
 	 *
-	 * @return text    This user's fax.
+	 * @return	text	This user's fax.
 	 */
 	function getFax() {
 		return $this->data_array['fax'];
@@ -1189,7 +1196,7 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * getTitle - get this person's title.
 	 *
-	 * @return text    This user's title.
+	 * @return	text	This user's title.
 	 */
 	function getTitle() {
 		return $this->data_array['title'];
@@ -1198,8 +1205,8 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * getGroups - get an array of groups this user is a member of.
 	 *
-	 * @param bool $onlylocal
-	 * @return array Array of groups.
+	 * @param	bool	$onlylocal
+	 * @return	array	Array of groups.
 	 */
 	function &getGroups($onlylocal = true) {
 		$ids = array();
@@ -1228,10 +1235,10 @@ Use one below, but make sure it is entered as the single line.)
 	}
 
 	/**
-	 *    addAuthorizedKey - add the SSH authorized key for the user.
+	 * addAuthorizedKey - add the SSH authorized key for the user.
 	 *
-	 * @param string $key
-	 * @return    boolean    success.
+	 * @param	string	$key
+	 * @return	boolean	success.
 	 */
 	function addAuthorizedKey($key) {
 		$key = trim($key);
@@ -1287,7 +1294,7 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * setLoggedIn($val) - Really only used by session code.
 	 *
-	 * @param    boolean    $val The session value.
+	 * @param	boolean	$val	The session value.
 	 */
 	function setLoggedIn($val = true) {
 		$this->is_logged_in = $val;
@@ -1300,7 +1307,7 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * isLoggedIn - only used by session code.
 	 *
-	 * @return    boolean    is_logged_in.
+	 * @return	boolean	is_logged_in.
 	 */
 	function isLoggedIn() {
 		return $this->is_logged_in;
@@ -1309,8 +1316,8 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * deletePreference - delete a preference for this user.
 	 *
-	 * @param    string    $preference_name The unique field name for this preference.
-	 * @return    boolean    success.
+	 * @param	string	$preference_name	The unique field name for this preference.
+	 * @return	boolean	success.
 	 */
 	function deletePreference($preference_name) {
 		$preference_name = strtolower(trim($preference_name));
@@ -1323,9 +1330,9 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * setPreference - set a new preference for this user.
 	 *
-	 * @param    string    $preference_name The unique field name for this preference.
-	 * @param    string    $value           The value you are setting this preference to.
-	 * @return    boolean    success.
+	 * @param	string	$preference_name	The unique field name for this preference.
+	 * @param	string	$value			The value you are setting this preference to.
+	 * @return	boolean	success.
 	 */
 	function setPreference($preference_name, $value) {
 		$preference_name = strtolower(trim($preference_name));
@@ -1356,8 +1363,8 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * getPreference - get a specific preference.
 	 *
-	 * @param    string        $preference_name The unique field name for this preference.
-	 * @return    string|bool    the preference string or false on failure.
+	 * @param	string		$preference_name	The unique field name for this preference.
+	 * @return	string|bool	the preference string or false on failure.
 	 */
 	function getPreference($preference_name) {
 		$preference_name = strtolower(trim($preference_name));
@@ -1402,8 +1409,8 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * setPasswd - Changes user's password.
 	 *
-	 * @param    string    $passwd The plaintext password.
-	 * @return    boolean    success.
+	 * @param	string	$passwd	The plaintext password.
+	 * @return	boolean	success.
 	 */
 	function setPasswd($passwd) {
 		global $SYS;
@@ -1448,8 +1455,8 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * setMD5Passwd - Changes user's MD5 password.
 	 *
-	 * @param    string    $md5 The MD5-hashed password.
-	 * @return    boolean    success.
+	 * @param	string	$md5	The MD5-hashed password.
+	 * @return	boolean	success.
 	 */
 	function setMD5Passwd($md5) {
 		db_begin();
@@ -1470,8 +1477,8 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * setUnixPasswd - Changes user's Unix-hashed password.
 	 *
-	 * @param    string    $unix The Unix-hashed password.
-	 * @return    boolean    success.
+	 * @param	string	$unix	The Unix-hashed password.
+	 * @return	boolean	success.
 	 */
 	function setUnixPasswd($unix) {
 		global $SYS;
@@ -1504,7 +1511,7 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * usesRatings - whether user participates in rating system.
 	 *
-	 * @return    boolean    success.
+	 * @return	boolean	success.
 	 */
 	function usesRatings() {
 		return !$this->data_array['block_ratings'];
@@ -1513,7 +1520,7 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * usesTooltips - whether user enables or not tooltips.
 	 *
-	 * @return    boolean    success.
+	 * @return	boolean	success.
 	 */
 	function usesTooltips() {
 		return $this->data_array['tooltips'];
@@ -1522,7 +1529,7 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * getPlugins -  get a list of all available user plugins
 	 *
-	 * @return    array    array containing plugin_id => plugin_name
+	 * @return	array	array containing plugin_id => plugin_name
 	 */
 	function getPlugins() {
 		if (!isset($this->plugins_data)) {
@@ -1545,8 +1552,8 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * usesPlugin - returns true if the user uses a particular plugin
 	 *
-	 * @param    string    $pluginname name of the plugin
-	 * @return    boolean    whether plugin is being used or not
+	 * @param	string	$pluginname	name of the plugin
+	 * @return	boolean	whether plugin is being used or not
 	 */
 	function usesPlugin($pluginname) {
 		$plugins_data = $this->getPlugins();
@@ -1561,9 +1568,9 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * setPluginUse - enables/disables plugins for the user
 	 *
-	 * @param    string     $pluginname name of the plugin
-	 * @param    boolean    $val        the new state
-	 * @return    string    database result
+	 * @param	string	$pluginname	name of the plugin
+	 * @param	boolean	$val		the new state
+	 * @return	string	database result
 	 */
 	function setPluginUse($pluginname, $val = true) {
 		if ($val == $this->usesPlugin($pluginname)) {
@@ -1594,8 +1601,8 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * getMailingsPrefs - Get activity status for one of the site mailings.
 	 *
-	 * @param    string    $mailing_id The id of mailing ('mail_va' for community mailings, 'mail_siteupdates' for site mailings)
-	 * @return    boolean    success.
+	 * @param	string	$mailing_id	The id of mailing ('mail_va' for community mailings, 'mail_siteupdates' for site mailings)
+	 * @return	boolean	success.
 	 */
 	function getMailingsPrefs($mailing_id) {
 		if ($mailing_id == 'va') {
@@ -1610,8 +1617,8 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * unsubscribeFromMailings - Disable email notifications for user.
 	 *
-	 * @param    boolean    $all If false, disable general site mailings, else - all.
-	 * @return    boolean    success.
+	 * @param	boolean	$all	If false, disable general site mailings, else - all.
+	 * @return	boolean	success.
 	 */
 	function unsubscribeFromMailings($all = false) {
 		$res2 = $res3 = true;
@@ -1630,7 +1637,7 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * getThemeID - get the theme_id for this user.
 	 *
-	 * @return    int    The theme_id.
+	 * @return	int	The theme_id.
 	 */
 	function getThemeID() {
 		return $this->data_array['theme_id'];
@@ -1639,7 +1646,7 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * setUpTheme - get the theme path
 	 *
-	 * @return    string    The theme path.
+	 * @return	string	The theme path.
 	 */
 	function setUpTheme() {
 //
