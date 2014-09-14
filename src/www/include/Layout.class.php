@@ -1367,7 +1367,7 @@ if (isset($params['group']) && $params['group']) {
 			echo '<script type="text/javascript">/* <![CDATA[ */'."
 				jQuery(document).ready(function() {
 						jQuery('#$element_id-ajax').html('".$spinner."');
-						jQuery.ajax({url:'". util_make_url($widget->getAjaxUrl($owner_id, $owner_type)) ."',
+						jQuery.ajax({url:'". util_make_uri($widget->getAjaxUrl($owner_id, $owner_type)) ."',
 							success: function(result){jQuery('#$element_id-ajax').html(result)},
 							});
 						});
