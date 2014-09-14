@@ -32,7 +32,6 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'include/vote_function.php';
 require_once $gfcommon.'tracker/ArtifactFactory.class.php';
 require_once $gfcommon.'tracker/ArtifactsForUser.class.php';
-require_once $gfcommon.'forum/ForumsForUser.class.php';
 require_once $gfcommon.'pm/ProjectTasksForUser.class.php';
 
 global $HTML; // Layout object
@@ -101,7 +100,7 @@ if (!session_loggedin()) {
 				$cell_attrs = array('colspan' => (array_sum($display_col)+1), 'align' => 'left');
 				$cell_data = array(array_merge((array)$cell_text, $cell_attrs));
 				echo $HTML->multiTableRow(array(), $cell_data);
-				
+
 			} else {
 				$atf = new ArtifactTypeFactory($p);
 				$at_arr = $atf->getArtifactTypes();
@@ -130,7 +129,7 @@ if (!session_loggedin()) {
 							$cell_data = array(array_merge((array)$cell_text, $cell_attrs));
 							echo $HTML->multiTableRow(array(), $cell_data);
 							$toggle=0;
-							
+
 							foreach($art_arr as $art) {
 								$cell_data = array();
 								$row_attrs = array('class' => $HTML->boxGetAltRowStyle($toggle++, true));
@@ -208,7 +207,7 @@ if (!session_loggedin()) {
 	}
 	echo $HTML->boxBottom();
 	echo html_ac(html_ap()-2);
-	
+
 // priority colors
 /*
 	echo html_ao('tr');
