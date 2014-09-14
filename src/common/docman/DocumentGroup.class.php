@@ -27,6 +27,7 @@
  */
 
 require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/MonitorElement.class.php';
 
 class DocumentGroup extends Error {
 
@@ -356,22 +357,8 @@ class DocumentGroup extends Error {
 	 * @return	string	The list of emails comma separated
 	 */
 	function getMonitoredUserEmailAddress() {
-		$result = db_query_params('select users.email from users,docgroup_monitored_docman where users.user_id = docgroup_monitored_docman.user_id and docgroup_monitored_docman.docgroup_id = $1', array ($this->getID()));
-		if (!$result || db_numrows($result) < 1) {
-			return NULL;
-		} else {
-			$values = '';
-			$comma = '';
-			$i = 0;
-			while ($arr = db_fetch_array($result)) {
-				if ( $i > 0 )
-					$comma = ',';
-
-				$values .= $comma.$arr['email'];
-				$i++;
-			}
-		}
-		return $values;
+		$MonitorElementObject = new MonitorElement('docgroup');
+		return $MonitorElementObject->getAllEmailsInCommatSeparated($this->getID());
 	}
 
 	/**
@@ -382,18 +369,12 @@ class DocumentGroup extends Error {
 	 * @return	boolean	true if monitored by this user
 	 */
 	function isMonitoredBy($userid = 'ALL') {
+		$MonitorElementObject = new MonitorElement('docgroup');
 		if ( $userid == 'ALL' ) {
-			$condition = '';
+			return $MonitorElementObject->isMonitoredByAny($this->getID());
 		} else {
-			$condition = 'user_id = '.$userid.' AND';
+			return $MonitorElementObject->isMonitoredByUserId($this->getID(), $userid);
 		}
-		$result = db_query_params('SELECT * FROM docgroup_monitored_docman WHERE '.$condition.' docgroup_id = $1',
-						array($this->getID()));
-
-		if (!$result || db_numrows($result) < 1)
-			return false;
-
-		return true;
 	}
 
 	/**
@@ -403,11 +384,9 @@ class DocumentGroup extends Error {
 	 * @return	boolean	true if success
 	 */
 	function removeMonitoredBy($userid) {
-		$result = db_query_params('DELETE FROM docgroup_monitored_docman WHERE docgroup_id = $1 AND user_id = $2',
-						array($this->getID(), $userid));
-
-		if (!$result) {
-			$this->setError(_('Unable To Remove Monitor')._(': ').db_error());
+		$MonitorElementObject = new MonitorElement('docgroup');
+		if (!$MonitorElementObject->disableMonitoringByUserId($this->getID(), $userid)) {
+			$this->setError($MonitorElementObject->getErrorMessage());
 			return false;
 		}
 		return true;
@@ -420,17 +399,10 @@ class DocumentGroup extends Error {
 	 * @return	boolean	true if success
 	 */
 	function addMonitoredBy($userid) {
-		$result = db_query_params('SELECT * FROM docgroup_monitored_docman WHERE user_id=$1 AND docgroup_id = $2',
-						array($userid, $this->getID()));
-
-		if (!$result || db_numrows($result) < 1) {
-			$result = db_query_params('INSERT INTO docgroup_monitored_docman (docgroup_id,user_id) VALUES ($1,$2)',
-							array($this->getID(), $userid));
-
-			if (!$result) {
-				$this->setError(_('Unable To Add Monitor')._(': ').db_error());
-				return false;
-			}
+		$MonitorElementObject = new MonitorElement('docgroup');
+		if (!$MonitorElementObject->enableMonitoringByUserId($this->getID(), $userid)) {
+			$this->setError($MonitorElementObject->getErrorMessage());
+			return false;
 		}
 		return true;
 	}
@@ -441,10 +413,9 @@ class DocumentGroup extends Error {
 	 * @return	boolean	true if success.
 	 */
 	function clearMonitor() {
-		$result = db_query_params('DELETE FROM docgroup_monitored_docman WHERE docgroup_id = $1',
-					array($this->getID()));
-		if (!$result) {
-			$this->setError(_('Unable To Clear Monitor')._(': ').db_error());
+		$MonitorElementObject = new MonitorElement('docgroup');
+		if (!$MonitorElementObject->clearMonitor($this->getID())) {
+			$this->setError($MonitorElementObject->getErrorMessage());
 			return false;
 		}
 		return true;

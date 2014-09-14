@@ -26,6 +26,7 @@
 
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'frs/FRSRelease.class.php';
+require_once $gfcommon.'include/MonitorElement.class.php';
 
 /**
  * get_frs_packages - get all FRS packages for a specific project
@@ -319,23 +320,10 @@ class FRSPackage extends Error {
 			$this->setError(_('You can only monitor if you are logged in.'));
 			return false;
 		}
-		$result = db_query_params('SELECT * FROM filemodule_monitor WHERE user_id=$1 AND filemodule_id=$2',
-					array (user_getid(), $this->getID()));
-
-		if (!$result || db_numrows($result) < 1) {
-			/*
-				User is not already monitoring thread, so
-				insert a row so monitoring can begin
-			*/
-			$result = db_query_params ('INSERT INTO filemodule_monitor (filemodule_id,user_id) VALUES ($1,$2)',
-						   array ($this->getID(),
-							  user_getid()));
-
-			if (!$result) {
-				$this->setError(_('Unable To Add Monitor')._(': ').db_error());
-				return false;
-			}
-
+		$MonitorElementObject = new MonitorElement('frspackage');
+		if (!$MonitorElementObject->enableMonitoringByUserId($this->getID(), user_getid())) {
+			$this->setError($MonitorElementObject->getErrorMessage());
+			return false;
 		}
 		return true;
 	}
@@ -350,9 +338,12 @@ class FRSPackage extends Error {
 			$this->setError(_('You can only monitor if you are logged in.'));
 			return false;
 		}
-		return db_query_params ('DELETE FROM filemodule_monitor WHERE user_id=$1 AND filemodule_id=$2',
-					array (user_getid(),
-					       $this->getID())) ;
+		$MonitorElementObject = new MonitorElement('frspackage');
+		if (!$MonitorElementObject->disableMonitoringByUserId($this->getID(), $userid)) {
+			$this->setError($MonitorElementObject->getErrorMessage());
+			return false;
+		}
+		return true;
 	}
 
 	/**
@@ -361,13 +352,13 @@ class FRSPackage extends Error {
 	 * @return	int	the count
 	 */
 	function getMonitorCount() {
-		$res = db_result(db_query_params ('select count(*) as count from filemodule_monitor where filemodule_id=$1',
-						  array ($this->getID())), 0, 0);
-		if ($res < 0) {
-			$this->setError(_('Error On querying monitor count: ').db_error());
-			return false;
+		$MonitorElementObject = new MonitorElement('frspackage');
+		$getMonitorCounterInteger = $MonitorElementObject->getMonitorCounterInteger($this->getID());
+		if ($getMonitorCounterInteger !== false) {
+			return $getMonitorCounterInteger;
 		}
-		return $res;
+		$this->setError($MonitorElementObject->getErrorMessage());
+		return false;
 	}
 
 	/**
@@ -379,31 +370,16 @@ class FRSPackage extends Error {
 		if (!session_loggedin()) {
 			return false;
 		}
-
-		$result = db_query_params ('SELECT * FROM filemodule_monitor WHERE user_id=$1 AND filemodule_id=$2',
-					   array (user_getid(),
-						  $this->getID())) ;
-
-		if (!$result || db_numrows($result) < 1) {
-			return false;
-		} else {
-			return true;
-		}
+		return $this->isMonitoredBy(user_getid());
 	}
 
 	function isMonitoredBy($userid = 'ALL') {
+		$MonitorElementObject = new MonitorElement('frspackage');
 		if ( $userid == 'ALL' ) {
-			$condition = '';
+			return $MonitorElementObject->isMonitoredByAny($this->getID());
 		} else {
-			$condition = 'user_id='.$userid.' AND';
+			return $MonitorElementObject->isMonitoredByUserId($this->getID(), $userid);
 		}
-		$result = db_query_params('SELECT * FROM filemodule_monitor WHERE '.$condition.' filemodule_id=$1',
-						array($this->getID()));
-
-		if (!$result || db_numrows($result) < 1)
-			return false;
-
-		return true;
 	}
 
 	/**
@@ -412,9 +388,8 @@ class FRSPackage extends Error {
 	 * @return	array	The array of user_id's.
 	 */
 	function &getMonitorIDs() {
-		$res = db_query_params ('SELECT user_id FROM filemodule_monitor WHERE filemodule_id=$1',
-					array ($this->getID())) ;
-		return util_result_column_to_array($res);
+		$MonitorElementObject = new MonitorElement('frspackage');
+		return $MonitorElementObject->getMonitorUsersIdsInArray($this->getID());
 	}
 
 	/**
@@ -660,22 +635,8 @@ class FRSPackage extends Error {
 	 * @return	string	The list of emails comma separated
 	 */
 	function getMonitoredUserEmailAddress() {
-		$result = db_query_params('select users.email from users,filemodule_monitor where users.user_id = filemodule_monitor.user_id and filemodule_monitor.file_id = $1', array ($this->getID()));
-		if (!$result || db_numrows($result) < 1) {
-			return NULL;
-		} else {
-			$values = '';
-			$comma = '';
-			$i = 0;
-			while ($arr = db_fetch_array($result)) {
-				if ( $i > 0 )
-					$comma = ',';
-
-				$values .= $comma.$arr['email'];
-				$i++;
-			}
-		}
-		return $values;
+		$MonitorElementObject = new MonitorElement('frspackage');
+		return $MonitorElementObject->getAllEmailsInCommatSeparated($this->getID());
 	}
 }
 

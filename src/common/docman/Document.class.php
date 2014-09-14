@@ -31,6 +31,36 @@ require_once $gfcommon.'docman/Parsedata.class.php';
 require_once $gfcommon.'docman/DocumentManager.class.php';
 require_once $gfcommon.'docman/DocumentGroup.class.php';
 require_once $gfcommon.'docman/DocumentStorage.class.php';
+require_once $gfcommon.'include/MonitorElement.class.php';
+
+$DOCUMENT_OBJ = array();
+
+/**
+ * document_get_object() - Get User object by user ID.
+ * document_get_object is useful so you can pool document objects/save database queries
+ * You should always use this instead of instantiating the object directly
+ *
+ * @param	int		$doc_id	The ID of the document - required
+ * @param	int|bool	$res	The result set handle ("SELECT * FROM docdata_vw WHERE docid=$1")
+ * @return	Document	a user object or false on failure
+ */
+function &document_get_object($doc_id, $res = false) {
+	global $DOCUMENT_OBJ;
+	if (!isset($DOCUMENT_OBJ["_".$doc_id."_"])) {
+		if ($res) {
+			//the db result handle was passed in
+		} else {
+			$res = db_query_params('SELECT * FROM docdata_vw WHERE docid = $1',
+						array($doc_id));
+		}
+		if (!$res || db_numrows($res) < 1) {
+			$DOCUMENT_OBJ["_".$doc_id."_"] = false;
+		} else {
+			$DOCUMENT_OBJ["_".$doc_id."_"] = new Document(group_get_object(db_result($res,0,'group_id')), $doc_id, db_fetch_array($res));
+		}
+	}
+	return $DOCUMENT_OBJ["_".$doc_id."_"];
+}
 
 class Document extends Error {
 
@@ -536,22 +566,8 @@ class Document extends Error {
 	 * @return	string	The list of emails comma separated
 	 */
 	function getMonitoredUserEmailAddress() {
-		$result = db_query_params('select users.email from users,docdata_monitored_docman where users.user_id = docdata_monitored_docman.user_id and docdata_monitored_docman.doc_id = $1', array ($this->getID()));
-		if (!$result || db_numrows($result) < 1) {
-			return NULL;
-		} else {
-			$values = '';
-			$comma = '';
-			$i = 0;
-			while ($arr = db_fetch_array($result)) {
-				if ( $i > 0 )
-					$comma = ',';
-
-				$values .= $comma.$arr['email'];
-				$i++;
-			}
-		}
-		return $values;
+		$MonitorElementObject = new MonitorElement('docdata');
+		return $MonitorElementObject->getAllEmailsInCommatSeparated($this->getID());
 	}
 
 	/**
@@ -562,18 +578,12 @@ class Document extends Error {
 	 * @return	boolean	true if monitored by this user
 	 */
 	function isMonitoredBy($userid = 'ALL') {
+		$MonitorElementObject = new MonitorElement('docdata');
 		if ( $userid == 'ALL' ) {
-			$condition = '';
+			return $MonitorElementObject->isMonitoredByAny($this->getID());
 		} else {
-			$condition = 'user_id='.$userid.' AND';
+			return $MonitorElementObject->isMonitoredByUserId($this->getID(), $userid);
 		}
-		$result = db_query_params('SELECT * FROM docdata_monitored_docman WHERE '.$condition.' doc_id=$1',
-						array($this->getID()));
-
-		if (!$result || db_numrows($result) < 1)
-			return false;
-
-		return true;
 	}
 
 	/**
@@ -583,11 +593,9 @@ class Document extends Error {
 	 * @return	boolean	true if success
 	 */
 	function removeMonitoredBy($userid) {
-		$result = db_query_params('DELETE FROM docdata_monitored_docman WHERE doc_id=$1 AND user_id=$2',
-						array($this->getID(), $userid));
-
-		if (!$result) {
-			$this->setError(_('Unable To Remove Monitor')._(': ').db_error());
+		$MonitorElementObject = new MonitorElement('docdata');
+		if (!$MonitorElementObject->disableMonitoringByUserId($this->getID(), $userid)) {
+			$this->setError($MonitorElementObject->getErrorMessage());
 			return false;
 		}
 		return true;
@@ -600,17 +608,10 @@ class Document extends Error {
 	 * @return	boolean	true if success
 	 */
 	function addMonitoredBy($userid) {
-		$result = db_query_params('SELECT * FROM docdata_monitored_docman WHERE user_id=$1 AND doc_id=$2',
-						array($userid, $this->getID()));
-
-		if (!$result || db_numrows($result) < 1) {
-			$result = db_query_params('INSERT INTO docdata_monitored_docman (doc_id,user_id) VALUES ($1,$2)',
-							array($this->getID(), $userid));
-
-			if (!$result) {
-				$this->setError(_('Unable To Add Monitor')._(': ').db_error());
-				return false;
-			}
+		$MonitorElementObject = new MonitorElement('docdata');
+		if (!$MonitorElementObject->enableMonitoringByUserId($this->getID(), $userid)) {
+			$this->setError($MonitorElementObject->getErrorMessage());
+			return false;
 		}
 		return true;
 	}
@@ -621,10 +622,9 @@ class Document extends Error {
 	 * @return	boolean	true if success.
 	 */
 	function clearMonitor() {
-		$result = db_query_params('DELETE FROM docdata_monitored_docman WHERE doc_id = $1',
-					array($this->getID()));
-		if (!$result) {
-			$this->setError(_('Unable To Clear Monitor')._(': ').db_error());
+		$MonitorElementObject = new MonitorElement('docdata');
+		if (!$MonitorElementObject->clearMonitor($this->getID())) {
+			$this->setError($MonitorElementObject->getErrorMessage());
 			return false;
 		}
 		return true;
@@ -933,7 +933,7 @@ class Document extends Error {
 		$subject="[" . forge_get_config('forge_name') ."] ".util_unconvert_htmlspecialchars($doc_name);
 		$body = "\n"._('A new document has been uploaded and waiting to be approved by you')._(': ').
 		"\n".util_make_url('/docman/?group_id='.$group_id.'&view=admin').
-		"\nBy: " . $name . "\n";
+		"\n"._('by').(': ').$name."\n";
 
 		$sanitizer = new TextSanitizer();
 		$text = $desc;

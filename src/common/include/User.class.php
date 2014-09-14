@@ -273,28 +273,28 @@ class GFUser extends Error {
 	/**
 	 * create() - Create a new user.
 	 *
-	 * @param	string		$unix_name		The unix username.
-	 * @param	string		$firstname		The real firstname.
-	 * @param	string		$lastname		The real lastname.
-	 * @param	string		$password1		The first password.
-	 * @param	string		$password2		The confirmation password.
-	 * @param	string		$email			The users email address.
-	 * @param	string		$mail_site		The users preferred default language.
-	 * @param	string		$mail_va		The users preferred default timezone.
-	 * @param	int			$language_id	The ID of the language preference.
-	 * @param	string		$timezone		The users preferred default timezone.
-	 * @param	string		$dummy1			ignored	(no longer used)
-	 * @param	int			$dummy2			ignored	(no longer used)
-	 * @param	int			$theme_id		The users theme_id.
-	 * @param	string    	$unix_box		The users unix_box.
-	 * @param	string    	$address		The users address.
-	 * @param	string    	$address2		The users address part 2.
-	 * @param	string    	$phone			The users phone.
-	 * @param	string    	$fax			The users fax.
-	 * @param	string		$title			The users title.
-	 * @param	string		$ccode			The users ISO country_code.
-	 * @param	bool		$send_mail		Whether to send an email or not
-	 * @param	bool|int	$tooltips		The users preference for tooltips
+	 * @param	string		$unix_name	The unix username.
+	 * @param	string		$firstname	The real firstname.
+	 * @param	string		$lastname	The real lastname.
+	 * @param	string		$password1	The first password.
+	 * @param	string		$password2	The confirmation password.
+	 * @param	string		$email		The users email address.
+	 * @param	string		$mail_site	The users preferred default language.
+	 * @param	string		$mail_va	The users preferred default timezone.
+	 * @param	int		$language_id	The ID of the language preference.
+	 * @param	string		$timezone	The users preferred default timezone.
+	 * @param	string		$dummy1		ignored	(no longer used)
+	 * @param	int		$dummy2		ignored	(no longer used)
+	 * @param	int		$theme_id	The users theme_id.
+	 * @param	string		$unix_box	The users unix_box.
+	 * @param	string		$address	The users address.
+	 * @param	string		$address2	The users address part 2.
+	 * @param	string		$phone		The users phone.
+	 * @param	string		$fax		The users fax.
+	 * @param	string		$title		The users title.
+	 * @param	string		$ccode		The users ISO country_code.
+	 * @param	bool		$send_mail	Whether to send an email or not
+	 * @param	bool|int	$tooltips	The users preference for tooltips
 	 * @return	bool|int	The newly created user ID
 	 *
 	 */
@@ -524,37 +524,14 @@ Use one below, but make sure it is entered as the single line.)
 
 
 			db_begin();
-			$res = db_query_params('DELETE FROM artifact_monitor WHERE user_id=$1',
-						array($this->getID()));
-			if (!$res) {
-				$this->setError(_('Could Not Delete From artifact_monitor:') . ' '.db_error());
-				db_rollback();
-				return false;
-			}
-			$res = db_query_params('DELETE FROM artifact_type_monitor WHERE user_id=$1',
-						array($this->getID()));
-			if (!$res) {
-				$this->setError(_('Could Not Delete From artifact_type_monitor:') . ' ' .db_error());
-				db_rollback();
-				return false;
-			}
-			$MonitorElementObject = new MonitorElement('forum');
-			if (!$MonitorElementObject->clearMonitorForUserId($this->getID())) {
-				$this->setError($MonitorElementObject->getErrorMessage());
-				db_rollback();
-				return false;
-			}
-			$MonitorElementObject = new MonitorElement('docdata');
-			if (!$MonitorElementObject->clearMonitorForUserId($this->getID())) {
-				$this->setError($MonitorElementObject->getErrorMessage());
-				db_rollback();
-				return false;
-			}
-			$MonitorElementObject = new MonitorElement('docgroup');
-			if (!$MonitorElementObject->clearMonitorForUserId($this->getID())) {
-				$this->setError($MonitorElementObject->getErrorMessage());
-				db_rollback();
-				return false;
+			$monitorElementsArray = array('artifact', 'artifact_type', 'docdata', 'docgroup', 'forum');
+			foreach ($monitorElementsArray as $monitorElement) {
+				$MonitorElementObject = new MonitorElement($monitorElement);
+				if (!$MonitorElementObject->clearMonitorForUserId($this->getID())) {
+					$this->setError($MonitorElementObject->getErrorMessage());
+					db_rollback();
+					return false;
+				}
 			}
 
 			$hook_params = array();
@@ -592,7 +569,7 @@ Use one below, but make sure it is entered as the single line.)
 	 * @param	string	$ccode		The users ccode.
 	 * @param	int	$tooltips	The users preference for tooltips.
 	 * @param	string	$email		The users email.
-	 * @return bool
+	 * @return	bool
 	 */
 	function update($firstname, $lastname, $language_id, $timezone, $mail_site, $mail_va, $use_ratings,
 					$dummy1, $dummy2, $theme_id, $address, $address2, $phone, $fax, $title,
@@ -680,8 +657,8 @@ Use one below, but make sure it is entered as the single line.)
 	 *
 	 * If an update occurred and you need to access the updated info.
 	 *
-	 * @param    int    $user_id the User ID data to be fetched
-	 * @return    boolean    success;
+	 * @param	int	$user_id	the User ID data to be fetched
+	 * @return	boolean	success;
 	 */
 	function fetchData($user_id) {
 		$res = db_query_params('SELECT * FROM users WHERE user_id=$1',

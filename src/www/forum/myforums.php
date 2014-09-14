@@ -34,6 +34,7 @@ require_once $gfcommon.'forum/Forum.class.php';
 require_once $gfcommon.'forum/ForumFactory.class.php';
 require_once $gfcommon.'forum/ForumMessageFactory.class.php';
 require_once $gfcommon.'forum/ForumMessage.class.php';
+require_once $gfcommon.'include/MonitorElement.class.php';
 
 global $HTML;
 
@@ -50,27 +51,22 @@ if ($group_id) {
 }
 
 //get the user monitored forums
-$result = db_query_params ('SELECT mon.forum_id, fg.group_id FROM forum_monitored_forums mon,forum_group_list fg where mon.user_id=$1 and fg.group_forum_id=mon.forum_id',
-			   array ($user_id));
-if (!$result) {
-    echo $HTML->error_msg(_('Database error :').db_error());
-    forum_footer();
-    exit;
-}
-if ( db_numrows($result) < 1) {
-    echo $HTML->information(_('You have no monitored forums'));
-    forum_footer();
-    exit;
+$MonitorElementObject = new MonitorElement('forum');
+$monitoredForumsIdsArray = $MonitorElementObject->getMonitedByUserIdInArray($user_id);
+
+if (!$monitoredForumsIdsArray) {
+	echo $HTML->error_msg($MonitorElementObject->getErrorMessage());
+	forum_footer();
+	exit;
 }
 
-//now, i need to create a forum object per each forum that the user is monitoring
-$monitored_forums = array();
-for ($i=0;$i<db_numrows($result);$i++) {
-	$monitored_forums[$i] = db_fetch_array($result);
+if (count($monitoredForumsIdsArray) < 1) {
+	echo $HTML->information(_('You have no monitored forums'));
+	forum_footer();
+	exit;
 }
 
-$tablearr=array(_('Project'),_('Forum'), _('Threads'),
-				_('Posts'), _('Last Post'), _('New Content?'));
+$tablearr = array(_('Project'),_('Forum'), _('Threads'), _('Posts'), _('Last Post'), _('New Content?'));
 echo $HTML->listTableTop($tablearr);
 
 $i = 0;
@@ -78,89 +74,75 @@ $j = 0;
 
 $f = array();
 //CHECK : if we won't ever be needing to store each forum/fmf, etc for each pass, don't use an array and use the same variable like $fmf instead of $fmf[$i], etc
-for($i=0;$i<sizeof($monitored_forums);$i++) {
-	$g = group_get_object($monitored_forums[$i]["group_id"]);
-	if (!$g || !is_object($g) || $g->isError()) {
-		exit_no_group();
-	}
-	$f = new Forum($g,$monitored_forums[$i]["forum_id"]);
-	if (!$f || !is_object($f) || $f->isError()) {
-		exit_error($f->isError(),'forums');
-	}
-	if (!is_object($f)) {
-		//just skip it - this object should never have been placed here
-	} elseif ($f->isError()) {
-		echo $f->getErrorMessage();
-	} else {
-		//check if the forum has new content
+for($i = 0; $i < sizeof($monitoredForumsIdsArray); $i++) {
+	if (forge_check_perm('forum', $monitoredForumsIdsArray[$i], 'read')) {
+		$forumObject = forum_get_object($monitoredForumsIdsArray[$i]);
+		if ($forumObject->isError()) {
+			echo $forumObject->getErrorMessage();
+		} else {
+			//check if the forum has new content
 
-		$fh = new ForumHTML($f);
-		if (!$fh || !is_object($fh)) {
-			exit_error(_('Error getting new ForumHTML'), 'forums');
-		} elseif ($fh->isError()) {
-			exit_error($fh->getErrorMessage(), 'forums');
-		}
+			$fh = new ForumHTML($forumObject);
+			if (!$fh || !is_object($fh)) {
+				exit_error(_('Error getting new ForumHTML'), 'forums');
+			} elseif ($fh->isError()) {
+				exit_error($fh->getErrorMessage(), 'forums');
+			}
 
-		$fmf = new ForumMessageFactory($f);
-		if (!$fmf || !is_object($fmf)) {
-			exit_error(_('Error getting new ForumMessageFactory'), 'forums');
-		} elseif ($fmf->isError()) {
-			exit_error($fmf->getErrorMessage(), 'forums');
-		}
+			$fmf = new ForumMessageFactory($forumObject);
+			if (!$fmf || !is_object($fmf)) {
+				exit_error(_('Error getting new ForumMessageFactory'), 'forums');
+			} elseif ($fmf->isError()) {
+				exit_error($fmf->getErrorMessage(), 'forums');
+			}
 
-		$fmf->setUp($offset,$style,$max_rows,$set);
-		$style=$fmf->getStyle();
-		$max_rows=$fmf->max_rows;
-		$offset=$fmf->offset;
-		$msg_arr = $fmf->nestArray($fmf->getNested());
-		if ($fmf->isError()) {
-			exit_error($fmf->getErrorMessage(), 'forums');
-		}
-		$rows=count($msg_arr[0]);
-		$avail_rows=$fmf->fetched_rows;
-		if ($rows > $max_rows) {
-			$rows=$max_rows;
-		}
+			$fmf->setUp($offset,$style,$max_rows,$set);
+			$style=$fmf->getStyle();
+			$max_rows=$fmf->max_rows;
+			$offset=$fmf->offset;
+			$msg_arr = $fmf->nestArray($fmf->getNested());
+			if ($fmf->isError()) {
+				exit_error($fmf->getErrorMessage(), 'forums');
+			}
+			$rows=count($msg_arr[0]);
+			$avail_rows=$fmf->fetched_rows;
+			if ($rows > $max_rows) {
+				$rows=$max_rows;
+			}
 
-		$new_content = '&nbsp;';
-		//this loops through every message AND followup, in search of new messages.
-		//anything that's new ( new thread or followup) is considered to be a "new thing" and the forum
-		//is considered to have new contents
-		if (!empty($msg_arr)) {
-			foreach ($msg_arr as $forum_msg_arr) {
-				foreach ($forum_msg_arr as $forum_msg) {
-					if ($f->getSavedDate() < $forum_msg->getPostDate()) {
-						//we've got ourselves a new message or followup for this forum. note that, exit the search
-						$new_content = html_image('ic/new.png','', '', array('alt' => 'new'));
+			$new_content = '&nbsp;';
+			//this loops through every message AND followup, in search of new messages.
+			//anything that's new ( new thread or followup) is considered to be a "new thing" and the forum
+			//is considered to have new contents
+			if (!empty($msg_arr)) {
+				foreach ($msg_arr as $forum_msg_arr) {
+					foreach ($forum_msg_arr as $forum_msg) {
+						if ($forumObject->getSavedDate() < $forum_msg->getPostDate()) {
+							//we've got ourselves a new message or followup for this forum. note that, exit the search
+							$new_content = html_image('ic/new.png','', '', array('alt' => 'new'));
+							break;
+						}
+					}
+					if ($new_content != '&nbsp;') {
 						break;
 					}
 				}
-				if ($new_content != '&nbsp;') {
-					break;
-				}
 			}
-		}
-		/*while (($j < $rows) && ($total_rows < $max_rows)) {
-			$msg =& $msg_arr["0"][$j];
-			$total_rows++;
-			if ($f->getSavedDate() < $msg->getPostDate()) {
-				//we've got ourselves a new message for this forum. note that, exit the search
-				$new_content = "<center>" . html_image('ic/new.png','', '', array('alt' => 'new')) . "</center>";
-				break;
-			}
-			$j++;
-		}*/
 
-		$this_forum_group = $f->getGroup();
-		$date = $f->getMostRecentDate()? date(_('Y-m-d H:i'),$f->getMostRecentDate()) : '';
-		$cells = array();
-		$cells[][] = $this_forum_group->getPublicName();
-		$cells[][] = util_make_link('/forum/forum.php?forum_id='.$f->getID().'&group_id='.$this_forum_group->getID(), html_image('ic/forum20w.png').'&nbsp;'.$f->getName());
-		$cells[] = array($f->getThreadCount(), 'class' => 'align-center');
-		$cells[] = array($f->getMessageCount(), 'class' => 'align-center');
-		$cells[] = array($date, 'class' => 'align-center');
-		$cells[] = array($new_content, 'class' => 'align-center');
-		echo $HTML->multiTableRow(array(), $cells);
+			$this_forum_group = $forumObject->getGroup();
+			$date = $forumObject->getMostRecentDate()? date(_('Y-m-d H:i'),$forumObject->getMostRecentDate()) : '';
+			$cells = array();
+			$cells[][] = $this_forum_group->getPublicName();
+			$cells[][] = util_make_link('/forum/forum.php?forum_id='.$forumObject->getID().'&group_id='.$this_forum_group->getID(), html_image('ic/forum20w.png').'&nbsp;'.$forumObject->getName());
+			$cells[] = array($forumObject->getThreadCount(), 'class' => 'align-center');
+			$cells[] = array($forumObject->getMessageCount(), 'class' => 'align-center');
+			$cells[] = array($date, 'class' => 'align-center');
+			$cells[] = array($new_content, 'class' => 'align-center');
+			echo $HTML->multiTableRow(array(), $cells);
+		}
+	} else {
+		// Oh ho! we found some monitored elements where user has no read access. Let's clean the situation
+		$monitorElementObject->disableMonitoringByUserId($monitoredForumsIdsArray[$i], user_getid());
 	}
 }
 

@@ -410,8 +410,8 @@ switch (getStringFromRequest('func')) {
 		if (!session_loggedin()) {
 			exit_permission_denied();
 		}
-		$start = getIntFromRequest('start');
-		$stop = getIntFromRequest('stop');
+		$start = getIntFromRequest('startmonitor');
+		$stop = getIntFromRequest('stopmonitor');
 		$artifact_id = getIntFromRequest('artifact_id');
 
 		// Fix to prevent collision with the start variable used in browse.
@@ -430,7 +430,6 @@ switch (getStringFromRequest('func')) {
 					$feedback = _('Monitoring Stopped');
 				else {
 					$ah->setMonitor();
-					$error_msg = $ah->getErrorMessage();
 				}
 				include $gfcommon.'tracker/actions/browse.php';
 			}
@@ -447,7 +446,6 @@ switch (getStringFromRequest('func')) {
 					$feedback = _('Monitoring Deactivated');
 				else {
 					$at->setMonitor();
-					$feedback=$at->getErrorMessage();
 					$at->clearError();
 				}
 				include $gfcommon.'tracker/actions/browse.php';
