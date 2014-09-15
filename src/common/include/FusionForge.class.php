@@ -49,7 +49,7 @@ class FusionForge extends Error {
 		if (isset($forge_pkg_version)) {
 			$this->software_version = $forge_pkg_version;
 		} else {
-			$this->software_version = file_get_contents(dirname(__FILE__).'/../../VERSION');
+			$this->software_version = trim(file_get_contents(dirname(__FILE__).'/../../VERSION'));
 		}
 
 		if (isset($forge_pkg_type)) {
