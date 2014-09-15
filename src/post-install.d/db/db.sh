@@ -20,5 +20,5 @@
 
 source_path=$(forge_get_config source_path)
 
-$source_path/post-install.d/db/configure.sh
+$source_path/post-install.d/db/server.sh
 $source_path/post-install.d/db/populate.sh

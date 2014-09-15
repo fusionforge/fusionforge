@@ -184,7 +184,6 @@ on an Apache webserver.
 Summary: collaborative development tool - mail tools (using Postfix)
 Requires: %{name}-common = %{version}, postfix
 Provides: %{name}-mta = %{version}
-Conflicts: %{name}-mta
 %description mta-postfix
 FusionForge provides many tools to aid collaboration in a
 development project, such as bug-tracking, task management,
@@ -205,7 +204,6 @@ if [ $1 -eq 0 ] ; then %{_datadir}/%{name}/post-install.d/mta-postfix/mta-postfi
 Summary: collaborative development tool - mail tools (using Exim 4)
 Requires: %{name}-common = %{version}, exim
 Provides: %{name}-mta = %{version}
-Conflicts: %{name}-mta
 %description mta-exim4
 FusionForge provides many tools to aid collaboration in a
 development project, such as bug-tracking, task management,

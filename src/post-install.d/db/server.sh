@@ -24,7 +24,11 @@ database_user=$(forge_get_config database_user)
 
 # Create default configuration files if needed
 if [ -e /etc/redhat-release ]; then
-    service postgresql initdb >/dev/null
+    if type postgresql-setup >/dev/null 2>&1; then
+	postgresql-setup initdb >/dev/null || true
+    else
+	service postgresql initdb >/dev/null || true  # deprecated in Fedora
+    fi
     chkconfig postgresql on
 fi
 if [ -e /etc/SuSE-release ]; then

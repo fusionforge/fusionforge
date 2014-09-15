@@ -5,7 +5,7 @@ Requires: git, gitweb
 Requires: subversion, viewvc, augeas
 
 %package plugin-scmbzr
-Requires: bazaar, mod_wsgi, loggerhead
+Requires: bzr, mod_wsgi, loggerhead
 
 %package plugin-scmhg
 Requires: mercurial
@@ -13,17 +13,14 @@ Requires: mercurial
 %package plugin-scmdarcs
 Requires: darcs
 
-%package plugin-scmarch
-Requires: arch
-
 %package plugin-admssw
-Requires: postgresql, plugin-doaprdf
+Requires: postgresql, fusionforge-plugin-doaprdf
 
 %package plugin-aselectextauth
 Requires:
 
 %package plugin-authcas
-Requires:
+Requires: php-pear-CAS
 
 %package plugin-authhttpd
 Requires:
@@ -41,7 +38,7 @@ Requires: ckeditor
 Requires:
 
 %package plugin-doaprdf
-Requires:
+Requires: %{name}-web = %{version}
 
 %package plugin-externalsearch
 Requires:
@@ -71,9 +68,6 @@ Requires:
 Requires: moin, mod_wsgi, python-psycopg2
 
 %package plugin-online_help
-Requires:
-
-%package plugin-quota_management
 Requires:
 
 %package plugin-scmhook
