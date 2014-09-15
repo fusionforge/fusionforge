@@ -1,11 +1,11 @@
 <?php
-/*-
+/**
  * MediaWiki Plugin for FusionForge
  *
  * Copyright © 2010, 2012
  *      Thorsten Glaser <t.glaser@tarent.de>
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2014, Franck Villaume - TrivialDev
  * All rights reserved.
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -22,12 +22,14 @@
  * You should have received a copy of the GNU General Public License along
  * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- *-
+ *
  * Admin page for the plugin
  */
 
 require_once '../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
+
+global $HTML;
 
 function logo_create($file_location, $project_mw_images_dir) {
 	$logofile = $project_mw_images_dir . "/.wgLogo.png";
@@ -71,12 +73,12 @@ if (!$group) {
 	exit_error("Invalid Project", "Nonexistent Project");
 }
 if (!$group->usesPlugin("mediawiki")) {
-	exit_error("Invalid Project", "Project does not use MediaWiki Plugin");
+	exit_disabled();
 }
 
 $userperm = $group->getPermission();
 if (!$userperm->IsMember())
-	exit_error("Access Denied", "You are not a member of this project");
+	exit_permission_denied();
 if (!$userperm->IsAdmin())
 	exit_error("Access Denied", "You are not an admin of this project");
 
@@ -89,16 +91,16 @@ $group_logo_url = util_make_url("/plugins/mediawiki/wiki/" .
 
 $incoming = False;
 if (forge_get_config('use_manual_uploads')) {
-  $incoming = forge_get_config('groupdir_prefix')."/$group_unix_name/incoming";
+	$incoming = forge_get_config('groupdir_prefix')."/$group_unix_name/incoming";
 
-  if ( (! is_dir($incoming)) || (! opendir($incoming)) ) {
-    $error_msg = sprintf( _("Not a directory or could not access contents of %s"), $incoming);
-  }
+	if ( (! is_dir($incoming)) || (! opendir($incoming)) ) {
+		$error_msg = sprintf( _("Not a directory or could not access contents of %s"), $incoming);
+	}
 }
 
 /* As the cronjob creates images subdirs in project data only if the uploads are enabled, there are chances the upload may fail */
 if (! forge_get_config('enable_uploads', 'mediawiki')) {
-  $error_msg .= _("Mediawiki plugin's configuration may require to enable uploads ('enable_uploads'). Contact your admin.");
+	$error_msg .= _("Mediawiki plugin's configuration may require to enable uploads ('enable_uploads'). Contact your admin.");
 }
 
 if (getStringFromRequest("logo_submit")) {
@@ -109,18 +111,18 @@ if (getStringFromRequest("logo_submit")) {
 	$feedback = "";
 
 	if (getIntFromRequest("logo_nuke") == 1) {
-	  if (unlink($wgUploadDirectory . "/.wgLogo.png")) {
+		if (unlink($wgUploadDirectory . "/.wgLogo.png")) {
 			$feedback = _("File successfully removed");
-	  } else {
+		} else {
 			$feedback = _("File removal error");
-	  }
+		}
 	} elseif ($userfile && is_uploaded_file($userfile['tmp_name']) &&
-	    util_is_valid_filename($userfile['name'])) {
+			util_is_valid_filename($userfile['name'])) {
 		$infile = $userfile['tmp_name'];
 		$fname = $userfile['name'];
 		$move = true;
 	} elseif ($userfile && $userfile['error'] != UPLOAD_ERR_OK &&
-	    $userfile['error'] != UPLOAD_ERR_NO_FILE) {
+		$userfile['error'] != UPLOAD_ERR_NO_FILE) {
 		switch ($userfile['error']) {
 		case UPLOAD_ERR_INI_SIZE:
 		case UPLOAD_ERR_FORM_SIZE:
@@ -134,8 +136,8 @@ if (getStringFromRequest("logo_submit")) {
 			break;
 		}
 	} elseif (forge_get_config ('use_manual_uploads') && $manual_filename &&
-	    util_is_valid_filename($manual_filename) &&
-	    is_file($incoming.'/'.$manual_filename)) {
+			util_is_valid_filename($manual_filename) &&
+			is_file($incoming.'/'.$manual_filename)) {
 		$incoming = forge_get_config('groupdir_prefix')."/$group_unix_name/incoming";
 		$infile = $incoming.'/'.$manual_filename;
 		$fname = $manual_filename;
@@ -162,50 +164,41 @@ site_project_header(array(
 	"group" => $gid,
 	));
 
+echo html_e('h2', array(), _('Nightly XML dump'));
+echo html_e('p', array(), sprintf(_('<a href="%s">Download</a> the nightly created XML dump (backup) here.'),
+				util_make_url("/plugins/mediawiki/dumps/" . $group_unix_name . ".xml")));
 
-echo "<h2>" . _('Nightly XML dump') . "</h2>\n";
-echo '<p>';
-printf(_('<a href="%s">Download</a> the nightly created XML dump (backup) here.'),
-       util_make_url("/plugins/mediawiki/dumps/" . $group_unix_name . ".xml"));
-echo "</p>\n";
-
-echo '<h2>'. _("This project's wiki logo: \$wgLogo") . "</h2>\n";
-echo '<div style="border:solid 1px black; margin:3px; padding:3px;">';
+echo html_e('h2', array(), _("This project's wiki logo : \$wgLogo"));
+echo html_ao('div', array('style' => 'border:solid 1px black; margin:3px; padding:3px'));;
 if (file_exists($group_logo)) {
-	echo "\n <p>" . _("Current logo:") . ' (<a href="' . $group_logo_url .
-	    '">' . _("Download") . '</a>)<br /><img alt="wgLogo.png" ' .
-	    'class="boxed_wgLogo" src="' . $group_logo_url . '" />' .
-	    "</p>\n";
+	echo html_e('p', array(), _("Current logo:") . ' (<a href="' . $group_logo_url .
+				'">' . _("Download") . '</a>)<br /><img alt="wgLogo.png" ' .
+				'class="boxed_wgLogo" src="' . $group_logo_url . '" />');
 } else {
-	echo "\n <p>" . _("No per-project logo currently installed.") . "</p>\n";
+	echo html_e('p', array(), _('No per-project logo currently installed.'));
 }
-echo "</div>\n\n";
-
-?>
-<form enctype="multipart/form-data" method="post"
- style="border:solid 1px black; margin:3px; padding:3px;"
- action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$gid"; ?>">
-<h4><?php echo _("Upload a new logo") ?></h4>
-<p><?php echo _('The logo must be in PNG format and precisely 135x135 pixels in size.'); ?></p>
-<p><?php echo _('Upload a new file') ?>: <input type="file" name="userfile" /></p>
-	  <?php if (forge_get_config('use_manual_uploads')) {
-             echo '<p>';
-             printf(_('Alternatively, you can use a file you already uploaded (by SFTP or SCP) to the <a href="%2$s">project\'s incoming directory</a> (%1$s).'),
-	       $incoming, "sftp://" . forge_get_config('web_host') . $incoming . "/");
-             echo ' ' . _('This direct <tt>sftp://</tt> link only works with some browsers, such as Konqueror.') . '<br />';
-             $manual_files_arr=ls($incoming,true);
-             if ( count($manual_files_arr) > 0 ) {
-                echo _('Choose an already uploaded file:').'<br />';
+echo html_ac(html_ap() -1);
+echo $HTML->openForm(array('enctype' => 'multipart/form-data', 'method' => 'post', 'style' => 'border:solid 1px black; margin:3px; padding:3px;',
+				'action' => getStringFromServer('PHP_SELF').'?group_id='.$gid));
+echo html_e('h3', array(), _('Upload a new logo'));
+echo html_e('p', array(), _('The logo must be in PNG format and precisely 135x135 pixels in size.'));
+echo html_e('p', array(), _('Upload a new file').(': ').html_e('input', array('type' => 'file', 'name' => 'userfile')));
+if (forge_get_config('use_manual_uploads')) {
+	echo '<p>';
+	printf(_('Alternatively, you can use a file you already uploaded (by SFTP or SCP) to the <a href="%2$s">project\'s incoming directory</a> (%1$s).'),
+		$incoming, "sftp://" . forge_get_config('web_host') . $incoming . "/");
+	echo ' ' . _('This direct <tt>sftp://</tt> link only works with some browsers, such as Konqueror.') . '<br />';
+	$manual_files_arr=ls($incoming,true);
+	if ( count($manual_files_arr) > 0 ) {
+		echo _('Choose an already uploaded file:').'<br />';
 		echo html_build_select_box_from_arrays($manual_files_arr,$manual_files_arr,'manual_filename','');
-	     } else {
-	       echo '<input type="hidden" name="manual_filename" value="">';
-	     } ?>
-	     </p>
-	  <?php } ?>
-<p><input type="checkbox" name="logo_nuke" value="1" /><?php
- echo _("… or delete the currently uploaded logo and revert to the site default"); ?></p>
-<p><input type="submit" name="logo_submit" value="<?php echo _("Upload new logo"); ?>" /></p>
-</form>
-
-<?php
-site_project_footer();
+	} else {
+		echo '<input type="hidden" name="manual_filename" value="">';
+	}
+	echo '</p>';
+}
+echo html_e('p', array(), html_e('input', array('type' => 'checkbox', 'name' => 'logo_nuke', 'value' => 1)).
+			_('… or delete the currently uploaded logo and revert to the site default'));
+echo html_e('p', array(), html_e('input', array('type' => 'submit', 'name' => 'logo_submit', 'value' => _('Upload new logo'))));
+echo $HTML->closeForm();
+site_project_footer(array());
