@@ -230,7 +230,7 @@ This plugin provides LDAP authentication capability for FusionForge.
 %package plugin-mediawiki
 Summary: Mediawiki plugin for FusionForge
 Group: Development/Tools
-Requires: %{name} >= %{version}, php, mediawiki
+Requires: %{name} >= %{version}, php, mediawiki119
 %description plugin-mediawiki
 This is a plugin to integrate MediaWiki within FusionForge.
 
@@ -473,7 +473,7 @@ sysauthldap plugin for FusionForge.
 %{__install} -m 755 -d $RPM_BUILD_ROOT/home/groups
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{_var}/log/gforge
 # mock mediawiki directory because we symlink GForge skin to Monobook
-%{__install} -m 755 -d $RPM_BUILD_ROOT/usr/share/mediawiki/skins
+%{__install} -m 755 -d $RPM_BUILD_ROOT/usr/share/mediawiki119/skins
 
 # we define a search and replace function, we'll be using this a lot
 # to fix several parts of the installation
@@ -594,23 +594,25 @@ done
 
 # plugin: mediawiki
 %{__ln_s} ../../plugins/mediawiki/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/mediawiki
-%{__ln_s} /usr/share/mediawiki/api.php $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
-%{__ln_s} /usr/share/mediawiki/extensions $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
-%{__ln_s} /usr/share/mediawiki/img_auth.php $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
-%{__ln_s} /usr/share/mediawiki/includes $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
-%{__ln_s} /usr/share/mediawiki/index.php $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
-%{__ln_s} /usr/share/mediawiki/languages $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
-%{__ln_s} /usr/share/mediawiki/maintenance/ $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
-%{__ln_s} /usr/share/mediawiki/opensearch_desc.php $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
-%{__ln_s} /usr/share/mediawiki/profileinfo.php $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
-%{__ln_s} /usr/share/mediawiki/redirect.php $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
-%{__ln_s} /usr/share/mediawiki/StartProfiler.php $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
-%{__ln_s} /usr/share/mediawiki/thumb.php $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
-%{__ln_s} /usr/share/mediawiki/trackback.php $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
-%{__ln_s} /usr/share/mediawiki/skins $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
-%{__ln_s} /usr/share/mediawiki $RPM_BUILD_ROOT%{FORGE_DATA_PATH}/plugins/mediawiki/master
-%{__ln_s} %{FORGE_PLUGINS_LIB_DIR}/mediawiki/mediawiki-skin/FusionForge.php $RPM_BUILD_ROOT/usr/share/mediawiki/skins/
-%{__ln_s} %{FORGE_PLUGINS_LIB_DIR}/mediawiki/mediawiki-skin/fusionforge $RPM_BUILD_ROOT/usr/share/mediawiki/skins/
+%{__ln_s} /usr/share/mediawiki119/api.php $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki119/extensions $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki119/img_auth.php $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki119/includes $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki119/index.php $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki119/languages $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki119/load.php $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki119/maintenance/ $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki119/opensearch_desc.php $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki119/profileinfo.php $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki119/redirect.php $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki119/StartProfiler.php $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki119/thumb.php $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki119/trackback.php $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki119/skins $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/mediawiki/www/
+%{__ln_s} /usr/share/mediawiki119 $RPM_BUILD_ROOT%{FORGE_DATA_PATH}/plugins/mediawiki/master
+%{__ln_s} %{FORGE_PLUGINS_LIB_DIR}/mediawiki/mediawiki-skin/FusionForge.php $RPM_BUILD_ROOT/usr/share/mediawiki119/skins/
+%{__ln_s} %{FORGE_PLUGINS_LIB_DIR}/mediawiki/mediawiki-skin/fusionforge $RPM_BUILD_ROOT/usr/share/mediawiki119/skins/
+%{__ln_s} /usr/share/mediawiki119 $RPM_BUILD_ROOT/usr/share/mediawiki
 
 # plugin: moinmoin
 %{__ln_s} ../../plugins/moinmoin/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/moinmoin
@@ -1013,8 +1015,9 @@ fi
 %{FORGE_PLUGINS_LIB_DIR}/mediawiki/
 %{FORGE_DIR}/www/plugins/mediawiki
 %{FORGE_DATA_PATH}/plugins/mediawiki
-/usr/share/mediawiki/skins/FusionForge.php
-/usr/share/mediawiki/skins/fusionforge
+/usr/share/mediawiki119/skins/FusionForge.php
+/usr/share/mediawiki119/skins/fusionforge
+/usr/share/mediawiki
 %config(noreplace) %{FORGE_PLUGINS_CONF_DIR}/mediawiki/
 
 %files plugin-moinmoin
