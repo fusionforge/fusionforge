@@ -185,6 +185,9 @@ class AuthLDAPPlugin extends ForgeAuthPlugin {
 			   $mapped_data['email']);
 
 		$u->setMD5Passwd ($mapped_data['md5_password']);
+		if (substr($mapped_data['unix_password'], 0, 7) == '{crypt}') {
+			$mapped_data['unix_password'] = substr($mapped_data['unix_password'],7);
+		}
 		$u->setUnixPasswd ($mapped_data['unix_password']);
 	}
 
