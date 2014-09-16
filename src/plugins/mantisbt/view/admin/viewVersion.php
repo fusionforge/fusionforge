@@ -3,6 +3,7 @@
  * MantisBT plugin
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -33,45 +34,34 @@ global $password;
 try {
 	/* do not recreate $clientSOAP object if already created by other pages */
 	if (!isset($clientSOAP))
-		$clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+		$clientSOAP = new SoapClient($mantisbtConf['url'].'/api/soap/mantisconnect.php?wsdl', array('trace' => true, 'exceptions' => true));
 
-	$listVersions = $clientSOAP->__soapCall('mc_project_get_versions', array("username" => $username, "password" => $password, "project_id" => $mantisbtConf['id_mantisbt']));
+	$listVersions = $clientSOAP->__soapCall('mc_project_get_versions', array('username' => $username, 'password' => $password, 'project_id' => $mantisbtConf['id_mantisbt']));
 } catch  (SoapFault $soapFault) {
-	echo $HTML->warning_msg(_('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring);
+	echo $HTML->warning_msg(_('Technical error occurs during data retrieving')._(': ').$soapFault->faultstring);
 	$errorPage = true;
 }
 
 if (!isset($errorPage)){
 	echo $HTML->boxTop(_('Manage versions'));
 	if (sizeof($listVersions)) {
-		echo '<table>';
-		echo	'<tr>';
-		echo		'<td>'._('Version').'</td>';
-		echo		'<td>'._('Description').'</td>';
-		echo		'<td>'._('Target Date').'</td>';
-		echo		'<td>'._('Type').'</td>';
-		echo 		'<td>'._('Action').'</td>';
-		echo	'</tr>';
-		$i = 1;
+		$titleArr = array(_('Version'), _('Description'), _('Target Date'), _('Type'), _('Actions'));
+		echo $HTML->listTableTop($titleArr);
 		foreach ($listVersions as $key => $version){
-			echo '<tr '.$HTML->boxGetAltRowStyle($i).'>';
-			echo '<td>'.$version->name.'</td>';
+			$cells = array();
+			$cells[][] = $version->name;
 			(isset($version->description))? $description_value = $version->description : $description_value = '';
-			echo '<td>'.$description_value.'</td>';
-			echo '<td>'.strftime("%d/%m/%Y",strtotime($version->date_order)).'</td>';
-			/* est-ce une version release ? */
+			$cells[][] = $description_value;
+			$cells[][] = strftime(_("%d/%m/%Y"),strtotime($version->date_order));
 			if ( $version->released ) {
-				echo '<td>Release</td>';
-			/* juste une milestone alors */
+				$cells[][] = _('Release');
 			} else {
-				echo '<td>Milestone</td>';
+				$cells[][] = _('Milestone');
 			}
-			echo '<td>';
-			echo util_make_link('/plugins/'.$mantisbt->name.'/?type=admin&group_id='.$group_id.'&view=editVersion&idVersion='.$version->id, _('Update'));
-			echo '</td></tr>';
-			$i++;
+			$cells[][] = util_make_link('/plugins/'.$mantisbt->name.'/?type=admin&group_id='.$group_id.'&view=editVersion&idVersion='.$version->id, _('Update'));
+			echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($key, true)), $cells);
 		}
-		echo '</table>';
+		echo $HTML->listTableBottom();
 	} else {
 		echo $HTML->warning_msg(_('No versions'));
 	}
