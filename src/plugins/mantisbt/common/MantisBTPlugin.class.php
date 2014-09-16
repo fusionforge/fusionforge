@@ -4,7 +4,7 @@
  *
  * Copyright 2009, Fabien Dubois - Capgemini
  * Copyright 2009-2011, Franck Villaume - Capgemini
- * Copyright 2011-2012, Franck Villaume - TrivialDev
+ * Copyright 2011-2012,2014 Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -50,7 +50,7 @@ class MantisBTPlugin extends Plugin {
 		switch ($hookname) {
 			case "usermenu": {
 				if ($G_SESSION->usesPlugin($this->name)) {
-					$param = '?type=user&user_id=' . $G_SESSION->getId() . '&pluginname=' . $this->name; // we indicate the part we're calling is the user one
+					$param = '?type=user&user_id=' . $G_SESSION->getId(); // we indicate the part we're calling is the user one
 					echo $HTML->PrintSubMenu(array($this->text), array('/plugins/mantisbt/index.php' . $param), array(array('title' => _('Personal MantisBT page'))));
 				}
 				$returned = true;
@@ -64,13 +64,13 @@ class MantisBTPlugin extends Plugin {
 				}
 				if ($project->usesPlugin($this->name)) {
 					$params['TITLES'][] = $this->text;
-					$params['DIRS'][] = '/plugins/'.$this->name.'/?type=group&group_id=' . $group_id . '&pluginname=' . $this->name;
+					$params['DIRS'][] = '/plugins/'.$this->name.'/?type=group&group_id=' . $group_id;
 					$params['TOOLTIPS'][] = _('Tickets Management');
 					if (session_loggedin()) {
 						$user = session_get_user();
 						$userperm = $project->getPermission();
 						if ($userperm->isAdmin()) {
-							$params['ADMIN'][] = '/plugins/'.$this->name.'/?type=admin&group_id=' . $group_id . '&pluginname=' . $this->name;
+							$params['ADMIN'][] = '/plugins/'.$this->name.'/?type=admin&group_id=' . $group_id;
 						}
 					}
 					if (isset($params['toptab'])) {
@@ -89,7 +89,7 @@ class MantisBTPlugin extends Plugin {
 					echo '<p>';
 					$arr_t = array();
 					$arr_t[] = array('title' => _('Manage your mantisbt account and follow your tickets'));
-					echo util_make_link('/plugins/'.$this->name.'/?user_id='.$userid.'&type=user&pluginname='.$this->name, _('View Personal MantisBT'), $arr_t);
+					echo util_make_link('/plugins/'.$this->name.'/?user_id='.$userid.'&type=user', _('View Personal MantisBT'), $arr_t);
 					echo '</p>';
 				}
 				$returned = true;
@@ -101,7 +101,7 @@ class MantisBTPlugin extends Plugin {
 				$group = group_get_object($group_id);
 				if ($group->usesPlugin($this->name)) {
 					echo '<p>';
-					echo util_make_link("/plugins/mantisbt/?group_id=$group_id&type=admin&pluginname=".$this->name, _('View Admin MantisBT'), array('title' => _('MantisBT administration page')));
+					echo util_make_link('/plugins/'.$this->name.'/?group_id='.$group_id.'&type=admin', _('View Admin MantisBT'), array('title' => _('MantisBT administration page')));
 					echo '</p>';
 				}
 				$returned = true;
@@ -392,17 +392,17 @@ class MantisBTPlugin extends Plugin {
 		$labelTitle[] = _('Roadmap');
 		$labelTitle[] = _('Tickets');
 		$labelPage = array();
-		$labelPage[] = "/plugins/".$this->name."/?type=group&group_id=".$group_id."&pluginname=".$this->name."&view=roadmap";
-		$labelPage[] = "/plugins/".$this->name."/?type=group&group_id=".$group_id."&pluginname=".$this->name;
+		$labelPage[] = "/plugins/".$this->name."/?type=group&group_id=".$group_id."&view=roadmap";
+		$labelPage[] = "/plugins/".$this->name."/?type=group&group_id=".$group_id;
 		$labelAttr = array();
 		$labelAttr[] = array('title' => _('View the roadmap, per version tickets'), 'id' => 'roadmapView');
 		$labelAttr[] = array('title' => _('View all tickets.'), 'id' => 'ticketView');
 		$userperm = $group->getPermission();
 		if ($userperm->isAdmin()) {
 			$labelTitle[] = _('Administration');
-			$labelPage[] = "/plugins/".$this->name."/?type=admin&group_id=".$group_id."&pluginname=".$this->name;
+			$labelPage[] = "/plugins/".$this->name."/?type=admin&group_id=".$group_id;
 			$labelTitle[] = _('Statistics');
-			$labelPage[] = "/plugins/".$this->name."/?type=admin&group_id=".$group_id."&pluginname=".$this->name."&view=stat";
+			$labelPage[] = "/plugins/".$this->name."/?type=admin&group_id=".$group_id."&view=stat";
 			$labelAttr[] = array('title' => _('Manage versions, categories and general configuration.'), 'id' => 'adminView');
 			$labelAttr[] = array('title' => _('View global statistics.'), 'id' => 'statView');
 		}

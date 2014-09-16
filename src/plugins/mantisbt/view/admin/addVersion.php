@@ -29,9 +29,9 @@ global $group;
 global $group_id;
 global $mantisbt;
 
-echo '<form method="POST" name="addVersion" action="index.php?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&action=addVersion">';
-echo '<table><tr>';
+echo $HTML->openForm(array('method' => 'post', 'name' => 'addVersion', 'action' => util_make_uri('/plugins/'.$mantisbt->name.'/?type=admin&group_id='.$group_id.'&action=addVersion')));
 echo $HTML->boxTop(_('Add a new version'));
+echo '<table><tr>';
 echo '<td>';
 echo '<label>'._('Name').'</label><input name="version" type="text" size="10" />';
 // need to be implemented ....
@@ -46,6 +46,6 @@ echo '</td>';
 echo '<td>';
 echo '<input type="submit" value="'. _('Add') .'" />';
 echo '</td>';
-echo $HTML->boxBottom();
 echo '</tr></table>';
-echo '</form>';
+echo $HTML->boxBottom();
+echo $HTML->closeForm();

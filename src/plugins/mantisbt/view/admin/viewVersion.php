@@ -54,7 +54,7 @@ if (!isset($errorPage)){
 		echo	'</tr>';
 		$i = 1;
 		foreach ($listVersions as $key => $version){
-			echo '<tr '.$HTML->boxGetAltRowStyle($i).'">';
+			echo '<tr '.$HTML->boxGetAltRowStyle($i).'>';
 			echo '<td>'.$version->name.'</td>';
 			(isset($version->description))? $description_value = $version->description : $description_value = '';
 			echo '<td>'.$description_value.'</td>';
@@ -67,7 +67,7 @@ if (!isset($errorPage)){
 				echo '<td>Milestone</td>';
 			}
 			echo '<td>';
-			echo '<a href="?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&view=editVersion&idVersion='.$version->id.'" ">'._('Update').'</a>';
+			echo util_make_link('/plugins/'.$mantisbt->name.'/?type=admin&group_id='.$group_id.'&view=editVersion&idVersion='.$version->id, _('Update'));
 			echo '</td></tr>';
 			$i++;
 		}
