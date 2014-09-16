@@ -169,6 +169,10 @@ post-install-web:
 
 post-install-shell:
 	$(post_source_path)/post-install.d/shell/shell.sh configure
+post-install-mta-postfix:
+	$(post_source_path)/post-install.d/mta-postfix/mta-postfix.sh configure
+post-install-mta-exim4:
+	$(post_source_path)/post-install.d/mta-exim4/mta-exim4.sh configure
 post-install-lists:
 	$(post_source_path)/post-install.d/lists/lists.sh configure
 

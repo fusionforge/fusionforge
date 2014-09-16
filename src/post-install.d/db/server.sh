@@ -67,15 +67,18 @@ host  $database_name all 0.0.0.0/0 md5
 EOF
 
 # Multi-host connection
+restart=0
 if ! grep -q '^listen_addresses\b' $pg_conf; then
     echo "listen_addresses='0.0.0.0'" >> $pg_conf
+    restart=1
 fi
 
-if ! service postgresql status >/dev/null; then
-    service postgresql start
+if [ $restart = 1 ] || ! service postgresql status >/dev/null; then
+    service postgresql restart
 else
     service postgresql reload
 fi
+
 if [ -x /bin/systemctl ]; then
     sleep 5  # systemd's postgresql init scripts is stupidly async
     # if you have a better way that works across distros...

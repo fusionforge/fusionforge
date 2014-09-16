@@ -40,6 +40,7 @@ database_port=$2
 database_name=$3
 database_user=$4
 database_password_file=$5
+database_password_file=$6
 
 if [ -z $database_host ]; then
     database_host=127.0.0.1
@@ -57,6 +58,10 @@ database_password=$(cat "$database_password_file" 2>/dev/null)
 if [ -z $database_password ]; then
     database_password=$((head -c100 /dev/urandom; date +"%s:%N") | md5sum | cut -d' ' -f1)
 fi
+database_password_mta=$(cat "$database_password_mta_file" 2>/dev/null)
+if [ -z $database_password_mta ]; then
+    database_password_mta=$((head -c100 /dev/urandom; date +"%s:%N") | md5sum | cut -d' ' -f1)
+fi
 
 # Generate session key here for simplificy
 session_key=$((head -c100 /dev/urandom; date +"%s:%N") | md5sum | cut -d' ' -f1)
@@ -67,8 +72,12 @@ sed $source_path/templates/post-install-secrets.ini \
     -e "s,@database_port@,$database_port," \
     -e "s,@database_name@,$database_name," \
     -e "s,@database_user@,$database_user," \
-    -e "s,@database_password@,$database_password," \
     -e "s,@session_key@,$session_key," \
     > $config_path/config.ini.d/post-install-secrets.ini
-# Note: ^^^ password+key leaked in 'ps', alternatives?
 chmod 600 $config_path/config.ini.d/post-install-secrets.ini
+sed -i -e '/^@secrets@/ { ' -e 'ecat' -e 'd }' \
+    $config_path/config.ini.d/post-install-secrets.ini <<EOF
+session_key=$session_key
+database_password=$database_password
+database_password_mta=$database_password_mta
+EOF

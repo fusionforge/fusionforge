@@ -52,6 +52,7 @@ case "$1" in
 	if [ -e '/etc/redhat-release' ]; then pgsock='/tmp/.s.PGSQL.5432'; fi
 	database_name=$(forge_get_config database_name)
 	database_user=$(forge_get_config database_user)
+	database_password_mta=$(forge_get_config database_password_mta)
 
 	# Redirect "noreply" mail to the bit bucket (if need be)
 	if [ "$(forge_get_config noreply_to_bitbucket)" != 'no' ] ; then
@@ -64,8 +65,9 @@ case "$1" in
 	for i in $cfgs_exim4_main; do
 	    sed -i '/:FUSIONFORGE_DOMAINS/! s/^domainlist local_domains.*/&:FUSIONFORGE_DOMAINS/' $i
 	    if ! grep -q '^FUSIONFORGE_DOMAINS=' $i; then
+		chmod 600 $i
 		sed -i '/^domainlist local_domains/ecat' $i <<EOF
-hide pgsql_servers = ($pgsock)/mail/Debian-exim/bogus:($pgsock)/$database_name/${database_user}_mta/${database_user}_mta
+hide pgsql_servers = ($pgsock)/mail/Debian-exim/bogus:($pgsock)/$database_name/${database_user}_mta/${database_password_mta}
 FUSIONFORGE_DOMAINS=$users_host:$lists_host
 EOF
 	    fi
