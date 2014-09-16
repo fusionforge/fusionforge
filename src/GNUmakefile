@@ -62,6 +62,7 @@ install-config: install-base-dirs
 install-common: install-config install-plugin-authbuiltin
 	$(MAKE) -C locale DESTDIR=$(DESTDIR) PREFIX=$(PREFIX) install
 	$(CP_R) VERSION bin common templates lib $(DESTDIR)$(pkgdatadir)/
+	$(INSTALL) -d -m 00755 $(DESTDIR)$(config_path)/custom/
 	$(CP_R) cronjobs/scm $(DESTDIR)$(pkgdatadir)/cronjobs/  # no dedicated 'scm' package now
 	$(CP_R) post-install.d/common $(DESTDIR)$(pkgdatadir)/post-install.d/
 	$(CP_R) plugins/env.inc.php $(DESTDIR)$(pkgdatadir)/plugins/
