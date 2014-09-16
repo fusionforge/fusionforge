@@ -5547,60 +5547,6 @@ CREATE CONSTRAINT TRIGGER forum_group_list_group_id_fk
 
 
 
-CREATE CONSTRAINT TRIGGER forum_posted_by_fk
-    AFTER INSERT OR UPDATE ON forum
-    FROM users
-    NOT DEFERRABLE INITIALLY IMMEDIATE
-    FOR EACH ROW
-    EXECUTE PROCEDURE "RI_FKey_check_ins"('forum_posted_by_fk', 'forum', 'users', 'FULL', 'posted_by', 'user_id');
-
-
-
-CREATE CONSTRAINT TRIGGER forum_posted_by_fk
-    AFTER DELETE ON users
-    FROM forum
-    NOT DEFERRABLE INITIALLY IMMEDIATE
-    FOR EACH ROW
-    EXECUTE PROCEDURE "RI_FKey_noaction_del"('forum_posted_by_fk', 'forum', 'users', 'FULL', 'posted_by', 'user_id');
-
-
-
-CREATE CONSTRAINT TRIGGER forum_posted_by_fk
-    AFTER UPDATE ON users
-    FROM forum
-    NOT DEFERRABLE INITIALLY IMMEDIATE
-    FOR EACH ROW
-    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('forum_posted_by_fk', 'forum', 'users', 'FULL', 'posted_by', 'user_id');
-
-
-
-CREATE CONSTRAINT TRIGGER forum_group_forum_id_fk
-    AFTER INSERT OR UPDATE ON forum
-    FROM forum_group_list
-    NOT DEFERRABLE INITIALLY IMMEDIATE
-    FOR EACH ROW
-    EXECUTE PROCEDURE "RI_FKey_check_ins"('forum_group_forum_id_fk', 'forum', 'forum_group_list', 'FULL', 'group_forum_id', 'group_forum_id');
-
-
-
-CREATE CONSTRAINT TRIGGER forum_group_forum_id_fk
-    AFTER DELETE ON forum_group_list
-    FROM forum
-    NOT DEFERRABLE INITIALLY IMMEDIATE
-    FOR EACH ROW
-    EXECUTE PROCEDURE "RI_FKey_noaction_del"('forum_group_forum_id_fk', 'forum', 'forum_group_list', 'FULL', 'group_forum_id', 'group_forum_id');
-
-
-
-CREATE CONSTRAINT TRIGGER forum_group_forum_id_fk
-    AFTER UPDATE ON forum_group_list
-    FROM forum
-    NOT DEFERRABLE INITIALLY IMMEDIATE
-    FOR EACH ROW
-    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('forum_group_forum_id_fk', 'forum', 'forum_group_list', 'FULL', 'group_forum_id', 'group_forum_id');
-
-
-
 CREATE CONSTRAINT TRIGGER project_group_list_group_id_fk
     AFTER INSERT OR UPDATE ON project_group_list
     FROM groups
@@ -6048,33 +5994,6 @@ CREATE CONSTRAINT TRIGGER artifactmessage_submittedby_fk
     NOT DEFERRABLE INITIALLY IMMEDIATE
     FOR EACH ROW
     EXECUTE PROCEDURE "RI_FKey_noaction_upd"('artifactmessage_submittedby_fk', 'artifact_message', 'users', 'FULL', 'submitted_by', 'user_id');
-
-
-
-CREATE CONSTRAINT TRIGGER artifactmonitor_artifactid_fk
-    AFTER INSERT OR UPDATE ON artifact_monitor
-    FROM artifact
-    NOT DEFERRABLE INITIALLY IMMEDIATE
-    FOR EACH ROW
-    EXECUTE PROCEDURE "RI_FKey_check_ins"('artifactmonitor_artifactid_fk', 'artifact_monitor', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
-
-
-
-CREATE CONSTRAINT TRIGGER artifactmonitor_artifactid_fk
-    AFTER DELETE ON artifact
-    FROM artifact_monitor
-    NOT DEFERRABLE INITIALLY IMMEDIATE
-    FOR EACH ROW
-    EXECUTE PROCEDURE "RI_FKey_noaction_del"('artifactmonitor_artifactid_fk', 'artifact_monitor', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
-
-
-
-CREATE CONSTRAINT TRIGGER artifactmonitor_artifactid_fk
-    AFTER UPDATE ON artifact
-    FROM artifact_monitor
-    NOT DEFERRABLE INITIALLY IMMEDIATE
-    FOR EACH ROW
-    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('artifactmonitor_artifactid_fk', 'artifact_monitor', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
 
 
 
