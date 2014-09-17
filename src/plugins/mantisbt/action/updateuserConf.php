@@ -30,9 +30,9 @@ $confArr['mantisbt_user'] = getStringFromRequest('mantisbt_user');
 $confArr['mantisbt_password'] = getStringFromRequest('mantisbt_password');
 
 if (!$mantisbt->updateUserConf($confArr)) {
-	$error_msg = $user->getErrorMessage();
-	session_redirect('/plugins/mantisbt/?type=user&pluginname='.$mantisbt->name);
+	$error_msg = $mantisbt->getErrorMessage();
+	session_redirect('/plugins/'.$mantisbt->name.'/?type=user');
 }
 
 $feedback = _('MantisBT User configuration successfully updated.');
-session_redirect('/plugins/mantisbt/?type=user&pluginname='.$mantisbt->name.'&view=adminuser');
+session_redirect('/plugins/'.$mantisbt->name.'/?type=user&view=adminuser');

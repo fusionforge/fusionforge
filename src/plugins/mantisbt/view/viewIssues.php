@@ -48,10 +48,12 @@ try {
 	/* do not recreate $clientSOAP object if already created by other pages */
 	switch ($type) {
 		case 'user': {
+			global $mantisbt_userid;
 			$idsBugAll = array();
 			foreach ($mantisbtConf['url'] as $mantisbtConfUrl) {
+				$accountDataArray = array('id' => $mantisbt_userid);
 				$clientSOAP = new SoapClient($mantisbtConfUrl.'/api/soap/mantisconnect.php?wsdl', array('trace' => true, 'exceptions' => true));
-				$idsBugAll = $clientSOAP->__soapCall('mc_issue_get_filtered_by_user', array('username' => $username, 'password' => $password));
+				$idsBugAll = $clientSOAP->__soapCall('mc_project_get_issues_for_user', array('username' => $username, 'password' => $password, 'project_id' => 0, 'filter_type' => 'assigned', 'target_user' => $accountDataArray));
 			}
 			break;
 		}

@@ -5,8 +5,8 @@
  * Copyright 2009-2011, Franck Villaume - Capgemini
  * Copyright 2009, Fabien Dubois - Capgemini
  * Copyright 2010, Antoine Mercadal - Capgemini
- * Copyright 2011, Franck Villaume - TrivialDev
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2011,2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -35,7 +35,6 @@ if (!$type) {
 	exit_missing_param($_SERVER['HTTP_REFERER'], array('No TYPE specified'), 'mantisbt');
 }
 
-global $use_tooltips;
 $editable = 1;
 $mantisbt = plugin_get_object('mantisbt');
 
@@ -141,6 +140,7 @@ switch ($type) {
 		break;
 	}
 	case 'user': {
+		global $gfplugins;
 		if (!session_loggedin()) {
 			exit_not_logged_in();
 		}
@@ -163,6 +163,7 @@ switch ($type) {
 			if ($mantisbtConf) {
 				$username = $mantisbtConf['user'];
 				$password = $mantisbtConf['password'];
+				$mantisbt_userid = $mantisbtConf['mantisbt_userid'];
 			}  else {
 				$warning_msg = _('Your mantisbt user is not initialized.');
 				$redirect_url = '/plugins/'.$mantisbt->name.'/?type=user&pluginname='.$mantisbt->name.'&view=inituser';
@@ -179,7 +180,6 @@ switch ($type) {
 			case 'addAttachment':
 			case 'deleteAttachment':
 			case 'updateuserConf': {
-				global $gfplugins;
 				include($gfplugins.$mantisbt->name.'/action/'.$action.'.php');
 				break;
 			}
@@ -196,7 +196,7 @@ switch ($type) {
 		// do the job
 
 		$mantisbt->getHeader('user');
-		include($mantisbt->name.'/www/user/index.php');
+		include($gfplugins.$mantisbt->name.'/www/user/index.php');
 		break;
 	}
 	case 'admin': {

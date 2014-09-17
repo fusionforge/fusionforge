@@ -2,7 +2,7 @@
 /**
  * MantisBT plugin
  *
- * Copyright 2011, Franck Villaume - TrivialDev
+ * Copyright 2011,2014 Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -22,6 +22,8 @@
  */
 
 global $mantisbt; // the mantisbt object
+global $error_msg;
+global $feedback;
 
 $confArr = array();
 $confArr['url'] = getStringFromRequest('url');
@@ -30,7 +32,7 @@ $confArr['soap_user'] = getStringFromRequest('soap_user');
 $confArr['soap_password'] = getStringFromRequest('soap_password');
 
 if (!$mantisbt->updateGlobalConf($confArr)) {
-	$error_msg = _('Failed to update global configuration.');
+	$error_msg = $mantisbt->getErrorMessage();
 	session_redirect('/plugins/mantisbt/?type=globaladmin&pluginname='.$mantisbt->name);
 }
 

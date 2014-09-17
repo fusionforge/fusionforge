@@ -29,17 +29,11 @@ global $mantisbt;
 global $mantisbtConf;
 
 echo $HTML->boxTop(_('Manage your account'));
-echo '<form method="POST" Action="?type=user&pluginname='.$mantisbt->name.'&action=updateuserConf">';
+echo $HTML->openForm(array('method' => 'post', 'action' => util_make_uri('/plugins/'.$mantisbt->name.'/?type=user&action=updateuserConf')));
 echo '<table>';
-echo '<tr><td><label id="mantisbtinit-user" ';
-if ($use_tooltips)
-	echo 'title="'._('Specify your mantisbt user.').'"';
-echo ' >MantisBT User</label></td><td><input type="text" size="50" maxlength="255" name="mantisbt_user" value="'.$mantisbtConf['user'].'" /></td></tr>';
-echo '<tr><td><label id="mantisbtinit-password" ';
-if ($use_tooltips)
-	echo 'title="'._('Specify the password of this user.').'"';
-echo ' >MantisBT Password</label></td><td><input type="text" size="50" maxlength="255" name="mantisbt_password" value="'.$mantisbtConf['password'].'" /></td></tr>';
+echo '<tr><td><label id="mantisbtinit-user" title="'._('Specify your mantisbt user.').'" >'._('MantisBT User').'</label></td><td><input type="text" size="50" maxlength="255" name="mantisbt_user" value="'.$mantisbtConf['user'].'" required="required" /></td></tr>';
+echo '<tr><td><label id="mantisbtinit-password" title="'._('Specify the password of this user.').'" >'._('MantisBT Password.').'</label></td><td><input type="password" size="50" maxlength="255" name="mantisbt_password" value="'.$mantisbtConf['password'].'" required="required" /></td></tr>';
 echo '</table>';
 echo '<input type="submit" value="'._('Update').'" />';
-echo '</form>';
+echo $HTML->closeForm();
 echo $HTML->boxBottom();

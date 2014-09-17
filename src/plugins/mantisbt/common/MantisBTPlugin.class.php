@@ -48,10 +48,9 @@ class MantisBTPlugin extends Plugin {
 		global $G_SESSION, $HTML;
 		$returned = false;
 		switch ($hookname) {
-			case "usermenu": {
+			case 'usermenu': {
 				if ($G_SESSION->usesPlugin($this->name)) {
-					$param = '?type=user&user_id=' . $G_SESSION->getId(); // we indicate the part we're calling is the user one
-					echo $HTML->PrintSubMenu(array($this->text), array('/plugins/mantisbt/index.php' . $param), array(array('title' => _('Personal MantisBT page'))));
+					echo $HTML->PrintSubMenu(array($this->text), array('/plugins/'.$this->name.'/?type=user&user_id=' . $G_SESSION->getId()), array(array('title' => _('Personal MantisBT page'))));
 				}
 				$returned = true;
 				break;
@@ -392,17 +391,17 @@ class MantisBTPlugin extends Plugin {
 		$labelTitle[] = _('Roadmap');
 		$labelTitle[] = _('Tickets');
 		$labelPage = array();
-		$labelPage[] = "/plugins/".$this->name."/?type=group&group_id=".$group_id."&view=roadmap";
-		$labelPage[] = "/plugins/".$this->name."/?type=group&group_id=".$group_id;
+		$labelPage[] = '/plugins/'.$this->name.'/?type=group&group_id='.$group_id.'&view=roadmap';
+		$labelPage[] = '/plugins/'.$this->name.'/?type=group&group_id='.$group_id;
 		$labelAttr = array();
 		$labelAttr[] = array('title' => _('View the roadmap, per version tickets'), 'id' => 'roadmapView');
 		$labelAttr[] = array('title' => _('View all tickets.'), 'id' => 'ticketView');
 		$userperm = $group->getPermission();
 		if ($userperm->isAdmin()) {
 			$labelTitle[] = _('Administration');
-			$labelPage[] = "/plugins/".$this->name."/?type=admin&group_id=".$group_id;
+			$labelPage[] = '/plugins/'.$this->name.'/?type=admin&group_id='.$group_id;
 			$labelTitle[] = _('Statistics');
-			$labelPage[] = "/plugins/".$this->name."/?type=admin&group_id=".$group_id."&view=stat";
+			$labelPage[] = '/plugins/'.$this->name.'/?type=admin&group_id='.$group_id.'&view=stat';
 			$labelAttr[] = array('title' => _('Manage versions, categories and general configuration.'), 'id' => 'adminView');
 			$labelAttr[] = array('title' => _('View global statistics.'), 'id' => 'statView');
 		}
@@ -416,7 +415,7 @@ class MantisBTPlugin extends Plugin {
 	 * @return	bool	success or not
 	 */
 	function getHeader($type) {
-		global $gfplugins;
+		global $gfplugins, $gfwww;
 		$returned = false;
 		use_javascript('/plugins/'.$this->name.'/scripts/MantisBTController.js');
 		use_stylesheet('/plugins/'.$this->name.'/style.css');
@@ -441,7 +440,6 @@ class MantisBTPlugin extends Plugin {
 			}
 			case 'globaladmin': {
 				session_require_global_perm('forge_admin');
-				global $gfwww;
 				require_once($gfwww.'admin/admin_utils.php');
 				site_admin_header(array('title'=>_('Site Global MantisBT Admin'), 'toptab' => ''));
 				$returned = true;
@@ -499,37 +497,35 @@ class MantisBTPlugin extends Plugin {
 	}
 
 	/**
-	 * initialize - initialize the mantisbt user
-	 *		save config in db
+	 * initializeUser - initialize the mantisbt user and save config in db
 	 * @param	array	configuration array
 	 * @return	bool	success or not
 	 */
 	function initializeUser($confArr) {
 		global $user;
-		if ($confArr['mantisbt_useglobal']) {
-			$globalConfArr = $this->getGlobalconf();
-			$confArr['url'] = $globalConfArr['url'];
-			$confArr['soap_user'] = $globalConfArr['soap_user'];
-			$confArr['soap_password'] = $globalConfArr['soap_password'];
-		}
-
-		if ($confArr['mantisbtcreate']) {
+		//MISSING: we should support multi mantisbt instance. per project? Currently only one is supported...
+		$mantisbtGlobalconf = $this->getGlobalconf();
+		if ($confArr['mantisbt_configtype'] == 1) {
+			//TO BE REWORKED... MantisBT does not support yet the user creation thru API.
 			$idMantisBTUser = $this->addUserMantisBT($confArr);
 			$confArr['mantisbt_user'] = $user->getUnixName();
-		}
-		if ($idMantisBTUser || !$confArr['mantisbtcreate']) {
-			$result = db_query_params('insert into plugin_mantisbt_users (id_user, mantisbt_user, mantisbt_password)
-							values ($1, $2, $3)',
-							array($user->getID(),
-								$confArr['mantisbt_user'],
-								$confArr['mantisbt_password']));
-			if (!$result) {
-				$user->setError('initializeUser::Error: '. db_error());
+			$account = null;
+		} elseif ($confArr['mantisbt_configtype'] == 2) {
+			try {
+				$clientSOAP = new SoapClient($mantisbtGlobalconf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+				$account = $clientSOAP->__soapCall('mc_login', array('username' => $confArr['mantisbt_user'], 'password' => $confArr['mantisbt_password']));
+			} catch (SoapFault $soapFault) {
+				$this->setError($soapFault->faultstring);
 				return false;
 			}
-			return true;
 		}
-		return false;
+		$result = db_query_params('insert into plugin_mantisbt_users (id_user, mantisbt_user, mantisbt_password, mantisbt_user_id) values ($1, $2, $3, $4)',
+							array($user->getID(), $confArr['mantisbt_user'], $confArr['mantisbt_password'], $account->account_data->id));
+		if (!$result) {
+			$this->setError(db_error());
+			return false;
+		}
+		return true;
 	}
 
 	/**
@@ -581,7 +577,7 @@ class MantisBTPlugin extends Plugin {
 	function getProjectMantisByName($group_id, $confArr) {
 		$groupObject = group_get_object($group_id);
 		try {
-			$clientSOAP = new SoapClient($confArr['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+			$clientSOAP = new SoapClient($confArr['url'].'/api/soap/mantisconnect.php?wsdl', array('trace' => true, 'exceptions' => true));
 			$mantisbtProjectArr = $clientSOAP->__soapCall('mc_projects_get_user_accessible', array("username" => $confArr['soap_user'], "password" => $confArr['soap_password']));
 		} catch (SoapFault $soapFault) {
 			$groupObject->setError('getProjectMantisByName::Error: ' . $soapFault->faultstring);
@@ -604,7 +600,7 @@ class MantisBTPlugin extends Plugin {
 	function getUserConf() {
 		global $user;
 		$userConf = array();
-		$resIdUser = db_query_params('SELECT mantisbt_user, mantisbt_password FROM plugin_mantisbt_users WHERE id_user = $1', array($user->getID()));
+		$resIdUser = db_query_params('SELECT mantisbt_user, mantisbt_password, mantisbt_user_id FROM plugin_mantisbt_users WHERE id_user = $1', array($user->getID()));
 		if (!$resIdUser) {
 			$user->setError('getUserConf::error '.db_error());
 			return false;
@@ -619,6 +615,7 @@ class MantisBTPlugin extends Plugin {
 		$row = db_fetch_array($resIdUser);
 		$userConf['user'] = $row['mantisbt_user'];
 		$userConf['password'] = $row['mantisbt_password'];
+		$userConf['mantisbt_userid'] = $row['mantisbt_user_id'];
 		$userConf['url'] = array();
 		foreach ($user->getGroups() as $groupObject) {
 			if ($groupObject->usesPlugin($this->name)) {
@@ -656,22 +653,33 @@ class MantisBTPlugin extends Plugin {
 	 * @return	bool	true on success
 	 */
 	function updateGlobalConf($confArr) {
-		if (!isset($confArr['url']) || !isset($confArr['soap_user']) || !isset($confArr['soap_password']))
+		global $clientSOAP;
+		if (!isset($confArr['url']) || !isset($confArr['soap_user']) || !isset($confArr['soap_password'])) {
+			$this->setError(_('Missing parameters'));
 			return false;
+		}
 
 		$res = db_query_params('truncate plugin_mantisbt_global', array());
-		if (!$res)
+		if (!$res) {
+			$this->setError(db_error());
 			return false;
+		}
 
-		$res = db_query_params('insert into plugin_mantisbt_global (url, soap_user, soap_password)
-					values ($1, $2, $3)',
-					array(
-						$confArr['url'],
-						$confArr['soap_user'],
-						$confArr['soap_password'],
-					));
-		if (!$res)
+		try {
+			if (!isset($clientSOAP))
+				$clientSOAP = new SoapClient($confArr['url'].'/api/soap/mantisconnect.php?wsdl', array('trace' => true, 'exceptions' => true));
+
+			$account = $clientSOAP->__soapCall('mc_login', array('username' => $confArr['soap_user'], 'password' => $confArr['soap_password']));
+		} catch (SoapFault $soapFault) {
+			$this->setError($soapFault->faultstring);
 			return false;
+		}
+		$res = db_query_params('insert into plugin_mantisbt_global (url, soap_user, soap_password, soap_user_id) values ($1, $2, $3, $4)',
+					array($confArr['url'], $confArr['soap_user'], $confArr['soap_password'], $account->account_data->id));
+		if (!$res) {
+			$this->setError(db_error());
+			return false;
+		}
 
 		return true;
 	}
