@@ -30,43 +30,28 @@ global $password;
 global $group_id;
 global $HTML;
 
-//validate function : to be sure needed informations are set before submit
-print	('
-	<script language="javacript" type="text/javascript">
-	function validate() {
-		if ( document.issue.resume.value.length == 0 ) {
-			alert ("champ Résumé obligatoire");
-		} elseif ( document.issue.description.value.length == 0 ) {
-			alert ("champ Description obligatoire");
-		} else {
-			document.issue.submit();
-            document.issue.submitbutton.disabled="true";
-		}
-	}
-	</script>
-	');
-
 try {
 	/* do not recreate $clientSOAP object if already created by other pages */
 	if (!isset($clientSOAP))
-		$clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+		$clientSOAP = new SoapClient($mantisbtConf['url'].'/api/soap/mantisconnect.php?wsdl', array('trace' => true, 'exceptions' => true));
 
-	$listCategories = $clientSOAP->__soapCall('mc_project_get_categories', array("username" => $username, "password" => $password, "project_id" => $mantisbtConf['id_mantisbt']));
-	$listSeverities = $clientSOAP->__soapCall('mc_enum_severities', array("username" => $username, "password" => $password));
-	$listReproducibilities = $clientSOAP->__soapCall('mc_enum_reproducibilities', array("username" => $username, "password" => $password));
-	$listViewStates = $clientSOAP->__soapCall('mc_enum_view_states', array("username" => $username, "password" => $password));
-	$listDevelopers = $clientSOAP->__soapCall('mc_project_get_users', array("username" => $username, "password" => $password, "project_id" => $mantisbtConf['id_mantisbt'], "acces" => 25));
-	$listPriorities = $clientSOAP->__soapCall('mc_enum_priorities', array("username" => $username, "password" => $password));
-	$listResolutions= $clientSOAP->__soapCall('mc_enum_resolutions', array("username" => $username, "password" => $password));
-	$listStatus= $clientSOAP->__soapCall('mc_enum_status', array("username" => $username, "password" => $password));
-	$listVersions = $clientSOAP->__soapCall('mc_project_get_versions', array("username" => $username, "password" => $password, "project_id" => $mantisbtConf['id_mantisbt']));
+	$listCategories = $clientSOAP->__soapCall('mc_project_get_categories', array('username' => $username, 'password' => $password, 'project_id' => $mantisbtConf['id_mantisbt']));
+	$listSeverities = $clientSOAP->__soapCall('mc_enum_severities', array('username' => $username, 'password' => $password));
+	$listReproducibilities = $clientSOAP->__soapCall('mc_enum_reproducibilities', array('username' => $username, 'password' => $password));
+	$listViewStates = $clientSOAP->__soapCall('mc_enum_view_states', array('username' => $username, 'password' => $password));
+	// acces = 25 is hardcoded value from MantisBT Role permissions...
+	$listDevelopers = $clientSOAP->__soapCall('mc_project_get_users', array('username' => $username, 'password' => $password, 'project_id' => $mantisbtConf['id_mantisbt'], 'acces' => 25));
+	$listPriorities = $clientSOAP->__soapCall('mc_enum_priorities', array('username' => $username, 'password' => $password));
+	$listResolutions= $clientSOAP->__soapCall('mc_enum_resolutions', array('username' => $username, 'password' => $password));
+	$listStatus= $clientSOAP->__soapCall('mc_enum_status', array('username' => $username, 'password' => $password));
+	$listVersions = $clientSOAP->__soapCall('mc_project_get_versions', array('username' => $username, 'password' => $password, 'project_id' => $mantisbtConf['id_mantisbt']));
 } catch (SoapFault $soapFault) {
-	echo $HTML->warning_msg(_('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring);
+	echo $HTML->warning_msg(_('Technical error occurs during data retrieving')._(': ').$soapFault->faultstring);
 	$errorPage = true;
 }
 
 if (!isset($errorPage)){
-	echo	'<form name="issue" method="POST" action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&action=addIssue" >';
+	echo $HTML->openForm(array('name' => 'issue', 'method' => 'post', 'action' => util_make_uri('/plugins/'.$mantisbt->name.'/?type='.$type.'&group_id='.$group_id.'&action=addIssue')));
 	echo	'<table>';
 	echo		'<tr>';
 	echo			'<td width="16%">'._('Category').'</td>';
@@ -133,11 +118,11 @@ if (!isset($errorPage)){
 	echo	'<table>';
 	echo		'<tr>';
 	echo 			'<td width="20%">'._('Summary').' * <span style="font-weight:normal">'._('(128 char max)').'</span></td>';
-	echo			'<td><input type="text" name="resume" maxlength="128" style="width:99%;"></td>';
+	echo			'<td><input type="text" name="resume" maxlength="128" style="width:99%;" required="required" /></td>';
 	echo		'</tr>';
 	echo		'<tr>';
 	echo 			'<td>'._('Description').' *</td>';
-	echo			'<td><textarea name="description" style="width:99%;" rows="12"></textarea></td>';
+	echo			'<td><textarea name="description" style="width:99%;" rows="12" required="required" ></textarea></td>';
 	echo		'</tr>';
 	echo		'<tr>';
 	echo 			'<td>'._('Additional Informations').'</td>';
@@ -145,8 +130,8 @@ if (!isset($errorPage)){
 	echo		'</tr>';
 	echo	'</table>';
 	echo 	'<div align="center">';
-	echo 		'<input type="button" name="submitbutton" value="'._('Submit').'" onclick="validate();">';
+	echo 		'<input type="submit" name="submitbutton" value="'._('Submit').'" />';
 	echo 	'</div>';
-	echo 	'</form>';
+	echo $HTML->closeForm();
 	echo $HTML->addRequiredFieldsInfoBox();
 }

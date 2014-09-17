@@ -4,8 +4,8 @@
  *
  * Copyright 2009, Fabien Dubois - Capgemini
  * Copyright 2009-2011, Franck Villaume - Capgemini
- * Copyright 2011, Franck Villaume - TrivialDev
  * Copyright 2010, Antoine Mercadal - Capgemini
+ * Copyright 2011,2014 Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -47,41 +47,41 @@ global $prioritiesImg, $bugPerPage;
 try {
 	/* do not recreate $clientSOAP object if already created by other pages */
 	switch ($type) {
-		case "user": {
+		case 'user': {
 			$idsBugAll = array();
 			foreach ($mantisbtConf['url'] as $mantisbtConfUrl) {
-				$clientSOAP = new SoapClient($mantisbtConfUrl."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
-				$idsBugAll = $clientSOAP->__soapCall('mc_issue_get_filtered_by_user', array("username" => $username, "password" => $password));
+				$clientSOAP = new SoapClient($mantisbtConfUrl.'/api/soap/mantisconnect.php?wsdl', array('trace' => true, 'exceptions' => true));
+				$idsBugAll = $clientSOAP->__soapCall('mc_issue_get_filtered_by_user', array('username' => $username, 'password' => $password));
 			}
 			break;
 		}
-		case "group": {
-			$clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
-			$idsBugAll = $clientSOAP->__soapCall('mc_project_get_issue_headers', array("username" => $username, "password" => $password, "project_id" => $mantisbtConf['id_mantisbt'],  "page_number" => -1, "per_page" => -1));
+		case 'group': {
+			$clientSOAP = new SoapClient($mantisbtConf['url'].'/api/soap/mantisconnect.php?wsdl', array('trace' => true, 'exceptions' => true));
+			$idsBugAll = $clientSOAP->__soapCall('mc_project_get_issue_headers', array('username' => $username, 'password' => $password, 'project_id' => $mantisbtConf['id_mantisbt'],  'page_number' => -1, 'per_page' => -1));
 			break;
 		}
 	}
 } catch (SoapFault $soapFault) {
-	echo $HTML->warning_msg(_('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring);
+	echo $HTML->warning_msg(_('Technical error occurs during data retrieving')._(': ').$soapFault->faultstring);
 	$errorPage = true;
 }
 if (!isset($clientSOAP) && !isset($errorPage)) {
-	echo $HTML->warning_msg(_('No data to retrieve'));
+	echo $HTML->warning_msg(_('No data to retrieve.'));
 } elseif (!isset($errorPage) && isset($clientSOAP)) {
 
-?>
-
-<script type="text/javascript">
-	jQuery(document).ready(function() {
-		jQuery("#expandable_ticket").hide();
-	});
-</script>
-
-<?php
+	echo html_ao('script', array('type' => 'text/javascript'));
+	?>
+	//<![CDATA[
+		jQuery(document).ready(function() {
+			jQuery("#expandable_ticket").hide();
+		});
+	//]]>
+	<?php
+	echo html_ac(html_ap() - 1);
 	// recuperation des bugs
 	$listBug = array();
 
-	$listStatus = $clientSOAP->__soapCall('mc_enum_status', array("username" => $username, "password" => $password));
+	$listStatus = $clientSOAP->__soapCall('mc_enum_status', array('username' => $username, 'password' => $password));
 	$pageActuelle = getIntFromRequest('page');
 	if (empty($pageActuelle)) {
 		$pageActuelle = 1;
@@ -103,11 +103,11 @@ if (!isset($clientSOAP) && !isset($errorPage)) {
 				$statusname = $loopStatus->name;
 			}
 		}
-		$listBugAll[] = array( "id"=> $defect->id, "idPriority"=> $defect->priority,
-					"category"=> $defect->category,"project" => $defect->project,
-					"severityId" => $defect->severity, "statusId" => $defect->status,
-					"last_updated" => $defect->last_updated, "status_name" => $statusname,
-					"summary" => htmlspecialchars($defect->summary,ENT_QUOTES), "view_state" => $defect->view_state,
+		$listBugAll[] = array('id'=> $defect->id, 'idPriority' => $defect->priority,
+					'category' => $defect->category,'project' => $defect->project,
+					'severityId' => $defect->severity, 'statusId' => $defect->status,
+					'last_updated' => $defect->last_updated, 'status_name' => $statusname,
+					'summary' => htmlspecialchars($defect->summary,ENT_QUOTES), 'view_state' => $defect->view_state,
 			);
 	}
 
@@ -121,14 +121,15 @@ if (!isset($clientSOAP) && !isset($errorPage)) {
 
 	// affichage page
 	if (!count($listBug)) {
-		echo $HTML->warning_msg(_('No tickets to display'));
+		echo $HTML->warning_msg(_('No tickets to display.'));
 	} else {
 		$nbligne=0;
 
-		$picto_haut = util_make_url('themes/gforge/images/picto_fleche_haut_marron.png');
-		$picto_bas = util_make_url('themes/gforge/images/picto_fleche_bas_marron.png');
+// 		$picto_haut = util_make_url('themes/gforge/images/picto_fleche_haut_marron.png');
+// 		$picto_bas = util_make_url('themes/gforge/images/picto_fleche_bas_marron.png');
 		$nbligne++;
-		include 'jumpToIssue.php';
+		//include ($gfcommon.'docman/views/help.php');
+		include ($gfplugins.$mantisbt->name.'/view/jumpToIssue.php');
 		echo '<table>';
 		echo	'<tr>';
 		// Priority
@@ -460,7 +461,7 @@ if (!isset($clientSOAP) && !isset($errorPage)) {
 			}else{
 				echo		'<td></td>';
 			}
-			echo		'<td><a href="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$bug['id'].'&view=viewIssue">'.sprintf($format,$bug['id']).'</a></td>';
+			echo		'<td>'.util_make_link('/plugins/'.$mantisbt->name.'/?type='.$type.'&group_id='.$group_id.'&idBug='.$bug['id'].'&view=viewIssue', sprintf($format,$bug['id'])).'</td>';
 			echo 		'<td>'.$bug['category'].'</td>';
 			echo 		'<td>'.$bug['project'].'</td>';
 			echo 		'<td>';
@@ -473,7 +474,7 @@ if (!isset($clientSOAP) && !isset($errorPage)) {
 			}
 			echo		'</td>';
 			echo 		'<td>'.$bug['status_name'].'</td>';
-			echo 		'<td>'.strftime("%d/%m/%Y",strtotime($bug['last_updated'])).'</td>';
+			echo 		'<td>'.strftime(_('%d/%m/%Y'),strtotime($bug['last_updated'])).'</td>';
 			echo 		'<td>'.$bug['summary'];
 			if ($bug['view_state'] == 50) {
 				echo '<img src="./img/protected.gif">';
@@ -509,7 +510,7 @@ if (!isset($clientSOAP) && !isset($errorPage)) {
 		{
 			echo '| <b>'.$i.'</b>';
 		} else {
-			echo '<form style="display:inline" name="page'.$i.'" method="post" action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&page='.$i.'" >';
+			echo $HTML->openForm(array('style' => 'display:inline', 'name' => 'page'.$i, 'method' => 'post',  'action' => util_make_uri('/plugins/'.$mantisbt->name.'/?type='.$type.'&group_id='.$group_id.'&page='.$i)));
 			echo 	'<input type="hidden" name="sort" value="'.$bugfilter['sort'].'" />';
 			echo 	'<input type="hidden" name="dir" value="'.$bugfilter['dir'].'" />';
 			if ( isset($bugfilter['show_status'])) {
@@ -523,7 +524,7 @@ if (!isset($clientSOAP) && !isset($errorPage)) {
 				}
 			}
 			echo '| <a href="javascript:document.page'.$i.'.submit();">'.$i.'</a>';
-			echo '</form>';
+			echo $HTML->closeForm();
 		}
 	}
 	echo 	'</div>';
