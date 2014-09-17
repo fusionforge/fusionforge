@@ -150,6 +150,13 @@ configure_sshd()
     chown ${system_user_ssh_akc} \
 	$(forge_get_config config_path)/config.ini.d/post-install-secrets-ssh_akc.ini
 
+    # Fix "Unsafe AuthorizedKeysCommand: bad ownership or modes for directory /usr/local/share"
+    dir=$cmd
+    while [ "$dir" != '/' ]; do
+	dir=$(dirname $dir)
+	if [ -n "$(find $dir -maxdepth 0 -perm -g+w)" ]; then chmod g-w $dir; fi
+    done
+
     service $(forge_get_config ssh_service) restart
 }
 
