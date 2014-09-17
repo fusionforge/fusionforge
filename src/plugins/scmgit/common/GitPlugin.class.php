@@ -290,7 +290,7 @@ class GitPlugin extends SCMPlugin {
 			$b .= $HTML->error_msg(_('Error: No access protocol has been allowed for the Git plugin in scmgit.ini: : use_ssh and use_dav are disabled'));
 		}
 
-		if (session_loggedin() && forge_get_config('use_ssh', 'scmgit')) {
+		if (session_loggedin()) {
 			$u = user_get_object(user_getid());
 			if ($u->getUnixStatus() == 'A') {
 				$result = db_query_params('SELECT * FROM scm_personal_repos p WHERE p.group_id=$1 AND p.user_id=$2 AND plugin_id=$3',
@@ -302,9 +302,14 @@ class GitPlugin extends SCMPlugin {
 					$b .= _('Access to your personal repository');
 					$b .= '</h2>';
 					$b .= '<p>';
-					$b .= _('You have a personal repository for this project, accessible through SSH with the following method. Enter your site password when prompted.');
+					$b .= _('You have a personal repository for this project, accessible through SSH with the following methods. Enter your site password when prompted.');
 					$b .= '</p>';
-					$b .= '<p><tt>git clone git+ssh://'.$u->getUnixName().'@' . $this->getBoxForProject($project) . '/'. forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/users/'. $u->getUnixName() .'.git</tt></p>';
+					if (forge_get_config('use_ssh', 'scmgit')) {
+						$b .= '<p><tt>git clone git+ssh://'.$u->getUnixName().'@' . $this->getBoxForProject($project) . '/'. forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/users/'. $u->getUnixName() .'.git</tt></p>';
+					}
+					if (forge_get_config('use_smarthttp', 'scmgit')) {
+						$b .= '<p><tt>git clone '.$protocol.'://'.$u->getUnixName().'@' . forge_get_config('scm_host').'/authscm/'.$u->getUnixName().'/git/'.$project->getUnixName() .'/users/'. $u->getUnixName() .'.git</tt></p>';
+					}
 				} else {
 					$glist = $u->getGroups();
 					foreach ($glist as $g) {

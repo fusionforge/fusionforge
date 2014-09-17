@@ -40,11 +40,11 @@ require_once $gfwww.'include/pre.php';
 session_require_global_perm('forge_admin');
 
 if (!stream_resolve_include_path('arc/ARC2.php')) {
-	exit_error(_('Missing require to use this plugin. You need OpenDocument.php'),'home');
+	exit_error(_('Missing require to use this plugin. You need arc/ARC2.php'),'home');
 }
 include_once 'arc/ARC2.php';
 if (!stream_resolve_include_path('OpenDocument.php')) {
-	exit_error(_('Missing require to use this plugin. You need arc/ARC2.php'),'home');
+	exit_error(_('Missing require to use this plugin. You need OpenDocument.php'),'home');
 }
 require_once 'OpenDocument.php';
 

@@ -3,7 +3,7 @@
  * MediaWikiPlugin Class
  *
  * Copyright 2000-2011, Fusionforge Team
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2014 Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -88,7 +88,7 @@ class MediaWikiPlugin extends Plugin {
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][]=$this->text;
 				$params['DIRS'][]=util_make_url('/plugins/mediawiki/wiki/'.$project->getUnixName().'/index.php');
-				$params['ADMIN'][]='';
+				$params['ADMIN'][] = util_make_url('/plugins/mediawiki/plugin_admin.php?group_id='.$project->getID());
 				$params['TOOLTIPS'][] = _('Mediawiki Space');
 			}
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );

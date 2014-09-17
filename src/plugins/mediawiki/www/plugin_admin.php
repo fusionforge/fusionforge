@@ -155,14 +155,13 @@ if (getStringFromRequest("logo_submit")) {
 }
 
 site_project_header(array(
-	"title" => "MediaWiki Plugin Admin",
-	"pagename" => "MediaWiki Project Admin",
+	"title" => _('MediaWiki Plugin Admin for ').$group->getPublicName(),
+	"pagename" => _('MediaWiki Project Admin'),
 	"sectionvals" => array($group->getPublicName()),
 	"toptab" => "admin",
 	"group" => $gid,
-    ));
+	));
 
-echo "<h1>MediaWiki Plugin Admin for ".$group->getPublicName()."</h1>\n\n";
 
 echo "<h2>" . _('Nightly XML dump') . "</h2>\n";
 echo '<p>';
