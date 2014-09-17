@@ -24,6 +24,7 @@ database_name=$(forge_get_config database_name)
 database_user=$(forge_get_config database_user)
 database_password=$(forge_get_config database_password)
 database_password_mta=$(forge_get_config database_password_mta)
+database_password_ssh_akc=$(forge_get_config database_password_ssh_akc)
 source_path=$(forge_get_config source_path)
 
 if [ -z "$database_name" ]; then
@@ -49,12 +50,17 @@ fi
 if ! su - postgres -c 'psql -At -c \\du' | grep "^${database_user}_mta|" >/dev/null; then
     su - postgres -c "createuser -SDR ${database_user}_mta"
 fi
+if ! su - postgres -c 'psql -At -c \\du' | grep "^${database_user}_ssh_akc|" >/dev/null; then
+    su - postgres -c "createuser -SDR ${database_user}_ssh_akc"
+fi
 database_password_quoted=$(echo $database_password | sed -e "s/'/''/")
 database_password_mta_quoted=$(echo $database_password_mta | sed -e "s/'/''/")
+database_password_ssh_akc_quoted=$(echo $database_password_ssh_akc | sed -e "s/'/''/")
 su - postgres -c psql <<EOF >/dev/null
 ALTER ROLE $database_user WITH PASSWORD '$database_password_quoted';
 GRANT CREATE ON DATABASE $database_name TO $database_user;  -- for wiki schemas
 ALTER ROLE ${database_user}_mta WITH PASSWORD '$database_password_mta_quoted';
+ALTER ROLE ${database_user}_ssh_akc WITH PASSWORD '$database_password_ssh_akc_quoted';
 EOF
 
 export PGPASSFILE=$(mktemp)
@@ -78,6 +84,7 @@ GRANT SELECT ON nss_groups TO ${database_user}_nss;
 GRANT SELECT ON nss_usergroups TO ${database_user}_nss;
 GRANT SELECT ON mta_users TO ${database_user}_mta;
 GRANT SELECT ON mta_lists TO ${database_user}_mta;
+GRANT SELECT ON ssh_authorized_keys TO ${database_user}_ssh_akc;
 EOF
 
 # Admin user

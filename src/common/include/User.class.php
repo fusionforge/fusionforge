@@ -253,13 +253,12 @@ class GFUser extends Error {
 				$this->data_array = db_fetch_array_by_row($res, 0);
 				if (($this->getUnixStatus() == 'A') && (forge_get_config('use_shell'))) {
 					$this->data_array['authorized_keys'] = array();
-					$res = db_query_params('select * from sshkeys where userid = $1 and deleted = 0', array($this->getID()));
+					$res = db_query_params('select * from sshkeys where userid = $1', array($this->getID()));
 					while ($arr = db_fetch_array($res)) {
 						$this->data_array['authorized_keys'][$arr['id_sshkeys']]['upload'] = $arr['upload'];
 						$this->data_array['authorized_keys'][$arr['id_sshkeys']]['name'] = $arr['name'];
 						$this->data_array['authorized_keys'][$arr['id_sshkeys']]['fingerprint'] = $arr['fingerprint'];
 						$this->data_array['authorized_keys'][$arr['id_sshkeys']]['algorithm'] = $arr['algorithm'];
-						$this->data_array['authorized_keys'][$arr['id_sshkeys']]['deploy'] = $arr['deploy'];
 						$this->data_array['authorized_keys'][$arr['id_sshkeys']]['key'] = $arr['sshkey'];
 						$this->data_array['authorized_keys'][$arr['id_sshkeys']]['keyid'] = $arr['id_sshkeys'];
 					}
@@ -670,13 +669,12 @@ Use one below, but make sure it is entered as the single line.)
 		$this->data_array = db_fetch_array($res);
 		if (($this->getUnixStatus() == 'A') && (forge_get_config('use_shell'))) {
 			$this->data_array['authorized_keys'] = array();
-			$res = db_query_params('select * from sshkeys where userid = $1 and deleted = 0', array($this->getID()));
+			$res = db_query_params('select * from sshkeys where userid = $1', array($this->getID()));
 			while ($arr = db_fetch_array($res)) {
 				$this->data_array['authorized_keys'][$arr['id_sshkeys']]['upload'] = $arr['upload'];
 				$this->data_array['authorized_keys'][$arr['id_sshkeys']]['name'] = $arr['name'];
 				$this->data_array['authorized_keys'][$arr['id_sshkeys']]['fingerprint'] = $arr['fingerprint'];
 				$this->data_array['authorized_keys'][$arr['id_sshkeys']]['algorithm'] = $arr['algorithm'];
-				$this->data_array['authorized_keys'][$arr['id_sshkeys']]['deploy'] = $arr['deploy'];
 				$this->data_array['authorized_keys'][$arr['id_sshkeys']]['key'] = $arr['sshkey'];
 				$this->data_array['authorized_keys'][$arr['id_sshkeys']]['keyid'] = $arr['id_sshkeys'];
 			}
@@ -1250,17 +1248,16 @@ Use one below, but make sure it is entered as the single line.)
 			$this->data_array['authorized_keys'][$keyid]['fingerprint'] = $fingerprint;
 			$this->data_array['authorized_keys'][$keyid]['upload'] = $now;
 			$this->data_array['authorized_keys'][$keyid]['sshkey'] = $key;
-			$this->data_array['authorized_keys'][$keyid]['deploy'] = 0;
 			$this->data_array['authorized_keys'][$keyid]['keyid'] = $keyid;
 			return true;
 		}
 	}
 
 	function deleteAuthorizedKey($keyid) {
-		$res = db_query_params('update sshkeys set deleted = 1 where id_sshkeys =$1 and userid = $2',
+		$res = db_query_params('DELETE FROM sshkeys WHERE id_sshkeys = $1 and userid = $2',
 					array($keyid, $this->getID()));
 		if (!$res) {
-			$this->setError(_('Error: Cannot Update User SSH Keys'));
+			$this->setError(_('Error: Cannot delete user SSH key'));
 			return false;
 		} else {
 			unset($this->data_array['authorized_keys'][$keyid]);

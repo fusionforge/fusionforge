@@ -25,8 +25,10 @@ db_user=$(forge_get_config database_user)
 db_host=$(forge_get_config database_host)
 # homedir_prefix, e.g. /home/users/ (with trailing slash)
 homedir_prefix=$(forge_get_config homedir_prefix | sed -e 's:[^/]$:&/:')
+system_user_ssh_akc=$(forge_get_config system_user_ssh_akc)
 
 db_user_nss=${db_user}_nss
+
 
 # Distros may want to install new conffiles using tools such as ucf(1)
 DESTDIR=$2
@@ -120,6 +122,44 @@ configure_nscd()
     fi
 }
 
+configure_sshd()
+{
+    if ! getent passwd ${system_user_ssh_akc} >/dev/null; then
+	useradd ${system_user_ssh_akc} -s /bin/false -d /nonexistent
+    fi
+    
+    # Deal with CentOS 6's early patch
+    user_cmd=AuthorizedKeysCommandUser
+    if [ -f /etc/redhat-release ]; then
+	os_version=$(rpm -q --qf "%{VERSION}" $(rpm -q --whatprovides redhat-release))
+	if [ "$os_version" = "6" ]; then
+	    user_cmd=AuthorizedKeysCommandRunAs
+	fi
+    fi
+    # Add actual sshd configuration
+    if ! grep -qw '^AuthorizedKeysCommand' /etc/ssh/sshd_config; then
+	echo 'AuthorizedKeysCommand replace_me' >> /etc/ssh/sshd_config
+    fi
+    if ! grep -qw "^$user_cmd" /etc/ssh/sshd_config; then
+	echo "$user_cmd replace_me" >> /etc/ssh/sshd_config
+    fi
+    cmd=$(forge_get_config source_path)/bin/ssh_akc.php
+    sed -i -e "s,^AuthorizedKeysCommand .*,AuthorizedKeysCommand $cmd," /etc/ssh/sshd_config
+    sed -i -e "s,^$user_cmd .*,$user_cmd ${system_user_ssh_akc}," /etc/ssh/sshd_config
+
+    chown ${system_user_ssh_akc} \
+	$(forge_get_config config_path)/config.ini.d/post-install-secrets-ssh_akc.ini
+
+    service $(forge_get_config ssh_service) restart
+}
+
+remove_sshd()
+{
+    sed -i -e "/^AuthorizedKeysCommand.*/d" /etc/ssh/sshd_config
+    userdel $system_user_ssh_akc
+}
+
+
 # Main
 case "$1" in
     configure)
@@ -127,10 +167,12 @@ case "$1" in
 	configure_nsswitch
 	configure_nscd
 	configure_pam
+	configure_sshd
 	;;
     remove)
 	remove_nsswitch
 	remove_pam
+	configure_sshd
 	;;
     purge)
 	# note: can't be called from Debian's postrm - rely on ucfq(1)

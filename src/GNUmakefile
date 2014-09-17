@@ -56,6 +56,7 @@ install-config: install-base-dirs
 			-e 's,@apache_user@,$(apache_user),' \
 			-e 's,@apache_group@,$(apache_group),' \
 			-e 's,@apache_service@,$(apache_service),' \
+			-e 's,@ssh_service@,$(ssh_service),' \
 			> $(DESTDIR)$(config_path)/config.ini; \
 	fi
 

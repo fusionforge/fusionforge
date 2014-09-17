@@ -56,12 +56,14 @@ fi
 # Replace configuration block
 sed -i -e '/^### BEGIN FUSIONFORGE BLOCK/,/^### END FUSIONFORGE BLOCK/ { ' -e 'ecat' -e 'd }' $pg_hba <<EOF
 ### BEGIN FUSIONFORGE BLOCK -- DO NOT EDIT
-# user which is used by libnss to access the DB (see /etc/nss-pgsql.conf)
-local $database_name ${database_user}_nss trust
-local $database_name list ident
-local $database_name ${database_user}_mta md5
+# single-host configuration
+local $database_name ${database_user}_nss     trust
+local $database_name ${database_user}_mta     md5
+local $database_name ${database_user}_ssh_akc md5
 # multi-host configuration
-host  $database_name ${database_user}_nss 0.0.0.0/0 trust
+host  $database_name ${database_user}_nss     0.0.0.0/0 trust
+host  $database_name ${database_user}_mta     0.0.0.0/0 md5
+host  $database_name ${database_user}_ssh_akc 0.0.0.0/0 md5
 host  $database_name all 0.0.0.0/0 md5
 ### END FUSIONFORGE BLOCK -- DO NOT EDIT
 EOF

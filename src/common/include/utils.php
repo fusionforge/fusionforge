@@ -1784,7 +1784,7 @@ function util_sudo_effective_user($username, $function, $params=array()) {
 			posix_initgroups($username, $userinfo['gid']) &&
 			posix_setuid($userinfo['uid'])) {
 			putenv('HOME='.$userinfo['dir']);
-			$function($params);
+			call_user_func($function, $params);
 		}
 		//exit(1); // too nice, PHP gracefully quits and closes DB connection
 		posix_kill(posix_getpid(), 9);

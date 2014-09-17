@@ -25,9 +25,6 @@ class ScmSvnSSHTest extends FForge_SeleniumTestCase
 {
 	function testScmSvnSSH()
 	{
-		$this->skip_on_rpm_installs();
-		$this->skip_on_src_installs();
-
 		$forge_get_config = RUN_JOB_PATH."/forge_get_config";
 		$config_path = rtrim(`$forge_get_config config_path`);
 		file_put_contents("$config_path/config.ini.d/zzz-buildbot-svnsshtest",
@@ -51,7 +48,6 @@ class ScmSvnSSHTest extends FForge_SeleniumTestCase
 		$this->reload_nscd();
 		$this->cron("scm/create_scm_repos.php");
 		$this->cron("shell/homedirs.php");
-		$this->cron("shell/ssh_create.php");
 
 		// Get the address of the repo
 		$this->open(ROOT);
