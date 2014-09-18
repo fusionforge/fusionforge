@@ -148,55 +148,66 @@ switch ($type) {
 		if (!($user) || !($user->usesPlugin($mantisbt->name))) {
 			exit_error(sprintf(_('First activate the User\'s %s plugin through Account Maintenance Page'), $mantisbt->name), 'my');
 		}
-
-		$action = getStringFromRequest('action');
-		$view = getStringFromRequest('view');
-		$sort = getStringFromRequest('sort');
-		$dir = getStringFromRequest('dir');
-		$action = getStringFromRequest('action');
-		$idBug = getStringFromRequest('idBug');
-		$idNote = getStringFromRequest('idNote');
-		$page = getStringFromRequest('page');
-
-		if ($view != 'inituser' && $action != 'inituser') {
-			$mantisbtConf = $mantisbt->getUserConf($user->getID());
-			if ($mantisbtConf) {
-				$username = $mantisbtConf['user'];
-				$password = $mantisbtConf['password'];
-				$mantisbt_userid = $mantisbtConf['mantisbt_userid'];
-			}  else {
-				$warning_msg = _('Your mantisbt user is not initialized.');
-				$redirect_url = '/plugins/'.$mantisbt->name.'/?type=user&pluginname='.$mantisbt->name.'&view=inituser';
-				session_redirect($redirect_url);
+		$projects = $user->getGroups();
+		$validProjectIds = array();
+		foreach ($projects as $project) {
+			if ($project->usesPlugin($mantisbt->name)) {
+				$validProjects[] = $project;
 			}
 		}
 
-		switch ($action) {
-			case 'inituser':
-			case 'updateIssue':
-			case 'updateNote':
-			case 'addNote':
-			case 'deleteNote':
-			case 'addAttachment':
-			case 'deleteAttachment':
-			case 'updateuserConf': {
-				include($gfplugins.$mantisbt->name.'/action/'.$action.'.php');
-				break;
-			}
-		}
+		if (count($validProjects)) {
+			$action = getStringFromRequest('action');
+			$view = getStringFromRequest('view');
+			$sort = getStringFromRequest('sort');
+			$dir = getStringFromRequest('dir');
+			$action = getStringFromRequest('action');
+			$idBug = getStringFromRequest('idBug');
+			$idNote = getStringFromRequest('idNote');
+			$page = getStringFromRequest('page');
 
-		// Si la variable $_GET['page'] existe...
-		if($page != null && $page != '') {
-			$pageActuelle=intval($page);
+			if ($view != 'inituser' && $action != 'inituser') {
+				$mantisbtConf = $mantisbt->getUserConf($user->getID());
+				if ($mantisbtConf) {
+					$username = $mantisbtConf['user'];
+					$password = $mantisbtConf['password'];
+					$mantisbt_userid = $mantisbtConf['mantisbt_userid'];
+				}  else {
+					$warning_msg = _('Your mantisbt user is not initialized.');
+					$redirect_url = '/plugins/'.$mantisbt->name.'/?type=user&pluginname='.$mantisbt->name.'&view=inituser';
+					session_redirect($redirect_url);
+				}
+			}
+
+			switch ($action) {
+				case 'inituser':
+				case 'updateIssue':
+				case 'updateNote':
+				case 'addNote':
+				case 'deleteNote':
+				case 'addAttachment':
+				case 'deleteAttachment':
+				case 'updateuserConf': {
+					include($gfplugins.$mantisbt->name.'/action/'.$action.'.php');
+					break;
+				}
+			}
+
+			// Si la variable $_GET['page'] existe...
+			if($page != null && $page != '') {
+				$pageActuelle=intval($page);
+			} else {
+				$pageActuelle=1; // La page actuelle est la n°1
+			}
+
+			$format = "%07d";
+			// do the job
+
+			$mantisbt->getHeader('user');
+			include($gfplugins.$mantisbt->name.'/www/user/index.php');
 		} else {
-			$pageActuelle=1; // La page actuelle est la n°1
+			echo $HTML->information(_('None of your projects are using MantisBT plugin.'));
 		}
-
-		$format = "%07d";
-		// do the job
-
-		$mantisbt->getHeader('user');
-		include($gfplugins.$mantisbt->name.'/www/user/index.php');
 		break;
 	}
 	case 'admin': {
