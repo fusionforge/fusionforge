@@ -71,7 +71,7 @@ $cells[] = array(_('Create the project in MantisBT')._(':'), 'class' => 'align-r
 $cells[][] = html_e('input', array('title' => _('If this project does NOT exist in MantisBT, do you want to create it ? The current project name will be used.'), 'id' => 'mantisbtcreate', 'type' => 'checkbox', 'name' => 'mantisbtcreate', 'value' => 1));
 echo $HTML->multiTableRow(array(), $cells);
 $cells = array();
-$cells[] = array(_('Link with a existing project in MantisBT')._(':'), 'class' => 'align-right');
+$cells[] = array(_('Link with an existing project in MantisBT')._(':'), 'class' => 'align-right');
 $cells[][] = html_e('input', array('title' => _('Specify the name of the project already created in MantisBT'), 'id' => 'mantisbtname', 'type' => 'text', 'size' => 50, 'maxlength' => 255, 'name' => 'mantisbtname'));
 echo $HTML->multiTableRow(array(), $cells);
 // echo '<tr><td><label id="mantisbtinit-syncroles" title="'._('Do you want to sync FusionForge -> MantisBT roles ?').'" >Sync Roles</label></td><td><input disabled="disabled" type="checkbox" name="sync_roles" /></td></tr>';
