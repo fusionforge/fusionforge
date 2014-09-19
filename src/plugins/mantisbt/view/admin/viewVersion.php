@@ -63,7 +63,7 @@ if (!isset($errorPage)){
 		}
 		echo $HTML->listTableBottom();
 	} else {
-		echo $HTML->warning_msg(_('No versions'));
+		echo $HTML->information(_('No versions'));
 	}
 	echo $HTML->boxBottom();
 }

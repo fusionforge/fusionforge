@@ -68,7 +68,7 @@ if (!isset($errorPage)){
 		}
 		echo $HTML->listTableBottom();
 	} else {
-		echo $HTML->warning_msg(_('No Categories'));
+		echo $HTML->information(_('No Categories'));
 	}
 	echo $HTML->boxBottom();
 }
