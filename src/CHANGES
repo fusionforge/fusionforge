@@ -4,22 +4,25 @@ Fusionforge-5.3.2:
 * Projects: don't display admins if their account is suspended (Inria)
 * Projects: member lists should check permission [#711] (TrivialDev)
 * Admin: fix edit table themes, fix frs_processor sequence [#691] (TrivialDev)
-* SCM Git: suppress 'warning: You appear to have cloned an empty repository.' in create_scm_repos.php (Inria)
 * User SSH keys (ssh_create.php): fix harmless warning when user removes all her keys (Inria)
 * News: don't send requests for frontpage display for private projects (Inria)
 * Docman: fix download count [#702] (TrivialDev)
 * Tracker: fix translation support [#688] (TrivialDev)
 * Tracker: fix custom status extrafield not updateable using mass update [#712] (TrivialDev)
 * Mailing lists: handle quotes and accents in description (Inria)
-* Stats: handle bad encoding when gathering Git stats, remove spurious warning when SVN repository isn't created yet (Inria)
 * SCM Reporting: fix legend block size exceed graph canvas [#718] (TrivialDev)
 * Plugin mediawiki: fix paths in import/export scripts (Inria)
 * Plugin fckeditor: dropped in favor of ckeditor
+* Plugin SCM Git: suppress 'warning: You appear to have cloned an empty repository.' in create_scm_repos.php (Inria)
 * Plugin SCM SVN: fix sql error in activity tab on init log [#715] (TrivialDev)
 * Plugin SCM SVN: fix activity tab on empty commit log [#714] (Inria)
 * Plugin SCM HG (Mercurial): fix user stats [#722] (TrivialDev)
 * Plugin SCM HG (Mercurial): fix iframe size [#721] (TrivialDev)
 * Plugin SCM HG (Mercurial): fix ssl setting [#723] (TrivialDev)
+* Stats: handle bad encoding when gathering Git stats, remove spurious warning when SVN repository isn't created yet (Inria)
+* Stats: fix commits count [#717] (TrivialDev, Roland Mas)
+  Run 'forge_run_job gather_scm_stats.php --all' to regenerate your stats.
+  Optionally, if some of your repositories have history dating from before the project was created on the forge, use '--allepoch' instead
 
 Fusionforge-5.3.1:
 * Docman: Basic Webdav write mkcol support (TrivialDev)
