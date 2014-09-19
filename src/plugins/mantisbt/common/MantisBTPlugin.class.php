@@ -55,7 +55,7 @@ class MantisBTPlugin extends Plugin {
 				$returned = true;
 				break;
 			}
-			case "groupmenu": {
+			case 'groupmenu': {
 				$group_id = $params['group'];
 				$project = group_get_object($group_id);
 				if (!$project || !is_object($project) || $project->isError() || !$project->isProject()) {
@@ -79,39 +79,33 @@ class MantisBTPlugin extends Plugin {
 				$returned = true;
 				break;
 			}
-			case "user_personal_links": {
+			case 'user_personal_links': {
 				// this displays the link in the user's profile page to it's personal MantisBT (if you want other sto access it, youll have to change the permissions in the index.php
 				$userid = $params['user_id'];
 				$user = user_get_object($userid);
 				//check if the user has the plugin activated
 				if ($user->usesPlugin($this->name)) {
-					echo '<p>';
-					$arr_t = array();
-					$arr_t[] = array('title' => _('Manage your mantisbt account and follow your tickets'));
-					echo util_make_link('/plugins/'.$this->name.'/?user_id='.$userid.'&type=user', _('View Personal MantisBT'), $arr_t);
-					echo '</p>';
+					echo html_e('p', array(), util_make_link('/plugins/'.$this->name.'/?user_id='.$userid.'&type=user', _('View Personal MantisBT'), array('title' => _('Manage your mantisbt account and follow your tickets'))));
 				}
 				$returned = true;
 				break;
 			}
-			case "project_admin_plugins": {
+			case 'project_admin_plugins': {
 				// this displays the link in the project admin options page to it's  MantisBT administration
 				$group_id = $params['group_id'];
 				$group = group_get_object($group_id);
 				if ($group->usesPlugin($this->name)) {
-					echo '<p>';
-					echo util_make_link('/plugins/'.$this->name.'/?group_id='.$group_id.'&type=admin', _('View Admin MantisBT'), array('title' => _('MantisBT administration page')));
-					echo '</p>';
+					echo html_e('p', array(), util_make_link('/plugins/'.$this->name.'/?group_id='.$group_id.'&type=admin', _('View Admin MantisBT'), array('title' => _('MantisBT administration page'))));
 				}
 				$returned = true;
 				break;
 			}
-			case "site_admin_option_hook": {
-				echo '<li>'.$this->getAdminOptionLink().'</li>';
+			case 'site_admin_option_hook': {
+				echo html_e('li', array(), $this->getAdminOptionLink());
 				$returned = true;
 				break;
 			}
-			case "group_delete": {
+			case 'group_delete': {
 				$group_id = $params['group_id'];
 				$group = group_get_object($group_id);
 				if ($group->usesPlugin($this->name)) {
@@ -145,14 +139,14 @@ class MantisBTPlugin extends Plugin {
 				}
 				break;
 			}
-			case "widgets": {
+			case 'widgets': {
 				$group = group_get_object($GLOBALS['group_id']);
 				if ($group->usesPlugin($this->name)) {
 					return $this->widgets($params);
 				}
 				break;
 			}
-			case "widget_instance": {
+			case 'widget_instance': {
 				$group = group_get_object($GLOBALS['group_id']);
 				if ((is_object($group)? $group->usesPlugin($this->name) : false) || $G_SESSION->usesPlugin($this->name)) {
 					return $this->myPageBox($params);
@@ -177,14 +171,14 @@ class MantisBTPlugin extends Plugin {
 		$mantisbtAccount['email'] = $user->getEmail();
 		$mantisbtAccount['password'] = $confArr['mantisbt_password'];
 		try {
-			$clientSOAP = new SoapClient($confArr['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
-			$idUserMantisBT = $clientSOAP->__soapCall('mc_account_create', array("username" => $confArr['soap_user'], "password" => $confArr['soap_password'], "account" => $mantisbtAccount));
+			$clientSOAP = new SoapClient($confArr['url'].'/api/soap/mantisconnect.php?wsdl', array('trace' => true, 'exceptions' => true));
+			$idUserMantisBT = $clientSOAP->__soapCall('mc_account_create', array('username' => $confArr['soap_user'], 'password' => $confArr['soap_password'], 'account' => $mantisbtAccount));
 		} catch (SoapFault $soapFault) {
-			$user->setError('addUserMantisBT::Error: ' . $soapFault->faultstring);
+			$this->setError('addUserMantisBT::Error: ' . $soapFault->faultstring);
 			return false;
 		}
 		if (!isset($idUserMantisBT) || !is_int($idUserMantisBT)){
-			$user->setError('addUserMantisBT::Error: ' . _('Unable to create user in Mantisbt'));
+			$this->setError('addUserMantisBT::Error: ' . _('Unable to create user in Mantisbt'));
 			return false;
 		}
 		return $idUserMantisBT;
@@ -200,7 +194,7 @@ class MantisBTPlugin extends Plugin {
 		$groupObject = group_get_object($groupId);
 		$project = array();
 		$project['name'] = $groupObject->getPublicName();
-		$project['status'] = "development";
+		$project['status'] = 'development';
 
 		//TODO : make it works correctly and use the config soap api to get the real value.
 		if ($groupObject->isPublic()) {
@@ -212,42 +206,41 @@ class MantisBTPlugin extends Plugin {
 		$project['description'] = $groupObject->getDescription();
 
 		try {
-			$clientSOAP = new SoapClient($confArr['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
-			$idProjetMantis = $clientSOAP->__soapCall('mc_project_add', array("username" => $confArr['soap_user'], "password" => $confArr['soap_password'], "project" => $project));
+			$clientSOAP = new SoapClient($confArr['url'].'/api/soap/mantisconnect.php?wsdl', array('trace' => true, 'exceptions' => true));
+			$idProjetMantis = $clientSOAP->__soapCall('mc_project_add', array('username' => $confArr['soap_user'], 'password' => $confArr['soap_password'], 'project' => $project));
 		} catch (SoapFault $soapFault) {
-			$groupObject->setError('addProjectMantis::Error: ' . $soapFault->faultstring);
+			$this->setError('addProjectMantis::Error: ' . $soapFault->faultstring);
 			return false;
 		}
 		if (!isset($idProjetMantis) || !is_int($idProjetMantis)){
-			$groupObject->setError('addProjectMantis::Error: ' . _('Unable to create project in Mantisbt'));
+			$this->setError('addProjectMantis::Error: ' . _('Unable to create project in MantisBT'));
 			return false;
 		}
 		return $idProjetMantis;
 	}
 
 	function removeProjectMantis($idProjet) {
-		$groupObject = group_get_object($idProjet);
-		$localMantisbtConf = $this->getMantisBTConf($groupObject->getID());
+		$localMantisbtConf = $this->getMantisBTConf($idProjet);
 
 		if (!$localMantisbtConf) {
-			$groupObject->setError('removeProjetMantis::Error' . ' '. _('No project found'));
+			$this->setError('removeProjetMantis::Error' . ' '. _('No project found'));
 			return false;
 		} else {
 			try {
-				$clientSOAP = new SoapClient($localMantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
-				$delete = $clientSOAP->__soapCall('mc_project_delete', array("username" => $localMantisbtConf['soap_user'], "password" => $localMantisbtConf['soap_password'], "project_id" => $localMantisbtConf['id_mantisbt']));
+				$clientSOAP = new SoapClient($localMantisbtConf['url'].'/api/soap/mantisconnect.php?wsdl', array('trace' => true, 'exceptions' => true));
+				$delete = $clientSOAP->__soapCall('mc_project_delete', array('username' => $localMantisbtConf['soap_user'], 'password' => $localMantisbtConf['soap_password'], 'project_id' => $localMantisbtConf['id_mantisbt']));
 			} catch (SoapFault $soapFault) {
-				$groupObject->setError('removeProjetMantis::Error' . ' '.$soapFault->faultstring);
+				$this->setError('removeProjetMantis::Error' . ' '.$soapFault->faultstring);
 				return false;
 			}
 			if (!isset($delete)) {
-				$groupObject->setError('removeProjetMantis:: ' . _('No project found in MantisBT') . ' ' .$localMantisbtConf['id_mantisbt']);
+				$this->setError('removeProjetMantis:: ' . _('No project found in MantisBT') . ' ' .$localMantisbtConf['id_mantisbt']);
 				return false;
 			} else {
 				$res = db_query_params('DELETE FROM plugin_mantisbt WHERE id_mantisbt = $1',
 						array($localMantisbtConf['id_mantisbt']));
 				if (!$res) {
-					$groupObject->setError('removeProjetMantis:: ' . _('Cannot delete in database') . ' ' .$localMantisbtConf['id_mantisbt']);
+					$this->setError('removeProjetMantis:: ' . _('Cannot delete in database') . ' ' .$localMantisbtConf['id_mantisbt']);
 					return false;
 				}
 			}
@@ -263,9 +256,8 @@ class MantisBTPlugin extends Plugin {
 	 * @return	bool	success or not
 	 */
 	function updateProjectMantis($groupId, $groupName, $groupIspublic) {
-		$groupObject = group_get_object($groupId);
 		$projet = array();
-		$localMantisbtConf = $this->getMantisBTConf($groupObject->getID());
+		$localMantisbtConf = $this->getMantisBTConf($groupId);
 		$project['name'] = $groupName;
 		$project['status'] = "development";
 
@@ -281,15 +273,15 @@ class MantisBTPlugin extends Plugin {
 				$clientSOAP = new SoapClient($localMantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
 				$update = $clientSOAP->__soapCall('mc_project_update', array("username" => $localMantisbtConf['soap_user'], "password" => $localMantisbtConf['soap_password'], "project_id" => $localMantisbtConf['id_mantisbt'], "project" => $project));
 			} catch (SoapFault $soapFault) {
-				$groupObject->setError('updateProjectMantis::Error' . ' '. $soapFault->faultstring);
+				$this->setError('updateProjectMantis::Error' . ' '. $soapFault->faultstring);
 				return false;
 			}
 			if (!isset($update)) {
-				$groupObject->setError('updateProjectMantis::Error' . ' ' . _('Update MantisBT project'));
+				$this->setError('updateProjectMantis::Error' . ' ' . _('Update MantisBT project'));
 				return false;
 			}
 		} else {
-			$groupObject->setError('updateProjectMantis::Error ' . _('ID MantisBT project not found'));
+			$this->setError('updateProjectMantis::Error ' . _('ID MantisBT project not found'));
 			return false;
 		}
 		return true;
@@ -322,11 +314,10 @@ class MantisBTPlugin extends Plugin {
 	 * @access	public
 	 */
 	function getMantisBTConf($group_id) {
-		$group = group_get_object($group_id);
 		$mantisbtConfArray = array();
 		$resIdProjetMantis = db_query_params('SELECT * FROM plugin_mantisbt WHERE id_group = $1', array($group_id));
 		if (!$resIdProjetMantis) {
-			$group->setError('getMantisBTId::error '.db_error());
+			$this->setError('getMantisBTId::error '.db_error());
 			return $mantisbtConfArray;
 		}
 
@@ -384,7 +375,6 @@ class MantisBTPlugin extends Plugin {
 	function getSubMenu() {
 		global $HTML;
 		global $group_id;
-		global $user;
 		$group = group_get_object($group_id);
 		// submenu
 		$labelTitle = array();
@@ -502,7 +492,6 @@ class MantisBTPlugin extends Plugin {
 	 * @return	bool	success or not
 	 */
 	function initializeUser($confArr) {
-		global $user;
 		try {
 			$clientSOAP = new SoapClient($confArr['mantisbt_url'].'/api/soap/mantisconnect.php?wsdl', array('trace'=>true, 'exceptions'=>true));
 			$account = $clientSOAP->__soapCall('mc_login', array('username' => $confArr['mantisbt_user'], 'password' => $confArr['mantisbt_password']));
@@ -511,7 +500,7 @@ class MantisBTPlugin extends Plugin {
 			return false;
 		}
 		$result = db_query_params('insert into plugin_mantisbt_users (id_user, mantisbt_user, mantisbt_password, mantisbt_user_id, mantisbt_url) values ($1, $2, $3, $4, $5)',
-							array($user->getID(), $confArr['mantisbt_user'], $confArr['mantisbt_password'], $account->account_data->id, $confArr['mantisbt_url']));
+							array(user_getid(), $confArr['mantisbt_user'], $confArr['mantisbt_password'], $account->account_data->id, $confArr['mantisbt_url']));
 		if (!$result) {
 			$this->setError(db_error());
 			return false;
@@ -527,13 +516,8 @@ class MantisBTPlugin extends Plugin {
 	 * @return	bool	success or not
 	 */
 	function updateConf($group_id, $confArr) {
-		$result = db_query_params('update plugin_mantisbt set url = $1 , soap_user = $2, soap_password = $3, use_global = $4
-						where id_group = $5',
-					array($confArr['url'],
-						$confArr['soap_user'],
-						$confArr['soap_password'],
-						$confArr['global_conf'],
-						$group_id));
+		$result = db_query_params('update plugin_mantisbt set url = $1 , soap_user = $2, soap_password = $3, use_global = $4 where id_group = $5',
+					array($confArr['url'], $confArr['soap_user'], $confArr['soap_password'], $confArr['global_conf'], $group_id));
 		if (!$result)
 			return false;
 
@@ -547,7 +531,6 @@ class MantisBTPlugin extends Plugin {
 	 * @return	bool	success or not
 	 */
 	function updateUserConf($confArr) {
-		global $user;
 		try {
 			$clientSOAP = new SoapClient($confArr['mantisbt_url'].'/api/soap/mantisconnect.php?wsdl', array('trace'=>true, 'exceptions'=>true));
 			$account = $clientSOAP->__soapCall('mc_login', array('username' => $confArr['mantisbt_user'], 'password' => $confArr['mantisbt_password']));
@@ -555,12 +538,8 @@ class MantisBTPlugin extends Plugin {
 			$this->setError($soapFault->faultstring);
 			return false;
 		}
-		$result = db_query_params('update plugin_mantisbt_users set mantisbt_user = $1 , mantisbt_password = $2
-						where id_user = $3 and mantisbt_url = $4',
-					array($confArr['mantisbt_user'],
-						$confArr['mantisbt_password'],
-						$user->getID()),
-						$confArr['mantisbt_url']);
+		$result = db_query_params('update plugin_mantisbt_users set mantisbt_user = $1 , mantisbt_password = $2 where id_user = $3 and mantisbt_url = $4',
+					array($confArr['mantisbt_user'], $confArr['mantisbt_password'], user_getid(), $confArr['mantisbt_url']));
 		if (!$result)
 			return false;
 
@@ -574,9 +553,8 @@ class MantisBTPlugin extends Plugin {
 	 * @return	bool	success or not
 	 */
 	function deleteUserConf($url) {
-		global $user;
 		$result = db_query_params('delete from plugin_mantisbt_users where id_user = $1 and mantisbt_url = $2',
-					array($user->getID(), $url));
+					array(user_getid(), $url));
 		if (!$result)
 			return false;
 
@@ -614,11 +592,10 @@ class MantisBTPlugin extends Plugin {
 	 * @return	array	the user configuration
 	 */
 	function getUserConf($url) {
-		global $user;
 		$userConf = array();
-		$resIdUser = db_query_params('SELECT mantisbt_user, mantisbt_password, mantisbt_user_id, mantisbt_url FROM plugin_mantisbt_users WHERE id_user = $1 and mantisbt_url = $2', array($user->getID(), $url));
+		$resIdUser = db_query_params('SELECT mantisbt_user, mantisbt_password, mantisbt_user_id, mantisbt_url FROM plugin_mantisbt_users WHERE id_user = $1 and mantisbt_url = $2', array(user_getid(), $url));
 		if (!$resIdUser) {
-			$user->setError('getUserConf::error '.db_error());
+			$this->setError('getUserConf::error '.db_error());
 			return false;
 		}
 
@@ -642,7 +619,7 @@ class MantisBTPlugin extends Plugin {
 	 * @return	array	the global configuration array
 	 */
 	function getGlobalconf() {
-		$resGlobConf = db_query_params('SELECT * from plugin_mantisbt_global',array());
+		$resGlobConf = db_query_params('SELECT * from plugin_mantisbt_global', array());
 		if (!$resGlobConf) {
 			return false;
 		}
@@ -723,11 +700,12 @@ class MantisBTPlugin extends Plugin {
 	/** Widgets function **/
 
 	function widgets($params) {
+		global $gfcommon;
 		$group = group_get_object($GLOBALS['group_id']);
-		if ( !$group || !$group->usesPlugin ( $this->name ) ) {
+		if ( !$group || !$group->usesPlugin($this->name)) {
 			return false;
 		}
-		require_once 'common/widget/WidgetLayoutManager.class.php';
+		require_once $gfcommon.'/widget/WidgetLayoutManager.class.php';
 		if ($params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_GROUP) {
 			$params['fusionforge_widgets'][] = 'plugin_mantisbt_project_latestissues';
 		}
@@ -735,15 +713,11 @@ class MantisBTPlugin extends Plugin {
 	}
 
 	function myPageBox($params) {
-		global $gfplugins;
-		require_once 'common/widget/WidgetLayoutManager.class.php';
+		global $gfplugins, $gfcommon;
+		require_once $gfcommon.'/widget/WidgetLayoutManager.class.php';
 		if ($params['widget'] == 'plugin_mantisbt_project_latestissues') {
 			require_once $gfplugins.$this->name.'/common/mantisbt_Widget_ProjectLastIssues.class.php';
 			$params['instance'] = new mantisbt_Widget_ProjectLastIssues($this);
 		}
 	}
 }
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:
