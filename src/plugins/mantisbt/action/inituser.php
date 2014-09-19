@@ -27,7 +27,7 @@ global $mantisbt; // the mantisbt object
 $confArr = array();
 $confArr['mantisbt_user'] = getStringFromRequest('mantisbt_user');
 $confArr['mantisbt_password'] = getStringFromRequest('mantisbt_password');
-$confArr['mantisbt_configtype'] = getIntFromRequest('mantisbt_configtype');
+$confArr['mantisbt_url'] = getStringFromRequest('mantisbt_url');
 
 if (!$mantisbt->initializeUser($confArr)) {
 	$error_msg = _('Failed to initialize user')._(': ').$mantisbt->getErrorMessage();

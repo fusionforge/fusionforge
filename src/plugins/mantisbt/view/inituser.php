@@ -27,27 +27,36 @@
 global $type;
 global $mantisbt;
 global $HTML;
+global $validProjects;
 
-echo $HTML->openForm(array('method' => 'post', 'action' => util_make_uri('/plugins/'.$mantisbt->name.'/?type='.$type.'&action=inituser')));
-echo $HTML->listTableTop();
-// disabled until MantisBT support user creation thru SOAP API
-// $cells = array();
-// $cells[] = array(_('Create the user in MantisBT').utils_requiredField()._(':'), 'class' => 'align-right');
-// $cells[][] = html_e('input', array('title' => _('If your user does NOT exist in MantisBT, do you want to create it ?'), 'type' => 'radio', 'name' => 'mantisbt_configtype', 'value' => 1));
-// echo $HTML->multiTableRow(array(), $cells);
-$cells = array();
-$cells[] = array(_('Link with already created user in MantisBT').utils_requiredField()._(':'), 'class' => 'align-right');
-$cells[][] = html_e('input', array('title' => _('If your user DOES exist in MantisBT, do you want to link with it ?'), 'type' => 'radio', 'name' => 'mantisbt_configtype', 'value' => 2));
-echo $HTML->multiTableRow(array(), $cells);
-$cells = array();
-$cells[] = array(_('MantisBT User').utils_requiredField()._(':'), 'class' => 'align-right');
-$cells[][] = html_e('input', array('title' => _('Specify your mantisbt user to be used.'), 'id' => 'mantisbt_user', 'type' => 'text', 'size' => 50, 'maxlength' => 255, 'name' => 'mantisbt_user', 'required' => 'required'));
-echo $HTML->multiTableRow(array(), $cells);
-$cells = array();
-$cells[] = array(_('Your Password').utils_requiredField()._(':'), 'class' => 'align-right');
-$cells[][] = html_e('input', array('title' => _('Specify the password of your user.'), 'id' => 'mantisbt_password', 'type' => 'password', 'size' => 50, 'maxlength' => 255, 'name' => 'mantisbt_password', 'required' => 'required'));
-echo $HTML->multiTableRow(array(), $cells);
-echo $HTML->listTableBottom();
-echo html_e('input', array('type' => 'submit', 'value' => _('Initialize')));
-echo $HTML->closeForm();
+$urlToSetup = getStringFromRequest('urlsetup');
+$uniqueMantisBTUrls = array();
+
+if (!strlen($urlToSetup)) {
+	foreach ($validProjects as $validProject) {
+		$localConf = $mantisbt->getMantisBTConf($validProject->getID());
+		$uniqueMantisBTUrls[] = $localConf['url'];
+	}
+	$uniqueMantisBTUrls = array_unique($uniqueMantisBTUrls);
+} else {
+	$uniqueMantisBTUrls[] = $urlToSetup;
+}
+
+echo html_e('p', array(), _('You need to setup your mantisbt account per URL.'));
+
+foreach ($uniqueMantisBTUrls as $uniqueMantisBTUrl) {
+	echo $HTML->boxTop(_('User configuration for URL')._(': ').$uniqueMantisBTUrl);
+	echo $HTML->openForm(array('method' => 'post', 'action' => util_make_uri('/plugins/'.$mantisbt->name.'/?type='.$type.'&action=inituser')));
+	echo $HTML->listTableTop();
+	$cells[] = array(_('MantisBT User').utils_requiredField()._(':'), 'class' => 'align-right');
+	$cells[][] = html_e('input', array('title' => _('Specify your MantisBT user to be used. This user MUST already exists.'), 'id' => 'mantisbt_user', 'type' => 'text', 'size' => 50, 'maxlength' => 255, 'name' => 'mantisbt_user', 'required' => 'required'));
+	$cells[] = array(_('MantisBT Password').utils_requiredField()._(':'), 'class' => 'align-right');
+	$cells[][] = html_e('input', array('title' => _('Specify the password of your user.'), 'id' => 'mantisbt_password', 'type' => 'password', 'size' => 50, 'maxlength' => 255, 'name' => 'mantisbt_password', 'required' => 'required'));
+	$cells[][] = html_e('input', array('type' => 'hidden', 'name' => 'mantisbt_url', 'value' => $uniqueMantisBTUrl)).
+			html_e('input', array('type' => 'submit', 'value' => _('Initialize')));
+	echo $HTML->multiTableRow(array(), $cells);
+	echo $HTML->listTableBottom();
+	echo $HTML->closeForm();
+	echo $HTML->boxBottom();
+}
 echo $HTML->addRequiredFieldsInfoBox();

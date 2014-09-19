@@ -27,13 +27,15 @@ global $group_id;
 global $mantisbt;
 /* add category to a dedicated project */
 
-echo $HTML->openForm(array('method' => 'post', 'name' => 'addCategory', 'action' => util_make_uri('/plugins/'.$mantisbt->name.'/?type=admin&group_id='.$group_id.'&action=addCategory')));
 echo $HTML->boxTop(_('Add a new category'));
-echo '<table><tr>';
-echo '<td><label >'._('Name').'</label><input name="nameCategory" type="text" /></td>';
-echo '<td>';
-echo '<input type="submit" value="'. _('Add') .'" />';
-echo '</td>';
-echo '</tr></table>';
-echo $HTML->boxBottom();
+echo $HTML->openForm(array('method' => 'post', 'name' => 'addCategory', 'action' => util_make_uri('/plugins/'.$mantisbt->name.'/?type=admin&group_id='.$group_id.'&action=addCategory')));
+echo $HTML->listTableTop();
+$cells = array();
+$cells[] = array(_('Name').utils_requiredField()._(':'), 'class' => 'align-right');
+$cells[][] = html_e('input', array('name' => 'nameCategory', 'type' => 'text', 'required' => 'required'));
+$cells[][] = html_e('input', array('type' => 'submit', 'value' => _('Add')));
+echo $HTML->multiTableRow(array(), $cells);
+echo $HTML->listTableBottom();
 echo $HTML->closeForm();
+echo $HTML->addRequiredFieldsInfoBox();
+echo $HTML->boxBottom();

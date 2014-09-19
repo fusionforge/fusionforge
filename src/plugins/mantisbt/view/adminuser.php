@@ -26,14 +26,23 @@
 /* main display */
 global $HTML;
 global $mantisbt;
-global $mantisbtConf;
+global $userMantisBTConf;
 
-echo $HTML->boxTop(_('Manage your account'));
-echo $HTML->openForm(array('method' => 'post', 'action' => util_make_uri('/plugins/'.$mantisbt->name.'/?type=user&action=updateuserConf')));
-echo '<table>';
-echo '<tr><td><label id="mantisbtinit-user" title="'._('Specify your mantisbt user.').'" >'._('MantisBT User').'</label></td><td><input type="text" size="50" maxlength="255" name="mantisbt_user" value="'.$mantisbtConf['user'].'" required="required" /></td></tr>';
-echo '<tr><td><label id="mantisbtinit-password" title="'._('Specify the password of this user.').'" >'._('MantisBT Password.').'</label></td><td><input type="password" size="50" maxlength="255" name="mantisbt_password" value="'.$mantisbtConf['password'].'" required="required" /></td></tr>';
-echo '</table>';
-echo '<input type="submit" value="'._('Update').'" />';
-echo $HTML->closeForm();
-echo $HTML->boxBottom();
+foreach ($userMantisBTConf as $userConf) {
+	echo $HTML->boxTop(_('Manage your account for the URL')._(': ').$userConf['url']);
+	echo $HTML->openForm(array('method' => 'post', 'action' => util_make_uri('/plugins/'.$mantisbt->name.'/?type=user&action=updateuserConf')));
+	echo $HTML->listTableTop();
+	$cells = array();
+	$cells[] = array(_('MantisBT User').utils_requiredField()._(':'), 'class' => 'align-right');
+	$cells[][] = html_e('input', array('type' => 'text', 'title' => _('Specify your MantisBT user.'), 'size' => 50, 'maxlength' => 255, 'name' => 'mantisbt_user', 'value' => $userConf['user'], 'required' => 'required'));
+	$cells[] = array(_('MantisBT Password').utils_requiredField()._(':'), 'class' => 'align-right');
+	$cells[][] = html_e('input', array('type' => 'password', 'title' => _('Specify the password of this MantisBT user.'), 'size' => 50, 'maxlength' => 255, 'name' => 'mantisbt_password', 'value' => $userConf['password'], 'required' => 'required'));
+	$cells[][] = html_e('input', array('type' => 'hidden', 'name' => 'mantisbt_url', 'value' => $userConf['url'])).
+			html_e('input', array('type' => 'submit', 'value' => _('Update'))).
+			html_e('input', array('type' => 'button', 'value' => _('Delete'), 'onclick' => 'location.href=\''.util_make_uri('/plugins/'.$mantisbt->name.'/?type=user&action=deleteuserConf&mantisbt_url='.urlencode($userConf['url'])).'\''));
+	echo $HTML->multiTableRow(array(), $cells);
+	echo $HTML->listTableBottom();
+	echo $HTML->closeForm();
+	echo $HTML->boxBottom();
+}
+echo $HTML->addRequiredFieldsInfoBox();

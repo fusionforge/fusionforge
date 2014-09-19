@@ -503,24 +503,15 @@ class MantisBTPlugin extends Plugin {
 	 */
 	function initializeUser($confArr) {
 		global $user;
-		//MISSING: we should support multi mantisbt instance. per project? Currently only one is supported...
-		$mantisbtGlobalconf = $this->getGlobalconf();
-		if ($confArr['mantisbt_configtype'] == 1) {
-			//TO BE REWORKED... MantisBT does not support yet the user creation thru API.
-			$idMantisBTUser = $this->addUserMantisBT($confArr);
-			$confArr['mantisbt_user'] = $user->getUnixName();
-			$account = null;
-		} elseif ($confArr['mantisbt_configtype'] == 2) {
-			try {
-				$clientSOAP = new SoapClient($mantisbtGlobalconf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
-				$account = $clientSOAP->__soapCall('mc_login', array('username' => $confArr['mantisbt_user'], 'password' => $confArr['mantisbt_password']));
-			} catch (SoapFault $soapFault) {
-				$this->setError($soapFault->faultstring);
-				return false;
-			}
+		try {
+			$clientSOAP = new SoapClient($confArr['mantisbt_url'].'/api/soap/mantisconnect.php?wsdl', array('trace'=>true, 'exceptions'=>true));
+			$account = $clientSOAP->__soapCall('mc_login', array('username' => $confArr['mantisbt_user'], 'password' => $confArr['mantisbt_password']));
+		} catch (SoapFault $soapFault) {
+			$this->setError($soapFault->faultstring);
+			return false;
 		}
-		$result = db_query_params('insert into plugin_mantisbt_users (id_user, mantisbt_user, mantisbt_password, mantisbt_user_id) values ($1, $2, $3, $4)',
-							array($user->getID(), $confArr['mantisbt_user'], $confArr['mantisbt_password'], $account->account_data->id));
+		$result = db_query_params('insert into plugin_mantisbt_users (id_user, mantisbt_user, mantisbt_password, mantisbt_user_id, mantisbt_url) values ($1, $2, $3, $4, $5)',
+							array($user->getID(), $confArr['mantisbt_user'], $confArr['mantisbt_password'], $account->account_data->id, $confArr['mantisbt_url']));
 		if (!$result) {
 			$this->setError(db_error());
 			return false;
@@ -557,11 +548,35 @@ class MantisBTPlugin extends Plugin {
 	 */
 	function updateUserConf($confArr) {
 		global $user;
+		try {
+			$clientSOAP = new SoapClient($confArr['mantisbt_url'].'/api/soap/mantisconnect.php?wsdl', array('trace'=>true, 'exceptions'=>true));
+			$account = $clientSOAP->__soapCall('mc_login', array('username' => $confArr['mantisbt_user'], 'password' => $confArr['mantisbt_password']));
+		} catch (SoapFault $soapFault) {
+			$this->setError($soapFault->faultstring);
+			return false;
+		}
 		$result = db_query_params('update plugin_mantisbt_users set mantisbt_user = $1 , mantisbt_password = $2
-						where id_user = $3',
+						where id_user = $3 and mantisbt_url = $4',
 					array($confArr['mantisbt_user'],
 						$confArr['mantisbt_password'],
-						$user->getID()));
+						$user->getID()),
+						$confArr['mantisbt_url']);
+		if (!$result)
+			return false;
+
+		return true;
+	}
+
+	/**
+	 * deleteUserConf - remove the MantisBT User configuration from db
+	 *
+	 * @param	string	url
+	 * @return	bool	success or not
+	 */
+	function deleteUserConf($url) {
+		global $user;
+		$result = db_query_params('delete from plugin_mantisbt_users where id_user = $1 and mantisbt_url = $2',
+					array($user->getID(), $url));
 		if (!$result)
 			return false;
 
@@ -595,12 +610,13 @@ class MantisBTPlugin extends Plugin {
 	/**
 	 * getUserConf - return the user / password for the user id mantisbt account
 	 *
+	 * @param	string	the mantisbt server url
 	 * @return	array	the user configuration
 	 */
-	function getUserConf() {
+	function getUserConf($url) {
 		global $user;
 		$userConf = array();
-		$resIdUser = db_query_params('SELECT mantisbt_user, mantisbt_password, mantisbt_user_id FROM plugin_mantisbt_users WHERE id_user = $1', array($user->getID()));
+		$resIdUser = db_query_params('SELECT mantisbt_user, mantisbt_password, mantisbt_user_id, mantisbt_url FROM plugin_mantisbt_users WHERE id_user = $1 and mantisbt_url = $2', array($user->getID(), $url));
 		if (!$resIdUser) {
 			$user->setError('getUserConf::error '.db_error());
 			return false;
@@ -616,13 +632,7 @@ class MantisBTPlugin extends Plugin {
 		$userConf['user'] = $row['mantisbt_user'];
 		$userConf['password'] = $row['mantisbt_password'];
 		$userConf['mantisbt_userid'] = $row['mantisbt_user_id'];
-		$userConf['url'] = array();
-		foreach ($user->getGroups() as $groupObject) {
-			if ($groupObject->usesPlugin($this->name)) {
-				$mantisbtGroupConf = $this->getMantisBTConf($groupObject->getID());
-				$userConf['url'][] = $mantisbtGroupConf['url'];
-			}
-		}
+		$userConf['url'] = $row['mantisbt_url'];
 		return $userConf;
 	}
 

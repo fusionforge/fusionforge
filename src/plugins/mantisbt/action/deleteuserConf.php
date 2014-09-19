@@ -1,9 +1,8 @@
 <?php
 /**
- * Project MantisBT page
+ * MantisBT plugin
  *
- * Copyright 2009-2011, Franck Villaume - Capgemini
- * Copyright 2011,2014 Franck Villaume - TrivialDev
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -22,31 +21,14 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-global $mantisbt;
-global $gfplugins;
-global $view;
+global $mantisbt; // the mantisbt object
 
-$mantisbt->getSubMenu();
+$mantisbt_url = getStringFromRequest('mantisbt_url');
 
-// page a afficher
-switch ($view) {
-	case 'addAttachment':
-	case 'addIssue':
-	case 'editIssue':
-	case 'roadmap':
-	case 'viewNote':
-	case 'viewIssue': {
-		include($gfplugins.$mantisbt->name.'/view/'.$view.'.php');
-		break;
-	}
-	case 'addNote':
-	case 'editNote': {
-		include($gfplugins.$mantisbt->name.'/view/addOrEditNote.php');
-		break;
-	}
-	/* viewIssues is the default page */
-	default: {
-		include($gfplugins.$mantisbt->name.'/view/viewIssues.php');
-		break;
-	}
+if (!$mantisbt->deleteUserConf($mantisbt_url)) {
+	$error_msg = $mantisbt->getErrorMessage();
+	session_redirect('/plugins/'.$mantisbt->name.'/?type=user');
 }
+
+$feedback = _('MantisBT User configuration successfully updated.');
+session_redirect('/my/');
