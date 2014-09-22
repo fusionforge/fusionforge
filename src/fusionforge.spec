@@ -648,9 +648,12 @@ done
 # plugin: scmgit
 %{__ln_s} ../../plugins/scmgit/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/scmgit
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/scmgit/www/cgi-bin
-%{__ln_s} /usr/share/gitweb/gitweb.cgi $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/scmgit/www/cgi-bin/gitweb.cgi
-%{__ln_s} /usr/share/gitweb/static/gitweb.css $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/scmgit/www/gitweb.css
-%{__ln_s} /usr/share/gitweb/static/gitweb.js $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/scmgit/www/gitweb.js
+%{__ln_s} www/cgi-bin $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/scmgit/cgi-bin
+%{__ln_s} /var/www/git/gitweb.cgi $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/scmgit/www/cgi-bin/gitweb.cgi
+%{__ln_s} /var/www/git/gitweb.css $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/scmgit/www/gitweb.css
+%{__ln_s} /var/www/git/gitweb.js $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/scmgit/www/gitweb.js
+%{__ln_s} /var/www/git/git-favicon.png $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/scmgit/www/git-favicon.png
+%{__ln_s} /var/www/git/git-logo.png $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/scmgit/www/git-logo.png
 %{__rm} $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/httpd.conf.d/plugin-scmgit-dav.inc
 # plugin: scmhg
 
