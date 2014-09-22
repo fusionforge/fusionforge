@@ -42,4 +42,3 @@ echo $HTML->listTableBottom();
 echo $HTML->closeForm();
 echo $HTML->addRequiredFieldsInfoBox();
 echo $HTML->boxBottom();
-
