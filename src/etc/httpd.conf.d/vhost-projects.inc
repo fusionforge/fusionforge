@@ -10,6 +10,7 @@ SetEnv FORGE_CONFIG_PATH "{core/config_path}"
 UseCanonicalName Off
 
 VirtualDocumentRoot {core/groupdir_prefix}/%1/htdocs
+# disabled for CVE-2014-6275
 # Only enable it if you know what you are doing, by default all scripts run as Apache
 #VirtualScriptAlias {core/groupdir_prefix}/%1/cgi-bin
 
