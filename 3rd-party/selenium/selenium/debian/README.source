@@ -1,9 +1,10 @@
-selenium for Debian
--------------------
+Unofficial packaging of selenium for Debian
+-------------------------------------------
 
-<this file describes information about the source package, see Debian policy
-manual section 4.14. You WILL either need to modify or delete this file>
+The package is very basic and just contains a copy of the upstream jar.
 
+To regenerate the .orig tarball, use 'debian/rules get-orig-source' to
+download the upstream standalone distribution (see debian/rules for
+more details).
 
-
-
+ -- Olivier Berger <obergix@debian.org>, Tue, 29 Apr 2014 18:54:13 +0200
