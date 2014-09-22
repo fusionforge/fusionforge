@@ -8,7 +8,8 @@ DirectoryIndex index.html index.php index.htm
 UseCanonicalName Off
 
 VirtualDocumentRoot {core/groupdir_prefix}/%1/htdocs
-VirtualScriptAlias {core/groupdir_prefix}/%1/cgi-bin
+# Only enable it if you know what you are doing, by default all scripts run as Apache
+#VirtualScriptAlias {core/groupdir_prefix}/%1/cgi-bin
 
 SetEnvIf Host "(.*)\.{core/web_host}" AWSTATS_FORCE_CONFIG=group-$1
 
