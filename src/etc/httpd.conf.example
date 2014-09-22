@@ -85,7 +85,9 @@ UseCanonicalName Off
 	# FusionForge without the DNS delegation
 	# Project home pages are in a virtual /www/<group> location
 	#	AliasMatch ^/www/([^/]*)/(.*) /home/groups/$1/htdocs/$2
-	#	ScriptAliasMatch ^/([^/]*)/cgi-bin/(.*) /home/groups/$1/cgi-bin/$2
+# disabled for CVE-2014-6275
+# Only enable it if you know what you are doing, by default all scripts run as Apache
+	#	#ScriptAliasMatch ^/([^/]*)/cgi-bin/(.*) /home/groups/$1/cgi-bin/$2
 	#	<Directory /home/groups>
 	#		Options Indexes FollowSymlinks
 	#		AllowOverride All
@@ -180,7 +182,9 @@ UseCanonicalName Off
 	ServerName gforge.company.com
 	ServerAlias *.gforge.company.com
 	VirtualDocumentRoot /home/groups/%1/htdocs
-        VirtualScriptAlias /home/groups/%1/cgi-bin
+# disabled for CVE-2014-6275
+# Only enable it if you know what you are doing, by default all scripts run as Apache
+        #VirtualScriptAlias /home/groups/%1/cgi-bin
 	DirectoryIndex index.html index.php
 	php_admin_value default_charset "UTF-8"
 	php_admin_value include_path "/path/to/gforge/etc/custom:/etc/gforge:/opt/gforge:/opt/gforge/www/include:."

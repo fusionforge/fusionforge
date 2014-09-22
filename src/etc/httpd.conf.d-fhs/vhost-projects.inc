@@ -8,7 +8,9 @@ DirectoryIndex index.html index.php index.htm
 UseCanonicalName Off
 
 VirtualDocumentRoot /var/lib/gforge/chroot/home/groups/%1/htdocs
-VirtualScriptAlias /var/lib/gforge/chroot/home/groups/%1/cgi-bin
+# disabled for CVE-2014-6275
+# Only enable it if you know what you are doing, by default all scripts run as Apache
+#VirtualScriptAlias /var/lib/gforge/chroot/home/groups/%1/cgi-bin
 
 SetEnvIf Host "(.*)\.{core/web_host}" AWSTATS_FORCE_CONFIG=group-$1
 
