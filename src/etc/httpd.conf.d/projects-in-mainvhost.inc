@@ -2,7 +2,8 @@
 
 # Project home pages are in a virtual /www/<group> location
 AliasMatch ^/www/([^/]*)/(.*) {core/groupdir_prefix}/$1/htdocs/$2
-ScriptAliasMatch ^/([^/]*)/cgi-bin/(.*) {core/groupdir_prefix}/$1/cgi-bin/$2
+# Only enable it if you know what you are doing, by default all scripts run as Apache
+#ScriptAliasMatch ^/([^/]*)/cgi-bin/(.*) {core/groupdir_prefix}/$1/cgi-bin/$2
 <Directory {core/groupdir_prefix}>
   Options Indexes FollowSymlinks
   AllowOverride All

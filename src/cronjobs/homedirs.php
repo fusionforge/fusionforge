@@ -139,7 +139,7 @@ while ($row = pg_fetch_array($res)) {
 		@mkdir($ghome);
 		/* this is safe as this directory still belongs to root */
 		@mkdir($ghome . '/htdocs');
-		@mkdir($ghome . '/cgi-bin');
+		#@mkdir($ghome . '/cgi-bin');
 
 		/* write substituted template to group home */
 		if (($fw = fopen($ghome . '/htdocs/index.html', 'w'))) {
