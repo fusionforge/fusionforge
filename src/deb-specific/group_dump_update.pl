@@ -170,7 +170,9 @@ sub add_group {
 
 	    SudoEffectiveUser($dummy_user, sub {
 		mkdir $log_dir, $default_perms ;
-		mkdir $cgi_dir, $default_perms ;
+# disabled for CVE-2014-6275
+# Only enable it if you know what you are doing, by default all scripts run as Apache
+#		mkdir $cgi_dir, $default_perms ;
 		mkdir $ht_dir, $default_perms ;
 		mkdir $inc_dir, $default_perms ;
 		if (-e $default_page) {
@@ -199,7 +201,7 @@ sub add_group {
 		# perl is sometime fucked to create with right permission
 		chmod $default_perms, $group_dir;
 		chmod $default_perms, $log_dir;
-		chmod $default_perms, $cgi_dir;
+#		chmod $default_perms, $cgi_dir;
 		chmod $default_perms, $ht_dir;
 		chmod $incdir_perms, $inc_dir;
 		chmod 0664, "$ht_dir/index.php";
@@ -236,7 +238,7 @@ sub update_group {
 	SudoEffectiveUser($dummy_user, sub {
 	    chmod $default_perms, $group_dir;
 	    chmod $default_perms, $log_dir;
-	    chmod $default_perms, $cgi_dir;
+#	    chmod $default_perms, $cgi_dir;
 	    chmod $default_perms, $ht_dir;
 	    chmod $incdir_perms, $inc_dir;
 	});

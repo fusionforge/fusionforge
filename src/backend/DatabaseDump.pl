@@ -138,16 +138,18 @@ while(my ($http_domain,$unix_group_name,$group_name,$status) = $c->fetchrow()) {
 		push @tmp_array, "    Order allow,deny\n";
 		push @tmp_array, "    Allow from all\n";
 		push @tmp_array, "</Directory>\n";
-		push @tmp_array, "<Directory \"$grpdir_prefix$unix_group_name/cgi-bin\">\n";
-		push @tmp_array, "    AllowOverride AuthConfig FileInfo\n";
-		push @tmp_array, "    Options ExecCGI\n";
-		push @tmp_array, "    Order allow,deny\n";
-		push @tmp_array, "    Allow from all\n";
-		push @tmp_array, "</Directory>\n";
+# disabled for CVE-2014-6275
+# Only enable it if you know what you are doing, by default all scripts run as Apache
+#		push @tmp_array, "<Directory \"$grpdir_prefix$unix_group_name/cgi-bin\">\n";
+#		push @tmp_array, "    AllowOverride AuthConfig FileInfo\n";
+#		push @tmp_array, "    Options ExecCGI\n";
+#		push @tmp_array, "    Order allow,deny\n";
+#		push @tmp_array, "    Allow from all\n";
+#		push @tmp_array, "</Directory>\n";
 		push @tmp_array, "<VirtualHost 192.168.4.52>\n";
 		push @tmp_array, "    DocumentRoot \"$grpdir_prefix$unix_group_name/htdocs/\"\n";
 		push @tmp_array, "    CustomLog $grpdir_prefix$unix_group_name/log/combined_log combined\n";
-		push @tmp_array, "    ScriptAlias /cgi-bin/ \"$grpdir_prefix$unix_group_name/cgi-bin/\"\n";
+#		push @tmp_array, "    ScriptAlias /cgi-bin/ \"$grpdir_prefix$unix_group_name/cgi-bin/\"\n";
 		push @tmp_array, "    Servername $http_domain\n";
 		push @tmp_array, "</VirtualHost>\n";
 	}
