@@ -21,7 +21,7 @@
 (
     echo "# GENERATED used $0"
     cat debian/control.in
-    echo
+    echo; echo
     for i in $(sed -n 's/^Package: fusionforge-plugin-//p' debian/plugins); do
 	sed -n -e '/^#/d' -e "/^Package: fusionforge-plugin-$i/,/^$/p" debian/plugins \
 	    | grep -v ^$ \
