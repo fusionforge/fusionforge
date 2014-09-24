@@ -1,7 +1,7 @@
 Name: fusionforge
 Version: @version@@snapshot@
 Release: 1%{?dist}
-Summary: collaborative development tool
+Summary: Collaborative development tool
 
 Group: Development/Tools
 BuildArch: noarch
@@ -74,7 +74,7 @@ done
 
 
 %package common
-Summary: collaborative development tool - shared files
+Summary: Collaborative development tool - shared files
 Requires: php-cli, php-pgsql, php-process, php-htmlpurifier-htmlpurifier, cronie
 %description common
 FusionForge provides many tools to aid collaboration in a
@@ -93,7 +93,7 @@ subpackages.
 
 
 %package db-local
-Summary: collaborative development tool - database (using PostgreSQL)
+Summary: Collaborative development tool - database (using PostgreSQL)
 Requires: %{name}-common = %{version}, postgresql-server
 Provides: %{name}-db = %{version}
 %description db-local
@@ -111,7 +111,7 @@ database.
 
 
 %package db-remote
-Summary: collaborative development tool - database (remote and already installed)
+Summary: Collaborative development tool - database (remote and already installed)
 Provides: %{name}-db = %{version}
 %description db-remote
 FusionForge provides many tools to aid collaboration in a
@@ -128,7 +128,7 @@ installs (e.g. plugins activation requires a populated db).
 
 
 %package shell
-Summary: collaborative development tool - shell accounts (using PostgreSQL)
+Summary: Collaborative development tool - shell accounts (using PostgreSQL)
 Requires: %{name}-common = %{version}, php, openssh-server, nscd, libnss-pgsql, pam
 %description shell
 FusionForge provides many tools to aid collaboration in a
@@ -149,7 +149,7 @@ fi
 
 
 %package web
-Summary: collaborative development tool - web part (using Apache)
+Summary: Collaborative development tool - web part (using Apache)
 Requires: %{name}-common = %{version}, %{name}-db = %{version}, httpd, mod_ssl, php, php-pgsql
 %description web
 FusionForge provides many tools to aid collaboration in a
@@ -166,7 +166,7 @@ FusionForge on an Apache webserver.
 
 
 %package web-vhosts
-Summary: collaborative development tool - web vhosts (using Apache)
+Summary: Collaborative development tool - web vhosts (using Apache)
 Requires: %{name}-common = %{version}, httpd
 %description web-vhosts
 FusionForge provides many tools to aid collaboration in a
@@ -181,7 +181,7 @@ on an Apache webserver.
 
 
 %package mta-postfix
-Summary: collaborative development tool - mail tools (using Postfix)
+Summary: Collaborative development tool - mail tools (using Postfix)
 Requires: %{name}-common = %{version}, postfix
 Provides: %{name}-mta = %{version}
 %description mta-postfix
@@ -201,7 +201,7 @@ if [ $1 -eq 0 ] ; then %{_datadir}/%{name}/post-install.d/mta-postfix/mta-postfi
 
 
 %package mta-exim4
-Summary: collaborative development tool - mail tools (using Exim 4)
+Summary: Collaborative development tool - mail tools (using Exim 4)
 Requires: %{name}-common = %{version}, exim
 Provides: %{name}-mta = %{version}
 %description mta-exim4
@@ -221,7 +221,7 @@ if [ $1 -eq 0 ] ; then %{_datadir}/%{name}/post-install.d/mta-exim4/mta-exim4.sh
 
 
 %package lists
-Summary: collaborative development tool - mailing-lists (using Mailman)
+Summary: Collaborative development tool - mailing-lists (using Mailman)
 Requires: %{name}-common = %{version}, %{name}-mta = %{version}, mailman
 %description lists
 FusionForge provides many tools to aid collaboration in a
@@ -240,5 +240,5 @@ This package controls the interaction between FusionForge and Mailman.
 
 
 %changelog
-* Tue Aug 19 2014 Sylvain Beucler <sylvain.beucler@inria.fr> - 5.3.50
+* Tue Aug 19 2014 Sylvain Beucler <sylvain.beucler@inria.fr> - 5.3.50-1
 - Revamp packaging
