@@ -23,6 +23,7 @@ snapshot=$2 # e.g. '+201408281835'; spec needs static tarball extract dir
 if [ -z "$version" ]; then version=$(make version); fi
 if [ -z "$autobuild" ]; then autobuild=''; fi
 
+rm -f fusionforge.spec
 (
     for i in $(sed -n 's/^%package plugin-//p' rpm/plugins); do
 	sed -n -e '/^#/d' -e "/^%package plugin-$i/,/^$/p" rpm/plugins \
