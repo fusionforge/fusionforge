@@ -73,8 +73,10 @@ Requires:
 %package plugin-scmhook
 Requires:
 
-%package plugin-wiki
-Requires: units
+# Way too many rpmlint errors in this one
+# Any volunteer?
+#%package plugin-wiki
+#Requires: units
 
 %package plugin-projectlabels
 Requires:
