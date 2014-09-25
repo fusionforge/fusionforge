@@ -89,7 +89,7 @@ subpackages.
 %doc AUTHORS* CHANGES COPYING INSTALL.TXT NEWS README
 %doc docs/*
 %post common
-%{_datadir}/%{name}/post-install.d/common/common.sh
+%{_datadir}/%{name}/post-install.d/common/common.sh configure
 
 
 %package db-local
@@ -107,7 +107,7 @@ This package installs, configures and maintains the FusionForge
 database.
 %files db-local -f db-local.rpmfiles
 %post db-local
-%{_datadir}/%{name}/post-install.d/db/db.sh
+%{_datadir}/%{name}/post-install.d/db/db.sh configure
 
 
 %package db-remote
