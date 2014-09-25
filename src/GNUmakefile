@@ -219,6 +219,7 @@ dist: all
 	mkdir $(TAR_PREFIX)/
 	$(CP_R) $$(ls -A | grep -v '^\.git' | grep -v $(TAR_PREFIX)) $(TAR_PREFIX)/
 	find $(TAR_PREFIX)/ -name '*~' -print0 | xargs -r0 rm
+	find $(TAR_PREFIX)/ -type d -print0 | xargs -r0 chmod g-s  # rpmlint non-standard-dir-perm
 	tar cjf $(TAR_PREFIX).tar.bz2 $(TAR_PREFIX)/
 	rm -rf $(TAR_PREFIX)/
 
