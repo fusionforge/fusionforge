@@ -40,6 +40,7 @@ install-base-dirs:
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(config_path)/httpd.conf.d/
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(config_path)/plugins/
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(sysconfdir)/cron.d/
+	$(INSTALL) -d -m 00755 $(DESTDIR)$(sysconfdir)/logrotate.d/
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(data_path)/
 
 install-config: install-base-dirs
@@ -92,6 +93,10 @@ install-web: install-base-dirs
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/forum/
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/tracker/
 	$(CP_R) post-install.d/web $(DESTDIR)$(pkgdatadir)/post-install.d/
+	if [ ! -e $(DESTDIR)$(sysconfdir)/logrotate.d/fusionforge-web ]; then \
+		sed 's,@log_path@,$(log_path),' etc/logrotate.d/fusionforge-web \
+			> $(DESTDIR)$(sysconfdir)/logrotate.d/fusionforge-web; \
+	fi
 #	TODO: multiple servers support
 #	(e.g. install scm, lists, vhosts and vhosts-extra separately)
 
@@ -100,6 +105,10 @@ install-web-vhosts: install-base-dirs
 	if [ ! -e $(DESTDIR)$(sysconfdir)/cron.d/fusionforge-web-vhosts ]; then \
 		sed 's,@bindir@,$(bindir),' etc/cron.d/fusionforge-web-vhosts \
 			> $(DESTDIR)$(sysconfdir)/cron.d/fusionforge-web-vhosts; \
+	fi
+	if [ ! -e $(DESTDIR)$(sysconfdir)/logrotate.d/fusionforge-web-vhosts ]; then \
+		sed 's,@log_path@,$(log_path),' etc/logrotate.d/fusionforge-web-vhosts \
+			> $(DESTDIR)$(sysconfdir)/logrotate.d/fusionforge-web-vhosts; \
 	fi
 #	TODO: only install 40-vhosts-extra.conf and httpd.vhosts with this module
 
