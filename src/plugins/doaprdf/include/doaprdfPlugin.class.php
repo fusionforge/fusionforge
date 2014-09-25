@@ -35,7 +35,7 @@ class doaprdfPlugin extends Plugin {
 		$this->text = _("DoaPRDF!"); // To show in the tabs, use...
 		$this->pkg_desc =
 _("This plugin provides DOAP RDF documents for projects on /projects URLs 
-with content-negociation (application/rdf+xml).");
+with content-negotiation (application/rdf+xml).");
 		$this->_addHook("script_accepted_types");
 		$this->_addHook("content_negociated_project_home");
 		$this->_addHook("alt_representations");

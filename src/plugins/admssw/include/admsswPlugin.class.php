@@ -51,7 +51,7 @@ class admsswPlugin extends Plugin {
 		$this->text = _("ADMS.SW"); // To show in the tabs, use...
 		$this->pkg_desc =
 _("This plugin provides ADMS.SW additions to the DOAP RDF documents for
-projects on /projects URLs with content-negociation
+projects on /projects URLs with content-negotiation
 (application/rdf+xml).");
 
 		// The standard RDF namespaces that will be used in the plugin

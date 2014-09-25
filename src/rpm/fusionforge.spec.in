@@ -159,7 +159,7 @@ web/FTP hosting, release management, etc. All these services are
 integrated into one web site and managed through a web interface.
 
 This package contains the files needed to run the web part of
-FusionForge on an Apache webserver.
+FusionForge on an Apache web server.
 %files web -f web.rpmfiles
 %post web
 %{_datadir}/%{name}/post-install.d/web/web.sh configure
@@ -176,7 +176,7 @@ web/FTP hosting, release management, etc. All these services are
 integrated into one web site and managed through a web interface.
 
 This package contains the files needed to run project vhosts
-on an Apache webserver.
+on an Apache web server.
 %files web-vhosts -f web-vhosts.rpmfiles
 
 

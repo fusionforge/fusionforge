@@ -83,7 +83,7 @@ Description: collaborative development tool - web part (using Apache)
  integrated into one web site and managed through a web interface.
  .
  This package contains the files needed to run the web part of
- FusionForge on an Apache webserver.
+ FusionForge on an Apache web server.
 
 
 Package: fusionforge-web-vhosts
@@ -97,7 +97,7 @@ Description: collaborative development tool - web vhosts (using Apache)
  integrated into one web site and managed through a web interface.
  .
  This package contains the files needed to run project vhosts
- on an Apache webserver.
+ on an Apache web server.
 
 
 Package: fusionforge-shell
