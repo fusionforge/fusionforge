@@ -88,6 +88,7 @@ subpackages.
 %files common -f common.rpmfiles -f %{name}.lang
 %doc AUTHORS* CHANGES COPYING INSTALL.TXT NEWS README
 %doc docs/*
+%doc rpm/README.fedora
 %post common
 %{_datadir}/%{name}/post-install.d/common/common.sh configure
 
@@ -240,5 +241,5 @@ This package controls the interaction between FusionForge and Mailman.
 
 
 %changelog
-* Tue Aug 19 2014 Sylvain Beucler <sylvain.beucler@inria.fr> - 5.3.50-1
+* Tue Aug 19 2014 Sylvain Beucler <sylvain.beucler@inria.fr> - @version@@snapshot@-1
 - Revamp packaging
