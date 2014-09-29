@@ -295,7 +295,7 @@ into the FusionForge database.");
 		}
 	}
 
-	function ConnectLDAP() {
+	function ConnectLdap() {
 		if ($this->ldap_conn) {
 			return true;
 		}
