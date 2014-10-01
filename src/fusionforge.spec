@@ -461,7 +461,7 @@ sysauthldap plugin for FusionForge.
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_PLUGINS_CONF_DIR}
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_LANG_DIR}
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DATA_PATH}
-%{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DATA_PATH}/upload
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DATA_PATH}/download
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DATA_PATH}/scmtarballs
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DATA_PATH}/scmsnapshots
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DATA_PATH}/homedirs
@@ -824,7 +824,7 @@ fi
 #%attr(0660, %{httpduser}, gforge) %config(noreplace) %{FORGE_CONF_DIR}/local.inc
 #%attr(0640, %{httpduser}, %{httpdgroup}) %config(noreplace) %{_sysconfdir}/httpd/conf.d/z-gforge.conf
 %attr(0644, root, root) %{_sysconfdir}/cron.d/%{name}
-%attr(0775, %{httpduser}, %{httpdgroup}) %dir %{FORGE_DATA_PATH}/upload
+%attr(0775, %{httpduser}, %{httpdgroup}) %dir %{FORGE_DATA_PATH}/download
 %attr(755, root, %{httpdgroup}) %dir %{FORGE_DIR}
 # Files under %{FORGE_DIR}
 %{FORGE_DIR}/AUTHORS*
