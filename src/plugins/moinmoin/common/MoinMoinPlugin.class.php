@@ -36,6 +36,7 @@ class MoinMoinPlugin extends Plugin {
 		$this->hooks[] = "project_public_area";
 		$this->hooks[] = "role_get";
 		$this->hooks[] = "role_normalize";
+		$this->hooks[] = "role_unlink_project";
 		$this->hooks[] = "role_translate_strings";
 		$this->hooks[] = "role_get_setting";
 		$this->hooks[] = "project_admin_plugins"; // to show up in the admin page for group
@@ -142,6 +143,18 @@ class MoinMoinPlugin extends Plugin {
 			$projects = $role->getLinkedProjects() ;
 			foreach ($projects as $p) {
 				$role->normalizePermsForSection ($new_pa, 'plugin_moinmoin_access', $p->getID()) ;
+			}
+		} elseif ($hookname == "role_unlink_project") {
+			$role =& $params['role'] ;
+			$project =& $params['project'] ;
+
+			$settings = array('plugin_moinmoin_access');
+
+			foreach ($settings as $s) {
+				db_query_params('DELETE FROM pfo_role_setting WHERE role_id=$1 AND section_name=$2 AND ref_id=$3',
+						array($role->getID(),
+						      $s,
+						      $project->getID()));
 			}
 		} elseif ($hookname == "role_translate_strings") {
 			$right = new PluginSpecificRoleSetting ($role,
