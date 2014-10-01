@@ -7,6 +7,7 @@
  * Copyright 2009-2010, Alain Peyrat, Alcatel-Lucent
  * Copyright 2009, Chris Dalzell, OpenGameForge.org
  * Copyright 2011, Roland Mas
+ * Copyright 2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -310,6 +311,13 @@ into the FusionForge database.");
 
 		if (forge_get_config('ldap_version', $this->name)) {
 			if (!ldap_set_option($conn, LDAP_OPT_PROTOCOL_VERSION, forge_get_config('ldap_version', $this->name))) {
+				error_log("LDAP: ldap_set_option() failed: ".ldap_error($this->ldap_conn));
+				return false;
+			}
+		}
+
+		if (forge_get_config('ldap_opt_referrals', $this->name) != NULL) {
+			if (!ldap_set_option($conn, LDAP_OPT_REFERRALS, forge_get_config('ldap_opt_referrals', $this->name))) {
 				error_log("LDAP: ldap_set_option() failed: ".ldap_error($this->ldap_conn));
 				return false;
 			}
