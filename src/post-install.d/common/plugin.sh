@@ -83,6 +83,10 @@ case "$2" in
     remove)
 	# TODO: httpd.conf.d ?
 
+	# Remove plugin symlink in source_path/www/plugins/
+	# TODO: dependencies issues on removal
+	#$source_path/bin/forge pluginDeactivate $1
+
 	# Run plugin-specific remove
 	if [ -x $source_path/plugins/$1/bin/install.sh ]; then
 	    echo "Running $source_path/plugins/$1/bin/install.sh remove"
