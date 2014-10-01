@@ -1,5 +1,5 @@
 Name: fusionforge
-Version: @version@@snapshot@
+Version: @version@
 Release: 1%{?dist}
 Summary: Collaborative development tool
 
@@ -26,7 +26,7 @@ This metapackage installs a stand-alone FusionForge site.
 
 
 %prep
-%setup -q -n fusionforge-@version@
+%setup -q
 
 %build
 make %{?_smp_mflags}
@@ -241,5 +241,5 @@ This package controls the interaction between FusionForge and Mailman.
 
 
 %changelog
-* Tue Aug 19 2014 Sylvain Beucler <sylvain.beucler@inria.fr> - @version@@snapshot@-1
+* Wed Oct 1 2014 Sylvain Beucler <beuc@beuc.net> - @version@-1
 - Revamp packaging

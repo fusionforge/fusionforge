@@ -107,8 +107,8 @@ function build_deb {
     version=$(dpkg-parsechangelog | sed -n 's/^Version: \([0-9.]\+\(\~rc[0-9]\)\?\).*/\1/p')+$(date +%Y%m%d%H%M)
     debian/rules debian/control  # re-gen debian/control
     dch --newversion $version-1 --distribution local --force-distribution "Autobuilt."
-    make dist
-    mv fusionforge-$(make version).tar.bz2 ../fusionforge_$version.orig.tar.bz2
+    make dist VERSION=$version
+    mv fusionforge-$version.tar.bz2 ../fusionforge_$version.orig.tar.bz2
     debuild -us -uc -tc  # using -tc so 'git status' is readable
     
     # Install built packages into the local repo
@@ -128,13 +128,12 @@ function build_rpm {
     
     # Build package
     cd /usr/src/fusionforge/src/
-    version="$(make version)"
-    snapshot="+$(date +%Y%m%d%H%M)"
-    rpm/gen_spec.sh $version $snapshot
-    make dist
+    version="$(make version)+$(date +%Y%m%d%H%M)"
+    rpm/gen_spec.sh $version
+    make dist VERSION=$version
     mkdir -p ../build/SOURCES/ ../build/SPECS/
-    mv fusionforge-$(make version).tar.bz2 ../build/SOURCES/fusionforge-$version$snapshot.tar.bz2
-    chown -h root: ../build/SOURCES/fusionforge-$version$snapshot.tar.bz2
+    mv fusionforge-$version.tar.bz2 ../build/SOURCES/fusionforge-$version.tar.bz2
+    chown -h root: ../build/SOURCES/fusionforge-$version.tar.bz2
     cp fusionforge.spec ../build/SPECS/
     rpmbuild ../build/SPECS/fusionforge.spec --define "_topdir $(pwd)/../build" -ba
     
