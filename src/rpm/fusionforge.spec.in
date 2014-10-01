@@ -21,10 +21,6 @@ This metapackage installs a stand-alone FusionForge site.
 %files
 
 
-# Don't compile the .py utils from plugin-moinmoin, the pyc/pyo files are hard to properly package
-%global __os_install_post %(echo '%{__os_install_post}' | sed -e 's!/usr/lib[^[:space:]]*/brp-python-bytecompile[[:space:]].*$!!g')
-
-
 %prep
 %setup -q
 
@@ -32,32 +28,29 @@ This metapackage installs a stand-alone FusionForge site.
 make %{?_smp_mflags}
 
 %install
-# List installed files automatically
-# 'make install' knows how to install plugins separately, let's rely on it
+# List package files automatically by installing separately on relying on 'make install'
+# Marking /etc as conffiles and exclude locales (cf. mandatory %find_lang)
+# Not using recursive dirs listing because that is processed when all
+#   packages are mixed in the common install dir (so using %dir instead)
 install_listfiles()
 {
-    # Install separately to list the installed files
     make install-${1} prefix=%{_prefix} DESTDIR=%{_builddir}/t
     (
         cd %{_builddir}/t/
-        find .%{_sysconfdir}/*              ! -type d | sed -e 's,^\./,%config(noreplace) /,'
-        find .%{_bindir}/*                  ! -type d | sed -e 's,^\.,,'
-        find .%{_datadir}/%{name}           ! -type d | sed -e 's,^\.,,'
-        find .%{_localstatedir}/lib/%{name} ! -type d | sed -e 's,^\.,,'
-        find .%{_localstatedir}/lib/%{name}/* -type d | sed -e 's,^\.,%dir ,'
-    ) > ${1}.rpmfiles
+        find .%{_bindir}           ! -type d || true
+        find .%{_sysconfdir}       ! -type d | sed -e 's,^\.,%config(noreplace) ,'
+        find .%{_sysconfdir}/%{name} -type d | sed -e 's,^\.,%dir ,'
+        find .%{_datadir}/%{name} .%{_localstatedir}/lib/%{name} .%{_localstatedir}/log/%{name} \
+            ! -type d || true
+        find .%{_datadir}/%{name} .%{_localstatedir}/lib/%{name} .%{_localstatedir}/log/%{name} \
+            -type d | sed -e 's,^\.,%dir ,' || true
+    ) | sed -e 's,^\.,,' > ${1}.rpmfiles
     rm -rf %{_builddir}/t/
     # Install for real
     make install-${1} prefix=%{_prefix} DESTDIR=%{buildroot}
 }
 # Install core and list common dirs
 install_listfiles common
-(cd %{buildroot} && \
-    find .%{_sysconfdir}/%{name} .%{_datadir}/%{name} -type d \
-    | sed -e 's,^.,%dir ,'
-    echo %dir %{_localstatedir}/lib/%{name}  # avoid duplicate dir in all packages
-    echo %dir %{_localstatedir}/log/%{name}  # only exists in -common, warning otherwise
-) >> common.rpmfiles
 %find_lang %{name}
 # Install plugins
 install_listfiles db-local
@@ -70,7 +63,8 @@ install_listfiles lists
 for i in $(sed -n 's/^%package plugin-//p' rpm/plugins); do \
     install_listfiles plugin-$i
 done
-
+# Manually handling the 3 python glue files for MoinMoin integration
+echo %{_datadir}/%{name}/plugins/moinmoin/lib/ >> plugin-moinmoin.rpmfiles
 
 
 %package common

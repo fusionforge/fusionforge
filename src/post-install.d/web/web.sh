@@ -90,12 +90,11 @@ case "$1" in
 	    a2enmod alias
 	    a2enmod dir
 	    a2enmod vhost_alias
-	    a2enmod cgi  # ViewVC bootstrap and gitweb
+	    a2enmod cgi  # ViewVC bootstrap, gitweb, mailman
 	    #a2enmod proxy
 	    #a2enmod proxy_http
-	else
-	    echo "TODO: enable Apache modules"
 	fi
+	# else: Apache modules already enabled in CentOS
 	
 	if [ -x /usr/sbin/a2dissite ]; then
 	    a2dissite 000-default
