@@ -40,7 +40,7 @@ class SysAuthLDAPPlugin extends SysAuthPlugin {
 	function SysAuthLDAPPlugin () {
 		$this->SysAuthPlugin() ;
 		$this->name = "sysauthldap" ;
-		$this->text = _("System authentication via PostgreLDAP");
+		$this->text = _("System authentication via LDAP");
 		$this->pkg_desc =
 _("This plugin maintains data about users, groups and memberships in an
 LDAP directory that can be used for NSS/PAM system authentication (or
