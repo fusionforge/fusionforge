@@ -44,7 +44,7 @@ case "$1" in
 	;;
     remove)
 	find $plugindir/www/ -type l -print0 | xargs -r0 rm
-	rm -f $plugindir/www/themes/css/mw-headbg.jpg
+	rm -f $source_path/www/themes/css/mw-headbg.jpg
 	rm -f $data_path/plugins/mediawiki/master
 	rm -f $mediawikidir/skins/FusionForge.php
 	;;
