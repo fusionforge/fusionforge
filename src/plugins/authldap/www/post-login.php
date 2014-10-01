@@ -77,11 +77,9 @@ if ($login) {
 			$plugin->startSession($form_loginname);
 		}
 		if ($return_to) {
-			header ("Location: " . util_make_url($return_to));
-			exit;
+			session_redirect($return_to);
 		} else {
-			header ("Location: " . util_make_url("/my"));
-			exit;
+			session_redirect('/my');
 		}
 	} elseif ($test == FORGE_AUTH_AUTHORITATIVE_REJECT) {
 		if ($form_loginname && $form_pw) {
