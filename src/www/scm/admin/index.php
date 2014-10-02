@@ -161,6 +161,7 @@ if (count($scm_plugins) != 0) {
 		$myPlugin = plugin_get_object($scm_plugins[0]);
 		echo '<input type="hidden" name="scmradio" value="'.$myPlugin->name.'" />' ;
 		echo '<p><input type="radio" name="fake" disabled="disabled" checked="checked" />'.$myPlugin->text.'</p>';
+		$scm = $myPlugin->name;
 	} else {
 		echo '<table><tbody><tr><td><strong>'._('SCM Repository').'</strong></td>';
 		$checked=true;
