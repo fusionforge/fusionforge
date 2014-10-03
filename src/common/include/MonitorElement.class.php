@@ -116,7 +116,7 @@ class MonitorElement extends Error {
 				$this->_getMonitoredByUserIdInArrayQuery = 'select filemodule_id from filemodule_monitor where user_id = $1';
 				$this->_getMonitoredDistinctGroupIdsByUserIdInArrayQuery = 'select distinct frs_package.group_id from groups, frs_package, filemodule_monitor where filemodule_monitor.filemodule_id = frs_package.package_id and groups.group_id = frs_package.group_id and filemodule_monitor.user_id = $1 and groups.status = $2';
 				$this->_getMonitoredIdsByGroupIdByUserIdInArrayQuery = 'select filemodule_monitor.filemodule_id from groups,filemodule_monitor,frs_package where groups.group_id = frs_package.group_id and frs_package.package_id = filemodule_monitor.filemodule_id and groups.group_id=$1 and filemodule_monitor.user_id=$2';
-				$this->_isMonitoredByAnyQuery = 'select forum_id, filemodule_monitor.user_id from filemodule_monitor, users where users.user_id = filemodule_monitor.user_id and filemodule_monitor.filemodule_id = $1 and users.status = $2';
+				$this->_isMonitoredByAnyQuery = 'select filemodule_id, filemodule_monitor.user_id from filemodule_monitor, users where users.user_id = filemodule_monitor.user_id and filemodule_monitor.filemodule_id = $1 and users.status = $2';
 				$this->_isMonitoredByUserIdQuery = 'select filemodule_id from filemodule_monitor where filemodule_id = $1 and user_id = $2';
 				break;
 			}
