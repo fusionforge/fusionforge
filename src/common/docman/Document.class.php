@@ -779,7 +779,7 @@ class Document extends Error {
 			case "application/x-cpio":
 			case "application/x-shar":
 			case "application/x-xz": {
-				$image = 'docman/file_type_archive.png';
+				$image = 'ic/file_type_archive.png';
 				break;
 			}
 			default: {

@@ -1285,6 +1285,10 @@ if (isset($params['group']) && $params['group']) {
 		return $this->getPicto('ic/configure.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
+	function getZipPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/file_type_archive.png', $title, $alt, 20, 20, $otherAttr);
+	}
+
 	function getPicto($url, $title, $alt, $width = '20', $height = '20', $otherAttr = array()) {
 		$otherAttr['title'] = $title;
 		if (!$alt) {
