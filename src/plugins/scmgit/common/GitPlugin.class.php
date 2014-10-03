@@ -507,7 +507,7 @@ class GitPlugin extends SCMPlugin {
         Require valid-user
 </Location>
 </IfVersion>
-\n');
+');
 				fclose($f);
 				system(forge_get_config('httpd_reload_cmd','scmgit'));
 			}
