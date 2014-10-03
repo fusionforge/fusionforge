@@ -1477,7 +1477,7 @@ Use one below, but make sure it is entered as the single line.)
 
 		db_begin();
 		if ($unix) {
-			$res = db_query_params('UPDATE users SET unix_pw=$1 WHERE user_id=$1',
+			$res = db_query_params('UPDATE users SET unix_pw=$1 WHERE user_id=$2',
 				array($unix, $this->getID()));
 
 			if (!$res || db_affected_rows($res) < 1) {

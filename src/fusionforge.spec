@@ -461,7 +461,7 @@ sysauthldap plugin for FusionForge.
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_PLUGINS_CONF_DIR}
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_LANG_DIR}
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DATA_PATH}
-%{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DATA_PATH}/upload
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DATA_PATH}/download
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DATA_PATH}/scmtarballs
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DATA_PATH}/scmsnapshots
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DATA_PATH}/homedirs
@@ -648,9 +648,12 @@ done
 # plugin: scmgit
 %{__ln_s} ../../plugins/scmgit/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/scmgit
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/scmgit/www/cgi-bin
-%{__ln_s} /usr/share/gitweb/gitweb.cgi $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/scmgit/www/cgi-bin/gitweb.cgi
-%{__ln_s} /usr/share/gitweb/static/gitweb.css $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/scmgit/www/gitweb.css
-%{__ln_s} /usr/share/gitweb/static/gitweb.js $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/scmgit/www/gitweb.js
+%{__ln_s} www/cgi-bin $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/scmgit/cgi-bin
+%{__ln_s} /var/www/git/gitweb.cgi $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/scmgit/www/cgi-bin/gitweb.cgi
+%{__ln_s} /var/www/git/gitweb.css $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/scmgit/www/gitweb.css
+%{__ln_s} /var/www/git/gitweb.js $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/scmgit/www/gitweb.js
+%{__ln_s} /var/www/git/git-favicon.png $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/scmgit/www/git-favicon.png
+%{__ln_s} /var/www/git/git-logo.png $RPM_BUILD_ROOT%{FORGE_PLUGINS_LIB_DIR}/scmgit/www/git-logo.png
 %{__rm} $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/httpd.conf.d/plugin-scmgit-dav.inc
 # plugin: scmhg
 
@@ -821,7 +824,7 @@ fi
 #%attr(0660, %{httpduser}, gforge) %config(noreplace) %{FORGE_CONF_DIR}/local.inc
 #%attr(0640, %{httpduser}, %{httpdgroup}) %config(noreplace) %{_sysconfdir}/httpd/conf.d/z-gforge.conf
 %attr(0644, root, root) %{_sysconfdir}/cron.d/%{name}
-%attr(0775, %{httpduser}, %{httpdgroup}) %dir %{FORGE_DATA_PATH}/upload
+%attr(0775, %{httpduser}, %{httpdgroup}) %dir %{FORGE_DATA_PATH}/download
 %attr(755, root, %{httpdgroup}) %dir %{FORGE_DIR}
 # Files under %{FORGE_DIR}
 %{FORGE_DIR}/AUTHORS*

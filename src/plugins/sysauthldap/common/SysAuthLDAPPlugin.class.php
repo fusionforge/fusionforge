@@ -2,7 +2,7 @@
 /**
  * FusionForge sysauthldap plugin
  *
- * Copyright 20012, Roland Mas
+ * Copyright 2012, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -38,8 +38,11 @@ class SysAuthLDAPPlugin extends SysAuthPlugin {
 	function SysAuthLDAPPlugin () {
 		$this->SysAuthPlugin() ;
 		$this->name = "sysauthldap" ;
-		$this->text = "System authentication via PostgreLDAP";
-
+		$this->text = _("System authentication via LDAP");
+		$this->pkg_desc =
+_("This plugin maintains data about users, groups and memberships in an
+LDAP directory that can be used for NSS/PAM system authentication (or
+for other uses).");
 		$this->ldap_conn = NULL;
 		$this->user_suffix = "Users";
 		$this->group_suffix = "Projects";

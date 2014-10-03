@@ -2,7 +2,7 @@
 /**
  * FusionForge sysauthpgsql plugin
  *
- * Copyright 20012, Roland Mas
+ * Copyright 2012, Roland Mas
  *
  * This file is part of FusionForge.
  *

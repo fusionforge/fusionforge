@@ -44,6 +44,7 @@ class MediaWikiPlugin extends Plugin {
 		$this->_addHook("project_public_area");
 		$this->_addHook("role_get");
 		$this->_addHook("role_normalize");
+		$this->_addHook("role_unlink_project");
 		$this->_addHook("role_translate_strings");
 		$this->_addHook("role_has_permission");
 		$this->_addHook("role_get_setting");
@@ -190,6 +191,18 @@ class MediaWikiPlugin extends Plugin {
 				$role->normalizePermsForSection ($new_pa, 'plugin_mediawiki_edit', $p->getID()) ;
 				$role->normalizePermsForSection ($new_pa, 'plugin_mediawiki_upload', $p->getID()) ;
 				$role->normalizePermsForSection ($new_pa, 'plugin_mediawiki_admin', $p->getID()) ;
+			}
+		} elseif ($hookname == "role_unlink_project") {
+			$role =& $params['role'] ;
+			$project =& $params['project'] ;
+
+			$settings = array('plugin_mediawiki_read', 'plugin_mediawiki_edit', 'plugin_mediawiki_upload', 'plugin_mediawiki_admin');
+
+			foreach ($settings as $s) {
+				db_query_params('DELETE FROM pfo_role_setting WHERE role_id=$1 AND section_name=$2 AND ref_id=$3',
+						array($role->getID(),
+						      $s,
+						      $project->getID()));
 			}
 		} elseif ($hookname == "role_translate_strings") {
 			$right = new PluginSpecificRoleSetting ($role,

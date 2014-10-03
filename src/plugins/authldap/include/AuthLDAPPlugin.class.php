@@ -115,7 +115,7 @@ class AuthLDAPPlugin extends ForgeAuthPlugin {
 					 $user_data['lastname'],
 					 $user_data['password1'],
 					 $user_data['password2'],
-					 $user_data['email'],
+					 trim($user_data['email']),
 					 $user_data['mail_site'],
 					 $user_data['mail_va'],
 					 $user_data['language_id'],
@@ -182,9 +182,12 @@ class AuthLDAPPlugin extends ForgeAuthPlugin {
 			   $u->getTitle(),
 			   $u->getCountryCode(),
 			   $u->usesTooltips(),
-			   $mapped_data['email']);
+			   trim($mapped_data['email']));
 
 		$u->setMD5Passwd ($mapped_data['md5_password']);
+		if (substr($mapped_data['unix_password'], 0, 7) == '{crypt}') {
+			$mapped_data['unix_password'] = substr($mapped_data['unix_password'],7);
+		}
 		$u->setUnixPasswd ($mapped_data['unix_password']);
 	}
 

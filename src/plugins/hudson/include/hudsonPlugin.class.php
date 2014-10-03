@@ -48,6 +48,7 @@ class hudsonPlugin extends Plugin {
 		$this->_addHook('ajax_reference_tooltip', 'ajax_reference_tooltip', false);
 		$this->_addHook('role_get');
 		$this->_addHook('role_normalize');
+		$this->_addHook('role_unlink_project');
 		$this->_addHook('role_translate_strings');
 		$this->_addHook('role_has_permission');
 		$this->_addHook('role_get_setting');
@@ -340,6 +341,20 @@ class hudsonPlugin extends Plugin {
 			$role->normalizePermsForSection($new_pa, 'plugin_hudson_read', $p->getID());
 		}
 		return true;
+	}
+
+	function role_unlink_project(&$params) {
+		$role =& $params['role'] ;
+		$project =& $params['project'] ;
+
+		$settings = array('plugin_hudson_read');
+		
+		foreach ($settings as $s) {
+			db_query_params('DELETE FROM pfo_role_setting WHERE role_id=$1 AND section_name=$2 AND ref_id=$3',
+					array($role->getID(),
+					      $s,
+					      $project->getID()));
+		}
 	}
 
 	function role_translate_strings(&$params) {

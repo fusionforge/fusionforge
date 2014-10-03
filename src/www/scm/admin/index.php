@@ -158,6 +158,7 @@ scm_header(array('title'=>_('SCM Repository'),'group'=>$group_id));
 		if (count($scm_plugins) == 1) {
 			$myPlugin = plugin_get_object($scm_plugins[0]);
 			echo '<input type="hidden" name="scmradio" value="'.$myPlugin->name.'" />' ;
+			$scm = $myPlugin->name;
 		} else {
 			echo '<p>'._('Note: Changing the repository does not delete the previous repository.  It only affects the information displayed under the SCM tab.').'</p>';
 			echo '<table><tbody><tr><td><strong>'._('SCM Repository').'</strong></td>';
