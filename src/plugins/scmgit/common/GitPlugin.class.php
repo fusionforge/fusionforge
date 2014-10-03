@@ -502,7 +502,21 @@ control over it to the project's administrator.");
 			system("find $main_repo -type d | xargs chmod g+s");
 			if (forge_get_config('use_dav','scmgit')) {
 				$f = fopen(forge_get_config('config_path').'/httpd.conf.d/plugin-scmgit-dav.inc','a');
-				fputs($f,'Use Project '.$project_name."\n");
+				fputs($f,'<IfVersion >= 2.3>
+  Use Project '.$project_name.'
+</IfVersion>
+<IfVersion < 2.3>
+<Location "/scmrepos/git/'.$project_name.'">
+        DAV on
+        Options +Indexes -ExecCGI -FollowSymLinks -MultiViews
+        AuthType Basic
+        AuthName "Git repository: '.$project_name.'"
+        #The AuthUserFile filename is needed in the code. Please do not rename it.
+        AuthUserFile '.forge_get_config('data_path').'/gituser-authfile.'.$project_name.'
+        Require valid-user
+</Location>
+</IfVersion>
+');
 				fclose($f);
 				system(forge_get_config('httpd_reload_cmd','scmgit'));
 			}
