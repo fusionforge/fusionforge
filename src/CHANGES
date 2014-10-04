@@ -1,6 +1,7 @@
 Fusionforge-5.3.3:
 * Plugin AuthLDAP: error and warning messages displayed twice [#732] (TrivialDev)
 * Plugin scmhook: fix display when only one SCM plugin enabled [#735] (TrivialDev)
+* Stats SCM: fix order in stats block [#736] (TrivialDev)
 
 Fusionforge-5.3.2:
 * Software map: fix "value too long for type character varying(255)" error in cron db_trove_maint.php (Inria)
