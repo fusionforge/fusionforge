@@ -477,7 +477,7 @@ class SVNPlugin extends SCMPlugin {
 			while (!feof($pipe) &&
 				$data = fgets ($pipe, 4096)) {
 				if (!xml_parse ($xml_parser, $data, feof ($pipe))) {
-					debug("Unable to parse XML with error " .
+					$this->setError("Unable to parse XML with error " .
 					      xml_error_string(xml_get_error_code($xml_parser)) .
 					      " on line " .
 					      xml_get_current_line_number($xml_parser));
@@ -689,7 +689,8 @@ function SVNPluginCharData($parser, $chars) {
 				$time_ok = true;
 			} else {
 				$time_ok = false;
-				$usr_commits[$last_user]--;
+				if ($last_user !== '') // empty in e.g. tags from cvs2svn
+					$usr_commits[$last_user]--;
 				$commits--;
 			}
 			$times[] = $last_time;

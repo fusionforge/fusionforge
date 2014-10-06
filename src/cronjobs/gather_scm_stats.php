@@ -52,6 +52,13 @@ $longopts = array(
 	"unix_group_name:"  // update data only for group with given unix name
 );
 $options = getopt($shortopts, $longopts);
+if ($options === false) {  // doesn't work, PHP returns ambiguous array() on error..
+	print "Usage: {$argv[0]} [--all|--allepoch|--startdate=YYYY-MM-DD]"
+		. " [--enddate=YYYY-MM-DD] [--group_id=XXX|--unix_group_name=AAA]\n";
+	exit(1);
+}
+
+
 $EXTRA_WHERE = "";
 $verbose = false;
 
