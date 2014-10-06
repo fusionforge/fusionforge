@@ -5,6 +5,7 @@ Fusionforge-X.X:
 * [#697] FRS: Enable widget "My monitored packages" (TrivialDev)
 * [#705] FRS: Provide new role settings (TrivialDev)
 * [#713] FRS: Add delete packages, releases or files mass action (TrivialDev)
+* [#737] FRS: Provide link to download any release as ZIP file (TrivialDev)
 * [#656] General: drop tipsy plugin, use standard jQuery UI tooltip already provided (TrivialDev)
 * [#663] General: FusionForge Theme & jQuery UI theme sync (TrivialDev)
 * [#664] General: Update the jQuery & jQuery UI frameworks (TrivialDev)

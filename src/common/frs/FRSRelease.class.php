@@ -69,6 +69,7 @@ class FRSRelease extends Error {
 	 */
 	var $FRSPackage;
 	var $release_files;
+	var $files_count = null;
 
 	/**
 	 * Constructor.
@@ -99,7 +100,7 @@ class FRSRelease extends Error {
 				$this->data_array =& $arr;
 				if ($this->data_array['package_id'] != $this->FRSPackage->getID()) {
 					$this->setError('FRSPackage_id in db result does not match FRSPackage Object');
-					$this->data_array=null;
+					$this->data_array = null;
 					return false;
 				}
 			}
@@ -342,6 +343,18 @@ class FRSRelease extends Error {
 		return $this->release_files;
 	}
 
+	function hasFiles() {
+		if ($files_count != null)
+			return $files_count;
+
+		$res = db_query_params('select count(file_id) as files_count from frs_file where release_id = $1', array($this->getID()));
+		if (db_numrows($res) >= 1) {
+			$row = db_fetch_array($res);
+			$files_count = $row['files_count'];
+		}
+		return $files_count;
+	}
+
 	/**
 	 * delete - delete this release and all its related data.
 	 *
@@ -375,11 +388,12 @@ class FRSRelease extends Error {
 			$this->setError(_('Release delete error')._(': ')._('trying to delete root dir'));
 			return false;
 		}
+		$this->FRSPackage->deleteReleaseFilesAsZip($this->getID());
 		rmdir($dir);
 
-		db_query_params ('DELETE FROM frs_release WHERE release_id=$1 AND package_id=$2',
-				 array ($this->getID(),
-					$this->FRSPackage->getID())) ;
+		db_query_params('DELETE FROM frs_release WHERE release_id=$1 AND package_id=$2',
+				array ($this->getID(),
+					$this->FRSPackage->getID()));
 		return true;
 	}
 
@@ -396,7 +410,7 @@ class FRSRelease extends Error {
 	 */
 	function update($status, $name, $notes, $changes, $preformatted, $release_date) {
 		if (strlen($name) < 3) {
-			$this->setError(_('FRSPackage Name Must Be At Least 3 Characters'));
+			$this->setError(_('FRSRelease Name Must Be At Least 3 Characters'));
 			return false;
 		}
 
@@ -421,7 +435,7 @@ class FRSRelease extends Error {
 			}
 		}
 		db_begin();
-		$res = db_query_params ('UPDATE frs_release SET	name=$1,status_id=$2,notes=$3,
+		$res = db_query_params('UPDATE frs_release SET	name=$1,status_id=$2,notes=$3,
 					changes=$4,preformatted=$5,release_date=$6,released_by=$7
 					WHERE package_id=$8 AND release_id=$9',
 					array (htmlspecialchars($name),
@@ -432,7 +446,7 @@ class FRSRelease extends Error {
 						   $release_date,
 						   user_getid(),
 						   $this->FRSPackage->getID(),
-						   $this->getID())) ;
+						   $this->getID()));
 
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setError(_('Error On Update')._(': ').db_error());
@@ -450,7 +464,7 @@ class FRSRelease extends Error {
 		$olddirlocation = forge_get_config('upload_dir').'/'.$this->FRSPackage->Group->getUnixName().'/'.$this->FRSPackage->getFileName().'/'.$oldfilename;
 		$newdirlocation = forge_get_config('upload_dir').'/'.$this->FRSPackage->Group->getUnixName().'/'.$this->FRSPackage->getFileName().'/'.$newfilename;
 
-		if (($oldfilename!=$newfilename) && is_dir($olddirlocation)) {
+		if (($oldfilename != $newfilename) && is_dir($olddirlocation)) {
 			if (is_dir($newdirlocation)) {
 				$this->setError(_('Error Updating Release')._(': ')._('Directory Already Exists'));
 				db_rollback();
@@ -464,7 +478,9 @@ class FRSRelease extends Error {
 			}
 		}
 		db_commit();
-		$this->FRSPackage->createNewestReleaseFilesAsZip();
+		if ($this->hasFiles()) {
+			$this->FRSPackage->createReleaseFilesAsZip($this->getID());
+		}
 		return true;
 	}
 

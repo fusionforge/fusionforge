@@ -60,18 +60,26 @@ function send_file($filename, $filepath, $file_id = NULL, $mode = NULL) {
 
 	if (session_loggedin()) {
 		$s =& session_get_user();
-		$us=$s->getID();
+		$us = $s->getID();
 	} else {
-		$us=100;
+		$us = 100;
 	}
 
 	$ip = getStringFromServer('REMOTE_ADDR');
 	if ($mode != 'latestzip') {
-		db_query_params('INSERT INTO frs_dlstats_file (ip_address,file_id,month,day,user_id) VALUES ($1, $2, $3, $4, $5)', array($ip,$file_id,date('Ym'),date('d'),$us));
+		db_query_params('INSERT INTO frs_dlstats_file (ip_address,file_id,month,day,user_id) VALUES ($1, $2, $3, $4, $5)', array($ip, $file_id, date('Ym'), date('d'), $us));
+	} else if ($mode == 'zip') {
+		// here $file_id is a release_id
+		$frsr = frsrelease_get_object($file_id);
+		$files = $release->getFiles();
+		foreach ($files as $fileObject) {
+			db_query_params('INSERT INTO frs_dlstats_file (ip_address,file_id,month,day,user_id) VALUES ($1, $2, $3, $4, $5)', array($ip, $fileObject->getID(), date('Ym'), date('d'), $us));
+		}
 	} else {
 		// here $file_id is a package_id
 		$Package = frspackage_get_object($file_id);
-		$release = $Package->getNewestRelease();
+		$release_id = $Package->getNewestReleaseID();
+		$release = frsrelease_get_object($release_id);
 		$files = $release->getFiles();
 		foreach ($files as $fileObject) {
 			db_query_params('INSERT INTO frs_dlstats_file (ip_address,file_id,month,day,user_id) VALUES ($1, $2, $3, $4, $5)', array($ip, $fileObject->getID(), date('Ym'), date('d'), $us));
@@ -149,14 +157,14 @@ case 'latestzip':
 	$package_id = $expl_pathinfo[4];
 
 	$Package = frspackage_get_object($package_id);
-	if (!$Package || !$Package->getNewestRelease()) {
+	if (!$Package) {
 		session_redirect404();
 	}
 
 	session_require_perm('frs', $Package->getID(), 'read');
 
-	$filename = $Package->getNewestReleaseZipName();
-	$filepath = $Package->getNewestReleaseZipPath();
+	$filename = $Package->getReleaseZipName($Package->getNewestReleaseID());
+	$filepath = $Package->getReleaseZipPath($Package->getNewestReleaseID());
 	send_file($filename, $filepath, $package_id, $mode);
 
 	break;
@@ -188,6 +196,26 @@ case 'latestfile':
 	$filepath = forge_get_config('upload_dir').'/'.$Group->getUnixName().'/'.$Package->getFileName().'/'.$Release->getFileName().'/'.$filename;
 
 	send_file ($filename, $filepath, $file_id);
+
+	break;
+
+case 'zip':
+	// .../download.php/zip/123/foo.tar.gz
+	// 123 -> release_id
+	// foo.tar.gz -> file name
+	$release_id = $expl_pathinfo[4];
+	$file_name = $expl_pathinfo[5];
+
+	$frsr = frsrelease_get_object($release_id);
+	$frsp = $frsr->FRSPackage;
+	$Group = $frsp->Group;
+	if (!$frsr || !$frsp) {
+		session_redirect404();
+	}
+	session_require_perm('frs', $frsp->getID(), 'read');
+
+	$filepath = forge_get_config('upload_dir').'/'.$Group->getUnixName().'/'.$frsp->getFileName().'/'.$file_name;
+	send_file($file_name, $filepath, $frsr->getID());
 
 	break;
 

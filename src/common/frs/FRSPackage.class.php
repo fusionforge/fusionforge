@@ -155,7 +155,6 @@ class FRSPackage extends Error {
 	 * @return	boolean	success.
 	 */
 	function create($name) {
-
 		if (strlen($name) < 3) {
 			$this->setError(_('FRSPackage Name Must Be At Least 3 Characters'));
 			return false;
@@ -177,7 +176,7 @@ class FRSPackage extends Error {
 		}
 
 		db_begin();
-		$result = db_query_params('INSERT INTO frs_package(group_id, name, status_id) VALUES ($1,$2,$3)',
+		$result = db_query_params('INSERT INTO frs_package(group_id, name, status_id) VALUES ($1, $2, $3)',
 					array($this->Group->getId(),
 						htmlspecialchars($name),
 						1));
@@ -186,7 +185,7 @@ class FRSPackage extends Error {
 			db_rollback();
 			return false;
 		}
-		$this->package_id = db_insertid($result,'frs_package','package_id');
+		$this->package_id = db_insertid($result, 'frs_package', 'package_id');
 		if (!$this->fetchData($this->package_id)) {
 			db_rollback();
 			return false;
@@ -346,6 +345,15 @@ class FRSPackage extends Error {
 		return true;
 	}
 
+	function clearMonitor() {
+		$MonitorElementObject = new MonitorElement('frspackage');
+		if (!$MonitorElementObject->clearMonitor($this->getID())) {
+			$this->setError($MonitorElementObject->getErrorMessage());
+			return false;
+		}
+		return true;
+	}
+
 	/**
 	 * getMonitorCount - Get the count of people monitoring this package
 	 *
@@ -454,7 +462,7 @@ class FRSPackage extends Error {
 			}
 		}
 		db_commit();
-		$this->createNewestReleaseFilesAsZip();
+		$this->createReleaseFilesAsZip($this->getNewestReleaseID());
 		$this->sendNotice();
 		return true;
 	}
@@ -467,10 +475,10 @@ class FRSPackage extends Error {
 	function &getReleases() {
 		if (!is_array($this->package_releases) || count($this->package_releases) < 1) {
 			$this->package_releases=array();
-			$res = db_query_params ('SELECT * FROM frs_release WHERE package_id=$1',
-						array ($this->getID())) ;
+			$res = db_query_params('SELECT * FROM frs_release WHERE package_id=$1',
+						array($this->getID()));
 			while ($arr = db_fetch_array($res)) {
-				$this->package_releases[]=$this->newFRSRelease($arr['release_id'],$arr);
+				$this->package_releases[] = $this->newFRSRelease($arr['release_id'], $arr);
 			}
 		}
 		return $this->package_releases;
@@ -519,11 +527,11 @@ class FRSPackage extends Error {
 			$this->setError(_('Package delete error: trying to delete root dir'));
 			return false;
 		}
-		$this->deleteNewestReleaseFilesAsZip();
 
 		if (is_dir($dir))
 			rmdir($dir);
 
+		$this->clearMonitor();
 		db_query_params('DELETE FROM frs_package WHERE package_id=$1 AND group_id=$2',
 				 array ($this->getID(),
 					$this->Group->getID()));
@@ -531,49 +539,53 @@ class FRSPackage extends Error {
 	}
 
 	/**
-	 * Function that selects the newest release.
+	 * getNewestReleaseID - return the newest release_id of a package
 	 * The newest release is the release with the highest ID
 	 *
-	 * @return	object	FRSRelease
+	 * @return	integer	release id
 	 */
-	public function getNewestRelease() {
+	public function getNewestReleaseID() {
 		$result = db_query_params('SELECT MAX(release_id) AS release_id FROM frs_release WHERE package_id=$1',
-					  array ($this->getID()));
+					  array($this->getID()));
 
 		if ($result && db_numrows($result) == 1) {
 			$row = db_fetch_array($result);
-			return frsrelease_get_object($row['release_id']);
+			return $row['release_id'];
 		} else {
 			$this->setError(_('No valid max release id'));
 			return false;
 		}
 	}
 
-	public function getNewestReleaseZipName() {
+	public function getReleaseZipPath($release) {
+		return forge_get_config('upload_dir').'/'.$this->Group->getUnixName().'/'.$this->getFileName().'/'.$this->getReleaseZipName($release);
+	}
+
+	public function getReleaseZipName($release) {
+		$frsr = frsrelease_get_object($release);
+		return $this->getFileName().'-'.$frsr->getName().'.zip';
+	}
+
+	public function getNewestReleaseZipName($release) {
 		return $this->getFileName().'-latest.zip';
 	}
 
-	public function getNewestReleaseZipPath() {
-		return forge_get_config('upload_dir').'/'.$this->Group->getUnixName().'/'.$this->getFileName().'/'.$this->getNewestReleaseZipName();
-	}
-
 	/**
-	 * createNewestReleaseFilesAsZip - create the Zip Archive of the package
+	 * createReleaseFilesAsZip - create the Zip Archive of the release
 	 *
-	 * @return	bool true on success even if the php ZipArchive does not exist
+	 * @param	integer	release id.
+	 * @return	bool	true on success even if the php ZipArchive does not exist
 	 */
-	public function createNewestReleaseFilesAsZip(){
-		$release = $this->getNewestRelease();
-		if ($release && class_exists('ZipArchive')) {
+	public function createReleaseFilesAsZip($release_id) {
+		if ($release_id && class_exists('ZipArchive')) {
 			$zip = new ZipArchive();
-			$zipPath = $this->getNewestReleaseZipPath();
+			$zipPath = $this->getReleaseZipPath($release_id);
+			$release = frsrelease_get_object($release_id);
 			$filesPath = forge_get_config('upload_dir').'/'.$this->Group->getUnixName().'/'.$this->getFileName().'/'.$release->getFileName();
-
-			if ($zip->open($zipPath, ZIPARCHIVE::OVERWRITE) !== true) {
+			if ($zip->open($zipPath, ZIPARCHIVE::CREATE) !== true) {
 				$this->setError(_('Cannot open the file archive')._(': ').$zipPath.'.');
 				return false;
 			}
-
 			$files = $release->getFiles();
 			foreach ($files as $f) {
 				$filePath = $filesPath.'/'.$f->getName();
@@ -590,9 +602,9 @@ class FRSPackage extends Error {
 		return true;
 	}
 
-	public function deleteNewestReleaseFilesAsZip() {
-		if (file_exists($this->getNewestReleaseZipPath()))
-			unlink($this->getNewestReleaseZipPath());
+	public function deleteReleaseFilesAsZip($release_id) {
+		if (file_exists($this->getReleaseZipPath($release_id)))
+			unlink($this->getReleaseZipPath($release_id));
 		return true;
 	}
 
