@@ -37,10 +37,10 @@ if [ -e /etc/debian_version ]; then
 else
     backports_rpm
     yum install -y make gettext php-cli php-pgsql \
-    httpd mod_ssl postgresql-server \
-    subversion augeas viewvc git \
-    mediawiki119 \
-    moin mod_wsgi python-psycopg2
+	httpd mod_ssl postgresql-server \
+	subversion augeas viewvc git \
+	mediawiki119 \
+	moin mod_wsgi python-psycopg2
 fi
 
 cd /usr/src/fusionforge/src/
