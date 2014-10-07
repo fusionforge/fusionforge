@@ -31,14 +31,14 @@ if [ -e /etc/debian_version ]; then
     apt-get update
     apt-get install -y make gettext php5-cli php5-pgsql php-htmlpurifier \
 	apache2 locales-all postgresql libnss-pgsql2 \
-	subversion viewvc git \
+	subversion augeas-tools viewvc git \
 	mediawiki \
 	python-moinmoin libapache2-mod-wsgi python-psycopg2
 else
     backports_rpm
     yum install -y make gettext php-cli php-pgsql \
     httpd mod_ssl postgresql-server \
-    subversion viewvc git \
+    subversion augeas viewvc git \
     mediawiki119 \
     moin mod_wsgi python-psycopg2
 fi
