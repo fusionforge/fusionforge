@@ -55,7 +55,7 @@ jQuery(function(){
 
 	jQuery('body').append(container);
 
-	jQuery('.resourceLocalPopupTrigger').live('mouseover', function() {
+	jQuery('.resourceLocalPopupTrigger').on('mouseover', function() {
 		var url = jQuery(this).attr('href');
 
 		if (hideTimer) {
@@ -85,7 +85,7 @@ jQuery(function(){
 		container.css('display', 'block');
 	});
 
-	jQuery('.resourceOslcPopupTrigger').live('mouseover', function() {
+	jQuery('.resourceOslcPopupTrigger').on('mouseover', function() {
 		var url = jQuery(this).attr('href');
 
 		if (hideTimer) {
@@ -131,7 +131,7 @@ jQuery(function(){
 		container.css('display', 'block');
 	});
 
-	jQuery('.resourceLocalPopupTrigger').live('mouseout', function() {
+	jQuery('.resourceLocalPopupTrigger').on('mouseout', function() {
 		if (hideTimer) {
 			clearTimeout(hideTimer);
 		}
@@ -142,13 +142,13 @@ jQuery(function(){
 		);
 	});
 
-	jQuery(document).live('mouseup', function(e) {
+	jQuery(document).on('mouseup', function(e) {
 		if (!container.is(e.target) && container.has(e.target).length === 0) {
 			container.hide();
 		}
 	});
 
-	jQuery('.resourceOslcPopupTrigger').live('mouseout', function() {
+	jQuery('.resourceOslcPopupTrigger').on('mouseout', function() {
 		if (hideTimer) {
 			clearTimeout(hideTimer);
 		}

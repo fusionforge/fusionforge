@@ -1,0 +1,94 @@
+%package plugin-scmgit
+Requires: git, gitweb
+
+%package plugin-scmsvn
+Requires: subversion, viewvc, augeas
+
+%package plugin-scmbzr
+Requires: bzr, mod_wsgi, loggerhead
+
+%package plugin-scmhg
+Requires: mercurial
+
+%package plugin-scmdarcs
+Requires: darcs
+
+%package plugin-admssw
+Requires: postgresql, fusionforge-plugin-doaprdf
+
+%package plugin-aselectextauth
+Requires:
+
+%package plugin-authcas
+Requires: php-pear-CAS
+
+%package plugin-authhttpd
+Requires:
+
+%package plugin-authldap
+Requires: php-ldap
+
+%package plugin-blocks
+Requires:
+
+%package plugin-ckeditor
+Requires: ckeditor
+
+%package plugin-compactpreview
+Requires: php-pear-HTTP
+
+%package plugin-doaprdf
+Requires: %{name}-web = %{version}
+
+%package plugin-externalsearch
+Requires:
+
+%package plugin-extsubproj
+Requires:
+
+%package plugin-foafprofiles
+Requires:
+
+%package plugin-gravatar
+Requires:
+
+%package plugin-headermenu
+Requires:
+
+%package plugin-hudson
+Requires:
+
+%package plugin-mediawiki
+Requires: mediawiki
+
+%package plugin-message
+Requires:
+
+%package plugin-moinmoin
+Requires: moin, mod_wsgi, python-psycopg2
+
+%package plugin-online_help
+Requires:
+
+%package plugin-scmhook
+Requires:
+
+# Way too many rpmlint errors in this one
+# Any volunteer?
+#%package plugin-wiki
+#Requires: units
+
+%package plugin-projectlabels
+Requires:
+
+%package plugin-contribtracker
+Requires:
+
+%package plugin-globalsearch
+Requires:
+
+%package plugin-webanalytics
+Requires:
+
+%package plugin-sysauthldap
+Requires:

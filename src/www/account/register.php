@@ -30,8 +30,8 @@ require_once $gfcommon.'include/timezones.php';
 
 global $HTML;
 
-if (forge_get_config ('user_registration_restricted')) {
-	session_require_global_perm ('forge_admin');
+if (forge_get_config('user_registration_restricted')) {
+	session_require_global_perm('forge_admin');
 }
 
 $unix_name = getStringFromRequest('unix_name');
@@ -141,8 +141,8 @@ if (!isset($ccode) || empty($ccode) || !preg_match('/^[a-zA-Z]{2}$/', $ccode)) {
 
 site_header(array('title'=>_('User Account Registration')));
 echo $HTML->openForm(array('action' => util_make_uri('/account/register.php'), 'method' => 'post'));
+echo html_e('input', array('type' => 'hidden', 'name' => 'form_key', 'value' => form_generate_key()));
 ?>
-<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
 <p>
 <?php
 if (forge_get_config('require_unique_email')) {
@@ -155,7 +155,7 @@ if (forge_get_config('require_unique_email')) {
     </label>
 </p>
 <p>
-<?php echo _('Password (min. 6 chars)').utils_requiredField()._(':'); ?>
+<?php echo _('Password (min. 6 chars)').utils_requiredField()._(':'); ?><br />
     <label for="password1">
         <input id="password1" type="password" required="required" name="password1"/>
     </label>
@@ -180,7 +180,7 @@ if (forge_get_config('require_unique_email')) {
     </label>
 </p>
 <p>
-<?php echo _('Last Name').utils_requiredField()._(':'); ?>
+<?php echo _('Last Name').utils_requiredField()._(':'); ?><br />
     <label for="lastname">
         <input id="lastname" required="required" size="30" type="text" name="lastname"
                value="<?php print(htmlspecialchars($lastname)); ?>"/>
@@ -258,7 +258,7 @@ if($toDisplay != "") {
 	<p>
 	<input type="checkbox" name="accept_conditions" value="1" />
 	<?php printf (_('Do you accept the <a href="%s">terms of use</a> for this site?'),
-		      util_make_url ('/terms.php')); ?>
+		      util_make_url('/terms.php')); ?>
 	</p>
 <?php } ?>
 <?php if (forge_check_global_perm('forge_admin')) { ?>
@@ -266,22 +266,13 @@ if($toDisplay != "") {
 <?php print _('Activate this user immediately') ; ?>
 	</p>
 <?php } else {
-		plugin_hook('captcha_form');
-	}
-?>
-
-<p>
-<?php echo $HTML->addRequiredFieldsInfoBox(); ?>
-</p>
-<p>
-<input type="submit" name="submit" value="<?php echo _('Register'); ?>" />
-</p>
-<?php
+	plugin_hook('captcha_form');
+}
+echo $HTML->addRequiredFieldsInfoBox();
+echo html_e('p', array(), html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Register'))));
 echo $HTML->closeForm();
-?>
-<p><a href="pending-resend.php"><?php echo _('Resend confirmation email to a pending account'); ?></a></p>
-
-<?php site_footer();
+echo html_e('p', array(), util_make_link('/account/pending-resend.php', _('Resend confirmation email to a pending account')));
+site_footer();
 
 // Local Variables:
 // mode: php

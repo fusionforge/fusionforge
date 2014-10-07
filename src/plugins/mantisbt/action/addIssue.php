@@ -35,17 +35,17 @@ $defect['category'] = getStringFromRequest('categorie');
 $defect['project']['id'] = $mantisbtConf['id_mantisbt'];
 
 try {
-	$clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
-	$listSeverities = $clientSOAP->__soapCall('mc_enum_severities', array("username" => $username, "password" => $password));
-	$listReproducibilities = $clientSOAP->__soapCall('mc_enum_reproducibilities', array("username" => $username, "password" => $password));
-	$listUsers = $clientSOAP->__soapCall('mc_project_get_users', array("username" => $username, "password" => $password, "project_id" => $mantisbtConf['id_mantisbt'], "acces" => 10));
-	$listViewStates = $clientSOAP->__soapCall('mc_enum_view_states', array("username" => $username, "password" => $password));
-	$listPriorities = $clientSOAP->__soapCall('mc_enum_priorities', array("username" => $username, "password" => $password));
-	$listResolutions= $clientSOAP->__soapCall('mc_enum_resolutions', array("username" => $username, "password" => $password));
-	$listStatus= $clientSOAP->__soapCall('mc_enum_status', array("username" => $username, "password" => $password));
+	$clientSOAP = new SoapClient($mantisbtConf['url'].'/api/soap/mantisconnect.php?wsdl', array('trace' => true, 'exceptions' => true));
+	$listSeverities = $clientSOAP->__soapCall('mc_enum_severities', array('username' => $username, 'password' => $password));
+	$listReproducibilities = $clientSOAP->__soapCall('mc_enum_reproducibilities', array('username' => $username, 'password' => $password));
+	$listUsers = $clientSOAP->__soapCall('mc_project_get_users', array('username' => $username, 'password' => $password, 'project_id' => $mantisbtConf['id_mantisbt'], "acces" => 10));
+	$listViewStates = $clientSOAP->__soapCall('mc_enum_view_states', array('username' => $username, 'password' => $password));
+	$listPriorities = $clientSOAP->__soapCall('mc_enum_priorities', array('username' => $username, 'password' => $password));
+	$listResolutions= $clientSOAP->__soapCall('mc_enum_resolutions', array('username' => $username, 'password' => $password));
+	$listStatus= $clientSOAP->__soapCall('mc_enum_status', array('username' => $username, 'password' => $password));
 } catch (SoapFault $soapFault) {
 	$error_msg = _('Task failed')._(': ').$soapFault->faultstring;
-	session_redirect('plugins/mantisbt/?type='.$type.'&group_id='.$group_id.'&pluginname=mantisbt&view=viewIssues');
+	session_redirect('/plugins/'.$mantisbt->name.'/?type='.$type.'&group_id='.$group_id.'&view=viewIssues');
 }
 foreach($listSeverities as $key => $severity){
 	if (getStringFromRequest('severite') == $severity->name){
@@ -81,7 +81,7 @@ foreach($listViewStates as $key => $viewState){
 }
 
 if (getStringFromRequest('handler') != ''){
-	$listUsers = $clientSOAP->__soapCall('mc_project_get_users', array("username" => $username, "password" => $password, "project_id" => $idProjetMantis, "acces" => 10));
+	$listUsers = $clientSOAP->__soapCall('mc_project_get_users', array('username' => $username, 'password' => $password, 'project_id' => $idProjetMantis, 'acces' => 10));
 	foreach($listUsers as $key => $mantisuser){
 		if (getStringFromRequest('handler') == $mantisuser->name){
 			$defect['handler']['id'] = $mantisuser->id;
@@ -122,10 +122,10 @@ $defect['additional_information'] = getStringFromRequest('informations');
 $defect['version'] = getStringFromRequest('version');
 
 try {
-	$newIdBug = $clientSOAP->__soapCall('mc_issue_add', array("username" => $username, "password" => $password, "issue" => $defect));
+	$newIdBug = $clientSOAP->__soapCall('mc_issue_add', array('username' => $username, 'password' => $password, 'issue' => $defect));
 	$feedback = sprintf(_('Ticket %s created successfully.'), $newIdBug);
-	session_redirect('plugins/mantisbt/?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$newIdBug.'&view=viewIssue');
+	session_redirect('/plugins/'.$mantisbt->name.'/?type='.$type.'&group_id='.$group_id.'&idBug='.$newIdBug.'&view=viewIssue');
 } catch (SoapFault $soapFault) {
 	$error_msg = _('Task failed')._(': ').$soapFault->faultstring;
-	session_redirect('plugins/mantisbt/?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name);
+	session_redirect('/plugins/'.$mantisbt->name.'/?type='.$type.'&group_id='.$group_id);
 }

@@ -27,9 +27,6 @@ require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'include/my_utils.php';
 require_once $gfwww.'include/vote_function.php';
-require_once $gfcommon.'tracker/ArtifactsForUser.class.php';
-require_once $gfcommon.'forum/ForumsForUser.class.php';
-require_once $gfcommon.'pm/ProjectTasksForUser.class.php';
 require_once $gfcommon.'widget/WidgetLayoutManager.class.php';
 
 if (!session_loggedin()) { // || $sf_user_hash) {
@@ -48,6 +45,9 @@ $sql = "SELECT l.*
 		";
 $res = db_query_params($sql,array('u', $user->getID()));
 $layout_id = db_result($res, 0 , 'id');
+if (!$layout_id) {
+	$layout_id = 1;
+}
 
 $ap = html_ap();
 echo html_ao('ul', array('class' => 'widget_toolbar'));

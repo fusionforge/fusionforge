@@ -7,7 +7,7 @@
 		},
 		{
 			"type": "file",
-			"source": "file/bashrc",
+			"source": "file/bashrc-deb",
 			"destination": "/root/.bashrc"
 		},
 		{

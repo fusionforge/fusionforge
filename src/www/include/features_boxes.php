@@ -113,16 +113,6 @@ function show_top_downloads() {
 	return $return;
 }
 
-function stats_getprojects_active_public() {
-	$ff = new FusionForge();
-	return $ff->getNumberOfPublicHostedProjects();
-}
-
-function stats_getprojects_total() {
-	$ff = new FusionForge();
-	return $ff->getNumberOfHostedProjects();
-}
-
 function stats_getpageviews_total() {
 	$res_count = db_query_params ('SELECT SUM(site_views) AS site, SUM(subdomain_views) AS subdomain FROM stats_site',
 			array());
@@ -148,14 +138,24 @@ function stats_downloads_total() {
 function show_sitestats() {
 	$fforge = new FusionForge();
 	$return = '<p>';
-	$return .= _('Public Hosted Projects')._(': ');
-	$content = '<strong>'.number_format($fforge->getNumberOfPublicHostedProjects()).'</strong>';
+
+	$count_type = forge_get_config('sitestats_projects_count');
+	if ($count_type == 'visible') {
+		$arr = group_get_public_active_projects_asc();  // cf. softwaremap/full_list.php
+		$count = count($arr);
+	} else { //if ($count_type == 'all') {
+		$count = $fforge->getNumberOfActiveProjects();
+	}
+	$return .= _('Hosted Projects')._(': ');
+	$content = '<strong>'.number_format($count).'</strong>';
+
 	if (forge_get_config('use_project_full_list')) {
 		$return .= util_make_link('/softwaremap/full_list.php', $content);
 	} else {
 		$return .= $content;
 	}
 	$return .= "</p><p>";
+
 	$return .= _('Registered Users')._(': ').'<strong>'.
 		number_format($fforge->getNumberOfActiveUsers()).'</strong>';
 	$return .= "</p>\n";

@@ -25,8 +25,10 @@ class ScmSvnSSHTest extends FForge_SeleniumTestCase
 {
 	function testScmSvnSSH()
 	{
-		$this->skip_on_rpm_installs();
-		$this->skip_on_src_installs();
+		$forge_get_config = RUN_JOB_PATH."/forge_get_config";
+		$config_path = rtrim(`$forge_get_config config_path`);
+		file_put_contents("$config_path/config.ini.d/zzz-buildbot-svnsshtest",
+				  "[scmsvn]\n"."use_ssh = yes\n"."use_dav = no\n");
 
 		$this->activatePlugin('scmsvn');
 		$this->populateStandardTemplate('empty');
@@ -44,9 +46,8 @@ class ScmSvnSSHTest extends FForge_SeleniumTestCase
 	    
 		// Run the cronjob to create repositories
 		$this->reload_nscd();
-		$this->cron("create_scm_repos.php");
-		$this->cron("homedirs.php");
-		$this->cron("ssh_create.php");
+		$this->cron("scm/create_scm_repos.php");
+		$this->cron("shell/homedirs.php");
 
 		// Get the address of the repo
 		$this->open(ROOT);

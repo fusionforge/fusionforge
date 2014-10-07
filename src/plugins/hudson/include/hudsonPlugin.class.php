@@ -31,6 +31,10 @@ class hudsonPlugin extends Plugin {
 		$this->Plugin($id);
 		$this->name = "hudson";
 		$this->text = _('Hudson/Jenkins'); // To show in the tabs, use...
+		$this->pkg_desc =
+_("This plugin contains the Hudson subsystem of FusionForge. It allows each
+FusionForge project to have its own Hudson, and gives some
+control over it to the project's administrator.");
 		$this->_addHook("user_personal_links"); //to make a link to the user's personal part of the plugin
 		//$this->_addHook("usermenu") ;
 		$this->_addHook("groupmenu");	// To put into the project tabs
@@ -48,6 +52,7 @@ class hudsonPlugin extends Plugin {
 		$this->_addHook('ajax_reference_tooltip', 'ajax_reference_tooltip', false);
 		$this->_addHook('role_get');
 		$this->_addHook('role_normalize');
+		$this->_addHook('role_unlink_project');
 		$this->_addHook('role_translate_strings');
 		$this->_addHook('role_has_permission');
 		$this->_addHook('role_get_setting');
@@ -341,6 +346,20 @@ class hudsonPlugin extends Plugin {
 			$role->normalizePermsForSection($new_pa, 'plugin_hudson_read', $p->getID());
 		}
 		return true;
+	}
+
+	function role_unlink_project(&$params) {
+		$role =& $params['role'] ;
+		$project =& $params['project'] ;
+
+		$settings = array('plugin_hudson_read');
+		
+		foreach ($settings as $s) {
+			db_query_params('DELETE FROM pfo_role_setting WHERE role_id=$1 AND section_name=$2 AND ref_id=$3',
+					array($role->getID(),
+					      $s,
+					      $project->getID()));
+		}
 	}
 
 	function role_translate_strings(&$params) {

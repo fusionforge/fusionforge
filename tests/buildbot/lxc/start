@@ -1,0 +1,48 @@
+#! /bin/sh
+echo "==== START $HOST ===="
+echo "VMENGINE=$VMENGINE VMTEMPLATE=$VMTEMPLATE CIDR=$CIDR IPGW=$IPGW"
+
+LXC_PATH=/usr/lib/lxc
+if [ -d /usr/share/lxc ] 
+then 
+	LXC_PATH=/usr/share/lxc
+fi
+
+lxcdir=`dirname $0`
+export TEMPLATE=$VMTEMPLATE
+
+if [ -z "$VMENGINE" ]
+then
+	echo "ERROR: VMENGINE not set" 
+	exit 1
+fi
+if [ -z "$TEMPLATE" ]
+then
+	echo "ERROR: TEMPLATE not set"
+	exit 2
+fi
+
+if [ ! -e $LXC_PATH/templates/lxc-$TEMPLATE ]
+then 
+	echo "$LXC_PATH/templates/lxc-$TEMPLATE not found"
+	echo "you need to install template"
+	echo "run: (cd $lxcdir ; sudo make)"
+else
+	tmpconf=`mktemp`
+	cat $lxcdir/config.$TEMPLATE > $tmpconf
+	if [ ! -z "$CIDR" ] 
+	then
+		echo "lxc.network.ipv4 = $CIDR" >> $tmpconf
+	fi
+	if [ ! -z "$IPGW" ]
+	then
+		echo "#lxc.network.ipv4.gw = $IPGW" >> $tmpconf
+	fi
+	# Next is a bit hacky, the only way I found to pass pubkey to the template
+	# LXC don't allow to pass extra args
+	# Note: doesn't work with lxc >= 1.0, comments are stripped
+	echo "#lxc.pubkey = $SSHPUBKEY" >> $tmpconf
+	sudo /usr/bin/lxc-create -n $HOST -f $tmpconf -t $TEMPLATE
+	rm -f $tmpconf
+	sudo /usr/bin/lxc-start -n $HOST -d
+fi

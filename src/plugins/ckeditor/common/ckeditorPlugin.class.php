@@ -37,6 +37,8 @@ class ckeditorPlugin extends Plugin {
 		$this->Plugin() ;
 		$this->name = "ckeditor" ;
 		$this->text = _("HTML editor (ckeditor)");
+		$this->pkg_desc =
+_("CKEditor is a WYSIWYG text editor that displays within a web browser.");
 		$this->hooks[] = "user_create";
 		$this->hooks[] = "userisactivecheckbox";
 		$this->hooks[] = "userisactivecheckboxpost";

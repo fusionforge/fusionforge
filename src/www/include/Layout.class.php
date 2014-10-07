@@ -1285,6 +1285,10 @@ if (isset($params['group']) && $params['group']) {
 		return $this->getPicto('ic/configure.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
+	function getZipPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/file_type_archive.png', $title, $alt, 20, 20, $otherAttr);
+	}
+
 	function getPicto($url, $title, $alt, $width = '20', $height = '20', $otherAttr = array()) {
 		$otherAttr['title'] = $title;
 		if (!$alt) {
@@ -1367,7 +1371,7 @@ if (isset($params['group']) && $params['group']) {
 			echo '<script type="text/javascript">/* <![CDATA[ */'."
 				jQuery(document).ready(function() {
 						jQuery('#$element_id-ajax').html('".$spinner."');
-						jQuery.ajax({url:'". util_make_url($widget->getAjaxUrl($owner_id, $owner_type)) ."',
+						jQuery.ajax({url:'". util_make_uri($widget->getAjaxUrl($owner_id, $owner_type)) ."',
 							success: function(result){jQuery('#$element_id-ajax').html(result)},
 							});
 						});

@@ -1,2 +1,0 @@
-# Include all FusionForge-related configuration files
-Include /etc/gforge/httpd.conf.d/*.conf

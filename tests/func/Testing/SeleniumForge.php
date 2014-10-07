@@ -61,13 +61,21 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		}
 		if (defined('DB_INIT_CMD')) {
 			// Reload a fresh database before running this test suite.
-			system(DB_INIT_CMD);
+			$ret = 0;
+			passthru(DB_INIT_CMD, $ret);
+			ob_flush();
+			if ($ret != 0)
+				die('DB_INIT_CMD ('.DB_INIT_CMD.') failed');
 		}
 		$this->reload_nscd();
 
 		$this->setBrowser('*firefox');
 		$this->setBrowserUrl(URL);
 		$this->setHost(SELENIUM_RC_HOST);
+
+		// Use a sensible default background (instead of Selenium's criminal default to black)
+		// (future-proof - https://github.com/giorgiosironi/phpunit-selenium/commit/07e50f74f3782ce8781527653e6c79aeefd94ada)
+		$this->screenshotBgColor = '#CCFFDD';
 	}
 
 	/**
@@ -130,8 +138,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 
 	protected function reload_nscd()
 	{
-		$this->runCommand("service unscd restart > /dev/null 2>&1 || service nscd restart > /dev/null 2>&1 || true");
-		sleep (5); // Give it some time to wake up
+		$this->runCommand("(nscd -i passwd && nscd -i group) >/dev/null 2>&1 || true");
 	}
 
 	protected function init() {
@@ -291,7 +298,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->init($project, $user);
 
 		// Run manually the cron for creating the svn structure.
-		$this->cron("create_scm_repos.php");
+		$this->cron("scm/create_scm_repos.php");
 	}
 
 	protected function login($username)
@@ -437,10 +444,33 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	}
 
 	protected function uploadSshKey () {
-		$keys = file(getenv('HOME').'/.ssh/id_rsa.pub');
+		// Prepare client config
+		$sshdir = getenv('HOME') . '/.ssh';
+		if (!file_exists($sshdir)) {
+			mkdir($sshdir);
+			chmod($sshdir, 0700);
+		}
+		$config = $sshdir . '/config';
+		if (!file_exists($config) or
+		    // Avoid OpenSSH host fingerprint prompt
+		    count(preg_grep('/StrictHostKeyChecking/', file($config))) == 0) {
+			$f = fopen($config, 'a');
+			fwrite($f, 'StrictHostKeyChecking no');
+			fclose($f);
+		}
+		chmod($sshdir . '/config', 0600);
+
+		// Generate user keys
+		$privkey = $sshdir . '/id_rsa';
+		$pubkey  = $sshdir . '/id_rsa.pub';
+		if (!file_exists($pubkey)) {
+			system("ssh-keygen -N '' -f $privkey");
+		}
+
+		// Upload keys to the web interface
+		$keys = file($pubkey);
 		$k = $keys[0];
 		$this->assertEquals(count($keys), 1);
-
 		$this->clickAndWait("link=My Account");
 		$this->clickAndWait("link=Edit Keys");
 		$this->type("authorized_key", $k);

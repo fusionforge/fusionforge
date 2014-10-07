@@ -1,0 +1,62 @@
+#!/usr/bin/make -f
+# See debhelper(7) (uncomment to enable)
+# output every command that modifies files on the build system.
+#DH_VERBOSE = 1
+
+# see EXAMPLES in dpkg-buildflags(1) and read /usr/share/dpkg/*
+DPKG_EXPORT_BUILDFLAGS = 1
+include /usr/share/dpkg/default.mk
+
+# see FEATURE AREAS in dpkg-buildflags(1)
+#export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+
+# see ENVIRONMENT in dpkg-buildflags(1)
+# package maintainers to append CFLAGS
+#export DEB_CFLAGS_MAINT_APPEND  = -Wall -pedantic
+# package maintainers to append LDFLAGS
+#export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
+
+
+# main packaging script based on dh7 syntax
+%:
+	dh $@
+
+override_dh_auto_install:
+	make install-common      prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-common
+	make install-db-local    prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-db-local
+	make install-web         prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-web
+	make install-web-vhosts  prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-web-vhosts
+	make install-shell       prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-shell
+	make install-mta-postfix prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-mta-postfix
+	make install-mta-exim4   prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-mta-exim4
+	make install-lists       prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-lists
+	for i in $$(sed -n 's/^Package: fusionforge-plugin-//p' debian/plugins); do \
+		make install-plugin-$$i prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-plugin-$$i; \
+		sed "s/@plugin@/$$i/" debian/plugin.postinst>debian/fusionforge-plugin-$$i.postinst; \
+		sed "s/@plugin@/$$i/" debian/plugin.prerm  > debian/fusionforge-plugin-$$i.prerm; \
+		sed "s/@plugin@/$$i/" debian/plugin.postrm > debian/fusionforge-plugin-$$i.postrm; \
+		if [ -f plugins/$$i/README ]; then \
+			echo plugins/$$i/README > debian/fusionforge-plugin-$$i.docs; \
+		fi; \
+	done
+#	embedded-php-library .../simplepie.inc -> libphp-simplepie
+	rm -rf debian/fusionforge-web/usr/share/fusionforge/vendor/simplepie/
+#	embedded-php-library .../Snoopy.class.php -> libphp-snoopy
+	rm -rf debian/fusionforge-web/usr/share/fusionforge/vendor/libphp-snoopy/
+#	embedded-javascript-library .../jquery.livequery.js -> libjs-jquery-livequery
+	rm -rf debian/fusionforge-web/usr/share/fusionforge/vendor/jquery-livequery/
+	ln -s /usr/share/javascript/jquery-livequery \
+		debian/fusionforge-web/usr/share/fusionforge/vendor/jquery-livequery
+#	extra-license-file usr/share/fusionforge/**/postreceiveemail/LICENCE
+	rm -f debian/fusionforge-plugin-scmhook/usr/share/fusionforge/plugins/scmhook/library/scmgit/hooks/postreceiveemail/LICENCE
+
+override_dh_clean:
+	dh_clean
+	for i in $$(sed -n 's/^Package: fusionforge-plugin-//p' debian/plugins); do \
+		rm -f debian/fusionforge-plugin-$$i.postinst debian/fusionforge-plugin-$$i.prerm \
+			debian/fusionforge-plugin-$$i.postrm debian/fusionforge-plugin-$$i.docs ; \
+	done
+
+# Needs to be done before 'dpkg-source'
+debian/control: debian/gen_control.sh debian/plugins
+	debian/gen_control.sh

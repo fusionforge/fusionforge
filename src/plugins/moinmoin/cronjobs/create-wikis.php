@@ -32,6 +32,7 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/cron_utils.php';
 
 $wikidata = forge_get_config('wiki_data_path', 'moinmoin');
+$wsgi_user = forge_get_config('wsgi_user', 'moinmoin');
 
 // Get all projects that use the mediawiki plugin
 $project_res = db_query_params ("SELECT g.unix_group_name from groups g, group_plugin gp, plugins p where g.group_id = gp.group_id and gp.plugin_id = p.plugin_id and p.plugin_name = $1;", array("moinmoin"));
@@ -55,7 +56,7 @@ while ( $row = db_fetch_array($project_res) ) {
 		cron_debug("  Creating project dir $project_dir.");
 		mkdir($project_dir, 0755, true);
 		system("cp -r /usr/share/moin/data /usr/share/moin/underlay $project_dir/");
-		system("chown -R gforge:gforge $project_dir");
+		system("chown -R $wsgi_user: $project_dir");
 		$template = forge_get_config('config_path') . "/plugins/moinmoin/PROJECT_NAME.py.tmpl";
 		system('(echo "# Automatically generated on `LANG=C date` from '.$template.'";'
                       . 'echo "# DO NOT EDIT";'

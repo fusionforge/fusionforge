@@ -1,0 +1,8 @@
+#
+# Regular cron jobs for the lists-mailman package
+#
+PATH=@bindir@:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+# Mailman-list creation
+* * * * * root forge_run_job manage_mailmanlists.php 
+

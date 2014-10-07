@@ -29,25 +29,6 @@
  * @version   $ID$
  */
 
-define ('SEPARATOR', "\n\t\r\0\x0B");
-
-/**
- *      viewcvs_is_html() - Test if ViewCVS returns HTML.
- *
- *      @return true if the content type of the ViewCVS is text/html.
- */
-function viewcvs_is_html() {
-	$request_uri = getStringFromServer('REQUEST_URI');
-	$query_string = getStringFromServer('QUERY_STRING');
-
-	return (strpos($request_uri,"*checkout*") === false &&
-		strpos($query_string,"view=graphimg") === false &&
-		strpos($query_string,"view=patch") === false &&
-		strpos($query_string,"view=tar") === false &&
-		strpos($request_uri,"*docroot*") === false &&
-		strpos($request_uri,"makepatch=1") === false);
-}
-
 /**
  * make_arg_cmd_safe() - Make strings safe for the command line.
  *
@@ -69,7 +50,6 @@ function make_arg_cmd_safe($arg) {
 function viewcvs_execute($repos_name, $repos_type) {
 	$request_uri = getStringFromServer('REQUEST_URI');
 	$query_string = getStringFromServer('QUERY_STRING');
-	$viewcvs_path = forge_get_config('url_root').'/scm/viewvc';
 
 	// this is very important ...
 	$path = getStringFromServer('PATH_INFO');
@@ -117,8 +97,8 @@ function viewcvs_execute($repos_name, $repos_type) {
 		'REPOSITORY_TYPE="'.$repos_type.'" '.
 		'REPOSITORY_NAME="'.make_arg_cmd_safe($repos_name).'" '.
 		'HTTP_HOST="'.make_arg_cmd_safe(getStringFromServer('HTTP_HOST')).'" '.
-		'DOCROOT="/themes/'.forge_get_config('default_theme').'/viewvc" '.
-		$viewcvs_path.'/bin/cgi/viewvc.cgi 2>&1';
+		'DOCROOT="/scm/viewvc/docroot" '.
+		dirname(__FILE__).'/../viewvc/viewvc.cgi 2>&1';
 
 	ob_start();
 	passthru($command);

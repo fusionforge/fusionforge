@@ -33,37 +33,32 @@ global $HTML;
 if (empty($msg)) {
 	if (!isset($defect)){
 		try{
-			$clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
-			$defect = $clientSOAP->__soapCall('mc_issue_get', array("username" => $username, "password" => $password, "issue_id" => $idBug));
+			$clientSOAP = new SoapClient($mantisbtConf['url'].'/api/soap/mantisconnect.php?wsdl', array('trace' => true, 'exceptions' => true));
+			$defect = $clientSOAP->__soapCall('mc_issue_get', array('username' => $username, 'password' => $password, 'issue_id' => $idBug));
 		}catch (SoapFault $soapFault) {
-			echo $HTML->warning_msg(_('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring);
+			echo $HTML->warning_msg(_('Technical error occurs during data retrieving')._(': ').$soapFault->faultstring);
 			$errorPage = true;
 		}
 	}
 
 	if (!isset($errorPage)){
-		echo '<h2>'._('Attached Files').'</h2>';
-		$boxTitle = 'Fichiers attach&eacute;s (<a style="color:#FFFFFF;font-size:0.8em" href="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&view=addAttachment">Ajouter un fichier</a>)';
+		echo html_e('h2', array(), _('Attached Files'));
 		if (isset($defect->attachments) && count($defect->attachments) > 0) {
-			echo	'<table class="innertabs">';
-			echo '<tr>';
-			echo '<td>'._('File Name').'</td>';
-			echo '<td>'._('Actions').'</td>';
-			echo '</tr>';
+			$titleArr = array(_('File Name'), _('Actions'));
+			echo $HTML->listTableTop($titleArr);
 			foreach ($defect->attachments as $key => $attachement){
-				echo	'<tr>';
-				echo		'<td>'.$attachement->filename.'</td>';
-				echo 		'<td>';
-				echo			'<input type=button value="'._('Download').'" onclick="window.location.href=\'getAttachment.php/'.$group_id.'/'.$attachement->id.'/'.$attachement->filename.'\'">';
+				$cells = array();
+				$cells[][] = $attachement->filename;
+				$contentCell = '<input type=button value="'._('Download').'" onclick="window.location.href=\'/plugins/'.$mantisbt->name.'/getAttachment.php/'.$group_id.'/'.$attachement->id.'/'.$attachement->filename.'\'">';
 				if ($editable)
-					echo		'<input type=button value="'._('Delete').'" onclick="window.location.href=\'?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&idAttachment='.$attachement->id.'&action=deleteAttachment&view=viewIssue\'">';
+					$contentCell .= '<input type=button value="'._('Delete').'" onclick="window.location.href=\'/plugins/'.$mantisbt->name.'/?type='.$type.'&group_id='.$group_id.'&idBug='.$idBug.'&idAttachment='.$attachement->id.'&action=deleteAttachment&view=viewIssue\'">';
 
-				echo		'</td>';
-				echo 	'</tr>';
+				$cells[][] = $contentCell;
+				echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($key, true)), $cells);
 			}
-		echo "</table>";
+			echo $HTML->listTableBottom();
 		} else {
-			echo $HTML->warning_msg(_('No attached files for this ticket'));
+			echo $HTML->information(_('No attached files for this ticket.'));
 		}
 	}
 ?>

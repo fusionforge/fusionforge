@@ -255,6 +255,11 @@ abstract class BaseRole extends Error {
 				return false;
 			}
 		}
+		
+		$hook_params = array();
+		$hook_params['role'] =& $this;
+		$hook_params['project'] =& $project;
+		plugin_hook ("role_unlink_project", $hook_params);
 
 		return true ;
 	}

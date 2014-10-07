@@ -28,6 +28,8 @@ require_once $gfcommon.'include/account.php';
 $authorized_key = getStringFromRequest('authorized_key');
 $uploaded_filekey = getUploadedFile('uploaded_filekey');
 if (strlen($authorized_key)) {
+	$authorized_keys = explode("\n", $authorized_key);
+	$authorized_key = $authorized_keys[0];
 	checkKeys($authorized_key);
 	if (!$u->addAuthorizedKey($authorized_key)) {
 		$error_msg = $u->getErrorMessage();

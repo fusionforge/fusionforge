@@ -1,1 +1,0 @@
-plugins/externalsearch/etc/*.ini @CONFIG_PATH@/config.ini.d/

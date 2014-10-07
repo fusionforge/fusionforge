@@ -190,11 +190,11 @@ class FRSFile extends Error {
 		if (!$release_time) {
 			$release_time = time();
 		}
-		$file_size = filesize("$newfilelocation$name");
+		$file_size = filesize($newfilelocation.$name);
 
 		db_begin();
 		$result = db_query_params('INSERT INTO frs_file(release_id,filename,release_time,type_id,processor_id,file_size,post_date) VALUES ($1,$2,$3,$4,$5,$6,$7)',
-					   array ($this->FRSRelease->getId(),
+					   array ($this->FRSRelease->getID(),
 						  $name,
 						  $release_time,
 						  $type_id,
@@ -202,7 +202,7 @@ class FRSFile extends Error {
 						  $file_size,
 						  time()));
 		if (!$result) {
-			$this->setError(_('Error Adding Release: ').db_error());
+			$this->setError(_('Error Adding File')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -210,10 +210,13 @@ class FRSFile extends Error {
 		if (!$this->fetchData($this->file_id)) {
 			db_rollback();
 			return false;
-		} else {
+		}
+		if ($this->FRSRelease->FRSPackage->createReleaseFilesAsZip($this->FRSRelease->getID())) {
 			db_commit();
-			$this->FRSRelease->FRSPackage->createNewestReleaseFilesAsZip();
 			return true;
+		} else {
+			$this->setError($this->FRSRelease->FRSPackage->getErrorMessage());
+			return false;
 		}
 	}
 
@@ -342,7 +345,7 @@ class FRSFile extends Error {
 	 * @return	boolean	success.
 	 */
 	function delete() {
-		if (!forge_check_perm ('frs', $this->FRSRelease->FRSPackage->getID(), 'file')) {
+		if (!forge_check_perm('frs', $this->FRSRelease->FRSPackage->getID(), 'file')) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -363,7 +366,11 @@ class FRSFile extends Error {
 		} else {
 			db_query_params('DELETE FROM frs_dlstats_file WHERE file_id=$1', array($this->getID()));
 			db_query_params('DELETE FROM frs_dlstats_filetotal_agg WHERE file_id=$1', array($this->getID()));
-			$this->FRSRelease->FRSPackage->createNewestReleaseFilesAsZip();
+			if ($this->hasFiles()) {
+				$this->FRSRelease->FRSPackage->createReleaseFilesAsZip($this->FRSRelease->getID());
+			} else {
+				$this->FRSRelease->FRSPackage->deleteReleaseFilesAsZip($this->FRSRelease->getID());
+			}
 			return true;
 		}
 	}
@@ -440,9 +447,13 @@ class FRSFile extends Error {
 				return false;
 			}
 		}
-		db_commit();
-		$this->FRSRelease->FRSPackage->createNewestReleaseFilesAsZip();
-		return true;
+		if ($this->FRSRelease->FRSPackage->createReleaseFilesAsZip($this->FRSRelease->getID())) {
+			db_commit();
+			return true;
+		} else {
+			$this->setError($this->FRSRelease->FRSPackage->getErrorMessage());
+			return false;
+		}
 	}
 }
 

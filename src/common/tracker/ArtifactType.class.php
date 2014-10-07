@@ -28,6 +28,7 @@
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'tracker/ArtifactExtraFieldElement.class.php';
 require_once $gfcommon.'tracker/ArtifactStorage.class.php';
+require_once $gfcommon.'include/MonitorElement.class.php';
 
 /**
  * Gets an ArtifactType object from the artifact type id
@@ -531,6 +532,7 @@ class ArtifactType extends Error {
 	 * @return	bool	false - always false - always use the getErrorMessage() for feedback
 	 */
 	function setMonitor($user_id = -1) {
+		global $feedback;
 		if ($user_id == -1) {
 			if (!session_loggedin()) {
 				$this->setError(_('You can only monitor if you are logged in.'));
@@ -538,44 +540,31 @@ class ArtifactType extends Error {
 			}
 			$user_id = user_getid();
 		}
-
-		$res = db_query_params('SELECT * FROM artifact_type_monitor WHERE group_artifact_id=$1 AND user_id=$2',
-			array($this->getID(),
-				$user_id));
-		if (!$res || db_numrows($res) < 1) {
-			//not yet monitoring
-			$res = db_query_params('INSERT INTO artifact_type_monitor (group_artifact_id,user_id) VALUES ($1,$2)',
-				array($this->getID(),
-					$user_id));
-			if (!$res) {
-				$this->setError(db_error());
-				return false;
-			} else {
-				$this->setError(_('Monitoring Started'));
+		$MonitorElementObject = new MonitorElement('artifact_type');
+		if (!$this->isMonitoring()) {
+			if (!$MonitorElementObject->enableMonitoringByUserId($this->getID(), $user_id)) {
+				$this->setError($MonitorElementObject->getErrorMessage());
 				return false;
 			}
+			$feedback = _('Monitoring Started');
+			return true;
 		} else {
-			//already monitoring - remove their monitor
-			db_query_params('DELETE FROM artifact_type_monitor
-				WHERE group_artifact_id=$1
-				AND user_id=$2',
-				array($this->getID(),
-					$user_id));
-			$this->setError(_('Monitoring Stopped'));
-			return false;
+			if (!$MonitorElementObject->disableMonitoringByUserId($this->getID(), $user_id)) {
+				$this->setError($MonitorElementObject->getErrorMessage());
+				return false;
+			}
+			$feedback = _('Monitoring Stopped');
+			return true;
 		}
+		return false;
 	}
 
 	function isMonitoring() {
 		if (!session_loggedin()) {
 			return false;
 		}
-		$result = db_query_params('SELECT count(*) AS count FROM artifact_type_monitor
-			WHERE user_id=$1 AND group_artifact_id=$2',
-					   array(user_getid(),
-						  $this->getID()));
-		$row_count = db_fetch_array($result);
-		return $result && $row_count['count'] > 0;
+		$MonitorElementObject = new MonitorElement('artifact_type');
+		return $MonitorElementObject->isMonitoredByUserId($this->getID(), user_getid());
 	}
 
 	/**
@@ -584,9 +573,8 @@ class ArtifactType extends Error {
 	 * @return	array	array of id of users monitoring this Artifact.
 	 */
 	function &getMonitorIds() {
-		$res = db_query_params('SELECT user_id	FROM artifact_type_monitor WHERE group_artifact_id=$1',
-					array($this->getID()));
-		return util_result_column_to_array($res);
+		$MonitorElementObject = new MonitorElement('artifact_type');
+		return $MonitorElementObject->getMonitorUsersIdsInArray($this->getID());
 	}
 
 	/**
@@ -883,6 +871,9 @@ class ArtifactType extends Error {
 			WHERE group_artifact_id=$1',
 				array($this->getID()));
 //echo '11'.db_error();
+
+		$MonitorElementObject = new MonitorElement('artifact_type');
+		$MonitorElementObject->clearMonitor($this->getID());
 
 		db_commit();
 		ArtifactStorage::instance()->commit();

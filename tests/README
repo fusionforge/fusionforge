@@ -1,0 +1,3 @@
+- code: static code checks
+- unit: unit tests
+- func: functional tests using Selenium

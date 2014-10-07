@@ -3,6 +3,7 @@
  * MantisBT plugin
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -30,12 +31,12 @@ global $idBug;
 
 try {
 	if (!isset($clientSOAP))
-		$clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+		$clientSOAP = new SoapClient($mantisbtConf['url'].'/api/soap/mantisconnect.php?wsdl', array('trace' => true, 'exceptions' => true));
 
-	$clientSOAP->__soapCall('mc_issue_attachment_add', array("username" => $username, "password" => $password, "issue_id" => $idBug, "name" => $_FILES['attachment']['name'], "file_type" => $_FILES['attachment']['type'], "content" => file_get_contents($_FILES['attachment']['tmp_name'])));
+	$clientSOAP->__soapCall('mc_issue_attachment_add', array('username' => $username, 'password' => $password, 'issue_id' => $idBug, 'name' => $_FILES['attachment']['name'], 'file_type' => $_FILES['attachment']['type'], 'content' => file_get_contents($_FILES['attachment']['tmp_name'])));
 	$feedback = _('Task succeeded.');
 } catch (SoapFault $soapFault) {
 	$error_msg = _('Task failed')._(': ').$soapFault->faultstring;
-	session_redirect('plugins/mantisbt/?type=group&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&view=viewIssue');
+	session_redirect('/plugins/'.$mantisbt->name.'/?type=group&group_id='.$group_id.'&idBug='.$idBug.'&view=viewIssue');
 }
-session_redirect('plugins/mantisbt/?type=group&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&view=viewIssue');
+session_redirect('/plugins/'.$mantisbt->name.'/?type=group&group_id='.$group_id.'&idBug='.$idBug.'&view=viewIssue');

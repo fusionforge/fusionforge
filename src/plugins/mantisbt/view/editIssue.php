@@ -4,6 +4,7 @@
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2010, Antoine Mercadal - Capgemini
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -30,40 +31,24 @@ global $idBug;
 global $type;
 global $HTML;
 
-//validate function : to be sure needed informations are set before submit
-print   ('
-	<script language="javacript" type="text/javascript">
-	function validate() {
-		if ( document.issue.resume.value.length == 0 ) {
-		alert ("champ Résumé obligatoire");
-		} elseif ( document.issue.description.value.length == 0 ) {
-		alert ("champ Description obligatoire");
-		} else {
-		document.issue.submit();
-		document.issue.submitbutton.disabled="true";
-		}
-	}
-	</script>
-	');
-
 try {
 	/* do not recreate $clientSOAP object if already created by other pages */
 	if (!isset($clientSOAP))
-		$clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+		$clientSOAP = new SoapClient($mantisbtConf['url'].'/api/soap/mantisconnect.php?wsdl', array('trace' => true, 'exceptions' => true));
 
-	$defect = $clientSOAP->__soapCall('mc_issue_get', array("username" => $username, "password" => $password, "issue_id" => $idBug));
-	$listCategories = $clientSOAP->__soapCall('mc_project_get_categories', array("username" => $username, "password" => $password, "project_id" => $defect->project->id));
-	$listSeverities = $clientSOAP->__soapCall('mc_enum_severities', array("username" => $username, "password" => $password));
-	$listReproducibilities = $clientSOAP->__soapCall('mc_enum_reproducibilities', array("username" => $username, "password" => $password));
-	$listReporters = $clientSOAP->__soapCall('mc_project_get_users', array("username" => $username, "password" => $password, "project_id" => $defect->project->id, "acces" => 10));
-	$listDevelopers = $clientSOAP->__soapCall('mc_project_get_users', array("username" => $username, "password" => $password, "project_id" => $defect->project->id, "acces" => 25));
-	$listPriorities = $clientSOAP->__soapCall('mc_enum_priorities', array("username" => $username, "password" => $password));
-	$listResolutions= $clientSOAP->__soapCall('mc_enum_resolutions', array("username" => $username, "password" => $password));
-	$listStatus= $clientSOAP->__soapCall('mc_enum_status', array("username" => $username, "password" => $password));
-	$listVersions = $clientSOAP->__soapCall('mc_project_get_versions', array("username" => $username, "password" => $password, "project_id" => $defect->project->id));
-	$listVersionsMilestone = $clientSOAP->__soapCall('mc_project_get_unreleased_versions', array("username" => $username, "password" => $password, "project_id" => $defect->project->id));
+	$defect = $clientSOAP->__soapCall('mc_issue_get', array('username' => $username, 'password' => $password, 'issue_id' => $idBug));
+	$listCategories = $clientSOAP->__soapCall('mc_project_get_categories', array('username' => $username, 'password' => $password, 'project_id' => $defect->project->id));
+	$listSeverities = $clientSOAP->__soapCall('mc_enum_severities', array('username' => $username, 'password' => $password));
+	$listReproducibilities = $clientSOAP->__soapCall('mc_enum_reproducibilities', array('username' => $username, 'password' => $password));
+	$listReporters = $clientSOAP->__soapCall('mc_project_get_users', array('username' => $username, 'password' => $password, 'project_id' => $defect->project->id, 'acces' => 10));
+	$listDevelopers = $clientSOAP->__soapCall('mc_project_get_users', array('username' => $username, 'password' => $password, 'project_id' => $defect->project->id, 'acces' => 25));
+	$listPriorities = $clientSOAP->__soapCall('mc_enum_priorities', array('username' => $username, 'password' => $password));
+	$listResolutions= $clientSOAP->__soapCall('mc_enum_resolutions', array('username' => $username, 'password' => $password));
+	$listStatus= $clientSOAP->__soapCall('mc_enum_status', array('username' => $username, 'password' => $password));
+	$listVersions = $clientSOAP->__soapCall('mc_project_get_versions', array('username' => $username, 'password' => $password, 'project_id' => $defect->project->id));
+	$listVersionsMilestone = $clientSOAP->__soapCall('mc_project_get_unreleased_versions', array('username' => $username, 'password' => $password, 'project_id' => $defect->project->id));
 } catch (SoapFault $soapFault) {
-	echo $HTML->warning_msg(_('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring);
+	echo $HTML->warning_msg(_('Technical error occurs during data retrieving')._(': ').$soapFault->faultstring);
 	$errorPage = true;
 }
 
@@ -83,8 +68,8 @@ if (!isset($errorPage)){
 	global $additional_value;
 
 	$boxTitle = _('Edit ticket')._(': ').sprintf($format,$defect->id);
-	echo 	'<form name="issue" Method="POST" Action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$defect->id.'&action=updateIssue&view=viewIssue">';
-	echo	'<table>';
+	echo $HTML->openForm(array('name' => 'issue', 'method' => 'post', 'action' => util_make_uri('plugins/'.$mantisbt->name.'/?type='.$type.'&group_id='.$group_id.'&idBug='.$defect->id.'&action=updateIssue&view=viewIssue')));
+	echo $HTML->listTableTop();
 	echo		'<tr>';
 	echo 			'<td width="20%">'._('Category').'</td>';
 	echo 			'<td width="20%">'._('Severity').'</td>';
@@ -207,25 +192,25 @@ if (!isset($errorPage)){
 	echo				'</select>';
 	echo			'</td>';
 	echo		'<tr>';
-	echo	'</table>';
+	echo $HTML->listTableBottom();
 	echo	'<br/>';
-	echo	'<table>';
+	echo $HTML->listTableTop();
 	echo		'<tr>';
 	echo			'<td width="20%">'._('Summary').'&nbsp;<span style="font-weight:normal">'._('(128 char max)').'</span></td>';
-	echo			'<td><input type="text" value="'.htmlspecialchars($defect->summary,ENT_QUOTES).'" name="resume" maxlength="128" style="width:99%"></td>';
+	echo			'<td><input type="text" value="'.htmlspecialchars($defect->summary,ENT_QUOTES).'" name="resume" maxlength="128" style="width:99%" required="required" ></td>';
 	echo		'</tr>';
 	echo		'<tr>';
 	echo			'<td width="20%">'._('Description').'</td>';
-	echo			'<td><textarea name="description" style="width:99%;" rows="6">'.htmlspecialchars($defect->description, ENT_QUOTES).'</textarea></td>';
+	echo			'<td><textarea name="description" style="width:99%;" rows="6" required="required" >'.htmlspecialchars($defect->description, ENT_QUOTES).'</textarea></td>';
 	echo		'</tr>';
 	echo		'<tr>';
 	echo			'<td width="20%">'._('Additional Informations').'</td>';
 	echo			'<td><textarea name="informations" style="width:99%;" rows="6">'. $additional_value .'</textarea></td>';
 	echo		'</tr>';
-	echo	'</table>';
+	echo $HTML->listTableBottom();
 	echo	'<br/>';
 	echo	'<div align="center">';
-	echo		'<input type="button" name="submitbutton" onclick="validate();" value="'._('Update').'">';
+	echo		'<input type="submit" name="submitbutton" value="'._('Update').'" />';
 	echo	'</div>';
-	echo	'</form>';
+	echo $HTML->closeForm();
 }

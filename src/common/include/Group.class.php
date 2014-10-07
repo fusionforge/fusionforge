@@ -163,7 +163,7 @@ function group_get_object_by_publicname($groupname) {
  * @param	int	$max_query_limit Optional Maximum number of rows to limit query length
  * @return	array	List of public active projects
  */
-function get_public_active_projects_asc($max_query_limit = -1) {
+function group_get_public_active_projects_asc($max_query_limit = -1) {
 
 	$res_grp = db_query_params ('
 			SELECT group_id, group_name, unix_group_name, short_description, register_time
@@ -1537,12 +1537,30 @@ class Group extends Error {
 	}
 
 	/**
-	 * DocEmailAll - whether or not this group has opted to use receive notices on all doc updates.
+	 * docEmailAll - whether or not this group has opted to use receive notices on all doc updates.
 	 *
 	 * @return	bool	email_on_all_doc_updates.
 	 */
 	function docEmailAll() {
 		return $this->data_array['send_all_docs'];
+	}
+
+	/**
+	 * getFRSEmailAddress - get email address(es) to send FRS notifications to.
+	 *
+	 * @return	string	email address.
+	 */
+	function getFRSEmailAddress() {
+		return $this->data_array['new_frs_address'];
+	}
+
+	/**
+	 * frsEmailAll - whether or not this group has opted to use receive notices on all frs updates.
+	 *
+	 * @return	bool	email_on_all_frs_updates.
+	 */
+	function frsEmailAll() {
+		return $this->data_array['send_all_frs'];
 	}
 
 	/**

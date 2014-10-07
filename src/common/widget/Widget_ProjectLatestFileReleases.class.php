@@ -33,7 +33,7 @@ class Widget_ProjectLatestFileReleases extends Widget {
 		$request =& HTTPRequest::instance();
 		$pm = ProjectManager::instance();
 		$project = $pm->getProject($request->get('group_id'));
-		if ($project && $this->canBeUsedByProject($project) && forge_check_perm('frs', $project->getID(), 'read')) {
+		if ($project && $this->canBeUsedByProject($project) && forge_check_perm('frs_admin', $project->getID(), 'read')) {
 			$this->content['title'] = _('Latest File Releases');
 		}
 	}

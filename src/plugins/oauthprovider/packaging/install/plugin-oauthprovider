@@ -1,6 +1,0 @@
-plugins/oauthprovider/common/*                  @PLUGINS_PATH@/oauthprovider/common/
-plugins/oauthprovider/include/*.php             @PLUGINS_PATH@/oauthprovider/include/
-plugins/oauthprovider/db/*                      @PLUGINS_PATH@/oauthprovider/db/
-plugins/oauthprovider/www/*                     @PLUGINS_PATH@/oauthprovider/www/
-plugins/oauthprovider/etc/plugins/oauthprovider/*     @CONFIG_PATH@/plugins/oauthprovider/
-plugins/oauthprovider/etc/*.ini @CONFIG_PATH@/config.ini.d/

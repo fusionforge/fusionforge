@@ -3,7 +3,7 @@
  * MantisBT plugin
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2014 Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -28,24 +28,17 @@ global $HTML;
 global $group;
 global $group_id;
 global $mantisbt;
-
-echo '<form method="POST" name="addVersion" action="index.php?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&action=addVersion">';
-echo '<table><tr>';
 echo $HTML->boxTop(_('Add a new version'));
-echo '<td>';
-echo '<label>'._('Name').'</label><input name="version" type="text" size="10" />';
-// need to be implemented ....
-// if ($group->usesPlugin('projects-hierarchy')) {
-// 	echo '<input name="transverse" type="checkbox" value="1" >'. _('Cross version (son included)') .'</input>';
-// }
-echo '</td>';
-echo '</tr><tr>';
-echo '<td>';
-echo '<label>'._('Description').'</label><input name="description" type="text" size="20" />';
-echo '</td>';
-echo '<td>';
-echo '<input type="submit" value="'. _('Add') .'" />';
-echo '</td>';
+echo $HTML->openForm(array('method' => 'post', 'name' => 'addVersion', 'action' => util_make_uri('/plugins/'.$mantisbt->name.'/?type=admin&group_id='.$group_id.'&action=addVersion')));
+echo $HTML->listTableTop();
+$cells = array();
+$cells[] = array(_('Name').utils_requiredField()._(':'), 'class' => 'align-right');
+$cells[][] = html_e('input', array('name' => 'version', 'type' => 'text', 'size' => 10, 'required' => 'required'));
+$cells[] = array(_('Description')._(':'), 'class' => 'align-right');
+$cells[][] = html_e('input', array('name' => 'description', 'type' => 'text', 'size' => 20));
+$cells[][] = html_e('input', array('type' => 'submit', 'value' => _('Add')));
+echo $HTML->multiTableRow(array(), $cells);
+echo $HTML->listTableBottom();
+echo $HTML->closeForm();
+echo $HTML->addRequiredFieldsInfoBox();
 echo $HTML->boxBottom();
-echo '</tr></table>';
-echo '</form>';

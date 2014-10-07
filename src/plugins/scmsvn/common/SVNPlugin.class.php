@@ -26,7 +26,8 @@
  */
 
 forge_define_config_item('default_server', 'scmsvn', forge_get_config ('web_host'));
-forge_define_config_item('repos_path', 'scmsvn', forge_get_config('chroot').'/scmrepos/svn');
+forge_define_config_item('repos_path', 'scmsvn', forge_get_config('data_path').'/scmrepos/svn');
+forge_define_config_item('serve_path', 'scmsvn', forge_get_config('repos_path'));
 forge_define_config_item('use_ssh', 'scmsvn', false);
 forge_set_config_item_bool('use_ssh', 'scmsvn');
 forge_define_config_item('use_dav', 'scmsvn', true);
@@ -40,7 +41,11 @@ class SVNPlugin extends SCMPlugin {
 	function SVNPlugin() {
 		$this->SCMPlugin();
 		$this->name = 'scmsvn';
-		$this->text = 'Subversion';
+		$this->text = _('Subversion');
+		$this->pkg_desc =
+_("This plugin contains the Subversion subsystem of FusionForge. It allows
+each FusionForge project to have its own Subversion repository, and gives
+some control over it to the project's administrator.");
 		$this->svn_root_fs = '/scmrepos/svn';
 		if (!file_exists($this->svn_root_fs.'/.')) {
 			$this->svn_root_fs = forge_get_config('repos_path',
@@ -211,7 +216,7 @@ class SVNPlugin extends SCMPlugin {
 		global $HTML ;
 		$b = '' ;
 
-		$result = db_query_params('SELECT u.realname, u.user_name, u.user_id, sum(updates) as updates, sum(adds) as adds, sum(adds+commits) as combined FROM stats_cvs_user s, users u WHERE group_id=$1 AND s.user_id=u.user_id AND (commits>0 OR adds >0) GROUP BY u.user_id, realname, user_name, u.user_id ORDER BY combined DESC, realname',
+		$result = db_query_params('SELECT u.realname, u.user_name, u.user_id, sum(updates) as updates, sum(adds) as adds, sum(adds+updates) as combined FROM stats_cvs_user s, users u WHERE group_id=$1 AND s.user_id=u.user_id AND (updates>0 OR adds >0) GROUP BY u.user_id, realname, user_name, u.user_id ORDER BY combined DESC, realname',
 					  array ($project->getID()));
 
 		if (db_numrows($result) > 0) {
@@ -492,7 +497,7 @@ class SVNPlugin extends SCMPlugin {
 			while (!feof($pipe) &&
 				$data = fgets ($pipe, 4096)) {
 				if (!xml_parse ($xml_parser, $data, feof ($pipe))) {
-					debug("Unable to parse XML with error " .
+					$this->setError("Unable to parse XML with error " .
 					      xml_error_string(xml_get_error_code($xml_parser)) .
 					      " on line " .
 					      xml_get_current_line_number($xml_parser));
@@ -713,7 +718,8 @@ function SVNPluginCharData($parser, $chars) {
 				$time_ok = true;
 			} else {
 				$time_ok = false;
-				$usr_commits[$last_user]--;
+				if ($last_user !== '') // empty in e.g. tags from cvs2svn
+					$usr_commits[$last_user]--;
 				$commits--;
 			}
 			$times[] = $last_time;

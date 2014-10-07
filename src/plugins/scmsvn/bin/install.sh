@@ -1,32 +1,44 @@
 #! /bin/sh
-#
-# Configure Subversion for Sourceforge
-# Roland Mas, Gforge
+# Configure Subversion
 
 set -e
 
 if [ $(id -u) != 0 ] ; then
-    echo "You must be root to run this, please enter passwd"
-    exec su -c "$0 $1"
+    echo "You must be root to run this"
 fi
 
-gforge_chroot=$(forge_get_config chroot)
+scmsvn_serve_root=$(forge_get_config serve_root scmsvn)
 
 case "$1" in
     configure)
         echo "Modifying inetd for Subversion server"
-        # First, dedupe the commented lines
-	update-inetd --remove svnserve || true
-	update-inetd --remove svn || true
-        update-inetd --add  "svn stream tcp nowait.400 scm-gforge /usr/bin/svnserve svnserve -i -r $gforge_chroot"
+	if [ -x /usr/sbin/update-inetd ]; then
+	    update-inetd --remove svn || true
+            update-inetd --add  "svn stream tcp nowait.400 scm-gforge /usr/bin/svnserve svnserve -i -r $scmsvn_serve_root"
+	else
+	    echo "TODO: xinetd support"
+	fi
+
+	# Work-around memory leak in mod_dav_svn
+	for conf in /etc/apache2/apache2.conf /etc/httpd/conf/httpd.conf \
+	    /etc/apache2/server-tuning.conf; do
+	    if [ -e $conf ] && type augtool >/dev/null 2>&1; then
+		val=$(augtool "print /files$conf/IfModule[arg='mpm_worker_module' or arg='worker.c']/directive[.='MaxRequestsPerChild']/arg" | sed 's/^.*= "\(.*\)"/\1/')
+		if [ "$val" = "0" ]; then
+		    augtool --autosave "set /files$conf/IfModule[arg='mpm_worker_module' or arg='worker.c']/directive[.='MaxRequestsPerChild']/arg 5000" \
+			|| true  # v0.10 always returns 1, v1.0 always returns 0..
+		fi
+	    fi
+	done
 	;;
 
-    purge)
-	update-inetd --remove svnserve || true
-	update-inetd --remove svn || true
+    remove)
+	if [ -x /usr/sbin/update-inetd ]; then
+	    update-inetd --remove svn || true
+	fi
 	;;
 
     *)
-	echo "Usage: $0 {configure|purge}"
+	echo "Usage: $0 {configure|remove}"
 	exit 1
 esac

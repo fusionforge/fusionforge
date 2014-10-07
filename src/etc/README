@@ -1,6 +1,2 @@
-# Generated files are removed from source tree
-# Use 
-../utils/manage-apache-config.sh build
-# to build config files
-# or just 
-# sh README in this directory
+Build-time configuration.
+Cf. ../templates/ for install-time configuration.

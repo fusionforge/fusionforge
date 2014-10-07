@@ -22,6 +22,7 @@
 
 require_once 'Widget.class.php';
 require_once $gfwww.'include/my_utils.php';
+require_once $gfcommon.'include/MonitorElement.class.php';
 
 /**
  * Widget_MyMonitoredForums
@@ -41,57 +42,22 @@ class Widget_MyMonitoredForums extends Widget {
 	function getContent() {
 		global $HTML;
 		$html_my_monitored_forums = '';
-		$sql = "SELECT DISTINCT groups.group_id, groups.group_name,
-			forum_group_list.group_forum_id, forum_group_list.forum_name ".
-			"FROM groups,forum_group_list,forum_monitored_forums ".
-			"WHERE groups.group_id=forum_group_list.group_id ".
-			"AND groups.status = 'A' ".
-			"AND forum_group_list.group_forum_id=forum_monitored_forums.forum_id ".
-			"AND forum_monitored_forums.user_id=$1 ";
-		$um = UserManager::instance();
-		$current_user = $um->getCurrentUser();
-		if ($current_user->getStatus()=='S') {
-			$projects = $current_user->getProjects();
-			$sql .= "AND groups.group_id IN (". implode(',', $projects) .") ";
-		}
-		//$sql .= "GROUP BY groups.group_id ORDER BY groups.group_id ASC LIMIT 100";
-		$sql .= "ORDER BY groups.group_id ASC LIMIT 100";
-
-		$result = db_query_params($sql, array(user_getid()));
-		$glist = array();
-		while ($r = db_fetch_array($result)) {
-			if (forge_check_perm('project', $r['group_id'], 'read')
-					&& forge_check_perm('forum', $r['group_forum_id'], 'read')) {
-				$glist[] = serialize(array($r['group_id'], $r['group_name']));
-			}
-		}
-		$glist = array_unique($glist);
-		$rows = count($glist);
-		if (!$result || $rows < 1) {
+		$monitorElementObject = new MonitorElement('forum');
+		$distinctMonitorGroupIdsArray = $monitorElementObject->getMonitoredDistinctGroupIdsByUserIdInArray(user_getid());
+		if (!$distinctMonitorGroupIdsArray || count($distinctMonitorGroupIdsArray) < 1) {
 			$html_my_monitored_forums .= $HTML->warning_msg(_('You are not monitoring any forums.')).html_e('p', array(), _("If you monitor forums, you will be sent new posts in the form of an email, with a link to the new message.")).html_e('p', array(), _("You can monitor forums by clicking on the appropriate menu item in the discussion forum itself."));
 		} else {
-			$request =& HTTPRequest::instance();
-			$html_my_monitored_forums .= $HTML->listTableTop();
-			foreach ($glist as $group) {
-				list($group_id, $group_name) = unserialize($group);
-
-				$sql2="SELECT forum_group_list.group_forum_id,forum_group_list.forum_name ".
-					"FROM groups,forum_group_list,forum_monitored_forums ".
-					"WHERE groups.group_id=forum_group_list.group_id ".
-					"AND groups.group_id=$1".
-					"AND forum_group_list.group_forum_id=forum_monitored_forums.forum_id ".
-					"AND forum_monitored_forums.user_id=$2 LIMIT 100";
-
-				$result2 = db_query_params($sql2, array($group_id, user_getid()));
-				$flist = array();
-				while ($r = db_fetch_array($result2)) {
-					if (forge_check_perm('forum', $r['group_forum_id'], 'read')) {
-						$flist[] = $r;
-					}
+			$validDistinctMonitorGroupIdsArray = array();
+			foreach ($distinctMonitorGroupIdsArray as $distinctMonitorGroupId) {
+				if (forge_check_perm('forum_admin', $distinctMonitorGroupId, 'read')) {
+					$validDistinctMonitorGroupIdsArray[] = $distinctMonitorGroupId;
+				} else {
+					// Oh ho! we found some monitored elements where user has no read access. Let's clean the situation
+					$monitorElementObject->disableMonitoringForGroupIdByUserId($distinctMonitorGroupId, user_getid());
 				}
-
-				$rows2 = count($flist);
-
+			}
+			if (count($validDistinctMonitorGroupIdsArray)) {
+				$request =& HTTPRequest::instance();
 				$vItemId = new Valid_UInt('hide_item_id');
 				$vItemId->required();
 				if ($request->valid($vItemId)) {
@@ -99,7 +65,6 @@ class Widget_MyMonitoredForums extends Widget {
 				} else {
 					$hide_item_id = null;
 				}
-
 				$vForum = new Valid_WhiteList('hide_forum', array(0, 1));
 				$vForum->required();
 				if ($request->valid($vForum)) {
@@ -107,28 +72,53 @@ class Widget_MyMonitoredForums extends Widget {
 				} else {
 					$hide_forum = null;
 				}
+				$setListTableTop = true;
+				foreach ($validDistinctMonitorGroupIdsArray as $validDistinctMonitorGroupId) {
+					$groupObject = group_get_object($validDistinctMonitorGroupId);
+					$monitoredForumIdsArray = $monitorElementObject->getMonitoredIdsByGroupIdByUserIdInArray($validDistinctMonitorGroupId, user_getid());
+					$validMonitoredForumIds = array();
+					foreach ($monitoredForumIdsArray as $monitoredForumId) {
+						if (forge_check_perm('forum', $monitoredForumId, 'read')) {
+							$validMonitoredForumIds[] = $monitoredForumId;
+						} else {
+							// Oh ho! we found some monitored elements where user has no read access. Let's clean the situation
+							$monitorElementObject->disableMonitoringByUserId($monitoredForumId, user_getid());
+						}
+					}
+					if (count($validMonitoredForumIds)) {
+						if ($setListTableTop) {
+							$html_my_monitored_forums .= $HTML->listTableTop();
+							$setListTableTop = false;
+						}
 
-				list($hide_now,$count_diff,$hide_url) = my_hide_url('forum',$group_id,$hide_item_id,$rows2,$hide_forum);
-				$count_new = max(0, $count_diff);
-				$cells = array();
-				$cells[] = array($hide_url.util_make_link('/forum/?group_id='.$group_id, $group_name).'    ['.$rows2.($count_new ? ', '.html_e('b', array(), sprintf(_('%s new'), $count_new)).']' : ']'),
-						'colspan' => 2);
-				$html_hdr = $HTML->multiTableRow(array('class' => 'boxitem'), $cells);
-				$html = '';
-				for ($i=0; $i<$rows2; $i++) {
-					if (!$hide_now) {
-						$group_forum_id = $flist[$i]['group_forum_id'];
+						list($hide_now, $count_diff, $hide_url) = my_hide_url('forum', $validDistinctMonitorGroupId, $hide_item_id, count($validMonitoredForumIds), $hide_forum);
+						$count_new = max(0, $count_diff);
 						$cells = array();
-						$cells[] = array('&nbsp;&nbsp;&nbsp;-&nbsp;'.util_make_link('/forum/forum.php?forum_id='.$group_forum_id, $flist[$i]['forum_name']), 'style' => 'width:99%');
-						$cells[] = array(util_make_link('/forum/monitor.php?forum_id='.$group_forum_id.'&group_id='.$group_id.'&stop=1',
+						$cells[] = array($hide_url.util_make_link('/forum/?group_id='.$validDistinctMonitorGroupId, $groupObject->getPublicName()).'    ['.count($validMonitoredForumIds).($count_new ? ', '.html_e('b', array(), sprintf(_('%s new'), $count_new)).']' : ']'), 'colspan' => 2);
+						$html_hdr = $HTML->multiTableRow(array('class' => 'boxitem'), $cells);
+						$html = '';
+						if (!$hide_now) {
+							foreach ($validMonitoredForumIds as $key => $validMonitoredForumId) {
+								$forumObject = forum_get_object($validMonitoredForumId);
+								$cells = array();
+								$cells[] = array('&nbsp;&nbsp;&nbsp;-&nbsp;'.util_make_link('/forum/forum.php?forum_id='.$validMonitoredForumId, $forumObject->getName()), 'style' => 'width:99%');
+								$cells[] = array(util_make_link('/forum/monitor.php?forum_id='.$validMonitoredForumId.'&group_id='.$groupObject->getID().'&stop=1',
 										$HTML->getDeletePic(_('Stop Monitoring'), _('Stop Monitoring'), array('onClick' => 'return confirm("'._('Stop monitoring this forum?').'")'))),
-								'class' => 'align-center');
-						$html .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
+										'class' => 'align-center');
+								$html .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($key, true)), $cells);
+							}
+						}
+						$html_my_monitored_forums .= $html_hdr.$html;
+					} else {
+						$html_my_monitored_forums .= $HTML->warning_msg(_('You are not monitoring any forums.')).html_e('p', array(), _("If you monitor forums, you will be sent new posts in the form of an email, with a link to the new message.")).html_e('p', array(), _("You can monitor forums by clicking on the appropriate menu item in the discussion forum itself."));
+					}
+					if (!$setListTableTop) {
+						$html_my_monitored_forums .= $HTML->listTableBottom();
 					}
 				}
-				$html_my_monitored_forums .= $html_hdr.$html;
+			} else {
+				$html_my_monitored_forums .= $HTML->warning_msg(_('You are not monitoring any forums.')).html_e('p', array(), _("If you monitor forums, you will be sent new posts in the form of an email, with a link to the new message.")).html_e('p', array(), _("You can monitor forums by clicking on the appropriate menu item in the discussion forum itself."));
 			}
-			$html_my_monitored_forums .= $HTML->listTableBottom();
 		}
 		return $html_my_monitored_forums;
 	}

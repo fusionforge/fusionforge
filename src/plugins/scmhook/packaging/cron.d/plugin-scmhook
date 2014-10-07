@@ -1,2 +1,0 @@
-# Apply hooks every hour
-0 * * * * root forge_run_plugin_job scmhook updateScmRepo.php

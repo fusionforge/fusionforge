@@ -5,8 +5,8 @@
  * Copyright 2009-2011, Franck Villaume - Capgemini
  * Copyright 2009, Fabien Dubois - Capgemini
  * Copyright 2010, Antoine Mercadal - Capgemini
- * Copyright 2011, Franck Villaume - TrivialDev
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2011,2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -35,7 +35,6 @@ if (!$type) {
 	exit_missing_param($_SERVER['HTTP_REFERER'], array('No TYPE specified'), 'mantisbt');
 }
 
-global $use_tooltips;
 $editable = 1;
 $mantisbt = plugin_get_object('mantisbt');
 
@@ -72,7 +71,7 @@ switch ($type) {
 		$view = getStringFromRequest('view');
 		if ($mantisbtConf['id_mantisbt'] === 0) {
 			$warning_msg = _('The mantisbt plugin for this project is not initialized.');
-			$redirect_url = '/plugins/'.$mantisbt->name.'/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&view=init';
+			$redirect_url = '/plugins/'.$mantisbt->name.'/?type=admin&group_id='.$group_id.'&view=init';
 			session_redirect($redirect_url);
 		}
 
@@ -80,13 +79,13 @@ switch ($type) {
 		if (isset($user)) {
 			$userperm = $group->getPermission();
 			if ($userperm->IsMember()) {
-				$mantisbtUserConf = $mantisbt->getUserConf($user->getID());
+				$mantisbtUserConf = $mantisbt->getUserConf($mantisbtConf['url']);
 				if ($mantisbtUserConf) {
 					$username = $mantisbtUserConf['user'];
 					$password = $mantisbtUserConf['password'];
 				} else {
-					$warning_msg = _('Your mantisbt user is not initialized.');
-					session_redirect('/plugins/'.$mantisbt->name.'/?type=user&pluginname='.$mantisbt->name.'&view=inituser');
+					$warning_msg = _('Your mantisbt user is not initialized for this URL.');
+					session_redirect('/plugins/'.$mantisbt->name.'/?type=user&view=inituser&urlsetup='.urlencode($mantisbtConf['url']));
 				}
 				$action = getStringFromRequest('action');
 			}
@@ -108,18 +107,18 @@ switch ($type) {
 		global $gfplugins;
 
 		switch ($action) {
-			case "updateIssue":
-			case "addNote":
-			case "addIssue":
-			case "deleteNote":
-			case "addAttachment":
-			case "deleteAttachment": {
+			case 'updateIssue':
+			case 'addNote':
+			case 'addIssue':
+			case 'deleteNote':
+			case 'addAttachment':
+			case 'deleteAttachment': {
 				include($gfplugins.$mantisbt->name.'/action/'.$action.'.php');
 				break;
 			}
-			case "updateNote":
-			case "privateNote":
-			case "publicNote": {
+			case 'updateNote':
+			case 'privateNote':
+			case 'publicNote': {
 				include($gfplugins.$mantisbt->name.'/action/updateNote.php');
 				break;
 			}
@@ -141,6 +140,7 @@ switch ($type) {
 		break;
 	}
 	case 'user': {
+		global $gfplugins;
 		if (!session_loggedin()) {
 			exit_not_logged_in();
 		}
@@ -148,55 +148,74 @@ switch ($type) {
 		if (!($user) || !($user->usesPlugin($mantisbt->name))) {
 			exit_error(sprintf(_('First activate the User\'s %s plugin through Account Maintenance Page'), $mantisbt->name), 'my');
 		}
-
-		$action = getStringFromRequest('action');
-		$view = getStringFromRequest('view');
-		$sort = getStringFromRequest('sort');
-		$dir = getStringFromRequest('dir');
-		$action = getStringFromRequest('action');
-		$idBug = getStringFromRequest('idBug');
-		$idNote = getStringFromRequest('idNote');
-		$page = getStringFromRequest('page');
-
-		if ($view != 'inituser' && $action != 'inituser') {
-			$mantisbtConf = $mantisbt->getUserConf($user->getID());
-			if ($mantisbtConf) {
-				$username = $mantisbtConf['user'];
-				$password = $mantisbtConf['password'];
-			}  else {
-				$warning_msg = _('Your mantisbt user is not initialized.');
-				$redirect_url = '/plugins/'.$mantisbt->name.'/?type=user&pluginname='.$mantisbt->name.'&view=inituser';
-				session_redirect($redirect_url);
+		$projects = $user->getGroups();
+		$validProjectIds = array();
+		$urlsMantisBTConf = array();
+		foreach ($projects as $project) {
+			if ($project->usesPlugin($mantisbt->name) && $mantisbt->isProjectMantisCreated($project->getID())) {
+				$validProjects[] = $project;
+				$projectMantisBTConf = $mantisbt->getMantisBTConf($project->getID());
+				$urlsMantisBTConf[] = $projectMantisBTConf['url'];
 			}
 		}
 
-		switch ($action) {
-			case 'inituser':
-			case 'updateIssue':
-			case 'updateNote':
-			case 'addNote':
-			case 'deleteNote':
-			case 'addAttachment':
-			case 'deleteAttachment':
-			case 'updateuserConf': {
-				global $gfplugins;
-				include($gfplugins.$mantisbt->name.'/action/'.$action.'.php');
-				break;
-			}
-		}
+		if (count($validProjects)) {
+			$urlsMantisBTConf = array_unique($urlsMantisBTConf);
+			$action = getStringFromRequest('action');
+			$view = getStringFromRequest('view');
+			$sort = getStringFromRequest('sort');
+			$dir = getStringFromRequest('dir');
+			$action = getStringFromRequest('action');
+			$idBug = getStringFromRequest('idBug');
+			$idNote = getStringFromRequest('idNote');
+			$page = getStringFromRequest('page');
 
-		// Si la variable $_GET['page'] existe...
-		if($page != null && $page != '') {
-			$pageActuelle=intval($page);
+			if ($view != 'inituser' && $action != 'inituser') {
+				$userMantisBTConf = array();
+				foreach ($urlsMantisBTConf as $urlMantisBTConf) {
+					$mantisbtConf = $mantisbt->getUserConf($urlMantisBTConf);
+					if ($mantisbtConf) {
+						$userMantisBTConf[] = $mantisbtConf;
+					}
+				}
+
+				if (!count($userMantisBTConf)) {
+					$warning_msg = _('Your mantisbt user is not initialized.');
+					$redirect_url = '/plugins/'.$mantisbt->name.'/?type=user&view=inituser';
+					session_redirect($redirect_url);
+				}
+			}
+
+			switch ($action) {
+				case 'addAttachment':
+				case 'addNote':
+				case 'deleteAttachment':
+				case 'deleteNote':
+				case 'deleteuserConf':
+				case 'inituser':
+				case 'updateIssue':
+				case 'updateNote':
+				case 'updateuserConf': {
+					include($gfplugins.$mantisbt->name.'/action/'.$action.'.php');
+					break;
+				}
+			}
+
+			// Si la variable $_GET['page'] existe...
+			if($page != null && $page != '') {
+				$pageActuelle=intval($page);
+			} else {
+				$pageActuelle=1; // La page actuelle est la n°1
+			}
+
+			$format = "%07d";
+			// do the job
+
+			$mantisbt->getHeader('user');
+			include($gfplugins.$mantisbt->name.'/www/user/index.php');
 		} else {
-			$pageActuelle=1; // La page actuelle est la n°1
+			echo $HTML->information(_('None of your projects are using MantisBT plugin.'));
 		}
-
-		$format = "%07d";
-		// do the job
-
-		$mantisbt->getHeader('user');
-		include($mantisbt->name.'/www/user/index.php');
 		break;
 	}
 	case 'admin': {
@@ -219,7 +238,7 @@ switch ($type) {
 			exit_no_group();
 		}
 		if (!$group->usesPlugin($mantisbt->name)) {//check if the group has the MantisBT plugin active
-			exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'),$mantisbt->name),'home');
+			exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'),$mantisbt->name), 'home');
 		}
 		if ($group->isError()) {
 			$error_msg .= $group->getErrorMessage();
@@ -232,12 +251,12 @@ switch ($type) {
 		if ($view != 'init' && $action != 'init') {
 			if ($mantisbtConf['id_mantisbt'] === 0) {
 				$warning_msg = _('The mantisbt plugin for this project is not initialized.');
-				$redirect_url = '/plugins/'.$mantisbt->name.'/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&view=init';
+				$redirect_url = '/plugins/'.$mantisbt->name.'/?type=admin&group_id='.$group_id.'&view=init';
 				session_redirect($redirect_url);
 			}
 
 			if (isset($user)) {
-				$mantisbtUserConf = $mantisbt->getUserConf($user->getID());
+				$mantisbtUserConf = $mantisbt->getUserConf($mantisbtConf['url']);
 				if ($mantisbtUserConf) {
 					$username = $mantisbtUserConf['user'];
 					$password = $mantisbtUserConf['password'];
@@ -247,7 +266,7 @@ switch ($type) {
 			// no user init ? we shoud force this user to init his account
 			if (!isset($username) || !isset($password)) {
 				$warning_msg = _('Your mantisbt user is not initialized.');
-				session_redirect('/plugins/'.$mantisbt->name.'/?type=user&pluginname='.$mantisbt->name.'&view=inituser');
+				session_redirect('/plugins/'.$mantisbt->name.'/?type=user&view=inituser');
 			}
 		}
 

@@ -47,7 +47,7 @@ site_user_header(array('title'=> _('Manage Authorized Keys')));
 $sshKeysArray = $u->getAuthorizedKeys();
 if (count($sshKeysArray)) {
 	echo $HTML->boxTop(_('Available keys'));
-	$tabletop = array(_('Name'), _('Algorithm'), _('Fingerprint'), _('Uploaded'), _('Ready ?'), _('Actions'));
+	$tabletop = array(_('Name'), _('Algorithm'), _('Fingerprint'), _('Uploaded'), _('Actions'));
 	$classth = array('', '', '', '', '', '', 'unsortable');
 	echo $HTML->listTableTop($tabletop, array(), 'sortable_sshkeys_listlinks', 'sortable', $classth);
 	foreach($sshKeysArray as $sshKey) {
@@ -56,11 +56,6 @@ if (count($sshKeysArray)) {
 		$cells[][] = $sshKey['algorithm'];
 		$cells[][] = $sshKey['fingerprint'];
 		$cells[][] = date(_('Y-m-d H:i'), $sshKey['upload']);
-		if ($sshKey['deploy']) {
-			$cells[][] = html_image('docman/validate.png', 22, 22, array('alt'=>_('ssh key is deployed.'),'title'=>_('ssh key is deployed.')));
-		} else {
-			$cells[][] = html_image('waiting.png', 22, 22, array('alt'=>_('ssh key is not deployed yet.'),'title'=>_('ssh key is not deployed yet.')));
-		}
 		$cells[][] = util_make_link('/account/?&action=deletesshkey&keyid='.$sshKey['keyid'], html_image('docman/trash-empty.png',22,22,array('alt'=>_('Delete this ssh key.'))), array('title' => _('Delete this ssh key.')));
 		echo $HTML->multiTableRow(array(), $cells);
 	}
@@ -69,7 +64,7 @@ if (count($sshKeysArray)) {
 }
 echo $HTML->openForm(array('action' => util_make_uri('/account/?action=addsshkey'), 'method' => 'post', 'enctype' => 'multipart/form-data'));
 echo html_e('h2', array(), _('Add a new ssh key'));
-echo html_e('p', array(), _('To avoid having to type your password every time for your CVS/SSH developer account, you may upload your public key(s) here and they will be placed on the server in your ~/.ssh/authorized_keys file. This is done by a cron job, so it may not happen immediately.  Please allow for a one hour delay.'));
+echo html_e('p', array(), _('To avoid having to type your password every time for your CVS/SSH developer account, you may upload your public key(s) here and they will be placed on the server in your ~/.ssh/authorized_keys file. Uploaded SSH keys are effective <em>immediately</em>.'));
 echo html_e('p', array(), _('To generate a public key, run the program \'ssh-keygen\' (you can use both protocol 1 or 2). The public key will be placed at \'~/.ssh/identity.pub\' (protocol version 1) and \'~/.ssh/id_dsa.pub\' or \'~/.ssh/id_rsa.pub\' (protocol version 2). Read the ssh documentation for further information on sharing keys.'));
 echo html_e('p', array(), html_e('em', array(), _('Important: Make sure there are no line breaks. After submitting, verify that the number of keys in your file is what you expected.')));
 echo html_e('textarea', array('rows' => 10,  'cols' => 80, 'name' => 'authorized_key', 'style' => 'width:90%;'), '', false);

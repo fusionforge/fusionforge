@@ -48,7 +48,11 @@ class admsswPlugin extends Plugin {
 	public function __construct($id=0) {
 		$this->Plugin($id) ;
 		$this->name = "admssw";
-		$this->text = "ADMS.SW"; // To show in the tabs, use...
+		$this->text = _("ADMS.SW"); // To show in the tabs, use...
+		$this->pkg_desc =
+_("This plugin provides ADMS.SW additions to the DOAP RDF documents for
+projects on /projects URLs with content-negotiation
+(application/rdf+xml).");
 
 		// The standard RDF namespaces that will be used in the plugin
 		$this->ns = array(
@@ -70,6 +74,13 @@ class admsswPlugin extends Plugin {
 
 		// Add the doaprdf plugin's namespaces
 		$doaprdfplugin = plugin_get_object ("doaprdf");
+		if ($doaprdfplugin == NULL)
+		{
+			// FIXME: constructor use of plugin_get_object
+			// requires 'doaprdf' to be listed before
+			// 'admssw' _in the plugins DB table_.
+			return;
+		}
 		$ns = $doaprdfplugin->doapNameSpaces();
 		foreach($ns as $s => $u)
 		{
@@ -428,7 +439,7 @@ class admsswPlugin extends Plugin {
 	 */
 	public function getProjectListSize() {
 		// same as for trove's full list
- 		$projects = get_public_active_projects_asc();
+ 		$projects = group_get_public_active_projects_asc();
 		return count($projects);
 	}
 
@@ -464,7 +475,7 @@ class admsswPlugin extends Plugin {
 		$res->setProp('adms:supportedSchema', 'ADMS.SW v1.0');
 
 		// same as for trove's full list
-		$projects = get_public_active_projects_asc();
+		$projects = group_get_public_active_projects_asc();
 
 		if ( isset($chunk) && isset($chunksize) ) {
 			// TODO : do some checks on $chunk $chunksize values

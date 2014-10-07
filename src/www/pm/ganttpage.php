@@ -34,7 +34,8 @@ html_use_jqueryteamworkgantt();
 html_generic_fileheader(_('Gantt Chart'));
 echo $HTML->getJavascripts();
 echo $HTML->getStylesheets();
-echo '</head><body>';
+echo '</head>';
+echo html_ao('body');
 echo html_ao('div', array('id' => 'maindiv'));
 
 /* define global vars */

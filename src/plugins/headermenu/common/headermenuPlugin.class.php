@@ -30,6 +30,9 @@ class headermenuPlugin extends Plugin {
 		$this->Plugin();
 		$this->name = 'headermenu';
 		$this->text = _('Menu Tabs Manager');
+		$this->pkg_desc =
+_("This plugin allows each project to define extra tabs with arbitrary
+titles and links.");
 		$this->_addHook('headermenu');
 		$this->_addHook('site_admin_option_hook');
 		$this->_addHook('outermenu');

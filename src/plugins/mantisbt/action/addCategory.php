@@ -3,7 +3,7 @@
  * MantisBT plugin
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2014 Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -33,14 +33,14 @@ $nameCategory = getStringFromRequest('nameCategory');
 
 if (!empty($nameCategory)) {
 	try {
-		$clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
-		$clientSOAP->__soapCall('mc_project_add_category', array("username" => $username, "password" => $password, "p_project_id" => $mantisbtConf['id_mantisbt'], "p_category_name" => $nameCategory));
+		$clientSOAP = new SoapClient($mantisbtConf['url'].'/api/soap/mantisconnect.php?wsdl', array('trace' => true, 'exceptions' => true));
+		$clientSOAP->__soapCall('mc_project_add_category', array('username' => $username, 'password' => $password, 'p_project_id' => $mantisbtConf['id_mantisbt'], 'p_category_name' => $nameCategory));
 	} catch (SoapFault $soapFault) {
 		$error_msg = _('Task failed')._(': ').$soapFault->faultstring;
-		session_redirect('plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name);
+		session_redirect('/plugins/'.$mantisbt->name.'/?type=admin&group_id='.$group_id);
 	}
 	$feedback = _('Category added successfully');
-	session_redirect('plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name);
+	session_redirect('/plugins/'.$mantisbt->name.'/?type=admin&group_id='.$group_id);
 }
 $warning_msg = _('Missing category name');
-session_redirect('plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name);
+session_redirect('/plugins/'.$mantisbt->name.'/?type=admin&group_id='.$group_id);

@@ -32,7 +32,8 @@ require_once $gfcommon.'forum/ForumAdmin.class.php';
 require_once $gfcommon.'forum/ForumFactory.class.php';
 require_once $gfcommon.'forum/ForumMessageFactory.class.php';
 require_once $gfcommon.'forum/ForumMessage.class.php';
-require_once $gfcommon.'include/TextSanitizer.class.php'; // to make the HTML input by the user safe to store
+require_once $gfcommon.'include/MonitorElement.class.php';
+require_once $gfcommon.'include/User.class.php';
 
 global $HTML;
 
@@ -50,12 +51,13 @@ session_require_perm('forum_admin', $f->Group->getID());
 
 forum_header(array('title'=>sprintf(_('Forum %s Monitoring Users'), $f->getName())));
 
-$res = db_query_params('select users.user_id,users.user_name, users.email, users.realname from
-			users,forum_monitored_forums fmf where fmf.user_id=users.user_id and
-			fmf.forum_id =$1 order by users.user_id',
-			array($group_forum_id));
-
-if ($res && db_numrows($res) == 0) {
+$MonitorElementObject = new MonitorElement('forum');
+$monitorUsersIdArray = $MonitorElementObject->getMonitorUsersIdsInArray($group_forum_id);
+if (!$monitorUsersIdArray) {
+	echo $HTML->error_msg($MonitorElementObject->getErrorMessage());
+	forum_footer();
+	exit;
+} elseif (count($monitorUsersIdArray) == 0) {
 	echo $HTML->information(_('No Monitoring Users'));
 	forum_footer();
 	exit;
@@ -64,11 +66,12 @@ if ($res && db_numrows($res) == 0) {
 $tableHeaders = array(_('User'), _('Email'), _('Real Name'));
 echo $HTML->listTableTop($tableHeaders);
 
-while ($arr = db_fetch_array($res)) {
+foreach ($monitorUsersIdArray as $monitorUsersId) {
+	$userObject = user_get_object($monitorUsersId);
 	$cells = array();
-	$cells[][] = $arr['user_name'];
-	$cells[][] = $arr['email'];
-	$cells[][] = $arr['realname'];
+	$cells[][] = $userObject->getUnixName();
+	$cells[][] = $userObject->getEmail();
+	$cells[][] = $userObject->getRealName();
 	echo $HTML->multiTableRow(array(), $cells);
 }
 echo $HTML->listTableBottom();

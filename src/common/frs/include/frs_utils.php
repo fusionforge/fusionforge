@@ -189,7 +189,7 @@ function frs_add_file_from_form($release, $type_id, $processor_id, $release_date
 		} elseif ($frsf->isError()) {
 			return $frsf->getErrorMessage();
 		} else {
-			if (!$frsf->create($fname,$infile,$type_id,$processor_id,$release_date)) {
+			if (!$frsf->create($fname, $infile, $type_id, $processor_id, $release_date)) {
 				return $frsf->getErrorMessage();
 			}
 			return true;

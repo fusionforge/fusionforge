@@ -3,7 +3,7 @@
  * MantisBT plugin
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -34,13 +34,11 @@ $idVersion=getIntFromRequest('idVersion');
 
 try {
 	if (!isset($clientSOAP))
-		$clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+		$clientSOAP = new SoapClient($mantisbtConf['url'].'/api/soap/mantisconnect.php?wsdl', array('trace' => true, 'exceptions' => true));
 
-	// currently this soap call is not included in mantisbt 1.2.x
-	//$detailVersion = $clientSOAP->__soapCall('mc_project_get_versions', array("username" => $username, "password" => $password, "version_id" => $idVersion));
-	$arrVersions = $clientSOAP->__soapCall('mc_project_get_versions', array("username" => $username, "password" => $password, "project_id" => $mantisbtConf['id_mantisbt']));
+	$arrVersions = $clientSOAP->__soapCall('mc_project_get_versions', array('username' => $username, 'password' => $password, 'project_id' => $mantisbtConf['id_mantisbt']));
 } catch (SoapFault $soapFault) {
-	echo $HTML->warning_msg(_('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring);
+	echo $HTML->warning_msg(_('Technical error occurs during data retrieving')._(': ').$soapFault->faultstring);
 	$errorPage = true;
 }
 
@@ -54,17 +52,9 @@ foreach ($arrVersions as $key => $currentVersion) {
 
 if (!isset($errorPage)){
 	echo $HTML->boxTop(_('Version Detail'));
-	echo '<form method="POST" action="?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&action=updateVersion">';
-	echo '<table>';
-	echo	'<thead>';
-	echo	'<tr>';
-	echo		'<th>'._('Version').'</th>';
-	echo		'<th>'._('Description').'</th>';
-	echo		'<th>'._('Target Date').'</th>';
-	echo		'<th>'._('Type').'</th>';
-	echo	'</tr>';
-	echo	'</thead>';
-	echo	'<tbody>';
+	echo $HTML->openForm(array('method' => 'post', 'action' => util_make_uri('/plugins/'.$mantisbt->name.'/?type=admin&group_id='.$group_id.'&action=updateVersion')));
+	$titleArr = array(_('Version'), _('Description'), _('Target Date'), _('Type'));
+	echo $HTML->listTableTop($titleArr);
 	echo	'<tr>';
 	echo		'<td><input type="text" name="version_name" value="'.htmlspecialchars($detailVersion->name,ENT_QUOTES).'" /></td>';
 	(isset($detailVersion->description)) ? $description_value = htmlspecialchars($detailVersion->description,ENT_QUOTES) : $description_value = '';
@@ -82,21 +72,20 @@ if (!isset($errorPage)){
 	echo			'</select>';
 	echo		'</td>';
 	echo	'</tr>';
-	echo	'</tbody>';
-	echo '</table>';
+	echo $HTML->listTableBottom();
 // need to be implemented
 // 	if ($group->usesPlugin('projects-hierarchy')) {
 // 		echo '<input type="checkbox" name="transverse" value="1">'._('Cross version (son included)').'</input>';
 // 	}
-	echo '<input type="hidden" name="version_id" value="'.$idVersion.'"></input>';
-	echo '<input type="hidden" name="version_old_name" value="'.$detailVersion->name.'"></input>';
+	echo '<input type="hidden" name="version_id" value="'.$idVersion.'" />';
+	echo '<input type="hidden" name="version_old_name" value="'.$detailVersion->name.'" />';
 	echo '<br/>';
 	echo '<input type="submit" value="'. _('Update') .'" />';
-	echo '</form>';
+	echo $HTML->closeForm();
 	echo $HTML->boxBottom();
 
-	echo '<form method="POST" action="?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&action=deleteVersion">';
-	echo '<input type="hidden" name="deleteVersion" value="'.$idVersion.'"></input>';
+	echo $HTML->openForm(array('method' => 'post', 'action' => util_make_uri('/plugins/'.$mantisbt->name.'/?type=admin&group_id='.$group_id.'&action=deleteVersion')));
+	echo '<input type="hidden" name="deleteVersion" value="'.$idVersion.'" />';
 	echo '<input type="submit" value="'. _('Delete') .'" />';
-	echo '</form>';
+	echo $HTML->closeForm();
 }

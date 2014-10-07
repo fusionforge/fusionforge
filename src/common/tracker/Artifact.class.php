@@ -51,6 +51,7 @@ require_once $gfcommon.'tracker/ArtifactMessage.class.php';
 require_once $gfcommon.'tracker/ArtifactExtraField.class.php';
 require_once $gfcommon.'tracker/ArtifactWorkflow.class.php';
 require_once $gfcommon.'tracker/ArtifactStorage.class.php';
+require_once $gfcommon.'include/MonitorElement.class.php';
 
 // This string is used when sending the notification mail for identifying the
 // user response
@@ -553,9 +554,8 @@ class Artifact extends Error {
 			ArtifactStorage::instance()->rollback();
 			return false;
 		}
-		$res = db_query_params ('DELETE FROM artifact_monitor WHERE artifact_id=$1',
-					array ($this->getID())) ;
-		if (!$res) {
+		$MonitorElementObject = new MonitorElement('artifact');
+		if (!$MonitorElementObject->clearMonitor($this->getID())) {
 			$this->setError(_('Error deleting monitor: ').db_error());
 			db_rollback();
 			ArtifactStorage::instance()->rollback();
@@ -603,50 +603,39 @@ class Artifact extends Error {
 	 * @return	bool	Always false - always use the getErrorMessage() for feedback
 	 */
 	function setMonitor() {
+		global $feedback;
 		if (session_loggedin()) {
-			$user_id=user_getid();
+			$user_id = user_getid();
 		} else {
-			$this->setError(_('Valid Email Address Required'));
+			$this->setError(_('You can only monitor if you are logged in.'));
 			return false;
 		}
 
-		$res = db_query_params ('SELECT * FROM artifact_monitor WHERE artifact_id=$1 AND user_id=$2',
-					array ($this->getID(),
-					       $user_id)) ;
-
-		if (!$res || db_numrows($res) < 1) {
-			//not yet monitoring
-			$res = db_query_params ('INSERT INTO artifact_monitor (artifact_id,user_id) VALUES ($1,$2)',
-						array ($this->getID(),
-						       $user_id)) ;
-			if (!$res) {
-				$this->setError(db_error());
-				return false;
-			} else {
-				$this->setError(_('Monitoring Started'));
+		$MonitorElementObject = new MonitorElement('artifact');
+		if (!$this->isMonitoring()) {
+			if (!$MonitorElementObject->enableMonitoringByUserId($this->getID(), $user_id)) {
+				$this->setError($MonitorElementObject->getErrorMessage());
 				return false;
 			}
+			$feedback = _('Monitoring Started');
+			return true;
 		} else {
-			//already monitoring - remove their monitor
-			db_query_params ('DELETE FROM artifact_monitor
-				WHERE artifact_id=$1
-				AND user_id=$2',
-					 array ($this->getID(),
-						$user_id)) ;
-			$this->setError(_('Monitoring Stopped'));
-			return false;
+			if (!$MonitorElementObject->disableMonitoringByUserId($this->getID(), $user_id)) {
+				$this->setError($MonitorElementObject->getErrorMessage());
+				return false;
+			}
+			$feedback = _('Monitoring Stopped');
+			return true;
 		}
+		return false;
 	}
 
 	function isMonitoring() {
 		if (!session_loggedin()) {
 			return false;
 		}
-		$result = db_query_params ('SELECT count(*) AS count FROM artifact_monitor WHERE user_id=$1 AND artifact_id=$2',
-					   array (user_getid(),
-						  $this->getID())) ;
-		$row_count = db_fetch_array($result);
-		return $result && $row_count['count'] > 0;
+		$MonitorElementObject = new MonitorElement('artifact');
+		return $MonitorElementObject->isMonitoredByUserId($this->getID(), user_getid());
 	}
 
 	/**
@@ -655,9 +644,8 @@ class Artifact extends Error {
 	 * @return	array of email addresses monitoring this Artifact.
 	 */
 	function getMonitorIds() {
-		$res = db_query_params ('SELECT user_id	FROM artifact_monitor WHERE artifact_id=$1',
-					array ($this->getID())) ;
-		return array_unique(array_merge($this->ArtifactType->getMonitorIds(),util_result_column_to_array($res)));
+		$MonitorElementObject = new MonitorElement('artifact');
+		return $MonitorElementObject->getMonitorUsersIdsInArray($this->getID());
 	}
 
 	/**
@@ -1592,12 +1580,15 @@ class Artifact extends Error {
 			$body .= "\nYou can respond by visiting: ".
 				"\n".util_make_url ('/tracker/?func=detail&atid='. $this->ArtifactType->getID() .
 					    "&aid=". $this->getID() .
-					    "&group_id=". $this->ArtifactType->Group->getID()) .
+					    "&group_id=". $this->ArtifactType->Group->getID());
+			if (false) {  // currently not working
+				$body .=
 				"\nOr by replying to this e-mail entering your response between the following markers: ".
 				"\n".ARTIFACT_MAIL_MARKER.
 				"\n(enter your response here, only in plain text format)".
-				"\n".ARTIFACT_MAIL_MARKER.
-				"\n";
+				"\n".ARTIFACT_MAIL_MARKER;
+			}
+			$body .= "\n";
 		}
 
 		$body .= "\n".$this->marker('status',$changes).

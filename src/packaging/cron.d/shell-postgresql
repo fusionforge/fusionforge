@@ -1,9 +1,0 @@
-#
-# Regular cron jobs for shell-postgresql
-#
-
-# SCM/user/group update
-15 * * * * root forge_run_job homedirs.php
-
-# SSH keys
-20 * * * * root forge_run_job ssh_create.php

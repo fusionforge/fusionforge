@@ -299,8 +299,8 @@ if (forge_get_config('use_shell')) {
 	<br />'._('SSH Shared Authorized Keys')._(': ').'<strong>';
 		$sshKeysArray = $u->getAuthorizedKeys();
 		if (is_array($sshKeysArray) && count($sshKeysArray)) {
-			$tabletop = array(_('Name'), _('Algorithm'), _('Fingerprint'), _('Uploaded'), _('Ready ?'));
-			$classth = array('', '', '', '', '');
+			$tabletop = array(_('Name'), _('Algorithm'), _('Fingerprint'), _('Uploaded'));
+			$classth = array('', '', '', '');
 			echo $HTML->listTableTop($tabletop, false, 'sortable_sshkeys_listlinks', 'sortable', $classth);
 			foreach($sshKeysArray as $sshKey) {
 				$cells = array();
@@ -308,11 +308,6 @@ if (forge_get_config('use_shell')) {
 				$cells[][] = $sshKey['algorithm'];
 				$cells[][] = $sshKey['fingerprint'];
 				$cells[][] = date(_('Y-m-d H:i'), $sshKey['upload']);
-				if ($sshKey['deploy']) {
-					$cells[][] = html_image('docman/validate.png', 22, 22, array('alt'=>_('ssh key is deployed.'), 'title'=>_('ssh key is deployed.')));
-				} else {
-					$cells[][] = html_image('waiting.png', 22, 22, array('alt'=>_('ssh key is not deployed yet.'), 'title'=>_('ssh key is not deployed yet.')));
-				}
 				echo $HTML->multiTableRow(array(), $cells);
 			}
 			echo $HTML->listTableBottom();

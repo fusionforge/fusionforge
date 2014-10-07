@@ -1,3 +1,0 @@
-plugins/authldap/include              @PLUGINS_PATH@/authldap/
-plugins/authldap/www              @PLUGINS_PATH@/authldap/
-plugins/authldap/etc/*.ini 	     @CONFIG_PATH@/config.ini.d/

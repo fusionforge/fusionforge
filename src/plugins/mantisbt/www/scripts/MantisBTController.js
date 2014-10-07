@@ -2,7 +2,7 @@
  * MantisBT Plugin
  *
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2011-2012, Franck Villaume - TrivialDev
+ * Copyright 2011-2012,2014 Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -27,14 +27,12 @@
 MantisBTInitController = function(params)
 {
 	this.params	= params;
-
 	this.bindControls();
 };
 
 MantisBTAdminViewController = function(params)
 {
 	this.params	= params;
-
 	this.bindControls();
 	this.initCheckboxGlobalConf();
 };

@@ -1,6 +1,0 @@
-plugins/forumml/common/*                  @PLUGINS_PATH@/forumml/common/
-plugins/forumml/include/*                 @PLUGINS_PATH@/forumml/include/
-plugins/forumml/db/*                      @PLUGINS_PATH@/forumml/db/
-plugins/forumml/bin/*                     @PLUGINS_PATH@/forumml/bin/
-plugins/forumml/www/*                     @PLUGINS_PATH@/forumml/www/
-plugins/forumml/etc/*                     @PLUGINS_PATH@/forumml/etc/

@@ -49,7 +49,7 @@ class FusionForge extends Error {
 		if (isset($forge_pkg_version)) {
 			$this->software_version = $forge_pkg_version;
 		} else {
-			$this->software_version = '5.99.50' ;
+			$this->software_version = trim(file_get_contents(dirname(__FILE__).'/../../VERSION'));
 		}
 
 		if (isset($forge_pkg_type)) {
@@ -61,38 +61,17 @@ class FusionForge extends Error {
 		return true;
 	}
 
-	function getNumberOfPublicHostedProjects() {
-		$res = db_query_params ('SELECT group_id FROM groups WHERE status=$1',
-				      array ('A'));
-		if (!$res) {
-			$this->setError('Unable to get hosted project count: '.db_error());
-			return false;
-		}
-		$count = 0;
-		$ra = RoleAnonymous::getInstance() ;
-		while ($row = db_fetch_array($res)) {
-			if ($ra->hasPermission('project_read', $row['group_id'])) {
-				$count++;
-			}
-		}
-		return $count;
-	}
-
-	function getNumberOfHostedProjects() {
-		$res = db_query_params ('SELECT group_id FROM groups WHERE status=$1',
+	/**
+	 * List full number of hosted projects, public and private
+	 */
+	function getNumberOfActiveProjects() {
+		$res = db_query_params ('SELECT count(*) FROM groups WHERE status=$1',
 					array ('A'));
 		if (!$res) {
 			$this->setError('Unable to get hosted project count: '.db_error());
 			return false;
 		}
-		$count = 0;
-		$ra = RoleAnonymous::getInstance() ;
-		while ($row = db_fetch_array($res)) {
-			if ($ra->hasPermission('project_read', $row['group_id'])) {
-				$count++;
-			}
-		}
-		return $count;
+		return $this->parseCount($res);
 	}
 
 	function getNumberOfActiveUsers() {

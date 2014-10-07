@@ -1,0 +1,10 @@
+@log_path@/access.log @log_path@/awstats.log {
+       weekly
+       missingok
+       rotate 52
+       compress
+       delaycompress
+       notifempty
+       create 640 root adm
+       sharedscripts
+}

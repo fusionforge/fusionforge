@@ -25,17 +25,13 @@ class SSHTest extends FForge_SeleniumTestCase
 {
 	function testSSH()
 	{
-		$this->skip_on_rpm_installs();
-		$this->skip_on_src_installs();
-
 		$this->init();
 
 		$this->uploadSshKey();
 	    
 		// Run the cronjobs
 		$this->reload_nscd();
-		$this->cron("homedirs.php");
-		$this->cron("ssh_create.php");
+		$this->cron("shell/homedirs.php");
 
 		$verbose = 0;
 		$v = '';

@@ -3,6 +3,7 @@
  * MantisBT plugin
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -26,10 +27,10 @@ global $mantisbt;
 global $type;
 global $idBug;
 
-echo '<form method="POST" Action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&action=addAttachment&view=viewIssue" enctype="multipart/form-data">';
+echo $HTML->openForm(array('method' => 'post', 'action' => util_make_uri('/plugins/'.$mantisbt->name.'/?type='.$type.'&group_id='.$group_id.'&idBug='.$idBug.'&action=addAttachment&view=viewIssue'), 'enctype' => 'multipart/form-data'));
 echo	'<table>';
 echo		'<tr><td>';
 echo		_('File')._(': ').'<input type="file" name="attachment" />';
 echo	'</td></tr></table>';
 echo	'<br/><input type="button" onclick="this.form.submit();this.disabled=true;" value="'._('Upload File').'" name="send">';
-echo '</form>';
+echo $HTML->closeForm();

@@ -5,7 +5,6 @@
  * Originally written by Laurent Julliard 2001, 2002, Codendi Team, Xerox
  * http://www.codendi.com
  *
- *
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -46,49 +45,49 @@ Output:
 
 function my_hide_url ($svc, $db_item_id, $item_id, $count, $hide) {
 
-    $pref_name = 'my_hide_'.$svc.$db_item_id;
-    $old_hide = $old_count = $old_pref_value = UserManager::instance()->getCurrentUser()->getPreference($pref_name);
-    if ($old_pref_value) {
-        list($old_hide,$old_count) = explode('|', $old_pref_value);
-    }
+	$pref_name = 'my_hide_'.$svc.$db_item_id;
+	$old_hide = $old_count = $old_pref_value = UserManager::instance()->getCurrentUser()->getPreference($pref_name);
+	if ($old_pref_value) {
+		list($old_hide,$old_count) = explode('|', $old_pref_value);
+	}
 
-    // Make sure they are both 0 if never set before
-    if ($old_count == false) { $old_count = 0; }
-    if ($old_hide == false) { $old_hide = 0; }
+	// Make sure they are both 0 if never set before
+	if ($old_count == false) { $old_count = 0; }
+	if ($old_hide == false) { $old_hide = 0; }
 
-    if ($item_id == $db_item_id) {
-                if (isset($hide)) {
-                    $pref_value = "$hide|$count";
-                } else {
-                    $pref_value = "$old_hide|$count";
-                    $hide = $old_hide;
-                }
-    } else {
-                if ($old_hide) {
-                    // if items are hidden keep the old count and keep pref as is
-                    $pref_value = $old_pref_value;
-                } else {
-                    // only update the item count if the items are visible
-                    // if they are hidden keep reporting the old count
-                    $pref_value = "$old_hide|$count";
-                }
-                $hide = $old_hide;
-    }
+	if ($item_id == $db_item_id) {
+		if (isset($hide)) {
+			$pref_value = "$hide|$count";
+		} else {
+			$pref_value = "$old_hide|$count";
+			$hide = $old_hide;
+		}
+	} else {
+		if ($old_hide) {
+			// if items are hidden keep the old count and keep pref as is
+			$pref_value = $old_pref_value;
+		} else {
+			// only update the item count if the items are visible
+			// if they are hidden keep reporting the old count
+			$pref_value = "$old_hide|$count";
+		}
+		$hide = $old_hide;
+	}
 
-    // Update pref value if needed
-    if ($old_pref_value != $pref_value) {
-        UserManager::instance()->getCurrentUser()->setPreference($pref_name, $pref_value);
-    }
+	// Update pref value if needed
+	if ($old_pref_value != $pref_value) {
+		UserManager::instance()->getCurrentUser()->setPreference($pref_name, $pref_value);
+	}
 
-    if ($hide) {
-                $hide_url= util_make_link('/my/?hide_'.$svc.'=0&hide_item_id='.$db_item_id, html_image('pointer_right.png', 16, 16, array('title' => _('Expand'), 'alt' => _('Expand')))).' ';
-                $hide_now = true;
-    } else {
-                $hide_url= util_make_link('/my/?hide_'.$svc.'=1&hide_item_id='.$db_item_id, html_image('pointer_down.png', 16, 16, array('title' => _('Collapse'), 'alt' => _('Collapse')))).' ';
-                $hide_now = false;
-    }
+	if ($hide) {
+		$hide_url= util_make_link('/my/?hide_'.$svc.'=0&hide_item_id='.$db_item_id, html_image('pointer_right.png', 16, 16, array('title' => _('Expand'), 'alt' => _('Expand')))).' ';
+		$hide_now = true;
+	} else {
+		$hide_url= util_make_link('/my/?hide_'.$svc.'=1&hide_item_id='.$db_item_id, html_image('pointer_down.png', 16, 16, array('title' => _('Collapse'), 'alt' => _('Collapse')))).' ';
+		$hide_now = false;
+	}
 
-    return array($hide_now, $count-$old_count, $hide_url);
+	return array($hide_now, $count-$old_count, $hide_url);
 }
 
 function my_hide($svc, $db_item_id, $item_id, $hide) {
@@ -104,47 +103,47 @@ function my_hide($svc, $db_item_id, $item_id, $hide) {
 	if ($old_hide == false) { $old_hide = 0; }
 
 	if ($item_id == $db_item_id) {
-			if (!isset($hide)) {
+		if (!isset($hide)) {
 			$hide = $old_hide;
-			}
+		}
 	} else {
-			$hide = $old_hide;
+		$hide = $old_hide;
 	}
 	return $hide;
 }
 
 function my_format_as_flag($assigned_to, $submitted_by, $multi_assigned_to=null) {
-    $AS_flag = '';
-    if ($assigned_to == user_getid()) {
-        $AS_flag = 'A';
-    } elseif ($multi_assigned_to) {
-     // For multiple assigned to
-       for ($i=0; $i<count($multi_assigned_to); $i++) {
-            if ($multi_assigned_to[$i]==user_getid()) {
-                $AS_flag = 'A';
-            }
-        }
-    }
-    if ($submitted_by == user_getid()) {
-        $AS_flag .= 'S';
-    }
-    if ($AS_flag) { $AS_flag = '[<b>'.$AS_flag.'</b>]'; }
+	$AS_flag = '';
+	if ($assigned_to == user_getid()) {
+		$AS_flag = 'A';
+	} elseif ($multi_assigned_to) {
+		// For multiple assigned to
+		for ($i=0; $i<count($multi_assigned_to); $i++) {
+			if ($multi_assigned_to[$i]==user_getid()) {
+				$AS_flag = 'A';
+			}
+		}
+	}
+	if ($submitted_by == user_getid()) {
+		$AS_flag .= 'S';
+	}
+	if ($AS_flag) { $AS_flag = '[<b>'.$AS_flag.'</b>]'; }
 
-    return $AS_flag;
+	return $AS_flag;
 }
 
 /* second case */
 function my_format_as_flag2($assignee, $submitter) {
-    $AS_flag = '';
-    if ($assignee) $AS_flag = 'A';
+	$AS_flag = '';
+	if ($assignee) $AS_flag = 'A';
 
-    if ($submitter) $AS_flag .= 'S';
+	if ($submitter) $AS_flag .= 'S';
 
-    if ($AS_flag != '') $AS_flag = '[<b>'.$AS_flag.'</b>]';
+	if ($AS_flag != '') $AS_flag = '[<b>'.$AS_flag.'</b>]';
 
-    return $AS_flag;
+	return $AS_flag;
 }
 
 function my_item_count($total, $new) {
-    return '['.$total.($new ? ", <b>".sprintf(ngettext('%d new item', '%d new items', $new), $new)."</b>]" : ']');
+	return '['.$total.($new ? ", <b>".sprintf(ngettext('%d new item', '%d new items', $new), $new)."</b>]" : ']');
 }

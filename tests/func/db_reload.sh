@@ -1,53 +1,35 @@
 #! /bin/sh
-
 # Reinitialize contents of the database to pass new tests (using the backup made in from /root/dump)
-
 # define some convenience functions
 
 is_db_up () {
-    echo "select count(*) from users;" | su - postgres -c "psql $database" > /dev/null 2>&1
+    # 'service postgresql status' is not reliable enough
+    # Also postgresql processes and control tools have too many names, esp. across distos
+    # Note: database shutdown might not be completed yet, use CHECKPOINT to reduce the risk
+    echo "SELECT COUNT(*) FROM users;" | su - postgres -c "psql $database" > /dev/null 2>&1
 }
 
-start_database () {
+stop_apache () {
 
-    echo "Starting the database"
-    if type invoke-rc.d 2>/dev/null
-    then
-	invoke-rc.d postgresql start
-    else
-	service postgresql start
-    fi
-
-    echo "Waiting for database to be up..."
-    i=0
-    while [ $i -lt 10 ] && ! is_db_up ; do
-        echo "...not yet ($(date))..."
-        i=$(( $i + 1 ))
-        sleep 5
-    done
-    if is_db_up ; then
-        echo "...OK"
-    else
-        echo "... FAIL: database still down?"
-    fi
+    echo "Stopping apache"
+    service $(forge_get_config apache_service) stop
 }
 
 stop_database () {
+    if [ "$1" = "--force" ]; then
+	# We don't care about data integrity, we're resetting it
+	killall -9 postgres
+    fi
 
     echo "Stopping the database"
-    if type invoke-rc.d 2>/dev/null
-    then
-	invoke-rc.d postgresql stop
-    else
-	service postgresql stop
-    fi
+    service postgresql stop
 
     echo "Waiting for database to be down..."
     i=0
-    while [ $i -lt 10 ] && is_db_up ; do
+    while [ $i -lt 50 ] && is_db_up ; do
         echo "...not yet ($(date))..."
         i=$(( $i + 1 ))
-        sleep 5
+        sleep 1
     done
     if ! is_db_up ; then
         echo "...OK"
@@ -56,30 +38,53 @@ stop_database () {
     fi
 }
 
+start_database () {
+
+    echo "Starting the database"
+    service postgresql start
+
+    echo "Waiting for database to be up..."
+    i=0
+    while [ $i -lt 50 ] && ! is_db_up ; do
+        echo "...not yet ($(date))..."
+        i=$(( $i + 1 ))
+        sleep 1
+    done
+    if is_db_up ; then
+        echo "...OK"
+    else
+        echo "... FAIL: database still down?"
+	ps fauxww
+    fi
+}
+
 start_apache () {
 
     echo "Starting apache"
-    if type invoke-rc.d 2>/dev/null
-    then
-    	invoke-rc.d apache2 start
-    else
-    	service httpd start
-    fi
+    service $(forge_get_config apache_service) start
 }
 
-stop_apache () {
 
-    echo "Stopping apache"
-    if type invoke-rc.d 2>/dev/null
-    then
-	invoke-rc.d apache2 stop
-    else
-	service httpd stop
+# Backup the DB, so that it can be restored for the test suite
+# Usually called from install.sh right after the first install (clean DB)
+if [ "$1" = "--backup" ]; then
+    set -e
+    forge_set_password admin myadmin
+    su - postgres -c "pg_dumpall" > /root/dump
+    su postgres -c 'psql -c CHECKPOINT'  # flush to disk
+    stop_database
+    pgdir=/var/lib/postgresql
+    if [ -e /etc/redhat-release ]; then pgdir=/var/lib/pgsql; fi
+    if [ -d $pgdir.backup ]; then
+        rm -fr $pgdir.backup
     fi
-}
+    cp -a --reflink=auto $pgdir $pgdir.backup
+    start_database
+    exit 0
+fi
 
-# Now the main program
 
+# Restore the DB
 if [ $# -eq 1 ]
 then
 	database=$1
@@ -110,7 +115,7 @@ fi
 
 stop_apache
 
-stop_database
+stop_database --force
 
 if [ -d /var/lib/postgresql ] ; then
     dbdir=/var/lib/postgresql
@@ -121,6 +126,7 @@ else
     exit 1
 fi
 
+# SCM
 for i in arch bzr cvs darcs git hg svn ; do
     repopath=`FUSIONFORGE_NO_PLUGINS=true forge_get_config repos_path scm$i`
     if [ -d "$repopath" ] && ls $repopath | grep -q .. ; then
@@ -128,6 +134,16 @@ for i in arch bzr cvs darcs git hg svn ; do
 	rm -rf $repopath/*
     fi
 done
+# Wikis
+rm -rf $(forge_get_config data_path)/plugins/mediawiki/projects/*
+rm -rf $(forge_get_config data_path)/plugins/moinmoin/wikidata/project*
+# Conf
+rm -f $(forge_get_config config_path)/config.ini.d/zzz-buildbot-*
+# SSH
+rm -rf $(forge_get_config homedir_prefix) #no trailing slash
+rm -rf $(forge_get_config groupdir_prefix) #no trailing slash
+# Too risky
+#rm -f ~/.ssh/id_rsa ~/.ssh/id_rsa.pub ~/.ssh/known_hosts
 
 # If the backup is there, restore it (it should now have been created by install.sh)
 if [ -d $dbdir.backup ]; then
@@ -166,11 +182,7 @@ start_database
 
 start_apache
 
-echo "Flushing/restarting nscd"
-rm -f /var/cache/nscd/* || true
-if type invoke-rc.d 2>/dev/null
-then
-    invoke-rc.d unscd restart || invoke-rc.d nscd restart || true
-else
-    service unscd restart || service nscd restart || true
+if [ -x /usr/sbin/nscd ]; then
+    echo "Flushing/restarting nscd"
+    nscd -i passwd && nscd -i group
 fi

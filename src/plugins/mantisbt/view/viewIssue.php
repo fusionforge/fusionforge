@@ -4,7 +4,7 @@
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2010, Antoine Mercadal - Capgemini
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2014 Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -31,28 +31,29 @@ global $gfplugins;
 global $editable;
 global $group_id;
 global $HTML;
+global $clientSOAP;
 
 if (!isset($defect)) {
 	try {
-        /* do not recreate $clientSOAP object if already created by other pages */
-        if (!isset($clientSOAP))
-		    $clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+	/* do not recreate $clientSOAP object if already created by other pages */
+	if (!isset($clientSOAP))
+			$clientSOAP = new SoapClient($mantisbtConf['url'].'/api/soap/mantisconnect.php?wsdl', array('trace' => true, 'exceptions' => true));
 
-		$defect = $clientSOAP->__soapCall('mc_issue_get', array("username" => $username, "password" => $password, "issue_id" => $idBug));
+		$defect = $clientSOAP->__soapCall('mc_issue_get', array('username' => $username, 'password' => $password, 'issue_id' => $idBug));
 	} catch (SoapFault $soapFault) {
-		echo $HTML->warning_msg(_('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring);
+		echo $HTML->warning_msg(_('Technical error occurs during data retrieving')._(': ').$soapFault->faultstring);
 		$errorPage = true;
 	}
 }
 
-if ($defect->project->id != $mantisbtConf['id_mantisbt']) {
+if ((isset($errorPage) && $errorPage ) || $defect->project->id != $mantisbtConf['id_mantisbt']) {
 	echo $HTML->warning_msg(_('Woops: wrong issue id'));
 	$errorPage = true;
 }
 
 if (!isset($errorPage)) {
-	include 'jumpToIssue.php';
-	echo '<h2>'._('Ticket').' #'.$idBug.'</h2>';
+	include ($gfplugins.$mantisbt->name.'/view/jumpToIssue.php');
+	echo html_e('h2', array(), _('Ticket').' #'.$idBug);
 	echo	'<table>';
 	echo		'<tr style="background-color: gray;">';
 	echo 			'<td width="14%" >'._('Category').'</td>';
@@ -119,6 +120,7 @@ if (!isset($errorPage)) {
 	echo			'<td width="75%"><textarea disabled name="description" style="width:99%; background-color:white; color:black; border: none;" rows="6">'. $additional_value .'</textarea></td>';
 	echo		'</tr>';
 	echo	'</table>';
+	if ($editable) {
 ?>
 <script type="text/javascript">
 	jQuery(document).ready(function() {
@@ -126,13 +128,13 @@ if (!isset($errorPage)) {
 	});
 </script>
 <?php
-	if ($editable) {
+
 ?>
 <p class="notice_title" onclick='jQuery("#expandable_edition").slideToggle(300)'><?php echo _('Edit ticket') ?></p>
 <div id='expandable_edition' class="notice_content">
 <?php
 		if (!isset($errorPage)) {
-			include($gfplugins.$mantisbt->name."/view/editIssue.php");
+			include($gfplugins.$mantisbt->name.'/view/editIssue.php');
 		}
 	}
 }
@@ -140,6 +142,6 @@ if (!isset($errorPage)) {
 </div>
 <?php
 if (!isset($errorPage)) {
-	include($gfplugins.$mantisbt->name."/view/viewNote.php");
-	include($gfplugins.$mantisbt->name."/view/viewAttachment.php");
+	include($gfplugins.$mantisbt->name.'/view/viewNote.php');
+	include($gfplugins.$mantisbt->name.'/view/viewAttachment.php');
 }

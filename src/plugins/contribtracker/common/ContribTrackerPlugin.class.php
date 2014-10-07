@@ -26,7 +26,10 @@ class ContribTrackerPlugin extends Plugin {
 	function ContribTrackerPlugin() {
 		$this->Plugin() ;
 		$this->name = "contribtracker";
-		$this->text = "Contribution Tracker"; // To show in the tabs, use...
+		$this->text = _("Contribution Tracker"); // To show in the tabs, use...
+		$this->pkg_desc =
+_("This plugin allows each project to display a list of significant
+contributions, along with their authors.");
 		$this->_addHook("groupmenu");	// To put into the project tabs
 		$this->_addHook("groupisactivecheckbox"); // The "use ..." checkbox in editgroupinfo
 		$this->_addHook("groupisactivecheckboxpost"); //

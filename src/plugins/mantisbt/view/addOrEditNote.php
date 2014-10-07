@@ -4,6 +4,7 @@
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2010, Antoine Mercadal - Capgemini
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -30,26 +31,26 @@ global $HTML;
 
 $noteEdit;
 try {
-    /* do not recreate $clientSOAP object if already created by other pages */
-    if (!isset($clientSOAP))
-        $clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+	/* do not recreate $clientSOAP object if already created by other pages */
+	if (!isset($clientSOAP))
+		$clientSOAP = new SoapClient($mantisbtConf['url'].'/api/soap/mantisconnect.php?wsdl', array('trace' => true, 'exceptions' => true));
 
-    $defect = $clientSOAP->__soapCall('mc_issue_get', array("username" => $username, "password" => $password, "issue_id" => $idBug));
-    if ($view == "editNote"){
-	    foreach($defect->notes as $key => $note){
-		    if ($note->id == $idNote){
-			    $noteEdit = $note;
-			    break;
-		    }
-	    }
-    }
+	$defect = $clientSOAP->__soapCall('mc_issue_get', array("username" => $username, "password" => $password, "issue_id" => $idBug));
+	if ($view == 'editNote'){
+		foreach($defect->notes as $key => $note){
+			if ($note->id == $idNote){
+				$noteEdit = $note;
+				break;
+			}
+		}
+	}
 } catch (SoapFault $soapFault) {
-	echo $HTML->warning_msg(_('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring);
+	echo $HTML->warning_msg(_('Technical error occurs during data retrieving')._(': ').$soapFault->faultstring);
 	$errorPage = true;
 }
 
 if (!isset($errorPage)){
-	if($view == "editNote"){
+	if($view == 'editNote'){
 		$labelboxTitle = _('Modify note');
 		$actionform = 'updateNote';
 		$labelButtonSubmit = _('Update');
@@ -60,7 +61,7 @@ if (!isset($errorPage)){
 	}
 
 	echo 		'<div id="add_edit_note">';
-	echo 		'<form Method="POST" Action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$defect->id.'&idNote='.$idNote.'&action='.$actionform.'&view=viewIssue">';
+	echo $HTML->openForm(array('method' => 'post', 'action' => util_make_uri('/plugins/'.$mantisbt->name.'/?type='.$type.'&group_id='.$group_id.'&idBug='.$defect->id.'&idNote='.$idNote.'&action='.$actionform.'&view=viewIssue')));
 	echo				'<table>';
 	echo 					'<tr>';
 	(isset($noteEdit->text))? $note_value = $noteEdit->text : $note_value = '';
@@ -68,6 +69,6 @@ if (!isset($errorPage)){
 	echo 					'</tr>';
 	echo				'</table>';
 	echo 				'<input type=button onclick="this.form.submit();this.disabled=true;" value="'.$labelButtonSubmit.'">';
-	echo 			'</form>';
+	echo $HTML->closeForm();
 	echo 		'</div>';
 }

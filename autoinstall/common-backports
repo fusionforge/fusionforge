@@ -1,0 +1,116 @@
+#!/bin/bash
+# Tricks to install unavailable packages - used by install.sh and install-src.sh
+#
+# Copyright (C) 2011  Roland Mas
+# Copyright (C) 2011  Olivier Berger - Institut Telecom
+# Copyright (C) 2014  Inria (Sylvain Beucler)
+#
+# This file is part of FusionForge. FusionForge is free software;
+# you can redistribute it and/or modify it under the terms of the
+# GNU General Public License as published by the Free Software
+# Foundation; either version 2 of the Licence, or (at your option)
+# any later version.
+#
+# FusionForge is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along
+# with FusionForge; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+
+function backports_deb {
+    if grep -q ^7 /etc/debian_version; then
+	# Install OpenSSH 6.6 to get AuthorizedKeysCommand support
+	if [ ! -f /etc/apt/sources.list.d/backports.list ]; then
+	    echo 'deb http://http.debian.net/debian wheezy-backports main' \
+		> /etc/apt/sources.list.d/backports.list
+	    apt-get update
+	fi
+	if dpkg-query -s openssh-server | grep -q 'Version: 1:6.0'; then
+	    apt-get -y install openssh-server -t wheezy-backports
+	fi
+
+	# fusionforge-plugin-scmbzr depends on loggerhead (>=
+	# 1.19~bzr477~), but wheezy only has 1.19~bzr461-1, so we need
+	# to manually "Backport" a more recent dependency
+	if ! dpkg-query -s loggerhead >/dev/null 2>&1 ; then
+	    # install loggerhead with its dependencies
+	    # we need gdebi to make sure dependencies are installed too (simple dpkg -i won't)
+	    apt-get -y install gdebi-core wget
+	    wget -c http://snapshot.debian.org/archive/debian/20121107T152130Z/pool/main/l/loggerhead/loggerhead_1.19%7Ebzr477-1_all.deb
+	    gdebi --non-interactive loggerhead_1.19~bzr477-1_all.deb
+	fi
+    fi
+}
+
+
+function backports_rpm {
+    # Fedora/RHEL/CentOS version:
+    os_version=$(rpm -q --qf "%{VERSION}" $(rpm -q --whatprovides redhat-release))
+
+    if ! rpm -q fedora-release >/dev/null; then
+	# EPEL - http://download.fedoraproject.org/pub/epel/6/i386/repoview/epel-release.html
+	if ! rpm -q epel-release >/dev/null; then
+	    rpm -ivh http://fr2.rpmfind.net/linux/epel/6/i386/epel-release-6-8.noarch.rpm
+	fi
+
+	# Prepare manual backports
+	cat <<'EOF' > /etc/yum.repos.d/fedora-source.repo
+[fedora]
+name=Fedora 20
+failovermethod=priority
+metalink=https://mirrors.fedoraproject.org/metalink?repo=fedora-20&arch=$basearch
+enabled=0
+gpgcheck=0
+[fedora-source]
+name=Fedora 20 - Source
+failovermethod=priority
+metalink=https://mirrors.fedoraproject.org/metalink?repo=fedora-source-20&arch=$basearch
+enabled=0
+gpgcheck=0
+EOF
+	yum install -y yum-utils  # yumdownloader
+    fi
+
+    if yum list libnss-pgsql >/dev/null 2>&1; then
+	yum install -y libnss-pgsql
+    else
+	# libnss-pgsql: id., plus http://yum.postgresql.org/8.4/redhat/rhel-5-x86_64/
+	yumdownloader --enablerepo=fedora --source libnss-pgsql
+	DEPS="gcc postgresql-devel xmlto"
+	yum install -y $DEPS
+	rpmbuild --rebuild libnss-pgsql-*.src.rpm
+	yum remove -y $DEPS
+	rpm -ivh ~/rpmbuild/RPMS/x86_64/libnss-pgsql-*.x86_64.rpm
+    fi
+
+    if yum list moin >/dev/null 2>&1; then
+	yum install -y moin
+    else
+	# moin: no available package for RHEL; though 'moin' is available in Fedora
+	yumdownloader --enablerepo=fedora --source moin
+	DEPS="python-devel"
+	yum install -y $DEPS
+	rpmbuild --rebuild moin-*.src.rpm
+	yum remove -y $DEPS
+	rpm -ivh ~/rpmbuild/RPMS/noarch/moin-*.noarch.rpm
+    fi
+
+    if yum list php-htmlpurifier-htmlpurifier >/dev/null 2>&1; then
+	yum install -y php-htmlpurifier-htmlpurifier
+    else
+	# moin: no available package for RHEL; though 'moin' is available in Fedora
+	yumdownloader --enablerepo=fedora --source php-htmlpurifier-htmlpurifier
+	DEPS="php-channel-htmlpurifier"  # for v4.3.0-6.fc20
+	yum install -y $DEPS
+	rpmbuild --rebuild php-htmlpurifier-htmlpurifier-*.src.rpm
+	yum remove -y $DEPS
+	yum install -y ~/rpmbuild/RPMS/noarch/php-htmlpurifier-htmlpurifier-*.noarch.rpm
+    fi
+
+    # TODO: postfix: rebuild from RHEL/CentOS sources with pgsql enabled,
+    # so we can test mta-postfix
+}

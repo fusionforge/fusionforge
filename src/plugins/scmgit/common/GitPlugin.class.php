@@ -39,7 +39,11 @@ class GitPlugin extends SCMPlugin {
 	function GitPlugin() {
 		$this->SCMPlugin();
 		$this->name = 'scmgit';
-		$this->text = 'Git';
+		$this->text = _('Git');
+		$this->pkg_desc =
+_("This plugin contains the Git subsystem of FusionForge. It allows each
+FusionForge project to have its own Git repository, and gives some
+control over it to the project's administrator.");
 		$this->_addHook('scm_browser_page');
 		$this->_addHook('scm_update_repolist');
 		$this->_addHook('scm_generate_snapshots');
@@ -402,7 +406,7 @@ class GitPlugin extends SCMPlugin {
 		global $HTML;
 		$b = '';
 
-		$result = db_query_params('SELECT u.realname, u.user_name, u.user_id, sum(updates) as updates, sum(adds) as adds, sum(adds+commits) as combined FROM stats_cvs_user s, users u WHERE group_id=$1 AND s.user_id=u.user_id AND (commits>0 OR adds >0) GROUP BY u.user_id, realname, user_name, u.user_id ORDER BY combined DESC, realname',
+		$result = db_query_params('SELECT u.realname, u.user_name, u.user_id, sum(updates) as updates, sum(adds) as adds, sum(adds+updates) as combined FROM stats_cvs_user s, users u WHERE group_id=$1 AND s.user_id=u.user_id AND (updates>0 OR adds >0) GROUP BY u.user_id, realname, user_name, u.user_id ORDER BY combined DESC, realname',
 			array($project->getID()));
 
 		if (db_numrows($result) > 0) {
@@ -552,7 +556,21 @@ class GitPlugin extends SCMPlugin {
 			system("find $main_repo -type d | xargs chmod g+s");
 			if (forge_get_config('use_dav','scmgit')) {
 				$f = fopen(forge_get_config('config_path').'/httpd.conf.d/plugin-scmgit-dav.inc','a');
-				fputs($f,'Use Project '.$project_name."\n");
+				fputs($f,'<IfVersion >= 2.3>
+  Use Project '.$project_name.'
+</IfVersion>
+<IfVersion < 2.3>
+<Location "/scmrepos/git/'.$project_name.'">
+        DAV on
+        Options +Indexes -ExecCGI -FollowSymLinks -MultiViews
+        AuthType Basic
+        AuthName "Git repository: '.$project_name.'"
+        #The AuthUserFile filename is needed in the code. Please do not rename it.
+        AuthUserFile '.forge_get_config('data_path').'/gituser-authfile.'.$project_name.'
+        Require valid-user
+</Location>
+</IfVersion>
+');
 				fclose($f);
 				system(forge_get_config('httpd_reload_cmd','scmgit'));
 			}

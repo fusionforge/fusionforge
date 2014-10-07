@@ -148,45 +148,46 @@ scm_header(array('title'=>_('SCM Repository'),'group'=>$group_id));
 		});
 	});
 </script>
-<form method="post" action="<?php echo util_make_uri('/scm/admin/?group_id='.$group_id) ?>">
 <?php
+echo $HTML->openForm(array('method' => 'post', 'action' => util_make_uri('/scm/admin/?group_id='.$group_id)));
+$hook_params = array () ;
+$hook_params['group_id'] = $group_id ;
 
-	$hook_params = array () ;
-	$hook_params['group_id'] = $group_id ;
-
-	$SCMFactory = new SCMFactory();
-	$scm_plugins = $SCMFactory->getSCMs();
-	if (count($scm_plugins) != 0) {
-		if (count($scm_plugins) == 1) {
-			$myPlugin = plugin_get_object($scm_plugins[0]);
-			echo '<input type="hidden" name="scmradio" value="'.$myPlugin->name.'" />' ;
-		} else {
-			echo '<p>'._('Note: Changing the repository does not delete the previous repository.  It only affects the information displayed under the SCM tab.').'</p>';
-			echo '<table><tbody><tr><td><strong>'._('SCM Repository').'</strong></td>';
-			$checked=true;
-			foreach ($scm_plugins as $plugin) {
-				$myPlugin = plugin_get_object($plugin);
-				echo '<td><input type="radio" name="scmradio" ';
-				echo 'value="'.$myPlugin->name.'"';
-				if ($group->usesPlugin($myPlugin->name)) {
-					$scm = $myPlugin->name;
-					echo ' checked="checked"';
-				}
-				echo ' />'.$myPlugin->text.'</td>';
-			}
-			echo '</tr></tbody></table>'."\n";
-		}
+$SCMFactory = new SCMFactory();
+$scm_plugins = $SCMFactory->getSCMs();
+if (count($scm_plugins) != 0) {
+	echo '<p>'._('Note: Changing the repository does not delete the previous repository.  It only affects the information displayed under the SCM tab.').'</p>';
+	if (count($scm_plugins) == 1) {
+		$myPlugin = plugin_get_object($scm_plugins[0]);
+		echo '<input type="hidden" name="scmradio" value="'.$myPlugin->name.'" />' ;
+		echo '<p><input type="radio" name="fake" disabled="disabled" checked="checked" />'.$myPlugin->text.'</p>';
+		$scm = $myPlugin->name;
 	} else {
-		echo $HTML->error_msg(_('Error: Site has SCM but no plugins registered'));
+		echo '<table><tbody><tr><td><strong>'._('SCM Repository').'</strong></td>';
+		$checked=true;
+		foreach ($scm_plugins as $plugin) {
+			$myPlugin = plugin_get_object($plugin);
+			echo '<td><input type="radio" name="scmradio" ';
+			echo 'value="'.$myPlugin->name.'"';
+			if ($group->usesPlugin($myPlugin->name)) {
+				$scm = $myPlugin->name;
+				echo ' checked="checked"';
+			}
+			echo ' />'.$myPlugin->text.'</td>';
+		}
+		echo '</tr></tbody></table>'."\n";
 	}
+} else {
+	echo $HTML->error_msg(_('Error: Site has SCM but no plugins registered'));
+}
 
-	(isset($scm)) ? $hook_params['scm_plugin'] = $scm : $hook_params['scm_plugin'] = 0;
-	plugin_hook("scm_admin_page", $hook_params);
+(isset($scm)) ? $hook_params['scm_plugin'] = $scm : $hook_params['scm_plugin'] = 0;
+plugin_hook("scm_admin_page", $hook_params);
 ?>
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
 <input type="submit" name="submit" value="<?php echo _('Update'); ?>" />
-</form>
 <?php
+echo $HTML->closeForm();
 
 plugin_hook('scm_admin_form', $hook_params);
 scm_footer();

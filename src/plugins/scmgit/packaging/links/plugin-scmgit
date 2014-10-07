@@ -1,7 +1,0 @@
-/usr/lib/cgi-bin/gitweb.cgi @PLUGINS_PATH@/scmgit/cgi-bin/gitweb.cgi
-/usr/share/gitweb/gitweb.cgi @SOURCE_PATH@/plugins/scmgit/www/gitweb.cgi
-/usr/share/gitweb/index.cgi @SOURCE_PATH@/plugins/scmgit/www/index.cgi
-/usr/share/gitweb/static/git-favicon.png @SOURCE_PATH@/plugins/scmgit/www/git-favicon.png
-/usr/share/gitweb/static/git-logo.png @SOURCE_PATH@/plugins/scmgit/www/git-logo.png
-/usr/share/gitweb/static/gitweb.css @SOURCE_PATH@/plugins/scmgit/www/gitweb.css
-/usr/share/gitweb/static/gitweb.js @SOURCE_PATH@/plugins/scmgit/www/gitweb.js
