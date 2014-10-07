@@ -53,7 +53,7 @@ if (!forge_get_config('use_project_full_list')) {
 $HTML->header(array('title'=>_('Project List'),'pagename'=>'softwaremap'));
 $HTML->printSoftwareMapLinks();
 
-$projects = get_public_active_projects_asc($TROVE_HARDQUERYLIMIT);
+$projects = group_get_public_active_projects_asc($TROVE_HARDQUERYLIMIT);
 
 $querytotalcount = count($projects);
 

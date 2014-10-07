@@ -19,10 +19,10 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 version=$1
-snapshot=$2 # e.g. '+201408281835'; spec needs static tarball extract dir
 if [ -z "$version" ]; then version=$(make version); fi
 if [ -z "$autobuild" ]; then autobuild=''; fi
 
+rm -f fusionforge.spec
 (
     for i in $(sed -n 's/^%package plugin-//p' rpm/plugins); do
 	sed -n -e '/^#/d' -e "/^%package plugin-$i/,/^$/p" rpm/plugins \
@@ -43,7 +43,6 @@ if [ -z "$autobuild" ]; then autobuild=''; fi
 ) \
 | sed \
     -e "s/@version@/$version/" \
-    -e "s/@snapshot@/$snapshot/" \
     -e '/^@plugins@/ { ' -e 'ecat' -e 'd }' \
     rpm/fusionforge.spec.in > fusionforge.spec
 chmod a-w fusionforge.spec

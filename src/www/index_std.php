@@ -45,8 +45,9 @@ require_once $gfcommon.'include/FusionForge.class.php';
 <li><?php print _('Wiki (using MediaWiki or phpWiki).'); ?></li>
 <li><?php print _('A powerful plugin system to add new features.'); ?></li>
 </ul>
+
 <h3><?php print _("What's new in FusionForge 5.3"); ?></h3>
-<p><?php print _('Checkout the roadmap for closed issues (bugs, patches, features requests) ') ?><a href="/tracker/roadmap.php?group_id=6&roadmap_id=1&release=5.3"><?php echo _('here') ?></a></p>
+<p><?php print _('Checkout the roadmap for closed issues (bugs, patches, features requests) ') ?><a href="https://fusionforge.org/tracker/roadmap.php?group_id=6&roadmap_id=1&release=5.3"><?php echo _('here') ?></a></p>
 <p><?php print _('Standards features:') ?></p>
 <ul>
 <li><?php print _('Docman:'); ?>
@@ -104,6 +105,7 @@ require_once $gfcommon.'include/FusionForge.class.php';
 <li><?php print _('webanalytics: new plugin to add support for piwik or google analytics tool (TrivialDev)'); ?></li>
 <li><?php print _('new admssw plugin to provide ADMS.SW compatible RDF descriptions of projects'); ?></li>
 </ul>
+
 <h3><?php print _("What's new in FusionForge 5.2"); ?></h3>
 <p><?php print _('Standards features:') ?></p>
 <ul>
@@ -153,37 +155,6 @@ require_once $gfcommon.'include/FusionForge.class.php';
 <li><?php print _('RPM packages for Red Hat (and derived) distributions.'); ?></li>
 </ul>
 
-<h3><?php print _("What's new in FusionForge 5.0"); ?></h3>
-<ul>
-<li><?php print _('Many improvements to the trackers: configurable display, workflow management, links between artifacts, better searches, and more'); ?></li>
-<li><?php print _('Rewritten SCM subsystem, with new plugins for Bazaar, Darcs and Git'); ?></li>
-<li><?php print _('New version of Mediawiki plugin, providing independent wikis for each project'); ?></li>
-<li><?php print _('Various new plugins: projectlabels, globalsearch, extratabs'); ?></li>
-<li><?php print _('An in-depth rewrite of the theme for better accessibility and XHTML conformance'); ?></li>
-</ul>
-
-<h3><?php print _("What's new in FusionForge 4.8"); ?></h3>
-<ul>
-<li><?php print _('New project classification by tags (tag cloud).'); ?></li>
-<li><?php print _('New reporting item for the File Release System: downloads per package.'); ?></li>
-<li><?php print _('List of all projects added in Project List'); ?></li>
-<li><?php print _('New version of phpWiki plugin, using lastest svn code'); ?></li>
-</ul>
-
-<h3><?php print _("What's new in FusionForge 4.7"); ?></h3>
-<ul>
-<li><?php print _('A new name to avoid confusion with proprietary versions of GForge.'); ?></li>
-<li><?php print _('Support for PHP5.'); ?></li>
-<li><?php print _('Support for PostgreSQL 8.x.'); ?></li>
-<li><?php print _('Translations are now managed by gettext.'); ?></li>
-<li><?php print _('Support for several configurations running on the same code.'); ?></li>
-<li><?php print _('Improved security, no need for PHP register_globals.'); ?></li>
-<li><?php print _('Available as full install CD.'); ?></li>
-<li><?php print _('New wiki plugins (using MediaWiki or phpWiki).'); ?></li>
-<li><?php print _('New online_help plugin.'); ?></li>
-<li><?php print _('New phpwebcalendar plugin.'); ?></li>
-<li><?php print _('New project hierarchy plugin.'); ?></li>
-</ul>
 <?php
 if(forge_get_config('use_news')) {
 	echo $HTML->boxTop(_('Latest News'), 'Latest_News');

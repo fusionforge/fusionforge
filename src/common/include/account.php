@@ -45,7 +45,7 @@ function account_pwvalid($pw) {
  * @return	bool	true on success/false on failure
  *
  */
-function account_namevalid($name, $unix=false) {
+function account_namevalid($name, $unix=false, $check_exists=true) {
 
 	if (!$unix) {
 		// If accounts comes from ldap and no shell access, then disable controls.
@@ -77,14 +77,16 @@ function account_namevalid($name, $unix=false) {
 	}
 
 	// illegal names
+	$system_user = forge_get_config('system_user');
+	$system_user_ssh_akc = forge_get_config('system_user_ssh_akc');
 	$regExpReservedNames = "^(root|bin|daemon|adm|lp|sync|shutdown|halt|mail|news|"
 		. "uucp|operator|games|mysql|httpd|nobody|dummy|www|cvs|shell|ftp|irc|"
-		. "debian|ns|download)$";
+		. "debian|ns|download|{$system_user}|{$system_user_ssh_akc})$";
 	if( preg_match("/$regExpReservedNames/i", $name) ) {
 		$GLOBALS['register_error'] = _('Name is reserved.');
 		return false;
 	}
-	if (forge_get_config('use_shell')) {
+	if (forge_get_config('use_shell') && $check_exists) {
 		if (exec("getent passwd $name") != "" ){
 			$GLOBALS['register_error'] = _('That username already exists.');
 			return false;

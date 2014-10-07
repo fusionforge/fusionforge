@@ -23,16 +23,16 @@
  */
 
 global $mantisbt; // the mantisbt object
-global $user;
 
 $confArr = array();
 $confArr['mantisbt_user'] = getStringFromRequest('mantisbt_user');
 $confArr['mantisbt_password'] = getStringFromRequest('mantisbt_password');
+$confArr['mantisbt_url'] = getStringFromRequest('mantisbt_url');
 
 if (!$mantisbt->updateUserConf($confArr)) {
-	$error_msg = $user->getErrorMessage();
-	session_redirect('/plugins/mantisbt/?type=user&pluginname='.$mantisbt->name);
+	$error_msg = _('Task failed')._(': ').$mantisbt->getErrorMessage();
+	session_redirect('/plugins/'.$mantisbt->name.'/?type=user&view=adminuser');
 }
 
 $feedback = _('MantisBT User configuration successfully updated.');
-session_redirect('/plugins/mantisbt/?type=user&pluginname='.$mantisbt->name.'&view=adminuser');
+session_redirect('/plugins/'.$mantisbt->name.'/?type=user&view=adminuser');

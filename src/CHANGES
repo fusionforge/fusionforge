@@ -5,6 +5,7 @@ Fusionforge-X.X:
 * [#697] FRS: Enable widget "My monitored packages" (TrivialDev)
 * [#705] FRS: Provide new role settings (TrivialDev)
 * [#713] FRS: Add delete packages, releases or files mass action (TrivialDev)
+* [#737] FRS: Provide link to download any release as ZIP file (TrivialDev)
 * [#656] General: drop tipsy plugin, use standard jQuery UI tooltip already provided (TrivialDev)
 * [#663] General: FusionForge Theme & jQuery UI theme sync (TrivialDev)
 * [#664] General: Update the jQuery & jQuery UI frameworks (TrivialDev)
@@ -18,6 +19,12 @@ Fusionforge-X.X:
 * [#724] Plugin SCM HG (Mercurial): display the Repository History stats block (TrivialDev)
 * [#725] Plugin SCM HG (Mercurial): add support for project activity tab (TrivialDev)
 * [#726] Plugin SCM HG (Mercurial): activity log entry link to commit log in SCM browsing tab (TrivialDev)
+* [#734] Plugin AuthLDAP: support LPAP_OPT_REFERRALS option, needed by ActiveDirectory Server (TrivialDev)
+
+Fusionforge-5.3.3:
+* Plugin AuthLDAP: error and warning messages displayed twice [#732] (TrivialDev)
+* Plugin scmhook: fix display when only one SCM plugin enabled [#735] (TrivialDev)
+* Stats SCM: fix order in stats block [#736] (TrivialDev)
 
 Fusionforge-5.3.2:
 * Software map: fix "value too long for type character varying(255)" error in cron db_trove_maint.php (Inria)
@@ -25,22 +32,25 @@ Fusionforge-5.3.2:
 * Projects: don't display admins if their account is suspended (Inria)
 * Projects: member lists should check permission [#711] (TrivialDev)
 * Admin: fix edit table themes, fix frs_processor sequence [#691] (TrivialDev)
-* SCM Git: suppress 'warning: You appear to have cloned an empty repository.' in create_scm_repos.php (Inria)
 * User SSH keys (ssh_create.php): fix harmless warning when user removes all her keys (Inria)
 * News: don't send requests for frontpage display for private projects (Inria)
 * Docman: fix download count [#702] (TrivialDev)
 * Tracker: fix translation support [#688] (TrivialDev)
 * Tracker: fix custom status extrafield not updateable using mass update [#712] (TrivialDev)
 * Mailing lists: handle quotes and accents in description (Inria)
-* Stats: handle bad encoding when gathering Git stats, remove spurious warning when SVN repository isn't created yet (Inria)
 * SCM Reporting: fix legend block size exceed graph canvas [#718] (TrivialDev)
 * Plugin mediawiki: fix paths in import/export scripts (Inria)
 * Plugin fckeditor: dropped in favor of ckeditor
+* Plugin SCM Git: suppress 'warning: You appear to have cloned an empty repository.' in create_scm_repos.php (Inria)
 * Plugin SCM SVN: fix sql error in activity tab on init log [#715] (TrivialDev)
 * Plugin SCM SVN: fix activity tab on empty commit log [#714] (Inria)
 * Plugin SCM HG (Mercurial): fix user stats [#722] (TrivialDev)
 * Plugin SCM HG (Mercurial): fix iframe size [#721] (TrivialDev)
 * Plugin SCM HG (Mercurial): fix ssl setting [#723] (TrivialDev)
+* Stats: handle bad encoding when gathering Git stats, remove spurious warning when SVN repository isn't created yet (Inria)
+* Stats: fix commits count [#717] (TrivialDev, Roland Mas)
+  Run 'forge_run_job gather_scm_stats.php --all' to regenerate your stats.
+  Optionally, if some of your repositories have history dating from before the project was created on the forge, use '--allepoch' instead
 
 Fusionforge-5.3.1:
 * Docman: Basic Webdav write mkcol support (TrivialDev)

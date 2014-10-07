@@ -494,9 +494,9 @@ function html_use_jqueryjqplotplugindateAxisRenderer() {
 }
 
 function html_use_jqueryteamworkgantt() {
-	html_use_jqueryui();
-	use_javascript('/scripts/jquery-livequery/jquery.livequery.min.js');
-	use_javascript('/scripts/jquery-teamwork-gantt/libs/jquery.timers.js');
+	html_use_jquerybrowser();
+	use_javascript('/scripts/jquery-livequery/jquery.livequery.js');
+	use_javascript('/scripts/jquery-livequery/jquery.timers.js');
 	use_javascript('/scripts/jquery-teamwork-gantt/libs/platform.js');
 	use_javascript('/scripts/jquery-teamwork-gantt/libs/date.js');
 	use_javascript('/scripts/jquery-teamwork-gantt/libs/date.js');
@@ -520,8 +520,12 @@ function html_use_jquerysplitter() {
 }
 
 function html_use_jqueryautoheight() {
-	html_use_jquery();
+	html_use_jquerybrowser();
 	use_javascript('/scripts/jquery-auto-height/jquery.iframe-auto-height.plugin.1.9.5.js');
+}
+
+function html_use_jquerybrowser() {
+	html_use_jquery();
 	use_javascript('/scripts/jquery-auto-height/jquery.browser.js');
 }
 

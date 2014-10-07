@@ -45,33 +45,23 @@ jQuery(document).ready(function() {
 <?php
 
 echo $HTML->boxTop(_('Manage configuration'));
-echo '<form method="POST" Action="?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&action=updateConf">';
+echo $HTML->openForm(array('method' => 'post', 'action' => util_make_uri('/plugins/'.$mantisbt->name.'/?type=admin&group_id='.$group_id.'&action=updateConf')));
 echo '<table>';
-echo '<tr><td><label id="mantisbtinit-global" ';
-if ($use_tooltips)
-	echo 'title="'._('Use the global configuration defined at forge level').'"';
+echo '<tr><td><label id="mantisbtinit-global" title="'._('Use the global configuration defined at forge level').'"';
 echo ' >'._('Use global configuration').'</label></td><td><input id="mantisbtglobalconf" type="checkbox" name="global_conf" value="1" ';
 if ($mantisbtConf['use_global']) {
 	echo 'checked="checked" ';
 }
 echo '/></td></tr>';
-echo '<tr><td><label id="mantisbtinit-url" ';
-if ($use_tooltips)
-	echo 'title="'._('Specify the Full URL of the MantisBT Web Server.').'"';
+echo '<tr><td><label id="mantisbtinit-url" title="'._('Specify the Full URL of the MantisBT Web Server.').'"';
 echo ' >URL</label></td><td><input id="mantisbturl" type="url" size="50" maxlength="255" name="url" value="'.$mantisbtConf['url'].'" /></td></tr>';
-echo '<tr><td><label id="mantisbtinit-user" ';
-if ($use_tooltips)
-	echo 'title="'._('Specify the user with admin right to be used thru SOAP API.').'"';
+echo '<tr><td><label id="mantisbtinit-user" title="'._('Specify the user with admin right to be used thru SOAP API.').'"';
 echo ' >SOAP User</label></td><td><input id="mantisbtuser" type="text" size="50" maxlength="255" name="soap_user" value="'.$mantisbtConf['soap_user'].'" /></td></tr>';
-echo '<tr><td><label id="mantisbtinit-password" ';
-if ($use_tooltips)
-	echo 'title="'._('Specify the password of this user.').'"';
+echo '<tr><td><label id="mantisbtinit-password" title="'._('Specify the password of this user.').'"';
 echo ' >SOAP Password</label></td><td><input id="mantisbtpassword" type="password" size="50" maxlength="255" name="soap_password" value="'.$mantisbtConf['soap_password'].'" /></td></tr>';
-echo '<tr><td><label id="mantisbtinit-syncroles" ';
-if ($use_tooltips)
-	echo 'title="'._('Do you want to sync FusionForge -> MantisBT roles ? Not implemented yet.').'"';
+echo '<tr><td><label id="mantisbtinit-syncroles" title="'._('Do you want to sync FusionForge -> MantisBT roles ? Not implemented yet.').'"';
 echo ' >Sync Roles</label></td><td><input disabled="disabled" type="checkbox" name="sync_roles" /></td></tr>';
 echo '</table>';
 echo '<input type="submit" value="'._('Update').'" />';
-echo '</form>';
+echo $HTML->closeForm();
 echo $HTML->boxBottom();

@@ -3,7 +3,7 @@
  * MantisBT plugin
  *
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2011, Franck Villaume - TrivialDev
+ * Copyright 2011,2014 Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -24,33 +24,39 @@
 
 /* please do not add include here, use index.php to do so */
 /* global variables */
-global $use_tooltips;
 global $type;
+global $mantisbt;
+global $HTML;
+global $validProjects;
 
-echo '<form method="POST" Action="?type='.$type.'&pluginname='.$mantisbt->name.'&action=inituser" >';
-echo '<table>';
-echo '<tr><td><label id="mantisbtuseglobal-user" ';
-if ($use_tooltips)
-	echo 'title="'._('Use global forge configuration.').'"';
-echo ' >Use global configuration</label></td><td><input id="mantisbtuseglobal" type="checkbox" name="mantisbtuseglobal" value="1"></td></tr>';
-echo '<tr><td><label id="mantisbtinit-create" ';
-if ($use_tooltips)
-	echo 'title="'._('If your user does NOT exist in MantisBT, do you want to create it ?').'"';
-echo ' >Create the user in MantisBT</label></td><td><input id="mantisbtcreate" type="checkbox" name="mantisbtcreate" value="1"></td></tr>';
-echo '<tr><td><label id="mantisbtinit-link" ';
-if ($use_tooltips)
-	echo 'title="'._('If your user DOES exist in MantisBT, do you want to link with it ?').'"';
-echo ' >Link with already created user in MantisBT</label></td><td><input id="mantisbtlink" type="checkbox" name="mantisbtlink" value="1"></td></tr>';
+$urlToSetup = getStringFromRequest('urlsetup');
+$uniqueMantisBTUrls = array();
 
-echo '<tr><td><label id="mantisbtinit-user" ';
-if ($use_tooltips)
-	echo 'title="'._('Specify your mantisbt user to be used.').'"';
-echo ' >MantisBT User</label></td><td><input type="text" size="50" maxlength="255" name="mantisbt_user" /></td></tr>';
-echo '<tr><td><label id="mantisbtinit-password" ';
-if ($use_tooltips)
-	echo 'title="'._('Specify the password of your user.').'"';
-echo ' >Your Password</label></td><td><input type="text" size="50" maxlength="255" name="mantisbt_password" /></td></tr>';
+if (!strlen($urlToSetup)) {
+	foreach ($validProjects as $validProject) {
+		$localConf = $mantisbt->getMantisBTConf($validProject->getID());
+		$uniqueMantisBTUrls[] = $localConf['url'];
+	}
+	$uniqueMantisBTUrls = array_unique($uniqueMantisBTUrls);
+} else {
+	$uniqueMantisBTUrls[] = $urlToSetup;
+}
 
-echo '</table>';
-echo '<input type="submit" value="'._('Initialize').'" />';
-echo '</form>';
+echo html_e('p', array(), _('You need to setup your mantisbt account per URL.'));
+
+foreach ($uniqueMantisBTUrls as $uniqueMantisBTUrl) {
+	echo $HTML->boxTop(_('User configuration for URL')._(': ').$uniqueMantisBTUrl);
+	echo $HTML->openForm(array('method' => 'post', 'action' => util_make_uri('/plugins/'.$mantisbt->name.'/?type='.$type.'&action=inituser')));
+	echo $HTML->listTableTop();
+	$cells[] = array(_('MantisBT User').utils_requiredField()._(':'), 'class' => 'align-right');
+	$cells[][] = html_e('input', array('title' => _('Specify your MantisBT user to be used. This user MUST already exists.'), 'id' => 'mantisbt_user', 'type' => 'text', 'size' => 50, 'maxlength' => 255, 'name' => 'mantisbt_user', 'required' => 'required'));
+	$cells[] = array(_('MantisBT Password').utils_requiredField()._(':'), 'class' => 'align-right');
+	$cells[][] = html_e('input', array('title' => _('Specify the password of your user.'), 'id' => 'mantisbt_password', 'type' => 'password', 'size' => 50, 'maxlength' => 255, 'name' => 'mantisbt_password', 'required' => 'required'));
+	$cells[][] = html_e('input', array('type' => 'hidden', 'name' => 'mantisbt_url', 'value' => $uniqueMantisBTUrl)).
+			html_e('input', array('type' => 'submit', 'value' => _('Initialize')));
+	echo $HTML->multiTableRow(array(), $cells);
+	echo $HTML->listTableBottom();
+	echo $HTML->closeForm();
+	echo $HTML->boxBottom();
+}
+echo $HTML->addRequiredFieldsInfoBox();

@@ -29,7 +29,7 @@ case "$1" in
 	else
 	    http_user_prefix=https://${web_host}${url_prefix}scm/loggerhead
 	fi
-	a2enmod wsgi
+	if [ -x /usr/sbin/a2enmod ]; then a2enmod wsgi; fi
 	if [ ! -e $configfile ] ; then
 	    mkdir -p $(dirname $configfile)
 	    cat > $configfile <<EOF

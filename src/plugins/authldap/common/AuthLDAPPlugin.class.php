@@ -7,6 +7,7 @@
  * Copyright 2009-2010, Alain Peyrat, Alcatel-Lucent
  * Copyright 2009, Chris Dalzell, OpenGameForge.org
  * Copyright 2011, Roland Mas
+ * Copyright 2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -120,7 +121,7 @@ into the FusionForge database.");
 					 $user_data['lastname'],
 					 $user_data['password1'],
 					 $user_data['password2'],
-					 $user_data['email'],
+					 trim($user_data['email']),
 					 $user_data['mail_site'],
 					 $user_data['mail_va'],
 					 $user_data['language_id'],
@@ -187,9 +188,12 @@ into the FusionForge database.");
 			   $u->getTitle(),
 			   $u->getCountryCode(),
 			   $u->usesTooltips(),
-			   $mapped_data['email']);
+			   trim($mapped_data['email']));
 
 		$u->setMD5Passwd ($mapped_data['md5_password']);
+		if (substr($mapped_data['unix_password'], 0, 7) == '{crypt}') {
+			$mapped_data['unix_password'] = substr($mapped_data['unix_password'],7);
+		}
 		$u->setUnixPasswd ($mapped_data['unix_password']);
 	}
 
@@ -292,7 +296,7 @@ into the FusionForge database.");
 		}
 	}
 
-	function ConnectLDAP() {
+	function ConnectLdap() {
 		if ($this->ldap_conn) {
 			return true;
 		}
@@ -307,6 +311,13 @@ into the FusionForge database.");
 
 		if (forge_get_config('ldap_version', $this->name)) {
 			if (!ldap_set_option($conn, LDAP_OPT_PROTOCOL_VERSION, forge_get_config('ldap_version', $this->name))) {
+				error_log("LDAP: ldap_set_option() failed: ".ldap_error($this->ldap_conn));
+				return false;
+			}
+		}
+
+		if (forge_get_config('ldap_opt_referrals', $this->name) != NULL) {
+			if (!ldap_set_option($conn, LDAP_OPT_REFERRALS, forge_get_config('ldap_opt_referrals', $this->name))) {
 				error_log("LDAP: ldap_set_option() failed: ".ldap_error($this->ldap_conn));
 				return false;
 			}

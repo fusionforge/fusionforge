@@ -3,8 +3,5 @@
 #
 PATH=@bindir@:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
-# SCM/user/group update
+# user/group homedirs
 15 * * * * root forge_run_job shell/homedirs.php
-
-# SSH keys
-20 * * * * root forge_run_job shell/ssh_create.php

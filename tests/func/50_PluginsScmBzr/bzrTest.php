@@ -52,7 +52,6 @@ class ScmBzrTest extends FForge_SeleniumTestCase
 		$this->reload_nscd();
 		$this->cron("scm/create_scm_repos.php");
 		$this->cron("shell/homedirs.php");
-		$this->cron("shell/ssh_create.php");
 
 		// Check that the repo is present and Loggerhead shows it (even if empty)
 		$this->open(ROOT);

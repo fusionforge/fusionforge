@@ -33,7 +33,9 @@ case "$1" in
 	;;
 
     remove)
-	update-inetd --remove svn || true
+	if [ -x /usr/sbin/update-inetd ]; then
+	    update-inetd --remove svn || true
+	fi
 	;;
 
     *)

@@ -3,7 +3,7 @@
  * MediaWikiPlugin Class
  *
  * Copyright 2000-2011, Fusionforge Team
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2014 Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -46,6 +46,7 @@ _("This plugin allows each project to embed Mediawiki under a tab.");
 		$this->_addHook("project_public_area");
 		$this->_addHook("role_get");
 		$this->_addHook("role_normalize");
+		$this->_addHook("role_unlink_project");
 		$this->_addHook("role_translate_strings");
 		$this->_addHook("role_has_permission");
 		$this->_addHook("role_get_setting");
@@ -90,7 +91,7 @@ _("This plugin allows each project to embed Mediawiki under a tab.");
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][]=$this->text;
 				$params['DIRS'][]=util_make_url('/plugins/mediawiki/wiki/'.$project->getUnixName().'/index.php');
-				$params['ADMIN'][]='';
+				$params['ADMIN'][] = util_make_url('/plugins/mediawiki/plugin_admin.php?group_id='.$project->getID());
 				$params['TOOLTIPS'][] = _('Mediawiki Space');
 			}
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
@@ -192,6 +193,18 @@ _("This plugin allows each project to embed Mediawiki under a tab.");
 				$role->normalizePermsForSection ($new_pa, 'plugin_mediawiki_edit', $p->getID()) ;
 				$role->normalizePermsForSection ($new_pa, 'plugin_mediawiki_upload', $p->getID()) ;
 				$role->normalizePermsForSection ($new_pa, 'plugin_mediawiki_admin', $p->getID()) ;
+			}
+		} elseif ($hookname == "role_unlink_project") {
+			$role =& $params['role'] ;
+			$project =& $params['project'] ;
+
+			$settings = array('plugin_mediawiki_read', 'plugin_mediawiki_edit', 'plugin_mediawiki_upload', 'plugin_mediawiki_admin');
+
+			foreach ($settings as $s) {
+				db_query_params('DELETE FROM pfo_role_setting WHERE role_id=$1 AND section_name=$2 AND ref_id=$3',
+						array($role->getID(),
+						      $s,
+						      $project->getID()));
 			}
 		} elseif ($hookname == "role_translate_strings") {
 			$right = new PluginSpecificRoleSetting ($role,

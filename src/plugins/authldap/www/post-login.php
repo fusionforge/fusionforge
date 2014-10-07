@@ -32,6 +32,8 @@ require_once '../../../www/env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once '../../../www/include/login-form.php';
 
+global $error_msg, $warning_msg;
+
 $plugin = plugin_get_object('authldap');
 
 $return_to = getStringFromRequest('return_to');
@@ -75,11 +77,9 @@ if ($login) {
 			$plugin->startSession($form_loginname);
 		}
 		if ($return_to) {
-			header ("Location: " . util_make_url($return_to));
-			exit;
+			session_redirect($return_to);
 		} else {
-			header ("Location: " . util_make_url("/my"));
-			exit;
+			session_redirect('/my');
 		}
 	} elseif ($test == FORGE_AUTH_AUTHORITATIVE_REJECT) {
 		if ($form_loginname && $form_pw) {
@@ -91,8 +91,6 @@ if ($login) {
 		$warning_msg = _('LDAP server unreachable');
 	}
 }
-
-$HTML->header(array('title'=>'Login'));
 
 if ($login) {
 	form_release_key(getStringFromRequest('form_key'));
@@ -116,14 +114,11 @@ if ($login) {
 		$error_msg .= '<p>'._('Thank you').'</p>';
 		$error_msg .= '<p>'.sprintf(_('-- the %s staff'), forge_get_config ('forge_name')).'</p>';
 	}
-	html_error_top($error_msg);
-	html_warning_top($warning_msg);
-	html_feedback_top($feedback);
 }
 
 // Otherwise, display the login form again
+$HTML->header(array('title'=>'Login'));
 display_login_form($return_to, $triggered);
-
 $HTML->footer();
 
 // Local Variables:

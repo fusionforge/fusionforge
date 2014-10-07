@@ -6,7 +6,7 @@ CREATE TABLE plugin_wiki_config
   CONSTRAINT plugin_wiki_config_pkey PRIMARY KEY (group_id, config_name)
 )
 WITH OIDS;
-ALTER TABLE plugin_wiki_config OWNER TO gforge;
+-- ALTER TABLE plugin_wiki_config OWNER TO gforge;
 
 -- For existing wikis, we enable wikiwords as before.
 -- Not doing it could break links.

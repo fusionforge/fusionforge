@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Roland Mas <lolando@debian.org>
 Uploaders: Christian Bayle <bayle@debian.org>, Olivier Berger <obergix@debian.org>, Sylvain Beucler <beuc@debian.org>
 Build-Depends: debhelper (>= 9)
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Homepage: https://fusionforge.org/
 Vcs-Git: https://fusionforge.org/anonscm/git/deb-packaging/deb-packaging.git
 Vcs-Browser: https://fusionforge.org/scm/browser.php?group_id=9
@@ -83,7 +83,7 @@ Description: collaborative development tool - web part (using Apache)
  integrated into one web site and managed through a web interface.
  .
  This package contains the files needed to run the web part of
- FusionForge on an Apache webserver.
+ FusionForge on an Apache web server.
 
 
 Package: fusionforge-web-vhosts
@@ -97,7 +97,7 @@ Description: collaborative development tool - web vhosts (using Apache)
  integrated into one web site and managed through a web interface.
  .
  This package contains the files needed to run project vhosts
- on an Apache webserver.
+ on an Apache web server.
 
 
 Package: fusionforge-shell
@@ -148,7 +148,7 @@ Description: collaborative development tool - mail tools (using Exim 4)
 
 Package: fusionforge-lists
 Architecture: all
-Depends: fusionforge-common (=${source:Version}), php5-cli, fusionforge-mta-postfix | gforge-mta, mailman, ${misc:Depends}
+Depends: fusionforge-common (=${source:Version}), php5-cli, fusionforge-mta-postfix | fusionforge-mta, mailman, ${misc:Depends}
 Description: collaborative development tool - mailing-lists (using Mailman)
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
@@ -158,3 +158,72 @@ Description: collaborative development tool - mailing-lists (using Mailman)
  .
  This package controls the interaction between FusionForge and Mailman.
 
+
+##
+# Transition 5.3->6.0
+##
+# https://wiki.debian.org/Renaming_a_Package#Method_2
+
+Package: gforge-common
+Depends: fusionforge-common, ${misc:Depends}
+Architecture: all
+Priority: extra
+Section: oldlibs
+Description: Dummy upgrade package for FusionForge
+ This is a transitional package and can safely be removed.
+
+Package: gforge-db-postgresql
+Depends: fusionforge-db-local, ${misc:Depends}
+Architecture: all
+Priority: extra
+Section: oldlibs
+Description: Dummy upgrade package for FusionForge
+ This is a transitional package and can safely be removed.
+
+Package: gforge-db-remote
+Depends: fusionforge-db-remote, ${misc:Depends}
+Architecture: all
+Priority: extra
+Section: oldlibs
+Description: Dummy upgrade package for FusionForge
+ This is a transitional package and can safely be removed.
+
+Package: gforge-web-apache2
+Depends: fusionforge-web, ${misc:Depends}
+Architecture: all
+Priority: extra
+Section: oldlibs
+Description: Dummy upgrade package for FusionForge
+ This is a transitional package and can safely be removed.
+
+Package: gforge-shell-postgresql
+Depends: fusionforge-shell, ${misc:Depends}
+Architecture: all
+Priority: extra
+Section: oldlibs
+Description: Dummy upgrade package for FusionForge
+ This is a transitional package and can safely be removed.
+
+Package: gforge-mta-postfix
+Depends: fusionforge-mta-postfix, ${misc:Depends}
+Architecture: all
+Priority: extra
+Section: oldlibs
+Description: Dummy upgrade package for FusionForge
+ This is a transitional package and can safely be removed.
+
+Package: gforge-mta-exim4
+Depends: fusionforge-mta-exim4, ${misc:Depends}
+Architecture: all
+Priority: extra
+Section: oldlibs
+Description: Dummy upgrade package for FusionForge
+ This is a transitional package and can safely be removed.
+
+Package: gforge-lists-mailman
+Depends: fusionforge-lists, ${misc:Depends}
+Architecture: all
+Priority: extra
+Section: oldlibs
+Description: Dummy upgrade package for FusionForge
+ This is a transitional package and can safely be removed.

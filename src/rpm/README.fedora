@@ -1,0 +1,18 @@
+FusionForge's installation is fully automated.  However, it requires a
+working connection with the database.  If installation failed
+(e.g. you configured a remote database which got down during install),
+you can re-run it manually for a given FusionForge main package using:
+
+  /usr/share/fusionforge/post-install.d/<pkg_name>/<pkg_name>.sh configure
+
+and for plugins using:
+
+  /usr/share/fusionforge/post-install.d/common/plugin.sh <plugin_name> configure
+
+E.g.:
+
+  /usr/share/fusionforge/post-install.d/common/common.sh configure
+  /usr/share/fusionforge/post-install.d/db/db.sh configure
+  /usr/share/fusionforge/post-install.d/web/web.sh configure
+  /usr/share/fusionforge/post-install.d/shell/shell.sh configure
+  /usr/share/fusionforge/post-install.d/common/plugin.sh scmgit configure

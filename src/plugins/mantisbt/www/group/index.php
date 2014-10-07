@@ -3,7 +3,7 @@
  * Project MantisBT page
  *
  * Copyright 2009-2011, Franck Villaume - Capgemini
- * Copyright 2011, Franck Villaume - TrivialDev
+ * Copyright 2011,2014 Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -23,34 +23,30 @@
  */
 
 global $mantisbt;
-global $mantisbtConf;
-global $group_id;
 global $gfplugins;
+global $view;
 
 $mantisbt->getSubMenu();
 
 // page a afficher
 switch ($view) {
-	case "editIssue":
-	case "viewNote":
-	case "addIssue":
-	case "addAttachment":
-	case "roadmap": {
-		include($gfplugins.$mantisbt->name."/view/$view.php");
+	case 'addAttachment':
+	case 'addIssue':
+	case 'editIssue':
+	case 'roadmap':
+	case 'viewNote':
+	case 'viewIssue': {
+		include($gfplugins.$mantisbt->name.'/view/'.$view.'.php');
 		break;
 	}
-	case "viewIssue": {
-		include($gfplugins.$mantisbt->name."/view/$view.php");
+	case 'addNote':
+	case 'editNote': {
+		include($gfplugins.$mantisbt->name.'/view/addOrEditNote.php');
 		break;
 	}
-	case "editNote":
-	case "addNote": {
-		include($gfplugins.$mantisbt->name."/view/addOrEditNote.php");
-		break;
-	}
-	/* viewAllIssues is the default page */
+	/* viewIssues is the default page */
 	default: {
-		include($gfplugins.$mantisbt->name."/view/viewIssues.php");
+		include($gfplugins.$mantisbt->name.'/view/viewIssues.php');
 		break;
 	}
 }

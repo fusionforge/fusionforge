@@ -23,6 +23,7 @@
 
 require_once 'Widget.class.php';
 require_once $gfwww.'include/my_utils.php';
+require_once $gfcommon.'include/MonitorElement.class.php';
 
 /**
  * Widget_MyMonitoredDocuments
@@ -42,26 +43,30 @@ class Widget_MyMonitoredDocuments extends Widget {
 	function getContent() {
 		global $HTML;
 		$html_my_monitored_documents = '';
-		$result=db_query_params('select DISTINCT groups.group_name, docdata_vw.group_id from groups, docdata_vw, docdata_monitored_docman where docdata_monitored_docman.doc_id = docdata_vw.docid and groups.group_id = docdata_vw.group_id and docdata_monitored_docman.user_id = $1',array(user_getid()));
-		$rows=db_numrows($result);
-		if (!$result || $rows < 1) {
+		$monitorElementObject = new MonitorElement('docdata');
+		$distinctMonitorGroupIdsArray = $monitorElementObject->getMonitoredDistinctGroupIdsByUserIdInArray(user_getid());
+		if (!$distinctMonitorGroupIdsArray || count($distinctMonitorGroupIdsArray) < 1) {
 			$html_my_monitored_documents .= $HTML->warning_msg(_('You are not monitoring any documents.')).html_e('p', array(), _("If you monitor documents, you will be sent new update in the form of an email.")).html_e('p', array(), _("You can monitor documents by clicking on the appropriate icon action in the directory itself."));
 		} else {
-			$request =& HTTPRequest::instance();
-			$html_my_monitored_documents .= $HTML->listTableTop();
-			$vItemId = new Valid_UInt('hide_item_id');
-			$vItemId->required();
-			if($request->valid($vItemId)) {
-				$hide_item_id = $request->get('hide_item_id');
-			} else {
-				$hide_item_id = null;
+			$validDistinctMonitorGroupIdsArray = array();
+			foreach ($distinctMonitorGroupIdsArray as $distinctMonitorGroupId) {
+				if (forge_check_perm('docman', $distinctMonitorGroupId, 'read')) {
+					$validDistinctMonitorGroupIdsArray[] = $distinctMonitorGroupId;
+				} else {
+					// Oh ho! we found some monitored documents where user has no read access. Let's clean the situation
+					$monitorElementObject->disableMonitoringForGroupIdByUserId($distinctMonitorGroupId, user_getid());
+				}
 			}
-			for ($j=0; $j<$rows; $j++) {
-				$group_id = db_result($result,$j,'group_id');
-				$sql2 = "select docdata_vw.docid, docdata_vw.doc_group, docdata_vw.filename, docdata_vw.filetype, docdata_vw.description from docdata_vw,docdata_monitored_docman where docdata_vw.docid = docdata_monitored_docman.doc_id and docdata_vw.group_id = $1 and docdata_monitored_docman.user_id = $2 limit 100";
-				$result2 = db_query_params($sql2,array($group_id,user_getid()));
-				$rows2 = db_numrows($result2);
-
+			if (count($validDistinctMonitorGroupIdsArray)) {
+				$request =& HTTPRequest::instance();
+				$html_my_monitored_documents .= $HTML->listTableTop();
+				$vItemId = new Valid_UInt('hide_item_id');
+				$vItemId->required();
+				if($request->valid($vItemId)) {
+					$hide_item_id = $request->get('hide_item_id');
+				} else {
+					$hide_item_id = null;
+				}
 				$vDocument = new Valid_WhiteList('hide_document', array(0, 1));
 				$vDocument->required();
 				if($request->valid($vDocument)) {
@@ -69,32 +74,37 @@ class Widget_MyMonitoredDocuments extends Widget {
 				} else {
 					$hide_document = null;
 				}
+				foreach ($distinctMonitorGroupIdsArray as $distinctMonitorGroupId) {
+					$groupObject = group_get_object($distinctMonitorGroupId);
+					$monitorElementIds = $monitorElementObject->getMonitoredIdsByGroupIdByUserIdInArray($distinctMonitorGroupId, user_getid());
 
-				list($hide_now,$count_diff,$hide_url) = my_hide_url('document',$group_id,$hide_item_id,$rows2,$hide_document);
-				$count_new = max(0, $count_diff);
-				$cells = array();
-				$cells[] = array($hide_url.util_make_link('/docman/?group_id='.$group_id, db_result($result,$j,'group_name')).'&nbsp;&nbsp;&nbsp;&nbsp;'.
-						'['.$rows2.($count_new ? ', '.html_e('b', array(), sprintf(_('%s new'), $count_new)).']' : ']'), 'colspan' => 2);
-				$html_hdr = $HTML->multiTableRow(array('class' => 'boxitem'), $cells);
-				$html = '';
-				for ($i = 0; $i < $rows2; $i++) {
+					list($hide_now, $count_diff, $hide_url) = my_hide_url('document', $distinctMonitorGroupId, $hide_item_id, count($monitorElementIds), $hide_document);
+					$count_new = max(0, $count_diff);
+					$cells = array();
+					$cells[] = array($hide_url.util_make_link('/docman/?group_id='.$distinctMonitorGroupId, $groupObject->getPublicName()).'&nbsp;&nbsp;&nbsp;&nbsp;'.
+							'['.count($monitorElementIds).($count_new ? ', '.html_e('b', array(), sprintf(_('%s new'), $count_new)).']' : ']'), 'colspan' => 2);
+					$html_hdr = $HTML->multiTableRow(array('class' => 'boxitem'), $cells);
+					$html = '';
 					if (!$hide_now) {
-						$cells = array();
-						$doc_group = db_result($result2,$i,'doc_group');
-						$docid = db_result($result2,$i,'docid');
-						$cells[] = array('&nbsp;&nbsp;&nbsp;-&nbsp;'.util_make_link('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$doc_group, stripslashes(db_result($result2,$i,'filename'))), 'style' => 'width:99%');
-						$cells[] = array(util_make_link('/docman/?group_id='.$group_id.'&action=monitorfile&option=stop&view=listfile&dirid='.$doc_group.'&fileid='.$docid,
-								$HTML->getDeletePic(_('Stop Monitoring'), _('Stop Monitoring'), array('onClick' => 'return confirm("'._('Stop monitoring this document?').'")'))),
-								'class' => 'align-center');
-						$html .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
+						foreach ($monitorElementIds as $key => $monitorElementId) {
+							$documentObject = document_get_object($monitorElementId);
+							$cells = array();
+							$cells[] = array('&nbsp;&nbsp;&nbsp;-&nbsp;'.util_make_link('/docman/?group_id='.$distinctMonitorGroupId.'&view=listfile&dirid='.$documentObject->getDocGroupID(), stripslashes($documentObject->getFileName())), 'style' => 'width:99%');
+							$cells[] = array(util_make_link('/docman/?group_id='.$distinctMonitorGroupId.'&action=monitorfile&option=stop&view=listfile&dirid='.$documentObject->getDocGroupID().'&fileid='.$documentObject->getID(),
+									$HTML->getDeletePic(_('Stop Monitoring'), _('Stop Monitoring'), array('onClick' => 'return confirm("'._('Stop monitoring this document?').'")'))),
+									'class' => 'align-center');
+							$html .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($key, true)), $cells);
 
+						}
 					}
+
+
+					$html_my_monitored_documents .= $html_hdr.$html;
 				}
-
-
-				$html_my_monitored_documents .= $html_hdr.$html;
+				$html_my_monitored_documents .= $HTML->listTableBottom();
+			} else {
+				$html_my_monitored_documents .= $HTML->warning_msg(_('You are not monitoring any documents.')).html_e('p', array(), _("If you monitor documents, you will be sent new update in the form of an email.")).html_e('p', array(), _("You can monitor documents by clicking on the appropriate icon action in the directory itself."));
 			}
-			$html_my_monitored_documents .= $HTML->listTableBottom();
 		}
 		return $html_my_monitored_documents;
 	}

@@ -6,7 +6,7 @@
  * Copyright 2002, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013-2014 Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -26,6 +26,8 @@
 
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'forum/ForumMessage.class.php';
+require_once $gfcommon.'include/MonitorElement.class.php';
+
 // This string is used when sending the notification mail for identifying the
 // user response
 define('FORUM_MAIL_MARKER', '#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+');
@@ -401,9 +403,8 @@ class Forum extends Error {
 	 * @return	array	The array of user_id's.
 	 */
 	function getMonitoringIDs() {
-		$result = db_query_params('SELECT user_id FROM forum_monitored_forums WHERE forum_id=$1',
-					  array($this->getID()));
-		return util_result_column_to_array($result);
+		$MonitorElementObject = new MonitorElement('forum');
+		return $MonitorElementObject->getMonitorUsersIdsInArray($this->getID());
 	}
 
 	/**
@@ -439,25 +440,12 @@ class Forum extends Error {
 				$this->setError(_('You can only monitor if you are logged in.'));
 				return false;
 			}
-			$u = user_getid() ;
+			$u = user_getid();
 		}
-		$result = db_query_params('SELECT * FROM forum_monitored_forums WHERE user_id=$1 AND forum_id=$2',
-					  array($u,
-						$this->getID()));
-		if (!$result || db_numrows($result) < 1) {
-			/*
-				User is not already monitoring thread, so
-				insert a row so monitoring can begin
-			*/
-			$result = db_query_params('INSERT INTO forum_monitored_forums (forum_id,user_id) VALUES ($1,$2)',
-						  array($this->getID(),
-							$u));
-
-			if (!$result) {
-				$this->setError(_('Unable To Add Monitor').' : '.db_error());
-				return false;
-			}
-
+		$MonitorElementObject = new MonitorElement('forum');
+		if (!$MonitorElementObject->enableMonitoringByUserId($this->getID(), $u)) {
+			$this->setError($MonitorElementObject->getErrorMessage());
+			return false;
 		}
 		return true;
 	}
@@ -476,9 +464,12 @@ class Forum extends Error {
 			}
 			$u = user_getid();
 		}
-		return db_query_params('DELETE FROM forum_monitored_forums WHERE user_id=$1 AND forum_id=$2',
-					array($u,
-						  $this->getID()));
+		$MonitorElementObject = new MonitorElement('forum');
+		if (!$MonitorElementObject->disableMonitoringByUserId($this->getID(), $u)) {
+			$this->setError($MonitorElementObject->getErrorMessage());
+			return false;
+		}
+		return true;
 	}
 
 	/**
@@ -490,11 +481,8 @@ class Forum extends Error {
 		if (!session_loggedin()) {
 			return false;
 		}
-		$result = db_query_params('SELECT count(*) AS count FROM forum_monitored_forums WHERE user_id=$1 AND forum_id=$2',
-					  array(user_getid(),
-						$this->getID()));
-		$row_count = db_fetch_array($result);
-		return $result && $row_count['count'] > 0;
+		$MonitorElementObject = new MonitorElement('forum');
+		return $MonitorElementObject->isMonitoredByUserId($this->getID(), user_getid());
 	}
 
 	/**
@@ -634,8 +622,8 @@ class Forum extends Error {
 			return false;
 		}
 
-		$result = db_query_params('DELETE FROM forum_monitored_forums WHERE forum_id=$1',
-				array($this->getID()));
+		$MonitorElementObject = new MonitorElement('forum');
+		$result = $MonitorElementObject->clearMonitor($this->getID());
 		if (!$result) {
 			$this->setError(_('Error Deleting Forum')._(': ').db_error());
 			db_rollback();

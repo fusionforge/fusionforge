@@ -2,12 +2,14 @@ fusionforge (5.3.50-1) unstable; urgency=medium
 
   * New upstream release
   * Adapt packaging to new build system
+  * Dump Standards-Version (no changes)
 
- -- Sylvain Beucler <beuc@debian.org>  Wed, 20 Aug 2014 14:58:47 +0200
+ -- Sylvain Beucler <beuc@debian.org>  Mon, 22 Sep 2014 14:58:47 +0200
 
-fusionforge (5.3.1-2) UNRELEASED; urgency=medium
+fusionforge (5.3.2-1) unstable; urgency=high
 
   [ Sylvain Beucler ]
+  * New upstream release (CVE-2014-6275)
   * plugin 'fckeditor' removed from upstream sources
   * plugin 'wiki' fixes 'source-is-missing' in upstream sources
   * fusionforge-plugin-scmhook: link Snoopy.class.php from the packaged version
@@ -17,7 +19,7 @@ fusionforge (5.3.1-2) UNRELEASED; urgency=medium
   * Infrastructure to use "fusionforge" dirs rather than "gforge"
     (/etc/gforge, /usr/share/gforge, and so on).
 
- -- Roland Mas <lolando@debian.org>  Fri, 25 Jul 2014 15:57:39 +0200
+ -- Sylvain Beucler <beuc@debian.org>  Mon, 22 Sep 2014 13:46:44 +0200
 
 fusionforge (5.3.1-1) unstable; urgency=medium
 

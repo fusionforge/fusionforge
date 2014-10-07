@@ -1,7 +1,7 @@
 #! /bin/bash
 # Configure Postfix for FusionForge+Mailman
 #
-# Christian Bayle, Roland Mas, debian-sf (GForge for Debian)
+# Christian Bayle, Roland Mas
 # Julien Goodwin
 # Copyright (C) 2014  Inria (Sylvain Beucler)
 #
@@ -59,7 +59,7 @@ case "$1" in
 	postfix_append_config 'relay_domains' $lists_host
 
 	# Forwarding rules
-	postfix_append_config 'virtual_alias_maps' 'proxy:pgsql:pgsql_gforge_users'
+	postfix_append_config 'virtual_alias_maps' 'proxy:pgsql:pgsql_fusionforge_users'
 
 	postfix_append_config 'transport_maps' "hash:$data_path/etc/postfix-transport"
 	mkdir -m 755 -p $data_path/etc/
@@ -72,17 +72,18 @@ case "$1" in
 		### END FUSIONFORGE BLOCK -- DO NOT EDIT
 		EOF
 	fi
+	chmod 600 /etc/postfix/main.cf  # adding database password
 	sed -i -e '/^### BEGIN FUSIONFORGE BLOCK/,/^### END FUSIONFORGE BLOCK/ { ' -e 'ecat' -e 'd }' \
 	    /etc/postfix/main.cf <<EOF
 ### BEGIN FUSIONFORGE BLOCK -- DO NOT EDIT ###
 # You may move this block around to accomodate your local needs as long as you
 # keep it in an appropriate position, where "appropriate" is defined by you.
-pgsql_gforge_users_hosts = unix:/var/run/postgresql
-pgsql_gforge_users_user = $(forge_get_config database_user)_mta
-pgsql_gforge_users_password = $(forge_get_config database_user)_mta
-pgsql_gforge_users_dbname = $(forge_get_config database_name)
-pgsql_gforge_users_domain = $users_host
-pgsql_gforge_users_query = SELECT email FROM mta_users WHERE login = '%u'
+pgsql_fusionforge_users_hosts = unix:/var/run/postgresql
+pgsql_fusionforge_users_user = $(forge_get_config database_user)_mta
+pgsql_fusionforge_users_password = $(forge_get_config database_password_mta)
+pgsql_fusionforge_users_dbname = $(forge_get_config database_name)
+pgsql_fusionforge_users_domain = $users_host
+pgsql_fusionforge_users_query = SELECT email FROM mta_users WHERE login = '%u'
 mailman_destination_recipient_limit = 1
 ### END FUSIONFORGE BLOCK ###
 EOF
@@ -97,7 +98,7 @@ EOF
 	postconf -e transport_maps="$(postconf -h transport_maps \
             | sed "s|\(, *\)\?hash:$data_path/etc/postfix-transport||")"
 	postconf -e virtual_alias_maps="$(postconf -h virtual_alias_maps \
-            | sed "s/\(, *\)\?proxy:pgsql:pgsql_gforge_users//")"
+            | sed "s/\(, *\)\?proxy:pgsql:pgsql_fusionforge_users//")"
 	postconf -e relay_domains="$(postconf -h relay_domains | sed "s/\(, *\)\?$lists_host//")"
 	postconf -e mydestination="$(postconf -h mydestination | sed "s/\(, *\)\?$users_host//")"
 	;;

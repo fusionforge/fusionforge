@@ -34,7 +34,7 @@ class foafprofilesPlugin extends Plugin {
 		$this->text = _("User FOAF Profiles"); // To show in the tabs, use...
 		$this->pkg_desc =
 _("This plugin provides FOAF profiles for users on /users URLs 
-with content-negociation (application/rdf+xml).");
+with content-negotiation (application/rdf+xml).");
 		$this->_addHook("script_accepted_types");
 		$this->_addHook("content_negociated_user_home");
 

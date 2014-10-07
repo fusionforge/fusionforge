@@ -24,7 +24,11 @@ database_user=$(forge_get_config database_user)
 
 # Create default configuration files if needed
 if [ -e /etc/redhat-release ]; then
-    service postgresql initdb >/dev/null
+    if type postgresql-setup >/dev/null 2>&1; then
+	postgresql-setup initdb >/dev/null || true
+    else
+	service postgresql initdb >/dev/null || true  # deprecated in Fedora
+    fi
     chkconfig postgresql on
 fi
 if [ -e /etc/SuSE-release ]; then
@@ -52,26 +56,31 @@ fi
 # Replace configuration block
 sed -i -e '/^### BEGIN FUSIONFORGE BLOCK/,/^### END FUSIONFORGE BLOCK/ { ' -e 'ecat' -e 'd }' $pg_hba <<EOF
 ### BEGIN FUSIONFORGE BLOCK -- DO NOT EDIT
-# user which is used by libnss to access the DB (see /etc/nss-pgsql.conf)
-local $database_name ${database_user}_nss trust
-local $database_name list ident
-local $database_name ${database_user}_mta md5
+# single-host configuration
+local $database_name ${database_user}_nss     trust
+local $database_name ${database_user}_mta     md5
+local $database_name ${database_user}_ssh_akc md5
 # multi-host configuration
-host  $database_name ${database_user}_nss 0.0.0.0/0 trust
+host  $database_name ${database_user}_nss     0.0.0.0/0 trust
+host  $database_name ${database_user}_mta     0.0.0.0/0 md5
+host  $database_name ${database_user}_ssh_akc 0.0.0.0/0 md5
 host  $database_name all 0.0.0.0/0 md5
 ### END FUSIONFORGE BLOCK -- DO NOT EDIT
 EOF
 
 # Multi-host connection
+restart=0
 if ! grep -q '^listen_addresses\b' $pg_conf; then
     echo "listen_addresses='0.0.0.0'" >> $pg_conf
+    restart=1
 fi
 
-if ! service postgresql status >/dev/null; then
-    service postgresql start
+if [ $restart = 1 ] || ! service postgresql status >/dev/null; then
+    service postgresql restart
 else
     service postgresql reload
 fi
+
 if [ -x /bin/systemctl ]; then
     sleep 5  # systemd's postgresql init scripts is stupidly async
     # if you have a better way that works across distros...

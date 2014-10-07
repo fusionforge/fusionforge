@@ -58,7 +58,7 @@ class ProjectTaskHTML extends ProjectTask {
 	}
 
 	function showDependentTasks () {
-		global $HTMl;
+		global $HTML;
 		$result=db_query_params ('SELECT project_task.project_task_id,project_task.summary
 			FROM project_task,project_dependencies
 			WHERE project_task.project_task_id=project_dependencies.project_task_id
@@ -72,7 +72,7 @@ class ProjectTaskHTML extends ProjectTask {
 			$title_arr[]=_('Task Id');
 			$title_arr[]=_('Task Summary');
 
-			echo $HTMl->listTableTop ($title_arr);
+			echo $HTML->listTableTop ($title_arr);
 
 			for ($i = 0; $i < $rows; $i++) {
 				$cells = array();
@@ -80,7 +80,7 @@ class ProjectTaskHTML extends ProjectTask {
 				$cells[][] = db_result($result, $i, 'summary');
 				echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
 			}
-			echo $HTMl->listTableBottom();
+			echo $HTML->listTableBottom();
 		} else {
 			echo '<p>'._('No Tasks are Dependent on This Task').'</p>';
 		}

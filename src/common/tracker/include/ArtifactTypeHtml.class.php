@@ -70,11 +70,11 @@ class ArtifactTypeHtml extends ArtifactType {
 			$attr[]   = array('title' => _('Various graph about statistics.'));
 			if ($this->isMonitoring()) {
 				$labels[] = _('Stop Monitor');
-				$links[]  = '/tracker/?group_id='.$group_id.'&atid='. $this->getID().'&func=monitor&stop=1';
+				$links[]  = '/tracker/?group_id='.$group_id.'&atid='. $this->getID().'&func=monitor&stopmonitor=1';
 				$attr[]   = array('title' => _('Remove this tracker from your monitoring.'));
 			} else {
 				$labels[] = _('Monitor');
-				$links[]  = '/tracker/?group_id='.$group_id.'&atid='. $this->getID().'&func=monitor&start=1';
+				$links[]  = '/tracker/?group_id='.$group_id.'&atid='. $this->getID().'&func=monitor&startmonitor=1';
 				$attr[]   = array('title' => _('Add this tracker from your monitoring.'));
 			}
 

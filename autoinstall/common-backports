@@ -22,15 +22,27 @@
 
 
 function backports_deb {
-    # fusionforge-plugin-scmbzr depends on loggerhead (>= 1.19~bzr477~),
-    # but wheezy only has 1.19~bzr461-1, so we need to manually "Backport"
-    # a more recent dependency
-    if grep -q ^7 /etc/debian_version && ! dpkg-query -s loggerhead >/dev/null 2>&1 ; then
-	# install loggerhead with its dependencies
-	# we need gdebi to make sure dependencies are installed too (simple dpkg -i won't)
-	apt-get -y install gdebi-core wget
-	wget -c http://snapshot.debian.org/archive/debian/20121107T152130Z/pool/main/l/loggerhead/loggerhead_1.19%7Ebzr477-1_all.deb
-	gdebi --non-interactive loggerhead_1.19~bzr477-1_all.deb
+    if grep -q ^7 /etc/debian_version; then
+	# Install OpenSSH 6.6 to get AuthorizedKeysCommand support
+	if [ ! -f /etc/apt/sources.list.d/backports.list ]; then
+	    echo 'deb http://http.debian.net/debian wheezy-backports main' \
+		> /etc/apt/sources.list.d/backports.list
+	    apt-get update
+	fi
+	if dpkg-query -s openssh-server | grep -q 'Version: 1:6.0'; then
+	    apt-get -y install openssh-server -t wheezy-backports
+	fi
+
+	# fusionforge-plugin-scmbzr depends on loggerhead (>=
+	# 1.19~bzr477~), but wheezy only has 1.19~bzr461-1, so we need
+	# to manually "Backport" a more recent dependency
+	if ! dpkg-query -s loggerhead >/dev/null 2>&1 ; then
+	    # install loggerhead with its dependencies
+	    # we need gdebi to make sure dependencies are installed too (simple dpkg -i won't)
+	    apt-get -y install gdebi-core wget
+	    wget -c http://snapshot.debian.org/archive/debian/20121107T152130Z/pool/main/l/loggerhead/loggerhead_1.19%7Ebzr477-1_all.deb
+	    gdebi --non-interactive loggerhead_1.19~bzr477-1_all.deb
+	fi
     fi
 }
 

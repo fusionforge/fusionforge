@@ -51,7 +51,7 @@ class admsswPlugin extends Plugin {
 		$this->text = _("ADMS.SW"); // To show in the tabs, use...
 		$this->pkg_desc =
 _("This plugin provides ADMS.SW additions to the DOAP RDF documents for
-projects on /projects URLs with content-negociation
+projects on /projects URLs with content-negotiation
 (application/rdf+xml).");
 
 		// The standard RDF namespaces that will be used in the plugin
@@ -439,7 +439,7 @@ projects on /projects URLs with content-negociation
 	 */
 	public function getProjectListSize() {
 		// same as for trove's full list
- 		$projects = get_public_active_projects_asc();
+ 		$projects = group_get_public_active_projects_asc();
 		return count($projects);
 	}
 
@@ -475,7 +475,7 @@ projects on /projects URLs with content-negociation
 		$res->setProp('adms:supportedSchema', 'ADMS.SW v1.0');
 
 		// same as for trove's full list
-		$projects = get_public_active_projects_asc();
+		$projects = group_get_public_active_projects_asc();
 
 		if ( isset($chunk) && isset($chunksize) ) {
 			// TODO : do some checks on $chunk $chunksize values

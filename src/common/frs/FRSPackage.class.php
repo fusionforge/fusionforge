@@ -26,6 +26,7 @@
 
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'frs/FRSRelease.class.php';
+require_once $gfcommon.'include/MonitorElement.class.php';
 
 /**
  * get_frs_packages - get all FRS packages for a specific project
@@ -154,7 +155,6 @@ class FRSPackage extends Error {
 	 * @return	boolean	success.
 	 */
 	function create($name) {
-
 		if (strlen($name) < 3) {
 			$this->setError(_('FRSPackage Name Must Be At Least 3 Characters'));
 			return false;
@@ -176,7 +176,7 @@ class FRSPackage extends Error {
 		}
 
 		db_begin();
-		$result = db_query_params('INSERT INTO frs_package(group_id, name, status_id) VALUES ($1,$2,$3)',
+		$result = db_query_params('INSERT INTO frs_package(group_id, name, status_id) VALUES ($1, $2, $3)',
 					array($this->Group->getId(),
 						htmlspecialchars($name),
 						1));
@@ -185,7 +185,7 @@ class FRSPackage extends Error {
 			db_rollback();
 			return false;
 		}
-		$this->package_id = db_insertid($result,'frs_package','package_id');
+		$this->package_id = db_insertid($result, 'frs_package', 'package_id');
 		if (!$this->fetchData($this->package_id)) {
 			db_rollback();
 			return false;
@@ -319,23 +319,10 @@ class FRSPackage extends Error {
 			$this->setError(_('You can only monitor if you are logged in.'));
 			return false;
 		}
-		$result = db_query_params('SELECT * FROM filemodule_monitor WHERE user_id=$1 AND filemodule_id=$2',
-					array (user_getid(), $this->getID()));
-
-		if (!$result || db_numrows($result) < 1) {
-			/*
-				User is not already monitoring thread, so
-				insert a row so monitoring can begin
-			*/
-			$result = db_query_params ('INSERT INTO filemodule_monitor (filemodule_id,user_id) VALUES ($1,$2)',
-						   array ($this->getID(),
-							  user_getid()));
-
-			if (!$result) {
-				$this->setError(_('Unable To Add Monitor')._(': ').db_error());
-				return false;
-			}
-
+		$MonitorElementObject = new MonitorElement('frspackage');
+		if (!$MonitorElementObject->enableMonitoringByUserId($this->getID(), user_getid())) {
+			$this->setError($MonitorElementObject->getErrorMessage());
+			return false;
 		}
 		return true;
 	}
@@ -350,9 +337,21 @@ class FRSPackage extends Error {
 			$this->setError(_('You can only monitor if you are logged in.'));
 			return false;
 		}
-		return db_query_params ('DELETE FROM filemodule_monitor WHERE user_id=$1 AND filemodule_id=$2',
-					array (user_getid(),
-					       $this->getID())) ;
+		$MonitorElementObject = new MonitorElement('frspackage');
+		if (!$MonitorElementObject->disableMonitoringByUserId($this->getID(), $userid)) {
+			$this->setError($MonitorElementObject->getErrorMessage());
+			return false;
+		}
+		return true;
+	}
+
+	function clearMonitor() {
+		$MonitorElementObject = new MonitorElement('frspackage');
+		if (!$MonitorElementObject->clearMonitor($this->getID())) {
+			$this->setError($MonitorElementObject->getErrorMessage());
+			return false;
+		}
+		return true;
 	}
 
 	/**
@@ -361,13 +360,13 @@ class FRSPackage extends Error {
 	 * @return	int	the count
 	 */
 	function getMonitorCount() {
-		$res = db_result(db_query_params ('select count(*) as count from filemodule_monitor where filemodule_id=$1',
-						  array ($this->getID())), 0, 0);
-		if ($res < 0) {
-			$this->setError(_('Error On querying monitor count: ').db_error());
-			return false;
+		$MonitorElementObject = new MonitorElement('frspackage');
+		$getMonitorCounterInteger = $MonitorElementObject->getMonitorCounterInteger($this->getID());
+		if ($getMonitorCounterInteger !== false) {
+			return $getMonitorCounterInteger;
 		}
-		return $res;
+		$this->setError($MonitorElementObject->getErrorMessage());
+		return false;
 	}
 
 	/**
@@ -379,31 +378,16 @@ class FRSPackage extends Error {
 		if (!session_loggedin()) {
 			return false;
 		}
-
-		$result = db_query_params ('SELECT * FROM filemodule_monitor WHERE user_id=$1 AND filemodule_id=$2',
-					   array (user_getid(),
-						  $this->getID())) ;
-
-		if (!$result || db_numrows($result) < 1) {
-			return false;
-		} else {
-			return true;
-		}
+		return $this->isMonitoredBy(user_getid());
 	}
 
 	function isMonitoredBy($userid = 'ALL') {
+		$MonitorElementObject = new MonitorElement('frspackage');
 		if ( $userid == 'ALL' ) {
-			$condition = '';
+			return $MonitorElementObject->isMonitoredByAny($this->getID());
 		} else {
-			$condition = 'user_id='.$userid.' AND';
+			return $MonitorElementObject->isMonitoredByUserId($this->getID(), $userid);
 		}
-		$result = db_query_params('SELECT * FROM filemodule_monitor WHERE '.$condition.' filemodule_id=$1',
-						array($this->getID()));
-
-		if (!$result || db_numrows($result) < 1)
-			return false;
-
-		return true;
 	}
 
 	/**
@@ -412,9 +396,8 @@ class FRSPackage extends Error {
 	 * @return	array	The array of user_id's.
 	 */
 	function &getMonitorIDs() {
-		$res = db_query_params ('SELECT user_id FROM filemodule_monitor WHERE filemodule_id=$1',
-					array ($this->getID())) ;
-		return util_result_column_to_array($res);
+		$MonitorElementObject = new MonitorElement('frspackage');
+		return $MonitorElementObject->getMonitorUsersIdsInArray($this->getID());
 	}
 
 	/**
@@ -479,7 +462,7 @@ class FRSPackage extends Error {
 			}
 		}
 		db_commit();
-		$this->createNewestReleaseFilesAsZip();
+		$this->createReleaseFilesAsZip($this->getNewestReleaseID());
 		$this->sendNotice();
 		return true;
 	}
@@ -492,10 +475,10 @@ class FRSPackage extends Error {
 	function &getReleases() {
 		if (!is_array($this->package_releases) || count($this->package_releases) < 1) {
 			$this->package_releases=array();
-			$res = db_query_params ('SELECT * FROM frs_release WHERE package_id=$1',
-						array ($this->getID())) ;
+			$res = db_query_params('SELECT * FROM frs_release WHERE package_id=$1',
+						array($this->getID()));
 			while ($arr = db_fetch_array($res)) {
-				$this->package_releases[]=$this->newFRSRelease($arr['release_id'],$arr);
+				$this->package_releases[] = $this->newFRSRelease($arr['release_id'], $arr);
 			}
 		}
 		return $this->package_releases;
@@ -544,11 +527,11 @@ class FRSPackage extends Error {
 			$this->setError(_('Package delete error: trying to delete root dir'));
 			return false;
 		}
-		$this->deleteNewestReleaseFilesAsZip();
 
 		if (is_dir($dir))
 			rmdir($dir);
 
+		$this->clearMonitor();
 		db_query_params('DELETE FROM frs_package WHERE package_id=$1 AND group_id=$2',
 				 array ($this->getID(),
 					$this->Group->getID()));
@@ -556,49 +539,53 @@ class FRSPackage extends Error {
 	}
 
 	/**
-	 * Function that selects the newest release.
+	 * getNewestReleaseID - return the newest release_id of a package
 	 * The newest release is the release with the highest ID
 	 *
-	 * @return	object	FRSRelease
+	 * @return	integer	release id
 	 */
-	public function getNewestRelease() {
+	public function getNewestReleaseID() {
 		$result = db_query_params('SELECT MAX(release_id) AS release_id FROM frs_release WHERE package_id=$1',
-					  array ($this->getID()));
+					  array($this->getID()));
 
 		if ($result && db_numrows($result) == 1) {
 			$row = db_fetch_array($result);
-			return frsrelease_get_object($row['release_id']);
+			return $row['release_id'];
 		} else {
 			$this->setError(_('No valid max release id'));
 			return false;
 		}
 	}
 
-	public function getNewestReleaseZipName() {
+	public function getReleaseZipPath($release) {
+		return forge_get_config('upload_dir').'/'.$this->Group->getUnixName().'/'.$this->getFileName().'/'.$this->getReleaseZipName($release);
+	}
+
+	public function getReleaseZipName($release) {
+		$frsr = frsrelease_get_object($release);
+		return $this->getFileName().'-'.$frsr->getName().'.zip';
+	}
+
+	public function getNewestReleaseZipName($release) {
 		return $this->getFileName().'-latest.zip';
 	}
 
-	public function getNewestReleaseZipPath() {
-		return forge_get_config('upload_dir').'/'.$this->Group->getUnixName().'/'.$this->getFileName().'/'.$this->getNewestReleaseZipName();
-	}
-
 	/**
-	 * createNewestReleaseFilesAsZip - create the Zip Archive of the package
+	 * createReleaseFilesAsZip - create the Zip Archive of the release
 	 *
-	 * @return	bool true on success even if the php ZipArchive does not exist
+	 * @param	integer	release id.
+	 * @return	bool	true on success even if the php ZipArchive does not exist
 	 */
-	public function createNewestReleaseFilesAsZip(){
-		$release = $this->getNewestRelease();
-		if ($release && class_exists('ZipArchive')) {
+	public function createReleaseFilesAsZip($release_id) {
+		if ($release_id && class_exists('ZipArchive')) {
 			$zip = new ZipArchive();
-			$zipPath = $this->getNewestReleaseZipPath();
+			$zipPath = $this->getReleaseZipPath($release_id);
+			$release = frsrelease_get_object($release_id);
 			$filesPath = forge_get_config('upload_dir').'/'.$this->Group->getUnixName().'/'.$this->getFileName().'/'.$release->getFileName();
-
-			if ($zip->open($zipPath, ZIPARCHIVE::OVERWRITE) !== true) {
+			if ($zip->open($zipPath, ZIPARCHIVE::CREATE) !== true) {
 				$this->setError(_('Cannot open the file archive')._(': ').$zipPath.'.');
 				return false;
 			}
-
 			$files = $release->getFiles();
 			foreach ($files as $f) {
 				$filePath = $filesPath.'/'.$f->getName();
@@ -615,9 +602,9 @@ class FRSPackage extends Error {
 		return true;
 	}
 
-	public function deleteNewestReleaseFilesAsZip() {
-		if (file_exists($this->getNewestReleaseZipPath()))
-			unlink($this->getNewestReleaseZipPath());
+	public function deleteReleaseFilesAsZip($release_id) {
+		if (file_exists($this->getReleaseZipPath($release_id)))
+			unlink($this->getReleaseZipPath($release_id));
 		return true;
 	}
 
@@ -660,22 +647,8 @@ class FRSPackage extends Error {
 	 * @return	string	The list of emails comma separated
 	 */
 	function getMonitoredUserEmailAddress() {
-		$result = db_query_params('select users.email from users,filemodule_monitor where users.user_id = filemodule_monitor.user_id and filemodule_monitor.file_id = $1', array ($this->getID()));
-		if (!$result || db_numrows($result) < 1) {
-			return NULL;
-		} else {
-			$values = '';
-			$comma = '';
-			$i = 0;
-			while ($arr = db_fetch_array($result)) {
-				if ( $i > 0 )
-					$comma = ',';
-
-				$values .= $comma.$arr['email'];
-				$i++;
-			}
-		}
-		return $values;
+		$MonitorElementObject = new MonitorElement('frspackage');
+		return $MonitorElementObject->getAllEmailsInCommatSeparated($this->getID());
 	}
 }
 

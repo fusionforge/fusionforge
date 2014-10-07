@@ -40,6 +40,7 @@ install-base-dirs:
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(config_path)/httpd.conf.d/
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(config_path)/plugins/
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(sysconfdir)/cron.d/
+	$(INSTALL) -d -m 00755 $(DESTDIR)$(sysconfdir)/logrotate.d/
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(data_path)/
 
 install-config: install-base-dirs
@@ -56,12 +57,14 @@ install-config: install-base-dirs
 			-e 's,@apache_user@,$(apache_user),' \
 			-e 's,@apache_group@,$(apache_group),' \
 			-e 's,@apache_service@,$(apache_service),' \
+			-e 's,@ssh_service@,$(ssh_service),' \
 			> $(DESTDIR)$(config_path)/config.ini; \
 	fi
 
 install-common: install-config install-plugin-authbuiltin
 	$(MAKE) -C locale DESTDIR=$(DESTDIR) PREFIX=$(PREFIX) install
 	$(CP_R) VERSION bin common templates lib $(DESTDIR)$(pkgdatadir)/
+	$(INSTALL) -d -m 00755 $(DESTDIR)$(config_path)/custom/
 	$(CP_R) cronjobs/scm $(DESTDIR)$(pkgdatadir)/cronjobs/  # no dedicated 'scm' package now
 	$(CP_R) post-install.d/common $(DESTDIR)$(pkgdatadir)/post-install.d/
 	$(CP_R) plugins/env.inc.php $(DESTDIR)$(pkgdatadir)/plugins/
@@ -90,6 +93,10 @@ install-web: install-base-dirs
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/forum/
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/tracker/
 	$(CP_R) post-install.d/web $(DESTDIR)$(pkgdatadir)/post-install.d/
+	if [ ! -e $(DESTDIR)$(sysconfdir)/logrotate.d/fusionforge-web ]; then \
+		sed 's,@log_path@,$(log_path),' etc/logrotate.d/fusionforge-web \
+			> $(DESTDIR)$(sysconfdir)/logrotate.d/fusionforge-web; \
+	fi
 #	TODO: multiple servers support
 #	(e.g. install scm, lists, vhosts and vhosts-extra separately)
 
@@ -98,6 +105,10 @@ install-web-vhosts: install-base-dirs
 	if [ ! -e $(DESTDIR)$(sysconfdir)/cron.d/fusionforge-web-vhosts ]; then \
 		sed 's,@bindir@,$(bindir),' etc/cron.d/fusionforge-web-vhosts \
 			> $(DESTDIR)$(sysconfdir)/cron.d/fusionforge-web-vhosts; \
+	fi
+	if [ ! -e $(DESTDIR)$(sysconfdir)/logrotate.d/fusionforge-web-vhosts ]; then \
+		sed 's,@log_path@,$(log_path),' etc/logrotate.d/fusionforge-web-vhosts \
+			> $(DESTDIR)$(sysconfdir)/logrotate.d/fusionforge-web-vhosts; \
 	fi
 #	TODO: only install 40-vhosts-extra.conf and httpd.vhosts with this module
 
@@ -168,6 +179,10 @@ post-install-web:
 
 post-install-shell:
 	$(post_source_path)/post-install.d/shell/shell.sh configure
+post-install-mta-postfix:
+	$(post_source_path)/post-install.d/mta-postfix/mta-postfix.sh configure
+post-install-mta-exim4:
+	$(post_source_path)/post-install.d/mta-exim4/mta-exim4.sh configure
 post-install-lists:
 	$(post_source_path)/post-install.d/lists/lists.sh configure
 
@@ -204,6 +219,7 @@ dist: all
 	mkdir $(TAR_PREFIX)/
 	$(CP_R) $$(ls -A | grep -v '^\.git' | grep -v $(TAR_PREFIX)) $(TAR_PREFIX)/
 	find $(TAR_PREFIX)/ -name '*~' -print0 | xargs -r0 rm
+	find $(TAR_PREFIX)/ -type d -print0 | xargs -r0 chmod g-s  # rpmlint non-standard-dir-perm
 	tar cjf $(TAR_PREFIX).tar.bz2 $(TAR_PREFIX)/
 	rm -rf $(TAR_PREFIX)/
 

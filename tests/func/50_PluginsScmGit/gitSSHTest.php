@@ -25,9 +25,6 @@ class ScmGitSSHTest extends FForge_SeleniumTestCase
 {
 	function testScmGitSSH()
 	{
-		$this->skip_on_rpm_installs();
-		$this->skip_on_src_installs();
-
 		$this->activatePlugin('scmgit');
 		$this->populateStandardTemplate('empty');
 		$this->init();
@@ -46,7 +43,6 @@ class ScmGitSSHTest extends FForge_SeleniumTestCase
 		$this->reload_nscd();
 		$this->cron("scm/create_scm_repos.php");
 		$this->cron("shell/homedirs.php");
-		$this->cron("shell/ssh_create.php");
 
 		// Get the address of the repo
 		$this->open(ROOT);

@@ -10,6 +10,7 @@
  *
  * Copyright 2010, Franck Villaume - Capgemini
  * Copyright 2012,2014, Franck Villaume - TrivialDev
+ * Copyright (C) 2014  Inria (Sylvain Beucler)
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;

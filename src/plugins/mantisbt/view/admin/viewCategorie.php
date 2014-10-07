@@ -3,6 +3,7 @@
  * MantisBT plugin
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -32,11 +33,11 @@ global $group_id;
 try {
 	/* do not recreate $clientSOAP object if already created by other pages */
 	if (!isset($clientSOAP))
-		$clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+		$clientSOAP = new SoapClient($mantisbtConf['url'].'/api/soap/mantisconnect.php?wsdl', array('trace' => true, 'exceptions' => true));
 
-	$listCategories = $clientSOAP->__soapCall('mc_project_get_categories', array("username" => $username, "password" => $password, "project_id" => $mantisbtConf['id_mantisbt']));
+	$listCategories = $clientSOAP->__soapCall('mc_project_get_categories', array('username' => $username, 'password' => $password, 'project_id' => $mantisbtConf['id_mantisbt']));
 } catch (SoapFault $soapFault) {
-	echo $HTML->warning_msg(_('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring);
+	echo $HTML->warning_msg(_('Technical error occurs during data retrieving')._(': ').$soapFault->faultstring);
 	$errorPage = true;
 }
 
@@ -44,35 +45,30 @@ if (!isset($errorPage)){
 	echo $HTML->boxTop(_('Manage categories'));
 	// General category is shared so no edit...
 	if (count($listCategories) > 1) {
-		echo	'<table>';
+		echo	$HTML->listTableTop();
 		echo		'<tr>';
 		echo			'<td>'._('Category').'</td>';
 		echo			'<td colspan="2">'._('Actions').'</td>';
 		echo		'</tr>';
-		$i = 1;
 		foreach ($listCategories as $key => $category){
-			echo '<tr '.$HTML->boxGetAltRowStyle($i).'">';
+			$cells = array();
 			if ( $category != 'General' ) {
-				echo '<td>'.$category.'</td>';
-				echo '<td>';
-				echo '<form method="POST" action="?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&action=renameCategory">';
-				echo '<input type="hidden" name="renameCategory" value="'.htmlspecialchars($category).'" />';
-				echo '<input name="newCategoryName" type="text" />';
-				echo '<input type="submit" value="'._('Rename').'" />';
-				echo '</td>';
-				echo '</form>';
-				echo '<td>';
-				echo '<form method="POST" action="?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&action=deleteCategory">';
-				echo '<input type="hidden" name="deleteCategory" value="'.htmlspecialchars($category).'" />';
-				echo '<input type="submit" value="'._('Delete').'" />';
-				echo '</form>';
-				echo '</td></tr>';
-				$i++;
+				$cells[][] = $category;
+				$cells[][] = $HTML->openForm(array('method' => 'post', 'action' => util_make_uri('/plugins/'.$mantisbt->name.'/?type=admin&group_id='.$group_id.'&action=renameCategory'))).
+						'<input type="hidden" name="renameCategory" value="'.htmlspecialchars($category).'" />'.
+						'<input name="newCategoryName" type="text" />'.
+						'<input type="submit" value="'._('Rename').'" />'.
+						$HTML->closeForm();
+				$cells[][] = $HTML->openForm(array('method' => 'post', 'action' => util_make_uri('/plugins/'.$mantisbt->name.'/?type=admin&group_id='.$group_id.'&action=deleteCategory'))).
+						'<input type="hidden" name="deleteCategory" value="'.htmlspecialchars($category).'" />'.
+						'<input type="submit" value="'._('Delete').'" />'.
+						$HTML->closeForm();
 			}
+			echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($key, true)), $cells);
 		}
-		echo '</table>';
+		echo $HTML->listTableBottom();
 	} else {
-		echo $HTML->warning_msg(_('No Categories'));
+		echo $HTML->information(_('No Categories'));
 	}
 	echo $HTML->boxBottom();
 }

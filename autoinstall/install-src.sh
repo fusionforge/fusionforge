@@ -31,14 +31,14 @@ if [ -e /etc/debian_version ]; then
     apt-get update
     apt-get install -y make gettext php5-cli php5-pgsql php-htmlpurifier \
 	apache2 locales-all postgresql libnss-pgsql2 \
-	subversion viewvc \
+	subversion augeas-tools viewvc git \
 	mediawiki \
 	python-moinmoin libapache2-mod-wsgi python-psycopg2
 else
     backports_rpm
     yum install -y make gettext php-cli php-pgsql \
     httpd mod_ssl postgresql-server \
-    subversion viewvc \
+    subversion augeas viewvc git \
     mediawiki119 \
     moin mod_wsgi python-psycopg2
 fi
@@ -46,13 +46,13 @@ fi
 cd /usr/src/fusionforge/src/
 make
 make install-base install-shell \
-    install-plugin-scmsvn install-plugin-blocks \
-    install-plugin-mediawiki install-plugin-moinmoin \
+    install-plugin-scmsvn install-plugin-scmgit \
+    install-plugin-blocks install-plugin-mediawiki install-plugin-moinmoin \
     install-plugin-online_help
 # adapt .ini configuration in /etc/fusionforge/config.ini.d/
 make post-install-base post-install-shell \
-    post-install-plugin-scmsvn post-install-plugin-blocks \
-    post-install-plugin-mediawiki post-install-plugin-moinmoin \
+    post-install-plugin-scmsvn post-install-plugin-scmgit \
+    post-install-plugin-blocks post-install-plugin-mediawiki post-install-plugin-moinmoin \
     post-install-plugin-online_help
 
 # Dump clean DB

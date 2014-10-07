@@ -1,7 +1,7 @@
 Name: fusionforge
-Version: @version@@snapshot@
+Version: @version@
 Release: 1%{?dist}
-Summary: collaborative development tool
+Summary: Collaborative development tool
 
 Group: Development/Tools
 BuildArch: noarch
@@ -21,43 +21,36 @@ This metapackage installs a stand-alone FusionForge site.
 %files
 
 
-# Don't compile the .py utils from plugin-moinmoin, the pyc/pyo files are hard to properly package
-%global __os_install_post %(echo '%{__os_install_post}' | sed -e 's!/usr/lib[^[:space:]]*/brp-python-bytecompile[[:space:]].*$!!g')
-
-
 %prep
-%setup -q -n fusionforge-@version@
+%setup -q
 
 %build
 make %{?_smp_mflags}
 
 %install
-# List installed files automatically
-# 'make install' knows how to install plugins separately, let's rely on it
+# List package files automatically by installing separately on relying on 'make install'
+# Marking /etc as conffiles and exclude locales (cf. mandatory %find_lang)
+# Not using recursive dirs listing because that is processed when all
+#   packages are mixed in the common install dir (so using %dir instead)
 install_listfiles()
 {
-    # Install separately to list the installed files
     make install-${1} prefix=%{_prefix} DESTDIR=%{_builddir}/t
     (
         cd %{_builddir}/t/
-        find .%{_sysconfdir}/*              ! -type d | sed -e 's,^\./,%config(noreplace) /,'
-        find .%{_bindir}/*                  ! -type d | sed -e 's,^\.,,'
-        find .%{_datadir}/%{name}           ! -type d | sed -e 's,^\.,,'
-        find .%{_localstatedir}/lib/%{name} ! -type d | sed -e 's,^\.,,'
-        find .%{_localstatedir}/lib/%{name}/* -type d | sed -e 's,^\.,%dir ,'
-    ) > ${1}.rpmfiles
+        find .%{_bindir}           ! -type d || true
+        find .%{_sysconfdir}       ! -type d | sed -e 's,^\.,%config(noreplace) ,'
+        find .%{_sysconfdir}/%{name} -type d | sed -e 's,^\.,%dir ,'
+        find .%{_datadir}/%{name} .%{_localstatedir}/lib/%{name} .%{_localstatedir}/log/%{name} \
+            ! -type d || true
+        find .%{_datadir}/%{name} .%{_localstatedir}/lib/%{name} .%{_localstatedir}/log/%{name} \
+            -type d | sed -e 's,^\.,%dir ,' || true
+    ) | sed -e 's,^\.,,' > ${1}.rpmfiles
     rm -rf %{_builddir}/t/
     # Install for real
     make install-${1} prefix=%{_prefix} DESTDIR=%{buildroot}
 }
 # Install core and list common dirs
 install_listfiles common
-(cd %{buildroot} && \
-    find .%{_sysconfdir}/%{name} .%{_datadir}/%{name} -type d \
-    | sed -e 's,^.,%dir ,'
-    echo %dir %{_localstatedir}/lib/%{name}  # avoid duplicate dir in all packages
-    echo %dir %{_localstatedir}/log/%{name}  # only exists in -common, warning otherwise
-) >> common.rpmfiles
 %find_lang %{name}
 # Install plugins
 install_listfiles db-local
@@ -70,11 +63,12 @@ install_listfiles lists
 for i in $(sed -n 's/^%package plugin-//p' rpm/plugins); do \
     install_listfiles plugin-$i
 done
-
+# Manually handling the 3 python glue files for MoinMoin integration
+echo %{_datadir}/%{name}/plugins/moinmoin/lib/ >> plugin-moinmoin.rpmfiles
 
 
 %package common
-Summary: collaborative development tool - shared files
+Summary: Collaborative development tool - shared files
 Requires: php-cli, php-pgsql, php-process, php-htmlpurifier-htmlpurifier, cronie
 %description common
 FusionForge provides many tools to aid collaboration in a
@@ -88,12 +82,13 @@ subpackages.
 %files common -f common.rpmfiles -f %{name}.lang
 %doc AUTHORS* CHANGES COPYING INSTALL.TXT NEWS README
 %doc docs/*
+%doc rpm/README.fedora
 %post common
-%{_datadir}/%{name}/post-install.d/common/common.sh
+%{_datadir}/%{name}/post-install.d/common/common.sh configure
 
 
 %package db-local
-Summary: collaborative development tool - database (using PostgreSQL)
+Summary: Collaborative development tool - database (using PostgreSQL)
 Requires: %{name}-common = %{version}, postgresql-server
 Provides: %{name}-db = %{version}
 %description db-local
@@ -107,11 +102,11 @@ This package installs, configures and maintains the FusionForge
 database.
 %files db-local -f db-local.rpmfiles
 %post db-local
-%{_datadir}/%{name}/post-install.d/db/db.sh
+%{_datadir}/%{name}/post-install.d/db/db.sh configure
 
 
 %package db-remote
-Summary: collaborative development tool - database (remote and already installed)
+Summary: Collaborative development tool - database (remote and already installed)
 Provides: %{name}-db = %{version}
 %description db-remote
 FusionForge provides many tools to aid collaboration in a
@@ -128,7 +123,7 @@ installs (e.g. plugins activation requires a populated db).
 
 
 %package shell
-Summary: collaborative development tool - shell accounts (using PostgreSQL)
+Summary: Collaborative development tool - shell accounts (using PostgreSQL)
 Requires: %{name}-common = %{version}, php, openssh-server, nscd, libnss-pgsql, pam
 %description shell
 FusionForge provides many tools to aid collaboration in a
@@ -149,7 +144,7 @@ fi
 
 
 %package web
-Summary: collaborative development tool - web part (using Apache)
+Summary: Collaborative development tool - web part (using Apache)
 Requires: %{name}-common = %{version}, %{name}-db = %{version}, httpd, mod_ssl, php, php-pgsql
 %description web
 FusionForge provides many tools to aid collaboration in a
@@ -159,14 +154,14 @@ web/FTP hosting, release management, etc. All these services are
 integrated into one web site and managed through a web interface.
 
 This package contains the files needed to run the web part of
-FusionForge on an Apache webserver.
+FusionForge on an Apache web server.
 %files web -f web.rpmfiles
 %post web
 %{_datadir}/%{name}/post-install.d/web/web.sh configure
 
 
 %package web-vhosts
-Summary: collaborative development tool - web vhosts (using Apache)
+Summary: Collaborative development tool - web vhosts (using Apache)
 Requires: %{name}-common = %{version}, httpd
 %description web-vhosts
 FusionForge provides many tools to aid collaboration in a
@@ -176,15 +171,14 @@ web/FTP hosting, release management, etc. All these services are
 integrated into one web site and managed through a web interface.
 
 This package contains the files needed to run project vhosts
-on an Apache webserver.
+on an Apache web server.
 %files web-vhosts -f web-vhosts.rpmfiles
 
 
 %package mta-postfix
-Summary: collaborative development tool - mail tools (using Postfix)
+Summary: Collaborative development tool - mail tools (using Postfix)
 Requires: %{name}-common = %{version}, postfix
 Provides: %{name}-mta = %{version}
-Conflicts: %{name}-mta
 %description mta-postfix
 FusionForge provides many tools to aid collaboration in a
 development project, such as bug-tracking, task management,
@@ -202,10 +196,9 @@ if [ $1 -eq 0 ] ; then %{_datadir}/%{name}/post-install.d/mta-postfix/mta-postfi
 
 
 %package mta-exim4
-Summary: collaborative development tool - mail tools (using Exim 4)
+Summary: Collaborative development tool - mail tools (using Exim 4)
 Requires: %{name}-common = %{version}, exim
 Provides: %{name}-mta = %{version}
-Conflicts: %{name}-mta
 %description mta-exim4
 FusionForge provides many tools to aid collaboration in a
 development project, such as bug-tracking, task management,
@@ -223,7 +216,7 @@ if [ $1 -eq 0 ] ; then %{_datadir}/%{name}/post-install.d/mta-exim4/mta-exim4.sh
 
 
 %package lists
-Summary: collaborative development tool - mailing-lists (using Mailman)
+Summary: Collaborative development tool - mailing-lists (using Mailman)
 Requires: %{name}-common = %{version}, %{name}-mta = %{version}, mailman
 %description lists
 FusionForge provides many tools to aid collaboration in a
@@ -242,5 +235,5 @@ This package controls the interaction between FusionForge and Mailman.
 
 
 %changelog
-* Tue Aug 19 2014 Sylvain Beucler <sylvain.beucler@inria.fr> - 5.3.50
+* Wed Oct 1 2014 Sylvain Beucler <beuc@beuc.net> - @version@-1
 - Revamp packaging
