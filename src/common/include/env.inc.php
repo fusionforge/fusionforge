@@ -86,6 +86,7 @@ if (getenv('FORGE_CONFIG_PATH') && file_exists(getenv('FORGE_CONFIG_PATH').'/con
 		$gfconfig = '';
 	}
 }
+error_log("found config file at $gfcgfile, gfconfig=$gfconfig");
 
 $include_path = join(PATH_SEPARATOR,
 	array(
@@ -115,3 +116,4 @@ if( !ini_set('include_path', $include_path ) && !set_include_path( $include_path
 	$gfwww = '';
 	$gfplugins = '';
 }
+error_log("gfcommon=$gfcommon");
