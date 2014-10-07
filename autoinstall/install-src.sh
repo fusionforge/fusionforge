@@ -32,7 +32,7 @@ if [ -e /etc/debian_version ]; then
     apt-get install -y make gettext php5-cli php5-pgsql php-htmlpurifier \
 	apache2 locales-all postgresql libnss-pgsql2 \
 	subversion augeas-tools viewvc git \
-	mediawiki \
+	mediawiki unscd \
 	php-twig \
 	python-moinmoin libapache2-mod-wsgi python-psycopg2
 else
