@@ -33,6 +33,7 @@ if [ -e /etc/debian_version ]; then
 	apache2 locales-all postgresql libnss-pgsql2 \
 	subversion augeas-tools viewvc git \
 	mediawiki \
+	php-twig \
 	python-moinmoin libapache2-mod-wsgi python-psycopg2
 else
     backports_rpm
