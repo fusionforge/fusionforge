@@ -39,7 +39,7 @@ class SSHTest extends FForge_SeleniumTestCase
 			system("echo 'Trying SSH' 1>&2", $ret);
 			$v = "-v";
 		}
-		system("ssh $v ".FORGE_ADMIN_USERNAME."@".HOST." true", $ret);
+		system("ssh $v ".FORGE_ADMIN_USERNAME."@".HOST." id", $ret);
 		$this->assertEquals($ret, 0);
 		if ($verbose) {
 			system("echo 'End of SSH run' 1>&2", $ret);
