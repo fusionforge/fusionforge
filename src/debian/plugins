@@ -1,5 +1,5 @@
 Package: fusionforge-plugin-scmgit
-Depends: git, gitweb
+Depends: git
 
 Package: fusionforge-plugin-scmsvn
 Depends: subversion, subversion-tools, viewvc, openbsd-inetd | inet-superserver, update-inetd, augeas-tools
