@@ -39,7 +39,7 @@ else
     backports_rpm
     yum install -y make gettext php-cli php-pgsql \
 	httpd mod_ssl postgresql-server nscd \
-	subversion augeas viewvc git \
+	subversion augeas viewvc git gitweb \
 	mediawiki119 \
 	moin mod_wsgi python-psycopg2
 fi
