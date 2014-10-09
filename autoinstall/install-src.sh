@@ -43,7 +43,7 @@ else
 	moin mod_wsgi python-psycopg2
 fi
 
-cd /usr/src/fusionforge/src/
+cd $(dirname $0)/../src/
 make
 make install-base install-shell \
     install-plugin-scmsvn install-plugin-scmgit \
