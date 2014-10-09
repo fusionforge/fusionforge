@@ -24,7 +24,6 @@ set -e
 
 users_host=$(forge_get_config users_host)
 lists_host=$(forge_get_config lists_host)
-data_path=$(forge_get_config data_path)
 
 function postfix_append_config {
     param=$1
@@ -61,10 +60,9 @@ case "$1" in
 	# Forwarding rules
 	postfix_append_config 'virtual_alias_maps' 'proxy:pgsql:pgsql_fusionforge_users'
 
-	postfix_append_config 'transport_maps' "hash:$data_path/etc/postfix-transport"
-	mkdir -m 755 -p $data_path/etc/
-	echo "$lists_host mailman:" > $data_path/etc/postfix-transport
-	postmap $data_path/etc/postfix-transport
+	postfix_append_config 'transport_maps' "hash:/etc/postfix/fusionforge-lists-transport"
+	echo "$lists_host mailman:" > /etc/postfix/fusionforge-lists-transport
+	postmap /etc/postfix/fusionforge-lists-transport
 
 	if ! grep -q '^### BEGIN FUSIONFORGE BLOCK' /etc/postfix/main.cf; then
 	    cat <<-EOF >>/etc/postfix/main.cf
@@ -94,9 +92,9 @@ EOF
 	    sed -i -e '/^noreply:/d' /etc/aliases
 	fi
 	sed -i -e '/^### BEGIN FUSIONFORGE BLOCK/,/^### END FUSIONFORGE BLOCK/d' /etc/postfix/main.cf
-	rm -f $data_path/etc/postfix-transport $data_path/etc/postfix-transport.db
+	rm -f /etc/postfix/fusionforge-lists-transport /etc/postfix/fusionforge-lists-transport.db
 	postconf -e transport_maps="$(postconf -h transport_maps \
-            | sed "s|\(, *\)\?hash:$data_path/etc/postfix-transport||")"
+            | sed "s|\(, *\)\?hash:/etc/postfix/fusionforge-lists-transport||")"
 	postconf -e virtual_alias_maps="$(postconf -h virtual_alias_maps \
             | sed "s/\(, *\)\?proxy:pgsql:pgsql_fusionforge_users//")"
 	postconf -e relay_domains="$(postconf -h relay_domains | sed "s/\(, *\)\?$lists_host//")"
