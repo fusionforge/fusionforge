@@ -179,7 +179,7 @@ case "$1" in
     remove)
 	remove_nsswitch
 	remove_pam
-	configure_sshd
+	remove_sshd
 	;;
     purge)
 	# note: can't be called from Debian's postrm - rely on ucfq(1)
