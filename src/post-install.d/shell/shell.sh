@@ -125,7 +125,7 @@ configure_nscd()
 configure_sshd()
 {
     if ! getent passwd ${system_user_ssh_akc} >/dev/null; then
-	useradd ${system_user_ssh_akc} -s /bin/false -d /nonexistent
+	useradd ${system_user_ssh_akc} -s /bin/false -M -d /nonexistent
     fi
     
     # Deal with CentOS 6's early patch
