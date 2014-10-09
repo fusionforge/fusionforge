@@ -94,7 +94,7 @@ EOF
 	    sed -i -e '/^noreply:/d' /etc/aliases
 	fi
 	sed -i -e '/^### BEGIN FUSIONFORGE BLOCK/,/^### END FUSIONFORGE BLOCK/d' /etc/postfix/main.cf
-	rm -f $data_path/etc/postfix-transport
+	rm -f $data_path/etc/postfix-transport $data_path/etc/postfix-transport.db
 	postconf -e transport_maps="$(postconf -h transport_maps \
             | sed "s|\(, *\)\?hash:$data_path/etc/postfix-transport||")"
 	postconf -e virtual_alias_maps="$(postconf -h virtual_alias_maps \
