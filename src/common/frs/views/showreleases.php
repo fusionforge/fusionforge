@@ -31,6 +31,7 @@ global $group_id; // id of group
 global $g; // group object
 global $warning_msg; // warning message
 global $error_msg; // error message
+global $permissionlevel;
 
 $package_id = getIntFromRequest('package_id');
 
@@ -74,7 +75,11 @@ if (count($rs) < 1) {
 	echo $HTML->listTableTop($title_arr);
 	for ($i = 0; $i < count($rs); $i++) {
 		$cells = array();
-		$cells[][] = html_e('input', array('type' => 'checkbox', 'value' => $rs[$i]->getID(), 'class' => 'checkedrelidactive', 'title' => _('Select / Deselect this release for massaction'), 'onClick' => 'controllerFRS.checkgeneral("active")'));
+		$releaseInputAttr = array('type' => 'checkbox', 'value' => $rs[$i]->getID(), 'class' => 'checkedrelidactive', 'title' => _('Select / Deselect this release for massaction'), 'onClick' => 'controllerFRS.checkgeneral("active")');
+		if (!forge_check_perm('frs', $package_id, 'release')) {
+			$releaseInputAttr['disabled'] = 'disabled';
+		}
+		$cells[][] = html_e('input', $releaseInputAttr);
 		$cells[][] = $rs[$i]->getName();
 		$cells[][] = date('Y-m-d H:i',$rs[$i]->getReleaseDate());
 		$content = util_make_link('/frs/?view=editrelease&group_id='.$group_id.'&package_id='.$package_id.'&release_id='.$rs[$i]->getID(), '['._('Edit').']');
@@ -86,12 +91,14 @@ if (count($rs) < 1) {
 		echo $HTML->multiTableRow(array('id' => 'releaseid'.$rs[$i]->getID(), 'class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
 	}
 	echo $HTML->listTableBottom();
-	$deleteUrlAction = util_make_uri('/frs/?action=deleterelease&package_id='.$package_id.'&group_id='.$group_id);
-	echo html_ao('p');
-	echo html_ao('span', array('id' => 'massactionactive', 'class' => 'hide'));
-	echo html_e('span', array('id' => 'frs-massactionmessage', 'title' => _('Actions availables for selected releases, you need to check at least one release to get actions')), _('Mass actions for selected releases')._(':'), false);
-	echo util_make_link('#', $HTML->getDeletePic(_('Delete selected release(s)'), _('Delete releases')), array('onclick' => 'javascript:controllerFRS.toggleConfirmBox({idconfirmbox: \'confirmbox1\', do: \''._('Delete the selected release(s)').'\', cancel: \''._('Cancel').'\', height: 150, width: 300, action: \''.$deleteUrlAction.'&release_id=\'+controllerFRS.buildUrlByCheckbox("active")})', 'title' => _('Delete selected release(s)')), true);
-	echo html_ac(html_ap() - 2);
+	if ($permissionlevel >= 3) {
+		$deleteUrlAction = util_make_uri('/frs/?action=deleterelease&package_id='.$package_id.'&group_id='.$group_id);
+		echo html_ao('p');
+		echo html_ao('span', array('id' => 'massactionactive', 'class' => 'hide'));
+		echo html_e('span', array('id' => 'frs-massactionmessage', 'title' => _('Actions availables for selected releases, you need to check at least one release to get actions')), _('Mass actions for selected releases')._(':'), false);
+		echo util_make_link('#', $HTML->getDeletePic(_('Delete selected release(s)'), _('Delete releases')), array('onclick' => 'javascript:controllerFRS.toggleConfirmBox({idconfirmbox: \'confirmbox1\', do: \''._('Delete the selected release(s)').'\', cancel: \''._('Cancel').'\', height: 150, width: 300, action: \''.$deleteUrlAction.'&release_id=\'+controllerFRS.buildUrlByCheckbox("active")})', 'title' => _('Delete selected release(s)')), true);
+		echo html_ac(html_ap() - 2);
+	}
 	echo $HTML->jQueryUIconfirmBox('confirmbox1', _('Delete release'), _('You are about to delete permanently this release. Are you sure? This action is definitive.'));
 }
 

@@ -435,7 +435,7 @@ class FRSRelease extends Error {
 			}
 		}
 		db_begin();
-		$res = db_query_params('UPDATE frs_release SET	name=$1,status_id=$2,notes=$3,
+		$res = db_query_params('UPDATE frs_release SET name=$1,status_id=$2,notes=$3,
 					changes=$4,preformatted=$5,release_date=$6,released_by=$7
 					WHERE package_id=$8 AND release_id=$9',
 					array (htmlspecialchars($name),

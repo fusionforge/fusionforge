@@ -1,11 +1,19 @@
-FusionForge's installation is fully automated.  However, it requires a
-working connection with the database.  If installation failed
-(e.g. you configured a remote database which got down during install),
-you can re-run it manually for a given FusionForge main package using:
+FusionForge's installation is fully automated.
+
+For Fedora however, packaging guidelines are incompatible with this
+automation, so it's disabled.  You need to run the post-install
+scripts manually after installation and upgrades.
+( see https://bugzilla.redhat.com/show_bug.cgi?id=1141711 )
+
+You may also need to re-run these manually in case the initial
+installation fails (e.g. you configured a remote database which got
+down during install).
+
+For a FusionForge main package, use:
 
   /usr/share/fusionforge/post-install.d/<pkg_name>/<pkg_name>.sh configure
 
-and for plugins using:
+and for plugins use:
 
   /usr/share/fusionforge/post-install.d/common/plugin.sh <plugin_name> configure
 
@@ -15,4 +23,9 @@ E.g.:
   /usr/share/fusionforge/post-install.d/db/db.sh configure
   /usr/share/fusionforge/post-install.d/web/web.sh configure
   /usr/share/fusionforge/post-install.d/shell/shell.sh configure
+  /usr/share/fusionforge/post-install.d/mta-postfix/mta-postfix.sh configure
   /usr/share/fusionforge/post-install.d/common/plugin.sh scmgit configure
+  /usr/share/fusionforge/post-install.d/common/plugin.sh scmsvn configure
+  ...
+
+Post-install scripts are idempotent and can safely be run multiple times.

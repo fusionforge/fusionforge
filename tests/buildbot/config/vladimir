@@ -9,6 +9,9 @@ VMENGINE=lxc
 REMOTESELENIUM=true
 KEEPVM=false
 
+# Proxy
+PROXY=http://miromesnil.gnurandal.net:3128/
+
 # VM for trunk
 fgcostrksrc=lxc:centos5::
 fgcostrk=lxc:centos5::

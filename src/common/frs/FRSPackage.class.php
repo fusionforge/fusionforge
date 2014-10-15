@@ -566,7 +566,7 @@ class FRSPackage extends Error {
 		return $this->getFileName().'-'.$frsr->getName().'.zip';
 	}
 
-	public function getNewestReleaseZipName($release) {
+	public function getNewestReleaseZipName() {
 		return $this->getFileName().'-latest.zip';
 	}
 

@@ -48,7 +48,7 @@ $FRSPackages = $fpFactory->getFRSs();
 
 if (count($FRSPackages) > 0) {
 	echo html_e('h2', array(), _('QRS'));
-	if ($permissionlevel == 'admin') {
+	if ($permissionlevel >= 4) { // admin
 		echo html_e('p', array(), _('Click here to ').util_make_link('/frs/?view=qrs&group_id='.$group_id, _('quick-release a file')));
 	}
 }
@@ -89,7 +89,7 @@ if (count($FRSPackages) == 0) {
 } else {
 	$title_arr = array();
 	$thTitleArray = array();
-	if ($permissionlevel == 'admin') {
+	if ($permissionlevel >= 4) { // admin
 		$title_arr[] = html_e('input', array('id' => 'checkallactive', 'type' => 'checkbox', 'title' => _('Select / Deselect all packages for massaction'), 'onClick' => 'controllerFRS.checkAll("checkedrelidactive", "active")'));
 		$thTitleArray[] = NULL;
 	}
@@ -140,7 +140,7 @@ if (count($FRSPackages) == 0) {
 		echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($key, true), 'id' => 'pkgid'.$FRSPackage->getID()), $cells);
 	}
 	echo $HTML->listTableBottom();
-	if ($permissionlevel == 'admin') {
+	if ($permissionlevel >= 4) { // admin
 		$deleteUrlAction = util_make_uri('/frs/?action=deletepackage&group_id='.$group_id);
 		echo html_ao('p');
 		echo html_ao('span', array('id' => 'massactionactive', 'class' => 'hide'));
@@ -148,10 +148,8 @@ if (count($FRSPackages) == 0) {
 		echo util_make_link('#', $HTML->getDeletePic(_('Delete selected package(s)'), _('Delete packages')), array('onclick' => 'javascript:controllerFRS.toggleConfirmBox({idconfirmbox: \'confirmbox1\', do: \''._('Delete the selected package(s)').'\', cancel: \''._('Cancel').'\', height: 150, width: 300, action: \''.$deleteUrlAction.'&package_id=\'+controllerFRS.buildUrlByCheckbox("active")})', 'title' => _('Delete selected package(s)')), true);
 		echo html_ac(html_ap() - 2);
 	}
+	echo $HTML->jQueryUIconfirmBox('confirmbox1', _('Delete package'), _('You are about to delete permanently this package. Are you sure? This action is definitive.'));
 }
-
-echo $HTML->jQueryUIconfirmBox('confirmbox1', _('Delete package'), _('You are about to delete permanently this package. Are you sure? This action is definitive.'));
-
 /*
 	form to create a new package
 */
