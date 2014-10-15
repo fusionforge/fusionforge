@@ -9,6 +9,13 @@ is_db_up () {
     echo "SELECT COUNT(*) FROM users;" | su - postgres -c "psql $database" > /dev/null 2>&1
 }
 
+is_db_down () {
+    pgdir=/var/lib/postgresql
+    if [ -e /etc/redhat-release ]; then pgdir=/var/lib/pgsql; fi
+    ! (echo "SELECT COUNT(*) FROM users;" | su - postgres -c "psql $database" > /dev/null 2>&1 \
+	|| find $pgdir -type f -name *.pid -size -10 | grep -q .)
+}
+
 stop_apache () {
 
     echo "Stopping apache"
@@ -31,7 +38,7 @@ stop_database () {
         i=$(( $i + 1 ))
         sleep 1
     done
-    if ! is_db_up ; then
+    if is_db_down ; then
         echo "...OK"
     else
         echo "... FAIL: database still up?"
