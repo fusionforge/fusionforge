@@ -46,14 +46,14 @@ $menu_links = array();
 $menu_attr = array();
 
 switch ($permissionlevel) {
-	case 'file': {
+	case 2: { // file
 		$menu_text = array(_('View File Releases'), _('Administration'));
 		$menu_links = array('/frs/?group_id='.$group_id, '/frs/?view=admin&group_id='.$group_id);
 		$menu_attr = array(NULL,NULL);
 		break;
 	}
-	case 'release':
-	case 'admin': {
+	case 3: // release
+	case 4: { // admin
 		$menu_text = array(_('View File Releases'),_('Reporting'),_('Administration'));
 		$menu_links = array('/frs/?group_id='.$group_id,'/frs/?view=reporting&group_id='.$group_id,'/frs/?view=admin&group_id='.$group_id);
 		$menu_attr = array(NULL,NULL,NULL);

@@ -101,7 +101,7 @@ if (count($FRSPackages) < 1) {
 
 		$package_name_protected = $HTML->toSlug($package_name);
 		$package_ziplink = '';
-		if ($FRSPackageReleases && $num_releases >= 1 && class_exists('ZipArchive')) {
+		if ($FRSPackageReleases && $num_releases >= 1 && class_exists('ZipArchive') && file_exists($FRSPackage->getReleaseZipPath($FRSPackage->getNewestReleaseID()))) {
 				// display link to latest-release-as-zip
 				$package_ziplink = util_make_link('#', $HTML->getZipPic(_('Download the newest release as ZIP.').' '._('This link always points to the newest release as a ZIP file.')), array('onclick' => 'location:href=\''.util_make_uri('/frs/download.php/latestzip/'.$FRSPackage->getID().'/'.$FRSPackage->getNewestReleaseZipName()).'\''), true);
 		}

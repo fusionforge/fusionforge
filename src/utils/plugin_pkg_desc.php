@@ -46,7 +46,10 @@ if ($plugin == null) {
   exit(1);
 }
 
-$shortdesc_prefix = _("collaborative development tool");
+// Don't actually translate, just mark for transaltion (packaging is in English)
+setlocale(LC_ALL, 'C');
+
+$shortdesc_prefix = _("FusionForge plugin");
 $desc_prefix =
 _("FusionForge provides many tools to aid collaboration in a
 development project, such as bug-tracking, task management,

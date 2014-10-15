@@ -142,15 +142,15 @@ class FRSPackageFactory extends Error {
 			$admin = true;
 		}
 		if ($admin) {
-			return 'admin';
+			return 4; // admin
 		} elseif ($release) {
-			return 'release';
+			return 3; // release
 		} elseif ($file) {
-			return 'file';
+			return 2; // file
 		} elseif ($read) {
-			return 'read';
+			return 1; // read
 		}
-		return NULL;
+		return null;
 	}
 
 }

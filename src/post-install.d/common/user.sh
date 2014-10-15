@@ -23,4 +23,6 @@
 
 system_user=$(forge_get_config system_user)
 data_path=$(forge_get_config data_path)
-if ! getent passwd $system_user >/dev/null; then useradd $system_user -s /bin/false -d $data_path; fi
+if ! getent passwd $system_user >/dev/null; then
+    useradd $system_user -s /bin/false -M -d $data_path
+fi

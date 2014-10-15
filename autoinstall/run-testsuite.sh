@@ -43,12 +43,13 @@ else
 fi
 
 # Install selenium (no packaged version available)
-version=2.35.0
+SELENIUMMAJOR=2
+SELENIUMMINOR=42
+SELENIUMMICRO=2
+SELENIUMURL=http://selenium-release.storage.googleapis.com/$SELENIUMMAJOR.$SELENIUMMINOR/selenium-server-standalone-$SELENIUMMAJOR.$SELENIUMMINOR.$SELENIUMMICRO.jar
 mkdir -p /usr/share/selenium/
-wget -c http://selenium.googlecode.com/files/selenium-server-standalone-$version.jar \
+http_proxy=$PROXY wget -c $SELENIUMURL \
     -O /usr/share/selenium/selenium-server.jar
-# Note: with >= 2.39.0:
-# http://selenium-release.storage.googleapis.com/X.YY/selenium-server-standalone-X.YY.Z.jar
 
 service cron stop || true
 
