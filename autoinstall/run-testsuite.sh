@@ -48,7 +48,7 @@ SELENIUMMINOR=42
 SELENIUMMICRO=2
 SELENIUMURL=http://selenium-release.storage.googleapis.com/$SELENIUMMAJOR.$SELENIUMMINOR/selenium-server-standalone-$SELENIUMMAJOR.$SELENIUMMINOR.$SELENIUMMICRO.jar
 mkdir -p /usr/share/selenium/
-wget -c $SELENIUMURL \
+http_proxy=$PROXY wget -c $SELENIUMURL \
     -O /usr/share/selenium/selenium-server.jar
 
 service cron stop || true
