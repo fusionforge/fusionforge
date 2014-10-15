@@ -41,8 +41,8 @@ configure_libnss_pgsql(){
 	127.*|localhost.*|localhost) ;; # 'local'
 	*) hostconf="host=$db_host"  ;; # 'host'
     esac
-    if [ -e $DESTDIR/etc/nss-pgsql.conf ]; then return; fi
-    cat > $DESTDIR/etc/nss-pgsql.conf <<EOF
+    if [ ! -s $DESTDIR/etc/nss-pgsql.conf ]; then
+	cat > $DESTDIR/etc/nss-pgsql.conf <<EOF
 ### NSS Configuration for FusionForge
 
 #----------------- DB connection
@@ -60,8 +60,9 @@ getgrgid = SELECT name AS groupname,'x',gid,ARRAY(SELECT user_name FROM nss_user
 #allgroups = SELECT name AS groupname,'x',gid,ARRAY(SELECT user_name FROM nss_usergroups WHERE nss_usergroups.gid = nss_groups.gid) AS members FROM nss_groups 
 groups_dyn = SELECT ug.gid FROM nss_usergroups ug, nss_passwd p WHERE ug.uid = p.uid AND p.login = \$1 AND ug.gid <> \$2
 EOF
-    if [ -e $DESTDIR/etc/nss-pgsql-root.conf ]; then return; fi
-    cat > $DESTDIR/etc/nss-pgsql-root.conf <<EOF
+    fi
+    if [ ! -s $DESTDIR/etc/nss-pgsql-root.conf ]; then
+	cat > $DESTDIR/etc/nss-pgsql-root.conf <<EOF
 ### NSS Configuration for FusionForge
 
 #----------------- DB connection
@@ -71,6 +72,7 @@ shadowconnectionstring = user=$db_user_nss dbname=$db_name $hostconf
 shadowbyname    = SELECT login AS shadow_name, passwd AS shadow_passwd, 14087 AS shadow_lstchg, 0 AS shadow_min, 99999 AS shadow_max, 7 AS shadow_warn, '' AS shadow_inact, '' AS shadow_expire, '' AS shadow_flag FROM nss_passwd WHERE login = \$1
 shadow          = SELECT login AS shadow_name, passwd AS shadow_passwd, 14087 AS shadow_lstchg, 0 AS shadow_min, 99999 AS shadow_max, 7 AS shadow_warn, '' AS shadow_inact, '' AS shadow_expire, '' AS shadow_flag FROM nss_passwd
 EOF
+    fi
 
     chmod 644 $DESTDIR/etc/nss-pgsql.conf
     chmod 600 $DESTDIR/etc/nss-pgsql-root.conf
