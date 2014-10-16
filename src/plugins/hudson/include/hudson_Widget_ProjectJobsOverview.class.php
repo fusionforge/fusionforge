@@ -93,35 +93,18 @@ class hudson_Widget_ProjectJobsOverview extends HudsonOverviewWidget {
 		global $HTML;
 		$jobs = $this->getJobsByGroup($this->group_id);
 		if (sizeof($jobs) > 0) {
-			$html = '';
-			$html .= '<table style="width:100%">';
-			$cpt = 1;
-
+			$html = $HTML->listTableTop();
 			foreach ($jobs as $job_id => $job) {
-				if ($cpt % 2 == 0) {
-					$class="boxitemalt bgcolor-white";
-				} else {
-					$class="boxitem bgcolor-grey";
-				}
-
 				try {
-
-					$html .= '<tr class="'. $class .'">';
-					$html .= ' <td>';
-					$html .= ' <img src="'.$job->getStatusIcon().'" title="'.$job->getStatus().'" >';
-					$html .= ' </td>';
-					$html .= ' <td style="width:99%">';
-					$html .= '  <a href="/plugins/hudson/?action=view_job&group_id='.$this->group_id.'&job_id='.$job_id.'">'.$job->getName().'</a><br />';
-					$html .= ' </td>';
-					$html .= '</tr>';
-
-					$cpt++;
-
+					$cells = array();
+					$cells[][] = html_abs_image($job->getStatusIcon(), '15', '15', array('title' => $job->getStatus()));
+					$cells[] = array(util_make_link('/plugins/hudson/?action=view_job&group_id='.$this->group_id.'&job_id='.$job_id, $job->getName()), 'style' => 'width: 99%');
+					$html .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($job_id, true)), $cells);
 				} catch (Exception $e) {
 					// Do not display wrong jobs
 				}
 			}
-			$html .= '</table>';
+			$html .= $HTML->listTableBottom();
 			return $html;
 		} else {
 			return $HTML->information(_('No job available.'));
