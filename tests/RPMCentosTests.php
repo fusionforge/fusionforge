@@ -9,7 +9,7 @@ if (!@include_once 'PHPUnit/Autoload.php') {
 }
 require_once 'func/Testing/RPMSeleniumRemoteSuite.php';
 
-class RPMCentosTests
+class AllTests
 {
 	public static function main()
 	{

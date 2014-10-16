@@ -32,10 +32,10 @@ DAG_RPMFORGE_REPO=http://apt.sw.be/redhat
 EPEL_REPO=http://download.fedoraproject.org/pub/epel
 
 # Debian 3rd-party
-DEB3RD=http://buildbot.fusionforge.org/job/3rd-party-deb/ws/build/debian/
+DEB3RD=http://buildbot.fusionforge.org/job/3rd-party-deb-for-5.3/ws/build/debian/
 
 # Redhat 3rd-party
-RPM3RD=http://buildbot.fusionforge.org/job/3rd-party-rpm/ws/build/redhat/
+RPM3RD=http://buildbot.fusionforge.org/job/3rd-party-rpm-for-5.3/ws/build/redhat/
 
 # The following is for static ip config samples
 # hostname=vmengine:template:address/mask:gateway

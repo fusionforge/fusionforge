@@ -9,7 +9,7 @@ if (!@include_once 'PHPUnit/Autoload.php') {
 }
 require_once 'func/Testing/TarSeleniumRemoteSuite.php';
 
-class TarCentosTests
+class AllTests
 {
 	public static function main()
 	{

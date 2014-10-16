@@ -30,6 +30,7 @@ EOF
 	domain_name=`forge_get_config web_host`
 	ip_address=`forge_get_config ip_address`
 	sys_simple_dns=`forge_get_config simple_dns`
+	data_path=$(forge_get_config data_path)
   	serial=`date '+%Y%m%d'`01
   	# scm_host lists_host are useless for now
   	for i in domain_name ip_address serial ; do

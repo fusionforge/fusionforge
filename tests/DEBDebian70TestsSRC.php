@@ -10,7 +10,7 @@ if (!@include_once 'PHPUnit/Autoload.php') {
 
 require_once 'func/Testing/DEBSeleniumRemoteSuite.php';
 
-class DEBDebian60Tests
+class AllTests
 {
 	public static function main()
 	{
