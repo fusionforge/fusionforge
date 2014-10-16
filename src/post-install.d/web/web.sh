@@ -94,6 +94,7 @@ case "$1" in
 	    #a2enmod proxy
 	    #a2enmod proxy_http
 	    a2enmod macro
+	    a2enmod authz_groupfile
 	fi
 	# else: Apache modules already enabled in CentOS
 	
