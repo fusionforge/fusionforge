@@ -145,6 +145,8 @@ control over it to the project's administrator.");
 	 * @param mixed $params ($param['group_id'] the ID of the deleted project)
 	 */
 	function projectIsDeleted($params) {
+		global $gfcommon;
+		require_once $gfcommon.'dao/CodendiDataAccess.class.php';
 		$group_id = $params['group_id'];
 		$job_dao = new PluginHudsonJobDao(CodendiDataAccess::instance());
 		$dar = $job_dao->deleteHudsonJobsByGroupID($group_id);
