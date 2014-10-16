@@ -62,18 +62,22 @@ class hudson_Widget_ProjectJobsOverview extends HudsonOverviewWidget {
 
 	function computeGlobalStatus() {
 		$jobs = $this->getJobsByGroup($this->group_id);
-		foreach ($jobs as $job) {
-			$this->_all_status[(string)$job->getColorNoAnime()] = $this->_all_status[(string)$job->getColorNoAnime()] + 1;
-		}
-		if ($this->_all_status['grey'] > 0 || $this->_all_status['red'] > 0) {
-			$this->_global_status = _("One or more failure or pending job");
-			$this->_global_status_icon = '/'.$this->plugin->getThemePath() . "/images/ic/status_red.png";
-		} elseif ($this->_all_status['yellow'] > 0) {
-			$this->_global_status = _("One or more unstable job");
-			$this->_global_status_icon = '/'.$this->plugin->getThemePath() . "/images/ic/status_yellow.png";
+		if (count($jobs)) {
+			foreach ($jobs as $job) {
+				$this->_all_status[(string)$job->getColorNoAnime()] = $this->_all_status[(string)$job->getColorNoAnime()] + 1;
+			}
+			if ($this->_all_status['grey'] > 0 || $this->_all_status['red'] > 0) {
+				$this->_global_status = _("One or more failure or pending job");
+				$this->_global_status_icon = '/'.$this->plugin->getThemePath() . "/images/ic/status_red.png";
+			} elseif ($this->_all_status['yellow'] > 0) {
+				$this->_global_status = _("One or more unstable job");
+				$this->_global_status_icon = '/'.$this->plugin->getThemePath() . "/images/ic/status_yellow.png";
+			} else {
+				$this->_global_status = _("Success");
+				$this->_global_status_icon = '/'.$this->plugin->getThemePath() . "/images/ic/status_blue.png";
+			}
 		} else {
-			$this->_global_status = _("Success");
-			$this->_global_status_icon = '/'.$this->plugin->getThemePath() . "/images/ic/status_blue.png";
+			$this->_use_global_status == false;
 		}
 	}
 
@@ -86,6 +90,7 @@ class hudson_Widget_ProjectJobsOverview extends HudsonOverviewWidget {
 	}
 
 	function getContent() {
+		global $HTML;
 		$jobs = $this->getJobsByGroup($this->group_id);
 		if (sizeof($jobs) > 0) {
 			$html = '';
@@ -118,6 +123,8 @@ class hudson_Widget_ProjectJobsOverview extends HudsonOverviewWidget {
 			}
 			$html .= '</table>';
 			return $html;
+		} else {
+			return $HTML->information(_('No job available.'));
 		}
 	}
 
