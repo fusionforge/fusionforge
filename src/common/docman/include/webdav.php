@@ -462,7 +462,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		$analysed_src_element = $this->analyse($src_element, $group_id);
 		$analysed_dest_element = $this->analyse($dest_element, $group_id);
 		$g = group_get_object($group_id);
-		if (isset($analysed_src_element['doc_id'])) {
+		if (isset($analysed_src_element['docid'])) {
 			// we are playing with a file
 			if ($analysed_dest_element['isdir']) {
 				$d = new Document($g, $analysed_src_element['docid']);
