@@ -414,11 +414,20 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 			$arr_dest = explode('/', rtrim($options['dest'], '/'));
 		}
 
+		// are we doing something ?
 		$arr_diff1 = array_diff($arr_dest, $arr_path);
 		$arr_diff2 = array_diff($arr_path, $arr_dest);
 		if ((count($arr_diff1) == 0) && (count($arr_diff2) == 0)) {
 			return '403';
 		}
+
+		/**
+		 rebuild the dest element and src element to find what are we doing :
+		 1) moving a file to a new dir ?
+		 2) moving a dir to a new dir ?
+		 3) renaming a file ?
+		 4) renaming a dir ?
+		*/
 
 		/**
 		 * 4 is coming from the url: /docman/view.php/6/webdav/the/directory
@@ -429,51 +438,62 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		 * the rest is the path /the/directory
 		 */
 		if ( 4 < count($arr_path)) {
-			$subpath = '';
+			$src_element = '';
 			for ($i = 5; $i < count($arr_path); $i++){
-				$subpath .= '/'.$arr_path[$i];
+				$src_element .= '/'.$arr_path[$i];
 			}
 		}
 
-		if (empty($subpath)) {
-			$subpath = '/';
+		if (empty($src_element)) {
+			$src_element = '/';
 		}
 
 		if ( 4 < count($arr_dest)) {
-			$subdestpath = '';
-			for ($i = 5; $i < count($arr_dest) -1; $i++){
-				$subdestpath .= '/'.$arr_dest[$i];
+			$dest_element = '';
+			for ($i = 5; $i < count($arr_dest) - 1; $i++){
+				$dest_element .= '/'.$arr_dest[$i];
 			}
 		}
 
-		if (empty($subdestpath)) {
-			$subdestpath = '/';
+		if (empty($dest_element)) {
+			$dest_element = '/';
 		}
 
-		$analysed_path = $this->analyse($subpath, $group_id);
-		$analysed_destpath = $this->analyse($subdestpath, $group_id);
+		$analysed_src_element = $this->analyse($src_element, $group_id);
+		$analysed_dest_element = $this->analyse($dest_element, $group_id);
 		$g = group_get_object($group_id);
-		if ($analysed_path['docid']) {
-			$d = new Document($g, $analysed_path['docid']);
-			if ($analysed_destpath['isdir']) {
-				if ($d->update($d->getFileName(), $d->getFileType(), false, $analysed_destpath['doc_group'], $d->getName(), $d->getDescription(), $d->getStateID())) {
+		if (isset($analysed_src_element['doc_id'])) {
+			// we are playing with a file
+			if ($analysed_dest_element['isdir']) {
+				$d = new Document($g, $analysed_src_element['docid']);
+				if ($d->getDocGroupID() == $analysed_dest_element['doc_group']) {
+					// we are renaming the file
+					$filename = end($arr_dest);
+				} else {
+					// we are moving the file to a new directory
+					$filename = $d->getFileName();
+				}
+				if ($d->update($filename, $d->getFileType(), false, $analysed_dest_element['doc_group'], $d->getName(), $d->getDescription(), $d->getStateID())) {
 					return '201';
 				}
 				return '403';
-			} else {
-				return '409';
 			}
-		} elseif ($analysed_path['isdir']) {
-			$dg = new DocumentGroup($g, $analysed_path['doc_group']);
-			if ($analysed_destpath['isdir']) {
-				if ($dg->update($dg->getName(), $analysed_destpath['doc_group'], 1)) {
+		} elseif ($analysed_src_element['isdir']) {
+			// we are playing with a directory
+			if ($analysed_dest_element['isdir']) {
+				$src_dg = new DocumentGroup($g, $analysed_src_element['doc_group']);
+				if ($src_dg->getParentID() == $analysed_dest_element['doc_group']) {
+					// we are renaming the directory
+					$dirname = end($arr_dest);
+				} else {
+					// we are moving the directory to a new directory
+					$dirname = $src_dg->getName();
+				}
+				if ($src_dg->update($dirname, $analysed_dest_element['doc_group'], 1)) {
 					return '201';
 				}
 				return '403';
-			} else {
-				return '409';
 			}
-			return '403';
 		}
 		return '403';
 	}
