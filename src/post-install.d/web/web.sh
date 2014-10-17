@@ -96,7 +96,6 @@ case "$1" in
 	    a2enmod macro
 	    a2enmod authz_groupfile
 	    a2enmod dav
-	    a2enmod dav_svn
 	fi
 	# else: Apache modules already enabled in CentOS
 	
