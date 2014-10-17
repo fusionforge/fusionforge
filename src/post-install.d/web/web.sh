@@ -58,7 +58,8 @@ case "$1" in
 	    echo "*** Note: please install $config_path/httpd.conf in your Apache configuration"
 	fi
 	
-	# Generate SSL cert if needed
+	# Generate SSL certs if needed
+	web_host=$(forge_get_config web_host)
 	cert=$config_path/ssl-cert.pem
 	key=$config_path/ssl-cert.key
 	if [ ! -e $key ] ; then
@@ -66,7 +67,13 @@ case "$1" in
 	    chmod 600 $key
 	fi
 	if [ ! -e $cert ] ; then
-	    openssl req -x509 -days 3650 -new -nodes -batch -text -key $key -out $cert
+	    openssl req -x509 -days 3650 -new -nodes -batch -text -key $key -subj "/CN=$web_host" -out $cert
+	fi
+
+	scm_host=$(forge_get_config scm_host)
+	scmcert=$config_path/ssl-cert-scm.pem
+	if [ ! -e $scmcert ] ; then
+	    openssl req -x509 -days 3650 -new -nodes -batch -text -key $key -subj "/CN=$scm_host" -out $scmcert
 	fi
 	
 	# Setup Docman/FRS/Tracker attachments
