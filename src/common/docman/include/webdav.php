@@ -308,24 +308,36 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		fclose($fp);
 		fclose($options['stream']);
 		$g = group_get_object($group_id);
-		$d = new Document($g);
-		if (strlen($newfilename) < 5) {
-			$title = $newfilename.' '._('(Title must be at least 5 characters.)');
+
+		$dg = new DocumentGroup($g, $dgId);
+
+		$docid = $dg->hasDocument($newfilename);
+		if ($docid) {
+			$d = document_get_object($docid);
+			if ($d->update($d->getFileName(), $d->getFileType(), $tmpfile, $dgId, $d->getName(), _('Injected by WebDAV')._(': ').date(DATE_ATOM), $d->getStateID())) {
+				@unlink($tmpfile);
+				return '200';
+			}
 		} else {
-			$title = $newfilename;
-		}
-		if (function_exists('finfo_open')) {
-			$finfo = finfo_open(FILEINFO_MIME_TYPE);
-			$uploaded_data_type = finfo_file($finfo, $tmpfile);
-		} else {
-			$uploaded_data_type = $options['content_type'];
-		}
-		if (!$d->create($newfilename, $uploaded_data_type, $tmpfile, $dgId, $title, _('Injected by WebDAV')._(': ').date(DATE_ATOM))) {
-			@unlink($tmpfile);
-			return '409';
+			$d = new Document($g);
+			if (strlen($newfilename) < 5) {
+				$title = $newfilename.' '._('(Title must be at least 5 characters.)');
+			} else {
+				$title = $newfilename;
+			}
+			if (function_exists('finfo_open')) {
+				$finfo = finfo_open(FILEINFO_MIME_TYPE);
+				$uploaded_data_type = finfo_file($finfo, $tmpfile);
+			} else {
+				$uploaded_data_type = $options['content_type'];
+			}
+			if ($d->create($newfilename, $uploaded_data_type, $tmpfile, $dgId, $title, _('Injected by WebDAV')._(': ').date(DATE_ATOM))) {
+				@unlink($tmpfile);
+				return '200';
+			}
 		}
 		@unlink($tmpfile);
-		return '200';
+		return '409';
 	}
 
 	function DELETE(&$options) {
