@@ -53,7 +53,7 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 
 		// Create a local clone, add stuff, push it to the repo
 		$t = exec("mktemp -d /tmp/gitTest.XXXXXX");
-		system("cd $t && git clone --quiet $p", $ret);
+		system("cd $t && GIT_SSL_NO_VERIFY=true git clone --quiet $p", $ret);
 		$this->assertEquals($ret, 0);
 
 		system("echo 'this is a simple text' > $t/projecta/mytext.txt");
@@ -62,7 +62,7 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 		system("cd $t/projecta && git commit --quiet -a -m'Modifying file'", $ret);
 		$this->assertEquals($ret, 0);
 
-		system("cd $t/projecta && git push --quiet --all", $ret);
+		system("cd $t/projecta && GIT_SSL_NO_VERIFY=true git push --quiet --all", $ret);
 		$this->assertEquals($ret, 0);
 
 		// Check that the changes appear in gitweb
