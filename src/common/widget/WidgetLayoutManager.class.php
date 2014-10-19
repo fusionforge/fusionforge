@@ -253,18 +253,16 @@ class WidgetLayoutManager {
 		$url = '/widgets/widgets.php?owner='.HTTPRequest::instance()->get('owner').
 			'&layout_id='.HTTPRequest::instance()->get('layout_id');
 		$elementsLi = array();
+		$elementsLi[0]['content'] = util_make_link($url, _('Add widgets'));
+		$elementsLi[1]['content'] = util_make_link($url.'&update=layout', _('Customize Layout'));
 		$update_layout = (HTTPRequest::instance()->get('update') == 'layout');
 		if ($update_layout) {
 			// customized selected
-			$elementsLi[0]['content'] = util_make_link($url, _('Add widgets'));
-			$elementsLi[1]['content'] = util_make_link($url.'&update=layout', _('Customize Layout'));
 			$elementsLi[1]['attrs'] = array('class' => 'current');
 			$action = 'layout';
 		} else {
 			// add selected, or default when first displayed
-			$elementsLi[0]['content'] = util_make_link($url, _('Add widgets'));
 			$elementsLi[0]['attrs'] = array('class' => 'current');
-			$elementsLi[1]['content'] = util_make_link($url.'&update=layout', _('Customize Layout'));
 			$action = 'widget';
 		}
 		echo $HTML->html_list($elementsLi, array('class' => 'widget_toolbar'));
