@@ -249,32 +249,25 @@ class WidgetLayoutManager {
 		while($data = db_fetch_array($res)) {
 			$used_widgets[] = $data['name'];
 		}
-		// display contextual toolbar
-		echo html_ao('ul', array('class' => 'widget_toolbar'));
+		// build & display contextual toolbar
 		$url = '/widgets/widgets.php?owner='.HTTPRequest::instance()->get('owner').
 			'&layout_id='.HTTPRequest::instance()->get('layout_id');
-
+		$elementsLi = array();
 		$update_layout = (HTTPRequest::instance()->get('update') == 'layout');
 		if ($update_layout) {
 			// customized selected
-			echo html_ao('li');
-			echo util_make_link($url, _('Add widgets'));
-			echo html_ac(html_ap() - 1);
-			echo html_ao('li', array('class' => 'current'));
-			echo util_make_link($url.'&update=layout', _('Customize Layout'));
-			echo html_ac(html_ap() -1);
+			$elementsLi[0]['content'] = util_make_link($url, _('Add widgets'));
+			$elementsLi[1]['content'] = util_make_link($url.'&update=layout', _('Customize Layout'));
+			$elementsLi[1]['attrs'] = array('class' => 'current');
 			$action = 'layout';
 		} else {
 			// add selected, or default when first displayed
-			echo html_ao('li', array('class' => 'current'));
-			echo util_make_link($url, _('Add widgets'));
-			echo html_ac(html_ap() -1);
-			echo html_ao('li');
-			echo util_make_link($url.'&update=layout', _('Customize Layout'));
-			echo html_ac(html_ap() -1);
+			$elementsLi[0]['content'] = util_make_link($url, _('Add widgets'));
+			$elementsLi[0]['attrs'] = array('class' => 'current');
+			$elementsLi[1]['content'] = util_make_link($url.'&update=layout', _('Customize Layout'));
 			$action = 'widget';
 		}
-		echo html_ac(html_ap() -1 );
+		echo $HTML->html_list($elementsLi, array('class' => 'widget_toolbar'));
 		echo $HTML->openForm(array('action' => util_make_uri('/widgets/updatelayout.php?owner='.$owner_type.$owner_id.'&action='.$action.'&layout_id='.$layout_id), 'method' => 'post'));
 		if ($update_layout) {
 			?>
