@@ -77,6 +77,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 	 * @return 	string	http status
 	 */
 	function PROPFIND(&$options, &$files) {
+		$files['files'] = array();
 		$arr_path = explode('/', rtrim($options['path'], '/'));
 		$group_id = $arr_path[3];
 
@@ -103,7 +104,6 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 
 		if ($analysed_path['isdir']) {
 			$i = 0;
-			$files["files"] = array();
 			$path = rtrim($options['path'], '/');
 			$res = db_query_params('select * from doc_groups where group_id = $1 and doc_group = $2 and stateid = 1',
 						array($group_id, $analysed_path['doc_group']));
@@ -172,7 +172,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 				$files['files'][$i]['props'][] = $this->mkprop('getcontentlength', $arr['filesize']);
 				$files['files'][$i]['props'][] = $this->mkprop('getcontenttype', $arr['filetype']);
 			}
-		} else {
+		} elseif (isset($analysed_path['docid'])) {
 			$res = db_query_params('select filename,filetype,filesize,createdate,updatedate from doc_data where group_id = $1 and docid = $2',
 				array($group_id, $analysed_path['docid']));
 			if (!$res)
