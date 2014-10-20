@@ -25,5 +25,3 @@ case "$1" in
 		echo "Usage: $0 {configure|triggered|remove}"
 		exit 1
 esac
-
-
