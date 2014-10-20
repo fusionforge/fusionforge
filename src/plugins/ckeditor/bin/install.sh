@@ -13,7 +13,7 @@ ckeditordir=$((ls -d /usr/share/ckeditor 2>/dev/null || echo '/usr/share/javascr
 case "$1" in
 	configure)
 		# adapt the ini file
-		sed -i -e "s@^src_path.*@src_path = $ckeditordir@" $extraconfigdirs/ckeditor.ini
+		sed -i -e "s@^ckeditor_path.*@ckeditor_path = $ckeditordir@" $extraconfigdirs/ckeditor.ini
 		;;
 	triggerd)
 		# here just for compatibility. Nothing to do.
