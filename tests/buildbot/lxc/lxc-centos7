@@ -325,6 +325,8 @@ copy_centos()
     # make a local copy of the minicentos
     echo -n "Copying rootfs to $rootfs ..."
     [ -d $rootfs ] && rmdir $rootfs
+    umount $cache/rootfs-$arch/proc || true
+    umount $cache/rootfs-$arch/sys || true
     cp --reflink=auto -a $cache/rootfs-$arch $rootfs || return 1
     return 0
 }
