@@ -20,7 +20,7 @@ upgrade_mediawikis () {
 case "$1" in
     configure)
         # adapt the ini file
-        sed -i -e "s@^src_path.*@src_path = $ckeditordir@" $extraconfigdirs/ckeditor.ini
+        sed -i -e "s@^src_path.*@src_path = $mediawikidir@" $extraconfigdirs/mediawiki.ini
         ln -nfs $mediawikidir/api.php              $plugindir/www/
         ln -nfs $mediawikidir/extensions           $plugindir/www/
         ln -nfs $mediawikidir/img_auth.php         $plugindir/www/
