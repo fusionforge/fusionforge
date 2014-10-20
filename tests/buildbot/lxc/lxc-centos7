@@ -285,7 +285,7 @@ EOF
 touch /etc/fstab
 # MOUNT PROC
 echo "Mount /proc"
-chroot $cache/partial-$arch /bin/mount proc /proc -t proc
+mount --bind /proc $cache/partial-$arch/proc
 # INSTALL PACKAGES
 echo "Install $pkglist"
 chroot $cache/partial-$arch /usr/bin/yum -y install $pkglist
@@ -294,7 +294,7 @@ EOF
     cat <<EOF >> /var/cache/rinse/$DISTRO-$arch.after_post_install
 # UMOUNT PROC
 echo "Umount /proc"
-chroot $cache/partial-$arch /bin/umount /proc
+umount $cache/partial-$arch/proc
 EOF
     chmod 755 /var/cache/rinse/$DISTRO-$arch.after_post_install
 
