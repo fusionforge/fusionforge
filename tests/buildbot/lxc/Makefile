@@ -4,7 +4,7 @@
 # Guess where lxc data is and default to /usr/share/lxc
 LXC_DATA:=$(shell [ -d /usr/share/lxc ] && echo /usr/share/lxc || ([ -d /usr/lib/lxc ] && echo /usr/lib/lxc))
 LXC_DATA:=$(shell [ -z "$(LXC_DATA)" ] && echo /usr/share/lxc || echo "$(LXC_DATA)")
-TEMPLATELIST:=$(LXC_DATA)/templates/lxc-debian6 $(LXC_DATA)/templates/lxc-debian7 $(LXC_DATA)/templates/lxc-debian8 $(LXC_DATA)/templates/lxc-centos5 $(LXC_DATA)/templates/lxc-centos6
+TEMPLATELIST:=$(LXC_DATA)/templates/lxc-debian6 $(LXC_DATA)/templates/lxc-debian7 $(LXC_DATA)/templates/lxc-debian8 $(LXC_DATA)/templates/lxc-centos5 $(LXC_DATA)/templates/lxc-centos6 $(LXC_DATA)/templates/lxc-centos7
 
 default: checkdepends installtemplate
 
@@ -79,12 +79,17 @@ $(LXC_DATA)/templates/lxc-centos5: lxc-centos5 $(LXC_DATA) Makefile
 $(LXC_DATA)/templates/lxc-centos6: lxc-centos6 $(LXC_DATA) Makefile
 	cp lxc-centos6 $(LXC_DATA)/templates/
 
+$(LXC_DATA)/templates/lxc-centos7: lxc-centos7 $(LXC_DATA) Makefile
+	cp lxc-centos7 $(LXC_DATA)/templates/
+
 createdeb:
 	sudo /usr/bin/lxc-create -n dhdebian6.local -f config.debian6 -t debian6
 	sudo /usr/bin/lxc-create -n dhdebian7.local -f config.debian7 -t debian7
 
 createcos: /usr/bin/netmask /usr/bin/rinse
 	sudo /usr/bin/lxc-create -n dhcentos5.local -f config.centos5 -t centos5
+	sudo /usr/bin/lxc-create -n dhcentos6.local -f config.centos6 -t centos6
+	sudo /usr/bin/lxc-create -n dhcentos7.local -f config.centos7 -t centos7
 
 startdeb: checkmount
 	sudo LANG=C /usr/bin/lxc-start -n dhdebian7.local -d

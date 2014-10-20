@@ -31,6 +31,10 @@ case $HOST in
 	VM=centos6
 	INSTALL_OS=centos
 	;;
+    centos7.local)
+	VM=centos7
+	INSTALL_OS=centos
+	;;
     *)
 	export DIST=jessie
 	VM=debian8
