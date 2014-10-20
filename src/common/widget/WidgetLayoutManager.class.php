@@ -508,8 +508,8 @@ class WidgetLayoutManager {
 	 * @param  title
 	 * @param  widgets
 	 * @param  used_widgets
-     * @return string
-     */
+	 * @return string
+	 */
 	function _displayWidgetsSelectionForm($title, $widgets, $used_widgets) {
 		$hp = Codendi_HTMLPurifier::instance();
 		$additionnal_html = '';
@@ -584,8 +584,8 @@ class WidgetLayoutManager {
 	/**
 	 * getCategories - sort the widgets in their different categories
 	 *
-	 * @param array $widgets
-	 * @return array (category => widgets)
+	 * @param	array	$widgets
+	 * @return	array	(category => widgets)
 	 */
 	function getCategories($widgets) {
 		$categ = array();
@@ -610,9 +610,9 @@ class WidgetLayoutManager {
 	/**
 	 * addWidget
 	 *
-	 * @param	int		$owner_id
+	 * @param	int	$owner_id
 	 * @param	string	$owner_type
-	 * @param	int		$layout_id
+	 * @param	int	$layout_id
 	 * @param	string	$name
 	 * @param	object	$widget
 	 * @param	object	$request
