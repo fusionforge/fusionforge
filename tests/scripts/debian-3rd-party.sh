@@ -31,9 +31,6 @@ SignWith: $SIGNKEY
 EOF
 done
 
-# Backport mediawiki from Jessie to Wheezy
-make -C 3rd-party/mediawiki DIST=wheezy
-
 # Build selenium packages for Wheezy+Jessie
 for DIST in $DISTS ; do
     make -C 3rd-party/selenium DIST=$DIST
