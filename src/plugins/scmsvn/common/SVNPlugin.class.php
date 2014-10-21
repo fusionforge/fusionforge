@@ -681,13 +681,69 @@ some control over it to the project's administrator.");
 		$params['texts'][] = _('Subversion Commits');
 		return true;
 	}
+
+	function getUserCommits($project, $user, $nbCommits) {
+		global $commits, $users, $adds, $updates, $messages, $times, $revisions, $deletes, $time_ok, $user_list, $last_message, $notimecheck;
+		$commits = 0;
+		$users = array();
+		$adds = 0;
+		$updates = 0;
+		$messages = array();
+		$times = array();
+		$revisions = array();
+		$deletes = 0;
+		$time_ok = false;
+		$user_list = array();
+		$last_message = '';
+		$notimecheck = true;
+		$userRevisions = array();
+		if ($project->usesPlugin($this->name) && forge_get_config('use_dav', $this->name) && forge_check_perm($this->name, $project->getID(), 'read')) {
+			$repo = forge_get_config('repos_path', $this->name) . '/' . $project->getUnixName();
+			$email = $user->getEmail();
+			$fullname = $user->getFirstName().' '.$user->getLastName();
+			$userunixname = $user->getUnixName();
+			if (is_dir($repo)) {
+				$pipe = popen("svn log file://$repo --xml -v --limit $nbCommits --search \"$userunixname\" 2> /dev/null", 'r' );
+				$xml_parser = xml_parser_create();
+				xml_set_element_handler($xml_parser, "SVNPluginStartElement", "SVNPluginEndElement");
+				xml_set_character_data_handler($xml_parser, "SVNPluginCharData");
+				while (!feof($pipe) && $data = fgets($pipe, 4096)) {
+					if (!xml_parse($xml_parser, $data, feof($pipe))) {
+						$this->setError("Unable to parse XML with error " .
+							xml_error_string(xml_get_error_code($xml_parser)) .
+							" on line " .
+							xml_get_current_line_number($xml_parser));
+						pclose($pipe);
+						return false;
+						break;
+					}
+
+				}
+				xml_parser_free($xml_parser);
+				pclose($pipe);
+			}
+			if ($adds > 0 || $updates > 0 || $commits > 0 || $deletes > 0) {
+				$i = 0;
+				foreach ($messages as $message) {
+					if ($users[$i] == $userunixname) {
+						$userRevisions[$i]['pluginName'] = 'scmsvn';
+						$userRevisions[$i]['description'] = htmlspecialchars($message);
+						$userRevisions[$i]['commit_id'] = $revisions[$i];
+						$userRevisions[$i]['date'] = $times[$i];
+					}
+					$i++;
+				}
+			}
+		}
+		return $userRevisions;
+	}
 }
 
 // End of class, helper functions now
 
 function SVNPluginCharData($parser, $chars) {
 	global $last_tag, $last_user, $last_time, $start_time, $end_time, $usr_commits, $commits,
-		$time_ok, $user_list, $last_message, $messages, $times, $users;
+		$time_ok, $user_list, $last_message, $messages, $times, $users, $notimecheck;
 	switch ($last_tag) {
 		case "AUTHOR": {
 			$last_user = preg_replace('/[^a-z0-9_-]/', '', strtolower(trim($chars)));
@@ -703,15 +759,17 @@ function SVNPluginCharData($parser, $chars) {
 				$time_ok = true;
 			} else {
 				$time_ok = false;
-				if ($last_user !== '') // empty in e.g. tags from cvs2svn
-					$usr_commits[$last_user]--;
-				$commits--;
+				if (!isset($notimecheck)) {
+					if ($last_user !== '') // empty in e.g. tags from cvs2svn
+						$usr_commits[$last_user]--;
+					$commits--;
+				}
 			}
 			$times[] = $last_time;
 			break;
 		}
 		case "MSG": {
-			if ($time_ok === true) {
+			if ($time_ok === true || isset($notimecheck)) {
 				$messages[count($messages)-1] .= $chars;
 			}
                         /* note: there may be more than one msg
@@ -724,7 +782,7 @@ function SVNPluginCharData($parser, $chars) {
 
 function SVNPluginStartElement($parser, $name, $attrs) {
 	global $last_user, $last_time, $last_tag, $time_ok, $commits,
-		$adds, $updates, $usr_adds, $usr_updates, $last_message, $messages, $times, $revisions, $deletes, $usr_deletes;
+		$adds, $updates, $usr_adds, $usr_updates, $last_message, $messages, $times, $revisions, $deletes, $usr_deletes, $notimecheck;
 	$last_tag = $name;
 	switch($name) {
 		case "LOGENTRY": {
@@ -735,7 +793,7 @@ function SVNPluginStartElement($parser, $name, $attrs) {
 			break;
 		}
 		case "PATH": {
-			if ($time_ok === true) {
+			if ($time_ok === true || isset($notimecheck)) {
 
 				if ($attrs['ACTION'] == "M") {
 					$updates++;
@@ -757,7 +815,7 @@ function SVNPluginStartElement($parser, $name, $attrs) {
 			break;
 		}
                 case "MSG": {
-			if ($time_ok === true) {
+			if ($time_ok === true || isset($notimecheck)) {
 				$messages[] = "";
 			}
 			break;

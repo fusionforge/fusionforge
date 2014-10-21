@@ -1209,6 +1209,33 @@ control over it to the project's administrator.");
 		<?php
 	}
 
+	function getUserCommits($project, $user, $nb_commits) {
+		$commits = array();
+		if ($project->usesPlugin($this->name) && forge_get_config('use_dav', $this->name) && forge_check_perm($this->name, $project->getID(), 'read')) {
+			$repo = forge_get_config('repos_path', $this->name) . '/' . $project->getUnixName() . '/' . $project->getUnixName() . '.git';
+			$email = $user->getEmail();
+			$fullname = $user->getFirstName().' '.$user->getLastName();
+			$userunixname = $user->getUnixName();
+			if (is_dir($repo)) {
+				$pipe = popen("GIT_DIR=\"$repo\" git log --date=raw --all --pretty='format:%ad||%ae||%s||%h' --name-status --max-count=$nb_commits --author=\"$email\" --author=\"$fullname\"  --author=\"$userunixname\"", 'r' );
+				$i = 0;
+				while (!feof($pipe) && $data = fgets($pipe)) {
+					$line = trim($data);
+					$splitedLine = explode('||', $line);
+					if (sizeof($splitedLine) == 4) {
+						$commits[$i]['pluginName'] = $this->name;
+						$commits[$i]['description'] = htmlspecialchars($splitedLine[2]);
+						$commits[$i]['commit_id'] = $splitedLine[3];
+						$splitedDate = explode(' ', $splitedLine[0]);
+						$commits[$i]['date'] = $splitedDate[0];
+						$i++;
+					}
+				}
+				pclose($pipe);
+			}
+		}
+		return $commits;
+	}
 }
 
 // Local Variables:
