@@ -84,7 +84,7 @@ echo $attch['file_path'];
     } else {
 		$feedback.= _('Error: Missing parameter');
     }
-    htmlRedirect('/plugins/forumml/message.php?group_id='.$groupId.'&list='.$list_id.'&topic='.$topic);
+    session_redirect('/plugins/forumml/message.php?group_id='.$groupId.'&list='.$list_id.'&topic='.$topic);
 } else {
-	header('Location: '.get_server_url());
+	session_redirect(get_server_url());
 }

@@ -249,32 +249,23 @@ class WidgetLayoutManager {
 		while($data = db_fetch_array($res)) {
 			$used_widgets[] = $data['name'];
 		}
-		// display contextual toolbar
-		echo html_ao('ul', array('class' => 'widget_toolbar'));
+		// build & display contextual toolbar
 		$url = '/widgets/widgets.php?owner='.HTTPRequest::instance()->get('owner').
 			'&layout_id='.HTTPRequest::instance()->get('layout_id');
-
+		$elementsLi = array();
+		$elementsLi[0]['content'] = util_make_link($url, _('Add widgets'));
+		$elementsLi[1]['content'] = util_make_link($url.'&update=layout', _('Customize Layout'));
 		$update_layout = (HTTPRequest::instance()->get('update') == 'layout');
 		if ($update_layout) {
 			// customized selected
-			echo html_ao('li');
-			echo util_make_link($url, _('Add widgets'));
-			echo html_ac(html_ap() - 1);
-			echo html_ao('li', array('class' => 'current'));
-			echo util_make_link($url.'&update=layout', _('Customize Layout'));
-			echo html_ac(html_ap() -1);
+			$elementsLi[1]['attrs'] = array('class' => 'current');
 			$action = 'layout';
 		} else {
 			// add selected, or default when first displayed
-			echo html_ao('li', array('class' => 'current'));
-			echo util_make_link($url, _('Add widgets'));
-			echo html_ac(html_ap() -1);
-			echo html_ao('li');
-			echo util_make_link($url.'&update=layout', _('Customize Layout'));
-			echo html_ac(html_ap() -1);
+			$elementsLi[0]['attrs'] = array('class' => 'current');
 			$action = 'widget';
 		}
-		echo html_ac(html_ap() -1 );
+		echo $HTML->html_list($elementsLi, array('class' => 'widget_toolbar'));
 		echo $HTML->openForm(array('action' => util_make_uri('/widgets/updatelayout.php?owner='.$owner_type.$owner_id.'&action='.$action.'&layout_id='.$layout_id), 'method' => 'post'));
 		if ($update_layout) {
 			?>
@@ -517,8 +508,8 @@ class WidgetLayoutManager {
 	 * @param  title
 	 * @param  widgets
 	 * @param  used_widgets
-     * @return string
-     */
+	 * @return string
+	 */
 	function _displayWidgetsSelectionForm($title, $widgets, $used_widgets) {
 		$hp = Codendi_HTMLPurifier::instance();
 		$additionnal_html = '';
@@ -593,8 +584,8 @@ class WidgetLayoutManager {
 	/**
 	 * getCategories - sort the widgets in their different categories
 	 *
-	 * @param array $widgets
-	 * @return array (category => widgets)
+	 * @param	array	$widgets
+	 * @return	array	(category => widgets)
 	 */
 	function getCategories($widgets) {
 		$categ = array();
@@ -619,9 +610,9 @@ class WidgetLayoutManager {
 	/**
 	 * addWidget
 	 *
-	 * @param	int		$owner_id
+	 * @param	int	$owner_id
 	 * @param	string	$owner_type
-	 * @param	int		$layout_id
+	 * @param	int	$layout_id
 	 * @param	string	$name
 	 * @param	object	$widget
 	 * @param	object	$request

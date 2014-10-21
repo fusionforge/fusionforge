@@ -111,5 +111,5 @@ if ($request->valid($vOwner)) {
 	}
 }
 if (!$request->isAjax()) {
-	htmlRedirect($redirect);
+	session_redirect($redirect);
 }

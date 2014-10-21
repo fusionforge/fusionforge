@@ -11,6 +11,8 @@ KEEPVM=true
 
 centos5=openvz:centos-5-x86-test::
 centos6=openvz:centos-6-x86-test::
+centos7=openvz:centos-7-x86-test::
 
 centos5tmpl=openvz:centos-5-x86::
 centos6tmpl=openvz:centos-6-x86::
+centos7tmpl=openvz:centos-7-x86::
