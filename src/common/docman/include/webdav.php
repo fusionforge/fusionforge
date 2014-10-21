@@ -321,6 +321,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 				}
 			} else {
 				return '423';
+			}
 		} else {
 			$d = new Document($g);
 			if (strlen($newfilename) < 5) {
