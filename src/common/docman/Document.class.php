@@ -160,14 +160,8 @@ class Document extends Error {
 			}
 		}
 
-		$result = db_query_params('SELECT filename, doc_group from docdata_vw
-						where filename = $1
-						and doc_group = $2
-						and stateid = $3',
-				array($filename, $doc_group, $doc_initstatus));
-
-		if (!$result || db_numrows($result) > 0) {
-			$dg = new DocumentGroup($this->getGroup(), $doc_group);
+		$dg = new DocumentGroup($this->getGroup(), $doc_group);
+		if ($dg->hasDocument($filename)) {
 			$this->setError(_('Document already published in this folder').' '.$dg->getPath());
 			return false;
 		}
@@ -175,7 +169,6 @@ class Document extends Error {
 		$result = db_query_params('SELECT title FROM docdata_vw where title = $1 AND doc_group = $2',
 			array($title, $doc_group));
 		if (!$result || db_numrows($result) > 0) {
-			$dg = new DocumentGroup($this->getGroup(), $doc_group);
 			$this->setError(_('Document already published in this folder').' '.$dg->getPath());
 			return false;
 		}
@@ -823,16 +816,6 @@ class Document extends Error {
 		if (strlen($description) < 10) {
 			$this->setError(_('Document Description Must Be At Least 10 Characters'));
 			return false;
-		}
-
-		/* TODO : NEED REAL CHECK */
-		if ($filename) {
-			$result = db_query_params('SELECT filename, doc_group FROM docdata_vw WHERE filename = $1 AND doc_group = $2 AND stateid = $3 AND docid != $4',
-						array($filename, $doc_group, $stateid, $this->getID()));
-			if (!$result || db_numrows($result) > 0) {
-				$this->setError(_('Document already published in this folder'));
-				return false;
-			}
 		}
 
 		db_begin();

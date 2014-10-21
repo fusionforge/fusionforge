@@ -31,6 +31,8 @@ function isLogged(){
 	return session_loggedin();
 }
 
+
+// DEPRECATED: use session_redirect
 function htmlRedirect($url) {
 	session_redirect($url);
 }
@@ -51,7 +53,6 @@ function htmlIframe($url,$poub) {
 			jQuery(\'#'.$id.'\').iframeAutoHeight({heightOffset: 50});
 			jQuery(\'#'.$id.'\').load(function (){
 					if (this.contentWindow.location.href == "'.util_make_url('/projects/'.$project->getUnixName()).'/") {
-						console.log(this.contentWindow.location.href);
 						window.location.href = this.contentWindow.location.href;
 					};
 				});

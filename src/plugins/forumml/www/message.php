@@ -115,7 +115,7 @@ if ($p && $plugin_manager->isPluginAvailable($p) && $p->isAllowed()) {
 		$ret = plugin_forumml_process_mail($p,true);
 		if ($ret) {
 			$feedback .=_('Email succefully sent. It can take some time before being displayed');
-			//htmlRedirect('/plugins/forumml/message.php?'. http_build_query(array(
+			//session_redirect('/plugins/forumml/message.php?'. http_build_query(array(
 			//    'group_id' => $group_id,
 			//    'list'     => $list_id,
 			//    'topic'    => $topic
@@ -215,5 +215,5 @@ if ($p && $plugin_manager->isPluginAvailable($p) && $p->isAllowed()) {
 	mail_footer($params);
 
 } else {
-	header('Location: '.get_server_url());
+	session_redirect(get_server_url());
 }

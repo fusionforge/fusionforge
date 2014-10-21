@@ -372,7 +372,7 @@ class MailmanList extends Error {
 				$this->setError(_('Update failed')._(': ').db_error());
 				return false;
 			}
-			htmlRedirect('/plugins/mailman/index.php?group_id='.$this->Group->getId());
+			session_redirect('/plugins/mailman/index.php?group_id='.$this->Group->getId());
 		}
 
 	}
@@ -389,7 +389,7 @@ class MailmanList extends Error {
 			$this->setError(_('Update failed')._(': ').db_error());
 			return false;
 		}
-		htmlRedirect('/plugins/mailman/index.php?group_id='.$this->Group->getId());
+		session_redirect('/plugins/mailman/index.php?group_id='.$this->Group->getId());
 	}
 	/**
 	 *	isMonitoring - See if the current user is in the list of people monitoring the forum.

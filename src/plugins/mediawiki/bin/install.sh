@@ -4,6 +4,7 @@
 source_path=$(forge_get_config source_path)
 data_path=$(forge_get_config data_path)
 plugindir=$(forge_get_config source_path)/plugins/mediawiki
+extraconfigdirs=$(forge_get_config extra_config_dirs)
 
 mediawikidir=$((ls -d /usr/share/mediawiki* 2>/dev/null || echo '/usr/share/mediawiki') | tail -1)
 # Debian: /usr/share/mediawiki/
@@ -18,6 +19,8 @@ upgrade_mediawikis () {
 
 case "$1" in
     configure)
+        # adapt the ini file
+        sed -i -e "s@^src_path.*@src_path = $mediawikidir@" $extraconfigdirs/mediawiki.ini
         ln -nfs $mediawikidir/api.php              $plugindir/www/
         ln -nfs $mediawikidir/extensions           $plugindir/www/
         ln -nfs $mediawikidir/img_auth.php         $plugindir/www/

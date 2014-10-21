@@ -166,7 +166,7 @@ class MailmanListFactory extends Error {
 		if (!$result) {
 			return false;
 		}
-		htmlRedirect('/plugins/mailman/index.php?group_id='.$this->Group->getId());
+		session_redirect('/plugins/mailman/index.php?group_id='.$this->Group->getId());
 		return $result;
 	}
 

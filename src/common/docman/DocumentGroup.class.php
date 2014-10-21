@@ -546,6 +546,20 @@ class DocumentGroup extends Error {
 		}
 	}
 
+	function hasDocument($filename, $stateid = 1) {
+		$result = db_query_params('SELECT filename, doc_group, docid from docdata_vw
+						where filename = $1
+						and doc_group = $2
+						and stateid = $3',
+				array($filename, $this->getID(), $stateid));
+
+		if (!$result || db_numrows($result) > 0) {
+			$row = db_fetch_array($result);
+			return $row['docid'];
+		}
+		return false;
+	}
+
 	/**
 	 * getNumberOfDocuments - get the number of files in this doc_group, group_id and for a document state
 	 *

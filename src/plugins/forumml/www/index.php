@@ -54,7 +54,7 @@ if ($p && $plugin_manager->isPluginAvailable($p) && $p->isAllowed()) {
 		exit_error(_('Error'),_('No list specified'));
 	} else {
 		$list_id = $request->get('list');
-$list = new MailmanList($group_id,$list_id);
+		$list = new MailmanList($group_id,$list_id);
 		if (!isLogged() || ($list->isPublic()!=1 && !$current_user->isMember($group_id))) {
 			exit_error(_('Error'),_('You are not allowed to access this page'));
 		}
@@ -75,7 +75,7 @@ $list = new MailmanList($group_id,$list_id);
 			$return = plugin_forumml_process_mail($p);
 			if ($return) {
 				$feedback .=_('There can be some delay before to see the message in the archives.')._(' Redirecting to archive page, please wait ...');
-				//htmlRedirect('/plugins/forumml/message.php?'. http_build_query(array(
+				//session_redirect('/plugins/forumml/message.php?'. http_build_query(array(
 				//    'group_id' => $group_id,
 				//    'list'     => $list_id,
 				    //'topic'    => 0
@@ -131,5 +131,5 @@ $list = new MailmanList($group_id,$list_id);
 	mail_footer($params);
 
 } else {
-	header('Location: '.get_server_url());
+	session_redirect(get_server_url());
 }
