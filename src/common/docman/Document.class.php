@@ -536,18 +536,18 @@ class Document extends Error {
 	}
 
 	/**
-	 * getReservedBy - get the owner of the reversed status of this document.
+	 * getReservedBy - get the owner of the reserved status of this document.
 	 *
-	 * @return	int	The owner of the reversed status of this document.
+	 * @return	int	The owner of the reserved status of this document.
 	 */
 	function getReservedBy() {
 		return $this->data_array['reserved_by'];
 	}
 
 	/**
-	 * getReserved - get the reversed status of this document.
+	 * getReserved - get the reserved status of this document.
 	 *
-	 * @return	int	The reversed status of this document.
+	 * @return	int	The reserved status of this document.
 	 */
 	function getReserved() {
 		return $this->data_array['reserved'];
