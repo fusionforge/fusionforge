@@ -26,7 +26,7 @@ require_once 'common/widget/Widget_MyProjects.class.php';
 require_once 'common/widget/Widget_MyBookmarks.class.php';
 require_once 'common/widget/Widget_MyMonitoredForums.class.php';
 require_once('common/widget/Widget_MyMonitoredFp.class.php');
-require_once 'common/widget/Widget_MyLatestSvnCommits.class.php';
+require_once 'common/widget/Widget_MyLatestCommits.class.php';
 require_once 'common/widget/Widget_MyProjectsLastDocuments.class.php';
 require_once 'common/widget/Widget_MyArtifacts.class.php';
 //require_once('common/widget/Widget_MyBugs.class.php');
@@ -216,26 +216,26 @@ require_once 'common/widget/Widget_MyMonitoredDocuments.class.php';
 				break;*/
 			case 'mymonitoredfp':
 				$o = new Widget_MyMonitoredFp();
-				break;/*
-			case 'mylatestsvncommits':
-				$o = new Widget_MyLatestSvnCommits();
 				break;
-				case 'mybugs':
+			case 'mylatestcommits':
+				$o = new Widget_MyLatestCommits();
+				break;/*
+			case 'mybugs':
 				$o = new Widget_MyBugs();
 				break;
-								case 'mytwitterfollow':
+			case 'mytwitterfollow':
 				$o = new Widget_MyTwitterFollow();
 				break;
-				case 'mywikipage':                   //not yet
+			case 'mywikipage':                   //not yet
 				$o = new Widget_MyWikiPage();
 				break;
-				case 'mysystemevent':
-					// This widget is only for super admin
-					if (forge_check_global_perm('forge_admin')) {
-						$o = new Widget_MySystemEvent();
-					}
-					break;
-				case 'projectclassification':
+			case 'mysystemevent':
+				// This widget is only for super admin
+				if (forge_check_global_perm('forge_admin')) {
+					$o = new Widget_MySystemEvent();
+				}
+				break;
+			case 'projectclassification':
 				$o = new Widget_ProjectClassification();
 				break;*/
 			case 'projectdescription':
@@ -265,19 +265,19 @@ require_once 'common/widget/Widget_MyMonitoredDocuments.class.php';
 			case 'projectrss':
 				$o = new Widget_ProjectRss();
 				break;/*
-				case 'projecttwitterfollow':
+			case 'projecttwitterfollow':
 				$o = new Widget_ProjectTwitterFollow();
 				break;
-				case 'projectsvnstats':
+			case 'projectsvnstats':
 				$o = new Widget_ProjectSvnStats();
 				break;
-				//case 'projectwikipage':                    //not yet
-				//    $o = new Widget_ProjectWikiPage();
-				//    break;
-				case 'projectlatestsvncommits':
+			case 'projectwikipage':                    //not yet
+				$o = new Widget_ProjectWikiPage();
+				break;
+			case 'projectlatestsvncommits':
 				$o = new Widget_ProjectLatestSvnCommits();
 				break;
-				case 'projectlatestcvscommits':
+			case 'projectlatestcvscommits':
 				$o = new Widget_ProjectLatestCvsCommits();
 				break;*/
 			default:
@@ -302,7 +302,7 @@ require_once 'common/widget/Widget_MyMonitoredDocuments.class.php';
 			case WidgetLayoutManager::OWNER_TYPE_USER:
 				$widgets = array('myadmin', 'mysurveys', 'myprojects', 'mybookmarks',
 						'mymonitoredforums', 'mymonitoredfp', 'myartifacts', 'mybugs', //'mywikipage' //not yet
-						'mytasks', 'mysrs', 'mylatestsvncommits', 'mytwitterfollow',
+						'mytasks', 'mysrs', 'mylatestcommits', 'mytwitterfollow',
 						'mysystemevent', 'myrss', 'mymonitoreddocuments', 'myprojectslastdocuments',
 						);
 				break;

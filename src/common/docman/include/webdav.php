@@ -314,9 +314,13 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		$docid = $dg->hasDocument($newfilename);
 		if ($docid) {
 			$d = document_get_object($docid);
-			if ($d->update($d->getFileName(), $d->getFileType(), $tmpfile, $dgId, $d->getName(), _('Injected by WebDAV')._(': ').date(DATE_ATOM), $d->getStateID())) {
-				@unlink($tmpfile);
-				return '200';
+			if (!$d->getReserved() && !$d->getLocked()) {
+				if ($d->update($d->getFileName(), $d->getFileType(), $tmpfile, $dgId, $d->getName(), _('Injected by WebDAV')._(': ').date(DATE_ATOM), $d->getStateID())) {
+					@unlink($tmpfile);
+					return '200';
+				}
+			} else {
+				return '423';
 			}
 		} else {
 			$d = new Document($g);
@@ -380,6 +384,8 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 				$d = new Document($g, $analysed_path['docid']);
 				if ($d->trash())
 					return '200';
+
+				return '423';
 			}
 		}
 		return '404';
