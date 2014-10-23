@@ -125,7 +125,14 @@ fi
 echo "Running PHPunit tests"
 retcode=0
 cd tests
-phpunit --verbose --debug --stop-on-failure --log-junit $SELENIUM_RC_DIR/phpunit-selenium.xml $@ func_tests.php || retcode=$?
+set -x
+if [ "$*" = "" ] ; then
+    ts=func_tests.php
+else
+    ts="$*"
+fi
+phpunit --verbose --debug --stop-on-failure --log-junit $SELENIUM_RC_DIR/phpunit-selenium.xml $ts || retcode=$?
+set +x
 echo "phpunit returned with code $retcode"
 
 set +e
