@@ -2,22 +2,45 @@
 
 set -e
 
+usage () {
+       echo "Usage: $0 <install_method>/<install_os> testsuite_name"
+       echo "Example: $0 src/centos6"
+}
+
 TEST_ENV="$1"
 # Test arg
 if [ -z "$TEST_ENV" ]
 then
-       echo "Usage: $0 testsuite_name"
+       usage
        exit 1
 fi
+shift
 
 export INSTALL_METHOD=${TEST_ENV%/*}
 export INSTALL_OS=${TEST_ENV#*/}
 
 if [ -z "$INSTALL_METHOD" ] || [ -z "$INSTALL_OS" ] ; then
-    echo "Usage: $0 testsuite_name"
-    echo "Example: $0 src/centos"
+    usage
     exit 1
 fi
+
+case $INSTALL_METHOD in
+    rpm|src|deb)
+	;;
+    *)
+	echo "Unknown install method"
+	exit 1
+	;;
+esac
+
+case $INSTALL_OS in
+    debian*|centos*)
+	;;
+    *)
+	echo "Unknown install OS"
+	exit 1
+	;;
+esac
 
 scriptdir=$(dirname $0)
 FORGE_HOME=$(cd $scriptdir/../..; pwd)
@@ -125,14 +148,7 @@ fi
 echo "Running PHPunit tests"
 retcode=0
 cd tests
-set -x
-if [ "$*" = "" ] ; then
-    ts=func_tests.php
-else
-    ts="$*"
-fi
-phpunit --verbose --debug --stop-on-failure --log-junit $SELENIUM_RC_DIR/phpunit-selenium.xml $ts || retcode=$?
-set +x
+phpunit --verbose --debug --stop-on-failure --log-junit $SELENIUM_RC_DIR/phpunit-selenium.xml "$@" || retcode=$?
 echo "phpunit returned with code $retcode"
 
 set +e
