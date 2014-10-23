@@ -12,7 +12,7 @@ class AllTests
 {
 	public static function main()
 	{
-		PHPUnit_TextUI_TestRunner::run(self::suite());
+        PHPUnit_TextUI_TestRunner::run(self::suite());
 	}
 
 	public static function suite()
@@ -27,8 +27,4 @@ class AllTests
 
 		return $suite;
 	}
-}
-
-if (PHPUnit_MAIN_METHOD == 'AllTests::main') {
-	AllTests::main();
 }
