@@ -148,7 +148,9 @@ fi
 echo "Running PHPunit tests"
 retcode=0
 cd tests
+set -x
 phpunit --verbose --debug --stop-on-failure --log-junit $SELENIUM_RC_DIR/phpunit-selenium.xml "$@" || retcode=$?
+set +x
 echo "phpunit returned with code $retcode"
 
 set +e
