@@ -14,11 +14,7 @@ class AllTests
 {
 	public static function main()
 	{
-        global $testsuite_already_run;
-        if (!isset ($testsuite_already_run)) {
-            PHPUnit_TextUI_TestRunner::run(self::suite());
-            $testsuite_already_run = TRUE;
-        }
+        PHPUnit_TextUI_TestRunner::run(self::suite());
 	}
 
 	public static function suite()
@@ -36,11 +32,4 @@ class AllTests
 
 		return $suite;
 	}
-}
-
-if (PHPUnit_MAIN_METHOD == 'AllTests::main') {
-    if (!isset ($testsuite_already_run)) {
-        AllTests::main();
-        $testsuite_already_run = TRUE;
-    }
 }
