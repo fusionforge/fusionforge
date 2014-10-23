@@ -14,7 +14,11 @@ class AllTests
 {
 	public static function main()
 	{
-		PHPUnit_TextUI_TestRunner::run(self::suite());
+        global $testsuite_already_run;
+        if (!isset $testsuite_already_run) {
+            PHPUnit_TextUI_TestRunner::run(self::suite());
+            $testsuite_already_run = TRUE;
+        }
 	}
 
 	public static function suite()
