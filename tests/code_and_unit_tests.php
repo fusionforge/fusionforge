@@ -34,5 +34,8 @@ class AllTests
 }
 
 if (PHPUnit_MAIN_METHOD == 'AllTests::main') {
-	AllTests::main();
+    if (!isset ($testsuite_already_run)) {
+        AllTests::main();
+        $testsuite_already_run = TRUE;
+    }
 }
