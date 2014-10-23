@@ -98,26 +98,22 @@ class Widget_MyLatestCommits extends Widget {
 			if (count($revisions) > 0) {
 				$global_nb_revisions += count($revisions);
 				list($hide_now, $count_diff, $hide_url) = my_hide_url('scm', $project->getID(), $hide_item_id, count($projects), $hide_scm);
-				$html .= $hide_url;
+				$html .= html_e('div', array(), $hide_url.util_make_link('/scm/?group_id='.$project->getID(), $project->getPublicName()));
 
-				$html .= util_make_link('/scm/?group_id='.$project->getID(), $project->getPublicName());
 				if (!$hide_now) {
 					$i = 0;
 					foreach ($revisions as $revision) {
-						$html .= '<div class="'. $HTML->boxGetAltRowStyle($i++, true) .'" style="border-bottom:1px solid #ddd">';
-						$html .= '<div style="font-size:0.98em;">';
-						$html .= $this->_getLinkToCommit($project, $revision['commit_id'], $revision['pluginName']);
-						$html .= ' '._("on").' ';
-						//In the db, svn dates are stored as int whereas cvs dates are stored as timestamp
-						$html .= date(_("Y-m-d H:i"), $revision['date']);
-						$html .= '</div>';
-						$html .= '<div style="padding-left:20px; padding-bottom:4px; color:#555">';
-						$html .= util_make_links(substr($revision['description'], 0, 255), $project->getID());
+						$revisionDescription = substr($revision['description'], 0, 255);
 						if (strlen($revision['description']) > 255) {
-							$html .= ' [...]';
+							$revisionDescription .= ' [...]';
 						}
-						$html .= '</div>';
-						$html .= '</div>';
+						$html .= html_e('div', array('class' => $HTML->boxGetAltRowStyle($i++, true), 'style' => 'border-bottom:1px solid #ddd'),
+								html_e('div', array('style' => 'font-size:0.98em'),
+									$this->_getLinkToCommit($project, $revision['commit_id'], $revision['pluginName']).
+									' '._('on').' '.
+									date(_("Y-m-d H:i"), $revision['date'])).
+								html_e('div', array('style' => 'padding-left:20px; padding-bottom:4px; color:#555'),
+									$revisionDescription));
 					}
 				}
 			}
