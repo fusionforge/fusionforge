@@ -41,6 +41,7 @@ else
 	httpd mod_ssl postgresql-server nscd \
 	subversion augeas viewvc git gitweb \
 	mediawiki119 \
+	php-twig \
 	moin mod_wsgi python-psycopg2
 fi
 
