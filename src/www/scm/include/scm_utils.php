@@ -65,11 +65,11 @@ function scm_header($params) {
 
 	$params['toptab'] = 'scm';
 	site_project_header($params);
-	echo '<div id="scm" class="scm">';
+	echo html_ao('div', array('id' => 'scm', 'class' => 'scm'));
 }
 
 function scm_footer() {
-	echo '</div>';
+	echo html_ac(html_ap() -1);
 	site_project_footer();
 }
 
@@ -186,7 +186,7 @@ function commitstime_graph($group_id, $chartid) {
 			plot'.$chartid.'.replot();
 		});'."\n";
 	echo '//]]></script>';
-	echo '<div id="chart'.$chartid.'"></div>';
+	echo html_e('div', array('id' => 'chart'.$chartid), '', false);
 }
 
 function commits_graph($group_id, $days, $chartid) {
@@ -250,7 +250,7 @@ function commits_graph($group_id, $days, $chartid) {
 				plot'.$chartid.'.replot( { resetAxes: true } );
 			});'."\n";
 		echo '//]]></script>';
-		echo '<div id="chart'.$chartid.'"></div>';
+		echo html_e('div', array('id' => 'chart'.$chartid), '', false);
 	} else {
 		echo $HTML->information(_('No commits during this period.'));
 	}

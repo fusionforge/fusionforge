@@ -34,17 +34,17 @@ html_use_jqueryjqplotplugindateAxisRenderer();
 $group_id = getIntFromRequest("group_id");
 scm_header(array('title'=>_('SCM Repository Reporting'), 'group'=>$group_id));
 
-echo '<h2>'._('Commits Over Time')."</h2>\n";
+echo html_e('h2', array(), _('Commits Over Time'));
 commitstime_graph($group_id, 1);
 
 
-echo '<h2>'._('Commits Last 30 Days')."</h2>\n";
+echo html_e('h2', array(), _('Commits Last 30 Days'));
 commits_graph($group_id, 30, 2);
 
-echo '<h2>'._('Commits Last 90 Days')."</h2>\n";
+echo html_e('h2', array(), _('Commits Last 90 Days'));
 commits_graph($group_id, 90, 3);
 
-echo '<h2>'._('Commits Last 365 Days')."</h2>\n";
+echo html_e('h2', array(), _('Commits Last 365 Days'));
 commits_graph($group_id, 365, 4);
 
 scm_footer();
