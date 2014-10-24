@@ -50,7 +50,9 @@ require_once 'Widget.class.php';
 					return idn_to_unicode($param);
 				}
 			}
-			require_once 'simplepie/simplepie.inc';
+			if (!(include_once 'simplepie/simplepie.inc'))  // vendor, debian
+			  if (!(include_once 'php-simplepie/autoloader.php'))  // fedora
+			    exit_error('Error', 'Could not load the SimplePie PHP library.');
 			if (!is_dir(forge_get_config('data_path') .'/rss')) {
 				if (!mkdir(forge_get_config('data_path') .'/rss')) {
 					$content .= $HTML->error_msg(_('Cannot create backend directory. Contact forge administrator.'));
