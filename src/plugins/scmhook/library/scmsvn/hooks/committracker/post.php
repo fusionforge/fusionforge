@@ -32,7 +32,6 @@
 
 require_once dirname(__FILE__).'/../../../../../../common/include/env.inc.php';
 require_once $gfcommon.'include/pre.php';
-require 'libphp-snoopy/Snoopy.class.php';
 
 /**
  * It returns the usage and exit program
@@ -163,8 +162,6 @@ foreach ($changed as $onefile) {
 
 
 // Our POSTer in Fusionforge
-$snoopy = new Snoopy;
-
 $SubmitUrl = util_make_url('/plugins/scmhook/committracker/newcommit.php');
 
 $tasks_involved= getInvolvedTasks($log);
@@ -191,5 +188,12 @@ foreach ( $files as $onefile )
 }
 
 $vars['data'] = urlencode(serialize($SubmitVars));
-$snoopy->submit($SubmitUrl, $vars);
-?>
+
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $SubmitUrl);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $vars);
+$result = curl_exec($ch);
+//$info = curl_getinfo($ch);
+curl_close($ch);
