@@ -55,6 +55,9 @@ install_listfiles()
 rm -rf vendor/simplepie/
 # http://fedoraproject.org/wiki/Packaging:No_Bundled_Libraries .../nusoap.php -> php-nusoap
 rm -rf vendor/nusoap/
+# Remove RDF libraries, used by plugins we didn't package because as they weren't available in Fedora
+rm -rf vendor/arc/
+rm -f vendor/Graphite.php
 # Install core and list common dirs
 install_listfiles common
 %find_lang %{name}
