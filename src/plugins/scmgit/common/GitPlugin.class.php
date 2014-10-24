@@ -26,6 +26,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+require_once $gfcommon.'include/plugins_utils.php';
+
 forge_define_config_item('default_server', 'scmgit', forge_get_config('web_host'));
 forge_define_config_item('repos_path', 'scmgit', forge_get_config('chroot').'/scmrepos/git');
 forge_define_config_item('use_ssh', 'scmgit', false);
@@ -79,20 +81,19 @@ control over it to the project's administrator.");
 			if (!$add_num) {
 				$add_num=0;
 			}
-			echo ' (Git: '.sprintf(_('<strong>%1$s</strong> updates, <strong>%2$s</strong> adds'), number_format($commit_num, 0), number_format($add_num, 0)).")";
+			echo ' (Git: '.sprintf(_('<strong>%1$s</strong> updates, <strong>%2$s</strong> adds'), number_format($commit_num, 0), number_format($add_num, 0)).')';
 		}
 	}
 
 	function getBlurb() {
-		return '<p>'
-				. sprintf(_('Documentation for %1$s is available at <a href="%2$s">%2$s</a>.'),
+		return html_e('p', array(), sprintf(_('Documentation for %1$s is available at <a href="%2$s">%2$s</a>.'),
 							'Git',
-							'http://git-scm.com/')
-				. '</p>';
+							'http://git-scm.com/'));
 	}
 
 	function getInstructionsForAnon($project) {
 		$repo_list = array($project->getUnixName());
+		$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
 		$result = db_query_params('SELECT repo_name FROM scm_secondary_repos WHERE group_id=$1 AND next_action = $2 AND plugin_id=$3 ORDER BY repo_name',
 					   array($project->getID(),
 						  SCM_EXTRA_REPO_ACTION_UPDATE,
@@ -110,22 +111,21 @@ control over it to the project's administrator.");
 			}
 		}
 
-		$b = '<h2>' . ngettext('Anonymous Access to the Git repository',
-				       'Anonymous Access to the Git repositories',
-				       count($repo_list)) . '</h2>';
+		$b = html_e('h2', array(),
+				ngettext('Anonymous Access to the Git repository',
+					'Anonymous Access to the Git repositories',
+					count($repo_list)));
 
-		$b .= '<p>';
-		$b .= ngettext("This project's Git repository can be checked out through anonymous access with the following command.",
-			       "This project's Git repositories can be checked out through anonymous access with the following commands.",
-			       count($repo_list));
+		$b .= html_e('p', array(),
+			ngettext("This project's Git repository can be checked out through anonymous access with the following command.",
+				"This project's Git repositories can be checked out through anonymous access with the following commands.",
+				count($repo_list)));
 
-		$b .= '</p>';
-
+		$htmlRepo = '';
 		foreach ($clone_commands as $cmd) {
-			$b .= '<p>';
-			$b .= '<tt>'.$cmd.'</tt><br />';
-			$b .= '</p>';
+			$htmlRepo .= html_e('tt', array(), $cmd).html_e('br');;
 		}
+		$b .= html_e('p', array(), $htmlRepo);
 
 		$result = db_query_params('SELECT u.user_id, u.user_name, u.realname FROM scm_personal_repos p, users u WHERE p.group_id=$1 AND u.user_id=p.user_id AND u.unix_status=$2 AND plugin_id=$3',
 					   array($project->getID(),
@@ -134,24 +134,22 @@ control over it to the project's administrator.");
 		$rows = db_numrows($result);
 
 		if ($rows > 0) {
-			$b .= '<h2>';
-			$b .= ngettext("Developer's repository",
-				       "Developer's repositories",
-				       $rows);
-			$b .= '</h2>'."\n";
-			$b .= '<p>';
-			$b .= ngettext("One of this project's members also has a personal Git repository that can be checked out anonymously.",
-					"Some of this project's members also have personal Git repositories that can be checked out anonymously.",
-				$rows);
-			$b .= '</p>';
-			$b .= '<p>';
+			$b .= html_e('h2', array(),
+					ngettext("Developer's repository",
+						"Developer's repositories",
+						$rows));
+			$b .= html_e('p', array(),
+					ngettext("One of this project's members also has a personal Git repository that can be checked out anonymously.",
+						"Some of this project's members also have personal Git repositories that can be checked out anonymously.",
+						$rows));
+			$htmlRepo = '';
 			for ($i=0; $i<$rows; $i++) {
 				$user_id = db_result($result,$i,'user_id');
 				$user_name = db_result($result,$i,'user_name');
 				$real_name = db_result($result,$i,'realname');
-				$b .= '<tt>git clone '.util_make_url('/anonscm/git/'.$project->getUnixName().'/users/'.$user_name.'.git').'</tt> ('.util_make_link_u($user_name, $user_id, $real_name).') ['.util_make_link('/scm/browser.php?group_id='.$project->getID().'&user_id='.$user_id, _('Browse Git Repository')).']<br />';
+				$htmlRepo .= html_e('tt', array(), 'git clone '.$protocol.'://'.$project->getSCMBox().'/anonscm/git/'.$project->getUnixName().'/users/'.$user_name.'.git').' ('.util_make_link_u($user_name, $user_id, $real_name).') ['.util_make_link('/scm/browser.php?group_id='.$project->getID().'&user_id='.$user_id, _('Browse Git Repository')).']'.html_e('br');
 			}
-			$b .= '</p>';
+			$b .= html_e('p', array(), $htmlRepo);
 		}
 
 		return $b;
@@ -175,123 +173,114 @@ control over it to the project's administrator.");
 			$u = user_get_object(user_getid());
 			$d = $u->getUnixName();
 			if (forge_get_config('use_ssh', 'scmgit')) {
-				$b .= '<h2>';
-				$b .= ngettext('Developer Access to the Git repository via SSH',
-						       'Developer Access to the Git repositories via SSH',
-						       count($repo_list));
-				$b .= '</h2>';
-				$b .= '<p>';
-				$b .= ngettext('Only project developers can access the Git repository via this method.',
-					       'Only project developers can access the Git repositories via this method.',
-					       count($repo_list));
-				$b .= ' ';
-				$b .= _('SSH must be installed on your client machine.');
-				$b .= ' ';
-				$b .= _('Enter your site password when prompted.');
-				$b .= '</p>';
+				$b .= html_e('h2', array(),
+					ngettext('Developer Access to the Git repository via SSH',
+						'Developer Access to the Git repositories via SSH',
+						count($repo_list)));
+				$b .= html_e('p', array(),
+					ngettext('Only project developers can access the Git repository via this method.',
+						'Only project developers can access the Git repositories via this method.',
+						count($repo_list)).
+					' '. _('SSH must be installed on your client machine.').
+					' '. _('Enter your site password when prompted.'));
+				$htmlRepo = '';
 				foreach ($repo_list as $repo_name) {
-					$b .= '<p><tt>git clone git+ssh://'.$d.'@' . $project->getSCMBox() . '/'. forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git</tt></p>';
+					$htmlRepo .= html_e('tt', array(), 'git clone git+ssh://'.$d.'@' . $project->getSCMBox() . '/'. forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git').html_e('br');
 				}
+				$b .= html_e('p', array(), $htmlRepo);
 			}
 			if (forge_get_config('use_smarthttp', 'scmgit')) {
-				$b .= '<h2>';
-				$b .= ngettext('Developer Access to the Git repository via “smart HTTP”',
-					      'Developer Access to the Git repositories via “smart HTTP”',
-					      count($repo_list));
-				$b .= '</h2>';
-				$b .= '<p>';
-				$b .= ngettext('Only project developers can access the Git repository via this method.',
-					       'Only project developers can access the Git repositories via this method.',
-					       count($repo_list));
-				$b .= ' ';
-				$b .= _('Enter your site password when prompted.');
-				$b .= '</p>';
+				$b .= html_e('h2', array(),
+					ngettext('Developer Access to the Git repository via "smart HTTP"',
+						'Developer Access to the Git repositories via "smart HTTP"',
+						count($repo_list)));
+				$b .= html_e('p', array(),
+					ngettext('Only project developers can access the Git repository via this method.',
+						'Only project developers can access the Git repositories via this method.',
+						count($repo_list)).
+					' '. _('Enter your site password when prompted.'));
+				$htmlRepo = '';
+
 				$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
 				foreach ($repo_list as $repo_name) {
-					$b .= '<p><tt>git clone '.$protocol.'://'.$d.'@' . forge_get_config('scm_host').'/authscm/'.$d.'/git/'.$project->getUnixName() .'/'. $repo_name .'.git</tt></p>';
+					$htmlRepo .= '<p><tt>git clone '.$protocol.'://'.$d.'@' . forge_get_config('scm_host').'/authscm/'.$d.'/git/'.$project->getUnixName() .'/'. $repo_name .'.git</tt></p>';
 				}
+				$b .= html_e('p', array(), $htmlRepo);
 			}
 			if (forge_get_config('use_dav', 'scmgit')) {
 				$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
-				$b .= '<h2>';
-				$b .= ngettext('Developer Access to the Git repository via HTTP',
-						       'Developer Access to the Git repositories via HTTP',
-						       count($repo_list));
-				$b .= '</h2>';
-				$b .= '<p>';
-				$b .= ngettext('Only project developers can access the Git repository via this method.',
-					       'Only project developers can access the Git repositories via this method.',
-					       count($repo_list));
-				$b .= ' ';
-				$b .= _('Enter your site password when prompted.');
-				$b .= '</p>';
+				$b = html_e('h2', array(),
+					ngettext('Developer Access to the Git repository via HTTP',
+						'Developer Access to the Git repositories via HTTP',
+						count($repo_list)));
+				$b .= html_e('p', array(),
+					ngettext('Only project developers can access the Git repository via this method.',
+						'Only project developers can access the Git repositories via this method.',
+						count($repo_list)).
+					' '. _('Enter your site password when prompted.'));
+				$htmlRepo = '';
 				foreach ($repo_list as $repo_name) {
-					$b .= '<p><tt>git clone '.$protocol.'://'.$d.'@' . $project->getSCMBox() . '/'. forge_get_config('scm_root', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git</tt></p>';
+					$htmlRepo .= html_e('tt', array(), 'git clone '.$protocol.'://'.$d.'@' . $project->getSCMBox() . '/'. forge_get_config('scm_root', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git').html_e('br');
 				}
+				$b .= html_e('p', array(), $htmlRepo);
 			}
 		} else {
 			if (forge_get_config('use_ssh', 'scmgit')) {
-				$b = '<h2>';
-				$b = ngettext('Developer Access to the Git repository via SSH',
-						       'Developer Access to the Git repositories via SSH',
-						       count($repo_list));
-				$b .= '</h2>';
-				$b .= '<p>';
-				$b .= ngettext('Only project developers can access the Git repository via this method.',
-					       'Only project developers can access the Git repositories via this method.',
-					       count($repo_list));
-				$b .= ' ';
-				$b .= _('SSH must be installed on your client machine.');
-				$b .= ' ';
-				$b .= _('Substitute <em>developername</em> with the proper value.');
-				$b .= ' ';
-				$b .= _('Enter your site password when prompted.');
-				$b .= '</p>';
+				$b = html_e('h2', array(),
+					ngettext('Developer Access to the Git repository via SSH',
+						'Developer Access to the Git repositories via SSH',
+						count($repo_list)));
+				$b .= html_e('p', array(),
+					ngettext('Only project developers can access the Git repository via this method.',
+						'Only project developers can access the Git repositories via this method.',
+						count($repo_list)).
+					' '. _('SSH must be installed on your client machine.').
+					' '. _('Substitute <em>developername</em> with the proper value.').
+					' '. _('Enter your site password when prompted.'));
+				$htmlRepo = '';
 				foreach ($repo_list as $repo_name) {
-					$b .= '<p><tt>git clone git+ssh://<i>'._('developername').'</i>@' . $project->getSCMBox() . '/'. forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git</tt></p>';
+					$htmlRepo .= html_e('tt', array(), 'git clone git+ssh://'.html_e('i', array(), _('developername')).'@' . $project->getSCMBox() . '/'. forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git').html_e('br');
 				}
 			}
 			if (forge_get_config('use_smarthttp', 'scmgit')) {
-				$b = '<h2>';
-				$b = ngettext('Developer Access to the Git repository via “smart HTTP”',
-					      'Developer Access to the Git repositories via “smart HTTP”',
-					      count($repo_list));
-				$b .= '</h2>';
-				$b .= '<p>';
-				$b .= ngettext('Only project developers can access the Git repository via this method.',
-					       'Only project developers can access the Git repositories via this method.',
-					       count($repo_list));
-				$b .= ' ';
-				$b .= _('Enter your site password when prompted.');
-				$b .= '</p>';
 				$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
+				$b .= html_e('h2', array(),
+					ngettext('Developer Access to the Git repository via "smart HTTP"',
+						'Developer Access to the Git repositories via "smart HTTP"',
+						count($repo_list)));
+				$b .= html_e('p', array(),
+					ngettext('Only project developers can access the Git repository via this method.',
+						'Only project developers can access the Git repositories via this method.',
+						count($repo_list)).
+					' '. _('Enter your site password when prompted.'));
+				$htmlRepo = '';
 				foreach ($repo_list as $repo_name) {
 					$b .= '<p><tt>git clone '.$protocol.'://<i>'._('developername').'</i>@' . forge_get_config('scm_host').'/authscm/<i>'._('developername').'</i>/git/'.$project->getUnixName() .'/'. $repo_name .'.git</tt></p>';
 				}
+				$b .= html_e('p', array(), $htmlRepo);
 			}
 			if (forge_get_config('use_dav', 'scmgit')) {
 				$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
-				$b .= '<h2>';
-				$b .= ngettext('Developer Access to the Git repository via HTTP',
-						       'Developer Access to the Git repositories via HTTP',
-						       count($repo_list));
-				$b .= '</h2>';
-				$b .= '<p>';
-				$b .= ngettext('Only project developers can access the Git repository via this method.',
-					       'Only project developers can access the Git repositories via this method.',
-					       count($repo_list));
-				$b .= ' ';
-				$b .= _('Enter your site password when prompted.');
-				$b .= '</p>';
+				$b = html_e('h2', array(),
+					ngettext('Developer Access to the Git repository via HTTP',
+						'Developer Access to the Git repositories via HTTP',
+						count($repo_list)));
+				$b .= html_e('p', array(),
+					ngettext('Only project developers can access the Git repository via this method.',
+						'Only project developers can access the Git repositories via this method.',
+						count($repo_list)).
+					' '. _('Enter your site password when prompted.'));
+				$htmlRepo = '';
 				foreach ($repo_list as $repo_name) {
-					$b .= '<p><tt>git clone '.$protocol.'://<i>'._('developername').'</i>@' . $project->getSCMBox() . '/'. forge_get_config('scm_root', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git</tt></p>';
+					$htmlRepo .= html_e('tt', array(), 'git clone '.$protocol.'://'.html_e('i', array(), _('developername')).'@' . $project->getSCMBox() . '/'. forge_get_config('scm_root', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git').html_e('br');
 				}
+				$b .= html_e('p', array(), $htmlRepo);
 			}
 		}
 
 		if ($b == '') {
-			$b = '<h2>'._('Developer Git Access').'</h2>';
-			$b .= $HTML->error_msg(_('Error: No access protocol has been allowed for the Git plugin in scmgit.ini: : use_ssh and use_dav are disabled'));
+			$b = html_e('h2', array(), _('Developer Git Access'));
+			$b .= $HTML->error_msg(_('Error')._(': ')._('No access protocol has been allowed for the Git plugin in scmgit.ini: use_ssh, use_smarthttp and use_dav are disabled'));
 		}
 
 		if (session_loggedin()) {
@@ -302,32 +291,23 @@ control over it to the project's administrator.");
 								 $u->getID(),
 								 $this->getID()));
 				if ($result && db_numrows($result) > 0) {
-					$b .= '<h2>';
-					$b .= _('Access to your personal repository');
-					$b .= '</h2>';
-					$b .= '<p>';
-					$b .= _('You have a personal repository for this project, accessible through SSH with the following methods. Enter your site password when prompted.');
-					$b .= '</p>';
+					$b .= html_e('h2', array(), _('Access to your personal repository'));
+					$b .= html_e('p', array(), _('You have a personal repository for this project, accessible through SSH with the following method. Enter your site password when prompted.'));
 					if (forge_get_config('use_ssh', 'scmgit')) {
-						$b .= '<p><tt>git clone git+ssh://'.$u->getUnixName().'@' . $this->getBoxForProject($project) . '/'. forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/users/'. $u->getUnixName() .'.git</tt></p>';
+							$b .= html_e('p', array(),
+										 html_e('tt', array(), 'git clone git+ssh://'.$u->getUnixName().'@' . $this->getBoxForProject($project) . '/'. forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/users/'. $u->getUnixName() .'.git'));
 					}
 					if (forge_get_config('use_smarthttp', 'scmgit')) {
-						$b .= '<p><tt>git clone '.$protocol.'://'.$u->getUnixName().'@' . forge_get_config('scm_host').'/authscm/'.$u->getUnixName().'/git/'.$project->getUnixName() .'/users/'. $u->getUnixName() .'.git</tt></p>';
+							$b .= html_e('p', array(),
+										 html_e('tt', array(), 'git clone '.$protocol.'://'.$u->getUnixName().'@' . forge_get_config('scm_host').'/authscm/'.$u->getUnixName().'/git/'.$project->getUnixName() .'/users/'. $u->getUnixName() .'.git'));
 					}
 				} else {
 					$glist = $u->getGroups();
 					foreach ($glist as $g) {
 						if ($g->getID() == $project->getID()) {
-							$b .= '<h2>';
-							$b .= _('Request a personal repository');
-							$b .= '</h2>';
-							$b .= '<p>';
-							$b .= _("You can clone the project repository into a personal one into which you alone will be able to write.  Other members of the project will only have read access.  Access for non-members will follow the same rules as for the project's main repository.  Note that the personal repository may take some time before it is created (less than an hour in most situations).");
-							$b .= '</p>';
-							$b .= '<p>';
-							$b .= sprintf(_('<a href="%s">Request a personal repository</a>.'),
-								       util_make_url('/plugins/scmgit/index.php?func=request-personal-repo&group_id='.$project->getID()));
-							$b .= '</p>';
+							$b .= html_e('h2', array(), _('Request a personal repository'));
+							$b .= html_e('p', array(), _("You can clone the project repository into a personal one into which you alone will be able to write.  Other members of the project will only have read access.  Access for non-members will follow the same rules as for the project's main repository.  Note that the personal repository may take some time before it is created (less than an hour in most situations)."));
+							$b .= html_e('p', array(), util_make_link('/plugins/scmgit/index.php?func=request-personal-repo&group_id='.$project->getID(), _('Request a personal repository')));
 						}
 					}
 				}
@@ -337,15 +317,10 @@ control over it to the project's administrator.");
 	}
 
 	function getSnapshotPara($project) {
-
-		$b = "";
+		$b = '';
 		$filename = $project->getUnixName().'-scm-latest.tar'.util_get_compressed_file_extension();
 		if (file_exists(forge_get_config('scm_snapshots_path').'/'.$filename)) {
-			$b .= '<p>[';
-			$b .= util_make_link("/snapshots.php?group_id=".$project->getID(),
-					      _('Download the nightly snapshot')
-				);
-			$b .= ']</p>';
+			$b .= html_e('p', array(), '['.util_make_link('/snapshots.php?group_id='.$project->getID(), _('Download the nightly snapshot')).']');
 		}
 		return $b;
 	}
@@ -361,44 +336,22 @@ control over it to the project's administrator.");
 		if ($project->usesPlugin($this->name)) {
 			if ($params['user_id']) {
 				$user = user_get_object($params['user_id']);
-				echo $project->getUnixName().'/users/'.$user->getUnixName();
-				print '<iframe id="scm_iframe" src="'.util_make_url("/plugins/scmgit/cgi-bin/gitweb.cgi?p=".$project->getUnixName().'/users/'.$user->getUnixName().'.git').'" frameborder="0" width=100% ></iframe>';
-				$useautoheight = 1;
+				htmlIframe('/plugins/scmgit/cgi-bin/gitweb.cgi?p='.$project->getUnixName().'/users/'.$user->getUnixName().'.git');
 			} elseif ($this->browserDisplayable($project)) {
-				$iframesrc = "/plugins/scmgit/cgi-bin/gitweb.cgi?p=".$project->getUnixName().'/'.$project->getUnixName().'.git';
+				$iframesrc = '/plugins/scmgit/cgi-bin/gitweb.cgi?p='.$project->getUnixName().'/'.$project->getUnixName().'.git';
 				if ($params['commit']) {
 					$iframesrc .= ';a=log;h='.$params['commit'];
 				}
-				print '<iframe id="scm_iframe" src="'.util_make_url($iframesrc).'" frameborder="0" width=100% ></iframe>';
-				$useautoheight = 1;
+				htmlIframe($iframesrc);
 			}
-		}
-		if ($useautoheight) {
-			html_use_jqueryautoheight();
-			echo $HTML->getJavascripts();
-			echo '<script type="text/javascript">//<![CDATA[
-				jQuery(\'#scm_iframe\').iframeAutoHeight({heightOffset: 50});
-				jQuery(\'#scm_iframe\').load(function (){
-						if (this.contentWindow.location.href == "'.util_make_url('/projects/'.$project->getUnixName()).'/") {
-							console.log(this.contentWindow.location.href);
-							window.location.href = this.contentWindow.location.href;
-						};
-					});
-				//]]></script>';
 		}
 	}
 
 	function getBrowserLinkBlock($project) {
 		global $HTML;
 		$b = $HTML->boxMiddle(_('Git Repository Browser'));
-		$b .= '<p>';
-		$b .= _("Browsing the Git tree gives you a view into the current status of this project's code. You may also view the complete histories of any file in the repository.");
-		$b .= '</p>';
-		$b .= '<p>[';
-		$b .= util_make_link("/scm/browser.php?group_id=".$project->getID(),
-				      _('Browse Git Repository')
-			);
-		$b .= ']</p>';
+		$b .= html_e('p', array(), _("Browsing the Git tree gives you a view into the current status of this project's code. You may also view the complete histories of any file in the repository."));
+		$b .= html_e('p', array(), '['.util_make_link('/scm/browser.php?group_id='.$project->getID(), _('Browse Git Repository')).']');
 		return $b;
 	}
 
@@ -422,20 +375,20 @@ control over it to the project's administrator.");
 			$total = array('adds' => 0, 'updates' => 0);
 
 			while($data = db_fetch_array($result)) {
-				$b .= '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
-				$b .= '<td class="halfwidth">';
-				$b .= util_make_link_u($data['user_name'], $data['user_id'], $data['realname']);
-				$b .= '</td><td class="onequarterwidth align-right">'.$data['adds']. '</td>'.
-					'<td class="onequarterwidth align-right">'.$data['updates'].'</td></tr>';
+				$cells = array();
+				$cells[] = array(util_make_link_u($data['user_name'], $data['user_id'], $data['realname']), 'class' => 'halfwidth');
+				$cells[] = array($data['adds'], 'class' => 'onequarterwidth align-right');
+				$cells[] = array($data['updates'], 'class' => 'onequarterwidth align-right');
+				$b .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
 				$total['adds'] += $data['adds'];
 				$total['updates'] += $data['updates'];
 				$i++;
 			}
-			$b .= '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
-			$b .= '<td class="halfwidth"><strong>'._('Total').':</strong></td>'.
-				'<td class="onequarterwidth align-right"><strong>'.$total['adds']. '</strong></td>'.
-				'<td class="onequarterwidth align-right"><strong>'.$total['updates'].'</strong></td>';
-			$b .= '</tr>';
+			$cells = array();
+			$cells[] = array(html_e('strong', array(), _('Total')._(':')), 'class' => 'halfwidth');
+			$cells[] = array($total['adds'], 'class' => 'onequarterwidth align-right');
+			$cells[] = array($total['updates'], 'class' => 'onequarterwidth align-right');
+			$b .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
 			$b .= $HTML->listTableBottom();
 		}
 
@@ -1256,6 +1209,7 @@ control over it to the project's administrator.");
 	}
 
 	function scm_admin_form(&$params) {
+		global $HTML;
 		$project = $this->checkParams($params);
 		if (!$project) {
 			return false;
@@ -1268,7 +1222,6 @@ control over it to the project's administrator.");
 
 		$project_name = $project->getUnixName();
 
-		$select_repo = '<select name="frontpage">' . "\n";
 		$result = db_query_params('SELECT repo_name, description, clone_url FROM scm_secondary_repos WHERE group_id=$1 AND next_action = $2 AND plugin_id=$3 ORDER BY repo_name',
 					  array($params['group_id'],
 						 SCM_EXTRA_REPO_ACTION_UPDATE,
@@ -1284,49 +1237,45 @@ control over it to the project's administrator.");
 						  'clone_url' => $data['clone_url']);
 		}
 		if (count($existing_repos) == 0) {
-			printf('<h2>'._('No extra Git repository for project %1$s').'</h2>', $project_name);
+			echo $HTML->information(_('No extra Git repository for project').' '.$project_name);
 		} else {
-			$t = sprintf(ngettext('Extra Git repository for project %1$s',
-					      'Extra Git repositories for project %1$s',
-					      count($existing_repos)), $project_name);
-			print '<h2>'.$t.'</h2>';
-			print '<table><thead><tr><th>'._('Repository name').'</th><th>'._('Initial repository description').'</th><th>'._('Initial clone URL (if any)').'</th><th>'._('Delete').'</th></tr></thead><tbody>';
-			foreach ($existing_repos as $repo) {
-				print "<tr><td><tt>$repo[repo_name]</tt></td><td>$repo[description]</td><td>$repo[clone_url]</td><td>";
-?>
-<form name="form_delete_repo_<?php echo $repo['repo_name']?>"
-	action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
-<input type="hidden" name="group_id" value="<?php echo $params['group_id'] ?>" />
-<input type="hidden" name="delete_repository" value="1" />
-<input type="hidden" name="repo_name" value="<?php echo $repo['repo_name']?>" />
-<input type="hidden" name="scm_enable_anonymous" value="<?php if ($project->enableAnonSCM()) echo 1 ; else echo 0 ?>" />
-<input type="submit" name="submit" value="<?php echo _('Delete') ?>" />
-</form>
-<?php
-				print "</td></tr>\n";
+			echo html_e('h2', array(), sprintf(ngettext('Extra Git repository for project %1$s',
+									'Extra Git repositories for project %1$s',
+									count($existing_repos)), $project_name));
+			$titleArr = array(_('Repository name'), ('Initial repository description'), _('Initial clone URL (if any)'), _('Delete'));
+			echo $HTML->listTableTop($titleArr);
+			foreach ($existing_repos as $key => $repo) {
+				$cells = array();
+				$cells[][] = html_e('tt', array(), $repo['repo_name']);
+				$cells[][] = $repo['description'];
+				$cells[][] = $repo['clone_url'];
+				$deleteForm = $HTML->openForm(array('name' => 'form_delete_repo_'.$repo['repo_name'], 'action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
+				$deleteForm .= html_e('input', array('type' => 'hidden', 'name' => 'group_id', 'value' => $params['group_id']));
+				$deleteForm .= html_e('input', array('type' => 'hidden', 'name' => 'delete_repository', 'value' => 1));
+				$deleteForm .= html_e('input', array('type' => 'hidden', 'name' => 'repo_name', 'value' => $repo['repo_name']));
+				$deleteForm .= html_e('input', array('type' => 'hidden', 'name' => 'scm_enable_anonymous', 'value' => ($project->enableAnonSCM()? 1 : 0)));
+				$deleteForm .= html_e('input', array('type' => 'submit', 'value' => _('Delete')));
+				$deleteForm .= $HTML->closeForm();
+				$cells[][] = $deleteForm;
+				echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($key, true)), $cells);
 			}
-			print '</tbody></table>';
+			echo $HTML->listTableBottom();
 		}
 
-		printf('<h2>'._('Create new Git repository for project %1$s').'</h2>', $project_name);
-
-		?>
-<form name="form_create_repo"
-	action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
-<input type="hidden" name="group_id" value="<?php echo $params['group_id'] ?>" />
-<input type="hidden" name="create_repository" value="1" />
-<p><strong><?php echo _('Repository name')._(':'); ?></strong><?php echo utils_requiredField(); ?><br />
-<input type="text" required="required" size="20" name="repo_name" value="" /></p>
-<p><strong><?php echo _('Description:'); ?></strong><br />
-<input type="text" size="60" name="description" value="" /></p>
-<p><strong><?php echo _('Initial clone URL (or name of an existing repository in this project; leave empty to start with an empty repository):') ?></strong><br />
-<input type="text" size="60" name="clone" value="<?php echo $project_name; ?>" /></p>
-<input type="hidden" name="scm_enable_anonymous" value="<?php if ($project->enableAnonSCM()) echo 1 ; else echo 0 ?>" />
-<input type="submit" name="cancel" value="<?php echo _('Cancel') ?>" />
-<input type="submit" name="submit" value="<?php echo _('Submit') ?>" />
-</form>
-
-		<?php
+		echo html_e('h2', array(), _('Create new Git repository for project').' '.$project_name);
+		echo $HTML->openForm(array('name' => 'form_create_repo', 'action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
+		echo html_e('input', array('type' => 'hidden', 'name' => 'group_id', 'value' => $params['group_id']));
+		echo html_e('input', array('type' => 'hidden', 'name' => 'create_repository', 'value' => 1));
+		echo html_e('p', array(), html_e('strong', array(), _('Repository name')._(':')).utils_requiredField().html_e('br').
+				html_e('input', array('type' => 'text', 'required' => 'required', 'size' => 20, 'name' => 'repo_name', 'value' => '')));
+		echo html_e('p', array(), html_e('strong', array(), _('Description')._(':')).html_e('br').
+				html_e('input', array('type' => 'text', 'size' => 60, 'name' => 'description', 'value' => '')));
+		echo html_e('p', array(), html_e('strong', array(), _('Initial clone URL (or name of an existing repository in this project; leave empty to start with an empty repository)')._(':')).html_e('br').
+				html_e('input', array('type' => 'text', 'size' => 60, 'name' => 'clone', 'value' => $project_name)));
+		echo html_e('input', array('type' => 'hidden', 'name' => 'scm_enable_anonymous', 'value' => ($project->enableAnonSCM()? 1 : 0)));
+		echo html_e('input', array('type' => 'submit', 'name' => 'cancel', 'value' => _('Cancel')));
+		echo html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Submit')));
+		echo $HTML->closeForm();
 	}
 
 	function getUserCommits($project, $user, $nb_commits) {
