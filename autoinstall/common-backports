@@ -111,6 +111,18 @@ EOF
 	yum install -y ~/rpmbuild/RPMS/noarch/php-htmlpurifier-htmlpurifier-*.noarch.rpm
     fi
 
+    if yum list php-nusoap >/dev/null 2>&1; then
+	yum install -y php-nusoap
+    else
+	# moin: no available package for RHEL; though 'moin' is available in Fedora
+	yumdownloader --enablerepo=fedora --source php-nusoap
+	DEPS="dos2unix"
+	yum install -y $DEPS
+	rpmbuild --rebuild php-nusoap-*.src.rpm
+	yum remove -y $DEPS
+	yum install -y ~/rpmbuild/RPMS/noarch/php-nusoap-*.noarch.rpm
+    fi
+
     # TODO: postfix: rebuild from RHEL/CentOS sources with pgsql enabled,
     # so we can test mta-postfix
 }

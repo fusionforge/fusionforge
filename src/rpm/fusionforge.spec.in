@@ -5,10 +5,12 @@ Summary: Collaborative development tool
 
 Group: Development/Tools
 BuildArch: noarch
-License: GPLv2+
+# FusionForge is GPLv2+ and JQuery is MIT
+License: GPLv2+ and MIT
 URL: http://www.fusionforge.org/
 Source0: http://fusionforge.org/frs/download.php/file/XX/%{name}-%{version}.tar.bz2
 Requires: %{name}-db-local = %{version}, %{name}-web = %{version}
+Provides: bundled(jquery), bundled(jquery-ui)
 
 %description
 FusionForge provides many tools to aid collaboration in a
@@ -49,6 +51,10 @@ install_listfiles()
     # Install for real
     make install-${1} prefix=%{_prefix} DESTDIR=%{buildroot}
 }
+# http://fedoraproject.org/wiki/Packaging:No_Bundled_Libraries .../simplepie.inc -> php-simplepie
+rm -rf vendor/simplepie/
+# http://fedoraproject.org/wiki/Packaging:No_Bundled_Libraries .../nusoap.php -> php-nusoap
+rm -rf vendor/nusoap/
 # Install core and list common dirs
 install_listfiles common
 %find_lang %{name}
@@ -145,7 +151,7 @@ fi
 
 %package web
 Summary: Collaborative development tool - web part (using Apache)
-Requires: %{name}-common = %{version}, %{name}-db = %{version}, httpd, mod_ssl, php, php-pgsql, php-twig
+Requires: %{name}-common = %{version}, %{name}-db = %{version}, httpd, mod_ssl, php, php-pgsql, php-simplepie, php-nusoap, php-twig
 %description web
 FusionForge provides many tools to aid collaboration in a
 development project, such as bug-tracking, task management,
@@ -235,5 +241,5 @@ This package controls the interaction between FusionForge and Mailman.
 
 
 %changelog
-* Wed Oct 1 2014 Sylvain Beucler <beuc@beuc.net> - @version@-1
+* Fri Oct 24 2014 Sylvain Beucler <beuc@beuc.net> - @version@-1
 - Revamp packaging
