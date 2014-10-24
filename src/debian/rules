@@ -41,8 +41,6 @@ override_dh_auto_install:
 	done
 #	embedded-php-library .../simplepie.inc -> libphp-simplepie
 	rm -rf debian/fusionforge-web/usr/share/fusionforge/vendor/simplepie/
-#	embedded-php-library .../Snoopy.class.php -> libphp-snoopy
-	rm -rf debian/fusionforge-web/usr/share/fusionforge/vendor/libphp-snoopy/
 #	embedded-javascript-library .../jquery.livequery.js -> libjs-jquery-livequery
 	rm -rf debian/fusionforge-web/usr/share/fusionforge/vendor/jquery-livequery/
 	ln -s /usr/share/javascript/jquery-livequery \
