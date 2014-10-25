@@ -36,13 +36,13 @@ require_once $gfcommon.'include/MonitorElement.class.php';
 $DOCUMENT_OBJ = array();
 
 /**
- * document_get_object() - Get User object by user ID.
+ * document_get_object() - Get document object by document ID.
  * document_get_object is useful so you can pool document objects/save database queries
  * You should always use this instead of instantiating the object directly
  *
  * @param	int		$doc_id	The ID of the document - required
  * @param	int|bool	$res	The result set handle ("SELECT * FROM docdata_vw WHERE docid=$1")
- * @return	Document	a user object or false on failure
+ * @return	Document	a document object or false on failure
  */
 function &document_get_object($doc_id, $res = false) {
 	global $DOCUMENT_OBJ;
