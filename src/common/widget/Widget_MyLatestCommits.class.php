@@ -24,14 +24,14 @@
 class Widget_MyLatestCommits extends Widget {
 
 	/**
-	* Default number of SVN commits to display (if user did not change/set preferences)
+	* Default number of commits to display (if user did not change/set preferences)
 	*/
 	const NB_COMMITS_TO_DISPLAY = 5;
 
 	/**
 	* Number of SVN commits to display (user preferences)
 	*/
-	private $_nb_svn_commits;
+	private $_nb_commits;
 
 	public function __construct() {
 		$this->Widget('mylatestcommits');
