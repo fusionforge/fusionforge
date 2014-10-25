@@ -979,9 +979,6 @@ class DocumentGroup extends Error {
 				case 'locked':
 				case 'locked_by':
 				case 'stateid':
-				case 'parent_doc_group':
-				case 'locked':
-				case 'locked_by':
 				case 'lockdate': {
 					if ($i) {
 						$qpa = db_construct_qpa($qpa, ',');
