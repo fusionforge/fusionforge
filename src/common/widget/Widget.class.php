@@ -19,46 +19,41 @@
  * along with Fusionforge. If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once 'common/widget/WidgetLayoutManager.class.php';
+require_once $gfcommon.'widget/WidgetLayoutManager.class.php';
 
-require_once 'common/widget/Widget_MySurveys.class.php';
-require_once 'common/widget/Widget_MyProjects.class.php';
-require_once 'common/widget/Widget_MyBookmarks.class.php';
-require_once 'common/widget/Widget_MyMonitoredForums.class.php';
-require_once('common/widget/Widget_MyMonitoredFp.class.php');
-require_once 'common/widget/Widget_MyLatestCommits.class.php';
-require_once 'common/widget/Widget_MyProjectsLastDocuments.class.php';
-require_once 'common/widget/Widget_MyArtifacts.class.php';
+require_once $gfcommon.'widget/Widget_MySurveys.class.php';
+require_once $gfcommon.'widget/Widget_MyProjects.class.php';
+require_once $gfcommon.'widget/Widget_MyBookmarks.class.php';
+require_once $gfcommon.'widget/Widget_MyMonitoredForums.class.php';
+require_once $gfcommon.'widget/Widget_MyMonitoredFp.class.php';
+require_once $gfcommon.'widget/Widget_MyLatestCommits.class.php';
+require_once $gfcommon.'widget/Widget_MyProjectsLastDocuments.class.php';
+require_once $gfcommon.'widget/Widget_MyArtifacts.class.php';
 //require_once('common/widget/Widget_MyBugs.class.php');
 //require_once('common/widget/Widget_MySrs.class.php');
-require_once 'common/widget/Widget_MyTasks.class.php';
-require_once 'common/widget/Widget_MyRss.class.php';
+require_once $gfcommon.'widget/Widget_MyTasks.class.php';
+require_once $gfcommon.'widget/Widget_MyRss.class.php';
 
-require_once 'common/widget/Widget_MyAdmin.class.php';
-/*
-   require_once 'common/widget/Widget_MyTwitterFollow.class.php';
-   require_once 'common/widget/Widget_MySystemEvent.class.php';
+require_once $gfcommon.'widget/Widget_MyAdmin.class.php';
+//require_once 'common/widget/Widget_MyTwitterFollow.class.php';
+//require_once 'common/widget/Widget_MySystemEvent.class.php';
 //require_once('common/widget/Widget_MyWikiPage.class.php');
-*/require_once('common/widget/Widget_ProjectDescription.class.php');
+require_once $gfcommon.'widget/Widget_ProjectDescription.class.php' ;
 //require_once('common/widget/Widget_ProjectClassification.class.php');
 
-require_once 'common/widget/Widget_ProjectMembers.class.php';
-require_once 'common/widget/Widget_ProjectInfo.class.php';
-require_once 'common/widget/Widget_ProjectLatestFileReleases.class.php';
-require_once 'common/widget/Widget_ProjectLatestDocuments.class.php';
-require_once('common/widget/Widget_ProjectDocumentsActivity.class.php');
-
-require_once 'common/widget/Widget_ProjectLatestNews.class.php';
-require_once 'common/widget/Widget_ProjectPublicAreas.class.php';
-require_once 'common/widget/Widget_ProjectRss.class.php';/*
-							     require_once 'common/widget/Widget_ProjectLatestSvnCommits.class.php';
-							     require_once 'common/widget/Widget_ProjectLatestCvsCommits.class.php';
-							     require_once 'common/widget/Widget_ProjectTwitterFollow.class.php';
+require_once $gfcommon.'widget/Widget_ProjectMembers.class.php';
+require_once $gfcommon.'widget/Widget_ProjectInfo.class.php';
+require_once $gfcommon.'widget/Widget_ProjectLatestFileReleases.class.php';
+require_once $gfcommon.'widget/Widget_ProjectLatestDocuments.class.php';
+require_once $gfcommon.'widget/Widget_ProjectDocumentsActivity.class.php' ;
+require_once $gfcommon.'widget/Widget_ProjectLatestNews.class.php';
+require_once $gfcommon.'widget/Widget_ProjectPublicAreas.class.php';
+require_once $gfcommon.'widget/Widget_ProjectRss.class.php';
+require_once $gfcommon.'widget/Widget_ProjectLatestCommits.class.php';
+//require_once 'common/widget/Widget_ProjectTwitterFollow.class.php';
 //require_once('common/widget/Widget_ProjectWikiPage.class.php');
-require_once 'common/widget/Widget_ProjectSvnStats.class.php';
-							   */
-
-require_once 'common/widget/Widget_MyMonitoredDocuments.class.php';
+//require_once 'common/widget/Widget_ProjectSvnStats.class.php';
+require_once $gfcommon.'widget/Widget_MyMonitoredDocuments.class.php';
 
 /**
 * "Codendi" Layout Widget
@@ -273,13 +268,10 @@ require_once 'common/widget/Widget_MyMonitoredDocuments.class.php';
 				break;
 			case 'projectwikipage':                    //not yet
 				$o = new Widget_ProjectWikiPage();
-				break;
-			case 'projectlatestsvncommits':
-				$o = new Widget_ProjectLatestSvnCommits();
-				break;
-			case 'projectlatestcvscommits':
-				$o = new Widget_ProjectLatestCvsCommits();
 				break;*/
+			case 'projectlatestcommits':
+				$o = new Widget_ProjectLatestCommits();
+				break;
 			default:
 				//$em = EventManager::instance();
 				//$em->processEvent('widget_instance', array('widget' => $widget_name, 'instance' => &$o));
@@ -310,8 +302,7 @@ require_once 'common/widget/Widget_MyMonitoredDocuments.class.php';
 				// project home widgets
 				$widgets = array('projectdescription', 'projectmembers', 'projectinfo',
 						'projectlatestfilereleases', 'projectlatestdocuments', 'projectlatestnews', 'projectpublicareas', //'projectwikipage' //not yet
-						'projectlatestsvncommits', 'projectlatestcvscommits', 'projecttwitterfollow',
-						'projectsvnstats', 'projectrss', 'projectdocumentsactivity',
+						'projectlatestcommits', 'projecttwitterfollow', 'projectsvnstats', 'projectrss', 'projectdocumentsactivity',
 						);
 				break;
 			case WidgetLayoutManager::OWNER_TYPE_HOME:

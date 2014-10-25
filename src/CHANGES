@@ -13,7 +13,8 @@ Fusionforge-X.X:
 * [#716] General: Update the jQuery Auto-height plugin (TrivialDev)
 * Plugin scmhook: Update git post-receive eMail hook (tarent solutions GmbH, Teckids e.V.)
 * [#684] Widget Public Area: display FRS link (TrivialDev)
-* [#743] Widget My Latest Commits: New widget to display user commits on "My Page" (TrivialDev)
+* [#743] Widget My Latest Commits: New widget to display user commits on "My Page"
+         Widget Project Latest Commits: New widget to display the 5 latest commits on the project page  (TrivialDev)
 * [#745] Widget Project Latest Documents: enhancement, add actions buttons (monitor, delete) (TrivialDev)
 * [#655] Tracker: enable support for multi-select extrafield in roadmap (TrivialDev)
 * [#662] Forum: store the attached file on FS. (TrivialDev)
