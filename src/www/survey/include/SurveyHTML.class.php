@@ -396,7 +396,7 @@ class SurveyHTML extends Error {
 			if ($surveys[$i]->isActive()) {
 				$ret.= util_make_link('/survey/survey.php?group_id='.$group_id.'&survey_id='. $surveys[$i]->getID(), $surveys[$i]->getTitle());
 			} else {
-				$ret.= '<strike>'.$surveys[$i]->getTitle().'</strike>';
+				$ret.= '<s>'.$surveys[$i]->getTitle().'</s>';
 			}
 			$ret.= '</td>';
 
