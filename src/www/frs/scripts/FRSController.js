@@ -64,7 +64,7 @@ FRSController.prototype =
 				},
 				{
 					text: this.params.cancel,
-					click: function() { jQuery(this).dialog('close'); },
+					click: function() { jQuery(this).dialog('close'); }
 				}]
 		});
 	},
