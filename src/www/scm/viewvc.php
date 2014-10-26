@@ -105,7 +105,7 @@ if ($external_scm) {
 	}
 
 	if (viewcvs_is_html()) {
-		// Now, we must replace the occurencies of $server_script with this script
+		// Now, we must replace the occurrences of $server_script with this script
 		// (do this only of outputting HTML)
 		// We must do this because we can't pass the environment variable SCRIPT_NAME
 		// to the cvsweb script (maybe this can be fixed in the future?)
