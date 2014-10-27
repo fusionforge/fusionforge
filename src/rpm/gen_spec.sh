@@ -27,7 +27,7 @@ rm -f fusionforge.spec
     for i in $(sed -n 's/^%package plugin-//p' rpm/plugins); do
 	sed -n -e '/^#/d' -e "/^%package plugin-$i/,/^$/p" rpm/plugins \
 	    | grep -v ^$ \
-	    | sed 's/Requires:\(.*\)/Requires: %{name}-common = %{version},\1/'
+	    | sed 's/Requires:\(.*\)/Requires: %{name}-common = %{version}-%{release},\1/'
 	#echo "Group: Development/Tools"
 	php utils/plugin_pkg_desc.php $i rpm
 	cat <<-EOF
