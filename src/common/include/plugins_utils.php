@@ -54,7 +54,7 @@ function htmlIframe($url,$poub = array()) {
 			jQuery(\'#'.$id.'\').load(function (){
 					if (this.contentWindow.location.href == "'.util_make_url('/projects/'.$project->getUnixName()).'/") {
 						window.location.href = this.contentWindow.location.href;
-					};
+					}
 				});
 			//]]></script>';
 	}

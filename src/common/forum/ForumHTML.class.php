@@ -33,7 +33,7 @@ require_once $gfcommon.'forum/ForumAdmin.class.php';
 require_once $gfcommon.'forum/AttachManager.class.php';
 
 function forum_header($params) {
-	global $HTML, $group_id, $forum_name, $forum_id, $f, $group_forum_id;
+	global $HTML, $group_id, $forum_id, $f, $group_forum_id;
 
 	if ($group_forum_id) {
 		$forum_id = $group_forum_id;

@@ -170,7 +170,7 @@ if(count($files)) {
 	$title_arr[] = _('Actions');
 
 	echo $HTML->listTableTop($title_arr, array(), '', '', array(), array(), array(array('style' => 'width: 2%'), array('style' => 'width: 30%')));
-	echo '<tr><td colspan="7" style="padding:0px;">';
+	echo '<tr><td colspan="7" style="padding:0;">';
 	foreach ($files as $key => $file) {
 		echo $HTML->openForm(array('action' => util_make_uri('/frs/?group_id='.$group_id.'&release_id='.$release_id.'&package_id='.$package_id.'&file_id='.$file->getID().'&action=editfile'), 'method' => 'post', 'id' => 'fileid'.$file->getID()));
 		echo $HTML->listTableTop();
