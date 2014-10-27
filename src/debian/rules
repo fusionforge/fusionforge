@@ -39,6 +39,10 @@ override_dh_auto_install:
 			echo plugins/$$i/README > debian/fusionforge-plugin-$$i.docs; \
 		fi; \
 	done
+#	Declare Debian-specific version
+	sed -e 's/@PKGVERSION@/$(shell dpkg-parsechangelog | sed -n "s/^Version: //p")/' \
+		< common/pkginfo.inc.php.template \
+		> debian/fusionforge-common/usr/share/fusionforge/common/pkginfo.inc.php
 #	embedded-php-library .../simplepie.inc -> libphp-simplepie
 	rm -rf debian/fusionforge-web/usr/share/fusionforge/vendor/simplepie/
 #	embedded-javascript-library .../jquery.livequery.js -> libjs-jquery-livequery

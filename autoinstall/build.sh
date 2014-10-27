@@ -109,6 +109,9 @@ function build_deb {
     dch --newversion $version-1 --distribution local --force-distribution "Autobuilt."
     make dist VERSION=$version
     mv fusionforge-$version.tar.bz2 ../fusionforge_$version.orig.tar.bz2
+    cd ..
+    tar xf fusionforge_$version.orig.tar.bz2
+    cd fusionforge-$version/
     debuild -us -uc -tc  # using -tc so 'git status' is readable
     
     # Install built packages into the local repo
@@ -128,8 +131,10 @@ function build_rpm {
     
     # Build package
     cd /usr/src/fusionforge/src/
-    version="$(make version)+$(date +%Y%m%d%H%M)"
-    rpm/gen_spec.sh $version
+    base_version=$(make version)
+    snapshot=$(date +%Y%m%d%H%M)
+    version=$base_version+$snapshot
+    rpm/gen_spec.sh $base_version $snapshot
     make dist VERSION=$version
     mkdir -p ../build/SOURCES/ ../build/SPECS/
     mv fusionforge-$version.tar.bz2 ../build/SOURCES/fusionforge-$version.tar.bz2
