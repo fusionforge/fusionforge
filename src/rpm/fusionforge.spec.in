@@ -10,7 +10,7 @@ License: GPLv2+ and MIT
 URL: http://www.fusionforge.org/
 Source0: http://fusionforge.org/frs/download.php/file/XX/%{name}-@tarball_version@.tar.bz2
 Requires: %{name}-db-local = %{version}-%{release}, %{name}-web = %{version}-%{release}
-Provides: bundled(jquery), bundled(jquery-ui)
+Provides: bundled(jquery) = 1.10.2, bundled(jquery-ui) = 1.10.4
 
 %description
 FusionForge provides many tools to aid collaboration in a
