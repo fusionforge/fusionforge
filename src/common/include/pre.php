@@ -1,7 +1,4 @@
 <?php
-
-THIS_IS_A_DELIBERATE SYNTAX_ERROR_TO_TEST_BUILDBOT
-
 /**
  * pre.php - Automatically prepend to every page.
  *
