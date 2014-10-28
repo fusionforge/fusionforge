@@ -37,6 +37,8 @@ application/pdf|parser_pdf.php
 application/vnd.oasis.opendocument.text|parser_unoconv_document.php
 application/vnd.openxmlformats-officedocument.wordprocessingml.document|parser_unoconv_document.php
 application/msword|parser_unoconv_document.php
+application/rtf|parser_unoconv_document.php
+text/rtf|parser_unoconv_document.php
 application/vnd.oasis.opendocument.presentation|parser_unoconv_presentation.php
 application/vnd.openxmlformats-officedocument.presentationml.presentation|parser_unoconv_presentation.php
 application/vnd.ms-powerpoint|parser_unoconv_presentation.php
