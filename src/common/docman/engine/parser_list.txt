@@ -5,6 +5,7 @@
 # Copyright 2005, Fabio Bertagnin
 # Copyright 2009-2010, Franck Villaume - Capgemini
 # Copyright 2012, Franck Villaume - TrivialDev
+# Copyright 2014, Roland Mas
 # http://fusionforge.org
 #
 # This file is part of FusionForge.
@@ -34,5 +35,6 @@ text/x-c|parser_text.php
 text/html|parser_html.php
 application/pdf|parser_pdf.php
 application/vnd.oasis.opendocument.presentation|parser_oo.php
-application/vnd.oasis.opendocument.text|parser_oo.php
-application/msword|parser_doc.php
+application/vnd.oasis.opendocument.text|parser_unoconv_document.php
+application/vnd.openxmlformats-officedocument.wordprocessingml.document|parser_unoconv_document.php
+application/msword|parser_unoconv_document.php
