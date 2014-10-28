@@ -4,7 +4,7 @@
  * FusionForge document search engine
  *
  * Copyright 2005, Fabio Bertagnin
- * Copyright 2009-2011, Franck Villaume - Capgemini
+ * Copyright 2011, Franck Villaume - Capgemini
  * Copyright 2012, Franck Villaume - TrivialDev
  * Copyright 2014, Roland Mas
  * http://fusionforge.org
@@ -27,18 +27,23 @@
 
 require dirname(__FILE__).'/../../include/env.inc.php';
 
-require_once $gfcommon.'docman/engine/parser_pdf.inc.php';
+require_once $gfcommon.'docman/engine/parser_text.inc.php';
 
 if ($argc != 2) {
-	echo 'Usage : parser_pdf.php <filename>'."\n";
-	exit(1);
+	echo 'Usage : parser_unoconv_document.php <filename>'."\n";
+	exit (1);
 }
 
 $fichin = $argv[1];
 if (!is_file($fichin))
-	exit(1);
+	exit (1);
 
-echo parser_pdf($fichin);
+$fichout = tempnam(forge_get_config('data_path'), 'tmp');
+$cmd = "/usr/bin/unoconv -d presentation -f pdf -o $fichout $fichin";
+$res = shell_exec($cmd);
+
+echo parser_pdf($fichout);
+unlink ($fichout);
 
 // Local Variables:
 // mode: php

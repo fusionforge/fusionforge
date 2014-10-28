@@ -6,7 +6,6 @@
  * Copyright 2005, Fabio Bertagnin
  * Copyright 2009-2011, Franck Villaume - Capgemini
  * Copyright 2012, Franck Villaume - TrivialDev
- * Copyright 2014, Roland Mas
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -27,18 +26,22 @@
 
 require dirname(__FILE__).'/../../include/env.inc.php';
 
-require_once $gfcommon.'docman/engine/parser_pdf.inc.php';
+require_once $gfcommon.'docman/engine/parser_text.inc.php';
 
-if ($argc != 2) {
-	echo 'Usage : parser_pdf.php <filename>'."\n";
-	exit(1);
+function parser_pdf($fichin) {
+	if (!is_file($fichin))
+		return '';
+
+	if (filesize($fichin) == 0)
+		return '';
+
+    $fichout = tempnam(forge_get_config('data_path'),'tmp');
+    $cmd = '/usr/bin/pdftotext '.$fichin.' '.$fichout;
+    $res = shell_exec($cmd);
+    
+    return parser_text($fichout);
+    unlink ($fichout);
 }
-
-$fichin = $argv[1];
-if (!is_file($fichin))
-	exit(1);
-
-echo parser_pdf($fichin);
 
 // Local Variables:
 // mode: php
