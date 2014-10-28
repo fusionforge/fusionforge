@@ -190,20 +190,20 @@ and gives some control over it to the project's administrator.");
 			$total = array('adds' => 0, 'updates' => 0);
 
 			while($data = db_fetch_array($result)) {
-				$b .= '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
-				$b .= '<td class="halfwidth">';
-				$b .= util_make_link_u($data['user_name'], $data['user_id'], $data['realname']);
-				$b .= '</td><td class="onequarterwidth align-right">'.$data['adds']. '</td>'.
-					'<td class="onequarterwidth align-right">'.$data['updates'].'</td></tr>';
+				$cells = array();
+				$cells[] = array(util_make_link_u($data['user_name'], $data['user_id'], $data['realname']), 'class' => 'halfwidth');
+				$cells[] = array($data['adds'], 'class' => 'onequarterwidth align-right');
+				$cells[] = array($data['updates'], 'class' => 'onequarterwidth align-right');
+				$b .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
 				$total['adds'] += $data['adds'];
 				$total['updates'] += $data['updates'];
 				$i++;
 			}
-			$b .= '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
-			$b .= '<td class="halfwidth"><strong>'._('Total').':</strong></td>'.
-				'<td class="onequarterwidth align-right"><strong>'.$total['adds']. '</strong></td>'.
-				'<td class="onequarterwidth align-right"><strong>'.$total['updates'].'</strong></td>';
-			$b .= '</tr>';
+			$cells = array();
+			$cells[] = array(html_e('strong', array(), _('Total')._(':')), 'class' => 'halfwidth');
+			$cells[] = array($total['adds'], 'class' => 'onequarterwidth align-right');
+			$cells[] = array($total['updates'], 'class' => 'onequarterwidth align-right');
+			$b .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
 			$b .= $HTML->listTableBottom();
 		}
 
