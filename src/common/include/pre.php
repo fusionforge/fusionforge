@@ -126,6 +126,12 @@ forge_set_config_item_bool ('sysdebug_xmlstarlet', 'core') ;
 // Load extra func to add extras func like debug
 $sysdebug_enable = forge_get_config('sysdebug_enable');
 
+// Server to access 'groupdir_prefix' via SSH
+// In simple, single-server installs, it's the 'web_host'
+if (forge_get_config('shell_host') == null) {
+	forge_define_config_item('shell_host', 'core', forge_get_config('web_host'));
+}
+
 $sysDTDs = array(
 	/*
 	 * we could use xhtml-rdfa-1.dtd but would need to
