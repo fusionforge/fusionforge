@@ -746,24 +746,6 @@ and gives some control over it to the project's administrator.");
 		return true;
 	}
 
-	function scm_admin_buttons(&$params) {
-		$project = $this->checkParams($params);
-		if (!$project) {
-			return false ;
-		}
-		if (! $project->usesPlugin ($this->name)) {
-			return false;
-		}
-
-		global $HTML;
-
-		$HTML->addButtons(
-				'/scm/admin/?group_id='.$params['group_id'].'&amp;form_create_repo=1',
-				_("Add Repository"),
-				array('icon' => html_image('ic/scm_repo_add.png'))
-		);
-	}
-
 	function scm_admin_form(&$params) {
 		$project = $this->checkParams($params);
 		if (!$project) {
