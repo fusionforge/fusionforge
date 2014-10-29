@@ -22,6 +22,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+require_once $gfcommon.'include/plugins_utils.php';
+
 forge_define_config_item ('default_server', 'scmdarcs', forge_get_config ('scm_host')) ;
 forge_define_config_item ('repos_path', 'scmdarcs', forge_get_config('chroot').'/scmrepos/darcs') ;
 
@@ -251,15 +253,7 @@ over it to the project's administrator.");
 
 		if ($project->usesPlugin ($this->name)) {
 			if ($this->browserDisplayable ($project)) {
-				print '<iframe id="scm_iframe" src="'.
-					util_make_url ("/plugins/scmdarcs/cgi-bin/darcsweb.cgi?r=".
-					$project->getUnixName()). '/' . $params['repo_name'] .
-					'" frameborder="0" width="100%" ></iframe>' ;
-				html_use_jqueryautoheight();
-				echo $HTML->getJavascripts();
-				echo '<script type="text/javascript">//<![CDATA[
-					jQuery(\'#scm_iframe\').iframeAutoHeight({heightOffset: 50});
-					//]]></script>';
+				htmlIframe('/plugins/scmdarcs/cgi-bin/darcsweb.cgi?r='.$project->getUnixName().'/'.$params['repo_name']);
 			}
 		}
 	}
