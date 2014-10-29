@@ -220,6 +220,7 @@ dist: all
 	$(CP_R) $$(ls -A | grep -v '^\.git' | grep -v $(TAR_PREFIX)) $(TAR_PREFIX)/
 	find $(TAR_PREFIX)/ -name '*~' -print0 | xargs -r0 rm
 	find $(TAR_PREFIX)/ -type d -print0 | xargs -r0 chmod g-s  # rpmlint non-standard-dir-perm
+	echo $(VERSION) > $(TAR_PREFIX)/VERSION  # if using e.g. make dist VERSION=5.3.50+20141027
 	tar cjf $(TAR_PREFIX).tar.bz2 $(TAR_PREFIX)/
 	rm -rf $(TAR_PREFIX)/
 

@@ -13,9 +13,6 @@ Requires: mercurial
 %package plugin-scmdarcs
 Requires: darcs
 
-%package plugin-admssw
-Requires: postgresql, fusionforge-plugin-doaprdf
-
 %package plugin-aselectextauth
 Requires:
 
@@ -37,16 +34,7 @@ Requires: ckeditor
 %package plugin-compactpreview
 Requires: php-pear-HTTP
 
-%package plugin-doaprdf
-Requires: %{name}-web = %{version}
-
 %package plugin-externalsearch
-Requires:
-
-%package plugin-extsubproj
-Requires:
-
-%package plugin-foafprofiles
 Requires:
 
 %package plugin-gravatar

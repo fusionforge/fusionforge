@@ -19,15 +19,22 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 version=$1
+snapshot=$2
+
 if [ -z "$version" ]; then version=$(make version); fi
-if [ -z "$autobuild" ]; then autobuild=''; fi
+# rpm needs snapshot version separately (because 6.0+20141027 > 6.0.1, unlike in Debian)
+tarball_version=$version
+if [ -n "$snapshot" ]; then
+    tarball_version=$version+$snapshot
+    snapshot=.$snapshot
+fi
 
 rm -f fusionforge.spec
 (
     for i in $(sed -n 's/^%package plugin-//p' rpm/plugins); do
 	sed -n -e '/^#/d' -e "/^%package plugin-$i/,/^$/p" rpm/plugins \
 	    | grep -v ^$ \
-	    | sed 's/Requires:\(.*\)/Requires: %{name}-common = %{version},\1/'
+	    | sed 's/Requires:\(.*\)/Requires: %{name}-common = %{version}-%{release},\1/'
 	#echo "Group: Development/Tools"
 	php utils/plugin_pkg_desc.php $i rpm
 	cat <<-EOF
@@ -43,6 +50,8 @@ rm -f fusionforge.spec
 ) \
 | sed \
     -e "s/@version@/$version/" \
+    -e "s/@snapshot@/$snapshot/" \
+    -e "s/@tarball_version@/$tarball_version/" \
     -e '/^@plugins@/ { ' -e 'ecat' -e 'd }' \
     rpm/fusionforge.spec.in > fusionforge.spec
 chmod a-w fusionforge.spec

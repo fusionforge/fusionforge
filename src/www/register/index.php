@@ -228,7 +228,7 @@ if ( !forge_get_config ('project_auto_approval') ) {
 </ul>
 <p><?php echo _('Your Unix name is important, however, because it will be used for many things, including:') ?></p>
 <ul>
-<li><?php printf(_('a web site at <tt>unixname.%s</tt>,'), forge_get_config('web_host')) ?></li>
+<li><?php printf(_('a web site at <samp>unixname.%s</samp>,'), forge_get_config('web_host')) ?></li>
 <li><?php echo _('the URL of your source code repository,') ?></li>
 <?php if (forge_get_config('use_shell')) { ?>
 <li><?php printf(_('shell access to <span class="tt">unixname.%s</span>,'), forge_get_config('web_host')) ?></li>

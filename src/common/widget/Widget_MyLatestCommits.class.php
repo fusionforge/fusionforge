@@ -24,14 +24,14 @@
 class Widget_MyLatestCommits extends Widget {
 
 	/**
-	* Default number of SVN commits to display (if user did not change/set preferences)
+	* Default number of commits to display (if user did not change/set preferences)
 	*/
 	const NB_COMMITS_TO_DISPLAY = 5;
 
 	/**
-	* Number of SVN commits to display (user preferences)
+	* Number of commits to display (user preferences)
 	*/
-	private $_nb_svn_commits;
+	private $_nb_commits;
 
 	public function __construct() {
 		$this->Widget('mylatestcommits');
@@ -59,7 +59,6 @@ class Widget_MyLatestCommits extends Widget {
 			}
 		}
 		return util_make_link($url, _('commit')._(': ').$commit_id);
-		//return '/svn/?func=detailrevision&amp;group_id='.$group_id.'&amp;rev_id='.$commit_id;
 	}
 
 	public function getContent() {
@@ -87,13 +86,13 @@ class Widget_MyLatestCommits extends Widget {
 				$hide_scm = null;
 			}
 			$revisions = array();
-			if ($project->usesPlugin('scmsvn') && forge_check_perm('scmsvn', $project->getID(), 'read')) {
+			if ($project->usesPlugin('scmsvn') && forge_check_perm('scm', $project->getID(), 'read')) {
 				$scmPlugin = plugin_get_object('scmsvn');
-				$revisions = $scmPlugin->getUserCommits($project, $user, $this->_nb_commits);
+				$revisions = $scmPlugin->getCommits($project, $user, $this->_nb_commits);
 			}
-			if ($project->usesPlugin('scmgit') && forge_check_perm('scmgit', $project->getID(), 'read')) {
+			if ($project->usesPlugin('scmgit') && forge_check_perm('scm', $project->getID(), 'read')) {
 				$scmPlugin = plugin_get_object('scmgit');
-				$revisions = $scmPlugin->getUserCommits($project, $user, $this->_nb_commits);
+				$revisions = $scmPlugin->getCommits($project, $user, $this->_nb_commits);
 			}
 			if (count($revisions) > 0) {
 				$global_nb_revisions += count($revisions);
@@ -101,13 +100,12 @@ class Widget_MyLatestCommits extends Widget {
 				$html .= html_e('div', array(), $hide_url.util_make_link('/scm/?group_id='.$project->getID(), $project->getPublicName()));
 
 				if (!$hide_now) {
-					$i = 0;
-					foreach ($revisions as $revision) {
+					foreach ($revisions as $key => $revision) {
 						$revisionDescription = substr($revision['description'], 0, 255);
 						if (strlen($revision['description']) > 255) {
 							$revisionDescription .= ' [...]';
 						}
-						$html .= html_e('div', array('class' => $HTML->boxGetAltRowStyle($i++, true), 'style' => 'border-bottom:1px solid #ddd'),
+						$html .= html_e('div', array('class' => $HTML->boxGetAltRowStyle($key, true), 'style' => 'border-bottom:1px solid #ddd'),
 								html_e('div', array('style' => 'font-size:0.98em'),
 									$this->_getLinkToCommit($project, $revision['commit_id'], $revision['pluginName']).
 									' '._('on').' '.

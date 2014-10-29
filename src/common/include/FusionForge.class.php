@@ -25,8 +25,7 @@ require_once $gfcommon.'include/Error.class.php';
 
 class FusionForge extends Error {
 
-	var $software_name ;
-	var $software_type ;
+	var $software_name = "FusionForge" ;
 	var $software_version ;
 
 	/**
@@ -40,22 +39,10 @@ class FusionForge extends Error {
 			include $pkg;
 		}
 
-		if (isset($forge_pkg_name)) {
-			$this->software_name = $forge_pkg_name;
-		} else {
-			$this->software_name = 'FusionForge' ;
-		}
-
 		if (isset($forge_pkg_version)) {
 			$this->software_version = $forge_pkg_version;
 		} else {
 			$this->software_version = trim(file_get_contents(dirname(__FILE__).'/../../VERSION'));
-		}
-
-		if (isset($forge_pkg_type)) {
-			$this->software_type = $forge_pkg_type;
-		} else {
-			$this->software_type = $this->software_name;
 		}
 
 		return true;

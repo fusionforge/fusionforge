@@ -697,7 +697,7 @@ some control over it to the project's administrator.");
 		return true;
 	}
 
-	function getUserCommits($project, $user, $nbCommits) {
+	function getCommits($project, $user = null, $nbCommits) {
 		global $commits, $users, $adds, $updates, $messages, $times, $revisions, $deletes, $time_ok, $user_list, $last_message, $notimecheck;
 		$commits = 0;
 		$users = array();
@@ -711,14 +711,17 @@ some control over it to the project's administrator.");
 		$user_list = array();
 		$last_message = '';
 		$notimecheck = true;
-		$userRevisions = array();
+		$revisionsArr = array();
 		if ($project->usesPlugin($this->name) && forge_get_config('use_dav', $this->name) && forge_check_perm($this->name, $project->getID(), 'read')) {
 			$repo = forge_get_config('repos_path', $this->name) . '/' . $project->getUnixName();
-			$email = $user->getEmail();
-			$fullname = $user->getFirstName().' '.$user->getLastName();
-			$userunixname = $user->getUnixName();
+			if ($user) {
+				$userunixname = $user->getUnixName();
+				$pipecmd = "svn log file://$repo --xml -v --limit $nbCommits --search \"$userunixname\" 2> /dev/null";
+			} else {
+				$pipecmd = "svn log file://$repo --xml -v --limit $nbCommits 2> /dev/null";
+			}
 			if (is_dir($repo)) {
-				$pipe = popen("svn log file://$repo --xml -v --limit $nbCommits --search \"$userunixname\" 2> /dev/null", 'r' );
+				$pipe = popen($pipecmd, 'r' );
 				$xml_parser = xml_parser_create();
 				xml_set_element_handler($xml_parser, "SVNPluginStartElement", "SVNPluginEndElement");
 				xml_set_character_data_handler($xml_parser, "SVNPluginCharData");
@@ -740,17 +743,22 @@ some control over it to the project's administrator.");
 			if ($adds > 0 || $updates > 0 || $commits > 0 || $deletes > 0) {
 				$i = 0;
 				foreach ($messages as $message) {
-					if ($users[$i] == $userunixname) {
-						$userRevisions[$i]['pluginName'] = 'scmsvn';
-						$userRevisions[$i]['description'] = htmlspecialchars($message);
-						$userRevisions[$i]['commit_id'] = $revisions[$i];
-						$userRevisions[$i]['date'] = $times[$i];
+					if ($user && ($users[$i] == $userunixname)) {
+						$revisionsArr[$i]['pluginName'] = 'scmsvn';
+						$revisionsArr[$i]['description'] = htmlspecialchars($message);
+						$revisionsArr[$i]['commit_id'] = $revisions[$i];
+						$revisionsArr[$i]['date'] = $times[$i];
+					} else {
+						$revisionsArr[$i]['pluginName'] = 'scmsvn';
+						$revisionsArr[$i]['description'] = htmlspecialchars($message);
+						$revisionsArr[$i]['commit_id'] = $revisions[$i];
+						$revisionsArr[$i]['date'] = $times[$i];
 					}
 					$i++;
 				}
 			}
 		}
-		return $userRevisions;
+		return $revisionsArr;
 	}
 }
 

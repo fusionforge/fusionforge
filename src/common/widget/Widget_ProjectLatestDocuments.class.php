@@ -49,17 +49,11 @@ class Widget_ProjectLatestDocuments extends Widget {
 		$group_id = $request->get('group_id');
 
 		$qpa = db_construct_qpa();
-		$qpa = db_construct_qpa($qpa, 'SELECT filename, title, updatedate, createdate, realname, user_name, state_name, filetype, docid, doc_group
-						FROM docdata_vw
-						WHERE group_id=$1
-						AND stateid=$2',
+		$qpa = db_construct_qpa($qpa, 'SELECT docid FROM doc_data WHERE group_id=$1 AND stateid=$2',
 					array($group_id, '1'));
 
-		if (session_loggedin() && (user_ismember($group_id) ||
-		    forge_check_global_perm('forge_admin'))) {
-			$qpa = db_construct_qpa($qpa, ' AND stateid IN ($1, $2, $3, $4)', array('1','3','4','5'));
-		} else {
-			$qpa = db_construct_qpa($qpa, ' AND stateid=$1', array('1'));
+		if (session_loggedin() && forge_check_perm('docman', $group_id, 'approve')) {
+			$qpa = db_construct_qpa($qpa, ' AND stateid IN ($1, $2, $3, $4)', array('1', '3', '4', '5'));
 		}
 
 		$qpa = db_construct_qpa($qpa, ' ORDER BY updatedate,createdate DESC LIMIT 5',array());
@@ -69,29 +63,30 @@ class Widget_ProjectLatestDocuments extends Widget {
 		if (!$res_files || $rows_files < 1) {
 			echo db_error();
 			// No documents
-			echo $HTML->warning_msg(_('This project has not published any documents.'));
+			echo $HTML->information(_('This project has not published any documents.'));
 		} else {
 			use_javascript('/js/sortable.js');
 			echo $HTML->getJavascripts();
 			$tabletop = array(_('Date'), _('File Name'), _('Title'), _('Author'), _('Path'));
-			if (session_loggedin() && (user_ismember($group_id) ||
-			    forge_check_global_perm('forge_admin'))) {
+			if (session_loggedin()) {
 				$tabletop[] = _('Status');
+				$tabletop[] = _('Actions');
 			}
 			echo $HTML->listTableTop($tabletop, false, 'sortable_widget_docman_listfile full', 'sortable');
 			for ($f=0; $f < $rows_files; $f++) {
-				$updatedate = db_result($res_files, $f, 'updatedate');
-				$createdate = db_result($res_files, $f, 'createdate');
+				$documentObject = document_get_object(db_result($res_files, $f, 'docid'));
+				$updatedate = $documentObject->getUpdated();
+				$createdate = $documentObject->getCreated();
 				$realdate = ($updatedate >= $createdate) ? $updatedate : $createdate;
-				$filename = db_result($res_files,$f,'filename');
-				$title = db_result($res_files,$f,'title');
-				$realname = db_result($res_files,$f,'realname');
-				$user_name = db_result($res_files,$f,'user_name');
-				$statename = db_result($res_files,$f,'state_name');
-				$filetype = db_result($res_files,$f,'filetype');
-				$docid = db_result($res_files,$f,'docid');
-				$docgroup = db_result($res_files,$f,'doc_group');
-				$ndg = new DocumentGroup(group_get_object($group_id), $docgroup);
+				$filename = $documentObject->getFileName();
+				$title = $documentObject->getFileName();
+				$realname = $documentObject->getCreatorRealName();
+				$user_name = $documentObject->getCreatorUserName();
+				$statename = $documentObject->getStateName();
+				$filetype = $documentObject->getFileType();
+				$docid = $documentObject->getID();
+				$docgroup = $documentObject->getDocGroupID();
+				$ndg = documentgroup_get_object($docgroup);
 				$path = $ndg->getPath(true, true);
 				switch ($filetype) {
 					case "URL": {
@@ -108,10 +103,24 @@ class Widget_ProjectLatestDocuments extends Widget {
 				$cells[][] = $title;
 				$cells[][] = make_user_link($user_name, $realname);
 				$cells[][] = $path;
-				if (session_loggedin() && (user_ismember($group_id) ||
-				    forge_check_global_perm('forge_admin'))) {
+				if (session_loggedin()) {
 					$cells[][] = $statename;
+					if ($documentObject->isMonitoredBy(UserManager::instance()->getCurrentUser()->getID())) {
+						$option = 'stop';
+						$titleMonitor = _('Stop monitoring this document');
+						$image = $HTML->getStopMonitoringPic($titleMonitor, $titleMonitor);
+					} else {
+						$option = 'start';
+						$titleMonitor = _('Start monitoring this document');
+						$image = $HTML->getStartMonitoringPic($titleMonitor, $titleMonitor);
+					}
+					$action = util_make_link('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$docgroup.'&action=monitorfile&option='.$option.'&fileid='.$documentObject->getID(), $image, array('title' => $titleMonitor));
+					if (forge_check_perm('docman', $group_id, 'approve') && !$documentObject->getLocked()) {
+						$action .= util_make_link('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$docgroup.'&action=trashfile&fileid='.$documentObject->getID(), $HTML->getDeletePic('', _('Move this document to trash')), array('title' => _('Move this document to trash')));
+					}
+					$cells[][] = $action;
 				}
+
 				echo $HTML->multiTableRow(array(), $cells);
 			}
 			echo $HTML->listTableBottom();

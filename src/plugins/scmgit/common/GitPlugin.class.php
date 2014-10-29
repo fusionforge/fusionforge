@@ -1278,15 +1278,22 @@ control over it to the project's administrator.");
 		echo $HTML->closeForm();
 	}
 
-	function getUserCommits($project, $user, $nb_commits) {
+	function getCommits($project, $user = null, $nb_commits) {
 		$commits = array();
 		if ($project->usesPlugin($this->name) && forge_get_config('use_dav', $this->name) && forge_check_perm($this->name, $project->getID(), 'read')) {
 			$repo = forge_get_config('repos_path', $this->name) . '/' . $project->getUnixName() . '/' . $project->getUnixName() . '.git';
-			$email = $user->getEmail();
-			$fullname = $user->getFirstName().' '.$user->getLastName();
-			$userunixname = $user->getUnixName();
+			if ($user) {
+				$email = $user->getEmail();
+				$fullname = $user->getFirstName().' '.$user->getLastName();
+				$userunixname = $user->getUnixName();
+				$pipecmd = "GIT_DIR=\"$repo\" git log --date=raw --all --pretty='format:%ad||%ae||%s||%h' --name-status --max-count=$nb_commits --author=\"$email\" --author=\"$fullname\"  --author=\"$userunixname\"";
+
+			} else {
+				$pipecmd = "GIT_DIR=\"$repo\" git log --date=raw --all --pretty='format:%ad||%ae||%s||%h' --name-status --max-count=$nb_commits";
+
+			}
 			if (is_dir($repo)) {
-				$pipe = popen("GIT_DIR=\"$repo\" git log --date=raw --all --pretty='format:%ad||%ae||%s||%h' --name-status --max-count=$nb_commits --author=\"$email\" --author=\"$fullname\"  --author=\"$userunixname\"", 'r' );
+				$pipe = popen($pipecmd, 'r' );
 				$i = 0;
 				while (!feof($pipe) && $data = fgets($pipe)) {
 					$line = trim($data);

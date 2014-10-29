@@ -1,6 +1,6 @@
 Name: fusionforge
 Version: @version@
-Release: 1%{?dist}
+Release: 1@snapshot@%{?dist}
 Summary: Collaborative development tool
 
 Group: Development/Tools
@@ -8,9 +8,9 @@ BuildArch: noarch
 # FusionForge is GPLv2+ and JQuery is MIT
 License: GPLv2+ and MIT
 URL: http://www.fusionforge.org/
-Source0: http://fusionforge.org/frs/download.php/file/XX/%{name}-%{version}.tar.bz2
-Requires: %{name}-db-local = %{version}, %{name}-web = %{version}
-Provides: bundled(jquery), bundled(jquery-ui)
+Source0: http://fusionforge.org/frs/download.php/file/XX/%{name}-@tarball_version@.tar.bz2
+Requires: %{name}-db-local = %{version}-%{release}, %{name}-web = %{version}-%{release}
+Provides: bundled(jquery) = 1.10.2, bundled(jquery-ui) = 1.10.4
 
 %description
 FusionForge provides many tools to aid collaboration in a
@@ -24,7 +24,7 @@ This metapackage installs a stand-alone FusionForge site.
 
 
 %prep
-%setup -q
+%setup -q -n fusionforge-@tarball_version@
 
 %build
 make %{?_smp_mflags}
@@ -51,10 +51,17 @@ install_listfiles()
     # Install for real
     make install-${1} prefix=%{_prefix} DESTDIR=%{buildroot}
 }
+# Declare rpm-specific version
+sed -e 's/@PKGVERSION@/%{version}-%{release}/' \
+    < common/pkginfo.inc.php.template \
+    > common/pkginfo.inc.php
 # http://fedoraproject.org/wiki/Packaging:No_Bundled_Libraries .../simplepie.inc -> php-simplepie
 rm -rf vendor/simplepie/
 # http://fedoraproject.org/wiki/Packaging:No_Bundled_Libraries .../nusoap.php -> php-nusoap
 rm -rf vendor/nusoap/
+# Remove RDF libraries, used by plugins we didn't package because as they weren't available in Fedora
+rm -rf vendor/arc/
+rm -f vendor/Graphite.php
 # Install core and list common dirs
 install_listfiles common
 %find_lang %{name}
@@ -95,8 +102,8 @@ subpackages.
 
 %package db-local
 Summary: Collaborative development tool - database (using PostgreSQL)
-Requires: %{name}-common = %{version}, postgresql-server
-Provides: %{name}-db = %{version}
+Requires: %{name}-common = %{version}-%{release}, postgresql-server
+Provides: %{name}-db = %{version}-%{release}
 %description db-local
 FusionForge provides many tools to aid collaboration in a
 development project, such as bug-tracking, task management,
@@ -113,7 +120,7 @@ database.
 
 %package db-remote
 Summary: Collaborative development tool - database (remote and already installed)
-Provides: %{name}-db = %{version}
+Provides: %{name}-db = %{version}-%{release}
 %description db-remote
 FusionForge provides many tools to aid collaboration in a
 development project, such as bug-tracking, task management,
@@ -130,7 +137,7 @@ installs (e.g. plugins activation requires a populated db).
 
 %package shell
 Summary: Collaborative development tool - shell accounts (using PostgreSQL)
-Requires: %{name}-common = %{version}, php, openssh-server, nscd, libnss-pgsql, pam
+Requires: %{name}-common = %{version}-%{release}, php, openssh-server, nscd, libnss-pgsql, pam
 %description shell
 FusionForge provides many tools to aid collaboration in a
 development project, such as bug-tracking, task management,
@@ -151,7 +158,7 @@ fi
 
 %package web
 Summary: Collaborative development tool - web part (using Apache)
-Requires: %{name}-common = %{version}, %{name}-db = %{version}, httpd, mod_ssl, php, php-pgsql, php-simplepie, php-nusoap
+Requires: %{name}-common = %{version}-%{release}, %{name}-db = %{version}-%{release}, httpd, mod_ssl, php, php-pgsql, php-simplepie, php-nusoap
 %description web
 FusionForge provides many tools to aid collaboration in a
 development project, such as bug-tracking, task management,
@@ -168,7 +175,7 @@ FusionForge on an Apache web server.
 
 %package web-vhosts
 Summary: Collaborative development tool - web vhosts (using Apache)
-Requires: %{name}-common = %{version}, httpd
+Requires: %{name}-common = %{version}-%{release}, httpd
 %description web-vhosts
 FusionForge provides many tools to aid collaboration in a
 development project, such as bug-tracking, task management,
@@ -183,8 +190,8 @@ on an Apache web server.
 
 %package mta-postfix
 Summary: Collaborative development tool - mail tools (using Postfix)
-Requires: %{name}-common = %{version}, postfix
-Provides: %{name}-mta = %{version}
+Requires: %{name}-common = %{version}-%{release}, postfix
+Provides: %{name}-mta = %{version}-%{release}
 %description mta-postfix
 FusionForge provides many tools to aid collaboration in a
 development project, such as bug-tracking, task management,
@@ -203,8 +210,8 @@ if [ $1 -eq 0 ] ; then %{_datadir}/%{name}/post-install.d/mta-postfix/mta-postfi
 
 %package mta-exim4
 Summary: Collaborative development tool - mail tools (using Exim 4)
-Requires: %{name}-common = %{version}, exim
-Provides: %{name}-mta = %{version}
+Requires: %{name}-common = %{version}-%{release}, exim
+Provides: %{name}-mta = %{version}-%{release}
 %description mta-exim4
 FusionForge provides many tools to aid collaboration in a
 development project, such as bug-tracking, task management,
@@ -223,7 +230,7 @@ if [ $1 -eq 0 ] ; then %{_datadir}/%{name}/post-install.d/mta-exim4/mta-exim4.sh
 
 %package lists
 Summary: Collaborative development tool - mailing-lists (using Mailman)
-Requires: %{name}-common = %{version}, %{name}-mta = %{version}, mailman
+Requires: %{name}-common = %{version}-%{release}, %{name}-mta = %{version}-%{release}, mailman
 %description lists
 FusionForge provides many tools to aid collaboration in a
 development project, such as bug-tracking, task management,
@@ -241,5 +248,5 @@ This package controls the interaction between FusionForge and Mailman.
 
 
 %changelog
-* Fri Oct 24 2014 Sylvain Beucler <beuc@beuc.net> - @version@-1
+* Fri Oct 24 2014 Sylvain Beucler <beuc@beuc.net> - @version@-1@snapshot@
 - Revamp packaging

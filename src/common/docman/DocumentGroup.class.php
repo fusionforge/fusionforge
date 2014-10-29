@@ -29,6 +29,35 @@
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'include/MonitorElement.class.php';
 
+$DOCUMENTGROUP_OBJ = array();
+
+/**
+ * documentgroup_get_object() - Get document group object by document group ID.
+ * documentgroup_get_object is useful so you can pool document group objects/save database queries
+ * You should always use this instead of instantiating the object directly
+ *
+ * @param	int		$docgroup_id	The ID of the document group - required
+ * @param	int|bool	$res	The result set handle ("SELECT * FROM doc_groups WHERE doc_group = $1")
+ * @return	DocumentGroup	a document group object or false on failure
+ */
+function &documentgroup_get_object($docgroup_id, $res = false) {
+	global $DOCUMENTGROUP_OBJ;
+	if (!isset($DOCUMENTGROUP_OBJ["_".$docgroup_id."_"])) {
+		if ($res) {
+			//the db result handle was passed in
+		} else {
+			$res = db_query_params('SELECT * FROM doc_groups WHERE doc_group = $1',
+						array($docgroup_id));
+		}
+		if (!$res || db_numrows($res) < 1) {
+			$DOCUMENTGROUP_OBJ["_".$docgroup_id."_"] = false;
+		} else {
+			$DOCUMENTGROUP_OBJ["_".$docgroup_id."_"] = new DocumentGroup(group_get_object(db_result($res,0,'group_id')), $docgroup_id, db_fetch_array($res));
+		}
+	}
+	return $DOCUMENTGROUP_OBJ["_".$docgroup_id."_"];
+}
+
 class DocumentGroup extends Error {
 
 	/**
@@ -950,9 +979,6 @@ class DocumentGroup extends Error {
 				case 'locked':
 				case 'locked_by':
 				case 'stateid':
-				case 'parent_doc_group':
-				case 'locked':
-				case 'locked_by':
 				case 'lockdate': {
 					if ($i) {
 						$qpa = db_construct_qpa($qpa, ',');
