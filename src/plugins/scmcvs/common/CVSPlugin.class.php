@@ -81,14 +81,14 @@ over it to the project's administrator.");
 
 	function getInstructionsForAnon ($project) {
 		$cvsrootend = $this->getBoxForProject($project).':'.forge_get_config('repos_path', 'scmcvs').'/'.$project->getUnixName();
-        $b = '<h2>' . _('Anonymous CVS Access') . '</h2>';
-        $b .= '<p>';
-        $b .= _('This project\'s CVS repository can be checked out through anonymous (pserver) CVS with the following instruction set. The module you wish to check out must be specified as the <em>modulename</em>. When prompted for a password for <em>anonymous</em>, simply press the Enter key.');
-        $b .= '</p>';
+		$b = '<h2>' . _('Anonymous CVS Access') . '</h2>';
+		$b .= '<p>';
+		$b .= _('This project\'s CVS repository can be checked out through anonymous (pserver) CVS with the following instruction set. The module you wish to check out must be specified as the <em>modulename</em>. When prompted for a password for <em>anonymous</em>, simply press the Enter key.');
+		$b .= '</p>';
 		$b .= '<p>
-		       <tt>cvs -d :pserver:anonymous@' . $cvsrootend.' login</tt><br/>
-		       <tt>cvs -d :pserver:anonymous@' . $cvsrootend.' checkout <em>'._('modulename').'</em></tt>
-		       </p>';
+			<tt>cvs -d :pserver:anonymous@' . $cvsrootend.' login</tt><br/>
+			<tt>cvs -d :pserver:anonymous@' . $cvsrootend.' checkout <em>'._('modulename').'</em></tt>
+			</p>';
 
 		return $b ;
 	}
@@ -98,10 +98,10 @@ over it to the project's administrator.");
 		if (session_loggedin()) {
 			$u = user_get_object(user_getid()) ;
 			$d = $u->getUnixName() ;
-        	$b = '<h2>';
+			$b = '<h2>';
 			$b .= sprintf(_('Developer %s Access via SSH'), 'CVS');
-        	$b = '</h2>';
-        	$b .= '<p>';
+			$b = '</h2>';
+			$b .= '<p>';
 			$b .= sprintf(_('Only project developers can access the %s tree via this method.'), 'CVS');
 			$b .= ' ';
 			$b .= _('SSH must be installed on your client machine.');
@@ -109,16 +109,16 @@ over it to the project's administrator.");
 			$b .= _('Substitute <em>developername</em> with the proper value.');
 			$b .= ' ';
 			$b .= _('Enter your site password when prompted.');
-        	$b .= '</p>';
+			$b .= '</p>';
 			$b .= '<p>
-			       <tt>export CVS_RSH=ssh</tt><br/>
-			       <tt>cvs -d :ext:'.$d.'@'.$cvsrootend.' checkout <em>'._('modulename').'</em></tt>
-			       </p>';
+				<tt>export CVS_RSH=ssh</tt><br/>
+				<tt>cvs -d :ext:'.$d.'@'.$cvsrootend.' checkout <em>'._('modulename').'</em></tt>
+				</p>';
 		} else {
-        	$b = '<h2>';
+			$b = '<h2>';
 			$b .= sprintf(_('Developer %s Access via SSH'), 'CVS');
-        	$b = '</h2>';
-        	$b .= '<p>';
+			$b = '</h2>';
+			$b .= '<p>';
 			$b .= sprintf(_('Only project developers can access the %s tree via this method.'), 'CVS');
 			$b .= ' ';
 			$b .= _('SSH must be installed on your client machine.');
@@ -126,11 +126,11 @@ over it to the project's administrator.");
 			$b .= _('Substitute <em>developername</em> with the proper value.');
 			$b .= ' ';
 			$b .= _('Enter your site password when prompted.');
-        	$b .= '</p>';
+			$b .= '</p>';
 			$b .= '<p>
-			       <tt>export CVS_RSH=ssh</tt><br/>
-			       <tt>cvs -d :ext:<em>'._('developername').'</em>@'.$cvsrootend.' checkout <em>'._('modulename').'</em></tt>
-			       </p>';
+				<tt>export CVS_RSH=ssh</tt><br/>
+				<tt>cvs -d :ext:<em>'._('developername').'</em>@'.$cvsrootend.' checkout <em>'._('modulename').'</em></tt>
+				</p>';
 		}
 		return $b ;
 	}
@@ -152,11 +152,11 @@ over it to the project's administrator.");
 	function getBrowserLinkBlock ($project) {
 		global $HTML ;
 		$b = $HTML->boxMiddle(sprintf(_('%s Repository Browser'), 'CVS'));
-        $b .= '<p>';
+		$b .= '<p>';
 		$b .= sprintf(_("Browsing the %s tree gives you a view into the current status of this project's code."), 'CVS');
 		$b .= ' ';
-        $b .= _('You may also view the complete histories of any file in the repository.');
-        $b .= '</p>';
+		$b .= _('You may also view the complete histories of any file in the repository.');
+		$b .= '</p>';
 		$b .= '<p>[' ;
 		$b .= util_make_link ("/scm/browser.php?group_id=".$project->getID(),
 								sprintf(_('Browse %s Repository'), 'CVS')
