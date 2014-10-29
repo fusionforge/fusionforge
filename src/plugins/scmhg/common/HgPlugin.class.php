@@ -43,6 +43,8 @@ and gives some control over it to the project's administrator.");
 		$this->_addHook('scm_gather_stats');
 		$this->_addHook('activity');
 		$this->_addHook('scm_admin_form');
+		$this->_addHook('scm_delete_repo');
+		$this->_addHook('scm_add_repo');
 		$this->register();
 	}
 
