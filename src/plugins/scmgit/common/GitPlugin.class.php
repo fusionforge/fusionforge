@@ -28,7 +28,7 @@
 
 require_once $gfcommon.'include/plugins_utils.php';
 
-forge_define_config_item('default_server', 'scmgit', forge_get_config('web_host'));
+forge_define_config_item('default_server', 'scmgit', forge_get_config('scm_host'));
 forge_define_config_item('repos_path', 'scmgit', forge_get_config('chroot').'/scmrepos/git');
 forge_define_config_item('use_ssh', 'scmgit', false);
 forge_set_config_item_bool('use_ssh', 'scmgit');
@@ -115,7 +115,7 @@ control over it to the project's administrator.");
 
 		$htmlRepo = '';
 		foreach ($repo_list as $repo_name) {
-			$htmlRepo .= html_e('tt', array(), 'git clone '.$protocol.'://'.$project->getSCMBox().'/anonscm/git/'.$project->getUnixName().'/'.$repo_name.'.git').html_e('br');;
+			$htmlRepo .= html_e('tt', array(), 'git clone '.$protocol.'://'.$this->getBoxForProject($project).'/anonscm/git/'.$project->getUnixName().'/'.$repo_name.'.git').html_e('br');;
 		}
 		$b .= html_e('p', array(), $htmlRepo);
 
@@ -139,7 +139,7 @@ control over it to the project's administrator.");
 				$user_id = db_result($result,$i,'user_id');
 				$user_name = db_result($result,$i,'user_name');
 				$real_name = db_result($result,$i,'realname');
-				$htmlRepo .= html_e('tt', array(), 'git clone '.$protocol.'://'.$project->getSCMBox().'/anonscm/git/'.$project->getUnixName().'/users/'.$user_name.'.git').' ('.util_make_link_u($user_name, $user_id, $real_name).') ['.util_make_link('/scm/browser.php?group_id='.$project->getID().'&user_id='.$user_id, _('Browse Git Repository')).']'.html_e('br');
+				$htmlRepo .= html_e('tt', array(), 'git clone '.$protocol.'://'.$this->getBoxForProject($project).'/anonscm/git/'.$project->getUnixName().'/users/'.$user_name.'.git').' ('.util_make_link_u($user_name, $user_id, $real_name).') ['.util_make_link('/scm/browser.php?group_id='.$project->getID().'&user_id='.$user_id, _('Browse Git Repository')).']'.html_e('br');
 			}
 			$b .= html_e('p', array(), $htmlRepo);
 		}
@@ -176,7 +176,7 @@ control over it to the project's administrator.");
 					' '. _('Enter your site password when prompted.'));
 				$htmlRepo = '';
 				foreach ($repo_list as $repo_name) {
-					$b .= html_e('tt', array(), 'git clone git+ssh://'.$d.'@' . $project->getSCMBox() . '/'. forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git').html_e('br');
+					$b .= html_e('tt', array(), 'git clone git+ssh://'.$d.'@' . $this->getBoxForProject($project) . '/'. forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git').html_e('br');
 				}
 				$b .= html_e('p', array(), $htmlRepo);
 			} elseif (forge_get_config('use_dav', 'scmgit')) {
@@ -192,7 +192,7 @@ control over it to the project's administrator.");
 					' '. _('Enter your site password when prompted.'));
 				$htmlRepo = '';
 				foreach ($repo_list as $repo_name) {
-					$htmlRepo .= html_e('tt', array(), 'git clone '.$protocol.'://'.$d.'@' . $project->getSCMBox() . '/'. forge_get_config('scm_root', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git').html_e('br');
+					$htmlRepo .= html_e('tt', array(), 'git clone '.$protocol.'://'.$d.'@' . $this->getBoxForProject($project) . '/'. forge_get_config('scm_root', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git').html_e('br');
 				}
 				$b .= html_e('p', array(), $htmlRepo);
 			}
@@ -211,7 +211,7 @@ control over it to the project's administrator.");
 					' '. _('Enter your site password when prompted.'));
 				$htmlRepo = '';
 				foreach ($repo_list as $repo_name) {
-					$htmlRepo .= html_e('tt', array(), 'git clone git+ssh://'.html_e('i', array(), _('developername')).'@' . $project->getSCMBox() . '/'. forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git').html_e('br');
+					$htmlRepo .= html_e('tt', array(), 'git clone git+ssh://'.html_e('i', array(), _('developername')).'@' . $this->getBoxForProject($project) . '/'. forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git').html_e('br');
 				}
 				$b .= html_e('p', array(), $htmlRepo);
 			} elseif (forge_get_config('use_dav', 'scmgit')) {
@@ -227,7 +227,7 @@ control over it to the project's administrator.");
 					' '. _('Enter your site password when prompted.'));
 				$htmlRepo = '';
 				foreach ($repo_list as $repo_name) {
-					$htmlRepo .= html_e('tt', array(), 'git clone '.$protocol.'://'.html_e('i', array(), _('developername')).'@' . $project->getSCMBox() . '/'. forge_get_config('scm_root', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git').html_e('br');
+					$htmlRepo .= html_e('tt', array(), 'git clone '.$protocol.'://'.html_e('i', array(), _('developername')).'@' . $this->getBoxForProject($project) . '/'. forge_get_config('scm_root', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git').html_e('br');
 				}
 				$b .= html_e('p', array(), $htmlRepo);
 			}

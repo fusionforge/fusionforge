@@ -25,7 +25,7 @@
 
 require_once $gfcommon.'include/plugins_utils.php';
 
-forge_define_config_item('default_server', 'scmhg', forge_get_config('web_host'));
+forge_define_config_item('default_server', 'scmhg', forge_get_config('scm_host'));
 forge_define_config_item('repos_path', 'scmhg', forge_get_config('chroot').'/scmrepos/hg');
 
 class HgPlugin extends SCMPlugin {

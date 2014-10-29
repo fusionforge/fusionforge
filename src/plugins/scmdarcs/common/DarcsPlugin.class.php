@@ -22,7 +22,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-forge_define_config_item ('default_server', 'scmdarcs', forge_get_config ('web_host')) ;
+forge_define_config_item ('default_server', 'scmdarcs', forge_get_config ('scm_host')) ;
 forge_define_config_item ('repos_path', 'scmdarcs', forge_get_config('chroot').'/scmrepos/darcs') ;
 
 class DarcsPlugin extends SCMPlugin {
@@ -112,7 +112,8 @@ over it to the project's administrator.");
  			}
  			else
  			{
- 				$url = util_make_url ('/anonscm/darcs/'.$project->getUnixName().'/' . $default_repo);
+				$protocol = forge_get_config('use_ssl')? 'https' : 'http';
+ 				$url = $protocol.'://'.$this->getBoxForProject($project).'/anonscm/darcs/'.$project->getUnixName().'/' . $default_repo);
 			}
 			$b = '<p><tt>darcs get ' . $url . '</tt></p>';
  			if (count($repo_names) > 1)
