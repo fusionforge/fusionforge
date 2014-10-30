@@ -59,7 +59,7 @@ function backports_rpm {
 		    rpm -ivh http://fr2.rpmfind.net/linux/epel/6/i386/epel-release-6-8.noarch.rpm
 		    ;;
 		7)
-		    rpm -ivh http://fr2.rpmfind.net/linux/epel/7/x86_64/epel-release-7-2.noarch.rpm
+		    rpm -ivh http://fr2.rpmfind.net/linux/epel/7/x86_64/e/epel-release-7-2.noarch.rpm
 		    ;;
 	    esac
 	fi
