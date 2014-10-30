@@ -65,7 +65,7 @@ rm -f vendor/Graphite.php
 # Install core and list common dirs
 install_listfiles common
 %find_lang %{name}
-# Install plugins
+# Install sub-modules
 install_listfiles db-local
 install_listfiles web
 install_listfiles web-vhosts
@@ -73,6 +73,7 @@ install_listfiles shell
 install_listfiles mta-postfix
 install_listfiles mta-exim4
 install_listfiles lists
+# Install plugins
 for i in $(sed -n 's/^%package plugin-//p' rpm/plugins); do \
     install_listfiles plugin-$i
 done

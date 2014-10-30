@@ -22,7 +22,9 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-forge_define_config_item ('default_server', 'scmdarcs', forge_get_config ('web_host')) ;
+require_once $gfcommon.'include/plugins_utils.php';
+
+forge_define_config_item ('default_server', 'scmdarcs', forge_get_config ('scm_host')) ;
 forge_define_config_item ('repos_path', 'scmdarcs', forge_get_config('chroot').'/scmrepos/darcs') ;
 
 class DarcsPlugin extends SCMPlugin {
@@ -112,7 +114,8 @@ over it to the project's administrator.");
  			}
  			else
  			{
- 				$url = util_make_url ('/anonscm/darcs/'.$project->getUnixName().'/' . $default_repo);
+				$protocol = forge_get_config('use_ssl')? 'https' : 'http';
+ 				$url = $protocol.'://'.$this->getBoxForProject($project).'/anonscm/darcs/'.$project->getUnixName().'/' . $default_repo;
 			}
 			$b = '<p><tt>darcs get ' . $url . '</tt></p>';
  			if (count($repo_names) > 1)
@@ -250,15 +253,7 @@ over it to the project's administrator.");
 
 		if ($project->usesPlugin ($this->name)) {
 			if ($this->browserDisplayable ($project)) {
-				print '<iframe id="scm_iframe" src="'.
-					util_make_url ("/plugins/scmdarcs/cgi-bin/darcsweb.cgi?r=".
-					$project->getUnixName()). '/' . $params['repo_name'] .
-					'" frameborder="0" width="100%" ></iframe>' ;
-				html_use_jqueryautoheight();
-				echo $HTML->getJavascripts();
-				echo '<script type="text/javascript">//<![CDATA[
-					jQuery(\'#scm_iframe\').iframeAutoHeight({heightOffset: 50});
-					//]]></script>';
+				htmlIframe('/plugins/scmdarcs/cgi-bin/darcsweb.cgi?r='.$project->getUnixName().'/'.$params['repo_name']);
 			}
 		}
 	}
