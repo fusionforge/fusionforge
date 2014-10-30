@@ -115,7 +115,7 @@ over it to the project's administrator.");
  			else
  			{
 				$protocol = forge_get_config('use_ssl')? 'https' : 'http';
- 				$url = $protocol.'://'.$this->getBoxForProject($project).'/anonscm/darcs/'.$project->getUnixName().'/' . $default_repo);
+ 				$url = $protocol.'://'.$this->getBoxForProject($project).'/anonscm/darcs/'.$project->getUnixName().'/' . $default_repo;
 			}
 			$b = '<p><tt>darcs get ' . $url . '</tt></p>';
  			if (count($repo_names) > 1)

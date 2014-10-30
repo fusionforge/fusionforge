@@ -166,6 +166,7 @@ over it to the project's administrator.");
 		if ($project->usesPlugin ($this->name)) {
 			if ($this->browserDisplayable ($project)) {
 				htmlIframe('/scm/loggerhead/'.$project->getUnixName());
+			}
 		}
 	}
 
@@ -221,9 +222,9 @@ over it to the project's administrator.");
 		}
 	}
 
-        function updateRepositoryList ($params) {
-                $groups = $this->getGroups () ;
-
+	function updateRepositoryList ($params) {
+			$groups = $this->getGroups () ;
+			
 		$dir = forge_get_config('data_path').'/plugins/scmbzr/public-repositories' ;
 
 		if (!is_dir($dir)) {
@@ -272,9 +273,9 @@ over it to the project's administrator.");
 		foreach ($createlist as $create) {
 			symlink (forge_get_config('repos_path', 'scmbzr') . '/' . $create, $dir . '/' . $create) ;
 		}
-        }
+	}
 
-        function gatherStats ($params) {
+	function gatherStats ($params) {
                 $project = $this->checkParams ($params) ;
                 if (!$project) {
                         return false ;
@@ -450,7 +451,7 @@ over it to the project's administrator.");
                         }
                 }
                 db_commit();
-        }
+	}
 
 	function findMainBranch ($project) {
 		$toprepo = forge_get_config('repos_path', 'scmbzr') ;
