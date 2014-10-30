@@ -109,19 +109,23 @@ EOF
     if yum list php-htmlpurifier-htmlpurifier >/dev/null 2>&1; then
 	yum install -y php-htmlpurifier-htmlpurifier
     else
-	# moin: no available package for RHEL; though 'moin' is available in Fedora
+	# php-htmlpurifier-htmlpurifier: no available package for RHEL, but available in Fedora
 	yumdownloader --enablerepo=fedora --source php-htmlpurifier-htmlpurifier
 	DEPS="php-channel-htmlpurifier"  # for v4.3.0-6.fc20
-	yum install -y $DEPS
+	for DEP in $DEPS ; do
+	    if ! yum install -y $DEP ; then
+		yumdownloader --enablerepo=fedora $DEP
+		yum install -y $DEP-*.noarch.rpm
+	    fi
+	done
 	rpmbuild --rebuild php-htmlpurifier-htmlpurifier-*.src.rpm
-	yum remove -y $DEPS
 	yum install -y ~/rpmbuild/RPMS/noarch/php-htmlpurifier-htmlpurifier-*.noarch.rpm
     fi
 
     if yum list php-nusoap >/dev/null 2>&1; then
 	yum install -y php-nusoap
     else
-	# moin: no available package for RHEL; though 'moin' is available in Fedora
+	# php-nusoap: no available package for RHEL, but available in Fedora
 	yumdownloader --enablerepo=fedora --source php-nusoap
 	DEPS="dos2unix"
 	yum install -y $DEPS
