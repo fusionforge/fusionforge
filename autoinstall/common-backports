@@ -54,7 +54,14 @@ function backports_rpm {
     if ! rpm -q fedora-release >/dev/null; then
 	# EPEL - http://download.fedoraproject.org/pub/epel/6/i386/repoview/epel-release.html
 	if ! rpm -q epel-release >/dev/null; then
-	    rpm -ivh http://fr2.rpmfind.net/linux/epel/6/i386/epel-release-6-8.noarch.rpm
+	    case $os_version in
+		6)
+		    rpm -ivh http://fr2.rpmfind.net/linux/epel/6/i386/epel-release-6-8.noarch.rpm
+		    ;;
+		7)
+		    rpm -ivh http://fr2.rpmfind.net/linux/epel/7/x86_64/e/epel-release-7-2.noarch.rpm
+		    ;;
+	    esac
 	fi
 
 	# Prepare manual backports

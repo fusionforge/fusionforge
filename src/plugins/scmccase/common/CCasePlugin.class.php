@@ -23,7 +23,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-forge_define_config_item ('default_server', 'scmccase', forge_get_config ('web_host')) ;
+forge_define_config_item ('default_server', 'scmccase', forge_get_config ('scm_host')) ;
 forge_define_config_item ('tag_pattern', 'scmccase', '') ;
 
 class CCasePlugin extends SCMPlugin {
