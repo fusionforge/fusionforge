@@ -46,6 +46,27 @@ function backports_deb {
     fi
 }
 
+function backport_rpm_from_fedora {
+    target=$1
+
+    if yum list $target >/dev/null 2>&1; then
+	yum install -y $target
+    else
+	yumdownloader --enablerepo=fedora --source $target
+	for DEP in $DEPS ; do
+	    if ! yum install -y $DEP ; then
+		yumdownloader --enablerepo=fedora $DEP
+		yum install -y $DEP-*.noarch.rpm
+	    fi
+	done
+	rpmbuild --rebuild $target-*.src.rpm
+	if [ -n "$REMOVEDEPS" ] ; then
+	    yum remove -y $REMOVEDEPS
+	fi
+	yum install -y ~/rpmbuild/RPMS/*/$target-[0-9]*.*.rpm
+    fi
+}
+
 
 function backports_rpm {
     # Fedora/RHEL/CentOS version:
@@ -82,57 +103,21 @@ EOF
 	yum install -y yum-utils  # yumdownloader
     fi
 
-    if yum list libnss-pgsql >/dev/null 2>&1; then
-	yum install -y libnss-pgsql
-    else
-	# libnss-pgsql: id., plus http://yum.postgresql.org/8.4/redhat/rhel-5-x86_64/
-	yumdownloader --enablerepo=fedora --source libnss-pgsql
-	DEPS="gcc postgresql-devel xmlto"
-	yum install -y $DEPS
-	rpmbuild --rebuild libnss-pgsql-*.src.rpm
-	yum remove -y $DEPS
-	rpm -ivh ~/rpmbuild/RPMS/x86_64/libnss-pgsql-*.x86_64.rpm
-    fi
+    DEPS="gcc postgresql-devel xmlto"
+    REMOVEDEPS=$DEPS
+    backport_rpm_from_fedora libnss-pgsql
 
-    if yum list moin >/dev/null 2>&1; then
-	yum install -y moin
-    else
-	# moin: no available package for RHEL; though 'moin' is available in Fedora
-	yumdownloader --enablerepo=fedora --source moin
-	DEPS="python-devel"
-	yum install -y $DEPS
-	rpmbuild --rebuild moin-*.src.rpm
-	yum remove -y $DEPS
-	rpm -ivh ~/rpmbuild/RPMS/noarch/moin-*.noarch.rpm
-    fi
+    DEPS="python-devel"
+    REMOVEDEPS=$DEPS
+    backport_rpm_from_fedora moin
 
-    if yum list php-htmlpurifier-htmlpurifier >/dev/null 2>&1; then
-	yum install -y php-htmlpurifier-htmlpurifier
-    else
-	# php-htmlpurifier-htmlpurifier: no available package for RHEL, but available in Fedora
-	yumdownloader --enablerepo=fedora --source php-htmlpurifier-htmlpurifier
-	DEPS="php-channel-htmlpurifier"  # for v4.3.0-6.fc20
-	for DEP in $DEPS ; do
-	    if ! yum install -y $DEP ; then
-		yumdownloader --enablerepo=fedora $DEP
-		yum install -y $DEP-*.noarch.rpm
-	    fi
-	done
-	rpmbuild --rebuild php-htmlpurifier-htmlpurifier-*.src.rpm
-	yum install -y ~/rpmbuild/RPMS/noarch/php-htmlpurifier-htmlpurifier-*.noarch.rpm
-    fi
+    DEPS="php-channel-htmlpurifier"
+    REMOVEDEPS=
+    backport_rpm_from_fedora php-htmlpurifier-htmlpurifier
 
-    if yum list php-nusoap >/dev/null 2>&1; then
-	yum install -y php-nusoap
-    else
-	# php-nusoap: no available package for RHEL, but available in Fedora
-	yumdownloader --enablerepo=fedora --source php-nusoap
-	DEPS="dos2unix"
-	yum install -y $DEPS
-	rpmbuild --rebuild php-nusoap-*.src.rpm
-	yum remove -y $DEPS
-	yum install -y ~/rpmbuild/RPMS/noarch/php-nusoap-*.noarch.rpm
-    fi
+    DEPS="dos2unix"
+    REMOVEDEPS=$DEPS
+    backport_rpm_from_fedora php-nusoap
 
     # TODO: postfix: rebuild from RHEL/CentOS sources with pgsql enabled,
     # so we can test mta-postfix
