@@ -38,8 +38,13 @@ if [ -e /etc/debian_version ]; then
     apt-get -y install wget default-jre iceweasel
     apt-get -y install phpunit phpunit-selenium patch psmisc patch rsyslog
 else
-    yum -y install wget firefox java-1.6.0
-    yum install -y php-phpunit-PHPUnit php-phpunit-PHPUnit-Selenium psmisc patch
+    yum -y install wget firefox
+    if yum list java-1.7.0-openjdk >/dev/null 2>&1 ; then
+	yum install -y java-1.7.0-openjdk
+    else
+	yum install -y java-1.6.0
+    fi
+    yum install -y php-phpunit-PHPUnit php-phpunit-PHPUnit-Selenium psmisc patch net-tools
 fi
 
 # Install selenium (no packaged version available)

@@ -126,6 +126,7 @@ function build_deb {
 
 function build_rpm {
     # Install build dependencies
+    yum makecache
     yum install -y make gettext tar bzip2 rpm-build  createrepo
     yum install -y php-cli  # rpm/gen_spec.sh
     
