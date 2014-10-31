@@ -112,12 +112,24 @@ EOF
     backport_rpm_from_fedora moin
 
     DEPS="php-channel-htmlpurifier"
-    REMOVEDEPS=
+    REMOVEDEPS=""
     backport_rpm_from_fedora php-htmlpurifier-htmlpurifier
 
     DEPS="dos2unix"
     REMOVEDEPS=$DEPS
     backport_rpm_from_fedora php-nusoap
+
+    DEPS="gcc gd-devel byacc freetype-devel libpng-devel libjpeg-devel"
+    REMOVEDEPS=$DEPS
+    backport_rpm_from_fedora cvsgraph
+
+    DEPS="python-devel python-pygments"
+    REMOVEDEPS=$DEPS
+    backport_rpm_from_fedora viewvc
+
+    DEPS=""
+    REMOVEDEPS=$DEPS
+    backport_rpm_from_fedora mediawiki
 
     # TODO: postfix: rebuild from RHEL/CentOS sources with pgsql enabled,
     # so we can test mta-postfix
