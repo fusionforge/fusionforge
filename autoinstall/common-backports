@@ -119,17 +119,21 @@ EOF
     REMOVEDEPS=$DEPS
     backport_rpm_from_fedora php-nusoap
 
-    DEPS="gcc gd-devel byacc freetype-devel libpng-devel libjpeg-devel"
-    REMOVEDEPS=$DEPS
-    backport_rpm_from_fedora cvsgraph
-
-    DEPS="python-devel python-pygments"
-    REMOVEDEPS=$DEPS
-    backport_rpm_from_fedora viewvc
-
-    DEPS=""
-    REMOVEDEPS=$DEPS
-    backport_rpm_from_fedora mediawiki
+    case $os_version in
+	7)
+	    DEPS="gcc gd-devel byacc freetype-devel libpng-devel libjpeg-devel"
+	    REMOVEDEPS=$DEPS
+	    backport_rpm_from_fedora cvsgraph
+	    
+	    DEPS="python-devel python-pygments"
+	    REMOVEDEPS=$DEPS
+	    backport_rpm_from_fedora viewvc
+	    
+	    DEPS=""
+	    REMOVEDEPS=$DEPS
+	    backport_rpm_from_fedora mediawiki
+	    ;;
+    esac
 
     # TODO: postfix: rebuild from RHEL/CentOS sources with pgsql enabled,
     # so we can test mta-postfix
