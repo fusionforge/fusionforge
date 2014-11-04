@@ -1,4 +1,4 @@
 plugins/scmbzr/bin/*                 @PLUGINS_PATH@/scmbzr/bin/
 plugins/scmbzr/common/*              @PLUGINS_PATH@/scmbzr/common/
 plugins/scmbzr/etc/plugins/scmbzr/*  @CONFIG_PATH@/plugins/scmbzr/
-plugins/scmbzr/etc/*.ini 	     @CONFIG_PATH@/config.ini.d/
+plugins/scmbzr/etc/*.ini 	     /etc/@PACKAGE@/config.ini.d/

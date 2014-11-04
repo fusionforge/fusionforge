@@ -3,5 +3,5 @@ plugins/projects-hierarchy/view/*                  @PLUGINS_PATH@/projects-hiera
 plugins/projects-hierarchy/actions/*                  @PLUGINS_PATH@/projects-hierarchy/actions/
 plugins/projects-hierarchy/include/*                  @PLUGINS_PATH@/projects-hierarchy/include/
 plugins/projects-hierarchy/www/*                     @PLUGINS_PATH@/projects-hierarchy/www/
-plugins/projects-hierarchy/etc/*.ini 	   			@CONFIG_PATH@/config.ini.d/
+plugins/projects-hierarchy/etc/*.ini 	   			/etc/@PACKAGE@/config.ini.d/
 plugins/projects-hierarchy/db/*                      @PLUGINS_PATH@/projects-hierarchy/db/

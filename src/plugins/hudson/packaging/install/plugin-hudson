@@ -5,4 +5,4 @@ plugins/hudson/www/*                     @PLUGINS_PATH@/hudson/www/
 plugins/hudson/cronjobs/*                @SOURCE_PATH@/cronjobs
 plugins/hudson/etc/plugins/hudson/*      @CONFIG_PATH@/plugins/hudson/
 plugins/hudson/etc/httpd.d/*             @SOURCE_PATH@/etc/httpd.d/
-plugins/hudson/etc/*.ini                 @CONFIG_PATH@/config.ini.d/
+plugins/hudson/etc/*.ini                 /etc/@PACKAGE@/config.ini.d/

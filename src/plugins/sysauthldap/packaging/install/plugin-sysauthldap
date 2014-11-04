@@ -1,4 +1,4 @@
 plugins/sysauthldap/bin             @PLUGINS_PATH@/sysauthldap/
 plugins/sysauthldap/common          @PLUGINS_PATH@/sysauthldap/
 plugins/sysauthldap/gforge.schema   @PLUGINS_PATH@/sysauthldap/
-plugins/sysauthldap/etc/*.ini 	    @CONFIG_PATH@/config.ini.d/
+plugins/sysauthldap/etc/*.ini 	    /etc/@PACKAGE@/config.ini.d/

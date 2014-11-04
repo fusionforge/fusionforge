@@ -1,4 +1,4 @@
 plugins/blocks/common/*               @PLUGINS_PATH@/blocks/common/
 plugins/blocks/db/*                   @PLUGINS_PATH@/blocks/db/
 plugins/blocks/www/*                  @PLUGINS_PATH@/blocks/www/
-plugins/blocks/etc/*.ini              @CONFIG_PATH@/config.ini.d/
+plugins/blocks/etc/*.ini              /etc/@PACKAGE@/config.ini.d/

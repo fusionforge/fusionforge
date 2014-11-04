@@ -1,4 +1,4 @@
 plugins/oauthconsumer/common/*                  @PLUGINS_PATH@/oauthconsumer/common/
 plugins/oauthconsumer/include/*                  @PLUGINS_PATH@/oauthconsumer/include/
 plugins/oauthconsumer/www/*                  @PLUGINS_PATH@/oauthconsumer/www/
-plugins/oauthconsumer/etc/oauthconsumer.ini	             @CONFIG_PATH@/config.ini.d/
+plugins/oauthconsumer/etc/oauthconsumer.ini	             /etc/@PACKAGE@/config.ini.d/

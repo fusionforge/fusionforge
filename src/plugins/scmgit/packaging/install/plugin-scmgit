@@ -1,4 +1,4 @@
 plugins/scmgit/common/*		@PLUGINS_PATH@/scmgit/common/
 plugins/scmgit/www/*            @PLUGINS_PATH@/scmgit/www/
 plugins/scmgit/db/*		@PLUGINS_PATH@/scmgit/db/
-plugins/scmgit/etc/*.ini 	@CONFIG_PATH@/config.ini.d/
+plugins/scmgit/etc/*.ini 	/etc/@PACKAGE@/config.ini.d/

@@ -4,4 +4,4 @@ plugins/extsubproj/view/*                  @PLUGINS_PATH@/extsubproj/view/
 plugins/extsubproj/include/*                 @PLUGINS_PATH@/extsubproj/include/
 plugins/extsubproj/db/*                      @PLUGINS_PATH@/extsubproj/db/
 plugins/extsubproj/www/*                     @PLUGINS_PATH@/extsubproj/www/
-plugins/extsubproj/etc/extsubproj.ini	             @CONFIG_PATH@/config.ini.d/
+plugins/extsubproj/etc/extsubproj.ini	             /etc/@PACKAGE@/config.ini.d/

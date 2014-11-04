@@ -2,5 +2,5 @@ plugins/projectimport/common/*                  @PLUGINS_PATH@/projectimport/com
 plugins/projectimport/www/*                     @PLUGINS_PATH@/projectimport/www/
 plugins/projectimport/etc/plugins/projectimport/*        @CONFIG_PATH@/plugins/projectimport/
 plugins/projectimport/3rd-party/oslc-tools/arc2-plugin/ARC2_OSLCCoreRDFJSONParserPlugin.php	@PLUGINS_PATH@/projectimport/common/	
-plugins/projectimport/etc/*.ini 	   			@CONFIG_PATH@/config.ini.d/
+plugins/projectimport/etc/*.ini 	   			/etc/@PACKAGE@/config.ini.d/
 plugins/projectimport/bin/*.sh                	@PLUGINS_PATH@/projectimport/bin/

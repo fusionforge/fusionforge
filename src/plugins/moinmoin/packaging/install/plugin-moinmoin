@@ -4,5 +4,5 @@ plugins/moinmoin/cronjobs/*       @PLUGINS_PATH@/moinmoin/cronjobs/
 plugins/moinmoin/lib/*            @PLUGINS_PATH@/moinmoin/lib/
 plugins/moinmoin/www/*            @PLUGINS_PATH@/moinmoin/www/
 plugins/moinmoin/wsgi/moin.wsgi   @PLUGINS_PATH@/moinmoin/wsgi
-plugins/moinmoin/etc/*.ini 	  		@CONFIG_PATH@/config.ini.d/
+plugins/moinmoin/etc/*.ini 	  		/etc/@PACKAGE@/config.ini.d/
 plugins/moinmoin/etc/plugins/moinmoin/*		@CONFIG_PATH@/plugins/moinmoin/

@@ -3,4 +3,4 @@ plugins/oauthprovider/include/*.php             @PLUGINS_PATH@/oauthprovider/inc
 plugins/oauthprovider/db/*                      @PLUGINS_PATH@/oauthprovider/db/
 plugins/oauthprovider/www/*                     @PLUGINS_PATH@/oauthprovider/www/
 plugins/oauthprovider/etc/plugins/oauthprovider/*     @CONFIG_PATH@/plugins/oauthprovider/
-plugins/oauthprovider/etc/*.ini @CONFIG_PATH@/config.ini.d/
+plugins/oauthprovider/etc/*.ini /etc/@PACKAGE@/config.ini.d/

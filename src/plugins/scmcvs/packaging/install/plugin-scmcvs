@@ -4,4 +4,4 @@ plugins/scmcvs/sbin/*                  @PLUGINS_PATH@/scmcvs/sbin/
 plugins/scmcvs/common/*                @PLUGINS_PATH@/scmcvs/common/
 plugins/scmcvs/cronjobs/*              @PLUGINS_PATH@/scmcvs/cronjobs/
 plugins/scmcvs/etc/plugins/scmcvs/*    @CONFIG_PATH@/plugins/scmcvs/
-plugins/scmcvs/etc/*.ini 	       @CONFIG_PATH@/config.ini.d/
+plugins/scmcvs/etc/*.ini 	       /etc/@PACKAGE@/config.ini.d/

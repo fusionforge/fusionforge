@@ -2,5 +2,5 @@ plugins/scmhook/common/*	@PLUGINS_PATH@/scmhook/common/
 plugins/scmhook/www/*		@PLUGINS_PATH@/scmhook/www/
 plugins/scmhook/db/*		@PLUGINS_PATH@/scmhook/db/
 plugins/scmhook/library/*	@PLUGINS_PATH@/scmhook/library/
-plugins/scmhook/etc/*.ini	@CONFIG_PATH@/config.ini.d/
+plugins/scmhook/etc/*.ini	/etc/@PACKAGE@/config.ini.d/
 plugins/scmhook/cronjobs/*	@PLUGINS_PATH@/scmhook/cronjobs/
