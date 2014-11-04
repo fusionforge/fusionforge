@@ -20,7 +20,7 @@ f=$(forge_get_config config_path)/httpd.conf.d/plugin-sysauthldap-secrets.inc
 if [ ! -e $f ] ; then
     cp $(forge_get_config source_path)/etc/httpd.conf.d-fhs/plugin-sysauthldap-secrets.inc $f
     chmod 600 $f
-    PATH=$(forge_get_config binary_path)/bin:$PATH manage-apache-config.sh install
+    PATH=$(forge_get_config binary_path):$PATH manage-apache-config.sh install
     mv $f.generated $f
 fi
 
