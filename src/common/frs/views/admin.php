@@ -118,7 +118,7 @@ if (count($FRSPackages) == 0) {
 			$content = util_make_link('/frs/?view=qrs&package_id='.$FRSPackage->getID().'&group_id='.$group_id, '<strong>['._('Add Release').']</strong>');
 		}
 		if (forge_check_perm('frs', $FRSPackage->getID(), 'file') && count($FRSPackage->getReleases()))  {
-			$content .= util_make_link('/frs/?view=showreleases&package_id='.$FRSPackage->getID().'&group_id='.$group_id, '<strong>['._('Edit Releases').']</strong>');
+			$content .= util_make_link('/frs/?view=showreleases&package_id='.$FRSPackage->getID().'&group_id='.$group_id, $HTML->getConfigurePic(_('Edit Releases'), _('Edit Releases')));
 		}
 		$cells[] = array($content, 'style' => 'white-space: nowrap;', 'align' => 'center');
 		$package_nameInputAttr = array('type' => 'text', 'name' => 'package_name', 'value' => html_entity_decode($FRSPackage->getName()), 'size' => 20, 'maxlength' => 60, 'required' => 'required', 'pattern' => '.{3,}', 'title' => _('At least 3 characters'));
