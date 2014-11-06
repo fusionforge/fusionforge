@@ -344,15 +344,15 @@ class FRSRelease extends Error {
 	}
 
 	function hasFiles() {
-		if ($files_count != null)
-			return $files_count;
+		if ($this->files_count != null)
+			return $this->files_count;
 
 		$res = db_query_params('select count(file_id) as files_count from frs_file where release_id = $1', array($this->getID()));
 		if (db_numrows($res) >= 1) {
 			$row = db_fetch_array($res);
-			$files_count = $row['files_count'];
+			$this->files_count = $row['files_count'];
 		}
-		return $files_count;
+		return $this->files_count;
 	}
 
 	/**
