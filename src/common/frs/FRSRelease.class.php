@@ -337,7 +337,7 @@ class FRSRelease extends Error {
 			$res = db_query_params('SELECT * FROM frs_file_vw WHERE release_id=$1',
 						array($this->getID())) ;
 			while ($arr = db_fetch_array($res)) {
-				$this->release_files[] = $this->newFRSFile($arr['file_id'], $arr);
+				$this->release_files[$arr['file_id']] = $this->newFRSFile($arr['file_id'], $arr);
 			}
 		}
 		return $this->release_files;
