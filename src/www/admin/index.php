@@ -148,11 +148,13 @@ echo html_ac(html_ap() - 1);
 	<li><?php echo util_make_link('/register/',_('Register New Project')); ?></li>
 	<li><?php echo util_make_link('/admin/approve-pending.php', _('Pending projects (new project approval)')); ?></li>
 	<li><form name="projectsearch" action="/admin/search.php">
+	<label for="status">
 	<?php echo _('Projects with status'); ?>
-	<select name="status">
-			<option value="A"><?php echo _('Active (A)'); ?></option>
-			<option value="H"><?php echo _('Hold (H)'); ?></option>
-			<option value="P"><?php echo _('Pending (P)'); ?></option>
+	</label>
+	<select id="status" name="status">
+		<option value="A"><?php echo _('Active (A)'); ?></option>
+		<option value="H"><?php echo _('Hold (H)'); ?></option>
+		<option value="P"><?php echo _('Pending (P)'); ?></option>
 	</select>
 	<input type="hidden" name="groupsearch" value="1"/>
 	<input type="hidden" name="search" value="%"/>
