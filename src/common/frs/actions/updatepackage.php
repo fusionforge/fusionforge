@@ -47,7 +47,7 @@ $status_id = getIntFromRequest('status_id');
 $result['html'] = $HTML->error_msg(_('Missing package_id or package_name'));
 
 if ($package_id && $package_name) {
-	$frsp = new FRSPackage($g, $package_id);
+	$frsp = frspackage_get_object($package_id);
 	if (!$frsp || !is_object($frsp)) {
 		$result['html'] = $HTML->error_msg(_('Error Getting FRSPackage'));
 		echo json_encode($result);

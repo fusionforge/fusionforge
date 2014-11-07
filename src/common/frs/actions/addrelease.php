@@ -41,7 +41,7 @@ if (!forge_check_perm('frs', $package_id, 'release')) {
 	session_redirect('/frs/?group_id='.$group_id);
 }
 
-$frsp = new FRSPackage($g, $package_id);
+$frsp = frspackage_get_object($package_id);
 if (!$frsp || !is_object($frsp)) {
 	$error_msg = _('Could Not Get FRS Package');
 	session_redirect('/frs/?group_id='.$group_id.'&view=admin');

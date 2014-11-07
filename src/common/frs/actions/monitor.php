@@ -47,7 +47,7 @@ if (!forge_check_perm('frs', $package_id, 'read')) {
 $redirect_url = getStringFromRequest('redirect_url', '/my/');
 
 if ($package_id) {
-	$frsp = new FRSPackage($g, $package_id);
+	$frsp = frspackage_get_object($package_id);
 	if (!$frsp || !is_object($frsp)) {
 		$error_msg = _('Error Getting FRSPackage');
 		if ($ajax) {

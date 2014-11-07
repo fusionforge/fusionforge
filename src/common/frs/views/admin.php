@@ -31,17 +31,11 @@ global $HTML; // html object
 global $group_id; // id of group
 global $g; // group object
 global $permissionlevel;
+global $fpFactory;
 
 if (!forge_check_perm('frs_admin', $group_id, 'read')) {
 	$warning_msg = _('FRS Access Denied');
 	session_redirect('/frs/?group_id='.$group_id);
-}
-
-$fpFactory = new FRSPackageFactory($g);
-if (!$fpFactory || !is_object($fpFactory)) {
-	exit_error(_('Could Not Get FRSPackageFactory'), 'frs');
-} elseif ($fpFactory->isError()) {
-	exit_error($fpFactory->getErrorMessage(), 'frs');
 }
 
 $FRSPackages = $fpFactory->getFRSs();

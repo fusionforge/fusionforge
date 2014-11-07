@@ -51,14 +51,14 @@ $ftp_filename = getStringFromRequest('ftp_filename');
 $manual_filename = getStringFromRequest('manual_filename');
 $docman_fileid = getIntFromRequest('docman_fileid');
 
-$frsp = new FRSPackage($g, $package_id);
+$frsp = frspackage_get_object($package_id);
 if (!$frsp || !is_object($frsp)) {
 	exit_error(_('Could Not Get FRS Package'), 'frs');
 } elseif ($frsp->isError()) {
 	exit_error($frsp->getErrorMessage(), 'frs');
 }
 
-$frsr = new FRSRelease($frsp, $release_id);
+$frsr = frsrelease_get_object($release_id);
 if (!$frsr || !is_object($frsr)) {
 	exit_error(_('Could Not Get FRS Release'), 'frs');
 } elseif ($frsr->isError()) {
