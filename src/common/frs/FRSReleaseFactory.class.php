@@ -22,6 +22,7 @@
 
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'frs/FRSRelease.class.php';
+require_once $gfcommon.'frs/FRSPackage.class.php';
 require_once $gfcommon.'frs/FRSPackageFactory.class.php';
 
 class FRSReleaseFactory extends Error {
@@ -96,7 +97,7 @@ class FRSReleaseFactory extends Error {
 
 		foreach ($ids as $id) {
 			if (forge_check_perm('frs', $id, 'read')) {
-				$frsp = new FRSPackage($this->Group, $id);
+				$frsp = frspackage_get_object($id);
 				$frspr = $frsp->getReleases();
 				$this->FRSRs = array_merge($frspr, $this->FRSRs);
 			}
@@ -121,7 +122,7 @@ class FRSReleaseFactory extends Error {
 
 		foreach ($ids as $id) {
 			if (forge_check_perm('frs', $id, 'read')) {
-				$frsp = new FRSPackage($this->Group, $id);
+				$frsp = frspackage_get_object($id);
 				$frspnr_id = $frsp->getNewestReleaseID();
 				$frspnr = frsrelease_get_object($frspnr_id);
 			}
