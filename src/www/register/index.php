@@ -5,7 +5,7 @@
  *
  * This page is used to request data required for project registration:
  *	 o Project Public Name
- *	 o Project Registartion Purpose
+ *	 o Project Registration Purpose
  *	 o Project License
  *	 o Project Public Description
  *	 o Project Unix Name
@@ -106,7 +106,7 @@ if (getStringFromRequest('submit')) {
 	}
 
 	if ( !$purpose && forge_get_config ('project_auto_approval') ) {
-		$purpose = 'No purpose given, autoapprove was on';
+		$purpose = _('No purpose given, autoapprove was on');
 	}
 
 	$send_mail = ! forge_get_config ('project_auto_approval') ;
@@ -188,8 +188,10 @@ site_user_header(array('title'=>_('Register Project')));
 <?php echo _('You should start with specifying the name of your project. The “Full Name” is descriptive, and has no arbitrary restrictions (except min 3 characters and max 40 characters).') ?>
 </p>
 <p>
+<label for="full_name">
 <?php echo _('Full Name') . _(': ') ?><br/>
-<input required="required" size="40" maxlength="40" type="text" name="full_name" placeholder="<?php echo _('Project Full Name'); ?>" value="<?php echo htmlspecialchars($full_name); ?>" pattern=".{3,40}"/>
+</label>
+<input id="full_name" required="required" size="40" maxlength="40" type="text" name="full_name" placeholder="<?php echo _('Project Full Name'); ?>" value="<?php echo htmlspecialchars($full_name); ?>" pattern=".{3,40}"/>
 </p>
 
 <?php
@@ -197,9 +199,11 @@ site_user_header(array('title'=>_('Register Project')));
 if ( !forge_get_config ('project_auto_approval') ) {
 	echo '<h2>'.$index++.'. '._('Project Purpose And Summarization').'</h2>';
 	echo '<p>';
+	echo '<label for="purpose">';
 	printf(_('Please provide detailed, accurate description of your project and what %1$s resources and in which way you plan to use. This description will be the basis for the approval or rejection of your project\'s hosting on %1$s, and later, to ensure that you are using the services in the intended way. This description will not be used as a public description of your project. It must be written in English. From 10 to 1500 characters.'), forge_get_config ('forge_name'));
+	echo '</label>';
 	echo '</p>';
-	echo '<textarea required="required" name="purpose" cols="70" rows="10" placeholder="'. _('Project Purpose And Summarization').'" >';
+	echo '<textarea id="purpose" required="required" name="purpose" cols="70" rows="10" placeholder="'. _('Project Purpose And Summarization').'" >';
 	echo htmlspecialchars($purpose);
 	echo '</textarea>';
 }
@@ -207,10 +211,12 @@ if ( !forge_get_config ('project_auto_approval') ) {
 
 <h2><?php echo $index++.'. '. _('Project Public Description') ?></h2>
 <p>
+<label for="description">
 <?php echo _('This is the description of your project which will be shown on the Project Summary page, in search results, etc. (at least 10 characters)') ?>
+</label>
 </p>
 
-<textarea required="required" name="description" cols="70" rows="5" placeholder="<?php echo _('Project Public Description'); ?>" >
+<textarea id="description" required="required" name="description" cols="70" rows="5" placeholder="<?php echo _('Project Public Description'); ?>" >
 <?php echo htmlspecialchars($description); ?>
 </textarea>
 
@@ -236,9 +242,11 @@ if ( !forge_get_config ('project_auto_approval') ) {
 <li><?php echo _('search engines throughout the site.') ?></li>
 </ul>
 <p>
+<label for="unix_name">
 <?php echo _('Unix Name') . _(':'); ?>
+</label>
 <br />
-<input required="required" type="text" maxlength="15" size="15" name="unix_name" value="<?php echo htmlspecialchars($unix_name); ?>" placeholder="<?php echo _('Unix Name'); ?>" pattern="[a-z0-9-]{3,15}"/>
+<input id="unix_name" required="required" type="text" maxlength="15" size="15" name="unix_name" value="<?php echo htmlspecialchars($unix_name); ?>" placeholder="<?php echo _('Unix Name'); ?>" pattern="[a-z0-9-]{3,15}"/>
 </p>
 
 <?php
@@ -248,11 +256,15 @@ if (forge_get_config('use_scm') && count($scm_plugins) > 0) {
 	echo '<h2>'.$index++.'. '._('Source Code').'</h2>';
 	echo '<p>' . _('You can choose among different SCM for your project, but just one (or none at all). Please select the SCM system you want to use.')."</p>\n";
 	echo '<table><tbody><tr><td><strong>'._('SCM Repository')._(':').'</strong></td>';
+	echo '<td>';
+	echo '<label for="noscm">';
 	if (!$scm) {
-		echo '<td><input type="radio" name="scm" value="noscm" checked="checked" />'._('No SCM').'</td>';
+		echo '<input id="noscm" type="radio" name="scm" value="noscm" checked="checked" />'._('No SCM');
 	} else {
-		echo '<td><input type="radio" name="scm" value="noscm" />'._('No SCM').'</td>';
+		echo '<input id="noscm" type="radio" name="scm" value="noscm" />'._('No SCM');
 	}
+	echo '</label>';
+	echo '</td>';
 	foreach($scm_plugins as $plugin) {
 		$myPlugin = plugin_get_object($plugin);
 		echo "<td>\n";
