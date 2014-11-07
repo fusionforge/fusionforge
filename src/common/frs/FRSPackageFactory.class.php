@@ -77,7 +77,7 @@ class FRSPackageFactory extends Error {
 	 * @param	bool	$status	limite the search to active packages. Default is false.
 	 * @return	array	The array of FRS objects.
 	 */
-	function getFRSs($status = false) {
+	function &getFRSs($status = false) {
 		if (isset($this->FRSs) && is_array($this->FRSs)) {
 			return $this->FRSs;
 		}
@@ -87,7 +87,7 @@ class FRSPackageFactory extends Error {
 
 		foreach ($ids as $id) {
 			if (forge_check_perm('frs', $id, 'read')) {
-				$this->FRSs[] = frspackage_get_object($id);
+				$this->FRSs[] =& frspackage_get_object($id);
 			}
 		}
 		return $this->FRSs;
