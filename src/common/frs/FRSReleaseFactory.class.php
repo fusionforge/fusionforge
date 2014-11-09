@@ -106,7 +106,7 @@ class FRSReleaseFactory extends Error {
 	}
 
 	/**
-	 * getFRSRs - get an array of FRS Newest Release objects for this Group.
+	 * getFRSRNewReleases - get an array of FRS Newest Release objects for this Group.
 	 *
 	 * @param	bool	$status	limite the search to active packages. Default is false.
 	 * @return	array	The array of FRS objects.
