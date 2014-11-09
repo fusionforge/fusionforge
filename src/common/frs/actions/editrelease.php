@@ -62,7 +62,7 @@ if (!$frsp || !is_object($frsp)) {
 //
 //  Get the release
 //
-$frsr = frsrelease_get_object$release_id);
+$frsr = frsrelease_get_object($release_id);
 if (!$frsr || !is_object($frsr)) {
 	exit_error(_('Could Not Get FRS Release'), 'frs');
 } elseif ($frsr->isError()) {
