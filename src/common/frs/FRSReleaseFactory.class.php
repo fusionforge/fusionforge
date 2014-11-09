@@ -122,9 +122,12 @@ class FRSReleaseFactory extends Error {
 
 		foreach ($ids as $id) {
 			if (forge_check_perm('frs', $id, 'read')) {
+				$frspnr = false;
 				$frsp = frspackage_get_object($id);
 				$frspnr_id = $frsp->getNewestReleaseID();
-				$frspnr = frsrelease_get_object($frspnr_id);
+				if ($frspnr_id) {
+					$frspnr = frsrelease_get_object($frspnr_id);
+				}
 			}
 			if (isset($frspnr) && $frspnr) {
 				$this->FRSNRs[] = $frspnr;
