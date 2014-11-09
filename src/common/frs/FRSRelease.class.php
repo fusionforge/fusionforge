@@ -374,7 +374,7 @@ class FRSRelease extends Error {
 		$f =& $this->getFiles();
 		for ($i = 0; $i < count($f); $i++) {
 			if (!is_object($f[$i]) || $f[$i]->isError() || !$f[$i]->delete()) {
-				$this->setError(_('File Error')._(': ').$f[$i]->getName().._(': ').$f[$i]->getErrorMessage());
+				$this->setError(_('File Error')._(': ').$f[$i]->getName()._(': ').$f[$i]->getErrorMessage());
 				return false;
 			}
 		}
