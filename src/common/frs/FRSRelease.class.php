@@ -42,13 +42,13 @@ function &frsrelease_get_object($release_id, $data = array()) {
 			$res = db_query_params('SELECT * FROM frs_release WHERE release_id=$1',
 						array ($release_id));
 			if (db_numrows($res)<1 ) {
-				$FRSRELEASE_OBJ['_'.$release_id.'_']=false;
+				$FRSRELEASE_OBJ['_'.$release_id.'_'] = false;
 				return false;
 			}
 			$data = db_fetch_array($res);
 		}
 		$FRSPackage = frspackage_get_object($data['package_id']);
-		$FRSRELEASE_OBJ['_'.$release_id.'_']= new FRSRelease($FRSPackage,$data['release_id'],$data);
+		$FRSRELEASE_OBJ['_'.$release_id.'_'] = new FRSRelease($FRSPackage, $data['release_id'], $data);
 	}
 	return $FRSRELEASE_OBJ['_'.$release_id.'_'];
 }
@@ -138,16 +138,16 @@ class FRSRelease extends Error {
 		if (!$release_date) {
 			$release_date=time();
 		}
-		$res = db_query_params ('SELECT * FROM frs_release WHERE package_id=$1 AND name=$2',
+		$res = db_query_params('SELECT * FROM frs_release WHERE package_id=$1 AND name=$2',
 					array ($this->FRSPackage->getID(),
-						   htmlspecialchars($name))) ;
+						   htmlspecialchars($name)));
 		if (db_numrows($res)) {
 			$this->setError(_('Error Adding Release: Name Already Exists'));
 			return false;
 		}
 
 		db_begin();
-		$result=db_query_params('INSERT INTO frs_release(package_id,notes,changes,preformatted,name,release_date,released_by,status_id) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
+		$result = db_query_params('INSERT INTO frs_release(package_id,notes,changes,preformatted,name,release_date,released_by,status_id) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
 					array($this->FRSPackage->getId(),
 						htmlspecialchars($notes),
 						htmlspecialchars($changes),
@@ -183,7 +183,7 @@ class FRSRelease extends Error {
 	 */
 	function fetchData($release_id) {
 		$res = db_query_params('SELECT * FROM frs_release WHERE release_id=$1 AND package_id=$2',
-					array($release_id, $this->FRSPackage->getID())) ;
+					array($release_id, $this->FRSPackage->getID()));
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError(_('Invalid release_id'));
 			return false;
@@ -284,7 +284,7 @@ class FRSRelease extends Error {
 
 		$date = date('Y-m-d H:i',time());
 
-		$subject = sprintf (_('[%1$s Release] %2$s'),
+		$subject = sprintf(_('[%1$s Release] %2$s'),
 					$this->FRSPackage->Group->getUnixName(),
 					$this->FRSPackage->getName());
 		$text = sprintf(_('Project %1$s (%2$s) has released a new version of package “%3$s”.'),
@@ -311,7 +311,7 @@ class FRSRelease extends Error {
 							. util_make_url('/frs/monitor.php?filemodule_id='.$this->FRSPackage->getID()."&group_id=".$this->FRSPackage->Group->getID()."&stop=1");
 //		$text = util_line_wrap($text);
 		if (count($arr)) {
-			util_handle_message(array_unique($arr),$subject,$text);
+			util_handle_message(array_unique($arr), $subject, $text);
 		}
 	}
 
@@ -374,7 +374,7 @@ class FRSRelease extends Error {
 		$f =& $this->getFiles();
 		for ($i = 0; $i < count($f); $i++) {
 			if (!is_object($f[$i]) || $f[$i]->isError() || !$f[$i]->delete()) {
-				$this->setError(_('File Error')._(': ').$f[$i]->getName().':'.$f[$i]->getErrorMessage());
+				$this->setError(_('File Error')._(': ').$f[$i]->getName().._(': ').$f[$i]->getErrorMessage());
 				return false;
 			}
 		}
