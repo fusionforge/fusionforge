@@ -1,6 +1,6 @@
 fusionforge (5.3.50-1) unstable; urgency=medium
 
-  * New upstream release
+  * New upstream release (closes: #769098)
   * Adapt packaging to new build system
 
  -- Sylvain Beucler <beuc@debian.org>  Mon, 22 Sep 2014 14:58:47 +0200

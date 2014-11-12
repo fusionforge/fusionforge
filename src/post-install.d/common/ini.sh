@@ -22,79 +22,98 @@
 source_path=$(forge_get_config source_path)
 config_path=$(forge_get_config config_path)
 
-# TODO: support 'db_get @PACKAGE@/shared/web_host' ?
-hostname=$(hostname -f || hostname)
-if [ ! -e $config_path/config.ini.d/post-install.ini ]; then \
-	sed $source_path/templates/post-install.ini \
+case "$1" in
+    configure)
+	# Distros may want to install new conffiles using tools such as ucf(1)
+	DESTDIR=$2
+	mkdir -m 755 -p $DESTDIR$config_path/config.ini.d/
+
+	# TODO: support 'db_get @PACKAGE@/shared/web_host' ?
+	hostname=$(hostname -f || hostname)
+	if [ ! -e $DESTDIR$config_path/config.ini.d/post-install.ini ]; then \
+	    sed $source_path/templates/post-install.ini \
 		-e "s,@web_host@,$hostname," \
-		> $config_path/config.ini.d/post-install.ini; \
-fi
+		> $DESTDIR$config_path/config.ini.d/post-install.ini; \
+	fi
 
-database_host=$1
-database_port=$2
-database_name=$3
-database_user=$4
-database_password_file=$5
-database_password_file_mta=$6
-database_password_file_ssh_akc=$7
+	# Get current values in case we're updating the Debian conf via ucf(1)
+	database_host=$(forge_get_config database_host)
+	database_port=$(forge_get_config database_port)
+	database_name=$(forge_get_config database_name)
+	database_user=$(forge_get_config database_user)
+	database_password=$(forge_get_config database_password)
+	database_password_mta=$(forge_get_config database_password_mta)
+	database_password_ssh_akc=$(forge_get_config database_password_ssh_akc)
+	session_key=$(forge_get_config session_key)
+	
+	if [ -z $database_host ]; then
+	    database_host=127.0.0.1
+	fi
+	if [ -z $database_port ]; then
+	    database_port=5432
+	fi
+	if [ -z $database_name ]; then
+	    database_name=fusionforge
+	fi
+	if [ -z $database_user ]; then
+	    database_user=fusionforge
+	fi
+	
+	# Don't overwrite existing config (e.g. previous or Puppet-generated)
+	if [ ! -e $DESTDIR$config_path/config.ini.d/post-install-secrets.ini ]; then
+	    if [ -z "$database_password" ]; then
+		database_password=$((head -c100 /dev/urandom; date +"%s:%N") | md5sum | cut -d' ' -f1)
+	    fi
+	    if [ -z "$database_password_mta" ]; then
+		database_password_mta=$((head -c100 /dev/urandom; date +"%s:%N") | md5sum | cut -d' ' -f1)
+	    fi
 
-if [ -z $database_host ]; then
-    database_host=127.0.0.1
-fi
-if [ -z $database_port ]; then
-    database_port=5432
-fi
-if [ -z $database_name ]; then
-    database_name=fusionforge
-fi
-if [ -z $database_user ]; then
-    database_user=fusionforge
-fi
+	    # Generate session key here for simplificy
+	    if [ -z "$session_key" ]; then
+		session_key=$((head -c100 /dev/urandom; date +"%s:%N") | md5sum | cut -d' ' -f1)
+	    fi
 
-# Don't overwrite existing config (e.g. previous or Puppet-generated)
-if [ ! -e $config_path/config.ini.d/post-install-secrets.ini ]; then
-    database_password=$(cat "$database_password_file" 2>/dev/null)
-    if [ -z "$database_password" ]; then
-	database_password=$((head -c100 /dev/urandom; date +"%s:%N") | md5sum | cut -d' ' -f1)
-    fi
-    database_password_mta=$(cat "$database_password_mta_file" 2>/dev/null)
-    if [ -z "$database_password_mta" ]; then
-	database_password_mta=$((head -c100 /dev/urandom; date +"%s:%N") | md5sum | cut -d' ' -f1)
-    fi
-    
-    # Generate session key here for simplificy
-    session_key=$((head -c100 /dev/urandom; date +"%s:%N") | md5sum | cut -d' ' -f1)
-    
-    # Create config file
-    sed $source_path/templates/post-install-secrets.ini \
-	-e "s,@database_host@,$database_host," \
-	-e "s,@database_port@,$database_port," \
-	-e "s,@database_name@,$database_name," \
-	-e "s,@database_user@,$database_user," \
-	-e "s,@session_key@,$session_key," \
-	> $config_path/config.ini.d/post-install-secrets.ini
-    chmod 600 $config_path/config.ini.d/post-install-secrets.ini
-    sed -i -e '/^@secrets@/ { ' -e 'ecat' -e 'd }' \
-	$config_path/config.ini.d/post-install-secrets.ini <<-EOF
-	session_key=$session_key
-	database_password=$database_password
-	database_password_mta=$database_password_mta
-	EOF
-fi
+	    # Create config file
+	    sed $source_path/templates/post-install-secrets.ini \
+		-e "s,@database_host@,$database_host," \
+		-e "s,@database_port@,$database_port," \
+		-e "s,@database_name@,$database_name," \
+		-e "s,@database_user@,$database_user," \
+		> $DESTDIR$config_path/config.ini.d/post-install-secrets.ini
+	    chmod 600 $config_path/config.ini.d/post-install-secrets.ini
+	    sed -i -e '/^@secrets@/ { ' -e 'ecat' -e 'd }' \
+		$DESTDIR$config_path/config.ini.d/post-install-secrets.ini <<-EOF
+		session_key=$session_key
+		database_password=$database_password
+		database_password_mta=$database_password_mta
+		EOF
+	fi
+	
+	# Special conf for AuthorizedKeysCommand (chown'd in post-install.d/shell/shell.sh)
+	if [ ! -e $DESTDIR$config_path/config.ini.d/post-install-secrets-ssh_akc.ini ]; then
+	    if [ -z "$database_password_ssh_akc" ]; then
+		database_password_ssh_akc=$((head -c100 /dev/urandom; date +"%s:%N") | md5sum | cut -d' ' -f1)
+	    fi
+	    cat <<-EOF > $DESTDIR$config_path/config.ini.d/post-install-secrets-ssh_akc.ini
+		[core]
+		database_host=$database_host
+		database_port=$database_port
+		database_name=$database_name
+		database_user_ssh_akc=${database_user}_ssh_akc
+		database_password_ssh_akc=$database_password_ssh_akc
+		EOF
+	    chmod 600 $DESTDIR$config_path/config.ini.d/post-install-secrets-ssh_akc.ini
+	fi
+	;;
 
-# Special conf for AuthorizedKeysCommand (chown'd in post-install.d/shell/shell.sh)
-if [ ! -e $config_path/config.ini.d/post-install-secrets-ssh_akc.ini ]; then
-    database_password_ssh_akc=$(cat "$database_password_ssh_akc_file" 2>/dev/null)
-    if [ -z "$database_password_ssh_akc" ]; then
-	database_password_ssh_akc=$((head -c100 /dev/urandom; date +"%s:%N") | md5sum | cut -d' ' -f1)
-    fi
-    cat <<-EOF > $config_path/config.ini.d/post-install-secrets-ssh_akc.ini
-	[core]
-	database_host=$database_host
-	database_port=$database_port
-	database_name=$database_name
-	database_user_ssh_akc=${database_user}_ssh_akc
-	database_password_ssh_akc=$database_password_ssh_akc
-	EOF
-    chmod 600 $config_path/config.ini.d/post-install-secrets-ssh_akc.ini
-fi
+    purge)
+	# note: can't be called from Debian's postrm - rely on ucfq(1)
+	cd $config_path/config.ini.d/
+	rm -f post-install.ini post-install-secrets.ini post-install-secrets-ssh_akc.ini
+	;;
+
+    *)
+	echo "Usage: $0 {configure|purge}"
+	exit 1
+	;;
+esac

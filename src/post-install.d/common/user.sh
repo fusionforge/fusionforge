@@ -23,6 +23,17 @@
 
 system_user=$(forge_get_config system_user)
 data_path=$(forge_get_config data_path)
-if ! getent passwd $system_user >/dev/null; then
-    useradd $system_user -s /bin/false -M -d $data_path
-fi
+
+case "$1" in
+    configure)
+	if ! getent passwd $system_user >/dev/null; then
+	    useradd $system_user -s /bin/false -M -d $data_path
+	fi
+	;;
+
+    purge)
+	# note: can't be called from Debian's postrm - reproduced there
+	userdel $system_user
+	# *not* removing $data_path automatically, let's play safe
+	;;
+esac
