@@ -133,6 +133,7 @@ case "$1" in
 	    rm -f $config_path/$i
 	done
 	;;
+
     *)
 	echo "Usage: $0 {configure|configure-conffiles|configure-exec|remove|purge}"
 	exit 1

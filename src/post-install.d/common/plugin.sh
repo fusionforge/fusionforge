@@ -98,8 +98,10 @@ case "$2" in
 	for i in $(ls httpd.conf.d/*); do
 	    rm -f $config_path/$i
 	done
+	;;
 
     *)
 	echo "Usage: $0 plugin_name configure|remove"
 	exit 1
+	;;
 esac
