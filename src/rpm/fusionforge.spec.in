@@ -99,6 +99,11 @@ subpackages.
 %doc rpm/README.fedora
 %post common
 %{_datadir}/%{name}/post-install.d/common/common.sh configure
+%preun common
+if [ $1 -eq 0 ] ; then
+    %{_datadir}/%{name}/post-install.d/common/common.sh remove
+    %{_datadir}/%{name}/post-install.d/common/common.sh purge
+fi
 
 
 %package db-local
@@ -154,6 +159,7 @@ database to FusionForge users.
 %preun shell
 if [ $1 -eq 0 ] ; then
     %{_datadir}/%{name}/post-install.d/shell/shell.sh remove
+    %{_datadir}/%{name}/post-install.d/shell/shell.sh purge
 fi
 
 
@@ -172,6 +178,11 @@ FusionForge on an Apache web server.
 %files web -f web.rpmfiles
 %post web
 %{_datadir}/%{name}/post-install.d/web/web.sh configure
+%preun web
+if [ $1 -eq 0 ] ; then
+    %{_datadir}/%{name}/post-install.d/web/web.sh remove
+    %{_datadir}/%{name}/post-install.d/web/web.sh purge
+fi
 
 
 %package web-vhosts
