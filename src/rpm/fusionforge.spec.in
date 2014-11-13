@@ -122,6 +122,8 @@ database.
 %files db-local -f db-local.rpmfiles
 %post db-local
 %{_datadir}/%{name}/post-install.d/db/db.sh configure
+%preun db-local
+if [ $1 -eq 0 ] ; then %{_datadir}/%{name}/post-install.d/db/db.sh remove; fi
 
 
 %package db-remote

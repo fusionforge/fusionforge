@@ -173,7 +173,7 @@ post-install-base: post-install-common post-install-db post-install-web
 post-install-common:
 	$(post_source_path)/post-install.d/common/common.sh configure
 post-install-db:
-	$(post_source_path)/post-install.d/db/db.sh
+	$(post_source_path)/post-install.d/db/db.sh configure
 post-install-web:
 	$(post_source_path)/post-install.d/web/web.sh configure
 
