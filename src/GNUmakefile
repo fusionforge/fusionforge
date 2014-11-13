@@ -171,7 +171,7 @@ post_source_path:=$(shell forge_get_config source_path 2>/dev/null)
 post-install: post-install-base post-install-plugins
 post-install-base: post-install-common post-install-db post-install-web
 post-install-common:
-	$(post_source_path)/post-install.d/common/common.sh
+	$(post_source_path)/post-install.d/common/common.sh configure
 post-install-db:
 	$(post_source_path)/post-install.d/db/db.sh
 post-install-web:
