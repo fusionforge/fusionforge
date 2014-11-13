@@ -138,13 +138,14 @@ configure_sshd()
 	    user_cmd=AuthorizedKeysCommandRunAs
 	fi
     fi
-    # Add actual sshd configuration
+    # Add placeholder if necessary
     if ! grep -qw '^AuthorizedKeysCommand' /etc/ssh/sshd_config; then
 	echo 'AuthorizedKeysCommand replace_me' >> /etc/ssh/sshd_config
     fi
     if ! grep -qw "^$user_cmd" /etc/ssh/sshd_config; then
 	echo "$user_cmd replace_me" >> /etc/ssh/sshd_config
     fi
+    # Configure SSH daemon
     cmd=$(forge_get_config source_path)/bin/ssh_akc.php
     sed -i -e "s,^AuthorizedKeysCommand .*,AuthorizedKeysCommand $cmd," /etc/ssh/sshd_config
     sed -i -e "s,^$user_cmd .*,$user_cmd ${system_user_ssh_akc}," /etc/ssh/sshd_config
