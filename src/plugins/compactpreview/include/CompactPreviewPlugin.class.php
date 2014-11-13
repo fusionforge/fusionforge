@@ -71,11 +71,6 @@ _("This plugin adds support for user and project compact-preview
 		use_javascript('/plugins/'.$this->name.'/scripts/oslcTooltip.js');
 	}
 
-	function javascript (&$params) {
-		// make sure jquery won't conflict with prototype
-		$params['return'] = 'jQuery.noConflict();';
-	}
-
 	function cssfile (&$params) {
 		use_stylesheet('/plugins/'.$this->name.'/css/oslcTooltipStyle.css');
 	}
