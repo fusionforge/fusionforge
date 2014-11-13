@@ -33,7 +33,6 @@ _("This plugin adds support for user and project compact-preview
 		$this->_addHook("user_link_with_tooltip"); // override the way user links are done (for user compact preview support)
 		$this->_addHook("project_link_with_tooltip");
 		$this->_addHook("javascript_file"); // Add js files for oslc plugin
-		$this->_addHook("javascript"); // Add js initialization code
 		$this->_addHook("cssfile");
 		$this->_addHook("script_accepted_types");
 		$this->_addHook("content_negociated_user_home");
