@@ -42,7 +42,10 @@ rm -f fusionforge.spec
 	%post plugin-$i
 	%{_datadir}/%{name}/post-install.d/common/plugin.sh $i configure
 	%preun plugin-$i
-	if [ \$1 -eq 0 ] ; then %{_datadir}/%{name}/post-install.d/common/plugin.sh $i remove; fi
+	if [ \$1 -eq 0 ] ; then
+		%{_datadir}/%{name}/post-install.d/common/plugin.sh $i remove
+		%{_datadir}/%{name}/post-install.d/common/plugin.sh $i purge
+	fi
 	EOF
 	echo
 	echo
