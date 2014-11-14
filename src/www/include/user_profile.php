@@ -28,13 +28,12 @@
 /**
 * Display user's profile / personal info either in compact or extensive way
 *
-* @param object $user
-* @param bool $compact
-* @param string|bool	$title
-* @return string HTML
+* @param	object		$user
+* @param	bool		$compact
+* @param	string|bool	$title
+* @return	string		HTML
 */
 function user_personal_information($user, $compact = false, $title = false) {
-
 	$user_id = $user->getID();
 
 	$user_logo = false;
@@ -102,7 +101,7 @@ function user_personal_information($user, $compact = false, $title = false) {
 				</td>
 			</tr>';
 	if (!$compact) {
-		if(!isset($GLOBALS['sys_show_contact_info']) || $GLOBALS['sys_show_contact_info']) {
+		if(forge_get_config('user_display_contact_info')) {
 
 			$user_mail=$user->getEmail();
 			$user_mailsha1=$user->getSha1Email();
