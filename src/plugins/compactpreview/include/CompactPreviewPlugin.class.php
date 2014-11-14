@@ -90,9 +90,9 @@ _("This plugin adds support for user and project compact-preview
 	}
 
 	function display_user_html_compact_preview($username, $title = false) {
-		global $gfwww;
+		global $gfcommon;
 
-		require_once $gfwww.'include/user_profile.php';
+		require_once $gfcommon.'include/user_profile.php';
 
 		$user_obj = user_get_object_by_name($username);
 
