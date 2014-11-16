@@ -164,7 +164,7 @@ if (count($data) == 0) {
 	$classth = array('', '', '', '');
 	echo $HTML->listTableTop($tabletop, false, 'sortable_docman_listfile', 'sortable', $classth);
 	for ($i = 0; $i < count($data); $i++) {
-		$ndg = new DocumentGroup($g, $data[$i][3]);
+		$ndg = documentgroup_get_object(data[$i][3]);
 		$cells = array();
 		$cells[][] = $ndg->getPath(true);
 		$cells[][] = $data[$i][0];
