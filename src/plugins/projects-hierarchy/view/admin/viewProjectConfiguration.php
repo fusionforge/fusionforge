@@ -31,47 +31,43 @@ $projectsHierarchyProjectConf = $projectsHierarchy->getConf($group_id);
 if (!$projectsHierarchyProjectConf) {
 	echo $HTML->error_msg(_('Cannot retrieve data from DB'));
 } else {
-	echo $HTML->boxTop(_('Manage project configuration'));
-	echo '<form method="post" action="?type=admin&group_id='.$group_id.'&pluginname='.$projectsHierarchy->name.'&action=updateProjectConf">';
-	echo '<table>';
-
-	echo '<tr><td><label id="projectsHierarchy-tree" ';
-	if ($use_tooltips)
-		echo 'title="'._('Enable visibily in hierarchy tree.').'"';
-	echo ' >'._('Enable Tree').'</label></td><td><input type="checkbox" name="tree" value="1"';
+	echo $HTML->boxTop($projectsHierarchy->text._(': ')._('Manage project configuration'));
+	echo $HTML->openForm(array('method' => 'post', 'action' => '/plugins/'.$projectsHierarchy->name.'/?type=admin&group_id='.$group_id.'&pluginname='.$projectsHierarchy->name.'&action=updateProjectConf'));
+	echo $HTML->listTableTop();
+	$cells = array();
+	$cells[][] = html_e('label', array('id' => 'projectsHierarchy-tree', 'title' => _('Enable visibily in hierarchy tree.')), _('Enable Tree'));
+	$inputAttrs = array('type' => 'checkbox', 'name' => 'tree', 'value' => 1);
 	if ($projectsHierarchyProjectConf['tree'])
-		echo 'checked="checked" ';
+		$inputAttrs['checked'] = 'checked';
+	$cells[][] = html_e('input', $inputAttrs);
+	echo $HTML->multiTableRow(array(), $cells);
 
-	echo '/></td></tr>';
-
-	echo '<tr><td><label id="projectsHierarchy-docman" ';
-	if ($use_tooltips)
-		echo 'title="'._('Enable hierarchy in docman browsing. Direct access to docman features in parent docman tab.').'"';
-	echo ' >'._('Enable Docman.').'</label></td><td><input type="checkbox" name="docman" value="1"';
+	$cells = array();
+	$cells[][] = html_e('label', array('id' => 'projectsHierarchy-docman', 'title' => _('Enable hierarchy in docman browsing. Direct access to docman features in parent docman tab.')), _('Enable Docman'));
+	$inputAttrs = array('type' => 'checkbox', 'name' => 'docman', 'value' => 1);
 	if ($projectsHierarchyProjectConf['docman'])
-		echo 'checked="checked" ';
+		$inputAttrs['checked'] = 'checked';
+	$cells[][] = html_e('input', $inputAttrs);
+	echo $HTML->multiTableRow(array(), $cells);
 
-	echo '/></td></tr>';
-
-	echo '<tr><td><label id="projectsHierarchy-delegate" ';
-	if ($use_tooltips)
-		echo 'title="'._('Enable full rights and configuration delegation to parent.').'"';
-	echo ' >'._('Enable delegate').'</label></td><td><input type="checkbox" name="delegate" value="1"';
+	$cells = array();
+	$cells[][] = html_e('label', array('id' => 'projectsHierarchy-delegate', 'title' => _('Enable full rights and configuration delegation to parent.')), _('Enable delegate'));
+	$inputAttrs = array('type' => 'checkbox', 'name' => 'delegate', 'value' => 1);
 	if ($projectsHierarchyProjectConf['delegate'])
-		echo 'checked="checked" ';
+		$inputAttrs['checked'] = 'checked';
+	$cells[][] = html_e('input', $inputAttrs);
+	echo $HTML->multiTableRow(array(), $cells);
 
-	echo '/></td></tr>';
-	echo '<tr><td><label id="projectsHierarchy-globalconf" ';
-	if ($use_tooltips)
-		echo 'title="'._('Use forge global configuration. Superseed any configuration done at project level.').'"';
-	echo ' >'._('Use forge global configuration').'</label></td><td><input type="checkbox" name="globalconf" value="1"';
+	$cells = array();
+	$cells[][] = html_e('label', array('id' => 'projectsHierarchy-globalconf', 'title' => _('Use forge global configuration. Superseed any configuration done at project level.')), _('Enable forge global configuration'));
+	$inputAttrs = array('type' => 'checkbox', 'name' => 'globalconf', 'value' => 1);
 	if ($projectsHierarchyProjectConf['globalconf'])
-		echo 'checked="checked" ';
+		$inputAttrs['checked'] = 'checked';
+	$cells[][] = html_e('input', $inputAttrs);
+	echo $HTML->multiTableRow(array(), $cells);
 
-	echo '/></td></tr>';
-
-	echo '</table>';
-	echo '<input type="submit" value="'._('Update').'" />';
-	echo '</form>';
+	echo $HTML->listTableBottom();
+	echo html_e('input', array('type' => 'submit', 'value' => _('Update')));
+	echo $HTML->closeForm();
 	echo $HTML->boxBottom();
 }
