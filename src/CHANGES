@@ -3,6 +3,7 @@ Fusionforge-5.3.3:
 * Plugin scmhook: fix display when only one SCM plugin enabled [#735] (TrivialDev)
 * Plugin Hudson: fix global status in Hudson Job widget [#740] (TrivialDev)
 * Plugin Hudson: delete jobs on project deletion [#742] (TrivialDev)
+* Plugin OSLC: Undefined index: is_public [#748] (TrivialDev)
 * Stats SCM: fix order in stats block [#736] (TrivialDev)
 
 Fusionforge-5.3.2:

@@ -650,11 +650,12 @@ class FusionForgeOSLCConnector extends OslcConnector {
 		$return = array();
 		foreach($projects as $prj_idx => $project){
 			$data = $project->data_array;
+			$ra = RoleAnonymous::getInstance();
 			$return[$prj_idx] = array(
 				'id'                => $data['group_id'],
 				'name'              => $data['group_name'],
 				'homepage'          => $data['homepage'],
-				'is_public'         => $data['is_public'],
+				'is_public'         => $ra->hasPermission('project_read', $data['group_id']),
 				'status'            => $data['status'],
 				'unix_group_name'   => $data['unix_group_name'],
 				'short_description' => $data['short_description'],
