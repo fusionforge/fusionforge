@@ -385,6 +385,32 @@ if ($DocGroupName) {
 	}
 	if (forge_check_perm('docman', $g->getID(), 'approve') && $foundFiles) {
 		include ($gfcommon.'docman/views/editfile.php');
+		$directViewFileRequestedID = getIntFromRequest('filedetailid', null);
+		if ($directViewFileRequestedID) {
+			$localDocumentObject = document_get_object($directViewFileRequestedID);
+			echo html_ao('script', array('type' => 'text/javascript'));
+			echo '//<![CDATA['."\n";
+			echo 'jQuery(document).ready(function() {javascript:controllerListFile.toggleEditFileView({action:\''.util_make_uri($editfileaction).'\',
+														lockIntervalDelay: 60000,
+														childGroupId: '.util_ifsetor($childgroup_id, 0).',
+														id:'.$localDocumentObject->getID().',
+														groupId:'.$localDocumentObject->Group->getID().',
+														docgroupId:'.$localDocumentObject->getDocGroupID().',
+														statusId:'.$localDocumentObject->getStateID().',
+														statusDict:'.$dm->getStatusNameList('json').',
+														docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').',
+														title:\''.addslashes($localDocumentObject->getName()).'\',
+														filename:\''.$localDocumentObject->getFilename().'\',
+														description:\''.addslashes($localDocumentObject->getDescription()).'\',
+														isURL:\''.$localDocumentObject->isURL().'\',
+														isText:\''.$localDocumentObject->isText().'\',
+														isHtml:\''.$d->isHtml().'\',
+														useCreateOnline:'.$localDocumentObject->Group->useCreateOnline().',
+														docManURL:\''.util_make_uri('/docman').'\'})';
+			echo '})';
+			echo '//]]>';
+			echo html_ac(html_ap() - 1);
+		}
 	}
 }
 

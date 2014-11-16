@@ -1,6 +1,7 @@
 Fusionforge-X.X:
 * [#658] Docman: Basic Webdav write mkcol, delete, put, move support (TrivialDev)
 * [#657] Docman: Add move mass actions (TrivialDev)
+* [#747] Docman: Direct link to file details (TrivialDev)
 * [#692] FRS: Reorganise code (TrivialDev)
 * [#697] FRS: Enable widget "My monitored packages" (TrivialDev)
 * [#705] FRS: Provide new role settings (TrivialDev)
