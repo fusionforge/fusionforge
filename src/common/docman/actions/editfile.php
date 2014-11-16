@@ -70,7 +70,7 @@ if (!$docid) {
 	session_redirect($urlparam);
 }
 
-$d= new Document($g, $docid);
+$d= document_get_object($docid);
 if ($d->isError()) {
 	$error_msg = $d->getErrorMessage();
 	session_redirect($urlparam);

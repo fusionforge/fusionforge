@@ -24,24 +24,24 @@
 
 /* please do not add require here : use www/docman/index.php to add require */
 /* global variables used */
-global $g; //group object
 global $dirid; //id of doc_group
 global $group_id; // id of group
 
 if (!forge_check_perm('docman', $group_id, 'approve')) {
 	$warning_msg = _('Document Manager Action Denied.');
-	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
+	session_redirect('/docman/?group_id='.$group_id.'&dirid='.$dirid);
 }
 
 $arr_fileid = explode(',', getStringFromRequest('fileid'));
 $feedback = _('Document(s)').' ';
 foreach ($arr_fileid as $fileid) {
-	$d= new Document($g, $fileid);
+	$d= document_get_object($fileid);
 	$feedback .= $d->getFilename().' ';
 	if ($d->isError() || !$d->setReservedBy(0)) {
+		$feedback = '';
 		$error_msg = $d->getErrorMessage();
-		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
+		session_redirect('/docman/?group_id='.$group_id.'&dirid='.$dirid);
 	}
 }
 $feedback .= _('released successfully.');
-session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
+session_redirect('/docman/?group_id='.$group_id.'&dirid='.$dirid);
