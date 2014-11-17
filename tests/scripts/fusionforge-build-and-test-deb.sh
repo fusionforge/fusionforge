@@ -90,8 +90,9 @@ rm $CHANGEFILE
 
 cd $CHECKOUTPATH
 
-destroy_vm -t $VM $HOST
-start_vm_if_not_keeped -t $VM $HOST
+$(dirname $0)/destroy_vm $HOST
+$(dirname $0)/start_vm $HOST
+
 setup_debian_3rdparty_repo
 
 # Transfer preseeding

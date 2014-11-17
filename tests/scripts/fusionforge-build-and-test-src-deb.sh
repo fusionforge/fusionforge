@@ -23,8 +23,9 @@ export FILTER="DEBDebian70TestsSRC.php"
 
 get_config $@
 prepare_workspace
-destroy_vm -t $VM $@
-start_vm_if_not_keeped -t $VM $@
+
+$(dirname $0)/destroy_vm $HOST
+$(dirname $0)/start_vm $HOST
 
 setup_debian_3rdparty_repo
 
