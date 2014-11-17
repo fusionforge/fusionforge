@@ -9,6 +9,7 @@ if (!@include_once 'PHPUnit/Autoload.php') {
 }
 
 @include_once 'PHP/Token/Stream/Autoload.php';
+@include_once 'Text/Template/Autoload.php';
 
 class AllTests
 {
