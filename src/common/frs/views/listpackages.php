@@ -29,13 +29,7 @@
 global $HTML; // html object
 global $group_id; // id of group
 global $g; // group object
-
-$fpFactory = new FRSPackageFactory($g);
-if (!$fpFactory || !is_object($fpFactory)) {
-	exit_error(_('Could Not Get FRSPackageFactory'), 'frs');
-} elseif ($fpFactory->isError()) {
-	exit_error($fpFactory->getErrorMessage(), 'frs');
-}
+global $fpFactory; // frs package factory package
 
 $FRSPackages = $fpFactory->getFRSs(true);
 

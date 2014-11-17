@@ -28,6 +28,7 @@ case "$1" in
 	$0 configure-exec
 	;;
 
+    # Prepare config files for installation
     configure-conffiles)
 	# Distros may want to install new conffiles using tools such as ucf(1)
 	DESTDIR=$2
@@ -44,6 +45,7 @@ case "$1" in
 	done
 	;;
 
+    # Configure once config files are installed
     configure-exec)
 	apache_user=$(forge_get_config apache_user)
 	apache_group=$(forge_get_config apache_group)
@@ -131,6 +133,7 @@ case "$1" in
 	    rm -f $config_path/$i
 	done
 	;;
+
     *)
 	echo "Usage: $0 {configure|configure-conffiles|configure-exec|remove|purge}"
 	exit 1

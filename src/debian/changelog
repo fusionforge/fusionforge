@@ -1,10 +1,19 @@
 fusionforge (5.3.50-1) unstable; urgency=medium
 
-  * New upstream release
+  * New upstream release (closes: #769098)
   * Adapt packaging to new build system
-  * Dump Standards-Version (no changes)
 
  -- Sylvain Beucler <beuc@debian.org>  Mon, 22 Sep 2014 14:58:47 +0200
+
+fusionforge (5.3.2+20141104-1) unstable; urgency=medium
+
+  * New upstream snapshot following the 5.3 stable branch.
+  (closes: #767931, #754791, #767688, #736157, #637217)
+  (closes: #674567, #675042, #744202, #597610)
+  * Bump Standards-Version to 3.9.6 (no changes)
+  * Remove reference to README.Custom (closes: #599289)
+
+ -- Sylvain Beucler <beuc@debian.org>  Tue, 04 Nov 2014 11:44:47 +0100
 
 fusionforge (5.3.2-1) unstable; urgency=high
 

@@ -359,6 +359,9 @@ class FRSFile extends Error {
 		if (file_exists($file))
 			unlink($file);
 
+		if (isset($this->FRSRelease->release_files[$this->getID()])) {
+			unset($this->FRSRelease->release_files[$this->getID()]);
+		}
 		$result = db_query_params('DELETE FROM frs_file WHERE file_id=$1', array($this->getID()));
 		if (!$result || db_affected_rows($result) < 1) {
 			$this->setError("frsDeleteFile()::2 ".db_error());
@@ -366,7 +369,7 @@ class FRSFile extends Error {
 		} else {
 			db_query_params('DELETE FROM frs_dlstats_file WHERE file_id=$1', array($this->getID()));
 			db_query_params('DELETE FROM frs_dlstats_filetotal_agg WHERE file_id=$1', array($this->getID()));
-			if ($this->hasFiles()) {
+			if ($this->FRSRelease->hasFiles()) {
 				$this->FRSRelease->FRSPackage->createReleaseFilesAsZip($this->FRSRelease->getID());
 			} else {
 				$this->FRSRelease->FRSPackage->deleteReleaseFilesAsZip($this->FRSRelease->getID());
@@ -384,7 +387,7 @@ class FRSFile extends Error {
 	 * @param	int|bool	$release_id	The release_id of the release this file belongs to (if not set, defaults to the release id of this file).
 	 * @return	boolean		success.
 	 */
-	function update($type_id,$processor_id,$release_time,$release_id=false) {
+	function update($type_id, $processor_id, $release_time, $release_id = false) {
 		if (!forge_check_perm('frs', $this->FRSRelease->FRSPackage->getID(), 'file')) {
 			$this->setPermissionDeniedError();
 			return false;
@@ -393,9 +396,9 @@ class FRSFile extends Error {
 		// Sanity checks
 		if ($release_id) {
 			// Check that the new FRSRelease id exists
-			if ($FRSRelease=frsrelease_get_object($release_id)) {
+			if ($FRSRelease = frsrelease_get_object($release_id)) {
 				// Check that the new FRSRelease id belongs to the group of this FRSFile
-				if ($FRSRelease->FRSPackage->Group->getID()!=$this->FRSRelease->FRSPackage->Group->getID()) {
+				if ($FRSRelease->FRSPackage->Group->getID() != $this->FRSRelease->FRSPackage->Group->getID()) {
 					$this->setError(_('No Valid Group Object'));
 					return false;
 				}
@@ -446,7 +449,11 @@ class FRSFile extends Error {
 				db_rollback();
 				return false;
 			}
+			if (isset($this->FRSRelease->release_files[$this->getID()])) {
+				unset($this->FRSRelease->release_files[$this->getID()]);
+			}
 		}
+
 		if ($this->FRSRelease->FRSPackage->createReleaseFilesAsZip($this->FRSRelease->getID())) {
 			db_commit();
 			return true;

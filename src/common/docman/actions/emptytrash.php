@@ -33,11 +33,11 @@ if ( !forge_check_perm('docman', $group_id, 'approve')) {
 	session_redirect('/docman/?group_id='.$group_id);
 }
 
-$dm = new DocumentManager(group_get_object($group_id));
+$dm = new DocumentManager($g);
 if (!$dm->cleanTrash()) {
 	$error_msg = _('Unable to clean trash');
 	session_redirect('/docman/?group_id='.$group_id);
 }
 
 $feedback = _('Emptied Trash successfully.');
-session_redirect('/docman/?group_id='.$group_id.'&view=listfile');
+session_redirect('/docman/?group_id='.$group_id);

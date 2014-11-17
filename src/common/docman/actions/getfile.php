@@ -43,7 +43,7 @@ switch ($fromview) {
 		break;
 	}
 	default: {
-		$urlparam .= '&view=listfile&dirid='.$doc_group;
+		$urlparam .= '&dirid='.$doc_group;
 		break;
 	}
 }
@@ -59,7 +59,7 @@ $details = getIntFromRequest('details');
 if ($childgroup_id) {
 	$g = group_get_object($childgroup_id);
 }
-$d = new Document($g, $fileid);
+$d = document_get_object($fileid);
 if ($d->isError()) {
 	$error_msg = $d->getErrorMessage();
 	session_redirect($urlparam);
@@ -67,14 +67,14 @@ if ($d->isError()) {
 
 $filearray = array();
 if ($details) {
-	$filearray["name"] = $d->getFileName();
-	$filearray["type"] = $d->getFileType();
-	$filearray["title"] = $d->getName();
-	$filearray["description"] = $d->getDescription();
-	$filearray["stateid"] = $d->getStateID();
-	$filearray["docgroupid"] = $d->getDocGroupID();
-	$filearray["isurl"] = $d->isURL();
+	$filearray['name'] = $d->getFileName();
+	$filearray['type'] = $d->getFileType();
+	$filearray['title'] = $d->getName();
+	$filearray['description'] = $d->getDescription();
+	$filearray['stateid'] = $d->getStateID();
+	$filearray['docgroupid'] = $d->getDocGroupID();
+	$filearray['isurl'] = $d->isURL();
 }
-$filearray["body"] = $d->getFileData();
+$filearray['body'] = $d->getFileData();
 echo json_encode($filearray);
 exit;

@@ -26,51 +26,51 @@
 /* global variables used */
 global $dirid; //id of doc_group
 global $group_id; // id of group
-global $LUSER; // User object
 
 if (!forge_check_perm('docman', $group_id, 'read')) {
 	$warning_msg = _('Document Manager Action Denied.');
-	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
+	session_redirect('/docman/?group_id='.$group_id.'&dirid='.$dirid);
 }
 
 $directoryid = getStringFromRequest('directoryid');
 $option = getStringFromRequest('option');
-$feedback = _('Folder').' ';
+$dg = documentgroup_get_object($directoryid);
+if (!$dg || $dg->isError()) {
+	$error_msg = _('Docman Error: unable to get folder object');
+	session_redirect('/docman/?group_id='.$group_id);
+}
+
 switch ($option) {
 	case 'start': {
 		if (!empty($directoryid)) {
-			$dg = new DocumentGroup($g, $directoryid);
-			$feedback .= $dg->getName()._(': ');
-			if ($dg->isError() || !$dg->addMonitoredBy($LUSER->getID())) {
+			if ($dg->isError() || !$dg->addMonitoredBy(user_getid())) {
 				$error_msg = $dg->getErrorMessage();
-				session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
+				session_redirect('/docman/?group_id='.$group_id.'&dirid='.$dirid);
 			}
 		} else {
 			$warning_msg = _('No action to perform');
-			session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
+			session_redirect('/docman/?group_id='.$group_id.'&dirid='.$dirid);
 		}
-		$feedback .= _('Monitoring Started');
+		$feedback = _('Folder').' '.$dg->getName()._(': ')._('Monitoring Started');
 		break;
 	}
 	case 'stop': {
 		if (!empty($directoryid)) {
-			$dg = new DocumentGroup($g, $directoryid);
-			$feedback .= $dg->getName().' ';
-			if ($dg->isError() || !$dg->removeMonitoredBy($LUSER->getID())) {
+			if ($dg->isError() || !$dg->removeMonitoredBy(user_getid())) {
 				$error_msg = $dg->getErrorMessage();
-				session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
+				session_redirect('/docman/?group_id='.$group_id.'&dirid='.$dirid);
 			}
 		} else {
 			$warning_msg = _('No action to perform');
-			session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
+			session_redirect('/docman/?group_id='.$group_id.'&dirid='.$dirid);
 		}
-		$feedback .= _('Monitoring Stopped');
+		$feedback = _('Folder').' '.$dg->getName()._(': ')._('Monitoring Stopped');
 		break;
 	}
 	default: {
 		$error_msg = _('Docman: monitoring action unknown.');
-		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
+		session_redirect('/docman/?group_id='.$group_id.'&dirid='.$dirid);
 	}
 }
 
-session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
+session_redirect('/docman/?group_id='.$group_id.'&dirid='.$dirid);

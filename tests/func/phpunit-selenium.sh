@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -ex
 
 usage () {
        echo "Usage: $0 <install_method>/<install_os> testsuite_name"
@@ -42,6 +42,8 @@ case $INSTALL_OS in
 	;;
 esac
 
+HOST=$(hostname -f)
+
 scriptdir=$(dirname $0)
 FORGE_HOME=$(cd $scriptdir/../..; pwd)
 cd $FORGE_HOME
@@ -52,8 +54,7 @@ cd $FORGE_HOME
 
 SELENIUM_RC_DIR=/var/log
 SELENIUM_RC_URL=${HUDSON_URL}job/${JOB_NAME}/ws/reports
-SELENIUM_RC_HOST=`hostname -f`
-HOST=`hostname -f`
+SELENIUM_RC_HOST=$HOST
 # the PHP file provided through CONFIG_PHP will be loaded inside the functionnal test suite with require_once, in SeleniumRemoteSuite.php
 CONFIG_PHP=func/config.php
 export SELENIUM_RC_DIR SELENIUM_RC_URL SELENIUM_RC_HOST HOST DB_NAME DB_USER CONFIG_PHP

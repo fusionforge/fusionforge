@@ -19,7 +19,7 @@
 # with FusionForge; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-set -e
+set -ex
 export DEBIAN_FRONTEND=noninteractive
 
 if [ -z "$1" ]; then
@@ -59,6 +59,9 @@ http_proxy=$PROXY wget -c $SELENIUMURL \
 service cron stop || true
 
 # Add alias to /etc/hosts
+if ! grep -q ^$(hostname -i) /etc/hosts ; then
+    echo $(hostname -i) $(hostname) >> /etc/hosts
+fi
 grep -q "^$(hostname -i).*$(forge_get_config scm_host)" /etc/hosts || sed -i -e "s/^$(hostname -i).*/& $(forge_get_config scm_host)/" /etc/hosts
  
 # Fix screenshot default black background (/usr/share/{php,pear}) (fix available upstream)

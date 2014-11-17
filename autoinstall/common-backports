@@ -100,7 +100,10 @@ metalink=https://mirrors.fedoraproject.org/metalink?repo=fedora-source-20&arch=$
 enabled=0
 gpgcheck=0
 EOF
-	yum install -y yum-utils  # yumdownloader
+	yum install -y yum-utils # yumdownloader
+	if [ ! -e /usr/bin/rpmbuild ] ; then
+	    yum install -y rpm-build
+	fi
     fi
 
     DEPS="gcc postgresql-devel xmlto"

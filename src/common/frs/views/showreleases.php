@@ -82,7 +82,7 @@ if (count($rs) < 1) {
 		$cells[][] = html_e('input', $releaseInputAttr);
 		$cells[][] = $rs[$i]->getName();
 		$cells[][] = date('Y-m-d H:i',$rs[$i]->getReleaseDate());
-		$content = util_make_link('/frs/?view=editrelease&group_id='.$group_id.'&package_id='.$package_id.'&release_id='.$rs[$i]->getID(), '['._('Edit').']');
+		$content = util_make_link('/frs/?view=editrelease&group_id='.$group_id.'&package_id='.$package_id.'&release_id='.$rs[$i]->getID(), $HTML->getConfigurePic(_('Edit'), _('Edit')));
 		if (forge_check_perm('frs', $package_id, 'release')) {
 			$deleteUrlAction = util_make_uri('/frs/?action=deleterelease&package_id='.$package_id.'&group_id='.$group_id.'&release_id='.$rs[$i]->getID());
 			$content .= util_make_link('#', $HTML->getDeletePic(_('Delete this release'), _('Delete release')), array('onclick' => 'javascript:controllerFRS.toggleConfirmBox({idconfirmbox: \'confirmbox1\', do: \''._('Delete the release').' '.$rs[$i]->getName().'\', cancel: \''._('Cancel').'\', height: 150, width: 300, action: \''.$deleteUrlAction.'\'})' ), true);

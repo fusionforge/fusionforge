@@ -94,7 +94,7 @@ class DocumentGroupFactory extends Error {
 		// Build the nested array
 		$count = count($this->flat_groups);
 		for ($i=0; $i < $count; $i++) {
-			$this->nested_groups["".$this->flat_groups[$i]->getParentID()][] =& $this->flat_groups[$i];
+			$this->nested_groups[$this->flat_groups[$i]->getParentID()][] =& $this->flat_groups[$i];
 		}
 		return $this->nested_groups;
 	}

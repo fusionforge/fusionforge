@@ -1,17 +1,5 @@
-#! /bin/sh -e
+#! /bin/sh
 
-scriptdir=$(dirname $0)
-configdir=$scriptdir/config
-. $(dirname $0)/common-vm
+HOST=$1
 
-read_param_vm "$@"
-
-# Start script for this engine must exist
-if [ ! -x $scriptdir/${VMENGINE}/stop ]
-then 
-	echo "Don't know how to stop ${VMENGINE} engine"
-	echo "$scriptdir/${VMENGINE}/stop not found"
-	exit 4
-else
-	$scriptdir/${VMENGINE}/stop
-fi
+sudo /usr/local/sbin/lxc-wrapper stop $(basename $HOST .local)

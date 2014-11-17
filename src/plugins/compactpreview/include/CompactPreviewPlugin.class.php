@@ -33,7 +33,6 @@ _("This plugin adds support for user and project compact-preview
 		$this->_addHook("user_link_with_tooltip"); // override the way user links are done (for user compact preview support)
 		$this->_addHook("project_link_with_tooltip");
 		$this->_addHook("javascript_file"); // Add js files for oslc plugin
-		$this->_addHook("javascript"); // Add js initialization code
 		$this->_addHook("cssfile");
 		$this->_addHook("script_accepted_types");
 		$this->_addHook("content_negociated_user_home");
@@ -71,11 +70,6 @@ _("This plugin adds support for user and project compact-preview
 		use_javascript('/plugins/'.$this->name.'/scripts/oslcTooltip.js');
 	}
 
-	function javascript (&$params) {
-		// make sure jquery won't conflict with prototype
-		$params['return'] = 'jQuery.noConflict();';
-	}
-
 	function cssfile (&$params) {
 		use_stylesheet('/plugins/'.$this->name.'/css/oslcTooltipStyle.css');
 	}
@@ -96,9 +90,9 @@ _("This plugin adds support for user and project compact-preview
 	}
 
 	function display_user_html_compact_preview($username, $title = false) {
-		global $gfwww;
+		global $gfcommon;
 
-		require_once $gfwww.'include/user_profile.php';
+		require_once $gfcommon.'include/user_profile.php';
 
 		$user_obj = user_get_object_by_name($username);
 
