@@ -2,7 +2,4 @@
 echo "==== STOP $HOST ===="
 echo "VMENGINE=$VMENGINE VMTEMPLATE=$VMTEMPLATE CIDR=$CIDR IPGW=$IPGW"
 
-lxcdir=`dirname $0`
-export TEMPLATE=$VMTEMPLATE
-
-sudo /usr/bin/lxc-stop -n $HOST
+sudo /usr/local/sbin/lxc-wrapper stop $HOST
