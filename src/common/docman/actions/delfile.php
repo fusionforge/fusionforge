@@ -36,7 +36,7 @@ if (!forge_check_perm('docman', $g->getID(), 'approve')) {
 $arr_fileid = explode(',', getStringFromRequest('fileid'));
 foreach ($arr_fileid as $fileid) {
 	if (!empty($fileid)) {
-		$d = new Document($g, $fileid);
+		$d = document_get_object($fileid);
 		if ($d->isError() || !$d->delete()) {
 			$error_msg = $d->getErrorMessage();
 			session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);

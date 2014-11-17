@@ -71,7 +71,7 @@ $nested_docs = array();
 $DocGroupName = 0;
 
 if ($dirid) {
-	$ndg = new DocumentGroup($g, $dirid);
+	$ndg = documentgroup_get_object($dirid);
 	$DocGroupName = $ndg->getName();
 	if (!$DocGroupName) {
 		$error_msg = $g->getErrorMessage();
@@ -99,8 +99,9 @@ echo $HTML->openForm(array('id' => 'emptytrash', 'name' => 'emptytrash', 'method
 echo html_e('input', array('id' => 'submitemptytrash', 'type' => 'submit', 'value' => _('Delete permanently all documents and folders with deleted status.')));
 echo $HTML->closeForm();
 echo html_ac(html_ap() - 1);
+echo html_ao('script', array('type' => 'text/javascript'));
 ?>
-<script type="text/javascript">//<![CDATA[
+//<![CDATA[
 var controllerListTrash;
 
 jQuery(document).ready(function() {
@@ -108,22 +109,26 @@ jQuery(document).ready(function() {
 		groupId:		<?php echo $group_id ?>,
 		divEditDirectory:	jQuery('#editdocgroup'),
 		buttonEditDirectory:	jQuery('#docman-editdirectory'),
-		docManURL:		'<?php util_make_uri('/docman') ?>',
+		docManURL:		'<?php echo util_make_uri('/docman') ?>',
 		lockIntervalDelay:	60000, //in microsecond and if you change this value, please update the check value 600
 		divLeft:		jQuery('#leftdiv'),
 		divRight:		jQuery('#rightdiv'),
 		divEditFile:		jQuery('#editFile'),
 		divEditTitle:		'<?php echo _("Edit document dialog box") ?>',
 		enableResize:		true,
-		page:			'trashfile'
+		page:			'trashfile',
+		docgroupId:		<?php echo $dirid ?>,
+		lockIntervalDelay:	60000
 	});
 });
-//]]></script>
+//]]>
 <?php
+echo html_ac(html_ap() - 1);
+
 if ($DocGroupName) {
 	$content = _('Document Folder')._(': ').html_e('i', array(), $DocGroupName, false).'&nbsp;';
 	if ($DocGroupName != '.trash') {
-		$content .= util_make_link('#', $HTML->getConfigurePic('', _('Edit')), array('id' => 'docman-editdirectory', 'title' => _('Edit this folder'), 'onclick' => 'javascript:controllerListTrash.toggleEditDirectoryView({lockIntervalDelay: 60000, doc_group:'.$ndg->getID().', groupId:'.$ndg->Group->getID().', docManURL:\''.util_make_uri('/docman').'\'})' ), true);
+		$content .= util_make_link('#', $HTML->getConfigurePic('', _('Edit')), array('id' => 'docman-editdirectory', 'title' => _('Edit this folder'), 'onclick' => 'javascript:controllerListTrash.toggleEditDirectoryView()' ), true);
 		$content .= util_make_link($redirecturl.'&action=deldir', html_image('docman/delete-directory.png', 22, 22, array('alt' => _('Delete folder'))), array('id' => 'docman-deletedirectory', 'title' => _('Delete permanently this folder and his content.')));
 	}
 	echo html_e('h3', array('class' => 'docman_h3'), $content, false);

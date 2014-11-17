@@ -31,7 +31,7 @@ global $dirid; //id of doc_group
 global $group_id; // id of group
 global $childgroup_id; // plugin projects hierarchy handler
 
-$urlredirect = '/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid;
+$urlredirect = '/docman/?group_id='.$group_id.'&dirid='.$dirid;
 
 // plugin projects-hierarchy handler
 if ($childgroup_id) {
@@ -46,7 +46,7 @@ if (!forge_check_perm('docman', $g->getID(), 'approve')) {
 
 $groupname = getStringFromRequest('groupname');
 $parent_dirid = getIntFromRequest('parent_dirid');
-$dg = new DocumentGroup($g, $dirid);
+$dg = documentgroup_get_object($dirid);
 if ($dg->isError()) {
 	$error_msg = $dg->getErrorMessage();
 	session_redirect($urlredirect);

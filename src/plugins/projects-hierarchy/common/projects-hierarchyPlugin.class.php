@@ -45,22 +45,22 @@ class projects_hierarchyPlugin extends Plugin {
 		global $HTML;
 		$returned = false;
 		switch($hookname) {
-			case "display_hierarchy": {
+			case 'display_hierarchy': {
 				if ($this->displayHierarchy()) {
 					$returned = true;
 				}
 				break;
 			}
-			case "hierarchy_views": {
+			case 'hierarchy_views': {
 				global $gfplugins;
 				require_once $gfplugins.$this->name.'/include/hierarchy_utils.php';
 				$group_id = $params[0];
 				$project = group_get_object($group_id);
 				if ($project->usesPlugin($this->name)) {
 					switch ($params[1]) {
-						case "admin":
-						case "docman":
-						case "home": {
+						case 'admin':
+						case 'docman':
+						case 'home': {
 							include($gfplugins.$this->name.'/view/'.$params[1].'_project_link.php');
 							$returned = true;
 							break;
@@ -72,30 +72,28 @@ class projects_hierarchyPlugin extends Plugin {
 				}
 				break;
 			}
-			case "group_delete": {
+			case 'group_delete': {
 				$this->remove($params['group_id']);
 				$returned = true;
 				break;
 			}
-			case "site_admin_option_hook": {
+			case 'site_admin_option_hook': {
 				// Use this to provide a link to the site wide administrative pages for your plugin
-				echo '<li>'.$this->getAdminOptionLink().'</li>';
+				echo html_e('li', array(), $this->getAdminOptionLink());
 				$returned = true;
 				break;
 			}
-			case "project_admin_plugins": {
+			case 'project_admin_plugins': {
 				// this displays the link in the project admin options page to it's administration
 				$group_id = $params['group_id'];
 				$group = group_get_object($group_id);
 				if ($group->usesPlugin($this->name)) {
-					echo '<p>';
-					echo util_make_link('/plugins/'.$this->name.'/?group_id='.$group_id.'&type=admin&pluginname='.$this->name, _('Hierarchy Admin'), array('title'=>_('Configure the projets-hierarchy plugin (docman, tree, delegate, globalconf features)')));
-					echo '</p>';
+					echo html_e('p', array(), util_make_link('/plugins/'.$this->name.'/?group_id='.$group_id.'&type=admin&pluginname='.$this->name, _('Hierarchy Admin'), array('title'=>_('Configure the projects-hierarchy plugin (docman, tree, delegate, globalconf features)'))));
 				}
 				$returned = true;
 				break;
 			}
-			case "display_hierarchy_submenu": {
+			case 'display_hierarchy_submenu': {
 				$globalConf = $this->getGlobalconf();
 				if ($globalConf['tree']) {
 					// Use to display a submenu in software map page if at least one project has a valid relationship
@@ -125,7 +123,7 @@ class projects_hierarchyPlugin extends Plugin {
 				$returned = true;
 				break;
 			}
-			case "docmansearch_has_hierarchy": {
+			case 'docmansearch_has_hierarchy': {
 				if ($params['includesubprojects']) {
 					$group_id = $params['group_id'];
 					$group = group_get_object($group_id);
@@ -139,7 +137,7 @@ class projects_hierarchyPlugin extends Plugin {
 				$returned = true;
 				break;
 			}
-			case "clone_project_from_template": {
+			case 'clone_project_from_template': {
 				$project = $params['project'];
 				if ($project->usesPlugin($this->name)) {
 					$this->add($project->getID());
@@ -221,22 +219,22 @@ class projects_hierarchyPlugin extends Plugin {
 	function getFamily($group_id, $order, $deep = false, $status = 'any') {
 		$localFamily = array();
 		switch ($status) {
-			case "validated": {
+			case 'validated': {
 				$statusCondition = 't';
 
 				break;
 			}
-			case "pending": {
+			case 'pending': {
 				$statusCondition = 'f';
 				break;
 			}
-			case "any":
+			case 'any':
 			default: {
 				break;
 			}
 		}
 		switch ($order) {
-			case "parent": {
+			case 'parent': {
 				$qpa = db_construct_qpa(false, 'SELECT project_id as id FROM plugin_projects_hierarchy_relationship
 							WHERE sub_project_id = $1', array($group_id));
 				if (isset($statusCondition))
@@ -245,7 +243,7 @@ class projects_hierarchyPlugin extends Plugin {
 				$res = db_query_qpa($qpa);
 				break;
 			}
-			case "child": {
+			case 'child': {
 				$qpa = db_construct_qpa(false, 'SELECT sub_project_id as id FROM plugin_projects_hierarchy_relationship
 							WHERE project_id = $1', array($group_id));
 				if (isset($statusCondition))
@@ -254,7 +252,7 @@ class projects_hierarchyPlugin extends Plugin {
 				$res = db_query_qpa($qpa);
 				break;
 			}
-			case "root": {
+			case 'root': {
 				$qpa = db_construct_qpa(false, 'SELECT DISTINCT project_id as id FROM plugin_projects_hierarchy_relationship',
 							array());
 				$res = db_query_qpa($qpa);
@@ -517,12 +515,12 @@ class projects_hierarchyPlugin extends Plugin {
 					$qpa = db_construct_qpa(false, 'UPDATE plugin_projects_hierarchy_relationship SET status = $1',
 						array($status));
 					switch ($relation) {
-						case "parent": {
+						case 'parent': {
 							$qpa = db_construct_qpa($qpa, ' WHERE project_id = $1 AND sub_project_id = $2',
 										array($sub_project_id, $project_id));
 							break;
 						}
-						case "child": {
+						case 'child': {
 							$qpa = db_construct_qpa($qpa, ' WHERE project_id = $1 AND sub_project_id = $2',
 										array($project_id, $sub_project_id));
 							break;
@@ -541,12 +539,12 @@ class projects_hierarchyPlugin extends Plugin {
 				} else {
 					$qpa = db_construct_qpa(false, 'DELETE FROM plugin_projects_hierarchy_relationship');
 					switch ($relation) {
-						case "parent": {
+						case 'parent': {
 							$qpa = db_construct_qpa($qpa, ' WHERE project_id = $1 AND sub_project_id = $2',
 										array($sub_project_id, $project_id));
 							break;
 						}
-						case "child": {
+						case 'child': {
 							$qpa = db_construct_qpa($qpa, ' WHERE project_id = $1 AND sub_project_id = $2',
 										array($project_id, $sub_project_id));
 							break;

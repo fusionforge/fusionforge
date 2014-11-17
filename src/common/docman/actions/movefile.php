@@ -26,7 +26,6 @@
 /* global variables used */
 global $dirid; //id of doc_group
 global $group_id; // id of group
-global $LUSER; // User object
 
 $baseurl = '/docman/?group_id='.$group_id;
 $redirecturl = $baseurl.'&view=listfile&dirid='.$dirid;
@@ -44,21 +43,21 @@ if ($childgroup_id) {
 
 if (!forge_check_perm('docman', $g->getID(), 'approve')) {
 	$warning_msg = _('Document Manager Action Denied.');
-	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
+	session_redirect('/docman/?group_id='.$group_id.'&dirid='.$dirid);
 }
 
 $arr_fileid = explode(',', getStringFromRequest('fileid'));
 $moveto_dirid = getIntFromRequest('moveto_dirid');
 foreach ($arr_fileid as $fileid) {
 	if (!empty($fileid)) {
-		$d = new Document($g, $fileid);
+		$d = document_get_object($fileid);
 		if ($d->isError() || !$d->update($d->getFilename(), $d->getFileType(), NULL, $moveto_dirid, $d->getName(), $d->getDescription(), $d->getStateID())) {
 			$error_msg = $d->getErrorMessage();
-			session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
+			session_redirect('/docman/?group_id='.$group_id.'&dirid='.$dirid);
 		}
 	}
 }
 
 $count = count($arr_fileid);
 $feedback = sprintf(ngettext('%s document moved.', '%s documents moved.', $count), $count);
-session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
+session_redirect('/docman/?group_id='.$group_id.'&dirid='.$dirid);

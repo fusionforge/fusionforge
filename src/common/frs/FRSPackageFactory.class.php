@@ -77,7 +77,7 @@ class FRSPackageFactory extends Error {
 	 * @param	bool	$status	limite the search to active packages. Default is false.
 	 * @return	array	The array of FRS objects.
 	 */
-	function getFRSs($status = false) {
+	function &getFRSs($status = false) {
 		if (isset($this->FRSs) && is_array($this->FRSs)) {
 			return $this->FRSs;
 		}
@@ -87,7 +87,7 @@ class FRSPackageFactory extends Error {
 
 		foreach ($ids as $id) {
 			if (forge_check_perm('frs', $id, 'read')) {
-				$this->FRSs[] = new FRSPackage($this->Group, $id);
+				$this->FRSs[] =& frspackage_get_object($id);
 			}
 		}
 		return $this->FRSs;
@@ -109,15 +109,24 @@ class FRSPackageFactory extends Error {
 
 		$qpa = db_construct_qpa($qpa, 'ORDER BY package_id ASC');
 		$res = db_query_qpa($qpa);
-		if (!$res) {
-			return $result;
-		}
-		while ($arr = db_fetch_array($res)) {
-			$result[] = $arr['package_id'];
+		if ($res) {
+			while ($arr = db_fetch_array($res)) {
+				$result[] = $arr['package_id'];
+			}
 		}
 		return $result;
 	}
 
+	/**
+	 * getPermissionOfASpecificUser - get the max level of permission of the current user
+	 *
+	 * @return	integer	the value of permission
+	 *			0 = none
+	 *			1 = read
+	 *			2 = file
+	 *			3 = release
+	 *			4 = admin
+	 */
 	function getPermissionOfASpecificUser() {
 		$admin = false;
 		$release = false;
@@ -150,7 +159,7 @@ class FRSPackageFactory extends Error {
 		} elseif ($read) {
 			return 1; // read
 		}
-		return null;
+		return 0;
 	}
 
 }

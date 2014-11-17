@@ -92,8 +92,9 @@ class hudson_Widget_ProjectJobsOverview extends HudsonOverviewWidget {
 	function getContent() {
 		global $HTML;
 		$jobs = $this->getJobsByGroup($this->group_id);
+		$html = '';
 		if (sizeof($jobs) > 0) {
-			$html = $HTML->listTableTop();
+			$html .= $HTML->listTableTop();
 			foreach ($jobs as $job_id => $job) {
 				try {
 					$cells = array();
@@ -105,10 +106,11 @@ class hudson_Widget_ProjectJobsOverview extends HudsonOverviewWidget {
 				}
 			}
 			$html .= $HTML->listTableBottom();
-			return $html;
 		} else {
-			return $HTML->information(_('No job available.'));
+			$html .= $HTML->information(_('No job available.'));
 		}
+		$html .= html_e('div', array('class' => 'underline-link'), util_make_link('/plugins/hudson/?group_id='.$this->group_id, _('Browse Hudson/Jenkins plugin')));
+		return $html;
 	}
 
 	function isAvailable() {

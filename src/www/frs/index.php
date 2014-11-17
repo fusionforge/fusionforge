@@ -31,6 +31,7 @@ require_once $gfcommon.'frs/FRSFile.class.php';
 require_once $gfcommon.'frs/FRSPackage.class.php';
 require_once $gfcommon.'frs/FRSPackageFactory.class.php';
 require_once $gfcommon.'frs/FRSRelease.class.php';
+require_once $gfcommon.'frs/FRSReleaseFactory.class.php';
 require_once $gfcommon.'reporting/report_utils.php';
 require_once $gfcommon.'reporting/ReportDownloads.class.php';
 require_once $gfcommon.'docman/DocumentManager.class.php';

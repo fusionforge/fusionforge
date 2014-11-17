@@ -29,34 +29,28 @@
  * Assumes $user object for displayed user is present
  */
 
-require_once $gfwww.'include/user_profile.php';
+require_once $gfcommon.'include/user_profile.php';
 require_once $gfwww.'include/vote_function.php';
 
 $title = _('User Profile');
 $HTML->header(array('title'=>$title));
 
 echo $HTML->boxTop(_('Personal Information'), _('Personal Information'));
+echo html_ao('div', array('about' => '', 'typeof' => 'sioc:UserAccount'));
+echo user_personal_information($user);
 
-?>
-
-<div about="" typeof="sioc:UserAccount">
-
-	<?php
-
-	echo user_personal_information($user);
-
-	if (forge_get_config('use_ratings')) {
-		echo $HTML->boxMiddle(_('Peer Rating'), _('Peer Rating'));
-        echo '<table class="my-layout-table" id="user-profile-rating">';
-		if ($user->usesRatings()) {
-			vote_show_user_rating($user_id);
-		} else {
-            echo '<tr><td colspan="2">';
-			echo _('User chose not to participate in peer rating');
-            echo '</td></tr>';
-		}
-        echo '</table><!-- id="user-profile-rating" -->';
+if (forge_get_config('use_ratings')) {
+	echo $HTML->boxMiddle(_('Peer Rating'), _('Peer Rating'));
+	echo '<table class="my-layout-table" id="user-profile-rating">';
+	if ($user->usesRatings()) {
+		vote_show_user_rating($user_id);
+	} else {
+		echo '<tr><td colspan="2">';
+		echo _('User chose not to participate in peer rating');
+		echo '</td></tr>';
 	}
+	echo '</table><!-- id="user-profile-rating" -->';
+}
 
 if (forge_get_config('use_diary')) {
 	echo $HTML->boxMiddle(_('Diary and Notes'), _('Diary and Notes'));
@@ -146,7 +140,7 @@ if (count ($projects) < 1) {
 } // end if groups
 echo "</div>\n"; // prefixes
 
-echo "</div>\n"; // end of about=""
+echo html_ac(html_ap() -1);
 
 $me = session_get_user();
 if (forge_get_config('use_ratings')) {

@@ -29,8 +29,11 @@
 global $g; //group object
 global $dirid; //id of doc_group
 global $group_id; // id of group
+global $warning_msg;
+global $feedback;
+global $error_msg;
 
-$redirecturl = '/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid;
+$redirecturl = '/docman/?group_id='.$group_id.'&dirid='.$dirid;
 if (!forge_check_perm('docman', $group_id, 'approve')) {
 	$warning_msg = _('Document Manager Action Denied.');
 	session_redirect($redirecturl);
@@ -50,8 +53,8 @@ if ($childgroup_id) {
 $arr_fileid = explode(',', getStringFromRequest('fileid'));
 foreach ($arr_fileid as $fileid) {
 	if (!empty($fileid)) {
-		$d = new Document($g, $fileid);
-		if ($d->isError() || !$d->trash()) {
+		$d = document_get_object($fileid);
+		if (!$d || $d->isError() || !$d->trash()) {
 			$error_msg = $d->getErrorMessage();
 			session_redirect($redirecturl);
 		}

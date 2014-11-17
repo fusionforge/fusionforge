@@ -28,13 +28,13 @@
 /**
 * Display user's profile / personal info either in compact or extensive way
 *
-* @param object $user
-* @param bool $compact
-* @param string|bool	$title
-* @return string HTML
+* @param	object		$user
+* @param	bool		$compact
+* @param	string|bool	$title
+* @return	string		HTML
 */
 function user_personal_information($user, $compact = false, $title = false) {
-
+	global $HTML;
 	$user_id = $user->getID();
 
 	$user_logo = false;
@@ -43,16 +43,14 @@ function user_personal_information($user, $compact = false, $title = false) {
 	if ($params['content']) {
 		$user_logo = $params['content'];
 	}
-
+	$html = $HTML->listTableTop();
 	if($compact) {
-		$html = '<table>';
+
 		if($title) {
 			$html .= '<tr>
 						<td colspan="2">'. $title . '</td>
 					  </tr>';
 		}
-	} else {
-		$html = '<table class="fullwidth">';
 	}
 
 	$html .= '<tr>';
@@ -101,49 +99,46 @@ function user_personal_information($user, $compact = false, $title = false) {
 				</div>
 				</td>
 			</tr>';
-	if (!$compact) {
-		if(!isset($GLOBALS['sys_show_contact_info']) || $GLOBALS['sys_show_contact_info']) {
+	if (!$compact && forge_get_config('user_display_contact_info')) {
+		$user_mail=$user->getEmail();
+		$user_mailsha1=$user->getSha1Email();
 
-			$user_mail=$user->getEmail();
-			$user_mailsha1=$user->getSha1Email();
+		$html .= '<tr>
+			<td>'. _('Email Address') . _(': ') .'</td>
+			<td><strong>'.
 
+		// Removed for privacy reasons
+		//print '<span property="sioc:email" content="'. $user_mail .'">';
+				'<span property="sioc:email_sha1" content="'. $user_mailsha1 .'">' .
+		util_make_link ('/sendmessage.php?touser='.$user_id, str_replace('@',' @nospam@ ',$user_mail)) .
+				'</span>
+				</strong>
+			</td>
+		</tr>';
+
+		if ($user->getAddress() || $user->getAddress2()) {
 			$html .= '<tr>
-				<td>'. _('Email Address') . _(': ') .'</td>
-				<td><strong>'.
+			<td><'. _('Address')._(':') .'</td>
+			<td>'. $user->getAddress() .'<br/>'. $user->getAddress2() .'</td>
+		</tr>';
+		}
 
-			// Removed for privacy reasons
-			//print '<span property="sioc:email" content="'. $user_mail .'">';
-					'<span property="sioc:email_sha1" content="'. $user_mailsha1 .'">' .
-			util_make_link ('/sendmessage.php?touser='.$user_id, str_replace('@',' @nospam@ ',$user_mail)) .
-					'</span>
-					</strong>
-				</td>
-			</tr>';
+		if ($user->getPhone()) {
+			$html .= '<tr>
+			<td>' . _('Phone')._(':') . '</td>
+			<td>' .
+			//print '<div property="foaf:phone" content="'.$user->getPhone().'">';
+			$user->getPhone()
+			//echo '</div>';
+			.'</td>
+		</tr>';
+		}
 
-			if ($user->getAddress() || $user->getAddress2()) {
-				$html .= '<tr>
-				<td><'. _('Address')._(':') .'</td>
-				<td>'. $user->getAddress() .'<br/>'. $user->getAddress2() .'</td>
-			</tr>';
-			}
-
-			if ($user->getPhone()) {
-				$html .= '<tr>
-				<td>' . _('Phone')._(':') . '</td>
-				<td>' .
-				//print '<div property="foaf:phone" content="'.$user->getPhone().'">';
-				$user->getPhone()
-				//echo '</div>';
-				.'</td>
-			</tr>';
-			}
-
-			if ($user->getFax()) {
-				$html .= '<tr>
-				<td>'. _('Fax')._(':') .'</td>
-				<td>'. $user->getFax() .'</td>
-			</tr>';
-			}
+		if ($user->getFax()) {
+			$html .= '<tr>
+			<td>'. _('Fax')._(':') .'</td>
+			<td>'. $user->getFax() .'</td>
+		</tr>';
 		}
 	}
 	$html .= '
@@ -156,13 +151,13 @@ function user_personal_information($user, $compact = false, $title = false) {
 		$user_uri = util_make_url('/users/'. $user->getUnixName() . '/');
 		$html .= '<tr>
 					<td><small>'. _('URI:') .'</small></td>
-					<td><small><a href="'. $user_uri .'">'. $user_uri .'</a></small></td>
+					<td><small>'.util_make_link_u($user->getUnixName(), $user->getID(), util_make_url_u($user->getUnixName(), $user->getID())).'</small></td>
 				</tr>';
 	}
 	$html .= '</table>
 	</td>
-	</tr>
-	</table>';
+	</tr>';
+	$html .= $HTML->listTableBottom();
 
 	return $html;
 }

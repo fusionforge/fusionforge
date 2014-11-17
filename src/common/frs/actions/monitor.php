@@ -47,7 +47,7 @@ if (!forge_check_perm('frs', $package_id, 'read')) {
 $redirect_url = getStringFromRequest('redirect_url', '/my/');
 
 if ($package_id) {
-	$frsp = new FRSPackage($g, $package_id);
+	$frsp = frspackage_get_object($package_id);
 	if (!$frsp || !is_object($frsp)) {
 		$error_msg = _('Error Getting FRSPackage');
 		if ($ajax) {
@@ -82,6 +82,15 @@ if ($package_id) {
 			} else {
 				session_redirect($redirect_url);
 			}
+		} else {
+			$error_msg = $frsp->getErrorMessage();
+			if ($ajax) {
+				$result['html'] = $HTML->error_msg($error_msg);
+				echo json_encode($result);
+				exit;
+			} else {
+				session_redirect($redirect_url);
+			}
 		}
 	} else {
 		if ($frsp->stopMonitor()) {
@@ -91,6 +100,15 @@ if ($package_id) {
 				$result['action'] = 'javascript:controllerFRS.doAction({action:\''.$url.'\', id:\'pkgid'.$package_id.'\'})';
 				$result['property'] = 'onclick';
 				$result['img'] = $HTML->getStartMonitoringPic($frsp->getName().' - '._('Start monitoring this package'));
+				echo json_encode($result);
+				exit;
+			} else {
+				session_redirect($redirect_url);
+			}
+		} else {
+			$error_msg = $frsp->getErrorMessage();
+			if ($ajax) {
+				$result['html'] = $HTML->error_msg($error_msg);
 				echo json_encode($result);
 				exit;
 			} else {

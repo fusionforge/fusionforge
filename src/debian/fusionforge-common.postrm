@@ -21,12 +21,13 @@ set -e
 
 case "$1" in
     purge)
-	ucfq fusionforge-web --with-colons \
+	ucfq fusionforge-common --with-colons \
 	    | while IFS=: read i ignored; do
 	    rm -f $i $i.ucf-*
 	    ucf --purge $i
-	    ucfr --purge fusionforge-web $i
+	    ucfr --purge fusionforge-common $i
 	done
+	userdel fusionforge
 	;;
 
     remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)

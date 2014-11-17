@@ -26,14 +26,13 @@
 /* global variables used */
 global $dirid; //id of doc_group
 global $group_id; // id of group
-global $LUSER; // User object
 global $HTML;
 
 $sysdebug_enable = false;
 
 if (!forge_check_perm('docman', $group_id, 'approve')) {
 	$warning_msg = _('Document Manager Action Denied.');
-	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
+	session_redirect('/docman/?group_id='.$group_id.'&dirid='.$dirid);
 }
 
 $itemid = getIntFromRequest('itemid');
@@ -56,13 +55,13 @@ switch ($type) {
 	}
 	default: {
 		$error_msg = _('Lock failed')._(': ')._('Missing Type');
-		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
+		session_redirect('/docman/?group_id='.$group_id.'&dirid='.$dirid);
 	}
 }
 
 if ($objectType->isError()) {
 	$error_msg  = $objectType->getErrorMessage();
-	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
+	session_redirect('/docman/?group_id='.$group_id.'&dirid='.$dirid);
 }
 
 if ($lock === 0) {
@@ -70,12 +69,12 @@ if ($lock === 0) {
 	echo $objectType->setLock($lock);
 } elseif ($lock === 1) {
 	//set the lock
-	echo $objectType->setLock($lock, $LUSER->getID(), time());
+	echo $objectType->setLock($lock, user_getid(), time());
 } elseif ($lock === 2) {
 	//get the current status of the lock
 	if (getIntFromRequest('json')) {
 		$result = array();
-		if ($objectType->getLocked()) {
+		if ($objectType->getLocked() && $objectType->getLockedBy() != user_getid()) {
 			$result['html'] = $HTML->warning_msg(_('Action currently locked by another user.'));
 		}
 		echo json_encode($result);

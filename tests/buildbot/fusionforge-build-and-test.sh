@@ -45,8 +45,8 @@ esac
 INSTALL_METHOD=$2
 if [ -z "$INSTALL_METHOD" ]; then INSTALL_METHOD='src'; fi
 
-destroy_vm_if_not_kept -t $VM $HOST
-start_vm_if_not_kept -t $VM $HOST
+$(dirname $0)/destroy_vm $HOST
+$(dirname $0)/start_vm $HOST
 
 # LXC post-install...
 if [ $INSTALL_OS == "debian" ]; then
@@ -76,5 +76,5 @@ ssh root@$HOST "/usr/src/fusionforge/autoinstall/vnc-run-testsuite.sh /usr/src/f
 
 rsync -av root@$HOST:/var/log/ $WORKSPACE/reports/
 
-stop_vm_if_not_kept -t $VM $@
+$(dirname $0)/stop_vm $HOST
 exit $retcode

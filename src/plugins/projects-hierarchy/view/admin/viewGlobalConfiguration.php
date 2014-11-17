@@ -3,7 +3,7 @@
  * Projects Hierarchy plugin
  *
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2014 Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -27,29 +27,31 @@ global $projectsHierarchy;
 global $use_tooltips;
 
 $projectsHierarchyGlobalConf = $projectsHierarchy->getGlobalconf();
+if (!$projectsHierarchyGlobalConf) {
+	echo $HTML->error_msg(_('Cannot retrieve data from DB'));
+} else {
+	echo $HTML->boxTop($projectsHierarchy->text._(': ')._('Manage Global Forge Configuration'));
+	echo $HTML->openForm(array('method' => 'post', 'action' => '/plugins/'.$projectsHierarchy->name.'/?type=globaladmin&action=updateGlobalConf'));
+	echo $HTML->listTableTop();
 
-echo $HTML->boxTop(_('Manage configuration'));
-echo '<form method="post" action="?type=globaladmin&action=updateGlobalConf">';
-echo '<table>';
+	$cells = array();
+	$cells[][] = html_e('label', array('id' => 'projectsHierarchy-tree', 'title' => _('Enable visibily in hierarchy tree.')), _('Enable Tree'));
+	$inputAttrs = array('type' => 'checkbox', 'name' => 'tree', 'value' => 1);
+	if ($projectsHierarchyGlobalConf['tree'])
+		$inputAttrs['checked'] = 'checked';
+	$cells[][] = html_e('input', $inputAttrs);
+	echo $HTML->multiTableRow(array(), $cells);
 
-echo '<tr><td><label id="projectsHierarchy-tree" ';
-if ($use_tooltips)
-	echo 'title="'._('Enable Tree in projects tab.').'"';
-echo ' >'._('Enable Tree').'</label></td><td><input type="checkbox" name="tree" value="1"';
-if ($projectsHierarchyGlobalConf['tree'])
-	echo 'checked="checked" ';
+		$cells = array();
+	$cells[][] = html_e('label', array('id' => 'projectsHierarchy-docman', 'title' => _('Enable hierarchical view for browsing in document manager.')), _('Enable Docman'));
+	$inputAttrs = array('type' => 'checkbox', 'name' => 'docman', 'value' => 1);
+	if ($projectsHierarchyGlobalConf['docman'])
+		$inputAttrs['checked'] = 'checked';
+	$cells[][] = html_e('input', $inputAttrs);
+	echo $HTML->multiTableRow(array(), $cells);
 
-echo '/></td></tr>';
-
-echo '<tr><td><label id="projectsHierarchy-docman" ';
-if ($use_tooltips)
-	echo 'title="'._('Enable hierarchical view for browsing in document manager.').'"';
-echo ' >'._('Enable docman browsing').'</label></td><td><input type="checkbox" name="docman" value="1"';
-if ($projectsHierarchyGlobalConf['docman'])
-	echo 'checked="checked" ';
-
-echo '/></td></tr>';
-echo '</table>';
-echo '<input type="submit" value="'._('Update').'" />';
-echo '</form>';
-echo $HTML->boxBottom();
+	echo $HTML->listTableBottom();
+	echo html_e('input', array('type' => 'submit', 'value' => _('Update')));
+	echo $HTML->closeForm();
+	echo $HTML->boxBottom();
+}

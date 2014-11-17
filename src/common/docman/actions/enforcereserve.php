@@ -30,18 +30,18 @@ global $group_id; // id of group
 
 if (!forge_check_perm('docman', $group_id, 'admin')) {
 	$warning_msg = _('Document Manager Action Denied.');
-	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
+	session_redirect('/docman/?group_id='.$group_id.'&dirid='.$dirid);
 }
 
-$arr_fileid = explode(',',getStringFromRequest('fileid'));
+$arr_fileid = explode(',', getStringFromRequest('fileid'));
 $feedback = _('Document(s)').' ';
 foreach ($arr_fileid as $fileid) {
 	$d = new Document($g, $fileid);
 	$feedback .= $d->getFilename().' ';
 	if ($d->isError() || !$d->setReservedBy('0')) {
 		$error_msg = $d->getErrorMessage();
-		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
+		session_redirect('/docman/?group_id='.$group_id.'&dirid='.$dirid);
 	}
 }
 $feedback .= _('reservation enforced successfully.');
-session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
+session_redirect('/docman/?group_id='.$group_id.'&dirid='.$dirid);

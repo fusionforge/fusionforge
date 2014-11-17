@@ -51,7 +51,7 @@ titles and links.");
 				break;
 			}
 			case 'site_admin_option_hook': {
-				echo '<li>'.$this->getAdminOptionLink().'</li>';
+				echo html_e('li', array(), $this->getAdminOptionLink());
 				break;
 			}
 			case 'groupmenu': {
@@ -66,8 +66,8 @@ titles and links.");
 				$group_id = $params['group_id'];
 				$project = group_get_object($group_id);
 				if ($project->usesPlugin($this->name)) {
-					echo '<p>'.util_make_link('/plugins/'.$this->name.'/?type=projectadmin&group_id='.$group_id,
-					     _('Menu Tabs Manager Admin'), array('title' => _('Add/Remove/Activate/Desactivate tabs'))) . '</p>';
+					echo hmtl_e('p', array(), util_make_link('/plugins/'.$this->name.'/?type=projectadmin&group_id='.$group_id,
+					     _('Menu Tabs Manager Admin'), array('title' => _('Add/Remove/Activate/Desactivate tabs'))));
 				}
 				break;
 			}

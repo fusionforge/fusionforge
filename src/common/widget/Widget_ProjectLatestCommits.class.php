@@ -66,11 +66,11 @@ class Widget_ProjectLatestCommits extends Widget {
 		$pm = ProjectManager::instance();
 		$project = $pm->getProject($request->get('group_id'));
 		$revisions = array();
-		if ($project->usesPlugin('scmsvn') && forge_check_perm('scmsvn', $project->getID(), 'read')) {
+		if ($project->usesPlugin('scmsvn') && forge_check_perm('scm', $project->getID(), 'read')) {
 			$scmPlugin = plugin_get_object('scmsvn');
 			$revisions = $scmPlugin->getCommits($project, null, self::NB_COMMITS_TO_DISPLAY);
 		}
-		if ($project->usesPlugin('scmgit') && forge_check_perm('scmgit', $project->getID(), 'read')) {
+		if ($project->usesPlugin('scmgit') && forge_check_perm('scm', $project->getID(), 'read')) {
 			$scmPlugin = plugin_get_object('scmgit');
 			$revisions = $scmPlugin->getCommits($project, null, self::NB_COMMITS_TO_DISPLAY);
 		}
@@ -91,6 +91,7 @@ class Widget_ProjectLatestCommits extends Widget {
 		} else {
 			$html .= $HTML->information(_('No commit found'));
 		}
+		$html .= html_e('div', array('class' => 'underline-link'), util_make_link('/scm/?group_id='.$project->getID(), _('Browse Source Content Management')));
 		return $html;
 	}
 

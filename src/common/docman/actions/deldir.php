@@ -45,7 +45,7 @@ if (!forge_check_perm('docman', $g->getID(), 'approve')) {
 	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
 }
 
-$dg = new DocumentGroup($g, $dirid);
+$dg = documentgroup_get_object($dirid);
 
 if ($dg->isError() || !$dg->delete($dirid, $g->getID())) {
 	$error_msg = $dg->getErrorMessage();

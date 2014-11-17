@@ -99,6 +99,11 @@ subpackages.
 %doc rpm/README.fedora
 %post common
 %{_datadir}/%{name}/post-install.d/common/common.sh configure
+%preun common
+if [ $1 -eq 0 ] ; then
+    %{_datadir}/%{name}/post-install.d/common/common.sh remove
+    %{_datadir}/%{name}/post-install.d/common/common.sh purge
+fi
 
 
 %package db-local
@@ -117,6 +122,8 @@ database.
 %files db-local -f db-local.rpmfiles
 %post db-local
 %{_datadir}/%{name}/post-install.d/db/db.sh configure
+%preun db-local
+if [ $1 -eq 0 ] ; then %{_datadir}/%{name}/post-install.d/db/db.sh remove; fi
 
 
 %package db-remote
@@ -154,6 +161,7 @@ database to FusionForge users.
 %preun shell
 if [ $1 -eq 0 ] ; then
     %{_datadir}/%{name}/post-install.d/shell/shell.sh remove
+    %{_datadir}/%{name}/post-install.d/shell/shell.sh purge
 fi
 
 
@@ -172,6 +180,11 @@ FusionForge on an Apache web server.
 %files web -f web.rpmfiles
 %post web
 %{_datadir}/%{name}/post-install.d/web/web.sh configure
+%preun web
+if [ $1 -eq 0 ] ; then
+    %{_datadir}/%{name}/post-install.d/web/web.sh remove
+    %{_datadir}/%{name}/post-install.d/web/web.sh purge
+fi
 
 
 %package web-vhosts
@@ -249,5 +262,20 @@ This package controls the interaction between FusionForge and Mailman.
 
 
 %changelog
-* Fri Oct 24 2014 Sylvain Beucler <beuc@beuc.net> - @version@-1@snapshot@
-- Revamp packaging
+* Mon Nov 3 2014 Sylvain Beucler <beuc@beuc.net> - @version@-1@snapshot@
+- New upstream snapshot following the development branch
+
+* Mon Nov 3 2014 Sylvain Beucler <beuc@beuc.net> - 5.3.2-3
+- Remove augeas dependency from fusionforge-plugin-scmsvn which is not
+  needed in 5.3.2.
+- Configure apache_user/apache_group to work-around 'install-ng' limitation
+- Use more precise %%{version}-%%{release} dependencies
+- Reference /var/log/fusionforge in %%files common
+- Install /var/log/fusionforge/plugins/env.inc.php
+
+* Sat Nov 1 2014 Sylvain beucler <beuc@beuc.net> - 5.3.2-2
+- Remove fusionforge-lists -> fusionforge-mta dependency which is not
+  yet available in 5.3.2.
+
+* Thu Oct 30 2014 Sylvain Beucler <beuc@beuc.net> - 5.3.2-1
+- Initial import for current stable release

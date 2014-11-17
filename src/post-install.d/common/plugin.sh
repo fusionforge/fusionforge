@@ -81,8 +81,6 @@ case "$2" in
 	;;
 
     remove)
-	# TODO: httpd.conf.d ?
-
 	# Remove plugin symlink in source_path/www/plugins/
 	# TODO: dependencies issues on removal
 	#$source_path/bin/forge pluginDeactivate $1
@@ -94,7 +92,16 @@ case "$2" in
 	fi
 	;;
 
+    purge)
+	# note: can't be called from Debian's postrm - rely on ucfq(1)
+	cd $source_path/plugins/$1/etc/
+	for i in $(ls httpd.conf.d/*); do
+	    rm -f $config_path/$i
+	done
+	;;
+
     *)
 	echo "Usage: $0 plugin_name configure|remove"
 	exit 1
+	;;
 esac
