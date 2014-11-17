@@ -45,8 +45,8 @@ esac
 INSTALL_METHOD=$2
 if [ -z "$INSTALL_METHOD" ]; then INSTALL_METHOD='src'; fi
 
-./destroy_vm $HOST
-./start_vm $HOST
+$(dirname $0)/destroy_vm $HOST
+$(dirname $0)/start_vm $HOST
 
 # LXC post-install...
 if [ $INSTALL_OS == "debian" ]; then
