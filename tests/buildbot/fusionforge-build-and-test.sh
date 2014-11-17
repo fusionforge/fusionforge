@@ -76,5 +76,5 @@ ssh root@$HOST "/usr/src/fusionforge/autoinstall/vnc-run-testsuite.sh /usr/src/f
 
 rsync -av root@$HOST:/var/log/ $WORKSPACE/reports/
 
-stop_vm_if_not_kept -t $VM $@
+$(dirname $0)/stop_vm $HOST
 exit $retcode
