@@ -185,11 +185,7 @@ control over it to the project's administrator.");
 					' '. _('Enter your site password when prompted.'));
 				$htmlRepo = '';
 				foreach ($repo_list as $repo_name) {
-<<<<<<< HEAD
-					$htmlRepo .= html_e('tt', array(), 'git clone git+ssh://'.$d.'@' . $project->getSCMBox() . '/'. forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git').html_e('br');
-=======
-					$b .= html_e('tt', array(), 'git clone git+ssh://'.$d.'@' . $this->getBoxForProject($project) . '/'. forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git').html_e('br');
->>>>>>> master
+						$htmlRepo .= html_e('tt', array(), 'git clone git+ssh://'.$d.'@' . $this->getBoxForProject($project) . '/'. forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git').html_e('br');
 				}
 				$b .= html_e('p', array(), $htmlRepo);
 			}
