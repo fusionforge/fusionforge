@@ -171,5 +171,5 @@ rsync -av root@$HOST:/var/log/ $WORKSPACE/reports/
 cd $CHECKOUTPATH
 for i in *_source.changes ; do echo $i ; echo $(basename $i _source.changes)_*.build ; cat $i | sed -e 0,/^Checksums/d -e /^Checksums/,\$d | awk '{print $3}' ; done | xargs rm || true
 
-stop_vm_if_not_keeped -t $VM $@
+$(dirname $0)/stop_vm $HOST
 exit $retcode

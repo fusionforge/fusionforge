@@ -70,5 +70,6 @@ ssh root@$HOST "$FORGE_HOME/tests/func/vncxstartsuite.sh $FILTER"
 retcode=$?
 rsync -av root@$HOST:/var/log/ $WORKSPACE/reports/
 
-stop_vm_if_not_keeped -t $VM $@
+$(dirname $0)/stop_vm $HOST
+
 exit $retcode

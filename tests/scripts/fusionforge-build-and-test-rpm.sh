@@ -93,5 +93,6 @@ retcode=$?
 rsync -av root@$HOST:/var/log/ $WORKSPACE/reports/
 scp root@$HOST:/tmp/gforge-*.log $WORKSPACE/reports/
 
-stop_vm_if_not_keeped -t $VM $@
+$(dirname $0)/stop_vm $HOST
+
 exit $retcode
