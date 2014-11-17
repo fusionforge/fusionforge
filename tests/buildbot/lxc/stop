@@ -2,4 +2,4 @@
 echo "==== STOP $HOST ===="
 echo "VMENGINE=$VMENGINE VMTEMPLATE=$VMTEMPLATE CIDR=$CIDR IPGW=$IPGW"
 
-sudo /usr/local/sbin/lxc-wrapper stop $HOST
+sudo /usr/local/sbin/lxc-wrapper stop $(basename $HOST .local)
