@@ -35,7 +35,7 @@ if [ -e /etc/debian_version ]; then
 	mediawiki \
 	python-moinmoin libapache2-mod-wsgi python-psycopg2
 else
-    yum install -y make
+    yum install -y make tar
     backports_rpm
     yum install -y gettext php-cli php-pgsql php-process \
 	httpd mod_ssl postgresql-server nscd \
