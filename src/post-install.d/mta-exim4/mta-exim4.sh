@@ -46,6 +46,8 @@ fi
 
 case "$1" in
     configure)
+	$(dirname $0)/upgrade-conf.sh $2
+
 	users_host=$(forge_get_config users_host)
 	lists_host=$(forge_get_config lists_host)
 	pgsock='/var/run/postgresql/.s.PGSQL.5432'
