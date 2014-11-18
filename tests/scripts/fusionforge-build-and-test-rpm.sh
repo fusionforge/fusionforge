@@ -27,6 +27,8 @@ $(dirname $0)/start_vm $HOST
 
 setup_redhat_3rdparty_repo
 
+ssh root@$HOST "yum install -y rsync"
+
 # BUILD FUSIONFORGE REPO
 echo "Build FUSIONFORGE REPO in $BUILDRESULT"
 make -f Makefile.rh BUILDRESULT=$BUILDRESULT RPM_TMP=$RPM_TMP fusionforge dist
