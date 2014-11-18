@@ -25,9 +25,11 @@ PREVVER=${1:-0.0}
 # 5.3 -> 6.0
 if [ $(php -r "print version_compare('$PREVVER', '5.3.50');") -eq -1 ]; then
     rm -f $(forge_get_config data_path)/etc/postfix-transport*
-    sed -i /etc/postfix/main.cf \
-	-e 's/\(^### \(BEGIN\|END\)\) GFORGE BLOCK/\1 FUSIONFORGE BLOCK/' \
-	-e '/^### GFORGE ADDITION.*/d' \
-	-e 's/proxy:pgsql:pgsql_gforge_users/proxy:pgsql:pgsql_fusionforge_users/' \
-	-e "s,hash:$(forge_get_config data_path)/etc/postfix-transport,hash:/etc/postfix/fusionforge-lists-transport,"
+    if [ -e /etc/postfix/main.cf ]; then
+	sed -i /etc/postfix/main.cf \
+	    -e 's/\(^### \(BEGIN\|END\)\) GFORGE BLOCK/\1 FUSIONFORGE BLOCK/' \
+	    -e '/^### GFORGE ADDITION.*/d' \
+	    -e 's/proxy:pgsql:pgsql_gforge_users/proxy:pgsql:pgsql_fusionforge_users/' \
+	    -e "s,hash:$(forge_get_config data_path)/etc/postfix-transport,hash:/etc/postfix/fusionforge-lists-transport,"
+    fi
 fi
