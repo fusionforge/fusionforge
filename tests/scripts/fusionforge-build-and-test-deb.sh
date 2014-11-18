@@ -95,7 +95,7 @@ $(dirname $0)/start_vm $HOST
 
 setup_debian_3rdparty_repo
 
-ssh root@$HOST "apt-get update;apt-get install -y rsync default-jre-headless phpunit"
+ssh root@$HOST "apt-get update;apt-get install -y rsync default-jre-headless phpunit phpunit-selenium"
 
 # Transfer preseeding
 cat tests/preseed/* | sed s/@FORGE_ADMIN_PASSWORD@/$FORGE_ADMIN_PASSWORD/ | ssh root@$HOST "LANG=C debconf-set-selections"
