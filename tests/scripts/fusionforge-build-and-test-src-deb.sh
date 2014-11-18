@@ -29,7 +29,7 @@ $(dirname $0)/start_vm $HOST
 
 setup_debian_3rdparty_repo
 
-ssh root@$HOST "apt-get update;apt-get install -y rsync"
+ssh root@$HOST "apt-get update;apt-get install -y rsync default-jre-headless"
 
 echo "Sync code on root@$HOST:$FORGE_HOME"
 ssh root@$HOST "[ -d $FORGE_HOME ] || mkdir -p $FORGE_HOME"
