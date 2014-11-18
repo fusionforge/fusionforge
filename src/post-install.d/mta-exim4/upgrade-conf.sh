@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 # Upgrade Exim4 configuration
 #
 # Copyright (C) 2014  Inria (Sylvain Beucler)

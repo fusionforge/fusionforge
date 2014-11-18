@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 # Upgrade NSS+PostgreSQL configuration
 #
 # Copyright (C) 2014  Inria (Sylvain Beucler)
