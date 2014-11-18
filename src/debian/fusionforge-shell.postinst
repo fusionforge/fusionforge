@@ -20,6 +20,8 @@ set -e
 
 case "$1" in
     configure)
+	PREVVER=$2
+	[ -n "$PREVVER" ] && $(forge_get_config source_path)/post-install.d/shell/upgrade.sh $PREVVER
 	DESTDIR=$(mktemp -d)
         $(forge_get_config source_path)/post-install.d/shell/shell.sh configure $DESTDIR
 	for i in $(find $DESTDIR -type f); do

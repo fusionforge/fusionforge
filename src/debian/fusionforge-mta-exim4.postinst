@@ -20,6 +20,8 @@ set -e
 
 case "$1" in
     configure)
+	PREVVER=$2
+	[ -n "$PREVVER" ] && $(forge_get_config source_path)/post-install.d/mta-exim4/upgrade.sh $PREVVER
         $(forge_get_config source_path)/post-install.d/mta-exim4/mta-exim4.sh configure
     ;;
 
