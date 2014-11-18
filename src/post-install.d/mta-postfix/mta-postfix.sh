@@ -41,6 +41,8 @@ function postfix_append_config {
 
 case "$1" in
     configure)
+	$(dirname $0)/upgrade-conf.sh $2
+
 	# Init postfix configuration if missing
 	if [ ! -e /etc/postfix/main.cf ]; then
 	    cp /usr/share/postfix/main.cf.debian /etc/postfix/main.cf

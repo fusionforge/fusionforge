@@ -20,10 +20,9 @@ set -e
 
 case "$1" in
     configure)
-	PREVVER=$2
-	[ -n "$PREVVER" ] && $(forge_get_config source_path)/post-install.d/shell/upgrade.sh $PREVVER
+	PREVVER=${2:-999}  # empty = new install
 	DESTDIR=$(mktemp -d)
-        $(forge_get_config source_path)/post-install.d/shell/shell.sh configure $DESTDIR
+        $(forge_get_config source_path)/post-install.d/shell/shell.sh configure $PREVVER $DESTDIR
 	for i in $(find $DESTDIR -type f); do
 	    ucf $i ${i#$DESTDIR}
 	    ucfr -f fusionforge-shell ${i#$DESTDIR}

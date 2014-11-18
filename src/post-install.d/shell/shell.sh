@@ -31,7 +31,7 @@ db_user_nss=${db_user}_nss
 
 
 # Distros may want to install new conffiles using tools such as ucf(1)
-DESTDIR=$2
+DESTDIR=$3
 mkdir -m 755 -p $DESTDIR/etc/
 
 # Check/Modify /etc/libnss-pgsql.conf
@@ -173,6 +173,7 @@ remove_sshd()
 # Main
 case "$1" in
     configure)
+	$(dirname $0)/upgrade-conf.sh $2
 	configure_libnss_pgsql
 	configure_nsswitch
 	configure_nscd
