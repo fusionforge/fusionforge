@@ -20,7 +20,7 @@ set -e
 
 case "$1" in
     configure)
-	PREVVER=${2:-999}  # empty = new install
+        PREVVER=${2:-999.9}  # empty = new install
         $(forge_get_config source_path)/post-install.d/mta-exim4/mta-exim4.sh configure $PREVVER
     ;;
 
