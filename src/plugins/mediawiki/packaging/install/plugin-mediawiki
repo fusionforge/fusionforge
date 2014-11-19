@@ -5,5 +5,5 @@ plugins/mediawiki/db/*		   @PLUGINS_PATH@/mediawiki/db/
 plugins/mediawiki/www/*            @PLUGINS_PATH@/mediawiki/www/
 plugins/mediawiki/mediawiki-skin/*            @PLUGINS_PATH@/mediawiki/mediawiki-skin/
 plugins/mediawiki/etc/httpd.d/*    @SOURCE_PATH@/etc/httpd.d/
-plugins/mediawiki/etc/*.ini 	   @CONFIG_PATH@/config.ini.d/
+plugins/mediawiki/etc/*.ini 	   /etc/@PACKAGE@/config.ini.d/
 plugins/mediawiki/etc/plugins/mediawiki/* @CONFIG_PATH@/plugins/mediawiki/

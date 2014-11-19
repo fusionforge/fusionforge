@@ -4,8 +4,8 @@
 #
 
 MAJOR=2
-MINOR=42
-MICRO=2
+MINOR=44
+MICRO=0
 SELENIUMURL=http://selenium-release.storage.googleapis.com/$(MAJOR).$(MINOR)/selenium-server-standalone-$(MAJOR).$(MINOR).$(MICRO).jar
 
 UPSTREAM=$(MAJOR).$(MINOR).$(MICRO)+$(DIST)

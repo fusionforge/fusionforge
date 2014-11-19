@@ -154,7 +154,7 @@ if ( $num_packages < 1) {
 			echo '<div class="warning">' . _('No releases') . '</div>
 			';
 		} else {
-			if (class_exists('ZipArchive')) {
+			if (class_exists('ZipArchive') && is_file($frsPackage->getNewestReleaseZipPath())) {
 				// display link to latest-release-as-zip
 				print '<p><em>'._('Download latest release as ZIP:').' ';
 				print util_make_link ('/frs/download.php/latestzip/'.$frsPackage->getID().'/'.$frsPackage->getNewestReleaseZipName(),

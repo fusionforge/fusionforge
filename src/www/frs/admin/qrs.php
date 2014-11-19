@@ -209,7 +209,7 @@ frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 			$incoming = forge_get_config('groupdir_prefix')."/".$g->getUnixName()."/incoming" ;
 			echo '<p>';
 			printf(_('Alternatively, you can use a file you already uploaded (by SFTP or SCP) to the <a href="%2$s">project\'s incoming directory</a> (%1$s).'),
-				$incoming, "sftp://" . forge_get_config ('web_host') . $incoming . "/");
+				$incoming, "sftp://" . forge_get_config ('shell_host') . $incoming . "/");
 			echo ' ' . _('This direct <tt>sftp://</tt> link only works with some browsers, such as Konqueror.') . '<br />';
 			echo _('Choose an already uploaded file:').'<br />';
 			$manual_files_arr=frs_filterfiles(ls($incoming,true));

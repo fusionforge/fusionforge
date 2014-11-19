@@ -5,4 +5,4 @@ plugins/helloworld/bin/*                     @PLUGINS_PATH@/helloworld/bin/
 plugins/helloworld/www/*                     @PLUGINS_PATH@/helloworld/www/
 plugins/helloworld/cronjobs/*                @SOURCE_PATH@/cronjobs
 plugins/helloworld/etc/httpd.d/*             @SOURCE_PATH@/etc/httpd.d/
-plugins/helloworld/etc/helloworld.ini	     @CONFIG_PATH@/config.ini.d/
+plugins/helloworld/etc/helloworld.ini	     /etc/@PACKAGE@/config.ini.d/

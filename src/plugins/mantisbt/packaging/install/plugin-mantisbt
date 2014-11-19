@@ -5,4 +5,4 @@ plugins/mantisbt/db		@PLUGINS_PATH@/mantisbt/
 plugins/mantisbt/view		@PLUGINS_PATH@/mantisbt/
 plugins/mantisbt/www		@PLUGINS_PATH@/mantisbt/
 plugins/mantisbt/etc/plugins/mantisbt/*  @CONFIG_PATH@/plugins/mantisbt/
-plugins/mantisbt/etc/*.ini 	     @CONFIG_PATH@/config.ini.d/
+plugins/mantisbt/etc/*.ini 	     /etc/@PACKAGE@/config.ini.d/

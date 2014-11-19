@@ -1,4 +1,4 @@
 plugins/message/common/*	@PLUGINS_PATH@/message/common/
 plugins/message/www/*		@PLUGINS_PATH@/message/www/
 plugins/message/db/*		@PLUGINS_PATH@/message/db/
-plugins/message/etc/*.ini	@CONFIG_PATH@/config.ini.d/
+plugins/message/etc/*.ini	/etc/@PACKAGE@/config.ini.d/

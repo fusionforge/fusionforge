@@ -23,12 +23,13 @@ export FILTER="DEBDebian70TestsSRC.php"
 
 get_config $@
 prepare_workspace
-destroy_vm -t $VM $@
-start_vm_if_not_keeped -t $VM $@
+
+$(dirname $0)/destroy_vm $HOST
+$(dirname $0)/start_vm $HOST
 
 setup_debian_3rdparty_repo
 
-ssh root@$HOST "apt-get update"
+ssh root@$HOST "apt-get update;apt-get install -y rsync default-jre-headless phpunit phpunit-selenium iceweasel"
 
 echo "Sync code on root@$HOST:$FORGE_HOME"
 ssh root@$HOST "[ -d $FORGE_HOME ] || mkdir -p $FORGE_HOME"
@@ -72,5 +73,6 @@ ssh root@$HOST "$FORGE_HOME/tests/func/vncxstartsuite.sh $FILTER"
 retcode=$?
 rsync -av root@$HOST:/var/log/ $WORKSPACE/reports/
 
-stop_vm_if_not_keeped -t $VM $@
+$(dirname $0)/stop_vm $HOST
+
 exit $retcode

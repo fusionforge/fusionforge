@@ -41,7 +41,7 @@ class hudsonPlugin extends Plugin {
 		$this->_addHook("project_admin_plugins"); // to show up in the admin page fro group
 		$this->_addHook('javascript',  false);
 		$this->_addHook('cssfile', 'cssFile', false);
-		$this->_addHook('project_is_deleted', 'projectIsDeleted', false);
+		$this->_addHook('group_delete', 'projectIsDeleted', false);
 		$this->_addHook('widget_instance', 'myPageBox', false);
 		$this->_addHook('widgets', 'widgets', false);
 		$this->_addHook('get_available_reference_natures', 'getAvailableReferenceNatures', false);
@@ -89,7 +89,7 @@ class hudsonPlugin extends Plugin {
 			use_stylesheet('/plugins/hudson/themes/default/css/style.css');
 		} elseif ($hookname == "cssfile") {
 			$this->cssFile($params);
-		} elseif ($hookname == "project_is_deleted") {
+		} elseif ($hookname == 'group_delete') {
 			$this->projectIsDeleted($params);
 		} elseif ($hookname == "widget_instance") {
 			$this->myPageBox($params);
@@ -141,6 +141,8 @@ class hudsonPlugin extends Plugin {
 	 * @param mixed $params ($param['group_id'] the ID of the deleted project)
 	 */
 	function projectIsDeleted($params) {
+		global $gfcommon;
+		require_once $gfcommon.'dao/CodendiDataAccess.class.php';
 		$group_id = $params['group_id'];
 		$job_dao = new PluginHudsonJobDao(CodendiDataAccess::instance());
 		$dar = $job_dao->deleteHudsonJobsByGroupID($group_id);
@@ -348,7 +350,7 @@ class hudsonPlugin extends Plugin {
 		$project =& $params['project'] ;
 
 		$settings = array('plugin_hudson_read');
-		
+
 		foreach ($settings as $s) {
 			db_query_params('DELETE FROM pfo_role_setting WHERE role_id=$1 AND section_name=$2 AND ref_id=$3',
 					array($role->getID(),

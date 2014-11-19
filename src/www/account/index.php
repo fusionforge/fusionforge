@@ -299,7 +299,7 @@ if (forge_get_config('use_shell')) {
 	echo $HTML->boxTop(_('Shell Account Information')."");
 	if ($u->getUnixStatus() == 'A') {
 		print '&nbsp;
-	<br />'._('Shell box').': <strong>'.$u->getUnixBox().'</strong>
+	<br />'._('Shell box').': <strong>'.forge_get_config('shell_host').'</strong>
 	<br />'._('SSH Shared Authorized Keys').': <strong>';
 		global $HTML;
 		$sshKeysArray = $u->getAuthorizedKeys();

@@ -1,8 +1,8 @@
-etc/config.ini-fhs                     @CONFIG_PATH@
-etc/config.ini.d/defaults.ini          @CONFIG_PATH@/config.ini.d/
-etc/config.ini.d/debug.ini             @CONFIG_PATH@/config.ini.d/
-etc/config.ini.d/zzzz-local.ini        @CONFIG_PATH@/config.ini.d/
-etc/custom                     	       @CONFIG_PATH@/
+etc/config.ini-fhs                     etc/@PACKAGE@
+etc/config.ini.d/defaults.ini          etc/@PACKAGE@/config.ini.d/
+etc/config.ini.d/debug.ini             etc/@PACKAGE@/config.ini.d/
+etc/config.ini.d/zzzz-local.ini        etc/@PACKAGE@/config.ini.d/
+etc/custom                     	       etc/@PACKAGE@/
 deb-specific/cvssh                     bin/
 #
 deb-specific/install-chroot.sh         @BINARY_PATH@/
@@ -28,7 +28,7 @@ locales/*                              usr/share/locale/
 #
 plugins/authbuiltin/common          @PLUGINS_PATH@/authbuiltin/
 plugins/authbuiltin/www             @PLUGINS_PATH@/authbuiltin/
-plugins/authbuiltin/etc/*.ini 	    @CONFIG_PATH@/config.ini.d/
+plugins/authbuiltin/etc/*.ini 	    etc/@PACKAGE@/config.ini.d/
 #
 utils/list-admins.php                  @BINARY_PATH@/
 utils/list-projects-using-plugin.php   @BINARY_PATH@/

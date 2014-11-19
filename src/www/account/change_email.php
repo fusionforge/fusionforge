@@ -58,7 +58,7 @@ if (getStringFromRequest('submit')) {
 			. "\n\n"
 		 	. _('Please visit the following URL to complete the email change:')
 			. "\n\n"
-			.  util_make_url('/account/change_email-complete.php?ch=_'.$confirm_hash)
+			.  util_make_url('/account/change_email-complete.php?ch='.$confirm_hash)
 			. "\n\n"
  			. sprintf(_('-- the %s staff'), forge_get_config('forge_name'));
 

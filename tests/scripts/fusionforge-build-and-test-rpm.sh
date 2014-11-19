@@ -21,10 +21,13 @@ case $HOST in
 esac	
 
 prepare_workspace
-destroy_vm -t $VM $HOST
-start_vm_if_not_keeped -t $VM $HOST
+
+$(dirname $0)/destroy_vm $HOST
+$(dirname $0)/start_vm $HOST
 
 setup_redhat_3rdparty_repo
+
+ssh root@$HOST "yum install -y rsync"
 
 # BUILD FUSIONFORGE REPO
 echo "Build FUSIONFORGE REPO in $BUILDRESULT"
@@ -95,5 +98,6 @@ retcode=$?
 rsync -av root@$HOST:/var/log/ $WORKSPACE/reports/
 scp root@$HOST:/tmp/gforge-*.log $WORKSPACE/reports/
 
-stop_vm_if_not_keeped -t $VM $@
+$(dirname $0)/stop_vm $HOST
+
 exit $retcode

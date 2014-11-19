@@ -1,1 +1,1 @@
-plugins/externalsearch/etc/*.ini @CONFIG_PATH@/config.ini.d/
+plugins/externalsearch/etc/*.ini /etc/@PACKAGE@/config.ini.d/
