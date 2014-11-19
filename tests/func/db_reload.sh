@@ -33,7 +33,7 @@ stop_database () {
 
     echo "Waiting for database to be down..."
     i=0
-    while [ $i -lt 50 ] && is_db_up ; do
+    while [ $i -lt 50 ] && ! is_db_down ; do
         echo "...not yet ($(date))..."
         i=$(( $i + 1 ))
         sleep 1
