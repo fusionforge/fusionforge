@@ -61,7 +61,7 @@ debian/rules debian/control
 pdebuild --configfile $COWBUILDERCONFIG --buildresult $BUILDRESULT
 
 cd $BUILDRESULT
-lintian -i $CHANGEFILE
+lintian -i $CHANGEFILE || true
 REPOPATH=$WORKSPACE/build/debian
 
 [ ! -d $REPOPATH ] || rm -r $REPOPATH
