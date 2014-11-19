@@ -45,6 +45,7 @@ if [ -e /etc/debian_version ]; then
 	    fusionforge-plugin-blocks locales-all
     fi
 else
+    yum install -y make tar
     backports_rpm
     if rpm -q fusionforge >/dev/null ; then
 	yum upgrade -y
