@@ -20,7 +20,8 @@ set -e
 
 case "$1" in
     configure)
-        $(forge_get_config source_path)/post-install.d/db/db.sh configure
+        PREVVER=${2:-999.9}  # empty = new install
+        $(forge_get_config source_path)/post-install.d/db/db.sh configure $PREVVER
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
