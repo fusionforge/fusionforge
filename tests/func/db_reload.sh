@@ -13,7 +13,7 @@ is_db_down () {
     pgdir=/var/lib/postgresql
     if [ -e /etc/redhat-release ]; then pgdir=/var/lib/pgsql; fi
     ! (echo "SELECT COUNT(*) FROM users;" | su - postgres -c "psql $database" > /dev/null 2>&1 \
-	|| find $pgdir -type f -name *.pid -size -10 | grep -q .)
+	|| find $pgdir -type f -name *.pid -size -10c | grep -q .)
 }
 
 stop_apache () {
@@ -33,7 +33,7 @@ stop_database () {
 
     echo "Waiting for database to be down..."
     i=0
-    while [ $i -lt 50 ] && is_db_up ; do
+    while [ $i -lt 50 ] && ! is_db_down ; do
         echo "...not yet ($(date))..."
         i=$(( $i + 1 ))
         sleep 1
@@ -189,7 +189,11 @@ start_database
 
 start_apache
 
+set -x
+
 if [ -x /usr/sbin/nscd ]; then
     echo "Flushing/restarting nscd"
     nscd -i passwd && nscd -i group
 fi
+
+echo "nscd flushed, going on with tests"
