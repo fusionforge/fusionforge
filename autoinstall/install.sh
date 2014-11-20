@@ -42,7 +42,10 @@ if [ -e /etc/debian_version ]; then
 	$APT install fusionforge-shell \
 	    fusionforge-plugin-scmgit fusionforge-plugin-scmsvn fusionforge-plugin-scmbzr \
 	    fusionforge-plugin-mediawiki fusionforge-plugin-moinmoin \
-	    fusionforge-plugin-blocks locales-all
+	    fusionforge-plugin-blocks
+	if [ $(cat /etc/lsb-release | sed -n 's/DISTRIB_ID=//p') != 'Ubuntu' ]; then
+	    apt-get install locales-all  # TODO: let's request a merge for this package
+	fi
     fi
 else
     yum install -y make tar
