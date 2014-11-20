@@ -189,7 +189,11 @@ start_database
 
 start_apache
 
+set -x
+
 if [ -x /usr/sbin/nscd ]; then
     echo "Flushing/restarting nscd"
     nscd -i passwd && nscd -i group
 fi
+
+echo "nscd flushed, going on with tests"
