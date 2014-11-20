@@ -19,6 +19,8 @@
 # with FusionForge; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
+set -e
+
 source_path=$(forge_get_config source_path)
 config_path=$(forge_get_config config_path)
 
@@ -80,7 +82,7 @@ case "$1" in
 		-e "s,@database_name@,$database_name," \
 		-e "s,@database_user@,$database_user," \
 		> $DESTDIR$config_path/config.ini.d/post-install-secrets.ini
-	    chmod 600 $config_path/config.ini.d/post-install-secrets.ini
+	    chmod 600 $DESTDIR$config_path/config.ini.d/post-install-secrets.ini
 	    sed -i -e '/^@secrets@/ { ' -e 'ecat' -e 'd }' \
 		$DESTDIR$config_path/config.ini.d/post-install-secrets.ini <<-EOF
 		session_key=$session_key
