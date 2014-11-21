@@ -35,7 +35,7 @@ if [ -e /etc/debian_version ]; then
 	mediawiki \
 	python-moinmoin libapache2-mod-wsgi python-psycopg2
     if [ $(cat /etc/lsb-release | sed -n 's/DISTRIB_ID=//p') != 'Ubuntu' ]; then
-	apt-get install locales-all  # TODO: let's request a merge for this package
+	apt-get install locales-all  # https://bugs.launchpad.net/ubuntu/+source/glibc/+bug/1394929
     fi
 else
     yum install -y make tar

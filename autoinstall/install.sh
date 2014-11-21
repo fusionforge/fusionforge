@@ -44,7 +44,7 @@ if [ -e /etc/debian_version ]; then
 	    fusionforge-plugin-mediawiki fusionforge-plugin-moinmoin \
 	    fusionforge-plugin-blocks
 	if [ $(cat /etc/lsb-release | sed -n 's/DISTRIB_ID=//p') != 'Ubuntu' ]; then
-	    apt-get install locales-all  # TODO: let's request a merge for this package
+	    apt-get install locales-all  # https://bugs.launchpad.net/ubuntu/+source/glibc/+bug/1394929
 	fi
     fi
 else
