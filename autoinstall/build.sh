@@ -102,9 +102,9 @@ function build_deb {
 
     # Finally, build the FusionForge packages
     f=$(mktemp)
-    cp -a src/debian/changelog $f
-    
     cd $(dirname $0)/../src/
+    cp -a debian/changelog $f
+
     version=$(dpkg-parsechangelog | sed -n 's/^Version: \([0-9.]\+\(\~rc[0-9]\)\?\).*/\1/p')+$(date +%Y%m%d%H%M)
     debian/rules debian/control  # re-gen debian/control
     dch --newversion $version-1 --distribution local --force-distribution "Autobuilt."
