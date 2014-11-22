@@ -165,7 +165,7 @@ class DocumentManager extends Error {
 		$subGroupIdArr = $dg->getSubgroup($docGroupId, $stateId);
 		if (sizeof($subGroupIdArr)) {
 			foreach ($subGroupIdArr as $subGroupIdValue) {
-				$localDg = new DocumentGroup($this->Group, $subGroupIdValue);
+				$localDg = documentgroup_get_object($subGroupIdValue);
 				$liclass = 'docman_li_treecontent';
 				if ($selecteddir == $localDg->getID()) {
 					$liclass = 'docman_li_treecontent_selected';
