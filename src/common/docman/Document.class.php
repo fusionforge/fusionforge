@@ -725,7 +725,7 @@ class Document extends Error {
 			case "text/x-c":
 			case "text/x-diff":
 			case "text/x-shellscript": {
-				$image = 'docman/file_type_plain.png';
+				$image = 'ic/file-txt.png';
 				break;
 			}
 			case "application/msword":

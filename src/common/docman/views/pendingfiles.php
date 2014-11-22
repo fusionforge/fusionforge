@@ -73,7 +73,7 @@ jQuery(document).ready(function() {
 					break;
 				}
 				default: {
-					$cells[][] = util_make_link('/docman/view.php/'.$g->getID().'/'.$d->getID().'/'.urlencode($d->getFileName()), html_image($d->getFileTypeImage(), '22', '22', array('alt'=>$d->getFileType())), array('title' => _('View this document')));
+					$cells[][] = util_make_link('/docman/view.php/'.$g->getID().'/'.$d->getID().'/'.urlencode($d->getFileName()), html_image($d->getFileTypeImage(), '20', '20', array('alt'=>$d->getFileType())), array('title' => _('View this document')));
 				}
 			}
 			$nextcell = '';

@@ -265,7 +265,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 				break;
 			}
 			default: {
-				$cells[][] =  util_make_link('/docman/view.php/'.$d->Group->getID().'/'.$d->getID().'/'.urlencode($d->getFileName()), html_image($d->getFileTypeImage(), '22', '22', array('alt' => $d->getFileType())), array('title' => _('View this document')));
+				$cells[][] =  util_make_link('/docman/view.php/'.$d->Group->getID().'/'.$d->getID().'/'.urlencode($d->getFileName()), html_image($d->getFileTypeImage(), '20', '20', array('alt' => $d->getFileType())), array('title' => _('View this document')));
 			}
 		}
 		$nextcell = '';
