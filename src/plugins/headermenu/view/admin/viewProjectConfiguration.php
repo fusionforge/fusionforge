@@ -73,7 +73,7 @@ if (sizeof($linksArray)) {
 			$cells[][] = html_image('docman/validate.png', 22, 22, array('alt'=>_('link is on'), 'title'=>_('link is on')));
 			$actionsLinks = util_make_link('/plugins/'.$headermenu->name.'?type=projectadmin&group_id='.$group_id.'&action=updateLinkStatus&linkid='.$link['id_headermenu'].'&linkstatus=0', html_image('docman/release-document.png', 22, 22, array('alt'=>_('Desactivate this link'))), array('title' => _('Desactivate this link')));
 		} else {
-			$cells[][] = html_image('docman/delete-directory.png', 22, 22, array('alt'=>_('link is off'), 'title'=>_('link is off')));
+			$cells[][] = $HTML->getRemovePic('', '', array('alt'=>_('link is off'), 'title'=>_('link is off')));
 			$actionsLinks = util_make_link('/plugins/'.$headermenu->name.'?type=projectadmin&group_id='.$group_id.'&action=updateLinkStatus&linkid='.$link['id_headermenu'].'&linkstatus=1', html_image('docman/reserve-document.png', 22, 22, array('alt'=>_('Activate this link'))), array('title' => _('Activate this link')));
 		}
 		$actionsLinks .= util_make_link('/plugins/'.$headermenu->name.'?type=projectadmin&group_id='.$group_id.'&view=updateLinkValue&linkid='.$link['id_headermenu'], html_image('docman/edit-file.png',22,22, array('alt'=>_('Edit this link'))), array('title' => _('Edit this link')));
