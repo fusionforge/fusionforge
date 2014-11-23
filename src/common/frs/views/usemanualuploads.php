@@ -30,7 +30,7 @@ global $HTML;
 $incoming = forge_get_config('groupdir_prefix').'/'.$g->getUnixName().'/incoming';
 $localcontent = sprintf(_('Alternatively, you can use a file you already uploaded (by SFTP or SCP) to the <a href="%2$s">project\'s incoming directory</a> (%1$s).'),
 			$incoming, 'sftp://'.forge_get_config('web_host').$incoming.'/');
-$localcontent .= ' ' . _('This direct <tt>sftp://</tt> link only works with some browsers, such as Konqueror.') .html_e('br');
+$localcontent .= ' ' . _('This direct <samp>sftp://</samp> link only works with some browsers, such as Konqueror.') .html_e('br');
 $localcontent .= _('Choose an already uploaded file:').html_e('br');
 $manual_files_arr = frs_filterfiles(ls($incoming, true));
 if (count($manual_files_arr)) {
