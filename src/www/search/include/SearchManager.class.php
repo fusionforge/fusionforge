@@ -75,7 +75,6 @@ class SearchManager {
 	function & getAvailableSearchEngines($format = SEARCH__OUTPUT_HTML) {
 		$availableSearchEngines = array();
 		if(isset($this->searchEngines[$format])) {
-			$searchEngines = $this->searchEngines[$format];
 			foreach($this->searchEngines[$format] AS $type => $searchEngine) {
 				if($searchEngine->isAvailable($this->parametersValues)) {
 					$availableSearchEngines[] = $searchEngine;
