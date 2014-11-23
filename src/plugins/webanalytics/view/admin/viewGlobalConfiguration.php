@@ -33,39 +33,39 @@ if (sizeof($linksArray)) {
 	$classth = array('','','','unsortable');
 	echo $HTML->listTableTop($tabletop, false, 'sortable_webanalytics_listlinks', 'sortable', $classth);
 	foreach ($linksArray as $link) {
-		echo '<tr>';
-		echo '<td>'.htmlentities($link['name']).'</td>';
-		echo '<td><code>'.$link['url'].'</code></td>';
+		$cells = array();
+		$cells[][] = htmlentities($link['name']);
+		$cells[][] = html_e('code', array(), $link['url']);
 		if ($link['is_enable']) {
-			echo '<td>'.html_image('docman/validate.png', 22, 22, array('alt'=>_('link is on'), 'title'=>_('link is on'))).'</td>';
-			echo '<td><a title="'._('Desactivate this link').'" href="index.php?type=globaladmin&action=updateLinkStatus&linkid='.$link['id_webanalytics'].'&linkstatus=0">'.html_image('docman/release-document.png', 22, 22, array('alt'=>_('Desactivate this link'))). '</a>';
+			$cells[][] = html_image('docman/validate.png', 22, 22, array('alt'=>_('link is on'), 'title'=>_('link is on')));
+			$nextcell = util_make_link('/plugins/'.$webanalytics->name.'/?type=globaladmin&action=updateLinkStatus&linkid='.$link['id_webanalytics'].'&linkstatus=0', html_image('docman/release-document.png', 22, 22, array('alt'=>_('Desactivate this link'))), array('title' =>_('Desactivate this link')));
 		} else {
-			echo '<td>'.html_image('docman/delete-directory.png', 22, 22, array('alt'=>_('link is off'), 'title'=>_('link is off'))).'</td>';
-			echo '<td><a title="'._('Activate this link').'" href="index.php?type=globaladmin&action=updateLinkStatus&linkid='.$link['id_webanalytics'].'&linkstatus=1">'.html_image('docman/reserve-document.png', 22, 22, array('alt'=>_('Activate this link'))). '</a>';
+			$cells[][] = html_image('docman/delete-directory.png', 22, 22, array('alt'=>_('link is off'), 'title'=>_('link is off')));
+			$nextcell = util_make_link('/plugins/'.$webanalytics->name.'/?type=globaladmin&action=updateLinkStatus&linkid='.$link['id_webanalytics'].'&linkstatus=1', html_image('docman/reserve-document.png', 22, 22, array('alt'=>_('Activate this link'))), array('title' => _('Activate this link')));
 		}
-		echo '<a title="'._('Edit this link').'" href="index.php?type=globaladmin&view=updateLinkValue&linkid='.$link['id_webanalytics'].'">'.html_image('docman/edit-file.png',22,22, array('alt'=>_('Edit this link'))). '</a>';
-		echo '<a title="'._('Delete this link').'" href="index.php?type=globaladmin&action=deleteLink&linkid='.$link['id_webanalytics'].'">'.html_image('docman/trash-empty.png',22,22, array('alt'=>_('Delete this link'))). '</a>';
-		echo '</td>';
-		echo '</tr>';
+		$nextcell .= util_make_link('/plugins/'.$webanalytics->name.'/?type=globaladmin&view=updateLinkValue&linkid='.$link['id_webanalytics'], html_image('docman/edit-file.png',22,22, array('alt'=>_('Edit this link'))), array('title' => _('Edit this link')));
+		$nextcell .= util_make_link('/plugins/'.$webanalytics->name.'/?type=globaladmin&action=deleteLink&linkid='.$link['id_webanalytics'], $HTML->getDeletePic('', '', array('alt' => _('Delete this link'), 'title' => _('Delete this link'))));
+		$cells[][] = $nextcell;
+		echo $HTML->multiTableRow(array(), $cells);
 	}
 	echo $HTML->listTableBottom();
 	echo $HTML->boxBottom();
-	echo '</br>';
+	echo html_e('br');
 }
 
-echo $HTML->openForm(array('method' => 'POST', 'name' => 'addLink', 'action' => util_make_uri('/plugins/'.$webanalytics->name.'?type=globaladmin&action=addLink')));
+echo $HTML->openForm(array('method' => 'POST', 'name' => 'addLink', 'action' => util_make_uri('/plugins/'.$webanalytics->name.'/?type=globaladmin&action=addLink')));
 echo $HTML->boxTop(_('Add a new webanalytics reference'));
 echo $HTML->listTableTop();
 $cells = array();
-$cells[][] = _('Informative Name');
-$cells[][] = '<input name="name" type="text" maxsize="255" required="required" />';
+$cells[] = array(_('Informative Name').utils_requiredField()._(':'), 'style' => 'text-align:right');
+$cells[][] = html_e('input', array('name' => 'name', 'type' => 'text', 'maxsize' => 255, 'required' => 'required'));
 echo $HTML->multiTableRow(array(), $cells);
 $cells = array();
-$cells[][] = _('Standard JavaScript Tracking code');
-$cells[][] = '<textarea name="link" rows="15" cols="70" required="required" >'._('Just paste your code here...').'</textarea>';
+$cells[] = array(_('Standard JavaScript Tracking code').utils_requiredField()._(':'), 'style' => 'text-align:right');
+$cells[][] = html_e('textarea', array('name' => 'link', 'rows' => 15, 'cols' => 70, 'required' => 'required', 'placeholder' => _('Just paste your code here...')), '', false);
 echo $HTML->multiTableRow(array(), $cells);
 $cells = array();
-$cells[] = array('<input type="submit" value="'. _('Add') .'" />', 'colspan' => 2);
+$cells[] = array(html_e('input', array('type' => 'submit', 'value' => _('Add'))), 'colspan' => 2);
 echo $HTML->multiTableRow(array(), $cells);
 echo $HTML->listTableBottom();
 echo $HTML->boxBottom();

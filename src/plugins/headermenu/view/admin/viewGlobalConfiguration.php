@@ -83,7 +83,7 @@ if (sizeof($linksHeaderMenuArray)) {
 		echo $HTML->multiTableRow(array('id' => $link['id_headermenu']), $cells);
 	}
 	echo $HTML->listTableBottom();
-	echo '<input type="button" id="linkorderheadervalidatebutton" value="'._('Save Order').'" class="hide" />';
+	echo html_e('input', array(), 'type' => 'button', 'id' => 'linkorderheadervalidatebutton', 'value' => _('Save Order'), 'class' => 'hide');
 	echo html_e('br');
 } else {
 	echo $HTML->information(_('No tabs available for headermenu'));
@@ -117,7 +117,7 @@ if (sizeof($linksOuterMenuArray)) {
 		echo $HTML->multiTableRow(array('id' => $link['id_headermenu']), $cells);
 	}
 	echo $HTML->listTableBottom();
-	echo '<input type="button" id="linkorderoutervalidatebutton" value="'._('Save Order').'" class="hide" />';
+	echo html_e('input', array(), 'type' => 'button', 'id' => 'linkorderoutervalidatebutton', 'value' => _('Save Order'), 'class' => 'hide');
 	echo html_e('br');
 } else {
 	echo $HTML->information(_('No tabs available for outermenu'));
@@ -129,11 +129,11 @@ echo $HTML->openForm(array('method' => 'POST', 'name' => 'addLink', 'action' => 
 echo $HTML->listTableTop();
 $cells = array();
 $cells[] = array(_('Displayed Name').utils_requiredField()._(':'), 'style' => 'text-align:right');
-$cells[][] = '<input required="required" name="name" type="text" maxlength="255" value="" size="40" placeholder="'._('the displayed name in menu').'" />';
+$cells[][] = html_e('input', array('required' => 'required', 'name' => 'name', 'type' => 'text', 'maxlength' => 255, 'size' => 40, 'placeholder' => _('the displayed name in menu')));
 echo $HTML->multiTableRow(array(), $cells);
 $cells = array();
 $cells[] = array(_('Description').utils_requiredField()._(':'), 'style' => 'text-align:right');
-$cells[][] = '<input name="description" type="text" maxlength="255" value="" size="40" placeholder="'._('the description, used by the tooltip system').'" />';
+$cells[][] = html_e('input', array('name' => 'description', 'type' => 'text', 'maxlength' => 255, 'size' => 40, 'placeholder' => _('the description, used by the tooltip system')));
 echo $HTML->multiTableRow(array(), $cells);
 $cells = array();
 $cells[] = array(_('Menu Location').utils_requiredField()._(':'), 'style' => 'text-align:right');
@@ -161,10 +161,10 @@ $cells[][] = $params['content'];
 echo $HTML->multiTableRow(array('id' => 'trhtmlcode', 'class' => 'hide'), $cells);
 $cells = array();
 $cells[] = array(_('URL')._(':'), 'style' => 'text-align:right');
-$cells[][] = '<input name="link" type="url" maxlength="255" size="40" />';
+$cells[][] = html_e('input', array('name' => 'link', 'type' => 'url', 'maxlength' => 255, 'size' => 40));
 echo $HTML->multiTableRow(array('id' => 'urlcode', 'class' => 'hide'), $cells);
 $cells = array();
-$cells[] = array('<input type="submit" value="'. _('Add') .'" />', 'colspan' => 2);
+$cells[] = array(hmtl_e('input', array('type' => 'submit', 'value' => _('Add'))), 'colspan' => 2);
 echo $HTML->multiTableRow(array(), $cells);
 echo $HTML->listTableBottom();
 echo $HTML->closeForm();
