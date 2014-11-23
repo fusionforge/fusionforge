@@ -64,7 +64,6 @@ function pm_reporting_header($group_id) {
 }
 
 function pm_quick_report($group_id,$title,$subtitle1,$qpa1,$subtitle2,$qpa2,$comment="") {
-	global $bar_colors;
 
 	pm_header(array ("title"=>$title));
 	pm_reporting_header($group_id);
