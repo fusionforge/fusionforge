@@ -20,7 +20,13 @@ set -e
 
 case "$1" in
     configure)
-        $(forge_get_config source_path)/post-install.d/common/common.sh
+	DESTDIR=$(mktemp -d)
+        $(forge_get_config source_path)/post-install.d/common/common.sh configure $DESTDIR
+	for i in $(find $DESTDIR -type f); do
+	    ucf $i ${i#$DESTDIR}
+	    ucfr -f fusionforge-common ${i#$DESTDIR}
+	done
+	rm -rf $DESTDIR/
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

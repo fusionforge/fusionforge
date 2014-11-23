@@ -30,13 +30,17 @@ if [ -e /etc/debian_version ]; then
     backports_deb
     apt-get update
     apt-get install -y make gettext php5-cli php5-pgsql php-htmlpurifier \
-	apache2 locales-all postgresql libnss-pgsql2 unscd \
+	apache2 postgresql libnss-pgsql2 unscd \
 	subversion augeas-tools viewvc git \
 	mediawiki \
 	python-moinmoin libapache2-mod-wsgi python-psycopg2
+    if [ $(cat /etc/lsb-release | sed -n 's/DISTRIB_ID=//p') != 'Ubuntu' ]; then
+	apt-get install locales-all  # https://bugs.launchpad.net/ubuntu/+source/glibc/+bug/1394929
+    fi
 else
+    yum install -y make tar
     backports_rpm
-    yum install -y make gettext php-cli php-pgsql php-process \
+    yum install -y gettext php-cli php-pgsql php-process \
 	httpd mod_ssl postgresql-server nscd \
 	subversion augeas viewvc git gitweb \
 	mediawiki119 \

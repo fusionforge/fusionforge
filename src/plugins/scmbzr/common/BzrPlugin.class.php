@@ -22,7 +22,9 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-forge_define_config_item ('default_server', 'scmbzr', forge_get_config ('web_host')) ;
+require_once $gfcommon.'include/plugins_utils.php';
+
+forge_define_config_item ('default_server', 'scmbzr', forge_get_config ('scm_host')) ;
 forge_define_config_item ('repos_path', 'scmbzr', forge_get_config('chroot').'/scmrepos/bzr') ;
 
 class BzrPlugin extends SCMPlugin {
@@ -163,13 +165,8 @@ over it to the project's administrator.");
 
 		if ($project->usesPlugin ($this->name)) {
 			if ($this->browserDisplayable ($project)) {
-				print '<iframe id="scm_iframe" src="'.util_make_url ("/scm/loggerhead/".$project->getUnixName()).'" frameborder="0" width="100%" ></iframe>' ;
-				html_use_jqueryautoheight();
-				echo $HTML->getJavascripts();
-				echo '<script type="text/javascript">//<![CDATA[
-					jQuery(\'#scm_iframe\').iframeAutoHeight({heightOffset: 50});
-					//]]></script>';
-				}
+				htmlIframe('/scm/loggerhead/'.$project->getUnixName());
+			}
 		}
 	}
 
@@ -225,9 +222,9 @@ over it to the project's administrator.");
 		}
 	}
 
-        function updateRepositoryList ($params) {
-                $groups = $this->getGroups () ;
-
+	function updateRepositoryList ($params) {
+			$groups = $this->getGroups () ;
+			
 		$dir = forge_get_config('data_path').'/plugins/scmbzr/public-repositories' ;
 
 		if (!is_dir($dir)) {
@@ -276,9 +273,9 @@ over it to the project's administrator.");
 		foreach ($createlist as $create) {
 			symlink (forge_get_config('repos_path', 'scmbzr') . '/' . $create, $dir . '/' . $create) ;
 		}
-        }
+	}
 
-        function gatherStats ($params) {
+	function gatherStats ($params) {
                 $project = $this->checkParams ($params) ;
                 if (!$project) {
                         return false ;
@@ -454,7 +451,7 @@ over it to the project's administrator.");
                         }
                 }
                 db_commit();
-        }
+	}
 
 	function findMainBranch ($project) {
 		$toprepo = forge_get_config('repos_path', 'scmbzr') ;

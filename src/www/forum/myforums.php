@@ -119,7 +119,7 @@ for($i = 0; $i < sizeof($monitoredForumsIdsArray); $i++) {
 					foreach ($forum_msg_arr as $forum_msg) {
 						if ($forumObject->getSavedDate() < $forum_msg->getPostDate()) {
 							//we've got ourselves a new message or followup for this forum. note that, exit the search
-							$new_content = html_image('ic/new.png','', '', array('alt' => 'new'));
+							$new_content = html_image('ic/add.png','', '', array('alt' => 'new'));
 							break;
 						}
 					}

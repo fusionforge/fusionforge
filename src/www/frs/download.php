@@ -64,25 +64,32 @@ function send_file($filename, $filepath, $file_id = NULL, $mode = NULL) {
 	} else {
 		$us = 100;
 	}
-
 	$ip = getStringFromServer('REMOTE_ADDR');
-	if ($mode != 'latestzip') {
-		db_query_params('INSERT INTO frs_dlstats_file (ip_address,file_id,month,day,user_id) VALUES ($1, $2, $3, $4, $5)', array($ip, $file_id, date('Ym'), date('d'), $us));
-	} else if ($mode == 'zip') {
-		// here $file_id is a release_id
-		$frsr = frsrelease_get_object($file_id);
-		$files = $release->getFiles();
-		foreach ($files as $fileObject) {
-			db_query_params('INSERT INTO frs_dlstats_file (ip_address,file_id,month,day,user_id) VALUES ($1, $2, $3, $4, $5)', array($ip, $fileObject->getID(), date('Ym'), date('d'), $us));
+	switch ($mode) {
+		case 'file':
+		case 'latestfile': {
+			db_query_params('INSERT INTO frs_dlstats_file (ip_address,file_id,month,day,user_id) VALUES ($1, $2, $3, $4, $5)', array($ip, $file_id, date('Ym'), date('d'), $us));
+			break;
 		}
-	} else {
-		// here $file_id is a package_id
-		$Package = frspackage_get_object($file_id);
-		$release_id = $Package->getNewestReleaseID();
-		$release = frsrelease_get_object($release_id);
-		$files = $release->getFiles();
-		foreach ($files as $fileObject) {
-			db_query_params('INSERT INTO frs_dlstats_file (ip_address,file_id,month,day,user_id) VALUES ($1, $2, $3, $4, $5)', array($ip, $fileObject->getID(), date('Ym'), date('d'), $us));
+		case 'zip': {
+
+			// here $file_id is a release_id
+			$frsr = frsrelease_get_object($file_id);
+			$files = $frsr->getFiles();
+			foreach ($files as $fileObject) {
+				db_query_params('INSERT INTO frs_dlstats_file (ip_address,file_id,month,day,user_id) VALUES ($1, $2, $3, $4, $5)', array($ip, $fileObject->getID(), date('Ym'), date('d'), $us));
+			}
+			break;
+		}
+		case 'latestzip': {
+			// here $file_id is a package_id
+			$Package = frspackage_get_object($file_id);
+			$release_id = $Package->getNewestReleaseID();
+			$release = frsrelease_get_object($release_id);
+			$files = $release->getFiles();
+			foreach ($files as $fileObject) {
+				db_query_params('INSERT INTO frs_dlstats_file (ip_address,file_id,month,day,user_id) VALUES ($1, $2, $3, $4, $5)', array($ip, $fileObject->getID(), date('Ym'), date('d'), $us));
+			}
 		}
 	}
 }
@@ -146,7 +153,7 @@ case 'file':
 	$filename = $File->getName();
 	$filepath = forge_get_config('upload_dir').'/'.$Group->getUnixName().'/'.$Package->getFileName().'/'.$Release->getFileName().'/'.$filename;
 
-	send_file ($filename, $filepath, $file_id);
+	send_file($filename, $filepath, $file_id, $mode);
 
 	break;
 
@@ -195,7 +202,7 @@ case 'latestfile':
 	$filename = $File->getName();
 	$filepath = forge_get_config('upload_dir').'/'.$Group->getUnixName().'/'.$Package->getFileName().'/'.$Release->getFileName().'/'.$filename;
 
-	send_file ($filename, $filepath, $file_id);
+	send_file($filename, $filepath, $file_id, $mode);
 
 	break;
 
@@ -215,7 +222,7 @@ case 'zip':
 	session_require_perm('frs', $frsp->getID(), 'read');
 
 	$filepath = forge_get_config('upload_dir').'/'.$Group->getUnixName().'/'.$frsp->getFileName().'/'.$file_name;
-	send_file($file_name, $filepath, $frsr->getID());
+	send_file($file_name, $filepath, $release_id, $mode);
 
 	break;
 

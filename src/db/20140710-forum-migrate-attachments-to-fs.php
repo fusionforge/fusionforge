@@ -40,7 +40,7 @@ if (!is_dir("$data/forum")) {
 }
 
 $fs = new ForumStorage();
-$tmp = tempnam('/tmp', 'docman');
+$tmp = tempnam('/tmp', 'forum');
 
 $res = db_query_params('SELECT attachmentid FROM forum_attachment where filedata != $1', array(0));
 if (!$res) {

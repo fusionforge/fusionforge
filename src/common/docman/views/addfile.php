@@ -43,9 +43,6 @@ if (isset($childgroup_id) && $childgroup_id) {
 	$redirecturl .= '&childgroup_id='.$childgroup_id;
 }
 
-if (!$dm)
-	$dm = new DocumentManager($g);
-
 $dgf = new DocumentGroupFactory($g);
 if ($dgf->isError())
 	exit_error($dgf->getErrorMessage(), 'docman');
@@ -143,7 +140,7 @@ if ($dgf->getNested() == NULL) {
 			$cells[][] = html_build_select_box_from_arrays($manual_files_arr, $manual_files_arr, 'manual_path', '').
 					html_e('br').
 					html_e('span', array(), sprintf(_('Pick a file already uploaded (by SFTP or SCP) to the <a href="%1$s">project\'s incoming directory</a> (%2$s).'),
-									'sftp://'.forge_get_config('web_host').$incoming.'/', $incoming), false);
+									'sftp://'.forge_get_config('shell_host').$incoming.'/', $incoming), false);
 		} else {
 			$cells[][] = html_e('p', array('class' => 'warning'), sprintf(_('You need first to upload file in %s'),$incoming), false);
 		}

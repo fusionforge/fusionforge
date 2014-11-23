@@ -31,6 +31,7 @@ global $group_id; // id of the group
 global $linkmenu;
 global $g; // the group object
 global $dirid; // the selected directory
+global $dm; // the document manager
 
 if (!forge_check_perm('docman', $group_id, 'read')) {
 	$warning_msg= _('Document Manager Access Denied');
@@ -38,7 +39,6 @@ if (!forge_check_perm('docman', $group_id, 'read')) {
 }
 
 echo html_ao('div', array('id' => 'documenttree'));
-$dm = new DocumentManager($g);
 echo html_ao('ul', array('id' => $g->getUnixname().'-tree'));
 $dm->getTree($dirid, $linkmenu);
 echo html_ac(html_ap() - 1);

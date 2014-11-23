@@ -1,5 +1,5 @@
 #!/bin/bash
-# Call all common post-install scripts in order
+# Upgrade PostgreSQL configuration
 #
 # Copyright (C) 2014  Inria (Sylvain Beucler)
 #
@@ -18,7 +18,13 @@
 # with FusionForge; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-source_path=$(forge_get_config source_path)
+set -e
 
-$source_path/post-install.d/common/ini.sh $1 $2
-$source_path/post-install.d/common/user.sh $1 $2
+PREVVER=${1:-0.0}
+
+# 5.3 -> 6.0
+if [ $(php -r "print version_compare('$PREVVER', '5.3.50');") -eq -1 ]; then
+    pg_hba=$(ls /etc/postgresql/*/*/pg_hba.conf /var/lib/pgsql/data/pg_hba.conf 2>/dev/null | tail -1)
+    database_name=$(forge_get_config database_name)
+    sed -i $pg_hba -e 's/\(^### \(BEGIN\|END\)\) GFORGE BLOCK/\1 FUSIONFORGE BLOCK/'
+fi

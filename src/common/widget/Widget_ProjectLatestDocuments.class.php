@@ -68,11 +68,14 @@ class Widget_ProjectLatestDocuments extends Widget {
 			use_javascript('/js/sortable.js');
 			echo $HTML->getJavascripts();
 			$tabletop = array(_('Date'), _('File Name'), _('Title'), _('Author'), _('Path'));
+			$classth = array('', '', '', '', '');
 			if (session_loggedin()) {
 				$tabletop[] = _('Status');
+				$classth[] = '';
 				$tabletop[] = _('Actions');
+				$classth[] = 'unsortable';
 			}
-			echo $HTML->listTableTop($tabletop, false, 'sortable_widget_docman_listfile full', 'sortable');
+			echo $HTML->listTableTop($tabletop, false, 'sortable_widget_docman_listfile full', 'sortable', $classth);
 			for ($f=0; $f < $rows_files; $f++) {
 				$documentObject = document_get_object(db_result($res_files, $f, 'docid'));
 				$updatedate = $documentObject->getUpdated();

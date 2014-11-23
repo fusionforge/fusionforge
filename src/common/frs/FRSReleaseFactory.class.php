@@ -22,6 +22,7 @@
 
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'frs/FRSRelease.class.php';
+require_once $gfcommon.'frs/FRSPackage.class.php';
 require_once $gfcommon.'frs/FRSPackageFactory.class.php';
 
 class FRSReleaseFactory extends Error {
@@ -96,7 +97,7 @@ class FRSReleaseFactory extends Error {
 
 		foreach ($ids as $id) {
 			if (forge_check_perm('frs', $id, 'read')) {
-				$frsp = new FRSPackage($this->Group, $id);
+				$frsp = frspackage_get_object($id);
 				$frspr = $frsp->getReleases();
 				$this->FRSRs = array_merge($frspr, $this->FRSRs);
 			}
@@ -105,7 +106,7 @@ class FRSReleaseFactory extends Error {
 	}
 
 	/**
-	 * getFRSRs - get an array of FRS Newest Release objects for this Group.
+	 * getFRSRNewReleases - get an array of FRS Newest Release objects for this Group.
 	 *
 	 * @param	bool	$status	limite the search to active packages. Default is false.
 	 * @return	array	The array of FRS objects.
@@ -121,9 +122,12 @@ class FRSReleaseFactory extends Error {
 
 		foreach ($ids as $id) {
 			if (forge_check_perm('frs', $id, 'read')) {
-				$frsp = new FRSPackage($this->Group, $id);
+				$frspnr = false;
+				$frsp = frspackage_get_object($id);
 				$frspnr_id = $frsp->getNewestReleaseID();
-				$frspnr = frsrelease_get_object($frspnr_id);
+				if ($frspnr_id) {
+					$frspnr = frsrelease_get_object($frspnr_id);
+				}
 			}
 			if (isset($frspnr) && $frspnr) {
 				$this->FRSNRs[] = $frspnr;

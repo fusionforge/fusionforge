@@ -186,7 +186,7 @@ echo html_e('p', array(), _('Upload a new file').(': ').html_e('input', array('t
 if (forge_get_config('use_manual_uploads')) {
 	echo '<p>';
 	printf(_('Alternatively, you can use a file you already uploaded (by SFTP or SCP) to the <a href="%2$s">project\'s incoming directory</a> (%1$s).'),
-		$incoming, "sftp://" . forge_get_config('web_host') . $incoming . "/");
+		$incoming, "sftp://" . forge_get_config('shell_host') . $incoming . "/");
 	echo ' ' . _('This direct <tt>sftp://</tt> link only works with some browsers, such as Konqueror.') . '<br />';
 	$manual_files_arr=ls($incoming,true);
 	if ( count($manual_files_arr) > 0 ) {

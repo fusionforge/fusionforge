@@ -132,10 +132,6 @@ if (getStringFromRequest('create_repository') && getStringFromRequest('submit'))
 		plugin_hook("scm_admin_update", $hook_params);
 }
 
-$hook_params = array();
-$hook_params['group_id'] = $group_id;
-plugin_hook('scm_admin_buttons', $hook_params);
-
 scm_header(array('title'=>_('SCM Repository'),'group'=>$group_id));
 echo html_ao('script', array('type' => 'text/javascript'));
 ?>

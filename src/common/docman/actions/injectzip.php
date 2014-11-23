@@ -28,27 +28,22 @@ global $g; // group object
 global $group_id; // id of group
 
 $doc_group = getIntFromRequest('dirid');
-
-if (!forge_check_perm('docman', $group_id, 'approve')) {
-	$warning_msg = _('Document Manager Action Denied.');
-	if ($doc_group) {
-		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$doc_group);
-	} else {
-		session_redirect('/docman/?group_id='.$group_id);
-	}
-}
-
-$uploaded_zip = getUploadedFile('uploaded_zip');
-$dg = new DocumentGroup($g, $doc_group);
-
-if ($dg->isError() || !$dg->injectArchive($uploaded_zip)) {
-	$error_msg = $dg->getErrorMessage();
-	session_redirect('/docman/?group_id='.$group_id);
-}
-
 $return_url = '/docman/?group_id='.$group_id;
 if ($doc_group)
 	$return_url .= '&dirid='.$doc_group;
+
+if (!forge_check_perm('docman', $group_id, 'approve')) {
+	$warning_msg = _('Document Manager Action Denied.');
+	session_redirect($return_url);
+}
+
+$uploaded_zip = getUploadedFile('uploaded_zip');
+$dg = documentgroup_get_object($doc_group);
+
+if (!$dg || $dg->isError() || !$dg->injectArchive($uploaded_zip)) {
+	$error_msg = $dg->getErrorMessage();
+	session_redirect($return_url);
+}
 
 $feedback = _('Archive injected successfully.');
 session_redirect($return_url);

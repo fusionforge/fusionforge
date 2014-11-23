@@ -398,7 +398,7 @@ class Layout extends Error {
 		 * cf. http://home.gna.org/forgeplucker/forge-identification.html
 		 */
 		$ff = new FusionForge();
-		echo html_e('meta', array('name' => 'Forge-Identification', 'content' => $ff->software_type.':'.$ff->software_version));
+		echo html_e('meta', array('name' => 'Forge-Identification', 'content' => $ff->software_name.':'.$ff->software_version));
 	}
 
 	function bodyHeader($params){
@@ -1281,12 +1281,24 @@ if (isset($params['group']) && $params['group']) {
 		return $this->getPicto('ic/delete.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
+	function getRemovePic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/remove.png', $title, $alt, 20, 20, $otherAttr);
+	}
+
 	function getConfigurePic($title = '', $alt = '', $otherAttr = array()) {
 		return $this->getPicto('ic/configure.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
 	function getZipPic($title = '', $alt = '', $otherAttr = array()) {
 		return $this->getPicto('ic/file_type_archive.png', $title, $alt, 20, 20, $otherAttr);
+	}
+
+	function getAddDirPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/directory-add.png', $title, $alt, 20, 20, $otherAttr);
+	}
+
+	function getNewPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/add.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
 	function getPicto($url, $title, $alt, $width = '20', $height = '20', $otherAttr = array()) {

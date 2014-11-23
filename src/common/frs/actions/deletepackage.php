@@ -38,7 +38,7 @@ if (!$package_id_strings) {
 	$result['format'] = 'multi';
 	foreach ($package_ids as $key => $package_id) {
 		if (forge_check_perm('frs', $package_id, 'admin')) {
-			$frsp = new FRSPackage($g, $package_id);
+			$frsp = frspackage_get_object($package_id);
 			if (!$frsp || !is_object($frsp)) {
 				$result[$key]['html'] = $HTML->error_msg(_('Error Getting FRSPackage'));
 			} elseif ($frsp->isError()) {

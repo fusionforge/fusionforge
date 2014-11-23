@@ -31,7 +31,7 @@ db_user_nss=${db_user}_nss
 
 
 # Distros may want to install new conffiles using tools such as ucf(1)
-DESTDIR=$2
+DESTDIR=$3
 mkdir -m 755 -p $DESTDIR/etc/
 
 # Check/Modify /etc/libnss-pgsql.conf
@@ -138,13 +138,14 @@ configure_sshd()
 	    user_cmd=AuthorizedKeysCommandRunAs
 	fi
     fi
-    # Add actual sshd configuration
+    # Add placeholder if necessary
     if ! grep -qw '^AuthorizedKeysCommand' /etc/ssh/sshd_config; then
 	echo 'AuthorizedKeysCommand replace_me' >> /etc/ssh/sshd_config
     fi
     if ! grep -qw "^$user_cmd" /etc/ssh/sshd_config; then
 	echo "$user_cmd replace_me" >> /etc/ssh/sshd_config
     fi
+    # Configure SSH daemon
     cmd=$(forge_get_config source_path)/bin/ssh_akc.php
     sed -i -e "s,^AuthorizedKeysCommand .*,AuthorizedKeysCommand $cmd," /etc/ssh/sshd_config
     sed -i -e "s,^$user_cmd .*,$user_cmd ${system_user_ssh_akc}," /etc/ssh/sshd_config
@@ -172,6 +173,7 @@ remove_sshd()
 # Main
 case "$1" in
     configure)
+	$(dirname $0)/upgrade-conf.sh $2
 	configure_libnss_pgsql
 	configure_nsswitch
 	configure_nscd

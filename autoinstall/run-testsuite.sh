@@ -19,7 +19,7 @@
 # with FusionForge; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-set -e
+set -ex
 export DEBIAN_FRONTEND=noninteractive
 
 if [ -z "$1" ]; then
@@ -38,8 +38,13 @@ if [ -e /etc/debian_version ]; then
     apt-get -y install wget default-jre iceweasel
     apt-get -y install phpunit phpunit-selenium patch psmisc patch rsyslog
 else
-    yum -y install wget firefox java-1.6.0
-    yum install -y php-phpunit-PHPUnit php-phpunit-PHPUnit-Selenium psmisc patch
+    yum -y install wget firefox
+    if yum list java-1.7.0-openjdk >/dev/null 2>&1 ; then
+	yum install -y java-1.7.0-openjdk
+    else
+	yum install -y java-1.6.0
+    fi
+    yum install -y php-phpunit-PHPUnit php-phpunit-PHPUnit-Selenium psmisc patch net-tools
 fi
 
 # Install selenium (no packaged version available)
@@ -53,6 +58,12 @@ http_proxy=$PROXY wget -c $SELENIUMURL \
 
 service cron stop || true
 
+# Add alias to /etc/hosts
+if ! grep -q ^$(hostname -i) /etc/hosts ; then
+    echo $(hostname -i) $(hostname) >> /etc/hosts
+fi
+grep -q "^$(hostname -i).*$(forge_get_config scm_host)" /etc/hosts || sed -i -e "s/^$(hostname -i).*/& $(forge_get_config scm_host)/" /etc/hosts
+ 
 # Fix screenshot default black background (/usr/share/{php,pear}) (fix available upstream)
 patch -N /usr/share/*/PHPUnit/Extensions/SeleniumTestCase.php <<'EOF' || true
 --- /usr/share/php/PHPUnit/Extensions/SeleniumTestCase.php-dist	2014-02-10 19:48:34.000000000 +0000

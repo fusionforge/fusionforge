@@ -1,7 +1,7 @@
 #! /bin/sh
 # Configure Exim4 for FusionForge+Mailman
 #
-# Christian Bayle, Roland Mas, debian-sf (GForge for Debian)
+# Christian Bayle, Roland Mas, debian-sf
 # Converted to Exim4 by Guillem Jover
 # Copyright (C) 2014  Inria (Sylvain Beucler)
 #
@@ -46,6 +46,8 @@ fi
 
 case "$1" in
     configure)
+	$(dirname $0)/upgrade-conf.sh $2
+
 	users_host=$(forge_get_config users_host)
 	lists_host=$(forge_get_config lists_host)
 	pgsock='/var/run/postgresql/.s.PGSQL.5432'
@@ -81,7 +83,7 @@ EOF
 # keep it in the Directors Configuration section (between the second and the
 # third occurences of a line containing only the word "end")
 
-forward_for_gforge:
+forward_for_fusionforge:
   domains = $users_host
   driver = redirect
   file_transport = address_file
@@ -89,7 +91,7 @@ forward_for_gforge:
   user = nobody
   group = nogroup
 
-forward_for_gforge_lists:
+forward_for_fusionforge_lists:
   domains = $lists_host
   driver = redirect
   pipe_transport = address_pipe
@@ -97,7 +99,7 @@ forward_for_gforge_lists:
   user = nobody
   group = nogroup
 
-forward_for_gforge_lists_owner:
+forward_for_fusionforge_lists_owner:
   domains = $lists_host
   local_part_suffix = -owner
   driver = redirect
@@ -106,7 +108,7 @@ forward_for_gforge_lists_owner:
   user = nobody
   group = nogroup
 
-forward_for_gforge_lists_request:
+forward_for_fusionforge_lists_request:
   domains = $lists_host
   local_part_suffix = -request
   driver = redirect
@@ -115,7 +117,7 @@ forward_for_gforge_lists_request:
   user = nobody
   group = nogroup
 
-forward_for_gforge_lists_admin:
+forward_for_fusionforge_lists_admin:
   domains = $lists_host
   local_part_suffix = -admin
   driver = redirect
@@ -124,7 +126,7 @@ forward_for_gforge_lists_admin:
   user = nobody
   group = nogroup
 
-forward_for_gforge_lists_bounces:
+forward_for_fusionforge_lists_bounces:
   domains = $lists_host
   local_part_suffix = -bounces : -bounces+*
   driver = redirect
@@ -133,7 +135,7 @@ forward_for_gforge_lists_bounces:
   user = nobody
   group = nogroup
 
-forward_for_gforge_lists_confirm:
+forward_for_fusionforge_lists_confirm:
   domains = $lists_host
   local_part_suffix = -confirm : -confirm+*
   driver = redirect
@@ -142,7 +144,7 @@ forward_for_gforge_lists_confirm:
   user = nobody
   group = nogroup
 
-forward_for_gforge_lists_join:
+forward_for_fusionforge_lists_join:
   domains = $lists_host
   local_part_suffix = -join
   driver = redirect
@@ -151,7 +153,7 @@ forward_for_gforge_lists_join:
   user = nobody
   group = nogroup
 
-forward_for_gforge_lists_leave:
+forward_for_fusionforge_lists_leave:
   domains = $lists_host
   local_part_suffix = -leave
   driver = redirect
@@ -160,7 +162,7 @@ forward_for_gforge_lists_leave:
   user = nobody
   group = nogroup
 
-forward_for_gforge_lists_subscribe:
+forward_for_fusionforge_lists_subscribe:
   domains = $lists_host
   local_part_suffix = -subscribe
   driver = redirect
@@ -169,7 +171,7 @@ forward_for_gforge_lists_subscribe:
   user = nobody
   group = nogroup
 
-forward_for_gforge_lists_unsubscribe:
+forward_for_fusionforge_lists_unsubscribe:
   domains = $lists_host
   local_part_suffix = -unsubscribe
   driver = redirect

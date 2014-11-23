@@ -36,6 +36,8 @@ if (!forge_check_perm('docman', $group_id, 'read')) {
 	session_redirect('/docman/?group_id='.$group_id);
 }
 
+$dm = new DocumentManager($g);
+
 /* create the submenu following role, rules and content */
 $menu_text = array();
 $menu_links = array();
@@ -58,12 +60,11 @@ if ($g->useDocmanSearch()) {
 }
 
 if (forge_check_perm('docman', $group_id, 'approve')) {
-    $dm = new DocumentManager($g);
-    if (!$dm->isTrashEmpty()) {
-        $menu_text[] = _('Trash');
-        $menu_links[] = '/docman/?group_id='.$group_id.'&view=listtrashfile';
-        $menu_attr[] = array('title' => _('Recover or delete permanently files with deleted status.'), 'id' => 'trashDocmanMenu');
-    }
+	if (!$dm->isTrashEmpty()) {
+		$menu_text[] = _('Trash');
+		$menu_links[] = '/docman/?group_id='.$group_id.'&view=listtrashfile';
+		$menu_attr[] = array('title' => _('Recover or delete permanently files with deleted status.'), 'id' => 'trashDocmanMenu');
+	}
 }
 
 if (forge_check_perm('docman', $group_id, 'admin')) {
@@ -79,4 +80,4 @@ if (count($menu_text)) {
 	echo $HTML->subMenu($menu_text, $menu_links, $menu_attr);
 }
 
-plugin_hook("blocks", "doc index");
+plugin_hook('blocks', 'doc index');

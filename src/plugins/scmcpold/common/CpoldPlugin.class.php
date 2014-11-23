@@ -20,7 +20,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-forge_define_config_item ('default_server', 'scmcpold', forge_get_config ('web_host')) ;
+forge_define_config_item ('default_server', 'scmcpold', forge_get_config ('scm_host')) ;
 forge_define_config_item ('repos_path', 'scmcpold', forge_get_config('chroot').'/scmrepos/cpold') ;
 
 class CpoldPlugin extends SCMPlugin {
@@ -81,7 +81,7 @@ class CpoldPlugin extends SCMPlugin {
 			$b .= ' ';
 			$b .= _('Enter your site password when prompted.');
 			$b .= '</p>';
-			$b .= '<p><tt>scp -r '.$d.'@' . $project->getSCMBox() . ':'. forge_get_config('repos_path', 'scmcpold') .'/'. $project->getUnixName().'/ .</tt></p>' ;
+			$b .= '<p><tt>scp -r '.$d.'@' . $this->getBoxForProject($project) . ':'. forge_get_config('repos_path', 'scmcpold') .'/'. $project->getUnixName().'/ .</tt></p>' ;
 		} else {
 			$b .= '<h2>';
 			$b .= sprintf(_('Developer %s Access via SSH'), 'CPOLD');
@@ -95,7 +95,7 @@ class CpoldPlugin extends SCMPlugin {
 			$b .= ' ';
 			$b .= _('Enter your site password when prompted.');
 			$b .= '</p>';
-			$b .= '<p><tt>scp -r <i>'._('developername').'</i>@' . $project->getSCMBox() . ':'. forge_get_config('repos_path', 'scmcpold') .'/'. $project->getUnixName().'/ .</tt></p>' ;
+			$b .= '<p><tt>scp -r <i>'._('developername').'</i>@' . $this->getBoxForProject($project) . ':'. forge_get_config('repos_path', 'scmcpold') .'/'. $project->getUnixName().'/ .</tt></p>' ;
 		}
 		return $b ;
 	}

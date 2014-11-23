@@ -108,7 +108,7 @@ DocManListFileController.prototype =
 				Save: jQuery.proxy(function() {
 					jQuery('#editdocdata').submit();
 					var id = jQuery('#docid').attr('value');
-					jQuery.get(this.params.docManURL, {
+					jQuery.get(this.params.docManURL+'/', {
 						group_id:	this.params.groupId,
 						action:		'lock',
 						lock:		0,
@@ -116,7 +116,7 @@ DocManListFileController.prototype =
 						type:		'file',
 						childgroup_id:	this.params.childGroupId
 					});
-					jQuery.get(this.params.docManURL, {
+					jQuery.get(this.params.docManURL+'/', {
 						group_id:	this.params.groupId,
 						action:		'lock',
 						lock:		0,
@@ -130,7 +130,7 @@ DocManListFileController.prototype =
 				}, this),
 				Cancel: jQuery.proxy(function() {
 					var id = jQuery('#docid').attr('value');
-					jQuery.get(this.params.docManURL, {
+					jQuery.get(this.params.docManURL+'/', {
 						group_id:	this.params.groupId,
 						action:		'lock',
 						lock:		0,
@@ -138,7 +138,7 @@ DocManListFileController.prototype =
 						type:		'file',
 						childgroup_id:	this.params.childGroupId
 					});
-					jQuery.get(this.params.docManURL, {
+					jQuery.get(this.params.docManURL+'/', {
 						group_id:	this.params.groupId,
 						action:		'lock',
 						lock:		0,
@@ -154,7 +154,7 @@ DocManListFileController.prototype =
 		});
 		jQuery(modalId).bind('dialogclose', jQuery.proxy(function() {
 			var id = jQuery('#docid').attr('value');
-			jQuery.get(this.params.docManURL, {
+			jQuery.get(this.params.docManURL+'/', {
 				group_id:	this.params.groupId,
 				action:		'lock',
 				lock:		0,
@@ -162,7 +162,7 @@ DocManListFileController.prototype =
 				type:		'file',
 				childgroup_id:	this.params.childGroupId
 			});
-			jQuery.get(this.params.docManURL, {
+			jQuery.get(this.params.docManURL+'/', {
 				group_id:	this.params.groupId,
 				action:		'lock',
 				lock:		0,
@@ -193,7 +193,7 @@ DocManListFileController.prototype =
 					computeHeight = this.params.divRight.height() + this.params.divEditDirectory.height();
 					currentLeftHeight = this.params.divLeft.height();
 					this.params.divLeft.height(currentLeftHeight + this.params.divEditDirectory.height());
-					jQuery.get(this.params.docManURL, {
+					jQuery.get(this.params.docManURL+'/', {
 						group_id:	this.params.groupId,
 						action:		'lock',
 						lock:		1,
@@ -201,7 +201,7 @@ DocManListFileController.prototype =
 						itemid:		this.params.docgroupId,
 						childgroup_id:	this.params.childGroupId
 					});
-					this.lockInterval[this.params.docgroupId] = setInterval("jQuery.get('" + this.params.docManURL + "', {group_id:"+this.params.groupId+",action:'lock',lock:1,type:'dir',itemid:"+this.params.docgroupId+",childgroup_id:"+this.params.childGroupId+"})", this.params.lockIntervalDelay);
+					this.lockInterval[this.params.docgroupId] = setInterval("jQuery.get('" + this.params.docManURL + "/', {group_id:"+this.params.groupId+",action:'lock',lock:1,type:'dir',itemid:"+this.params.docgroupId+",childgroup_id:"+this.params.childGroupId+"})", this.params.lockIntervalDelay);
 					if (typeof(this.params.divLeft) != 'undefined' && typeof(this.params.divRight) != 'undefined') {
 						if (this.params.divLeft.height() > computeHeight) {
 							jQuery('#views').height(this.params.divLeft.height());
@@ -216,7 +216,7 @@ DocManListFileController.prototype =
 			computeHeight = this.params.divRight.height() - this.params.divEditDirectory.height();
 			currentLeftHeight = this.params.divLeft.height();
 			this.params.divLeft.height(currentLeftHeight - this.params.divEditDirectory.height());
-			jQuery.get(this.params.docManURL, {
+			jQuery.get(this.params.docManURL+'/', {
 				group_id:	this.params.groupId,
 				action:		'lock',
 				lock:		0,
@@ -247,7 +247,7 @@ DocManListFileController.prototype =
 					jQuery('#maindiv > .warning_msg').remove();
 					jQuery('#maindiv').prepend(data.html);
 				} else {
-					jQuery.get(this.params.docManURL, {
+					jQuery.get(this.params.docManURL+'/', {
 						group_id:	this.params.groupId,
 						action:		'lock',
 						lock:		1,
@@ -255,7 +255,7 @@ DocManListFileController.prototype =
 						itemid:		this.params.docgroupId,
 						childgroup_id:	this.params.childGroupId
 					});
-					this.lockInterval[this.params.docgroupId] = setInterval("jQuery.get('" + this.params.docManURL + "', {group_id:"+this.params.groupId+",action:'lock',lock:1,type:'dir',itemid:"+this.params.docgroupId+",childgroup_id:"+this.params.childGroupId+"})",this.params.lockIntervalDelay);
+					this.lockInterval[this.params.docgroupId] = setInterval("jQuery.get('" + this.params.docManURL + "/', {group_id:"+this.params.groupId+",action:'lock',lock:1,type:'dir',itemid:"+this.params.docgroupId+",childgroup_id:"+this.params.childGroupId+"})",this.params.lockIntervalDelay);
 					this.params.divAddItem.show();
 					this.params.divEditDirectory.hide();
 					computeHeight = this.params.divRight.height() + jQuery(this.params.divAddItem).height();
@@ -271,7 +271,7 @@ DocManListFileController.prototype =
 				}
 			}, this));
 		} else {
-			jQuery.get(this.params.docManURL, {
+			jQuery.get(this.params.docManURL+'/', {
 				group_id:	this.params.groupId,
 				action:		'lock',
 				lock:		0,
@@ -350,7 +350,7 @@ DocManListFileController.prototype =
 		}
 		jQuery('#editdocdata').attr('action', this.docparams.action);
 
-		jQuery.get(this.docparams.docManURL, {
+		jQuery.get(this.docparams.docManURL+'/', {
 				group_id:	this.docparams.groupId,
 				action:		'lock',
 				lock:		1,
@@ -358,8 +358,8 @@ DocManListFileController.prototype =
 				itemid:		this.docparams.docgroupId,
 				childgroup_id:	this.docparams.childGroupId
 			});
-		this.lockInterval[this.docparams.id] = setInterval("jQuery.get('" + this.docparams.docManURL + "', {group_id:"+this.docparams.groupId+",action:'lock',lock:1,type:'file',itemid:"+this.docparams.id+",childgroup_id:"+this.docparams.childGroupId+"})",this.docparams.lockIntervalDelay);
-		this.lockInterval[this.docparams.docgroupId] = setInterval("jQuery.get('" + this.docparams.docManURL + "', {group_id:"+this.docparams.groupId+",action:'lock',lock:1,type:'dir',itemid:"+this.docparams.docgroupId+",childgroup_id:"+this.docparams.childGroupId+"})",this.docparams.lockIntervalDelay);
+		this.lockInterval[this.docparams.id] = setInterval("jQuery.get('" + this.docparams.docManURL + "/', {group_id:"+this.docparams.groupId+",action:'lock',lock:1,type:'file',itemid:"+this.docparams.id+",childgroup_id:"+this.docparams.childGroupId+"})",this.docparams.lockIntervalDelay);
+		this.lockInterval[this.docparams.docgroupId] = setInterval("jQuery.get('" + this.docparams.docManURL + "/', {group_id:"+this.docparams.groupId+",action:'lock',lock:1,type:'dir',itemid:"+this.docparams.docgroupId+",childgroup_id:"+this.docparams.childGroupId+"})",this.docparams.lockIntervalDelay);
 		jQuery(this.params.divEditFile).dialog('open');
 
 		return false;

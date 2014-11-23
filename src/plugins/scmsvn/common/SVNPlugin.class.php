@@ -25,7 +25,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-forge_define_config_item('default_server', 'scmsvn', forge_get_config ('web_host'));
+forge_define_config_item('default_server', 'scmsvn', forge_get_config ('scm_host'));
 forge_define_config_item('repos_path', 'scmsvn', forge_get_config('data_path').'/scmrepos/svn');
 forge_define_config_item('serve_path', 'scmsvn', forge_get_config('repos_path'));
 forge_define_config_item('use_ssh', 'scmsvn', false);

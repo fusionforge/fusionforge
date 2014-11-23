@@ -31,17 +31,11 @@ global $HTML; // html object
 global $group_id; // id of group
 global $g; // group object
 global $permissionlevel;
+global $fpFactory;
 
 if (!forge_check_perm('frs_admin', $group_id, 'read')) {
 	$warning_msg = _('FRS Access Denied');
 	session_redirect('/frs/?group_id='.$group_id);
-}
-
-$fpFactory = new FRSPackageFactory($g);
-if (!$fpFactory || !is_object($fpFactory)) {
-	exit_error(_('Could Not Get FRSPackageFactory'), 'frs');
-} elseif ($fpFactory->isError()) {
-	exit_error($fpFactory->getErrorMessage(), 'frs');
 }
 
 $FRSPackages = $fpFactory->getFRSs();
@@ -118,7 +112,7 @@ if (count($FRSPackages) == 0) {
 			$content = util_make_link('/frs/?view=qrs&package_id='.$FRSPackage->getID().'&group_id='.$group_id, '<strong>['._('Add Release').']</strong>');
 		}
 		if (forge_check_perm('frs', $FRSPackage->getID(), 'file') && count($FRSPackage->getReleases()))  {
-			$content .= util_make_link('/frs/?view=showreleases&package_id='.$FRSPackage->getID().'&group_id='.$group_id, '<strong>['._('Edit Releases').']</strong>');
+			$content .= util_make_link('/frs/?view=showreleases&package_id='.$FRSPackage->getID().'&group_id='.$group_id, $HTML->getConfigurePic(_('Edit Releases'), _('Edit Releases')));
 		}
 		$cells[] = array($content, 'style' => 'white-space: nowrap;', 'align' => 'center');
 		$package_nameInputAttr = array('type' => 'text', 'name' => 'package_name', 'value' => html_entity_decode($FRSPackage->getName()), 'size' => 20, 'maxlength' => 60, 'required' => 'required', 'pattern' => '.{3,}', 'title' => _('At least 3 characters'));

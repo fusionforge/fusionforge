@@ -48,7 +48,7 @@ var controllerListPending;
 jQuery(document).ready(function() {
 	controllerListPending = new DocManListFileController({
 		groupId:		<?php echo $group_id ?>,
-		docManURL:		'<?php util_make_uri('/docman') ?>',
+		docManURL:		'<?php echo util_make_uri('/docman') ?>',
 		lockIntervalDelay:	60000, //in microsecond and if you change this value, please update the check value 600
 		divEditFile:		jQuery('#editFile'),
 		divEditTitle:		'<?php echo _("Edit document dialog box") ?>'
@@ -73,12 +73,12 @@ jQuery(document).ready(function() {
 					break;
 				}
 				default: {
-					$cells[][] = util_make_link('/docman/view.php/'.$g->getID().'/'.$d->getID().'/'.urlencode($d->getFileName()), html_image($d->getFileTypeImage(), '22', '22', array('alt'=>$d->getFileType())), array('title' => _('View this document')));
+					$cells[][] = util_make_link('/docman/view.php/'.$g->getID().'/'.$d->getID().'/'.urlencode($d->getFileName()), html_image($d->getFileTypeImage(), '20', '20', array('alt'=>$d->getFileType())), array('title' => _('View this document')));
 				}
 			}
 			$nextcell = '';
 			if (($d->getUpdated() && $time_new > (time() - $d->getUpdated())) || $time_new > (time() - $d->getCreated())) {
-				$nextcell.= html_image('docman/new.png', '14', '14', array('alt' => _('new'), 'class' => 'docman-newdocument', 'title' => _('Created or updated since less than 7 days'))).'&nbsp;';
+				$nextcell.= $HTML->getNewPic(_('Created or updated since less than 7 days'), 'new', array('class' => 'docman-newdocument')).'&nbsp;';
 			}
 			$cells[] = array($nextcell.$d->getFileName(), 'style' => 'word-wrap: break-word; max-width: 250px;');
 			$cells[] = array($d->getName(), 'style' => 'word-wrap: break-word; max-width: 250px;');
@@ -107,7 +107,7 @@ jQuery(document).ready(function() {
 			}
 			$editfileaction .= '&group_id='.$GLOBALS['group_id'];
 			$nextcell .= util_make_link('#', html_image('docman/edit-file.png', 22, 22, array('alt' => _('Edit this document'))), array('onclick' => 'javascript:controllerListPending.toggleEditFileView({action:\''.util_make_uri($editfileaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json').', docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').', title:\''.htmlspecialchars($d->getName()).'\', filename:\''.$d->getFilename().'\', description:\''.htmlspecialchars($d->getDescription()).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri("docman").'\'})', 'title' => _('Edit this document')), true);
-			$nextcell .= util_make_link('#', html_image('docman/validate.png', 22, 22, array('alt' => _('Activate in this folder'))), array('onclick' => 'window.location.href=\''.util_make_uri($redirecturl.'&action=validatefile&fileid='.$d->getID()), 'title' => _('Activate in this folder')), true);
+			$nextcell .= util_make_link('#', html_image('docman/validate.png', 22, 22, array('alt' => _('Activate in this folder'))), array('onclick' => 'window.location.href=\''.util_make_uri($redirecturl.'&action=validatefile&fileid='.$d->getID()).'\'', 'title' => _('Activate in this folder')), true);
 			$cells[][] = $nextcell;
 			echo $HTML->multiTableRow(array(), $cells);
 		}

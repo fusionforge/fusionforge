@@ -71,7 +71,7 @@ $nested_docs = array();
 $DocGroupName = 0;
 
 if ($dirid) {
-	$ndg = new DocumentGroup($g, $dirid);
+	$ndg = documentgroup_get_object($dirid);
 	$DocGroupName = $ndg->getName();
 	if (!$DocGroupName) {
 		$error_msg = $g->getErrorMessage();
@@ -99,8 +99,9 @@ echo $HTML->openForm(array('id' => 'emptytrash', 'name' => 'emptytrash', 'method
 echo html_e('input', array('id' => 'submitemptytrash', 'type' => 'submit', 'value' => _('Delete permanently all documents and folders with deleted status.')));
 echo $HTML->closeForm();
 echo html_ac(html_ap() - 1);
+echo html_ao('script', array('type' => 'text/javascript'));
 ?>
-<script type="text/javascript">//<![CDATA[
+//<![CDATA[
 var controllerListTrash;
 
 jQuery(document).ready(function() {
@@ -108,23 +109,27 @@ jQuery(document).ready(function() {
 		groupId:		<?php echo $group_id ?>,
 		divEditDirectory:	jQuery('#editdocgroup'),
 		buttonEditDirectory:	jQuery('#docman-editdirectory'),
-		docManURL:		'<?php util_make_uri('/docman') ?>',
+		docManURL:		'<?php echo util_make_uri('/docman') ?>',
 		lockIntervalDelay:	60000, //in microsecond and if you change this value, please update the check value 600
 		divLeft:		jQuery('#leftdiv'),
 		divRight:		jQuery('#rightdiv'),
 		divEditFile:		jQuery('#editFile'),
 		divEditTitle:		'<?php echo _("Edit document dialog box") ?>',
 		enableResize:		true,
-		page:			'trashfile'
+		page:			'trashfile',
+		docgroupId:		<?php echo $dirid ?>,
+		lockIntervalDelay:	60000
 	});
 });
-//]]></script>
+//]]>
 <?php
+echo html_ac(html_ap() - 1);
+
 if ($DocGroupName) {
 	$content = _('Document Folder')._(': ').html_e('i', array(), $DocGroupName, false).'&nbsp;';
 	if ($DocGroupName != '.trash') {
-		$content .= util_make_link('#', $HTML->getConfigurePic('', _('Edit')), array('id' => 'docman-editdirectory', 'title' => _('Edit this folder'), 'onclick' => 'javascript:controllerListTrash.toggleEditDirectoryView({lockIntervalDelay: 60000, doc_group:'.$ndg->getID().', groupId:'.$ndg->Group->getID().', docManURL:\''.util_make_uri('/docman').'\'})' ), true);
-		$content .= util_make_link($redirecturl.'&action=deldir', html_image('docman/delete-directory.png', 22, 22, array('alt' => _('Delete folder'))), array('id' => 'docman-deletedirectory', 'title' => _('Delete permanently this folder and his content.')));
+		$content .= util_make_link('#', $HTML->getConfigurePic(_('Edit this folder'), 'edit'), array('id' => 'docman-editdirectory', 'onclick' => 'javascript:controllerListTrash.toggleEditDirectoryView()'), true);
+		$content .= util_make_link($redirecturl.'&action=deldir', $HTML->getRemovePic(_('Delete permanently this folder and his content.'), 'deldir'), array('id' => 'docman-deletedirectory'));
 	}
 	echo html_e('h3', array('class' => 'docman_h3'), $content, false);
 	echo html_ao('div', array('class' => 'docman_div_include hide', 'id' => 'editdocgroup'));
@@ -148,12 +153,12 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 				break;
 			}
 			default: {
-				$cells[][] = util_make_link('/docman/view.php/'.$group_id.'/'.$d->getID().'/'.urlencode($d->getFileName()), html_image($d->getFileTypeImage(), '22', '22', array('alt' => $d->getFileType())), array('title' => _('View this document')));
+				$cells[][] = util_make_link('/docman/view.php/'.$group_id.'/'.$d->getID().'/'.urlencode($d->getFileName()), html_image($d->getFileTypeImage(), '20', '20', array('alt' => $d->getFileType())), array('title' => _('View this document')));
 			}
 		}
 		$nextcell ='';
 		if (($d->getUpdated() && $time_new > (time() - $d->getUpdated())) || $time_new > (time() - $d->getCreated())) {
-			$nextcell =  html_image('docman/new.png', '14', '14', array('alt' => _('new'), 'class' => 'docman-newdocument', 'title' => _('Updated since less than 7 days'))).'&nbsp;';
+			$nextcell.= $HTML->getNewPic(_('Created or updated since less than 7 days'), 'new', array('class' => 'docman-newdocument')).'&nbsp;';
 		}
 		$cells[] = array($nextcell.$d->getFileName(), 'style' => 'word-wrap: break-word; max-width: 250px;');
 		$cells[] = array($d->getName(), 'style' => 'word-wrap: break-word; max-width: 250px;');
@@ -182,7 +187,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		}
 		$editfileaction .= '&group_id='.$GLOBALS['group_id'];
 		$nextcell = '';
-		$nextcell .= util_make_link($redirecturl.'&action=delfile&fileid='.$d->getID(), html_image('docman/delete-directory.png', 22, 22, array('alt' => _('Delete permanently this document.'))), array('title' => _('Delete permanently this document.')));
+		$nextcell .= util_make_link($redirecturl.'&action=delfile&fileid='.$d->getID(), $HTML->getRemovePic(_('Delete permanently this document.'), 'delfile'));
 		$nextcell .= util_make_link('#', html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this document'))), array('onclick' => 'javascript:controllerListTrash.toggleEditFileView({action:\''.util_make_uri($editfileaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json','2').', docgroupDict:'.$dm->getDocGroupList($newdgf->getNested(), 'json').', title:\''.$d->getName().'\', filename:\''.$d->getFilename().'\', description:\''.$d->getDescription().'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri("docman").'\'})', 'title' => _('Edit this document')), true);
 		$cells[][] = $nextcell;
 		echo $HTML->multiTableRow(array(), $cells);
@@ -191,7 +196,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 	echo html_ao('p');
 	echo html_ao('span', array('id' => 'massactionactive', 'class' => 'hide'));
 	echo html_e('span', array('id' => 'docman-massactionmessage', 'title' => _('Actions availables for selected documents, you need to check at least one document to get actions')), _('Mass actions for selected documents:'), false);
-	echo util_make_link('#', html_image('docman/delete-directory.png', 22, 22, array('alt' => _('Permanently Delete'))), array('onclick' => 'window.location.href=\''.util_make_uri($redirecturl.'&action=delfile&fileid=\'+controllerListTrash.buildUrlByCheckbox("active")'), 'title' => _('Permanently Delete')), true);
+	echo util_make_link('#', $HTML->getRemovePic(_('Permanently Delete'), 'del'), array('onclick' => 'window.location.href=\''.util_make_uri($redirecturl.'&action=delfile&fileid=\'+controllerListTrash.buildUrlByCheckbox("active")')), true);
 	echo util_make_link('#', html_image('docman/download-directory-zip.png', 22, 22, array('alt' => _('Download as a ZIP'))), array('onclick' => 'window.location.href=\''.util_make_uri('/docman/view.php/'.$group_id.'/zip/selected/\'+controllerListTrash.buildUrlByCheckbox("active")'), 'title' => _('Download as a ZIP')), true);
 	echo html_ac(html_ap() - 3);
 } else {

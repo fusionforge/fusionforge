@@ -153,7 +153,7 @@ class DocumentManager extends Error {
 		global $g; // the master group of all the groups .... anyway.
 		$dg = new DocumentGroup($this->Group);
 		switch ($linkmenu) {
-			case "listtrashfile": {
+			case 'listtrashfile': {
 				$stateId = 2;
 				break;
 			}
@@ -165,7 +165,7 @@ class DocumentManager extends Error {
 		$subGroupIdArr = $dg->getSubgroup($docGroupId, $stateId);
 		if (sizeof($subGroupIdArr)) {
 			foreach ($subGroupIdArr as $subGroupIdValue) {
-				$localDg = new DocumentGroup($this->Group, $subGroupIdValue);
+				$localDg = documentgroup_get_object($subGroupIdValue);
 				$liclass = 'docman_li_treecontent';
 				if ($selecteddir == $localDg->getID()) {
 					$liclass = 'docman_li_treecontent_selected';
@@ -267,7 +267,7 @@ class DocumentManager extends Error {
 		$this->buildArrays($nested_groups, $id_array, $text_array, $dont_display);
 		$rows = count($id_array);
 		switch ($format) {
-			case "json": {
+			case 'json': {
 				$returnString = '{';
 				for ($i=0; $i<$rows; $i++) {
 					$returnString .= '\''.util_html_secure(addslashes($text_array[$i])).'\':'.$id_array[$i].',';
@@ -367,11 +367,11 @@ class DocumentManager extends Error {
 				$union = 1;
 			}
 			$qpa = db_construct_qpa($qpa, 'SELECT count(*) FROM activity_vw WHERE activity_date BETWEEN $1 AND $2
-			AND group_id = $3 AND section = $4 ',
-			array($begin,
-				$end,
-				$this->getGroup()->getID(),
-				$sections[$i]));
+							AND group_id = $3 AND section = $4 ',
+							array($begin,
+								$end,
+								$this->getGroup()->getID(),
+								$sections[$i]));
 			if ($union) {
 				$qpa = db_construct_qpa($qpa, ' UNION ALL ', array());
 			}

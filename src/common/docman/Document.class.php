@@ -254,7 +254,7 @@ class Document extends Error {
 			}
 		}
 		$this->sendNotice(true);
-		$this->SendApprovalNotice();
+		$this->sendApprovalNotice();
 		db_commit();
 		if ($filesize) {
 			DocumentStorage::instance()->commit();
@@ -725,7 +725,7 @@ class Document extends Error {
 			case "text/x-c":
 			case "text/x-diff":
 			case "text/x-shellscript": {
-				$image = 'docman/file_type_plain.png';
+				$image = 'ic/file-txt.png';
 				break;
 			}
 			case "application/msword":
@@ -899,23 +899,23 @@ class Document extends Error {
 	}
 
 	/**
-	 * SendApprovalNotice - send email to project admin for pending documents.
+	 * sendApprovalNotice - send email to project admin for pending documents.
 	 *
 	 * @return	boolean	success.
 	 */
-	function SendApprovalNotice() {
+	function sendApprovalNotice() {
 		if ($this->getStateID() != 3)
 			return true;
 
 		$doc_name = $this->getName();
-		$desc     = util_unconvert_htmlspecialchars( $this->getDescription() );
+		$desc     = util_unconvert_htmlspecialchars($this->getDescription());
 		$group_id = $this->Group->getID();
 		$name     = $this->getCreatorRealName()." (".$this->getCreatorUserName().")";
 		$bcc      = '';
 
 		$subject="[" . forge_get_config('forge_name') ."] ".util_unconvert_htmlspecialchars($doc_name);
 		$body = "\n"._('A new document has been uploaded and waiting to be approved by you')._(': ').
-		"\n".util_make_url('/docman/?group_id='.$group_id.'&view=admin').
+		"\n".util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$this->getDocGroupID().'&filedetailid='.$this->getID()).
 		"\n"._('by').(': ').$name."\n";
 
 		$sanitizer = new TextSanitizer();

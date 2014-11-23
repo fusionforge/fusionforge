@@ -130,6 +130,7 @@ class Deprecations_Tests extends PHPUnit_Framework_TestCase
 			       'sys_share_path',
 			       'sys_var_path',
 			       'sys_etc_path',
+			       'sys_show_contact_info'
 			) ;
 
 		$pattern = implode ('|', $vars) ;

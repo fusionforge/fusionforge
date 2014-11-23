@@ -101,22 +101,25 @@ function build_deb {
     fi
 
     # Finally, build the FusionForge packages
-    cd /usr/src/fusionforge/src
     f=$(mktemp)
-    cp debian/changelog $f
+    cd $(dirname $0)/../src/
+    cp -a debian/changelog $f
+
     version=$(dpkg-parsechangelog | sed -n 's/^Version: \([0-9.]\+\(\~rc[0-9]\)\?\).*/\1/p')+$(date +%Y%m%d%H%M)
     debian/rules debian/control  # re-gen debian/control
     dch --newversion $version-1 --distribution local --force-distribution "Autobuilt."
     make dist VERSION=$version
     mv fusionforge-$version.tar.bz2 ../fusionforge_$version.orig.tar.bz2
     cd ..
+
     tar xf fusionforge_$version.orig.tar.bz2
     cd fusionforge-$version/
     debuild -us -uc -tc  # using -tc so 'git status' is readable
-    
     # Install built packages into the local repo
     debrelease -f local
-    mv $f debian/changelog
+    cd ..
+
+    mv $f src/debian/changelog
     
     # Declare the repo so that packages become installable
     echo 'deb file:///usr/src/debian-repository local/' > /etc/apt/sources.list.d/local.list
@@ -126,6 +129,7 @@ function build_deb {
 
 function build_rpm {
     # Install build dependencies
+    yum makecache
     yum install -y make gettext tar bzip2 rpm-build  createrepo
     yum install -y php-cli  # rpm/gen_spec.sh
     

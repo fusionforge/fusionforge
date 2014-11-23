@@ -1,4 +1,7 @@
 ScriptAliasMatch ^/plugins/([^/]*)/cgi-bin/(.*) {core/source_path}/plugins/$1/cgi-bin/$2
+<DirectoryMatch {core/source_path}/plugins/[^/]*/cgi-bin/>
+  Include {core/config_path}/httpd.conf.d/auth-main.inc
+</DirectoryMatch>
 
 Alias {core/url_prefix}anonscm/ {core/data_path}/chroot/scmrepos/
 

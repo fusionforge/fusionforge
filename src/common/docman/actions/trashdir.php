@@ -26,11 +26,13 @@
 
 /* please do not add require here : use www/docman/index.php to add require */
 /* global variables used */
-global $g; //group object
 global $dirid; //id of doc_group
 global $group_id; // id of group
+global $feedback;
+global $error_msg;
+global $warning_msg;
 
-$redirecturl = '/docman/?group_id='.$group_id.'&view=listfile';
+$redirecturl = '/docman/?group_id='.$group_id;
 if (!forge_check_perm('docman', $group_id, 'approve')) {
 	$warning_msg = _('Document Manager Action Denied.');
 	session_redirect($redirecturl.'&dirid='.$dirid);
@@ -44,14 +46,13 @@ if ($childgroup_id) {
 		session_redirect($redirecturl.'&dirid='.$dirid);
 	}
 	$redirecturl .= '&childgroup_id='.$childgroup_id;
-	$g = group_get_object($childgroup_id);
 }
 
 /* set this dirid to trash */
-$dg = new DocumentGroup($g, $dirid);
+$dg = documentgroup_get_object($dirid);
 $currentParent = $dg->getParentID();
 
-if (!$dg->trash()) {
+if ($dg->isError() || !$dg->trash()) {
 	$error_msg = $dg->getErrorMessage();
 	session_redirect($redirecturl.'&dirid='.$dirid);
 }

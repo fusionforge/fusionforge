@@ -26,10 +26,8 @@
 /* global variables used */
 global $dirid; //id of doc_group
 global $group_id; // id of group
-global $LUSER; // User object
 
-$baseurl = '/docman/?group_id='.$group_id;
-$redirecturl = $baseurl.'&view=listfile&dirid='.$dirid;
+$redirecturl = '/docman/?group_id='.$group_id.'&dirid='.$dirid;
 
 // plugin projects-hierarchy handler
 $childgroup_id = getIntFromRequest('childgroup_id');
@@ -53,8 +51,8 @@ switch ($option) {
 	case 'start': {
 		foreach ($arr_fileid as $fileid) {
 			if (!empty($fileid)) {
-				$d = new Document($g, $fileid);
-				if ($d->isError() || !$d->addMonitoredBy($LUSER->getID())) {
+				$d = document_get_object($fileid);
+				if ($d->isError() || !$d->addMonitoredBy(user_getid())) {
 					$error_msg = $d->getErrorMessage();
 					session_redirect($redirecturl);
 				}
@@ -70,7 +68,7 @@ switch ($option) {
 	case 'stop': {
 		foreach ($arr_fileid as $fileid) {
 			if (!empty($fileid)) {
-				$d = new Document($g, $fileid);
+				$d = document_get_object($fileid);
 				if ($d->isError() || !$d->removeMonitoredBy($LUSER->getID())) {
 					$error_msg = $d->getErrorMessage();
 					session_redirect($redirecturl);

@@ -71,13 +71,14 @@ if (sizeof($linksArray)) {
 		$cells[][] = htmlspecialchars($link['description']);
 		if ($link['is_enable']) {
 			$cells[][] = html_image('docman/validate.png', 22, 22, array('alt'=>_('link is on'), 'title'=>_('link is on')));
-			$cells[][] = util_make_link('/plugins/'.$headermenu->name.'?type=projectadmin&group_id='.$group_id.'&action=updateLinkStatus&linkid='.$link['id_headermenu'].'&linkstatus=0', html_image('docman/release-document.png', 22, 22, array('alt'=>_('Desactivate this link'))), array('title' => _('Desactivate this link')));
+			$actionsLinks = util_make_link('/plugins/'.$headermenu->name.'?type=projectadmin&group_id='.$group_id.'&action=updateLinkStatus&linkid='.$link['id_headermenu'].'&linkstatus=0', html_image('docman/release-document.png', 22, 22, array('alt'=>_('Desactivate this link'))), array('title' => _('Desactivate this link')));
 		} else {
-			$cells[][] = html_image('docman/delete-directory.png', 22, 22, array('alt'=>_('link is off'), 'title'=>_('link is off')));
-			$cells[][] = util_make_link('/plugins/'.$headermenu->name.'?type=projectadmin&group_id='.$group_id.'&action=updateLinkStatus&linkid='.$link['id_headermenu'].'&linkstatus=1', html_image('docman/reserve-document.png', 22, 22, array('alt'=>_('Activate this link'))), array('title' => _('Activate this link')));
+			$cells[][] = $HTML->getRemovePic('', '', array('alt'=>_('link is off'), 'title'=>_('link is off')));
+			$actionsLinks = util_make_link('/plugins/'.$headermenu->name.'?type=projectadmin&group_id='.$group_id.'&action=updateLinkStatus&linkid='.$link['id_headermenu'].'&linkstatus=1', html_image('docman/reserve-document.png', 22, 22, array('alt'=>_('Activate this link'))), array('title' => _('Activate this link')));
 		}
-		$cells[][] = util_make_link('/plugins/'.$headermenu->name.'?type=projectadmin&group_id='.$group_id.'&view=updateLinkValue&linkid='.$link['id_headermenu'], html_image('docman/edit-file.png',22,22, array('alt'=>_('Edit this link'))), array('title' => _('Edit this link')));
-		$cells[][] = util_make_link('/plugins/'.$headermenu->name.'?type=projectadmin&group_id='.$group_id.'&action=deleteLink&linkid='.$link['id_headermenu'], html_image('docman/trash-empty.png',22,22, array('alt'=>_('Delete this link'))), array('title' => _('Delete this link')));
+		$actionsLinks .= util_make_link('/plugins/'.$headermenu->name.'?type=projectadmin&group_id='.$group_id.'&view=updateLinkValue&linkid='.$link['id_headermenu'], html_image('docman/edit-file.png',22,22, array('alt'=>_('Edit this link'))), array('title' => _('Edit this link')));
+		$actionsLinks .= util_make_link('/plugins/'.$headermenu->name.'?type=projectadmin&group_id='.$group_id.'&action=deleteLink&linkid='.$link['id_headermenu'], html_image('docman/trash-empty.png',22,22, array('alt'=>_('Delete this link'))), array('title' => _('Delete this link')));
+		$cells[][] = $actionsLinks;
 		echo $HTML->multiTableRow(array('id' => $link['id_headermenu']), $cells);
 	}
 	echo $HTML->listTableBottom();
@@ -91,27 +92,13 @@ echo $HTML->openForm(array('method' => 'POST', 'name' => 'addLink', 'action' => 
 echo $HTML->listTableTop();
 $cells = array();
 $cells[] = array(_('Displayed Name').utils_requiredField()._(':'), 'style' => 'text-align:right');
-$cells[][] = '<input required="required" name="name" type="text" maxlength="255" />';
+$cells[][] = html_e('input', array('required' => 'required', 'name' => 'name', 'type' => 'text', 'maxlength' => 255));
 echo $HTML->multiTableRow(array(), $cells);
 $cells = array();
 $cells[] = array(_('Description')._(':'), 'style' => 'text-align:right');
-$cells[][] = '<input name="description" type="text" maxlength="255" />';
+$cells[][] = html_e('input', array('name' => 'description', 'type' => 'text', 'maxlength' => 255));
 echo $HTML->multiTableRow(array(), $cells);
-$cells = array();$params['name'] = 'htmlcode';$params['name'] = 'htmlcode';
-$params['body'] = _('Just paste your code here...');;
-$params['width'] = "800";
-$params['height'] = "500";
-$params['user_id'] = user_getid();
-$params['content'] = '<textarea name="htmlcode" rows="5" cols="80">'.$params['body'].'</textarea>';
-plugin_hook("text_editor", $params);
-$cells[][] = $params['content'];
-$params['body'] = _('Just paste your code here...');;
-$params['width'] = "800";
-$params['height'] = "500";
-$params['user_id'] = user_getid();
-$params['content'] = '<textarea name="htmlcode" rows="5" cols="80">'.$params['body'].'</textarea>';
-plugin_hook("text_editor", $params);
-$cells[][] = $params['content'];
+$cells = array();
 $cells[] = array(_('Tab Type')._(':'), 'style' => 'text-align:right');
 $texts = array('URL', 'HTML Page');
 $vals = array('url', 'htmlcode');
@@ -130,13 +117,14 @@ $cells[][] = $params['content'];
 echo $HTML->multiTableRow(array('id' => 'trhtmlcode', 'class' => 'hide'), $cells);
 $cells = array();
 $cells[] = array(_('URL').utils_requiredField()._(':'), 'style' => 'text-align:right');
-$cells[][] = '<input name="link" type="text" maxlength="255" />';
+$cells[][] = html_e('input', array('name' => 'link', 'type' => 'url', 'maxlength' => 255));
 echo $HTML->multiTableRow(array('id' => 'urlcode'), $cells);
 $cells = array();
-$cells[] = array('<input name="iframeview" type="checkbox" value="1" />'._('Display URL as iframe'), 'colspan' => 2);
+$cells[] = array(_('Display URL as iframe')._(':'), 'style' => 'text-align:right');
+$cells[][] = html_e('input', array('name' => 'iframeview', 'type' => 'checkbox', 'value' => 1));
 echo $HTML->multiTableRow(array('id' => 'iframe'), $cells);
 $cells = array();
-$cells[] = array('<input type="hidden" name="linkmenu" value="groupmenu" /><input type="submit" value="'. _('Add') .'" />', 'colspan' => 2);
+$cells[] = array(html_e('input', array('type' => 'hidden', 'name' => 'linkmenu', 'value' => 'groupmenu')).html_e('input', array('type' => 'submit', 'value' => _('Add'))), 'colspan' => 2);
 echo $HTML->multiTableRow(array(), $cells);
 echo $HTML->listTableBottom();
 echo $HTML->closeForm();
