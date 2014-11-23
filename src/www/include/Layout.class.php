@@ -1372,7 +1372,7 @@ if (isset($params['group']) && $params['group']) {
 				jQuery(document).ready(function() {
 						jQuery('#$element_id-ajax').html('".$spinner."');
 						jQuery.ajax({url:'". util_make_uri($widget->getAjaxUrl($owner_id, $owner_type)) ."',
-							success: function(result){jQuery('#$element_id-ajax').html(result)},
+							success: function(result){jQuery('#$element_id-ajax').html(result)}
 							});
 						});
 			/* ]]> */</script>";
@@ -1467,6 +1467,7 @@ if (isset($params['group']) && $params['group']) {
 	 *						['attrs'] = array of html attrs applied to the li element
 	 * @param	array	$attrs		array of attributes of the ol element. Default empty array.
 	 * @param	string	$type		type of list : ol or ul. Default is ul.
+	 * @return string
 	 */
 	function html_list($elements, $attrs = array() , $type = 'ul') {
 		$htmlcode = html_ao($type, $attrs);
