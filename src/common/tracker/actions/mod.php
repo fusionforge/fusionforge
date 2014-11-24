@@ -120,7 +120,7 @@ if (session_loggedin()) {
 				$submittedUnixName = $ah->getSubmittedUnixName();
 				$submittedBy = $ah->getSubmittedBy();
 				?>
-				(<tt><?php echo util_make_link_u ($submittedUnixName,$submittedBy,$submittedUnixName); ?></tt>)
+				(<samp><?php echo util_make_link_u ($submittedUnixName,$submittedBy,$submittedUnixName); ?></samp>)
 			<?php } ?>
 		</td>
 		<td><strong><?php echo _('Date Submitted')._(':'); ?></strong><br />

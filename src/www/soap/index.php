@@ -172,6 +172,7 @@ function login($userid, $passwd) {
  * logout - Logs out a SOAP client
  *
  * @param 	string	$session_ser	sessionkey	The session key
+ * @return string
  */
 function logout($session_ser) {
 	continue_session($session_ser);

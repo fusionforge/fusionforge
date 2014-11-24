@@ -814,6 +814,7 @@ function build_priority_select_box($name = 'priority', $checked_val = '3', $noch
  * @param	string	$name		Name of the select box
  * @param	string	$checked_val	The value to be checked
  * @param	bool	$nochange	Whether to make 'No Change' selected.
+ * @return string
  */
 function html_build_priority_select_box($name = 'priority', $checked_val = '3', $nochange = false) {
 	$html = '<select id="tracker-'.$name.'" name="'.$name.'" title="'.util_html_secure(html_get_tooltip_description($name)).'">';
