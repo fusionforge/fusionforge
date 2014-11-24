@@ -49,21 +49,21 @@ function backports_deb {
 function backport_rpm_from_fedora {
     target=$1
 
-    if yum list $target >/dev/null 2>&1; then
-	yum install -y $target
+    if yum -C list $target >/dev/null 2>&1; then
+	yum -C install -y $target
     else
 	yumdownloader --enablerepo=fedora --source $target
 	for DEP in $DEPS ; do
-	    if ! yum install -y $DEP ; then
+	    if ! yum -C install -y $DEP ; then
 		yumdownloader --enablerepo=fedora $DEP
-		yum install -y $DEP-*.noarch.rpm
+		yum -C install -y $DEP-*.noarch.rpm
 	    fi
 	done
 	rpmbuild --rebuild $target-*.src.rpm
 	if [ -n "$REMOVEDEPS" ] ; then
-	    yum remove -y $REMOVEDEPS
+	    yum -C remove -y $REMOVEDEPS
 	fi
-	yum install -y ~/rpmbuild/RPMS/*/$target-[0-9]*.*.rpm
+	yum -C install -y ~/rpmbuild/RPMS/*/$target-[0-9]*.*.rpm
     fi
 }
 
@@ -102,7 +102,7 @@ gpgcheck=0
 EOF
 	yum install -y yum-utils # yumdownloader
 	if [ ! -e /usr/bin/rpmbuild ] ; then
-	    yum install -y rpm-build
+	    yum -C install -y rpm-build
 	fi
     fi
 
