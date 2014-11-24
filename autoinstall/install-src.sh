@@ -30,7 +30,7 @@ if [ -e /etc/debian_version ]; then
     backports_deb
     apt-get update
     apt-get install -y make gettext php5-cli php5-pgsql php-htmlpurifier \
-	libapache2-mpm-itk \
+	libapache2-mpm-itk libapache2-mod-svn \
 	apache2 postgresql libnss-pgsql2 unscd \
 	subversion augeas-tools viewvc git \
 	mediawiki \
