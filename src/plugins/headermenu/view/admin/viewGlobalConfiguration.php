@@ -83,7 +83,7 @@ if (sizeof($linksHeaderMenuArray)) {
 		echo $HTML->multiTableRow(array('id' => $link['id_headermenu']), $cells);
 	}
 	echo $HTML->listTableBottom();
-	echo html_e('input', array(), 'type' => 'button', 'id' => 'linkorderheadervalidatebutton', 'value' => _('Save Order'), 'class' => 'hide');
+	echo html_e('input', array('type' => 'button', 'id' => 'linkorderheadervalidatebutton', 'value' => _('Save Order'), 'class' => 'hide'));
 	echo html_e('br');
 } else {
 	echo $HTML->information(_('No tabs available for headermenu'));
@@ -117,7 +117,7 @@ if (sizeof($linksOuterMenuArray)) {
 		echo $HTML->multiTableRow(array('id' => $link['id_headermenu']), $cells);
 	}
 	echo $HTML->listTableBottom();
-	echo html_e('input', array(), 'type' => 'button', 'id' => 'linkorderoutervalidatebutton', 'value' => _('Save Order'), 'class' => 'hide');
+	echo html_e('input', array('type' => 'button', 'id' => 'linkorderoutervalidatebutton', 'value' => _('Save Order'), 'class' => 'hide'));
 	echo html_e('br');
 } else {
 	echo $HTML->information(_('No tabs available for outermenu'));
