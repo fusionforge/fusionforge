@@ -33,7 +33,8 @@ if [ -e /etc/debian_version ]; then
 	apache2 postgresql libnss-pgsql2 unscd \
 	subversion augeas-tools viewvc git \
 	mediawiki \
-	python-moinmoin libapache2-mod-wsgi python-psycopg2
+	python-moinmoin libapache2-mod-wsgi python-psycopg2 \
+	unoconv
     if [ $(cat /etc/lsb-release | sed -n 's/DISTRIB_ID=//p') != 'Ubuntu' ]; then
 	apt-get install locales-all  # https://bugs.launchpad.net/ubuntu/+source/glibc/+bug/1394929
     fi
@@ -44,7 +45,8 @@ else
 	httpd mod_ssl postgresql-server nscd \
 	subversion augeas viewvc git gitweb \
 	mediawiki119 \
-	moin mod_wsgi python-psycopg2
+	moin mod_wsgi python-psycopg2 \
+	unoconv
 fi
 
 cd $(dirname $0)/../src/

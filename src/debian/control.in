@@ -73,7 +73,7 @@ Description: collaborative development tool - database (remote)
 
 Package: fusionforge-web
 Architecture: all
-Depends: fusionforge-common (=${source:Version}), fusionforge-db, php5-cli, libapache2-mod-php5, libphp-simplepie, php-http, php-http-webdav-server, libjs-jquery-livequery, python, ucf, ${misc:Depends}
+Depends: fusionforge-common (=${source:Version}), fusionforge-db, php5-cli, libapache2-mod-php5, libphp-simplepie, php-http, php-http-webdav-server, libjs-jquery-livequery, python, ucf, unoconv, ${misc:Depends}
 Recommends: locales-all
 Description: collaborative development tool - web part (using Apache)
  FusionForge provides many tools to aid collaboration in a
