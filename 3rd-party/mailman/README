@@ -1,0 +1,19 @@
++mailman (1:2.1.13-2coclico4) unstable; urgency=low
++
++  * Add python dependancy for postgres and mysql
++
++ -- Christian Bayle <bayle@debian.org>  Tue, 30 Mar 2010 11:06:21 +0200
++
++mailman (1:2.1.13-2coclico1) karmic; urgency=low
++
++  * Add forum archiver patch that allow multiple archivers
++  * Session :
++     - Modify SecurityManager.py to make it extendable
++     - Add OldSecurityManager.py as the default security manager
++  * MailList.py : modified
++     - Search extend.py first in /var/lib/lists
++     - Make it possible to extend SecurityManager.py
++  * Add dist-packages (python library directory) to ./misc/paths.py.in
++
++ -- Mélanie Le Bail <melanie.lebail@orange-ftgroup.com>  Mon, 29 Mar 2010 11:30:40 +0200
++
