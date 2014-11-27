@@ -119,14 +119,12 @@ hr {
 
 /* =header */
 #header {
-	background: rgb(66, 69, 82) url("../images/header/header-bg.png");
-	background-color: white;
+	background: white url("../images/header/header-bg.png");
 	font-size:77%;
 	margin: 0;
 	border-top-left-radius: 6px;
 	border-top-right-radius: 6px;
 	border-collapse: collapse;
-
 }
 
 #header-col1 {
@@ -714,7 +712,6 @@ p.information {
 	footer
 */
 .footer {
-	background-color: gray;
 	padding: 10px;
 	background: rgb(66, 69, 82) url("../images/header/header-bg.png");
 	border-top: 1px solid #f7f7f7;

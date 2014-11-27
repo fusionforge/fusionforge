@@ -1281,12 +1281,28 @@ if (isset($params['group']) && $params['group']) {
 		return $this->getPicto('ic/delete.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
+	function getRemovePic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/remove.png', $title, $alt, 20, 20, $otherAttr);
+	}
+
 	function getConfigurePic($title = '', $alt = '', $otherAttr = array()) {
 		return $this->getPicto('ic/configure.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
 	function getZipPic($title = '', $alt = '', $otherAttr = array()) {
 		return $this->getPicto('ic/file_type_archive.png', $title, $alt, 20, 20, $otherAttr);
+	}
+
+	function getAddDirPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/directory-add.png', $title, $alt, 20, 20, $otherAttr);
+	}
+
+	function getNewPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/add.png', $title, $alt, 20, 20, $otherAttr);
+	}
+
+	function getFolderPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/folder.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
 	function getPicto($url, $title, $alt, $width = '20', $height = '20', $otherAttr = array()) {
@@ -1372,7 +1388,7 @@ if (isset($params['group']) && $params['group']) {
 				jQuery(document).ready(function() {
 						jQuery('#$element_id-ajax').html('".$spinner."');
 						jQuery.ajax({url:'". util_make_uri($widget->getAjaxUrl($owner_id, $owner_type)) ."',
-							success: function(result){jQuery('#$element_id-ajax').html(result)},
+							success: function(result){jQuery('#$element_id-ajax').html(result)}
 							});
 						});
 			/* ]]> */</script>";
@@ -1488,6 +1504,7 @@ if (isset($params['group']) && $params['group']) {
 	 *						['attrs'] = array of html attrs applied to the li element
 	 * @param	array	$attrs		array of attributes of the ol element. Default empty array.
 	 * @param	string	$type		type of list : ol or ul. Default is ul.
+	 * @return string
 	 */
 	function html_list($elements, $attrs = array() , $type = 'ul') {
 		$htmlcode = html_ao($type, $attrs);

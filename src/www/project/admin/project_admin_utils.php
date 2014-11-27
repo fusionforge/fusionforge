@@ -30,7 +30,7 @@
 */
 
 function project_admin_header($params) {
-	global $group_id, $feedback, $HTML;
+	global $group_id, $HTML;
 
 	$params['toptab'] = 'admin';
 	$params['group'] = $group_id;

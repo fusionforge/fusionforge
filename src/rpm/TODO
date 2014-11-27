@@ -1,0 +1,9 @@
+We need Fedora packages for:
+- WebDAV support:
+  http://pear.php.net/package/HTTP_WebDAV_Server (cf. openSUSE and Mageia)
+- RDF plugins (admssw, doaprdf, extsubproj, foafprofiles):
+  https://github.com/semsol/arc2
+  http://graphite.ecs.soton.ac.uk/
+
+Additionally we need EPEL packages for:
+- php-htmlpurifier

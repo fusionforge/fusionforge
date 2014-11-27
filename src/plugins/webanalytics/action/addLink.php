@@ -2,7 +2,7 @@
 /**
  * webanalytics plugin
  *
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2014 Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -23,9 +23,8 @@
 
 global $webanalytics;
 
-session_require_global_perm('forge_admin');
 $link = getStringFromRequest('link');
-$name = getStringFromRequest('name');
+$name = strip_tags(getStringFromRequest('name'));
 
 if (!empty($link) && !empty($name)) {
 	if ($webanalytics->addLink($link, $name)) {
@@ -35,5 +34,5 @@ if (!empty($link) && !empty($name)) {
 	$error_msg = _('Task failed');
 	session_redirect('plugins/'.$webanalytics->name.'/?type=globaladmin');
 }
-$warning_msg = _('Missing Link URL or name.');
+$warning_msg = _('Missing Link Code or name.');
 session_redirect('plugins/'.$webanalytics->name.'/?type=globaladmin');

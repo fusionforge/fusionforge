@@ -155,7 +155,7 @@ div.scm form { margin: 0; }
   text-align: right;
 }
 .vc_file_line_text {
-  border-right-width: 0px;
+  border-right-width: 0;
   background-color: white;
   font-family: monospace;
   text-align: left;
