@@ -145,7 +145,7 @@ while ( $row = db_fetch_array($project_res) ) {
 		$mwwrapper = forge_get_config('source_path')."/plugins/mediawiki/bin/mw-wrapper.php" ;
 		$dumpfile = forge_get_config('config_path')."/plugins/mediawiki/initial-content.xml" ;
 
-		system ("$mwwrapper $project update.php --quick") ;
+		system ("$mwwrapper $project update.php --quick > /dev/null") ;
 		
 		if (file_exists ($dumpfile)) {
 			system ("$mwwrapper $project importDump.php $dumpfile") ;
