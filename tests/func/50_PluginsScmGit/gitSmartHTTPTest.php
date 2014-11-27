@@ -25,6 +25,14 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 {
 	function testScmGitSmartHTTP()
 	{
+		$forge_get_config = RUN_JOB_PATH."/forge_get_config";
+		$config_path = rtrim(`$forge_get_config config_path`);
+		file_put_contents("$config_path/config.ini.d/zzz-buildbot-gitsmarthttptest",
+				  "; Used for gitSmartHTTPTest.php
+[core]
+use_ssl = no
+");
+
 		$this->activatePlugin('scmgit');
 		$this->populateStandardTemplate('empty');
 		$this->init();
