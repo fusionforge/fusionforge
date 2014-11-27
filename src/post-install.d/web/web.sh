@@ -107,7 +107,13 @@ case "$1" in
 	    a2enmod dav
 	fi
 	# else: Apache modules already enabled in CentOS
-	
+
+	# Enable mpm-itk on RH/CentOS
+	if [ -e /etc/httpd/conf.modules.d/00-mpm-itk.conf ] \
+	       && ! grep -q ^LoadModule.mpm_itk_module /etc/httpd/conf.modules.d/00-mpm-itk.conf ; then
+	    sed -i -e s/^#LoadModule/LoadModule/ /etc/httpd/conf.modules.d/00-mpm-itk.conf
+	fi
+
 	if [ -x /usr/sbin/a2dissite ]; then
 	    a2dissite 000-default
 	fi
