@@ -40,6 +40,8 @@ if (class_exists('ZipArchive')) {
 						array($packageArr['pid']));
 		$releaseArr = db_fetch_array($releaseRes);
 		$filesRes = db_query_params('select filename from frs_file where release_id = $1', array($releaseArr['rid']));
+		$packageArr['pname'] = util_secure_filename($packageArr['pname']);
+		$releaseArr['rname'] = util_secure_filename($releaseArr['rname']);
 		if (db_numrows($filesRes)) {
 			$zip = new ZipArchive();
 			$zipPath = forge_get_config('upload_dir').'/'.$packageArr['guxname'].'/'.$packageArr['pname'].'/'.$packageArr['pname'].'-latest.zip';
@@ -50,9 +52,9 @@ if (class_exists('ZipArchive')) {
 				} else {
 					$filesPath = forge_get_config('upload_dir').'/'.$packageArr['guxname'].'/'.$packageArr['pname'].'/'.$releaseArr['rname'];
 					while ($fileArr = db_fetch_array($filesRes)) {
-						$filePath = $filesPath.'/'.$fileArr['filename'];
+						$filePath = $filesPath.'/'.util_secure_filename($fileArr['filename']);
 						if ($zip->addFile($filePath, $fileArr['filename']) !== true) {
-							echo _('Cannot add file to the file archive')._(': ').$fileArr['filename'].' -> '.$zipPath."\n";
+							echo _('Cannot add file to the file archive')._(': ').$filePath.' -> '.$zipPath."\n";
 							$globalStatus = 1;
 						}
 					}
