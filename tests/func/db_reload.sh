@@ -159,6 +159,13 @@ if [ -d $dbdir.backup ]; then
     rm -rf $dbdir
     cp -a --reflink=auto $dbdir.backup $dbdir
 
+    pg_conf=$(ls /etc/postgresql/*/*/postgresql.conf /var/lib/pgsql/data/postgresql.conf 2>/dev/null | tail -1)
+
+    for i in fsync synchronous_commit full_page_writes ; do
+	if ! grep -q "^$i\b" $pg_conf; then
+	    echo "$i = off" >> $pg_conf
+	fi
+    done
 else
     # We will restore from the dump, then perform a backup so that it's there next time
     sleep 3
