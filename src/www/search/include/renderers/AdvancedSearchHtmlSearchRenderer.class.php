@@ -337,7 +337,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			<input class="ff" type="hidden" name="search" value="1"/>
 			<input class="ff" type="hidden" name="group_id" value="'.$group_id.'"/>
 			<div align="center"><br />
-			<table>
+			<table id="advsearchinput">
 				<tr class="ff">
 				<td class="ff" colspan ="2">
 					<input class="ff" type="text" size="60" name="words" value="'.stripslashes(htmlspecialchars($words)).'" />
@@ -346,10 +346,10 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 				</tr>
 				<tr class="ff">
 				<td class="ff top">
-					<input class="ff" type="radio" name="mode" value="'.SEARCH__MODE_AND.'" '.($isExact ? 'checked="checked"' : '').' />'._('with all words').'
+					<input class="ff" id="all_words" type="radio" name="mode" value="'.SEARCH__MODE_AND.'" '.($isExact ? 'checked="checked"' : '').' /><label for="all_words">'._('with all words').'</label>
 				</td>
 				<td class="ff">
-					<input class="ff" type="radio" name="mode" value="'.SEARCH__MODE_OR.'" '.(!$isExact ? 'checked="checked"' : '').' />'._('with one word').'
+					<input class="ff" id="one_word" type="radio" name="mode" value="'.SEARCH__MODE_OR.'" '.(!$isExact ? 'checked="checked"' : '').' /><label for="one_word">'._('with one word').'</label>
 				</td>
 				</tr>
 			</table><br />'
@@ -422,21 +422,24 @@ EOS;
 
 			$return .= '<fieldset>'."\n";
 			$return .= '<legend>';
-			$return .= '<input type="checkbox" name="'.$key.'_checkall"';
-			if (getStringFromRequest($key.'_checkall')) $return .= ' checked="checked"';
-			$return .= ' class="checkall" /><a href="#'.$key.'">'.$group_subsection_names[$key].'</a>';
+			$return .= '<input type="checkbox" id="'.$key.'_checkall" name="'.$key.'_checkall"';
+			if (getStringFromRequest($key.'_checkall'))
+				$return .= ' checked="checked"';
+			$return .= ' class="checkall" /><label for="'.$key.'_checkall">'.$group_subsection_names[$key].'</label>';
 			$return .= "\n";
 			$return .= '</legend>';
 
 			if (!is_array($section)) {
-				$return .= '		<input type="checkbox" name="'.$key.'"';
-				if (getStringFromRequest($key))	$return .= ' checked="checked"';
-				$return .= ' class="childCheckBox" />'.$group_subsection_names[$key].'<br />'."\n";
+				$return .= '		<input type="checkbox" id="'.$key.'" name="'.$key.'"';
+				if (getStringFromRequest($key))
+					$return .= ' checked="checked"';
+				$return .= ' class="childCheckBox" /><label for="'.$key.'">'.$group_subsection_names[$key].'</label><br />'."\n";
 			} else {
 				foreach($section as $underkey => $undersection) {
-					$return .= '	<input type="checkbox" name="'.$key.$underkey.'"';
-					if (getStringFromRequest($key.$underkey)) $return .= ' checked="checked"';
-					$return .= ' />'.$undersection.'<br />'."\n";
+					$return .= '	<input type="checkbox" id="'.$key.$underkey.'" name="'.$key.$underkey.'"';
+					if (getStringFromRequest($key.$underkey))
+						$return .= ' checked="checked"';
+					$return .= ' /><label for="'.$key.$underkey.'">'.$undersection.'</label><br />'."\n";
 				}
 			}
 
