@@ -42,7 +42,7 @@ else
     yum install -y make tar
     backports_rpm
     yum install -y gettext php-cli php-pgsql php-process \
-	httpd mod_ssl postgresql-server nscd \
+	httpd httpd-itk mod_dav_svn mod_ssl postgresql-server nscd \
 	subversion augeas viewvc git gitweb \
 	mediawiki119 \
 	moin mod_wsgi python-psycopg2
