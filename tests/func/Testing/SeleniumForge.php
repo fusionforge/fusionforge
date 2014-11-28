@@ -63,7 +63,6 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 			// Reload a fresh database before running this test suite.
 			system(DB_INIT_CMD);
 		}
-		$this->reload_nscd();
 
 		$this->setBrowser('*firefox');
 		$this->setBrowserUrl(URL);
@@ -126,12 +125,6 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	{
 		$this->runCommand("service apache2 reload > /dev/null 2>&1 || service httpd reload > /dev/null 2>&1");
 		sleep (3); // Give it some time to become available again
-	}
-
-	protected function reload_nscd()
-	{
-		$this->runCommand("service unscd restart > /dev/null 2>&1 || service nscd restart > /dev/null 2>&1 || true");
-		sleep (1); // Give it some time to wake up
 	}
 
 	protected function init() {
