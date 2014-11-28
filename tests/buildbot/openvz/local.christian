@@ -1,3 +1,0 @@
-DEBMIRROR=http://christian.bayle.eu/debian
-RINSECONF=local.christian.rinse.conf
-RINSEBPI=--before-post-install $(CURDIR)/local.christian.rinse.bpi
