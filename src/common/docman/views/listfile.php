@@ -315,7 +315,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 			$editfileaction .= '&group_id='.$GLOBALS['group_id'];
 			if (!$d->getLocked() && !$d->getReserved()) {
 				$nextcell .= util_make_link($redirecturl.'&action=trashfile&fileid='.$d->getID(), $HTML->getDeletePic(_('Move this document to trash'), 'delfile'));
-				$nextcell .= util_make_link('#', html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this document'))), array('onclick' => 'javascript:controllerListFile.toggleEditFileView({action:\''.util_make_uri($editfileaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json').', docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').', title:\''.addslashes($d->getName()).'\', filename:\''.$d->getFilename().'\', description:\''.addslashes($d->getDescription()).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', isHtml:\''.$d->isHtml().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri('/docman').'\'})', 'title' => _('Edit this document')), true);
+				$nextcell .= util_make_link('#', html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this document'))), array('onclick' => 'javascript:controllerListFile.toggleEditFileView({action:\''.util_make_uri($editfileaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json').', docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').', title:\''.addslashes($d->getName()).'\', filename:\''.addslashes($d->getFilename()).'\', description:\''.addslashes($d->getDescription()).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', isHtml:\''.$d->isHtml().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri('/docman').'\'})', 'title' => _('Edit this document')), true);
 				if (session_loggedin()) {
 					$nextcell .= util_make_link($redirecturl.'&action=reservefile&fileid='.$d->getID(), html_image('docman/reserve-document.png', 22, 22, array('alt' => _('Reserve this document'))), array('title' => _('Reserve this document for later edition')));
 				}
@@ -326,7 +326,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 					}
 				} else {
 					$nextcell .= util_make_link($redirecturl.'&action=trashfile&fileid='.$d->getID(), $HTML->getDeletePic(_('Move this document to trash'), 'delfile'));
-					$nextcell .= util_make_link('#', html_image('docman/edit-file.png', 22 ,22, array('alt' => _('Edit this document'))), array('onclick' => 'javascript:controllerListFile.toggleEditFileView({action:\''.util_make_uri($editfileaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json').', docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').', title:\''.addslashes($d->getName()).'\', filename:\''.$d->getFilename().'\', description:\''.addslashes($d->getDescription()).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', isHtml:\''.$d->isHtml().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri('/docman').'\'})', 'title' => _('Edit this document')), true);
+					$nextcell .= util_make_link('#', html_image('docman/edit-file.png', 22 ,22, array('alt' => _('Edit this document'))), array('onclick' => 'javascript:controllerListFile.toggleEditFileView({action:\''.util_make_uri($editfileaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json').', docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').', title:\''.addslashes($d->getName()).'\', filename:\''.addslashes($d->getFilename()).'\', description:\''.addslashes($d->getDescription()).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', isHtml:\''.$d->isHtml().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri('/docman').'\'})', 'title' => _('Edit this document')), true);
 					$nextcell .= util_make_link($redirecturl.'&action=releasefile&fileid='.$d->getID(), html_image('docman/release-document.png', 22, 22, array('alt' => _('Release reservation'))), array('title' => _('Release reservation')));
 				}
 			}
@@ -400,7 +400,7 @@ if ($DocGroupName) {
 														statusDict:'.$dm->getStatusNameList('json').',
 														docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').',
 														title:\''.addslashes($localDocumentObject->getName()).'\',
-														filename:\''.$localDocumentObject->getFilename().'\',
+														filename:\''.addslashes($localDocumentObject->getFilename()).'\',
 														description:\''.addslashes($localDocumentObject->getDescription()).'\',
 														isURL:\''.$localDocumentObject->isURL().'\',
 														isText:\''.$localDocumentObject->isText().'\',

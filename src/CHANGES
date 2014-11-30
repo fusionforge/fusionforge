@@ -30,6 +30,7 @@ Fusionforge-5.3.3:
 * SCM: use 'shell_host' variable (or failing that, 'web_host') to document where users can SSH to the group shared directory [#698] (Inria)
 * SCM stats: fix order in stats block [#736] (TrivialDev)
 * System replication: refresh nscd cache before applying changes
+* Docman: fix edit file when filename has quote [#750] (TrivialDev)
 * Plugin AuthLDAP: error and warning messages displayed twice [#732] (TrivialDev)
 * Plugin scmhook: fix display when only one SCM plugin enabled [#735] (TrivialDev)
 * Plugin Hudson: fix global status in Hudson Job widget [#740] (TrivialDev)
