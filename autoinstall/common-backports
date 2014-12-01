@@ -230,7 +230,7 @@ EOF
 	    REMOVEDEPS=$DEPS
 	    backport_rpm_from_fedora libicns libicns-utils
 
-	    DEPS="kde-filesystem"
+	    DEPS="kde-filesystem hardlink"
 	    REMOVEDEPS=$DEPS
 	    backport_rpm_from_fedora_updates --source-package generic-logos --force generic-logos-httpd
 
