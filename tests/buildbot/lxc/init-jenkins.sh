@@ -30,26 +30,17 @@ then
 	su - jenkins -c "ssh-keygen -q -t rsa -f ~/.ssh/id_rsa -N ''"
 fi
 
-# Setup botkey
+# Setup botkey - only needed for 5.3?
 echo "Setup Bot Key"
 if ! su - jenkins -c "gpg --list-secret-keys $EMAIL 2>/dev/null"
 then 
-cat > ~jenkins/botkey <<-EOF
-%echo Generating a standard key'
-Key-Type: DSA
-Key-Length: 1024
-Subkey-Type: ELG-E
-Subkey-Length: 1024
-Name-Real: FusionForge Bot
-Name-Comment: with stupid passphrase
-Name-Email: $EMAIL
-Expire-Date: 0
-#Passphrase: abc
-#%pubring botkey.pub
-#%secring botkey.sec
-# Do a commit here, so that we can later print "done" :-)
-%commit
-%echo done
+su - jenkins -c "gpg --batch --gen-key" <<EOF
+     Key-Type: RSA
+     Key-Length: 2048
+     Subkey-Type: RSA
+     Subkey-Length: 2048
+     Name-Real: buildbot@$(hostname -f)
+     Expire-Date: 0
+     %commit
 EOF
-su - jenkins -c "gpg --batch --gen-key ~/botkey"
 fi
