@@ -9,19 +9,19 @@ help:
 checkdepends: /usr/bin/lxc-start /lib/bridge-utils /usr/bin/netmask /usr/sbin/rinse /usr/sbin/tunctl
 
 /usr/bin/lxc-start:
-	@[ -f $@ ] || sudo apt-get install lxc
+	@[ -f $@ ] || apt-get install lxc
 
 /lib/bridge-utils:
-	@[ -d $@ ] || sudo apt-get install bridge-utils
+	@[ -d $@ ] || apt-get install bridge-utils
 
 /usr/bin/netmask:
-	@[ -f $@ ] || sudo apt-get install netmask
+	@[ -f $@ ] || apt-get install netmask
 
 /usr/sbin/rinse:
-	@[ -f $@ ] || sudo apt-get install rinse
+	@[ -f $@ ] || apt-get install rinse
 
 /usr/sbin/tunctl:
-	@[ -f $@ ] || sudo apt-get install uml-utilities
+	@[ -f $@ ] || apt-get install uml-utilities
 
 installtemplate: /usr/local/sbin/lxc-wrapper
 
