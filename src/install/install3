@@ -86,7 +86,11 @@ psql_startdb(){
 	fi
 
 	# Might fail if it's already running, so we'll ingnore the result
-	$pgservice start
+	if [ -x $pgservice ] ; then
+	    $pgservice start
+	else
+	    systemctl start postgresql
+	fi
 }
 
 psql_stopdb(){
@@ -100,7 +104,11 @@ psql_stopdb(){
 	fi
 
 	# Might fail if it's already running, so we'll ingnore the result
-	$pgservice stop
+	if [ -x $pgservice ] ; then
+	    $pgservice stop
+	else
+	    systemctl stop postgresql
+	fi
 }
 
 get_config(){
@@ -115,7 +123,7 @@ get_config(){
 find_pghba(){
 	pghbafile="/var/lib/pgsql/data/pg_hba.conf"
 	for v in $PG_VERSIONS ; do
-	    pghbafile="$pghbafile /etc/postgresql/$v/main/pg_hba.conf"
+	    pghbafile="$pghbafile /etc/postgresql/$v/main/pg_hba.conf "
 	done
 	pghbafile="$pghbafile /opt/csw/var/pgdata/pg_hba.conf"
 	for i in $pghbafile
