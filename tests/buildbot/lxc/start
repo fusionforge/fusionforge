@@ -1,6 +1,0 @@
-#! /bin/sh
-
-echo "==== START $HOST ===="
-echo "VMENGINE=$VMENGINE VMTEMPLATE=$VMTEMPLATE CIDR=$CIDR IPGW=$IPGW"
-
-sudo /usr/local/sbin/lxc-wrapper start $(basename $HOST .local)

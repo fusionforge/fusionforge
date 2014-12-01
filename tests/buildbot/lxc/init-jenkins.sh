@@ -4,11 +4,10 @@ EMAIL="buildbot@$HOST"
 
 # Setup sudo command needed by jenkins
 echo "Setup sudoers"
-if [ ! -f /etc/sudoers.d/jenkins ]
+if [ ! -f /etc/sudoers.d/ci ]
 then
-cat > /etc/sudoers.d/jenkins <<-EOF
-jenkins ALL = NOPASSWD: /usr/bin/apt-get,/usr/bin/lxc-create,/usr/bin/lxc-start,/usr/bin/lxc-stop,/usr/bin/lxc-destroy, /usr/bin/lxc-console
-jenkins ALL = NOPASSWD:SETENV: /usr/sbin/cowbuilder
+cat > /etc/sudoers.d/ci <<-EOF
+jenkins ALL = NOPASSWD: /usr/bin/lxc-wrapper
 EOF
 fi
 

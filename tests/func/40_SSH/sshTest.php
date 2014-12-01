@@ -30,7 +30,6 @@ class SSHTest extends FForge_SeleniumTestCase
 		$this->uploadSshKey();
 	    
 		// Run the cronjobs
-		$this->reload_nscd();
 		$this->cron("shell/homedirs.php");
 
 		$verbose = 0;
