@@ -60,6 +60,9 @@ require dirname(__FILE__).'/../common/include/env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require $gfcommon.'include/cron_utils.php';
 
+// Sync nss-pgsql
+cron_reload_nscd();
+
 setup_gettext_from_sys_lang();
 define('USER_DEFAULT_GROUP', 'users');
 // error variable

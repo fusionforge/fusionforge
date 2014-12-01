@@ -31,6 +31,9 @@ require dirname(__FILE__).'/../common/include/env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require $gfcommon.'include/cron_utils.php';
 
+// Sync nss-pgsql
+cron_reload_nscd();
+
 function create_authkeys($params) {
 	$sshdir = $params['sshdir'];
 	$sshkeys = $params['sshkeys'];

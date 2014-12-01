@@ -59,6 +59,7 @@ find_psql_init(){
 	for v in $PG_VERSIONS ; do
 	    initpsql="$initpsql postgresql-$v"
 	done
+	initpsql="$initpsql /lib/systemd/system/postgresql.service"
 	initpsql="$initpsql /etc/init.d/cswpostgres"
 	for i in $initpsql
 	do

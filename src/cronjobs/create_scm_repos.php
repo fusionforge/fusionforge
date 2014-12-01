@@ -32,6 +32,9 @@ require_once $gfcommon.'include/PluginManager.class.php' ;
 // SCM-specific plugins subsystem
 require_once $gfcommon.'include/SCMPlugin.class.php' ;
 
+// Sync nss-pgsql
+cron_reload_nscd();
+
 session_set_admin ();
 
 setup_plugin_manager();
