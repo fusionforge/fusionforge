@@ -109,7 +109,9 @@ EOF
 	    
 	    mkdir -p $cachedir/root/.ssh
 	    cp /var/lib/jenkins/.ssh/id_rsa.pub $cachedir/root/.ssh/authorized_keys
-	    
+
+	    # SSH host key cache
+	    # TODO: populate it if it doesn't exist yet
 	    cp /var/cache/lxc/ssh/$host.local/* $cachedir/etc/ssh
 	fi
 
