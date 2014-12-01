@@ -251,7 +251,7 @@ EOF
 		    yum downgrade -y mariadb-libs
 		fi
 
-		DEPS="bzip2-devel curl-devel pam-devel libstdc++-devel libedit-devel libtool-ltdl-devel libzip-devel systemtap-sdt-devel firebird-devel net-snmp-devel libxslt-devel t1lib-devel libvpx-devel gmp-devel tokyocabinet-devel libmcrypt-devel libtidy-devel freetds-devel aspell-devel recode-devel libicu-devel enchant-devel libc-client-devel openldap-devel unixODBC-devel mariadb-devel-5.5.37"
+		DEPS="bzip2-devel curl-devel pam-devel libstdc++-devel libedit-devel libtool-ltdl-devel libzip-devel systemtap-sdt-devel firebird-devel net-snmp-devel libxslt-devel t1lib-devel libvpx-devel gmp-devel tokyocabinet-devel libmcrypt-devel libtidy-devel freetds-devel aspell-devel recode-devel libicu-devel enchant-devel libc-client-devel openldap-devel unixODBC-devel mariadb-devel-5.5.37 exim"
 		REMOVEDEPS=$DEPS
 		rebuild_rpm_from_centos --source-package php php-common php-cli php php-pdo php-pgsql php-process php-ldap php-gd
 
