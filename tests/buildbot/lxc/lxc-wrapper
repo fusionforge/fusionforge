@@ -103,6 +103,10 @@ EOF
 		    ;;
 		debian*)
 		    chroot $cachedir apt-get install --yes avahi-autoipd avahi-daemon unattended-upgrades bash-completion
+		    # Avoid "Invalid Email Address" during CreateForum::testEmailAddressNotAlreadyUsed
+		    cat <<EOF >> $cachedir/etc/hosts
+127.0.1.1	$host.local
+EOF
 		    ;;
 	    esac
 	    sed -i -e /^rlimit-nproc=/d $cachedir/etc/avahi/avahi-daemon.conf
