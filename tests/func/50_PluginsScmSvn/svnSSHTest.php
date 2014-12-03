@@ -25,10 +25,7 @@ class ScmSvnSSHTest extends FForge_SeleniumTestCase
 {
 	function testScmSvnSSH()
 	{
-		$forge_get_config = RUN_JOB_PATH."/forge_get_config";
-		$config_path = rtrim(`$forge_get_config config_path`);
-		file_put_contents("$config_path/config.ini.d/zzz-buildbot-svnsshtest",
-				  "[scmsvn]\n"."use_ssh = yes\n"."use_dav = no\n");
+        $this->changeConfig("[scmsvn]\nuse_ssh = yes\nuse_dav = no\n");
 
 		$this->activatePlugin('scmsvn');
 		$this->populateStandardTemplate('empty');

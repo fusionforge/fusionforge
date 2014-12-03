@@ -30,10 +30,7 @@ class PluginMediawiki extends FForge_SeleniumTestCase
 		$this->skip_on_rpm_installs();
 		$this->skip_on_centos();
 
-		$forge_get_config = RUN_JOB_PATH."/forge_get_config";
-		$config_path = rtrim(`$forge_get_config config_path`);
-		file_put_contents("$config_path/config.ini.d/zzz-buildbot-mediawikitest",
-				  "[mediawiki]\n"."unbreak_frames=yes\n");
+        $this->changeConfig("[mediawiki]\nunbreak_frames=yes\n");
 
 		$this->activatePlugin('mediawiki');
 		

@@ -25,10 +25,7 @@ class ScmSvnWUITest extends FForge_SeleniumTestCase
 {
 	function testScmSvnWUI()
 	{
-		$forge_get_config = RUN_JOB_PATH."/forge_get_config";
-		$config_path = rtrim(`$forge_get_config config_path`);
-		file_put_contents("$config_path/config.ini.d/zzz-buildbot-svnwuitest",
-				  "[scmsvn]\n"."use_ssh = no\n"."use_dav = yes\n");
+        $this->changeConfig("[scmsvn]\nuse_ssh = no\nuse_dav = yes\n");
 
 		$this->activatePlugin('scmsvn');
 		$this->populateStandardTemplate('empty');
