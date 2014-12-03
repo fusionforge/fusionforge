@@ -191,8 +191,8 @@ function version() {
 }
 
 // 4. call the service method to initiate the transaction and send the response
-$HTTP_RAW_POST_DATA = isset($HTTP_RAW_POST_DATA) ? $HTTP_RAW_POST_DATA : '';
-$server->service($HTTP_RAW_POST_DATA);
+$postdata = file_get_contents("php://input");
+$server->service($postdata);
 
 if(isset($log) and $log != ''){
 	harness('nusoap_r2_base_server',$server->headers['User-Agent'],$server->methodname,$server->request,$server->response,$server->result);
