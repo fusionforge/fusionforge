@@ -484,6 +484,13 @@ Enjoy the site.
 				db_rollback();
 				return false;
 			}
+			$res = db_query_params('UPDATE users SET expire_date=0 WHERE user_id=$1',
+			    array($this->getID()));
+			if (!$res) {
+				$this->setError(_('ERROR - Could Not Update User Object:') . ' ' . db_error());
+				db_rollback();
+				return false;
+			}
 			if (!$this->setUnixStatus('D')) {
 				db_rollback();
 				return false;
