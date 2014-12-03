@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright © 2014 Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -24,6 +25,7 @@
 require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/account.php';
+require_once $gfcommon.'include/datepick.php';
 require_once $gfwww.'admin/admin_utils.php';
 
 session_require_global_perm ('forge_admin');
@@ -56,8 +58,16 @@ if (getStringFromRequest('delete_user') != '' && getStringFromRequest('confirm_d
 	$shell = getStringFromRequest('shell');
 	$status = getStringFromRequest('status');
 
+	$newexp = getIntFromRequest('accexp_bool') ?
+	    getStringFromRequest('accexp_date') : '';
+	$newexp = $newexp ? datepick_parse($newexp) : 0;
+	if ($newexp && ($newexp < time()))
+		/* account has expired */
+		$status = 'S';
+
     //XXX use_shell
 	if (!$u->setEmail($email)
+		|| !$u->setExpiry($newexp)
 		|| (forge_get_config('use_shell') && !$u->setShell($shell))
 		|| !$u->setStatus($status)) {
 		exit_error( _('Could Not Complete Operation: ').$u->getErrorMessage(),'admin');
@@ -82,6 +92,7 @@ if (getStringFromRequest('delete_user') != '' && getStringFromRequest('confirm_d
 
 }
 
+datepick_prepare();
 $title = _('Site Admin: User Info');
 site_admin_header(array('title'=>$title));
 
@@ -118,6 +129,21 @@ site_admin_header(array('title'=>$title));
 <td>
 <?php echo $u->getRealName(); ?>
 </td>
+</tr>
+
+<tr>
+<td><?php echo _('Account expiry'); ?></td>
+<td><?php
+$isexp = $u->getExpiry();
+echo html_e('input', array(
+	'type' => 'checkbox',
+	'name' => 'accexp_bool',
+	'value' => 1,
+	'checked' => ($isexp ? 'checked' : false),
+    )) . ' ' . _('expires on') . ': ';
+datepick_emit('accexp_date',
+    $isexp ? datepick_format($isexp, true) : '', true);
+?></td>
 </tr>
 
 <tr>

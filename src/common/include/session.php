@@ -535,20 +535,23 @@ function session_set_new($user_id) {
 		exit_error(db_error(), '');
 	} elseif (db_numrows($res) < 1) {
 		exit_error(_('Could not fetch user session data'), '');
-	} else {
-		session_set_internal($user_id, $res);
+	} elseif (!session_set_internalEx($user_id, $res)) {
+		exit_error(_('Account expired'), '');
 	}
 }
 
-function session_set_internal($user_id, $res=false) {
+function session_set_internalEx($user_id, $res=false, $checkvalid=true) {
 	global $G_SESSION;
 
 	$G_SESSION = user_get_object($user_id, $res);
 	if ($G_SESSION) {
+		if (!$G_SESSION->isActive(false))
+			return false;
 		$G_SESSION->setLoggedIn(true);
 	}
 
 	RBACEngine::getInstance()->invalidateRoleCaches();
+	return true;
 }
 
 /**
@@ -624,12 +627,7 @@ function session_set() {
 		}
 	} // else (hash does not exist) or (session hash is bad)
 
-	if ($id_is_good) {
-		$G_SESSION = user_get_object($user_id, $result);
-		if ($G_SESSION) {
-			$G_SESSION->setLoggedIn(true);
-		}
-	} else {
+	if (!$id_is_good || !session_set_internalEx($user_id, $result)) {
 		$G_SESSION=false;
 
 		// if there was bad session cookie, kill it and the user cookie

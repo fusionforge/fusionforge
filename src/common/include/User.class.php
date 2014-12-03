@@ -678,14 +678,52 @@ Enjoy the site.
 	 *	isActive - whether this user is confirmed and active.
 	 *
 	 *	Database field status of 'A' returns true.
+	 *	Account is not expired.
 	 *	@return	boolean is_active.
 	 */
-	function isActive() {
-		if ($this->getStatus()=='A') {
+	function isActive($checkstatus=true) {
+		if ($checkstatus && ($this->getStatus() != 'A'))
+			/* account not active */
+			return false;
+		if (!$this->getExpiry())
+			/* account does not expire */
 			return true;
-		} else {
+		if ($this->getExpiry() < time())
+			/* account has expired */
+			return false;
+		return true;
+	}
+
+	/* returns time_t, or falsy if account does not expire */
+	function getExpiry() {
+		return $this->data_array['expire_date'];
+	}
+
+	/* takes a time_t or 0 if account does not expire */
+	function setExpiry($t) {
+		db_begin();
+		$res = db_query_params('UPDATE users
+			SET expire_date=$2
+			WHERE user_id=$1',
+		    array($this->getID(), $t));
+		if (!$res) {
+			$this->setError(_('ERROR - Could Not Update User Object:') . ' ' . db_error());
+			db_rollback();
 			return false;
 		}
+		if (!$this->fetchData($this->getID())) {
+			db_rollback();
+			return false;
+		}
+
+		$hook_params = array(
+			'user' => $this,
+			'user_id' => $this->getID(),
+		    );
+		plugin_hook("user_update_expiry", $hook_params);
+
+		db_commit();
+		return true;
 	}
 
 	/**
@@ -1627,5 +1665,3 @@ function sortUserList (&$list, $criterion='name') {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

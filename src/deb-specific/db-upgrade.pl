@@ -1957,6 +1957,7 @@ eval {
     &update_with_sql("20120321-add-news-in-activity_vw","5.1-12");
     &update_with_sql("20120903-no-unix-account-for-deleted-users", "5.1-13");
     &update_with_sql("20121112-fix-projecttask-external_id", "5.1-14");
+    &update_with_sql("20141203-user-expiry", "5.1-15");
 
     ########################### INSERT HERE #################################
 

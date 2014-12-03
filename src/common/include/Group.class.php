@@ -2496,7 +2496,7 @@ class Group extends Error {
 		
 		// Temporarily switch to the submitter's identity
 		$saved_session = session_get_user () ;
-		session_set_internal ($idadmin_group) ;
+		session_set_internalEx($idadmin_group, false, false);
 
 		if ($template) {
 			if (forge_get_config ('use_tracker')) {
@@ -2660,7 +2660,7 @@ class Group extends Error {
 		}
 
 		// Switch back to user preference
-		session_set_internal ($saved_session->getID()) ;
+		session_set_internalEx($saved_session->getID(), false, false);
 		setup_gettext_from_context();
 
 		db_commit();
