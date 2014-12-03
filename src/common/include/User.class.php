@@ -480,8 +480,14 @@ Enjoy the site.
 			$hook_params['user_id'] = $this->getID();
 			plugin_hook ("user_delete", $hook_params);
 			
-			$this->setStatus('D');
-			$this->setUnixStatus('D');
+			if (!$this->setStatus('D', true)) {
+				db_rollback();
+				return false;
+			}
+			if (!$this->setUnixStatus('D')) {
+				db_rollback();
+				return false;
+			}
 			db_commit();
 		}
 		return true;
