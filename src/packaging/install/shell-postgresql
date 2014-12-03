@@ -1,2 +1,3 @@
+cronjobs/shell_cleanup.php usr/share/@OLDPACKAGE@/cronjobs/
 deb-specific/fusionforge.rsyslog etc/rsyslog.d/
 utils/install-nsspgsql.sh usr/share/@OLDPACKAGE@/bin/
