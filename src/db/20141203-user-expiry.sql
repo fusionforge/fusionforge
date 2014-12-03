@@ -9,4 +9,4 @@ DO $$
 			WHEN duplicate_column THEN RAISE NOTICE 'column expire_date already added to table users';
 		END;
 	END;
-$$
+$$;
