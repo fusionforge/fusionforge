@@ -38,7 +38,7 @@ class SoapTest extends FForge_SeleniumTestCase
         
 	function testSoap()
 	{
-		$this->populateStandardTemplate('empty');
+		$this->populateStandardTemplate('trackers');
 		$this->init();
 
         $userid = FORGE_ADMIN_USERNAME;
@@ -84,6 +84,7 @@ class SoapTest extends FForge_SeleniumTestCase
         $response = $this->soapclient->getGroupsByName($this->session,array('projecta'));
         $group = $response[0];
         $this->assertEquals('projecta', $group->unix_group_name);
+        $projecta = $group;
         
         // Get several groups
         $response = $this->soapclient->getGroupsByName($this->session,array('tmpl', 'projecta'));
@@ -93,6 +94,30 @@ class SoapTest extends FForge_SeleniumTestCase
             $this->assertEquals($group->group_id, $group2->group_id);
             $this->assertEquals($group->unix_group_name, $group2->unix_group_name);
         }
+
+        // Check trackers
+        $trackers = $this->soapclient->getArtifactTypes($this->session, $projecta->group_id);
+        $found = false;
+        foreach ($trackers as $t) {
+            if ($t->name == 'Bugs') {
+                $found = true;
+                $tracker = $t;
+            }
+        }
+        $this->assertTrue($found, "Trackers 'Bugs' not found");
+
+        $response = $this->soapclient->addArtifact($this->session, $projecta->group_id, $tracker->group_artifact_id, 1, 3, 100, "Bug submitted by SOAP", "Bug details are not really relevant here", array());
+
+		$this->clickAndWait("link=Tracker");
+		$this->clickAndWait("link=Bugs");
+		$this->assertTrue($this->isTextPresent("Bug submitted by SOAP"));
+		$this->clickAndWait("link=Bug submitted by SOAP");
+        $this->type("summary", 'Bug summary edited via web interface');
+		$this->clickAndWait("submit");
+
+        $bugs = $this->soapclient->getArtifacts($this->session, $projecta->group_id, $tracker->group_artifact_id, 0, 0);
+        $bug = $bugs[0];
+        $this->assertEquals('Bug summary edited via web interface', $bug->summary);
 	}
 }
 ?>
