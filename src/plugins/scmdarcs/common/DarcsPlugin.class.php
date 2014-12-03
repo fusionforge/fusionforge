@@ -253,7 +253,7 @@ over it to the project's administrator.");
 
 		if ($project->usesPlugin ($this->name)) {
 			if ($this->browserDisplayable ($project)) {
-				htmlIframe('/plugins/scmdarcs/cgi-bin/darcsweb.cgi?r='.$project->getUnixName().'/'.$params['repo_name']);
+					htmlIframe('/plugins/scmdarcs/cgi-bin/darcsweb.cgi?r='.$project->getUnixName().'/'.$params['repo_name'],array('id'=>'scmdarcs_iframe'));
 			}
 		}
 	}

@@ -92,7 +92,8 @@ if ($external_scm) {
 	$server_script = preg_replace("/^\\//", "", $server_script);
 
 	// pass the parameters passed to this script to the remote script in the same fashion
-	$script_url = "http://".$scm_box."/".$server_script.$_SERVER["PATH_INFO"]."?".$_SERVER["QUERY_STRING"];
+    $parameters = preg_replace('/^inframe=1[&;]/','',$_SERVER["QUERY_STRING"]);
+	$script_url = "http://".$scm_box."/".$server_script.$_SERVER["PATH_INFO"]."?".$parameters;
 	$fh = @fopen($script_url, "r");
 	if (!$fh) {
 		exit_error(sprintf(_('Could not open script %s.'),$script_url),'home');
@@ -183,6 +184,12 @@ switch ($_GET['view']) {
 		break;
 	}
 }
+
+scm_header(array('title'=>_("SCM Repository"),
+				 'group'=>$Group->getID(),
+				 'inframe'=>getIntFromGet('inframe')));
+echo $content;
+scm_footer(array('inframe'=>getIntFromGet('inframe')));
 
 // Local Variables:
 // mode: php

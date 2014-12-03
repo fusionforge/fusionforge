@@ -165,7 +165,7 @@ over it to the project's administrator.");
 
 		if ($project->usesPlugin ($this->name)) {
 			if ($this->browserDisplayable ($project)) {
-				htmlIframe('/scm/loggerhead/'.$project->getUnixName());
+					htmlIframe('/scm/loggerhead/'.$project->getUnixName(),array('id'=>'scmbzr_iframe'));
 			}
 		}
 	}

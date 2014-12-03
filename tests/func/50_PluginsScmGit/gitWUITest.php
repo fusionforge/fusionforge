@@ -34,7 +34,7 @@ class ScmGitWUITest extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=Admin");
 		$this->clickAndWait("link=Tools");
 		$this->clickAndWait("link=Source Code Admin");
-		$this->click("//input[@name='scmradio' and @value='scmgit']");
+		$this->check("//input[@name='scmengine[]' and @value='scmgit']");
 		$this->clickAndWait("submit");
 	    
 		$this->type("//input[@name='repo_name']", "other-repo");
@@ -57,12 +57,17 @@ class ScmGitWUITest extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=SCM");
 		$this->assertTextPresent("Access to your personal repository");
 
-		$this->open(ROOT.'/plugins/scmgit/cgi-bin/gitweb.cgi?a=project_list;pf=projecta');
-		$this->waitForPageToLoad();
+		$this->open(ROOT);
+		$this->clickAndWait("link=ProjectA");
+		$this->clickAndWait("link=SCM");
+		$this->clickAndWait("link=Browse Git Repository");
+        $this->selectFrame("id=scmgit_iframe");
 		$this->assertElementPresent("//.[@class='page_footer']");
+		$this->clickAndWait("link=projecta");
 		$this->assertTextPresent("projecta.git");
 		$this->assertTextPresent("other-repo.git");
 		$this->assertTextPresent("users/".FORGE_ADMIN_USERNAME.".git");
+        $this->selectFrame("relative=top");
 
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
@@ -75,12 +80,17 @@ class ScmGitWUITest extends FForge_SeleniumTestCase
 		// Run the cronjob to create repositories
 		$this->cron("scm/create_scm_repos.php");
 
-		$this->open(ROOT.'/plugins/scmgit/cgi-bin/gitweb.cgi?a=project_list;pf=projecta');
-		$this->waitForPageToLoad();
+		$this->open(ROOT);
+		$this->clickAndWait("link=ProjectA");
+		$this->clickAndWait("link=SCM");
+		$this->clickAndWait("link=Browse Git Repository");
+        $this->selectFrame("id=scmgit_iframe");
 		$this->assertElementPresent("//.[@class='page_footer']");
+		$this->clickAndWait("link=projecta");
 		$this->assertTextPresent("projecta.git");
 		$this->assertTextNotPresent("other-repo.git");
 		$this->assertTextPresent("users/".FORGE_ADMIN_USERNAME.".git");
+        $this->selectFrame("relative=top");
 	}
 
 	/**

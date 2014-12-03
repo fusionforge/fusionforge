@@ -285,13 +285,13 @@ control over it to the project's administrator.");
 		if ($project->usesPlugin($this->name)) {
 			if ($params['user_id']) {
 				$user = user_get_object($params['user_id']);
-				htmlIframe('/plugins/scmgit/cgi-bin/gitweb.cgi?p='.$project->getUnixName().'/users/'.$user->getUnixName().'.git');
+				htmlIframe('/plugins/scmgit/cgi-bin/gitweb.cgi?p='.$project->getUnixName().'/users/'.$user->getUnixName().'.git',array('id'=>'scmgit_iframe'));
 			} elseif ($this->browserDisplayable($project)) {
 				$iframesrc = '/plugins/scmgit/cgi-bin/gitweb.cgi?p='.$project->getUnixName().'/'.$project->getUnixName().'.git';
 				if ($params['commit']) {
 					$iframesrc .= ';a=log;h='.$params['commit'];
 				}
-				htmlIframe($iframesrc);
+				htmlIframe($iframesrc,array('id'=>'scmgit_iframe'));
 			}
 		}
 	}

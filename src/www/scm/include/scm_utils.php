@@ -40,6 +40,13 @@ function scm_header($params) {
 	if (!$project->usesSCM()) {
 		exit_disabled();
 	}
+
+    if ($params['inframe']) {
+			echo html_ao('html');
+			echo html_ao('body');
+			echo html_ao('div');
+            return;
+    }
 	/*
 		Show horizontal links
 	*/
@@ -68,8 +75,11 @@ function scm_header($params) {
 	echo html_ao('div', array('id' => 'scm', 'class' => 'scm'));
 }
 
-function scm_footer() {
+function scm_footer($params = array('inframe'=>0)) {
 	echo html_ac(html_ap() -1);
+    if ($params['inframe']) {
+            return;
+    }
 	site_project_footer();
 }
 

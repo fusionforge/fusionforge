@@ -36,7 +36,7 @@ class ScmSvnWUITest extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=Admin");
 		$this->clickAndWait("link=Tools");
 		$this->clickAndWait("link=Source Code Admin");
-		$this->click("//input[@name='scmradio' and @value='scmsvn']");
+		$this->check("//input[@name='scmengine[]' and @value='scmsvn']");
 		$this->clickAndWait("submit");
 	    
 		// Run the cronjob to create repositories
@@ -46,8 +46,10 @@ class ScmSvnWUITest extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
 		$this->clickAndWait("link=Browse Subversion Repository");
+        $this->selectFrame("id=scmsvn_iframe");
 		$this->assertTextPresent("trunk");
 		$this->assertTextPresent("Init");
+        $this->selectFrame("relative=top");
 	}
 
 	/**
