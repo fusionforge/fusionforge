@@ -188,11 +188,11 @@ function session_login_valid_dbonly($loginname, $passwd, $allowpending) {
 
 	// Try to get the users from the database using user_id and (MD5) user_pw
 	if (forge_get_config('require_unique_email')) {
-		$res = db_query_params ('SELECT user_id,status,unix_pw FROM users WHERE (user_name=$1 OR email=$1) AND user_pw=$2',
+		$res = db_query_params ('SELECT user_id,status,unix_pw,expire_date FROM users WHERE (user_name=$1 OR email=$1) AND user_pw=$2',
 					array ($loginname,
 					       md5($passwd))) ;
 	} else {
-		$res = db_query_params ('SELECT user_id,status,unix_pw FROM users WHERE user_name=$1 AND user_pw=$2',
+		$res = db_query_params ('SELECT user_id,status,unix_pw,expire_date FROM users WHERE user_name=$1 AND user_pw=$2',
 					array ($loginname,
 					       md5($passwd))) ;
 	}
@@ -263,6 +263,10 @@ function session_login_valid_dbonly($loginname, $passwd, $allowpending) {
 		if ($allowpending && ($usr['status'] == 'P')) {
 			//1;
 		} else {
+			if ($usr['expire_date'] && ($usr['expire_date'] < time())) {
+				$feedback = _('Account expired');
+				return false;
+			}
 			if ($usr['status'] == 'S') {
 				//acount suspended
 				$feedback = _('Account Suspended');
