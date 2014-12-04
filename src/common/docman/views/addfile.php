@@ -161,7 +161,7 @@ if ($dgf->getNested() == NULL) {
 	$params['group'] = $group_id;
 	plugin_hook("text_editor", $params);
 	if (!$GLOBALS['editor_was_set_up']) {
-		echo '<textarea name="details" rows="5" cols="80"></textarea>';
+		echo html_e('textarea', array('name' => 'details', 'rows' => 5, 'cols' => 80), '', false);
 	}
 	unset($GLOBALS['editor_was_set_up']);
 	echo html_ac(html_ap() - 2);
@@ -184,9 +184,7 @@ if ($dgf->getNested() == NULL) {
 	}
 	echo $HTML->listTableBottom();
 	echo $HTML->addRequiredFieldsInfoBox();
-	echo html_ao('div', array('class' => 'docmanSubmitDiv'));
-	echo html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Submit Information')));
-	echo html_ac(html_ap() - 1);
+	echo html_e('div', array('class' => 'docmanSubmitDiv'), html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Submit Information'))));
 	echo $HTML->closeForm();
 }
 echo html_ac(html_ap() - 1);
