@@ -75,6 +75,7 @@ class ScmSvnWebDAVTest extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
 		$this->clickAndWait("link=Browse Subversion Repository");
+        $this->selectFrame("id=scmsvn_iframe");
 		$this->assertTextPresent("Modifying file");
 		$this->assertTextNotPresent("Adding file");
 

@@ -76,12 +76,14 @@ use_ssl = no
 		$this->assertEquals($ret, 0);
 
 		// Check that the changes appear in gitweb
-		$this->open(ROOT.'/plugins/scmgit/cgi-bin/gitweb.cgi?a=project_list;pf=projecta');
-		$this->waitForPageToLoad();
+		$this->open(ROOT);
+		$this->clickAndWait("link=ProjectA");
+		$this->clickAndWait("link=SCM");
+		$this->clickAndWait("link=Browse Git Repository");
+        $this->selectFrame("id=scmgit_iframe");
 		$this->assertElementPresent("//.[@class='page_footer']");
 		$this->assertTextPresent("projecta.git");
-		$this->click("link=projecta/projecta.git");
-		$this->waitForPageToLoad();
+		$this->clickAndWait("link=projecta.git");
 		$this->assertTextPresent("Modifying file");
 		$this->assertTextPresent("Adding file");
 
