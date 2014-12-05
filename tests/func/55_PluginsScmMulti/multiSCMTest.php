@@ -52,38 +52,7 @@ class multiSCMTest extends FForge_SeleniumTestCase
 		$this->cron("scm/create_scm_repos.php");
 		$this->cron("shell/homedirs.php");
 
-		// Check Bazaar repo browser
-		$this->open(ROOT);
-		$this->clickAndWait("link=ProjectA");
-		$this->clickAndWait("link=SCM");
-		$this->clickAndWait("link=Browse Bazaar Repository");
-        $this->selectFrame("id=scmbzr_iframe");
-		$this->assertTextPresent("Browsing (root)");
-		$this->clickAndWait("link=projecta");
-		$this->assertTextPresent("Browsing (root)/projecta");
-        $this->selectFrame("relative=top");
-
-        // Check Subversion repo browser
-		$this->open(ROOT);
-		$this->clickAndWait("link=ProjectA");
-		$this->clickAndWait("link=SCM");
-		$this->clickAndWait("link=Browse Subversion Repository");
-        $this->selectFrame("id=scmsvn_iframe");
-		$this->assertTextPresent("trunk");
-		$this->assertTextPresent("Init");
-        $this->selectFrame("relative=top");
-
-        // Check Git repo browser
-		$this->open(ROOT);
-		$this->clickAndWait("link=ProjectA");
-		$this->clickAndWait("link=SCM");
-		$this->clickAndWait("link=Browse Git Repository");
-        $this->selectFrame("id=scmgit_iframe");
-		$this->assertElementPresent("//.[@class='page_footer']");
-		$this->assertTextPresent("projecta.git");
-        $this->selectFrame("relative=top");
-
-        // Check Bazaar commit/push/browse
+        // Check Bazaar commit/push
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
@@ -100,6 +69,43 @@ class multiSCMTest extends FForge_SeleniumTestCase
 		$this->assertEquals($ret, 0);
 		system("cd $t/trunk && bzr push --quiet $p/trunk", $ret);
 		$this->assertEquals($ret, 0);
+		system("rm -fr $t");
+
+        // Check Subversion checkout/commit
+		$this->open(ROOT);
+		$this->clickAndWait("link=ProjectA");
+		$this->clickAndWait("link=SCM");
+		$p = $this->getText("//tt[contains(.,'svn checkout svn+ssh')]");
+		$p = preg_replace(",^svn checkout ,", "", $p);
+		$t = exec("mktemp -d /tmp/svnTest.XXXXXX");
+		system("cd $t && svn checkout $p projecta", $ret);
+		$this->assertEquals($ret, 0);
+		system("echo 'this is a simple text' > $t/projecta/mytext.txt");
+		system("cd $t/projecta && svn add mytext.txt && svn commit -m'Adding file in Subversion'", $ret);
+		system("echo 'another simple text' >> $t/projecta/mytext.txt");
+		system("cd $t/projecta && svn commit -m'Modifying file in Subversion'", $ret);
+		$this->assertEquals($ret, 0);
+		system("rm -fr $t");
+
+        // Check Git clone/commit/push
+		$this->open(ROOT);
+		$this->clickAndWait("link=ProjectA");
+		$this->clickAndWait("link=SCM");
+		$p = $this->getText("//tt[contains(.,'git clone git+ssh')]");
+		$p = preg_replace(",^git clone ,", "", $p);
+		$t = exec("mktemp -d /tmp/gitTest.XXXXXX");
+		system("cd $t && git clone --quiet $p", $ret);
+		$this->assertEquals($ret, 0);
+		system("echo 'this is a simple text' > $t/projecta/mytext.txt");
+		system("cd $t/projecta && git add mytext.txt && git commit --quiet -a -m'Adding file in Git'", $ret);
+		system("echo 'another simple text' >> $t/projecta/mytext.txt");
+		system("cd $t/projecta && git commit --quiet -a -m'Modifying file in Git'", $ret);
+		$this->assertEquals($ret, 0);
+		system("cd $t/projecta && git push --quiet --all", $ret);
+		$this->assertEquals($ret, 0);
+		system("rm -fr $t");
+
+        // Check Bazaar browse
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
@@ -116,49 +122,19 @@ class multiSCMTest extends FForge_SeleniumTestCase
 		$this->assertTextPresent("Modifying file in Bazaar");
 		$this->assertTextPresent("Adding file in Bazaar");
         $this->selectFrame("relative=top");
-		system("rm -fr $t");
 
-        // Check Subversion checkout/commit/browse
-		$this->open(ROOT);
-		$this->clickAndWait("link=ProjectA");
-		$this->clickAndWait("link=SCM");
-		$p = $this->getText("//tt[contains(.,'svn checkout svn+ssh')]");
-		$p = preg_replace(",^svn checkout ,", "", $p);
-		$t = exec("mktemp -d /tmp/svnTest.XXXXXX");
-		system("cd $t && svn checkout $p projecta", $ret);
-		$this->assertEquals($ret, 0);
-		system("echo 'this is a simple text' > $t/projecta/mytext.txt");
-		system("cd $t/projecta && svn add mytext.txt && svn commit -m'Adding file in Subversion'", $ret);
-		system("echo 'another simple text' >> $t/projecta/mytext.txt");
-		system("cd $t/projecta && svn commit -m'Modifying file in Subversion'", $ret);
-		$this->assertEquals($ret, 0);
+        // Check Subversion browse
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
 		$this->clickAndWait("link=Browse Subversion Repository");
         $this->selectFrame("id=scmsvn_iframe");
+		$this->assertTextPresent("trunk");
+		$this->assertTextPresent("Init");
 		$this->assertTextPresent("Modifying file in Subversion");
-		$this->assertTextNotPresent("Adding file in Subversion");
         $this->selectFrame("relative=top");
-		system("rm -fr $t");
 
-        // Check Git clone/commit/push/browse
-		$this->open(ROOT);
-		$this->clickAndWait("link=ProjectA");
-		$this->clickAndWait("link=SCM");
-		$p = $this->getText("//tt[contains(.,'git clone git+ssh')]");
-		$p = preg_replace(",^git clone ,", "", $p);
-		$p = preg_replace(",://.*@,", "://root@", $p);
-		$t = exec("mktemp -d /tmp/gitTest.XXXXXX");
-		system("cd $t && git clone --quiet $p", $ret);
-		$this->assertEquals($ret, 0);
-		system("echo 'this is a simple text' > $t/projecta/mytext.txt");
-		system("cd $t/projecta && git add mytext.txt && git commit --quiet -a -m'Adding file in Git'", $ret);
-		system("echo 'another simple text' >> $t/projecta/mytext.txt");
-		system("cd $t/projecta && git commit --quiet -a -m'Modifying file in Git'", $ret);
-		$this->assertEquals($ret, 0);
-		system("cd $t/projecta && git push --quiet --all", $ret);
-		$this->assertEquals($ret, 0);
+        // Check Git browse
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
@@ -170,8 +146,7 @@ class multiSCMTest extends FForge_SeleniumTestCase
 		$this->assertTextPresent("Modifying file in Git");
 		$this->assertTextPresent("Adding file in Git");
         $this->selectFrame("relative=top");
-		system("rm -fr $t");
-    }
+}
 
 	/**
 	 * Method that is called after Selenium actions.
