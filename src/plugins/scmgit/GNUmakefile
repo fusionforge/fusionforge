@@ -7,5 +7,5 @@ all:
 	@echo "No default action"
 
 install:
-	install -d -m 755 $(DESTDIR)$(data_path)/plugins/scmgit/libexec/
+	install -d -m 755 $(DESTDIR)$(pkgdatadir)/plugins/scmgit/libexec/
 	$(LN_S) $(gitlibexecdir)/git-core/git-http-backend $(DESTDIR)$(pkgdatadir)/plugins/scmgit/libexec/
