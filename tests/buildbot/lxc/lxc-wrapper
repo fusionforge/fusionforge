@@ -103,13 +103,19 @@ EOF
 		    ;;
 		debian*)
 		    chroot $cachedir apt-get install --yes avahi-autoipd avahi-daemon unattended-upgrades bash-completion
+		    # Avoid "Invalid Email Address" during CreateForum::testEmailAddressNotAlreadyUsed
+		    cat <<EOF >> $cachedir/etc/hosts
+127.0.1.1	$host.local
+EOF
 		    ;;
 	    esac
 	    sed -i -e /^rlimit-nproc=/d $cachedir/etc/avahi/avahi-daemon.conf
 	    
 	    mkdir -p $cachedir/root/.ssh
 	    cp /var/lib/jenkins/.ssh/id_rsa.pub $cachedir/root/.ssh/authorized_keys
-	    
+
+	    # SSH host key cache
+	    # TODO: populate it if it doesn't exist yet
 	    cp /var/cache/lxc/ssh/$host.local/* $cachedir/etc/ssh
 	fi
 

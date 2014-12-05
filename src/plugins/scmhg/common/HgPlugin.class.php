@@ -212,7 +212,7 @@ and gives some control over it to the project's administrator.");
 				} else {
 					$iframesrc .=  '?p='.$project->getUnixName();
 				}
-				htmlIframe($iframesrc);
+				htmlIframe($iframesrc,array('id'=>'scmhg_iframe'));
 			}
 		}
 	}

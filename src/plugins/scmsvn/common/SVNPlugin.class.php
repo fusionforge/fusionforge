@@ -254,16 +254,32 @@ some control over it to the project's administrator.");
 	}
 
 	function printBrowserPage($params) {
+		global $HTML;
+		$useautoheight = 0;
 		$project = $this->checkParams($params);
 		if (!$project) {
 			return;
 		}
 
 		if ($project->usesPlugin($this->name)) {
-			if ($this->browserDisplayable($project)) {
-				session_redirect("/scm/viewvc.php/?root=".$project->getUnixName());
-			}
+				print '<iframe id="scmsvn_iframe" src="'.util_make_url("/scm/viewvc.php/?inframe=1&root=".$project->getUnixName()).'" frameborder="0" width=100% ></iframe>';
+				$useautoheight = 1;
+        }
+
+		if ($useautoheight) {
+			html_use_jqueryautoheight();
+			echo $HTML->getJavascripts();
+			echo '<script type="text/javascript">//<![CDATA[
+				jQuery(\'#scmsvn_iframe\').iframeAutoHeight({heightOffset: 50});
+				jQuery(\'#scmsvn_iframe\').load(function (){
+						if (this.contentWindow.location.href == "'.util_make_url('/projects/'.$project->getUnixName()).'/") {
+							console.log(this.contentWindow.location.href);
+							window.location.href = this.contentWindow.location.href;
+						};
+					});
+				//]]></script>';
 		}
+
 	}
 
 	function createOrUpdateRepo($params) {

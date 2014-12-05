@@ -87,8 +87,9 @@ if (getStringFromRequest('create_repository') && getStringFromRequest('submit'))
 	$hook_params = array();
 	$hook_params['group_id'] = $group_id;
 
-	$scmradio = '';
+	$scmarray = array();
 	$scmvars = array_keys(_getRequestArray());
+    error_log(print_r(_getRequestArray(),1));
 	foreach (_getRequestArray() as $key => $value) {
 		foreach ($scm_list as $scm) {
 			if ($key == strstr($key, $scm . "_")) {
@@ -99,33 +100,45 @@ if (getStringFromRequest('create_repository') && getStringFromRequest('submit'))
 			}
 		}
 		if ($key == strstr($key, "scm_")) {
-			$hook_params[$key] = $value;
-		} elseif ($key == 'scmradio') {
-			$scmradio = $value;
+                $hook_params[$key] = $value;
+		} elseif ($key == 'scmengine') {
+                error_log("foo");
+                if (is_array($value)) {
+                        error_log("bar");
+                        $scmarray = $value;
+                } else {
+                        error_log("baz");
+                        $scmarray = array($value);
+                }
 		}
 	}
+
+    error_log(print_r($scmarray,1));
 
 	$SCMFactory = new SCMFactory();
 	$scm_plugins = $SCMFactory->getSCMs();
 
 	$scm_changed = false;
-	if (in_array($scmradio, $scm_plugins)) {
-		foreach ($scm_plugins as $plugin) {
-			$myPlugin = plugin_get_object($plugin);
-			if ($scmradio == $myPlugin->name) {
-				if (!$group->usesPlugin($myPlugin->name)) {
-					$group->setPluginUse($myPlugin->name, 1);
-					if ($myPlugin->getDefaultServer()) {
-						$group->setSCMBox($myPlugin->getDefaultServer());
-					}
-					$scm_changed = true;
-				}
-			} else {
-				$group->setPluginUse($myPlugin->name, 0);
-			}
-		}
-	}
 
+    foreach ($scm_plugins as $plugin) {
+			$myPlugin = plugin_get_object($plugin);
+            if (in_array($myPlugin->name, $scmarray)) {
+                    if (!$group->usesPlugin($myPlugin->name)) {
+                            $group->setPluginUse($myPlugin->name, 1);
+                            if ($myPlugin->getDefaultServer()) {
+                                    $group->setSCMBox($myPlugin->getDefaultServer());
+                            }
+                            $scm_changed = true;
+                    }
+			} else {
+                    if ($group->usesPlugin($myPlugin->name)) {
+                            $group->setPluginUse($myPlugin->name, 0);
+                            $scm_changed = true;
+                    }
+			}
+    }
+
+        
 	// Don't call scm plugin update if their form wasn't displayed
 	// to avoid processing an apparently empty form and reset configuration
 	if (!$scm_changed)
@@ -137,11 +150,11 @@ echo html_ao('script', array('type' => 'text/javascript'));
 ?>
 //<![CDATA[
 	$(document).ready(function() {
-		$("input[type=radio][name=scmradio]").change(function() {
-			$("input[type=radio][name=scmradio]").each(function () {
+		$("input[name='scmengine[]']").change(function() {
+			$("input[name='scmengine[]']").each(function () {
 				$('#div_'+$(this).val()).hide();
 			});
-			$('#div_'+$("input[type=radio][name=scmradio]:checked").val()).show();
+			$('#div_'+$("input[name='scmengine[]']:checked").val()).show();
 		});
 	});
 //]]>
@@ -157,14 +170,19 @@ if (count($scm_plugins) != 0) {
 	echo $HTML->information(_('Note: Changing the repository does not delete the previous repository.  It only affects the information displayed under the SCM tab.'));
 	if (count($scm_plugins) == 1) {
 		$myPlugin = plugin_get_object($scm_plugins[0]);
-		echo html_e('input', array('type' => 'hidden', 'name' => 'scmradio', 'value' => $myPlugin->name));
+		echo html_e('input', array('type' => 'hidden', 'name' => 'scmengine[]', 'value' => $myPlugin->name));
 		echo html_e('p', array(), html_e('input', array('type' => 'radio', 'name' => 'fake', 'disabled' => 'disabled', 'checked' => 'checked')).$myPlugin->text);
 		$scm = $myPlugin->name;
 	} else {
 		echo html_e('h2', array(), _('SCM Repository'));
 		foreach ($scm_plugins as $plugin) {
 			$myPlugin = plugin_get_object($plugin);
-			$inputAttr = array('type' => 'radio', 'name' => 'scmradio', 'value' => $myPlugin->name);
+			$inputAttr = array('name' => 'scmengine[]', 'value' => $myPlugin->name);
+			if (forge_get_config('allow_multiple_scm')) {
+					$inputAttr['type'] = 'checkbox';
+			} else {
+					$inputAttr['type'] = 'radio';
+			}
 			if ($group->usesPlugin($myPlugin->name)) {
 				$scm = $myPlugin->name;
 				$inputAttr['checked'] = 'checked';

@@ -45,7 +45,7 @@ if (!$scm_plugin) {
 	$warning_msg = _("This project has no associated Source Code Management tool defined, please configure one using the Administration submenu.");
 }
 
-scm_header(array('title'=> sprintf(_('Source Code Repository for %s'), $group->getPublicName()),'group'=>$group_id));
+scm_header(array('title'=> sprintf(_('Source Code Repository for %s'), $group->getPublicName()),'group'=>$group_id,'inframe'=>0));
 
 plugin_hook("blocks", "scm index");
 

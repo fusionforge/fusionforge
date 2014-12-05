@@ -3,7 +3,8 @@
 /**
  * FusionForge document search engine
  *
- * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright 2005, Fabio Bertagnin
+ * Copyright 2009-2011, Franck Villaume - Capgemini
  * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
@@ -27,39 +28,20 @@ require dirname(__FILE__).'/../../include/env.inc.php';
 
 require_once $gfcommon.'docman/engine/parser_text.inc.php';
 
-if ($argc != 2) {
-	echo 'Usage : parser_oo.php <filename>'."\n";
-	exit(1);
+function parser_pdf($fichin) {
+	if (!is_file($fichin))
+		return '';
+
+	if (filesize($fichin) == 0)
+		return '';
+
+    $fichout = tempnam(forge_get_config('data_path'),'tmp');
+    $cmd = '/usr/bin/pdftotext '.$fichin.' '.$fichout;
+    $res = shell_exec($cmd);
+    
+    return parser_text($fichout);
+    unlink ($fichout);
 }
-
-$fichin = $argv[1];
-if (!is_file($fichin))
-	exit(1);
-
-$zip = new ZipArchive;
-if ($zip->open($fichin) === TRUE) {
-	$output_dir = tempnam(forge_get_config('data_path'), 'tmp');
-	if (file_exists($output_dir))
-		unlink($output_dir);
-
-	mkdir($output_dir);
-	$zip->extractTo($output_dir, array('content.xml'));
-	$zip->close();
-} else {
-	exit(2);
-}
-
-// transformer le context.xml en fichier txt
-$regexp_oo = "sed -e 's/<[^>]*>//g;s/&lt;/</g;s/&gt;/>/g;s/&apos;/'\"'\"'/g;s/&quot;/\"/g;s/&amp;/\&/g'";
-
-$cmd = $regexp_oo.' '.$output_dir.'/content.xml > '.$output_dir.'/content.xml.txt';
-
-$res = shell_exec($cmd);
-echo parser_text($output_dir.'/content.xml.txt');
-
-unlink($output_dir.'/content.xml');
-unlink($output_dir.'/content.xml.txt');
-rmdir($output_dir);
 
 // Local Variables:
 // mode: php

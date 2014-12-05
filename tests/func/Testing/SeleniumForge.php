@@ -77,6 +77,14 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->screenshotBgColor = '#CCFFDD';
 	}
 
+    protected function changeConfig($text) {
+            $forge_get_config = RUN_JOB_PATH."/forge_get_config";
+            $config_path = rtrim(`$forge_get_config config_path`);
+            $classname = get_class($this);
+            file_put_contents("$config_path/config.ini.d/zzz-buildbot-$classname.ini",
+                              $text);
+    }
+
 	/**
 	 * Method that is called after Selenium actions.
 	 *
