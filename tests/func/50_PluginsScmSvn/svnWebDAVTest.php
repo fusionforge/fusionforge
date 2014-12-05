@@ -36,7 +36,7 @@ class ScmSvnWebDAVTest extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=Admin");
 		$this->clickAndWait("link=Tools");
 		$this->clickAndWait("link=Source Code Admin");
-		$this->click("//input[@name='scmradio' and @value='scmsvn']");
+		$this->click("//input[@name='scmengine[]' and @value='scmsvn']");
 		$this->clickAndWait("submit");
 	    
 		// Run the cronjob to create repositories
