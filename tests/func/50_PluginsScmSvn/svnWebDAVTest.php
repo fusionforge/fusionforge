@@ -56,15 +56,17 @@ class ScmSvnWebDAVTest extends FForge_SeleniumTestCase
 		$t = exec("mktemp -d /tmp/svnTest.XXXXXX");
 		$auth = "--username ".FORGE_ADMIN_USERNAME." --password ".FORGE_ADMIN_PASSWORD;
 		$globalopts = "--trust-server-cert --non-interactive";
-		system("cd $t && svn checkout $globalopts $auth $p projecta", $ret);
+        $log = "2> /var/log/svn.stderr > /var/log/svn.stdout";
+        $timeout = "timeout 15s";
+		system("cd $t && $timeout svn checkout $globalopts $auth $p projecta $log", $ret);
 		$this->assertEquals($ret, 0);
 		sleep(2);
 		system("echo 'this is a simple text' > $t/projecta/mytext.txt");
-		system("cd $t/projecta && svn add mytext.txt && svn commit $globalopts $auth -m'Adding file'", $ret);
+		system("cd $t/projecta && $timeout svn add mytext.txt $log && $timeout svn commit $globalopts $auth -m'Adding file' $log", $ret);
 		$this->assertEquals($ret, 0);
 		sleep(2);
 		system("echo 'another simple text' >> $t/projecta/mytext.txt");
-		system("cd $t/projecta && svn commit $globalopts $auth -m'Modifying file'", $ret);
+		system("cd $t/projecta && $timeout svn commit $globalopts $auth -m'Modifying file' $log", $ret);
 		$this->assertEquals($ret, 0);
 		sleep(2);
 

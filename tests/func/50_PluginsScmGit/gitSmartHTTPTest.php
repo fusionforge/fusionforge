@@ -58,7 +58,7 @@ use_ssl = no
 		$p = $this->getText("//tt[contains(.,'git clone http') and contains(.,'".FORGE_ADMIN_USERNAME."@')]");
 		$p = preg_replace(",^git clone ,", "", $p);
 		$p = preg_replace(",@,", ":".FORGE_ADMIN_PASSWORD."@", $p);
-        $log = "2>> /var/log/git.log >> /var/log/git.log";
+        $log = "2> /var/log/git.stderr > /var/log/git.stdout";
         $timeout = "timeout 15s";
 
 		// Create a local clone, add stuff, push it to the repo
