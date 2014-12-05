@@ -262,7 +262,7 @@ some control over it to the project's administrator.");
 		}
 
 		if ($project->usesPlugin($this->name)) {
-				print '<iframe id="scmsvn_iframe" src="'.util_make_url("/scm/viewvc.php/?inframe=1&root=".$project->getUnixName()).'" frameborder="0" width=100% ></iframe>';
+				print '<iframe id="scmsvn_iframe" src="'.util_make_url("/scm/viewvc.php?inframe=1&root=".$project->getUnixName()).'" frameborder="0" width=100% ></iframe>';
 				$useautoheight = 1;
         }
 
