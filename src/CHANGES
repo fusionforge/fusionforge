@@ -25,6 +25,7 @@ Fusionforge-X.X:
 * [#726] Plugin SCM HG (Mercurial): activity log entry link to commit log in SCM browsing tab (TrivialDev)
 * [#734] Plugin AuthLDAP: support LPAP_OPT_REFERRALS option, needed by ActiveDirectory Server (TrivialDev)
 * [#751] SCM: Allow projects to use several SCM engines in parallel (Roland Mas, for CEA)
+* [#749] Docman: Rewrite parser using unoconv, support more file formats (Roland Mas, for CEA)
 
 Fusionforge-5.3.3:
 * User e-mail change: simplify confirmation hash to avoid mangling in some versions of Thunderbird [#738] (Inria)

@@ -6,6 +6,7 @@
  * Copyright 2005, Fabio Bertagnin
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2014, Roland Mas
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -29,7 +30,7 @@ require dirname(__FILE__).'/../../include/env.inc.php';
 require_once $gfcommon.'docman/engine/parser_text.inc.php';
 
 if ($argc != 2) {
-	echo 'Usage : parser_doc.php <filename>'."\n";
+	echo 'Usage : parser_unoconv_document.php <filename>'."\n";
 	exit (1);
 }
 
@@ -38,7 +39,7 @@ if (!is_file($fichin))
 	exit (1);
 
 $fichout = tempnam(forge_get_config('data_path'), 'tmp');
-$cmd = '/usr/bin/antiword -i1 -t '.$fichin.' > '.$fichout;
+$cmd = "/usr/bin/unoconv -d document -f text -o $fichout $fichin";
 $res = shell_exec($cmd);
 
 echo parser_text($fichout);
