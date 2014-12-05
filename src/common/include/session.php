@@ -549,7 +549,7 @@ function session_set_internalEx($user_id, $res=false, $checkvalid=true) {
 
 	$G_SESSION = user_get_object($user_id, $res);
 	if ($G_SESSION) {
-		if (!$G_SESSION->isActive(false))
+		if ($checkvalid && !$G_SESSION->isActive(false))
 			return false;
 		$G_SESSION->setLoggedIn(true);
 	}
