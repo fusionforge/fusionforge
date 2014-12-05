@@ -170,7 +170,6 @@ switch ($_GET['view']) {
 			}
 		}
 		echo $body;
-		break;
 	}
 	default: {
 		// If we output html and we found the mbstring extension, we
@@ -178,18 +177,12 @@ switch ($_GET['view']) {
 		if ($charset != 'UTF-8' && extension_loaded('mbstring'))
 			$body = mb_convert_encoding($body, 'UTF-8', $encoding);
 		scm_header(array('title'=>_("SCM Repository"),
-			'group'=>$Group->getID()));
+						 'group'=>$Group->getID(),
+						 'inframe'=>1));
 		echo $body;
-		scm_footer();
-		break;
+		scm_footer(array('inframe'=>1));
 	}
 }
-
-scm_header(array('title'=>_("SCM Repository"),
-				 'group'=>$Group->getID(),
-				 'inframe'=>getIntFromGet('inframe')));
-echo $content;
-scm_footer(array('inframe'=>getIntFromGet('inframe')));
 
 // Local Variables:
 // mode: php
