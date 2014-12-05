@@ -34,13 +34,12 @@ class ScmGitSSHTest extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=Admin");
 		$this->clickAndWait("link=Tools");
 		$this->clickAndWait("link=Source Code Admin");
-		$this->click("//input[@name='scmradio' and @value='scmgit']");
+		$this->check("//input[@name='scmengine[]' and @value='scmgit']");
 		$this->clickAndWait("submit");
 
 		$this->uploadSshKey();
 	    
 		// Run the cronjob to create repositories
-		$this->reload_nscd();
 		$this->cron("scm/create_scm_repos.php");
 		$this->cron("shell/homedirs.php");
 
@@ -68,14 +67,17 @@ class ScmGitSSHTest extends FForge_SeleniumTestCase
 		$this->assertEquals($ret, 0);
 
 		// Check that the changes appear in gitweb
-		$this->open(ROOT.'/plugins/scmgit/cgi-bin/gitweb.cgi?a=project_list;pf=projecta');
-		$this->waitForPageToLoad();
+		$this->open(ROOT);
+		$this->clickAndWait("link=ProjectA");
+		$this->clickAndWait("link=SCM");
+		$this->clickAndWait("link=Browse Git Repository");
+        $this->selectFrame("id=scmgit_iframe");
 		$this->assertElementPresent("//.[@class='page_footer']");
 		$this->assertTextPresent("projecta.git");
-		$this->click("link=projecta/projecta.git");
-		$this->waitForPageToLoad();
+		$this->clickAndWait("link=projecta.git");
 		$this->assertTextPresent("Modifying file");
 		$this->assertTextPresent("Adding file");
+        $this->selectFrame("relative=top");
 
 		system("rm -fr $t");
 	}

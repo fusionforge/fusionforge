@@ -67,7 +67,6 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 			if ($ret != 0)
 				die('DB_INIT_CMD ('.DB_INIT_CMD.') failed');
 		}
-		$this->reload_nscd();
 
 		$this->setBrowser('*firefox');
 		$this->setBrowserUrl(URL);
@@ -77,6 +76,14 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		// (future-proof - https://github.com/giorgiosironi/phpunit-selenium/commit/07e50f74f3782ce8781527653e6c79aeefd94ada)
 		$this->screenshotBgColor = '#CCFFDD';
 	}
+
+    protected function changeConfig($text) {
+            $forge_get_config = RUN_JOB_PATH."/forge_get_config";
+            $config_path = rtrim(`$forge_get_config config_path`);
+            $classname = get_class($this);
+            file_put_contents("$config_path/config.ini.d/zzz-buildbot-$classname.ini",
+                              $text);
+    }
 
 	/**
 	 * Method that is called after Selenium actions.
@@ -134,11 +141,6 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	{
 		$this->runCommand("service apache2 reload > /dev/null 2>&1 || service httpd reload > /dev/null 2>&1");
 		sleep (3); // Give it some time to become available again
-	}
-
-	protected function reload_nscd()
-	{
-		$this->runCommand("(nscd -i passwd && nscd -i group) >/dev/null 2>&1 || true");
 	}
 
 	protected function init() {

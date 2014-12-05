@@ -52,6 +52,10 @@ if (forge_get_config('enable_uploads', 'mediawiki')) {
 		$project = $row['unix_group_name'];
 		$project_dir = "$projects_path/$project";
 		cron_debug("Checking $project...");
+		if (!is_dir($project_dir)) {
+			// wait for create-wikis.php
+			continue;
+		}
 
 		// Create the image directory if necessary
 		$upload_dir = "$project_dir/$upload_dir_basename";

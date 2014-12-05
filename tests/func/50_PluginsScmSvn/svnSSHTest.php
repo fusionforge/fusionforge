@@ -25,10 +25,7 @@ class ScmSvnSSHTest extends FForge_SeleniumTestCase
 {
 	function testScmSvnSSH()
 	{
-		$forge_get_config = RUN_JOB_PATH."/forge_get_config";
-		$config_path = rtrim(`$forge_get_config config_path`);
-		file_put_contents("$config_path/config.ini.d/zzz-buildbot-svnsshtest",
-				  "[scmsvn]\n"."use_ssh = yes\n"."use_dav = no\n");
+        $this->changeConfig("[scmsvn]\nuse_ssh = yes\nuse_dav = no\n");
 
 		$this->activatePlugin('scmsvn');
 		$this->populateStandardTemplate('empty');
@@ -39,13 +36,12 @@ class ScmSvnSSHTest extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=Admin");
 		$this->clickAndWait("link=Tools");
 		$this->clickAndWait("link=Source Code Admin");
-		$this->click("//input[@name='scmradio' and @value='scmsvn']");
+		$this->check("//input[@name='scmengine[]' and @value='scmsvn']");
 		$this->clickAndWait("submit");
 
 		$this->uploadSshKey();
 	    
 		// Run the cronjob to create repositories
-		$this->reload_nscd();
 		$this->cron("scm/create_scm_repos.php");
 		$this->cron("shell/homedirs.php");
 
@@ -72,8 +68,10 @@ class ScmSvnSSHTest extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
 		$this->clickAndWait("link=Browse Subversion Repository");
+        $this->selectFrame("id=scmsvn_iframe");
 		$this->assertTextPresent("Modifying file");
 		$this->assertTextNotPresent("Adding file");
+        $this->selectFrame("relative=top");
 
 		system("rm -fr $t");
 	}

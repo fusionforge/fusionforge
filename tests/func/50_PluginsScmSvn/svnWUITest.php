@@ -25,10 +25,7 @@ class ScmSvnWUITest extends FForge_SeleniumTestCase
 {
 	function testScmSvnWUI()
 	{
-		$forge_get_config = RUN_JOB_PATH."/forge_get_config";
-		$config_path = rtrim(`$forge_get_config config_path`);
-		file_put_contents("$config_path/config.ini.d/zzz-buildbot-svnwuitest",
-				  "[scmsvn]\n"."use_ssh = no\n"."use_dav = yes\n");
+        $this->changeConfig("[scmsvn]\nuse_ssh = no\nuse_dav = yes\n");
 
 		$this->activatePlugin('scmsvn');
 		$this->populateStandardTemplate('empty');
@@ -39,7 +36,7 @@ class ScmSvnWUITest extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=Admin");
 		$this->clickAndWait("link=Tools");
 		$this->clickAndWait("link=Source Code Admin");
-		$this->click("//input[@name='scmradio' and @value='scmsvn']");
+		$this->check("//input[@name='scmengine[]' and @value='scmsvn']");
 		$this->clickAndWait("submit");
 	    
 		// Run the cronjob to create repositories
@@ -49,8 +46,10 @@ class ScmSvnWUITest extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
 		$this->clickAndWait("link=Browse Subversion Repository");
+        $this->selectFrame("id=scmsvn_iframe");
 		$this->assertTextPresent("trunk");
 		$this->assertTextPresent("Init");
+        $this->selectFrame("relative=top");
 	}
 
 	/**
