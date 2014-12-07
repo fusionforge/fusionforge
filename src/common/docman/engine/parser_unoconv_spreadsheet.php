@@ -5,7 +5,7 @@
  *
  * Copyright 2005, Fabio Bertagnin
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2014 Franck Villaume - TrivialDev
  * Copyright 2014, Roland Mas
  * http://fusionforge.org
  *
@@ -27,7 +27,7 @@
 
 require dirname(__FILE__).'/../../include/env.inc.php';
 
-require_once $gfcommon.'docman/engine/parser_text.inc.php';
+require_once $gfcommon.'docman/engine/parser_pdf.inc.php';
 
 if ($argc != 2) {
 	echo 'Usage : parser_unoconv_document.php <filename>'."\n";
@@ -43,7 +43,7 @@ $cmd = "/usr/bin/unoconv -d spreadsheet -f pdf -o $fichout $fichin";
 $res = shell_exec($cmd);
 
 echo parser_pdf($fichout);
-unlink ($fichout);
+unlink($fichout);
 
 // Local Variables:
 // mode: php

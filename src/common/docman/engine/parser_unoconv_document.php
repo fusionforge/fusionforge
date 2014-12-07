@@ -43,7 +43,7 @@ $cmd = "/usr/bin/unoconv -d document -f text -o $fichout $fichin";
 $res = shell_exec($cmd);
 
 echo parser_text($fichout);
-unlink ($fichout);
+unlink($fichout);
 
 // Local Variables:
 // mode: php
