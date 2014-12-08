@@ -1,1 +1,0 @@
-../../../../lenny/3rd-party/Packages/jquery-goodies/jquery-goodies_3-1~bpo50+1.dsc
