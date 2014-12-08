@@ -4,6 +4,7 @@ fusionforge (5.3.50-1) unstable; urgency=medium
   (closes: #769098, #666236, #717803, #769098, #309518)
   (closes: #556189, #597602, #638010, #640804, #685074)
   (closes: #576410, #720305, #551761, #656088, #585205)
+  (closes: #772241)
   * Adapt packaging to new build system
 
  -- Sylvain Beucler <beuc@debian.org>  Mon, 22 Sep 2014 14:58:47 +0200

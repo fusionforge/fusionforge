@@ -73,9 +73,11 @@ RESULT=$?
 if [ $RESULT -eq "0" ]; then
         exit 0
 else
-        echo -e "---------PRE COMMIT HOOK---------" 1>&2
-        echo -e "\nEvery commit must have a log.\n" 1>&2
-        echo -e "---------------------------------" 1>&2
+        echo "---------PRE COMMIT HOOK---------" 1>&2
+        echo
+        echo "Every commit must have a log." 1>&2
+        echo
+        echo "---------------------------------" 1>&2
         exit 1
 fi
 
