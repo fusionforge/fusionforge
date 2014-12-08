@@ -59,14 +59,23 @@ class ScmSvnWebDAVTest extends FForge_SeleniumTestCase
         $log = "2> /var/log/svn.stderr > /var/log/svn.stdout";
         $timeout = "timeout 15s";
 		system("cd $t && $timeout svn checkout $globalopts $auth $p projecta $log", $ret);
+        if ($ret > 120) {
+            system("cd $t && $timeout svn checkout $globalopts $auth $p projecta $log", $ret);
+        }
 		$this->assertEquals($ret, 0);
 		sleep(2);
 		system("echo 'this is a simple text' > $t/projecta/mytext.txt");
 		system("cd $t/projecta && $timeout svn add mytext.txt $log && $timeout svn commit $globalopts $auth -m'Adding file' $log", $ret);
+        if ($ret > 120) {
+            system("cd $t/projecta && $timeout svn add mytext.txt $log && $timeout svn commit $globalopts $auth -m'Adding file' $log", $ret);
+        }
 		$this->assertEquals($ret, 0);
 		sleep(2);
 		system("echo 'another simple text' >> $t/projecta/mytext.txt");
 		system("cd $t/projecta && $timeout svn commit $globalopts $auth -m'Modifying file' $log", $ret);
+        if ($ret > 120) {
+            system("cd $t/projecta && $timeout svn commit $globalopts $auth -m'Modifying file' $log", $ret);
+        }
 		$this->assertEquals($ret, 0);
 		sleep(2);
 
