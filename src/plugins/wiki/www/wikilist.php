@@ -40,9 +40,9 @@ $res = db_query_params('SELECT group_name,register_time,unix_group_name,groups.g
 
 $headers = array(
     _('Project Name'),
-    _('Project Register Time'),
-    _('Unix name'),
-    _('Public?')
+    _('Registered'),
+    _('Unix Name'),
+    _('Is Public?')
 );
 if (forge_get_config('allow_external')) {
     $headers[] = _("External?");
@@ -81,7 +81,7 @@ while ($grp = db_fetch_array($res)) {
             echo '<td>' . $grp['is_external'] . '</td>';
         }
         echo '<td>' . $grp['members'] . '</td>';
-        echo '<td><a href="/wiki/g/' . $grp['unix_group_name'] . '/?action=upgrade">' . _("Upgrade") . '</a></td>';
+        echo '<td><a title="'._('Upgrade').' '.$grp['group_name'].'" href="/wiki/g/'.$grp['unix_group_name'].'/?action=upgrade&amp;nodb=true">'._('Upgrade').'</a></td>';
         echo '</tr>';
         $i++;
     }
