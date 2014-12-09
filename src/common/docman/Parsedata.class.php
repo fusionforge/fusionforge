@@ -88,7 +88,6 @@ class Parsedata {
 		$arrayLines = file($file, FILE_SKIP_EMPTY_LINES);
 		if (is_array($arrayLines) && count($arrayLines)) {
 			foreach ($arrayLines as $a) {
-				echo "$a\n";
 				if (trim($a) != "" && substr($a, 0,1) != "#") {
 					$a2 = explode ("|", $a);
 					$rep[$a2[0]] = $a2[1];
