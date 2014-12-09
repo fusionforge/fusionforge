@@ -6,7 +6,9 @@ data_path=$(forge_get_config data_path)
 plugindir=$(forge_get_config source_path)/plugins/mediawiki
 extraconfigdirs=$(forge_get_config extra_config_dirs)
 
-mediawikidir=$((ls -d /usr/share/mediawiki* 2>/dev/null || echo '/usr/share/mediawiki') | tail -1)
+mediawikidir=$( \
+    (ls -d /usr/share/mediawiki* | grep -v '-extensions' 2>/dev/null || echo '/usr/share/mediawiki') \
+    | tail -1)
 # Debian: /usr/share/mediawiki/
 # CentOS6: /usr/share/mediawiki119/
 

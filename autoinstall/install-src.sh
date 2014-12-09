@@ -50,17 +50,18 @@ else
 	unoconv poppler-utils
 fi
 
-cd $(dirname $0)/../src/
-make
-make install-base install-shell \
-    install-plugin-scmsvn install-plugin-scmgit \
-    install-plugin-blocks install-plugin-mediawiki install-plugin-moinmoin \
-    install-plugin-online_help
-# adapt .ini configuration in /etc/fusionforge/config.ini.d/
-make post-install-base post-install-shell \
-    post-install-plugin-scmsvn post-install-plugin-scmgit \
-    post-install-plugin-blocks post-install-plugin-mediawiki post-install-plugin-moinmoin \
-    post-install-plugin-online_help
+(
+    cd $(dirname $0)/../src/
+    make
+    make install-base install-shell \
+        install-plugin-scmsvn install-plugin-scmgit \
+        install-plugin-blocks install-plugin-mediawiki install-plugin-moinmoin \
+        install-plugin-online_help
+    make post-install-base post-install-shell \
+        post-install-plugin-scmsvn post-install-plugin-scmgit \
+        post-install-plugin-blocks post-install-plugin-mediawiki post-install-plugin-moinmoin \
+        post-install-plugin-online_help
+)
 
 # Dump clean DB
 if [ ! -e /root/dump ]; then $(dirname $0)/../tests/func/db_reload.sh --backup; fi
