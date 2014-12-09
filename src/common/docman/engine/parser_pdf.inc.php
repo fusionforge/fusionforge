@@ -35,12 +35,12 @@ function parser_pdf($fichin) {
 	if (filesize($fichin) == 0)
 		return '';
 
-    $fichout = tempnam(forge_get_config('data_path'),'tmp');
-    $cmd = '/usr/bin/pdftotext '.$fichin.' '.$fichout;
-    $res = shell_exec($cmd);
-    
-    return parser_text($fichout);
-    unlink ($fichout);
+	$fichout = tempnam(forge_get_config('data_path'),'tmp');
+	$cmd = '/usr/bin/pdftotext '.$fichin.' '.$fichout;
+	$res = shell_exec($cmd);
+
+	return parser_text($fichout);
+	unlink ($fichout);
 }
 
 // Local Variables:
