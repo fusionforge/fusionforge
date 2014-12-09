@@ -1,1 +1,0 @@
-../../../../lenny/3rd-party/Packages/jquery/jquery_1.4.2-2~bpo50+1.dsc
