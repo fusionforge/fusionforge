@@ -65,7 +65,8 @@ if ($owner) {
 			$name = null;
 			if ($request->exist('name')) {
 				$param = $request->get('name');
-				$name = array_pop(array_keys($param));
+				$arrKeys = array_keys($param);
+				$name = array_pop($arrKeys);
 				$instance_id = (int)$param[$name];
 			}
 			switch($request->get('action')) {
@@ -73,7 +74,8 @@ if ($owner) {
 					if ($name && $request->exist('layout_id')) {
 						if ($widget = Widget::getInstance($name)) {
 							if ($widget->isAvailable()) {
-								$action = array_pop(array_keys($param[$name]));
+								$arrKeys = array_keys($param[$name]);
+								$action = array_pop($arrKeys);
 								switch($action) {
 									case 'remove':
 										$instance_id = (int)$param[$name][$action];
