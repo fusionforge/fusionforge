@@ -1,5 +1,6 @@
 Fusionforge-5.3.3:
 * User e-mail change: simplify confirmation hash and precise encoding to avoid mangling in some versions of Thunderbird and Apple Mail [#738] (Inria)
+* Project homepage: default to http:// rather than https:// for external homepage links [#752] (Inria)
 * SCM: use 'shell_host' variable (or failing that, 'web_host') to document where users can SSH to the group shared directory [#698] (Inria)
 * SCM stats: fix order in stats block [#736] (TrivialDev)
 * System replication: refresh nscd cache before applying changes
