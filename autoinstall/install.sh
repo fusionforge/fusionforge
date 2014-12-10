@@ -43,7 +43,7 @@ if [ -e /etc/debian_version ]; then
 	    fusionforge-plugin-scmgit fusionforge-plugin-scmsvn fusionforge-plugin-scmbzr \
 	    fusionforge-plugin-mediawiki fusionforge-plugin-moinmoin \
 	    fusionforge-plugin-blocks
-	if [ "$(cat /etc/lsb-release 2>/dev/null | sed -n 's/DISTRIB_ID=//p')" != 'Ubuntu' ]; then
+	if ! dpkg-vendor --is Ubuntu; then
 	    apt-get install locales-all  # https://bugs.launchpad.net/ubuntu/+source/glibc/+bug/1394929
 	fi
     fi
