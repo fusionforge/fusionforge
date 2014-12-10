@@ -39,7 +39,7 @@ fi
 if type yum 2>/dev/null
 then
     yum install -y java-1.7.0-openjdk || yum install -y java-1.6.0
-    yum install -y psmisc net-tools
+    yum install -y psmisc net-tools firefox
 fi
 
 if type apt-get 2>/dev/null ; then
