@@ -35,33 +35,34 @@ if [ -e /etc/debian_version ]; then
 	mediawiki \
 	php-twig \
 	python-moinmoin libapache2-mod-wsgi python-psycopg2 \
-	unoconv
-    if [ $(cat /etc/lsb-release | sed -n 's/DISTRIB_ID=//p') != 'Ubuntu' ]; then
+	unoconv poppler-utils
+    if ! dpkg-vendor --is Ubuntu; then
 	apt-get install locales-all  # https://bugs.launchpad.net/ubuntu/+source/glibc/+bug/1394929
     fi
 else
     yum install -y make tar
     backports_rpm
-    yum install -y gettext php-cli php-pgsql php-process \
+    yum install -y gettext php-cli php-pgsql php-process php-mbstring \
 	httpd mod_ssl postgresql-server nscd \
 	subversion augeas viewvc git gitweb \
 	mediawiki119 \
 	php-twig \
 	moin mod_wsgi python-psycopg2 \
-	unoconv
+	unoconv poppler-utils
 fi
 
-cd $(dirname $0)/../src/
-make
-make install-base install-shell \
-    install-plugin-scmsvn install-plugin-scmgit \
-    install-plugin-blocks install-plugin-mediawiki install-plugin-moinmoin \
-    install-plugin-online_help
-# adapt .ini configuration in /etc/fusionforge/config.ini.d/
-make post-install-base post-install-shell \
-    post-install-plugin-scmsvn post-install-plugin-scmgit \
-    post-install-plugin-blocks post-install-plugin-mediawiki post-install-plugin-moinmoin \
-    post-install-plugin-online_help
+(
+    cd $(dirname $0)/../src/
+    make
+    make install-base install-shell \
+        install-plugin-scmsvn install-plugin-scmgit \
+        install-plugin-blocks install-plugin-mediawiki install-plugin-moinmoin \
+        install-plugin-online_help
+    make post-install-base post-install-shell \
+        post-install-plugin-scmsvn post-install-plugin-scmgit \
+        post-install-plugin-blocks post-install-plugin-mediawiki post-install-plugin-moinmoin \
+        post-install-plugin-online_help
+)
 
 # Dump clean DB
 if [ ! -e /root/dump ]; then $(dirname $0)/../tests/func/db_reload.sh --backup; fi
