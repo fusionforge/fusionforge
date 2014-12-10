@@ -1002,6 +1002,10 @@ function site_user_header($params) {
 	$arr_l[] = '/account/';
 	$arr_attr[] = array('title' => _('Manage your account. Change your password, select your preferences.'));
 
+	$arr_t[] = _('System actions queue');
+	$arr_l[] = '/my/sysactionsq.php';
+	$arr_attr[] = array('title' => _('In-progress and past system replication'));
+
 	if (!forge_get_config('project_registration_restricted')
 			|| forge_check_global_perm('approve_projects', '')) {
 		$arr_t[] = _('Register Project');
