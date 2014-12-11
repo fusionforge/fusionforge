@@ -41,7 +41,7 @@ function scm_header($params) {
 		exit_disabled();
 	}
 
-	if (isset($params['inframe'])) {
+	if (isset($params['inframe']) && $params['inframe']) {
 		echo html_ao('html');
 		echo html_ao('body');
 		echo html_ao('div');
@@ -75,7 +75,7 @@ function scm_header($params) {
 	echo html_ao('div', array('id' => 'scm', 'class' => 'scm'));
 }
 
-function scm_footer($params = array('inframe'=>0)) {
+function scm_footer($params = array('inframe' => 0)) {
 	echo html_ac(html_ap() -1);
 	if ($params['inframe']) {
 		return;
