@@ -83,12 +83,15 @@ while (true) {
 		while ($arr = db_fetch_array($res)) {
 				usergroups_sync();
 				$script = sysaction_get_script($arr['plugin_id'], $arr['sysaction_id']);
+				if (!file_exists($script))
+						// Not installed on this node, skipping
+						continue;
 				if (!is_executable($script)) {
 						db_query_params("UPDATE sysactionsq SET status=$1, error_message=$2"
 										. " WHERE sysactionsq_id=$3",
 										array('ERROR',
 											  "Cron job {$arr['plugin_id']}/{$arr['sysaction_id']}"
-											  . " '$script' not found or not executable.\n",
+											  . " '$script' not executable.\n",
 											  $arr['sysactionsq_id']));
 						continue;
 				}
