@@ -25,9 +25,9 @@ prepare_workspace
 $(dirname $0)/destroy_vm $HOST
 $(dirname $0)/start_vm $HOST
 
-setup_redhat_3rdparty_repo
-
 ssh root@$HOST "yum install -y rsync"
+
+setup_redhat_3rdparty_repo
 
 # BUILD FUSIONFORGE REPO
 echo "Build FUSIONFORGE REPO in $BUILDRESULT"
