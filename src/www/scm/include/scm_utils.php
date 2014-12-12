@@ -42,8 +42,6 @@ function scm_header($params) {
 	}
 
 	if (isset($params['inframe']) && $params['inframe']) {
-		echo html_ao('html');
-		echo html_ao('body');
 		return;
 	}
 	/*
