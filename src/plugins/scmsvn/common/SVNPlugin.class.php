@@ -25,6 +25,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+require_once $gfcommon.'include/plugins_utils.php';
+
 forge_define_config_item('default_server', 'scmsvn', forge_get_config ('scm_host'));
 forge_define_config_item('repos_path', 'scmsvn', forge_get_config('data_path').'/scmrepos/svn');
 forge_define_config_item('serve_path', 'scmsvn', forge_get_config('repos_path'));
@@ -101,8 +103,7 @@ some control over it to the project's administrator.");
 		$repo = 'file://' . forge_get_config('repos_path', $this->name).'/'.$project->getUnixName().'/';
 		$res = array ();
 		$module = 'trunk';
-		if (!(exec("svn ls '$repo'", $res) && in_array($module.'/', $res)))
-		{
+		if (!(exec("svn ls '$repo'", $res) && in_array($module.'/', $res))) {
 			$module = '';
 		}
 
@@ -263,24 +264,8 @@ some control over it to the project's administrator.");
 		}
 
 		if ($project->usesPlugin($this->name)) {
-				print '<iframe id="scmsvn_iframe" src="'.util_make_url("/scm/viewvc.php?inframe=1&root=".$project->getUnixName()).'" frameborder="0" width=100% ></iframe>';
-				$useautoheight = 1;
-        }
-
-		if ($useautoheight) {
-			html_use_jqueryautoheight();
-			echo $HTML->getJavascripts();
-			echo '<script type="text/javascript">//<![CDATA[
-				jQuery(\'#scmsvn_iframe\').iframeAutoHeight({heightOffset: 50});
-				jQuery(\'#scmsvn_iframe\').load(function (){
-						if (this.contentWindow.location.href == "'.util_make_url('/projects/'.$project->getUnixName()).'/") {
-							console.log(this.contentWindow.location.href);
-							window.location.href = this.contentWindow.location.href;
-						};
-					});
-				//]]></script>';
+			htmlIframe('/scm/viewvc.php?inframe=1&root='.$project->getUnixName(), array('id'=>'scmgit_iframe'));
 		}
-
 	}
 
 	function createOrUpdateRepo($params) {
@@ -651,45 +636,46 @@ some control over it to the project's administrator.");
 		}
 
 		if (in_array('scmsvn', $params['show']) || (count($params['show']) < 1)) {
-			$start_time = $params['begin'];
-			$end_time = $params['end'];
-			$d1 = date('Y-m-d', $start_time - 80000);
-			$d2 = date('Y-m-d', $end_time + 80000);
-
 			$repo = forge_get_config('repos_path', 'scmsvn') . '/' . $project->getUnixName();
-			$pipe = popen("svn log file://$repo --xml -v -r '".'{'.$d2.'}:{'.$d1.'}'."' 2> /dev/null", 'r' );
-			$xml_parser = xml_parser_create();
-			xml_set_element_handler($xml_parser, "SVNPluginStartElement", "SVNPluginEndElement");
-			xml_set_character_data_handler($xml_parser, "SVNPluginCharData");
-			while (!feof($pipe) && $data = fgets($pipe, 4096)) {
-				if (!xml_parse($xml_parser, $data, feof ($pipe))) {
-					debug("Unable to parse XML with error " .
-						xml_error_string(xml_get_error_code($xml_parser)) .
-						" on line " .
-						xml_get_current_line_number($xml_parser));
-					return false;
-					break;
-				}
-			}
-			xml_parser_free($xml_parser);
-			if ($adds > 0 || $updates > 0 || $commits > 0 || $deletes > 0) {
-				$i = 0;
-				foreach ($messages as $message) {
-					$result = array();
-					$result['section'] = 'scm';
-					$result['group_id'] = $group_id;
-					$result['ref_id'] = 'viewvc.php/?root='.$project->getUnixName();
-					$result['description'] = htmlspecialchars($message).' (r'.$revisions[$i].')';
-					$userObject = user_get_object_by_name($users[$i]);
-					if (is_a($userObject, 'GFUser')) {
-						$result['realname'] = util_display_user($userObject->getUnixName(), $userObject->getID(), $userObject->getRealName());
-					} else {
-						$result['realname'] = '';
+			if (is_dir($repo)) {
+				$start_time = $params['begin'];
+				$end_time = $params['end'];
+				$d1 = date('Y-m-d', $start_time - 80000);
+				$d2 = date('Y-m-d', $end_time + 80000);
+				$pipe = popen("svn log file://$repo --xml -v -r '".'{'.$d2.'}:{'.$d1.'}'."' 2> /dev/null", 'r' );
+				$xml_parser = xml_parser_create();
+				xml_set_element_handler($xml_parser, "SVNPluginStartElement", "SVNPluginEndElement");
+				xml_set_character_data_handler($xml_parser, "SVNPluginCharData");
+				while (!feof($pipe) && $data = fgets($pipe, 4096)) {
+					if (!xml_parse($xml_parser, $data, feof ($pipe))) {
+						debug("Unable to parse XML with error " .
+							xml_error_string(xml_get_error_code($xml_parser)) .
+							" on line " .
+							xml_get_current_line_number($xml_parser));
+						return false;
+						break;
 					}
-					$result['activity_date'] = $times[$i];
-					$result['subref_id'] = '&view=rev&revision='.$revisions[$i];
-					$params['results'][] = $result;
-					$i++;
+				}
+				xml_parser_free($xml_parser);
+				if ($adds > 0 || $updates > 0 || $commits > 0 || $deletes > 0) {
+					$i = 0;
+					foreach ($messages as $message) {
+						$result = array();
+						$result['section'] = 'scm';
+						$result['group_id'] = $group_id;
+						$result['ref_id'] = 'viewvc.php/?root='.$project->getUnixName();
+						$result['description'] = htmlspecialchars($message).' (r'.$revisions[$i].')';
+						$userObject = user_get_object_by_name($users[$i]);
+						if (is_a($userObject, 'GFUser')) {
+							$result['realname'] = util_display_user($userObject->getUnixName(), $userObject->getID(), $userObject->getRealName());
+						} else {
+							$result['realname'] = '';
+						}
+						$result['activity_date'] = $times[$i];
+						$result['subref_id'] = '&view=rev&revision='.$revisions[$i];
+						$params['results'][] = $result;
+						$i++;
+					}
 				}
 			}
 		}

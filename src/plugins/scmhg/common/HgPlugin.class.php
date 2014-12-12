@@ -615,15 +615,10 @@ and gives some control over it to the project's administrator.");
 			return false;
 		}
 		if (in_array('scmhg', $params['show']) || (count($params['show']) < 1)) {
-			$start_time = $params['begin'];
-			$end_time = $params['end'];
 			$repo = forge_get_config('repos_path', 'scmhg') . '/' . $project->getUnixName();
-			if (!is_dir($repo) || !is_dir("$repo/.hg")) {
-				// echo "No repository\n";
-				return false;
-			}
-			$cdir = chdir($repo);
-			if ($cdir) {
+			if (is_dir($repo) && is_dir($repo.'/.hg') && chdir($repo)) {
+				$start_time = $params['begin'];
+				$end_time = $params['end'];
 				$pipe = popen("hg log --template '{date|shortdate}||{author|email}||{desc}||{node}\n' -d '$start_time 0 to $end_time 0'", 'r');
 				while (!feof($pipe) && $data = fgets($pipe)) {
 					$line = trim($data);
