@@ -336,13 +336,13 @@ control over it to the project's administrator.");
 		if ($project->usesPlugin($this->name)) {
 			if ($params['user_id']) {
 				$user = user_get_object($params['user_id']);
-				htmlIframe('/plugins/scmgit/cgi-bin/gitweb.cgi?p='.$project->getUnixName().'/users/'.$user->getUnixName().'.git',array('id'=>'scmgit_iframe'));
+				htmlIframe('/plugins/scmgit/cgi-bin/gitweb.cgi?p='.$project->getUnixName().'/users/'.$user->getUnixName().'.git', array('id'=>'scmgit_iframe'));
 			} elseif ($this->browserDisplayable($project)) {
 				$iframesrc = '/plugins/scmgit/cgi-bin/gitweb.cgi?p='.$project->getUnixName().'/'.$project->getUnixName().'.git';
 				if ($params['commit']) {
 					$iframesrc .= ';a=log;h='.$params['commit'];
 				}
-				htmlIframe($iframesrc,array('id'=>'scmgit_iframe'));
+				htmlIframe($iframesrc, array('id'=>'scmgit_iframe'));
 			}
 		}
 	}
@@ -1090,29 +1090,31 @@ control over it to the project's administrator.");
 			return false;
 		}
 		if (in_array('scmgit', $params['show']) || (count($params['show']) < 1)) {
-			$start_time = $params['begin'];
-			$end_time = $params['end'];
 			$repo = forge_get_config('repos_path', 'scmgit') . '/' . $project->getUnixName() . '/' . $project->getUnixName() . '.git';
-			$pipe = popen("GIT_DIR=\"$repo\" git log --date=raw --since=@$start_time --until=@$end_time --all --pretty='format:%ad||%ae||%s||%h' --name-status", 'r' );
-			while (!feof($pipe) && $data = fgets($pipe)) {
-				$line = trim($data);
-				$splitedLine = explode('||', $line);
-				if (sizeof($splitedLine) == 4) {
-					$result = array();
-					$result['section'] = 'scm';
-					$result['group_id'] = $group_id;
-					$result['ref_id'] = 'browser.php?group_id='.$group_id.'&commit='.$splitedLine[3];
-					$result['description'] = htmlspecialchars($splitedLine[2]).' (commit '.$splitedLine[3].')';
-					$userObject = user_get_object_by_email($splitedLine[1]);
-					if (is_a($userObject, 'GFUser')) {
-						$result['realname'] = util_display_user($userObject->getUnixName(), $userObject->getID(), $userObject->getRealName());
-					} else {
-						$result['realname'] = '';
+			if (is_dir($repo) && !is_dir($repo.'/refs')) {
+				$start_time = $params['begin'];
+				$end_time = $params['end'];
+				$pipe = popen("GIT_DIR=\"$repo\" git log --date=raw --since=@$start_time --until=@$end_time --all --pretty='format:%ad||%ae||%s||%h' --name-status", 'r' );
+				while (!feof($pipe) && $data = fgets($pipe)) {
+					$line = trim($data);
+					$splitedLine = explode('||', $line);
+					if (sizeof($splitedLine) == 4) {
+						$result = array();
+						$result['section'] = 'scm';
+						$result['group_id'] = $group_id;
+						$result['ref_id'] = 'browser.php?group_id='.$group_id.'&commit='.$splitedLine[3];
+						$result['description'] = htmlspecialchars($splitedLine[2]).' (commit '.$splitedLine[3].')';
+						$userObject = user_get_object_by_email($splitedLine[1]);
+						if (is_a($userObject, 'GFUser')) {
+							$result['realname'] = util_display_user($userObject->getUnixName(), $userObject->getID(), $userObject->getRealName());
+						} else {
+							$result['realname'] = '';
+						}
+						$splitedDate = explode(' ', $splitedLine[0]);
+						$result['activity_date'] = $splitedDate[0];
+						$result['subref_id'] = '';
+						$params['results'][] = $result;
 					}
-					$splitedDate = explode(' ', $splitedLine[0]);
-					$result['activity_date'] = $splitedDate[0];
-					$result['subref_id'] = '';
-					$params['results'][] = $result;
 				}
 			}
 		}

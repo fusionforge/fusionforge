@@ -92,7 +92,7 @@ if ($external_scm) {
 	$server_script = preg_replace("/^\\//", "", $server_script);
 
 	// pass the parameters passed to this script to the remote script in the same fashion
-    $parameters = preg_replace('/^inframe=1[&;]/','',$_SERVER["QUERY_STRING"]);
+	$parameters = preg_replace('/^inframe=1[&;]/','',$_SERVER["QUERY_STRING"]);
 	$script_url = "http://".$scm_box."/".$server_script.$_SERVER["PATH_INFO"]."?".$parameters;
 	$fh = @fopen($script_url, "r");
 	if (!$fh) {

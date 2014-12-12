@@ -4,7 +4,6 @@
 
 /*** Standard Tags ***/
 
-/* FusionForge: don't change the outer attributes
 html, body {
   color: #000000;
   background-color: #ffffff;
@@ -18,7 +17,7 @@ a:active  { color: #0000ff; }
 img { border: none; }
 table {
   width: 100%;
-  margin: 0; 
+  margin: 0;
   border: none;
 }
 table.auto {
@@ -29,48 +28,13 @@ table.fixed {
   table-layout: fixed;
 }
 table.fixed td {
-  overflow: hidden; 
+  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 tr, td, th { vertical-align: top; }
 th { white-space: nowrap; }
 form { margin: 0; }
-*/
-
-/* FusionForge: ... instead only apply them in context: */
-div.scm {
-  color: #000000;
-  background-color: #ffffff;
-  font-family: sans-serif;
-}
-
-div.scm a:link    { color: #0000ff; }
-div.scm a:visited { color: #880088; }
-div.scm a:active  { color: #0000ff; }
-
-div.scm img { border: none; }
-div.scm table {
-  width: 100%;
-  margin: 0; 
-  border: none;
-}
-div.scm table.auto {
-  width: auto;
-}
-div.scm table.fixed {
-  width: 100%;
-  table-layout: fixed;
-}
-div.scm table.fixed td {
-  overflow: hidden; 
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-div.scm tr, div.scm td, div.scm th { vertical-align: top; }
-div.scm th { white-space: nowrap; }
-div.scm form { margin: 0; }
-
 
 /*** Icons ***/
 .vc_icon {
@@ -283,11 +247,11 @@ div.scm form { margin: 0; }
 .vc_idiff_empty {
   background-color:#e0e0e0;
 }
-table.vc_idiff col.content { 
+table.vc_idiff col.content {
   width: 50%;
 }
 table.vc_idiff tbody {
-  font-family: monospace; 
+  font-family: monospace;
   /* unfortunately, white-space: pre-wrap isn't widely supported ... */
   white-space: -moz-pre-wrap; /* Mozilla based browsers */
   white-space: -pre-wrap;     /* Opera 4 - 6 */
