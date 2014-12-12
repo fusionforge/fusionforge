@@ -262,7 +262,7 @@ some control over it to the project's administrator.");
 		}
 
 		if ($project->usesPlugin($this->name)) {
-			htmlIframe('/scm/viewvc.php?inframe=1&root='.$project->getUnixName(), array('id'=>'scmgit_iframe'));
+			htmlIframe('/scm/viewvc.php?inframe=1&root='.$project->getUnixName(), array('id'=>'scmsvn_iframe'));
 		}
 	}
 
