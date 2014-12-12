@@ -23,7 +23,7 @@
 
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
-require_once $gfcommon.'include/SysActionQ.class.php';
+require_once $gfcommon.'include/SysActionsQ.class.php';
 
 global $HTML; // Layout object
 
@@ -35,7 +35,7 @@ if (!session_loggedin()) {
 // Test
 if ($_SERVER['QUERY_STRING'] == 'create') {
 		$sa = new SysActionQ();
-		$sa->add();
+		$sa->add(null, 1, 1, null);
 		if ($sa->isError()) {
 				exit_error($sa->getErrorMessage());
 		}

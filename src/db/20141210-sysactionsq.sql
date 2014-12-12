@@ -7,15 +7,15 @@ CREATE TRIGGER nss_usergroups_update_last_modified_date
 -- system queue
 CREATE TYPE sysactionsq_status AS ENUM ('TODO', 'WIP', 'DONE', 'ERROR');
 CREATE TABLE sysactionsq (
-    sysactionsq_id  SERIAL PRIMARY KEY,
-    plugin_id       integer REFERENCES plugins ON DELETE CASCADE,
-    sysaction_id    integer NOT NULL,
-    user_id         integer REFERENCES users ON DELETE CASCADE,
-    group_id        integer REFERENCES groups ON DELETE CASCADE,
-    status          sysactionsq_status DEFAULT 'TODO' NOT NULL,
-    error_message   text,
-    requested       timestamp,
-    started         timestamp,
-    stopped         timestamp
+    sysactionsq_id     SERIAL PRIMARY KEY,
+    plugin_id          integer REFERENCES plugins ON DELETE CASCADE,
+    sysaction_type_id  integer NOT NULL,
+    group_id           integer REFERENCES groups ON DELETE CASCADE,
+    user_id            integer REFERENCES users ON DELETE CASCADE,
+    status             sysactionsq_status DEFAULT 'TODO' NOT NULL,
+    error_message      text,
+    requested          timestamp,
+    started            timestamp,
+    stopped            timestamp
 );
 CREATE INDEX sysactionsq_status ON sysactionsq(status);

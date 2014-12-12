@@ -21,16 +21,19 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-class SysActionQ extends Error {
-		function add() {
+define('SYSACTION_CORE', null);
+define('SYSACTION_SCM_REPO', 27);
+
+class SysActionsQ extends Error {
+		function add($plugin_id, $sysaction_type_id, $group_id, $user_id=null) {
 				$res = db_query_params('INSERT INTO sysactionsq (
 				    plugin_id,
-				    sysaction_id,
-				    user_id,
+				    sysaction_type_id,
 				    group_id,
+				    user_id,
 				    requested
 				  ) VALUES ($1, $2, $3, $4, now())',
-				  array(NULL, 1, NULL, 1));
+				  array($plugin_id, $sysaction_type_id, $group_id, $user_id));
 				if (!$res || db_affected_rows($res) < 1) {
 						$this->setError(sprintf(_('Error: Cannot create system action: %s'),
 												db_error()));

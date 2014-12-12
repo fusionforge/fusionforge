@@ -1,4 +1,4 @@
-#! /usr/bin/php -f
+#!/usr/bin/php
 <?php
 /**
  * Small and fast system action trigger
@@ -28,8 +28,21 @@ require (dirname(__FILE__).'/../common/include/env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/cron_utils.php';
 
+$shortopts = "v";       // enable verbose mode
+$longopts = array();
+$options = getopt($shortopts, $longopts);
+if ($options === false) {  // doesn't work, PHP returns ambiguous array() on error..
+	print "Usage: {$argv[0]} [-v]\n";
+	exit(1);
+}
+$verbose = false;
+if ( isset($options['v']) ) {
+		print "verbose mode ON\n";
+		$verbose = true;
+}
+
 // (sysactionsq_lists) -> cf. mail_group_list
-// - sysaction_id references sysactions
+// - sysactionq_id references sysactions
 
 // (sysactionsq_membership)
 // -> user_groups_lastmodified
@@ -63,11 +76,11 @@ function usergroups_sync() {
 		}
 }
 
-function sysaction_get_script($plugin_id, $sysaction_id) {
+function sysaction_get_script($plugin_id, $sysaction_type_id) {
 		global $cron_arr;
 		if ($plugin_id == null) {
-				if (isset($cron_arr[$sysaction_id]))
-						return forge_get_config('source_path').'/cronjobs/'.$cron_arr[$sysaction_id];
+				if (isset($cron_arr[$sysaction_type_id]))
+						return forge_get_config('source_path').'/cronjobs/'.$cron_arr[$sysaction_type_id];
 				else
 						return null;
 		} else {
@@ -79,10 +92,11 @@ function sysaction_get_script($plugin_id, $sysaction_id) {
 usergroups_sync();
 while (true) {
 		// Deal with pending requests
-		$res = db_query_params("SELECT * FROM sysactionsq WHERE status=$1", array('TODO'));
+		$res = db_query_params("SELECT * FROM sysactionsq WHERE status=$1"
+							   . " ORDER BY sysactionsq_id LIMIT 1", array('TODO'));
 		while ($arr = db_fetch_array($res)) {
 				usergroups_sync();
-				$script = sysaction_get_script($arr['plugin_id'], $arr['sysaction_id']);
+				$script = sysaction_get_script($arr['plugin_id'], $arr['sysaction_type_id']);
 				if (!file_exists($script))
 						// Not installed on this node, skipping
 						continue;
@@ -90,7 +104,7 @@ while (true) {
 						db_query_params("UPDATE sysactionsq SET status=$1, error_message=$2"
 										. " WHERE sysactionsq_id=$3",
 										array('ERROR',
-											  "Cron job {$arr['plugin_id']}/{$arr['sysaction_id']}"
+											  "Cron job {$arr['plugin_id']}/{$arr['sysaction_type_id']}"
 											  . " '$script' not executable.\n",
 											  $arr['sysactionsq_id']));
 						continue;
@@ -99,11 +113,14 @@ while (true) {
 								array('WIP', $arr['sysactionsq_id']));
 				AcquireReplicationLock($script);
 				$ret = null;
+				if ($verbose) print "Running: $script... ";
 				system("$script\n", $ret);
 				if ($ret == 0) {
+						if ($verbose) print "DONE\n";
 						db_query_params("UPDATE sysactionsq SET status=$1 WHERE sysactionsq_id=$2",
 										array('DONE', $arr['sysactionsq_id']));
 				} else {
+						if ($verbose) print "ERROR\n";
 						db_query_params("UPDATE sysactionsq SET status=$1 WHERE sysactionsq_id=$2",
 										array('ERROR', $arr['sysactionsq_id']));
 				}

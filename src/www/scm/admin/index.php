@@ -26,6 +26,7 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'project/admin/project_admin_utils.php';
 require_once $gfwww.'scm/include/scm_utils.php';
 require_once $gfcommon.'scm/SCMFactory.class.php';
+require_once $gfcommon.'include/SysActionsQ.class.php';
 
 global $HTML;
 
@@ -50,6 +51,8 @@ if (getStringFromRequest('form_create_repo')) {
 	exit;
 }
 
+$sysactionsq = new SysActionsQ();
+
 if (getStringFromRequest('create_repository') && getStringFromRequest('submit')) {
 	$repo_name = trim(getStringFromRequest('repo_name'));
 	$description = preg_replace('/[\r\n]/', ' ', getStringFromRequest('description'));
@@ -61,6 +64,7 @@ if (getStringFromRequest('create_repository') && getStringFromRequest('submit'))
 	$hook_params['clone'] = $clone;
 	$hook_params['error_msg'] = '';
 	$hook_params['scm_enable_anonymous'] = getIntFromRequest('scm_enable_anonymous');
+	$sysactionsq->add(SYSACTION_CORE, SYSACTION_SCM_REPO, $group_id);
 	plugin_hook_by_reference('scm_add_repo', $hook_params);
 	if ($hook_params['error_msg']) {
 		$error_msg = $hook_params['error_msg'];
@@ -76,6 +80,7 @@ if (getStringFromRequest('create_repository') && getStringFromRequest('submit'))
 	$hook_params['repo_name'] = $repo_name;
 	$hook_params['error_msg'] = '';
 	$hook_params['scm_enable_anonymous'] = getIntFromRequest('scm_enable_anonymous');
+	$sysactionsq->add(SYSACTION_CORE, SYSACTION_SCM_REPO, $group_id);
 	plugin_hook_by_reference('scm_delete_repo', $hook_params);
 	if ($hook_params['error_msg']) {
 		$error_msg = $hook_params['error_msg'];
@@ -139,10 +144,12 @@ if (getStringFromRequest('create_repository') && getStringFromRequest('submit'))
     }
 
         
-	// Don't call scm plugin update if their form wasn't displayed
-	// to avoid processing an apparently empty form and reset configuration
-	if (!$scm_changed)
-		plugin_hook("scm_admin_update", $hook_params);
+	if ($scm_changed)
+			$sysactionsq->add(SYSACTION_CORE, SYSACTION_SCM_REPO, $group_id);
+	else
+			// Don't call scm plugin update if their form wasn't displayed
+			// to avoid processing an apparently empty form and reset configuration
+			plugin_hook("scm_admin_update", $hook_params);
 }
 
 scm_header(array('title'=>_('SCM Repository'),'group'=>$group_id));
