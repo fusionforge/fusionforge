@@ -23,6 +23,7 @@ set -ex
 export DEBIAN_FRONTEND=noninteractive
 
 if [ -z "$1" ]; then
+    set +x
     echo "Usage:"
     echo "  $0 src/debian"
     echo "  $0 deb/debian"
