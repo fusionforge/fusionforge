@@ -222,33 +222,31 @@ some control over it to the project's administrator.");
 					  array ($project->getID()));
 
 		if (db_numrows($result) > 0) {
-			$b .= $HTML->boxMiddle(_('Repository Statistics'));
-
 			$tableHeaders = array(
-				_('Name'),
-				_('Adds'),
-				_('Updates')
-				);
-			$b .= $HTML->listTableTop($tableHeaders);
+			_('Name'),
+			_('Adds'),
+			_('Updates')
+			);
+			$b .= $HTML->listTableTop($tableHeaders, false, '', 'repo-history');
 
 			$i = 0;
 			$total = array('adds' => 0, 'updates' => 0);
 
 			while($data = db_fetch_array($result)) {
-				$b .= '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
-				$b .= '<td width="50%">' ;
-				$b .= util_make_link_u ($data['user_name'], $data['user_id'], $data['realname']) ;
-				$b .= '</td><td width="25%" align="right">'.$data['adds']. '</td>'.
-					'<td width="25%" align="right">'.$data['updates'].'</td></tr>';
+				$cells = array();
+				$cells[] = array(util_make_link_u($data['user_name'], $data['user_id'], $data['realname']), 'class' => 'halfwidth');
+				$cells[] = array($data['adds'], 'class' => 'onequarterwidth align-right');
+				$cells[] = array($data['updates'], 'class' => 'onequarterwidth align-right');
+				$b .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
 				$total['adds'] += $data['adds'];
 				$total['updates'] += $data['updates'];
 				$i++;
 			}
-			$b .= '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
-			$b .= '<td width="50%"><strong>'._('Total')._(':').'</strong></td>'.
-				'<td width="25%" align="right"><strong>'.$total['adds']. '</strong></td>'.
-				'<td width="25%" align="right"><strong>'.$total['updates'].'</strong></td>';
-			$b .= '</tr>';
+			$cells = array();
+			$cells[] = array(html_e('strong', array(), _('Total')._(':')), 'class' => 'halfwidth');
+			$cells[] = array($total['adds'], 'class' => 'onequarterwidth align-right');
+			$cells[] = array($total['updates'], 'class' => 'onequarterwidth align-right');
+			$b .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
 			$b .= $HTML->listTableBottom();
 		}
 
