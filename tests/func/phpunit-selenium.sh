@@ -44,13 +44,11 @@ esac
 
 HOST=$(hostname -f)
 
-scriptdir=$(dirname $0)
-FORGE_HOME=$(cd $scriptdir/../..; pwd)
-cd $FORGE_HOME
 
 # Initialize defaults
-. $scriptdir/../buildbot/config/default
-[ ! -f $scriptdir/../buildbot/config/phpunit ] || . $scriptdir/../buildbot/config/phpunit
+. $(dirname $0)/../buildbot/config/default
+FORGE_HOME=$(cd $(dirname $0)/../..; pwd)
+cd $FORGE_HOME
 
 SELENIUM_RC_DIR=/var/log
 SELENIUM_RC_URL=${HUDSON_URL}job/${JOB_NAME}/ws/reports
