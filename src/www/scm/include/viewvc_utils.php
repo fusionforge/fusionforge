@@ -36,10 +36,10 @@
  * @return string  The argument with dangerous shell characters escaped.
  */
 function make_arg_cmd_safe($arg) {
-    if (get_magic_quotes_gpc()) {
-        $arg = stripslashes($arg);
-    }
-    return escapeshellcmd($arg);
+	if (get_magic_quotes_gpc()) {
+		$arg = stripslashes($arg);
+	}
+	return escapeshellcmd($arg);
 }
 
 /**
@@ -81,9 +81,9 @@ function viewcvs_execute($repos_name, $repos_type) {
 
 	$query_string = str_replace('\\&', '&', make_arg_cmd_safe($query_string));
 	$query_string = str_replace('\\*', '*', $query_string);
-    $query_string = preg_replace('/^inframe=1[&;]/','',$query_string);
+	$query_string = preg_replace('/^inframe=1[&;]/','',$query_string);
 
- 	$path = str_replace('\\*', '*', make_arg_cmd_safe($path));
+	$path = str_replace('\\*', '*', make_arg_cmd_safe($path));
 	$command = 'HTTP_COOKIE="'.make_arg_cmd_safe(getStringFromServer('HTTP_COOKIE')).'" '.
 		'REMOTE_ADDR="'.make_arg_cmd_safe(getStringFromServer('REMOTE_ADDR')).'" '.
 		'QUERY_STRING="'.$query_string.'" '.
