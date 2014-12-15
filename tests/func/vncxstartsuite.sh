@@ -1,5 +1,7 @@
 #! /bin/sh
 
+set -x
+
 TEST_SUITE="$1"
 # Test arg
 if [ -z "$TEST_SUITE" ]
