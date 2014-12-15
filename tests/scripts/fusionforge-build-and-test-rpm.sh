@@ -44,9 +44,11 @@ gpgcheck = 0
 EOF
 
 setup_dag_repo $@
-if [ $VM = centos6 ] ; then
-    setup_epel_repo $@
-fi
+case $VM in
+    centos5|centos6)
+	setup_epel_repo $@
+	;;
+esac
 
 ssh root@$HOST "yum install -y rsync"
 

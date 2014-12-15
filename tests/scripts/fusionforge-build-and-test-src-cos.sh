@@ -30,9 +30,11 @@ $(dirname $0)/start_vm $HOST
 #make -f Makefile.rh BUILDRESULT=$WORKSPACE/build/packages src
 
 setup_dag_repo $@
-if [ $VM = centos6 ] ; then
-    setup_epel_repo $@
-fi
+case $VM in
+    centos5|centos6)
+	setup_epel_repo $@
+	;;
+esac
 
 ssh root@$HOST "yum install -y rsync"
 
