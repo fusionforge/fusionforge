@@ -132,7 +132,12 @@ fi
 echo "Running PHPunit tests"
 retcode=0
 cd tests
-phpunit --verbose --stop-on-failure --log-junit $SELENIUM_RC_DIR/phpunit-selenium.xml $@ $testsuite || retcode=$?
+for i in $(echo $@ $testsuite | xargs) ; do
+    phpunit --verbose --stop-on-failure --log-junit $SELENIUM_RC_DIR/phpunit-selenium.xml $i || retcode=$?
+    if ! [ $retcode = 0 ] ; then
+	break
+    fi
+done
 cd ..
 # on debian
 killall -9 firefox-bin
