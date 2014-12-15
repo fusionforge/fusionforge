@@ -61,7 +61,7 @@ deps_redhat() {
 				packagelist="httpd php mailman cvs $pg $pg-libs $pg-server $pg-contrib perl-URI php-pgsql subversion mod_dav_svn postfix rcs php-gd mod_ssl wget openssh which liberation-fonts php-htmlpurifier php-mbstring poppler-utils php-pear-HTTP_WebDAV_Server antiword shared-mime-info rsync git gitweb"
 				;;
 			5|el5*)
-				packagelist="httpd php mailman cvs $pg $pg-libs $pg-server $pg-contrib perl-URI php-pgsql subversion mod_dav_svn postfix rcs php-gd mod_ssl wget openssh which liberation-fonts php-htmlpurifier php-mbstring poppler-utils php-pecl-zip php-pear-HTTP_WebDAV_Server antiword php-pecl-Fileinfo shared-mime-info rsync git gitweb"
+				packagelist="httpd php53 mailman cvs $pg $pg-libs $pg-server $pg-contrib perl-URI php-pgsql subversion mod_dav_svn postfix rcs php-gd mod_ssl wget openssh which liberation-fonts php-htmlpurifier php-mbstring poppler-utils php-pecl-zip php-pear-HTTP_WebDAV_Server antiword php-pecl-Fileinfo shared-mime-info rsync git gitweb"
 				;;
 			*)
 				msg red "Target version unknown. Die here"
