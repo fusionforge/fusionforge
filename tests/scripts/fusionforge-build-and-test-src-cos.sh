@@ -43,6 +43,12 @@ esac
 ssh root@$HOST "yum install -y rsync"
 
 setup_redhat_3rdparty_repo
+case $VM in
+    centos5)
+	ssh root@$HOST "rpm -i http://rpms.famillecollet.com/enterprise/remi-release-5.rpm"
+	ssh root@$HOST "yum -y --enablerepo=remi install php-phpunit-PHPUnit"
+	;;
+esac
 
 echo "Create $FORGE_HOME if necessary"
 ssh root@$HOST "[ -d $FORGE_HOME ] || mkdir -p $FORGE_HOME"
