@@ -26,15 +26,18 @@ then
 	echo "vncserver is missing"
 	if type yum 2>/dev/null
 	then
-		yum install -y tigervnc-server || yum install -y vnc-server
+	    yum install -y tigervnc-server
+	    if ! type vncserver 2>/dev/null ; then
+		yum install -y vnc-server
+	    fi
 	fi
 	if type apt-get 2>/dev/null
 	then
 		apt-get -y install vnc4server
 	fi
-	if ! type vncserver 2>/dev/null
-	then
-		exit 1
+	if ! type vncserver 2>/dev/null ; then
+	    echo "Couldn't find vncserver"
+	    exit 1
 	fi
 fi
 
