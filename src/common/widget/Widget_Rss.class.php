@@ -51,8 +51,8 @@ require_once 'Widget.class.php';
 				}
 			}
 			if (!(include_once 'simplepie/simplepie.inc'))  // vendor, debian
-			  if (!(include_once 'php-simplepie/autoloader.php'))  // fedora
-			    exit_error('Error', 'Could not load the SimplePie PHP library.');
+				if (!(include_once 'php-simplepie/autoloader.php'))  // fedora
+					exit_error(_('Could not load the SimplePie PHP library.'));
 			if (!is_dir(forge_get_config('data_path') .'/rss')) {
 				if (!mkdir(forge_get_config('data_path') .'/rss')) {
 					$content .= $HTML->error_msg(_('Cannot create backend directory. Contact forge administrator.'));
@@ -149,7 +149,9 @@ require_once 'Widget.class.php';
 			$vTitle = new Valid_String('title');
 			$vTitle->required();
 			if (!$request->validInArray('rss', $vTitle)) {
-				require_once 'simplepie/simplepie.inc';
+				if (!(include_once 'simplepie/simplepie.inc'))  // vendor, debian
+					if (!(include_once 'php-simplepie/autoloader.php'))  // fedora
+						exit_error(_('Could not load the SimplePie PHP library.'));
 				if (!is_dir(forge_get_config('data_path') .'/rss')) {
 					mkdir(forge_get_config('data_path') .'/rss');
 				}
