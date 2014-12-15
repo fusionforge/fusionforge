@@ -115,7 +115,7 @@ require_once 'Widget.class.php';
 		$prefs .= 'URL'._(':');
 		$prefs .= '</td>';
 		$prefs .= '<td>';
-		$prefs .= '<input type="url" class="textfield_medium" name="rss[url]" value="http://search.twitter.com/search.atom?q=alcatel-lucent&amp;show_user=1" />';
+		$prefs .= '<input type="url" class="textfield_medium" name="rss[url]" value="" placeholder="'._('Set your RSS URL here.').'" />';
 		$prefs .= '</td>';
 		$prefs .= '</tr>';
 		$prefs .= '</table>';
@@ -156,7 +156,11 @@ require_once 'Widget.class.php';
 					mkdir(forge_get_config('data_path') .'/rss');
 				}
 				$rss_reader = new SimplePie($rss['url'], forge_get_config('data_path') .'/rss', null, forge_get_config('sys_proxy'));
-				$rss['title'] = $rss_reader->get_title();
+				if ($rss_reader) {
+					$rss['title'] = $rss_reader->get_title();
+				} else {
+					return false;
+				}
 			}
 			$sql = 'INSERT INTO widget_rss (owner_id, owner_type, title, url) VALUES ($1,$2,$3,$4)';
 			$res = db_query_params($sql,array($this->owner_id,$this->owner_type,$rss['title'],$rss['url']));
