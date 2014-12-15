@@ -136,7 +136,7 @@ if ($group_id) {
 				break;
 			}
 			case 'frsrelease': {
-				if (!forge_check_perm('frs',$arr['group_id'],'read_public')) {
+				if (!forge_check_perm('frs',$arr['ref_id'],'read')) {
 					continue (2);
 				}
 				print "  <item>\n";
@@ -166,6 +166,17 @@ if ($group_id) {
 				print "   <link>$url/forum/forum.php?forum_id=".$arr['subref_id']."</link>\n";
 				print "   <comments>$url/forum/forum.php?forum_id=".$arr['subref_id']."</comments>\n";
 				$arr['category'] = _('News');
+				break;
+			}
+			case 'docmannew': {
+				if (!forge_check_perm('docman', $arr['group_id'], 'read')) {
+					continue (2);
+				}
+				print "  <item>\n";
+				print "   <title>".htmlspecialchars('New Document '.$arr['description'])."</title>\n";
+				print "   <link>$url/docman/?group_id=".$arr['group_id']."&amp;view=listfile&amp;dirid=".$arr['ref_id']."</link>\n";
+				print "   <comment>$url/docman/?group_id=".$arr['group_id']."&amp;view=listfile&amp;dirid=".$arr['ref_id']."</comment>\n";
+				$arr['category'] = _('Documents');
 				break;
 			}
 			default: {

@@ -59,7 +59,7 @@ case "$1" in
 	else
 	    echo "*** Note: please install $config_path/httpd.conf in your Apache configuration"
 	fi
-	
+
 	# Generate SSL certs if needed
 	web_host=$(forge_get_config web_host)
 	cert=$config_path/ssl-cert.pem
@@ -77,17 +77,18 @@ case "$1" in
 	if [ ! -e $scmcert ] ; then
 	    openssl req -x509 -days 3650 -new -nodes -batch -text -key $key -subj "/CN=$scm_host" -out $scmcert
 	fi
-	
-	# Setup Docman/FRS/Tracker attachments
+
+	# Setup Docman/FRS/Forum/Tracker/RSS attachments
 	# (not done in 'make install' because e.g. dpkg ignores existing dirs, cf. DP10.9[1])
 	chown $apache_user: $data_path/docman/
 	chown $apache_user: $data_path/download/
 	chown $apache_user: $data_path/forum/
 	chown $apache_user: $data_path/tracker/
-	
+	chown $apache_user: $data_path/rss/
+
 	# Plugins activation from the web UI
 	chown $apache_user: $source_path/www/plugins/
-	
+
 	# Enable required modules
 	if [ -x /usr/sbin/a2enmod ]; then
 	    a2enmod version 2>/dev/null || true  # opensuse..
