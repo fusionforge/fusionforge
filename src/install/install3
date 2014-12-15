@@ -252,8 +252,8 @@ local all all trust
 host all all 127.0.0.1/32 trust
 EOF
 	msg green " * Restarting PostgreSQL..."
-	$pgservice stop
-	$pgservice start
+	psql_stopdb
+	psql_startdb
 
 	msg green " * Creating $gforge_user Group..."
 	/usr/sbin/groupadd $gforge_user;
