@@ -13,7 +13,6 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildArch: noarch
 Requires: php
-Conflicts: php < 5.0.5
 
 Obsoletes: htmlpurifier
 
