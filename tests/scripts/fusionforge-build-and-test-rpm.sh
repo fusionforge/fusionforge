@@ -4,6 +4,8 @@
 
 get_config
 
+set -x
+
 export FORGE_HOME=/usr/share/gforge
 export HOST=$1
 export FILTER="RPMCentosTests.php"

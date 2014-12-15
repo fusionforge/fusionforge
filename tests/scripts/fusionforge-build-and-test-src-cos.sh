@@ -4,6 +4,8 @@
 
 get_config
 
+set -x
+
 export FORGE_HOME=/opt/gforge
 export HOST=$1
 export FILTER="TarCentosTests.php"
