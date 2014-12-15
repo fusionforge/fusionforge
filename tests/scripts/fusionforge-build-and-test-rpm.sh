@@ -50,22 +50,19 @@ case $VM in
     centos5|centos6)
 	setup_epel_repo $@
 	ssh root@$HOST "yum -y --enablerepo=epel install cronolog"
-	;;
-esac
-
-case $VM in
-    centos5)
-	ssh root@$HOST "yum -y install php53"
-	ssh root@$HOST "yum -y install wget ; wget https://phar.phpunit.de/phpunit.phar ; chmod +x phpunit.phar ; mv phpunit.phar /usr/local/bin/phpunit"
-	;;
-    centos6)
-	ssh root@$HOST "yum -y --enablerepo=epel install php-pear-PHPUnit php-phpunit-PHPUnit-Selenium"
+	ssh root@$HOST "yum -y --enablerepo=epel install php-phpunit-PHPUnit-Selenium"
 	;;
 esac
 
 ssh root@$HOST "yum install -y rsync"
 
 setup_redhat_3rdparty_repo
+case $VM in
+    centos5|centos6)
+	ssh root@$HOST "rpm -i http://rpms.famillecollet.com/enterprise/remi-release-5.rpm"
+	ssh root@$HOST "yum -y --enablerepo=remi install php-phpunit-PHPUnit"
+	;;
+esac
 
 sleep 5
 ssh root@$HOST "FFORGE_DB=$DB_NAME FFORGE_USER=gforge FFORGE_ADMIN_USER=$FORGE_ADMIN_USERNAME FFORGE_ADMIN_PASSWORD=$FORGE_ADMIN_PASSWORD export FFORGE_DB FFORGE_USER FFORGE_ADMIN_USER FFORGE_ADMIN_PASSWORD; yum install -y --skip-broken fusionforge fusionforge-plugin-scmsvn fusionforge-plugin-online_help fusionforge-plugin-extratabs fusionforge-plugin-authldap fusionforge-plugin-scmgit fusionforge-plugin-blocks"

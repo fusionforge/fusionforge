@@ -12,7 +12,7 @@ Source: http://htmlpurifier.org/releases/htmlpurifier-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildArch: noarch
-Requires: php
+Requires: php >= 5.0.5
 
 Obsoletes: htmlpurifier
 

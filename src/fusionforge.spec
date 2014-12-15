@@ -58,7 +58,7 @@ URL: http://www.fusionforge.org/
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 Packager: Alain Peyrat <aljeux@free.fr>
 
-Requires: httpd, mod_dav_svn, mod_ssl, mod_php, php-pgsql, php-gd, php-mbstring, mailman
+Requires: httpd, mod_dav_svn, mod_ssl, php, php-pgsql, php-gd, php-mbstring, mailman
 Requires: postgresql >= 8.3
 Requires: postgresql-server >= 8.3
 Requires: postfix, openssh, inetd, which
