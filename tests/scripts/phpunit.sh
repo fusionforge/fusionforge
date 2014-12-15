@@ -1,5 +1,7 @@
 #! /bin/sh
 
+set -x
+
 if [ $# -ge 1 ]
 then
         testsuite=$1
