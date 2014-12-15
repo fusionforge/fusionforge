@@ -1,3 +1,3 @@
 # Triggers for @PACKAGE@-plugin-mediawiki
-interest /usr/share/mediawiki
-interest /usr/share/mediawiki-extensions
+interest-noawait /usr/share/mediawiki
+interest-noawait /usr/share/mediawiki-extensions
