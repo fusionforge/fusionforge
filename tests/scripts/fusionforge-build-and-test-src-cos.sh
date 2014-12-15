@@ -41,6 +41,7 @@ esac
 
 case $VM in
     centos5)
+	ssh root@$HOST "yum -y install php53"
 	ssh root@$HOST "yum -y install wget ; wget https://phar.phpunit.de/phpunit.phar ; chmod +x phpunit.phar ; mv phpunit.phar /usr/local/bin/phpunit"
 	;;
     centos6)
