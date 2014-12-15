@@ -248,7 +248,7 @@ if (count($ids) < 1) {
 						break;
 					}
 					case 'frsrelease': {
-						$cached_perms[$s][$ref] = forge_check_perm('frs', $group_id, 'read_public');
+						$cached_perms[$s][$ref] = forge_check_perm('frs', $ref, 'read');
 						break;
 					}
 					case 'forumpost':
