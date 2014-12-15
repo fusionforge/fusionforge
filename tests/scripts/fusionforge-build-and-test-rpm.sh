@@ -25,10 +25,6 @@ prepare_workspace
 $(dirname $0)/destroy_vm $HOST
 $(dirname $0)/start_vm $HOST
 
-ssh root@$HOST "yum install -y rsync"
-
-setup_redhat_3rdparty_repo
-
 # BUILD FUSIONFORGE REPO
 echo "Build FUSIONFORGE REPO in $BUILDRESULT"
 make -f Makefile.rh BUILDRESULT=$BUILDRESULT RPM_TMP=$RPM_TMP fusionforge dist
@@ -51,6 +47,10 @@ setup_dag_repo $@
 if [ $VM = centos6 ] ; then
     setup_epel_repo $@
 fi
+
+ssh root@$HOST "yum install -y rsync"
+
+setup_redhat_3rdparty_repo
 
 sleep 5
 if [ $VM = centos6 ] ; then

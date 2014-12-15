@@ -25,10 +25,6 @@ prepare_workspace
 $(dirname $0)/destroy_vm $HOST
 $(dirname $0)/start_vm $HOST
 
-setup_redhat_3rdparty_repo
-
-ssh root@$HOST "yum install -y rsync"
-
 #[ ! -e $HOME/doxygen-1.6.3/bin/doxygen ] || make build-doc DOCSDIR=$WORKSPACE/apidocs DOXYGEN=$HOME/doxygen-1.6.3/bin/doxygen
 #make BUILDRESULT=$WORKSPACE/build/packages buildtar
 #make -f Makefile.rh BUILDRESULT=$WORKSPACE/build/packages src
@@ -37,6 +33,10 @@ setup_dag_repo $@
 if [ $VM = centos6 ] ; then
     setup_epel_repo $@
 fi
+
+ssh root@$HOST "yum install -y rsync"
+
+setup_redhat_3rdparty_repo
 
 echo "Create $FORGE_HOME if necessary"
 ssh root@$HOST "[ -d $FORGE_HOME ] || mkdir -p $FORGE_HOME"

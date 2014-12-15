@@ -138,6 +138,7 @@ wget -q -O - ${DEB3RD}key | ssh root@$HOST "apt-key add -"
 
 setup_redhat_3rdparty_repo()
 {
+    ssh root@$HOST "yum install --enablerepo=epel -y python-hashlib"
 if [ -z "$HOST" ] ; then  echo "HOST undefined" ;exit 1; fi
 if [ -z "$RPM3RD" ] ; then  echo "RPM3RD undefined" ; exit 2 ; fi
 echo "Installing redhat 3rd party repo $RPM3RD on $HOST"
