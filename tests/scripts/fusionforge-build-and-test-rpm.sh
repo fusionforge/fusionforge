@@ -48,7 +48,18 @@ case $VM in
     centos5|centos6)
 	setup_epel_repo $@
 	ssh root@$HOST "yum -y --enablerepo=epel install cronolog"
-	ssh root@$HOST "yum -y --enablerepo=epel install php-phpunit-PHPUnit-Selenium"
+	;;
+esac
+
+case $VM in
+    centos5)
+	ssh root@$HOST "yum -y wget"
+	wget https://phar.phpunit.de/phpunit.phar
+	chmod +x phpunit.phar
+	mv phpunit.phar /usr/local/bin/phpunit
+	;;
+    centos6)
+	ssh root@$HOST "yum -y --enablerepo=epel install php-pear-PHPUnit php-phpunit-PHPUnit-Selenium"
 	;;
 esac
 
