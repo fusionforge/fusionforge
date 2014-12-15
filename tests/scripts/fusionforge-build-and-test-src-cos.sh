@@ -33,6 +33,8 @@ setup_dag_repo $@
 case $VM in
     centos5|centos6)
 	setup_epel_repo $@
+	ssh root@$HOST "yum -y --enablerepo=epel install cronolog"
+	ssh root@$HOST "yum -y --enablerepo=epel install php-phpunit-PHPUnit-Selenium"
 	;;
 esac
 
@@ -66,7 +68,6 @@ echo "Stop cron daemon"
 ssh root@$HOST "service crond stop" || true
 
 if [ $VM = centos6 ] ; then
-    ssh root@$HOST "yum -y --enablerepo=epel install php-phpunit-PHPUnit-Selenium"
     ssh root@$HOST "yum -y remove mod_ssl ; service httpd restart"
 fi
 
