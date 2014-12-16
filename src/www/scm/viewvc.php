@@ -141,10 +141,12 @@ if (count($exploded_content) > 1) {
 	$content_type = '';
 	$charset = '';
 	foreach ($headers as $header) {
-		header($header);
 		if (preg_match('/^Content-Type:\s*(([^;]*)(\s*;\s*charset=(.*))?)/i', $header, $matches)) {
 			$content_type = $matches[2];
-			$charset = $matches[4];
+			if (isset($matches[4])) $charset = $matches[4];
+			// we'll validate content-type or transcode body below
+		} else {
+			header($header);
 		}
 	}
 } else {
@@ -158,30 +160,29 @@ if (!isset($_GET['view'])) {
 switch ($_GET['view']) {
 	case 'tar':
 	case 'co':
-	case 'patch': {
+	case 'patch':
 		$sysdebug_enable = false;
-		if (isset($content_type)) {
-			switch ($content_type) {
-				case (preg_match('/text\/.*/', $content_type) ? true : false):
-				case (preg_match('/.*\/javascript/', $content_type) ? true : false): {
-					header('Content-Type: text/plain');
-					break;
-				}
-			}
+		// Force content-type for any text/* or */javascript, to avoid XSS
+		if (!empty($content_type) &&
+			(preg_match('/text\/.*/', $content_type) ||
+			 preg_match('/.*\/javascript/', $content_type))) {
+				header('Content-Type: text/plain'
+					  . (!empty($charset) ? ";charset=$charset" : ''));
 		}
 		echo $body;
-	}
-	default: {
+		break;
+	default:
 		// If we output html and we found the mbstring extension, we
 		// should try to encode the output of ViewCVS in UTF-8
-		if ($charset != 'UTF-8' && extension_loaded('mbstring'))
-			$body = mb_convert_encoding($body, 'UTF-8', $encoding);
+		if (!empty($charset) && $charset != 'UTF-8' && extension_loaded('mbstring')) {
+			$body = mb_convert_encoding($body, 'UTF-8', $charset);
+		}
 		scm_header(array('title'=>_("SCM Repository"),
 						 'group'=>$Group->getID(),
 						 'inframe'=>1));
 		echo $body;
 		scm_footer(array('inframe'=>1));
-	}
+		break;
 }
 
 // Local Variables:
