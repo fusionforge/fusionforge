@@ -262,7 +262,11 @@ some control over it to the project's administrator.");
 		}
 
 		if ($project->usesPlugin($this->name)) {
-			htmlIframe('/scm/viewvc.php?inframe=1&root='.$project->getUnixName(), array('id'=>'scmsvn_iframe'));
+			$iframe_src = '/scm/viewvc.php?inframe=1&root='.$project->getUnixName();
+			if ($params['commit']) {
+				$iframe_src .= '&view=rev&revision='.$params['commit'];
+			}
+			htmlIframe($iframe_src, array('id'=>'scmsvn_iframe'));
 		}
 	}
 
@@ -661,7 +665,7 @@ some control over it to the project's administrator.");
 						$result = array();
 						$result['section'] = 'scm';
 						$result['group_id'] = $group_id;
-						$result['ref_id'] = 'viewvc.php/?root='.$project->getUnixName();
+						$result['ref_id'] = 'browser.php?group_id='.$group_id;
 						$result['description'] = htmlspecialchars($message).' (r'.$revisions[$i].')';
 						$userObject = user_get_object_by_name($users[$i]);
 						if (is_a($userObject, 'GFUser')) {
@@ -670,7 +674,7 @@ some control over it to the project's administrator.");
 							$result['realname'] = '';
 						}
 						$result['activity_date'] = $times[$i];
-						$result['subref_id'] = '&view=rev&revision='.$revisions[$i];
+						$result['subref_id'] = '&commit='.$revisions[$i];
 						$params['results'][] = $result;
 						$i++;
 					}

@@ -92,6 +92,7 @@ install-web: install-base-dirs
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/download/
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/forum/
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/tracker/
+	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/rss/
 	$(CP_R) post-install.d/web $(DESTDIR)$(pkgdatadir)/post-install.d/
 	if [ ! -e $(DESTDIR)$(sysconfdir)/logrotate.d/fusionforge-web ]; then \
 		sed 's,@log_path@,$(log_path),' etc/logrotate.d/fusionforge-web \
