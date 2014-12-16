@@ -9,6 +9,24 @@ fusionforge (5.3.50-1) unstable; urgency=medium
 
  -- Sylvain Beucler <beuc@debian.org>  Mon, 22 Sep 2014 14:58:47 +0200
 
+fusionforge (5.3.2+20141104-3) unstable; urgency=medium
+
+  * Support dpkg-1.17.17 and avoid a trigger loop by replacing 'interest'
+    triggers by 'interest-noawait' ones (closes: #772870)
+  * Do bump Standards-Version to 3.9.6 by regenerating debian/control (no
+    changes)
+
+ -- Sylvain Beucler <beuc@debian.org>  Mon, 15 Dec 2014 11:46:30 +0100
+
+fusionforge (5.3.2+20141104-2) unstable; urgency=medium
+
+  * Start Debian-specific branch without important bugfixes (cf. #771944)
+  * Use Debian-specific 'invoke-rc.d' instead of portable 'service'
+    (closes: #771619)
+  * Really bump Standards-Version to 3.9.6 (no changes)
+
+ -- Sylvain Beucler <beuc@debian.org>  Mon, 08 Dec 2014 12:18:07 +0100
+
 fusionforge (5.3.2+20141104-1) unstable; urgency=medium
 
   * New upstream snapshot following the 5.3 stable branch.
