@@ -163,11 +163,12 @@ switch ($_GET['view']) {
 	case 'patch':
 		$sysdebug_enable = false;
 		// Force content-type for any text/* or */javascript, to avoid XSS
-		if (!empty($content_type) &&
-			(preg_match('/text\/.*/', $content_type) ||
-			 preg_match('/.*\/javascript/', $content_type))) {
-				header('Content-Type: text/plain'
-					  . (!empty($charset) ? ";charset=$charset" : ''));
+		if (!empty($content_type)) {
+			if ((preg_match('/text\/.*/', $content_type) ||
+				 preg_match('/.*\/javascript/', $content_type)))
+					$content_type = 'text/plain';
+			header("Content-Type: $content_type"
+				   . (!empty($charset) ? ";charset=$charset" : ''));
 		}
 		echo $body;
 		break;
