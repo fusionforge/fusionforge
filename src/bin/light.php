@@ -78,16 +78,26 @@ function usergroups_sync() {
 
 function sysaction_get_script($plugin_id, $sysaction_type_id) {
 		global $cron_arr;
+		global $pm, $plugins;
 		if ($plugin_id == null) {
 				if (isset($cron_arr[$sysaction_type_id]))
-						return forge_get_config('source_path').'/cronjobs/'.$cron_arr[$sysaction_type_id];
-				else
-						return null;
+						return forge_get_config('source_path')
+								.'/cronjobs/'.$cron_arr[$sysaction_type_id];
 		} else {
-				// TODO
-				// $path = forge_get_config('plugins_path')."/$plugin/cronjobs/";
+				if (isset($plugins[$plugin_id])) {
+						$plugin = $pm->GetPluginObject($plugins[$plugin_id]);
+						print_r($plugin->sysaction_types);
+						if (isset($plugin->sysaction_types[$sysaction_type_id]))
+								return forge_get_config('plugins_path')."/".$plugin->GetName()
+										."/cronjobs/".$plugin->sysaction_types[$sysaction_type_id];
+				}
 		}
+		return null;
 }
+
+
+$pm = plugin_manager_get_object();
+$plugins = $pm->GetPlugins();
 
 usergroups_sync();
 while (true) {
