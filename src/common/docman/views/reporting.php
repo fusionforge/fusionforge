@@ -88,7 +88,7 @@ if ($report->isError()) {
 	echo html_e('strong', array(), _('Start Date')._(':'), false);
 	echo report_months_box($report, 'start', $start);
 	echo html_e('strong', array(), _('End Date')._(':'), false);
-	echo report_months_box($report, 'start', $end);
+	echo report_months_box($report, 'end', $end);
 	echo html_e('input', array('type' => 'submit', 'value' => _('Refresh')));
 	echo $HTML->closeForm();
 	echo html_ac(html_ap() -1);
