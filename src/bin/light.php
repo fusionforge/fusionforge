@@ -95,9 +95,14 @@ posix_setsid();
 chdir('/');
 umask(0);
 if (!$verbose) {
+	// Hack to reopen stdin/stdout/stderr, order is important
+	// https://andytson.com/blog/2010/05/daemonising-a-php-cli-script-on-a-posix-system/
 	fclose(STDIN);
 	fclose(STDOUT);
 	fclose(STDERR);
+	$ff_stdin = fopen('/dev/null', 'r');
+	$ff_stdout = fopen('/dev/null', 'w');
+	$ff_stderr = fopen('php://stdout', 'w');
 }
 // We could fork & continue in the background too, but then we'd have
 // to manage the PID file as well - best leave this to the init script
@@ -110,7 +115,9 @@ usergroups_sync();
 while (true) {
 		// Deal with pending requests
 		$res = db_query_params("SELECT * FROM sysactionsq WHERE status=$1"
-							   . " ORDER BY sysactionsq_id LIMIT 1", array('TODO'));
+		                       . " ORDER BY sysactionsq_id LIMIT 1", array('TODO'));
+		if (!$res && !db_connection_status())
+			db_reconnect();
 		while ($arr = db_fetch_array($res)) {
 				usergroups_sync();
 				$script = sysaction_get_script($arr['plugin_id'], $arr['sysaction_type_id']);
