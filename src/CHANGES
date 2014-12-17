@@ -1,7 +1,9 @@
 Fusionforge-X.X:
+* New install system (Inria)
 * [#658] Docman: Basic Webdav write mkcol, delete, put, move support (TrivialDev)
 * [#657] Docman: Add move mass actions (TrivialDev)
 * [#747] Docman: Direct link to file details (TrivialDev)
+* [#749] Docman: Rewrite parser using unoconv, support more file formats (Roland Mas, for CEA)
 * [#692] FRS: Reorganise code (TrivialDev)
 * [#697] FRS: Enable widget "My monitored packages" (TrivialDev)
 * [#705] FRS: Provide new role settings (TrivialDev)
@@ -12,20 +14,20 @@ Fusionforge-X.X:
 * [#664] General: Update the jQuery & jQuery UI frameworks (TrivialDev)
 * [#669] General: feedback, error_msg, warning_msg are now store in cookie. (TrivialDev)
 * [#716] General: Update the jQuery Auto-height plugin (TrivialDev)
-* Plugin scmhook: Update git post-receive eMail hook (tarent solutions GmbH, Teckids e.V.)
 * [#684] Widget Public Area: display FRS link (TrivialDev)
 * [#743] Widget My Latest Commits: New widget to display user commits on "My Page"
          Widget Project Latest Commits: New widget to display the 5 latest commits on the project page  (TrivialDev)
 * [#745] Widget Project Latest Documents: enhancement, add actions buttons (monitor, delete) (TrivialDev)
 * [#655] Tracker: enable support for multi-select extrafield in roadmap (TrivialDev)
 * [#662] Forum: store the attached file on FS. (TrivialDev)
+* [#751] SCM: Allow projects to use several SCM engines in parallel (Roland Mas, for CEA)
+* [#719] Plugin SCM SVN: improved ViewVC integration, using external installation (Inria, TrivialDev)
 * [#719] Plugin SCM GIT: activity log entry link to commit log in SCM browsing tab (TrivialDev)
 * [#724] Plugin SCM HG (Mercurial): display the Repository History stats block (TrivialDev)
 * [#725] Plugin SCM HG (Mercurial): add support for project activity tab (TrivialDev)
 * [#726] Plugin SCM HG (Mercurial): activity log entry link to commit log in SCM browsing tab (TrivialDev)
+* Plugin scmhook: Update git post-receive eMail hook (tarent solutions GmbH, Teckids e.V.)
 * [#734] Plugin AuthLDAP: support LPAP_OPT_REFERRALS option, needed by ActiveDirectory Server (TrivialDev)
-* [#751] SCM: Allow projects to use several SCM engines in parallel (Roland Mas, for CEA)
-* [#749] Docman: Rewrite parser using unoconv, support more file formats (Roland Mas, for CEA)
 
 Fusionforge-5.3.3:
 * User e-mail change: simplify confirmation hash and precise encoding to avoid mangling in some versions of Thunderbird and Apple Mail [#738] (Inria)
