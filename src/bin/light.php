@@ -28,26 +28,6 @@ require (dirname(__FILE__).'/../common/include/env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/cron_utils.php';
 
-$shortopts = "v";       // enable verbose mode
-$longopts = array();
-$options = getopt($shortopts, $longopts);
-if ($options === false) {  // doesn't work, PHP returns ambiguous array() on error..
-	print "Usage: {$argv[0]} [-v]\n";
-	exit(1);
-}
-$verbose = false;
-if ( isset($options['v']) ) {
-		print "verbose mode ON\n";
-		$verbose = true;
-}
-
-// (sysactionsq_lists) -> cf. mail_group_list
-// - sysactionq_id references sysactions
-
-// (sysactionsq_membership)
-// -> user_groups_lastmodified
-
-
 // Locking: for a single script
 // flock() locks are automatically lost on program termination, however
 // that happened (clean, segfault...)
@@ -86,7 +66,6 @@ function sysaction_get_script($plugin_id, $sysaction_type_id) {
 		} else {
 				if (isset($plugins[$plugin_id])) {
 						$plugin = $pm->GetPluginObject($plugins[$plugin_id]);
-						print_r($plugin->sysaction_types);
 						if (isset($plugin->sysaction_types[$sysaction_type_id]))
 								return forge_get_config('plugins_path')."/".$plugin->GetName()
 										."/cronjobs/".$plugin->sysaction_types[$sysaction_type_id];
@@ -94,6 +73,34 @@ function sysaction_get_script($plugin_id, $sysaction_type_id) {
 		}
 		return null;
 }
+
+
+
+$shortopts = "v";       // enable verbose mode
+$longopts = array();
+$options = getopt($shortopts, $longopts);
+if ($options === false) {  // doesn't work, PHP returns ambiguous array() on error..
+	print "Usage: {$argv[0]} [-v]\n";
+	exit(1);
+}
+$verbose = false;
+if (isset($options['v'])) {
+	print "verbose mode ON\n";
+	$verbose = true;
+}
+
+
+// Proper daemon
+posix_setsid();
+chdir('/');
+umask(0);
+if (!$verbose) {
+	fclose(STDIN);
+	fclose(STDOUT);
+	fclose(STDERR);
+}
+// We could fork & continue in the background too, but then we'd have
+// to manage the PID file as well - best leave this to the init script
 
 
 $pm = plugin_manager_get_object();
