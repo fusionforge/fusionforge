@@ -79,7 +79,7 @@ function sysaction_get_script($plugin_id, $sysaction_type_id) {
 $shortopts = "v";       // enable verbose mode
 $longopts = array();
 $options = getopt($shortopts, $longopts);
-if ($options === false) {  // doesn't work, PHP returns ambiguous array() on error..
+if (count($options) != (count($argv)-1)) {  // PHP just strips invalid options
 	print "Usage: {$argv[0]} [-v]\n";
 	exit(1);
 }
