@@ -1,4 +1,4 @@
-#! /usr/bin/php
+#!/usr/bin/php
 <?php
 /**
  * FusionForge document search engine
@@ -38,7 +38,7 @@ $fichin = $argv[1];
 if (!is_file($fichin))
 	exit (1);
 
-$fichout = tempnam(forge_get_config('data_path'), 'tmp');
+$fichout = tempnam(sys_get_temp_dir(), 'docman');
 $cmd = "/usr/bin/unoconv -d presentation -f pdf -o $fichout $fichin";
 $res = shell_exec($cmd);
 
