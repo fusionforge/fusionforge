@@ -60,8 +60,7 @@ case "$1" in
 	    echo "*** Note: please install $config_path/httpd.conf in your Apache configuration"
 	fi
 
-	# Generate SSL certs if needed
-	web_host=$(forge_get_config web_host)
+	# Generate SSL cert if needed
 	cert=$config_path/ssl-cert.pem
 	key=$config_path/ssl-cert.key
 	if [ ! -e $key ] ; then
@@ -69,13 +68,7 @@ case "$1" in
 	    chmod 600 $key
 	fi
 	if [ ! -e $cert ] ; then
-	    openssl req -x509 -days 3650 -new -nodes -batch -text -key $key -subj "/CN=$web_host" -out $cert
-	fi
-
-	scm_host=$(forge_get_config scm_host)
-	scmcert=$config_path/ssl-cert-scm.pem
-	if [ ! -e $scmcert ] ; then
-	    openssl req -x509 -days 3650 -new -nodes -batch -text -key $key -subj "/CN=$scm_host" -out $scmcert
+	    openssl req -x509 -days 3650 -new -nodes -batch -text -key $key -out $cert
 	fi
 
 	# Setup Docman/FRS/Forum/Tracker/RSS attachments
@@ -103,17 +96,8 @@ case "$1" in
 	    a2enmod cgi  # ViewVC bootstrap, gitweb, mailman
 	    #a2enmod proxy
 	    #a2enmod proxy_http
-	    a2enmod macro
-	    a2enmod authz_groupfile
-	    a2enmod dav
 	fi
 	# else: Apache modules already enabled in CentOS
-
-	# Enable mpm-itk on RH/CentOS
-	if [ -e /etc/httpd/conf.modules.d/00-mpm-itk.conf ] \
-	       && ! grep -q ^LoadModule.mpm_itk_module /etc/httpd/conf.modules.d/00-mpm-itk.conf ; then
-	    sed -i -e s/^#LoadModule/LoadModule/ /etc/httpd/conf.modules.d/00-mpm-itk.conf
-	fi
 
 	if [ -x /usr/sbin/a2dissite ]; then
 	    a2dissite 000-default

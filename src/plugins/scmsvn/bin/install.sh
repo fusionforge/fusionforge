@@ -19,12 +19,6 @@ case "$1" in
 	    echo "TODO: xinetd support"
 	fi
 
-	# Enable required modules
-	if [ -x /usr/sbin/a2enmod ]; then
-	    a2enmod dav_svn
-	fi
-	# else: Apache modules already enabled in CentOS
-
 	# Work-around memory leak in mod_dav_svn
 	for conf in /etc/apache2/apache2.conf /etc/httpd/conf/httpd.conf \
 	    /etc/apache2/server-tuning.conf; do
