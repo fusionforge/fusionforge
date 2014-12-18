@@ -137,6 +137,14 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->runCommand(RUN_JOB_PATH."/forge_run_plugin_job $plugin $cmd");
 	}
 
+    /**
+     * Execute pending system tasks
+     */
+	protected function waitSystasks()
+	{
+		$this->runCommand(RUN_JOB_PATH.'/systasks_wait_until_empty.php');
+	}
+
 	protected function reload_apache()
 	{
 		$this->runCommand("service apache2 reload > /dev/null 2>&1 || service httpd reload > /dev/null 2>&1");

@@ -64,6 +64,7 @@ install-config: install-base-dirs
 install-common: install-config install-plugin-authbuiltin
 	$(MAKE) -C locale DESTDIR=$(DESTDIR) PREFIX=$(PREFIX) install
 	$(CP_R) VERSION bin common templates lib $(DESTDIR)$(pkgdatadir)/
+	chmod 755 $(DESTDIR)$(pkgdatadir)/bin/ssh_akc.php
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(config_path)/custom/
 	$(CP_R) cronjobs/scm $(DESTDIR)$(pkgdatadir)/cronjobs/  # no dedicated 'scm' package now
 	$(CP_R) post-install.d/common $(DESTDIR)$(pkgdatadir)/post-install.d/
@@ -74,6 +75,7 @@ install-common: install-config install-plugin-authbuiltin
 	ln -nfs $(pkgdatadir)/bin/forge_run_plugin_job $(DESTDIR)$(bindir)
 	ln -nfs $(pkgdatadir)/bin/forge_make_admin $(DESTDIR)$(bindir)
 	ln -nfs $(pkgdatadir)/bin/forge_set_password $(DESTDIR)$(bindir)
+	$(CP_R) etc/init.d/fusionforge-systasksd $(DESTDIR)$(sysconfdir)/init.d/
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(log_path)/
 
 install-db-local: install-db

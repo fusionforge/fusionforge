@@ -23,7 +23,7 @@
 
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
-require_once $gfcommon.'include/SysActionsQ.class.php';
+require_once $gfcommon.'include/SysTasksQ.class.php';
 
 global $HTML; // Layout object
 
@@ -34,7 +34,7 @@ if (!session_loggedin()) {
 
 // Test
 if ($_SERVER['QUERY_STRING'] == 'create') {
-		$sa = new SysActionQ();
+		$sa = new SysTasksQ();
 		$sa->add(null, 1, 1, null);
 		if ($sa->isError()) {
 				exit_error($sa->getErrorMessage());
@@ -51,7 +51,7 @@ foreach($groups as $g)
 		$gids[] = $g->getID();
 $gids = implode(',', $gids);
 
-$res = pg_query_params("SELECT * FROM sysactionsq WHERE user_id=$1 or group_id IN ($gids)"
+$res = pg_query_params("SELECT * FROM systasks WHERE user_id=$1 or group_id IN ($gids)"
 					   . " AND requested > NOW() - interval '1 day'",
 					   array($u->getID()));
 while($row = db_fetch_array($res)) {

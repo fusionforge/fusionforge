@@ -25,7 +25,7 @@
 //
 //	This key id# is important - do not change or renumber
 //
-require_once $gfcommon.'include/SysActionsQ.class.php';
+require_once $gfcommon.'include/SysTasksQ.class.php';
 $cron_arr = array();
 $cron_arr[0]='unused';
 $cron_arr[1]='db/calculate_user_metric.php';
@@ -52,9 +52,9 @@ $cron_arr[20]='db/reporting_cron.php';
 $cron_arr[22]='db/daily_task_email.php';
 #$cron_arr[23]='misc/backup_site.php';
 #$cron_arr[24]='svn-stats.php';
-$cron_arr[25]='shell/homedirs.php';
+$cron_arr[SYSTASK_HOMEDIR]='shell/homedirs.php';
 #$cron_arr[26]='update_users.php';
-$cron_arr[SYSACTION_SCM_REPO]='scm/create_scm_repos.php';
+$cron_arr[SYSTASK_SCM_REPO]='scm/create_scm_repos.php';
 $cron_arr[28]='scm/gather_scm_stats.php';
 #$cron_arr[29]='weekly.php';
 $cron_arr[30]='web-vhosts/create_vhosts.php';

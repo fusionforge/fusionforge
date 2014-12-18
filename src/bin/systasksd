@@ -1,7 +1,7 @@
 #!/usr/bin/php
 <?php
 /**
- * Small and fast system action trigger
+ * Small and fast system tasks trigger
  *
  * Copyright (C) 2014  Inria (Sylvain Beucler)
  *
@@ -56,19 +56,19 @@ function usergroups_sync() {
 		}
 }
 
-function sysaction_get_script($plugin_id, $sysaction_type_id) {
+function systask_get_script($plugin_id, $systask_type_id) {
 		global $cron_arr;
 		global $pm, $plugins;
 		if ($plugin_id == null) {
-				if (isset($cron_arr[$sysaction_type_id]))
+				if (isset($cron_arr[$systask_type_id]))
 						return forge_get_config('source_path')
-								.'/cronjobs/'.$cron_arr[$sysaction_type_id];
+								.'/cronjobs/'.$cron_arr[$systask_type_id];
 		} else {
 				if (isset($plugins[$plugin_id])) {
 						$plugin = $pm->GetPluginObject($plugins[$plugin_id]);
-						if (isset($plugin->sysaction_types[$sysaction_type_id]))
+						if (isset($plugin->systask_types[$systask_type_id]))
 								return forge_get_config('plugins_path')."/".$plugin->GetName()
-										."/cronjobs/".$plugin->sysaction_types[$sysaction_type_id];
+										."/cronjobs/".$plugin->systask_types[$systask_type_id];
 				}
 		}
 		return null;
@@ -76,19 +76,18 @@ function sysaction_get_script($plugin_id, $sysaction_type_id) {
 
 
 
-$shortopts = "v";       // enable verbose mode
-$longopts = array();
+$shortopts = 'v';       // enable verbose mode
+$longopts = array('verbose');
 $options = getopt($shortopts, $longopts);
 if (count($options) != (count($argv)-1)) {  // PHP just strips invalid options
-	print "Usage: {$argv[0]} [-v]\n";
+	print "Usage: {$argv[0]} [-v|--verbose]\n";
 	exit(1);
 }
 $verbose = false;
-if (isset($options['v'])) {
+if (isset($options['v']) or isset($options['verbose'])) {
 	print "verbose mode ON\n";
 	$verbose = true;
 }
-
 
 // Proper daemon
 posix_setsid();
@@ -97,6 +96,7 @@ umask(0);
 if (!$verbose) {
 	// Hack to reopen stdin/stdout/stderr, order is important
 	// https://andytson.com/blog/2010/05/daemonising-a-php-cli-script-on-a-posix-system/
+	// (prevents PHP from exiting when printing anything)
 	fclose(STDIN);
 	fclose(STDOUT);
 	fclose(STDERR);
@@ -114,39 +114,39 @@ $plugins = $pm->GetPlugins();
 usergroups_sync();
 while (true) {
 		// Deal with pending requests
-		$res = db_query_params("SELECT * FROM sysactionsq WHERE status=$1"
-		                       . " ORDER BY sysactionsq_id LIMIT 1", array('TODO'));
+		$res = db_query_params("SELECT * FROM systasks WHERE status=$1"
+		                       . " ORDER BY systask_id", array('TODO'));
 		if (!$res && !db_connection_status())
 			db_reconnect();
 		while ($arr = db_fetch_array($res)) {
 				usergroups_sync();
-				$script = sysaction_get_script($arr['plugin_id'], $arr['sysaction_type_id']);
+				$script = systask_get_script($arr['plugin_id'], $arr['systask_type_id']);
 				if (!file_exists($script))
 						// Not installed on this node, skipping
 						continue;
 				if (!is_executable($script)) {
-						db_query_params("UPDATE sysactionsq SET status=$1, error_message=$2"
-										. " WHERE sysactionsq_id=$3",
+						db_query_params("UPDATE systasks SET status=$1, error_message=$2"
+										. " WHERE systask_id=$3",
 										array('ERROR',
-											  "Cron job {$arr['plugin_id']}/{$arr['sysaction_type_id']}"
+											  "Cron job {$arr['plugin_id']}/{$arr['systask_type_id']}"
 											  . " '$script' not executable.\n",
-											  $arr['sysactionsq_id']));
+											  $arr['systask_id']));
 						continue;
 				}
-				db_query_params("UPDATE sysactionsq SET status=$1 WHERE sysactionsq_id=$2",
-								array('WIP', $arr['sysactionsq_id']));
+				db_query_params("UPDATE systasks SET status=$1 WHERE systask_id=$2",
+								array('WIP', $arr['systask_id']));
 				AcquireReplicationLock($script);
 				$ret = null;
 				if ($verbose) print "Running: $script... ";
 				system("$script\n", $ret);
 				if ($ret == 0) {
 						if ($verbose) print "DONE\n";
-						db_query_params("UPDATE sysactionsq SET status=$1 WHERE sysactionsq_id=$2",
-										array('DONE', $arr['sysactionsq_id']));
+						db_query_params("UPDATE systasks SET status=$1 WHERE systask_id=$2",
+										array('DONE', $arr['systask_id']));
 				} else {
 						if ($verbose) print "ERROR\n";
-						db_query_params("UPDATE sysactionsq SET status=$1 WHERE sysactionsq_id=$2",
-										array('ERROR', $arr['sysactionsq_id']));
+						db_query_params("UPDATE systasks SET status=$1 WHERE systask_id=$2",
+										array('ERROR', $arr['systask_id']));
 				}
 		}
 

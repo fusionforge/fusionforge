@@ -25,7 +25,7 @@
 require dirname(__FILE__).'/../../common/include/env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/cron_utils.php';
-require_once $gfcommon.'include/SysActionsQ.class.php';
+require_once $gfcommon.'include/SysTasksQ.class.php';
 
 // Plugins subsystem
 require_once $gfcommon.'include/Plugin.class.php' ;
@@ -38,8 +38,8 @@ session_set_admin ();
 
 setup_plugin_manager();
 
-$res = db_query_params('SELECT sysactionsq_id, group_id FROM sysactionsq WHERE status=$1 AND sysaction_type_id=$2',
-					   array('WIP', SYSACTION_SCM_REPO));
+$res = db_query_params('SELECT systask_id, group_id FROM systasks WHERE status=$1 AND systask_type_id=$2',
+                       array('WIP', SYSTASK_SCM_REPO));
 if (!$res) {
 	$this->setError('Unable to get list of projects using SCM: '.db_error());
 	return false;
@@ -56,7 +56,7 @@ $hook_params = array ('output' => '') ;
 plugin_hook_by_reference ('scm_update_repolist', $hook_params) ;
 $output .= $hook_params['output'];
 
-cron_entry(SYSACTION_SCM_REPO, $output);
+cron_entry(SYSTASK_SCM_REPO, $output);
 
 // Local Variables:
 // mode: php

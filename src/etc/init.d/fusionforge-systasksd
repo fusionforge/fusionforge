@@ -1,6 +1,6 @@
 #!/bin/bash
 ### BEGIN INIT INFO
-# Provides:          fusionforge-light
+# Provides:          fusionforge-systasksd
 # Required-Start:    $local_fs $remote_fs $network $syslog $named postgresql
 # Required-Stop:     $local_fs $remote_fs $network $syslog $named postgresql
 # Default-Start:     2 3 4 5
@@ -10,11 +10,11 @@
 ### END INIT INFO
 # Copyright (C) 2014  Inria (Sylvain Beucler)
 
-PIDFILE=/var/run/fusionforge-light
-DAEMON=$(forge_get_config binary_path)/light
+PIDFILE=/var/run/fusionforge-systasksd
+DAEMON=$(forge_get_config binary_path)/systasksd
 
 function check_running() {
-    if kill -0 $(cat $PIDFILE) 2>/dev/null; then
+    if kill -0 $(cat $PIDFILE 2>/dev/null) 2>/dev/null; then
 	return 0
     else
 	return 1
@@ -28,16 +28,18 @@ case $1 in
 	else
 	    $DAEMON &
 	    echo $! > $PIDFILE
-	    if !check_running; then
+	    if ! check_running; then
 		echo "Failed"
 		rm -f $PIDFILE
 		return 1
 	    fi
+	    echo "Started"
 	fi
 	;;
     stop)
-	kill $(cat $PIDFILE)
+	kill $(cat $PIDFILE 2>/dev/null)
 	rm -f $PIDFILE
+	echo "Stopped"
 	;;
     status)
 	if check_running; then

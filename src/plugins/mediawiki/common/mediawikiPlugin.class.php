@@ -32,14 +32,14 @@ forge_define_config_item('master_path', 'mediawiki', '$mediawiki/mwdata_path/mas
 forge_define_config_item('enable_uploads', 'mediawiki', false);
 forge_set_config_item_bool('enable_uploads', 'mediawiki');
 }
-require_once $gfcommon.'include/SysActionsQ.class.php';
-define('SYSACTION_MEDIAWIKI_CREATE_WIKI', 1);
-define('SYSACTION_MEDIAWIKI_CREATE_IMAGEDIR', 2);
+require_once $gfcommon.'include/SysTasksQ.class.php';
+define('SYSTASK_MEDIAWIKI_CREATE_WIKI', 1);
+define('SYSTASK_MEDIAWIKI_CREATE_IMAGEDIR', 2);
 
 class MediaWikiPlugin extends Plugin {
-	public $sysaction_types = array(
-		SYSACTION_MEDIAWIKI_CREATE_WIKI => 'create-wikis.php',
-		SYSACTION_MEDIAWIKI_CREATE_IMAGEDIR => 'create-imagedirs.php'
+	public $systask_types = array(
+		SYSTASK_MEDIAWIKI_CREATE_WIKI => 'create-wikis.php',
+		SYSTASK_MEDIAWIKI_CREATE_IMAGEDIR => 'create-imagedirs.php'
 	);
 
 	function __construct ($id=0) {
@@ -378,10 +378,10 @@ _("This plugin allows each project to embed Mediawiki under a tab.");
 			if (!parent::groupisactivecheckboxpost($params))
 					return false;
 			if (getIntFromRequest('use_mediawiki') == 1) {
-				$sysactionsq = new SysActionsQ();
+				$systasksq = new SystasksQ();
 				$group_id = $params['group'];
-				$sysactionsq->add($this->getID(), SYSACTION_MEDIAWIKI_CREATE_WIKI, $group_id);
-				$sysactionsq->add($this->getID(), SYSACTION_MEDIAWIKI_CREATE_IMAGEDIR, $group_id);
+				$systasksq->add($this->getID(), SYSTASK_MEDIAWIKI_CREATE_WIKI, $group_id);
+				$systasksq->add($this->getID(), SYSTASK_MEDIAWIKI_CREATE_IMAGEDIR, $group_id);
 			}
 			return true;
 	}
