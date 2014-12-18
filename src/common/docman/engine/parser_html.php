@@ -44,7 +44,7 @@ $contents = fread($fd, filesize($fichin));
 fclose($fd);
 
 $strip_content = strip_tags($contents);
-$filename = tempnam(forge_get_config('data_path'), "tmp");
+$filename = tempnam(sys_get_temp_dir(), 'docman');
 $fd = fopen($filename, "w");
 fwrite($fd , $strip_content);
 fclose($fd);

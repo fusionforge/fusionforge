@@ -7,7 +7,7 @@
  * Copyright 2005, Fabio Bertagnin
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2013, Franck Villaume - TrivialDev
+ * Copyright 2012-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -78,7 +78,7 @@ if (isset($projectIDsArray) && is_array($projectIDsArray)) {
 		$attrsInputIncludeSubprojects['checked'] = 'checked';
 	echo html_e('input', $attrsInputIncludeSubprojects)._('Include child projects');
 }
-
+echo $HTML->addRequiredFieldsInfoBox();
 echo $HTML->closeForm();
 echo html_ac(html_ap() - 1);
 echo html_ao('div', array('id' => 'docman_search_query_result'));
