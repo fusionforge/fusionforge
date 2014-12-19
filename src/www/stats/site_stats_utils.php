@@ -521,7 +521,7 @@ function views_graph($monthly = 0) {
 		echo '<script type="text/javascript">//<![CDATA['."\n";
 		echo 'var '.$chartid.'values = new Array();';
 		echo 'var plot'.$chartid.';';
-		for ($j = 0; $j < count($monthStartArrFormat); $j++) {
+		for ($j = 0; $j < count($monthStartArrFormat) - 1; $j++) {
 			$key = array_search($monthStartArrFormat[$j], $xlabel);
 			if ($key !== FALSE) {
 				echo 'var '.$chartid.'datevalues = '.$ydata[$key].';';
@@ -575,7 +575,7 @@ function users_graph() {
 	global $gfcommon;
 	require_once $gfcommon.'reporting/Report.class.php';
 	$report = new Report();
-	$res = db_query_params ('SELECT month,day,new_users,new_projects FROM stats_site ORDER BY month ASC, day ASC',
+	$res = db_query_params ('SELECT month,SUM(new_users) as new_users, SUM(new_projects) as new_projects FROM stats_site GROUP BY month ORDER BY month',
 			array ());
 
 	$i = 0;
@@ -589,7 +589,7 @@ function users_graph() {
 	$monthStartArr = $report->getMonthStartArr();
 	$monthStartArrFormat = $report->getMonthStartArrFormat();
 	while ( $row = db_fetch_array($res) ) {
-		$xlabel[$i] = $row['month'] . ((isset($row['day'])) ? "/" . $row['day'] : '');
+		$xlabel[$i] = $row['month'];
 		$ydata[0][$i] = $row['new_users'];
 		$ydata[1][$i] = $row['new_projects'];
 		++$i;
@@ -597,29 +597,31 @@ function users_graph() {
 	if (count($ydata[0])) {
 		$chartid = '_newprojectuser';
 		echo '<script type="text/javascript">//<![CDATA['."\n";
-		echo 'var '.$chartid.'values = new Array();';
-		echo 'var '.$chartid.'labels = new Array();';
-		echo 'var '.$chartid.'series = new Array();';
-		echo 'var plot'.$chartid.';';
+		echo 'var '.$chartid.'values = new Array();'."\n";
+		echo 'var '.$chartid.'labels = new Array();'."\n";
+		echo 'var '.$chartid.'series = new Array();'."\n";
+		echo 'var plot'.$chartid.';'."\n";
 		for ($z = 0; $z < count($ydata); $z++) {
 			echo $chartid.'values['.$z.'] = new Array();';
-			echo $chartid.'labels.push({label:\''.$label[$z].'\'});';
-			for ($j = 0; $j < count($monthStartArrFormat); $j++) {
+			echo $chartid.'labels.push({label:\''.$label[$z].'\'});'."\n";
+			for ($j = 0; $j < count($monthStartArrFormat) - 1; $j++) {
 				$key = array_search($monthStartArrFormat[$j], $xlabel);
+				$cur_y = null;
 				if ($key !== FALSE) {
-					echo 'var '.$chartid.'datevalues = '.$ydata[$z][$key].';';
-					if ($ydata[$z][$thekey] > $yMax) {
-						$yMax = $ydata[$z][$thekey];
+					$cur_y = $ydata[$z][$key];
+					if ($ydata[$z][$key] > $yMax) {
+						$yMax = $ydata[$z][$key];
 					}
 				} else {
-					echo 'var '.$chartid.'datevalues = 0;';
+					$cur_y = 0;
 				}
-				echo 'var '.$chartid.'date = '.$monthStartArrFormat[$j].';';
-				echo $chartid.'values['.$z.'].push(['.$chartid.'date, '.$chartid.'datevalues]);';
+				echo $chartid.'values['.$z.'].push(['.$monthStartArrFormat[$j].', '.$cur_y.']);';
+				echo "\n";
 			}
+			echo "\n";
 		}
 		for ($z = 0; $z < count($ydata); $z++) {
-			echo $chartid.'series.push('.$chartid.'values['.$z.']);';
+			echo $chartid.'series.push('.$chartid.'values['.$z.']);'."\n";
 		}
 		echo 'jQuery(document).ready(function(){
 				plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', '.$chartid.'series, {
@@ -647,12 +649,14 @@ function users_graph() {
 							min: 0,
 							tickOptions: {
 								angle: 0,
+								formatString:\'%d\'
 							}
 						}
 					},
 					highlighter: {
 						show: true,
 						sizeAdjust: 2.5,
+						tooltipAxes: \'y\',
 					},
 				});
 			});';
