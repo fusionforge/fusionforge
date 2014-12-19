@@ -32,6 +32,11 @@ fi
 # Update regularly:
 # sudo pbuilder --update --basetgz /var/cache/pbuilder/base-wheezy-bpo.tar.gz --bindmounts /usr/src/backports/wheezy/
 
+# Add source for 'apt-get source'
+echo "deb-src http://ftp.fr.debian.org/debian/ jessie main" \
+  | sudo tee /etc/apt/sources.list.d/jessie-src.list
+sudo apt-get update
+
 # Setup identity
 export DEBEMAIL="fusionforge-general@lists.fusionforge.org" 
 export DEBFULLNAME="FusionForge Hackers"
@@ -40,10 +45,9 @@ export DEBFULLNAME="FusionForge Hackers"
 export DEB_BUILD_OPTIONS="parallel=$(nproc) nocheck"
 #export DEB_BUILD_OPTIONS="parallel=$(nproc)"
 
-# Add source for 'apt-get source'
-echo "deb-src http://ftp.fr.debian.org/debian/ jessie main" \
-  | sudo tee /etc/apt/sources.list.d/jessie-src.list
-sudo apt-get update
+# Create a working directory for sources
+mkdir /usr/src/backports/sources/
+cd /usr/src/backports/sources/
 
 # Dependencies to add in our local repo
 apt-get source apr/jessie
@@ -60,7 +64,7 @@ apt-get source apr/jessie
 )
 apt-get source apr-util/jessie
 (
-    cd apr-util-1.5.3/
+    cd apr-util-1.5.4/
     dch --bpo "No changes."
     sed -i '1 s/~bpo/~ff/' debian/changelog
     pdebuild --debbuildopts '-v1.4.1-3' \
@@ -76,8 +80,25 @@ apt-get source apache2/jessie
 (
     cd apache2-2.4.10/
     dch --bpo "Note: depends on backported libapr."
+    dch -a "Don't support symlink<->dir changes to avoid dpkg >= 1.17"
+    sed -i -e '/^\(dir_to_symlink\|symlink_to_dir\)/d' debian/*.maintscript
+    sed -i -e 's/\(dpkg\|dpkg-dev\) ([^)]*)/\1/g' debian/control
     sed -i '1 s/~bpo/~ff/' debian/changelog
     pdebuild --debbuildopts '-v2.2.22-13+deb7u3' \
+        --use-pdebuild-internal --buildresult /usr/src/backports/wheezy/ \
+        --pbuildersatisfydepends /usr/lib/pbuilder/pbuilder-satisfydepends-experimental \
+        -- --basetgz /var/cache/pbuilder/base-wheezy-bpo.tar.gz \
+           --bindmounts /usr/src/backports/wheezy/ \
+           --hookdir /usr/src/backports/wheezy/
+)
+
+# mpm_itk - separate package in Jessie
+apt-get source mpm-itk/jessie
+(
+    cd mpm-itk-2.4.7-02/  # even for 2.4.10-8
+    dch --bpo "Note: compiled against Apache 2.4.10"
+    sed -i '1 s/~bpo/~ff/' debian/changelog
+    pdebuild --debbuildopts '-v0' \
         --use-pdebuild-internal --buildresult /usr/src/backports/wheezy/ \
         --pbuildersatisfydepends /usr/lib/pbuilder/pbuilder-satisfydepends-experimental \
         -- --basetgz /var/cache/pbuilder/base-wheezy-bpo.tar.gz \
@@ -104,8 +125,8 @@ apt-get source libgd2/jessie
 # PHP 5.6 for Apache 2.4
 apt-get source php5/jessie
 (
-    cd php5-5.6.0+dfsg/
-    dch --bpo "Note: libapache2-mod-php5 rebuilt against Apache 2.4."
+    cd php5-5.6.2+dfsg/
+    dch --bpo "Note: libapache2-mod-php5 rebuilt against Apache 2.4.10"
     sed -i '1 s/~bpo/~ff/' debian/changelog
     pdebuild --debbuildopts '-v5.4.4-14+deb7u14' \
         --use-pdebuild-internal --buildresult /usr/src/backports/wheezy/ \
@@ -154,19 +175,7 @@ apt-get source xdebug/jessie
            --hookdir /usr/src/backports/wheezy/
 )
 
-# mpm_itk - separate package in Jessie
-apt-get source mpm-itk/jessie
-(
-    cd mpm-itk-2.4.7-02/
-    dch --bpo "Note: compiled against Apache 2.4."
-    sed -i '1 s/~bpo/~ff/' debian/changelog
-    pdebuild --debbuildopts '-v0' \
-        --use-pdebuild-internal --buildresult /usr/src/backports/wheezy/ \
-        --pbuildersatisfydepends /usr/lib/pbuilder/pbuilder-satisfydepends-experimental \
-        -- --basetgz /var/cache/pbuilder/base-wheezy-bpo.tar.gz \
-           --bindmounts /usr/src/backports/wheezy/ \
-           --hookdir /usr/src/backports/wheezy/
-)
+# Possibly backport php-wikidiff2 which mediawiki recommends
 
 # mod_dav_svn for Apache 2.4
 apt-get source subversion/jessie
@@ -196,7 +205,7 @@ diff -u subversion-1.8.10/debian/rules subversion-1.8.10/debian/rules
  	cd debian/tmp/$(libdir); for lib in ra fs auth swig; do \
 EOF
     dch -a "Adapt ruby libdir as it's not multiarched in wheezy."
-    dch -a "Note: compiled against Apache 2.4."
+    dch -a "Note: compiled against Apache 2.4.10"
     sed -i '1 s/~bpo/~ff/' debian/changelog
     pdebuild --debbuildopts '-v1.6.17dfsg-4+deb7u6' \
         --use-pdebuild-internal --buildresult /usr/src/backports/wheezy/ \
@@ -209,8 +218,8 @@ EOF
 # mod_wsgi for Apache 2.4
 apt-get source mod-wsgi/jessie
 (
-    cd mod-wsgi-4.2.7/
-    dch --bpo "Note: compiled against Apache 2.4."
+    cd mod-wsgi-4.3.0/
+    dch --bpo "Note: compiled against Apache 2.4.10"
     sed -i '1 s/~bpo/~ff/' debian/changelog
     pdebuild --debbuildopts '-v3.3-4+deb7u1' \
         --use-pdebuild-internal --buildresult /usr/src/backports/wheezy/ \
