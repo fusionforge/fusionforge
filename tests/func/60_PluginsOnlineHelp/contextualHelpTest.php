@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Copyright (C) 2010 Alcatel-Lucent
  *
  * This file is part of FusionForge.
@@ -19,7 +19,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-/*
+/**
  * Standard Alcatel-Lucent disclaimer for contributing to open source
  *
  * "The test suite ("Contribution") has not been tested and/or
@@ -48,7 +48,7 @@ class ContextualHelp extends FForge_SeleniumTestCase
 	function testContextualHelp()
 	{
 		$this->skip_on_deb_installs();
-		
+
 		$this->init();
 		$this->activatePlugin('online_help');
 		$this->login ('admin');

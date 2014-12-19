@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Copyright 2012, Roland Mas
  *
  * This file is part of FusionForge.
@@ -24,16 +24,16 @@ require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
 class PluginMoinMoin extends FForge_SeleniumTestCase
 {
 	protected $alreadyActive = 0;
-	
+
 	function testMoinMoin()
 	{
 		$this->skip_on_rpm_installs();
 		$this->skip_on_centos();
 
-        $this->changeConfig("[moinmoin]\nuse_frame=no\n");
+		$this->changeConfig("[moinmoin]\nuse_frame=no\n");
 
 		$this->activatePlugin('moinmoin');
-		
+
 		$this->populateStandardTemplate('empty');
 		$this->init();
 

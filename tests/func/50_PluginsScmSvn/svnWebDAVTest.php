@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Copyright (C) 2012 Roland Mas
  *
  * This file is part of FusionForge.
@@ -8,7 +8,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
- *      
+ *
  * FusionForge is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License along
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- */             
+ */
 
 require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
 
@@ -38,7 +38,7 @@ class ScmSvnWebDAVTest extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=Source Code Admin");
 		$this->click("//input[@name='scmengine[]' and @value='scmsvn']");
 		$this->clickAndWait("submit");
-	    
+
 		// Run the cronjob to create repositories
 		$this->cron("scm/create_scm_repos.php");
 		$this->cron("shell/homedirs.php");
@@ -56,26 +56,26 @@ class ScmSvnWebDAVTest extends FForge_SeleniumTestCase
 		$t = exec("mktemp -d /tmp/svnTest.XXXXXX");
 		$auth = "--username ".FORGE_ADMIN_USERNAME." --password ".FORGE_ADMIN_PASSWORD;
 		$globalopts = "--trust-server-cert --non-interactive";
-        $log = "2> /var/log/svn.stderr > /var/log/svn.stdout";
-        $timeout = "timeout 15s";
+		$log = "2> /var/log/svn.stderr > /var/log/svn.stdout";
+		$timeout = "timeout 15s";
 		system("cd $t && $timeout svn checkout $globalopts $auth $p projecta $log", $ret);
-        if ($ret > 120) {
-            system("cd $t && $timeout svn checkout $globalopts $auth $p projecta $log", $ret);
-        }
+		if ($ret > 120) {
+			system("cd $t && $timeout svn checkout $globalopts $auth $p projecta $log", $ret);
+		}
 		$this->assertEquals($ret, 0);
 		sleep(2);
 		system("echo 'this is a simple text' > $t/projecta/mytext.txt");
 		system("cd $t/projecta && $timeout svn add mytext.txt $log && $timeout svn commit $globalopts $auth -m'Adding file' $log", $ret);
-        if ($ret > 120) {
-            system("cd $t/projecta && $timeout svn add mytext.txt $log && $timeout svn commit $globalopts $auth -m'Adding file' $log", $ret);
-        }
+		if ($ret > 120) {
+			system("cd $t/projecta && $timeout svn add mytext.txt $log && $timeout svn commit $globalopts $auth -m'Adding file' $log", $ret);
+		}
 		$this->assertEquals($ret, 0);
 		sleep(2);
 		system("echo 'another simple text' >> $t/projecta/mytext.txt");
 		system("cd $t/projecta && $timeout svn commit $globalopts $auth -m'Modifying file' $log", $ret);
-        if ($ret > 120) {
-            system("cd $t/projecta && $timeout svn commit $globalopts $auth -m'Modifying file' $log", $ret);
-        }
+		if ($ret > 120) {
+			system("cd $t/projecta && $timeout svn commit $globalopts $auth -m'Modifying file' $log", $ret);
+		}
 		$this->assertEquals($ret, 0);
 		sleep(2);
 
@@ -84,7 +84,7 @@ class ScmSvnWebDAVTest extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
 		$this->clickAndWait("link=Browse Subversion Repository");
-        $this->selectFrame("id=scmsvn_iframe");
+		$this->selectFrame("id=scmsvn_iframe");
 		$this->assertTextPresent("Modifying file");
 		$this->assertTextNotPresent("Adding file");
 

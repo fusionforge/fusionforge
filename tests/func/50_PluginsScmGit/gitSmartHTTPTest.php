@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Copyright (C) 2012 Roland Mas
  *
  * This file is part of FusionForge.
@@ -8,7 +8,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
- *      
+ *
  * FusionForge is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License along
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- */             
+ */
 
 require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
 
@@ -26,7 +26,7 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 	function testScmGitSmartHTTP()
 	{
 
-        $this->changeConfig("[core]\nuse_ssl = no\n");
+		$this->changeConfig("[core]\nuse_ssl = no\n");
 
 		$this->activatePlugin('scmgit');
 		$this->populateStandardTemplate('empty');
@@ -39,7 +39,7 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=Source Code Admin");
 		$this->click("//input[@name='scmengine[]' and @value='scmgit']");
 		$this->clickAndWait("submit");
-	    
+
 		// Run the cronjob to create repositories
 		$this->cron("scm/create_scm_repos.php");
 		$this->cron("shell/homedirs.php");
@@ -53,15 +53,15 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 		$p = $this->getText("//tt[contains(.,'git clone http') and contains(.,'".FORGE_ADMIN_USERNAME."@')]");
 		$p = preg_replace(",^git clone ,", "", $p);
 		$p = preg_replace(",@,", ":".FORGE_ADMIN_PASSWORD."@", $p);
-        $log = "2> /var/log/git.stderr > /var/log/git.stdout";
-        $timeout = "timeout 15s";
+		$log = "2> /var/log/git.stderr > /var/log/git.stdout";
+		$timeout = "timeout 15s";
 
 		// Create a local clone, add stuff, push it to the repo
 		$t = exec("mktemp -d /tmp/gitTest.XXXXXX");
 		system("cd $t && GIT_SSL_NO_VERIFY=true $timeout git clone --quiet $p $log", $ret);
-        if ($ret >= 120) {
-            system("cd $t && GIT_SSL_NO_VERIFY=true $timeout git clone --quiet $p $log", $ret);
-        }
+		if ($ret >= 120) {
+			system("cd $t && GIT_SSL_NO_VERIFY=true $timeout git clone --quiet $p $log", $ret);
+		}
 		$this->assertEquals($ret, 0);
 
 		system("echo 'this is a simple text' > $t/projecta/mytext.txt");
@@ -71,9 +71,9 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 		$this->assertEquals($ret, 0);
 
 		system("cd $t/projecta && GIT_SSL_NO_VERIFY=true $timeout git push --quiet --all $log", $ret);
-        if ($ret >= 120) {
-            system("cd $t/projecta && GIT_SSL_NO_VERIFY=true $timeout git push --quiet --all $log", $ret);
-        }
+		if ($ret >= 120) {
+			system("cd $t/projecta && GIT_SSL_NO_VERIFY=true $timeout git push --quiet --all $log", $ret);
+		}
 		$this->assertEquals($ret, 0);
 
 		// Check that the changes appear in gitweb
@@ -81,7 +81,7 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
 		$this->clickAndWait("link=Browse Git Repository");
-        $this->selectFrame("id=scmgit_iframe");
+		$this->selectFrame("id=scmgit_iframe");
 		$this->assertElementPresent("//.[@class='page_footer']");
 		$this->assertTextPresent("projecta.git");
 		$this->clickAndWait("link=projecta.git");

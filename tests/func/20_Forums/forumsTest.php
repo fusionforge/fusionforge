@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Copyright (C) 2008 Alain Peyrat <aljeux@free.fr>
  * Copyright (C) 2009 Alain Peyrat, Alcatel-Lucent
  *
@@ -20,7 +20,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-/*
+/**
  * Standard Alcatel-Lucent disclaimer for contributing to open source
  *
  * "The test suite ("Contribution") has not been tested and/or
@@ -71,7 +71,7 @@ class CreateForum extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("Message1"));
 	}
 
-	/*
+	/**
 	 * Simulate a click on the link from a mail.
 	 * As the forum is private, the users should be
 	 * redirected to the login prompt saying that he has
@@ -95,7 +95,7 @@ class CreateForum extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("Welcome to developers"));
 	}
 
-	/*
+	/**
 	 * Simulate a user non logged that will reply
 	 * to a message in a forum. He will be redirected
 	 * to the login page, then will reply and then
@@ -124,7 +124,7 @@ class CreateForum extends FForge_SeleniumTestCase
 
 	}
 
-	/*
+	/**
 	 * Verify that it is impossible to use name already used by a mailing list
 	 */
 	function testEmailAddressNotAlreadyUsed() {

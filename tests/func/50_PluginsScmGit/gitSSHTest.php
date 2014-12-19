@@ -8,7 +8,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
- *      
+ *
  * FusionForge is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License along
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- */             
+ */
 
 require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
 
@@ -38,7 +38,7 @@ class ScmGitSSHTest extends FForge_SeleniumTestCase
 		$this->clickAndWait("submit");
 
 		$this->uploadSshKey();
-	    
+
 		// Run the cronjob to create repositories
 		$this->cron("scm/create_scm_repos.php");
 		$this->cron("shell/homedirs.php");
@@ -71,13 +71,13 @@ class ScmGitSSHTest extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
 		$this->clickAndWait("link=Browse Git Repository");
-        $this->selectFrame("id=scmgit_iframe");
+		$this->selectFrame("id=scmgit_iframe");
 		$this->assertElementPresent("//.[@class='page_footer']");
 		$this->assertTextPresent("projecta.git");
 		$this->clickAndWait("link=projecta.git");
 		$this->assertTextPresent("Modifying file");
 		$this->assertTextPresent("Adding file");
-        $this->selectFrame("relative=top");
+		$this->selectFrame("relative=top");
 
 		system("rm -fr $t");
 	}
