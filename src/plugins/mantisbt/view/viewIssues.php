@@ -55,8 +55,8 @@ try {
 			foreach ($userMantisBTConf as $userMantisBTConfEntry) {
 				$accountDataArray = array('id' => $userMantisBTConfEntry['mantisbt_userid']);
 				$clientSOAP = new SoapClient($userMantisBTConfEntry['url'].'/api/soap/mantisconnect.php?wsdl', array('trace' => true, 'exceptions' => true));
-				$idsBugAll[] = $clientSOAP->__soapCall('mc_project_get_issues_for_user', array('username' => $userMantisBTConfEntry['user'], 'password' => $userMantisBTConfEntry['password'], 'project_id' => 0, 'filter_type' => 'assigned', 'target_user' => $accountDataArray));
-				$listStatus[] = $clientSOAP->__soapCall('mc_enum_status', array('username' => $userMantisBTConfEntry['user'], 'password' => $userMantisBTConfEntry['password']));
+				$idsBugAll = array_merge($idsBugAll, $clientSOAP->__soapCall('mc_project_get_issues_for_user', array('username' => $userMantisBTConfEntry['user'], 'password' => $userMantisBTConfEntry['password'], 'project_id' => 0, 'filter_type' => 'assigned', 'target_user' => $accountDataArray)));
+				$listStatus = array_merge($listStatus, $clientSOAP->__soapCall('mc_enum_status', array('username' => $userMantisBTConfEntry['user'], 'password' => $userMantisBTConfEntry['password'])));
 			}
 			break;
 		}
