@@ -220,15 +220,23 @@ function FusionForgeMWAuth( $user, &$result ) {
 }
 
 function SetupPermissionsFromRoles () {
-	global $fusionforgeproject, $wgGroupPermissions ;
+	global $fusionforgeproject, $wgGroupPermissions, $unused_external_roles;
 
 	$g = group_get_object_by_name ($fusionforgeproject) ;
 	// Setup rights for all roles referenced by project
 	$rids = $g->getRolesID() ;
 	$e = RBACEngine::getInstance();
 	$grs = $e->getGlobalRoles();
+	forge_cache_external_roles($g);
+	$skiproles = array();
+	foreach ($unused_external_roles as $r) {
+		$skiproles[$r->getID()] = true;
+	}
 	foreach ($grs as $r) {
-		$rids[] = $r->getID();
+		$rid = $r->getID();
+		if (!isset($skiproles[$rid])) {
+			$rids[] = $rid;
+		}
 	}
 	$rids = array_unique($rids);
 	$rs = array();
