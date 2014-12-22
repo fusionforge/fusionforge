@@ -251,15 +251,23 @@ function FusionForgeMWAuth( $user, &$result ) {
 }
 
 function SetupPermissionsFromRoles () {
-	global $fusionforgeproject, $wgGroupPermissions ;
+	global $fusionforgeproject, $wgGroupPermissions, $unused_external_roles;
 
 	$g = group_get_object_by_name ($fusionforgeproject) ;
 	// Setup rights for all roles referenced by project
 	$rids = $g->getRolesID() ;
 	$e = RBACEngine::getInstance();
 	$grs = $e->getGlobalRoles();
+	forge_cache_external_roles($g);
+	$skiproles = array();
+	foreach ($unused_external_roles as $r) {
+		$skiproles[$r->getID()] = true;
+	}
 	foreach ($grs as $r) {
-		$rids[] = $r->getID();
+		$rid = $r->getID();
+		if (!isset($skiproles[$rid])) {
+			$rids[] = $rid;
+		}
 	}
 	$rids = array_unique($rids);
 	$rs = array();
@@ -369,9 +377,16 @@ $GLOBALS['wgHooks']['UserLoadFromSession'][]='FusionForgeMWAuth';
 
 $zeroperms = array ('read', 'writeapi', 'edit', 'move-subpages', 'move-rootuserpages', 'reupload-shared', 'createaccount');
 
+/* explicitly zero these mediawiki permissions */
 foreach ($zeroperms as $i) {
 	$wgGroupPermissions['user'][$i] = false;
 	$wgGroupPermissions['*'][$i] = false;
+}
+/* zero all permissions implicitly set by mediawiki already */
+foreach ($wgGroupPermissions as $kg => $vg) {
+	foreach ($vg as $kp => $vp) {
+		$wgGroupPermissions[$kg][$kp] = false;
+	}
 }
 
 SetupPermissionsFromRoles();
