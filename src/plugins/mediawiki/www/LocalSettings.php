@@ -338,9 +338,16 @@ $GLOBALS['wgHooks']['UserLoadFromSession'][]='FusionForgeMWAuth';
 
 $zeroperms = array ('read', 'writeapi', 'edit', 'move-subpages', 'move-rootuserpages', 'reupload-shared', 'createaccount');
 
+/* explicitly zero these mediawiki permissions */
 foreach ($zeroperms as $i) {
 	$wgGroupPermissions['user'][$i] = false;
 	$wgGroupPermissions['*'][$i] = false;
+}
+/* zero all permissions implicitly set by mediawiki already */
+foreach ($wgGroupPermissions as $kg => $vg) {
+	foreach ($vg as $kp => $vp) {
+		$wgGroupPermissions[$kg][$kp] = false;
+	}
 }
 
 SetupPermissionsFromRoles();
