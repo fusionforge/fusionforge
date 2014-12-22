@@ -29,7 +29,9 @@ class webanalyticsPlugin extends Plugin {
 		$this->name = "webanalytics" ;
 		$this->text = _("webanalytics") ;
 		$this->pkg_desc =
-_("webanalytics plugin for FusionForge.");
+_("webanalytics plugin for FusionForge. Get the ability
+to configure specific URL for web analytics tool
+such as Piwik or Google Analytics.");
 		$this->_addHook('webanalytics_url');
 		$this->_addHook('webanalytics_admin');
 		$this->_addHook('site_admin_option_hook');
@@ -178,14 +180,5 @@ _("webanalytics plugin for FusionForge.");
 		$user = session_get_user();
 		include $gfplugins.$this->name.'/view/admin/viewGlobalConfiguration.php';
 		return true;
-	}
-
-	/**
-	 * getPluginDescription - display the description of this plugin in pluginman admin page
-	 *
-	 * @return	string	the description
-	 */
-	function getPluginDescription() {
-		return _('Get the ability to configure specific URL for web analytics tool such as Piwik or Google Analytics.');
 	}
 }

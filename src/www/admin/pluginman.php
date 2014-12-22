@@ -264,21 +264,16 @@ foreach ($filelist as $filename) {
 		$groups = _('None');
 		$adminlink = '';
 	}
-	$description = '';
-	if (method_exists($pluginObject, 'getPluginDescription')) {
-		$description = $pluginObject->getPluginDescription();
-	}
-	// Disable link to action if action is not possible.
-	if (isset($action[$filename][$next]) && $action[$filename][$next] === false) {
-		$link = '';
-	}
-
 	// Disable link to action if action is not possible.
 	if (isset($action[$filename][$next]) && $action[$filename][$next] === false) {
 		$link = '';
 	}
 
 	$title = _('Current plugin status is'). ' ' .forge_get_config('plugin_status', $filename);
+	$description = '';
+	if (isset($pluginObject->pkg_desc)) {
+		$description = $pluginObject->pkg_desc;
+	}
 	echo '<tr '. $HTML->boxGetAltRowStyle($j+1) .'>'.
 		'<td title="'. $description.' '.$title .'">'. $filename.'</td>'.
 		'<td class="'.$status.'" class="align-center">'. $msg .'</td>'.
