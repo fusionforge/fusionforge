@@ -46,7 +46,7 @@ if (!isset($defect)) {
 	}
 }
 
-if ((isset($errorPage) && $errorPage ) || $defect->project->id != $mantisbtConf['id_mantisbt']) {
+if (isset($defect) && $defect->project->id != $mantisbtConf['id_mantisbt']) {
 	echo $HTML->warning_msg(_('Woops: wrong issue id'));
 	$errorPage = true;
 }
