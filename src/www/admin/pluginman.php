@@ -126,14 +126,9 @@ if (getStringFromRequest('update')) {
 }
 
 site_admin_header(array('title'=>_('Plugin Manager')));
-
-?>
-<form name="theform" action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
-<?php
-echo '<p>';
-echo _('Here you can activate / deactivate site-wide plugins which are in the plugins/ folder. Then, you should activate them also per project, per user or whatever the plugin specifically applies to.');
-echo '</p>';
-echo '<p class="important">' . _('Be careful because some projects/users can be using the plugin. Deactivating it will remove the plugin from all users/projects.') . '</p>';
+echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'get'));
+echo html_e('p', array(), _('Here you can activate / deactivate site-wide plugins which are in the plugins/ folder. Then, you should activate them also per project, per user or whatever the plugin specifically applies to.'));
+echo html_e('p', array('class' => 'important'), _('Be careful because some projects/users can be using the plugin. Deactivating it will remove the plugin from all users/projects.'));
 
 $title_arr = array( _('Plugin Name'),
 		    _('Status'),
@@ -206,7 +201,7 @@ sort($filelist);
 
 $j = 0;
 
-foreach ($filelist as $filename) {
+foreach ($filelist as $key => $filename) {
 	$pluginObject = $pm->GetPluginObject($filename);
 	if ($pm->PluginIsInstalled($filename)) {
 		$msg = _('Active');
@@ -218,15 +213,16 @@ foreach ($filelist as $filename) {
 			array($filename));
 		if ($res) {
 			if (db_numrows($res)>0) {
-				$users = " ";
-				$nb_users = db_numrows($res);
-				for($i=0;$i<$nb_users;$i++) {
-					$users .= db_result($res,$i,0) . " | ";
-				}
-				$users = substr($users,0,strlen($users) - 3); //remove the last |
 				// If there are too many users, replace the list with number of users
+				$nb_users = db_numrows($res);
 				if ($nb_users > 100) {
 					$users = util_make_link("/admin/userlist.php?usingplugin=$filename", '<b>'.sprintf(_("%d users"), $nb_users).'</b>');
+				} else {
+					$users = " ";
+					for($i = 0; $i < $nb_users; $i++) {
+						$users .= db_result($res, $i, 0) . " | ";
+					}
+					$users = substr($users, 0, strlen($users) - 3); //remove the last |
 				}
 			} else {
 				$users = _('None');
@@ -237,15 +233,16 @@ foreach ($filelist as $filename) {
 			array($filename));
 		if ($res) {
 			if (db_numrows($res)>0) {
-				$groups = " ";
 				$nb_groups = db_numrows($res);
-				for($i=0;$i<$nb_groups;$i++) {
-					$groups .= db_result($res,$i,0) . " | ";
-				}
-				$groups = substr($groups,0,strlen($groups) - 3); //remove the last |
 				// If there are too many projects, replace the list with number of projects
 				if ($nb_groups > 100) {
 					$groups = util_make_link("/admin/grouplist.php?usingplugin=$filename", '<b>'.sprintf(_("%d projects"), $nb_groups).'</b>');
+				} else {
+					$groups = " ";
+					for($i=0;$i<$nb_groups;$i++) {
+						$groups .= db_result($res,$i,0) . " | ";
+					}
+					$groups = substr($groups,0,strlen($groups) - 3); //remove the last |
 				}
 			} else {
 				$groups = _('None');
@@ -274,24 +271,18 @@ foreach ($filelist as $filename) {
 	if (isset($pluginObject->pkg_desc)) {
 		$description = $pluginObject->pkg_desc;
 	}
-	echo '<tr '. $HTML->boxGetAltRowStyle($j+1) .'>'.
-		'<td title="'. $description.' '.$title .'">'. $filename.'</td>'.
-		'<td class="'.$status.'" class="align-center">'. $msg .'</td>'.
-		'<td class="align-center">'. $link .'</td>'.
-		'<td class="align-left">'. $users .'</td>'.
-		'<td class="align-left">'. $groups .'</td>'.
-		'<td class="align-left">'. $adminlink .'</td></tr>'."\n";
-	$j++;
+	$cells = array();
+	$cells[] = array($filename, 'title' => $description.' '.$title);
+	$cells[] = array($msg, 'class' => 'align-center '.$status);
+	$cells[] = array($link, 'class' => 'align-center');
+	$cells[] = array($users, 'class' => 'align-left');
+	$cells[] = array($groups, 'class' => 'align-left');
+	$cells[] = array($adminlink, 'class' => 'align-left');
+	echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($key, true)), $cells);
 }
 
 echo $HTML->listTableBottom();
-
-?>
-
-</form>
-
-<?php
-
+echo $HTML->closeForm();
 site_admin_footer();
 
 // Local Variables:
