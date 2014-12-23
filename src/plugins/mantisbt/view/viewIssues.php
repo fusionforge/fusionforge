@@ -74,7 +74,6 @@ try {
 if (!isset($clientSOAP) && !isset($errorPage)) {
 	echo $HTML->warning_msg(_('No data to retrieve.'));
 } elseif (!isset($errorPage) && isset($clientSOAP)) {
-
 	echo html_ao('script', array('type' => 'text/javascript'));
 	?>
 	//<![CDATA[
@@ -204,7 +203,7 @@ if (!isset($clientSOAP) && !isset($errorPage)) {
 
 	// Creation de la pagination
 	echo '<div align="center">';
-	for($i=1; $i<=$nombreDePages; $i++)
+	for($i=1; $i < $nombreDePages; $i++)
 	{
 		if($i==$pageActuelle) //Si il s'agit de la page actuelle...
 		{
