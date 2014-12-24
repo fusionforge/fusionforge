@@ -1322,17 +1322,14 @@ function html_trove_limit_navigation_box($php_self, $querytotalcount, $trove_bro
 	$html_limit = sprintf(_(' Displaying %1$s per page. Projects sorted by alphabetical order.'), $trove_browselimit).'<br/>';
 
 	// display all the numbers
-	for ($i=1;$i<=ceil($querytotalcount/$trove_browselimit);$i++) {
+	for ($i = 1; $i <= ceil($querytotalcount/$trove_browselimit); $i++) {
 		$html_limit .= ' ';
-		if ($page != $i) {
-			$html_limit .= '<a href="'.$php_self;
-			$html_limit .= '?page='.$i;
-			$html_limit .= '">';
-		} else $html_limit .= '<strong>';
-		$html_limit .= '&lt;'.$i.'&gt;';
-		if ($page != $i) {
-			$html_limit .= '</a>';
-		} else $html_limit .= '</strong>';
+		$ahrefcontent = '&lt;'.$i.'&gt;';
+		if ($page == $i) {
+			$html_limit .= html_e('strong', array(), $ahrefcontent);
+		} else {
+			$html_limit .= util_make_link($php_self.'?page='.$i, $ahrefcontent);
+		}
 		$html_limit .= ' ';
 	}
 	return $html_limit;
