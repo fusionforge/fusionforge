@@ -2,7 +2,7 @@
 /**
  * Copyright (C) 2008-2009 Alcatel-Lucent
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2014 Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -50,6 +50,8 @@ if (!forge_get_config('use_project_full_list')) {
 	exit_disabled();
 }
 
+glboal $HTML;
+
 $HTML->header(array('title'=>_('Project List'),'pagename'=>'softwaremap'));
 $HTML->printSoftwareMapLinks();
 
@@ -76,7 +78,7 @@ if ($querytotalcount > $TROVE_BROWSELIMIT) {
 	$html_limit .= html_trove_limit_navigation_box($_SERVER['PHP_SELF'], $querytotalcount, $TROVE_BROWSELIMIT, $page);
 }
 
-print $html_limit."<hr />\n";
+echo $html_limit.html_e('hr');
 
 // #################################################################
 // print actual project listings
@@ -94,42 +96,43 @@ for ($i_proj=0;$i_proj<$querytotalcount;$i_proj++) {
 
 		// Embed RDFa description for /projects/PROJ_NAME
 		$proj_uri = util_make_url_g(strtolower($row_grp['unix_group_name']),$row_grp['group_id']);
-		print '<div typeof="doap:Project sioc:Space" about="'.$proj_uri.'">'."\n";
-		print '<span rel="planetforge:hosted_by" resource="'. util_make_url ('/') .'"></span>'."\n";
+		echo html_ao('div', array('typeof' => 'doap:Project sioc:Space', 'about' => $proj_uri));
+		echo html_e('span', array('rel' => 'planetforge:hosted_by', 'resource' => util_make_url('/')), '', false);
 
-		print '<table class="fullwidth">';
-		print '<tr class="top"><td colspan="2">';
-		print util_make_link_g(strtolower($row_grp['unix_group_name']),$row_grp['group_id'],'<strong>'
+		echo $HTML->listTableTop();
+		$cells = array();
+		$content = util_make_link_g(strtolower($row_grp['unix_group_name']),$row_grp['group_id'],'<strong>'
 			.'<span property="doap:name">'
 			.$row_grp['group_name']
 			.'</span>'
 			.'</strong>').' ';
-
 		if ($row_grp['short_description']) {
-			print "- "
+			$content .= '- '
 			. '<span property="doap:short_desc">'
 			. $row_grp['short_description']
 			. '</span>';
 		}
-
-		// extra description
-		print '</td></tr><tr class="top"><td>';
+		$cells[] = array($content, 'colspan' => 2);
+		echo $HTML->multiTableRow(array('class' => 'top'), $cells);
+		$cells = array();
+		$content = '';
 		// list all trove categories
 		if (forge_get_config('use_trove')) {
-			print trove_getcatlisting($row_grp['group_id'],0,1,1);
+			$content .= trove_getcatlisting($row_grp['group_id'], 0, 1, 1);
 		}
-		print '</td>';
-		print '<td class="bottom align-right"><br />'._('Register Date:').' <strong>'.date(_('Y-m-d H:i'),$row_grp['register_time']).'</strong></td>';
-		print '</tr>';
-		print '</table>';
-        print '</div>'; // /doap:Project
-		print '<hr />';
+		$cells[] = array($content, 'class' => 'top');
+		$cells[] = array(html_e('br')._('Register Date')._(': ').html_e('strong', array(), date(_('Y-m-d H:i'),$row_grp['register_time'])),
+				'class' => 'bottom align-right');
+		echo $HTML->multiTableRow(array('class' => 'top'), $cells);
+		echo $HTML->listTableBottom();
+		echo html_ac(html_ap() -1);
+		echo html_e('hr');
 	} // end if for row and range chacking
 }
 
 // print bottom navigation if there are more projects to display
 if ($querytotalcount > $TROVE_BROWSELIMIT) {
-	print $html_limit;
+	echo $html_limit;
 }
 
 $HTML->footer();
