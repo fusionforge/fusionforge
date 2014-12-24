@@ -160,7 +160,7 @@ if (count($data) == 0) {
 		});'."\n";
 	echo '//]]>';
 	echo html_ac(html_ap() -1);
-	echo html_e('div', array('id' => 'chart1'), '', false);
+	echo $HTML->html_chartid('chart1');
 	$tabletop = array(_('Folder'), _('Document'), _('User'), _('Date'));
 	$classth = array('', '', '', '');
 	echo $HTML->listTableTop($tabletop, false, 'sortable_docman_listfile', 'sortable', $classth);

@@ -193,7 +193,7 @@ function commitstime_graph($group_id, $chartid) {
 			plot'.$chartid.'.replot();
 		});'."\n";
 	echo '//]]></script>';
-	echo html_e('div', array('id' => 'chart'.$chartid), '', false);
+	echo $HTML->html_chartid($chartid);
 }
 
 function commits_graph($group_id, $days, $chartid) {
@@ -257,7 +257,7 @@ function commits_graph($group_id, $days, $chartid) {
 				plot'.$chartid.'.replot( { resetAxes: true } );
 			});'."\n";
 		echo '//]]></script>';
-		echo html_e('div', array('id' => 'chart'.$chartid), '', false);
+		echo $HTML->html_chartid($chartid);
 	} else {
 		echo $HTML->information(_('No commits during this period.'));
 	}
