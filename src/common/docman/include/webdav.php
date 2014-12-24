@@ -315,7 +315,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		if ($docid) {
 			$d = document_get_object($docid);
 			if (!$d->getReserved() && !$d->getLocked()) {
-				if ($d->update($d->getFileName(), $d->getFileType(), $tmpfile, $dgId, $d->getName(), _('Injected by WebDAV')._(': ').date(DATE_ATOM), $d->getStateID())) {
+				if ($d->update($d->getFileName(), $d->getFileType(), $tmpfile, $dgId, $d->getName(), $d->getDescription(), $d->getStateID())) {
 					@unlink($tmpfile);
 					return '200';
 				}
