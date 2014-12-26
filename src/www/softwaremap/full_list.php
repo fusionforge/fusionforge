@@ -50,7 +50,7 @@ if (!forge_get_config('use_project_full_list')) {
 	exit_disabled();
 }
 
-glboal $HTML;
+global $HTML;
 
 $HTML->header(array('title'=>_('Project List'),'pagename'=>'softwaremap'));
 $HTML->printSoftwareMapLinks();
