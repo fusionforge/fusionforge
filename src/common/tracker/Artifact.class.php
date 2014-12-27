@@ -1213,7 +1213,7 @@ class Artifact extends Error {
 	 * @return	bool	true on success / false on failure
 	 */
 	function assignToMe() {
-		if (!session_loggedin() || !($this->ArtifactType->userIsAdmin() || $this->ArtifactType->userIsTechnician())) {
+		if (!session_loggedin() || !(forge_check_perm('tracker', $this->ArtifactType->getID(), 'manager') || forge_check_perm('tracker', $this->ArtifactType->getID(), 'tech'))) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
