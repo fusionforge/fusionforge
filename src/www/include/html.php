@@ -1317,10 +1317,13 @@ function html_a_apply($scopy) {
  * @param	int	$page			current page number (starting at 1)
  * @return	string
  */
-function html_trove_limit_navigation_box($php_self, $querytotalcount, $trove_browselimit, $page) {
-
-	$html_limit = sprintf(_(' Displaying %1$s per page. Projects sorted by alphabetical order.'), $trove_browselimit).'<br/>';
-
+function html_trove_limit_navigation_box($php_self, $querytotalcount, $trove_browselimit, $page, $textintro = '') {
+	if ($textintro != '') {
+		$html_limit = sprintf(_(' Displaying %1$s per page. Projects sorted by alphabetical order.'), $trove_browselimit);
+	} else {
+		$html_limit = $textintro;
+	}
+	$html_limit .= html_e('br');
 	// display all the numbers
 	for ($i = 1; $i <= ceil($querytotalcount/$trove_browselimit); $i++) {
 		$html_limit .= ' ';
