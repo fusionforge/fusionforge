@@ -59,7 +59,7 @@ if (!$group_id) {
 	$allowedActions = array('get_trackers_fields');
 	
 	if( in_array($action, $allowedActions) ) {
-		include( $gfplugins.'taskboard/www/admin/ajax_'.$action.'.php' );
+		include( $gfplugins.'taskboard/common/actions/admin/ajax_'.$action.'.php' );
 	} else {
 		echo  json_encode( array( 'message' => 'OK' ) );
 	}

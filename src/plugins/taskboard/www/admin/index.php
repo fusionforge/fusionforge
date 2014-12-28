@@ -62,9 +62,9 @@ if (!$group_id) {
 	$action = getStringFromRequest('action');
 
 	if( in_array($action, $allowedActions) ) {
-		include( $gfplugins.'taskboard/www/admin/'.$action.'.php' );
+		include( $gfplugins.'taskboard/common/actions/admin/'.$action.'.php' );
 	} else {
-		include( $gfplugins.'taskboard/www/admin/ind.php' );
+		include( $gfplugins.'taskboard/common/actions/admin/ind.php' );
 	}
 }
 

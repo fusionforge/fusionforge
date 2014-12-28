@@ -59,7 +59,7 @@ if (!$group_id) {
 	$allowedActions = array('load_taskboard','drop_card','update','add');
 	
 	if( in_array($action, $allowedActions) ) {
-		include( $gfplugins.'taskboard/www/ajax_'.$action.'.php' );
+		include( $gfplugins.'taskboard/common/actions/ajax_'.$action.'.php' );
 	} else {
 		echo  json_encode( array( 'message' => 'OK' ) );
 	}
