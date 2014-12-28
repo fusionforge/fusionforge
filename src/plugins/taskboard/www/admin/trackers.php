@@ -67,7 +67,6 @@ for ($j = 0; $j < count($at_arr); $j++) {
 	}
 }
 
-
 if( $taskboard->getID() ) {
 	foreach( $taskboard->getUsedTrackersData() as $used_tracker_data ) {
 		$trackers_selected[] = $used_tracker_data['group_artifact_id'];
@@ -81,7 +80,16 @@ if( $taskboard->getID() ) {
 		$user_stories_sort_field = $taskboard->getUserStoriesSortField();
 		$first_column_by_default = $taskboard->getFirstColumnByDefault();
 	}
-	
+}
+
+if( count($trackers) > 0 ) {
+	if( count($trackers_selected) == 0 ) {
+		echo '<div id="messages" class="warning">'._('Choose at least one tracker for using with taskboard.').'</div>';
+	} else {
+		echo '<div id="messages" class="warning" style="display: none;"></div>';
+	}
+} else {
+	echo '<div class="error">'._('There are no any tracker having "resolution" field.').'</div>';
 }
 
 if (getStringFromRequest('post_changes')) {
@@ -106,16 +114,6 @@ if (getStringFromRequest('post_changes')) {
 	if( !$ret ) {
 		exit_error( $taskboard->getErrorMessage() );
 	}
-}
-
-if( count($at_arr) > 0 ) {
-	if( count($trackers_selected) == 0 ) {
-		echo '<div id="messages" class="warning">'._('Choose at least one tracker for using with taskboard.').'</div>';
-	} else {
-		echo '<div id="messages" class="warning" style="display: none;"></div>';
-	}
-} else {
-	echo '<div id="messages" class="error">'._('There are no any tracker having "resolution" field.').'</div>';
 }
 
 ?>

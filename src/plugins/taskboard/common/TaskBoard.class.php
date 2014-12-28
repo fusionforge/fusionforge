@@ -59,7 +59,7 @@ function &taskboard_init($group_id) {
 	$Group = group_get_object($data["group_id"]);
 
 	$Taskboard = new TaskBoard($Group,$data);
-	 return $Taskboard;
+	return $Taskboard;
 }
 
 
@@ -141,33 +141,28 @@ class TaskBoard extends Error {
 		//      data validation
 		//
 		if (!session_loggedin()) {
-			$this->setError('Must Be Logged In');
+			$this->setError(_('Must Be Logged In'));
 			return false;
 		}
 
 		if( count($trackers) == 0 ) {
-			$this->setError('Taskboard must be linked at least to one tracker');
+			$this->setError(_('Taskboard must be linked at least to one tracker'));
 			return false;	
 		}
 
 		$ret = true;
 		db_begin();
-	
-		$sql = sprintf(
-			"INSERT INTO plugin_taskboard(group_id, release_field_alias,  release_field_tracker, estimated_cost_field_alias, remaining_cost_field_alias, user_stories_group_artifact_id, user_stories_reference_field_alias,user_stories_sort_field_alias, first_column_by_default) VALUES(%d,%s,%s,%s,%s,%s,%s, %d)", 
-			$this->Group->getID(),
-			( $release_field_alias ? "'$release_field_alias'": 'NULL' ),
-			$release_field_tracker,
-			( $estimated_cost_field_alias ? "'$estimated_cost_field_alias'": 'NULL' ),
-			( $remaining_cost_field_alias ? "'$remaining_cost_field_alias'": 'NULL' ),
-			( $user_stories_tracker ? "$user_stories_tracker": 'NULL' ),
-			( $user_stories_reference_field ? "'$user_stories_reference_field'": 'NULL' ),
-			( $user_stories_sort_field ? "'$user_stories_sort_field'": 'NULL' ),
-			$first_column_by_default
-		) ;
-		$res = db_query( $sql );
+		$res = db_query_params(
+			'INSERT INTO plugin_taskboard(group_id, release_field_alias,  release_field_tracker, estimated_cost_field_alias, 
+				remaining_cost_field_alias, user_stories_group_artifact_id, user_stories_reference_field_alias,user_stories_sort_field_alias, 
+			first_column_by_default) VALUES($1,$2,$3,$4,$5,$6,$7, $8)',
+			array( $release_field_alias, $release_field_tracker, $estimated_cost_field_alias,
+				$remaining_cost_field_alias, ( $user_stories_tracker ? $user_stories_tracker: NULL ),
+				$user_stories_reference_field, $user_stories_sort_field, $first_column_by_default
+			)
+		);
 		if (!$res) {
-			$this->setError('Cannot create taskboard');
+			$this->setError(_('Cannot create taskboard'));
 			$ret = false;
  		} else {
 			$this->data_array['taskboard_id'] = db_insertid($res,'plugin_taskboard','taskboard_id');
@@ -210,33 +205,28 @@ class TaskBoard extends Error {
 		//      data validation
 		//
 		if (!session_loggedin()) {
-			$this->setError('Must Be Logged In');
+			$this->setError(_('Must Be Logged In'));
 			return false;
 		}
 
 		if( count($trackers) == 0 ) {
-			$thiss->setError('Taskboard must be linked at least to one tracker');
+			$this->setError(_('Taskboard must be linked at least to one tracker'));
 			return false;
 		}
 
 		$ret = true;
 		db_begin();
-
-		$sql = sprintf(
-			"UPDATE plugin_taskboard SET release_field_alias=%s, release_field_tracker=%d, estimated_cost_field_alias=%s, remaining_cost_field_alias=%s, user_stories_group_artifact_id=%s, user_stories_reference_field_alias=%s, user_stories_sort_field_alias=%s, first_column_by_default=%d WHERE taskboard_id=%d",
-			( $release_field_alias ? "'$release_field_alias'": 'NULL' ),
-			$release_field_tracker,
-			( $estimated_cost_field_alias ? "'$estimated_cost_field_alias'": 'NULL' ),
-			( $remaining_cost_field_alias ? "'$remaining_cost_field_alias'": 'NULL' ),
-			( $user_stories_tracker ? "$user_stories_tracker": 'NULL' ),
-			( $user_stories_reference_field ? "'$user_stories_reference_field'": 'NULL' ),
-			( $user_stories_sort_field ? "'$user_stories_sort_field'": 'NULL' ),
-			$first_column_by_default,
-			$this->getID()
-		) ;
-		$res = db_query( $sql );
+		$res = db_query_params(
+				'UPDATE plugin_taskboard SET release_field_alias=$1, release_field_tracker=$2, estimated_cost_field_alias=$3, remaining_cost_field_alias=$4, 
+				user_stories_group_artifact_id=$5, user_stories_reference_field_alias=$6, user_stories_sort_field_alias=$7, 
+				first_column_by_default=$8 WHERE taskboard_id=$9',
+			array( 
+					$release_field_alias, $release_field_tracker , $estimated_cost_field_alias, $remaining_cost_field_alias, 
+					( $user_stories_tracker ? $user_stories_tracker: NULL), $user_stories_reference_field, $user_stories_sort_field, 
+					$first_column_by_default, $this->getID() )
+		);
 		if (!$res) {
-			$this->setError('Cannot update taskboard');
+			$this->setError(_('Cannot update taskboard'));
 			$ret = false;
 		} else {
 			$this->fetchData();
@@ -617,6 +607,13 @@ class TaskBoard extends Error {
 		return $ret_stories;
 	}
 
+	/**
+	 *      getMappedTask - map artifact object into hash and add column and presentation specific fields
+	 *
+	 *      @param  Artifact     artifact instance
+	 *
+	 *      @return array
+	 */
 	function getMappedTask( $task ) {
 		static $_used_trackers_data = NULL;
 		static $_first_column_id = NULL;
@@ -677,7 +674,13 @@ class TaskBoard extends Error {
 		return $ret;
 	}
 
-
+	/**
+	 *      _mapTask - map artifact object into hash
+	 *
+	 *      @param  Artifact     artifact instance
+	 *
+	 *      @return array
+	 */
 	private function _mapTask( $task ) {
 		$ret = array();
 	
@@ -764,6 +767,13 @@ class TaskBoard extends Error {
 		return true;
 	}
 	
+	/**
+	 *      getExtraFieldValues - get hash of values, available for the given extra field
+	 *
+	 *      @param  string     extra field alias
+	 *
+	 *      @return array    hash element_name => element_id
+	 */
 	function getExtraFieldValues($extra_field_alias) {
 		$ret = array();
 	
