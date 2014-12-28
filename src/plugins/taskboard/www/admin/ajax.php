@@ -27,7 +27,7 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfconfig.'plugins/taskboard/config.php' ;
 
 global $gfplugins;
-require_once $gfplugins.'taskboard/www/include/TaskBoardHtml.class.php';
+require_once $gfplugins.'taskboard/common/include/TaskBoardHtml.class.php';
 
 $user = session_get_user(); // get the session user
 

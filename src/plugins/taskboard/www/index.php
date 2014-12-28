@@ -32,7 +32,7 @@ if( file_exists( $gfconfig.'plugins/taskboard/config.php' ) ) {
 }
 
 global $gfplugins;
-require_once $gfplugins.'taskboard/www/include/TaskBoardHtml.class.php';
+require_once $gfplugins.'taskboard/common/include/TaskBoardHtml.class.php';
 
 
 $user = session_get_user(); // get the session user
@@ -217,6 +217,8 @@ if( $taskboard->getReleaseField() ) {
 var gGroupId = <?php echo $group_id ?>;
 var gIsManager = <?php echo ( $taskboard->TrackersAdapter->isManager() ? 'true' : 'false' ) ?>;
 var gIsTechnician = <?php echo ( $taskboard->TrackersAdapter->isTechnician() ? 'true' : 'false' ) ?>;
+var gAjaxUrl = '<?php echo util_make_url ('/plugins/taskboard/ajax.php') ; ?>';
+
 bShowUserStories = <?php echo $taskboard->getUserStoriesTrackerID() ? 'true' : 'false' ?>;
 aUserStories = [];
 aPhases = []

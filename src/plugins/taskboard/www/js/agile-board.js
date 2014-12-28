@@ -20,7 +20,7 @@ function loadTaskboard( group_id ) {
 
 	jQuery.ajax({
 		type: 'POST',
-		url: '/plugins/taskboard/ajax.php',
+		url: gAjaxUrl,
 		dataType: 'json',
 		data : data, 
 		async: false
@@ -131,7 +131,7 @@ function setPhase( nUserStoryId, nTaskId, nTargetPhaseId ) {
 							// try to drop card 
 							jQuery.ajax({
 								type: 'POST',
-								url: '/plugins/taskboard/ajax.php',
+								url: gAjaxUrl,
 								dataType: 'json',
 								data : {
 									action   : 'drop_card',
@@ -306,7 +306,7 @@ function initEditable() {
 					var textField = this;
 					jQuery.ajax({
 						type: 'POST',
-						url: '/plugins/taskboard/ajax.php',
+						url: gAjaxUrl,
 						dataType: 'json',
 						data : {
 							action   : 'update',
@@ -368,7 +368,7 @@ function initEditable() {
 					var textField = this;
 					jQuery.ajax({
 						type: 'POST',
-						url: '/plugins/taskboard/ajax.php',
+						url: gAjaxUrl,
 						dataType: 'json',
 						data : {
 							action   : 'update',

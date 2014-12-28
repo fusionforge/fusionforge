@@ -237,7 +237,7 @@ jQuery(function($){
 	function loadUserStorySortFields() {
 		$.ajax({
 			type: 'POST',
-			url: '/plugins/taskboard/admin/ajax.php',
+			url: '<?php echo util_make_url('/plugins/taskboard/admin/ajax.php') ;?>',
 			dataType: 'json',
 			data : {
 				action : 'get_trackers_fields',
@@ -291,7 +291,7 @@ jQuery(function($){
 		
 		$.ajax({
 			type: 'POST',
-			url: '/plugins/taskboard/admin/ajax.php',
+			url: '<?php echo util_make_url('/plugins/taskboard/admin/ajax.php') ;?>',
 			dataType: 'json',
 			data : {
 				action : 'get_trackers_fields',
@@ -336,7 +336,7 @@ jQuery(function($){
 
 		$.ajax({
 			type: 'POST',
-			url: '/plugins/taskboard/admin/ajax.php',
+			url: '<?php echo util_make_url('/plugins/taskboard/admin/ajax.php') ;?>',
 			dataType: 'json',
 			data : {
 				action : 'get_trackers_fields',
