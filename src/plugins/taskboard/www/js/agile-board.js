@@ -66,7 +66,7 @@ function drawUserStories() {
 		if( bShowUserStories ) {
 			start=1;
 			l_sHtml += '<td class="agile-phase"><div class="agile-sticker-container">';
-			l_sHtml += '<div class="agile-sticker agile-sticker-user-story">';
+			l_sHtml += '<div class="agile-sticker agile-sticker-user-story" id="user-story-' + us.id + '">';
 			l_sHtml += '<div class="agile-sticker-header"><a href="' + us.url + '" target="_blank">' + us.id + '</a> : <span>' + us.title + "</span>";
 			l_sHtml += '<div style="float: right";>[<a href="" class="agile-toolbar-add-task" user_story_id="' +us.id+ '">+</a>]</div></div>\n';
 			l_sHtml += '<div class="agile-sticker-body">' + us.description + "</div>\n";
@@ -199,6 +199,8 @@ function initUserStory( oUserStory ) {
 			}
 		}
 	}
+	
+	jQuery('#user-story-' + oUserStory.id).data('task_id', oUserStory.id);
 }
 
 function drawUserStory( oUserStory ) {
@@ -325,7 +327,7 @@ function initEditable() {
 							loadTaskboard( gGroupId );
 						}
 
-						l_oTitle.html( jQuery(textField).val() );
+						l_oTitle.text( jQuery(textField).val() );
 					}).fail(function( jqxhr, textStatus, error ) {
 						var err = textStatus + ', ' + error;
 						alert(err);
@@ -387,7 +389,7 @@ function initEditable() {
 							loadTaskboard( gGroupId );
 						}
 
-						l_oDesc.text(jQuery(textField).val() );
+						l_oDesc.html(jQuery(textField).val().replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>') );
 					}).fail(function( jqxhr, textStatus, error ) {
 						var err = textStatus + ', ' + error;
 						alert(err);

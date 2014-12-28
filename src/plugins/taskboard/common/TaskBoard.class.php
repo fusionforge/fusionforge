@@ -554,7 +554,7 @@ class TaskBoard extends Error {
 			$stories[$story->getID()] = array(
 				'id' => $story->getID(),
 				'title' => $story->getSummary(),
-				'description' => $story->getDetails(),
+				'description' => str_replace( "\n", '<br>', $story->getDetails() ),
 				'priority' => $story->getPriority(),
 				'tasks' => array(),
 				'url' => $this->TrackersAdapter->getTaskUrl($story)
