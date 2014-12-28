@@ -218,6 +218,9 @@ var gGroupId = <?php echo $group_id ?>;
 var gIsManager = <?php echo ( $taskboard->TrackersAdapter->isManager() ? 'true' : 'false' ) ?>;
 var gIsTechnician = <?php echo ( $taskboard->TrackersAdapter->isTechnician() ? 'true' : 'false' ) ?>;
 var gAjaxUrl = '<?php echo util_make_url ('/plugins/taskboard/ajax.php') ; ?>';
+var gMessages = {
+	'notasks' : "<?php echo _('There no tasks found.') ?>"
+};
 
 bShowUserStories = <?php echo $taskboard->getUserStoriesTrackerID() ? 'true' : 'false' ?>;
 aUserStories = [];

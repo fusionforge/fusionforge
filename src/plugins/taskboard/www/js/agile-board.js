@@ -34,24 +34,31 @@ function loadTaskboard( group_id ) {
 		aUserStories = answer['user_stories'];
 		aPhases = answer['phases'];
 
-		jQuery( "#agile-board" ).append(
-			drawUserStories()
-		);
+		if( aUserStories.length ) {
+			jQuery( "#agile-board" ).append(
+				drawUserStories()
+			);
+	
+			jQuery( ".agile-toolbar-add-task" ).click( function(e) {
+				jQuery('#new-task-dialog input[name="user_story_id"]').val( jQuery(this).attr('user_story_id') );
+				jQuery('#new-task-dialog').dialog('open');
+				jQuery('.ui-widget-overlay').height( jQuery( document ).height() );
+				e.preventDefault();	
+			});
 
-		jQuery( ".agile-toolbar-add-task" ).click( function(e) {
-			jQuery('#new-task-dialog input[name="user_story_id"]').val( jQuery(this).attr('user_story_id') );
-			jQuery('#new-task-dialog').dialog('open');
-			jQuery('.ui-widget-overlay').height( jQuery( document ).height() );
-			e.preventDefault();	
-		});
-
-		for(var i=0 ; i<aUserStories.length ; i++) {
-			drawUserStory( aUserStories[i] );
-		};
-
-		initUserStories();
-
-		initEditable();
+		
+			for(var i=0 ; i<aUserStories.length ; i++) {
+				drawUserStory( aUserStories[i] );
+			};
+	
+			initUserStories();
+	
+			initEditable();
+		} else {
+			jQuery( "#agile-board" ).append(
+					'<tr><td colspan="'  + aPhases.length + '" style="text-align: center;">' + gMessages['notasks'] + '</td></tr>'
+				);
+		}
 	});
 }
 
