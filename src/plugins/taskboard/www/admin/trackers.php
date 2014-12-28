@@ -156,8 +156,8 @@ if(  count($at_arr) > 0 ) {
 
 ?>
 <table>
-	<tr><td><strong><?php echo _('Estimated cost field') ?></strong></td><td><select name="estimated_cost_field"><option option value=""><?php echo _('Not defined') ?></option></select></td></tr>
-	<tr><td><strong><?php echo _('Remaining cost field') ?></strong></td><td><select name="remaining_cost_field"><option option value=""><?php echo _('Not defined') ?></option></select></td></tr>
+	<tr><td><strong><?php echo _('Estimated effort field') ?></strong></td><td><select name="estimated_cost_field"><option option value=""><?php echo _('Not defined') ?></option></select></td></tr>
+	<tr><td><strong><?php echo _('Remaining effort field') ?></strong></td><td><select name="remaining_cost_field"><option option value=""><?php echo _('Not defined') ?></option></select></td></tr>
 </table>
 
 

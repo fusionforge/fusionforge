@@ -30,15 +30,16 @@
 }
 
 .agile-sticker-container {
-	padding: 10px;
+	padding: 4%;
 	float: left;
 	margin-left: auto;
 	margin-right: auto;
+	width: 92%;
 }
 
 .agile-sticker {
 	font-size: 10px;
-	width: 230px;
+	width: 100%;
 	/* border: solid #CCCCCC 1px; */
 	height: 130px;
 	-moz-box-shadow: 0 4px 8px rgba(0,0,0,0.5);
@@ -57,9 +58,8 @@
 
 .agile-sticker-body {
 	padding: 2px;
-	position: absolute;
 	height: 108px;
-	width: 226px;
+	width: 98%;
 }
 
 .agile-sticker-user-story {
