@@ -1,0 +1,124 @@
+#agile-board {
+	width: 99%;
+	border: 1px solid grey;
+	border-spacing: 1px;
+	border-collapse: separate;
+}
+
+
+.agile-user-story {
+/*	padding-bottom: 5px; */
+}
+
+
+.agile-phase {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.agile-phase-title {
+	text-align: center;
+	font-weight: bold;
+	background-color: #CCCCCC;
+	margin: 1px 1px 1px 10px;
+	width: 20%;
+}
+
+.agile-phase-body {
+/*	border-left: dotted #222222 1px; */
+}
+
+.agile-sticker-container {
+	padding: 10px;
+	float: left;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.agile-sticker {
+	font-size: 10px;
+	width: 230px;
+	/* border: solid #CCCCCC 1px; */
+	height: 130px;
+	-moz-box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+	-webkit-box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+	box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+}
+
+.agile-sticker-header, .agile-sticker-footer {
+	background-color: #AAAAAA;
+	padding: 2px;
+}
+
+.agile-sticker-header a {
+	font-weight: bold;
+}
+
+.agile-sticker-body {
+	padding: 2px;
+	position: absolute;
+	height: 108px;
+	width: 226px;
+}
+
+.agile-sticker-user-story {
+	background-color: #FFFF99;
+}
+
+.agile-sticker-task {
+	z-index: 999;
+	background-color: #FFFFCC;
+}
+
+.agile-sticker-task .agile-sticker-body, .agile-sticker-task .agile-sticker-header {
+/* 	background-color: #FFFACD; */
+}
+
+.agile-phase-hovered {
+	background-color: #EEEEEE;
+	opacity: 0.75;
+}
+
+#new-task-dialog div {
+	margin: 7px;
+}
+
+#new-task-dialog input, #new-task-dialog textarea {
+	width: 98%;
+}
+
+.ui-dialog {
+	z-index: 2000;
+	background-color: #ffffcc;
+	border: 1px solid grey;
+}
+
+.ui-dialog-titlebar {
+	display: none;
+}
+
+.ui-dialog-buttonpane {
+	padding: 2px 5px;
+	height: 30px;
+}
+
+.ui-dialog-buttonset {
+	float: right;
+}
+
+.ui-helper-clearfix:after {
+	clear: both;
+	display: block;
+}
+
+.ui-widget-overlay {
+	opacity: 0.5;
+	height: 100%;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	z-index: 1001;
+	background-color: #aaaaaa;
+}
