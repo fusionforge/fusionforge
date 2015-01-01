@@ -170,7 +170,10 @@ if( $taskboard->getReleaseField() ) {
 				$style .= 'background-color: ' . $title_bg_color . ';';
 			}
 		?>
-			<td class="agile-phase-title" style="<?php echo $style ?>"><?php echo $column->getTitle() ?></td>
+			<td class="agile-phase-title" style="<?php echo $style ?>">
+				<?php echo $column->getTitle() ?>&nbsp;&nbsp;
+				<input type="checkbox" class="agile-minimize-column" id="phase-title-<?php echo $column->getID() ?>" phase_id="<?php echo $column->getID() ?>">
+			</td>
 		<?php } ?>
 		</tr>
 	</thead>

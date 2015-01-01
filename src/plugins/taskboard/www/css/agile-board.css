@@ -29,6 +29,12 @@
 /*	border-left: dotted #222222 1px; */
 }
 
+.agile-phase-more {
+	font-weight: bold;
+	float: right;
+	padding: 0 3%;
+}
+
 .agile-sticker-container {
 	padding: 4%;
 	float: left;

@@ -54,6 +54,34 @@ function loadTaskboard( group_id ) {
 			initUserStories();
 	
 			initEditable();
+			
+			jQuery( ".agile-minimize-column" ).click( function() {
+				var phase_id = jQuery(this).attr('phase_id');
+				var phase_locator = '.agile-phase-' + phase_id;
+				var locator = phase_locator + ' div.agile-sticker-container';
+
+				if( jQuery(this).is(':checked') ) {
+					// hide column
+					jQuery(phase_locator).each( function(j,p) {
+						jQuery(p).children('div.agile-sticker-container').each( function(i,e) {
+							if( i > 0 ) {
+								jQuery(e).hide();
+								if( i==1 && jQuery(e).parent().children(phase_locator+'-more').length == 0 ) {
+									jQuery(e).parent().append('<div class="agile-phase-' + phase_id + '-more agile-phase-more">...</div>' );
+								}
+							}
+						})
+					});
+				} else {
+					// unhide column
+					jQuery(locator).each( function(i,e) {
+						jQuery(e).show();
+						if( i==0 && jQuery(e).parent().children(phase_locator+'-more').length > 0 ) {
+							jQuery(phase_locator+'-more').remove();
+						}
+					});
+				}
+			});
 		} else {
 			jQuery( "#agile-board" ).append(
 					'<tr><td colspan="'  + aPhases.length + '" style="text-align: center;">' + gMessages['notasks'] + '</td></tr>'
@@ -87,7 +115,7 @@ function drawUserStories() {
 			if( ph.background ) {
 				style = ' style="background-color:' + ph.background + ';"';
 			}
-			l_sHtml += '<td id="' + ph.id + '-' + us.id + '" class="agile-phase"' + style + '>';
+			l_sHtml += '<td id="' + ph.id + '-' + us.id + '" class="agile-phase agile-phase-' + ph.id + '"' + style + '>';
 			l_sHtml += "</td>\n";
 		}
 
