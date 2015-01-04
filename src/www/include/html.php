@@ -381,7 +381,7 @@ function html_get_tooltip_description($element_name) {
 	switch ($element_name) {
 		case 'assigned_to':
 			return _('This drop-down box represents the person to which a tracker item is assigned.');
-		case 'status_id':
+		case 'status_id_tracker':
 			return _('This drop-down box represents the current status of a tracker item.')
 				.'<br /><br />'
 				._('You can set the status to “Pending” if you are waiting for a response from the tracker item author.  When the author responds the status is automatically reset to that of “Open”. Otherwise, if the author does not respond with an admin-defined amount of time (default is 14 days) then the item is given a status of “Deleted”.');
