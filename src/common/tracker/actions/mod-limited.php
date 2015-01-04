@@ -148,7 +148,7 @@ if (session_loggedin()) {
 	<tr>
 		<td>
 			<strong><?php echo _('State')._(':'); ?></strong><br />
-			<span id="tracker-status_id" title="<?php echo util_html_secure(html_get_tooltip_description('status_id')) ?>">
+			<span id="tracker-status_id" title="<?php echo util_html_secure(html_get_tooltip_description('status_id_tracker')) ?>">
 			<?php echo $ath->statusBox ('status_id', $ah->getStatusID() ); ?>
 			<span>
 		</td>
