@@ -48,11 +48,15 @@ export DEB_BUILD_OPTIONS="parallel=$(nproc) nocheck"
 # Create a working directory for sources
 mkdir /usr/src/backports/sources/
 cd /usr/src/backports/sources/
+# Remove old extracted source dirs so that globbing new ones
+# will match precisely the just downloaded version only
+rm -rf apr-*/ apache2-*/ mpm-itk-*/ libgd2-*/ php5-*/ dh-php5-*/ \
+    php-json-*/ xdebug-*/ subversion-*/ mod-wsgi-*/
 
 # Dependencies to add in our local repo
 apt-get source apr/jessie
 (
-    cd apr-1.5.1/
+    cd apr-*/
     dch --bpo "No changes."
     sed -i '1 s/~bpo/~ff/' debian/changelog
     pdebuild --debbuildopts '-v1.4.6-3+deb7u1' \
@@ -64,7 +68,7 @@ apt-get source apr/jessie
 )
 apt-get source apr-util/jessie
 (
-    cd apr-util-1.5.4/
+    cd apr-util-*/
     dch --bpo "No changes."
     sed -i '1 s/~bpo/~ff/' debian/changelog
     pdebuild --debbuildopts '-v1.4.1-3' \
@@ -78,7 +82,7 @@ apt-get source apr-util/jessie
 # Apache 2.4 itself
 apt-get source apache2/jessie
 (
-    cd apache2-2.4.10/
+    cd apache2-*/
     dch --bpo "Note: depends on backported libapr."
     dch -a "Don't support symlink<->dir changes to avoid dpkg >= 1.17"
     sed -i -e '/^\(dir_to_symlink\|symlink_to_dir\)/d' debian/*.maintscript
@@ -95,7 +99,7 @@ apt-get source apache2/jessie
 # mpm_itk - separate package in Jessie
 apt-get source mpm-itk/jessie
 (
-    cd mpm-itk-2.4.7-02/  # even for 2.4.10-8
+    cd mpm-itk-*/
     dch --bpo "Note: compiled against Apache 2.4.10"
     sed -i '1 s/~bpo/~ff/' debian/changelog
     pdebuild --debbuildopts '-v0' \
@@ -111,7 +115,7 @@ apt-get source mpm-itk/jessie
 # PHP 5.6 dependency
 apt-get source libgd2/jessie
 (
-    cd libgd2-2.1.0/
+    cd libgd2-*/
     dch --bpo "No changes."
     sed -i '1 s/~bpo/~ff/' debian/changelog
     pdebuild --debbuildopts '-v2.0.36~rc1~dfsg-6.1' \
@@ -125,7 +129,7 @@ apt-get source libgd2/jessie
 # PHP 5.6 for Apache 2.4
 apt-get source php5/jessie
 (
-    cd php5-5.6.4+dfsg/
+    cd php5-*/
     dch --bpo "Note: libapache2-mod-php5 rebuilt against Apache 2.4.10"
     sed -i '1 s/~bpo/~ff/' debian/changelog
     pdebuild --debbuildopts '-v5.4.4-14+deb7u14' \
@@ -139,7 +143,7 @@ apt-get source php5/jessie
 # Run-time dependency for libapache2-mod-php5
 apt-get source dh-php5/jessie
 (
-    cd dh-php5-0.2/
+    cd dh-php5-*/
     dch --bpo "No changes."
     sed -i '1 s/~bpo/~ff/' debian/changelog
     pdebuild --debbuildopts '-v0' \
@@ -151,7 +155,7 @@ apt-get source dh-php5/jessie
 )
 apt-get source php-json/jessie
 (
-    cd php-json-1.3.6/
+    cd php-json-*/
     dch --bpo "No changes."
     pdebuild --debbuildopts '-v0~0' \
         --use-pdebuild-internal --buildresult /usr/src/backports/wheezy/ \
@@ -164,7 +168,7 @@ apt-get source php-json/jessie
 # PHPUnit indirect dependency - rebuilt against PHP 5.6
 apt-get source xdebug/jessie
 (
-    cd xdebug-2.2.5/
+    cd xdebug-*/
     dch --bpo "Note: rebuilt against PHP 5.6."
     sed -i '1 s/~bpo/~ff/' debian/changelog
     pdebuild --debbuildopts '-v2.2.1-2' \
@@ -180,7 +184,7 @@ apt-get source xdebug/jessie
 # mod_dav_svn for Apache 2.4
 apt-get source subversion/jessie
 (
-    cd subversion-1.8.10/
+    cd subversion-*/
     sed -i -e 's/db5.3/db5.1/' debian/control
     dch --bpo "Use libdb5.1 instead of 5.3."
     patch -p1 <<'EOF'
@@ -218,7 +222,7 @@ EOF
 # mod_wsgi for Apache 2.4
 apt-get source mod-wsgi/jessie
 (
-    cd mod-wsgi-4.3.0/
+    cd mod-wsgi-*/
     dch --bpo "Note: compiled against Apache 2.4.10"
     sed -i '1 s/~bpo/~ff/' debian/changelog
     pdebuild --debbuildopts '-v3.3-4+deb7u1' \
