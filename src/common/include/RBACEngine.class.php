@@ -517,6 +517,38 @@ function forge_check_global_perm_for_user ($user, $section, $action = NULL) {
 	return $engine->isGlobalActionAllowedForUser($user, $section, $action);
 }
 
+function forge_cache_external_roles($group) {
+	global $used_external_roles, $unused_external_roles;
+
+	$used_external_roles = array();
+	$unused_external_roles = array();
+	$group_id = $group->getID();
+
+	foreach (RBACEngine::getInstance()->getPublicRoles() as $r) {
+		$grs = $r->getLinkedProjects();
+		$seen = false;
+		foreach ($grs as $g) {
+			if ($g->getID() == $group_id) {
+				$seen = true;
+				break;
+			}
+		}
+		if (!$seen) {
+			$unused_external_roles[] = $r;
+		}
+	}
+
+	foreach ($group->getRoles() as $r) {
+		if ($r->getHomeProject() == NULL ||
+		    $r->getHomeProject()->getID() != $group_id) {
+			$used_external_roles[] = $r;
+		}
+	}
+
+	sortRoleList($used_external_roles, $group, 'composite');
+	sortRoleList($unused_external_roles, $group, 'composite');
+}
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"
