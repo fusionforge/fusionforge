@@ -220,9 +220,13 @@ class TaskBoardBasicAdapter {
 				if( $release_field_alias ) {
 					$extra_field_id = $fields[$release_field_alias];
 					
-					$elements = $this->getExtraFieldValues($tracker_id, $release_field_alias);
-					if( array_key_exists($release_value, $elements) ) {
-						$extra_fields[$extra_field_id] = $elements[$release_value];
+					if( $release_value == 100) {
+						$extra_fields[$extra_field_id] = 100;
+					} else {
+						$elements = $this->getExtraFieldValues($tracker_id, $release_field_alias);
+						if( array_key_exists($release_value, $elements) ) {
+							$extra_fields[$extra_field_id] = $elements[$release_value];
+						}
 					}
 				}
 			}

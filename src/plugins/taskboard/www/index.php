@@ -130,7 +130,8 @@ if( $taskboard->getReleaseField() ) {
 			$release_name_arr[] = $release_name;
 		}
 		
-		$release_box=html_build_select_box_from_arrays ($release_id_arr,$release_name_arr,'_release',$current_release,false);
+		//$release_box=html_build_select_box_from_arrays ($release_id_arr,$release_name_arr,'_release',$current_release,true,_('Unplanned'));
+		$release_box=html_build_select_box_from_arrays ($release_id_arr,$release_name_arr,'_release',$current_release, true);
 	}
 }
 ?>
@@ -143,7 +144,7 @@ if( $taskboard->getReleaseField() ) {
 		<?php if( $release_box ) { ?>
 
 				<td>
-					<?php echo _('Sprint/Release').':&nbsp;'. $release_box ; ?>
+					<?php echo _('Release').':&nbsp;'. $release_box ; ?>
 				</td>
 		<?php } ?>
 				<td>
