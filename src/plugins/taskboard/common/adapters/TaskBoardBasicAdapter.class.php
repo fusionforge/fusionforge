@@ -108,9 +108,13 @@ class TaskBoardBasicAdapter {
 				if( array_key_exists($release_field_alias, $fields) ) {
 					$extra_field_id = $fields[$release_field_alias];
 				
-					$elements = $this->getExtraFieldValues($at->getID(), $release_field_alias);
-					if( array_key_exists($release_value, $elements) ) {
-						$extra_fields[$extra_field_id] = $elements[$release_value];
+					if( $release_value == 100) {
+						$extra_fields[$extra_field_id] = 100;
+					} else {
+						$elements = $this->getExtraFieldValues($at->getID(), $release_field_alias);
+						if( array_key_exists($release_value, $elements) ) {
+							$extra_fields[$extra_field_id] = $elements[$release_value];
+						}
 					}
 				}
 			}
@@ -270,7 +274,7 @@ class TaskBoardBasicAdapter {
 	 *
 	 * @return   string     error message in case of fail
 	 */
-	function createTask( $tracker_id, $title, $description, $user_story_id=null, $release_value=NULL ) {
+	function createTask( $tracker_id, $title, $description, $user_story_id=null, $release_value=NULL, $assigned_to=NULL ) {
 		$tracker = $this->getTasksTracker($tracker_id);
 		if( $tracker ) {
 			$artifact = new Artifact( $tracker );
@@ -298,7 +302,7 @@ class TaskBoardBasicAdapter {
 				}
 			}
 
-			$ret = $artifact->create($title,$description, null, null, $extra_fields);
+			$ret = $artifact->create($title,$description, $assigned_to, null, $extra_fields);
 
 			if( !$ret ) {
 				return $artifact->getErrorMessage();

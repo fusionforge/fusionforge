@@ -259,7 +259,8 @@ jQuery( document ).ready(function( $ ) {
 							user_story_id : jQuery('#user_story_id').val(), 
 							title : jQuery('#tracker-summary').val(),
 							desc : jQuery('#tracker-description').val(),
-							release : jQuery('select[name="_release"]').val()
+							release : jQuery('select[name="_release"]').val(),
+							assigned_to :  jQuery('select[name="_assigned_to"]').val()
 						},
 						async: true
 					}).done(function( answer ) {

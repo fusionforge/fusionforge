@@ -11,7 +11,7 @@
 - DONE Releases are based either on US or on tasks
 - View - indicators - progress by tasks number
 - View - indicators - progress by tasks cost (if efforts fields are configured)
-- Admin - releases management
+- DONE Admin - releases management
 - View - auto ref rate support
 - Admin - auto ref rate support
 - Admin - adapters - coloring support
