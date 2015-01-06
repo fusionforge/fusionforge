@@ -125,7 +125,7 @@ apt-get source libgd2/jessie
 # PHP 5.6 for Apache 2.4
 apt-get source php5/jessie
 (
-    cd php5-5.6.2+dfsg/
+    cd php5-5.6.4+dfsg/
     dch --bpo "Note: libapache2-mod-php5 rebuilt against Apache 2.4.10"
     sed -i '1 s/~bpo/~ff/' debian/changelog
     pdebuild --debbuildopts '-v5.4.4-14+deb7u14' \
