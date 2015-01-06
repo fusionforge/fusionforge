@@ -61,14 +61,14 @@ if( $element_id && $start_date_unixtime && $end_date_unixtime ) {
 		session_redirect( '/plugins/taskboard/releases/?group_id='.$group_id );
 	} else {
 		db_rollback();
-		exit_error( $column->getErrorMessage() );
+		exit_error( $release->getErrorMessage() );
 	}
 } else {
 
 	$taskboard->header(
 		array(
 			'title'=>'Taskboard for '.$group->getPublicName().' : '. _('Releases').' : '._('Add release') ,
-			'pagename'=>_('Column configuration'),
+			'pagename'=>_('Releases').' : '._('Add release'),
 			'sectionvals'=>array(group_getname($group_id)),
 			'group'=>$group_id
 		)

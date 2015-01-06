@@ -57,7 +57,7 @@
 	foreach( $taskboardReleases as $release ) {
 		echo '
 		<tr valign="middle">
- 			<td>'.util_make_link ('/plugins/taskboard/admin/?group_id='.$group_id.'&amp;action=edit_release&amp;release_id='.$release->getID(),
+ 			<td>'.util_make_link ('/plugins/taskboard/releases/?group_id='.$group_id.'&amp;action=edit_release&amp;release_id='.$release->getID(),
 						htmlspecialchars( $release->getTitle() ) ).'</a></td>
 			<td>'.date("Y-m-d", $release->getStartDate()).'</td>
 			<td>'.date("Y-m-d", $release->getEndDate()).'</td>
