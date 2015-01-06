@@ -15,9 +15,6 @@ cat <<'EOF' > /usr/src/backports/wheezy/D70results
 # Make sure local repo is updated before building
 cd /usr/src/backports/wheezy/
 dpkg-scanpackages . /dev/null > Packages
-# It would be better to sign but that's complex in the context of pbuilder
-# Also 'pbuilder --allow-untrusted' only works with the default satisfydepends
-echo 'APT::Get::AllowUnauthenticated "true";' > /etc/apt/apt.conf.d/99AllowUnauthenticated
 apt-get update
 EOF
 chmod 755 /usr/src/backports/wheezy/D70results
@@ -26,7 +23,7 @@ chmod 755 /usr/src/backports/wheezy/D70results
 if [ ! -e /var/cache/pbuilder/base-wheezy-bpo.tar.gz ]; then
     sudo pbuilder --create --basetgz /var/cache/pbuilder/base-wheezy-bpo.tar.gz \
       --distribution wheezy \
-      --othermirror "deb http://security.debian.org/ wheezy/updates main|deb http://ftp.fr.debian.org/debian wheezy-backports main|deb file:///usr/src/backports/wheezy ./" \
+      --othermirror "deb http://security.debian.org/ wheezy/updates main|deb http://ftp.fr.debian.org/debian wheezy-backports main|deb [trusted=yes] file:///usr/src/backports/wheezy ./" \
       --bindmounts /usr/src/backports/wheezy/
 fi
 # Update regularly:
@@ -241,7 +238,6 @@ apt-get source mod-wsgi/jessie
 #{{{
 #sudo pbuilder --login --basetgz /var/cache/pbuilder/base-wheezy-bpo.tar.gz --bindmounts /usr/src/backports
 #apt-get update
-#echo 'APT::Get::AllowUnauthenticated "true";' > /etc/apt/apt.conf.d/99AllowUnauthenticated
 #cd /usr/src/backports/sources/apache2-2.4.10/
 #apt-get install pbuilder devscripts fakeroot
 #/usr/lib/pbuilder/pbuilder-satisfydepends-experimental
