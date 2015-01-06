@@ -46,9 +46,19 @@ class TaskBoardHtml extends TaskBoard {
 			$labels[] = _("Releases");
 			$links[]  = '/plugins/taskboard/releases/index.php?group_id='.$group_id;
 		}
+		
+		if (session_loggedin()) {
+			if ( forge_check_perm('project_admin', $this->Group->getID() )) {
+				$release_id = getIntFromRequest('release_id','');
+				if( $release_id ) {
+					$labels[] = _('Delete Release');
+					$links[]  = '/plugins/taskboard/releases/index.php?group_id='.$group_id.'&action=delete_release&release_id='.$release_id;
+				}
+			}
+		}
 
 		if (session_loggedin()) {
-			if (forge_check_perm ('tracker', $this->getID(), 'manager')) {
+			if ( forge_check_perm('project_admin', $this->Group->getID() )) {
 				$labels[] = _('Administration');
 				$links[]  = '/plugins/taskboard/admin/index.php?group_id='.$group_id;
 
@@ -57,7 +67,7 @@ class TaskBoardHtml extends TaskBoard {
 					$labels[] = _('Configure Columns');
 					$links[]  = '/plugins/taskboard/admin/index.php?group_id='.$group_id.'&action=columns';
 
-					$column_id = getStringFromRequest('column_id','');
+					$column_id = getIntFromRequest('column_id','');
 					if( $column_id ) {
 						$labels[] = _('Delete Column');
 						$links[]  = '/plugins/taskboard/admin/index.php?group_id='.$group_id.'&action=delete_column&column_id='.$column_id;

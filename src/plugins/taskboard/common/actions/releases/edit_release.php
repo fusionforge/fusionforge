@@ -25,12 +25,18 @@ session_require_perm ('project_admin', $group_id) ;
 $start_date_unixtime = NULL;
 $end_date_unixtime = NULL;
 $error_msg = '';
-$element_id = getIntFromRequest('_release', NULL);
-$start_date = getStringFromRequest('start_date','');
-$end_date = getStringFromRequest('end_date','');
-$goals = getStringFromRequest('goals','');
-$page_url = getStringFromRequest('page_url','');
+$release_id = getIntFromRequest('release_id', NULL);
+
+$release = new TaskBoardRelease( $taskboard, $release_id );
+
 if (getStringFromRequest('post_changes')) {
+	$element_id = getIntFromRequest('_release','');
+	$start_date = getStringFromRequest('start_date','');
+	$end_date = getStringFromRequest('end_date','');
+	$goals = getStringFromRequest('goals','');
+	$page_url = getStringFromRequest('page_url','');
+	
+	
 	$start_date_unixtime = strtotime($start_date);
 	$end_date_unixtime = strtotime($end_date);
 	
@@ -39,26 +45,20 @@ if (getStringFromRequest('post_changes')) {
 		$end_date_unixtime = NULL;
 		$error_msg = _('End date should be later then the start date');
 	}
+} else {
+	$element_id = $release->getElementID();
+	$start_date = date( 'Y-m-d', $release->getStartDate() );
+	$end_date = date( 'Y-m-d', $release->getEndDate() );
+	$goals = $release->getGoals();
+	$page_url = $release->getPageUrl();
 }
 
 if( $element_id && $start_date_unixtime && $end_date_unixtime ) {
 	db_begin();
 
-	$release = new TaskBoardRelease( 
-		$taskboard, 
-		array(
-			'taskboard_id' => $taskboard->getID(),
-			'element_id' => $element_id,
-			'start_date' => $start_date_unixtime,
-			'end_date' => $end_date_unixtime,
-			'goals' => $goals,
-			'page_url' => $page_url
-		)
-	);
-
-	if( $release->create($element_id, $start_date_unixtime, $end_date_unixtime, $goals, $page_url) ) {
+	if( $release->update($element_id, $start_date_unixtime, $end_date_unixtime, $goals, $page_url) ) {
 		db_commit();
-		$feedback .= _('Succefully Created');
+		$feedback .= _('Succefully Updated');
 		session_redirect( '/plugins/taskboard/releases/?group_id='.$group_id );
 	} else {
 		db_rollback();
@@ -68,8 +68,8 @@ if( $element_id && $start_date_unixtime && $end_date_unixtime ) {
 
 	$taskboard->header(
 		array(
-			'title'=>'Taskboard for '.$group->getPublicName().' : '. _('Releases').' : '._('Add release') ,
-			'pagename'=>_('Releases').' : '._('Add release'),
+			'title'=>'Taskboard for '.$group->getPublicName().' : '. _('Releases').' : '._('Edit release') ,
+			'pagename'=>_('Releases').' : '._('Edit release'),
 			'sectionvals'=>array(group_getname($group_id)),
 			'group'=>$group_id
 		)
@@ -104,7 +104,7 @@ if( $element_id && $start_date_unixtime && $end_date_unixtime ) {
 	$release_name_arr = array();
 	foreach( $release_values as $release_name => $release_id ) {
 		// show only unused releases
-		if( !in_array($release_id, $used_release_elements ) ) {
+		if( !in_array($release_id, $used_release_elements ) || $release_id == $element_id ) {
 			$release_id_arr[] = $release_id;
 			$release_name_arr[] = $release_name;
 		}
@@ -113,10 +113,11 @@ if( $element_id && $start_date_unixtime && $end_date_unixtime ) {
 	$release_box=html_build_select_box_from_arrays ($release_id_arr,$release_name_arr,'_release',$element_id,false);
 ?>
 
-<form action="<?php echo util_make_url( '/plugins/taskboard/releases/?group_id='.$group_id.'&amp;action=add_release') ?>" method="post">
+<form action="<?php echo util_make_url( '/plugins/taskboard/releases/?group_id='.$group_id.'&amp;action=edit_release') ?>" method="post">
 <input type="hidden" name="post_changes" value="y">
+<input type="hidden" name="release_id" value="<?php echo $release->getID() ?>">
 
-<h2><?php echo _('Add release')?>:</h2>
+<h2><?php echo _('Edit release')?>:</h2>
 <table>
 	<tr><td><strong><?php echo _('Release') ?></strong>&nbsp;<?php echo utils_requiredField(); ?></td><td><?php echo $release_box; ?></td></tr>
 	<tr><td><strong><?php echo _('Start date') ?></strong>&nbsp;<?php echo utils_requiredField(); ?></td><td><input type="text" name="start_date" value="<?php echo $start_date ?>"></td></tr>

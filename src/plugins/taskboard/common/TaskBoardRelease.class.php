@@ -129,7 +129,7 @@ class TaskBoardRelease extends Error {
 
 	function delete(){
 		$res = db_query_params (
-			'DELETE FROM plugin_taskboard_releases_snapshots WHERE taskboard_release_i=$1',
+			'DELETE FROM plugin_taskboard_releases_snapshots WHERE taskboard_release_id=$1',
 			array ( $this->getID() )
 		) ;
 
@@ -138,7 +138,7 @@ class TaskBoardRelease extends Error {
 		}
 
 		$res = db_query_params (
-			'DELETE FROM plugin_taskboard_releases WHERE taskboard_column_id=$1',
+			'DELETE FROM plugin_taskboard_releases WHERE taskboard_release_id=$1',
 			array ( $this->getID() )
 		) ;
 		if (!$res) {

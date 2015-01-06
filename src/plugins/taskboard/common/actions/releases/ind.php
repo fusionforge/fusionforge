@@ -55,10 +55,17 @@
 	
 	
 	foreach( $taskboardReleases as $release ) {
+		$release_title = htmlspecialchars( $release->getTitle() );
+		if (session_loggedin() && forge_check_perm('project_admin', $taskboard->Group->getID() ) ) {
+			$release_title = util_make_link (
+				'/plugins/taskboard/releases/?group_id='.$group_id.'&amp;action=edit_release&amp;release_id='.$release->getID(),
+				 $release_title
+			);
+		}
+
 		echo '
 		<tr valign="middle">
- 			<td>'.util_make_link ('/plugins/taskboard/releases/?group_id='.$group_id.'&amp;action=edit_release&amp;release_id='.$release->getID(),
-						htmlspecialchars( $release->getTitle() ) ).'</a></td>
+ 			<td>'.$release_title.'</td>
 			<td>'.date("Y-m-d", $release->getStartDate()).'</td>
 			<td>'.date("Y-m-d", $release->getEndDate()).'</td>
 			<td>'.htmlspecialchars( $release->getGoals() ).'</td>

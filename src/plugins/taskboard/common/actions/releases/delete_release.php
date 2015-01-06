@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
+ * Copyright (C) 2015 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
  *
  * This file is part of FusionForge.
  *
@@ -22,26 +22,25 @@
 
 session_require_perm ('project_admin', $group_id) ;
 
-$column_id = getStringFromRequest('column_id','');
+$release_id = getStringFromRequest('release_id','');
 $confirmed = getStringFromRequest('confirmed','');
-$column = &taskboard_column_get_object($column_id);
+$release = new TaskBoardRelease( $taskboard, $release_id );
 
 if( $confirmed ) {
 	db_begin();
-	if( $column->delete() ) {
+	if( $release->delete() ) {
 		db_commit();
 		$feedback.=_('Successfully Removed');
 	} else {
 		db_rollback();
 	}
 
-	$action = 'columns';
-	include( $gfplugins.'taskboard/www/admin/columns.php' );
+	session_redirect( '/plugins/taskboard/releases/?group_id='.$group_id );
 } else {
 	$taskboard->header(
 		array(
-			'title'=>'Taskboard for '.$group->getPublicName().' : '._('Administration').' : '._('Column configuration') ,
-			'pagename'=>_('Column configuration'),
+			'title'=>'Taskboard for '.$group->getPublicName().' : '._('Release').' : '._('Delete release') ,
+			'pagename'=>_('Release').' : '._('Delete release'),
 			'sectionvals'=>array(group_getname($group_id)),
 			'group'=>$group_id
 		)
@@ -54,12 +53,12 @@ if( $confirmed ) {
 	}
 
 ?>
-	<form action="<?php echo util_make_url ('/plugins/taskboard/admin/?group_id='.$group_id.'&amp;action=delete_column') ?>" method="post">
-	<input type="hidden" name="column_id" value="<?php echo $column_id ?>">
+	<form action="<?php echo util_make_url ('/plugins/taskboard/releases/?group_id='.$group_id.'&amp;action=delete_release') ?>" method="post">
+	<input type="hidden" name="release_id" value="<?php echo $release_id ?>">
 
-	<h1><?php echo _('Column') ." '".$column->getTitle() ."'"; ?></h1>
+	<h1><?php echo _('Release') ." '".$release->getTitle() ."'"; ?></h1>
 	<div>
-	<?php echo _('You are about to permanently and irretrievably delete this column! ') ?>
+	<?php echo _('You are about to permanently and irretrievably delete this release with all indicators! ') ?>
 	</div>
 	<div>
 	<input type="checkbox" value="y" name="confirmed"> <?php echo _("I'm Sure") ?>
