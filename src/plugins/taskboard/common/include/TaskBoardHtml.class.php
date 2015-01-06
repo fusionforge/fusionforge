@@ -41,6 +41,11 @@ class TaskBoardHtml extends TaskBoard {
 
 		$labels[] = _("View Taskboard");
 		$links[]  = '/plugins/taskboard/index.php?group_id='.$group_id;
+		
+		if( $this->getReleaseField() ) {
+			$labels[] = _("Releases");
+			$links[]  = '/plugins/taskboard/releases/index.php?group_id='.$group_id;
+		}
 
 		if (session_loggedin()) {
 			if (forge_check_perm ('tracker', $this->getID(), 'manager')) {

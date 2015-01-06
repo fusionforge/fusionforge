@@ -38,7 +38,7 @@ if( $confirmed ) {
 } else {
 	$taskboard->header(
 		array(
-			'title'=>'Taskboard for '.$group->getPublicName().' : Administration : Column configuration' ,
+			'title'=>'Taskboard for '.$group->getPublicName().' : '._('Administration').' : '._('Column configuration') ,
 			'pagename'=>_('Column configuration'),
 			'sectionvals'=>array(group_getname($group_id)),
 			'group'=>$group_id
@@ -52,7 +52,7 @@ if( $confirmed ) {
 	}
 
 ?>
-	<form action="/plugins/taskboard/admin/?group_id=<?php echo $group_id ?>&amp;action=delete_column" method="post">
+	<form action="<?php echo util_make_url ('/plugins/taskboard/admin/?group_id='.$group_id.'&amp;action=delete_column') ?>" method="post">
 	<input type="hidden" name="column_id" value="<?php echo $column_id ?>">
 
 	<h1><?php echo _('Column') ." '".$column->getTitle() ."'"; ?></h1>

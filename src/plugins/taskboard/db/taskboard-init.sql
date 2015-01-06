@@ -55,3 +55,26 @@ CREATE TABLE plugin_taskboard_columns_sources (
     autoref integer NULL
 );
 -- ALTER TABLE plugin_taskboard_columns_sources OWNER TO gforge;
+
+CREATE TABLE plugin_taskboard_releases (
+    taskboard_release_id SERIAL primary key,
+    taskboard_id integer REFERENCES plugin_taskboard(taskboard_id) ON DELETE CASCADE,
+    element_id integer NOT NULL,
+    start_date integer NOT NULL,
+    end_date integer NOT NULL,
+    goals TEXT,
+    page_url TEXT
+);
+
+CREATE TABLE plugin_taskboard_releases_snapshots (
+    taskboard_release_snapshot_id SERIAL primary key,
+    taskboard_release_id integer REFERENCES plugin_taskboard_releases(taskboard_release_id) ON DELETE CASCADE,
+    snapshot_date integer NOT NULL,
+    completed_user_stories integer NOT NULL DEFAULT 0,
+    completed_tasks integer NOT NULL DEFAULT 0,
+    completed_story_points integer NOT NULL DEFAULT 0,
+    completed_man_days integer NOT NULL DEFAULT 0
+);
+ALTER TABLE plugin_taskboard_releases_snapshots 
+    ADD CONSTRAINT plugin_taskboard_releases_snapshots_date 
+        UNIQUE (taskboard_release_id, snapshot_date);

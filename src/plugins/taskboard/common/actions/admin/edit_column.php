@@ -52,7 +52,7 @@ if (getStringFromRequest('post_changes')) {
 
 $taskboard->header(
 	array(
-		'title'=>'Taskboard for '.$group->getPublicName().' : Administration : Column configuration' ,
+		'title'=>_('Taskboard for ').$group->getPublicName().' : '._('Administration').' : '._('Column configuration') ,
 		'pagename'=>_('Column configuration'),
 		'sectionvals'=>array(group_getname($group_id)),
 		'group'=>$group_id
@@ -69,18 +69,18 @@ $drop_rules_by_default = $column->getDropRulesByDefault(true);
 
 ?>
 
-<form action="/plugins/taskboard/admin/?group_id=<?php echo $group_id ?>&amp;action=edit_column" method="post">
+<form action="<?php echo util_make_url ('/plugins/taskboard/admin/?group_id='.$group_id.'&amp;action=edit_column') ?>" method="post">
 <input type="hidden" name="post_changes" value="y">
 <input type="hidden" name="column_id" value="<?php echo $column_id ?>">
 
-<h2>Edit column:</h2>
+<h2><?php echo _('Edit column') ?>:</h2>
 <table>
 	<tr><td><strong><?php echo _('Title') ?></strong>&nbsp;<?php echo utils_requiredField(); ?></td><td><input type="text" name="column_title" value="<?php echo htmlspecialchars( $column->getTitle() ) ?>"></td></tr>
 	<tr><td><strong><?php echo _('Title backgound color') ?></strong></td><td><?php echo $taskboard->colorBgChooser('title_bg_color', $column->getTitleBackgroundColor() ) ?></td></tr>
 	<tr><td><strong><?php echo _('Column Background color') ?></strong></td><td><?php echo $taskboard->colorBgChooser('column_bg_color', $column->getColumnBackgroundColor() ) ?></td></tr>
 	<tr><td><strong><?php echo _('Maximum tasks number') ?></strong></td><td><input type="text" name="column_max_tasks" value="<?php echo $column->getMaxTasks() ?>"></td></tr>
 
-	<tr><td colspan="2"><strong>Resolutions:</strong></td></tr>
+	<tr><td colspan="2"><strong><?php echo _('Resolutions') ?>:</strong></td></tr>
 <?php
 $columns_resolutions = $column->getResolutions();
 foreach( $taskboard->getAvailableResolutions() as $resolution ) {

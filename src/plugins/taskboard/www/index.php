@@ -64,7 +64,7 @@ if (!$group_id) {
 
 	$taskboard->header(
 		array(
-			'title'=>'Taskboard for '.$group->getPublicName(),
+			'title'=>_('Taskboard for ').$group->getPublicName(),
 			'pagename'=>"Taskboard",
 			'sectionvals'=>array(group_getname($group_id)),
 			'group' => $group_id
@@ -91,7 +91,7 @@ if (!$group_id) {
 <link rel="stylesheet" type="text/css" href="/plugins/taskboard/css/agile-board.css">
 <script type="text/javascript" src="/plugins/taskboard/js/agile-board.js?<?php echo time() ?>"></script>
 <?php if ( function_exists( 'html_use_jqueryui' ) ) { html_use_jqueryui(); } else { ?>
-<script type="text/javascript" src="/plugins/taskboard/js/jquery-ui.js"></script>
+<script type="text/javascript" src="<?php echo util_make_url('/plugins/taskboard/js/jquery-ui.js') ?>"></script>
 <?php } ?>
 
 <?php

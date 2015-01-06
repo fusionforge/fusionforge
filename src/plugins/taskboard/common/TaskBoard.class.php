@@ -25,6 +25,7 @@ define('RELEASE_OF_USER_STORY', 2);
 
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfplugins.'taskboard/common/TaskBoardColumn.class.php';
+require_once $gfplugins.'taskboard/common/TaskBoardRelease.class.php';
 require_once $gfconfig.'plugins/taskboard/config.php' ;
 
 /**
@@ -794,6 +795,26 @@ class TaskBoard extends Error {
 		}
 	
 		return $ret;
+	}
+	
+	/**
+	 *      getReleases - get taskboard releases
+	 *
+	 *      @return array
+	 */
+	function getReleases() {
+		$res = db_query_params ('SELECT * FROM plugin_taskboard_releases WHERE taskboard_id=$1 ORDER BY start_date, end_date', array ($this->getID())) ;
+		if (!$res) {
+			$this->setError('Cannot get list of releases.');
+			return false;
+		}
+	
+		$releases = array();
+		while( $row =  db_fetch_array($res) ) {
+			$releases[] = new TaskBoardRelease($this, $row) ;
+		}
+		db_free_result($res);
+		return $releases;
 	}
 	
 	function getReleaseValues() {

@@ -23,7 +23,7 @@
 $taskboard->header(
 	array(
 		'title'=>'Taskboard for '.$group->getPublicName().' : Administration : Trackers configuration' ,
-		'pagename'=>_('Trackers confoguration'),
+		'pagename'=>_('Trackers configuration'),
 		'sectionvals'=>array(group_getname($group_id)),
 		'group'=>$group_id
 	)
@@ -119,7 +119,7 @@ if (getStringFromRequest('post_changes')) {
 ?>
 
 <script type="text/javascript" src="/plugins/taskboard/js/agile-board.js"></script>
-<form action="/plugins/taskboard/admin/?group_id=<?php echo $group_id ?>&amp;action=trackers" method="post">
+<form action="<?php echo util_make_url ('/plugins/taskboard/admin/?group_id='.$group_id.'&amp;action=trackers') ?>" method="post">
 <input type="hidden" name="post_changes" value="y">
 
 <table cellspacing="2" cellpadding="2" width="100%">
@@ -180,13 +180,13 @@ if(  count($at_arr) > 0 ) {
 	<tr><td><strong><?php echo _('Use first column by default') ?></strong></td><td><input name="first_column_by_default" type="checkbox" <?php echo ($first_column_by_default? 'checked' : '')  ?> value="1"></td></tr>
 </table>
 
-<?php echo $HTML->boxMiddle(_("Release/sprint management"));?>
+<?php echo $HTML->boxMiddle(_("Releases management"));?>
 
 <table>
-	<tr><td><strong><?php echo _('Manage releases/sprints') ?></strong></td><td>
+	<tr><td><strong><?php echo _('Manage releases') ?></strong></td><td>
 		<input type="radio" name="release_field_tracker" value="1" id="release_tracker1" <?php echo ( $release_field_tracker!=2 ? 'checked' : '') ?>>&nbsp;<?php echo _('by tasks') ?><br>
 		<input type="radio" name="release_field_tracker" value="2" id="release_tracker2" <?php echo ( $release_field_tracker==2 ? 'checked' : '') ?>>&nbsp;<?php echo _('by user stories') ?></td></tr>
-	<tr><td><strong><?php echo _('Release/sprint field') ?></strong></td><td><select name="release_field"><option value=""><?php echo _('Not defined') ?></option></select></td></tr>
+	<tr><td><strong><?php echo _('Release field') ?></strong></td><td><select name="release_field"><option value=""><?php echo _('Not defined') ?></option></select></td></tr>
 </table>
 
 <?php echo $HTML->boxBottom(); ?>

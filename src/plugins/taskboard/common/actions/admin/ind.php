@@ -27,7 +27,7 @@
 
 $taskboard->header(
 	array(
-		'title'=>'Taskboard for '.$group->getPublicName().' : Administration' ,
+		'title'=>_('Taskboard for ').$group->getPublicName().' : '._('Administration') ,
 		'pagename'=>_('Administration'),
 		'sectionvals'=>array(group_getname($group_id)),
 		'group'=>$group_id

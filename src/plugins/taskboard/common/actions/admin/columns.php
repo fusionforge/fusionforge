@@ -60,7 +60,7 @@ $columns = $taskboard->getColumns();
 <?php
 $tablearr = array(_('Order'),_('Title'),_('Max number of tasks'),_('Assigned resolutions'),_('Drop resolution'));
 
- echo $HTML->listTableTop($tablearr, false, 'sortable_table_tracker', 'sortable_table_tracker');
+echo $HTML->listTableTop($tablearr, false, 'sortable_table_tracker', 'sortable_table_tracker');
 foreach( $columns as $column ) {
 	$downLink = '';
 	if( $column->getOrder() < count( $columns ) ) {
@@ -88,7 +88,7 @@ foreach( $columns as $column ) {
 
 ?>
 
-<form action="/plugins/taskboard/admin/?group_id=<?php echo $group_id ?>&amp;action=columns" method="post">
+<form action="<?php echo util_make_url ('/plugins/taskboard/admin/?group_id='.$group_id.'&amp;action=columns' ) ?>" method="post">
 <input type="hidden" name="post_changes" value="y">
 
 <h2>Add new column:</h2>
