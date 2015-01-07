@@ -40,10 +40,7 @@ class ScmSvnWebDAVTest extends FForge_SeleniumTestCase
 		$this->clickAndWait("submit");
 
 		// Run the cronjob to create repositories
-		$this->cron("scm/create_scm_repos.php");
-		$this->cron("shell/homedirs.php");
-		$this->reload_apache();
-		$this->reload_nscd();
+		$this->waitSystasks();
 
 		// Get the address of the repo
 		$this->open(ROOT);

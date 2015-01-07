@@ -52,7 +52,7 @@ class ScmGitWUITest extends FForge_SeleniumTestCase
 		$this->assertTextPresent("You have now requested a personal Git repository");
 
 		// Run the cronjob to create repositories
-		$this->cron("scm/create_scm_repos.php");
+		$this->waitSystasks();
 
 		$this->clickAndWait("link=SCM");
 		$this->assertTextPresent("Access to your personal repository");

@@ -49,8 +49,7 @@ class multiSCMTest extends FForge_SeleniumTestCase
 		$this->uploadSshKey();
 
 		// Run the cronjob to create repositories
-		$this->cron("scm/create_scm_repos.php");
-		$this->cron("shell/homedirs.php");
+		$this->waitSystasks();
 
         // Check Bazaar commit/push
 		$this->open(ROOT);
