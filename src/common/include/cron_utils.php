@@ -154,6 +154,10 @@ function cron_reload_nscd() {
         system("(nscd -i passwd && nscd -i group) >/dev/null 2>&1");
 }
 
+function cron_reload_apache() {
+        system("service apache2 reload || service httpd reload >/dev/null 2>&1");
+}
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"

@@ -50,6 +50,7 @@ function usergroups_sync() {
 		$row = db_fetch_array($res);
 		if ($row['lastmodified'] > $usergroups_lastsync) {
 				cron_reload_nscd();
+				cron_reload_apache();
 				$hook_params = array();
 				plugin_hook("usergroups_sync", $hook_params);
 				$usergroups_lastsync = time();
