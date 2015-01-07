@@ -7,7 +7,7 @@
  * Copyright 2001-2009, Xerox Corporation, Codendi Team
  * Copyright 2010, Mélanie Le Bail
  * Copyright 2011, Alain Peyrat - Alcatel-Lucent
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013,2014 Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -34,6 +34,7 @@ class Plugin extends Error {
 	var $name;
 	var $hooks;
 	var $id = NULL;
+	var $pkg_desc = 'No description available.';
 
 	/**
 	 * Plugin() - constructor
@@ -271,12 +272,7 @@ class Plugin extends Error {
 			}
 			echo ' /><br/>';
 			echo "</td>\n";
-			$pluginObject = plugin_get_object($this->name);
-			if (method_exists($pluginObject, 'getPluginDescription')) {
-				echo '<td title="'.$description = $pluginObject->getPluginDescription().'">';
-			} else {
-				echo "</td>\n";
-			}
+			echo '<td title="'.$this->pkg_desc.'">';
 			echo "<strong>";
 			printf(_("Use %s"), $this->text);
 			echo "</strong>";
@@ -346,7 +342,7 @@ class Plugin extends Error {
 	}
 
 	function getPluginDescription() {
-		return _('No description available.');
+		return $this->pkg_desc;
 	}
 }
 

@@ -30,6 +30,7 @@ if [ -e /etc/debian_version ]; then
     backports_deb
     apt-get update
     apt-get install -y make gettext php5-cli php5-pgsql php-htmlpurifier \
+	libapache2-mpm-itk libapache2-mod-svn \
 	apache2 postgresql libnss-pgsql2 unscd \
 	subversion augeas-tools viewvc git \
 	mediawiki \
@@ -42,7 +43,7 @@ else
     yum install -y make tar
     backports_rpm
     yum install -y gettext php-cli php-pgsql php-process php-mbstring \
-	httpd mod_ssl postgresql-server nscd \
+	httpd httpd-itk mod_dav_svn mod_ssl postgresql-server nscd \
 	subversion augeas viewvc git gitweb \
 	mediawiki119 \
 	moin mod_wsgi python-psycopg2 \

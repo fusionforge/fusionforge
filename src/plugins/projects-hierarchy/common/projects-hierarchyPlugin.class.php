@@ -789,6 +789,7 @@ class projects_hierarchyPlugin extends Plugin {
 	 * @access	public
 	 */
 	function son_box($group_id, $name, $selected = 'xzxzxz') {
+		global $HTML;
 		$sons = $this->getFamily($group_id, 'child', true, 'any');
 		$parent = $this->getFamily($group_id, 'parent', true, 'any');
 		$family = array_merge($parent, $sons);
@@ -802,7 +803,16 @@ class projects_hierarchyPlugin extends Plugin {
 						$group_id,
 						db_int_array_to_any_clause($family),
 						$this->name));
-		return html_build_select_box($son, $name, $selected, false);
+		if ($son & db_numrows($son)) {
+			$content = $HTML->openForm(array('method' => 'post', 'action' => '/plugins/'.$this->name.'/?type=group&action=addChild&id='.$group_id));
+			$content .= _('Select a project')._(':');
+			$content .= html_build_select_box($son, $name, $selected, false);
+			$content .= '<input type="submit" value="'._('Add Child project').'">';
+			$content .= $HTML->closeForm();
+		} else {
+			$content .= $HTML->information(_('No other project available'));
+		}
+		return $content;
 	}
 
 	/**

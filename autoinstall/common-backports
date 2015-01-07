@@ -46,29 +46,108 @@ function backports_deb {
     fi
 }
 
-function backport_rpm_from_fedora {
-    target=$1
+function backport_rpm_from_fedora_updates {
+    rebuild_one_rpm --enablefedora --enablefedoraupdates $*
+}
 
-    if yum list $target >/dev/null 2>&1; then
-	yum install -y $target
+function backport_rpm_from_fedora {
+    rebuild_one_rpm --enablefedora $*
+}
+
+function rebuild_rpm_from_centos {
+    rebuild_one_rpm --rebuild $*
+}
+
+function rebuild_one_rpm {
+    enablefedsrc=
+    enablefed=
+    if [ "$1" = "--enablefedora" ] ; then
+	enablefedsrc="--enablerepo=fedora-source"
+	enablefed="--enablerepo=fedora"
+    	shift
+    fi
+
+    if [ "$1" = "--enablefedoraupdates" ] ; then
+	enablefedsrc="--enablerepo=fedora-updates-source"
+	enablefed="--enablerepo=fedora-updates"
+    	shift
+    fi
+
+    rebuild=no
+    if [ "$1" = "--rebuild" ] ; then
+    	rebuild=yes
+    	shift
+    fi
+
+    src=
+    if [ "$1" = "--source-package" ] ; then
+    	src=$2
+    	shift
+    	shift
+    fi
+
+    force=
+    if [ "$1" = "--force" ] ; then
+    	force=$1
+    	shift
+    fi
+
+    target=$1
+    shift
+    others="$*"
+
+    src=${src:-$target}
+
+    rebuild_needed=no
+    if [ $rebuild = yes ] ; then
+	rebuild_needed=yes
     else
-	yumdownloader --enablerepo=fedora --source $target
-	for DEP in $DEPS ; do
-	    if ! yum install -y $DEP ; then
-		yumdownloader --enablerepo=fedora $DEP
-		yum install -y $DEP-*.noarch.rpm
+	for i in $target $others ; do
+	    if ! yum list $i >/dev/null 2>&1; then
+		rebuild_needed=yes
+		break
 	    fi
 	done
-	rpmbuild --rebuild $target-*.src.rpm
+    fi
+
+    if [ $rebuild_needed = yes ] ; then
+	yumdownloader $enablefedsrc --source $src
+
+	for DEP in $DEPS ; do
+	    if ! yum install -y $DEP ; then
+		yumdownloader $enablefed $DEP
+		if [ -e  $DEP-*.noarch.rpm ] ; then
+		    yum install -y $DEP-*.noarch.rpm
+		else
+		    yum install -y $DEP-*.x86_64.rpm
+		fi
+	    fi
+	done
+
+	for i in $src-*.src.rpm ; do
+	    if [ $rebuild = yes ] || [ ! -e "$i.done" ] ; then
+		rpmbuild --rebuild $src-*.src.rpm
+	    fi
+	    mv -f "$i" "$i.done"
+	done
 	if [ -n "$REMOVEDEPS" ] ; then
-	    yum remove -y $REMOVEDEPS
+	    : yum remove -y $REMOVEDEPS
 	fi
-	yum install -y ~/rpmbuild/RPMS/*/$target-[0-9]*.*.rpm
+
+	for i in $target $others ; do
+	    yum remove -y $i
+	done
+	for i in $target $others ; do
+	    yum install -y ~/rpmbuild/RPMS/*/$i-[0-9]*.*.rpm || rpm -i $force ~/rpmbuild/RPMS/*/$i-[0-9]*.*.rpm
+	done
+    else
+	yum install -y $target $others
     fi
 }
 
-
 function backports_rpm {
+    set -ex
+
     # Fedora/RHEL/CentOS version:
     os_version=$(rpm -q --qf "%{VERSION}" $(rpm -q --whatprovides redhat-release))
 
@@ -93,10 +172,22 @@ failovermethod=priority
 metalink=https://mirrors.fedoraproject.org/metalink?repo=fedora-20&arch=$basearch
 enabled=0
 gpgcheck=0
+[fedora-updates]
+name=Fedora 20 Updates
+failovermethod=priority
+metalink=https://mirrors.fedoraproject.org/metalink?repo=updates-released-f20&arch=$basearch
+enabled=0
+gpgcheck=0
 [fedora-source]
 name=Fedora 20 - Source
 failovermethod=priority
 metalink=https://mirrors.fedoraproject.org/metalink?repo=fedora-source-20&arch=$basearch
+enabled=0
+gpgcheck=0
+[fedora-updates-source]
+name=Fedora 20 Updates - Source
+failovermethod=priority
+metalink=https://mirrors.fedoraproject.org/metalink?repo=updates-released-source-f20&arch=$basearch
 enabled=0
 gpgcheck=0
 EOF
@@ -106,37 +197,85 @@ EOF
 	fi
     fi
 
-    DEPS="gcc postgresql-devel xmlto"
+    yum install -y gcc gcc-c++ postgresql-devel python-devel libpng-devel sqlite-devel autoconf libtool systemd-devel freetype-devel
+
+    DEPS="xmlto"
     REMOVEDEPS=$DEPS
     backport_rpm_from_fedora libnss-pgsql
 
-    DEPS="python-devel"
+    DEPS=""
     REMOVEDEPS=$DEPS
     backport_rpm_from_fedora moin
 
-    DEPS="php-channel-htmlpurifier"
-    REMOVEDEPS=""
-    backport_rpm_from_fedora php-htmlpurifier-htmlpurifier
+    case $os_version in
+	7)
+	    DEPS="gd-devel byacc libjpeg-devel flex"
+	    REMOVEDEPS=$DEPS
+	    backport_rpm_from_fedora cvsgraph
+
+	    DEPS="python-pygments"
+	    REMOVEDEPS=$DEPS
+	    backport_rpm_from_fedora viewvc
+
+	    # Backport httpd-itk from Fedora 20
+	    # until https://bugzilla.redhat.com/show_bug.cgi?id=1059143 is fixed
+	    # …yes, it requires pulling in a lot of stuff :-(
+	    #
+	    #
+	    DEPS="libuuid-devel lksctp-tools-devel"
+	    REMOVEDEPS=$DEPS
+	    backport_rpm_from_fedora_updates --source-package apr apr-1.5.1 apr-devel-1.5.1
+
+	    DEPS="jasper-devel"
+	    REMOVEDEPS=$DEPS
+	    backport_rpm_from_fedora libicns libicns-utils
+
+	    DEPS="kde-filesystem hardlink"
+	    REMOVEDEPS=$DEPS
+	    backport_rpm_from_fedora_updates --source-package generic-logos --force generic-logos-httpd
+
+	    DEPS="xmlto libselinux-devel lua-devel pcre-devel openssl-devel libxml2-devel apr-util-devel"
+	    REMOVEDEPS=$DEPS
+	    backport_rpm_from_fedora_updates --source-package httpd httpd-tools-2.4.10 httpd-2.4.10 httpd-devel-2.4.10 mod_ssl-2.4.10
+
+	    DEPS=""
+	    REMOVEDEPS=$DEPS
+	    backport_rpm_from_fedora_updates --source-package httpd-itk httpd-itk-2.4.7.01
+
+	    DEPS=""
+	    REMOVEDEPS=$DEPS
+	    rebuild_rpm_from_centos mod_wsgi
+
+	    if ! rpm -qR php | grep -q httpd.*2.4.10 ; then
+		if rpm -qi mariadb-libs | grep -q 5\.5\. && ! rpm -qi mariadb-libs | grep -q 5\.5\.37 ; then
+		    yum downgrade -y mariadb-libs
+		fi
+
+		DEPS="bzip2-devel curl-devel pam-devel libstdc++-devel libedit-devel libtool-ltdl-devel libzip-devel systemtap-sdt-devel firebird-devel net-snmp-devel libxslt-devel t1lib-devel libvpx-devel gmp-devel tokyocabinet-devel libmcrypt-devel libtidy-devel freetds-devel aspell-devel recode-devel libicu-devel enchant-devel libc-client-devel openldap-devel unixODBC-devel mariadb-devel-5.5.37 exim"
+		REMOVEDEPS=$DEPS
+		rebuild_rpm_from_centos --source-package php php-common php-cli php php-pdo php-pgsql php-process php-ldap php-gd
+
+		if rpm -qi mariadb-libs | grep -q 5\.5\.37 ; then
+		    yum upgrade -y mariadb-libs
+		fi
+	    fi
+	    #
+	    #
+	    # End of backport for httpd-itk + related packages
+	    ;;
+    esac
 
     DEPS="dos2unix"
     REMOVEDEPS=$DEPS
     backport_rpm_from_fedora php-nusoap
 
-    case $os_version in
-	7)
-	    DEPS="gcc gd-devel byacc freetype-devel libpng-devel libjpeg-devel"
-	    REMOVEDEPS=$DEPS
-	    backport_rpm_from_fedora cvsgraph
-	    
-	    DEPS="python-devel python-pygments"
-	    REMOVEDEPS=$DEPS
-	    backport_rpm_from_fedora viewvc
-	    
-	    DEPS=""
-	    REMOVEDEPS=$DEPS
-	    backport_rpm_from_fedora mediawiki
-	    ;;
-    esac
+    DEPS="php-channel-htmlpurifier"
+    REMOVEDEPS=""
+    backport_rpm_from_fedora php-htmlpurifier-htmlpurifier
+
+    DEPS=""
+    REMOVEDEPS=$DEPS
+    backport_rpm_from_fedora mediawiki
 
     # TODO: postfix: rebuild from RHEL/CentOS sources with pgsql enabled,
     # so we can test mta-postfix

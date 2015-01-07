@@ -94,7 +94,6 @@ if (getStringFromRequest('create_repository') && getStringFromRequest('submit'))
 
 	$scmarray = array();
 	$scmvars = array_keys(_getRequestArray());
-	error_log(print_r(_getRequestArray(),1));
 	foreach (_getRequestArray() as $key => $value) {
 		foreach ($scm_list as $scm) {
 			if ($key == strstr($key, $scm . "_")) {
@@ -118,7 +117,6 @@ if (getStringFromRequest('create_repository') && getStringFromRequest('submit'))
 		}
 	}
 
-	error_log(print_r($scmarray,1));
 
 	$SCMFactory = new SCMFactory();
 	$scm_plugins = $SCMFactory->getSCMs();

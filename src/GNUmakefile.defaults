@@ -41,6 +41,7 @@ log_path=$(localstatedir)/log/fusionforge
 # Tools
 INSTALL=install
 CP_R=cp -r --preserve=timestamps
+LN_S=ln -s
 
 # Hard-coded detection of distro-specific Apache configuration
 apache_user=$(shell if [ -e /etc/redhat-release ]; then echo 'apache'; elif [ -e /etc/SuSE-release ]; then echo 'wwwrun'; else echo 'www-data'; fi)

@@ -379,7 +379,7 @@ function html_get_tooltip_description($element_name) {
 	switch ($element_name) {
 		case 'assigned_to':
 			return _('This drop-down box represents the person to which a tracker item is assigned.');
-		case 'status_id':
+		case 'status_id_tracker':
 			return _('This drop-down box represents the current status of a tracker item.')
 				.'<br /><br />'
 				._('You can set the status to “Pending” if you are waiting for a response from the tracker item author.  When the author responds the status is automatically reset to that of “Open”. Otherwise, if the author does not respond with an admin-defined amount of time (default is 14 days) then the item is given a status of “Deleted”.');
@@ -1321,22 +1321,22 @@ function html_a_apply($scopy) {
  * @param	int	$page			current page number (starting at 1)
  * @return	string
  */
-function html_trove_limit_navigation_box($php_self, $querytotalcount, $trove_browselimit, $page) {
-
-	$html_limit = sprintf(_(' Displaying %1$s per page. Projects sorted by alphabetical order.'), $trove_browselimit).'<br/>';
-
+function html_trove_limit_navigation_box($php_self, $querytotalcount, $trove_browselimit, $page, $textintro = '') {
+	if ($textintro != '') {
+		$html_limit = sprintf(_(' Displaying %1$s per page. Projects sorted by alphabetical order.'), $trove_browselimit);
+	} else {
+		$html_limit = $textintro;
+	}
+	$html_limit .= html_e('br');
 	// display all the numbers
-	for ($i=1;$i<=ceil($querytotalcount/$trove_browselimit);$i++) {
+	for ($i = 1; $i <= ceil($querytotalcount/$trove_browselimit); $i++) {
 		$html_limit .= ' ';
-		if ($page != $i) {
-			$html_limit .= '<a href="'.$php_self;
-			$html_limit .= '?page='.$i;
-			$html_limit .= '">';
-		} else $html_limit .= '<strong>';
-		$html_limit .= '&lt;'.$i.'&gt;';
-		if ($page != $i) {
-			$html_limit .= '</a>';
-		} else $html_limit .= '</strong>';
+		$ahrefcontent = '&lt;'.$i.'&gt;';
+		if ($page == $i) {
+			$html_limit .= html_e('strong', array(), $ahrefcontent);
+		} else {
+			$html_limit .= util_make_link($php_self.'?page='.$i, $ahrefcontent);
+		}
 		$html_limit .= ' ';
 	}
 	return $html_limit;

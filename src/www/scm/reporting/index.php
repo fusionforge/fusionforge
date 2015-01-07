@@ -37,7 +37,6 @@ scm_header(array('title'=>_('SCM Repository Reporting'), 'group'=>$group_id));
 echo html_e('h2', array(), _('Commits Over Time'));
 commitstime_graph($group_id, 1);
 
-
 echo html_e('h2', array(), _('Commits Last 30 Days'));
 commits_graph($group_id, 30, 2);
 

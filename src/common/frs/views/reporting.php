@@ -165,7 +165,7 @@ if ($report->isError()) {
 				plot1.replot( { resetAxes: true } );
 			});'."\n";
 		echo '//]]></script>';
-		echo html_e('div', array('id' => 'chart1'), '', false);
+		echo $HTML->html_chartid('chart1');
 		echo $HTML->listTableTop(array(_('Package'), _('Release'), _('File'), _('User'), _('Date')),
 				false, true, 'Download');
 		for ($i=0; $i<count($data); $i++) {

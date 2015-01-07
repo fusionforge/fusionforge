@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Copyright (C) 2010 Alcatel-Lucent
  *
  * This file is part of FusionForge.
@@ -19,7 +19,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-/*
+/**
  * Standard Alcatel-Lucent disclaimer for contributing to open source
  *
  * "The test suite ("Contribution") has not been tested and/or
@@ -45,55 +45,55 @@ require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
 
 class UserBlocks extends FForge_SeleniumTestCase
 {
-  protected $alreadyActive = 0;
+	protected $alreadyActive = 0;
 
-  function testUserBlocks()
-  {
-  	$this->_activateBlocksPlugin();
+	function testUserBlocks()
+	{
+		$this->_activateBlocksPlugin();
 
-    $this->populateStandardTemplate('empty');
-    $this->init();
+		$this->populateStandardTemplate('empty');
+		$this->init();
 
-    $this->click("link=Admin");
-    $this->waitForPageToLoad("30000");
-    $this->click("link=Tools");
-    $this->waitForPageToLoad("30000");
-    $this->click("use_blocks");
-    $this->click("submit");
-    $this->waitForPageToLoad("30000");
-    $this->assertTrue($this->isTextPresent("Project information updated"));
-    $this->click("link=Blocks Admin");
-    $this->waitForPageToLoad("30000");
-    $this->click("activate[summary_description]");
-//    $this->click("activate[summary_right]");
-    $this->click("//input[@value='Save Blocks']");
-    $this->waitForPageToLoad("30000");
+		$this->click("link=Admin");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Tools");
+		$this->waitForPageToLoad("30000");
+		$this->click("use_blocks");
+		$this->click("submit");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("Project information updated"));
+		$this->click("link=Blocks Admin");
+		$this->waitForPageToLoad("30000");
+		$this->click("activate[summary_description]");
+	//    $this->click("activate[summary_right]");
+		$this->click("//input[@value='Save Blocks']");
+		$this->waitForPageToLoad("30000");
 
-    $this->open("/plugins/blocks/index.php?id=7&type=admin&pluginname=blocks");
-    $this->click("link=Configure");
-    $this->waitForPageToLoad("30000");
-    $this->type("body", "This is my nice block.");
-    $this->click("//input[@value='Save']");
-    $this->waitForPageToLoad("30000");
-//    $this->click("//div[@id='maindiv']/form/table/tbody/tr[2]/td[4]/a");
-//    $this->waitForPageToLoad("30000");
-//    $this->type("body", "{boxTop Project}\nThis is the summary block.\n{boxBottom}");
-//    $this->click("//input[@value='Save']");
-//    $this->waitForPageToLoad("30000");
-    $this->click("link=Summary");
-    $this->waitForPageToLoad("30000");
-//    $this->assertText("//td[@id='main']/table[1]/tbody/tr/td[1]", "This is my nice block.");
-//    $this->assertEquals("This is the summary block.", $this->getText("//td[@id='main']/table[1]/tbody/tr/td[2]/table[1]/tbody/tr[2]/td"));
-	$this->assertTrue($this->isTextPresent("This is my nice block."));
-//	$this->assertTrue($this->isTextPresent("This is the summary block."));
-  }
+		$this->open("/plugins/blocks/index.php?id=7&type=admin&pluginname=blocks");
+		$this->click("link=Configure");
+		$this->waitForPageToLoad("30000");
+		$this->type("body", "This is my nice block.");
+		$this->click("//input[@value='Save']");
+		$this->waitForPageToLoad("30000");
+	//    $this->click("//div[@id='maindiv']/form/table/tbody/tr[2]/td[4]/a");
+	//    $this->waitForPageToLoad("30000");
+	//    $this->type("body", "{boxTop Project}\nThis is the summary block.\n{boxBottom}");
+	//    $this->click("//input[@value='Save']");
+	//    $this->waitForPageToLoad("30000");
+		$this->click("link=Summary");
+		$this->waitForPageToLoad("30000");
+	//    $this->assertText("//td[@id='main']/table[1]/tbody/tr/td[1]", "This is my nice block.");
+	//    $this->assertEquals("This is the summary block.", $this->getText("//td[@id='main']/table[1]/tbody/tr/td[2]/table[1]/tbody/tr[2]/td"));
+		$this->assertTrue($this->isTextPresent("This is my nice block."));
+	//	$this->assertTrue($this->isTextPresent("This is the summary block."));
+	}
 
-  private function _activateBlocksPlugin() {
-  	if (! $this->alreadyActive) {
-  		$this->activatePlugin('blocks');
-		$this->alreadyActive = 1;
-  	}
-  }
+	private function _activateBlocksPlugin() {
+		if (! $this->alreadyActive) {
+			$this->activatePlugin('blocks');
+			$this->alreadyActive = 1;
+		}
+	}
 }
 
 // Local Variables:

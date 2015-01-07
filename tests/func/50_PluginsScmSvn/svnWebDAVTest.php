@@ -21,11 +21,11 @@
 
 require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
 
-class ScmSvnSSHTest extends FForge_SeleniumTestCase
+class ScmSvnWebDAVTest extends FForge_SeleniumTestCase
 {
-	function testScmSvnSSH()
+	function testScmSvnWebDAV()
 	{
-		$this->changeConfig("[scmsvn]\nuse_ssh = yes\nuse_dav = no\n");
+        $this->changeConfig("[scmsvn]\nuse_ssl = no\n");
 
 		$this->activatePlugin('scmsvn');
 		$this->populateStandardTemplate('empty');
@@ -36,31 +36,48 @@ class ScmSvnSSHTest extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=Admin");
 		$this->clickAndWait("link=Tools");
 		$this->clickAndWait("link=Source Code Admin");
-		$this->check("//input[@name='scmengine[]' and @value='scmsvn']");
+		$this->click("//input[@name='scmengine[]' and @value='scmsvn']");
 		$this->clickAndWait("submit");
 
-		$this->uploadSshKey();
-
 		// Run the cronjob to create repositories
-		$this->waitSystasks();
+		$this->cron("scm/create_scm_repos.php");
+		$this->cron("shell/homedirs.php");
+		$this->reload_apache();
+		$this->reload_nscd();
 
 		// Get the address of the repo
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
-		$p = $this->getText("//tt[contains(.,'svn checkout svn+ssh')]");
-		$p = preg_replace(",^svn checkout ,", "", $p);
+		$p = $this->getText("//tt[contains(.,'svn checkout --username ".FORGE_ADMIN_USERNAME." http')]");
+		$p = preg_replace(",^svn checkout --username ".FORGE_ADMIN_USERNAME." ,", "", $p);
 
-		// Create a local checkout, commit stuff
+		// Create a local clone, add stuff, push it to the repo
 		$t = exec("mktemp -d /tmp/svnTest.XXXXXX");
-		system("cd $t && svn checkout $p projecta", $ret);
+		$auth = "--username ".FORGE_ADMIN_USERNAME." --password ".FORGE_ADMIN_PASSWORD;
+		$globalopts = "--trust-server-cert --non-interactive";
+		$log = "2> /var/log/svn.stderr > /var/log/svn.stdout";
+		$timeout = "timeout 15s";
+		system("cd $t && $timeout svn checkout $globalopts $auth $p projecta $log", $ret);
+		if ($ret > 120) {
+			system("cd $t && $timeout svn checkout $globalopts $auth $p projecta $log", $ret);
+		}
 		$this->assertEquals($ret, 0);
-
+		sleep(2);
 		system("echo 'this is a simple text' > $t/projecta/mytext.txt");
-		system("cd $t/projecta && svn add mytext.txt && svn commit -m'Adding file'", $ret);
-		system("echo 'another simple text' >> $t/projecta/mytext.txt");
-		system("cd $t/projecta && svn commit -m'Modifying file'", $ret);
+		system("cd $t/projecta && $timeout svn add mytext.txt $log && $timeout svn commit $globalopts $auth -m'Adding file' $log", $ret);
+		if ($ret > 120) {
+			system("cd $t/projecta && $timeout svn add mytext.txt $log && $timeout svn commit $globalopts $auth -m'Adding file' $log", $ret);
+		}
 		$this->assertEquals($ret, 0);
+		sleep(2);
+		system("echo 'another simple text' >> $t/projecta/mytext.txt");
+		system("cd $t/projecta && $timeout svn commit $globalopts $auth -m'Modifying file' $log", $ret);
+		if ($ret > 120) {
+			system("cd $t/projecta && $timeout svn commit $globalopts $auth -m'Modifying file' $log", $ret);
+		}
+		$this->assertEquals($ret, 0);
+		sleep(2);
 
 		// Check that the changes appear in svnweb
 		$this->open(ROOT);
@@ -70,7 +87,6 @@ class ScmSvnSSHTest extends FForge_SeleniumTestCase
 		$this->selectFrame("id=scmsvn_iframe");
 		$this->assertTextPresent("Modifying file");
 		$this->assertTextNotPresent("Adding file");
-		$this->selectFrame("relative=top");
 
 		system("rm -fr $t");
 	}

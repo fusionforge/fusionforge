@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Copyright 2012, Roland Mas
  *
  * This file is part of FusionForge.
@@ -24,16 +24,16 @@ require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
 class PluginMediawiki extends FForge_SeleniumTestCase
 {
 	protected $alreadyActive = 0;
-	
+
 	function testMediawiki()
 	{
 		$this->skip_on_rpm_installs();
 		$this->skip_on_centos();
 
-        $this->changeConfig("[mediawiki]\nunbreak_frames=yes\n");
+		$this->changeConfig("[mediawiki]\nunbreak_frames=yes\n");
 
 		$this->activatePlugin('mediawiki');
-		
+
 		$this->populateStandardTemplate('empty');
 		$this->init();
 

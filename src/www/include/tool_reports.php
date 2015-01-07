@@ -55,7 +55,7 @@ function reports_quick_graph($title, $qpa1, $qpa2) {
 		$values[] = $diff;
 		report_pm_hbar(1, $values, $titles, $labels, $all);
 	} else {
-		echo "<p class='information'>"._('No data found to report')."</p>";
+		echo $HTML->information(_('No data found to report'));
 	}
 }
 

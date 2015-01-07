@@ -21,13 +21,14 @@
 
 require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
 
-class ScmSvnSSHTest extends FForge_SeleniumTestCase
+class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 {
-	function testScmSvnSSH()
+	function testScmGitSmartHTTP()
 	{
-		$this->changeConfig("[scmsvn]\nuse_ssh = yes\nuse_dav = no\n");
 
-		$this->activatePlugin('scmsvn');
+		$this->changeConfig("[core]\nuse_ssl = no\n");
+
+		$this->activatePlugin('scmgit');
 		$this->populateStandardTemplate('empty');
 		$this->init();
 
@@ -36,41 +37,55 @@ class ScmSvnSSHTest extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=Admin");
 		$this->clickAndWait("link=Tools");
 		$this->clickAndWait("link=Source Code Admin");
-		$this->check("//input[@name='scmengine[]' and @value='scmsvn']");
+		$this->click("//input[@name='scmengine[]' and @value='scmgit']");
 		$this->clickAndWait("submit");
 
-		$this->uploadSshKey();
-
 		// Run the cronjob to create repositories
-		$this->waitSystasks();
+		$this->cron("scm/create_scm_repos.php");
+		$this->cron("shell/homedirs.php");
+		$this->reload_apache();
+		$this->reload_nscd();
 
 		// Get the address of the repo
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
-		$p = $this->getText("//tt[contains(.,'svn checkout svn+ssh')]");
-		$p = preg_replace(",^svn checkout ,", "", $p);
+		$p = $this->getText("//tt[contains(.,'git clone http') and contains(.,'".FORGE_ADMIN_USERNAME."@')]");
+		$p = preg_replace(",^git clone ,", "", $p);
+		$p = preg_replace(",@,", ":".FORGE_ADMIN_PASSWORD."@", $p);
+		$timeout = "timeout 15s";
 
-		// Create a local checkout, commit stuff
-		$t = exec("mktemp -d /tmp/svnTest.XXXXXX");
-		system("cd $t && svn checkout $p projecta", $ret);
+		// Create a local clone, add stuff, push it to the repo
+		$t = exec("mktemp -d /tmp/gitTest.XXXXXX");
+		system("cd $t && GIT_SSL_NO_VERIFY=true $timeout git clone --quiet $p", $ret);
+		if ($ret >= 120) {
+			system("cd $t && GIT_SSL_NO_VERIFY=true $timeout git clone --quiet $p", $ret);
+		}
 		$this->assertEquals($ret, 0);
 
 		system("echo 'this is a simple text' > $t/projecta/mytext.txt");
-		system("cd $t/projecta && svn add mytext.txt && svn commit -m'Adding file'", $ret);
+		system("cd $t/projecta && $timeout git add mytext.txt && $timeout git commit --quiet -a -m'Adding file'", $ret);
 		system("echo 'another simple text' >> $t/projecta/mytext.txt");
-		system("cd $t/projecta && svn commit -m'Modifying file'", $ret);
+		system("cd $t/projecta && git commit --quiet -a -m'Modifying file'", $ret);
 		$this->assertEquals($ret, 0);
 
-		// Check that the changes appear in svnweb
+		system("cd $t/projecta && GIT_SSL_NO_VERIFY=true $timeout git push --quiet --all", $ret);
+		if ($ret >= 120) {
+			system("cd $t/projecta && GIT_SSL_NO_VERIFY=true $timeout git push --quiet --all", $ret);
+		}
+		$this->assertEquals($ret, 0);
+
+		// Check that the changes appear in gitweb
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
-		$this->clickAndWait("link=Browse Subversion Repository");
-		$this->selectFrame("id=scmsvn_iframe");
+		$this->clickAndWait("link=Browse Git Repository");
+		$this->selectFrame("id=scmgit_iframe");
+		$this->assertElementPresent("//.[@class='page_footer']");
+		$this->assertTextPresent("projecta.git");
+		$this->clickAndWait("link=projecta.git");
 		$this->assertTextPresent("Modifying file");
-		$this->assertTextNotPresent("Adding file");
-		$this->selectFrame("relative=top");
+		$this->assertTextPresent("Adding file");
 
 		system("rm -fr $t");
 	}

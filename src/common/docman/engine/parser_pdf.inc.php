@@ -1,4 +1,3 @@
-#! /usr/bin/php
 <?php
 /**
  * FusionForge document search engine

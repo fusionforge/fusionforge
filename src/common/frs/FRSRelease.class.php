@@ -372,11 +372,13 @@ class FRSRelease extends Error {
 			return false;
 		}
 		$f =& $this->getFiles();
-		for ($i = 0; $i < count($f); $i++) {
-			if (!is_object($f[$i]) || $f[$i]->isError() || !$f[$i]->delete()) {
-				$this->setError(_('File Error')._(': ').$f[$i]->getName()._(': ').$f[$i]->getErrorMessage());
+
+		while($file = current($f)) {
+			if (!is_object($file) || $file->isError() || !$file->delete()) {
+				$this->setError(_('File Error')._(': ').$file->getName()._(': ').$file->getErrorMessage());
 				return false;
 			}
+			next($f);
 		}
 		$dir=forge_get_config('upload_dir').'/'.
 			$this->FRSPackage->Group->getUnixName() . '/' .

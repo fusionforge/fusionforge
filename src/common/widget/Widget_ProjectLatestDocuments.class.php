@@ -82,7 +82,7 @@ class Widget_ProjectLatestDocuments extends Widget {
 				$createdate = $documentObject->getCreated();
 				$realdate = ($updatedate >= $createdate) ? $updatedate : $createdate;
 				$filename = $documentObject->getFileName();
-				$title = $documentObject->getFileName();
+				$title = $documentObject->getName();
 				$realname = $documentObject->getCreatorRealName();
 				$user_name = $documentObject->getCreatorUserName();
 				$statename = $documentObject->getStateName();

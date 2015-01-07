@@ -29,6 +29,8 @@ class MantisBTPlugin extends Plugin {
 		$this->Plugin();
 		$this->name = 'mantisbt';
 		$this->text = 'MantisBT'; // To show in the tabs, use...
+		$this->pkg_desc =
+_('Use Mantis Bugtracker as another ticket management tool.');
 		$this->_addHook('user_personal_links'); //to make a link to the user's personal part of the plugin
 		$this->_addHook('usermenu');
 		$this->_addHook('groupmenu'); // To put into the project tabs
@@ -685,16 +687,6 @@ class MantisBTPlugin extends Plugin {
 
 	function getAdminOptionLink() {
 		return util_make_link('/plugins/'.$this->name.'/?type=globaladmin', _('Global MantisBT admin'), array('title' => _('Direct link to global configuration of this plugin')));
-	}
-
-
-	/**
-	 * getPluginDescription - display the description of this plugin in pluginman admin page
-	 *
-	 * @return	string	the description
-	 */
-	function getPluginDescription() {
-		return _('Use Mantis Bugtracker as another ticket management tool.');
 	}
 
 	/** Widgets function **/

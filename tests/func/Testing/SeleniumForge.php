@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Copyright (C) 2007-2008 Alain Peyrat <aljeux at free dot fr>
  * Copyright (C) 2009 Alain Peyrat, Alcatel-Lucent
  * Copyright 2013, Franck Villaume - TrivialDev
@@ -21,7 +21,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-/*
+/**
  * Standard Alcatel-Lucent disclaimer for contributing to open source
  *
  * "The test suite ("Contribution") has not been tested and/or
@@ -77,13 +77,13 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->screenshotBgColor = '#CCFFDD';
 	}
 
-    protected function changeConfig($text) {
-            $forge_get_config = RUN_JOB_PATH."/forge_get_config";
-            $config_path = rtrim(`$forge_get_config config_path`);
-            $classname = get_class($this);
-            file_put_contents("$config_path/config.ini.d/zzz-buildbot-$classname.ini",
-                              $text);
-    }
+	protected function changeConfig($text) {
+		$forge_get_config = RUN_JOB_PATH."/forge_get_config";
+		$config_path = rtrim(`$forge_get_config config_path`);
+		$classname = get_class($this);
+		file_put_contents("$config_path/config.ini.d/zzz-buildbot-$classname.ini",
+				$text);
+	}
 
 	/**
 	 * Method that is called after Selenium actions.
@@ -148,7 +148,13 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	protected function reload_apache()
 	{
 		$this->runCommand("service apache2 reload > /dev/null 2>&1 || service httpd reload > /dev/null 2>&1");
-		sleep (3); // Give it some time to become available again
+		sleep (5); // Give it some time to become available again
+	}
+
+	protected function reload_nscd()
+	{
+		$this->runCommand("service unscd restart > /dev/null 2>&1 || service nscd restart > /dev/null 2>&1 || true");
+		sleep (5); // Give it some time to wake up
 	}
 
 	protected function init() {
@@ -488,7 +494,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	}
 
 	protected function skip_test($msg) {
-		$this->captureScreenshotOnFailure = false; 
+		$this->captureScreenshotOnFailure = false;
 		$this->markTestSkipped($msg);
 	}
 
