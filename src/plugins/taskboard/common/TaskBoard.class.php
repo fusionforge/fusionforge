@@ -817,6 +817,36 @@ class TaskBoard extends Error {
 		return $releases;
 	}
 	
+	/**
+	 *      getCurrentRelease - get current release object
+	 *
+	 *      @return object
+	 */
+	function getCurrentRelease() {
+		$current_release = NULL;
+	
+		$res = db_query_params (
+			'SELECT * FROM plugin_taskboard_releases WHERE taskboard_id=$1 AND start_date < $2 AND end_date > $2 LIMIT 1', 
+			array (
+					$this->getID(),
+					strtotime( date('Y-m-d') )
+			)
+		) ;
+		if (!$res) {
+			$this->setError('Cannot get current release.');
+			return false;
+		} else {
+			$row =  db_fetch_array($res);
+			error_log(1);
+			if( $row ) {
+				$current_release = new TaskBoardRelease( $this, $row );
+			}
+		}
+		db_free_result($res);
+	
+		return $current_release;
+	}
+	
 	function getReleaseValues() {
 		$ret = array();
 	

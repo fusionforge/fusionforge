@@ -86,6 +86,10 @@
 	opacity: 0.75;
 }
 
+.agile-current-release {
+	background-color: #00FF66;
+}
+
 #new-task-dialog div {
 	margin: 7px;
 }

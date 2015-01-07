@@ -118,7 +118,11 @@ $tech_box=html_build_select_box_from_arrays ($tech_id_arr,$tech_name_arr,'_assig
 $release_box = '';
 if( $taskboard->getReleaseField() ) {
 	$release_field_alias = $taskboard->getReleaseField();
-	$current_release = '' ; //TODO - initialize with real current release
+	$current_release = $taskboard->getCurrentRelease();
+	$current_release_title = '';
+	if( $current_release ) {
+		$current_release_title = $current_release->getTitle();
+	}
 	
 	$releases = $taskboard->getReleaseValues();
 
@@ -131,7 +135,7 @@ if( $taskboard->getReleaseField() ) {
 		}
 		
 		//$release_box=html_build_select_box_from_arrays ($release_id_arr,$release_name_arr,'_release',$current_release,true,_('Unplanned'));
-		$release_box=html_build_select_box_from_arrays ($release_id_arr,$release_name_arr,'_release',$current_release, true);
+		$release_box=html_build_select_box_from_arrays ($release_id_arr,$release_name_arr,'_release',$current_release_title, true);
 	}
 }
 ?>

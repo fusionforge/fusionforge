@@ -32,6 +32,8 @@
 
 ?>
 
+<link rel="stylesheet" type="text/css" href="/plugins/taskboard/css/agile-board.css">
+
 <div id="messages" class="warning" style="display: none;"></div>
 <br/>
 <?php 
@@ -49,11 +51,11 @@
 			'<strong>'._('Add release').'</strong>') ;
 	echo '</p>';
 
-	$tablearr = array(_('Title'),_('Start date'),_('End date'), _('Goals'));
+	$tablearr = array(_('Title'),_('Start date'),_('End date'), _('Goals'), _('Page'));
 	
 	echo $HTML->listTableTop($tablearr, false, 'sortable_table_tracker', 'sortable_table_tracker');
 	
-	
+	$today = strtotime(date('Y-m-d'));
 	foreach( $taskboardReleases as $release ) {
 		$release_title = htmlspecialchars( $release->getTitle() );
 		if (session_loggedin() && forge_check_perm('project_admin', $taskboard->Group->getID() ) ) {
@@ -62,13 +64,20 @@
 				 $release_title
 			);
 		}
+		
+		$current_release = '';
+		
+		if( $release->getStartDate() < $today && $today < $release->getEndDate() ) {
+			$current_release = ' class= "agile-current-release "';
+		}
 
 		echo '
-		<tr valign="middle">
+		<tr valign="middle"'.$current_release.'>
  			<td>'.$release_title.'</td>
 			<td>'.date("Y-m-d", $release->getStartDate()).'</td>
 			<td>'.date("Y-m-d", $release->getEndDate()).'</td>
 			<td>'.htmlspecialchars( $release->getGoals() ).'</td>
+			<td>'. ( $release->getPageUrl() ? '<a href="'.$release->getPageUrl().'" target="_blank">'.htmlspecialchars( $release->getPageUrl() ).'</a>' : '' ).'</td>
 		</tr>
 		';
 	}
