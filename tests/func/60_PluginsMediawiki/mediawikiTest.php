@@ -43,8 +43,7 @@ class PluginMediawiki extends FForge_SeleniumTestCase
 		$this->clickAndWait("submit");
 		$this->assertTrue($this->isTextPresent("Project information updated"));
 
- 		$this->cron_for_plugin("create-wikis.php", "mediawiki");
- 		sleep (10);
+		$this->waitSystasks();
 
 		$this->gotoProject('ProjectA');
 		$this->clickAndWait("link=Mediawiki");
