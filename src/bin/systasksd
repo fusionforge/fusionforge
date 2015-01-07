@@ -28,20 +28,6 @@ require (dirname(__FILE__).'/../common/include/env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/cron_utils.php';
 
-// Locking: for a single script
-// flock() locks are automatically lost on program termination, however
-// that happened (clean, segfault...)
-$lock = null;  // global, or auto-closed by PHP and we lose the lock!
-function AcquireReplicationLock($script) {
-  // Script lock: http://perl.plover.com/yak/flock/samples/slide006.html
-  global $argv, $lock;
-  $lock = fopen($script, 'r') or die("Failed to ask lock.\n");
-
-  if (!flock($lock, LOCK_EX | LOCK_NB)) {
-    die("There's a lock for '$script', exiting\n");
-  }
-}
-
 // Invalidate users/groups cache e.g. when a user is added to a group
 // Special-case in 'publish-subscribe' mode
 function usergroups_sync() {
@@ -136,7 +122,7 @@ while (true) {
 				}
 				db_query_params("UPDATE systasks SET status=$1 WHERE systask_id=$2",
 								array('WIP', $arr['systask_id']));
-				AcquireReplicationLock($script);
+				cron_acquire_lock($script);
 				$ret = null;
 				if ($verbose) print "Running: $script... ";
 				system("$script\n", $ret);
