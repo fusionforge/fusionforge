@@ -68,6 +68,10 @@ if ( $wgCommandLineMode ) {
         }
 }
 $g = group_get_object_by_name($fusionforgeproject) ;
+$group_id = $g->getID();
+if (!$g->usesPlugin('mediawiki')) {
+	exit_error(sprintf(_('Project %s does not use the Mediawiki plugin'), $fusionforgeproject));
+}
 $wgSitename         = $g->getPublicName() . " Wiki";
 $wgScriptPath       = "/plugins/mediawiki/wiki/$fusionforgeproject" ;
 
