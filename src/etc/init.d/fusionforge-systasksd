@@ -37,9 +37,13 @@ case $1 in
 	fi
 	;;
     stop)
-	kill $(cat $PIDFILE 2>/dev/null)
-	rm -f $PIDFILE
-	echo "Stopped"
+	if [ -e $PIDFILE ]; then
+	    kill $(cat $PIDFILE)
+	    rm -f $PIDFILE
+	    echo "Stopped"
+	else
+	    echo "No PID file, assuming stopped."
+	fi
 	;;
     status)
 	if check_running; then
@@ -52,5 +56,10 @@ case $1 in
     restart)
 	$0 stop
 	$0 start
+	;;
+
+    *)
+	echo "Usage: $0 start|stop|status|restart"
+	exit 1
 	;;
 esac
