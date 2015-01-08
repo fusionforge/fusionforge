@@ -102,3 +102,8 @@ fi
 
 rm -f $PGPASSFILE
 unset PGPASSFILE
+
+# Usually systasksd fails to start on first install because the DB
+# isn't populated yet.  Also it's a good idea to restart resident
+# daemons on schema upgrade.
+service fusionforge-systasksd restart
