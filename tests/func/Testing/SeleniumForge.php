@@ -119,7 +119,8 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	protected function runCommand($cmd)
 	{
 		system(RUN_COMMAND_PREFIX.$cmd, $ret);
-                $this->assertEquals($ret, 0);
+		$this->assertEquals($ret, 0);
+		ob_flush();
 	}
 
 	protected function db($sql)
@@ -288,21 +289,6 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 			$this->assertTrue($this->isTextPresent("Get Public Help"));
 			$this->assertTrue($this->isTextPresent("Project Developer Discussion"));
 		}
-	}
-
-	protected function initSvn($project='ProjectA', $user=FORGE_ADMIN_USERNAME)
-	{
-		// Remove svnroot directory before creating the project.
-		$forge_get_config = RUN_JOB_PATH."/forge_get_config";
-		$repo = `$forge_get_config chroot`.'/scmrepos/svn/'.strtolower($project);
-		if (is_dir($repo)) {
-			system("rm -fr $repo");
-		}
-
-		$this->init($project, $user);
-
-		// Run manually the cron for creating the svn structure.
-		$this->cron("scm/create_scm_repos.php");
 	}
 
 	protected function login($username)
