@@ -22,6 +22,10 @@
 /** This script will automatically dump Mediawiki databases to an XML file.
  *
  * It is intended to be started in a cronjob.
+ *
+ * Note: Wiki dumps of Wikis made private since the last invocation
+ *       will be removed; Wiki dumps of groups no longer using the
+ *       MediaWiki plugin will not be removed (probably a mistake)!
  */
 
 require_once dirname(__FILE__) . '/../../../www/env.inc.php';
