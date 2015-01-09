@@ -28,14 +28,21 @@ require_once $gfcommon.'include/pre.php';
 
 $first = true;
 do {
-	if ($first)
-		$first = false;
-	else
+	if (!$first)
 		sleep(1);
 
 	$res = db_query_params("SELECT * FROM systasks WHERE status=$1"
 	                       . " ORDER BY systask_id", array('TODO'));
 	$nb = db_numrows($res);
+	if ($nb > 0) {
+		echo "systasks_wait_until_empty.php: pending:\n";
+		while ($arr = db_fetch_array($res)) {
+			echo "- {$arr['systask_id']} {$arr['plugin_id']} {$arr['systask_type_id']}"
+				. " {$arr['group_id']} {$arr['user_id']}\n";
+		}
+	}
+
+	$first = false;
 } while ($nb > 0);
 
 // Local Variables:
