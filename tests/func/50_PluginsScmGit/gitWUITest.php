@@ -78,7 +78,7 @@ class ScmGitWUITest extends FForge_SeleniumTestCase
 		$this->assertTextPresent("Repository other-repo is marked for deletion");
 
 		// Run the cronjob to create repositories
-		$this->cron("scm/create_scm_repos.php");
+		$this->waitSystasks();
 
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");

@@ -40,7 +40,7 @@ class ScmSvnWUITest extends FForge_SeleniumTestCase
 		$this->clickAndWait("submit");
 
 		// Run the cronjob to create repositories
-		$this->cron("scm/create_scm_repos.php");
+		$this->waitSystasks();
 
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
