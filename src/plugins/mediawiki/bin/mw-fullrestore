@@ -2,7 +2,7 @@
 #-
 # MediaWiki Plugin full dump/restore for FusionForge
 #
-# Copyright © 2013
+# Copyright © 2013, 2015
 #	Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
 # All rights reserved.
 #
@@ -32,6 +32,10 @@ if [[ $# != 2 || $1 = *[[:space:]]* || ! -s $2 || \
 	echo 'Syntax: mw-fullrestore tgtprojectname src.fulldump' 1>&2
 	exit 255
 fi
+
+# check if project uses Wiki at all
+/usr/share/gforge/plugins/mediawiki/bin/mw-wrapper.php "$1" \
+    showStats.php >/dev/null || exit $?
 
 set -x
 set -e

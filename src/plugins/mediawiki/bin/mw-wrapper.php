@@ -5,8 +5,8 @@
  *
  * Copyright © 2010
  *	Roland Mas
- * Copyright © 2012, 2014
- *	Thorsten Glaser <t.glaser@tarent.de>
+ * Copyright © 2012, 2014, 2015
+ *	Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
  * All rights reserved.
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -68,12 +68,14 @@ setup_plugin_manager () ;
 
 $group = group_get_object_by_name($fusionforgeproject) ;
 if (!$group || $group->isError()) {
-	die("Wrong group! " .
+	fwrite(STDERR, "Wrong group! " .
 	    ($group ? $group->getErrorMessage() : "") . "\n");
+	exit(1);
 }
 
 if (!$group->usesPlugin('mediawiki')) {
-	die ("Project doesn't use the Mediawiki plugin\n") ;
+	fwrite(STDERR, "Project doesn't use the Mediawiki plugin\n");
+	exit(1);
 }
 
 function ffmw_wrapper_fixup_searchpath($username) {
