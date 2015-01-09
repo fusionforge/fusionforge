@@ -37,7 +37,7 @@ $exit_errorlevel = 0;
  * @param		string	Error toptab
  */
 function exit_error($title,$toptab='') {
-	print 'ERROR - '.$title;
+	print 'ERROR - ' . $title . "\n";
 	exit($exit_errorlevel);
 }
 
