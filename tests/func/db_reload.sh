@@ -202,5 +202,7 @@ if [ -x /usr/sbin/nscd ]; then
     echo "Flushing/restarting nscd"
     nscd -i passwd && nscd -i group
 fi
-
 echo "nscd flushed, going on with tests"
+
+# We may have changed plugins.plugin_id, need to reload the systasksd
+service fusionforge-systasksd restart

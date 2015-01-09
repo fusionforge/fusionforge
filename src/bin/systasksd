@@ -45,12 +45,13 @@ function usergroups_sync() {
 
 function systask_get_script($plugin_id, $systask_type_id) {
 		global $cron_arr;
-		global $pm, $plugins;
 		if ($plugin_id == null) {
 				if (isset($cron_arr[$systask_type_id]))
 						return forge_get_config('source_path')
 								.'/cronjobs/'.$cron_arr[$systask_type_id];
 		} else {
+				global $pm;
+				$plugins = $pm->GetPlugins();  // reload in case a new plugin was installed
 				if (isset($plugins[$plugin_id])) {
 						$plugin = $pm->GetPluginObject($plugins[$plugin_id]);
 						if (isset($plugin->systask_types[$systask_type_id]))
@@ -96,7 +97,6 @@ if (!$verbose) {
 
 
 $pm = plugin_manager_get_object();
-$plugins = $pm->GetPlugins();
 
 usergroups_sync();
 while (true) {
