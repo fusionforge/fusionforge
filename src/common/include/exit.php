@@ -23,6 +23,14 @@
  */
 
 /**
+ * exit_errorlevel – Return code for exit_error() and friends
+ *
+ * A script can set this to explicitly return a different
+ * status code than the historic default of 0 to the caller.
+ */
+$exit_errorlevel = 0;
+
+/**
  * exit_error() - Exit PHP with error
  *
  * @param	string	$text	Error text
@@ -33,7 +41,7 @@ function exit_error($text = "", $toptab = '') {
 	$HTML->header(array('title'=>_('Exiting with error'), 'group'=>$group_id, 'toptab'=>$toptab));
 	echo $HTML->error_msg(htmlspecialchars($text));
 	$HTML->footer(array());
-	exit;
+	exit($exit_errorlevel);
 }
 
 /**
