@@ -53,7 +53,8 @@ $project_dir = forge_get_config('projects_path', 'mediawiki') . "/"
 	. $fusionforgeproject ;
 
 if (!is_dir($project_dir)) {
-	exit_error (sprintf(_('Mediawiki for project %s not created yet, please wait for a few minutes.'), $fusionforgeproject)) ;
+	fprintf(STDERR, _('Mediawiki for project %s not created yet, please wait for a few minutes.'), $fusionforgeproject);
+	exit(1);
 }
 
 
@@ -64,13 +65,15 @@ require_once( "$IP/includes/DefaultSettings.php" );
 
 if ( $wgCommandLineMode ) {
         if ( isset( $_SERVER ) && array_key_exists( 'REQUEST_METHOD', $_SERVER ) ) {
-                die( "This script must be run from the command line\n" );
+                fwrite(STDERR, "This script must be run from the command line\n");
+		exit(1);
         }
 }
 $g = group_get_object_by_name($fusionforgeproject) ;
 $group_id = $g->getID();
 if (!$g->usesPlugin('mediawiki')) {
-	exit_error(sprintf(_('Project %s does not use the Mediawiki plugin'), $fusionforgeproject));
+	fprintf(STDERR, _('Project %s does not use the Mediawiki plugin'), $fusionforgeproject);
+	exit(1);
 }
 $wgSitename         = $g->getPublicName() . " Wiki";
 $wgScriptPath       = "/plugins/mediawiki/wiki/$fusionforgeproject" ;
