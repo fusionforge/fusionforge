@@ -26,6 +26,7 @@ function loadTaskboard( group_id ) {
 		async: false
 	}).done(function( answer ) {
 		jQuery('#agile-board tbody').html('');
+		jQuery('#agile-board-progress').html( '' );
 
 		if(answer['message']) {
 			showMessage(answer['message'], 'error');
@@ -50,10 +51,17 @@ function loadTaskboard( group_id ) {
 			for(var i=0 ; i<aUserStories.length ; i++) {
 				drawUserStory( aUserStories[i] );
 			};
+			
+			drawBoardProgress();
 	
 			initUserStories();
 	
 			initEditable();
+			
+			// set fixed with in pixels for preventing bad view when d'n'd
+			jQuery('.agile-sticker').each( function( i, e) {
+				jQuery(e).css('width',jQuery(e).width() );
+			});
 			
 			jQuery( ".agile-minimize-column" ).click( function() {
 				var phase_id = jQuery(this).attr('phase_id');
@@ -90,6 +98,55 @@ function loadTaskboard( group_id ) {
 	});
 }
 
+function drawBoardProgress() {
+	var html = '<table width="99%" style="margin-bottom: 0px;">';
+		
+	var start= bShowUserStories ? 1 : 0;
+	
+	// tasks progress
+	html += '<tr><td width="' + parseInt( 100 / aPhases.length )  + '%" style="padding: 0;">' + gMessages.progressByTasks + ':</td><td style="padding: 0;">';
+	
+	var totalTasks = 0;
+	var totalCostEstimated = 0;
+	var totalCostRemaining = 0;
+	
+	// TODO - claculate progree
+	for( var j=start; j<aPhases.length; j++) {
+		aPhases[j].progressTasks = 0;
+		aPhases[j].progressCost = 0;
+		for( var i=0; i<aUserStories.length; i++ ) {
+			for( var t=0; t<aUserStories[i].tasks.length; t++ ) {
+				if( taskInPhase( aUserStories[i].tasks[t], aPhases[j].id ) ) {
+					aPhases[j].progressTasks ++;
+					totalTasks ++;
+					
+					totalCostEstimated += parseInt(  aUserStories[i].tasks[t].estimated_dev_effort );
+					totalCostRemaining += parseInt( aUserStories[i].tasks[t].remaining_dev_effort );
+				}
+			}
+		}
+	}
+
+	for( var j=start; j<aPhases.length; j++) {
+		if( aPhases[j].progressTasks ) {
+			var wt = parseInt(  parseInt( aPhases[j].progressTasks ) / totalTasks * 100 );
+			
+			var back = '';
+			if( aPhases[j].titlebackground ) {
+				back = 'background-color:' + aPhases[j].titlebackground;
+			}
+			html += '<div style="float : left; text-align: center; padding: 2px 0; width: ' + wt + '%; ' + back + '" ' +
+				'title="' + aPhases[j].title + '"' + 
+				'">' + 
+				aPhases[j].progressTasks + 
+				'</div>';
+		}
+	}
+
+	html += '</td></tr><table>';
+	
+	jQuery('#agile-board-progress').html( html );
+}
 
 function drawUserStories() {
 	var l_sHtml = '';
@@ -117,6 +174,10 @@ function drawUserStories() {
 			}
 			l_sHtml += '<td id="' + ph.id + '-' + us.id + '" class="agile-phase agile-phase-' + ph.id + '"' + style + '>';
 			l_sHtml += "</td>\n";
+			
+			// initialize progress counters
+			aPhases[j].progressTasks = 0;
+			aPhases[j].progressCost = 0;
 		}
 
 		l_sHtml += "</tr>\n";
@@ -187,18 +248,25 @@ function setPhase( nUserStoryId, nTaskId, nTargetPhaseId ) {
 								if(answer['action'] == 'reload') {
 									// reload whole board
 									loadTaskboard( gGroupId );
+								} else {
+									if( answer['task'] ) {
+										// change particular task data
+										aUserStories[i].tasks[j] = answer['task']; 
+									}
+	
+									if( l_oUserStory ) {
+										drawUserStory(l_oUserStory);
+									}
+									
+									jQuery('.agile-sticker').each( function( i, e) {
+										jQuery(e).css('width',jQuery(e).width() );
+									});
+	
+									jQuery('#agile-board-progress').html( '' );
+									drawBoardProgress();
+	
+									initEditable();
 								}
-
-								if( answer['task'] ) {
-									// change particular task data
-									aUserStories[i].tasks[j] = answer['task']; 
-								}
-
-								if( l_oUserStory ) {
-									drawUserStory(l_oUserStory);
-								}
-								
-								initEditable();
 							});
 					}
 				}	

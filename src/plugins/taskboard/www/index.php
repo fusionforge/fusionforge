@@ -134,7 +134,6 @@ if( $taskboard->getReleaseField() ) {
 			$release_name_arr[] = $release_name;
 		}
 		
-		//$release_box=html_build_select_box_from_arrays ($release_id_arr,$release_name_arr,'_release',$current_release,true,_('Unplanned'));
 		$release_box=html_build_select_box_from_arrays ($release_id_arr,$release_name_arr,'_release',$current_release_title, true);
 	}
 }
@@ -157,6 +156,9 @@ if( $taskboard->getReleaseField() ) {
 			</tr>
 		</table>
 	</form>
+</div>
+
+<div id="agile-board-progress">
 </div>
 
 <table id="agile-board">
@@ -227,7 +229,8 @@ var gIsManager = <?php echo ( $taskboard->TrackersAdapter->isManager() ? 'true' 
 var gIsTechnician = <?php echo ( $taskboard->TrackersAdapter->isTechnician() ? 'true' : 'false' ) ?>;
 var gAjaxUrl = '<?php echo util_make_url ('/plugins/taskboard/ajax.php') ; ?>';
 var gMessages = {
-	'notasks' : "<?php echo _('There no tasks found.') ?>"
+	'notasks' : "<?php echo _('There no tasks found.') ?>",
+	'progressByTasks' : "<?php echo _('Progress by tasks') ?>"
 };
 
 bShowUserStories = <?php echo $taskboard->getUserStoriesTrackerID() ? 'true' : 'false' ?>;

@@ -695,7 +695,7 @@ class TaskBoard extends Error {
 		$ret['description'] = str_replace("\n", '<br>', $task->getDetails() );
 		$ret['assigned_to'] = $task->getAssignedRealName();
 		$ret['priority'] = $task->getPriority();
-		foreach( array( 'resolution', 'estimated_dev_effort', 'remaining_estimated_effort', $us_ref_field) as $f){
+		foreach( array( 'resolution', 'estimated_dev_effort', 'remaining_dev_effort', $us_ref_field) as $f){
 			$ret[$f] = '';
 			if( array_key_exists( $f, $fields_ids ) ) {
 				if( array_key_exists( $fields_ids[$f], $extra_data ) ) {

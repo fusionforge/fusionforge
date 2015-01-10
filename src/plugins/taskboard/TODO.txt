@@ -9,7 +9,8 @@
 - DONE View  - first column by default 
 - DONE View - filter by assigned persons
 - DONE Releases are based either on US or on tasks
-- View - indicators - progress by tasks number
+- DONE View - indicators - progress by tasks number
+- API - configured fields support in mapped tasks ('estimated_dev_effort', 'remaining_dev_effort', 'user_story' )
 - View - indicators - progress by tasks cost (if efforts fields are configured)
 - DONE Admin - releases management
 - View - auto ref rate support
