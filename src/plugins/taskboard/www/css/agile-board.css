@@ -5,6 +5,24 @@
 	border-collapse: separate;
 }
 
+#agile-board-progress table {
+	width: 99%;
+	margin-bottom: 3px;
+}
+
+.agile-board-progress-bar, .agile-board-progress-bar-done, .agile-board-progress-bar-remains {
+	float : left; 
+	text-align: center; 
+	padding: 2px 0; 
+}
+
+.agile-board-progress-bar-done {
+	background-color: #66ff66;
+}
+
+.agile-board-progress-bar-remains {
+	background-color: #ff9966;
+}
 
 .agile-user-story {
 /*	padding-bottom: 5px; */

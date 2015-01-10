@@ -80,6 +80,11 @@ if (!$group_id) {
 		}
 
 		$columns = $taskboard->getColumns();
+		
+		if( count( $columns ) == 0 ) {
+			exit_error( _('Configure columns for the board first.') );
+		}
+		
 		$user_stories_tracker = $taskboard->getUserStoriesTrackerID();
 		$columns_number = count($columns) + ( $user_stories_tracker ? 1 : 0 );
 		$column_width = intval( 100 / $columns_number );
@@ -230,7 +235,8 @@ var gIsTechnician = <?php echo ( $taskboard->TrackersAdapter->isTechnician() ? '
 var gAjaxUrl = '<?php echo util_make_url ('/plugins/taskboard/ajax.php') ; ?>';
 var gMessages = {
 	'notasks' : "<?php echo _('There no tasks found.') ?>",
-	'progressByTasks' : "<?php echo _('Progress by tasks') ?>"
+	'progressByTasks' : "<?php echo _('Progress by tasks') ?>",
+	'progressByCost' : "<?php echo _('Progress by cost') ?>"
 };
 
 bShowUserStories = <?php echo $taskboard->getUserStoriesTrackerID() ? 'true' : 'false' ?>;

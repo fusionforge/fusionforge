@@ -674,6 +674,15 @@ class TaskBoard extends Error {
 
 		return $ret;
 	}
+	
+	function getMandatoryFieldsMapping() {
+		return array(
+			'resolution' => 'resolution',
+			'estimated_dev_effort' => $this->getEstimatedCostField(),
+			'remaining_dev_effort' => $this->getRemainingCostField(),
+			'user_story' => $this->getUserStoriesReferenceField()
+		);
+	}
 
 	/**
 	 *      _mapTask - map artifact object into hash
@@ -685,7 +694,7 @@ class TaskBoard extends Error {
 	private function _mapTask( $task ) {
 		$ret = array();
 	
-		$us_ref_field = $this->getUserStoriesReferenceField();
+		$ef_mapping = $this->getMandatoryFieldsMapping();
 
 		$fields_ids = $this->TrackersAdapter->getFieldsIds($task->ArtifactType->getID() );
 		$extra_data = $task->getExtraFieldDataText();	
@@ -695,11 +704,11 @@ class TaskBoard extends Error {
 		$ret['description'] = str_replace("\n", '<br>', $task->getDetails() );
 		$ret['assigned_to'] = $task->getAssignedRealName();
 		$ret['priority'] = $task->getPriority();
-		foreach( array( 'resolution', 'estimated_dev_effort', 'remaining_dev_effort', $us_ref_field) as $f){
-			$ret[$f] = '';
+		foreach( $ef_mapping as $k => $f){
+			$ret[$k] = '';
 			if( array_key_exists( $f, $fields_ids ) ) {
 				if( array_key_exists( $fields_ids[$f], $extra_data ) ) {
-					$ret[$f] = $extra_data[$fields_ids[$f]]['value'];
+					$ret[$k] = $extra_data[$fields_ids[$f]]['value'];
 				}
 			}
 		}

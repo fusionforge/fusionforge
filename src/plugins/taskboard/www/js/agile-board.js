@@ -99,18 +99,13 @@ function loadTaskboard( group_id ) {
 }
 
 function drawBoardProgress() {
-	var html = '<table width="99%" style="margin-bottom: 0px;">';
-		
 	var start= bShowUserStories ? 1 : 0;
-	
-	// tasks progress
-	html += '<tr><td width="' + parseInt( 100 / aPhases.length )  + '%" style="padding: 0;">' + gMessages.progressByTasks + ':</td><td style="padding: 0;">';
-	
+
 	var totalTasks = 0;
 	var totalCostEstimated = 0;
 	var totalCostRemaining = 0;
 	
-	// TODO - claculate progree
+	var lastPhaseWithTasks = 0;
 	for( var j=start; j<aPhases.length; j++) {
 		aPhases[j].progressTasks = 0;
 		aPhases[j].progressCost = 0;
@@ -120,30 +115,52 @@ function drawBoardProgress() {
 					aPhases[j].progressTasks ++;
 					totalTasks ++;
 					
-					totalCostEstimated += parseInt(  aUserStories[i].tasks[t].estimated_dev_effort );
-					totalCostRemaining += parseInt( aUserStories[i].tasks[t].remaining_dev_effort );
+					if( aUserStories[i].tasks[t].estimated_dev_effort ) {
+						totalCostEstimated += parseInt( aUserStories[i].tasks[t].estimated_dev_effort );
+						totalCostRemaining += parseInt( aUserStories[i].tasks[t].remaining_dev_effort );
+					}
+					
+					lastPhaseWithTasks = j;
 				}
 			}
 		}
 	}
 
+	var html = '<table>';
+	html += '<tr><td width="' + parseInt( 100 / aPhases.length )  + '%" style="padding: 0;">' + gMessages.progressByTasks + ':</td><td style="padding: 0;">';
+	
+	var buf = 0;
 	for( var j=start; j<aPhases.length; j++) {
 		if( aPhases[j].progressTasks ) {
 			var wt = parseInt(  parseInt( aPhases[j].progressTasks ) / totalTasks * 100 );
+			if( j == lastPhaseWithTasks ) {
+				// to avoid bad presenttaion when sum of rounded percemts less then 100
+				wt = 100 - buf;
+			}
+			buf += wt;
 			
 			var back = '';
 			if( aPhases[j].titlebackground ) {
 				back = 'background-color:' + aPhases[j].titlebackground;
 			}
-			html += '<div style="float : left; text-align: center; padding: 2px 0; width: ' + wt + '%; ' + back + '" ' +
-				'title="' + aPhases[j].title + '"' + 
-				'">' + 
+			html += '<div class="agile-board-progress-bar" style="width: ' + wt + '%; ' + back + '" ' + 'title="' + aPhases[j].title + '">' + 
 				aPhases[j].progressTasks + 
 				'</div>';
 		}
 	}
 
 	html += '</td></tr><table>';
+
+	if( parseInt(totalCostEstimated) > 0 ) {
+		var totalCostCompleted = totalCostEstimated - totalCostRemaining;
+		var wt = parseInt( totalCostCompleted/totalCostEstimated * 100);
+		// show progress by cost
+		html += '<table>';
+		html += '<tr><td width="' + parseInt( 100 / aPhases.length )  + '%" style="padding: 0;">' + gMessages.progressByCost + ':</td><td style="padding: 0;">';
+		html += '<div class="agile-board-progress-bar-done" style="width: ' + wt + '%;">' + totalCostCompleted + '</div>';
+		html += '<div class="agile-board-progress-bar-remains" style="width: ' + ( 100 - wt ) + '%;">' + totalCostRemaining + '</div>';
+		html += '</td></tr><table>';
+	}
 	
 	jQuery('#agile-board-progress').html( html );
 }

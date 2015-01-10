@@ -133,15 +133,8 @@ class TaskBoardBasicAdapter {
 	 * @return   array
 	 */
 	function getFieldsIds($tracker_id) {
-		$ret = array(
-			'resolution' => 0,
-			'estimated_dev_effort' => 0,
-			'remaining_dev_effort' => 0,
-			'release' => 0,
-			'user_story' => 0
-		);
+		$ret = array();
 
-		// TODO mapping into madatory fields according to tracker config
 		if( !array_key_exists($tracker_id, $this->_fields) ) {
 			$at = $this->getTasksTracker($tracker_id);
 
