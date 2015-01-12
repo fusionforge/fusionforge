@@ -103,7 +103,7 @@ function rebuild_one_rpm {
 	rebuild_needed=yes
     else
 	for i in $target $others ; do
-	    if ! rpm -q $i >/dev/null 2>&1; then
+	    if ! yum list $i >/dev/null 2>&1; then
 		rebuild_needed=yes
 		break
 	    fi
