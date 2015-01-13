@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/sh
 
 set -e
 
@@ -24,8 +24,15 @@ case "$host" in
 	;;
 esac
 
-sed -i -e "s/lxc.cap.drop = mac_admin mac_override.*/lxc.cap.drop = mac_admin mac_override/" /usr/share/lxc/config/centos.common.conf
-sed -i -e "s/^ *chroot \$rootfs_path passwd -e root/# DISABLED # &/" /usr/share/lxc/templates/lxc-centos
+# Work-around systemd-journald taking 100% CPU in Centos7
+if ! grep -q '^lxc.kmsg = 0' /usr/share/lxc/config/centos.common.conf; then
+    echo 'lxc.kmsg = 0' >> /usr/share/lxc/config/centos.common.conf
+fi
+# TODO: don't modify the side-wide configuration
+# ?
+sed -i -e 's/lxc.cap.drop = mac_admin mac_override.*/lxc.cap.drop = mac_admin mac_override/' /usr/share/lxc/config/centos.common.conf
+# Don't expire root password
+sed -i -e 's/^ *chroot $rootfs_path passwd -e root/# DISABLED # &/' /usr/share/lxc/templates/lxc-centos
 
 # Get variables
 case $host in
@@ -51,67 +58,38 @@ esac
 rootfs=/var/lib/lxc/$host.local/rootfs
 
 case $cmd in
-    destroy)
-	$0 stop $host
-	if lxc-ls --stopped | grep -q $host.local ; then
-	    lxc-destroy -n $host.local
-	fi
-	;;
-    
-    emptycache)
-	$0 destroy $host
-	rm -rf $cachedir
-	;;
-
+    # Prepare customized template
+    # TODO: don't modify the side-wide cache
     prepare)
 	if [ ! -e $cachedir ] ; then
+	    # Create and destroy an empty container to create the cache
+	    $0 destroy $host
 	    lxc-create -t $template -f /etc/lxc/default.conf --name $host.local -- --release $release
-	    lxc-destroy -n $host.local || true
-	    
+	    $0 destroy $host
+
+	    # Customize the cache
 	    case $host in
 		centos7)
 		    chroot $cachedir usermod --expiredate $(date +"%Y-%m-%d" -d "1 year") root
 		    chroot $cachedir yum install -y avahi-autoipd avahi-daemon nscd cronie
-		    sed -i -e s/^PIDFile/#PIDFile/ $cachedir/lib/systemd/system/nscd.service 
-		    cat >> $cachedir/usr/local/sbin/update-hosts <<EOF
-#! /bin/sh
-sleep 5
-(echo -n \$(/sbin/ip addr show dev eth0 | awk '/inet / { print \$2 }'|cut -d/ -f1) ; echo -n " " ; echo $host.local $host) >> /etc/hosts 2> /root/log
-EOF
-		    mkdir -p $cachedir/etc/cron.d
-		    echo '@reboot root sh /usr/local/sbin/update-hosts' > $cachedir/etc/cron.d/boot-update-hosts
-		    ;;
-		centos5)
-		    chroot $cachedir yum install -y avahi vixie-cron
-		    cat >> $cachedir/usr/local/sbin/update-hosts <<EOF
-#! /bin/sh
-sleep 5
-(echo -n \$(/sbin/ip addr show dev eth0 | awk '/inet / { print \$2 }'|cut -d/ -f1) ; echo -n " " ; echo $host.local $host) >> /etc/hosts 2> /root/log
-EOF
-		    mkdir -p $cachedir/etc/cron.d
-		    echo '@reboot root sh /usr/local/sbin/update-hosts' > $cachedir/etc/cron.d/boot-update-hosts
+		    # Fix 'service nscd restart' stalling (!?)
+		    sed -i -e s/^PIDFile/#PIDFile/ $cachedir/lib/systemd/system/nscd.service
 		    ;;
 		centos6)
 		    chroot $cachedir yum install -y avahi-autoipd avahi cronie
-		    cat >> $cachedir/usr/local/sbin/update-hosts <<EOF
-#! /bin/sh
-sleep 5
-(echo -n \$(/sbin/ip addr show dev eth0 | awk '/inet / { print \$2 }'|cut -d/ -f1) ; echo -n " " ; echo $host.local $host) >> /etc/hosts 2> /root/log
-EOF
-		    mkdir -p $cachedir/etc/cron.d
-		    echo '@reboot root sh /usr/local/sbin/update-hosts' > $cachedir/etc/cron.d/boot-update-hosts
+		    ;;
+		centos5)
+		    chroot $cachedir yum install -y avahi vixie-cron
 		    ;;
 		debian*)
-		    chroot $cachedir apt-get install --yes avahi-autoipd avahi-daemon unattended-upgrades bash-completion
-		    # Avoid "Invalid Email Address" during CreateForum::testEmailAddressNotAlreadyUsed
-		    cat <<EOF >> $cachedir/etc/hosts
-127.0.1.1	$host.local
-EOF
+		    chroot $cachedir apt-get install --yes \
+			   avahi-autoipd avahi-daemon unattended-upgrades bash-completion
 		    ;;
 	    esac
+	    # Fix Avahi compatibility with LXC
 	    sed -i -e /^rlimit-nproc=/d $cachedir/etc/avahi/avahi-daemon.conf
 	    
-	    mkdir -p $cachedir/root/.ssh
+	    mkdir -p $cachedir/root/.ssh/
 	    cp /var/lib/jenkins/.ssh/id_rsa.pub $cachedir/root/.ssh/authorized_keys
 
 	    # SSH host key cache
@@ -122,20 +100,7 @@ EOF
 	$0 upgrade $host
 	;;
 
-    refresh)
-	if [ ! -d $cachedir ] ; then
-	    $0 prepare $host
-	fi
-	$0 destroy $host
-	lxc-create -t $template -f /etc/lxc/default.conf --name $host.local -- --release $release
-	case $host in
-	    centos*)
-		echo "127.0.0.1 localhost" > $rootfs/etc/hosts
-		echo "$host.local" > $rootfs/etc/hostname
-		;;
-	esac
-	;;
-    
+    # Upgrade template
     upgrade)
 	$0 destroy $host
 	case $host in
@@ -156,22 +121,48 @@ EOF
 	esac
 	;;
 
+    # Remove customized template
+    emptycache)
+	rm -rf $cachedir
+	;;
+
+
+    # Recreate VM
+    refresh)
+	$0 prepare $host
+	$0 destroy $host
+	lxc-create -t $template -f /etc/lxc/default.conf --name $host.local -- --release $release
+	case $host in
+	    centos*)
+		echo "$host.local" > $rootfs/etc/hostname
+		# Fix 'hostname -f' == 'localhost'
+		echo "127.0.1.1 $host.local" > $rootfs/etc/hosts
+		;;
+	    *)
+		# Avoid "Invalid Email Address" during CreateForum::testEmailAddressNotAlreadyUsed
+		echo "127.0.1.1 $host.local" >> $rootfs/etc/hosts
+		;;
+	esac
+	;;
+
+    # Start VM
     start)
 	if [ ! -d $rootfs ] ; then
 	    $0 refresh $host
 	fi
-	case $host in
-	    debian*)
-		cp /var/cache/lxc/ssh/$host.local/* $rootfs/etc/ssh
-		;;
-	esac
 	hwaddr=00:16:3e:$(echo $host | md5sum | cut -c -6 | sed s/../\&:/g | sed s/:$//)
 	lxc-start --name $host.local -s lxc.network.hwaddr=$hwaddr -s lxc.utsname=$host --daemon
 	;;
 
+    # Harshly^WQuickly stop VM
     stop)
 	if lxc-ls --active | grep -q $host.local ; then
 	    lxc-stop --name $host.local --kill
 	fi
+	;;
+
+    # Harshly^WQuickly destroy VM
+    destroy)
+	lxc-destroy -fn $host.local || true
 	;;
 esac
