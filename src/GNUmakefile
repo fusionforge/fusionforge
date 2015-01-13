@@ -76,7 +76,9 @@ install-common: install-config install-plugin-authbuiltin
 	ln -nfs $(pkgdatadir)/bin/forge_make_admin $(DESTDIR)$(bindir)
 	ln -nfs $(pkgdatadir)/bin/forge_set_password $(DESTDIR)$(bindir)
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(sysconfdir)/init.d/
-	$(CP_R) etc/init.d/fusionforge-systasksd $(DESTDIR)$(sysconfdir)/init.d/
+	sed 's,@bindir@,$(bindir),' etc/init.d/fusionforge-systasksd \
+		> $(DESTDIR)$(sysconfdir)/init.d/fusionforge-systasksd
+	chmod 755 $(DESTDIR)$(sysconfdir)/init.d/fusionforge-systasksd
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(log_path)/
 
 install-db-local: install-db
