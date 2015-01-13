@@ -241,6 +241,15 @@ EOF
 	    backport_rpm_from_fedora_updates --source-package httpd-itk httpd-itk-2.4.7.01
 	    #
 	    # End of backport for httpd-itk + related packages
+
+	    # No mediawiki in EPEL7
+	    DEPS=""
+	    REMOVEDEPS=$DEPS
+	    backport_rpm_from_fedora mediawiki
+	    ;;
+
+	6)
+	    yum install mediawiki119
 	    ;;
     esac
 
@@ -251,10 +260,6 @@ EOF
     DEPS="php-channel-htmlpurifier"
     REMOVEDEPS=""
     backport_rpm_from_fedora php-htmlpurifier-htmlpurifier
-
-    DEPS=""
-    REMOVEDEPS=$DEPS
-    backport_rpm_from_fedora mediawiki
 
     # TODO: postfix: rebuild from RHEL/CentOS sources with pgsql enabled,
     # so we can test mta-postfix
