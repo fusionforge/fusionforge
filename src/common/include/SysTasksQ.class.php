@@ -38,7 +38,6 @@ class SysTasksQ extends Error {
 				if (!$res || db_affected_rows($res) < 1) {
 						$this->setError(sprintf(_('Error: Cannot create system action: %s'),
 												db_error()));
-						db_rollback();
 						return false;
 				}
 		}
