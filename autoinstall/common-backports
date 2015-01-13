@@ -199,10 +199,13 @@ EOF
 
     yum install -y gcc gcc-c++ postgresql-devel python-devel libpng-devel sqlite-devel autoconf libtool systemd-devel freetype-devel
 
+    # libnss-pgsql: no available package for RHEL; though it's available in Fedora
+    # (there's also http://yum.postgresql.org/8.4/redhat/rhel-5-x86_64/)
     DEPS="xmlto"
     REMOVEDEPS=$DEPS
     backport_rpm_from_fedora libnss-pgsql
 
+    # moin: no available package for RHEL; though it's available in Fedora
     DEPS=""
     REMOVEDEPS=$DEPS
     backport_rpm_from_fedora moin
