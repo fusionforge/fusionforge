@@ -126,7 +126,7 @@ function rebuild_one_rpm {
 
 	for i in $src-*.src.rpm ; do
 	    if [ $rebuild = yes ] || [ ! -e "$i.done" ] ; then
-		rpmbuild --rebuild $src-*.src.rpm
+		rpmbuild -D'runselftest 0' --rebuild $src-*.src.rpm
 	    fi
 	    mv -f "$i" "$i.done"
 	done
