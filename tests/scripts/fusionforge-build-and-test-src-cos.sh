@@ -58,7 +58,10 @@ echo "Sync code on root@$HOST:$FORGE_HOME"
 rsync -a --delete src/ root@$HOST:$FORGE_HOME/
 
 echo "Run Install on $HOST"
-ssh root@$HOST "$FORGE_HOME/install-ng --auto --reinit"
+if ! ssh root@$HOST "$FORGE_HOME/install-ng --auto --reinit" ; then
+    rsync -av root@$HOST:/var/log/ root@$HOST:/tmp/gforge-*.log $WORKSPACE/reports/
+    exit 1
+fi
 
 echo "Dump freshly installed database"
 ssh root@$HOST "su - postgres -c \"pg_dumpall\" > /root/dump"
