@@ -219,8 +219,6 @@ EOF
 
 	    # Backport httpd-itk from Fedora 20
 	    # until https://bugzilla.redhat.com/show_bug.cgi?id=1059143 is fixed
-	    # …yes, it requires pulling in a lot of stuff :-(
-	    #
 	    #
 	    DEPS="libuuid-devel lksctp-tools-devel"
 	    REMOVEDEPS=$DEPS
@@ -241,25 +239,6 @@ EOF
 	    DEPS=""
 	    REMOVEDEPS=$DEPS
 	    backport_rpm_from_fedora_updates --source-package httpd-itk httpd-itk-2.4.7.01
-
-	    DEPS=""
-	    REMOVEDEPS=$DEPS
-	    rebuild_rpm_from_centos mod_wsgi
-
-	    if ! rpm -qR php | grep -q httpd.*2.4.10 ; then
-		if rpm -qi mariadb-libs | grep -q 5\.5\. && ! rpm -qi mariadb-libs | grep -q 5\.5\.37 ; then
-		    yum downgrade -y mariadb-libs
-		fi
-
-		DEPS="bzip2-devel curl-devel pam-devel libstdc++-devel libedit-devel libtool-ltdl-devel libzip-devel systemtap-sdt-devel firebird-devel net-snmp-devel libxslt-devel t1lib-devel libvpx-devel gmp-devel tokyocabinet-devel libmcrypt-devel libtidy-devel freetds-devel aspell-devel recode-devel libicu-devel enchant-devel libc-client-devel openldap-devel unixODBC-devel mariadb-devel-5.5.37 exim"
-		REMOVEDEPS=$DEPS
-		rebuild_rpm_from_centos --source-package php php-common php-cli php php-pdo php-pgsql php-process php-ldap php-gd
-
-		if rpm -qi mariadb-libs | grep -q 5\.5\.37 ; then
-		    yum upgrade -y mariadb-libs
-		fi
-	    fi
-	    #
 	    #
 	    # End of backport for httpd-itk + related packages
 	    ;;
