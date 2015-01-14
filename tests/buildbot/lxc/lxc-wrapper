@@ -59,7 +59,7 @@ rootfs=/var/lib/lxc/$host.local/rootfs
 
 case $cmd in
     # Prepare customized template
-    # TODO: don't modify the side-wide cache
+    # TODO: only apply generic fixes in the site-wide cache (i.e. nothing FF-specific)
     prepare)
 	if [ ! -e $cachedir ] ; then
 	    # Create and destroy an empty container to create the cache
@@ -88,9 +88,6 @@ case $cmd in
 	    esac
 	    # Fix Avahi compatibility with LXC
 	    sed -i -e /^rlimit-nproc=/d $cachedir/etc/avahi/avahi-daemon.conf
-	    
-	    mkdir -p $cachedir/root/.ssh/
-	    cp /var/lib/jenkins/.ssh/id_rsa.pub $cachedir/root/.ssh/authorized_keys
 	fi
 
 	$0 upgrade $host
@@ -139,6 +136,12 @@ case $cmd in
 		echo "127.0.1.1 $host.local" >> $rootfs/etc/hosts
 		;;
 	esac
+	# Grant us SSH access - not in prepare to avoid modifying the site-wide cache
+	# TODO: populate ssh cache if it doesn't exist yet
+	cp /var/cache/lxc/ssh/$host.local/* $rootfs/etc/ssh/
+	chmod 600 $rootfs/etc/ssh/*_key
+	mkdir -p $rootfs/root/.ssh/
+	cp /var/lib/jenkins/.ssh/id_rsa.pub $rootfs/root/.ssh/authorized_keys
 	;;
 
     # Start VM
@@ -146,10 +149,7 @@ case $cmd in
 	if [ ! -d $rootfs ] ; then
 	    $0 refresh $host
 	fi
-	# SSH host key cache - template 'lxc-debian' overwrites
-	# /etc/ssh on lxc-create, so not done in 'prepare'
-	# TODO: populate ssh cache if it doesn't exist yet
-	cp /var/cache/lxc/ssh/$host.local/* $rootfs/etc/ssh/
+	# TODO: write this in VM config (so it can be started manually)?
 	hwaddr=00:16:3e:$(echo $host | md5sum | cut -c -6 | sed s/../\&:/g | sed s/:$//)
 	lxc-start --name $host.local -s lxc.network.hwaddr=$hwaddr -s lxc.utsname=$host --daemon
 	;;
