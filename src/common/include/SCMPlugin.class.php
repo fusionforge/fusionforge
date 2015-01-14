@@ -23,6 +23,7 @@
  */
 
 require_once $gfcommon.'include/scm.php';
+require_once $gfcommon.'include/SysTasksQ.class.php';
 
 abstract class SCMPlugin extends Plugin {
 	/**
