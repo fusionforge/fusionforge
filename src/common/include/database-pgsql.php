@@ -431,11 +431,13 @@ function db_begin($dbserver = NULL) {
  * @return	bool	true on success/false on failure.
  */
 function db_commit($dbserver = NULL) {
-	global $_sys_db_transaction_level;
+	global $_sys_db_transaction_level, $sysdebug_dberrors;
 
 	// check for transaction stack underflow
 	if ($_sys_db_transaction_level == 0) {
-		echo "COMMIT underflow<br />";
+		echo "COMMIT underflow [$sysdebug_dberrors]<br />";
+		if ($sysdebug_dberrors)
+			ffDebug("database", "db_commit underflow", debug_string_backtrace(), 1);
 		return false;
 	}
 
@@ -456,11 +458,13 @@ function db_commit($dbserver = NULL) {
  * @return	bool	true on success/false on failure.
  */
 function db_rollback($dbserver = NULL) {
-	global $_sys_db_transaction_level;
+	global $_sys_db_transaction_level, $sysdebug_dberrors;
 
 	// check for transaction stack underflow
 	if ($_sys_db_transaction_level == 0) {
-		echo "ROLLBACK underflow<br />";
+		echo "ROLLBACK underflow [$sysdebug_dberrors]<br />";
+		if ($sysdebug_dberrors)
+			ffDebug("database", "db_rollback underflow", debug_string_backtrace());
 		return false;
 	}
 
