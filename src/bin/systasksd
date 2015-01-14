@@ -53,10 +53,14 @@ function systask_get_script($plugin_id, $systask_type_id) {
 				global $pm;
 				$plugins = $pm->GetPlugins();  // reload in case a new plugin was installed
 				if (isset($plugins[$plugin_id])) {
+					$plugin = $pm->GetPluginObject($plugins[$plugin_id]);
+					if ($plugin == null) {
+						$pm->LoadPlugin($plugins[$plugin_id]);
 						$plugin = $pm->GetPluginObject($plugins[$plugin_id]);
-						if (isset($plugin->systask_types[$systask_type_id]))
-								return forge_get_config('plugins_path')."/".$plugin->GetName()
-										."/cronjobs/".$plugin->systask_types[$systask_type_id];
+					}
+					if (isset($plugin->systask_types[$systask_type_id]))
+						return forge_get_config('plugins_path')."/".$plugin->GetName()
+							."/cronjobs/".$plugin->systask_types[$systask_type_id];
 				}
 		}
 		return null;
