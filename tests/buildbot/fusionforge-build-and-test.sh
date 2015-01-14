@@ -4,6 +4,11 @@
 
 set -ex
 
+copy_logs() {
+    rsync -av root@$HOST:/var/log/ $WORKSPACE/reports/
+}
+trap copy_logs ERR
+
 get_config
 prepare_workspace
 
@@ -74,7 +79,7 @@ echo "Run phpunit test on $HOST"
 #ssh root@$HOST "TESTGLOB='func/50_PluginsScmBzr/*' /usr/src/fusionforge/autoinstall/vnc-run-testsuite.sh /usr/src/fusionforge/autoinstall/run-testsuite.sh $INSTALL_METHOD/$INSTALL_OS" || retcode=$?
 ssh root@$HOST "/usr/src/fusionforge/autoinstall/vnc-run-testsuite.sh /usr/src/fusionforge/autoinstall/run-testsuite.sh $INSTALL_METHOD/$INSTALL_OS" || retcode=$?
 
-rsync -av root@$HOST:/var/log/ $WORKSPACE/reports/
+copy_logs
 
 stop_vm_if_not_kept $HOST
 exit $retcode
