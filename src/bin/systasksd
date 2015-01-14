@@ -31,39 +31,39 @@ require_once $gfcommon.'include/cron_utils.php';
 // Invalidate users/groups cache e.g. when a user is added to a group
 // Special-case in 'publish-subscribe' mode
 function usergroups_sync() {
-		global $usergroups_lastsync;
-		$res = db_query_params("SELECT MAX(last_modified_date) AS lastmodified FROM nss_usergroups");
-		$row = db_fetch_array($res);
-		if ($row['lastmodified'] > $usergroups_lastsync) {
-				cron_reload_nscd();
-				cron_reload_apache();
-				$hook_params = array();
-				plugin_hook("usergroups_sync", $hook_params);
-				$usergroups_lastsync = time();
-		}
+	global $usergroups_lastsync;
+	$res = db_query_params("SELECT MAX(last_modified_date) AS lastmodified FROM nss_usergroups");
+	$row = db_fetch_array($res);
+	if ($row['lastmodified'] > $usergroups_lastsync) {
+		cron_reload_nscd();
+		cron_reload_apache();
+		$hook_params = array();
+		plugin_hook("usergroups_sync", $hook_params);
+		$usergroups_lastsync = time();
+	}
 }
 
 function systask_get_script($plugin_id, $systask_type_id) {
-		global $cron_arr;
-		if ($plugin_id == null) {
-				if (isset($cron_arr[$systask_type_id]))
-						return forge_get_config('source_path')
-								.'/cronjobs/'.$cron_arr[$systask_type_id];
-		} else {
-				global $pm;
-				$plugins = $pm->GetPlugins();  // reload in case a new plugin was installed
-				if (isset($plugins[$plugin_id])) {
-					$plugin = $pm->GetPluginObject($plugins[$plugin_id]);
-					if ($plugin == null) {
-						$pm->LoadPlugin($plugins[$plugin_id]);
-						$plugin = $pm->GetPluginObject($plugins[$plugin_id]);
-					}
-					if (isset($plugin->systask_types[$systask_type_id]))
-						return forge_get_config('plugins_path')."/".$plugin->GetName()
-							."/cronjobs/".$plugin->systask_types[$systask_type_id];
-				}
+	global $cron_arr;
+	if ($plugin_id == null) {
+		if (isset($cron_arr[$systask_type_id]))
+			return forge_get_config('source_path')
+				.'/cronjobs/'.$cron_arr[$systask_type_id];
+	} else {
+		global $pm;
+		$plugins = $pm->GetPlugins();  // reload in case a new plugin was installed
+		if (isset($plugins[$plugin_id])) {
+			$plugin = $pm->GetPluginObject($plugins[$plugin_id]);
+			if ($plugin == null) {
+				$pm->LoadPlugin($plugins[$plugin_id]);
+				$plugin = $pm->GetPluginObject($plugins[$plugin_id]);
+			}
+			if (isset($plugin->systask_types[$systask_type_id]))
+				return forge_get_config('plugins_path')."/".$plugin->GetName()
+					."/cronjobs/".$plugin->systask_types[$systask_type_id];
 		}
-		return null;
+	}
+	return null;
 }
 
 
@@ -104,46 +104,46 @@ $pm = plugin_manager_get_object();
 
 usergroups_sync();
 while (true) {
-		// Deal with pending requests
-		$res = db_query_params("SELECT * FROM systasks WHERE status=$1"
-		                       . " ORDER BY systask_id", array('TODO'));
-		if (!$res && !db_connection_status())
-			db_reconnect();
-		while ($arr = db_fetch_array($res)) {
-				usergroups_sync();
-				$script = systask_get_script($arr['plugin_id'], $arr['systask_type_id']);
-				if (!file_exists($script))
-						// Not installed on this node, skipping
-						continue;
-				if (!is_executable($script)) {
-						db_query_params("UPDATE systasks SET status=$1, error_message=$2"
-										. " WHERE systask_id=$3",
-										array('ERROR',
-											  "Cron job {$arr['plugin_id']}/{$arr['systask_type_id']}"
-											  . " '$script' not executable.\n",
-											  $arr['systask_id']));
-						continue;
-				}
-				db_query_params("UPDATE systasks SET status=$1 WHERE systask_id=$2",
-								array('WIP', $arr['systask_id']));
-				cron_acquire_lock($script);
-				$ret = null;
-				if ($verbose) print "Running: $script... ";
-				system("$script\n", $ret);
-				if ($ret == 0) {
-						if ($verbose) print "DONE\n";
-						db_query_params("UPDATE systasks SET status=$1 WHERE systask_id=$2",
-										array('DONE', $arr['systask_id']));
-				} else {
-						if ($verbose) print "ERROR\n";
-						db_query_params("UPDATE systasks SET status=$1 WHERE systask_id=$2",
-										array('ERROR', $arr['systask_id']));
-				}
-		}
-
+	// Deal with pending requests
+	$res = db_query_params("SELECT * FROM systasks WHERE status=$1"
+						   . " ORDER BY systask_id", array('TODO'));
+	if (!$res && !db_connection_status())
+		db_reconnect();
+	while ($arr = db_fetch_array($res)) {
 		usergroups_sync();
-
-		sleep(1);
+		$script = systask_get_script($arr['plugin_id'], $arr['systask_type_id']);
+		if (!file_exists($script))
+			// Not installed on this node, skipping
+			continue;
+		if (!is_executable($script)) {
+			db_query_params("UPDATE systasks SET status=$1, error_message=$2"
+							. " WHERE systask_id=$3",
+							array('ERROR',
+								  "Cron job {$arr['plugin_id']}/{$arr['systask_type_id']}"
+								  . " '$script' not executable.\n",
+								  $arr['systask_id']));
+			continue;
+		}
+		db_query_params("UPDATE systasks SET status=$1 WHERE systask_id=$2",
+						array('WIP', $arr['systask_id']));
+		cron_acquire_lock($script);
+		$ret = null;
+		if ($verbose) print "Running: $script... ";
+		system("$script\n", $ret);
+		if ($ret == 0) {
+			if ($verbose) print "DONE\n";
+			db_query_params("UPDATE systasks SET status=$1 WHERE systask_id=$2",
+							array('DONE', $arr['systask_id']));
+		} else {
+			if ($verbose) print "ERROR\n";
+			db_query_params("UPDATE systasks SET status=$1 WHERE systask_id=$2",
+							array('ERROR', $arr['systask_id']));
+		}
+	}
+	
+	usergroups_sync();
+	
+	sleep(1);
 }
 
 // Local Variables:
