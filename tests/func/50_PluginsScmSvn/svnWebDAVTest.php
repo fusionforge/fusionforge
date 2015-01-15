@@ -23,6 +23,16 @@ require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
 
 class ScmSvnWebDAVTest extends FForge_SeleniumTestCase
 {
+	// Retry Git/SVN commands over HTTP if they timeout at first (?)
+    function runCommandTimeout($dir, $command) {
+		system("cd $dir && timeout 15s $command", $ret);
+		if ($ret == 124) {	# retry once if we get a timeout
+			system("cd $dir && timeout 15s $command", $ret);
+		}
+		ob_flush();
+		$this->assertEquals($ret, 0);
+	}
+
 	function testScmSvnWebDAV()
 	{
         $this->changeConfig("[scmsvn]\nuse_ssl = no\n");
@@ -53,27 +63,14 @@ class ScmSvnWebDAVTest extends FForge_SeleniumTestCase
 		$t = exec("mktemp -d /tmp/svnTest.XXXXXX");
 		$auth = "--username ".FORGE_ADMIN_USERNAME." --password ".FORGE_ADMIN_PASSWORD;
 		$globalopts = "--trust-server-cert --non-interactive";
-		$log = "2> /var/log/svn.stderr > /var/log/svn.stdout";
-		$timeout = "timeout 15s";
-		system("cd $t && $timeout svn checkout $globalopts $auth $p projecta $log", $ret);
-		if ($ret > 120) {
-			system("cd $t && $timeout svn checkout $globalopts $auth $p projecta $log", $ret);
-		}
-		$this->assertEquals($ret, 0);
+		$this->runCommandTimeout($t, "svn checkout $globalopts $auth $p projecta");
 		sleep(2);
-		system("echo 'this is a simple text' > $t/projecta/mytext.txt");
-		system("cd $t/projecta && $timeout svn add mytext.txt $log && $timeout svn commit $globalopts $auth -m'Adding file' $log", $ret);
-		if ($ret > 120) {
-			system("cd $t/projecta && $timeout svn add mytext.txt $log && $timeout svn commit $globalopts $auth -m'Adding file' $log", $ret);
-		}
-		$this->assertEquals($ret, 0);
+		$this->runCommand("echo 'this is a simple text' > $t/projecta/mytext.txt");
+		$this->runCommandTimeout("$t/projecta", "svn add mytext.txt");
+		$this->runCommandTimeout("$t/projecta", "svn commit $globalopts $auth -m'Adding file'");
 		sleep(2);
-		system("echo 'another simple text' >> $t/projecta/mytext.txt");
-		system("cd $t/projecta && $timeout svn commit $globalopts $auth -m'Modifying file' $log", $ret);
-		if ($ret > 120) {
-			system("cd $t/projecta && $timeout svn commit $globalopts $auth -m'Modifying file' $log", $ret);
-		}
-		$this->assertEquals($ret, 0);
+		$this->runCommand("echo 'another simple text' >> $t/projecta/mytext.txt");
+		$this->runCommandTimeout("$t/projecta", "svn commit $globalopts $auth -m'Modifying file'");
 		sleep(2);
 
 		// Check that the changes appear in svnweb
@@ -102,4 +99,3 @@ class ScmSvnWebDAVTest extends FForge_SeleniumTestCase
 	}
 
 }
-?>
