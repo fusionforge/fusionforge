@@ -24,7 +24,7 @@ require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
 class ScmSvnWebDAVTest extends FForge_SeleniumTestCase
 {
 	// Retry Git/SVN commands over HTTP if they timeout at first (?)
-    function runCommandTimeout($dir, $command) {
+	function runCommandTimeout($dir, $command) {
 		system("cd $dir && timeout 15s $command", $ret);
 		if ($ret == 124) {	# retry once if we get a timeout
 			system("cd $dir && timeout 15s $command", $ret);
@@ -102,3 +102,8 @@ class ScmSvnWebDAVTest extends FForge_SeleniumTestCase
 	}
 
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
