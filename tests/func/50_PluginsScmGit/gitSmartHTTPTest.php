@@ -25,7 +25,6 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 {
 	function testScmGitSmartHTTP()
 	{
-
 		$this->changeConfig("[core]\nuse_ssl = no\n");
 
 		$this->activatePlugin('scmgit');
@@ -38,6 +37,24 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=Tools");
 		$this->clickAndWait("link=Source Code Admin");
 		$this->click("//input[@name='scmengine[]' and @value='scmgit']");
+		$this->clickAndWait("submit");
+	    
+        // Set up a different user
+        $this->createUser ('otheruser') ;
+        $this->createAndGoto ('projectb');
+		$this->clickAndWait("link=Admin");
+		$this->clickAndWait("link=Users and permissions");
+		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "otheruser") ;
+		$this->select("//input[@value='Add Member']/../select[@name='role_id']", "label=Admin");
+		$this->clickAndWait ("//input[@value='Add Member']") ;
+		$this->assertTrue($this->isTextPresent("otheruser Lastname"));
+		$this->assertTrue($this->isElementPresent("//tr/td/a[.='otheruser Lastname']/../../td/div[contains(.,'Admin')]")) ;
+		$this->clickAndWait("//tr/td/form/div[contains(.,'Anonymous')]/../../../td/form/div/input[contains(@value,'Unlink Role')]");
+		$this->assertTrue($this->isTextPresent("Role unlinked successfully"));
+
+		$this->clickAndWait("link=Tools");
+		$this->clickAndWait("link=Source Code Admin");
+		$this->click("//input[@name='scmradio' and @value='scmgit']");
 		$this->clickAndWait("submit");
 
 		// Run the cronjob to create repositories
@@ -86,6 +103,74 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=projecta.git");
 		$this->assertTextPresent("Modifying file");
 		$this->assertTextPresent("Adding file");
+
+        // Check gitweb directly
+		$this->open('/plugins/scmgit/cgi-bin/gitweb.cgi?p=projecta/projecta.git');
+		$this->assertElementPresent("//.[@class='page_footer']");
+		$this->assertTextPresent("projecta.git");
+		$this->clickAndWait("link=projecta.git");
+		$this->assertTextPresent("Modifying file");
+		$this->assertTextPresent("Adding file");
+
+        // Disable anonymous access to gitweb
+		$this->open(ROOT);
+		$this->clickAndWait("link=ProjectA");
+		$this->click("link=Admin");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("Project Information"));
+		$this->click("link=Users and permissions");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("Current Project Members"));
+		$this->click("//tr/td/form/div[contains(.,'Anonymous')]/../../../td/form/div/input[contains(@value,'Unlink Role')]");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("Role unlinked successfully"));
+
+        // Update repository permissions
+		$this->cron("create_scm_repos.php");
+		$this->cron("homedirs.php");
+
+        // Check that gitweb now fails
+		$this->open('/plugins/scmgit/cgi-bin/gitweb.cgi?p=projecta/projecta.git');
+		$this->assertElementPresent("//.[@class='page_footer']");
+		$this->assertTextNotPresent("projecta.git");
+
+        // Now try to use the authenticated gitweb
+        $this->open("http://".FORGE_ADMIN_USERNAME.":".FORGE_ADMIN_PASSWORD."@scm.".HOST.ROOT."/authscm/".FORGE_ADMIN_USERNAME."/gitweb/projecta/");
+		$this->assertElementPresent("//.[@class='page_footer']");
+		$this->assertTextPresent("projecta.git");
+		$this->selectFrame("relative=top");
+
+		// Also check via the standard page
+		$this->open(ROOT);
+		$this->clickAndWait("link=ProjectA");
+		$this->clickAndWait("link=SCM");
+		$this->clickAndWait("link=Browse Git Repository");
+		$this->selectFrame("id=scmgit_iframe");
+		$this->assertElementPresent("//.[@class='page_footer']");
+		$this->assertTextPresent("projecta.git");
+		$this->clickAndWait("link=projecta.git");
+		$this->assertTextPresent("Modifying file");
+		$this->assertTextPresent("Adding file");
+		$this->selectFrame("relative=top");
+
+        // Update repository permissions
+		$this->cron("create_scm_repos.php");
+		$this->cron("homedirs.php");
+
+        // Try with a different user
+        $this->open("http://otheruser:".FORGE_OTHER_PASSWORD."@scm.".HOST.ROOT."/authscm/otheruser/gitweb/projecta/");
+		$this->assertElementPresent("//.[@class='page_footer']");
+		$this->assertTextNotPresent("projecta.git");
+
+        // Test accessing admin's URL with otheruser's credentials (and asserting we get a 401)
+        // …Selenium doesn't allow checking HTTP return codes, so use a file_get_contents() hack
+        // First make sure that the hack works
+        $f = @file_get_contents("http://otheruser:".FORGE_OTHER_PASSWORD."@scm.".HOST.ROOT."/authscm/otheruser/gitweb/projecta/", "r");
+        $this->assertTrue(is_string($f));
+        $this->assertEquals(1, preg_match('/projectb.git/',$f));
+        // Then make sure we detect a failure
+        $f = @file_get_contents("http://otheruser:".FORGE_OTHER_PASSWORD."@scm.".HOST.ROOT."/authscm/".FORGE_ADMIN_USERNAME."/gitweb/projecta/", "r");
+        $this->assertFalse($f);
 
 		system("rm -fr $t");
 	}

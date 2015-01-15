@@ -45,8 +45,16 @@ function htmlIframe($url, $poub = array()) {
 	} else {
 		$id = 'default_id_htmliframe';
 	}
+	if (isset($poub['absolute'])) {
+		$absolute = $poub['absolute'];
+	} else {
+		$absolute = false;
+	}
 	if (!empty($url)) {
-		echo html_e('iframe', array('src' => util_make_uri($url), 'id' => $id, 'width' => '100%', 'frameborder' =>0), '', false);
+		if (! $absolute) {
+			$url = util_make_uri($url);
+		}
+		echo html_e('iframe', array('src' => $url, 'id' => $id, 'width' => '100%', 'frameborder' =>0), '', false);
 		html_use_jqueryautoheight();
 		echo $HTML->getJavascripts();
 		echo '<script type="text/javascript">//<![CDATA[
