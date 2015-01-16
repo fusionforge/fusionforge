@@ -1,11 +1,9 @@
-#! /usr/bin/php -f
 <?php
 /**
- * FusionForge
+ * User's current and completed system actions
  *
- * Copyright 2012, Roland Mas
- * Copyright (C) 2006  Sylvain Beucler
  * Copyright (C) 2014  Inria (Sylvain Beucler)
+ * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -23,42 +21,45 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-// Don't try to connect to the DB, just spawning a cronjob
-putenv('FUSIONFORGE_NO_DB=true');
-        
-require (dirname(__FILE__).'/../common/include/env.inc.php');
+require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
-require_once $gfcommon.'include/cron_utils.php';
+require_once $gfcommon.'include/SysTasksQ.class.php';
 
-if (count ($argv) < 2) {
-	echo "Usage: .../forge_run_job <jobname> [ <parameter> ... ]
-" ;
-        exit (1) ;
-}
-$self = array_shift($argv);
+global $HTML; // Layout object
 
-
-$job = array_shift($argv);
-$path = forge_get_config('source_path').'/cronjobs/';
-$script = $path.$job;
-
-if (! is_executable($script)) {
-	print "Cron job $script not found or not executable.\n" ;
-	// exit (1) ;
+if (!session_loggedin()) {
+		exit_not_logged_in();
 }
 
-cron_acquire_lock($script);
 
-$cmdline = $script;
-while ($arg = array_shift($argv)) {
-	$cmdline .= ' '.escapeshellarg($arg);
+// Test
+if ($_SERVER['QUERY_STRING'] == 'create') {
+		$sa = new SysTasksQ();
+		$sa->add(null, 1, 1, null);
+		if ($sa->isError()) {
+				exit_error($sa->getErrorMessage());
+		}
 }
 
-// Clean-up env
-putenv('FUSIONFORGE_NO_DB');
-putenv('FUSIONFORGE_NO_PLUGINS');
-	
-system ("$cmdline\n");
+
+site_user_header(array('title' => _('System actions queue')));
+
+$u = session_get_user();
+$groups = $u->getGroups();
+$gids = array();
+foreach($groups as $g)
+		$gids[] = $g->getID();
+$gids = implode(',', $gids);
+
+$res = pg_query_params("SELECT * FROM systasks WHERE user_id=$1 or group_id IN ($gids)"
+					   . " AND requested > NOW() - interval '1 day'",
+					   array($u->getID()));
+while($row = db_fetch_array($res)) {
+		print_r($row);
+		print "<br />";
+}
+
+site_user_footer();
 
 // Local Variables:
 // mode: php

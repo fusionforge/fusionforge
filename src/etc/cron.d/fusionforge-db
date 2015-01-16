@@ -42,9 +42,6 @@ PATH=@bindir@:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 # Weekly db vacuum (should be done after ALL OTHER JOBS)
 50 2 * * 1 root forge_run_job db/vacuum.php
 
-# Create SCM repositories
-0 * * * * root forge_run_job scm/create_scm_repos.php
-
 # Gather commit stats from SCM repositories
 0 2 * * * root forge_run_job scm/gather_scm_stats.php
 

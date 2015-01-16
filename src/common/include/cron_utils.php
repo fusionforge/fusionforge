@@ -25,6 +25,7 @@
 //
 //	This key id# is important - do not change or renumber
 //
+require_once $gfcommon.'include/SysTasksQ.class.php';
 $cron_arr = array();
 $cron_arr[0]='unused';
 $cron_arr[1]='db/calculate_user_metric.php';
@@ -51,9 +52,9 @@ $cron_arr[20]='db/reporting_cron.php';
 $cron_arr[22]='db/daily_task_email.php';
 #$cron_arr[23]='misc/backup_site.php';
 #$cron_arr[24]='svn-stats.php';
-$cron_arr[25]='shell/homedirs.php';
+$cron_arr[SYSTASK_HOMEDIR]='shell/homedirs.php';
 #$cron_arr[26]='update_users.php';
-$cron_arr[27]='scm/create_scm_repos.php';
+$cron_arr[SYSTASK_SCM_REPO]='scm/create_scm_repos.php';
 $cron_arr[28]='scm/gather_scm_stats.php';
 #$cron_arr[29]='weekly.php';
 $cron_arr[30]='web-vhosts/create_vhosts.php';
@@ -84,65 +85,17 @@ function checkChroot() {
 	return false;
 }
 
-//
-//  Create lock via semaphore so long running jobs don't overlap
-//
-//  Parameters
-//  $name - Name of cron job to use in the lock file name
-//
-function cron_create_lock($name) {
-	if (function_exists('sem_get')) {
-		global $cron_utils_sem ;
-		if (! $cron_utils_sem[$name]) {
-			$token = ftok ($name, 'g');
-			$cron_utils_sem[$name] = sem_get ($token, 1, 0600, 0) ;
-		}
-		return sem_acquire ($cron_utils_sem[$name]);
-	}
+// Locking: for a single script
+// flock() locks are automatically lost on program termination, however
+// that happened (clean, segfault...)
+function cron_acquire_lock($script) {
+	// Script lock: http://perl.plover.com/yak/flock/samples/slide006.html
+	static $lock;  // static, otherwise auto-closed by PHP and we lose the lock!
+	$lock = fopen($script, 'r') or die("Failed to ask lock.\n");
 
-	$name = basename($name);
-	if (!preg_match('/^[[:alnum:]\.\-_]+$/', $name)) {
-		return false;
+	if (!flock($lock, LOCK_EX | LOCK_NB)) {
+		die("There's a lock for '$script', exiting\n");
 	}
-	$lockf = '/tmp/blahlock'.$name;
-
-	if (file_exists($lockf)) {
-		return false;
-	} else {
-		$fp = fopen($lockf,'w');
-		if ($fp) {
-			fclose($fp);
-			return true;
-		}
-	}
-	return false;
-}
-
-//
-//  Delete lock created by cron_create_lock
-//
-//  Parameters
-//  $name - Name of cron job to use in the lock file name
-//
-function cron_remove_lock($name) {
-	if (function_exists('sem_get')) {
-		global $cron_utils_sem ;
-		if (! $cron_utils_sem[$name]) {
-			$token = ftok ($name, 'g');
-			$cron_utils_sem[$name] = sem_get ($token, 1, 0600, 0) ;
-		}
-		return sem_release ($cron_utils_sem[$name]);
-	}
-
-	$name = basename($name);
-	$lockf = '/tmp/blahlock'.$name;
-
-	if (file_exists($lockf) && is_writeable($lockf)) {
-		if (unlink($lockf)) {
-			return true;
-		}
-	}
-	return false;
 }
 
 //
@@ -151,6 +104,10 @@ function cron_remove_lock($name) {
 // 
 function cron_reload_nscd() {
         system("(nscd -i passwd && nscd -i group) >/dev/null 2>&1");
+}
+
+function cron_reload_apache() {
+        system("service apache2 reload || service httpd reload >/dev/null 2>&1");
 }
 
 // Local Variables:

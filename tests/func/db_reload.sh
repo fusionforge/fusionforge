@@ -72,24 +72,14 @@ start_apache () {
 }
 
 
-# Backup the DB, so that it can be restored for the test suite
-# Usually called from install.sh right after the first install (clean DB)
-if [ "$1" = "--backup" ]; then
-    set -e
-    forge_set_password admin myadmin
-    su - postgres -c "pg_dumpall" > /root/dump
-    su postgres -c 'psql -c CHECKPOINT'  # flush to disk
-    stop_database
-    pgdir=/var/lib/postgresql
-    if [ -e /etc/redhat-release ]; then pgdir=/var/lib/pgsql; fi
-    if [ -d $pgdir.backup ]; then
-        rm -fr $pgdir.backup
-    fi
-    cp -a --reflink=auto $pgdir $pgdir.backup
-    start_database
-    exit 0
+if [ "$1" = "--reset" ]; then
+    reset=1
+    shift
 fi
-
+if [ "$1" = "--backup" ]; then
+    backup=1
+    shift
+fi
 
 # Restore the DB
 if [ $# -eq 1 ]
@@ -119,6 +109,37 @@ then
 else
 	echo "Forge database is $database"
 fi
+
+
+# Reset the DB to a clean post-install state
+if [ "$reset" = 1 ]; then
+    set -e
+    # Reset connections
+    service fusionforge-systasksd stop
+    service postgresql restart
+    su - postgres -c "dropdb $database"
+    $(forge_get_config source_path)/post-install.d/db/db.sh configure
+    forge_set_password admin myadmin
+    service fusionforge-systasksd start
+    exit 0
+fi
+
+# Backup the DB, so that it can be restored for the test suite
+if [ "$backup" = 1 ]; then
+    set -e
+    su - postgres -c "pg_dumpall" > /root/dump
+    su postgres -c 'psql -c CHECKPOINT'  # flush to disk
+    stop_database
+    pgdir=/var/lib/postgresql
+    if [ -e /etc/redhat-release ]; then pgdir=/var/lib/pgsql; fi
+    if [ -d $pgdir.backup ]; then
+        rm -fr $pgdir.backup
+    fi
+    cp -a --reflink=auto $pgdir $pgdir.backup
+    start_database
+    exit 0
+fi
+
 
 stop_apache
 
@@ -202,5 +223,7 @@ if [ -x /usr/sbin/nscd ]; then
     echo "Flushing/restarting nscd"
     nscd -i passwd && nscd -i group
 fi
-
 echo "nscd flushed, going on with tests"
+
+# We may have changed plugins.plugin_id, need to reload the systasksd
+service fusionforge-systasksd restart

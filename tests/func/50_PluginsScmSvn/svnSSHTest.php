@@ -42,8 +42,7 @@ class ScmSvnSSHTest extends FForge_SeleniumTestCase
 		$this->uploadSshKey();
 
 		// Run the cronjob to create repositories
-		$this->cron("scm/create_scm_repos.php");
-		$this->cron("shell/homedirs.php");
+		$this->waitSystasks();
 
 		// Get the address of the repo
 		$this->open(ROOT);
@@ -55,13 +54,13 @@ class ScmSvnSSHTest extends FForge_SeleniumTestCase
 		// Create a local checkout, commit stuff
 		$t = exec("mktemp -d /tmp/svnTest.XXXXXX");
 		system("cd $t && svn checkout $p projecta", $ret);
-		$this->assertEquals($ret, 0);
+		$this->assertEquals(0, $ret);
 
 		system("echo 'this is a simple text' > $t/projecta/mytext.txt");
 		system("cd $t/projecta && svn add mytext.txt && svn commit -m'Adding file'", $ret);
 		system("echo 'another simple text' >> $t/projecta/mytext.txt");
 		system("cd $t/projecta && svn commit -m'Modifying file'", $ret);
-		$this->assertEquals($ret, 0);
+		$this->assertEquals(0, $ret);
 
 		// Check that the changes appear in svnweb
 		$this->open(ROOT);

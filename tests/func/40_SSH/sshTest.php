@@ -30,7 +30,7 @@ class SSHTest extends FForge_SeleniumTestCase
 		$this->uploadSshKey();
 
 		// Run the cronjobs
-		$this->cron("shell/homedirs.php");
+		$this->waitSystasks();
 
 		$verbose = 0;
 		$v = '';
@@ -39,7 +39,7 @@ class SSHTest extends FForge_SeleniumTestCase
 			$v = "-v";
 		}
 		system("ssh $v ".FORGE_ADMIN_USERNAME."@".HOST." id", $ret);
-		$this->assertEquals($ret, 0);
+		$this->assertEquals(0, $ret);
 		if ($verbose) {
 			system("echo 'End of SSH run' 1>&2", $ret);
 		}

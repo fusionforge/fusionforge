@@ -58,10 +58,7 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 		$this->clickAndWait("submit");
 
 		// Run the cronjob to create repositories
-		$this->cron("scm/create_scm_repos.php");
-		$this->cron("shell/homedirs.php");
-		$this->reload_apache();
-		$this->reload_nscd();
+		$this->waitSystasks();
 
 		// Get the address of the repo
 		$this->open(ROOT);
@@ -78,19 +75,19 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 		if ($ret >= 120) {
 			system("cd $t && GIT_SSL_NO_VERIFY=true $timeout git clone --quiet $p", $ret);
 		}
-		$this->assertEquals($ret, 0);
+		$this->assertEquals(0, $ret);
 
 		system("echo 'this is a simple text' > $t/projecta/mytext.txt");
 		system("cd $t/projecta && $timeout git add mytext.txt && $timeout git commit --quiet -a -m'Adding file'", $ret);
 		system("echo 'another simple text' >> $t/projecta/mytext.txt");
 		system("cd $t/projecta && git commit --quiet -a -m'Modifying file'", $ret);
-		$this->assertEquals($ret, 0);
+		$this->assertEquals(0, $ret);
 
 		system("cd $t/projecta && GIT_SSL_NO_VERIFY=true $timeout git push --quiet --all", $ret);
 		if ($ret >= 120) {
 			system("cd $t/projecta && GIT_SSL_NO_VERIFY=true $timeout git push --quiet --all", $ret);
 		}
-		$this->assertEquals($ret, 0);
+		$this->assertEquals(0, $ret);
 
 		// Check that the changes appear in gitweb
 		$this->open(ROOT);

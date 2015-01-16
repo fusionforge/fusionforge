@@ -23,6 +23,7 @@
  */
 
 require_once $gfcommon.'include/scm.php';
+require_once $gfcommon.'include/SysTasksQ.class.php';
 
 abstract class SCMPlugin extends Plugin {
 	/**
@@ -31,6 +32,7 @@ abstract class SCMPlugin extends Plugin {
 	 */
 	function SCMPlugin() {
 		$this->Plugin() ;
+		$this->_addHook('group_plugin_use');
 		$this->_addHook('scm_plugin');
 		$this->_addHook('scm_page');
 		$this->_addHook('scm_admin_page');
@@ -49,6 +51,11 @@ abstract class SCMPlugin extends Plugin {
 
 	function CallHook($hookname, &$params) {
 		switch ($hookname) {
+			case 'group_plugin_use': {
+				$systasksq = new SysTasksQ();
+				$systasksq->add(SYSTASK_CORE, SYSTASK_SCM_REPO, $params['group_id']);
+				break;
+			}
 			case 'scm_plugin': {
 				$scm_plugins=& $params['scm_plugins'];
 				$scm_plugins[]=$this->name;

@@ -80,16 +80,16 @@ class ScmBzrTest extends FForge_SeleniumTestCase
 		mysystem("bzr whoami 'admin <admin@admin.tld>'");
 		$t = exec("mktemp -d /tmp/bzrTest.XXXXXX");
 		mysystem("cd $t && bzr init --quiet trunk >/dev/null", $ret);
-		$this->assertEquals($ret, 0);
+		$this->assertEquals(0, $ret);
 
 		mysystem("echo 'this is a simple text' > $t/trunk/mytext.txt");
 		mysystem("cd $t/trunk && bzr add --quiet && bzr commit -m'Adding file' --quiet", $ret);
 		mysystem("echo 'another simple text' >> $t/trunk/mytext.txt");
 		mysystem("cd $t/trunk && bzr add --quiet && bzr commit -m'Modifying file' --quiet", $ret);
-		$this->assertEquals($ret, 0);
+		$this->assertEquals(0, $ret);
 
 		mysystem("cd $t/trunk && bzr push --quiet $p/trunk", $ret);
-		$this->assertEquals($ret, 0);
+		$this->assertEquals(0, $ret);
 
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");

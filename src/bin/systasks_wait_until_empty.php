@@ -1,10 +1,8 @@
-#! /usr/bin/php -f
+#!/usr/bin/php
 <?php
 /**
- * FusionForge
+ * Synchronously wait until all tasks are done - useful for testsuite
  *
- * Copyright 2012, Roland Mas
- * Copyright (C) 2006  Sylvain Beucler
  * Copyright (C) 2014  Inria (Sylvain Beucler)
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -23,42 +21,29 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-// Don't try to connect to the DB, just spawning a cronjob
-putenv('FUSIONFORGE_NO_DB=true');
-        
+putenv('FUSIONFORGE_NO_PLUGINS=true');
+
 require (dirname(__FILE__).'/../common/include/env.inc.php');
 require_once $gfcommon.'include/pre.php';
-require_once $gfcommon.'include/cron_utils.php';
 
-if (count ($argv) < 2) {
-	echo "Usage: .../forge_run_job <jobname> [ <parameter> ... ]
-" ;
-        exit (1) ;
-}
-$self = array_shift($argv);
+$first = true;
+do {
+	if (!$first)
+		sleep(1);
 
+	$res = db_query_params("SELECT * FROM systasks WHERE status=$1"
+	                       . " ORDER BY systask_id", array('TODO'));
+	$nb = db_numrows($res);
+	if ($nb > 0) {
+		echo "systasks_wait_until_empty.php: pending:\n";
+		while ($arr = db_fetch_array($res)) {
+			echo "- {$arr['systask_id']} {$arr['plugin_id']} {$arr['systask_type_id']}"
+				. " {$arr['group_id']} {$arr['user_id']}\n";
+		}
+	}
 
-$job = array_shift($argv);
-$path = forge_get_config('source_path').'/cronjobs/';
-$script = $path.$job;
-
-if (! is_executable($script)) {
-	print "Cron job $script not found or not executable.\n" ;
-	// exit (1) ;
-}
-
-cron_acquire_lock($script);
-
-$cmdline = $script;
-while ($arg = array_shift($argv)) {
-	$cmdline .= ' '.escapeshellarg($arg);
-}
-
-// Clean-up env
-putenv('FUSIONFORGE_NO_DB');
-putenv('FUSIONFORGE_NO_PLUGINS');
-	
-system ("$cmdline\n");
+	$first = false;
+} while ($nb > 0);
 
 // Local Variables:
 // mode: php

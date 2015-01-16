@@ -61,11 +61,11 @@ class Utils_Tests extends PHPUnit_Framework_TestCase
 	 */
 	public function testStripAccents()
 	{
-		$this->assertEquals(util_strip_accents('aléiât'), 'aleiat');
+		$this->assertEquals('aleiat', util_strip_accents('aléiât'));
 
-		$this->assertEquals(util_strip_accents('ààéééïï'), 'aaeeeii');
+		$this->assertEquals('aaeeeii', util_strip_accents('ààéééïï'));
 
-		$this->assertEquals(util_strip_accents('alain'), 'alain');
+		$this->assertEquals('alain', util_strip_accents('alain'));
 	}
 
 	/**
@@ -113,13 +113,13 @@ class Utils_Tests extends PHPUnit_Framework_TestCase
 	public function testGetFilteredStringFromRequest()
 	{
 		$_REQUEST=array('arg' => 'good');
-		$this->assertEquals(getFilteredStringFromRequest('arg', '/^[a-z]+$/', 'default'), 'good');
+		$this->assertEquals('good', getFilteredStringFromRequest('arg', '/^[a-z]+$/', 'default'));
 
 		$_REQUEST=array('arg' => 'BaD');
-		$this->assertEquals(getFilteredStringFromRequest('arg', '/^[a-z]+$/', 'default'), 'default');
+		$this->assertEquals('default', getFilteredStringFromRequest('arg', '/^[a-z]+$/', 'default'));
 
 		$_REQUEST=array('no_arg' => 'BaD');
-		$this->assertEquals(getFilteredStringFromRequest('arg', '/^[a-z]+$/', 'default'), 'default');
+		$this->assertEquals('default', getFilteredStringFromRequest('arg', '/^[a-z]+$/', 'default'));
 	}
 
 	public function testUtilIsHtml()

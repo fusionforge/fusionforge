@@ -70,7 +70,11 @@ function db_connect() {
 	//	Connect to primary database
 	//
 	if (function_exists("pg_pconnect")) {
-		$gfconn = pg_pconnect(pg_connectstring(forge_get_config('database_name'), forge_get_config('database_user'), forge_get_config('database_password'), forge_get_config('database_host'), forge_get_config('database_port')));
+		$gfconn = pg_pconnect(pg_connectstring(forge_get_config('database_name'),
+		                                       forge_get_config('database_user'),
+		                                       forge_get_config('database_password'),
+		                                       forge_get_config('database_host'),
+		                                       forge_get_config('database_port')));
 		if (!$gfconn) {
 			print forge_get_config('forge_name')." Could Not Connect to Database: ".db_error();
 			exit(1);
@@ -84,7 +88,11 @@ function db_connect() {
 	//	If any replication is configured, connect
 	//
 	if (forge_get_config('database_use_replication')) {
-		$gfconn2 = pg_pconnect(pg_connectstring($sys_dbreaddb, forge_get_config('database_user'), forge_get_config('database_password'), $sys_dbreadhost, $sys_dbreadport));
+		$gfconn2 = pg_pconnect(pg_connectstring($sys_dbreaddb,
+		                                        forge_get_config('database_user'),
+		                                        forge_get_config('database_password'),
+		                                        $sys_dbreadhost,
+		                                        $sys_dbreadport));
 	} else {
 		$gfconn2 = $gfconn;
 	}
@@ -93,7 +101,6 @@ function db_connect() {
 	//	Now map the physical database connections to the
 	//	"virtual" list that is used to distribute load in db_query()
 	//
-	define('SYS_DB_PRIMARY', $gfconn);
 	define('SYS_DB_STATS', $gfconn2);
 	define('SYS_DB_TROVE', $gfconn2);
 	define('SYS_DB_SEARCH', $gfconn2);
@@ -117,11 +124,39 @@ function db_connect_if_needed() {
         }
 }
 
+/**
+ * Attempt to reconnect, without exiting on error
+ */
+function db_reconnect() {
+	global $gfconn;
+	$gfconn = pg_pconnect(pg_connectstring(forge_get_config('database_name'),
+	                                       forge_get_config('database_user'),
+	                                       forge_get_config('database_password'),
+	                                       forge_get_config('database_host'),
+	                                       forge_get_config('database_port')),
+	                      PGSQL_CONNECT_FORCE_NEW);
+	return ($gfconn !== FALSE);
+}
+
+/**
+ * Is the DB connection ready or closed?
+ */
+function db_connection_status() {
+	global $gfconn;
+	if ($gfconn === FALSE)
+		return false;
+	if (pg_connection_status($gfconn) == PGSQL_CONNECTION_OK)
+		return true;
+	else
+		return false;
+}
+
 function db_switcher($dbserver = NULL) {
+	global $gfconn;
 	switch ($dbserver) {
 		case NULL:
 		case 'SYS_DB_PRIMARY': {
-			$dbconn = SYS_DB_PRIMARY;
+			$dbconn = $gfconn;
 			break;
 		}
 		case 'SYS_DB_STATS': {
@@ -141,7 +176,7 @@ function db_switcher($dbserver = NULL) {
 			if (pg_dbname($dbserver)) {
 				$dbconn = $dbserver;
 			} else {
-				$dbconn = SYS_DB_PRIMARY;
+				$dbconn = $gfconn;
 			}
 		}
 	}

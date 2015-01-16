@@ -119,7 +119,8 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	protected function runCommand($cmd)
 	{
 		system(RUN_COMMAND_PREFIX.$cmd, $ret);
-                $this->assertEquals($ret, 0);
+		$this->assertEquals(0, $ret);
+		ob_flush();
 	}
 
 	protected function db($sql)
@@ -137,16 +138,12 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->runCommand(RUN_JOB_PATH."/forge_run_plugin_job $plugin $cmd");
 	}
 
-	protected function reload_apache()
+    /**
+     * Execute pending system tasks
+     */
+	protected function waitSystasks()
 	{
-		$this->runCommand("service apache2 reload > /dev/null 2>&1 || service httpd reload > /dev/null 2>&1");
-		sleep (5); // Give it some time to become available again
-	}
-
-	protected function reload_nscd()
-	{
-		$this->runCommand("service unscd restart > /dev/null 2>&1 || service nscd restart > /dev/null 2>&1 || true");
-		sleep (5); // Give it some time to wake up
+		$this->runCommand(RUN_JOB_PATH.'/systasks_wait_until_empty.php');
 	}
 
 	protected function init() {
@@ -292,21 +289,6 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 			$this->assertTrue($this->isTextPresent("Get Public Help"));
 			$this->assertTrue($this->isTextPresent("Project Developer Discussion"));
 		}
-	}
-
-	protected function initSvn($project='ProjectA', $user=FORGE_ADMIN_USERNAME)
-	{
-		// Remove svnroot directory before creating the project.
-		$forge_get_config = RUN_JOB_PATH."/forge_get_config";
-		$repo = `$forge_get_config chroot`.'/scmrepos/svn/'.strtolower($project);
-		if (is_dir($repo)) {
-			system("rm -fr $repo");
-		}
-
-		$this->init($project, $user);
-
-		// Run manually the cron for creating the svn structure.
-		$this->cron("scm/create_scm_repos.php");
 	}
 
 	protected function login($username)
@@ -478,7 +460,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		// Upload keys to the web interface
 		$keys = file($pubkey);
 		$k = $keys[0];
-		$this->assertEquals(count($keys), 1);
+		$this->assertEquals(1, count($keys));
 		$this->clickAndWait("link=My Account");
 		$this->clickAndWait("link=Edit Keys");
 		$this->type("authorized_key", $k);

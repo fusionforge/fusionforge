@@ -35,7 +35,7 @@ if [[ $# != 2 || $1 = *[[:space:]]* || ! -s $2 ]]; then
 fi
 
 # check if project uses Wiki at all
-$(forge_get_config source_path)/plugins/mediawiki/bin/mw-wrapper.php "$1" \
+$(forge_get_config plugins_path)/mediawiki/bin/mw-wrapper.php "$1" \
     showStats.php >/dev/null || exit $?
 
 set -x
@@ -43,15 +43,15 @@ set -e
 rm -rf "$wikiprojectdir/fulldump"
 (cd "$wikiprojectdir" && tar xzf -) <"$2"
 cd "$wikiprojectdir/fulldump"
-$(forge_get_config source_path)/plugins/mediawiki/bin/mw-wrapper.php "$1" \
+$(forge_get_config plugins_path)/mediawiki/bin/mw-wrapper.php "$1" \
     importImages.php mfi/
-$(forge_get_config source_path)/plugins/mediawiki/bin/mw-wrapper.php "$1" \
+$(forge_get_config plugins_path)/mediawiki/bin/mw-wrapper.php "$1" \
     importDump.php df.xml
 cd ..
 rm -rf fulldump
 chown -R www-data:www-data \
     "$wikiprojectdir/images"
-$(forge_get_config source_path)/plugins/mediawiki/bin/mw-wrapper.php "$1" \
+$(forge_get_config plugins_path)/mediawiki/bin/mw-wrapper.php "$1" \
     rebuildrecentchanges.php
-$(forge_get_config source_path)/plugins/mediawiki/bin/mw-wrapper.php "$1" update.php --quick
+$(forge_get_config plugins_path)/mediawiki/bin/mw-wrapper.php "$1" update.php --quick
 exit 0
