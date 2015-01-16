@@ -53,15 +53,13 @@ class PluginManager extends Error {
 	 * @return	array hash of plugin id => plugin names
 	 */
 	function GetPlugins() {
-		if (!isset($this->plugins_data)) {
-			$this->plugins_data = array();
-			$res = db_query_params('SELECT plugin_id, plugin_name FROM plugins',
-					array());
-			$rows = db_numrows($res);
-			for ($i=0; $i<$rows; $i++) {
-				$plugin_id = db_result($res, $i, 'plugin_id');
-				$this->plugins_data[$plugin_id] = db_result($res, $i, 'plugin_name');
-			}
+		$this->plugins_data = array();
+		$res = db_query_params('SELECT plugin_id, plugin_name FROM plugins',
+				array());
+		$rows = db_numrows($res);
+		for ($i=0; $i<$rows; $i++) {
+			$plugin_id = db_result($res, $i, 'plugin_id');
+			$this->plugins_data[$plugin_id] = db_result($res, $i, 'plugin_name');
 		}
 		return $this->plugins_data;
 	}

@@ -22,3 +22,4 @@ source_path=$(forge_get_config source_path)
 
 $source_path/post-install.d/common/ini.sh $1 $2
 $source_path/post-install.d/common/user.sh $1 $2
+$source_path/post-install.d/common/systasksd.sh $1 $2

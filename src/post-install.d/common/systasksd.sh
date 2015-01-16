@@ -1,5 +1,5 @@
 #!/bin/bash
-# Create to-be-specified 'fusionforge' user
+# Start systasksd on boot
 #
 # Copyright (C) 2014  Inria (Sylvain Beucler)
 #
@@ -18,30 +18,34 @@
 # with FusionForge; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-# TODO: specify the role of this user and its permissions
-# Currently used in: plugin-scmbzr, plugin-moinmoin, ???
-
-system_user=$(forge_get_config system_user)
-data_path=$(forge_get_config data_path)
-
 case "$1" in
     configure)
-	if ! getent passwd $system_user >/dev/null; then
-	    useradd $system_user -s /bin/false -M -d $data_path
+	if [ -x /sbin/chkconfig ]; then
+	    chkconfig fusionforge-systasksd on
+	else
+	    update-rc.d fusionforge-systasksd defaults
+	    # Work-around http://bugs.debian.org/774799
+	    if [ -x /bin/systemctl ]; then
+		systemctl daemon-reload
+	    fi
 	fi
+	# not 'start' as systemd will no-op if systasksd started and exited
+	service fusionforge-systasksd restart
 	;;
 
     remove)
+	if [ -x /sbin/chkconfig ]; then
+	    chkconfig fusionforge-systasksd off
+	else
+	    update-rc.d fusionforge-systasksd remove
+	fi
 	;;
 
     purge)
-	# note: can't be called from Debian's postrm - reproduced there
-	userdel $system_user
-	# *not* removing $data_path automatically, let's play safe
 	;;
 
     *)
-	echo "Usage: $0 {configure|purge}"
+	echo "Usage: $0 {configure|remove}"
 	exit 1
 	;;
 esac

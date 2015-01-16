@@ -26,6 +26,7 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'project/admin/project_admin_utils.php';
 require_once $gfwww.'scm/include/scm_utils.php';
 require_once $gfcommon.'scm/SCMFactory.class.php';
+require_once $gfcommon.'include/SysTasksQ.class.php';
 
 global $HTML;
 
@@ -50,6 +51,8 @@ if (getStringFromRequest('form_create_repo')) {
 	exit;
 }
 
+$systasksq = new SysTasksQ();
+
 if (getStringFromRequest('create_repository') && getStringFromRequest('submit')) {
 	$repo_name = trim(getStringFromRequest('repo_name'));
 	$description = preg_replace('/[\r\n]/', ' ', getStringFromRequest('description'));
@@ -67,6 +70,7 @@ if (getStringFromRequest('create_repository') && getStringFromRequest('submit'))
 	}
 	else {
 		$feedback = sprintf(_('New repository %s registered, will be created shortly.'), $repo_name);
+		$systasksq->add(SYSTASK_CORE, SYSTASK_SCM_REPO, $group_id);
 	}
 } elseif (getStringFromRequest('delete_repository') && getStringFromRequest('submit')) {
 	$repo_name = trim(getStringFromRequest('repo_name'));
@@ -82,6 +86,7 @@ if (getStringFromRequest('create_repository') && getStringFromRequest('submit'))
 	}
 	else {
 		$feedback = sprintf(_('Repository %s is marked for deletion (actual deletion will happen shortly).'), $repo_name);
+		$systasksq->add(SYSTASK_CORE, SYSTASK_SCM_REPO, $group_id);
 	}
 } elseif (getStringFromRequest('submit')) {
 	$hook_params = array();
@@ -136,9 +141,9 @@ if (getStringFromRequest('create_repository') && getStringFromRequest('submit'))
 		}
 	}
 
-	// Don't call scm plugin update if their form wasn't displayed
-	// to avoid processing an apparently empty form and reset configuration
 	if (!$scm_changed)
+		// Don't call scm plugin update if their form wasn't displayed
+		// to avoid processing an apparently empty form and reset configuration
 		plugin_hook("scm_admin_update", $hook_params);
 }
 

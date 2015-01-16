@@ -115,12 +115,12 @@ fi
 if [ "$reset" = 1 ]; then
     set -e
     # Reset connections
-    #service fusionforge-systasksd stop
+    service fusionforge-systasksd stop
     service postgresql restart
     su - postgres -c "dropdb $database"
     $(forge_get_config source_path)/post-install.d/db/db.sh configure
     forge_set_password admin myadmin
-    #service fusionforge-systasksd start
+    service fusionforge-systasksd start
     exit 0
 fi
 
@@ -223,5 +223,7 @@ if [ -x /usr/sbin/nscd ]; then
     echo "Flushing/restarting nscd"
     nscd -i passwd && nscd -i group
 fi
-
 echo "nscd flushed, going on with tests"
+
+# We may have changed plugins.plugin_id, need to reload the systasksd
+service fusionforge-systasksd restart

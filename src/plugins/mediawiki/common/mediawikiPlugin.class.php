@@ -32,8 +32,16 @@ forge_define_config_item('master_path', 'mediawiki', '$mediawiki/mwdata_path/mas
 forge_define_config_item('enable_uploads', 'mediawiki', false);
 forge_set_config_item_bool('enable_uploads', 'mediawiki');
 }
+require_once $gfcommon.'include/SysTasksQ.class.php';
+define('SYSTASK_MEDIAWIKI_CREATE_WIKI', 1);
+define('SYSTASK_MEDIAWIKI_CREATE_IMAGEDIR', 2);
 
 class MediaWikiPlugin extends Plugin {
+	public $systask_types = array(
+		SYSTASK_MEDIAWIKI_CREATE_WIKI => 'create-wikis.php',
+		SYSTASK_MEDIAWIKI_CREATE_IMAGEDIR => 'create-imagedirs.php'
+	);
+
 	function __construct ($id=0) {
 		$this->Plugin($id) ;
 		$this->name = "mediawiki" ;
@@ -95,32 +103,6 @@ _("This plugin allows each project to embed Mediawiki under a tab.");
 				$params['TOOLTIPS'][] = _('Mediawiki Space');
 			}
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
-		} elseif ($hookname == "groupisactivecheckbox") {
-			//Check if the group is active
-			// this code creates the checkbox in the project edit public info page to activate/deactivate the plugin
-			$group = group_get_object($group_id);
-			echo "<tr>";
-			echo "<td>";
-			echo ' <input type="checkbox" name="use_mediawikiplugin" value="1" ';
-			// checked or unchecked?
-			if ( $group->usesPlugin ( $this->name ) ) {
-				echo "checked";
-			}
-			echo " /><br/>";
-			echo "</td>";
-			echo "<td>";
-			echo "<strong>Use ".$this->text." Plugin</strong>";
-			echo "</td>";
-			echo "</tr>";
-		} elseif ($hookname == "groupisactivecheckboxpost") {
-			// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
-			$group = group_get_object($group_id);
-			$use_mediawikiplugin = getStringFromRequest('use_mediawikiplugin');
-			if ( $use_mediawikiplugin == 1 ) {
-				$group->setPluginUse ( $this->name );
-			} else {
-				$group->setPluginUse ( $this->name, false );
-			}
 		} elseif ($hookname == "project_public_area") {
 			$project = group_get_object($group_id);
 			if (!$project || !is_object($project)) {
@@ -391,7 +373,19 @@ _("This plugin allows each project to embed Mediawiki under a tab.");
 			}
 		}
 	}
-  }
+
+	function groupisactivecheckboxpost(&$params) {
+			if (!parent::groupisactivecheckboxpost($params))
+					return false;
+			if (getIntFromRequest('use_mediawiki') == 1) {
+				$systasksq = new SystasksQ();
+				$group_id = $params['group'];
+				$systasksq->add($this->getID(), SYSTASK_MEDIAWIKI_CREATE_WIKI, $group_id);
+				$systasksq->add($this->getID(), SYSTASK_MEDIAWIKI_CREATE_IMAGEDIR, $group_id);
+			}
+			return true;
+	}
+}
 
 // Local Variables:
 // mode: php

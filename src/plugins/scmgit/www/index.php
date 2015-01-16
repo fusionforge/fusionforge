@@ -27,9 +27,12 @@
 require_once '../../../www/env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'scm/include/scm_utils.php';
+require_once $gfcommon.'include/SysTasksQ.class.php';
 
 $plugin = plugin_get_object('scmgit');
 $plugin_id = $plugin->getID();
+
+$systasksq = new SysTasksQ();
 
 $func = getStringFromRequest('func');
 
@@ -69,6 +72,7 @@ case 'request-personal-repo':
 								$user->getID(),
 								$plugin_id));
 
+				$systasksq->add(SYSTASK_CORE, SYSTASK_SCM_REPO, $group_id);
 				scm_header(array('title' => _('SCM Repository'), 'group' => $group_id));
 				echo _('You have now requested a personal Git repository for this project.  It will be created shortly.');
 				scm_footer();
