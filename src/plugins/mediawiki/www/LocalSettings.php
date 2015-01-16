@@ -75,6 +75,13 @@ if (!$g->usesPlugin('mediawiki')) {
 	$exit_errorlevel = 1;
 	exit_error(sprintf(_('Project %s does not use the Mediawiki plugin'), $fusionforgeproject));
 }
+if (!$g->isActive()) {
+	/* disabled project requires Site Admin privs */
+	$exit_errorlevel = 1;
+	session_require_global_perm('forge_admin');
+	/* revert, if we’re still there */
+	$exit_errorlevel = 0;
+}
 $wgSitename         = $g->getPublicName() . " Wiki";
 $wgScriptPath       = "/plugins/mediawiki/wiki/$fusionforgeproject" ;
 
