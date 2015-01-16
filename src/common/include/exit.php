@@ -36,7 +36,8 @@ $exit_errorlevel = 0;
  * @param	string  toptab for navigation bar
  */
 function exit_error($text="", $toptab='') {
-	global $HTML,$group_id;
+	global $HTML, $group_id, $exit_errorlevel;
+
 	$HTML->header(array('title'=>_('Exiting with error'), 'group'=>$group_id, 'toptab'=>$toptab));
 	echo $HTML->error_msg(htmlspecialchars($text));
 	$HTML->footer(array());
