@@ -25,7 +25,6 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 {
 	function testScmGitSmartHTTP()
 	{
-
 		$this->changeConfig("[core]\nuse_ssl = no\n");
 
 		$this->activatePlugin('scmgit');
@@ -39,8 +38,8 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=Source Code Admin");
 		$this->click("//input[@name='scmengine[]' and @value='scmgit']");
 		$this->clickAndWait("submit");
-
-		// Run the cronjob to create repositories
+	    
+		// Create repositories
 		$this->waitSystasks();
 
 		// Get the address of the repo
@@ -83,6 +82,35 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=projecta.git");
 		$this->assertTextPresent("Modifying file");
 		$this->assertTextPresent("Adding file");
+
+        // Check gitweb directly
+		$this->open('/plugins/scmgit/cgi-bin/gitweb.cgi?p=projecta/projecta.git');
+		$this->assertElementPresent("//.[@class='page_footer']");
+		$this->assertTextPresent("projecta.git");
+		$this->clickAndWait("link=projecta.git");
+		$this->assertTextPresent("Modifying file");
+		$this->assertTextPresent("Adding file");
+
+        // Disable anonymous access to gitweb
+		$this->open(ROOT);
+		$this->clickAndWait("link=ProjectA");
+		$this->click("link=Admin");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("Project Information"));
+		$this->click("link=Users and permissions");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("Current Project Members"));
+		$this->click("//tr/td/form/div[contains(.,'Anonymous')]/../../../td/form/div/input[contains(@value,'Unlink Role')]");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("Role unlinked successfully"));
+
+		// Update repositories
+		$this->waitSystasks();
+
+        // Check that gitweb now fails
+		$this->open('/plugins/scmgit/cgi-bin/gitweb.cgi?p=projecta/projecta.git');
+		$this->assertElementPresent("//.[@class='page_footer']");
+		$this->assertTextNotPresent("projecta.git");
 
 		system("rm -fr $t");
 	}
