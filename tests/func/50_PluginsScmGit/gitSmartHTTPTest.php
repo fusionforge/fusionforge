@@ -39,25 +39,7 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 		$this->click("//input[@name='scmengine[]' and @value='scmgit']");
 		$this->clickAndWait("submit");
 	    
-        // Set up a different user
-        $this->createUser ('otheruser') ;
-        $this->createAndGoto ('projectb');
-		$this->clickAndWait("link=Admin");
-		$this->clickAndWait("link=Users and permissions");
-		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "otheruser") ;
-		$this->select("//input[@value='Add Member']/../select[@name='role_id']", "label=Admin");
-		$this->clickAndWait ("//input[@value='Add Member']") ;
-		$this->assertTrue($this->isTextPresent("otheruser Lastname"));
-		$this->assertTrue($this->isElementPresent("//tr/td/a[.='otheruser Lastname']/../../td/div[contains(.,'Admin')]")) ;
-		$this->clickAndWait("//tr/td/form/div[contains(.,'Anonymous')]/../../../td/form/div/input[contains(@value,'Unlink Role')]");
-		$this->assertTrue($this->isTextPresent("Role unlinked successfully"));
-
-		$this->clickAndWait("link=Tools");
-		$this->clickAndWait("link=Source Code Admin");
-		$this->click("//input[@name='scmradio' and @value='scmgit']");
-		$this->clickAndWait("submit");
-
-		// Run the cronjob to create repositories
+		// Create repositories
 		$this->waitSystasks();
 
 		// Get the address of the repo
@@ -122,9 +104,8 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Role unlinked successfully"));
 
-        // Update repository permissions
-		$this->cron("create_scm_repos.php");
-		$this->cron("homedirs.php");
+		// Update repositories
+		$this->waitSystasks();
 
         // Check that gitweb now fails
 		$this->open('/plugins/scmgit/cgi-bin/gitweb.cgi?p=projecta/projecta.git');
@@ -150,9 +131,26 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 		$this->assertTextPresent("Adding file");
 		$this->selectFrame("relative=top");
 
-        // Update repository permissions
-		$this->cron("create_scm_repos.php");
-		$this->cron("homedirs.php");
+        // Set up a different user
+        $this->createUser ('otheruser') ;
+        $this->createAndGoto ('projectb');
+		$this->clickAndWait("link=Admin");
+		$this->clickAndWait("link=Users and permissions");
+		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "otheruser") ;
+		$this->select("//input[@value='Add Member']/../select[@name='role_id']", "label=Admin");
+		$this->clickAndWait ("//input[@value='Add Member']") ;
+		$this->assertTrue($this->isTextPresent("otheruser Lastname"));
+		$this->assertTrue($this->isElementPresent("//tr/td/a[.='otheruser Lastname']/../../td/div[contains(.,'Admin')]")) ;
+		$this->clickAndWait("//tr/td/form/div[contains(.,'Anonymous')]/../../../td/form/div/input[contains(@value,'Unlink Role')]");
+		$this->assertTrue($this->isTextPresent("Role unlinked successfully"));
+
+		$this->clickAndWait("link=Tools");
+		$this->clickAndWait("link=Source Code Admin");
+		$this->click("//input[@name='scmengine[]' and @value='scmgit']");
+		$this->clickAndWait("submit");
+
+		// Create repositories
+		$this->waitSystasks();
 
         // Try with a different user
         $this->open("http://otheruser:".FORGE_OTHER_PASSWORD."@scm.".HOST.ROOT."/authscm/otheruser/gitweb/projecta/");
