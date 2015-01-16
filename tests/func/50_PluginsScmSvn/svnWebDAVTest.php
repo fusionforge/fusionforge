@@ -30,7 +30,7 @@ class ScmSvnWebDAVTest extends FForge_SeleniumTestCase
 			system("cd $dir && timeout 15s $command", $ret);
 		}
 		ob_flush();
-		$this->assertEquals($ret, 0);
+		$this->assertEquals(0, $ret);
 	}
 
 	function testScmSvnWebDAV()

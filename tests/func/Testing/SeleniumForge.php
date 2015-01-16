@@ -119,7 +119,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	protected function runCommand($cmd)
 	{
 		system(RUN_COMMAND_PREFIX.$cmd, $ret);
-		$this->assertEquals($ret, 0);
+		$this->assertEquals(0, $ret);
 		ob_flush();
 	}
 
