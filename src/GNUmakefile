@@ -174,6 +174,7 @@ uninstall:
 ## Step 3: configure & update system
 # not relying on 'prefix' for post-install (for no-install/dev setups)
 post_source_path:=$(shell forge_get_config source_path 2>/dev/null)
+post_plugins_path:=$(shell forge_get_config plugins_path 2>/dev/null)
 post-install: post-install-base post-install-plugins
 post-install-base: post-install-common post-install-db post-install-web
 post-install-common:
@@ -192,7 +193,7 @@ post-install-mta-exim4:
 post-install-lists:
 	$(post_source_path)/post-install.d/lists/lists.sh configure
 
-PLUGINS_INSTALLED:=$(shell cd $(post_source_path)/plugins 2>/dev/null && find * -maxdepth 0 -type d)
+PLUGINS_INSTALLED:=$(shell cd $(post_plugins_path) 2>/dev/null && find * -maxdepth 0 -type d)
 PLUGINS_POST_INSTALL_TARGETS=$(addprefix post-install-plugin-,$(PLUGINS_INSTALLED))
 # Not depending on PLUGINS_POST_INSTALL_TARGETS: too many dependencies and non-production plugins
 post-install-plugins:
@@ -200,10 +201,10 @@ post-install-plugins:
 	@for i in $(PLUGINS_INSTALLED); do \
 		echo "  make post-install-plugin-$$i"; \
 	done
-post-install-plugin-%: $(post_source_path)/plugins/%/
+post-install-plugin-%: $(post_plugins_path)/%/
 	$(post_source_path)/post-install.d/common/plugin.sh $* configure
 
-uninstall-plugin-%: $(post_source_path)/plugins/%/
+uninstall-plugin-%: $(post_plugins_path)/%/
 	$(post_source_path)/post-install.d/common/plugin.sh $* remove
 #	$(post_source_path)/post-install.d/common/plugin.sh $* uninstall
 

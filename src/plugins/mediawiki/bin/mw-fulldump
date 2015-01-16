@@ -42,7 +42,7 @@ fi
 #fi
 
 # check if project uses Wiki at all
-$(forge_get_config source_path)/plugins/mediawiki/bin/mw-wrapper.php "$1" \
+$(forge_get_config plugins_path)/mediawiki/bin/mw-wrapper.php "$1" \
     showStats.php >/dev/null || exit $?
 
 wd=$PWD
@@ -51,7 +51,7 @@ set -e
 rm -rf "$wikiprojectdir/fulldump"
 mkdir "$wikiprojectdir/fulldump"
 cd "$wikiprojectdir/fulldump"
-$(forge_get_config source_path)/plugins/mediawiki/bin/mw-wrapper.php "$1" \
+$(forge_get_config plugins_path)/mediawiki/bin/mw-wrapper.php "$1" \
     dumpUploads.php >mf1.txt
 sed \
     "smwstore://local-backend/local-public$wikiprojectdir/images" \
@@ -60,7 +60,7 @@ mkdir mfi
 if [[ -s mf2.txt ]]; then
 	ln $(<mf2.txt) mfi/
 fi
-$(forge_get_config source_path)/plugins/mediawiki/bin/mw-wrapper.php "$1" \
+$(forge_get_config plugins_path)/mediawiki/bin/mw-wrapper.php "$1" \
     dumpBackup.php --full >df.xml
 rm -f mf?.txt
 cd ..
