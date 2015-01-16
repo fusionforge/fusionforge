@@ -460,7 +460,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		// Upload keys to the web interface
 		$keys = file($pubkey);
 		$k = $keys[0];
-		$this->assertEquals(count($keys), 1);
+		$this->assertEquals(1, count($keys));
 		$this->clickAndWait("link=My Account");
 		$this->clickAndWait("link=Edit Keys");
 		$this->type("authorized_key", $k);

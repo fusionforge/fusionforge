@@ -60,14 +60,14 @@ class multiSCMTest extends FForge_SeleniumTestCase
 		$p = preg_replace(",/branchname$,", "", $p);
 		$t = exec("mktemp -d /tmp/bzrTest.XXXXXX");
 		system("cd $t && bzr init --quiet trunk >/dev/null", $ret);
-		$this->assertEquals($ret, 0);
+		$this->assertEquals(0, $ret);
 		system("echo 'this is a simple text' > $t/trunk/mytext.txt");
 		system("cd $t/trunk && bzr add --quiet && bzr commit -m'Adding file in Bazaar' --quiet", $ret);
 		system("echo 'another simple text' >> $t/trunk/mytext.txt");
 		system("cd $t/trunk && bzr add --quiet && bzr commit -m'Modifying file in Bazaar' --quiet", $ret);
-		$this->assertEquals($ret, 0);
+		$this->assertEquals(0, $ret);
 		system("cd $t/trunk && bzr push --quiet $p/trunk", $ret);
-		$this->assertEquals($ret, 0);
+		$this->assertEquals(0, $ret);
 		system("rm -fr $t");
 
         // Check Subversion checkout/commit
@@ -78,12 +78,12 @@ class multiSCMTest extends FForge_SeleniumTestCase
 		$p = preg_replace(",^svn checkout ,", "", $p);
 		$t = exec("mktemp -d /tmp/svnTest.XXXXXX");
 		system("cd $t && svn checkout $p projecta", $ret);
-		$this->assertEquals($ret, 0);
+		$this->assertEquals(0, $ret);
 		system("echo 'this is a simple text' > $t/projecta/mytext.txt");
 		system("cd $t/projecta && svn add mytext.txt && svn commit -m'Adding file in Subversion'", $ret);
 		system("echo 'another simple text' >> $t/projecta/mytext.txt");
 		system("cd $t/projecta && svn commit -m'Modifying file in Subversion'", $ret);
-		$this->assertEquals($ret, 0);
+		$this->assertEquals(0, $ret);
 		system("rm -fr $t");
 
         // Check Git clone/commit/push
@@ -94,14 +94,14 @@ class multiSCMTest extends FForge_SeleniumTestCase
 		$p = preg_replace(",^git clone ,", "", $p);
 		$t = exec("mktemp -d /tmp/gitTest.XXXXXX");
 		system("cd $t && git clone --quiet $p", $ret);
-		$this->assertEquals($ret, 0);
+		$this->assertEquals(0, $ret);
 		system("echo 'this is a simple text' > $t/projecta/mytext.txt");
 		system("cd $t/projecta && git add mytext.txt && git commit --quiet -a -m'Adding file in Git'", $ret);
 		system("echo 'another simple text' >> $t/projecta/mytext.txt");
 		system("cd $t/projecta && git commit --quiet -a -m'Modifying file in Git'", $ret);
-		$this->assertEquals($ret, 0);
+		$this->assertEquals(0, $ret);
 		system("cd $t/projecta && git push --quiet --all", $ret);
-		$this->assertEquals($ret, 0);
+		$this->assertEquals(0, $ret);
 		system("rm -fr $t");
 
         // Check Bazaar browse

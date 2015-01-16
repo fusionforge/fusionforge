@@ -51,19 +51,19 @@ class ScmGitSSHTest extends FForge_SeleniumTestCase
 
 		// Create a local clone, add stuff, push it to the repo
 		system("git config --global core.askpass ''", $ret);
-		$this->assertEquals($ret, 0);
+		$this->assertEquals(0, $ret);
 		$t = exec("mktemp -d /tmp/gitTest.XXXXXX");
 		system("cd $t && git clone --quiet $p", $ret);
-		$this->assertEquals($ret, 0);
+		$this->assertEquals(0, $ret);
 
 		system("echo 'this is a simple text' > $t/projecta/mytext.txt");
 		system("cd $t/projecta && git add mytext.txt && git commit --quiet -a -m'Adding file'", $ret);
 		system("echo 'another simple text' >> $t/projecta/mytext.txt");
 		system("cd $t/projecta && git commit --quiet -a -m'Modifying file'", $ret);
-		$this->assertEquals($ret, 0);
+		$this->assertEquals(0, $ret);
 
 		system("cd $t/projecta && git push --quiet --all", $ret);
-		$this->assertEquals($ret, 0);
+		$this->assertEquals(0, $ret);
 
 		// Check that the changes appear in gitweb
 		$this->open(ROOT);
