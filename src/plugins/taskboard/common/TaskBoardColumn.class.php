@@ -1,7 +1,7 @@
 <?php
 /**
  *
- * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com> 
+ * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
  *
  * This file is part of FusionForge.
  *
@@ -9,7 +9,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
- * 
+ *
  * FusionForge is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -25,7 +25,7 @@ require_once $gfplugins.'taskboard/common/TaskBoardColumnSource.class.php';
 
 /**
  *       Factory method which creates a taskboard column from a taskboard column ID
- *       
+ *
  *       @param int      The taskboard column ID
  *       @param array    The result array, if it's passed in
  *       @return object  TaskBoardColumn object
@@ -45,7 +45,7 @@ function &taskboard_column_get_object($taskboard_column_id,$data=false) {
 
 /**
  *       Factory method which creates a taskboard column by reolustion name
- *       
+ *
  *       @param object      Taskboard
  *       @param string      Resolution label
  *       @return object  TaskBoardColumn object
@@ -60,7 +60,7 @@ function &taskboard_column_get_object_by_resolution($taskboard, $resolution_labe
 	if( !array_key_exists($resolution_label, $columns[ $taskboard->getID() ] ) ) {
 		$res = db_query_params (
 			'SELECT C.* FROM plugin_taskboard_columns as C, plugin_taskboard_columns_resolutions as R
-			WHERE C.taskboard_column_id=R.taskboard_column_id AND C.taskboard_id=$1 and taskboard_column_resolution=$2', 
+			WHERE C.taskboard_column_id=R.taskboard_column_id AND C.taskboard_id=$1 and taskboard_column_resolution=$2',
 			array (
 				$taskboard->getID(),
 				$resolution_label
@@ -95,7 +95,7 @@ class TaskBoardColumn extends Error {
 	 * @var         array   $data_array.
 	 */
 	var $data_array;
-	
+
 	var $drop_rules_by_default;
 
 	var $drop_rules;
@@ -147,6 +147,9 @@ class TaskBoardColumn extends Error {
 		}
 		db_free_result($res);
 
+		if (!$this->fetchData($this->getID())) {
+			return false;
+		}
 		return true;
 	}
 
@@ -245,7 +248,7 @@ class TaskBoardColumn extends Error {
 				return false;
 			}
 		}
-		
+
 		//TODO remove relations from other columns
 
 		return true;
@@ -258,7 +261,7 @@ class TaskBoardColumn extends Error {
 	 *      @return boolean success.
 	 */
 	function fetchData($id) {
-		$res = db_query_params ('SELECT * FROM plugin_taskboard_column WHERE taskboard_column_id=$1', array ($id)) ;
+		$res = db_query_params ('SELECT * FROM plugin_taskboard_columns WHERE taskboard_column_id=$1', array ($id)) ;
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError('TaskBoard: Invalid TaskBoardColumnID');
 			return false;
@@ -356,7 +359,7 @@ class TaskBoardColumn extends Error {
 			$resolutions[$row['taskboard_column_value_id']] = $row['taskboard_column_resolution'];
 		}
 		db_free_result($res);
-		return $resolutions;		
+		return $resolutions;
 	}
 
 	/**
@@ -382,7 +385,7 @@ class TaskBoardColumn extends Error {
 					);
 				} else {
 					// drop rule by default
-					$this->drop_rules['*'] = taskboard_default_column_source_get_object( 
+					$this->drop_rules['*'] = taskboard_default_column_source_get_object(
 						$row['target_taskboard_column_id'],
 						$row
 					);
@@ -420,7 +423,7 @@ class TaskBoardColumn extends Error {
 		return $this->drop_rules_by_default->getTargetResolution();
 	}
 
-	
+
 	/**
 	 *
 	 */
@@ -434,7 +437,7 @@ class TaskBoardColumn extends Error {
 		if( $rule ) {
 			$rule->save($target_resolution, $alert, $autoassign);
 			if( $rule->isError() ) {
-				$this->setError( $rule->getErrorMessage() );	
+				$this->setError( $rule->getErrorMessage() );
 				return false;
 			}
 		} else {

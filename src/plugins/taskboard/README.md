@@ -29,7 +29,7 @@ Any tracker could be used either like a tasks tracker or like user stories track
 In user stories tracker you can define an extra field, that will be used for user stories sorting.
 It's a 'text' type extra field that usually keeps a unique number - relative priority of the user story.
 
-Naturally, in tasks trackers you should define an extra field for keeping a referetce to related user story artifact
+Naturally, in tasks trackers you should define an extra field for keeping a reference to related user story artifact
 (identifier of user story artifact).
 
 User story extra field should have 'text' or 'relation' type.
