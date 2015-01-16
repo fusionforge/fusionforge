@@ -124,7 +124,7 @@ while (true) {
 								  $arr['systask_id']));
 			continue;
 		}
-		db_query_params("UPDATE systasks SET status=$1 WHERE systask_id=$2",
+		db_query_params("UPDATE systasks SET status=$1, started=now() WHERE systask_id=$2",
 						array('WIP', $arr['systask_id']));
 		cron_acquire_lock($script);
 		$ret = null;
@@ -132,11 +132,11 @@ while (true) {
 		system("$script\n", $ret);
 		if ($ret == 0) {
 			if ($verbose) print "DONE\n";
-			db_query_params("UPDATE systasks SET status=$1 WHERE systask_id=$2",
+			db_query_params("UPDATE systasks SET status=$1, stopped=now() WHERE systask_id=$2",
 							array('DONE', $arr['systask_id']));
 		} else {
 			if ($verbose) print "ERROR\n";
-			db_query_params("UPDATE systasks SET status=$1 WHERE systask_id=$2",
+			db_query_params("UPDATE systasks SET status=$1, stopped=now() WHERE systask_id=$2",
 							array('ERROR', $arr['systask_id']));
 		}
 	}
