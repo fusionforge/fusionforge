@@ -39,7 +39,14 @@ function loadTaskboard( group_id ) {
 			jQuery( "#agile-board" ).append(
 				drawUserStories()
 			);
-	
+			
+			jQuery( window ).resize( function() {
+				jQuery('.agile-sticker').each( function( i, e) {
+					jQuery(e).css('width', 'auto' );
+				});
+				fixCardSize();
+			} );
+
 			jQuery( ".agile-toolbar-add-task" ).click( function(e) {
 				jQuery('#new-task-dialog input[name="user_story_id"]').val( jQuery(this).attr('user_story_id') );
 				jQuery('#new-task-dialog').dialog('open');
@@ -47,7 +54,6 @@ function loadTaskboard( group_id ) {
 				e.preventDefault();	
 			});
 
-		
 			for(var i=0 ; i<aUserStories.length ; i++) {
 				drawUserStory( aUserStories[i] );
 			};
@@ -55,13 +61,8 @@ function loadTaskboard( group_id ) {
 			drawBoardProgress();
 	
 			initUserStories();
-	
 			initEditable();
-			
-			// set fixed with in pixels for preventing bad view when d'n'd
-			jQuery('.agile-sticker').each( function( i, e) {
-				jQuery(e).css('width',jQuery(e).width() );
-			});
+			fixCardSize();
 			
 			jQuery( ".agile-minimize-column" ).click( function() {
 				var phase_id = jQuery(this).attr('phase_id');
@@ -95,6 +96,13 @@ function loadTaskboard( group_id ) {
 					'<tr><td colspan="'  + aPhases.length + '" style="text-align: center;">' + gMessages['notasks'] + '</td></tr>'
 				);
 		}
+	});
+}
+
+function fixCardSize () {
+	// set fixed with in pixels for preventing bad view when d'n'd
+	jQuery('.agile-sticker').each( function( i, e) {
+		jQuery(e).css('width',jQuery(e).width() );
 	});
 }
 
@@ -275,9 +283,7 @@ function setPhase( nUserStoryId, nTaskId, nTargetPhaseId ) {
 										drawUserStory(l_oUserStory);
 									}
 									
-									jQuery('.agile-sticker').each( function( i, e) {
-										jQuery(e).css('width',jQuery(e).width() );
-									});
+									fixCardSize();
 	
 									jQuery('#agile-board-progress').html( '' );
 									drawBoardProgress();
