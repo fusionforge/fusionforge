@@ -140,9 +140,9 @@ while (true) {
 							array('ERROR', $arr['systask_id']));
 		}
 	}
-	
+
 	usergroups_sync();
-	
+
 	sleep(1);
 }
 
