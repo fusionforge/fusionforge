@@ -28,6 +28,7 @@
 
 require $gfcommon.'include/PFO-RBAC.interface.php';
 require_once $gfcommon.'frs/FRSPackageFactory.class.php';
+require_once $gfcommon.'include/SysTasksQ.class.php';
 
 // Code shared between classes
 
@@ -228,6 +229,9 @@ abstract class BaseRole extends Error {
 			}
 		}
 
+		$systasksq = new SysTasksQ();
+		$systasksq->add(SYSTASK_CORE, SYSTASK_SCM_REPO, $project->getID());
+
 		return true ;
 	}
 
@@ -260,6 +264,9 @@ abstract class BaseRole extends Error {
 		$hook_params['role'] =& $this;
 		$hook_params['project'] =& $project;
 		plugin_hook ("role_unlink_project", $hook_params);
+
+		$systasksq = new SysTasksQ();
+		$systasksq->add(SYSTASK_CORE, SYSTASK_SCM_REPO, $project->getID());
 
 		return true ;
 	}
@@ -878,6 +885,11 @@ abstract class BaseRole extends Error {
 					return false;
 				}
 			}
+		}
+
+		$systasksq = new SysTasksQ();
+		foreach ($this->getLinkedProjects() as $project) {
+			$systasksq->add(SYSTASK_CORE, SYSTASK_SCM_REPO, $project->getID());
 		}
 
 		return true;
