@@ -230,7 +230,7 @@ abstract class BaseRole extends Error {
 		}
 
 		$systasksq = new SysTasksQ();
-		$systasksq->add(SYSTASK_CORE, SYSTASK_SCM_REPO, $project->getID());
+		$systasksq->add(SYSTASK_CORE, 'SCM_REPO', $project->getID());
 
 		return true ;
 	}
@@ -266,7 +266,7 @@ abstract class BaseRole extends Error {
 		plugin_hook ("role_unlink_project", $hook_params);
 
 		$systasksq = new SysTasksQ();
-		$systasksq->add(SYSTASK_CORE, SYSTASK_SCM_REPO, $project->getID());
+		$systasksq->add(SYSTASK_CORE, 'SCM_REPO', $project->getID());
 
 		return true ;
 	}
@@ -889,7 +889,7 @@ abstract class BaseRole extends Error {
 
 		$systasksq = new SysTasksQ();
 		foreach ($this->getLinkedProjects() as $project) {
-			$systasksq->add(SYSTASK_CORE, SYSTASK_SCM_REPO, $project->getID());
+			$systasksq->add(SYSTASK_CORE, 'SCM_REPO', $project->getID());
 		}
 
 		return true;

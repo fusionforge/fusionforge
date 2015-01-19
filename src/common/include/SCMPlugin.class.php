@@ -53,7 +53,7 @@ abstract class SCMPlugin extends Plugin {
 		switch ($hookname) {
 			case 'group_plugin_use': {
 				$systasksq = new SysTasksQ();
-				$systasksq->add(SYSTASK_CORE, SYSTASK_SCM_REPO, $params['group_id']);
+				$systasksq->add(SYSTASK_CORE, 'SCM_REPO', $params['group_id']);
 				break;
 			}
 			case 'scm_plugin': {

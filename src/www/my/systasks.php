@@ -52,7 +52,7 @@ $gids = implode(',', $gids);
 $title_arr = array(
 	_('Task ID'),
 	_('Plugin'),
-	_('SysTask Type ID'),
+	_('SysTask Type'),
 	_('Group ID'),
 	_('Status'),
 	_('Requested'),
@@ -63,7 +63,7 @@ $title_arr = array(
 echo $HTML->listTableTop($title_arr);
 $query = "
 SELECT systask_id, unix_group_name,
-plugin_name, systasks.status,
+plugin_name, systask_type, systasks.status,
     EXTRACT(epoch FROM requested) AS requested,
     EXTRACT(epoch FROM started) AS started,
     EXTRACT(epoch FROM stopped) AS stopped,
@@ -83,7 +83,7 @@ for ($i=0; $i<db_numrows($res); $i++) {
 		$cells[][] = 'core';
 	else
 		$cells[][] = $plugin_name;
-	$cells[][] = db_result($res,$i,'systask_type_id');
+	$cells[][] = db_result($res,$i,'systask_type');
 	$cells[][] = db_result($res,$i,'unix_group_name');
 	$cells[][] = db_result($res,$i,'status');
 	$cells[][] = date("H:i:s", db_result($res, $i,'requested'));

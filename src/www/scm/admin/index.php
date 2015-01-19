@@ -70,7 +70,7 @@ if (getStringFromRequest('create_repository') && getStringFromRequest('submit'))
 	}
 	else {
 		$feedback = sprintf(_('New repository %s registered, will be created shortly.'), $repo_name);
-		$systasksq->add(SYSTASK_CORE, SYSTASK_SCM_REPO, $group_id);
+		$systasksq->add(SYSTASK_CORE, 'SCM_REPO', $group_id);
 	}
 } elseif (getStringFromRequest('delete_repository') && getStringFromRequest('submit')) {
 	$repo_name = trim(getStringFromRequest('repo_name'));
@@ -86,7 +86,7 @@ if (getStringFromRequest('create_repository') && getStringFromRequest('submit'))
 	}
 	else {
 		$feedback = sprintf(_('Repository %s is marked for deletion (actual deletion will happen shortly).'), $repo_name);
-		$systasksq->add(SYSTASK_CORE, SYSTASK_SCM_REPO, $group_id);
+		$systasksq->add(SYSTASK_CORE, 'SCM_REPO', $group_id);
 	}
 } elseif (getStringFromRequest('submit')) {
 	$hook_params = array();

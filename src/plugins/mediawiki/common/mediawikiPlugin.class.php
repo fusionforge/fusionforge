@@ -33,13 +33,11 @@ forge_define_config_item('enable_uploads', 'mediawiki', false);
 forge_set_config_item_bool('enable_uploads', 'mediawiki');
 }
 require_once $gfcommon.'include/SysTasksQ.class.php';
-define('SYSTASK_MEDIAWIKI_CREATE_WIKI', 1);
-define('SYSTASK_MEDIAWIKI_CREATE_IMAGEDIR', 2);
 
 class MediaWikiPlugin extends Plugin {
 	public $systask_types = array(
-		SYSTASK_MEDIAWIKI_CREATE_WIKI => 'create-wikis.php',
-		SYSTASK_MEDIAWIKI_CREATE_IMAGEDIR => 'create-imagedirs.php'
+		'MEDIAWIKI_CREATE_WIKI' => 'create-wikis.php',
+		'MEDIAWIKI_CREATE_IMAGEDIR' => 'create-imagedirs.php'
 	);
 
 	function __construct ($id=0) {
@@ -63,13 +61,13 @@ _("This plugin allows each project to embed Mediawiki under a tab.");
 		$this->_addHook("clone_project_from_template") ;
 		$this->_addHook('group_delete');
 	}
-
-        function process() {
+	
+	function process() {
 		echo '<h1>Mediawiki</h1>';
 		echo $this->getPluginInfo()->getpropVal('answer');
-        }
+	}
 
-        function &getPluginInfo() {
+	function &getPluginInfo() {
 		if (!is_a($this->pluginInfo, 'MediaWikiPluginInfo')) {
 			require_once 'MediaWikiPluginInfo.class.php';
 			$this->pluginInfo = new MediaWikiPluginInfo($this);
@@ -380,8 +378,8 @@ _("This plugin allows each project to embed Mediawiki under a tab.");
 			if (getIntFromRequest('use_mediawiki') == 1) {
 				$systasksq = new SystasksQ();
 				$group_id = $params['group'];
-				$systasksq->add($this->getID(), SYSTASK_MEDIAWIKI_CREATE_WIKI, $group_id);
-				$systasksq->add($this->getID(), SYSTASK_MEDIAWIKI_CREATE_IMAGEDIR, $group_id);
+				$systasksq->add($this->getID(), 'MEDIAWIKI_CREATE_WIKI', $group_id);
+				$systasksq->add($this->getID(), 'MEDIAWIKI_CREATE_IMAGEDIR', $group_id);
 			}
 			return true;
 	}

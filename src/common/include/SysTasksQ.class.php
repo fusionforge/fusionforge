@@ -21,20 +21,19 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+# Default category (plugin_id field)
 define('SYSTASK_CORE', null);
-define('SYSTASK_HOMEDIR', 25);
-define('SYSTASK_SCM_REPO', 27);
 
 class SysTasksQ extends Error {
-		function add($plugin_id, $systask_type_id, $group_id, $user_id=null) {
+		function add($plugin_id, $systask_type, $group_id, $user_id=null) {
 				$res = db_query_params('INSERT INTO systasks (
 				    plugin_id,
-				    systask_type_id,
+				    systask_type,
 				    group_id,
 				    user_id,
 				    requested
 				  ) VALUES ($1, $2, $3, $4, now())',
-				  array($plugin_id, $systask_type_id, $group_id, $user_id));
+				  array($plugin_id, $systask_type, $group_id, $user_id));
 				if (!$res || db_affected_rows($res) < 1) {
 						$this->setError(sprintf(_('Error: Cannot create system action: %s'),
 												db_error()));

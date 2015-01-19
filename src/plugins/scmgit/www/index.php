@@ -72,7 +72,7 @@ case 'request-personal-repo':
 								$user->getID(),
 								$plugin_id));
 
-				$systasksq->add(SYSTASK_CORE, SYSTASK_SCM_REPO, $group_id);
+				$systasksq->add(SYSTASK_CORE, 'SCM_REPO', $group_id);
 				scm_header(array('title' => _('SCM Repository'), 'group' => $group_id));
 				echo _('You have now requested a personal Git repository for this project.  It will be created shortly.');
 				scm_footer();

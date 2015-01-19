@@ -43,12 +43,12 @@ function usergroups_sync() {
 	}
 }
 
-function systask_get_script($plugin_id, $systask_type_id) {
+function systask_get_script($plugin_id, $systask_type) {
 	global $cron_arr;
 	if ($plugin_id == null) {
-		if (isset($cron_arr[$systask_type_id]))
+		if (isset($cron_arr[$systask_type]))
 			return forge_get_config('source_path')
-				.'/cronjobs/'.$cron_arr[$systask_type_id];
+				.'/cronjobs/'.$cron_arr[$systask_type];
 	} else {
 		global $pm;
 		$plugins = $pm->GetPlugins();  // reload in case a new plugin was installed
@@ -58,9 +58,9 @@ function systask_get_script($plugin_id, $systask_type_id) {
 				$pm->LoadPlugin($plugins[$plugin_id]);
 				$plugin = $pm->GetPluginObject($plugins[$plugin_id]);
 			}
-			if (isset($plugin->systask_types[$systask_type_id]))
+			if (isset($plugin->systask_types[$systask_type]))
 				return forge_get_config('plugins_path')."/".$plugin->GetName()
-					."/cronjobs/".$plugin->systask_types[$systask_type_id];
+					."/cronjobs/".$plugin->systask_types[$systask_type];
 		}
 	}
 	return null;
@@ -111,7 +111,7 @@ while (true) {
 		db_reconnect();
 	while ($arr = db_fetch_array($res)) {
 		usergroups_sync();
-		$script = systask_get_script($arr['plugin_id'], $arr['systask_type_id']);
+		$script = systask_get_script($arr['plugin_id'], $arr['systask_type']);
 		if (!file_exists($script))
 			// Not installed on this node, skipping
 			continue;
@@ -119,7 +119,7 @@ while (true) {
 			db_query_params("UPDATE systasks SET status=$1, error_message=$2"
 							. " WHERE systask_id=$3",
 							array('ERROR',
-								  "Cron job {$arr['plugin_id']}/{$arr['systask_type_id']}"
+								  "Cron job {$arr['plugin_id']}/{$arr['systask_type']}"
 								  . " '$script' not executable.\n",
 								  $arr['systask_id']));
 			continue;
