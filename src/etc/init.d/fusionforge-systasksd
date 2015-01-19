@@ -25,7 +25,7 @@ function check_running() {
 case $1 in
     start)
 	if check_running; then
-	    echo "Already running"
+	    echo "fusionforge-systasksd: already running"
 	else
 	    $DAEMON &
 	    echo $! > $PIDFILE
@@ -34,23 +34,23 @@ case $1 in
 		rm -f $PIDFILE
 		return 1
 	    fi
-	    echo "Started"
+	    echo "fusionforge-systasksd: started"
 	fi
 	;;
     stop)
 	if [ -e $PIDFILE ]; then
 	    kill $(cat $PIDFILE)
 	    rm -f $PIDFILE
-	    echo "Stopped"
+	    echo "fusionforge-systasksd: stopped"
 	else
-	    echo "No PID file, assuming stopped."
+	    echo "fusionforge-systasksd: no PID file, assuming stopped."
 	fi
 	;;
     status)
 	if check_running; then
-	    echo "Running"
+	    echo "fusionforge-systasksd: running"
 	else
-	    echo "Stopped"
+	    echo "fusionforge-systasksd: stopped"
 	    return 3
 	fi
 	;;
