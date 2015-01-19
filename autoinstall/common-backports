@@ -46,10 +46,6 @@ function backports_deb {
     fi
 }
 
-function backport_rpm_from_fedora_updates {
-    rebuild_one_rpm --enablefedora --enablefedoraupdates $*
-}
-
 function backport_rpm_from_fedora {
     rebuild_one_rpm --enablefedora $*
 }
@@ -62,14 +58,7 @@ function rebuild_one_rpm {
     enablefedsrc=
     enablefed=
     if [ "$1" = "--enablefedora" ] ; then
-	enablefedsrc="--enablerepo=fedora-source"
-	enablefed="--enablerepo=fedora"
-    	shift
-    fi
-
-    if [ "$1" = "--enablefedoraupdates" ] ; then
-	enablefedsrc="--enablerepo=fedora-updates-source"
-	enablefed="--enablerepo=fedora-updates"
+	enablefedsrc="--enablerepo=fedora-source --enablerepo=fedora-updates-source"
     	shift
     fi
 
@@ -83,12 +72,6 @@ function rebuild_one_rpm {
     if [ "$1" = "--source-package" ] ; then
     	src=$2
     	shift
-    	shift
-    fi
-
-    force=
-    if [ "$1" = "--force" ] ; then
-    	force=$1
     	shift
     fi
 
@@ -113,20 +96,13 @@ function rebuild_one_rpm {
     if [ $rebuild_needed = yes ] ; then
 	yumdownloader $enablefedsrc --source $src
 
-	for DEP in $DEPS ; do
-	    if ! yum install -y $DEP ; then
-		yumdownloader $enablefed $DEP
-		if [ -e  $DEP-*.noarch.rpm ] ; then
-		    yum install -y $DEP-*.noarch.rpm
-		else
-		    yum install -y $DEP-*.x86_64.rpm
-		fi
-	    fi
-	done
+	if [ -n "$DEPS" ]; then
+	    yum install -y $DEPS
+	fi
 
 	for i in $src-*.src.rpm ; do
 	    if [ $rebuild = yes ] || [ ! -e "$i.done" ] ; then
-		rpmbuild -D'runselftest 0' --rebuild $src-*.src.rpm
+		rpmbuild --rebuild $src-*.src.rpm
 	    fi
 	    mv -f "$i" "$i.done"
 	done
@@ -138,13 +114,14 @@ function rebuild_one_rpm {
 	    yum remove -y $i
 	done
 	for i in $target $others ; do
-	    yum install -y ~/rpmbuild/RPMS/*/$i-[0-9]*.*.rpm || rpm -i $force ~/rpmbuild/RPMS/*/$i-[0-9]*.*.rpm
+	    yum install -y ~/rpmbuild/RPMS/*/$i-[0-9]*.*.rpm || rpm -i ~/rpmbuild/RPMS/*/$i-[0-9]*.*.rpm
 	done
     else
 	yum install -y $target $others
     fi
 }
 
+# TODO: compile in a different job and use mockbuild?
 function backports_rpm {
     set -ex
 
@@ -153,6 +130,7 @@ function backports_rpm {
 
     if ! rpm -q fedora-release >/dev/null; then
 	# EPEL - http://download.fedoraproject.org/pub/epel/6/i386/repoview/epel-release.html
+	#      - http://download.fedoraproject.org/pub/epel/7/x86_64/repoview/epel-release.html
 	if ! rpm -q epel-release >/dev/null; then
 	    case $os_version in
 		6)
@@ -202,71 +180,124 @@ EOF
 	fi
     fi
 
-    yum install -y gcc gcc-c++ postgresql-devel python-devel libpng-devel sqlite-devel autoconf libtool systemd-devel freetype-devel
+    case $os_version in
+	7)
+	    # Backport httpd-itk from Fedora
+	    # until https://bugzilla.redhat.com/show_bug.cgi?id=1059143 is fixed
+	    #
+	    # apr > 1.5: httpd 2.4.10 BuildRequires and Requires
+	    DEPS="libuuid-devel lksctp-tools-devel autoconf libtool"
+	    REMOVEDEPS=$DEPS
+	    backport_rpm_from_fedora --source-package apr apr-1.5.1 apr-devel-1.5.1
+
+	    # httpd 2.4.10 (not 2.4.7): required for mod_itk to compile
+	    if ! rpm -q httpd | grep -q 2.4.10; then
+		DEPS="xmlto gcc libselinux-devel lua-devel pcre-devel openssl-devel libxml2-devel apr-util-devel systemd-devel"
+		REMOVEDEPS=$DEPS
+		yum install -y $DEPS
+		yumdownloader --enablerepo=fedora-source --enablerepo=fedora-updates-source \
+			      --source httpd
+		rpm -ivh httpd-*.src.rpm
+                # Remove generic-logos dependency, it itself has a lot of dependencies,
+	        # and it's only for unused /usr/share/pixmaps/poweredby.png
+		sed -i -e '/Requires/ s/, system-logos-httpd//' ~/rpmbuild/SPECS/httpd.spec
+		rpmbuild -bb ~/rpmbuild/SPECS/httpd.spec
+		yum install -y ~/rpmbuild/RPMS/*/httpd-[0-9]*.rpm \
+		    ~/rpmbuild/RPMS/*/httpd-tools-[0-9]*.rpm
+		yum install -y ~/rpmbuild/RPMS/*/mod_ssl-[0-9]*.rpm
+		yum install -y ~/rpmbuild/RPMS/*/httpd-devel-[0-9]*.rpm  # for itk
+		# Note: F21 introduces httpd-filesystem (which needs to be installed),
+		# and requires newer openssl-libs (which needs to be backported).
+		# Let's stick to F20 until #1059143 above is fixed (in CentOS 7.1).
+            fi
+
+	    # mod_itk itself
+	    DEPS=""
+	    REMOVEDEPS=$DEPS
+	    backport_rpm_from_fedora --source-package httpd-itk httpd-itk-2.4.7.01
+	    #
+	    # End of backport for httpd-itk + related packages
+
+	    # viewvc: not available in EPEL7
+	    if yum list viewvc >/dev/null 2>&1; then
+		yum install -y viewvc
+	    else
+		DEPS="python-devel python-pygments"
+		REMOVEDEPS="python-devel"
+		yum install -y $DEPS
+		yumdownloader --enablerepo=fedora-source --enablerepo=fedora-updates-source \
+			      --source viewvc
+		rpm -ivh viewvc-*.src.rpm
+		# remove cvsgraph dependency, not available in EPEL7
+		sed -i -e '/Requires:\s*cvsgraph/d' ~/rpmbuild/SPECS/viewvc.spec
+		rpmbuild -bb ~/rpmbuild/SPECS/viewvc.spec
+		yum install -y ~/rpmbuild/RPMS/*/viewvc-[0-9]*.rpm
+	    fi
+	    
+	    # mediawiki available in EPEL6 but not in EPEL7
+	    # Note: we don't support mediawiki > 1.19 as of 2014-01
+	    if yum list mediawiki >/dev/null 2>&1; then
+		yum install -y mediawiki
+	    else
+		yumdownloader --enablerepo=fedora-source --enablerepo=fedora-updates-source \
+			      --source mediawiki
+		rpm -ivh mediawiki-*.src.rpm
+	        # don't backport php-pecl-jsonc which has lots of deps, let's use built-in php-json
+		sed -i -e '/Requires/ s/, php-pecl-jsonc//' ~/rpmbuild/SPECS/mediawiki.spec
+		rpmbuild -bb ~/rpmbuild/SPECS/mediawiki.spec
+		yum install -y ~/rpmbuild/RPMS/noarch/mediawiki-[0-9]*.rpm
+	    fi
+
+	    # php-htmlpurifier-htmlpurifier Requires, available in EPEL6 but not EPEL7
+	    DEPS="php-pear"
+	    REMOVEDEPS=$DEPS
+	    backport_rpm_from_fedora php-channel-htmlpurifier
+	    ;;
+
+	# Note: FusionForge *6.0* currently doesn't officially support Centos 6
+	6)
+	    yum install mediawiki119
+
+	    # Notes for recompiling httpd modules for 2.4.10
+	    # mod_wsgi:
+	    # DEPS=""
+	    # REMOVEDEPS=$DEPS
+	    # rebuild_rpm_from_centos mod_wsgi
+	    #
+	    # PHP:
+	    # # Skip lengthy testsuite: rpmbuild -D'runselftest 0' --rebuild ...
+	    # if ! rpm -qR php | grep -q 'httpd-mmn = 20120211x8664' ; then
+	    #     if rpm -qi mariadb-libs | grep -q 5\.5\. && ! rpm -qi mariadb-libs | grep -q 5\.5\.37 ; then
+	    #         yum downgrade -y mariadb-libs
+	    #     fi
+	    # 
+	    #     DEPS="bzip2-devel curl-devel pam-devel libstdc++-devel libedit-devel libtool-ltdl-devel libzip-devel systemtap-sdt-devel firebird-devel net-snmp-devel libxslt-devel t1lib-devel libvpx-devel gmp-devel tokyocabinet-devel libmcrypt-devel libtidy-devel freetds-devel aspell-devel recode-devel libicu-devel enchant-devel libc-client-devel openldap-devel unixODBC-devel mariadb-devel-5.5.37 exim"
+	    #     REMOVEDEPS=$DEPS
+	    #     rebuild_rpm_from_centos --source-package php php-common php-cli php php-pdo php-pgsql php-process php-ldap php-gd
+	    # 
+	    #     if rpm -qi mariadb-libs | grep -q 5\.5\.37 ; then
+	    #         yum upgrade -y mariadb-libs
+	    #     fi
+	    # fi
+    esac
 
     # libnss-pgsql: no available package for RHEL; though it's available in Fedora
     # (there's also http://yum.postgresql.org/8.4/redhat/rhel-5-x86_64/)
-    DEPS="xmlto"
+    DEPS="xmlto gcc postgresql-devel"
     REMOVEDEPS=$DEPS
     backport_rpm_from_fedora libnss-pgsql
 
     # moin: no available package for RHEL; though it's available in Fedora
-    DEPS=""
+    DEPS="python-devel"
     REMOVEDEPS=$DEPS
     backport_rpm_from_fedora moin
-
-    case $os_version in
-	7)
-	    DEPS="gd-devel byacc libjpeg-devel flex"
-	    REMOVEDEPS=$DEPS
-	    backport_rpm_from_fedora cvsgraph
-
-	    DEPS="python-pygments"
-	    REMOVEDEPS=$DEPS
-	    backport_rpm_from_fedora viewvc
-
-	    # Backport httpd-itk from Fedora 20
-	    # until https://bugzilla.redhat.com/show_bug.cgi?id=1059143 is fixed
-	    #
-	    DEPS="libuuid-devel lksctp-tools-devel"
-	    REMOVEDEPS=$DEPS
-	    backport_rpm_from_fedora_updates --source-package apr apr-1.5.1 apr-devel-1.5.1
-
-	    DEPS="jasper-devel"
-	    REMOVEDEPS=$DEPS
-	    backport_rpm_from_fedora libicns libicns-utils
-
-	    DEPS="kde-filesystem hardlink"
-	    REMOVEDEPS=$DEPS
-	    backport_rpm_from_fedora_updates --source-package generic-logos --force generic-logos-httpd
-
-	    DEPS="xmlto libselinux-devel lua-devel pcre-devel openssl-devel libxml2-devel apr-util-devel"
-	    REMOVEDEPS=$DEPS
-	    backport_rpm_from_fedora_updates --source-package httpd httpd-tools-2.4.10 httpd-2.4.10 httpd-devel-2.4.10 mod_ssl-2.4.10
-
-	    DEPS=""
-	    REMOVEDEPS=$DEPS
-	    backport_rpm_from_fedora_updates --source-package httpd-itk httpd-itk-2.4.7.01
-	    #
-	    # End of backport for httpd-itk + related packages
-
-	    # No mediawiki in EPEL7
-	    DEPS=""
-	    REMOVEDEPS=$DEPS
-	    backport_rpm_from_fedora mediawiki
-	    ;;
-
-	6)
-	    yum install mediawiki119
-	    ;;
-    esac
 
     DEPS="dos2unix"
     REMOVEDEPS=$DEPS
     backport_rpm_from_fedora php-nusoap
 
-    DEPS="php-channel-htmlpurifier"
-    REMOVEDEPS=""
+    DEPS=""
+    REMOVEDEPS=$DEPS
     backport_rpm_from_fedora php-htmlpurifier-htmlpurifier
 
     # TODO: postfix: rebuild from RHEL/CentOS sources with pgsql enabled,
