@@ -76,7 +76,7 @@ class System extends Error {
 			return false;
 		} else {
 			$systasksq = new SysTasksQ();
-			$systasksq->add(SYSTASK_CORE, SYSTASK_HOMEDIR, null, $user_id);
+			$systasksq->add(SYSTASK_CORE, 'HOMEDIR', null, $user_id);
 			return true;
 		}
 	}

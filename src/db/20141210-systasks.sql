@@ -9,7 +9,7 @@ CREATE TYPE systask_status AS ENUM ('TODO', 'WIP', 'DONE', 'ERROR');
 CREATE TABLE systasks (
     systask_id       SERIAL PRIMARY KEY,
     plugin_id        integer REFERENCES plugins ON DELETE CASCADE,
-    systask_type_id  integer NOT NULL,
+    systask_type     text NOT NULL,
     group_id         integer REFERENCES groups ON DELETE CASCADE,
     user_id          integer REFERENCES users ON DELETE CASCADE,
     status           systask_status DEFAULT 'TODO' NOT NULL,

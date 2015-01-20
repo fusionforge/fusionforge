@@ -72,8 +72,9 @@ case $cmd in
 		centos7)
 		    chroot $cachedir usermod --expiredate $(date +"%Y-%m-%d" -d "1 year") root
 		    chroot $cachedir yum install -y avahi-autoipd avahi-daemon nscd cronie
-		    # Fix 'service nscd restart' stalling (!?)
-		    sed -i -e s/^PIDFile/#PIDFile/ $cachedir/lib/systemd/system/nscd.service
+		    # Fix nscd restart and stalled avahi pid files
+		    rm -rf $cachedir/var/run/
+		    ln -s ../run $cachedir/var/
 		    ;;
 		centos6)
 		    chroot $cachedir yum install -y avahi-autoipd avahi cronie

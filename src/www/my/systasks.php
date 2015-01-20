@@ -28,19 +28,17 @@ require_once $gfcommon.'include/SysTasksQ.class.php';
 global $HTML; // Layout object
 
 if (!session_loggedin()) {
-		exit_not_logged_in();
+	exit_not_logged_in();
 }
-
 
 // Test
 if ($_SERVER['QUERY_STRING'] == 'create') {
-		$sa = new SysTasksQ();
-		$sa->add(null, 1, 1, null);
-		if ($sa->isError()) {
-				exit_error($sa->getErrorMessage());
-		}
+	$sa = new SysTasksQ();
+	$sa->add(null, 1, 1, null);
+	if ($sa->isError()) {
+		exit_error($sa->getErrorMessage());
+	}
 }
-
 
 site_user_header(array('title' => _('System actions queue (past day)')));
 
@@ -54,7 +52,7 @@ $gids = implode(',', $gids);
 $title_arr = array(
 	_('Task ID'),
 	_('Plugin'),
-	_('SysTask Type ID'),
+	_('SysTask Type'),
 	_('Group ID'),
 	_('Status'),
 	_('Requested'),
@@ -62,10 +60,10 @@ $title_arr = array(
 	_('Ended'),
 );
 
-echo $HTML->listTableTop ($title_arr);
+echo $HTML->listTableTop($title_arr);
 $query = "
 SELECT systask_id, unix_group_name,
-plugin_name, systasks.status,
+plugin_name, systask_type, systasks.status,
     EXTRACT(epoch FROM requested) AS requested,
     EXTRACT(epoch FROM started) AS started,
     EXTRACT(epoch FROM stopped) AS stopped,
@@ -76,7 +74,7 @@ plugin_name, systasks.status,
   WHERE user_id=$1 or systasks.group_id IN ($gids)
   AND requested > NOW() - interval '1 day'
   ORDER BY systask_id";
-$res = pg_query_params($query, array($u->getID()));
+$res = db_query_params($query, array($u->getID()));
 for ($i=0; $i<db_numrows($res); $i++) {
 	$cells = array();
 	$cells[][] = db_result($res,$i,'systask_id');
@@ -85,7 +83,7 @@ for ($i=0; $i<db_numrows($res); $i++) {
 		$cells[][] = 'core';
 	else
 		$cells[][] = $plugin_name;
-	$cells[][] = db_result($res,$i,'systask_type_id');
+	$cells[][] = db_result($res,$i,'systask_type');
 	$cells[][] = db_result($res,$i,'unix_group_name');
 	$cells[][] = db_result($res,$i,'status');
 	$cells[][] = date("H:i:s", db_result($res, $i,'requested'));
@@ -95,7 +93,6 @@ for ($i=0; $i<db_numrows($res); $i++) {
 		. ' (+' . round(db_result($res, $i,'run'), 1) . 's)';
 	echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i+1, true)), $cells);
 }
-
 
 echo $HTML->listTableBottom();
 

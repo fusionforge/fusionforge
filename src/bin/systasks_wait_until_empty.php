@@ -37,7 +37,7 @@ do {
 	if ($nb > 0) {
 		echo "systasks_wait_until_empty.php: pending:\n";
 		while ($arr = db_fetch_array($res)) {
-			echo "- {$arr['systask_id']} {$arr['plugin_id']} {$arr['systask_type_id']}"
+			echo "- {$arr['systask_id']} {$arr['plugin_id']} {$arr['systask_type']}"
 				. " {$arr['group_id']} {$arr['user_id']}\n";
 		}
 	}
