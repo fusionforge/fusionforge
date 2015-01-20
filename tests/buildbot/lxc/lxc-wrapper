@@ -96,7 +96,6 @@ case $cmd in
 
     # Upgrade template
     upgrade)
-	$0 destroy $host
 	case $host in
 	    centos*)
 		mount --bind /proc $cachedir/proc
@@ -106,7 +105,7 @@ case $cmd in
 	    debian*)
 		mount --bind /proc $cachedir/proc
 		chroot $cachedir sh -c "apt-get update"
-		chroot $cachedir sh -c "unattended-upgrades -d"
+		LANG=C chroot $cachedir sh -c "unattended-upgrades -d"
 		chroot $cachedir sh -c "apt-get clean"
 		umount $cachedir/proc
 		
