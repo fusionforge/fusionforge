@@ -74,6 +74,8 @@ if (getStringFromRequest('action')) {
 				form_release_key(getStringFromRequest('form_key'));
 				$error_msg = _('Scheduling Mailing, Could not schedule mailing, database error: ').db_error();
 			} else {
+				$systasksq = new SysTasksQ();
+				$systasksq->add(SYSTASK_CORE, 'MASSMAIL', null, user_getid());
 				$feedback = _('Mailing successfully scheduled for delivery');
 			}
 			break;
