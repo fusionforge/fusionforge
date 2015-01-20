@@ -1,7 +1,7 @@
 #!/bin/bash -e
 # gitweb post-install
 
-plugindir=$(forge_get_config source_path)/plugins/scmgit
+plugindir=$(forge_get_config plugins_path)/scmgit
 
 gitwebcgi=$(ls /var/www/git/gitweb.cgi /var/www/gitweb-caching/gitweb.cgi \
     /usr/lib/cgi-bin/gitweb.cgi /usr/share/gitweb/gitweb.cgi 2>/dev/null | tail -1)

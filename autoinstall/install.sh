@@ -60,6 +60,3 @@ else
 	    fusionforge-plugin-blocks fusionforge-plugin-online_help
     fi
 fi
-
-# Dump clean DB
-if [ ! -e /root/dump ]; then $(dirname $0)/../tests/func/db_reload.sh --backup; fi

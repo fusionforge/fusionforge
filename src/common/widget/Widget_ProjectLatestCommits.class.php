@@ -43,19 +43,7 @@ class Widget_ProjectLatestCommits extends Widget {
 	}
 
 	public function _getLinkToCommit($project, $commit_id, $pluginName) {
-		$url = '';
-		switch ($pluginName) {
-			case 'scmsvn': {
-				$url = '/scm/viewvc.php/?root='.$project->getUnixname().'&view=rev&revision='.$commit_id;
-				break;
-			}
-			case 'scmgit': {
-				$url = '/scm/browser.php?group_id='.$project->getID().'&commit='.$commit_id;
-				break;
-			}
-		}
-		return util_make_link($url, _('commit')._(': ').$commit_id);
-		//return '/svn/?func=detailrevision&amp;group_id='.$group_id.'&amp;rev_id='.$commit_id;
+		return util_make_link('/scm/browser.php?group_id='.$project->getID().'&commit='.$commit_id, _('commit')._(': ').$commit_id);
 	}
 
 	public function getContent() {

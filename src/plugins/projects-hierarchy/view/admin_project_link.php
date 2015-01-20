@@ -4,7 +4,7 @@
  *
  * Copyright 2006 (c) Fabien Regnier - Sogeti
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013,2014 Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -24,63 +24,60 @@
  */
 
 global $group_id;
+global $HTML;
 $projectsHierarchy = plugin_get_object('projects-hierarchy');
 
-echo html_e('h3', array(), _('Modify the hierarchy'), false);
+echo html_e('h3', array(), _('Modify the hierarchy'));
 
 $childs = $projectsHierarchy->getFamily($group_id, 'child', false, 'validated');
 if (sizeof($childs)) {
 	foreach ($childs as $child) {
 		$childGroup = group_get_object($child);
-		echo '<form method="post" action="/plugins/'.$projectsHierarchy->name.'/?type=group&pluginname='.$projectsHierarchy->name.'&action=removeChild&id='.$group_id.'&child_id='.$childGroup->getID().'">';
+		echo $HTML->openForm(array('method' => 'post', 'action' => '/plugins/'.$projectsHierarchy->name.'/?type=group&action=removeChild&id='.$group_id.'&child_id='.$childGroup->getID()));
 		echo util_make_link('/projects/'.$childGroup->getUnixName(),$childGroup->getPublicName(),array('title'=>_('Browse this project')));
 		echo '<input type="submit" value="'._('Remove child project').'">';
-		echo '</form>';
+		echo $HTML->closeForm();
 	}
 }
 
 $parent = $projectsHierarchy->getFamily($group_id, 'parent', false, 'validated');
 if (sizeof($parent)) {
 	$parentGroup = group_get_object($parent[0]);
-	echo '<form method="post" action="/plugins/'.$projectsHierarchy->name.'/?type=group&pluginname='.$projectsHierarchy->name.'&action=removeParent&id='.$group_id.'&parent_id='.$parentGroup->getID().'">';
+	echo $HTML->openForm(array('method' => 'post', 'action' => '/plugins/'.$projectsHierarchy->name.'/?type=group&action=removeParent&id='.$group_id.'&parent_id='.$parentGroup->getID()));
 	echo util_make_link('/projects/'.$parentGroup->getUnixName(),$parentGroup->getPublicName(),array('title'=>_('Browse this project')));
 	echo '<input type="submit" value="'._('Remove parent project').'">';
-	echo '</form>';
+	echo $HTML->closeForm();
 }
 
-echo '<h4>'._('Add new child').'</h4>';
+echo html_e('h4', array(), _('Add new child'));
 if ($projectsHierarchy->isUsed($group_id)) {
-	echo '<form method="post" action="/plugins/'.$projectsHierarchy->name.'/?type=group&pluginname='.$projectsHierarchy->name.'&action=addChild&id='.$group_id.'">';
-	echo _('Select a project: ');
 	echo $projectsHierarchy->son_box($group_id, 'sub_project_id', '0');
-	echo '<input type="submit" value="'._('Add Child project').'">';
-	echo '</form>';
 } else {
 	echo $HTML->information(_('No other project using project hierarchy plugin.'));
 }
 
-echo '<h4>'._('Pending hierarchy request').'</h4>';
+echo html_e('h4', array(), _('Pending hierarchy request'));
 $pendingParent = $projectsHierarchy->getFamily($group_id, 'parent', false, 'pending');
 if (sizeof($pendingParent)) {
 	$pendingParentGroup = group_get_object($pendingParent[0]);
-	echo '<form method="post" action="/plugins/'.$projectsHierarchy->name.'/?type=group&pluginname='.$projectsHierarchy->name.'&action=validateRelationship&id='.$group_id.'&relation=parent">';
+	echo $HTML->openForm(array('method' => 'post', 'action' => '/plugins/'.$projectsHierarchy->name.'/?type=group&action=validateRelationship&id='.$group_id.'&relation=parent'));
 	echo '<input type="hidden" name="validation_id" value="'.$pendingParent[0].'" />';
 	echo _('Validate parent').' '.util_make_link('/projects/'.$pendingParentGroup->getUnixName(), $pendingParentGroup->getPublicName(), array('title'=>_('Browse this project')));
 	echo html_build_select_box_from_arrays(array(1,0), array(_('Yes'), _('No')), 'validation_status', 'xzxz', false);
 	echo '<input type="submit" value="'. _('Send') .'" />';
-	echo '</form>';
+	echo $HTML->closeForm();
 }
 
 $pendingChilds = $projectsHierarchy->getFamily($group_id, 'child', false, 'pending');
 if (sizeof($pendingChilds)) {
 	foreach ($pendingChilds as $pendingChild) {
 		$pendingChildGroup = group_get_object($pendingChild);
-		echo '<form method="post" action="/plugins/'.$projectsHierarchy->name.'/?type=group&pluginname='.$projectsHierarchy->name.'&action=validateRelationship&id='.$group_id.'&relation=child">';
+		echo $HTML->openForm(array('method' => 'post', 'action' => '/plugins/'.$projectsHierarchy->name.'/?type=group&action=validateRelationship&id='.$group_id.'&relation=child'));
 		echo '<input type="hidden" name="validation_id" value="'.$pendingChild.'" />';
 		echo _('Validate child').' '.util_make_link('/projects/'.$pendingChildGroup->getUnixName(), $pendingChildGroup->getPublicName(), array('title'=>_('Browse this project')));
 		echo html_build_select_box_from_arrays(array(1,0), array(_('Yes'), _('No')), 'validation_status', 'xzxz', false);
 		echo '<input type="submit" value="'. _('Send') .'" />';
-		echo '</form>';
+		echo $HTML->closeForm();
 	}
 }
 

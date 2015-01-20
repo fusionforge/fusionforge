@@ -158,7 +158,7 @@ class pgsql extends System {
 				$this->sysGroupAddUser($pid, $user_id) ;
 			}
 		}
-		return true;
+		return parent::sysCreateUser($user_id);
 	}
 
 	/**

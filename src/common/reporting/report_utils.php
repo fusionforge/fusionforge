@@ -5,7 +5,7 @@
  * Copyright 2003-2004, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013,2014 Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -228,7 +228,6 @@ function report_pie_arr($labels, $vals, $format=1) {
 		$pie_labels[]=_('Other')." (". number_format($rem,$format) .") ";
 		$pie_vals[]=$rem;
 	}
-
 }
 
 function report_package_box($group_id, $name='dev_id', $selected='') {
@@ -308,7 +307,6 @@ function trackeract_graph($group_id, $area, $SPAN, $start, $end, $atid) {
 	}
 	echo 'jQuery(document).ready(function(){
 		plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', series, {
-			title : \''._('Tracker Activity').' ('.strftime('%x',$start).' - '.strftime('%x',$end).') \',
 			axesDefaults: {
 				tickOptions: {
 					angle: -90,
@@ -358,10 +356,7 @@ function trackeract_graph($group_id, $area, $SPAN, $start, $end, $atid) {
 		plot'.$chartid.'.replot();
 		});'."\n";
 	echo '//]]></script>';
-	echo "<figure>\n";
-	echo "<figcaption>"._('Tracker Activity').' ('.date(_('Y-m-d'), $start).' - '.date(_('Y-m-d'), $end).')'."</figcaption>\n";
-	echo '<div id="chart'.$chartid.'"></div>';
-	echo "</figure>\n";
+	echo $HTML->html_chartid($chartid, _('Tracker Activity').' ('.date(_('Y-m-d'), $start).' - '.date(_('Y-m-d'), $end).')');
 	return true;
 }
 
@@ -387,40 +382,41 @@ function trackerpie_graph($group_id, $area, $SPAN, $start, $end, $atid) {
 			break;
 		}
 	}
-	$chartid = 'projecttrackerpie_'.$group_id;
-	echo '<script type="text/javascript">//<![CDATA['."\n";
-	echo 'var plot'.$chartid.';';
-	echo 'var data = new Array();';
-	while ($row = db_fetch_array($dbres)) {
-		echo 'data.push([\''.htmlentities($row[0]).'\',\''.$row[1].'\']);';
+	if (db_numrows($dbres)) {
+		$chartid = 'projecttrackerpie_'.$group_id;
+		echo '<script type="text/javascript">//<![CDATA['."\n";
+		echo 'var plot'.$chartid.';';
+		echo 'var data = new Array();';
+		while ($row = db_fetch_array($dbres)) {
+			echo 'data.push([\''.htmlentities($row[0]).'\',\''.$row[1].'\']);';
+		}
+		echo 'jQuery(document).ready(function(){
+			plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', [data],
+				{
+					seriesDefaults: {
+						// Make this a pie chart.
+						renderer: jQuery.jqplot.PieRenderer,
+						rendererOptions: {
+							// Put data labels on the pie slices.
+							// By default, labels show the percentage of the slice.
+							showDataLabels: true,
+							dataLabels: \'percent\',
+						}
+					},
+					legend: {
+						show:true, location: \'e\',
+					},
+				}
+				);
+			});';
+		echo 'jQuery(window).resize(function() {
+				plot'.$chartid.'.replot( { resetAxes: true } );
+			});'."\n";
+		echo '//]]></script>';
+		echo $HTML->html_chartid($chartid, $areaname.' ('.date(_('Y-m-d'), $start).' - '.date(_('Y-m-d'), $end).')');
+	} else {
+		echo $HTML->information(_('No data to display'));
 	}
-	echo 'jQuery(document).ready(function(){
-		plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', [data],
-			{
-				seriesDefaults: {
-					// Make this a pie chart.
-					renderer: jQuery.jqplot.PieRenderer,
-					rendererOptions: {
-						// Put data labels on the pie slices.
-						// By default, labels show the percentage of the slice.
-						showDataLabels: true,
-						dataLabels: \'percent\',
-					}
-				},
-				legend: {
-					show:true, location: \'e\',
-				},
-			}
-			);
-		});';
-	echo 'jQuery(window).resize(function() {
-			plot'.$chartid.'.replot( { resetAxes: true } );
-		});'."\n";
-	echo '//]]></script>';
-	echo "<figure>\n";
-	echo "<figcaption>".$areaname.' ('.date(_('Y-m-d'), $start).' - '.date(_('Y-m-d'), $end).')'."</figcaption>\n";
-	echo '<div id="chart'.$chartid.'"></div>';
-	echo "</figure>\n";
 	return true;
 }
 
@@ -590,10 +586,7 @@ function report_graph($type, $SPAN, $start, $end) {
 			plot'.$chartid.'.replot( { resetAxes: true } );
 		});'."\n";
 	echo '//]]></script>';
-	echo "<figure>\n";
-	echo "<figcaption>".$label[0].' ('.date(_('Y-m-d'), $start).' - '.date(_('Y-m-d'), $end).')'."</figcaption>\n";
-	echo '<div id="chart'.$chartid.'"></div>';
-	echo "</figure>\n";
+	echo $HTML->html_chartid($chartid, $label[0].' ('.date(_('Y-m-d'), $start).' - '.date(_('Y-m-d'), $end).')');
 	return true;
 }
 
@@ -881,10 +874,7 @@ function report_actgraph($type, $SPAN, $start, $end, $id, $area) {
 		plot'.$chartid.'.replot();
 	});'."\n";
 	echo '//]]></script>';
-	echo "<figure>\n";
-	echo "<figcaption>".$areaname.' ('.date(_('Y-m-d'), $start).' - '.date(_('Y-m-d'), $end).')'."</figcaption>\n";
-	echo '<div id="chart'.$chartid.'"></div>';
-	echo "</figure>\n";
+	echo $HTML->html_chartid($chartid, $areaname.' ('.date(_('Y-m-d'), $start).' - '.date(_('Y-m-d'), $end).')');
 	return true;
 }
 
@@ -986,10 +976,7 @@ function report_toolspiegraph($datatype = 0, $start, $end) {
 				plot'.$chartid.'.replot( { resetAxes: true } );
 			});'."\n";
 		echo '//]]></script>';
-		echo "<figure>\n";
-		echo "<figcaption>".$arr[$datatype].' ('.date(_('Y-m-d'), $start).' - '.date(_('Y-m-d'), $end).')'."</figcaption>\n";
-		echo '<div id="chart'.$chartid.'"></div>';
-		echo "</figure>\n";
+		echo $HTML->html_chartid($chartid, $arr[$datatype].' ('.date(_('Y-m-d'), $start).' - '.date(_('Y-m-d'), $end).')');
 	} else {
 		echo $HTML->information(_('No data to display.'));
 	}
@@ -1053,10 +1040,7 @@ function report_timegraph($type = 'site', $area = 'tasks', $start, $end, $id = 0
 				plot'.$chartid.'.replot( { resetAxes: true } );
 			});'."\n";
 		echo '//]]></script>';
-		echo "<figure>\n";
-		echo "<figcaption>".$arr[$area].' ('.date(_('Y-m-d'), $start).' - '.date(_('Y-m-d'), $end).')'."</figcaption>\n";
-		echo '<div id="chart'.$chartid.'"></div>';
-		echo "</figure>\n";
+		echo $HTML->html_chartid($chartid, $arr[$area].' ('.date(_('Y-m-d'), $start).' - '.date(_('Y-m-d'), $end).')');
 	} else {
 		echo $HTML->information(_('No data to display.'));
 	}
@@ -1159,10 +1143,7 @@ function report_sitetimebargraph($start, $end) {
 			plot'.$chartid.'.replot();
 		});'."\n";
 		echo '//]]></script>';
-		echo "<figure>\n";
-		echo "<figcaption>".$areaname.' ('.date(_('Y-m-d'), $start).' - '.date(_('Y-m-d'), $end).')'."</figcaption>\n";
-		echo '<div id="chart'.$chartid.'"></div>';
-		echo "</figure>\n";
+		echo $HTML->html_chartid($chartid, $areaname.' ('.date(_('Y-m-d'), $start).' - '.date(_('Y-m-d'), $end).')');
 	} else {
 		echo $HTML->information(_('No data to display.'));
 	}
@@ -1254,7 +1235,7 @@ function report_pm_hbar($id, $values, $ticks, $labels, $stackSeries = false) {
 		plot'.$id.'.replot();
 	});'."\n";
 	echo '//]]></script>';
-	echo '<div id="chart'.$id.'"></div>';
+	echo $HTML->html_chartid($chartid);
 }
 
 // Local Variables:

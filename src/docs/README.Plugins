@@ -289,6 +289,12 @@ had been written.
   [TODO: The use of the 'group' name as a parameter is inconsistent
    with most other group plugin hooks - which use group_id.]
 
+  Hook Name  : group_plugin_use
+  Parameters : group_id - The numeric ID of the current group
+  Locations  : common/include/Group.class.php
+  Description: When a plugin is activated for a specific group, this
+               hook is called.
+
   Hook Name  : groupmenu_scm
   Parameters : DIRS - A reference to the array of tab URLs
                TITLES - A reference to the array of tab titles

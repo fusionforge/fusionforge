@@ -64,7 +64,8 @@ $project_dir = forge_get_config('projects_path', 'mediawiki') . "/"
 	. $fusionforgeproject ;
 
 if (!is_dir($project_dir)) {
-	exit_error (sprintf(_('Mediawiki for project %s not created yet, please wait for a few minutes.'), $fusionforgeproject.':'.$project_dir) . "\n") ;
+	$exit_errorlevel = 1;
+	exit_error(sprintf(_('Mediawiki for project %s (directory %s) not created yet, please wait for a few minutes.'), $fusionforgeproject, $project_dir));
 }
 
 $path = array( $IP, "$IP/includes", "$IP/languages" );
@@ -76,11 +77,17 @@ require_once( "$IP/includes/DefaultSettings.php" );
 
 if ( $wgCommandLineMode ) {
         if ( isset( $_SERVER ) && array_key_exists( 'REQUEST_METHOD', $_SERVER ) ) {
-                die( "This script must be run from the command line\n" );
+		$exit_errorlevel = 1;
+		exit_error(_('This script must be run from the command line!'));
         }
 }
 
 $g = group_get_object_by_name($fusionforgeproject) ;
+$group_id = $g->getID();
+if (!$g->usesPlugin('mediawiki')) {
+	$exit_errorlevel = 1;
+	exit_error(sprintf(_('Project %s does not use the Mediawiki plugin'), $fusionforgeproject));
+}
 $wgSitename         = $g->getPublicName() . " Wiki";
 $wgScriptPath       = "/plugins/mediawiki/wiki/$fusionforgeproject" ;
 
@@ -252,15 +259,23 @@ function FusionForgeMWAuth( $user, &$result ) {
 }
 
 function SetupPermissionsFromRoles () {
-	global $fusionforgeproject, $wgGroupPermissions ;
+	global $fusionforgeproject, $wgGroupPermissions, $unused_external_roles;
 
 	$g = group_get_object_by_name ($fusionforgeproject) ;
 	// Setup rights for all roles referenced by project
 	$rids = $g->getRolesID() ;
 	$e = RBACEngine::getInstance();
 	$grs = $e->getGlobalRoles();
+	forge_cache_external_roles($g);
+	$skiproles = array();
+	foreach ($unused_external_roles as $r) {
+		$skiproles[$r->getID()] = true;
+	}
 	foreach ($grs as $r) {
-		$rids[] = $r->getID();
+		$rid = $r->getID();
+		if (!isset($skiproles[$rid])) {
+			$rids[] = $rid;
+		}
 	}
 	$rids = array_unique($rids);
 	$rs = array();
@@ -370,9 +385,16 @@ $GLOBALS['wgHooks']['UserLoadFromSession'][]='FusionForgeMWAuth';
 
 $zeroperms = array ('read', 'writeapi', 'edit', 'move-subpages', 'move-rootuserpages', 'reupload-shared', 'createaccount');
 
+/* explicitly zero these mediawiki permissions */
 foreach ($zeroperms as $i) {
 	$wgGroupPermissions['user'][$i] = false;
 	$wgGroupPermissions['*'][$i] = false;
+}
+/* zero all permissions implicitly set by mediawiki already */
+foreach ($wgGroupPermissions as $kg => $vg) {
+	foreach ($vg as $kp => $vp) {
+		$wgGroupPermissions[$kg][$kp] = false;
+	}
 }
 
 SetupPermissionsFromRoles();

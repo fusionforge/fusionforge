@@ -301,11 +301,9 @@ some control over it to the project's administrator.");
 			if (forge_get_config('use_ssh', 'scmsvn')) {
 				$unix_group = 'scm_' . $project->getUnixName() ;
 				system ("find $repo -type d | xargs -I{} chmod g+s {}") ;
-				if ($project->enableAnonSCM()) {
-					system ("chmod -R g+rwX,o+rX-w $repo") ;
-				} else {
-					system ("chmod -R g+rwX,o-rwx $repo") ;
-				}
+				// open permissions to allow switching private/public easily
+				// see after to restrict the top-level directory
+				system ("chmod -R g+rwX,o+rX-w $repo") ;
 				system ("chgrp -R $unix_group $repo") ;
 			} else {
 				$unix_user = forge_get_config('apache_user');

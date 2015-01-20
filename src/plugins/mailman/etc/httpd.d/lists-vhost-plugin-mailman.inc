@@ -1,7 +1,7 @@
 AddHandler cgi-script .cgi
 
-ScriptAlias /cgi-bin/mailman/ /var/lib/mailman/cgi-bin/
-ScriptAlias /mailman/ /var/lib/mailman/cgi-bin/
+ScriptAlias /cgi-bin/mailman/ /usr/lib/cgi-bin/mailman/
+ScriptAlias /mailman/ /usr/lib/cgi-bin/mailman/
 
 Alias /pipermail /var/lib/mailman/archives/public
 <Directory /var/lib/mailman/archives/public>

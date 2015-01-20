@@ -1,4 +1,4 @@
-<Directory {core/source_path}/plugins/scmgit/cgi-bin>
+<Directory {core/plugins_path}/scmgit/cgi-bin>
   SetEnv GITWEB_CONFIG {core/config_path}/plugins/scmgit/gitweb.conf
   <IfVersion >= 2.3>
     Require all granted

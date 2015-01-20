@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Copyright (C) 2014 Roland Mas
  *
  * This file is part of FusionForge.
@@ -8,7 +8,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
- *      
+ *
  * FusionForge is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License along
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- */             
+ */
 
 require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
 
@@ -28,9 +28,9 @@ class SSHTest extends FForge_SeleniumTestCase
 		$this->init();
 
 		$this->uploadSshKey();
-	    
+
 		// Run the cronjobs
-		$this->cron("shell/homedirs.php");
+		$this->waitSystasks();
 
 		$verbose = 0;
 		$v = '';
@@ -39,7 +39,7 @@ class SSHTest extends FForge_SeleniumTestCase
 			$v = "-v";
 		}
 		system("ssh $v ".FORGE_ADMIN_USERNAME."@".HOST." id", $ret);
-		$this->assertEquals($ret, 0);
+		$this->assertEquals(0, $ret);
 		if ($verbose) {
 			system("echo 'End of SSH run' 1>&2", $ret);
 		}

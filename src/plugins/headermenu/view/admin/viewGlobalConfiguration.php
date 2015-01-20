@@ -164,7 +164,7 @@ $cells[] = array(_('URL')._(':'), 'style' => 'text-align:right');
 $cells[][] = html_e('input', array('name' => 'link', 'type' => 'url', 'maxlength' => 255, 'size' => 40));
 echo $HTML->multiTableRow(array('id' => 'urlcode', 'class' => 'hide'), $cells);
 $cells = array();
-$cells[] = array(hmtl_e('input', array('type' => 'submit', 'value' => _('Add'))), 'colspan' => 2);
+$cells[] = array(html_e('input', array('type' => 'submit', 'value' => _('Add'))), 'colspan' => 2);
 echo $HTML->multiTableRow(array(), $cells);
 echo $HTML->listTableBottom();
 echo $HTML->closeForm();

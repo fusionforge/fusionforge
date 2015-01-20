@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Copyright (C) 2007-2008 Alain Peyrat <aljeux at free dot fr>
  * Copyright (C) 2009 Alain Peyrat, Alcatel-Lucent
  * Copyright 2013, Franck Villaume - TrivialDev
@@ -21,7 +21,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-/*
+/**
  * Standard Alcatel-Lucent disclaimer for contributing to open source
  *
  * "The test suite ("Contribution") has not been tested and/or
@@ -77,13 +77,13 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->screenshotBgColor = '#CCFFDD';
 	}
 
-    protected function changeConfig($text) {
-            $forge_get_config = RUN_JOB_PATH."/forge_get_config";
-            $config_path = rtrim(`$forge_get_config config_path`);
-            $classname = get_class($this);
-            file_put_contents("$config_path/config.ini.d/zzz-buildbot-$classname.ini",
-                              $text);
-    }
+	protected function changeConfig($text) {
+		$forge_get_config = RUN_JOB_PATH."/forge_get_config";
+		$config_path = rtrim(`$forge_get_config config_path`);
+		$classname = get_class($this);
+		file_put_contents("$config_path/config.ini.d/zzz-buildbot-$classname.ini",
+				$text);
+	}
 
 	/**
 	 * Method that is called after Selenium actions.
@@ -119,7 +119,8 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	protected function runCommand($cmd)
 	{
 		system(RUN_COMMAND_PREFIX.$cmd, $ret);
-                $this->assertEquals($ret, 0);
+		$this->assertEquals(0, $ret);
+		ob_flush();
 	}
 
 	protected function db($sql)
@@ -141,6 +142,14 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	{
 		$this->runCommand("service apache2 reload > /dev/null 2>&1 || service httpd reload > /dev/null 2>&1");
 		sleep (3); // Give it some time to become available again
+	}
+	
+    /**
+     * Execute pending system tasks
+     */
+	protected function waitSystasks()
+	{
+		$this->runCommand(RUN_JOB_PATH.'/systasks_wait_until_empty.php');
 	}
 
 	protected function init() {
@@ -286,21 +295,6 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 			$this->assertTrue($this->isTextPresent("Get Public Help"));
 			$this->assertTrue($this->isTextPresent("Project Developer Discussion"));
 		}
-	}
-
-	protected function initSvn($project='ProjectA', $user=FORGE_ADMIN_USERNAME)
-	{
-		// Remove svnroot directory before creating the project.
-		$forge_get_config = RUN_JOB_PATH."/forge_get_config";
-		$repo = `$forge_get_config chroot`.'/scmrepos/svn/'.strtolower($project);
-		if (is_dir($repo)) {
-			system("rm -fr $repo");
-		}
-
-		$this->init($project, $user);
-
-		// Run manually the cron for creating the svn structure.
-		$this->cron("scm/create_scm_repos.php");
 	}
 
 	protected function login($username)
@@ -472,7 +466,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		// Upload keys to the web interface
 		$keys = file($pubkey);
 		$k = $keys[0];
-		$this->assertEquals(count($keys), 1);
+		$this->assertEquals(1, count($keys));
 		$this->clickAndWait("link=My Account");
 		$this->clickAndWait("link=Edit Keys");
 		$this->type("authorized_key", $k);
@@ -480,7 +474,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	}
 
 	protected function skip_test($msg) {
-		$this->captureScreenshotOnFailure = false; 
+		$this->captureScreenshotOnFailure = false;
 		$this->markTestSkipped($msg);
 	}
 

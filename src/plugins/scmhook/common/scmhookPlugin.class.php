@@ -33,7 +33,9 @@ _("This plugin contains a set of commit hooks (e-mail notifications,
 tracker integration, conformity...) that can be enabled for each
 project independently.");
 		$this->_addHook('groupmenu');	// To put into the project tabs
-		$this->_addHook('groupisactivecheckbox'); // The "use ..." checkbox in editgroupinfo
+		if (forge_get_config('use_scm')) {
+			$this->_addHook('groupisactivecheckbox'); // The "use ..." checkbox in editgroupinfo
+		}
 		$this->_addHook('groupisactivecheckboxpost'); //
 		$this->_addHook('scm_admin_page');
 		$this->_addHook('scm_admin_update');
@@ -305,7 +307,6 @@ project independently.");
 		}
 		return true;
 	}
-
 
 	function displayScmSvnHook($hooksAvailable, $statusDeploy, $hooksEnabled, $group_id) {
 		global $HTML;

@@ -31,9 +31,17 @@ case "$1" in
 	fi
 	;;
 
+    remove)
+	;;
+
     purge)
 	# note: can't be called from Debian's postrm - reproduced there
 	userdel $system_user
 	# *not* removing $data_path automatically, let's play safe
+	;;
+
+    *)
+	echo "Usage: $0 {configure|purge}"
+	exit 1
 	;;
 esac

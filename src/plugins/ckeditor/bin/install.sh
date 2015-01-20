@@ -3,7 +3,7 @@
 
 source_path=$(forge_get_config source_path)
 data_path=$(forge_get_config data_path)
-plugindir=$(forge_get_config source_path)/plugins/ckeditor
+plugindir=$(forge_get_config plugins_path)/ckeditor
 extraconfigdirs=$(forge_get_config extra_config_dirs)
 
 ckeditordir=$((ls -d /usr/share/ckeditor 2>/dev/null || echo '/usr/share/javascript/ckeditor') | tail -1)

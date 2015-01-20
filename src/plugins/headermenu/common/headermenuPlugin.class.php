@@ -32,7 +32,8 @@ class headermenuPlugin extends Plugin {
 		$this->text = _('Menu Tabs Manager');
 		$this->pkg_desc =
 _("This plugin allows each project to define extra tabs with arbitrary
-titles and links.");
+titles and links, next to the login menu (headermenu),
+in the main menu (outermenu) or in the project menu (groupmenu).");
 		$this->_addHook('headermenu');
 		$this->_addHook('site_admin_option_hook');
 		$this->_addHook('outermenu');
@@ -66,7 +67,7 @@ titles and links.");
 				$group_id = $params['group_id'];
 				$project = group_get_object($group_id);
 				if ($project->usesPlugin($this->name)) {
-					echo hmtl_e('p', array(), util_make_link('/plugins/'.$this->name.'/?type=projectadmin&group_id='.$group_id,
+					echo html_e('p', array(), util_make_link('/plugins/'.$this->name.'/?type=projectadmin&group_id='.$group_id,
 					     _('Menu Tabs Manager Admin'), array('title' => _('Add/Remove/Activate/Desactivate tabs'))));
 				}
 				break;
@@ -464,14 +465,5 @@ titles and links.");
 		$user = session_get_user();
 		include $gfplugins.$this->name.'/view/admin/viewProjectConfiguration.php';
 		return true;
-	}
-
-	/**
-	 * getPluginDescription - display the description of this plugin in pluginman admin page
-	 *
-	 * @return	string	the description
-	 */
-	function getPluginDescription() {
-		return _('Get the ability to set new links next to the login menu (headermenu), in the main menu (outermenu) or in the project menu (groupmenu).');
 	}
 }

@@ -1483,7 +1483,7 @@ if (isset($params['group']) && $params['group']) {
 	 *						['attrs'] = array of html attrs applied to the li element
 	 * @param	array	$attrs		array of attributes of the ol element. Default empty array.
 	 * @param	string	$type		type of list : ol or ul. Default is ul.
-	 * @return string
+	 * @return	string
 	 */
 	function html_list($elements, $attrs = array() , $type = 'ul') {
 		$htmlcode = html_ao($type, $attrs);
@@ -1494,6 +1494,21 @@ if (isset($params['group']) && $params['group']) {
 			$htmlcode .= html_e('li', $element['attrs'], $element['content']);
 		}
 		$htmlcode .= html_ac(html_ap() -1);
+		return $htmlcode;
+	}
+
+	/**
+	 * html_chartid - create the div code to be used with jqplot script
+	 *
+	 * @param	string	$chart_id		id to identify the div.
+	 * @param	string	$figcaption_title	title of the chart
+	 * @return	string
+	 */
+	function html_chartid($chart_id = 0, $figcaption_title = '') {
+		$htmlcode = html_ao('figure');
+		$htmlcode .= html_e('figcaption', array(), $figcaption_title);
+		$htmlcode .= html_ao('div', array('id' => 'chart'.$chart_id));
+		$htmlcode .= html_ac(html_ap() -2);
 		return $htmlcode;
 	}
 }

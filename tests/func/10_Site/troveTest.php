@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Copyright (C) 2009 Alain Peyrat <aljeux@free.fr>
  *
  * This file is part of FusionForge.

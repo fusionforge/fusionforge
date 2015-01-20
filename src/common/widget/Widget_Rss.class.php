@@ -61,26 +61,28 @@ require_once 'Widget.class.php';
 			$rss = new SimplePie($this->rss_url, forge_get_config('data_path') .'/rss', null, forge_get_config('sys_proxy'));
 			$max_items = 10;
 			$items = array_slice($rss->get_items(), 0, $max_items);
-			$content .= '<table class="fullwidth">';
-			$i = 0;
-			foreach($items as $item){
-				$i=$i+1;
-
-				$content .= '<tr '.$HTML->boxGetAltRowStyle($i).'><td width="99%">';
-				if ($image = $item->get_link(0, 'image')) {
-					//hack to display twitter avatar
-					$content .= '<img src="'.  $hp->purify($image, CODENDI_PURIFIER_CONVERT_HTML)  .'" style="float:left; margin-right:1em;" />';
+			if (count($items)) {
+				$content .= $HTML->listTableTop();
+				$i = 0;
+				foreach($items as $key => $item){
+					$content .= '<tr '.$HTML->boxGetAltRowStyle($key).'><td width="99%">';
+					if ($image = $item->get_link(0, 'image')) {
+						//hack to display twitter avatar
+						$content .= '<img src="'.  $hp->purify($image, CODENDI_PURIFIER_CONVERT_HTML)  .'" style="float:left; margin-right:1em;" />';
+					}
+					/* Do not trust SimplePie for purifying. */
+					$content .= html_e('a', array(
+						'href' => util_unconvert_htmlspecialchars($item->get_link()),
+					), util_html_secure($item->get_title()));
+					if ($item->get_date()) {
+						$content .= '<span style="color:#999;" title="'. date(_("Y-m-d H:i"), $item->get_date('U')) .'"> - '. $this->_date_ago($item->get_date('U'),time()) .'</span>';
+					}
+					$content .= '</td></tr>';
 				}
-				/* Do not trust SimplePie for purifying. */
-				$content .= html_e('a', array(
-					'href' => util_unconvert_htmlspecialchars($item->get_link()),
-				    ), util_html_secure($item->get_title()));
-				if ($item->get_date()) {
-					$content .= '<span style="color:#999;" title="'. date(_("Y-m-d H:i"), $item->get_date('U')) .'"> - '. $this->_date_ago($item->get_date('U'),time()) .'</span>';
-				}
-				$content .= '</td></tr>';
+				$content .= $HTML->listTableBottom();
+			} else {
+				$content = $HTML->information(_('No element to display'));
 			}
-			$content .= '</table>';
 		}
 		return $content;
 	}

@@ -31,6 +31,8 @@ if (!forge_get_config('use_trove')) {
 	exit_disabled('home');
 }
 
+global $HTML;
+
 // Allow alternate content-type rendering by hook
 $default_content_type = 'text/html';
 
@@ -56,19 +58,15 @@ if($content_type != $default_content_type) {
 $HTML->header(array('title'=>_('Software Map'),'pagename'=>'softwaremap'));
 $HTML->printSoftwareMapLinks();
 
-$form_cat = getIntFromRequest('form_cat');
-$page = getIntFromRequest('page',1);
+// assign default. 18 is 'topic'
+$form_cat = getIntFromRequest('form_cat', forge_get_config('default_trove_cat'));
+
+// default first page.
+$page = getIntFromRequest('page', 1);
 
 // 'c' for by categories
-$cat = getStringFromRequest('cat');
-if (empty($cat)) {
-	$cat = 'c';
-}
+$cat = getStringFromRequest('cat', 'c');
 
-// assign default. 18 is 'topic'
-if (!$form_cat) {
-	$form_cat = forge_get_config('default_trove_cat');
-}
 
 // get info about current folder
 $res_trove_cat = db_query_params('
@@ -81,8 +79,8 @@ if (db_numrows($res_trove_cat) < 1) {
 	exit_error(_('That Trove category does not exist')._(': ').db_error(),'trove');
 }
 
-echo '<div id="project-tree" class="underline-link">' . "\n";
-echo '<h2>' . _('Project Tree') . '</h2>' . "\n";
+echo html_ao('div', array('id' => 'project-tree', 'class' => 'underline-link'));
+echo html_e('h2', array(), _('Project Tree'));
 
 plugin_hook('display_hierarchy_submenu');
 
@@ -147,11 +145,11 @@ if ( $cat === 'c' ) {
 	// #######################################
 
 	if (!empty($discrim_desc))
-		print '<p>'.$discrim_desc.'</p>';
+		echo html_e('p', array(), $discrim_desc);
 
 	// ######## two column table for key on right
 	// first print all parent cats and current cat (breadcrumb)
-	print '<table class="fullwidth">' . "\n";
+	echo $HTML->listTableTop();
 	print '<tr class="top">' . "\n";
 	print '<td id="project-tree-col1">' . "\n";
 
@@ -190,18 +188,16 @@ if ( $cat === 'c' ) {
 			array($form_cat));
 	echo db_error();
 
-	print "<ul>";
+	$elementsLi = array();
 	while ($row_sub = db_fetch_array($res_sub)) {
-		print "<li>";
-		echo util_make_link('/softwaremap/trove_list.php?cat=c&form_cat='.$row_sub['trove_cat_id'].$discrim_url, $row_sub['fullname']);
-		print '&nbsp;<em>(';
 		$realprojects = ($row_sub['subprojects']) ? $row_sub['subprojects'] : 0;
 		$plural = ($row_sub['subprojects'] > 1) ? $row_sub['subprojects'] : 0;
-		printf(ngettext('%s projects', '%s project', $plural), $realprojects);
-		print ')</em>';
-		print "</li>\n";
+		$content = util_make_link('/softwaremap/trove_list.php?cat=c&form_cat='.$row_sub['trove_cat_id'].$discrim_url, $row_sub['fullname']);
+		$content .= '&nbsp;'.html_e('em', array(), '('.sprintf(ngettext('%s projects', '%s project', $plural), $realprojects).')');
+		$elementsLi[] = array('content' => $content);
 	}
-	print "</ul>";
+	echo $HTML->html_list($elementsLi);
+
 	// ########### right column: root level
 	print "</td>\n";
 	print '<td id="project-tree-col2">';
@@ -215,31 +211,25 @@ if ( $cat === 'c' ) {
 			array ());
 	echo db_error();
 
-	print "<p>";
-	print _('Browse By')._(': ');
-	print "</p> \n";
+	echo html_e('p', array(), _('Browse By')._(':'));
 
-	print '<ul id="project-tree-branches">';
+	$elementsLi = array();
 	while ($row_rootcat = db_fetch_array($res_rootcat)) {
 		// print open folder if current, otherwise closed
 		// also make anchor if not current
 		if (($row_rootcat['trove_cat_id'] == $row_trove_cat['root_parent'])
 			|| ($row_rootcat['trove_cat_id'] == $row_trove_cat['trove_cat_id'])) {
-			print '<li class="current-cat">' . $row_rootcat['fullname'] . "</li>\n";
+			$elementsLi[] = array('content' => $row_rootcat['fullname'], 'attrs' => array('class' => 'current-cat'));
 		} else {
-			print "<li>";
-			print util_make_link ('/softwaremap/trove_list.php?cat=c&form_cat=' .$row_rootcat['trove_cat_id'].$discrim_url, $row_rootcat['fullname']);
-			print "</li>\n";
+			$elementsLi[] = array('content' => util_make_link('/softwaremap/trove_list.php?cat=c&form_cat=' .$row_rootcat['trove_cat_id'].$discrim_url, $row_rootcat['fullname']));
 		}
 	}
-	print "</ul>\n";
-	print "</td>\n</tr>\n</table>\n";
+	echo $HTML->html_list($elementsLi, array('id' => 'project-tree-branches'));
+	print "</td>\n</tr>\n";
+	echo $HTML->listTableBottom();
+	echo html_e('hr');
 
-?>
-<hr />
-<?php
 	// one listing for each project
-
 	$qpa = db_construct_qpa();
 	$qpa = db_construct_qpa($qpa, 'SELECT * FROM trove_agg');
 	$qpa = db_join_qpa($qpa, $qpa_alias);
@@ -267,25 +257,10 @@ if ( $cat === 'c' ) {
 
 	}
 	$html_limit .= sprintf(ngettext('<strong>%d</strong> project in result set.', '<strong>%d</strong> projects in result set.', $querytotalcount), $querytotalcount);
-
-	// only display pages stuff if there is more to display
 	if ($querytotalcount > $TROVE_BROWSELIMIT) {
-		$html_limit .= ' Displaying '.$TROVE_BROWSELIMIT.' per page. Projects sorted by activity ranking.<br />';
-
-		// display all the numbers
-		for ($i=1;$i<=ceil($querytotalcount/$TROVE_BROWSELIMIT);$i++) {
-			$html_limit .= ' ';
-			$displayed_i = '&lt;'.$i.'&gt;';
-			if ($page == $i) {
-				$html_limit .= "<strong>$displayed_i</strong>" ;
-			} else {
-				$viewthisrow = 0;
-			}
-			$html_limit .= ' ';
-		}
+		$html_limit .= html_trove_limit_navigation_box($_SERVER['PHP_SELF'].'?cat=c&form_cat='.$form_cat, $querytotalcount, $TROVE_BROWSELIMIT, $page, sprintf(_('Displaying %1$s per page. Projects sorted by activity ranking.'), $TROVE_BROWSELIMIT));
 	}
-
-	print $html_limit."<hr />\n";
+	echo $html_limit.html_e('hr');
 
 	// #################################################################
 	// print actual project listings
@@ -301,7 +276,6 @@ if ( $cat === 'c' ) {
 
 		if ($row_grp && $viewthisrow) {
 			print '<table class="fullwidth"><tr class="top"><td colspan="2">';
-			print "$i_proj. " ;
 			print util_make_link_g ($row_grp['unix_group_name'],
 						$row_grp['group_id'],
 						"<strong>".htmlspecialchars($row_grp['group_name'])."</strong> ");
@@ -336,7 +310,7 @@ if ( $cat === 'c' ) {
 
 // print '<p><FONT size="-1">This listing was produced by the following query: '
 //	.$query_projlist.'</FONT>';
-echo '</div><!-- id="project-tree" -->' . "\n";
+echo html_ac(html_ap() -1);
 
 $HTML->footer();
 

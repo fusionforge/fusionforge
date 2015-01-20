@@ -162,7 +162,7 @@ if ($selected_tag) {
 			printf ('<br />'._('Activity Percentile: <strong>%3.0f</strong>'), $percentile);
 			printf ('<br />'._('Activity Ranking: <strong>%d</strong>'), $ranking);
 			printf ('<br />'._('Registered') . _(': '));
-            printf ('<strong>%s</strong>', date(_('Y-m-d H:i'),$row_grp['register_time']));
+			printf ('<strong>%s</strong>', date(_('Y-m-d H:i'),$row_grp['register_time']));
 			print '</td></tr>';
 			/*
 			 if ($row_grp['jobs_count']) {
