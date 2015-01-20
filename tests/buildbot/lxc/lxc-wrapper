@@ -96,7 +96,6 @@ case $cmd in
 
     # Upgrade template
     upgrade)
-	$0 destroy $host
 	case $host in
 	    centos*)
 		mount --bind /proc $cachedir/proc
