@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Copyright (C) 2010-2013 Alain Peyrat - Alcatel-Lucent
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2013, Franck Villaume - TrivialDev
@@ -21,7 +21,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-/*
+/**
  * Standard Alcatel-Lucent disclaimer for contributing to open source
  *
  * "The test suite ("Contribution") has not been tested and/or

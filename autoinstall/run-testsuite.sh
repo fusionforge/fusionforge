@@ -23,6 +23,7 @@ set -ex
 export DEBIAN_FRONTEND=noninteractive
 
 if [ -z "$1" ]; then
+    set +x
     echo "Usage:"
     echo "  $0 src/debian"
     echo "  $0 deb/debian"
@@ -78,6 +79,10 @@ patch -N /usr/share/*/PHPUnit/Extensions/SeleniumTestCase.php <<'EOF' || true
              return 'Screenshot: ' . $this->screenshotUrl . '/' .
                     $this->testId . ".png\n";
 EOF
+
+# Reset the database to post-install state
+$(dirname $0)/../tests/func/db_reload.sh --reset
+$(dirname $0)/../tests/func/db_reload.sh --backup
 
 # Now, start the functionnal test suite using phpunit and selenium
 $(dirname $0)/../tests/func/phpunit-selenium.sh $@

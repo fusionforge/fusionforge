@@ -239,6 +239,7 @@ class Mail {
 		$mail = "To: ".$this->getTo().$sys_lf;
 		$mail .= "From: ".$this->getFrom().$sys_lf;
 		$mail .= "Content-type: ".$this->getMimeType()."; charset=".$this->getBodyCharset().$sys_lf;
+		$mail .= "Content-Transfer-Encoding: 8bit".$sys_lf;
 		$cc = $this->getCc();
 		if (strlen($cc) > 0) {
 			$mail .= "Cc: ".$cc.$sys_lf;

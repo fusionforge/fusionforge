@@ -1,4 +1,4 @@
-#! /usr/bin/php -f
+#!/usr/bin/php
 <?php
 /**
  * FusionForge source control management

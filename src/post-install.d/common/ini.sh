@@ -108,6 +108,9 @@ case "$1" in
 	fi
 	;;
 
+    remove)
+	;;
+
     purge)
 	# note: can't be called from Debian's postrm - rely on ucfq(1)
 	cd $config_path/config.ini.d/

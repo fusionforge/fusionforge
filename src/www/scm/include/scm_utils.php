@@ -41,12 +41,9 @@ function scm_header($params) {
 		exit_disabled();
 	}
 
-    if ($params['inframe']) {
-			echo html_ao('html');
-			echo html_ao('body');
-			echo html_ao('div');
-            return;
-    }
+	if (isset($params['inframe']) && $params['inframe']) {
+		return;
+	}
 	/*
 		Show horizontal links
 	*/
@@ -75,11 +72,11 @@ function scm_header($params) {
 	echo html_ao('div', array('id' => 'scm', 'class' => 'scm'));
 }
 
-function scm_footer($params = array('inframe'=>0)) {
+function scm_footer($params = array('inframe' => 0)) {
+	if ($params['inframe']) {
+		return;
+	}
 	echo html_ac(html_ap() -1);
-    if ($params['inframe']) {
-            return;
-    }
 	site_project_footer();
 }
 
@@ -196,7 +193,7 @@ function commitstime_graph($group_id, $chartid) {
 			plot'.$chartid.'.replot();
 		});'."\n";
 	echo '//]]></script>';
-	echo html_e('div', array('id' => 'chart'.$chartid), '', false);
+	echo $HTML->html_chartid($chartid);
 }
 
 function commits_graph($group_id, $days, $chartid) {
@@ -260,7 +257,7 @@ function commits_graph($group_id, $days, $chartid) {
 				plot'.$chartid.'.replot( { resetAxes: true } );
 			});'."\n";
 		echo '//]]></script>';
-		echo html_e('div', array('id' => 'chart'.$chartid), '', false);
+		echo $HTML->html_chartid($chartid);
 	} else {
 		echo $HTML->information(_('No commits during this period.'));
 	}

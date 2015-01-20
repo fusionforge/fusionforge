@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Copyright (C) 2008 Alain Peyrat <aljeux@free.fr>
  * Copyright (C) 2009 - 2010 Alain Peyrat, Alcatel-Lucent
  *
@@ -20,7 +20,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-/*
+/**
  * Standard Alcatel-Lucent disclaimer for contributing to open source
  *
  * "The test suite ("Contribution") has not been tested and/or

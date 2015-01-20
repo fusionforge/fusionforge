@@ -59,8 +59,9 @@ case "$1" in
 	else
 	    echo "*** Note: please install $config_path/httpd.conf in your Apache configuration"
 	fi
-	
-	# Generate SSL cert if needed
+
+	# Generate SSL certs if needed
+	web_host=$(forge_get_config web_host)
 	cert=$config_path/ssl-cert.pem
 	key=$config_path/ssl-cert.key
 	if [ ! -e $key ] ; then
@@ -68,19 +69,26 @@ case "$1" in
 	    chmod 600 $key
 	fi
 	if [ ! -e $cert ] ; then
-	    openssl req -x509 -days 3650 -new -nodes -batch -text -key $key -out $cert
+	    openssl req -x509 -days 3650 -new -nodes -batch -text -key $key -subj "/CN=$web_host" -out $cert
 	fi
-	
-	# Setup Docman/FRS/Tracker attachments
+
+	scm_host=$(forge_get_config scm_host)
+	scmcert=$config_path/ssl-cert-scm.pem
+	if [ ! -e $scmcert ] ; then
+	    openssl req -x509 -days 3650 -new -nodes -batch -text -key $key -subj "/CN=$scm_host" -out $scmcert
+	fi
+
+	# Setup Docman/FRS/Forum/Tracker/RSS attachments
 	# (not done in 'make install' because e.g. dpkg ignores existing dirs, cf. DP10.9[1])
 	chown $apache_user: $data_path/docman/
 	chown $apache_user: $data_path/download/
 	chown $apache_user: $data_path/forum/
 	chown $apache_user: $data_path/tracker/
-	
+	chown $apache_user: $data_path/rss/
+
 	# Plugins activation from the web UI
 	chown $apache_user: $source_path/www/plugins/
-	
+
 	# Enable required modules
 	if [ -x /usr/sbin/a2enmod ]; then
 	    a2enmod version 2>/dev/null || true  # opensuse..
@@ -95,9 +103,18 @@ case "$1" in
 	    a2enmod cgi  # ViewVC bootstrap, gitweb, mailman
 	    #a2enmod proxy
 	    #a2enmod proxy_http
+	    a2enmod macro
+	    a2enmod authz_groupfile
+	    a2enmod dav
 	fi
 	# else: Apache modules already enabled in CentOS
-	
+
+	# Enable mpm-itk on RH/CentOS
+	if [ -e /etc/httpd/conf.modules.d/00-mpm-itk.conf ] \
+	       && ! grep -q ^LoadModule.mpm_itk_module /etc/httpd/conf.modules.d/00-mpm-itk.conf ; then
+	    sed -i -e s/^#LoadModule/LoadModule/ /etc/httpd/conf.modules.d/00-mpm-itk.conf
+	fi
+
 	if [ -x /usr/sbin/a2dissite ]; then
 	    a2dissite 000-default
 	fi

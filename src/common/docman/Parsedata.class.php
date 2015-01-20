@@ -62,7 +62,7 @@ class Parsedata {
 		// always parse title, description, filename and filetype
 		$data1 = utf8_decode("$title $description $filename $filetype");
 		// temporary file for treatment
-		$filename = tempnam(forge_get_config('data_path'), 'tmp');
+		$filename = tempnam(sys_get_temp_dir(), 'docman');
 		$handle = fopen($filename, 'w');
 		fwrite($handle, $data1);
 		fclose($handle);
@@ -90,7 +90,7 @@ class Parsedata {
 			foreach ($arrayLines as $a) {
 				if (trim($a) != "" && substr($a, 0,1) != "#") {
 					$a2 = explode ("|", $a);
-					$rep[$a2[0]] = $a2[1];
+					$rep[$a2[0]] = trim($a2[1]);
 				}
 			}
 		}

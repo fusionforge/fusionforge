@@ -36,7 +36,8 @@ class HgPlugin extends SCMPlugin {
 		$this->pkg_desc =
 _("This plugin contains the Mercurial (Hg) subsystem of FusionForge. It
 allows each FusionForge project to have its own Mercurial repository,
-and gives some control over it to the project's administrator.");
+and gives some control over it to the project's administrator.
+Offer DAV or SSH access.");
 		$this->_addHook('scm_browser_page');
 		$this->_addHook('scm_update_repolist');
 		$this->_addHook('scm_generate_snapshots');
@@ -46,15 +47,6 @@ and gives some control over it to the project's administrator.");
 		$this->_addHook('scm_delete_repo');
 		$this->_addHook('scm_add_repo');
 		$this->register();
-	}
-
-	/**
-	 * getPluginDescription - display the description of this plugin in pluginman admin page
-	 *
-	 * @return	string	the description
-	 */
-	function getPluginDescription() {
-		return _('Use Mercurial as Source Code Management tool. Offer DAV or SSH access.');
 	}
 
 	function getDefaultServer() {
@@ -615,15 +607,10 @@ and gives some control over it to the project's administrator.");
 			return false;
 		}
 		if (in_array('scmhg', $params['show']) || (count($params['show']) < 1)) {
-			$start_time = $params['begin'];
-			$end_time = $params['end'];
 			$repo = forge_get_config('repos_path', 'scmhg') . '/' . $project->getUnixName();
-			if (!is_dir($repo) || !is_dir("$repo/.hg")) {
-				// echo "No repository\n";
-				return false;
-			}
-			$cdir = chdir($repo);
-			if ($cdir) {
+			if (is_dir($repo) && is_dir($repo.'/.hg') && chdir($repo)) {
+				$start_time = $params['begin'];
+				$end_time = $params['end'];
 				$pipe = popen("hg log --template '{date|shortdate}||{author|email}||{desc}||{node}\n' -d '$start_time 0 to $end_time 0'", 'r');
 				while (!feof($pipe) && $data = fgets($pipe)) {
 					$line = trim($data);

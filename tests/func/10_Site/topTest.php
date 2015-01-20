@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Copyright (C) 2008 Alain Peyrat <aljeux@free.fr>
  * Copyright (C) 2009 - 2010 Alain Peyrat, Alcatel-Lucent
  *
@@ -20,7 +20,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-/*
+/**
  * Standard Alcatel-Lucent disclaimer for contributing to open source
  *
  * "The test suite ("Contribution") has not been tested and/or
@@ -46,39 +46,39 @@ require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
 
 class TopTester extends FForge_SeleniumTestCase
 {
-    function testWalkInTop()
-    {
-	    $this->populateStandardTemplate('forums');
-	    $this->init();
+	function testWalkInTop()
+	{
+		$this->populateStandardTemplate('forums');
+		$this->init();
 
-	    $this->clickAndWait("link=Forums");
-	    $this->clickAndWait("link=open-discussion");
-	    $this->clickAndWait("link=Start New Thread");
-	    $this->type("subject", "Message1");
-	    $this->type("body", "Text1");
-	    $this->clickAndWait("submit");
-	    $this->assertTextPresent("Message Posted Successfully");
+		$this->clickAndWait("link=Forums");
+		$this->clickAndWait("link=open-discussion");
+		$this->clickAndWait("link=Start New Thread");
+		$this->type("subject", "Message1");
+		$this->type("body", "Text1");
+		$this->clickAndWait("submit");
+		$this->assertTextPresent("Message Posted Successfully");
 
-	    $this->cron("db/project_weekly_metric.php");
+		$this->cron("db/project_weekly_metric.php");
 
-	    // Test that from the main page we access the most active this week.
-	    $this->clickAndWait("link=Home");
-	    $this->clickAndWait("link=All project activities");
-	    $this->assertTextPresent("Most Active This Week");
+		// Test that from the main page we access the most active this week.
+		$this->clickAndWait("link=Home");
+		$this->clickAndWait("link=All project activities");
+		$this->assertTextPresent("Most Active This Week");
 
-	    // Test that we can return back to all the tops.
-	    $this->clickAndWait("link=[View Other Top Categories]");
-	    $this->assertTextPresent("We track many project usage statistics");
+		// Test that we can return back to all the tops.
+		$this->clickAndWait("link=[View Other Top Categories]");
+		$this->assertTextPresent("We track many project usage statistics");
 
-	    // Test that we can go the view the most active all time.
-	    $this->clickAndWait("link=Most Active All Time");
-	    $this->assertTextPresent("Most Active All Time");
+		// Test that we can go the view the most active all time.
+		$this->clickAndWait("link=Most Active All Time");
+		$this->assertTextPresent("Most Active All Time");
 
-	    // Return back to tops.
-	    $this->clickAndWait("link=[View Other Top Categories]");
-	    $this->clickAndWait("link=Top Downloads");
-	    $this->assertTextPresent("Rank");
-    }
+		// Return back to tops.
+		$this->clickAndWait("link=[View Other Top Categories]");
+		$this->clickAndWait("link=Top Downloads");
+		$this->assertTextPresent("Rank");
+	}
 }
 
 // Local Variables:

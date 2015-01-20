@@ -64,6 +64,7 @@ install-config: install-base-dirs
 install-common: install-config install-plugin-authbuiltin
 	$(MAKE) -C locale DESTDIR=$(DESTDIR) PREFIX=$(PREFIX) install
 	$(CP_R) VERSION bin common templates lib $(DESTDIR)$(pkgdatadir)/
+	chmod 755 $(DESTDIR)$(pkgdatadir)/bin/ssh_akc.php
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(config_path)/custom/
 	$(CP_R) cronjobs/scm $(DESTDIR)$(pkgdatadir)/cronjobs/  # no dedicated 'scm' package now
 	$(CP_R) post-install.d/common $(DESTDIR)$(pkgdatadir)/post-install.d/
@@ -74,6 +75,10 @@ install-common: install-config install-plugin-authbuiltin
 	ln -nfs $(pkgdatadir)/bin/forge_run_plugin_job $(DESTDIR)$(bindir)
 	ln -nfs $(pkgdatadir)/bin/forge_make_admin $(DESTDIR)$(bindir)
 	ln -nfs $(pkgdatadir)/bin/forge_set_password $(DESTDIR)$(bindir)
+	$(INSTALL) -d -m 00755 $(DESTDIR)$(sysconfdir)/init.d/
+	sed 's,@bindir@,$(bindir),' etc/init.d/fusionforge-systasksd \
+		> $(DESTDIR)$(sysconfdir)/init.d/fusionforge-systasksd
+	chmod 755 $(DESTDIR)$(sysconfdir)/init.d/fusionforge-systasksd
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(log_path)/
 
 install-db-local: install-db
@@ -92,6 +97,7 @@ install-web: install-base-dirs
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/download/
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/forum/
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/tracker/
+	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/rss/
 	$(CP_R) post-install.d/web $(DESTDIR)$(pkgdatadir)/post-install.d/
 	if [ ! -e $(DESTDIR)$(sysconfdir)/logrotate.d/fusionforge-web ]; then \
 		sed 's,@log_path@,$(log_path),' etc/logrotate.d/fusionforge-web \
@@ -168,6 +174,7 @@ uninstall:
 ## Step 3: configure & update system
 # not relying on 'prefix' for post-install (for no-install/dev setups)
 post_source_path:=$(shell forge_get_config source_path 2>/dev/null)
+post_plugins_path:=$(shell forge_get_config plugins_path 2>/dev/null)
 post-install: post-install-base post-install-plugins
 post-install-base: post-install-common post-install-db post-install-web
 post-install-common:
@@ -186,7 +193,7 @@ post-install-mta-exim4:
 post-install-lists:
 	$(post_source_path)/post-install.d/lists/lists.sh configure
 
-PLUGINS_INSTALLED:=$(shell cd $(post_source_path)/plugins 2>/dev/null && find * -maxdepth 0 -type d)
+PLUGINS_INSTALLED:=$(shell cd $(post_plugins_path) 2>/dev/null && find * -maxdepth 0 -type d)
 PLUGINS_POST_INSTALL_TARGETS=$(addprefix post-install-plugin-,$(PLUGINS_INSTALLED))
 # Not depending on PLUGINS_POST_INSTALL_TARGETS: too many dependencies and non-production plugins
 post-install-plugins:
@@ -194,10 +201,10 @@ post-install-plugins:
 	@for i in $(PLUGINS_INSTALLED); do \
 		echo "  make post-install-plugin-$$i"; \
 	done
-post-install-plugin-%: $(post_source_path)/plugins/%/
+post-install-plugin-%: $(post_plugins_path)/%/
 	$(post_source_path)/post-install.d/common/plugin.sh $* configure
 
-uninstall-plugin-%: $(post_source_path)/plugins/%/
+uninstall-plugin-%: $(post_plugins_path)/%/
 	$(post_source_path)/post-install.d/common/plugin.sh $* remove
 #	$(post_source_path)/post-install.d/common/plugin.sh $* uninstall
 

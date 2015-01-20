@@ -1524,6 +1524,9 @@ class Group extends Error {
 							$plugin_id));
 		}
 		$this->normalizeAllRoles();
+		$hook_params = array();
+		$hook_params['group_id'] = $this->getID();
+		plugin_hook("group_plugin_use", $hook_params);
 		return $res;
 	}
 
@@ -1571,7 +1574,7 @@ class Group extends Error {
 	function getHomePage() {
 		if (!preg_match("/^[a-zA-Z][a-zA-Z0-9+.-]*:/",
 			$this->data_array['homepage'])) {
-			$this->data_array['homepage'] = util_url_prefix() .
+			$this->data_array['homepage'] = 'http://' .
 				$this->data_array['homepage'];
 		}
 		return $this->data_array['homepage'];

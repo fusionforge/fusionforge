@@ -51,8 +51,8 @@ require_once 'Widget.class.php';
 				}
 			}
 			if (!(include_once 'simplepie/simplepie.inc'))  // vendor, debian
-			  if (!(include_once 'php-simplepie/autoloader.php'))  // fedora
-			    exit_error('Error', 'Could not load the SimplePie PHP library.');
+				if (!(include_once 'php-simplepie/autoloader.php'))  // fedora
+					exit_error(_('Could not load the SimplePie PHP library.'));
 			if (!is_dir(forge_get_config('data_path') .'/rss')) {
 				if (!mkdir(forge_get_config('data_path') .'/rss')) {
 					$content .= $HTML->error_msg(_('Cannot create backend directory. Contact forge administrator.'));
@@ -61,26 +61,28 @@ require_once 'Widget.class.php';
 			$rss = new SimplePie($this->rss_url, forge_get_config('data_path') .'/rss', null, forge_get_config('sys_proxy'));
 			$max_items = 10;
 			$items = array_slice($rss->get_items(), 0, $max_items);
-			$content .= '<table class="fullwidth">';
-			$i = 0;
-			foreach($items as $item){
-				$i=$i+1;
-
-				$content .= '<tr '.$HTML->boxGetAltRowStyle($i).'><td width="99%">';
-				if ($image = $item->get_link(0, 'image')) {
-					//hack to display twitter avatar
-					$content .= '<img src="'.  $hp->purify($image, CODENDI_PURIFIER_CONVERT_HTML)  .'" style="float:left; margin-right:1em;" />';
+			if (count($items)) {
+				$content .= $HTML->listTableTop();
+				$i = 0;
+				foreach($items as $key => $item){
+					$content .= '<tr '.$HTML->boxGetAltRowStyle($key).'><td width="99%">';
+					if ($image = $item->get_link(0, 'image')) {
+						//hack to display twitter avatar
+						$content .= '<img src="'.  $hp->purify($image, CODENDI_PURIFIER_CONVERT_HTML)  .'" style="float:left; margin-right:1em;" />';
+					}
+					/* Do not trust SimplePie for purifying. */
+					$content .= html_e('a', array(
+						'href' => util_unconvert_htmlspecialchars($item->get_link()),
+					), util_html_secure($item->get_title()));
+					if ($item->get_date()) {
+						$content .= '<span style="color:#999;" title="'. date(_("Y-m-d H:i"), $item->get_date('U')) .'"> - '. $this->_date_ago($item->get_date('U'),time()) .'</span>';
+					}
+					$content .= '</td></tr>';
 				}
-				/* Do not trust SimplePie for purifying. */
-				$content .= html_e('a', array(
-					'href' => util_unconvert_htmlspecialchars($item->get_link()),
-				    ), util_html_secure($item->get_title()));
-				if ($item->get_date()) {
-					$content .= '<span style="color:#999;" title="'. date(_("Y-m-d H:i"), $item->get_date('U')) .'"> - '. $this->_date_ago($item->get_date('U'),time()) .'</span>';
-				}
-				$content .= '</td></tr>';
+				$content .= $HTML->listTableBottom();
+			} else {
+				$content = $HTML->information(_('No element to display'));
 			}
-			$content .= '</table>';
 		}
 		return $content;
 	}
@@ -115,7 +117,7 @@ require_once 'Widget.class.php';
 		$prefs .= 'URL'._(':');
 		$prefs .= '</td>';
 		$prefs .= '<td>';
-		$prefs .= '<input type="url" class="textfield_medium" name="rss[url]" value="http://search.twitter.com/search.atom?q=alcatel-lucent&amp;show_user=1" />';
+		$prefs .= '<input type="url" class="textfield_medium" name="rss[url]" value="" placeholder="'._('Set your RSS URL here.').'" />';
 		$prefs .= '</td>';
 		$prefs .= '</tr>';
 		$prefs .= '</table>';
@@ -149,12 +151,18 @@ require_once 'Widget.class.php';
 			$vTitle = new Valid_String('title');
 			$vTitle->required();
 			if (!$request->validInArray('rss', $vTitle)) {
-				require_once 'simplepie/simplepie.inc';
+				if (!(include_once 'simplepie/simplepie.inc'))  // vendor, debian
+					if (!(include_once 'php-simplepie/autoloader.php'))  // fedora
+						exit_error(_('Could not load the SimplePie PHP library.'));
 				if (!is_dir(forge_get_config('data_path') .'/rss')) {
 					mkdir(forge_get_config('data_path') .'/rss');
 				}
 				$rss_reader = new SimplePie($rss['url'], forge_get_config('data_path') .'/rss', null, forge_get_config('sys_proxy'));
-				$rss['title'] = $rss_reader->get_title();
+				if ($rss_reader) {
+					$rss['title'] = $rss_reader->get_title();
+				} else {
+					return false;
+				}
 			}
 			$sql = 'INSERT INTO widget_rss (owner_id, owner_type, title, url) VALUES ($1,$2,$3,$4)';
 			$res = db_query_params($sql,array($this->owner_id,$this->owner_type,$rss['title'],$rss['url']));

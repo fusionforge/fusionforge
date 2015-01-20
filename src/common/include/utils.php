@@ -226,6 +226,7 @@ function util_send_message($to, $subject, $body, $from = '', $BCC = '', $sendern
 	$send_html_email? $type = "html" : $type = "plain";
 	$body2 .= "\n".util_encode_mimeheader("Subject", $subject, $charset).
 		"\nContent-type: text/$type; charset=$charset".
+		"\nContent-Transfer-Encoding: 8bit".
 		"\n\n".
 		util_convert_body($body, $charset);
 

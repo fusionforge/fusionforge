@@ -23,14 +23,22 @@
  */
 
 /**
+ * exit_errorlevel – Return code for exit_error() and friends
+ *
+ * A script can set this to explicitly return a different
+ * status code than the historic default of 0 to the caller.
+ */
+$exit_errorlevel = 0;
+
+/**
  * exit_error() - Exit with error
  *
  * @param		string	Error text
  * @param		string	Error toptab
  */
 function exit_error($title,$toptab='') {
-	print 'Error: '.$title;
-	exit;
+	print 'Error: ' . $title . "\n";
+	exit($exit_errorlevel);
 }
 
 /**

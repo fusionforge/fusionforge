@@ -616,5 +616,4 @@ class Search extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("News1"));
 		$this->assertTrue($this->isTextPresent("News2"));
 	}
-
 }

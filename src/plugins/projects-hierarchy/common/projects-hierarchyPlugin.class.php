@@ -29,6 +29,8 @@ class projects_hierarchyPlugin extends Plugin {
 		$this->Plugin();
 		$this->name = 'projects-hierarchy';
 		$this->text = _('Project Hierarchy'); // To show in the tabs, use...
+		$this->pkg_desc =
+_('Organise projects hierarchicaly, relation type 1-n');
 		$this->_addHook('groupisactivecheckbox'); // The "use ..." checkbox in editgroupinfo
 		$this->_addHook('groupisactivecheckboxpost');
 		$this->_addHook('hierarchy_views'); // include specific views
@@ -640,7 +642,7 @@ class projects_hierarchyPlugin extends Plugin {
 	 * @return	array	the global configuration array
 	 */
 	function getGlobalconf() {
-		$resGlobConf = db_query_params('SELECT * from plugin_projects_hierarchy_global',array());
+		$resGlobConf = db_query_params('SELECT * from plugin_projects_hierarchy_global', array());
 		if (!$resGlobConf) {
 			return false;
 		}
@@ -672,7 +674,7 @@ class projects_hierarchyPlugin extends Plugin {
 	 * @return	array	the configuration array
 	 */
 	function getConf($project_id) {
-		$resConf = db_query_params('SELECT * from plugin_projects_hierarchy where project_id=$1',array($project_id));
+		$resConf = db_query_params('SELECT * from plugin_projects_hierarchy where project_id=$1', array($project_id));
 		if (!$resConf) {
 			return false;
 		}
@@ -789,6 +791,7 @@ class projects_hierarchyPlugin extends Plugin {
 	 * @access	public
 	 */
 	function son_box($group_id, $name, $selected = 'xzxzxz') {
+		global $HTML;
 		$sons = $this->getFamily($group_id, 'child', true, 'any');
 		$parent = $this->getFamily($group_id, 'parent', true, 'any');
 		$family = array_merge($parent, $sons);
@@ -802,7 +805,16 @@ class projects_hierarchyPlugin extends Plugin {
 						$group_id,
 						db_int_array_to_any_clause($family),
 						$this->name));
-		return html_build_select_box($son, $name, $selected, false);
+		if ($son & db_numrows($son)) {
+			$content = $HTML->openForm(array('method' => 'post', 'action' => '/plugins/'.$this->name.'/?type=group&action=addChild&id='.$group_id));
+			$content .= _('Select a project')._(':');
+			$content .= html_build_select_box($son, $name, $selected, false);
+			$content .= html_e('input', array('type' => 'submit', 'value' => _('Add Child project')));
+			$content .= $HTML->closeForm();
+		} else {
+			$content = $HTML->information(_('No other project available'));
+		}
+		return $content;
 	}
 
 	/**

@@ -28,11 +28,11 @@ require_once 'common/widget/WidgetLayoutManager.class.php';
  */
 
 class Widget_MyRss extends Widget_Rss {
-    function __construct() {
-        $this->Widget_Rss('myrss', user_getid(), WidgetLayoutManager::OWNER_TYPE_USER);
-    }
+	function __construct() {
+		$this->Widget_Rss('myrss', user_getid(), WidgetLayoutManager::OWNER_TYPE_USER);
+	}
 
-    function getDescription() {
-        return _("Allow you to include public rss (or atom) feeds into your personal page.");
-    }
+	function getDescription() {
+		return _("Allow you to include public rss (or atom) feeds into your personal page.");
+	}
 }

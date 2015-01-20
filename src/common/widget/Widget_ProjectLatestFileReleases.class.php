@@ -50,7 +50,7 @@ class Widget_ProjectLatestFileReleases extends Widget {
 		global $HTML;
 
 		$frsrf = new FRSReleaseFactory($project);
-		$frsrnrs = $frsrf->getFRSRNewReleases();
+		$frsrnrs = $frsrf->getFRSRNewReleases(true);
 		if (count($frsrnrs) < 1) {
 			echo $HTML->warning_msg(_('This project has not released any files.'));
 		} else {

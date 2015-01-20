@@ -36,7 +36,7 @@ server = sapi.CgiServer()
 cfg = viewvc.load_config(CONF_PATHNAME, server)
 
 # Read the repository root dir from the environment.
-# This way, we will only have ONE repository configured (the one we're browsing). This 
+# This way, we will only have ONE repository configured (the one we're browsing). This
 # is more secure than having one (CVS|SVN) root configured with all the repositories inside
 
 if os.environ["REPOSITORY_TYPE"] == 'cvs':
@@ -44,7 +44,7 @@ if os.environ["REPOSITORY_TYPE"] == 'cvs':
 elif os.environ["REPOSITORY_TYPE"] == 'svn':
   cfg.general.svn_roots[os.environ["REPOSITORY_NAME"]] = os.environ["REPOSITORY_ROOT"]
 
-cfg.general.address = "<a href='mailto:root@"+os.environ["HTTP_HOST"]+"'>root@" + os.environ["HTTP_HOST"]+ "</a>"
+cfg.general.address = "root@" + os.environ["HTTP_HOST"]
 cfg.options.docroot = os.environ["DOCROOT"]
 #cfg.options.allow_compress = False
 #cfg.options.generate_etags = False

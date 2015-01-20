@@ -25,6 +25,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+require_once $gfcommon.'include/plugins_utils.php';
+
 forge_define_config_item('default_server', 'scmsvn', forge_get_config ('scm_host'));
 forge_define_config_item('repos_path', 'scmsvn', forge_get_config('data_path').'/scmrepos/svn');
 forge_define_config_item('serve_path', 'scmsvn', forge_get_config('repos_path'));
@@ -101,8 +103,7 @@ some control over it to the project's administrator.");
 		$repo = 'file://' . forge_get_config('repos_path', $this->name).'/'.$project->getUnixName().'/';
 		$res = array ();
 		$module = 'trunk';
-		if (!(exec("svn ls '$repo'", $res) && in_array($module.'/', $res)))
-		{
+		if (!(exec("svn ls '$repo'", $res) && in_array($module.'/', $res))) {
 			$module = '';
 		}
 
@@ -121,8 +122,7 @@ some control over it to the project's administrator.");
 			$b .= '<tt>svn checkout svn://'.$this->getBoxForProject($project).$this->svn_root_fs.'/'.$project->getUnixName().$module.'</tt><br />';
 		}
 		if (forge_get_config('use_dav', 'scmsvn')) {
-			$b .= '<tt>svn checkout --username '.forge_get_config('anonsvn_login', 'scmsvn').' http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://' . $this->getBoxForProject($project). $this->svn_root_dav .'/'. $project->getUnixName() .$module.'</tt><br />';
-			$b .= _('The password is ').forge_get_config('anonsvn_password', 'scmsvn').'<br />';
+				$b .= '<p><tt>svn checkout http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. forge_get_config('scm_host'). '/anonscm/svn/'.$project->getUnixName().$module.'</tt></p>' ;
 		}
 		$b .= '</p>';
 		return $b;
@@ -158,7 +158,7 @@ some control over it to the project's administrator.");
 				$b .= ' ';
 				$b .= _('Enter your site password when prompted.');
 				$b .= '</p>';
-				$b .= '<p><tt>svn checkout --username '.$d.' http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. $this->getBoxForProject($project) . $this->svn_root_dav .'/'.$project->getUnixName().$module.'</tt></p>' ;
+				$b .= '<p><tt>svn checkout --username '.$d.' http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. forge_get_config('scm_host'). '/authscm/'.$d.'/svn/'.$project->getUnixName().$module.'</tt></p>' ;
 			}
 		} else {
 			if (forge_get_config('use_ssh', 'scmsvn')) {
@@ -187,7 +187,7 @@ some control over it to the project's administrator.");
 				$b .= ' ';
 				$b .= _('Enter your site password when prompted.');
 				$b .= '</p>';
-				$b .= '<p><tt>svn checkout --username <i>'._('developername').'</i> http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. $this->getBoxForProject($project) . $this->svn_root_dav .'/'.$project->getUnixName().$module.'</tt></p>' ;
+				$b .= '<p><tt>svn checkout --username <i>'._('developername').'</i> http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. forge_get_config('scm_host'). '/authscm/<i>'._('developername').'</i>/svn/'.$project->getUnixName().$module.'</tt></p>' ;
 			}
 		}
 		return $b;
@@ -221,33 +221,31 @@ some control over it to the project's administrator.");
 					  array ($project->getID()));
 
 		if (db_numrows($result) > 0) {
-			$b .= $HTML->boxMiddle(_('Repository Statistics'));
-
 			$tableHeaders = array(
-				_('Name'),
-				_('Adds'),
-				_('Updates')
-				);
-			$b .= $HTML->listTableTop($tableHeaders);
+			_('Name'),
+			_('Adds'),
+			_('Updates')
+			);
+			$b .= $HTML->listTableTop($tableHeaders, false, '', 'repo-history');
 
 			$i = 0;
 			$total = array('adds' => 0, 'updates' => 0);
 
 			while($data = db_fetch_array($result)) {
-				$b .= '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
-				$b .= '<td width="50%">' ;
-				$b .= util_make_link_u ($data['user_name'], $data['user_id'], $data['realname']) ;
-				$b .= '</td><td width="25%" align="right">'.$data['adds']. '</td>'.
-					'<td width="25%" align="right">'.$data['updates'].'</td></tr>';
+				$cells = array();
+				$cells[] = array(util_make_link_u($data['user_name'], $data['user_id'], $data['realname']), 'class' => 'halfwidth');
+				$cells[] = array($data['adds'], 'class' => 'onequarterwidth align-right');
+				$cells[] = array($data['updates'], 'class' => 'onequarterwidth align-right');
+				$b .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
 				$total['adds'] += $data['adds'];
 				$total['updates'] += $data['updates'];
 				$i++;
 			}
-			$b .= '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
-			$b .= '<td width="50%"><strong>'._('Total')._(':').'</strong></td>'.
-				'<td width="25%" align="right"><strong>'.$total['adds']. '</strong></td>'.
-				'<td width="25%" align="right"><strong>'.$total['updates'].'</strong></td>';
-			$b .= '</tr>';
+			$cells = array();
+			$cells[] = array(html_e('strong', array(), _('Total')._(':')), 'class' => 'halfwidth');
+			$cells[] = array($total['adds'], 'class' => 'onequarterwidth align-right');
+			$cells[] = array($total['updates'], 'class' => 'onequarterwidth align-right');
+			$b .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
 			$b .= $HTML->listTableBottom();
 		}
 
@@ -263,24 +261,12 @@ some control over it to the project's administrator.");
 		}
 
 		if ($project->usesPlugin($this->name)) {
-				print '<iframe id="scmsvn_iframe" src="'.util_make_url("/scm/viewvc.php?inframe=1&root=".$project->getUnixName()).'" frameborder="0" width=100% ></iframe>';
-				$useautoheight = 1;
-        }
-
-		if ($useautoheight) {
-			html_use_jqueryautoheight();
-			echo $HTML->getJavascripts();
-			echo '<script type="text/javascript">//<![CDATA[
-				jQuery(\'#scmsvn_iframe\').iframeAutoHeight({heightOffset: 50});
-				jQuery(\'#scmsvn_iframe\').load(function (){
-						if (this.contentWindow.location.href == "'.util_make_url('/projects/'.$project->getUnixName()).'/") {
-							console.log(this.contentWindow.location.href);
-							window.location.href = this.contentWindow.location.href;
-						};
-					});
-				//]]></script>';
+			$iframe_src = '/scm/viewvc.php?inframe=1&root='.$project->getUnixName();
+			if ($params['commit']) {
+				$iframe_src .= '&view=rev&revision='.$params['commit'];
+			}
+			htmlIframe($iframe_src, array('id'=>'scmsvn_iframe'));
 		}
-
 	}
 
 	function createOrUpdateRepo($params) {
@@ -314,11 +300,9 @@ some control over it to the project's administrator.");
 			if (forge_get_config('use_ssh', 'scmsvn')) {
 				$unix_group = 'scm_' . $project->getUnixName() ;
 				system ("find $repo -type d | xargs -I{} chmod g+s {}") ;
-				if ($project->enableAnonSCM()) {
-					system ("chmod -R g+rwX,o+rX-w $repo") ;
-				} else {
-					system ("chmod -R g+rwX,o-rwx $repo") ;
-				}
+				// open permissions to allow switching private/public easily
+				// see after to restrict the top-level directory
+				system ("chmod -R g+rwX,o+rX-w $repo") ;
 				system ("chgrp -R $unix_group $repo") ;
 			} else {
 				$unix_user = forge_get_config('apache_user');
@@ -358,6 +342,9 @@ some control over it to the project's administrator.");
 			return true;
 		}
 
+		$config_fname = forge_get_config('data_path').'/scmsvn-auth.inc';
+		$config_f = fopen($config_fname.'.new', 'w');
+			
 		$access_data = '';
 		$password_data = '';
 		$engine = RBACEngine::getInstance() ;
@@ -400,10 +387,19 @@ some control over it to the project's administrator.");
 
 			$access_data .= "\n";
 			$engine->invalidateRoleCaches();  // caching all roles takes ~1GB RAM for 5K projects/15K users
+
+			if ($project->enableAnonSCM()) {
+				fwrite($config_f, 'Use ScmsvnProjectWithAnon '.$project->getUnixName().'
+');
+			}
+			
+			fwrite($config_f, "\n");
 		}
 
 		foreach ($svnusers as $user_id => $user) {
 			$password_data .= $user->getUnixName().':'.$user->getUnixPasswd()."\n";
+			fwrite($config_f, 'Use ScmsvnUser '.$user->getUnixName().'
+');
 		}
 		$password_data .= forge_get_config('anonsvn_login', 'scmsvn').":".htpasswd_apr1_md5(forge_get_config('anonsvn_password', 'scmsvn'))."\n";
 
@@ -420,6 +416,10 @@ some control over it to the project's administrator.");
 		fclose($f);
 		chmod($fname.'.new', 0644);
 		rename($fname.'.new', $fname);
+
+		fclose($config_f);
+		chmod($config_fname.'.new', 0644);
+		rename($config_fname.'.new', $config_fname);
 	}
 
 	function gatherStats($params) {
@@ -651,45 +651,46 @@ some control over it to the project's administrator.");
 		}
 
 		if (in_array('scmsvn', $params['show']) || (count($params['show']) < 1)) {
-			$start_time = $params['begin'];
-			$end_time = $params['end'];
-			$d1 = date('Y-m-d', $start_time - 80000);
-			$d2 = date('Y-m-d', $end_time + 80000);
-
 			$repo = forge_get_config('repos_path', 'scmsvn') . '/' . $project->getUnixName();
-			$pipe = popen("svn log file://$repo --xml -v -r '".'{'.$d2.'}:{'.$d1.'}'."' 2> /dev/null", 'r' );
-			$xml_parser = xml_parser_create();
-			xml_set_element_handler($xml_parser, "SVNPluginStartElement", "SVNPluginEndElement");
-			xml_set_character_data_handler($xml_parser, "SVNPluginCharData");
-			while (!feof($pipe) && $data = fgets($pipe, 4096)) {
-				if (!xml_parse($xml_parser, $data, feof ($pipe))) {
-					debug("Unable to parse XML with error " .
-						xml_error_string(xml_get_error_code($xml_parser)) .
-						" on line " .
-						xml_get_current_line_number($xml_parser));
-					return false;
-					break;
-				}
-			}
-			xml_parser_free($xml_parser);
-			if ($adds > 0 || $updates > 0 || $commits > 0 || $deletes > 0) {
-				$i = 0;
-				foreach ($messages as $message) {
-					$result = array();
-					$result['section'] = 'scm';
-					$result['group_id'] = $group_id;
-					$result['ref_id'] = 'viewvc.php/?root='.$project->getUnixName();
-					$result['description'] = htmlspecialchars($message).' (r'.$revisions[$i].')';
-					$userObject = user_get_object_by_name($users[$i]);
-					if (is_a($userObject, 'GFUser')) {
-						$result['realname'] = util_display_user($userObject->getUnixName(), $userObject->getID(), $userObject->getRealName());
-					} else {
-						$result['realname'] = '';
+			if (is_dir($repo)) {
+				$start_time = $params['begin'];
+				$end_time = $params['end'];
+				$d1 = date('Y-m-d', $start_time - 80000);
+				$d2 = date('Y-m-d', $end_time + 80000);
+				$pipe = popen("svn log file://$repo --xml -v -r '".'{'.$d2.'}:{'.$d1.'}'."' 2> /dev/null", 'r' );
+				$xml_parser = xml_parser_create();
+				xml_set_element_handler($xml_parser, "SVNPluginStartElement", "SVNPluginEndElement");
+				xml_set_character_data_handler($xml_parser, "SVNPluginCharData");
+				while (!feof($pipe) && $data = fgets($pipe, 4096)) {
+					if (!xml_parse($xml_parser, $data, feof ($pipe))) {
+						debug("Unable to parse XML with error " .
+							xml_error_string(xml_get_error_code($xml_parser)) .
+							" on line " .
+							xml_get_current_line_number($xml_parser));
+						return false;
+						break;
 					}
-					$result['activity_date'] = $times[$i];
-					$result['subref_id'] = '&view=rev&revision='.$revisions[$i];
-					$params['results'][] = $result;
-					$i++;
+				}
+				xml_parser_free($xml_parser);
+				if ($adds > 0 || $updates > 0 || $commits > 0 || $deletes > 0) {
+					$i = 0;
+					foreach ($messages as $message) {
+						$result = array();
+						$result['section'] = 'scm';
+						$result['group_id'] = $group_id;
+						$result['ref_id'] = 'browser.php?group_id='.$group_id;
+						$result['description'] = htmlspecialchars($message).' (r'.$revisions[$i].')';
+						$userObject = user_get_object_by_name($users[$i]);
+						if (is_a($userObject, 'GFUser')) {
+							$result['realname'] = util_display_user($userObject->getUnixName(), $userObject->getID(), $userObject->getRealName());
+						} else {
+							$result['realname'] = '';
+						}
+						$result['activity_date'] = $times[$i];
+						$result['subref_id'] = '&commit='.$revisions[$i];
+						$params['results'][] = $result;
+						$i++;
+					}
 				}
 			}
 		}
