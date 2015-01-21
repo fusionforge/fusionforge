@@ -41,7 +41,6 @@ if (!$res) {
 	cron_entry(30, _('Unable to get list of projects with vhost: ').db_error());
 }
 
-$enableRestart = false;
 $httpdRestartedMsg = _('httpd server not restarted');
 
 $inTemplateVhostFile = forge_get_config('custom_path').'/httpd.vhosts.tmpl';
@@ -65,16 +64,7 @@ while ($arr = db_fetch_array($res)) {
 	$count++;
 }
 
-if ($enableRestart) {
-	// debian specific
-	//$httpd_restart_cmd = '/usr/sbin/invoke-rc.d --quiet apache2 reload';
-	// redhat based
-	//$httpd_restart_cmd = 'service httpd restart';
-	if (isset($httpd_restart_cmd) && !empty($httpd_restart_cmd)) {
-		system($httpd_restart_cmd);
-		$httpdRestartedMsg = _('httpd server automatically restarted');
-	}
-}
+cron_reload_apache();
 
 $output .= $count._(' vhost created.').' '.$httpdRestartedMsg;
 cron_entry(30, $output);
