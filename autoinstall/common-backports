@@ -58,7 +58,7 @@ function rebuild_one_rpm {
     enablefedsrc=
     enablefed=
     if [ "$1" = "--enablefedora" ] ; then
-	enablefedsrc="--enablerepo=fedora-source --enablerepo=fedora-updates-source"
+	enablefedsrc="--enablerepo=fedora-source"
     	shift
     fi
 
