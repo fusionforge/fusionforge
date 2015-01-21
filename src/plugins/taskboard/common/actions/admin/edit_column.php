@@ -32,20 +32,28 @@ if (getStringFromRequest('post_changes')) {
 	$color_bg_color = getStringFromRequest('column_bg_color','');
 	$column_max_tasks = getStringFromRequest('column_max_tasks','');
 
-	$column->update($column_title, $title_bg_color, $color_bg_color, $column_max_tasks);
-	$column->setResolutions($resolutions);
-
 	$resolution_by_default =  getStringFromRequest('resolution_by_default','');
 	$alert = getStringFromRequest('alert','');
 	$autoassign = getIntFromRequest('autoassign',0);
-
-	db_begin();
-	if( $column->setDropRule(NULL, $resolution_by_default, $alert, $autoassign) ) {
-		db_commit();
-		$feedback .= _('Succefully Updated');
+	
+	if( $resolution_by_default && $column_title) {
+		db_begin();
+		if( $column->update($column_title, $title_bg_color, $color_bg_color, $column_max_tasks) ) {
+			$column->setResolutions($resolutions);
+			
+			if( $column->setDropRule(NULL, $resolution_by_default, $alert, $autoassign) ) {
+				db_commit();
+				$feedback .= _('Succefully Updated');
+			} else {
+				db_rollback();
+				exit_error( $column->getErrorMessage() );
+			}
+		} else {
+			db_rollback();
+			exit_error( $column->getErrorMessage() );
+		}
 	} else {
-		db_rollback();
-		exit_error( $column->getErrorMessage() );
+		$warning_msg .= _('Please, fill all required fields');
 	}
 }
 
@@ -83,12 +91,19 @@ $drop_rules_by_default = $column->getDropRulesByDefault(true);
 
 	<tr><td colspan="2"><strong><?php echo _('Resolutions') ?>:</strong></td></tr>
 <?php
-$columns_resolutions = $column->getResolutions();
-foreach( $taskboard->getAvailableResolutions() as $resolution ) {
+// unused by any columns resolutions
+foreach( $taskboard->getUnusedResolutions() as $resolution ) {
 ?>
-	<tr><td><?php echo htmlspecialchars( $resolution ) ?></td><td><input type="checkbox" name="resolutions[]" value="<?php echo htmlspecialchars( $resolution)  ?>" <?php echo ( in_array( $resolution, $columns_resolutions) ? 'checked' : '') ?>></td></tr>
+	<tr><td><?php echo htmlspecialchars( $resolution ) ?></td><td><input type="checkbox" name="resolutions[]" value="<?php echo htmlspecialchars( $resolution)  ?>" ></td></tr>
 <?php
 }
+// used by current column resolutions
+foreach( $column->getResolutions() as $resolution ) {
+	?>
+	<tr><td><?php echo htmlspecialchars( $resolution ) ?></td><td><input type="checkbox" name="resolutions[]" value="<?php echo htmlspecialchars( $resolution)  ?>" checked></td></tr>
+<?php
+}
+
 ?>
 
 

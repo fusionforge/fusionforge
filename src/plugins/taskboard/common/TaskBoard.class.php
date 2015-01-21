@@ -859,6 +859,11 @@ class TaskBoard extends Error {
 		return $current_release;
 	}
 	
+	/**
+	 *      getReleaseValues - get list of all available reslease values
+	 *
+	 *      @return array
+	 */
 	function getReleaseValues() {
 		$ret = array();
 	
@@ -873,31 +878,52 @@ class TaskBoard extends Error {
 		return $ret;
 	}
 
+	/**
+	 *      getAvailableResolutions - get list of all available resolution values
+	 *
+	 *      @return array
+	 */
 	function getAvailableResolutions() {
 		return array_keys( $this->getExtraFieldValues('resolution') );
 	}
+	
+	/**
+	 *      getUsedResolutions - get list of resolutions that are already used with taskboard columns 
+	 *
+	 *      @return array
+	 */
+	function getUsedResolutions() {
+		$res = db_query_params (
+				'SELECT R.* FROM plugin_taskboard_columns_resolutions as R, plugin_taskboard_columns as C
+				WHERE C.taskboard_id=$1 AND R.taskboard_column_id=C.taskboard_column_id', 
+				array ($this->getID())
+		) ;
+		if (!$res) {
+			$this->setError('TaskBoard: cannot get used resolutions');
+			return false;
+		}
+		
+		$resolutions= array();
+		while( $row = db_fetch_array($res) ) {
+			$resolutions[$row['taskboard_column_resolution']] = $row['taskboard_column_resolution'];
+		}
+		db_free_result($res);
 
+		return array_keys( $resolutions );
+	}
+
+	/**
+	 *      getUnusedResolutions - get list of resolutions that are not used with taskboard columns
+	 *
+	 *      @return array
+	 */
 	function getUnusedResolutions() {
+		$all_resolutions = $this->getAvailableResolutions();
+		$used_resolutions = $this->getUsedResolutions();
+		
 		$resolutions = array();
-
-		// TODO return only unused resolutions
-
-		$tasks_trackers = $this->getUsedTrackersIds()  ;
-		foreach( $tasks_trackers as $tracker_id ) {
-			$ef_values = array_keys( $this->TrackersAdapter->getExtraFieldValues($tracker_id, 'resolution') );
-			if( count($resolutions) == 0 ) {
-				foreach( $ef_values as $v) {
-					$resolutions[] = $v;
-				}
-			} else {
-				$buf = array();
-				foreach( $resolutions as $r ) {
-					if( in_array( $r, $ef_values ) ){
-						$buf[] = $r;
-					}
-				}
-				$resolutions = $buf;
-			}
+		if( $all_resolutions && $used_resolutions ) {
+			$resolutions = array_diff( $all_resolutions, $used_resolutions );
 		}
 
 		return $resolutions;
