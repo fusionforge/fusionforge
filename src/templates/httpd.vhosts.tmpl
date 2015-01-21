@@ -1,7 +1,9 @@
 <VirtualHost *:80>
 	ServerName {vhost_name}
 	DocumentRoot {docdir}
-	ScriptAlias /cgi-bin/ {cgidir}
+	# disabled for CVE-2014-6275
+	# Only enable it if you know what you are doing, by default all scripts run as Apache
+	#ScriptAlias /cgi-bin/ {cgidir}
 	<Directory {core/groupdir_prefix}>
 		Options Indexes FollowSymlinks
 		AllowOverride All
