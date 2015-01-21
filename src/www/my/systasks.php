@@ -47,6 +47,8 @@ $groups = $u->getGroups();
 $gids = array();
 foreach($groups as $g)
 	$gids[] = $g->getID();
+if (empty($gids))
+	$gids[] = -1;  // avoid empty 'IN (...)' SQL clause
 $gids = implode(',', $gids);
 
 $title_arr = array(
@@ -57,12 +59,12 @@ $title_arr = array(
 	_('Status'),
 	_('Requested'),
 	_('Started'),
-	_('Ended'),
+	_('Stopped'),
 );
 
 echo $HTML->listTableTop($title_arr);
 $query = "
-SELECT systask_id, unix_group_name,
+SELECT systask_id, COALESCE(unix_group_name, '-') AS unix_group_name,
 plugin_name, systask_type, systasks.status,
     EXTRACT(epoch FROM requested) AS requested,
     EXTRACT(epoch FROM started) AS started,

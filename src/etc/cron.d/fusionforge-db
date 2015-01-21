@@ -36,9 +36,6 @@ PATH=@bindir@:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 # Daily sweep of the stats into final tables
 45 0 * * * root forge_run_job db/db_stats_agg.php
 
-# Hourly send pending massmailings, if any
-48 * * * * root forge_run_job db/massmail.php
-
 # Weekly db vacuum (should be done after ALL OTHER JOBS)
 50 2 * * 1 root forge_run_job db/vacuum.php
 
