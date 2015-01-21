@@ -31,6 +31,7 @@
 require dirname(__FILE__).'/../../common/include/env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require $gfcommon.'include/cron_utils.php';
+require_once $gfcommon.'include/SysTasksQ.class.php';
 
 $err='';
 
