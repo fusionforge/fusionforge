@@ -121,10 +121,6 @@ install-web-vhosts: install-base-dirs
 install-shell: install-base-dirs
 	$(CP_R) cronjobs/shell $(DESTDIR)$(pkgdatadir)/cronjobs/
 	$(CP_R) post-install.d/shell $(DESTDIR)$(pkgdatadir)/post-install.d/
-	if [ -e etc/cron.d/fusionforge-shell ] && [ ! -e $(DESTDIR)$(sysconfdir)/cron.d/fusionforge-shell ]; then \
-		sed 's,@bindir@,$(bindir),' etc/cron.d/fusionforge-shell \
-			> $(DESTDIR)$(sysconfdir)/cron.d/fusionforge-shell; \
-	fi
 
 install-mta-postfix: install-base-dirs
 	$(CP_R) post-install.d/mta-postfix $(DESTDIR)$(pkgdatadir)/post-install.d/
@@ -135,10 +131,6 @@ install-mta-exim4: install-base-dirs
 install-lists: install-base-dirs
 	$(CP_R) cronjobs/lists $(DESTDIR)$(pkgdatadir)/cronjobs/
 	$(CP_R) post-install.d/lists $(DESTDIR)$(pkgdatadir)/post-install.d/
-	if [ ! -e $(DESTDIR)$(sysconfdir)/cron.d/fusionforge-lists ]; then \
-		sed 's,@bindir@,$(bindir),' etc/cron.d/fusionforge-lists \
-			> $(DESTDIR)$(sysconfdir)/cron.d/fusionforge-lists; \
-	fi
 
 install-base: install-base-dirs install-common install-web install-db
 
