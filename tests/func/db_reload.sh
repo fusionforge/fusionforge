@@ -39,9 +39,9 @@ stop_database () {
         sleep 1
     done
     if is_db_down ; then
-        echo "...OK"
+        echo "OK"
     else
-        echo "... FAIL: database still up?"
+        echo "FAIL: database still up?"
     fi
 }
 
