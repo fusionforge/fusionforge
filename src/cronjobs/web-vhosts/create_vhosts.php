@@ -32,7 +32,10 @@ $output = '';
 
 session_set_admin();
 
-$res = db_query_params('select vh.vhost_name, vh.docdir, vh.cgidir from prweb_vhost vh, groups g where g.status = $1 and vh.group_id = g.group_id order by vh.vhost_name',
+$res = db_query_params('SELECT vh.vhost_name, vh.docdir, vh.cgidir, g.unix_group_name
+FROM prweb_vhost vh, groups g
+WHERE g.status = $1 AND vh.group_id = g.group_id
+ORDER BY vh.vhost_name',
 			array ('A'));
 if (!$res) {
 	cron_entry(30, _('Unable to get list of projects with vhost: ').db_error());
@@ -41,7 +44,9 @@ if (!$res) {
 $enableRestart = false;
 $httpdRestartedMsg = _('httpd server not restarted');
 
-$inTemplateVhostFile = forge_get_config('source_path').'/templates/httpd.vhosts.tmpl';
+$inTemplateVhostFile = forge_get_config('custom_path').'/httpd.vhosts.tmpl';
+if (!is_readable($inTemplateVhostFile))
+	$inTemplateVhostFile = forge_get_config('source_path').'/templates/httpd.vhosts.tmpl';
 $outVhostsFile = forge_get_config('config_path').'/httpd.conf.d/httpd.vhosts';
 $logPath = forge_get_config('log_path');
 $groupdirPrefix = forge_get_config('groupdir_prefix');
@@ -51,6 +56,7 @@ $count = 0;
 while ($arr = db_fetch_array($res)) {
 	$str = file_get_contents($inTemplateVhostFile);
 	$str = str_replace('{vhost_name}', $arr['vhost_name'], $str);
+	$str = str_replace('{unix_group_name}', $arr['unix_group_name'], $str);
 	$str = str_replace('{docdir}', $arr['docdir'], $str);
 	$str = str_replace('{cgidir}', $arr['cgidir'], $str);
 	$str = str_replace('{core/log_path}', $logPath, $str);
