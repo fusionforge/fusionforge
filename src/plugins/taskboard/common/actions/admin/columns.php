@@ -25,11 +25,28 @@ $column_title = getStringFromRequest('column_title','');
 $title_bg_color = getStringFromRequest('title_bg_color','');
 $color_bg_color = getStringFromRequest('column_bg_color','');
 $column_max_tasks = getStringFromRequest('column_max_tasks','');
+$resolution_by_default = getStringFromRequest('resolution_by_default','');
 
 
 if (getStringFromRequest('post_changes')) {
-	if( $taskboard->addColumn($column_title, $title_bg_color, $color_bg_color, $column_max_tasks) ) {
+	db_begin();
+	$column_id = $taskboard->addColumn($column_title, $title_bg_color, $color_bg_color, $column_max_tasks);
+	if( $column_id ) {
+		$column = new TaskBoardColumn( $taskboard, $column_id );
+		if( $column && $column->setDropRule(NULL, $resolution_by_default) ) {
+			if( !$column->setResolutions( array( $resolution_by_default ) ) ) {
+				db_rollback();
+				exit_error( _('Cannot set resolutions for new column') );
+			}
+		} else {
+			db_rollback();
+			exit_error( _('Cannot set drop rule for new column') );
+		}
+		db_commit();
 		$feedback.=_('Successfully Added');
+	} else {
+		db_rollback();
+		exit_error( _('Cannot create column') );
 	}
 }
 

@@ -749,6 +749,8 @@ class TaskBoard extends Error {
 	 *      @return boolean
 	 */
 	function addColumn( $title, $title_bg_color, $column_bg_color, $max_tasks ) {
+		$column_id = false;
+
 		$res = db_query_params ('SELECT COUNT(*) as count FROM plugin_taskboard_columns WHERE taskboard_id=$1', array ($this->getID())) ;
 		if (!$res) {
 			return false;
@@ -772,9 +774,10 @@ class TaskBoard extends Error {
 		if (!$res) {
 			return false;
 		}
+		$column_id = db_insertid($res,'plugin_taskboard_columns','taskboard_column_id');
 		db_free_result($res);
 
-		return true;
+		return $column_id;
 	}
 	
 	/**
@@ -802,7 +805,7 @@ class TaskBoard extends Error {
 				$ret = $buf;
 			}
 		}
-	
+
 		return $ret;
 	}
 	

@@ -36,7 +36,7 @@ if( $confirmed ) {
 	}
 
 	$action = 'columns';
-	include( $gfplugins.'taskboard/www/admin/columns.php' );
+	session_redirect( '/plugins/taskboard/admin/?action=columns&group_id='.$group_id );
 } else {
 	$taskboard->header(
 		array(
