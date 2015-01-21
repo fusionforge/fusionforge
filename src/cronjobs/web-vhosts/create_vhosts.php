@@ -21,13 +21,14 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require dirname(__FILE__).'/../common/include/env.inc.php';
+require dirname(__FILE__).'/../../common/include/env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/cron_utils.php';
 
 if (!forge_get_config('use_project_vhost')) {
 	cron_entry(30, _('forge not using vhost'));
 }
+$output = '';
 
 session_set_admin();
 
