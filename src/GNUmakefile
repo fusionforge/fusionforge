@@ -121,7 +121,7 @@ install-web-vhosts: install-base-dirs
 install-shell: install-base-dirs
 	$(CP_R) cronjobs/shell $(DESTDIR)$(pkgdatadir)/cronjobs/
 	$(CP_R) post-install.d/shell $(DESTDIR)$(pkgdatadir)/post-install.d/
-	if [ ! -e $(DESTDIR)$(sysconfdir)/cron.d/fusionforge-shell ]; then \
+	if [ -e etc/cron.d/fusionforge-shell ] && [ ! -e $(DESTDIR)$(sysconfdir)/cron.d/fusionforge-shell ]; then \
 		sed 's,@bindir@,$(bindir),' etc/cron.d/fusionforge-shell \
 			> $(DESTDIR)$(sysconfdir)/cron.d/fusionforge-shell; \
 	fi
