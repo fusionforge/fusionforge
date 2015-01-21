@@ -58,8 +58,7 @@ while ($arr = db_fetch_array($res)) {
 	$str = str_replace('{unix_group_name}', $arr['unix_group_name'], $str);
 	$str = str_replace('{docdir}', $arr['docdir'], $str);
 	$str = str_replace('{cgidir}', $arr['cgidir'], $str);
-	$str = str_replace('{core/log_path}', $logPath, $str);
-	$str = str_replace('{core/groupdir_prefix}', $groupdirPrefix, $str);
+	$str = forge_expand_config_braces($str);
 	file_put_contents($outVhostsFile, $str, FILE_APPEND);
 	$count++;
 }
