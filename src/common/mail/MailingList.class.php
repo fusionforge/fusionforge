@@ -24,6 +24,7 @@
  */
 
 require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/SysTasksQ.class.php';
 
 class MailingList extends Error {
 
@@ -179,6 +180,10 @@ class MailingList extends Error {
 			return false;
 		}
 
+		// TODO: link 'mail_group_list' with 'systasks' for better reporting
+		$systasksq = new SysTasksQ();
+		$systasksq->add(SYSTASK_CORE, 'LISTS', $this->Group->getID());
+
 		$this->groupMailingListId = db_insertid($result, 'mail_group_list', 'group_list_id');
 		$this->fetchData($this->groupMailingListId);
 
@@ -268,6 +273,11 @@ Thank you for registering your project with %1$s.'), forge_get_config ('forge_na
 			$this->setError(sprintf(_('Error On Update: %s'), db_error()));
 			return false;
 		}
+
+		// TODO: link 'mail_group_list' with 'systasks' for better reporting
+		$systasksq = new SysTasksQ();
+		$systasksq->add(SYSTASK_CORE, 'LISTS', $this->Group->getID());
+
 		return true;
 	}
 
@@ -423,6 +433,11 @@ Thank you for registering your project with %1$s.'), forge_get_config ('forge_na
 			$this->setError('Could Not Delete List: '.db_error());
 			return false;
 		}
+
+		// TODO: link 'mail_group_list' with 'systasks' for better reporting
+		$systasksq = new SysTasksQ();
+		$systasksq->add(SYSTASK_CORE, 'LISTS', $this->Group->getID());
+
 		return true;
 	}
 }
