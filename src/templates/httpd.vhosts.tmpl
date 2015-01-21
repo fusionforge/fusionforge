@@ -1,7 +1,7 @@
 <VirtualHost *:80>
 	ServerName {vhost_name}
 	DocumentRoot {docdir}
-	ScriptAlias {cgidir}
+	ScriptAlias /cgi-bin/ {cgidir}
 	<Directory {core/groupdir_prefix}>
 		Options Indexes FollowSymlinks
 		AllowOverride All
