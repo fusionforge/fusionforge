@@ -85,12 +85,19 @@ if (!$group_id) {
 			exit_error( _('Configure columns for the board first.') );
 		}
 		
+		$messages = '';
+		foreach( $columns as $column ) {
+			if( count( $column->getResolutions() ) == 0 ) {
+				$messages .= sprintf( _('Resolutions list is empty for "%s", column is not dropable'), $column->getTitle() ).'<br>';
+			}
+		}
+		
 		$user_stories_tracker = $taskboard->getUserStoriesTrackerID();
 		$columns_number = count($columns) + ( $user_stories_tracker ? 1 : 0 );
 		$column_width = intval( 100 / $columns_number );
 ?>
 
-<div id="messages" class="warning" style="display: none;"></div>
+<div id="messages" class="warning" <?php if( !$messages ) { ?> style="display: none;" <?php } ?>><?php echo $messages ?></div>
 <br/>
 
 <link rel="stylesheet" type="text/css" href="/plugins/taskboard/css/agile-board.css">
@@ -145,8 +152,8 @@ if( $taskboard->getReleaseField() ) {
 ?>
 
 
-<div class="tabbertab'.($af->query_type == 'custom' ? ' tabbertabdefault' : '').'" title="'._('Simple Filtering and Sorting').'">
-	<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&amp;atid='.$ath->getID().'" method="post">
+<div>
+	<form>
 		<table cellspacing="0">
 			<tr>
 		<?php if( $release_box ) { ?>
