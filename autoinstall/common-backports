@@ -76,6 +76,10 @@ function rebuild_one_rpm {
     fi
 
     target=$1
+    shift
+    others="$*"
+    
+    src=${src:-$target}
 
     if yum list $target >/dev/null 2>&1; then
 	yum install -y $target
