@@ -46,7 +46,7 @@ $cron_arr = array(
 	'HOMEDIR' => 'shell/homedirs.php',  # 25
 	'SCM_REPO' => 'scm/create_scm_repos.php',  # 27
 	28 => 'scm/gather_scm_stats.php',
-	30 => 'web-vhosts/create_vhosts.php',
+	'WEB_VHOSTS' => 'web-vhosts/create_vhosts.php',  # 30
 	);
 
 #	 13 => 'cvs.php',

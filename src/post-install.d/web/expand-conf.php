@@ -49,12 +49,7 @@ if ($out === FALSE) {
 
 // Replace the variable with the configuration value
 foreach($lines as $line) {
-  $line = preg_replace_callback(
-    ',{([a-z_]*)/([a-z_]*)},',
-    function ($matches) {
-      return forge_get_config($matches[2], $matches[1]);
-    },
-    $line);
-  fwrite($out, $line);
+	$line = forge_expand_config_braces($line);
+	fwrite($out, $line);
 }
 fclose($out);
