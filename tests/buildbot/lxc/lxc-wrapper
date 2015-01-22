@@ -129,11 +129,11 @@ case $cmd in
 	    centos*)
 		echo "$host.local" > $rootfs/etc/hostname
 		# Fix 'hostname -f' == 'localhost'
-		echo "127.0.1.1 $host.local" > $rootfs/etc/hosts
+		echo "127.0.1.1 $host.local $host" > $rootfs/etc/hosts
 		;;
 	    *)
 		# Avoid "Invalid Email Address" during CreateForum::testEmailAddressNotAlreadyUsed
-		echo "127.0.1.1 $host.local" >> $rootfs/etc/hosts
+		echo "127.0.1.1 $host.local $host" >> $rootfs/etc/hosts
 		;;
 	esac
 	# Grant us SSH access - not in prepare to avoid modifying the site-wide cache
