@@ -173,6 +173,16 @@ EOF
     REMOVEDEPS=$DEPS
     backport_rpm_from_fedora moin
 
+    case $os_version in
+	7)
+	    # php-htmlpurifier-htmlpurifier Requires, available in EPEL6 but not EPEL7
+	    DEPS="php-pear"
+	    REMOVEDEPS=$DEPS
+	    backport_rpm_from_fedora php-channel-htmlpurifier
+	    ;;
+    esac
+
+
     DEPS="php-channel-htmlpurifier"
     REMOVEDEPS=""
     backport_rpm_from_fedora php-htmlpurifier-htmlpurifier
