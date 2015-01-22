@@ -39,9 +39,9 @@ stop_database () {
         sleep 1
     done
     if is_db_down ; then
-        echo "...OK"
+        echo "OK"
     else
-        echo "... FAIL: database still up?"
+        echo "FAIL: database still up?"
     fi
 }
 
@@ -128,7 +128,7 @@ fi
 if [ "$backup" = 1 ]; then
     set -e
     su - postgres -c "pg_dumpall" > /root/dump
-    su postgres -c 'psql -c CHECKPOINT'  # flush to disk
+    su - postgres -c 'psql -c CHECKPOINT'  # flush to disk
     stop_database
     pgdir=/var/lib/postgresql
     if [ -e /etc/redhat-release ]; then pgdir=/var/lib/pgsql; fi
