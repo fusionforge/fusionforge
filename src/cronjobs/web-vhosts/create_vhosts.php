@@ -21,26 +21,31 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require dirname(__FILE__).'/../common/include/env.inc.php';
+require dirname(__FILE__).'/../../common/include/env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/cron_utils.php';
 
 if (!forge_get_config('use_project_vhost')) {
 	cron_entry(30, _('forge not using vhost'));
 }
+$output = '';
 
 session_set_admin();
 
-$res = db_query_params('select vh.vhost_name, vh.docdir, vh.cgidir from prweb_vhost vh, groups g where g.status = $1 and vh.group_id = g.group_id order by vh.vhost_name',
+$res = db_query_params('SELECT vh.vhost_name, vh.docdir, vh.cgidir, g.unix_group_name
+FROM prweb_vhost vh, groups g
+WHERE g.status = $1 AND vh.group_id = g.group_id
+ORDER BY vh.vhost_name',
 			array ('A'));
 if (!$res) {
 	cron_entry(30, _('Unable to get list of projects with vhost: ').db_error());
 }
 
-$enableRestart = false;
 $httpdRestartedMsg = _('httpd server not restarted');
 
-$inTemplateVhostFile = forge_get_config('source_path').'/templates/httpd.vhosts.tmpl';
+$inTemplateVhostFile = forge_get_config('custom_path').'/httpd.vhosts.tmpl';
+if (!is_readable($inTemplateVhostFile))
+	$inTemplateVhostFile = forge_get_config('source_path').'/templates/httpd.vhosts.tmpl';
 $outVhostsFile = forge_get_config('config_path').'/httpd.conf.d/httpd.vhosts';
 $logPath = forge_get_config('log_path');
 $groupdirPrefix = forge_get_config('groupdir_prefix');
@@ -50,24 +55,15 @@ $count = 0;
 while ($arr = db_fetch_array($res)) {
 	$str = file_get_contents($inTemplateVhostFile);
 	$str = str_replace('{vhost_name}', $arr['vhost_name'], $str);
+	$str = str_replace('{unix_group_name}', $arr['unix_group_name'], $str);
 	$str = str_replace('{docdir}', $arr['docdir'], $str);
 	$str = str_replace('{cgidir}', $arr['cgidir'], $str);
-	$str = str_replace('{core/log_path}', $logPath, $str);
-	$str = str_replace('{core/groupdir_prefix}', $groupdirPrefix, $str);
+	$str = forge_expand_config_braces($str);
 	file_put_contents($outVhostsFile, $str, FILE_APPEND);
 	$count++;
 }
 
-if ($enableRestart) {
-	// debian specific
-	//$httpd_restart_cmd = '/usr/sbin/invoke-rc.d --quiet apache2 reload';
-	// redhat based
-	//$httpd_restart_cmd = 'service httpd restart';
-	if (isset($httpd_restart_cmd) && !empty($httpd_restart_cmd)) {
-		system($httpd_restart_cmd);
-		$httpdRestartedMsg = _('httpd server automatically restarted');
-	}
-}
+cron_reload_apache();
 
 $output .= $count._(' vhost created.').' '.$httpdRestartedMsg;
 cron_entry(30, $output);

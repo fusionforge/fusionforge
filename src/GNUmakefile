@@ -108,14 +108,6 @@ install-web: install-base-dirs
 
 install-web-vhosts: install-base-dirs
 	$(CP_R) cronjobs/web-vhosts $(DESTDIR)$(pkgdatadir)/cronjobs/
-	if [ ! -e $(DESTDIR)$(sysconfdir)/cron.d/fusionforge-web-vhosts ]; then \
-		sed 's,@bindir@,$(bindir),' etc/cron.d/fusionforge-web-vhosts \
-			> $(DESTDIR)$(sysconfdir)/cron.d/fusionforge-web-vhosts; \
-	fi
-	if [ ! -e $(DESTDIR)$(sysconfdir)/logrotate.d/fusionforge-web-vhosts ]; then \
-		sed 's,@log_path@,$(log_path),' etc/logrotate.d/fusionforge-web-vhosts \
-			> $(DESTDIR)$(sysconfdir)/logrotate.d/fusionforge-web-vhosts; \
-	fi
 #	TODO: only install 40-vhosts-extra.conf and httpd.vhosts with this module
 
 install-shell: install-base-dirs

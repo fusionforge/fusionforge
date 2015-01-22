@@ -285,6 +285,19 @@ function forge_reset_config_item ($var, $section, $default) {
 	$c->reset_value ($section, $var, $default) ;
 }
 
+/**
+ * Interpolate configuration variables between braces
+ * Typically used in httpd conf, e.g. {core/log_path}
+ */
+function forge_expand_config_braces($line) {
+	return preg_replace_callback(
+		',{([a-z_]*)/([a-z_]*)},',
+		function ($matches) {
+			return forge_get_config($matches[2], $matches[1]);
+		},
+		$line);
+}
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"

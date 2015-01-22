@@ -26,6 +26,7 @@
 require_once '../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'project/admin/project_admin_utils.php';
+require_once $gfcommon.'include/SysTasksQ.class.php';
 
 global $HTML;
 
@@ -61,6 +62,8 @@ if (getStringFromRequest('createvhost')) {
 		} else {
 			$feedback = _('Virtual Host scheduled for creation.');
 			$group->addHistory('Added vhost '.$vhost_name.' ','');
+			$systasksq = new SysTasksQ();
+			$systasksq->add(SYSTASK_CORE, 'WEB_VHOSTS', $group_id);
 		}
 
 	} else {
@@ -98,7 +101,8 @@ if (getStringFromRequest('deletevhost')) {
 	} else {
 		$feedback .= _('VHOST deleted');
 		$group->addHistory('Virtual Host '.$row_vh['vhost_name'].' Removed','');
-
+		$systasksq = new SysTasksQ();
+		$systasksq->add(SYSTASK_CORE, 'WEB_VHOSTS', $group_id);
 	}
 
 }
@@ -117,7 +121,7 @@ print '</p>';
 
 ?>
 
-<form name="new_vhost" action="<?php echo util_make_uri('/project/admin/?group_id='.$group->getID().'&createvhost=1'); ?>" method="post">
+<form name="new_vhost" action="<?php echo util_make_uri('/project/admin/vhost.php?group_id='.$group->getID().'&createvhost=1'); ?>" method="post">
 <table>
 <tr>
 	<td> <?php echo _('New Virtual Host <em>(e.g. vhost.org)</em>') ?> </td>
