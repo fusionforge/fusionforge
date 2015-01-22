@@ -50,6 +50,30 @@ if [ -e /etc/debian_version ]; then
 else
     yum install -y make tar
     backports_rpm
+    os_version=$(rpm -q --qf "%{VERSION}" $(rpm -q --whatprovides redhat-release))
+    case $os_version in
+	6)
+	    cat > /etc/yum.repos.d/dag-rpmforge.repo <<-EOF
+# Name: RPMforge RPM Repository for Red Hat Enterprise \$releasever - dag
+# URL: http://rpmforge.net/
+[dag-rpmforge]
+name = Red Hat Enterprise 6 - RPMforge.net - dag
+mirrorlist = http://apt.sw.be/redhat/el6/en/mirrors-rpmforge
+enabled = 1
+protect = 0
+gpgcheck = 0
+
+[dag-rpmforge-extra]
+name = Red Hat Enterprise 6 - RPMforge.net - extra
+mirrorlist = http://apt.sw.be/redhat/el6/en/mirrors-rpmforge
+enabled = 0
+protect = 0
+gpgcheck = 0
+EOF
+	    yum install -y unoconv
+	    rm -f /etc/yum.repos.d/dag-rpmforge.repo
+	    ;;
+    esac
     if rpm -q fusionforge >/dev/null ; then
 	yum upgrade -y
     else
