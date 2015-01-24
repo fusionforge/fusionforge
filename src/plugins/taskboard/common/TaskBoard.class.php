@@ -36,16 +36,21 @@ require_once $gfconfig.'plugins/taskboard/config.php' ;
  *       @return object  TaskBoard object
  */
 function &taskboard_get_object($taskboard_id,$data=false) {
-	$res = db_query_params ('SELECT * FROM plugin_taskboard WHERE taskboard_id=$1', array ($taskboard_id)) ;
-	if (db_numrows($res) <1 ) {
-		return false;
+	static $trackers = array();
+	
+	if( !array_key_exists($taskboard_id, $trackers ) ) {
+		$res = db_query_params ('SELECT * FROM plugin_taskboard WHERE taskboard_id=$1', array ($taskboard_id)) ;
+		if (db_numrows($res) <1 ) {
+			return false;
+		}
+		$data = db_fetch_array($res);
+	
+		$Group = group_get_object($data["group_id"]); 
+		$trackers[$taskboard_id] = new TaskBoard($Group,$data);
 	}
-	$data = db_fetch_array($res);
-
-	$Group = group_get_object($data["group_id"]);
-
-	$Taskboard = new TaskBoard($Group,$data);
-	return $Taskboard;
+	
+	
+	return $trackers[$taskboard_id];
 }
 
 /**

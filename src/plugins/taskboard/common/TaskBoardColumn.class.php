@@ -31,15 +31,20 @@ require_once $gfplugins.'taskboard/common/TaskBoardColumnSource.class.php';
  *       @return object  TaskBoardColumn object
  */
 function &taskboard_column_get_object($taskboard_column_id,$data=false) {
-	$res = db_query_params ('SELECT * FROM plugin_taskboard_columns WHERE taskboard_column_id=$1', array ($taskboard_column_id)) ;
-	if (db_numrows($res) <1 ) {
-		return false;
+	static $taskboard_columns = array();
+	
+	if( !array_key_exists($taskboard_column_id, $taskboard_columns ) ) {
+		$res = db_query_params ('SELECT * FROM plugin_taskboard_columns WHERE taskboard_column_id=$1', array ($taskboard_column_id)) ;
+		if (db_numrows($res) <1 ) {
+			return false;
+		}
+		$data = db_fetch_array($res);
+	
+		$Taskboard = &taskboard_get_object($data['taskboard_id']);
+		$taskboard_columns[$taskboard_column_id] = new TaskBoardColumn($Taskboard,$data);
 	}
-	$data = db_fetch_array($res);
-
-	$Taskboard = &taskboard_get_object($data['taskboard_id']);
-	$Column = new TaskBoardColumn($Taskboard,$data);
-	return $Column;
+	
+	return $taskboard_columns[$taskboard_column_id];
 }
 
 
