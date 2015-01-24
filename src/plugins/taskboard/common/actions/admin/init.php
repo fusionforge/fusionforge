@@ -26,5 +26,5 @@ if( !$taskboard->getID() ) {
 	$taskboard = taskboard_init( $group_id );
 }
 
-session_redirect( util_make_link( '/plugins/taskboard/admin/?group_id='.$group_id.'&action=trackers') );
+session_redirect( '/plugins/taskboard/admin/?group_id='.$group_id.'&action=trackers' );
 

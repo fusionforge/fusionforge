@@ -34,5 +34,5 @@ if ( $column->setOrder( $column->getOrder() + 1 ) ) {
 }
 
 $action = 'columns';
-include( $gfplugins.'taskboard/www/admin/columns.php' );
+include( $gfplugins.'taskboard/common/actions/admin/columns.php' );
 

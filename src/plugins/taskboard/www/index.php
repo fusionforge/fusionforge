@@ -34,6 +34,17 @@ if( file_exists( $gfconfig.'plugins/taskboard/config.php' ) ) {
 global $gfplugins;
 require_once $gfplugins.'taskboard/common/include/TaskBoardHtml.class.php';
 
+// Compatibility fix
+if (!function_exists( 'html_use_jqueryui' ) ) {
+	function html_use_jqueryui() {
+		html_use_jquery();
+		use_javascript('/plugins/taskboard/js/jquery-ui.js');
+	}
+}
+
+html_use_jqueryui();
+use_javascript('/plugins/taskboard/js/agile-board.js');
+use_stylesheet('/plugins/taskboard/css/agile-board.css');
 
 $user = session_get_user(); // get the session user
 
@@ -99,12 +110,6 @@ if (!$group_id) {
 
 <div id="messages" class="warning" <?php if( !$messages ) { ?> style="display: none;" <?php } ?>><?php echo $messages ?></div>
 <br/>
-
-<link rel="stylesheet" type="text/css" href="/plugins/taskboard/css/agile-board.css">
-<script type="text/javascript" src="/plugins/taskboard/js/agile-board.js?<?php echo time() ?>"></script>
-<?php if ( function_exists( 'html_use_jqueryui' ) ) { html_use_jqueryui(); } else { ?>
-<script type="text/javascript" src="<?php echo util_make_url('/plugins/taskboard/js/jquery-ui.js') ?>"></script>
-<?php } ?>
 
 <?php
 $techs = $group->getUsers();
