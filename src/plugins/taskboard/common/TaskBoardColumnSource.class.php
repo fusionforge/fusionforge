@@ -188,31 +188,16 @@ class TaskBoardColumnSource extends Error {
 	 *
 	 */
 	function save($target_resolution, $alert = '', $autoassign = 0) {
-
 		$source_column_id = $this->getSourceColumnID();
 
-		if( function_exists('db_construct_qpa') ) {
-			$qpa = db_construct_qpa();
-			$qpa = db_construct_qpa($qpa,'SELECT * FROM plugin_taskboard_columns_sources WHERE target_taskboard_column_id=$1', array ($this->getTargetColumnID()) );
-			if( $source_column_id ) {
-				$qpa = db_construct_qpa($qpa,  ' AND source_taskboard_column_id = $1', array( $source_column_id ) );
-			} else {
-				$qpa = db_construct_qpa($qpa,  ' AND source_taskboard_column_id is NULL');
-			}
-
-			$res = db_query_qpa($qpa);
+		$qpa = db_construct_qpa();
+		$qpa = db_construct_qpa($qpa, 'SELECT * FROM plugin_taskboard_columns_sources WHERE target_taskboard_column_id = $1', array($this->getTargetColumnID()) );
+		if($source_column_id) {
+			$qpa = db_construct_qpa($qpa, ' AND source_taskboard_column_id = $1', array($source_column_id));
 		} else {
-			if( $source_column_id  ) {
-				$wsql = ' AND source_taskboard_column_id = '. $source_column_id ;
-			} else {
-				$wsql = ' AND source_taskboard_column_id is NULL';
-			}
-
-			$res = db_query_params (
-				'SELECT * FROM plugin_taskboard_columns_sources WHERE target_taskboard_column_id=$1'.$wsql,
-				array ($this->getTargetColumnID())
-			) ;
+			$qpa = db_construct_qpa($qpa, ' AND source_taskboard_column_id is NULL');
 		}
+		$res = db_query_qpa($qpa);
 
 		if (!$res) {
 			$this->setError('TaskBoardColumnSource: cannot save drop rule');
@@ -223,8 +208,8 @@ class TaskBoardColumnSource extends Error {
 		if($row) {
 			// update rule
 			$res = db_query_params(
-				"UPDATE plugin_taskboard_columns_sources SET target_resolution=$1, alert=$2, autoassign=$3
-				WHERE taskboard_column_source_id=$4",
+				'UPDATE plugin_taskboard_columns_sources SET target_resolution=$1, alert=$2, autoassign=$3
+				WHERE taskboard_column_source_id = $4',
 				array(
 					$target_resolution,
 					$alert,
@@ -234,11 +219,10 @@ class TaskBoardColumnSource extends Error {
 			);
 		} else {
 			// insert rule
-
-			$res = db_query_params (
-				"INSERT INTO plugin_taskboard_columns_sources(target_taskboard_column_id, source_taskboard_column_id, target_resolution, alert, autoassign)
-				VALUES($1,$2,$3,$4,$5)",
-				 array (
+			$res = db_query_params(
+				'INSERT INTO plugin_taskboard_columns_sources(target_taskboard_column_id, source_taskboard_column_id, target_resolution, alert, autoassign)
+				VALUES($1, $2, $3, $4, $5)',
+				 array(
 					$this->getTargetColumnID(),
 				 	$source_column_id,
 					$target_resolution,
