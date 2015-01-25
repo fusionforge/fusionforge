@@ -1,6 +1,5 @@
 <?php
-
-/*
+/**
  * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
  *
  * This file is part of FusionForge.
@@ -32,12 +31,12 @@ $desc = getStringFromRequest('desc', '');
 $title = getStringFromRequest('title', '');
 
 $task = $taskboard->TrackersAdapter->getTask($task_id);
-if( $task ) {
-	if( $desc || $title ) {
+if($task) {
+	if ($desc || $title) {
 		db_begin();
 		$msg = $taskboard->TrackersAdapter->updateTask($task, NULL, NULL, $title, $desc);
-		if( $msg ) {
-			$ret['alert'] = $msg;	
+		if($msg) {
+			$ret['alert'] = $msg;
 			db_rollback();
 		} else {
 			db_commit();
@@ -48,4 +47,4 @@ if( $task ) {
 	$ret['action'] = 'reload';
 }
 
-echo json_encode( $ret );
+echo json_encode($ret);

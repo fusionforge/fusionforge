@@ -1,6 +1,5 @@
 <?php
-
-/*
+/**
  * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
  *
  * This file is part of FusionForge.
@@ -36,7 +35,7 @@ if( $confirmed ) {
 	}
 
 	$action = 'columns';
-	session_redirect( '/plugins/taskboard/admin/?action=columns&group_id='.$group_id );
+	session_redirect('/plugins/taskboard/admin/?action=columns&group_id='.$group_id);
 } else {
 	$taskboard->header(
 		array(
@@ -54,7 +53,7 @@ if( $confirmed ) {
 	}
 
 ?>
-	<form action="<?php echo util_make_url ('/plugins/taskboard/admin/?group_id='.$group_id.'&amp;action=delete_column') ?>" method="post">
+	<form action="<?php echo util_make_url('/plugins/taskboard/admin/?group_id='.$group_id.'&action=delete_column') ?>" method="post">
 	<input type="hidden" name="column_id" value="<?php echo $column_id ?>">
 
 	<h1><?php echo _('Column') ." '".$column->getTitle() ."'"; ?></h1>
@@ -69,4 +68,4 @@ if( $confirmed ) {
 	<input type="submit" name="post_delete" value="<?php echo _('Delete') ?>">
 	</p>
 
-<?php } ?>
+<?php }

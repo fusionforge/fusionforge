@@ -1,7 +1,6 @@
 <?php
 /**
- *
- * Copyright (C) 2015 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com> 
+ * Copyright (C) 2015 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
  *
  * This file is part of FusionForge.
  *
@@ -9,7 +8,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
- * 
+ *
  * FusionForge is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -19,15 +18,15 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
+
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfplugins.'taskboard/common/TaskBoard.class.php';
-
 
 class TaskBoardRelease extends Error {
 	/**
 	 * The Taskboard object.
 	 *
-	 * @var         object  $Taskboard.
+	 * @var	object	$Taskboard.
 	 */
 	var $Taskboard; //taskboard object
 
@@ -35,22 +34,22 @@ class TaskBoardRelease extends Error {
 	/**
 	  * Array of release data.
 	 *
-	 * @var         array   $data_array.
+	 * @var	array	$data_array.
 	 */
 	var $data_array;
-	
+
 	/**
-	 * release title (name of related extra field element)  
+	 * release title (name of related extra field element)
 	 *
-	 * @var         string   $title.
+	 * @var	string	$title.
 	 */
-	private $_title=NULL;
+	private $_title = NULL;
 
 
-	/*
+	/**
 	 * Constructor
 	 */
-	function TaskBoardRelease($Taskboard,$arr=false) {
+	function TaskBoardRelease($Taskboard, $arr = false) {
 		$this->Error();
 		if (!$Taskboard || !is_object($Taskboard)) {
 			$this->setError('No Valid Taskboard Object');
@@ -75,22 +74,22 @@ class TaskBoardRelease extends Error {
 			}
 		}
 	}
-	
+
 	/**
-	 *      create - create taskboard release
+	 * create - create taskboard release
 	 *
-	 *      @return boolean
+	 * @return	boolean
 	 */
-	function create( $element_id, $start_date, $end_date, $goals, $page_url ) {
+	function create($element_id, $start_date, $end_date, $goals, $page_url) {
 		$res = db_query_params (
 				'INSERT INTO plugin_taskboard_releases(taskboard_id, element_id, start_date, end_date, goals, page_url)
-				 VALUES($1,$2,$3,$4,$5,$6)',
-				array (
+				 VALUES($1, $2, $3, $4, $5, $6)',
+				array(
 					$this->Taskboard->getID(),
 					$element_id,
-					$start_date, 
+					$start_date,
 					$end_date,
-					$goals, 
+					$goals,
 					$page_url
 				)
 		) ;
@@ -98,27 +97,27 @@ class TaskBoardRelease extends Error {
 			return false;
 		}
 		db_free_result($res);
-	
+
 		return true;
 	}
 
 	/**
-	 *      update - update taskboard release
+	 * update - update taskboard release
 	 *
-	 *      @return boolean
+	 * @return	boolean
 	 */
-	function update( $element_id, $start_date, $end_date, $goals, $page_url  ) {
-		$res = db_query_params (
+	function update($element_id, $start_date, $end_date, $goals, $page_url) {
+		$res = db_query_params(
 			'UPDATE plugin_taskboard_releases SET element_id=$1, start_date=$2, end_date=$3, goals=$4, page_url=$5 WHERE taskboard_release_id=$6',
-			array (
+			array(
 				$element_id,
-				$start_date, 
+				$start_date,
 				$end_date,
-				$goals, 
+				$goals,
 				$page_url,
 				$this->getID()
 			)
-		) ;
+		);
 		if (!$res) {
 			return false;
 		}
@@ -128,18 +127,18 @@ class TaskBoardRelease extends Error {
 	}
 
 	function delete(){
-		$res = db_query_params (
+		$res = db_query_params(
 			'DELETE FROM plugin_taskboard_releases_snapshots WHERE taskboard_release_id=$1',
-			array ( $this->getID() )
+			array($this->getID())
 		) ;
 
 		if (!$res) {
 			return false;
 		}
 
-		$res = db_query_params (
+		$res = db_query_params(
 			'DELETE FROM plugin_taskboard_releases WHERE taskboard_release_id=$1',
-			array ( $this->getID() )
+			array($this->getID())
 		) ;
 		if (!$res) {
 			return false;
@@ -149,13 +148,13 @@ class TaskBoardRelease extends Error {
 	}
 
 	/**
-	 *      fetchData - re-fetch the data for this TaskBoardColumn from the database.
+	 * fetchData - re-fetch the data for this TaskBoardColumn from the database.
 	 *
-	 *      @param  int             The taskboard column ID.
-	 *      @return boolean success.
+	 * @param	int	The taskboard column ID.
+	 * @return	boolean	success.
 	 */
 	function fetchData($id) {
-		$res = db_query_params ('SELECT * FROM plugin_taskboard_releases WHERE taskboard_release_id=$1', array ($id)) ;
+		$res = db_query_params('SELECT * FROM plugin_taskboard_releases WHERE taskboard_release_id=$1', array ($id));
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError('TaskBoard: Invalid TaskBoardReleaseID');
 			return false;
@@ -166,82 +165,82 @@ class TaskBoardRelease extends Error {
 	}
 
 	/**
-	 *      getID - get this TaskBoardReleaseID.
+	 * getID - get this TaskBoardReleaseID.
 	 *
-	 *      @return int     The taskboard_release_id
+	 * @return	int	The taskboard_release_id
 	 */
 	function getID() {
 		return $this->data_array['taskboard_release_id'];
 	}
 
 	/**
-	 *      getTaskboardID - get related TaskBoard ID.
+	 * getTaskboardID - get related TaskBoard ID.
 	 *
-	 *      @return int     The taskboard_id
+	 * @return	int	The taskboard_id
 	 */
 	function getTaskBoardID() {
 		return $this->data_array['taskboard_id'];
 	}
-	
+
 	/**
-	 *      getElementID - get related element ID.
+	 * getElementID - get related element ID.
 	 *
-	 *      @return int     The element_id
+	 * @return	int	The element_id
 	 */
 	function getElementID() {
 		return $this->data_array['element_id'];
 	}
 
 	/**
-	 *      getTitle - get release title
+	 * getTitle - get release title
 	 *
-	 *      @return string
+	 * @return	string
 	 */
 	function getTitle() {
 		if( !$this->_title ) {
 			// retrieve element name
 			$releases = $this->Taskboard->getReleaseValues();
-			foreach( $releases as $release_name => $release_id ) {
-				if(  $release_id == $this->getElementID() ) {
+			foreach($releases as $release_name => $release_id) {
+				if($release_id == $this->getElementID()) {
 					$this->_title = $release_name;
 				}
 			}
 		}
-		
+
 		return $this->_title;
 	}
 
 	/**
-	 *      getStartDate - get release start date as unixtime
+	 * getStartDate - get release start date as unixtime
 	 *
-	 *      @return integer
+	 * @return	integer
 	 */
 	function getStartDate() {
 		return $this->data_array['start_date'];
 	}
-	
+
 	/**
-	 *      getEndDate - get release end date as unixtime
+	 * getEndDate - get release end date as unixtime
 	 *
-	 *      @return integer
+	 * @return	integer
 	 */
 	function getEndDate() {
 		return $this->data_array['end_date'];
 	}
-	
+
 	/**
-	 *      getGoals - get release goals
+	 * getGoals - get release goals
 	 *
-	 *      @return string
+	 * @return	string
 	 */
 	function getGoals() {
 		return $this->data_array['goals'];
 	}
-	
+
 	/**
-	 *      getPageUrl - get release page URL
+	 * getPageUrl - get release page URL
 	 *
-	 *      @return string
+	 * @return	string
 	 */
 	function getPageUrl() {
 		return $this->data_array['page_url'];
@@ -260,4 +259,3 @@ class TaskBoardRelease extends Error {
 		return true;
 	}
 }
-

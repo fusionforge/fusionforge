@@ -1,6 +1,5 @@
 <?php
-
-/*
+/**
  * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
  *
  * This file is part of FusionForge.
@@ -28,7 +27,7 @@ $ret = array(
 $ret['message'] = '';
 
 $tracker_id = getIntFromRequest('tracker_id');
-$user_story_id = getIntFromRequest('user_story_id',0);
+$user_story_id = getIntFromRequest('user_story_id', 0);
 $desc = getStringFromRequest('desc', '');
 $title = getStringFromRequest('title', '');
 $release = getStringFromRequest('release', NULL);
@@ -37,8 +36,8 @@ $assigned_to = getStringFromRequest('assigned_to', NULL);
 if( $tracker_id && $desc && $title  ) {
 	db_begin();
 	$msg = $taskboard->TrackersAdapter->createTask($tracker_id, $title, $desc, $user_story_id, $release, $assigned_to);
-	if( $msg ) {
-		$ret['alert'] = $msg;	
+	if($msg) {
+		$ret['alert'] = $msg;
 		db_rollback();
 	} else {
 		db_commit();
@@ -47,4 +46,4 @@ if( $tracker_id && $desc && $title  ) {
 	$ret['alert'] = _('All fields are mandatory.');
 }
 
-echo json_encode( $ret );
+echo json_encode($ret);

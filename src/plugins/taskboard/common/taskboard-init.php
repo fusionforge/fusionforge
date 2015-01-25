@@ -1,6 +1,5 @@
 <?php
-
-/*
+/**
  * Copyright (C) 2013, Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
  *
  * This file is part of FusionForge.
@@ -24,7 +23,6 @@
 global $gfplugins;
 require_once $gfplugins.'taskboard/common/TaskBoardPlugin.class.php';
 
-$taskboardPluginObject = new TaskBoardPlugin ;
+$taskboardPluginObject = new TaskBoardPlugin;
 
-register_plugin ($taskboardPluginObject) ;
-
+register_plugin($taskboardPluginObject);

@@ -1,6 +1,5 @@
 <?php
-
-/*
+/**
  * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
  *
  * This file is part of FusionForge.
@@ -31,27 +30,27 @@ $task_id = getStringFromRequest('task_id');
 $target_phase_id = getStringFromRequest('target_phase_id');
 
 $task = $taskboard->TrackersAdapter->getTask($task_id);
-if( $task ) {
+if ($task ) {
 
-	$ret['task'] = $taskboard->getMappedTask( $task );
+	$ret['task'] = $taskboard->getMappedTask($task);
 	$source_phase_id = $ret['task']['phase_id'];
 
-	$drop_rule = taskboard_column_source_get_object($source_phase_id,$target_phase_id);
-	if( !$drop_rule->getID() ) {
-		$drop_rule = taskboard_default_column_source_get_object($target_phase_id); 
+	$drop_rule = taskboard_column_source_get_object($source_phase_id, $target_phase_id);
+	if ( !$drop_rule->getID() ) {
+		$drop_rule = taskboard_default_column_source_get_object($target_phase_id);
 	}
 
-	if( !$drop_rule->getID() ) {
+	if (!$drop_rule->getID()) {
 		$ret['alert'] = _('Drop rule is not defined for this target column');
 	} else {
 		db_begin();
 		$cannot_drop_msg = $drop_rule->drop($task);
-		if( !$cannot_drop_msg ) {
+		if (!$cannot_drop_msg) {
 			db_commit();
-			if( $drop_rule->getAlertText() ) {
+			if ($drop_rule->getAlertText()) {
 				$ret['alert'] = $drop_rule->getAlertText();
 			}
-			$ret['task'] = $taskboard->getMappedTask( $task );
+			$ret['task'] = $taskboard->getMappedTask($task);
 		} else {
 			db_rollback();
 			$ret['alert'] =  $cannot_drop_msg;

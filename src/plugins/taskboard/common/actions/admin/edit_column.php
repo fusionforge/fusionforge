@@ -1,6 +1,5 @@
 <?php
-
-/*
+/**
  * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
  *
  * This file is part of FusionForge.
@@ -35,12 +34,12 @@ if (getStringFromRequest('post_changes')) {
 	$resolution_by_default =  getStringFromRequest('resolution_by_default','');
 	$alert = getStringFromRequest('alert','');
 	$autoassign = getIntFromRequest('autoassign',0);
-	
+
 	if( $resolution_by_default && $column_title) {
 		db_begin();
 		if( $column->update($column_title, $title_bg_color, $color_bg_color, $column_max_tasks) ) {
 			$column->setResolutions($resolutions);
-			
+
 			if( $column->setDropRule(NULL, $resolution_by_default, $alert, $autoassign) ) {
 				db_commit();
 				$feedback .= _('Succefully Updated');
@@ -56,8 +55,6 @@ if (getStringFromRequest('post_changes')) {
 		$warning_msg .= _('Please, fill all required fields');
 	}
 }
-
-
 
 $taskboard->header(
 	array(

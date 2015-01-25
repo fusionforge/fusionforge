@@ -1,6 +1,5 @@
 <?php
-
-/*
+/**
  * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
  *
  * This file is part of FusionForge.
@@ -377,4 +376,3 @@ jQuery( document ).ready(function( $ ) {
 }
 
 site_project_footer(array());
-

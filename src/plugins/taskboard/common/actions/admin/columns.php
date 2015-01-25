@@ -1,6 +1,5 @@
 <?php
-
-/*
+/**
  * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
  *
  * This file is part of FusionForge.
@@ -27,7 +26,6 @@ $color_bg_color = getStringFromRequest('column_bg_color','');
 $column_max_tasks = getStringFromRequest('column_max_tasks','');
 $resolution_by_default = getStringFromRequest('resolution_by_default','');
 
-
 if (getStringFromRequest('post_changes')) {
 	db_begin();
 	$column_id = $taskboard->addColumn($column_title, $title_bg_color, $color_bg_color, $column_max_tasks);
@@ -49,8 +47,6 @@ if (getStringFromRequest('post_changes')) {
 		exit_error( _('Cannot create column') );
 	}
 }
-
-
 
 $taskboard->header(
 	array(
@@ -81,7 +77,7 @@ echo $HTML->listTableTop($tablearr, false, 'sortable_table_tracker', 'sortable_t
 foreach( $columns as $column ) {
 	$downLink = '';
 	if( $column->getOrder() < count( $columns ) ) {
-		$downLink = util_make_link ('/plugins/taskboard/admin/?group_id='.$group_id.'&amp;action=down_column&amp;column_id='.$column->getID(), "<img alt='" ._('Down'). "' src='/images/pointer_down.png'>" );
+		$downLink = util_make_link ('/plugins/taskboard/admin/?group_id='.$group_id.'&action=down_column&column_id='.$column->getID(), "<img alt='" ._('Down'). "' src='/images/pointer_down.png'>" );
 	}
 
 	echo '
@@ -93,7 +89,7 @@ foreach( $columns as $column ) {
 			'</td>
 			<td>
 			<div style="float: left; border: 1px solid grey; height: 30px; width: 20px; background-color: '.$column->getColumnBackgroundColor().'; margin-right: 10px;"><div style="width: 100%; height: 10px; background-color: '.$column->getTitleBackgroundColor().';"></div></div>'.
-				util_make_link ('/plugins/taskboard/admin/?group_id='.$group_id.'&amp;action=edit_column&amp;column_id='.$column->getID(),
+				util_make_link ('/plugins/taskboard/admin/?group_id='.$group_id.'&action=edit_column&column_id='.$column->getID(),
 				$column->getTitle() ).'</a></td>
 			<td>'.$column->getMaxTasks().'</td>
 			<td>'.implode(', ', array_values( $column->getResolutions() )).'</td>
@@ -105,7 +101,7 @@ foreach( $columns as $column ) {
 
 ?>
 
-<form action="<?php echo util_make_url ('/plugins/taskboard/admin/?group_id='.$group_id.'&amp;action=columns' ) ?>" method="post">
+<form action="<?php echo util_make_url('/plugins/taskboard/admin/?group_id='.$group_id.'&action=columns' ) ?>" method="post">
 <input type="hidden" name="post_changes" value="y">
 
 <h2>Add new column:</h2>

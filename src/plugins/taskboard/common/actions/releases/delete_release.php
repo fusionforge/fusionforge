@@ -1,6 +1,5 @@
 <?php
-
-/*
+/**
  * Copyright (C) 2015 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
  *
  * This file is part of FusionForge.
@@ -30,12 +29,12 @@ if( $confirmed ) {
 	db_begin();
 	if( $release->delete() ) {
 		db_commit();
-		$feedback.=_('Successfully Removed');
+		$feedback .= _('Successfully Removed');
 	} else {
 		db_rollback();
 	}
 
-	session_redirect( '/plugins/taskboard/releases/?group_id='.$group_id );
+	session_redirect('/plugins/taskboard/releases/?group_id='.$group_id);
 } else {
 	$taskboard->header(
 		array(

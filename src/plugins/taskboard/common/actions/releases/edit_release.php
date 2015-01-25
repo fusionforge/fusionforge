@@ -1,6 +1,5 @@
 <?php
-
-/*
+/**
  * Copyright (C) 2015 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
  *
  * This file is part of FusionForge.
@@ -35,11 +34,11 @@ if (getStringFromRequest('post_changes')) {
 	$end_date = getStringFromRequest('end_date','');
 	$goals = getStringFromRequest('goals','');
 	$page_url = getStringFromRequest('page_url','');
-	
-	
+
+
 	$start_date_unixtime = strtotime($start_date);
 	$end_date_unixtime = strtotime($end_date);
-	
+
 	if( $end_date_unixtime < $start_date_unixtime ) {
 		$start_date_unixtime = NULL;
 		$end_date_unixtime = NULL;
@@ -53,10 +52,10 @@ if (getStringFromRequest('post_changes')) {
 	$page_url = $release->getPageUrl();
 }
 
-if( $element_id && $start_date_unixtime && $end_date_unixtime ) {
+if ($element_id && $start_date_unixtime && $end_date_unixtime) {
 	db_begin();
 
-	if( $release->update($element_id, $start_date_unixtime, $end_date_unixtime, $goals, $page_url) ) {
+	if ($release->update($element_id, $start_date_unixtime, $end_date_unixtime, $goals, $page_url)) {
 		db_commit();
 		$feedback .= _('Succefully Updated');
 		session_redirect( '/plugins/taskboard/releases/?group_id='.$group_id );
@@ -74,29 +73,29 @@ if( $element_id && $start_date_unixtime && $end_date_unixtime ) {
 			'group'=>$group_id
 		)
 	);
-	
+
 	echo '<link rel="stylesheet" type="text/css" href="/plugins/taskboard/css/agile-board.css">';
 	echo "\n";
-	if ( function_exists( 'html_use_jqueryui' ) ) { 
-		html_use_jqueryui(); 
+	if ( function_exists( 'html_use_jqueryui' ) ) {
+		html_use_jqueryui();
 	} else {
 		echo '<script type="text/javascript" src="'.util_make_url('/plugins/taskboard/js/jquery-ui.js').'"></script>';
 	}
 	echo "\n";
-	
+
 	if( $taskboard->isError() ) {
 		echo '<div id="messages" class="error">'.$taskboard->getErrorMessage().'</div>';
 	} else {
 		echo '<div id="messages" style="display: none;"></div>';
 	}
 	echo "\n";
-	
+
 	// prepare list of unused releases
 	$used_release_elements = array();
 	$taskboard_releases = $taskboard->getReleases();
 	foreach($taskboard_releases as $release ) {
 		$used_release_elements[] = $release->getElementID();
-	} 
+	}
 
 	$release_values = $taskboard->getReleaseValues();
 
@@ -139,7 +138,6 @@ jQuery( document ).ready(function( $ ) {
 	$( "input[name='start_date'], input[name='end_date']" ).datepicker( {  "dateFormat" : "yy-mm-dd" });
 });
 </script>
-	
-<?php 
-} 
-?>
+<?php
+}
+

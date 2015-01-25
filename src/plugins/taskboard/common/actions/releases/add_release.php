@@ -1,6 +1,5 @@
 <?php
-
-/*
+/**
  * Copyright (C) 2015 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
  *
  * This file is part of FusionForge.
@@ -26,26 +25,26 @@ $start_date_unixtime = NULL;
 $end_date_unixtime = NULL;
 $error_msg = '';
 $element_id = getIntFromRequest('_release', NULL);
-$start_date = getStringFromRequest('start_date','');
-$end_date = getStringFromRequest('end_date','');
-$goals = getStringFromRequest('goals','');
-$page_url = getStringFromRequest('page_url','');
+$start_date = getStringFromRequest('start_date', '');
+$end_date = getStringFromRequest('end_date', '');
+$goals = getStringFromRequest('goals', '');
+$page_url = getStringFromRequest('page_url', '');
 if (getStringFromRequest('post_changes')) {
 	$start_date_unixtime = strtotime($start_date);
 	$end_date_unixtime = strtotime($end_date);
-	
-	if( $end_date_unixtime < $start_date_unixtime ) {
+
+	if($end_date_unixtime < $start_date_unixtime) {
 		$start_date_unixtime = NULL;
 		$end_date_unixtime = NULL;
 		$error_msg = _('End date should be later then the start date');
 	}
 }
 
-if( $element_id && $start_date_unixtime && $end_date_unixtime ) {
+if ($element_id && $start_date_unixtime && $end_date_unixtime) {
 	db_begin();
 
-	$release = new TaskBoardRelease( 
-		$taskboard, 
+	$release = new TaskBoardRelease(
+		$taskboard,
 		array(
 			'taskboard_id' => $taskboard->getID(),
 			'element_id' => $element_id,
@@ -56,13 +55,13 @@ if( $element_id && $start_date_unixtime && $end_date_unixtime ) {
 		)
 	);
 
-	if( $release->create($element_id, $start_date_unixtime, $end_date_unixtime, $goals, $page_url) ) {
+	if ($release->create($element_id, $start_date_unixtime, $end_date_unixtime, $goals, $page_url) ) {
 		db_commit();
 		$feedback .= _('Succefully Created');
-		session_redirect( '/plugins/taskboard/releases/?group_id='.$group_id );
+		session_redirect('/plugins/taskboard/releases/?group_id='.$group_id);
 	} else {
 		db_rollback();
-		exit_error( $release->getErrorMessage() );
+		exit_error($release->getErrorMessage());
 	}
 } else {
 
@@ -74,29 +73,29 @@ if( $element_id && $start_date_unixtime && $end_date_unixtime ) {
 			'group'=>$group_id
 		)
 	);
-	
+
 	echo '<link rel="stylesheet" type="text/css" href="/plugins/taskboard/css/agile-board.css">';
 	echo "\n";
-	if ( function_exists( 'html_use_jqueryui' ) ) { 
-		html_use_jqueryui(); 
+	if ( function_exists( 'html_use_jqueryui' ) ) {
+		html_use_jqueryui();
 	} else {
 		echo '<script type="text/javascript" src="'.util_make_url('/plugins/taskboard/js/jquery-ui.js').'"></script>';
 	}
 	echo "\n";
-	
+
 	if( $taskboard->isError() ) {
 		echo '<div id="messages" class="error">'.$taskboard->getErrorMessage().'</div>';
 	} else {
 		echo '<div id="messages" style="display: none;"></div>';
 	}
 	echo "\n";
-	
+
 	// prepare list of unused releases
 	$used_release_elements = array();
 	$taskboard_releases = $taskboard->getReleases();
 	foreach($taskboard_releases as $release ) {
 		$used_release_elements[] = $release->getElementID();
-	} 
+	}
 
 	$release_values = $taskboard->getReleaseValues();
 
@@ -113,7 +112,7 @@ if( $element_id && $start_date_unixtime && $end_date_unixtime ) {
 	$release_box=html_build_select_box_from_arrays ($release_id_arr,$release_name_arr,'_release',$element_id,false);
 ?>
 
-<form action="<?php echo util_make_url( '/plugins/taskboard/releases/?group_id='.$group_id.'&amp;action=add_release') ?>" method="post">
+<form action="<?php echo util_make_url('/plugins/taskboard/releases/?group_id='.$group_id.'&amp;action=add_release') ?>" method="post">
 <input type="hidden" name="post_changes" value="y">
 
 <h2><?php echo _('Add release')?>:</h2>
@@ -138,7 +137,7 @@ jQuery( document ).ready(function( $ ) {
 	$( "input[name='start_date'], input[name='end_date']" ).datepicker( {  "dateFormat" : "yy-mm-dd" });
 });
 </script>
-	
-<?php 
-} 
-?>
+
+<?php
+}
+

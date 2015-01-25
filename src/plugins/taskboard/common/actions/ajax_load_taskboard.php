@@ -1,6 +1,5 @@
 <?php
-
-/*
+/**
  * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
  *
  * This file is part of FusionForge.
@@ -28,32 +27,32 @@ $ret['message'] = '';
 $release = getStringFromRequest('release', NULL);
 $assigned_to = getIntFromRequest('assigned_to', NULL);
 
-if( !$assigned_to ) {
+if (!$assigned_to) {
 	$assigned_to = NULL;
 }
 
 $user_stories = $taskboard->getUserStories($release, $assigned_to);
 $user_stories_tracker = $taskboard->getUserStoriesTrackerID();
 $phases = array();
-if( $user_stories_tracker ) {
+if ($user_stories_tracker) {
 	$phases[] = array(
 		'id' => 'user-stories',
 		'title' => _('User stories')
 	);
 }
 
-foreach( $columns as $column ) {
+foreach($columns as $column) {
 	$phases[] = array(
 		'id' => $column->getID(),
 		'dom_id' => $column->getDomID(),
 		'title' => $column->getTitle(),
 		'titlebackground' => $column->getTitleBackgroundColor(),
 		'background' => $column->getColumnBackgroundColor(),
-		'resolutions' =>  array_values( $column->getResolutions() )
+		'resolutions' =>  array_values($column->getResolutions())
 	);
 }
 
 $ret['user_stories'] = $user_stories;
 $ret['phases'] = $phases;
 
-echo json_encode( $ret );
+echo json_encode($ret);

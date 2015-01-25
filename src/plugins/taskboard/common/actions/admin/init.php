@@ -1,6 +1,5 @@
 <?php
-
-/*
+/**
  * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
  *
  * This file is part of FusionForge.
@@ -22,9 +21,8 @@
 
 session_require_perm ('tracker_admin', $group_id) ;
 
-if( !$taskboard->getID() ) {
-	$taskboard = taskboard_init( $group_id );
+if(!$taskboard->getID()) {
+	$taskboard = taskboard_init($group_id);
 }
 
-session_redirect( '/plugins/taskboard/admin/?group_id='.$group_id.'&action=trackers' );
-
+session_redirect('/plugins/taskboard/admin/?group_id='.$group_id.'&action=trackers');

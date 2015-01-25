@@ -1,6 +1,5 @@
 <?php
-
-/*
+/**
  * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
  *
  * This file is part of FusionForge.
@@ -20,11 +19,9 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-global $group_id, $HTML;
-
 $atf = $taskboard->TrackersAdapter->getArtifactTypeFactory();
 if (!$atf || !is_object($atf) || $atf->isError()) {
-	echo  json_encode( array( 'message' => _('Could Not Get ArtifactTypeFactory') ) );
+	echo  json_encode(array( 'message' => _('Could Not Get ArtifactTypeFactory')));
 	exit();
 }
 
@@ -34,7 +31,7 @@ for ($j = 0; $j < count($at_arr); $j++) {
 	if (!is_object($at_arr[$j])) {
 		//just skip it
 	} elseif ($at_arr[$j]->isError()) {
-		echo  json_encode( array( 'message' => $at_arr[$j]->getErrorMessage() ) );
+		echo  json_encode(array( 'message' => $at_arr[$j]->getErrorMessage()));
 		exit();
 	} else {
 		// get only fields having 'select' type
@@ -48,11 +45,11 @@ for ($j = 0; $j < count($at_arr); $j++) {
 					'name' => $at_arr[$j]->getName(),
 					'desc' => $at_arr[$j]->getDescription(),
 					'used' => '',
-					'bgcolor' => '' 
+					'bgcolor' => ''
 				);
 			}
 		}
 	}
 }
 
-echo json_encode( $ret );
+echo json_encode($ret);

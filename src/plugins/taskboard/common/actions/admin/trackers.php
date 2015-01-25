@@ -1,6 +1,5 @@
 <?php
-
-/*
+/**
  * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
  *
  * This file is part of FusionForge.
@@ -59,7 +58,7 @@ $tracker = array();
 for ($j = 0; $j < count($at_arr); $j++) {
 	if (is_object($at_arr[$j])) {
 		if( $at_arr[$j]->getID() )
-	
+
 		$fields = $at_arr[$j]->getExtraFields();
 		foreach( $fields as $field) {
 			if( $field['alias'] == 'resolution' ) {
@@ -134,7 +133,7 @@ echo $HTML->boxTop(_("Tasks trackers"));
 if(  count($at_arr) > 0 ) {
 	$tablearr = array(_('Tracker'),_('Description'),_('Use'),_('Card background color'));
 
-	
+
 	echo $HTML->listTableTop($tablearr, false, 'sortable_table_tracker', 'sortable_table_tracker');
 	foreach( $trackers as $tracker ) {
 		$tracker_id = $tracker->getID();
@@ -148,9 +147,9 @@ if(  count($at_arr) > 0 ) {
 				</td>
 				<td><input type="checkbox" name="use[]" value="'.$tracker_id.'" class="use_tracker" '.
 					(in_array($tracker_id, $trackers_selected) ? 'checked' : '' ).'></td>
-				<td>'. $taskboard->trackersColorChooser( 
+				<td>'. $taskboard->trackersColorChooser(
 					'bg['.$tracker_id.']',
-					( array_key_exists($tracker_id, $trackers_bgcolor) ? $trackers_bgcolor[$tracker_id]  : NULL  ) 
+					( array_key_exists($tracker_id, $trackers_bgcolor) ? $trackers_bgcolor[$tracker_id]  : NULL  )
 				) .'</td>
 			</tr>';
 	}
@@ -168,7 +167,7 @@ if(  count($at_arr) > 0 ) {
 	<td width="50%">
 
 <?php echo $HTML->boxTop(_("User story tracker")); ?>
-	
+
 <table>
 	<tr><td><strong><?php echo _('User stories tracker') ?></strong></td><td><select name="user_stories_tracker"><option value=""><?php echo _('Not defined') ?></option></select></td></tr>
 	<tr><td><strong><?php echo _('User stories reference field') ?></strong>&nbsp;<span id='usrefreq' <?php if( !$user_stories_tracker) { ?> style='display: none;' <?php } ?> ><?php echo utils_requiredField(); ?></span></td><td><select name="user_stories_reference_field"><option value=""><?php echo _('Not defined') ?></option></select></td></tr>
@@ -209,8 +208,8 @@ if(  count($at_arr) > 0 ) {
 
 <script>
 var all_trackers = new Array();
-<?php 
-foreach( $at_arr as $tracker ) { 
+<?php
+foreach( $at_arr as $tracker ) {
 	echo  'all_trackers.push( { id: "'.$tracker->getID().'", name: "'.$tracker->getName().'", desc: "'.$tracker->getDescription().'" } );'."\n";
 } ?>
 
@@ -268,7 +267,7 @@ jQuery(function($){
 						str +='<option value="'+ key +'"'+ ( key == selected ? 'selected' : '' ) +'>'+ value +'</option>';
 					});
 				}
-	
+
 				$('select[name=user_stories_sort_field]').empty().html(str);
 			}
 		});
@@ -288,7 +287,7 @@ jQuery(function($){
 			// load field user story tracker
 			release_trackers = [ $('select[name=user_stories_tracker]').val() ];
 		}
-		
+
 		$.ajax({
 			type: 'POST',
 			url: '<?php echo util_make_url('/plugins/taskboard/admin/ajax.php') ;?>',
@@ -316,7 +315,7 @@ jQuery(function($){
 						str +='<option value="'+ key +'"'+ ( key == selected ? 'selected' : '' ) +'>'+ value +'</option>';
 					});
 				}
-	
+
 				$('select[name=release_field]').empty().html(str);
 			}
 		});
@@ -332,7 +331,7 @@ jQuery(function($){
 
 		if( trackers.length == 0 ) {
 			showMessage("<?php echo _('Choose at least one tracker for using with taskboard.') ?>", "warning");
-		} 
+		}
 
 		$.ajax({
 			type: 'POST',
@@ -419,7 +418,7 @@ jQuery(function($){
 	$('select[name=user_stories_tracker]').change( function () {
 		cleanMessages();
 		if( $(this).val() ) {
-			$('#usrefreq').show();			
+			$('#usrefreq').show();
 			$('select[name=user_stories_reference_field]').empty().html(user_story_ref_field);
 			$('#release_tracker2').prop("disabled", false);
 			loadUserStorySortFields();

@@ -1,7 +1,6 @@
 <?php
 /**
- *
- * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com> 
+ * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
  *
  * This file is part of FusionForge.
  *
@@ -9,7 +8,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
- * 
+ *
  * FusionForge is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -20,38 +19,35 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-
 global $gfplugins;
 require_once $gfplugins.'taskboard/common/TaskBoard.class.php';
-
-
 
 class TaskBoardHtml extends TaskBoard {
 
 	// the header that displays for the user portion of the plugin
-	function header($params) {                                                                                                     
-		global $DOCUMENT_ROOT,$HTML,$group_id;
+	function header($params) {
+		global $HTML, $group_id;
 
 		use_javascript('/js/sortable.js');
-		html_use_jquery();		
+		html_use_jquery();
 
-		$params['toptab']='taskboard';
-		$params['group']=$group_id;
+		$params['toptab'] = 'taskboard';
+		$params['group'] = $group_id;
 
-		$labels[] = _("View Taskboard");
-		$links[]  = '/plugins/taskboard/index.php?group_id='.$group_id;
-		
-		if( $this->getReleaseField() ) {
-			$labels[] = _("Releases");
-			$links[]  = '/plugins/taskboard/releases/index.php?group_id='.$group_id;
+		$labels[] = _('View Taskboard');
+		$links[]  = '/plugins/taskboard/?group_id='.$group_id;
+
+		if( $this->getReleaseField()) {
+			$labels[] = _('Releases');
+			$links[]  = '/plugins/taskboard/releases/?group_id='.$group_id;
 		}
-		
+
 		if (session_loggedin()) {
 			if ( forge_check_perm('tracker_admin', $this->Group->getID() )) {
 				$release_id = getIntFromRequest('release_id','');
 				if( $release_id ) {
 					$labels[] = _('Delete Release');
-					$links[]  = '/plugins/taskboard/releases/index.php?group_id='.$group_id.'&action=delete_release&release_id='.$release_id;
+					$links[]  = '/plugins/taskboard/releases/?group_id='.$group_id.'&action=delete_release&release_id='.$release_id;
 				}
 			}
 		}
@@ -59,22 +55,22 @@ class TaskBoardHtml extends TaskBoard {
 		if (session_loggedin()) {
 			if ( forge_check_perm('tracker_admin', $this->Group->getID() )) {
 				$labels[] = _('Administration');
-				$links[]  = '/plugins/taskboard/admin/index.php?group_id='.$group_id;
+				$links[]  = '/plugins/taskboard/admin/?group_id='.$group_id;
 
 				$action = getStringFromRequest('action');
-				if($action=='edit_column') {
+				if($action == 'edit_column') {
 					$labels[] = _('Configure Columns');
-					$links[]  = '/plugins/taskboard/admin/index.php?group_id='.$group_id.'&action=columns';
+					$links[]  = '/plugins/taskboard/admin/?group_id='.$group_id.'&action=columns';
 
-					$column_id = getIntFromRequest('column_id','');
+					$column_id = getIntFromRequest('column_id', '');
 					if( $column_id ) {
 						$labels[] = _('Delete Column');
-						$links[]  = '/plugins/taskboard/admin/index.php?group_id='.$group_id.'&action=delete_column&column_id='.$column_id;
+						$links[]  = '/plugins/taskboard/admin/?group_id='.$group_id.'&action=delete_column&column_id='.$column_id;
 					}
 				}
 			}
-		} 
-		$params['submenu'] = $HTML->subMenu($labels,$links);
+		}
+		$params['submenu'] = $HTML->subMenu($labels, $links);
 		site_project_header($params);
 	}
 	
@@ -87,9 +83,9 @@ class TaskBoardHtml extends TaskBoard {
 		}
 	}
 
-	function colorBgChooser( $name, $color='Silver' ) {
-		$l_aColors = array( 'none', 'Khaki', 'Gold', 'LawnGreen', 'PaleGreen', 'Salmon', 'PeachPuff', 'LightBlue', 'Silver' );
-		return $this->_colorChooser( $name, $l_aColors, 'Silver', $color );
+	function colorBgChooser($name, $color='Silver') {
+		$l_aColors = array('none', 'Khaki', 'Gold', 'LawnGreen', 'PaleGreen', 'Salmon', 'PeachPuff', 'LightBlue', 'Silver');
+		return $this->_colorChooser($name, $l_aColors, 'Silver', $color);
 	}
 
 	private function _colorChooser( $name, $colors, $default_color, $selected_color=NULL ) {
@@ -109,5 +105,5 @@ class TaskBoardHtml extends TaskBoard {
 		return $ret;
 	}
 
-	
+
 }

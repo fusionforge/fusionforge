@@ -1,6 +1,5 @@
 <?php
-
-/*
+/**
  * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
  *
  * This file is part of FusionForge.
@@ -37,4 +36,4 @@ $ret['common_selects'] = $common_fields[1];
 $ret['common_texts'] = $common_fields[4];
 $ret['common_refs'] = array_merge( $common_fields[4], $common_fields[9] );
 
-echo json_encode( $ret );
+echo json_encode($ret);

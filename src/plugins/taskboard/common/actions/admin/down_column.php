@@ -1,6 +1,5 @@
 <?php
-
-/*
+/**
  * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
  *
  * This file is part of FusionForge.
@@ -34,5 +33,5 @@ if ( $column->setOrder( $column->getOrder() + 1 ) ) {
 }
 
 $action = 'columns';
-include( $gfplugins.'taskboard/common/actions/admin/columns.php' );
+include( $gfplugins.'taskboard/common/actions/admin/columns.php');
 

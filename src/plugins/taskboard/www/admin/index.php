@@ -1,6 +1,5 @@
 <?php
-
-/*
+/**
  * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
  *
  * This file is part of FusionForge.
@@ -20,7 +19,6 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-
 require_once "env.inc.php";
 require_once $gfcommon.'include/pre.php';
 
@@ -31,11 +29,11 @@ require_once $gfplugins.'taskboard/common/include/TaskBoardHtml.class.php';
 $user = session_get_user(); // get the session user
 
 if (!$user || !is_object($user) ) {
-	exit_error(_('Invalid User'),'home');
+	exit_error(_('Invalid User'), 'home');
 } else if ( $user->isError() ) {
-	exit_error($user->getErrorMessage(),'home');
+	exit_error($user->getErrorMessage(), 'home');
 } else if ( !$user->isActive()) {
-	exit_error(_('Invalid User : Not active'),'home');
+	exit_error(_('Invalid User')._(': ')._('Not active'), 'home');
 }
 
 
@@ -43,7 +41,7 @@ $group_id = getIntFromRequest('group_id');
 $pluginname = 'taskboard';
 
 if (!$group_id) {
-	exit_error(_('Cannot Process your request : No ID specified'),'home');
+	exit_error(_('Cannot Process your request : No ID specified'), 'home');
 } else {
 	$group = group_get_object($group_id);
 	if ( !$group) {
@@ -57,7 +55,7 @@ if (!$group_id) {
 	session_require_perm ('tracker_admin', $group_id) ;
 	$taskboard = new TaskBoardHtml( $group ) ;
 
-	$allowedActions = array('trackers','columns','edit_column','down_column','delete_column','init');
+	$allowedActions = array('trackers', 'columns', 'edit_column', 'down_column', 'delete_column', 'init');
 	$action = getStringFromRequest('action');
 
 	if( in_array($action, $allowedActions) ) {
@@ -68,5 +66,3 @@ if (!$group_id) {
 }
 
 site_project_footer(array());
-
-?>
