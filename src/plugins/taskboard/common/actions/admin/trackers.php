@@ -47,11 +47,11 @@ $trackers_selected = array();
 $trackers_bgcolor  = array();
 $release_field  = '';
 $release_field_tracker  = 1;
-$estimated_cost_field = $plugins_taskboard_estimated_cost_field_init;
-$remaining_cost_field = $plugins_taskboard_remaining_cost_field_init;
+$estimated_cost_field = '';  // TODO define alias by default in configuration file
+$remaining_cost_field = '';  // TODO define alias by default in configuration file
 $user_stories_tracker = '';
-$user_stories_reference_field = '';
-$user_stories_sort_field = '';
+$user_stories_reference_field = '';  // TODO define alias by default in configuration file
+$user_stories_sort_field = '';  // TODO define alias by default in configuration file
 $first_column_by_default = 1;
 
 $tracker = array();

@@ -26,7 +26,6 @@ define('RELEASE_OF_USER_STORY', 2);
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfplugins.'taskboard/common/TaskBoardColumn.class.php';
 require_once $gfplugins.'taskboard/common/TaskBoardRelease.class.php';
-require_once $gfconfig.'plugins/taskboard/config.php' ;
 
 /**
  *       Factory method which creates a taskboard from a taskboard ID
@@ -116,6 +115,7 @@ class TaskBoard extends Error {
 			}
 		}
 
+		// TODO define adapter class name in configuration file
 		global $gfplugins,$plugins_taskboard_trackers_adapter_class, $plugins_taskboard_trackers_adapter_module;
 		if( !isset($plugins_taskboard_trackers_adapter_module) || !isset($plugins_taskboard_trackers_adapter_class) ) {
 			$plugins_taskboard_trackers_adapter_module = $gfplugins.'taskboard/common/adapters/TaskBoardBasicAdapter.class.php';

@@ -25,12 +25,6 @@ global $gfwww;
 require_once $gfwww."env.inc.php";
 require_once $gfcommon.'include/pre.php';
 
-if( file_exists( $gfconfig.'plugins/taskboard/config.php' ) ) {
-	require_once $gfconfig.'plugins/taskboard/config.php' ;
-} else {
-	exit_error(_('Configuration file is missing for taskboard plugin'),'home');
-}
-
 global $gfplugins;
 require_once $gfplugins.'taskboard/common/include/TaskBoardHtml.class.php';
 

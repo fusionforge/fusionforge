@@ -20,7 +20,6 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfconfig.'plugins/taskboard/config.php' ;
 
 global $gfplugins;
 require_once $gfplugins.'taskboard/common/TaskBoard.class.php';
