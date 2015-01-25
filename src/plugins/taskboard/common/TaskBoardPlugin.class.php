@@ -55,9 +55,10 @@ _('Agile TaskBoard: Supports Scrum and Kanban methodologies.');
 			if($group->usesPlugin($this->name)) {
 				$params['TITLES'][] = _('Task Board');
 				$params['DIRS'][] = '/plugins/taskboard/index.php?group_id='.$group->getID();
+				$params['TOOLTIPS'][] = _('Agile Scrum and Kanban display of existing artefacts.');
 
 				if($params['toptab'] == $this->name) {
-					$params['selected']=array_search($this->text,$params['TITLES']);
+					$params['selected'] = array_search($this->text, $params['TITLES']);
 				}
 			}
 		}
