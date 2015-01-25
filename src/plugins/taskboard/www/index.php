@@ -19,9 +19,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-global $gfwww;
-
-require_once $gfwww."env.inc.php";
+require_once '../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 
 global $gfplugins;
@@ -35,19 +33,19 @@ use_stylesheet('/plugins/taskboard/css/agile-board.css');
 
 $user = session_get_user(); // get the session user
 
-if (!$user || !is_object($user) ) {
-	exit_error(_('Invalid User'),'home');
-} else if ( $user->isError() ) {
-	exit_error($user->getErrorMessage(),'home');
+if (!$user || !is_object($user)) {
+	exit_error(_('Invalid User'), 'home');
+} else if ( $user->isError()) {
+	exit_error($user->getErrorMessage(), 'home');
 } else if ( !$user->isActive()) {
-	exit_error(_('Invalid User : Not active'),'home');
+	exit_error(_('Invalid User : Not active'), 'home');
 }
 
 $pluginname = 'taskboard';
 $group_id = getStringFromRequest('group_id');
 
 if (!$group_id) {
-	exit_error(_('Cannot Process your request : No ID specified'),'home');
+	exit_error(_('Cannot Process your request : No ID specified'), 'home');
 } else {
 	$group = group_get_object($group_id);
 	if ( !$group) {

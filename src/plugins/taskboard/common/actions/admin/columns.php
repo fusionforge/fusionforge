@@ -26,6 +26,8 @@ $color_bg_color = getStringFromRequest('column_bg_color','');
 $column_max_tasks = getStringFromRequest('column_max_tasks','');
 $resolution_by_default = getStringFromRequest('resolution_by_default','');
 
+session_require_perm('tracker_admin', $group_id);
+
 if (getStringFromRequest('post_changes')) {
 	db_begin();
 	$column_id = $taskboard->addColumn($column_title, $title_bg_color, $color_bg_color, $column_max_tasks);
@@ -34,17 +36,17 @@ if (getStringFromRequest('post_changes')) {
 		if( $column && $column->setDropRule(NULL, $resolution_by_default) ) {
 			if( !$column->setResolutions( array( $resolution_by_default ) ) ) {
 				db_rollback();
-				exit_error( _('Cannot set resolutions for new column') );
+				$error_msg = _('Cannot set resolutions for new column');
 			}
 		} else {
 			db_rollback();
-			exit_error( _('Cannot set drop rule for new column') );
+			$error_msg = _('Cannot set drop rule for new column');
 		}
 		db_commit();
-		$feedback.=_('Successfully Added');
+		$feedback = _('Successfully Added');
 	} else {
 		db_rollback();
-		exit_error( _('Cannot create column') );
+		$error_msg = _('Cannot create column');
 	}
 }
 
@@ -57,45 +59,41 @@ $taskboard->header(
 	)
 );
 
-if( count( $taskboard->getUsedTrackersIds() ) == 0 ) {
-	exit_error( _('Choose at least one tracker for using with taskboard.') );
-}
-
-if( $taskboard->isError() ) {
-	echo '<div id="messages" class="error">'.$taskboard->getErrorMessage().'</div>';
+if(count($taskboard->getUsedTrackersIds()) == 0) {
+	echo $HTML->warning_msg(_('Choose at least one tracker for using with taskboard.'));
 } else {
-	echo '<div id="messages" style="display: none;"></div>';
-}
-
-$columns = $taskboard->getColumns();
-?>
-
-<?php
-$tablearr = array(_('Order'),_('Title'),_('Max number of tasks'),_('Assigned resolutions'),_('Drop resolution'));
-
-echo $HTML->listTableTop($tablearr, false, 'sortable_table_tracker', 'sortable_table_tracker');
-foreach( $columns as $column ) {
-	$downLink = '';
-	if( $column->getOrder() < count( $columns ) ) {
-		$downLink = util_make_link ('/plugins/taskboard/admin/?group_id='.$group_id.'&action=down_column&column_id='.$column->getID(), "<img alt='" ._('Down'). "' src='/images/pointer_down.png'>" );
+	if($taskboard->isError()) {
+		echo $HTML->error_msg($taskboard->getErrorMessage());
+	} else {
+		echo '<div id="messages" style="display: none;"></div>';
 	}
 
-	echo '
-		<tr valign="middle">
-			<td>'.
-				$column->getOrder().
-				"&nbsp;".
-				$downLink .
-			'</td>
-			<td>
-			<div style="float: left; border: 1px solid grey; height: 30px; width: 20px; background-color: '.$column->getColumnBackgroundColor().'; margin-right: 10px;"><div style="width: 100%; height: 10px; background-color: '.$column->getTitleBackgroundColor().';"></div></div>'.
-				util_make_link ('/plugins/taskboard/admin/?group_id='.$group_id.'&action=edit_column&column_id='.$column->getID(),
-				$column->getTitle() ).'</a></td>
-			<td>'.$column->getMaxTasks().'</td>
-			<td>'.implode(', ', array_values( $column->getResolutions() )).'</td>
-			<td>'.$column->getResolutionByDefault().'</td>
-		</tr>
-		';
+	$columns = $taskboard->getColumns();
+	$tablearr = array(_('Order'), _('Title'), _('Max number of tasks'), _('Assigned resolutions'), _('Drop resolution'));
+
+	echo $HTML->listTableTop($tablearr, false, 'sortable_table_tracker', 'sortable_table_tracker');
+	foreach($columns as $column) {
+		$downLink = '';
+		if($column->getOrder() < count($columns)) {
+			$downLink = util_make_link('/plugins/taskboard/admin/?group_id='.$group_id.'&action=down_column&column_id='.$column->getID(), "<img alt='" ._('Down'). "' src='/images/pointer_down.png'>" );
+		}
+
+		echo '
+			<tr valign="middle">
+				<td>'.
+					$column->getOrder().
+					"&nbsp;".
+					$downLink .
+				'</td>
+				<td>
+				<div style="float: left; border: 1px solid grey; height: 30px; width: 20px; background-color: '.$column->getColumnBackgroundColor().'; margin-right: 10px;"><div style="width: 100%; height: 10px; background-color: '.$column->getTitleBackgroundColor().';"></div></div>'.
+					util_make_link('/plugins/taskboard/admin/?group_id='.$group_id.'&action=edit_column&column_id='.$column->getID(),
+					$column->getTitle()).'</td>
+				<td>'.$column->getMaxTasks().'</td>
+				<td>'.implode(', ', array_values($column->getResolutions())).'</td>
+				<td>'.$column->getResolutionByDefault().'</td>
+			</tr>
+			';
 	}
 	echo $HTML->listTableBottom();
 
@@ -122,8 +120,7 @@ foreach( $taskboard->getUnusedResolutions() as $resolution ) {
 <p>
 <input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" />
 </p>
-
+</form>
 <?php
-echo utils_requiredField().' '._('Indicates required fields.');
-?>
-
+	echo $HTML->addRequiredFieldsInfoBox();
+}
