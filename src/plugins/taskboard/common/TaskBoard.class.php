@@ -112,16 +112,9 @@ class TaskBoard extends Error {
 			}
 		}
 
-<<<<<<< HEAD
 		$plugins_taskboard_trackers_adapter_class = forge_get_config('trackers_adapter_class', 'taskboard');
 		if( !isset($plugins_taskboard_trackers_adapter_class) ) {
-			$plugins_taskboard_trackers_adapter_class  = 'TaskBoardBasicAdapter';			
-=======
-		global $gfplugins,$plugins_taskboard_trackers_adapter_class, $plugins_taskboard_trackers_adapter_module;
-		if( !isset($plugins_taskboard_trackers_adapter_module) || !isset($plugins_taskboard_trackers_adapter_class) ) {
-			$plugins_taskboard_trackers_adapter_module = $gfplugins.'taskboard/common/adapters/TaskBoardBasicAdapter.class.php';
 			$plugins_taskboard_trackers_adapter_class  = 'TaskBoardBasicAdapter';
->>>>>>> first review: coding rule & small cleanup
 		}
 		global $gfplugins;
 		$plugins_taskboard_trackers_adapter_module = $gfplugins.'taskboard/common/adapters/' . $plugins_taskboard_trackers_adapter_class . '.class.php';
@@ -707,11 +700,7 @@ class TaskBoard extends Error {
 
 		$ef_mapping = $this->getMandatoryFieldsMapping();
 
-<<<<<<< HEAD
-		$fields_ids = $this->TrackersAdapter->getFieldsIds($task->ArtifactType->getID() );
-=======
 		$fields_ids = $this->TrackersAdapter->getFieldsIds($task->ArtifactType->getID());
->>>>>>> first review: coding rule & small cleanup
 		$extra_data = $task->getExtraFieldDataText();
 
 		$ret['id'] = $task->getID();
@@ -796,9 +785,8 @@ class TaskBoard extends Error {
 	}
 
 	/**
-<<<<<<< HEAD
 	 *      getExtraFields - get a list of extra fields, existing is all used task trackers
-	 *      
+	 *
 	 *      @param  array   list of allowed extra fields types
 	 *      @param  array   list of excluded aliases
 	 *
@@ -809,17 +797,17 @@ class TaskBoard extends Error {
 		if (!$atf || !is_object($atf) || $atf->isError()) {
 			return _('Could Not Get ArtifactTypeFactory');
 		}
-		
+
 		if( !$used_trackers ) {
 			$used_trackers = $this->getUsedTrackersIds();
 		}
-		
+
 		$common_fields = array();
-		
+
 		foreach( $allowed_types as $allowed_type) {
 			$common_fields[$allowed_type] = array();
 		}
-		
+
 		$at_arr = $atf->getArtifactTypes();
 		$init = true;
 		for ($j = 0; $j < count($at_arr); $j++) {
@@ -829,7 +817,7 @@ class TaskBoard extends Error {
 				return $at_arr[$j]->getErrorMessage();
 			} else {
 				$tracker_id = $at_arr[$j]->getID();
-		
+
 				if( in_array( $tracker_id, $used_trackers ) ) {
 					// select common fields for the give types
 					$fields = $at_arr[$j]->getExtraFields( $allowed_types );
@@ -837,7 +825,7 @@ class TaskBoard extends Error {
 					foreach( $allowed_types as $allowed_type) {
 						$tmp[$allowed_type] = array();
 					}
-		
+
 					foreach( $fields as $field) {
 						// exclude 'resolution' field
 						if( !in_array( $field['alias'],$excluded_aliases ) ) {
@@ -858,15 +846,12 @@ class TaskBoard extends Error {
 				}
 			}
 		}
-		
+
 		return $common_fields;
 	}
-	
+
 	/**
-	 *      getExtraFieldValues - get hash of values, available for the given extra field
-=======
 	 * getExtraFieldValues - get hash of values, available for the given extra field
->>>>>>> first review: coding rule & small cleanup
 	 *
 	 * @param	string	extra field alias
 	 *
@@ -915,27 +900,16 @@ class TaskBoard extends Error {
 	}
 
 	/**
-<<<<<<< HEAD
-	 *      getCurrentRelease - get current or the most recent release object
-=======
-	 * getCurrentRelease - get current release object
->>>>>>> first review: coding rule & small cleanup
+	 * getCurrentRelease - get current or the most recent release object
 	 *
 	 * @return	object
 	 */
 	function getCurrentRelease() {
 		$current_release = NULL;
-<<<<<<< HEAD
-	
+
 		$res = db_query_params (
 			'SELECT * FROM plugin_taskboard_releases WHERE taskboard_id=$1 AND start_date < $2 ORDER BY start_date DESC LIMIT 1',
-			array (
-=======
-
-		$res = db_query_params(
-			'SELECT * FROM plugin_taskboard_releases WHERE taskboard_id = $1 AND start_date < $2 AND end_date > $2 LIMIT 1',
 				array(
->>>>>>> first review: coding rule & small cleanup
 					$this->getID(),
 					strtotime(date('Y-m-d'))
 				)
@@ -945,14 +919,8 @@ class TaskBoard extends Error {
 			return false;
 		} else {
 			$row =  db_fetch_array($res);
-<<<<<<< HEAD
-			if( $row ) {
-				$current_release = new TaskBoardRelease( $this, $row );
-=======
-			error_log(1);
 			if ($row) {
 				$current_release = new TaskBoardRelease($this, $row);
->>>>>>> first review: coding rule & small cleanup
 			}
 		}
 		db_free_result($res);
