@@ -21,25 +21,13 @@
 
 require_once '../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
-
-global $gfplugins;
 require_once $gfplugins.'taskboard/common/include/TaskBoardHtml.class.php';
 
-// Do not use html_use_jqueryui(), taskboard requires jquery-ui-1.11.2
-html_use_jquery();
-use_javascript('/plugins/taskboard/js/jquery-ui.js');
+global $HTML;
+
+html_use_jqueryui();
 use_javascript('/plugins/taskboard/js/agile-board.js');
 use_stylesheet('/plugins/taskboard/css/agile-board.css');
-
-$user = session_get_user(); // get the session user
-
-if (!$user || !is_object($user)) {
-	exit_error(_('Invalid User'), 'home');
-} else if ( $user->isError()) {
-	exit_error($user->getErrorMessage(), 'home');
-} else if ( !$user->isActive()) {
-	exit_error(_('Invalid User : Not active'), 'home');
-}
 
 $pluginname = 'taskboard';
 $group_id = getStringFromRequest('group_id');
@@ -51,29 +39,28 @@ if (!$group_id) {
 	if ( !$group) {
 		exit_no_group();
 	}
-	if ( ! ($group->usesPlugin ( $pluginname )) ) {//check if the group has the plugin active
+	if ( ! ($group->usesPlugin($pluginname))) {//check if the group has the plugin active
 		exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'),$pluginname),'home');
 	}
 
+	$taskboard = new TaskBoardHtml($group);
 
-	$taskboard = new TaskBoardHtml( $group ) ;
+	if( $taskboard->isError() ) {
+		exit_error($taskboard->getErrorMessage());
+	}
 
 	$taskboard->header(
 		array(
-			'title'=>_('Taskboard for ').$group->getPublicName(),
-			'pagename'=>"Taskboard",
-			'sectionvals'=>array(group_getname($group_id)),
+			'title' => _('Taskboard for ').$group->getPublicName(),
+			'pagename' => "Taskboard",
+			'sectionvals' => array(group_getname($group_id)),
 			'group' => $group_id
 		)
 	);
 
-	if( $taskboard->isError() ) {
-		exit_error($taskboard->getErrorMessage());
+	if(count($taskboard->getUsedTrackersIds()) == 0) {
+		echo $HTML->warning_msg(_('Choose at least one tracker for using with taskboard.'));
 	} else {
-
-		if( count( $taskboard->getUsedTrackersIds() ) == 0 ) {
-			exit_error( _('Choose at least one tracker for using with taskboard.') );
-		}
 
 		$columns = $taskboard->getColumns();
 
@@ -246,7 +233,7 @@ var gMessages = {
 	'progressByCost' : "<?php echo _('Progress by cost') ?>"
 };
 
-<?php 
+<?php
 	$releases = array();
 	foreach( $taskboard->getReleases() as $release ) {
 		$releases[ $release->getTitle() ] = array(
@@ -328,7 +315,7 @@ jQuery( document ).ready(function( $ ) {
 			jQuery('#tracker-description').val('');
 		}
 	});
-	
+
 	<?php if ( forge_check_perm('tracker_admin', $group_id ) ) { ?>
 	jQuery('#taskboard-save-snapshot-btn').click( function ( e ) {
 		jQuery.ajax({
@@ -356,7 +343,7 @@ jQuery( document ).ready(function( $ ) {
 	});
 	<?php }?>
 
-	
+
 	<?php } ?>
 
 	jQuery('#tracker-summary, #tracker-description').keyup( function () {
