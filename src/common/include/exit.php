@@ -38,6 +38,7 @@ $exit_errorlevel = 0;
  */
 function exit_error($text = "", $toptab = '') {
 	global $HTML, $group_id, $exit_errorlevel;
+
 	$HTML->header(array('title'=>_('Exiting with error'), 'group'=>$group_id, 'toptab'=>$toptab));
 	echo $HTML->error_msg(htmlspecialchars($text));
 	$HTML->footer();
