@@ -106,12 +106,9 @@ if (getStringFromRequest('create_repository') && getStringFromRequest('submit'))
 		if ($key == strstr($key, "scm_")) {
 			$hook_params[$key] = $value;
 		} elseif ($key == 'scmengine') {
-			error_log("foo");
 			if (is_array($value)) {
-				error_log("bar");
 				$scmarray = $value;
 			} else {
-				error_log("baz");
 				$scmarray = array($value);
 			}
 		}
