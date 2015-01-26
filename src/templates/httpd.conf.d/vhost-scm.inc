@@ -1,7 +1,7 @@
 ServerName {core/scm_host}
 
-SetEnvIf Request_URI . ITKUID=www-data
-SetEnvIf Request_URI . ITKGID=www-data
+SetEnvIf Request_URI . ITKUID={core/apache_user}
+SetEnvIf Request_URI . ITKGID={core/apache_group}
 
 <IfVersion >= 2.3>
   IncludeOptional {core/config_path}/httpd.conf.d/plugin-scm*.inc
