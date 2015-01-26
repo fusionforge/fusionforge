@@ -64,6 +64,7 @@ foreach( $taskboardReleases as $release ) {
 		);
 	}
 
+
 	$current_release = '';
 
 	if( $release->getStartDate() < $today && $today < $release->getEndDate() ) {

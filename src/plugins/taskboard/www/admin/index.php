@@ -39,8 +39,8 @@ if (!$group_id) {
 		exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'),$pluginname),'home');
 	}
 
-	session_require_perm ('tracker_admin', $group_id) ;
-	$taskboard = new TaskBoardHtml( $group ) ;
+	session_require_perm('tracker_admin', $group_id);
+	$taskboard = new TaskBoardHtml($group);
 
 	$allowedActions = array('trackers', 'columns', 'edit_column', 'down_column', 'delete_column', 'init');
 	$action = getStringFromRequest('action');
