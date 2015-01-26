@@ -341,7 +341,7 @@ control over it to the project's administrator.");
 				} elseif (session_loggedin()) {
 						$u = user_get_object(user_getid())->getUnixName();
 						$box = $this->getBoxForProject($project);
-						$iframesrc = "$protocol://$box/authscm/$u/gitweb/".$project->getUnixName().'?p='.$project->getUnixName().'/users/'.$user->getUnixName().'.git';
+						$iframesrc = "$protocol://$box/authscm/$u/gitweb/".$project->getUnixName().'/?p='.$project->getUnixName().'/users/'.$user->getUnixName().'.git';
 				}
 				htmlIframe($iframesrc, array('id'=>'scmgit_iframe', 'absolute'=>true));
 			} elseif ($this->browserDisplayable($project)) {
@@ -351,7 +351,7 @@ control over it to the project's administrator.");
 						$u = user_get_object(user_getid())->getUnixName();
 						$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
 						$box = $this->getBoxForProject($project);
-						$iframesrc = "$protocol://$box/authscm/$u/gitweb/".$project->getUnixName().'?p='.$project->getUnixName().'/'.$project->getUnixName().'.git';
+						$iframesrc = "$protocol://$box/authscm/$u/gitweb/".$project->getUnixName().'/?p='.$project->getUnixName().'/'.$project->getUnixName().'.git';
 				}
 				if ($params['commit']) {
 					$iframesrc .= ';a=log;h='.$params['commit'];

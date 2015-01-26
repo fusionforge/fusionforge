@@ -23,7 +23,7 @@ ScriptAliasMatch ^/authscm/[^/]+/git/(.*) {core/plugins_path}/scmgit/libexec/git
 </LocationMatch>
 
 ScriptAlias /anonscm/gitweb {core/plugins_path}/scmgit/cgi-bin/gitweb.cgi
-ScriptAliasMatch ^/authscm/[^/]+/gitweb/([^/]+) {core/plugins_path}/scmgit/cgi-bin/gitweb.cgi
+ScriptAliasMatch ^/authscm/[^/]+/gitweb/([^/?]+) {core/plugins_path}/scmgit/cgi-bin/gitweb.cgi
 
 <LocationMatch "^/authscm/[^/]+/gitweb/">
   AuthType Basic
