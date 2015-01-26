@@ -31,7 +31,3 @@ class AllTests
 		return $suite;
 	}
 }
-
-if (PHPUnit_MAIN_METHOD == 'AllTests::main') {
-	AllTests::main();
-}
