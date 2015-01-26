@@ -210,7 +210,7 @@ function FusionForgeMWAuth( $user, &$result ) {
                         $mwu->setPassword (User::randomPassword());
                         $mwu->setRealName ($u->getRealName ()) ;
                         $mwu->setToken ();
-                        $mwu->loadFromDatabase ();
+                        $mwu->saveSettings ();
                 }
                 $user->mId=$mwu->getID();
                 $user->loadFromId() ;
