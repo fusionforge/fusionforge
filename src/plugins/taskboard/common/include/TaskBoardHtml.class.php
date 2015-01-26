@@ -47,7 +47,7 @@ class TaskBoardHtml extends TaskBoard {
 		}
 		
 		if (session_loggedin()) {
-			if ( forge_check_perm('project_admin', $this->Group->getID() )) {
+			if ( forge_check_perm('tracker_admin', $this->Group->getID() )) {
 				$release_id = getIntFromRequest('release_id','');
 				if( $release_id ) {
 					$labels[] = _('Delete Release');
@@ -57,7 +57,7 @@ class TaskBoardHtml extends TaskBoard {
 		}
 
 		if (session_loggedin()) {
-			if ( forge_check_perm('project_admin', $this->Group->getID() )) {
+			if ( forge_check_perm('tracker_admin', $this->Group->getID() )) {
 				$labels[] = _('Administration');
 				$links[]  = '/plugins/taskboard/admin/index.php?group_id='.$group_id;
 

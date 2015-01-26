@@ -54,7 +54,7 @@ if (!$group_id) {
 	}
 
 
-	session_require_perm ('project_admin', $group_id) ;
+	session_require_perm ('tracker_admin', $group_id) ;
 	$taskboard = new TaskBoardHtml( $group ) ;
 
 	$allowedActions = array('trackers','columns','edit_column','down_column','delete_column','init');

@@ -58,7 +58,7 @@
 	$today = strtotime(date('Y-m-d'));
 	foreach( $taskboardReleases as $release ) {
 		$release_title = htmlspecialchars( $release->getTitle() );
-		if (session_loggedin() && forge_check_perm('project_admin', $taskboard->Group->getID() ) ) {
+		if (session_loggedin() && forge_check_perm('tracker_admin', $taskboard->Group->getID() ) ) {
 			$release_title = util_make_link (
 				'/plugins/taskboard/releases/?group_id='.$group_id.'&amp;action=edit_release&amp;release_id='.$release->getID(),
 				 $release_title

@@ -20,7 +20,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-session_require_perm ('project_admin', $group_id) ;
+session_require_perm ('tracker_admin', $group_id) ;
 
 $release_id = getStringFromRequest('release_id','');
 $confirmed = getStringFromRequest('confirmed','');

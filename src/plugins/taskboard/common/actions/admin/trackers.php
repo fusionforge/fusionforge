@@ -36,7 +36,7 @@ if (!$atf || !is_object($atf) || $atf->isError()) {
 	exit_error(_('Could Not Get ArtifactTypeFactory'));
 }
 
-session_require_perm ('project_admin', $group_id) ;
+session_require_perm ('tracker_admin', $group_id) ;
 
 $at_arr = $atf->getArtifactTypes();
 if ($at_arr === false || !count($at_arr) ) {
