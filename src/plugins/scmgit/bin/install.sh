@@ -5,7 +5,7 @@ plugindir=$(forge_get_config plugins_path)/scmgit
 
 gitwebcgi=$(ls /var/www/git/gitweb.cgi /var/www/gitweb-caching/gitweb.cgi \
     /usr/lib/cgi-bin/gitweb.cgi /usr/share/gitweb/gitweb.cgi 2>/dev/null | tail -1)
-gitwebdir=$(ls -d /var/www/git /var/www/gitweb-caching /usr/share/gitweb/static 2>/dev/null | tail -1)
+gitwebdir=$(ls -d /var/www/git /var/www/git/static /var/www/gitweb-caching /usr/share/gitweb/static 2>/dev/null | tail -1)
 # CentOS: /var/www/git/
 # Debian, openSUSE: /usr/share/gitweb/
 
