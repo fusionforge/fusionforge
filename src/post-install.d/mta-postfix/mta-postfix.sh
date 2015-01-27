@@ -55,50 +55,40 @@ case "$1" in
 	    fi
 	fi
 
-	# Transport
+	# Destination
 	postfix_append_config 'mydestination' $users_host
 	postfix_append_config 'relay_domains' $lists_host
 
-	# Forwarding rules
-	postfix_append_config 'virtual_alias_maps' 'proxy:pgsql:pgsql_fusionforge_users'
-
-	postfix_append_config 'transport_maps' "hash:/etc/postfix/fusionforge-lists-transport"
+	# Mailman
+	postfix_append_config 'transport_maps' 'hash:/etc/postfix/fusionforge-lists-transport'
 	echo "$lists_host mailman:" > /etc/postfix/fusionforge-lists-transport
 	postmap /etc/postfix/fusionforge-lists-transport
+	postconf -e mailman_destination_recipient_limit=1
 
-	if ! grep -q '^### BEGIN FUSIONFORGE BLOCK' /etc/postfix/main.cf; then
-	    cat <<-EOF >>/etc/postfix/main.cf
-		### BEGIN FUSIONFORGE BLOCK -- DO NOT EDIT
-		### END FUSIONFORGE BLOCK -- DO NOT EDIT
+	# Users aliases - database link
+	postfix_append_config 'virtual_alias_maps' 'proxy:pgsql:/etc/postfix/fusionforge-users.cf'
+	touch /etc/postfix/fusionforge-users.cf
+	chown root:postfix /etc/postfix/fusionforge-users.cf
+	chmod 640 /etc/postfix/fusionforge-users.cf  # database password
+	cat > /etc/postfix/fusionforge-users.cf <<-EOF
+		hosts = unix:/var/run/postgresql
+		user = $(forge_get_config database_user)_mta
+		password = $(forge_get_config database_password_mta)
+		dbname = $(forge_get_config database_name)
+		domain = $users_host
+		query = SELECT email FROM mta_users WHERE login = '%u'
 		EOF
-	fi
-	chmod 600 /etc/postfix/main.cf  # adding database password
-	sed -i -e '/^### BEGIN FUSIONFORGE BLOCK/,/^### END FUSIONFORGE BLOCK/ { ' -e 'ecat' -e 'd }' \
-	    /etc/postfix/main.cf <<EOF
-### BEGIN FUSIONFORGE BLOCK -- DO NOT EDIT ###
-# You may move this block around to accomodate your local needs as long as you
-# keep it in an appropriate position, where "appropriate" is defined by you.
-pgsql_fusionforge_users_hosts = unix:/var/run/postgresql
-pgsql_fusionforge_users_user = $(forge_get_config database_user)_mta
-pgsql_fusionforge_users_password = $(forge_get_config database_password_mta)
-pgsql_fusionforge_users_dbname = $(forge_get_config database_name)
-pgsql_fusionforge_users_domain = $users_host
-pgsql_fusionforge_users_query = SELECT email FROM mta_users WHERE login = '%u'
-mailman_destination_recipient_limit = 1
-### END FUSIONFORGE BLOCK ###
-EOF
 	;;
     
     remove)
 	if [ "$(forge_get_config noreply_to_bitbucket)" != 'no' ] ; then
 	    sed -i -e '/^noreply:/d' /etc/aliases
 	fi
-	sed -i -e '/^### BEGIN FUSIONFORGE BLOCK/,/^### END FUSIONFORGE BLOCK/d' /etc/postfix/main.cf
 	rm -f /etc/postfix/fusionforge-lists-transport /etc/postfix/fusionforge-lists-transport.db
 	postconf -e transport_maps="$(postconf -h transport_maps \
             | sed "s|\(, *\)\?hash:/etc/postfix/fusionforge-lists-transport||")"
 	postconf -e virtual_alias_maps="$(postconf -h virtual_alias_maps \
-            | sed "s/\(, *\)\?proxy:pgsql:pgsql_fusionforge_users//")"
+            | sed "s|\(, *\)\?proxy:pgsql:/etc/postfix/fusionforge-users.cf||")"
 	postconf -e relay_domains="$(postconf -h relay_domains | sed "s/\(, *\)\?$lists_host//")"
 	postconf -e mydestination="$(postconf -h mydestination | sed "s/\(, *\)\?$users_host//")"
 	;;

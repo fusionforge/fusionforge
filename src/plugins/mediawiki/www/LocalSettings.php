@@ -88,6 +88,13 @@ if (!$g->usesPlugin('mediawiki')) {
 	$exit_errorlevel = 1;
 	exit_error(sprintf(_('Project %s does not use the Mediawiki plugin'), $fusionforgeproject));
 }
+if (!$g->isActive()) {
+	/* disabled project requires Site Admin privs */
+	$exit_errorlevel = 1;
+	session_require_global_perm('forge_admin');
+	/* revert, if we’re still there */
+	$exit_errorlevel = 0;
+}
 $wgSitename         = $g->getPublicName() . " Wiki";
 $wgScriptPath       = "/plugins/mediawiki/wiki/$fusionforgeproject" ;
 
@@ -204,7 +211,7 @@ function FusionForgeMWAuth( $user, &$result ) {
                         $mwu->setPassword (User::randomPassword());
                         $mwu->setRealName ($u->getRealName ()) ;
                         $mwu->setToken ();
-                        $mwu->loadFromDatabase ();
+                        $mwu->saveSettings ();
                 }
                 $user->mId=$mwu->getID();
                 $user->loadFromId() ;
@@ -371,17 +378,51 @@ if (isset($_SERVER['SERVER_SOFTWARE'])) {
 		var $dst = '/account/logout.php?return_to=';
 	}
 
+	class SpecialForgeRedirChangeEmail extends SpecialForgeRedir {
+		var $dst = '/account/change_email.php';
+	}
+
 	function DisableLogInOut(&$mList) {
 		$mList['Userlogin'] = 'SpecialForgeRedirLogin';
 		$mList['CreateAccount'] = 'SpecialForgeRedirCreateAccount';
 		$mList['Resetpass'] = 'SpecialForgeRedirResetPass';
 		$mList['Userlogout'] = 'SpecialForgeRedirLogout';
+		$mList['ChangeEmail'] = 'SpecialForgeRedirChangeEmail';
 		return true;
 	}
 	$GLOBALS['wgHooks']['SpecialPage_initList'][] = 'DisableLogInOut';
 }
 
 $GLOBALS['wgHooks']['UserLoadFromSession'][]='FusionForgeMWAuth';
+
+
+// Set e-mail to enable "watch lists"
+function FusionForgeMWUserGetEmail($user, &$mEmail) {
+	$u = user_get_object_by_name(lcfirst($user->mName));
+	if ($u != null) {
+		$mEmail = $u->getEmail();
+		return false;  // OK, don't run other hooks
+	}
+	return true;  // run other hooks
+}
+// for the Preferences page
+function FusionForgeMWUserGetEmailAuthenticationTimeStamp($user, &$mEmailAuthenticated) {
+	$u = user_get_object_by_name(lcfirst($user->mName));
+	if ($u != null) {
+		$mEmailAuthenticated = time();
+		return false;  // OK, don't run other hooks
+	}
+	return true;  // run other hooks
+}
+function FusionForgeMWUserEmailConfirmed(&$user, &$confirmed) {
+	$user->getEmail();  // force populating $user->mEmail from 'UserGetEmail' hook
+	return true;  // run other hooks
+}
+$GLOBALS['wgHooks']['UserGetEmail'][]='FusionForgeMWUserGetEmail';
+$GLOBALS['wgHooks']['UserGetEmailAuthenticationTimestamp'][]
+	= 'FusionForgeMWUserGetEmailAuthenticationTimestamp';
+$GLOBALS['wgHooks']['EmailConfirmed'][]='FusionForgeMWUserEmailConfirmed';
+
 
 $zeroperms = array ('read', 'writeapi', 'edit', 'move-subpages', 'move-rootuserpages', 'reupload-shared', 'createaccount');
 
