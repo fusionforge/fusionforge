@@ -1,3 +1,9 @@
+fusionforge (5.99-0) unstable; urgency=medium
+
+  * Start following 6.0 branch before release.
+
+ -- Roland Mas <lolando@debian.org>  Fri, 30 Jan 2015 14:13:49 +0100
+
 fusionforge (5.3.50-1) unstable; urgency=medium
 
   * New upstream release
