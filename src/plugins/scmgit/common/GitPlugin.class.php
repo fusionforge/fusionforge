@@ -336,13 +336,27 @@ control over it to the project's administrator.");
 		if ($project->usesPlugin($this->name)) {
 			if ($params['user_id']) {
 				$user = user_get_object($params['user_id']);
-				htmlIframe('/plugins/scmgit/cgi-bin/gitweb.cgi?p='.$project->getUnixName().'/users/'.$user->getUnixName().'.git', array('id'=>'scmgit_iframe'));
+				if ($project->enableAnonSCM()) {
+						$iframesrc = util_make_uri('/plugins/scmgit/cgi-bin/gitweb.cgi?p='.$project->getUnixName().'/users/'.$user->getUnixName().'.git');
+				} elseif (session_loggedin()) {
+						$u = user_get_object(user_getid())->getUnixName();
+						$box = $this->getBoxForProject($project);
+						$iframesrc = "$protocol://$box/authscm/$u/gitweb/".$project->getUnixName().'/?p='.$project->getUnixName().'/users/'.$user->getUnixName().'.git';
+				}
+				htmlIframe($iframesrc, array('id'=>'scmgit_iframe', 'absolute'=>true));
 			} elseif ($this->browserDisplayable($project)) {
-				$iframesrc = '/plugins/scmgit/cgi-bin/gitweb.cgi?p='.$project->getUnixName().'/'.$project->getUnixName().'.git';
+				if ($project->enableAnonSCM()) {
+						$iframesrc = util_make_uri('/plugins/scmgit/cgi-bin/gitweb.cgi?p='.$project->getUnixName().'/'.$project->getUnixName().'.git');
+				} elseif (session_loggedin()) {
+						$u = user_get_object(user_getid())->getUnixName();
+						$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
+						$box = $this->getBoxForProject($project);
+						$iframesrc = "$protocol://$box/authscm/$u/gitweb/".$project->getUnixName().'/?p='.$project->getUnixName().'/'.$project->getUnixName().'.git';
+				}
 				if ($params['commit']) {
 					$iframesrc .= ';a=log;h='.$params['commit'];
 				}
-				htmlIframe($iframesrc, array('id'=>'scmgit_iframe'));
+				htmlIframe($iframesrc, array('id'=>'scmgit_iframe','absolute'=>true));
 			}
 		}
 	}
@@ -662,7 +676,7 @@ control over it to the project's administrator.");
 		$rootdir = forge_get_config('repos_path', 'scmgit');
 		fwrite($f, "\$projectroot = '$rootdir';\n");
 		fwrite($f, "\$projects_list = '$config_dir/gitweb.list';\n");
-		fwrite($f, "@git_base_url_list = ('". util_make_url('/anonscm/git') . "');\n");
+		fwrite($f, "\$anon_clone_url = '". util_make_url('/anonscm/git') . "';\n");
 		fwrite($f, "\$logo = '". util_make_url('/plugins/scmgit/git-logo.png') . "';\n");
 		fwrite($f, "\$favicon = '". util_make_url('/plugins/scmgit/git-favicon.png')."';\n");
 		fwrite($f, "\$stylesheet = '". util_make_url('/plugins/scmgit/gitweb.css')."';\n");
@@ -671,6 +685,22 @@ control over it to the project's administrator.");
 		fwrite($f, "\$feature{'actions'}{'default'} = [('project home', '" .
 		       util_make_url('/plugins/scmgit/?func=grouppage/%n') .
 		       "', 'summary')];\n");
+
+		fwrite($f, "\$per_request_config = sub {\n");
+		
+        fwrite($f, "push @git_base_url_list, qq,". util_make_url('/anonscm/git') .",;\n");
+
+		$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
+		if (forge_get_config('use_smarthttp', 'scmgit')) {
+				fwrite($f, "if (defined \$ENV{ITKUID}) { push @git_base_url_list, qq,$protocol://\$ENV{ITKUID}\@".forge_get_config('scm_host')."/authscm/\$ENV{ITKUID}/git,; }\n");
+		}
+
+		if (forge_get_config('use_ssh', 'scmgit')) {
+				fwrite($f, "if (defined \$ENV{ITKUID}) { push @git_base_url_list, qq,git+ssh://\$ENV{ITKUID}\@".forge_get_config('scm_host').forge_get_config('repos_path', 'scmgit').",; }\n");
+		}
+				
+		fwrite($f, "};\n");
+		
 		fclose($f);
 		chmod($fname.'.new', 0644);
 		rename($fname.'.new', $fname);

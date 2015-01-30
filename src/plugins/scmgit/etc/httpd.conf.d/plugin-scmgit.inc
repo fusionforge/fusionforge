@@ -21,3 +21,13 @@ ScriptAliasMatch ^/authscm/[^/]+/git/(.*) {core/plugins_path}/scmgit/libexec/git
   AuthUserFile {core/data_path}/scmgit-userfile
   AuthGroupFile {core/data_path}/scmgit-groupfile
 </LocationMatch>
+
+ScriptAlias /anonscm/gitweb {core/plugins_path}/scmgit/cgi-bin/gitweb.cgi
+ScriptAliasMatch ^/authscm/[^/]+/gitweb/([^/?]+) {core/plugins_path}/scmgit/cgi-bin/gitweb.cgi
+
+<LocationMatch "^/authscm/[^/]+/gitweb/">
+  AuthType Basic
+  AuthName "SCM for {core/forge_name}"
+  AuthUserFile {core/data_path}/scmgit-userfile
+  AuthGroupFile {core/data_path}/scmgit-groupfile
+</LocationMatch>
