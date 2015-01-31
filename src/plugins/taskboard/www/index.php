@@ -28,15 +28,9 @@ require_once $gfcommon.'include/pre.php';
 global $gfplugins;
 require_once $gfplugins.'taskboard/common/include/TaskBoardHtml.class.php';
 
-// Compatibility fix
-if (!function_exists( 'html_use_jqueryui' ) ) {
-	function html_use_jqueryui() {
-		html_use_jquery();
-		use_javascript('/plugins/taskboard/js/jquery-ui.js');
-	}
-}
-
-html_use_jqueryui();
+// Do not use html_use_jqueryui(), taskboard requires jquery-ui-1.11.2
+html_use_jquery();
+use_javascript('/plugins/taskboard/js/jquery-ui.js');
 use_javascript('/plugins/taskboard/js/agile-board.js');
 use_stylesheet('/plugins/taskboard/css/agile-board.css');
 
@@ -85,18 +79,18 @@ if (!$group_id) {
 		}
 
 		$columns = $taskboard->getColumns();
-		
+
 		if( count( $columns ) == 0 ) {
 			exit_error( _('Configure columns for the board first.') );
 		}
-		
+
 		$messages = '';
 		foreach( $columns as $column ) {
 			if( count( $column->getResolutions() ) == 0 ) {
 				$messages .= sprintf( _('Resolutions list is empty for "%s", column is not dropable'), $column->getTitle() ).'<br>';
 			}
 		}
-		
+
 		$user_stories_tracker = $taskboard->getUserStoriesTrackerID();
 		$columns_number = count($columns) + ( $user_stories_tracker ? 1 : 0 );
 		$column_width = intval( 100 / $columns_number );
@@ -134,7 +128,7 @@ if( $taskboard->getReleaseField() ) {
 	if( $current_release ) {
 		$current_release_title = $current_release->getTitle();
 	}
-	
+
 	$releases = $taskboard->getReleaseValues();
 
 	if( $releases ) {
@@ -144,7 +138,7 @@ if( $taskboard->getReleaseField() ) {
 			$release_id_arr[] = $release_name;
 			$release_name_arr[] = $release_name;
 		}
-		
+
 		$release_box=html_build_select_box_from_arrays ($release_id_arr,$release_name_arr,'_release',$current_release_title, true);
 	}
 }
@@ -181,8 +175,8 @@ if( $taskboard->getReleaseField() ) {
 		<?php } ?>
 
 		<?php foreach( $columns as $column ) { ?>
-		<?php 	
-			$style='width: ' . $column_width . '%;'; 
+		<?php
+			$style='width: ' . $column_width . '%;';
 			$title_bg_color =  $column->getTitleBackgroundColor();
 			if( $title_bg_color ) {
 				$style .= 'background-color: ' . $title_bg_color . ';';
@@ -214,7 +208,7 @@ if( $taskboard->getReleaseField() ) {
 			foreach( $used_trackers as $tracker_id ) {
 				$tracker = $taskboard->TrackersAdapter->getTasksTracker($tracker_id);
 				echo '<option value="'.$tracker->getID().'">' . $tracker->getName() . '</option>';
-			}	
+			}
 			echo '</select>';
 			echo "</div>\n";
 		}
@@ -224,7 +218,7 @@ if( $taskboard->getReleaseField() ) {
 
 	<div>
 		 <strong><?php echo _('Summary')?><?php echo utils_requiredField(); ?>:</strong><br />
-		<input id="tracker-summary" title="<?php echo util_html_secure(_('The summary text-box represents a short tracker item summary. Useful when browsing through several tracker items.')) ?>" type="text" name="summary" size="70" value="" maxlength="255" />	
+		<input id="tracker-summary" title="<?php echo util_html_secure(_('The summary text-box represents a short tracker item summary. Useful when browsing through several tracker items.')) ?>" type="text" name="summary" size="70" value="" maxlength="255" />
 	</div>
 
 	<div>
@@ -275,7 +269,7 @@ jQuery( document ).ready(function( $ ) {
 							action : 'add',
 							group_id : gGroupId,
 							tracker_id : jQuery('#tracker_id').val(),
-							user_story_id : jQuery('#user_story_id').val(), 
+							user_story_id : jQuery('#user_story_id').val(),
 							title : jQuery('#tracker-summary').val(),
 							desc : jQuery('#tracker-description').val(),
 							release : jQuery('select[name="_release"]').val(),
