@@ -835,7 +835,7 @@ class TaskBoard extends Error {
 	}
 	
 	/**
-	 *      getCurrentRelease - get current release object
+	 *      getCurrentRelease - get current or the most recent release object
 	 *
 	 *      @return object
 	 */
@@ -843,7 +843,7 @@ class TaskBoard extends Error {
 		$current_release = NULL;
 	
 		$res = db_query_params (
-			'SELECT * FROM plugin_taskboard_releases WHERE taskboard_id=$1 AND start_date < $2 AND end_date > $2 LIMIT 1', 
+			'SELECT * FROM plugin_taskboard_releases WHERE taskboard_id=$1 AND start_date < $2 ORDER BY start_date DESC LIMIT 1',
 			array (
 					$this->getID(),
 					strtotime( date('Y-m-d') )
@@ -854,7 +854,6 @@ class TaskBoard extends Error {
 			return false;
 		} else {
 			$row =  db_fetch_array($res);
-			error_log(1);
 			if( $row ) {
 				$current_release = new TaskBoardRelease( $this, $row );
 			}
