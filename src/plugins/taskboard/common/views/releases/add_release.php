@@ -21,51 +21,7 @@
 
 session_require_perm('tracker_admin', $group_id);
 
-$start_date_unixtime = NULL;
-$end_date_unixtime = NULL;
-$error_msg = '';
-$element_id = getIntFromRequest('_release', NULL);
-$start_date = getStringFromRequest('start_date', '');
-$end_date = getStringFromRequest('end_date', '');
-$goals = getStringFromRequest('goals', '');
-$page_url = getStringFromRequest('page_url', '');
-if (getStringFromRequest('post_changes')) {
-	$start_date_unixtime = strtotime($start_date);
-	$end_date_unixtime = strtotime($end_date);
-
-	if($end_date_unixtime < $start_date_unixtime) {
-		$start_date_unixtime = NULL;
-		$end_date_unixtime = NULL;
-		$error_msg = _('End date should be later then the start date');
-	}
-}
-
-if ($element_id && $start_date_unixtime && $end_date_unixtime) {
-	db_begin();
-
-	$release = new TaskBoardRelease(
-		$taskboard,
-		array(
-			'taskboard_id' => $taskboard->getID(),
-			'element_id' => $element_id,
-			'start_date' => $start_date_unixtime,
-			'end_date' => $end_date_unixtime,
-			'goals' => $goals,
-			'page_url' => $page_url
-		)
-	);
-
-	if ($release->create($element_id, $start_date_unixtime, $end_date_unixtime, $goals, $page_url) ) {
-		db_commit();
-		$feedback .= _('Succefully Created');
-		session_redirect('/plugins/taskboard/releases/?group_id='.$group_id);
-	} else {
-		db_rollback();
-		exit_error($release->getErrorMessage());
-	}
-} else {
-
-	$taskboard->header(
+$taskboard->header(
 		array(
 			'title'=>'Taskboard for '.$group->getPublicName().' : '. _('Releases').' : '._('Add release') ,
 			'pagename'=>_('Releases').' : '._('Add release'),
@@ -74,45 +30,38 @@ if ($element_id && $start_date_unixtime && $end_date_unixtime) {
 		)
 	);
 
-	echo '<link rel="stylesheet" type="text/css" href="/plugins/taskboard/css/agile-board.css">';
-	echo "\n";
-	if ( function_exists( 'html_use_jqueryui' ) ) {
-		html_use_jqueryui();
-	} else {
-		echo '<script type="text/javascript" src="'.util_make_url('/plugins/taskboard/js/jquery-ui.js').'"></script>';
+echo '<link rel="stylesheet" type="text/css" href="/plugins/taskboard/css/agile-board.css">';
+html_use_jqueryui();
+
+if( $taskboard->isError() ) {
+	echo '<div id="messages" class="error">'.$taskboard->getErrorMessage().'</div>';
+} else {
+	echo '<div id="messages" style="display: none;"></div>';
+}
+
+// prepare list of unused releases
+$used_release_elements = array();
+$taskboard_releases = $taskboard->getReleases();
+foreach($taskboard_releases as $release ) {
+	$used_release_elements[] = $release->getElementID();
+}
+
+$release_values = $taskboard->getReleaseValues();
+
+$release_id_arr = array();
+$release_name_arr = array();
+foreach( $release_values as $release_name => $release_id ) {
+	// show only unused releases
+	if( !in_array($release_id, $used_release_elements ) ) {
+		$release_id_arr[] = $release_id;
+		$release_name_arr[] = $release_name;
 	}
-	echo "\n";
+}
 
-	if( $taskboard->isError() ) {
-		echo '<div id="messages" class="error">'.$taskboard->getErrorMessage().'</div>';
-	} else {
-		echo '<div id="messages" style="display: none;"></div>';
-	}
-	echo "\n";
-
-	// prepare list of unused releases
-	$used_release_elements = array();
-	$taskboard_releases = $taskboard->getReleases();
-	foreach($taskboard_releases as $release ) {
-		$used_release_elements[] = $release->getElementID();
-	}
-
-	$release_values = $taskboard->getReleaseValues();
-
-	$release_id_arr = array();
-	$release_name_arr = array();
-	foreach( $release_values as $release_name => $release_id ) {
-		// show only unused releases
-		if( !in_array($release_id, $used_release_elements ) ) {
-			$release_id_arr[] = $release_id;
-			$release_name_arr[] = $release_name;
-		}
-	}
-
-	$release_box=html_build_select_box_from_arrays ($release_id_arr,$release_name_arr,'_release',$element_id,false);
+$release_box=html_build_select_box_from_arrays ($release_id_arr,$release_name_arr,'_release',$element_id,false);
+echo $HTML->openForm(array('action' => '/plugins/taskboard/releases/?group_id='.$group_id.'&action=add_release', 'method' => 'post'));
 ?>
 
-<form action="<?php echo util_make_url('/plugins/taskboard/releases/?group_id='.$group_id.'&amp;action=add_release') ?>" method="post">
 <input type="hidden" name="post_changes" value="y">
 
 <h2><?php echo _('Add release')?>:</h2>
@@ -129,7 +78,8 @@ if ($element_id && $start_date_unixtime && $end_date_unixtime) {
 </p>
 
 <?php
-	echo utils_requiredField().' '._('Indicates required fields.');
+echo $HTML->closeForm();
+echo $HTML->addRequiredFieldsInfoBox();
 ?>
 
 <script>
@@ -139,5 +89,3 @@ jQuery( document ).ready(function( $ ) {
 </script>
 
 <?php
-}
-

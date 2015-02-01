@@ -36,15 +36,15 @@ $taskboard->header(
 );
 
 if($taskboard->getID()) {
-	echo html_e('p', array(), util_make_link('/plugins/taskboard/admin/?group_id='.$group_id.'&action=trackers',
+	echo html_e('p', array(), util_make_link('/plugins/taskboard/admin/?group_id='.$group_id.'&view=trackers',
 						html_e('strong', array(), _('Configure Trackers')))
 				.html_e('br'). _('Choose and configure trackers, used with taskboard.'));
 
-	echo html_e('p', array(), util_make_link('/plugins/taskboard/admin/?group_id='.$group_id.'&action=columns',
+	echo html_e('p', array(), util_make_link('/plugins/taskboard/admin/?group_id='.$group_id.'&view=columns',
 						html_e('strong', array(), _('Configure Columns')))
 				.html_e('br'). _('Configure taskboard columns.'));
 } else {
-	echo html_e('p', array(), util_make_link('/plugins/taskboard/admin/?group_id='.$group_id.'&action=init',
+	echo html_e('p', array(), util_make_link('/plugins/taskboard/admin/?group_id='.$group_id.'&view=init',
 						html_e('strong', array(), _('Initialize taskboard')))
 				.html_e('br'). _('Create initial taskboard configuration'));
 }
