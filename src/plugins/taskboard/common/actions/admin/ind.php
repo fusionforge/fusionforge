@@ -2,7 +2,8 @@
 /**
  * Tracker Links
  *
- * Copyright 2010, FusionForge Team
+ * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -27,27 +28,23 @@
 
 $taskboard->header(
 	array(
-		'title'=>_('Taskboard for ').$group->getPublicName().' : '._('Administration') ,
-		'pagename'=>_('Administration'),
-		'sectionvals'=>array(group_getname($group_id)),
-		'group'=>$group_id
+		'title' => _('Taskboard for ').$group->getPublicName()._(': ')._('Administration'),
+		'pagename' => _('Administration'),
+		'sectionvals' => array(group_getname($group_id)),
+		'group' => $group_id
 	)
 );
 
-if( $taskboard->getID() ) {
-	echo '<p>'.util_make_link('/plugins/taskboard/admin/?group_id='.$group_id.'&action=trackers',
-			     '<strong>'._('Configure Trackers').'</strong>').'<br />' ;
-	echo _('Choose and configure trackers, used with taskboard.') ;
-	echo '</p>';
+if($taskboard->getID()) {
+	echo html_e('p', array(), util_make_link('/plugins/taskboard/admin/?group_id='.$group_id.'&action=trackers',
+						html_e('strong', array(), _('Configure Trackers')))
+				.html_e('br'). _('Choose and configure trackers, used with taskboard.'));
 
-	echo '<p>' .util_make_link('/plugins/taskboard/admin/?group_id='.$group_id.'&action=columns',
-		'<strong>'._('Configure Columns').'</strong>').'<br />';
-	echo _('Configure taskboard columns.');
-	echo '</p>';
+	echo html_e('p', array(), util_make_link('/plugins/taskboard/admin/?group_id='.$group_id.'&action=columns',
+						html_e('strong', array(), _('Configure Columns')))
+				.html_e('br'). _('Configure taskboard columns.'));
 } else {
-	echo '<p>' . util_make_link('/plugins/taskboard/admin/?group_id='.$group_id.'&action=init',
-		'<strong>'._('Initialize taskboard').'</strong>').'<br />' ;
-	echo _('Create initial taskboard configuration') ;
-	echo '</p>';
-
+	echo html_e('p', array(), util_make_link('/plugins/taskboard/admin/?group_id='.$group_id.'&action=init',
+						html_e('strong', array(), _('Initialize taskboard')))
+				.html_e('br'). _('Create initial taskboard configuration'));
 }
