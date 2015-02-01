@@ -19,6 +19,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+global $group_id, $group;
 
 $column_title = getStringFromRequest('column_title','');
 $title_bg_color = getStringFromRequest('title_bg_color','');
@@ -27,6 +28,8 @@ $column_max_tasks = getStringFromRequest('column_max_tasks','');
 $resolution_by_default = getStringFromRequest('resolution_by_default','');
 
 session_require_perm('tracker_admin', $group_id);
+
+$taskboard = new TaskBoardHtml($group);
 
 if (getStringFromRequest('post_changes')) {
 	db_begin();
