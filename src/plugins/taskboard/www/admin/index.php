@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
+ * Copyright 2015, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -40,15 +41,20 @@ if (!$group_id) {
 	}
 
 	session_require_perm('tracker_admin', $group_id);
-	$taskboard = new TaskBoardHtml($group);
+
+	$allowedActions = array('trackers');
+	$action = getStringFromRequest('action');
+	if (in_array($action, $allowedActions)) {
+		include($gfplugins.'taskboard/common/actions/'.$action.'.php');
+	}
 
 	$allowedViews = array('trackers', 'columns', 'edit_column', 'down_column', 'delete_column', 'init');
 	$view = getStringFromRequest('view');
 
-	if( in_array($view, $allowedViews)) {
-		include( $gfplugins.'taskboard/common/views/admin/'.$view.'.php');
+	if (in_array($view, $allowedViews)) {
+		include($gfplugins.'taskboard/common/views/admin/'.$view.'.php');
 	} else {
-		include( $gfplugins.'taskboard/common/views/admin/ind.php' );
+		include($gfplugins.'taskboard/common/views/admin/ind.php');
 	}
 }
 

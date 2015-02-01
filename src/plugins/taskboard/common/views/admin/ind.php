@@ -3,7 +3,7 @@
  * Tracker Links
  *
  * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2015 Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -26,6 +26,9 @@
 //  SHOW LINKS TO FUNCTIONS
 //
 
+global $group, $group_id;
+
+$taskboard = new TaskBoardHtml($group);
 $taskboard->header(
 	array(
 		'title' => _('Taskboard for ').$group->getPublicName()._(': ')._('Administration'),

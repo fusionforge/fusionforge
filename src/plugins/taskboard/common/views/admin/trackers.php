@@ -19,12 +19,12 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-global $group_id, $HTML;
+global $group_id, $group, $HTML;
 
 session_require_perm('tracker_admin', $group_id);
 
-$projectObject = group_get_object($group_id);
-if ($projectObject->usesTracker()) {
+if ($group->usesTracker()) {
+	$taskboard = new TaskBoardHtml($group);
 	$taskboard->header(
 		array(
 			'title' => _('Taskboard for ').$group->getPublicName()._(': ').'Administration - Trackers configuration',
@@ -94,29 +94,6 @@ if ($projectObject->usesTracker()) {
 				echo $HTML->error_msg(_('There are no any tracker having "resolution" field.'));
 			}
 
-			if (getStringFromRequest('post_changes')) {
-				$trackers_selected = getArrayFromRequest('use', array());
-				$trackers_bgcolor  = getArrayFromRequest('bg', array());
-				$release_field = getStringFromRequest('release_field','');
-				$release_field_tracker = getIntFromRequest('release_field_tracker',1);
-				$estimated_cost_field = getStringFromRequest('estimated_cost_field','');
-				$remaining_cost_field = getStringFromRequest('remaining_cost_field','');
-				$user_stories_tracker = getStringFromRequest('user_stories_tracker','');
-				$user_stories_reference_field = getStringFromRequest('user_stories_reference_field','');
-				$user_stories_sort_field = getStringFromRequest('user_stories_sort_field','');
-				$first_column_by_default = getIntFromRequest('first_column_by_default','0');
-
-				// try to save data
-				if( $taskboard->getID() ) {
-					$ret = $taskboard->update( $trackers_selected, $trackers_bgcolor, $release_field, $release_field_tracker, $estimated_cost_field, $remaining_cost_field, $user_stories_tracker, $user_stories_reference_field, $user_stories_sort_field, $first_column_by_default);
-				} else {
-					$ret = $taskboard->create( $trackers_selected, $trackers_bgcolor, $release_field, $release_field_tracker, $estimated_cost_field, $remaining_cost_field, $user_stories_tracker, $user_stories_reference_field, $user_stories_sort_field, $first_column_by_default);
-				}
-
-				if( !$ret ) {
-					exit_error( $taskboard->getErrorMessage() );
-				}
-			}
 			echo html_e('script', array('type' => 'text/javascript', 'src' => '/plugins/taskboard/js/agile-board.js'), '', false);
 			echo $HTML->openForm(array('action' => '/plugins/taskboard/admin/?group_id='.$group_id.'&action=trackers', 'method' => 'post'));
 ?>
