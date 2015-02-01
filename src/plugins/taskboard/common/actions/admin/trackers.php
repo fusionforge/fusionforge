@@ -23,105 +23,104 @@ global $group_id, $HTML;
 
 session_require_perm('tracker_admin', $group_id);
 
-$taskboard->header(
-	array(
-		'title'=>'Taskboard for '.$group->getPublicName().' : Administration : Trackers configuration' ,
-		'pagename'=>_('Trackers configuration'),
-		'sectionvals'=>array(group_getname($group_id)),
-		'group'=>$group_id
-	)
-);
-
 $projectObject = group_get_object($group_id);
 if ($projectObject->usesTracker()) {
+	$taskboard->header(
+		array(
+			'title' => _('Taskboard for ').$group->getPublicName()._(': ').'Administration - Trackers configuration',
+			'pagename' => _('Trackers configuration'),
+			'sectionvals' => array(group_getname($group_id)),
+			'group' => $group_id
+		)
+	);
+
 	$atf = $taskboard->TrackersAdapter->getArtifactTypeFactory();
 	if (!$atf || !is_object($atf) || $atf->isError()) {
-		exit_error(_('Could Not Get ArtifactTypeFactory'));
-	}
-	$at_arr = $atf->getArtifactTypes();
-	if ($at_arr === false || !count($at_arr) ) {
-		exit_error(_('There Are No Trackers Defined For This Project'));
-	}
+		echo $HTML->error_msg(_('Could Not Get ArtifactTypeFactory'));
+	} else {
+		$at_arr = $atf->getArtifactTypes();
+		if ($at_arr === false || !count($at_arr) ) {
+			echo $HTML->error_msg(_('There Are No Trackers Defined For This Project'));
+		} else {
 
-	$trackers_selected = array();
-	$trackers_bgcolor  = array();
-	$release_field  = '';
-	$release_field_tracker  = 1;
-	$estimated_cost_field = '';  // TODO define alias by default in configuration file
-	$remaining_cost_field = '';  // TODO define alias by default in configuration file
-	$user_stories_tracker = '';
-	$user_stories_reference_field = '';  // TODO define alias by default in configuration file
-	$user_stories_sort_field = '';  // TODO define alias by default in configuration file
-	$first_column_by_default = 1;
+			$trackers_selected = array();
+			$trackers_bgcolor  = array();
+			$release_field  = '';
+			$release_field_tracker  = 1;
+			$estimated_cost_field = '';  // TODO define alias by default in configuration file
+			$remaining_cost_field = '';  // TODO define alias by default in configuration file
+			$user_stories_tracker = '';
+			$user_stories_reference_field = '';  // TODO define alias by default in configuration file
+			$user_stories_sort_field = '';  // TODO define alias by default in configuration file
+			$first_column_by_default = 1;
 
-	$tracker = array();
-	//select trackers, having resolution field
-	for ($j = 0; $j < count($at_arr); $j++) {
-		if (is_object($at_arr[$j])) {
-			if( $at_arr[$j]->getID() )
+			$trackers = array();
+			//select trackers, having resolution field
+			for ($j = 0; $j < count($at_arr); $j++) {
+				if (is_object($at_arr[$j])) {
+					if( $at_arr[$j]->getID() )
 
-			$fields = $at_arr[$j]->getExtraFields();
-			foreach( $fields as $field) {
-				if( $field['alias'] == 'resolution' ) {
-					$trackers[] = $at_arr[$j];
+					$fields = $at_arr[$j]->getExtraFields();
+					foreach( $fields as $field) {
+						if( $field['alias'] == 'resolution' ) {
+							$trackers[] = $at_arr[$j];
+						}
+					}
 				}
 			}
-		}
-	}
 
-	if( $taskboard->getID() ) {
-		foreach( $taskboard->getUsedTrackersData() as $used_tracker_data ) {
-			$trackers_selected[] = $used_tracker_data['group_artifact_id'];
-			$trackers_bgcolor[ $used_tracker_data['group_artifact_id'] ] = $used_tracker_data['card_background_color'];
-			$release_field = $taskboard->getReleaseField();
-			$release_field_tracker = $taskboard->getReleaseFieldTracker();
-			$estimated_cost_field = $taskboard->getEstimatedCostField();
-			$remaining_cost_field = $taskboard->getRemainingCostField();
-			$user_stories_tracker = $taskboard->getUserStoriesTrackerID();
-			$user_stories_reference_field = $taskboard->getUserStoriesReferenceField();
-			$user_stories_sort_field = $taskboard->getUserStoriesSortField();
-			$first_column_by_default = $taskboard->getFirstColumnByDefault();
-		}
-	}
+			if( $taskboard->getID() ) {
+				foreach( $taskboard->getUsedTrackersData() as $used_tracker_data ) {
+					$trackers_selected[] = $used_tracker_data['group_artifact_id'];
+					$trackers_bgcolor[ $used_tracker_data['group_artifact_id'] ] = $used_tracker_data['card_background_color'];
+					$release_field = $taskboard->getReleaseField();
+					$release_field_tracker = $taskboard->getReleaseFieldTracker();
+					$estimated_cost_field = $taskboard->getEstimatedCostField();
+					$remaining_cost_field = $taskboard->getRemainingCostField();
+					$user_stories_tracker = $taskboard->getUserStoriesTrackerID();
+					$user_stories_reference_field = $taskboard->getUserStoriesReferenceField();
+					$user_stories_sort_field = $taskboard->getUserStoriesSortField();
+					$first_column_by_default = $taskboard->getFirstColumnByDefault();
+				}
+			}
 
-	if( count($trackers) > 0 ) {
-		if( count($trackers_selected) == 0 ) {
-			echo $HTML->warning_msg(_('Choose at least one tracker for using with taskboard.'));
-		} else {
-			echo '<div id="messages" class="warning" style="display: none;"></div>';
-		}
-	} else {
-		echo $HTML->error_msg(_('There are no any tracker having "resolution" field.'));
-	}
+			if( count($trackers) > 0 ) {
+				if( count($trackers_selected) == 0 ) {
+					echo $HTML->warning_msg(_('Choose at least one tracker for using with taskboard.'));
+				} else {
+					echo '<div id="messages" class="warning" style="display: none;"></div>';
+				}
+			} else {
+				echo $HTML->error_msg(_('There are no any tracker having "resolution" field.'));
+			}
 
-	if (getStringFromRequest('post_changes')) {
-		$trackers_selected = getArrayFromRequest('use', array());
-		$trackers_bgcolor  = getArrayFromRequest('bg', array());
-		$release_field = getStringFromRequest('release_field','');
-		$release_field_tracker = getIntFromRequest('release_field_tracker',1);
-		$estimated_cost_field = getStringFromRequest('estimated_cost_field','');
-		$remaining_cost_field = getStringFromRequest('remaining_cost_field','');
-		$user_stories_tracker = getStringFromRequest('user_stories_tracker','');
-		$user_stories_reference_field = getStringFromRequest('user_stories_reference_field','');
-		$user_stories_sort_field = getStringFromRequest('user_stories_sort_field','');
-		$first_column_by_default = getIntFromRequest('first_column_by_default','0');
+			if (getStringFromRequest('post_changes')) {
+				$trackers_selected = getArrayFromRequest('use', array());
+				$trackers_bgcolor  = getArrayFromRequest('bg', array());
+				$release_field = getStringFromRequest('release_field','');
+				$release_field_tracker = getIntFromRequest('release_field_tracker',1);
+				$estimated_cost_field = getStringFromRequest('estimated_cost_field','');
+				$remaining_cost_field = getStringFromRequest('remaining_cost_field','');
+				$user_stories_tracker = getStringFromRequest('user_stories_tracker','');
+				$user_stories_reference_field = getStringFromRequest('user_stories_reference_field','');
+				$user_stories_sort_field = getStringFromRequest('user_stories_sort_field','');
+				$first_column_by_default = getIntFromRequest('first_column_by_default','0');
 
-		// try to save data
-		if( $taskboard->getID() ) {
-			$ret = $taskboard->update( $trackers_selected, $trackers_bgcolor, $release_field, $release_field_tracker, $estimated_cost_field, $remaining_cost_field, $user_stories_tracker, $user_stories_reference_field, $user_stories_sort_field, $first_column_by_default);
-		} else {
-			$ret = $taskboard->create( $trackers_selected, $trackers_bgcolor, $release_field, $release_field_tracker, $estimated_cost_field, $remaining_cost_field, $user_stories_tracker, $user_stories_reference_field, $user_stories_sort_field, $first_column_by_default);
-		}
+				// try to save data
+				if( $taskboard->getID() ) {
+					$ret = $taskboard->update( $trackers_selected, $trackers_bgcolor, $release_field, $release_field_tracker, $estimated_cost_field, $remaining_cost_field, $user_stories_tracker, $user_stories_reference_field, $user_stories_sort_field, $first_column_by_default);
+				} else {
+					$ret = $taskboard->create( $trackers_selected, $trackers_bgcolor, $release_field, $release_field_tracker, $estimated_cost_field, $remaining_cost_field, $user_stories_tracker, $user_stories_reference_field, $user_stories_sort_field, $first_column_by_default);
+				}
 
-		if( !$ret ) {
-			exit_error( $taskboard->getErrorMessage() );
-		}
-	}
-
+				if( !$ret ) {
+					exit_error( $taskboard->getErrorMessage() );
+				}
+			}
+			echo html_e('script', array('type' => 'text/javascript', 'src' => '/plugins/taskboard/js/agile-board.js'), '', false);
+			echo $HTML->openForm(array('action' => '/plugins/taskboard/admin/?group_id='.$group_id.'&action=trackers', 'method' => 'post'));
 ?>
 
-<script type="text/javascript" src="/plugins/taskboard/js/agile-board.js"></script>
-<form action="<?php echo util_make_url('/plugins/taskboard/admin/?group_id='.$group_id.'&action=trackers') ?>" method="post">
 <input type="hidden" name="post_changes" value="y">
 
 <table cellspacing="2" cellpadding="2" width="100%">
@@ -129,12 +128,10 @@ if ($projectObject->usesTracker()) {
 	<td with="50%">
 <?php
 
-	echo $HTML->boxTop(_('Tasks trackers'));
-
 	if(  count($at_arr) > 0 ) {
 		$tablearr = array(_('Tracker'), _('Description'), _('Use'), _('Card background color'));
 
-
+	echo $HTML->boxTop(_('Tasks trackers'));
 		echo $HTML->listTableTop($tablearr, false, 'sortable_table_tracker', 'sortable_table_tracker');
 		foreach($trackers as $tracker) {
 			$tracker_id = $tracker->getID();
@@ -160,7 +157,7 @@ if ($projectObject->usesTracker()) {
 	<tr><td><strong><?php echo _('Estimated effort field') ?></strong></td><td><select name="estimated_cost_field"><option option value=""><?php echo _('Not defined') ?></option></select></td></tr>
 	<tr><td><strong><?php echo _('Remaining effort field') ?></strong></td><td><select name="remaining_cost_field"><option option value=""><?php echo _('Not defined') ?></option></select></td></tr>
 </table>
-
+<?php echo $HTML->boxBottom(); ?>
 	</td>
 	<td width="50%">
 
@@ -200,9 +197,8 @@ if ($projectObject->usesTracker()) {
 <?php
 	echo $HTML->addRequiredFieldsInfoBox();
 }
+echo $HTML->closeForm();
 ?>
-
-</form>
 
 <script>
 var all_trackers = new Array();
@@ -438,6 +434,16 @@ jQuery(function($){
 });
 </script>
 <?php
+		}
+	}
 } else {
+	$taskboard->header(
+		array(
+			'title' => _('Taskboard for ').$group->getPublicName()._(': ').'Administration - Trackers configuration',
+			'pagename' => _('Trackers configuration'),
+			'sectionvals' => array(group_getname($group_id)),
+			'group' => $group_id
+		)
+	);
 	echo $HTML->information(_('Your project does not use tracker feature. Please contact your Administrator to turn on this feature.'));
 }
