@@ -297,50 +297,27 @@ some control over it to the project's administrator.");
 			}
 			system ("sed -i '/enable-rep-sharing = false/s/^. //' $repo/db/fsfs.conf") ;
 			system ("svn mkdir -m'Init' file:///$repo/trunk file:///$repo/tags file:///$repo/branches >/dev/null") ;
-			if (forge_get_config('use_ssh', 'scmsvn')) {
-				$unix_group = 'scm_' . $project->getUnixName() ;
-				system ("find $repo -type d | xargs -I{} chmod g+s {}") ;
-				// open permissions to allow switching private/public easily
-				// see after to restrict the top-level directory
-				system ("chmod -R g+rwX,o+rX-w $repo") ;
-				system ("chgrp -R $unix_group $repo") ;
-			} else {
-				$unix_user = forge_get_config('apache_user');
-				$unix_group = forge_get_config('apache_group');
-				system ("chmod -R g-rwx,o-rwx $repo") ;
-				system ("chown -R $unix_user:$unix_group $repo") ;
-			}
+			system ("find $repo -type d | xargs -I{} chmod g+s {}") ;
+			// Allow read/write users to modify the SVN repository
+			$rw_unix_group = 'scm_' . $project->getUnixName() ;
+			system("chgrp -R $rw_unix_group $repo");
+			// Allow read-only users to enter the directory
+			$ro_unix_group = $project->getUnixName();
+			system("chgrp $ro_unix_group $repo");
+			// open permissions to allow switching private/public easily
+			// see after to restrict the top-level directory
+			system ("chmod -R g+rwX,o+rX-w $repo") ;
 		}
 
-		if (forge_get_config('use_ssh', 'scmsvn')) {
-			$unix_group = 'scm_' . $project->getUnixName();
-			system("find $repo -type d | xargs -I{} chmod g+s {}");
-			if (forge_get_config('use_dav', 'scmsvn')) {
-				$unix_user = forge_get_config('apache_user');
-				system("chown $unix_user:$unix_group $repo");
-			} else {
-				system("chgrp $unix_group $repo");
-			}
-			if ($project->enableAnonSCM()) {
-				system("chmod g+rwX,o+rX-w $repo") ;
-			} else {
-				system("chmod g+rwX,o-rwx $repo") ;
-			}
+		if ($project->enableAnonSCM()) {
+			system("chmod g+rX,o+rX-w $repo") ;
 		} else {
-			$unix_user = forge_get_config('apache_user');
-			$unix_group = forge_get_config('apache_group');
-			system("chown $unix_user:$unix_group $repo") ;
-			system("chmod g-rwx,o-rwx $repo") ;
+			system("chmod g+rX,o-rwx $repo") ;
 		}
 	}
 
 	function updateRepositoryList(&$params) {
 		$groups = $this->getGroups();
-
-		// Update WebDAV stuff
-		if (!forge_get_config('use_dav', 'scmsvn')) {
-			return true;
-		}
 
 		$config_fname = forge_get_config('data_path').'/scmsvn-auth.inc';
 		$config_f = fopen($config_fname.'.new', 'w');
@@ -699,6 +676,8 @@ some control over it to the project's administrator.");
 		return true;
 	}
 
+	// Get latest commits for inclusion in a widget
+	// TODO: make it work with ITK
 	function getCommits($project, $user = null, $nbCommits) {
 		global $commits, $users, $adds, $updates, $messages, $times, $revisions, $deletes, $time_ok, $user_list, $last_message, $notimecheck;
 		$commits = 0;
