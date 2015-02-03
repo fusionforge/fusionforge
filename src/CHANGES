@@ -1,5 +1,7 @@
 Fusionforge-6.0 (unreleased):
-* New install system (Inria)
+* New install system [#710] (Inria)
+* Reactivity: system replication is now performed immediately (rather than waiting for cron jobs) (Inria)
+* SCM: concurrent SSH and HTTPS access, relying on Apache mod_itk (Roland Mas)
 * [#658] Docman: Basic Webdav write mkcol, delete, put, move support (TrivialDev)
 * [#657] Docman: Add move mass actions (TrivialDev)
 * [#747] Docman: Direct link to file details (TrivialDev)
