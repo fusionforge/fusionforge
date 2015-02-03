@@ -23,7 +23,13 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+require_once $gfcommon.'include/SysTasksQ.class.php';
+
 class scmhookPlugin extends Plugin {
+	public $systask_types = array(
+		'SCMHOOK_UPDATE' => 'updateScmRepo.php',
+	);
+
 	function __construct() {
 		$this->Plugin();
 		$this->name = 'scmhook';
@@ -94,7 +100,8 @@ project independently.");
 			$res = db_query_params('INSERT INTO plugin_scmhook (id_group) VALUES ($1)', array($group_id));
 			if (!$res)
 				return false;
-
+			$systasksq = new SystasksQ();
+			$systasksq->add($this->getID(), 'SCMHOOK_UPDATE', $group_id);
 		}
 		return true;
 	}
@@ -176,6 +183,9 @@ project independently.");
 
 		if (!$res)
 			return false;
+
+		$systasksq = new SystasksQ();
+		$systasksq->add($this->getID(), 'SCMHOOK_UPDATE', $group_id);
 
 		return true;
 	}
