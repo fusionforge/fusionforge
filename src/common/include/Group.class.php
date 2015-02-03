@@ -582,11 +582,6 @@ class Group extends Error {
 			$homepage = util_make_url('/projects/' . $this->getUnixName() . '/');
 		}
 
-		if (strlen(htmlspecialchars($short_description))<10) {
-			$this->setError(_('Describe in a more comprehensive manner your project.'));
-			return false;
-		}
-
 		db_begin();
 
 		//XXX not yet actived logo_image_id='$logo_image_id',
