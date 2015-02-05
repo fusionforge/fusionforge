@@ -1,3 +1,0 @@
-# Apply hooks every hour
-PATH=@bindir@:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-0 * * * * root forge_run_plugin_job scmhook updateScmRepo.php
