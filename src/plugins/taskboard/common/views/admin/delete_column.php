@@ -25,28 +25,26 @@ $column_id = getStringFromRequest('column_id','');
 $confirmed = getStringFromRequest('confirmed','');
 $column = &taskboard_column_get_object($column_id);
 
-if( $confirmed ) {
+if($confirmed) {
 	db_begin();
-	if( $column->delete() ) {
+	if($column->delete()) {
 		db_commit();
 		$feedback.=_('Successfully Removed');
 	} else {
 		db_rollback();
 	}
-
-	$action = 'columns';
-	session_redirect('/plugins/taskboard/admin/?action=columns&group_id='.$group_id);
+	session_redirect('/plugins/taskboard/admin/?view=columns&group_id='.$group_id);
 } else {
 	$taskboard->header(
 		array(
-			'title'=>'Taskboard for '.$group->getPublicName().' : '._('Administration').' : '._('Column configuration') ,
-			'pagename'=>_('Column configuration'),
-			'sectionvals'=>array(group_getname($group_id)),
-			'group'=>$group_id
+			'title' => _('Taskboard for ').$group->getPublicName()._(': ')._('Administration')._(': ')._('Column configuration'),
+			'pagename' => _('Column configuration'),
+			'sectionvals' => array(group_getname($group_id)),
+			'group' => $group_id
 		)
 	);
 
-	if( $taskboard->isError() ) {
+	if($taskboard->isError()) {
 		echo '<div id="messages" class="error">'.$taskboard->getErrorMessage().'</div>';
 	} else {
 		echo '<div id="messages" style="display: none;"></div>';

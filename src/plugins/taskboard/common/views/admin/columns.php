@@ -26,10 +26,10 @@ $taskboard = new TaskBoardHtml($group);
 
 $taskboard->header(
 	array(
-		'title'=>'Taskboard for '.$group->getPublicName().' : Administration : Columns configuration' ,
-		'pagename'=>_('Columns configuration'),
-		'sectionvals'=>array(group_getname($group_id)),
-		'group'=>$group_id
+		'title' => _('Taskboard for ').$group->getPublicName()._(': ')._('Administration')._(': ')._('Columns configuration'),
+		'pagename' => _('Columns configuration'),
+		'sectionvals' => array(group_getname($group_id)),
+		'group' => $group_id
 	)
 );
 
@@ -51,50 +51,44 @@ if(count($taskboard->getUsedTrackersIds()) == 0) {
 		if($column->getOrder() < count($columns)) {
 			$downLink = util_make_link('/plugins/taskboard/admin/?group_id='.$group_id.'&action=down_column&column_id='.$column->getID(), "<img alt='" ._('Down'). "' src='/images/pointer_down.png'>" );
 		}
-
-		echo '
-			<tr valign="middle">
-				<td>'.
-					$column->getOrder().
-					"&nbsp;".
-					$downLink .
-				'</td>
-				<td>
-				<div style="float: left; border: 1px solid grey; height: 30px; width: 20px; background-color: '.$column->getColumnBackgroundColor().'; margin-right: 10px;"><div style="width: 100%; height: 10px; background-color: '.$column->getTitleBackgroundColor().';"></div></div>'.
+		$cells = array();
+		$cells[][] = $column->getOrder().'&nbsp;'.$downLink;
+		$cells[][] = '<div style="float: left; border: 1px solid grey; height: 30px; width: 20px; background-color: '.$column->getColumnBackgroundColor().'; margin-right: 10px;"><div style="width: 100%; height: 10px; background-color: '.$column->getTitleBackgroundColor().';"></div></div>'.
 					util_make_link('/plugins/taskboard/admin/?group_id='.$group_id.'&view=edit_column&column_id='.$column->getID(),
-					$column->getTitle()).'</td>
-				<td>'.$column->getMaxTasks().'</td>
-				<td>'.implode(', ', array_values($column->getResolutions())).'</td>
-				<td>'.$column->getResolutionByDefault().'</td>
-			</tr>
-			';
+					$column->getTitle());
+		$cells[][] = $column->getMaxTasks();
+		$cells[][] = implode(', ', array_values($column->getResolutions()));
+		$cells[][] = $column->getResolutionByDefault();
+		echo $HTML->multiTableRow(array('valign' => 'middle'), $cells);
 	}
 	echo $HTML->listTableBottom();
 
-?>
-
-<form action="<?php echo util_make_url('/plugins/taskboard/admin/?group_id='.$group_id.'&action=columns' ) ?>" method="post">
-<input type="hidden" name="post_changes" value="y">
-
-<h2>Add new column:</h2>
-<table>
-	<tr><td><strong><?php echo _('Title') ?></strong>&nbsp;<?php echo utils_requiredField(); ?></td><td><input type="text" name="column_title"></td></tr>
-	<tr><td><strong><?php echo _('Title backgound color') ?></strong></td><td><?php echo $taskboard->colorBgChooser('title_bg_color') ?></td></tr>
-	<tr><td><strong><?php echo _('Column Background color') ?></strong></td><td><?php echo $taskboard->colorBgChooser('column_bg_color', 'none') ?></td></tr>
-	<tr><td><strong><?php echo _('Maximum tasks number') ?></strong></td><td><input type="text" name="column_max_tasks"></td></tr>
-	<tr><td><strong><?php echo _('Drop resolution by default') ?></strong>&nbsp;<?php echo utils_requiredField(); ?></td><td><select id="resolution_by_default" name="resolution_by_default">
-<?php
-foreach( $taskboard->getUnusedResolutions() as $resolution ) {
-	echo '<option value="'.htmlspecialchars( $resolution).'">' . htmlspecialchars( $resolution) . "</option>";
-}
-?>
-</select></td></tr>
-</table>
-
-<p>
-<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" />
-</p>
-</form>
-<?php
+	echo $HTML->openForm(array('action' => '/plugins/taskboard/admin/?group_id='.$group_id.'&action=columns', 'method' => 'post'));
+	echo html_e('input', array('type' => 'hidden', 'name' => 'post_changes', 'value' => 'y'));
+	echo html_e('h2', array(), _('Add new column').(':'));
+	echo $HTML->listTableTop();
+	$cells = array();
+	$cells[][] = html_e('strong', array(), _('Title').utils_requiredField()._(':'));
+	$cells[][] = html_e('input', array('type' => 'text', 'name' => 'column_title', 'required' => 'required'));
+	echo $HTML->multiTableRow(array(), $cells);
+	$cells = array();
+	$cells[][] = html_e('strong', array(), _('Title backgound color')._(':'));
+	$cells[][] = $taskboard->colorBgChooser('title_bg_color');
+	echo $HTML->multiTableRow(array(), $cells);
+	$cells = array();
+	$cells[][] = html_e('strong', array(), _('Column Background color')._(':'));
+	$cells[][] = $taskboard->colorBgChooser('column_bg_color', 'none');
+	echo $HTML->multiTableRow(array(), $cells);
+	$cells = array();
+	$cells[][] = html_e('strong', array(), _('Maximum tasks number')._(':'));
+	$cells[][] = html_e('input', array('type' => 'text', 'name' => 'column_max_tasks'));
+	echo $HTML->multiTableRow(array(), $cells);
+	$cells = array();
+	$cells[][] = html_e('strong', array(), _('Drop resolution by default').utils_requiredField()._(':'));
+	$cells[][] = html_build_select_box_from_arrays($taskboard->getUnusedResolutions(), $taskboard->getUnusedResolutions(), 'resolution');
+	echo $HTML->multiTableRow(array(), $cells);
+	echo $HTML->listTableBottom();
+	echo html_e('p', array(), html_e('input', array('type' => 'submit', 'name' => 'post_changes', 'value' => _('Submit'))));
+	echo $HTML->closeForm();
 	echo $HTML->addRequiredFieldsInfoBox();
 }
