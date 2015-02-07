@@ -24,8 +24,6 @@ $ret = array(
 	'action' => 'reload'
 );
 
-$ret['message'] = '';
-
 $tracker_id = getIntFromRequest('tracker_id');
 $user_story_id = getIntFromRequest('user_story_id', 0);
 $desc = getStringFromRequest('desc', '');

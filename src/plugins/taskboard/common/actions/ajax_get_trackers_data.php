@@ -25,20 +25,20 @@ if (!$atf || !is_object($atf) || $atf->isError()) {
 	exit();
 }
 
-$ret = array( 'messages' => '', 'data' => array() );
+$ret = array('messages' => '', 'data' => array());
 $at_arr = $atf->getArtifactTypes();
 for ($j = 0; $j < count($at_arr); $j++) {
 	if (!is_object($at_arr[$j])) {
 		//just skip it
 	} elseif ($at_arr[$j]->isError()) {
-		echo  json_encode(array( 'message' => $at_arr[$j]->getErrorMessage()));
+		echo  json_encode(array('message' => $at_arr[$j]->getErrorMessage()));
 		exit();
 	} else {
 		// get only fields having 'select' type
 		$fields = $at_arr[$j]->getExtraFields( 1 );
 
-		foreach( $fields as $field) {
-			if( $field['alias'] == 'resolution' ) {
+		foreach($fields as $field) {
+			if( $field['alias'] == 'resolution') {
 				// this tracker uses 'resolution' select list, so could be used with taskboard
 				$ret['data'][] = array(
 					'id' => $at_arr[$j]->getID(),

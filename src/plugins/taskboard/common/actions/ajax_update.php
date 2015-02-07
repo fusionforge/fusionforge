@@ -21,10 +21,9 @@
 
 $ret = array(
 	'message' => '',
-	'action' => ''
+	'action' => 'reload'
 );
 
-$ret['message'] = '';
 
 $task_id = getStringFromRequest('task_id');
 $desc = getStringFromRequest('desc', '');
@@ -44,7 +43,6 @@ if($task) {
 	}
 } else {
 	$ret['alert'] = _('Task is not found. Taskboard will be reloaded.');
-	$ret['action'] = 'reload';
 }
 
 echo json_encode($ret);

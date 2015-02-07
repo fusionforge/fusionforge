@@ -60,7 +60,7 @@ if ($element_id && $start_date_unixtime && $end_date_unixtime) {
 
 	if ($release->create($element_id, $start_date_unixtime, $end_date_unixtime, $goals, $page_url) ) {
 		db_commit();
-		$feedback .= _('Succefully Created');
+		$feedback .= _('Successfully Created');
 	} else {
 		db_rollback();
 		$error_msg = $release->getErrorMessage();

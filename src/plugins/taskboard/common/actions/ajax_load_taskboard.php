@@ -19,7 +19,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-$ret = array();
+global $taskboard;
 
 $columns = $taskboard->getColumns();
 $ret['message'] = '';

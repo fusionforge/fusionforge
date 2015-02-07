@@ -19,7 +19,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-global $group_id, $HTML;
+global $group_id;
 
 $used_trackers = getArrayFromRequest('trackers' );
 

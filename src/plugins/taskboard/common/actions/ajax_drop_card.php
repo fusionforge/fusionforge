@@ -21,22 +21,20 @@
 
 $ret = array(
 	'message' => '',
-	'action' => ''
+	'action' => 'reload'
 );
-
-$ret['message'] = '';
 
 $task_id = getStringFromRequest('task_id');
 $target_phase_id = getStringFromRequest('target_phase_id');
 
 $task = $taskboard->TrackersAdapter->getTask($task_id);
-if ($task ) {
+if ($task) {
 
 	$ret['task'] = $taskboard->getMappedTask($task);
 	$source_phase_id = $ret['task']['phase_id'];
 
 	$drop_rule = taskboard_column_source_get_object($source_phase_id, $target_phase_id);
-	if ( !$drop_rule->getID() ) {
+	if (!$drop_rule->getID()) {
 		$drop_rule = taskboard_default_column_source_get_object($target_phase_id);
 	}
 
@@ -58,7 +56,6 @@ if ($task ) {
 	}
 } else {
 	$ret['alert'] = _('Task is not found. Taskboard will be reloaded.');
-	$ret['action'] = 'reload';
 }
 
-echo json_encode( $ret );
+echo json_encode($ret);

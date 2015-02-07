@@ -19,48 +19,31 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-global $gfwww;
-
-require_once $gfwww."env.inc.php";
+require_once '../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
-
-global $gfplugins;
 require_once $gfplugins.'taskboard/common/include/TaskBoardHtml.class.php';
 
 $sysdebug_enable = false;
 
-$user = session_get_user(); // get the session user
-
-if (!$user || !is_object($user) ) {
-	echo  json_encode( array( 'message' => _('Invalid User') ) );
-	exit();
-} else if ( $user->isError() ) {
-	echo  json_encode( array( 'message' => $user->getErrorMessage() ) );
-	exit();
-} else if ( !$user->isActive()) {
-	echo  json_encode( array( 'message' => _('Invalid User : Not active') ) );
-	exit();
-}
-
-$group_id = getIntFromPost( 'group_id');
-$action = getStringFromPost( 'action');
+$group_id = getIntFromPost('group_id');
+$action = getStringFromPost('action');
 
 if (!$group_id) {
-	echo  json_encode( array( 'message' => _('Cannot Process your request : No ID specified') ) );
+	echo  json_encode(array('message' => _('Cannot Process your request')._(': ')._('No ID specified')));
 	exit();
 } else {
 	$group = group_get_object($group_id);
-	if ( !$group) {
-		echo  json_encode( array( 'message' => _('Group is not found') ) );
+	if (!$group) {
+		echo  json_encode(array('message' => _('Group is not found')));
 		exit();
 	}
 
-	$taskboard = new TaskBoardHtml( $group ) ;
 	$allowedActions = array('load_taskboard','drop_card','update','add','save_release_snapshot');
 
-	if( in_array($action, $allowedActions) ) {
-		include( $gfplugins.'taskboard/common/actions/ajax_'.$action.'.php' );
+	if (in_array($action, $allowedActions)) {
+		$taskboard = new TaskBoardHtml($group);
+		include($gfplugins.'taskboard/common/actions/ajax_'.$action.'.php');
 	} else {
-		echo  json_encode( array( 'message' => 'OK' ) );
+		echo json_encode(array('message' => _('OK')));
 	}
 }
