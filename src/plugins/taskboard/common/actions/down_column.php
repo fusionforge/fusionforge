@@ -19,19 +19,20 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+global $group_id;
+
 session_require_perm('tracker_admin', $group_id) ;
 
-$column_id = getStringFromRequest('column_id','');
+$column_id = getStringFromRequest('column_id', '');
 
 $column = &taskboard_column_get_object($column_id);
 
 db_begin();
-if ( $column->setOrder( $column->getOrder() + 1 ) ) {
+if ($column->setOrder($column->getOrder() + 1)) {
 	db_commit();
 } else {
 	db_rollback();
 }
 
-$action = 'columns';
-include( $gfplugins.'taskboard/common/actions/admin/columns.php');
+session_redirect('/plugins/taskboard/admin/?group_id='.$group_id.'&view=columns');
 

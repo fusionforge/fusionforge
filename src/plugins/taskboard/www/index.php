@@ -229,7 +229,7 @@ var gIsManager = <?php echo ( $taskboard->TrackersAdapter->isManager() ? 'true' 
 var gIsTechnician = <?php echo ( $taskboard->TrackersAdapter->isTechnician() ? 'true' : 'false' ) ?>;
 var gAjaxUrl = '<?php echo util_make_url ('/plugins/'.$pluginTaskboard->name.'/ajax.php') ; ?>';
 var gMessages = {
-	'notasks' : "<?php echo _('There no tasks found.') ?>",
+	'notasks' : "<?php echo _('There are no tasks found.') ?>",
 	'progressByTasks' : "<?php echo _('Progress by tasks') ?>",
 	'progressByCost' : "<?php echo _('Progress by cost') ?>"
 };

@@ -42,13 +42,13 @@ if (!$group_id) {
 
 	session_require_perm('tracker_admin', $group_id);
 
-	$allowedActions = array('trackers', 'columns', 'edit_column');
+	$allowedActions = array('trackers', 'columns', 'edit_column', 'down_column');
 	$action = getStringFromRequest('action');
 	if (in_array($action, $allowedActions)) {
 		include($gfplugins.'taskboard/common/actions/'.$action.'.php');
 	}
 
-	$allowedViews = array('trackers', 'columns', 'edit_column', 'down_column', 'delete_column', 'init');
+	$allowedViews = array('trackers', 'columns', 'edit_column', 'delete_column', 'init');
 	$view = getStringFromRequest('view');
 
 	if (in_array($view, $allowedViews)) {

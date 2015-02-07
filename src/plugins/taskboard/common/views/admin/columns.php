@@ -49,7 +49,7 @@ if(count($taskboard->getUsedTrackersIds()) == 0) {
 	foreach($columns as $column) {
 		$downLink = '';
 		if($column->getOrder() < count($columns)) {
-			$downLink = util_make_link('/plugins/taskboard/admin/?group_id='.$group_id.'&view=down_column&column_id='.$column->getID(), "<img alt='" ._('Down'). "' src='/images/pointer_down.png'>" );
+			$downLink = util_make_link('/plugins/taskboard/admin/?group_id='.$group_id.'&action=down_column&column_id='.$column->getID(), "<img alt='" ._('Down'). "' src='/images/pointer_down.png'>" );
 		}
 
 		echo '

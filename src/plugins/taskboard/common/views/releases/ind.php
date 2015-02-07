@@ -22,9 +22,9 @@
 
 $taskboard->header(
 	array(
-		'title'=>_('Taskboard for ').$group->getPublicName().' : '._('Releases'),
-		'pagename'=>"Releases",
-		'sectionvals'=>array(group_getname($group_id)),
+		'title' => _('Taskboard for ').$group->getPublicName()._(': ')._('Releases'),
+		'pagename' => "Releases",
+		'sectionvals' => array(group_getname($group_id)),
 		'group' => $group_id
 	)
 );

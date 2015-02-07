@@ -50,3 +50,5 @@ if (getStringFromRequest('post_changes')) {
 		$error_msg = _('Cannot create column');
 	}
 }
+
+session_redirect('/plugins/taskboard/admin/?group_id='.$group_id.'&view=columns');
