@@ -1,6 +1,5 @@
 <?php
-
-/*
+/**
  * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
  *
  * This file is part of FusionForge.
@@ -27,6 +26,8 @@ require_once $gfcommon.'include/pre.php';
 
 global $gfplugins;
 require_once $gfplugins.'taskboard/common/include/TaskBoardHtml.class.php';
+
+$sysdebug_enable = false;
 
 $user = session_get_user(); // get the session user
 
@@ -56,7 +57,7 @@ if (!$group_id) {
 
 	$taskboard = new TaskBoardHtml( $group ) ;
 	$allowedActions = array('load_taskboard','drop_card','update','add','save_release_snapshot');
-	
+
 	if( in_array($action, $allowedActions) ) {
 		include( $gfplugins.'taskboard/common/actions/ajax_'.$action.'.php' );
 	} else {

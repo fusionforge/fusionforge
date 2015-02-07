@@ -19,39 +19,10 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-global $group_id, $group;
-
-$column_title = getStringFromRequest('column_title','');
-$title_bg_color = getStringFromRequest('title_bg_color','');
-$color_bg_color = getStringFromRequest('column_bg_color','');
-$column_max_tasks = getStringFromRequest('column_max_tasks','');
-$resolution_by_default = getStringFromRequest('resolution_by_default','');
+global $group_id, $group, $HTML;
 
 session_require_perm('tracker_admin', $group_id);
-
 $taskboard = new TaskBoardHtml($group);
-
-if (getStringFromRequest('post_changes')) {
-	db_begin();
-	$column_id = $taskboard->addColumn($column_title, $title_bg_color, $color_bg_color, $column_max_tasks);
-	if( $column_id ) {
-		$column = new TaskBoardColumn( $taskboard, $column_id );
-		if( $column && $column->setDropRule(NULL, $resolution_by_default) ) {
-			if( !$column->setResolutions( array( $resolution_by_default ) ) ) {
-				db_rollback();
-				$error_msg = _('Cannot set resolutions for new column');
-			}
-		} else {
-			db_rollback();
-			$error_msg = _('Cannot set drop rule for new column');
-		}
-		db_commit();
-		$feedback = _('Successfully Added');
-	} else {
-		db_rollback();
-		$error_msg = _('Cannot create column');
-	}
-}
 
 $taskboard->header(
 	array(
@@ -78,7 +49,7 @@ if(count($taskboard->getUsedTrackersIds()) == 0) {
 	foreach($columns as $column) {
 		$downLink = '';
 		if($column->getOrder() < count($columns)) {
-			$downLink = util_make_link('/plugins/taskboard/admin/?group_id='.$group_id.'&action=down_column&column_id='.$column->getID(), "<img alt='" ._('Down'). "' src='/images/pointer_down.png'>" );
+			$downLink = util_make_link('/plugins/taskboard/admin/?group_id='.$group_id.'&view=down_column&column_id='.$column->getID(), "<img alt='" ._('Down'). "' src='/images/pointer_down.png'>" );
 		}
 
 		echo '
@@ -90,7 +61,7 @@ if(count($taskboard->getUsedTrackersIds()) == 0) {
 				'</td>
 				<td>
 				<div style="float: left; border: 1px solid grey; height: 30px; width: 20px; background-color: '.$column->getColumnBackgroundColor().'; margin-right: 10px;"><div style="width: 100%; height: 10px; background-color: '.$column->getTitleBackgroundColor().';"></div></div>'.
-					util_make_link('/plugins/taskboard/admin/?group_id='.$group_id.'&action=edit_column&column_id='.$column->getID(),
+					util_make_link('/plugins/taskboard/admin/?group_id='.$group_id.'&view=edit_column&column_id='.$column->getID(),
 					$column->getTitle()).'</td>
 				<td>'.$column->getMaxTasks().'</td>
 				<td>'.implode(', ', array_values($column->getResolutions())).'</td>

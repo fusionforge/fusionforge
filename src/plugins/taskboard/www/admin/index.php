@@ -27,22 +27,22 @@ global $gfplugins;
 require_once $gfplugins.'taskboard/common/include/TaskBoardHtml.class.php';
 
 $group_id = getIntFromRequest('group_id');
-$pluginname = 'taskboard';
+$pluginTaskboard = plugin_get_object('taskboard');
 
 if (!$group_id) {
-	exit_error(_('Cannot Process your request : No ID specified'), 'home');
+	exit_error(_('Cannot Process your request')._(': ')._('No ID specified'), 'home');
 } else {
 	$group = group_get_object($group_id);
 	if ( !$group) {
 		exit_no_group();
 	}
-	if ( ! ($group->usesPlugin($pluginname))) {//check if the group has the plugin active
-		exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'),$pluginname),'home');
+	if ( ! ($group->usesPlugin($pluginTaskboard->name))) {//check if the group has the plugin active
+		exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'), $pluginTaskboard->name), 'home');
 	}
 
 	session_require_perm('tracker_admin', $group_id);
 
-	$allowedActions = array('trackers');
+	$allowedActions = array('trackers', 'columns', 'edit_column');
 	$action = getStringFromRequest('action');
 	if (in_array($action, $allowedActions)) {
 		include($gfplugins.'taskboard/common/actions/'.$action.'.php');

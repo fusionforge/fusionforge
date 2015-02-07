@@ -25,12 +25,8 @@ require_once $gfplugins.'taskboard/common/include/TaskBoardHtml.class.php';
 
 global $HTML;
 
-html_use_jqueryui();
-use_javascript('/plugins/taskboard/js/agile-board.js');
-use_stylesheet('/plugins/taskboard/css/agile-board.css');
-
-$pluginname = 'taskboard';
 $group_id = getStringFromRequest('group_id');
+$pluginTaskboard = plugin_get_object('taskboard');
 
 if (!$group_id) {
 	exit_error(_('Cannot Process your request : No ID specified'), 'home');
@@ -39,8 +35,8 @@ if (!$group_id) {
 	if ( !$group) {
 		exit_no_group();
 	}
-	if ( ! ($group->usesPlugin($pluginname))) {//check if the group has the plugin active
-		exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'),$pluginname),'home');
+	if ( ! ($group->usesPlugin($pluginTaskboard->name))) {//check if the group has the plugin active
+		exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'),$pluginTaskboard->name),'home');
 	}
 
 	$taskboard = new TaskBoardHtml($group);
@@ -48,6 +44,10 @@ if (!$group_id) {
 	if( $taskboard->isError() ) {
 		exit_error($taskboard->getErrorMessage());
 	}
+
+	html_use_jqueryui();
+	use_javascript('/plugins/'.$pluginTaskboard->name.'/js/agile-board.js');
+	use_stylesheet('/plugins/'.$pluginTaskboard->name.'/css/agile-board.css');
 
 	$taskboard->header(
 		array(
@@ -64,58 +64,58 @@ if (!$group_id) {
 
 		$columns = $taskboard->getColumns();
 
-		if( count( $columns ) == 0 ) {
-			exit_error( _('Configure columns for the board first.') );
-		}
+		if(count($columns) == 0) {
+			echo $HTML->warning_msg(_('Configure columns for the board first.'));
+		} else {
 
-		$messages = '';
-		foreach( $columns as $column ) {
-			if( count( $column->getResolutions() ) == 0 ) {
-				$messages .= sprintf( _('Resolutions list is empty for "%s", column is not dropable'), $column->getTitle() ).'<br>';
+			$messages = '';
+			foreach($columns as $column) {
+				if(count($column->getResolutions()) == 0) {
+					$messages .= sprintf( _('Resolutions list is empty for "%s", column is not dropable'), $column->getTitle() ).'<br>';
+				}
 			}
-		}
 
-		$user_stories_tracker = $taskboard->getUserStoriesTrackerID();
-		$columns_number = count($columns) + ( $user_stories_tracker ? 1 : 0 );
-		$column_width = intval( 100 / $columns_number );
+			$user_stories_tracker = $taskboard->getUserStoriesTrackerID();
+			$columns_number = count($columns) + ($user_stories_tracker ? 1 : 0);
+			$column_width = intval(100 / $columns_number);
 ?>
 
-<div id="messages" class="warning" <?php if( !$messages ) { ?> style="display: none;" <?php } ?>><?php echo $messages ?></div>
+<div id="messages" class="warning" <?php if (!$messages) { ?> style="display: none;" <?php } ?>><?php echo $messages ?></div>
 <br/>
 
 <?php
 $techs = $group->getUsers();
 
-$_assigned_to = getIntFromRequest('_assigned_to','0');
+$_assigned_to = getIntFromRequest('_assigned_to', '0');
 // stolen code from tracker
-$tech_id_arr = array () ;
-$tech_name_arr = array () ;
+$tech_id_arr = array();
+$tech_name_arr = array();
 
 foreach ($techs as $tech) {
 	$tech_id_arr[] = $tech->getID() ;
 	$tech_name_arr[] = $tech->getRealName() ;
 }
-$tech_id_arr[]='0';  //this will be the 'any' row
-$tech_name_arr[]=_('Any');
+$tech_id_arr[] = '0';  //this will be the 'any' row
+$tech_name_arr[] = _('Any');
 
 if (is_array($_assigned_to)) {
 	$_assigned_to='';
 }
-$tech_box=html_build_select_box_from_arrays ($tech_id_arr,$tech_name_arr,'_assigned_to',$_assigned_to,true,_('Unassigned'));
+$tech_box=html_build_select_box_from_arrays($tech_id_arr, $tech_name_arr, '_assigned_to', $_assigned_to, true, _('Unassigned'));
 // end of the stolen code
 
 $release_box = '';
-if( $taskboard->getReleaseField() ) {
+if ($taskboard->getReleaseField()) {
 	$release_field_alias = $taskboard->getReleaseField();
 	$current_release = $taskboard->getCurrentRelease();
 	$current_release_title = '';
-	if( $current_release ) {
+	if ($current_release ) {
 		$current_release_title = $current_release->getTitle();
 	}
 
 	$releases = $taskboard->getReleaseValues();
 
-	if( $releases ) {
+	if ($releases) {
 		$release_id_arr = array();
 		$release_name_arr = array();
 		foreach( $releases as $release_name => $release_id ) {
@@ -134,11 +134,12 @@ if( $taskboard->getReleaseField() ) {
 		<table cellspacing="0">
 			<tr valign="middle">
 				<td>
-					<?php echo _('Assignee').':&nbsp;'. $tech_box ; ?>
+					<?php echo _('Assignee')._(': '). $tech_box ; ?>
 				</td>
-		<?php if( $release_box ) { ?>
+			<tr>
+		<?php if ($release_box) { ?>
 				<td>
-					<?php echo _('Release').':&nbsp;'. $release_box ; ?>
+					<?php echo _('Release')._(': ').$release_box; ?>
 				</td>
 				<?php if ( forge_check_perm('tracker_admin', $group_id ) ) { ?>
 				<td>
@@ -192,9 +193,9 @@ if( $taskboard->getReleaseField() ) {
 	<input type="hidden" name="user_story_id" id="user_story_id" value="">
 	<?php
 		$used_trackers = $taskboard->getUsedTrackersIds();
-
-		if( count($used_trackers) == 1 ) {
-			echo '<input type="hidden" name="tracker_id" id="tracker_id" value="' . $used_trackers[0] . '">';
+		if(count($used_trackers) == 1) {
+			$tracker = $taskboard->TrackersAdapter->getTasksTracker($used_trackers[0]);
+			echo '<input type="hidden" name="tracker_id" id="tracker_id" value="' . $tracker->getID(). '">';
 		} else {
 			// select target tracker if more then single trackers are configured
 			echo "<div>\n";
@@ -226,7 +227,7 @@ if( $taskboard->getReleaseField() ) {
 var gGroupId = <?php echo $group_id ?>;
 var gIsManager = <?php echo ( $taskboard->TrackersAdapter->isManager() ? 'true' : 'false' ) ?>;
 var gIsTechnician = <?php echo ( $taskboard->TrackersAdapter->isTechnician() ? 'true' : 'false' ) ?>;
-var gAjaxUrl = '<?php echo util_make_url ('/plugins/taskboard/ajax.php') ; ?>';
+var gAjaxUrl = '<?php echo util_make_url ('/plugins/'.$pluginTaskboard->name.'/ajax.php') ; ?>';
 var gMessages = {
 	'notasks' : "<?php echo _('There no tasks found.') ?>",
 	'progressByTasks' : "<?php echo _('Progress by tasks') ?>",
@@ -270,7 +271,7 @@ jQuery( document ).ready(function( $ ) {
 				click : function () {
 					jQuery.ajax({
 						type: 'POST',
-						url: '<?php echo util_make_url('/plugins/taskboard/ajax.php') ;?>',
+						url: '<?php echo util_make_url('/plugins/'.$pluginTaskboard->name.'/ajax.php') ;?>',
 						dataType: 'json',
 						data : {
 							action : 'add',
@@ -357,6 +358,7 @@ jQuery( document ).ready(function( $ ) {
 });
 </script>
 <?php
+		}
 	}
 }
 
