@@ -19,10 +19,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-global $group_id, $group, $HTML;
-
-session_require_perm('tracker_admin', $group_id);
-$taskboard = new TaskBoardHtml($group);
+global $group_id, $group, $HTML, $pluginTaskboard, $taskboard;
 
 $taskboard->header(
 	array(

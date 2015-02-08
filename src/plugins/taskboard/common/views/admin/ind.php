@@ -26,28 +26,27 @@
 //  SHOW LINKS TO FUNCTIONS
 //
 
-global $group, $group_id;
+global $group, $group_id, $pluginTaskboard, $taskboard;
 
-$taskboard = new TaskBoardHtml($group);
 $taskboard->header(
 	array(
 		'title' => _('Taskboard for ').$group->getPublicName()._(': ')._('Administration'),
 		'pagename' => _('Administration'),
-		'sectionvals' => array(group_getname($group_id)),
+		'sectionvals' => array($group->getPublicName()),
 		'group' => $group_id
 	)
 );
 
 if($taskboard->getID()) {
-	echo html_e('p', array(), util_make_link('/plugins/taskboard/admin/?group_id='.$group_id.'&view=trackers',
+	echo html_e('p', array(), util_make_link('/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&view=trackers',
 						html_e('strong', array(), _('Configure Trackers')))
 				.html_e('br'). _('Choose and configure trackers, used with taskboard.'));
 
-	echo html_e('p', array(), util_make_link('/plugins/taskboard/admin/?group_id='.$group_id.'&view=columns',
+	echo html_e('p', array(), util_make_link('/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&view=columns',
 						html_e('strong', array(), _('Configure Columns')))
 				.html_e('br'). _('Configure taskboard columns.'));
 } else {
-	echo html_e('p', array(), util_make_link('/plugins/taskboard/admin/?group_id='.$group_id.'&view=init',
+	echo html_e('p', array(), util_make_link('/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&view=init',
 						html_e('strong', array(), _('Initialize taskboard')))
 				.html_e('br'). _('Create initial taskboard configuration'));
 }

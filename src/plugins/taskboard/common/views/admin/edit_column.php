@@ -20,46 +20,43 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-global $group_id, $group;
+global $group_id, $group, $pluginTaskboard, $taskboard, $HTML;
 
-session_require_perm('tracker_admin', $group_id);
+$column_id = getStringFromRequest('column_id', '');
+if ($column_id) {
+	$column = &taskboard_column_get_object($column_id);
+	if ($column && $column->Taskboard->Group->getID() == $group_id) {
 
-$column_id = getStringFromRequest('column_id','');
+		$taskboard->header(
+			array(
+				'title' => _('Taskboard for ').$group->getPublicName()._(': ')._('Administration')._(': ')._('Column configuration'),
+				'pagename' => _('Column configuration'),
+				'sectionvals' => array($group->getPublicName()),
+				'group' => $group_id
+			)
+		);
 
-$column = &taskboard_column_get_object($column_id);
-$taskboard = new TaskBoardHtml($group);
+		if($taskboard->isError()) {
+			echo $HTML->error_msg($taskboard->getErrorMessage());
+		} else {
+			echo html_e('div', array('id' => 'messages', 'style' => 'display: none;'));
+		}
 
-$taskboard->header(
-	array(
-		'title'=>_('Taskboard for ').$group->getPublicName()._(': ')._('Administration')._(': ')._('Column configuration') ,
-		'pagename'=>_('Column configuration'),
-		'sectionvals'=>array(group_getname($group_id)),
-		'group'=>$group_id
-	)
-);
+		$drop_rules_by_default = $column->getDropRulesByDefault(true);
 
-if( $taskboard->isError() ) {
-	echo '<div id="messages" class="error">'.$taskboard->getErrorMessage().'</div>';
-} else {
-	echo '<div id="messages" style="display: none;"></div>';
-}
+		echo $HTML->openForm(array('action' => '/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&action=edit_column', 'method' => 'post'));
+		echo html_e('input', array('type' => 'hidden', 'name' => 'post_changes', 'value' => 'y'));
+		echo html_e('input', array('type' => 'hidden', 'name' => 'column_id', 'value' => $column_id));
+		echo html_e('h2', _('Edit column')._(':'));
+		echo $HTML->listTableTop();
+		?>
 
-$drop_rules_by_default = $column->getDropRulesByDefault(true);
-
-?>
-
-<form action="<?php echo util_make_url ('/plugins/taskboard/admin/?group_id='.$group_id.'&amp;action=edit_column') ?>" method="post">
-<input type="hidden" name="post_changes" value="y">
-<input type="hidden" name="column_id" value="<?php echo $column_id ?>">
-
-<h2><?php echo _('Edit column') ?>:</h2>
-<table>
 	<tr><td><strong><?php echo _('Title') ?></strong>&nbsp;<?php echo utils_requiredField(); ?></td><td><input type="text" name="column_title" value="<?php echo htmlspecialchars( $column->getTitle() ) ?>"></td></tr>
 	<tr><td><strong><?php echo _('Title backgound color') ?></strong></td><td><?php echo $taskboard->colorBgChooser('title_bg_color', $column->getTitleBackgroundColor() ) ?></td></tr>
 	<tr><td><strong><?php echo _('Column Background color') ?></strong></td><td><?php echo $taskboard->colorBgChooser('column_bg_color', $column->getColumnBackgroundColor() ) ?></td></tr>
 	<tr><td><strong><?php echo _('Maximum tasks number') ?></strong></td><td><input type="text" name="column_max_tasks" value="<?php echo $column->getMaxTasks() ?>"></td></tr>
 
-	<tr><td colspan="2"><strong><?php echo _('Resolutions') ?>:</strong></td></tr>
+	<tr><td colspan="2"><strong><?php echo _('Resolutions')._(':') ?></strong></td></tr>
 <?php
 // unused by any columns resolutions
 foreach( $taskboard->getUnusedResolutions() as $resolution ) {
@@ -75,22 +72,16 @@ foreach( $column->getResolutions() as $resolution ) {
 }
 
 ?>
-
-
 	<tr><td><strong><?php echo _('Drop resolution by default') ?></strong>&nbsp;<?php echo utils_requiredField(); ?></td><td><select id="resolution_by_default" name="resolution_by_default"></select></td></tr>
 	<tr><td><strong><?php echo _('Autoassign') ?></strong></td><td><input type="checkbox" name="autoassign" value="1" <?php  echo $drop_rules_by_default->getAutoassign() ? 'checked' : '' ; ?>></td></tr>
 	<tr><td><strong><?php echo _('Alert message') ?></strong></td><td><textarea name="alert" cols="79" rows="5" ><?php echo htmlspecialchars($drop_rules_by_default->getAlertText()) ?></textarea></td></tr>
-</table>
-
-<p>
-<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" />
-</p>
-
 <?php
-echo utils_requiredField().' '._('Indicates required fields.');
+		echo $HTML->listTableBottom();
+		echo html_e('p', array(), html_e('input', array('type' => 'submit', 'name' => 'post_changes', 'value' => _('Submit'))));
+		echo utils_requiredField().' '._('Indicates required fields.');
+		echo html_ao('script', array('type' => 'text/javascript'));
 ?>
-
-<script>
+//<![CDATA[
 jQuery(function($){
 	function loadResolutions(select_name, default_value) {
 		var selected = $('select[name=' + select_name + '] option:selected').val();
@@ -112,4 +103,14 @@ jQuery(function($){
 		loadResolutions('resolution_by_default', '<?php echo $column->getResolutionByDefault() ?>');
 	});
 });
-</script>
+//]]>
+<?php
+		echo html_ac(html_ap() - 1);
+	} else {
+		$error_msg = _('Cannot edit column due to unknown column ID');
+		session_redirect('/plugins/'.$pluginTaskboard->name.'/admin/?view=columns&group_id='.$group_id);
+	}
+} else {
+	$warning_msg = _('Cannot edit column due to missing column ID');
+	session_redirect('/plugins/'.$pluginTaskboard->name.'/admin/?view=columns&group_id='.$group_id);
+}

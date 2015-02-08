@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
+ * Copyright 2015, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -19,10 +20,10 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-session_require_perm('tracker_admin', $group_id);
+global $group_id, $pluginTaskboard, $taskboard;
 
 if(!$taskboard->getID()) {
 	$taskboard = taskboard_init($group_id);
 }
 
-session_redirect('/plugins/taskboard/admin/?group_id='.$group_id.'&view=trackers');
+session_redirect('/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&view=trackers');

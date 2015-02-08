@@ -49,4 +49,4 @@ if (getStringFromRequest('post_changes')) {
 	}
 }
 
-session_redirect('/plugins/taskboard/admin/?group_id='.$group_id);
+session_redirect('/plugins/taskboard/admin/?view=trackers&group_id='.$group_id);

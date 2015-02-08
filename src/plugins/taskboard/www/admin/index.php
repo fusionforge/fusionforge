@@ -22,9 +22,9 @@
 
 require_once '../../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
-
-global $gfplugins;
 require_once $gfplugins.'taskboard/common/include/TaskBoardHtml.class.php';
+
+global $HTML;
 
 $group_id = getIntFromRequest('group_id');
 $pluginTaskboard = plugin_get_object('taskboard');
@@ -40,21 +40,36 @@ if (!$group_id) {
 		exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'), $pluginTaskboard->name), 'home');
 	}
 
-	session_require_perm('tracker_admin', $group_id);
+	if ($group->usesTracker()) {
 
-	$allowedActions = array('trackers', 'columns', 'edit_column', 'down_column');
-	$action = getStringFromRequest('action');
-	if (in_array($action, $allowedActions)) {
-		include($gfplugins.'taskboard/common/actions/'.$action.'.php');
-	}
+		session_require_perm('tracker_admin', $group_id);
 
-	$allowedViews = array('trackers', 'columns', 'edit_column', 'delete_column', 'init');
-	$view = getStringFromRequest('view');
+		$allowedActions = array('trackers', 'columns', 'edit_column', 'down_column');
+		$action = getStringFromRequest('action');
+		$taskboard = new TaskBoardHtml($group);
 
-	if (in_array($view, $allowedViews)) {
-		include($gfplugins.'taskboard/common/views/admin/'.$view.'.php');
+		if (in_array($action, $allowedActions)) {
+			include($gfplugins.$pluginTaskboard->name.'/common/actions/'.$action.'.php');
+		}
+
+		$allowedViews = array('trackers', 'columns', 'edit_column', 'delete_column', 'init');
+		$view = getStringFromRequest('view');
+
+		if (in_array($view, $allowedViews)) {
+			include($gfplugins.$pluginTaskboard->name.'/common/views/admin/'.$view.'.php');
+		} else {
+			include($gfplugins.$pluginTaskboard->name.'/common/views/admin/ind.php');
+		}
 	} else {
-		include($gfplugins.'taskboard/common/views/admin/ind.php');
+		$taskboard->header(
+			array(
+				'title' => _('Taskboard for ').$group->getPublicName()._(': ')._('Administration'),
+				'pagename' => _('Administration'),
+				'sectionvals' => array(group_getname($group_id)),
+				'group' => $group_id
+			)
+		);
+		echo $HTML->information(_('Your project does not use tracker feature. Please contact your Administrator to turn on this feature.'));
 	}
 }
 

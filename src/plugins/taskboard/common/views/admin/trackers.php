@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
+ * Copyright 2015, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -19,170 +20,166 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-global $group_id, $group, $HTML;
+global $group_id, $group, $HTML, $pluginTaskboard, $taskboard;
 
 session_require_perm('tracker_admin', $group_id);
 
-if ($group->usesTracker()) {
-	$taskboard = new TaskBoardHtml($group);
-	$taskboard->header(
-		array(
-			'title' => _('Taskboard for ').$group->getPublicName()._(': ').'Administration - Trackers configuration',
-			'pagename' => _('Trackers configuration'),
-			'sectionvals' => array(group_getname($group_id)),
-			'group' => $group_id
-		)
-	);
+$taskboard->header(
+	array(
+		'title' => _('Taskboard for ').$group->getPublicName()._(': ')._('Administration - Trackers configuration'),
+		'pagename' => _('Trackers configuration'),
+		'sectionvals' => array($group->getPublicName()),
+		'group' => $group_id
+	)
+);
 
-	$atf = $taskboard->TrackersAdapter->getArtifactTypeFactory();
-	if (!$atf || !is_object($atf) || $atf->isError()) {
-		echo $HTML->error_msg(_('Could Not Get ArtifactTypeFactory'));
+$atf = $taskboard->TrackersAdapter->getArtifactTypeFactory();
+if (!$atf || !is_object($atf) || $atf->isError()) {
+	echo $HTML->error_msg(_('Could Not Get ArtifactTypeFactory'));
+} else {
+	$at_arr = $atf->getArtifactTypes();
+	if ($at_arr === false || !count($at_arr) ) {
+		echo $HTML->error_msg(_('There Are No Trackers Defined For This Project'));
 	} else {
-		$at_arr = $atf->getArtifactTypes();
-		if ($at_arr === false || !count($at_arr) ) {
-			echo $HTML->error_msg(_('There Are No Trackers Defined For This Project'));
-		} else {
 
-			$trackers_selected = array();
-			$trackers_bgcolor  = array();
-			$release_field  = '';
-			$release_field_tracker  = 1;
-			$estimated_cost_field = '';  // TODO define alias by default in configuration file
-			$remaining_cost_field = '';  // TODO define alias by default in configuration file
-			$user_stories_tracker = '';
-			$user_stories_reference_field = '';  // TODO define alias by default in configuration file
-			$user_stories_sort_field = '';  // TODO define alias by default in configuration file
-			$first_column_by_default = 1;
+		$trackers_selected = array();
+		$trackers_bgcolor  = array();
+		$release_field  = '';
+		$release_field_tracker  = 1;
+		$estimated_cost_field = '';  // TODO define alias by default in configuration file
+		$remaining_cost_field = '';  // TODO define alias by default in configuration file
+		$user_stories_tracker = '';
+		$user_stories_reference_field = '';  // TODO define alias by default in configuration file
+		$user_stories_sort_field = '';  // TODO define alias by default in configuration file
+		$first_column_by_default = 1;
 
-			$trackers = array();
-			//select trackers, having resolution field
-			for ($j = 0; $j < count($at_arr); $j++) {
-				if (is_object($at_arr[$j])) {
-					if( $at_arr[$j]->getID() )
+		$trackers = array();
+		//select trackers, having resolution field
+		for ($j = 0; $j < count($at_arr); $j++) {
+			if (is_object($at_arr[$j])) {
+				if( $at_arr[$j]->getID() )
 
-					$fields = $at_arr[$j]->getExtraFields();
-					foreach( $fields as $field) {
-						if( $field['alias'] == 'resolution' ) {
-							$trackers[] = $at_arr[$j];
-						}
+				$fields = $at_arr[$j]->getExtraFields();
+				foreach( $fields as $field) {
+					if( $field['alias'] == 'resolution' ) {
+						$trackers[] = $at_arr[$j];
 					}
 				}
 			}
-
-			if( $taskboard->getID() ) {
-				foreach( $taskboard->getUsedTrackersData() as $used_tracker_data ) {
-					$trackers_selected[] = $used_tracker_data['group_artifact_id'];
-					$trackers_bgcolor[ $used_tracker_data['group_artifact_id'] ] = $used_tracker_data['card_background_color'];
-					$release_field = $taskboard->getReleaseField();
-					$release_field_tracker = $taskboard->getReleaseFieldTracker();
-					$estimated_cost_field = $taskboard->getEstimatedCostField();
-					$remaining_cost_field = $taskboard->getRemainingCostField();
-					$user_stories_tracker = $taskboard->getUserStoriesTrackerID();
-					$user_stories_reference_field = $taskboard->getUserStoriesReferenceField();
-					$user_stories_sort_field = $taskboard->getUserStoriesSortField();
-					$first_column_by_default = $taskboard->getFirstColumnByDefault();
-				}
-			}
-
-			if( count($trackers) > 0 ) {
-				if( count($trackers_selected) == 0 ) {
-					echo $HTML->warning_msg(_('Choose at least one tracker for using with taskboard.'));
-				} else {
-					echo '<div id="messages" class="warning" style="display: none;"></div>';
-				}
-			} else {
-				echo $HTML->error_msg(_('There are no any tracker having "resolution" field.'));
-			}
-
-			echo html_e('script', array('type' => 'text/javascript', 'src' => '/plugins/taskboard/js/agile-board.js'), '', false);
-			echo $HTML->openForm(array('action' => '/plugins/taskboard/admin/?group_id='.$group_id.'&action=trackers', 'method' => 'post'));
-?>
-
-<input type="hidden" name="post_changes" value="y">
-
-<table cellspacing="2" cellpadding="2" width="100%">
-<tr valign="top">
-	<td with="50%">
-<?php
-
-	if(  count($at_arr) > 0 ) {
-		$tablearr = array(_('Tracker'), _('Description'), _('Use'), _('Card background color'));
-
-	echo $HTML->boxTop(_('Tasks trackers'));
-		echo $HTML->listTableTop($tablearr, false, 'sortable_table_tracker', 'sortable_table_tracker');
-		foreach($trackers as $tracker) {
-			$tracker_id = $tracker->getID();
-			echo '
-				<tr valign="middle">
-					<td>'.util_make_link('/tracker/?atid='.$tracker_id.'&group_id='.$group_id.'&func=browse',
-						html_image("ic/tracker20w.png","20","20").' &nbsp;'.$tracker->getName()).'
-					</td>
-					<td>'.$tracker->getDescription().'
-					</td>
-					<td><input type="checkbox" name="use[]" value="'.$tracker_id.'" class="use_tracker" '.
-						(in_array($tracker_id, $trackers_selected) ? 'checked' : '' ).'></td>
-					<td>'. $taskboard->colorBgChooser(
-						'bg['.$tracker_id.']',
-						( array_key_exists($tracker_id, $trackers_bgcolor) ? $trackers_bgcolor[$tracker_id]  : NULL  )
-					) .'</td>
-				</tr>';
 		}
+
+		if( $taskboard->getID() ) {
+			foreach( $taskboard->getUsedTrackersData() as $used_tracker_data ) {
+				$trackers_selected[] = $used_tracker_data['group_artifact_id'];
+				$trackers_bgcolor[ $used_tracker_data['group_artifact_id'] ] = $used_tracker_data['card_background_color'];
+				$release_field = $taskboard->getReleaseField();
+				$release_field_tracker = $taskboard->getReleaseFieldTracker();
+				$estimated_cost_field = $taskboard->getEstimatedCostField();
+				$remaining_cost_field = $taskboard->getRemainingCostField();
+				$user_stories_tracker = $taskboard->getUserStoriesTrackerID();
+				$user_stories_reference_field = $taskboard->getUserStoriesReferenceField();
+				$user_stories_sort_field = $taskboard->getUserStoriesSortField();
+				$first_column_by_default = $taskboard->getFirstColumnByDefault();
+			}
+		}
+
+		if (count($trackers) > 0) {
+			if (count($trackers_selected) == 0) {
+				echo $HTML->warning_msg(_('Choose at least one tracker for using with taskboard.'));
+			} else {
+				echo $html_e('div', array('id' => 'messages', 'class' => 'warning', 'style' => 'display: none;'), '', false);
+			}
+		} else {
+			echo $HTML->error_msg(_('There are no any tracker having "resolution" field.'));
+		}
+
+		echo html_e('script', array('type' => 'text/javascript', 'src' => '/plugins/taskboard/js/agile-board.js'), '', false);
+		echo $HTML->openForm(array('action' => '/plugins/taskboard/admin/?group_id='.$group_id.'&action=trackers', 'method' => 'post'));
+		echo html_e('input', array('type' => 'hidden', 'name' => 'post_changes', 'value' => 'y'));
+		echo $HTML->listTableTop();
+		$cells = array();
+		$tablearr = array(_('Tracker'), _('Description'), _('Use'), _('Card background color'));
+		$content = $HTML->boxTop(_('Tasks trackers'));
+		$content .= $HTML->listTableTop($tablearr, false, 'sortable_table_tracker', 'sortable_table_tracker');
+		foreach ($trackers as $tracker) {
+			$tracker_id = $tracker->getID();
+			$innercells = array();
+			$innercells[][] = util_make_link('/tracker/?atid='.$tracker_id.'&group_id='.$group_id.'&func=browse', $HTML->getFollowPic().' &nbsp;'.$tracker->getName());
+			$innercells[][] = $tracker->getDescription();
+			$innercells[][] = '<input type="checkbox" name="use[]" value="'.$tracker_id.'" class="use_tracker" '.(in_array($tracker_id, $trackers_selected) ? 'checked="checked"' : '' ).'>';
+			$innercells[][] = $taskboard->colorBgChooser('bg['.$tracker_id.']', (array_key_exists($tracker_id, $trackers_bgcolor) ? $trackers_bgcolor[$tracker_id] : NULL ));
+			$content .= $HTML->multiTableRow(array('valign' => 'middle'), $innercells);
+		}
+		$content .= $HTML->listTableBottom();
+		$content .= $HTML->listTableTop();
+		$innercells = array();
+		$innercells[][] = html_e('strong', array(), _('Estimated effort field'));
+		$innercells[][] = html_e('select', array('name' => 'estimated_cost_field'), html_e('option', array('value' => ''), _('Not defined')));
+		$content .= $HTML->multiTableRow(array(), $innercells);
+		$innercells = array();
+		$innercells[][] = html_e('strong', array(), _('Remaining effort field'));
+		$innercells[][] = html_e('select', array('name' => 'remaining_cost_field'), html_e('option', array('value' => ''), _('Not defined')));
+		$content .= $HTML->multiTableRow(array(), $innercells);
+		$content .= $HTML->listTableBottom();
+		$content .= $HTML->boxBottom();
+		$cells[] = array($content, 'width' => '50%');
+		$content = $HTML->boxTop(_('User story tracker'));
+		$content .= $HTML->listTableTop();
+		$innercells = array();
+		$innercells[][] = html_e('strong', array(), _('User stories tracker'));
+		$innercells[][] = html_e('select', array('name' => 'user_stories_tracker'), html_e('option', array('value' => ''), _('Not defined')));
+		$content .= $HTML->multiTableRow(array(), $innercells);
+		$innercells = array();
+		$innercells[][] = html_e('strong', array(), _('User stories reference field')).'&nbsp;'.html_e('span', array('id' => 'usrefreq', 'style' => (!$user_stories_tracker) ? 'display: none;' : '' ), '', false).utils_requiredField();
+		$innercells[][] = html_e('select', array('name' => 'user_stories_reference_field'), html_e('option', array('value' => ''), _('Not defined')));
+		$content .= $HTML->multiTableRow(array(), $innercells);
+		$innercells = array();
+		$innercells[][] = html_e('strong', array(), _('User stories sorting field'));
+		$innercells[][] = html_e('select', array('name' => 'user_stories_sort_field'), html_e('option', array('value' => ''), _('Not defined')));
+		$content .= $HTML->multiTableRow(array(), $innercells);
+		$content .= $HTML->listTableBottom();
+		$content .= $HTML->boxBottom();
+		$content .= $HTML->boxTop(_('General parameters'));
+		$content .= $HTML->listTableTop();
+		$innercells = array();
+		$innercells[][] = html_e('strong', array(), _('Use first column by default'));
+		$firstColumnByDefaultAttr = array('name' => 'first_column_by_default', 'type' => 'checkbox', 'value' => 1);
+		($first_column_by_default ? $firstColumnByDefaultAttr['checked'] = 'checked' : '');
+		$innercells[][] = html_e('input', $firstColumnByDefaultAttr);
+		$content .= $HTML->multiTableRow(array(), $innercells);
+		$content .= $HTML->listTableBottom();
+		$content .= $HTML->boxMiddle(_('Releases management'));
+		$content .= $HTML->listTableTop();
+		$innercells = array();
+		$innercells[][] = html_e('strong', array(), _('Manage releases'));
+		$releaseTrackerInputAttr1 = array('type' => 'radio', 'name' => 'release_field_tracker', 'value' => 1, 'id' => 'release_tracker1');
+		$releaseTrackerInputAttr2 = array('type' => 'radio', 'name' => 'release_field_tracker', 'value' => 2, 'id' => 'release_tracker2');
+		($release_field_tracker == 2 ? $releaseTrackerInputAttr2['checked'] = 'checked' : $releaseTrackerInputAttr1['checked'] = 'checked');
+
+		$innercells[][] = html_e('input', $releaseTrackerInputAttr1).'&nbsp;'._('by tasks').html_e('br').
+				html_e('input', $releaseTrackerInputAttr2).'&nbsp;'._('by user stories');
+		$content .= $HTML->multiTableRow(array(), $innercells);
+		$innercells = array();
+		$innercells[][] = html_e('strong', array(), _('Release field'));
+		$innercells[][] = html_e('select', array('name' => 'release_field'), html_e('option', array('value' => ''), _('Not defined')));
+		$content .= $HTML->multiTableRow(array(), $innercells);
+		$content .= $HTML->listTableBottom();
+		$content .= $HTML->boxBottom();
+		$cells[] = array($content, 'width' => '50%');
+		echo $HTML->multiTableRow(array('valign' => 'top'), $cells);
 		echo $HTML->listTableBottom();
-
+		echo html_e('p', array(), html_e('input', array('type' => 'submit', 'name' => 'post_changes', 'value' => _('Submit'))));
+		echo $HTML->addRequiredFieldsInfoBox();
+		echo $HTML->closeForm();
+		echo html_ao('script', array('type' => 'text/javascript'));
 ?>
-<table>
-	<tr><td><strong><?php echo _('Estimated effort field') ?></strong></td><td><select name="estimated_cost_field"><option option value=""><?php echo _('Not defined') ?></option></select></td></tr>
-	<tr><td><strong><?php echo _('Remaining effort field') ?></strong></td><td><select name="remaining_cost_field"><option option value=""><?php echo _('Not defined') ?></option></select></td></tr>
-</table>
-<?php echo $HTML->boxBottom(); ?>
-	</td>
-	<td width="50%">
-
-<?php echo $HTML->boxTop(_('User story tracker')); ?>
-
-<table>
-	<tr><td><strong><?php echo _('User stories tracker') ?></strong></td><td><select name="user_stories_tracker"><option value=""><?php echo _('Not defined') ?></option></select></td></tr>
-	<tr><td><strong><?php echo _('User stories reference field') ?></strong>&nbsp;<span id='usrefreq' <?php if( !$user_stories_tracker) { ?> style='display: none;' <?php } ?> ><?php echo utils_requiredField(); ?></span></td><td><select name="user_stories_reference_field"><option value=""><?php echo _('Not defined') ?></option></select></td></tr>
-	<tr><td><strong><?php echo _('User stories sorting field') ?></strong></td><td><select name="user_stories_sort_field"><option value=""><?php echo _('Not defined') ?></option></select></td></tr>
-</table>
-
-<?php echo $HTML->boxBottom(); ?>
-
-<?php echo $HTML->boxTop(_('General parameters')); ?>
-<table>
-	<tr><td><strong><?php echo _('Use first column by default') ?></strong></td><td><input name="first_column_by_default" type="checkbox" <?php echo ($first_column_by_default? 'checked' : '')  ?> value="1"></td></tr>
-</table>
-
-<?php echo $HTML->boxMiddle(_('Releases management'));?>
-
-<table>
-	<tr><td><strong><?php echo _('Manage releases') ?></strong></td><td>
-		<input type="radio" name="release_field_tracker" value="1" id="release_tracker1" <?php echo ( $release_field_tracker!=2 ? 'checked' : '') ?>>&nbsp;<?php echo _('by tasks') ?><br>
-		<input type="radio" name="release_field_tracker" value="2" id="release_tracker2" <?php echo ( $release_field_tracker==2 ? 'checked' : '') ?>>&nbsp;<?php echo _('by user stories') ?></td></tr>
-	<tr><td><strong><?php echo _('Release field') ?></strong></td><td><select name="release_field"><option value=""><?php echo _('Not defined') ?></option></select></td></tr>
-</table>
-
-<?php echo $HTML->boxBottom(); ?>
-
-	</td>
-</tr></table>
-
-<p>
-	<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" />
-</p>
-
-<?php
-	echo $HTML->addRequiredFieldsInfoBox();
-}
-echo $HTML->closeForm();
-?>
-
-<script>
+//<![CDATA[
 var all_trackers = new Array();
 <?php
-foreach( $at_arr as $tracker ) {
-	echo  'all_trackers.push( { id: "'.$tracker->getID().'", name: "'.$tracker->getName().'", desc: "'.$tracker->getDescription().'" } );'."\n";
-} ?>
+		foreach( $at_arr as $tracker ) {
+			echo  'all_trackers.push({ id: "'.$tracker->getID().'", name: "'.$tracker->getName().'", desc: "'.$tracker->getDescription().'" });'."\n";
+		}
+?>
 
 jQuery(function($){
 	var user_story_ref_field ='';
@@ -193,7 +190,7 @@ jQuery(function($){
 			selected = '<?php echo $user_stories_tracker ?>';
 		}
 
-		var str = '<option value=""><?php echo _('Not defined') ?></option>';
+		var str = '<option value=""><?php echo _('Not defined'); ?></option>';
 		$.each(all_trackers, function(key, value) {
 			if( !$('input.use_tracker[value=' + value.id + ']').is(':checked') ) {
 				str +='<option value="'+ value.id +'"'+ ( value.id == selected ? 'selected' : '' ) +'>'+ value.name +'</option>';
@@ -207,7 +204,7 @@ jQuery(function($){
 	function loadUserStorySortFields() {
 		$.ajax({
 			type: 'POST',
-			url: '<?php echo util_make_url('/plugins/taskboard/admin/ajax.php') ;?>',
+			url: '<?php echo util_make_url('/plugins/taskboard/admin/ajax.php'); ?>',
 			dataType: 'json',
 			data : {
 				action : 'get_trackers_fields',
@@ -226,7 +223,7 @@ jQuery(function($){
 					selected = '<?php echo $user_stories_sort_field ?>';
 				}
 
-				var str = '<option value=""><?php echo _('Not defined') ?></option>';
+				var str = '<option value=""><?php echo _('Not defined'); ?></option>';
 				if( answer['common_selects'] ) {
 					$.each(answer['common_selects'], function(key, value) {
 						str +='<option value="'+ key +'"'+ ( key == selected ? 'selected' : '' ) +'>'+ value +'</option>';
@@ -261,7 +258,7 @@ jQuery(function($){
 
 		$.ajax({
 			type: 'POST',
-			url: '<?php echo util_make_url('/plugins/taskboard/admin/ajax.php') ;?>',
+			url: '<?php echo util_make_url('/plugins/taskboard/admin/ajax.php'); ?>',
 			dataType: 'json',
 			data : {
 				action : 'get_trackers_fields',
@@ -280,7 +277,7 @@ jQuery(function($){
 					selected = '<?php echo $release_field ?>';
 				}
 
-				var str = '<option value=""><?php echo _('Not defined') ?></option>';
+				var str = '<option value=""><?php echo _('Not defined'); ?></option>';
 				if( answer['common_selects'] ) {
 					$.each(answer['common_selects'], function(key, value) {
 						str +='<option value="'+ key +'"'+ ( key == selected ? 'selected' : '' ) +'>'+ value +'</option>';
@@ -301,12 +298,12 @@ jQuery(function($){
 		});
 
 		if( trackers.length == 0 ) {
-			showMessage("<?php echo _('Choose at least one tracker for using with taskboard.') ?>", "warning");
+			showMessage("<?php echo _('Choose at least one tracker for using with taskboard.'); ?>", "warning");
 		}
 
 		$.ajax({
 			type: 'POST',
-			url: '<?php echo util_make_url('/plugins/taskboard/admin/ajax.php') ;?>',
+			url: '<?php echo util_make_url('/plugins/taskboard/admin/ajax.php'); ?>',
 			dataType: 'json',
 			data : {
 				action : 'get_trackers_fields',
@@ -409,18 +406,8 @@ jQuery(function($){
 	loadTrackersFields();
 	loadReleaseField();
 });
-</script>
+//]]>
 <?php
-		}
+		echo html_ac(html_ap() - 1);
 	}
-} else {
-	$taskboard->header(
-		array(
-			'title' => _('Taskboard for ').$group->getPublicName()._(': ').'Administration - Trackers configuration',
-			'pagename' => _('Trackers configuration'),
-			'sectionvals' => array(group_getname($group_id)),
-			'group' => $group_id
-		)
-	);
-	echo $HTML->information(_('Your project does not use tracker feature. Please contact your Administrator to turn on this feature.'));
 }
