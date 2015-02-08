@@ -22,59 +22,15 @@
 
 global $group_id, $HTML;
 
-$atf = $taskboard->TrackersAdapter->getArtifactTypeFactory();
-if (!$atf || !is_object($atf) || $atf->isError()) {
-	echo  json_encode( array( 'message' => _('Could Not Get ArtifactTypeFactory') ) );
-	exit();
-}
-
 $used_trackers = getArrayFromRequest('trackers' );
 
 $ret = array( 'messages' => '' );
-$common_fields = array();
 $allowed_types = array( 1, 4, 9);
-foreach( $allowed_types as $allowed_type) {
-	$common_fields[$allowed_type] = array();
-}
+$common_fields = $taskboard->getExtraFields( $allowed_types, $used_trackers );
 
-$at_arr = $atf->getArtifactTypes();
-$init = true;
-for ($j = 0; $j < count($at_arr); $j++) {
-	if (!is_object($at_arr[$j])) {
-		//just skip it
-	} elseif ($at_arr[$j]->isError()) {
-		echo  json_encode( array( 'message' => $at_arr[$j]->getErrorMessage() ) );
-		exit();
-	} else {
-		$tracker_id = $at_arr[$j]->getID();
-
-		if( in_array( $tracker_id, $used_trackers ) ) {
-			// select common 'select' fields
-			$fields = $at_arr[$j]->getExtraFields( $allowed_types );
-			$tmp = array();
-			foreach( $allowed_types as $allowed_type) {
-				$tmp[$allowed_type] = array();
-			}
-
-			foreach( $fields as $field) {
-				// exclude 'resolution' field
-				if( $field['alias'] != 'resolution' ) {
-					if( $init ) {
-						if( in_array( $field['field_type'], $allowed_types) ) {
-							$tmp[ $field['field_type'] ][ $field['alias'] ] = $field['field_name'];
-						}
-					} elseif( 
-						in_array( $field['alias'], array_keys( $common_fields[ $field['field_type'] ]) ) && 
-						in_array( $field['field_type'], $allowed_types)
-						) {
-						$tmp[ $field['field_type'] ][$field['alias']] = $field['field_name'];
-					}
-				}
-			}
-			$common_fields = $tmp;
-			$init = false;
-		}
-	}
+if( is_string( $common_fields ) ) {
+	echo  json_encode( array( 'message' => $common_fields ) );
+	exit();
 }
 
 $ret['common_selects'] = $common_fields[1];

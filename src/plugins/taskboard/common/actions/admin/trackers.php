@@ -148,7 +148,7 @@ if(  count($at_arr) > 0 ) {
 				</td>
 				<td><input type="checkbox" name="use[]" value="'.$tracker_id.'" class="use_tracker" '.
 					(in_array($tracker_id, $trackers_selected) ? 'checked' : '' ).'></td>
-				<td>'. $taskboard->colorBgChooser( 
+				<td>'. $taskboard->trackersColorChooser( 
 					'bg['.$tracker_id.']',
 					( array_key_exists($tracker_id, $trackers_bgcolor) ? $trackers_bgcolor[$tracker_id]  : NULL  ) 
 				) .'</td>

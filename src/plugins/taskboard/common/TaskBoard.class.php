@@ -115,12 +115,11 @@ class TaskBoard extends Error {
 			}
 		}
 
-		// TODO define adapter class name in configuration file
-		global $gfplugins,$plugins_taskboard_trackers_adapter_class, $plugins_taskboard_trackers_adapter_module;
-		if( !isset($plugins_taskboard_trackers_adapter_module) || !isset($plugins_taskboard_trackers_adapter_class) ) {
-			$plugins_taskboard_trackers_adapter_module = $gfplugins.'taskboard/common/adapters/TaskBoardBasicAdapter.class.php';
+		$plugins_taskboard_trackers_adapter_class = forge_get_config('trackers_adapter_class', 'taskboard');
+		if( !isset($plugins_taskboard_trackers_adapter_class) ) {
 			$plugins_taskboard_trackers_adapter_class  = 'TaskBoardBasicAdapter';			
 		}
+		$plugins_taskboard_trackers_adapter_module = $gfplugins.'taskboard/common/adapters/' . $plugins_taskboard_trackers_adapter_class . '.class.php';
 
 		require_once( $plugins_taskboard_trackers_adapter_module );
 		$this->TrackersAdapter = new $plugins_taskboard_trackers_adapter_class( $this );
@@ -645,7 +644,12 @@ class TaskBoard extends Error {
 			}
 		}
 
-		$task_maped['background'] = $_used_trackers_data[$task->ArtifactType->getID()]['card_background_color'];
+		$card_title_background = $_used_trackers_data[$task->ArtifactType->getID()]['card_background_color'];
+		if( method_exists($this->TrackersAdapter, 'cardBackgroundColor' ) ) {
+			$task_maped['background'] = $this->TrackersAdapter->cardBackgroundColor($task, $card_title_background );
+		} else {
+			$task_maped['background'] = $card_title_background;
+		}
 
 		return $task_maped;
 	}
@@ -702,7 +706,7 @@ class TaskBoard extends Error {
 		$ef_mapping = $this->getMandatoryFieldsMapping();
 
 		$fields_ids = $this->TrackersAdapter->getFieldsIds($task->ArtifactType->getID() );
-		$extra_data = $task->getExtraFieldDataText();	
+		$extra_data = $task->getExtraFieldDataText();
 
 		$ret['id'] = $task->getID();
 		$ret['title'] = $task->getSummary();
@@ -783,6 +787,72 @@ class TaskBoard extends Error {
 		db_free_result($res);
 
 		return $column_id;
+	}
+	
+	/**
+	 *      getExtraFields - get a list of extra fields, existing is all used task trackers
+	 *      
+	 *      @param  array   list of allowed extra fields types
+	 *      @param  array   list of excluded aliases
+	 *
+	 *      @return array    array of aliases
+	 */
+	function getExtraFields($allowed_types=array(), $used_trackers=NULL, $excluded_aliases=array('resolution')) {
+		$atf = $this->TrackersAdapter->getArtifactTypeFactory();
+		if (!$atf || !is_object($atf) || $atf->isError()) {
+			return _('Could Not Get ArtifactTypeFactory');
+		}
+		
+		if( !$used_trackers ) {
+			$used_trackers = $this->getUsedTrackersIds();
+		}
+		
+		$common_fields = array();
+		
+		foreach( $allowed_types as $allowed_type) {
+			$common_fields[$allowed_type] = array();
+		}
+		
+		$at_arr = $atf->getArtifactTypes();
+		$init = true;
+		for ($j = 0; $j < count($at_arr); $j++) {
+			if (!is_object($at_arr[$j])) {
+				//just skip it
+			} elseif ($at_arr[$j]->isError()) {
+				return $at_arr[$j]->getErrorMessage();
+			} else {
+				$tracker_id = $at_arr[$j]->getID();
+		
+				if( in_array( $tracker_id, $used_trackers ) ) {
+					// select common fields for the give types
+					$fields = $at_arr[$j]->getExtraFields( $allowed_types );
+					$tmp = array();
+					foreach( $allowed_types as $allowed_type) {
+						$tmp[$allowed_type] = array();
+					}
+		
+					foreach( $fields as $field) {
+						// exclude 'resolution' field
+						if( !in_array( $field['alias'],$excluded_aliases ) ) {
+							if( $init ) {
+								if( in_array( $field['field_type'], $allowed_types) ) {
+									$tmp[ $field['field_type'] ][ $field['alias'] ] = $field['field_name'];
+								}
+							} elseif(
+									in_array( $field['alias'], array_keys( $common_fields[ $field['field_type'] ]) ) &&
+									in_array( $field['field_type'], $allowed_types)
+							) {
+								$tmp[ $field['field_type'] ][$field['alias']] = $field['field_name'];
+							}
+						}
+					}
+					$common_fields = $tmp;
+					$init = false;
+				}
+			}
+		}
+		
+		return $common_fields;
 	}
 	
 	/**
