@@ -148,16 +148,26 @@ if( $taskboard->getReleaseField() ) {
 <div>
 	<form>
 		<table cellspacing="0">
-			<tr>
-		<?php if( $release_box ) { ?>
-
-				<td>
-					<?php echo _('Release').':&nbsp;'. $release_box ; ?>
-				</td>
-		<?php } ?>
+			<tr valign="middle">
 				<td>
 					<?php echo _('Assignee').':&nbsp;'. $tech_box ; ?>
 				</td>
+		<?php if( $release_box ) { ?>
+				<td>
+					<?php echo _('Release').':&nbsp;'. $release_box ; ?>
+				</td>
+				<?php if ( forge_check_perm('tracker_admin', $group_id ) ) { ?>
+				<td>
+					<div id="taskboard-release-description"></div>
+					<div id="taskboard-release-snapshot">
+						<input type="hidden" name="taskboard_release_id" id="taskboard-release-id"value="">
+						<input type="text" name="snapshot_date" value="<?php echo date('Y-m-d') ?>">
+						<button id="taskboard-save-snapshot-btn"><?php echo _('Save release snapshot'); ?></button>
+					</div>
+				</td>
+				<?php } ?>
+		<?php } ?>
+
 			</tr>
 		</table>
 	</form>
@@ -239,6 +249,19 @@ var gMessages = {
 	'progressByCost' : "<?php echo _('Progress by cost') ?>"
 };
 
+<?php 
+	$releases = array();
+	foreach( $taskboard->getReleases() as $release ) {
+		$releases[ $release->getTitle() ] = array(
+			'id' => $release->getID(),
+			'startDate' => date( 'Y-m-d', $release->getStartDate()),
+			'endDate' => date( 'Y-m-d', $release->getEndDate()),
+			'goal' => htmlspecialchars( $release->getTitle() )
+		);
+	}
+?>
+var gReleases = <?php echo json_encode($releases) ;?>
+
 bShowUserStories = <?php echo $taskboard->getUserStoriesTrackerID() ? 'true' : 'false' ?>;
 aUserStories = [];
 aPhases = []
@@ -307,8 +330,37 @@ jQuery( document ).ready(function( $ ) {
 			jQuery('#tracker-summary').val('');
 			jQuery('#tracker-description').val('');
 		}
-		<?php } ?>
 	});
+	
+	<?php if ( forge_check_perm('tracker_admin', $group_id ) ) { ?>
+	jQuery('#taskboard-save-snapshot-btn').click( function ( e ) {
+		jQuery.ajax({
+			type: 'POST',
+			url: '<?php echo util_make_url('/plugins/taskboard/ajax.php') ;?>',
+			dataType: 'json',
+			data : {
+				action : 'save_release_snapshot',
+				group_id : gGroupId,
+				tracker_id : jQuery('#tracker_id').val(),
+				release_id : jQuery('#taskboard-release-id').val(),
+				snapshot_date :  jQuery('input[name="snapshot_date"]').val()
+			},
+			async: true
+		}).done(function( answer ) {
+			if(answer['alert']) {
+				alert(answer['alert']);
+			}
+		}).fail(function( jqxhr, textStatus, error ) {
+			var err = textStatus + ', ' + error;
+			alert(err);
+		});
+
+		e.preventDefault();
+	});
+	<?php }?>
+
+	
+	<?php } ?>
 
 	jQuery('#tracker-summary, #tracker-description').keyup( function () {
 		// submit button is enabled only if both, title and descritpion, are filled

@@ -116,6 +116,16 @@
 	width: 98%;
 }
 
+#taskboard-release-description {
+	margin:0 auto;
+	float: left;
+}
+
+#taskboard-release-snapshot {
+	margin-left: 50px;
+	float: right;
+}
+
 .ui-dialog {
 	z-index: 2000;
 	background-color: #ffffcc;

@@ -10,13 +10,30 @@ function showMessage( msg_text, msg_class) {
 
 function loadTaskboard( group_id ) {
 	var assigned_to = jQuery('select[name="_assigned_to"]').val();
-	var release = jQuery('select[name="_release"]').val();
+	var release_val = jQuery('select[name="_release"]').val();
 	var data = {
 			action   : 'load_taskboard',
 			group_id : group_id,
 			assigned_to : assigned_to,
-			release : release
+			release : release_val
 		};
+
+	if( release_val && gReleases[release_val] ) {
+		jQuery('#taskboard-release-id').val( gReleases[release_val].id );
+		jQuery('#taskboard-release-description').html(
+				gReleases[release_val].startDate + ' - ' + gReleases[release_val].endDate
+		);
+		jQuery('#taskboard-release-snapshot').show();
+		jQuery( "input[name='snapshot_date']" ).datepicker( {  
+			"dateFormat" : "yy-mm-dd",
+			"minDate" : gReleases[release_val].startDate,
+			"maxDate" : gReleases[release_val].endDate
+		});
+	} else {
+		jQuery('#taskboard-release-id').val('');
+		jQuery('#taskboard-release-description').html('');
+		jQuery('#taskboard-release-snapshot').hide();
+	}
 
 	jQuery.ajax({
 		type: 'POST',

@@ -55,7 +55,7 @@ if (!$group_id) {
 	}
 
 	$taskboard = new TaskBoardHtml( $group ) ;
-	$allowedActions = array('load_taskboard','drop_card','update','add');
+	$allowedActions = array('load_taskboard','drop_card','update','add','save_release_snapshot');
 	
 	if( in_array($action, $allowedActions) ) {
 		include( $gfplugins.'taskboard/common/actions/ajax_'.$action.'.php' );
