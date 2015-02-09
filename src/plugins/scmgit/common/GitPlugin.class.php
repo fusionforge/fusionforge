@@ -340,10 +340,11 @@ control over it to the project's administrator.");
 						$iframesrc = util_make_uri('/plugins/scmgit/cgi-bin/gitweb.cgi?p='.$project->getUnixName().'/users/'.$user->getUnixName().'.git');
 				} elseif (session_loggedin()) {
 						$u = user_get_object(user_getid())->getUnixName();
+						$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
 						$box = $this->getBoxForProject($project);
 						$iframesrc = "$protocol://$box/authscm/$u/gitweb/".$project->getUnixName().'/?p='.$project->getUnixName().'/users/'.$user->getUnixName().'.git';
 				}
-				htmlIframe($iframesrc, array('id'=>'scmgit_iframe', 'absolute'=>true));
+				htmlIframeResizer($iframesrc, array('id'=>'scmgit_iframe', 'absolute'=>true));
 			} elseif ($this->browserDisplayable($project)) {
 				if ($project->enableAnonSCM()) {
 						$iframesrc = util_make_uri('/plugins/scmgit/cgi-bin/gitweb.cgi?p='.$project->getUnixName().'/'.$project->getUnixName().'.git');
@@ -356,7 +357,7 @@ control over it to the project's administrator.");
 				if ($params['commit']) {
 					$iframesrc .= ';a=log;h='.$params['commit'];
 				}
-				htmlIframe($iframesrc, array('id'=>'scmgit_iframe','absolute'=>true));
+				htmlIframeResizer($iframesrc, array('id'=>'scmgit_iframe','absolute'=>true));
 			}
 		}
 	}

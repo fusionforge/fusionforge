@@ -524,6 +524,10 @@ function html_use_jqueryautoheight() {
 	use_javascript('/scripts/jquery-auto-height/jquery.iframe-auto-height.plugin.1.9.5.js');
 }
 
+function html_use_iframeresizer() {
+	use_javascript('/scripts/iframe-resizer/iframeResizer.min.js');
+}
+
 function html_use_jquerybrowser() {
 	html_use_jquery();
 	use_javascript('/scripts/jquery-auto-height/jquery.browser.js');
