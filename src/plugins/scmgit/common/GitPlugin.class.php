@@ -682,6 +682,7 @@ control over it to the project's administrator.");
 		fwrite($f, "\$favicon = '". util_make_url('/plugins/scmgit/git-favicon.png')."';\n");
 		fwrite($f, "\$stylesheet = '". util_make_url('/plugins/scmgit/gitweb.css')."';\n");
 		fwrite($f, "\$javascript = '". util_make_url('/plugins/scmgit/gitweb.js')."';\n");
+		fwrite($f, "\$site_header = '" . forge_get_config('plugins_path') . "/scmgit/www/iframeResizer.contentWindow.html';\n");
 		fwrite($f, "\$prevent_xss = 'true';\n");
 		fwrite($f, "\$feature{'actions'}{'default'} = [('project home', '" .
 		       util_make_url('/plugins/scmgit/?func=grouppage/%n') .
