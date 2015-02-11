@@ -34,7 +34,7 @@ SetEnv FORGE_CONFIG_PATH "{core/config_path}"
 
 Alias /images/ {core/source_path}/www/images/
 Alias /scripts/coolfieldset/ {core/source_path}/vendor/coolfieldset/
-Alias /scripts/iframe-resizer/ /usr/local/share/fusionforge/vendor/iframe-resizer/                       |
+Alias /scripts/iframe-resizer/ /usr/local/share/fusionforge/vendor/iframe-resizer/
 Alias /scripts/jquery/ {core/source_path}/vendor/jquery/
 Alias /scripts/jquery-ui/ {core/source_path}/vendor/jquery-ui/
 Alias /scripts/jquery-storage/ {core/source_path}/vendor/jquery-storage/
