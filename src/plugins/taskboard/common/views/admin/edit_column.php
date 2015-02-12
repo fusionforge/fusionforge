@@ -66,7 +66,7 @@ if ($column_id) {
 		$cells[][] = html_e('input', array('type' => 'text', 'name' => 'column_max_tasks', 'value' => $column->getMaxTasks()));
 		echo $HTML->multiTableRow(array(), $cells);
 		$cells = array();
-		$cells[] = array(html_e('strong', array(), _('Resolutions')_(':')), 'colspan' = 2);
+		$cells[] = array(html_e('strong', array(), _('Resolutions')._(':')), 'colspan' => 2);
 		echo $HTML->multiTableRow(array(), $cells);
 		// unused by any columns resolutions
 		foreach ($taskboard->getUnusedResolutions() as $resolution) {
