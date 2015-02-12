@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
+ * Copyright 2015, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -30,27 +31,27 @@ $taskboard->header(
 	)
 );
 
-if(count($taskboard->getUsedTrackersIds()) == 0) {
+if (count($taskboard->getUsedTrackersIds()) == 0) {
 	echo $HTML->warning_msg(_('Choose at least one tracker for using with taskboard.'));
 } else {
-	if($taskboard->isError()) {
+	if ($taskboard->isError()) {
 		echo $HTML->error_msg($taskboard->getErrorMessage());
 	} else {
-		echo '<div id="messages" style="display: none;"></div>';
+		echo html_e('div', array('id' => 'messages', 'style' => 'display: none;'), '', false);
 	}
 
 	$columns = $taskboard->getColumns();
 	$tablearr = array(_('Order'), _('Title'), _('Max number of tasks'), _('Assigned resolutions'), _('Drop resolution'));
 
 	echo $HTML->listTableTop($tablearr, false, 'sortable_table_tracker', 'sortable_table_tracker');
-	foreach($columns as $column) {
+	foreach ($columns as $column) {
 		$downLink = '';
-		if($column->getOrder() < count($columns)) {
-			$downLink = util_make_link('/plugins/taskboard/admin/?group_id='.$group_id.'&action=down_column&column_id='.$column->getID(), "<img alt='" ._('Down'). "' src='/images/pointer_down.png'>" );
+		if ($column->getOrder() < count($columns)) {
+			$downLink = util_make_link('/plugins/taskboard/admin/?group_id='.$group_id.'&action=down_column&column_id='.$column->getID(), html_image('pointer_down.png', 16, 16, array('title' => _('Down'), 'alt' => _('Down'))));
 		}
 		$cells = array();
 		$cells[][] = $column->getOrder().'&nbsp;'.$downLink;
-		$cells[][] = '<div style="float: left; border: 1px solid grey; height: 30px; width: 20px; background-color: '.$column->getColumnBackgroundColor().'; margin-right: 10px;"><div style="width: 100%; height: 10px; background-color: '.$column->getTitleBackgroundColor().';"></div></div>'.
+		$cells[][] = html_e('div', array('style' => 'float: left; border: 1px solid grey; height: 30px; width: 20px; background-color: '.$column->getColumnBackgroundColor().'; margin-right: 10px;'), html_e('div', array('style' => 'width: 100%; height: 10px; background-color: '.$column->getTitleBackgroundColor()), '', false)).
 					util_make_link('/plugins/taskboard/admin/?group_id='.$group_id.'&view=edit_column&column_id='.$column->getID(),
 					$column->getTitle());
 		$cells[][] = $column->getMaxTasks();

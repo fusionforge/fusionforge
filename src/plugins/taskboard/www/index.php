@@ -52,8 +52,8 @@ if (!$group_id) {
 	$taskboard->header(
 		array(
 			'title' => _('Taskboard for ').$group->getPublicName(),
-			'pagename' => "Taskboard",
-			'sectionvals' => array(group_getname($group_id)),
+			'pagename' => 'Taskboard',
+			'sectionvals' => array($group->getPublicName()),
 			'group' => $group_id
 		)
 	);

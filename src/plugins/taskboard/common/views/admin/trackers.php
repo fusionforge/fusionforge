@@ -87,7 +87,7 @@ if (!$atf || !is_object($atf) || $atf->isError()) {
 			if (count($trackers_selected) == 0) {
 				echo $HTML->warning_msg(_('Choose at least one tracker for using with taskboard.'));
 			} else {
-				echo $html_e('div', array('id' => 'messages', 'class' => 'warning', 'style' => 'display: none;'), '', false);
+				echo html_e('div', array('id' => 'messages', 'class' => 'warning', 'style' => 'display: none;'), '', false);
 			}
 		} else {
 			echo $HTML->error_msg(_('There are no any tracker having "resolution" field.'));
