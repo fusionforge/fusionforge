@@ -1101,6 +1101,11 @@ abstract class RoleExplicit extends BaseRole implements PFO_RoleExplicit {
 			}
 		}
 
+		$systasksq = new SysTasksQ();
+		foreach ($this->getLinkedProjects() as $project) {
+			$systasksq->add(SYSTASK_CORE, 'SCM_REPO', $project->getID());
+		}
+
 		return true;
 	}
 
@@ -1131,6 +1136,11 @@ abstract class RoleExplicit extends BaseRole implements PFO_RoleExplicit {
 			foreach ($ids as $uid) {
 				$SYS->sysGroupCheckUser($p->getID(),$uid) ;
 			}
+		}
+
+		$systasksq = new SysTasksQ();
+		foreach ($this->getLinkedProjects() as $project) {
+			$systasksq->add(SYSTASK_CORE, 'SCM_REPO', $project->getID());
 		}
 
 		return true ;
