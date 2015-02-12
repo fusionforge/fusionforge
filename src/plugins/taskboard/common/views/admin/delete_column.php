@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
+ * Copyright 2015, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -19,36 +20,26 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-session_require_perm('tracker_admin', $group_id) ;
 
-$column_id = getStringFromRequest('column_id','');
-$confirmed = getStringFromRequest('confirmed','');
+global $group_id, $taskboard, $HTML;
+
+$column_id = getStringFromRequest('column_id', '');
 $column = &taskboard_column_get_object($column_id);
 
-if($confirmed) {
-	db_begin();
-	if($column->delete()) {
-		db_commit();
-		$feedback.=_('Successfully Removed');
-	} else {
-		db_rollback();
-	}
-	session_redirect('/plugins/taskboard/admin/?view=columns&group_id='.$group_id);
-} else {
-	$taskboard->header(
-		array(
-			'title' => _('Taskboard for ').$group->getPublicName()._(': ')._('Administration')._(': ')._('Column configuration'),
-			'pagename' => _('Column configuration'),
-			'sectionvals' => array(group_getname($group_id)),
-			'group' => $group_id
-		)
-	);
+$taskboard->header(
+	array(
+		'title' => _('Taskboard for ').$group->getPublicName()._(': ')._('Administration')._(': ')._('Column configuration'),
+		'pagename' => _('Column configuration'),
+		'sectionvals' => array(group_getname($group_id)),
+		'group' => $group_id
+	)
+);
 
-	if($taskboard->isError()) {
-		echo '<div id="messages" class="error">'.$taskboard->getErrorMessage().'</div>';
-	} else {
-		echo '<div id="messages" style="display: none;"></div>';
-	}
+if($taskboard->isError()) {
+	echo '<div id="messages" class="error">'.$taskboard->getErrorMessage().'</div>';
+} else {
+	echo '<div id="messages" style="display: none;"></div>';
+}
 
 ?>
 	<form action="<?php echo util_make_url('/plugins/taskboard/admin/?group_id='.$group_id.'&action=delete_column') ?>" method="post">
@@ -65,5 +56,5 @@ if($confirmed) {
 	<p>
 	<input type="submit" name="post_delete" value="<?php echo _('Delete') ?>">
 	</p>
+	</form>
 
-<?php }
