@@ -28,7 +28,7 @@ class SysTasksQ extends Error {
 	function add($plugin_id, $systask_type, $group_id, $user_id=null) {
 		// Trim duplicate requests, e.g. SCM_REPO ones
 		$qpa = db_construct_qpa();
-		$qpa = db_construct_qpa($qpa, 'SELECT FROM systasks WHERE status=$1', array('TODO'));
+		$qpa = db_construct_qpa($qpa, 'SELECT * FROM systasks WHERE status=$1', array('TODO'));
 		$qpa = db_construct_qpa($qpa, ' AND systask_type=$1', array($systask_type));
 		if ($plugin_id == null) $qpa = db_construct_qpa($qpa, ' AND plugin_id IS NULL');
 		else                    $qpa = db_construct_qpa($qpa, ' AND plugin_id=$1', array($plugin_id));
