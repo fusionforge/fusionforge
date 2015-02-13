@@ -47,7 +47,7 @@ case $VM in
     centos5)
 	ssh root@$HOST "yum -y --enablerepo=epel install epel-release"
 	ssh root@$HOST "rpm -i http://rpms.famillecollet.com/enterprise/remi-release-5.rpm"
-	ssh root@$HOST "yum -y --enablerepo=remi install php-phpunit-PHPUnit"
+	ssh root@$HOST "yum -y --enablerepo=remi install php-phpunit-PHPUnit php-phpunit-PHPUnit-Selenium"
 	;;
 esac
 
