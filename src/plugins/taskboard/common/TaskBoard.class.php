@@ -119,6 +119,7 @@ class TaskBoard extends Error {
 		if( !isset($plugins_taskboard_trackers_adapter_class) ) {
 			$plugins_taskboard_trackers_adapter_class  = 'TaskBoardBasicAdapter';			
 		}
+		global $gfplugins;
 		$plugins_taskboard_trackers_adapter_module = $gfplugins.'taskboard/common/adapters/' . $plugins_taskboard_trackers_adapter_class . '.class.php';
 
 		require_once( $plugins_taskboard_trackers_adapter_module );
@@ -996,8 +997,10 @@ class TaskBoard extends Error {
 		$used_resolutions = $this->getUsedResolutions();
 		
 		$resolutions = array();
-		if( $all_resolutions && $used_resolutions ) {
+		if( $all_resolutions && count( $used_resolutions ) > 0 ) {
 			$resolutions = array_diff( $all_resolutions, $used_resolutions );
+		} else {
+			$resolutions = $all_resolutions;
 		}
 
 		return $resolutions;

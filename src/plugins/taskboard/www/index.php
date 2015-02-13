@@ -210,7 +210,7 @@ if( $taskboard->getReleaseField() ) {
 		$used_trackers = $taskboard->getUsedTrackersIds();
 
 		if( count($used_trackers) == 1 ) {
-			echo '<input type="hidden" name="tracker_id" id="tracker_id" value="' . $used_trackers[0]->getID(). '">';
+			echo '<input type="hidden" name="tracker_id" id="tracker_id" value="' . $used_trackers[0] . '">';
 		} else {
 			// select target tracker if more then single trackers are configured
 			echo "<div>\n";

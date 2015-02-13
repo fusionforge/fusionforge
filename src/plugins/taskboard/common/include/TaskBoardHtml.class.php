@@ -80,7 +80,7 @@ class TaskBoardHtml extends TaskBoard {
 	
 	function trackersColorChooser( $name, $color='Silver' ) {
 		if( method_exists($this->TrackersAdapter, 'trackersColorChooser' ) ) {
-			return $this->TrackersAdapter->trackersColorChooser( $name, $color='Silver' );
+			return $this->TrackersAdapter->trackersColorChooser( $name, $color );
 		} else {
 			$l_aColors = array( 'none', 'Khaki', 'Gold', 'LawnGreen', 'PaleGreen', 'Salmon', 'PeachPuff', 'LightBlue', 'Silver' );
 			return $this->_colorChooser( $name, $l_aColors, 'Silver', $color );
