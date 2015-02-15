@@ -28,14 +28,14 @@ $end_date_unixtime = NULL;
 $error_msg = '';
 $release_id = getIntFromRequest('release_id', NULL);
 
-$release = new TaskBoardRelease( $taskboard, $release_id );
+$release = new TaskBoardRelease( $taskboard, $release_id);
 
 if (getStringFromRequest('post_changes')) {
-	$element_id = getIntFromRequest('_release','');
-	$start_date = getStringFromRequest('start_date','');
-	$end_date = getStringFromRequest('end_date','');
-	$goals = getStringFromRequest('goals','');
-	$page_url = getStringFromRequest('page_url','');
+	$element_id = getIntFromRequest('_release', '');
+	$start_date = getStringFromRequest('start_date', '');
+	$end_date = getStringFromRequest('end_date', '');
+	$goals = getStringFromRequest('goals', '');
+	$page_url = getStringFromRequest('page_url', '');
 
 
 	$start_date_unixtime = strtotime($start_date);
@@ -56,13 +56,12 @@ if (getStringFromRequest('post_changes')) {
 
 if ($element_id && $start_date_unixtime && $end_date_unixtime) {
 	db_begin();
-
 	if ($release->update($element_id, $start_date_unixtime, $end_date_unixtime, $goals, $page_url)) {
 		db_commit();
 		$feedback .= _('Succefully Updated');
-		session_redirect('/plugins/taskboard/releases/?group_id='.$group_id );
 	} else {
 		db_rollback();
-		exit_error( $release->getErrorMessage() );
+		$error_msg = $release->getErrorMessage();
 	}
 }
+session_redirect('/plugins/taskboard/releases/?group_id='.$group_id );

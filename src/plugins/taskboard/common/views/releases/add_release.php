@@ -32,13 +32,10 @@ $taskboard->header(
 		)
 	);
 
-echo '<link rel="stylesheet" type="text/css" href="/plugins/taskboard/css/agile-board.css">';
-html_use_jqueryui();
-
-if ( $taskboard->isError() ) {
-	echo '<div id="messages" class="error">'.$taskboard->getErrorMessage().'</div>';
+if ($taskboard->isError()) {
+	echo $HTML->error_msg($taskboard->getErrorMessage());
 } else {
-	echo '<div id="messages" style="display: none;"></div>';
+	echo html_e('div', array('id' => 'messages', 'style' => 'display: none;'), '', false);
 }
 
 // prepare list of unused releases
@@ -60,32 +57,28 @@ foreach ( $release_values as $release_name => $release_id ) {
 	}
 }
 
-$release_box=html_build_select_box_from_arrays ($release_id_arr,$release_name_arr,'_release',$element_id,false);
+$release_box = html_build_select_box_from_arrays($release_id_arr, $release_name_arr, '_release', $element_id, false);
 echo $HTML->openForm(array('action' => '/plugins/'.$pluginTaskboard->name.'/releases/?group_id='.$group_id.'&action=add_release', 'method' => 'post'));
+echo html_e('input', array('type' => 'hidden', 'name' => 'post_changes', 'value' => 'y'));
+echo html_e('h2', array(), _('Add release')._(':'));
+echo $HTML->listTableTop();
 ?>
-
-<input type="hidden" name="post_changes" value="y">
-
-<h2><?php echo _('Add release')?>:</h2>
-<table>
 	<tr><td><strong><?php echo _('Release') ?></strong>&nbsp;<?php echo utils_requiredField(); ?></td><td><?php echo $release_box; ?></td></tr>
 	<tr><td><strong><?php echo _('Start date') ?></strong>&nbsp;<?php echo utils_requiredField(); ?></td><td><input type="text" name="start_date" value="<?php echo $start_date ?>"></td></tr>
 	<tr><td><strong><?php echo _('End date') ?></strong>&nbsp;<?php echo utils_requiredField(); ?></td><td><input type="text" name="end_date" value="<?php echo $end_date ?>"></td></tr>
 	<tr><td><strong><?php echo _('Goals') ?></strong></td><td><textarea name="goals" cols="79" rows="5" ><?php echo htmlspecialchars($goals) ?></textarea></td></tr>
 	<tr><td><strong><?php echo _('Page URL') ?></strong></td><td><input type="text" name="page_url" value="<?php echo htmlspecialchars($page_url) ?>"></td></tr>
-</table>
-
-<p>
-<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" />
-</p>
-
 <?php
+echo $HTML->listTableBottom();
+echo html_e('p', array(), html_e('input', array('type' => 'submit', 'name' => 'post_changes', 'value' => _('Submit'))));
 echo $HTML->closeForm();
 echo $HTML->addRequiredFieldsInfoBox();
+echo html_ao('script', array('type' => 'text/javascript'));
 ?>
-
-<script>
+//<![CDATA[
 jQuery( document ).ready(function( $ ) {
 	$( "input[name='start_date'], input[name='end_date']" ).datepicker( {  "dateFormat" : "yy-mm-dd" });
 });
-</script>
+//]]>
+<?php
+echo html_ac(html_ap() - 1);

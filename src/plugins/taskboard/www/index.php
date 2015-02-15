@@ -45,10 +45,6 @@ if (!$group_id) {
 		exit_error($taskboard->getErrorMessage());
 	}
 
-	html_use_jqueryui();
-	use_javascript('/plugins/'.$pluginTaskboard->name.'/js/agile-board.js');
-	use_stylesheet('/plugins/'.$pluginTaskboard->name.'/css/agile-board.css');
-
 	$taskboard->header(
 		array(
 			'title' => _('Taskboard for ').$group->getPublicName(),

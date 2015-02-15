@@ -29,7 +29,9 @@ class TaskBoardHtml extends TaskBoard {
 		global $HTML, $group_id;
 
 		use_javascript('/js/sortable.js');
-		html_use_jquery();
+		use_stylesheet('/plugins/taskboard/css/agile-board.css');
+		use_javascript('/plugins/taskboard/js/agile-board.js');
+		html_use_jqueryui();
 
 		$params['toptab'] = 'taskboard';
 		$params['group'] = $group_id;
@@ -73,7 +75,7 @@ class TaskBoardHtml extends TaskBoard {
 		$params['submenu'] = $HTML->subMenu($labels, $links);
 		site_project_header($params);
 	}
-	
+
 	function trackersColorChooser( $name, $color='Silver' ) {
 		if( method_exists($this->TrackersAdapter, 'trackersColorChooser' ) ) {
 			return $this->TrackersAdapter->trackersColorChooser( $name, $color );

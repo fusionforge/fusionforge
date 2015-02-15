@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (C) 2015 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
+ * Copyright 2015, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -19,6 +20,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+global $group_id, $group, $taskboard, $pluginTaskboard, $HTML;
+
 session_require_perm('tracker_admin', $group_id) ;
 
 $release_id = getStringFromRequest('release_id','');
@@ -33,25 +36,16 @@ $taskboard->header(
 	)
 );
 
-if( $taskboard->isError() ) {
-	echo '<div id="messages" class="error">'.$taskboard->getErrorMessage().'</div>';
+if ($taskboard->isError()) {
+	echo $HTML->error_msg($taskboard->getErrorMessage());
 } else {
-	echo '<div id="messages" style="display: none;"></div>';
+	echo html_e('div', array('id' => 'messages', 'style' => 'display: none;'), '', false);
 }
 
-?>
-	<form action="<?php echo util_make_url ('/plugins/taskboard/releases/?group_id='.$group_id.'&amp;action=delete_release') ?>" method="post">
-	<input type="hidden" name="release_id" value="<?php echo $release_id ?>">
-
-	<h1><?php echo _('Release') ." '".$release->getTitle() ."'"; ?></h1>
-	<div>
-	<?php echo _('You are about to permanently and irretrievably delete this release with all indicators! ') ?>
-	</div>
-	<div>
-	<input type="checkbox" value="y" name="confirmed"> <?php echo _("I'm Sure") ?>
-	</div>
-
-	<p>
-	<input type="submit" name="post_delete" value="<?php echo _('Delete') ?>">
-	</p>
-	</form>
+echo $HTML->openForm(array('action' => '/plugins/'.$pluginTaskboard->name.'/releases/?group_id='.$group_id.'&action=delete_release', 'method' => 'post'));
+echo html_e('input', array('type' => 'hidden', 'name' => 'release_id', 'value' => $release_id));
+echo html_e('h2', array(), _('Release') ." '".$release->getTitle() ."'");
+echo html_e('div', array(), _('You are about to permanently and irretrievably delete this release with all indicators!'));
+echo html_e('div', array(), html_e('input', array('type' => 'checkbox', 'value' => 'y', 'name' => 'confirmed'))._('I am Sure'));
+echo html_e('p', array(), html_e('input', array('type' => 'submit', 'name' => 'post_delete', 'value' => _('Delete'))));
+echo $HTML->closeForm();

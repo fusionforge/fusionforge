@@ -19,13 +19,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-
-require_once "env.inc.php";
+require_once '../../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 
 global $gfplugins;
 require_once $gfplugins.'taskboard/common/include/TaskBoardHtml.class.php';
-
 
 $group_id = getIntFromRequest('group_id');
 $pluginTaskboard = plugin_get_object('taskboard');
