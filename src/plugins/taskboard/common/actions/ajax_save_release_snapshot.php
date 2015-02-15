@@ -1,6 +1,5 @@
 <?php
-
-/*
+/**
  * Copyright (C) 2015 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
  *
  * This file is part of FusionForge.
@@ -37,7 +36,7 @@ if( $release ) {
 		if( $snapshot_datetime >= $release->getStartDate() && $snapshot_datetime <= $release->getEndDate() ) {
 			db_begin();
 			if( !$release->saveSnapshot( $snapshot_datetime ) ) {
-				$ret['alert'] = _('Cannot save release snapshot');	
+				$ret['alert'] = _('Cannot save release snapshot');
 				db_rollback();
 			} else {
 				db_commit();

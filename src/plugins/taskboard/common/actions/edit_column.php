@@ -20,7 +20,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-global $group_id;
+global $group_id, $pluginTaskboard;
 
 session_require_perm('tracker_admin', $group_id);
 $column_id = getStringFromRequest('column_id', '');
@@ -55,7 +55,7 @@ if (getStringFromRequest('post_changes')) {
 		}
 	} else {
 		$warning_msg .= _('Please, fill all required fields.');
-		session_redirect('/plugins/taskboard/admin/?group_id='.$group_id.'&view=edit_column&column_id='.$column_id);
+		session_redirect('/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&view=edit_column&column_id='.$column_id);
 	}
 }
-session_redirect('/plugins/taskboard/admin/?group_id='.$group_id);
+session_redirect('/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id);

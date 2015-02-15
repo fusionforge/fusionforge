@@ -22,7 +22,7 @@
 
 session_require_perm('tracker_admin', $group_id);
 
-global $taskboard;
+global $taskboard, $pluginTaskboard;
 
 $start_date_unixtime = NULL;
 $end_date_unixtime = NULL;
@@ -58,7 +58,7 @@ if ($element_id && $start_date_unixtime && $end_date_unixtime) {
 		)
 	);
 
-	if ($release->create($element_id, $start_date_unixtime, $end_date_unixtime, $goals, $page_url) ) {
+	if ($release->create($element_id, $start_date_unixtime, $end_date_unixtime, $goals, $page_url)) {
 		db_commit();
 		$feedback .= _('Successfully Created');
 	} else {
@@ -68,4 +68,4 @@ if ($element_id && $start_date_unixtime && $end_date_unixtime) {
 } else {
 	$warning_msg = _('Something missing here');
 }
-session_redirect('/plugins/taskboard/releases/?group_id='.$group_id);
+session_redirect('/plugins/'.$pluginTaskboard->name.'/releases/?group_id='.$group_id);

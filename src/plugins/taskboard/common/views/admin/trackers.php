@@ -93,8 +93,8 @@ if (!$atf || !is_object($atf) || $atf->isError()) {
 			echo $HTML->error_msg(_('There are no any tracker having "resolution" field.'));
 		}
 
-		echo html_e('script', array('type' => 'text/javascript', 'src' => '/plugins/taskboard/js/agile-board.js'), '', false);
-		echo $HTML->openForm(array('action' => '/plugins/taskboard/admin/?group_id='.$group_id.'&action=trackers', 'method' => 'post'));
+		echo html_e('script', array('type' => 'text/javascript', 'src' => '/plugins/'.$pluginTaskboard->name.'/js/agile-board.js'), '', false);
+		echo $HTML->openForm(array('action' => '/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&action=trackers', 'method' => 'post'));
 		echo html_e('input', array('type' => 'hidden', 'name' => 'post_changes', 'value' => 'y'));
 		echo $HTML->listTableTop();
 		$cells = array();
@@ -204,7 +204,7 @@ jQuery(function($){
 	function loadUserStorySortFields() {
 		$.ajax({
 			type: 'POST',
-			url: '<?php echo util_make_url('/plugins/taskboard/admin/ajax.php'); ?>',
+			url: '<?php echo util_make_url('/plugins/'.$pluginTaskboard->name.'/admin/ajax.php'); ?>',
 			dataType: 'json',
 			data : {
 				action : 'get_trackers_fields',
@@ -258,7 +258,7 @@ jQuery(function($){
 
 		$.ajax({
 			type: 'POST',
-			url: '<?php echo util_make_url('/plugins/taskboard/admin/ajax.php'); ?>',
+			url: '<?php echo util_make_url('/plugins/'.$pluginTaskboard->name.'/admin/ajax.php'); ?>',
 			dataType: 'json',
 			data : {
 				action : 'get_trackers_fields',
@@ -303,7 +303,7 @@ jQuery(function($){
 
 		$.ajax({
 			type: 'POST',
-			url: '<?php echo util_make_url('/plugins/taskboard/admin/ajax.php'); ?>',
+			url: '<?php echo util_make_url('/plugins/'.$pluginTaskboard->name.'/admin/ajax.php'); ?>',
 			dataType: 'json',
 			data : {
 				action : 'get_trackers_fields',

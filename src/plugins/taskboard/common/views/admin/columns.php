@@ -47,12 +47,12 @@ if (count($taskboard->getUsedTrackersIds()) == 0) {
 	foreach ($columns as $column) {
 		$downLink = '';
 		if ($column->getOrder() < count($columns)) {
-			$downLink = util_make_link('/plugins/taskboard/admin/?group_id='.$group_id.'&action=down_column&column_id='.$column->getID(), html_image('pointer_down.png', 16, 16, array('title' => _('Down'), 'alt' => _('Down'))));
+			$downLink = util_make_link('/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&action=down_column&column_id='.$column->getID(), html_image('pointer_down.png', 16, 16, array('title' => _('Down'), 'alt' => _('Down'))));
 		}
 		$cells = array();
 		$cells[][] = $column->getOrder().'&nbsp;'.$downLink;
 		$cells[][] = html_e('div', array('style' => 'float: left; border: 1px solid grey; height: 30px; width: 20px; background-color: '.$column->getColumnBackgroundColor().'; margin-right: 10px;'), html_e('div', array('style' => 'width: 100%; height: 10px; background-color: '.$column->getTitleBackgroundColor()), '', false)).
-					util_make_link('/plugins/taskboard/admin/?group_id='.$group_id.'&view=edit_column&column_id='.$column->getID(),
+					util_make_link('/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&view=edit_column&column_id='.$column->getID(),
 					$column->getTitle());
 		$cells[][] = $column->getMaxTasks();
 		$cells[][] = implode(', ', array_values($column->getResolutions()));
@@ -61,7 +61,7 @@ if (count($taskboard->getUsedTrackersIds()) == 0) {
 	}
 	echo $HTML->listTableBottom();
 
-	echo $HTML->openForm(array('action' => '/plugins/taskboard/admin/?group_id='.$group_id.'&action=columns', 'method' => 'post'));
+	echo $HTML->openForm(array('action' => '/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&action=columns', 'method' => 'post'));
 	echo html_e('input', array('type' => 'hidden', 'name' => 'post_changes', 'value' => 'y'));
 	echo html_e('h2', array(), _('Add new column').(':'));
 	echo $HTML->listTableTop();

@@ -21,7 +21,7 @@
  */
 
 
-global $group_id, $taskboard, $HTML;
+global $group_id, $taskboard, $pluginTaskboard, $HTML;
 
 $column_id = getStringFromRequest('column_id', '');
 $column = &taskboard_column_get_object($column_id);
@@ -36,25 +36,15 @@ $taskboard->header(
 );
 
 if($taskboard->isError()) {
-	echo '<div id="messages" class="error">'.$taskboard->getErrorMessage().'</div>';
+	echo $HTML->error_msg($taskboard->getErrorMessage());
 } else {
-	echo '<div id="messages" style="display: none;"></div>';
+	echo $html_e('div', array('id' => 'messages', 'style' => 'display: none;'), '', false);
 }
 
-?>
-	<form action="<?php echo util_make_url('/plugins/taskboard/admin/?group_id='.$group_id.'&action=delete_column') ?>" method="post">
-	<input type="hidden" name="column_id" value="<?php echo $column_id ?>">
-
-	<h1><?php echo _('Column') ." '".$column->getTitle() ."'"; ?></h1>
-	<div>
-	<?php echo _('You are about to permanently and irretrievably delete this column! ') ?>
-	</div>
-	<div>
-	<input type="checkbox" value="y" name="confirmed"> <?php echo _("I'm Sure") ?>
-	</div>
-
-	<p>
-	<input type="submit" name="post_delete" value="<?php echo _('Delete') ?>">
-	</p>
-	</form>
-
+echo $HTML->openForm(array('action' => '/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&action=delete_column', 'method' => 'post'));
+echo html_e('input', array('type' => 'hidden', 'name' => 'column_id', 'value' => $column_id));
+echo html_e('h1', array(), _('Column')." '".$column->getTitle() ."'");
+echo html_e('div', array(), _('You are about to permanently and irretrievably delete this column!'));
+echo html_e('div', array(), html_e('input', array('type' => 'checkbox', 'value' => 'y', 'name' => 'confirmed')), ._('I am Sure'));
+echo html_e('p', array(), html_e('input', array('type' => 'submit', 'name' => 'post_delete', 'value' => _('Delete'))));
+echo $HTML->closeForm();

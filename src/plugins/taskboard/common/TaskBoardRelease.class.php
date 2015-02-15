@@ -245,17 +245,17 @@ class TaskBoardRelease extends Error {
 	function getPageUrl() {
 		return $this->data_array['page_url'];
 	}
-	
+
 	/**
-	 *      Save current taskboard snapshot. So, we can have a history of release implementation, 
-	 *      that could be used for different indicators calculation.
+	 * Save current taskboard snapshot. So, we can have a history of release implementation,
+	 * that could be used for different indicators calculation.
 	 *
-	 *      @param  int             Snapshot unix date time
-	 *      @return boolean success.
+	 * @param	int	Snapshot unix date time
+	 * @return	boolean	success.
 	 */
 	function saveSnapshot($snapshot_datetime) {
 		// TODO
-		
+
 		return true;
 	}
 }

@@ -70,26 +70,36 @@ if ($column_id) {
 		echo $HTML->multiTableRow(array(), $cells);
 		// unused by any columns resolutions
 		foreach ($taskboard->getUnusedResolutions() as $resolution) {
-?>
-	<tr><td><?php echo htmlspecialchars( $resolution ) ?></td><td><input type="checkbox" name="resolutions[]" value="<?php echo htmlspecialchars( $resolution)  ?>" ></td></tr>
-<?php
+			$cells = array();
+			$cells[][] = htmlspecialchars($resolution);
+			$cells[][] = html_e('input', array('type' => 'checkbox', 'name' => 'resolutions[]', 'value' => htmlspecialchars($resolution)));
+			echo $HTML->multiTableRow(array(), $cells);
 		}
-// used by current column resolutions
-foreach( $column->getResolutions() as $resolution ) {
-	?>
-	<tr><td><?php echo htmlspecialchars( $resolution ) ?></td><td><input type="checkbox" name="resolutions[]" value="<?php echo htmlspecialchars( $resolution)  ?>" checked></td></tr>
-<?php
-}
-
-?>
-	<tr><td><strong><?php echo _('Drop resolution by default') ?></strong>&nbsp;<?php echo utils_requiredField(); ?></td><td><select id="resolution_by_default" name="resolution_by_default"></select></td></tr>
-	<tr><td><strong><?php echo _('Autoassign') ?></strong></td><td><input type="checkbox" name="autoassign" value="1" <?php  echo $drop_rules_by_default->getAutoassign() ? 'checked' : '' ; ?>></td></tr>
-	<tr><td><strong><?php echo _('Alert message') ?></strong></td><td><textarea name="alert" cols="79" rows="5" ><?php echo htmlspecialchars($drop_rules_by_default->getAlertText()) ?></textarea></td></tr>
-<?php
+		// used by current column resolutions
+		foreach ($column->getResolutions() as $resolution) {
+			$cells = array();
+			$cells[][] = htmlspecialchars($resolution);
+			$cells[][] = html_e('input', array('type' => 'checkbox', 'name' => 'resolutions[]', 'checked' => 'checked', 'value' => htmlspecialchars($resolution)));
+			echo $HTML->multiTableRow(array(), $cells);
+		}
+		$cells = array();
+		$cells[][] = html_e('strong', array(), _('Drop resolution by default').utils_requiredField());
+		$cells[][] = html_e('select', array('id' => 'resolution_by_default', 'name' => 'resolution_by_default'), '', false);
+		echo $HTML->multiTableRow(array(), $cells);
+		$cells = array();
+		$cells[][] = html_e('strong', array(), _('Autoassign'));
+		$autoAssignAttr = array('type' => 'checkbox', 'name' => 'autoassign', 'value' => 1);
+		$drop_rules_by_default->getAutoassign() ? $autoAssignAttr['checked'] = 'checked' : '';
+		$cells[][] = html_e('input', $autoAssignAttr);
+		echo $HTML->multiTableRow(array(), $cells);
+		$cells = array();
+		$cells[][] = html_e('strong', array(), _('Alert message'));
+		$cells[][] = html_e('textarea', array('name' => 'alert', 'cols' => 79, 'rows' => 5), htmlspecialchars($drop_rules_by_default->getAlertText()));
+		echo $HTML->multiTableRow(array(), $cells);
 		echo $HTML->listTableBottom();
 		echo html_e('p', array(), html_e('input', array('type' => 'submit', 'name' => 'post_changes', 'value' => _('Submit'))));
 		echo $HTML->closeForm();
-		echo utils_requiredField().' '._('Indicates required fields.');
+		echo $HTML->addRequiredFieldsInfoBox();
 		echo html_ao('script', array('type' => 'text/javascript'));
 ?>
 //<![CDATA[

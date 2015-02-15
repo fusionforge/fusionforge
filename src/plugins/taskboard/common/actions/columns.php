@@ -20,35 +20,32 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-global $group_id, $group;
+global $group_id, $group, $pluginTaskboard;
 session_require_perm('tracker_admin', $group_id);
 $taskboard = new TaskBoardHtml($group);
 
 if (getStringFromRequest('post_changes')) {
-	$column_title = getStringFromRequest('column_title','');
-	$title_bg_color = getStringFromRequest('title_bg_color','');
-	$color_bg_color = getStringFromRequest('column_bg_color','');
-	$column_max_tasks = getStringFromRequest('column_max_tasks','');
-	$resolution_by_default = getStringFromRequest('resolution_by_default','');
+	$column_title = getStringFromRequest('column_title', '');
+	$title_bg_color = getStringFromRequest('title_bg_color', '');
+	$color_bg_color = getStringFromRequest('column_bg_color', '');
+	$column_max_tasks = getStringFromRequest('column_max_tasks', '');
+	$resolution_by_default = getStringFromRequest('resolution_by_default', '');
 	db_begin();
 	$column_id = $taskboard->addColumn($column_title, $title_bg_color, $color_bg_color, $column_max_tasks);
-	if( $column_id ) {
-		$column = new TaskBoardColumn( $taskboard, $column_id );
-		if( $column && $column->setDropRule(NULL, $resolution_by_default) ) {
-			if( !$column->setResolutions( array( $resolution_by_default ) ) ) {
-				db_rollback();
-				$error_msg = _('Cannot set resolutions for new column');
-			}
+	if ($column_id) {
+		$column = new TaskBoardColumn($taskboard, $column_id);
+		if ($column && $column->setDropRule(NULL, $resolution_by_default) && $column->setResolutions(array($resolution_by_default))) {
+				db_commit();
+				$feedback = _('Successfully Added');
 		} else {
 			db_rollback();
-			$error_msg = _('Cannot set drop rule for new column');
+			$error_msg = _('Cannot set drop rule or resolutions for new column');
 		}
-		db_commit();
-		$feedback = _('Successfully Added');
+
 	} else {
 		db_rollback();
 		$error_msg = _('Cannot create column');
 	}
 }
 
-session_redirect('/plugins/taskboard/admin/?group_id='.$group_id.'&view=columns');
+session_redirect('/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&view=columns');

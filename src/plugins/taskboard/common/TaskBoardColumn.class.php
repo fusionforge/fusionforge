@@ -63,13 +63,13 @@ function &taskboard_column_get_object_by_resolution($taskboard, $resolution_labe
 
 	if (!array_key_exists($resolution_label, $columns[ $taskboard->getID()])) {
 		$res = db_query_params(
-			'SELECT C.* FROM plugin_taskboard_columns as C, plugin_taskboard_columns_resolutions as R
-			WHERE C.taskboard_column_id=R.taskboard_column_id AND C.taskboard_id=$1 and taskboard_column_resolution=$2',
-			array(
-				$taskboard->getID(),
-				$resolution_label
-			)
-		);
+				'SELECT C.* FROM plugin_taskboard_columns as C, plugin_taskboard_columns_resolutions as R
+				WHERE C.taskboard_column_id = R.taskboard_column_id AND C.taskboard_id = $1 and taskboard_column_resolution = $2',
+				array(
+					$taskboard->getID(),
+					$resolution_label
+				)
+			);
 		if (db_numrows($res) <1) {
 			$columns[$taskboard->getID()][$resolution_label] = false;
 		} else {
@@ -80,7 +80,7 @@ function &taskboard_column_get_object_by_resolution($taskboard, $resolution_labe
 		}
 	}
 
-	return $columns[ $taskboard->getID() ][ $resolution_label ];
+	return $columns[$taskboard->getID()][$resolution_label];
 }
 
 class TaskBoardColumn extends Error {
@@ -136,15 +136,15 @@ class TaskBoardColumn extends Error {
 	 */
 	function update($title, $title_bg_color, $column_bg_color, $max_tasks) {
 		$res = db_query_params(
-			'UPDATE plugin_taskboard_columns SET title = $1, title_background_color=$2, column_background_color=$3, max_tasks=$4 WHERE taskboard_column_id=$5',
-			array(
-				$title,
-				$title_bg_color,
-				$column_bg_color,
-				intval($max_tasks),
-				$this->getID()
-			)
-		);
+				'UPDATE plugin_taskboard_columns SET title = $1, title_background_color=$2, column_background_color=$3, max_tasks=$4 WHERE taskboard_column_id=$5',
+				array(
+					$title,
+					$title_bg_color,
+					$column_bg_color,
+					intval($max_tasks),
+					$this->getID()
+				)
+			);
 		if (!$res) {
 			return false;
 		}
@@ -161,47 +161,45 @@ class TaskBoardColumn extends Error {
 	 */
 	function delete(){
 		$res = db_query_params(
-			'DELETE FROM plugin_taskboard_columns_resolutions WHERE taskboard_column_id = $1',
-			array($this->getID())
-		) ;
+				'DELETE FROM plugin_taskboard_columns_resolutions WHERE taskboard_column_id = $1',
+				array($this->getID())
+			);
 		if (!$res) {
 			return false;
 		}
 
 		$res = db_query_params(
-			'DELETE FROM plugin_taskboard_columns_sources WHERE target_taskboard_column_id = $1',
-			array($this->getID())
-		) ;
+				'DELETE FROM plugin_taskboard_columns_sources WHERE target_taskboard_column_id = $1',
+				array($this->getID())
+			);
 		if (!$res) {
 			return false;
 		}
 
 		$res = db_query_params (
-			'DELETE FROM plugin_taskboard_columns_sources WHERE source_taskboard_column_id = $1',
-			array($this->getID())
-		) ;
-
-
+				'DELETE FROM plugin_taskboard_columns_sources WHERE source_taskboard_column_id = $1',
+				array($this->getID())
+			);
 		if (!$res) {
 			return false;
 		}
 
 		$res = db_query_params(
-			'DELETE FROM plugin_taskboard_columns WHERE taskboard_column_id=$1',
-			array($this->getID())
-		) ;
+				'DELETE FROM plugin_taskboard_columns WHERE taskboard_column_id=$1',
+				array($this->getID())
+			);
 		if (!$res) {
 			return false;
 		}
 
 		// reorder other fields
 		$res = db_query_params(
-			'UPDATE plugin_taskboard_columns SET order_num=order_num-1 WHERE order_num>$1 AND taskboard_id=$2',
-			array(
-				$this->getOrder(),
-				$this->getTaskBoardID()
-			)
-		);
+				'UPDATE plugin_taskboard_columns SET order_num=order_num-1 WHERE order_num>$1 AND taskboard_id=$2',
+				array(
+					$this->getOrder(),
+					$this->getTaskBoardID()
+				)
+			);
 		if (!$res) {
 			return false;
 		}
@@ -215,25 +213,25 @@ class TaskBoardColumn extends Error {
 	function setOrder($order){
 		// get columns having the given order
 		$res = db_query_params(
-			 'UPDATE plugin_taskboard_columns SET order_num=$1 WHERE order_num=$2 AND taskboard_id=$3',
-			array(
-				$order-1,
-				$order,
-				$this->getTaskBoardID()
-			)
-		);
+				'UPDATE plugin_taskboard_columns SET order_num=$1 WHERE order_num=$2 AND taskboard_id=$3',
+				array(
+					$order-1,
+					$order,
+					$this->getTaskBoardID()
+				)
+			);
 		if (!$res) {
 			return false;
 		}
 
 
 		$res = db_query_params(
-			 'UPDATE plugin_taskboard_columns SET order_num=$1 WHERE taskboard_column_id=$2',
-			array(
-				$order,
-				 $this->getID()
-			)
-		);
+				'UPDATE plugin_taskboard_columns SET order_num=$1 WHERE taskboard_column_id=$2',
+				array(
+					$order,
+					$this->getID()
+				)
+			);
 		if (!$res) {
 			return false;
 		}
@@ -357,7 +355,9 @@ class TaskBoardColumn extends Error {
 	}
 
 	/**
+	 * getResolutions
 	 *
+	 * @return array
 	 */
 	function getResolutions() {
 		$res = db_query_params('SELECT * FROM plugin_taskboard_columns_resolutions WHERE taskboard_column_id=$1', array ($this->getID()));
@@ -374,14 +374,16 @@ class TaskBoardColumn extends Error {
 	}
 
 	/**
+	 * getDropRules
 	 *
+	 * @return array
 	 */
 	function getDropRules() {
-		if( !$this->drop_rules ) {
+		if (!$this->drop_rules) {
 			$res = db_query_params(
-				'SELECT * FROM plugin_taskboard_columns_sources WHERE target_taskboard_column_id=$1',
-				array ($this->getID())
-			);
+					'SELECT * FROM plugin_taskboard_columns_sources WHERE target_taskboard_column_id=$1',
+					array ($this->getID())
+				);
 			if (!$res) {
 				$this->setError('TaskBoardColumn'._(': ')._('cannot get drop rules'));
 				return false;
@@ -396,10 +398,7 @@ class TaskBoardColumn extends Error {
 					);
 				} else {
 					// drop rule by default
-					$this->drop_rules['*'] = taskboard_default_column_source_get_object(
-						$row['target_taskboard_column_id'],
-						$row
-					);
+					$this->drop_rules['*'] = taskboard_default_column_source_get_object($row['target_taskboard_column_id'], $row);
 
 					if (!$this->drop_rules_by_default) {
 						$this->drop_rules_by_default = $this->drop_rules['*'];

@@ -35,7 +35,7 @@ for ($j = 0; $j < count($at_arr); $j++) {
 		exit();
 	} else {
 		// get only fields having 'select' type
-		$fields = $at_arr[$j]->getExtraFields( 1 );
+		$fields = $at_arr[$j]->getExtraFields(1);
 
 		foreach($fields as $field) {
 			if( $field['alias'] == 'resolution') {

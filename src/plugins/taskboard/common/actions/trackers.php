@@ -20,8 +20,9 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-global $group_id, $group;
-$taskboard = new TaskBoardHtml($group);
+global $group_id, $pluginTaskboard, $taskboard;
+
+session_require_perm('tracker_admin', $group_id);
 
 if (getStringFromRequest('post_changes')) {
 	$trackers_selected = getArrayFromRequest('use', array());
@@ -49,4 +50,4 @@ if (getStringFromRequest('post_changes')) {
 	}
 }
 
-session_redirect('/plugins/taskboard/admin/?view=trackers&group_id='.$group_id);
+session_redirect('/plugins/'.$pluginTaskboard->name.'/admin/?view=trackers&group_id='.$group_id);

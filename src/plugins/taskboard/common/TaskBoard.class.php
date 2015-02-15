@@ -54,7 +54,7 @@ function &taskboard_get_object($taskboard_id, $data = false) {
  */
 function &taskboard_init($group_id) {
 	$res = db_query_params('INSERT INTO plugin_taskboard(group_id) VALUES($1)', array($group_id));
-	if ( !$res ) {
+	if (!$res) {
 		return false;
 	}
 
@@ -125,16 +125,16 @@ class TaskBoard extends Error {
 
 
 	/**
-	 *  create - create a row in the taskboards table
+	 * create - create a row in the taskboards table
 	 *
-	 *  @param	array	list of trackers IDs, linked to the taskboard
-	 *  @param	array	has of card background colors (key - tracker id, value - bg color)
-	 *  @param	string	Alias for of 'select' extra field used for release/sprint
-	 *  @param	string	Tracke type of extra field used for release/sprint (1 - task trackers, 2 - user story tracker)
-	 *  @param	string	Used for cost calculations together with remaining_cost_field_alias if specified
-	 *  @param	string	Used for cost calculations together with estimated_cost_field_alias if specified
+	 * @param	array	list of trackers IDs, linked to the taskboard
+	 * @param	array	has of card background colors (key - tracker id, value - bg color)
+	 * @param	string	Alias for of 'select' extra field used for release/sprint
+	 * @param	string	Tracke type of extra field used for release/sprint (1 - task trackers, 2 - user story tracker)
+	 * @param	string	Used for cost calculations together with remaining_cost_field_alias if specified
+	 * @param	string	Used for cost calculations together with estimated_cost_field_alias if specified
 	 *
-	 *  @return     true on success / false on failure.
+	 * @return     true on success / false on failure.
 	 */
 	function create($trackers, $bgcolors, $release_field_alias = NULL, $release_field_tracker = 1,
 			$estimated_cost_field_alias = NULL, $remaining_cost_field_alias = NULL,
@@ -148,7 +148,7 @@ class TaskBoard extends Error {
 			return false;
 		}
 
-		if( count($trackers) == 0 ) {
+		if (count($trackers) == 0) {
 			$this->setError(_('Taskboard must be linked at least to one tracker'));
 			return false;
 		}
@@ -189,16 +189,16 @@ class TaskBoard extends Error {
 	}
 
 	/**
-	 *  update - update a row in the taskboards table
+	 * update - update a row in the taskboards table
 	 *
-	 *  @param	array	list of trackers IDs, linked to the taskboard
-	 *  @param	array	has of card background colors (key - tracker id, value - bg color)
-	 *  @param	string	Alias for of 'select' extra field used for release/sprint
-	 *  @param	string	Tracke type of extra field used for release/sprint (1 - task trackers, 2 - user story tracker)
-	 *  @param	string	Used for cost calculations together with remaining_cost_field_alias if specified
-	 *  @param	string	Used for cost calculations together with estimated_cost_field_alias if specified
+	 * @param	array	list of trackers IDs, linked to the taskboard
+	 * @param	array	has of card background colors (key - tracker id, value - bg color)
+	 * @param	string	Alias for of 'select' extra field used for release/sprint
+	 * @param	string	Tracke type of extra field used for release/sprint (1 - task trackers, 2 - user story tracker)
+	 * @param	string	Used for cost calculations together with remaining_cost_field_alias if specified
+	 * @param	string	Used for cost calculations together with estimated_cost_field_alias if specified
 	 *
-	 *  @return	true on success / false on failure.
+	 * @return	true on success / false on failure.
 	 */
 	function update($trackers, $bgcolors, $release_field_alias = NULL,  $release_field_tracker = 1,
 			$estimated_cost_field_alias = NULL, $remaining_cost_field_alias = NULL,
@@ -785,26 +785,26 @@ class TaskBoard extends Error {
 	}
 
 	/**
-	 *      getExtraFields - get a list of extra fields, existing is all used task trackers
+	 * getExtraFields - get a list of extra fields, existing is all used task trackers
 	 *
-	 *      @param  array   list of allowed extra fields types
-	 *      @param  array   list of excluded aliases
+	 * @param	array	list of allowed extra fields types
+	 * @param	array	list of excluded aliases
 	 *
-	 *      @return array    array of aliases
+	 * @return	array	array of aliases
 	 */
-	function getExtraFields($allowed_types=array(), $used_trackers=NULL, $excluded_aliases=array('resolution')) {
+	function getExtraFields($allowed_types = array(), $used_trackers = NULL, $excluded_aliases = array('resolution')) {
 		$atf = $this->TrackersAdapter->getArtifactTypeFactory();
 		if (!$atf || !is_object($atf) || $atf->isError()) {
 			return _('Could Not Get ArtifactTypeFactory');
 		}
 
-		if( !$used_trackers ) {
+		if (!$used_trackers) {
 			$used_trackers = $this->getUsedTrackersIds();
 		}
 
 		$common_fields = array();
 
-		foreach( $allowed_types as $allowed_type) {
+		foreach ($allowed_types as $allowed_type) {
 			$common_fields[$allowed_type] = array();
 		}
 
@@ -818,26 +818,26 @@ class TaskBoard extends Error {
 			} else {
 				$tracker_id = $at_arr[$j]->getID();
 
-				if( in_array( $tracker_id, $used_trackers ) ) {
+				if (in_array($tracker_id, $used_trackers)) {
 					// select common fields for the give types
-					$fields = $at_arr[$j]->getExtraFields( $allowed_types );
+					$fields = $at_arr[$j]->getExtraFields($allowed_types);
 					$tmp = array();
-					foreach( $allowed_types as $allowed_type) {
+					foreach ($allowed_types as $allowed_type) {
 						$tmp[$allowed_type] = array();
 					}
 
-					foreach( $fields as $field) {
+					foreach ($fields as $field) {
 						// exclude 'resolution' field
-						if( !in_array( $field['alias'],$excluded_aliases ) ) {
-							if( $init ) {
-								if( in_array( $field['field_type'], $allowed_types) ) {
-									$tmp[ $field['field_type'] ][ $field['alias'] ] = $field['field_name'];
+						if (!in_array($field['alias'],$excluded_aliases)) {
+							if($init) {
+								if (in_array($field['field_type'], $allowed_types)) {
+									$tmp[$field['field_type']][$field['alias']] = $field['field_name'];
 								}
-							} elseif(
-									in_array( $field['alias'], array_keys( $common_fields[ $field['field_type'] ]) ) &&
-									in_array( $field['field_type'], $allowed_types)
+							} elseif (
+									in_array($field['alias'], array_keys($common_fields[$field['field_type']])) &&
+									in_array($field['field_type'], $allowed_types)
 							) {
-								$tmp[ $field['field_type'] ][$field['alias']] = $field['field_name'];
+								$tmp[$field['field_type']][$field['alias']] = $field['field_name'];
 							}
 						}
 					}
@@ -846,7 +846,6 @@ class TaskBoard extends Error {
 				}
 			}
 		}
-
 		return $common_fields;
 	}
 

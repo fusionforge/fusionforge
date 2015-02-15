@@ -24,7 +24,6 @@ $ret = array(
 	'action' => 'reload'
 );
 
-
 $task_id = getStringFromRequest('task_id');
 $desc = getStringFromRequest('desc', '');
 $title = getStringFromRequest('title', '');

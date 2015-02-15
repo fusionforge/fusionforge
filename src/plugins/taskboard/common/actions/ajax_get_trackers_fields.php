@@ -21,19 +21,19 @@
 
 global $group_id;
 
-$used_trackers = getArrayFromRequest('trackers' );
+$used_trackers = getArrayFromRequest('trackers');
 
-$ret = array( 'messages' => '' );
-$allowed_types = array( 1, 4, 9);
-$common_fields = $taskboard->getExtraFields( $allowed_types, $used_trackers );
+$ret = array('messages' => '');
+$allowed_types = array(1, 4, 9);
+$common_fields = $taskboard->getExtraFields($allowed_types, $used_trackers);
 
-if( is_string( $common_fields ) ) {
-	echo  json_encode( array( 'message' => $common_fields ) );
+if (is_string( $common_fields)) {
+	echo json_encode(array('message' => $common_fields));
 	exit();
 }
 
 $ret['common_selects'] = $common_fields[1];
 $ret['common_texts'] = $common_fields[4];
-$ret['common_refs'] = array_merge( $common_fields[4], $common_fields[9] );
+$ret['common_refs'] = array_merge($common_fields[4], $common_fields[9]);
 
 echo json_encode($ret);
