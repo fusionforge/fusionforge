@@ -19,12 +19,13 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+global $taskboard, $group, $group_id, $pluginTaskboard, $HTML;
 
 $taskboard->header(
 	array(
 		'title' => _('Taskboard for ').$group->getPublicName()._(': ')._('Releases'),
 		'pagename' => "Releases",
-		'sectionvals' => array(group_getname($group_id)),
+		'sectionvals' => array($group->getPublicName()),
 		'group' => $group_id
 	)
 );
@@ -36,30 +37,28 @@ $taskboard->header(
 <div id="messages" class="warning" style="display: none;"></div>
 <br/>
 <?php
-if( !$taskboard->getReleaseField() ) {
-	exit_error(_("Release field is not configured"));
+if (!$taskboard->getReleaseField()) {
+	exit_error(_('Release field is not configured'));
 }
 
 $taskboardReleases = $taskboard->getReleases();
 
-if( $taskboardReleases === false ) {
+if ($taskboardReleases === false) {
 	exit_error($taskboard->getErrorMessage());
 }
 
-echo '<p>' . util_make_link ('/plugins/taskboard/releases/?group_id='.$group_id.'&amp;action=add_release',
-		'<strong>'._('Add release').'</strong>') ;
-echo '</p>';
+echo html_e('p', array(), util_make_link('/plugins/'.$pluginTaskboard->name.'/releases/?group_id='.$group_id.'&view=add_release', html_e('strong', array(), _('Add release'))));
 
 $tablearr = array(_('Title'),_('Start date'),_('End date'), _('Goals'), _('Page'));
 
 echo $HTML->listTableTop($tablearr, false, 'sortable_table_tracker', 'sortable_table_tracker');
 
 $today = strtotime(date('Y-m-d'));
-foreach( $taskboardReleases as $release ) {
-	$release_title = htmlspecialchars( $release->getTitle() );
-	if (session_loggedin() && forge_check_perm('tracker_admin', $taskboard->Group->getID() ) ) {
-		$release_title = util_make_link (
-			'/plugins/taskboard/releases/?group_id='.$group_id.'&amp;action=edit_release&amp;release_id='.$release->getID(),
+foreach ($taskboardReleases as $release) {
+	$release_title = htmlspecialchars($release->getTitle());
+	if (session_loggedin() && forge_check_perm('tracker_admin', $taskboard->Group->getID())) {
+		$release_title = util_make_link(
+			'/plugins/'.$pluginTaskboard->name.'/releases/?group_id='.$group_id.'&view=edit_release&release_id='.$release->getID(),
 				$release_title
 		);
 	}

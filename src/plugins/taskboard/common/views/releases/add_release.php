@@ -19,21 +19,23 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+global $group_id, $group, $taskboard, $pluginTaskboard, $HTML;
+
 session_require_perm('tracker_admin', $group_id);
 
 $taskboard->header(
 		array(
-			'title'=>'Taskboard for '.$group->getPublicName().' : '. _('Releases').' : '._('Add release') ,
-			'pagename'=>_('Releases').' : '._('Add release'),
-			'sectionvals'=>array(group_getname($group_id)),
-			'group'=>$group_id
+			'title' => _('Taskboard for ').$group->getPublicName()._(': '). _('Releases')._(': ')._('Add release'),
+			'pagename' => _('Releases')._(': ')._('Add release'),
+			'sectionvals' => array($group->getPublicName()),
+			'group' => $group_id
 		)
 	);
 
 echo '<link rel="stylesheet" type="text/css" href="/plugins/taskboard/css/agile-board.css">';
 html_use_jqueryui();
 
-if( $taskboard->isError() ) {
+if ( $taskboard->isError() ) {
 	echo '<div id="messages" class="error">'.$taskboard->getErrorMessage().'</div>';
 } else {
 	echo '<div id="messages" style="display: none;"></div>';
@@ -42,7 +44,7 @@ if( $taskboard->isError() ) {
 // prepare list of unused releases
 $used_release_elements = array();
 $taskboard_releases = $taskboard->getReleases();
-foreach($taskboard_releases as $release ) {
+foreach ($taskboard_releases as $release ) {
 	$used_release_elements[] = $release->getElementID();
 }
 
@@ -50,16 +52,16 @@ $release_values = $taskboard->getReleaseValues();
 
 $release_id_arr = array();
 $release_name_arr = array();
-foreach( $release_values as $release_name => $release_id ) {
+foreach ( $release_values as $release_name => $release_id ) {
 	// show only unused releases
-	if( !in_array($release_id, $used_release_elements ) ) {
+	if ( !in_array($release_id, $used_release_elements ) ) {
 		$release_id_arr[] = $release_id;
 		$release_name_arr[] = $release_name;
 	}
 }
 
 $release_box=html_build_select_box_from_arrays ($release_id_arr,$release_name_arr,'_release',$element_id,false);
-echo $HTML->openForm(array('action' => '/plugins/taskboard/releases/?group_id='.$group_id.'&action=add_release', 'method' => 'post'));
+echo $HTML->openForm(array('action' => '/plugins/'.$pluginTaskboard->name.'/releases/?group_id='.$group_id.'&action=add_release', 'method' => 'post'));
 ?>
 
 <input type="hidden" name="post_changes" value="y">
@@ -87,5 +89,3 @@ jQuery( document ).ready(function( $ ) {
 	$( "input[name='start_date'], input[name='end_date']" ).datepicker( {  "dateFormat" : "yy-mm-dd" });
 });
 </script>
-
-<?php

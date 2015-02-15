@@ -19,6 +19,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+global $group_id, $group, $taskboard;
+
 session_require_perm('tracker_admin', $group_id) ;
 
 $start_date_unixtime = NULL;
@@ -28,88 +30,50 @@ $release_id = getIntFromRequest('release_id', NULL);
 
 $release = new TaskBoardRelease( $taskboard, $release_id );
 
-if (getStringFromRequest('post_changes')) {
-	$element_id = getIntFromRequest('_release','');
-	$start_date = getStringFromRequest('start_date','');
-	$end_date = getStringFromRequest('end_date','');
-	$goals = getStringFromRequest('goals','');
-	$page_url = getStringFromRequest('page_url','');
+$element_id = $release->getElementID();
+$start_date = date( 'Y-m-d', $release->getStartDate() );
+$end_date = date( 'Y-m-d', $release->getEndDate() );
+$goals = $release->getGoals();
+$page_url = $release->getPageUrl();
 
+$taskboard->header(
+	array(
+		'title'=>'Taskboard for '.$group->getPublicName().' : '. _('Releases').' : '._('Edit release') ,
+		'pagename'=>_('Releases').' : '._('Edit release'),
+		'sectionvals'=>array(group_getname($group_id)),
+		'group'=>$group_id
+	)
+);
 
-	$start_date_unixtime = strtotime($start_date);
-	$end_date_unixtime = strtotime($end_date);
+echo '<link rel="stylesheet" type="text/css" href="/plugins/taskboard/css/agile-board.css">';
+html_use_jqueryui();
 
-	if( $end_date_unixtime < $start_date_unixtime ) {
-		$start_date_unixtime = NULL;
-		$end_date_unixtime = NULL;
-		$error_msg = _('End date should be later then the start date');
-	}
+if( $taskboard->isError() ) {
+	echo '<div id="messages" class="error">'.$taskboard->getErrorMessage().'</div>';
 } else {
-	$element_id = $release->getElementID();
-	$start_date = date( 'Y-m-d', $release->getStartDate() );
-	$end_date = date( 'Y-m-d', $release->getEndDate() );
-	$goals = $release->getGoals();
-	$page_url = $release->getPageUrl();
+	echo '<div id="messages" style="display: none;"></div>';
 }
 
-if ($element_id && $start_date_unixtime && $end_date_unixtime) {
-	db_begin();
+// prepare list of unused releases
+$used_release_elements = array();
+$taskboard_releases = $taskboard->getReleases();
+foreach($taskboard_releases as $release ) {
+	$used_release_elements[] = $release->getElementID();
+}
 
-	if ($release->update($element_id, $start_date_unixtime, $end_date_unixtime, $goals, $page_url)) {
-		db_commit();
-		$feedback .= _('Succefully Updated');
-		session_redirect( '/plugins/taskboard/releases/?group_id='.$group_id );
-	} else {
-		db_rollback();
-		exit_error( $release->getErrorMessage() );
+$release_values = $taskboard->getReleaseValues();
+
+$release_id_arr = array();
+$release_name_arr = array();
+foreach( $release_values as $release_name => $release_id ) {
+	// show only unused releases
+	if( !in_array($release_id, $used_release_elements ) || $release_id == $element_id ) {
+		$release_id_arr[] = $release_id;
+		$release_name_arr[] = $release_name;
 	}
-} else {
+}
 
-	$taskboard->header(
-		array(
-			'title'=>'Taskboard for '.$group->getPublicName().' : '. _('Releases').' : '._('Edit release') ,
-			'pagename'=>_('Releases').' : '._('Edit release'),
-			'sectionvals'=>array(group_getname($group_id)),
-			'group'=>$group_id
-		)
-	);
-
-	echo '<link rel="stylesheet" type="text/css" href="/plugins/taskboard/css/agile-board.css">';
-	echo "\n";
-	if ( function_exists( 'html_use_jqueryui' ) ) {
-		html_use_jqueryui();
-	} else {
-		echo '<script type="text/javascript" src="'.util_make_url('/plugins/taskboard/js/jquery-ui.js').'"></script>';
-	}
-	echo "\n";
-
-	if( $taskboard->isError() ) {
-		echo '<div id="messages" class="error">'.$taskboard->getErrorMessage().'</div>';
-	} else {
-		echo '<div id="messages" style="display: none;"></div>';
-	}
-	echo "\n";
-
-	// prepare list of unused releases
-	$used_release_elements = array();
-	$taskboard_releases = $taskboard->getReleases();
-	foreach($taskboard_releases as $release ) {
-		$used_release_elements[] = $release->getElementID();
-	}
-
-	$release_values = $taskboard->getReleaseValues();
-
-	$release_id_arr = array();
-	$release_name_arr = array();
-	foreach( $release_values as $release_name => $release_id ) {
-		// show only unused releases
-		if( !in_array($release_id, $used_release_elements ) || $release_id == $element_id ) {
-			$release_id_arr[] = $release_id;
-			$release_name_arr[] = $release_name;
-		}
-	}
-
-	$release_box=html_build_select_box_from_arrays ($release_id_arr,$release_name_arr,'_release',$element_id,false);
+$release_box=html_build_select_box_from_arrays ($release_id_arr,$release_name_arr,'_release',$element_id,false);
 ?>
 
 <form action="<?php echo util_make_url( '/plugins/taskboard/releases/?group_id='.$group_id.'&amp;action=edit_release') ?>" method="post">
@@ -138,6 +102,3 @@ jQuery( document ).ready(function( $ ) {
 	$( "input[name='start_date'], input[name='end_date']" ).datepicker( {  "dateFormat" : "yy-mm-dd" });
 });
 </script>
-<?php
-}
-

@@ -1,6 +1,5 @@
 <?php
-
-/*
+/**
  * Copyright (C) 2015 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
  *
  * This file is part of FusionForge.
@@ -28,43 +27,50 @@ global $gfplugins;
 require_once $gfplugins.'taskboard/common/include/TaskBoardHtml.class.php';
 
 
-$user = session_get_user(); // get the session user
-
-if (!$user || !is_object($user) ) {
-	exit_error(_('Invalid User'),'home');
-} else if ( $user->isError() ) {
-	exit_error($user->getErrorMessage(),'home');
-} else if ( !$user->isActive()) {
-	exit_error(_('Invalid User : Not active'),'home');
-}
-
-
 $group_id = getIntFromRequest('group_id');
-$pluginname = 'taskboard';
+$pluginTaskboard = plugin_get_object('taskboard');
 
 if (!$group_id) {
-	exit_error(_('Cannot Process your request : No ID specified'),'home');
+	exit_error(_('Cannot Process your request')._(': ')._('No ID specified'), 'home');
 } else {
 	$group = group_get_object($group_id);
-	if ( !$group) {
+	if (!$group) {
 		exit_no_group();
 	}
-	if ( ! ($group->usesPlugin ( $pluginname )) ) {//check if the group has the plugin active
-		exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'),$pluginname),'home');
+	if (!$group->usesPlugin($pluginTaskboard->name)) {//check if the group has the plugin active
+		exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'), $pluginTaskboard->name), 'home');
 	}
 
-	$taskboard = new TaskBoardHtml( $group ) ;
+	if ($group->usesTracker()) {
+		session_require_perm('tracker_admin', $group_id);
 
-	$allowedActions = array('add_release', 'delete_release', 'edit_release');
-	$action = getStringFromRequest('action');
+		$allowedActions = array('add_release', 'delete_release', 'edit_release');
+		$action = getStringFromRequest('action');
+		$taskboard = new TaskBoardHtml($group);
 
-	if( in_array($action, $allowedActions) ) {
-		include( $gfplugins.'taskboard/common/actions/releases/'.$action.'.php' );
+		if (in_array($action, $allowedActions)) {
+			include($gfplugins.$pluginTaskboard->name.'/common/actions/'.$action.'.php');
+		}
+
+		$allowedViews = array('add_release', 'delete_release', 'edit_release');
+		$view = getStringFromRequest('view');
+
+		if( in_array($view, $allowedViews) ) {
+			include($gfplugins.$pluginTaskboard->name.'/common/views/releases/'.$view.'.php' );
+		} else {
+			include($gfplugins.$pluginTaskboard->name.'/common/views/releases/ind.php' );
+		}
 	} else {
-		include( $gfplugins.'taskboard/common/actions/releases/ind.php' );
+		$taskboard->header(
+			array(
+				'title' => _('Taskboard for ').$group->getPublicName()._(': ')._('Administration'),
+				'pagename' => _('Administration'),
+				'sectionvals' => array(group_getname($group_id)),
+				'group' => $group_id
+			)
+		);
+		echo $HTML->information(_('Your project does not use tracker feature. Please contact your Administrator to turn on this feature.'));
 	}
 }
 
 site_project_footer(array());
-
-?>

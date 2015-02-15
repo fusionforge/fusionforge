@@ -22,34 +22,22 @@
 session_require_perm('tracker_admin', $group_id) ;
 
 $release_id = getStringFromRequest('release_id','');
-$confirmed = getStringFromRequest('confirmed','');
 $release = new TaskBoardRelease( $taskboard, $release_id );
 
-if( $confirmed ) {
-	db_begin();
-	if( $release->delete() ) {
-		db_commit();
-		$feedback .= _('Successfully Removed');
-	} else {
-		db_rollback();
-	}
+$taskboard->header(
+	array(
+		'title'=>'Taskboard for '.$group->getPublicName().' : '._('Release').' : '._('Delete release') ,
+		'pagename'=>_('Release').' : '._('Delete release'),
+		'sectionvals'=>array(group_getname($group_id)),
+		'group'=>$group_id
+	)
+);
 
-	session_redirect('/plugins/taskboard/releases/?group_id='.$group_id);
+if( $taskboard->isError() ) {
+	echo '<div id="messages" class="error">'.$taskboard->getErrorMessage().'</div>';
 } else {
-	$taskboard->header(
-		array(
-			'title'=>'Taskboard for '.$group->getPublicName().' : '._('Release').' : '._('Delete release') ,
-			'pagename'=>_('Release').' : '._('Delete release'),
-			'sectionvals'=>array(group_getname($group_id)),
-			'group'=>$group_id
-		)
-	);
-
-	if( $taskboard->isError() ) {
-		echo '<div id="messages" class="error">'.$taskboard->getErrorMessage().'</div>';
-	} else {
-		echo '<div id="messages" style="display: none;"></div>';
-	}
+	echo '<div id="messages" style="display: none;"></div>';
+}
 
 ?>
 	<form action="<?php echo util_make_url ('/plugins/taskboard/releases/?group_id='.$group_id.'&amp;action=delete_release') ?>" method="post">
@@ -66,6 +54,4 @@ if( $confirmed ) {
 	<p>
 	<input type="submit" name="post_delete" value="<?php echo _('Delete') ?>">
 	</p>
-
-<?php
-}
+	</form>
