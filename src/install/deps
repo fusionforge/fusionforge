@@ -56,24 +56,19 @@ deps_redhat() {
 		case $targetversion in
 			7|el7*)
 				packagelist="httpd php mailman cvs $pg $pg-libs $pg-server $pg-contrib perl-URI php-pgsql subversion mod_dav_svn postfix rcs php-gd mod_ssl wget openssh which liberation-fonts php-htmlpurifier php-mbstring poppler-utils php-pear-HTTP_WebDAV_Server antiword shared-mime-info rsync git gitweb"
-				yum --enablerepo=fusionforge --enablerepo=dag-rpmforge -y --skip-broken install $packagelist
 				;;
 			6|el6*)
 				packagelist="httpd php mailman cvs $pg $pg-libs $pg-server $pg-contrib perl-URI php-pgsql subversion mod_dav_svn postfix rcs php-gd mod_ssl wget openssh which liberation-fonts php-htmlpurifier php-mbstring poppler-utils php-pear-HTTP_WebDAV_Server antiword shared-mime-info rsync git gitweb"
-				yum --enablerepo=fusionforge --enablerepo=dag-rpmforge -y --skip-broken install $packagelist
 				;;
 			5|el5*)
-				# We require phpunit for testsuite, but the old pear.phpunit.de is
-				# gone, the new version requires php > 5.3 (CentOS has 5.1), so we
-				# install php(5.4)+phpunit+php-extensions from the remi repo
 				packagelist="httpd php mailman cvs $pg $pg-libs $pg-server $pg-contrib perl-URI php-pgsql subversion mod_dav_svn postfix rcs php-gd mod_ssl wget openssh which liberation-fonts php-htmlpurifier php-mbstring poppler-utils php-pecl-zip php-pear-HTTP_WebDAV_Server antiword php-pecl-Fileinfo shared-mime-info rsync git gitweb"
-				yum --enablerepo=fusionforge --enablerepo=dag-rpmforge --enablerepo=remi -y --skip-broken install $packagelist
 				;;
 			*)
 				msg red "Target version unknown. Die here"
 				exit 1
 				;;
 		esac
+		yum --enablerepo=fusionforge --enablerepo=dag-rpmforge -y --skip-broken install $packagelist
 		touch /tmp/done_yum
 	fi
 }
