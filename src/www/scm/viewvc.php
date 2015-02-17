@@ -79,39 +79,24 @@ if (!$Group->usesSCM()) {
 // check if the scm_box is located in another server
 $scm_box = $Group->getSCMBox();
 //$external_scm = (gethostbyname(forge_get_config('web_host')) != gethostbyname($scm_box));
-$external_scm = !forge_get_config('scm_single_host');
+//$external_scm = !forge_get_config('scm_single_host');
+$external_scm = 1;
 
 if (!forge_check_perm('scm', $Group->getID(), 'read')) {
 	exit_permission_denied('scm');
 }
 
 if ($external_scm) {
-	//$server_script = "/cgi-bin/viewcvs.cgi";
-	$server_script = $GLOBALS["sys_path_to_scmweb"]."/viewcvs.cgi";
-	// remove leading / (if any)
-	$server_script = preg_replace("/^\\//", "", $server_script);
-
+	$server_script = '/anonscm/viewvc/';
 	// pass the parameters passed to this script to the remote script in the same fashion
-	$parameters = preg_replace('/^inframe=1[&;]/','',$_SERVER["QUERY_STRING"]);
-	$script_url = "http://".$scm_box."/".$server_script.$_SERVER["PATH_INFO"]."?".$parameters;
-	$fh = @fopen($script_url, "r");
-	if (!$fh) {
-		exit_error(sprintf(_('Could not open script %s.'),$script_url),'home');
-	}
-
-	// start reading the output of the script (in 8k chunks)
-	$content = "";
-	while (!feof($fh)) {
-		$content .= fread($fh, 8192);
-	}
-
-	if (viewcvs_is_html()) {
-		// Now, we must replace the occurrences of $server_script with this script
-		// (do this only of outputting HTML)
-		// We must do this because we can't pass the environment variable SCRIPT_NAME
-		// to the cvsweb script (maybe this can be fixed in the future?)
-		$content = str_replace("/".$server_script, $_SERVER["SCRIPT_NAME"], $content);
-	}
+	$script_url = "http://" . $scm_box . '/' . $server_script
+		. @$_SERVER['PATH_INFO'] . '?' . $_SERVER["QUERY_STRING"];
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_HEADER, true);
+	curl_setopt($ch, CURLOPT_URL, $script_url);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	$content = curl_exec($ch);
+	curl_close($ch);
 } else {
 	$unix_name = $Group->getUnixName();
 
@@ -140,11 +125,16 @@ if (count($exploded_content) > 1) {
 	$headers = explode("\r\n", $headers);
 	$content_type = '';
 	$charset = '';
+	if ($external_scm)
+		// Strip "HTTP/1.1 200 OK" initial status line
+		array_shift($headers);
 	foreach ($headers as $header) {
 		if (preg_match('/^Content-Type:\s*(([^;]*)(\s*;\s*charset=(.*))?)/i', $header, $matches)) {
 			$content_type = $matches[2];
 			if (isset($matches[4])) $charset = $matches[4];
 			// we'll validate content-type or transcode body below
+		} else if (preg_match('/^Transfer-Encoding:/', $header)) {
+			// skip headers like "Transfer-Encoding: chunked" which cause issue in the user browser
 		} else {
 			header($header);
 		}
