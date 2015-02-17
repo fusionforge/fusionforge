@@ -261,7 +261,7 @@ some control over it to the project's administrator.");
 		}
 
 		if ($project->usesPlugin($this->name)) {
-			$iframe_src = '/scm/viewvc.php?inframe=1&root='.$project->getUnixName();
+			$iframe_src = '/scm/viewvc.php?root='.$project->getUnixName();
 			if ($params['commit']) {
 				$iframe_src .= '&view=rev&revision='.$params['commit'];
 			}
