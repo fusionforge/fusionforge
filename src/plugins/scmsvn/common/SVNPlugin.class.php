@@ -364,12 +364,6 @@ some control over it to the project's administrator.");
 
 			$access_data .= "\n";
 			$engine->invalidateRoleCaches();  // caching all roles takes ~1GB RAM for 5K projects/15K users
-
-			if ($project->enableAnonSCM()) {
-				fwrite($config_f, 'Use ScmsvnProjectWithAnon '.$project->getUnixName().'
-');
-			}
-			
 			fwrite($config_f, "\n");
 		}
 
