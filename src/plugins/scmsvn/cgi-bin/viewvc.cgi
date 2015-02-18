@@ -51,18 +51,23 @@ cfg.general.root_parents = [repos_path+': svn']
 
 # Authentify request
 try:
-  p = subprocess.Popen(['sudo', 'forge_check_cookie'], stdin=subprocess.PIPE)
-  p.communicate(os.environ.get('HTTP_COOKIE', ''))
-  if p.returncode != 0:
-    raise Exception('Unauthorized')
+  # TODO: itk prevents sudo from gaining privileges, let's try with something else
+  # p = subprocess.Popen(['sudo', 'forge_check_cookie'], stdin=subprocess.PIPE)
+  #p.communicate(os.environ.get('HTTP_COOKIE', ''))
+  #if p.returncode != 0:
+  #  raise Exception('Unauthorized')
+  pass  # no auth for now
 except Exception, e:
   print "Content-type: text/plain\n\n";
   print e
   sys.exit(1)
 
+# Pretend we're running on the source host
 os.environ['SCRIPT_NAME'] = '/scm/viewvc.php'
-cfg.general.address = 'root@' + os.environ['HTTP_HOST']
 cfg.options.docroot = '/scm/viewvc/docroot';
+
+# Generic configuration
+cfg.general.address = 'root@' + os.environ['HTTP_HOST']
 #cfg.options.allow_compress = False
 #cfg.options.generate_etags = False
 #cfg.options.allowed_views = ['annotate', 'diff', 'markup', 'roots', 'tar', 'co']

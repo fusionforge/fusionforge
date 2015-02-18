@@ -81,6 +81,7 @@ $scm_box = $Group->getSCMBox();
 //$external_scm = (gethostbyname(forge_get_config('web_host')) != gethostbyname($scm_box));
 //$external_scm = !forge_get_config('scm_single_host');
 $external_scm = 1;
+$redirect = 0;
 
 if (!forge_check_perm('scm', $Group->getID(), 'read')) {
 	exit_permission_denied('scm');
@@ -98,17 +99,22 @@ if ($external_scm) {
 	$script_url = $protocol . $scm_box . $server_script
 		. (isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : '/')
 		. '?' . $_SERVER["QUERY_STRING"];
-	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_HEADER, true);
-	curl_setopt($ch, CURLOPT_URL, $script_url);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-	curl_setopt($ch, CURLOPT_COOKIE, $_SERVER['HTTP_COOKIE']);
-	$content = curl_exec($ch);
-	if ($content === false) {
-		exit_error("Error fetching $script_url : " . curl_error($ch), 'summary');
+	if ($redirect) {
+		header("Location: $script_url");
+		exit(0);
+	} else {
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_HEADER, true);
+		curl_setopt($ch, CURLOPT_URL, $script_url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_COOKIE, $_SERVER['HTTP_COOKIE']);
+		$content = curl_exec($ch);
+		if ($content === false) {
+			exit_error("Error fetching $script_url : " . curl_error($ch), 'summary');
+		}
+		curl_close($ch);
 	}
-	curl_close($ch);
 } else {
 	// Call to ViewCVS CGI locally (see viewcvs_utils.php)
 
