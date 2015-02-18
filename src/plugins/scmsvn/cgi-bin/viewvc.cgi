@@ -28,6 +28,10 @@ for pat in CONF_GLOBS:
     break
 #CONF_PATHNAME = os.path.dirname(__filename__) + '/viewvc.conf'
 
+#print "Content-type: text/plain\n\n";
+#print os.popen('id').read()
+#print os.environ
+#sys.exit(0)
 
 import sapi
 import viewvc
@@ -35,8 +39,12 @@ import viewvc
 server = sapi.CgiServer()
 cfg = viewvc.load_config(CONF_PATHNAME, server)
 
+# Get repo path from FusionForge config
+# couldn't find any way to disable compression in forge_get_config/PHP >(
+if 'HTTP_ACCEPT_ENCODING' in os.environ: del os.environ['HTTP_ACCEPT_ENCODING']
 repos_path = os.popen('forge_get_config repos_path scmsvn').read().rstrip()  # '/srv/svn'
 cfg.general.root_parents = [repos_path+': svn']
+
 
 os.environ['SCRIPT_NAME'] = '/scm/viewvc.php'
 cfg.general.address = 'root@' + os.environ['HTTP_HOST']
