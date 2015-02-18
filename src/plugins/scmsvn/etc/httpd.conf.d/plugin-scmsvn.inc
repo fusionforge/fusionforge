@@ -6,6 +6,7 @@
 </IfModule>
 
 ScriptAlias /anonscm/viewvc {core/source_path}/plugins/scmsvn/cgi-bin/viewvc.cgi
+ScriptAliasMatch ^/authscm/[^/]+/viewvc(.*) {core/source_path}/plugins/scmsvn/cgi-bin/viewvc.cgi$1
 <Directory {core/source_path}/plugins/scmsvn/cgi-bin/>
   <IfVersion >= 2.3>
     Require all granted

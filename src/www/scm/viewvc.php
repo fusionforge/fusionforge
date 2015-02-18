@@ -86,11 +86,17 @@ if (!forge_check_perm('scm', $Group->getID(), 'read')) {
 	exit_permission_denied('scm');
 }
 
+$unix_name = $Group->getUnixName();
+$u = session_get_user();
 if ($external_scm) {
-	$server_script = '/anonscm/viewvc/';
+	if ($Group->enableAnonSCM())
+		$server_script = '/anonscm/viewvc';
+	else
+		$server_script = '/authscm/'.$u->getUnixName().'/viewvc';
 	// pass the parameters passed to this script to the remote script in the same fashion
-	$script_url = "http://" . $scm_box . '/' . $server_script
-		. @$_SERVER['PATH_INFO'] . '?' . $_SERVER["QUERY_STRING"];
+	$script_url = "http://" . $scm_box . $server_script
+		. (isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : '/')
+		. '?' . $_SERVER["QUERY_STRING"];
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_HEADER, true);
 	curl_setopt($ch, CURLOPT_URL, $script_url);
@@ -98,8 +104,6 @@ if ($external_scm) {
 	$content = curl_exec($ch);
 	curl_close($ch);
 } else {
-	$unix_name = $Group->getUnixName();
-
 	// Call to ViewCVS CGI locally (see viewcvs_utils.php)
 
 	// see what type of plugin this project if using
@@ -147,6 +151,7 @@ if (!isset($_GET['view'])) {
 	$_GET['view'] = 'none';
 }
 
+// echo "script_url=$script_url<br />";
 switch ($_GET['view']) {
 	case 'tar':
 	case 'co':
