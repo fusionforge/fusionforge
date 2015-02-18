@@ -94,14 +94,20 @@ if ($external_scm) {
 	else
 		$server_script = '/authscm/'.$u->getUnixName().'/viewvc';
 	// pass the parameters passed to this script to the remote script in the same fashion
-	$script_url = "http://" . $scm_box . $server_script
+	$protocol = forge_get_config('use_ssl', 'scmsvn')? 'https://' : 'http://';
+	$script_url = $protocol . $scm_box . $server_script
 		. (isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : '/')
 		. '?' . $_SERVER["QUERY_STRING"];
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_HEADER, true);
 	curl_setopt($ch, CURLOPT_URL, $script_url);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+	curl_setopt($ch, CURLOPT_COOKIE, $_SERVER['HTTP_COOKIE']);
 	$content = curl_exec($ch);
+	if ($content === false) {
+		exit_error("Error fetching $script_url : " . curl_error($ch), 'summary');
+	}
 	curl_close($ch);
 } else {
 	// Call to ViewCVS CGI locally (see viewcvs_utils.php)
