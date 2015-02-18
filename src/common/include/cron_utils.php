@@ -89,14 +89,21 @@ function checkChroot() {
 // Locking: for a single script
 // flock() locks are automatically lost on program termination, however
 // that happened (clean, segfault...)
+// Global, otherwise auto-closed by PHP and we lose the lock!
+$locks = array();
 function cron_acquire_lock($script) {
 	// Script lock: http://perl.plover.com/yak/flock/samples/slide006.html
-	static $lock;  // static, otherwise auto-closed by PHP and we lose the lock!
-	$lock = fopen($script, 'r') or die("Failed to ask lock.\n");
+	if (!isset($locks[$script]))
+		$locks[$script] = fopen($script, 'r') or die("Failed to ask lock.\n");
 
-	if (!flock($lock, LOCK_EX | LOCK_NB)) {
+	if (!flock($locks[$script], LOCK_EX | LOCK_NB)) {
 		die("There's a lock for '$script', exiting\n");
 	}
+}
+
+function cron_release_lock($script) {
+	flock($locks[$script], LOCK_UN);
+	unset($locks[$script]);
 }
 
 //

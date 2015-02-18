@@ -130,6 +130,7 @@ while (true) {
 		$ret = null;
 		if ($verbose) print "Running: $script... ";
 		system("$script\n", $ret);
+		cron_release_lock($script);
 		if ($ret == 0) {
 			if ($verbose) print "DONE\n";
 			db_query_params("UPDATE systasks SET status=$1, stopped=now() WHERE systask_id=$2",
