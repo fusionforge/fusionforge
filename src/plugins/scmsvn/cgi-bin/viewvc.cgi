@@ -28,7 +28,7 @@ for pat in CONF_GLOBS:
     break
 #CONF_PATHNAME = os.path.dirname(__filename__) + '/viewvc.conf'
 
-#print "Content-type: text/plain\n\n";
+#print "Content-type: text/plain\n";
 #print os.popen('id').read()
 #print os.environ
 #sys.exit(0)
@@ -51,15 +51,26 @@ cfg.general.root_parents = [repos_path+': svn']
 
 # Authentify request
 try:
-  # TODO: itk prevents sudo from gaining privileges, let's try with something else
-  # p = subprocess.Popen(['sudo', 'forge_check_cookie'], stdin=subprocess.PIPE)
-  #p.communicate(os.environ.get('HTTP_COOKIE', ''))
-  #if p.returncode != 0:
-  #  raise Exception('Unauthorized')
-  pass  # no auth for now
+  web_host = subprocess.check_output(['forge_get_config', 'web_host']).rstrip()
+  import pycurl
+  from StringIO import StringIO
+  buffer = StringIO()
+  c = pycurl.Curl()
+  c.setopt(c.URL, 'https://' + web_host + '/account/check_forwarded_session.php')
+  c.setopt(c.SSL_VERIFYPEER, False)
+  c.setopt(c.COOKIE, os.environ.get('HTTP_COOKIE', ''))
+  c.setopt(c.USERAGENT, os.environ.get('HTTP_USER_AGENT', ''))
+  c.setopt(c.HTTPHEADER, ['X-Forwarded-For: '+os.environ.get('HTTP_X_FORWARDED_FOR', '')])
+  c.setopt(c.WRITEDATA, buffer)
+  c.perform()
+  c.close()
+  body = buffer.getvalue()
+  if body != 'OK':
+    raise Exception('Unauthorized')
 except Exception, e:
-  print "Content-type: text/plain\n\n";
+  print "Content-type: text/plain\n";
   print e
+  #raise
   sys.exit(1)
 
 # Pretend we're running on the source host

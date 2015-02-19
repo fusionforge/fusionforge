@@ -108,7 +108,11 @@ if ($external_scm) {
 		curl_setopt($ch, CURLOPT_URL, $script_url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-		curl_setopt($ch, CURLOPT_COOKIE, $_SERVER['HTTP_COOKIE']);
+		curl_setopt($ch, CURLOPT_COOKIE, $_SERVER['HTTP_COOKIE']);  // for session validation
+		curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);  // for session validation
+		curl_setopt($ch, CURLOPT_HTTPHEADER,
+					array('Accept-Language: '.$_SERVER['HTTP_ACCEPT_LANGUAGE'],  // for i18n
+						  'X-Forwarded-For: '.$_SERVER['REMOTE_ADDR']));  // for session validation
 		$content = curl_exec($ch);
 		if ($content === false) {
 			exit_error("Error fetching $script_url : " . curl_error($ch), 'summary');
