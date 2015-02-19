@@ -45,6 +45,7 @@ import subprocess
 
 # Get repo path from FusionForge config
 # couldn't find any way to disable compression in forge_get_config/PHP >(
+encoding = os.environ['HTTP_ACCEPT_ENCODING']
 if 'HTTP_ACCEPT_ENCODING' in os.environ: del os.environ['HTTP_ACCEPT_ENCODING']
 repos_path = subprocess.check_output(['forge_get_config', 'repos_path', 'scmsvn']).rstrip()
 cfg.general.root_parents = [repos_path+': svn']
@@ -72,6 +73,7 @@ except Exception, e:
   print e
   #raise
   sys.exit(1)
+if encoding != None: os.environ['HTTP_ACCEPT_ENCODING'] = encoding
 
 # Pretend we're running on the source host
 os.environ['SCRIPT_NAME'] = '/scm/viewvc.php'

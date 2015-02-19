@@ -112,6 +112,7 @@ if ($external_scm) {
 		curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);  // for session validation
 		curl_setopt($ch, CURLOPT_HTTPHEADER,
 					array('Accept-Language: '.$_SERVER['HTTP_ACCEPT_LANGUAGE'],  // for i18n
+						  'Accept-Encoding: '.$_SERVER['HTTP_ACCEPT_ENCODING'],  // for compression
 						  'X-Forwarded-For: '.$_SERVER['REMOTE_ADDR']));  // for session validation
 		$content = curl_exec($ch);
 		if ($content === false) {
@@ -153,8 +154,8 @@ if (count($exploded_content) > 1) {
 			$content_type = $matches[2];
 			if (isset($matches[4])) $charset = $matches[4];
 			// we'll validate content-type or transcode body below
-		} else if (preg_match('/^Transfer-Encoding:/', $header)) {
-			// skip headers like "Transfer-Encoding: chunked" which cause issue in the user browser
+		} else if (preg_match('/^Transfer-Encoding: chunked/', $header)) {
+			// curl already de-chuncked the body
 		} else {
 			header($header);
 		}
