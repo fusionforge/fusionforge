@@ -38,3 +38,20 @@ ScriptAliasMatch ^/authscm/[^/]+/viewvc(.*) {core/source_path}/plugins/scmsvn/cg
 <IfModule !mod_authz_svn.c>
   Redirect permanent /svn /anonscm/svn/
 </IfModule>
+
+# For reference, we could do without svnroot-authfile, but
+# mod-auth-pgsql isn't packaged for RPM :/
+#<LocationMatch "^/authscm/[^/]+/svn">
+#  AuthType Basic
+#  AuthName "SCM for FusionForge"
+#  AuthBasicProvider     pgsql
+#  Auth_PG_host          127.0.0.1
+#  Auth_PG_user          fusionforge_nss
+#  #Auth_PG_pwd          <no password>
+#  Auth_PG_database      fusionforge
+#  Auth_PG_pwd_table     nss_passwd
+#  Auth_PG_uid_field     login
+#  Auth_PG_pwd_field     passwd
+#  Auth_PG_encrypted     on
+#  Auth_PG_hash_type     CRYPT
+#</LocationMatch>
