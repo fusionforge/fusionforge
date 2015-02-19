@@ -2,7 +2,7 @@
 Requires: git, gitweb
 
 %package plugin-scmsvn
-Requires: subversion, viewvc, augeas
+Requires: subversion, viewvc, python-pycurl, augeas
 
 %package plugin-scmbzr
 Requires: bzr, mod_wsgi, loggerhead
