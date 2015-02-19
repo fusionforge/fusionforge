@@ -1,3 +1,4 @@
+# Read-only access for public repos
 <Location /anonscm/svn/>
   DAV svn
   SVNParentPath {scmsvn/repos_path}
@@ -6,6 +7,7 @@
   </LimitExcept>
 </Location>
 
+# Authentification for macro 'ScmsvnUser'
 <LocationMatch "^/authscm/[^/]+/svn">
   # how to authenticate a user
   AuthType Basic
@@ -15,19 +17,19 @@
   #AuthzSVNAccessFile {core/data_path}/svnroot-access
 </LocationMatch>
 
-<LocationMatch "^/authscm/[^/]+/viewvc">
-  # TODO: let's find a way to authenticate from viewvc.php
-  #AuthType Basic
-  #AuthName "SCM for FusionForge"
-  #AuthUserFile {core/data_path}/svnroot-authfile
-</LocationMatch>
-
+# ViewVC
+# Authentified via cookie in viewvc.php:
+#<LocationMatch "^/authscm/[^/]+/viewvc">
+#  AuthType Basic
+#  AuthName "SCM for FusionForge"
+#  AuthUserFile {core/data_path}/svnroot-authfile
+#</LocationMatch>
 ScriptAlias /anonscm/viewvc {core/source_path}/plugins/scmsvn/cgi-bin/viewvc.cgi
 ScriptAliasMatch ^/authscm/[^/]+/viewvc(.*) {core/source_path}/plugins/scmsvn/cgi-bin/viewvc.cgi$1
+#Alias /doc/viewvc /usr/share/viewvc/docroot
 <Directory {core/source_path}/plugins/scmsvn/cgi-bin>
   Require all granted
 </Directory>
-#Alias /doc/viewvc /usr/share/viewvc/docroot
 
 # Redirect URLs from FF < 6.0
 <IfModule mod_authz_svn.c>
