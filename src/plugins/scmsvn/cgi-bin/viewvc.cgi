@@ -52,22 +52,23 @@ cfg.general.root_parents = [repos_path+': svn']
 
 # Authentify request
 try:
-  web_host = subprocess.check_output(['forge_get_config', 'web_host']).rstrip()
-  import pycurl
-  from StringIO import StringIO
-  buffer = StringIO()
-  c = pycurl.Curl()
-  c.setopt(c.URL, 'https://' + web_host + '/account/check_forwarded_session.php')
-  c.setopt(c.SSL_VERIFYPEER, False)
-  c.setopt(c.COOKIE, os.environ.get('HTTP_COOKIE', ''))
-  c.setopt(c.USERAGENT, os.environ.get('HTTP_USER_AGENT', ''))
-  c.setopt(c.HTTPHEADER, ['X-Forwarded-For: '+os.environ.get('HTTP_X_FORWARDED_FOR', '')])
-  c.setopt(c.WRITEDATA, buffer)
-  c.perform()
-  c.close()
-  body = buffer.getvalue()
-  if body != 'OK':
-    raise Exception('Unauthorized')
+  if not os.environ['REQUEST_URI'].startswith('/anonscm/'):
+    web_host = subprocess.check_output(['forge_get_config', 'web_host']).rstrip()
+    import pycurl
+    from StringIO import StringIO
+    buffer = StringIO()
+    c = pycurl.Curl()
+    c.setopt(c.URL, 'https://' + web_host + '/account/check_forwarded_session.php')
+    c.setopt(c.SSL_VERIFYPEER, False)
+    c.setopt(c.COOKIE, os.environ.get('HTTP_COOKIE', ''))
+    c.setopt(c.USERAGENT, os.environ.get('HTTP_USER_AGENT', ''))
+    c.setopt(c.HTTPHEADER, ['X-Forwarded-For: '+os.environ.get('HTTP_X_FORWARDED_FOR', '')])
+    c.setopt(c.WRITEDATA, buffer)
+    c.perform()
+    c.close()
+    body = buffer.getvalue()
+    if body != 'OK':
+      raise Exception('Unauthorized')
 except Exception, e:
   print "Content-type: text/plain\n";
   print e
