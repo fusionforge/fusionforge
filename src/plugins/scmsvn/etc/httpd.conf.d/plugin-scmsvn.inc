@@ -25,7 +25,6 @@
 #  AuthUserFile {core/data_path}/svnroot-authfile
 #</LocationMatch>
 ScriptAlias /anonscm/viewvc {core/source_path}/plugins/scmsvn/cgi-bin/viewvc.cgi
-ScriptAliasMatch ^/authscm/[^/]+/viewvc(.*) {core/source_path}/plugins/scmsvn/cgi-bin/viewvc.cgi$1
 #Alias /doc/viewvc /usr/share/viewvc/docroot
 <Directory {core/source_path}/plugins/scmsvn/cgi-bin>
   Require all granted
