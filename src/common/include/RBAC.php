@@ -1356,9 +1356,9 @@ class RoleComparator {
 		$ap = $a->getHomeProject() ;
 		$bp = $b->getHomeProject() ;
 		if ($ap == NULL && $bp != NULL) {
-			return 1 ;
-		} elseif ($ap != NULL && $bp == NULL) {
 			return -1 ;
+		} elseif ($ap != NULL && $bp == NULL) {
+			return 1 ;
 		} elseif ($ap == NULL && $bp == NULL) {
 			$tmp = strcoll ($a->getName(), $b->getName()) ;
 			return $tmp ;
