@@ -627,7 +627,8 @@ function html_build_select_box_from_arrays($vals, $texts, $select_name, $checked
 
 	if (!$have_a_subelement) {
 		/* <select></select> without <option/> in between is invalid */
-		return '<!-- select without options -->'."\n";
+		$return .= '<!-- select without options -->'."\n";
+		$return .= html_e('option', array(), '', false);
 	}
 
 	$return .= html_ac(html_ap() -1);
