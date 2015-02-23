@@ -60,6 +60,7 @@ try:
     c = pycurl.Curl()
     c.setopt(c.URL, 'https://' + web_host + '/account/check_forwarded_session.php')
     c.setopt(c.SSL_VERIFYPEER, False)
+    c.setopt(c.SSL_VERIFYHOST, False)
     c.setopt(c.COOKIE, os.environ.get('HTTP_COOKIE', ''))
     c.setopt(c.USERAGENT, os.environ.get('HTTP_USER_AGENT', ''))
     c.setopt(c.HTTPHEADER, ['X-Forwarded-For: '+os.environ.get('HTTP_X_FORWARDED_FOR', '')])
