@@ -320,6 +320,7 @@ some control over it to the project's administrator.");
 		$groups = $this->getGroups();
 
 		# Reproduce nss_passwd on file, so we can work without mod_auth_pgsql2
+		# Maybe switch to mod_authnz_pam instead?
 		$fname = forge_get_config('data_path').'/svnroot-authfile';
 		$f = fopen($fname.'.new', 'w');
 

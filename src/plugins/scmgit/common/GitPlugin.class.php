@@ -342,7 +342,7 @@ control over it to the project's administrator.");
 						$u = user_get_object(user_getid())->getUnixName();
 						$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
 						$box = $this->getBoxForProject($project);
-						$iframesrc = "$protocol://$box/authscm/$u/gitweb/".$project->getUnixName().'/?p='.$project->getUnixName().'/users/'.$user->getUnixName().'.git';
+						$iframesrc = "$protocol://$box/authscm/$u/gitweb/?p=".$project->getUnixName().'/users/'.$user->getUnixName().'.git';
 				}
 				htmlIframeResizer($iframesrc, array('id'=>'scmgit_iframe', 'absolute'=>true));
 			} elseif ($this->browserDisplayable($project)) {
@@ -352,7 +352,7 @@ control over it to the project's administrator.");
 						$u = user_get_object(user_getid())->getUnixName();
 						$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
 						$box = $this->getBoxForProject($project);
-						$iframesrc = "$protocol://$box/authscm/$u/gitweb/".$project->getUnixName().'/?p='.$project->getUnixName().'/'.$project->getUnixName().'.git';
+						$iframesrc = "$protocol://$box/authscm/$u/gitweb/?p=".$project->getUnixName().'/'.$project->getUnixName().'.git';
 				}
 				if ($params['commit']) {
 					$iframesrc .= ';a=log;h='.$params['commit'];
@@ -522,26 +522,6 @@ control over it to the project's administrator.");
 			}
 			system("echo \"Git repository for $project_name\" > $main_repo/description");
 			system("find $main_repo -type d | xargs chmod g+s");
-			if (forge_get_config('use_dav','scmgit')) {
-				$f = fopen(forge_get_config('config_path').'/httpd.conf.d/plugin-scmgit-dav.inc','a');
-				fputs($f,'<IfVersion >= 2.3>
-  Use Project '.$project_name.'
-</IfVersion>
-<IfVersion < 2.3>
-<Location "/scmrepos/git/'.$project_name.'">
-        DAV on
-        Options +Indexes -ExecCGI -FollowSymLinks -MultiViews
-        AuthType Basic
-        AuthName "Git repository: '.$project_name.'"
-        #The AuthUserFile filename is needed in the code. Please do not rename it.
-        AuthUserFile '.forge_get_config('data_path').'/gituser-authfile.'.$project_name.'
-        Require valid-user
-</Location>
-</IfVersion>
-');
-				fclose($f);
-				system(forge_get_config('httpd_reload_cmd','scmgit'));
-			}
 		}
 		if (forge_get_config('use_ssh','scmgit')) {
 			if ($project->enableAnonSCM()) {
@@ -709,25 +689,12 @@ control over it to the project's administrator.");
 
 		$fname = $config_dir . '/gitweb.list';
 		$f = fopen($fname.'.new', 'w');
-		$engine = RBACEngine::getInstance();
 		foreach ($list as $project) {
 			$repos = $this->getRepositories($rootdir . "/" .  $project->getUnixName());
 			foreach ($repos as $repo) {
 				$reldir = substr($repo, strlen($rootdir) + 1);
 				fwrite($f, $reldir . "\n");
 			}
-			$users = $engine->getUsersByAllowedAction('scm',$project->getID(),'write');
-			$password_data = '';
-			foreach ($users as $user) {
-				$password_data .= $user->getUnixName().':'.$user->getUnixPasswd()."\n";
-			}
-			$faname = forge_get_config('data_path').'/gituser-authfile.'.$project->getUnixName();
-			$fa = fopen($faname.'.new', 'w');
-			fwrite($fa, $password_data);
-			fclose($fa);
-			chmod($faname.'.new', 0644);
-			rename($faname.'.new', $faname);
-			$engine->invalidateRoleCaches();  // caching all roles takes ~1GB RAM for 5K projects/15K users
 		}
 		fclose($f);
 		chmod($fname.'.new', 0644);
@@ -736,67 +703,28 @@ control over it to the project's administrator.");
 		if (forge_get_config('use_smarthttp', 'scmgit')) {
 			$gitusers = array();
 			
-			$config_fname = forge_get_config('data_path').'/scmgit-auth.inc';
-			$config_f = fopen($config_fname.'.new', 'w');
-			
+			# Reproduce nss_passwd on file, so we can work without mod_auth_pgsql2
+			# Maybe switch to mod_authnz_pam instead?
 			$user_fname = forge_get_config('data_path').'/scmgit-userfile';
 			$user_f = fopen($user_fname.'.new', 'w');
 			
-			$group_fname = forge_get_config('data_path').'/scmgit-groupfile';
-			$group_f = fopen($group_fname.'.new', 'w');
+			# Enable /authscm/$user URLs
+			$config_fname = forge_get_config('data_path').'/scmgit-auth.inc';
+			$config_f = fopen($config_fname.'.new', 'w');
 			
-			foreach ($groups as $project) {
-				if ( !$project->isActive()) {
-					continue;
-				}
-				if ( !$project->usesSCM()) {
-					continue;
-				}
-				$rusers = $engine->getUsersByAllowedAction('scm',$project->getID(),'read');
-				fwrite($group_f, $project->getUnixName().':');
-				foreach ($rusers as $user) {
-					$gitusers[$user->getID()] = $user;
-					fwrite($group_f, ' '.$user->getUnixName());
-				}
-				fwrite($group_f, "\n");
-				
-				$wusers = $engine->getUsersByAllowedAction('scm',$project->getID(),'write');
-				fwrite($group_f, 'scm_'.$project->getUnixName().':');
-				foreach ($wusers as $user) {
-					fwrite($group_f, ' '.$user->getUnixName());
-				}
-				fwrite($group_f, "\n");
-				
-				
-				if ($project->enableAnonSCM()) {
-					fwrite($config_f, 'Use ScmgitProjectWithAnon '.$project->getUnixName().'
-');
-				} else {
-					fwrite($config_f, 'Use ScmgitProjectWithoutAnon '.$project->getUnixName().'
-');
-				}
-				
-				fwrite($config_f, "\n");
+			$res = db_query_params("SELECT login, passwd FROM nss_passwd WHERE status=$1", array('A'));
+			while ($arr = db_fetch_array($res)) {
+				fwrite($user_f, $arr['login'].':'.$arr['passwd']."\n");
+				fwrite($config_f, 'Use ScmgitUser '.$arr['login']."\n");
 			}
-			$password_data = '';
-			foreach ($gitusers as $user) {
-				$password_data .= $user->getUnixName().':'.$user->getUnixPasswd()."\n";
-				fwrite($config_f, 'Use ScmgitUser '.$user->getUnixName().'
-');
-			}
-			fwrite($user_f, $password_data);
+
+			fclose($user_f);
+			chmod($user_fname.'.new', 0644);
+			rename($user_fname.'.new', $user_fname);
 			
 			fclose($config_f);
 			chmod($config_fname.'.new', 0644);
 			rename($config_fname.'.new', $config_fname);
-			
-			fclose($group_f);
-			chmod($group_fname.'.new', 0644);
-			rename($group_fname.'.new', $group_fname);
-			
-			fclose($user_f);
-			chmod($user_fname.'.new', 0644);
-			rename($user_fname.'.new', $user_fname);
 		}
 	}
 
