@@ -321,7 +321,7 @@ some control over it to the project's administrator.");
 
 		# Reproduce nss_passwd on file, so we can work without mod_auth_pgsql2
 		# Maybe switch to mod_authnz_pam instead?
-		$fname = forge_get_config('data_path').'/svnroot-authfile';
+		$fname = forge_get_config('data_path').'/scm-passwd';
 		$f = fopen($fname.'.new', 'w');
 
 		# Enable /authscm/$user URLs
