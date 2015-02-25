@@ -1136,20 +1136,25 @@ function html_eo($name, $attrs = array()) {
  * @param	bool	$shortform
  *		(optional) allow short open-close form
  *		(default: true)
+ * @param   bool    $indent
+ *      (optional) indent output; disable if extra spacing breaks the rendering
+ *      (default: true)
  * @return	string
  *		XHTML string suitable for echo'ing
  */
-function html_e($name, $attrs = array(), $content = "", $shortform = true) {
+function html_e($name, $attrs = array(), $content = "", $shortform = true, $indent = true) {
 	global $use_tooltips, $html_autoclose_pos;
 	if (!$use_tooltips && isset($attrs['title'])) {
 		$attrs['title'] = '';
 	}
 	$rv = '';
-	$tab = '';
-	for ($i = 0; $i < $html_autoclose_pos +1; $i++) {
-		$tab .= "\t";
+	if ($indent) {
+		$tab = '';
+		for ($i = 0; $i < $html_autoclose_pos +1; $i++) {
+			$tab .= "\t";
+		}
+		$rv .= $tab;
 	}
-	$rv .= $tab;
 	$rv .= '<'.$name;
 	foreach ($attrs as $key => $value) {
 		if (is_array($value)) {
@@ -1161,17 +1166,19 @@ function html_e($name, $attrs = array(), $content = "", $shortform = true) {
 		$rv .= ' '.$key.'="'.util_html_secure($value).'"';
 	}
 	if ($content === "" && $shortform) {
-		$rv .= ' />'."\n";
+		$rv .= ' />';
+		if ($indent) $rv .= "\n";
 	} else {
 		$rv .= '>';
-		if (preg_match('/([\<])([^\>]{1,})*([\>])/i', $content)) {
+		if (preg_match('/([\<])([^\>]{1,})*([\>])/i', $content) && $indent) {
 			$rv .= "\n\t";
 		}
 		$rv .= $content;
-		if (preg_match('/([\<])([^\>]{1,})*([\>])/i', $content)) {
+		if (preg_match('/([\<])([^\>]{1,})*([\>])/i', $content) && $indent) {
 			$rv .= $tab;
 		}
-		$rv .= '</'.$name.'>'."\n";
+		$rv .= '</'.$name.'>';
+		if ($indent) $rv .= "\n";
 	}
 	return $rv;
 }
