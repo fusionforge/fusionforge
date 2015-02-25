@@ -184,7 +184,7 @@ control over it to the project's administrator.");
 					' '. _('Enter your site password when prompted.'));
 				$htmlRepo = '';
 				foreach ($repo_list as $repo_name) {
-						$htmlRepo .= html_e('tt', array(), 'git clone git+ssh://'.$d.'@' . $this->getBoxForProject($project) . '/'. forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git').html_e('br');
+						$htmlRepo .= html_e('tt', array(), 'git clone git+ssh://'.$d.'@' . $this->getBoxForProject($project) . forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git').html_e('br');
 				}
 				$b .= html_e('p', array(), $htmlRepo);
 			}
@@ -238,7 +238,7 @@ control over it to the project's administrator.");
 					' '. _('Enter your site password when prompted.'));
 				$htmlRepo = '';
 				foreach ($repo_list as $repo_name) {
-					$htmlRepo .= html_e('tt', array(), 'git clone git+ssh://'.html_e('i', array(), _('developername')).'@' . $this->getBoxForProject($project) . '/'. forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git').html_e('br');
+					$htmlRepo .= html_e('tt', array(), 'git clone git+ssh://'.html_e('i', array(), _('developername')).'@' . $this->getBoxForProject($project) . forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git').html_e('br');
 				}
 			}
 			if (forge_get_config('use_smarthttp', 'scmgit')) {
@@ -294,7 +294,7 @@ control over it to the project's administrator.");
 					$b .= html_e('p', array(), _('You have a personal repository for this project, accessible through SSH with the following method. Enter your site password when prompted.'));
 					if (forge_get_config('use_ssh', 'scmgit')) {
 							$b .= html_e('p', array(),
-										 html_e('tt', array(), 'git clone git+ssh://'.$u->getUnixName().'@' . $this->getBoxForProject($project) . '/'. forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/users/'. $u->getUnixName() .'.git'));
+										 html_e('tt', array(), 'git clone git+ssh://'.$u->getUnixName().'@' . $this->getBoxForProject($project) . forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/users/'. $u->getUnixName() .'.git'));
 					}
 					if (forge_get_config('use_smarthttp', 'scmgit')) {
 							$b .= html_e('p', array(),
