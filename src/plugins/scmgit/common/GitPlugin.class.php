@@ -104,7 +104,6 @@ control over it to the project's administrator.");
 		}
 		$clone_commands = array();
 		foreach ($repo_list as $repo_name) {
-			$clone_commands[] = 'git clone '.util_make_url('/anonscm/git/'.$project->getUnixName().'/'.$repo_name.'.git');
 			if (forge_get_config('use_smarthttp', 'scmgit')) {
 				$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
 				$clone_commands[] = 'git clone '.$protocol.'://'.$this->getBoxForProject($project).'/anonscm/git/'.$project->getUnixName().'/'.$repo_name.'.git';
