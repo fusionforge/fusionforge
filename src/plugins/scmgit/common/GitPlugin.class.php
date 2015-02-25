@@ -410,21 +410,19 @@ control over it to the project's administrator.");
 		return $b;
 	}
 
+	/**
+	 * Create user repository under non-privileged uid
+	 **/
 	static function createUserRepo($params) {
 		$project = $params['project'];
 		$project_name = $project->getUnixName();
 		$user_name = $params['user_name'];
-		$unix_group = $params['unix_group'];
 		$main_repo = $params['main_repo'];
 		$root = $params['root'];
 
+		// dir was already created by root
 		$repodir = $root . '/users/' .  $user_name . '.git';
-		chgrp($repodir, $unix_group);
-		if ($project->enableAnonSCM()) {
-			chmod($repodir, 02755);
-		} else {
-			chmod($repodir, 02750);
-		}
+		chmod($repodir, 00755);
 		if (!is_file("$repodir/HEAD") && !is_dir("$repodir/objects") && !is_dir("$repodir/refs")) {
 			// 'cd $root' because git will abort if e.g. we're in a 0700 /root after setuid
 			system("cd $root; LC_ALL=C git clone --bare --quiet --no-hardlinks $main_repo $repodir 2>&1 >/dev/null | grep -v 'warning: You appear to have cloned an empty repository.' >&2");
@@ -443,10 +441,13 @@ control over it to the project's administrator.");
 				system("chmod +x $repodir/hooks/post-update");
 			}
 			system("echo \"Git repository for user $user_name in project $project_name\" > $repodir/description");
+			system("chmod -R go=rX $repodir");
 		}
 	}
 
 	function createOrUpdateRepo($params) {
+		$output = '';
+
 		$project = $this->checkParams($params);
 		if (!$project) {
 			return false;
@@ -457,18 +458,19 @@ control over it to the project's administrator.");
 		}
 
 		$project_name = $project->getUnixName();
+		$unix_group_ro = $project_name;
+		$unix_group_rw = 'scm_' . $project_name;
+
 		$root = forge_get_config('repos_path', 'scmgit') . '/' . $project_name;
 		if (!is_dir($root)) {
 			system("mkdir -p $root");
+			system("chgrp $unix_group_ro $root");
 		}
-		$output = '';
-
-		if (forge_get_config('use_ssh','scmgit')) {
-			$unix_group = 'scm_' . $project_name;
+		if ($project->enableAnonSCM()) {
+			system("chmod 2755 $root");
 		} else {
-			$unix_group = forge_get_config('apache_group');
+			system("chmod 2750 $root");
 		}
-		system("chgrp $unix_group $root");
 
 		// Create main repository
 		$main_repo = $root . '/' .  $project_name . '.git';
@@ -499,14 +501,8 @@ control over it to the project's administrator.");
 			}
 			system("echo \"Git repository for $project_name\" > $tmp_repo/description");
 			system("find $tmp_repo -type d | xargs chmod g+s");
-			system("chgrp -R $unix_group $tmp_repo");
-			system("chmod -R g+wX,o+rX-w $tmp_repo");
-			if ($project->enableAnonSCM()) {
-				system("chmod g+wX,o+rX-w $root");
-			} else {
-				system("chmod g+wX,o-rwx $root");
-				system("chmod g+wX,o-rwx $tmp_repo");
-			}
+			system("chgrp -R $unix_group_rw $tmp_repo");
+			system("chmod -R g=rwX,o=rX $tmp_repo");
 			$ret = true;
 			/*
 			 * $main_repo can already exist, for example if it’s
@@ -521,22 +517,8 @@ control over it to the project's administrator.");
 				return false;
 			}
 			system("echo \"Git repository for $project_name\" > $main_repo/description");
-			system("find $main_repo -type d | xargs chmod g+s");
 		}
-		if (forge_get_config('use_ssh','scmgit')) {
-			if ($project->enableAnonSCM()) {
-				system("chmod g+wX,o+rX-w $root");
-				system("chmod g+rwX,o+rX-w $main_repo");
-			} else {
-				system("chmod g+wX,o-rwx $root");
-				system("chmod g+rwX,o-rwx $main_repo");
-			}
-		} else {
-			$unix_user = forge_get_config('apache_user');
-			system("chown $unix_user:$unix_group $main_repo");
-			system("chmod g-rwx,o-rwx $main_repo");
-		}
-
+		
 		// Create project-wide secondary repositories
 		$result = db_query_params('SELECT repo_name, description, clone_url FROM scm_secondary_repos WHERE group_id=$1 AND next_action = $2 AND plugin_id=$3',
 					   array($project->getID(),
@@ -571,13 +553,8 @@ control over it to the project's administrator.");
 				$f = fopen("$repodir/description", "w");
 				fwrite($f, $description."\n");
 				fclose($f);
-				system("chgrp -R $unix_group $repodir");
-				system("chmod g+s $root");
-				if ($project->enableAnonSCM()) {
-					system("chmod -R g+wX,o+rX-w $main_repo");
-				} else {
-					system("chmod -R g+wX,o-rwx $main_repo");
-				}
+				system("chgrp -R $unix_group_rw $repodir");
+				system("chmod -R g=rwX,o=rX $repodir");
 			}
 		}
 
@@ -608,7 +585,8 @@ control over it to the project's administrator.");
 		$rows = db_numrows ($result);
 		if (!is_dir($root.'/users')) {
 			system("mkdir -p $root/users");
-			chgrp($root.'/users', $unix_group);
+			chgrp("$root/users", 'root');  // make it clear group members don't have write access
+			system("chmod 00755 $root/users");
 		}
 		for ($i=0; $i<$rows; $i++) {
 			$user_name = db_result($result,$i,'user_name');
@@ -616,24 +594,17 @@ control over it to the project's administrator.");
 
 			if (!is_dir($repodir) && mkdir ($repodir, 0700)) {
 				chown ($repodir, $user_name);
+				chgrp ($repodir, 'root');  // make it clear group members don't have write access
 
 				$params = array();
 				$params['project'] = $project;
 				$params['user_name'] = $user_name;
-				$params['unix_group'] = $unix_group;
 				$params['root'] = $root;
 				$params['main_repo'] = $main_repo;
 
 				util_sudo_effective_user($user_name,
 							 array("GitPlugin","createUserRepo"),
 							 $params);
-			}
-		}
-		if (is_dir ("$root/users")) {
-			if ($project->enableAnonSCM()) {
-				system("chmod g+rX-w,o+rX-w $root/users");
-			} else {
-				system("chmod g+rX-w,o-rwx $root/users");
 			}
 		}
 		$params['output'] = $output;
