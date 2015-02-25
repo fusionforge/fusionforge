@@ -494,7 +494,7 @@ control over it to the project's administrator.");
 			}
 			system("echo \"Git repository for $project_name\" > $main_repo/description");
 		}
-		
+
 		// Create project-wide secondary repositories
 		$result = db_query_params('SELECT repo_name, description, clone_url FROM scm_secondary_repos WHERE group_id=$1 AND next_action = $2 AND plugin_id=$3',
 					   array($project->getID(),
@@ -616,8 +616,8 @@ control over it to the project's administrator.");
 		       "', 'summary')];\n");
 
 		fwrite($f, "\$per_request_config = sub {\n");
-		
-        fwrite($f, "push @git_base_url_list, qq,". util_make_url('/anonscm/git') .",;\n");
+
+		fwrite($f, "push @git_base_url_list, qq,". util_make_url('/anonscm/git') .",;\n");
 
 		$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
 		if (forge_get_config('use_smarthttp', 'scmgit')) {
@@ -627,9 +627,9 @@ control over it to the project's administrator.");
 		if (forge_get_config('use_ssh', 'scmgit')) {
 				fwrite($f, "if (defined \$ENV{ITKUID}) { push @git_base_url_list, qq,git+ssh://\$ENV{ITKUID}\@".forge_get_config('scm_host').forge_get_config('repos_path', 'scmgit').",; }\n");
 		}
-				
+
 		fwrite($f, "};\n");
-		
+
 		fclose($f);
 		chmod($fname.'.new', 0644);
 		rename($fname.'.new', $fname);
