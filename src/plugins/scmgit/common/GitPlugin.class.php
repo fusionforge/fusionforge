@@ -646,33 +646,6 @@ control over it to the project's administrator.");
 		fclose($f);
 		chmod($fname.'.new', 0644);
 		rename($fname.'.new', $fname);
-
-		if (forge_get_config('use_smarthttp', 'scmgit')) {
-			$gitusers = array();
-			
-			# Reproduce nss_passwd on file, so we can work without mod_auth_pgsql2
-			# Maybe switch to mod_authnz_pam instead?
-			$user_fname = forge_get_config('data_path').'/scm-passwd';
-			$user_f = fopen($user_fname.'.new', 'w');
-			
-			# Enable /authscm/$user URLs
-			$config_fname = forge_get_config('data_path').'/scmgit-auth.inc';
-			$config_f = fopen($config_fname.'.new', 'w');
-			
-			$res = db_query_params("SELECT login, passwd FROM nss_passwd WHERE status=$1", array('A'));
-			while ($arr = db_fetch_array($res)) {
-				fwrite($user_f, $arr['login'].':'.$arr['passwd']."\n");
-				fwrite($config_f, 'Use ScmgitUser '.$arr['login']."\n");
-			}
-
-			fclose($user_f);
-			chmod($user_fname.'.new', 0644);
-			rename($user_fname.'.new', $user_fname);
-			
-			fclose($config_f);
-			chmod($config_fname.'.new', 0644);
-			rename($config_fname.'.new', $config_fname);
-		}
 	}
 
 	function getRepositories($path) {

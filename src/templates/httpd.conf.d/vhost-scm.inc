@@ -40,7 +40,7 @@ AssignGroupIDExpr %{reqenv:ITKGID}
 
 # Could be done with mod-auth-pgsql, but it isn't packaged at all for
 # RPM :/
-#<LocationMatch "^/authscm/[^/]+/svn">
+#<LocationMatch "^/authscm/[^/]+/">
 #  AuthType Basic
 #  AuthName "SCM for FusionForge"
 #  AuthBasicProvider     pgsql

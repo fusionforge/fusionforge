@@ -319,25 +319,14 @@ some control over it to the project's administrator.");
 	function updateRepositoryList(&$params) {
 		$groups = $this->getGroups();
 
-		# Reproduce nss_passwd on file, so we can work without mod_auth_pgsql2
-		# Maybe switch to mod_authnz_pam instead?
-		$fname = forge_get_config('data_path').'/scm-passwd';
-		$f = fopen($fname.'.new', 'w');
-
-		# Enable /authscm/$user URLs
+		# Enable /authscm/$user/svn URLs
 		$config_fname = forge_get_config('data_path').'/scmsvn-auth.inc';
 		$config_f = fopen($config_fname.'.new', 'w');
 			
 		$res = db_query_params("SELECT login, passwd FROM nss_passwd WHERE status=$1", array('A'));
 		while ($arr = db_fetch_array($res)) {
-			fwrite($f, $arr['login'].':'.$arr['passwd']."\n");
 			fwrite($config_f, 'Use ScmsvnUser '.$arr['login']."\n");
 		}
-		fwrite($f, forge_get_config('anonsvn_login', 'scmsvn').":".htpasswd_apr1_md5(forge_get_config('anonsvn_password', 'scmsvn'))."\n");
-
-		fclose($f);
-		chmod($fname.'.new', 0644);
-		rename($fname.'.new', $fname);
 
 		fclose($config_f);
 		chmod($config_fname.'.new', 0644);
