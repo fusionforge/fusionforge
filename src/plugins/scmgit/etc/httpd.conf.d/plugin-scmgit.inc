@@ -2,9 +2,27 @@
 SetEnv GIT_PROJECT_ROOT {scmgit/repos_path}
 SetEnv GIT_HTTP_EXPORT_ALL
 
-ScriptAlias /anonscm/git/ {core/plugins_path}/scmgit/libexec/git-http-backend/
+# Pass supported URLs to git-http-backend, leave the rest to Apache
+# Allows efficiency + directory	browsing (debugging)
+ScriptAliasMatch \
+  "(?x)^/anonscm/git/(.*/(HEAD | \
+                          info/refs | \
+                          objects/(info/[^/]+ | \
+                                   [0-9a-f]{2}/[0-9a-f]{38} | \
+                                   pack/pack-[0-9a-f]{40}\.(pack|idx)) | \
+                          git-(upload|receive)-pack))$" \
+  {core/plugins_path}/scmgit/libexec/git-http-backend/$1
+Alias /anonscm/git {scmgit/repos_path}
 
-ScriptAliasMatch ^/authscm/[^/]+/git/(.*) {core/plugins_path}/scmgit/libexec/git-http-backend/$1
+ScriptAliasMatch \
+  "(?x)^/authscm/[^/]+/git/(.*/(HEAD | \
+                            info/refs | \
+                            objects/(info/[^/]+ | \
+                                     [0-9a-f]{2}/[0-9a-f]{38} | \
+                                     pack/pack-[0-9a-f]{40}\.(pack|idx)) | \
+                            git-(upload|receive)-pack))$" \
+  {core/plugins_path}/scmgit/libexec/git-http-backend/$1
+AliasMatch ^/authscm/[^/]+/git/(.*) /srv/git/$1
 
 
 # gitweb
