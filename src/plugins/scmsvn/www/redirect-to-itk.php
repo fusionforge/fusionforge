@@ -35,11 +35,18 @@ require_once $gfcommon.'include/pre.php';
 # Force authentication so we get the username
 $auth = $_SERVER['PHP_AUTH_USER'];
 if (empty($auth)) {
+	# TODO: make old/new realm configurable
+	# so users don't change realm and have to re-type their password
 	header('WWW-Authenticate: Basic realm="Document repository"');
 	header('HTTP/1.0 401 Unauthorized');
 	echo 'Authorization required [this text ignored by SVN]';
 	exit;
 }
 
-header('Location: https://' . forge_get_config('scm_host') . '/authscm/'
+if ($_SERVER['PHP_AUTH_USER'] == forge_get_config('anonsvn_login', 'scmsvn')) {
+    header('Location: https://' . forge_get_config('scm_host') . '/anonscm/'
+    . $_SERVER['REQUEST_URI'], true, 301);
+} else {
+	header('Location: https://' . forge_get_config('scm_host') . '/authscm/'
 	. $_SERVER['PHP_AUTH_USER'] . $_SERVER['REQUEST_URI'], true, 301);
+}
