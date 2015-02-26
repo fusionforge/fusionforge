@@ -25,12 +25,7 @@ SetEnv FORGE_CONFIG_PATH "{core/config_path}"
   ForceType application/x-httpd-php
 </Location>
 
-<IfVersion >= 2.3>
-  IncludeOptional {core/config_path}/httpd.conf.d/plugin-*.inc
-</IfVersion>
-<IfVersion < 2.3>
-  Include {core/config_path}/httpd.conf.d/plugin-*.inc
-</IfVersion>
+IncludeOptional {core/config_path}/httpd.conf.d/plugin-*.inc
 
 Alias /images/ {core/source_path}/www/images/
 Alias /scripts/coolfieldset/ {core/source_path}/vendor/coolfieldset/
