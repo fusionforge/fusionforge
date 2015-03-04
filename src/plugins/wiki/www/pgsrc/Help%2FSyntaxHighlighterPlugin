@@ -1,0 +1,95 @@
+Date: Wed,  4 Mar 2015 14:20:06 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.5.3)
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FSyntaxHighlighterPlugin;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+The **~SyntaxHighlighter** [[Help:WikiPlugin|plugin]] will highlight source
+code in a variety of languages.
+
+Highlighting is done in Javascript with [[http://highlightjs.org/]].
+
+Recognized languages are the following:
+| Apache      | Bash         | C#       | C++
+| CSS         | CoffeeScript | Diff     | HTML, XML
+| HTTP        | Ini          | JSON     | Java
+| JavaScript  | Makefile     | Markdown | Nginx
+| Objective C | PHP          | Perl     | Python
+| Ruby        | SQL 
+
+== Arguments ==
+
+None.
+
+The source code is put between {{{<<SyntaxHighlighter}}} and {{{>>}}}.
+
+== Example ==
+
+{{{
+<<SyntaxHighlighter
+ #include <stdio.h>
+
+ int main() {
+     printf("Lalala\n");
+ }
+>>
+}}}
+
+will give:
+
+<<SyntaxHighlighter
+ #include <stdio.h>
+
+ int main() {
+     printf("Lalala\n");
+ }
+>>
+
+== History ==
+
+The first implementation of this plugin passed all its arguments through a C++
+highlighter called "highlight" (available at [[http://www.andre-simon.de]]).
+
+This implementation allowed the following arguments, which are now ignored.
+
+=== Former Arguments ===
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **syntax**
+|
+| //None// (required argument), see http://www.andre-simon.de/doku/highlight/highlight.html
+|-
+| **style**
+|
+| ~[ "ansi", "gnu", "kr", "java", "linux" ~] (required)
+|-
+| **color**
+|
+| null (optional), see ##highlight/themes##
+|-
+| **number**
+|
+| 0  (optional)
+|-
+| **wrap**
+|
+| 0  (optional)
+|}
+
+== Authors ==
+
+* alecthomas
+* Fixes by [[Help:Reini Urban|Reini Urban]]
+* Re-implementation with [[http://highlightjs.org/]] by Alain Peyrat and Marc-Etienne Vargenau, Alcatel-Lucent
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

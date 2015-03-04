@@ -1,0 +1,41 @@
+#!/usr/bin/php
+<?php
+if (count($argv) != 1) {
+    echo "usage: $argv[0]\n";
+    exit;
+}
+
+$wsdl = getenv('PHPWIKI_WSDL_URL');
+if ($wsdl === false) {
+    $wsdl = "http://phpwiki.fr/PhpWiki.wsdl";
+}
+
+try {
+    $client = new SoapClient($wsdl);
+} catch (SoapFault $fault) {
+    die($fault->faultstring);
+}
+
+$phpwiki = getenv("HOME")."/.phpwiki";
+if (!file_exists($phpwiki)) {
+    $login = readline("Login: ");
+    $password = readline("Password: ");
+    $credentials = base64_encode($login.':'.$password);
+    if ($fp = fopen($phpwiki, 'w')) {
+        fprintf($fp, "%s:%s", $login, $password);
+        fclose($fp);
+        chmod($phpwiki, 0600);
+    }
+} else {
+    $credentials = base64_encode(file_get_contents($phpwiki));
+}
+
+try {
+    $plugins = $client->listPlugins($credentials);
+    for ($i = 0; $i < count($plugins); $i++) {
+        echo $plugins[$i];
+        echo "\n";
+    }
+} catch (SoapFault $e) {
+    echo 'Error: ' .  $e->getMessage() . "\n";
+}

@@ -1,0 +1,53 @@
+Date: Wed,  4 Mar 2015 14:19:52 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.5.3)
+Content-Type: application/x-phpwiki;
+  pagename=locale/fr/pgsrc/D%C3%A9bogageDePhpWiki;
+  flags=PAGE_LOCKED;
+  acl="view:_AUTHENTICATED,-_EVERY; list:_AUTHENTICATED,-_EVERY";
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+**//Note ://** //La plupart des actions sur cette page nécessitent des privilèges d'administrateur.//
+
+<<CreateToc jshide||=0 with_toclink||=1 position=right with_counter=1>>
+
+== Le coeur de Phpwiki ==
+
+Tout ceci surtout pour des débogages (au moins c'est ce que j'espère).
+
+En utilisation normale, vous ne devriez par les utiliser mais ça ne devrait
+pas vous faire de mal.
+
+=== Purger le cache ===
+
+Si votre wiki est ainsi configuré, le contenu transformé (presque HTML) de la plus récente version des pages est mis en cache. Ceci accélère la vitesse de chargement dans le navigateur car transformer le texte wiki prend du temps.
+
+Une pression sur ce bouton effacera tout le cache. Le contenu de chaque page sera transformer et remis en cache la prochaine fois que quelqu'un la verra.
+
+  <<WikiAdminUtils
+           action=purge-cache
+           label="Purge du cache"
+  >>
+
+=== Suppression des pages vides et non référencées ===
+
+ *Attention!* en appuyant sur ce bouton toutes les pages vides et non référencées seront supprimées sans aucune possiblité de les restaurer.
+ Ceci supprimera toute possibilité de retrouver les page ainsi supprimées.
+
+ <<WikiAdminUtils
+           action=purge-empty-pages
+           label="Purge all empty unreferenced pages"
+  >>
+
+=== Suppression des pages indésirables dans la base des données wiki ===
+
+Les pages dont le nom commence avec un séparateur de sous-page (habituellement un slash =/=) ne sont pas autorisées. Elles sont parfois crées par un plugin mal écrit...
+
+Ce bouton effacera toutes les pages dont le nom est illégal.
+  <<WikiAdminUtils
+           action=purge-bad-pagenames
+           label="Nettoyage de WikiDB"
+  >>
+
+----
+[[CatégoriePageDAction]]
