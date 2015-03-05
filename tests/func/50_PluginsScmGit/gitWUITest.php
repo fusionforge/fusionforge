@@ -60,7 +60,7 @@ class ScmGitWUITest extends FForge_SeleniumTestCase
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
-		$this->clickAndWait("link=Browse Git Repository");
+		$this->clickAndWait("link=Browse main git Repository");
 		$this->selectFrame("id=scmgit_iframe");
 		$this->assertElementPresent("//.[@class='page_footer']");
 		$this->clickAndWait("link=projecta");
@@ -83,7 +83,7 @@ class ScmGitWUITest extends FForge_SeleniumTestCase
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
-		$this->clickAndWait("link=Browse Git Repository");
+		$this->clickAndWait("link=Browse main git Repository");
 		$this->selectFrame("id=scmgit_iframe");
 		$this->assertElementPresent("//.[@class='page_footer']");
 		$this->clickAndWait("link=projecta");
