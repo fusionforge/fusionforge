@@ -68,6 +68,30 @@ function htmlIframe($url, $poub = array()) {
 	}
 }
 
+function htmlIframeResizer($url, $poub = array()) {
+	global $HTML, $group_id;
+	$project = group_get_object($group_id);
+	if (isset($poub['id'])) {
+		$id = $poub['id'];
+	} else {
+		$id = 'default_id_htmliframe';
+	}
+	if (isset($poub['absolute'])) {
+		$absolute = $poub['absolute'];
+	} else {
+		$absolute = false;
+	}
+	if (!empty($url)) {
+		if (! $absolute) {
+			$url = util_make_uri($url);
+		}
+		echo html_e('iframe', array('src' => $url, 'id' => $id, 'width' => '100%', 'frameborder' =>0), '', false);
+		html_use_iframeresizer();
+		echo $HTML->getJavascripts();
+		echo '<script type="text/javascript">jQuery(\'iframe\').iFrameResize();</script>';
+	}
+}
+
 function helpButton($help) {
 }
 

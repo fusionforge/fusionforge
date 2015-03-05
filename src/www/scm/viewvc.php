@@ -79,42 +79,49 @@ if (!$Group->usesSCM()) {
 // check if the scm_box is located in another server
 $scm_box = $Group->getSCMBox();
 //$external_scm = (gethostbyname(forge_get_config('web_host')) != gethostbyname($scm_box));
-$external_scm = !forge_get_config('scm_single_host');
+//$external_scm = !forge_get_config('scm_single_host');
+$external_scm = 1;
+$redirect = 0;
 
 if (!forge_check_perm('scm', $Group->getID(), 'read')) {
 	exit_permission_denied('scm');
 }
 
+$unix_name = $Group->getUnixName();
+$u = session_get_user();
 if ($external_scm) {
-	//$server_script = "/cgi-bin/viewcvs.cgi";
-	$server_script = $GLOBALS["sys_path_to_scmweb"]."/viewcvs.cgi";
-	// remove leading / (if any)
-	$server_script = preg_replace("/^\\//", "", $server_script);
-
+	if ($Group->enableAnonSCM())
+		$server_script = '/anonscm/viewvc';
+	else
+		$server_script = '/authscm/'.$u->getUnixName().'/viewvc';
 	// pass the parameters passed to this script to the remote script in the same fashion
-	$parameters = preg_replace('/^inframe=1[&;]/','',$_SERVER["QUERY_STRING"]);
-	$script_url = "http://".$scm_box."/".$server_script.$_SERVER["PATH_INFO"]."?".$parameters;
-	$fh = @fopen($script_url, "r");
-	if (!$fh) {
-		exit_error(sprintf(_('Could not open script %s.'),$script_url),'home');
-	}
-
-	// start reading the output of the script (in 8k chunks)
-	$content = "";
-	while (!feof($fh)) {
-		$content .= fread($fh, 8192);
-	}
-
-	if (viewcvs_is_html()) {
-		// Now, we must replace the occurrences of $server_script with this script
-		// (do this only of outputting HTML)
-		// We must do this because we can't pass the environment variable SCRIPT_NAME
-		// to the cvsweb script (maybe this can be fixed in the future?)
-		$content = str_replace("/".$server_script, $_SERVER["SCRIPT_NAME"], $content);
+	$protocol = forge_get_config('use_ssl', 'scmsvn')? 'https://' : 'http://';
+	$script_url = $protocol . $scm_box . $server_script
+		. (isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : '/')
+		. '?' . $_SERVER["QUERY_STRING"];
+	if ($redirect) {
+		header("Location: $script_url");
+		exit(0);
+	} else {
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_HEADER, true);
+		curl_setopt($ch, CURLOPT_URL, $script_url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+		curl_setopt($ch, CURLOPT_COOKIE, $_SERVER['HTTP_COOKIE']);  // for session validation
+		curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);  // for session validation
+		curl_setopt($ch, CURLOPT_HTTPHEADER,
+					array('Accept-Language: '.$_SERVER['HTTP_ACCEPT_LANGUAGE'],  // for i18n
+						  'Accept-Encoding: '.$_SERVER['HTTP_ACCEPT_ENCODING'],  // for compression
+						  'X-Forwarded-For: '.$_SERVER['REMOTE_ADDR']));  // for session validation
+		$content = curl_exec($ch);
+		if ($content === false) {
+			exit_error("Error fetching $script_url : " . curl_error($ch), 'summary');
+		}
+		curl_close($ch);
 	}
 } else {
-	$unix_name = $Group->getUnixName();
-
 	// Call to ViewCVS CGI locally (see viewcvs_utils.php)
 
 	// see what type of plugin this project if using
@@ -140,11 +147,16 @@ if (count($exploded_content) > 1) {
 	$headers = explode("\r\n", $headers);
 	$content_type = '';
 	$charset = '';
+	if ($external_scm)
+		// Strip "HTTP/1.1 200 OK" initial status line
+		array_shift($headers);
 	foreach ($headers as $header) {
 		if (preg_match('/^Content-Type:\s*(([^;]*)(\s*;\s*charset=(.*))?)/i', $header, $matches)) {
 			$content_type = $matches[2];
 			if (isset($matches[4])) $charset = $matches[4];
 			// we'll validate content-type or transcode body below
+		} else if (preg_match('/^Transfer-Encoding: chunked/', $header)) {
+			// curl already de-chuncked the body
 		} else {
 			header($header);
 		}
@@ -157,6 +169,7 @@ if (!isset($_GET['view'])) {
 	$_GET['view'] = 'none';
 }
 
+// echo "script_url=$script_url<br />";
 switch ($_GET['view']) {
 	case 'tar':
 	case 'co':

@@ -261,7 +261,7 @@ some control over it to the project's administrator.");
 		}
 
 		if ($project->usesPlugin($this->name)) {
-			$iframe_src = '/scm/viewvc.php?inframe=1&root='.$project->getUnixName();
+			$iframe_src = '/scm/viewvc.php?root='.$project->getUnixName();
 			if ($params['commit']) {
 				$iframe_src .= '&view=rev&revision='.$params['commit'];
 			}
@@ -319,80 +319,14 @@ some control over it to the project's administrator.");
 	function updateRepositoryList(&$params) {
 		$groups = $this->getGroups();
 
+		# Enable /authscm/$user/svn URLs
 		$config_fname = forge_get_config('data_path').'/scmsvn-auth.inc';
 		$config_f = fopen($config_fname.'.new', 'w');
 			
-		$access_data = '';
-		$password_data = '';
-		$engine = RBACEngine::getInstance() ;
-
-		$svnusers = array();
-		foreach ($groups as $project) {
-			if ( !$project->isActive()) {
-				continue;
-			}
-			if ( !$project->usesSCM()) {
-				continue;
-			}
-			$access_data .= '[' . $project->getUnixName() . ":/]\n";
-
-			$users = $engine->getUsersByAllowedAction('scm',$project->getID(),'read');
-			if ($users === false) {
-				$params['output'] .= $engine->getErrorMessage();
-				return false;
-			}
-			foreach ($users as $user) {
-				$svnusers[$user->getID()] = $user;
-				if (forge_check_perm_for_user($user,
-							       'scm',
-							       $project->getID(),
-							       'write')) {
-					$access_data .= $user->getUnixName() . "= rw\n";
-				} else {
-					$access_data .= $user->getUnixName() . "= r\n";
-				}
-			}
-
-			if ($project->enableAnonSCM()) {
-				$anonRole = RoleAnonymous::getInstance();
-				if ($anonRole->hasPermission('scm', $project->getID(), 'write')) {
-					$access_data .= forge_get_config('anonsvn_login', 'scmsvn')." = rw\n";
-				} else {
-					$access_data .= forge_get_config('anonsvn_login', 'scmsvn')." = r\n";
-				}
-			}
-
-			$access_data .= "\n";
-			$engine->invalidateRoleCaches();  // caching all roles takes ~1GB RAM for 5K projects/15K users
-
-			if ($project->enableAnonSCM()) {
-				fwrite($config_f, 'Use ScmsvnProjectWithAnon '.$project->getUnixName().'
-');
-			}
-			
-			fwrite($config_f, "\n");
+		$res = db_query_params("SELECT login, passwd FROM nss_passwd WHERE status=$1", array('A'));
+		while ($arr = db_fetch_array($res)) {
+			fwrite($config_f, 'Use ScmsvnUser '.$arr['login']."\n");
 		}
-
-		foreach ($svnusers as $user_id => $user) {
-			$password_data .= $user->getUnixName().':'.$user->getUnixPasswd()."\n";
-			fwrite($config_f, 'Use ScmsvnUser '.$user->getUnixName().'
-');
-		}
-		$password_data .= forge_get_config('anonsvn_login', 'scmsvn').":".htpasswd_apr1_md5(forge_get_config('anonsvn_password', 'scmsvn'))."\n";
-
-		$fname = forge_get_config('data_path').'/svnroot-authfile';
-		$f = fopen($fname.'.new', 'w');
-		fwrite($f, $password_data);
-		fclose($f);
-		chmod($fname.'.new', 0644);
-		rename($fname.'.new', $fname);
-
-		$fname = forge_get_config('data_path').'/svnroot-access';
-		$f = fopen($fname.'.new', 'w');
-		fwrite($f, $access_data);
-		fclose($f);
-		chmod($fname.'.new', 0644);
-		rename($fname.'.new', $fname);
 
 		fclose($config_f);
 		chmod($config_fname.'.new', 0644);

@@ -1,3 +1,8 @@
+<Directory {scmbzr/repos_path}>
+  Include {core/config_path}/httpd.conf.d/disable-scripts.inc
+</Directory>
+Alias {core/url_prefix}anonscm/bzr {scmbzr/repos_path}
+
 Alias {core/url_prefix}scm/loggerhead/static /usr/share/loggerhead/static
 RewriteEngine On
 RewriteRule ^{core/url_prefix}scm/loggerhead$ {core/url_prefix}scm/loggerhead/ [R]

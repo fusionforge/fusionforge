@@ -1,11 +1,8 @@
 <?php
 /**
- * SCM Frontend
+ * Check if cookie forwarded by e.g. our ViewVC wrapper is valid
  *
- * Copyright 2004, Tim Perdue -GForge LLC
- * Copyright 2004-2009, Roland Mas
- * Copyright 2012,2014, Franck Villaume - TrivialDev
- * http://fusionforge.org
+ * Copyright (C) 2015  Inria (Sylvain Beucler)
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -24,18 +21,8 @@
  */
 
 require_once '../env.inc.php';
+
+$_SERVER['REMOTE_ADDR'] = $_SERVER['HTTP_X_FORWARDED_FOR'];
 require_once $gfcommon.'include/pre.php';
-require_once $gfwww.'scm/include/scm_utils.php';
 
-$group_id = getIntFromRequest("group_id");
-scm_header(array('title'=>_('SCM Repository'),'group'=>$group_id));
-
-$hook_params = array();
-$hook_params['group_id'] = $group_id;
-$hook_params['repo_name'] = getStringFromRequest('repo_name', 'none');
-$hook_params['user_id'] = getIntFromRequest('user_id');
-$hook_params['extra'] = getStringFromRequest('extra');
-$hook_params['commit'] = getStringFromRequest('commit');
-plugin_hook ('scm_browser_page', $hook_params);
-
-scm_footer();
+echo session_loggedin() ? 'OK' : 'KO';
