@@ -84,7 +84,7 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 		$this->assertTextPresent("Adding file");
 
         // Check gitweb directly
-		$this->open('/plugins/scmgit/cgi-bin/gitweb.cgi?p=projecta/projecta.git');
+        $this->open("http://scm.".HOST.ROOT."/anonscm/gitweb/?p=projecta/projecta.git");
 		$this->assertElementPresent("//.[@class='page_footer']");
 		$this->assertTextPresent("projecta.git");
 		$this->clickAndWait("link=projecta.git");
@@ -108,7 +108,7 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 		$this->waitSystasks();
 
         // Check that gitweb now fails
-		$this->open('/plugins/scmgit/cgi-bin/gitweb.cgi?p=projecta/projecta.git');
+        $this->open("http://scm.".HOST.ROOT."/anonscm/gitweb/?p=projecta/projecta.git");
 		$this->assertElementPresent("//.[@class='page_footer']");
 		$this->assertTextNotPresent("projecta.git");
 
