@@ -82,6 +82,7 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=projecta.git");
 		$this->assertTextPresent("Modifying file");
 		$this->assertTextPresent("Adding file");
+		$this->selectFrame("relative=top");
 
         // Check gitweb directly
         $this->open("http://scm.".HOST.ROOT."/anonscm/gitweb/?p=projecta/projecta.git");
@@ -116,7 +117,6 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
         $this->open("http://".FORGE_ADMIN_USERNAME.":".FORGE_ADMIN_PASSWORD."@scm.".HOST.ROOT."/authscm/".FORGE_ADMIN_USERNAME."/gitweb/projecta/");
 		$this->assertElementPresent("//.[@class='page_footer']");
 		$this->assertTextPresent("projecta.git");
-		$this->selectFrame("relative=top");
 
 		// Also check via the standard page
 		$this->open(ROOT);
