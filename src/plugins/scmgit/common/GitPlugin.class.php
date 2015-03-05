@@ -292,7 +292,9 @@ control over it to the project's administrator.");
 			}
 
 			if ($project->enableAnonSCM()) {
-				$iframesrc = util_make_uri('/plugins/scmgit/cgi-bin/gitweb.cgi?p='.$repo);
+				$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
+				$box = $this->getBoxForProject($project);
+				$iframesrc = "$protocol://$box/anonscm/gitweb/?p=$repo";
 			} elseif (session_loggedin()) {
 				$logged_user = user_get_object(user_getid())->getUnixName();
 				$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
