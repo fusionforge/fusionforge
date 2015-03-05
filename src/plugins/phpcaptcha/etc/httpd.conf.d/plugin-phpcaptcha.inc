@@ -1,1 +1,1 @@
-Alias /plugins/phpcaptcha {phpcaptcha/phpcaptcha_path}
+Alias /plugins/phpcaptcha ${FF__phpcaptcha__phpcaptcha_path}
