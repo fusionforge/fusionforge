@@ -611,7 +611,7 @@ control over it to the project's administrator.");
 		fwrite($f, "\$favicon = '". util_make_url('/plugins/scmgit/git-favicon.png')."';\n");
 		fwrite($f, "\$stylesheet = '". util_make_url('/plugins/scmgit/gitweb.css')."';\n");
 		fwrite($f, "\$javascript = '". util_make_url('/plugins/scmgit/gitweb.js')."';\n");
-		fwrite($f, "\$site_header = '" . forge_get_config('plugins_path') . "/scmgit/www/iframeResizer.contentWindow.html';\n");
+		fwrite($f, "\$site_html_head_string = '<script type=\"text/javascript\" src=\"". util_make_url('/scripts/iframe-resizer/iframeResizer.contentWindow.min.js'). "\" />';\n");
 		fwrite($f, "\$prevent_xss = 'true';\n");
 		fwrite($f, "\$feature{'actions'}{'default'} = [('project home', '" .
 		       util_make_url('/plugins/scmgit/?func=grouppage/%n') .
@@ -623,11 +623,11 @@ control over it to the project's administrator.");
 
 		$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
 		if (forge_get_config('use_smarthttp', 'scmgit')) {
-				fwrite($f, "if (defined \$ENV{ITKUID}) { push @git_base_url_list, qq,$protocol://\$ENV{ITKUID}\@".forge_get_config('scm_host')."/authscm/\$ENV{ITKUID}/git,; }\n");
+			fwrite($f, "if (defined \$ENV{ITKUID} && \$ENV{ITKUID} ne '".forge_get_config('apache_user')."') { push @git_base_url_list, qq,$protocol://\$ENV{ITKUID}\@".forge_get_config('scm_host')."/authscm/\$ENV{ITKUID}/git,; }\n");
 		}
 
 		if (forge_get_config('use_ssh', 'scmgit')) {
-				fwrite($f, "if (defined \$ENV{ITKUID}) { push @git_base_url_list, qq,git+ssh://\$ENV{ITKUID}\@".forge_get_config('scm_host').forge_get_config('repos_path', 'scmgit').",; }\n");
+				fwrite($f, "if (defined \$ENV{ITKUID} && \$ENV{ITKUID} ne '".forge_get_config('apache_user')."') { push @git_base_url_list, qq,git+ssh://\$ENV{ITKUID}\@".forge_get_config('scm_host').forge_get_config('repos_path', 'scmgit').",; }\n");
 		}
 
 		fwrite($f, "};\n");
