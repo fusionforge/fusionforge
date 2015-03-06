@@ -12,14 +12,14 @@
 </Location>
 
 # ViewVC
-ScriptAliasMatch ^/authscm/[^/]+/viewvc(.*) {core/plugins_path}/scmsvn/libexec/viewvc.cgi$1
+ScriptAliasMatch ^/authscm/[^/]+/viewvc(.*) {core/plugins_path}/scmsvn/libexec/cgi-bin/viewvc.cgi$1
 # Authentified via cookie in viewvc.php:
 <LocationMatch "^/authscm/[^/]+/viewvc">
   Satisfy Any
 </LocationMatch>
-ScriptAlias /anonscm/viewvc {core/plugins_path}/scmsvn/libexec/viewvc.cgi
+ScriptAlias /anonscm/viewvc {core/plugins_path}/scmsvn/libexec/cgi-bin/viewvc.cgi
 #Alias /doc/viewvc /usr/share/viewvc/docroot
-<Directory {core/plugins_path}/scmsvn/libexec>
+<Directory {core/plugins_path}/scmsvn/libexec/cgi-bin>
   Require all granted
 </Directory>
 
