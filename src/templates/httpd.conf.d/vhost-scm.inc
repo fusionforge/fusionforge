@@ -1,10 +1,10 @@
-ServerName {core/scm_host}
+ServerName ${FF__core__scm_host}
 
-SetEnvIf Request_URI . ITKUID={core/apache_user}
-SetEnvIf Request_URI . ITKGID={core/apache_group}
+SetEnvIf Request_URI . ITKUID=${FF__core__apache_user}
+SetEnvIf Request_URI . ITKGID=${FF__core__apache_group}
 
-IncludeOptional {core/config_path}/httpd.conf.d/vhost-scm-plugin-scm*.inc
-IncludeOptional {core/data_path}/scm*-auth*.inc
+IncludeOptional ${FF__core__config_path}/httpd.conf.d/vhost-scm-plugin-scm*.inc
+IncludeOptional ${FF__core__data_path}/scm*-auth*.inc
 
 # Run programs under a specific uid:
 AssignUserIDExpr %{reqenv:ITKUID}
@@ -13,7 +13,7 @@ AssignGroupIDExpr %{reqenv:ITKGID}
 <LocationMatch "^/authscm/[^/]+/">
   AuthType Basic
   AuthName "SCM for FusionForge"
-  AuthUserFile {core/data_path}/scm-passwd
+  AuthUserFile ${FF__core__data_path}/scm-passwd
 </LocationMatch>
 
 # Cf. 05-config-macros-scm.conf for the 'Require User' directive

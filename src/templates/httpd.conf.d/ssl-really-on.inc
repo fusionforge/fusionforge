@@ -3,8 +3,8 @@
 #<IfModule mod_ssl.c>
   SSLEngine on
   
-  SSLCertificateFile {core/config_path}/ssl-cert.pem
-  SSLCertificateKeyFile {core/config_path}/ssl-cert.key
+  SSLCertificateFile ${FF__core__config_path}/ssl-cert.pem
+  SSLCertificateKeyFile ${FF__core__config_path}/ssl-cert.key
   # Add extra SSL configuration (e.g. SSLCACertificatePath) here
   
   <Files ~ "\.(cgi|shtml)$">

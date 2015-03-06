@@ -1,12 +1,12 @@
-ServerName {core/lists_host}
+ServerName ${FF__core__lists_host}
 
-SetEnv FORGE_CONFIG_PATH "{core/config_path}"
+SetEnv FF__core__config_path "${FF__core__config_path}"
 
 <IfVersion >= 2.3>
-  IncludeOptional {core/config_path}/httpd.conf.d/lists-vhost-plugin-*.inc
+  IncludeOptional ${FF__core__config_path}/httpd.conf.d/lists-vhost-plugin-*.inc
 </IfVersion>
 <IfVersion < 2.3>
-  Include {core/config_path}/httpd.conf.d/lists-vhost-plugin-*.inc
+  Include ${FF__core__config_path}/httpd.conf.d/lists-vhost-plugin-*.inc
 </IfVersion>
 
 RewriteEngine on

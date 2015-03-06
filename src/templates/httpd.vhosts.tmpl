@@ -4,13 +4,13 @@
 	# disabled for CVE-2014-6275
 	# Only enable it if you know what you are doing, by default all scripts run as Apache
 	#ScriptAlias /cgi-bin/ {cgidir}
-	<Directory {core/groupdir_prefix}>
+	<Directory ${FF__core__groupdir_prefix}>
 		Options Indexes FollowSymlinks
 		AllowOverride All
 		order allow,deny
 		allow from all
 	</Directory>
-	Include {core/config_path}/httpd.conf.d/block-trace.inc
-	Include {core/config_path}/httpd.conf.d/log.inc
-	Include {core/config_path}/httpd.conf.d/ssl-off.inc
+	Include ${FF__core__config_path}/httpd.conf.d/block-trace.inc
+	Include ${FF__core__config_path}/httpd.conf.d/log.inc
+	Include ${FF__core__config_path}/httpd.conf.d/ssl-off.inc
 </VirtualHost>

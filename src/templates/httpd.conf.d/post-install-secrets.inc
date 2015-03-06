@@ -2,22 +2,22 @@
 # Restart Apache after changing these
 
 RequestHeader unset GForgeDbhost
-RequestHeader append GForgeDbhost "{core/database_host}"
+RequestHeader append GForgeDbhost "${FF__core__database_host}"
 
 RequestHeader unset GForgeDbport
-RequestHeader append GForgeDbport "{core/database_port}"
+RequestHeader append GForgeDbport "${FF__core__database_port}"
 
 RequestHeader unset GForgeDbname
-RequestHeader append GForgeDbname "{core/database_name}"
+RequestHeader append GForgeDbname "${FF__core__database_name}"
 
 RequestHeader unset GForgeDbuser
-RequestHeader append GForgeDbuser "{core/database_user}"
+RequestHeader append GForgeDbuser "${FF__core__database_user}"
 
 RequestHeader unset GForgeDbpasswd
-RequestHeader append GForgeDbpasswd "{core/database_password}"
+RequestHeader append GForgeDbpasswd "${FF__core__database_password}"
 
 RequestHeader unset GForgeLdapPasswd
-RequestHeader append GForgeLdapPasswd "{core/ldap_password}"
+RequestHeader append GForgeLdapPasswd "${FF__core__ldap_password}"
 
 RequestHeader unset GForgeSessionKey
-RequestHeader append GForgeSessionKey "{core/session_key}"
+RequestHeader append GForgeSessionKey "${FF__core__session_key}"

@@ -39,16 +39,14 @@ case "$2" in
 	# Distros may want to install new conffiles using tools such as ucf(1)
 	DESTDIR=$3
 	mkdir -m 755 -p $DESTDIR$config_path/httpd.conf.d/
-	
+
 	cd $source_path/plugins/$1/etc/
 	for i in $(ls httpd.conf.d/*); do
 	    if [ ! -e $DESTDIR$config_path/$i ]; then
-		$source_path/post-install.d/web/expand-conf.php $i $DESTDIR$config_path/$i
+		cp $i $DESTDIR$config_path/$i
 	    fi
-	    case $i in
-		*secrets*) chmod 600 $DESTDIR$config_path/$i;;
-	    esac
 	done
+	$source_path/post-install.d/web/web.sh update-defines
 	;;
 
     configure-exec)
