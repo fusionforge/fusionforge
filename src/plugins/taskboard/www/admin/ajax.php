@@ -20,8 +20,10 @@
  */
 
 global $gfwww;
+global $gfcommon;
 
-require_once $gfwww."env.inc.php";
+require_once '../../../env.inc.php';
+//require_once $gfwww."env.inc.php";
 require_once $gfcommon.'include/pre.php';
 
 global $gfplugins;

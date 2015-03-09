@@ -71,6 +71,10 @@
 	box-shadow: 0 4px 8px rgba(0,0,0,0.5);
 }
 
+.agile-sticker textarea{
+	font-size: 10px;
+}
+
 .agile-sticker-header, .agile-sticker-footer {
 	background-color: #AAAAAA;
 	padding: 2px;
@@ -84,6 +88,7 @@
 	padding: 2px;
 	height: 108px;
 	width: 98%;
+	overflow: hidden;
 }
 
 .agile-sticker-user-story {

@@ -54,7 +54,7 @@ if (count($taskboard->getUsedTrackersIds()) == 0) {
 		$cells[][] = html_e('div', array('style' => 'float: left; border: 1px solid grey; height: 30px; width: 20px; background-color: '.$column->getColumnBackgroundColor().'; margin-right: 10px;'), html_e('div', array('style' => 'width: 100%; height: 10px; background-color: '.$column->getTitleBackgroundColor()), '', false)).
 					util_make_link('/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&view=edit_column&column_id='.$column->getID(),
 					$column->getTitle());
-		$cells[][] = $column->getMaxTasks();
+		$cells[][] = ( $column->getMaxTasks() ? $column->getMaxTasks() : '&nbsp;' );
 		$cells[][] = implode(', ', array_values($column->getResolutions()));
 		$cells[][] = $column->getResolutionByDefault();
 		echo $HTML->multiTableRow(array('valign' => 'middle'), $cells);
@@ -83,7 +83,8 @@ if (count($taskboard->getUsedTrackersIds()) == 0) {
 	echo $HTML->multiTableRow(array(), $cells);
 	$cells = array();
 	$cells[][] = html_e('strong', array(), _('Drop resolution by default').utils_requiredField()._(':'));
-	$cells[][] = html_build_select_box_from_arrays($taskboard->getUnusedResolutions(), $taskboard->getUnusedResolutions(), 'resolution');
+	$unused_resolutions = array_values( $taskboard->getUnusedResolutions() );	
+	$cells[][] = html_build_select_box_from_arrays( $unused_resolutions, $unused_resolutions, 'resolution_by_default', NULL, false);
 	echo $HTML->multiTableRow(array(), $cells);
 	echo $HTML->listTableBottom();
 	echo html_e('p', array(), html_e('input', array('type' => 'submit', 'name' => 'post_changes', 'value' => _('Submit'))));

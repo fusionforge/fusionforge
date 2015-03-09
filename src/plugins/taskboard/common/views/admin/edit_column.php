@@ -94,7 +94,8 @@ if ($column_id) {
 		echo $HTML->multiTableRow(array(), $cells);
 		$cells = array();
 		$cells[][] = html_e('strong', array(), _('Alert message'));
-		$cells[][] = html_e('textarea', array('name' => 'alert', 'cols' => 79, 'rows' => 5), htmlspecialchars($drop_rules_by_default->getAlertText()));
+		error_log($drop_rules_by_default->getAlertText());
+		$cells[][] = html_e('textarea', array('name' => 'alert', 'cols' => 79, 'rows' => 5), htmlspecialchars($drop_rules_by_default->getAlertText()), false);
 		echo $HTML->multiTableRow(array(), $cells);
 		echo $HTML->listTableBottom();
 		echo html_e('p', array(), html_e('input', array('type' => 'submit', 'name' => 'post_changes', 'value' => _('Submit'))));
@@ -112,9 +113,13 @@ jQuery(function($){
 
 		var str = '';
 		$('input:checked[name="resolutions[]"]').each( function(i, e) {
-			str +='<option value="'+ e.value +'"'+ ( e.value == selected ? 'selected' : '' ) +'>'+ e.value +'</option>';
+			if( e.value ) {
+				str +='<option value="'+ e.value +'"'+ ( e.value == selected ? 'selected' : '' ) +'>'+ e.value +'</option>';
+			}
 		});
-		$('select[name=' + select_name + ']').empty().html(str);
+		if( str ) {
+			$('select[name=' + select_name + ']').empty().html(str);
+		}
 	}
 
 

@@ -38,13 +38,13 @@ $taskboard->header(
 if($taskboard->isError()) {
 	echo $HTML->error_msg($taskboard->getErrorMessage());
 } else {
-	echo $html_e('div', array('id' => 'messages', 'style' => 'display: none;'), '', false);
+	echo html_e('div', array('id' => 'messages', 'style' => 'display: none;'), '', false);
 }
 
 echo $HTML->openForm(array('action' => '/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&action=delete_column', 'method' => 'post'));
 echo html_e('input', array('type' => 'hidden', 'name' => 'column_id', 'value' => $column_id));
 echo html_e('h1', array(), _('Column')." '".$column->getTitle() ."'");
 echo html_e('div', array(), _('You are about to permanently and irretrievably delete this column!'));
-echo html_e('div', array(), html_e('input', array('type' => 'checkbox', 'value' => 'y', 'name' => 'confirmed')), ._('I am Sure'));
+echo html_e('div', array(), html_e('input', array('type' => 'checkbox', 'value' => 'y', 'name' => 'confirmed')), _('I am Sure'));
 echo html_e('p', array(), html_e('input', array('type' => 'submit', 'name' => 'post_delete', 'value' => _('Delete'))));
 echo $HTML->closeForm();

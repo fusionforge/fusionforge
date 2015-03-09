@@ -58,4 +58,4 @@ if (getStringFromRequest('post_changes')) {
 		session_redirect('/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&view=edit_column&column_id='.$column_id);
 	}
 }
-session_redirect('/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id);
+session_redirect('/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&view=columns');

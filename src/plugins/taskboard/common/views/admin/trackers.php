@@ -93,6 +93,7 @@ if (!$atf || !is_object($atf) || $atf->isError()) {
 			echo $HTML->error_msg(_('There are no any tracker having "resolution" field.'));
 		}
 
+
 		echo html_e('script', array('type' => 'text/javascript', 'src' => '/plugins/'.$pluginTaskboard->name.'/js/agile-board.js'), '', false);
 		echo $HTML->openForm(array('action' => '/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&action=trackers', 'method' => 'post'));
 		echo html_e('input', array('type' => 'hidden', 'name' => 'post_changes', 'value' => 'y'));
@@ -130,7 +131,7 @@ if (!$atf || !is_object($atf) || $atf->isError()) {
 		$innercells[][] = html_e('select', array('name' => 'user_stories_tracker'), html_e('option', array('value' => ''), _('Not defined')));
 		$content .= $HTML->multiTableRow(array(), $innercells);
 		$innercells = array();
-		$innercells[][] = html_e('strong', array(), _('User stories reference field')).'&nbsp;'.html_e('span', array('id' => 'usrefreq', 'style' => (!$user_stories_tracker) ? 'display: none;' : '' ), '', false).utils_requiredField();
+		$innercells[][] = html_e('strong', array(), _('User stories reference field')).'&nbsp;'.html_e('span', array('id' => 'usrefreq', 'style' => (!intval($user_stories_tracker)) ? 'display: none;' : '' ), utils_requiredField(), false);
 		$innercells[][] = html_e('select', array('name' => 'user_stories_reference_field'), html_e('option', array('value' => ''), _('Not defined')));
 		$content .= $HTML->multiTableRow(array(), $innercells);
 		$innercells = array();

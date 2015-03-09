@@ -315,7 +315,7 @@ class TaskBoard extends Error {
 	function fetchDataByGroup() {
 		$res = db_query_params('SELECT * FROM plugin_taskboard WHERE group_id=$1', array ($this->Group->getID()));
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError(_('TaskBoard')._(': ')._('Not configured for this project yet.'));
+			$this->setError(_('TaskBoard')._(': ')._('Not configured for this project yet. Please, initialize plugin on the plugin admin page.'));
 			return false;
 		}
 		$this->data_array = db_fetch_array($res);
@@ -986,15 +986,20 @@ class TaskBoard extends Error {
 	 * @return	array
 	 */
 	function getUnusedResolutions() {
-		$all_resolutions = $this->getAvailableResolutions();
-		$used_resolutions = $this->getUsedResolutions();
-
-		$resolutions = array();
-		if( $all_resolutions && count( $used_resolutions ) > 0 ) {
-			$resolutions = array_diff( $all_resolutions, $used_resolutions );
-		} else {
-			$resolutions = $all_resolutions;
+		static $resolutions = NULL;
+		
+		if( !$resolutions ) {
+			$all_resolutions = $this->getAvailableResolutions();
+			$used_resolutions = $this->getUsedResolutions();
+	
+			$resolutions = array();
+			if( $all_resolutions && count( $used_resolutions ) > 0 ) {
+				$resolutions = array_diff( $all_resolutions, $used_resolutions );
+			} else {
+				$resolutions = $all_resolutions;
+			}
 		}
+
 
 		return $resolutions;
 	}
