@@ -267,11 +267,11 @@ class DocumentManager extends Error {
 		$rows = count($id_array);
 		switch ($format) {
 			case "json": {
-				$returnString = '{';
+				$returnString = '[';
 				for ($i=0; $i<$rows; $i++) {
-					$returnString .= '\''.util_html_secure(addslashes($text_array[$i])).'\':'.$id_array[$i].',';
+                    $returnString .= '['.$id_array[$i].',\''.util_html_secure(addslashes($text_array[$i])).'\'],';
 				}
-				$returnString .= '}';
+				$returnString .= ']';
 				break;
 			}
 		}
