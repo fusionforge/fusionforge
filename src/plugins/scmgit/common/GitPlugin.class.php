@@ -439,6 +439,7 @@ class GitPlugin extends SCMPlugin {
 			$unix_group = forge_get_config('apache_group');
 		}
 		system("chgrp $unix_group $root");
+		system("chmod g+s $root");
 
 		// Create main repository
 		$main_repo = $root . '/' .  $project_name . '.git';
@@ -560,11 +561,11 @@ class GitPlugin extends SCMPlugin {
 				fwrite($f, $description."\n");
 				fclose($f);
 				system("chgrp -R $unix_group $repodir");
-				system("chmod g+s $root");
+				system("chmod g+s $repodir");
 				if ($project->enableAnonSCM()) {
-					system("chmod -R g+wX,o+rX-w $main_repo");
+					system("chmod -R g+wX,o+rX-w $repodir");
 				} else {
-					system("chmod -R g+wX,o-rwx $main_repo");
+					system("chmod -R g+wX,o-rwx $repodir");
 				}
 			}
 		}
