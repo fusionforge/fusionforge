@@ -332,9 +332,9 @@ DocManListFileController.prototype =
 			}
 		}
 		jQuery('#doc_group').empty();
-		jQuery.each(this.docparams.docgroupDict, function(key, value) {
-			jQuery('#doc_group').append(jQuery('<option>').text(key).attr('value',value));
-		});
+                for (var i = 0; i < this.docparams.docgroupDict.length; i++) {
+                        jQuery('#doc_group').append(jQuery("<option>").text(this.docparams.docgroupDict[i][1]).attr("value",this.docparams.docgroupDict[i][0]));
+                };
 		jQuery('#doc_group option[value='+this.docparams.docgroupId+']').attr('selected', 'selected');
 		jQuery('#stateid').empty();
 		jQuery.each(this.docparams.statusDict, function(key, value) {
