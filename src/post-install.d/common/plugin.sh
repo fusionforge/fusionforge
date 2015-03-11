@@ -28,28 +28,8 @@ fi
 
 case "$2" in
     configure)
-	$0 $1 configure-conffiles
-	$0 $1 configure-exec
-	;;
-
-    configure-conffiles)
-	# Restart apache if there is some change in config
-	if [ ! -d $source_path/plugins/$1/etc/httpd.conf.d/ ]; then exit; fi
-	
-	# Distros may want to install new conffiles using tools such as ucf(1)
-	DESTDIR=$3
-	mkdir -m 755 -p $DESTDIR$config_path/httpd.conf.d/
-
-	cd $source_path/plugins/$1/etc/
-	for i in $(ls httpd.conf.d/*); do
-	    if [ ! -e $DESTDIR$config_path/$i ]; then
-		cp $i $DESTDIR$config_path/$i
-	    fi
-	done
 	$source_path/post-install.d/web/web.sh update-defines
-	;;
 
-    configure-exec)
 	# Enable plugin
 	$source_path/bin/forge pluginActivate $1
 
@@ -99,7 +79,7 @@ case "$2" in
 	;;
 
     *)
-	echo "Usage: $0 plugin_name configure|remove"
+	echo "Usage: $0 plugin_name configure|triggered|remove|purge"
 	exit 1
 	;;
 esac
