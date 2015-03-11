@@ -35,4 +35,3 @@ if ($column->setOrder($column->getOrder() + 1)) {
 }
 
 session_redirect('/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&view=columns');
-
