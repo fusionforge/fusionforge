@@ -15,23 +15,23 @@ SetEnv FF__core__config_path "${FF__core__config_path}"
 
 # Define configuration/env variables for passing passwords and other secrets to PHP
 <Directory ${FF__core__source_path}/www>
-  RequestHeader unset GForgeDbhost
-  RequestHeader append GForgeDbhost "${FF__core__database_host}"
+  RequestHeader unset FusionForgeDbhost
+  RequestHeader append FusionForgeDbhost "${FF__core__database_host}"
   
-  RequestHeader unset GForgeDbport
-  RequestHeader append GForgeDbport "${FF__core__database_port}"
+  RequestHeader unset FusionForgeDbport
+  RequestHeader append FusionForgeDbport "${FF__core__database_port}"
   
-  RequestHeader unset GForgeDbname
-  RequestHeader append GForgeDbname "${FF__core__database_name}"
+  RequestHeader unset FusionForgeDbname
+  RequestHeader append FusionForgeDbname "${FF__core__database_name}"
   
-  RequestHeader unset GForgeDbuser
-  RequestHeader append GForgeDbuser "${FF__core__database_user}"
+  RequestHeader unset FusionForgeDbuser
+  RequestHeader append FusionForgeDbuser "${FF__core__database_user}"
   
-  RequestHeader unset GForgeDbpasswd
-  RequestHeader append GForgeDbpasswd "${FF__core__database_password}"
+  RequestHeader unset FusionForgeDbpasswd
+  RequestHeader append FusionForgeDbpasswd "${FF__core__database_password}"
   
-  RequestHeader unset GForgeSessionKey
-  RequestHeader append GForgeSessionKey "${FF__core__session_key}"
+  RequestHeader unset FusionForgeSessionKey
+  RequestHeader append FusionForgeSessionKey "${FF__core__session_key}"
 </Directory>
 
 <Location /projects>
