@@ -18,6 +18,10 @@ AssignGroupIDExpr %{reqenv:ITKGID}
 IncludeOptional ${FF__core__config_path}/httpd.conf.d/vhost-scm-plugin-scm*.inc
 IncludeOptional ${FF__core__data_path}/scm*-auth*.inc
 
+Alias /robots.txt ${FF__core__source_path}/common/robots/scm.txt
+<Directory "${FF__core__source_path}/common/robots/">
+  Require all granted
+</Directory>
 
 # Configuration notes to setup without 'scm-passwd'
 
