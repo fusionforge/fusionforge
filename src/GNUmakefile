@@ -93,7 +93,7 @@ install-db: install-base-dirs
 
 install-web: install-base-dirs
 	$(CP_R) vendor www $(DESTDIR)$(pkgdatadir)/
-	$(CP_R) --no-clobber etc/fusionforge/httpd.conf* $(DESTDIR)$(config_path)
+	$(CP_R) --no-clobber etc/httpd.conf* $(DESTDIR)$(config_path)
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/docman/
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/download/
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/forum/
