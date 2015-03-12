@@ -136,7 +136,7 @@ install-plugin-%: plugins/% install-base-dirs
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(pkgdatadir)/plugins/$*/
 	cd plugins/$* && $(CP_R) $$(ls | grep -v '^(etc|packaging)$$') $(DESTDIR)$(pkgdatadir)/plugins/$*/
 #	Initial config files
-	$(CP_R) plugins/$*/etc/$*.ini $(DESTDIR)$(config_path)/config.ini.d/;
+	$(CP_R) --no-clobber plugins/$*/etc/$*.ini $(DESTDIR)$(config_path)/config.ini.d/;
 	if [ -d plugins/$*/etc/plugins/$* ]; then \
 		$(CP_R) --no-clobber plugins/$*/etc/plugins/$* $(DESTDIR)$(config_path)/plugins/; \
 	fi
