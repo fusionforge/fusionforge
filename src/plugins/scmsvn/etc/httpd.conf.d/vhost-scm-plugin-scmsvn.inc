@@ -31,3 +31,6 @@ ScriptAlias /anonscm/viewvc ${FF__core__plugins_path}/scmsvn/libexec/viewvc.cgi
 <IfModule !mod_authz_svn.c>
   Redirect permanent /svn /anonscm/svn/
 </IfModule>
+<LocationMatch "^/authscm/[^/]+/svn/">
+  AuthName "${FF__scmsvn__apache_auth_realm}"
+</LocationMatch>
