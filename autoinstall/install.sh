@@ -42,7 +42,7 @@ if [ -e /etc/debian_version ]; then
 	$APT install fusionforge-shell \
 	    fusionforge-plugin-scmgit fusionforge-plugin-scmsvn fusionforge-plugin-scmbzr \
 	    fusionforge-plugin-mediawiki fusionforge-plugin-moinmoin \
-	    fusionforge-plugin-blocks
+	    fusionforge-plugin-blocks fusionforge-plugin-taskboard
 	if ! dpkg-vendor --is Ubuntu; then
 	    apt-get install locales-all  # https://bugs.launchpad.net/ubuntu/+source/glibc/+bug/1394929
 	fi
@@ -57,6 +57,6 @@ else
 	yum install -y fusionforge fusionforge-shell \
 	    fusionforge-plugin-scmgit fusionforge-plugin-scmsvn \
 	    fusionforge-plugin-mediawiki \
-	    fusionforge-plugin-blocks fusionforge-plugin-online_help
+	    fusionforge-plugin-blocks fusionforge-plugin-online_help fusionforge-plugin-taskboard
     fi
 fi

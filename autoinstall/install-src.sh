@@ -56,11 +56,11 @@ fi
     make install-base install-shell \
         install-plugin-scmsvn install-plugin-scmgit \
         install-plugin-blocks install-plugin-mediawiki install-plugin-moinmoin \
-        install-plugin-online_help
+        install-plugin-online_help install-plugin-taskboard
     make post-install-base post-install-shell \
         post-install-plugin-scmsvn post-install-plugin-scmgit \
         post-install-plugin-blocks post-install-plugin-mediawiki post-install-plugin-moinmoin \
-        post-install-plugin-online_help
+        post-install-plugin-online_help post-install-plugin-taskboard
 )
 
 # Dump clean DB
