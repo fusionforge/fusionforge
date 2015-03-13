@@ -32,7 +32,7 @@ if [ -e /etc/debian_version ]; then
     apt-get install -y make gettext php5-cli php5-pgsql php-htmlpurifier \
 	libapache2-mpm-itk libapache2-mod-svn \
 	apache2 postgresql libnss-pgsql2 unscd \
-	subversion augeas-tools viewvc git \
+	subversion augeas-tools viewvc python-pycurl git \
 	mediawiki \
 	python-moinmoin libapache2-mod-wsgi python-psycopg2 \
 	unoconv poppler-utils
@@ -44,7 +44,7 @@ else
     backports_rpm
     yum install -y gettext php-cli php-pgsql php-process php-mbstring \
 	httpd httpd-itk mod_dav_svn mod_ssl postgresql-server nscd \
-	subversion augeas viewvc git gitweb \
+	subversion augeas viewvc python-pycurl git gitweb \
 	mediawiki119 \
 	moin mod_wsgi python-psycopg2 \
 	unoconv poppler-utils

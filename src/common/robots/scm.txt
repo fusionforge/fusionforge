@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /anonscm/viewvc/
+Disallow: /anonscm/gitweb/
+Crawl-delay: 10

@@ -93,6 +93,7 @@ install-db: install-base-dirs
 
 install-web: install-base-dirs
 	$(CP_R) vendor www $(DESTDIR)$(pkgdatadir)/
+	$(CP_R) --no-clobber etc/httpd.conf* $(DESTDIR)$(config_path)
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/docman/
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/download/
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/forum/
@@ -135,9 +136,13 @@ install-plugin-%: plugins/% install-base-dirs
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(pkgdatadir)/plugins/$*/
 	cd plugins/$* && $(CP_R) $$(ls | grep -v '^(etc|packaging)$$') $(DESTDIR)$(pkgdatadir)/plugins/$*/
 #	Initial config files
-	$(CP_R) plugins/$*/etc/$*.ini $(DESTDIR)$(config_path)/config.ini.d/; \
+	$(CP_R) --no-clobber plugins/$*/etc/$*.ini $(DESTDIR)$(config_path)/config.ini.d/;
 	if [ -d plugins/$*/etc/plugins/$* ]; then \
 		$(CP_R) --no-clobber plugins/$*/etc/plugins/$* $(DESTDIR)$(config_path)/plugins/; \
+	fi
+	if [ -d plugins/$*/etc/httpd.conf.d/ ]; then \
+		$(CP_R) --no-clobber plugins/$*/etc/httpd.conf.d/ \
+			$(DESTDIR)$(config_path); \
 	fi
 	for i in $$(ls plugins/$*/etc/cron.d/* 2>/dev/null); do \
 		if [ ! -e $(DESTDIR)$(sysconfdir)/cron.d/$$(basename $$i) ]; then \

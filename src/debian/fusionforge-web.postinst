@@ -20,14 +20,7 @@ set -e
 
 case "$1" in
     configure)
-	DESTDIR=$(mktemp -d)
-        $(forge_get_config source_path)/post-install.d/web/web.sh configure-conffiles $DESTDIR
-	for i in $(find $DESTDIR -type f); do
-	    ucf $i ${i#$DESTDIR}
-	    ucfr -f fusionforge-web ${i#$DESTDIR}
-	done
-	rm -rf $DESTDIR/
-        $(forge_get_config source_path)/post-install.d/web/web.sh configure-exec
+        $(forge_get_config source_path)/post-install.d/web/web.sh configure
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

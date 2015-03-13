@@ -4,14 +4,7 @@ pluginctl=$(forge_get_config source_path)/post-install.d/common/plugin.sh
 
 case "$1" in
     configure)
-	DESTDIR=$(mktemp -d)
-	$pluginctl @plugin@ configure-conffiles $DESTDIR
-	for i in $(find $DESTDIR -type f); do
-	    ucf $i ${i#$DESTDIR}
-	    ucfr -f fusionforge-plugin-@plugin@ ${i#$DESTDIR}
-	done
-	rm -rf $DESTDIR/
-	$pluginctl @plugin@ configure-exec
+	$pluginctl @plugin@ configure
 	;;
 
     triggered)

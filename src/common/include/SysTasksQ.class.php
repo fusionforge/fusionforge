@@ -2,7 +2,7 @@
 /**
  * FusionForge system action queue
  *
- * Copyright (C) 2014  Inria (Sylvain Beucler)
+ * Copyright (C) 2014, 2015  Inria (Sylvain Beucler)
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -25,21 +25,41 @@
 define('SYSTASK_CORE', null);
 
 class SysTasksQ extends Error {
-		function add($plugin_id, $systask_type, $group_id, $user_id=null) {
-				$res = db_query_params('INSERT INTO systasks (
-				    plugin_id,
-				    systask_type,
-				    group_id,
-				    user_id,
-				    requested
-				  ) VALUES ($1, $2, $3, $4, now())',
-				  array($plugin_id, $systask_type, $group_id, $user_id));
-				if (!$res || db_affected_rows($res) < 1) {
-						$this->setError(sprintf(_('Error: Cannot create system action: %s'),
-												db_error()));
-						return false;
-				}
+	function add($plugin_id, $systask_type, $group_id, $user_id=null) {
+		// Trim duplicate requests, e.g. SCM_REPO ones
+		$qpa = db_construct_qpa();
+		$qpa = db_construct_qpa($qpa, 'SELECT * FROM systasks WHERE status=$1', array('TODO'));
+		$qpa = db_construct_qpa($qpa, ' AND systask_type=$1', array($systask_type));
+		if ($plugin_id == null) $qpa = db_construct_qpa($qpa, ' AND plugin_id IS NULL');
+		else                    $qpa = db_construct_qpa($qpa, ' AND plugin_id=$1', array($plugin_id));
+		if ($group_id == null)  $qpa = db_construct_qpa($qpa, ' AND group_id IS NULL');
+		else                    $qpa = db_construct_qpa($qpa, ' AND group_id=$1', array($group_id));
+		if ($user_id == null)   $qpa = db_construct_qpa($qpa, ' AND user_id IS NULL');
+		else                    $qpa = db_construct_qpa($qpa, ' AND user_id=$1', array($user_id));
+		$res = db_query_qpa($qpa);
+		if (!$res) {
+			$this->setError(sprintf(_('Error: Cannot create system action: %s'),
+									db_error()));
+			return false;
 		}
+		if (db_numrows($res) >= 1)
+			return true;
+		
+		$res = db_query_params(
+			'INSERT INTO systasks (
+				plugin_id,
+				systask_type,
+				group_id,
+				user_id,
+				requested
+			) VALUES ($1, $2, $3, $4, now())',
+			array($plugin_id, $systask_type, $group_id, $user_id));
+		if (!$res || db_affected_rows($res) < 1) {
+			$this->setError(sprintf(_('Error: Cannot create system action: %s'),
+									db_error()));
+			return false;
+		}
+	}
 }
 
 // Local Variables:

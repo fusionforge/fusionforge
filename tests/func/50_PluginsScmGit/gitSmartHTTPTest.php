@@ -75,16 +75,17 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
-		$this->clickAndWait("link=Browse Git Repository");
+		$this->clickAndWait("link=Browse main git repository");
 		$this->selectFrame("id=scmgit_iframe");
 		$this->assertElementPresent("//.[@class='page_footer']");
 		$this->assertTextPresent("projecta.git");
 		$this->clickAndWait("link=projecta.git");
 		$this->assertTextPresent("Modifying file");
 		$this->assertTextPresent("Adding file");
+		$this->selectFrame("relative=top");
 
         // Check gitweb directly
-		$this->open('/plugins/scmgit/cgi-bin/gitweb.cgi?p=projecta/projecta.git');
+        $this->open("http://scm.".HOST.ROOT."/anonscm/gitweb/?p=projecta/projecta.git");
 		$this->assertElementPresent("//.[@class='page_footer']");
 		$this->assertTextPresent("projecta.git");
 		$this->clickAndWait("link=projecta.git");
@@ -108,21 +109,20 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 		$this->waitSystasks();
 
         // Check that gitweb now fails
-		$this->open('/plugins/scmgit/cgi-bin/gitweb.cgi?p=projecta/projecta.git');
+        $this->open("http://scm.".HOST.ROOT."/anonscm/gitweb/?p=projecta/projecta.git");
 		$this->assertElementPresent("//.[@class='page_footer']");
 		$this->assertTextNotPresent("projecta.git");
 
         // Now try to use the authenticated gitweb
-        $this->open("http://".FORGE_ADMIN_USERNAME.":".FORGE_ADMIN_PASSWORD."@scm.".HOST.ROOT."/authscm/".FORGE_ADMIN_USERNAME."/gitweb/projecta/");
+        $this->open("http://".FORGE_ADMIN_USERNAME.":".FORGE_ADMIN_PASSWORD."@scm.".HOST.ROOT."/authscm/".FORGE_ADMIN_USERNAME."/gitweb/?p=projecta/projecta.git");
 		$this->assertElementPresent("//.[@class='page_footer']");
 		$this->assertTextPresent("projecta.git");
-		$this->selectFrame("relative=top");
 
 		// Also check via the standard page
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
-		$this->clickAndWait("link=Browse Git Repository");
+		$this->clickAndWait("link=Browse main git repository");
 		$this->selectFrame("id=scmgit_iframe");
 		$this->assertElementPresent("//.[@class='page_footer']");
 		$this->assertTextPresent("projecta.git");
@@ -152,15 +152,16 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 		// Create repositories
 		$this->waitSystasks();
 
-        // Try with a different user
-        $this->open("http://otheruser:".FORGE_OTHER_PASSWORD."@scm.".HOST.ROOT."/authscm/otheruser/gitweb/projecta/");
+		// Try with a different user
+		sleep (5);  // ugly temporary sleep() to try and understand random timeouts..
+		$this->open("http://otheruser:".FORGE_OTHER_PASSWORD."@scm.".HOST.ROOT."/authscm/otheruser/gitweb/?p=projecta/projecta.git");
 		$this->assertElementPresent("//.[@class='page_footer']");
 		$this->assertTextNotPresent("projecta.git");
 
         // Test accessing admin's URL with otheruser's credentials (and asserting we get a 401)
         // …Selenium doesn't allow checking HTTP return codes, so use a file_get_contents() hack
         // First make sure that the hack works
-        $f = @file_get_contents("http://otheruser:".FORGE_OTHER_PASSWORD."@scm.".HOST.ROOT."/authscm/otheruser/gitweb/projecta/", "r");
+        $f = @file_get_contents("http://otheruser:".FORGE_OTHER_PASSWORD."@scm.".HOST.ROOT."/authscm/otheruser/gitweb/", "r");
         $this->assertTrue(is_string($f));
         $this->assertEquals(1, preg_match('/projectb.git/',$f));
         // Then make sure we detect a failure

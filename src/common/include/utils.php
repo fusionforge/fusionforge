@@ -1169,7 +1169,7 @@ function util_make_link($path, $text, $extra_params = false, $absolute = false) 
 	} else {
 		$attrs['href'] = util_make_uri($path);
 	}
-	return html_e('a', $attrs, $text, true);
+	return html_e('a', $attrs, $text, true, false);
 }
 
 /**

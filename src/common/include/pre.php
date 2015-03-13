@@ -73,13 +73,13 @@ function setconfigfromenv ($sec, $var, $serv, $env) {
 	return false;
 }
 
-setconfigfromenv('core', 'database_host', 'GForgeDbhost', 'sys_gfdbhost');
-setconfigfromenv('core', 'database_port', 'GForgeDbport', 'sys_gfdbport');
-setconfigfromenv('core', 'database_name', 'GForgeDbname', 'sys_gfdbname');
-setconfigfromenv('core', 'database_user', 'GForgeDbuser', 'sys_gfdbuser');
-setconfigfromenv('core', 'database_password', 'GForgeDbpasswd', 'sys_gfdbpasswd');
-setconfigfromenv('core', 'ldap_password', 'GForgeLdapPasswd', 'sys_gfldap_passwd');
-setconfigfromenv('core', 'session_key', 'GForgeSessionKey', 'sys_session_key');
+setconfigfromenv('core', 'database_host', 'FusionForgeDbhost', 'sys_gfdbhost');
+setconfigfromenv('core', 'database_port', 'FusionForgeDbport', 'sys_gfdbport');
+setconfigfromenv('core', 'database_name', 'FusionForgeDbname', 'sys_gfdbname');
+setconfigfromenv('core', 'database_user', 'FusionForgeDbuser', 'sys_gfdbuser');
+setconfigfromenv('core', 'database_password', 'FusionForgeDbpasswd', 'sys_gfdbpasswd');
+setconfigfromenv('core', 'ldap_password', 'FusionForgeLdapPasswd', 'sys_gfldap_passwd');
+setconfigfromenv('core', 'session_key', 'FusionForgeSessionKey', 'sys_session_key');
 
 forge_read_config_file($gfconfig.'/'.$gfcgfile);
 
