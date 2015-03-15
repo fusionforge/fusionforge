@@ -139,7 +139,7 @@ if ($taskboard->getReleaseField()) {
 					<?php echo _('Release')._(': ').$release_box; ?>
 				</td>
 				<?php if ( forge_check_perm('tracker_admin', $group_id ) ) { ?>
-				<td>
+				<td style="vertical-align: middle;">
 					<div id="taskboard-release-description"></div>
 					<div id="taskboard-release-snapshot">
 						<input type="hidden" name="taskboard_release_id" id="taskboard-release-id" value="" />

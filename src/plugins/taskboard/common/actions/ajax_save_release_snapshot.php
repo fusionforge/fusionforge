@@ -35,11 +35,12 @@ if( $release ) {
 	if( $snapshot_datetime ) {
 		if( $snapshot_datetime >= $release->getStartDate() && $snapshot_datetime <= $release->getEndDate() ) {
 			db_begin();
-			if( !$release->saveSnapshot( $snapshot_datetime ) ) {
+			if( !$release->saveSnapshot( $snapshot_datetime, $release_id ) ) {
 				$ret['alert'] = _('Cannot save release snapshot');
 				db_rollback();
 			} else {
 				db_commit();
+				$ret['alert'] = sprintf( _('Snapshot is succesfully saved for %s'), $snapshot_date);
 			}
 		} else {
 			$ret['alert'] = _('Snapshot date should be withing release period');
