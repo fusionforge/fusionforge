@@ -117,7 +117,7 @@ if [ "$reset" = 1 ]; then
     # Reset connections
     service fusionforge-systasksd stop
     service postgresql restart
-    su - postgres -c "dropdb $database"
+    su - postgres -c "dropdb $database" || true
     $(forge_get_config source_path)/post-install.d/db/db.sh configure
     forge_set_password admin myadmin
     service fusionforge-systasksd start
