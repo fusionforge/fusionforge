@@ -43,7 +43,7 @@ class pgsql extends System {
 	var $GID_ADD = 10000;
 
 	/**
- 	* Value to add to unix gid to get unix uid of anoncvs special user
+	* Value to add to unix gid to get unix gid of 'scm_xxx' group
  	*
  	* @var	constant	$SCM_UID_ADD
  	*/
@@ -108,11 +108,9 @@ class pgsql extends System {
 		} else {
 			$res = db_query_params ('UPDATE users SET
 			unix_uid=user_id+$1,
-			unix_gid=user_id+$2,
-			unix_status=$3
-			WHERE user_id=$4',
+			unix_status=$2
+			WHERE user_id=$3',
 						array ($this->UID_ADD,
-							   $this->UID_ADD,
 							   'A',
 							   $user_id)) ;
 					if (!$res) {
@@ -131,15 +129,6 @@ class pgsql extends System {
 						 array ($user_id));
 			if (!$res2) {
 				$this->setError('Error: Cannot Delete Group GID: '.db_error());
-				return false;
-			}
-			$res3 = db_query_params ('INSERT INTO nss_groups
-					(user_id, group_id,name, gid)
-					SELECT user_id, 0, user_name, unix_gid
-					FROM users WHERE user_id=$1',
-						 array ($user_id));
-			if (!$res3) {
-				$this->setError('Error: Cannot Update Group GID: '.db_error());
 				return false;
 			}
 
@@ -281,8 +270,8 @@ class pgsql extends System {
 			return false;
 		}
 		$res4 = db_query_params ('INSERT INTO nss_groups
-					(user_id, group_id, name, gid)
-						SELECT 0, group_id, unix_group_name, group_id + $1
+					(group_id, name, gid)
+						SELECT group_id, unix_group_name, group_id + $1
 					FROM groups
 					WHERE group_id=$2',
 					 array ($this->GID_ADD,
@@ -292,8 +281,8 @@ class pgsql extends System {
 			return false;
 		}
 		$res5 = db_query_params ('INSERT INTO nss_groups
-					(user_id, group_id, name, gid)
-						SELECT 0, group_id, $1 || unix_group_name, group_id + $2
+					(group_id, name, gid)
+						SELECT group_id, $1 || unix_group_name, group_id + $2
 					FROM groups
 					WHERE group_id=$3',
 					 array ('scm_',
