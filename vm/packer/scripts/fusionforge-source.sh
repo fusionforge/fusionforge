@@ -1,4 +1,6 @@
 # Help text for users
+# TODO: keyboard mapping stays qwerty in Jessie despite being
+# documented at https://wiki.debian.org/Keyboard
 cat <<'EOF' > /etc/issue
 Debian GNU/Linux + FusionForge Dev VM \l
 

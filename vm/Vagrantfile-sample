@@ -4,9 +4,9 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "fusionforge-dev-debian"
-  #config.vm.box_url = "packer/fusionforge-dev-debian.box"
-  config.vm.box_url = "http://fusionforge.fusionforge.org/sandbox/fusionforge-dev-debian.box"
+  config.vm.box = "fusionforge-dev-debian8"
+  #config.vm.box_url = "packer/fusionforge-dev-debian8.box"
+  config.vm.box_url = "http://fusionforge.fusionforge.org/sandbox/fusionforge-dev-debian8.box"
 
   # Guest network: private IP address:
   config.vm.network :private_network, ip: "192.168.35.11"
