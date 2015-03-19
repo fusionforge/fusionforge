@@ -7,6 +7,7 @@ Fusionforge-5.3.3:
 * System replication: refresh nscd cache before applying changes, fix spurious warning output from cron jobs (Inria)
 * Docman: fix edit file when filename has quote [#750] (TrivialDev)
 * FRS: wrong tooltip displayed in admin page [#703] (TrivialDev)
+* PM: fix test on success [#762] (TrivialDev)
 * Plugin AuthLDAP: error and warning messages displayed twice [#732] (TrivialDev)
 * Plugin scmhook: fix display when only one SCM plugin enabled [#735] (TrivialDev)
 * Plugin Hudson: fix global status in Hudson Job widget [#740] (TrivialDev)
