@@ -15,7 +15,23 @@ SetEnv FF__core__config_path "${FF__core__config_path}"
 
 # Define configuration/env variables for passing passwords and other secrets to PHP
 <Directory ${FF__core__source_path}/www>
-  Include ${FF__core__config_path}/httpd.conf.d/post-install-secrets.inc
+  RequestHeader unset FusionForgeDbhost
+  RequestHeader append FusionForgeDbhost "${FF__core__database_host}"
+  
+  RequestHeader unset FusionForgeDbport
+  RequestHeader append FusionForgeDbport "${FF__core__database_port}"
+  
+  RequestHeader unset FusionForgeDbname
+  RequestHeader append FusionForgeDbname "${FF__core__database_name}"
+  
+  RequestHeader unset FusionForgeDbuser
+  RequestHeader append FusionForgeDbuser "${FF__core__database_user}"
+  
+  RequestHeader unset FusionForgeDbpasswd
+  RequestHeader append FusionForgeDbpasswd "${FF__core__database_password}"
+  
+  RequestHeader unset FusionForgeSessionKey
+  RequestHeader append FusionForgeSessionKey "${FF__core__session_key}"
 </Directory>
 
 <Location /projects>

@@ -3,22 +3,29 @@ ServerName ${FF__core__scm_host}
 SetEnvIf Request_URI . ITKUID=${FF__core__apache_user}
 SetEnvIf Request_URI . ITKGID=${FF__core__apache_group}
 
-IncludeOptional ${FF__core__config_path}/httpd.conf.d/vhost-scm-plugin-scm*.inc
-IncludeOptional ${FF__core__data_path}/scm*-auth*.inc
-
 # Run programs under a specific uid:
 AssignUserIDExpr %{reqenv:ITKUID}
 AssignGroupIDExpr %{reqenv:ITKGID}
 
 <LocationMatch "^/authscm/[^/]+/">
   AuthType Basic
-  AuthName "SCM for FusionForge"
+  AuthName "${FF__core__apache_auth_realm}"
   AuthUserFile ${FF__core__data_path}/scm-passwd
 </LocationMatch>
-
 # Cf. 05-config-macros-scm.conf for the 'Require User' directive
 
-# Could be done with mod-authnz-pam, but it isn't packaged for CentOS :/
+# Load plugins after the above LocationMatch to allow specialization
+IncludeOptional ${FF__core__config_path}/httpd.conf.d/vhost-scm-plugin-scm*.inc
+IncludeOptional ${FF__core__data_path}/scm*-auth*.inc
+
+Alias /robots.txt ${FF__core__source_path}/common/robots/scm.txt
+<Directory "${FF__core__source_path}/common/robots/">
+  Require all granted
+</Directory>
+
+# Configuration notes to setup without 'scm-passwd'
+
+# with mod-authnz-pam (not packaged for CentOS)
 #<LocationMatch "^/authscm/[^/]+/">
 #  AuthType Basic
 #  AuthName "SCM for FusionForge"
@@ -26,8 +33,7 @@ AssignGroupIDExpr %{reqenv:ITKGID}
 #  AuthPAMService sshd
 #</LocationMatch>
 
-# Could be done with mod-authnz-external+pwauth, but it isn't packaged
-# for CentOS 7 :/
+# with mod-authnz-external+pwauth (not packaged for CentOS 7)
 # -> would avoid leaking the password hashes
 #AddExternalAuth pwauth /usr/sbin/pwauth
 #SetExternalAuthMethod pwauth pipe
@@ -38,8 +44,7 @@ AssignGroupIDExpr %{reqenv:ITKGID}
 #  AuthExternal pwauth
 #</LocationMatch>
 
-# Could be done with mod-auth-pgsql, but it isn't packaged at all for
-# RPM :/
+# with mod-auth-pgsql (no RPM package at all)
 #<LocationMatch "^/authscm/[^/]+/">
 #  AuthType Basic
 #  AuthName "SCM for FusionForge"

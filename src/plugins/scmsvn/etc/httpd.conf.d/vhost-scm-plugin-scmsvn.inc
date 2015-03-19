@@ -12,14 +12,14 @@
 </Location>
 
 # ViewVC
-ScriptAliasMatch ^/authscm/[^/]+/viewvc(.*) ${FF__core__plugins_path}/scmsvn/libexec/cgi-bin/viewvc.cgi$1
+ScriptAliasMatch ^/authscm/[^/]+/viewvc(.*) ${FF__core__plugins_path}/scmsvn/libexec/viewvc.cgi$1
 # Authentified via cookie in viewvc.php:
 <LocationMatch "^/authscm/[^/]+/viewvc">
   Satisfy Any
 </LocationMatch>
-ScriptAlias /anonscm/viewvc ${FF__core__plugins_path}/scmsvn/libexec/cgi-bin/viewvc.cgi
+ScriptAlias /anonscm/viewvc ${FF__core__plugins_path}/scmsvn/libexec/viewvc.cgi
 #Alias /doc/viewvc /usr/share/viewvc/docroot
-<Directory ${FF__core__plugins_path}/scmsvn/libexec/cgi-bin>
+<Directory ${FF__core__plugins_path}/scmsvn/libexec>
   Require all granted
 </Directory>
 
@@ -31,3 +31,6 @@ ScriptAlias /anonscm/viewvc ${FF__core__plugins_path}/scmsvn/libexec/cgi-bin/vie
 <IfModule !mod_authz_svn.c>
   Redirect permanent /svn /anonscm/svn/
 </IfModule>
+<LocationMatch "^/authscm/[^/]+/svn/">
+  AuthName "${FF__scmsvn__apache_auth_realm}"
+</LocationMatch>

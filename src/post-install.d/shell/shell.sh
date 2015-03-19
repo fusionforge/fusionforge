@@ -42,6 +42,7 @@ configure_libnss_pgsql(){
 	*) hostconf="host=$db_host"  ;; # 'host'
     esac
     if [ ! -s $DESTDIR/etc/nss-pgsql.conf ]; then
+	gid=$(forge_get_config users_default_gid)
 	cat > $DESTDIR/etc/nss-pgsql.conf <<EOF
 ### NSS Configuration for FusionForge
 
@@ -51,10 +52,10 @@ connectionstring = user=$db_user_nss dbname=$db_name $hostconf
 
 
 #----------------- NSS queries
-getpwnam        = SELECT login AS username,passwd,gecos,('$homedir_prefix' || login) AS homedir,shell,uid,gid FROM nss_passwd WHERE login = \$1
-getpwuid        = SELECT login AS username,passwd,gecos,('$homedir_prefix' || login) AS homedir,shell,uid,gid FROM nss_passwd WHERE uid = \$1
-#allusers        = SELECT login AS username,passwd,gecos,('$homedir_prefix' || login) AS homedir,shell,uid,gid FROM nss_passwd
-getgroupmembersbygid = SELECT login AS username FROM nss_passwd WHERE gid = \$1
+getpwnam        = SELECT login AS username,passwd,gecos,('$homedir_prefix' || login) AS homedir,shell,uid,$gid FROM nss_passwd WHERE login = \$1
+getpwuid        = SELECT login AS username,passwd,gecos,('$homedir_prefix' || login) AS homedir,shell,uid,$gid FROM nss_passwd WHERE uid = \$1
+#allusers        = SELECT login AS username,passwd,gecos,('$homedir_prefix' || login) AS homedir,shell,uid,$gid FROM nss_passwd
+getgroupmembersbygid = SELECT login AS username FROM nss_passwd WHERE $gid = \$1
 getgrnam = SELECT name AS groupname,'x',gid,ARRAY(SELECT user_name FROM nss_usergroups WHERE nss_usergroups.gid = nss_groups.gid) AS members FROM nss_groups WHERE name = \$1
 getgrgid = SELECT name AS groupname,'x',gid,ARRAY(SELECT user_name FROM nss_usergroups WHERE nss_usergroups.gid = nss_groups.gid) AS members FROM nss_groups WHERE gid = \$1
 #allgroups = SELECT name AS groupname,'x',gid,ARRAY(SELECT user_name FROM nss_usergroups WHERE nss_usergroups.gid = nss_groups.gid) AS members FROM nss_groups 

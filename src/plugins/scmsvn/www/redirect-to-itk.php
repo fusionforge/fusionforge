@@ -33,11 +33,9 @@ require_once '../../../www/env.inc.php';
 require_once $gfcommon.'include/pre.php';
 
 # Force authentication so we get the username
-$auth = $_SERVER['PHP_AUTH_USER'];
+$auth = @$_SERVER['PHP_AUTH_USER'];
 if (empty($auth)) {
-	# TODO: make old/new realm configurable
-	# so users don't change realm and have to re-type their password
-	header('WWW-Authenticate: Basic realm="Document repository"');
+	header('WWW-Authenticate: Basic realm="'.forge_get_config('apache_auth_realm', 'scmsvn').'"');
 	header('HTTP/1.0 401 Unauthorized');
 	echo 'Authorization required [this text ignored by SVN]';
 	exit;

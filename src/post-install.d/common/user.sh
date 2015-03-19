@@ -18,14 +18,13 @@
 # with FusionForge; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-# TODO: specify the role of this user and its permissions
-# Currently used in: plugin-scmbzr, plugin-moinmoin, ???
-
 system_user=$(forge_get_config system_user)
 data_path=$(forge_get_config data_path)
 
 case "$1" in
     configure)
+	# TODO: specify the role of this user and its permissions
+	# Currently used in: plugin-scmbzr, plugin-moinmoin, ???
 	if ! getent passwd $system_user >/dev/null; then
 	    useradd $system_user -s /bin/false -M -d $data_path
 	fi
