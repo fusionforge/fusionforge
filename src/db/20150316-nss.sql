@@ -18,3 +18,6 @@ ALTER TABLE users DROP "unix_gid";
 DELETE FROM nss_groups WHERE group_id=0;
 ALTER TABLE nss_groups DROP "user_id";
 ALTER TABLE nss_groups ADD CONSTRAINT "gid_pk" PRIMARY KEY (gid);
+
+-- TODO: GRANT SELECT ON nss_groups TO ${database_user}_nss;
+--       or just re-run post-install.d/db/populate.sh
