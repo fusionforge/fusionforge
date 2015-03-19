@@ -113,7 +113,7 @@ if (isset($input_file) && isset($input_file['tmp_name']) &&
 	$res['errormessage'] = _('Parameter error');
 }
 
-if (isset($res['success'])) {
+if (isset($res['success']) && $res['success']) {
 	$feedback .= _('Import was successful');
 } else {
 	$error_msg .= $res['errormessage'];
