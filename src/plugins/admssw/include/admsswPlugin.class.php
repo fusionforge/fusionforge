@@ -62,7 +62,8 @@ class admsswPlugin extends Plugin {
 				'schema' => 'http://schema.org/',
 				'rad' => 'http://www.w3.org/ns/rad#',
 				'ldp' => 'http://www.w3.org/ns/ldp#',
-				'dcat' => 'http://www.w3.org/ns/dcat#'
+				'dcat' => 'http://www.w3.org/ns/dcat#',
+				'owl' => 'http://www.w3.org/2002/07/owl#'
 		);
 
 		//$this->trovecat_id_index = array();
@@ -334,7 +335,9 @@ class admsswPlugin extends Plugin {
 					$trovecaturis['admssw:programmingLanguage'][] = $trovecaturi;
 					break;
 				default:
+					// all the rest : topic, ...
 					$trovecaturis['rad:theme'][] = $trovecaturi;
+					$trovecaturis['dcat:theme'][] = $trovecaturi;
 					break;
 			}
 		}
