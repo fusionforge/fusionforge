@@ -73,6 +73,25 @@ function rdfutils_setPropToXSDdateTime(&$res, $prop, $date) {
 	$res->setProp($prop, $datecreated);
 }
 
+/**
+ * rdfutils_setPropToString() - Add a string property to an ARC2_Resource, with optional language tag
+ *
+ * example : rdfutils_setPropToString($res, 'dct:description', 'Olivier was here', 'en');
+ *
+ * @param	ARC2_Resource	$res
+ * @param	string	$prop
+ * @param	string	$value
+ * @param	string	$lang (optional)
+ */
+function rdfutils_setPropToString(&$res, $prop, $value, $lang = '') {
+	if (!$lang) {
+		$res->setProp($prop, $value);
+	} else {
+		$res->setProp($prop, array('type' => 'literal', 'value' => $value, 'lang' => $lang) );
+	}
+}
+
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"
