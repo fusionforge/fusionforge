@@ -46,10 +46,13 @@ case "$1" in
 	$0 update-defines
 
 	# '${FF__core__config_path}' not yet available in the top-level config file, so generate it:
-	cat > $config_path/httpd.conf <<-EOF
-	# Include all FusionForge-related configuration files
-	Include $config_path/httpd.conf.d/*.conf
-	EOF
+	# (unless it was manually emptied, meaning sites will be individually enabled e.g. via Puppet)
+	if [ ! -e $config_path/httpd.conf -o -s $config_path/httpd.conf ]; then
+	    cat > $config_path/httpd.conf <<-EOF
+		# Include all FusionForge-related configuration files
+		Include $config_path/httpd.conf.d/*.conf
+		EOF
+	fi
 
 	apache_user=$(forge_get_config apache_user)
 	apache_group=$(forge_get_config apache_group)
