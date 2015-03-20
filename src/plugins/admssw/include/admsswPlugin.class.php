@@ -470,7 +470,7 @@ class admsswPlugin extends Plugin {
 		// TODO :
 		// - dcat:contactPoint
 		// - dct:modified
-		// - dct:publisher
+		// - dct:publisher : faof:Agent
 
 		// same as for trove's full list
 		$projects = get_public_active_projects_asc();
