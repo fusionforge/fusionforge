@@ -45,6 +45,7 @@ Fusionforge-5.3.3:
 * SCM stats: fix order in stats block [#736] (TrivialDev)
 * System replication: refresh nscd cache before applying changes, fix spurious warning output from cron jobs (Inria)
 * Docman: fix edit file when filename has quote [#750] (TrivialDev)
+* Docman: fix move to files to fs script [#763] (TrivialDev)
 * FRS: wrong tooltip displayed in admin page [#703] (TrivialDev)
 * PM: fix test on success [#762] (TrivialDev)
 * Plugin AuthLDAP: error and warning messages displayed twice [#732] (TrivialDev)
