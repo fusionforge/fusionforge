@@ -35,14 +35,14 @@ if (!$res) {
 	exit(1);
 }
 
-$data = forge_get_config('data_path');
-if (!is_dir($data)) {
-	system("mkdir -p $data");
-	system("chmod 0755 $data");
+$datadir = forge_get_config('data_path');
+if (!is_dir($datadir)) {
+	system("mkdir -p $datadir");
+	system("chmod 0755 $datadir");
 }
-if (!is_dir("$data/docman")) {
-	system("mkdir $data/docman");
-	system("chmod 0700 $data/docman");
+if (!is_dir("$datadir/docman")) {
+	system("mkdir $datadir/docman");
+	system("chmod 0700 $datadir/docman");
 }
 
 $ds = new DocumentStorage();
@@ -76,6 +76,6 @@ while($row = db_fetch_array($res)) {
 
 $ds->commit();
 
-system("chown -R ".forge_get_config('apache_user').':'.forge_get_config('apache_group')." $data/docman");
+system("chown -R ".forge_get_config('apache_user').':'.forge_get_config('apache_group')." $datadir/docman");
 
 echo "SUCCESS\n";
