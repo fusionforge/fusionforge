@@ -324,13 +324,9 @@ class WidgetLayoutManager {
 			echo '<tr class="layout-manager-chooser '. ($checked ? 'layout-manager-chooser_selected' : '') .'"><td>';
 			echo '<input type="radio" name="layout_id" value="-1" id="layout_custom" '. $checked .'/>';
 			echo '</td><td>';
-			echo '<label for="layout_custom">';
-			echo html_image('layout/custom.png', '', '', array('style' => 'vertical-align:top;float:left;'));
-			echo '</label>';
+			echo html_e('label', array('for' => 'layout_custom'), html_image('layout/custom.png', '', '', array('style' => 'vertical-align:top;float:left;')));
 			echo '</td><td>';
-			echo '<label for="layout_custom"><strong>'. _('Custom') .'</strong><br />';
-			echo _('Define your own layout:');
-			echo '</label>';
+			echo html_e('label', array('for' => 'layout_custom'), html_e('strong', array(), _('Custom')).html_e('br')._('Define your own layout')._(':'));
 			echo '<table id="layout-manager">
 				<tr>
 				<td>
@@ -527,44 +523,21 @@ class WidgetLayoutManager {
 					echo html_e('li', array(), $row, false);
 				}
 				echo html_ac(html_ap() - 1);
-			} else {
-				foreach($widgets as $widget_name) {
-					if ($widget = Widget::getInstance($widget_name)) {
-						if ($widget->isAvailable()) {
-							$row = '';
-							$row .= '<td>'. $widget->getTitle() . $widget->getInstallPreferences() .'</td>';
-							$row .= '<td class="align-right">';
-							if ($widget->isUnique() && in_array($widget_name, $used_widgets)) {
-								$row .= '<em>'. _("Already used") .'</em>';
-							} else {
-								$row .= '<input type="submit" name="name['. $widget_name .'][add]" value="'. _("Add") .'" />';
-							}
-							$row .= '</td>';
-							$widget_rows[$widget->getTitle()] = $row;
-						}
-					}
-				}
-				$i = 0;
-				foreach($widget_rows as $row) {
-					echo '<tr class="'. (count($widget_rows) ? '' : util_get_alt_row_color($i++)) .'">'. $row .'</tr>';
-				}
-			}
-			if (count($categs)) {
 				foreach($categs as $c => $ws) {
 					$i = 0;
 					$widget_rows = array();
 					// display widgets of the category
 					foreach($ws as $widget_name => $widget) {
 						$row = '';
-						$row .= '<div class="widget-preview '. $widget->getPreviewCssClass() .'">';
-						$row .= '<h3>'. $widget->getTitle()  .'</h3>';
-						$row .= '<p>'. $widget->getDescription() .'</p>';
-						$row .= $widget->getInstallPreferences();
-						$row .= '</div><div style="text-align:right; border-bottom:1px solid #ddd; padding-bottom:10px; margin-bottom:20px;">';
+						$row .= html_e('div', array('class' => 'widget-preview '. $widget->getPreviewCssClass()),;
+								html_e('h3', array(), $widget->getTitle()).
+								html_e('p', array(), $widget->getDescription()).
+								$widget->getInstallPreferences());
+						$row .= '<div style="text-align:right; border-bottom:1px solid #ddd; padding-bottom:10px; margin-bottom:20px;">';
 						if ($widget->isUnique() && in_array($widget_name, $used_widgets)) {
-							$row .= '<em>'. _("Already used") .'</em>';
+							$row .= html_e('em', array(), _('Already used'));
 						} else {
-							$row .= '<input type="submit" name="name['. $widget_name .'][add]" value="'. _("Add") .'" />';
+							$row .= html_e('input', array('type' => 'submit', 'name' => 'name['. $widget_name .'][add]', 'value' => _('Add')));
 						}
 						$row .= '</div>';
 						$widget_rows[$widget->getTitle()] = $row;
