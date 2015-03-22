@@ -323,14 +323,14 @@ control over it to the project's administrator.");
 										SCM_EXTRA_REPO_ACTION_UPDATE,
 										$this->getID()));
 		$rows = db_numrows($result);
+		$repo_list = array();
 		for ($i=0; $i<$rows; $i++) {
 			$repo_list[] = db_result($result,$i,'repo_name');
 		}
-		$clone_commands = array();
 		foreach ($repo_list as $repo_name) {
 			if (forge_get_config('use_smarthttp', 'scmgit')) {
 				$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
-				$b .= '['.util_make_link('/scm/browser.php?group_id='.$project->getID().'&extra='.$repo_name, _('Browse extra git repository: ') . $repo_name).']<br />';
+				$b .= '['.util_make_link('/scm/browser.php?group_id='.$project->getID().'&extra='.$repo_name, _('Browse extra git repository')._(': ').$repo_name).']'.html_e('br');
 			}
 		}
 
@@ -342,7 +342,7 @@ control over it to the project's administrator.");
 		for ($i=0; $i<$rows; $i++) {
 			$user_id = db_result($result,$i,'user_id');
 			$user_name = db_result($result,$i,'user_name');
-			$b .= '['.util_make_link('/scm/browser.php?group_id='.$project->getID().'&user_id='.$user_id, _('Browse personal git repository: ') . $user_name).']<br />';
+			$b .= '['.util_make_link('/scm/browser.php?group_id='.$project->getID().'&user_id='.$user_id, _('Browse personal git repository')._(': ').$user_name).']'.html_e('br');
 		}
 
 		return $b;
