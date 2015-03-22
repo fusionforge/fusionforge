@@ -43,7 +43,7 @@ class WidgetLayoutManager {
 	 *
 	 * Display the default layout for the "owner". It may be the home page, the project summary page or /my/ page.
 	 *
-	 * @param	int		$owner_id
+	 * @param	int	$owner_id
 	 * @param	string	$owner_type
 	 */
 	function displayLayout($owner_id, $owner_type) {
@@ -105,7 +105,7 @@ class WidgetLayoutManager {
 	/**
 	 * _currentUserCanUpdateLayout
 	 *
-	 * @param	int		$owner_id
+	 * @param	int	$owner_id
 	 * @param	string	$owner_type
 	 * @return	boolean true if the user can update the layout (add/remove widget, collapse, set preferences, ...)
 	 */
@@ -231,9 +231,9 @@ class WidgetLayoutManager {
 	/**
 	 * displayAvailableWidgets - Display all widgets that the user can add to the layout
 	 *
-	 * @param	int		$owner_id
+	 * @param	int	$owner_id
 	 * @param	string	$owner_type
-	 * @param	int		$layout_id
+	 * @param	int	$layout_id
 	 */
 	function displayAvailableWidgets($owner_id, $owner_type, $layout_id) {
 		global $HTML;
@@ -386,10 +386,10 @@ class WidgetLayoutManager {
 			AND o.owner_id = $2
 			AND o.is_default = 1
 			";
-		$req = db_query_params($sql,array($owner_type,$owner_id));
+		$req = db_query_params($sql, array($owner_type, $owner_id));
 		if ($data = db_fetch_array($req)) {
 			if ($this->_currentUserCanUpdateLayout($owner_id, $owner_type)) {
-				$old_scope         = $data['scope'];
+				$old_scope = $data['scope'];
 				$old_layout_id = $data['id'];
 				$new_layout_id = null;
 				if ($layout == '-1' && is_array($custom_layout)) {
@@ -505,10 +505,10 @@ class WidgetLayoutManager {
 	/**
 	 * _displayWidgetsSelectionForm - displays a widget selection form
 	 *
-	 * @param  title
-	 * @param  widgets
-	 * @param  used_widgets
-	 * @return string
+	 * @param	title		$title
+	 * @param	widgets		$widgets
+	 * @param	used_widgets	$used_widgets
+	 * @return	string
 	 */
 	function _displayWidgetsSelectionForm($title, $widgets, $used_widgets) {
 		$hp = Codendi_HTMLPurifier::instance();
