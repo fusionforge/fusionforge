@@ -80,9 +80,14 @@ case "$1" in
 	fi
 
 	scm_host=$(forge_get_config scm_host)
-	scmcert=$config_path/ssl-cert-scm.pem
-	if [ ! -e $scmcert ] ; then
-	    openssl req -x509 -days 3650 -new -nodes -batch -text -key $key -subj "/CN=$scm_host" -out $scmcert
+	cert_scm=$config_path/ssl-cert-scm.pem
+	key_scm=$config_path/ssl-cert-scm.key
+	if [ ! -e $key_scm ] ; then
+	    openssl genrsa -out $key_scm
+	    chmod 600 $key_scm
+	fi
+	if [ ! -e $cert_scm ] ; then
+	    openssl req -x509 -days 3650 -new -nodes -batch -text -key $key_scm -subj "/CN=$scm_host" -out $cert_scm
 	fi
 
 	# Setup Docman/FRS/Forum/Tracker/RSS attachments

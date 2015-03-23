@@ -5,7 +5,6 @@
   
   SSLCertificateFile ${FF__core__config_path}/ssl-cert.pem
   SSLCertificateKeyFile ${FF__core__config_path}/ssl-cert.key
-  # Add extra SSL configuration (e.g. SSLCACertificatePath) here
   
   <Files ~ "\.(cgi|shtml)$">
     SSLOptions +StdEnvVars
