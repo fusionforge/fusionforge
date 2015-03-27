@@ -61,9 +61,7 @@ class admsswPlugin extends Plugin {
 				'foaf' => 'http://xmlns.com/foaf/0.1/',
 				'schema' => 'http://schema.org/',
 				'rad' => 'http://www.w3.org/ns/rad#',
-				'ldp' => 'http://www.w3.org/ns/ldp#',
-				'dcat' => 'http://www.w3.org/ns/dcat#',
-				'owl' => 'http://www.w3.org/2002/07/owl#'
+				'ldp' => 'http://www.w3.org/ns/ldp#'
 		);
 
 		//$this->trovecat_id_index = array();
@@ -335,9 +333,7 @@ class admsswPlugin extends Plugin {
 					$trovecaturis['admssw:programmingLanguage'][] = $trovecaturi;
 					break;
 				default:
-					// all the rest : topic, ...
 					$trovecaturis['rad:theme'][] = $trovecaturi;
-					$trovecaturis['dcat:theme'][] = $trovecaturi;
 					break;
 			}
 		}
@@ -457,23 +453,15 @@ class admsswPlugin extends Plugin {
 		$res->setURI( admsswPlugin::repositoryUri() );
 
 		// $res->setRel('rdf:type', 'admssw:SoftwareRepository');
-		
-		rdfutils_setPropToUri($res, 'rdf:type', array('admssw:SoftwareRepository', 'adms:AssetRepository'));
-		
+		rdfutils_setPropToUri($res, 'rdf:type', 'admssw:SoftwareRepository');
+
 		//$res->setProp('doap:name', $projectname);
 		rdfutils_setPropToUri($res, 'adms:accessURL', util_make_url ("/softwaremap/") );
 		$forge_name = forge_get_config ('forge_name');
 		$ff = new FusionForge();
-		//$res->setProp('dcterms:description', "...", 'en');
-		rdfutils_setPropToString($res, 'dcterms:description', 'Public projects in the '. $ff->software_name .' Software Map on '. $forge_name, 'en');
-		$res->setProp('rdfs:label', $forge_name .' public projects'); // for ADMS.SW
-		rdfutils_setPropToString($res, 'dct:title', $forge_name .' public projects', 'en'); // for ADMS. AP JoinUp
-		$res->setProp('adms:supportedSchema', array('ADMS.SW v1.0', 'ADMS Application Profile for Joinup'));
-
-		// TODO :
-		// - dcat:contactPoint
-		// - dct:modified
-		// - dct:publisher : faof:Agent
+		$res->setProp('dcterms:description', 'Public projects in the '. $ff->software_name .' Software Map on '. $forge_name );
+		$res->setProp('rdfs:label', $forge_name .' public projects');
+		$res->setProp('adms:supportedSchema', 'ADMS.SW v1.0');
 
 		// same as for trove's full list
 		$projects = get_public_active_projects_asc();
@@ -493,8 +481,7 @@ class admsswPlugin extends Plugin {
 			$proj_uris[] = $proj_uri;
 		}
 		if(count($proj_uris)) {
-			rdfutils_setPropToUri($res, 'dcterms:hasPart', $proj_uris); // for ADMS.SW
-			rdfutils_setPropToUri($res, 'dcat:dataset', $proj_uris); // for ADMS. AP JoinUp
+			rdfutils_setPropToUri($res, 'dcterms:hasPart', $proj_uris);
 		}
 
 		$graph = new Graphite();

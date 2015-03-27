@@ -101,17 +101,12 @@ class RDFedFRSFile extends FRSFile {
 		// $res->setRel('rdf:type', 'admssw:SoftwarePackage');
 		rdfutils_setPropToUri($res, 'rdf:type', 'admssw:SoftwarePackage');
 
-		$res->setProp('rdfs:label', $frs_file_name); // for ADMS.SW
-		$res->setProp('dcterms:title', $frs_file_name); // for ADMS. AP JoinUp
-		$description = "'". $frs_file_name ."', part of " .$frs_package->getName(). ' - ' .$frs_release->getName();
-		rdfutils_setPropToString($res, 'dcterms:description', $description, 'en');
+		$res->setProp('rdfs:label', $frs_file_name);
+		$description = $frs_file_name. _(', part of ') .$frs_package->getName(). ' ' .$frs_release->getName();
+		$res->setProp('dcterms:description', $description);
 
-		rdfutils_setPropToUri($res, 'schema:downloadUrl', $this->getDownloadUrl()); // for ADMS.SW
-		rdfutils_setPropToUri($res, 'dcat:accessUrl', $this->getDownloadUrl()); // for ADMS. AP JoinUp
-		rdfutils_setPropToUri($res, 'dcat:downloadUrl', $this->getDownloadUrl()); // for ADMS. AP JoinUp
-		$release_date = date('c', $this->getReleaseTime());
-		rdfutils_setPropToXSDdateTime($res, 'dcterms:created', $release_date); // for ADMS.SW
-		rdfutils_setPropToXSDdateTime($res, 'dcterms:issued', $release_date); // for ADMS. AP JoinUp
+		rdfutils_setPropToUri($res, 'schema:downloadUrl', $this->getDownloadUrl());
+		rdfutils_setPropToXSDdateTime($res, 'dcterms:created', date('c', $this->getReleaseTime()));
 		$res->setProp('schema:fileSize', $this->getSize());
 
 		$frs_filetype_id = $this->getTypeID();
@@ -160,9 +155,8 @@ class RDFedFRSFile extends FRSFile {
 				$mime_type = 'application/binary';
 				break;
 		}
-		rdfutils_setPropToUri($res, 'dcterms:format', $mime_type); // for ADMS.SW
-		rdfutils_setPropToUri($res, 'dcat:mediaType', $mime_type); // for ADMS. AP JoinUp
-		
+		rdfutils_setPropToUri($res, 'dcterms:format', 'http://purl.org/NET/mediatypes/'. $mime_type);
+
 		rdfutils_setPropToUri($res, 'admssw:release', $frs_release->getUri());
 
 		rdfutils_setPropToUri($res, 'dcterms:license', $this->getDownloadUrl().'#unspecified_license');

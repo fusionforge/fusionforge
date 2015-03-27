@@ -115,18 +115,14 @@ class RDFedFRSRelease extends FRSRelease {
 		// $res->setRel('rdf:type', 'admssw:SoftwareRelease');
 		rdfutils_setPropToUri($res, 'rdf:type', 'admssw:SoftwareRelease');
 
-		$res->setProp('rdfs:label', $package_name.' '.$release_name ); // for ADMS.SW
-		$res->setProp('dcterms:title', $package_name.' '.$release_name ); // for ADMS. AP JoinUp
-		$res->setProp('doap:revision', $release_name ); // for ADMS.SW
-		$res->setProp('owl:versionInfo', $release_name ); // for ADMS. AP JoinUp
+		$res->setProp('rdfs:label', $package_name.' '.$release_name );
+		$res->setProp('doap:revision', $release_name );
 
-		rdfutils_setPropToXSDdateTime($res, 'dcterms:created', date('c', $this->getReleaseDate())); // for ADMS.SW
-		rdfutils_setPropToXSDdateTime($res, 'dcterms:issued', date('c', $this->getReleaseDate())); // for ADMS. AP JoinUp
-		
+		rdfutils_setPropToXSDdateTime($res, 'dcterms:created', date('c', $this->getReleaseDate()));
+
 		$res->setProp('dcterms:description', $this->getNotes());
 
-		$res->setProp('schema:releaseNotes', $this->getChanges()); // for ADMS.SW
-		$res->setProp('adms:versionNotes', $this->getChanges()); // for ADMS. AP JoinUp
+		$res->setProp('schema:releaseNotes', $this->getChanges());
 
 		$projecturi = util_make_url ('/projects/'. $projectname .'/#project');
 
@@ -143,8 +139,7 @@ class RDFedFRSRelease extends FRSRelease {
 		foreach($frs_files as $frs_file) {
 			$file_uris[] = $frs_file->getUri();
 		}
-		rdfutils_setPropToUri($res, 'admssw:package', $file_uris); // for ADMS.SW
-		rdfutils_setPropToUri($res, 'dcat:distribution', $file_uris); // for ADMS. AP JoinUp
+		rdfutils_setPropToUri($res, 'admssw:package', $file_uris);
 
 		$count = $graph->addTriples( ARC2::getTriplesFromIndex($res->index) );
 
