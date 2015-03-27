@@ -1,8 +1,24 @@
-# SSL is off by default to not provide a false sense of security
-# If/when you have a real SSL certificate, uncomment the "really-on" line and 
-# comment out the "off" line.
+# Not using IfModule: the name changes between distros
+# and user can disable SSL in ssl-on.inc
+#<IfModule mod_ssl.c>
+  SSLEngine on
+  
+  SSLCertificateFile ${FF__core__config_path}/ssl-cert.pem
+  SSLCertificateKeyFile ${FF__core__config_path}/ssl-cert.key
+  
+  <Files ~ "\.(cgi|shtml)$">
+    SSLOptions +StdEnvVars
+  </Files>
+  
+  <Directory "/usr/lib/cgi-bin">
+    SSLOptions +StdEnvVars
+  </Directory>
+  
+  SetEnvIf User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown
+#</IfModule>
 
-###Include ${FF__core__config_path}/httpd.conf.d/ssl-off.inc
-# IT DOES BRAKE ALL, PLEASE DON'T COMMIT UNTESTED 
-Include ${FF__core__config_path}/httpd.conf.d/ssl-really-on.inc
-
+<IfModule apache_ssl.c>
+  SSLEnable
+  
+  SetEnvIf User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown
+</IfModule>

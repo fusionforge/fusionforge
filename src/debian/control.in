@@ -28,7 +28,7 @@ Description: collaborative development tool - standard metapackage
 
 Package: fusionforge-common
 Architecture: all
-Depends: php5-cli, php5-pgsql, php-htmlpurifier, cron, perl, ${misc:Depends}
+Depends: php5-cli, php5-pgsql, php-htmlpurifier, cron, perl, ucf, ${misc:Depends}
 Description: collaborative development tool - shared files
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
@@ -73,8 +73,8 @@ Description: collaborative development tool - database (remote)
 
 Package: fusionforge-web
 Architecture: all
-Depends: fusionforge-common (=${source:Version}), fusionforge-db, libapache2-mpm-itk | apache2-mpm-itk, php5-cli, libapache2-mod-php5, libphp-simplepie, php-http, php-http-webdav-server, libjs-jquery-livequery, python, ucf, unoconv, poppler-utils, ${misc:Depends}
-Recommends: locales-all
+Depends: fusionforge-common (=${source:Version}), fusionforge-db, libapache2-mpm-itk | apache2-mpm-itk, php5-cli, libapache2-mod-php5, libphp-simplepie, php-http, php-http-webdav-server, libjs-jquery-livequery, python, poppler-utils, ${misc:Depends}
+Recommends: locales-all, unoconv
 Description: collaborative development tool - web part (using Apache)
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
