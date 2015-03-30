@@ -39,7 +39,7 @@ if [ -e /etc/debian_version ]; then
 	$APT install fusionforge
 	
 	# Additional components for testsuite
-	$APT install fusionforge-shell \
+	$APT install fusionforge-shell fusionforge-scm \
 	    fusionforge-plugin-scmgit fusionforge-plugin-scmsvn fusionforge-plugin-scmbzr \
 	    fusionforge-plugin-mediawiki fusionforge-plugin-moinmoin \
 	    fusionforge-plugin-blocks
@@ -54,7 +54,7 @@ else
 	yum upgrade -y
     else
 	# Initial installation
-	yum install -y fusionforge fusionforge-shell \
+	yum install -y fusionforge fusionforge-shell fusionforge-scm \
 	    fusionforge-plugin-scmgit fusionforge-plugin-scmsvn \
 	    fusionforge-plugin-mediawiki \
 	    fusionforge-plugin-blocks fusionforge-plugin-online_help

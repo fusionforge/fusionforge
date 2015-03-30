@@ -1,0 +1,11 @@
+#
+# Regular cron jobs for the fusionforge-scm package
+#
+PATH=@bindir@:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+# Gather commit stats from SCM repositories
+0 2 * * * root forge_run_job scm/gather_scm_stats.php
+
+# Generate snapshots and tarballs from SCM repositories
+0 3 * * * root forge_run_job scm/generate_scm_snapshots.php
+
