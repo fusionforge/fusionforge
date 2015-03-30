@@ -60,5 +60,5 @@ override_dh_clean:
 	done
 
 # Needs to be done before 'dpkg-source'
-debian/control: debian/gen_control.sh debian/plugins
+debian/control: debian/gen_control.sh debian/control.in debian/plugins
 	debian/gen_control.sh
