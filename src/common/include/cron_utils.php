@@ -92,6 +92,7 @@ function checkChroot() {
 // Global, otherwise auto-closed by PHP and we lose the lock!
 $locks = array();
 function cron_acquire_lock($script) {
+	global $locks;
 	// Script lock: http://perl.plover.com/yak/flock/samples/slide006.html
 	if (!isset($locks[$script]))
 		$locks[$script] = fopen($script, 'r') or die("Failed to ask lock.\n");
@@ -102,6 +103,7 @@ function cron_acquire_lock($script) {
 }
 
 function cron_release_lock($script) {
+	global $locks;
 	flock($locks[$script], LOCK_UN);
 	unset($locks[$script]);
 }
