@@ -142,6 +142,10 @@ function cron_regen_apache_auth() {
 	fclose($config_f);
 	chmod($config_fname.'.new', 0644);
 	rename($config_fname.'.new', $config_fname);
+
+	# Regen scmsvn-auth.inc
+	$hook_params = array() ;
+	plugin_hook_by_reference ('scm_regen_apache_auth', $hook_params) ;
 }
 
 // Local Variables:

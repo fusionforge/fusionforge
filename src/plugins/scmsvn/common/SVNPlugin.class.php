@@ -56,6 +56,7 @@ some control over it to the project's administrator.");
 		$this->svn_root_dav = '/svn';
 		$this->_addHook('scm_browser_page');
 		$this->_addHook('scm_update_repolist');
+		$this->_addHook('scm_regen_apache_auth');
 		$this->_addHook('scm_generate_snapshots');
 		$this->_addHook('scm_gather_stats');
 		$this->_addHook('activity');
@@ -317,6 +318,9 @@ some control over it to the project's administrator.");
 	}
 
 	function updateRepositoryList(&$params) {
+	}
+
+	function regenApacheAuth(&$params) {
 		# Enable /authscm/$user/svn URLs
 		$config_fname = forge_get_config('data_path').'/scmsvn-auth.inc';
 		$config_f = fopen($config_fname.'.new', 'w');
