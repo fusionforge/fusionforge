@@ -589,14 +589,6 @@ control over it to the project's administrator.");
 	}
 
 	function updateRepositoryList($params) {
-		$groups = $this->getGroups();
-		$list = array();
-		foreach ($groups as $project) {
-			if ($this->browserDisplayable($project)) {
-				$list[] = $project;
-			}
-		}
-
 		$config_dir = forge_get_config('config_path').'/plugins/scmgit';
 		if (!is_dir($config_dir)) {
 			mkdir($config_dir, 0755, true);
@@ -636,41 +628,39 @@ control over it to the project's administrator.");
 		chmod($fname.'.new', 0644);
 		rename($fname.'.new', $fname);
 
+		# Optimized gitweb.list generation
+		# Useful to list all a project's repos: /gitweb?a=project_list;pf=project_name
 		$fname = $config_dir . '/gitweb.list';
 		$f = fopen($fname.'.new', 'w');
-		foreach ($list as $project) {
-			$repos = $this->getRepositories($rootdir . "/" .  $project->getUnixName());
-			foreach ($repos as $repo) {
-				$reldir = substr($repo, strlen($rootdir) + 1);
-				fwrite($f, $reldir . "\n");
-			}
+		$res = db_query_params("SELECT unix_group_name FROM groups
+			JOIN group_plugin ON (groups.group_id=group_plugin.group_id)
+			WHERE groups.status=$1 AND group_plugin.plugin_id=$2
+			ORDER BY unix_group_name", array('A', $this->getID()));
+		while ($arr = db_fetch_array($res)) {
+			fwrite($f, $arr['unix_group_name'].'/'.$arr['unix_group_name'].".git\n");
+		}
+		$res = db_query_params("SELECT unix_group_name, repo_name
+			FROM groups
+			JOIN group_plugin ON (groups.group_id=group_plugin.group_id)
+			JOIN scm_secondary_repos ON (groups.group_id=scm_secondary_repos.group_id)
+			WHERE groups.status=$1 AND group_plugin.plugin_id=$2
+			ORDER BY unix_group_name, repo_name", array('A', $this->getID()));
+		while ($arr = db_fetch_array($res)) {
+			fwrite($f, $arr['unix_group_name'].'/'.$arr['repo_name'].".git\n");
+		}
+		$res = db_query_params("SELECT unix_group_name, user_name
+			FROM groups
+			JOIN group_plugin ON (groups.group_id=group_plugin.group_id)
+			JOIN scm_personal_repos ON (groups.group_id=scm_personal_repos.group_id)
+			JOIN users ON (scm_personal_repos.user_id=users.user_id)
+			WHERE groups.status=$1 AND group_plugin.plugin_id=$2 AND users.status=$3
+			ORDER BY unix_group_name, user_name", array('A', $this->getID(), 'A'));
+		while ($arr = db_fetch_array($res)) {
+			fwrite($f, $arr['unix_group_name'].'/users/'.$arr['user_name'].".git\n");
 		}
 		fclose($f);
 		chmod($fname.'.new', 0644);
 		rename($fname.'.new', $fname);
-	}
-
-	function getRepositories($path) {
-		if (!is_dir($path)) {
-			return array();
-		}
-		if (file_exists("$path/HEAD")) {
-			return array($path);
-		}
-		$list = array();
-		$entries = scandir($path);
-		foreach ($entries as $entry) {
-			if (($entry == ".") or ($entry == ".."))
-				continue;
-			$fullname = $path . "/" . $entry;
-			if (is_dir($fullname)) {
-				if (is_link($fullname))
-					continue;
-				$result = $this->getRepositories($fullname);
-				$list = array_merge($list, $result);
-			}
-		}
-		return $list;
 	}
 
 	function gatherStats($params) {
