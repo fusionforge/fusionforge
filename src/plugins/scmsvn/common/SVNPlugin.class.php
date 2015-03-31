@@ -317,8 +317,6 @@ some control over it to the project's administrator.");
 	}
 
 	function updateRepositoryList(&$params) {
-		$groups = $this->getGroups();
-
 		# Enable /authscm/$user/svn URLs
 		$config_fname = forge_get_config('data_path').'/scmsvn-auth.inc';
 		$config_f = fopen($config_fname.'.new', 'w');
