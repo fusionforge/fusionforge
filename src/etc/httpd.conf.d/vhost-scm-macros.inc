@@ -13,3 +13,6 @@
     Require user $user
   </Location>
 </Macro>
+
+# Note: macros defined in a separate file because they can't be
+# defined twice (e.g. included twice from http and https virtualhosts)

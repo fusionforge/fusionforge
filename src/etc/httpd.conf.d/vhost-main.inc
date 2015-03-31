@@ -13,8 +13,32 @@ SetEnv FF__core__config_path "${FF__core__config_path}"
   UserDir disabled
 </IfModule>
 
-# Define configuration/env variables for passing passwords and other secrets to PHP
+# Main directory options (${FF__core__source_path}/www contains the
+# PHP scripts of FusionForge)
 <Directory ${FF__core__source_path}/www>
+  Options Indexes FollowSymlinks
+  AllowOverride All
+  
+  # define access restrictions for the main site
+  Include ${FF__core__config_path}/httpd.conf.d/auth-main.inc
+  
+  #
+  # PHP settings
+  #
+  php_admin_value default_charset "UTF-8"
+  php_flag register_globals "off"
+  php_flag magic_quotes_gpc "off"
+  
+  # Report E_ALL errors
+  php_admin_value error_reporting 2147483647
+  
+  # Don't echo error to user
+  php_admin_value display_errors 0
+  
+  # ...but log the errors to error.log
+  php_admin_value log_errors 1
+
+  # Define configuration/env variables for passing passwords and other secrets to PHP
   RequestHeader unset FusionForgeDbhost
   RequestHeader append FusionForgeDbhost "${FF__core__database_host}"
   
@@ -32,6 +56,16 @@ SetEnv FF__core__config_path "${FF__core__config_path}"
   
   RequestHeader unset FusionForgeSessionKey
   RequestHeader append FusionForgeSessionKey "${FF__core__session_key}"
+</Directory>
+
+# Directory options for vendor dir (${FF__core__source_path}/vendor
+# contains the Javascript scripts of FusionForge)
+<Directory ${FF__core__source_path}/vendor>
+  Options Indexes FollowSymlinks
+  AllowOverride All
+  
+  Include ${FF__core__config_path}/httpd.conf.d/auth-main.inc
+  
 </Directory>
 
 <Location /projects>
