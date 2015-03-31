@@ -131,7 +131,7 @@ install-lists: install-base-dirs
 	$(CP_R) cronjobs/lists $(DESTDIR)$(pkgdatadir)/cronjobs/
 	$(CP_R) post-install.d/lists $(DESTDIR)$(pkgdatadir)/post-install.d/
 
-install-base: install-base-dirs install-common install-web install-db
+install-base: install-base-dirs install-common install-web install-db install-scm
 
 PLUGINS=$(shell cd plugins/ && find * -maxdepth 0 -type d)
 PLUGINS_INSTALL_TARGETS=$(addprefix install-plugin-,$(PLUGINS))
@@ -171,7 +171,7 @@ uninstall:
 post_source_path:=$(shell forge_get_config source_path 2>/dev/null)
 post_plugins_path:=$(shell forge_get_config plugins_path 2>/dev/null)
 post-install: post-install-base post-install-plugins
-post-install-base: post-install-common post-install-db post-install-web
+post-install-base: post-install-common post-install-db post-install-web post-install-scm
 post-install-common:
 	$(post_source_path)/post-install.d/common/common.sh configure
 post-install-db:
