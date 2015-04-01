@@ -125,7 +125,7 @@ foreach(util_result_column_to_array($res,0) as $uname) {
 		mkdir($uhome);
 		chmod($uhome, 0755);
 		chown($uhome, $uname);
-		chgrp($uhome, forge_get_config('users_default_gid'));
+		chgrp($uhome, intval(forge_get_config('users_default_gid')));
 	}
 }
 
