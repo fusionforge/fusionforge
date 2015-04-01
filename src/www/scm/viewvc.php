@@ -96,7 +96,7 @@ if ($external_scm) {
 		$server_script = '/authscm/'.$u->getUnixName().'/viewvc';
 	// pass the parameters passed to this script to the remote script in the same fashion
 	$protocol = forge_get_config('use_ssl', 'scmsvn')? 'https://' : 'http://';
-	$script_url = $protocol . $scm_box . $server_script
+	$script_url = $protocol . forge_get_config('scm_host') . $server_script
 		. (isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : '/')
 		. '?' . $_SERVER["QUERY_STRING"];
 	if ($redirect) {
