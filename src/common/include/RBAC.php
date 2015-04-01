@@ -324,6 +324,13 @@ abstract class BaseRole extends Error {
 						       $reference,
 						       $value)) ;
 		$this->perms_array[$section][$reference] = $value;
+
+		# Change repo permissions when we change anonymous access
+		$anon = RoleAnonymous::getInstance();
+		if ($section == 'scm' && $this->getID() == $anon->getID()) {
+				$systasksq = new SysTasksQ();
+				$systasksq->add(SYSTASK_CORE, 'SCM_REPO', $reference);
+		}
 	}
 
 	function getSettingsForProject ($project) {
@@ -845,6 +852,7 @@ abstract class BaseRole extends Error {
 		//			db_execute('delete_from_pfo_role_setting', array($role_id, $sect, $refid));
 
 		// Insert new/changed permissions
+		$anon = RoleAnonymous::getInstance();
 		foreach ($data as $sect => &$refs) {
 			foreach ($refs as $refid => $value) {
 				if (!isset($this->perms_array[$sect][$refid])) {
@@ -856,6 +864,12 @@ abstract class BaseRole extends Error {
 					db_execute('update_pfo_role_setting',
 						   array($role_id, $sect, $refid, $value));
 				}
+			}
+
+			# Change repo permissions when we change anonymous access
+			if ($sect == 'scm' && $this->getID() == $anon->getID()) {
+					$systasksq = new SysTasksQ();
+					$systasksq->add(SYSTASK_CORE, 'SCM_REPO', $refid);
 			}
 		}
 
