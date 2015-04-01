@@ -824,6 +824,7 @@ else
 	fi
 	set -o noglob
 	for uri in $(git config hooks.curltrigger); do
+		print -r -- "‣‣‣ $uri"
 		curl "$uri"
 	done
 fi
