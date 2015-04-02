@@ -43,6 +43,11 @@ stop_database () {
     else
         echo "FAIL: database still up?"
     fi
+
+    # Work-around http://bugs.debian.org/759725
+    if [ -x /bin/systemctl ]; then
+        sleep 1  # bleh
+    fi
 }
 
 start_database () {
@@ -136,10 +141,6 @@ if [ "$backup" = 1 ]; then
         rm -fr $pgdir.backup
     fi
     cp -a --reflink=auto $pgdir $pgdir.backup
-    # Work-around http://bugs.debian.org/759725
-    if [ -x /bin/systemctl ]; then
-        sleep 1  # bleh
-    fi
     start_database
     exit 0
 fi
