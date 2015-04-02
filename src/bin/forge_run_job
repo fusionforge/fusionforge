@@ -25,7 +25,7 @@
 
 // Don't try to connect to the DB, just spawning a cronjob
 putenv('FUSIONFORGE_NO_DB=true');
-        
+
 require (dirname(__FILE__).'/../common/include/env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/cron_utils.php';
@@ -33,7 +33,7 @@ require_once $gfcommon.'include/cron_utils.php';
 if (count ($argv) < 2) {
 	echo "Usage: .../forge_run_job <jobname> [ <parameter> ... ]
 " ;
-        exit (1) ;
+	exit (1) ;
 }
 $self = array_shift($argv);
 
@@ -57,7 +57,7 @@ while ($arg = array_shift($argv)) {
 // Clean-up env
 putenv('FUSIONFORGE_NO_DB');
 putenv('FUSIONFORGE_NO_PLUGINS');
-	
+
 system ("$cmdline\n");
 
 // Local Variables:

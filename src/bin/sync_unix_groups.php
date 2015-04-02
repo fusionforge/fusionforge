@@ -51,5 +51,3 @@ db_commit();
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>
