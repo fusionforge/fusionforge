@@ -300,10 +300,10 @@ some control over it to the project's administrator.");
 			system ("svn mkdir -m'Init' file:///$repo/trunk file:///$repo/tags file:///$repo/branches >/dev/null") ;
 			system ("find $repo -type d | xargs -I{} chmod g+s {}") ;
 			// Allow read/write users to modify the SVN repository
-			$rw_unix_group = 'scm_' . $project->getUnixName() ;
+			$rw_unix_group = $project->getUnixName() . '_scmrw';
 			system("chgrp -R $rw_unix_group $repo");
-			// Allow read-only users to enter the directory
-			$ro_unix_group = $project->getUnixName();
+			// Allow read-only users to enter the (top-level) directory
+			$ro_unix_group = $project->getUnixName() . '_scmro';
 			system("chgrp $ro_unix_group $repo");
 			// open permissions to allow switching private/public easily
 			// see after to restrict the top-level directory

@@ -436,8 +436,8 @@ control over it to the project's administrator.");
 		}
 
 		$project_name = $project->getUnixName();
-		$unix_group_ro = $project_name;
-		$unix_group_rw = 'scm_' . $project_name;
+		$unix_group_ro = $project_name . '_scmro';
+		$unix_group_rw = $project_name . '_scmrw';
 
 		$root = forge_get_config('repos_path', 'scmgit') . '/' . $project_name;
 		if (!is_dir($root)) {
