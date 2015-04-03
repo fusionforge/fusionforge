@@ -388,7 +388,7 @@ WHERE users.user_id=$3
   AND users.unix_status=$5
   AND groups.status=$6
   AND groups.group_id=$7)',
-						array($this->GIT_ADD_SCMRO,
+						array($this->GID_ADD_SCMRO,
 							  '_scmro',
 							  $user_id,
 							  'A', 'A', 'A',
@@ -414,7 +414,7 @@ WHERE users.user_id=$3
   AND users.unix_status=$5
   AND groups.status=$6
   AND groups.group_id=$7)',
-						array($this->GIT_ADD_SCMRW,
+						array($this->GID_ADD_SCMRW,
 							  '_scmrw',
 							  $user_id,
 							  'A', 'A', 'A',
