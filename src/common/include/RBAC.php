@@ -262,6 +262,14 @@ abstract class BaseRole extends Error {
 		$hook_params['project'] =& $project;
 		plugin_hook ("role_unlink_project", $hook_params);
 
+		# Change repo permissions when we change anonymous access
+		# Not done in SetSetting() because we used batch-mode removeObsoleteSettings()
+		$anon = RoleAnonymous::getInstance();
+		if ($this->getID() == $anon->getID()) {
+				$systasksq = new SysTasksQ();
+				$systasksq->add(SYSTASK_CORE, 'SCM_REPO', $project->getID());
+		}
+
 		return true ;
 	}
 
