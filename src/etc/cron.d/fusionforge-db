@@ -1,5 +1,5 @@
 #
-# Regular cron jobs for the db-postgresql package
+# Regular cron jobs for the fusionforge-db-local package
 #
 PATH=@bindir@:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
@@ -38,12 +38,6 @@ PATH=@bindir@:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 # Weekly db vacuum (should be done after ALL OTHER JOBS)
 50 2 * * 1 root forge_run_job db/vacuum.php
-
-# Gather commit stats from SCM repositories
-0 2 * * * root forge_run_job scm/gather_scm_stats.php
-
-# Generate snapshots and tarballs from SCM repositories
-0 3 * * * root forge_run_job scm/generate_scm_snapshots.php
 
 # this cronjob analyse the apache log and instert them in the db table stats_subd_pages
 # this is not used in fusionforge IHM.

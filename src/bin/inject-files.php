@@ -51,7 +51,7 @@ db_begin ();
 
 $f = fopen ('files.txt', 'r') ;
 while (! feof ($f)) {
-        $l = trim (fgets ($f, 1024)) ;
+	$l = trim (fgets ($f, 1024)) ;
 	if ($l == "") { continue ; } ;
 	$array = explode (':', $l) ;
 	$projectname = $array[0] ;
@@ -133,5 +133,3 @@ db_commit () ;
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

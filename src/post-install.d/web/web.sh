@@ -46,10 +46,13 @@ case "$1" in
 	$0 update-defines
 
 	# '${FF__core__config_path}' not yet available in the top-level config file, so generate it:
-	cat > $config_path/httpd.conf <<-EOF
-	# Include all FusionForge-related configuration files
-	Include $config_path/httpd.conf.d/*.conf
-	EOF
+	# (unless it was manually emptied, meaning sites will be individually enabled e.g. via Puppet)
+	if [ ! -e $config_path/httpd.conf -o -s $config_path/httpd.conf ]; then
+	    cat > $config_path/httpd.conf <<-EOF
+		# Include all FusionForge-related configuration files
+		Include $config_path/httpd.conf.d/*.conf
+		EOF
+	fi
 
 	apache_user=$(forge_get_config apache_user)
 	apache_group=$(forge_get_config apache_group)
@@ -77,9 +80,14 @@ case "$1" in
 	fi
 
 	scm_host=$(forge_get_config scm_host)
-	scmcert=$config_path/ssl-cert-scm.pem
-	if [ ! -e $scmcert ] ; then
-	    openssl req -x509 -days 3650 -new -nodes -batch -text -key $key -subj "/CN=$scm_host" -out $scmcert
+	cert_scm=$config_path/ssl-cert-scm.pem
+	key_scm=$config_path/ssl-cert-scm.key
+	if [ ! -e $key_scm ] ; then
+	    openssl genrsa -out $key_scm
+	    chmod 600 $key_scm
+	fi
+	if [ ! -e $cert_scm ] ; then
+	    openssl req -x509 -days 3650 -new -nodes -batch -text -key $key_scm -subj "/CN=$scm_host" -out $cert_scm
 	fi
 
 	# Setup Docman/FRS/Forum/Tracker/RSS attachments
@@ -96,6 +104,7 @@ case "$1" in
 	# Enable required modules
 	if [ -x /usr/sbin/a2enmod ]; then
 	    a2enmod version 2>/dev/null || true  # opensuse..
+	    a2enmod macro
 	    a2enmod php5
 	    a2enmod ssl
 	    a2enmod env
@@ -107,7 +116,6 @@ case "$1" in
 	    a2enmod cgi  # ViewVC bootstrap, gitweb, mailman
 	    #a2enmod proxy
 	    #a2enmod proxy_http
-	    a2enmod macro
 	    a2enmod authz_groupfile
 	    a2enmod dav
 	fi

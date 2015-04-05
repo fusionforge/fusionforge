@@ -92,6 +92,7 @@ function checkChroot() {
 // Global, otherwise auto-closed by PHP and we lose the lock!
 $locks = array();
 function cron_acquire_lock($script) {
+	global $locks;
 	// Script lock: http://perl.plover.com/yak/flock/samples/slide006.html
 	if (!isset($locks[$script]))
 		$locks[$script] = fopen($script, 'r') or die("Failed to ask lock.\n");
@@ -102,6 +103,7 @@ function cron_acquire_lock($script) {
 }
 
 function cron_release_lock($script) {
+	global $locks;
 	flock($locks[$script], LOCK_UN);
 	unset($locks[$script]);
 }
@@ -140,6 +142,10 @@ function cron_regen_apache_auth() {
 	fclose($config_f);
 	chmod($config_fname.'.new', 0644);
 	rename($config_fname.'.new', $config_fname);
+
+	# Regen scmsvn-auth.inc
+	$hook_params = array() ;
+	plugin_hook_by_reference ('scm_regen_apache_auth', $hook_params) ;
 }
 
 // Local Variables:

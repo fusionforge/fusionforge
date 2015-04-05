@@ -49,8 +49,7 @@ class ScmBzrTest extends FForge_SeleniumTestCase
 		$this->uploadSshKey();
 
 		// Run the cronjob to create repositories
-		$this->cron("scm/create_scm_repos.php");
-		$this->cron("shell/homedirs.php");
+		$this->waitSystasks();
 
 		// Check that the repo is present and Loggerhead shows it (even if empty)
 		$this->open(ROOT);
@@ -62,9 +61,6 @@ class ScmBzrTest extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=SCM");
 		$this->clickAndWait("link=Browse Bazaar Repository");
 		$this->selectFrame("id=scmbzr_iframe");
-		$this->assertTextPresent("Browsing (root)");
-		$this->click("link=projecta");
-		$this->waitForPageToLoad(60000);
 		$this->assertTextPresent("Browsing (root)/projecta");
 		$this->selectFrame("relative=top");
 
@@ -96,17 +92,12 @@ class ScmBzrTest extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=SCM");
 		$this->clickAndWait("link=Browse Bazaar Repository");
 		$this->selectFrame("id=scmbzr_iframe");
-		$this->assertTextPresent("Browsing (root)");
-		$this->click("link=projecta");
-		$this->waitForPageToLoad(60000);
 		$this->assertTextPresent("Browsing (root)/projecta");
 		$this->assertTextPresent("trunk");
-		$this->click("link=trunk");
-		$this->waitForPageToLoad(60000);
+		$this->clickAndWait("link=trunk");
 		$this->assertTextPresent("Modifying file");
 		$this->assertTextNotPresent("Adding file");
-		$this->click("link=Changes");
-		$this->waitForPageToLoad(60000);
+		$this->clickAndWait("link=Changes");
 		$this->assertTextPresent("Modifying file");
 		$this->assertTextPresent("Adding file");
 		$this->selectFrame("relative=top");

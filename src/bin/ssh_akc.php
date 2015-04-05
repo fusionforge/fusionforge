@@ -37,8 +37,8 @@ if (count ($argv) <= 1) {
 
 // Filter out hard-coded list ("root") and weird usernames
 if (!account_namevalid($argv[1], true, false)) {
-    file_put_contents('php://stderr', "Invalid username {$argv[1]}\n");
-    exit();
+	file_put_contents('php://stderr', "Invalid username {$argv[1]}\n");
+	exit();
 }
 
 // The DB request

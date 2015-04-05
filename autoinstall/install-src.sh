@@ -53,11 +53,11 @@ fi
 (
     cd $(dirname $0)/../src/
     make
-    make install-base install-shell \
+    make install-base install-shell install-scm \
         install-plugin-scmsvn install-plugin-scmgit \
         install-plugin-blocks install-plugin-mediawiki install-plugin-moinmoin \
         install-plugin-online_help install-plugin-taskboard
-    make post-install-base post-install-shell \
+	make post-install-base post-install-shell post-install-scm \
         post-install-plugin-scmsvn post-install-plugin-scmgit \
         post-install-plugin-blocks post-install-plugin-mediawiki post-install-plugin-moinmoin \
         post-install-plugin-online_help post-install-plugin-taskboard

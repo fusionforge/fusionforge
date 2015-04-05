@@ -12,7 +12,7 @@ AssignGroupIDExpr %{reqenv:ITKGID}
   AuthName "${FF__core__apache_auth_realm}"
   AuthUserFile ${FF__core__data_path}/scm-passwd
 </LocationMatch>
-# Cf. 05-config-macros-scm.conf for the 'Require User' directive
+# Cf. vhost-scm-macros.conf for the 'Require User' directive
 
 # Load plugins after the above LocationMatch to allow specialization
 IncludeOptional ${FF__core__config_path}/httpd.conf.d/vhost-scm-plugin-scm*.inc

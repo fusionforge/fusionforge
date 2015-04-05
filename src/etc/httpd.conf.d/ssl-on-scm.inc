@@ -4,8 +4,7 @@
   SSLEngine on
   
   SSLCertificateFile ${FF__core__config_path}/ssl-cert-scm.pem
-  SSLCertificateKeyFile ${FF__core__config_path}/ssl-cert.key
-  # Add extra SSL configuration (e.g. SSLCACertificatePath) here
+  SSLCertificateKeyFile ${FF__core__config_path}/ssl-cert-scm.key
   
   <Files ~ "\.(cgi|shtml)$">
     SSLOptions +StdEnvVars

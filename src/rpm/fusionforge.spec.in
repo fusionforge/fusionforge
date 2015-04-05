@@ -70,6 +70,7 @@ install_listfiles db-local
 install_listfiles web
 install_listfiles web-vhosts
 install_listfiles shell
+install_listfiles scm
 install_listfiles mta-postfix
 install_listfiles mta-exim4
 install_listfiles lists
@@ -163,6 +164,20 @@ if [ $1 -eq 0 ] ; then
     %{_datadir}/%{name}/post-install.d/shell/shell.sh remove
     %{_datadir}/%{name}/post-install.d/shell/shell.sh purge
 fi
+
+
+%package scm
+Summary: Collaborative development tool - shell accounts (using PostgreSQL)
+Requires: %{name}-common = %{version}-%{release}, %{name}-shell = %{version}-%{release}
+%description shell
+FusionForge provides many tools to aid collaboration in a
+development project, such as bug-tracking, task management,
+mailing-lists, SCM repository, forums, support request helper,
+web/FTP hosting, release management, etc. All these services are
+integrated into one web site and managed through a web interface.
+
+This package manages SCM repositories.
+%files shell -f scm.rpmfiles
 
 
 %package web

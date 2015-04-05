@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (C) 2009 Alain Peyrat, Alcatel-Lucent
+ * Copyright 2015, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -44,76 +45,90 @@ require_once $gfcommon.'pm/import_utils.php';
 
 $input_file = getUploadedFile('userfile');
 if (isset($input_file) && isset($input_file['tmp_name']) &&
-    is_uploaded_file($input_file['tmp_name'])) {
-	$handle = fopen($input_file['tmp_name'], 'r');
-	$tasks = array();
+	is_uploaded_file($input_file['tmp_name'])) {
 
-	// Detect separator & if headers are present or not.
-	$sep = ',';
-	$values = fgetcsv($handle, 4096, $sep);
-	if (count($values) == 1) {
-		$sep = ';';
-		fseek($handle, 0);
-		$values = fgetcsv($handle, 4096, $sep);
+	if (function_exists('finfo_open')) {
+		$finfo = finfo_open(FILEINFO_MIME_TYPE);
+		$uploaded_data_type = finfo_file($finfo, $input_file['tmp_name']);
+	} else {
+		$uploaded_data_type = $input_file['type'];
 	}
-	$headers = (in_array('project_task_id', $values) && in_array('title', $values));
 
-	// Rewind the file.
-	fseek($handle, 0);
 
-	if ($headers) {
-		// Headers are given in the file (first line).
-		$headers = array_flip(fgetcsv($handle, 4096, $sep));
-		while (($values = fgetcsv($handle, 4096, $sep)) !== false) {
-			$task = array();
-			foreach($headers as $name => $id) {
-				if ($name == 'project_task_id') $name = 'id';
-				if ($name == 'title') $name = 'name';
-				$task[$name] = $values[$id];
+	if ($uploaded_data_type === "text/plain") {
+
+		$handle = fopen($input_file['tmp_name'], 'r');
+		$tasks = array();
+
+		// Detect separator & if headers are present or not.
+		$sep = ',';
+		$values = fgetcsv($handle, 4096, $sep);
+		if (count($values) == 1) {
+			$sep = ';';
+			fseek($handle, 0);
+			$values = fgetcsv($handle, 4096, $sep);
+		}
+		$headers = (in_array('project_task_id', $values) && in_array('title', $values));
+
+		// Rewind the file.
+		fseek($handle, 0);
+
+		if ($headers) {
+			// Headers are given in the file (first line).
+			$headers = array_flip(fgetcsv($handle, 4096, $sep));
+			while (($values = fgetcsv($handle, 4096, $sep)) !== false) {
+				$task = array();
+				foreach($headers as $name => $id) {
+					if ($name == 'project_task_id') $name = 'id';
+					if ($name == 'title') $name = 'name';
+					$task[$name] = $values[$id];
+				}
+				$tasks[] = $task;
 			}
-			$tasks[] = $task;
+		} else {
+			// Original code (default format, no headers)
+			while (($cols = fgetcsv($handle, 4096, $sep)) !== false) {
+
+				$resources = array();
+				for ($i=12;$i<17;$i++) {
+					if (trim($cols[$i]) != '') {
+						$resources[] = array('user_name'=>$cols[$i]);
+					}
+				}
+
+				$dependentOn = array();
+
+				for ($i=17;$i<30;$i=$i+3) {
+					if (trim($cols[$i]) != '') {
+						$dependentOn[] = array('task_id'=>$cols[$i], 'msproj_id'=>$cols[$i+1], 'task_name'=>'', 'link_type'=>$cols[$i+2]);
+					}
+				}
+
+				$tasks[] = array('id'=>$cols[0],
+						'msproj_id'=>$cols[1],
+						'parent_id'=>$cols[2],
+						'parent_msproj_id'=>$cols[3],
+						'name'=>$cols[4],
+						'duration'=>$cols[5],
+						'work'=>$cols[6],
+						'start_date'=>$cols[7],
+						'end_date'=>$cols[8],
+						'percent_complete'=>$cols[9],
+						'priority'=>$cols[10],
+						'resources'=>$resources,
+						'dependenton'=>$dependentOn,
+						'notes'=>$cols[11]);
+			}
+			$res = &pm_import_tasks($group_project_id, $tasks);
 		}
 	} else {
-		// Original code (default format, no headers)
-		while (($cols = fgetcsv($handle, 4096, $sep)) !== false) {
-
-			$resources = array();
-			for ($i=12;$i<17;$i++) {
-				if (trim($cols[$i]) != '') {
-					$resources[] = array('user_name'=>$cols[$i]);
-				}
-			}
-
-			$dependentOn = array();
-
-			for ($i=17;$i<30;$i=$i+3) {
-				if (trim($cols[$i]) != '') {
-					$dependentOn[] = array('task_id'=>$cols[$i], 'msproj_id'=>$cols[$i+1], 'task_name'=>'', 'link_type'=>$cols[$i+2]);
-				}
-			}
-
-			$tasks[] = array('id'=>$cols[0],
-					'msproj_id'=>$cols[1],
-					'parent_id'=>$cols[2],
-					'parent_msproj_id'=>$cols[3],
-					'name'=>$cols[4],
-					'duration'=>$cols[5],
-					'work'=>$cols[6],
-					'start_date'=>$cols[7],
-					'end_date'=>$cols[8],
-					'percent_complete'=>$cols[9],
-					'priority'=>$cols[10],
-					'resources'=>$resources,
-					'dependenton'=>$dependentOn,
-					'notes'=>$cols[11]);
-		}
-		$res=&pm_import_tasks($group_project_id, $tasks);
+		$res['errormessage'] = _('Wrong file type. Only plain CSV file supported');
 	}
 } else {
 	$res['errormessage'] = _('Parameter error');
 }
 
-if (isset($res['success'])) {
+if (isset($res['success']) && $res['success']) {
 	$feedback .= _('Import was successful');
 } else {
 	$error_msg .= $res['errormessage'];

@@ -163,7 +163,7 @@ function run_script($script) {
 	if ($ext == 'php') {
 		// run the php script
 		$result = array();
-		$exec = 'php -f '.$db_path.$filename;
+		$exec = 'php -f '.$db_path.$filename.' 2>&1';
 		exec($exec, $result);
 
 		if (count($result)) { // the script produced an output

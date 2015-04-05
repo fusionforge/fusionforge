@@ -56,6 +56,7 @@ some control over it to the project's administrator.");
 		$this->svn_root_dav = '/svn';
 		$this->_addHook('scm_browser_page');
 		$this->_addHook('scm_update_repolist');
+		$this->_addHook('scm_regen_apache_auth');
 		$this->_addHook('scm_generate_snapshots');
 		$this->_addHook('scm_gather_stats');
 		$this->_addHook('activity');
@@ -299,10 +300,10 @@ some control over it to the project's administrator.");
 			system ("svn mkdir -m'Init' file:///$repo/trunk file:///$repo/tags file:///$repo/branches >/dev/null") ;
 			system ("find $repo -type d | xargs -I{} chmod g+s {}") ;
 			// Allow read/write users to modify the SVN repository
-			$rw_unix_group = 'scm_' . $project->getUnixName() ;
+			$rw_unix_group = $project->getUnixName() . '_scmrw';
 			system("chgrp -R $rw_unix_group $repo");
-			// Allow read-only users to enter the directory
-			$ro_unix_group = $project->getUnixName();
+			// Allow read-only users to enter the (top-level) directory
+			$ro_unix_group = $project->getUnixName() . '_scmro';
 			system("chgrp $ro_unix_group $repo");
 			// open permissions to allow switching private/public easily
 			// see after to restrict the top-level directory
@@ -317,8 +318,9 @@ some control over it to the project's administrator.");
 	}
 
 	function updateRepositoryList(&$params) {
-		$groups = $this->getGroups();
+	}
 
+	function regenApacheAuth(&$params) {
 		# Enable /authscm/$user/svn URLs
 		$config_fname = forge_get_config('data_path').'/scmsvn-auth.inc';
 		$config_f = fopen($config_fname.'.new', 'w');

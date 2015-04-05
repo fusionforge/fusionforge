@@ -1,4 +1,6 @@
 # Help text for users
+# TODO: keyboard mapping stays qwerty in Jessie despite being
+# documented at https://wiki.debian.org/Keyboard
 cat <<'EOF' > /etc/issue
 Debian GNU/Linux + FusionForge Dev VM \l
 
@@ -13,21 +15,13 @@ EOF
 # Install sources
 if [ -e /etc/debian_version ]; then
     apt-get -y --force-yes install git
-    repo='git://fusionforge.org/deb-packaging/deb-packaging.git -b debian/5.3'
 else
     echo "TODO: instructions for CentOS" >> /etc/issue
     yum -y install git
-    repo='git://fusionforge.org/fusionforge/fusionforge.git -b Branch_5_3'
 fi
 
 cd /usr/src/
-git clone $repo fusionforge/
-
-if [ -e /etc/debian_version ]; then
-    cd fusionforge/
-    git remote add upstream git://scm.fusionforge.org/fusionforge/fusionforge.git
-    git fetch upstream
-fi
+git clone git://fusionforge.org/fusionforge/fusionforge.git -b 6.0 fusionforge/
 
 git config --global color.diff auto
 git config --global color.status auto

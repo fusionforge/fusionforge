@@ -20,7 +20,7 @@
  * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-        
+
 require (dirname(__FILE__).'/../common/include/env.inc.php');
 require_once $gfcommon.'include/pre.php';
 
@@ -48,7 +48,7 @@ if (count ($argv) == 2) {
 } else {
 	echo "Usage: .../forge_make_admin <username>
 " ;
-        exit (1) ;
+	exit (1) ;
 }
 
 // Local Variables:

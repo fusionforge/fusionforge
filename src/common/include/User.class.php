@@ -1120,7 +1120,7 @@ Use one below, but make sure it is entered as the single line.)
 	 * @return	int	This user's GID.
 	 */
 	function getUnixGID() {
-		return $this->data_array['unix_gid'];
+		return forge_get_config('users_default_gid');
 	}
 
 	/**

@@ -66,7 +66,6 @@ install-common: install-config install-plugin-authbuiltin
 	$(CP_R) VERSION bin common templates lib $(DESTDIR)$(pkgdatadir)/
 	chmod 755 $(DESTDIR)$(pkgdatadir)/bin/ssh_akc.php
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(config_path)/custom/
-	$(CP_R) cronjobs/scm $(DESTDIR)$(pkgdatadir)/cronjobs/  # no dedicated 'scm' package now
 	$(CP_R) post-install.d/common $(DESTDIR)$(pkgdatadir)/post-install.d/
 	$(CP_R) plugins/env.inc.php $(DESTDIR)$(pkgdatadir)/plugins/
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(bindir)
@@ -104,7 +103,7 @@ install-web: install-base-dirs
 		sed 's,@log_path@,$(log_path),' etc/logrotate.d/fusionforge-web \
 			> $(DESTDIR)$(sysconfdir)/logrotate.d/fusionforge-web; \
 	fi
-#	TODO: multiple servers support
+#	TODO: multiple servers support?
 #	(e.g. install scm, lists, vhosts and vhosts-extra separately)
 
 install-web-vhosts: install-base-dirs
@@ -114,6 +113,13 @@ install-web-vhosts: install-base-dirs
 install-shell: install-base-dirs
 	$(CP_R) cronjobs/shell $(DESTDIR)$(pkgdatadir)/cronjobs/
 	$(CP_R) post-install.d/shell $(DESTDIR)$(pkgdatadir)/post-install.d/
+
+install-scm: install-base-dirs
+	$(CP_R) cronjobs/scm $(DESTDIR)$(pkgdatadir)/cronjobs/
+	if [ ! -e $(DESTDIR)$(sysconfdir)/cron.d/fusionforge-scm ]; then \
+		sed 's,@bindir@,$(bindir),' etc/cron.d/fusionforge-scm \
+			> $(DESTDIR)$(sysconfdir)/cron.d/fusionforge-scm; \
+	fi
 
 install-mta-postfix: install-base-dirs
 	$(CP_R) post-install.d/mta-postfix $(DESTDIR)$(pkgdatadir)/post-install.d/
@@ -125,7 +131,7 @@ install-lists: install-base-dirs
 	$(CP_R) cronjobs/lists $(DESTDIR)$(pkgdatadir)/cronjobs/
 	$(CP_R) post-install.d/lists $(DESTDIR)$(pkgdatadir)/post-install.d/
 
-install-base: install-base-dirs install-common install-web install-db
+install-base: install-base-dirs install-common install-web install-db install-scm
 
 PLUGINS=$(shell cd plugins/ && find * -maxdepth 0 -type d)
 PLUGINS_INSTALL_TARGETS=$(addprefix install-plugin-,$(PLUGINS))
@@ -165,7 +171,7 @@ uninstall:
 post_source_path:=$(shell forge_get_config source_path 2>/dev/null)
 post_plugins_path:=$(shell forge_get_config plugins_path 2>/dev/null)
 post-install: post-install-base post-install-plugins
-post-install-base: post-install-common post-install-db post-install-web
+post-install-base: post-install-common post-install-db post-install-web post-install-scm
 post-install-common:
 	$(post_source_path)/post-install.d/common/common.sh configure
 post-install-db:
@@ -175,6 +181,8 @@ post-install-web:
 
 post-install-shell:
 	$(post_source_path)/post-install.d/shell/shell.sh configure
+post-install-scm:
+#	nothing yet
 post-install-mta-postfix:
 	$(post_source_path)/post-install.d/mta-postfix/mta-postfix.sh configure
 post-install-mta-exim4:
@@ -182,7 +190,7 @@ post-install-mta-exim4:
 post-install-lists:
 	$(post_source_path)/post-install.d/lists/lists.sh configure
 
-PLUGINS_INSTALLED:=$(shell cd $(post_plugins_path) 2>/dev/null && find * -maxdepth 0 -type d)
+PLUGINS_INSTALLED:=$(shell [ -d "$(post_plugins_path)" ] && cd $(post_plugins_path) && find * -maxdepth 0 -type d)
 PLUGINS_POST_INSTALL_TARGETS=$(addprefix post-install-plugin-,$(PLUGINS_INSTALLED))
 # Not depending on PLUGINS_POST_INSTALL_TARGETS: too many dependencies and non-production plugins
 post-install-plugins:
