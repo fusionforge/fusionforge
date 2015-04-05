@@ -183,7 +183,7 @@ over it to the project's administrator.");
 		$project_name = $project->getUnixName();
 
 		$repo = forge_get_config('repos_path', 'scmbzr') . '/' . $project->getUnixName() ;
-		$unix_group = 'scm_' . $project_name ;
+		$unix_group = $project_name.'_scmrw' ;
 
 		$repo_exists = false ;
 		if (is_dir ($repo)) {

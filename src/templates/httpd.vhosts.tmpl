@@ -7,8 +7,7 @@
 	<Directory ${FF__core__groupdir_prefix}>
 		Options Indexes FollowSymlinks
 		AllowOverride All
-		order allow,deny
-		allow from all
+		Include ${FF__core__config_path}/httpd.conf.d/auth-projects.inc
 	</Directory>
 	Include ${FF__core__config_path}/httpd.conf.d/block-trace.inc
 	Include ${FF__core__config_path}/httpd.conf.d/log.inc

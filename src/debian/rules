@@ -27,6 +27,7 @@ override_dh_auto_install:
 	make install-web         prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-web
 	make install-web-vhosts  prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-web-vhosts
 	make install-shell       prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-shell
+	make install-scm         prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-scm
 	make install-mta-postfix prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-mta-postfix
 	make install-mta-exim4   prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-mta-exim4
 	make install-lists       prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-lists
@@ -59,5 +60,5 @@ override_dh_clean:
 	done
 
 # Needs to be done before 'dpkg-source'
-debian/control: debian/gen_control.sh debian/plugins
+debian/control: debian/gen_control.sh debian/control.in debian/plugins
 	debian/gen_control.sh

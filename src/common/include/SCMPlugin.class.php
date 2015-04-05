@@ -91,6 +91,11 @@ abstract class SCMPlugin extends Plugin {
 				$this->updateRepositoryList($params);
 				break;
 			}
+			case 'scm_regen_apache_auth': {
+				session_set_admin();
+				$this->regenApacheAuth($params);
+				break;
+			}
 			case 'scm_generate_snapshots': { // Optional
 				session_set_admin();
 				$this->generateSnapshots($params);

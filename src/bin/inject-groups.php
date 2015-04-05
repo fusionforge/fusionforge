@@ -34,7 +34,7 @@ db_begin ();
 
 $f = fopen ('groups.txt', 'r') ;
 while (! feof ($f)) {
-        $l = trim (fgets ($f, 1024)) ;
+	$l = trim (fgets ($f, 1024)) ;
 	if ($l == "") { continue ; } ;
 	$array = explode (':', $l) ;
 	$unixname = $array[0] ;
@@ -62,12 +62,11 @@ while (! feof ($f)) {
 	$admin = user_get_object_by_name ('admin') ;
 	session_set_new ($admin->getID ()) ;
 	$r = $g->approve ($admin) ;
-        if (!$r) {
-                print "Error: ". $g->getErrorMessage () . "\n" ;
-                db_rollback () ;
-                exit (1) ;
-        }
-
+	if (!$r) {
+		print "Error: ". $g->getErrorMessage () . "\n" ;
+		db_rollback () ;
+		exit (1) ;
+	}
 }
 fclose ($f);
 
@@ -78,5 +77,3 @@ db_commit () ;
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

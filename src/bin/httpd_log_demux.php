@@ -30,7 +30,7 @@
 if (count($argv) < 3) {
 	echo "Usage: {$argv[0]} dir_template project_pregexp\n";
 	echo "   ex: CustomLog \"||{$argv[0]} /home/logs/%/raw/access.log /([-_a-zA-Z0-9]+)\.yourforge\.tld/\" combined\n";
-        exit(1);
+	exit(1);
 }
 $dir_template   = $argv[1];
 $project_regexp = $argv[2];
@@ -38,21 +38,21 @@ $project_regexp = $argv[2];
 $stdin = fopen('php://stdin', 'r') or die("Can't read standard input.");
 
 while(($line = fgets($stdin)) !== false) {
-  if (!preg_match($project_regexp, $line, $matches)) {
-    error_log("httpd_log_demux: line doesn't match project_pregexp: $line");
-  } else {
-    $project = $matches[1];
-    if (!preg_match('/^[a-z0-9][-a-z0-9_\.]+\z/', $project)) {  // project name, or domain name if DNS alias
-      error_log("httpd_log_demux: project name is invalid: '$project'");
-    } else {
-      $logfile = str_replace('%', $project, $dir_template);
-      $f = fopen($logfile, 'a');
-      if ($f != null) {
-	fwrite($f, $line);
-	fclose($f);
-      }
-    }
-  }
+	if (!preg_match($project_regexp, $line, $matches)) {
+		error_log("httpd_log_demux: line doesn't match project_pregexp: $line");
+	} else {
+		$project = $matches[1];
+		if (!preg_match('/^[a-z0-9][-a-z0-9_\.]+\z/', $project)) {  // project name, or domain name if DNS alias
+			error_log("httpd_log_demux: project name is invalid: '$project'");
+		} else {
+			$logfile = str_replace('%', $project, $dir_template);
+			$f = fopen($logfile, 'a');
+			if ($f != null) {
+				fwrite($f, $line);
+				fclose($f);
+			}
+		}
+	}
 }
 
 fclose($stdin);

@@ -104,6 +104,7 @@ case "$1" in
 	# Enable required modules
 	if [ -x /usr/sbin/a2enmod ]; then
 	    a2enmod version 2>/dev/null || true  # opensuse..
+	    a2enmod macro
 	    a2enmod php5
 	    a2enmod ssl
 	    a2enmod env
@@ -115,7 +116,6 @@ case "$1" in
 	    a2enmod cgi  # ViewVC bootstrap, gitweb, mailman
 	    #a2enmod proxy
 	    #a2enmod proxy_http
-	    a2enmod macro
 	    a2enmod authz_groupfile
 	    a2enmod dav
 	fi

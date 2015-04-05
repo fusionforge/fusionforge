@@ -114,6 +114,19 @@ Description: collaborative development tool - shell accounts (using PostgreSQL)
  database to FusionForge users.
 
 
+Package: fusionforge-scm
+Architecture: all
+Depends: fusionforge-common (=${source:Version}), fusionforge-shell (=${source:Version}), php5-cli, ${misc:Depends}
+Description: collaborative development tool - shell accounts (using PostgreSQL)
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This package manages SCM repositories.
+
+
 Package: fusionforge-mta-postfix
 Architecture: all
 Depends: fusionforge-common (=${source:Version}), postfix, postfix-pgsql, ${misc:Depends}
