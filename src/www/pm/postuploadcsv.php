@@ -119,7 +119,7 @@ if (isset($input_file) && isset($input_file['tmp_name']) &&
 						'dependenton'=>$dependentOn,
 						'notes'=>$cols[11]);
 			}
-			$res = &pm_import_tasks($group_project_id, $tasks);
+    			$res = &pm_import_tasks($group_project_id, $tasks, getIntFromRequest('replace') == 1);
 		}
 	} else {
 		$res['errormessage'] = _('Wrong file type. Only plain CSV file supported');
