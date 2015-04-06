@@ -71,7 +71,7 @@ case $cmd in
 	    case $host in
 		centos7)
 		    chroot $cachedir usermod --expiredate $(date +"%Y-%m-%d" -d "1 year") root
-		    chroot $cachedir yum install -y avahi-autoipd avahi-daemon nscd
+		    chroot $cachedir yum install -y avahi avahi-autoipd nscd
 		    # Fix nscd restart and stalled avahi pid files
 		    rm -rf $cachedir/var/run/
 		    ln -s ../run $cachedir/var/
