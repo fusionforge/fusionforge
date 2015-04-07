@@ -80,3 +80,6 @@ Requires:
 
 %package plugin-sysauthldap
 Requires:
+
+%package plugin-taskboard
+Requires:
