@@ -54,7 +54,7 @@ else
 	yum upgrade -y
     else
 	# Initial installation
-	yum install -y fusionforge fusionforge-shell fusionforge-scm \
+	yum --enablerepo=epel-testing install -y fusionforge fusionforge-shell fusionforge-scm \
 	    fusionforge-plugin-scmgit fusionforge-plugin-scmsvn \
 	    fusionforge-plugin-mediawiki \
 	    fusionforge-plugin-blocks fusionforge-plugin-online_help fusionforge-plugin-taskboard
