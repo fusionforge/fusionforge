@@ -63,7 +63,7 @@ install-config: install-base-dirs
 
 install-common: install-config install-plugin-authbuiltin
 	$(MAKE) -C locale DESTDIR=$(DESTDIR) PREFIX=$(PREFIX) install
-	$(CP_R) VERSION bin common templates lib $(DESTDIR)$(pkgdatadir)/
+	$(CP_R) VERSION bin common templates $(DESTDIR)$(pkgdatadir)/
 	chmod 755 $(DESTDIR)$(pkgdatadir)/bin/ssh_akc.php
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(config_path)/custom/
 	$(CP_R) post-install.d/common $(DESTDIR)$(pkgdatadir)/post-install.d/

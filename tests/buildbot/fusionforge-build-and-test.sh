@@ -64,6 +64,8 @@ if [ $INSTALL_OS == "debian" ]; then
     ssh root@$HOST "apt-get install -y rsync"
 else
     ssh root@$HOST "yum install -y rsync"
+    setup_epel_repo
+    setup_epel_testing_repo
 fi
 rsync -av --delete autoinstall src tests root@$HOST:/usr/src/fusionforge/
 if [ $INSTALL_METHOD = "src" ]; then
