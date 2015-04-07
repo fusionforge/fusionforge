@@ -61,6 +61,8 @@ class ScmBzrTest extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=SCM");
 		$this->clickAndWait("link=Browse Bazaar Repository");
 		$this->selectFrame("id=scmbzr_iframe");
+		$this->assertTextPresent("Browsing (root)");
+		$this->clickAndWait("link=projecta");
 		$this->assertTextPresent("Browsing (root)/projecta");
 		$this->selectFrame("relative=top");
 
@@ -92,6 +94,8 @@ class ScmBzrTest extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=SCM");
 		$this->clickAndWait("link=Browse Bazaar Repository");
 		$this->selectFrame("id=scmbzr_iframe");
+		$this->assertTextPresent("Browsing (root)");
+		$this->clickAndWait("link=projecta");
 		$this->assertTextPresent("Browsing (root)/projecta");
 		$this->assertTextPresent("trunk");
 		$this->clickAndWait("link=trunk");
