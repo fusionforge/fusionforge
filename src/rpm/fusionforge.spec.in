@@ -30,7 +30,7 @@ This metapackage installs a stand-alone FusionForge site.
 make %{?_smp_mflags}
 
 %install
-# List package files automatically by installing separately on relying on 'make install'
+# List package files automatically by installing separately and relying on 'make install'
 # Marking /etc as conffiles and exclude locales (cf. mandatory %%find_lang)
 # Not using recursive dirs listing because that is processed when all
 #   packages are mixed in the common install dir (so using %%dir instead)
