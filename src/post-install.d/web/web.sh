@@ -160,11 +160,6 @@ case "$1" in
 	;;
 
     purge)
-	# note: can't be called from Debian's postrm - rely on ucfq(1)
-	cd $source_path/templates/
-	for i in httpd.conf $(ls httpd.conf.d/*); do
-	    rm -f $config_path/$i
-	done
 	;;
 
     *)
