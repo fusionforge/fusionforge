@@ -116,6 +116,8 @@ install-shell: install-base-dirs
 
 install-scm: install-base-dirs
 	$(CP_R) cronjobs/scm $(DESTDIR)$(pkgdatadir)/cronjobs/
+	$(INSTALL) -d -m 00755 $(DESTDIR)$(sysconfdir)/xinetd.d/
+	$(CP_R) etc/xinetd.d/fusionforge-scm $(DESTDIR)$(sysconfdir)/xinetd.d/
 	if [ ! -e $(DESTDIR)$(sysconfdir)/cron.d/fusionforge-scm ]; then \
 		sed 's,@bindir@,$(bindir),' etc/cron.d/fusionforge-scm \
 			> $(DESTDIR)$(sysconfdir)/cron.d/fusionforge-scm; \
