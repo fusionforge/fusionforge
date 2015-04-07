@@ -46,5 +46,5 @@ PATH=@bindir@:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 # this cronjob send a mail to the admin with all news that have been posted less than 30 days and that have not be validated.
 # Daily mail for not approved news
-30 17 * * * root forge_run_job db/get_news_notapproved.pl
+30 17 * * * root forge_run_job db/get_news_notapproved.php
 
