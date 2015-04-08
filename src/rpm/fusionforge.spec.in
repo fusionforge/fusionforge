@@ -176,7 +176,8 @@ mailing-lists, SCM repository, forums, support request helper,
 web/FTP hosting, release management, etc. All these services are
 integrated into one web site and managed through a web interface.
 
-This package manages SCM repositories.
+This package contains the jobs to manage SCM repositories.
+It should be installed on only one server in your infrastructure.
 %files scm -f scm.rpmfiles
 
 
