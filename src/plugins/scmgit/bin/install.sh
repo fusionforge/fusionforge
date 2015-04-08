@@ -28,7 +28,7 @@ case "$1" in
 		}
 		EOF
 	    fi
-	    service xinetd restart
+	    service xinetd restart || true
 	fi
 
 	# rsync access

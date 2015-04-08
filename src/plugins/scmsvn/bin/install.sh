@@ -28,7 +28,7 @@ case "$1" in
 		}
 		EOF
 	    fi
-	    service xinetd restart
+	    service xinetd restart || true
 	elif [ -x /usr/sbin/update-inetd ]; then
 	    update-inetd --remove svn || true
             update-inetd --add  "svn stream tcp nowait.400 scm-gforge /usr/bin/svnserve svnserve -i -r $scmsvn_serve_root"
