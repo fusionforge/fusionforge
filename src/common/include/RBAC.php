@@ -572,7 +572,7 @@ abstract class BaseRole extends Error {
 
 		case 'tracker':
 			if ($this->hasPermission('tracker_admin', artifacttype_get_groupid($reference))) {
-				return 5 | $value ;
+				return 31 | $value ;
 			} elseif (!$this->hasPermission('project_read', artifacttype_get_groupid($reference))) {
 				return 0;
 			}
@@ -580,7 +580,7 @@ abstract class BaseRole extends Error {
 			break ;
 		case 'new_tracker':
 			if ($this->hasPermission('tracker_admin', $reference)) {
-				return 5 | $value ;
+				return 31 | $value ;
 			} elseif (!$this->hasPermission('project_read', $reference)) {
 				return 0;
 			}
