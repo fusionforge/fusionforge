@@ -135,7 +135,8 @@ install-lists: install-base-dirs
 
 install-base: install-base-dirs install-common install-web install-db install-scm
 
-PLUGINS=$(shell cd plugins/ && find * -maxdepth 0 -type d)
+# Select only "valid" plugins for 'make install'
+PLUGINS=$(shell grep 'plugin_status\s=\svalid' plugins/*/etc/*.ini | sed 's,plugins/\([^/]*\)/.*,\1,')
 PLUGINS_INSTALL_TARGETS=$(addprefix install-plugin-,$(PLUGINS))
 install-plugins: $(PLUGINS_INSTALL_TARGETS)
 
