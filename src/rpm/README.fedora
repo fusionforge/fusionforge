@@ -9,23 +9,9 @@ You may also need to re-run these manually in case the initial
 installation fails (e.g. you configured a remote database which got
 down during install).
 
-For a FusionForge main package, use:
+You can run all the post-install scripts for installed components
+using:
 
-  /usr/share/fusionforge/post-install.d/<pkg_name>/<pkg_name>.sh configure
-
-and for plugins use:
-
-  /usr/share/fusionforge/post-install.d/common/plugin.sh <plugin_name> configure
-
-E.g.:
-
-  /usr/share/fusionforge/post-install.d/common/common.sh configure
-  /usr/share/fusionforge/post-install.d/db/db.sh configure
-  /usr/share/fusionforge/post-install.d/web/web.sh configure
-  /usr/share/fusionforge/post-install.d/shell/shell.sh configure
-  /usr/share/fusionforge/post-install.d/mta-postfix/mta-postfix.sh configure
-  /usr/share/fusionforge/post-install.d/common/plugin.sh scmgit configure
-  /usr/share/fusionforge/post-install.d/common/plugin.sh scmsvn configure
-  ...
+  /usr/share/fusionforge/bin/post-install.sh
 
 Post-install scripts are idempotent and can safely be run multiple times.
