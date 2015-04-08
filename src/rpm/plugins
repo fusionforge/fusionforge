@@ -1,8 +1,8 @@
 %package plugin-scmgit
-Requires: git, gitweb
+Requires: git, gitweb, xinetd, rsync
 
 %package plugin-scmsvn
-Requires: subversion, viewvc, python-pycurl, augeas
+Requires: subversion, viewvc, python-pycurl, xinetd, rsync, augeas
 
 %package plugin-scmbzr
 Requires: bzr, mod_wsgi, loggerhead

@@ -168,7 +168,7 @@ fi
 
 %package scm
 Summary: Collaborative development tool - shell accounts (using PostgreSQL)
-Requires: %{name}-common = %{version}-%{release}, %{name}-shell = %{version}-%{release}
+Requires: %{name}-common = %{version}-%{release}, %{name}-shell = %{version}-%{release}, xinetd, rsync
 %description scm
 FusionForge provides many tools to aid collaboration in a
 development project, such as bug-tracking, task management,

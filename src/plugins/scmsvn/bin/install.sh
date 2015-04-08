@@ -12,10 +12,9 @@ case "$1" in
 	scmsvn_repos_path=$(forge_get_config repos_path scmsvn)
 	scmsvn_serve_root=$(forge_get_config serve_root scmsvn)
 
-	echo "Modifying (x)inetd for Subversion server"
-	if [ -d /etc/xinetd.d/ ]; then
-	    if [ ! -e /etc/xinetd.d/fusionforge-plugin-scmsvn ]; then
-		cat > /etc/xinetd.d/fusionforge-plugin-scmsvn <<-EOF
+	echo "Modifying xinetd for Subversion server"
+	if [ ! -e /etc/xinetd.d/fusionforge-plugin-scmsvn ]; then
+	    cat > /etc/xinetd.d/fusionforge-plugin-scmsvn <<-EOF
 		service svn
 		{
 			port			= 3690
@@ -27,12 +26,8 @@ case "$1" in
 			server_args		= -i -r $scmsvn_serve_root
 		}
 		EOF
-	    fi
-	    service xinetd restart || true
-	elif [ -x /usr/sbin/update-inetd ]; then
-	    update-inetd --remove svn || true
-            update-inetd --add  "svn stream tcp nowait.400 scm-gforge /usr/bin/svnserve svnserve -i -r $scmsvn_serve_root"
 	fi
+	service xinetd restart
 
 	# rsync access
 	if ! grep -q '^use chroot' /etc/rsyncd.conf 2>/dev/null; then

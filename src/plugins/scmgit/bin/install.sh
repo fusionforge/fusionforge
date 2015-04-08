@@ -13,10 +13,9 @@ case "$1" in
     configure)
 	scmgit_repos_path=$(forge_get_config repos_path scmgit)
 
-	echo "Modifying (x)inetd for Subversion server"
-	if [ -d /etc/xinetd.d/ ]; then
-	    if [ ! -e /etc/xinetd.d/fusionforge-plugin-scmgit ]; then
-		cat > /etc/xinetd.d/fusionforge-plugin-scmgit <<-EOF
+	echo "Modifying xinetd for Git server"
+	if [ ! -e /etc/xinetd.d/fusionforge-plugin-scmgit ]; then
+	    cat > /etc/xinetd.d/fusionforge-plugin-scmgit <<-EOF
 		service git
 		{
 		    port            = 9418
@@ -27,9 +26,8 @@ case "$1" in
 		    server_args     = daemon --inetd --export-all --base-path=$scmgit_repos_path
 		}
 		EOF
-	    fi
-	    service xinetd restart || true
 	fi
+	service xinetd restart
 
 	# rsync access
 	if ! grep -q '^use chroot' /etc/rsyncd.conf 2>/dev/null; then
