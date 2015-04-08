@@ -4,7 +4,6 @@
 source_path=$(forge_get_config source_path)
 data_path=$(forge_get_config data_path)
 plugindir=$(forge_get_config plugins_path)/mediawiki
-extraconfigdirs=$(forge_get_config extra_config_dirs)
 
 mediawikidir=$( \
     (ls -d /usr/share/mediawiki* | grep -v '-extensions' 2>/dev/null || echo '/usr/share/mediawiki') \
@@ -21,8 +20,10 @@ upgrade_mediawikis () {
 
 case "$1" in
     configure)
-        # adapt the ini file
-        sed -i -e "s@^src_path.*@src_path = $mediawikidir@" $extraconfigdirs/mediawiki.ini
+	# Default value for mediawiki.ini:src_path:
+	ln -nfs $mediawikidir                      $plugindir/src_path
+
+	# Symlinks for integration in FusionForge web frontend
         ln -nfs $mediawikidir/api.php              $plugindir/www/
         ln -nfs $mediawikidir/extensions           $plugindir/www/
         ln -nfs $mediawikidir/img_auth.php         $plugindir/www/
