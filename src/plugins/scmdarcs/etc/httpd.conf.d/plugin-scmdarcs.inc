@@ -5,5 +5,4 @@ Alias ${FF__core__url_prefix}anonscm/darcs ${FF__scmdarcs__repos_path}
 
 <Directory ${FF__core__plugins_path}/scmdarcs/cgi-bin>
   SetEnv DARCSWEB_CONFPATH ${FF__core__config_path}/plugins/scmdarcs/
-e their variability
 </Directory>
