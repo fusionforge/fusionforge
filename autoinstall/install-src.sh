@@ -32,8 +32,8 @@ if [ -e /etc/debian_version ]; then
     apt-get install -y make gettext php5-cli php5-pgsql php-htmlpurifier \
 	libapache2-mpm-itk libapache2-mod-svn \
 	apache2 postgresql libnss-pgsql2 unscd \
-	subversion augeas-tools viewvc python-pycurl git \
-	mediawiki xinetd \
+	subversion augeas-tools viewvc python-pycurl git xinetd \
+	mediawiki \
 	python-moinmoin libapache2-mod-wsgi python-psycopg2 \
 	unoconv poppler-utils
     if ! dpkg-vendor --is Ubuntu; then
