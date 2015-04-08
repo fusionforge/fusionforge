@@ -212,6 +212,7 @@ EOF
 		yum install -y ~/rpmbuild/RPMS/noarch/mediawiki-[0-9]*.rpm
 	    fi
 
+	    yum --enablerepo=epel -y install php-tidy
 	    # php-htmlpurifier-htmlpurifier Requires, available in EPEL6 but not EPEL7
 	    DEPS="php-pear"
 	    REMOVEDEPS=$DEPS
