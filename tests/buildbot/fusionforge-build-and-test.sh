@@ -93,7 +93,7 @@ fi
 retcode=0
 echo "Run phpunit test on $HOST"
 #ssh root@$HOST "TESTGLOB='func/50_PluginsScmBzr/*' /usr/src/fusionforge/autoinstall/vnc-run-testsuite.sh /usr/src/fusionforge/autoinstall/run-testsuite.sh $INSTALL_METHOD/$INSTALL_OS" || retcode=$?
-ssh root@$HOST "/usr/src/fusionforge/autoinstall/vnc-run-testsuite.sh /usr/src/fusionforge/autoinstall/run-testsuite.sh $INSTALL_METHOD/$INSTALL_OS $@" || retcode=$?
+ssh root@$HOST "/usr/src/fusionforge/autoinstall/vnc-run-testsuite.sh /usr/src/fusionforge/autoinstall/run-testsuite.sh $INSTALL_METHOD/$INSTALL_OS $*" || retcode=$?
 
 copy_logs
 
