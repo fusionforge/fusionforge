@@ -129,7 +129,7 @@ EOF
 
 echo "Starting Selenium"
 killall -9 java || true
-timeout=300
+timeout=30
 PATH=/usr/lib/iceweasel:/usr/lib64/firefox:$PATH LANG=C java -jar /usr/share/selenium/selenium-server.jar -trustAllSSLCertificates -singleWindow &
 pid=$!
 i=0
