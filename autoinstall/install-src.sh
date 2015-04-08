@@ -44,8 +44,8 @@ else
     backports_rpm
     yum install -y gettext php-cli php-pgsql php-process php-mbstring \
 	httpd mod_dav_svn mod_ssl postgresql-server nscd \
-	subversion augeas viewvc python-pycurl git gitweb \
-	mediawiki119 xinetd \
+	subversion augeas viewvc python-pycurl git gitweb xinetd \
+	mediawiki119 \
 	moin mod_wsgi python-psycopg2 \
 	unoconv poppler-utils
     yum --enablerepo=epel-testing install -y httpd-itk
