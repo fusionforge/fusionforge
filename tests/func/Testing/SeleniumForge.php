@@ -85,6 +85,15 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 				$text);
 	}
 
+	protected function openWithOneRetry($url) {
+		try {
+			$this->open($url);
+		}
+		catch (Exception $e) {
+			$this->open($url);
+		}
+	}
+
 	/**
 	 * Method that is called after Selenium actions.
 	 *
