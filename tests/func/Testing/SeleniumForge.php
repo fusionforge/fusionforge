@@ -110,7 +110,8 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 
 	protected function clickAndWait($link)
 	{
-		$this->clickAndWait($link);
+		$this->click($link);
+		$this->waitForPageToLoad();
 	}
 
 	protected function waitForTextPresent($text)
