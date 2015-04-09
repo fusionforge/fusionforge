@@ -57,6 +57,9 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 		if ($ret >= 120) {
 			system("cd $t && GIT_SSL_NO_VERIFY=true $timeout git clone --quiet $p", $ret);
 		}
+		if ($ret >= 120) {
+			system("cd $t && GIT_SSL_NO_VERIFY=true $timeout git clone --quiet $p", $ret);
+		}
 		$this->assertEquals(0, $ret);
 
 		system("echo 'this is a simple text' > $t/projecta/mytext.txt");
@@ -66,6 +69,9 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 		$this->assertEquals(0, $ret);
 
 		system("cd $t/projecta && GIT_SSL_NO_VERIFY=true $timeout git push --quiet --all", $ret);
+		if ($ret >= 120) {
+			system("cd $t/projecta && GIT_SSL_NO_VERIFY=true $timeout git push --quiet --all", $ret);
+		}
 		if ($ret >= 120) {
 			system("cd $t/projecta && GIT_SSL_NO_VERIFY=true $timeout git push --quiet --all", $ret);
 		}

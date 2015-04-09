@@ -29,6 +29,9 @@ class ScmSvnWebDAVTest extends FForge_SeleniumTestCase
 		if ($ret == 124) {	# retry once if we get a timeout
 			system("cd $dir && timeout 15s $command", $ret);
 		}
+		if ($ret == 124) {	# retry once if we get a timeout
+			system("cd $dir && timeout 15s $command", $ret);
+		}
 		ob_flush();
 		$this->assertEquals(0, $ret);
 	}
