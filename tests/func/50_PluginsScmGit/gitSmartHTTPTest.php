@@ -85,7 +85,7 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 		$this->selectFrame("relative=top");
 
         // Check gitweb directly
-        $this->open("http://scm.".HOST.ROOT."/anonscm/gitweb/?p=projecta/projecta.git");
+        $this->openWithOneRetry("http://scm.".HOST.ROOT."/anonscm/gitweb/?p=projecta/projecta.git");
 		$this->assertElementPresent("//.[@class='page_footer']");
 		$this->assertTextPresent("projecta.git");
 		$this->clickAndWait("link=projecta.git");
@@ -93,7 +93,7 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 		$this->assertTextPresent("Adding file");
 
         // Disable anonymous access to gitweb
-		$this->open(ROOT);
+		$this->openWithOneRetry(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->click("link=Admin");
 		$this->waitForPageToLoad("30000");
@@ -109,17 +109,17 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 		$this->waitSystasks();
 
         // Check that gitweb now fails
-        $this->open("http://scm.".HOST.ROOT."/anonscm/gitweb/?p=projecta/projecta.git");
+        $this->openWithOneRetry("http://scm.".HOST.ROOT."/anonscm/gitweb/?p=projecta/projecta.git");
 		$this->assertElementPresent("//.[@class='page_footer']");
 		$this->assertTextNotPresent("projecta.git");
 
         // Now try to use the authenticated gitweb
-        $this->open("http://".FORGE_ADMIN_USERNAME.":".FORGE_ADMIN_PASSWORD."@scm.".HOST.ROOT."/authscm/".FORGE_ADMIN_USERNAME."/gitweb/?p=projecta/projecta.git");
+        $this->openWithOneRetry("http://".FORGE_ADMIN_USERNAME.":".FORGE_ADMIN_PASSWORD."@scm.".HOST.ROOT."/authscm/".FORGE_ADMIN_USERNAME."/gitweb/?p=projecta/projecta.git");
 		$this->assertElementPresent("//.[@class='page_footer']");
 		$this->assertTextPresent("projecta.git");
 
 		// Also check via the standard page
-		$this->open(ROOT);
+		$this->openWithOneRetry(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
 		$this->clickAndWait("link=Browse main git repository");
