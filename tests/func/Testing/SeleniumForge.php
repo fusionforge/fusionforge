@@ -132,8 +132,8 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		ob_flush();
 	}
 
-	function runCommandTimeout($dir, $command) {
-		$cmd = "cd $dir && timeout 15s $command";
+	function runCommandTimeout($dir, $command, $env='') {
+		$cmd = "cd $dir && $env timeout 15s $command";
 		system($cmd, $ret);
 		if ($ret == 124) {	# retry once if we get a timeout
 			system($cmd, $ret);
