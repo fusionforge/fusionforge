@@ -49,33 +49,18 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 		$p = $this->getText("//tt[contains(.,'git clone http') and contains(.,'".FORGE_ADMIN_USERNAME."@')]");
 		$p = preg_replace(",^git clone ,", "", $p);
 		$p = preg_replace(",@,", ":".FORGE_ADMIN_PASSWORD."@", $p);
-		$timeout = "timeout 15s";
 
 		// Create a local clone, add stuff, push it to the repo
 		$t = exec("mktemp -d /tmp/gitTest.XXXXXX");
-		system("cd $t && GIT_SSL_NO_VERIFY=true $timeout git clone --quiet $p", $ret);
-		if ($ret >= 120) {
-			system("cd $t && GIT_SSL_NO_VERIFY=true $timeout git clone --quiet $p", $ret);
-		}
-		if ($ret >= 120) {
-			system("cd $t && GIT_SSL_NO_VERIFY=true $timeout git clone --quiet $p", $ret);
-		}
-		$this->assertEquals(0, $ret);
+		$this->runCommandTimeout($t, "GIT_SSL_NO_VERIFY=true git clone --quiet $p");
 
 		system("echo 'this is a simple text' > $t/projecta/mytext.txt");
-		system("cd $t/projecta && $timeout git add mytext.txt && $timeout git commit --quiet -a -m'Adding file'", $ret);
+		system("cd $t/projecta && git add mytext.txt && git commit --quiet -a -m'Adding file'", $ret);
 		system("echo 'another simple text' >> $t/projecta/mytext.txt");
 		system("cd $t/projecta && git commit --quiet -a -m'Modifying file'", $ret);
 		$this->assertEquals(0, $ret);
 
-		system("cd $t/projecta && GIT_SSL_NO_VERIFY=true $timeout git push --quiet --all", $ret);
-		if ($ret >= 120) {
-			system("cd $t/projecta && GIT_SSL_NO_VERIFY=true $timeout git push --quiet --all", $ret);
-		}
-		if ($ret >= 120) {
-			system("cd $t/projecta && GIT_SSL_NO_VERIFY=true $timeout git push --quiet --all", $ret);
-		}
-		$this->assertEquals(0, $ret);
+		$this->runCommandTimeout("$t/projecta", "GIT_SSL_NO_VERIFY=true git push --quiet --all");
 
 		// Check that the changes appear in gitweb
 		$this->open(ROOT);
