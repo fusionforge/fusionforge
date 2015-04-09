@@ -1,5 +1,7 @@
+PATH=@bindir@:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
 # Cleanup stale (>=3 days old) SVN/viewcvs temp files
 00 6 * * *  root  find /tmp -maxdepth 1 -name "*" -type f -mtime +3 -exec rm -rf {} \;
 
 # Kill old SVN processes
-0 * * * *	root	for pid in $(PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin pidof svnserve); do etimes=$(ps -oetimes -p$pid | tail -n+2); if [ ${etimes:-0} -gt 86400 ]; then kill -9 $pid; fi; done
+0 * * * *	root	for pid in $(pidof svnserve); do etimes=$(ps -oetimes -p$pid | tail -n+2); if [ ${etimes:-0} -gt 86400 ]; then kill -9 $pid; fi; done

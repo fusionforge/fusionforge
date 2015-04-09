@@ -118,7 +118,7 @@ function account_groupnamevalid($name) {
 	$regExpReservedGroupNames = "^(www[0-9]?|cvs[0-9]?|shell[0-9]?|ftp[0-9]?|"
 		. "irc[0-9]?|news[0-9]?|mail[0-9]?|ns[0-9]?|download[0-9]?|pub|users|"
 		. "compile|lists|slayer|orbital|tokyojoe|webdev|projects|cvs|monitor|"
-		. "mirrors?)$";
+		. "mirrors?|.*_scmro|.*_scmrw)$";
 	if(preg_match("/$regExpReservedGroupNames/i",$name)) {
 		$GLOBALS['register_error'] = _('Name is reserved for DNS purposes.');
 		return 0;

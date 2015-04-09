@@ -7,16 +7,40 @@ if [ $(id -u) != 0 ] ; then
     echo "You must be root to run this"
 fi
 
-scmsvn_serve_root=$(forge_get_config serve_root scmsvn)
-
 case "$1" in
     configure)
-        echo "Modifying inetd for Subversion server"
-	if [ -x /usr/sbin/update-inetd ]; then
-	    update-inetd --remove svn || true
-            update-inetd --add  "svn stream tcp nowait.400 scm-gforge /usr/bin/svnserve svnserve -i -r $scmsvn_serve_root"
-	else
-	    echo "TODO: xinetd support"
+	scmsvn_repos_path=$(forge_get_config repos_path scmsvn)
+	scmsvn_serve_root=$(forge_get_config serve_root scmsvn)
+
+	echo "Modifying xinetd for Subversion server"
+	if [ ! -e /etc/xinetd.d/fusionforge-plugin-scmsvn ]; then
+	    cat > /etc/xinetd.d/fusionforge-plugin-scmsvn <<-EOF
+		service svn
+		{
+			port			= 3690
+			socket_type		= stream
+			protocol		= tcp
+			wait			= no
+			user			= nobody
+			server			= /usr/bin/svnserve
+			server_args		= -i -r $scmsvn_serve_root
+		}
+		EOF
+	fi
+	service xinetd restart
+
+	# rsync access
+	if ! grep -q '^use chroot' /etc/rsyncd.conf 2>/dev/null; then
+	    touch /etc/rsyncd.conf
+	    echo 'use chroot=no' | sed -i -e '1ecat' /etc/rsyncd.conf
+	fi
+	sed -i -e 's/^use chroot.*/use chroot=no/' /etc/rsyncd.conf
+	if ! grep -q '\[svn\]' /etc/rsyncd.conf; then
+	    cat <<-EOF >> /etc/rsyncd.conf
+		[svn]
+		comment=SVN source repositories
+		path=$scmsvn_repos_path
+		EOF
 	fi
 
 	# Enable required modules
@@ -39,6 +63,7 @@ case "$1" in
 	;;
 
     remove)
+	rm -f /etc/xinetd.d/fusionforge-plugin-scmsvn
 	if [ -x /usr/sbin/update-inetd ]; then
 	    update-inetd --remove svn || true
 	fi

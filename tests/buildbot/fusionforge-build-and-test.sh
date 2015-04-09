@@ -13,6 +13,7 @@ get_config
 prepare_workspace
 
 export HOST=$1
+shift
 if [ -z "$HOST" ]; then
     echo "Usage: $0 vm_hostname"
     exit 1
@@ -47,8 +48,21 @@ case $HOST in
 	;;
 esac
 
-INSTALL_METHOD=$2
-if [ -z "$INSTALL_METHOD" ]; then INSTALL_METHOD='src'; fi
+INSTALL_METHOD=$1
+case $INSTALL_METHOD in
+    src)
+	shift
+	;;
+    deb)
+	shift
+	;;
+    rpm)
+	shift
+	;;
+    *)
+	INSTALL_METHOD=src
+	;;
+esac
 
 destroy_vm_if_not_kept $HOST
 start_vm_if_not_kept $HOST
@@ -79,7 +93,7 @@ fi
 retcode=0
 echo "Run phpunit test on $HOST"
 #ssh root@$HOST "TESTGLOB='func/50_PluginsScmBzr/*' /usr/src/fusionforge/autoinstall/vnc-run-testsuite.sh /usr/src/fusionforge/autoinstall/run-testsuite.sh $INSTALL_METHOD/$INSTALL_OS" || retcode=$?
-ssh root@$HOST "/usr/src/fusionforge/autoinstall/vnc-run-testsuite.sh /usr/src/fusionforge/autoinstall/run-testsuite.sh $INSTALL_METHOD/$INSTALL_OS" || retcode=$?
+ssh root@$HOST "/usr/src/fusionforge/autoinstall/vnc-run-testsuite.sh /usr/src/fusionforge/autoinstall/run-testsuite.sh $INSTALL_METHOD/$INSTALL_OS $*" || retcode=$?
 
 copy_logs
 

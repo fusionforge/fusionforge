@@ -110,16 +110,18 @@ install-web-vhosts: install-base-dirs
 	$(CP_R) cronjobs/web-vhosts $(DESTDIR)$(pkgdatadir)/cronjobs/
 #	TODO: only install 40-vhosts-extra.conf and httpd.vhosts with this module
 
-install-shell: install-base-dirs
-	$(CP_R) cronjobs/shell $(DESTDIR)$(pkgdatadir)/cronjobs/
-	$(CP_R) post-install.d/shell $(DESTDIR)$(pkgdatadir)/post-install.d/
-
 install-scm: install-base-dirs
 	$(CP_R) cronjobs/scm $(DESTDIR)$(pkgdatadir)/cronjobs/
+	$(INSTALL) -d -m 00755 $(DESTDIR)$(sysconfdir)/xinetd.d/
+	$(CP_R) etc/xinetd.d/fusionforge-scm $(DESTDIR)$(sysconfdir)/xinetd.d/
 	if [ ! -e $(DESTDIR)$(sysconfdir)/cron.d/fusionforge-scm ]; then \
 		sed 's,@bindir@,$(bindir),' etc/cron.d/fusionforge-scm \
 			> $(DESTDIR)$(sysconfdir)/cron.d/fusionforge-scm; \
 	fi
+
+install-shell: install-base-dirs
+	$(CP_R) cronjobs/shell $(DESTDIR)$(pkgdatadir)/cronjobs/
+	$(CP_R) post-install.d/shell $(DESTDIR)$(pkgdatadir)/post-install.d/
 
 install-mta-postfix: install-base-dirs
 	$(CP_R) post-install.d/mta-postfix $(DESTDIR)$(pkgdatadir)/post-install.d/
@@ -133,7 +135,8 @@ install-lists: install-base-dirs
 
 install-base: install-base-dirs install-common install-web install-db install-scm
 
-PLUGINS=$(shell cd plugins/ && find * -maxdepth 0 -type d)
+# Select only "valid" plugins for 'make install'
+PLUGINS=$(shell grep -l '^plugin_status\s=\svalid' plugins/*/etc/*.ini | sed 's,plugins/\([^/]*\)/.*,\1,')
 PLUGINS_INSTALL_TARGETS=$(addprefix install-plugin-,$(PLUGINS))
 install-plugins: $(PLUGINS_INSTALL_TARGETS)
 
@@ -170,7 +173,8 @@ uninstall:
 # not relying on 'prefix' for post-install (for no-install/dev setups)
 post_source_path:=$(shell forge_get_config source_path 2>/dev/null)
 post_plugins_path:=$(shell forge_get_config plugins_path 2>/dev/null)
-post-install: post-install-base post-install-plugins
+post-install:
+	$(post_source_path)/bin/post-install.sh
 post-install-base: post-install-common post-install-db post-install-web post-install-scm
 post-install-common:
 	$(post_source_path)/post-install.d/common/common.sh configure
@@ -178,11 +182,11 @@ post-install-db:
 	$(post_source_path)/post-install.d/db/db.sh configure
 post-install-web:
 	$(post_source_path)/post-install.d/web/web.sh configure
+post-install-scm:
+#	nothing yet
 
 post-install-shell:
 	$(post_source_path)/post-install.d/shell/shell.sh configure
-post-install-scm:
-#	nothing yet
 post-install-mta-postfix:
 	$(post_source_path)/post-install.d/mta-postfix/mta-postfix.sh configure
 post-install-mta-exim4:

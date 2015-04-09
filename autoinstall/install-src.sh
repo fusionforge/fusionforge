@@ -32,7 +32,7 @@ if [ -e /etc/debian_version ]; then
     apt-get install -y make gettext php5-cli php5-pgsql php-htmlpurifier \
 	libapache2-mpm-itk libapache2-mod-svn \
 	apache2 postgresql libnss-pgsql2 unscd \
-	subversion augeas-tools viewvc python-pycurl git \
+	subversion augeas-tools viewvc python-pycurl git xinetd \
 	mediawiki \
 	python-moinmoin libapache2-mod-wsgi python-psycopg2 \
 	unoconv poppler-utils
@@ -44,7 +44,7 @@ else
     backports_rpm
     yum install -y gettext php-cli php-pgsql php-process php-mbstring \
 	httpd mod_dav_svn mod_ssl postgresql-server nscd \
-	subversion augeas viewvc python-pycurl git gitweb \
+	subversion augeas viewvc python-pycurl git gitweb xinetd \
 	mediawiki119 \
 	moin mod_wsgi python-psycopg2 \
 	unoconv poppler-utils
@@ -58,10 +58,7 @@ fi
         install-plugin-scmsvn install-plugin-scmgit \
         install-plugin-blocks install-plugin-mediawiki install-plugin-moinmoin \
         install-plugin-online_help install-plugin-taskboard
-    make post-install-base post-install-shell post-install-scm \
-        post-install-plugin-scmsvn post-install-plugin-scmgit \
-        post-install-plugin-blocks post-install-plugin-mediawiki post-install-plugin-moinmoin \
-        post-install-plugin-online_help post-install-plugin-taskboard
+    make post-install
 )
 
 # Dump clean DB

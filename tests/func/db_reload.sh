@@ -45,7 +45,7 @@ stop_database () {
     fi
 
     # Work-around http://bugs.debian.org/759725
-    if [ -x /bin/systemctl ]; then
+    if [ -f /etc/debian_version -a -x /bin/systemctl ]; then
         sleep 1  # bleh
     fi
 }

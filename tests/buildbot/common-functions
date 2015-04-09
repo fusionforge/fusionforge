@@ -45,7 +45,6 @@ prepare_workspace()
 setup_epel_repo()
 {
 if [ -z "$HOST" ] ; then  echo "HOST undefined" ;exit 1; fi
-HOST=$1
 # EPEL REPO
 if [ ! -z "$EPEL_REPO" ] ; then
         echo "Installing specific EPEL REPO $EPEL_REPO"
@@ -79,7 +78,6 @@ fi
 setup_epel_testing_repo()
 {
 if [ -z "$HOST" ] ; then  echo "HOST undefined" ;exit 1; fi
-HOST=$1
 # EPEL Testing REPO
 echo "Installing EPEL Testing REPO"
 ssh root@$HOST "cat > /etc/yum.repos.d/epel-testing.repo" <<-EOF
