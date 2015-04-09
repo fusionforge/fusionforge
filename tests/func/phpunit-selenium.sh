@@ -151,6 +151,7 @@ fi
 if [ $i = $timeout ] || ! kill -0 $pid 2>/dev/null; then
     echo "Selenium failed to start!"
     netstat -tnl
+    kill -9 $pid
     exit 1
 fi
 
