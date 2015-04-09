@@ -132,6 +132,19 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		ob_flush();
 	}
 
+	function runCommandTimeout($dir, $command) {
+		$cmd = "cd $dir && timeout 15s $command";
+		system($cmd, $ret);
+		if ($ret == 124) {	# retry once if we get a timeout
+			system($cmd, $ret);
+		}
+		if ($ret == 124) {	# retry a second time if we get a timeout again
+			system($cmd, $ret);
+		}
+		$this->assertEquals(0, $ret);  # Give up
+		ob_flush();
+	}
+
 	protected function db($sql)
 	{
 		system("echo \"$sql\" | psql -q -Upostgres ".DB_NAME);
