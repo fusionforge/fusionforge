@@ -1521,6 +1521,7 @@ class Group extends Error {
 		$this->normalizeAllRoles();
 		$hook_params = array();
 		$hook_params['group_id'] = $this->getID();
+		$hook_params['val'] = $val;
 		plugin_hook("group_plugin_use", $hook_params);
 		return $res;
 	}

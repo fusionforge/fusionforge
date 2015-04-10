@@ -427,13 +427,9 @@ control over it to the project's administrator.");
 		$output = '';
 
 		$project = $this->checkParams($params);
-		if (!$project) {
-			return false;
-		}
-
-		if (!$project->usesPlugin($this->name)) {
-			return false;
-		}
+		if (!$project) return false;
+		if (!$project->isActive()) return false;
+		if (!$project->usesPlugin($this->name)) return false;
 
 		$project_name = $project->getUnixName();
 		$unix_group_ro = $project_name . '_scmro';

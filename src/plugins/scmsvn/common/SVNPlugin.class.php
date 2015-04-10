@@ -272,13 +272,9 @@ some control over it to the project's administrator.");
 
 	function createOrUpdateRepo($params) {
 		$project = $this->checkParams($params);
-		if (!$project) {
-			return false;
-		}
-
-		if (! $project->usesPlugin($this->name)) {
-			return false;
-		}
+		if (!$project) return false;
+		if (!$project->isActive()) return false;
+		if (!$project->usesPlugin($this->name)) return false;
 
 		$repo_prefix = forge_get_config('repos_path', 'scmsvn');
 		if (!is_dir($repo_prefix) && !mkdir($repo_prefix, 0755, true)) {
