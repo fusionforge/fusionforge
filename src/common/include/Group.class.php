@@ -582,11 +582,6 @@ class Group extends Error {
 			$homepage = util_make_url('/projects/' . $this->getUnixName() . '/');
 		}
 
-		if (strlen(htmlspecialchars($short_description))<10) {
-			$this->setError(_('Describe in a more comprehensive manner your project.'));
-			return false;
-		}
-
 		db_begin();
 
 		//XXX not yet actived logo_image_id='$logo_image_id',
@@ -1526,6 +1521,7 @@ class Group extends Error {
 		$this->normalizeAllRoles();
 		$hook_params = array();
 		$hook_params['group_id'] = $this->getID();
+		$hook_params['val'] = $val;
 		plugin_hook("group_plugin_use", $hook_params);
 		return $res;
 	}

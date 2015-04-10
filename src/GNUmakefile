@@ -63,10 +63,9 @@ install-config: install-base-dirs
 
 install-common: install-config install-plugin-authbuiltin
 	$(MAKE) -C locale DESTDIR=$(DESTDIR) PREFIX=$(PREFIX) install
-	$(CP_R) VERSION bin common templates lib $(DESTDIR)$(pkgdatadir)/
+	$(CP_R) VERSION bin common templates $(DESTDIR)$(pkgdatadir)/
 	chmod 755 $(DESTDIR)$(pkgdatadir)/bin/ssh_akc.php
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(config_path)/custom/
-	$(CP_R) cronjobs/scm $(DESTDIR)$(pkgdatadir)/cronjobs/  # no dedicated 'scm' package now
 	$(CP_R) post-install.d/common $(DESTDIR)$(pkgdatadir)/post-install.d/
 	$(CP_R) plugins/env.inc.php $(DESTDIR)$(pkgdatadir)/plugins/
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(bindir)
@@ -93,6 +92,7 @@ install-db: install-base-dirs
 
 install-web: install-base-dirs
 	$(CP_R) vendor www $(DESTDIR)$(pkgdatadir)/
+	$(CP_R) --no-clobber etc/httpd.conf* $(DESTDIR)$(config_path)
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/docman/
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/download/
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/forum/
@@ -103,12 +103,21 @@ install-web: install-base-dirs
 		sed 's,@log_path@,$(log_path),' etc/logrotate.d/fusionforge-web \
 			> $(DESTDIR)$(sysconfdir)/logrotate.d/fusionforge-web; \
 	fi
-#	TODO: multiple servers support
+#	TODO: multiple servers support?
 #	(e.g. install scm, lists, vhosts and vhosts-extra separately)
 
 install-web-vhosts: install-base-dirs
 	$(CP_R) cronjobs/web-vhosts $(DESTDIR)$(pkgdatadir)/cronjobs/
 #	TODO: only install 40-vhosts-extra.conf and httpd.vhosts with this module
+
+install-scm: install-base-dirs
+	$(CP_R) cronjobs/scm $(DESTDIR)$(pkgdatadir)/cronjobs/
+	$(INSTALL) -d -m 00755 $(DESTDIR)$(sysconfdir)/xinetd.d/
+	$(CP_R) etc/xinetd.d/fusionforge-scm $(DESTDIR)$(sysconfdir)/xinetd.d/
+	if [ ! -e $(DESTDIR)$(sysconfdir)/cron.d/fusionforge-scm ]; then \
+		sed 's,@bindir@,$(bindir),' etc/cron.d/fusionforge-scm \
+			> $(DESTDIR)$(sysconfdir)/cron.d/fusionforge-scm; \
+	fi
 
 install-shell: install-base-dirs
 	$(CP_R) cronjobs/shell $(DESTDIR)$(pkgdatadir)/cronjobs/
@@ -124,9 +133,10 @@ install-lists: install-base-dirs
 	$(CP_R) cronjobs/lists $(DESTDIR)$(pkgdatadir)/cronjobs/
 	$(CP_R) post-install.d/lists $(DESTDIR)$(pkgdatadir)/post-install.d/
 
-install-base: install-base-dirs install-common install-web install-db
+install-base: install-base-dirs install-common install-web install-db install-scm
 
-PLUGINS=$(shell cd plugins/ && find * -maxdepth 0 -type d)
+# Select only "valid" plugins for 'make install'
+PLUGINS=$(shell grep -l '^plugin_status\s=\svalid' plugins/*/etc/*.ini | sed 's,plugins/\([^/]*\)/.*,\1,')
 PLUGINS_INSTALL_TARGETS=$(addprefix install-plugin-,$(PLUGINS))
 install-plugins: $(PLUGINS_INSTALL_TARGETS)
 
@@ -135,9 +145,13 @@ install-plugin-%: plugins/% install-base-dirs
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(pkgdatadir)/plugins/$*/
 	cd plugins/$* && $(CP_R) $$(ls | grep -v '^(etc|packaging)$$') $(DESTDIR)$(pkgdatadir)/plugins/$*/
 #	Initial config files
-	$(CP_R) plugins/$*/etc/$*.ini $(DESTDIR)$(config_path)/config.ini.d/; \
+	$(CP_R) --no-clobber plugins/$*/etc/$*.ini $(DESTDIR)$(config_path)/config.ini.d/;
 	if [ -d plugins/$*/etc/plugins/$* ]; then \
 		$(CP_R) --no-clobber plugins/$*/etc/plugins/$* $(DESTDIR)$(config_path)/plugins/; \
+	fi
+	if [ -d plugins/$*/etc/httpd.conf.d/ ]; then \
+		$(CP_R) --no-clobber plugins/$*/etc/httpd.conf.d/ \
+			$(DESTDIR)$(config_path); \
 	fi
 	for i in $$(ls plugins/$*/etc/cron.d/* 2>/dev/null); do \
 		if [ ! -e $(DESTDIR)$(sysconfdir)/cron.d/$$(basename $$i) ]; then \
@@ -159,14 +173,17 @@ uninstall:
 # not relying on 'prefix' for post-install (for no-install/dev setups)
 post_source_path:=$(shell forge_get_config source_path 2>/dev/null)
 post_plugins_path:=$(shell forge_get_config plugins_path 2>/dev/null)
-post-install: post-install-base post-install-plugins
-post-install-base: post-install-common post-install-db post-install-web
+post-install:
+	$(post_source_path)/bin/post-install.sh
+post-install-base: post-install-common post-install-db post-install-web post-install-scm
 post-install-common:
 	$(post_source_path)/post-install.d/common/common.sh configure
 post-install-db:
 	$(post_source_path)/post-install.d/db/db.sh configure
 post-install-web:
 	$(post_source_path)/post-install.d/web/web.sh configure
+post-install-scm:
+#	nothing yet
 
 post-install-shell:
 	$(post_source_path)/post-install.d/shell/shell.sh configure
@@ -177,7 +194,7 @@ post-install-mta-exim4:
 post-install-lists:
 	$(post_source_path)/post-install.d/lists/lists.sh configure
 
-PLUGINS_INSTALLED:=$(shell cd $(post_plugins_path) 2>/dev/null && find * -maxdepth 0 -type d)
+PLUGINS_INSTALLED:=$(shell [ -d "$(post_plugins_path)" ] && cd $(post_plugins_path) && find * -maxdepth 0 -type d)
 PLUGINS_POST_INSTALL_TARGETS=$(addprefix post-install-plugin-,$(PLUGINS_INSTALLED))
 # Not depending on PLUGINS_POST_INSTALL_TARGETS: too many dependencies and non-production plugins
 post-install-plugins:

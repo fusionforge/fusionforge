@@ -50,4 +50,3 @@ if (!$plugin) {
 foreach ($plugin->getGroups() as $p) {
 	print $p->getUnixName()."\n";
 }
-?>

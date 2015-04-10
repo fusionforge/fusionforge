@@ -86,13 +86,15 @@ $format .= " using '$sep' as separator.";
 <h2><?php echo _('Import tasks using a CSV file'); ?></h2>
 <form enctype="multipart/form-data" method="post" action="<?php echo getStringFromServer('PHP_SELF')?>?group_project_id=<?php echo $group_project_id ?>&amp;group_id=<?php echo $group_id ?>&amp;func=postuploadcsv">
 <p><?php echo _('Choose a file in the proper .csv format for uploading.'); ?></p>
-<input type="file" name="userfile" required="required" />
+<input type="file" name="userfile" required="required" /><br/>
+<label><input type="radio" name="replace" value="1" checked /> <?php echo _('Replace all tasks by the ones present in the file'); ?></label>
+<label><input type="radio" name="replace" value="0" /> <?php echo _('Add the ones from the file to the existing ones'); ?></label>
+<br/><br/>
 <input type="submit" name="submit" value="<?php echo _('Submit'); ?>" />
 </form>
 
 <h3><?php echo _('Notes'); ?></h3>
 <ul>
-<li><?php echo _('Be careful, when importing a CSV file, all the tasks will be replaced by the ones present in the file.'); ?></li>
 <li><?php echo _('If project_task_id is empty, then a new task will be created.'); ?></li>
 <li><?php echo _('If project_task_id is present, then the corresponding task will be updated.'); ?></li>
 </ul>

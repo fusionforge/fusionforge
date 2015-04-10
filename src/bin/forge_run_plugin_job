@@ -27,7 +27,7 @@
  * This script runs the plugin-specific cron jobs typically located in
  * @PLUGINS_PATH@/PLUGIN_NAME/cronjobs/
  */
-        
+
 require (dirname(__FILE__).'/../common/include/env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/cron_utils.php';
@@ -35,7 +35,7 @@ require_once $gfcommon.'include/cron_utils.php';
 if (count ($argv) < 3) {
 	echo "Usage: .../forge_run_plugin_job <plugin> <jobname> [ <parameter> ... ]
 " ;
-        exit (1) ;
+	exit (1) ;
 }
 $self = array_shift($argv);
 
@@ -60,7 +60,7 @@ $cmdline = $script;
 while ($arg = array_shift($argv)) {
 	$cmdline .= ' '.escapeshellarg($arg);
 }
-	
+
 system ("$cmdline\n");
 
 // Local Variables:

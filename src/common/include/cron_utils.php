@@ -89,14 +89,23 @@ function checkChroot() {
 // Locking: for a single script
 // flock() locks are automatically lost on program termination, however
 // that happened (clean, segfault...)
+// Global, otherwise auto-closed by PHP and we lose the lock!
+$locks = array();
 function cron_acquire_lock($script) {
+	global $locks;
 	// Script lock: http://perl.plover.com/yak/flock/samples/slide006.html
-	static $lock;  // static, otherwise auto-closed by PHP and we lose the lock!
-	$lock = fopen($script, 'r') or die("Failed to ask lock.\n");
+	if (!isset($locks[$script]))
+		$locks[$script] = fopen($script, 'r') or die("Failed to ask lock.\n");
 
-	if (!flock($lock, LOCK_EX | LOCK_NB)) {
+	if (!flock($locks[$script], LOCK_EX | LOCK_NB)) {
 		die("There's a lock for '$script', exiting\n");
 	}
+}
+
+function cron_release_lock($script) {
+	global $locks;
+	flock($locks[$script], LOCK_UN);
+	unset($locks[$script]);
 }
 
 //
@@ -109,6 +118,34 @@ function cron_reload_nscd() {
 
 function cron_reload_apache() {
         system("service apache2 reload || service httpd reload >/dev/null 2>&1");
+}
+
+function cron_regen_apache_auth() {
+	# Reproduce nss_passwd on file, so we can work without mod-auth-*
+	$passwd_fname = forge_get_config('data_path').'/scm-passwd';
+	$passwd_f = fopen($passwd_fname.'.new', 'w');
+	
+	# Enable /authscm/$user ITK URLs for FusionForge users only (not system users)
+	$config_fname = forge_get_config('data_path').'/scm-auth.inc';
+	$config_f = fopen($config_fname.'.new', 'w');
+	
+	$res = db_query_params("SELECT login, passwd FROM nss_passwd WHERE status=$1", array('A'));
+	while ($arr = db_fetch_array($res)) {
+		fwrite($passwd_f, $arr['login'].':'.$arr['passwd']."\n");
+		fwrite($config_f, 'Use ScmUser '.$arr['login']."\n");
+	}
+	
+	fclose($passwd_f);
+	chmod($passwd_fname.'.new', 0644);
+	rename($passwd_fname.'.new', $passwd_fname);
+	
+	fclose($config_f);
+	chmod($config_fname.'.new', 0644);
+	rename($config_fname.'.new', $config_fname);
+
+	# Regen scmsvn-auth.inc
+	$hook_params = array() ;
+	plugin_hook_by_reference ('scm_regen_apache_auth', $hook_params) ;
 }
 
 // Local Variables:

@@ -1,8 +1,8 @@
 Package: fusionforge-plugin-scmgit
-Depends: git
+Depends: git, xinetd, rsync
 
 Package: fusionforge-plugin-scmsvn
-Depends: subversion, subversion-tools, viewvc, openbsd-inetd | inet-superserver, update-inetd, augeas-tools, libapache2-mod-svn
+Depends: subversion, subversion-tools, viewvc, python-pycurl, xinetd, rsync, augeas-tools, libapache2-mod-svn
 
 Package: fusionforge-plugin-scmbzr
 Depends: bzr, libapache2-mod-wsgi, loggerhead (>= 1.19~bzr477~), python-pastedeploy
@@ -81,3 +81,6 @@ Depends: php5-cli, php5-curl, ${perl:Depends}
 Package: fusionforge-plugin-sysauthldap
 Depends: php5-ldap
 Recommends: slapd, ldap-utils, ${perl:Depends}
+
+Package: fusionforge-plugin-taskboard
+Depends:

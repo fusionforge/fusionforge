@@ -1,5 +1,10 @@
 Fusionforge-X.X:
-* New install system (Inria)
+
+Fusionforge-6.0 (unreleased):
+* [#710] New install system (Inria)
+* [#147] Reactivity: system replication is now performed immediately (rather than waiting for cron jobs) (Inria)
+* [#519] SCM: concurrent SSH and HTTPS access, relying on Apache mod_itk (Roland Mas)
+* [#760] System: users now use a common default group ("users") rather than per-user group; avoids conflicts with project groups (Inria)
 * [#658] Docman: Basic Webdav write mkcol, delete, put, move support (TrivialDev)
 * [#657] Docman: Add move mass actions (TrivialDev)
 * [#747] Docman: Direct link to file details (TrivialDev)
@@ -20,8 +25,11 @@ Fusionforge-X.X:
 * [#745] Widget Project Latest Documents: enhancement, add actions buttons (monitor, delete) (TrivialDev)
 * [#655] Tracker: enable support for multi-select extrafield in roadmap (TrivialDev)
 * [#662] Forum: store the attached file on FS. (TrivialDev)
-* [#751] SCM: Allow projects to use several SCM engines in parallel (Roland Mas, for CEA)
+* vhosts: allow customization from <config_dir>/custom/httpd.vhosts.tmpl (Inria)
+* [#751] SCM: allow projects to use several SCM engines in parallel (Roland Mas, for CEA)
+* [#519] SCM: browsing support for (Git) private repositories (Roland Mas, for AdaCore)
 * [#719] Plugin SCM SVN: improved ViewVC integration, using external installation (Inria, TrivialDev)
+* Plugin SCM SVN: support read-only access to private projects via SSH (Inria)
 * [#719] Plugin SCM GIT: activity log entry link to commit log in SCM browsing tab (TrivialDev)
 * [#724] Plugin SCM HG (Mercurial): display the Repository History stats block (TrivialDev)
 * [#725] Plugin SCM HG (Mercurial): add support for project activity tab (TrivialDev)
@@ -32,16 +40,21 @@ Fusionforge-X.X:
 Fusionforge-5.3.3:
 * User e-mail change: simplify confirmation hash and precise encoding to avoid mangling in some versions of Thunderbird and Apple Mail [#738] (Inria)
 * Project homepage: default to http:// rather than https:// for external homepage links [#752] (Inria)
+* Site stats: fix "new users" and "new groups" charts (Inria)
 * SCM: use 'shell_host' variable (or failing that, 'web_host') to document where users can SSH to the group shared directory [#698] (Inria)
 * SCM stats: fix order in stats block [#736] (TrivialDev)
-* System replication: refresh nscd cache before applying changes
+* System replication: refresh nscd cache before applying changes, fix spurious warning output from cron jobs (Inria)
 * Docman: fix edit file when filename has quote [#750] (TrivialDev)
+* Docman: fix move to files to fs script [#763] (TrivialDev)
 * FRS: wrong tooltip displayed in admin page [#703] (TrivialDev)
+* PM: fix test on success [#762] (TrivialDev)
+* PM: fix allow new tasks without replace older one [#761] patch from Philipp Keidel (TrivialDev)
 * Plugin AuthLDAP: error and warning messages displayed twice [#732] (TrivialDev)
 * Plugin scmhook: fix display when only one SCM plugin enabled [#735] (TrivialDev)
 * Plugin Hudson: fix global status in Hudson Job widget [#740] (TrivialDev)
 * Plugin Hudson: delete jobs on project deletion [#742] (TrivialDev)
 * Plugin MediaWiki: activate MediaWiki extensions (in the database) when creating a new project wiki (Thorsten Glaser & Inria)
+* Plugin MediaWiki: integrate e-mail from FusionForge account, to send watchlist notifications (Inria)
 * Plugin OSLC: Undefined index: is_public [#748] (TrivialDev)
 
 Fusionforge-5.3.2:

@@ -43,6 +43,11 @@ stop_database () {
     else
         echo "FAIL: database still up?"
     fi
+
+    # Work-around http://bugs.debian.org/759725
+    if [ -f /etc/debian_version -a -x /bin/systemctl ]; then
+        sleep 1  # bleh
+    fi
 }
 
 start_database () {
@@ -117,7 +122,7 @@ if [ "$reset" = 1 ]; then
     # Reset connections
     service fusionforge-systasksd stop
     service postgresql restart
-    su - postgres -c "dropdb $database"
+    su - postgres -c "dropdb $database" || true
     $(forge_get_config source_path)/post-install.d/db/db.sh configure
     forge_set_password admin myadmin
     service fusionforge-systasksd start

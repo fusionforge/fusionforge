@@ -38,7 +38,7 @@ function usage($rc=1) {
 	echo "\t.../populate_template_project.php 5\n";
 	echo "\t.../populate_template_project.php new unixname groupname\n";
 	echo "The first syntax populates an existing group, with its ID given.\n";
-	echo "The second syntax creates a new template froup.\n";
+	echo "The second syntax creates a new template group.\n";
 	exit($rc);
 }
 
@@ -228,7 +228,7 @@ if (count($argv) < 2) {
 	}
 	if (!populateProject($project)) {
 		printf("Error: could not populate new group: %s\n",
-		    $project->getErrorMessage());
+			$project->getErrorMessage());
 		exit(1);
 	}
 } elseif (count($argv) == 4 && $argv[1] == "new") {
@@ -240,18 +240,18 @@ if (count($argv) < 2) {
 	    $desc, $desc)) {
 		db_rollback();
 		printf("Error: could not create group: %s\n",
-		    $project->getErrorMessage());
+			$project->getErrorMessage());
 		exit(1);
 	}
 	if (!$project->setAsTemplate(true)) {
 		db_rollback();
 		printf("Error: could not mark group as template: %s\n",
-		    db_error());
+			db_error());
 		exit(1);
 	}
 	if (!populateProject($project)) {
 		printf("Error: could not populate new group: %s\n",
-		    $project->getErrorMessage());
+			$project->getErrorMessage());
 		exit(1);
 	}
 	db_commit();
@@ -260,5 +260,5 @@ if (count($argv) < 2) {
 }
 
 printf("Group #%d %s (%s) populated successfully.\n", $project->getID(),
-    $project->getUnixName(), $project->getPublicName());
+	$project->getUnixName(), $project->getPublicName());
 exit(0);

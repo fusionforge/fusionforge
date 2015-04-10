@@ -23,7 +23,7 @@
 
 require_once $gfcommon.'pm/ProjectTaskFactory.class.php';
 
-function &pm_import_tasks($group_project_id,&$tasks) {
+function &pm_import_tasks($group_project_id,&$tasks,$replace=true) {
 	$was_error = false;
 
 	$pg = projectgroup_get_object($group_project_id);
@@ -303,7 +303,7 @@ function &pm_import_tasks($group_project_id,&$tasks) {
 			//
 			//	Delete unreferenced tasks
 			//
-			if (!$was_error) {
+			if ($replace && !$was_error) {
 				$ptf = new ProjectTaskFactory($pg);
 				$pt_arr=& $ptf->getTasks();
 				for ($i=0; $i<count($pt_arr); $i++) {

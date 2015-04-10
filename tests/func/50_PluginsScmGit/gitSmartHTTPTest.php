@@ -49,42 +49,34 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 		$p = $this->getText("//tt[contains(.,'git clone http') and contains(.,'".FORGE_ADMIN_USERNAME."@')]");
 		$p = preg_replace(",^git clone ,", "", $p);
 		$p = preg_replace(",@,", ":".FORGE_ADMIN_PASSWORD."@", $p);
-		$timeout = "timeout 15s";
 
 		// Create a local clone, add stuff, push it to the repo
 		$t = exec("mktemp -d /tmp/gitTest.XXXXXX");
-		system("cd $t && GIT_SSL_NO_VERIFY=true $timeout git clone --quiet $p", $ret);
-		if ($ret >= 120) {
-			system("cd $t && GIT_SSL_NO_VERIFY=true $timeout git clone --quiet $p", $ret);
-		}
-		$this->assertEquals(0, $ret);
+		$this->runCommandTimeout($t, "git clone --quiet $p", "GIT_SSL_NO_VERIFY=true");
 
 		system("echo 'this is a simple text' > $t/projecta/mytext.txt");
-		system("cd $t/projecta && $timeout git add mytext.txt && $timeout git commit --quiet -a -m'Adding file'", $ret);
+		system("cd $t/projecta && git add mytext.txt && git commit --quiet -a -m'Adding file'", $ret);
 		system("echo 'another simple text' >> $t/projecta/mytext.txt");
 		system("cd $t/projecta && git commit --quiet -a -m'Modifying file'", $ret);
 		$this->assertEquals(0, $ret);
 
-		system("cd $t/projecta && GIT_SSL_NO_VERIFY=true $timeout git push --quiet --all", $ret);
-		if ($ret >= 120) {
-			system("cd $t/projecta && GIT_SSL_NO_VERIFY=true $timeout git push --quiet --all", $ret);
-		}
-		$this->assertEquals(0, $ret);
+		$this->runCommandTimeout("$t/projecta", "git push --quiet --all", "GIT_SSL_NO_VERIFY=true");
 
 		// Check that the changes appear in gitweb
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
-		$this->clickAndWait("link=Browse Git Repository");
+		$this->clickAndWait("link=Browse main git repository");
 		$this->selectFrame("id=scmgit_iframe");
 		$this->assertElementPresent("//.[@class='page_footer']");
 		$this->assertTextPresent("projecta.git");
 		$this->clickAndWait("link=projecta.git");
 		$this->assertTextPresent("Modifying file");
 		$this->assertTextPresent("Adding file");
+		$this->selectFrame("relative=top");
 
         // Check gitweb directly
-		$this->open('/plugins/scmgit/cgi-bin/gitweb.cgi?p=projecta/projecta.git');
+        $this->openWithOneRetry("http://scm.".HOST.ROOT."/anonscm/gitweb/?p=projecta/projecta.git");
 		$this->assertElementPresent("//.[@class='page_footer']");
 		$this->assertTextPresent("projecta.git");
 		$this->clickAndWait("link=projecta.git");
@@ -92,7 +84,7 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 		$this->assertTextPresent("Adding file");
 
         // Disable anonymous access to gitweb
-		$this->open(ROOT);
+		$this->openWithOneRetry(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->click("link=Admin");
 		$this->waitForPageToLoad("30000");
@@ -108,9 +100,63 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 		$this->waitSystasks();
 
         // Check that gitweb now fails
-		$this->open('/plugins/scmgit/cgi-bin/gitweb.cgi?p=projecta/projecta.git');
+        $this->openWithOneRetry("http://scm.".HOST.ROOT."/anonscm/gitweb/?p=projecta/projecta.git");
 		$this->assertElementPresent("//.[@class='page_footer']");
 		$this->assertTextNotPresent("projecta.git");
+
+        // Now try to use the authenticated gitweb
+        $this->openWithOneRetry("http://".FORGE_ADMIN_USERNAME.":".FORGE_ADMIN_PASSWORD."@scm.".HOST.ROOT."/authscm/".FORGE_ADMIN_USERNAME."/gitweb/?p=projecta/projecta.git");
+		$this->assertElementPresent("//.[@class='page_footer']");
+		$this->assertTextPresent("projecta.git");
+
+		// Also check via the standard page
+		$this->openWithOneRetry(ROOT);
+		$this->clickAndWait("link=ProjectA");
+		$this->clickAndWait("link=SCM");
+		$this->clickAndWait("link=Browse main git repository");
+		$this->selectFrame("id=scmgit_iframe");
+		$this->assertElementPresent("//.[@class='page_footer']");
+		$this->assertTextPresent("projecta.git");
+		$this->clickAndWait("link=projecta.git");
+		$this->assertTextPresent("Modifying file");
+		$this->assertTextPresent("Adding file");
+		$this->selectFrame("relative=top");
+
+        // Set up a different user
+        $this->createUser ('otheruser') ;
+        $this->createAndGoto ('projectb');
+		$this->clickAndWait("link=Admin");
+		$this->clickAndWait("link=Users and permissions");
+		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "otheruser") ;
+		$this->select("//input[@value='Add Member']/../select[@name='role_id']", "label=Admin");
+		$this->clickAndWait ("//input[@value='Add Member']") ;
+		$this->assertTrue($this->isTextPresent("otheruser Lastname"));
+		$this->assertTrue($this->isElementPresent("//tr/td/a[.='otheruser Lastname']/../../td/div[contains(.,'Admin')]")) ;
+		$this->clickAndWait("//tr/td/form/div[contains(.,'Anonymous')]/../../../td/form/div/input[contains(@value,'Unlink Role')]");
+		$this->assertTrue($this->isTextPresent("Role unlinked successfully"));
+
+		$this->clickAndWait("link=Tools");
+		$this->clickAndWait("link=Source Code Admin");
+		$this->click("//input[@name='scmengine[]' and @value='scmgit']");
+		$this->clickAndWait("submit");
+
+		// Create repositories
+		$this->waitSystasks();
+
+		// Try with a different user
+		$this->openWithOneRetry("http://otheruser:".FORGE_OTHER_PASSWORD."@scm.".HOST.ROOT."/authscm/otheruser/gitweb/?p=projecta/projecta.git");
+		$this->assertElementPresent("//.[@class='page_footer']");
+		$this->assertTextNotPresent("projecta.git");
+
+        // Test accessing admin's URL with otheruser's credentials (and asserting we get a 401)
+        // …Selenium doesn't allow checking HTTP return codes, so use a file_get_contents() hack
+        // First make sure that the hack works
+        $f = @file_get_contents("http://otheruser:".FORGE_OTHER_PASSWORD."@scm.".HOST.ROOT."/authscm/otheruser/gitweb/", "r");
+        $this->assertTrue(is_string($f));
+        $this->assertEquals(1, preg_match('/projectb.git/',$f));
+        // Then make sure we detect a failure
+        $f = @file_get_contents("http://otheruser:".FORGE_OTHER_PASSWORD."@scm.".HOST.ROOT."/authscm/".FORGE_ADMIN_USERNAME."/gitweb/projecta/", "r");
+        $this->assertFalse($f);
 
 		system("rm -fr $t");
 	}

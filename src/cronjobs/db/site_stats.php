@@ -130,7 +130,7 @@ site_stats_day($year,$month,$day);
 //	populate stats_project table
 //
 $err .= "\n\nBeginning stats_project ".date('Ymd H:i:s',time());
-include 'cronjobs/stats_projects.inc';
+include 'cronjobs/db/stats_projects.inc';
 project_stats_day($year,$month,$day);
 
 cron_entry(11,$err);

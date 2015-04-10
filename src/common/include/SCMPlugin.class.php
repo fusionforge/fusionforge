@@ -52,8 +52,10 @@ abstract class SCMPlugin extends Plugin {
 	function CallHook($hookname, &$params) {
 		switch ($hookname) {
 			case 'group_plugin_use': {
-				$systasksq = new SysTasksQ();
-				$systasksq->add(SYSTASK_CORE, 'SCM_REPO', $params['group_id']);
+				if ($params['val'] == true) {
+					$systasksq = new SysTasksQ();
+					$systasksq->add(SYSTASK_CORE, 'SCM_REPO', $params['group_id']);
+				}
 				break;
 			}
 			case 'scm_plugin': {
@@ -89,6 +91,11 @@ abstract class SCMPlugin extends Plugin {
 			case 'scm_update_repolist': {
 				session_set_admin();
 				$this->updateRepositoryList($params);
+				break;
+			}
+			case 'scm_regen_apache_auth': {
+				session_set_admin();
+				$this->regenApacheAuth($params);
 				break;
 			}
 			case 'scm_generate_snapshots': { // Optional

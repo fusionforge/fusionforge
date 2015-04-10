@@ -32,7 +32,7 @@ if [ -e /etc/debian_version ]; then
     apt-get install -y make gettext php5-cli php5-pgsql php-htmlpurifier \
 	libapache2-mpm-itk libapache2-mod-svn \
 	apache2 postgresql libnss-pgsql2 unscd \
-	subversion augeas-tools viewvc git \
+	subversion augeas-tools viewvc python-pycurl git xinetd \
 	mediawiki \
 	php-twig \
 	python-moinmoin libapache2-mod-wsgi python-psycopg2 \
@@ -44,25 +44,23 @@ else
     yum install -y make tar
     backports_rpm
     yum install -y gettext php-cli php-pgsql php-process php-mbstring \
-	httpd httpd-itk mod_dav_svn mod_ssl postgresql-server nscd \
-	subversion augeas viewvc git gitweb \
+	httpd mod_dav_svn mod_ssl postgresql-server nscd \
+	subversion augeas viewvc python-pycurl git gitweb xinetd \
 	mediawiki119 \
 	php-twig \
 	moin mod_wsgi python-psycopg2 \
 	unoconv poppler-utils
+    yum --enablerepo=epel-testing install -y httpd-itk
 fi
 
 (
     cd $(dirname $0)/../src/
     make
-    make install-base install-shell \
+    make install-base install-shell install-scm \
         install-plugin-scmsvn install-plugin-scmgit \
         install-plugin-blocks install-plugin-mediawiki install-plugin-moinmoin \
-        install-plugin-online_help
-    make post-install-base post-install-shell \
-        post-install-plugin-scmsvn post-install-plugin-scmgit \
-        post-install-plugin-blocks post-install-plugin-mediawiki post-install-plugin-moinmoin \
-        post-install-plugin-online_help
+        install-plugin-online_help install-plugin-taskboard
+    make post-install
 )
 
 # Dump clean DB

@@ -1,2 +1,2 @@
 RequestHeader unset GForgePluginSysAuthLdapPasswd
-RequestHeader append GForgePluginSysAuthLdapPasswd "{sysauthldap/ldap_password}"
+RequestHeader append GForgePluginSysAuthLdapPasswd "${FF__sysauthldap__ldap_password}"

@@ -1,8 +1,8 @@
 %package plugin-scmgit
-Requires: git, gitweb
+Requires: git, gitweb, xinetd, rsync
 
 %package plugin-scmsvn
-Requires: subversion, viewvc, augeas
+Requires: subversion, viewvc, python-pycurl, xinetd, rsync, augeas
 
 %package plugin-scmbzr
 Requires: bzr, mod_wsgi, loggerhead
@@ -79,4 +79,7 @@ Requires:
 Requires:
 
 %package plugin-sysauthldap
+Requires:
+
+%package plugin-taskboard
 Requires:

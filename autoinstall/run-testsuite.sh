@@ -45,7 +45,7 @@ else
     else
 	yum install -y java-1.6.0
     fi
-    yum install -y php-phpunit-PHPUnit php-phpunit-PHPUnit-Selenium psmisc patch net-tools
+    yum --enablerepo=epel install -y php-phpunit-PHPUnit php-phpunit-PHPUnit-Selenium psmisc patch net-tools
 fi
 
 # Install selenium (no packaged version available)

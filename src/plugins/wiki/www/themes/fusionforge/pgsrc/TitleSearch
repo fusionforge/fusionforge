@@ -1,0 +1,26 @@
+Date: Wed,  4 Mar 2015 14:19:56 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.5.3)
+Content-Type: application/x-phpwiki;
+  pagename=TitleSearch;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+<<TitleSearch>>
+
+----
+
+Additional Searches:
+
+<<WikiFormRich action=TitleSearch method=GET nobr=1 class=wikiaction editbox[] name=s text="" submit[] >>
+
+<<WikiFormRich action=FullTextSearch method=GET nobr=1 class=wikiaction editbox[] name=s text="" submit[] >>
+
+<<WikiFormRich action=FuzzyPages method=GET nobr=1 class=wikiaction editbox[] name=s text="" submit[] >>
+
+----
+
+<<IncludePage page=FindPage quiet=1 section=Tips sectionhead=1>>
+
+----
+[[CategoryActionPage]]

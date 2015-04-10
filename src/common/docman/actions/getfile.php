@@ -53,13 +53,13 @@ if (!forge_check_perm('docman', $group_id, 'approve')) {
 	session_redirect($urlparam);
 }
 
-$fileid = getIntFromRequest('fileid');
+$itemid = getIntFromRequest('itemid');
 $childgroup_id = getIntFromRequest('childgroup_id');
 $details = getIntFromRequest('details');
 if ($childgroup_id) {
 	$g = group_get_object($childgroup_id);
 }
-$d = document_get_object($fileid);
+$d = document_get_object($itemid);
 if ($d->isError()) {
 	$error_msg = $d->getErrorMessage();
 	session_redirect($urlparam);

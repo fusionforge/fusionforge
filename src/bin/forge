@@ -28,7 +28,7 @@ require_once $gfcommon.'include/pre.php';
 class CliActions {
 	function help () {
 		$methods = join('|', get_class_methods($this));
-		echo "Usage: forge.php ($methods) [arguments...]\n" ;
+		echo "Usage: .../forge ($methods) [arguments...]\n" ;
 		exit (1) ;
 	}
 
@@ -39,7 +39,7 @@ class CliActions {
 		$plugin = $pm->GetPluginObject($name);
 		$plugin->install();
 	}
-	
+
 	function pluginDeactivate ($name) {
 		$pm = plugin_manager_get_object();
 		$pm->deactivate($name);
@@ -53,7 +53,7 @@ if (count($argv) == 3) {
 	$action = 'help';
 	$name   = '';
 }
-	
+
 $ctl = new CliActions();
 if (method_exists($ctl, $action)) {
 	$ctl->$action($name);

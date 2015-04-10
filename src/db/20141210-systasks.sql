@@ -1,6 +1,6 @@
 ALTER TABLE nss_usergroups ADD last_modified_date integer;
 CREATE TRIGGER nss_usergroups_update_last_modified_date
-    BEFORE INSERT OR UPDATE ON artifact
+    BEFORE INSERT OR UPDATE ON nss_usergroups
     FOR EACH ROW
     EXECUTE PROCEDURE update_last_modified_date();
 

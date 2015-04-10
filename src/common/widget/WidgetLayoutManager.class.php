@@ -2,7 +2,7 @@
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013-2014, Franck Villaume - TrivialDev
+ * Copyright 2013-2015, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -43,7 +43,7 @@ class WidgetLayoutManager {
 	 *
 	 * Display the default layout for the "owner". It may be the home page, the project summary page or /my/ page.
 	 *
-	 * @param	int		$owner_id
+	 * @param	int	$owner_id
 	 * @param	string	$owner_type
 	 */
 	function displayLayout($owner_id, $owner_type) {
@@ -67,11 +67,6 @@ class WidgetLayoutManager {
 			$req = db_query_params($sql, array($owner_type ,$owner_id));
 			if ($data = db_fetch_array($req)) {
 				$readonly = !$this->_currentUserCanUpdateLayout($owner_id, $owner_type);
-//				if (!$readonly) {
-//					echo '<p class="customize"><a href="/widgets/widgets.php?owner='. $owner_type.$owner_id .'&amp;layout_id='. $data['id'] .'">'. _("Customize") .'</a></p>';
-//				} elseif ($owner_type === self::OWNER_TYPE_GROUP) {
-//					echo '<br />';
-//				}
 				$layout = new WidgetLayout($data['id'], $data['name'], $data['description'], $data['scope']);
 				$sql = 'SELECT * FROM layouts_rows WHERE layout_id = $1 ORDER BY rank';
 				$req_rows = db_query_params($sql,array($layout->id));
@@ -105,9 +100,9 @@ class WidgetLayoutManager {
 	/**
 	 * _currentUserCanUpdateLayout
 	 *
-	 * @param	int		$owner_id
+	 * @param	int	$owner_id
 	 * @param	string	$owner_type
-	 * @return	boolean true if the user can update the layout (add/remove widget, collapse, set preferences, ...)
+	 * @return	boolean	true if the user can update the layout (add/remove widget, collapse, set preferences, ...)
 	 */
 	function _currentUserCanUpdateLayout($owner_id, $owner_type) {
 		$readonly = true;
@@ -231,9 +226,9 @@ class WidgetLayoutManager {
 	/**
 	 * displayAvailableWidgets - Display all widgets that the user can add to the layout
 	 *
-	 * @param	int		$owner_id
+	 * @param	int	$owner_id
 	 * @param	string	$owner_type
-	 * @param	int		$layout_id
+	 * @param	int	$layout_id
 	 */
 	function displayAvailableWidgets($owner_id, $owner_type, $layout_id) {
 		global $HTML;
@@ -310,13 +305,9 @@ class WidgetLayoutManager {
 				echo '<tr class="layout-manager-chooser '. ($checked ? 'layout-manager-chooser_selected' : '') .'" ><td>';
 				echo '<input type="radio" name="layout_id" value="'. $data['id'] .'" id="layout_'. $data['id'] .'" '. $checked .'/>';
 				echo '</td><td>';
-				echo '<label for="layout_'. $data['id'] .'">';
-				echo html_image('layout/'. strtolower(preg_replace('/(\W+)/', '-', $data['name'])) .'.png');
-				echo '</label>';
+				echo html_e('label', array('for' => 'layout_'. $data['id']), html_image('layout/'. strtolower(preg_replace('/(\W+)/', '-', $data['name'])) .'.png'));
 				echo '</td><td>';
-				echo '<label for="layout_'. $data['id'] .'"><strong>'. $data['name'] .'</strong><br />';
-				echo $data['description'];
-				echo '</label>';
+				echo html_e('label', array('for' => 'layout_'. $data['id']), html_e('strong', array(), $data['name']).html_e('br').$data['description']);
 				echo '</td></tr>';
 			}
 			/* Custom layout are not available yet */
@@ -324,13 +315,9 @@ class WidgetLayoutManager {
 			echo '<tr class="layout-manager-chooser '. ($checked ? 'layout-manager-chooser_selected' : '') .'"><td>';
 			echo '<input type="radio" name="layout_id" value="-1" id="layout_custom" '. $checked .'/>';
 			echo '</td><td>';
-			echo '<label for="layout_custom">';
-			echo html_image('layout/custom.png', '', '', array('style' => 'vertical-align:top;float:left;'));
-			echo '</label>';
+			echo html_e('label', array('for' => 'layout_custom'), html_image('layout/custom.png', '', '', array('style' => 'vertical-align:top;float:left;')));
 			echo '</td><td>';
-			echo '<label for="layout_custom"><strong>'. _('Custom') .'</strong><br />';
-			echo _('Define your own layout:');
-			echo '</label>';
+			echo html_e('label', array('for' => 'layout_custom'), html_e('strong', array(), _('Custom')).html_e('br')._('Define your own layout')._(':'));
 			echo '<table id="layout-manager">
 				<tr>
 				<td>
@@ -353,15 +340,15 @@ class WidgetLayoutManager {
 						<td class="layout-manager-column-add">+</td>';
 				}
 				echo '  </tr>
-					</table>
-					<div class="layout-manager-row-add">+</div>';
+					</table>';
+				echo html_e('div', array('class' => 'layout-manager-row-add'), '+');
 			}
 			echo '    </td>
 				</tr>
 				</table>';
 			echo '</td></tr>';
 			echo $HTML->listTableBottom();
-			echo '<input type="submit" id="save" value="'. _("Submit") .'" />';
+			echo html_e('input', array('type' => 'submit', 'id' => 'save', 'value' => _('Submit')));
 		} else {
 			// display the widget selection form
 			$after = '';
@@ -386,10 +373,10 @@ class WidgetLayoutManager {
 			AND o.owner_id = $2
 			AND o.is_default = 1
 			";
-		$req = db_query_params($sql,array($owner_type,$owner_id));
+		$req = db_query_params($sql, array($owner_type, $owner_id));
 		if ($data = db_fetch_array($req)) {
 			if ($this->_currentUserCanUpdateLayout($owner_id, $owner_type)) {
-				$old_scope         = $data['scope'];
+				$old_scope = $data['scope'];
 				$old_layout_id = $data['id'];
 				$new_layout_id = null;
 				if ($layout == '-1' && is_array($custom_layout)) {
@@ -505,10 +492,10 @@ class WidgetLayoutManager {
 	/**
 	 * _displayWidgetsSelectionForm - displays a widget selection form
 	 *
-	 * @param  title
-	 * @param  widgets
-	 * @param  used_widgets
-	 * @return string
+	 * @param	title		$title
+	 * @param	widgets		$widgets
+	 * @param	used_widgets	$used_widgets
+	 * @return	string
 	 */
 	function _displayWidgetsSelectionForm($title, $widgets, $used_widgets) {
 		$hp = Codendi_HTMLPurifier::instance();
@@ -527,44 +514,20 @@ class WidgetLayoutManager {
 					echo html_e('li', array(), $row, false);
 				}
 				echo html_ac(html_ap() - 1);
-			} else {
-				foreach($widgets as $widget_name) {
-					if ($widget = Widget::getInstance($widget_name)) {
-						if ($widget->isAvailable()) {
-							$row = '';
-							$row .= '<td>'. $widget->getTitle() . $widget->getInstallPreferences() .'</td>';
-							$row .= '<td class="align-right">';
-							if ($widget->isUnique() && in_array($widget_name, $used_widgets)) {
-								$row .= '<em>'. _("Already used") .'</em>';
-							} else {
-								$row .= '<input type="submit" name="name['. $widget_name .'][add]" value="'. _("Add") .'" />';
-							}
-							$row .= '</td>';
-							$widget_rows[$widget->getTitle()] = $row;
-						}
-					}
-				}
-				$i = 0;
-				foreach($widget_rows as $row) {
-					echo '<tr class="'. (count($widget_rows) ? '' : util_get_alt_row_color($i++)) .'">'. $row .'</tr>';
-				}
-			}
-			if (count($categs)) {
 				foreach($categs as $c => $ws) {
 					$i = 0;
 					$widget_rows = array();
 					// display widgets of the category
 					foreach($ws as $widget_name => $widget) {
-						$row = '';
-						$row .= '<div class="widget-preview '. $widget->getPreviewCssClass() .'">';
-						$row .= '<h3>'. $widget->getTitle()  .'</h3>';
-						$row .= '<p>'. $widget->getDescription() .'</p>';
-						$row .= $widget->getInstallPreferences();
-						$row .= '</div><div style="text-align:right; border-bottom:1px solid #ddd; padding-bottom:10px; margin-bottom:20px;">';
+						$row = html_e('div', array('class' => 'widget-preview '. $widget->getPreviewCssClass()),
+								html_e('h3', array(), $widget->getTitle()).
+								html_e('p', array(), $widget->getDescription()).
+								$widget->getInstallPreferences());
+						$row .= '<div style="text-align:right; border-bottom:1px solid #ddd; padding-bottom:10px; margin-bottom:20px;">';
 						if ($widget->isUnique() && in_array($widget_name, $used_widgets)) {
-							$row .= '<em>'. _("Already used") .'</em>';
+							$row .= html_e('em', array(), _('Already used'));
 						} else {
-							$row .= '<input type="submit" name="name['. $widget_name .'][add]" value="'. _("Add") .'" />';
+							$row .= html_e('input', array('type' => 'submit', 'name' => 'name['. $widget_name .'][add]', 'value' => _('Add')));
 						}
 						$row .= '</div>';
 						$widget_rows[$widget->getTitle()] = $row;

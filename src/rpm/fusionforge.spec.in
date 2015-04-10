@@ -30,7 +30,7 @@ This metapackage installs a stand-alone FusionForge site.
 make %{?_smp_mflags}
 
 %install
-# List package files automatically by installing separately on relying on 'make install'
+# List package files automatically by installing separately and relying on 'make install'
 # Marking /etc as conffiles and exclude locales (cf. mandatory %%find_lang)
 # Not using recursive dirs listing because that is processed when all
 #   packages are mixed in the common install dir (so using %%dir instead)
@@ -70,6 +70,7 @@ install_listfiles db-local
 install_listfiles web
 install_listfiles web-vhosts
 install_listfiles shell
+install_listfiles scm
 install_listfiles mta-postfix
 install_listfiles mta-exim4
 install_listfiles lists
@@ -163,6 +164,21 @@ if [ $1 -eq 0 ] ; then
     %{_datadir}/%{name}/post-install.d/shell/shell.sh remove
     %{_datadir}/%{name}/post-install.d/shell/shell.sh purge
 fi
+
+
+%package scm
+Summary: Collaborative development tool - shell accounts (using PostgreSQL)
+Requires: %{name}-common = %{version}-%{release}, %{name}-shell = %{version}-%{release}, xinetd, rsync
+%description scm
+FusionForge provides many tools to aid collaboration in a
+development project, such as bug-tracking, task management,
+mailing-lists, SCM repository, forums, support request helper,
+web/FTP hosting, release management, etc. All these services are
+integrated into one web site and managed through a web interface.
+
+This package contains the jobs to manage SCM repositories.
+It should be installed on only one server in your infrastructure.
+%files scm -f scm.rpmfiles
 
 
 %package web

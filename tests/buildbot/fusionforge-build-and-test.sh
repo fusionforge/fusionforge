@@ -13,6 +13,7 @@ get_config
 prepare_workspace
 
 export HOST=$1
+shift
 if [ -z "$HOST" ]; then
     echo "Usage: $0 vm_hostname"
     exit 1
@@ -47,8 +48,21 @@ case $HOST in
 	;;
 esac
 
-INSTALL_METHOD=$2
-if [ -z "$INSTALL_METHOD" ]; then INSTALL_METHOD='src'; fi
+INSTALL_METHOD=$1
+case $INSTALL_METHOD in
+    src)
+	shift
+	;;
+    deb)
+	shift
+	;;
+    rpm)
+	shift
+	;;
+    *)
+	INSTALL_METHOD=src
+	;;
+esac
 
 destroy_vm_if_not_kept $HOST
 start_vm_if_not_kept $HOST
@@ -61,9 +75,12 @@ if [ $INSTALL_OS == "debian" ]; then
 fi
 
 if [ $INSTALL_OS == "debian" ]; then
-    ssh root@$HOST "apt-get install -y rsync"
+    ssh root@$HOST "apt-get install -y rsync haveged"
 else
     ssh root@$HOST "yum install -y rsync"
+    setup_epel_repo
+    setup_epel_testing_repo
+    ssh root@$HOST "yum --enablerepo=epel install -y haveged"
 fi
 rsync -av --delete autoinstall src tests root@$HOST:/usr/src/fusionforge/
 if [ $INSTALL_METHOD = "src" ]; then
@@ -77,7 +94,7 @@ fi
 retcode=0
 echo "Run phpunit test on $HOST"
 #ssh root@$HOST "TESTGLOB='func/50_PluginsScmBzr/*' /usr/src/fusionforge/autoinstall/vnc-run-testsuite.sh /usr/src/fusionforge/autoinstall/run-testsuite.sh $INSTALL_METHOD/$INSTALL_OS" || retcode=$?
-ssh root@$HOST "/usr/src/fusionforge/autoinstall/vnc-run-testsuite.sh /usr/src/fusionforge/autoinstall/run-testsuite.sh $INSTALL_METHOD/$INSTALL_OS" || retcode=$?
+ssh root@$HOST "/usr/src/fusionforge/autoinstall/vnc-run-testsuite.sh /usr/src/fusionforge/autoinstall/run-testsuite.sh $INSTALL_METHOD/$INSTALL_OS $*" || retcode=$?
 
 copy_logs
 

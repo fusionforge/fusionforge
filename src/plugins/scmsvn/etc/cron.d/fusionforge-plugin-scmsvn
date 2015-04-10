@@ -1,3 +1,5 @@
+PATH=@bindir@:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
 # Cleanup stale (>=3 days old) SVN/viewcvs temp files
 00 6 * * *  root  find /tmp -maxdepth 1 -name "*" -type f -mtime +3 -exec rm -rf {} \;
 

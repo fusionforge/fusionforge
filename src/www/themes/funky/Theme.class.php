@@ -36,7 +36,9 @@ class Theme extends Layout {
 		$this->imgroot = $this->imgbaseurl;
 		$this->addStylesheet('/themes/funky/css/theme.css');
 		$this->addStylesheet('/themes/funky/css/theme-pages.css');
-		$this->addStylesheet('/scripts/jquery-ui/css/overcast/jquery-ui-1.10.4.custom.css');
+		$this->addStylesheet('/scripts/jquery-ui/css/overcast/jquery-ui-1.11.2.css');
+		$this->addStylesheet('/scripts/jquery-ui/css/overcast/jquery-ui.structure-1.11.2.css');
+		$this->addStylesheet('/scripts/jquery-ui/css/overcast/jquery-ui.theme-1.11.2.css');
 	}
 
 	function bodyHeader($params) {

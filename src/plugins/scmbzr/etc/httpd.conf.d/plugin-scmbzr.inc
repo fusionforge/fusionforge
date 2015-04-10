@@ -1,13 +1,18 @@
-Alias {core/url_prefix}scm/loggerhead/static /usr/share/loggerhead/static
+<Directory ${FF__scmbzr__repos_path}>
+  Include ${FF__core__config_path}/httpd.conf.d/disable-scripts.inc
+</Directory>
+Alias ${FF__core__url_prefix}anonscm/bzr ${FF__scmbzr__repos_path}
+
+Alias ${FF__core__url_prefix}scm/loggerhead/static /usr/share/loggerhead/static
 RewriteEngine On
-RewriteRule ^{core/url_prefix}scm/loggerhead$ {core/url_prefix}scm/loggerhead/ [R]
+RewriteRule ^${FF__core__url_prefix}scm/loggerhead$ ${FF__core__url_prefix}scm/loggerhead/ [R]
 
 <IfModule wsgi_module>
-    WSGIScriptAlias {core/url_prefix}scm/loggerhead /usr/bin/loggerhead.wsgi
+    WSGIScriptAlias ${FF__core__url_prefix}scm/loggerhead /usr/bin/loggerhead.wsgi
     WSGIProcessGroup fusionforge-plugin-scmbzr
 </IfModule>
 
-<Location {core/url_prefix}scm/loggerhead>
+<Location ${FF__core__url_prefix}scm/loggerhead>
   <IfVersion >= 2.3>
     Require all granted
   </IfVersion>

@@ -182,42 +182,6 @@ EOF
 
     case $os_version in
 	7)
-	    # Backport httpd-itk from Fedora
-	    # until https://bugzilla.redhat.com/show_bug.cgi?id=1059143 is fixed
-	    #
-	    # apr > 1.5: httpd 2.4.10 BuildRequires and Requires
-	    DEPS="libuuid-devel lksctp-tools-devel autoconf libtool"
-	    REMOVEDEPS=$DEPS
-	    backport_rpm_from_fedora --source-package apr apr-1.5.1 apr-devel-1.5.1
-
-	    # httpd 2.4.10 (not 2.4.7): required for mod_itk to compile
-	    if ! rpm -q httpd | grep -q 2.4.10; then
-		DEPS="xmlto gcc libselinux-devel lua-devel pcre-devel openssl-devel libxml2-devel apr-util-devel systemd-devel"
-		REMOVEDEPS=$DEPS
-		yum install -y $DEPS
-		yumdownloader --enablerepo=fedora-source --enablerepo=fedora-updates-source \
-			      --source httpd
-		rpm -ivh httpd-*.src.rpm
-                # Remove generic-logos dependency, it itself has a lot of dependencies,
-	        # and it's only for unused /usr/share/pixmaps/poweredby.png
-		sed -i -e '/Requires/ s/, system-logos-httpd//' ~/rpmbuild/SPECS/httpd.spec
-		rpmbuild -bb ~/rpmbuild/SPECS/httpd.spec
-		yum install -y ~/rpmbuild/RPMS/*/httpd-[0-9]*.rpm \
-		    ~/rpmbuild/RPMS/*/httpd-tools-[0-9]*.rpm
-		yum install -y ~/rpmbuild/RPMS/*/mod_ssl-[0-9]*.rpm
-		yum install -y ~/rpmbuild/RPMS/*/httpd-devel-[0-9]*.rpm  # for itk
-		# Note: F21 introduces httpd-filesystem (which needs to be installed),
-		# and requires newer openssl-libs (which needs to be backported).
-		# Let's stick to F20 until #1059143 above is fixed (in CentOS 7.1).
-            fi
-
-	    # mod_itk itself
-	    DEPS=""
-	    REMOVEDEPS=$DEPS
-	    backport_rpm_from_fedora --source-package httpd-itk httpd-itk-2.4.7.01
-	    #
-	    # End of backport for httpd-itk + related packages
-
 	    # viewvc: not available in EPEL7
 	    if yum list viewvc >/dev/null 2>&1; then
 		yum install -y viewvc
@@ -233,7 +197,7 @@ EOF
 		rpmbuild -bb ~/rpmbuild/SPECS/viewvc.spec
 		yum install -y ~/rpmbuild/RPMS/*/viewvc-[0-9]*.rpm
 	    fi
-	    
+
 	    # mediawiki available in EPEL6 but not in EPEL7
 	    # Note: we don't support mediawiki > 1.19 as of 2014-01
 	    if yum list mediawiki >/dev/null 2>&1; then
@@ -248,6 +212,7 @@ EOF
 		yum install -y ~/rpmbuild/RPMS/noarch/mediawiki-[0-9]*.rpm
 	    fi
 
+	    yum --enablerepo=epel -y install php-tidy
 	    # php-htmlpurifier-htmlpurifier Requires, available in EPEL6 but not EPEL7
 	    DEPS="php-pear"
 	    REMOVEDEPS=$DEPS

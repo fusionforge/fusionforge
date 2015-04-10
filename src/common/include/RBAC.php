@@ -229,9 +229,6 @@ abstract class BaseRole extends Error {
 			}
 		}
 
-		$systasksq = new SysTasksQ();
-		$systasksq->add(SYSTASK_CORE, 'SCM_REPO', $project->getID());
-
 		return true ;
 	}
 
@@ -265,8 +262,13 @@ abstract class BaseRole extends Error {
 		$hook_params['project'] =& $project;
 		plugin_hook ("role_unlink_project", $hook_params);
 
-		$systasksq = new SysTasksQ();
-		$systasksq->add(SYSTASK_CORE, 'SCM_REPO', $project->getID());
+		# Change repo permissions when we change anonymous access
+		# Not done in SetSetting() because we used batch-mode removeObsoleteSettings()
+		$anon = RoleAnonymous::getInstance();
+		if ($this->getID() == $anon->getID()) {
+				$systasksq = new SysTasksQ();
+				$systasksq->add(SYSTASK_CORE, 'SCM_REPO', $project->getID());
+		}
 
 		return true ;
 	}
@@ -330,6 +332,13 @@ abstract class BaseRole extends Error {
 						       $reference,
 						       $value)) ;
 		$this->perms_array[$section][$reference] = $value;
+
+		# Change repo permissions when we change anonymous access
+		$anon = RoleAnonymous::getInstance();
+		if ($section == 'scm' && $this->getID() == $anon->getID()) {
+				$systasksq = new SysTasksQ();
+				$systasksq->add(SYSTASK_CORE, 'SCM_REPO', $reference);
+		}
 	}
 
 	function getSettingsForProject ($project) {
@@ -563,7 +572,7 @@ abstract class BaseRole extends Error {
 
 		case 'tracker':
 			if ($this->hasPermission('tracker_admin', artifacttype_get_groupid($reference))) {
-				return 5 | $value ;
+				return 29 | $value ;
 			} elseif (!$this->hasPermission('project_read', artifacttype_get_groupid($reference))) {
 				return 0;
 			}
@@ -571,7 +580,7 @@ abstract class BaseRole extends Error {
 			break ;
 		case 'new_tracker':
 			if ($this->hasPermission('tracker_admin', $reference)) {
-				return 5 | $value ;
+				return 29 | $value ;
 			} elseif (!$this->hasPermission('project_read', $reference)) {
 				return 0;
 			}
@@ -851,6 +860,7 @@ abstract class BaseRole extends Error {
 		//			db_execute('delete_from_pfo_role_setting', array($role_id, $sect, $refid));
 
 		// Insert new/changed permissions
+		$anon = RoleAnonymous::getInstance();
 		foreach ($data as $sect => &$refs) {
 			foreach ($refs as $refid => $value) {
 				if (!isset($this->perms_array[$sect][$refid])) {
@@ -862,6 +872,12 @@ abstract class BaseRole extends Error {
 					db_execute('update_pfo_role_setting',
 						   array($role_id, $sect, $refid, $value));
 				}
+			}
+
+			# Change repo permissions when we change anonymous access
+			if ($sect == 'scm' && $this->getID() == $anon->getID()) {
+					$systasksq = new SysTasksQ();
+					$systasksq->add(SYSTASK_CORE, 'SCM_REPO', $refid);
 			}
 		}
 
@@ -885,11 +901,6 @@ abstract class BaseRole extends Error {
 					return false;
 				}
 			}
-		}
-
-		$systasksq = new SysTasksQ();
-		foreach ($this->getLinkedProjects() as $project) {
-			$systasksq->add(SYSTASK_CORE, 'SCM_REPO', $project->getID());
 		}
 
 		return true;
@@ -1346,9 +1357,9 @@ class RoleComparator {
 		$ap = $a->getHomeProject() ;
 		$bp = $b->getHomeProject() ;
 		if ($ap == NULL && $bp != NULL) {
-			return 1 ;
-		} elseif ($ap != NULL && $bp == NULL) {
 			return -1 ;
+		} elseif ($ap != NULL && $bp == NULL) {
+			return 1 ;
 		} elseif ($ap == NULL && $bp == NULL) {
 			$tmp = strcoll ($a->getName(), $b->getName()) ;
 			return $tmp ;

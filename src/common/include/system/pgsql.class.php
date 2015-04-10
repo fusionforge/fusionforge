@@ -29,25 +29,32 @@ class pgsql extends System {
  	*/
 
 	/**
- 	* Value to add to unix_uid to get unix uid
- 	*
- 	* @var	constant	$UID_ADD
- 	*/
+	* Value to add to unix_uid to get unix uid
+	*
+	* @var	constant	$UID_ADD
+	*/
 	var $UID_ADD = 20000;
 
 	/**
- 	* Value to add to group_id to get unix gid
- 	*
- 	* @var	constant	$GID_ADD
- 	*/
+	* Value to add to group_id to get unix gid
+	*
+	* @var	constant	$GID_ADD
+	*/
 	var $GID_ADD = 10000;
 
 	/**
- 	* Value to add to unix gid to get unix uid of anoncvs special user
- 	*
- 	* @var	constant	$SCM_UID_ADD
- 	*/
-	var $SCM_UID_ADD = 50000;
+	* Value to add to unix gid to get unix gid of 'xxx_scmro' group
+	*
+	* @var	constant	$GID_ADD_SCMRO
+	*/
+	var $GID_ADD_SCMRO = 100000;
+
+	/**
+	* Value to add to unix gid to get unix gid of 'xxx_scmrw' group
+	*
+	* @var	constant	$GID_ADD_SCMRW
+	*/
+	var $GID_ADD_SCMRW = 50000;
 
 	/**
 	* pgsql() - CONSTRUCTOR
@@ -108,11 +115,9 @@ class pgsql extends System {
 		} else {
 			$res = db_query_params ('UPDATE users SET
 			unix_uid=user_id+$1,
-			unix_gid=user_id+$2,
-			unix_status=$3
-			WHERE user_id=$4',
+			unix_status=$2
+			WHERE user_id=$3',
 						array ($this->UID_ADD,
-							   $this->UID_ADD,
 							   'A',
 							   $user_id)) ;
 					if (!$res) {
@@ -131,15 +136,6 @@ class pgsql extends System {
 						 array ($user_id));
 			if (!$res2) {
 				$this->setError('Error: Cannot Delete Group GID: '.db_error());
-				return false;
-			}
-			$res3 = db_query_params ('INSERT INTO nss_groups
-					(user_id, group_id,name, gid)
-					SELECT user_id, 0, user_name, unix_gid
-					FROM users WHERE user_id=$1',
-						 array ($user_id));
-			if (!$res3) {
-				$this->setError('Error: Cannot Update Group GID: '.db_error());
 				return false;
 			}
 
@@ -280,9 +276,10 @@ class pgsql extends System {
 			$this->setError('Error: Cannot Delete Group GID: '.db_error());
 			return false;
 		}
+
 		$res4 = db_query_params ('INSERT INTO nss_groups
-					(user_id, group_id, name, gid)
-						SELECT 0, group_id, unix_group_name, group_id + $1
+					(group_id, name, gid)
+						SELECT group_id, unix_group_name, group_id + $1
 					FROM groups
 					WHERE group_id=$2',
 					 array ($this->GID_ADD,
@@ -291,17 +288,30 @@ class pgsql extends System {
 			$this->setError('Error: Cannot Insert Group GID: '.db_error());
 			return false;
 		}
+
 		$res5 = db_query_params ('INSERT INTO nss_groups
-					(user_id, group_id, name, gid)
-						SELECT 0, group_id, $1 || unix_group_name, group_id + $2
+					(group_id, name, gid)
+						SELECT group_id, unix_group_name||$1, group_id + $2
 					FROM groups
 					WHERE group_id=$3',
-					 array ('scm_',
-						$this->SCM_UID_ADD,
+					 array ('_scmro',
+						$this->GID_ADD_SCMRO,
 						$group_id)) ;
-
 		if (!$res5) {
-			$this->setError('Error: Cannot Insert SCM Group GID: '.db_error());
+			$this->setError('Error: Cannot Insert SCMRO Group GID: '.db_error());
+			return false;
+		}
+
+		$res6 = db_query_params ('INSERT INTO nss_groups
+					(group_id, name, gid)
+						SELECT group_id, unix_group_name||$1, group_id + $2
+					FROM groups
+					WHERE group_id=$3',
+					 array ('_scmrw',
+						$this->GID_ADD_SCMRW,
+						$group_id)) ;
+		if (!$res6) {
+			$this->setError('Error: Cannot Insert SCMRW Group GID: '.db_error());
 			return false;
 		}
 
@@ -363,6 +373,33 @@ class pgsql extends System {
 
 		$u = user_get_object($user_id) ;
 		$p = group_get_object($group_id) ;
+
+		if (forge_check_perm_for_user($u,'scm',$group_id,'read')) {
+			$res = db_query_params ('INSERT INTO nss_usergroups (
+SELECT users.unix_uid AS uid,
+	   groups.group_id + $1 AS gid,
+	   users.user_id AS user_id,
+	   groups.group_id AS group_id,
+	   users.user_name AS user_name,
+	   groups.unix_group_name||$2 AS unix_group_name
+FROM users,groups
+WHERE users.user_id=$3
+  AND users.status=$4
+  AND users.unix_status=$5
+  AND groups.status=$6
+  AND groups.group_id=$7)',
+						array($this->GID_ADD_SCMRO,
+							  '_scmro',
+							  $user_id,
+							  'A', 'A', 'A',
+							  $group_id));
+			if (!$res) {
+				db_rollback();
+				$this->setError('Error: Cannot Update Group Member(s): '.db_error());
+				return false;
+			}
+		}
+
 		if (forge_check_perm_for_user($u,'scm',$group_id,'write')) {
 			$res = db_query_params ('INSERT INTO nss_usergroups (
 SELECT users.unix_uid AS uid,
@@ -370,15 +407,15 @@ SELECT users.unix_uid AS uid,
 	   users.user_id AS user_id,
 	   groups.group_id AS group_id,
 	   users.user_name AS user_name,
-	   $2 || groups.unix_group_name AS unix_group_name
+	   groups.unix_group_name||$2 AS unix_group_name
 FROM users,groups
 WHERE users.user_id=$3
   AND users.status=$4
   AND users.unix_status=$5
   AND groups.status=$6
   AND groups.group_id=$7)',
-						array($this->SCM_UID_ADD,
-							  'scm_',
+						array($this->GID_ADD_SCMRW,
+							  '_scmrw',
 							  $user_id,
 							  'A', 'A', 'A',
 							  $group_id));
@@ -434,6 +471,82 @@ WHERE users.user_id=$2
 			$this->setError('Error: Cannot Delete Group Member(s): '.db_error());
 			return false;
 		}
+		return true;
+	}
+
+	function sysRegenUserGroups() {
+		db_begin();
+		$res = db_query_params('TRUNCATE nss_usergroups', array());
+		if (!$res) {
+			$this->setError('Error: cannot truncate nss_usergroups: '.db_error());
+			return false;
+		}
+
+		$sql = "
+INSERT INTO nss_usergroups
+
+-- Member access
+SELECT users.unix_uid, nss_groups.gid, users.user_id, nss_groups.group_id, user_name, nss_groups.name::text
+FROM users
+  JOIN pfo_user_role USING (user_id)
+  JOIN pfo_role ON (pfo_user_role.role_id=pfo_role.role_id)
+  LEFT JOIN role_project_refs ON (pfo_user_role.role_id=role_project_refs.role_id)
+  JOIN nss_groups ON (pfo_role.home_group_id=nss_groups.group_id)
+WHERE users.unix_status='A'AND nss_groups.gid < $1 
+
+UNION
+
+-- Read access
+SELECT users.unix_uid, nss_groups.gid, users.user_id, nss_groups.group_id, user_name, nss_groups.name::text
+FROM users
+  JOIN pfo_user_role USING (user_id)
+  JOIN pfo_role ON (pfo_user_role.role_id=pfo_role.role_id)
+  LEFT JOIN role_project_refs ON (pfo_user_role.role_id=role_project_refs.role_id)
+  JOIN nss_groups ON (pfo_role.home_group_id=nss_groups.group_id OR role_project_refs.group_id=nss_groups.group_id)
+  JOIN pfo_role_setting ON (pfo_user_role.role_id=pfo_role_setting.role_id AND (pfo_role_setting.ref_id=nss_groups.group_id) AND ((section_name='project_admin' AND perm_val=1) OR (section_name='scm' AND perm_val=1)))
+WHERE users.unix_status='A' AND nss_groups.gid > $2
+
+UNION
+
+-- Write access
+SELECT users.unix_uid, nss_groups.gid, users.user_id, nss_groups.group_id, user_name, nss_groups.name::text
+FROM users
+  JOIN pfo_user_role USING (user_id)
+  JOIN pfo_role ON (pfo_user_role.role_id=pfo_role.role_id)
+  LEFT JOIN role_project_refs ON (pfo_user_role.role_id=role_project_refs.role_id)
+  JOIN nss_groups ON (pfo_role.home_group_id=nss_groups.group_id OR role_project_refs.group_id=nss_groups.group_id)
+  JOIN pfo_role_setting ON (pfo_user_role.role_id=pfo_role_setting.role_id AND (pfo_role_setting.ref_id=nss_groups.group_id) AND ((section_name='project_admin' AND perm_val=1) OR (section_name='scm' AND perm_val=2)))
+WHERE users.unix_status='A' AND nss_groups.gid > $1 AND nss_groups.gid < $2
+
+UNION
+
+-- Forge admins
+SELECT users.unix_uid, nss_groups.gid, users.user_id, nss_groups.group_id, user_name, nss_groups.name::text
+FROM users
+  JOIN pfo_user_role USING (user_id)
+  JOIN pfo_role_setting ON (pfo_user_role.role_id=pfo_role_setting.role_id AND section_name='forge_admin' AND perm_val=1), nss_groups
+WHERE users.unix_status='A'
+
+-- Not supported, this is not sane
+-- UNION
+-- 
+-- -- 'Open' privileges for Anonymous and LoggedIn users
+-- SELECT users.unix_uid, nss_groups.gid, users.user_id, nss_groups.group_id, user_name, nss_groups.name::text||'_scmro'
+-- FROM users
+--   JOIN role_project_refs ON (role_project_refs.role_id IN (1,2))
+--   JOIN nss_groups ON (role_project_refs.group_id=nss_groups.group_id)
+--   JOIN pfo_role_setting ON (role_project_refs.role_id=pfo_role_setting.role_id AND (pfo_role_setting.ref_id=nss_groups.group_id) AND ((section_name='project_admin' AND perm_val=1) OR (section_name='scm' AND perm_val=2)))
+-- WHERE users.unix_status='A' AND nss_groups.gid < $1
+
+GROUP BY users.user_id, nss_groups.gid;
+";
+		$res = db_query_params($sql, array($GID_ADD_SCMRW, $GID_ADD_SCMRO));
+		if (!$res) {
+			$this->setError('Error: cannot regen nss_usergroups: '.db_error());
+			return false;
+		}
+		db_commit();
+		
 		return true;
 	}
 }

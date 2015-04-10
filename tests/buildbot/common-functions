@@ -45,7 +45,6 @@ prepare_workspace()
 setup_epel_repo()
 {
 if [ -z "$HOST" ] ; then  echo "HOST undefined" ;exit 1; fi
-HOST=$1
 # EPEL REPO
 if [ ! -z "$EPEL_REPO" ] ; then
         echo "Installing specific EPEL REPO $EPEL_REPO"
@@ -74,6 +73,23 @@ enabled=0
 gpgcheck=0
 EOF
 fi
+}
+
+setup_epel_testing_repo()
+{
+if [ -z "$HOST" ] ; then  echo "HOST undefined" ;exit 1; fi
+# EPEL Testing REPO
+echo "Installing EPEL Testing REPO"
+ssh root@$HOST "cat > /etc/yum.repos.d/epel-testing.repo" <<-EOF
+# Name: EPEL RPM Repository for Red Hat Enterprise Testing \$releasever - epel
+# URL: http://fedoraproject.org/wiki/EPEL
+[epel-testing]
+name=Extra Packages for Enterprise Linux Testing \$releasever - \$basearch 
+mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=testing-epel\$releasever&arch=\$basearch
+failovermethod=priority
+enabled=0
+gpgcheck=0
+EOF
 }
 
 setup_dag_repo()

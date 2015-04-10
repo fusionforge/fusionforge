@@ -85,6 +85,15 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 				$text);
 	}
 
+	protected function openWithOneRetry($url) {
+		try {
+			$this->open($url);
+		}
+		catch (Exception $e) {
+			$this->open($url);
+		}
+	}
+
 	/**
 	 * Method that is called after Selenium actions.
 	 *
@@ -120,6 +129,19 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	{
 		system(RUN_COMMAND_PREFIX.$cmd, $ret);
 		$this->assertEquals(0, $ret);
+		ob_flush();
+	}
+
+	function runCommandTimeout($dir, $command, $env='') {
+		$cmd = "cd $dir && $env timeout 15s $command";
+		system($cmd, $ret);
+		if ($ret == 124) {	# retry once if we get a timeout
+			system($cmd, $ret);
+		}
+		if ($ret == 124) {	# retry a second time if we get a timeout again
+			system($cmd, $ret);
+		}
+		$this->assertEquals(0, $ret);  # Give up
 		ob_flush();
 	}
 
@@ -163,23 +185,17 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 
 		$this->createProject ('Tmpl');
 
-		$this->click("link=Site Admin");
-		$this->waitForPageToLoad("30000");
-		$this->click("link=Display Full Project List/Edit Projects");
-		$this->waitForPageToLoad("30000");
-		$this->click("link=Tmpl");
-		$this->waitForPageToLoad("30000");
+		$this->clickAndWait("link=Site Admin");
+		$this->clickAndWait("link=Display Full Project List/Edit Projects");
+		$this->clickAndWait("link=Tmpl");
 		$this->select ("//select[@name='form_template']", "label=Yes") ;
-		$this->click("submit");
-		$this->waitForPageToLoad("30000");
+		$this->clickAndWait("submit");
 
 		$this->open( ROOT . '/projects/tmpl') ;
 		$this->waitForPageToLoad("30000");
 
-		$this->click("link=Admin");
-		$this->waitForPageToLoad("30000");
-		$this->click("link=Tools");
-		$this->waitForPageToLoad("30000");
+		$this->clickAndWait("link=Admin");
+		$this->clickAndWait("link=Tools");
 		$this->check("//input[@name='use_forum']") ;
 		$this->check("//input[@name='use_tracker']") ;
 		$this->check("//input[@name='use_mail']") ;
@@ -187,104 +203,78 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->check("//input[@name='use_docman']") ;
 		$this->check("//input[@name='use_news']") ;
 		$this->check("//input[@name='use_frs']") ;
-		$this->click("submit");
-		$this->waitForPageToLoad("30000");
+		$this->clickAndWait("submit");
 
 		if (in_array ('trackers', $what)) {
-			$this->click("link=Trackers Administration");
-			$this->waitForPageToLoad("30000");
+			$this->clickAndWait("link=Trackers Administration");
 			$this->type("name", "Bugs");
 			$this->type("//input[@name='description']", "Tracker for bug reports");
-			$this->click("post_changes");
-			$this->waitForPageToLoad("30000");
+			$this->clickAndWait("post_changes");
 			$this->assertTrue($this->isTextPresent("Tracker created successfully"));
-			$this->click("link=Bugs");
-			$this->waitForPageToLoad("30000");
-			$this->click("link=Manage Custom Fields");
-			$this->waitForPageToLoad("30000");
+			$this->clickAndWait("link=Bugs");
+			$this->clickAndWait("link=Manage Custom Fields");
 			$this->type("name", "URL");
 			$this->type("alias", "url");
 			$this->click("//input[@name='field_type' and @value=4]");
-			$this->click("post_changes");
-			$this->waitForPageToLoad("30000");
+			$this->clickAndWait("post_changes");
 
-			$this->click("link=Admin");
-			$this->waitForPageToLoad("30000");
-			$this->click("link=Tools");
-			$this->waitForPageToLoad("30000");
-			$this->click("link=Trackers Administration");
-			$this->waitForPageToLoad("30000");
+			$this->clickAndWait("link=Admin");
+			$this->clickAndWait("link=Tools");
+			$this->clickAndWait("link=Trackers Administration");
 			$this->type("name", "Support Requests");
 			$this->type("//input[@name='description']", "Tracker for support requests");
-			$this->click("post_changes");
-			$this->waitForPageToLoad("30000");
+			$this->clickAndWait("post_changes");
 			$this->assertTrue($this->isTextPresent("Tracker created successfully"));
 
 			$this->type("name", "Patches");
 			$this->type("//input[@name='description']", "Proposed changes to code");
-			$this->click("post_changes");
-			$this->waitForPageToLoad("30000");
+			$this->clickAndWait("post_changes");
 			$this->assertTrue($this->isTextPresent("Tracker created successfully"));
 
 			$this->type("name", "Feature Requests");
 			$this->type("//input[@name='description']", "New features that people want");
-			$this->click("post_changes");
-			$this->waitForPageToLoad("30000");
+			$this->clickAndWait("post_changes");
 			$this->assertTrue($this->isTextPresent("Tracker created successfully"));
 		}
 
 		if (in_array ('tasks', $what)) {
-			$this->click("link=Admin");
-			$this->waitForPageToLoad("30000");
-			$this->click("link=Tools");
-			$this->waitForPageToLoad("30000");
-			$this->click("link=Tasks Administration");
-			$this->waitForPageToLoad("30000");
-			$this->click("link=Add a Subproject");
-			$this->waitForPageToLoad("30000");
+			$this->clickAndWait("link=Admin");
+			$this->clickAndWait("link=Tools");
+			$this->clickAndWait("link=Tasks Administration");
+			$this->clickAndWait("link=Add a Subproject");
 			$this->type("project_name", "To Do");
 			$this->type("//input[@name='description']", "Things we have to do");
-			$this->click("submit");
-			$this->waitForPageToLoad("30000");
+			$this->clickAndWait("submit");
 			$this->assertTrue($this->isTextPresent("Subproject Inserted"));
 
 			$this->type("project_name", "Next Release");
 			$this->type("//input[@name='description']", "Items for our next release");
-			$this->click("submit");
-			$this->waitForPageToLoad("30000");
+			$this->clickAndWait("submit");
 			$this->assertTrue($this->isTextPresent("Subproject Inserted"));
 		}
 
 		if (in_array ('forums', $what)) {
-			$this->click("link=Admin");
-			$this->waitForPageToLoad("30000");
-			$this->click("link=Tools");
-			$this->waitForPageToLoad("30000");
-			$this->click("link=Forums Admin");
-			$this->waitForPageToLoad("30000");
+			$this->clickAndWait("link=Admin");
+			$this->clickAndWait("link=Tools");
+			$this->clickAndWait("link=Forums Admin");
 
-			$this->click("link=Add Forum");
-			$this->waitForPageToLoad("30000");
+			$this->clickAndWait("link=Add Forum");
 			$this->type("forum_name", "Open-Discussion");
 			$this->type("//input[@name='description']", "General Discussion");
-			$this->click("submit");
-			$this->waitForPageToLoad("30000");
+			$this->clickAndWait("submit");
 			$this->assertTrue($this->isTextPresent("Forum added successfully"));
 
 			$this->type("forum_name", "Help");
 			$this->type("//input[@name='description']", "Get Public Help");
-			$this->click("submit");
-			$this->waitForPageToLoad("30000");
+			$this->clickAndWait("submit");
 			$this->assertTrue($this->isTextPresent("Forum added successfully"));
 
 			$this->type("forum_name", "Developers-Discussion");
 			$this->type("//input[@name='description']", "Project Developer Discussion");
-			$this->click("submit");
-			$this->waitForPageToLoad("30000");
+			$this->clickAndWait("submit");
 			$this->assertTrue($this->isTextPresent("Forum added successfully"));
 
-			$this->click("link=Forums");
-			$this->waitForPageToLoad("30000");
+			$this->clickAndWait("link=Forums");
 			$this->assertTrue($this->isTextPresent("open-discussion"));
 			$this->assertTrue($this->isTextPresent("Get Public Help"));
 			$this->assertTrue($this->isTextPresent("Project Developer Discussion"));
@@ -375,8 +365,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 
 		$this->open( ROOT . '/admin/approve-pending.php') ;
 		$this->waitForPageToLoad("30000");
-		$this->click("document.forms['approve.$unix_name'].submit");
-		$this->waitForPageToLoad("60000");
+		$this->clickAndWait("document.forms['approve.$unix_name'].submit");
 
 		$this->assertTrue($this->isTextPresent("Approving Project: $unix_name"));
 

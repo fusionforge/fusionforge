@@ -13,10 +13,10 @@ AliasMatch "^/moin_static[0-9]*/(.*)" "/usr/share/moin/htdocs/$1"
 
 <IfModule wsgi_module>
   WSGIProcessGroup fusionforge-plugin-moinmoin
-  WSGIScriptAliasMatch /plugins/moinmoin/[-_a-zA-Z0-9]*/(.*) "{core/data_path}/plugins/moinmoin/wikidata/moin.wsgi/$1"
+  WSGIScriptAliasMatch /plugins/moinmoin/[-_a-zA-Z0-9]*/(.*) "${FF__core__data_path}/plugins/moinmoin/wikidata/moin.wsgi/$1"
 </IfModule>
 
-<Location {core/url_prefix}plugins/moinmoin>
+<Location ${FF__core__url_prefix}plugins/moinmoin>
   <IfVersion >= 2.3>
     Require all granted
   </IfVersion>
