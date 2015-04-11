@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (C) 2009 Alain Peyrat, Alcatel-Lucent
+ * Copyright 2015, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -45,6 +46,8 @@
 //	so a user can choose a file to upload a .csv file and store it in task mgr
 //
 
+global $HTML;
+
 pm_header(array('title'=>_('Upload data into the tasks'),'group_project_id'=>$group_project_id));
 
 $default = array('headers' => 1, 'full' => 1, 'sep' => ',');
@@ -68,177 +71,166 @@ if (session_loggedin()) {
 	}
 }
 
-$url_set_format = '/pm/task.php?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=format_csv&amp;sep='.urlencode($sep).'&amp;full='.$full.'&amp;headers='.$headers;
-
-$url_export = '/pm/task.php?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=downloadcsv&amp;sep='.urlencode($sep).'&amp;full='.$full.'&amp;headers='.$headers;
-
 $format = $full ? "Full CSV" : "Normal CSV";
 $format .= $headers ? ' with headers' : ' without headers';
 $format .= " using '$sep' as separator.";
-?>
-<p><?php echo _('This page allows you to export or import all the tasks using a CSV (<a href="http://en.wikipedia.org/wiki/Comma-separated_values">Comma Separated Values</a>) File. This format can be used to view tasks using Microsoft Excel.'); ?></p>
-<h2><?php echo _('Export tasks as a CSV file'); ?></h2>
 
-<strong><?php echo _('Selected CSV Format:'); ?></strong> <?php echo $format ?> <a href="<?php echo $url_set_format ?>">(Change)</a>
+echo html_e('p', array(), _('This page allows you to export or import all the tasks using a CSV (<a href="http://en.wikipedia.org/wiki/Comma-separated_values">Comma Separated Values</a>) File. This format can be used to view tasks using Microsoft Excel.'));
+echo html_e('h2', array(), _('Export tasks as a CSV file'));
 
-<p><a href="<?php echo $url_export ?>"><?php echo _('Export CSV file'); ?></a></p>
+echo html_e('strong', array(), _('Selected CSV Format')._(':')).' '.$format.' '.util_make_link('/pm/task.php?group_id='.$group_id.'&group_project_id='.$group_project_id.'&func=format_csv&sep='.$sep.'&full='.$full.'&headers='.$headers, _('(Change)'));
+echo html_e('p', array(), util_make_link('/pm/task.php?group_id='.$group_id.'&group_project_id='.$group_project_id.'&func=downloadcsv&sep='.$sep.'&full='.$full.'&headers='.$headers, _('Export CSV file')));
 
-<h2><?php echo _('Import tasks using a CSV file'); ?></h2>
-<form enctype="multipart/form-data" method="post" action="<?php echo getStringFromServer('PHP_SELF')?>?group_project_id=<?php echo $group_project_id ?>&amp;group_id=<?php echo $group_id ?>&amp;func=postuploadcsv">
-<p><?php echo _('Choose a file in the proper .csv format for uploading.'); ?></p>
-<input type="file" name="userfile" required="required" /><br/>
-<label><input type="radio" name="replace" value="1" checked /> <?php echo _('Replace all tasks by the ones present in the file'); ?></label>
-<label><input type="radio" name="replace" value="0" /> <?php echo _('Add the ones from the file to the existing ones'); ?></label>
-<br/><br/>
-<input type="submit" name="submit" value="<?php echo _('Submit'); ?>" />
-</form>
+echo html_e('h2', array(), _('Import tasks using a CSV file'));
+echo $HTML->openForm(array('enctype' => 'multipart/form-data', 'method' => 'post', 'action' => getStringFromServer('PHP_SELF').'?group_project_id='.$group_project_id.'&group_id='.$group_id.'&func=postuploadcsv'));
+echo html_e('p', array(), _('Choose a file in the proper .csv format for uploading.'));
+echo html_e('input', array('type' => 'file', 'name' => 'userfile', 'required' => 'required')).html_e('br');
+echo html_e('p', array(),
+	html_e('label', array(), html_e('input', array('type' => 'radio', 'name' => 'replace', 'value' => 1, 'checked' => 'checked')). _('Replace all tasks by the ones present in the file')).
+	html_e('label', array(), html_e('input', array('type' => 'radio', 'name' => 'replace', 'value' => 0)). _('Add the ones from the file to the existing ones')));
+echo html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Submit')));
+echo $HTML->closeForm();
+echo html_e('h3', array(), _('Notes'));
+$elementsArray = array();
+$elementsArray[] = array('content' => _('If project_task_id is empty, then a new task will be created.'));
+$elementsArray[] = array('content' => _('If project_task_id is present, then the corresponding task will be updated.'));
+echo $HTML->html_list($elementsArray);
 
-<h3><?php echo _('Notes'); ?></h3>
-<ul>
-<li><?php echo _('If project_task_id is empty, then a new task will be created.'); ?></li>
-<li><?php echo _('If project_task_id is present, then the corresponding task will be updated.'); ?></li>
-</ul>
+echo html_e('h2', array(), _('Record Layout'));
 
-<h2><?php echo _('Record Layout'); ?></h2>
-
-<table class="listing full">
-<tr>
-    <th><?php echo _('Field Name'); ?></th>
-    <th><?php echo _('Description'); ?></th>
-</tr>
-<tr>
-    <td>project_task_id</td>
-    <td><?php echo _('this is the ID in database'); ?></td>
-</tr>
-<tr>
-    <td>external_task_id</td>
-    <td><?php echo _('optional, the equivalent of project_task_id but determined by external application, such as Microsoft Project. Primarily preserved for sorting purposes only.'); ?></td>
-</tr>
-<tr>
-    <td>parent_id</td>
-    <td><?php echo _('the project_task_id of the parent task, if any'); ?></td>
-</tr>
-<tr>
-    <td>external_parent_id</td>
-    <td><?php echo _('the equivalent of parent project_task_id but determined by external application, such as Microsoft Project. Primarily preserved for matching purposes only.'); ?></td>
-</tr>
-<tr>
-    <td>title</td>
-    <td><?php echo _('The summary or brief description'); ?></td>
-</tr>
-<tr>
-    <td>category</td>
-    <td><?php echo _('The category name (must be defined, only available in full export)'); ?></td>
-</tr>
-<tr>
-    <td>duration</td>
-    <td><?php echo _('Duration in days'); ?></td>
-</tr>
-<tr>
-    <td>work</td>
-    <td><?php echo _('Number of hours required to complete'); ?></td>
-</tr>
-<tr>
-    <td>start_date</td>
-    <td><?php echo _('The start date in MM-DD-YYYY HH:MM:SS format'); ?></td>
-</tr>
-<tr>
-    <td>end_date</td>
-    <td><?php echo _('The end date in MM-DD-YYYY HH:MM:SS format'); ?></td>
-</tr>
-<tr>
-    <td>percent_complete</td>
-    <td><?php echo _('Percentage of completion'); ?></td>
-</tr>
-<tr>
-    <td>priority</td>
-    <td><?php echo _('integers 1 to 5'); ?></td>
-</tr>
-<tr>
-    <td>notes</td>
-    <td><?php echo _('optional, the details of the task or a comment to add to a task'); ?></td>
-</tr>
-<tr>
-    <td>resource1_unixname</td>
-    <td><?php echo _('optional, the unixname or precisely-matched realname of the assignee'); ?></td>
-</tr>
-<tr>
-    <td>resource2_unixname</td>
-    <td><?php echo _('optional, same as above'); ?></td>
-</tr>
-<tr>
-    <td>resource3_unixname</td>
-    <td><?php echo _('optional, same as above'); ?></td>
-</tr>
-<tr>
-    <td>resource4_unixname</td>
-    <td><?php echo _('optional, same as above'); ?></td>
-</tr>
-<tr>
-    <td>resource5_unixname</td>
-    <td><?php echo _('optional, same as above'); ?></td>
-</tr>
-<tr>
-    <td>dependenton1_project_task_id</td>
-    <td><?php echo _('optional, the task_id of a task to be dependent on'); ?></td>
-</tr>
-<tr>
-    <td>dependenton1_external_task_id</td>
-    <td><?php echo _('optional, the ID used by the external application'); ?></td>
-</tr>
-<tr>
-    <td>dependenton1_linktype</td>
-    <td><?php echo _('SS, SF, FS, FF, - The same types as Microsoft Project'); ?></td>
-</tr>
-<tr>
-    <td>dependenton2_project_task_id</td>
-    <td><?php echo _('repetition of dependenton1'); ?></td>
-</tr>
-<tr>
-    <td>dependenton2_external_task_id</td>
-    <td><?php echo _('repetition of dependenton1'); ?></td>
-</tr>
-<tr>
-    <td>dependenton2_linktype</td>
-    <td><?php echo _('repetition of dependenton1'); ?></td>
-</tr>
-<tr>
-    <td>dependenton3_project_task_id</td>
-    <td><?php echo _('repetition of dependenton1'); ?></td>
-</tr>
-<tr>
-    <td>dependenton3_external_task_id</td>
-    <td><?php echo _('repetition of dependenton1'); ?></td>
-</tr>
-<tr>
-    <td>dependenton3_linktype</td>
-    <td><?php echo _('repetition of dependenton1'); ?></td>
-</tr>
-<tr>
-    <td>dependenton4_project_task_id</td>
-    <td><?php echo _('repetition of dependenton1'); ?></td>
-</tr>
-<tr>
-    <td>dependenton4_external_task_id</td>
-    <td><?php echo _('repetition of dependenton1'); ?></td>
-</tr>
-<tr>
-    <td>dependenton4_linktype</td>
-    <td><?php echo _('repetition of dependenton1'); ?></td>
-</tr>
-<tr>
-    <td>dependenton5_project_task_id</td>
-    <td><?php echo _('repetition of dependenton1'); ?></td>
-</tr>
-<tr>
-    <td>dependenton5_external_task_id</td>
-    <td><?php echo _('repetition of dependenton1'); ?></td>
-</tr>
-<tr>
-    <td>dependenton5_linktype</td>
-    <td><?php echo _('repetition of dependenton1'); ?></td>
-</tr>
-</table>
-
-<?php
+$thArray= array(_('Field Name'), _('Description'));
+echo $HTML->listTableTop($thArray);
+$cells = array();
+$cells[][] = 'project_task_id';
+$cells[][] = _('this is the ID in database');
+echo $HTML->multiTableRow(array(), $cells);
+$cells = array();
+$cells[][] = 'external_task_id';
+$cells[][] = _('optional, the equivalent of project_task_id but determined by external application, such as Microsoft Project. Primarily preserved for sorting purposes only.');
+echo $HTML->multiTableRow(array(), $cells);
+$cells = array();
+$cells[][] = 'parent_id';
+$cells[][] = _('the project_task_id of the parent task, if any');
+echo $HTML->multiTableRow(array(), $cells);
+$cells = array();
+$cells[][] = 'external_parent_id';
+$cells[][] = _('the equivalent of parent project_task_id but determined by external application, such as Microsoft Project. Primarily preserved for matching purposes only.');
+echo $HTML->multiTableRow(array(), $cells);
+$cells = array();
+$cells[][] = 'title';
+$cells[][] = _('The summary or brief description');
+echo $HTML->multiTableRow(array(), $cells);
+$cells = array();
+$cells[][] = 'category';
+$cells[][] = _('The category name (must be defined, only available in full export)');
+echo $HTML->multiTableRow(array(), $cells);
+$cells = array();
+$cells[][] = 'duration';
+$cells[][] = _('Duration in days');
+echo $HTML->multiTableRow(array(), $cells);
+$cells = array();
+$cells[][] = 'work';
+$cells[][] = _('Number of hours required to complete');
+echo $HTML->multiTableRow(array(), $cells);
+$cells = array();
+$cells[][] = 'start_date';
+$cells[][] = _('The start date in MM-DD-YYYY HH:MM:SS format');
+echo $HTML->multiTableRow(array(), $cells);
+$cells = array();
+$cells[][] = 'end_date';
+$cells[][] = _('The end date in MM-DD-YYYY HH:MM:SS format');
+echo $HTML->multiTableRow(array(), $cells);
+$cells = array();
+$cells[][] = 'percent_complete';
+$cells[][] = _('Percentage of completion');
+echo $HTML->multiTableRow(array(), $cells);
+$cells = array();
+$cells[][] = 'priority';
+$cells[][] = _('integers 1 to 5');
+echo $HTML->multiTableRow(array(), $cells);
+$cells = array();
+$cells[][] = 'notes';
+$cells[][] = _('optional, the details of the task or a comment to add to a task');
+echo $HTML->multiTableRow(array(), $cells);
+$cells = array();
+$cells[][] = 'resource1_unixname';
+$cells[][] = _('optional, the unixname or precisely-matched realname of the assignee');
+echo $HTML->multiTableRow(array(), $cells);
+$cells = array();
+$cells[][] = 'resource2_unixname';
+$cells[][] = _('optional, same as above');
+echo $HTML->multiTableRow(array(), $cells);
+$cells = array();
+$cells[][] = 'resource3_unixname';
+$cells[][] = _('optional, same as above');
+echo $HTML->multiTableRow(array(), $cells);
+$cells = array();
+$cells[][] = 'resource4_unixname';
+$cells[][] = _('optional, same as above');
+echo $HTML->multiTableRow(array(), $cells);
+$cells = array();
+$cells[][] = 'resource5_unixname';
+$cells[][] = _('optional, same as above');
+echo $HTML->multiTableRow(array(), $cells);
+$cells = array();
+$cells[][] = 'dependenton1_project_task_id';
+$cells[][] = _('optional, the task_id of a task to be dependent on');
+echo $HTML->multiTableRow(array(), $cells);
+$cells = array();
+$cells[][] = 'dependenton1_external_task_id';
+$cells[][] = _('optional, the ID used by the external application');
+echo $HTML->multiTableRow(array(), $cells);
+$cells = array();
+$cells[][] = 'dependenton1_linktype';
+$cells[][] = _('SS, SF, FS, FF, - The same types as Microsoft Project');
+echo $HTML->multiTableRow(array(), $cells);
+$cells = array();
+$cells[][] = 'dependenton2_project_task_id';
+$cells[][] = _('repetition of dependenton1');
+echo $HTML->multiTableRow(array(), $cells);
+$cells = array();
+$cells[][] = 'dependenton2_external_task_id';
+$cells[][] = _('repetition of dependenton1');
+echo $HTML->multiTableRow(array(), $cells);
+$cells = array();
+$cells[][] = 'dependenton2_linktype';
+$cells[][] = _('repetition of dependenton1');
+echo $HTML->multiTableRow(array(), $cells);
+$cells = array();
+$cells[][] = 'dependenton3_project_task_id';
+$cells[][] = _('repetition of dependenton1');
+echo $HTML->multiTableRow(array(), $cells);
+$cells = array();
+$cells[][] = 'dependenton3_external_task_id';
+$cells[][] = _('repetition of dependenton1');
+echo $HTML->multiTableRow(array(), $cells);
+$cells = array();
+$cells[][] = 'dependenton3_linktype';
+$cells[][] = _('repetition of dependenton1');
+echo $HTML->multiTableRow(array(), $cells);
+$cells = array();
+$cells[][] = 'dependenton4_project_task_id';
+$cells[][] = _('repetition of dependenton1');
+echo $HTML->multiTableRow(array(), $cells);
+$cells = array();
+$cells[][] = 'dependenton4_external_task_id';
+$cells[][] = _('repetition of dependenton1');
+echo $HTML->multiTableRow(array(), $cells);
+$cells = array();
+$cells[][] = 'dependenton4_linktype';
+$cells[][] = _('repetition of dependenton1');
+echo $HTML->multiTableRow(array(), $cells);
+$cells = array();
+$cells[][] = 'dependenton5_project_task_id';
+$cells[][] = _('repetition of dependenton1');
+echo $HTML->multiTableRow(array(), $cells);
+$cells = array();
+$cells[][] = 'dependenton5_external_task_id';
+$cells[][] = _('repetition of dependenton1');
+echo $HTML->multiTableRow(array(), $cells);
+$cells = array();
+$cells[][] = 'dependenton5_linktype';
+$cells[][] = _('repetition of dependenton1');
+echo $HTML->multiTableRow(array(), $cells);
+echo $HTML->listTableBottom();
 pm_footer();
