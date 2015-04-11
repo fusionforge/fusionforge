@@ -96,10 +96,10 @@ if (count($FRSPackages) < 1) {
 		$package_name_protected = $HTML->toSlug($package_name);
 		$package_ziplink = '';
 		if ($FRSPackageReleases && $num_releases >= 1 && class_exists('ZipArchive') && file_exists($FRSPackage->getReleaseZipPath($FRSPackage->getNewestReleaseID()))) {
-				// display link to latest-release-as-zip
-				$package_ziplink = util_make_link('#', $HTML->getZipPic(_('Download the newest release as ZIP.').' '._('This link always points to the newest release as a ZIP file.')), array('onclick' => 'location:href=\''.util_make_uri('/frs/download.php/latestzip/'.$FRSPackage->getID().'/'.$FRSPackage->getNewestReleaseZipName()).'\''), true);
+			// display link to latest-release-as-zip
+			$package_ziplink = html_e('span', array('class' => 'frs-zip-package'), util_make_link('#', $HTML->getZipPic(_('Download the newest release as ZIP.').' '._('This link always points to the newest release as a ZIP file.')), array('onclick' => 'location:href=\''.util_make_uri('/frs/download.php/latestzip/'.$FRSPackage->getID().'/'.$FRSPackage->getNewestReleaseZipName()).'\''), true));
 		}
-		echo html_e('h2', array('id' => 'title_'. $package_name_protected), html_entity_decode($package_name).html_e('span', array('class' => 'frs-monitor-package'), $package_monitor).html_e('span', array('class' => 'frs-zip-package'), $package_ziplink));
+		echo html_e('h2', array('id' => 'title_'. $package_name_protected), html_entity_decode($package_name).html_e('span', array('class' => 'frs-monitor-package'), $package_monitor).$package_ziplink);
 
 		if ( !$FRSPackageReleases || $num_releases < 1 ) {
 			echo $HTML->warning_msg(_('No releases'));
