@@ -42,13 +42,12 @@ if [ -e /etc/debian_version ]; then
 else
     yum install -y make tar
     backports_rpm
-    yum install -y gettext php-cli php-pgsql php-process php-mbstring \
+    yum install -y httpd-itk gettext php-cli php-pgsql php-process php-mbstring \
 	httpd mod_dav_svn mod_ssl postgresql-server nscd \
 	subversion viewvc python-pycurl git gitweb xinetd \
 	mediawiki119 \
 	moin mod_wsgi python-psycopg2 \
 	unoconv poppler-utils
-    yum --enablerepo=epel-testing install -y httpd-itk
 fi
 
 (
