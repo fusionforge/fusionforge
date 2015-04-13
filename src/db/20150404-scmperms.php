@@ -80,3 +80,5 @@ foreach ($groups as $group) {
         system("chmod -R g+rwX,o+rX-w $projroot/*.git");
     }
 }
+
+echo "SUCCESS\n";
