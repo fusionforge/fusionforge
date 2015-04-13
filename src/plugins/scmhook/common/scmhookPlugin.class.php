@@ -101,7 +101,7 @@ project independently.");
 			if (!$res)
 				return false;
 			$systasksq = new SystasksQ();
-			$systasksq->add($this->getID(), 'SCMHOOK_UPDATE', $group_id);
+			$systasksq->add($this->getID(), 'SCMHOOK_UPDATE', $group_id, user_getid());
 		}
 		return true;
 	}
@@ -185,7 +185,7 @@ project independently.");
 			return false;
 
 		$systasksq = new SystasksQ();
-		$systasksq->add($this->getID(), 'SCMHOOK_UPDATE', $group_id);
+		$systasksq->add($this->getID(), 'SCMHOOK_UPDATE', $group_id, user_getid());
 
 		return true;
 	}
