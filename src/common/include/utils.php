@@ -1773,6 +1773,8 @@ function util_mkdtemp($suffix = '', $prefix = 'tmp') {
 /**
  * Run a function with only the permissions of a given Unix user
  * Function can be an anonymous
+ * Used to rely on posix_seteuid, but standard Bash reverts euid=uid,
+ * cf. Debian patch "privmode.diff", so using fork&exec
  * Optional arguments in an array
  * @param	string		$username	Unix user name
  * @param	function	$function	function to run (possibly anonymous)

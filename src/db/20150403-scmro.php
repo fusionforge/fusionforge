@@ -24,6 +24,7 @@
 require_once dirname(__FILE__).'/../common/include/env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/system/pgsql.class.php';
+require_once $gfcommon.'include/cron_utils.php';
 
 if ($SYS->sysRegenUserGroups()) {
 	echo "SUCCESS\n";
@@ -31,3 +32,4 @@ if ($SYS->sysRegenUserGroups()) {
 	echo "ERROR\n";
 	exit(1);
 }
+cron_reload_nscd();

@@ -32,7 +32,7 @@ if [ -e /etc/debian_version ]; then
     apt-get install -y make gettext php5-cli php5-pgsql php-htmlpurifier \
 	libapache2-mpm-itk libapache2-mod-svn \
 	apache2 postgresql libnss-pgsql2 unscd \
-	subversion augeas-tools viewvc python-pycurl git xinetd \
+	subversion viewvc python-pycurl git xinetd \
 	mediawiki \
 	python-moinmoin libapache2-mod-wsgi python-psycopg2 \
 	unoconv poppler-utils
@@ -42,13 +42,13 @@ if [ -e /etc/debian_version ]; then
 else
     yum install -y make tar
     backports_rpm
+    yum --enablerepo=epel install -y httpd-itk
     yum install -y gettext php-cli php-pgsql php-process php-mbstring \
 	httpd mod_dav_svn mod_ssl postgresql-server nscd \
-	subversion augeas viewvc python-pycurl git gitweb xinetd \
+	subversion viewvc python-pycurl git gitweb xinetd \
 	mediawiki119 \
 	moin mod_wsgi python-psycopg2 \
 	unoconv poppler-utils
-    yum --enablerepo=epel-testing install -y httpd-itk
 fi
 
 (

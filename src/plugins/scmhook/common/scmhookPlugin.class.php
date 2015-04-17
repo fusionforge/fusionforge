@@ -101,7 +101,7 @@ project independently.");
 			if (!$res)
 				return false;
 			$systasksq = new SystasksQ();
-			$systasksq->add($this->getID(), 'SCMHOOK_UPDATE', $group_id);
+			$systasksq->add($this->getID(), 'SCMHOOK_UPDATE', $group_id, user_getid());
 		}
 		return true;
 	}
@@ -185,7 +185,7 @@ project independently.");
 			return false;
 
 		$systasksq = new SystasksQ();
-		$systasksq->add($this->getID(), 'SCMHOOK_UPDATE', $group_id);
+		$systasksq->add($this->getID(), 'SCMHOOK_UPDATE', $group_id, user_getid());
 
 		return true;
 	}
@@ -195,25 +195,22 @@ project independently.");
 		use_javascript('/js/sortable.js');
 		echo $HTML->getJavascripts();
 		$hooksAvailable = $this->getAvailableHooks($group_id);
-		$statusDeploy = $this->getStatusDeploy($group_id);
 		$hooksEnabled = $this->getEnabledHooks($group_id);
 		if (count($hooksAvailable)) {
 			echo '<div id="scmhook">';
-			if ($statusDeploy)
-				echo $HTML->warning_msg(_('Hooks management update process waiting ...'));
 
 			echo '<h2>'._('Enable Repository Hooks').'</h2>';
 			switch ($scm) {
 				case "scmsvn": {
-					$this->displayScmSvnHook($hooksAvailable, $statusDeploy, $hooksEnabled, $group_id);
+					$this->displayScmSvnHook($hooksAvailable, $hooksEnabled, $group_id);
 					break;
 				}
 				case "scmhg": {
-					$this->displayScmHgHook($hooksAvailable, $statusDeploy, $hooksEnabled);
+					$this->displayScmHgHook($hooksAvailable, $hooksEnabled);
 					break;
 				}
 				case "scmgit": {
-					$this->displayScmGitHook($hooksAvailable, $statusDeploy, $hooksEnabled);
+					$this->displayScmGitHook($hooksAvailable, $hooksEnabled);
 					break;
 				}
 				default: {
@@ -318,7 +315,7 @@ project independently.");
 		return true;
 	}
 
-	function displayScmSvnHook($hooksAvailable, $statusDeploy, $hooksEnabled, $group_id) {
+	function displayScmSvnHook($hooksAvailable, $hooksEnabled, $group_id) {
 		global $HTML;
 		// Group available hooks by type
 		$hooks_by_type = array();
@@ -333,7 +330,6 @@ project independently.");
 				$classth = array('unsortable', '', '');
 				echo $HTML->listTableTop($tabletop, false, "sortable_scmhook_$hooktype", 'sortable', $classth);
 				foreach ($hooks as $hook) {
-					$isdisabled = 0;
 					if (! empty($hook->onlyGlobalAdmin) && ! Permission::isGlobalAdmin()) {
 						echo '<tr class="hide" ><td>';
 					}
@@ -345,15 +341,11 @@ project independently.");
 					if (in_array($hook->getClassname(), $hooksEnabled))
 						echo ' checked="checked"';
 
-					if ($statusDeploy) {
-						$isdisabled = 1;
-						echo ' disabled="disabled"';
-					}
-					if (!$isdisabled && !$hook->isAvailable())
+					if (!$hook->isAvailable())
 						echo ' disabled="disabled"';
 
 					echo ' />';
-					if (in_array($hook->getClassname(), $hooksEnabled) && $statusDeploy) {
+					if (in_array($hook->getClassname(), $hooksEnabled)) {
 						echo '<input type="hidden" ';
 						echo 'name="'.$hook->getLabel().'_'.$hook->getClassname().'" ';
 						echo 'value="on" />';
@@ -388,7 +380,7 @@ project independently.");
 		}
 	}
 
-	function displayScmHgHook($hooksAvailable, $statusDeploy, $hooksEnabled) {
+	function displayScmHgHook($hooksAvailable, $hooksEnabled) {
 		global $HTML;
 		$hooksServePushPullBundle = array();
 		foreach ($hooksAvailable as $hook) {
@@ -409,7 +401,6 @@ project independently.");
 			$classth = array('unsortable', '', '');
 			echo $HTML->listTableTop($tabletop, false, 'sortable_scmhook_serve-push-pull-bundle', 'sortable', $classth);
 			foreach ($hooksServePushPullBundle as $hookServePushPullBundle) {
-				$isdisabled = 0;
 				if (! empty($hookServePushPullBundle->onlyGlobalAdmin) && ! Permission::isGlobalAdmin()) {
 					echo '<tr class="hide" ><td>';
 				}
@@ -421,16 +412,11 @@ project independently.");
 				if (in_array($hookServePushPullBundle->getClassname(), $hooksEnabled))
 					echo ' checked="checked"';
 
-				if ($statusDeploy) {
-					$isdisabled = 1;
-					echo ' disabled="disabled"';
-				}
-
-				if (!$isdisabled && !$hookServePushPullBundle->isAvailable())
+				if (!$hookServePushPullBundle->isAvailable())
 					echo ' disabled="disabled"';
 
 				echo ' />';
-				if (in_array($hookServePushPullBundle->getClassname(), $hooksEnabled) && $statusDeploy) {
+				if (in_array($hookServePushPullBundle->getClassname(), $hooksEnabled)) {
 					echo '<input type="hidden" ';
 					echo 'name="'.$hookServePushPullBundle->getLabel().'_'.$hookServePushPullBundle->getClassname().'" ';
 					echo 'value="on" />';
@@ -449,7 +435,7 @@ project independently.");
 			echo $HTML->listTableBottom();
 		}
 	}
-	function displayScmGitHook($hooksAvailable, $statusDeploy, $hooksEnabled) {
+	function displayScmGitHook($hooksAvailable, $hooksEnabled) {
 		global $HTML;
 		$hooksPostReceive = array();
 		foreach ($hooksAvailable as $hook) {
@@ -470,7 +456,6 @@ project independently.");
 			$classth = array('unsortable', '', '');
 			echo $HTML->listTableTop($tabletop, false, 'sortable_scmhook_post-receive', 'sortable', $classth);
 			foreach ($hooksPostReceive as $hookPostReceive) {
-				$isdisabled = 0;
 				if (! empty($hookPostReceive->onlyGlobalAdmin) && ! Permission::isGlobalAdmin()) {
 					echo '<tr class="hide" ><td>';
 				}
@@ -482,16 +467,11 @@ project independently.");
 				if (in_array($hookPostReceive->getClassname(), $hooksEnabled))
 					echo ' checked="checked"';
 
-				if ($statusDeploy) {
-					$isdisabled = 1;
-					echo ' disabled="disabled"';
-				}
-
-				if (!$isdisabled && !$hookPostReceive->isAvailable())
+				if (!$hookPostReceive->isAvailable())
 					echo ' disabled="disabled"';
 
 				echo ' />';
-				if (in_array($hookPostReceive->getClassname(), $hooksEnabled) && $statusDeploy) {
+				if (in_array($hookPostReceive->getClassname(), $hooksEnabled)) {
 					echo '<input type="hidden" ';
 					echo 'name="'.$hookPostReceive->getLabel().'_'.$hookPostReceive->getClassname().'" ';
 					echo 'value="on" />';

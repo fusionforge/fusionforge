@@ -294,7 +294,7 @@ some control over it to the project's administrator.");
 			}
 			system ("sed -i '/enable-rep-sharing = false/s/^. //' $repo/db/fsfs.conf") ;
 			system ("svn mkdir -m'Init' file:///$repo/trunk file:///$repo/tags file:///$repo/branches >/dev/null") ;
-			system ("find $repo -type d | xargs -I{} chmod g+s {}") ;
+			system ("find $repo -type d -print0 | xargs -r -0 chmod g+s") ;
 			// Allow read/write users to modify the SVN repository
 			$rw_unix_group = $project->getUnixName() . '_scmrw';
 			system("chgrp -R $rw_unix_group $repo");
