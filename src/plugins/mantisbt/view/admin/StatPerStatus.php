@@ -43,7 +43,7 @@ try {
 
 if (!isset($errorPage)){
 	$total = array('open' => 0, 'resolved' => 0, 'resolved' => 0, 'closed' => 0, 'total' => 0);
-	echo $HTML->boxTop(_('Tickets oer Status'));
+	echo $HTML->boxTop(_('Tickets or Status'));
 	echo	'<tr>';
 	echo		'<th>'._('Project').'</th>';
 	echo		'<th>'._('Open').'</th>';

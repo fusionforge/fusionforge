@@ -36,37 +36,56 @@ require_once $gfplugins.'scmhook/common/scmhookPlugin.class.php';
 ############
 ###### START
 
-// get the list of project to be updated
-$res = db_query_params('SELECT groups.group_id, groups.scm_box, plugin_scmhook.hooks
+$res = db_query_params('SELECT systask_id, group_id, user_name FROM systasks
+	JOIN users ON (systasks.user_id = users.user_id)
+	WHERE systasks.status=$1 AND systask_type=$2',
+	array('WIP', 'SCMHOOK_UPDATE'));
+while ($task = db_fetch_array($res)) {
+	$group_id = $task['group_id'];
+	$user_name = $task['user_name'];
+	// Run as the requesting user to avoid symlinks attacks
+	if (util_sudo_effective_user($user_name, 'install_hooks', array($group_id)) == false) {
+		cron_debug("ERROR scmhook: couldn't run install_hooks as user $user_name");
+	}
+}
+
+$group = null;  // pass info to library/ scripts
+function install_hooks($params) {
+	global $group, $gfplugins;
+
+	$group_id = $params[0];
+	// get the list of project to be updated
+	$res = db_query_params('SELECT groups.group_id, groups.scm_box, plugin_scmhook.hooks
 			FROM groups, plugin_scmhook
 			WHERE groups.status = $1
 			AND plugin_scmhook.id_group = groups.group_id
 			AND plugin_scmhook.need_update = $2
-			AND groups.use_scm = $3',
-			array('A', 1, 1));
+			AND groups.use_scm = $3
+            AND group_id = $4',
+		array('A', 1, 1, $group_id));
 
-if (! $res) {
-	cron_debug("FATAL Database Query Failed: " . db_error());
-}
-
-$scmhookPlugin = new scmhookPlugin;
-while ($row = db_fetch_array($res)) {
-	$group_id = $row['group_id'];
-	$scm_box = $row['scm_box'];
-	$scmtype = '';
-	// find the scm type of the project
-	$listScm = $scmhookPlugin->getListLibraryScm();
-	$group = group_get_object($group_id);
-	for ($i = 0; $i < count($listScm); $i++) {
-		if ($group->usesPlugin($listScm[$i])) {
-			$scmtype = $listScm[$i];
-			continue;
-		}
+	if (! $res) {
+		cron_debug("FATAL Database Query Failed: " . db_error());
 	}
-	$returnvalue = true;
-	// call the right cronjob in the library
-	switch ($scmtype) {
-		case 'scmsvn': {
+
+	$scmhookPlugin = new scmhookPlugin;
+	while ($row = db_fetch_array($res)) {
+		$group_id = $row['group_id'];
+		$scm_box = $row['scm_box'];
+		$scmtype = '';
+		// find the scm type of the project
+		$listScm = $scmhookPlugin->getListLibraryScm();
+		$group = group_get_object($group_id);
+		for ($i = 0; $i < count($listScm); $i++) {
+			if ($group->usesPlugin($listScm[$i])) {
+				$scmtype = $listScm[$i];
+				continue;
+			}
+		}
+		$returnvalue = true;
+		// call the right cronjob in the library
+		switch ($scmtype) {
+		case 'scmsvn':
 			cron_debug("INFO start updating hooks for project ".$group->getUnixName());
 			require_once $gfplugins.'scmhook/library/'.$scmtype.'/cronjobs/updateScmRepo.php';
 			$scmsvncronjob = new ScmSvnUpdateScmRepo();
@@ -81,8 +100,8 @@ while ($row = db_fetch_array($res)) {
 				}
 			}
 			break;
-		}
-		case 'scmhg': {
+
+		case 'scmhg':
 			cron_debug("INFO start updating hooks for project ".$group->getUnixName());
 			require_once $gfplugins.'scmhook/library/'.$scmtype.'/cronjobs/updateScmRepo.php';
 			$scmhgcronjob = new ScmHgUpdateScmRepo();
@@ -97,8 +116,8 @@ while ($row = db_fetch_array($res)) {
 				}
 			}
 			break;
-		}
-		case 'scmgit': {
+
+		case 'scmgit':
 			cron_debug("INFO start updating hooks for project ".$group->getUnixName());
 			require_once $gfplugins.'scmhook/library/'.$scmtype.'/cronjobs/updateScmRepo.php';
 			$scmgitcronjob = new ScmGitUpdateScmRepo();
@@ -113,18 +132,18 @@ while ($row = db_fetch_array($res)) {
 				}
 			}
 			break;
-		}
-		default: {
+
+		default:
 			cron_debug("WARNING No scm plugin found for this project ".$group->getUnixName()." or no cronjobs for this type");
 			$returnvalue = false;
 			break;
 		}
-	}
-
-	if ($returnvalue) {
-		cron_debug("INFO hooks updated for project ".$group->getUnixName());
-	} else {
-		cron_debug("ERROR Unable to update hooks for project ".$group->getUnixName());
+		
+		if ($returnvalue) {
+			cron_debug("INFO hooks updated for project ".$group->getUnixName());
+		} else {
+			cron_debug("ERROR Unable to update hooks for project ".$group->getUnixName());
+		}
 	}
 }
 

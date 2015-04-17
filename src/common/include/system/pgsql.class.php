@@ -540,7 +540,7 @@ WHERE users.unix_status='A'
 
 GROUP BY users.user_id, nss_groups.gid;
 ";
-		$res = db_query_params($sql, array($GID_ADD_SCMRW, $GID_ADD_SCMRO));
+		$res = db_query_params($sql, array($this->GID_ADD_SCMRW, $this->GID_ADD_SCMRO));
 		if (!$res) {
 			$this->setError('Error: cannot regen nss_usergroups: '.db_error());
 			return false;

@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014-2015, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -170,26 +170,28 @@ foreach ($group->getUsers() as $member) {
 	$afu = new ArtifactsForUser($member);
 	$artifacts = $afu->getAssignedArtifactsByGroup();
 	foreach ($artifacts as $artifact) {
-		$cells = array();
-		$cells[][] = util_make_link('/tracker/?func=detail&aid='. $artifact->getID() .'&group_id='.$group_id.'&atid='.$artifact->ArtifactType->getID(), $artifact->ArtifactType->getName().' '.$artifact->getID());
-		$cells[][] = $artifact->getSummary();
-		$cells[][] = GetTime( time() - $artifact->getOpenDate());
-		$messages = db_query_params("select adddate FROM artifact_message_user_vw ".
-						"WHERE artifact_id=$1 ".
-						"ORDER by adddate DESC", array($artifact->getID()));
-		if ( db_numrows($messages)) {
-			$cells[][] = GetTime(time() - db_result($messages, 0, 'adddate'));
-		} else {
-			$cells[][] = GetTime(time() - $artifact->getOpenDate());;
+		if (!$artifact->isError() && $artifact->ArtifactType->Group->getID() == $group_id) {
+			$cells = array();
+			$cells[][] = util_make_link('/tracker/?func=detail&aid='. $artifact->getID() .'&group_id='.$artifact->ArtifactType->Group->getID().'&atid='.$artifact->ArtifactType->getID(), $artifact->ArtifactType->getName().' '.$artifact->getID());
+			$cells[][] = $artifact->getSummary();
+			$cells[][] = GetTime( time() - $artifact->getOpenDate());
+			$messages = db_query_params("select adddate FROM artifact_message_user_vw ".
+							"WHERE artifact_id=$1 ".
+							"ORDER by adddate DESC", array($artifact->getID()));
+			if ( db_numrows($messages)) {
+				$cells[][] = GetTime(time() - db_result($messages, 0, 'adddate'));
+			} else {
+				$cells[][] = GetTime(time() - $artifact->getOpenDate());;
+			}
+			echo $HTML->multiTableRow(array('class' => 'priority'.$artifact->getPriority()), $cells);
 		}
-		echo $HTML->multiTableRow(array('class' => 'priority'.$artifact->getPriority()), $cells);
 	}
 	$ptfu = new ProjectTasksForUser($member);
 	$tasks = $ptfu->getTasksByGroupProjectName();
 	foreach ($tasks as $task) {
-		if ($task-> getPercentComplete() != 100) {
+		if (!$task->isError() && $task->ProjectGroup->Group->getID() == $group_id && $task->getPercentComplete() != 100) {
 			$cells = array();
-			$cells[][] = util_make_link('/pm/task.php?func=detailtask&project_task_id='. $task->getID().'&group_id='.$group_id.'&group_project_id='.$task->ProjectGroup->getID(),_('Task').' '.$task->getID());
+			$cells[][] = util_make_link('/pm/task.php?func=detailtask&project_task_id='. $task->getID().'&group_id='.$task->ProjectGroup->Group->getID().'&group_project_id='.$task->ProjectGroup->getID(),_('Task').' '.$task->getID());
 			$cells[][] = $task->getSummary();
 			$cells[][] = GetTime(time()-$task->getStartDate());
 			$cells[][] = $task->getPercentComplete().'% '._('done');
