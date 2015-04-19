@@ -72,7 +72,7 @@ if ($login) {
 		exit_form_double_submit();
 	}
 	$test = $plugin->checkLDAPCredentials(strtolower($form_loginname),$form_pw);
-	if ($test == FORGE_AUTH_AUTHORITATIVE_ACCEPT) {
+	if ($test == FORGE_AUTH_AUTHORITATIVE_ACCEPT && user_get_object_by_name($form_loginname)->getStatus() == 'A') {
 		if ($plugin->isSufficient()) {
 			$plugin->startSession($form_loginname);
 		}
