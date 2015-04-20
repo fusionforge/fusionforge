@@ -198,6 +198,7 @@ into the FusionForge database.");
 	}
 
 	function displayAuthForm(&$params) {
+		global $HTML;
 		if (!$this->isRequired() && !$this->isSufficient()) {
 			return true;
 		}
@@ -206,18 +207,16 @@ into the FusionForge database.");
 
 		$result = '';
 
-		$result .= '<p>';
-		$result .= _('Cookies must be enabled past this point.');
-		$result .= '</p>';
-
-		$result .= '<form action="' . util_make_url('/plugins/authldap/post-login.php') . '" method="post">
-<input type="hidden" name="form_key" value="' . form_generate_key() . '"/>
-<input type="hidden" name="return_to" value="' . htmlspecialchars(stripslashes($return_to)) . '" />
-<p>';
-		$result .= _('LDAP Login name:');
-		$result .= '<br /><input type="text" name="form_loginname" value="' . htmlspecialchars(stripslashes($loginname)) . '" /></p><p>' . _('Password') . _(':') . '<br /><input type="password" name="form_pw" /></p><p><input type="submit" name="login" value="' . _('Login') . '" />
-</p>
-</form>';
+		$result .= html_e('p', array(), _('Cookies must be enabled past this point.'));
+		$result .= $HTML->openForm(array('action' => util_make_uri('/plugins/'.$this->name.'/post-login.php'), 'method' => 'post'));
+		$result .= html_e('input', array('type' => 'hidden', 'name' => 'form_key', 'value' => form_generate_key()));
+		$result .= html_e('input', array('type' => 'hidden', 'name' => 'return_to', 'value' => htmlspecialchars(stripslashes($return_to))));
+		$result .= html_e('p', array(), _('Login Name')._(':').
+						html_e('br').html_e('input', array('type' => 'text', 'name' => 'form_loginname', 'value' => htmlspecialchars(stripslashes($loginname)), 'required' => 'required')));
+		$result .= html_e('p', array(), _('Password')._(':').
+						html_e('br').html_e('input', array('type' => 'password', 'name' => 'form_pw', 'required' => 'required')));
+		$result .= html_e('p', array(), html_e('input', array('type' => 'submit', 'name' => 'login', 'value' => _('Login'))), false);
+		$result .= $HTML->closeForm();
 
 		$params['html_snippets'][$this->name] = $result;
 	}

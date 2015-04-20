@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
+ * Copyright 2015, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -119,7 +120,7 @@ if ($taskboard->getReleaseField()) {
 			$release_name_arr[] = $release_name;
 		}
 
-		$release_box=html_build_select_box_from_arrays ($release_id_arr,$release_name_arr,'_release',$current_release_title, true);
+		$release_box=html_build_select_box_from_arrays ($release_id_arr,$release_name_arr,'_release',$current_release_title, false, 'none', true);
 	}
 }
 ?>
