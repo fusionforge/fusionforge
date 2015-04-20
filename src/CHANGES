@@ -50,6 +50,7 @@ Fusionforge-5.3.3:
 * FRS: wrong tooltip displayed in admin page [#703] (TrivialDev)
 * PM: fix test on success [#762] (TrivialDev)
 * PM: fix allow new tasks without replace older one [#761] patch from Philipp Keidel (TrivialDev)
+* Tracker: fix delete elements of an extrafield [#758] (TrivialDev)
 * Plugin AuthLDAP: error and warning messages displayed twice [#732] (TrivialDev)
 * Plugin AuthLDAP: fix check user status before login [#767] (TrivialDev)
 * Plugin scmhook: fix display when only one SCM plugin enabled [#735] (TrivialDev)
