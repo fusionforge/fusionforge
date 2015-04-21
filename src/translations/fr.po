@@ -14,15 +14,14 @@ msgstr ""
 "Project-Id-Version: fusionforge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-02-07 16:12+0100\n"
-"PO-Revision-Date: 2015-04-21 11:53+0200\n"
-"Last-Translator: Stéphane Aulery <lkppo@free.fr>\n"
+"PO-Revision-Date: 2015-04-21 16:24+0200\n"
+"Last-Translator: Sylvain Beucler <beuc@beuc.net>\n"
 "Language-Team: French <traduc@traduc.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 1.6.10\n"
 
 #: common/account/actions/addsshkey.php:35
 #: common/account/actions/addsshkey.php:50
@@ -2757,7 +2756,7 @@ msgstr "Vous avez reçu ce message suite à votre demande d'être notifié lorsq
 
 #: common/frs/FRSRelease.class.php:375
 msgid "Release delete error: trying to delete root dir"
-msgstr "Erreur de suppression de la version : essayez de supprimer le répertoire racine"
+msgstr "Erreur de suppression de la version : tentative de suppression du répertoire racine"
 
 #: common/frs/FRSRelease.class.php:419
 msgid "Error On Update: Name Already Exists"
@@ -2781,7 +2780,7 @@ msgstr "Voir les fichiers"
 
 #: common/frs/include/frs_utils.php:175 common/frs/include/frs_utils.php:197
 msgid "Error: group id required"
-msgstr "Erreur : identifient de groupe obligatoire"
+msgstr "Erreur : identifiant de groupe obligatoire"
 
 #: common/frs/include/frs_utils.php:225
 #: plugins/mediawiki/www/plugin_admin.php:127
@@ -3402,7 +3401,7 @@ msgstr "Votre demande pour rejoindre le projet %s a été acceptée par un admin
 
 #: common/include/GroupJoinRequest.class.php:287
 msgid "Must be sure before deleting"
-msgstr "Soyez certain avant de supprimer"
+msgstr "Vous devez confirmer avant de supprimer"
 
 #: common/include/GroupJoinRequest.class.php:298
 #: common/survey/Survey.class.php:240
@@ -4110,7 +4109,7 @@ msgstr "Le fichier %1$s ne peut pas être déplacé vers sa destination %2$s."
 #: common/include/Storage.class.php:70
 #, php-format
 msgid "Not a File %1$s or not a directory %2$s."
-msgstr "N'est ni un fichier %1$s ni un répertoire %2$s."
+msgstr "%1$s n'est pas un fichier ou %2$s n'est pas un répertoire."
 
 #: common/include/User.class.php:246
 msgid "User Not Found"
@@ -4764,7 +4763,7 @@ msgstr "Sondage"
 #: common/survey/SurveyQuestionFactory.class.php:61
 #, php-format
 msgid "%s does not use the Survey tool"
-msgstr "%s n'utilise pas l'outil de surveillance"
+msgstr "%s n'utilise pas l'outil de sondage"
 
 #: common/survey/SurveyQuestion.class.php:97
 #: common/survey/SurveyQuestion.class.php:135
@@ -5421,7 +5420,7 @@ msgstr "Votes"
 #: common/tracker/actions/detail.php:67
 #: common/tracker/actions/mod-limited.php:76 common/tracker/actions/mod.php:82
 msgid "Retract Vote"
-msgstr "Retiré le vote"
+msgstr "Retirer le vote"
 
 #: common/tracker/actions/detail.php:70
 #: common/tracker/actions/mod-limited.php:79 common/tracker/actions/mod.php:85
@@ -5463,7 +5462,7 @@ msgstr "Joindre des fichiers"
 #: www/frs/admin/editrelease.php:251 www/frs/admin/editrelease.php:258
 #: www/frs/admin/editrelease.php:294
 msgid "max upload size: "
-msgstr "vitesse maximale d'envoi des données :"
+msgstr "taille maximale d'envoi de données :"
 
 #: common/tracker/actions/detail.php:179
 #: common/tracker/actions/mod-limited.php:204
@@ -5778,7 +5777,7 @@ msgstr "Élément %s créé avec succès"
 #: common/tracker/actions/tracker.php:110
 #, php-format
 msgid "Error on attached file %1$d, file is too large (maximum: %2$s)."
-msgstr "Erreur sur le fichier joint %1$d, qui est trop grand (maximun : %2$s)."
+msgstr "Erreur sur le fichier joint %1$d, qui est trop grand (maximum : %2$s)."
 
 #: common/tracker/actions/tracker.php:114
 #, php-format
@@ -5983,15 +5982,15 @@ msgstr "Ce nom d'élément existe déjà"
 
 #: common/tracker/ArtifactExtraField.class.php:126
 msgid "Invalid size/maxlength for text field"
-msgstr "Longueur ou taille invalide pour le champ texte"
+msgstr "Taille ou longueur maximum invalide pour le champ texte"
 
 #: common/tracker/ArtifactExtraField.class.php:132
 msgid "Invalid rows/cols for textarea field"
-msgstr "Ligne ou colonne invalide pour la zone de texte"
+msgstr "Nombre de ligne ou de colonne invalide pour la zone de texte"
 
 #: common/tracker/ArtifactExtraField.class.php:137
 msgid "This Tracker already uses custom statuses"
-msgstr "Ce traqueur utilise déjà des paramètres personnalisés"
+msgstr "Ce traqueur utilise déjà des états personnalisés"
 
 #: common/tracker/ArtifactExtraField.class.php:234
 msgid "Invalid ArtifactExtraField ID"
@@ -6108,11 +6107,11 @@ msgstr "Intervalle de date de dernière modification invalide"
 
 #: common/tracker/ArtifactQuery.class.php:358
 msgid "Invalid Open Date Range"
-msgstr "Intervalle de date d’ouverture"
+msgstr "Intervalle de date d’ouverture invalide"
 
 #: common/tracker/ArtifactQuery.class.php:374
 msgid "Invalid Close Date Range"
-msgstr "Intervalle de date fermeture"
+msgstr "Intervalle de date fermeture invalide"
 
 #: common/tracker/ArtifactType.class.php:217
 #: common/tracker/ArtifactType.class.php:987
@@ -6131,7 +6130,7 @@ msgstr "Ce nom d'outil de suivi est déjà pris"
 #: common/tracker/ArtifactTypeFactory.class.php:67
 #, php-format
 msgid "%s does not use the Tracker tool"
-msgstr "%s n'utilise pas le traqueur"
+msgstr "%s n'utilise pas l'outil de suivi"
 
 #: common/tracker/include/ArtifactHtml.class.php:46
 msgid "Edit this message"
@@ -6243,7 +6242,7 @@ msgstr "Cloner l'outil de suivi"
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:327
 msgid "Task Id and Summary"
-msgstr "Identifient de tâche et sommaire"
+msgstr "Identifiant de tâche et résumé"
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:328
 msgid "Progress"
@@ -6392,7 +6391,7 @@ msgstr "Éléments définis"
 
 #: common/tracker/views/form-addextrafieldoption.php:51
 msgid "Mapping"
-msgstr "Mappage"
+msgstr "Correspondance"
 
 #: common/tracker/views/form-addextrafieldoption.php:84
 #: common/tracker/views/form-adminroadmap.php:412
@@ -7550,11 +7549,11 @@ msgstr "Lecteur de flux RSS"
 
 #: common/widget/Widget_Rss.class.php:55
 msgid "Cannot create backend directory. Contact forge administrator."
-msgstr "Impossible de créer un répertoire en arrière plan. Contactez l'administrateur de la forge"
+msgstr "Impossible de créer le stockage interne. Contactez l'administrateur de la forge"
 
 #: common/widget/Widget_Rss.class.php:142
 msgid "Cannot add empty RSS URL"
-msgstr "Impossible d'ajouter un URL RSS vide"
+msgstr "Impossible d'ajouter une URL de RSS vide"
 
 #: common/widget/Widget_Rss.class.php:206
 msgid "less than 1 minute"
@@ -7692,7 +7691,7 @@ msgstr "Détails"
 
 #: cronjobs/tracker_gateway.php:195
 msgid "This user is not allowed to submit items to this tracker."
-msgstr "cet utilisateur n'est pas autorisé à envoyer d'éléments à ce traqueur."
+msgstr "Cet utilisateur n'est pas autorisé à envoyer des éléments sur cet outil de suivi."
 
 #: cronjobs/tracker_gateway.php:199
 msgid "Could not match sender email address to user, and tracker does not allow anonymous posts."
@@ -7718,7 +7717,7 @@ msgstr ", partie de "
 #: plugins/admssw/common/RDFedFRSPackage.class.php:94
 #, php-format
 msgid "%1$s release series of project %2$s"
-msgstr "%1$s série de version du projet %2$s"
+msgstr "série de version %1$s du projet %2$s"
 
 #: plugins/admssw/include/admsswPlugin.class.php:138
 msgid "ADMS.SW meta-data"
@@ -7735,7 +7734,7 @@ msgstr "Prévisualisation des <a href=\"%s\">méta-données RDF ADMS.SW</a> à p
 
 #: plugins/admssw/include/admsswPlugin.class.php:631
 msgid "The following is a preview of (machine-readable) RDF meta-data, in Turtle format (see at the bottom for more details)"
-msgstr "Ce qui suit est une prévisualisation des méta-données RDF (pour les machines), au format Turtle (voir plus bas bas pour plus d'informations)"
+msgstr "Ce qui suit est une prévisualisation des méta-données RDF (pour les machines), au format Turtle (voir plus bas pour plus d'informations)"
 
 #: plugins/admssw/include/admsswPlugin.class.php:634
 #: www/softwaremap/full_list.php:70
@@ -7746,7 +7745,7 @@ msgstr "<strong>%d</strong> projets trouvés."
 #: plugins/admssw/include/admsswPlugin.class.php:645
 #: plugins/admssw/www/projectturtle.php:52 plugins/admssw/www/trove.php:46
 msgid "To access this RDF document, you may use, for instance:"
-msgstr "Pour accéder à ce document RDF, vous pouvez utiliser, pour le moment :"
+msgstr "Pour accéder à ce document RDF, vous pouvez utiliser, par exemple :"
 
 #: plugins/admssw/include/admsswPlugin.class.php:649
 msgid "This may redirect to several pages documents in case of too big number of results (observing the LDP paging specifications)."
@@ -7758,7 +7757,7 @@ msgstr "Sinon, si vous êtes certain de vouloir la totalité d'un unique documen
 
 #: plugins/admssw/www/full.php:59
 msgid "Full ADMS.SW export"
-msgstr "Export ADMS.SW intégralement"
+msgstr "Export ADMS.SW intégral"
 
 #: plugins/admssw/www/index.php:37
 msgid "ADMS.SW"
@@ -7811,7 +7810,7 @@ msgstr "Ceci est une prévisualisation des méta-données RDF (pour des machines
 
 #: plugins/admssw/www/trove.php:37
 msgid "SKOS meta-data for trove categories"
-msgstr "Méta-données SKOS pour les catégories de l'arbre"
+msgstr "Méta-données SKOS pour les catégories de projet"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:67
 #: plugins/authcas/include/AuthCASPlugin.class.php:88
@@ -7988,7 +7987,7 @@ msgstr "Ajouter une nouvelle identité"
 
 #: plugins/authopenid/www/index.php:130
 msgid "You can add your own OpenID identities in the form below."
-msgstr "Vous pouvez ajouter vos propres identités OpenID avec le formulaire ci-dessous."
+msgstr "Vous pouvez ajouter vos propres identités OpenID dans le formulaire ci-dessous."
 
 #: plugins/authopenid/www/index.php:138
 msgid "OpenID identity URL:"
@@ -8032,7 +8031,7 @@ msgstr "Vous devez avoir lié au préalable un WebID à un de vos comptes fusion
 #: plugins/authwebid/include/AuthWebIDPlugin.class.php:273
 #, php-format
 msgid "Cannot bind new identity: %s"
-msgstr "Impossible de lié une nouvelle identité : %s"
+msgstr "Impossible de lier une nouvelle identité : %s"
 
 #: plugins/authwebid/include/AuthWebIDPlugin.class.php:288
 msgid "WebID already used"
@@ -8065,7 +8064,7 @@ msgstr "Lier une nouvelle WebID"
 
 #: plugins/authwebid/www/index.php:99
 msgid "You can add your own WebID identities in the form below."
-msgstr "Vous pouvez ajouter vos propres identités WebID avec le formulaire ci-dessous."
+msgstr "Vous pouvez ajouter vos propres identités WebID dans le formulaire ci-dessous."
 
 #: plugins/authwebid/www/index.php:100
 msgid "Once you have confirmed their binding to your fusionforge account, you may use them to login."
@@ -8744,7 +8743,7 @@ msgstr "Administration générale des sous-projets externes du site"
 
 #: plugins/extsubproj/include/extsubproj_Widget_SubProjects.class.php:31
 msgid "Project external subprojects"
-msgstr "Projet avec des sous-projets externes"
+msgstr "Sous-projets externes du projet"
 
 #: plugins/extsubproj/include/extsubproj_Widget_SubProjects.class.php:35
 msgid "Plugin (project)"
@@ -8752,7 +8751,7 @@ msgstr "Greffon (projet)"
 
 #: plugins/extsubproj/include/extsubproj_Widget_SubProjects.class.php:39
 msgid "Displays links to external subprojects of the project"
-msgstr "Affiche les liens vers des sous-projets externes du projet"
+msgstr "Affiche les liens vers les sous-projets externes du projet"
 
 #: plugins/extsubproj/include/extsubproj_Widget_SubProjects.class.php:51
 msgid "Subprojects"
@@ -8854,7 +8853,7 @@ msgstr "Marche "
 
 #: plugins/forumml/www/forumml_utils.php:417
 msgid "Toggle font family (typewriter/normal)"
-msgstr "Changer la police de caractères (à casse fixe / ordinaire)"
+msgstr "Changer la police de caractères (à chasse fixe / ordinaire)"
 
 #: plugins/forumml/www/forumml_utils.php:435
 #: plugins/forumml/www/scripts/cc_attach_js.php:42
@@ -8901,7 +8900,7 @@ msgstr "L'envoi a échoué, vous devez spécifier l'objet du message."
 
 #: plugins/forumml/www/index.php:77
 msgid "There can be some delay before to see the message in the archives."
-msgstr "Il peu y avoir un délai avant de voir le message dans les archives."
+msgstr "Il peut y avoir un délai avant de voir le message dans les archives."
 
 #: plugins/forumml/www/index.php:77
 msgid " Redirecting to archive page, please wait ..."
@@ -9509,7 +9508,7 @@ msgstr "Administration de menu général du site"
 
 #: plugins/headermenu/common/headermenuPlugin.class.php:466
 msgid "Get the ability to set new links next to the login menu (headermenu), in the main menu (outermenu) or in the project menu (groupmenu)."
-msgstr "Obtenir la possibilité de sélectionner le nouveau lien à côté de menu connexion (headermenu), dans le menu principal (outermenu) ou dans le menu projet (groupmenu)."
+msgstr "Permet de définir de nouveaux liens à côté de menu connexion (headermenu), dans le menu principal (outermenu) ou dans le menu projet (groupmenu)."
 
 #: plugins/headermenu/view/admin/updateLinkValue.php:58
 #: plugins/webanalytics/view/admin/updateLinkValue.php:34
@@ -9528,7 +9527,7 @@ msgstr "Nom affiché"
 #: plugins/headermenu/view/admin/updateLinkValue.php:66
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:134
 msgid "Menu Location"
-msgstr "Menu catégories"
+msgstr "Emplacement du menu"
 
 #: plugins/headermenu/view/admin/updateLinkValue.php:76
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:62
@@ -9555,19 +9554,19 @@ msgstr "Impossible de récupérer la valeur de ce lien :"
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:44
 msgid "Outermenu Link Order successfully validated"
-msgstr "Ordre des liens du menu principal enregistré avec succès"
+msgstr "Ordre des liens du menu principal validé avec succès"
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:45
 msgid "Headermenu Link Order successfully validated"
-msgstr "Ordre des liens du menu connexion enregistré avec succès"
+msgstr "Ordre des liens du menu connexion validé avec succès"
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:46
 msgid "Error in Outermenu Link Order validation"
-msgstr "Échec de l'enregistrement de l'ordre des liens du menu principal"
+msgstr "Échec de validation de l'ordre des liens du menu principal"
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:47
 msgid "Error in Headermenu Link Order validation"
-msgstr "Échec de l'enregistrement de l'ordre des liens du menu connexion"
+msgstr "Échec de validation de l'ordre des liens du menu connexion"
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:58
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:55
@@ -10297,7 +10296,7 @@ msgstr "Les administrateurs de projets doivent utiliser le lien Administration p
 
 #: plugins/mailman/www/index.php:64
 msgid "You seem to have mailman account with a different name or password. If you want to update mailman information, click on "
-msgstr "Vous semblez avoir un compte mailman avec un identifient ou un mot de passe différent. Si vous voulez mettre à jour les informations de mailman, cliquez ici "
+msgstr "Vous semblez avoir un compte mailman avec un identifiant ou un mot de passe différent. Si vous voulez mettre à jour les informations de mailman, cliquez sur "
 
 #: plugins/mailman/www/index.php:71 www/mail/index.php:74
 msgid "Choose a list to browse, search, and post messages."
@@ -10403,7 +10402,7 @@ msgstr "Pièce jointe supprimée avec succès."
 
 #: plugins/mantisbt/action/deleteAttachment.php:43
 msgid "Missing Attachment ID to delete."
-msgstr "Identifient de pièce jointe à supprimer."
+msgstr "Il manque l'identifiant de pièce jointe à supprimer."
 
 #: plugins/mantisbt/action/deleteCategory.php:40
 #, php-format
@@ -10440,7 +10439,7 @@ msgstr "Utilisateur MantisBT initialisé avec succès."
 
 #: plugins/mantisbt/action/renameCategory.php:37
 msgid "No action, same category name."
-msgstr "Aucun action, même nom de catégorie."
+msgstr "Aucune action, même nom de catégorie."
 
 #: plugins/mantisbt/action/renameCategory.php:47
 msgid "Category renamed successfully."
@@ -10510,15 +10509,15 @@ msgstr "Aucun projet trouvé dans MantisBT"
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:251
 msgid "Cannot delete in database"
-msgstr "Impossible de supprimer la base de données"
+msgstr "Impossible de supprimer en base de données"
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:289
 msgid "Update MantisBT project"
-msgstr "Mise à jour du MantisBT du projet"
+msgstr "Mise à jour du projet MantisBT"
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:293
 msgid "ID MantisBT project not found"
-msgstr "Identifient MantisBT du projet introuvable"
+msgstr "Identifiant MantisBT du projet introuvable"
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:393
 msgid "Tickets"
@@ -10526,11 +10525,11 @@ msgstr "Tickets"
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:398
 msgid "View the roadmap, per version tickets"
-msgstr "voir la roadmap"
+msgstr "Voir la feuille de route, tickets classés par version"
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:399
 msgid "View all tickets."
-msgstr "Voir les traceurs."
+msgstr "Voir tous les tickets."
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:404
 msgid "Statistics"
@@ -10546,7 +10545,7 @@ msgstr "Voir les statistiques globales."
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:446
 msgid "Site Global MantisBT Admin"
-msgstr "Administration générale de MantisBT"
+msgstr "Administration générale MantisBT du site"
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:478
 msgid "MantisBT project not initialized, missing params"
@@ -10562,7 +10561,7 @@ msgstr "Administration général de MantisBT"
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:702
 msgid "Use Mantis Bugtracker as another ticket management tool."
-msgstr "Utiliser le traqueur de bug Mantis comme un autre outil de gestion des tickets."
+msgstr "Utiliser l'outil de suivi Mantis comme outil supplémentaire de gestion des tickets."
 
 #: plugins/mantisbt/common/mantisbt_Widget_ProjectLastIssues.class.php:30
 msgid "MantisBT title"
@@ -10702,7 +10701,7 @@ msgstr "Date cible"
 
 #: plugins/mantisbt/view/admin/StatPerStatus.php:45
 msgid "Tickets oer Status"
-msgstr "Tickets par Statut"
+msgstr "Tickets par État"
 
 #: plugins/mantisbt/view/admin/StatPerStatus.php:49
 msgid "Fixed"
@@ -10879,7 +10878,7 @@ msgstr "Ajouter un fichier"
 
 #: plugins/mantisbt/view/viewIssue.php:48
 msgid "Woops: wrong issue id"
-msgstr "Oups : identifient incorrect"
+msgstr "Oups : identifiant incorrect"
 
 #: plugins/mantisbt/view/viewIssue.php:54
 msgid "Ticket"
@@ -11084,7 +11083,7 @@ msgstr "Aucun répertoire ou impossible d'accéder au contenu de %s"
 
 #: plugins/mediawiki/www/plugin_admin.php:101
 msgid "Mediawiki plugin's configuration may require to enable uploads ('enable_uploads'). Contact your admin."
-msgstr "La configuration du greffon Mediawiki nécessite d'activer le envoi de données ('enable_uploads'). Contactez votre administrateur."
+msgstr "La configuration du greffon Mediawiki peut nécessiter d'activer l'envoi de données ('enable_uploads'). Contactez votre administrateur."
 
 #: plugins/mediawiki/www/plugin_admin.php:113
 msgid "File successfully removed"
@@ -11105,7 +11104,7 @@ msgstr "<a href=\"%s\">Télécharger</a> la sauvegarde XML quotidienne."
 
 #: plugins/mediawiki/www/plugin_admin.php:173
 msgid "This project's wiki logo : $wgLogo"
-msgstr "Ce logo de wiki du projet : $wgLogo"
+msgstr "Le logo de wiki de ce projet : $wgLogo"
 
 #: plugins/mediawiki/www/plugin_admin.php:176
 msgid "Current logo:"
@@ -11121,7 +11120,7 @@ msgstr "Télécharger un nouveau logo"
 
 #: plugins/mediawiki/www/plugin_admin.php:190
 msgid "The logo must be in PNG format and precisely 135x135 pixels in size."
-msgstr "ce logo doit être au format PNG et respecter une taille précise de 135 x 135 pixels."
+msgstr "Le logo doit être au format PNG et respecter une taille précise de 135 x 135 pixels."
 
 #: plugins/mediawiki/www/plugin_admin.php:191
 #: www/frs/admin/editrelease.php:294 www/frs/admin/qrs.php:197
@@ -11196,11 +11195,11 @@ msgstr "Fournisseur"
 
 #: plugins/oauthconsumer/www/access_tokens.php:13
 msgid "Token Key"
-msgstr "Clef de jeton"
+msgstr "Clef du jeton"
 
 #: plugins/oauthconsumer/www/access_tokens.php:13
 msgid "Token Secret"
-msgstr ""
+msgstr "Secret du jeton"
 
 #: plugins/oauthconsumer/www/access_tokens.php:29
 msgid "You have no OAuth Access Tokens registered in the database currently"
@@ -11326,7 +11325,7 @@ msgstr "Demander un jeton"
 
 #: plugins/oauthconsumer/www/get_access_token.php:139
 msgid "Request Token Secret"
-msgstr "Demander un jeton secret"
+msgstr "Demander un secret de jeton"
 
 #: plugins/oauthconsumer/www/get_access_token.php:158
 msgid "Step 2: "
@@ -11343,11 +11342,11 @@ msgstr "Erreur de récupération de la demande de jeton"
 #: plugins/oauthconsumer/www/get_access_token.php:178
 #: plugins/oauthconsumer/www/index.php:81
 msgid "There are no OAuth Providers registered in the database currently. Please ask your forge administer to create one."
-msgstr "Il n'y a pas de fournisseurs OAuth enregistrés dans la base de données pour le moment. Veuillez demander à l'administrateur de votre forge dans créer un."
+msgstr "Il n'y a pas de fournisseurs OAuth enregistrés dans la base de données pour le moment. Veuillez demander à l'administrateur de votre forge d'en créer un."
 
 #: plugins/oauthconsumer/www/index.php:13
 msgid "This OAuth Consumer plugin allows a user to connect to different oauth enabled services."
-msgstr "Ce greffon consommateur d'OAuth permet à un utilisateur de se connecter à différent services activés par oauth."
+msgstr "Ce greffon consommateur OAuth permet à un utilisateur de se connecter à différents services gérant oauth."
 
 #: plugins/oauthconsumer/www/index.php:14
 msgid "Accessing resources with OAuth"
@@ -11367,7 +11366,7 @@ msgstr "Demande HTTP"
 
 #: plugins/oauthconsumer/www/index.php:62
 msgid "POST data"
-msgstr "ENVOYER des données"
+msgstr "Données POST"
 
 #: plugins/oauthconsumer/www/index.php:77
 msgid "No access tokens have been created for this provider"
@@ -11385,7 +11384,7 @@ msgstr "Modifier le fournisseur OAuth"
 #: plugins/oauthconsumer/www/providers.php:14
 #: plugins/oauthconsumer/www/providers.php:88
 msgid "Consumer Secret"
-msgstr ""
+msgstr "Secret du consommateur"
 
 #: plugins/oauthconsumer/www/provider_edit.php:69
 msgid "Update Provider"
@@ -11393,7 +11392,7 @@ msgstr "Mettre à jour le fournisseur"
 
 #: plugins/oauthconsumer/www/providers.php:49
 msgid "There are currently no OAuth Providers registered in the database"
-msgstr "Il 'n'y a pas actuellement de fournisseur OAuth enregistré dans la base de données"
+msgstr "Il n'y a actuellement pas de fournisseur OAuth enregistré dans la base de données"
 
 #: plugins/oauthconsumer/www/providers.php:69
 msgid "Add a new OAuth provider"
@@ -11559,7 +11558,7 @@ msgstr "Administration OSLC"
 
 #: plugins/phpcaptcha/common/phpcaptchaPlugin.class.php:45
 msgid "Wrong captcha code"
-msgstr "Captcha faux"
+msgstr "Mauvaise réponse Captcha"
 
 #: plugins/phpcaptcha/common/phpcaptchaPlugin.class.php:54
 msgid "Reload image."
@@ -11633,7 +11632,7 @@ msgstr "Fichier non trouvé sur le serveur"
 
 #: plugins/projectimport/common/UploadedFiles.class.php:377
 msgid "Please either select existing file OR upload new file"
-msgstr "Veuillez sélectionner au moins un fichier existant ou en envoyer un nouveau"
+msgstr "Veuillez sélectionner un fichier existant OU BIEN en envoyer un nouveau"
 
 #: plugins/projectimport/common/UploadedFiles.class.php:388
 #, php-format
@@ -11658,7 +11657,7 @@ msgstr "Échec lors de l'écriture du fichier sur le disque."
 
 #: plugins/projectimport/common/UploadedFiles.class.php:409
 msgid "File upload stopped by extension."
-msgstr "Envoi de fichier arrêter par extension."
+msgstr "Envoi de fichier bloqué par extension."
 
 #: plugins/projectimport/common/UploadedFiles.class.php:411
 #, php-format
@@ -11689,7 +11688,7 @@ msgstr "Correspondance trouvée avec un utilisateur forge existant ayant le mêm
 #: plugins/projectimport/www/index.php:295
 #, php-format
 msgid "Found matching existing forge user “%s” with same email “%s”"
-msgstr "Correspondance trouvée avec un utilisateur forge existant ayant le même courriel \"%s\""
+msgstr "Correspondance trouvée avec un utilisateur forge existant \"%s\" ayant le même courriel \"%s\""
 
 #: plugins/projectimport/www/index.php:301
 #, php-format
@@ -11706,7 +11705,7 @@ msgstr "Sélectionner un utilisateur existant"
 
 #: plugins/projectimport/www/index.php:329
 msgid "to be added to project"
-msgstr "est ajouté au projet"
+msgstr "à ajouter au projet"
 
 #: plugins/projectimport/www/index.php:342
 msgid "need to add to project"
@@ -11718,11 +11717,11 @@ msgstr "Impossible de trouver des utilisateurs existants correspondants aux util
 
 #: plugins/projectimport/www/index.php:382
 msgid "If you wish to map their data to existing users, choose them in the form bellow, and re-submit it:"
-msgstr "Si vous souhaitez connecter leurs données à des utilisateurs existants, choisissez les dans le formulaire ci-dessous, et envoyez le de nouveau :"
+msgstr "Si vous souhaitez connecter leurs données à des utilisateurs existants, choisissez-les dans le formulaire ci-dessous, et validez-le à nouveau :"
 
 #: plugins/projectimport/www/index.php:385
 msgid "You may change some mappings and re-submit."
-msgstr "Vous devriez modifier des connexions et envoyé de nouveau."
+msgstr "Vous pouvez modifier des connexions et revalider."
 
 #: plugins/projectimport/www/index.php:390
 msgid "Matching imported users to existing forge users"
@@ -11742,7 +11741,7 @@ msgstr "Rôle initial"
 
 #: plugins/projectimport/www/index.php:397
 msgid "Map to existing user (role)"
-msgstr "Connecté à un utilisateur existant (rôle)"
+msgstr "Connecter à un utilisateur existant (rôle)"
 
 #: plugins/projectimport/www/index.php:399
 msgid "Mapped to existing user"
@@ -11750,7 +11749,7 @@ msgstr "Connecté à un utilisateur existant"
 
 #: plugins/projectimport/www/index.php:421
 msgid "Matching new project members roles"
-msgstr ""
+msgstr "Rôles de membres correspondants du nouveau projet"
 
 #: plugins/projectimport/www/index.php:424
 msgid "New project member"
@@ -11758,7 +11757,7 @@ msgstr "Nouveau membre du projet"
 
 #: plugins/projectimport/www/index.php:425
 msgid "Imported users mapped to it"
-msgstr ""
+msgstr "Utilisateurs importés correspondants"
 
 #: plugins/projectimport/www/index.php:426
 msgid "New role"
@@ -11767,7 +11766,7 @@ msgstr "Nouveau rôle"
 #: plugins/projectimport/www/index.php:472
 #, php-format
 msgid "Imported user “%s” (role “%s”), mapped as “%s” which is not yet in the project: need to add it as role “%s”."
-msgstr ""
+msgstr "L'utilisateur importé \"%s\" (role \"%s\"), correspondant à l'utilisateur \"%s\" qui n'est pas encore dans le projet: nécessité de l'ajouter en tant que rôle \"%s\"."
 
 #: plugins/projectimport/www/index.php:483
 #, php-format
@@ -11780,7 +11779,7 @@ msgstr "Détails du projet importé : "
 
 #: plugins/projectimport/www/index.php:578
 msgid "Project's spaces found"
-msgstr "Espaces de projet trouvés"
+msgstr "Espaces du projet trouvés"
 
 #: plugins/projectimport/www/index.php:584
 msgid "uri"
@@ -11796,7 +11795,7 @@ msgstr "Erreur d'analyse du fichier."
 
 #: plugins/projectimport/www/index.php:685
 msgid "Confirm selected file or upload a new one"
-msgstr "Confirmer le fichier sélectionner ou en envoyé un nouveau"
+msgstr "Confirmer le fichier sélectionné ou en envoyer un nouveau"
 
 #: plugins/projectimport/www/index.php:688
 msgid "Select a file or upload a new one"
@@ -11812,11 +11811,11 @@ msgstr "Vous ne pouvez importer un projet sans être administrateur de ce projet
 
 #: plugins/projectimport/www/projectsimport.php:43
 msgid "Missing require to use this plugin. You need OpenDocument.php"
-msgstr ""
+msgstr "Il manque un 'require' pour utiliser ce plugin. Vous devez installer OpenDocument.php"
 
 #: plugins/projectimport/www/projectsimport.php:47
 msgid "Missing require to use this plugin. You need arc/ARC2.php"
-msgstr ""
+msgstr "Il manque un 'require' pour utiliser ce plugin. Vous devez installer arc/ARC2.php"
 
 #: plugins/projectimport/www/projectsimport.php:264
 msgid "Failed to create project"
@@ -12040,7 +12039,7 @@ msgstr "Administration de la hiérarchie de projets"
 #: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:92
 #: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:610
 msgid "Configure the projets-hierarchy plugin (docman, tree, delegate, globalconf features)"
-msgstr "configurer le greffon de de hiérarchie de projet (docman, arbre, délégation, fonctionnalités de configuration générale)"
+msgstr "Configurer le greffon de hiérarchie de projet (docman, arbre, délégation, fonctionnalités de configuration générale)"
 
 #: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:116
 msgid "Per Category"
@@ -12145,7 +12144,7 @@ msgstr "Activer l'arbre"
 
 #: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:46
 msgid "Enable hierarchical view for browsing in document manager."
-msgstr "Activer le parcours en vue hiérarchique dans le gestionnaire de document."
+msgstr "Activer le parcours en vue hiérarchique dans le gestionnaire de documents."
 
 #: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:47
 msgid "Enable docman browsing"
@@ -12718,8 +12717,8 @@ msgstr[1] "Accès anonyme aux dépôts Git"
 #: plugins/scmgit/common/GitPlugin.class.php:106
 msgid "This project's Git repository can be checked out through anonymous access with the following command."
 msgid_plural "This project's Git repositories can be checked out through anonymous access with the following commands."
-msgstr[0] "Le dépôt Git de ce projet est accessible anonymement grâce aux commandes suivantes."
-msgstr[1] "Les dépôts Git de ce projet sont accessibles anonymement grâce aux commandes suivantes."
+msgstr[0] "Le dépôt Git de ce projet est accessible anonymement avec les commandes suivantes."
+msgstr[1] "Les dépôts Git de ce projet sont accessibles anonymement avec les commandes suivantes."
 
 #: plugins/scmgit/common/GitPlugin.class.php:126
 msgid "Developer's repository"
@@ -12801,7 +12800,7 @@ msgstr "Envois Git"
 
 #: plugins/scmgit/common/GitPlugin.class.php:995
 msgid "Cannot create a secondary repository with the same name as the primary"
-msgstr "Impossible de créer un dépôt secondaire avec de même nom que le premier"
+msgstr "Impossible de créer un dépôt secondaire avec le même nom que le dépôt principal"
 
 #: plugins/scmgit/common/GitPlugin.class.php:1000
 #: plugins/scmhg/common/HgPlugin.class.php:556
@@ -12855,7 +12854,7 @@ msgstr "Description :"
 
 #: plugins/scmgit/common/GitPlugin.class.php:1131
 msgid "Initial clone URL (or name of an existing repository in this project; leave empty to start with an empty repository):"
-msgstr "URL de clonage initial (ou nom d'un dépôt existant dans le projet : laisser vide au démarrage avec un dépôt vide) :"
+msgstr "URL de clonage initial (ou nom d'un dépôt existant dans le projet : laisser vide pour démarrer avec un dépôt vide) :"
 
 #: plugins/scmgit/common/scmgit_Widget_MyRepositories.class.php:32
 msgid "My Git cloned Repositories List"
@@ -12867,7 +12866,7 @@ msgstr "Liste les URL de vos dépôts personnels clonés depuis des dépôts de 
 
 #: plugins/scmgit/common/scmgit_Widget_MyRepositories.class.php:57
 msgid "No personal git repository"
-msgstr "Pas de dépôt personnel"
+msgstr "Pas de dépôt git personnel"
 
 #: plugins/scmgit/www/index.php:44
 #, php-format
@@ -12884,7 +12883,7 @@ msgstr "Vous avez demandé un dépôt Git personnel pour ce projet. Il sera cré
 
 #: plugins/scmhg/common/HgPlugin.class.php:47
 msgid "Use Mercurial as Source Code Management tool. Offer DAV or SSH access."
-msgstr "Utiliser Mercurial comme outils de gestion de code source. Offre un accès DAV ou SSH."
+msgstr "Utiliser Mercurial comme outil de gestion de code source. Offre un accès DAV ou SSH."
 
 #: plugins/scmhg/common/HgPlugin.class.php:61
 msgid "Another short Introduction can be found at <a href=\"http://hginit.com/\">http://hginit.com/</a>"
@@ -12927,7 +12926,7 @@ msgstr "Navigateur de dépôt Mercurial"
 
 #: plugins/scmhg/common/HgPlugin.class.php:159
 msgid "Browsing the Mercurial tree gives you a view into the current status of this project's code. You may also view the complete histories of any file in the repository."
-msgstr "Parcourir l’arborescence Mercurial donne une vue de l'état actuel du code de ce projet. Vous pouvez voir l'historique complet de chacun des fichiers du dépôt."
+msgstr "Parcourir l’arborescence Mercurial donne une vue de l'état actuel du code de ce projet. Vous pouvez également voir l'historique complet de chacun des fichiers du dépôt."
 
 #: plugins/scmhg/common/HgPlugin.class.php:162
 msgid "Browse Hg Repository"
@@ -12998,7 +12997,7 @@ msgstr "Déclencheurs post-receive"
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:36
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:35
 msgid "Every commit is pushed into related tracker or task."
-msgstr "Chaque commit est poussé vers le traqueur ou la tâche associé."
+msgstr "Chaque commit est référencé dans l'outil de suivi ou la tâche associé."
 
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:48
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:49
@@ -13008,7 +13007,7 @@ msgstr "Déclencheur indisponible en l'absence d'une dépendance : le projet n'
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:51
 #: plugins/scmhook/library/scmgit/postReceiveEmail.class.php:59
 msgid "Hook not available due to missing dependency: Forge not using SSH for Git."
-msgstr "Déclencheur indisponible en l'absence d'une dépendance : le projet n'utilise SSH avec Git"
+msgstr "Déclencheur indisponible en l'absence d'une dépendance : le projet n'utilise pas l'accès Git-SSH"
 
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:68
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:81
@@ -13034,7 +13033,7 @@ msgstr "Le journal des messages de commit a été envoyé à la liste de diffusi
 #: plugins/scmhook/library/scmhg/commitEmail.class.php:60
 #: plugins/scmhook/library/scmsvn/commitEmail.class.php:57
 msgid "Hook not available due to missing dependency: Project has no commit mailing-list: "
-msgstr "Déclencheur indisponible en l'absence d'une dépendance : le projet n'utilise pas de liste de diffusion de commit"
+msgstr "Déclencheur indisponible en l'absence d'une dépendance : le projet n'a pas de liste de diffusion de commit"
 
 #: plugins/scmhook/library/scmgit/postReceiveEmail.class.php:57
 #: plugins/scmhook/library/scmhg/commitEmail.class.php:62
@@ -13052,7 +13051,7 @@ msgstr "Le déclencheur est exécuté après « serve push pull bundle » sur 
 
 #: plugins/scmhook/library/scmsvn/allowRevPropChange.class.php:30
 msgid "Allow SCM committers to change revision properties."
-msgstr "Permettre aux committeurs de modifier les propriétés de révision."
+msgstr "Permettre aux contributeurs de modifier les propriétés de révision."
 
 #: plugins/scmhook/library/scmsvn/checkLog.class.php:29
 msgid "Commit message must not be empty."
@@ -13060,7 +13059,7 @@ msgstr "Le message de commit ne peut être vide."
 
 #: plugins/scmhook/library/scmsvn/checkMimetype.class.php:30
 msgid "Verify if commited files have svn:mimetype set up correctly."
-msgstr "Vérifier si les fichiers poussés ont la propriété svn:mimetype correctement renseignée."
+msgstr "Vérifier si les fichiers envoyés ont la propriété svn:mimetype correctement renseignée."
 
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:96
 msgid "Related SVN commits"
@@ -13109,7 +13108,7 @@ msgstr "Lien mis à jour"
 
 #: plugins/webanalytics/common/webanalyticsPlugin.class.php:56
 msgid "Global WebAnalytics admin"
-msgstr "Administration des WebAnalytics générale"
+msgstr "Administration WebAnalytics générale"
 
 #: plugins/webanalytics/common/webanalyticsPlugin.class.php:161
 msgid "Site Global Webanalytics Admin"
@@ -13122,7 +13121,7 @@ msgstr "Obtenir l'autorisation de configurer un URL particulier pour un outil we
 #: plugins/webanalytics/view/admin/updateLinkValue.php:35
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:59
 msgid "Informative Name"
-msgstr "Nom détaillé"
+msgstr "Nom descriptif"
 
 #: plugins/webanalytics/view/admin/updateLinkValue.php:37
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:32
@@ -13394,7 +13393,7 @@ msgstr "Mise à jour du mot de passe"
 
 #: www/account/editsshkeys.php:46
 msgid "Manage Authorized Keys"
-msgstr "Gestion des clefs d’autorisées"
+msgstr "Gestion des clefs SSH"
 
 #: www/account/editsshkeys.php:50
 msgid "Available keys"
@@ -13447,7 +13446,7 @@ msgstr "Important : vérifiez qu'il n'y a pas de retour à la ligne. Après avo
 
 #: www/account/editsshkeys.php:81
 msgid "Or upload your '~/.ssh/identity.pub' (protocol version 1) or '~/.ssh/id_dsa.pub' or '~/.ssh/id_rsa.pub' (protocol version 2)"
-msgstr "Ou envoyer votre \"~/.ssh/identity.pub\" (protocol version 1) ou \"~/.ssh/id_dsa.pu\" ou \"/.ssh/id_rsa.pub\" (protocol version 2)"
+msgstr "Ou envoyer votre \"~/.ssh/identity.pub\" (protocole version 1) ou \"~/.ssh/id_dsa.pub\" (protocole version 2)"
 
 #: www/account/first.php:31
 #, php-format
@@ -13681,7 +13680,7 @@ msgstr "Erreur entre l'enregistrement d'un utilisateur et son activation ; l'ut
 #: www/account/register.php:107
 #, php-format
 msgid "Could not activate newly registered user's forge account: %s"
-msgstr "Impossible d'activer le nouveau compte utilisateur de forge : %s"
+msgstr "Impossible d'activer le compte forge du nouvel utilisateur : %s"
 
 #: www/account/register.php:114
 #, php-format
@@ -14229,7 +14228,7 @@ msgstr "Suspendu (H)"
 #: www/admin/groupedit.php:137
 #, php-format
 msgid "With PFO-RBAC, the “is_public” property is gone. Instead, to make a project public, <%1$s>link<%2$s> the global role “Anonymous/not logged in” then <%3$s>give<%4$s> it “Project visibility” permissions."
-msgstr ""
+msgstr "Avec PFP-RBAC, la propriété \"is_public\" a disparu. À la place, pour rendre un projet public, <%1$s>référencez<%2$s> le rôle global “Anonyme/non connecté” puis <%3$s>donnez-lui<%4$s> les permissions de “Visibilité sur le projet”."
 
 #: www/admin/groupedit.php:150 www/admin/grouplist.php:74
 msgid "Template?"
@@ -14342,7 +14341,7 @@ msgstr "Utilisateurs en attente"
 
 #: www/admin/index.php:83
 msgid "Plugins User Maintenance"
-msgstr "Greffons de maintenance utilisateur"
+msgstr "Greffons de gestion des utilisateurs"
 
 #: www/admin/index.php:91
 msgid "Global roles and permissions"
@@ -14920,7 +14919,7 @@ msgstr "Impossible de terminer l'opération : "
 
 #: www/admin/useredit.php:57
 msgid "Please check the confirmation box if you really want to delete this user."
-msgstr "Veuillez cocher la boîte de confirmation si vous souhaitez réellement supprimer cet utilisateur."
+msgstr "Veuillez cocher la case de confirmation si vous souhaitez réellement supprimer cet utilisateur."
 
 #: www/admin/useredit.php:93
 msgid "Added Successfully to project "
@@ -16219,15 +16218,15 @@ msgstr "<strong>Note !</strong> Cela vous occasionnera du courrier supplémentai
 
 #: www/include/html.php:427
 msgid "You can cast your vote for a Tracker Item to aid Project Management to decide which features to prioritise, and retract votes at any time. Please use this functionality sparingly, as it loses its meaning if you vote on *every* item."
-msgstr "Vous pouvez envoyer votre vote pour un élément du traqueur pour aider le gestionnaire du projet à décider quelle fonctionnalité favoriser, et retirer votre vote à tout moment. Veuillez utiliser cette fonctionnalité avec discernement, sans quoi elle perd tout intérêt si vous votez pour tous les éléments."
+msgstr "Vous pouvez voter pour un élément de l'outil de suivi pour aider le gestionnaire du projet à décider quelles fonctionnalités favoriser, et retirer votre vote à tout moment. Veuillez utiliser cette fonctionnalité avec discernement, var elle perd tout intérêt si vous votez pour tous les éléments."
 
 #: www/include/html.php:429
 msgid "This metric displays the number of people who can *currently* vote for features in this tracker, and how many of them did so. (This means historic votes of people no longer allowed to vote, while not lost, do not play into the numbers displayed.)"
-msgstr "Cet indicateur affiche le nombre de personnes qui peuvent actuellement voter pour les fonctionnalités du traqueur, et combien l'on fait (Cela signifie que les personnes ayant eut un droit vote, et l'ayant perdu, ne sont pas comptées)."
+msgstr "Cet indicateur affiche le nombre de personnes qui peuvent actuellement voter pour les fonctionnalités de cet outil de suivi, et combien l'ont fait (Cela signifie que les votes des personnes n'ayant plus droit de vote, bien que non supprimés, ne sont pas comptabilisés)."
 
 #: www/include/html.php:569
 msgid "Error: uneven row counts"
-msgstr ""
+msgstr "Erreur : nombres de lignes différents"
 
 #: www/include/html.php:829
 msgid "Lowest"
@@ -16345,7 +16344,7 @@ msgstr "Minimizer"
 
 #: www/include/Layout.class.php:1361
 msgid "Spinner"
-msgstr ""
+msgstr "Animation d'attente"
 
 #: www/include/Layout.class.php:1390
 msgid "Browse per tags defined by the projects."
@@ -16622,7 +16621,7 @@ msgstr "Un projet peut maintenant désactiver l'activité du projet (Alcatel-Luc
 
 #: www/index_std.php:57
 msgid "User: account ssh key management: rewrite backend, add more informations such as fingerprint, deploy flag, easy delete (TrivialDev)"
-msgstr "Utilisateur : gestion de clef ssh de compte : récrire le backend, ajouter d'autres informations tel que fingerprint, déployer un drapeau, suppression facile (TrivialDev)"
+msgstr "Utilisateur : gestion de clef ssh du compte : réécrire de la gestion interne, ajout d'autres informations tel que fingerprint, état de déploiement, suppression facile (TrivialDev)"
 
 #: www/index_std.php:58
 msgid "Docman: Directory monitoring (TrivialDev)"
@@ -17297,7 +17296,7 @@ msgstr "Catégories existantes"
 
 #: www/people/admin/index.php:94
 msgid "No job categories"
-msgstr "Aucune catégories de travail"
+msgstr "Aucune catégorie de poste"
 
 #: www/people/admin/index.php:103
 msgid "New Category Name"
@@ -17309,7 +17308,7 @@ msgstr "Dès lors que vous aurez ajouté une catégorie, vous ne pourrez la supp
 
 #: www/people/admin/index.php:118
 msgid "Add/Change People Skills"
-msgstr "Ajouter / modifier des compétences utilisateur"
+msgstr "Ajouter / modifier des compétences"
 
 #: www/people/admin/index.php:126
 msgid "Existing Skills"
@@ -17337,7 +17336,7 @@ msgstr "Aucune catégorie de travail"
 
 #: www/people/admin/index.php:159
 msgid "Add Job Skills"
-msgstr "Ajouter des compétences de travail"
+msgstr "Ajouter des compétences de poste"
 
 #: www/people/createjob.php:45
 msgid "Start by filling in the fields below. When you click continue, you will be shown a list of skills and experience levels that this job requires."
@@ -17468,7 +17467,7 @@ msgstr "Échec lors de l'ajout de la compétence %s"
 
 #: www/people/editprofile.php:102
 msgid "Skill added successfully"
-msgstr "Compétences ajoutée avec succès"
+msgstr "Compétence ajoutée avec succès"
 
 #: www/people/editprofile.php:107
 msgid "Start Month"
@@ -17506,7 +17505,7 @@ msgstr "Compétence mise à jour"
 
 #: www/people/editprofile.php:145
 msgid "Skills updated"
-msgstr "Compétences mise à jour"
+msgstr "Compétences mises à jour"
 
 #: www/people/editprofile.php:150 www/people/editprofile.php:151
 msgid "Edit Skills"
@@ -17670,7 +17669,7 @@ msgstr "Dernières demandes"
 
 #: www/people/index.php:95
 msgid "more latest posts"
-msgstr "Encore…"
+msgstr "suite des postes récents…"
 
 #: www/people/people_utils.php:95
 msgid "Must select a skill ID"
@@ -17758,7 +17757,7 @@ msgstr "Cet utilisateur n'a entré aucune compétence."
 
 #: www/people/viewjob.php:54
 msgid "Posting fetch failed: No such posting for this project:"
-msgstr ""
+msgstr "Error lors de la récupération de l'offre : Aucune offre de ce type pour ce projet :"
 
 #: www/people/viewjob.php:55 www/people/viewjob.php:58
 msgid "View a Job"
@@ -18133,7 +18132,7 @@ msgstr "Choisissez un fichier au format CSV à importer."
 
 #: www/pm/csv.php:95
 msgid "Be careful, when importing a CSV file, all the tasks will be replaced by the ones present in the file."
-msgstr "Prudence, lors de l'importation d'un fichier CSV, toutes les tâches seront remplacées par celles du fichier."
+msgstr "Attention, lors de l'importation d'un fichier CSV, toutes les tâches seront remplacées par celles du fichier."
 
 #: www/pm/csv.php:96
 msgid "If project_task_id is empty, then a new task will be created."
@@ -18157,16 +18156,15 @@ msgstr "c'est l'identifiant dans la base de données"
 
 #: www/pm/csv.php:113
 msgid "optional, the equivalent of project_task_id but determined by external application, such as Microsoft Project. Primarily preserved for sorting purposes only."
-msgstr ""
+msgstr "facultatif, l'équivalent du project_task_id mais déterminé par une application externe, telle que Microsoft Project. Conservé essentiellement à des fins de correspondance."
 
 #: www/pm/csv.php:117
 msgid "the project_task_id of the parent task, if any"
 msgstr "project_task_id de la tâche parente, s'il y a lieu"
 
 #: www/pm/csv.php:121
-#, fuzzy
 msgid "the equivalent of parent project_task_id but determined by external application, such as Microsoft Project. Primarily preserved for matching purposes only."
-msgstr "équivalent du project_task_id parent mais déterminé par une application externe, tel que Microsoft Project. "
+msgstr "l'équivalent du project_task_id du parent mais déterminé par une application externe, telle que Microsoft Project. Conservé essentiellement à des fins de correspondance."
 
 #: www/pm/csv.php:125
 msgid "The summary or brief description"
@@ -18174,7 +18172,7 @@ msgstr "Résumé ou brève description"
 
 #: www/pm/csv.php:129
 msgid "The category name (must be defined, only available in full export)"
-msgstr "Le nom de catégorie (doit être défini, disponible seulement en exportation complète)"
+msgstr "Le nom de catégorie (doit être défini, disponible seulement en export complet)"
 
 #: www/pm/csv.php:133
 msgid "Duration in days"
@@ -18206,7 +18204,7 @@ msgstr "facultatif, des détails de la tâche, ou un commentaire à ajouter à l
 
 #: www/pm/csv.php:161
 msgid "optional, the unixname or precisely-matched realname of the assignee"
-msgstr ""
+msgstr "facultatif, le login Unix ou le nom réel avec correspondance exacte du responsable"
 
 #: www/pm/csv.php:165 www/pm/csv.php:169 www/pm/csv.php:173 www/pm/csv.php:177
 msgid "optional, same as above"
@@ -18214,11 +18212,11 @@ msgstr "optionnel, comme ci-dessus"
 
 #: www/pm/csv.php:181
 msgid "optional, the task_id of a task to be dependent on"
-msgstr "facultatif, task_id de la tâche dons dépendant la tâche"
+msgstr "facultatif, task_id d'une tâche dont on va dépendre"
 
 #: www/pm/csv.php:185
 msgid "optional, the ID used by the external application"
-msgstr "facultatif, le numéro utilisé par l'application externe"
+msgstr "facultatif, l'identifiant utilisé par l'application externe"
 
 #: www/pm/csv.php:189
 msgid "SS, SF, FS, FF, - The same types as Microsoft Project"
@@ -18548,7 +18546,7 @@ msgstr "Attention !"
 
 #: www/pm/uploadcsv.php:35
 msgid "This function will <em>replace</em> all tasks in the currently selected subproject with these uploaded from the CSV file."
-msgstr "Cette fonction <em>remplacera</em> toutes les tâches du sous-projet sélectionné par celles du fichier CSV."
+msgstr "Cette fonction <em>écrasera</em> toutes les tâches du sous-projet sélectionné par celles du fichier CSV."
 
 #: www/pm/uploadcsv.php:36
 msgid "FAQ: Attaching files to Tasks is not possible, only Tracker Items (Bugs, Feature Requests, …) support that functionality."
@@ -18568,7 +18566,7 @@ msgstr "Création de la base programmée"
 
 #: www/project/admin/database.php:108
 msgid "Operation failed. Password and Password Confirm are not the same"
-msgstr "Opération échouée. Le mot de passe et sa confirmation différent."
+msgstr "Opération échouée. Le mot de passe et sa confirmation diffèrent."
 
 #: www/project/admin/database.php:130
 msgid "Database scheduled for deletion"
@@ -18825,7 +18823,7 @@ msgstr "Ajouter tout"
 
 #: www/project/admin/project_admin_utils.php:49
 msgid "General information about project. Tag, trove list, description."
-msgstr "Informations générales du projet. Tag, liste d'arbre, description."
+msgstr "Informations générales du projet. Mots clefs, catégories, description."
 
 #: www/project/admin/project_admin_utils.php:52
 msgid "Users and permissions"
@@ -18833,7 +18831,7 @@ msgstr "Utilisateurs et permissions"
 
 #: www/project/admin/project_admin_utils.php:53
 msgid "Permissions management. Edit / Create roles. Assign new permissions to user. Add / Remove member."
-msgstr "Gestion des permissions. Modifier / créer des rôles. Assigner de nouvelles permissions à l'utilisateur. Ajouter / supprimer un membre."
+msgstr "Gestion des permissions. Modifier / créer des rôles. Attribuer de nouvelles permissions à l'utilisateur. Ajouter / retirer un membre."
 
 #: www/project/admin/project_admin_utils.php:56
 msgid "Tools"
@@ -18841,7 +18839,7 @@ msgstr "Outils"
 
 #: www/project/admin/project_admin_utils.php:57
 msgid "Activate / Desactivate extensions like docman, forums, plugins."
-msgstr "Activer / désactiver les extensions tel que docman, forums, greffons."
+msgstr "Activer / désactiver les extensions telles que docman, forums, greffons."
 
 #: www/project/admin/project_admin_utils.php:60
 msgid "Project History"
@@ -18857,15 +18855,15 @@ msgstr "Nouveau poste"
 
 #: www/project/admin/project_admin_utils.php:66
 msgid "Hiring new people. Describe the job"
-msgstr "Recruter de nouvelles personnes. Décrire le travail"
+msgstr "Recruter de nouvelles personnes. Décrire le poste"
 
 #: www/project/admin/project_admin_utils.php:68
 msgid "Edit Jobs"
-msgstr "Éditer les travaux"
+msgstr "Éditer les postes"
 
 #: www/project/admin/project_admin_utils.php:69
 msgid "Edit already created available position in your project."
-msgstr "Modifier une position existante du votre projet."
+msgstr "Modifier une position existante de votre projet."
 
 #: www/project/admin/project_admin_utils.php:80
 msgid "VHOSTs"
@@ -19298,7 +19296,7 @@ msgstr "Ce nom Unix est important, car il est utilisé des manières suivantes 
 #: www/register/index.php:228
 #, php-format
 msgid "a web site at <tt>unixname.%s</tt>,"
-msgstr "un site web à l'adrese <tt>unixname.%s</tt>,"
+msgstr "un site web à l'adresse <tt>unixname.%s</tt>,"
 
 #: www/register/index.php:229
 msgid "the URL of your source code repository,"
@@ -19541,7 +19539,7 @@ msgstr "Le nouveau dépôt %s est enregistré, il sera créé sous peu."
 #: www/scm/admin/index.php:80
 #, php-format
 msgid "Repository %s is marked for deletion (actual deletion will happen shortly)."
-msgstr "Le dépôt %s est marqué pour destruction (la destruction aura lieu sous peu)."
+msgstr "Le dépôt %s est marqué pour suppression (la suppression aura lieu sous peu)."
 
 #: www/scm/admin/index.php:153
 msgid "Note: Changing the repository does not delete the previous repository.  It only affects the information displayed under the SCM tab."
@@ -19561,7 +19559,7 @@ msgstr "Voir le code source en ligne"
 
 #: www/scm/include/scm_utils.php:52
 msgid "Global statistics on this SCM repository"
-msgstr "Statistiques globales sur ce gestionnaire de dépôt"
+msgstr "Statistiques globales sur ce dépôt de code"
 
 #: www/scm/include/scm_utils.php:55
 msgid "Administration page : enable / disable options"
@@ -19973,7 +19971,7 @@ msgstr "Erreur: cet échantillon de code n'existe pas dans ce paquet."
 
 #: www/snippet/delete.php:65
 msgid "Item Removed From Package"
-msgstr "Élément supprimé du paquet"
+msgstr "Élément retiré du paquet"
 
 #: www/snippet/delete.php:81
 msgid "Error: That snippet does not exist."
@@ -20465,7 +20463,7 @@ msgstr "Développeurs"
 
 #: www/stats/site_stats_utils.php:570
 msgid "Page view: no graph to display."
-msgstr "Vue page : aucun graphique à afficher."
+msgstr "Pages vues : aucun graphique à afficher."
 
 #: www/stats/site_stats_utils.php:587
 msgid "New users"
@@ -20845,7 +20843,7 @@ msgstr "Pourcentage"
 
 #: www/top/mostactive.php:80 www/top/mostactive.php:87
 msgid "More"
-msgstr "Plus…"
+msgstr "Suite…"
 
 #: www/top/toplist.php:37
 #, php-format
