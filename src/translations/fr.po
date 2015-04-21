@@ -6,7 +6,7 @@
 # Christian Bayle <chris@bayle.eu>, 2002, 2003.
 # Guillaume Smet <guillaume.smet@gmail.com> 2003, 2004, 2005.
 # Marc-Etienne Vargenau <marc-etienne.vargenau@alcatel-lucent.com>, 2013, 2014.
-# Sylvain Beucler <beuc@beuc.net>, 2014.
+# Sylvain Beucler <beuc@beuc.net>, 2014, 2015.
 # Stéphane Aulery <lkppo@free.fr>, 2015.
 #
 msgid ""
@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: fusionforge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-02-07 16:12+0100\n"
-"PO-Revision-Date: 2015-04-21 00:44+0200\n"
+"PO-Revision-Date: 2015-04-21 11:53+0200\n"
 "Last-Translator: Stéphane Aulery <lkppo@free.fr>\n"
 "Language-Team: French <traduc@traduc.org>\n"
 "Language: fr\n"
@@ -6073,7 +6073,7 @@ msgstr "Numéro d'ArtifactHistory invalide"
 
 #: common/tracker/ArtifactMessage.class.php:89
 msgid "Error: Logged In User Bug Could Not Get User Object"
-msgstr ""
+msgstr "Erreur avec utilisateur connecté - impossible d'obtenir un objet utilisateur"
 
 #: common/tracker/ArtifactMessage.class.php:92
 msgid "Logged In: YES"
@@ -8740,7 +8740,7 @@ msgstr "Configuration du greffon de sous-projets exterieurs"
 
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:98
 msgid "Site Global External subprojects Admin"
-msgstr ""
+msgstr "Administration générale des sous-projets externes du site"
 
 #: plugins/extsubproj/include/extsubproj_Widget_SubProjects.class.php:31
 msgid "Project external subprojects"
@@ -10702,7 +10702,7 @@ msgstr "Date cible"
 
 #: plugins/mantisbt/view/admin/StatPerStatus.php:45
 msgid "Tickets oer Status"
-msgstr ""
+msgstr "Tickets par Statut"
 
 #: plugins/mantisbt/view/admin/StatPerStatus.php:49
 msgid "Fixed"
@@ -11575,7 +11575,7 @@ msgstr "phpcaptcha semble ne pas être installé. Contactez votre administrateur
 
 #: plugins/projectimport/common/ProjectImporter.class.php:27
 msgid "Missing require to use this plugin. You need ARC2_OSLCCoreRDFJSONParserPlugin.php"
-msgstr ""
+msgstr "Il manque un 'require' pour utiliser ce plugin. Vous devez installer ARC2_OSLCCoreRDFJSONParserPlugin.php"
 
 #: plugins/projectimport/common/ProjectImporter.class.php:124
 msgid "error: no supported provider for "
@@ -11684,17 +11684,17 @@ msgstr "Utilisateurs listés dans le fichier importé"
 #: plugins/projectimport/www/index.php:282
 #, php-format
 msgid "Found matching existing forge user with same login “%s”"
-msgstr ""
+msgstr "Correspondance trouvée avec un utilisateur forge existant ayant le même login \"%s\""
 
 #: plugins/projectimport/www/index.php:295
 #, php-format
 msgid "Found matching existing forge user “%s” with same email “%s”"
-msgstr ""
+msgstr "Correspondance trouvée avec un utilisateur forge existant ayant le même courriel \"%s\""
 
 #: plugins/projectimport/www/index.php:301
 #, php-format
 msgid "Failed to find existing user matching imported user “%s”"
-msgstr ""
+msgstr "Impossible de trouver un utilisateur existant correspond à l'utilisateur importé \"%s\""
 
 #: plugins/projectimport/www/index.php:317
 msgid "Optionally change for another existing user"
@@ -18228,7 +18228,7 @@ msgstr "SS, SF, FS, FF, - les mêmes types que Microsoft Project"
 #: www/pm/csv.php:209 www/pm/csv.php:213 www/pm/csv.php:217 www/pm/csv.php:221
 #: www/pm/csv.php:225 www/pm/csv.php:229 www/pm/csv.php:233 www/pm/csv.php:237
 msgid "repetition of dependenton1"
-msgstr ""
+msgstr "répétition du champ 'dependenton1'"
 
 #: www/pm/deletetask.php:26
 #, php-format
