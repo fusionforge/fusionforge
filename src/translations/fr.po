@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: fusionforge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-02-07 16:12+0100\n"
-"PO-Revision-Date: 2015-04-21 16:24+0200\n"
+"PO-Revision-Date: 2015-04-22 13:57+0200\n"
 "Last-Translator: Sylvain Beucler <beuc@beuc.net>\n"
 "Language-Team: French <traduc@traduc.org>\n"
 "Language: fr\n"
@@ -64,15 +64,15 @@ msgstr "Clef SSH supprimée avec succès."
 #: common/docman/actions/validatefile.php:40
 #: common/docman/views/addfile.php:53
 msgid "Document Manager Action Denied."
-msgstr "Gestionnaire de documentation : action interdite."
+msgstr "Gestionnaire de documentation : action interdite."
 
 #: common/docman/actions/addfile.php:75
 msgid "No valid folder was selected."
-msgstr "Pas de dossier valide de document sélectionné."
+msgstr "Pas de dossier valide sélectionné."
 
 #: common/docman/actions/addfile.php:93 common/docman/actions/addfile.php:106
 msgid "Error getting blank document."
-msgstr "Erreur lors de l'ajout d'un document."
+msgstr "Erreur lors de l’ajout d’un document."
 
 #: common/docman/actions/addfile.php:152
 msgid "Manual uploads disabled."
@@ -90,7 +90,7 @@ msgstr "Le document %s a été soumis avec succès."
 #: common/docman/actions/addfile.php:196
 #, php-format
 msgid "Document %s has been successfully uploaded and is waiting to be approved."
-msgstr "Le document %s a été soumis avec succès et est en attente de validation."
+msgstr "Le document %s, soumis avec succès, est en attente de validation."
 
 #: common/docman/actions/addsubdocgroup.php:63
 msgid "Document subfolder successfully created."
@@ -98,7 +98,7 @@ msgstr "Le sous-dossier de documents a été créé avec succès."
 
 #: common/docman/actions/addsubdocgroup.php:67
 msgid "Document folder successfully created."
-msgstr "Le dossier de documents a été soumis avec succès."
+msgstr "Le dossier de documents a été créé avec succès."
 
 #: common/docman/actions/deldir.php:63
 #, php-format
@@ -146,7 +146,7 @@ msgstr "Aucun document trouvé à mettre à jour."
 #: common/docman/actions/editfile.php:89
 #, php-format
 msgid "Invalid file attack attempt %s."
-msgstr "Tentative d'attaque par fichier invalide %s."
+msgstr "Tentative d’attaque par fichier invalide %s."
 
 #: common/docman/actions/editfile.php:112
 #, php-format
@@ -167,7 +167,7 @@ msgstr "Le document a été réservé avec succès."
 
 #: common/docman/actions/forcereindexenginesearch.php:36
 msgid "Search Engine Reindex Forced: search results will be available within 24 h."
-msgstr "Réindexation forcée : les résultats seront disponibles d'ici 24 h."
+msgstr "Réindexation forcée : les résultats seront disponibles d’ici 24 h."
 
 #: common/docman/actions/injectzip.php:49
 msgid "Archive injected successfully."
@@ -419,7 +419,7 @@ msgstr "Surveillance arrêtée"
 #: common/docman/actions/monitordirectory.php:76
 #: common/docman/actions/monitorfile.php:80
 msgid "Docman: monitoring action unknown."
-msgstr "Action de surveillance inconnue."
+msgstr "Docman : action de surveillance inconnue."
 
 #: common/docman/actions/releasefile.php:49
 msgid "released successfully."
@@ -489,7 +489,7 @@ msgstr "activé avec succès."
 #: common/tracker/ArtifactTypeFactory.class.php:59
 #: common/tracker/ArtifactTypes.class.php:54
 msgid "No Valid Group Object"
-msgstr "Pas d'objet Group valide"
+msgstr "Pas d'objet Groupe valide"
 
 #: common/docman/Document.class.php:82
 #: common/docman/DocumentGroup.class.php:76 common/forum/Forum.class.php:139
@@ -498,7 +498,7 @@ msgstr "Pas d'objet Group valide"
 #: common/survey/SurveyQuestion.class.php:74
 #: plugins/mailman/include/MailmanList.class.php:102
 msgid "group_id in db result does not match Group Object"
-msgstr "L'identifiant du groupe dans la base de données ne correspond pas à l'objet groupe"
+msgstr "L’identifiant du groupe dans la base de données ne correspond pas à l'objet groupe"
 
 #: common/docman/Document.class.php:113 common/docman/Document.class.php:837
 #: common/pm/ProjectGroup.class.php:145 common/pm/ProjectGroup.class.php:338
@@ -516,7 +516,7 @@ msgstr "Document déjà publié dans ce dossier"
 
 #: common/docman/Document.class.php:198 common/docman/Document.class.php:205
 msgid "Error Adding Document:"
-msgstr "Erreur lors de l'ajout du document :"
+msgstr "Erreur lors de l’ajout du document :"
 
 #: common/docman/Document.class.php:198
 msgid "Not a file"
@@ -529,7 +529,7 @@ msgstr "Erreur lors de la récupération du document"
 #: common/docman/Document.class.php:225 common/docman/Document.class.php:890
 #: common/docman/Document.class.php:1110
 msgid "Error updating document group:"
-msgstr "Erreur lors de la mise à jour du groupe de documents :"
+msgstr "Erreur lors de la mise à jour du groupe de documents :"
 
 #: common/docman/Document.class.php:252
 msgid "Document: Invalid docid"
@@ -544,7 +544,7 @@ msgstr "Impossible de désactiver la surveillance"
 #: common/docman/DocumentGroup.class.php:431 common/forum/Forum.class.php:457
 #: common/frs/FRSPackage.class.php:295
 msgid "Unable To Add Monitor"
-msgstr "Impossible d'ajouter la surveillance"
+msgstr "Impossible d’ajouter la surveillance"
 
 #: common/docman/Document.class.php:627
 #: common/docman/DocumentGroup.class.php:447
@@ -605,7 +605,7 @@ msgstr "Soumis par"
 #: common/docman/Document.class.php:955
 #: common/docman/DocumentGroup.class.php:736
 msgid "For more info, visit:"
-msgstr "Pour plus d'informations, visitez :"
+msgstr "Pour plus d’informations, visitez :"
 
 #: common/docman/Document.class.php:960
 #: common/docman/DocumentGroup.class.php:741
@@ -614,16 +614,16 @@ msgstr "Docman"
 
 #: common/docman/Document.class.php:1029
 msgid "Error Deleting Document:"
-msgstr "Erreur lors de la suppression du document :"
+msgstr "Erreur lors de la suppression du document :"
 
 #: common/docman/Document.class.php:1105
 #: common/docman/DocumentGroup.class.php:879
 msgid "wrong column name"
-msgstr "Nom de colonne invalide"
+msgstr "nom de colonne invalide"
 
 #: common/docman/DocumentFactory.class.php:316
 msgid "No Documents Found"
-msgstr "Aucun document trouvé."
+msgstr "Aucun document trouvé"
 
 #: common/docman/DocumentGroup.class.php:67
 #: common/docman/views/listfile.php:173
@@ -638,7 +638,7 @@ msgstr "Le nom est obligatoire"
 #: common/docman/DocumentGroup.class.php:110
 #: common/docman/DocumentGroup.class.php:490
 msgid "Invalid Documents Folder parent ID"
-msgstr "Numéro du dossier parent invalide"
+msgstr "Numéro du dossier de documents parent invalide"
 
 #: common/docman/DocumentGroup.class.php:131
 msgid "Folder name already exists"
@@ -646,11 +646,11 @@ msgstr "Ce nom de dossier existe déjà"
 
 #: common/docman/DocumentGroup.class.php:147
 msgid "Error Adding Folder:"
-msgstr "Erreur lors de l'ajout d'un dossier :"
+msgstr "Erreur lors de l’ajout d'un dossier :"
 
 #: common/docman/DocumentGroup.class.php:241
 msgid "Unsupported injected file:"
-msgstr "Ce type de fichier ne peut être injecté :"
+msgstr "Ce type de fichier ne peut être injecté :"
 
 #: common/docman/DocumentGroup.class.php:259
 msgid "Invalid Document Folder ID"
@@ -663,7 +663,7 @@ msgstr "Ce nom de dossier est déjà pris"
 #: common/docman/DocumentGroup.class.php:525
 #, php-format
 msgid "Error: %s"
-msgstr "Erreur : %s"
+msgstr "Erreur : %s"
 
 #: common/docman/DocumentGroup.class.php:676
 msgid "Browse this folder"
@@ -684,11 +684,11 @@ msgstr "Mis à jour par"
 
 #: common/docman/DocumentGroup.class.php:768
 msgid "Unable to extract ZIP file."
-msgstr "Erreur lors de l'extraction du fichier ZIP."
+msgstr "Erreur lors de l’extraction du fichier ZIP."
 
 #: common/docman/DocumentGroup.class.php:773
 msgid "Unable to open ZIP file."
-msgstr "Impossible d'ouvrir le fichier ZIP."
+msgstr "Impossible d’ouvrir le fichier ZIP."
 
 #: common/docman/DocumentGroup.class.php:824
 msgid "(Title must be at least 5 characters.)"
@@ -696,7 +696,7 @@ msgstr "(Le titre doit avoir au moins 5 caractères.)"
 
 #: common/docman/DocumentGroup.class.php:829
 msgid "Injected by ZIP:"
-msgstr "Injecté par ZIP :"
+msgstr "Injecté par ZIP :"
 
 #: common/docman/DocumentGroup.class.php:838
 msgid "Unknown item."
@@ -704,7 +704,7 @@ msgstr "Élément inconnu."
 
 #: common/docman/DocumentGroup.class.php:845
 msgid "Unable to open folder for injecting into tree"
-msgstr "Impossible d'ouvrir le dossier pour injecter l'arbre"
+msgstr "Impossible d’ouvrir le dossier pour injecter dans l’arbre"
 
 #: common/docman/DocumentGroupFactory.class.php:86
 #: common/docman/DocumentGroupFactory.class.php:120
@@ -790,11 +790,11 @@ msgstr "Erreur WebDAV :"
 
 #: common/docman/views/addfile.php:88
 msgid "You MUST first create at least one folder to store your document."
-msgstr "Vous DEVEZ d'abord créer au moins un dossier pour stocker votre document."
+msgstr "Vous DEVEZ d’abord créer au moins un dossier pour stocker votre document."
 
 #: common/docman/views/addfile.php:91
 msgid "Refers to the relatively brief title of the document (e.g. How to use the download server)."
-msgstr "Titre court du document (par exemple : « Comment utiliser le serveur de téléchargement »)."
+msgstr "Titre court du document (par exemple : « Comment utiliser le serveur de téléchargement »)."
 
 #: common/docman/views/addfile.php:92 common/docman/views/addfile.php:108
 #: common/docman/views/addfile.php:110 common/docman/views/editfile.php:42
@@ -916,7 +916,7 @@ msgstr "Importer un fichier"
 #: common/docman/views/editfile.php:81
 #, php-format
 msgid "(max upload size: %s)"
-msgstr "(taille maximale pour l'import : %s)"
+msgstr "(taille maximale pour l'import : %s)"
 
 #: common/docman/views/addfile.php:139
 msgid "Enter a valid URL"
@@ -925,12 +925,12 @@ msgstr "Entrez une URL valide"
 #: common/docman/views/addfile.php:151
 #, php-format
 msgid "Pick a file already uploaded (by SFTP or SCP) to the <a href=\"%2$s\">project's incoming directory</a> (%1$s)."
-msgstr "Choisissez un fichier que vous avez préalablement copié (en SFTP ou SCP) dans <a href=\"%2$s\">le répertoire d'entrée du projet</a> (%1$s)."
+msgstr "Choisissez un fichier que vous avez préalablement importé (en SFTP ou SCP) dans <a href=\"%2$s\">le répertoire d’entrée du projet</a> (%1$s)."
 
 #: common/docman/views/addfile.php:158
 #, php-format
 msgid "You need first to upload file in %s"
-msgstr "Vous devez d'abord télécharger le fichier dans %s"
+msgstr "Vous devez d’abord importer le fichier dans %s"
 
 #: common/docman/views/addfile.php:165 common/docman/views/listfile.php:218
 #: common/docman/views/listtrashfile.php:129
@@ -946,7 +946,7 @@ msgstr "Nom du fichier"
 
 #: common/docman/views/addfile.php:193
 msgid "Documents folder that document belongs in"
-msgstr "Dossier auquel le document appartient"
+msgstr "Dossier auquel les documents appartiennent"
 
 #: common/docman/views/addfile.php:204
 msgid "Status of that document"
@@ -982,7 +982,7 @@ msgstr "Créer un dossier avec ce nom."
 
 #: common/docman/views/additem.php:58
 msgid "Create a full folders tree using an compressed archive. Only ZIP format support."
-msgstr "Créer une arborescence complète de dossiers à partie d'une archive compressée. Seul le format ZIP est accepté."
+msgstr "Créer une arborescence complète de dossiers à partie d’une archive compressée. Seul le format ZIP est accepté."
 
 #: common/docman/views/additem.php:59 common/docman/views/additem.php:81
 msgid "Inject Tree"
@@ -990,7 +990,7 @@ msgstr "Injecter un arbre"
 
 #: common/docman/views/additem.php:80
 msgid "Upload archive:"
-msgstr "Importer une archive:"
+msgstr "Importer une archive :"
 
 #: common/docman/views/addsubdocgroup.php:56
 msgid "Name of the document subfolder to create"
@@ -1031,11 +1031,11 @@ msgstr "Réindexer les documents"
 
 #: common/docman/views/admin.php:90
 msgid "Enable Webdav Interface"
-msgstr "Activer l'interface Webdav"
+msgstr "Activer l’interface Webdav"
 
 #: common/docman/views/admin.php:93
 msgid "Disable Webdav Interface"
-msgstr "Désactiver l'interface Webdav"
+msgstr "Désactiver l’interface Webdav"
 
 #: common/docman/views/editdocgroup.php:59
 msgid "Folder Name"
@@ -1081,7 +1081,7 @@ msgstr "Éditez à votre guise le contenu, ou laissez-le tel quel si vous ne sou
 
 #: common/docman/views/editfile.php:65
 msgid "Folder that document belongs to:"
-msgstr "Dossier auquel le document appartient :"
+msgstr "Dossier auquel le document appartient :"
 
 #: common/docman/views/editfile.php:70 common/tracker/actions/browse.php:412
 #: common/tracker/actions/browse.php:570 common/tracker/actions/browse.php:771
@@ -1096,11 +1096,11 @@ msgstr "État"
 
 #: common/docman/views/editfile.php:75
 msgid "Specify an new outside URL where the file will be referenced:"
-msgstr "Spécifier une URL externe pour le fichier :"
+msgstr "Spécifier une nouvelle URL externe où le fichier sera référencé :"
 
 #: common/docman/views/editfile.php:80
 msgid "OPTIONAL: Upload new file:"
-msgstr "Optionnel : déposer un nouveau fichier :"
+msgstr "Optionnel : importer un nouveau fichier :"
 
 #: common/docman/views/help.php:38
 msgid "Documents parsing is also available thru webdav"
@@ -1108,12 +1108,12 @@ msgstr "La navigation des documents est également possible par WebDAV."
 
 #: common/docman/views/help.php:39
 msgid "Direct Webdav URL"
-msgstr "URL directe du Webdav"
+msgstr "URL Webdav directe"
 
 #: common/docman/views/listfile.php:112
 #: common/docman/views/listtrashfile.php:73
 msgid "Invalid folder"
-msgstr "Dossier non valide"
+msgstr "Dossier invalide"
 
 #: common/docman/views/listfile.php:158
 #: common/docman/views/listtrashfile.php:109
@@ -1282,7 +1282,7 @@ msgstr "Actions"
 #: common/docman/views/listfile.php:231 common/docman/views/listfile.php:236
 #: common/docman/views/listtrashfile.php:137
 msgid "Select / Deselect this document for massaction"
-msgstr "Sélectionner ou déselectionner ce document pour une action collective"
+msgstr "Sélectionner ou désélectionner ce document pour une action collective"
 
 #: common/docman/views/listfile.php:243
 #: common/docman/views/listtrashfile.php:142
@@ -1455,7 +1455,7 @@ msgstr "Supprimer définitivement les dossiers et documents de la corbeille."
 
 #: common/docman/views/listtrashfile.php:119
 msgid "Delete permanently this folder and his content."
-msgstr "Supprimer ce dossier et tout son contenu."
+msgstr "Supprimer définitivement ce dossier et son contenu."
 
 #: common/docman/views/listtrashfile.php:158
 msgid "Updated since less than 7 days"
@@ -1473,7 +1473,7 @@ msgstr "Supprimer définitivement"
 
 #: common/docman/views/menu.php:44
 msgid "View Documents"
-msgstr "Voir les docs"
+msgstr "Voir les documents"
 
 #: common/docman/views/menu.php:46
 msgid "View documents and folders in 2 panels. Left a folder tree, right a list of files of selected folder."
@@ -1485,7 +1485,7 @@ msgstr "Ajouter un nouvel élément"
 
 #: common/docman/views/menu.php:51
 msgid "Add a new item such as file, create directory, inject a ZIP at root level."
-msgstr "Ajouter un nouvel élément par ex. fichier, créer un dossier, injecter un ZIP à la racine"
+msgstr "Ajouter un nouvel élément par ex. fichier, créer un dossier, injecter un ZIP à la racine."
 
 #: common/docman/views/menu.php:55 common/docman/views/search.php:63
 #: common/include/Navigation.class.php:181
@@ -1561,7 +1561,7 @@ msgstr "Actions disponibles pour les fichiers sélectionnés ; au moins un fich
 
 #: common/docman/views/pendingfiles.php:136
 msgid "Mass actions for selected pending files:"
-msgstr "Actions collectives sur les fichiers en attente sélectionnés :"
+msgstr "Actions en attente sur les fichiers sélectionnés :"
 
 #: common/docman/views/reporting.php:92
 #: common/tracker/include/ArtifactTypeHtml.class.php:329
@@ -1822,7 +1822,7 @@ msgstr "Date de début"
 #: www/survey/include/SurveyHTML.class.php:198
 #, php-format
 msgid ":"
-msgstr " : "
+msgstr " :"
 
 #: common/docman/views/reporting.php:94
 #: common/tracker/include/ArtifactTypeHtml.class.php:330
@@ -1858,7 +1858,7 @@ msgstr "Rafraîchir"
 
 #: common/docman/views/reporting.php:105
 msgid "There have been no viewed documents for this project yet."
-msgstr "Aucun document n'a été vu dans ce projet pour l'instant."
+msgstr "Aucun document n'a été vu dans ce projet pour l’instant."
 
 #: common/docman/views/reporting.php:116 common/docman/views/reporting.php:124
 #: common/reporting/report_utils.php:73 www/frs/reporting/downloads.php:135
@@ -1928,15 +1928,15 @@ msgstr "Afficher le profil de l'utilisateur"
 
 #: common/docman/views/search.php:61
 msgid "Query: "
-msgstr "Requête : "
+msgstr "Requête : "
 
 #: common/docman/views/search.php:62
 msgid "Searched words"
-msgstr "Mots à rechercher"
+msgstr "Mots recherchés"
 
 #: common/docman/views/search.php:65
 msgid "All searched words are mandatory"
-msgstr "Tous les champs de recherche sont obligatoires"
+msgstr "Tous les mots recherchés sont obligatoires"
 
 #: common/docman/views/search.php:65
 msgid "With all the words"
@@ -1948,15 +1948,15 @@ msgstr "Au moins un mot doit être trouvé"
 
 #: common/docman/views/search.php:66
 msgid "With at least one of words"
-msgstr "Avec au moins un mot"
+msgstr "Avec au moins un des mots"
 
 #: common/docman/views/search.php:68
 msgid "Filename and contents are used to match searched words"
-msgstr "Les noms des fichiers et leurs contenus sont utilisés pour la recherche"
+msgstr "Les noms des fichiers et leur contenu sont utilisés pour la recherche"
 
 #: common/docman/views/search.php:68
 msgid "Inside documents"
-msgstr "À l'intérieur des documents"
+msgstr "À l’intérieur des documents"
 
 #: common/docman/views/search.php:75
 msgid "search into childs following project hierarchy"
@@ -1972,7 +1972,7 @@ msgstr "Erreur lors de la requête en base de données"
 
 #: common/docman/views/search.php:129
 msgid "Your search did not match any documents."
-msgstr "Votre recherche n'a renvoyé aucun document."
+msgstr "Votre recherche n’a renvoyé aucun document."
 
 #: common/docman/views/search.php:154 common/docman/views/tree.php:64
 msgid "Browse document manager for this project."
@@ -1991,7 +1991,7 @@ msgstr "Projet fils"
 #: www/forum/admin/index.php:332 www/forum/admin/index.php:397
 #: www/forum/admin/monitor.php:41
 msgid "Could Not Get Forum Object"
-msgstr "Erreur lors de la création de l'objet Forum"
+msgstr "Impossible d’obtenir l’objet Forum"
 
 #: common/forum/AttachManager.class.php:150
 #: common/forum/ForumAdmin.class.php:69 common/forum/ForumAdmin.class.php:334
@@ -2068,21 +2068,21 @@ msgstr "Ajouter"
 #: common/forum/AttachManager.class.php:267
 #: common/forum/AttachManager.class.php:323
 msgid "Could not get message id"
-msgstr "Erreur lors de la récupération de l'identifiant de message"
+msgstr "Impossible d’obtenir l’identifiant de message"
 
 #: common/forum/AttachManager.class.php:197
 #: common/forum/AttachManager.class.php:287
 #: common/forum/AttachManager.class.php:309
 #: common/forum/AttachManager.class.php:343
 msgid "File uploaded"
-msgstr "Fichier publié"
+msgstr "Fichier importé"
 
 #: common/forum/AttachManager.class.php:199
 #: common/forum/AttachManager.class.php:290
 #: common/forum/AttachManager.class.php:313
 #: common/forum/AttachManager.class.php:346
 msgid "File not uploaded"
-msgstr "Fichier non publié"
+msgstr "Fichier non importé"
 
 #: common/forum/AttachManager.class.php:235
 msgid "Invalid Extension"
@@ -2094,13 +2094,13 @@ msgstr "Un problème est survenu avec la pièce jointe envoyée sur le serveur"
 
 #: common/forum/AttachManager.class.php:310
 msgid "File Updated Successfully"
-msgstr "Fichier publié avec succès"
+msgstr "Fichier mis à jour avec succès"
 
 #: common/forum/ForumAdmin.class.php:40 common/forum/Forum.class.php:126
 #: common/forum/ForumFactory.class.php:60 www/forum/admin/index.php:58
 #, php-format
 msgid "%s does not use the Forum tool."
-msgstr "%s n'utilise pas l'outil Forum."
+msgstr "%s n’utilise pas l’outil Forum."
 
 #: common/forum/ForumAdmin.class.php:61 www/forum/admin/index.php:364
 msgid "Move Thread"
@@ -2121,19 +2121,19 @@ msgstr "Gérer les messages en attente"
 #: www/forum/attachment.php:70 www/forum/monitor.php:47 www/forum/new.php:48
 #: www/forum/save.php:47
 msgid "Error getting Forum"
-msgstr "Erreur en accédant à un forum"
+msgstr "Erreur d’accès au forum"
 
 #: common/forum/ForumAdmin.class.php:187
 msgid "Forum Info Updated Successfully"
-msgstr "Le forum a été mis à jour"
+msgstr "Le forum a été mis à jour avec succès"
 
 #: common/forum/ForumAdmin.class.php:214
 msgid "Forum added successfully"
-msgstr "Le forum a été créé"
+msgstr "Le forum a été créé avec succès"
 
 #: common/forum/ForumAdmin.class.php:232 www/forum/admin/index.php:293
 msgid "Error Getting ForumMessage"
-msgstr "Erreur en accédant à un message de forum"
+msgstr "Erreur d’accès à un message de forum"
 
 #: common/forum/ForumAdmin.class.php:240
 #, php-format
@@ -2149,7 +2149,7 @@ msgstr "Supprimé avec succès."
 
 #: common/forum/ForumAdmin.class.php:286
 msgid "No forums are moderated for this group"
-msgstr "Ce projet n'a pas de forums modérés"
+msgstr "Ce groupe n’a pas de forums modérés"
 
 #: common/forum/ForumAdmin.class.php:300
 msgid "Proceed? Actions are permanent!"
@@ -2221,14 +2221,14 @@ msgstr "Forum supprimé"
 #: common/forum/ForumAdmin.class.php:419 www/forum/forum.php:70
 #: www/forum/message.php:72
 msgid "Error getting new Forum"
-msgstr "Erreur en accédant à un forum"
+msgstr "Erreur d’accès à un nouveau forum"
 
 #: common/forum/ForumAdmin.class.php:425 common/forum/ForumAdmin.class.php:427
 #: www/forum/admin/pendingmsgdetail.php:57
 #: www/forum/admin/pendingmsgdetail.php:59 www/forum/forum.php:89
 #: www/forum/forum.php:92 www/forum/message.php:82
 msgid "Error getting new ForumMessage"
-msgstr "Erreur en accédant à un message de forum"
+msgstr "Erreur d’accès à un nouveau message de forum"
 
 #: common/forum/ForumAdmin.class.php:439
 msgid "Pending message released"
@@ -2238,19 +2238,19 @@ msgstr "Message en attente publié"
 #: common/forum/ForumMessage.class.php:183
 #: common/forum/ForumMessage.class.php:277
 msgid "Could not Update Master Thread parent with current time"
-msgstr "Échec lors de la mise à jour du fil de discussion principal avec la date courante"
+msgstr "Impossible de mettre à jour le fil de discussion principal avec la date courante"
 
 #: common/forum/ForumAdmin.class.php:463
 msgid "The thread which the message was posted to doesn't exist anymore, please delete the message."
-msgstr "Le fil de discussion dans lequel le message a été publié n'existe plus. Veuillez supprimer ce message."
+msgstr "Le fil de discussion dans lequel le message a été publié n’existe plus. Veuillez supprimer ce message."
 
 #: common/forum/Forum.class.php:172 common/forum/Forum.class.php:553
 msgid "Forum name must be at least 3 characters."
-msgstr "Le nom d'un forum doit compter au moins 3 caractères."
+msgstr "Le nom d’un forum doit compter au moins 3 caractères."
 
 #: common/forum/Forum.class.php:176 common/forum/Forum.class.php:557
 msgid "Forum description must be at least 10 characters."
-msgstr "La description d'un forum doit compter au moins 10 caractères."
+msgstr "La description d’un forum doit compter au moins 10 caractères."
 
 #: common/forum/Forum.class.php:181 common/forum/Forum.class.php:183
 #: common/forum/Forum.class.php:562 common/forum/Forum.class.php:564
@@ -2267,7 +2267,7 @@ msgstr "Il existe déjà une liste de diffusion portant ce nom."
 
 #: common/forum/Forum.class.php:230
 msgid "Error Adding Forum"
-msgstr "Erreur lors de l'ajout d'un forum"
+msgstr "Erreur lors de l’ajout d'un forum"
 
 #: common/forum/Forum.class.php:241 cronjobs/homedirs.php:156
 #: www/account/first.php:29
@@ -2333,7 +2333,7 @@ msgstr "Forum"
 #: common/forum/ForumFactory.class.php:142
 #: common/forum/ForumFactory.class.php:151
 msgid "You don't have a permission to access this page"
-msgstr "Vous n'avez pas l'autorisation d'accéder à cette page"
+msgstr "Vous n’avez pas l’autorisation d’accéder à cette page"
 
 #: common/forum/ForumFactory.class.php:158
 msgid "Forum not found"
@@ -2439,7 +2439,7 @@ msgstr "Fichier à publier"
 
 #: common/forum/ForumHTML.class.php:325
 msgid "Warning: Uploaded file will replace current file"
-msgstr "Attention : le fichier actuel sera remplacé de manière permanente"
+msgstr "Attention : le fichier importé remplacera le fichier actuel de manière permanente"
 
 #: common/forum/ForumHTML.class.php:349 common/tracker/actions/detail.php:168
 #: common/tracker/actions/mod-limited.php:193
@@ -2487,12 +2487,12 @@ msgstr "Annuler"
 
 #: common/forum/ForumHTML.class.php:607
 msgid "HTML tags will display in your post as text"
-msgstr "Les balises HTML de votre message seront affichées comme du texte."
+msgstr "Les balises HTML de votre message seront affichées comme du texte"
 
 #: common/forum/ForumHTML.class.php:614
 #, php-format
 msgid "You are posting anonymously because you are not <a href=\"%s\">logged in</a>"
-msgstr "Vous ajoutez un message anonyme car vous n'êtes pas <a href=\"%s\">identifié</a>"
+msgstr "Vous ajoutez un message anonyme car vous n’êtes pas <a href=\"%s\">identifié</a>"
 
 #: common/forum/ForumHTML.class.php:619 common/tracker/actions/mod.php:243
 msgid "Post Comment"
@@ -2500,7 +2500,7 @@ msgstr "Publier le commentaire"
 
 #: common/forum/ForumHTML.class.php:619
 msgid "Anonymously"
-msgstr "de manière anonyme"
+msgstr "anonymement"
 
 #: common/forum/ForumHTML.class.php:620
 msgid "Receive comments via email"
