@@ -70,6 +70,13 @@
 			</p>
 
 			<p>
+			<input id="really_sure" type="checkbox" name="really_sure" value="1" />
+			<label for="really_sure">
+			<?php echo _("I am really sure") ?>
+			</label>
+			</p>
+
+			<p>
 			<input type="submit" name="post_changes" value="<?php echo _('Delete') ?>" /></p>
 			</form>
 			</fieldset>
