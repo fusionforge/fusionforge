@@ -19,6 +19,7 @@ Fusionforge-5.3.3:
 * Plugin MediaWiki: activate MediaWiki extensions (in the database) when creating a new project wiki (Thorsten Glaser & Inria)
 * Plugin MediaWiki: integrate e-mail from FusionForge account, to send watchlist notifications (Inria)
 * Plugin OSLC: Undefined index: is_public [#748] (TrivialDev)
+* I18N: updated French translation (Stéphane Aulery and Inria)
 
 Fusionforge-5.3.2:
 * Software map: fix "value too long for type character varying(255)" error in cron db_trove_maint.php (Inria)
