@@ -1,6 +1,6 @@
 Name: fusionforge
 Version: @rpm_version@
-Release: @rpm_snapshot@%{?dist}
+Release: 0.1@rpm_snapshot@%{?dist}
 Summary: Collaborative development tool
 
 Group: Development/Tools
