@@ -46,113 +46,98 @@ require_once $gfcommon.'include/FusionForge.class.php';
 <li><?php print _('A powerful plugin system to add new features.'); ?></li>
 </ul>
 
-<h3><?php print _("What's new in FusionForge 5.3"); ?></h3>
-<p><?php print _('Checkout the roadmap for closed issues (bugs, patches, features requests) ') ?><a href="https://fusionforge.org/tracker/roadmap.php?group_id=6&roadmap_id=1&release=5.3"><?php echo _('here') ?></a></p>
+<h3><?php print _("What's new in FusionForge 6.0"); ?></h3>
+<p><?php print _('Checkout the roadmap for closed issues (bugs, patches, features requests) ') ?><a href="https://fusionforge.org/tracker/roadmap.php?group_id=6&roadmap_id=1&release=6.0"><?php echo _('here') ?></a></p>
+
 <p><?php print _('Standards features:') ?></p>
 <ul>
+
+<li><?php print _('New install system [#710] (Inria)'); ?></li>
+<li><?php print _('Reactivity: system replication is now performed immediately (rather than waiting for cron jobs) [#147] (Inria)'); ?></li>
+
+<li><?php print _('SCM:'); ?>
+  <ul>
+  <li><?php print _('Concurrent SSH and HTTPS access, relying on Apache mod_itk [#519] (Roland Mas and Inria)'); ?></li>
+  <li><?php print _('Allow projects to use several SCM engines in parallel [#751] (Roland Mas, for CEA)'); ?></li>
+  <li><?php print _('Support read-only access to private projects via SSH (Inria)'); ?></li>
+  <li><?php print _('Browsing support for (Git) private repositories [#519] (Roland Mas, for AdaCore)'); ?></li>
+  <li><?php print _('Anonymous read-only access through xinetd and rsync (Inria)'); ?></li>
+  </ul>
+</li>
+
+<li><?php print _('System: users now use a common default group ("users") rather than per-user group; avoids conflicts with project groups [#760] (Inria)'); ?></li>
+
 <li><?php print _('Docman:'); ?>
   <ul>
-  <li><?php print _('Files moved to filesystem using the Storage generic class (TrivialDev)'); ?></li>
-  <li><?php print _('Directory monitoring (TrivialDev)'); ?></li>
-  <li><?php print _('Display number of download per file, max upload size (TrivialDev)'); ?></li>
-  <li><?php print _('Add report view as in FRS (TrivialDev)'); ?></li>
+  <li><?php print _('Basic Webdav write mkcol, delete, put, move support [#658] (TrivialDev)'); ?></li>
+  <li><?php print _('Add move mass actions [#657] (TrivialDev)'); ?></li>
+  <li><?php print _('Direct link to file details [#747] (TrivialDev)'); ?></li>
+  <li><?php print _('Rewrite parser using unoconv, support more file formats [#749] (Roland Mas, for CEA)'); ?></li>
   </ul>
 </li>
-<li><?php print _('User management:'); ?>
+
+<li><?php print _('FRS:'); ?>
   <ul>
-  <li><?php print _('Account ssh key management: rewrite backend, add more informations such as fingerprint, deploy flag, easy delete (TrivialDev)'); ?></li>
-  <li><?php print _('Notify admins when user has validated his account (TrivialDev)'); ?></li>
-  <li><?php print _('New SOAP services to handle adding/removing groups, users and tasks (patch by Pasquale Vitale)'); ?></li>
+  <li><?php print _('Enable widget "My monitored packages" [#697] (TrivialDev)'); ?></li>
+  <li><?php print _('Provide new role settings [#705] (TrivialDev)'); ?></li>
+  <li><?php print _('Add delete packages, releases or files mass action [#713] (TrivialDev)'); ?></li>
+  <li><?php print _('Provide link to download any release as ZIP file [#737] (TrivialDev)'); ?></li>
+  <li><?php print _('Fix RBAC migration script [#765] (TrivialDev)'); ?></li>
+  <li><?php print _('Reorganise code [#692] (TrivialDev)'); ?></li>
   </ul>
 </li>
-<li><?php print _('Project activity:'); ?>
+
+<li><?php print _('Web UI:'); ?>
   <ul>
-  <li><?php print _('Allow project to disable the Project Activity (Alcatel-Lucent)'); ?></li>
-  <li><?php print _('Activity: New Directory appears now in activity (TrivialDev)'); ?></li>
-  </ul>
+  <li><?php print _('Drop tipsy plugin, use standard jQuery UI tooltip already provided [#656] (TrivialDev)'); ?></li>
+  <li><?php print _('FusionForge Theme & jQuery UI theme sync [#663] (TrivialDev)'); ?></li>
+  <li><?php print _('Update the jQuery & jQuery UI frameworks [#664] (TrivialDev)'); ?></li>
+  <li><?php print _('Feedback, error_msg, warning_msg are now store in cookie [#669] (TrivialDev)'); ?></li>
+  <li><?php print _('Update the jQuery Auto-height plugin [#716] (TrivialDev)'); ?></li>
+  <li><?php print _('Updated French translation (Stéphane Aulery and Inria)'); ?></li>
+	</ul>
 </li>
-<li><?php print _('Trackers: Attachements moved to filesystem to allow larger attachments & reduce DB size (Alcatel-Lucent)'); ?></li>
-<li><?php print _('Frs: Download statistics are available as graph now (TrivialDev)'); ?></li>
-<li><?php print _('New javascript based graphics (bybye jpgraph) (TrivialDev)'); ?></li>
+
 <li><?php print _('Widgets:'); ?>
   <ul>
-  <li><?php print _('Widget: MyArtifacts Enhancement: add monitored artifacts (TrivialDev)'); ?></li>
-  <li><?php print _('Widget: Project Document Activity: new or updates files, new directories, in the last 4 weeks (TrivialDev)'); ?></li>
+  <li><?php print _('Public Area: display FRS link [#684] (TrivialDev)'); ?></li>
+  <li><?php print _('My Latest Commits: New widget to display user commits on "My Page" [#743] (TrivialDev)'); ?></li>
+  <li><?php print _('Project Latest Commits: New widget to display the 5 latest commits on the project page  (TrivialDev)'); ?></li>
+  <li><?php print _('Project Latest Documents: enhancement, add actions buttons (monitor, delete) [#745] (TrivialDev)'); ?></li>
   </ul>
 </li>
+
+<li><?php print _('Tracker: enable support for multi-select extrafield in roadmap [#655] (TrivialDev)'); ?></li>
+
+<li><?php print _('Forum: store the attached file on FS [#662] (TrivialDev)'); ?></li>
+
+<li><?php print _('vhosts: allow customization from <config_dir>/custom/httpd.vhosts.tmpl (Inria)'); ?></li>
 </ul>
+
 <p><?php print _('Plugins:') ?></p>
 <ul>
-<li><?php print _('scmgit:'); ?>
+
+<li><?php print _('SCM SVN: Improved ViewVC integration, using external installation [#719] (Inria, TrivialDev)'); ?></li>
+<li><?php print _('SCM Git: Activity log entry link to commit log in SCM browsing tab [#719] (TrivialDev)'); ?></li>
+
+<li><?php print _('SCM Hg (Mercurial)'); ?>
   <ul>
-  <li><?php print _('Multiple repositories per project (developed for/sponsored by AdaCore)'); ?></li>
-  <li><?php print _('Add browsing capability for user personal repository (TrivialDev)'); ?></li>
-  <li><?php print _('Basic activity support (TrivialDev)'); ?></li>
+  <li><?php print _('Display the Repository History stats block [#724] (TrivialDev)'); ?></li>
+  <li><?php print _('Add support for project activity tab [#725] (TrivialDev)'); ?></li>
+  <li><?php print _('Activity log entry link to commit log in SCM browsing tab [#726] (TrivialDev)'); ?></li>
   </ul>
 </li>
+
 <li><?php print _('scmhook'); ?>
   <ul>
-  <li><?php print _('commitEmail support for scmhg plugin (TrivialDev)'); ?></li>
-  <li><?php print _('change properties support for SVN pre-revprop-changehooks (Alcatel-Lucent)'); ?></li>
-  <li><?php print _('svncommitemail: this plugin is superseed by scmhook'); ?></li>
-  <li><?php print _('svntracker: this plugin is superseed by scmhook'); ?></li>
+  <li><?php print _('Update git post-receive email hook (tarent solutions GmbH, Teckids e.V.)'); ?></li>
+  <li><?php print _('Install hooks as the requesting system user (Inria)'); ?></li>
   </ul>
 </li>
-<li><?php print _('scmhg: http support, online browsing, stats (Denise Patzker, TrivialDev)'); ?></li>
-<li><?php print _('headermenu: new plugin to handle links in headermenu, outermenu & groupmenu (TrivialDev)'); ?></li>
-<li><?php print _('blocks: improved with a new HTML widget for the project summary page (Alcatel-Lucent)'); ?></li>
-<li><?php print _('new phpcaptcha plugin: enable a captcha in the register page. (TrivialDev)'); ?></li>
-<li><?php print _('webanalytics: new plugin to add support for piwik or google analytics tool (TrivialDev)'); ?></li>
-<li><?php print _('new admssw plugin to provide ADMS.SW compatible RDF descriptions of projects'); ?></li>
-</ul>
 
-<h3><?php print _("What's new in FusionForge 5.2"); ?></h3>
-<p><?php print _('Standards features:') ?></p>
-<ul>
-<li><?php print _('Docman:'); ?>
-  <ul>
-  <li><?php print _('Inject ZIP as a tree (Capgemini)') ?></li>
-  <li><?php print _('Mass action (Capgemini)') ?></li>
-  <li><?php print _('Interaction with the projects-hierarchy plugin to enable hierarchical browsing. (Capgemini)') ?></li>
-  <li><?php print _('Complete rewritten of trash and pending view (Capgemini)') ?></li>
-  </ul>
-</li>
-<li><?php print _('scmsvn:'); ?>
-  <ul>
-  <li><?php print _('Private projects can now be browsed with viewvc, using user rights management (TrivialDev).') ?></li>
-  <li><?php print _('Basic activity support (TrivialDev)') ?></li>
-  </ul>
-</li>
-<li><?php print _('Trackers: New view to display roadmaps view for trackers (Alcatel-Lucent)') ?></li>
-<li><?php print _('Admin: User add membership to multiples projects in one shot (Capgemini)') ?></li>
-<li><?php print _('Widgets:'); ?>
-  <ul>
-  <li><?php print _('New Widget: last 5 documents published in my project (Capgemini)') ?></li>
-  <li><?php print _('New Widget: smcgit personal URL of cloned repositories. Currently just a list of URLs of your personal repository cloned from project you belong. (Capgemini)') ?></li>
-  </ul>
-</li>
-</ul>
-<p><?php print _('Plugins:') ?></p>
-<ul>
-<li><?php print _('New Scmhook plugin: complete library to handle hooks for any scm available in fusionforge. Currently supporting post-commit and pre-commit hook. scmsvn pre-commit and post-commit library is provided (Capgemini)') ?></li>
-<li><?php print _('New Message plugin to display global messages like planned upgrade or outage (Alcatel-Lucent).') ?></li>
-<li><?php print _('New MoinMoinWiki plugin (AdaCore)') ?></li>
-</ul>
+<li><?php print _('AuthLDAP: Support LPAP_OPT_REFERRALS option, needed by ActiveDirectory Server [#734] (TrivialDev)'); ?></li>
 
-<h3><?php print _("What's new in FusionForge 5.1"); ?></h3>
-<ul>
-<li><?php print _('New Funky Theme (Capgemini).'); ?></li>
-<li><?php print _('New UI and features for the document manager (download as ZIP, locking, referencing documents by URL) (Capgemini).'); ?></li>
-<li><?php print _('New progress bar displaying completion state of trackers using a custom status field.'); ?></li>
-<li><?php print _('Improved sorting in trackers (Alcatel-Lucent).'); ?></li>
-<li><?php print _('More flexible and more powerful role-based access control system (Coclico).'); ?></li>
-<li><?php print _('New unobtrusive tooltip system based on jquery and tipsy to replace old help window (Alcatel-Lucent)'); ?></li>
-<li><?php print _('New plugins: Blocks, to add free HTML blocks on top of each tool of the project; Gravatar, to display user faces; OSLC, implementing the OSLC-CM API for tracker interoperability with external tools.'); ?></li>
-<li><?php print _('scmgit plugin: Personal Git repositories for project members (AdaCore).'); ?></li>
-<li><?php print _('Template projects: there can be several of them, and users registering new projects can pick which template to clone from for their new projects (Coclico).'); ?></li>
-<li><?php print _('Simplified configuration system, using standard *.ini files.'); ?></li>
-<li><?php print _('Reorganised, modular Apache configuration.'); ?></li>
-<li><?php print _('RPM packages for Red Hat (and derived) distributions.'); ?></li>
+<li><?php print _('Task Board: New Agile TaskBoard supporting Scrum and Kanban methodologies (Vitaliy Pylypiv and TrivialDev)'); ?></li>
 </ul>
 
 <?php

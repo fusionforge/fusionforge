@@ -24,9 +24,22 @@ snapshot=$2
 if [ -z "$version" ]; then version=$(make version); fi
 # rpm needs snapshot version separately (because 6.0+20141027 > 6.0.1, unlike in Debian)
 tarball_version=$version
-if [ -n "$snapshot" ]; then
-    tarball_version=$version+$snapshot
-    snapshot=.$snapshot
+
+if echo $version | grep -q 'rc'; then
+    rc=$(echo $version | sed 's/.*rc//')
+    rpm_version=$(echo $version | sed 's/rc.*//')
+    rpm_snapshot=0.1.rc$rc
+    if [ -n "$snapshot" ]; then
+	tarball_version=$version+$snapshot
+	rpm_snapshot=$rpm_snapshot.$snapshot
+    fi
+else
+    rpm_version=$version
+    rpm_snapshot=1
+    if [ -n "$snapshot" ]; then
+	tarball_version=$version+$snapshot
+	snapshot=1.$snapshot
+    fi
 fi
 
 rm -f fusionforge.spec
@@ -52,8 +65,8 @@ rm -f fusionforge.spec
     done
 ) \
 | sed \
-    -e "s/@version@/$version/" \
-    -e "s/@snapshot@/$snapshot/" \
+    -e "s/@rpm_version@/$rpm_version/" \
+    -e "s/@rpm_snapshot@/$rpm_snapshot/" \
     -e "s/@tarball_version@/$tarball_version/" \
     -e '/^@plugins@/ { ' -e 'ecat' -e 'd }' \
     rpm/fusionforge.spec.in > fusionforge.spec
