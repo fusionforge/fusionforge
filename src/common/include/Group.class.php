@@ -1666,52 +1666,47 @@ class Group extends Error {
 		//
 		//	Delete Trackers
 		//
-		if ($this->usesTracker()) {
-			$atf = new ArtifactTypeFactory($this);
-			$at_arr = $atf->getArtifactTypes();
-			foreach ($at_arr as $i) {
-				if (!is_object($i)) {
-					continue;
-				}
-				if (!$i->delete(1,1)) {
-					$this->setError(_('Could not properly delete the tracker:').' '.$i->getErrorMessage());
-					return false;
-				}
+		$atf = new ArtifactTypeFactory($this, true);
+		$at_arr = $atf->getArtifactTypes();
+		foreach ($at_arr as $i) {
+			if (!is_object($i)) {
+				continue;
+			}
+			if (!$i->delete(1,1)) {
+				$this->setError(_('Could not properly delete the tracker:').' '.$i->getErrorMessage());
+				return false;
 			}
 		}
 		//
 		//	Delete Forums
 		//
-
-		if ($this->usesForum()) {
-			$ff = new ForumFactory($this);
-			$f_arr = $ff->getForums();
-			foreach ($f_arr as $i) {
-				if (!is_object($i)) {
-					continue;
-				}
-				if(!$i->delete(1,1)) {
-					$this->setError(_('Could not properly delete the forum:').' '.$i->getErrorMessage());
-					return false;
-				}
+		$ff = new ForumFactory($this, true);
+		$f_arr = $ff->getForums();
+		foreach ($f_arr as $i) {
+			if (!is_object($i)) {
+				continue;
+			}
+			if(!$i->delete(1,1)) {
+				$this->setError(_('Could not properly delete the forum:').' '.$i->getErrorMessage());
+				return false;
 			}
 		}
+
 		//
 		//	Delete Subprojects
 		//
-		if ($this->usesPM()) {
-			$pgf = new ProjectGroupFactory($this);
-			$pg_arr = $pgf->getProjectGroups();
-			foreach ($pg_arr as $i) {
-				if (!is_object($i)) {
-					continue;
-				}
-				if (!$i->delete(1,1)) {
-					$this->setError(_('Could not properly delete the ProjectGroup:').' '.$i->getErrorMessage());
-					return false;
-				}
+		$pgf = new ProjectGroupFactory($this, true);
+		$pg_arr = $pgf->getProjectGroups();
+		foreach ($pg_arr as $i) {
+			if (!is_object($i)) {
+				continue;
+			}
+			if (!$i->delete(1,1)) {
+				$this->setError(_('Could not properly delete the ProjectGroup:').' '.$i->getErrorMessage());
+				return false;
 			}
 		}
+
 		//
 		//	Delete FRS Packages
 		//
@@ -1822,22 +1817,20 @@ class Group extends Error {
 		//
 		//	Delete Surveys
 		//
-		if ($this->usesSurvey()) {
-			$sf = new SurveyFactory($this);
-			$s_arr =& $sf->getSurveys();
-			foreach ($s_arr as $i) {
-				if (!is_object($i)) {
-					continue;
-				}
-				if (!$i->delete()) {
-					$this->setError(_('Could not properly delete the survey'));
-					db_rollback();
-					return false;
-				}
+		$sf = new SurveyFactory($this, true);
+		$s_arr =& $sf->getSurveys();
+		foreach ($s_arr as $i) {
+			if (!is_object($i)) {
+				continue;
 			}
-		//
-		//	Delete SurveyQuestions
-		//
+			if (!$i->delete()) {
+				$this->setError(_('Could not properly delete the survey'));
+				db_rollback();
+				return false;
+			}
+			//
+			//	Delete SurveyQuestions
+			//
 			$sqf = new SurveyQuestionFactory($this);
 			$sq_arr = $sqf->getSurveyQuestions();
 			if (is_array($sq_arr)) {
@@ -1856,18 +1849,16 @@ class Group extends Error {
 		//
 		//	Delete Mailing List Factory
 		//
-		if ($this->usesMail()) {
-			$mlf = new MailingListFactory($this);
-			$ml_arr = $mlf->getMailingLists();
-			foreach ($ml_arr as $i) {
-				if (!is_object($i)) {
-					continue;
-				}
-				if (!$i->delete(1,1)) {
-					$this->setError(_('Could not properly delete the mailing list'));
-					db_rollback();
-					return false;
-				}
+		$mlf = new MailingListFactory($this, true);
+		$ml_arr = $mlf->getMailingLists();
+		foreach ($ml_arr as $i) {
+			if (!is_object($i)) {
+				continue;
+			}
+			if (!$i->delete(1,1)) {
+				$this->setError(_('Could not properly delete the mailing list'));
+				db_rollback();
+				return false;
 			}
 		}
 		//

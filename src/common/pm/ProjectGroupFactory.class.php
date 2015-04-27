@@ -48,7 +48,7 @@ class ProjectGroupFactory extends Error {
 	 * @param	Group	$Group	The Group object to which this ProjectGroupFactory is associated.
 	 * @return	\ProjectGroupFactory
 	*/
-	function __construct(&$Group) {
+	function __construct(&$Group, $skip_check=false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(_('No Valid Group Object'));
@@ -58,7 +58,7 @@ class ProjectGroupFactory extends Error {
 			$this->setError('ProjectGroup:: '.$Group->getErrorMessage());
 			return;
 		}
-		if (!$Group->usesPM()) {
+		if (!$skip_check && !$Group->usesPM()) {
 			$this->setError(sprintf(_('%s does not use the Project Management tool'),
 			    $Group->getPublicName()));
 			return;

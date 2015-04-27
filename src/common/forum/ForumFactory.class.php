@@ -46,7 +46,7 @@ class ForumFactory extends Error {
 	 *
 	 * @param	object	$Group	The Group object to which this forum is associated.
 	 */
-	function __construct(&$Group) {
+	function __construct(&$Group, $skip_check=false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(_('No Valid Group Object'));
@@ -56,7 +56,7 @@ class ForumFactory extends Error {
 			$this->setError(_('Forum').':: '.$Group->getErrorMessage());
 			return;
 		}
-		if (!$Group->usesForum()) {
+		if (!$skip_check && !$Group->usesForum()) {
 			$this->setError(sprintf(_('%s does not use the Forum tool.'),
 			    $Group->getPublicName()));
 			return;

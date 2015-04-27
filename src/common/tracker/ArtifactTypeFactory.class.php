@@ -53,7 +53,7 @@ class ArtifactTypeFactory extends Error {
 	 *
 	 * @param	Group	$Group The Group object to which this ArtifactTypeFactory is associated
 	 */
-	function __construct(&$Group) {
+	function __construct(&$Group, $skip_check=false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(_('No Valid Group Object'));
@@ -63,7 +63,7 @@ class ArtifactTypeFactory extends Error {
 			$this->setError('ArtifactTypeFactory: '.$Group->getErrorMessage());
 			return;
 		}
-		if (!$Group->usesTracker()) {
+		if (!$skip_check && !$Group->usesTracker()) {
 			$this->setError(sprintf(_('%s does not use the Tracker tool'),
 			    $Group->getPublicName()));
 			return;
