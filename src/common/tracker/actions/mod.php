@@ -210,7 +210,7 @@ echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 <?php
 $count=db_numrows($ah->getMessages());
 $nb = $count? ' ('.$count.')' : '';
-$pm = new PluginManager();
+$pm = plugin_manager_get_object();
 $pluginsListeners = $pm->GetHookListeners('artifact_extra_detail');
 $pluginfound = false;
 foreach ($pluginsListeners as $pluginsListener) {

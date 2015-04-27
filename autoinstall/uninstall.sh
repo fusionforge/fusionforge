@@ -3,7 +3,7 @@
 if [ -e /etc/debian_version ]; then
     aptitude purge ~nforge ~npostgres ~nnss-pgsql ~napache2 ~nphp ~npostfix ~nexim4
 else
-    yum remove -y 'fusionforge*'
+    yum remove -y 'fusionforge*' postgresql
     rm -f /etc/cron.d/fusionforge-*
 fi
 service postgresql stop

@@ -143,7 +143,7 @@ jQuery(document).ready(function() {
 <?php
 $count=db_numrows($ah->getMessages());
 $nb = $count? ' ('.$count.')' : '';
-$pm = new PluginManager();
+$pm = plugin_manager_get_object();
 $pluginsListeners = $pm->GetHookListeners('artifact_extra_detail');
 $pluginfound = false;
 foreach ($pluginsListeners as $pluginsListener) {

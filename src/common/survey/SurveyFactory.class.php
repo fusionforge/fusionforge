@@ -48,7 +48,7 @@ class SurveyFactory extends Error {
 	 *
 	 * @param	object	$Group	The Group object to which this survey is associated.
 	 */
-	function __construct(&$Group) {
+	function __construct(&$Group, $skip_check=false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(_('No Valid Group Object'));
@@ -59,7 +59,7 @@ class SurveyFactory extends Error {
 			$this->setError(_('Survey')._(': ').$Group->getErrorMessage());
 			return;
 		}
-		if (!$Group->usesSurvey()) {
+		if (!$skip_check && !$Group->usesSurvey()) {
 			$this->setError(sprintf(_('%s does not use the Survey tool'),
 			    $Group->getPublicName()));
 			return;

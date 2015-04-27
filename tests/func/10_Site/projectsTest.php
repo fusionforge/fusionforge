@@ -205,7 +205,8 @@ class CreateProject extends FForge_SeleniumTestCase
 	// Test removal of project.
 	function testRemoveProject()
 	{
-		$this->login(FORGE_ADMIN_USERNAME);
+		$this->populateStandardTemplate('trackers');
+		$this->init();
 
 		// Create project as a different user
 		// Non-regression test for Adacore ticket K720-005
@@ -239,6 +240,28 @@ class CreateProject extends FForge_SeleniumTestCase
 		$this->click("link=Home");
 		$this->waitForPageToLoad("30000");
 		$this->assertFalse($this->isTextPresent("testal1"));
+
+		// Non-regression test for bug #681
+		$this->gotoProject('ProjectA');
+		$this->clickAndWait("link=Admin");
+		$this->clickAndWait("link=Tools");
+		$this->uncheck("//input[@name='use_tracker']") ;
+		$this->uncheck("//input[@name='use_forum']") ;
+		$this->uncheck("//input[@name='use_pm']") ;
+		$this->uncheck("//input[@name='use_survey']") ;
+		$this->uncheck("//input[@name='use_mail']") ;
+		$this->clickAndWait("submit");
+		
+		$this->clickAndWait("link=Site Admin");
+		$this->clickAndWait("link=Display Full Project List/Edit Projects");
+		$this->clickAndWait("link=ProjectA");
+		$this->clickAndWait("link=Permanently Delete Project");
+		$this->click("sure");
+		$this->click("reallysure");
+		$this->click("reallyreallysure");
+		$this->clickAndWait("submit");
+		$this->clickAndWait("link=Home");
+		$this->assertFalse($this->isTextPresent("ProjectA"));
 	}
 }
 
