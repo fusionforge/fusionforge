@@ -29,7 +29,7 @@ if [ -e /etc/debian_version ]; then
     export DEBIAN_FRONTEND=noninteractive
     backports_deb
     apt-get update
-    apt-get install -y make gettext php5-cli php5-pgsql php-htmlpurifier \
+    apt-get install -y make gettext php5-cli php5-pgsql php-htmlpurifier php-http \
 	libapache2-mpm-itk libapache2-mod-svn \
 	apache2 postgresql libnss-pgsql2 unscd \
 	subversion viewvc python-pycurl git xinetd \
@@ -43,7 +43,7 @@ else
     yum install -y make tar
     backports_rpm
     yum --enablerepo=epel install -y httpd-itk
-    yum install -y gettext php-cli php-pgsql php-process php-mbstring \
+    yum install -y gettext php-cli php-pgsql php-process php-mbstring php-pear-HTTP \
 	httpd mod_dav_svn mod_ssl postgresql-server nscd \
 	subversion viewvc python-pycurl git gitweb xinetd \
 	mediawiki119 \
