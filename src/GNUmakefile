@@ -90,6 +90,10 @@ install-db: install-base-dirs
 			> $(DESTDIR)$(sysconfdir)/cron.d/fusionforge-db; \
 	fi
 
+install-db-remote:
+	$(INSTALL) -d -m 00755 $(DESTDIR)$(sysconfdir)/init.d/
+	$(CP_R) etc/init.d/fusionforge-db-remote $(DESTDIR)$(sysconfdir)/init.d/fusionforge-db-remote
+
 install-web: install-base-dirs
 	$(CP_R) vendor www $(DESTDIR)$(pkgdatadir)/
 	$(CP_R) --no-clobber etc/httpd.conf* $(DESTDIR)$(config_path)

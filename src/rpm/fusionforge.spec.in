@@ -67,6 +67,7 @@ install_listfiles common
 %find_lang %{name}
 # Install sub-modules
 install_listfiles db-local
+install_listfiles db-remote
 install_listfiles web
 install_listfiles web-vhosts
 install_listfiles shell
@@ -141,7 +142,7 @@ This dummy package tells FusionForge you installed the database on a
 separate machine.  It preserves the fusionforge-db virtual dependency,
 to configure the database before depending packages in single-server
 installs (e.g. plugins activation requires a populated db).
-%files db-remote
+%files db-remote -f db-remote.rpmfiles
 
 
 %package shell
