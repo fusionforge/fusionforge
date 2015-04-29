@@ -18,10 +18,10 @@
 # Box : souvent synonyme de "Server"
 msgid ""
 msgstr ""
-"Project-Id-Version: fusionforge 5.3\n"
+"Project-Id-Version: fusionforge 6.0rc1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-04-24 15:40+0200\n"
-"PO-Revision-Date: 2015-04-29 19:09+0200\n"
+"PO-Revision-Date: 2015-04-29 19:59+0200\n"
 "Last-Translator: Sylvain Beucler <beuc@beuc.net>\n"
 "Language-Team: French <traduc@traduc.org>\n"
 "Language: fr\n"
@@ -532,9 +532,8 @@ msgid "Document already published in this folder"
 msgstr "Document déjà publié dans ce dossier"
 
 #: common/docman/Document.class.php:221 common/docman/Document.class.php:228
-#, fuzzy
 msgid "Error Adding Document"
-msgstr "Erreur lors de l’ajout du document :"
+msgstr "Erreur lors de l’ajout du document"
 
 #: common/docman/Document.class.php:221
 #: common/forum/AttachManager.class.php:215
@@ -550,9 +549,8 @@ msgstr "Erreur lors de la récupération du document"
 
 #: common/docman/Document.class.php:248 common/docman/Document.class.php:831
 #: common/docman/Document.class.php:1068
-#, fuzzy
 msgid "Error updating document group"
-msgstr "Erreur lors de la mise à jour du groupe de documents :"
+msgstr "Erreur lors de la mise à jour du groupe de documents"
 
 #: common/docman/Document.class.php:275
 msgid "Document: Invalid docid"
@@ -630,20 +628,17 @@ msgid "Docman"
 msgstr "Docman"
 
 #: common/docman/Document.class.php:917
-#, fuzzy
 msgid "A new document has been uploaded and waiting to be approved by you"
-msgstr "Le document %s, soumis avec succès, est en attente de validation."
+msgstr "Le document %s, soumis avec succès, est en attente de validation"
 
 #: common/docman/Document.class.php:964
-#, fuzzy
 msgid "Error Deleting Document"
-msgstr "Erreur lors de la suppression du document :"
+msgstr "Erreur lors de la suppression du document"
 
 #: common/docman/Document.class.php:1023
 #: common/docman/DocumentGroup.class.php:968
-#, fuzzy
 msgid "wrong parameters"
-msgstr "Erreur : paramètre manquant"
+msgstr "paramètres erronés"
 
 #: common/docman/Document.class.php:1052
 #: common/docman/DocumentGroup.class.php:991
@@ -674,14 +669,12 @@ msgid "Folder name already exists"
 msgstr "Ce nom de dossier existe déjà"
 
 #: common/docman/DocumentGroup.class.php:177
-#, fuzzy
 msgid "Error Adding Folder"
-msgstr "Erreur lors de l’ajout d'un dossier :"
+msgstr "Erreur lors de l’ajout d'un dossier"
 
 #: common/docman/DocumentGroup.class.php:271
-#, fuzzy
 msgid "Unsupported injected file"
-msgstr "Ce type de fichier ne peut être injecté :"
+msgstr "Ce type de fichier ne peut être injecté"
 
 #: common/docman/DocumentGroup.class.php:289
 msgid "Invalid Document Folder ID"
@@ -916,8 +909,8 @@ msgstr "Aucune action à effectuer"
 #, fuzzy, php-format
 msgid "%s document deleted successfully."
 msgid_plural "%s documents deleted successfully."
-msgstr[0] "Pièce jointe supprimée avec succès."
-msgstr[1] "Pièce jointe supprimée avec succès."
+msgstr[0] "Document supprimé avec succès."
+msgstr[1] "Document supprimé avec succès."
 
 #: common/docman/actions/editdocgroup.php:69
 #, php-format
@@ -1094,9 +1087,8 @@ msgid "webdav db error"
 msgstr "Erreur WebDAV :"
 
 #: common/docman/include/webdav.php:338
-#, fuzzy
 msgid "Injected by WebDAV"
-msgstr "Injecté par ZIP :"
+msgstr "Injecté par WebDAV"
 
 #: common/docman/views/addfile.php:89
 msgid "You MUST first create at least one folder to store your document."
@@ -1692,9 +1684,8 @@ msgid "Edit the contents to your desire or leave them as they are to remain unmo
 msgstr "Éditez à votre guise le contenu, ou laissez-le tel quel si vous ne souhaitez pas le modifier."
 
 #: common/docman/views/editfile.php:65
-#, fuzzy
 msgid "Folder that document belongs to"
-msgstr "Dossier auquel le document appartient :"
+msgstr "Dossier auquel le document appartient"
 
 #: common/docman/views/editfile.php:69 common/tracker/Artifact.class.php:932
 #: common/tracker/actions/browse.php:427 common/tracker/actions/browse.php:585
@@ -1706,14 +1697,12 @@ msgid "State"
 msgstr "État"
 
 #: common/docman/views/editfile.php:73
-#, fuzzy
 msgid "Specify an new outside URL where the file will be referenced"
-msgstr "Spécifier une nouvelle URL externe où le fichier sera référencé :"
+msgstr "Spécifier une nouvelle URL externe où le fichier sera référencé"
 
 #: common/docman/views/editfile.php:77
-#, fuzzy
 msgid "OPTIONAL Upload new file"
-msgstr "Optionnel : importer un nouveau fichier :"
+msgstr "Optionnel : importer un nouveau fichier"
 
 #: common/docman/views/help.php:38
 #, fuzzy
@@ -2033,9 +2022,8 @@ msgid "Actions availables for selected documents, you need to check at least one
 msgstr "Actions disponibles pour les documents sélectionnés ; au moins un document doit être sélectionné pour que ces actions aient lieu."
 
 #: common/docman/views/listfile.php:352
-#, fuzzy
 msgid "Mass actions for selected documents"
-msgstr "Actions en attente sur les documents sélectionnés :"
+msgstr "Actions en attente sur les documents sélectionnés"
 
 #: common/docman/views/listfile.php:354
 msgid "Move to trash"
@@ -2050,12 +2038,10 @@ msgid "Reserve for later edition"
 msgstr "Réserver ce document pour une édition ultérieure"
 
 #: common/docman/views/listfile.php:358
-#, fuzzy
 msgid "Start monitoring"
-msgstr "Arrêter la surveillance"
+msgstr "Démarrer la surveillance"
 
 #: common/docman/views/listfile.php:359
-#, fuzzy
 msgid "Stop monitoring"
 msgstr "Arrêter la surveillance"
 
@@ -2335,9 +2321,8 @@ msgid "At least one word must be found"
 msgstr "Au moins un mot doit être trouvé"
 
 #: common/docman/views/search.php:58
-#, fuzzy
 msgid "Query"
-msgstr "Requête : "
+msgstr "Requête"
 
 #: common/docman/views/search.php:59
 msgid "Searched words"
@@ -2510,9 +2495,8 @@ msgstr "Fichier non importé"
 #: common/forum/AttachManager.class.php:321
 #: common/forum/AttachManager.class.php:358
 #: common/forum/AttachManager.class.php:413
-#, fuzzy
 msgid "Error Adding Attachment"
-msgstr "Erreur lors de l’ajout du document :"
+msgstr "Erreur lors de l’ajout du document"
 
 #: common/forum/AttachManager.class.php:256
 msgid "Invalid Extension"
@@ -3091,9 +3075,8 @@ msgid "Filename can only be alphanumeric and “-”, “_”, “+”, “.”,
 msgstr "Le nom de fichier ne peut contenir que des caractères alphanumériques ainsi que « - », « _ », « + », « . », et « ~ »."
 
 #: common/frs/FRSFile.class.php:134
-#, fuzzy
 msgid "FRSFile appears to be invalid."
-msgstr "Le fichier semble invalide"
+msgstr "Le FRSFile semble invalide."
 
 #: common/frs/FRSFile.class.php:150
 #, fuzzy
@@ -3105,9 +3088,8 @@ msgid "File cannot be moved to the permanent location"
 msgstr "Le fichier ne peut pas être déplacé vers sa destination"
 
 #: common/frs/FRSFile.class.php:205
-#, fuzzy
 msgid "Error Adding File"
-msgstr "Erreur lors de l’ajout d'un dossier :"
+msgstr "Erreur lors de l’ajout d'un fichier"
 
 #: common/frs/FRSFile.class.php:234
 msgid "Invalid file_id"
@@ -3115,9 +3097,8 @@ msgstr "file_id invalide"
 
 #: common/frs/FRSFile.class.php:424 common/frs/FRSPackage.class.php:438
 #: common/frs/FRSRelease.class.php:435 common/frs/FRSRelease.class.php:454
-#, fuzzy
 msgid "Error On Update"
-msgstr "Erreur lors de la mise à jour : %s"
+msgstr "Erreur lors de la mise à jour"
 
 #: common/frs/FRSFile.class.php:442
 msgid "That filename already exists in this project space"
@@ -3137,9 +3118,8 @@ msgid "Package Name can only be alphanumeric"
 msgstr "Le nom du paquet doit être alphanumérique"
 
 #: common/frs/FRSPackage.class.php:176 common/frs/FRSPackage.class.php:186
-#, fuzzy
 msgid "Error Adding Package"
-msgstr "Erreur lors de l'ajout du paquet : "
+msgstr "Erreur lors de l'ajout du paquet"
 
 #: common/frs/FRSPackage.class.php:176 common/frs/FRSPackage.class.php:427
 #: common/frs/FRSRelease.class.php:435
@@ -3152,20 +3132,17 @@ msgid "Invalid package_id"
 msgstr "package_id invalide"
 
 #: common/frs/FRSPackage.class.php:309
-#, fuzzy
 msgid "public"
-msgstr "Public"
+msgstr "public"
 
 #: common/frs/FRSPackage.class.php:311
-#, fuzzy
 msgid "private"
-msgstr "Privé"
+msgstr "privé"
 
 #: common/frs/FRSPackage.class.php:427 common/frs/FRSPackage.class.php:445
 #: common/frs/FRSPackage.class.php:455 common/frs/FRSPackage.class.php:460
-#, fuzzy
 msgid "Error Updating Package"
-msgstr "Erreur lors de l'ajout du paquet : "
+msgstr "Impossible de mettre à jour le paquet"
 
 #: common/frs/FRSPackage.class.php:445 common/frs/FRSRelease.class.php:461
 #, fuzzy
@@ -3183,9 +3160,8 @@ msgid "Couldn't rename dir"
 msgstr "Impossible de mettre à jour le paquet : impossible de renommer le répertoire"
 
 #: common/frs/FRSPackage.class.php:519
-#, fuzzy
 msgid "Release Error"
-msgstr "Erreur de livraison : "
+msgstr "Erreur dans la Version"
 
 #: common/frs/FRSPackage.class.php:529
 msgid "Package delete error: trying to delete root dir"
@@ -3197,9 +3173,8 @@ msgstr "Identifiant de livraison maximum incorrect"
 
 #: common/frs/FRSPackage.class.php:588 db/20141105-frs-ziplatest.php:51
 #: db/20141106-frs-zip-per-release.php:48
-#, fuzzy
 msgid "Cannot open the file archive"
-msgstr "Erreur lors de l'ouverture de l'archive."
+msgstr "Erreur lors de l'ouverture de l'archive"
 
 #: common/frs/FRSPackage.class.php:595 db/20141105-frs-ziplatest.php:58
 #: db/20141106-frs-zip-per-release.php:55
@@ -3230,20 +3205,18 @@ msgid "Package"
 msgstr "Paquet"
 
 #: common/frs/FRSPackage.class.php:635
-#, fuzzy
 msgid "For more info, visit"
-msgstr "Pour plus d’informations, visitez :"
+msgstr "Pour plus d’informations, visitez"
 
 #: common/frs/FRSPackage.class.php:640
-#, fuzzy
 msgid "FRS"
-msgstr "RSS"
+msgstr "Publication de Fichiers"
 
 #: common/frs/FRSPackageFactory.class.php:59
 #: common/frs/FRSReleaseFactory.class.php:68
-#, fuzzy, php-format
+#, php-format
 msgid "%s does not use the FRS tool"
-msgstr "%s n’utilise pas l’outil Forum."
+msgstr "%s n’utilise pas l’outil de Publication de Fichiers."
 
 #: common/frs/FRSRelease.class.php:85
 msgid "Invalid FRS Package Object"
@@ -3302,14 +3275,12 @@ msgid "File Error"
 msgstr "Erreur lors de la publication du fichier"
 
 #: common/frs/FRSRelease.class.php:390
-#, fuzzy
 msgid "Release delete error"
-msgstr "Erreur de livraison : "
+msgstr "Impossible de supprimer la version"
 
 #: common/frs/FRSRelease.class.php:390
-#, fuzzy
 msgid "trying to delete root dir"
-msgstr "Erreur de suppression de paquet : tentative de suppression du répertoire racine"
+msgstr "tentative de suppression du répertoire racine"
 
 #: common/frs/FRSRelease.class.php:461 common/frs/FRSRelease.class.php:471
 #: common/frs/FRSRelease.class.php:476
@@ -3511,9 +3482,8 @@ msgid "QRS"
 msgstr "NVR"
 
 #: common/frs/views/admin.php:46
-#, fuzzy
 msgid "Click here to "
-msgstr "Cliquez ici pour accéder à cet élément : %s"
+msgstr "Cliquez ici pour "
 
 #: common/frs/views/admin.php:46
 #, fuzzy
@@ -3533,23 +3503,20 @@ msgid "You can use packages to group different file releases together, or use th
 msgstr "Les paquets peuvent par exemple être utilisés pour regrouper plusieurs publications de fichiers."
 
 #: common/frs/views/admin.php:66
-#, fuzzy
 msgid "An example of packages"
-msgstr "Un exemple de paquets :"
+msgstr "Un exemple de paquets"
 
 #: common/frs/views/admin.php:68
-#, fuzzy
 msgid "Your Packages"
-msgstr "Vos paquets :"
+msgstr "Vos paquets"
 
 #: common/frs/views/admin.php:70
 msgid "Define your packages"
 msgstr "Définir vos paquets"
 
 #: common/frs/views/admin.php:71
-#, fuzzy
 msgid "Create new releases of packages."
-msgstr "Créer une nouvelle version de paquets"
+msgstr "Créer une nouvelle version de paquets."
 
 #: common/frs/views/admin.php:73
 msgid "Releases of Packages"
@@ -3560,12 +3527,10 @@ msgid "A release of a package can contain multiple files."
 msgstr "Une version d'un paquet peut contenir plusieurs fichiers."
 
 #: common/frs/views/admin.php:75
-#, fuzzy
 msgid "Examples of releases"
 msgstr "Exemples de versions"
 
 #: common/frs/views/admin.php:77
-#, fuzzy
 msgid "You can create new releases of packages by clicking on <strong>Add/Edit Releases</strong> next to your package name."
 msgstr "Vous pouvez créer de nouvelles versions des paquets en cliquant sur <strong>Éditer les versions</strong> à côté du nom de votre paquet."
 
@@ -3620,17 +3585,14 @@ msgid "At least 3 characters"
 msgstr "3 caractères minimum"
 
 #: common/frs/views/admin.php:128
-#, fuzzy
 msgid "Delete this package"
-msgstr "Supprimer cette tâche"
+msgstr "Supprimer ce paquet"
 
 #: common/frs/views/admin.php:128 common/frs/views/admin.php:145
-#, fuzzy
 msgid "Delete package"
 msgstr "Supprimer le paquet"
 
 #: common/frs/views/admin.php:128
-#, fuzzy
 msgid "Delete the package"
 msgstr "Supprimer le paquet"
 
@@ -3705,9 +3667,8 @@ msgstr "Envoyer les notes de version"
 
 #: common/frs/views/editrelease.php:98 common/frs/views/editrelease.php:105
 #: common/frs/views/editrelease.php:132
-#, fuzzy
 msgid "max upload size"
-msgstr "taille maximale d'envoi de données :"
+msgstr "taille maximale d'envoi de données"
 
 #: common/frs/views/editrelease.php:104
 msgid "Upload Change Log"
@@ -3802,9 +3763,8 @@ msgid "Actions availables for selected files, you need to check at least one fil
 msgstr "Actions disponibles pour les fichiers sélectionnés ; au moins un fichier doit être sélectionné pour que ces actions aient lieu."
 
 #: common/frs/views/editrelease.php:195
-#, fuzzy
 msgid "Mass actions for selected files"
-msgstr "Actions en attente sur les fichiers sélectionnés :"
+msgstr "Actions en attente sur les fichiers sélectionnés"
 
 #: common/frs/views/editrelease.php:196
 #, fuzzy
@@ -3858,9 +3818,8 @@ msgid "Unable to set monitoring"
 msgstr "Impossible de supprimer la surveillance"
 
 #: common/frs/views/listpackages.php:100
-#, fuzzy
 msgid "Download the newest release as ZIP."
-msgstr "Télécharger la dernière version sous forme d'archive ZIP :"
+msgstr "Télécharger la dernière version sous forme d'archive ZIP."
 
 #: common/frs/views/listpackages.php:100
 msgid "This link always points to the newest release as a ZIP file."
@@ -3988,7 +3947,6 @@ msgid "Choose a package to be edited."
 msgstr "Choisissez un paquet"
 
 #: common/frs/views/showreleases.php:44
-#, fuzzy
 msgid "Permission denied"
 msgstr "Permission refusée."
 
@@ -4059,9 +4017,8 @@ msgid "Alternatively, you can use FTP to upload a new file at %s."
 msgstr "Vous pouvez également utiliser FTP pour envoyer un fichier sur %s."
 
 #: common/frs/views/useftpuploads.php:31
-#, fuzzy
 msgid "Choose an FTP file instead of uploading"
-msgstr "Choisissez un fichier FTP au lieu de télécharger :"
+msgstr "Choisissez un fichier FTP au lieu de télécharger"
 
 #: common/frs/views/usemanualuploads.php:31
 #: plugins/mediawiki/www/plugin_admin.php:188
@@ -4634,7 +4591,6 @@ msgid "Error - only text/plain supported at this time"
 msgstr "Erreur -  seul text/plain est pris en charge pour le moment"
 
 #: common/include/MonitorElement.class.php:137
-#, fuzzy
 msgid "Unable to clear monitoring"
 msgstr "Impossible de supprimer la surveillance"
 
@@ -5420,7 +5376,6 @@ msgstr "Administration des forums"
 
 #: common/include/rbac_texts.php:68 common/include/rbac_texts.php:173
 #: common/include/rbac_texts.php:178
-#, fuzzy
 msgid "No access"
 msgstr "Aucun accès"
 
@@ -6106,9 +6061,8 @@ msgid "Per assignee"
 msgstr "Par responsable"
 
 #: common/reporting/report_utils.php:418
-#, fuzzy
 msgid "No data to display"
-msgstr "Pas de données à afficher."
+msgstr "Pas de données à afficher"
 
 #: common/reporting/report_utils.php:432 www/reporting/index.php:40
 #: www/reporting/usercum.php:59
@@ -6391,9 +6345,8 @@ msgstr "le titre et le corps du message sont obligatoires"
 
 #: common/tracker/ArtifactExtraField.class.php:108
 #: common/tracker/ArtifactExtraField.class.php:405
-#, fuzzy
 msgid "A field name is required"
-msgstr "un nom de champ est nécessaire"
+msgstr "Un nom de champ est nécessaire"
 
 #: common/tracker/ArtifactExtraField.class.php:112
 msgid "Type of custom field not selected"
@@ -6860,9 +6813,8 @@ msgid "Renderer Updated"
 msgstr "Moteur de rendu mis à jour"
 
 #: common/tracker/actions/admin-updates.php:553
-#, fuzzy
 msgid "Initial values not saved, no initial state given."
-msgstr "Erreur : valeurs initiales non sauvegardées et pas d'état initial spécifié."
+msgstr "Valeurs initiales non sauvegardées, pas d'état initial spécifié."
 
 #: common/tracker/actions/admin-updates.php:557
 msgid "Initial values saved."
@@ -8381,9 +8333,8 @@ msgid "Custom"
 msgstr "Personnalisé"
 
 #: common/widget/WidgetLayoutManager.class.php:320
-#, fuzzy
 msgid "Define your own layout"
-msgstr "Définissez votre propre mise en page :"
+msgstr "Définissez votre propre mise en page"
 
 #: common/widget/WidgetLayoutManager.class.php:359
 #, php-format
@@ -8455,9 +8406,8 @@ msgid "Display artifacts:"
 msgstr "Afficher les éléments :"
 
 #: common/widget/Widget_MyArtifacts.class.php:142
-#, fuzzy
 msgid "You have no artifacts."
-msgstr "Vous n'avez pas d'éléments"
+msgstr "Vous n'avez pas d'éléments."
 
 #: common/widget/Widget_MyArtifacts.class.php:201
 #: common/widget/Widget_MyArtifacts.class.php:273
@@ -8580,9 +8530,8 @@ msgid "%s new"
 msgstr "%s nouveaux"
 
 #: common/widget/Widget_MyMonitoredDocuments.class.php:94
-#, fuzzy
 msgid "Stop monitoring this document?"
-msgstr "Ne plus surveiller ce document"
+msgstr "Ne plus surveiller ce document ?"
 
 #: common/widget/Widget_MyMonitoredDocuments.class.php:113
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:136
@@ -8624,7 +8573,6 @@ msgid "You can monitor forums by clicking on the appropriate menu item in the di
 msgstr "Vous pouvez surveiller des forums en cliquant sur le lien correspondant dans le forum lui-même."
 
 #: common/widget/Widget_MyMonitoredForums.class.php:106
-#, fuzzy
 msgid "Stop monitoring this forum?"
 msgstr "Ne plus surveiller ce forum ?"
 
@@ -8655,9 +8603,8 @@ msgid "You can monitor files by visiting a project's “Summary Page” and clic
 msgstr "Vous pouvez surveiller des fichiers en visitant la page de résumé d'un projet et en cliquant sur l'icône correspondante dans la section des fichiers."
 
 #: common/widget/Widget_MyMonitoredFp.class.php:101
-#, fuzzy
 msgid "Stop monitoring this package?"
-msgstr "Ne plus surveiller ce paquet"
+msgstr "Ne plus surveiller ce paquet ?"
 
 #: common/widget/Widget_MyMonitoredFp.class.php:126
 msgid "List packages that you are currently monitoring, by project."
@@ -8790,9 +8737,8 @@ msgid "new and update files and directories [FUD]"
 msgstr "nouveaux fichiers et dossiers et fichiers et dossiers mis à jour [FUD]"
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:94
-#, fuzzy
 msgid "Display statistics"
-msgstr "Voir les statistiques :"
+msgstr "Voir les statistiques"
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:161
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:179
@@ -8926,9 +8872,8 @@ msgid "5 Latest Published Documents"
 msgstr "Les 5 derniers documents publiés"
 
 #: common/widget/Widget_ProjectLatestDocuments.class.php:66
-#, fuzzy
 msgid "This project has not published any documents."
-msgstr "Ce projet n'a pas encore publié de documents"
+msgstr "Ce projet n'a pas encore publié de documents."
 
 #: common/widget/Widget_ProjectLatestDocuments.class.php:147
 msgid "List the 5 most recent documents published by team project."
@@ -8939,9 +8884,8 @@ msgid "Latest File Releases"
 msgstr "Derniers fichiers publiés"
 
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:55
-#, fuzzy
 msgid "This project has not released any files."
-msgstr "Ce projet n'a pas encore publié de fichier"
+msgstr "Ce projet n'a pas encore publié de fichier."
 
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:116
 msgid "View All Project Files"
@@ -10717,9 +10661,8 @@ msgid "Remote account created but unable to create remote associated discovery p
 msgstr ""
 
 #: plugins/globaldashboard/www/admin/add_account.php:79
-#, fuzzy
 msgid "Unable to create remote account"
-msgstr "Impossible de supprimer le compte distant :"
+msgstr "Impossible de supprimer le compte distant"
 
 #: plugins/globaldashboard/www/admin/delete_account.php:33
 msgid "You can remove only YOUR remote accounts !!!"
@@ -10730,9 +10673,8 @@ msgid "Remote Account successfully deleted"
 msgstr "Compte distant supprimé avec succès"
 
 #: plugins/globaldashboard/www/admin/delete_account.php:45
-#, fuzzy
 msgid "Unable to delete remote account"
-msgstr "Impossible de supprimer le compte distant :"
+msgstr "Impossible de supprimer le compte distant"
 
 #: plugins/globaldashboard/www/admin/edit_account.php:43
 msgid "You can edit only YOUR remote accounts !!!"
@@ -11315,9 +11257,8 @@ msgstr "Page HTML"
 
 #: plugins/headermenu/view/admin/updateLinkValue.php:112
 #: plugins/webanalytics/view/admin/updateLinkValue.php:53
-#, fuzzy
 msgid "Cannot retrieve value for this link"
-msgstr "Impossible de récupérer la valeur de ce lien :"
+msgstr "Impossible de récupérer la valeur de ce lien"
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:56
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:53
@@ -11832,9 +11773,8 @@ msgid "Show the last builds for this job (last one, last successfull, last faile
 msgstr "Affiche les dernières constructions pour une tâche (la dernière, la dernière réussie, la dernière en échec) et la tendance. La tendance est représentée comme un bulletin météo (soleil, orages, etc.) selon qu'elle est généralement bonne ou pas."
 
 #: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:94
-#, fuzzy
 msgid "Last Build"
-msgstr "Dernière fabrication :"
+msgstr "Dernière fabrication"
 
 #: plugins/hudson/include/hudson_Widget_JobTestResults.class.php:47
 #: plugins/hudson/include/hudson_Widget_JobTestResults.class.php:57
@@ -12216,9 +12156,8 @@ msgid "MantisBT plugin successfully initialized."
 msgstr "Greffon MantisBT initialisé avec succès."
 
 #: plugins/mantisbt/action/inituser.php:33
-#, fuzzy
 msgid "Failed to initialize user"
-msgstr "Échec de l'initialisation de l'utilisateur."
+msgstr "Échec de l'initialisation de l'utilisateur"
 
 #: plugins/mantisbt/action/inituser.php:37
 msgid "MantisBT User successfully initialized."
@@ -12695,9 +12634,8 @@ msgid "Specify the password of your user."
 msgstr "Indiquez le mot de passe de votre utilisateur."
 
 #: plugins/mantisbt/view/jumpToIssue.php:31
-#, fuzzy
 msgid "Jump to ticket"
-msgstr "Aller au ticket :"
+msgstr "Aller au ticket"
 
 #: plugins/mantisbt/view/jumpToIssue.php:33
 msgid "Ok"
@@ -12716,9 +12654,8 @@ msgid "No versions to display"
 msgstr "Aucun version à afficher"
 
 #: plugins/mantisbt/view/viewAttachment.php:61
-#, fuzzy
 msgid "No attached files for this ticket."
-msgstr "Ce ticket n'a pas de fichiers joints"
+msgstr "Ce ticket n'a pas de fichiers joints."
 
 #: plugins/mantisbt/view/viewAttachment.php:74
 #: www/project/admin/editimages.php:256
@@ -12734,21 +12671,18 @@ msgid "Ticket"
 msgstr "Ticket"
 
 #: plugins/mantisbt/view/viewIssues.php:75
-#, fuzzy
 msgid "No data to retrieve."
-msgstr "Aucune données à récupérer"
+msgstr "Aucune donnée à récupérer."
 
 #: plugins/mantisbt/view/viewIssues.php:128
-#, fuzzy
 msgid "No tickets to display."
-msgstr "Pas de tickets à afficher"
+msgstr "Pas de tickets à afficher."
 
 #: plugins/mantisbt/view/viewIssues.php:141
 msgid "Bug ID"
 msgstr ""
 
 #: plugins/mantisbt/view/viewIssues.php:155
-#, fuzzy
 msgid "Last Update"
 msgstr "Dernière mise à jour"
 
@@ -13960,7 +13894,6 @@ msgid "Hierarchy Admin"
 msgstr "Administration de la hiérarchie de projets"
 
 #: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:93
-#, fuzzy
 msgid "Configure the projects-hierarchy plugin (docman, tree, delegate, globalconf features)"
 msgstr "Configurer le greffon de hiérarchie de projet (docman, arbre, délégation, fonctionnalités de configuration générale)"
 
@@ -13998,9 +13931,8 @@ msgid "Site Global Hierarchy Admin"
 msgstr "Administration de la hiérarchie globale du site"
 
 #: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:810
-#, fuzzy
 msgid "Select a project"
-msgstr "Choisir un projet : "
+msgstr "Choisir un projet"
 
 #: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:812
 msgid "Add Child project"
@@ -14049,9 +13981,8 @@ msgstr "Activer le parcours en vue hiérarchique dans le gestionnaire de documen
 
 #: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:46
 #: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:46
-#, fuzzy
 msgid "Enable Docman"
-msgstr "Activer Docman."
+msgstr "Activer Docman"
 
 #: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:34
 msgid "Manage project configuration"
@@ -14551,9 +14482,8 @@ msgid "This project's CPOLD repository can be accessep anonymously at %s."
 msgstr "Le dépôt CPOLD de ce projet est accessible de manière anonyme à %s."
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:35
-#, fuzzy
 msgid "CVS"
-msgstr "CSV"
+msgstr "CVS"
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:37
 msgid ""
@@ -14679,9 +14609,8 @@ msgid "Clone"
 msgstr "Clone"
 
 #: plugins/scmgit/common/GitPlugin.class.php:44
-#, fuzzy
 msgid "Git"
-msgstr "Gio"
+msgstr "Git"
 
 #: plugins/scmgit/common/GitPlugin.class.php:46
 msgid ""
@@ -14691,9 +14620,8 @@ msgid ""
 msgstr ""
 
 #: plugins/scmgit/common/GitPlugin.class.php:113
-#, fuzzy
 msgid "Anonymous Access"
-msgstr "Accès anonyme à CVS"
+msgstr "Accès Anonyme"
 
 #: plugins/scmgit/common/GitPlugin.class.php:116
 msgid "This project's Git repository can be checked out through anonymous access with the following command."
@@ -16061,14 +15989,12 @@ msgid "Member since"
 msgstr "Membre depuis le"
 
 #: www/account/index.php:153 www/account/register.php:176
-#, fuzzy
 msgid "First Name"
-msgstr "Prénom :"
+msgstr "Prénom"
 
 #: www/account/index.php:162 www/account/register.php:183
-#, fuzzy
 msgid "Last Name"
-msgstr "Nom de famille :"
+msgstr "Nom de famille"
 
 #: www/account/index.php:171 www/snippet/package.php:156
 #: www/snippet/snippet_utils.php:187 www/snippet/snippet_utils.php:221
@@ -16214,7 +16140,6 @@ msgid "Fill in a user name and click “Submit” to resend the confirmation ema
 msgstr "Saisissez un nom d'utilisateur et validez pour renvoyer le courrier de confirmation."
 
 #: www/account/pending-resend.php:68 www/account/verify.php:76
-#, fuzzy
 msgid "Login name"
 msgstr "Nom du compte"
 
@@ -16258,19 +16183,16 @@ msgid "Login Name (no uppercase letters; leave empty to have it generated automa
 msgstr "Identifiant de connexion (en minuscules ; si vous laissez ce champ vide, un identifiant sera généré automatiquement) :"
 
 #: www/account/register.php:151
-#, fuzzy
 msgid "Login Name (do not use uppercase letters)"
-msgstr "Nom du compte (ne pas utiliser de majuscules) :"
+msgstr "Nom du compte (ne pas utiliser de majuscules)"
 
 #: www/account/register.php:158
-#, fuzzy
 msgid "Password (min. 6 chars)"
-msgstr "Mot de passe (6 caractères minimum) :"
+msgstr "Mot de passe (6 caractères minimum)"
 
 #: www/account/register.php:164
-#, fuzzy
 msgid "Password (repeat)"
-msgstr "Mot de passe (confirmez) :"
+msgstr "Mot de passe (confirmez)"
 
 #: www/account/register.php:190
 msgid "Language Choice:"
@@ -16624,9 +16546,8 @@ msgid "Successfully Deleted Role"
 msgstr "Rôle correctement supprimé"
 
 #: www/admin/globalroledelete.php:59
-#, fuzzy
 msgid "Please confirm the deletion of the role."
-msgstr "Erreur : veuillez confirmer la suppression de ce rôle."
+msgstr "Veuillez confirmer la suppression de ce rôle."
 
 #: www/admin/globalroleedit.php:77 www/project/admin/roleedit.php:88
 msgid "Missing Role Name"
@@ -16851,9 +16772,8 @@ msgid "Display Full User List/Edit Users"
 msgstr "Afficher/Éditer les utilisateurs"
 
 #: www/admin/index.php:49
-#, fuzzy
 msgid "Display Users Beginning with"
-msgstr "Afficher les utilisateurs commençant par :"
+msgstr "Afficher les utilisateurs commençant par"
 
 #: www/admin/index.php:55
 msgid "Search <em>(userid, username, realname, email)</em>"
@@ -18707,9 +18627,8 @@ msgid "Standards features:"
 msgstr "Fonctionnalités standard :"
 
 #: www/index_std.php:53 www/index_std.php:112
-#, fuzzy
 msgid "Docman:"
-msgstr "Docman"
+msgstr "Docman :"
 
 #: www/index_std.php:55
 #, fuzzy
@@ -19191,9 +19110,8 @@ msgid "Task ID"
 msgstr "Identifiant de tâche"
 
 #: www/my/systasks.php:56
-#, fuzzy
 msgid "Plugin"
-msgstr "Greffons :"
+msgstr "Greffon"
 
 #: www/my/systasks.php:57
 #, fuzzy
@@ -20217,9 +20135,8 @@ msgid "Export tasks as a CSV file"
 msgstr "Exporter les tâches dans un fichier CSV"
 
 #: www/pm/csv.php:81
-#, fuzzy
 msgid "Selected CSV Format"
-msgstr "Format CSV sélectionné :"
+msgstr "Format CSV sélectionné"
 
 #: www/pm/csv.php:81
 #, fuzzy
@@ -22327,9 +22244,8 @@ msgid "More than <strong>%d</strong> projects in result set."
 msgstr "Plus de <strong>%d</strong> projets trouvés."
 
 #: www/softwaremap/full_list.php:124
-#, fuzzy
 msgid "Register Date"
-msgstr "Date d'enregistrement :"
+msgstr "Date d'enregistrement"
 
 #: www/softwaremap/tag_cloud.php:86
 #, php-format
