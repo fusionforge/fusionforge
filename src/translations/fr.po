@@ -9,12 +9,19 @@
 # Sylvain Beucler <beuc@beuc.net>, 2014, 2015.
 # Stéphane Aulery <lkppo@free.fr>, 2015.
 #
+# Artifact : Élément
+# Job : Poste
+# Tracker : Outil de suivi
+# Trove Software Map : Arbre / Arborescence / Carte des projets
+#   Trove : même idée à adapter selon le contexte
+# Upload : Envoi / Envoyer / Transfert / Transmettre
+# Box : souvent synonyme de "Server"
 msgid ""
 msgstr ""
 "Project-Id-Version: fusionforge 5.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-02-07 16:12+0100\n"
-"PO-Revision-Date: 2015-04-22 13:57+0200\n"
+"PO-Revision-Date: 2015-04-29 19:09+0200\n"
 "Last-Translator: Sylvain Beucler <beuc@beuc.net>\n"
 "Language-Team: French <traduc@traduc.org>\n"
 "Language: fr\n"
@@ -2500,7 +2507,7 @@ msgstr "Publier le commentaire"
 
 #: common/forum/ForumHTML.class.php:619
 msgid "Anonymously"
-msgstr "anonymement"
+msgstr "Anonymement"
 
 #: common/forum/ForumHTML.class.php:620
 msgid "Receive comments via email"
@@ -2619,7 +2626,7 @@ msgstr "Le nom est trop court. Il doit compter au moins 3 caractères."
 
 #: common/frs/FRSFile.class.php:125
 msgid "Filename can only be alphanumeric and “-”, “_”, “+”, “.”, “~” characters."
-msgstr "Le nom de fichier ne peut contenir que des caractères alphanumériques ainsi que « - », « _ », « + », « ~ », et « . »."
+msgstr "Le nom de fichier ne peut contenir que des caractères alphanumériques ainsi que « - », « _ », « + », « . », et « ~ »."
 
 #: common/frs/FRSFile.class.php:135
 msgid "FRSFile Appears to be invalid"
@@ -2706,7 +2713,7 @@ msgstr "Erreur de suppression de paquet : tentative de suppression du répertoir
 
 #: common/frs/FRSPackage.class.php:519
 msgid "No valid max release id"
-msgstr "Identifient de livraison maximum incorrect"
+msgstr "Identifiant de livraison maximum incorrect"
 
 #: common/frs/FRSPackage.class.php:540
 msgid "Cannot open the file archive."
@@ -3025,7 +3032,7 @@ msgstr "Changement d'état non valide de : "
 
 #: common/include/Group.class.php:743
 msgid " To: "
-msgstr "À : "
+msgstr " À : "
 
 #: common/include/Group.class.php:754
 #, php-format
@@ -3150,7 +3157,7 @@ msgstr "Erreur : utilisateur non supprimé : %s"
 
 #: common/include/Group.class.php:2093
 msgid "Error: artifact:"
-msgstr "Erreur de base de données : artifact :"
+msgstr "Erreur : artifact :"
 
 #: common/include/Group.class.php:2114 common/include/Group.class.php:2127
 #, php-format
@@ -4182,7 +4189,7 @@ msgid ""
 "\n"
 "%2$s"
 msgstr ""
-"Merci de vous être enregistré sur le site %3$s. \n"
+"Merci de vous être enregistré sur le site %3$s.\n"
 "Vous avez maintenant un compte du nom de %1$s. \n"
 "Pour terminer votre inscription, suivez le lien : \n"
 "\n"
@@ -4207,7 +4214,7 @@ msgstr "Profitez du site."
 #: www/survey/privacy.php:58 www/survey/survey_resp.php:60
 #, php-format
 msgid "-- the %s staff"
-msgstr "L'équipe de %s"
+msgstr "-- l'équipe de %s"
 
 #: common/include/User.class.php:499
 #, php-format
@@ -4826,7 +4833,7 @@ msgstr "Créer un nouvel outil de suivi"
 
 #: common/tracker/actions/admin-ind.php:130
 msgid "You can use this system to track virtually any kind of data, with each tracker having separate user, group, category, and permission lists. You can also easily move items between trackers when needed."
-msgstr "Vous pouvez utiliser ce système pour tracer à peu près n'importe quel type de données. Vous pouvez aussi déplacer facilement des items d'un traceur à l'autre."
+msgstr "Vous pouvez utiliser ce système pour tracer à peu près n'importe quel type de données. Vous pouvez aussi déplacer facilement des éléments d'un traceur à l'autre."
 
 #: common/tracker/actions/admin-ind.php:131
 msgid "Trackers are referred to as “Artifact Types” and individual pieces of data are “Artifacts”. “Bugs” might be an Artifact Type, whiles a bug report would be an Artifact. You can create as many Artifact Types as you want, but remember you need to set up categories, groups, and permission for each type, which can get time-consuming."
@@ -5118,7 +5125,7 @@ msgstr "Tous"
 #: common/tracker/actions/browse.php:190 www/pm/browse_task.php:108
 #: www/pm/browse_task.php:353 www/pm/ganttpage.php:154
 msgid "Unassigned"
-msgstr "Personne"
+msgstr "Non assigné"
 
 #: common/tracker/actions/browse.php:196 common/tracker/actions/browse.php:560
 #: common/tracker/actions/query.php:196
@@ -5159,7 +5166,7 @@ msgstr "Date d'ouverture"
 #: common/tracker/actions/query.php:200
 #: common/tracker/views/form-customizelist.php:47
 msgid "Last Modified Date"
-msgstr "Date de la dernière modification"
+msgstr "Date de dernière modification"
 
 #: common/tracker/actions/browse.php:201 common/tracker/actions/browse.php:568
 #: common/tracker/actions/query.php:201
@@ -5229,7 +5236,7 @@ msgstr "Affichage de %2$s résultats."
 #: common/tracker/actions/browse.php:284 www/pm/browse_task.php:186
 #: www/top/topusers.php:67
 msgid "Change"
-msgstr "Changement"
+msgstr "Modifier"
 
 #: common/tracker/actions/browse.php:335 common/tracker/actions/browse.php:445
 msgid "Advanced queries"
@@ -5330,7 +5337,7 @@ msgstr "% vote(s)"
 #: common/tracker/actions/browse.php:713
 #, php-format
 msgid "* Denotes requests > %s Days Old"
-msgstr "* indique les requêtes datant de plus de %s jours"
+msgstr "* Indique les requêtes datant de plus de %s jours"
 
 #: common/tracker/actions/browse.php:736 common/tracker/actions/browse.php:780
 #: www/pm/browse_task.php:359 www/pm/browse_task.php:388
@@ -5837,7 +5844,7 @@ msgstr "Fichier détruit avec succès"
 #: common/tracker/actions/tracker.php:403
 #, php-format
 msgid "Item %s successfully updated"
-msgstr "Élément %s correctement mis à jour."
+msgstr "Élément %s correctement mis à jour"
 
 #: common/tracker/actions/tracker.php:449
 msgid "Monitoring Deactivated"
@@ -5878,7 +5885,7 @@ msgstr "Vous n'êtes pas autorisé à créer des tickets dans ce traceur."
 
 #: common/tracker/Artifact.class.php:214
 msgid "Message Summary Is Required"
-msgstr "Il faut un titre"
+msgstr "Il faut un résumé"
 
 #: common/tracker/Artifact.class.php:218
 msgid "Message Body Is Required"
@@ -5898,11 +5905,11 @@ msgstr "Erreur lors de la suppression du champ supplémentaire : "
 
 #: common/tracker/Artifact.class.php:536
 msgid "Error deleting file from db: "
-msgstr "Erreur lors de la suppression : "
+msgstr "Erreur lors de la suppression depuis la base : "
 
 #: common/tracker/Artifact.class.php:544
 msgid "Error deleting message: "
-msgstr "Erreur lors de la suppression de l'annonce : "
+msgstr "Erreur lors de la suppression du message : "
 
 #: common/tracker/Artifact.class.php:552
 msgid "Error deleting history: "
@@ -5935,7 +5942,7 @@ msgstr "Impossible de déplacer vers un nouveau type d'artefact"
 #: common/tracker/Artifact.class.php:996
 #, php-format
 msgid "Moved from %1$s to %2$s"
-msgstr "Déplacé de %1$s à %2$s"
+msgstr "Déplacé de %1$s vers %2$s"
 
 #: common/tracker/Artifact.class.php:1070
 msgid "Removal of old artifact_extra_field_data failed: "
@@ -5978,7 +5985,7 @@ msgstr "Type de champ supplémentaire non sélectionné"
 #: common/tracker/ArtifactExtraField.class.php:121
 #: common/tracker/ArtifactExtraField.class.php:389
 msgid "Field name already exists"
-msgstr "Ce nom d'élément existe déjà"
+msgstr "Ce nom de champ existe déjà"
 
 #: common/tracker/ArtifactExtraField.class.php:126
 msgid "Invalid size/maxlength for text field"
@@ -6004,7 +6011,7 @@ msgstr "Liste déroulante"
 #: common/tracker/ArtifactExtraField.class.php:323
 #: common/tracker/views/form-addextrafield.php:125
 msgid "Check Box"
-msgstr "Cases à cocher"
+msgstr "Case à cocher"
 
 #: common/tracker/ArtifactExtraField.class.php:324
 #: common/tracker/views/form-addextrafield.php:126
@@ -6037,7 +6044,7 @@ msgstr "Entier"
 
 #: common/tracker/ArtifactExtraField.class.php:499
 msgid "The alias contains invalid characters. Only letters, numbers, hypens (-), at sign (@) and underscores (_) allowed."
-msgstr "L'alias contient des caractères invalides. Les seuls caractères autorisés sont les caractères alphanumériques ainsi que « @ », « - » et « _ »."
+msgstr "L'alias contient des caractères invalides. Les seuls caractères autorisés sont les caractères alphanumériques ainsi que le tiret « - », l'arobase « @ » et le caractère souligné « _ »."
 
 #: common/tracker/ArtifactExtraField.class.php:502
 #, php-format
@@ -6303,7 +6310,7 @@ msgstr "%1$s, identifiez-vous %2$s"
 #: common/tracker/include/build_submission_form.php:45
 #: common/tracker/include/build_submission_form.php:90
 msgid "If you <strong>cannot</strong> login, then enter your email address here"
-msgstr "Si vous ne parvenez pas à vous connecter, saisissez votre e-mail"
+msgstr "Si vous <strong>ne parvenez pas</strong> à vous connecter, saisissez votre e-mail"
 
 #: common/tracker/include/build_submission_form.php:53 www/news/submit.php:153
 #: www/people/viewjob.php:79
@@ -6951,11 +6958,11 @@ msgstr "surveillés par moi [M]"
 
 #: common/widget/Widget_MyArtifacts.class.php:103
 msgid "assigned to or submitted by me [AS]"
-msgstr "soumis par moi, ou affectés à moi [AS]"
+msgstr "affectés à moi, ou soumis par moi [AS]"
 
 #: common/widget/Widget_MyArtifacts.class.php:104
 msgid "assigned to or monitored by me [AM]"
-msgstr "soumis par moi, ou affectés à moi [AM]"
+msgstr "affectés à moi, ou surveillé par moi [AM]"
 
 #: common/widget/Widget_MyArtifacts.class.php:105
 msgid "submitted by or monitored by me [SM]"
@@ -7169,7 +7176,7 @@ msgstr "Mes projets"
 
 #: common/widget/Widget_MyProjects.class.php:151
 msgid "List the projects you belong to. Selecting any of these projects brings you to the corresponding Project Summary page."
-msgstr "Liste des projets desquels vous êtes membre. Cette liste est constituée de liens pointant vers la page de résumé de chacun de ces projets."
+msgstr "Liste des projets dont vous êtes membre. Cette liste est constituée de liens pointant vers la page de résumé de chacun de ces projets."
 
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:37
 msgid "The 5 Last Documents in My Projects"
@@ -7319,7 +7326,7 @@ msgstr "Afficher l'activité du gestionnaire de documentation (nouveaux document
 #: common/widget/Widget_ProjectInfo.class.php:32 www/include/user_home.php:88
 #: www/project/admin/project_admin_utils.php:48
 msgid "Project Information"
-msgstr "Information du projet"
+msgstr "Informations sur le projet"
 
 #: common/widget/Widget_ProjectInfo.class.php:45
 #: www/project/admin/index.php:162 www/softwaremap/tag_cloud.php:144
@@ -7681,7 +7688,7 @@ msgstr "Ce courrier électronique vous est envoyé pour vous rappeler que des é
 #: cronjobs/send_pending_items_mail.php:115
 #, php-format
 msgid "The item #%s is pending"
-msgstr " L'élément #%s est en attente"
+msgstr "L'élément #%s est en attente"
 
 #: cronjobs/send_pending_items_mail.php:121 www/admin/pending-news.php:147
 #: www/export/rssAboTask.php:146 www/my/diary.php:187
@@ -7708,7 +7715,7 @@ msgstr "Le lien symbolique n'a pas été supprimé dans le répertoire www/plugi
 #: db/20130531-svntrackerToScmhookCommitTrackerMigration.php:108
 #: db/20130602-svncommitemailToScmHookCommitEmailMigration.php:104
 msgid "Soft link wasn't removed in config folder, please do so manually."
-msgstr "Le lien symbolique n'a pas été supprimé dans le répertoire config. Veuillez le faire manuellement."
+msgstr "Le lien symbolique n'a pas été supprimé dans le répertoire de configuration. Veuillez le faire manuellement."
 
 #: plugins/admssw/common/RDFedFRSFile.class.php:105
 msgid ", part of "
@@ -7725,7 +7732,7 @@ msgstr "méta-données ADMS.SW"
 
 #: plugins/admssw/include/admsswPlugin.class.php:140
 msgid "ADMS.SW RDF meta-data about forge projects."
-msgstr "Méta-données RDF ADMS.SW à propos des projets de forge."
+msgstr "Méta-données RDF ADMS.SW sur les projets de la forge."
 
 #: plugins/admssw/include/admsswPlugin.class.php:150
 #, php-format
@@ -7907,7 +7914,7 @@ msgstr "Votre compte "
 
 #: plugins/authhttpd/include/AuthHTTPDPlugin.class.php:67
 msgid "Login via HTTP authentication"
-msgstr "Connexion par l'authentification HTTP"
+msgstr "Connexion par authentification HTTP"
 
 #: plugins/authldap/include/AuthLDAPPlugin.class.php:208
 msgid "LDAP Login name:"
@@ -8109,7 +8116,7 @@ msgstr "Le fournisseur d'identité a confirmé que vous êtes le propriétaire d
 
 #: plugins/blocks/common/blocksPlugin.class.php:52
 msgid "Blocks"
-msgstr "les blocs"
+msgstr "Blocs"
 
 #: plugins/blocks/common/blocksPlugin.class.php:65
 msgid "Blocks Admin"
@@ -8217,7 +8224,7 @@ msgstr "Astuces"
 
 #: plugins/blocks/www/index.php:325
 msgid "You can create boxes like the ones on the right site of summary page, by inserting the following sentences in the content:"
-msgstr "Vous pouvez créer des boîtes comme celles de la page de résumé, en vous inspirant dans le contenu des exemples suivants :"
+msgstr "Vous pouvez créer des boîtes comme celles de la page de résumé, en vous inspirant du contenu des exemples suivants :"
 
 #: plugins/blocks/www/index.php:328
 msgid ": will create the top part of the box using Hello as title."
@@ -12401,7 +12408,7 @@ msgstr "Répertoire personnel et FTP"
 #: plugins/scmsvn/common/SVNPlugin.class.php:88
 #, php-format
 msgid "Documentation for %1$s is available at <a href=\"%2$s\">%2$s</a>."
-msgstr "La documentation de %1$s est disponible <a href=\"%2$s\">%2$s</a>."
+msgstr "La documentation de %1$s est disponible sur <a href=\"%2$s\">%2$s</a>."
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:70
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:84
@@ -13143,7 +13150,7 @@ msgstr "Ajouter une référence webanalytics"
 
 #: plugins/wiki/common/wikiconfig.class.php:39
 msgid "Check to disable automatic linking of camelcase words to pages. Internal page links must be forced with [[pagename]] then."
-msgstr "Cochez la case pour désactiver les liens automatiques pour les mots en casse de chameau. Les liens doivent alors utiliser [[nom de page]]."
+msgstr "Cochez la case pour désactiver les liens automatiques pour les mots en camelcase. Les liens doivent alors utiliser [[nom de page]]."
 
 #: plugins/wiki/common/wikiconfig.class.php:41
 msgid "Check to enable spam prevention. If a non-admin adds more than 20 external links, it will be rejected as spam."
@@ -14854,7 +14861,7 @@ msgstr "Vous pouvez désabonner un utilisateur soit pour les envois de mails gé
 
 #: www/admin/unsubscribe.php:55
 msgid "MAIL"
-msgstr "E-mail"
+msgstr "COURRIEL"
 
 #: www/admin/unsubscribe.php:55 www/admin/userlist.php:68
 #: www/include/tool_reports.php:54 www/stats/site_stats_utils.php:142
@@ -14893,7 +14900,7 @@ msgstr "Identifiant utilisateur"
 
 #: www/admin/unsubscribe.php:115
 msgid "Site Mail."
-msgstr "Courrier."
+msgstr "Courriers du site."
 
 #: www/admin/unsubscribe.php:116
 msgid "Comm. Mail."
@@ -14977,7 +14984,7 @@ msgstr "Opérations"
 
 #: www/admin/useredit.php:286 www/include/user_home.php:99
 msgid "This user is not a member of any project."
-msgstr "Ce développeur ne fait partie d'aucun projet."
+msgstr "Cet utilisateur ne fait partie d'aucun projet."
 
 #: www/admin/useredit.php:289
 msgid "Add membership to new projects"
@@ -14990,7 +14997,7 @@ msgstr "Sélectionner le rôle"
 #: www/admin/userlist.php:63
 #, php-format
 msgid "User updated to %s status"
-msgstr "Utilisateur mis à jour au statut %s"
+msgstr "Utilisateur mis à jour à l'état %s"
 
 #: www/admin/userlist.php:70 www/frs/admin/index.php:95
 #: www/frs/admin/showreleases.php:81
@@ -15174,7 +15181,7 @@ msgstr "Vous recevrez désormais un courriel sur l'activité journalière de cet
 
 #: www/developer/monitor.php:68
 msgid "To turn off monitoring, simply click the <strong>Monitor user</strong> link again."
-msgstr "Pour arrêter le suivi, cliquez à nouveau sur le lien « Suivre cet utilisateur »."
+msgstr "Pour arrêter le suivi, cliquez à nouveau sur le lien <strong>Suivre cet utilisateur</strong>."
 
 #: www/developer/monitor.php:76
 msgid "You will not receive any more emails from this user"
@@ -15186,7 +15193,7 @@ msgstr "Erreur: choisissez d'abord un utilisateur à suivre"
 
 #: www/developer/rate.php:34
 msgid "Ratings turned off. You chose not to participate in the peer rating system"
-msgstr "Vous avez choisi de ne pas participer à l'évaluation par les pairs"
+msgstr "Compteur de popularité désactivé. Vous avez choisi de ne pas participer à l'évaluation par les pairs"
 
 #: www/developer/rate.php:52
 msgid "Invalid rate value"
@@ -15298,7 +15305,7 @@ msgstr "Veuillez fournir un numéro de groupe avec la demande."
 
 #: www/export/rss20_forum.php:99
 msgid "Forum RSS: No forums found"
-msgstr "Flux RSS : aucun forum."
+msgstr "Flux RSS : aucun forum trouvé."
 
 #: www/export/rss20_forum.php:264
 msgid "Forum RSS: Forum not found: "
@@ -15323,7 +15330,7 @@ msgstr "Mettre à jour l'historique de la tâche de nom %1$s et d'identifiant %2
 
 #: www/export/rssAboTask.php:140
 msgid "Current values of the task’s…"
-msgstr "Valeurs actuelles de la tâche :"
+msgstr "Valeurs actuelles de la tâche…"
 
 #: www/export/rssAboTask.php:144
 msgid "Complete"
@@ -15664,7 +15671,7 @@ msgstr "Impossible de récupérer la version"
 
 #: www/frs/admin/deleterelease.php:66 www/frs/admin/index.php:113
 msgid "Release Edit/File Releases"
-msgstr "Édition des paquets"
+msgstr "Édition des versions/Fichiers publiés"
 
 #: www/frs/admin/deleterelease.php:72
 msgid "You are about to permanently and irretrievably delete this release and its files!"
@@ -15744,11 +15751,11 @@ msgstr "Vous pouvez indépendamment télécharger les notes de versions, les mod
 
 #: www/frs/admin/editrelease.php:250
 msgid "Upload Release Notes"
-msgstr "Télécharger les notes"
+msgstr "Envoyer les notes de version"
 
 #: www/frs/admin/editrelease.php:257
 msgid "Upload Change Log"
-msgstr "Télécharger les modifications"
+msgstr "Envoyer le journal des modifications"
 
 #: www/frs/admin/editrelease.php:265
 msgid "Paste The Notes In"
@@ -15772,12 +15779,12 @@ msgstr "Ajouter des fichiers à cette version"
 
 #: www/frs/admin/editrelease.php:289
 msgid "Now, choose a file to upload into the system."
-msgstr "Choisissez maintenant un fichier à télécharger dans le système."
+msgstr "Choisissez maintenant un fichier à envoyer dans le système."
 
 #: www/frs/admin/editrelease.php:298 www/frs/admin/qrs.php:200
 #, php-format
 msgid "Alternatively, you can use FTP to upload a new file at %s."
-msgstr "Vous pouvez également utiliser FTP pour télécharger un fichier sur %s."
+msgstr "Vous pouvez également utiliser FTP pour envoyer un fichier sur %s."
 
 #: www/frs/admin/editrelease.php:322 www/frs/admin/editrelease.php:350
 #: www/frs/admin/qrs.php:224
@@ -16053,7 +16060,7 @@ msgstr "Cette publication n'a pas été trouvée."
 
 #: www/frs/shownotes.php:62
 msgid "File Release Notes and Changelog"
-msgstr "Remarques sur les révisions"
+msgstr "Notes de version et journal des modifications"
 
 #: www/include/features_boxes.php:35
 msgid "Features Boxes"
@@ -16202,7 +16209,7 @@ msgstr "Saisissez une description détaillée."
 
 #: www/include/html.php:418
 msgid "<strong>Editing tips:</strong><br/><strong>http,https or ftp</strong>: Hyperlinks.<br/><strong>[#NNN]</strong>: Tracker id NNN.<br/><strong>[TNNN]</strong>: Task id NNN.<br/><strong>[wiki:&lt;pagename&gt;]</strong>: Wiki page.<br/><strong>[forum:&lt;msg_id&gt;]</strong>: Forum post."
-msgstr "<strong>Astuces pour l'édition :</strong><br/><strong>http,https ou ftp</strong>: Hyperliens.<br/><strong>[#NNN]</strong> : Item n<sup>o</sup> NNN dans un outil de suivi.<br/><strong>[TNNN]</strong> : Item n<sup>o</sup> NNN dans un gestionnaire de tâches.<br/><strong>[wiki:&lt;pagename&gt;]</strong>: Page wiki.<br/><strong>[forum:&lt;msg_id&gt;]</strong>: Article de forum."
+msgstr "<strong>Astuces pour l'édition :</strong><br/><strong>http, https ou ftp</strong>: Hyperliens.<br/><strong>[#NNN]</strong> : Item n<sup>o</sup> NNN dans un outil de suivi.<br/><strong>[TNNN]</strong> : Item n<sup>o</sup> NNN dans un gestionnaire de tâches.<br/><strong>[wiki:&lt;pagename&gt;]</strong> : Page wiki.<br/><strong>[forum:&lt;msg_id&gt;]</strong>: Article de forum."
 
 #: www/include/html.php:421
 msgid "When you wish to attach a file to a tracker item you must check this checkbox before submitting changes."
@@ -16589,7 +16596,7 @@ msgstr "Les nouveautés de FusionForge 5.3"
 
 #: www/index_std.php:49
 msgid "Checkout the roadmap for closed issues (bugs, patches, features requests) "
-msgstr "Vérifier le feuille de route pour les erreurs résolues (bogues, patches, demandes de fonctionnalité) "
+msgstr "Vérifier la feuille de route pour les erreurs résolues (bogues, patches, demandes de fonctionnalité) "
 
 #: www/index_std.php:49
 msgid "here"
@@ -17101,7 +17108,7 @@ msgstr "Vous n'avez pas de données"
 #: www/my/rmproject.php:59
 #, php-format
 msgid "You cannot remove yourself from this project, because you are admin of it. You should ask other admin to reset your admin privilege first. If you are the only admin of the project, please consider posting availability notice to <a href=\"%s\">Help Wanted Board</a> and be ready to pass admin privilege to interested party."
-msgstr "Vous ne pouvez pas vous supprimer vous-même de ce projet, parce que vous en êtes un administrateur. Vous devez d'abord demander à un autre administrateur de supprimer vos privilèges d'administrateur. Si vous êtes le seul administrateur de ce projet, vous pouvez annoncer la disponibilité du poste sur le <a href=\"%s\">tableau d'affichage</a>, de manière à pouvoir passer les privilèges d'administrateur aux personnes intéressées."
+msgstr "Vous ne pouvez pas vous supprimer vous-même de ce projet, parce que vous en êtes administrateur. Vous devez d'abord demander à un autre administrateur de supprimer vos privilèges d'administrateur. Si vous êtes le seul administrateur de ce projet, vous pouvez annoncer la disponibilité du poste sur le <a href=\"%s\">tableau d'affichage</a>, de manière à pouvoir passer les privilèges d'administrateur aux personnes intéressées."
 
 #: www/my/rmproject.php:76 www/my/rmproject.php:79
 msgid "Quitting Project"
@@ -17227,7 +17234,7 @@ msgstr "Proposer une annonce"
 
 #: www/news/news_utils.php:282
 msgid "Not Found"
-msgstr "Aucune nouvelle trouvée"
+msgstr "Aucune annonce trouvée"
 
 #: www/news/submit.php:74
 msgid "You cannot submit news for a project unless you are an admin on that project."
@@ -17340,7 +17347,7 @@ msgstr "Ajouter des compétences de poste"
 
 #: www/people/createjob.php:45
 msgid "Start by filling in the fields below. When you click continue, you will be shown a list of skills and experience levels that this job requires."
-msgstr "Commencez par compléter les champs ci-dessous. Quand vous cliquerez sur Continuer >>, une liste de niveaux d'expérience et de compétences nécessaires pour ce poste vous sera proposée."
+msgstr "Commencez par compléter les champs ci-dessous. Quand vous cliquerez sur Continuer, une liste de niveaux d'expérience et de compétences nécessaires pour ce poste vous sera proposée."
 
 #: www/people/createjob.php:53 www/people/editjob.php:170
 #: www/project/admin/index.php:139
@@ -18622,11 +18629,11 @@ msgstr "Erreur : la taille du fichier doit être comprise entre 20 et 256 000 o
 
 #: www/project/admin/editimages.php:99
 msgid "Error: Cannot store multimedia file: "
-msgstr "Erreur de base de données lors du stockage d'un fichier multimédia : "
+msgstr "Erreur : impossible de supprimer le fichier multimédia : "
 
 #: www/project/admin/editimages.php:101
 msgid "Multimedia File Uploaded"
-msgstr "Fichier multimédia téléchargé"
+msgstr "Fichier multimédia envoyé"
 
 #: www/project/admin/editimages.php:118
 msgid "Both file name and description are required"
@@ -18634,7 +18641,7 @@ msgstr "Le nom de fichier et la description sont requis"
 
 #: www/project/admin/editimages.php:137
 msgid "Error: Cannot delete multimedia file: "
-msgstr "Erreur de base de données lors de la suppression d'un fichier multimédia : "
+msgstr "Erreur : impossible de supprimer le fichier multimédia : "
 
 #: www/project/admin/editimages.php:139
 msgid "Multimedia File Deleted"
@@ -18646,7 +18653,7 @@ msgstr "Description de fichier requise"
 
 #: www/project/admin/editimages.php:161
 msgid "Error: Cannot update multimedia file"
-msgstr "Erreur de base de données lors de la mise à jour d'un fichier multimédia : "
+msgstr "Erreur : impossible de mettre à jour le fichier multimédia : "
 
 #: www/project/admin/editimages.php:163
 msgid "Multimedia File Properties Updated"
@@ -18664,7 +18671,7 @@ msgstr "Vous pouvez stocker jusqu'à %s Mo de données multimédia (images vecto
 
 #: www/project/admin/editimages.php:222
 msgid "Replace with new file (optional)"
-msgstr "Remplacer par un nouveau fichier (option)"
+msgstr "Remplacer par un nouveau fichier (facultatif)"
 
 #: www/project/admin/editimages.php:230 www/project/admin/editimages.php:266
 msgid "MIME Type"
@@ -18746,7 +18753,7 @@ msgstr "Nom précis du projet"
 
 #: www/project/admin/index.php:141
 msgid "Maximum 255 characters, HTML will be stripped from this description"
-msgstr "255 caractères maximum, sans HTML"
+msgstr "255 caractères maximum, le code HTML sera supprimé de cette description"
 
 #: www/project/admin/index.php:150
 msgid "Project tags"
@@ -18917,7 +18924,7 @@ msgstr "Nouveau rôle"
 
 #: www/project/admin/roleedit.php:114
 msgid "Use this page to edit the permissions attached to each role.  Note that each role has at least as much access as the Anonymous and LoggedIn roles.  For example, if the Anonymous role has read access to a forum, all other roles will have it too."
-msgstr "Utilisez cette page pour modifier les permissions associées à chaque rôle.Notez que chaque rôle dispose au moins des permissions associées aux rôles « Anonyme » et « Connecté ». Ainsi, si le rôle « Anonyme » a accès en lecture à un forum, tous les utilisateurs auront cet accès, quel que soit leur rôle."
+msgstr "Utilisez cette page pour modifier les permissions associées à chaque rôle. Notez que chaque rôle dispose au moins des permissions associées aux rôles « Anonyme » et « Connecté ». Ainsi, si le rôle « Anonyme » a accès en lecture à un forum, tous les utilisateurs auront cet accès, quel que soit leur rôle."
 
 #: www/project/admin/roleedit.php:132
 msgid "Shared role (can be referenced by other projects)"
@@ -19140,7 +19147,7 @@ msgstr "Liste des membres du projet"
 
 #: www/project/memberlist.php:37 www/project/report/index.php:130
 msgid "If you would like to contribute to this project by becoming a member, contact one of the project admins, designated in bold text below."
-msgstr "Si vous désirez contribuer à ce projet en devenant développeur, contactez l'un des administrateurs du projet signalés en gras dans la liste ci-dessous."
+msgstr "Si vous désirez contribuer à ce projet en devenant membre, contactez l'un des administrateurs du projet signalés en gras dans la liste ci-dessous."
 
 #: www/project/memberlist.php:49
 msgid "Member"
@@ -19575,7 +19582,7 @@ msgstr "Pas d'envois pendant cette période."
 
 #: www/scm/include/viewvc_utils.php:98
 msgid "The repository for this project isn't created yet. It will be created in the next few minutes."
-msgstr "Le dépôt de ce projet n'existe pas encore. Il sera créé prochainement."
+msgstr "Le dépôt de ce projet n'existe pas encore. Il sera créé dans les prochaines minutes."
 
 #: www/scm/index.php:45
 msgid "This project has no associated Source Code Management tool defined, please configure one using the Administration submenu."
@@ -19788,7 +19795,7 @@ msgstr "Votre adresse électronique"
 
 #: www/sendmessage.php:191
 msgid "Send Message"
-msgstr "Envoyer message"
+msgstr "Envoyer le message"
 
 #: www/snippet/add_snippet_to_package.php:51 www/snippet/snippet_utils.php:119
 msgid "Submit A New Snippet"
@@ -20437,12 +20444,12 @@ msgstr "Statistiques pour les %d derniers jours"
 #: www/stats/site_stats_utils.php:358 www/stats/site_stats_utils.php:412
 #: www/stats/site_stats_utils.php:468
 msgid "Site Views"
-msgstr "sites"
+msgstr "Nb. de vues Site"
 
 #: www/stats/site_stats_utils.php:359 www/stats/site_stats_utils.php:413
 #: www/stats/site_stats_utils.php:469
 msgid "Subdomain Views"
-msgstr "sous-domaines"
+msgstr "Nb. de vues Sous-domaines"
 
 #: www/stats/site_stats_utils.php:390 www/stats/site_stats_utils.php:446
 msgid "No Data"
@@ -20775,7 +20782,7 @@ msgstr "Voter pour le sondage"
 
 #: www/survey/survey.php:55 www/survey/survey_resp.php:48
 msgid "For some reason, the Project ID or Survey ID did not make it to this page"
-msgstr "Il semble que l'identifiant du projet et/ou celui du le sondage se soit perdu en chemin."
+msgstr "Il semble que l'identifiant du projet et/ou celui du sondage se soit perdu en chemin."
 
 #: www/survey/survey_resp.php:41
 msgid "Survey Complete"
@@ -20852,7 +20859,7 @@ msgstr "Le plus de pages vues sur *.%1$s (hebdomadaire, à partir de l'affichage
 
 #: www/top/topusers.php:52
 msgid "Information about highest ranked users is not available."
-msgstr "Les informations sur les développeurs les mieux classés ne sont pas disponibles."
+msgstr "Les informations sur les utilisateurs les mieux classés ne sont pas disponibles."
 
 #: www/top/topusers.php:55
 msgid "Top users"
@@ -20886,11 +20893,11 @@ msgstr "En baisse de %s"
 
 #: www/tracker/admin/index.php:99
 msgid "Delete Layout Template"
-msgstr "Supprimer le modèle de rendu"
+msgstr "Supprimer le modèle de mise en page"
 
 #: www/tracker/admin/index.php:100
 msgid "You are about to delete your current Layout Template"
-msgstr "Vous êtes sur le point de supprimer le modèle de rendu."
+msgstr "Vous êtes sur le point de supprimer le modèle de mise en page."
 
 #: www/tracker/admin/index.php:101 www/tracker/admin/index.php:178
 msgid "Do you really want to do that?"
