@@ -84,7 +84,9 @@ case "$1" in
 	;;
     
     remove)
-	sed -i -e '/^### BEGIN FUSIONFORGE BLOCK/,/^### END FUSIONFORGE BLOCK/d' $pg_hba
+	if [ -e "$pg_hba" ]; then
+	    sed -i -e '/^### BEGIN FUSIONFORGE BLOCK/,/^### END FUSIONFORGE BLOCK/d' $pg_hba
+	fi
 	;;
 
     *)
