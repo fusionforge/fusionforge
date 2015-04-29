@@ -31,7 +31,7 @@ case "$1" in
 
     remove)
 	if [ -x /sbin/chkconfig ]; then
-	    chkconfig fusionforge-systasksd off
+	    chkconfig --del fusionforge-systasksd
 	else
 	    update-rc.d fusionforge-systasksd remove
 	fi
