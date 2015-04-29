@@ -143,6 +143,10 @@ separate machine.  It preserves the fusionforge-db virtual dependency,
 to configure the database before depending packages in single-server
 installs (e.g. plugins activation requires a populated db).
 %files db-remote -f db-remote.rpmfiles
+%post db-remote
+%{_datadir}/%{name}/post-install.d/db-remote/db-remote.sh configure
+%preun db-remote
+if [ $1 -eq 0 ] ; then %{_datadir}/%{name}/post-install.d/db-remote/db-remote.sh remove; fi
 
 
 %package shell

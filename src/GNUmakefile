@@ -90,9 +90,10 @@ install-db: install-base-dirs
 			> $(DESTDIR)$(sysconfdir)/cron.d/fusionforge-db; \
 	fi
 
-install-db-remote:
+install-db-remote: install-base-dirs
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(sysconfdir)/init.d/
 	$(CP_R) etc/init.d/fusionforge-db-remote $(DESTDIR)$(sysconfdir)/init.d/fusionforge-db-remote
+	$(CP_R) post-install.d/db-remote $(DESTDIR)$(pkgdatadir)/post-install.d/
 
 install-web: install-base-dirs
 	$(CP_R) vendor www $(DESTDIR)$(pkgdatadir)/
@@ -184,6 +185,8 @@ post-install-common:
 	$(post_source_path)/post-install.d/common/common.sh configure
 post-install-db:
 	$(post_source_path)/post-install.d/db/db.sh configure
+post-install-db-remote:
+	$(post_source_path)/post-install.d/db-remote/remote.sh configure
 post-install-web:
 	$(post_source_path)/post-install.d/web/web.sh configure
 post-install-scm:
