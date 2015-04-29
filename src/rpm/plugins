@@ -59,7 +59,7 @@ Requires: moin, mod_wsgi, python-psycopg2
 Requires:
 
 %package plugin-scmhook
-Requires:
+Requires: php-cli
 
 # Way too many rpmlint errors in this one
 # Any volunteer?
@@ -79,7 +79,7 @@ Requires:
 Requires:
 
 %package plugin-sysauthldap
-Requires:
+Requires: php-ldap
 
 %package plugin-taskboard
 Requires:

@@ -1,14 +1,8 @@
-fusionforge (6.0.99-1) unstable; urgency=medium
+fusionforge (6.0~rc1-0) UNRELEASED; urgency=medium
 
-  * Master branch (more recent than 6.0 branch).
+  * New upstream release candidate
 
- -- Roland Mas <lolando@debian.org>  Fri, 30 Jan 2015 14:16:41 +0100
-
-fusionforge (5.99-0) unstable; urgency=medium
-
-  * Start following 6.0 branch before release.
-
- -- Roland Mas <lolando@debian.org>  Fri, 30 Jan 2015 14:13:49 +0100
+ -- Sylvain Beucler <beuc@debian.org>  Fri, 24 Apr 2015 15:40:27 +0200
 
 fusionforge (5.3.50-1) unstable; urgency=medium
 

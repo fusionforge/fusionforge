@@ -47,7 +47,7 @@ class MailingListFactory extends Error {
 	 *
 	 * @param	Group	$Group The Group object to which these mailing lists are associated.
 	 */
-	function __construct(& $Group) {
+	function __construct(&$Group, $skip_check=false) {
 		$this->Error();
 
 		if (!$Group || !is_object($Group)) {
@@ -58,7 +58,7 @@ class MailingListFactory extends Error {
 			$this->setError('MailingListFactory: '.$Group->getErrorMessage());
 			return;
 		}
-		if (!$Group->usesMail()) {
+		if (!$skip_check && !$Group->usesMail()) {
 			$this->setError(sprintf(_('%s does not use the Mailing-list tool'),
 			    $Group->getPublicName()));
 			return;
