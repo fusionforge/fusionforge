@@ -132,25 +132,32 @@ if (isset($svn_tracker_debug) && $svn_tracker_debug == 1) {
 
 $changed = explode("\n", $changed);
 
+// First check if anything must be done before diving deeper into the svn history
+$tasks_involved= getInvolvedTasks($log);
+$artifacts_involved= getInvolvedArtifacts($log);
+if ((!is_array($tasks_involved) || count($tasks_involved) < 1) &&
+	(!is_array($artifacts_involved) || count($artifacts_involved) < 1)) {
+	//nothing to post
+	die("No artifacts nor tasks in the commit log\n");
+}
+
 foreach ($changed as $onefile) {
-	//we must see when it was last changed, and that's previous revision
-	$exit=0;
-	$actrev = $revision - 1;
-	if ($revision==0) {
-		$exit = 1;
-		$prev = 1;
-	}
-	while ( (!$exit) && ($actrev != 0 ) ) {
-		$changed2 = trim(`svnlook changed -r $actrev $repository | sed 's/[A-Z]*   //'`);
-		$changed2 = explode("\n", $changed2);
-		if ( in_array($onefile,$changed2) ) {
-			$prev = $actrev;
-			$exit = 1;
+
+	// Get revision history for each file into an array and search for
+	// current and previous revision in memory to eliminate looping
+	// all revisions for each file
+	$prev = 1;
+	if ($revision!=0) {
+		// use tail to strip off header and sed to get only the revision numbers
+		$allrevs = trim(`svnlook history $repository $onefile | tail -n +3 | sed 's/ *\\([0-9]*\\).*/\\1/'`);
+		$allrevs = explode("\n", $allrevs);
+		if ( in_array($revision,$allrevs) ) {
+			// get index in array of current rev and increment by one for prev rev
+			$found = array_search($revision, $allrevs, true) + 1;
+			if ($found < count($allrevs)) {
+				$prev = $allrevs[$found];
+			}
 		}
-		$actrev = $actrev - 1 ;
-	}
-	if ($actrev == 0) {
-		$prev = 1;
 	}
 
 	$files[] = array(
@@ -163,14 +170,6 @@ foreach ($changed as $onefile) {
 
 // Our POSTer in Fusionforge
 $SubmitUrl = util_make_url('/plugins/scmhook/committracker/newcommit.php');
-
-$tasks_involved= getInvolvedTasks($log);
-$artifacts_involved= getInvolvedArtifacts($log);
-if ((!is_array($tasks_involved) || count($tasks_involved) < 1) &&
-	(!is_array($artifacts_involved) || count($artifacts_involved) < 1)) {
-	//nothing to post
-	die("No artifacts nor tasks in the commit log\n");
-}
 
 $i = 0;
 foreach ( $files as $onefile )
