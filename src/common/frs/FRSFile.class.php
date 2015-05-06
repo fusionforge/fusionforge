@@ -452,6 +452,12 @@ class FRSFile extends Error {
 			if (isset($this->FRSRelease->release_files[$this->getID()])) {
 				unset($this->FRSRelease->release_files[$this->getID()]);
 			}
+
+			// regenerate ZIP
+			if (!$FRSRelease->FRSPackage->createReleaseFilesAsZip($FRSRelease->getID())) {
+				$this->setError($FRSRelease->FRSPackage->getErrorMessage());
+				return false;
+			}
 		}
 
 		if ($this->FRSRelease->FRSPackage->createReleaseFilesAsZip($this->FRSRelease->getID())) {
