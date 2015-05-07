@@ -30,7 +30,7 @@ msgstr ""
 "Project-Id-Version: fusionforge 6.0rc1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-04-24 15:40+0200\n"
-"PO-Revision-Date: 2015-05-02 02:45+0200\n"
+"PO-Revision-Date: 2015-05-07 16:48+0200\n"
 "Last-Translator: Sylvain Beucler <beuc@beuc.net>\n"
 "Language-Team: French <traduc@traduc.org>\n"
 "Language: fr\n"
@@ -2051,7 +2051,7 @@ msgstr "Arrêter la surveillance"
 
 #: common/docman/views/listfile.php:360
 msgid "Move files to another folder"
-msgstr "Déplacer les fichier vers un autre répertoire"
+msgstr "Déplacer les fichiers vers un autre répertoire"
 
 #: common/docman/views/listfile.php:363
 #: common/docman/views/listtrashfile.php:200
@@ -3174,7 +3174,7 @@ msgstr "Erreur lors de l'ouverture de l'archive"
 #: common/frs/FRSPackage.class.php:595 db/20141105-frs-ziplatest.php:58
 #: db/20141106-frs-zip-per-release.php:55
 msgid "Cannot add file to the file archive"
-msgstr "Impossible d'ajouter un ficher à l'archive"
+msgstr "Impossible d'ajouter un fichier à l'archive"
 
 #: common/frs/FRSPackage.class.php:600 db/20141105-frs-ziplatest.php:64
 #: db/20141106-frs-zip-per-release.php:61
@@ -3573,7 +3573,7 @@ msgstr "Actions collectives pour les paquets sélectionnés"
 
 #: common/frs/views/admin.php:142
 msgid "Delete selected package(s)"
-msgstr "Supprimer un ou des paquets sélectionnés"
+msgstr "Supprimer le ou les paquets sélectionnés"
 
 #: common/frs/views/admin.php:142
 msgid "Delete packages"
@@ -3585,7 +3585,7 @@ msgstr "Supprimer le ou les paquets sélectionnés"
 
 #: common/frs/views/admin.php:145
 msgid "You are about to delete permanently this package. Are you sure? This action is definitive."
-msgstr "Vous êtes sur le point de supprimer irrémédiablement ce paquet. Êtes-vous certain ?"
+msgstr "Vous êtes sur le point de supprimer définitement ce paquet. Êtes-vous sûr(e) ?"
 
 #: common/frs/views/admin.php:152
 msgid "Create New Package"
@@ -3707,7 +3707,7 @@ msgstr "Supprimer ce fichier"
 
 #: common/frs/views/editrelease.php:185 common/frs/views/editrelease.php:200
 msgid "Delete file"
-msgstr "Supprimer un fichier"
+msgstr "Supprimer fichier"
 
 #: common/frs/views/editrelease.php:185
 msgid "Delete the file"
@@ -3723,7 +3723,7 @@ msgstr "Actions collectives pour les fichiers sélectionnés"
 
 #: common/frs/views/editrelease.php:196
 msgid "Delete selected file(s)"
-msgstr "Supprimer un ou des fichiers sélectionnés"
+msgstr "Supprimer le ou les fichiers sélectionnés"
 
 #: common/frs/views/editrelease.php:196
 msgid "Delete files"
@@ -3735,7 +3735,7 @@ msgstr "Supprimer le ou les fichiers sélectionnés"
 
 #: common/frs/views/editrelease.php:200
 msgid "You are about to delete permanently this file. Are you sure? This action is definitive."
-msgstr "Vous êtes sur le point de supprimer irrémédiablement ce fichier. Êtes-vous certain ?"
+msgstr "Vous êtes sur le point de supprimer définitivement ce fichier. Êtes-vous certain ?"
 
 #: common/frs/views/editrelease.php:201
 #, php-format
@@ -3774,7 +3774,7 @@ msgstr "Télécharger la dernière version sous forme d'archive ZIP."
 
 #: common/frs/views/listpackages.php:100
 msgid "This link always points to the newest release as a ZIP file."
-msgstr "Ce lien pointe toujours sur la dernière version, sous forme d'une archive au format ZIP."
+msgstr "Ce lien pointe toujours sur la dernière version, sous forme d'archive ZIP."
 
 #: common/frs/views/listpackages.php:105
 msgid "No releases"
@@ -3786,7 +3786,7 @@ msgstr "Télécharger cette version au format ZIP."
 
 #: common/frs/views/listpackages.php:113
 msgid "This link always points to this release as a ZIP file."
-msgstr "Ce lien pointe toujours sur la dernière version au format ZIP."
+msgstr "Ce lien pointe toujours sur la dernière version sous forme d'archive ZIP."
 
 #: common/frs/views/listpackages.php:142
 msgid "D/L"
@@ -3931,11 +3931,11 @@ msgstr "Actions collectives pour les versions sélectionnées"
 
 #: common/frs/views/showreleases.php:99
 msgid "Delete selected release(s)"
-msgstr "Supprimer un ou des versions sélectionnées"
+msgstr "Supprimer la ou les versions sélectionnées"
 
 #: common/frs/views/showreleases.php:99
 msgid "Delete releases"
-msgstr "Supprimer des versions"
+msgstr "Supprimer les versions"
 
 #: common/frs/views/showreleases.php:99
 msgid "Delete the selected release(s)"
@@ -4541,7 +4541,7 @@ msgstr "Valeurs de paramètres manquantes."
 
 #: common/include/MonitorElement.class.php:150
 msgid "Unable to clear monitoring for user"
-msgstr "Impossible de nettoyer la surveillance de l'utilisateur"
+msgstr "Impossible de supprimer la surveillance de l'utilisateur"
 
 #: common/include/MonitorElement.class.php:164
 #: common/include/MonitorElement.class.php:178
@@ -4554,18 +4554,18 @@ msgstr "Impossible d’ajouter la surveillance"
 
 #: common/include/MonitorElement.class.php:208
 msgid "Unable to get emails from db"
-msgstr "Impossible de récupérer les emails de la base de données"
+msgstr "Impossible de récupérer les emails depuis la base de données"
 
 #: common/include/MonitorElement.class.php:241
 #: common/include/MonitorElement.class.php:269
 #: common/include/MonitorElement.class.php:283
 #: common/include/MonitorElement.class.php:297
 msgid "Unable to get ids from db"
-msgstr "Impossible de récupérer les identifiants de la base de données"
+msgstr "Impossible de récupérer les identifiants depuis la base de données"
 
 #: common/include/MonitorElement.class.php:255
 msgid "Unable to get counter from db"
-msgstr "Impossible de récupérer les compteurs de la base de données"
+msgstr "Impossible de récupérer les compteurs depuis la base de données"
 
 #: common/include/Navigation.class.php:179
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:90
@@ -7976,7 +7976,7 @@ msgstr "Vous pouvez "
 
 #: common/tracker/views/form-adminroadmap.php:421
 msgid "select tracker(s) for this roadmap"
-msgstr "outil(s) de suivi sélectionné(s) pour cette feuille de route"
+msgstr "sélectionner des outils de suivi pour cette feuille de route"
 
 #: common/tracker/views/form-adminroadmap.php:424
 msgid "Return to list of roadmaps"
@@ -8073,7 +8073,7 @@ msgstr "Élément"
 
 #: common/tracker/views/form-deleteextrafieldelement.php:75
 msgid "I am really sure"
-msgstr "Je suis certain"
+msgstr "Je confirme vraiment"
 
 #: common/tracker/views/form-deletetracker.php:24
 #, php-format
@@ -8935,7 +8935,7 @@ msgstr "Pas d'élément à afficher"
 
 #: common/widget/Widget_Rss.class.php:120
 msgid "Set your RSS URL here."
-msgstr "Indiquez votre URL RSS ici."
+msgstr "Indiquez l'URL de votre RSS ici."
 
 #: common/widget/Widget_Rss.class.php:147
 msgid "Cannot add empty RSS URL"
@@ -9085,15 +9085,15 @@ msgstr "Vous pouvez revenir sur cette page plus tard, ou vous diriger vers <a hr
 
 #: cronjobs/web-vhosts/create_vhosts.php:29
 msgid "forge not using vhost"
-msgstr "la forge n'utilise par d'hôte virtuel"
+msgstr "la forge n'utilise par les hôtes virtuels"
 
 #: cronjobs/web-vhosts/create_vhosts.php:41
 msgid "Unable to get list of projects with vhost: "
-msgstr "Impossible de récupérer la liste des projets avec l'hôte virtuel : "
+msgstr "Impossible de récupérer la liste des projets et leur hôte virtuel : "
 
 #: cronjobs/web-vhosts/create_vhosts.php:44
 msgid "httpd server not restarted"
-msgstr "serveur httpd on redémarré"
+msgstr "serveur httpd non redémarré"
 
 #: cronjobs/web-vhosts/create_vhosts.php:67
 msgid " vhost created."
@@ -9114,7 +9114,7 @@ msgstr "Le lien symbolique n'a pas été supprimé dans le répertoire de config
 
 #: db/20141105-frs-ziplatest.php:69 db/20141106-frs-zip-per-release.php:66
 msgid "Something went wrong during zip creation, check permission?"
-msgstr "Quelque chose c'est mal passé durant la création du fichier zip. Avez-vous vérifié les permissions ?"
+msgstr "Quelque chose s'est mal passé durant la création du fichier zip. Avez-vous vérifié les permissions ?"
 
 #: plugins/admssw/common/RDFedFRSFile.class.php:105
 msgid ", part of "
@@ -9136,7 +9136,7 @@ msgid ""
 "projects on /projects URLs with content-negotiation\n"
 "(application/rdf+xml)."
 msgstr ""
-"Ce greffon fournie des extensions ADMS.SW aux documents RDF DOAP\n"
+"Ce greffon fournit des extensions ADMS.SW aux documents RDF DOAP\n"
 "pour les projets et URLs de projet avec une négociation de contenu (application/rdf+xml)."
 
 #: plugins/admssw/include/admsswPlugin.class.php:149
@@ -9353,9 +9353,10 @@ msgid ""
 "FusionForge. It allows Apache authentication to be reused for\n"
 "FusionForge, for instance where Kerberos is used."
 msgstr ""
-"Ce greffon contient un mécanisme d'authentification par HTTPD pour FusionForge.\n"
-"Il permet de réutiliser l'authentification Apache pour FusionForge, lorsque\n"
-"qu'une instance Kerberos est utilisée."
+"Ce greffon contient un mécanisme d'authentification par HTTPD pour\n"
+"FusionForge.  Il permet de réutiliser l'authentification Apache pour\n"
+"FusionForge, par exemple lorsque qu'une instance Kerberos est\n"
+"utilisée."
 
 #: plugins/authhttpd/common/AuthHTTPDPlugin.class.php:71
 msgid "Login via HTTP authentication"
@@ -10234,7 +10235,12 @@ msgid ""
 "your users to search your FusionForge site through external search engines\n"
 "which have indexed it. You can define search engines you want to use in\n"
 "the configuration file."
-msgstr "Ce greffon ajoute un nouveau moteur de recherche pour votre siteFusionForge. Il permet à vos utilisateurs de rechercher dans votre siteFusionForge à travers un moteur de recherche externe qui l'a indexé. Vouspouvez définir les moteurs de recherche que vous souhaitez utiliser dans lefichier de configuration."
+msgstr ""
+"Ce greffon ajoute un nouveau moteur de recherche pour votre site\n"
+"FusionForge. Il permet à vos utilisateurs de rechercher dans votre\n"
+"site FusionForge à travers des moteurs de recherches externes qui\n"
+"l'ont indexé. Vous pouvez définir les moteurs de recherche que vous\n"
+"souhaitez utiliser dans le fichier de configuration."
 
 #: plugins/extsubproj/actions/addExtSubProj.php:31
 msgid "Failed to add subproject."
@@ -11092,7 +11098,11 @@ msgid ""
 "This plugin allows each project to define extra tabs with arbitrary\n"
 "titles and links, next to the login menu (headermenu),\n"
 "in the main menu (outermenu) or in the project menu (groupmenu)."
-msgstr "Ce greffon permet à chaque projet de définir des onglets supplémentaires avec un nombre arbitraire de titres et de liens, en plus de ceux du menu connexion (headermenu), du menu principal (outermenu) ou du menu projet (groupmenu)."
+msgstr ""
+"Ce greffon permet à chaque projet de définir des onglets\n"
+"supplémentaires avec un nombre arbitraire de titres et de liens, en\n"
+"plus de ceux du menu connexion (headermenu), du menu principal\n"
+"(outermenu) ou du menu projet (groupmenu)."
 
 #: plugins/headermenu/common/headermenuPlugin.class.php:71
 #: plugins/headermenu/common/headermenuPlugin.class.php:437
@@ -13190,7 +13200,7 @@ msgstr "Gérer"
 
 #: plugins/oauthprovider/www/consumer.php:78
 msgid "There are currently no OAuth consumers registered in the database"
-msgstr "Il n'y a aucun consommateur OAuth enregistré dans la base de données pur le moment"
+msgstr "Il n'y a aucun consommateur OAuth enregistré dans la base de données pour le moment"
 
 #: plugins/oauthprovider/www/consumer.php:95
 #: plugins/oauthprovider/www/consumer.php:119
@@ -13561,8 +13571,8 @@ msgid ""
 "This can be used to highlight some projects on a forge, for instance\n"
 "for a \"project of the month\"."
 msgstr ""
-"Ceci peut être utilisé pur mettre en avant certains projets sur une forge,\n"
-"par exemple pour un « projet du mois »."
+"Ceci peut être utilisé pour mettre en avant certains projets sur une\n"
+"forge, par exemple pour un « projet du mois »."
 
 #: plugins/projectlabels/common/ProjectLabelsPlugin.class.php:20
 msgid "Project labels plugin"
@@ -14513,8 +14523,8 @@ msgstr[1] "Les dépôts Git de ce projet sont accessibles anonymement avec les c
 #: plugins/scmgit/common/GitPlugin.class.php:134
 msgid "Member repository"
 msgid_plural "Members repositories"
-msgstr[0] "Membre du dépôt"
-msgstr[1] "Membres des dépôts"
+msgstr[0] "Dépôt personnel"
+msgstr[1] "Dépôts personnels"
 
 #: plugins/scmgit/common/GitPlugin.class.php:138
 msgid "One of this project's members also has a personal Git repository that can be checked out anonymously."
@@ -14572,7 +14582,7 @@ msgstr "Navigateur de dépôt Git"
 
 #: plugins/scmgit/common/GitPlugin.class.php:314
 msgid "Browsing the Git tree gives you a view into the current status of this project's code. You may also view the complete history of any file in the repository."
-msgstr "Parcourir l'arborescence du dépôt Git permet de vous faire une idée de l'état actuel du code de ce projet. Vous devriez aussi regarder l'historique complet des fichiers du dépôt."
+msgstr "Parcourir l'arborescence du dépôt Git permet de vous faire une idée de l'état actuel du code de ce projet. Vous pouvez aussi regarder l'historique complet de chaque fichier du dépôt."
 
 #: plugins/scmgit/common/GitPlugin.class.php:318
 msgid "Browse main git repository"
@@ -14640,7 +14650,7 @@ msgstr "Créer un nouveau dépôt Git pour le projet"
 #: plugins/scmgit/common/GitPlugin.class.php:1143
 #: plugins/scmhg/common/HgPlugin.class.php:791
 msgid "Initial clone URL (or name of an existing repository in this project; leave empty to start with an empty repository)"
-msgstr "URL de clonage initial (ou nom d'un dépôt existant dans le projet ; laisser vide pour démarrer avec un dépôt vide)"
+msgstr "URL du clone initial (ou nom d'un dépôt existant dans le projet ; laisser vide pour démarrer avec un dépôt vide)"
 
 #: plugins/scmgit/common/scmgit_Widget_MyRepositories.class.php:32
 msgid "My Git cloned Repositories List"
@@ -14682,10 +14692,10 @@ msgid ""
 "and gives some control over it to the project's administrator.\n"
 "Offer DAV or SSH access."
 msgstr ""
-"ce greffon contient le sous-système Mercurial (Hg) pour FusionForge.\n"
-"Il permet à chaque projet FusionForge d'avoir ses propres dépôts Mercurial,\n"
-"et de donner à l'administrateur du projet un certain contrôle sur eux.\n"
-"Offre un accès DAV ou SSH."
+"Ce greffon contient le sous-système Mercurial (Hg) pour FusionForge.\n"
+"Il permet à chaque projet FusionForge d'avoir ses propres dépôts\n"
+"Mercurial, et de donner à l'administrateur du projet un certain\n"
+"contrôle sur eux.  Offre un accès DAV ou SSH."
 
 #: plugins/scmhg/common/HgPlugin.class.php:60
 msgid "Another short Introduction can be found at <a href=\"http://hginit.com/\">http://hginit.com/</a>"
@@ -14767,13 +14777,14 @@ msgid ""
 "tracker integration, conformity...) that can be enabled for each\n"
 "project independently."
 msgstr ""
-"Ce greffon contient un ensemble de déclencheurs d'envois (notifications par email,\n"
-"intégration d'outil de suivi, conformité…) qui peut être activé indépendamment\n"
-"pour chaque projet."
+"Ce greffon contient un ensemble de déclencheurs à l'envois\n"
+"(notifications par email, intégration avec l'outil de suivi,\n"
+"conformité…) qui peuvent être activés indépendamment pour chaque\n"
+"projet."
 
 #: plugins/scmhook/common/scmhookPlugin.class.php:165
 msgid "invalid e-mails"
-msgstr "Adresses de messagerie invalides"
+msgstr "adresses de messagerie invalides"
 
 #: plugins/scmhook/common/scmhookPlugin.class.php:202
 msgid "Enable Repository Hooks"
@@ -14790,7 +14801,7 @@ msgstr "Aucun déclencheur disponible"
 #: plugins/scmhook/common/scmhookPlugin.class.php:328
 #, php-format
 msgid "%s Hooks"
-msgstr "%s déclencheurs"
+msgstr "Déclencheurs %s"
 
 #: plugins/scmhook/common/scmhookPlugin.class.php:329
 msgid "Hook"
@@ -14843,7 +14854,7 @@ msgstr "Parcourir"
 
 #: plugins/scmhook/library/scmgit/postReceiveEmail.class.php:32
 msgid "Commit message log is pushed to commit mailing-list of the project"
-msgstr "Le journal des messages de commit a été envoyé à la liste de diffusion des commit du projet."
+msgstr "Les messages de commit sont envoyés à la liste de diffusion du projet."
 
 #: plugins/scmhook/library/scmgit/postReceiveEmail.class.php:55
 #: plugins/scmhook/library/scmhg/commitEmail.class.php:60
@@ -14877,11 +14888,11 @@ msgstr "Vérifier si les fichiers envoyés ont la propriété svn:mimetype corre
 
 #: plugins/scmhook/library/scmsvn/commitEmail.class.php:35
 msgid "Commit message log is pushed to commit mailing-list of the project (which you need to create)"
-msgstr "Le journal des messages d'envoi est notifié à la liste de diffusion des envois du projet (que vous devez créer)."
+msgstr "Les messages de commit sont envoyés à la liste de diffusion du projet (que vous devez créer)"
 
 #: plugins/scmhook/library/scmsvn/commitEmail.class.php:62
 msgid "Send commit e-mail notification to"
-msgstr "Envoyer une notifications par email de l'envoi à"
+msgstr "Envoyer une notifications par email des commits à"
 
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:99
 msgid "Related SVN commits"
@@ -15484,7 +15495,7 @@ msgid ""
 "to configure specific URL for web analytics tool\n"
 "such as Piwik or Google Analytics."
 msgstr ""
-"greffon webanalytics pour FusionForge. Ayez la possibilité de configurer\n"
+"Greffon webanalytics pour FusionForge. Ayez la possibilité de configurer\n"
 "une URL spécifique pour l'outil d'analyse du trafic web tel que Piwik ou\n"
 "Google Analytics."
 
@@ -15568,7 +15579,7 @@ msgid ""
 "web/FTP hosting, release management, etc. All these services are\n"
 "integrated into one web site and managed through a web interface."
 msgstr ""
-"FusionForge fournie un certain nombre d'outils pour faciliter les projets de\n"
+"FusionForge fournit un certain nombre d'outils pour faciliter les projets de\n"
 "développement collaboratifs, tel un outil de suivi de bogues, un gestionnaire\n"
 "de tâches, des listes de diffusion, un dépôt de code, des forums, un\n"
 "mécanisme d'aide des utilisateurs, un hébergement web / FTP, un gestionnaire\n"
@@ -16747,11 +16758,11 @@ msgstr "Erreur de programmation de courrier. Impossible de programmer le courrie
 
 #: www/admin/massmail.php:79
 msgid "Mailing successfully scheduled for delivery"
-msgstr ""
+msgstr "Courrier global marqué pour envoi"
 
 #: www/admin/massmail.php:87
 msgid "Delivery Id"
-msgstr ""
+msgstr "Identifiant d'envoi"
 
 #: www/admin/massmail.php:93
 msgid "Scheduling Mailing, Could not delete mailing, database error: "
@@ -16759,7 +16770,7 @@ msgstr "Programmation des envois de messages. Impossible de supprimer l'envoi de
 
 #: www/admin/massmail.php:95
 msgid "Mailing successfully deleted for delivery"
-msgstr ""
+msgstr "Courrier global supprimé avec succès"
 
 #: www/admin/massmail.php:107 www/admin/massmail.php:163
 msgid "Active Deliveries"
@@ -17712,7 +17723,7 @@ msgstr "Utilisateurs surveillant ce forum"
 #: www/forum/admin/monitor.php:52
 #, php-format
 msgid "Forum %s Monitoring Users"
-msgstr "%s utilisateurs surveillent ce forum"
+msgstr "Utilisateurs surveillant le forum %s"
 
 #: www/forum/admin/monitor.php:61
 msgid "No Monitoring Users"
@@ -18144,7 +18155,7 @@ msgstr "Tâches systèmes"
 
 #: www/include/html.php:1012
 msgid "In-progress and past system replication"
-msgstr ""
+msgstr "Réplication système en cours et passée"
 
 #: www/include/html.php:1016 www/register/index.php:177
 msgid "Register Project"
@@ -18425,7 +18436,7 @@ msgstr "Docman :"
 
 #: www/index_std.php:55
 msgid "Files moved to filesystem using the Storage generic class (TrivialDev)"
-msgstr "Fichiers déplacées sur le système de fichier utilisant une classe générique de stockage (TrivialDev)"
+msgstr "Fichiers déplacés sur le système de fichier en utilisant une classe de stockage générique (TrivialDev)"
 
 #: www/index_std.php:56
 msgid "Directory monitoring (TrivialDev)"
@@ -18441,7 +18452,7 @@ msgstr "Ajout d'un rapport comme dans FRS (TrivialDev)"
 
 #: www/index_std.php:61
 msgid "User management:"
-msgstr "Gestion de l'utilisateur :"
+msgstr "Gestion des utilisateurs :"
 
 #: www/index_std.php:63
 msgid "Account ssh key management: rewrite backend, add more informations such as fingerprint, deploy flag, easy delete (TrivialDev)"
@@ -18453,7 +18464,7 @@ msgstr "Notification des administrateurs lorsqu'un utilisateur a validé son com
 
 #: www/index_std.php:65
 msgid "New SOAP services to handle adding/removing groups, users and tasks (patch by Pasquale Vitale)"
-msgstr "Nouveaux services SOAP pour contrôler l'ajout/retrait des groupes, utilisateurs et tâches ((patch de Pasquale Vitale))"
+msgstr "Nouveaux services SOAP pour contrôler l'ajout/retrait des groupes, utilisateurs et tâches (patch de Pasquale Vitale)"
 
 #: www/index_std.php:68
 msgid "Project activity:"
@@ -19903,7 +19914,7 @@ msgstr "Format CSV sélectionné"
 
 #: www/pm/csv.php:81
 msgid "(Change)"
-msgstr "(modification)"
+msgstr "(Modifier)"
 
 #: www/pm/csv.php:82
 msgid "Export CSV file"
@@ -20208,7 +20219,7 @@ msgstr "Jour"
 
 #: www/pm/postuploadcsv.php:125
 msgid "Wrong file type. Only plain CSV file supported"
-msgstr "Type de fichier erroné. Seul le format de fichier CVS ordinaire est pris en charge"
+msgstr "Type de fichier erroné. Seul le format de fichier CSV ordinaire est pris en charge"
 
 #: www/pm/postuploadcsv.php:128
 msgid "Parameter error"
@@ -20951,7 +20962,7 @@ msgstr "L'enregistrement de nouveaux projets est restreint sur %s, seuls les adm
 
 #: www/register/index.php:109
 msgid "No purpose given, autoapprove was on"
-msgstr "Aucune justification fournie, la validation automatique était activée"
+msgstr "Aucune objectif fourni, la validation automatique était activée"
 
 #: www/register/index.php:139
 msgid "Registration complete"
