@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-24 15:40+0200\n"
+"POT-Creation-Date: 2015-05-07 17:08+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -232,11 +232,11 @@ msgstr ""
 #: common/frs/views/editrelease.php:98 common/frs/views/editrelease.php:105
 #: common/frs/views/editrelease.php:132 common/frs/views/qrs.php:62
 #: common/frs/views/shownotes.php:51 common/include/Error.class.php:206
-#: common/include/Group.class.php:2670 common/include/Group.class.php:2671
-#: common/include/Group.class.php:2672 common/include/Group.class.php:2724
-#: common/include/Group.class.php:2725 common/include/Group.class.php:2728
-#: common/include/Group.class.php:2732 common/include/Group.class.php:2742
-#: common/include/Group.class.php:2743
+#: common/include/Group.class.php:2661 common/include/Group.class.php:2662
+#: common/include/Group.class.php:2663 common/include/Group.class.php:2715
+#: common/include/Group.class.php:2716 common/include/Group.class.php:2719
+#: common/include/Group.class.php:2723 common/include/Group.class.php:2733
+#: common/include/Group.class.php:2734
 #: common/include/GroupJoinRequest.class.php:298
 #: common/include/MonitorElement.class.php:137
 #: common/include/MonitorElement.class.php:150
@@ -599,7 +599,7 @@ msgstr ""
 
 #: common/docman/Document.class.php:888
 #: common/docman/DocumentGroup.class.php:762
-#: common/include/Group.class.php:2728 common/tracker/actions/browse.php:204
+#: common/include/Group.class.php:2719 common/tracker/actions/browse.php:204
 #: common/tracker/actions/query.php:199 common/tracker/actions/query.php:343
 msgid "Submitter"
 msgstr ""
@@ -1605,8 +1605,8 @@ msgstr ""
 #: www/my/bookmark_add.php:49 www/my/bookmark_edit.php:58
 #: www/my/bookmark_edit.php:62 www/my/diary.php:186 www/my/diary.php:191
 #: www/news/admin/index.php:128 www/people/admin/index.php:105
-#: www/people/admin/index.php:143 www/people/createjob.php:53
-#: www/people/createjob.php:56 www/people/editjob.php:170
+#: www/people/admin/index.php:143 www/people/createjob.php:49
+#: www/people/createjob.php:51 www/people/editjob.php:170
 #: www/people/editjob.php:173 www/people/editprofile.php:241
 #: www/pm/add_task.php:52 www/pm/add_task.php:57 www/pm/add_task.php:58
 #: www/pm/add_task.php:61 www/pm/add_task.php:66 www/pm/add_task.php:71
@@ -2812,7 +2812,7 @@ msgstr ""
 
 #: common/forum/ForumHTML.class.php:95
 #: common/widget/Widget_ProjectLatestNews.class.php:42
-#: www/export/projnews.php:72 www/index_std.php:160
+#: www/export/projnews.php:72 www/index_std.php:145
 msgid "Latest News"
 msgstr ""
 
@@ -3584,10 +3584,6 @@ msgstr ""
 msgid "Delete packages"
 msgstr ""
 
-#: common/frs/views/admin.php:142
-msgid "Delete the selected package(s)"
-msgstr ""
-
 #: common/frs/views/admin.php:145
 msgid ""
 "You are about to delete permanently this package. Are you sure? This action "
@@ -3745,10 +3741,6 @@ msgstr ""
 
 #: common/frs/views/editrelease.php:196
 msgid "Delete files"
-msgstr ""
-
-#: common/frs/views/editrelease.php:196
-msgid "Delete the selected file(s)"
 msgstr ""
 
 #: common/frs/views/editrelease.php:200
@@ -3960,10 +3952,6 @@ msgstr ""
 
 #: common/frs/views/showreleases.php:99
 msgid "Delete releases"
-msgstr ""
-
-#: common/frs/views/showreleases.php:99
-msgid "Delete the selected release(s)"
 msgstr ""
 
 #: common/frs/views/showreleases.php:102
@@ -4181,147 +4169,147 @@ msgstr ""
 msgid "Could not properly remove member:"
 msgstr ""
 
-#: common/include/Group.class.php:1695
+#: common/include/Group.class.php:1694
 msgid "Could not properly delete the tracker:"
 msgstr ""
 
-#: common/include/Group.class.php:1712
+#: common/include/Group.class.php:1708
 msgid "Could not properly delete the forum:"
 msgstr ""
 
-#: common/include/Group.class.php:1728
+#: common/include/Group.class.php:1723
 msgid "Could not properly delete the ProjectGroup:"
 msgstr ""
 
-#: common/include/Group.class.php:1739
+#: common/include/Group.class.php:1734
 msgid "Error FRS Packages: "
 msgstr ""
 
-#: common/include/Group.class.php:1747
+#: common/include/Group.class.php:1742
 msgid "Could not properly delete the FRSPackage:"
 msgstr ""
 
-#: common/include/Group.class.php:1758 common/include/Group.class.php:1773
+#: common/include/Group.class.php:1753 common/include/Group.class.php:1768
 msgid "Error Deleting News: "
 msgstr ""
 
-#: common/include/Group.class.php:1766
+#: common/include/Group.class.php:1761
 #, php-format
 msgid "Could Not Delete News Forum: %d"
 msgstr ""
 
-#: common/include/Group.class.php:1784 common/include/Group.class.php:1792
+#: common/include/Group.class.php:1779 common/include/Group.class.php:1787
 msgid "Error Deleting Documents: "
 msgstr ""
 
-#: common/include/Group.class.php:1802
+#: common/include/Group.class.php:1797
 msgid "Error Deleting Tags: "
 msgstr ""
 
-#: common/include/Group.class.php:1813
+#: common/include/Group.class.php:1808
 msgid "Error Deleting Project History: "
 msgstr ""
 
-#: common/include/Group.class.php:1824
+#: common/include/Group.class.php:1819
 msgid "Error Deleting Project Plugins: "
 msgstr ""
 
-#: common/include/Group.class.php:1835
+#: common/include/Group.class.php:1830
 msgid "Error Deleting SCM Statistics: "
 msgstr ""
 
-#: common/include/Group.class.php:1851
+#: common/include/Group.class.php:1845
 msgid "Could not properly delete the survey"
 msgstr ""
 
-#: common/include/Group.class.php:1867
+#: common/include/Group.class.php:1860
 msgid "Could not properly delete the survey questions"
 msgstr ""
 
-#: common/include/Group.class.php:1885
+#: common/include/Group.class.php:1877
 #: plugins/mailman/include/mailmanPlugin.class.php:198
 msgid "Could not properly delete the mailing list"
 msgstr ""
 
-#: common/include/Group.class.php:1897 common/include/Group.class.php:1905
+#: common/include/Group.class.php:1888 common/include/Group.class.php:1896
 msgid "Error Deleting Trove: "
 msgstr ""
 
-#: common/include/Group.class.php:1916
+#: common/include/Group.class.php:1907
 msgid "Error Deleting Counters: "
 msgstr ""
 
-#: common/include/Group.class.php:1926 common/include/Group.class.php:1945
+#: common/include/Group.class.php:1917 common/include/Group.class.php:1936
 msgid "Error Deleting Project:"
 msgstr ""
 
-#: common/include/Group.class.php:2017
+#: common/include/Group.class.php:2008
 msgid "User is not active. Only active users can be added."
 msgstr ""
 
-#: common/include/Group.class.php:2029
+#: common/include/Group.class.php:2020
 msgid "Error Getting Role Object"
 msgstr ""
 
-#: common/include/Group.class.php:2058 www/account/lostpw.php:44
+#: common/include/Group.class.php:2049 www/account/lostpw.php:44
 #: www/account/pending-resend.php:40 www/sendmessage.php:45 www/users:77
 msgid "That user does not exist."
 msgstr ""
 
-#: common/include/Group.class.php:2072
+#: common/include/Group.class.php:2063
 msgid "Added User"
 msgstr ""
 
-#: common/include/Group.class.php:2106 common/include/Group.class.php:2225
+#: common/include/Group.class.php:2097 common/include/Group.class.php:2216
 #, php-format
 msgid "Error: User not removed: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2128
+#: common/include/Group.class.php:2119
 msgid "Error: artifact:"
 msgstr ""
 
-#: common/include/Group.class.php:2149 common/include/Group.class.php:2162
+#: common/include/Group.class.php:2140 common/include/Group.class.php:2153
 #, php-format
 msgid "Error: project_assigned_to %d: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2183
+#: common/include/Group.class.php:2174
 msgid "Removed User"
 msgstr ""
 
-#: common/include/Group.class.php:2205 www/admin/globalroledelete.php:41
+#: common/include/Group.class.php:2196 www/admin/globalroledelete.php:41
 #: www/admin/globalroleedit.php:44 www/project/admin/roledelete.php:47
 #: www/project/admin/roleedit.php:55
 msgid "Could Not Get Role"
 msgstr ""
 
-#: common/include/Group.class.php:2208
+#: common/include/Group.class.php:2199
 #, php-format
 msgid "Role: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2212
+#: common/include/Group.class.php:2203
 msgid "Wrong destination role"
 msgstr ""
 
-#: common/include/Group.class.php:2232
+#: common/include/Group.class.php:2223
 msgid "Updated User"
 msgstr ""
 
-#: common/include/Group.class.php:2328
+#: common/include/Group.class.php:2319
 msgid "Group already active"
 msgstr ""
 
-#: common/include/Group.class.php:2569
+#: common/include/Group.class.php:2560
 msgid "Approved"
 msgstr ""
 
-#: common/include/Group.class.php:2592 common/include/Group.class.php:2662
+#: common/include/Group.class.php:2583 common/include/Group.class.php:2653
 msgid "Group does not have any administrators."
 msgstr ""
 
-#: common/include/Group.class.php:2600
+#: common/include/Group.class.php:2591
 #, php-format
 msgid ""
 "Your project registration for %4$s has been approved.\n"
@@ -4357,100 +4345,100 @@ msgid ""
 "-- the %4$s crew"
 msgstr ""
 
-#: common/include/Group.class.php:2636
+#: common/include/Group.class.php:2627
 #, php-format
 msgid "%s Project Approved"
 msgstr ""
 
-#: common/include/Group.class.php:2669
+#: common/include/Group.class.php:2660
 #, php-format
 msgid "Your project registration for %s has been denied."
 msgstr ""
 
-#: common/include/Group.class.php:2670 common/include/Group.class.php:2724
-#: common/include/Group.class.php:2742 www/register/index.php:186
+#: common/include/Group.class.php:2661 common/include/Group.class.php:2715
+#: common/include/Group.class.php:2733 www/register/index.php:186
 #: www/register/index.php:194
 msgid "Project Full Name"
 msgstr ""
 
-#: common/include/Group.class.php:2671 plugins/projectlabels/www/index.php:172
+#: common/include/Group.class.php:2662 plugins/projectlabels/www/index.php:172
 #: www/admin/approve-pending.php:193 www/admin/groupedit.php:170
 #: www/admin/vhost.php:121 www/register/index.php:223
 msgid "Project Unix Name"
 msgstr ""
 
-#: common/include/Group.class.php:2672
+#: common/include/Group.class.php:2663
 msgid "Reasons for negative decision"
 msgstr ""
 
-#: common/include/Group.class.php:2684
+#: common/include/Group.class.php:2675
 #, php-format
 msgid "%s Project Denied"
 msgstr ""
 
-#: common/include/Group.class.php:2708
+#: common/include/Group.class.php:2699
 msgid "Could not find user who has submitted the project."
 msgstr ""
 
-#: common/include/Group.class.php:2715
+#: common/include/Group.class.php:2706
 msgid "There is no administrator to send the mail to."
 msgstr ""
 
-#: common/include/Group.class.php:2723 common/include/Group.class.php:2734
-#: common/include/Group.class.php:2741 common/include/Group.class.php:2747
+#: common/include/Group.class.php:2714 common/include/Group.class.php:2725
+#: common/include/Group.class.php:2732 common/include/Group.class.php:2738
 #, php-format
 msgid "New %s Project Submitted"
 msgstr ""
 
-#: common/include/Group.class.php:2725 common/include/Group.class.php:2743
+#: common/include/Group.class.php:2716 common/include/Group.class.php:2734
 #: www/admin/approve-pending.php:195
 msgid "Submitted Description"
 msgstr ""
 
-#: common/include/Group.class.php:2732
+#: common/include/Group.class.php:2723
 msgid "Please visit the following URL to approve or reject this project"
 msgstr ""
 
-#: common/include/Group.class.php:2744
+#: common/include/Group.class.php:2735
 #, php-format
 msgid ""
 "The %s admin team will now examine your project submission. You will be "
 "notified of their decision."
 msgstr ""
 
-#: common/include/Group.class.php:2762
+#: common/include/Group.class.php:2753
 msgid "Group name is too short"
 msgstr ""
 
-#: common/include/Group.class.php:2765
+#: common/include/Group.class.php:2756
 msgid "Group name is too long"
 msgstr ""
 
-#: common/include/Group.class.php:2768
+#: common/include/Group.class.php:2759
 msgid "Group name already taken"
 msgstr ""
 
-#: common/include/Group.class.php:2852
+#: common/include/Group.class.php:2843
 #, php-format
 msgid "Error: Cannot Update Group Unix Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2916
+#: common/include/Group.class.php:2907
 #, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2934
+#: common/include/Group.class.php:2925
 #, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2952
+#: common/include/Group.class.php:2943
 #, php-format
 msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2970
+#: common/include/Group.class.php:2961
 #, php-format
 msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr ""
@@ -6890,7 +6878,7 @@ msgid "Change"
 msgstr ""
 
 #: common/tracker/actions/browse.php:348
-msgid "Use project project queries or build and use your own queries."
+msgid "Use project queries or build and use your own queries."
 msgstr ""
 
 #: common/tracker/actions/browse.php:348 common/tracker/actions/browse.php:460
@@ -12337,7 +12325,7 @@ msgstr ""
 #: plugins/mantisbt/view/admin/viewCategorie.php:50
 #: plugins/mantisbt/view/editIssue.php:74
 #: plugins/mantisbt/view/viewIssue.php:59
-#: plugins/mantisbt/view/viewIssues.php:143 www/people/createjob.php:50
+#: plugins/mantisbt/view/viewIssues.php:143 www/people/createjob.php:48
 #: www/people/editjob.php:52 www/people/editjob.php:74
 #: www/people/editjob.php:164 www/people/people_utils.php:361
 #: www/people/people_utils.php:443 www/pm/add_task.php:52
@@ -15963,7 +15951,7 @@ msgstr ""
 
 #: www/account/editsshkeys.php:67
 msgid ""
-"To avoid having to type your password every time for your CVS/SSH developer "
+"To avoid having to type your password every time for your SSH developer "
 "account, you may upload your public key(s) here and they will be placed on "
 "the server in your ~/.ssh/authorized_keys file. Uploaded SSH keys are "
 "effective <em>immediately</em>."
@@ -17052,7 +17040,7 @@ msgid "Scheduling Mailing, Could not delete mailing, database error: "
 msgstr ""
 
 #: www/admin/massmail.php:95
-msgid "Mailing successfully deleted for delivery"
+msgid "Mailing successfully deleted"
 msgstr ""
 
 #: www/admin/massmail.php:107 www/admin/massmail.php:163
@@ -18819,7 +18807,7 @@ msgid "A powerful plugin system to add new features."
 msgstr ""
 
 #: www/index_std.php:49
-msgid "What's new in FusionForge 5.3"
+msgid "What's new in FusionForge 6.0"
 msgstr ""
 
 #: www/index_std.php:50
@@ -18831,300 +18819,238 @@ msgstr ""
 msgid "here"
 msgstr ""
 
-#: www/index_std.php:51 www/index_std.php:110
+#: www/index_std.php:52
 msgid "Standards features:"
 msgstr ""
 
-#: www/index_std.php:53 www/index_std.php:112
-msgid "Docman:"
-msgstr ""
-
 #: www/index_std.php:55
-msgid "Files moved to filesystem using the Storage generic class (TrivialDev)"
+msgid "New install system [#710] (Inria)"
 msgstr ""
 
 #: www/index_std.php:56
-msgid "Directory monitoring (TrivialDev)"
-msgstr ""
-
-#: www/index_std.php:57
-msgid "Display number of download per file, max upload size (TrivialDev)"
+msgid ""
+"Reactivity: system replication is now performed immediately (rather than "
+"waiting for cron jobs) [#147] (Inria)"
 msgstr ""
 
 #: www/index_std.php:58
-msgid "Add report view as in FRS (TrivialDev)"
+msgid "SCM:"
+msgstr ""
+
+#: www/index_std.php:60
+msgid ""
+"Concurrent SSH and HTTPS access, relying on Apache mod_itk [#519] (Roland "
+"Mas and Inria)"
 msgstr ""
 
 #: www/index_std.php:61
-msgid "User management:"
+msgid ""
+"Allow projects to use several SCM engines in parallel [#751] (Roland Mas, "
+"for CEA)"
+msgstr ""
+
+#: www/index_std.php:62
+msgid "Support read-only access to private projects via SSH (Inria)"
 msgstr ""
 
 #: www/index_std.php:63
 msgid ""
-"Account ssh key management: rewrite backend, add more informations such as "
-"fingerprint, deploy flag, easy delete (TrivialDev)"
+"Browsing support for (Git) private repositories [#519] (Roland Mas, for "
+"AdaCore)"
 msgstr ""
 
 #: www/index_std.php:64
-msgid "Notify admins when user has validated his account (TrivialDev)"
-msgstr ""
-
-#: www/index_std.php:65
-msgid ""
-"New SOAP services to handle adding/removing groups, users and tasks (patch "
-"by Pasquale Vitale)"
+msgid "Anonymous read-only access through xinetd and rsync (Inria)"
 msgstr ""
 
 #: www/index_std.php:68
-msgid "Project activity:"
+msgid ""
+"System: users now use a common default group (\"users\") rather than per-"
+"user group; avoids conflicts with project groups [#760] (Inria)"
 msgstr ""
 
 #: www/index_std.php:70
-msgid "Allow project to disable the Project Activity (Alcatel-Lucent)"
+msgid "Docman:"
 msgstr ""
 
-#: www/index_std.php:71
-msgid "Activity: New Directory appears now in activity (TrivialDev)"
+#: www/index_std.php:72
+msgid "Basic Webdav write mkcol, delete, put, move support [#658] (TrivialDev)"
+msgstr ""
+
+#: www/index_std.php:73
+msgid "Add move mass actions [#657] (TrivialDev)"
 msgstr ""
 
 #: www/index_std.php:74
-msgid ""
-"Trackers: Attachements moved to filesystem to allow larger attachments & "
-"reduce DB size (Alcatel-Lucent)"
+msgid "Direct link to file details [#747] (TrivialDev)"
 msgstr ""
 
 #: www/index_std.php:75
-msgid "Frs: Download statistics are available as graph now (TrivialDev)"
-msgstr ""
-
-#: www/index_std.php:76
-msgid "New javascript based graphics (bybye jpgraph) (TrivialDev)"
-msgstr ""
-
-#: www/index_std.php:77 www/index_std.php:128
-msgid "Widgets:"
+msgid ""
+"Rewrite parser using unoconv, support more file formats [#749] (Roland Mas, "
+"for CEA)"
 msgstr ""
 
 #: www/index_std.php:79
-msgid "Widget: MyArtifacts Enhancement: add monitored artifacts (TrivialDev)"
+msgid "FRS:"
 msgstr ""
 
-#: www/index_std.php:80
-msgid ""
-"Widget: Project Document Activity: new or updates files, new directories, in "
-"the last 4 weeks (TrivialDev)"
+#: www/index_std.php:81
+msgid "Enable widget \"My monitored packages\" [#697] (TrivialDev)"
 msgstr ""
 
-#: www/index_std.php:84 www/index_std.php:135
-msgid "Plugins:"
+#: www/index_std.php:82
+msgid "Provide new role settings [#705] (TrivialDev)"
+msgstr ""
+
+#: www/index_std.php:83
+msgid "Add delete packages, releases or files mass action [#713] (TrivialDev)"
+msgstr ""
+
+#: www/index_std.php:84
+msgid "Provide link to download any release as ZIP file [#737] (TrivialDev)"
+msgstr ""
+
+#: www/index_std.php:85
+msgid "Fix RBAC migration script [#765] (TrivialDev)"
 msgstr ""
 
 #: www/index_std.php:86
-msgid "scmgit:"
+msgid "Reorganise code [#692] (TrivialDev)"
 msgstr ""
 
-#: www/index_std.php:88
-msgid "Multiple repositories per project (developed for/sponsored by AdaCore)"
+#: www/index_std.php:90
+msgid "Web UI:"
 msgstr ""
 
-#: www/index_std.php:89
-msgid "Add browsing capability for user personal repository (TrivialDev)"
-msgstr ""
-
-#: www/index_std.php:90 www/index_std.php:123
-msgid "Basic activity support (TrivialDev)"
-msgstr ""
-
-#: www/index_std.php:93
-msgid "scmhook"
-msgstr ""
-
-#: www/index_std.php:95
-msgid "commitEmail support for scmhg plugin (TrivialDev)"
-msgstr ""
-
-#: www/index_std.php:96
+#: www/index_std.php:92
 msgid ""
-"change properties support for SVN pre-revprop-changehooks (Alcatel-Lucent)"
-msgstr ""
-
-#: www/index_std.php:97
-msgid "svncommitemail: this plugin is superseed by scmhook"
-msgstr ""
-
-#: www/index_std.php:98
-msgid "svntracker: this plugin is superseed by scmhook"
-msgstr ""
-
-#: www/index_std.php:101
-msgid ""
-"scmhg: http support, online browsing, stats (Denise Patzker, TrivialDev)"
-msgstr ""
-
-#: www/index_std.php:102
-msgid ""
-"headermenu: new plugin to handle links in headermenu, outermenu & groupmenu "
+"Drop tipsy plugin, use standard jQuery UI tooltip already provided [#656] "
 "(TrivialDev)"
 msgstr ""
 
-#: www/index_std.php:103
+#: www/index_std.php:93
+msgid "FusionForge Theme & jQuery UI theme sync [#663] (TrivialDev)"
+msgstr ""
+
+#: www/index_std.php:94
+msgid "Update the jQuery & jQuery UI frameworks [#664] (TrivialDev)"
+msgstr ""
+
+#: www/index_std.php:95
 msgid ""
-"blocks: improved with a new HTML widget for the project summary page "
-"(Alcatel-Lucent)"
+"Feedback, error_msg, warning_msg are now store in cookie [#669] (TrivialDev)"
+msgstr ""
+
+#: www/index_std.php:96
+msgid "Update the jQuery Auto-height plugin [#716] (TrivialDev)"
+msgstr ""
+
+#: www/index_std.php:97
+msgid "Updated French translation (Stéphane Aulery and Inria)"
+msgstr ""
+
+#: www/index_std.php:101
+msgid "Widgets:"
+msgstr ""
+
+#: www/index_std.php:103
+msgid "Public Area: display FRS link [#684] (TrivialDev)"
 msgstr ""
 
 #: www/index_std.php:104
 msgid ""
-"new phpcaptcha plugin: enable a captcha in the register page. (TrivialDev)"
+"My Latest Commits: New widget to display user commits on \"My Page\" [#743] "
+"(TrivialDev)"
 msgstr ""
 
 #: www/index_std.php:105
 msgid ""
-"webanalytics: new plugin to add support for piwik or google analytics tool "
-"(TrivialDev)"
+"Project Latest Commits: New widget to display the 5 latest commits on the "
+"project page  (TrivialDev)"
 msgstr ""
 
 #: www/index_std.php:106
 msgid ""
-"new admssw plugin to provide ADMS.SW compatible RDF descriptions of projects"
+"Project Latest Documents: enhancement, add actions buttons (monitor, delete) "
+"[#745] (TrivialDev)"
 msgstr ""
 
-#: www/index_std.php:109
-msgid "What's new in FusionForge 5.2"
+#: www/index_std.php:110
+msgid ""
+"Tracker: enable support for multi-select extrafield in roadmap [#655] "
+"(TrivialDev)"
+msgstr ""
+
+#: www/index_std.php:112
+msgid "Forum: store the attached file on FS [#662] (TrivialDev)"
 msgstr ""
 
 #: www/index_std.php:114
-msgid "Inject ZIP as a tree (Capgemini)"
-msgstr ""
-
-#: www/index_std.php:115
-msgid "Mass action (Capgemini)"
-msgstr ""
-
-#: www/index_std.php:116
 msgid ""
-"Interaction with the projects-hierarchy plugin to enable hierarchical "
-"browsing. (Capgemini)"
+"vhosts: allow customization from &lt;config_dir&gt;/custom/httpd.vhosts.tmpl "
+"(Inria)"
 msgstr ""
 
 #: www/index_std.php:117
-msgid "Complete rewritten of trash and pending view (Capgemini)"
+msgid "Plugins:"
 msgstr ""
 
 #: www/index_std.php:120
-msgid "scmsvn:"
+msgid ""
+"SCM SVN: Improved ViewVC integration, using external installation [#719] "
+"(Inria, TrivialDev)"
 msgstr ""
 
-#: www/index_std.php:122
+#: www/index_std.php:121
 msgid ""
-"Private projects can now be browsed with viewvc, using user rights "
-"management (TrivialDev)."
+"SCM Git: Activity log entry link to commit log in SCM browsing tab [#719] "
+"(TrivialDev)"
+msgstr ""
+
+#: www/index_std.php:123
+msgid "SCM Hg (Mercurial)"
+msgstr ""
+
+#: www/index_std.php:125
+msgid "Display the Repository History stats block [#724] (TrivialDev)"
 msgstr ""
 
 #: www/index_std.php:126
-msgid ""
-"Trackers: New view to display roadmaps view for trackers (Alcatel-Lucent)"
+msgid "Add support for project activity tab [#725] (TrivialDev)"
 msgstr ""
 
 #: www/index_std.php:127
 msgid ""
-"Admin: User add membership to multiples projects in one shot (Capgemini)"
-msgstr ""
-
-#: www/index_std.php:130
-msgid "New Widget: last 5 documents published in my project (Capgemini)"
+"Activity log entry link to commit log in SCM browsing tab [#726] (TrivialDev)"
 msgstr ""
 
 #: www/index_std.php:131
-msgid ""
-"New Widget: smcgit personal URL of cloned repositories. Currently just a "
-"list of URLs of your personal repository cloned from project you belong. "
-"(Capgemini)"
+msgid "scmhook"
 msgstr ""
 
-#: www/index_std.php:137
+#: www/index_std.php:133
 msgid ""
-"New Scmhook plugin: complete library to handle hooks for any scm available "
-"in fusionforge. Currently supporting post-commit and pre-commit hook. scmsvn "
-"pre-commit and post-commit library is provided (Capgemini)"
+"Update git post-receive email hook (tarent solutions GmbH, Teckids e.V.)"
+msgstr ""
+
+#: www/index_std.php:134
+msgid "Install hooks as the requesting system user (Inria)"
 msgstr ""
 
 #: www/index_std.php:138
 msgid ""
-"New Message plugin to display global messages like planned upgrade or outage "
-"(Alcatel-Lucent)."
+"AuthLDAP: Support LPAP_OPT_REFERRALS option, needed by ActiveDirectory "
+"Server [#734] (TrivialDev)"
 msgstr ""
 
-#: www/index_std.php:139
-msgid "New MoinMoinWiki plugin (AdaCore)"
-msgstr ""
-
-#: www/index_std.php:142
-msgid "What's new in FusionForge 5.1"
-msgstr ""
-
-#: www/index_std.php:144
-msgid "New Funky Theme (Capgemini)."
-msgstr ""
-
-#: www/index_std.php:145
+#: www/index_std.php:140
 msgid ""
-"New UI and features for the document manager (download as ZIP, locking, "
-"referencing documents by URL) (Capgemini)."
+"Task Board: New Agile TaskBoard supporting Scrum and Kanban methodologies "
+"(Vitaliy Pylypiv and TrivialDev)"
 msgstr ""
 
-#: www/index_std.php:146
-msgid ""
-"New progress bar displaying completion state of trackers using a custom "
-"status field."
-msgstr ""
-
-#: www/index_std.php:147
-msgid "Improved sorting in trackers (Alcatel-Lucent)."
-msgstr ""
-
-#: www/index_std.php:148
-msgid ""
-"More flexible and more powerful role-based access control system (Coclico)."
-msgstr ""
-
-#: www/index_std.php:149
-msgid ""
-"New unobtrusive tooltip system based on jquery and tipsy to replace old help "
-"window (Alcatel-Lucent)"
-msgstr ""
-
-#: www/index_std.php:150
-msgid ""
-"New plugins: Blocks, to add free HTML blocks on top of each tool of the "
-"project; Gravatar, to display user faces; OSLC, implementing the OSLC-CM API "
-"for tracker interoperability with external tools."
-msgstr ""
-
-#: www/index_std.php:151
-msgid "scmgit plugin: Personal Git repositories for project members (AdaCore)."
-msgstr ""
-
-#: www/index_std.php:152
-msgid ""
-"Template projects: there can be several of them, and users registering new "
-"projects can pick which template to clone from for their new projects "
-"(Coclico)."
-msgstr ""
-
-#: www/index_std.php:153
-msgid "Simplified configuration system, using standard *.ini files."
-msgstr ""
-
-#: www/index_std.php:154
-msgid "Reorganised, modular Apache configuration."
-msgstr ""
-
-#: www/index_std.php:155
-msgid "RPM packages for Red Hat (and derived) distributions."
-msgstr ""
-
-#: www/index_std.php:178
+#: www/index_std.php:163
 #, php-format
 msgid "This site is running %1$s version %2$s"
 msgstr ""
@@ -19608,24 +19534,24 @@ msgstr ""
 msgid "Add Job Skills"
 msgstr ""
 
-#: www/people/createjob.php:45
+#: www/people/createjob.php:44
 msgid ""
 "Start by filling in the fields below. When you click continue, you will be "
 "shown a list of skills and experience levels that this job requires."
 msgstr ""
 
-#: www/people/createjob.php:53 www/people/editjob.php:170
+#: www/people/createjob.php:49 www/people/editjob.php:170
 #: www/project/admin/index.php:139
 msgid "Short Description"
 msgstr ""
 
-#: www/people/createjob.php:56 www/people/editjob.php:173
+#: www/people/createjob.php:51 www/people/editjob.php:173
 #: www/people/viewjob.php:84
 msgid "Long Description"
 msgstr ""
 
-#: www/people/createjob.php:59
-msgid "Continue >>"
+#: www/people/createjob.php:53
+msgid "Continue"
 msgstr ""
 
 #: www/people/editjob.php:61
@@ -20020,10 +19946,12 @@ msgstr ""
 msgid "Date Opened"
 msgstr ""
 
-#: www/people/people_utils.php:445
+#: www/people/people_utils.php:445 www/softwaremap/trove_list.php:196
 #, php-format
 msgid "%s project"
-msgstr ""
+msgid_plural "%s projects"
+msgstr[0] ""
+msgstr[1] ""
 
 #: www/people/people_utils.php:455
 msgid "None Found"
@@ -22729,13 +22657,6 @@ msgstr ""
 msgid "Remove This Filter"
 msgstr ""
 
-#: www/softwaremap/trove_list.php:196 www/trove/index.php:152
-#, php-format
-msgid "%s projects"
-msgid_plural "%s project"
-msgstr[0] ""
-msgstr[1] ""
-
 #: www/softwaremap/trove_list.php:214 www/trove/index.php:95
 msgid "Browse By"
 msgstr ""
@@ -23481,6 +23402,11 @@ msgstr ""
 
 #: www/trove/index.php:76
 msgid "Remove Filter"
+msgstr ""
+
+#: www/trove/index.php:152
+#, php-format
+msgid "%s projects"
 msgstr ""
 
 #: www/trove/index.php:178
