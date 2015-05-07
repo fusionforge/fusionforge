@@ -1,6 +1,6 @@
 # FusionForge build system
 #
-# Copyright (C) 2014  Inria (Sylvain Beucler)
+# Copyright (C) 2014, 2015  Inria (Sylvain Beucler)
 #
 # This file is part of FusionForge. FusionForge is free software;
 # you can redistribute it and/or modify it under the terms of the
@@ -79,6 +79,10 @@ install-common: install-config install-plugin-authbuiltin
 		> $(DESTDIR)$(sysconfdir)/init.d/fusionforge-systasksd
 	chmod 755 $(DESTDIR)$(sysconfdir)/init.d/fusionforge-systasksd
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(log_path)/
+	if [ ! -e $(DESTDIR)$(sysconfdir)/logrotate.d/fusionforge-common ]; then \
+		sed 's,@log_path@,$(log_path),' etc/logrotate.d/fusionforge-common \
+			> $(DESTDIR)$(sysconfdir)/logrotate.d/fusionforge-common; \
+	fi
 
 install-db-local: install-db
 install-db: install-base-dirs
