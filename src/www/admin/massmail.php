@@ -92,7 +92,7 @@ if (getStringFromRequest('action')) {
 				form_release_key(getStringFromRequest('form_key'));
 				$error_msg = _('Scheduling Mailing, Could not delete mailing, database error: ').db_error();
 			} else {
-				$feedback = _('Mailing successfully deleted for delivery');
+				$feedback = _('Mailing successfully deleted');
 			}
 			break;
 		}

@@ -96,7 +96,7 @@ if (count($rs) < 1) {
 		echo html_ao('p');
 		echo html_ao('span', array('id' => 'massactionactive', 'class' => 'hide'));
 		echo html_e('span', array('id' => 'frs-massactionmessage', 'title' => _('Actions availables for selected releases, you need to check at least one release to get actions')), _('Mass actions for selected releases')._(':'), false);
-		echo util_make_link('#', $HTML->getDeletePic(_('Delete selected release(s)'), _('Delete releases')), array('onclick' => 'javascript:controllerFRS.toggleConfirmBox({idconfirmbox: \'confirmbox1\', do: \''._('Delete the selected release(s)').'\', cancel: \''._('Cancel').'\', height: 150, width: 300, action: \''.$deleteUrlAction.'&release_id=\'+controllerFRS.buildUrlByCheckbox("active")})', 'title' => _('Delete selected release(s)')), true);
+		echo util_make_link('#', $HTML->getDeletePic(_('Delete selected release(s)'), _('Delete releases')), array('onclick' => 'javascript:controllerFRS.toggleConfirmBox({idconfirmbox: \'confirmbox1\', do: \''._('Delete selected release(s)').'\', cancel: \''._('Cancel').'\', height: 150, width: 300, action: \''.$deleteUrlAction.'&release_id=\'+controllerFRS.buildUrlByCheckbox("active")})', 'title' => _('Delete selected release(s)')), true);
 		echo html_ac(html_ap() - 2);
 	}
 	echo $HTML->jQueryUIconfirmBox('confirmbox1', _('Delete release'), _('You are about to delete permanently this release. Are you sure? This action is definitive.'));
