@@ -9,19 +9,28 @@
 # Sylvain Beucler <beuc@beuc.net>, 2014, 2015.
 # Stéphane Aulery <lkppo@free.fr>, 2015.
 #
+#
+# ### Glossaire ################################################
+#
 # Artifact : Élément
+# Box : souvent synonyme de "Server"
+# Delivery : ???
+# Drop resolution : ???
 # Job : Poste
+# quick-release a file : ???
 # Tracker : Outil de suivi
 # Trove Software Map : Arbre / Arborescence / Carte des projets
-#   Trove : même idée à adapter selon le contexte
+# Trove : même idée à adapter selon le contexte
 # Upload : Envoi / Envoyer / Transfert / Transmettre
-# Box : souvent synonyme de "Server"
+# User story : ???
+# Vote : vote (et non voix)
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: fusionforge 6.0rc1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-04-24 15:40+0200\n"
-"PO-Revision-Date: 2015-04-29 19:59+0200\n"
+"PO-Revision-Date: 2015-05-02 02:45+0200\n"
 "Last-Translator: Sylvain Beucler <beuc@beuc.net>\n"
 "Language-Team: French <traduc@traduc.org>\n"
 "Language: fr\n"
@@ -756,7 +765,7 @@ msgstr "Mis à jour par"
 
 #: common/docman/DocumentGroup.class.php:797
 msgid "Unable to move this folder to trash. Folder locked."
-msgstr ""
+msgstr "Impossible de jeter ce répertoire à la corbeille. Répertoire verrouillé."
 
 #: common/docman/DocumentGroup.class.php:821
 msgid "Unable to extract ZIP file."
@@ -906,11 +915,11 @@ msgid "No action to perform"
 msgstr "Aucune action à effectuer"
 
 #: common/docman/actions/delfile.php:50
-#, fuzzy, php-format
+#, php-format
 msgid "%s document deleted successfully."
 msgid_plural "%s documents deleted successfully."
-msgstr[0] "Document supprimé avec succès."
-msgstr[1] "Document supprimé avec succès."
+msgstr[0] "%s document supprimé avec succès."
+msgstr[1] "%s documents supprimés avec succès."
 
 #: common/docman/actions/editdocgroup.php:69
 #, php-format
@@ -963,22 +972,20 @@ msgid "Archive injected successfully."
 msgstr "Archive correctement insérée."
 
 #: common/docman/actions/lock.php:57
-#, fuzzy
 msgid "Lock failed"
-msgstr "Tâche échouée"
+msgstr "Verrouillage échoué"
 
 #: common/docman/actions/lock.php:57
-#, fuzzy
 msgid "Missing Type"
-msgstr "Il manque des paramètres"
+msgstr "Type manquant"
 
 #: common/docman/actions/lock.php:78
 msgid "Action currently locked by another user."
-msgstr ""
+msgstr "L'action est verrouillée par un autre utilisateur."
 
 #: common/docman/actions/monitordirectory.php:39
 msgid "Docman Error: unable to get folder object"
-msgstr ""
+msgstr "Erreur docman : impossible de récupérer l'objet répertoire"
 
 #: common/docman/actions/monitordirectory.php:54
 #: common/tracker/Artifact.class.php:620
@@ -1000,30 +1007,29 @@ msgid "Docman: monitoring action unknown."
 msgstr "Docman : action de surveillance inconnue."
 
 #: common/docman/actions/monitorfile.php:65
-#, fuzzy, php-format
+#, php-format
 msgid "Monitoring %s document started."
 msgid_plural "Monitoring %s documents started."
-msgstr[0] "Surveillance démarrée"
-msgstr[1] "Surveillance démarrée"
+msgstr[0] "Surveillance de %s document démarrée."
+msgstr[1] "Surveillance de %s documents démarrée."
 
 #: common/docman/actions/monitorfile.php:82
-#, fuzzy, php-format
+#, php-format
 msgid "Monitoring %s document stopped."
 msgid_plural "Monitoring %s documents stopped."
-msgstr[0] "Surveillance arrêtée"
-msgstr[1] "Surveillance arrêtée"
+msgstr[0] "Surveillance de %s document arrêtée."
+msgstr[1] "Surveillance de %s documents arrêtée."
 
 #: common/docman/actions/monitorfile.php:86
-#, fuzzy
 msgid "monitoring action unknown."
-msgstr "Docman : action de surveillance inconnue."
+msgstr "action de surveillance inconnue."
 
 #: common/docman/actions/movefile.php:62
-#, fuzzy, php-format
+#, php-format
 msgid "%s document moved."
 msgid_plural "%s documents moved."
-msgstr[0] "Aucun document."
-msgstr[1] "Aucun document."
+msgstr[0] "%s document déplacés."
+msgstr[1] "%s documents déplacés."
 
 #: common/docman/actions/releasefile.php:46
 msgid "released successfully."
@@ -1039,11 +1045,11 @@ msgid "Documents folder %s moved to trash successfully."
 msgstr "Le dossier de documents %s a été mis à corbeille avec succès."
 
 #: common/docman/actions/trashfile.php:67
-#, fuzzy, php-format
+#, php-format
 msgid "%s document moved to trash successfully."
 msgid_plural "%s documents moved to trash successfully."
-msgstr[0] "a été mis à corbeille avec succès."
-msgstr[1] "a été mis à corbeille avec succès."
+msgstr[0] "%s document mis à corbeille avec succès."
+msgstr[1] "%s documents mis à corbeille avec succès."
 
 #: common/docman/actions/updatecreateonline.php:40
 msgid "Create Online Documents Status updated successfully: Active."
@@ -1070,21 +1076,20 @@ msgid "Webdav Interface updated successfully: Off."
 msgstr "Désactivation réussie de l'interface Webdav."
 
 #: common/docman/actions/validatefile.php:58
-#, fuzzy, php-format
+#, php-format
 msgid "%s document validated successfully."
 msgid_plural "%s documents validated successfully."
-msgstr[0] "Le document %s a été mis à jour avec succès."
-msgstr[1] "Le document %s a été mis à jour avec succès."
+msgstr[0] "%s document mis à jour avec succès."
+msgstr[1] "%s documents mis à jour avec succès."
 
 #: common/docman/include/webdav.php:233 common/docman/include/webdav.php:235
 msgid "Index of"
-msgstr ""
+msgstr "Index de"
 
 #: common/docman/include/webdav.php:249 common/docman/include/webdav.php:260
 #: common/docman/include/webdav.php:544 common/docman/include/webdav.php:589
-#, fuzzy
 msgid "webdav db error"
-msgstr "Erreur WebDAV :"
+msgstr "Erreur de base de données WebDAV"
 
 #: common/docman/include/webdav.php:338
 msgid "Injected by WebDAV"
@@ -1225,9 +1230,9 @@ msgid "Enter a valid URL"
 msgstr "Entrez une URL valide"
 
 #: common/docman/views/addfile.php:142
-#, fuzzy, php-format
+#, php-format
 msgid "Pick a file already uploaded (by SFTP or SCP) to the <a href=\"%1$s\">project's incoming directory</a> (%2$s)."
-msgstr "Choisissez un fichier que vous avez préalablement importé (en SFTP ou SCP) dans <a href=\"%2$s\">le répertoire d’entrée du projet</a> (%1$s)."
+msgstr "Choisissez un fichier que vous avez préalablement importé (par SFTP ou SCP) dans le <a href=\"%1$s\">répertoire d’entrée du projet</a> (%2$s)."
 
 #: common/docman/views/addfile.php:145
 #, php-format
@@ -1705,9 +1710,8 @@ msgid "OPTIONAL Upload new file"
 msgstr "Optionnel : importer un nouveau fichier"
 
 #: common/docman/views/help.php:38
-#, fuzzy
 msgid "Documents parsing is also available thru webdav. Only for registred users."
-msgstr "La navigation des documents est également possible par WebDAV."
+msgstr "Le parcours des documents est également possible par WebDAV. Pour les utilisateurs enregistrés seulement."
 
 #: common/docman/views/help.php:39
 msgid "Direct Webdav URL"
@@ -2019,11 +2023,11 @@ msgstr "Surveiller ce document"
 #: common/docman/views/listtrashfile.php:198
 #: common/docman/views/pendingfiles.php:117
 msgid "Actions availables for selected documents, you need to check at least one document to get actions"
-msgstr "Actions disponibles pour les documents sélectionnés ; au moins un document doit être sélectionné pour que ces actions aient lieu."
+msgstr "Actions disponibles pour les documents sélectionnés ; au moins un document doit être sélectionné pour que ces actions aient lieu"
 
 #: common/docman/views/listfile.php:352
 msgid "Mass actions for selected documents"
-msgstr "Actions en attente sur les documents sélectionnés"
+msgstr "Actions collectives pour les documents sélectionnés"
 
 #: common/docman/views/listfile.php:354
 msgid "Move to trash"
@@ -2047,7 +2051,7 @@ msgstr "Arrêter la surveillance"
 
 #: common/docman/views/listfile.php:360
 msgid "Move files to another folder"
-msgstr ""
+msgstr "Déplacer les fichier vers un autre répertoire"
 
 #: common/docman/views/listfile.php:363
 #: common/docman/views/listtrashfile.php:200
@@ -2075,7 +2079,7 @@ msgstr "Supprimer définitivement ce document."
 
 #: common/docman/views/listtrashfile.php:198
 msgid "Mass actions for selected documents:"
-msgstr "Actions en attente sur les documents sélectionnés :"
+msgstr "Actions collectives pour les documents sélectionnés :"
 
 #: common/docman/views/listtrashfile.php:199
 #: plugins/mailman/www/admin/deletelist.php:67 www/admin/groupdelete.php:69
@@ -2166,9 +2170,8 @@ msgid "Docman module administration."
 msgstr "Administration du gestionnaire de documents."
 
 #: common/docman/views/movefile.php:49
-#, fuzzy
 msgid "Move files to"
-msgstr "Milestone"
+msgstr "Déplacer les fichiers vers"
 
 #: common/docman/views/movefile.php:51
 #: plugins/oauthconsumer/www/callback.php:25
@@ -2192,9 +2195,8 @@ msgid "Activate in this folder"
 msgstr "Activer dans ce dossier"
 
 #: common/docman/views/pendingfiles.php:117
-#, fuzzy
 msgid "Mass actions for selected pending documents:"
-msgstr "Actions en attente sur les documents sélectionnés :"
+msgstr "Actions collectives en attente pour les documents sélectionnés :"
 
 #: common/docman/views/reporting.php:88 common/frs/views/reporting.php:87
 #: common/tracker/include/ArtifactTypeHtml.class.php:333
@@ -2308,9 +2310,8 @@ msgid "Date"
 msgstr "Date"
 
 #: common/docman/views/reporting.php:176
-#, fuzzy
 msgid "Anonymous user"
-msgstr "Anonymement"
+msgstr "Utilisateur anonyme"
 
 #: common/docman/views/search.php:46
 msgid "All searched words are mandatory"
@@ -3057,9 +3058,8 @@ msgid "Invalid group_form_id"
 msgstr "group_form_id invalide"
 
 #: common/forum/ForumMessageFactory.class.php:225
-#, fuzzy
 msgid "Error when fetching messages "
-msgstr "Erreur lors de la suppression du message : "
+msgstr "Erreur lors du parcours des messages "
 
 #: common/frs/FRSFile.class.php:81 common/frs/FRSFile.class.php:406
 msgid "Invalid FRS Release Object"
@@ -3079,9 +3079,8 @@ msgid "FRSFile appears to be invalid."
 msgstr "Le FRSFile semble invalide."
 
 #: common/frs/FRSFile.class.php:150
-#, fuzzy
 msgid "That filename already exists in this release"
-msgstr "Un fichier portant ce nom existe déjà dans ce projet"
+msgstr "Un fichier portant ce nom existe déjà dans cette version"
 
 #: common/frs/FRSFile.class.php:186 common/frs/FRSFile.class.php:448
 msgid "File cannot be moved to the permanent location"
@@ -3123,9 +3122,8 @@ msgstr "Erreur lors de l'ajout du paquet"
 
 #: common/frs/FRSPackage.class.php:176 common/frs/FRSPackage.class.php:427
 #: common/frs/FRSRelease.class.php:435
-#, fuzzy
 msgid "Name Already Exists"
-msgstr "Une liste portant ce nom existe déjà."
+msgstr "Ce nom existe déjà"
 
 #: common/frs/FRSPackage.class.php:229
 msgid "Invalid package_id"
@@ -3145,19 +3143,16 @@ msgid "Error Updating Package"
 msgstr "Impossible de mettre à jour le paquet"
 
 #: common/frs/FRSPackage.class.php:445 common/frs/FRSRelease.class.php:461
-#, fuzzy
 msgid "Couldn't fetch data"
-msgstr "Impossible d'accéder aux données de la session"
+msgstr "Impossible d'accéder aux données"
 
 #: common/frs/FRSPackage.class.php:455 common/frs/FRSRelease.class.php:471
-#, fuzzy
 msgid "Directory Already Exists"
-msgstr "Une liste portant ce nom existe déjà."
+msgstr "Ce répertoire existe déjà"
 
 #: common/frs/FRSPackage.class.php:460 common/frs/FRSRelease.class.php:476
-#, fuzzy
 msgid "Couldn't rename dir"
-msgstr "Impossible de mettre à jour le paquet : impossible de renommer le répertoire"
+msgstr "Impossible de renommer le répertoire"
 
 #: common/frs/FRSPackage.class.php:519
 msgid "Release Error"
@@ -3178,20 +3173,17 @@ msgstr "Erreur lors de l'ouverture de l'archive"
 
 #: common/frs/FRSPackage.class.php:595 db/20141105-frs-ziplatest.php:58
 #: db/20141106-frs-zip-per-release.php:55
-#, fuzzy
 msgid "Cannot add file to the file archive"
-msgstr "Erreur lors de l'ouverture de l'archive."
+msgstr "Impossible d'ajouter un ficher à l'archive"
 
 #: common/frs/FRSPackage.class.php:600 db/20141105-frs-ziplatest.php:64
 #: db/20141106-frs-zip-per-release.php:61
-#, fuzzy
 msgid "Cannot close the file archive"
-msgstr "Erreur lors de l'ouverture de l'archive."
+msgstr "Impossible de fermer l'archive"
 
 #: common/frs/FRSPackage.class.php:627
-#, fuzzy
 msgid "New Package"
-msgstr "Nouveau nom de paquet"
+msgstr "Nouveau paquet"
 
 #: common/frs/FRSPackage.class.php:629
 msgid "Updated Package"
@@ -3223,9 +3215,8 @@ msgid "Invalid FRS Package Object"
 msgstr "Objet Paquet FRS invalide"
 
 #: common/frs/FRSRelease.class.php:123 common/frs/FRSRelease.class.php:415
-#, fuzzy
 msgid "FRSRelease Name Must Be At Least 3 Characters"
-msgstr "Le nom du paquet doit compter au moins 3 caractères"
+msgstr "Le nom de la version FRS doit compter au moins 3 caractères"
 
 #: common/frs/FRSRelease.class.php:145
 msgid "Error Adding Release: Name Already Exists"
@@ -3270,9 +3261,8 @@ msgid "You receive this email because you requested to be notified when new vers
 msgstr "Vous avez reçu ce message suite à votre demande d'être notifié lorsque de nouvelles versions de ce paquet sont publiées. Si vous souhaitez interrompre ces notifications, connectez-vous à %s et suivez ce lien :"
 
 #: common/frs/FRSRelease.class.php:378
-#, fuzzy
 msgid "File Error"
-msgstr "Erreur lors de la publication du fichier"
+msgstr "Erreur de fichier"
 
 #: common/frs/FRSRelease.class.php:390
 msgid "Release delete error"
@@ -3284,18 +3274,16 @@ msgstr "tentative de suppression du répertoire racine"
 
 #: common/frs/FRSRelease.class.php:461 common/frs/FRSRelease.class.php:471
 #: common/frs/FRSRelease.class.php:476
-#, fuzzy
 msgid "Error Updating Release"
-msgstr "Erreur lors de l'ajout d'une version : "
+msgstr "Erreur lors de la mise à jour d'une version"
 
 #: common/frs/actions/addfile.php:37 common/frs/actions/addpackage.php:35
 #: common/frs/actions/addrelease.php:40 common/frs/actions/deletefile.php:34
 #: common/frs/actions/deleterelease.php:54 common/frs/actions/editfile.php:34
 #: common/frs/actions/editrelease.php:37 common/frs/actions/monitor.php:37
 #: common/frs/actions/updatepackage.php:39
-#, fuzzy
 msgid "FRS Action Denied."
-msgstr "Permission refusée"
+msgstr "Action FRS refusée."
 
 #: common/frs/actions/addfile.php:56 common/frs/actions/addpackage.php:45
 #: common/frs/actions/addrelease.php:46 common/frs/actions/editrelease.php:57
@@ -3317,16 +3305,14 @@ msgid "Added Package"
 msgstr "Paquet ajouté"
 
 #: common/frs/actions/addpackage.php:55
-#, fuzzy
 msgid "Missing package_name"
-msgstr "Nom du catégorie manquant"
+msgstr "Nom de paquet manquant"
 
 #: common/frs/actions/addrelease.php:35
 #: common/frs/actions/deletepackage.php:35
 #: common/frs/actions/deleterelease.php:34 common/frs/actions/monitor.php:120
-#, fuzzy
 msgid "Missing package_id"
-msgstr "Il manque des paramètres"
+msgstr "Identifiant de paquet manquant"
 
 #: common/frs/actions/addrelease.php:75 common/frs/actions/addrelease.php:96
 #: common/frs/actions/editrelease.php:75 common/frs/actions/editrelease.php:96
@@ -3352,19 +3338,16 @@ msgid "Change Log Is Too Small"
 msgstr "Journal trop petit."
 
 #: common/frs/actions/addrelease.php:116
-#, fuzzy
 msgid "Release successfully created"
-msgstr "Élément %s créé avec succès"
+msgstr "Version créée avec succès"
 
 #: common/frs/actions/addrelease.php:120
-#, fuzzy
 msgid " and file successfully added to the release."
-msgstr "Forge partenaire ajoutée avec succès."
+msgstr " et le fichier a été ajouté avec succès à la version."
 
 #: common/frs/actions/addrelease.php:131
-#, fuzzy
 msgid "Missing release_name or too short release_name, at least 3 characters."
-msgstr "Le nom est trop court. Il doit compter au moins 3 caractères."
+msgstr "Nom de version maquant ou trop court, il doit compter au moins 3 caractères."
 
 #: common/frs/actions/deletefile.php:41
 #: common/frs/actions/deletepackage.php:43 common/frs/actions/monitor.php:52
@@ -3373,34 +3356,28 @@ msgid "Error Getting FRSPackage"
 msgstr "Erreur lors de l'accès à un paquet."
 
 #: common/frs/actions/deletefile.php:47
-#, fuzzy
 msgid "File successfully deleted."
-msgstr "%s supprimé(e) avec succès."
+msgstr "Fichier supprimé avec succès."
 
 #: common/frs/actions/deletefile.php:52
-#, fuzzy
 msgid "Missing file_id"
-msgstr "Le nom de la compétence est manquant."
+msgstr "Identifiant de fichier manquant"
 
 #: common/frs/actions/deletepackage.php:52
-#, fuzzy
 msgid "Package successfully deleted."
-msgstr "%s supprimé(e) avec succès."
+msgstr "Paquet supprimé avec succès."
 
 #: common/frs/actions/deletepackage.php:57
-#, fuzzy
 msgid "FRS Action Denied"
-msgstr "Permission refusée"
+msgstr "Action FRS refusée"
 
 #: common/frs/actions/deleterelease.php:40
-#, fuzzy
 msgid "Missing release_id"
-msgstr "Il manque des paramètres"
+msgstr "Identifiant de version manquant"
 
 #: common/frs/actions/deleterelease.php:50
-#, fuzzy
 msgid "Release successfully deleted."
-msgstr "%s supprimé(e) avec succès."
+msgstr "Version supprimée avec succès."
 
 #: common/frs/actions/editfile.php:49 common/frs/include/frs_utils.php:188
 msgid "Could Not Get FRSFile"
@@ -3411,14 +3388,12 @@ msgid "File Updated"
 msgstr "Fichier mis à jour"
 
 #: common/frs/actions/editrelease.php:120
-#, fuzzy
 msgid "Release edited successfully"
-msgstr "publié avec succès."
+msgstr "Version modifiée avec succès."
 
 #: common/frs/actions/monitor.php:76
-#, fuzzy
 msgid "Monitoring started successfuly"
-msgstr "Poste correctement inséré"
+msgstr "Surveillance démarrée avec succès"
 
 #: common/frs/actions/monitor.php:79 common/frs/views/listpackages.php:76
 #: common/widget/Widget_MyMonitoredFp.class.php:100
@@ -3427,25 +3402,21 @@ msgid "Stop monitoring this package"
 msgstr "Ne plus surveiller ce paquet"
 
 #: common/frs/actions/monitor.php:99
-#, fuzzy
 msgid "Monitoring stopped successfuly"
-msgstr "Surveillance arrêtée"
+msgstr "Surveillance arrêtée avec succès"
 
 #: common/frs/actions/monitor.php:102 common/frs/views/listpackages.php:80
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:100
-#, fuzzy
 msgid "Start monitoring this package"
-msgstr "Ne plus surveiller ce paquet"
+msgstr "Démarrer lu surveillance de ce paquet"
 
 #: common/frs/actions/updatepackage.php:47
-#, fuzzy
 msgid "Missing package_id or package_name"
-msgstr "Nom du catégorie manquant"
+msgstr "Identifiant et nom de paquet manquants"
 
 #: common/frs/actions/updatepackage.php:65
-#, fuzzy
 msgid "Package successfully updated"
-msgstr "Élément %s correctement mis à jour"
+msgstr "Paquet correctement mis à jour"
 
 #: common/frs/include/frs_utils.php:85 common/frs/include/frs_utils.php:108
 msgid "Error: group id required"
@@ -3473,9 +3444,8 @@ msgid "Must select a file."
 msgstr "Vous devez sélectionner un fichier."
 
 #: common/frs/views/admin.php:37 common/frs/views/menu.php:30
-#, fuzzy
 msgid "FRS Access Denied"
-msgstr "Jetons d'accès"
+msgstr "Accès FRS refusé"
 
 #: common/frs/views/admin.php:44
 msgid "QRS"
@@ -3486,13 +3456,12 @@ msgid "Click here to "
 msgstr "Cliquez ici pour "
 
 #: common/frs/views/admin.php:46
-#, fuzzy
 msgid "quick-release a file"
-msgstr "Cliquer ici pour faire une %1$s Nouvelle Version Rapide %2$s de vos paquets"
+msgstr ""
 
 #: common/frs/views/admin.php:62
 msgid "Help about Packages and Releases"
-msgstr ""
+msgstr "Aide sur les paquets et versions"
 
 #: common/frs/views/admin.php:64
 msgid "Packages"
@@ -3539,9 +3508,8 @@ msgid "There are no packages defined."
 msgstr "Aucun paquet de fichiers n'a été défini."
 
 #: common/frs/views/admin.php:87
-#, fuzzy
 msgid "Select / Deselect all packages for massaction"
-msgstr "Sélectionner ou désélectionner tous les documents pour une action collective"
+msgstr "Sélectionner ou désélectionner tous les paquets pour une action collective"
 
 #: common/frs/views/admin.php:90
 #: common/tracker/views/form-adminroadmap.php:400
@@ -3564,12 +3532,11 @@ msgstr "Visible par le public"
 
 #: common/frs/views/admin.php:97
 msgid "To change public visibility of a specific package, you have to use the role permission."
-msgstr ""
+msgstr "Pour modifier la publicité d'un paquet en particulier, vous devez utiliser la permission du rôle."
 
 #: common/frs/views/admin.php:106
-#, fuzzy
 msgid "Select / Deselect this package for massaction"
-msgstr "Sélectionner ou désélectionner ce document pour une action collective"
+msgstr "Sélectionner ou désélectionner ce paquet pour une action collective"
 
 #: common/frs/views/admin.php:112 common/frs/views/showreleases.php:105
 msgid "Add Release"
@@ -3597,33 +3564,28 @@ msgid "Delete the package"
 msgstr "Supprimer le paquet"
 
 #: common/frs/views/admin.php:141
-#, fuzzy
 msgid "Actions availables for selected packages, you need to check at least one package to get actions"
-msgstr "Actions disponibles pour les documents sélectionnés ; au moins un document doit être sélectionné pour que ces actions aient lieu."
+msgstr "Actions disponibles pour les paquets sélectionnés ; au moins un paquet doit être sélectionné pour que ces actions aient lieu"
 
 #: common/frs/views/admin.php:141
-#, fuzzy
 msgid "Mass actions for selected packages"
-msgstr "Actions en attente sur les documents sélectionnés :"
+msgstr "Actions collectives pour les paquets sélectionnés"
 
 #: common/frs/views/admin.php:142
-#, fuzzy
 msgid "Delete selected package(s)"
-msgstr "Vous devez sélectionner un paquet."
+msgstr "Supprimer un ou des paquets sélectionnés"
 
 #: common/frs/views/admin.php:142
-#, fuzzy
 msgid "Delete packages"
-msgstr "Supprimer le paquet"
+msgstr "Supprimer les paquets"
 
 #: common/frs/views/admin.php:142
-#, fuzzy
 msgid "Delete the selected package(s)"
-msgstr "Créer une nouvelle version de paquets"
+msgstr "Supprimer le ou les paquets sélectionnés"
 
 #: common/frs/views/admin.php:145
 msgid "You are about to delete permanently this package. Are you sure? This action is definitive."
-msgstr ""
+msgstr "Vous êtes sur le point de supprimer irrémédiablement ce paquet. Êtes-vous certain ?"
 
 #: common/frs/views/admin.php:152
 msgid "Create New Package"
@@ -3635,12 +3597,11 @@ msgstr "Nouveau nom de paquet"
 
 #: common/frs/views/docmanfile.php:29
 msgid "Alternatively, you can pick a file available in the Documents Management tool."
-msgstr ""
+msgstr "Vous pouvez aussi sélectionner un fichier disponible dans le gestionnaire de documents."
 
 #: common/frs/views/editrelease.php:73
-#, fuzzy
 msgid "Edit Release for the package"
-msgstr "Versions de paquets"
+msgstr "Modifier la version de ce paquet"
 
 #: common/frs/views/editrelease.php:81 common/frs/views/editrelease.php:169
 #: common/frs/views/qrs.php:57
@@ -3725,65 +3686,56 @@ msgid "Once you have added files to this release you <strong>must</strong> updat
 msgstr "Une fois que vous avez ajouté les fichiers à cette version, vous <strong>devez</strong> mettre à jour chacun de ces fichiers avec les informations correctes ou ils n'apparaîtront pas dans la page de sommaire de téléchargement."
 
 #: common/frs/views/editrelease.php:164
-#, fuzzy
 msgid "Select / Deselect all files for massaction"
-msgstr "Sélectionner ou désélectionner tous les documents pour une action collective"
+msgstr "Sélectionner ou désélectionner tous les fichiers pour une action collective"
 
 #: common/frs/views/editrelease.php:166
 msgid "Processor"
 msgstr "Microprocesseur"
 
 #: common/frs/views/editrelease.php:178
-#, fuzzy
 msgid "Select / Deselect this file for massaction"
-msgstr "Sélectionner ou désélectionner ce document pour une action collective"
+msgstr "Sélectionner ou désélectionner ce fichier pour une action collective"
 
 #: common/frs/views/editrelease.php:185
 msgid "Update/Refresh"
 msgstr "Mettre à jour/Rafraîchir"
 
 #: common/frs/views/editrelease.php:185
-#, fuzzy
 msgid "Delete this file"
-msgstr "Supprimer ce lien"
+msgstr "Supprimer ce fichier"
 
 #: common/frs/views/editrelease.php:185 common/frs/views/editrelease.php:200
-#, fuzzy
 msgid "Delete file"
-msgstr "Erreur lors de la suppression"
+msgstr "Supprimer un fichier"
 
 #: common/frs/views/editrelease.php:185
-#, fuzzy
 msgid "Delete the file"
-msgstr "Erreur lors de la suppression"
+msgstr "Supprimer le fichier"
 
 #: common/frs/views/editrelease.php:195
-#, fuzzy
 msgid "Actions availables for selected files, you need to check at least one file to get actions"
-msgstr "Actions disponibles pour les fichiers sélectionnés ; au moins un fichier doit être sélectionné pour que ces actions aient lieu."
+msgstr "Actions disponibles pour les fichiers sélectionnés ; au moins un fichier doit être sélectionné pour que ces actions aient lieu"
 
 #: common/frs/views/editrelease.php:195
 msgid "Mass actions for selected files"
-msgstr "Actions en attente sur les fichiers sélectionnés"
+msgstr "Actions collectives pour les fichiers sélectionnés"
 
 #: common/frs/views/editrelease.php:196
-#, fuzzy
 msgid "Delete selected file(s)"
-msgstr "Vous devez sélectionner un seul fichier"
+msgstr "Supprimer un ou des fichiers sélectionnés"
 
 #: common/frs/views/editrelease.php:196
-#, fuzzy
 msgid "Delete files"
-msgstr "Erreur lors de la suppression"
+msgstr "Supprimer des fichiers"
 
 #: common/frs/views/editrelease.php:196
 msgid "Delete the selected file(s)"
-msgstr ""
+msgstr "Supprimer le ou les fichiers sélectionnés"
 
 #: common/frs/views/editrelease.php:200
-#, fuzzy
 msgid "You are about to delete permanently this file. Are you sure? This action is definitive."
-msgstr "Vous êtes sur le point de supprimer irrémédiablement cette version et tous ses fichiers !"
+msgstr "Vous êtes sur le point de supprimer irrémédiablement ce fichier. Êtes-vous certain ?"
 
 #: common/frs/views/editrelease.php:201
 #, php-format
@@ -3813,9 +3765,8 @@ msgid "To create a new release click here."
 msgstr "Pour créer une nouvelle version, cliquez ici."
 
 #: common/frs/views/listpackages.php:84
-#, fuzzy
 msgid "Unable to set monitoring"
-msgstr "Impossible de supprimer la surveillance"
+msgstr "Impossible de configurer la surveillance"
 
 #: common/frs/views/listpackages.php:100
 msgid "Download the newest release as ZIP."
@@ -3830,14 +3781,12 @@ msgid "No releases"
 msgstr "Pas de version"
 
 #: common/frs/views/listpackages.php:113
-#, fuzzy
 msgid "Download this release as ZIP."
-msgstr "Télécharger la dernière version sous forme d'archive ZIP :"
+msgstr "Télécharger cette version au format ZIP."
 
 #: common/frs/views/listpackages.php:113
-#, fuzzy
 msgid "This link always points to this release as a ZIP file."
-msgstr "Ce lien pointe toujours sur la dernière version, sous forme d'une archive au format ZIP."
+msgstr "Ce lien pointe toujours sur la dernière version au format ZIP."
 
 #: common/frs/views/listpackages.php:142
 msgid "D/L"
@@ -3874,18 +3823,16 @@ msgid "Latest"
 msgstr "Dernière"
 
 #: common/frs/views/listpackages.php:150
-#, fuzzy
 msgid "No files"
-msgstr "Pas un fichier"
+msgstr "Aucun fichier"
 
 #: common/frs/views/listpackages.php:162
 msgid "Latest version"
 msgstr "Dernière version"
 
 #: common/frs/views/menu.php:36
-#, fuzzy
 msgid "Could Not Get FRSPackageFactory"
-msgstr "Erreur lors de l'accès au paquet."
+msgstr "Impossible de récupérer FRSPackageFactory"
 
 #: common/frs/views/menu.php:50 common/frs/views/menu.php:57
 msgid "View File Releases"
@@ -3893,7 +3840,7 @@ msgstr "Voir les fichiers"
 
 #: common/frs/views/qrs.php:35
 msgid "No package found. You need to create one before creating releases."
-msgstr ""
+msgstr "Aucun paquet trouvé. Vous devez en créer un avant de créer une version."
 
 #: common/frs/views/qrs.php:39
 msgid "Quick Release System"
@@ -3914,9 +3861,8 @@ msgid "You can probably not upload files larger than about %.2f MiB in size."
 msgstr "Vous ne pourrez probablement pas publier de fichiers de plus de %0.2f Mo."
 
 #: common/frs/views/qrs.php:91
-#, fuzzy
 msgid "Create release"
-msgstr "Créer un rôle"
+msgstr "Créer une version"
 
 #: common/frs/views/reporting.php:95 www/project/stats/index.php:117
 #: www/reporting/groupadded.php:53 www/reporting/groupcum.php:53
@@ -3942,74 +3888,62 @@ msgid "File Release Notes and Changelog"
 msgstr "Notes de version et journal des modifications"
 
 #: common/frs/views/showreleases.php:39
-#, fuzzy
 msgid "Choose a package to be edited."
-msgstr "Choisissez un paquet"
+msgstr "Choisissez un paquet à modifier."
 
 #: common/frs/views/showreleases.php:44
 msgid "Permission denied"
 msgstr "Permission refusée."
 
 #: common/frs/views/showreleases.php:71
-#, fuzzy
 msgid "Available Releases for the package"
-msgstr "Versions de paquets"
+msgstr "Versions disponibles de ce paquet"
 
 #: common/frs/views/showreleases.php:73
-#, fuzzy
 msgid "Select / Deselect all releases for massaction"
-msgstr "Sélectionner ou désélectionner tous les documents pour une action collective"
+msgstr "Sélectionner ou désélectionner toutes les versions pour une action collective"
 
 #: common/frs/views/showreleases.php:78
-#, fuzzy
 msgid "Select / Deselect this release for massaction"
-msgstr "Sélectionner ou désélectionner ce document pour une action collective"
+msgstr "Sélectionner ou désélectionner cette version pour une action collective"
 
 #: common/frs/views/showreleases.php:88
-#, fuzzy
 msgid "Delete this release"
-msgstr "Supprimer cette tâche"
+msgstr "Supprimer cette version"
 
 #: common/frs/views/showreleases.php:88 common/frs/views/showreleases.php:102
 #: plugins/taskboard/common/views/releases/delete_release.php:32
 #: plugins/taskboard/common/views/releases/delete_release.php:33
-#, fuzzy
 msgid "Delete release"
-msgstr "Supprimer le rôle"
+msgstr "Supprimer une version"
 
 #: common/frs/views/showreleases.php:88
-#, fuzzy
 msgid "Delete the release"
-msgstr "Supprimer le modèle"
+msgstr "Supprimer la version"
 
 #: common/frs/views/showreleases.php:98
-#, fuzzy
 msgid "Actions availables for selected releases, you need to check at least one release to get actions"
-msgstr "Actions disponibles pour les fichiers sélectionnés ; au moins un fichier doit être sélectionné pour que ces actions aient lieu."
+msgstr "Actions disponibles pour les versions sélectionnées ; au moins une version doit être sélectionnée pour que ces actions aient lieu"
 
 #: common/frs/views/showreleases.php:98
-#, fuzzy
 msgid "Mass actions for selected releases"
-msgstr "Actions en attente sur les fichiers sélectionnés :"
+msgstr "Actions collectives pour les versions sélectionnées"
 
 #: common/frs/views/showreleases.php:99
-#, fuzzy
 msgid "Delete selected release(s)"
-msgstr "Retourner à la dernière version"
+msgstr "Supprimer un ou des versions sélectionnées"
 
 #: common/frs/views/showreleases.php:99
-#, fuzzy
 msgid "Delete releases"
-msgstr "Supprimer le rôle"
+msgstr "Supprimer des versions"
 
 #: common/frs/views/showreleases.php:99
-#, fuzzy
 msgid "Delete the selected release(s)"
-msgstr "Retourner à la dernière version"
+msgstr "Supprimer la ou les versions sélectionnées"
 
 #: common/frs/views/showreleases.php:102
 msgid "You are about to delete permanently this release. Are you sure? This action is definitive."
-msgstr ""
+msgstr "Vous êtes sur le point de supprimer irrémédiablement cette version. Êtes-vous certain ?"
 
 #: common/frs/views/useftpuploads.php:29
 #, php-format
@@ -4027,7 +3961,6 @@ msgid "Alternatively, you can use a file you already uploaded (by SFTP or SCP) t
 msgstr "Vous pouvez également utiliser un fichier que vous avez préalablement copié (en SFTP ou SCP) dans <a href=\"%2$s\">le répertoire d'entrée du projet</a> (%1$s)."
 
 #: common/frs/views/usemanualuploads.php:33
-#, fuzzy
 msgid "This direct <samp>sftp://</samp> link only works with some browsers, such as Konqueror."
 msgstr "Ce lien direct <tt>sftp://</tt> ne fonctionne qu'avec certains navigateurs comme Konqueror."
 
@@ -4037,9 +3970,8 @@ msgid "Choose an already uploaded file:"
 msgstr "Choisir un fichier déjà téléchargé :"
 
 #: common/frs/views/usemanualuploads.php:39
-#, fuzzy
 msgid "No uploaded file available."
-msgstr "Fichiers téléchargés disponibles"
+msgstr "Aucun fichier envoyé disponible."
 
 #: common/import/import_users.php:402
 #, php-format
@@ -4110,9 +4042,8 @@ msgid "Group object already exists."
 msgstr "L'objet Group existe déjà."
 
 #: common/include/Group.class.php:313
-#, fuzzy
 msgid "Invalid project name"
-msgstr "Nom de fichier invalide."
+msgstr "Nom de projet invalide"
 
 #: common/include/Group.class.php:316 common/include/User.class.php:343
 #: common/include/User.class.php:403
@@ -4301,9 +4232,8 @@ msgid "That user does not exist."
 msgstr "Cet utilisateur n'existe pas."
 
 #: common/include/Group.class.php:2072
-#, fuzzy
 msgid "Added User"
-msgstr "Ajouter un utilisateur"
+msgstr "Utilisateur ajouté"
 
 #: common/include/Group.class.php:2106 common/include/Group.class.php:2225
 #, php-format
@@ -4320,9 +4250,8 @@ msgid "Error: project_assigned_to %d: %s"
 msgstr "Erreur de base de données : project_assigned_to : %d / %s"
 
 #: common/include/Group.class.php:2183
-#, fuzzy
 msgid "Removed User"
-msgstr "Supprimer ce filtre"
+msgstr "Utilisateur supprimé"
 
 #: common/include/Group.class.php:2205 www/admin/globalroledelete.php:41
 #: www/admin/globalroleedit.php:44 www/project/admin/roledelete.php:47
@@ -4340,9 +4269,8 @@ msgid "Wrong destination role"
 msgstr "Rôle de destination incorrect"
 
 #: common/include/Group.class.php:2232
-#, fuzzy
 msgid "Updated User"
-msgstr "Mettre à jour la requête"
+msgstr "Utilisateur modifié"
 
 #: common/include/Group.class.php:2328
 msgid "Group already active"
@@ -4608,43 +4536,36 @@ msgstr "Impossible de supprimer la surveillance"
 #: common/include/MonitorElement.class.php:301
 #: common/include/MonitorElement.class.php:313
 #: common/include/MonitorElement.class.php:325
-#, fuzzy
 msgid "Missing parameters values."
-msgstr "Il manque des paramètres pour supprimer la version."
+msgstr "Valeurs de paramètres manquantes."
 
 #: common/include/MonitorElement.class.php:150
-#, fuzzy
 msgid "Unable to clear monitoring for user"
-msgstr "Impossible de supprimer la surveillance"
+msgstr "Impossible de nettoyer la surveillance de l'utilisateur"
 
 #: common/include/MonitorElement.class.php:164
 #: common/include/MonitorElement.class.php:178
-#, fuzzy
 msgid "Unable to remove monitor from db"
-msgstr "Impossible de désactiver la surveillance"
+msgstr "Impossible de supprimer la surveillance de la base de données"
 
 #: common/include/MonitorElement.class.php:192
-#, fuzzy
 msgid "Unable to add monitor"
 msgstr "Impossible d’ajouter la surveillance"
 
 #: common/include/MonitorElement.class.php:208
-#, fuzzy
 msgid "Unable to get emails from db"
-msgstr "Erreur lors de la récupération de la liste %s"
+msgstr "Impossible de récupérer les emails de la base de données"
 
 #: common/include/MonitorElement.class.php:241
 #: common/include/MonitorElement.class.php:269
 #: common/include/MonitorElement.class.php:283
 #: common/include/MonitorElement.class.php:297
-#, fuzzy
 msgid "Unable to get ids from db"
-msgstr "Impossible de supprimer la tâche Hudson"
+msgstr "Impossible de récupérer les identifiants de la base de données"
 
 #: common/include/MonitorElement.class.php:255
-#, fuzzy
 msgid "Unable to get counter from db"
-msgstr "Impossible d'obtenir un nouvel identifiant de message"
+msgstr "Impossible de récupérer les compteurs de la base de données"
 
 #: common/include/Navigation.class.php:179
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:90
@@ -5020,9 +4941,9 @@ msgid "Not a File %1$s or not a directory %2$s."
 msgstr "%1$s n'est pas un fichier ou %2$s n'est pas un répertoire."
 
 #: common/include/SysTasksQ.class.php:41 common/include/SysTasksQ.class.php:58
-#, fuzzy, php-format
+#, php-format
 msgid "Error: Cannot create system action: %s"
-msgstr "Erreur lors de la création du groupe : %s"
+msgstr "Erreur : impossible de créer l'action système : %s"
 
 #: common/include/User.class.php:248
 msgid "User Not Found"
@@ -5170,9 +5091,8 @@ msgid "Error - Could Not Add User SSH Key:"
 msgstr "Erreur lors de l'ajout de la clef SSH de l'utilisateur :"
 
 #: common/include/User.class.php:1260
-#, fuzzy
 msgid "Error: Cannot delete user SSH key"
-msgstr "Erreur lors de la mise à jour des clefs SSH"
+msgstr "Erreur : impossible de supprimer la clef SSH de l'utilisateur"
 
 #: common/include/User.class.php:1406 common/include/User.class.php:1442
 #: common/include/User.class.php:1466
@@ -5380,14 +5300,12 @@ msgid "No access"
 msgstr "Aucun accès"
 
 #: common/include/rbac_texts.php:69
-#, fuzzy
 msgid "FRS access"
-msgstr "Accès en lecture"
+msgstr "Accès FRS"
 
 #: common/include/rbac_texts.php:70
-#, fuzzy
 msgid "FRS administrator"
-msgstr "Administration de la forge"
+msgstr "Administration FRS"
 
 #: common/include/rbac_texts.php:73 common/include/rbac_texts.php:105
 #: common/include/rbac_texts.php:113 common/include/rbac_texts.php:119
@@ -5461,75 +5379,67 @@ msgstr "Technicien et manager"
 
 #: common/include/rbac_texts.php:88 common/include/rbac_texts.php:134
 msgid "No access + Vote"
-msgstr "Aucun accès + vote"
+msgstr "Aucun accès + Vote"
 
 #: common/include/rbac_texts.php:89 common/include/rbac_texts.php:135
 msgid "Read only + Vote"
-msgstr "Lecture seule + vote"
+msgstr "Lecture seule + Vote"
 
 #: common/include/rbac_texts.php:90 common/include/rbac_texts.php:136
-#, fuzzy
 msgid "Technician (no read access, no submitting) + Vote"
-msgstr "Technicien (sans accès en lecture, sans soumission)"
+msgstr "Technicien (sans accès en lecture, sans soumission) + Vote"
 
 #: common/include/rbac_texts.php:91 common/include/rbac_texts.php:137
-#, fuzzy
 msgid "Technician (no submitting) + Vote"
-msgstr "Technicien (pas de soumission)"
+msgstr "Technicien (pas de soumission) + Vote"
 
 #: common/include/rbac_texts.php:92 common/include/rbac_texts.php:138
-#, fuzzy
 msgid "Manager (no read access, no submitting) + Vote"
-msgstr "Manager (sans accès en lecture, sans soumission)"
+msgstr "Manager (sans accès en lecture, sans soumission) + Vote"
 
 #: common/include/rbac_texts.php:93 common/include/rbac_texts.php:139
-#, fuzzy
 msgid "Manager (no submitting) + Vote"
-msgstr "Manager (sans soumission)"
+msgstr "Manager (sans soumission) + Vote"
 
 #: common/include/rbac_texts.php:94 common/include/rbac_texts.php:140
-#, fuzzy
 msgid "Tech & manager (no read access, no submitting) + Vote"
-msgstr "Technicien et manager (sans accès en lecture, sans soumission)"
+msgstr "Technicien et manager (sans accès en lecture, sans soumission) + Vote"
 
 #: common/include/rbac_texts.php:95 common/include/rbac_texts.php:141
-#, fuzzy
 msgid "Tech & manager (no submitting) + Vote"
-msgstr "Technicien et manager (sans soumission)"
+msgstr "Technicien et manager (sans soumission) + Vote"
 
 #: common/include/rbac_texts.php:96 common/include/rbac_texts.php:142
-#, fuzzy
 msgid "Submit only + Vote"
-msgstr "Soumission uniquement"
+msgstr "Soumission + Vote"
 
 #: common/include/rbac_texts.php:97 common/include/rbac_texts.php:143
-#, fuzzy
 msgid "Read & submit + Vote"
-msgstr "Accès en lecture et soumission"
+msgstr "Accès en lecture + Soumission + Vote"
 
 #: common/include/rbac_texts.php:98 common/include/rbac_texts.php:144
 msgid "Technician (no read access) + Vote"
-msgstr "Technicien (sans accès en lecture) + vote"
+msgstr "Technicien (sans accès en lecture) + Vote"
 
 #: common/include/rbac_texts.php:99 common/include/rbac_texts.php:145
 msgid "Technician + Vote"
-msgstr "Technicien + vote"
+msgstr "Technicien + Vote"
 
 #: common/include/rbac_texts.php:100 common/include/rbac_texts.php:146
 msgid "Manager (no read access) + Vote"
-msgstr "Manager (sans accès en lecture) + vote"
+msgstr "Manager (sans accès en lecture) + Vote"
 
 #: common/include/rbac_texts.php:101 common/include/rbac_texts.php:147
 msgid "Manager + Vote"
-msgstr "Manager + vote"
+msgstr "Manager + Vote"
 
 #: common/include/rbac_texts.php:102 common/include/rbac_texts.php:148
 msgid "Tech & manager (no read access) + Vote"
-msgstr "Technicien et manager (pas d'accès en lecture) + vote"
+msgstr "Technicien et manager (pas d'accès en lecture) + Vote"
 
 #: common/include/rbac_texts.php:103 common/include/rbac_texts.php:149
 msgid "Tech & manager + Vote"
-msgstr "Technicien et manager + vote"
+msgstr "Technicien et manager + Vote"
 
 #: common/include/rbac_texts.php:114 common/include/rbac_texts.php:160
 msgid "Moderated post"
@@ -5560,19 +5470,16 @@ msgid "Doc manager administration"
 msgstr "Administration du gestionnaire de documents"
 
 #: common/include/rbac_texts.php:175 common/include/rbac_texts.php:180
-#, fuzzy
 msgid "Files management"
 msgstr "Gestion de fichiers"
 
 #: common/include/rbac_texts.php:176 common/include/rbac_texts.php:181
-#, fuzzy
 msgid "Files & releases management"
-msgstr "Gestion de fichiers"
+msgstr "Gestion de fichiers et de versions"
 
 #: common/include/rbac_texts.php:177 common/include/rbac_texts.php:182
-#, fuzzy
 msgid "Package admin"
-msgstr "Nom du paquet"
+msgstr "Administration de paquet"
 
 #: common/include/rbac_texts.php:191
 msgid "Forge statistics"
@@ -5592,7 +5499,7 @@ msgstr "Administration des forums"
 
 #: common/include/rbac_texts.php:199
 msgid "FRS access level"
-msgstr ""
+msgstr "Niveau d'accès FRS"
 
 #: common/include/rbac_texts.php:206
 msgid "Default for new trackers"
@@ -5607,9 +5514,8 @@ msgid "Default for new forums"
 msgstr "Valeur par défaut pour les nouveaux forums"
 
 #: common/include/rbac_texts.php:209
-#, fuzzy
 msgid "Default for new packages"
-msgstr "Valeur par défaut pour les nouveaux outils de suivi"
+msgstr "Valeur par défaut pour les nouveaux paquets"
 
 #: common/include/rbac_texts.php:212
 msgid "Documentation manager"
@@ -6448,9 +6354,8 @@ msgid "Invalid ArtifactHistory ID"
 msgstr "Numéro d'ArtifactHistory invalide"
 
 #: common/tracker/ArtifactMessage.class.php:89
-#, fuzzy
 msgid "Error: Logged In User Bug - Could Not Get User Object"
-msgstr "Erreur avec utilisateur connecté - impossible d'obtenir un objet utilisateur"
+msgstr "Erreur : avec utilisateur connecté - impossible d'obtenir un objet utilisateur"
 
 #: common/tracker/ArtifactMessage.class.php:92
 msgid "Logged In: YES"
@@ -6972,7 +6877,7 @@ msgstr "Modifier"
 
 #: common/tracker/actions/browse.php:348
 msgid "Use project project queries or build and use your own queries."
-msgstr ""
+msgstr "Utiliser les requêtes de projet ou créer et utiliser vos propres requêtes."
 
 #: common/tracker/actions/browse.php:348 common/tracker/actions/browse.php:460
 msgid "Advanced queries"
@@ -6980,7 +6885,7 @@ msgstr "Requêtes avancées"
 
 #: common/tracker/actions/browse.php:349
 msgid "Filtering by assignee, state, priority."
-msgstr ""
+msgstr "Filtrage par assignation, état, priorité."
 
 #: common/tracker/actions/browse.php:349 common/tracker/actions/browse.php:461
 msgid "Simple Filtering and Sorting"
@@ -7739,15 +7644,13 @@ msgstr "Astuce : saisissez une liste d'identifiants d'artefacts séparés par d
 
 #: common/tracker/include/build_submission_form.php:45
 #: common/tracker/include/build_submission_form.php:90
-#, fuzzy
 msgid "Please"
-msgstr "Publier"
+msgstr "S'il vous plaît"
 
 #: common/tracker/include/build_submission_form.php:45
 #: common/tracker/include/build_submission_form.php:90
-#, fuzzy
 msgid "login"
-msgstr "Identification"
+msgstr "identifiant"
 
 #: common/tracker/include/build_submission_form.php:46
 #: common/tracker/include/build_submission_form.php:91
@@ -7863,27 +7766,25 @@ msgstr "Longueur maximale du champ texte/Colonne de la zone de texte"
 
 #: common/tracker/views/form-addextrafield.php:142
 #: common/tracker/views/form-updateextrafield.php:83
-#, fuzzy
 msgid "Hide the default none value"
-msgstr "Impossible de modifier la valeur par défaut : "
+msgstr "Masquer la valeur par défaut aucun"
 
 #: common/tracker/views/form-addextrafield.php:144
 #: common/tracker/views/form-updateextrafield.php:89
 msgid "Label for the none value"
-msgstr ""
+msgstr "Étiquette pour la valeur aucun"
 
 #: common/tracker/views/form-addextrafield.php:145
 msgid "none"
-msgstr ""
+msgstr "aucun"
 
 #: common/tracker/views/form-addextrafield.php:148
 msgid "Warning: this add new custom field"
 msgstr "Attention : ceci ajoute un nouveau champ supplémentaire"
 
 #: common/tracker/views/form-addextrafield.php:151
-#, fuzzy
 msgid "Add Custom Field"
-msgstr "Ajouter un nouveau champ supplémentaire"
+msgstr "Ajouter un champ supplémentaire"
 
 #: common/tracker/views/form-addextrafield.php:156
 msgid "Custom Field Rendering Template"
@@ -8071,12 +7972,11 @@ msgstr "Aucun traceur sélectionné pour cette feuille de route"
 
 #: common/tracker/views/form-adminroadmap.php:421
 msgid "You can "
-msgstr ""
+msgstr "Vous pouvez "
 
 #: common/tracker/views/form-adminroadmap.php:421
-#, fuzzy
 msgid "select tracker(s) for this roadmap"
-msgstr "Vous pouvez <a href=\"%s\">sélectionner un ou plusieurs traceurs pour cette feuille de route</a>."
+msgstr "outil(s) de suivi sélectionné(s) pour cette feuille de route"
 
 #: common/tracker/views/form-adminroadmap.php:424
 msgid "Return to list of roadmaps"
@@ -8172,9 +8072,8 @@ msgid "Element"
 msgstr "Élément"
 
 #: common/tracker/views/form-deleteextrafieldelement.php:75
-#, fuzzy
 msgid "I am really sure"
-msgstr "Je confirme vraiment"
+msgstr "Je suis certain"
 
 #: common/tracker/views/form-deletetracker.php:24
 #, php-format
@@ -8470,9 +8369,8 @@ msgid "Bookmarked items can be edited which means that both the title of the boo
 msgstr "Les favoris peuvent être modifiés (à la fois le titre et l'URL de destination)."
 
 #: common/widget/Widget_MyLatestCommits.class.php:46
-#, fuzzy
 msgid "My Latest Commits"
-msgstr "Mes derniers envois Subversion"
+msgstr "Mes derniers envois"
 
 #: common/widget/Widget_MyLatestCommits.class.php:50
 #: common/widget/Widget_ProjectLatestCommits.class.php:46
@@ -8490,19 +8388,16 @@ msgstr "le"
 
 #: common/widget/Widget_MyLatestCommits.class.php:109
 #: common/widget/Widget_ProjectLatestCommits.class.php:80
-#, fuzzy
 msgid "No commit found"
-msgstr "Aucun élément trouvé"
+msgstr "Aucun envoi trouvé"
 
 #: common/widget/Widget_MyLatestCommits.class.php:115
-#, fuzzy
 msgid "Maximum number of commits to display per project"
-msgstr "Nombre maximal de validations Subversion à afficher par projet"
+msgstr "Nombre maximal d'envois à afficher par projet"
 
 #: common/widget/Widget_MyLatestCommits.class.php:145
-#, fuzzy
 msgid "List Commits you have done, by project."
-msgstr "Liste de vos validations Subversion, par projet."
+msgstr "Liste vos envois, par projet."
 
 #: common/widget/Widget_MyMonitoredDocuments.class.php:40
 msgid "Monitored Documents"
@@ -8776,9 +8671,8 @@ msgid "Current Week"
 msgstr "Cette semaine"
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:239
-#, fuzzy
 msgid "No activity to display"
-msgstr "Pas de tickets à afficher"
+msgstr "Pas d'activité à afficher"
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:241
 #: common/widget/Widget_ProjectLatestDocuments.class.php:131
@@ -8821,9 +8715,8 @@ msgid "Activity Ranking: <strong>%d</strong>"
 msgstr "Rang d'activité : <strong>%d</strong>"
 
 #: common/widget/Widget_ProjectInfo.class.php:84
-#, fuzzy
 msgid "View project"
-msgstr "Voir les sous-projets"
+msgstr "Voir le projet"
 
 #: common/widget/Widget_ProjectInfo.class.php:84
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:395
@@ -8853,19 +8746,16 @@ msgstr "Quelques informations concernant ce projet."
 
 #: common/widget/Widget_ProjectLatestCommits.class.php:37
 #: common/widget/Widget_ProjectLatestCommits.class.php:42
-#, fuzzy
 msgid "5 Latest Commits"
-msgstr "Mes derniers envois Subversion"
+msgstr "5 derniers envois"
 
 #: common/widget/Widget_ProjectLatestCommits.class.php:82
-#, fuzzy
 msgid "Browse Source Content Management"
-msgstr "Naviguer dans le gestionnaire de documentation"
+msgstr "Naviguer dans le gestionnaire de code"
 
 #: common/widget/Widget_ProjectLatestCommits.class.php:91
-#, fuzzy
 msgid "List the 5 most recent commits by team project."
-msgstr "Liste des 5 derniers documents publiés par les membres du projet."
+msgstr "Liste des 5 derniers envois publiés par les membres du projet."
 
 #: common/widget/Widget_ProjectLatestDocuments.class.php:38
 msgid "5 Latest Published Documents"
@@ -9033,20 +8923,19 @@ msgstr "Lecteur de flux RSS"
 #: common/widget/Widget_Rss.class.php:55
 #: common/widget/Widget_Rss.class.php:156
 msgid "Could not load the SimplePie PHP library."
-msgstr ""
+msgstr "Impossible de charger la bibliothèque PHP SimplePie."
 
 #: common/widget/Widget_Rss.class.php:58
 msgid "Cannot create backend directory. Contact forge administrator."
 msgstr "Impossible de créer le stockage interne. Contactez l'administrateur de la forge"
 
 #: common/widget/Widget_Rss.class.php:84
-#, fuzzy
 msgid "No element to display"
-msgstr "Pas de tickets à afficher"
+msgstr "Pas d'élément à afficher"
 
 #: common/widget/Widget_Rss.class.php:120
 msgid "Set your RSS URL here."
-msgstr ""
+msgstr "Indiquez votre URL RSS ici."
 
 #: common/widget/Widget_Rss.class.php:147
 msgid "Cannot add empty RSS URL"
@@ -9061,9 +8950,9 @@ msgid "1 minute"
 msgstr "1 minute"
 
 #: common/widget/Widget_Rss.class.php:213
-#, fuzzy, php-format
+#, php-format
 msgid "%d minutes ago"
-msgstr "il y a %d minute"
+msgstr "Il y a %d minutes"
 
 #: common/widget/Widget_Rss.class.php:215
 msgid "About one hour"
@@ -9196,21 +9085,19 @@ msgstr "Vous pouvez revenir sur cette page plus tard, ou vous diriger vers <a hr
 
 #: cronjobs/web-vhosts/create_vhosts.php:29
 msgid "forge not using vhost"
-msgstr ""
+msgstr "la forge n'utilise par d'hôte virtuel"
 
 #: cronjobs/web-vhosts/create_vhosts.php:41
-#, fuzzy
 msgid "Unable to get list of projects with vhost: "
-msgstr "Erreur lors de la récupération de la liste %s : %s"
+msgstr "Impossible de récupérer la liste des projets avec l'hôte virtuel : "
 
 #: cronjobs/web-vhosts/create_vhosts.php:44
 msgid "httpd server not restarted"
-msgstr ""
+msgstr "serveur httpd on redémarré"
 
 #: cronjobs/web-vhosts/create_vhosts.php:67
-#, fuzzy
 msgid " vhost created."
-msgstr "Liste recréée"
+msgstr " hôte virtuel créé."
 
 #: db/20130127-extratabToHeadermenuMigration.php:81
 #: db/20130531-svntrackerToScmhookCommitTrackerMigration.php:99
@@ -9227,7 +9114,7 @@ msgstr "Le lien symbolique n'a pas été supprimé dans le répertoire de config
 
 #: db/20141105-frs-ziplatest.php:69 db/20141106-frs-zip-per-release.php:66
 msgid "Something went wrong during zip creation, check permission?"
-msgstr ""
+msgstr "Quelque chose c'est mal passé durant la création du fichier zip. Avez-vous vérifié les permissions ?"
 
 #: plugins/admssw/common/RDFedFRSFile.class.php:105
 msgid ", part of "
@@ -9249,6 +9136,8 @@ msgid ""
 "projects on /projects URLs with content-negotiation\n"
 "(application/rdf+xml)."
 msgstr ""
+"Ce greffon fournie des extensions ADMS.SW aux documents RDF DOAP\n"
+"pour les projets et URLs de projet avec une négociation de contenu (application/rdf+xml)."
 
 #: plugins/admssw/include/admsswPlugin.class.php:149
 msgid "ADMS.SW meta-data"
@@ -9295,7 +9184,6 @@ msgid "Preview of RDF meta-data about the forge, conforming to the ADMS.SW speci
 msgstr "Prévisualiser les méta-données a propos de la forge, conformément aux spécifications ADMS.SW"
 
 #: plugins/admssw/www/index.php:43
-#, fuzzy
 msgid "Public projects:"
 msgstr "Projets publics :"
 
@@ -9316,7 +9204,6 @@ msgid " (as Turtle)"
 msgstr " (comme Turtle)"
 
 #: plugins/admssw/www/index.php:53
-#, fuzzy
 msgid "Trove Categories:"
 msgstr "Catégories de l’arbre des projets :"
 
@@ -9342,9 +9229,8 @@ msgid "SKOS meta-data for trove categories"
 msgstr "Méta-données SKOS pour les catégories de projet"
 
 #: plugins/aselectextauth/common/ASelectAuthPlugin.class.php:28
-#, fuzzy
 msgid "A-select external authentication"
-msgstr "L'utilisateur a annulé l'authentification."
+msgstr "Authentification externe A-select"
 
 #: plugins/aselectextauth/common/ASelectAuthPlugin.class.php:30
 msgid ""
@@ -9352,6 +9238,9 @@ msgid ""
 "where users can be authenticated by several means with Authentication\n"
 "Service Providers."
 msgstr ""
+"Un greffon système pour l'authentification des utilisateurs dans fusionforge.\n"
+"A-Select est un framework par lequel les utilisateurs peuvent s'authentifier de\n"
+"plusieurs manières via des fournisseurs de service d'authentification."
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:67
 #: plugins/authcas/common/AuthCASPlugin.class.php:92
@@ -9433,9 +9322,8 @@ msgid "Thank you"
 msgstr "Merci"
 
 #: plugins/authcas/common/AuthCASPlugin.class.php:34
-#, fuzzy
 msgid "CAS authentication"
-msgstr "Connexion par authentification HTTP"
+msgstr "Authentification CAS"
 
 #: plugins/authcas/common/AuthCASPlugin.class.php:36
 msgid ""
@@ -9443,6 +9331,9 @@ msgid ""
 "FusionForge. It allows users to authenticate against an external CAS\n"
 "server."
 msgstr ""
+"Ce greffon contient un mécanisme d'authentification CAS pour FusionForge.\n"
+"Il permet aux utilisateurs de s'authentifier par l'intermédiaire d'un serveur\n"
+"CAS externe."
 
 #: plugins/authcas/common/AuthCASPlugin.class.php:98
 msgid "Login via CAS"
@@ -9453,9 +9344,8 @@ msgid "Your account "
 msgstr "Votre compte "
 
 #: plugins/authhttpd/common/AuthHTTPDPlugin.class.php:33
-#, fuzzy
 msgid "HTTPD authentication"
-msgstr "Connexion par authentification HTTP"
+msgstr "Authentification HTTPD"
 
 #: plugins/authhttpd/common/AuthHTTPDPlugin.class.php:35
 msgid ""
@@ -9463,15 +9353,17 @@ msgid ""
 "FusionForge. It allows Apache authentication to be reused for\n"
 "FusionForge, for instance where Kerberos is used."
 msgstr ""
+"Ce greffon contient un mécanisme d'authentification par HTTPD pour FusionForge.\n"
+"Il permet de réutiliser l'authentification Apache pour FusionForge, lorsque\n"
+"qu'une instance Kerberos est utilisée."
 
 #: plugins/authhttpd/common/AuthHTTPDPlugin.class.php:71
 msgid "Login via HTTP authentication"
 msgstr "Connexion par authentification HTTP"
 
 #: plugins/authldap/common/AuthLDAPPlugin.class.php:40
-#, fuzzy
 msgid "LDAP authentication"
-msgstr "Connexion par authentification HTTP"
+msgstr "Authentification LDAP"
 
 #: plugins/authldap/common/AuthLDAPPlugin.class.php:42
 msgid ""
@@ -9480,6 +9372,10 @@ msgid ""
 "directory, and syncs some of their personal information from LDAP\n"
 "into the FusionForge database."
 msgstr ""
+"Ce greffon contient un mécanisme d'authentification LDAP pour FusionForge.\n"
+"Il permet aux utilisateurs de s'authentifier par l'intermédiaire d'un\n"
+"répertoire LDAP externe, et de synchroniser dans la base de données de FusionForge\n"
+"certaines informations provenant de LDAP."
 
 #: plugins/authldap/www/post-login.php:91
 msgid "LDAP server unreachable"
@@ -9611,7 +9507,7 @@ msgstr "Liaison de ce WebID déjà en cours"
 
 #: plugins/authwebid/www/index.php:61
 msgid "The IdP has confirmed that you own this WebID. It is now bound to your account."
-msgstr "Le fournisseur d'identité a confirmé que vous êtes le propriétaire de ce WebID. Il est maintenant lié à votre comnpte."
+msgstr "Le fournisseur d'identité a confirmé que vous êtes le propriétaire de ce WebID. Il est maintenant lié à votre compte."
 
 #: plugins/authwebid/www/index.php:70
 msgid "The IdP has confirmed that you own a WebID. Please confirm you want to bind it to your account."
@@ -9685,6 +9581,9 @@ msgid ""
 "FusionForge project to have its own Blocks, and gives some\n"
 "control over it to the project's administrator."
 msgstr ""
+"Ce greffon contient le sous-système de blocs pour FusionForge.\n"
+"Il permet à chaque projet FusionForge d'avoir ses propres blocs,\n"
+"et de donner sur eux un certain contrôle à l'administrateur du projet."
 
 #: plugins/blocks/common/blocksPlugin.class.php:70
 msgid "Blocks Admin"
@@ -9830,7 +9729,7 @@ msgstr "éditeur HTML (ckeditor)"
 
 #: plugins/ckeditor/common/ckeditorPlugin.class.php:41
 msgid "CKEditor is a WYSIWYG text editor that displays within a web browser."
-msgstr ""
+msgstr "CKEditor est un éditeur de texte WYSIWYG qui s'affiche dans un navigateur web."
 
 #: plugins/ckeditor/common/ckeditorPlugin.class.php:113
 #: plugins/ckeditor/common/ckeditorPlugin.class.php:117
@@ -9838,15 +9737,16 @@ msgid "Unable to activate ckeditor plugin, package ckeditor not found."
 msgstr "Impossible d'activer le greffon ckeditor, paquet ckeditor introuvable."
 
 #: plugins/compactpreview/include/CompactPreviewPlugin.class.php:29
-#, fuzzy
 msgid "CompactPreview!"
-msgstr "Prévisualisation compacte de projet OSLC"
+msgstr "Aperçu compact !"
 
 #: plugins/compactpreview/include/CompactPreviewPlugin.class.php:31
 msgid ""
 "This plugin adds support for user and project compact-preview\n"
 "(popups) compatible with the OSLC specifications."
 msgstr ""
+"Ce greffon ajoute la prise en charge de l'aperçu compact de projet\n"
+"et utilisateur (popups) compatible avec les spécifications OSLC."
 
 #: plugins/compactpreview/include/CompactPreviewPlugin.class.php:238
 msgid "Compact preview of local user"
@@ -9865,15 +9765,16 @@ msgid "OSLC Compact preview of user"
 msgstr "Aperçu compact OSLC d'un utilisateur"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:29
-#, fuzzy
 msgid "Contribution Tracker"
-msgstr "Suivi des contributions"
+msgstr "Outil de suivi des contributions"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:31
 msgid ""
 "This plugin allows each project to display a list of significant\n"
 "contributions, along with their authors."
 msgstr ""
+"Ce greffon permet à chaque projet d'afficher une liste des contributions\n"
+"significatives, avec leurs auteurs."
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:55
 msgid "Contribution tracker"
@@ -9885,7 +9786,7 @@ msgstr "Suivre les contributions à ce projet"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:77
 msgid "Use the Contribution Tracker plugin"
-msgstr "Utiliser le plugin de suivi de contributions"
+msgstr "Utiliser le greffon de suivi de contributions"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:97
 #: plugins/contribtracker/www/global_admin.php:231
@@ -10313,18 +10214,19 @@ msgstr "Afficher les différences avec"
 
 #: plugins/doaprdf/include/doaprdfPlugin.class.php:35
 msgid "DoaPRDF!"
-msgstr ""
+msgstr "DoaPRDF !"
 
 #: plugins/doaprdf/include/doaprdfPlugin.class.php:37
 msgid ""
 "This plugin provides DOAP RDF documents for projects on /projects URLs \n"
 "with content-negotiation (application/rdf+xml)."
 msgstr ""
+"Ce greffon fournie les documents RDF DOAP pour les projets ou URLs de projet\n"
+"avec une négociation de contenu (application/rdf+xml)."
 
 #: plugins/externalsearch/common/ExternalSearchPlugin.class.php:25
-#, fuzzy
 msgid "External Search"
-msgstr "Recherche globale"
+msgstr "Recherche externe"
 
 #: plugins/externalsearch/common/ExternalSearchPlugin.class.php:27
 msgid ""
@@ -10332,7 +10234,7 @@ msgid ""
 "your users to search your FusionForge site through external search engines\n"
 "which have indexed it. You can define search engines you want to use in\n"
 "the configuration file."
-msgstr ""
+msgstr "Ce greffon ajoute un nouveau moteur de recherche pour votre siteFusionForge. Il permet à vos utilisateurs de rechercher dans votre siteFusionForge à travers un moteur de recherche externe qui l'a indexé. Vouspouvez définir les moteurs de recherche que vous souhaitez utiliser dans lefichier de configuration."
 
 #: plugins/extsubproj/actions/addExtSubProj.php:31
 msgid "Failed to add subproject."
@@ -10351,9 +10253,8 @@ msgid "Subproject successfully deleted."
 msgstr "Sous-projet supprimé avec succès."
 
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:28
-#, fuzzy
 msgid "External SubProjects"
-msgstr "Administration des sous-projets externes"
+msgstr "Sous-projets externes"
 
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:30
 msgid ""
@@ -10361,6 +10262,9 @@ msgid ""
 "FusionForge project to have its own extsubproj, and gives some\n"
 "control over it to the project's administrator."
 msgstr ""
+"Ce greffon contient le sous-système de sous-projet externe de FusionForge.\n"
+"Il permet à chaque projet d'avoir son propre sous-projet externe, et donne\n"
+"à l'administrateur du projet un certain contrôle sur eux."
 
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:71
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:80
@@ -10370,7 +10274,7 @@ msgstr "Administration des sous-projets externes"
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:71
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:80
 msgid "Configure the External subprojects plugin"
-msgstr "Configuration du greffon de sous-projets exterieurs"
+msgstr "Configuration du greffon de sous-projets externes"
 
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:102
 msgid "Site Global External subprojects Admin"
@@ -10417,15 +10321,16 @@ msgid "Unknown action."
 msgstr "Action inconnue."
 
 #: plugins/foafprofiles/include/foafprofilesPlugin.class.php:34
-#, fuzzy
 msgid "User FOAF Profiles"
-msgstr "Profil de l'utilisateur"
+msgstr "Profils d'utilisateur FOAF"
 
 #: plugins/foafprofiles/include/foafprofilesPlugin.class.php:36
 msgid ""
 "This plugin provides FOAF profiles for users on /users URLs \n"
 "with content-negotiation (application/rdf+xml)."
 msgstr ""
+"Ce greffon fournie les profiles FOAF pour les utilisateurs ou URLs\n"
+"utilisateur avec une négociation de contenu (application/rdf+xml)."
 
 #: plugins/forumml/include/ForumMLGroupSearchEngine.class.php:17
 msgid "ForumML"
@@ -10619,9 +10524,8 @@ msgid "Error: Missing parameter"
 msgstr "Erreur : paramètre manquant"
 
 #: plugins/globaldashboard/include/globalDashboard_Widget_MyArtifacts.php:32
-#, fuzzy
 msgid "User artifacts from other remote Forges"
-msgstr "Artefacts utilisateur d'autres forges distantes"
+msgstr "Éléments utilisateur d'autres forges distantes"
 
 #: plugins/globaldashboard/include/globalDashboard_Widget_MyArtifacts.php:36
 #: plugins/globaldashboard/include/globalDashboard_Widget_MyProjects.php:38
@@ -10658,7 +10562,7 @@ msgstr "Compte distant créé avec succès"
 
 #: plugins/globaldashboard/www/admin/add_account.php:75
 msgid "Remote account created but unable to create remote associated discovery parameters"
-msgstr ""
+msgstr "Compte distant créé mais impossible de créer les paramètres associés du compte distant"
 
 #: plugins/globaldashboard/www/admin/add_account.php:79
 msgid "Unable to create remote account"
@@ -10686,9 +10590,8 @@ msgstr "Compte distant mis à jour avec succès"
 
 #: plugins/globaldashboard/www/admin/edit_account.php:78
 #: plugins/globaldashboard/www/admin/edit_account.php:82
-#, fuzzy
 msgid "Unable to update remote account"
-msgstr "Impossible de supprimer le compte distant :"
+msgstr "Impossible de modifier le compte distant"
 
 #: plugins/globaldashboard/www/admin/edit_account_page.php:55
 msgid "Remote Account Management"
@@ -10810,9 +10713,8 @@ msgstr ""
 #: plugins/taskboard/www/admin/ajax.php:38
 #: plugins/taskboard/www/admin/index.php:33 plugins/taskboard/www/ajax.php:32
 #: plugins/taskboard/www/releases/index.php:32
-#, fuzzy
 msgid "Cannot Process your request"
-msgstr "Erreur de traitement de votre requête : pas d'identifiant spécifié."
+msgstr "Impossible d'exécuter votre requête"
 
 #: plugins/globaldashboard/www/index.php:26
 #: plugins/quota_management/www/index.php:46
@@ -10828,12 +10730,10 @@ msgid "No ID specified"
 msgstr "Pas d'ID spécifié"
 
 #: plugins/globaldashboard/www/index.php:36
-#, fuzzy
 msgid "Access Denied"
-msgstr "Jetons d'accès"
+msgstr "Accès refusé"
 
 #: plugins/globalsearch/common/GlobalsearchPlugin.class.php:30
-#, fuzzy
 msgid "Globalsearch"
 msgstr "Recherche globale"
 
@@ -10843,6 +10743,9 @@ msgid ""
 "declare a list of other FusionForge sites, and search for projects\n"
 "hosted on these forges from your own."
 msgstr ""
+"Ce greffon contient un moteur de recherche multi-forge pour FusionForge.\n"
+"Vous pouvez déclarer une liste d'autres sites FusionForge, et rechercher\n"
+"les projets hébergés sur ces autres forges sans quitter la votre."
 
 #: plugins/globalsearch/common/GlobalsearchPlugin.class.php:43
 msgid "Admin Associated Forges"
@@ -11074,6 +10977,8 @@ msgid ""
 "This plugin contains the gravatar plugin of FusionForge. It allows each\n"
 "FusionForge user to have its gravatar icon displayed."
 msgstr ""
+"Ce greffon contient le greffon gravatar pour FusionForge. Il permet à chaque\n"
+"utilisateur de FusionForge d'avoir son gravatar affiché."
 
 #: plugins/gravatar/common/gravatarPlugin.class.php:79
 msgid "Change face"
@@ -11183,12 +11088,11 @@ msgid "Menu Tabs Manager"
 msgstr "le gestionnaire d'onglets"
 
 #: plugins/headermenu/common/headermenuPlugin.class.php:34
-#, fuzzy
 msgid ""
 "This plugin allows each project to define extra tabs with arbitrary\n"
 "titles and links, next to the login menu (headermenu),\n"
 "in the main menu (outermenu) or in the project menu (groupmenu)."
-msgstr "Permet de définir de nouveaux liens à côté de menu connexion (headermenu), dans le menu principal (outermenu) ou dans le menu projet (groupmenu)."
+msgstr "Ce greffon permet à chaque projet de définir des onglets supplémentaires avec un nombre arbitraire de titres et de liens, en plus de ceux du menu connexion (headermenu), du menu principal (outermenu) ou du menu projet (groupmenu)."
 
 #: plugins/headermenu/common/headermenuPlugin.class.php:71
 #: plugins/headermenu/common/headermenuPlugin.class.php:437
@@ -11339,13 +11243,12 @@ msgid "You can add specific tabs in outermenu (main tab) or headermenu (next to 
 msgstr "Vous pouvez ajouter vos propres onglets à la barre de menu avec le formulaire ci-dessous."
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:132
-#, fuzzy
 msgid "the displayed name in menu"
-msgstr "affichée dans un cadre en ligne"
+msgstr "nom affiché dans le menu"
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:136
 msgid "the description, used by the tooltip system"
-msgstr ""
+msgstr "la description, utilisée dans les infobulles"
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:155
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:111
@@ -11366,9 +11269,8 @@ msgid "You can add your own tabs in the menu bar with the form below."
 msgstr "Vous pouvez ajouter vos propres onglets à la barre de menu avec le formulaire ci-dessous."
 
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:123
-#, fuzzy
 msgid "Display URL as iframe"
-msgstr "affichée dans un cadre en ligne"
+msgstr "Afficher les URL dans un cadre en ligne"
 
 #: plugins/helloworld/include/HelloWorldPluginDescriptor.class.php:29
 msgid "HelloWorld"
@@ -11532,9 +11434,11 @@ msgid ""
 "FusionForge project to have its own Hudson, and gives some\n"
 "control over it to the project's administrator."
 msgstr ""
+"Ce greffon contient le sous-système Hudson pour FusionForge. Il permet à chaque\n"
+"projet FusionForge d'avoir son propre Hudson, et de donner à l'administrateur\n"
+"du projet un certain contrôle sur lui."
 
 #: plugins/hudson/include/hudsonPlugin.class.php:87
-#, fuzzy
 msgid "Continuous Integration Scheduler"
 msgstr "Ordonnanceur d'intégration continue"
 
@@ -11853,14 +11757,12 @@ msgid "Shows an overview of all the jobs associated with this project. You can a
 msgstr "Affiche un résumé de toutes les tâches associées à ce projet. Vous pouvez toujours choisir les tâches à afficher en utilisant le lien de préférences du widget."
 
 #: plugins/hudson/include/hudson_Widget_ProjectJobsOverview.class.php:110
-#, fuzzy
 msgid "No job available."
-msgstr "Aucun déclencheur disponible"
+msgstr "Aucun poste disponible."
 
 #: plugins/hudson/include/hudson_Widget_ProjectJobsOverview.class.php:112
-#, fuzzy
 msgid "Browse Hudson/Jenkins plugin"
-msgstr "Hudson/Jenkins"
+msgstr "Parcourir le greffon Hudson / Jenkins"
 
 #: plugins/mailman/include/MailmanList.class.php:407
 msgid "Error On Query:"
@@ -12105,9 +12007,9 @@ msgid "Missing category name"
 msgstr "Nom du catégorie manquant"
 
 #: plugins/mantisbt/action/addIssue.php:126
-#, fuzzy, php-format
+#, php-format
 msgid "Ticket %s created successfully."
-msgstr "Outil de suivi créé avec succès"
+msgstr "Ticket %s créé avec succès"
 
 #: plugins/mantisbt/action/addNote.php:57
 msgid "Note added successfully."
@@ -12220,9 +12122,8 @@ msgid "Unable to create user in Mantisbt"
 msgstr "Impossible de créer un utilisateur dans Mantisbt"
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:218
-#, fuzzy
 msgid "Unable to create project in MantisBT"
-msgstr "Impossible de créer un projet dans Mantisbt"
+msgstr "Impossible de créer un projet dans MantisBt"
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:228
 #: plugins/projectimport/www/index.php:628 www/admin/search.php:178
@@ -12278,9 +12179,8 @@ msgid "MantisBT project not found"
 msgstr "MantisBT du projet introuvable"
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:647
-#, fuzzy
 msgid "Missing parameters"
-msgstr "Il manque des paramètres"
+msgstr "Paramètres manquants"
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:689
 msgid "Global MantisBT admin"
@@ -12293,19 +12193,16 @@ msgid "MantisBT"
 msgstr "MantisBT"
 
 #: plugins/mantisbt/common/mantisbt_Widget_ProjectLastIssues.class.php:31
-#, fuzzy
 msgid "Latest 5 Issues."
-msgstr "Dernières annonces"
+msgstr "5 derniers bogues."
 
 #: plugins/mantisbt/common/mantisbt_Widget_ProjectLastIssues.class.php:39
-#, fuzzy
 msgid "Display the 5 last issues of your project."
-msgstr "Liste des sondages dans vos projets."
+msgstr "Afficher les 5 derniers bogues de votre projets."
 
 #: plugins/mantisbt/common/mantisbt_Widget_ProjectLastIssues.class.php:70
-#, fuzzy
 msgid "ID"
-msgstr "N<sup>o</sup> de tâche"
+msgstr "N<sup>o</sup>"
 
 #: plugins/mantisbt/common/mantisbt_Widget_ProjectLastIssues.class.php:70
 #: plugins/mantisbt/view/addIssue.php:57
@@ -12326,9 +12223,8 @@ msgid "Category"
 msgstr "Catégorie"
 
 #: plugins/mantisbt/common/mantisbt_Widget_ProjectLastIssues.class.php:86
-#, fuzzy
 msgid "No issues found."
-msgstr "Aucun élément trouvé"
+msgstr "Aucun bogue trouvé."
 
 #: plugins/mantisbt/controler/filter.php:56
 #: plugins/mantisbt/controler/filter.php:85
@@ -12375,9 +12271,8 @@ msgstr "Milestone"
 #: plugins/mantisbt/view/viewAttachment.php:39
 #: plugins/mantisbt/view/viewIssue.php:44
 #: plugins/mantisbt/view/viewIssues.php:71
-#, fuzzy
 msgid "Technical error occurs during data retrieving"
-msgstr "Une erreur technique s'est produite durant la récupération des données :"
+msgstr "Une erreur technique s'est produite durant la récupération des données"
 
 #: plugins/mantisbt/view/addIssue.php:58
 #: plugins/mantisbt/view/editIssue.php:76
@@ -12423,7 +12318,6 @@ msgid "Add note"
 msgstr "Ajouter la note"
 
 #: plugins/mantisbt/view/admin/StatPerStatus.php:46
-#, fuzzy
 msgid "Tickets per Status"
 msgstr "Tickets par État"
 
@@ -12500,15 +12394,13 @@ msgstr "Voulez-vous synchroniser les rôles de MantisBT avec ceux de FusionForge
 
 #: plugins/mantisbt/view/admin/viewGlobalConfiguration.php:38
 #: plugins/mantisbt/view/init.php:62
-#, fuzzy
 msgid "SOAP User"
-msgstr "Ajouter un utilisateur"
+msgstr "Utilisateur SOAP"
 
 #: plugins/mantisbt/view/admin/viewGlobalConfiguration.php:42
 #: plugins/mantisbt/view/init.php:66
-#, fuzzy
 msgid "SOAP Password"
-msgstr "Ancien mot de passe"
+msgstr "Mot de passe SOAP"
 
 #: plugins/mantisbt/view/admin/viewVersion.php:46
 msgid "Manage versions"
@@ -12517,38 +12409,33 @@ msgstr "Gérer les versions"
 #: plugins/mantisbt/view/admin/viewVersion.php:55
 #: plugins/mantisbt/view/viewIssues.php:182
 msgid "%d/%m/%Y"
-msgstr ""
+msgstr "%d/%m/%Y"
 
 #: plugins/mantisbt/view/admin/viewVersion.php:66
 msgid "No versions"
 msgstr "Pas de version"
 
 #: plugins/mantisbt/view/adminuser.php:32
-#, fuzzy
 msgid "Manage your account for the URL"
-msgstr "Gérer mon compte"
+msgstr "Gérer votre compte pour l'URL"
 
 #: plugins/mantisbt/view/adminuser.php:36
 #: plugins/mantisbt/view/inituser.php:51
-#, fuzzy
 msgid "MantisBT User"
-msgstr "MantisBT"
+msgstr "Utilisateur MantisBT"
 
 #: plugins/mantisbt/view/adminuser.php:37
-#, fuzzy
 msgid "Specify your MantisBT user."
 msgstr "Indiquez votre utilisateur MantisBT."
 
 #: plugins/mantisbt/view/adminuser.php:38
 #: plugins/mantisbt/view/inituser.php:53
-#, fuzzy
 msgid "MantisBT Password"
-msgstr "Modifier mon mot de passe"
+msgstr "Mot de passe MantisBT"
 
 #: plugins/mantisbt/view/adminuser.php:39
-#, fuzzy
 msgid "Specify the password of this MantisBT user."
-msgstr "Spécifier le mot de passe de cet utilisateur."
+msgstr "Spécifier le mot de passe de cet utilisateur MantisBT."
 
 #: plugins/mantisbt/view/editIssue.php:70
 #: plugins/mantisbt/view/viewIssue.php:133
@@ -12586,48 +12473,40 @@ msgid "Target"
 msgstr "Cible"
 
 #: plugins/mantisbt/view/init.php:67
-#, fuzzy
 msgid "Specify the password of this SOAP User."
-msgstr "Spécifier le mot de passe de cet utilisateur."
+msgstr "Spécifier le mot de passe de cet utilisateur SOAP."
 
 #: plugins/mantisbt/view/init.php:70
-#, fuzzy
 msgid "Create the project in MantisBT"
-msgstr "Impossible de créer un projet dans Mantisbt"
+msgstr "Créer le projet MantisBT"
 
 #: plugins/mantisbt/view/init.php:71
-#, fuzzy
 msgid "If this project does NOT exist in MantisBT, do you want to create it ? The current project name will be used."
-msgstr "si ce projet n'existe pas dans MantisBT, voulez-vous le créer ?"
+msgstr "Si ce projet n'existe pas dans MantisBT, voulez-vous le créer ? Le nom actuel du projet sera utilisé."
 
 #: plugins/mantisbt/view/init.php:74
-#, fuzzy
 msgid "Link with an existing project in MantisBT"
-msgstr "Impossible de créer un projet dans Mantisbt"
+msgstr "Lier un projet existant dans Mantisbt"
 
 #: plugins/mantisbt/view/init.php:75
-#, fuzzy
 msgid "Specify the name of the project already created in MantisBT"
-msgstr "Indiquez le nom du projet dans MantisBT s'il a déjà été créé dans MantisBT"
+msgstr "Indiquez le nom du projet déjà créé dans MantisBT"
 
 #: plugins/mantisbt/view/init.php:79 plugins/mantisbt/view/inituser.php:56
 msgid "Initialize"
 msgstr "Initialiser"
 
 #: plugins/mantisbt/view/inituser.php:45
-#, fuzzy
 msgid "You need to setup your mantisbt account per URL."
-msgstr "Gérer votre compte MantisBT."
+msgstr "Vous devez configurer votre compte MantisBT avec une URL."
 
 #: plugins/mantisbt/view/inituser.php:48
-#, fuzzy
 msgid "User configuration for URL"
-msgstr "Utiliser la configuration globale"
+msgstr "Configuration utilisateur pour l'URL"
 
 #: plugins/mantisbt/view/inituser.php:52
-#, fuzzy
 msgid "Specify your MantisBT user to be used. This user MUST already exists."
-msgstr "Indiquez votre utilisateur MantisBT"
+msgstr "Indiquez votre utilisateur MantisBT à utiliser. Cet utilisateur NE DOIT PAS déjà exister."
 
 #: plugins/mantisbt/view/inituser.php:54
 msgid "Specify the password of your user."
@@ -12639,7 +12518,7 @@ msgstr "Aller au ticket"
 
 #: plugins/mantisbt/view/jumpToIssue.php:33
 msgid "Ok"
-msgstr ""
+msgstr "Ok"
 
 #: plugins/mantisbt/view/roadmap.php:66
 msgid "Display filter rules"
@@ -12680,7 +12559,7 @@ msgstr "Pas de tickets à afficher."
 
 #: plugins/mantisbt/view/viewIssues.php:141
 msgid "Bug ID"
-msgstr ""
+msgstr "Identifiant de bogue"
 
 #: plugins/mantisbt/view/viewIssues.php:155
 msgid "Last Update"
@@ -12728,9 +12607,8 @@ msgid "The mantisbt plugin for this project is not initialized."
 msgstr "Le greffon MantisBT de ce projet n'est pas initialisé."
 
 #: plugins/mantisbt/www/index.php:87
-#, fuzzy
 msgid "Your mantisbt user is not initialized for this URL."
-msgstr "Votre utilisateur MantisBT n'est pas initialisé."
+msgstr "Votre utilisateur MantisBT n'est pas initialisé pour cette URL."
 
 #: plugins/mantisbt/www/index.php:149 plugins/mantisbt/www/index.php:228
 #, php-format
@@ -12738,9 +12616,8 @@ msgid "First activate the User's %s plugin through Account Maintenance Page"
 msgstr "Vous devez d'abord activer le greffon %s de l'utilisateur dans l'interface d'administration du compte"
 
 #: plugins/mantisbt/www/index.php:217
-#, fuzzy
 msgid "None of your projects are using MantisBT plugin."
-msgstr "Aucun autre projet n'utilise le greffon de hiérarchie de projets."
+msgstr "Aucun de vos projets n'utilise le greffon MantisBT."
 
 #: plugins/mantisbt/www/user/index.php:35
 msgid "My Tickets"
@@ -12761,7 +12638,7 @@ msgstr "Mediawiki"
 
 #: plugins/mediawiki/common/mediawikiPlugin.class.php:48
 msgid "This plugin allows each project to embed Mediawiki under a tab."
-msgstr ""
+msgstr "Ce greffon permet à chaque projet d'embarquer Mediawiki dans un onglet."
 
 #: plugins/mediawiki/common/mediawikiPlugin.class.php:101
 msgid "Mediawiki Space"
@@ -12834,18 +12711,18 @@ msgid "Project Summary"
 msgstr "Résumé du projet"
 
 #: plugins/mediawiki/www/LocalSettings.php:68
-#, fuzzy, php-format
+#, php-format
 msgid "Mediawiki for project %s (directory %s) not created yet, please wait for a few minutes."
-msgstr "Le wiki du projet %s n'a pas encore été créé, veuillez réessayer dans quelques minutes."
+msgstr "Le Mediawiki du projet %s (répertoire %s) n'a pas encore été créé, veuillez patienter quelques minutes."
 
 #: plugins/mediawiki/www/LocalSettings.php:81
 msgid "This script must be run from the command line!"
-msgstr ""
+msgstr "Ce script doit être lancé depuis la ligne de commande !"
 
 #: plugins/mediawiki/www/LocalSettings.php:89
-#, fuzzy, php-format
+#, php-format
 msgid "Project %s does not use the Mediawiki plugin"
-msgstr "%s n'utilise pas l'outil de liste de diffusion"
+msgstr "Le projet %s n'utilise pas le greffon Mediawiki"
 
 #: plugins/mediawiki/www/frame.php:29
 msgid "wiki"
@@ -12903,14 +12780,12 @@ msgid "File removal error"
 msgstr "Erreur lors de la suppression du fichier"
 
 #: plugins/mediawiki/www/plugin_admin.php:160
-#, fuzzy
 msgid "MediaWiki Plugin Admin for "
-msgstr "Administration du plugin Mediawiki"
+msgstr "Administration du greffon Mediawiki pour"
 
 #: plugins/mediawiki/www/plugin_admin.php:161
-#, fuzzy
 msgid "MediaWiki Project Admin"
-msgstr "Administration du projet"
+msgstr "Administration du projet MediaWiki"
 
 #: plugins/mediawiki/www/plugin_admin.php:167
 msgid "Nightly XML dump"
@@ -12958,6 +12833,8 @@ msgid ""
 "This plugin allows the site administrator to display a message banner\n"
 "on all pages, e.g. for maintenance announcements."
 msgstr ""
+"Ce greffon permet à l'administrateur du site d'afficher une bannière\n"
+"sur toutes les pages, par exemple pour les annonces de maintenance."
 
 #: plugins/message/common/messagePlugin.class.php:50
 msgid "Configure Global Message"
@@ -12973,19 +12850,16 @@ msgid "Close"
 msgstr "Fermer"
 
 #: plugins/message/www/index.php:56
-#, fuzzy
 msgid "New message available."
-msgstr "Aucune version disponible"
+msgstr "Nouveau message disponible."
 
 #: plugins/message/www/index.php:60
-#, fuzzy
 msgid "Message updated."
-msgstr "Annonce mise à jour."
+msgstr "Message mise à jour."
 
 #: plugins/message/www/index.php:62
-#, fuzzy
 msgid "Message removed."
-msgstr "Corps du message"
+msgstr "Message supprimé."
 
 #: plugins/message/www/index.php:72
 msgid "Global Message Administration"
@@ -12996,18 +12870,16 @@ msgid "Edit the message as you want. If you activate the HTML editor, you will b
 msgstr "Modifiez le message à votre guise. Si vous activez l'éditeur HTML, vous pourrez le mettre en forme visuellement (gras, couleurs…)"
 
 #: plugins/moinmoin/common/MoinMoinPlugin.class.php:32
-#, fuzzy
 msgid "MoinMoinWiki"
-msgstr "Accès au Wiki MoinMoin"
+msgstr "Wiki MoinMoin"
 
 #: plugins/moinmoin/common/MoinMoinPlugin.class.php:34
 msgid "This plugin allows each project to embed MoinMoinWiki under a tab."
-msgstr ""
+msgstr "ce greffon permet à chaque projet d'embarquer un Wiki MoinMoin dans un onglet."
 
 #: plugins/moinmoin/common/MoinMoinPlugin.class.php:78
-#, fuzzy
 msgid "MoinMoin Space"
-msgstr "Accès au Wiki MoinMoin"
+msgstr "Espace MoinMoin"
 
 #: plugins/moinmoin/common/MoinMoinPlugin.class.php:165
 msgid "MoinMoin Wiki access"
@@ -13374,13 +13246,12 @@ msgid "You have denied Consumer “%s” access to Fusionforge on your behalf. T
 msgstr "Vous avez refusé au consommateur « %s » l'accès à Fusionforge en votre nom. La demande de jeton d'accès OAuth a été supprimé."
 
 #: plugins/online_help/common/online_helpPlugin.class.php:38
-#, fuzzy
 msgid "online_help!"
-msgstr "Nouveau greffon d'aide en ligne."
+msgstr "aide en ligne !"
 
 #: plugins/online_help/common/online_helpPlugin.class.php:40
 msgid "This is a online_help plugin within FusionForge."
-msgstr ""
+msgstr "Greffon d'aide en ligne pour FusionForge."
 
 #: plugins/online_help/common/online_helpPlugin.class.php:88
 msgid "Get Help"
@@ -13396,7 +13267,7 @@ msgstr "Administration OSLC"
 
 #: plugins/phpcaptcha/common/phpcaptchaPlugin.class.php:33
 msgid "Enable use of phpcaptcha (more information www.phpcaptcha.org)"
-msgstr ""
+msgstr "Activer phpcaptcha (plus d'informations sur www.phpcaptcha.org)"
 
 #: plugins/phpcaptcha/common/phpcaptchaPlugin.class.php:45
 msgid "Wrong captcha code"
@@ -13690,6 +13561,8 @@ msgid ""
 "This can be used to highlight some projects on a forge, for instance\n"
 "for a \"project of the month\"."
 msgstr ""
+"Ceci peut être utilisé pur mettre en avant certains projets sur une forge,\n"
+"par exemple pour un « projet du mois »."
 
 #: plugins/projectlabels/common/ProjectLabelsPlugin.class.php:20
 msgid "Project labels plugin"
@@ -13887,7 +13760,7 @@ msgstr "Hiérarchie des projets"
 
 #: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:33
 msgid "Organise projects hierarchicaly, relation type 1-n"
-msgstr ""
+msgstr "Organiser les projets hiérarchiquement, relation de type 1-n"
 
 #: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:93
 msgid "Hierarchy Admin"
@@ -13914,9 +13787,8 @@ msgid "Browse per hierarchy. Projects can share relationship between projects, a
 msgstr "Parcourir par hiérarchie. Les projets peuvent entretenir des relations, comme père et fils"
 
 #: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:177
-#, fuzzy
 msgid "No Tree to display."
-msgstr "Pas de données à afficher."
+msgstr "Pas d'arborescence à afficher."
 
 #: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:596
 msgid "Global Hierarchy admin"
@@ -13939,9 +13811,8 @@ msgid "Add Child project"
 msgstr "Ajouter un projet fils"
 
 #: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:815
-#, fuzzy
 msgid "No other project available"
-msgstr "Il n'y a pas de sous-projet"
+msgstr "Aucun autre projet disponible"
 
 #: plugins/projects-hierarchy/include/hierarchy_utils.php:46
 msgid "Link Type"
@@ -13961,9 +13832,8 @@ msgid "Cannot retrieve data from DB"
 msgstr "Impossible de récupérer les données de la base"
 
 #: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:33
-#, fuzzy
 msgid "Manage Global Forge Configuration"
-msgstr "Utiliser la configuration globale de la forge."
+msgstr "Gérer la configuration globale de la forge"
 
 #: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:38
 #: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:38
@@ -14005,9 +13875,8 @@ msgid "Use forge global configuration. Superseed any configuration done at proje
 msgstr "Utiliser le configuration générale de la forge. Prend le pas sur toute configuration au niveau projet."
 
 #: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:62
-#, fuzzy
 msgid "Enable forge global configuration"
-msgstr "Utiliser la configuration générale de la forge"
+msgstr "Activer la configuration générale de la forge"
 
 #: plugins/projects-hierarchy/view/admin_project_link.php:30
 msgid "Modify the hierarchy"
@@ -14079,13 +13948,12 @@ msgid "Direct link to project"
 msgstr "Lien direct au projet"
 
 #: plugins/quota_management/common/quota_managementPlugin.class.php:30
-#, fuzzy
 msgid "Quota Management"
-msgstr "Gestion du quota disque"
+msgstr "Gestion des quotas"
 
 #: plugins/quota_management/common/quota_managementPlugin.class.php:32
 msgid "This is a quota_management plugin within FusionForge."
-msgstr ""
+msgstr "Greffon de gestion de quotas pour FusionForge."
 
 #: plugins/quota_management/common/quota_managementPlugin.class.php:52
 #: plugins/quota_management/common/quota_managementPlugin.class.php:68
@@ -14270,6 +14138,9 @@ msgid ""
 "each FusionForge project to have its own Arch repository, and gives\n"
 "some control over it to the project's administrator."
 msgstr ""
+"Ce greffon contient le sous-système GNU Arch pour FusionForge. Il permet à\n"
+"chaque projet FusionForge d'avoir ses propres dépôts Arch, et donne à\n"
+"l'administrateur du projet un certain contrôle sur eux."
 
 #: plugins/scmarch/common/ArchPlugin.class.php:47
 #: plugins/scmbzr/common/BzrPlugin.class.php:82
@@ -14284,7 +14155,7 @@ msgstr "La documentation de %1$s est disponible sur <a href=\"%2$s\">%2$s</a>."
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:35
 msgid "Bazaar"
-msgstr ""
+msgstr "Bazaar"
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:37
 msgid ""
@@ -14292,6 +14163,9 @@ msgid ""
 "FusionForge project to have its own Bazaar repository, and gives some control\n"
 "over it to the project's administrator."
 msgstr ""
+"Ce greffon contient le sous-système Bazaar pour FusionForge. Il permet à\n"
+"chaque projet FusionForge d'avoir ses propres dépôts Bazaar, et donne à\n"
+"l'administrateur un certain contrôle sur eux."
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:76
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:90
@@ -14491,6 +14365,9 @@ msgid ""
 "FusionForge project to have its own CVS repository, and gives some control\n"
 "over it to the project's administrator."
 msgstr ""
+"Ce greffon contient le sous-système CVS pour FusionForge. Il permet à chaque\n"
+"projet FusionForge d'avoir ses propres dépôts CVS, et de donner à\n"
+"l'administrateur du projet un certain contrôle sur eux."
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:70
 #, php-format
@@ -14527,14 +14404,12 @@ msgid "Adds"
 msgstr "Ajouts"
 
 #: plugins/scmcvs/www/acl.php:44
-#, fuzzy
 msgid "Invalid CVS repository: "
 msgstr "Dépôt CVS invalide : "
 
 #: plugins/scmcvs/www/acl.php:47
-#, fuzzy
 msgid "Invalid username: "
-msgstr "Nom d'utilisateur non valide : "
+msgstr "Nom d'utilisateur invalide : "
 
 #: plugins/scmcvs/www/acl.php:53
 #, php-format
@@ -14543,7 +14418,7 @@ msgstr "Utilisateur %s introuvable"
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:35
 msgid "Darcs"
-msgstr ""
+msgstr "Darcs"
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:37
 msgid ""
@@ -14551,6 +14426,9 @@ msgid ""
 "FusionForge project to have its own Darcs repository, and gives some control\n"
 "over it to the project's administrator."
 msgstr ""
+"Ce greffon contient le sous-système Darcs pour FusionForge. Il permet à\n"
+"chaque projet FusionForge d'avoir ses propres dépôts Darcs, et de donner à\n"
+"l'administrateur un certain contrôle sur eux."
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:123
 msgid "where REPO can be: "
@@ -14618,6 +14496,9 @@ msgid ""
 "FusionForge project to have its own Git repository, and gives some\n"
 "control over it to the project's administrator."
 msgstr ""
+"Ce greffon contient le sous-système Git pour FusionForge. Il permet à\n"
+"chaque projet FusionForge d'avoir ses propres dépôts Git, et de donner à\n"
+"l'administrateur du projet un certain contrôle sur eux."
 
 #: plugins/scmgit/common/GitPlugin.class.php:113
 msgid "Anonymous Access"
@@ -14630,11 +14511,10 @@ msgstr[0] "Le dépôt Git de ce projet est accessible anonymement avec les comma
 msgstr[1] "Les dépôts Git de ce projet sont accessibles anonymement avec les commandes suivantes."
 
 #: plugins/scmgit/common/GitPlugin.class.php:134
-#, fuzzy
 msgid "Member repository"
 msgid_plural "Members repositories"
-msgstr[0] "Dépôt de développeurs"
-msgstr[1] "Dépôts de développeurs"
+msgstr[0] "Membre du dépôt"
+msgstr[1] "Membres des dépôts"
 
 #: plugins/scmgit/common/GitPlugin.class.php:138
 msgid "One of this project's members also has a personal Git repository that can be checked out anonymously."
@@ -14643,14 +14523,13 @@ msgstr[0] "Un des membres de ce projet a également un dépôt Git personnel, qu
 msgstr[1] "Certains des membres de ce projet ont également un dépôt Git personnel, qui peut être récupéré de manière anonyme."
 
 #: plugins/scmgit/common/GitPlugin.class.php:170
-#, fuzzy
 msgid "Developer Access"
-msgstr "Accès à Git pour les développeurs"
+msgstr "Accès développeur"
 
 #: plugins/scmgit/common/GitPlugin.class.php:175
 #: plugins/scmgit/common/GitPlugin.class.php:204
 msgid "via SSH"
-msgstr ""
+msgstr "via SSH"
 
 #: plugins/scmgit/common/GitPlugin.class.php:177
 #: plugins/scmgit/common/GitPlugin.class.php:190
@@ -14664,20 +14543,19 @@ msgstr[1] "Seuls les développeurs du projet peuvent accéder aux dépôts Git p
 #: plugins/scmgit/common/GitPlugin.class.php:188
 #: plugins/scmgit/common/GitPlugin.class.php:219
 msgid "via \"smart HTTP\""
-msgstr ""
+msgstr "via « smart HTTP »"
 
 #: plugins/scmgit/common/GitPlugin.class.php:233
 msgid "No access protocol has been allowed for the Git plugin in scmgit.ini: use_ssh, use_smarthttp and use_dav are disabled"
-msgstr ""
+msgstr "Aucun protocole d'accès n'a été autorisé pour le greffon Git dans scmgit.ini : use_ssh, use_smarthttp et use_dav sont désactivés"
 
 #: plugins/scmgit/common/GitPlugin.class.php:244
 msgid "Access to your personal repository"
 msgstr "Accès à votre dépôt personnel"
 
 #: plugins/scmgit/common/GitPlugin.class.php:245
-#, fuzzy
 msgid "You have a personal repository for this project, accessible through the following methods. Enter your site password when prompted."
-msgstr "Vous disposez d'un dépôt personnel au sein de ce projet, accessible à travers SSH de la manière suivante. Vous pourrez avoir besoin de taper votre mot de passe."
+msgstr "Vous disposez d'un dépôt personnel au sein de ce projet, accessible des manières suivantes. Entrez votre mot de passe pour le site lorsqu'il vous sera demandé."
 
 #: plugins/scmgit/common/GitPlugin.class.php:256
 #: plugins/scmgit/common/GitPlugin.class.php:258
@@ -14693,24 +14571,20 @@ msgid "Git Repository Browser"
 msgstr "Navigateur de dépôt Git"
 
 #: plugins/scmgit/common/GitPlugin.class.php:314
-#, fuzzy
 msgid "Browsing the Git tree gives you a view into the current status of this project's code. You may also view the complete history of any file in the repository."
-msgstr "Parcourir le dépôt Git permet de naviguer dans l'état actuel du code de ce projet, mais également d'avoir accès à l'historique complet de chaque fichier présent dans le dépôt."
+msgstr "Parcourir l'arborescence du dépôt Git permet de vous faire une idée de l'état actuel du code de ce projet. Vous devriez aussi regarder l'historique complet des fichiers du dépôt."
 
 #: plugins/scmgit/common/GitPlugin.class.php:318
-#, fuzzy
 msgid "Browse main git repository"
-msgstr "Parcourir le dépôt Git"
+msgstr "Parcourir le dépôt Git principal"
 
 #: plugins/scmgit/common/GitPlugin.class.php:333
-#, fuzzy
 msgid "Browse extra git repository"
-msgstr "Parcourir le dépôt Git"
+msgstr "Parcourir le dépôt Git supplémentaire"
 
 #: plugins/scmgit/common/GitPlugin.class.php:345
-#, fuzzy
 msgid "Browse personal git repository"
-msgstr "Pas de dépôt git personnel"
+msgstr "Parcourir le dépôt Git personnel"
 
 #: plugins/scmgit/common/GitPlugin.class.php:990
 msgid "Git Commits"
@@ -14744,9 +14618,8 @@ msgid "Clone of %s"
 msgstr "Clone de %s"
 
 #: plugins/scmgit/common/GitPlugin.class.php:1110
-#, fuzzy
 msgid "No extra Git repository for project"
-msgstr "Aucun dépôt Git supplémentaire pour le projet %1$s"
+msgstr "Aucun dépôt Git supplémentaire pour le projet"
 
 #: plugins/scmgit/common/GitPlugin.class.php:1112
 #, php-format
@@ -14761,15 +14634,13 @@ msgid "Initial clone URL (if any)"
 msgstr "URL initial de clonage (if nécessaire)"
 
 #: plugins/scmgit/common/GitPlugin.class.php:1135
-#, fuzzy
 msgid "Create new Git repository for project"
-msgstr "Créer un nouveau dépôt Git pour le projet %1$s"
+msgstr "Créer un nouveau dépôt Git pour le projet"
 
 #: plugins/scmgit/common/GitPlugin.class.php:1143
 #: plugins/scmhg/common/HgPlugin.class.php:791
-#, fuzzy
 msgid "Initial clone URL (or name of an existing repository in this project; leave empty to start with an empty repository)"
-msgstr "URL de clonage initial (ou nom d'un dépôt existant dans le projet : laisser vide pour démarrer avec un dépôt vide) :"
+msgstr "URL de clonage initial (ou nom d'un dépôt existant dans le projet ; laisser vide pour démarrer avec un dépôt vide)"
 
 #: plugins/scmgit/common/scmgit_Widget_MyRepositories.class.php:32
 msgid "My Git cloned Repositories List"
@@ -14802,7 +14673,7 @@ msgstr "Vous avez demandé un dépôt Git personnel pour ce projet. Il sera cré
 
 #: plugins/scmhg/common/HgPlugin.class.php:35
 msgid "Mercurial"
-msgstr ""
+msgstr "Mercurial"
 
 #: plugins/scmhg/common/HgPlugin.class.php:37
 msgid ""
@@ -14811,6 +14682,10 @@ msgid ""
 "and gives some control over it to the project's administrator.\n"
 "Offer DAV or SSH access."
 msgstr ""
+"ce greffon contient le sous-système Mercurial (Hg) pour FusionForge.\n"
+"Il permet à chaque projet FusionForge d'avoir ses propres dépôts Mercurial,\n"
+"et de donner à l'administrateur du projet un certain contrôle sur eux.\n"
+"Offre un accès DAV ou SSH."
 
 #: plugins/scmhg/common/HgPlugin.class.php:60
 msgid "Another short Introduction can be found at <a href=\"http://hginit.com/\">http://hginit.com/</a>"
@@ -14821,9 +14696,8 @@ msgid "Anonymous Mercurial Access"
 msgstr "Accès anonyme à Mercurial"
 
 #: plugins/scmhg/common/HgPlugin.class.php:69
-#, fuzzy
 msgid "This project's Mercurial repository can be checked out through anonymous access with the following command"
-msgstr "Le dépôt Mercurial de ce projet est accessible de manière anonyme grâce à la commande suivante :"
+msgstr "Le dépôt Mercurial de ce projet est accessible de manière anonyme grâce à la commande suivante"
 
 #: plugins/scmhg/common/HgPlugin.class.php:72
 msgid "The password is "
@@ -14860,26 +14734,24 @@ msgid "Browse Hg Repository"
 msgstr "Parcourir le dépôt Mercurial"
 
 #: plugins/scmhg/common/HgPlugin.class.php:639
-#, fuzzy
 msgid "Hg Commits"
-msgstr "Envois"
+msgstr "Envois Hg"
 
 #: plugins/scmhg/common/HgPlugin.class.php:758
-#, fuzzy
 msgid "No extra Hg repository for project"
-msgstr "Aucun dépôt Git supplémentaire pour le projet %1$s"
+msgstr "Aucun dépôt Hg supplémentaire pour le projet"
 
 #: plugins/scmhg/common/HgPlugin.class.php:760
-#, fuzzy, php-format
+#, php-format
 msgid "Extra Hg repository for project %1$s"
 msgid_plural "Extra Hg repositories for project %1$s"
-msgstr[0] "Dépôt Git supplémentaire pour le projet %1$s"
-msgstr[1] "Dépôts Git supplémentaires pour le projet %1$s"
+msgstr[0] "Dépôt Hg supplémentaire pour le projet %1$s"
+msgstr[1] "Dépôts Hg supplémentaires pour les projets %1$s"
 
 #: plugins/scmhg/common/HgPlugin.class.php:783
-#, fuzzy, php-format
+#, php-format
 msgid "Create new Hg repository for project %s"
-msgstr "Créer un nouveau dépôt Git pour le projet %1$s"
+msgstr "Créer un nouveau dépôt Hg pour le projet %s"
 
 #: plugins/scmhook/common/scmhook.class.php:75
 msgid "Feature not implemented."
@@ -14887,7 +14759,7 @@ msgstr "Pas encore implémenté."
 
 #: plugins/scmhook/common/scmhookPlugin.class.php:36
 msgid "Scmhook"
-msgstr ""
+msgstr "Scmhook"
 
 #: plugins/scmhook/common/scmhookPlugin.class.php:38
 msgid ""
@@ -14895,11 +14767,13 @@ msgid ""
 "tracker integration, conformity...) that can be enabled for each\n"
 "project independently."
 msgstr ""
+"Ce greffon contient un ensemble de déclencheurs d'envois (notifications par email,\n"
+"intégration d'outil de suivi, conformité…) qui peut être activé indépendamment\n"
+"pour chaque projet."
 
 #: plugins/scmhook/common/scmhookPlugin.class.php:165
-#, fuzzy
 msgid "invalid e-mails"
-msgstr "Adresse de messagerie non valide"
+msgstr "Adresses de messagerie invalides"
 
 #: plugins/scmhook/common/scmhookPlugin.class.php:202
 msgid "Enable Repository Hooks"
@@ -14916,12 +14790,11 @@ msgstr "Aucun déclencheur disponible"
 #: plugins/scmhook/common/scmhookPlugin.class.php:328
 #, php-format
 msgid "%s Hooks"
-msgstr ""
+msgstr "%s déclencheurs"
 
 #: plugins/scmhook/common/scmhookPlugin.class.php:329
-#, fuzzy
 msgid "Hook"
-msgstr "Nom du déclencheur"
+msgstr "Déclencheur"
 
 #: plugins/scmhook/common/scmhookPlugin.class.php:399
 msgid "serve-push-pull-bundle Hooks"
@@ -15003,23 +14876,20 @@ msgid "Verify if commited files have svn:mimetype set up correctly."
 msgstr "Vérifier si les fichiers envoyés ont la propriété svn:mimetype correctement renseignée."
 
 #: plugins/scmhook/library/scmsvn/commitEmail.class.php:35
-#, fuzzy
 msgid "Commit message log is pushed to commit mailing-list of the project (which you need to create)"
-msgstr "Le journal des messages de commit a été envoyé à la liste de diffusion des commit du projet."
+msgstr "Le journal des messages d'envoi est notifié à la liste de diffusion des envois du projet (que vous devez créer)."
 
 #: plugins/scmhook/library/scmsvn/commitEmail.class.php:62
-#, fuzzy
 msgid "Send commit e-mail notification to"
-msgstr "Notifications de suivi en attente"
+msgstr "Envoyer une notifications par email de l'envoi à"
 
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:99
 msgid "Related SVN commits"
 msgstr "Envois Subversion liés"
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:46
-#, fuzzy
 msgid "Subversion"
-msgstr "Envois Subversion"
+msgstr "Subversion"
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:48
 msgid ""
@@ -15027,6 +14897,9 @@ msgid ""
 "each FusionForge project to have its own Subversion repository, and gives\n"
 "some control over it to the project's administrator."
 msgstr ""
+"Ce greffon contient le sous-système Subversion pour FusionForge. Il permet\n"
+"à chaque projet FusionForge d'avoir ses propres dépôts Subversion, et de\n"
+"donner à l'administrateur un certain contrôle sur eux."
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:115
 msgid "Anonymous Subversion Access"
@@ -15055,7 +14928,7 @@ msgstr "Administration de SoapAdmin"
 
 #: plugins/sysauthldap/common/SysAuthLDAPPlugin.class.php:43
 msgid "System authentication via LDAP"
-msgstr ""
+msgstr "Système d'authentification LDAP"
 
 #: plugins/sysauthldap/common/SysAuthLDAPPlugin.class.php:45
 msgid ""
@@ -15063,22 +14936,23 @@ msgid ""
 "LDAP directory that can be used for NSS/PAM system authentication (or\n"
 "for other uses)."
 msgstr ""
+"Ce greffon contient des données à propos des utilisateurs, groupes et\n"
+"appartenances des utilisateurs dans le répertoire LDAP qui peut être\n"
+"utilisé pour un système d'authentification NSS/PAM\n"
+"(ou pour d'autres utilisateurs)."
 
 #: plugins/taskboard/common/TaskBoard.class.php:152
 #: plugins/taskboard/common/TaskBoard.class.php:215
-#, fuzzy
 msgid "Taskboard must be linked at least to one tracker"
-msgstr "Le mot de passe doit comporter au moins 6 caractères."
+msgstr "Le gestionnaire de tâche doit être lié à au moins un outil de suivi"
 
 #: plugins/taskboard/common/TaskBoard.class.php:167
-#, fuzzy
 msgid "Cannot create taskboard"
-msgstr "Impossible de créer la feuille de route : "
+msgstr "Impossible de créer le gestionnaire de tâches"
 
 #: plugins/taskboard/common/TaskBoard.class.php:231
-#, fuzzy
 msgid "Cannot update taskboard"
-msgstr "Erreur de mise à jour"
+msgstr "Impossible de mettre à jour le gestionnaire de tâches"
 
 #: plugins/taskboard/common/TaskBoard.class.php:302
 #: plugins/taskboard/common/TaskBoard.class.php:318
@@ -15092,49 +14966,41 @@ msgstr "Erreur de mise à jour"
 #: plugins/taskboard/common/TaskBoard.class.php:889
 #: plugins/taskboard/common/TaskBoard.class.php:917
 #: plugins/taskboard/common/TaskBoard.class.php:970
-#, fuzzy
 msgid "TaskBoard"
-msgstr "N<sup>o</sup> de tâche"
+msgstr "Gestionnaire de tâches"
 
 #: plugins/taskboard/common/TaskBoard.class.php:302
-#, fuzzy
 msgid "Invalid TaskBoardID"
-msgstr "N<sup>o</sup> de tâche invalide"
+msgstr "Identifiant de gestionnaire de tâches invalide"
 
 #: plugins/taskboard/common/TaskBoard.class.php:318
 msgid "Not configured for this project yet. Please, initialize plugin on the plugin admin page."
-msgstr ""
+msgstr "Non configuré pour ce projet. Veuillez initialiser le greffon dans la page d'administration des greffons."
 
 #: plugins/taskboard/common/TaskBoard.class.php:416
 #: plugins/taskboard/common/TaskBoard.class.php:436
-#, fuzzy
 msgid "Cannot get list of used trackers."
-msgstr "Lister les outils de suivi disponibles"
+msgstr "Impossible de lister les outils de suivi utilisés"
 
 #: plugins/taskboard/common/TaskBoard.class.php:456
-#, fuzzy
 msgid "Cannot empty list of used trackers."
-msgstr "Lister les outils de suivi disponibles"
+msgstr "Impossible de lister les outils de suivi utilisés."
 
 #: plugins/taskboard/common/TaskBoard.class.php:474
-#, fuzzy
 msgid "Cannot add used tracker"
-msgstr "Créer un nouvel outil de suivi"
+msgstr "Impossible d'ajouter l'outil de suivi utilisé"
 
 #: plugins/taskboard/common/TaskBoard.class.php:492
-#, fuzzy
 msgid "Cannot update used tracker"
-msgstr "Erreur de mise à jour"
+msgstr "Impossible de mettre à jour l'outil de suivi utilisé"
 
 #: plugins/taskboard/common/TaskBoard.class.php:509
-#, fuzzy
 msgid "Cannot delete used tracker"
-msgstr "Supprimer irrémédiablement cet outil de suivi."
+msgstr "Impossible de supprimer l'outil de suivi utilisé"
 
 #: plugins/taskboard/common/TaskBoard.class.php:525
-#, fuzzy
 msgid "Unlinked tasks"
-msgstr "Utiliser les tâches"
+msgstr "Tâches déréférencées"
 
 #: plugins/taskboard/common/TaskBoard.class.php:526
 msgid "Tasks, which are not linked to any user story"
@@ -15145,167 +15011,142 @@ msgid "Configured extra field for userstories sorting is not found."
 msgstr ""
 
 #: plugins/taskboard/common/TaskBoard.class.php:738
-#, fuzzy
 msgid "Cannot get list of columns."
-msgstr "Impossible d'ajouter un utilisateur à un rôle de ce type"
+msgstr "Impossible de récupérer la liste des colonnes"
 
 #: plugins/taskboard/common/TaskBoard.class.php:889
-#, fuzzy
 msgid "Cannot get list of releases."
-msgstr "Impossible d'ajouter un utilisateur à un rôle de ce type"
+msgstr "Impossible de récupérer la liste des versions"
 
 #: plugins/taskboard/common/TaskBoard.class.php:917
-#, fuzzy
 msgid "Cannot get current release."
-msgstr "Impossible de récupérer la question du sondage"
+msgstr "Impossible de récupérer la version en cours"
 
 #: plugins/taskboard/common/TaskBoard.class.php:970
-#, fuzzy
 msgid "Cannot get used resolutions"
-msgstr "Impossible de récupérer la question du sondage"
+msgstr "Impossible de récupérer les résolutions utilisées"
 
 #: plugins/taskboard/common/TaskBoardColumn.class.php:365
-#, fuzzy
 msgid "cannot get resolutions"
-msgstr "Impossible de récupérer la question du sondage"
+msgstr "Impossible de récupérer les résolutions"
 
 #: plugins/taskboard/common/TaskBoardColumn.class.php:388
-#, fuzzy
 msgid "cannot get drop rules"
-msgstr "Impossible de récupérer la question du sondage"
+msgstr "Impossible de récupérer les règles de suppression"
 
 #: plugins/taskboard/common/TaskBoardColumn.class.php:432
 msgid "cannot get resolution by default"
-msgstr ""
+msgstr "Impossible de récupérer la résolution par défaut"
 
 #: plugins/taskboard/common/TaskBoardColumn.class.php:456
-#, fuzzy
 msgid "cannot set drop rule"
-msgstr "Impossible de modifier la feuille de route : "
+msgstr "Impossible d'affecter la règle de suppression"
 
 #: plugins/taskboard/common/TaskBoardColumnSource.class.php:254
-#, fuzzy
 msgid "Tracker error"
-msgstr "Groupe de suivi"
+msgstr "Erreur de l'outil de suivi"
 
 #: plugins/taskboard/common/TaskBoardPlugin.class.php:31
 msgid "Agile TaskBoard: Supports Scrum and Kanban methodologies."
-msgstr ""
+msgstr "Gestionnaire de tâches agile : prend en charge les méthodologies Scrum et Kanban."
 
 #: plugins/taskboard/common/TaskBoardPlugin.class.php:44
-#, fuzzy
 msgid "Task Board Admin"
-msgstr "Administration du gestionnaire d'onglets"
+msgstr "Administration du gestionnaire de tâches"
 
 #: plugins/taskboard/common/TaskBoardPlugin.class.php:59
 msgid "Agile Scrum and Kanban display of existing artefacts."
-msgstr ""
+msgstr "Affichage agile Scrum et Kanban des éléments existants."
 
 #: plugins/taskboard/common/actions/add_release.php:42
 #: plugins/taskboard/common/actions/edit_release.php:47
 msgid "End date should be later then the start date"
-msgstr ""
+msgstr "La date de fin devrait être postérieure à la date de début"
 
 #: plugins/taskboard/common/actions/add_release.php:63
-#, fuzzy
 msgid "Successfully Created"
-msgstr "Requête créée avec succès"
+msgstr "Créé avec succès"
 
 #: plugins/taskboard/common/actions/add_release.php:69
 msgid "Something missing here"
-msgstr ""
+msgstr "Quelque chose manque ici"
 
 #: plugins/taskboard/common/actions/ajax_add.php:44
-#, fuzzy
 msgid "All fields are mandatory."
-msgstr "Tous les mots recherchés sont obligatoires"
+msgstr "Tous les champs sont obligatoires."
 
 #: plugins/taskboard/common/actions/ajax_drop_card.php:42
-#, fuzzy
 msgid "Drop rule is not defined for this target column"
-msgstr "Ce projet n'a pas défini de mots clefs"
+msgstr "La règle de suppression n'est pas définie pour cette colonne cible"
 
 #: plugins/taskboard/common/actions/ajax_drop_card.php:58
 #: plugins/taskboard/common/actions/ajax_update.php:44
 msgid "Task is not found. Taskboard will be reloaded."
-msgstr ""
+msgstr "Tâche introuvable. Le gestionnaire de tâches va être relancé."
 
 #: plugins/taskboard/common/actions/ajax_load_taskboard.php:40
 #: plugins/taskboard/www/index.php:166
-#, fuzzy
 msgid "User stories"
-msgstr "Profil de l'utilisateur"
+msgstr ""
 
 #: plugins/taskboard/common/actions/ajax_save_release_snapshot.php:39
 #: plugins/taskboard/common/actions/ajax_save_release_snapshot.php:49
-#, fuzzy
 msgid "Cannot save release snapshot"
-msgstr "Impossible de créer un rôle avec un nom vide"
+msgstr "Impossible d'enregistrer le cliché de version"
 
 #: plugins/taskboard/common/actions/ajax_save_release_snapshot.php:45
 msgid "Snapshot date should be withing release period"
-msgstr ""
+msgstr "La date du cliché devrait être dans la période de la version"
 
 #: plugins/taskboard/common/actions/columns.php:42
 msgid "Cannot set drop rule or resolutions for new column"
-msgstr ""
+msgstr "Impossible d'affecter la règle de suppression ou les résolutions pour une nouvelle colonne"
 
 #: plugins/taskboard/common/actions/columns.php:47
-#, fuzzy
 msgid "Cannot create column"
-msgstr "Impossible de créer la feuille de route : "
+msgstr "Impossible de créer une colonne"
 
 #: plugins/taskboard/common/actions/delete_column.php:34
 #: plugins/taskboard/common/actions/delete_release.php:34
-#, fuzzy
 msgid "Successfully Removed"
-msgstr "Projet fils correctement supprimé"
+msgstr "Supprimé correctement"
 
 #: plugins/taskboard/common/actions/edit_column.php:47
-#, fuzzy
 msgid "Successfully Updated"
-msgstr "Rôle mis à jour"
+msgstr "Mise à jour réussie"
 
 #: plugins/taskboard/common/actions/edit_column.php:57
-#, fuzzy
 msgid "Please, fill all required fields."
-msgstr "Indique les champs requis."
+msgstr "Veuillez renseigner tous les champs obligatoires."
 
 #: plugins/taskboard/common/actions/edit_release.php:61
-#, fuzzy
 msgid "Succefully Updated"
-msgstr "Rôle mis à jour"
+msgstr "Mis à jour avec succès"
 
 #: plugins/taskboard/common/actions/trackers.php:49
-#, fuzzy
 msgid "Success on something here"
-msgstr "Supprimé avec succès (sauf la configuration)"
+msgstr "Succès sur quelque chose ici"
 
 #: plugins/taskboard/common/adapters/TaskBoardBasicAdapter.class.php:365
-#, fuzzy
 msgid "Error updating assigned_to in artifact"
-msgstr "Erreur durant la mise à jour d’assigned_to dans l’artefact : "
+msgstr "Erreur durant la mise à jour d’assigned_to dans l’élément"
 
 #: plugins/taskboard/common/include/TaskBoardHtml.class.php:39
-#, fuzzy
 msgid "View Taskboard"
-msgstr "Voir les traceurs"
+msgstr "Voir le gestionnaire de tâches"
 
 #: plugins/taskboard/common/include/TaskBoardHtml.class.php:51
-#, fuzzy
 msgid "Delete Release"
-msgstr "Prochaine version"
+msgstr "Supprimer une version"
 
 #: plugins/taskboard/common/include/TaskBoardHtml.class.php:64
 #: plugins/taskboard/common/views/admin/ind.php:46
-#, fuzzy
 msgid "Configure Columns"
-msgstr "Valeur configurée"
+msgstr "Configurer des colonnes"
 
 #: plugins/taskboard/common/include/TaskBoardHtml.class.php:69
-#, fuzzy
 msgid "Delete Column"
-msgstr "Supprimer le consommateur"
+msgstr "Supprimer une colonne"
 
 #: plugins/taskboard/common/views/admin/columns.php:27
 #: plugins/taskboard/common/views/admin/delete_column.php:31
@@ -15317,37 +15158,32 @@ msgstr "Supprimer le consommateur"
 #: plugins/taskboard/common/views/releases/ind.php:26
 #: plugins/taskboard/www/admin/index.php:66 plugins/taskboard/www/index.php:51
 #: plugins/taskboard/www/releases/index.php:64
-#, fuzzy
 msgid "Taskboard for "
-msgstr "Outils de suivi de %s"
+msgstr "Gestionnaire de tâches de "
 
 #: plugins/taskboard/common/views/admin/columns.php:27
 #: plugins/taskboard/common/views/admin/columns.php:28
-#, fuzzy
 msgid "Columns configuration"
-msgstr "Gérer la configuration"
+msgstr "Configuration des colonnes"
 
 #: plugins/taskboard/common/views/admin/columns.php:35
 #: plugins/taskboard/common/views/admin/trackers.php:88
 #: plugins/taskboard/common/views/admin/trackers.php:302
 #: plugins/taskboard/www/index.php:59
 msgid "Choose at least one tracker for using with taskboard."
-msgstr ""
+msgstr "Choisir au moins un outil de suivi à utiliser avec le gestionnaire de tâches."
 
 #: plugins/taskboard/common/views/admin/columns.php:44
-#, fuzzy
 msgid "Max number of tasks"
-msgstr "Nombre de tâches commencées"
+msgstr "Nombre maximum de tâches"
 
 #: plugins/taskboard/common/views/admin/columns.php:44
-#, fuzzy
 msgid "Assigned resolutions"
-msgstr "Confié à"
+msgstr "Réserver la résolution"
 
 #: plugins/taskboard/common/views/admin/columns.php:44
-#, fuzzy
 msgid "Drop resolution"
-msgstr "Précision"
+msgstr "Abandonner la résolution"
 
 #: plugins/taskboard/common/views/admin/columns.php:50
 #: www/survey/include/SurveyHTML.class.php:266
@@ -15355,24 +15191,23 @@ msgid "Down"
 msgstr "Descendre"
 
 #: plugins/taskboard/common/views/admin/columns.php:66
-#, fuzzy
 msgid "Add new column"
-msgstr "Ajouter un nouveau projet fils"
+msgstr "Ajouter une nouvelle colonne"
 
 #: plugins/taskboard/common/views/admin/columns.php:73
 #: plugins/taskboard/common/views/admin/edit_column.php:57
 msgid "Title backgound color"
-msgstr ""
+msgstr "Couleur de fond du titre"
 
 #: plugins/taskboard/common/views/admin/columns.php:77
 #: plugins/taskboard/common/views/admin/edit_column.php:61
 msgid "Column Background color"
-msgstr ""
+msgstr "Couleur de fond des colonnes"
 
 #: plugins/taskboard/common/views/admin/columns.php:81
 #: plugins/taskboard/common/views/admin/edit_column.php:65
 msgid "Maximum tasks number"
-msgstr ""
+msgstr "Nombre maximum de tâches"
 
 #: plugins/taskboard/common/views/admin/columns.php:85
 #: plugins/taskboard/common/views/admin/edit_column.php:86
@@ -15383,108 +15218,92 @@ msgstr ""
 #: plugins/taskboard/common/views/admin/delete_column.php:32
 #: plugins/taskboard/common/views/admin/edit_column.php:32
 #: plugins/taskboard/common/views/admin/edit_column.php:33
-#, fuzzy
 msgid "Column configuration"
-msgstr "Gérer la configuration"
+msgstr "Configuration de la colonne"
 
 #: plugins/taskboard/common/views/admin/delete_column.php:46
 msgid "Column"
-msgstr ""
+msgstr "Colonne"
 
 #: plugins/taskboard/common/views/admin/delete_column.php:47
-#, fuzzy
 msgid "You are about to permanently and irretrievably delete this column!"
-msgstr "Vous êtes sur le point de supprimer irrémédiablement cette version et tous ses fichiers !"
+msgstr "Vous êtes sur le point de supprimer irrémédiablement cette colonne !"
 
 #: plugins/taskboard/common/views/admin/edit_column.php:50
-#, fuzzy
 msgid "Edit column"
-msgstr "Modifier le rôle"
+msgstr "Modifier la colonne"
 
 #: plugins/taskboard/common/views/admin/edit_column.php:69
-#, fuzzy
 msgid "Resolutions"
-msgstr "Précision"
+msgstr "Résolutions"
 
 #: plugins/taskboard/common/views/admin/edit_column.php:90
-#, fuzzy
 msgid "Autoassign"
-msgstr "Responsable"
+msgstr "Assignation automatique"
 
 #: plugins/taskboard/common/views/admin/edit_column.php:96
-#, fuzzy
 msgid "Alert message"
-msgstr "Messages plus anciens"
+msgstr "Message d'alerte"
 
 #: plugins/taskboard/common/views/admin/edit_column.php:136
 msgid "Cannot edit column due to unknown column ID"
-msgstr ""
+msgstr "Impossible de modifier la colonne car son identifiant est inconnu"
 
 #: plugins/taskboard/common/views/admin/edit_column.php:140
 msgid "Cannot edit column due to missing column ID"
-msgstr ""
+msgstr "Impossible de modifier la colonne car son identifiant est manquant"
 
 #: plugins/taskboard/common/views/admin/ind.php:42
-#, fuzzy
 msgid "Configure Trackers"
-msgstr "Cloner l'outil de suivi"
+msgstr "Configurer les outils de suivi"
 
 #: plugins/taskboard/common/views/admin/ind.php:43
 msgid "Choose and configure trackers, used with taskboard."
-msgstr ""
+msgstr "Choisir et configurer les outils de suivi utilisés avec le gestionnaire de tâches."
 
 #: plugins/taskboard/common/views/admin/ind.php:47
 msgid "Configure taskboard columns."
-msgstr ""
+msgstr "Configurer les colonnes du gestionnaire de tâches."
 
 #: plugins/taskboard/common/views/admin/ind.php:50
-#, fuzzy
 msgid "Initialize taskboard"
-msgstr "Initialiser"
+msgstr "Initialiser le gestionnaire de tâches"
 
 #: plugins/taskboard/common/views/admin/ind.php:51
-#, fuzzy
 msgid "Create initial taskboard configuration"
-msgstr "Configuration de tableau de bord général"
+msgstr "Création de la configuration initiale du gestionnaire de tâches"
 
 #: plugins/taskboard/common/views/admin/trackers.php:29
-#, fuzzy
 msgid "Administration - Trackers configuration"
-msgstr "Administration du traceur"
+msgstr "Administration - configuration des outils de suivi"
 
 #: plugins/taskboard/common/views/admin/trackers.php:30
-#, fuzzy
 msgid "Trackers configuration"
-msgstr "Gérer la configuration"
+msgstr "Configuration des outils de suivi"
 
 #: plugins/taskboard/common/views/admin/trackers.php:42
-#, fuzzy
 msgid "There Are No Trackers Defined For This Project"
-msgstr "Aucun paquet de fichiers n'a été défini pour ce projet."
+msgstr "Aucun outil de suivi n'a été défini pour ce projet"
 
 #: plugins/taskboard/common/views/admin/trackers.php:93
-#, fuzzy
 msgid "There are no any tracker having \"resolution\" field."
-msgstr "Aucun paquet de fichiers n'a été défini."
+msgstr "Aucun outil de suivi n'a de champ « resolution »."
 
 #: plugins/taskboard/common/views/admin/trackers.php:102
-#, fuzzy
 msgid "Use"
-msgstr "Utilisateur"
+msgstr "Utiliser"
 
 #: plugins/taskboard/common/views/admin/trackers.php:102
 msgid "Card background color"
-msgstr ""
+msgstr "Couleur de fond de carte"
 
 #: plugins/taskboard/common/views/admin/trackers.php:103
-#, fuzzy
 msgid "Tasks trackers"
-msgstr "Outils de suivi"
+msgstr "Outils de suivi des tâches"
 
 #: plugins/taskboard/common/views/admin/trackers.php:117
-#, fuzzy
 msgid "Estimated effort field"
-msgstr "Durée horaire estimée"
+msgstr "Durée de travail estimée"
 
 #: plugins/taskboard/common/views/admin/trackers.php:118
 #: plugins/taskboard/common/views/admin/trackers.php:122
@@ -15501,110 +15320,96 @@ msgstr "Durée horaire estimée"
 #: plugins/taskboard/common/views/admin/trackers.php:366
 #: plugins/taskboard/common/views/admin/trackers.php:374
 #: plugins/taskboard/common/views/admin/trackers.php:396
-#, fuzzy
 msgid "Not defined"
-msgstr "Aucun hôte virtuel défini"
+msgstr "Indéfini"
 
 #: plugins/taskboard/common/views/admin/trackers.php:121
 msgid "Remaining effort field"
-msgstr ""
+msgstr "Durée de travail restante"
 
 #: plugins/taskboard/common/views/admin/trackers.php:127
-#, fuzzy
 msgid "User story tracker"
-msgstr "Utiliser les outils de suivi"
+msgstr ""
 
 #: plugins/taskboard/common/views/admin/trackers.php:130
-#, fuzzy
 msgid "User stories tracker"
-msgstr "Parcourir le traceur."
+msgstr ""
 
 #: plugins/taskboard/common/views/admin/trackers.php:134
 msgid "User stories reference field"
 msgstr ""
 
 #: plugins/taskboard/common/views/admin/trackers.php:138
-#, fuzzy
 msgid "User stories sorting field"
-msgstr "Statistiques sur le temps consommé par les utilisateurs"
+msgstr ""
 
 #: plugins/taskboard/common/views/admin/trackers.php:143
-#, fuzzy
 msgid "General parameters"
-msgstr "Produire le rapport d'activité"
+msgstr "Paramètres généraux"
 
 #: plugins/taskboard/common/views/admin/trackers.php:146
 msgid "Use first column by default"
-msgstr ""
+msgstr "Utiliser par défaut la premier colonne"
 
 #: plugins/taskboard/common/views/admin/trackers.php:152
-#, fuzzy
 msgid "Releases management"
-msgstr "Gestion de tâches."
+msgstr "Gestion de versions."
 
 #: plugins/taskboard/common/views/admin/trackers.php:160
-#, fuzzy
 msgid "by tasks"
-msgstr "Mes tâches"
+msgstr "par tâches"
 
 #: plugins/taskboard/common/views/admin/trackers.php:161
 msgid "by user stories"
 msgstr ""
 
 #: plugins/taskboard/common/views/admin/trackers.php:164
-#, fuzzy
 msgid "Release field"
-msgstr "Publier le paquet"
+msgstr "Champ version"
 
 #: plugins/taskboard/common/views/releases/add_release.php:28
 #: plugins/taskboard/common/views/releases/add_release.php:29
 #: plugins/taskboard/common/views/releases/add_release.php:63
 #: plugins/taskboard/common/views/releases/ind.php:50
-#, fuzzy
 msgid "Add release"
 msgstr "Ajouter une version"
 
 #: plugins/taskboard/common/views/releases/add_release.php:67
 #: plugins/taskboard/common/views/releases/edit_release.php:81
 #: plugins/taskboard/common/views/releases/ind.php:52
-#, fuzzy
 msgid "Start date"
-msgstr "date de début"
+msgstr "Date de début"
 
 #: plugins/taskboard/common/views/releases/add_release.php:68
 #: plugins/taskboard/common/views/releases/edit_release.php:82
 #: plugins/taskboard/common/views/releases/ind.php:52
-#, fuzzy
 msgid "End date"
-msgstr "date de fin"
+msgstr "Date de fin"
 
 #: plugins/taskboard/common/views/releases/add_release.php:69
 #: plugins/taskboard/common/views/releases/edit_release.php:83
 #: plugins/taskboard/common/views/releases/ind.php:52
 msgid "Goals"
-msgstr ""
+msgstr "Objectifs"
 
 #: plugins/taskboard/common/views/releases/add_release.php:70
 #: plugins/taskboard/common/views/releases/edit_release.php:84
-#, fuzzy
 msgid "Page URL"
-msgstr "Page"
+msgstr "URL de la Page"
 
 #: plugins/taskboard/common/views/releases/delete_release.php:48
-#, fuzzy
 msgid "You are about to permanently and irretrievably delete this release with all indicators!"
-msgstr "Vous êtes sur le point de supprimer irrémédiablement cette version et tous ses fichiers !"
+msgstr "Vous êtes sur le point de supprimer irrémédiablement cette version et tous ses indicateurs !"
 
 #: plugins/taskboard/common/views/releases/edit_release.php:41
 #: plugins/taskboard/common/views/releases/edit_release.php:42
 #: plugins/taskboard/common/views/releases/edit_release.php:77
-#, fuzzy
 msgid "Edit release"
-msgstr "Éditer la version"
+msgstr "Modifier une version"
 
 #: plugins/taskboard/common/views/releases/ind.php:41
 msgid "Release field is not configured"
-msgstr ""
+msgstr "Le champ version n'est pas configuré"
 
 #: plugins/taskboard/common/views/releases/ind.php:52
 #: plugins/wiki/common/WikiHtmlSearchRenderer.class.php:50
@@ -15612,53 +15417,46 @@ msgid "Page"
 msgstr "Page"
 
 #: plugins/taskboard/www/admin/ajax.php:43 plugins/taskboard/www/ajax.php:37
-#, fuzzy
 msgid "Group is not found"
-msgstr "Groupe non trouvé"
+msgstr "Groupe introuvable"
 
 #: plugins/taskboard/www/admin/index.php:72
 #: plugins/taskboard/www/releases/index.php:70
 msgid "Your project does not use tracker feature. Please contact your Administrator to turn on this feature."
-msgstr ""
+msgstr "Votre projet n'utilise pas cette fonctionnalité de l'outil de suivi. Veuillez contacter votre administrateur pour l'activer."
 
 #: plugins/taskboard/www/index.php:33
-#, fuzzy
 msgid "Cannot Process your request : No ID specified"
-msgstr "Erreur de traitement de votre requête : pas d'identifiant spécifié."
+msgstr "Impossible d'exécuter votre requête : aucun identifiant spécifié"
 
 #: plugins/taskboard/www/index.php:65
 msgid "Configure columns for the board first."
-msgstr ""
+msgstr "Configurer les colonnes du premier tableau."
 
 #: plugins/taskboard/www/index.php:71
 #, php-format
 msgid "Resolutions list is empty for \"%s\", column is not dropable"
-msgstr ""
+msgstr "La liste des résolutions de « %s » est vide, la colonne n'est pas supprimable"
 
 #: plugins/taskboard/www/index.php:147
-#, fuzzy
 msgid "Save release snapshot"
-msgstr "Gérer les versions"
+msgstr "Enregistrer le cliché de version"
 
 #: plugins/taskboard/www/index.php:229
-#, fuzzy
 msgid "There are no tasks found."
-msgstr "Aucun paquet de fichiers n'a été défini."
+msgstr "Aucun tâche trouvée."
 
 #: plugins/taskboard/www/index.php:230
-#, fuzzy
 msgid "Progress by tasks"
-msgstr "Avancement"
+msgstr "Avancement par tâche"
 
 #: plugins/taskboard/www/index.php:231
-#, fuzzy
 msgid "Progress by cost"
-msgstr "Avancement"
+msgstr "Avancement par coût"
 
 #: plugins/taskboard/www/index.php:266
-#, fuzzy
 msgid "Create task"
-msgstr "Créer une nouvelle tâche"
+msgstr "Créer une tâche"
 
 #: plugins/twitter/www/checks.php:99
 msgid "You have no Twitter Access Tokens registered in the database currently"
@@ -15669,9 +15467,8 @@ msgid "Could not find a twitter provider registered in the database. If a twitte
 msgstr "Impossible de trouver un fournisseur twitter enregistré dans la base de données. Si un fournisseur twitter existe, il doit être appelé « Twitter » ou être créé dans un greffon consommateur d'OAuth"
 
 #: plugins/webanalytics/action/addLink.php:37
-#, fuzzy
 msgid "Missing Link Code or name."
-msgstr "URL ou nom manquant."
+msgstr "Code ou nom de de lien manquant."
 
 #: plugins/webanalytics/action/updateLinkValue.php:33
 msgid "Link updated"
@@ -15679,15 +15476,17 @@ msgstr "Lien mis à jour"
 
 #: plugins/webanalytics/common/webanalyticsPlugin.class.php:30
 msgid "webanalytics"
-msgstr ""
+msgstr "webanalytics"
 
 #: plugins/webanalytics/common/webanalyticsPlugin.class.php:32
-#, fuzzy
 msgid ""
 "webanalytics plugin for FusionForge. Get the ability\n"
 "to configure specific URL for web analytics tool\n"
 "such as Piwik or Google Analytics."
-msgstr "Obtenir l'autorisation de configurer un URL particulier pour un outil web analytics tel que Piwik ou Google Analytics."
+msgstr ""
+"greffon webanalytics pour FusionForge. Ayez la possibilité de configurer\n"
+"une URL spécifique pour l'outil d'analyse du trafic web tel que Piwik ou\n"
+"Google Analytics."
 
 #: plugins/webanalytics/common/webanalyticsPlugin.class.php:60
 msgid "Global WebAnalytics admin"
@@ -15730,6 +15529,8 @@ msgid ""
 "PhpWiki plugin for FusionForge. Allows for one wiki per project, integrated search,\n"
 "page edits displayed on activity tab, and multi-project wiki preferences."
 msgstr ""
+"Greffon PhpWiki pour FusionForge. Autorise un wiki par projet, avec une recherche intégré,\n"
+"l'affichage des modifications de page dans un onglet activité et des préférences de wiki multi-projet."
 
 #: plugins/wiki/common/WikiPlugin.class.php:77
 msgid "Wiki Admin"
@@ -15757,7 +15558,7 @@ msgstr "Cochez la case pour activer l'évaluation des pages. Les utilisateurs id
 
 #: utils/plugin_pkg_desc.php:52
 msgid "FusionForge plugin"
-msgstr ""
+msgstr "Greffon FusionForge"
 
 #: utils/plugin_pkg_desc.php:54
 msgid ""
@@ -15767,6 +15568,12 @@ msgid ""
 "web/FTP hosting, release management, etc. All these services are\n"
 "integrated into one web site and managed through a web interface."
 msgstr ""
+"FusionForge fournie un certain nombre d'outils pour faciliter les projets de\n"
+"développement collaboratifs, tel un outil de suivi de bogues, un gestionnaire\n"
+"de tâches, des listes de diffusion, un dépôt de code, des forums, un\n"
+"mécanisme d'aide des utilisateurs, un hébergement web / FTP, un gestionnaire\n"
+"de versions, etc. Tous ces services sont intégrés en un seul site et\n"
+"gérés à travers une interface web."
 
 #: www/404.php:26
 msgid "Requested Page not Found (Error 404)"
@@ -15937,9 +15744,8 @@ msgid "Add a new ssh key"
 msgstr "Ajouter une nouvelle clef SSH"
 
 #: www/account/editsshkeys.php:67
-#, fuzzy
 msgid "To avoid having to type your password every time for your CVS/SSH developer account, you may upload your public key(s) here and they will be placed on the server in your ~/.ssh/authorized_keys file. Uploaded SSH keys are effective <em>immediately</em>."
-msgstr "Pour éviter d'avoir à saisir votre mot de passe à chaque fois que vous utilisez votre compte CVS/SSH, vous pouvez déposer votre clef publique ici et elles seront placées sur le serveur dans votre fichier ~/.ssh/authorized_keys. Cette opération s'effectue à l'aide d'une tâche programmée et n'est donc pas instantanée. Attendez-vous à un délai d'une heure."
+msgstr "Pour éviter d'avoir à saisir votre mot de passe à chaque fois que vous utilisez votre compte CVS/SSH, vous pouvez déposer vos clefs publiques ici et elles seront placées sur le serveur dans votre fichier ~/.ssh/authorized_keys. Les clefs SSH seront disponibles <em>immédiatement</em>."
 
 #: www/account/editsshkeys.php:68
 msgid "To generate a public key, run the program 'ssh-keygen' (you can use both protocol 1 or 2). The public key will be placed at '~/.ssh/identity.pub' (protocol version 1) and '~/.ssh/id_dsa.pub' or '~/.ssh/id_rsa.pub' (protocol version 2). Read the ssh documentation for further information on sharing keys."
@@ -16267,19 +16073,16 @@ msgid "Tracker Closed"
 msgstr "Élément de suivi fermé"
 
 #: www/activity/index.php:122
-#, fuzzy
 msgid "Tasks Opened"
-msgstr "Élément de suivi ouvert"
+msgstr "Tâches ouvertes"
 
 #: www/activity/index.php:124
-#, fuzzy
 msgid "Tasks Closed"
-msgstr "Tâche fermée"
+msgstr "Tâches fermées"
 
 #: www/activity/index.php:126
-#, fuzzy
 msgid "Tasks Deleted"
-msgstr "Supprimé"
+msgstr "Tâches supprimées"
 
 #: www/activity/index.php:131 www/activity/index.php:322
 msgid "FRS Release"
@@ -16318,9 +16121,8 @@ msgid "Source Code"
 msgstr "Code source"
 
 #: www/activity/index.php:307
-#, fuzzy
 msgid "scm commit"
-msgstr "envoi de code source : "
+msgstr "envoi scm"
 
 #: www/activity/index.php:312 www/stats/site_stats_utils.php:268
 #: www/stats/site_stats_utils.php:270 www/stats/site_stats_utils.php:272
@@ -16945,21 +16747,19 @@ msgstr "Erreur de programmation de courrier. Impossible de programmer le courrie
 
 #: www/admin/massmail.php:79
 msgid "Mailing successfully scheduled for delivery"
-msgstr "Courrier programmé avec succès"
+msgstr ""
 
 #: www/admin/massmail.php:87
 msgid "Delivery Id"
 msgstr ""
 
 #: www/admin/massmail.php:93
-#, fuzzy
 msgid "Scheduling Mailing, Could not delete mailing, database error: "
-msgstr "Erreur de programmation de courrier. Impossible de programmer le courrier, erreur de base de données : "
+msgstr "Programmation des envois de messages. Impossible de supprimer l'envoi de messages, erreur de base de données : "
 
 #: www/admin/massmail.php:95
-#, fuzzy
 msgid "Mailing successfully deleted for delivery"
-msgstr "Courrier programmé avec succès"
+msgstr ""
 
 #: www/admin/massmail.php:107 www/admin/massmail.php:163
 msgid "Active Deliveries"
@@ -17306,9 +17106,8 @@ msgid "You can unsubscribe user either from admin-initiated sitewide mailings or
 msgstr "Vous pouvez désabonner un utilisateur soit pour les envois de mails généraux, soit pour tous les envois de mails (envois de mails généraux et diffusions automatiques, comme pour les forums et les notifications de mises à jours)."
 
 #: www/admin/unsubscribe.php:57
-#, fuzzy
 msgid "Unsubscription type:"
-msgstr "Désabonnement effectué"
+msgstr "Type de désabonnement :"
 
 #: www/admin/unsubscribe.php:58
 msgid "MAIL"
@@ -17343,7 +17142,7 @@ msgstr "Utilisez le champ ci-dessous pour trouver des utilisateurs correspondant
 
 #: www/admin/unsubscribe.php:98
 msgid "Pattern:"
-msgstr ""
+msgstr "Motif :"
 
 #: www/admin/unsubscribe.php:99
 msgid "Show users matching pattern"
@@ -17438,7 +17237,7 @@ msgstr "Ajouter un membre aux projets"
 
 #: www/admin/useredit.php:289
 msgid "(100 shown)"
-msgstr ""
+msgstr "(100 affichés)"
 
 #: www/admin/useredit.php:295
 msgid "Select role"
@@ -17729,9 +17528,8 @@ msgid "No document to display - invalid or inactive document number."
 msgstr "Aucun document à afficher : le numéro de document est invalide, ou correspond à un document inactif."
 
 #: www/docman/view.php:302
-#, fuzzy
 msgid "PHP ZIP extension is missing."
-msgstr "L'extension PHP est manquante."
+msgstr "L'extension PHP ZIP est manquante."
 
 #: www/export/index.php:29
 msgid "Exports Available"
@@ -17912,9 +17710,9 @@ msgid "Monitoring Users"
 msgstr "Utilisateurs surveillant ce forum"
 
 #: www/forum/admin/monitor.php:52
-#, fuzzy, php-format
+#, php-format
 msgid "Forum %s Monitoring Users"
-msgstr "Pas d'utilisateurs surveillant ce forum"
+msgstr "%s utilisateurs surveillent ce forum"
 
 #: www/forum/admin/monitor.php:61
 msgid "No Monitoring Users"
@@ -17956,12 +17754,10 @@ msgid "You cannot edit this attachment"
 msgstr "Vous ne pouvez pas modifier cette pièce jointe."
 
 #: www/forum/attachment.php:144
-#, fuzzy
 msgid "Attachment saved"
-msgstr "Pièces jointes"
+msgstr "Pièce jointe enregistrée"
 
 #: www/forum/attachment.php:157
-#, fuzzy
 msgid "No attachment found"
 msgstr "Aucune pièce jointe trouvée"
 
@@ -18092,14 +17888,12 @@ msgid "Forum Position Saved. New messages will be highlighted when you return"
 msgstr "Position dans le forum enregistrée. Les nouveaux messages seront mis en valeur lorsque vous reviendrez."
 
 #: www/frs/download.php:230
-#, fuzzy
 msgid "Invalid download mode"
-msgstr "Dossier invalide"
+msgstr "Mode de téléchargement invalide"
 
 #: www/frs/index.php:109
-#, fuzzy
 msgid "Project Filelist for "
-msgstr "Liste de fichiers du projet"
+msgstr "Liste de fichiers du projet "
 
 #: www/include/Layout.class.php:135
 msgid "Cannot find theme directory!"
@@ -18345,9 +18139,8 @@ msgid "Manage your account. Change your password, select your preferences."
 msgstr "Gérez votre compte. Modifiez votre mot de passe, sélectionnez vos préférences."
 
 #: www/include/html.php:1010
-#, fuzzy
 msgid "System tasks"
-msgstr "Afficher les tâches"
+msgstr "Tâches systèmes"
 
 #: www/include/html.php:1012
 msgid "In-progress and past system replication"
@@ -18631,48 +18424,40 @@ msgid "Docman:"
 msgstr "Docman :"
 
 #: www/index_std.php:55
-#, fuzzy
 msgid "Files moved to filesystem using the Storage generic class (TrivialDev)"
-msgstr "Docman : fichiers déplacées sur le système de fichier utilisant une classe générique de stockage (TrivialDev)"
+msgstr "Fichiers déplacées sur le système de fichier utilisant une classe générique de stockage (TrivialDev)"
 
 #: www/index_std.php:56
-#, fuzzy
 msgid "Directory monitoring (TrivialDev)"
-msgstr "Docman : surveillance de répertoire (TrivialDev)"
+msgstr "Surveillance de répertoire (TrivialDev)"
 
 #: www/index_std.php:57
-#, fuzzy
 msgid "Display number of download per file, max upload size (TrivialDev)"
-msgstr "Docman : Afficher le nombre de téléchargement par fichier, taille d'envoi maximale (TrivialDev)"
+msgstr "Afficher le nombre de téléchargement par fichier, taille d'envoi maximale (TrivialDev)"
 
 #: www/index_std.php:58
-#, fuzzy
 msgid "Add report view as in FRS (TrivialDev)"
-msgstr "Docman : ajout d'une vue FRS au rapport (TrivialDev)"
+msgstr "Ajout d'un rapport comme dans FRS (TrivialDev)"
 
 #: www/index_std.php:61
-#, fuzzy
 msgid "User management:"
-msgstr "Gestion de tâches."
+msgstr "Gestion de l'utilisateur :"
 
 #: www/index_std.php:63
-#, fuzzy
 msgid "Account ssh key management: rewrite backend, add more informations such as fingerprint, deploy flag, easy delete (TrivialDev)"
-msgstr "Utilisateur : gestion de clef ssh du compte : réécrire de la gestion interne, ajout d'autres informations tel que fingerprint, état de déploiement, suppression facile (TrivialDev)"
+msgstr "Gestion de clef ssh de compte : réécriture de la partie arrière, ajout d'informations tel que l'empreinte, l'état de déploiement, la suppression facile (TrivialDev)"
 
 #: www/index_std.php:64
-#, fuzzy
 msgid "Notify admins when user has validated his account (TrivialDev)"
-msgstr "Utilisateurs : notifier les administrateurs lorsque l'utilisateur a validé son compte (TrivialDev)"
+msgstr "Notification des administrateurs lorsqu'un utilisateur a validé son compte (TrivialDev)"
 
 #: www/index_std.php:65
 msgid "New SOAP services to handle adding/removing groups, users and tasks (patch by Pasquale Vitale)"
 msgstr "Nouveaux services SOAP pour contrôler l'ajout/retrait des groupes, utilisateurs et tâches ((patch de Pasquale Vitale))"
 
 #: www/index_std.php:68
-#, fuzzy
 msgid "Project activity:"
-msgstr "Activité du projet"
+msgstr "Activité du projet :"
 
 #: www/index_std.php:70
 msgid "Allow project to disable the Project Activity (Alcatel-Lucent)"
@@ -18695,9 +18480,8 @@ msgid "New javascript based graphics (bybye jpgraph) (TrivialDev)"
 msgstr "Nouveaux graphiques javascript (bybye jpgraph) (TrivialDev"
 
 #: www/index_std.php:77 www/index_std.php:128
-#, fuzzy
 msgid "Widgets:"
-msgstr "Gadgets de %s"
+msgstr "Gadgets :"
 
 #: www/index_std.php:79
 msgid "Widget: MyArtifacts Enhancement: add monitored artifacts (TrivialDev)"
@@ -18713,36 +18497,31 @@ msgstr "Greffons :"
 
 #: www/index_std.php:86
 msgid "scmgit:"
-msgstr ""
+msgstr "scmgit :"
 
 #: www/index_std.php:88
-#, fuzzy
 msgid "Multiple repositories per project (developed for/sponsored by AdaCore)"
-msgstr "scmgit : plusieurs dépôts par projet (développé et sponsorisé par AdaCore)"
+msgstr "Plusieurs dépôts par projet (développé pour et sponsorisé par AdaCore)"
 
 #: www/index_std.php:89
-#, fuzzy
 msgid "Add browsing capability for user personal repository (TrivialDev)"
-msgstr "scmgit : ajout de capacités de navigation pour le dépôt utilisateur personnel (TrivialDev)"
+msgstr "Ajout de capacités de navigation pour le dépôt utilisateur personnel (TrivialDev)"
 
 #: www/index_std.php:90 www/index_std.php:123
-#, fuzzy
 msgid "Basic activity support (TrivialDev)"
-msgstr "scmgit : prise en charge minimale de l'activité (TrivialDev)"
+msgstr "Prise en charge minimale de l'activité (TrivialDev)"
 
 #: www/index_std.php:93
 msgid "scmhook"
-msgstr ""
+msgstr "scmhook"
 
 #: www/index_std.php:95
-#, fuzzy
 msgid "commitEmail support for scmhg plugin (TrivialDev)"
-msgstr "scmhook : ajout de la prise en charge de commitEmail pour le greffon scmhg (TrivialDev)"
+msgstr "Ajout de la prise en charge de commitEmail pour le greffon scmhg (TrivialDev)"
 
 #: www/index_std.php:96
-#, fuzzy
 msgid "change properties support for SVN pre-revprop-changehooks (Alcatel-Lucent)"
-msgstr "scmhook : ajout du support de pre-revprop-changehooks pour modifier les propriétés (Alcatel-Lucent)"
+msgstr "Modification de la prise en charge des propriétés pre-revprop-changehooks de SVN (Alcatel-Lucent)"
 
 #: www/index_std.php:97
 msgid "svncommitemail: this plugin is superseed by scmhook"
@@ -18753,9 +18532,8 @@ msgid "svntracker: this plugin is superseed by scmhook"
 msgstr "svntracker : ce greffon est remplacé par scmhook"
 
 #: www/index_std.php:101
-#, fuzzy
 msgid "scmhg: http support, online browsing, stats (Denise Patzker, TrivialDev)"
-msgstr "scmhg : fusion du patch de Denise Patzker : ajout de la prise en charge, navigation en ligne, des statistiques (TrivialDev)"
+msgstr "scmhg : prise en charge du protocole http, de la navigation en ligne, des statistiques (Denise Patzker, TrivialDev)"
 
 #: www/index_std.php:102
 msgid "headermenu: new plugin to handle links in headermenu, outermenu & groupmenu (TrivialDev)"
@@ -18782,33 +18560,28 @@ msgid "What's new in FusionForge 5.2"
 msgstr "Les nouveautés de FusionForge 5.2"
 
 #: www/index_std.php:114
-#, fuzzy
 msgid "Inject ZIP as a tree (Capgemini)"
-msgstr "Docman : injecter ZIP comme un arbre (Capgemini)"
+msgstr "Injecter ZIP comme un arbre (Capgemini)"
 
 #: www/index_std.php:115
-#, fuzzy
 msgid "Mass action (Capgemini)"
-msgstr "Documents : action de masse (Capgemini)"
+msgstr "Action collective (Capgemini)"
 
 #: www/index_std.php:116
-#, fuzzy
 msgid "Interaction with the projects-hierarchy plugin to enable hierarchical browsing. (Capgemini)"
-msgstr "Docman : interaction avec de greffon de hiérarchie de projet pour activer la navigation hiérarchique (Capgemini)."
+msgstr "Interaction avec le greffon de hiérarchie de projet pour activer la navigation hiérarchique (Capgemini)."
 
 #: www/index_std.php:117
-#, fuzzy
 msgid "Complete rewritten of trash and pending view (Capgemini)"
-msgstr "Docman : réécriture complète de la corbeille et de la vue des suspends (Capgemini)"
+msgstr "Réécriture complète de la corbeille et de la vue des suspends (Capgemini)"
 
 #: www/index_std.php:120
 msgid "scmsvn:"
-msgstr ""
+msgstr "scmsvn :"
 
 #: www/index_std.php:122
-#, fuzzy
 msgid "Private projects can now be browsed with viewvc, using user rights management (TrivialDev)."
-msgstr "scmsvn : un projet privé peut maintenant être parcouru avec viewvc en utilisant les droits utilisateur (TrivialDev)."
+msgstr "Les projets privés peuvent maintenant être parcouru avec viewvc en utilisant les droits utilisateur (TrivialDev)."
 
 #: www/index_std.php:126
 msgid "Trackers: New view to display roadmaps view for trackers (Alcatel-Lucent)"
@@ -18819,18 +18592,16 @@ msgid "Admin: User add membership to multiples projects in one shot (Capgemini)"
 msgstr "Admin : l'utilisateur peut devenir membre de plusieurs projets en une opération (Capgemini)"
 
 #: www/index_std.php:130
-#, fuzzy
 msgid "New Widget: last 5 documents published in my project (Capgemini)"
-msgstr "Widget : nouveau Widget utilisateur : les cinq derniers documents publiés dans mon projet (Capgemini)"
+msgstr "Nouveau gadget : les 5 derniers documents publiés de mon projet (Capgemini)"
 
 #: www/index_std.php:131
 msgid "New Widget: smcgit personal URL of cloned repositories. Currently just a list of URLs of your personal repository cloned from project you belong. (Capgemini)"
 msgstr "Nouveau Widget : URL smcgit personnel de dépôts clonés. Pour le moment une liste d'URLs de dépôts clonés personnels de projets dont vous êtes membre (Capgemini)."
 
 #: www/index_std.php:137
-#, fuzzy
 msgid "New Scmhook plugin: complete library to handle hooks for any scm available in fusionforge. Currently supporting post-commit and pre-commit hook. scmsvn pre-commit and post-commit library is provided (Capgemini)"
-msgstr "nouveau Scmhook : bibliothèque complète fournissant des déclencheurs pour chaque gestionnaire de version disponible dans fusionforge. Actuellement priend en charge les déclencheurs post-commit et pre-commit. La bibliothèque de déclencheurs pre-commit et post-commit est fournie (Capgemini)"
+msgstr "Nouveau greffon Scmhook : bibliothèque complète fournissant des déclencheurs pour chaque gestionnaire de version disponible dans fusionforge. Actuellement prend en charge les déclencheurs post-commit et pre-commit. La bibliothèque de déclencheurs pre-commit et post-commit est fournie pour scmsvn (Capgemini)"
 
 #: www/index_std.php:138
 msgid "New Message plugin to display global messages like planned upgrade or outage (Alcatel-Lucent)."
@@ -19016,9 +18787,8 @@ msgid "Changed"
 msgstr "Modifié"
 
 #: www/my/dashboard.php:99
-#, fuzzy
 msgid "This project is not using the tracker feature."
-msgstr "%s n'utilise pas l'outil de suivi"
+msgstr "Ce projet n'utilise pas l'outil de suivi."
 
 #: www/my/diary.php:63
 msgid "Diary Updated"
@@ -19103,7 +18873,7 @@ msgstr "Vous êtes sur le point de vous désister de ce projet. Veuillez confirm
 
 #: www/my/systasks.php:43
 msgid "System actions queue (past day)"
-msgstr ""
+msgstr "File d'attente des action système (jour précédent)"
 
 #: www/my/systasks.php:55
 msgid "Task ID"
@@ -19114,27 +18884,24 @@ msgid "Plugin"
 msgstr "Greffon"
 
 #: www/my/systasks.php:57
-#, fuzzy
 msgid "SysTask Type"
-msgstr "Type d'onglet"
+msgstr "Type de tâche système"
 
 #: www/my/systasks.php:58 www/pm/task.php:69
 msgid "Group ID"
 msgstr "N<sup>o</sup> de projet"
 
 #: www/my/systasks.php:60
-#, fuzzy
 msgid "Requested"
-msgstr "Demander des jetons"
+msgstr "Demandée"
 
 #: www/my/systasks.php:61
-#, fuzzy
 msgid "Started"
-msgstr "Non débuté"
+msgstr "Démarrée"
 
 #: www/my/systasks.php:62
 msgid "Stopped"
-msgstr ""
+msgstr "Arrêtée"
 
 #: www/new/index.php:31
 msgid "New File Releases"
@@ -19521,11 +19288,10 @@ msgid "Failed to update skills: %s"
 msgstr "Échec lors de la mise à jour de la compétence : %s."
 
 #: www/people/editprofile.php:145
-#, fuzzy
 msgid "Skill updated"
 msgid_plural "Skills updated"
 msgstr[0] "Compétence mise à jour"
-msgstr[1] "Compétence mise à jour"
+msgstr[1] "Compétences mise à jour"
 
 #: www/people/editprofile.php:150
 msgid "Edit Skills"
@@ -19553,22 +19319,20 @@ msgid "Failed to delete any skills: %s"
 msgstr "Échec de la suppression de compétences : %s"
 
 #: www/people/editprofile.php:188
-#, fuzzy
 msgid "Skill deleted successfully"
 msgid_plural "Skills deleted successfully"
 msgstr[0] "Compétence correctement supprimée"
-msgstr[1] "Compétence correctement supprimée"
+msgstr[1] "Compétences correctement supprimées"
 
 #: www/people/editprofile.php:197
 msgid "Confirm skill delete"
 msgstr "Confirmation de la suppression d'une compétence"
 
 #: www/people/editprofile.php:200
-#, fuzzy
 msgid "You are about to delete the following skill from the skills database:"
 msgid_plural "You are about to delete the following skills from the skills database:"
 msgstr[0] "Vous êtes sur le point de supprimer la compétence suivante du référentiel des compétences :"
-msgstr[1] "Vous êtes sur le point de supprimer la compétence suivante du référentiel des compétences :"
+msgstr[1] "Vous êtes sur le point de supprimer les compétences suivantes du référentiel des compétences :"
 
 #: www/people/editprofile.php:205
 msgid "This action cannot be undone."
@@ -19806,9 +19570,8 @@ msgid "Skills profile for"
 msgstr "Profil de compétence pour"
 
 #: www/people/viewprofile.php:73
-#, fuzzy
 msgid "Edit your profile"
-msgstr "Édition de votre profil"
+msgstr "Modifier votre profil"
 
 #: www/people/viewprofile.php:86
 msgid "User_id not found."
@@ -19971,9 +19734,9 @@ msgid "Detailed"
 msgstr "Détail"
 
 #: www/pm/browse_task.php:178
-#, fuzzy, php-format
+#, php-format
 msgid "Displaying results %1$s out of %2$d total."
-msgstr "Affichage des résultats %1$d‒%2$d (sur un total de %3$d)."
+msgstr "Affichage de %1$s résultats sur un total de %2$d."
 
 #: www/pm/browse_task.php:200 www/pm/ganttpage.php:186
 msgid "Sort On"
@@ -20139,9 +19902,8 @@ msgid "Selected CSV Format"
 msgstr "Format CSV sélectionné"
 
 #: www/pm/csv.php:81
-#, fuzzy
 msgid "(Change)"
-msgstr "Modifier"
+msgstr "(modification)"
 
 #: www/pm/csv.php:82
 msgid "Export CSV file"
@@ -20156,14 +19918,12 @@ msgid "Choose a file in the proper .csv format for uploading."
 msgstr "Choisissez un fichier au format CSV à importer."
 
 #: www/pm/csv.php:89
-#, fuzzy
 msgid "Replace all tasks by the ones present in the file"
-msgstr "Attention, lors de l'importation d'un fichier CSV, toutes les tâches seront remplacées par celles du fichier."
+msgstr "Remplacer toutes les tâches par celles du fichier"
 
 #: www/pm/csv.php:90
-#, fuzzy
 msgid "Add the ones from the file to the existing ones"
-msgstr "Ajouter une première ligne avec le nom des champs."
+msgstr "Ajouter celles du fichier à celle existantes"
 
 #: www/pm/csv.php:95
 msgid "If project_task_id is empty, then a new task will be created."
@@ -20273,9 +20033,8 @@ msgid "Task Detail"
 msgstr "Détails d'une tâche"
 
 #: www/pm/detail_task.php:46
-#, fuzzy
 msgid "Task Detail Information (JSON)"
-msgstr "Informations personnelles"
+msgstr "Informations détaillées sur la tâche (JSON)"
 
 #: www/pm/detail_task.php:55 www/pm/mod_task.php:108
 msgid "Subscribe to task"
@@ -20449,7 +20208,7 @@ msgstr "Jour"
 
 #: www/pm/postuploadcsv.php:125
 msgid "Wrong file type. Only plain CSV file supported"
-msgstr ""
+msgstr "Type de fichier erroné. Seul le format de fichier CVS ordinaire est pris en charge"
 
 #: www/pm/postuploadcsv.php:128
 msgid "Parameter error"
@@ -20639,9 +20398,8 @@ msgid "Del"
 msgstr "Suppr"
 
 #: www/project/admin/group_trove.php:43
-#, fuzzy
 msgid "Changed Trove"
-msgstr "Modifié"
+msgstr "Arborescence modifiée"
 
 #: www/project/admin/group_trove.php:70
 msgid "Trove Update Success"
@@ -20727,30 +20485,27 @@ msgstr "Lien vers la page d'accueil"
 
 #: www/project/admin/index.php:257
 msgid "Notifications setup"
-msgstr ""
+msgstr "Configuration des notifications"
 
 #: www/project/admin/index.php:267
-#, fuzzy
 msgid "If you wish, you can provide default email addresses to which new submissions (documents or folders) will be sent"
-msgstr "Si vous le désirez, vous pouvez fournir une adresse électronique par défaut à laquelle les nouvelles soumissions seront envoyées"
+msgstr "Si vous le désirez, vous pouvez fournir une adresse électronique par défaut à laquelle les nouvelles soumissions (de documents ou répertoires) seront envoyées"
 
 #: www/project/admin/index.php:268
-#, fuzzy
 msgid "New document or folder Submissions"
-msgstr "Soumission de nouveaux documents"
+msgstr "Nouvelles soumissions de document ou de répertoire"
 
 #: www/project/admin/index.php:270 www/project/admin/index.php:287
 msgid "(send on all updates)"
 msgstr "(envoi pour toutes les mises à jour)"
 
 #: www/project/admin/index.php:284
-#, fuzzy
 msgid "If you wish, you can provide default email addresses to which new FRS (packages, releases or files) will be sent"
 msgstr "Si vous le désirez, vous pouvez fournir une adresse électronique par défaut à laquelle les nouvelles soumissions seront envoyées"
 
 #: www/project/admin/index.php:285
 msgid "New packages, releases, files Submissions"
-msgstr ""
+msgstr "Nouveaux paquets, versions, soumissions de fichiers"
 
 #: www/project/admin/massadd.php:67 www/project/admin/massfinish.php:62
 #: www/project/admin/users.php:234
@@ -20859,14 +20614,12 @@ msgid "You can't delete a role belonging to another project."
 msgstr "Vous ne pouvez pas supprimer depuis cette page un rôle qui appartient à un autre projet."
 
 #: www/project/admin/roledelete.php:67
-#, fuzzy
 msgid "Deleted Role"
-msgstr "Supprimer le rôle"
+msgstr "Supprimer un rôle"
 
 #: www/project/admin/roledelete.php:71
-#, fuzzy
 msgid "Please check “I am Sure” to confirm or return to previous page to cancel."
-msgstr "Erreur : veuillez cocher « Je confirme » ou retourner à la page précédente pour annuler."
+msgstr "Veuillez cocher « Je suis certain » ou retourner à la page précédente pour annuler."
 
 #: www/project/admin/roledelete.php:76
 #, php-format
@@ -20879,14 +20632,12 @@ msgid "You are about to permanently delete role %s"
 msgstr "Vous êtes sur le point de supprimer définitivement le rôle %s."
 
 #: www/project/admin/roleedit.php:96
-#, fuzzy
 msgid "Added Role"
-msgstr "Réponse ajoutée"
+msgstr "Rôle ajouté"
 
 #: www/project/admin/roleedit.php:106
-#, fuzzy
 msgid "Updated Role"
-msgstr "Nouvelle valeur"
+msgstr "Rôle mis à jour"
 
 #: www/project/admin/roleedit.php:113
 msgid "New Role"
@@ -21015,18 +20766,16 @@ msgid "Role linked successfully"
 msgstr "Le rôle a été référencé"
 
 #: www/project/admin/users.php:164
-#, fuzzy
 msgid "Linked Role"
-msgstr "Déréférencer le rôle"
+msgstr "Rôle lié"
 
 #: www/project/admin/users.php:177
 msgid "Role unlinked successfully"
 msgstr "Le rôle a été déréférencé"
 
 #: www/project/admin/users.php:178
-#, fuzzy
 msgid "Unlinked Role"
-msgstr "Déréférencer le rôle"
+msgstr "Rôle déréférencé"
 
 #: www/project/admin/users.php:188
 #, php-format
@@ -21075,9 +20824,8 @@ msgid "Link external role"
 msgstr "Référencer"
 
 #: www/project/admin/vhost.php:61
-#, fuzzy
 msgid "Cannot insert VHOST entry:"
-msgstr "Impossible d'ajouter une nouvelle identité : %s"
+msgstr "Impossible d'insérer une nouvelle entrée d'hôte virtuel :"
 
 #: www/project/admin/vhost.php:63
 msgid "Virtual Host scheduled for creation."
@@ -21089,9 +20837,8 @@ msgid "Not a valid hostname - %s"
 msgstr "%s n'est pas un nom d'hôte valide"
 
 #: www/project/admin/vhost.php:100
-#, fuzzy
 msgid "Could not delete VHOST entry:"
-msgstr "Erreur lors de la suppression de la liste : "
+msgstr "Impossible de supprimer une entrée d'hôte virtuel : "
 
 #: www/project/admin/vhost.php:102
 msgid "VHOST deleted"
@@ -21159,7 +20906,7 @@ msgstr "Contacter %s"
 
 #: www/project/report/index.php:197
 msgid "done"
-msgstr ""
+msgstr "fait"
 
 #: www/project/request.php:50
 msgid "Your request has been submitted."
@@ -21204,7 +20951,7 @@ msgstr "L'enregistrement de nouveaux projets est restreint sur %s, seuls les adm
 
 #: www/register/index.php:109
 msgid "No purpose given, autoapprove was on"
-msgstr ""
+msgstr "Aucune justification fournie, la validation automatique était activée"
 
 #: www/register/index.php:139
 msgid "Registration complete"
@@ -21295,9 +21042,9 @@ msgid "Your Unix name is important, however, because it will be used for many th
 msgstr "Ce nom Unix est important, car il est utilisé des manières suivantes :"
 
 #: www/register/index.php:237
-#, fuzzy, php-format
+#, php-format
 msgid "a web site at <samp>unixname.%s</samp>,"
-msgstr "un site web à l'adresse <tt>unixname.%s</tt>,"
+msgstr "un site web à l'adresse <samp>unixname.%s</samp>,"
 
 #: www/register/index.php:238
 msgid "the URL of your source code repository,"
@@ -21547,9 +21294,8 @@ msgid "Note: Changing the repository does not delete the previous repository.  I
 msgstr "Note : Changer de dépôt ne supprime pas le dépôt précédent. Cela n'affecte que les informations affichées dans l'onglet « Code source »."
 
 #: www/scm/admin/index.php:193
-#, fuzzy
 msgid "Site has SCM but no plugins registered"
-msgstr "Erreur : le site a activé le suivi de versions, mais aucun greffon adéquat n'est installé."
+msgstr "Le site a un SCM mais pas de greffon enregistré"
 
 #: www/scm/include/scm_utils.php:51
 msgid "View Source Code"
@@ -21568,9 +21314,8 @@ msgid "Administration page : enable / disable options"
 msgstr "Page d'administration : activer / désactiver les options"
 
 #: www/scm/include/scm_utils.php:234
-#, fuzzy
 msgid "Others"
-msgstr "Autre"
+msgstr "Autres"
 
 #: www/scm/include/scm_utils.php:240
 msgid "Commits By User"
@@ -21722,9 +21467,8 @@ msgid "Post Date"
 msgstr "Date de publication"
 
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:154
-#, fuzzy
 msgid "search query too short"
-msgstr "Erreur : requête de recherche trop courte"
+msgstr "requête de recherche trop courte"
 
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:175
 #, php-format
@@ -22290,10 +22034,10 @@ msgid "Remove This Filter"
 msgstr "Supprimer ce filtre"
 
 #: www/softwaremap/trove_list.php:196 www/trove/index.php:152
-#, fuzzy, php-format
+#, php-format
 msgid "%s projects"
 msgid_plural "%s project"
-msgstr[0] "%s projets"
+msgstr[0] "%s projet"
 msgstr[1] "%s projets"
 
 #: www/softwaremap/trove_list.php:214 www/trove/index.php:95
@@ -22301,9 +22045,9 @@ msgid "Browse By"
 msgstr "Afficher par"
 
 #: www/softwaremap/trove_list.php:261
-#, fuzzy, php-format
+#, php-format
 msgid "Displaying %1$s per page. Projects sorted by activity ranking."
-msgstr "Affichage de %d projet par page. Projets triés par niveau d'activité."
+msgstr "Affichage de %1$s projets par page. Projets triés par niveau d'activité."
 
 #: www/softwaremap/trove_list.php:294
 msgid "Activity Percentile"
@@ -22658,18 +22402,16 @@ msgstr[0] "%d question trouvée"
 msgstr[1] "%d questions trouvées"
 
 #: www/survey/include/SurveyHTML.class.php:301
-#, fuzzy
 msgid "Question ID"
-msgstr "Question"
+msgstr "Identifiant de question"
 
 #: www/survey/include/SurveyHTML.class.php:301
-#, fuzzy
 msgid "Edit/Delete"
-msgstr "Édition / Suppression"
+msgstr "Modifier / Supprimer"
 
 #: www/survey/include/SurveyHTML.class.php:345
 msgid "Survey ID"
-msgstr "ID du sondage"
+msgstr "Identifiant de sondage"
 
 #: www/survey/include/SurveyHTML.class.php:354
 msgid "Number of Questions"
