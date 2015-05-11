@@ -24,7 +24,6 @@ include /usr/share/dpkg/default.mk
 override_dh_auto_install:
 	make install-common      prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-common
 	make install-db-local    prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-db-local
-	make install-db-remote   prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-db-remote
 	make install-web         prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-web
 	make install-web-vhosts  prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-web-vhosts
 	make install-shell       prefix=/usr DESTDIR=$(CURDIR)/debian/fusionforge-shell

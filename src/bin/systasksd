@@ -25,7 +25,11 @@
 //putenv('FUSIONFORGE_NO_DB=true');
 
 require (dirname(__FILE__).'/../common/include/env.inc.php');
-require_once $gfcommon.'include/pre.php';
+try {
+        require_once $gfcommon.'include/pre.php';
+} catch (DBException $e) {
+        print "Cannot connect to DB: $e\nWaiting for DB...\n";
+}
 require_once $gfcommon.'include/cron_utils.php';
 
 // Invalidate users/groups cache e.g. when a user is added to a group

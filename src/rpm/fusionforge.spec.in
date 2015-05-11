@@ -67,7 +67,6 @@ install_listfiles common
 %find_lang %{name}
 # Install sub-modules
 install_listfiles db-local
-install_listfiles db-remote
 install_listfiles web
 install_listfiles web-vhosts
 install_listfiles shell
@@ -85,7 +84,7 @@ echo %{_datadir}/%{name}/plugins/moinmoin/lib/ >> plugin-moinmoin.rpmfiles
 
 %package common
 Summary: Collaborative development tool - shared files
-Requires: %{name}-db = %{version}-%{release}, php-cli, php-pgsql, php-process, php-htmlpurifier-htmlpurifier, crontabs, cronie
+Requires: php-cli, php-pgsql, php-process, php-htmlpurifier-htmlpurifier, crontabs, cronie
 %description common
 FusionForge provides many tools to aid collaboration in a
 development project, such as bug-tracking, task management,
@@ -142,11 +141,7 @@ This dummy package tells FusionForge you installed the database on a
 separate machine.  It preserves the fusionforge-db virtual dependency,
 to configure the database before depending packages in single-server
 installs (e.g. plugins activation requires a populated db).
-%files db-remote -f db-remote.rpmfiles
-%post db-remote
-%{_datadir}/%{name}/post-install.d/db-remote/db-remote.sh configure
-%preun db-remote
-if [ $1 -eq 0 ] ; then %{_datadir}/%{name}/post-install.d/db-remote/db-remote.sh remove; fi
+%files db-remote
 
 
 %package shell
@@ -188,7 +183,7 @@ It should be installed on only one server in your infrastructure.
 
 %package web
 Summary: Collaborative development tool - web part (using Apache)
-Requires: %{name}-common = %{version}-%{release}, httpd, mod_ssl, php, php-pgsql, php-simplepie, php-pear-HTTP, php-nusoap, php-mbstring, httpd-itk, mod_dav_svn, unoconv, poppler-utils
+Requires: %{name}-common = %{version}-%{release}, %{name}-db = %{version}-%{release}, httpd, mod_ssl, php, php-pgsql, php-simplepie, php-pear-HTTP, php-nusoap, php-mbstring, httpd-itk, mod_dav_svn, unoconv, poppler-utils
 %description web
 FusionForge provides many tools to aid collaboration in a
 development project, such as bug-tracking, task management,
