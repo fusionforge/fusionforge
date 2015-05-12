@@ -1,0 +1,20 @@
+<div id='infobox' style="margin-top: 15%; margin-left: 15%; margin-right: 15%; text-align: center;">
+  <table align="center">
+    <tr>
+      <td>{{ image }}</td>
+      <td>{{ msg }}</td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center">
+        <form action="{{ action }}" method="get">
+    	{% for k,v in params %}
+    	<input type="hidden" name="{{ k }}" value="{{ v }}" />
+    	{% endfor %}
+    	{% for k,v in buttons %}
+    	<input type="submit" name="{{ k }}" value="{{ v }}" />
+    	{% endfor %}
+        </form>
+      </td>
+    </tr>
+  </table>
+</div>

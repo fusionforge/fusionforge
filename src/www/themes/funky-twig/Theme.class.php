@@ -323,12 +323,28 @@ class Theme extends Layout {
 		return parent::information($msg);
 	}
 	function confirmBox($msg, $params, $buttons, $image='*none*') {
-		// TODO
-		return parent::confirmBox($msg, $params, $buttons, $image);
+		$template = $this->twig->loadTemplate('ConfirmBox.html');
+
+		if ($image == '*none*') {
+			$image = html_image('stop.png','48','48',array());
+		}
+
+		$vars = array('params' => $params,
+					  'buttons' => $buttons,
+					  'image' => $image,
+					  'msg' => $msg,
+					  'action' => getStringFromServer('PHP_SELF'));
+		
+		return $template->render($vars);
 	}
 	function jQueryUIconfirmBox($id = 'dialog-confirm', $title = 'Confirm your action', $message = 'Do you confirm your action?') {
-		// TODO
-		return parent::jQueryUIconfirmBox($id, $title, $message);
+		$template = $this->twig->loadTemplate('jQueryUIConfirmBox.html');
+
+		$vars = array('id' => $id,
+					  'title' => $title,
+					  'message' => $message);
+
+		return $template->render($vars);
 	}
 	function html_input($name, $id = '', $label = '', $type = 'text', $value = '', $extra_params = '') {
 		// TODO
