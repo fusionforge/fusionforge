@@ -57,16 +57,16 @@ class RoadmapFactory extends Error {
 	function __construct($group) {
 		$this->Error();
 
-		if (is_object($group)) {
-			if ($group->isError()) {
-				$this->setError('in RoadmapFactory, '.$group->getErrorMessage());
-				return;
-			}
-			$this->group = $group;
-			$this->group_id = $group->getID();
-		} else {
-			$this->setError(_('Invalid Group'));
+		if (!$group || !is_object($group)) {
+			$this->setError(_('No Valid Group Object'));
+			return;
+ 		}
+		if ($group->isError()) {
+			$this->setError('RoadmapFactory: '.$group->getErrorMessage());
+			return;
 		}
+		$this->group =& $group;
+      $this->group_id = $group->getID();
 	}
 
 	public function getRoadmaps($enable_only=false) {

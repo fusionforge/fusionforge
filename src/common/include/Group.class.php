@@ -28,6 +28,7 @@
 
 require_once $gfcommon.'tracker/ArtifactTypes.class.php';
 require_once $gfcommon.'tracker/ArtifactTypeFactory.class.php';
+require_once $gfcommon.'tracker/RoadmapFactory.class.php';
 require_once $gfcommon.'forum/Forum.class.php';
 require_once $gfcommon.'forum/ForumFactory.class.php';
 require_once $gfcommon.'pm/ProjectGroup.class.php';
@@ -1665,7 +1666,7 @@ class Group extends Error {
 		//
 		//	Remove all the members
 		//
-		$members = $this->getMembers();
+		$members = $this->getMembers(false);
 		foreach ($members as $i) {
 			if(!$this->removeUser($i->getID())) {
 				$this->setError(_('Could not properly remove member:').' '.$i->getID());
@@ -1695,6 +1696,20 @@ class Group extends Error {
 				return false;
 			}
 		}
+      //
+      //	Delete Roadmaps
+      //
+		$rmf = new RoadmapFactory($this);
+      $rm_arr = $rmf->getRoadmaps();
+      foreach ($rm_arr as $i) {
+         if (!is_object($i)) {
+            continue;
+         }
+         if (!$i->delete()) {
+            $this->setError(_('Could not properly delete the roadmap:') . ' ' . $i->getErrorMessage());
+            return false;
+         }
+      }
 		//
 		//	Delete Forums
 		//
@@ -1754,7 +1769,7 @@ class Group extends Error {
 			db_rollback();
 			return false;
 		}
-
+ 
 		for ($i=0; $i<db_numrows($res); $i++) {
 			$Forum = new Forum($news_group,db_result($res,$i,'forum_id'));
 			if (!$Forum->delete(1,1)) {
@@ -1762,7 +1777,17 @@ class Group extends Error {
 				return false;
 			}
 		}
-		$res = db_query_params('DELETE FROM news_bytes WHERE group_id=$1',
+      
+     // Delete news forums in group itself
+      for ($i = 0; $i < db_numrows($res); $i++) {
+         $Forum = new Forum($this, db_result($res, $i, 'forum_id'));
+         if (!$Forum->delete(1, 1)) {
+            $this->setError(_("Could Not Delete News Forum: %d"), $Forum->getID());
+            return false;
+         }
+      }
+
+      $res = db_query_params('DELETE FROM news_bytes WHERE group_id=$1',
 					array($this->getID()));
 		if (!$res) {
 			$this->setError(_('Error Deleting News: ').db_error());
@@ -2086,23 +2111,24 @@ class Group extends Error {
 
 		$user = user_get_object($user_id);
 		$roles = RBACEngine::getInstance()->getAvailableRolesForUser($user);
-		$found_role = NULL;
+		$found_roles = array();
 		foreach ($roles as $role) {
 			if ($role->getHomeProject() && $role->getHomeProject()->getID() == $this->getID()) {
-				$found_role = $role;
-				break;
+				$found_roles[] = $role;
 			}
 		}
-		if ($found_role == NULL) {
+		if (count($found_roles) == 0) {
 			$this->setError(sprintf(_('Error: User not removed: %s')));
 			db_rollback();
 			return false;
 		}
-		$found_role->removeUser($user);
-		if (!$SYS->sysGroupCheckUser($this->getID(), $user_id)) {
-			$this->setError($SYS->getErrorMessage());
-			db_rollback();
-			return false;
+		foreach ($found_roles as $found_role) {
+			$found_role->removeUser($user);
+			if (!$SYS->sysGroupCheckUser($this->getID(), $user_id)) {
+				$this->setError($SYS->getErrorMessage());
+				db_rollback();
+				return false;
+			}
 		}
 
 		//
@@ -2285,10 +2311,11 @@ class Group extends Error {
 	/**
 	 * getMembers - returns array of User objects for this project
 	 *
+	 * @param	boolean	$onlyactive	Only users with state active, or all users of group
 	 * @return array of User objects for this group.
 	 */
-	function getMembers() {
-		return $this->getUsers (true);
+	function getMembers($onlyactive = true) {
+		return $this->getUsers (true, $onlyactive);
 	}
 
 	/**
@@ -2870,9 +2897,10 @@ if there is anything we can do to help you.
 	 * getUsers - Get the users of a group
 	 *
 	 * @param	bool	$onlylocal
+	 * @param	boolean	$onlyactive	Only users with state active, or all users of group
 	 * @return	array	user's objects.
 	 */
-	function getUsers($onlylocal = true) {
+	function getUsers($onlylocal = true, $onlyactive = true) {
 		if (!isset($this->membersArr)) {
 			$this->membersArr = array();
 
@@ -2889,7 +2917,7 @@ if there is anything we can do to help you.
 			$ids = array_unique ($ids);
 			foreach ($ids as $id) {
 				$u = user_get_object ($id);
-				if ($u->isActive()) {
+				if (!$onlyactive || $u->isActive()) {
 					$this->membersArr[] = $u;
 				}
 			}
