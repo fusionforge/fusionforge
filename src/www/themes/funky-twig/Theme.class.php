@@ -45,170 +45,6 @@ class Theme extends Layout {
 
 	}
 
-	function bodyHeader($params) {
-		if (!isset($params['h1']) && isset($params['title'])) {
-			$params['h1'] = $params['title'];
-		}
-
-		if (!isset($params['title'])) {
-			$params['title'] = forge_get_config('forge_name');
-		} else {
-			$params['title'] = $params['title'] . " - ".forge_get_config('forge_name');
-		}
-
-		echo $this->listTableTop(array(), array(), 'fullwidth', 'header');
-		$cells = array();
-		$cells[] = array(util_make_link('/', html_image('/header/top-logo.png', null, null, array('alt'=>'FusionForge Home'))), 'id' => 'header-col1');
-		$items = $this->navigation->getUserLinks();
-		for ($j = 0; $j < count($items['titles']); $j++) {
-			$links[] = util_make_link($items['urls'][$j], $items['titles'][$j], array('class' => 'userlink'), true);
-		}
-		$params['links'] = &$links;
-		plugin_hook('headermenu', $params);
-		$template = isset($params['template']) ?  $params['template'] : ' | ';
-		$cells[] = array(implode($template, $links), 'id' => 'header-col2');
-		echo $this->multiTableRow(array(), $cells);
-		$cells = array();
-		$cells[] = array($this->quickNav().$this->searchBox(), 'id' => 'header-line2', 'colspan' => 2);
-		echo $this->multiTableRow(array(), $cells);
-		echo $this->listTableBottom();
-		$this->outerTabs($params);
-		echo '<!-- inner tabs -->' . "\n";
-		echo html_ao('div', array('class' => 'innertabs'));
-		if (isset($params['group']) && $params['group']) {
-			$this->projectTabs($params['toptab'], $params['group']);
-		}
-
-		echo html_ac(html_ap() -1);
-		echo html_ao('div', array('id' => 'maindiv'));
-
-		plugin_hook('message');
-
-		if(isset($GLOBALS['error_msg']) && $GLOBALS['error_msg']) {
-			echo $this->error_msg($GLOBALS['error_msg']);
-		}
-		if(isset($GLOBALS['warning_msg']) && $GLOBALS['warning_msg']) {
-			echo $this->warning_msg($GLOBALS['warning_msg']);
-		}
-		if(isset($GLOBALS['feedback']) && $GLOBALS['feedback']) {
-			echo $this->feedback($GLOBALS['feedback']);
-		}
-
-		if (isset($params['h1'])) {
-			echo html_e('h1', array(), $params['h1'], false);
-		} elseif (isset($params['title'])) {
-			echo html_e('h1', array('class' => 'hide'), $params['title'], false);
-		}
-		if (isset($params['submenu']))
-			echo $params['submenu'];
-	}
-
-	function bodyFooter($params) {
-		echo html_ac(html_ap() -1).'<!-- id="maindiv" -->' . "\n";
-	}
-
-	function footer($params = array()) {
-		$this->bodyFooter($params);
-		echo html_ao('div', array('class' => 'footer'));
-		echo $this->navigation->getPoweredBy();
-		echo $this->navigation->getShowSource();
-		echo html_e('div', array('style' => 'clear:both'), '', false);
-		echo html_ac(html_ap() -1);
-		plugin_hook('webanalytics_url');
-		echo html_ac(html_ap() -1);
-		echo '</html>' . "\n";
-	}
-
-	/**
-	 * boxTop() - Top HTML box
-	 *
-	 * @param	string	$title	Box title
-	 * @param	string	$id
-	 * @return	string
-	 */
-	function boxTop($title, $id = '') {
-		if ($id) {
-			$id = $this->toSlug($id);
-			$idid = $id;
-			$idtitle = $id.'-title"';
-			$idtcont = $id.'-title-content"';
-		} else {
-			$idid = "";
-			$idtitle = "";
-			$idtcont = "";
-		}
-
-		$t_result = '';
-		$t_result .= html_ao('div', array('id' => $idid, 'class' => 'box-surround'));
-		$t_result .= html_ao('div', array('id' => $idtitle, 'class' => 'box-title'));
-		$t_result .= html_e('div', array('id' => $idtcont, 'class' => 'box-title-content'), $title, false);
-		$t_result .= html_ac(html_ap() -1);
-		return $t_result;
-	}
-
-	/**
-	 * boxMiddle() - Middle HTML box
-	 *
-	 * @param	string	$title	Box title
-	 * @param	string	$id
-	 * @return	string
-	 */
-	function boxMiddle($title, $id = '') {
-		if ($id) {
-			$id = $this->toSlug($id);
-			$idtitle = $id.'-title"';
-		} else {
-			$idtitle = "";
-		}
-
-		return html_e('div', array('id' => $idtitle, 'class' => 'box-middle'), $title, false);
-	}
-
-	/**
-	 * boxContent() - Content HTML box
-	 *
-	 * @param	string	$content	Box content
-	 * @param	string	$id
-	 * @return	string
-	 */
-	function boxContent($content, $id = '') {
-		if ($id) {
-			$id = $this->toSlug($id);
-			$idcont = $id.'-content"';
-		} else {
-			$idcont = "";
-		}
-
-		return html_e('div', array('id' => $idcont, 'class' => 'box-content'), $content, false);
-	}
-
-	/**
-	 * boxBottom() - Bottom HTML box
-	 *
-	 * @return	string
-	 */
-	function boxBottom() {
-		return html_ac(html_ap() -1).'<!-- class="box-surround" -->'."\n";
-	}
-
-	/**
-	 * boxGetAltRowStyle() - Get an alternating row style for tables
-	 *
-	 * @param	int	$i		Row number
-	 * @param	bool	$classonly	Return class name only
-	 * @return	string
-	 */
-	function boxGetAltRowStyle($i, $classonly = false) {
-		if ($i % 2 == 0)
-			$ret = 'bgcolor-white';
-		else
-			$ret = 'bgcolor-grey';
-		if ($classonly)
-			return $ret;
-		else
-			return 'class="'.$ret.'"';
-	}
-
 	function tabGenerator($TABS_DIRS, $TABS_TITLES, $TABS_TOOLTIPS, $nested=false,  $selected=false, $sel_tab_bgcolor='WHITE',  $total_width='100%') {
 		global $use_tooltips;
 
@@ -235,144 +71,6 @@ class Theme extends Layout {
 		$vars['tabs'] = $tabs;
 
 		return $template->render($vars);
-	}
-
-	/**
-	 * beginSubMenu() - Opening a submenu.
-	 *
-	 * @return	string	Html to start a submenu.
-	 */
-	function beginSubMenu() {
-		return html_ao('ul', array('class' => 'submenu'));
-	}
-
-	/**
-	 * endSubMenu() - Closing a submenu.
-	 *
-	 * @return	string	Html to end a submenu.
-	 */
-	function endSubMenu() {
-		return html_ac(html_ap() -1);
-	}
-
-	/**
-	 * printSubMenu() - Takes two array of titles and links and builds the contents of a menu.
-	 *
-	 * @param	array	$title_arr	The array of titles.
-	 * @param	array	$links_arr	The array of title links.
-	 * @param	array	$attr_arr	The array of attributs by link
-	 * @return	string	Html to build a submenu.
-	 */
-	function printSubMenu($title_arr, $links_arr, $attr_arr) {
-		$count  = count($title_arr) - 1;
-		$return = '';
-
-		if (!count($attr_arr)) {
-			for ($i=0; $i<count($title_arr); $i++) {
-				$attr_arr[] = NULL;
-			}
-		}
-		for ($i = 0; $i < $count; $i++) {
-			$return .= html_ao('li');
-			$return .= html_e('span', array(), util_make_link($links_arr[$i], $title_arr[$i], $attr_arr[$i]), false);
-			$return .= html_ac(html_ap() -1);
-		}
-
-		$return .= html_ao('li');
-		$return .= html_e('span', array(), util_make_link($links_arr[$i], $title_arr[$i], $attr_arr[$i]), false);
-		$return .= html_ac(html_ap() -1);
-		return $return;
-	}
-
-	/**
-	 * subMenu() - Takes two array of titles and links and build a menu.
-	 *
-	 * @param	array	$title_arr	The array of titles.
-	 * @param	array	$links_arr	The array of title links.
-	 * @param	array	$attr_arr	The array of attributes by link
-	 * @return	string	Html to build a submenu.
-	 */
-	function subMenu($title_arr, $links_arr, $attr_arr = array()) {
-		$return  = $this->beginSubMenu();
-		$return .= $this->printSubMenu($title_arr, $links_arr, $attr_arr);
-		$return .= $this->endSubMenu();
-		return $return;
-	}
-
-	/**
-	 * multiTableRow() - create a multilevel row in a table
-	 *
-	 * @param	array	$row_attrs	the row attributes
-	 * @param	array	$cell_data	the array of cell data, each element is an array,
-	 *					the first item being the text,
-	 *					the subsequent items are attributes (dont include
-	 *					the bgcolor for the title here, that will be
-	 *					handled by $istitle
-	 * @param	bool	$istitle	is this row part of the title ?
-	 *
-	 * @return string
-	 */
-	function multiTableRow($row_attrs, $cell_data, $istitle = false) {
-		$ap = html_ap();
-		(isset($row_attrs['class'])) ? $row_attrs['class'] .= ' ff' : $row_attrs['class'] = 'ff';
-		if ( $istitle ) {
-			$row_attrs['class'] .= ' align-center';
-		}
-		$return = html_ao('tr', $row_attrs);
-		for ( $c = 0; $c < count($cell_data); $c++ ) {
-			$locAp = html_ap();
-			$cellAttrs = array();
-			foreach (array_slice($cell_data[$c],1) as $k => $v) {
-				$cellAttrs[$k] = $v;
-			}
-			(isset($cellAttrs['class'])) ? $cellAttrs['class'] .= ' ff' : $cellAttrs['class'] = 'ff';
-			$return .= html_ao('td', $cellAttrs);
-			if ( $istitle ) {
-				$return .= html_ao('strong');
-			}
-			$return .= $cell_data[$c][0];
-			if ( $istitle ) {
-				$return .= html_ac(html_ap() -1);
-			}
-			$return .= html_ac($locAp);
-		}
-		$return .= html_ac($ap);
-		return $return;
-	}
-
-	/**
-	 * headerJS() - creates the JS headers and calls the plugin javascript hook
-	 * @todo generalize this
-	 */
-	function headerJS() {
-		echo html_e('script', array('type' => 'text/javascript', 'src' => util_make_uri('/js/common.js')), '', false);
-
-		plugin_hook("javascript_file");
-
-		// invoke the 'javascript' hook for custom javascript addition
-		$params = array('return' => false);
-		plugin_hook("javascript", $params);
-		$javascript = $params['return'];
-		if($javascript) {
-			echo html_ao('script', array('type' => 'text/javascript')).'//<![CDATA['."\n";
-			echo $javascript;
-			echo "\n".'//]]'."\n";
-			echo html_ac(html_ap() -1);
-		}
-		html_use_storage();
-		html_use_coolfieldset();
-		html_use_jqueryui();
-		echo $this->getJavascripts();
-		echo html_ao('script', array('type' => 'text/javascript'));
-		echo '	//<![CDATA[
-			jQuery(window).load(function(){
-				setTimeout("jQuery(\'.feedback\').hide(\'slow\')", 5000);
-				setInterval(function() {
-						setTimeout("jQuery(\'.feedback\').hide(\'slow\')", 5000);
-					}, 5000);
-			});
-			//]]>'."\n";
-		echo html_ac(html_ap() -1);
 	}
 
 	function makeLink($path, $text, $extra_params = false, $absolute = false) {
@@ -427,6 +125,324 @@ class Theme extends Layout {
 					  'title' => $title);
 		
 		return $template->render($vars);
+	}
+
+	// Methods to reimplement (if relevant)
+	function addJavascript($js) {
+		// TODO
+		return parent::addJavascript($js);
+	}
+	function addStylesheet($css, $media='') {
+		// TODO
+		return parent::addStylesheet($css, $media);
+	}
+	function getJavascripts() {
+		// TODO
+		return parent::getJavascripts();
+	}
+	function getStylesheets() {
+		// TODO
+		return parent::getStylesheets();
+	}
+	function header($params) {
+		// TODO
+		return parent::header($params);
+	}
+	function headerStart($params) {
+		// TODO
+		return parent::headerStart($params);
+	}
+	function headerHTMLDeclaration() {
+		// TODO
+		return parent::headerHTMLDeclaration();
+	}
+	function headerTitle($params) {
+		// TODO
+		return parent::headerTitle($params);
+	}
+	function headerFavIcon() {
+		// TODO
+		return parent::headerFavIcon();
+	}
+	function headerRSS() {
+		// TODO
+		return parent::headerRSS();
+	}
+	function headerSearch() {
+		// TODO
+		return parent::headerSearch();
+	}
+	function headerCSS() {
+		// TODO
+		return parent::headerCSS();
+	}
+	function headerJS() {
+		// TODO
+		return parent::headerJS();
+	}
+	function headerLinkedDataAutodiscovery() {
+		// TODO
+		return parent::headerLinkedDataAutodiscovery();
+	}
+	function headerForgepluckerMeta() {
+		// TODO
+		return parent::headerForgepluckerMeta();
+	}
+	function bodyHeader($params){
+		// TODO
+		return parent::bodyHeader($params);
+		}
+	function footer($params = array()) {
+			// TODO
+			return parent::footer($params);
+		}
+	function footerEnd() {
+		// TODO
+		return parent::footerEnd() { ;
+		}
+	function getRootIndex() {
+		// TODO
+		return parent::getRootIndex();
+	}
+	function boxTop($title) {
+		// TODO
+		return parent::boxTop($title);
+	}
+	function boxMiddle($title) {
+		// TODO
+		return parent::boxMiddle($title);
+	}
+	function boxBottom() {
+		// TODO
+		return parent::boxBottom();
+	}
+	function boxGetAltRowStyle($i, $classonly = false) {
+		// TODO
+		return parent::boxGetAltRowStyle($i, $classonly);
+	}
+	function listTableTop($titleArray = array(), $linksArray = array(), $class = '', $id = '', $thClassArray = array(), $thTitleArray = array(), $thOtherAttrsArray = array()) {
+		// TODO
+		return parent::listTableTop($titleArray, $linksArray, $class, $id, $thClassArray, $thTitleArray, $thOtherAttrsArray);
+	}
+	function listTableBottom() {
+		// TODO
+		return parent::listTableBottom();
+	}
+	function outerTabs($params) {
+		// TODO
+		return parent::outerTabs($params);
+	}
+	function quickNav() {
+		// TODO
+		return parent::quickNav();
+	}
+	function projectTabs($toptab, $group_id) {
+		// TODO
+		return parent::projectTabs($toptab, $group_id);
+	}
+	function tabGenerator($TABS_DIRS, $TABS_TITLES, $TABS_TOOLTIPS, $nested=false, $selected=false, $sel_tab_bgcolor='white', $total_width='100%') {
+		// TODO
+		return parent::tabGenerator($TABS_DIRS, $TABS_TITLES, $TABS_TOOLTIPS, $nested, $selected, $sel_tab_bgcolor, $total_width);
+	}
+	function searchBox() {
+		// TODO
+		return parent::searchBox();
+	}
+	function beginSubMenu() {
+		// TODO
+		return parent::beginSubMenu();
+	}
+	function endSubMenu() {
+		// TODO
+		return parent::endSubMenu();
+	}
+	function printSubMenu($title_arr, $links_arr, $attr_arr) {
+		// TODO
+		return parent::printSubMenu($title_arr, $links_arr, $attr_arr);
+	}
+	function subMenuSeparator() {
+		// TODO
+		return parent::subMenuSeparator();
+	}
+	function subMenu($title_arr, $links_arr, $attr_arr = array()) {
+		// TODO
+		return parent::subMenu($title_arr, $links_arr, $attr_arr);
+	}
+	function multiTableRow($row_attrs, $cell_data, $istitle = false) {
+		// TODO
+		return parent::multiTableRow($row_attrs, $cell_data, $istitle);
+	}
+	function feedback($feedback) {
+		// TODO
+		return parent::feedback($feedback);
+	}
+	function warning_msg($msg) {
+		// TODO
+		return parent::warning_msg($msg);
+	}
+	function error_msg($msg) {
+		// TODO
+		return parent::error_msg($msg);
+	}
+	function information($msg) {
+		// TODO
+		return parent::information($msg);
+	}
+	function confirmBox($msg, $params, $buttons, $image='*none*') {
+		// TODO
+		return parent::confirmBox($msg, $params, $buttons, $image);
+	}
+	function jQueryUIconfirmBox($id = 'dialog-confirm', $title = 'Confirm your action', $message = 'Do you confirm your action?') {
+		// TODO
+		return parent::jQueryUIconfirmBox($id, $title, $message);
+	}
+	function html_input($name, $id = '', $label = '', $type = 'text', $value = '', $extra_params = '') {
+		// TODO
+		return parent::html_input($name, $id, $label, $type, $value, $extra_params);
+	}
+	function html_checkbox($name, $value, $id = '', $label = '', $checked = '', $extra_params = array()) {
+		// TODO
+		return parent::html_checkbox($name, $value, $id, $label, $checked, $extra_params) {
+	}
+	function html_text_input_img_submit($name, $img_src, $id = '', $label = '', $value = '', $img_title = '', $img_alt = '', $extra_params = array(), $img_extra_params = '') {
+		// TODO
+		return parent::html_text_input_img_submit($name, $img_src, $id, $label, $value, $img_title, $img_alt, $extra_params, $img_extra_params);
+	}
+	function html_select($vals, $name, $label = '', $id = '', $checked_val = '', $text_is_value = false, $extra_params = '') {
+		// TODO
+		return parent::html_select($vals, $name, $label, $id, $checked_val, $text_is_value, $extra_params);
+	}
+	function html_textarea($name, $id = '', $label = '', $value = '',  $extra_params = '') {
+		// TODO
+		return parent::html_textarea($name, $id, $label, $value, $extra_params);
+	}
+	function html_table_top($cols, $summary = '', $class = '', $extra_params = '') {
+		// TODO
+		return parent::html_table_top($cols, $summary, $class, $extra_params);
+	}
+	function getMonitorPic($title = '', $alt = '') {
+		// TODO
+		return parent::getMonitorPic($title, $alt);
+	}
+	function getStartMonitoringPic($title = '', $alt = '') {
+		// TODO
+		return parent::getStartMonitoringPic($title, $alt);
+	}
+	function getStopMonitoringPic($title = '', $alt = '') {
+		// TODO
+		return parent::getStopMonitoringPic($title, $alt);
+	}
+	function getReleaseNotesPic($title = '', $alt = '') {
+		// TODO
+		return parent::getReleaseNotesPic($title, $alt);
+	}
+	function getDownloadPic($title = '', $alt = '') {
+		// TODO
+		return parent::getDownloadPic($title, $alt);
+	}
+	function getHomePic($title = '', $alt = '') {
+		// TODO
+		return parent::getHomePic($title, $alt);
+	}
+	function getFollowPic($title = '', $alt = '') {
+		// TODO
+		return parent::getFollowPic($title, $alt);
+	}
+	function getForumPic($title = '', $alt = '') {
+		// TODO
+		return parent::getForumPic($title, $alt);
+	}
+	function getDocmanPic($title = '', $alt = '') {
+		// TODO
+		return parent::getDocmanPic($title, $alt);
+	}
+	function getMailPic($title = '', $alt = '') {
+		// TODO
+		return parent::getMailPic($title, $alt);
+	}
+	function getPmPic($title = '', $alt = '') {
+		// TODO
+		return parent::getPmPic($title, $alt);
+	}
+	function getSurveyPic($title = '', $alt = '') {
+		// TODO
+		return parent::getSurveyPic($title, $alt);
+	}
+	function getScmPic($title = '', $alt = '') {
+		// TODO
+		return parent::getScmPic($title, $alt);
+	}
+	function getFtpPic($title = '', $alt = '') {
+		// TODO
+		return parent::getFtpPic($title, $alt);
+	}
+	function getDeletePic($title = '', $alt = '', $otherAttr = array()) {
+		// TODO
+		return parent::getDeletePic($title, $alt, $otherAttr);
+	}
+	function getRemovePic($title = '', $alt = '', $otherAttr = array()) {
+		// TODO
+		return parent::getRemovePic($title, $alt, $otherAttr);
+	}
+	function getConfigurePic($title = '', $alt = '', $otherAttr = array()) {
+		// TODO
+		return parent::getConfigurePic($title, $alt, $otherAttr);
+	}
+	function getZipPic($title = '', $alt = '', $otherAttr = array()) {
+		// TODO
+		return parent::getZipPic($title, $alt, $otherAttr);
+	}
+	function getAddDirPic($title = '', $alt = '', $otherAttr = array()) {
+		// TODO
+		return parent::getAddDirPic($title, $alt, $otherAttr);
+	}
+	function getNewPic($title = '', $alt = '', $otherAttr = array()) {
+		// TODO
+		return parent::getNewPic($title, $alt, $otherAttr);
+	}
+	function getFolderPic($title = '', $alt = '', $otherAttr = array()) {
+		// TODO
+		return parent::getFolderPic($title, $alt, $otherAttr);
+	}
+	function getPicto($url, $title, $alt, $width = '20', $height = '20', $otherAttr = array()) {
+		// TODO
+		return parent::getPicto($url, $title, $alt, $width, $height, $otherAttr);
+	}
+	function toSlug($string, $space = "-") {
+		// TODO
+		return parent::toSlug($string, $space);
+	}
+	function widget(&$widget, $layout_id, $readonly, $column_id, $is_minimized, $display_preferences, $owner_id, $owner_type) {
+		// TODO
+		return parent::widget(&$widget, $layout_id, $readonly, $column_id, $is_minimized, $display_preferences, $owner_id, $owner_type);
+	}
+	function _getTogglePlusForWidgets() {
+		// TODO
+		return parent::_getTogglePlusForWidgets();
+	}
+	function _getToggleMinusForWidgets() {
+		// TODO
+		return parent::_getToggleMinusForWidgets();
+	}
+	function printSoftwareMapLinks() {
+		// TODO
+		return parent::printSoftwareMapLinks();
+	}
+	function displayStylesheetElements() {
+		// TODO
+		return parent::displayStylesheetElements();
+	}
+	function openForm($args) {
+		// TODO
+		return parent::openForm($args);
+	}
+	function closeForm() {
+		// TODO
+		return parent::closeForm();
+	}
+	function addRequiredFieldsInfoBox() {
+		// TODO
+		return parent::addRequiredFieldsInfoBox();
 	}
 }
 
