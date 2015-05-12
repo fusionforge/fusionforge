@@ -6,7 +6,7 @@
  * Portions Copyright 2004 (c) Roland Mas <99.roland.mas @nospam@ aist.enst.fr>
  * The rest Copyright 2004 (c) Francisco Gimeno <kikov @nospam@ kikov.org>
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013,2015 Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -55,16 +55,15 @@ function usage( $argv ) {
 function getInvolvedArtifacts($Log)
 {
 	preg_match_all('/[[]#[\d]+[]]/', $Log,  $Matches );
-	foreach($Matches as $Match)
-	{
+	foreach($Matches as $Match) {
 		$Result = preg_replace ('/[[]#([\d]+)[]]/', '\1', $Match);
 	}
 	return $Result;
 }
 
 /**
- * It returns a list of involved artifacts.
- * An artifact is identified if [T(NUMBER)] is found.
+ * It returns a list of involved Tasks.
+ * A task is identified if [T(NUMBER)] is found.
  *
  * @param   string   $Log Log message to be parsed.
  *
@@ -73,33 +72,10 @@ function getInvolvedArtifacts($Log)
 function getInvolvedTasks($Log)
 {
 	preg_match_all ('/[[]T[\d]+[]]/', $Log,  $Matches );
-	foreach($Matches as $Match)
-	{
+	foreach($Matches as $Match) {
 		$Result = preg_replace ('/[[]T([\d]+)[]]/', '\1', $Match);
 	}
 	return $Result;
-}
-
-/**
- * Parse input and get the Log message.
- *
- * @param   string   $Input Input from stdin.
- *
- * @return  array    Array of lines of Log Message.
- */
-function getLog($Input)
-{
-	$Lines = explode("\n", $Input);
-	$ii = count($Lines);
-	$Logging=false;
-	for ( $i=0; $i < $ii ; $i++ )
-	{
-		if ($Logging==true)
-			$Log.=$Lines[$i]."\n";
-		if ($Lines[$i]=='Log Message:')
-			$Logging=true;
-	}
-	return trim($Log);
 }
 
 $files = array();
@@ -116,25 +92,28 @@ USAGE;
 $repository = $argv[1];
 $revision   = $argv[2];
 $svn_tracker_debug = 0;
+$svn_tracker_debug_file = sys_get_temp_dir().'scmhook_svn_committracker.debug';
 
 $UserName = trim(`svnlook author -r $revision $repository`); //username of author
-$date    = trim(`svnlook date -r $revision $repository`); //date
-$log     = trim(`svnlook log -r $revision $repository`); // the log
-$changed = trim(`svnlook changed -r $revision $repository | sed 's/[A-Z]*   //'`); // the filenames
+$date     = trim(`svnlook date -r $revision $repository`); //date
+$log      = trim(`svnlook log -r $revision $repository`); // the log
+$changed  = trim(`svnlook changed -r $revision $repository | sed 's/[A-Z]*   //'`); // the filenames
 
 if (isset($svn_tracker_debug) && $svn_tracker_debug == 1) {
+	$file = fopen($svn_tracker_debug_file, 'a+');
 	fwrite($file,"Vars filled:\n");
-	fwrite($file,"username :  " . $UserName . " \n");
-	fwrite($file,"date :  " . $date . " \n");
-	fwrite($file,"log  :  " . $log . " \n");
-	fwrite($file,"changed :  " . $changed . " \n");
+	fwrite($file,"username: " . $UserName . "\n");
+	fwrite($file,"date: " . $date . "\n");
+	fwrite($file,"log: " . $log . "\n");
+	fwrite($file,"changed: " . $changed . "\n");
+	fclose($file);
 }
 
 $changed = explode("\n", $changed);
 
 // First check if anything must be done before diving deeper into the svn history
-$tasks_involved= getInvolvedTasks($log);
-$artifacts_involved= getInvolvedArtifacts($log);
+$tasks_involved = getInvolvedTasks($log);
+$artifacts_involved = getInvolvedArtifacts($log);
 if ((!is_array($tasks_involved) || count($tasks_involved) < 1) &&
 	(!is_array($artifacts_involved) || count($artifacts_involved) < 1)) {
 	//nothing to post
@@ -161,7 +140,7 @@ foreach ($changed as $onefile) {
 	}
 
 	$files[] = array(
-			'name' => $repository . "/" . $onefile,
+			'name' => $repository . '/' . $onefile,
 			'previous' => $prev,
 			'actual' => $revision
 		);
@@ -172,17 +151,16 @@ foreach ($changed as $onefile) {
 $SubmitUrl = util_make_url('/plugins/scmhook/committracker/newcommit.php');
 
 $i = 0;
-foreach ( $files as $onefile )
-{
-	$SubmitVars[$i]["UserName"]        = $UserName;
-	$SubmitVars[$i]["Repository"]      = $repository;
-	$SubmitVars[$i]["FileName"]        = $onefile['name'];
-	$SubmitVars[$i]["PrevVersion"]     = $onefile['previous'];
-	$SubmitVars[$i]["ActualVersion"]   = $onefile['actual'];
-	$SubmitVars[$i]["Log"]             = $log;
-	$SubmitVars[$i]["TaskNumbers"]     = getInvolvedTasks($log);
-	$SubmitVars[$i]["ArtifactNumbers"] = getInvolvedArtifacts($log);
-	$SubmitVars[$i]["SvnDate"]         = time();
+foreach ( $files as $onefile ) {
+	$SubmitVars[$i]['UserName']        = $UserName;
+	$SubmitVars[$i]['Repository']      = $repository;
+	$SubmitVars[$i]['FileName']        = $onefile['name'];
+	$SubmitVars[$i]['PrevVersion']     = $onefile['previous'];
+	$SubmitVars[$i]['ActualVersion']   = $onefile['actual'];
+	$SubmitVars[$i]['Log']             = $log;
+	$SubmitVars[$i]['TaskNumbers']     = $tasks_involved;
+	$SubmitVars[$i]['ArtifactNumbers'] = $artifacts_involved;
+	$SubmitVars[$i]['SvnDate']         = time();
 	$i++;
 }
 
