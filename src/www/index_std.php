@@ -47,7 +47,7 @@ require_once $gfcommon.'include/FusionForge.class.php';
 </ul>
 
 <h3><?php print _("What's new in FusionForge 6.0"); ?></h3>
-<p><?php print _('Checkout the roadmap for closed issues (bugs, patches, features requests) ') ?><a href="https://fusionforge.org/tracker/roadmap.php?group_id=6&roadmap_id=1&release=6.0"><?php echo _('here') ?></a></p>
+<p><?php print _('Checkout the roadmap for closed issues (bugs, patches, features requests) ') ?><a href="https://fusionforge.org/tracker/roadmap.php?group_id=6&amp;roadmap_id=1&amp;release=6.0"><?php echo _('here') ?></a></p>
 
 <p><?php print _('Standards features:') ?></p>
 <ul>
@@ -111,7 +111,7 @@ require_once $gfcommon.'include/FusionForge.class.php';
 
 <li><?php print _('Forum: store the attached file on FS [#662] (TrivialDev)'); ?></li>
 
-<li><?php print _('vhosts: allow customization from <config_dir>/custom/httpd.vhosts.tmpl (Inria)'); ?></li>
+<li><?php print _('vhosts: allow customization from &lt;config_dir&gt;/custom/httpd.vhosts.tmpl (Inria)'); ?></li>
 </ul>
 
 <p><?php print _('Plugins:') ?></p>

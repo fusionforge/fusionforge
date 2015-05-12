@@ -3,7 +3,7 @@
 /**
  * Small and fast system tasks trigger
  *
- * Copyright (C) 2014  Inria (Sylvain Beucler)
+ * Copyright (C) 2014, 2015  Inria (Sylvain Beucler)
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -25,7 +25,11 @@
 //putenv('FUSIONFORGE_NO_DB=true');
 
 require (dirname(__FILE__).'/../common/include/env.inc.php');
-require_once $gfcommon.'include/pre.php';
+try {
+        require_once $gfcommon.'include/pre.php';
+} catch (DBException $e) {
+        print "Cannot connect to DB: $e\nWaiting for DB...\n";
+}
 require_once $gfcommon.'include/cron_utils.php';
 
 // Invalidate users/groups cache e.g. when a user is added to a group
@@ -86,6 +90,7 @@ if (isset($options['v']) or isset($options['verbose'])) {
 posix_setsid();
 chdir('/');
 umask(0);
+$log_path = forge_get_config('log_path');
 if (!$verbose) {
 	// Hack to reopen stdin/stdout/stderr, order is important
 	// https://andytson.com/blog/2010/05/daemonising-a-php-cli-script-on-a-posix-system/
@@ -94,8 +99,10 @@ if (!$verbose) {
 	fclose(STDOUT);
 	fclose(STDERR);
 	$ff_stdin = fopen('/dev/null', 'r');
-	$ff_stdout = fopen('/dev/null', 'w');
-	$ff_stderr = fopen('php://stdout', 'w');
+	//$ff_stdout = fopen('/dev/null', 'w');
+	//$ff_stderr = fopen('php://stdout', 'w');
+	$ff_stdout = fopen("$log_path/systasksd.stdout", 'w');
+	$ff_stderr = fopen("$log_path/systasksd.stderr", 'w');
 }
 // We could fork & continue in the background too, but then we'd have
 // to manage the PID file as well - best leave this to the init script

@@ -117,13 +117,13 @@ if (count($FRSPackages) < 1) {
 				if ( ! $release_id || $release_id == $package_release_id ) {
 					// no release_id OR release_id is current one
 					$release_title = util_make_link('/frs/?view=shownotes&group_id='.$group_id.'&release_id='.$package_release_id, $package_name.' '.$FRSPackageRelease->getName().' ('.date(_('Y-m-d H:i'), $FRSPackageRelease->getReleaseDate()).')');
-					echo $HTML->boxTop($release_title.html_e('span', array('class' => 'frs-zip-release'), $ziplink), $package_name.' '.$FRSPackageRelease->getName());
+					echo $HTML->boxTop($release_title.html_e('span', array('class' => 'frs-zip-release'), $ziplink, false), $package_name.' '.$FRSPackageRelease->getName());
 				} elseif ( $release_id != $package_release_id ) {
 					// release_id but not current one
 					$t_url_anchor = $HTML->toSlug($package_name).'-'.$HTML->toSlug($FRSPackageRelease->getName()).'-title-content';
 					$t_url = '/frs/?group_id='.$group_id.'&release_id='.$package_release_id.'#'.$t_url_anchor;
 					$release_title = util_make_link($t_url, $package_name.' '.$FRSPackageRelease->getName());
-					echo html_e('div', array('class' => 'frs_release_name_version'), $release_title.html_e('span', array('class' => 'frs-zip-release'), $ziplink));
+					echo html_e('div', array('class' => 'frs_release_name_version'), $release_title.html_e('span', array('class' => 'frs-zip-release'), $ziplink, false));
 				}
 
 				// get the files in this release....

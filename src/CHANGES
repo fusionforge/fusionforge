@@ -1,4 +1,4 @@
-Fusionforge-6.0 RC1:
+FusionForge 6.0rcX:
 * New install system [#710] (Inria)
 * Reactivity: system replication is now performed immediately (rather than waiting for cron jobs) [#147] (Inria)
 * SCM: Concurrent SSH and HTTPS access, relying on Apache mod_itk [#519] (Roland Mas and Inria)
@@ -62,7 +62,7 @@ Fusionforge-5.3.3:
 * Plugin MediaWiki: integrate e-mail from FusionForge account, to send watchlist notifications (Inria)
 * Plugin OSLC: Undefined index: is_public [#748] (TrivialDev)
 * I18N: updated French translation (Stéphane Aulery and Inria)
-* Project deletaion: fix failure to delete project if tools have been deleted [#681] (Roland Mas)
+* Project deletion: fix failure to delete project if tools have been deleted [#681] (Roland Mas)
 
 Fusionforge-5.3.2:
 * Software map: fix "value too long for type character varying(255)" error in cron db_trove_maint.php (Inria)

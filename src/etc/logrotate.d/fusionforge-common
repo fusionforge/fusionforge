@@ -1,0 +1,13 @@
+@log_path@/systasksd.stdout @log_path@/systasksd.stderr {
+	daily
+	missingok
+	rotate 31
+	compress
+	delaycompress
+	notifempty
+	create 640 root adm
+	sharedscripts
+	postrotate
+		service fusionforge-systasksd restart > /dev/null
+	endscript
+}

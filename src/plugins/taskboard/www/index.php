@@ -98,7 +98,7 @@ $tech_name_arr[] = _('Any');
 if (is_array($_assigned_to)) {
 	$_assigned_to='';
 }
-$tech_box=html_build_select_box_from_arrays($tech_id_arr, $tech_name_arr, '_assigned_to', $_assigned_to, true, _('Unassigned'));
+$tech_box = html_build_select_box_from_arrays($tech_id_arr, $tech_name_arr, '_assigned_to', $_assigned_to, true, _('Unassigned'));
 // end of the stolen code
 
 $release_box = '';
@@ -142,8 +142,8 @@ if ($taskboard->getReleaseField()) {
 				<td>
 					<div id="taskboard-release-description"></div>
 					<div id="taskboard-release-snapshot">
-						<input type="hidden" name="taskboard_release_id" id="taskboard-release-id"value="">
-						<input type="text" name="snapshot_date" value="<?php echo date('Y-m-d') ?>">
+						<input type="hidden" name="taskboard_release_id" id="taskboard-release-id" value="" />
+						<input type="text" name="snapshot_date" value="<?php echo date('Y-m-d') ?>" />
 						<button id="taskboard-save-snapshot-btn"><?php echo _('Save release snapshot'); ?></button>
 					</div>
 				</td>
@@ -192,7 +192,7 @@ if ($taskboard->getReleaseField()) {
 		$used_trackers = $taskboard->getUsedTrackersIds();
 		if(count($used_trackers) == 1) {
 			$tracker = $taskboard->TrackersAdapter->getTasksTracker($used_trackers[0]);
-			echo '<input type="hidden" name="tracker_id" id="tracker_id" value="' . $tracker->getID(). '">';
+			echo html_e('input', array('type' => 'hidden', 'name' => 'tracker_id', 'id' => 'tracker_id', 'value' => $tracker->getID()));
 		} else {
 			// select target tracker if more then single trackers are configured
 			echo "<div>\n";

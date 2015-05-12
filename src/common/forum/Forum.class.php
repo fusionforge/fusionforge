@@ -124,11 +124,8 @@ class Forum extends Error {
 				array($group_forum_id));
 			$is_news = $res && db_numrows($res) >= 1;
 		}
-		if (!$is_news && !$Group->usesForum()) {
-			$this->setError(sprintf(_('%s does not use the Forum tool.'), $Group->getPublicName()));
-			return;
-		}
-		$this->Group =& $Group;
+
+      $this->Group =& $Group;
 
 		if ($group_forum_id) {
 			if (!$arr || !is_array($arr)) {
