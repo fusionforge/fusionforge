@@ -145,7 +145,7 @@ class Theme extends Layout {
 		}
 		$this->javascripts = array();
 
-		$vars = array('js' => $scripts);,
+		$vars = array('js' => $scripts);
 		
 		return $template->render($vars);
 	}
@@ -164,7 +164,7 @@ class Theme extends Layout {
 		}
 		$this->stylesheets = array();
 
-		$vars = array('sheets' => $sheets);,
+		$vars = array('sheets' => $sheets);
 		
 		return $template->render($vars);
 	}
@@ -232,7 +232,7 @@ class Theme extends Layout {
 		}
 	function footerEnd() {
 		// TODO
-		return parent::footerEnd() { ;
+		return parent::footerEnd();
 		}
 	function getRootIndex() {
 		// TODO
@@ -273,10 +273,6 @@ class Theme extends Layout {
 	function projectTabs($toptab, $group_id) {
 		// TODO
 		return parent::projectTabs($toptab, $group_id);
-	}
-	function tabGenerator($TABS_DIRS, $TABS_TITLES, $TABS_TOOLTIPS, $nested=false, $selected=false, $sel_tab_bgcolor='white', $total_width='100%') {
-		// TODO
-		return parent::tabGenerator($TABS_DIRS, $TABS_TITLES, $TABS_TOOLTIPS, $nested, $selected, $sel_tab_bgcolor, $total_width);
 	}
 	function searchBox() {
 		// TODO
@@ -352,7 +348,7 @@ class Theme extends Layout {
 	}
 	function html_checkbox($name, $value, $id = '', $label = '', $checked = '', $extra_params = array()) {
 		// TODO
-		return parent::html_checkbox($name, $value, $id, $label, $checked, $extra_params) {
+		return parent::html_checkbox($name, $value, $id, $label, $checked, $extra_params);
 	}
 	function html_text_input_img_submit($name, $img_src, $id = '', $label = '', $value = '', $img_title = '', $img_alt = '', $extra_params = array(), $img_extra_params = '') {
 		// TODO
@@ -464,7 +460,7 @@ class Theme extends Layout {
 	}
 	function widget(&$widget, $layout_id, $readonly, $column_id, $is_minimized, $display_preferences, $owner_id, $owner_type) {
 		// TODO
-		return parent::widget(&$widget, $layout_id, $readonly, $column_id, $is_minimized, $display_preferences, $owner_id, $owner_type);
+		return parent::widget($widget, $layout_id, $readonly, $column_id, $is_minimized, $display_preferences, $owner_id, $owner_type);
 	}
 	function _getTogglePlusForWidgets() {
 		// TODO
