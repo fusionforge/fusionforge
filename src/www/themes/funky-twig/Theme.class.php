@@ -398,6 +398,28 @@ class Theme extends Layout {
 		return $template->render($vars);
 	}
 
+	function html_list($elements, $attrs = array(), $type = 'ul') {
+		if ($type == 'ol') {
+			$template = $this->twig->loadTemplate('OrderedList.html');
+		} else {
+			$template = $this->twig->loadTemplate('UnorderedList.html');
+		}
+
+		$items = array();
+		for ($i = 0; $i < count($elements); $i++) {
+			$items[$i]['element'] = $elements[$i];
+			if ($i <= count($attrs)) {
+				$items[$i]['attr'] = $attrs[$i];
+			} else {
+				$items[$i]['attr'] = '';
+			}				
+		}
+
+		$vars = array('items' => $items);
+
+		return $template->render($vars);
+	}
+
 }
 
 // Local Variables:
