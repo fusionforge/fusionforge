@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) Alcatel-Lucent
  * Copyright 2009, Roland Mas
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2015 Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -31,16 +31,16 @@ function util_gen_cross_ref ($text, $group_id) {
 	$text = util_make_links($text);
 
 	// Handle gforge [#nnn] Syntax => links to tracker.
-	$text = preg_replace('/\[\#(\d+)\]/e', "_artifactid2url('\\1')", $text);
+	$text = preg_replace_callback('/\[\#(\d+)\]/', create_function('$matches', 'return _artifactid2url($matches[1]);'), $text);
 
 	// Handle gforge [Tnnn] Syntax => links to task.
-	$text = preg_replace('/\[\T(\d+)\]/e', "_taskid2url('\\1','$group_id')", $text);
+	$text = preg_replace_callback('/\[\T(\d+)\]/', create_function('$matches', 'return _taskid2url($matches[1],'.$group_id.');'), $text);
 
 	// Handle [wiki:<pagename>] syntax
-	$text = preg_replace('/\[wiki:(.*?)\]/e', "_page2url('$prj','\\1')", $text);
+	$text = preg_replace_callback('/\[wiki:(.*?)\]/', create_function('$matches', 'return _page2url('.$prj.',$matches[1]);'), $text);
 
 	// Handle [forum:<thread_id>] Syntax => links to forum.
-	$text = preg_replace('/\[forum:(\d+)\]/e', "_forumid2url('\\1')", $text);
+	$text = preg_replace_callback('/\[forum:(\d+)\]/', create_function('$matches', 'return _forumid2url($matches[1]);'), $text);
 
 	return $text;
 }
