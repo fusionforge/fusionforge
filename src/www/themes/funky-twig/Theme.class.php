@@ -420,6 +420,14 @@ class Theme extends Layout {
 		return $template->render($vars);
 	}
 
+	function html_chartid($id = 0, $title = '') {
+		$template = $this->twig->loadTemplate('ChartId.html');
+
+		$vars = array('chart_id' => $id,
+					  'title' => $title);
+		
+		return $template->render($vars);
+	}
 }
 
 // Local Variables:
