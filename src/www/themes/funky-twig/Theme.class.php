@@ -137,12 +137,36 @@ class Theme extends Layout {
 		return parent::addStylesheet($css, $media);
 	}
 	function getJavascripts() {
-		// TODO
-		return parent::getJavascripts();
+		$template = $this->twig->loadTemplate('JavaScripts.html');
+
+		$scripts = array();
+		foreach ($this->javascripts as $js) {
+			$scripts[] = util_make_uri($js);
+		}
+		$this->javascripts = array();
+
+		$vars = array('js' => $scripts);,
+		
+		return $template->render($vars);
 	}
 	function getStylesheets() {
-		// TODO
-		return parent::getStylesheets();
+		$template = $this->twig->loadTemplate('StyleSheets.html');
+
+		$sheets = array();
+		foreach ($this->stylesheets as $c) {
+			$sheet = array('css' => util_make_uri($c['css']));
+			if ($c['media']) {
+				$sheet['media'] = $c['media'];
+			} else {
+				$sheet['media'] = '';
+			}
+			$sheets[] = $sheet;
+		}
+		$this->stylesheets = array();
+
+		$vars = array('sheets' => $sheets);,
+		
+		return $template->render($vars);
 	}
 	function header($params) {
 		// TODO
