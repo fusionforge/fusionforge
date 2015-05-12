@@ -177,8 +177,18 @@ class Theme extends Layout {
 		return parent::headerStart($params);
 	}
 	function headerHTMLDeclaration() {
-		// TODO
-		return parent::headerHTMLDeclaration();
+		$template = $this->twig->loadTemplate('HTMLDeclaration.html');
+
+		$vars = array();
+		
+		if (!util_ifsetor($this->doctype) || !util_ifsetor($sysDTDs[$this->doctype])) {
+			$this->doctype = 'transitional';
+		}
+		$vars['dtd'] = $sysDTDs[$this->doctype]['doctype'];
+		$vars['lang'] = _('en');
+		$vars['ns'] = $sysXMLNSs;
+
+		return $template->render($vars);
 	}
 	function headerTitle($params) {
 		// TODO
