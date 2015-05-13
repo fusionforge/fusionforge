@@ -268,12 +268,43 @@ class Theme extends Layout {
 		return parent::boxGetAltRowStyle($i, $classonly);
 	}
 	function listTableTop($titleArray = array(), $linksArray = array(), $class = '', $id = '', $thClassArray = array(), $thTitleArray = array(), $thOtherAttrsArray = array()) {
-		// TODO
-		return parent::listTableTop($titleArray, $linksArray, $class, $id, $thClassArray, $thTitleArray, $thOtherAttrsArray);
+		$template = $this->twig->loadTemplate('ListTableTop.html');
+
+		$vars = array('id' => $id,
+					  'class' => $class);
+
+		$data = array();
+
+		if (count($titleArray)) {
+			$count = count($titleArray);
+			for ($i = 0; $i < $count; $i++) {
+				$item = array();
+				if ($thOtherAttrsArray && isset($thOtherAttrsArray[$i])) {
+					$item = $thOtherAttrsArray[$i];
+				}
+				if ($thClassArray && isset($thClassArray[$i])) {
+					$item['class'] = $thClassArray[$i];
+				}
+				if ($thTitleArray && isset($thTitleArray[$i])) {
+					$item['title'] = $thTitleArray[$i];
+				}
+				if ($linksArray && isset($linksArray[$i])) {
+					$item['url'] = util_make_uri($linksArray[$i]);
+				}
+				$data[] = $item;
+			}
+		}
+
+		$vars['data'] = $data;
+
+		return $template->render($vars);
 	}
 	function listTableBottom() {
-		// TODO
-		return parent::listTableBottom();
+		$template = $this->twig->loadTemplate('ListTableBottom.html');
+
+		$vars = array();
+
+		return $template->render($vars);
 	}
 	function outerTabs($params) {
 		// TODO
