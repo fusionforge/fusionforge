@@ -59,7 +59,7 @@ Package: fusionforge-plugin-globalsearch
 Depends: libxml-rss-perl, libgetopt-mixed-perl, libdbi-perl, libwww-perl, libcrypt-ssleay-perl, libunicode-string-perl, ${perl:Depends}
 
 Package: fusionforge-plugin-gravatar
-Depends: 
+Depends:
 
 Package: fusionforge-plugin-headermenu
 Depends:
@@ -83,4 +83,7 @@ Depends: php5-ldap
 Recommends: slapd, ldap-utils, ${perl:Depends}
 
 Package: fusionforge-plugin-taskboard
+Depends:
+
+Package: fusionforge-plugin-webanalytics
 Depends:
