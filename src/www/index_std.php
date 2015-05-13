@@ -46,6 +46,34 @@ require_once $gfcommon.'include/FusionForge.class.php';
 <li><?php print _('A powerful plugin system to add new features.'); ?></li>
 </ul>
 
+<h3><?php print "What's new in FusionForge 5.3.3"; ?></h3>
+<p><?php print _('Checkout the roadmap for closed issues (bugs, patches, features requests) ') ?><a href="https://fusionforge.org/tracker/roadmap.php?group_id=6&roadmap_id=1&release=5.3.3"><?php echo _('here') ?></a></p>
+<p><?php print _('Fixes:') ?></p>
+<ul>
+  <li><?php print 'User e-mail change: simplify confirmation hash and precise encoding to avoid mangling in some versions of Thunderbird and Apple Mail [#738] (Inria)'; ?></li>
+  <li><?php print 'Project homepage: default to http:// rather than https:// for external homepage links [#752] (Inria)'; ?></li>
+  <li><?php print 'Site stats: fix "new users" and "new groups" charts (Inria)'; ?></li>
+  <li><?php print 'SCM: use \'shell_host\' variable (or failing that, \'web_host\') to document where users can SSH to the group shared directory [#698] (Inria)'; ?></li>
+  <li><?php print 'SCM stats: fix order in stats block [#736] (TrivialDev)'; ?></li>
+  <li><?php print 'System replication: refresh nscd cache before applying changes, fix spurious warning output from cron jobs (Inria)'; ?></li>
+  <li><?php print 'Docman: fix edit file when filename has quote [#750] (TrivialDev)'; ?></li>
+  <li><?php print 'Docman: fix move to files to fs script [#763] (TrivialDev)'; ?></li>
+  <li><?php print 'FRS: wrong tooltip displayed in admin page [#703] (TrivialDev)'; ?></li>
+  <li><?php print 'PM: fix test on success [#762] (TrivialDev)'; ?></li>
+  <li><?php print 'PM: fix allow new tasks without replace older one [#761] patch from Philipp Keidel (TrivialDev)'; ?></li>
+  <li><?php print 'Tracker: fix delete elements of an extrafield [#758] (TrivialDev)'; ?></li>
+  <li><?php print 'Plugin AuthLDAP: error and warning messages displayed twice [#732] (TrivialDev)'; ?></li>
+  <li><?php print 'Plugin AuthLDAP: fix check user status before login [#767] (TrivialDev)'; ?></li>
+  <li><?php print 'Plugin scmhook: fix display when only one SCM plugin enabled [#735] (TrivialDev)'; ?></li>
+  <li><?php print 'Plugin Hudson: fix global status in Hudson Job widget [#740] (TrivialDev)'; ?></li>
+  <li><?php print 'Plugin Hudson: delete jobs on project deletion [#742] (TrivialDev)'; ?></li>
+  <li><?php print 'Plugin MediaWiki: activate MediaWiki extensions (in the database) when creating a new project wiki (Thorsten Glaser & Inria)'; ?></li>
+  <li><?php print 'Plugin MediaWiki: integrate e-mail from FusionForge account, to send watchlist notifications (Inria)'; ?></li>
+  <li><?php print 'Plugin OSLC: Undefined index: is_public [#748] (TrivialDev)'; ?></li>
+  <li><?php print 'I18N: updated French translation (Stéphane Aulery and Inria)'; ?></li>
+  <li><?php print 'Project deletion: fix failure to delete project if tools have been deleted [#681] (Roland Mas)'; ?></li>
+</ul>
+
 <h3><?php print _("What's new in FusionForge 5.3.2"); ?></h3>
 <p><?php print _('Checkout the roadmap for closed issues (bugs, patches, features requests) ') ?><a href="https://fusionforge.org/tracker/roadmap.php?group_id=6&roadmap_id=1&release=5.3.2"><?php echo _('here') ?></a></p>
 <p><?php print _('Fixes:') ?></p>
@@ -177,55 +205,6 @@ require_once $gfcommon.'include/FusionForge.class.php';
 <li><?php print _('new phpcaptcha plugin: enable a captcha in the register page. (TrivialDev)'); ?></li>
 <li><?php print _('webanalytics: new plugin to add support for piwik or google analytics tool (TrivialDev)'); ?></li>
 <li><?php print _('new admssw plugin to provide ADMS.SW compatible RDF descriptions of projects'); ?></li>
-</ul>
-
-<h3><?php print _("What's new in FusionForge 5.2"); ?></h3>
-<p><?php print _('Standards features:') ?></p>
-<ul>
-<li><?php print _('Docman:'); ?>
-  <ul>
-  <li><?php print _('Inject ZIP as a tree (Capgemini)') ?></li>
-  <li><?php print _('Mass action (Capgemini)') ?></li>
-  <li><?php print _('Interaction with the projects-hierarchy plugin to enable hierarchical browsing. (Capgemini)') ?></li>
-  <li><?php print _('Complete rewritten of trash and pending view (Capgemini)') ?></li>
-  </ul>
-</li>
-<li><?php print _('scmsvn:'); ?>
-  <ul>
-  <li><?php print _('Private projects can now be browsed with viewvc, using user rights management (TrivialDev).') ?></li>
-  <li><?php print _('Basic activity support (TrivialDev).') ?></li>
-  </ul>
-</li>
-<li><?php print _('Trackers: New view to display roadmaps view for trackers (Alcatel-Lucent)') ?></li>
-<li><?php print _('Admin: User add membership to multiples projects in one shot (Capgemini)') ?></li>
-<li><?php print _('Widgets:'); ?>
-  <ul>
-  <li><?php print _('New Widget: last 5 documents published in my project (Capgemini)') ?></li>
-  <li><?php print _('New Widget: smcgit personal URL of cloned repositories. Currently just a list of URLs of your personal repository cloned from project you belong. (Capgemini)') ?></li>
-  </ul>
-</li>
-</ul>
-<p><?php print _('Plugins:') ?></p>
-<ul>
-<li><?php print _('New Scmhook plugin: complete library to handle hooks for any scm available in fusionforge. Currently supporting post-commit and pre-commit hook. scmsvn pre-commit and post-commit library is provided (Capgemini)') ?></li>
-<li><?php print _('New Message plugin to display global messages like planned upgrade or outage (Alcatel-Lucent).') ?></li>
-<li><?php print _('New MoinMoinWiki plugin (AdaCore)') ?></li>
-</ul>
-
-<h3><?php print _("What's new in FusionForge 5.1"); ?></h3>
-<ul>
-<li><?php print _('New Funky Theme (Capgemini).'); ?></li>
-<li><?php print _('New UI and features for the document manager (download as ZIP, locking, referencing documents by URL) (Capgemini).'); ?></li>
-<li><?php print _('New progress bar displaying completion state of trackers using a custom status field.'); ?></li>
-<li><?php print _('Improved sorting in trackers (Alcatel-Lucent).'); ?></li>
-<li><?php print _('More flexible and more powerful role-based access control system (Coclico).'); ?></li>
-<li><?php print _('New unobtrusive tooltip system based on jquery and tipsy to replace old help window (Alcatel-Lucent)'); ?></li>
-<li><?php print _('New plugins: Blocks, to add free HTML blocks on top of each tool of the project; Gravatar, to display user faces; OSLC, implementing the OSLC-CM API for tracker interoperability with external tools.'); ?></li>
-<li><?php print _('scmgit plugin: Personal Git repositories for project members (AdaCore).'); ?></li>
-<li><?php print _('Template projects: there can be several of them, and users registering new projects can pick which template to clone from for their new projects (Coclico).'); ?></li>
-<li><?php print _('Simplified configuration system, using standard *.ini files.'); ?></li>
-<li><?php print _('Reorganised, modular Apache configuration.'); ?></li>
-<li><?php print _('RPM packages for Red Hat (and derived) distributions.'); ?></li>
 </ul>
 
 <?php
