@@ -240,17 +240,28 @@ class Theme extends Layout {
 		// TODO
 		return parent::getRootIndex();
 	}
-	function boxTop($title) {
-		// TODO
-		return parent::boxTop($title);
+	function boxTop($title, $id='') {
+		$template = $this->twig->loadTemplate('BoxTop.html');
+
+		$vars = array('id' => $id,
+					  'title' => $title);
+
+		return $template->render($vars);
 	}
-	function boxMiddle($title) {
-		// TODO
-		return parent::boxMiddle($title);
+	function boxMiddle($title, $id='') {
+		$template = $this->twig->loadTemplate('BoxMiddle.html');
+
+		$vars = array('id' => $id,
+					  'title' => $title);
+
+		return $template->render($vars);
 	}
 	function boxBottom() {
-		// TODO
-		return parent::boxBottom();
+		$template = $this->twig->loadTemplate('BoxBottom.html');
+
+		$vars = array();
+
+		return $template->render($vars);
 	}
 	function boxGetAltRowStyle($i, $classonly = false) {
 		// TODO
