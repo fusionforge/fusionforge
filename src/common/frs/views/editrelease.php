@@ -193,7 +193,7 @@ if(count($files)) {
 	echo html_ao('p');
 	echo html_ao('span', array('id' => 'massactionactive', 'class' => 'hide'));
 	echo html_e('span', array('id' => 'frs-massactionmessage', 'title' => _('Actions availables for selected files, you need to check at least one file to get actions')), _('Mass actions for selected files')._(':'), false);
-	echo util_make_link('#', $HTML->getDeletePic(_('Delete selected file(s)'), _('Delete files')), array('onclick' => 'javascript:controllerFRS.toggleConfirmBox({idconfirmbox: \'confirmbox1\', do: \''._('Delete the selected file(s)').'\', cancel: \''._('Cancel').'\', height: 150, width: 300, action: \''.$deleteUrlAction.'&file_id=\'+controllerFRS.buildUrlByCheckbox("active")})', 'title' => _('Delete selected file(s)')), true);
+	echo util_make_link('#', $HTML->getDeletePic(_('Delete selected file(s)'), _('Delete files')), array('onclick' => 'javascript:controllerFRS.toggleConfirmBox({idconfirmbox: \'confirmbox1\', do: \''._('Delete selected file(s)').'\', cancel: \''._('Cancel').'\', height: 150, width: 300, action: \''.$deleteUrlAction.'&file_id=\'+controllerFRS.buildUrlByCheckbox("active")})', 'title' => _('Delete selected file(s)')), true);
 	echo html_ac(html_ap() - 2);
 }
 

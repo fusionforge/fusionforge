@@ -345,7 +345,7 @@ echo '
 //]]></script>
 <div id="tabber" class="tabber">
 	<ul>
-	<li><a href="#tabber-advancedquery" title="'._('Use project project queries or build and use your own queries.').'">'._('Advanced queries').'</a></li>
+	<li><a href="#tabber-advancedquery" title="'._('Use project queries or build and use your own queries.').'">'._('Advanced queries').'</a></li>
 	<li><a href="#tabber-simplefiltering" title="'._('Filtering by assignee, state, priority.').'">'._('Simple Filtering and Sorting').'</a></li>
 	</ul>
 	<div id="tabber-advancedquery">';

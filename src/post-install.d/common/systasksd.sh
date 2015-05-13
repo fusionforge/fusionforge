@@ -24,10 +24,6 @@ case "$1" in
 	    chkconfig fusionforge-systasksd on
 	else
 	    update-rc.d fusionforge-systasksd defaults
-	    # Work-around http://bugs.debian.org/774799
-	    if [ -x /bin/systemctl ]; then
-		systemctl daemon-reload
-	    fi
 	fi
 	# not 'start' as systemd will no-op if systasksd started and exited
 	service fusionforge-systasksd restart
@@ -35,7 +31,7 @@ case "$1" in
 
     remove)
 	if [ -x /sbin/chkconfig ]; then
-	    chkconfig fusionforge-systasksd off
+	    chkconfig --del fusionforge-systasksd
 	else
 	    update-rc.d fusionforge-systasksd remove
 	fi

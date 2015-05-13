@@ -193,7 +193,7 @@ if ( $cat === 'c' ) {
 		$realprojects = ($row_sub['subprojects']) ? $row_sub['subprojects'] : 0;
 		$plural = ($row_sub['subprojects'] > 1) ? $row_sub['subprojects'] : 0;
 		$content = util_make_link('/softwaremap/trove_list.php?cat=c&form_cat='.$row_sub['trove_cat_id'].$discrim_url, $row_sub['fullname']);
-		$content .= '&nbsp;'.html_e('em', array(), '('.sprintf(ngettext('%s projects', '%s project', $plural), $realprojects).')');
+		$content .= '&nbsp;'.html_e('em', array(), '('.sprintf(ngettext('%s project', '%s projects', $plural), $realprojects).')');
 		$elementsLi[] = array('content' => $content);
 	}
 	echo $HTML->html_list($elementsLi);

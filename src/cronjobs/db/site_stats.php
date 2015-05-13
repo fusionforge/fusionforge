@@ -123,7 +123,7 @@ $err .= db_error();
 //	populate stats_site table
 //
 $err .= "\n\nBeginning stats_site ".date('Ymd H:i:s',time());
-include 'cronjobs/stats_site.inc';
+include 'cronjobs/db/stats_site.inc';
 site_stats_day($year,$month,$day);
 
 //

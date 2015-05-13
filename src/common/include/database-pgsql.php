@@ -76,7 +76,8 @@ function db_connect() {
 		                                       forge_get_config('database_host'),
 		                                       forge_get_config('database_port')));
 		if (!$gfconn) {
-			print forge_get_config('forge_name')." Could Not Connect to Database: ".db_error();
+			throw new DBException(forge_get_config('forge_name')
+					." Could Not Connect to Database: ".db_error());
 			exit(1);
 		}
 	} else {
@@ -839,6 +840,8 @@ function db_query_to_string($sql, $params = array()) {
 function db_qpa_to_string($qpa) {
 	return db_query_to_string($qpa[0], $qpa[1]);
 }
+
+class DBException extends Exception {}
 
 // Local Variables:
 // mode: php

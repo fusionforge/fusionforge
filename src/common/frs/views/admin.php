@@ -139,7 +139,7 @@ if (count($FRSPackages) == 0) {
 		echo html_ao('p');
 		echo html_ao('span', array('id' => 'massactionactive', 'class' => 'hide'));
 		echo html_e('span', array('id' => 'frs-massactionmessage', 'title' => _('Actions availables for selected packages, you need to check at least one package to get actions')), _('Mass actions for selected packages')._(':'), false);
-		echo util_make_link('#', $HTML->getDeletePic(_('Delete selected package(s)'), _('Delete packages')), array('onclick' => 'javascript:controllerFRS.toggleConfirmBox({idconfirmbox: \'confirmbox1\', do: \''._('Delete the selected package(s)').'\', cancel: \''._('Cancel').'\', height: 150, width: 300, action: \''.$deleteUrlAction.'&package_id=\'+controllerFRS.buildUrlByCheckbox("active")})', 'title' => _('Delete selected package(s)')), true);
+		echo util_make_link('#', $HTML->getDeletePic(_('Delete selected package(s)'), _('Delete packages')), array('onclick' => 'javascript:controllerFRS.toggleConfirmBox({idconfirmbox: \'confirmbox1\', do: \''._('Delete selected package(s)').'\', cancel: \''._('Cancel').'\', height: 150, width: 300, action: \''.$deleteUrlAction.'&package_id=\'+controllerFRS.buildUrlByCheckbox("active")})', 'title' => _('Delete selected package(s)')), true);
 		echo html_ac(html_ap() - 2);
 	}
 	echo $HTML->jQueryUIconfirmBox('confirmbox1', _('Delete package'), _('You are about to delete permanently this package. Are you sure? This action is definitive.'));
