@@ -54,7 +54,7 @@ case $1 in
 	    return 3
 	fi
 	;;
-    restart)
+    restart|force-reload)
 	$0 stop
 	$0 start
 	;;
