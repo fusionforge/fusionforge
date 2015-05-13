@@ -83,3 +83,6 @@ Requires: php-ldap
 
 %package plugin-taskboard
 Requires:
+
+%package plugin-webanalytics
+Requires:
