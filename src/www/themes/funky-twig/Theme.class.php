@@ -177,6 +177,8 @@ class Theme extends Layout {
 		return parent::headerStart($params);
 	}
 	function headerHTMLDeclaration() {
+		global $sysDTDs, $sysXMLNSs;
+
 		$template = $this->twig->loadTemplate('HTMLDeclaration.html');
 
 		$vars = array();
@@ -188,7 +190,7 @@ class Theme extends Layout {
 		$vars['lang'] = _('en');
 		$vars['ns'] = $sysXMLNSs;
 
-		return $template->render($vars);
+		print $template->render($vars);
 	}
 	function headerTitle($params) {
 		// TODO
