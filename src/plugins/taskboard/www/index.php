@@ -284,8 +284,8 @@ jQuery( document ).ready(function( $ ) {
 					}).done(function( answer ) {
 						jQuery('#new-task-dialog').dialog( "close" );
 
-						if(answer['message']) {
-							showMessage(answer['message'], 'error');
+						if(answer['alert']) {
+							showMessage(answer['alert'], 'error');
 						}
 
 						if(answer['action'] == 'reload') {
