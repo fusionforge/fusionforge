@@ -439,7 +439,7 @@ class hudsonViews extends Views {
 	function _display_iframe($url = '') {
 		if (!empty($url)) {
 			echo '<div id="hudson_iframe_div">';
-			htmlIframe($url, array('id' => 'hudson_iframe', 'class' => 'iframe_service'));
+			htmlIframe($url, array('id' => 'hudson_iframe', 'class' => 'iframe_service', 'absolute' = true));
 			echo '</div>';
 		}
 	}
