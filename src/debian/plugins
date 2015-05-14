@@ -2,7 +2,7 @@ Package: fusionforge-plugin-scmgit
 Depends: git, xinetd, rsync
 
 Package: fusionforge-plugin-scmsvn
-Depends: subversion, subversion-tools, viewvc, python-pycurl, xinetd, rsync, libapache2-mod-svn
+Depends: subversion, subversion-tools, viewvc, python, python-pycurl, xinetd, rsync, libapache2-mod-svn
 
 Package: fusionforge-plugin-scmbzr
 Depends: bzr, libapache2-mod-wsgi, loggerhead (>= 1.19~bzr477~), python-pastedeploy
@@ -59,7 +59,7 @@ Package: fusionforge-plugin-globalsearch
 Depends: libxml-rss-perl, libgetopt-mixed-perl, libdbi-perl, libwww-perl, libcrypt-ssleay-perl, libunicode-string-perl, ${perl:Depends}
 
 Package: fusionforge-plugin-gravatar
-Depends: 
+Depends:
 
 Package: fusionforge-plugin-headermenu
 Depends:
@@ -83,4 +83,7 @@ Depends: php5-ldap
 Recommends: slapd, ldap-utils, ${perl:Depends}
 
 Package: fusionforge-plugin-taskboard
+Depends:
+
+Package: fusionforge-plugin-webanalytics
 Depends:

@@ -1,0 +1,4 @@
+# It is registered, in a separate script called from postinst
+fusionforge-common: script-in-etc-init.d-not-registered-via-update-rc.d etc/init.d/fusionforge-systasksd
+# It's a portable init script; also FF doesn't rely on systemd so no need to "redirect /etc/init.d/$script calls to systemctl"
+fusionforge-common: init.d-script-does-not-source-init-functions etc/init.d/fusionforge-systasksd

@@ -496,6 +496,10 @@ class ArtifactType extends Error {
 					return false;
 				}
 				$status_id = db_result($res, 0, 'status_id');
+				if ($status_id < 1 || $status_id > 4) {
+					$this->setError('INVALID STATUS REMAP: '.$status_id.' FROM SELECTED ELEMENT: '.$element_id);
+					return false;
+				}
 			} else {
 				// custom status was not passed... use the first status from the database
 				$res = db_query_params('SELECT status_id FROM artifact_extra_field_elements WHERE extra_field_id=$1 ORDER BY element_id ASC LIMIT 1 OFFSET 0',
@@ -505,11 +509,6 @@ class ArtifactType extends Error {
 					return false;
 				}
 				$status_id = db_result($res, 0, 'status_id');
-			}
-
-			if ($status_id < 1 || $status_id > 4) {
-				echo "INVALID STATUS REMAP: $status_id FROM SELECTED ELEMENT: $element_id";
-				return false;
 			}
 			return $status_id;
 		} else {

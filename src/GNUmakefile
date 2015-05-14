@@ -80,7 +80,7 @@ install-common: install-config install-plugin-authbuiltin
 	chmod 755 $(DESTDIR)$(sysconfdir)/init.d/fusionforge-systasksd
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(log_path)/
 	if [ ! -e $(DESTDIR)$(sysconfdir)/logrotate.d/fusionforge-common ]; then \
-		sed 's,@log_path@,$(log_path),' etc/logrotate.d/fusionforge-common \
+		sed 's,@log_path@,$(log_path),g' etc/logrotate.d/fusionforge-common \
 			> $(DESTDIR)$(sysconfdir)/logrotate.d/fusionforge-common; \
 	fi
 
@@ -104,7 +104,7 @@ install-web: install-base-dirs
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/rss/
 	$(CP_R) post-install.d/web $(DESTDIR)$(pkgdatadir)/post-install.d/
 	if [ ! -e $(DESTDIR)$(sysconfdir)/logrotate.d/fusionforge-web ]; then \
-		sed 's,@log_path@,$(log_path),' etc/logrotate.d/fusionforge-web \
+		sed 's,@log_path@,$(log_path),g' etc/logrotate.d/fusionforge-web \
 			> $(DESTDIR)$(sysconfdir)/logrotate.d/fusionforge-web; \
 	fi
 #	TODO: multiple servers support?
