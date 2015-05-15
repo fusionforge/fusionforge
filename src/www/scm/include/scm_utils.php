@@ -81,6 +81,7 @@ function scm_footer($params = array('inframe' => 0)) {
 }
 
 function commitstime_graph($group_id, $chartid) {
+	global $HTML;
 	$g = group_get_object($group_id);
 	$end = time();
 	$res = db_query_params ('SELECT month, sum(commits) AS count
