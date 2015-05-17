@@ -492,7 +492,7 @@ FROM users
   JOIN pfo_role ON (pfo_user_role.role_id=pfo_role.role_id)
   LEFT JOIN role_project_refs ON (pfo_user_role.role_id=role_project_refs.role_id)
   JOIN nss_groups ON (pfo_role.home_group_id=nss_groups.group_id)
-WHERE users.unix_status='A'AND nss_groups.gid < $1 
+WHERE users.unix_status='A'AND nss_groups.gid < $1
 
 UNION
 
@@ -529,7 +529,7 @@ WHERE users.unix_status='A'
 
 -- Not supported, this is not sane
 -- UNION
--- 
+--
 -- -- 'Open' privileges for Anonymous and LoggedIn users
 -- SELECT users.unix_uid, nss_groups.gid, users.user_id, nss_groups.group_id, user_name, nss_groups.name::text||'_scmro'
 -- FROM users
@@ -538,7 +538,7 @@ WHERE users.unix_status='A'
 --   JOIN pfo_role_setting ON (role_project_refs.role_id=pfo_role_setting.role_id AND (pfo_role_setting.ref_id=nss_groups.group_id) AND ((section_name='project_admin' AND perm_val=1) OR (section_name='scm' AND perm_val=2)))
 -- WHERE users.unix_status='A' AND nss_groups.gid < $1
 
-GROUP BY users.user_id, nss_groups.gid;
+GROUP BY users.user_id, nss_groups.gid, users.unix_uid, nss_groups.group_id, users.user_name, nss_groups.name;
 ";
 		$res = db_query_params($sql, array($this->GID_ADD_SCMRW, $this->GID_ADD_SCMRO));
 		if (!$res) {
@@ -546,7 +546,7 @@ GROUP BY users.user_id, nss_groups.gid;
 			return false;
 		}
 		db_commit();
-		
+
 		return true;
 	}
 }
