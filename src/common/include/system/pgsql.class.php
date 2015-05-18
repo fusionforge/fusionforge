@@ -538,7 +538,7 @@ WHERE users.unix_status='A'
 --   JOIN pfo_role_setting ON (role_project_refs.role_id=pfo_role_setting.role_id AND (pfo_role_setting.ref_id=nss_groups.group_id) AND ((section_name='project_admin' AND perm_val=1) OR (section_name='scm' AND perm_val=2)))
 -- WHERE users.unix_status='A' AND nss_groups.gid < $1
 
-GROUP BY users.user_id, nss_groups.gid, users.unix_uid, nss_groups.group_id, users.user_name, nss_groups.name;
+GROUP BY users.user_id, nss_groups.gid;
 ";
 		$res = db_query_params($sql, array($this->GID_ADD_SCMRW, $this->GID_ADD_SCMRO));
 		if (!$res) {
