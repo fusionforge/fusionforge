@@ -1,6 +1,6 @@
 Name: fusionforge
 Version: @rpm_version@
-Release: 0.1@rpm_snapshot@%{?dist}
+Release: 0.2@rpm_snapshot@%{?dist}
 Summary: Collaborative development tool
 
 Group: Development/Tools
@@ -278,8 +278,11 @@ This package controls the interaction between FusionForge and Mailman.
 
 
 %changelog
-* Mon Nov 3 2014 Sylvain Beucler <beuc@beuc.net> - @version@-1@snapshot@
-- New upstream snapshot following the development branch
+* Mon May 18 2015 Sylvain Beucler <beuc@beuc.net> - @rpm_version@-0.2@rpm_snapshot@
+- New upstream snapshot following the stable branch
+
+* Mon May 18 2015 Sylvain Beucler <beuc@beuc.net> - 6.0-0.1.rc2
+- New upstream release candidate
 
 * Mon Nov 3 2014 Sylvain Beucler <beuc@beuc.net> - 5.3.2-3
 - Remove augeas dependency from fusionforge-plugin-scmsvn which is not
