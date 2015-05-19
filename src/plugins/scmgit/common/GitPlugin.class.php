@@ -1150,7 +1150,7 @@ control over it to the project's administrator.");
 
 	function getCommits($project, $user = null, $nb_commits) {
 		$commits = array();
-		if ($project->usesPlugin($this->name) && forge_get_config('use_dav', $this->name) && forge_check_perm($this->name, $project->getID(), 'read')) {
+		if ($project->usesPlugin($this->name) && forge_check_perm('scm', $project->getID(), 'read')) {
 			$repo = forge_get_config('repos_path', $this->name) . '/' . $project->getUnixName() . '/' . $project->getUnixName() . '.git';
 			if ($user) {
 				$email = $user->getEmail();
