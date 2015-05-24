@@ -6,7 +6,7 @@
  * Copyright 2010 (c) FusionForge Team
  * Copyright (C) 2010-2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2011-2014, Franck Villaume - TrivialDev
+ * Copyright 2011-2015, Franck Villaume - TrivialDev
  * Copyright © 2011, 2012
  *	Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
  *
@@ -1128,17 +1128,17 @@ function html_eo($name, $attrs = array()) {
  * @param	string	$name
  *			element name
  * @param	array	$attrs
- *		(optional) associative array of element attributes
+ *			(optional) associative array of element attributes
  *			values: arrays are space-imploded;
  *			    false values and empty arrays ignored
  * @param	string	$content
  *		(optional) XHTML to be placed inside
  * @param	bool	$shortform
- *		(optional) allow short open-close form
- *		(default: true)
- * @param   bool    $indent
- *      (optional) indent output; disable if extra spacing breaks the rendering
- *      (default: true)
+ *			(optional) allow short open-close form
+ *			(default: true)
+ * @param	bool	$indent
+ *			(optional) indent output; disable if extra spacing breaks the rendering
+ *			(default: true)
  * @return	string
  *		XHTML string suitable for echo'ing
  */
