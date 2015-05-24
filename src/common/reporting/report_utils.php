@@ -356,7 +356,7 @@ function trackeract_graph($group_id, $area, $SPAN, $start, $end, $atid) {
 		plot'.$chartid.'.replot();
 		});'."\n";
 	echo '//]]></script>';
-	echo $HTML->html_chartid($chartid, _('Tracker Activity').' ('.date(_('Y-m-d'), $start).' - '.date(_('Y-m-d'), $end).')');
+	echo $HTML->html_chartid('chart'.$chartid, _('Tracker Activity').' ('.date(_('Y-m-d'), $start).' - '.date(_('Y-m-d'), $end).')');
 	return true;
 }
 
@@ -413,7 +413,7 @@ function trackerpie_graph($group_id, $area, $SPAN, $start, $end, $atid) {
 				plot'.$chartid.'.replot( { resetAxes: true } );
 			});'."\n";
 		echo '//]]></script>';
-		echo $HTML->html_chartid($chartid, $areaname.' ('.date(_('Y-m-d'), $start).' - '.date(_('Y-m-d'), $end).')');
+		echo $HTML->html_chartid('chart'.$chartid, $areaname.' ('.date(_('Y-m-d'), $start).' - '.date(_('Y-m-d'), $end).')');
 	} else {
 		echo $HTML->information(_('No data to display'));
 	}
