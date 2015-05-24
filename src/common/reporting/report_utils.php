@@ -5,7 +5,7 @@
  * Copyright 2003-2004, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013,2014 Franck Villaume - TrivialDev
+ * Copyright 2013,2015 Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -586,7 +586,7 @@ function report_graph($type, $SPAN, $start, $end) {
 			plot'.$chartid.'.replot( { resetAxes: true } );
 		});'."\n";
 	echo '//]]></script>';
-	echo $HTML->html_chartid($chartid, $label[0].' ('.date(_('Y-m-d'), $start).' - '.date(_('Y-m-d'), $end).')');
+	echo $HTML->html_chartid('chart'.$chartid, $label[0].' ('.date(_('Y-m-d'), $start).' - '.date(_('Y-m-d'), $end).')');
 	return true;
 }
 
@@ -874,7 +874,7 @@ function report_actgraph($type, $SPAN, $start, $end, $id, $area) {
 		plot'.$chartid.'.replot();
 	});'."\n";
 	echo '//]]></script>';
-	echo $HTML->html_chartid($chartid, $areaname.' ('.date(_('Y-m-d'), $start).' - '.date(_('Y-m-d'), $end).')');
+	echo $HTML->html_chartid('chart'.$chartid, $areaname.' ('.date(_('Y-m-d'), $start).' - '.date(_('Y-m-d'), $end).')');
 	return true;
 }
 
@@ -976,7 +976,7 @@ function report_toolspiegraph($datatype = 0, $start, $end) {
 				plot'.$chartid.'.replot( { resetAxes: true } );
 			});'."\n";
 		echo '//]]></script>';
-		echo $HTML->html_chartid($chartid, $arr[$datatype].' ('.date(_('Y-m-d'), $start).' - '.date(_('Y-m-d'), $end).')');
+		echo $HTML->html_chartid('chart'.$chartid, $arr[$datatype].' ('.date(_('Y-m-d'), $start).' - '.date(_('Y-m-d'), $end).')');
 	} else {
 		echo $HTML->information(_('No data to display.'));
 	}
@@ -1040,7 +1040,7 @@ function report_timegraph($type = 'site', $area = 'tasks', $start, $end, $id = 0
 				plot'.$chartid.'.replot( { resetAxes: true } );
 			});'."\n";
 		echo '//]]></script>';
-		echo $HTML->html_chartid($chartid, $arr[$area].' ('.date(_('Y-m-d'), $start).' - '.date(_('Y-m-d'), $end).')');
+		echo $HTML->html_chartid('chart'.$chartid, $arr[$area].' ('.date(_('Y-m-d'), $start).' - '.date(_('Y-m-d'), $end).')');
 	} else {
 		echo $HTML->information(_('No data to display.'));
 	}
@@ -1143,7 +1143,7 @@ function report_sitetimebargraph($start, $end) {
 			plot'.$chartid.'.replot();
 		});'."\n";
 		echo '//]]></script>';
-		echo $HTML->html_chartid($chartid, $areaname.' ('.date(_('Y-m-d'), $start).' - '.date(_('Y-m-d'), $end).')');
+		echo $HTML->html_chartid('chart'.$chartid, $areaname.' ('.date(_('Y-m-d'), $start).' - '.date(_('Y-m-d'), $end).')');
 	} else {
 		echo $HTML->information(_('No data to display.'));
 	}
@@ -1235,7 +1235,7 @@ function report_pm_hbar($id, $values, $ticks, $labels, $stackSeries = false) {
 		plot'.$id.'.replot();
 	});'."\n";
 	echo '//]]></script>';
-	echo $HTML->html_chartid($chartid);
+	echo $HTML->html_chartid('chart'.$id);
 }
 
 // Local Variables:

@@ -8,7 +8,7 @@
  * Copyright 2010-2012, Alain Peyrat - Alcatel-Lucent
  * Copyright © 2011 Thorsten Glaser – tarent GmbH
  * Copyright 2011 - Marc-Etienne Vargenau, Alcatel-Lucent
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2015, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -1504,10 +1504,10 @@ if (isset($params['group']) && $params['group']) {
 	 * @param	string	$figcaption_title	title of the chart
 	 * @return	string
 	 */
-	function html_chartid($chart_id = 0, $figcaption_title = '') {
+	function html_chartid($chart_id = 'chart0', $figcaption_title = '') {
 		$htmlcode = html_ao('figure');
-		$htmlcode .= html_e('figcaption', array(), $figcaption_title);
-		$htmlcode .= html_ao('div', array('id' => 'chart'.$chart_id));
+		$htmlcode .= html_e('figcaption', array(), $figcaption_title, false);
+		$htmlcode .= html_ao('div', array('id' => $chart_id));
 		$htmlcode .= html_ac(html_ap() -2);
 		return $htmlcode;
 	}
