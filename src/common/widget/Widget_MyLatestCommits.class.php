@@ -77,11 +77,11 @@ class Widget_MyLatestCommits extends Widget {
 			$revisions = array();
 			if ($project->usesPlugin('scmsvn') && forge_check_perm('scm', $project->getID(), 'read')) {
 				$scmPlugin = plugin_get_object('scmsvn');
-				$revisions = $scmPlugin->getCommits($project, $user, $this->_nb_commits);
+				$revisions = array_merge($revisions, $scmPlugin->getCommits($project, $user, $this->_nb_commits));
 			}
 			if ($project->usesPlugin('scmgit') && forge_check_perm('scm', $project->getID(), 'read')) {
 				$scmPlugin = plugin_get_object('scmgit');
-				$revisions = $scmPlugin->getCommits($project, $user, $this->_nb_commits);
+				$revisions = array_merge($revisions, $scmPlugin->getCommits($project, $user, $this->_nb_commits));
 			}
 			if (count($revisions) > 0) {
 				$global_nb_revisions += count($revisions);

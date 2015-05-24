@@ -101,7 +101,6 @@ function artifact_submission_form($ath, $group) {
 	<tr>
 		<td colspan="2">
 		<div class="file_attachments">
-		<a href="javascript:help_window(\''. util_make_uri('/help/tracker.php?helpname=attach_file') .'\')"><strong>(?)</strong></a>
 		<p>
 		<strong><?php echo _('Attach Files')._(':'); ?> </strong> <?php echo('('._('max upload size: '.human_readable_bytes(util_get_maxuploadfilesize())).')') ?><br />
 		<input type="file" name="input_file0" /><br />

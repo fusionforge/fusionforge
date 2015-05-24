@@ -1,3 +1,9 @@
+fusionforge (6.0~rc3-1) unstable; urgency=medium
+
+  * New upstream release candidate.
+
+ -- Roland Mas <lolando@debian.org>  Fri, 22 May 2015 17:08:50 +0200
+
 fusionforge (6.0~rc2+20150513-1) unstable; urgency=medium
 
   * New upstream release candidate

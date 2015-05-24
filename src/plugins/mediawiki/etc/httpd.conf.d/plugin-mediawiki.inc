@@ -12,3 +12,7 @@ AliasMatch ^/plugins/mediawiki/dumps/(.*)$ ${FF__core__data_path}/plugins/mediaw
         Options -FollowSymLinks +Indexes
         AllowOverride None
 </Directory>
+
+<Directory ${FF__core__data_path}/plugins/mediawiki/projects>
+        Require all granted
+</Directory>

@@ -35,7 +35,7 @@ class AuthBuiltinPlugin extends ForgeAuthPlugin {
 		$this->ForgeAuthPlugin();
 
 		$this->name = 'authbuiltin';
-		$this->text = 'Built-in authentication';
+		$this->text = _('Built-in authentication');
 
 		$this->_addHook('check_auth_session');
 		$this->_addHook('fetch_authenticated_user');

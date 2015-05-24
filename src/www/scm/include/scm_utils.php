@@ -5,7 +5,7 @@
  * Copyright 2004-2005 (c) GForge LLC, Tim Perdue
  * Copyright 2010 (c), Franck Villaume - Capgemini
  * Copyright (C) 2010-2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2015, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -194,7 +194,7 @@ function commitstime_graph($group_id, $chartid) {
 			plot'.$chartid.'.replot();
 		});'."\n";
 	echo '//]]></script>';
-	echo $HTML->html_chartid($chartid);
+	echo $HTML->html_chartid('chart'.$chartid);
 }
 
 function commits_graph($group_id, $days, $chartid) {
@@ -258,7 +258,7 @@ function commits_graph($group_id, $days, $chartid) {
 				plot'.$chartid.'.replot( { resetAxes: true } );
 			});'."\n";
 		echo '//]]></script>';
-		echo $HTML->html_chartid($chartid);
+		echo $HTML->html_chartid('chart'.$chartid);
 	} else {
 		echo $HTML->information(_('No commits during this period.'));
 	}
