@@ -959,7 +959,7 @@ control over it to the project's administrator.");
 		}
 		if (in_array('scmgit', $params['show']) || (count($params['show']) < 1)) {
 			$repo = forge_get_config('repos_path', 'scmgit') . '/' . $project->getUnixName() . '/' . $project->getUnixName() . '.git';
-			if (is_dir($repo) && !is_dir($repo.'/refs')) {
+			if (is_dir($repo) && is_dir($repo.'/refs')) {
 				$start_time = $params['begin'];
 				$end_time = $params['end'];
 				$pipe = popen("GIT_DIR=\"$repo\" git log --date=raw --since=@$start_time --until=@$end_time --all --pretty='format:%ad||%ae||%s||%h' --name-status", 'r' );
