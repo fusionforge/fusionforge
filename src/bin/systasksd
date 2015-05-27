@@ -89,7 +89,8 @@ if (isset($options['v']) or isset($options['verbose'])) {
 // Proper daemon
 posix_setsid();
 chdir('/');
-umask(0);
+//umask(0); // programmers usually expect umask=0022, and this would default mkdir to 0777
+umask(0022);
 $log_path = forge_get_config('log_path');
 if (!$verbose) {
 	// Hack to reopen stdin/stdout/stderr, order is important
