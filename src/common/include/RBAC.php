@@ -874,8 +874,8 @@ abstract class BaseRole extends Error {
 				}
 			}
 
-			# Change repo permissions when we change anonymous access
-			if ($sect == 'scm' && $this->getID() == $anon->getID()) {
+			# Change repo permissions when we edit anonymous access for a single project
+			if ($sect == 'scm' && $this->getID() == $anon->getID() && count($refs) == 1) {
 					$systasksq = new SysTasksQ();
 					$systasksq->add(SYSTASK_CORE, 'SCM_REPO', $refid);
 			}
