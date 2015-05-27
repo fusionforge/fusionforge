@@ -116,8 +116,8 @@ $tasks_involved = getInvolvedTasks($log);
 $artifacts_involved = getInvolvedArtifacts($log);
 if ((!is_array($tasks_involved) || count($tasks_involved) < 1) &&
 	(!is_array($artifacts_involved) || count($artifacts_involved) < 1)) {
-	//nothing to post
-	die("No artifacts nor tasks in the commit log\n");
+	// No artifacts nor tasks in the commit log
+	exit(0);
 }
 
 foreach ($changed as $onefile) {
