@@ -1143,7 +1143,7 @@ function util_make_uri($path) {
 }
 
 /**
- * util_make_link - Construct proper (relative) URI from path & text
+ * util_make_link - Construct proper URL/URI from path & text
  *
  * @param	string		$path
  * @param	string		$text
