@@ -40,6 +40,11 @@ FusionForge 6.0rcX:
 * Plugin AuthLDAP: Support LPAP_OPT_REFERRALS option, needed by ActiveDirectory Server [#734] (TrivialDev)
 * Plugin Task Board: New Agile TaskBoard supporting Scrum and Kanban methodologies (Vitaliy Pylypiv and TrivialDev)
 
+Fusionforge-5.3.4:
+* CVE-2015-0850: Prevent arbitrary command execution via clone URL
+  parameter of the method to create secondary Git repositories. Found
+  by Ansgar Burchardt <ansgar@debian.org>.
+
 Fusionforge-5.3.3:
 * User e-mail change: simplify confirmation hash and precise encoding to avoid mangling in some versions of Thunderbird and Apple Mail [#738] (Inria)
 * Project homepage: default to http:// rather than https:// for external homepage links [#752] (Inria)
