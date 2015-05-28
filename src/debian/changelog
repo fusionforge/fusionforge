@@ -1,3 +1,16 @@
+fusionforge (6.0~rc4-0) UNRELEASED; urgency=high
+
+  [ Sylvain Beucler ]
+  * New upstream release candidate
+  (closes: #782196, #782638)
+
+  [ Roland Mas ]
+  * CVE-2015-0850: Prevent arbitrary command execution via clone URL
+    parameter of the method to create secondary Git repositories. Found by
+    Ansgar Burchardt <ansgar@debian.org>.
+
+ -- Sylvain Beucler <beuc@debian.org>  Thu, 28 May 2015 11:29:28 +0200
+
 fusionforge (6.0~rc3-1) unstable; urgency=medium
 
   * New upstream release candidate.

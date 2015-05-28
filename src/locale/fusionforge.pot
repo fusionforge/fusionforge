@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-07 17:08+0200\n"
+"POT-Creation-Date: 2015-05-28 11:39+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -99,11 +99,11 @@ msgstr ""
 msgid "Items For Our Next Release"
 msgstr ""
 
-#: bin/populate_template_project.php:203 common/tracker/actions/detail.php:161
-#: common/tracker/actions/detail.php:213
+#: bin/populate_template_project.php:203 common/tracker/actions/detail.php:159
+#: common/tracker/actions/detail.php:211
 #: common/tracker/actions/mod-limited.php:192
 #: common/tracker/actions/mod-limited.php:237
-#: common/tracker/actions/mod.php:230 common/tracker/actions/mod.php:305
+#: common/tracker/actions/mod.php:227 common/tracker/actions/mod.php:302
 #: plugins/scmcvs/common/CVSPlugin.class.php:181
 #: www/stats/site_stats_utils.php:283
 msgid "Commits"
@@ -156,6 +156,7 @@ msgstr ""
 #: common/tracker/ArtifactType.class.php:163
 #: common/tracker/ArtifactTypeFactory.class.php:59
 #: common/tracker/ArtifactTypes.class.php:54
+#: common/tracker/RoadmapFactory.class.php:61
 msgid "No Valid Group Object"
 msgstr ""
 
@@ -201,11 +202,11 @@ msgstr ""
 #: common/docman/views/tree.php:64 common/forum/AttachManager.class.php:215
 #: common/forum/AttachManager.class.php:321
 #: common/forum/AttachManager.class.php:358
-#: common/forum/AttachManager.class.php:413 common/forum/Forum.class.php:232
-#: common/forum/Forum.class.php:513 common/forum/Forum.class.php:594
-#: common/forum/Forum.class.php:620 common/forum/Forum.class.php:628
-#: common/forum/Forum.class.php:636 common/forum/Forum.class.php:644
-#: common/forum/Forum.class.php:652 common/forum/Forum.class.php:660
+#: common/forum/AttachManager.class.php:413 common/forum/Forum.class.php:229
+#: common/forum/Forum.class.php:510 common/forum/Forum.class.php:591
+#: common/forum/Forum.class.php:617 common/forum/Forum.class.php:625
+#: common/forum/Forum.class.php:633 common/forum/Forum.class.php:641
+#: common/forum/Forum.class.php:649 common/forum/Forum.class.php:657
 #: common/forum/ForumAdmin.class.php:412
 #: common/forum/ForumFactory.class.php:56
 #: common/forum/ForumFactory.class.php:158 common/forum/ForumHTML.class.php:58
@@ -232,11 +233,11 @@ msgstr ""
 #: common/frs/views/editrelease.php:98 common/frs/views/editrelease.php:105
 #: common/frs/views/editrelease.php:132 common/frs/views/qrs.php:62
 #: common/frs/views/shownotes.php:51 common/include/Error.class.php:206
-#: common/include/Group.class.php:2661 common/include/Group.class.php:2662
-#: common/include/Group.class.php:2663 common/include/Group.class.php:2715
-#: common/include/Group.class.php:2716 common/include/Group.class.php:2719
-#: common/include/Group.class.php:2723 common/include/Group.class.php:2733
-#: common/include/Group.class.php:2734
+#: common/include/Group.class.php:2688 common/include/Group.class.php:2689
+#: common/include/Group.class.php:2690 common/include/Group.class.php:2742
+#: common/include/Group.class.php:2743 common/include/Group.class.php:2746
+#: common/include/Group.class.php:2750 common/include/Group.class.php:2760
+#: common/include/Group.class.php:2761
 #: common/include/GroupJoinRequest.class.php:298
 #: common/include/MonitorElement.class.php:137
 #: common/include/MonitorElement.class.php:150
@@ -265,7 +266,7 @@ msgstr ""
 #: common/tracker/ArtifactExtraField.class.php:193
 #: common/tracker/ArtifactExtraField.class.php:199
 #: common/tracker/ArtifactType.class.php:225
-#: common/tracker/ArtifactType.class.php:996
+#: common/tracker/ArtifactType.class.php:995
 #: common/tracker/actions/admin-tracker.php:31
 #: common/tracker/actions/admin-updates.php:58
 #: common/tracker/actions/admin-updates.php:114
@@ -284,13 +285,13 @@ msgstr ""
 #: common/tracker/actions/admin-updates.php:595
 #: common/tracker/actions/browse.php:424 common/tracker/actions/browse.php:427
 #: common/tracker/actions/browse.php:445 common/tracker/actions/browse.php:794
-#: common/tracker/actions/detail.php:70
+#: common/tracker/actions/detail.php:68
 #: common/tracker/actions/mod-limited.php:77
 #: common/tracker/actions/mod-limited.php:202
-#: common/tracker/actions/mod.php:81 common/tracker/actions/mod.php:140
-#: common/tracker/actions/mod.php:167 common/tracker/actions/mod.php:174
-#: common/tracker/actions/mod.php:182 common/tracker/actions/mod.php:200
-#: common/tracker/actions/mod.php:261 common/tracker/actions/mod.php:263
+#: common/tracker/actions/mod.php:79 common/tracker/actions/mod.php:137
+#: common/tracker/actions/mod.php:164 common/tracker/actions/mod.php:171
+#: common/tracker/actions/mod.php:179 common/tracker/actions/mod.php:197
+#: common/tracker/actions/mod.php:258 common/tracker/actions/mod.php:260
 #: common/tracker/actions/query.php:322 common/tracker/actions/query.php:337
 #: common/tracker/actions/query.php:343 common/tracker/actions/query.php:344
 #: common/tracker/actions/query.php:379 common/tracker/actions/query.php:381
@@ -302,9 +303,9 @@ msgstr ""
 #: common/tracker/actions/tracker.php:382
 #: common/tracker/actions/tracker.php:387
 #: common/tracker/actions/tracker.php:496
-#: common/tracker/include/ArtifactHtml.class.php:110
-#: common/tracker/include/ArtifactHtml.class.php:112
-#: common/tracker/include/ArtifactHtml.class.php:220
+#: common/tracker/include/ArtifactHtml.class.php:109
+#: common/tracker/include/ArtifactHtml.class.php:111
+#: common/tracker/include/ArtifactHtml.class.php:219
 #: common/tracker/include/ArtifactTypeHtml.class.php:444
 #: common/tracker/views/form-addextrafieldoption.php:39
 #: common/tracker/views/form-adminroadmap.php:73
@@ -420,7 +421,7 @@ msgstr ""
 #: plugins/taskboard/common/TaskBoardColumn.class.php:432
 #: plugins/taskboard/common/TaskBoardColumn.class.php:456
 #: plugins/taskboard/common/TaskBoardColumnSource.class.php:254
-#: plugins/taskboard/common/adapters/TaskBoardBasicAdapter.class.php:365
+#: plugins/taskboard/common/adapters/TaskBoardBasicAdapter.class.php:370
 #: plugins/taskboard/common/views/admin/columns.php:27
 #: plugins/taskboard/common/views/admin/delete_column.php:31
 #: plugins/taskboard/common/views/admin/edit_column.php:32
@@ -498,7 +499,7 @@ msgid ": "
 msgstr ""
 
 #: common/docman/Document.class.php:112
-#: common/docman/DocumentGroup.class.php:106 common/forum/Forum.class.php:141
+#: common/docman/DocumentGroup.class.php:106 common/forum/Forum.class.php:138
 #: common/frs/FRSPackage.class.php:141 common/include/Error.class.php:184
 #: common/mail/MailingList.class.php:84 common/survey/Survey.class.php:83
 #: common/survey/SurveyQuestion.class.php:74
@@ -599,7 +600,7 @@ msgstr ""
 
 #: common/docman/Document.class.php:888
 #: common/docman/DocumentGroup.class.php:762
-#: common/include/Group.class.php:2719 common/tracker/actions/browse.php:204
+#: common/include/Group.class.php:2746 common/tracker/actions/browse.php:204
 #: common/tracker/actions/query.php:199 common/tracker/actions/query.php:343
 msgid "Submitter"
 msgstr ""
@@ -807,7 +808,7 @@ msgstr ""
 #: common/tracker/actions/format_csv.php:95
 #: common/tracker/include/ArtifactTypeHtml.class.php:552
 #: common/tracker/include/ArtifactTypeHtml.class.php:597
-#: common/tracker/include/ArtifactTypeHtml.class.php:764
+#: common/tracker/include/ArtifactTypeHtml.class.php:763
 #: plugins/taskboard/common/adapters/TaskBoardSampleAdapter.class.php:31
 #: www/admin/pluginman.php:228 www/admin/pluginman.php:248
 #: www/admin/pluginman.php:260 www/admin/pluginman.php:261
@@ -971,7 +972,7 @@ msgstr ""
 
 #: common/docman/actions/monitordirectory.php:54
 #: common/tracker/Artifact.class.php:620
-#: common/tracker/ArtifactType.class.php:549
+#: common/tracker/ArtifactType.class.php:548
 #: common/tracker/actions/tracker.php:428
 #: common/tracker/actions/tracker.php:444
 msgid "Monitoring Started"
@@ -979,7 +980,7 @@ msgstr ""
 
 #: common/docman/actions/monitordirectory.php:67
 #: common/tracker/Artifact.class.php:627
-#: common/tracker/ArtifactType.class.php:556
+#: common/tracker/ArtifactType.class.php:555
 #: common/tracker/actions/tracker.php:430 www/developer/monitor.php:74
 msgid "Monitoring Stopped"
 msgstr ""
@@ -1126,7 +1127,7 @@ msgstr ""
 #: plugins/oauthprovider/www/consumer.php:109
 #: plugins/oauthprovider/www/consumer_manage.php:66
 #: plugins/oauthprovider/www/consumer_update_page.php:64
-#: plugins/scmgit/common/GitPlugin.class.php:1141
+#: plugins/scmgit/common/GitPlugin.class.php:1146
 #: plugins/scmhg/common/HgPlugin.class.php:789
 #: plugins/scmhook/common/scmhookPlugin.class.php:329
 #: plugins/scmhook/common/scmhookPlugin.class.php:400
@@ -1402,11 +1403,11 @@ msgstr ""
 #: common/tracker/actions/admin-ind.php:154
 #: common/tracker/actions/admin-ind.php:157
 #: common/tracker/actions/browse.php:782 common/tracker/actions/browse.php:790
-#: common/tracker/actions/browse.php:800 common/tracker/actions/detail.php:93
-#: common/tracker/actions/detail.php:97 common/tracker/actions/detail.php:104
-#: common/tracker/actions/detail.php:111 common/tracker/actions/detail.php:121
-#: common/tracker/actions/detail.php:133 common/tracker/actions/detail.php:174
-#: common/tracker/actions/detail.php:195
+#: common/tracker/actions/browse.php:800 common/tracker/actions/detail.php:91
+#: common/tracker/actions/detail.php:95 common/tracker/actions/detail.php:102
+#: common/tracker/actions/detail.php:109 common/tracker/actions/detail.php:119
+#: common/tracker/actions/detail.php:131 common/tracker/actions/detail.php:172
+#: common/tracker/actions/detail.php:193
 #: common/tracker/actions/format_csv.php:71
 #: common/tracker/actions/format_csv.php:86
 #: common/tracker/actions/format_csv.php:109
@@ -1421,17 +1422,18 @@ msgstr ""
 #: common/tracker/actions/mod-limited.php:216
 #: common/tracker/actions/mod-limited.php:219
 #: common/tracker/actions/mod-limited.php:226
-#: common/tracker/actions/mod.php:117 common/tracker/actions/mod.php:126
-#: common/tracker/actions/mod.php:132 common/tracker/actions/mod.php:192
-#: common/tracker/actions/mod.php:237 common/tracker/actions/mod.php:286
-#: common/tracker/actions/mod.php:289 common/tracker/actions/query.php:369
+#: common/tracker/actions/mod.php:114 common/tracker/actions/mod.php:123
+#: common/tracker/actions/mod.php:129 common/tracker/actions/mod.php:189
+#: common/tracker/actions/mod.php:234 common/tracker/actions/mod.php:283
+#: common/tracker/actions/mod.php:286 common/tracker/actions/query.php:369
 #: common/tracker/actions/query.php:371 common/tracker/actions/query.php:373
 #: common/tracker/actions/query.php:396 common/tracker/actions/taskmgr.php:107
 #: common/tracker/actions/taskmgr.php:108
 #: common/tracker/actions/taskmgr.php:112
 #: common/tracker/actions/taskmgr.php:161
 #: common/tracker/actions/taskmgr.php:162
-#: common/tracker/include/ArtifactHtml.class.php:215
+#: common/tracker/include/ArtifactHtml.class.php:46
+#: common/tracker/include/ArtifactHtml.class.php:214
 #: common/tracker/include/ArtifactTypeHtml.class.php:329
 #: common/tracker/include/ArtifactTypeHtml.class.php:375
 #: common/tracker/include/build_submission_form.php:46
@@ -1440,7 +1442,7 @@ msgstr ""
 #: common/tracker/include/build_submission_form.php:67
 #: common/tracker/include/build_submission_form.php:73
 #: common/tracker/include/build_submission_form.php:80
-#: common/tracker/include/build_submission_form.php:106
+#: common/tracker/include/build_submission_form.php:105
 #: common/tracker/views/form-addcanned.php:71
 #: common/tracker/views/form-addcanned.php:76
 #: common/tracker/views/form-addextrafield.php:115
@@ -1544,9 +1546,9 @@ msgstr ""
 #: plugins/mantisbt/view/jumpToIssue.php:31
 #: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:810
 #: plugins/scmgit/common/GitPlugin.class.php:381
-#: plugins/scmgit/common/GitPlugin.class.php:1139
-#: plugins/scmgit/common/GitPlugin.class.php:1141
-#: plugins/scmgit/common/GitPlugin.class.php:1143
+#: plugins/scmgit/common/GitPlugin.class.php:1144
+#: plugins/scmgit/common/GitPlugin.class.php:1146
+#: plugins/scmgit/common/GitPlugin.class.php:1148
 #: plugins/scmhg/common/HgPlugin.class.php:69
 #: plugins/scmhg/common/HgPlugin.class.php:163
 #: plugins/scmhg/common/HgPlugin.class.php:787
@@ -1686,9 +1688,9 @@ msgstr ""
 
 #: common/docman/views/editfile.php:69 common/tracker/Artifact.class.php:932
 #: common/tracker/actions/browse.php:427 common/tracker/actions/browse.php:585
-#: common/tracker/actions/browse.php:794 common/tracker/actions/detail.php:104
+#: common/tracker/actions/browse.php:794 common/tracker/actions/detail.php:102
 #: common/tracker/actions/mod-limited.php:150
-#: common/tracker/actions/mod.php:182 common/tracker/actions/query.php:337
+#: common/tracker/actions/mod.php:179 common/tracker/actions/query.php:337
 #: common/tracker/views/form-customizelist.php:40 www/pm/browse_task.php:420
 msgid "State"
 msgstr ""
@@ -1825,7 +1827,7 @@ msgstr ""
 #: common/docman/views/listtrashfile.php:142
 #: common/docman/views/pendingfiles.php:63 common/docman/views/search.php:143
 #: common/frs/views/admin.php:94 common/frs/views/editrelease.php:89
-#: common/include/Group.class.php:789
+#: common/include/Group.class.php:790
 #: common/tracker/ArtifactExtraField.class.php:352
 #: common/tracker/include/ArtifactTypeHtml.class.php:335
 #: common/tracker/views/form-addextrafield.php:132
@@ -1924,16 +1926,16 @@ msgstr ""
 #: common/frs/views/listpackages.php:157 common/pm/ProjectTask.class.php:1213
 #: common/tracker/Artifact.class.php:1679
 #: common/tracker/actions/browse.php:638 common/tracker/actions/browse.php:649
-#: common/tracker/actions/browse.php:669 common/tracker/actions/detail.php:94
+#: common/tracker/actions/browse.php:669 common/tracker/actions/detail.php:92
 #: common/tracker/actions/downloadcsv.php:87
 #: common/tracker/actions/downloadcsv.php:88
 #: common/tracker/actions/downloadcsv.php:89
 #: common/tracker/actions/mod-limited.php:120
 #: common/tracker/actions/mod-limited.php:125
-#: common/tracker/actions/mod.php:128 common/tracker/actions/mod.php:133
-#: common/tracker/include/ArtifactHtml.class.php:111
-#: common/tracker/include/ArtifactHtml.class.php:169
-#: common/tracker/include/ArtifactHtml.class.php:178
+#: common/tracker/actions/mod.php:125 common/tracker/actions/mod.php:130
+#: common/tracker/include/ArtifactHtml.class.php:110
+#: common/tracker/include/ArtifactHtml.class.php:168
+#: common/tracker/include/ArtifactHtml.class.php:177
 #: common/tracker/include/ArtifactTypeHtml.class.php:346
 #: common/tracker/include/ArtifactTypeHtml.class.php:347
 #: common/tracker/include/ArtifactTypeHtml.class.php:388
@@ -2281,9 +2283,9 @@ msgstr ""
 
 #: common/docman/views/reporting.php:164 common/forum/ForumHTML.class.php:69
 #: common/frs/views/listpackages.php:140 common/frs/views/reporting.php:169
-#: common/frs/views/showreleases.php:73 common/tracker/actions/detail.php:93
-#: common/tracker/include/ArtifactHtml.class.php:110
-#: common/tracker/include/ArtifactHtml.class.php:147
+#: common/frs/views/showreleases.php:73 common/tracker/actions/detail.php:91
+#: common/tracker/include/ArtifactHtml.class.php:109
+#: common/tracker/include/ArtifactHtml.class.php:146
 #: common/tracker/include/ArtifactTypeHtml.class.php:379
 #: common/widget/Widget_ProjectLatestDocuments.class.php:70
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:69
@@ -2392,7 +2394,7 @@ msgstr ""
 #: common/forum/ForumAdmin.class.php:67 common/forum/ForumAdmin.class.php:323
 #: common/tracker/actions/admin-tracker.php:75
 #: common/tracker/actions/deleteartifact.php:57
-#: common/tracker/actions/mod.php:105
+#: common/tracker/actions/mod.php:102
 #: common/tracker/include/ArtifactTypeHtml.class.php:127
 #: common/tracker/include/ArtifactTypeHtml.class.php:392
 #: common/tracker/views/form-addcanned.php:56
@@ -2426,8 +2428,8 @@ msgstr ""
 #: plugins/oauthprovider/www/request_tokens.php:100
 #: plugins/oauthprovider/www/request_tokens.php:103
 #: plugins/oauthprovider/www/request_tokens.php:108
-#: plugins/scmgit/common/GitPlugin.class.php:1115
-#: plugins/scmgit/common/GitPlugin.class.php:1127
+#: plugins/scmgit/common/GitPlugin.class.php:1120
+#: plugins/scmgit/common/GitPlugin.class.php:1132
 #: plugins/scmhg/common/HgPlugin.class.php:763
 #: plugins/scmhg/common/HgPlugin.class.php:775
 #: plugins/taskboard/common/views/admin/delete_column.php:49
@@ -2509,59 +2511,53 @@ msgstr ""
 msgid "File Updated Successfully"
 msgstr ""
 
-#: common/forum/Forum.class.php:128 common/forum/ForumAdmin.class.php:41
-#: common/forum/ForumFactory.class.php:60 www/forum/admin/index.php:58
-#, php-format
-msgid "%s does not use the Forum tool."
-msgstr ""
-
-#: common/forum/Forum.class.php:174 common/forum/Forum.class.php:541
+#: common/forum/Forum.class.php:171 common/forum/Forum.class.php:538
 msgid "Forum name must be at least 3 characters."
 msgstr ""
 
-#: common/forum/Forum.class.php:178 common/forum/Forum.class.php:545
+#: common/forum/Forum.class.php:175 common/forum/Forum.class.php:542
 msgid "Forum description must be at least 10 characters."
 msgstr ""
 
-#: common/forum/Forum.class.php:183 common/forum/Forum.class.php:185
-#: common/forum/Forum.class.php:550 common/forum/Forum.class.php:552
+#: common/forum/Forum.class.php:180 common/forum/Forum.class.php:182
+#: common/forum/Forum.class.php:547 common/forum/Forum.class.php:549
 msgid "Illegal characters in Forum name."
 msgstr ""
 
-#: common/forum/Forum.class.php:183 common/forum/Forum.class.php:550
+#: common/forum/Forum.class.php:180 common/forum/Forum.class.php:547
 msgid "No space allowed."
 msgstr ""
 
-#: common/forum/Forum.class.php:205 common/forum/Forum.class.php:577
+#: common/forum/Forum.class.php:202 common/forum/Forum.class.php:574
 msgid "Mailing List exists with same name."
 msgstr ""
 
-#: common/forum/Forum.class.php:232
+#: common/forum/Forum.class.php:229
 msgid "Error Adding Forum"
 msgstr ""
 
-#: common/forum/Forum.class.php:243 cronjobs/shell/homedirs.php:158
+#: common/forum/Forum.class.php:240 cronjobs/shell/homedirs.php:158
 #: www/account/first.php:30
 #, php-format
 msgid "Welcome to %s"
 msgstr ""
 
-#: common/forum/Forum.class.php:267
+#: common/forum/Forum.class.php:264
 msgid "Invalid forum group identifier."
 msgstr ""
 
-#: common/forum/Forum.class.php:440 common/forum/Forum.class.php:462
+#: common/forum/Forum.class.php:437 common/forum/Forum.class.php:459
 #: common/frs/FRSPackage.class.php:321 common/frs/FRSPackage.class.php:339
 #: common/tracker/Artifact.class.php:610
-#: common/tracker/ArtifactType.class.php:538
+#: common/tracker/ArtifactType.class.php:537
 msgid "You can only monitor if you are logged in."
 msgstr ""
 
-#: common/forum/Forum.class.php:495
+#: common/forum/Forum.class.php:492
 msgid "You can only save your place if you are logged in."
 msgstr ""
 
-#: common/forum/Forum.class.php:594 common/survey/Survey.class.php:180
+#: common/forum/Forum.class.php:591 common/survey/Survey.class.php:180
 #: common/survey/Survey.class.php:218
 #: common/survey/SurveyQuestion.class.php:151
 #: common/tracker/Artifact.class.php:1136
@@ -2581,19 +2577,25 @@ msgstr ""
 msgid "Update failed"
 msgstr ""
 
-#: common/forum/Forum.class.php:609 common/frs/FRSPackage.class.php:509
-#: common/frs/FRSRelease.class.php:367 common/include/Group.class.php:1642
+#: common/forum/Forum.class.php:606 common/frs/FRSPackage.class.php:509
+#: common/frs/FRSRelease.class.php:367 common/include/Group.class.php:1643
 #: common/mail/MailingList.class.php:411 common/pm/ProjectGroup.class.php:384
 #: common/pm/ProjectTask.class.php:517 common/tracker/Artifact.class.php:514
 #: common/tracker/ArtifactExtraField.class.php:460
-#: common/tracker/ArtifactType.class.php:803
+#: common/tracker/ArtifactType.class.php:802
 msgid "Please tick all checkboxes."
 msgstr ""
 
-#: common/forum/Forum.class.php:620 common/forum/Forum.class.php:628
-#: common/forum/Forum.class.php:636 common/forum/Forum.class.php:644
-#: common/forum/Forum.class.php:652 common/forum/Forum.class.php:660
+#: common/forum/Forum.class.php:617 common/forum/Forum.class.php:625
+#: common/forum/Forum.class.php:633 common/forum/Forum.class.php:641
+#: common/forum/Forum.class.php:649 common/forum/Forum.class.php:657
 msgid "Error Deleting Forum"
+msgstr ""
+
+#: common/forum/ForumAdmin.class.php:41 common/forum/ForumFactory.class.php:60
+#: www/forum/admin/index.php:58
+#, php-format
+msgid "%s does not use the Forum tool."
 msgstr ""
 
 #: common/forum/ForumAdmin.class.php:59 www/forum/admin/index.php:365
@@ -2656,7 +2658,7 @@ msgstr ""
 
 #: common/forum/ForumAdmin.class.php:310 common/forum/ForumHTML.class.php:523
 #: common/forum/ForumHTML.class.php:587
-#: common/tracker/include/ArtifactHtml.class.php:72
+#: common/tracker/include/ArtifactHtml.class.php:71
 #: plugins/forumml/www/index.php:121
 #: plugins/message/common/messagePlugin.class.php:35 www/admin/cronman.php:44
 #: www/sendmessage.php:176
@@ -2783,9 +2785,9 @@ msgstr ""
 
 #: common/forum/ForumHTML.class.php:70 common/include/Navigation.class.php:382
 #: common/tracker/actions/browse.php:200 common/tracker/actions/browse.php:577
-#: common/tracker/actions/detail.php:133
+#: common/tracker/actions/detail.php:131
 #: common/tracker/actions/mod-limited.php:163
-#: common/tracker/actions/mod.php:192 common/tracker/actions/query.php:195
+#: common/tracker/actions/mod.php:189 common/tracker/actions/query.php:195
 #: common/tracker/actions/query.php:379
 #: common/tracker/include/build_submission_form.php:73
 #: common/tracker/views/form-customizelist.php:38
@@ -2854,7 +2856,7 @@ msgstr ""
 
 #: common/forum/ForumHTML.class.php:207 common/forum/ForumHTML.class.php:265
 #: common/forum/ForumMessage.class.php:664
-#: common/tracker/include/ArtifactHtml.class.php:148
+#: common/tracker/include/ArtifactHtml.class.php:147
 #: common/tracker/include/ArtifactTypeHtml.class.php:380
 #: www/activity/index.php:293 www/forum/message.php:128
 #: www/pm/include/ProjectTaskHTML.class.php:150
@@ -2884,11 +2886,11 @@ msgstr ""
 msgid "Warning: Uploaded file will replace current file"
 msgstr ""
 
-#: common/forum/ForumHTML.class.php:346 common/tracker/actions/detail.php:159
-#: common/tracker/actions/detail.php:191
+#: common/forum/ForumHTML.class.php:346 common/tracker/actions/detail.php:157
+#: common/tracker/actions/detail.php:189
 #: common/tracker/actions/mod-limited.php:190
 #: common/tracker/actions/mod-limited.php:215
-#: common/tracker/actions/mod.php:228 common/tracker/actions/mod.php:285
+#: common/tracker/actions/mod.php:225 common/tracker/actions/mod.php:282
 #: common/tracker/include/ArtifactTypeHtml.class.php:375
 #: www/forum/attachment.php:40 www/forum/attachment.php:121
 #: www/forum/attachment.php:149
@@ -2920,7 +2922,7 @@ msgstr ""
 #: plugins/headermenu/view/admin/updateLinkValue.php:108
 #: plugins/oauthconsumer/www/provider_edit.php:30
 #: plugins/oauthprovider/www/consumer_update_page.php:50
-#: plugins/scmgit/common/GitPlugin.class.php:1146
+#: plugins/scmgit/common/GitPlugin.class.php:1151
 #: plugins/scmhg/common/HgPlugin.class.php:794
 #: plugins/taskboard/www/index.php:302
 #: plugins/webanalytics/view/admin/updateLinkValue.php:46
@@ -2944,7 +2946,7 @@ msgid ""
 "You are posting anonymously because you are not <a href=\"%s\">logged in</a>"
 msgstr ""
 
-#: common/forum/ForumHTML.class.php:617 common/tracker/actions/mod.php:261
+#: common/forum/ForumHTML.class.php:617 common/tracker/actions/mod.php:258
 msgid "Post Comment"
 msgstr ""
 
@@ -4013,8 +4015,8 @@ msgstr ""
 msgid "No Error"
 msgstr ""
 
-#: common/include/Error.class.php:125 common/include/Group.class.php:433
-#: common/include/Group.class.php:516
+#: common/include/Error.class.php:125 common/include/Group.class.php:434
+#: common/include/Group.class.php:517
 #: plugins/hudson/include/hudson.class.php:66
 #: plugins/hudson/include/hudson.class.php:78
 #: plugins/hudson/include/hudson.class.php:95
@@ -4052,264 +4054,268 @@ msgstr ""
 msgid "Missing Required Parameters"
 msgstr ""
 
-#: common/include/Group.class.php:257
+#: common/include/Group.class.php:258
 msgid "Group Not Found"
 msgstr ""
 
-#: common/include/Group.class.php:310
+#: common/include/Group.class.php:311
 msgid "Group object already exists."
 msgstr ""
 
-#: common/include/Group.class.php:313
+#: common/include/Group.class.php:314
 msgid "Invalid project name"
 msgstr ""
 
-#: common/include/Group.class.php:316 common/include/User.class.php:343
+#: common/include/Group.class.php:317 common/include/User.class.php:343
 #: common/include/User.class.php:403
 msgid "Invalid Unix Name."
 msgstr ""
 
-#: common/include/Group.class.php:319 common/include/Group.class.php:323
+#: common/include/Group.class.php:320 common/include/Group.class.php:324
 #: common/include/User.class.php:347
 msgid "Unix name already taken."
 msgstr ""
 
-#: common/include/Group.class.php:326
+#: common/include/Group.class.php:327
 msgid ""
 "Please describe your Registration Project Purpose and Summarization in a "
 "more comprehensive manner."
 msgstr ""
 
-#: common/include/Group.class.php:329
+#: common/include/Group.class.php:330
 msgid ""
 "The Registration Project Purpose and Summarization text is too long. Please "
 "make it smaller than 1500 characters."
 msgstr ""
 
-#: common/include/Group.class.php:332
+#: common/include/Group.class.php:333
 msgid "Describe in a more comprehensive manner your project."
 msgstr ""
 
-#: common/include/Group.class.php:374
+#: common/include/Group.class.php:375
 #, php-format
 msgid "Error: Cannot create group: %s"
 msgstr ""
 
-#: common/include/Group.class.php:381
+#: common/include/Group.class.php:382
 #, php-format
 msgid "Error: Cannot get group id: %s"
 msgstr ""
 
-#: common/include/Group.class.php:428 common/include/Group.class.php:511
+#: common/include/Group.class.php:429 common/include/Group.class.php:512
 msgid "Could not get permission."
 msgstr ""
 
-#: common/include/Group.class.php:449
+#: common/include/Group.class.php:450
 #, php-format
 msgid "Error: Cannot change group properties: %s"
 msgstr ""
 
-#: common/include/Group.class.php:530
+#: common/include/Group.class.php:531
 #, php-format
 msgid "New Doc Address Appeared Invalid: %s"
 msgid_plural "New Doc Addresses Appeared Invalid: %s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: common/include/Group.class.php:627
+#: common/include/Group.class.php:628
 #, php-format
 msgid "Error updating project information: %s"
 msgstr ""
 
-#: common/include/Group.class.php:633
+#: common/include/Group.class.php:634
 #, php-format
 msgid "Error updating project information: use_docman %s"
 msgstr ""
 
-#: common/include/Group.class.php:660
+#: common/include/Group.class.php:661
 msgid "Error updating project information in plugin_hook group_update"
 msgstr ""
 
-#: common/include/Group.class.php:739
+#: common/include/Group.class.php:740
 msgid "Invalid Status Change From: "
 msgstr ""
 
-#: common/include/Group.class.php:739
+#: common/include/Group.class.php:740
 msgid " To: "
 msgstr ""
 
-#: common/include/Group.class.php:750
+#: common/include/Group.class.php:751
 #, php-format
 msgid "Error: Cannot change group status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:963
+#: common/include/Group.class.php:964
 msgid "Could not insert SCM_BOX to database"
 msgstr ""
 
-#: common/include/Group.class.php:967
+#: common/include/Group.class.php:968
 msgid "SCM Box cannot be empty"
 msgstr ""
 
-#: common/include/Group.class.php:1611
+#: common/include/Group.class.php:1612
 msgid ""
 "Bad tag name, you only can use the following characters: [A-Z][a-z][0-9]-_&'#"
 "+. and space"
 msgstr ""
 
-#: common/include/Group.class.php:1620
+#: common/include/Group.class.php:1621
 msgid "Setting tags:"
 msgstr ""
 
-#: common/include/Group.class.php:1649
+#: common/include/Group.class.php:1650
 msgid "Cannot Delete System Group"
 msgstr ""
 
-#: common/include/Group.class.php:1671
+#: common/include/Group.class.php:1672
 msgid "Could not properly remove member:"
 msgstr ""
 
-#: common/include/Group.class.php:1694
+#: common/include/Group.class.php:1695
 msgid "Could not properly delete the tracker:"
 msgstr ""
 
-#: common/include/Group.class.php:1708
-msgid "Could not properly delete the forum:"
+#: common/include/Group.class.php:1709
+msgid "Could not properly delete the roadmap:"
 msgstr ""
 
 #: common/include/Group.class.php:1723
+msgid "Could not properly delete the forum:"
+msgstr ""
+
+#: common/include/Group.class.php:1738
 msgid "Could not properly delete the ProjectGroup:"
 msgstr ""
 
-#: common/include/Group.class.php:1734
+#: common/include/Group.class.php:1749
 msgid "Error FRS Packages: "
 msgstr ""
 
-#: common/include/Group.class.php:1742
+#: common/include/Group.class.php:1757
 msgid "Could not properly delete the FRSPackage:"
 msgstr ""
 
-#: common/include/Group.class.php:1753 common/include/Group.class.php:1768
+#: common/include/Group.class.php:1768 common/include/Group.class.php:1793
 msgid "Error Deleting News: "
 msgstr ""
 
-#: common/include/Group.class.php:1761
+#: common/include/Group.class.php:1776 common/include/Group.class.php:1785
 #, php-format
 msgid "Could Not Delete News Forum: %d"
 msgstr ""
 
-#: common/include/Group.class.php:1779 common/include/Group.class.php:1787
+#: common/include/Group.class.php:1804 common/include/Group.class.php:1812
 msgid "Error Deleting Documents: "
 msgstr ""
 
-#: common/include/Group.class.php:1797
+#: common/include/Group.class.php:1822
 msgid "Error Deleting Tags: "
 msgstr ""
 
-#: common/include/Group.class.php:1808
+#: common/include/Group.class.php:1833
 msgid "Error Deleting Project History: "
 msgstr ""
 
-#: common/include/Group.class.php:1819
+#: common/include/Group.class.php:1844
 msgid "Error Deleting Project Plugins: "
 msgstr ""
 
-#: common/include/Group.class.php:1830
+#: common/include/Group.class.php:1855
 msgid "Error Deleting SCM Statistics: "
 msgstr ""
 
-#: common/include/Group.class.php:1845
+#: common/include/Group.class.php:1870
 msgid "Could not properly delete the survey"
 msgstr ""
 
-#: common/include/Group.class.php:1860
+#: common/include/Group.class.php:1885
 msgid "Could not properly delete the survey questions"
 msgstr ""
 
-#: common/include/Group.class.php:1877
+#: common/include/Group.class.php:1902
 #: plugins/mailman/include/mailmanPlugin.class.php:198
 msgid "Could not properly delete the mailing list"
 msgstr ""
 
-#: common/include/Group.class.php:1888 common/include/Group.class.php:1896
+#: common/include/Group.class.php:1913 common/include/Group.class.php:1921
 msgid "Error Deleting Trove: "
 msgstr ""
 
-#: common/include/Group.class.php:1907
+#: common/include/Group.class.php:1932
 msgid "Error Deleting Counters: "
 msgstr ""
 
-#: common/include/Group.class.php:1917 common/include/Group.class.php:1936
+#: common/include/Group.class.php:1942 common/include/Group.class.php:1961
 msgid "Error Deleting Project:"
 msgstr ""
 
-#: common/include/Group.class.php:2008
+#: common/include/Group.class.php:2033
 msgid "User is not active. Only active users can be added."
 msgstr ""
 
-#: common/include/Group.class.php:2020
+#: common/include/Group.class.php:2045
 msgid "Error Getting Role Object"
 msgstr ""
 
-#: common/include/Group.class.php:2049 www/account/lostpw.php:44
+#: common/include/Group.class.php:2074 www/account/lostpw.php:44
 #: www/account/pending-resend.php:40 www/sendmessage.php:45 www/users:77
 msgid "That user does not exist."
 msgstr ""
 
-#: common/include/Group.class.php:2063
+#: common/include/Group.class.php:2088
 msgid "Added User"
 msgstr ""
 
-#: common/include/Group.class.php:2097 common/include/Group.class.php:2216
+#: common/include/Group.class.php:2121 common/include/Group.class.php:2242
 #, php-format
 msgid "Error: User not removed: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2119
+#: common/include/Group.class.php:2145
 msgid "Error: artifact:"
 msgstr ""
 
-#: common/include/Group.class.php:2140 common/include/Group.class.php:2153
+#: common/include/Group.class.php:2166 common/include/Group.class.php:2179
 #, php-format
 msgid "Error: project_assigned_to %d: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2174
+#: common/include/Group.class.php:2200
 msgid "Removed User"
 msgstr ""
 
-#: common/include/Group.class.php:2196 www/admin/globalroledelete.php:41
+#: common/include/Group.class.php:2222 www/admin/globalroledelete.php:41
 #: www/admin/globalroleedit.php:44 www/project/admin/roledelete.php:47
 #: www/project/admin/roleedit.php:55
 msgid "Could Not Get Role"
 msgstr ""
 
-#: common/include/Group.class.php:2199
+#: common/include/Group.class.php:2225
 #, php-format
 msgid "Role: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2203
+#: common/include/Group.class.php:2229
 msgid "Wrong destination role"
 msgstr ""
 
-#: common/include/Group.class.php:2223
+#: common/include/Group.class.php:2249
 msgid "Updated User"
 msgstr ""
 
-#: common/include/Group.class.php:2319
+#: common/include/Group.class.php:2346
 msgid "Group already active"
 msgstr ""
 
-#: common/include/Group.class.php:2560
+#: common/include/Group.class.php:2587
 msgid "Approved"
 msgstr ""
 
-#: common/include/Group.class.php:2583 common/include/Group.class.php:2653
+#: common/include/Group.class.php:2610 common/include/Group.class.php:2680
 msgid "Group does not have any administrators."
 msgstr ""
 
-#: common/include/Group.class.php:2591
+#: common/include/Group.class.php:2618
 #, php-format
 msgid ""
 "Your project registration for %4$s has been approved.\n"
@@ -4345,100 +4351,100 @@ msgid ""
 "-- the %4$s crew"
 msgstr ""
 
-#: common/include/Group.class.php:2627
+#: common/include/Group.class.php:2654
 #, php-format
 msgid "%s Project Approved"
 msgstr ""
 
-#: common/include/Group.class.php:2660
+#: common/include/Group.class.php:2687
 #, php-format
 msgid "Your project registration for %s has been denied."
 msgstr ""
 
-#: common/include/Group.class.php:2661 common/include/Group.class.php:2715
-#: common/include/Group.class.php:2733 www/register/index.php:186
+#: common/include/Group.class.php:2688 common/include/Group.class.php:2742
+#: common/include/Group.class.php:2760 www/register/index.php:186
 #: www/register/index.php:194
 msgid "Project Full Name"
 msgstr ""
 
-#: common/include/Group.class.php:2662 plugins/projectlabels/www/index.php:172
+#: common/include/Group.class.php:2689 plugins/projectlabels/www/index.php:172
 #: www/admin/approve-pending.php:193 www/admin/groupedit.php:170
 #: www/admin/vhost.php:121 www/register/index.php:223
 msgid "Project Unix Name"
 msgstr ""
 
-#: common/include/Group.class.php:2663
+#: common/include/Group.class.php:2690
 msgid "Reasons for negative decision"
 msgstr ""
 
-#: common/include/Group.class.php:2675
+#: common/include/Group.class.php:2702
 #, php-format
 msgid "%s Project Denied"
 msgstr ""
 
-#: common/include/Group.class.php:2699
+#: common/include/Group.class.php:2726
 msgid "Could not find user who has submitted the project."
 msgstr ""
 
-#: common/include/Group.class.php:2706
+#: common/include/Group.class.php:2733
 msgid "There is no administrator to send the mail to."
 msgstr ""
 
-#: common/include/Group.class.php:2714 common/include/Group.class.php:2725
-#: common/include/Group.class.php:2732 common/include/Group.class.php:2738
+#: common/include/Group.class.php:2741 common/include/Group.class.php:2752
+#: common/include/Group.class.php:2759 common/include/Group.class.php:2765
 #, php-format
 msgid "New %s Project Submitted"
 msgstr ""
 
-#: common/include/Group.class.php:2716 common/include/Group.class.php:2734
+#: common/include/Group.class.php:2743 common/include/Group.class.php:2761
 #: www/admin/approve-pending.php:195
 msgid "Submitted Description"
 msgstr ""
 
-#: common/include/Group.class.php:2723
+#: common/include/Group.class.php:2750
 msgid "Please visit the following URL to approve or reject this project"
 msgstr ""
 
-#: common/include/Group.class.php:2735
+#: common/include/Group.class.php:2762
 #, php-format
 msgid ""
 "The %s admin team will now examine your project submission. You will be "
 "notified of their decision."
 msgstr ""
 
-#: common/include/Group.class.php:2753
+#: common/include/Group.class.php:2780
 msgid "Group name is too short"
 msgstr ""
 
-#: common/include/Group.class.php:2756
+#: common/include/Group.class.php:2783
 msgid "Group name is too long"
 msgstr ""
 
-#: common/include/Group.class.php:2759
+#: common/include/Group.class.php:2786
 msgid "Group name already taken"
 msgstr ""
 
-#: common/include/Group.class.php:2843
+#: common/include/Group.class.php:2870
 #, php-format
 msgid "Error: Cannot Update Group Unix Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2907
+#: common/include/Group.class.php:2935
 #, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2925
+#: common/include/Group.class.php:2953
 #, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2943
+#: common/include/Group.class.php:2971
 #, php-format
 msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2961
+#: common/include/Group.class.php:2989
 #, php-format
 msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr ""
@@ -4659,8 +4665,8 @@ msgstr ""
 msgid "Project Homepage. Widgets oriented"
 msgstr ""
 
-#: common/include/Navigation.class.php:400 common/tracker/actions/mod.php:171
-#: common/tracker/actions/mod.php:241
+#: common/include/Navigation.class.php:400 common/tracker/actions/mod.php:168
+#: common/tracker/actions/mod.php:238
 #: common/tracker/include/build_submission_form.php:65
 #: common/widget/Widget_MyProjects.class.php:76
 #: www/include/Layout.class.php:712 www/pm/add_task.php:53
@@ -6126,10 +6132,6 @@ msgstr ""
 msgid "Message Body Is Required"
 msgstr ""
 
-#: common/tracker/Artifact.class.php:237
-msgid "Error remapping status"
-msgstr ""
-
 #: common/tracker/Artifact.class.php:309
 msgid "Invalid Artifact ID"
 msgstr ""
@@ -6163,9 +6165,9 @@ msgid "Error updating artifact counts: "
 msgstr ""
 
 #: common/tracker/Artifact.class.php:928 common/tracker/actions/browse.php:589
-#: common/tracker/actions/browse.php:790 common/tracker/actions/detail.php:121
+#: common/tracker/actions/browse.php:790 common/tracker/actions/detail.php:119
 #: common/tracker/actions/mod-limited.php:136
-#: common/tracker/actions/mod.php:167
+#: common/tracker/actions/mod.php:164
 #: common/tracker/include/build_submission_form.php:63
 #: common/tracker/views/form-customizelist.php:42
 #: cronjobs/db/send_pending_items_mail.php:119
@@ -6183,7 +6185,7 @@ msgstr ""
 msgid "Canned Response"
 msgstr ""
 
-#: common/tracker/Artifact.class.php:940 common/tracker/actions/mod.php:140
+#: common/tracker/Artifact.class.php:940 common/tracker/actions/mod.php:137
 msgid "Data Type"
 msgstr ""
 
@@ -6386,17 +6388,17 @@ msgid "Invalid Close Date Range"
 msgstr ""
 
 #: common/tracker/ArtifactType.class.php:218
-#: common/tracker/ArtifactType.class.php:978
+#: common/tracker/ArtifactType.class.php:977
 msgid ""
 "ArtifactType: Name, Description, Due Period, and Status Timeout are required"
 msgstr ""
 
 #: common/tracker/ArtifactType.class.php:225
-#: common/tracker/ArtifactType.class.php:996
+#: common/tracker/ArtifactType.class.php:995
 msgid "E-mail address(es) appeared invalid"
 msgstr ""
 
-#: common/tracker/ArtifactType.class.php:989
+#: common/tracker/ArtifactType.class.php:988
 msgid "Tracker name already used"
 msgstr ""
 
@@ -6406,7 +6408,6 @@ msgid "%s does not use the Tracker tool"
 msgstr ""
 
 #: common/tracker/Roadmap.class.php:75
-#: common/tracker/RoadmapFactory.class.php:68
 msgid "Invalid Group"
 msgstr ""
 
@@ -6507,7 +6508,7 @@ msgstr ""
 
 #: common/tracker/actions/admin-ind.php:160
 #: common/tracker/include/build_submission_form.php:55
-#: common/tracker/include/build_submission_form.php:118
+#: common/tracker/include/build_submission_form.php:117
 #: common/tracker/views/form-addcanned.php:80
 #: common/tracker/views/form-addextrafieldoption.php:114
 #: common/tracker/views/form-adminroadmap.php:233
@@ -6528,7 +6529,7 @@ msgstr ""
 #: plugins/forumml/www/forumml_utils.php:596 plugins/forumml/www/index.php:126
 #: plugins/mantisbt/view/addIssue.php:133
 #: plugins/mantisbt/view/addOrEditNote.php:60
-#: plugins/scmgit/common/GitPlugin.class.php:1147
+#: plugins/scmgit/common/GitPlugin.class.php:1152
 #: plugins/scmhg/common/HgPlugin.class.php:795
 #: plugins/taskboard/common/views/admin/columns.php:90
 #: plugins/taskboard/common/views/admin/edit_column.php:101
@@ -6773,9 +6774,9 @@ msgid "Id"
 msgstr ""
 
 #: common/tracker/actions/browse.php:199 common/tracker/actions/browse.php:587
-#: common/tracker/actions/browse.php:782 common/tracker/actions/detail.php:97
+#: common/tracker/actions/browse.php:782 common/tracker/actions/detail.php:95
 #: common/tracker/actions/mod-limited.php:141
-#: common/tracker/actions/mod.php:174 common/tracker/actions/query.php:194
+#: common/tracker/actions/mod.php:171 common/tracker/actions/query.php:194
 #: common/tracker/include/build_submission_form.php:67
 #: common/tracker/views/form-customizelist.php:41
 #: plugins/mantisbt/view/addIssue.php:60
@@ -6931,9 +6932,9 @@ msgstr ""
 msgid "Clear all"
 msgstr ""
 
-#: common/tracker/actions/browse.php:591 common/tracker/actions/detail.php:111
+#: common/tracker/actions/browse.php:591 common/tracker/actions/detail.php:109
 #: common/tracker/actions/mod-limited.php:108
-#: common/tracker/actions/mod.php:117
+#: common/tracker/actions/mod.php:114
 #: common/tracker/views/form-customizelist.php:43
 #: cronjobs/db/send_pending_items_mail.php:79
 #: cronjobs/db/send_pending_items_mail.php:120
@@ -6948,8 +6949,8 @@ msgstr ""
 msgid "Submitted by"
 msgstr ""
 
-#: common/tracker/actions/browse.php:593 common/tracker/actions/mod.php:226
-#: common/tracker/actions/mod.php:273
+#: common/tracker/actions/browse.php:593 common/tracker/actions/mod.php:223
+#: common/tracker/actions/mod.php:270
 #: common/tracker/include/ArtifactTypeHtml.class.php:329
 #: common/tracker/views/form-customizelist.php:46
 msgid "Related Tasks"
@@ -6992,8 +6993,8 @@ msgid "No Change"
 msgstr ""
 
 #: common/tracker/actions/browse.php:791
-#: common/tracker/include/ArtifactTypeHtml.class.php:698
-#: common/tracker/include/ArtifactTypeHtml.class.php:732
+#: common/tracker/include/ArtifactTypeHtml.class.php:697
+#: common/tracker/include/ArtifactTypeHtml.class.php:731
 msgid "Nobody"
 msgstr ""
 
@@ -7060,66 +7061,66 @@ msgstr ""
 msgid "Monitor"
 msgstr ""
 
-#: common/tracker/actions/detail.php:70
-#: common/tracker/actions/mod-limited.php:77 common/tracker/actions/mod.php:81
+#: common/tracker/actions/detail.php:68
+#: common/tracker/actions/mod-limited.php:77 common/tracker/actions/mod.php:79
 #: www/survey/admin/show_results.php:101
 msgid "Votes"
 msgstr ""
 
-#: common/tracker/actions/detail.php:74
-#: common/tracker/actions/mod-limited.php:81 common/tracker/actions/mod.php:86
+#: common/tracker/actions/detail.php:72
+#: common/tracker/actions/mod-limited.php:81 common/tracker/actions/mod.php:83
 msgid "Retract Vote"
 msgstr ""
 
-#: common/tracker/actions/detail.php:77
-#: common/tracker/actions/mod-limited.php:84 common/tracker/actions/mod.php:89
+#: common/tracker/actions/detail.php:75
+#: common/tracker/actions/mod-limited.php:84 common/tracker/actions/mod.php:86
 msgid "Cast Vote"
 msgstr ""
 
-#: common/tracker/actions/detail.php:85
+#: common/tracker/actions/detail.php:83
 #: common/tracker/actions/mod-limited.php:100
-#: common/tracker/actions/mod.php:108 common/tracker/actions/query.php:262
+#: common/tracker/actions/mod.php:105 common/tracker/actions/query.php:262
 msgid "Save Changes"
 msgstr ""
 
-#: common/tracker/actions/detail.php:158 common/tracker/actions/detail.php:165
+#: common/tracker/actions/detail.php:156 common/tracker/actions/detail.php:163
 #: common/tracker/actions/mod-limited.php:189
 #: common/tracker/actions/mod-limited.php:196
 #: common/tracker/actions/mod-limited.php:202
-#: common/tracker/actions/mod.php:224 common/tracker/actions/mod.php:234
-#: common/tracker/actions/mod.php:263 common/tracker/actions/query.php:383
+#: common/tracker/actions/mod.php:221 common/tracker/actions/mod.php:231
+#: common/tracker/actions/mod.php:260 common/tracker/actions/query.php:383
 #: www/news/news_utils.php:181 www/pm/include/ProjectTaskHTML.class.php:138
 #: www/survey/include/SurveyHTML.class.php:655
 msgid "Comments"
 msgstr ""
 
-#: common/tracker/actions/detail.php:163 common/tracker/actions/detail.php:226
+#: common/tracker/actions/detail.php:161 common/tracker/actions/detail.php:224
 #: common/tracker/actions/mod-limited.php:194
 #: common/tracker/actions/mod-limited.php:248
 #: common/tracker/actions/mod-limited.php:249
-#: common/tracker/actions/mod.php:232 common/tracker/actions/mod.php:316
-#: common/tracker/actions/mod.php:317
-#: common/tracker/include/ArtifactHtml.class.php:215
+#: common/tracker/actions/mod.php:229 common/tracker/actions/mod.php:313
+#: common/tracker/actions/mod.php:314
+#: common/tracker/include/ArtifactHtml.class.php:214
 #: www/snippet/addversion.php:99 www/snippet/addversion.php:222
 msgid "Changes"
 msgstr ""
 
-#: common/tracker/actions/detail.php:174
+#: common/tracker/actions/detail.php:172
 #: common/tracker/actions/mod-limited.php:199 www/pm/mod_task.php:127
 msgid "Add A Comment"
 msgstr ""
 
-#: common/tracker/actions/detail.php:195
+#: common/tracker/actions/detail.php:193
 #: common/tracker/actions/mod-limited.php:219
-#: common/tracker/actions/mod.php:289
-#: common/tracker/include/build_submission_form.php:106
+#: common/tracker/actions/mod.php:286
+#: common/tracker/include/build_submission_form.php:105
 msgid "Attach Files"
 msgstr ""
 
-#: common/tracker/actions/detail.php:195
+#: common/tracker/actions/detail.php:193
 #: common/tracker/actions/mod-limited.php:219
-#: common/tracker/actions/mod.php:289
-#: common/tracker/include/build_submission_form.php:106
+#: common/tracker/actions/mod.php:286
+#: common/tracker/include/build_submission_form.php:105
 msgid "max upload size: "
 msgstr ""
 
@@ -7206,23 +7207,22 @@ msgstr ""
 msgid "Total"
 msgstr ""
 
-#: common/tracker/actions/mod-limited.php:95
-#: common/tracker/actions/mod.php:100
+#: common/tracker/actions/mod-limited.php:95 common/tracker/actions/mod.php:97
 msgid "Build Task Relation"
 msgstr ""
 
 #: common/tracker/actions/mod-limited.php:118
-#: common/tracker/actions/mod.php:126
+#: common/tracker/actions/mod.php:123
 msgid "Date Submitted"
 msgstr ""
 
 #: common/tracker/actions/mod-limited.php:124
-#: common/tracker/actions/mod.php:132
+#: common/tracker/actions/mod.php:129
 msgid "Date Closed"
 msgstr ""
 
 #: common/tracker/actions/mod-limited.php:216
-#: common/tracker/actions/mod.php:286
+#: common/tracker/actions/mod.php:283
 msgid "Existing Files"
 msgstr ""
 
@@ -7231,15 +7231,15 @@ msgstr ""
 msgid "Attached Files"
 msgstr ""
 
-#: common/tracker/actions/mod.php:193 plugins/taskboard/www/index.php:213
+#: common/tracker/actions/mod.php:190 plugins/taskboard/www/index.php:213
 #: www/include/html.php:405
 msgid ""
 "The summary text-box represents a short tracker item summary. Useful when "
 "browsing through several tracker items."
 msgstr ""
 
-#: common/tracker/actions/mod.php:200 common/tracker/actions/query.php:381
-#: common/tracker/include/ArtifactHtml.class.php:45
+#: common/tracker/actions/mod.php:197 common/tracker/actions/query.php:381
+#: common/tracker/include/ArtifactHtml.class.php:46
 #: common/tracker/include/ArtifactHtml.class.php:50
 #: common/tracker/include/build_submission_form.php:80
 #: common/tracker/views/form-customizelist.php:45
@@ -7247,7 +7247,7 @@ msgstr ""
 msgid "Detailed description"
 msgstr ""
 
-#: common/tracker/actions/mod.php:237
+#: common/tracker/actions/mod.php:234
 msgid "Use Canned Response"
 msgstr ""
 
@@ -7490,36 +7490,36 @@ msgstr ""
 msgid "Cast Vote successfully"
 msgstr ""
 
-#: common/tracker/include/ArtifactHtml.class.php:46
+#: common/tracker/include/ArtifactHtml.class.php:47
 msgid "Edit this message"
 msgstr ""
 
-#: common/tracker/include/ArtifactHtml.class.php:112
+#: common/tracker/include/ArtifactHtml.class.php:111
 msgid "Sender"
 msgstr ""
 
-#: common/tracker/include/ArtifactHtml.class.php:134
+#: common/tracker/include/ArtifactHtml.class.php:133
 #: www/pm/include/ProjectTaskHTML.class.php:169
 msgid "No Comments Have Been Posted"
 msgstr ""
 
-#: common/tracker/include/ArtifactHtml.class.php:145
+#: common/tracker/include/ArtifactHtml.class.php:144
 #: www/pm/include/ProjectTaskHTML.class.php:187
 #: www/project/admin/project_admin_utils.php:154
 msgid "Field"
 msgstr ""
 
-#: common/tracker/include/ArtifactHtml.class.php:146
+#: common/tracker/include/ArtifactHtml.class.php:145
 #: www/pm/include/ProjectTaskHTML.class.php:188
 #: www/project/admin/project_admin_utils.php:155
 msgid "Old Value"
 msgstr ""
 
-#: common/tracker/include/ArtifactHtml.class.php:186
+#: common/tracker/include/ArtifactHtml.class.php:185
 msgid "No Changes Have Been Made to This Item"
 msgstr ""
 
-#: common/tracker/include/ArtifactHtml.class.php:211
+#: common/tracker/include/ArtifactHtml.class.php:210
 msgid "Backward Relations"
 msgstr ""
 
@@ -7650,7 +7650,7 @@ msgstr ""
 msgid "Download"
 msgstr ""
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:676
+#: common/tracker/include/ArtifactTypeHtml.class.php:677
 msgid ""
 "Tip: Enter a space-separated list of artifact ids ([#NNN] also accepted)"
 msgstr ""
@@ -9334,6 +9334,10 @@ msgid ""
 "framework\n"
 "where users can be authenticated by several means with Authentication\n"
 "Service Providers."
+msgstr ""
+
+#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:38
+msgid "Built-in authentication"
 msgstr ""
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:67
@@ -11539,7 +11543,7 @@ msgstr ""
 msgid ""
 "This plugin contains the Hudson subsystem of FusionForge. It allows each\n"
 "FusionForge project to have its own Hudson, and gives some\n"
-"control over it to the project's administrator."
+"control over it to the project administrator."
 msgstr ""
 
 #: plugins/hudson/include/hudsonPlugin.class.php:87
@@ -14632,8 +14636,8 @@ msgid "Create new repository:"
 msgstr ""
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:647
-#: plugins/scmgit/common/GitPlugin.class.php:1115
-#: plugins/scmgit/common/GitPlugin.class.php:1139
+#: plugins/scmgit/common/GitPlugin.class.php:1120
+#: plugins/scmgit/common/GitPlugin.class.php:1144
 #: plugins/scmhg/common/HgPlugin.class.php:763
 #: plugins/scmhg/common/HgPlugin.class.php:787
 msgid "Repository name"
@@ -14761,58 +14765,58 @@ msgstr ""
 msgid "Browse personal git repository"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:990
+#: plugins/scmgit/common/GitPlugin.class.php:994
 msgid "Git Commits"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1008
+#: plugins/scmgit/common/GitPlugin.class.php:1012
 msgid "Cannot create a secondary repository with the same name as the primary"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1013
+#: plugins/scmgit/common/GitPlugin.class.php:1017
 #: plugins/scmhg/common/HgPlugin.class.php:662
 msgid "This repository name is not valid"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1026
+#: plugins/scmgit/common/GitPlugin.class.php:1030
 #: plugins/scmhg/common/HgPlugin.class.php:657
 #: plugins/scmhg/common/HgPlugin.class.php:675
 #, php-format
 msgid "A repository %s already exists"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1051
+#: plugins/scmgit/common/GitPlugin.class.php:1056
 #: plugins/scmhg/common/HgPlugin.class.php:700
 msgid "Invalid URL from which to clone"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1060
+#: plugins/scmgit/common/GitPlugin.class.php:1065
 #: plugins/scmhg/common/HgPlugin.class.php:709
 #, php-format
 msgid "Clone of %s"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1110
+#: plugins/scmgit/common/GitPlugin.class.php:1115
 msgid "No extra Git repository for project"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1112
+#: plugins/scmgit/common/GitPlugin.class.php:1117
 #, php-format
 msgid "Extra Git repository for project %1$s"
 msgid_plural "Extra Git repositories for project %1$s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1115
+#: plugins/scmgit/common/GitPlugin.class.php:1120
 #: plugins/scmhg/common/HgPlugin.class.php:763
 msgid "Initial clone URL (if any)"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1135
+#: plugins/scmgit/common/GitPlugin.class.php:1140
 msgid "Create new Git repository for project"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1143
+#: plugins/scmgit/common/GitPlugin.class.php:1148
 #: plugins/scmhg/common/HgPlugin.class.php:791
 msgid ""
 "Initial clone URL (or name of an existing repository in this project; leave "
@@ -15318,7 +15322,7 @@ msgstr ""
 msgid "Success on something here"
 msgstr ""
 
-#: plugins/taskboard/common/adapters/TaskBoardBasicAdapter.class.php:365
+#: plugins/taskboard/common/adapters/TaskBoardBasicAdapter.class.php:370
 msgid "Error updating assigned_to in artifact"
 msgstr ""
 
@@ -21884,15 +21888,15 @@ msgstr ""
 msgid "Administration page : enable / disable options"
 msgstr ""
 
-#: www/scm/include/scm_utils.php:234
+#: www/scm/include/scm_utils.php:235
 msgid "Others"
 msgstr ""
 
-#: www/scm/include/scm_utils.php:240
+#: www/scm/include/scm_utils.php:241
 msgid "Commits By User"
 msgstr ""
 
-#: www/scm/include/scm_utils.php:262
+#: www/scm/include/scm_utils.php:263
 msgid "No commits during this period."
 msgstr ""
 
