@@ -1,6 +1,6 @@
 Name: fusionforge
 Version: @rpm_version@
-Release: 0.1@rpm_snapshot@%{?dist}
+Release: 0.2@rpm_snapshot@%{?dist}
 Summary: Collaborative development tool
 
 Group: Development/Tools
@@ -278,8 +278,11 @@ This package controls the interaction between FusionForge and Mailman.
 
 
 %changelog
-* Thu May 28 2015 Sylvain Beucler <beuc@beuc.net> - @rpm_version@-0.1@rpm_snapshot@
+* Thu May 28 2015 Sylvain Beucler <beuc@beuc.net> - @rpm_version@-0.2@rpm_snapshot@
 - New upstream snapshot following the stable branch
+
+* Thu May 28 2015 Sylvain Beucler <beuc@beuc.net> - 6.0-0.2.rc4
+- New upstream release candidate
 - CVE-2015-0850: Prevent arbitrary command execution via clone URL
   parameter of the method to create secondary Git repositories. Found by
   Ansgar Burchardt <ansgar@debian.org>.
