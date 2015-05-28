@@ -1,3 +1,8 @@
+Fusionforge-5.3.4:
+* CVE-2015-0850: Prevent arbitrary command execution via clone URL
+  parameter of the method to create secondary Git repositories. Found
+  by Ansgar Burchardt <ansgar@debian.org>.
+
 Fusionforge-5.3.3:
 * User e-mail change: simplify confirmation hash and precise encoding to avoid mangling in some versions of Thunderbird and Apple Mail [#738] (Inria)
 * Project homepage: default to http:// rather than https:// for external homepage links [#752] (Inria)
