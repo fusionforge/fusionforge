@@ -503,6 +503,10 @@ control over it to the project's administrator.");
 			$repo_name = db_result($result,$i,'repo_name');
 			$description = db_result($result,$i,'description');
 			$clone_url = db_result($result,$i,'clone_url');
+            // Clone URLs need to be validated to prevent a potential arbitrary command execution
+            if (!preg_match('|^[-a-zA-Z0-9:./_]+$|', $clone_url)) {
+                    $clone_url = '';
+            }
 			$repodir = $root . '/' .  $repo_name . '.git';
 			if (!is_file("$repodir/HEAD") && !is_dir("$repodir/objects") && !is_dir("$repodir/refs")) {
 				if ($clone_url != '') {
@@ -1034,8 +1038,9 @@ control over it to the project's administrator.");
 			if ($url == '') {
 				// Start from empty
 				$clone = $url;
-			} elseif (preg_match('|^git://|', $url) || preg_match('|^https?://|', $url)) {
-				// External URLs: OK
+			} elseif ((preg_match('|^git://|', $url) || preg_match('|^https?://|', $url))
+				&& preg_match('|^[-a-zA-Z0-9:./_]+$|', $url)) {
+				// External URLs: OK, but they need to be validated to prevent a potential arbitrary command execution
 				$clone = $url;
 			} elseif ($url == $project->getUnixName()) {
 				$clone = $url;
