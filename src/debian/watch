@@ -1,3 +1,4 @@
 version=3
 
-http://fusionforge.org/frs/?group_id=6 /frs/download.php/.*/fusionforge-([\d\.]*).tar.bz2
+opts="uversionmangle=s/(rc\d+)/~$1/" https://fusionforge.org/frs/?group_id=6 /frs/download.php/.*/fusionforge-([\d\.]*(?:rc\d+)?).tar.bz2
+

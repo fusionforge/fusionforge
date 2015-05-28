@@ -9,7 +9,7 @@ BuildArch: noarch
 License: GPLv2+ and MIT
 URL: http://www.fusionforge.org/
 Source0: http://fusionforge.org/frs/download.php/file/XX/%{name}-@tarball_version@.tar.bz2
-Requires: %{name}-db-local = %{version}-%{release}, %{name}-web = %{version}-%{release}
+Requires: %{name}-db-local = %{version}-%{release}, %{name}-web = %{version}-%{release}, %{name}-scm = %{version}-%{release}
 Provides: bundled(jquery) = 1.10.2, bundled(jquery-ui) = 1.10.4
 
 %description
@@ -278,8 +278,14 @@ This package controls the interaction between FusionForge and Mailman.
 
 
 %changelog
-* Mon May 18 2015 Sylvain Beucler <beuc@beuc.net> - @rpm_version@-0.2@rpm_snapshot@
+* Thu May 28 2015 Sylvain Beucler <beuc@beuc.net> - @rpm_version@-0.2@rpm_snapshot@
 - New upstream snapshot following the stable branch
+
+* Thu May 28 2015 Sylvain Beucler <beuc@beuc.net> - 6.0-0.2.rc4
+- New upstream release candidate
+- CVE-2015-0850: Prevent arbitrary command execution via clone URL
+  parameter of the method to create secondary Git repositories. Found by
+  Ansgar Burchardt <ansgar@debian.org>.
 
 * Mon May 18 2015 Sylvain Beucler <beuc@beuc.net> - 6.0-0.1.rc2
 - New upstream release candidate

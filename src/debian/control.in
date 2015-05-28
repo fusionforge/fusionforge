@@ -12,7 +12,7 @@ Vcs-Browser: https://fusionforge.org/scm/browser.php?group_id=6
 
 Package: fusionforge
 Architecture: all
-Depends: fusionforge-common (=${source:Version}), fusionforge-db-local | fusionforge-db, fusionforge-web, ${misc:Depends}
+Depends: fusionforge-common (=${source:Version}), fusionforge-db-local | fusionforge-db, fusionforge-web, fusionforge-scm, ${misc:Depends}
 Recommends: fusionforge-lists, fusionforge-shell, fusionforge-plugin-scmgit, fusionforge-plugin-scmsvn
 Suggests: fusionforge-web-vhosts, fusionforge-plugin-mediawiki, fusionforge-plugin-moinmoin, fusionforge-plugin-blocks
 Description: collaborative development tool - standard metapackage
