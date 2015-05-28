@@ -27,9 +27,16 @@ case "$1" in
 	    chown www-data:list /var/lib/mailman/archives/private
 	    chmod 2770 /var/lib/mailman/archives/private
 	fi
+
 	# Managed by mailman, but referencing it to document where it is:
 	# echo "Use 'mmsitepass' to set the Mailman master password"
 	# echo "Cf. /var/lib/mailman/data/adm.pw"
+
+	# Normally defined in per-list config, but needed e.g. in default empty archives page
+	lists_host=$(forge_get_config lists_host)
+	sed -i -e "s/^DEFAULT_EMAIL_HOST.*/DEFAULT_EMAIL_HOST = '$lists_host'/" \
+	       -e "s/^DEFAULT_URL_HOST.*/DEFAULT_URL_HOST = '$lists_host'/" \
+	    /etc/mailman/mm_cfg.py
 	;;
     *)
 	echo "Usage: $0 {configure}"
