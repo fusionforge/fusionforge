@@ -9,7 +9,7 @@ BuildArch: noarch
 License: GPLv2+ and MIT
 URL: http://www.fusionforge.org/
 Source0: http://fusionforge.org/frs/download.php/file/XX/%{name}-@tarball_version@.tar.bz2
-Requires: %{name}-db-local = %{version}-%{release}, %{name}-web = %{version}-%{release}
+Requires: %{name}-db-local = %{version}-%{release}, %{name}-web = %{version}-%{release}, %{name}-scm = %{version}-%{release}
 Provides: bundled(jquery) = 1.10.2, bundled(jquery-ui) = 1.10.4
 
 %description
