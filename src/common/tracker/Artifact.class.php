@@ -234,7 +234,7 @@ class Artifact extends Error {
 		//
 		$status_id = $this->ArtifactType->remapStatus($status_id,$extra_fields);
 		if (!$status_id) {
-			$this->setError(_('Error remapping status'));
+			$this->setError($this->ArtifactType->getErrorMessage());
 			return false;
 		}
 

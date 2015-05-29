@@ -272,25 +272,30 @@ class TaskBoardBasicAdapter {
 		if ($tracker) {
 			$artifact = new Artifact($tracker);
 
-			$extra_fields = array();
 			$user_story_alias = $this->TaskBoard->getUserStoriesReferenceField();
 			$release_alias = $this->TaskBoard->getReleaseField();
+			$fields_ids = $this->getFieldsIds($tracker_id);
+			$at = $this->getTasksTracker($tracker_id);
+			$extra_fields = $at->getExtraFields();
 
-			$fields = $this->getFieldsIds($tracker_id);
+			if (array_key_exists('resolution', $fields_ids)) {
+				$elements = $this->getExtraFieldValues($tracker_id, 'resolution');
+				$extra_fields[ $fields_ids['resolution'] ] = array_shift($elements);
+			}
 
 			// link create task to user story (if specified)
 			if ($user_story_id && $user_story_alias) {
-				if(array_key_exists($user_story_alias, $fields)) {
-					$extra_fields[ $fields[ $user_story_alias ] ] = $user_story_id;
+				if(array_key_exists($user_story_alias, $fields_ids)) {
+					$extra_fields[ $fields_ids[ $user_story_alias ] ] = $user_story_id;
 				}
 			}
 
 			// link create task to release (if specified)
 			if ($release_value && $release_alias) {
-				if(array_key_exists($release_alias, $fields)) {
+				if(array_key_exists($release_alias, $fields_ids)) {
 					$elements = $this->getExtraFieldValues($tracker_id, $release_alias);
 					if(array_key_exists($release_value, $elements)) {
-						$extra_fields[ $fields[ $release_alias ] ] = $elements[$release_value];
+						$extra_fields[ $fields_ids[ $release_alias ] ] = $elements[$release_value];
 					}
 				}
 			}

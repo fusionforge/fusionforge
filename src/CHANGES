@@ -1,4 +1,4 @@
-FusionForge 6.0rcX:
+FusionForge 6.0rc4:
 * New install system [#710] (Inria)
 * Reactivity: system replication is now performed immediately (rather than waiting for cron jobs) [#147] (Inria)
 * SCM: Concurrent SSH and HTTPS access, relying on Apache mod_itk [#519] (Roland Mas and Inria)
@@ -39,6 +39,11 @@ FusionForge 6.0rcX:
 * Plugin scmhook: Install hooks as the requesting system user (Inria)
 * Plugin AuthLDAP: Support LPAP_OPT_REFERRALS option, needed by ActiveDirectory Server [#734] (TrivialDev)
 * Plugin Task Board: New Agile TaskBoard supporting Scrum and Kanban methodologies (Vitaliy Pylypiv and TrivialDev)
+
+Fusionforge-5.3.4:
+* CVE-2015-0850: Prevent arbitrary command execution via clone URL
+  parameter of the method to create secondary Git repositories. Found
+  by Ansgar Burchardt <ansgar@debian.org>.
 
 Fusionforge-5.3.3:
 * User e-mail change: simplify confirmation hash and precise encoding to avoid mangling in some versions of Thunderbird and Apple Mail [#738] (Inria)

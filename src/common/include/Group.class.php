@@ -2355,6 +2355,8 @@ class Group extends Error {
 			return false;
 		}
 
+		db_commit();
+
 		// Switch to system language for item creation
 		setup_gettext_from_sys_lang();
 
@@ -2580,8 +2582,6 @@ class Group extends Error {
 		// Switch back to user preference
 		session_set_internal($saved_session->getID());
 		setup_gettext_from_context();
-
-		db_commit();
 
 		$this->sendApprovalEmail();
 		$this->addHistory(_('Approved'), 'x');

@@ -1,12 +1,10 @@
 <?php
-/*
+/**
+ * FusionForge Generic Tracker facility
  *
- * SourceForge Generic Tracker facility
- *
- * SourceForge: Breaking Down the Barriers to Open Source Development
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright 2011,2015 Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -31,9 +29,12 @@ require_once $gfcommon.'include/utils_crossref.php';
 class ArtifactHtml extends Artifact {
 
 	/**
-	 * show details preformatted (like followups)
+	 * showDetails - show details preformatted (like followups)
+	 *
+	 * @param	bool	$editable	is the detail editable or not? default is false.
 	 */
 	function showDetails($editable = false) {
+		global $HTML;
 		$result = $this->getDetails();
 		$result = util_gen_cross_ref($result, $this->ArtifactType->Group->getID());
 		//$result = util_line_wrap( $result, 120,"\n");
@@ -42,18 +43,16 @@ class ArtifactHtml extends Artifact {
 		$title_arr = array();
 		if ($editable === true) {
 			$title_arr[] = '<div style="width:100%;">' .
-				'<div style="float:left">' . _('Detailed description') . '</div>' .
-				'<div style="float:right">' . html_image('ic/forum_edit.gif','37','15',array('title'=>_('Edit this message'), 'alt'=>_('Edit this message'), 'class' => 'mini_buttons tip-ne', 'onclick'=>"switch2edit(this, 'show', 'edit')")) . '</div>' .
+				'<div style="float:left">' . _('Detailed description')._(':') . '</div>' .
+				'<div>' . html_image('ic/forum_edit.gif','37','15',array('title'=>_('Edit this message'), 'alt'=>_('Edit this message'), 'class' => 'mini_buttons tip-ne', 'onclick'=>"switch2edit(this, 'showdescription', 'editdescription')")) . '</div>' .
 				'</div>';
-		}
-		else {
+		} else {
 			$title_arr[] = _('Detailed description');
 		}
-		echo $GLOBALS['HTML']->listTableTop ($title_arr);
-
-		echo '<tr ' . $GLOBALS['HTML']->boxGetAltRowStyle(0) .'><td>'. $result. '</td></tr>';
-
-		echo $GLOBALS['HTML']->listTableBottom();
+		echo $HTML->listTableTop($title_arr);
+		echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle(0, true), 'id' => 'editdescription', 'style' => 'display:none'), array(array(html_e('textarea', array('id' => 'tracker-description', 'required' => 'required', 'name' => 'description', 'rows' => 20, 'cols' => 79, 'title' => util_html_secure(html_get_tooltip_description('description'))), $result))));
+		echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle(0, true), 'id' => 'showdescription'), array(array($result)));
+		echo $HTML->listTableBottom();
 	}
 
 	function showMessages() {

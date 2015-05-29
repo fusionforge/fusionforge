@@ -75,11 +75,11 @@ Requires:
 %package plugin-globalsearch
 Requires:
 
-%package plugin-webanalytics
-Requires:
-
 %package plugin-sysauthldap
 Requires: php-ldap
 
 %package plugin-taskboard
+Requires:
+
+%package plugin-webanalytics
 Requires:

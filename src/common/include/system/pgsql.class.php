@@ -492,7 +492,7 @@ FROM users
   JOIN pfo_role ON (pfo_user_role.role_id=pfo_role.role_id)
   LEFT JOIN role_project_refs ON (pfo_user_role.role_id=role_project_refs.role_id)
   JOIN nss_groups ON (pfo_role.home_group_id=nss_groups.group_id)
-WHERE users.unix_status='A'AND nss_groups.gid < $1 
+WHERE users.unix_status='A' AND nss_groups.gid < $1
 
 UNION
 
@@ -529,7 +529,7 @@ WHERE users.unix_status='A'
 
 -- Not supported, this is not sane
 -- UNION
--- 
+--
 -- -- 'Open' privileges for Anonymous and LoggedIn users
 -- SELECT users.unix_uid, nss_groups.gid, users.user_id, nss_groups.group_id, user_name, nss_groups.name::text||'_scmro'
 -- FROM users
@@ -546,7 +546,7 @@ GROUP BY users.user_id, nss_groups.gid;
 			return false;
 		}
 		db_commit();
-		
+
 		return true;
 	}
 }

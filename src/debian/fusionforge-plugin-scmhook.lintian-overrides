@@ -3,3 +3,5 @@ fusionforge-plugin-scmhook: script-not-executable usr/share/fusionforge/plugins/
 fusionforge-plugin-scmhook: script-not-executable usr/share/fusionforge/plugins/scmhook/library/scmsvn/skel/post-commit/head
 fusionforge-plugin-scmhook: script-not-executable usr/share/fusionforge/plugins/scmhook/library/scmsvn/skel/pre-commit/head
 fusionforge-plugin-scmhook: script-not-executable usr/share/fusionforge/plugins/scmhook/library/scmsvn/skel/pre-revprop-change/head
+# Auto-documented, clear package name, so we can use the same words for the description
+fusionforge-plugin-scmhook: description-is-pkg-name FusionForge plugin - Scmhook

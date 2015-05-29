@@ -1,19 +1,32 @@
-fusionforge (6.0~rc2-0) UNRELEASED; urgency=medium
+fusionforge (6.0~rc4-1) unstable; urgency=high
+
+  [ Sylvain Beucler ]
+  * New upstream release candidate
+  (closes: #782196, #782638)
+
+  [ Roland Mas ]
+  * CVE-2015-0850: Prevent arbitrary command execution via clone URL
+    parameter of the method to create secondary Git repositories. Found by
+    Ansgar Burchardt <ansgar@debian.org>.
+
+ -- Sylvain Beucler <beuc@debian.org>  Thu, 28 May 2015 13:42:35 +0200
+
+fusionforge (6.0~rc3-1) unstable; urgency=medium
+
+  * New upstream release candidate.
+
+ -- Roland Mas <lolando@debian.org>  Fri, 22 May 2015 17:08:50 +0200
+
+fusionforge (6.0~rc2+20150513-1) unstable; urgency=medium
 
   * New upstream release candidate
-
- -- Sylvain Beucler <beuc@debian.org>  Fri, 24 Apr 2015 15:40:27 +0200
-
-fusionforge (5.3.50-1) unstable; urgency=medium
-
-  * New upstream release
   (closes: #769098, #666236, #717803, #769098, #309518)
   (closes: #556189, #597602, #638010, #640804, #685074)
   (closes: #576410, #720305, #551761, #656088, #585205)
   (closes: #772241)
   * Adapt packaging to new build system
 
- -- Sylvain Beucler <beuc@debian.org>  Mon, 22 Sep 2014 14:58:47 +0200
+ -- Sylvain Beucler <beuc@debian.org>  Wed, 13 May 2015 13:42:48 +0200
 
 fusionforge (5.3.2+20141104-3) unstable; urgency=medium
 

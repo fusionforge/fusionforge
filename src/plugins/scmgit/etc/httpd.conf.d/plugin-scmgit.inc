@@ -3,5 +3,6 @@
 Redirect permanent /anonscm/git https://${FF__core__scm_host}/anonscm/git
 # - use_dav=1 => ${FF__core__web_host}/scmrepos/git -> ${FF__core__scm_host}/authscm/git
 Redirect permanent /scmrepos/git https://${FF__core__scm_host}/authscm/git/
-# - gitweb    => still at ${FF__core__web_host}/plugins/scmgit/cgi-bin/gitweb.cgi
-#             => authenticated gitweb (for private repos) previously not supported
+# - gitweb - anonymous
+Redirect permanent /plugins/scmgit/cgi-bin/gitweb.cgi https://${FF__core__scm_host}/anonscm/gitweb/
+# - gitweb - authenticated => previously not supported

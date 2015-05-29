@@ -107,7 +107,7 @@ class FRSPackageFactory extends Error {
 		if ($status)
 			$qpa = db_construct_qpa($qpa, 'AND status_id=$1', array(1));
 
-		$qpa = db_construct_qpa($qpa, 'ORDER BY package_id ASC');
+		$qpa = db_construct_qpa($qpa, 'ORDER BY package_id DESC');
 		$res = db_query_qpa($qpa);
 		if ($res) {
 			while ($arr = db_fetch_array($res)) {

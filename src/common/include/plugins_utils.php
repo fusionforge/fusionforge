@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright 2010 (c) Mélanie Le Bail
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2015 Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -88,7 +88,14 @@ function htmlIframeResizer($url, $poub = array()) {
 		echo html_e('iframe', array('src' => $url, 'id' => $id, 'width' => '100%', 'frameborder' =>0), '', false);
 		html_use_iframeresizer();
 		echo $HTML->getJavascripts();
-		echo '<script type="text/javascript">jQuery(\'iframe\').iFrameResize();</script>';
+		echo '<script type="text/javascript">//<![CDATA[
+			jQuery(\'iframe\').iFrameResize();
+			jQuery(\'iframe\').load(function (){
+					if (this.contentWindow.location.href == "'.util_make_url('/projects/'.$project->getUnixName()).'/") {
+						window.location.href = this.contentWindow.location.href;
+					}
+				});
+			//]]></script>';
 	}
 }
 

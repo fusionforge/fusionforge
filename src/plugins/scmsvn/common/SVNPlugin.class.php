@@ -320,7 +320,7 @@ some control over it to the project's administrator.");
 		# Enable /authscm/$user/svn URLs
 		$config_fname = forge_get_config('data_path').'/scmsvn-auth.inc';
 		$config_f = fopen($config_fname.'.new', 'w');
-			
+
 		$res = db_query_params("SELECT login, passwd FROM nss_passwd WHERE status=$1", array('A'));
 		while ($arr = db_fetch_array($res)) {
 			fwrite($config_f, 'Use ScmsvnUser '.$arr['login']."\n");
@@ -625,7 +625,7 @@ some control over it to the project's administrator.");
 		$last_message = '';
 		$notimecheck = true;
 		$revisionsArr = array();
-		if ($project->usesPlugin($this->name) && forge_get_config('use_dav', $this->name) && forge_check_perm($this->name, $project->getID(), 'read')) {
+		if ($project->usesPlugin($this->name) && forge_check_perm('scm', $project->getID(), 'read')) {
 			$repo = forge_get_config('repos_path', $this->name) . '/' . $project->getUnixName();
 			if ($user) {
 				$userunixname = $user->getUnixName();
