@@ -98,5 +98,14 @@ ssh root@$HOST "/usr/src/fusionforge/autoinstall/vnc-run-testsuite.sh /usr/src/f
 
 copy_logs
 
+case $INSTALL_METHOD in
+    deb)
+	rsync -av root@$HOST:/usr/src/debian-repository/local $WORKSPACE/repository
+	;;
+    rpm)
+	rsync -av root@$HOST:/usr/src/fusionforge/build/RPMS $WORKSPACE/repository
+	;;
+esac
+
 stop_vm_if_not_kept $HOST
 exit $retcode
