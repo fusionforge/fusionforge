@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-28 11:39+0200\n"
+"POT-Creation-Date: 2015-05-29 13:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1470,8 +1470,8 @@ msgstr ""
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:73
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:75
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:79
-#: plugins/authldap/common/AuthLDAPPlugin.class.php:214
-#: plugins/authldap/common/AuthLDAPPlugin.class.php:216
+#: plugins/authldap/common/AuthLDAPPlugin.class.php:215
+#: plugins/authldap/common/AuthLDAPPlugin.class.php:217
 #: plugins/blocks/common/blocks_Widget_ProjectSummary.class.php:55
 #: plugins/blocks/common/blocks_Widget_ProjectSummary.class.php:57
 #: plugins/contribtracker/www/global_admin.php:379
@@ -5582,7 +5582,7 @@ msgstr ""
 
 #: common/include/user_profile.php:85
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:75
-#: plugins/authldap/common/AuthLDAPPlugin.class.php:214
+#: plugins/authldap/common/AuthLDAPPlugin.class.php:215
 #: www/account/index.php:146 www/account/lostpw.php:89
 msgid "Login Name"
 msgstr ""
@@ -9343,7 +9343,7 @@ msgstr ""
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:67
 #: plugins/authcas/common/AuthCASPlugin.class.php:92
 #: plugins/authhttpd/common/AuthHTTPDPlugin.class.php:65
-#: plugins/authldap/common/AuthLDAPPlugin.class.php:210
+#: plugins/authldap/common/AuthLDAPPlugin.class.php:211
 #: plugins/authopenid/include/AuthOpenIDPlugin.class.php:78
 #: plugins/authwebid/include/AuthWebIDPlugin.class.php:103
 msgid "Cookies must be enabled past this point."
@@ -9355,13 +9355,13 @@ msgid "Login name or email address"
 msgstr ""
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:79
-#: plugins/authldap/common/AuthLDAPPlugin.class.php:216
+#: plugins/authldap/common/AuthLDAPPlugin.class.php:217
 #: www/account/verify.php:80
 msgid "Password"
 msgstr ""
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:82
-#: plugins/authldap/common/AuthLDAPPlugin.class.php:218
+#: plugins/authldap/common/AuthLDAPPlugin.class.php:219
 #: www/account/verify.php:83 www/admin/userlist.php:81
 #: www/include/login-form.php:64
 msgid "Login"

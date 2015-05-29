@@ -278,11 +278,8 @@ This package controls the interaction between FusionForge and Mailman.
 
 
 %changelog
-* Thu May 28 2015 Roland Mas <lolando@debian.org> - 6.0-0
+* Fri May 30 2015 Roland Mas <lolando@debian.org> - @rpm_version@-0.2@rpm_snapshot@
 - New upstream release
-
-* Thu May 28 2015 Sylvain Beucler <beuc@beuc.net> - @rpm_version@-0.2@rpm_snapshot@
-- New upstream snapshot following the stable branch
 
 * Thu May 28 2015 Sylvain Beucler <beuc@beuc.net> - 6.0-0.2.rc4
 - New upstream release candidate
