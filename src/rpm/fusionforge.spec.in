@@ -1,6 +1,6 @@
 Name: fusionforge
 Version: @rpm_version@
-Release: 0.2@rpm_snapshot@%{?dist}
+Release: 1@rpm_snapshot@%{?dist}
 Summary: Collaborative development tool
 
 Group: Development/Tools
@@ -278,7 +278,10 @@ This package controls the interaction between FusionForge and Mailman.
 
 
 %changelog
-* Fri May 30 2015 Roland Mas <lolando@debian.org> - @rpm_version@-0.2@rpm_snapshot@
+* Fri May 29 2015 Sylvain Beucler <beuc@beuc.net> - @rpm_version@-1@rpm_snapshot@
+- New upstream snapshot following the stable branch
+
+* Fri May 29 2015 Sylvain Beucler <beuc@beuc.net> - 6.0-1
 - New upstream release
 
 * Thu May 28 2015 Sylvain Beucler <beuc@beuc.net> - 6.0-0.2.rc4
