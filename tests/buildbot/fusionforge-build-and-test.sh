@@ -100,10 +100,10 @@ copy_logs
 
 case $INSTALL_METHOD in
     deb)
-	rsync -av root@$HOST:/usr/src/debian-repository/local $WORKSPACE/repository
+	rsync -av --delete root@$HOST:/usr/src/debian-repository/local/ $WORKSPACE/packages/
 	;;
     rpm)
-	rsync -av root@$HOST:/usr/src/fusionforge/build/RPMS $WORKSPACE/repository
+	rsync -av --delete root@$HOST:/usr/src/fusionforge/build/RPMS/ $WORKSPACE/packages/
 	;;
 esac
 

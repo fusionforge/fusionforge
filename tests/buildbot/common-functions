@@ -24,16 +24,8 @@ prepare_workspace()
 	export BUILDRESULT=$WORKSPACE/build/packages
 	mkdir -p $BUILDRESULT
 	export BUILDERDIR=${BUILDERDIR:-$HOME/builder}
-	# Delete existing packages
-	if [ -d $WORKSPACE/build/packages ] 
-	then 
-		rm -fr $WORKSPACE/build/packages/*
-	fi
-	# Create place to build package if necessary
-	[ ! -d $WORKSPACE/build/packages ] || mkdir -p $WORKSPACE/build/packages
-	# Erase config
-	[ ! -d $WORKSPACE/build/config ] || rm -fr $WORKSPACE/build/config
-	mkdir -p $WORKSPACE/build/config
+	# Create place to store built packages
+	[ ! -d $WORKSPACE/packages ] || mkdir -p $WORKSPACE/packages
 	# Erase reports
 	[ ! -d $WORKSPACE/reports ] || rm -fr $WORKSPACE/reports
 	mkdir -p $WORKSPACE/reports/coverage
