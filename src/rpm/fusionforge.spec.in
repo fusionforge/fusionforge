@@ -95,7 +95,7 @@ integrated into one web site and managed through a web interface.
 This package contains files and programs used by several other
 subpackages.
 %files common -f common.rpmfiles -f %{name}.lang
-%doc AUTHORS* CHANGES COPYING INSTALL.TXT NEWS README
+%doc AUTHORS* CHANGES COPYING INSTALL.TXT README
 %doc docs/*
 %doc rpm/README.fedora
 %post common
