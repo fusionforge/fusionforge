@@ -256,9 +256,6 @@ class TaskBoardColumnSource extends Error {
 			$target_column = taskboard_column_get_object( $this->getTargetColumnID() );
 			
 			$columns = $this->getTaskboard()->getColumns();
-			
-			error_log( count($columns) . ' ' .  $target_column->getOrder() );
-			
 			if( $target_column->getOrder() == count($columns) ) {
 				// final column, so set remaining cost to 0 
 				$remaining_cost = 0;

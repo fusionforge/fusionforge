@@ -185,8 +185,8 @@ function drawBoardProgress() {
 		// show progress by cost
 		html += '<table>';
 		html += '<tr><td width="' + parseInt( 100 / aPhases.length )  + '%" style="padding: 0;">' + gMessages.progressByCost + ':</td><td style="padding: 0;">';
+		html += '<div class="agile-board-progress-bar-done" style="width: ' + wt + '%;" title="' + gMessages['completedCost'] + '">' + totalCostCompleted + '</div>';
 		html += '<div class="agile-board-progress-bar-remains" style="width: ' + ( 100 - wt ) + '%;" title="' + gMessages['remainingCost'] + '">' + totalCostRemaining + '</div>';
-		html += '<div class="agile-board-progress-bar-done" style="width: ' + wt + '%;" title="' + gMessages['completedCost'] + '">' + totalCostCompleted + '</div>';		
 		html += '</td></tr><table>';
 	}
 	
@@ -482,7 +482,7 @@ function initEditable() {
 				}
 			});
 		}
-	});	
+	});
 	
 }
 

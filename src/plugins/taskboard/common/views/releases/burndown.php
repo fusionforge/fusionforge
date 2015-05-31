@@ -108,54 +108,54 @@ foreach( $release_snapshots as $snapshot ) {
 			{
 				axesDefaults: {
 					pad : 1
-				},	
+				},
 				seriesColors: [ '#000', '#DDDDDD', '#00FA9A', '#B22222' ],
 				legend: {
-			        show: true,
-			        location: 'ne', 
-			        xoffset: 12,
-			        yoffset: 12
-			    },
+					show: true,
+					location: 'ne', 
+					xoffset: 12,
+					yoffset: 12
+				},
 				axes : { 
-					xaxis : {	
+					xaxis : {
 						renderer : jQuery.jqplot.DateAxisRenderer, 
 						tickRenderer: jQuery.jqplot.CanvasAxisTickRenderer,
 						tickOptions:{ 
-				            angle: -90,
-				            fontSize : '1.3em',
-				            formatString : '%Y-%m-%d'
-				        },
-				        numberTicks: <?php echo count($xaxisData) - 2; ?>,	
-				        min: <?php echo $release->getStartDate() * 1000; ?>,
-				        max: <?php echo $release->getEndDate() * 1000; ?>	       
+							angle: -90,
+							fontSize : '1.3em',
+							formatString : '%Y-%m-%d'
+						},
+						numberTicks: <?php echo count($xaxisData) - 2; ?>,
+						min: <?php echo $release->getStartDate() * 1000; ?>,
+						max: <?php echo $release->getEndDate() * 1000; ?>
 					},
 					yaxis : {
 						autoscale:true,
 						min : 0,
-					    label: "<?php echo _('Completed tasks') ?>" ,
-				        labelRenderer: jQuery.jqplot.CanvasAxisLabelRenderer,
-				        labelOptions:{
-				       		fontSize : '12px'
-				        }
+						label: "<?php echo _('Completed tasks') ?>" ,
+						labelRenderer: jQuery.jqplot.CanvasAxisLabelRenderer,
+							labelOptions:{
+							fontSize : '12px'
+						}
 					},
-				    y2axis: {
-		                autoscale:true,	
-		                min : 0,  
-		                tickOptions:{ 
-		                	isMinorTick: true,
-		                	formatString: "%.1f <?php echo _('m/d') ?>"
-				        } 
-		            }
+					y2axis: {
+						autoscale:true,
+						min : 0,
+						tickOptions:{ 
+						isMinorTick: true,
+						formatString: "%.1f <?php echo _('m/d') ?>"
+						}
+					}
 				},
-				series:[ 
-					{ show : false }, // to indicates all dates only	
+				series:[
+					{ show : false }, // to indicate all dates
 					{ label : "<?php echo _('Ideal burndown') ;?>", lineWidth:1, markerOptions : { style : 'circle', size : 5 } },
 					{ label : "<?php echo _('Remaining tasks') ;?>", lineWidth:1, markerOptions : { style : 'circle', size : 5 },  yaxis: 'yaxis' },
 					{ label : "<?php echo _('Remaining efforts') ;?>", lineWidth:1, markerOptions : { style : 'circle', size : 5 } , yaxis:'y2axis' }
 				],
 				highlighter: {
-		        	show: true,
-		        	sizeAdjust: 8
+					show: true,
+					sizeAdjust: 8
 				},
 				cursor: {
 					show: false
