@@ -227,7 +227,9 @@ var gAjaxUrl = '<?php echo util_make_url ('/plugins/'.$pluginTaskboard->name.'/a
 var gMessages = {
 	'notasks' : "<?php echo _('There are no tasks found.') ?>",
 	'progressByTasks' : "<?php echo _('Progress by tasks') ?>",
-	'progressByCost' : "<?php echo _('Progress by cost') ?>"
+	'progressByCost' : "<?php echo _('Progress by cost') ?>",
+	'remainingCost' : "<?php echo _('Remaining m/d') ?>",
+	'completedCost' : "<?php echo _('Completed m/d') ?>"
 };
 
 <?php

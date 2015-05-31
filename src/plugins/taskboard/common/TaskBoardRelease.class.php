@@ -247,22 +247,26 @@ class TaskBoardRelease extends Error {
 	}
 
 	/**
-	 * Save current taskboard snapshot. So, we can have a history of release implementation,
-	 * that could be used for different indicators calculation.
+	 *  Get release volume - number of total
 	 *
-	 * @param	int	Snapshot unix date time
-	 * @return	boolean	success.
+	 *  @return array  hash with user_stories, tasks, story_points, man_days key
 	 */
-	function saveSnapshot($snapshot_datetime) {
-		$user_stories = $this->Taskboard->getUserStories($this->getTitle());		
+	function getVolume() {
+		$user_stories = $this->Taskboard->getUserStories($this->getTitle());
 		$columns = $this->Taskboard->getColumns($this->getTitle());
 
 		$_columns_num = count($columns);
-		$_completed_user_stories = 0;
- 		$_completed_tasks = 0;
-		$_completed_story_points = 0;
-		$_completed_man_days = 0;
-		
+		$ret = array(
+			'user_stories' => 0,
+			'completed_user_stories' => 0,
+			'tasks' => 0,
+			'completed_tasks' => 0,
+			'story_points' => 0,
+			'completed_story_points' => 0,
+			'man_days'=> 0,
+			'completed_man_days'=> 0,
+		);
+
 		foreach( $user_stories as $us ) {
 			$completed_us = true;
 
@@ -270,26 +274,45 @@ class TaskBoardRelease extends Error {
 				foreach( $us['tasks'] as $tsk ) {
 					if( $tsk['phase_id'] == $columns[$i]->getID() ) {
 						if( $i + 1 == $_columns_num ) {
-							// last column, so- completed task
-							$_completed_tasks++;
+							// last column, so - completed task
+							$ret['completed_tasks']++;
+							if( $tsk['estimated_dev_effort'] ) {
+								$ret['completed_man_days'] += ( (float) $tsk['estimated_dev_effort'] - (float) $tsk['remaining_dev_effort'] );
+							}
 						} else {
 							// incomplete task, so incomplete US
 							$completed_us = false;
 						}
+						$ret['tasks']++;
+						if( $tsk['estimated_dev_effort'] ) {
+							$ret['man_days'] += (float)  $tsk['estimated_dev_effort'];
+						}
 					}
 				}
-				
 			}
-			
+
 			if( $completed_us ) {
-				$_completed_user_stories++;
+				$ret['completed_user_stories']++;
 				// TODO $_completed_story_points += ...
 			}
+			$ret['user_stories']++;
 		}
-		
-		
+
+		return $ret;
+	}
+
+	/**
+	 * Save current taskboard snapshot. So, we can have a history of release implementation,
+	 * that could be used for different indicators calculation.
+	 *
+	 * @param	int	Snapshot unix date time
+	 * @return	boolean	success.
+	 */
+	function saveSnapshot($snapshot_datetime) {
+		$release_volume = $this->getVolume();
+
 		$res = db_query_params(
-				'SELECT taskboard_release_snapshot_id  FROM plugin_taskboard_releases_snapshots WHERE taskboard_release_id=$1 AND snapshot_date=$2', 
+				'SELECT taskboard_release_snapshot_id  FROM plugin_taskboard_releases_snapshots WHERE taskboard_release_id=$1 AND snapshot_date=$2',
 				array ($this->getID(), $snapshot_datetime )
 		);
 
@@ -297,20 +320,20 @@ class TaskBoardRelease extends Error {
 			$this->setError('TaskBoardRelease: Cannot get release snapshot');
 			return false;
 		}
-		
+
 		$row = db_fetch_array($res);
 		db_free_result($res);
-		
+
 		if( $row ) {
 			$res = db_query_params(
-					'UPDATE plugin_taskboard_releases_snapshots 
+					'UPDATE plugin_taskboard_releases_snapshots
 					SET completed_user_stories=$1, completed_tasks=$2, completed_story_points=$3, completed_man_days=$4
 					WHERE taskboard_release_snapshot_id=$5',
 					array(
-							$_completed_user_stories,
-							$_completed_tasks,
-							0, //TODO
-							0, //TODO
+							$release_volume['completed_user_stories'],
+							$release_volume['completed_tasks'],
+							$release_volume['completed_story_points'],
+							$release_volume['completed_man_days'],
 							intval($row['taskboard_release_snapshot_id'])
 					)
 			);
@@ -325,10 +348,10 @@ class TaskBoardRelease extends Error {
 					array(
 							$this->getID(),
 							$snapshot_datetime,
-							$_completed_user_stories,
-							$_completed_tasks,
-							0, //TODO
-							0 //TODO
+							$release_volume['completed_user_stories'],
+							$release_volume['completed_tasks'],
+							$release_volume['completed_story_points'],
+							$release_volume['completed_man_days'],
 					)
 			);
 			if (!$res) {
@@ -338,5 +361,32 @@ class TaskBoardRelease extends Error {
 		}
 
 		return true;
+	}
+
+	/**
+	 * Get current release snapshots
+	 *
+	 * @return	array
+	 */
+	function getSnapshots() {
+		$ret = array();
+
+		$res = db_query_params(
+				'SELECT  snapshot_date, completed_user_stories, completed_tasks, completed_story_points, completed_man_days
+				FROM plugin_taskboard_releases_snapshots WHERE taskboard_release_id=$1 ORDER BY snapshot_date',
+				array ($this->getID() )
+		);
+
+		if (!$res) {
+			$this->setError('TaskBoardRelease: Cannot get release snapshots');
+			return false;
+		}
+
+		while( $row = db_fetch_array($res) ) {
+			$ret[] = $row;
+		}
+		db_free_result($res);
+
+		return $ret;
 	}
 }
