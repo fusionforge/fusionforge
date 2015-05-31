@@ -10,14 +10,14 @@
 - DONE View - filter by assigned persons
 - DONE Releases are based either on US or on tasks
 - DONE View - indicators - progress by tasks number
-- API - configured fields support in mapped tasks ('estimated_dev_effort', 'remaining_dev_effort', 'user_story' )
-- View - indicators - progress by tasks cost (if efforts fields are configured)
+- DONE API - configured fields support in mapped tasks ('estimated_dev_effort', 'remaining_dev_effort', 'user_story' )
+- DONE View - indicators - progress by tasks cost (if efforts fields are configured)
 - DONE Admin - releases management
 - View - auto ref rate support
 - Admin - auto ref rate support
 - Admin - adapters - coloring support
 - View - adapters - coloring support (for GT)
 - View - colors by extrafield (for GT)
-- View - indicators - burndown chart
+- DONE View - indicators - burndown chart
 - View - indicators - velocity calculation
 - Improve taskboard initialization - columns by default? 
