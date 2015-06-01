@@ -13,6 +13,12 @@ case $os in
     debian8)
 	dist=jessie
 	;;
+    debian9)
+	dist=stretch
+	;;
+    debian10)
+	dist=buster
+	;;
     centos*)
 	dist=$os
 	;;
