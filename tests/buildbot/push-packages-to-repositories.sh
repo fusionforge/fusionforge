@@ -1,10 +1,10 @@
 #!/bin/bash
 
-set -e
+set -ex
 
 os=$1
 method=$2
-branch=$(echo $GIT_BRANCH | sed -e s,origin/,, -e s,remotes/,, -e s,/,_,g)
+branch=$(echo $GIT_BRANCH | sed -e s,origin/,, -e s,remotes_,, -e s,remotes/,, -e s,/,_,g)
 
 case $os in
     debian7)
