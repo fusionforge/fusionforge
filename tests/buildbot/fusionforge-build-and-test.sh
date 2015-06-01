@@ -98,7 +98,7 @@ ssh root@$HOST "/usr/src/fusionforge/autoinstall/vnc-run-testsuite.sh /usr/src/f
 
 copy_logs
 
-if [ $retcode = 0 ] ; then
+if [ $retcode = 0 && "$PUBLISH_REPO" = 1 ] ; then
     branch=$(echo $GIT_BRANCH | sed -e s,origin/,, -e s,/,_,g)
     case $INSTALL_METHOD in
 	deb)
