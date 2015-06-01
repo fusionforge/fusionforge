@@ -99,9 +99,12 @@ ssh root@$HOST "/usr/src/fusionforge/autoinstall/vnc-run-testsuite.sh /usr/src/f
 copy_logs
 
 if [ $retcode = 0 ] ; then
+    branch=$(git branch | awk '/^\*/ { print $2 }' | sed s,/,_,g)
     case $INSTALL_METHOD in
 	deb)
 	    rsync -av --delete root@$HOST:/usr/src/debian-repository/local/ $WORKSPACE/packages/
+	    sed -i -e "s/^Distribution:.*/Distribution: $DIST-$branch/" fusionforge*changes
+	    dput fforg fusionforge*changes
 	    ;;
 	rpm)
 	    rsync -av --delete root@$HOST:/usr/src/fusionforge/build/RPMS/ $WORKSPACE/packages/
