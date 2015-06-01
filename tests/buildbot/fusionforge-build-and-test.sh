@@ -103,7 +103,7 @@ if [ $retcode = 0 ] ; then
     case $INSTALL_METHOD in
 	deb)
 	    rsync -av --delete root@$HOST:/usr/src/debian-repository/local/ $WORKSPACE/packages/
-	    sed -i -e "s/^Distribution:.*/Distribution: $DIST-$branch/" fusionforge*changes
+	    sed -i -e "s/^Distribution:.*/Distribution: $DIST-$branch/" $WORKSPACE/packages/fusionforge*changes
 	    dput fforg fusionforge*changes
 	    ;;
 	rpm)
