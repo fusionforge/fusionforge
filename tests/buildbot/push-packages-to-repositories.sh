@@ -4,7 +4,7 @@ set -e
 
 os=$1
 method=$2
-branch=$(echo $GIT_BRANCH | sed -e s,origin/,, -e s,/,_,g)
+branch=$(echo $GIT_BRANCH | sed -e s,origin/,, -e s,remotes/,, -e s,/,_,g)
 
 case $os in
     debian7)
@@ -12,6 +12,12 @@ case $os in
 	;;
     debian8)
 	dist=jessie
+	;;
+    debian9)
+	dist=stretch
+	;;
+    debian10)
+	dist=buster
 	;;
     centos*)
 	dist=$os
