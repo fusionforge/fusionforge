@@ -101,10 +101,7 @@ copy_logs
 if [ $retcode = 0 ] ; then
     case $INSTALL_METHOD in
 	deb)
-	    cwd=$(pwd)
-	    cd $WORKSPACE/packages/
-	    rsync -av --delete root@$HOST:/usr/src/debian-repository/local/ ./
-	    cd $cwd
+	    rsync -av --delete root@$HOST:/usr/src/debian-repository/local/ $WORKSPACE/packages/
 	    ;;
 	rpm)
 	    rsync -av --delete root@$HOST:/usr/src/fusionforge/build/RPMS/ $WORKSPACE/packages/
