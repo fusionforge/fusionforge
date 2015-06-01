@@ -102,8 +102,9 @@ if [ $retcode = 0 && "$PUBLISH_REPO" = 1 ] ; then
     branch=$(echo $GIT_BRANCH | sed -e s,origin/,, -e s,/,_,g)
     case $INSTALL_METHOD in
 	deb)
-	    rsync -av --delete root@$HOST:/usr/src/debian-repository/local/ $WORKSPACE/packages/
-	    sed -i -e "s/^Distribution:.*/Distribution: $DIST-$branch/" $WORKSPACE/packages/fusionforge*changes
+	    cd $WORKSPACE/packages/
+	    rsync -av --delete root@$HOST:/usr/src/debian-repository/local/ ./
+	    sed -i -e "s/^Distribution:.*/Distribution: $DIST-$branch/" fusionforge*changes
 	    dput fforg fusionforge*changes
 	    ;;
 	rpm)
