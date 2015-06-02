@@ -282,6 +282,8 @@ generate_email()
 
 generate_email_header()
 {
+	local routing_headers
+
 	# --- Email (all stdout will be the email)
 	# Generate header
 
