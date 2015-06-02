@@ -1,6 +1,6 @@
 Name: fusionforge
 Version: @rpm_version@
-Release: 0.2@rpm_snapshot@%{?dist}
+Release: 1@rpm_snapshot@%{?dist}
 Summary: Collaborative development tool
 
 Group: Development/Tools
@@ -8,7 +8,7 @@ BuildArch: noarch
 # FusionForge is GPLv2+ and JQuery is MIT
 License: GPLv2+ and MIT
 URL: http://www.fusionforge.org/
-Source0: http://fusionforge.org/frs/download.php/file/XX/%{name}-@tarball_version@.tar.bz2
+Source0: http://fusionforge.org/frs/download.php/latestfile/2/%{name}-@tarball_version@.tar.bz2
 Requires: %{name}-db-local = %{version}-%{release}, %{name}-web = %{version}-%{release}, %{name}-scm = %{version}-%{release}
 Provides: bundled(jquery) = 1.10.2, bundled(jquery-ui) = 1.10.4
 
@@ -95,7 +95,7 @@ integrated into one web site and managed through a web interface.
 This package contains files and programs used by several other
 subpackages.
 %files common -f common.rpmfiles -f %{name}.lang
-%doc AUTHORS* CHANGES COPYING INSTALL.TXT NEWS README
+%doc AUTHORS* CHANGES COPYING README
 %doc docs/*
 %doc rpm/README.fedora
 %post common
@@ -278,8 +278,11 @@ This package controls the interaction between FusionForge and Mailman.
 
 
 %changelog
-* Thu May 28 2015 Sylvain Beucler <beuc@beuc.net> - @rpm_version@-0.2@rpm_snapshot@
+* Fri May 29 2015 Sylvain Beucler <beuc@beuc.net> - @rpm_version@-1@rpm_snapshot@
 - New upstream snapshot following the stable branch
+
+* Fri May 29 2015 Sylvain Beucler <beuc@beuc.net> - 6.0-1
+- New upstream release
 
 * Thu May 28 2015 Sylvain Beucler <beuc@beuc.net> - 6.0-0.2.rc4
 - New upstream release candidate
