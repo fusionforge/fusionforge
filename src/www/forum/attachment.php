@@ -6,7 +6,7 @@
  * The rest Copyright 2002-2004 (c) GForge Team
  * Coyright 2005, Daniel Perez
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014-2015, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -37,7 +37,7 @@ require_once $gfcommon.'forum/ForumStorage.class.php';
  */
 
 function goodbye($msg) {
-	site_header(array('title'=>_('Attachments')));
+	forum_header(array('title'=>_('Attachments')));
 	html_feedback_top($msg);
 	echo '<form method="post"><input type="button" value="'._('Close Window').'" onclick="window.close()" /></form>';
 	site_footer();
@@ -118,7 +118,6 @@ if ($edit == "yes") {
 	} else {
 		if ($doedit=="1") {
 			//actually edit the attach and save the info
-			forum_header(array('title'=>_('Attachments')));
 			$am = new AttachManager();
 			$fm = new ForumMessage($f, $msg_id, array(), false);
 			$am->SetForumMsg($fm);
