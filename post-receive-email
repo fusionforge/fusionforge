@@ -810,11 +810,11 @@ emailprefix=$(git config hooks.emailprefix)
 custom_showrev=$(git config hooks.showrev)
 maxlines=$(git config hooks.emailmaxlines)
 diffopts=$(git config hooks.diffopts)
-: ${diffopts:="-p --stat --summary --find-copies-harder"}
+: "${diffopts:="-p --stat --summary --find-copies-harder"}"
 kgbconffile=$(git config hooks.kgbconffile)
 replyto=$(git config hooks.replyto)
 shortdesc=$(git config hooks.shortdesc)
-: ${shortdesc:=$projectdesc}
+: "${shortdesc:=$projectdesc}"
 
 # --- Main loop
 # Allow dual mode: run from the command line just like the update hook, or
