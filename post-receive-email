@@ -302,7 +302,8 @@ generate_email_header()
 	X-Git-Reftype: $refname_type
 	X-Git-Oldrev: $oldrev
 	X-Git-Newrev: $newrev
-	$(perl -Mutf8 -MEncode -e "print encode('MIME-Q', '$subj');")
+	$(print -nr -- "$subj" | \
+	    perl -C7 -0777 -Mutf8 -MEncode -e "print encode('MIME-Q', <>);")
 	Auto-Submitted: auto-generated
 
 	This is an automated email from the git hooks/post-receive script. It was
