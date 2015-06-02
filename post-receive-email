@@ -292,6 +292,9 @@ generate_email_header()
 	[[ -n $replyto ]] && routing_headers="$routing_headers${nl}Reply-To: $replyto"
 
 	subj="Subject: ${emailprefix}$shortdesc $refname_type $short_refname ${change_type}d. $describe"
+
+	# Note: the Perl call is known to occasionally insert extra whitespace
+	# cf. https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=787513
 	subj=$(print -nr -- "$subj" | \
 	    perl -C7 -0777 -Mutf8 -MEncode -e "print encode('MIME-Q', <>);")
 
