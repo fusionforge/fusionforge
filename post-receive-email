@@ -292,6 +292,13 @@ generate_email_header()
 	[[ -n $replyto ]] && routing_headers="$routing_headers${nl}Reply-To: $replyto"
 
 	subj="Subject: ${emailprefix}$shortdesc $refname_type $short_refname ${change_type}d. $describe"
+	subj=$(print -nr -- "$subj" | \
+	    perl -C7 -0777 -Mutf8 -MEncode -e "print encode('MIME-Q', <>);")
+
+	if [[ -z $subj ]]; then
+		print -u2 "E: Subject empty, RFC2047 MIME encoding failed"
+		exit 1
+	fi
 
 	cat <<-EOF
 	MIME-Version: 1.0
@@ -302,8 +309,7 @@ generate_email_header()
 	X-Git-Reftype: $refname_type
 	X-Git-Oldrev: $oldrev
 	X-Git-Newrev: $newrev
-	$(print -nr -- "$subj" | \
-	    perl -C7 -0777 -Mutf8 -MEncode -e "print encode('MIME-Q', <>);")
+	$subj
 	Auto-Submitted: auto-generated
 
 	This is an automated email from the git hooks/post-receive script. It was
