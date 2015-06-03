@@ -345,11 +345,6 @@ project independently.");
 						echo ' disabled="disabled"';
 
 					echo ' />';
-					if (in_array($hook->getClassname(), $hooksEnabled)) {
-						echo '<input type="hidden" ';
-						echo 'name="'.$hook->getLabel().'_'.$hook->getClassname().'" ';
-						echo 'value="on" />';
-					}
 					echo '</td><td';
 					if (!$hook->isAvailable())
 						echo ' title="'.$hook->getDisabledMessage().'"';
@@ -416,12 +411,6 @@ project independently.");
 					echo ' disabled="disabled"';
 
 				echo ' />';
-				if (in_array($hookServePushPullBundle->getClassname(), $hooksEnabled)) {
-					echo '<input type="hidden" ';
-					echo 'name="'.$hookServePushPullBundle->getLabel().'_'.$hookServePushPullBundle->getClassname().'" ';
-					echo 'value="on" />';
-				}
-
 				echo '</td><td';
 				if (!$hookServePushPullBundle->isAvailable())
 					echo ' title="'.$hookServePushPullBundle->getDisabledMessage().'"';
@@ -471,12 +460,6 @@ project independently.");
 					echo ' disabled="disabled"';
 
 				echo ' />';
-				if (in_array($hookPostReceive->getClassname(), $hooksEnabled)) {
-					echo '<input type="hidden" ';
-					echo 'name="'.$hookPostReceive->getLabel().'_'.$hookPostReceive->getClassname().'" ';
-					echo 'value="on" />';
-				}
-
 				echo '</td><td';
 				if (!$hookPostReceive->isAvailable())
 					echo ' title="'.$hookPostReceive->getDisabledMessage().'"';

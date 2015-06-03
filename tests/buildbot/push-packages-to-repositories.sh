@@ -43,7 +43,8 @@ case $method in
     rpm)
 	rpmsign --addsign $WORKSPACE/packages/noarch/*.rpm
 	gpg --detach-sign --armor $WORKSPACE/packages/repodata/repomd.xml
-	rsync -av --delete $WORKSPACE/packages/ ffbuildbot@fusionforge.org:/home/groups/fusionforge/htdocs/rpm/$dist-$branch/
+	rsync -av --delete $WORKSPACE/packages/ /var/lib/jenkins/rpm/$dist-$branch/
+	rsync -av --delete-after  /var/lib/jenkins/rpm/ ffbuildbot@fusionforge.org:/home/groups/fusionforge/htdocs/rpm/
 	;;
     *)
 	echo "Unknown install method"
