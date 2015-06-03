@@ -36,6 +36,7 @@ case $method in
     deb)
 	cd $WORKSPACE/packages/
 	sed -i -e "s/^Distribution:.*/Distribution: $dist-$branch/" fusionforge*changes
+	debsign -m"FusionForge buildbot" *changes
 	dput buildbot fusionforge*changes
 	rsync -av --delete-after /var/lib/jenkins/deb/ ffbuildbot@fusionforge.org:/home/groups/fusionforge/htdocs/deb/
 	;;
