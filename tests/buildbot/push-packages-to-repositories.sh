@@ -38,7 +38,7 @@ case $method in
 	sed -i -e "s/^Distribution:.*/Distribution: $dist-$branch/" fusionforge*changes
 	debsign -m"FusionForge buildbot" *changes
 	dput buildbot fusionforge*changes
-	rsync -av --delete-after /var/lib/jenkins/deb/ ffbuildbot@fusionforge.org:/home/groups/fusionforge/htdocs/deb/
+	rsync -av --delete-after --exclude=/mini-dinstall --exclude=/*.db --delete-excluded /var/lib/jenkins/deb/ ffbuildbot@fusionforge.org:/home/groups/fusionforge/htdocs/deb/
 	;;
     rpm)
 	rpmsign --addsign $WORKSPACE/packages/noarch/*.rpm
