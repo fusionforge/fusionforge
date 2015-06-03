@@ -1,3 +1,14 @@
+FusionForge 6.0.1:
+* Accounts: accept elliptic curve ssh keys (Unit 193)
+* Accounts: fix project join request form (Inria)
+* SCM: fix commit privileges (*_scmro group membership) (Inria)
+* FRS: display new releases first (Roland Mas, for Inria)
+* Tracker: fix description re-html-ization when editing item (Inria)
+* Widgets: MyProjects: only display active projects (Inria)
+* Plugin scmhook: git commitemail: fix subject, handle special chars (Roland Mas, for Inria)
+* Plugin scmhook: fix hook deactivation (Inria)
+* Doc clean-up (Inria)
+
 FusionForge 6.0:
 * New install system [#710] (Inria)
 * Reactivity: system replication is now performed immediately (rather than waiting for cron jobs) [#147] (Inria)
