@@ -57,6 +57,9 @@ function pg_connectstring($dbname, $user, $password = "", $host = "", $port = ""
 	if ($port != "") {
 		$string .= " port=$port";
 	}
+	# using SSL breaks util_sudo_effective_user
+	# ("SSL error: decryption failed or bad record mac" for parent's new queries)
+	$string .= " sslmode=disable";
 	return $string;
 }
 

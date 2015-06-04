@@ -36,9 +36,9 @@ class ArtifactHtml extends Artifact {
 	function showDetails($editable = false) {
 		global $HTML;
 		$result = $this->getDetails();
-		$result = util_gen_cross_ref($result, $this->ArtifactType->Group->getID());
+		$result_html = util_gen_cross_ref($result, $this->ArtifactType->Group->getID());
 		//$result = util_line_wrap( $result, 120,"\n");
-		$result = nl2br($result);
+		$result_html = nl2br($result_html);
 
 		$title_arr = array();
 		if ($editable === true) {
@@ -51,7 +51,7 @@ class ArtifactHtml extends Artifact {
 		}
 		echo $HTML->listTableTop($title_arr);
 		echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle(0, true), 'id' => 'editdescription', 'style' => 'display:none'), array(array(html_e('textarea', array('id' => 'tracker-description', 'required' => 'required', 'name' => 'description', 'rows' => 20, 'cols' => 79, 'title' => util_html_secure(html_get_tooltip_description('description'))), $result))));
-		echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle(0, true), 'id' => 'showdescription'), array(array($result)));
+		echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle(0, true), 'id' => 'showdescription'), array(array($result_html)));
 		echo $HTML->listTableBottom();
 	}
 

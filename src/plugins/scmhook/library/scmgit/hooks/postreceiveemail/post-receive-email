@@ -251,11 +251,6 @@ generate_email()
 	# Email parameters
 	# The email subject will contain the best description of the ref
 	# that we can build from the parameters
-	describe=$(git describe $rev 2>/dev/null)
-	if [ -z "$describe" ]; then
-		describe=$rev
-	fi
-
 	generate_email_header
 
 	# Call the correct body generation function
@@ -287,6 +282,12 @@ generate_email_header()
 	test -n "$envelopesender" && routing_headers="From: $envelopesender${nl}$routing_headers"
 	test -n "$replyto" && routing_headers="$routing_headers${nl}Reply-To: $replyto"
 
+	subj="Subject: ${emailprefix}$shortdesc $refname_type $short_refname ${change_type}d. $(git show --no-patch --format='%h %s' $newrev)"
+	subj=$(print -nr -- "$subj" | php -r '
+mb_internal_encoding("UTF-8");
+echo mb_encode_mimeheader(file_get_contents("php://stdin"),
+"UTF-8", "Q", "\012");')
+	
 	cat <<-EOF
 	MIME-Version: 1.0
 	Content-Type: text/plain; charset=UTF-8
@@ -296,7 +297,7 @@ generate_email_header()
 	X-Git-Reftype: $refname_type
 	X-Git-Oldrev: $oldrev
 	X-Git-Newrev: $newrev
-	$(perl -Mutf8 -MEncode -e "print encode('MIME-Q', 'Subject: ${emailprefix}$shortdesc $refname_type $short_refname ${change_type}d. $describe');")
+        $subj
 	Auto-Submitted: auto-generated
 
 	This is an automated email from the git hooks/post-receive script. It was

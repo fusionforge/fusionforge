@@ -113,7 +113,6 @@ if ($external_scm) {
 		curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);  // for session validation
 		curl_setopt($ch, CURLOPT_HTTPHEADER,
 					array('Accept-Language: '.$_SERVER['HTTP_ACCEPT_LANGUAGE'],  // for i18n
-						  'Accept-Encoding: '.$_SERVER['HTTP_ACCEPT_ENCODING'],  // for compression
 						  'X-Forwarded-For: '.$_SERVER['REMOTE_ADDR']));  // for session validation
 		$content = curl_exec($ch);
 		if ($content === false) {
