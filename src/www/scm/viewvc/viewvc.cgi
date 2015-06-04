@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # Locate ViewVC and run it
+# (local CGI version, see also plugins/scmsvn/libexec/viewvc.cgi)
 
 import sys
 import os
