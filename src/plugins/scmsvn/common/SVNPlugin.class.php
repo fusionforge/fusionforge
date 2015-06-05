@@ -120,7 +120,7 @@ some control over it to the project's administrator.");
 		$b .= '<p>' ;
 		$module = $this->topModule($project);
 		if (forge_get_config('use_ssh', 'scmsvn')) {
-			$b .= '<tt>svn checkout svn://'.$this->getBoxForProject($project).$this->svn_root_fs.'/'.$project->getUnixName().$module.'</tt><br />';
+			$b .= '<tt>svn checkout svn://'.forge_get_config('scm_host').$this->svn_root_fs.'/'.$project->getUnixName().$module.'</tt><br />';
 		}
 		if (forge_get_config('use_dav', 'scmsvn')) {
 				$b .= '<p><tt>svn checkout http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. forge_get_config('scm_host'). '/anonscm/svn/'.$project->getUnixName().$module.'</tt></p>' ;
@@ -148,7 +148,7 @@ some control over it to the project's administrator.");
 				$b .= ' ';
 				$b .= _('Enter your site password when prompted.');
 				$b .= '</p>';
-				$b .= '<p><tt>svn checkout svn+ssh://'.$d.'@' . $this->getBoxForProject($project) . $this->svn_root_fs .'/'. $project->getUnixName().$module.'</tt></p>' ;
+				$b .= '<p><tt>svn checkout svn+ssh://'.$d.'@' . forge_get_config('scm_host') . $this->svn_root_fs .'/'. $project->getUnixName().$module.'</tt></p>' ;
 			}
 			if (forge_get_config('use_dav', 'scmsvn')) {
 				$b .= '<h2>';
@@ -175,7 +175,7 @@ some control over it to the project's administrator.");
 				$b .= ' ';
 				$b .= _('Enter your site password when prompted.');
 				$b .= '</p>';
-				$b .= '<p><tt>svn checkout svn+ssh://<i>'._('developername').'</i>@' . $this->getBoxForProject($project) . $this->svn_root_fs .'/'. $project->getUnixName().$module.'</tt></p>' ;
+				$b .= '<p><tt>svn checkout svn+ssh://<i>'._('developername').'</i>@' . forge_get_config('scm_host') . $this->svn_root_fs .'/'. $project->getUnixName().$module.'</tt></p>' ;
 			}
 			if (forge_get_config('use_dav', 'scmsvn')) {
 				$b .= '<h2>';
