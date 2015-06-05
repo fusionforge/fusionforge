@@ -93,8 +93,6 @@ function rebuild_one_rpm {
 	done
     fi
 
-    mkdir -p /usr/src/fusionforge/build/RPMS/
-
     if [ $rebuild_needed = yes ] ; then
 	yumdownloader $enablefedsrc --source $src
 
@@ -117,7 +115,6 @@ function rebuild_one_rpm {
 	done
 	for i in $target $others ; do
 	    yum install -y ~/rpmbuild/RPMS/*/$i-[0-9]*.*.rpm || rpm -i ~/rpmbuild/RPMS/*/$i-[0-9]*.*.rpm
-	    cp $i-[0-9]*.*.rpm /usr/src/fusionforge/build/RPMS/
 	done
     else
 	yum install -y $target $others
@@ -267,6 +264,9 @@ EOF
     DEPS=""
     REMOVEDEPS=$DEPS
     backport_rpm_from_fedora php-htmlpurifier-htmlpurifier
+
+    mkdir -p /usr/src/fusionforge/build/RPMS/
+    cp -r ~/rpmbuild/RPMS/* /usr/src/fusionforge/build/RPMS/
 
     # TODO: postfix: rebuild from RHEL/CentOS sources with pgsql enabled,
     # so we can test mta-postfix
