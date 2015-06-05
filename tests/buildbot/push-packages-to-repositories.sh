@@ -41,7 +41,7 @@ case $method in
 	rsync -av --delete-after --exclude=/mini-dinstall --exclude=/*.db --delete-excluded /var/lib/jenkins/deb/ ffbuildbot@fusionforge.org:/home/groups/fusionforge/htdocs/deb/
 	;;
     rpm)
-	rpmsign --addsign $WORKSPACE/packages/noarch/*.rpm
+	rpmsign --addsign $WORKSPACE/packages/*/*.rpm
 	gpg --detach-sign --armor $WORKSPACE/packages/repodata/repomd.xml
 	rsync -av --delete $WORKSPACE/packages/ /var/lib/jenkins/rpm/$dist-$branch/
 	rsync -av --delete-after  /var/lib/jenkins/rpm/ ffbuildbot@fusionforge.org:/home/groups/fusionforge/htdocs/rpm/
