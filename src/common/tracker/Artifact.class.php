@@ -1607,7 +1607,7 @@ class Artifact extends Error {
 		$efd = $this->getExtraFieldDataText();
 		foreach ($efd as $efid => $ef) {
 			$body .= $this->marker('extra_fields', $changes, $efid);
-			$body .= $ef["name"].": ".$ef["value"]."\n";
+			$body .= $ef["name"].": ".htmlspecialchars_decode($ef["value"])."\n";
 		}
 
 		$subject='['. $this->ArtifactType->Group->getUnixName() . '-' . $name . ']' . $this->getStringID() .' '. util_unconvert_htmlspecialchars( $this->getSummary() );
