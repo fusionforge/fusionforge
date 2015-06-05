@@ -7,6 +7,7 @@ FusionForge 6.0.1:
 * Tracker: fix HTML entities in mail notifications (Inria)
 * Widgets: MyProjects: only display active projects (Inria)
 * SCM SVN: fix double-compression in ViewVC (Inria)
+* SCM SVN: support files with spaces in ViewVC (Inria)
 * Plugin scmhook: git commitemail: fix subject, handle special chars (Roland Mas, for Inria)
 * Plugin scmhook: fix hook deactivation (Inria)
 * Doc clean-up (Inria)
