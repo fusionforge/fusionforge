@@ -169,12 +169,91 @@ class Theme extends Layout {
 		return $template->render($vars);
 	}
 	function header($params) {
-		// TODO
-		return parent::header($params);
+		$this->headerStart($params);
+		$this->bodyHeader($params);
 	}
 	function headerStart($params) {
-		// TODO
-		return parent::headerStart($params);
+		$this->headerHTMLDeclaration();
+
+		$template = $this->twig->loadTemplate('headerStart.html');
+
+		$vars = array();
+
+		$vars['forge_name'] = forge_get_config('forge_name');
+		if (isset($params['title'])) {
+			$vars['title'] = $params['title'];
+		}
+		if (isset($params['meta-description'])) {
+			$vars['meta_description'] = $params['meta-description'];
+		}
+		if (isset($params['meta-keywords'])) {
+			$vars['meta keywords'] = $params['meta-keywords'];
+		}
+		$vars['favicon_url'] = util_make_uri('/images/icon.png');
+		$vars['search_url'] = util_make_uri('/export/search_plugin.php');
+
+		$vars['rssfeeds'] = array(
+			array('title' => forge_get_config ('forge_name').' - Project News Highlights RSS',
+				  'url' => util_make_uri('/export/rss_sfnews.php')),
+			array('title' => forge_get_config ('forge_name').' - Project News Highlights RSS 2.0',
+				  'url' => util_make_uri('/export/rss20_news.php')),
+			array('title' => forge_get_config ('forge_name').' - New Projects RSS',
+				  'url' => util_make_uri('/export/rss_sfprojects.php')),
+			);
+		if (isset($GLOBALS['group_id'])) {
+			$vars['rssfeeds'][] = array('title' => forge_get_config ('forge_name') . ' - New Activity RSS',
+										'url' => util_make_uri('/export/rss20_activity.php?group_id='.$GLOBALS['group_id']));
+		}
+
+		plugin_hook("javascript_file");
+		plugin_hook("css_file");
+		$vars['javascripts'] = array();
+		foreach ($this->javascripts as $js) {
+			$vars['javascripts'][] = util_make_uri($js);
+		}
+
+		$sheets = array();
+		foreach ($this->stylesheets as $c) {
+			$sheet = array('url' => util_make_uri($c['css']));
+			if ($c['media']) {
+				$sheet['media'] = $c['media'];
+			} else {
+				$sheet['media'] = '';
+			}
+			$sheets[] = $sheet;
+		}
+		$vars['stylesheets'] = $sheets;
+
+		$ff = new FusionForge();
+		$vars['software_name'] = $ff->software_name;
+		$vars['software_version'] = $ff->software_version;
+
+
+
+		$script_name = getStringFromServer('SCRIPT_NAME');
+		$end = strpos($script_name,'/',1);
+		if($end) {
+			$script_name = substr($script_name,0,$end);
+		}
+
+		// Only activated for /projects, /users or /softwaremap for the moment
+		$vars['alt_representations'] = array();
+		if ($script_name == '/projects' || $script_name == '/users' || $script_name == '/softwaremap') {
+
+			$php_self = getStringFromServer('PHP_SELF');
+
+			// invoke the 'alt_representations' hook to add potential 'alternate' links (useful for Linked Data)
+			// cf. http://www.w3.org/TR/cooluris/#linking
+			$params = array('script_name' => $script_name,
+							'php_self' => $php_self,
+							'return' => array());
+
+			plugin_hook_by_reference('alt_representations', $params);
+
+			$vars['alt_representations'] = $params['return'];
+		}
+		
+		print $template->render($vars);
 	}
 	function headerHTMLDeclaration() {
 		global $sysDTDs, $sysXMLNSs;
@@ -191,38 +270,6 @@ class Theme extends Layout {
 		$vars['ns'] = $sysXMLNSs;
 
 		print $template->render($vars);
-	}
-	function headerTitle($params) {
-		// TODO
-		return parent::headerTitle($params);
-	}
-	function headerFavIcon() {
-		// TODO
-		return parent::headerFavIcon();
-	}
-	function headerRSS() {
-		// TODO
-		return parent::headerRSS();
-	}
-	function headerSearch() {
-		// TODO
-		return parent::headerSearch();
-	}
-	function headerCSS() {
-		// TODO
-		return parent::headerCSS();
-	}
-	function headerJS() {
-		// TODO
-		return parent::headerJS();
-	}
-	function headerLinkedDataAutodiscovery() {
-		// TODO
-		return parent::headerLinkedDataAutodiscovery();
-	}
-	function headerForgepluckerMeta() {
-		// TODO
-		return parent::headerForgepluckerMeta();
 	}
 	function bodyHeader($params){
 		// TODO

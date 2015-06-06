@@ -177,7 +177,7 @@ class Layout extends Error {
 			if (file_exists($filename)) {
 				$js .= '?'.date ("U", filemtime($filename));
 			} else {
-				$filename = str_replace('/scripts/', $GLOBALS['fusionforge_basedir'].'/vendor/', $js);
+				$filename = preg_replace(',^/scripts/', $GLOBALS['fusionforge_basedir'].'/vendor/', $js);
 				if (file_exists($filename)) {
 					$js .= '?'.date ("U", filemtime($filename));
 				}
@@ -341,23 +341,25 @@ class Layout extends Error {
 	 */
 	function headerJS() {
 		echo html_e('script', array('type' => 'text/javascript', 'src' => util_make_uri('/js/common.js')), '', false);
-		echo '	<script type="text/javascript">/* <![CDATA[ */';
-		plugin_hook ("javascript");
-		echo '
-			/* ]]> */</script>';
-		plugin_hook ("javascript_file");
-		echo $this->getJavascripts();
-
 		// invoke the 'javascript' hook for custom javascript addition
 		$params = array('return' => false);
 		plugin_hook("javascript",$params);
 		$javascript = $params['return'];
 		if($javascript) {
-			echo '<script type="text/javascript">';
+			echo '	<script type="text/javascript">/* <![CDATA[ */';
 			echo $javascript;
 			echo '
-			</script>';
+			/* ]]> */</script>';
 		}
+
+		$params = array('return' => array());
+		plugin_hook("javascript_file",$params);
+		$javascript = $params['return'];
+		plugin_hook ("javascript_file");
+		foreach ($params['return'] as $js) {
+			$this->javascripts[] = $js;
+		}
+		echo $this->getJavascripts();
 	}
 
 	/**
@@ -387,7 +389,8 @@ class Layout extends Error {
 			plugin_hook_by_reference('alt_representations', $params);
 
 			foreach($params['return'] as $link) {
-				echo "                        $link"."\n";
+				printf('<link rel="%s" type="%s" title="%s" href="%s" />',
+					   $link['rel'],$link['type'],$link['title'],$link['href']);
 			}
 		}
 	}

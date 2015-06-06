@@ -325,8 +325,6 @@ had been written.
   Description: Provides a place to add inline Javascript into the page.
                The output (in $params['return']) of the hook should be pure Javascript, as it will
                be placed within an existing <script> block.
-  [TODO: The output of the hook appears after the closing SGML comment marker
-   and before the closing </script> element. Is this what is really indended?]
 
   Hook Name  : javascript_file
   Locations  : www/include/Layout.class.php (function headerJS)
@@ -535,7 +533,7 @@ TODO : document Auth plugins :
 
   Hook Name  : alt_representations
   Parameters : $params['script_name'] contains the SCRIPT_NAME (filtered to work only on /projects or /users for the moment)
-  Description: returns alternate representations for a particular page in $params['results'] which is populated by the hook users 
+  Description: returns alternate representations for a particular page in $params['results'] which is populated by the hook users (in an array of arrays with rel/type/title/href keys)
 
   Hook Name  : content_negociated_projects_list
   Parameters : $params['accept'] provides the content-type to be rendered

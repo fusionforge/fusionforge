@@ -126,16 +126,34 @@ projects on /projects URLs with content-negotiation
 		$script_name = $params['script_name'];
 		$php_self = $params['php_self'];
 		if ($php_self == '/softwaremap/trove_list.php') {
-			$params['return'][] = '<link rel="alternate" type="application/rdf+xml" title="ADMS.SW RDF Data" href="'. util_make_url ("/plugins/admssw/trove.php") .'"/>';
-			$params['return'][] = '<link rel="alternate" type="text/turtle" title="ADMS.SW RDF Data" href="'. util_make_url ("/plugins/admssw/trove.php") .'"/>';
+			$params['return'][] = array("rel"=>"alternate",
+										"type"=>"application/rdf+xml",
+										"title"=>"ADMS.SW RDF Data",
+										"href"=>util_make_url ("/plugins/admssw/trove.php"));
+			$params['return'][] = array("rel"=>"alternate",
+										"type"=>"text/turtle",
+										"title"=>"ADMS.SW RDF Data",
+										"href"=>util_make_url ("/plugins/admssw/trove.php"));
 		}
 		elseif ($script_name == '/softwaremap') {
-			$params['return'][] = '<link rel="alternate" type="application/rdf+xml" title="ADMS.SW RDF Data" href="'. util_make_url ("/projects") .'"/>';
-			$params['return'][] = '<link rel="alternate" type="text/turtle" title="ADMS.SW RDF Data" href="'. util_make_url ("/projects") .'"/>';
+			$params['return'][] = array("rel"=>"alternate",
+										"type"=>"application/rdf+xml",
+										"title"=>"ADMS.SW RDF Data",
+										"href"=>util_make_url ("/projects"));
+			$params['return'][] = array("rel"=>"alternate",
+										"type"=>"text/turtle",
+										"title"=>"ADMS.SW RDF Data",
+										"href"=>util_make_url ("/projects"));
 		}
 		else if($script_name == '/projects') {
-			$params['return'][] = '<link rel="alternate" type="application/rdf+xml" title="ADMS.SW RDF Data" href="'. util_make_url ($php_self) .'"/>';
-			$params['return'][] = '<link rel="alternate" type="text/turtle" title="ADMS.SW RDF Data" href="'. util_make_url ($php_self) .'"/>';
+			$params['return'][] = array("rel"=>"alternate",
+										"type"=>"application/rdf+xml",
+										"title"=>"ADMS.SW RDF Data",
+										"href"=>util_make_url ($php_self));
+			$params['return'][] = array("rel"=>"alternate",
+										"type"=>"text/turtle",
+										"title"=>"ADMS.SW RDF Data",
+										"href"=>util_make_url ($php_self));
 		}
 	}
 

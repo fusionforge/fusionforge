@@ -183,7 +183,7 @@ class ForumMLPlugin extends Plugin {
 		//$request =& HTTPRequest::instance();
 		if (strpos($_SERVER['REQUEST_URI'], $this->getPluginPath()) === 0) {
 			//echo '<link rel="stylesheet" type="text/css" href="'.$this->getThemePath().'/css/style.css" />'."\n";
-			echo '<script type="text/javascript" src="'.$this->getPluginPath().'/scripts/forumml.js"></script>'."\n";
+			use_javascript($this->getPluginPath().'/scripts/forumml.js');
 		}
 	}
 

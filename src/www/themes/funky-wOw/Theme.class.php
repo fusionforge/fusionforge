@@ -374,6 +374,8 @@ class Theme extends Layout {
 			echo "\n".'//]]'."\n";
 			echo html_ac(html_ap() -1);
 		}
+		// invoke the 'javascript_file' hook for custom javascript addition
+		plugin_hook("javascript_file",$params);
 		html_use_storage();
 		html_use_coolfieldset();
 		html_use_jqueryui();

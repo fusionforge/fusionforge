@@ -43,7 +43,6 @@ control over it to the project administrator.");
 		//$this->_addHook("userisactivecheckbox") ; // The "use ..." checkbox in user account
 		//$this->_addHook("userisactivecheckboxpost") ; //
 		$this->_addHook("project_admin_plugins"); // to show up in the admin page fro group
-		$this->_addHook('javascript',  false);
 		$this->_addHook('cssfile', 'cssFile', false);
 		$this->_addHook('group_delete', 'projectIsDeleted', false);
 		$this->_addHook('widget_instance', 'myPageBox', false);

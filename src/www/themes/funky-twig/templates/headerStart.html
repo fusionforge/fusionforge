@@ -1,0 +1,38 @@
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    {% if meta_description %}
+    <meta name="description" content="{{ meta_description }}" />
+    {% endif %}
+    {% if meta_keywords %}
+    <meta name="keywords" content="{{ meta_keywords }}" />
+    {% endif %}
+    {% if title %}
+    <title>{{ forge_name }}: {{ title }}</title>
+    {% else %}
+    <title>{{ forge_name }}</title>
+    {% endif %}
+    <link rel="icon" type="image/png" href="{{ favicon_url }}" />
+    <link rel="shortcut icon" type="image/png" href="{{ favicon_url }}" />
+
+    {% for f in rssfeeds %}
+    <link rel="alternate" title="{{ f.title }}" href="{{ f.url }}" type="application/rss+xml" />
+    {% endfor %}
+
+    <link rel="search" title="{{ forge_name }}" href="{{ search_url }}" type="application/opensearchdescription+xml" />
+
+    {% for s in javascripts %}
+    <script type="text/javascript" src="{{ s }}"></script>
+    {% endfor %}
+
+    {% for s in stylesheets %}
+    <link type="text/css" href="{{ s.url }}" {% if m %} media="{{ s.media }}" {% endif %} />
+    {% endfor %}
+
+    <meta name="Forge-Identification" content="{{ software_name }}:{{ software_version }}" />
+
+    {% for a in alt_representations %}
+    <link type="{{ a.type }}" href="{{ a.href }}" rel="{{ a.rel }}" title="{{ a.title }}" />
+    {% endfor %}
+
+  </head>
+  <body>
