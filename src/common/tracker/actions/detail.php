@@ -157,6 +157,9 @@ foreach ($pluginsListeners as $pluginsListener) {
 	<li><a href="#tabber-commits"><?php echo _('Commits'); ?></a></li>
 	<?php } ?>
 	<li><a href="#tabber-changes"><?php echo _('Changes'); ?></a></li>
+	<?php if ($ah->hasRelations()) { ?>
+	<li><a href="#tabber-relations"><?php echo _('Relations'); ?></a></li>
+	<?php } ?>
 	</ul>
 	<div id="tabber-comments" class="tabbertab" title="<?php echo _('Comments').$nb; ?>">
 		<table width="80%">
