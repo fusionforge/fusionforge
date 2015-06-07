@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2015, Franck Villaume - TrivialDev
  * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
  * http://fusionforge.org/
  *
@@ -159,6 +159,9 @@ foreach ($pluginsListeners as $pluginsListener) {
 	<li><a href="#tabber-commits"><?php echo _('Commits'); ?></a></li>
 	<?php } ?>
 	<li><a href="#tabber-changes"><?php echo _('Changes'); ?></a></li>
+	<?php if ($ah->hasRelations()) { ?>
+	<li><a href="#tabber-relations"><?php echo _('Relations'); ?></a></li>
+	<?php } ?>
 	</ul>
 	<div id="tabber-comments" class="tabbertab" title="<?php echo _('Comments').$nb; ?>">
 		<table width="80%">
