@@ -177,7 +177,7 @@ class Layout extends Error {
 			if (file_exists($filename)) {
 				$js .= '?'.date ("U", filemtime($filename));
 			} else {
-				$filename = preg_replace(',^/scripts/', $GLOBALS['fusionforge_basedir'].'/vendor/', $js);
+				$filename = preg_replace(',^/scripts/,', $GLOBALS['fusionforge_basedir'].'/vendor/', $js);
 				if (file_exists($filename)) {
 					$js .= '?'.date ("U", filemtime($filename));
 				}
