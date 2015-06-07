@@ -6,7 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2011-2014, Franck Villaume - TrivialDev
+ * Copyright 2011-2015, Franck Villaume - TrivialDev
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
@@ -160,7 +160,7 @@ class Document extends Error {
 			}
 		}
 
-		$dg = new DocumentGroup($this->getGroup(), $doc_group);
+		$dg = documentgroup_get_object($doc_group);
 		if ($dg->hasDocument($filename)) {
 			$this->setError(_('Document already published in this folder').' '.$dg->getPath());
 			return false;
@@ -243,7 +243,7 @@ class Document extends Error {
 		}
 
 		if ($perm->isDocEditor()) {
-			$localDg = new DocumentGroup($this->Group, $doc_group);
+			$localDg = documentgroup_get_object($doc_group);
 			if (!$localDg->update($localDg->getName(), $localDg->getParentID(), 1)) {
 				$this->setError(_('Error updating document group')._(': ').$localDg->getErrorMessage());
 				if ($filesize) {
@@ -818,9 +818,9 @@ class Document extends Error {
 			return false;
 		}
 
-		$dg = new DocumentGroup($this->getGroup(), $doc_group);
-		if ($dg->hasDocument($filename)) {
-			$this->setError(_('Document already published in this folder').' '.$dg->getPath());
+		$localDg = documentgroup_get_object($doc_group);
+		if ($localDg->hasDocument($filename)) {
+			$this->setError(_('Document already published in this folder').' '.$localDg->getPath());
 			return false;
 		}
 
@@ -832,7 +832,6 @@ class Document extends Error {
 			return false;
 		}
 
-		$localDg = new DocumentGroup($this->Group, $doc_group);
 		if (!$localDg->update($localDg->getName(), $localDg->getParentID(), 1)) {
 			$this->setOnUpdateError(_('Error updating document group')._(': ').$localDg->getErrorMessage());
 			db_rollback();
@@ -875,7 +874,7 @@ class Document extends Error {
 		if ($this->isMonitoredBy('ALL')) {
 			$BCC .= $this->getMonitoredUserEmailAddress();
 		}
-		$dg = new DocumentGroup($this->Group, $this->getDocGroupID());
+		$dg = documentgroup_get_object($this->getDocGroupID());
 		if ($dg->isMonitoredBy('ALL')) {
 			$BCC .= $dg->getMonitoredUserEmailAddress();
 		}
@@ -1069,7 +1068,7 @@ class Document extends Error {
 			$this->setOnUpdateError(db_error());
 			return false;
 		}
-		$localDg = new DocumentGroup($this->Group, $this->getDocGroupID());
+		$localDg = documentgroup_get_object($this->getDocGroupID());
 		if (!$localDg->update($localDg->getName(), $localDg->getParentID(), 1)) {
 			$this->setError(_('Error updating document group')._(': ').$localDg->getErrorMessage());
 			return false;
