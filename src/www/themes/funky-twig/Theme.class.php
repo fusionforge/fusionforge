@@ -393,21 +393,33 @@ class Theme extends Layout {
 		// TODO
 		return parent::multiTableRow($row_attrs, $cell_data, $istitle);
 	}
-	function feedback($feedback) {
-		// TODO
-		return parent::feedback($feedback);
+	function feedback($msg) {
+		$template = $this->twig->loadTemplate('feedback.html');
+
+		$vars = array('message' => strip_tags($msg, '<br>'));
+
+		return $template->render($vars);
 	}
 	function warning_msg($msg) {
-		// TODO
-		return parent::warning_msg($msg);
+		$template = $this->twig->loadTemplate('warningMessage.html');
+
+		$vars = array('message' => strip_tags($msg, '<br>'));
+
+		return $template->render($vars);
 	}
 	function error_msg($msg) {
-		// TODO
-		return parent::error_msg($msg);
+		$template = $this->twig->loadTemplate('errorMessage.html');
+
+		$vars = array('message' => strip_tags($msg, '<br>'));
+
+		return $template->render($vars);
 	}
 	function information($msg) {
-		// TODO
-		return parent::information($msg);
+		$template = $this->twig->loadTemplate('information.html');
+
+		$vars = array('message' => strip_tags($msg, '<br>'));
+
+		return $template->render($vars);
 	}
 	function confirmBox($msg, $params, $buttons, $image='*none*') {
 		$template = $this->twig->loadTemplate('ConfirmBox.html');
