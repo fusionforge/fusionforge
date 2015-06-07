@@ -3,6 +3,7 @@
  * Update Artifact Type Form
  *
  * Copyright 2010, FusionForge Team
+ * Copyright 2015, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -22,6 +23,8 @@
  */
 
 require_once 'common/tracker/ArtifactWorkflow.class.php';
+
+global $HTML;
 
 $has_error = false;
 $efarr = $ath->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_STATUS));
@@ -55,7 +58,9 @@ if (!$has_error) {
 ?>
 
 	<h2><?php printf(_('Allowed initial values for the %s field'), $field_name) ?></h2>
-	<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post">
+<?php
+echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&amp;atid='.$ath->getID(), 'method' => 'post'));
+?>
 	<input type="hidden" name="field_id" value="<?php echo $field_id ?>" />
 	<input type="hidden" name="workflow" value="1" />
 
@@ -69,7 +74,7 @@ if (!$has_error) {
 	foreach ($elearray as $status) {
 		$title_arr[]=$status['element_name'];
 	}
-	echo $GLOBALS['HTML']->listTableTop($title_arr, false, ' ');
+	echo $HTML->listTableTop($title_arr, false, ' ');
 	echo "\n";
 
 	// Special treatement for the initial value (in the Submit form).
@@ -83,14 +88,14 @@ if (!$has_error) {
 		echo '<td class="align-center">'.$str.'</td>'."\n";
 	}
 	echo '</tr>'."\n";
-	echo $GLOBALS['HTML']->listTableBottom();
+	echo $HTML->listTableBottom();
 
 	$count=count($title_arr);
 	$totitle_arr = array();
 	for ($i=0; $i<$count; $i++) {
 		$totitle_arr[] = $title_arr[$i]? $to.$title_arr[$i] : '';
 	}
-	echo $GLOBALS['HTML']->listTableTop($totitle_arr, false, ' ');
+	echo $HTML->listTableTop($totitle_arr, false, ' ');
 
 	$i=1;
 	foreach ($elearray as $status) {
@@ -102,8 +107,8 @@ if (!$has_error) {
 				$value = in_array($s['element_id'], $next)? ' checked="checked"' : '';
 				$str = '<input type="checkbox" name="'.$name.'"'.$value.' />';
 				if ($value) {
-					$url = getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;workflow_roles=1&amp;from='.$status['element_id'].'&amp;next='.$s['element_id'];
-					$str .= ' <a href="'.$url.'" title="Edit roles">'.html_image('ic/acl_roles20.png', 20, 20, array('alt'=>'Edit Roles')).'</a>';
+					$url = '/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&workflow_roles=1&from='.$status['element_id'].'&next='.$s['element_id'];
+					$str .= util_make_link($url, html_image('ic/acl_roles20.png', 20, 20, array('alt'=>_('Edit Roles'))), array('title' => _('Edit roles')));
 				} else {
 					$str .= ' '.html_image('spacer.gif', 20, 20);
 				}
@@ -115,14 +120,14 @@ if (!$has_error) {
 		}
 		echo '</tr>'."\n";
 	}
-	echo $GLOBALS['HTML']->listTableBottom();
+	echo $HTML->listTableBottom();
 
 ?>
 <div class="tips">Tip: Click on <?php echo html_image('ic/acl_roles20.png', 20, 20, array('alt'=> _('Edit Roles'))) ?> to configure allowed roles for a transition (all by default).</div>
 <p>
 <input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
-</form>
 <?php
+	echo $HTML->closeForm();
 }
 
 $ath->footer();

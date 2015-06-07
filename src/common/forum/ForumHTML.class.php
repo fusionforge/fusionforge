@@ -6,7 +6,7 @@
  * Copyright 2002, Tim Perdue - GForge, LLC
  * Copyright 2010 (c) Franck Villaume - Capgemini
  * Copyright (C) 2010-2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013-2014, Franck Villaume - TrivialDev
+ * Copyright 2013-2015, Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of National Education
  * http://fusionforge.org
  *
@@ -300,9 +300,8 @@ class ForumHTML extends Error {
 	 */
 	function LinkAttachEditForm($filename,$group_id,$forum_id,$attachid,$msg_id) {
 		global $HTML;
-		$return_val = '
-
-			<form action="' . getStringFromServer('PHP_SELF') . '" method="post" enctype="multipart/form-data">
+		$return_val = $HTML->openForm(array('method' => 'post', 'enctype' => 'multipart/form-data', 'action' => '/forum/attachment.php?attach_id='.$attachid.'group='.$group_id.'&forum_id='.$forum_id.'&msg_id='.$msg_id));
+		$return_val .='
 			<table>
 			<tr>
 				<td>' . _('Current File') . ": <span class=\"selected\">" . $filename . '</span></td>
@@ -329,9 +328,8 @@ class ForumHTML extends Error {
 			<input type="hidden" name="group_id" value="'.$group_id.'" />
 			<input type="hidden" name="attachid" value="'.$attachid.'" />
 			<input type="hidden" name="msg_id" value="'.$msg_id.'" />
-			</fieldset>
-			</form>
-			<p/>';
+			</fieldset>';
+		$return_val .= $HTML->closeForm();
 		return $return_val;
 	}
 

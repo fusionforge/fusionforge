@@ -4,7 +4,7 @@
  *
  * Copyright 2002 GForge, LLC
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2015 Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -28,6 +28,7 @@ global $ah;
 global $group_id;
 global $aid;
 global $atid;
+global $HTML;
 
 $ath->header(array ('title'=>_('Delete artifact').': [#'. $ah->getID(). '] ' . $ah->getSummary(),
 					'atid'=>$ath->getID()));
@@ -41,7 +42,9 @@ $ath->header(array ('title'=>_('Delete artifact').': [#'. $ah->getID(). '] ' . $
 <td>
 <fieldset>
 <legend><?php echo _('Confirm Delete'); ?></legend>
-<form action="<?php echo getStringFromServer('PHP_SELF')."?aid=$aid&amp;group_id=$group_id"; ?>" method="post">
+<?php
+echo $HTML->openForm(array('action' => '/tracker/?aid='.$aid.'&group_id='.$group_id, 'method' => 'post'));
+?>
 <input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>" />
 <input type="hidden" name="func" value="postdeleteartifact" />
 <input type="hidden" name="atid" value="<?php echo $atid; ?>" />
@@ -56,7 +59,9 @@ $ath->header(array ('title'=>_('Delete artifact').': [#'. $ah->getID(). '] ' . $
 </p>
 <p class="align-center"><input type="submit" value="<?php echo _('Delete'); ?>" name="submit" />
 </p>
-</form>
+<?php
+echo $HTML->closeForm();
+?>
 </fieldset>
 </td>
 </tr>

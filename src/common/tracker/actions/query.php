@@ -3,7 +3,7 @@
  * Copyright 2005 (c) GForge Group, LLC; Anthony J. Pugliese,
  * Copyright 2010 (c) Fusionforge Team
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2015, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -29,6 +29,7 @@ global $feedback;
 global $error_msg;
 global $group_id;
 global $atid;
+global $HTML;
 
 if (!session_loggedin()) {
 	exit_not_logged_in();
@@ -253,9 +254,8 @@ echo '<table style="margin-left:auto;margin-right:auto"><tr><td>' .
 		_('Build Query').
 		'</legend>';
 
-echo '
-<form action="'.getStringFromServer('PHP_SELF').'?func=query&amp;group_id='.$group_id.'&amp;atid='.$ath->getID().'" method="post">
-<input type="hidden" name="form_key" value="'.form_generate_key().'" />
+echo $HTML->openForm(array('action' => '/tracker/?func=query&group_id='.$group_id.'&atid='.$ath->getID(), 'method' => 'post'));
+echo '<input type="hidden" name="form_key" value="'.form_generate_key().'" />
 <table align="center" border="3" cellpadding="4" rules="groups" frame="box" width="100%" class="tablecontent">
 	<tr>
 		<td>
@@ -400,7 +400,8 @@ echo '<tr>
 		</td>
 	</tr>';
 echo '
-	</table></form>';
+	</table>';
+echo $HTML->closeForm();
 echo '</fieldset></td></tr></table>';
 $ath->footer();
 

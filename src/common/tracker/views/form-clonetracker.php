@@ -3,7 +3,7 @@
  * FusionForge Tracker Cloning Form
  *
  * Copyright 2010, FusionForge Team
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014-2015	, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -53,17 +53,19 @@ if (!$g || !is_object($g)) {
 		if (empty($ata)) {
 			echo $HTML->warning_msg(_('The site administrator must first set up template trackers in the template projet with default values and set permissions propertly so you can access them.'));
 		} else {
-		?>
-		<p><?php echo _('Choose the template tracker to clone.') ?></p>
-		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post">
-		<input type="hidden" name="clone_tracker" value="y" />
-		<?php
-		echo $HTML->warning_msg(_('WARNING!!! Cloning this tracker will duplicate all the fields and all the elements from those fields into this tracker. There is nothing to prevent you from cloning multiple times or making a huge mess. If you have preexisting extrafields with same name, they will be dropped. You have been warned!'));
-		?>
-		<p><?php echo html_build_select_box_from_arrays($ids,$titles,'clone_id','',false); ?></p>
-		<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" />
-		</form>
-<?php
+			?>
+			<p><?php echo _('Choose the template tracker to clone.') ?></p>
+			<?php
+			echo $HTML->openForm(array('/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID(), 'method' => 'post'));
+			?>
+			<input type="hidden" name="clone_tracker" value="y" />
+			<?php
+			echo $HTML->warning_msg(_('WARNING!!! Cloning this tracker will duplicate all the fields and all the elements from those fields into this tracker. There is nothing to prevent you from cloning multiple times or making a huge mess. If you have preexisting extrafields with same name, they will be dropped. You have been warned!'));
+			?>
+			<p><?php echo html_build_select_box_from_arrays($ids,$titles,'clone_id','',false); ?></p>
+			<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" />
+			<?php
+			echo $HTML->closeForm();
 		}
 		$ath->footer();
 	}

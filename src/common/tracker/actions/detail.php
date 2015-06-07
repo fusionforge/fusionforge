@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2015, Franck Villaume - TrivialDev
  * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
  * http://fusionforge.org/
  *
@@ -28,6 +28,7 @@ global $ath;
 global $ah;
 global $group_id;
 global $aid;
+global $HTML;
 
 html_use_jqueryui();
 html_use_coolfieldset();
@@ -44,9 +45,9 @@ jQuery(document).ready(function() {
 });
 //]]></script>
 
-	<form id="trackerdetailform" action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&amp;atid=<?php echo $ath->getID(); ?>" method="post" enctype="multipart/form-data">
-
-<?php if (session_loggedin()) { ?>
+<?php
+echo $HTML->openForm(array('id' => 'trackerdetailform', 'action' => '/tracker/?group_id='.$group_id.'&atid='.$ath->getID(), 'method' => 'post', 'enctype' => 'multipart/form-data'));
+if (session_loggedin()) { ?>
 	<table class="fullwidth">
 		<tr>
 			<td>
@@ -60,7 +61,7 @@ jQuery(document).ready(function() {
 						$key="monitor";
 						$text=_('Monitor');
 					}
-					echo util_make_link('/tracker/?group_id='.$group_id.'&artifact_id='.$ah->getID().'&atid='.$ath->getID().'&func=monitor', html_e('strong', array(), html_image('ic/'.$img.'','20','20').' '.$text), array('id' => 'tracker-monitor', 'title' => util_html_secure(html_get_tooltip_description('monitor'))));
+					echo util_make_link('/tracker/?group_id='.$group_id.'&artifact_id='.$ah->getID().'&atid='.$ath->getID().'&func='.$key, html_e('strong', array(), html_image('ic/'.$img, 20, 20).' '.$text), array('id' => 'tracker-monitor', 'title' => util_html_secure(html_get_tooltip_description('monitor'))));
 					?>
 			</td>
 			<td><?php
@@ -74,8 +75,7 @@ jQuery(document).ready(function() {
 							$key = 'pointer_up';
 							$txt = _('Cast Vote');
 						}
-						echo '<a id="tracker-vote" alt="'.$txt.'" title="'.html_get_tooltip_description('vote').'" href="'.getselfhref(array('func' => $key)) . '">' .
-							html_image('ic/' . $key . '.png', '16', '16', array('border' => '0')) . '</a>';
+						echo util_make_link('/tracker/?group_id='.$group_id.'&artifact_id='.$ah->getID().'&atid='.$ath->getID().'&func='.$key, html_image('ic/'.$key.'.png', 16, 16, array('border' => 0)), array('id' => 'tracker-vote', 'alt' => $txt, 'title' => util_html_secure(html_get_tooltip_description('vote'))));
 					}
 					?>
 			</td>
@@ -226,9 +226,8 @@ $nb = $count? ' ('.$count.')' : '';
 	</div>
 	<?php $ah->showRelations(); ?>
 </div>
-</form>
 <?php
-
+echo $HTML->closeForm();
 $ath->footer();
 
 // Local Variables:

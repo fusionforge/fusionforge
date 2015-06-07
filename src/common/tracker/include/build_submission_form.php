@@ -3,7 +3,7 @@
  * Generic Tracker facility
  *
  * Copyright 1999-2001 (c) VA Linux Systems; 2005 GForge, LLC
- * Copyright 2012,2014, Franck Villaume - TrivialDev
+ * Copyright 2012,2015, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -29,9 +29,8 @@ function artifact_submission_form($ath, $group) {
 	*/
 	echo notepad_func();
 	echo $ath->renderSubmitInstructions();
-?>
-
-	<form id="trackeraddform" action="<?php echo getStringFromServer('PHP_SELF') . '?group_id='.$group->getID().'&amp;atid='.$ath->getID(); ?>" method="post" enctype="multipart/form-data">
+	echo $HTML->openForm(array('id' => 'trackeraddform', 'action' => '/tracker/?group_id='.$group->getID().'&atid='.$ath->getID(), 'method' => 'post', 'enctype' => 'multipart/form-data'));
+	?>
 	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>" />
 	<input type="hidden" name="func" value="postadd" />
 	<input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
@@ -119,7 +118,7 @@ function artifact_submission_form($ath, $group) {
 	</tr>
 
 	</table>
-	</form>
 <?php
+	echo $HTML->closeForm();
 	echo $HTML->addRequiredFieldsInfoBox();
 }

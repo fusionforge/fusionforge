@@ -3,7 +3,7 @@
  * Tracker Facility
  *
  * Copyright 2010 (c) FusionForge Team
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014-2015, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -51,16 +51,11 @@ if ($rows > 0) {
 		$i=$keys[$k];
 		$id=str_replace('@','',$efarr[$i]['alias']);
 		echo '<tr id="field-'.$id.'" '. $HTML->boxGetAltRowStyle($i) .">\n".
-			'<td>'.$efarr[$i]['field_name'].(($efarr[$i]['is_required']) ? utils_requiredField() : '').'<a href="'.getStringFromServer('PHP_SELF').'?update_box=1&amp;id='.
-				$efarr[$i]['extra_field_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
-				' ['._('Edit').']</a>'.
-			'<a href="'.getStringFromServer('PHP_SELF').'?deleteextrafield=1&amp;id='.
-						$efarr[$i]['extra_field_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
-						' ['._('Delete').']</a>'.
-			'<a href="'.getStringFromServer('PHP_SELF').'?copy_opt=1&amp;id='.
-						$efarr[$i]['extra_field_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
-						' ['._('Copy').']</a>'.
-			"</td>\n";
+			'<td>'.$efarr[$i]['field_name'].(($efarr[$i]['is_required']) ? utils_requiredField() : '').
+				util_make_link('/tracker/admin/?update_box=1&id='.$efarr[$i]['extra_field_id'].'&group_id='.$group_id.'&atid='.$ath->getID(), ' ['._('Edit').']').
+				util_make_link('/tracker/admin/?deleteextrafield=1&id='.$efarr[$i]['extra_field_id'].'&group_id='.$group_id.'&atid='. $ath->getID(), ' ['._('Delete').']').
+				util_make_link('/tracker/admin/?copy_opt=1&id='.$efarr[$i]['extra_field_id'].'&group_id='.$group_id.'&atid='. $ath->getID(), ' ['._('Copy').']').
+				"</td>\n";
 		echo '<td>'.$eftypes[$efarr[$i]['field_type']]."</td>\n";
 		/*
 			List of possible options for a user built Selection Box
@@ -73,14 +68,8 @@ if ($rows > 0) {
 			echo '<td>';
 			for ($j=0; $j <$optrows; $j++) {
 				echo $elearray[$j]['element_name'];
-				echo ' <a href="'.getStringFromServer('PHP_SELF').'?update_opt=1&amp;id='.
-				$elearray[$j]['element_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;boxid='.
-				$efarr[$i]['extra_field_id'].'">'.
-				'['._('Edit').']</a>';
-				echo ' <a href="'.getStringFromServer('PHP_SELF').'?delete_opt=1&amp;id='.
-				$elearray[$j]['element_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;boxid='.
-				$efarr[$i]['extra_field_id'].'">'.
-				'['._('Delete').']</a>';
+				echo util_make_link('/tracker/admin/?update_opt=1&id='.$elearray[$j]['element_id'].'&group_id='.$group_id.'&atid='.$ath->getID().'&boxid='.$efarr[$i]['extra_field_id'], ' ['._('Edit').']');
+				echo util_make_link('/tracker/admin/?delete_opt=1&id='.$elearray[$j]['element_id'].'&group_id='.$group_id.'&atid='.$ath->getID().'&boxid='.$efarr[$i]['extra_field_id'], ' ['._('Delete').']');
 				echo '<br />';
 			}
 		} else {
@@ -94,9 +83,7 @@ if ($rows > 0) {
 			|| $efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX
 			|| $efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT
 			|| $efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
-			echo '<a href="'.getStringFromServer('PHP_SELF').'?add_opt=1&amp;boxid='.
-				$efarr[$i]['extra_field_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">['.
-				_('Add/Reorder choices').']</a>';
+			echo util_make_link('/tracker/admin/?add_opt=1&boxid='.$efarr[$i]['extra_field_id'].'&group_id='.$group_id.'&atid='.$ath->getID(), '['._('Add/Reorder choices').']');
 		}
 		echo "</td>\n";
 		echo "</tr>\n";
@@ -108,8 +95,8 @@ if ($rows > 0) {
 }
 
 echo "<h2>"._('Add New Custom Field')."</h2>";
+echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID(), 'method' => 'post'));
 ?>
-<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post">
 <p>
 <input type="hidden" name="add_extrafield" value="y" />
 <strong><?php echo _('Custom Field Name').utils_requiredField()._(':'); ?></strong><br />
@@ -150,14 +137,13 @@ echo $HTML->warning_msg(_('Warning: this add new custom field'));
 <p>
 <input type="submit" name="post_changes" value="<?php echo _('Add Custom Field') ?>" />
 </p>
-</form>
 <?php
-
+echo $HTML->closeForm();
 echo "<h2>"._('Custom Field Rendering Template')."</h2>";
 
 echo "<p>";
-echo '<a href="'.getStringFromServer('PHP_SELF').'?edittemplate=1&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'._('Edit template').'</a><br />';
-echo '<a href="'.getStringFromServer('PHP_SELF').'?deletetemplate=1&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'._('Delete template').'</a><br />';
+echo util_make_link('/tracker/admin/?edittemplate=1&group_id='.$group_id.'&atid='.$ath->getID(), _('Edit template')).'<br />';
+echo util_make_link('/tracker/admin/?deletetemplate=1&group_id='.$group_id.'&atid='.$ath->getID(), _('Delete template'));
 echo "</p>";
 
 $ath->footer();
