@@ -64,14 +64,12 @@ if (session_loggedin()) {
 			<td><?php
 				if ($ah->isMonitoring()) {
 					$img="xmail16w.png";
-					$key="monitorstop";
 					$text=_('Stop Monitoring');
 				} else {
 					$img="mail16w.png";
-					$key="monitor";
 					$text=_('Monitor');
 				}
-				echo util_make_link('/tracker/?group_id='.$group_id.'&artifact_id='.$ah->getID().'&atid='.$ath->getID().'&func='.$key, html_e('strong', array(), html_image('ic/'.$img, 20, 20).' '.$text), array('id' => 'tracker-monitor', 'title' => util_html_secure(html_get_tooltip_description('monitor'))));
+				echo util_make_link('/tracker/?group_id='.$group_id.'&artifact_id='.$ah->getID().'&atid='.$ath->getID().'&func=monitor', html_e('strong', array(), html_image('ic/'.$img, 20, 20).' '.$text), array('id' => 'tracker-monitor', 'title' => util_html_secure(html_get_tooltip_description('monitor'))));
 				?>
 			</td>
 			<td><?php

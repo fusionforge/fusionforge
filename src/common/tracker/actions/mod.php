@@ -67,11 +67,9 @@ if (session_loggedin()) {
 			<td><?php
 				if ($ah->isMonitoring()) {
 					$img="xmail16w.png";
-					$key="monitorstop";
 					$text=_('Stop Monitoring');
 				} else {
 					$img="mail16w.png";
-					$key="monitor";
 					$text=_('Monitor');
 				}
 				echo util_make_link('/tracker/?group_id='.$group_id.'&artifact_id='.$ah->getID().'&atid='.$ath->getID().'&func=monitor', html_e('strong', array(), html_image('ic/'.$img.'','20','20').' '.$text), array('id' => 'tracker-monitor', 'title' => util_html_secure(html_get_tooltip_description('monitor'))));
@@ -88,8 +86,7 @@ if (session_loggedin()) {
 							$key = 'pointer_up';
 							$txt = _('Cast Vote');
 						}
-						echo '<a id="tracker-vote" alt="'.$txt.'" title="'.html_get_tooltip_description('vote').'" href="'.getselfhref(array('func' => $key)) . '">' .
-							html_image('ic/' . $key . '.png', '16', '16', array('border' => '0')) . '</a>';
+						echo util_make_link('/tracker/?group_id='.$group_id.'&artifact_id='.$ah->getID().'&atid='.$ath->getID().'&func='.$key, html_image('ic/'.$key.'.png', 16, 16, array('border' => 0)), array('id' => 'tracker-vote', 'alt' => $txt, 'title' => util_html_secure(html_get_tooltip_description('vote'))));
 					}
 				?>
 			</td>
