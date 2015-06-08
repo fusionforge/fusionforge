@@ -1,8 +1,9 @@
 <?php
-/*
+/**
  * Tracker Facility
  *
  * Copyright 2010 (c) FusionForge Team
+ * Copyright 2015, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -21,6 +22,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+global $HTML;
+
 $name = getStringFromRequest('name', $ath->getName());
 $description = getStringFromRequest('description', $ath->getDescription());
 $email_address = getStringFromRequest('email_address', $ath->getEmailAddress());
@@ -35,8 +38,8 @@ $browse_instructions = getStringFromRequest('browse_instructions', $ath->getBrow
 //
 $ath->adminHeader(array('title'=>sprintf(_('Update settings for %s'),
 	$ath->getName())));
+echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID(), 'method' => 'post'));
 ?>
-	<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post">
 	<p>
 		<input type="hidden" name="update_type" value="y" />
 		<?php echo _('<strong>Name:</strong> (examples: meeting minutes, test results, RFP Docs)') ?><br />
@@ -101,9 +104,8 @@ $ath->adminHeader(array('title'=>sprintf(_('Update settings for %s'),
 	<p>
 		<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" />
 	</p>
-	</form>
 	<?php
-
+echo $HTML->closeForm();
 	$ath->footer();
 
 // Local Variables:

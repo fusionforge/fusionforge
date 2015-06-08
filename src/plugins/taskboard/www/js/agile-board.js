@@ -141,8 +141,11 @@ function drawBoardProgress() {
 					totalTasks ++;
 					
 					if( aUserStories[i].tasks[t].estimated_dev_effort ) {
-						totalCostEstimated += parseInt( aUserStories[i].tasks[t].estimated_dev_effort );
-						totalCostRemaining += parseInt( aUserStories[i].tasks[t].remaining_dev_effort );
+						totalCostEstimated += parseFloat( aUserStories[i].tasks[t].estimated_dev_effort );
+					}
+					
+					if( aUserStories[i].tasks[t].remaining_dev_effort ) {
+						totalCostRemaining += parseFloat( aUserStories[i].tasks[t].remaining_dev_effort );
 					}
 					
 					lastPhaseWithTasks = j;
@@ -176,14 +179,14 @@ function drawBoardProgress() {
 
 	html += '</td></tr><table>';
 
-	if( parseInt(totalCostEstimated) > 0 ) {
+	if( parseFloat(totalCostEstimated) > 0 ) {
 		var totalCostCompleted = totalCostEstimated - totalCostRemaining;
 		var wt = parseInt( totalCostCompleted/totalCostEstimated * 100);
 		// show progress by cost
 		html += '<table>';
 		html += '<tr><td width="' + parseInt( 100 / aPhases.length )  + '%" style="padding: 0;">' + gMessages.progressByCost + ':</td><td style="padding: 0;">';
-		html += '<div class="agile-board-progress-bar-done" style="width: ' + wt + '%;">' + totalCostCompleted + '</div>';
-		html += '<div class="agile-board-progress-bar-remains" style="width: ' + ( 100 - wt ) + '%;">' + totalCostRemaining + '</div>';
+		html += '<div class="agile-board-progress-bar-done" style="width: ' + wt + '%;" title="' + gMessages['completedCost'] + '">' + totalCostCompleted + '</div>';
+		html += '<div class="agile-board-progress-bar-remains" style="width: ' + ( 100 - wt ) + '%;" title="' + gMessages['remainingCost'] + '">' + totalCostRemaining + '</div>';
 		html += '</td></tr><table>';
 	}
 	
@@ -479,7 +482,7 @@ function initEditable() {
 				}
 			});
 		}
-	});	
+	});
 	
 }
 

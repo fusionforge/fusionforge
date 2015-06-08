@@ -23,7 +23,7 @@ CREATE TABLE plugin_taskboard_trackers (
 
 CREATE TABLE plugin_taskboard_columns (
     taskboard_column_id SERIAL primary key,
-    taskboard_id integer REFERENCES plugin_taskboard(taskboard_id) ON DELETE CASCADE, 
+    taskboard_id integer REFERENCES plugin_taskboard(taskboard_id) ON DELETE CASCADE,
     title text NOT NULL,
     title_background_color text,
     column_background_color text,
@@ -34,8 +34,8 @@ CREATE TABLE plugin_taskboard_columns (
 
 CREATE TABLE plugin_taskboard_columns_resolutions (
     taskboard_column_value_id SERIAL primary key,
-    taskboard_column_id integer REFERENCES plugin_taskboard_columns( taskboard_column_id ) ON DELETE CASCADE, 
-    taskboard_column_resolution text NOT NULL 
+    taskboard_column_id integer REFERENCES plugin_taskboard_columns( taskboard_column_id ) ON DELETE CASCADE,
+    taskboard_column_resolution text NOT NULL
 );
 -- ALTER TABLE plugin_taskboard_columns_resolutions OWNER TO gforge;
 
@@ -43,7 +43,7 @@ CREATE TABLE plugin_taskboard_columns_resolutions (
 -- records with empty source is a records by default
 -- possible set rules:
 -- resolution = 'Fixed' (alias = element_name, for extra fields, having elements)
--- remaining_estimated_cost = 0 (alias = value, for extra fields, using values ) 
+-- remaining_estimated_cost = 0 (alias = value, for extra fields, using values )
 --
 CREATE TABLE plugin_taskboard_columns_sources (
     taskboard_column_source_id SERIAL primary key,
@@ -75,6 +75,6 @@ CREATE TABLE plugin_taskboard_releases_snapshots (
     completed_story_points integer NOT NULL DEFAULT 0,
     completed_man_days integer NOT NULL DEFAULT 0
 );
-ALTER TABLE plugin_taskboard_releases_snapshots 
-    ADD CONSTRAINT plugin_taskboard_releases_snapshots_date 
+ALTER TABLE plugin_taskboard_releases_snapshots
+    ADD CONSTRAINT plugin_taskboard_releases_snapshots_date
         UNIQUE (taskboard_release_id, snapshot_date);

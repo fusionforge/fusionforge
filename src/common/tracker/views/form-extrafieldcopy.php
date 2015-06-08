@@ -1,8 +1,9 @@
 <?php
-/*
+/**
  * Tracker Facility
  *
  * Copyright 2010 (c) FusionForge Team
+ * Copyright 2015, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -20,6 +21,8 @@
  * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
+
+global $HTML;
 
 //
 //  FORM TO COPY Choices configured by admin for extra_field BOXES
@@ -59,8 +62,8 @@ $res = db_query_params ('SELECT g.unix_group_name, agl.name AS tracker_name, aef
 			$field_id_arr[] = $efearr[$i]['element_id'];
 			$field_arr[] = $efearr[$i]['element_name'];
 		}
-?>
-		<form action="<?php echo getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post" >
+echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID(), 'method' => 'post'));
+		?>
 		<table>
 		<tr>
 		<td></td><th>
@@ -92,9 +95,10 @@ $res = db_query_params ('SELECT g.unix_group_name, agl.name AS tracker_name, aef
 ?>
 		<br />
 	 	<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" />
-		</td></tr></table></form>
+		</td></tr></table>
 
 <?php
+echo $HTML->closeForm();
 		$ath->footer();
 
 // Local Variables:

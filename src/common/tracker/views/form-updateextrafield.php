@@ -3,7 +3,7 @@
  * Tracker Facility
  *
  * Copyright 2010 (c) FusionForge Team
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014-2015, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -40,11 +40,12 @@ if (!$ac || !is_object($ac)) {
 } elseif ($ac->isError()) {
 	$error_msg .= $ac->getErrorMessage();
 } else {
-?>
-<p>
-<strong><?php echo _('Type of custom field')._(': ').$ac->getTypeName(); ?></strong></p>
-
-<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;id='.$id.'&amp;atid='.$ath->getID(); ?>" method="post">
+	?>
+	<p>
+	<strong><?php echo _('Type of custom field')._(': ').$ac->getTypeName(); ?></strong></p>
+	<?php
+	echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&id='.$id.'&atid='.$ath->getID(), 'method' => 'post'));
+	?>
 	<input type="hidden" name="update_box" value="y" />
 	<input type="hidden" name="id" value="<?php echo $ac->getID(); ?>" />
 	<p>
@@ -108,8 +109,8 @@ if (!$ac || !is_object($ac)) {
 	<p>
 	<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" />
 	</p>
-</form>
-<?php
+	<?php
+	echo $HTML->closeForm();
 }
 
 $ath->footer();

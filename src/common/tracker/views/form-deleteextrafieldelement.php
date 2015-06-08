@@ -4,6 +4,7 @@
  *
  * Copyright 2010 (c) FusionForge Team
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2015, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -21,6 +22,8 @@
  * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
+
+global $HTML;
 
 //
 //  FORM TO DELETE POP-UP CHOICES FOR A BOX
@@ -52,7 +55,9 @@
 			<td>
 			<fieldset>
 			<legend><?php echo _('Confirm Delete') ?></legend>
-			<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post">
+			<?php
+			echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID(), 'method' => 'post'));
+			?>
 			<input type="hidden" name="delete_opt" value="y" />
 			<input type="hidden" name="id" value="<?php echo $ao->getID(); ?>" />
 			<input type="hidden" name="boxid" value="<?php echo $boxid; ?>" />
@@ -78,7 +83,9 @@
 
 			<p>
 			<input type="submit" name="post_changes" value="<?php echo _('Delete') ?>" /></p>
-			</form>
+			<?php
+			echo $HTML->closeForm();
+			?>
 			</fieldset>
 			</td>
 			</tr>

@@ -248,8 +248,21 @@ class TaskBoardColumnSource extends Error {
 		if( $this->getAutoassign() ) {
 			$assigned_to = user_getid();
 		}
+		
 
-		$msg = $this->getTaskboard()->TrackersAdapter->updateTask( $task,$assigned_to, $this->getTargetResolution() );
+		$remaining_cost = NULL;
+		if( $this->getTaskboard()->getRemainingCostField() ) {
+			// set 0 to remainin cost if target column is a last one
+			$target_column = taskboard_column_get_object( $this->getTargetColumnID() );
+			
+			$columns = $this->getTaskboard()->getColumns();
+			if( $target_column->getOrder() == count($columns) ) {
+				// final column, so set remaining cost to 0 
+				$remaining_cost = 0;
+			}
+		}		
+
+		$msg = $this->getTaskboard()->TrackersAdapter->updateTask( $task, $assigned_to, $this->getTargetResolution(), NULL, NULL, $remaining_cost );
 		if($msg) {
 			$msg = _('Tracker error')._(': ').$msg;
 		}

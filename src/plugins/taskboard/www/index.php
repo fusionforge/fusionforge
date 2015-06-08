@@ -139,7 +139,7 @@ if ($taskboard->getReleaseField()) {
 					<?php echo _('Release')._(': ').$release_box; ?>
 				</td>
 				<?php if ( forge_check_perm('tracker_admin', $group_id ) ) { ?>
-				<td>
+				<td style="vertical-align: middle;">
 					<div id="taskboard-release-description"></div>
 					<div id="taskboard-release-snapshot">
 						<input type="hidden" name="taskboard_release_id" id="taskboard-release-id" value="" />
@@ -191,8 +191,7 @@ if ($taskboard->getReleaseField()) {
 	<?php
 		$used_trackers = $taskboard->getUsedTrackersIds();
 		if(count($used_trackers) == 1) {
-			$tracker = $taskboard->TrackersAdapter->getTasksTracker($used_trackers[0]);
-			echo html_e('input', array('type' => 'hidden', 'name' => 'tracker_id', 'id' => 'tracker_id', 'value' => $tracker->getID()));
+			echo html_e('input', array('type' => 'hidden', 'name' => 'tracker_id', 'id' => 'tracker_id', 'value' => $used_trackers[0]));
 		} else {
 			// select target tracker if more then single trackers are configured
 			echo "<div>\n";
@@ -228,7 +227,9 @@ var gAjaxUrl = '<?php echo util_make_url ('/plugins/'.$pluginTaskboard->name.'/a
 var gMessages = {
 	'notasks' : "<?php echo _('There are no tasks found.') ?>",
 	'progressByTasks' : "<?php echo _('Progress by tasks') ?>",
-	'progressByCost' : "<?php echo _('Progress by cost') ?>"
+	'progressByCost' : "<?php echo _('Progress by cost') ?>",
+	'remainingCost' : "<?php echo _('Remaining m/d') ?>",
+	'completedCost' : "<?php echo _('Completed m/d') ?>"
 };
 
 <?php

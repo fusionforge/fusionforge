@@ -122,8 +122,9 @@
 }
 
 #taskboard-release-description {
-	margin:0 auto;
 	float: left;
+	font-size: 14px;
+	margin: 4px;
 }
 
 #taskboard-release-snapshot {

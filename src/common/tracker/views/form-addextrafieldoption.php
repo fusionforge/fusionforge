@@ -3,7 +3,7 @@
  * Tracker Facility
  *
  * Copyright 2010 (c) FusionForge Team
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014-2015, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -22,6 +22,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+global $HTML;
+
 //
 //  FORM TO ADD ELEMENTS TO EXTRA FIELD
 //
@@ -39,10 +41,7 @@
 		echo '<h2>'._('Custom Field Name')._(': ').$ac->getName().'</h2>';
 		$rows=count($efearr);
 		if ($rows > 0) {
-
-			?>
-			<form action="<?php echo 'index.php?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;boxid='.$boxid; ?>" method="post">
-			<?php
+			echo $HTML->openForm(array('action' => '/tracker/admin?group_id='.$group_id.'&atid='.$ath->getID().'&boxid='.$boxid, 'method' => 'post'));
 			$title_arr=array();
 			$title_arr[]=_('Current / New positions');
 			$title_arr[]=_('Up/Down positions');
@@ -52,10 +51,10 @@
 			}
 			$title_arr[]='';
 
-			echo $GLOBALS['HTML']->listTableTop ($title_arr,false, ' ');
+			echo $HTML->listTableTop ($title_arr,false, ' ');
 
 			for ($i=0; $i < $rows; $i++) {
-				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
+				echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>'.
 					'<td class="align-right">'.
 					($i + 1).' --&gt; <input type="text" name="order['. $efearr[$i]['element_id'] .']" value="" size="3" maxlength="3" />'.
 					"</td>\n";
@@ -65,16 +64,11 @@
 					    "</td>\n";
 				}
 				echo '<td class="align-center">'.
-					'<a href="index.php?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;boxid='.$boxid.'&amp;id='.$efearr[$i]['element_id'].
-					'&amp;updownorder_opt=1&amp;new_pos='.(($i == 0)? $i + 1 : $i).'">'.html_image('ic/btn_up.png','19','18',array('alt'=>"Up")).'</a>'.
-					'<a href="index.php?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;boxid='.$boxid.'&amp;id='.$efearr[$i]['element_id'].
-					'&amp;updownorder_opt=1&amp;new_pos='.(($i == $rows - 1)? $i + 1 : $i + 2).'">'.html_image('ic/btn_down.png','19','18',array('alt'=>"Down")).'</a>'.
+					util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&boxid='.$boxid.'&id='.$efearr[$i]['element_id'].'&updownorder_opt=1&new_pos='.(($i == 0)? $i + 1 : $i), html_image('ic/btn_up.png','19','18',array('alt'=>"Up"))).
+					util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&boxid='.$boxid.'&id='.$efearr[$i]['element_id'].'&updownorder_opt=1&new_pos='.(($i == $rows - 1)? $i + 1 : $i + 2), html_image('ic/btn_down.png','19','18',array('alt'=>"Down"))).
 					'</td>'."\n".'<td>'.$efearr[$i]['element_name'].
 					'</td>'."\n".'<td class="align-center">'.
-					'<a href="'.getStringFromServer('PHP_SELF').'?update_opt=1&amp;id='.
-					$efearr[$i]['element_id'].'&amp;boxid='.
-					$boxid.'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
-					html_image('ic/forum_edit.gif','37','15',array('alt'=>"Edit")).'</a>'.
+					util_make_link('/tracker/admin/?update_opt=1&id='.$efearr[$i]['element_id'].'&boxid='.$boxid.'&group_id='.$group_id.'&atid='. $ath->getID(), html_image('ic/forum_edit.gif','37','15',array('alt'=>_('Edit')))).
 					'</td></tr>'."\n";
 			}
 //			echo $GLOBALS['HTML']->listTableBottom();
@@ -89,15 +83,15 @@
 			<input type="submit" name="post_changes_alphaorder" value="<?php echo _('Alphabetical order') ?>" />
 			</td>
 			</tr>
-			<?php echo $GLOBALS['HTML']->listTableBottom(); ?>
-			</form>
 			<?php
+			echo $HTML->listTableBottom();
+			echo $HTML->closeForm();
 
 		} else {
 			echo "\n<strong>"._('You have not defined any elements.')."</strong>";
 		}
+		echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&boxid='.$boxid.'&atid='.$ath->getID(), 'method' => 'post'));
 		?>
-		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;boxid='.$boxid.'&amp;atid='.$ath->getID(); ?>" method="post">
 		<input type="hidden" name="add_opt" value="y" />
 		<br /><br />
 		<label for="name">
@@ -112,8 +106,8 @@
 		<?php echo $ath->statusBox('status_id',1,false,false); ?>
 		<?php } ?>
 		<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" />
-		</form>
 		<?php
+		echo $HTML->closeForm();
 		$ath->footer();
 	}
 // Local Variables:

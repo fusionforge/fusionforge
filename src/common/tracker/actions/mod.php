@@ -5,7 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 (c) Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2015, Franck Villaume - TrivialDev
  * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
  * http://fusionforge.org/
  *
@@ -31,6 +31,7 @@ global $group_id;
 global $group;
 global $aid;
 global $atid;
+global $HTML;
 
 function gettipspan($idpart, $content) {
 	$id = 'tracker-' . str_replace(' ', '_', $idpart);
@@ -51,7 +52,9 @@ jQuery(document).ready(function() {
 	jQuery("#tabber").tabs();
 });
 //]]></script>
-<form id="trackermodform" action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&amp;atid=<?php echo $ath->getID(); ?>" enctype="multipart/form-data" method="post">
+<?php
+echo $HTML->openForm(array('id' => 'trackermodform', 'action' => '/tracker/?group_id='.$group_id.'&atid='.$ath->getID(), 'enctype' => 'multipart/form-data', 'method' => 'post'));
+?>
 <input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>" />
 <input type="hidden" name="func" value="postmod" />
 <input type="hidden" name="artifact_id" value="<?php echo $ah->getID(); ?>" />
@@ -64,11 +67,9 @@ if (session_loggedin()) {
 			<td><?php
 				if ($ah->isMonitoring()) {
 					$img="xmail16w.png";
-					$key="monitorstop";
 					$text=_('Stop Monitoring');
 				} else {
 					$img="mail16w.png";
-					$key="monitor";
 					$text=_('Monitor');
 				}
 				echo util_make_link('/tracker/?group_id='.$group_id.'&artifact_id='.$ah->getID().'&atid='.$ath->getID().'&func=monitor', html_e('strong', array(), html_image('ic/'.$img.'','20','20').' '.$text), array('id' => 'tracker-monitor', 'title' => util_html_secure(html_get_tooltip_description('monitor'))));
@@ -85,21 +86,20 @@ if (session_loggedin()) {
 							$key = 'pointer_up';
 							$txt = _('Cast Vote');
 						}
-						echo '<a id="tracker-vote" alt="'.$txt.'" title="'.html_get_tooltip_description('vote').'" href="'.getselfhref(array('func' => $key)) . '">' .
-							html_image('ic/' . $key . '.png', '16', '16', array('border' => '0')) . '</a>';
+						echo util_make_link('/tracker/?group_id='.$group_id.'&artifact_id='.$ah->getID().'&atid='.$ath->getID().'&func='.$key, html_image('ic/'.$key.'.png', 16, 16, array('border' => 0)), array('id' => 'tracker-vote', 'alt' => $txt, 'title' => util_html_secure(html_get_tooltip_description('vote'))));
 					}
 				?>
 			</td>
 			<td><?php
 				if ($group->usesPM()) {
-					echo '
-				<a href="'.getStringFromServer('PHP_SELF').'?func=taskmgr&amp;group_id='.$group_id.'&amp;atid='.$atid.'&amp;aid='.$aid.'">'.
-					html_image('ic/taskman20w.png','20','20').'<strong>'._('Build Task Relation').'</strong></a>';
+					echo util_make_link('/tracker/?func=taskmgr&group_id='.$group_id.'&atid='.$atid.'&aid='.$aid, html_image('ic/taskman20w.png','20','20').'<strong>'._('Build Task Relation').'</strong>');
 				}
 				?>
 			</td>
 			<td>
-				<a href="<?php echo getStringFromServer('PHP_SELF')."?func=deleteartifact&amp;aid=$aid&amp;group_id=$group_id&amp;atid=$atid"; ?>"><strong><?php echo html_image('ic/trash.png','16','16') . _('Delete'); ?></strong></a>
+				<?php
+				echo util_make_link('/tracker/?func=deleteartifact&aid='.$aid.'&group_id='.$group_id.'&atid='.$atid, html_image('ic/trash.png','16','16').html_e('strong', array(), _('Delete')));
+				?>
 			</td>
 			<td>
 				<input type="submit" name="submit" value="<?php echo _('Save Changes') ?>" />
@@ -227,6 +227,9 @@ foreach ($pluginsListeners as $pluginsListener) {
 	<li><a href="#tabber-commits"><?php echo _('Commits'); ?></a></li>
 	<?php } ?>
 	<li><a href="#tabber-changes"><?php echo _('Changes'); ?></a></li>
+	<?php if ($ah->hasRelations()) { ?>
+	<li><a href="#tabber-relations"><?php echo _('Relations'); ?></a></li>
+	<?php } ?>
 	</ul>
 <div id="tabber-comments" class="tabbertab" title="<?php echo _('Comments').$nb; ?>">
 <table width="80%">
@@ -316,9 +319,8 @@ $nb = $count? ' ('.$count.')' : '';
 </div>
 	<?php $ah->showRelations(); ?>
 </div>
-</form>
 <?php
-
+echo $HTML->closeForm();
 $ath->footer();
 
 // Local Variables:

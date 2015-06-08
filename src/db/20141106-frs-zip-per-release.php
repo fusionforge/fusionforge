@@ -38,6 +38,8 @@ if (class_exists('ZipArchive')) {
 	while ($packageArr = db_fetch_array($packagesRes)) {
 		$releasesRes = db_query_params('select distinct frs_release.release_id as rid, frs_release.name as rname from frs_release,frs_file where frs_release.package_id = $1 and frs_file.release_id = frs_release.release_id',
 						array($packageArr['pid']));
+		$packageArr['pname'] = util_secure_filename($packageArr['pname']);
+		$releaseArr['rname'] = util_secure_filename($releaseArr['rname']);
 		while ($releaseArr = db_fetch_array($releasesRes)) {
 			$filesRes = db_query_params('select filename from frs_file where release_id = $1', array($releaseArr['rid']));
 			if (db_numrows($filesRes)) {
@@ -52,7 +54,7 @@ if (class_exists('ZipArchive')) {
 						while ($fileArr = db_fetch_array($filesRes)) {
 							$filePath = $filesPath.'/'.$fileArr['filename'];
 							if ($zip->addFile($filePath, $fileArr['filename']) !== true) {
-								echo _('Cannot add file to the file archive')._(': ').$fileArr['filename'].' -> '.$zipPath."\n";
+								echo _('Cannot add file to the file archive')._(': ').$filePath.' -> '.$zipPath."\n";
 								$globalStatus = 1;
 							}
 						}

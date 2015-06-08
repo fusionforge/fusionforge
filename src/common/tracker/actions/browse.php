@@ -5,7 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 Roland Mas
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2015, Franck Villaume - TrivialDev
  * Copyright 2011, Iñigo Martinez
  * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
  * Copyright 2014, Stéphane-Eymeric Bredthauer
@@ -259,8 +259,6 @@ $paging = 0;
 if (session_loggedin()) {
 	/* logged in users get configurable paging */
 	$paging = $u->getPreference("paging");
-	echo '<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;start='.
-		$start.'" method="post">'."\n";
 }
 if (!$paging) {
 	$paging = 25;
@@ -278,15 +276,14 @@ if ($art_cnt) {
 	$max = 0;
 }
 
-printf('<p>' . _('Displaying results %1$d‒%2$d out of %3$d total.'),
-       $start + 1, $max, $art_cnt);
 if (session_loggedin()) {
-	printf(' ' . _('Displaying %2$s results.') . "\n\t<input " .
-	       'type="submit" name="setpaging" value="%1$s" />' .
-	       "\n</p>\n</form>\n", _('Change'),
-	       html_build_select_box_from_array(array(
-							'10', '25', '50', '100', '1000'), 'nres', $paging, 1));
+	echo $HTML->openForm(array('action' => '/tracker/?group_id='.$group_id.'&atid='.$ath->getID().'&start='.$start, 'method' => 'post'));
+	printf('<p>' . _('Displaying results %1$d‒%2$d out of %3$d total.'), $start + 1, $max, $art_cnt);
+	printf(' ' . _('Displaying %2$s results.') . "\n\t<input " .'type="submit" name="setpaging" value="%1$s" />', _('Change'), html_build_select_box_from_array(array(10, 25, 50, 100, 1000), 'nres', $paging, 1));
+	echo "</p>\n";
+	echo $HTML->closeForm();
 } else {
+	printf('<p>' . _('Displaying results %1$d‒%2$d out of %3$d total.'), $start + 1, $max, $art_cnt);
 	echo "</p>\n";
 }
 
@@ -366,7 +363,7 @@ if (session_loggedin()) {
 }
 
 if (db_numrows($res)>0) {
-	echo '<form action="'. getStringFromServer('PHP_SELF') .'" method="get">';
+	echo $HTML->openForm(array('action' => '/tracker/', 'method' => 'get'));
 	echo '<input type="hidden" name="group_id" value="'.$group_id.'" />';
 	echo '<input type="hidden" name="atid" value="'.$ath->getID().'" />';
 	echo '<input type="hidden" name="power_query" value="1" />';
@@ -399,23 +396,24 @@ if (db_numrows($res)>0) {
 	echo '</select>
 	<noscript><input type="submit" name="run" value="'._('Power Query').'" /></noscript>
 	&nbsp;&nbsp;'.util_make_link('/tracker/?atid='. $ath->getID().'&group_id='.$group_id.'&func=query', _('Build Query')).'
-	</td></tr></table>
-	</form>';
+	</td></tr></table>';
+	echo $HTML->closeForm();
 	?>
 		<script type="text/javascript">/* <![CDATA[ */
 		jQuery('#query_id').change(function() {
-			location.href = '<?php echo getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&atid='.$ath->getID().'&power_query=1&query_id=' ?>'+$('#query_id').val();
+			location.href = '<?php echo util_make_url('/tracker/?group_id='.$group_id.'&atid='.$ath->getID().'&power_query=1&query_id='); ?>'+$('#query_id').val();
 		});
 		/* ]]> */</script>
 	<?php
 } else {
 
-	echo util_make_link('/tracker/?atid='. $ath->getID().'&group_id='.$group_id.'&func=query','<strong>'._('Build Query').'</strong>');
+	echo util_make_link('/tracker/?atid='.$ath->getID().'&group_id='.$group_id.'&func=query','<strong>'._('Build Query').'</strong>');
 }
 echo '
 	</div>
-	<div id="tabber-simplefiltering">
-	<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&amp;atid='.$ath->getID().'" method="post">
+	<div id="tabber-simplefiltering">';
+echo $HTML->openForm(array('action' => '/tracker/?group_id='.$group_id.'&atid='.$ath->getID(), 'method' => 'post'));
+echo '
 	<input type="hidden" name="query_id" value="-1" />
 	<input type="hidden" name="set" value="custom" />
 	<table>
@@ -450,9 +448,9 @@ echo _('Order by')._(': ').'<br>'.
 
 echo '
 	</tr>
-	</table>
-	</form>
-	</div>';
+	</table>';
+echo $HTML->closeForm();
+echo '</div>';
 if ($af->query_type == 'default') {
 	echo '<div class="tabbertab tabbertabdefault" >';
 	echo '<strong>';
@@ -548,9 +546,8 @@ if ($art_arr && $art_cnt > 0) {
 	$IS_ADMIN = forge_check_perm ('tracker', $ath->getID(), 'manager') ;
 
 	if ($IS_ADMIN) {
-		echo '
-		<form name="artifactList" action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&amp;atid='.$ath->getID().'" method="post">
-		<input type="hidden" name="form_key" value="'.form_generate_key().'" />
+		echo $HTML->openForm(array('name' => 'artifactList', 'action' => '/tracker/?group_id='.$group_id.'&atid='.$ath->getID(), 'method' => 'post'));
+		echo '<input type="hidden" name="form_key" value="'.form_generate_key().'" />
 		<input type="hidden" name="func" value="massupdate" />';
 	}
 
@@ -619,7 +616,7 @@ if ($art_arr && $art_cnt > 0) {
 				echo '<td style="white-space: nowrap;">'.
 				($IS_ADMIN?'<input type="checkbox" name="artifact_id_list[]" value="'.
 				$art_arr[$i]->getID() .'" /> ':'').
-				util_make_link(getStringFromServer('PHP_SELF').'?func=detail&aid='.
+				util_make_link('/tracker/?func=detail&aid='.
 				$art_arr[$i]->getID().
 				'&group_id='. $group_id .'&atid='.
 				$ath->getID(),
@@ -627,7 +624,7 @@ if ($art_arr && $art_cnt > 0) {
 				'</td>';
 			} elseif ($f == 'summary') {
 		 		echo '<td>'.
-				util_make_link(getStringFromServer('PHP_SELF').'?func=detail&aid='.
+				util_make_link('/tracker/?func=detail&aid='.
 				$art_arr[$i]->getID() .
 				'&group_id='. $group_id .'&atid='.
 				$ath->getID(),
@@ -702,7 +699,7 @@ if ($art_arr && $art_cnt > 0) {
 	$currentpage = intval($start / $paging);
 
 	if ($start > 0) {
-		echo util_make_link(getStringFromServer('PHP_SELF').'?func=browse&group_id='.$group_id.'&atid='.$ath->getID().'&set='. $set.'&start='.($start-$paging),'<strong>← '._('previous').'</strong>');
+		echo util_make_link('/tracker/?func=browse&group_id='.$group_id.'&atid='.$ath->getID().'&set='. $set.'&start='.($start-$paging),'<strong>← '._('previous').'</strong>');
 		echo '&nbsp;&nbsp;';
 	}
 	if ($pages > 1) {
@@ -722,12 +719,12 @@ if ($art_arr && $art_cnt > 0) {
 			if ($j * $paging == $start) {
 				echo '<strong>'.($j+1).'</strong>&nbsp;&nbsp;';
 			} else {
-				echo util_make_link(getStringFromServer('PHP_SELF').'?func=browse&group_id='.$group_id.'&atid='.$ath->getID().'&set='. $set.'&start='.($j*$paging), '<strong>'.($j+1).'</strong>').'&nbsp;&nbsp;';
+				echo util_make_link('/tracker/?func=browse&group_id='.$group_id.'&atid='.$ath->getID().'&set='. $set.'&start='.($j*$paging), '<strong>'.($j+1).'</strong>').'&nbsp;&nbsp;';
 			}
 		}
 	}
 	if ( $art_cnt > $start + $paging) {
-		echo util_make_link(getStringFromServer('PHP_SELF').'?func=browse&group_id='.$group_id.'&atid='.$ath->getID().'&set='. $set.'&start='.($start+$paging),'<strong>'._('next').' →</strong>');
+		echo util_make_link('/tracker/?func=browse&group_id='.$group_id.'&atid='.$ath->getID().'&set='. $set.'&start='.($start+$paging),'<strong>'._('next').' →</strong>');
 	}
 	echo '<div style="display:table;width:100%">';
 	echo '<div style="display:table-row">';
@@ -804,8 +801,7 @@ if ($art_arr && $art_cnt > 0) {
 			</table>';
 		echo '</div>
 		</fieldset>';
-		echo '
-		</form>';
+		echo $HTML->closeForm();
 	}
 
 } else {

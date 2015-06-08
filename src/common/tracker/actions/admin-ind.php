@@ -6,7 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010, FusionForge Team
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2015, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -131,7 +131,9 @@ if (forge_check_perm ('tracker_admin', $group->getID())) { ?>
 	<p><?php echo _('You can use this system to track virtually any kind of data, with each tracker having separate user, group, category, and permission lists. You can also easily move items between trackers when needed.') ?></p>
 	<p><?php echo _('Trackers are referred to as “Artifact Types” and individual pieces of data are “Artifacts”. “Bugs” might be an Artifact Type, whiles a bug report would be an Artifact. You can create as many Artifact Types as you want, but remember you need to set up categories, groups, and permission for each type, which can get time-consuming.') ?></p>
 
-	<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>" method="post">
+	<?php
+	echo $HTML->openForm(array('method' => 'post', 'action' => '/tracker/admin/?group_id='.$group_id));
+	?>
 	<input type="hidden" name="add_at" value="y" />
 	<p>
 	<?php echo _('<strong> Name:</strong> (examples: meeting minutes, test results, RFP Docs)').utils_requiredField() ?><br />
@@ -158,8 +160,8 @@ if (forge_check_perm ('tracker_admin', $group->getID())) { ?>
 	<textarea name="browse_instructions" rows="10" cols="55"></textarea></p>
 	<p>
 	<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
-	</form>
 	<?php
+	echo $HTML->closeForm();
 }
 
 $atf->footer();

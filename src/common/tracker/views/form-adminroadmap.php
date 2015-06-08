@@ -4,7 +4,7 @@
  *
  * Copyright 2011, Alcatel-Lucent
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014-2015, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -162,15 +162,17 @@ if (getStringFromRequest('delete_roadmap')) {
 	<p>
 	<strong><?php echo sprintf(_('Are you sure you want to delete the %s roadmap?'), $roadmap_name) ?></strong>
 	</p>
-	<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;admin_roadmap=1' ?>" method="post">
+	<?php
+	echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&admin_roadmap=1', 'method' => 'post'));
+	?>
 	<input type="hidden" name="admin_roadmap" value="1" />
 	<input type="hidden" name="roadmap_id" value="<?php echo $roadmap_id ?>" />
 	<p>
 	<input type="submit" name="delete_roadmap_sure" value="<?php echo _('Yes') ?>" />
 	<input type="submit" name="cancel" formnovalidate="formnovalidate" value="<?php echo _('Cancel') ?>" />
 	</p>
-	</form>
 	<?php
+	echo $HTML->closeForm();
 	$ihm = true;
 }
 
@@ -393,7 +395,9 @@ if (getIntFromRequest('manage_release') ||
 			<p>
 			<strong><?php echo sprintf(_('Set order of releases for %s roadmap:'), $selected_roadmap->getName()) ?></strong>
 			</p>
-			<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;admin_roadmap=1' ?>" method="post">
+			<?php
+			echo $HTML->openForm(array('action' => '/tracker/admin?group_id='.$group_id.'&admin_roadmap=1', 'method' => 'post'));
+			?>
 			<input type="hidden" name="roadmap_id" value="<?php echo $roadmap_id ?>" />
 			<?php
 			$title_arr = array();
@@ -414,7 +418,7 @@ if (getIntFromRequest('manage_release') ||
 					</td>
 				  </tr>';
 			echo $HTML->listTableBottom();
-			echo '</form>'."\n";
+			echo $HTML->closeForm();
 		}
 		else {
 			echo '<p>'._('No tracker is selected for this roadmap').'.</p>';

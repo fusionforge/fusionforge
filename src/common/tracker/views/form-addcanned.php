@@ -3,6 +3,7 @@
  * Tracker Facility
  *
  * Copyright 2010 (c) FusionForge Team
+ * Copyright 2015, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -46,14 +47,11 @@ if ($result && $rows > 0) {
 	echo $HTML->listTableTop ($title_arr);
 
 	for ($i=0; $i < $rows; $i++) {
+		$id = db_result($result, $i, 'id');
 		echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>'.
-			'<td>'.db_result($result, $i, 'id').'</td>'.
-			'<td><a href="'.getStringFromServer('PHP_SELF').'?update_canned=1&amp;id='.
-				db_result($result, $i, 'id').'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
-				db_result($result, $i, 'title').'</a></td>
-			<td><a href="'.getStringFromServer('PHP_SELF').'?delete_canned=1&amp;id='.
-				db_result($result, $i, 'id').'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
-				_('Delete').'</a></td></tr>';
+			'<td>'.$id.'</td>'.
+			'<td>'.util_make_link('/tracker/admin/?update_canned=1&id='.$id.'&group_id='.$group_id.'&atid='.$ath->getID(), db_result($result, $i, 'title')).'</td>
+			<td>'.util_make_link('/tracker/admin/?delete_canned=1&id='.$id.'&group_id='.$group_id.'&atid='. $ath->getID(), _('Delete')).'</td></tr>';
 	}
 
 	echo $HTML->listTableBottom();
@@ -65,7 +63,9 @@ if ($result && $rows > 0) {
 echo '<h2>'._('Add New Canned Response').'</h2>';
 ?>
 <p><?php echo _('Creating useful generic messages can save you a lot of time when handling common artifact requests.') ?></p>
-<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post">
+<?php
+echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&add_canned=1', 'method' => 'post'));
+?>
 <input type="hidden" name="add_canned" value="y" />
 <label for="title">
 <strong><?php echo _('Title').utils_requiredField()._(':') ?></strong><br />
@@ -78,9 +78,8 @@ echo '<h2>'._('Add New Canned Response').'</h2>';
 <textarea id="body" name="body" required="required" rows="15" cols="80"></textarea></p>
 <p>
 <input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
-</form>
 <?php
-
+echo $HTML->closeForm();
 $ath->footer();
 
 // Local Variables:

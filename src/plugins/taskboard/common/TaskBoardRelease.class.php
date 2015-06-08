@@ -247,6 +247,63 @@ class TaskBoardRelease extends Error {
 	}
 
 	/**
+	 *  Get release volume - number of total
+	 *
+	 *  @return array  hash with user_stories, tasks, story_points, man_days key
+	 */
+	function getVolume() {
+		$user_stories = $this->Taskboard->getUserStories($this->getTitle());
+		$columns = $this->Taskboard->getColumns($this->getTitle());
+
+		$_columns_num = count($columns);
+		$ret = array(
+			'user_stories' => 0,
+			'completed_user_stories' => 0,
+			'tasks' => 0,
+			'completed_tasks' => 0,
+			'story_points' => 0,
+			'completed_story_points' => 0,
+			'man_days'=> 0,
+			'completed_man_days'=> 0,
+		);
+
+		foreach( $user_stories as $us ) {
+			$completed_us = true;
+
+			for($i=0; $i < $_columns_num ; $i++ ) {
+				foreach( $us['tasks'] as $tsk ) {
+					if( $tsk['phase_id'] == $columns[$i]->getID() ) {
+						if( $i + 1 == $_columns_num ) {
+							// last column, so - completed task
+							$ret['completed_tasks']++;							
+						} else {
+							// incomplete task, so incomplete US
+							$completed_us = false;
+						}
+						$ret['tasks']++;
+						
+						if( $tsk['estimated_dev_effort'] ) {
+							$ret['completed_man_days'] += ( (float) $tsk['estimated_dev_effort'] - (float) $tsk['remaining_dev_effort'] );
+						}
+						
+						if( $tsk['estimated_dev_effort'] ) {
+							$ret['man_days'] += (float)  $tsk['estimated_dev_effort'];
+						}
+					}
+				}
+			}
+
+			if( $completed_us ) {
+				$ret['completed_user_stories']++;
+				// TODO $_completed_story_points += ...
+			}
+			$ret['user_stories']++;
+		}
+
+		return $ret;
+	}
+
+	/**
 	 * Save current taskboard snapshot. So, we can have a history of release implementation,
 	 * that could be used for different indicators calculation.
 	 *
@@ -254,8 +311,84 @@ class TaskBoardRelease extends Error {
 	 * @return	boolean	success.
 	 */
 	function saveSnapshot($snapshot_datetime) {
-		// TODO
+		$release_volume = $this->getVolume();
+
+		$res = db_query_params(
+				'SELECT taskboard_release_snapshot_id  FROM plugin_taskboard_releases_snapshots WHERE taskboard_release_id=$1 AND snapshot_date=$2',
+				array ($this->getID(), $snapshot_datetime )
+		);
+
+		if (!$res) {
+			$this->setError('TaskBoardRelease: Cannot get release snapshot');
+			return false;
+		}
+
+		$row = db_fetch_array($res);
+		db_free_result($res);
+
+		if( $row ) {
+			$res = db_query_params(
+					'UPDATE plugin_taskboard_releases_snapshots
+					SET completed_user_stories=$1, completed_tasks=$2, completed_story_points=$3, completed_man_days=$4
+					WHERE taskboard_release_snapshot_id=$5',
+					array(
+							$release_volume['completed_user_stories'],
+							$release_volume['completed_tasks'],
+							$release_volume['completed_story_points'],
+							$release_volume['completed_man_days'],
+							intval($row['taskboard_release_snapshot_id'])
+					)
+			);
+			if (!$res) {
+				return false;
+			}
+			db_free_result($res);
+		} else {
+			$res = db_query_params(
+					'INSERT INTO plugin_taskboard_releases_snapshots(taskboard_release_id, snapshot_date, completed_user_stories, completed_tasks, completed_story_points, completed_man_days)
+					VALUES($1,$2,$3,$4,$5,$6)',
+					array(
+							$this->getID(),
+							$snapshot_datetime,
+							$release_volume['completed_user_stories'],
+							$release_volume['completed_tasks'],
+							$release_volume['completed_story_points'],
+							$release_volume['completed_man_days'],
+					)
+			);
+			if (!$res) {
+				return false;
+			}
+			db_free_result($res);
+		}
 
 		return true;
+	}
+
+	/**
+	 * Get current release snapshots
+	 *
+	 * @return	array
+	 */
+	function getSnapshots() {
+		$ret = array();
+
+		$res = db_query_params(
+				'SELECT  snapshot_date, completed_user_stories, completed_tasks, completed_story_points, completed_man_days
+				FROM plugin_taskboard_releases_snapshots WHERE taskboard_release_id=$1 ORDER BY snapshot_date',
+				array ($this->getID() )
+		);
+
+		if (!$res) {
+			$this->setError('TaskBoardRelease: Cannot get release snapshots');
+			return false;
+		}
+
+		while( $row = db_fetch_array($res) ) {
+			$ret[] = $row;
+		}
+		db_free_result($res);
+
+		return $ret;
 	}
 }

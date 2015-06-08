@@ -322,7 +322,7 @@ class TaskBoardBasicAdapter {
 	 *
 	 * @return   string     error message in case of fail
 	 */
-	function updateTask(&$artifact, $assigned_to, $resolution, $title = NULL, $description = NULL) {
+	function updateTask(&$artifact, $assigned_to, $resolution, $title = NULL, $description = NULL, $remaining_cost=NULL ) {
 		if (!$assigned_to) {
 			$assigned_to = $artifact->getAssignedTo();
 		}
@@ -340,6 +340,17 @@ class TaskBoardBasicAdapter {
 				$extra_fields[ $resolution_field_id ] = $elements[$resolution];
 			}
 		}
+
+		if($remaining_cost!==NULL) {
+			$remaining_cost_alias = $this->TaskBoard->getRemainingCostField();
+
+			if($remaining_cost_alias) {
+				if (array_key_exists($remaining_cost_alias, $fields_ids)){
+					$remaining_cost_field_id = $fields_ids[$remaining_cost_alias];
+					$extra_fields[ $remaining_cost_field_id ] = $remaining_cost;
+				}
+			}
+		} 
 
 		if (!$title) {
 			$title = htmlspecialchars_decode($artifact->getSummary());

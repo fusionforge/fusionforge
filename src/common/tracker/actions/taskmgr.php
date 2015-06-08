@@ -4,7 +4,7 @@
  *
  * Copyright 2003 GForge, LLC
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2015, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -29,6 +29,7 @@ require_once $gfcommon.'pm/ProjectTaskFactory.class.php';
 global $group;
 global $ath;
 global $group_id;
+global $HTML;
 
 $group_project_id = getIntFromRequest('group_project_id');
 $project_task_id = getIntFromRequest('project_task_id');
@@ -102,8 +103,8 @@ if (getStringFromRequest('add_to_task')) {
 		'atid'=>$ath->getID(),
 		'title'=>_('Build Relationship Between Tracker Items and Tasks')));
 
+	echo $HTML->openForm(array('name' => 'foo', 'action' => '/tracker/?func=taskmgr&group_id='.$group_id.'&atid='.$atid.'&aid='.$aid, 'method' => 'post'));
 	echo '
-		<form name="foo" action="'. getStringFromServer('PHP_SELF') .'?func=taskmgr&amp;group_id='.$group_id.'&amp;atid='.$atid.'&amp;aid='.$aid.'" method="post">
 		<p><strong>'._('Tracker Item')._(':').'</strong> [#'.$a->getID().'] '.$a->getSummary().'</p>
 		<p><strong>'._('Tasks Project')._(':').'</strong><br />';
 	echo $pg->getName().'
@@ -115,8 +116,8 @@ if (getStringFromRequest('add_to_task')) {
 		echo '<option value="'.$task->getID().'">'.$task->getSummary().'</option>';
 	}
 	echo '</select><br />
-		<input type="submit" name="done_adding" value="'._('Add Relationship to Selected Task') . '" />
-		</form>';
+		<input type="submit" name="done_adding" value="'._('Add Relationship to Selected Task') . '" />';
+	echo $HTML->closeForm();
 
 //
 //	Add the relationship and display finished message
@@ -157,7 +158,8 @@ if (getStringFromRequest('add_to_task')) {
 		'atid'=>$ath->getID(),
 		'title'=>_('Build Relationship Between Tracker Items and Tasks')));
 
-	echo '<form name="foo" action="'. getStringFromServer('PHP_SELF') .'?func=taskmgr&amp;group_id='.$group_id.'&amp;atid='.$atid.'&amp;aid='.$aid.'" method="post">
+	echo $HTML->openForm(array('name' => 'foo', 'action' => '/tracker/?func=taskmgr&group_id='.$group_id.'&atid='.$atid.'&aid='.$aid, 'method' => 'post'));
+	echo '
 		<p><strong>'._('Tracker Item')._(':').'</strong> [#'.$a->getID().'] '.$a->getSummary().'</p>
 		<p><strong>'._('Tasks Project')._(':').'</strong></p>
 		<select name="group_project_id">';
@@ -168,8 +170,8 @@ if (getStringFromRequest('add_to_task')) {
 		<p>
 		<input type="submit" name="add_to_task" value="'._('Add Relation to Existing Task').'" />
 		<input type="submit" name="new_task" value="'._('Create New Task').'" />
-		</p>
-		</form>';
+		</p>';
+	echo $HTML->closeForm();
 }
 
 $ath->footer();

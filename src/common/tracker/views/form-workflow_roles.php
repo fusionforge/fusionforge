@@ -4,6 +4,7 @@
  *
  * Copyright 2010, FusionForge Team
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2015, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -23,6 +24,8 @@
  */
 
 require_once 'common/tracker/ArtifactWorkflow.class.php';
+
+global $HTML;
 
 		$from = getIntFromRequest('from');
 		$next = getIntFromRequest('next');
@@ -56,8 +59,9 @@ require_once 'common/tracker/ArtifactWorkflow.class.php';
 		$ath->adminHeader(array('title'=>$title,
 			'pagename'=>'tracker_admin_customize_liste',
 			'titlevals'=>array($ath->getName())));
+
+echo $HTML->openForm(array('action' => '/tracler/admin/?group_id='.$group_id.'&atid='.$ath->getID(), 'method' => 'post'));
 ?>
-		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post">
 		<input type="hidden" name="field_id" value="<?php echo $field_id ?>" />
 		<input type="hidden" name="workflow_roles" value="1" />
 		<input type="hidden" name="from" value="<?php echo $from ?>" />
@@ -75,7 +79,6 @@ require_once 'common/tracker/ArtifactWorkflow.class.php';
 ?>
 		<p>
 		<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
-		</form>
 		<?php
-
+echo $HTML->closeForm();
 		$ath->footer();

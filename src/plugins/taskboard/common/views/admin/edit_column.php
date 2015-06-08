@@ -94,7 +94,6 @@ if ($column_id) {
 		echo $HTML->multiTableRow(array(), $cells);
 		$cells = array();
 		$cells[][] = html_e('strong', array(), _('Alert message'));
-		error_log($drop_rules_by_default->getAlertText());
 		$cells[][] = html_e('textarea', array('name' => 'alert', 'cols' => 79, 'rows' => 5), htmlspecialchars($drop_rules_by_default->getAlertText()), false);
 		echo $HTML->multiTableRow(array(), $cells);
 		echo $HTML->listTableBottom();

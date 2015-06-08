@@ -7,7 +7,7 @@
  * Copyright 2009, Roland Mas
  * Copyright 2010, Franck Villaume - Capgemini
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2015, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -52,7 +52,8 @@ function &documentgroup_get_object($docgroup_id, $res = false) {
 		if (!$res || db_numrows($res) < 1) {
 			$DOCUMENTGROUP_OBJ["_".$docgroup_id."_"] = false;
 		} else {
-			$DOCUMENTGROUP_OBJ["_".$docgroup_id."_"] = new DocumentGroup(group_get_object(db_result($res,0,'group_id')), $docgroup_id, db_fetch_array($res));
+			$Group = &group_get_object(db_result($res,0,'group_id'));
+			$DOCUMENTGROUP_OBJ["_".$docgroup_id."_"] = new DocumentGroup($Group, db_fetch_array($res));
 		}
 	}
 	return $DOCUMENTGROUP_OBJ["_".$docgroup_id."_"];
@@ -187,7 +188,7 @@ class DocumentGroup extends Error {
 
 		if ($parent_doc_group) {
 			/* update the parent */
-			$parentDg = new DocumentGroup($this->Group, $parent_doc_group);
+			$parentDg = documentgroup_get_object($parent_doc_group);
 			$parentDg->update($parentDg->getName(), $parentDg->getParentID(), 1);
 		}
 		$this->sendNotice(true);
@@ -226,7 +227,7 @@ class DocumentGroup extends Error {
 		}
 
 		/* update the parent */
-		$parentDg = new DocumentGroup($this->Group, $this->getParentID());
+		$parentDg = documentgroup_get_object($this->getParentID());
 		$parentDg->update($parentDg->getName(), $parentDg->getParentID(), 1);
 		/* is there any subdir ? */
 		$subdir = db_query_params('select doc_group from doc_groups where parent_doc_group = $1 and group_id = $2',
@@ -643,7 +644,7 @@ class DocumentGroup extends Error {
 
 		$returnPath = '';
 		if ($this->getParentID()) {
-			$parentDg = new DocumentGroup($this->Group, $this->getParentID());
+			$parentDg = documentgroup_get_object($this->getParentID());
 			$returnPath = $parentDg->getPath($url);
 		}
 		if ($includename) {
@@ -949,7 +950,7 @@ class DocumentGroup extends Error {
 		$this->data_array['lockdate'] = $thistime;
 		$subGroupArray = $this->getSubgroup($this->getID(), $this->getState());
 		foreach ($subGroupArray as $docgroupId) {
-			$ndg = new DocumentGroup($this->Group, $docgroupId);
+			$ndg = documentgroup_get_object($docgroupId);
 			$ndg->setLock($stateLock, $userid, $thistime);
 		}
 		return true;

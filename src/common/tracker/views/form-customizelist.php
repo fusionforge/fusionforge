@@ -5,6 +5,7 @@
  * Copyright 2010, FusionForge Team
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
+ * Copyright 2015, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -21,6 +22,8 @@
  * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
+
+global $HTML;
 
 $ath->adminHeader(array('title'=>_('Customize Browse List'),
 	'pagename'=>'tracker_admin_customize_liste',
@@ -66,20 +69,16 @@ $select = '';
 foreach ($fields as $f => $name) {
 	$pos = array_search($f, $browse_fields);
 	if ($pos !== false) {
-		$rows[$pos] = '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($pos) .'>'.'<td>'.$name.'</td>'."\n".
+		$rows[$pos] = '<tr '. $HTML->boxGetAltRowStyle($pos) .'>'.'<td>'.$name.'</td>'."\n".
 					'<td class="align-right">'.
 					($pos + 1).' --&gt; <input type="text" name="order['.$f.']" value="" size="3" maxlength="3" />'.
 					'</td>'."\n".
 					'<td class="align-center">'.
-					'<a href="index.php?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;id='.$f.
-					'&amp;customize_list=1&amp;post_changes=1&amp;updownorder_field=1&amp;new_pos='.(($pos == 0)? $pos + 1 : $pos).'">'.html_image('ic/btn_up.png','19','18',array('alt'=>"Up")).'</a> '.
-					'<a href="index.php?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;id='.$f.
-					'&amp;customize_list=1&amp;post_changes=1&amp;updownorder_field=1&amp;new_pos='.(($pos == count($browse_fields) - 1)? $pos + 1 : $pos + 2).'">'.html_image('ic/btn_down.png','19','18',array('alt'=>"Down")).'</a>'.
+					util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&id='.$f.'&customize_list=1&post_changes=1&updownorder_field=1&new_pos='.(($pos == 0)? $pos + 1 : $pos), html_image('ic/btn_up.png','19','18',array('alt' => _('Up')))).
+					util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&id='.$f.'&customize_list=1&post_changes=1&updownorder_field=1&new_pos='.(($pos == count($browse_fields) - 1)? $pos + 1 : $pos + 2), html_image('ic/btn_down.png','19','18',array('alt' => _('Down')))).
 					'</td>'."\n".
 					'<td class="align-center">'.
-					'<a href="index.php?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;id='.$f.
-					'&amp;customize_list=1&amp;post_changes=1&amp;delete_field=1">'.
-					html_image('ic/trash.png','','',array('alt'=>"Delete")).'</a>'.
+					util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&id='.$f.'&customize_list=1&post_changes=1&delete_field=1', html_image('ic/trash.png','','',array('alt' => _('Delete')))).
 					'</td>'."\n".
 					'</tr>'."\n";
 	}
@@ -93,7 +92,9 @@ ksort($rows);
 	<p>
 	<?php echo _('Set order of the fields that will be displayed on the browse view of your tracker:') ?>
 	</p>
-	<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post">
+<?php
+echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID(), 'method' => 'post'));
+?>
 	<input type="hidden" name="customize_list" value="1" />
 	<input type="hidden" name="post_changes" value="1" />
 <?php
@@ -103,7 +104,7 @@ $title_arr[] = _('Current / New positions');
 $title_arr[] = _('Up/Down positions');
 $title_arr[] = _('Delete');
 
-echo $GLOBALS['HTML']->listTableTop ($title_arr,false, ' ');
+echo $HTML->listTableTop ($title_arr,false, ' ');
 echo implode('', $rows);
 echo '<tr class="noborder">
 	<td>
@@ -114,14 +115,15 @@ echo '<tr class="noborder">
 	<td>
 	</td>
       </tr>';
-echo $GLOBALS['HTML']->listTableBottom();
-?>
-	</form>
-<?php if ($select) { ?>
+echo $HTML->listTableBottom();
+echo $HTML->closeForm();
+if ($select) { ?>
 	<p>
 	<?php echo _('Select the fields that will be displayed on the browse view of your tracker:') ?>
 	</p>
-	<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post">
+	<?php
+	echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID(), 'method' => 'post'));
+	?>
 		<input type="hidden" name="customize_list" value="1" />
 		<input type="hidden" name="add_field" value="1" />
 		<strong><?php echo _('Add New Field')._(':'); ?></strong>
@@ -131,8 +133,8 @@ echo $select;
 echo '</select>'."\n";
 ?>
 		<input type="submit" name="post_changes" value="<?php echo _('Add') ?>" />
-	</form>
 <?php
+	echo $HTML->closeForm();
 }
 
 $ath->footer();
