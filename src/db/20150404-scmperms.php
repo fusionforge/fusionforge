@@ -50,10 +50,10 @@ foreach ($groups as $group) {
     
     $repo = "$svnroot/$gname";
     if (is_dir($repo)) {
-        chmod($repo, $group['anon'] ? 02775 : 02770);
+        chmod($repo, $group['anon'] ? 02755 : 02750);
         system("chown -Rh root:{$gid_rw} $repo");
         system("chown  -h root:{$gid_ro} $repo");
-        system("find $repo -type d -print0 | xargs -r -0 chmod 2775");
+        system("find $repo/* -type d -print0 | xargs -r -0 chmod 2775");
         system("chmod -R g+rwX,o+rX-w $repo/*");
     }
     $repo = '/nonexistent';  // for safety
