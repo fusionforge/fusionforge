@@ -39,8 +39,8 @@ if (class_exists('ZipArchive')) {
 		$releasesRes = db_query_params('select distinct frs_release.release_id as rid, frs_release.name as rname from frs_release,frs_file where frs_release.package_id = $1 and frs_file.release_id = frs_release.release_id',
 						array($packageArr['pid']));
 		$packageArr['pname'] = util_secure_filename($packageArr['pname']);
-		$releaseArr['rname'] = util_secure_filename($releaseArr['rname']);
 		while ($releaseArr = db_fetch_array($releasesRes)) {
+			$releaseArr['rname'] = util_secure_filename($releaseArr['rname']);
 			$filesRes = db_query_params('select filename from frs_file where release_id = $1', array($releaseArr['rid']));
 			if (db_numrows($filesRes)) {
 				$zip = new ZipArchive();
