@@ -229,6 +229,15 @@ $nb = $count? ' ('.$count.')' : '';
 	</div>
 	<?php $ah->showRelations(); ?>
 </div>
+<?php if (session_loggedin()) { ?>
+	<table class="fullwidth">
+		<tr>
+			<td>
+				<input type="submit" name="submit" value="<?php echo _('Save Changes') ?>" />
+			</td>
+		</tr>
+	</table>
+<?php } ?>
 </form>
 <?php
 
