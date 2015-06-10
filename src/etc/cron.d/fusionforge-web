@@ -1,0 +1,8 @@
+#
+# Regular cron jobs for the fusionforge-web package
+#
+PATH=@bindir@:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+# Kill stalled Apache2 processes (excluding the main apache parent)
+# (stuck in _nss_pgsql_getpwuid_r ?)
+1 * * * *	root	d=$(forge_get_config apache_service); for pid in $(pidof $d -o $(cat /var/run/$d/$d.pid)); do etimes=$(ps -oetimes -p$pid | tail -n+2); if [ ${etimes:-0} -gt 86400 ]; then kill -9 $pid; fi; done
