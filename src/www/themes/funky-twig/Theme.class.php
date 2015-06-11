@@ -495,8 +495,31 @@ class Theme extends Layout {
 		return parent::subMenu($title_arr, $links_arr, $attr_arr);
 	}
 	function multiTableRow($row_attrs, $cell_data, $istitle = false) {
-		// TODO
-		return parent::multiTableRow($row_attrs, $cell_data, $istitle);
+		$template = $this->twig->loadTemplate('multiTableRow.html');
+
+		if (!isset($row_attrs['class'])) {
+			$row_attrs['class'] = '';
+		}
+		
+		if ($istitle) {
+			$row_attrs['class'] .= ' align-center';
+		}
+		
+		$cells = array();
+		for ( $c = 0; $c < count($cell_data); $c++ ) {
+			$cell = array('text' => $cell_data[$c][0]);
+			$cell['attrs'] = array('class' => '');
+			foreach (array_slice($cell_data[$c],1) as $k => $v) {
+				$cell['attrs'][$k] = $v;
+			}
+			$cells[] = $cell;
+		}
+		
+		$vars = array('rowattrs' => $row_attrs,
+					  'cells' => $cells,
+					  'istitle' => $istitle);
+		
+		return $template->render($vars);
 	}
 	function feedback($msg) {
 		$template = $this->twig->loadTemplate('feedback.html');
