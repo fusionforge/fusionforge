@@ -272,6 +272,7 @@ class Theme extends Layout {
 		print $template->render($vars);
 	}
 	function bodyHeader($params){
+		// TODO: tabs, navigation menu
 		$template = $this->twig->loadTemplate('bodyHeader.html');
 
 		$vars = array();

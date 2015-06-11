@@ -3,3 +3,18 @@
 {% include 'multiTableRow.html' %}
 
 {% include 'ListTableBottom.html' only %}
+
+      <!-- Add outertabs and innertabs (projecttabs) -->
+
+    <div id="maindiv">
+
+      {% include 'errorMessage.html' %}
+      {% include 'warningMessage.html' %}
+      {% include 'feedback.html' %}
+
+      {% if h1 %}
+      <h1>{{ h1 }}</h1>
+      {% else %}
+      <h1 class="hide">{{ title }}</h1>
+      {% endif %}
+      
