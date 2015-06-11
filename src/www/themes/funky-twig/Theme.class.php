@@ -308,6 +308,10 @@ class Theme extends Layout {
 		$vars['rowattrs'] = array();
 		$vars['cell_data'] = $cells;
 
+		$vars['error_msg'] = $GLOBALS['error_msg'];
+		$vars['warning_msg'] = $GLOBALS['warning_msg'];
+		$vars['feedback'] = $GLOBALS['feedback'];
+
 		print $template->render($vars);
 		}
 	function footer($params = array()) {
