@@ -1,0 +1,5 @@
+<tr {% for k,v in rowattrs %}{{ k }}="{{ v }}"{% endfor %}>
+{% for cell in cell_data %}
+<td {% for k,v in cell['attrs'] %}{{ k }}="{{ v }}"{% endfor %}>{{ cell['text']|raw }}</td>
+{% endfor %}
+</tr>

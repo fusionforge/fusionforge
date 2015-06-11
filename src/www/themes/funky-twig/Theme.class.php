@@ -272,8 +272,42 @@ class Theme extends Layout {
 		print $template->render($vars);
 	}
 	function bodyHeader($params){
-		// TODO
-		return parent::bodyHeader($params);
+		$template = $this->twig->loadTemplate('bodyHeader.html');
+
+		$vars = array();
+		
+		if (isset($params['h1'])) {
+			$vars['h1'] = $params['h1'];
+		} elseif (isset($params['title'])) {
+			$vars['h1'] = $params['title'];
+		} else {
+			$vars['h1'] = '';
+		}
+
+		if (isset($params['title'])) {
+			$vars['title'] = $params['title'] . " - ".forge_get_config('forge_name');
+		} else {
+			$vars['title'] = forge_get_config('forge_name');
+		}
+
+		$cells = array();
+		$cells[] = array(util_make_link('/', html_image('/header/top-logo.png', null, null, array('alt'=>'FusionForge Home'))), 'id' => 'header-col1');
+		$items = $this->navigation->getUserLinks();
+		for ($j = 0; $j < count($items['titles']); $j++) {
+			$links[] = util_make_link($items['urls'][$j], $items['titles'][$j], array('class' => 'userlink'), true);
+		}
+		
+		$params['links'] = &$links;
+		plugin_hook('headermenu', $params);
+
+		$sep = isset($params['template']) ?  $params['template'] : ' | ';
+		$cells[] = array('text' => implode($sep, $links),
+						 'attrs' => array('id' => 'header-col2'));
+
+		$vars['rowattrs'] = array();
+		$vars['cell_data'] = $cells;
+
+		print $template->render($vars);
 		}
 	function footer($params = array()) {
 			// TODO
