@@ -169,6 +169,8 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	}
 
 	protected function init() {
+		$this->switchUser (FORGE_ADMIN_USERNAME) ;
+		$this->changeTheme("Funky Twig");
 		$this->createAndGoto('ProjectA');
 	}
 
