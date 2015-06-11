@@ -25,7 +25,7 @@
     {% endfor %}
 
     {% for s in stylesheets %}
-    <link type="text/css" href="{{ s.url }}" {% if m %} media="{{ s.media }}" {% endif %} />
+    <link rel="stylesheet" type="text/css" href="{{ s.url }}" {% if m %} media="{{ s.media }}" {% endif %} />
     {% endfor %}
 
     <meta name="Forge-Identification" content="{{ software_name }}:{{ software_version }}" />

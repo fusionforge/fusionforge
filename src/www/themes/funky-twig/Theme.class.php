@@ -51,15 +51,15 @@ class Theme extends Layout {
 		$template = $this->twig->loadTemplate('Tabs.html');
 
 		$vars = array('use_tooltips' => $use_tooltips,
-			      'nested' => $nested,
-			      'total_width' => $total_width);
+					  'nested' => $nested,
+					  'total_width' => $total_width);
 
 		$tabs = array();
 		for ($i = 0; $i < count($TABS_DIRS); $i++) {
 			$tab = array('href' => $TABS_DIRS[$i],
-				     'id' => md5($TABS_DIRS[$i]),
-				     'title' => $TABS_TITLES[$i],
-				     'tooltip' => $TABS_TOOLTIPS[$i]
+						 'id' => md5($TABS_DIRS[$i]),
+						 'title' => $TABS_TITLES[$i],
+						 'tooltip' => $TABS_TOOLTIPS[$i]
 				);
 			if ($i == $selected) {
 				$tab['selected'] = true;
@@ -270,7 +270,9 @@ class Theme extends Layout {
 		print $template->render($vars);
 	}
 	function bodyHeader($params){
-		// TODO: tabs, navigation menu
+		global $use_tooltips;
+
+		// TODO: innertabs
 		$template = $this->twig->loadTemplate('bodyHeader.html');
 
 		$vars = array();
@@ -309,7 +311,11 @@ class Theme extends Layout {
 
 		$vars['session_loggedin'] = session_loggedin();
 
-		$groups = session_get_user()->getGroups();
+		if (session_loggedin()) {
+			$groups = session_get_user()->getGroups();
+		} else {
+			$groups = array();
+		}
 		sortProjectList($groups);
 		
 		$naventries = array();
@@ -333,6 +339,25 @@ class Theme extends Layout {
 		}
 
 		$vars['naventries'] = $naventries;
+
+
+		$menu = $this->navigation->getSiteMenu();
+		$outertabsdata = array();
+		for ($i = 0; $i < count($menu); $i++) {
+			$d = array('href' => $menu['urls'][$i],
+					   'id' => md5($menu['urls'][$i]),
+					   'title' => $menu['titles'][$i],
+					   'tooltip' => $menu['tooltips'][$i]);
+			if ($i == $menu['selected']) {
+				$d['selected'] = true;
+			} else {
+				$d['selected'] = false;
+			}
+			$outertabsdata[] = $d;
+		}
+		$vars['outertabsdata'] = $outertabsdata;
+		$vars['use_tooltips'] = $use_tooltips;
+		
 
 		$vars['error_msg'] = $GLOBALS['error_msg'];
 		$vars['warning_msg'] = $GLOBALS['warning_msg'];

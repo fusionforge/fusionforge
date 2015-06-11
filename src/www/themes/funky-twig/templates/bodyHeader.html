@@ -25,7 +25,11 @@
 
 {% endif %}      
 
-{% include 'ListTableBottom.html' only %}
+      {% include 'ListTableBottom.html' only %}
+
+{% include 'Tabs.html' with { 'use_tooltips': use_tooltips, 'tabs': outertabsdata, 'total_width': '100%' } only %}
+
+      
 
       <!-- TODO: Add outertabs and innertabs (projecttabs) -->
 
