@@ -107,6 +107,10 @@ install-web: install-base-dirs
 		sed 's,@log_path@,$(log_path),g' etc/logrotate.d/fusionforge-web \
 			> $(DESTDIR)$(sysconfdir)/logrotate.d/fusionforge-web; \
 	fi
+	if [ ! -e $(DESTDIR)$(sysconfdir)/cron.d/fusionforge-web ]; then \
+		sed 's,@bindir@,$(bindir),' etc/cron.d/fusionforge-web \
+			> $(DESTDIR)$(sysconfdir)/cron.d/fusionforge-web; \
+	fi
 #	TODO: multiple servers support?
 #	(e.g. install scm, lists, vhosts and vhosts-extra separately)
 

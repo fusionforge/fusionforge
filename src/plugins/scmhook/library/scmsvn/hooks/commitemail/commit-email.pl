@@ -474,6 +474,9 @@ if ($mode eq 'commit')
     push(@body, "Date: $date\n");
     push(@body, "New Revision: $rev\n");
     push(@body, "\n");
+    push(@body, "Log:\n");
+    push(@body, @log);
+    push(@body, "\n");
     if (@adds)
       {
         @adds = sort @adds;
@@ -492,9 +495,6 @@ if ($mode eq 'commit')
         push(@body, "Modified:\n");
         push(@body, map { "   $_\n" } @mods);
       }
-    push(@body, "Log:\n");
-    push(@body, @log);
-    push(@body, "\n");
   }
 elsif ($mode eq 'revprop-change')
   {

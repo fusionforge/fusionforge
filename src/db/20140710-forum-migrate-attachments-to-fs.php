@@ -29,14 +29,14 @@ require_once $gfcommon.'forum/ForumStorage.class.php';
 ini_set('memory_limit', -1);
 ini_set('max_execution_time', 0);
 
-$data = forge_get_config('data_path');
-if (!is_dir($data)) {
-	system("mkdir -p $data");
-	system("chmod 0755 $data");
+$data_path = forge_get_config('data_path');
+if (!is_dir($data_path)) {
+	system("mkdir -p $data_path");
+	system("chmod 0755 $data_path");
 }
 if (!is_dir("$data/forum")) {
-	system("mkdir $data/forum");
-	system("chmod 0700 $data/forum");
+	system("mkdir $data_path/forum");
+	system("chmod 0700 $data_path/forum");
 }
 
 $fs = new ForumStorage();
@@ -110,6 +110,6 @@ while($row = db_fetch_array($res)) {
 	db_query_params('UPDATE forum_pending_attachment set filedata = $1 where attachmentid = $2', array(0, $row['attachmentid']));
 }
 
-system("chown -R ".forge_get_config('apache_user').':'.forge_get_config('apache_group')." $data/forum");
+system("chown -R ".forge_get_config('apache_user').':'.forge_get_config('apache_group')." $data_path/forum");
 
 echo "SUCCESS\n";
