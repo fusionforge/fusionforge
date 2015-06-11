@@ -292,7 +292,8 @@ class Theme extends Layout {
 		}
 
 		$cells = array();
-		$cells[] = array(util_make_link('/', html_image('/header/top-logo.png', null, null, array('alt'=>'FusionForge Home'))), 'id' => 'header-col1');
+		$cells[] = array('text' => util_make_link('/', html_image('/header/top-logo.png', null, null, array('alt'=>'FusionForge Home'))),
+						 'attrs' => array('id' => 'header-col1'));
 		$items = $this->navigation->getUserLinks();
 		for ($j = 0; $j < count($items['titles']); $j++) {
 			$links[] = util_make_link($items['urls'][$j], $items['titles'][$j], array('class' => 'userlink'), true);
