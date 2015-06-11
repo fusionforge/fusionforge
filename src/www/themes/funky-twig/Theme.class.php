@@ -307,6 +307,33 @@ class Theme extends Layout {
 		$vars['rowattrs'] = array();
 		$vars['cell_data'] = $cells;
 
+		$vars['session_loggedin'] = session_loggedin();
+
+		$groups = session_get_user()->getGroups();
+		sortProjectList($groups);
+		
+		$naventries = array();
+
+		foreach ($groups as $g) {
+			$menu = $this->navigation->getProjectMenu($g->getID());
+			$naventries[] = array('url' => $menu['starturl'],
+								'title' => $menu['name'],
+								'indent' => 0);
+			
+			for ($j = 0; $j < count($menu['urls']); $j++) {
+				$naventries[] = array('url' => $menu['urls'][$j],
+									'title' => $menu['titles'][$j],
+									'indent' => 1);
+				if (@$menu['adminurls'][$j]) {
+					$naventries[] = array('url' => $menu['adminurls'][$j],
+										'title' => _('Admin'),
+										'indent' => 2);
+				}
+			}
+		}
+
+		$vars['naventries'] = $naventries;
+
 		$vars['error_msg'] = $GLOBALS['error_msg'];
 		$vars['warning_msg'] = $GLOBALS['warning_msg'];
 		$vars['feedback'] = $GLOBALS['feedback'];
@@ -394,10 +421,6 @@ class Theme extends Layout {
 	function outerTabs($params) {
 		// TODO -- not used directly by pages, can be inlined in this file (unless used in several places)
 		return parent::outerTabs($params);
-	}
-	function quickNav() {
-		// TODO -- not used directly by pages, can be inlined in this file (unless used in several places)
-		return parent::quickNav();
 	}
 	function projectTabs($toptab, $group_id) {
 		// TODO -- not used directly by pages, can be inlined in this file (unless used in several places)

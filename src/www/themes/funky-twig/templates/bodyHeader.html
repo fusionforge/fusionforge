@@ -1,6 +1,29 @@
 {% include 'ListTableTop.html' with { 'class': 'fullwidth', 'id': 'header' } only %}
 
-{% include 'multiTableRow.html' %}
+      {% include 'multiTableRow.html' %}
+
+      {% if session_loggedin %}
+
+{% if naventries|length > 0 %}
+{% set indentarray = { 0: '', 1: '   ↳ ', 2: '      ↳ ' } %}
+      <tr>
+	<td id="header-line2" colspan="2">
+<form id="quicknavform" name="quicknavform" action="">
+  <div>
+    <select name="quicknav" id="quicknav" onchange="location.href=document.quicknavform.quicknav.value">
+      <option value="">Quick Jump To...</option>
+      {% for e in naventries %}
+      <option value="{{ e.url }}">{{ indentarray[e.indent]|raw }}{{ e.title }}</option>
+      {% endfor %}
+    </select>
+  </div>
+	  </form>
+	</td>
+      </tr>
+
+{% endif %}
+
+{% endif %}      
 
 {% include 'ListTableBottom.html' only %}
 
