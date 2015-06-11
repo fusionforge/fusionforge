@@ -25,6 +25,7 @@
 require_once dirname(__FILE__).'/../common/include/env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'forum/ForumStorage.class.php';
+require_once $gfcommon.'forum/ForumPendingStorage.class.php';
 
 ini_set('memory_limit', -1);
 ini_set('max_execution_time', 0);
@@ -34,12 +35,18 @@ if (!is_dir($data_path)) {
 	system("mkdir -p $data_path");
 	system("chmod 0755 $data_path");
 }
-if (!is_dir("$data/forum")) {
+if (!is_dir("$data_path/forum")) {
 	system("mkdir $data_path/forum");
 	system("chmod 0700 $data_path/forum");
 }
+if (!is_dir("$data_path/forum/pending")) {
+	system("mkdir $data_path/forum/pending");
+	system("chmod 0700 $data_path/forum/pending");
+}
 
 $fs = new ForumStorage();
+$fps = new ForumPendingStorage();
+
 $tmp = tempnam('/tmp', 'forum');
 
 $res = db_query_params('SELECT attachmentid FROM forum_attachment where filedata != $1', array(0));
@@ -92,21 +99,21 @@ while($row = db_fetch_array($res)) {
 	$ret = file_put_contents($tmp, $data);
 	if ($ret === false) {
 		echo "UPGRADE ERROR: file_put_contents($tmp) error: returned false\n";
-		$fs->rollback();
+		$fps->rollback();
 		exit(1);
 	}
 	if ($ret != $size) {
 		echo "UPGRADE ERROR: file_put_contents($tmp) size error: ($ret != ".$size.")\n";
-		$fs->rollback();
+		$fps->rollback();
 		exit(1);
 	}
-	$ret = $fs->store($row['attachmentid'], $tmp);
+	$ret = $fps->store($row['attachmentid'], $tmp);
 	if (!$ret) {
-		echo "UPGRADE ERROR: $ret: ".$fs->getErrorMessage()."\n";
-		$fs->rollback();
+		echo "UPGRADE ERROR: $ret: ".$fps->getErrorMessage()."\n";
+		$fps->rollback();
 		exit(1);
 	}
-	$fs->commit();
+	$fps->commit();
 	db_query_params('UPDATE forum_pending_attachment set filedata = $1 where attachmentid = $2', array(0, $row['attachmentid']));
 }
 

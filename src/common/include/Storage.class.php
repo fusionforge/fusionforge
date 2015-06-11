@@ -79,7 +79,7 @@ class Storage extends Error {
 
 	function delete($key) {
 		$this->pending_delete[] = $this->get_storage($key);
-		return self::$_instance;
+		return $this->instance();
 	}
 
 	function deleteFromQuery($query, $params) {

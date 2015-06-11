@@ -29,6 +29,7 @@ require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'forum/ForumHTML.class.php';
 require_once $gfcommon.'forum/ForumStorage.class.php';
+require_once $gfcommon.'forum/ForumPendingStorage.class.php';
 
 /**
  *  goodbye - Just prints a message and a close button.
@@ -131,7 +132,7 @@ if ($edit == "yes") {
 				}
 			} else {
 				//add new one
-				$attachok = $am->attach($attach,$group_id,$attachid, $msg_id);
+				$attachok = $am->attach($attach,$group_id,false,$msg_id);
 				if ($attachok!=false) {
 					$fm->fetchData($msg_id);
 					$fm->sendAttachNotice($attachok);
@@ -205,7 +206,11 @@ if ($mimetype) {
 	header('Content-type: application/octet-stream');
 }
 
-readfile_chunked(ForumStorage::instance()->get($attachid));
+if ($pending) {
+	readfile_chunked(ForumPendingStorage::instance()->get($attachid));
+} else {
+	readfile_chunked(ForumStorage::instance()->get($attachid));
+}
 flush();
 
 //increase the attach count

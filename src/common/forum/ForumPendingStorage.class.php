@@ -1,8 +1,9 @@
 <?php
 /**
- * FusionForge Artifact Storage Class
+ * FusionForge Forum Storage Class
  *
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -44,17 +45,17 @@
 
 require_once $gfcommon.'include/Storage.class.php';
 
-class ArtifactStorage extends Storage {
+class ForumPendingStorage extends Storage {
 	protected static $_instance;
 	public static function instance() {
 		if (!isset(self::$_instance)) {
-		$c = __CLASS__;
-		self::$_instance = new $c;
+			$c = __CLASS__;
+			self::$_instance = new $c;
 		}
 		return self::$_instance;
 	}
 
 	function get_storage_path() {
-		return forge_get_config('data_path').'/tracker';
+		return forge_get_config('data_path').'/forum/pending';
 	}
 }
