@@ -29,10 +29,13 @@
 
 {% include 'Tabs.html' with { 'use_tooltips': use_tooltips, 'tabs': outertabsdata, 'total_width': '100%' } only %}
 
+      {% if projecttabsdata|length > 0 %}
+      <div class="innertabs">
+      {% include 'Tabs.html' with { 'use_tooltips': use_tooltips, 'tabs': projecttabsdata, 'total_width': '100%', 'nested': true } only %}
+      </div>
+      {% endif %}
+
       
-
-      <!-- TODO: Add outertabs and innertabs (projecttabs) -->
-
     <div id="maindiv">
 
       {% include 'errorMessage.html' %}

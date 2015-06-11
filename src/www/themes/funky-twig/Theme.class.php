@@ -240,13 +240,13 @@ class Theme extends Layout {
 
 			// invoke the 'alt_representations' hook to add potential 'alternate' links (useful for Linked Data)
 			// cf. http://www.w3.org/TR/cooluris/#linking
-			$params = array('script_name' => $script_name,
-							'php_self' => $php_self,
-							'return' => array());
+			$p2 = array('script_name' => $script_name,
+						'php_self' => $php_self,
+						'return' => array());
+			
+			plugin_hook_by_reference('alt_representations', $p2);
 
-			plugin_hook_by_reference('alt_representations', $params);
-
-			$vars['alt_representations'] = $params['return'];
+			$vars['alt_representations'] = $p2['return'];
 		}
 		
 		print $template->render($vars);
@@ -272,11 +272,12 @@ class Theme extends Layout {
 	function bodyHeader($params){
 		global $use_tooltips;
 
-		// TODO: innertabs
 		$template = $this->twig->loadTemplate('bodyHeader.html');
 
 		$vars = array();
 		
+		$vars['use_tooltips'] = $use_tooltips;
+
 		if (isset($params['h1'])) {
 			$vars['h1'] = $params['h1'];
 		} elseif (isset($params['title'])) {
@@ -341,8 +342,8 @@ class Theme extends Layout {
 		$vars['naventries'] = $naventries;
 
 
-		$menu = $this->navigation->getSiteMenu();
 		$outertabsdata = array();
+		$menu = $this->navigation->getSiteMenu();
 		for ($i = 0; $i < count($menu); $i++) {
 			$d = array('href' => $menu['urls'][$i],
 					   'id' => md5($menu['urls'][$i]),
@@ -356,8 +357,26 @@ class Theme extends Layout {
 			$outertabsdata[] = $d;
 		}
 		$vars['outertabsdata'] = $outertabsdata;
-		$vars['use_tooltips'] = $use_tooltips;
-		
+
+
+
+		$projecttabsdata = array();
+		if (isset($params['group']) && $params['group']) {
+			$menu = $this->navigation->getProjectMenu($params['group'], $params['toptab']);
+			for ($i = 0; $i < count($menu); $i++) {
+				$d = array('href' => $menu['urls'][$i],
+						   'id' => md5($menu['urls'][$i]),
+						   'title' => $menu['titles'][$i],
+						   'tooltip' => $menu['tooltips'][$i]);
+				if ($i == $menu['selected']) {
+					$d['selected'] = true;
+				} else {
+					$d['selected'] = false;
+				}
+				$projecttabsdata[] = $d;
+			}
+		}
+		$vars['projecttabsdata'] = $projecttabsdata;
 
 		$vars['error_msg'] = $GLOBALS['error_msg'];
 		$vars['warning_msg'] = $GLOBALS['warning_msg'];
