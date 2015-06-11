@@ -383,15 +383,18 @@ class Theme extends Layout {
 		$vars['feedback'] = $GLOBALS['feedback'];
 
 		print $template->render($vars);
-		}
+	}
 	function footer($params = array()) {
-			// TODO
-			return parent::footer($params);
-		}
+		$template = $this->twig->loadTemplate('footer.html');
+
+		$vars = array('imgurl' => util_make_uri('/images/pow-fusionforge.png'));
+
+		print $template->render($vars);
+	}
 	function footerEnd() {
 		// TODO
 		return parent::footerEnd();
-		}
+	}
 	function getRootIndex() {
 		// TODO
 		return parent::getRootIndex();
@@ -434,18 +437,18 @@ class Theme extends Layout {
 		if (count($titleArray)) {
 			$count = count($titleArray);
 			for ($i = 0; $i < $count; $i++) {
-				$item = array();
+				$item = array('text' => $titleArray[$i]);
 				if ($thOtherAttrsArray && isset($thOtherAttrsArray[$i])) {
-					$item = $thOtherAttrsArray[$i];
+					$item['attrs'] = $thOtherAttrsArray[$i];
 				}
 				if ($thClassArray && isset($thClassArray[$i])) {
-					$item['class'] = $thClassArray[$i];
+					$item['attrs']['class'] = $thClassArray[$i];
 				}
 				if ($thTitleArray && isset($thTitleArray[$i])) {
-					$item['title'] = $thTitleArray[$i];
+					$item['attrs']['title'] = $thTitleArray[$i];
 				}
 				if ($linksArray && isset($linksArray[$i])) {
-					$item['url'] = util_make_uri($linksArray[$i]);
+					$item['attrs']['url'] = util_make_uri($linksArray[$i]);
 				}
 				$data[] = $item;
 			}

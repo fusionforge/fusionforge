@@ -2,8 +2,8 @@
   {% if data|length %}
   <thead>
 	<tr>
-	  {% for item in data %}
-	  <th {% for k,v in i.attrs if k != 'title' and k != 'url' %}{{ k }}="{{ v }}"{% endfor %}><a href="{{ i.url }}">{{ i.title }}</a>
+	  {% for i in data %}
+	  <th {% for k,v in i.attrs if k != 'title' and k != 'url' %}{{ k }}="{{ v }}"{% endfor %}>{% if i.url %}<a href="{{ i.url }}">{% endif %}{{ i.text }}{% if i.url %}</a>{% endif %}
 	  </th>
 	  {% endfor %}
 	</tr>
