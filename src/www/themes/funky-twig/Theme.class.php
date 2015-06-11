@@ -169,10 +169,6 @@ class Theme extends Layout {
 		return $template->render($vars);
 	}
 	function header($params) {
-		$this->headerStart($params);
-		$this->bodyHeader($params);
-	}
-	function headerStart($params) {
 		$this->headerHTMLDeclaration();
 
 		$template = $this->twig->loadTemplate('headerStart.html');
@@ -254,6 +250,8 @@ class Theme extends Layout {
 		}
 		
 		print $template->render($vars);
+
+		$this->bodyHeader($params);
 	}
 	function headerHTMLDeclaration() {
 		global $sysDTDs, $sysXMLNSs;
@@ -394,15 +392,15 @@ class Theme extends Layout {
 		return $template->render($vars);
 	}
 	function outerTabs($params) {
-		// TODO
+		// TODO -- not used directly by pages, can be inlined in this file (unless used in several places)
 		return parent::outerTabs($params);
 	}
 	function quickNav() {
-		// TODO
+		// TODO -- not used directly by pages, can be inlined in this file (unless used in several places)
 		return parent::quickNav();
 	}
 	function projectTabs($toptab, $group_id) {
-		// TODO
+		// TODO -- not used directly by pages, can be inlined in this file (unless used in several places)
 		return parent::projectTabs($toptab, $group_id);
 	}
 	function searchBox() {
@@ -506,11 +504,11 @@ class Theme extends Layout {
 		return parent::html_textarea($name, $id, $label, $value, $extra_params);
 	}
 	function html_table_top($cols, $summary = '', $class = '', $extra_params = '') {
-		// TODO
+		// TODO -- not used directly by pages, can be inlined in this file (unless used in several places)
 		return parent::html_table_top($cols, $summary, $class, $extra_params);
 	}
 	function getMonitorPic($title = '', $alt = '') {
-		// TODO
+		// TODO -- not used directly by pages, can be inlined in this file (unless used in several places)
 		return parent::getMonitorPic($title, $alt);
 	}
 	function getStartMonitoringPic($title = '', $alt = '') {
@@ -590,11 +588,11 @@ class Theme extends Layout {
 		return parent::getNewPic($title, $alt, $otherAttr);
 	}
 	function getFolderPic($title = '', $alt = '', $otherAttr = array()) {
-		// TODO
+		// TODO -- not used directly by pages, can be inlined in this file (unless used in several places)
 		return parent::getFolderPic($title, $alt, $otherAttr);
 	}
 	function getPicto($url, $title, $alt, $width = '20', $height = '20', $otherAttr = array()) {
-		// TODO
+		// TODO -- not used directly by pages, can be inlined in this file (unless used in several places)
 		return parent::getPicto($url, $title, $alt, $width, $height, $otherAttr);
 	}
 	function toSlug($string, $space = "-") {
@@ -606,11 +604,11 @@ class Theme extends Layout {
 		return parent::widget($widget, $layout_id, $readonly, $column_id, $is_minimized, $display_preferences, $owner_id, $owner_type);
 	}
 	function _getTogglePlusForWidgets() {
-		// TODO
+		// TODO -- not used directly by pages, can be inlined in this file (unless used in several places)
 		return parent::_getTogglePlusForWidgets();
 	}
 	function _getToggleMinusForWidgets() {
-		// TODO
+		// TODO -- not used directly by pages, can be inlined in this file (unless used in several places)
 		return parent::_getToggleMinusForWidgets();
 	}
 	function printSoftwareMapLinks() {
