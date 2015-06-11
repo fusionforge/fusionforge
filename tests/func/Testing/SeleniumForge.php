@@ -291,6 +291,13 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->triggeredLogin($username);
 	}
 
+	protected function changeTheme($theme)
+	{
+		$this->clickAndWait("link=My Account");
+		$this->select("//select[@name='theme_id']","label=$theme");
+		$this->clickAndWait("submit");
+	}
+
 	protected function triggeredLogin($username)
 	{
 		if ($username == FORGE_ADMIN_USERNAME) {

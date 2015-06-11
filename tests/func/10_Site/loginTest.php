@@ -122,7 +122,8 @@ class LoginProcess extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Forge Admin"));
 		$this->assertTrue($this->isTextPresent("Log Out"));
-		$this->assertTrue($this->isTextPresent("Log Out"));
+
+		$this->changeTheme("Funky Twig");
 	}
 }
 
