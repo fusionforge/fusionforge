@@ -1,6 +1,6 @@
 {% include 'ListTableTop.html' with { 'class': 'fullwidth', 'id': 'header' } only %}
 
-      {% include 'multiTableRow.html' %}
+      {% include 'multiTableRow.html' with { 'rowattrs': {}, 'cells': siteheader_celldata } only %}
 
       {% if session_loggedin %}
 

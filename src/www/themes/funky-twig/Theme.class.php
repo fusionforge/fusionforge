@@ -308,7 +308,7 @@ class Theme extends Layout {
 						 'attrs' => array('id' => 'header-col2'));
 
 		$vars['rowattrs'] = array();
-		$vars['cell_data'] = $cells;
+		$vars['siteheader_celldata'] = $cells;
 
 		$vars['session_loggedin'] = session_loggedin();
 
@@ -344,7 +344,7 @@ class Theme extends Layout {
 
 		$outertabsdata = array();
 		$menu = $this->navigation->getSiteMenu();
-		for ($i = 0; $i < count($menu); $i++) {
+		for ($i = 0; $i < count($menu['urls']); $i++) {
 			$d = array('href' => $menu['urls'][$i],
 					   'id' => md5($menu['urls'][$i]),
 					   'title' => $menu['titles'][$i],
