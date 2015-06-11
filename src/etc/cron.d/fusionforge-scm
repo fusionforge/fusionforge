@@ -8,6 +8,3 @@ PATH=@bindir@:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 # Generate snapshots and tarballs from SCM repositories
 0 3 * * * root forge_run_job scm/generate_scm_snapshots.php
-
-# Kill old Apache2 processes (excluding the main apache parent)
-1 * * * *	root	d=$(forge_get_config apache_service); for pid in $(pidof $d -o $(cat /var/run/$d/$d.pid)); do etimes=$(ps -oetimes -p$pid | tail -n+2); if [ ${etimes:-0} -gt 86400 ]; then kill -9 $pid; fi; done

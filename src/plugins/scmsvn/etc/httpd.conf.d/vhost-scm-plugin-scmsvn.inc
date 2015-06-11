@@ -26,7 +26,7 @@ ScriptAlias /anonscm/viewvc ${FF__core__plugins_path}/scmsvn/libexec/viewvc.cgi
 # Redirect URLs from FF < 6.0 (scm_host -> scm_host)
 # Note: ViewVC URLs are backward-compatible through proxying in viewvc.php
 <IfModule mod_authz_svn.c>
-  Alias /svn ${FF__core__source_path}/www/plugins/scmsvn/redirect-to-itk.php
+  Alias /svn ${FF__core__plugins_path}/scmsvn/www/redirect-to-itk.php
 </IfModule>
 <IfModule !mod_authz_svn.c>
   Redirect permanent /svn /anonscm/svn/
