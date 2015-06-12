@@ -509,7 +509,7 @@ class Theme extends Layout {
 		return $this->renderTemplate('errorMessage.html', $vars);
 	}
 	function information($msg) {
-		$vars = array('message' => strip_tags($msg, '<br>'));
+		$vars = array('information' => strip_tags($msg, '<br>'));
 
 		return $this->renderTemplate('information.html', $vars);
 	}
