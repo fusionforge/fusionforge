@@ -188,6 +188,10 @@ class Theme_Funky_Twig extends Theme_Funky {
 
 		plugin_hook("javascript_file");
 		plugin_hook("css_file");
+		html_use_storage();
+		html_use_coolfieldset();
+		html_use_jqueryui();
+
 		$vars['javascripts'] = array();
 		foreach ($this->javascripts as $js) {
 			$vars['javascripts'][] = util_make_uri($js);
