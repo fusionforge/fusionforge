@@ -24,7 +24,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfwww.'include/Layout.class.php';
+require_once forge_get_config('themes_root').'/funky/Theme.class.php';
 require_once 'Twig/Autoloader.php';
 Twig_Autoloader::register();
 
