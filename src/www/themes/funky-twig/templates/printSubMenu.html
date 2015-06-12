@@ -1,0 +1,4 @@
+    {% for entry in submenuentries %}
+      {% include 'Link.html' with { 'text': entry.title, 'href': entry.url, 'extra_params': entry.attrs, 'use_tooltips': use_tooltips } only %}
+      {% if not loop.last %}{% include 'subMenuSeparator.html' only %}{% endif %}
+      {% endfor %}

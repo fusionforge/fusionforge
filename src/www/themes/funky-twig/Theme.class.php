@@ -90,8 +90,8 @@ class Theme extends Layout {
 		}
 
 		$vars = array('href' => $href,
-			      'text' => $text,
-			      'extra_params' => $extra_params);
+					  'text' => $text,
+					  'extra_params' => $extra_params);
 
 		return $this->renderTemplate('Link.html', $vars);
 	}
@@ -359,6 +359,8 @@ class Theme extends Layout {
 		$vars['warning_msg'] = $GLOBALS['warning_msg'];
 		$vars['feedback'] = $GLOBALS['feedback'];
 
+		$vars['submenu'] = $params['submenu'];
+
 		print $this->renderTemplate('bodyHeader.html', $vars);
 	}
 	function footer($params = array()) {
@@ -439,24 +441,32 @@ class Theme extends Layout {
 		return parent::searchBox();
 	}
 	function beginSubMenu() {
-		// TODO
-		return parent::beginSubMenu();
+		return $this->renderTemplate('beginSubMenu.html');
 	}
 	function endSubMenu() {
-		// TODO
-		return parent::endSubMenu();
+		return $this->renderTemplate('endSubMenu.html');
 	}
 	function printSubMenu($title_arr, $links_arr, $attr_arr) {
-		// TODO
-		return parent::printSubMenu($title_arr, $links_arr, $attr_arr);
+		$submenuentries = array();
+
+		for ($i=0; $i < count($title_arr); $i++) {
+			$submenuentries[] = array('title' => $title_arr[$i],
+									  'url' => util_make_uri($links_arr[$i]),
+									  'attrs' => $attr_arr[$i]);
+		}
+
+		$vars = array('submenuentries' => $submenuentries);
+
+		return $this->renderTemplate('printSubMenu.html', $vars);
 	}
 	function subMenuSeparator() {
-		// TODO
-		return parent::subMenuSeparator();
+		return $this->renderTemplate('subMenuSeparator.html');
 	}
 	function subMenu($title_arr, $links_arr, $attr_arr = array()) {
-		// TODO
-		return parent::subMenu($title_arr, $links_arr, $attr_arr);
+		$return  = $this->beginSubMenu();
+		$return .= $this->printSubMenu($title_arr, $links_arr, $attr_arr);
+		$return .= $this->endSubMenu();
+		return $return;
 	}
 	function multiTableRow($row_attrs, $cell_data, $istitle = false) {
 		if (!isset($row_attrs['class'])) {
