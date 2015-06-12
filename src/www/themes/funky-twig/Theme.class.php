@@ -340,7 +340,7 @@ class Theme extends Layout {
 		$projecttabsdata = array();
 		if (isset($params['group']) && $params['group']) {
 			$menu = $this->navigation->getProjectMenu($params['group'], $params['toptab']);
-			for ($i = 0; $i < count($menu); $i++) {
+			for ($i = 0; $i < count($menu['urls']); $i++) {
 				$d = array('href' => $menu['urls'][$i],
 						   'id' => md5($menu['urls'][$i]),
 						   'title' => $menu['titles'][$i],
