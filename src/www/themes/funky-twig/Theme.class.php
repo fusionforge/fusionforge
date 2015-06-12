@@ -186,6 +186,7 @@ class Theme_Funky_Twig extends Theme_Funky {
 										'url' => util_make_uri('/export/rss20_activity.php?group_id='.$GLOBALS['group_id']));
 		}
 
+		use_javascript('/js/common.js');
 		plugin_hook("javascript_file");
 		plugin_hook("css_file");
 		html_use_storage();
