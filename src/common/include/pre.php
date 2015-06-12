@@ -302,6 +302,9 @@ if (getenv('FUSIONFORGE_NO_DB') != 'true' and forge_get_config('database_name') 
 			$y[] = ucfirst($i);
 		}
 		$classname = implode('_', $y);
+		if (!class_exists($classname)) {
+			$classname = 'Theme'; // Cope with local themes where the class may still be called "Theme"
+		}
 		$HTML = new $classname () ;
 		$HTML->_theme = $x_theme;
 		unset($x_theme);
