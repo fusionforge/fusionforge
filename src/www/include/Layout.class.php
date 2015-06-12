@@ -116,7 +116,7 @@ class Layout extends Error {
 	/**
 	 * Layout() - Constructor
 	 */
-	function Layout() {
+	function __construct() {
 		// parent constructor
 		$this->Error();
 

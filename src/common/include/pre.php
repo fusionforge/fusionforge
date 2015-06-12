@@ -296,7 +296,13 @@ if (getenv('FUSIONFORGE_NO_DB') != 'true' and forge_get_config('database_name') 
 			$x_theme = forge_get_config('default_theme');
 		}
 		require_once forge_get_config('themes_root').'/'.$x_theme.'/Theme.class.php';
-		$HTML = new Theme () ;
+		$x = explode('-', $x_theme);
+		$y = array('Theme');
+		foreach ($x as $i) {
+			$y[] = ucfirst($i);
+		}
+		$classname = implode('_', $y);
+		$HTML = new $classname () ;
 		$HTML->_theme = $x_theme;
 		unset($x_theme);
 	} else {		     // Script run from cron or a command line
