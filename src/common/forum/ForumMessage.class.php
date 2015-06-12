@@ -593,14 +593,18 @@ class ForumMessage extends Error {
 			$msg = new ForumMessage($this->Forum,db_result($result,$i,'msg_id'));
 			$count += $msg->delete();
 		}
-		$toss = db_query_params ('DELETE FROM forum
-			WHERE msg_id=$1
-			AND group_forum_id=$2',
-					 array ($msg_id,
-						$this->Forum->getID())) ;
 
-		$res = db_query_params ('DELETE FROM forum_attachment where msg_id=$1',
-					array ($msg_id));
+		$res_pa = db_query_params('SELECT attachmentid FROM forum_attachment WHERE msg_id=$1',
+								  array($msg_id));
+		while ($pa = db_fetch_array($res_pa)) {
+			ForumStorage::instance()->delete($pa['attachmentid']);
+			db_query_params('DELETE FROM forum_attachment WHERE attachmentid=$1',
+							array($pa['attachmentid']));
+		}
+		ForumStorage::instance()->commit();
+
+		$toss = db_query_params('DELETE FROM forum WHERE msg_id=$1 AND group_forum_id=$2',
+								array ($msg_id, $this->Forum->getID()));
 
 		return $count;
 	}

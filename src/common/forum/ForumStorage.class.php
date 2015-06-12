@@ -46,6 +46,7 @@
 require_once $gfcommon.'include/Storage.class.php';
 
 class ForumStorage extends Storage {
+	protected static $_instance;
 	public static function instance() {
 		if (!isset(self::$_instance)) {
 			$c = __CLASS__;

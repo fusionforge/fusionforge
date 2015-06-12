@@ -369,19 +369,21 @@ class ForumAdmin extends Error {
 					case 2 : {
 						//delete
 						db_begin();
-						if (!db_query_params ('DELETE FROM forum_pending_attachment WHERE msg_id=$1',
-									array ($msgids[$i]))) {
-							$error_msg .= "DB Error: ". db_error();
-							db_rollback();
-							break;
+						$res_pa = db_query_params('SELECT attachmentid FROM forum_pending_attachment WHERE msg_id=$1',
+												  array($msgids[$i]));
+						while ($pa = db_fetch_array($res_pa)) {
+							ForumPendingStorage::instance()->delete($pa['attachmentid']);
+							db_query_params('DELETE FROM forum_pending_attachment WHERE attachmentid=$1', array($pa['attachmentid']));
 						}
 						if (!db_query_params('DELETE FROM forum_pending_messages WHERE msg_id=$1',
 									array ($msgids[$i]))) {
 							$error_msg .= "DB Error: ". db_error();
 							db_rollback();
+							ForumPendingStorage::instance()->rollback();
 							break;
 						}
 						db_commit();
+						ForumPendingStorage::instance()->commit();
 						$feedback .= _('Forum deleted');
 						break;
 					}
@@ -429,7 +431,7 @@ class ForumAdmin extends Error {
 								$userid = db_result($res2,0,"userid");
 								$dateline = db_result($res2,0,"dateline");
 								$filename = db_result($res2,0,"filename");
-								$filedata = db_result($res2,0,"filedata");
+								$filedata = ForumPendingStorage::instance()->get_storage(db_result($res2,0,"attachmentid"));
 								$filesize = db_result($res2,0,"filesize");
 								$visible = db_result($res2,0,"visible");
 								$msg_id = db_result($res2,0,"msg_id");
@@ -472,7 +474,8 @@ class ForumAdmin extends Error {
 						}
 
 						if ($deleteok) {
-							//delete the message and attach
+							// delete the message
+							// delete attachments (in the DB only, files already moved by FileStorage::store)
 							db_begin();
 							if (!db_query_params ('DELETE FROM forum_pending_attachment WHERE msg_id=$1',
 										array ($msgids[$i]))) {

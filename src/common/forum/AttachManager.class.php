@@ -26,6 +26,7 @@
  */
 
 require_once $gfcommon.'forum/ForumStorage.class.php';
+require_once $gfcommon.'forum/ForumPendingStorage.class.php';
 
 class AttachManager extends Error {
 
@@ -306,14 +307,14 @@ class AttachManager extends Error {
 					if ($attachment_size) {
 						if (is_file($attachment)) {
 							$id = db_insertid($res,'forum_pending_attachment','attachmentid');
-							if (ForumStorage::instance()->store($this->$id, $attachment)) {
+							if (ForumPendingStorage::instance()->store($id, $attachment)) {
 								$this->messages[] = _('File uploaded');
 								db_commit();
 								return true;
 							} else {
-								ForumStorage::instance()->rollback();
+								ForumPendingStorage::instance()->rollback();
 								db_rollback();
-								$this->setError(ForumStorage::instance()->getErrorMessage());
+								$this->setError(ForumPendingStorage::instance()->getErrorMessage());
 								$this->messages[] = _('File not uploaded');
 								return false;
 							}
@@ -324,10 +325,9 @@ class AttachManager extends Error {
 							return false;
 						}
 					}
-					$this->messages[] = _('File not uploaded');
-				} else {
-					$this->messages[] = _('File not uploaded');
 				}
+				db_rollback();
+				$this->messages[] = _('File not uploaded');
 			}
 		} else {
 			if ($update) {
@@ -373,7 +373,7 @@ class AttachManager extends Error {
 				if ($msg_id != 0) {
 					$this->msg_id = $msg_id;
 				} else {
-					$result = db_query_params('SELECT max(msg_id) AS id FROM forum_pending_messages',
+					$result = db_query_params('SELECT max(msg_id) AS id FROM forum_messages',
 								array());
 					if (!$result || db_numrows($result) < 1) {
 						$this->messages[] = _('Could not get message id');

@@ -642,6 +642,7 @@ class Forum extends Error {
 			db_rollback();
 			return false;
 		}
+		# TODO: remove attachments from the filesystem
 
 		$result = db_query_params('DELETE FROM forum WHERE group_forum_id=$1',
 				array($this->getID()));
