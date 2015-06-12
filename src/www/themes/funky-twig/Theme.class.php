@@ -494,17 +494,17 @@ class Theme extends Layout {
 		return $this->renderTemplate('multiTableRow.html', $vars);
 	}
 	function feedback($msg) {
-		$vars = array('message' => strip_tags($msg, '<br>'));
+		$vars = array('feedback' => strip_tags($msg, '<br>'));
 
 		return $this->renderTemplate('feedback.html', $vars);
 	}
 	function warning_msg($msg) {
-		$vars = array('message' => strip_tags($msg, '<br>'));
+		$vars = array('warning_msg' => strip_tags($msg, '<br>'));
 
 		return $this->renderTemplate('warningMessage.html', $vars);
 	}
 	function error_msg($msg) {
-		$vars = array('message' => strip_tags($msg, '<br>'));
+		$vars = array('error_msg' => strip_tags($msg, '<br>'));
 
 		return $this->renderTemplate('errorMessage.html', $vars);
 	}
