@@ -24,6 +24,29 @@
     <script type="text/javascript" src="{{ s }}"></script>
     {% endfor %}
 
+    <script type="text/javascript">
+      //<![CDATA[
+      jQuery(window).load(function(){
+      	setTimeout("jQuery(\'.feedback\').hide(\'slow\')", 5000);
+      	setInterval(function() {
+      			setTimeout("jQuery(\'.feedback\').hide(\'slow\')", 5000);
+      		}, 5000);
+      });
+      //]]>
+    </script>
+
+    {% if use_tooltips %}
+    <script type="text/javascript">
+      //<![CDATA[
+      jQuery(document).ready(
+        function() {
+          jQuery(document).tooltip();
+	}
+      );
+      //]]>
+    </script>
+    {% endif %}
+
     {% for s in stylesheets %}
     <link rel="stylesheet" type="text/css" href="{{ s.url }}" {% if m %} media="{{ s.media }}" {% endif %} />
     {% endfor %}
