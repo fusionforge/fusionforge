@@ -1,7 +1,7 @@
-<ul>
+<ul {% for k,v in attrs %}{{ k }}="{{ v }}"{% endfor %}>
 {% for i in items %}
-  <li {{ i.attr }}>
-  {{ i.element }}
+  <li {% for k,v in i.attrs %}{{ k }}="{{ v }}"{% endfor %}>
+  {{ i.element|raw }}
   </li>
 {% endfor %}
 </ul>

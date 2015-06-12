@@ -99,15 +99,12 @@ class Theme extends Layout {
 	function html_list($elements, $attrs = array(), $type = 'ul') {
 		$items = array();
 		for ($i = 0; $i < count($elements); $i++) {
-			$items[$i]['element'] = $elements[$i];
-			if ($i <= count($attrs)) {
-				$items[$i]['attr'] = $attrs[$i];
-			} else {
-				$items[$i]['attr'] = '';
-			}				
+			$items[$i]['element'] = $elements[$i]['content'];
+			$items[$i]['attrs'] = $elements[$i]['attrs'];
 		}
 
-		$vars = array('items' => $items);
+		$vars = array('items' => $items,
+					  'attrs' => $attrs);
 
 		if ($type == 'ol') {
 			return $this->renderTemplate('OrderedList.html', $vars);
