@@ -42,18 +42,23 @@ class Theme extends Layout {
 
 		$this->twig_loader = new Twig_Loader_Filesystem(forge_get_config('themes_root').'/funky-twig/templates');
 		$this->twig = new Twig_Environment($this->twig_loader);
+	}
 
+	function renderTemplate($file, $vars = array()) {
+		global $use_tooltips;
+
+		$vars['use_tooltips'] = $use_tooltips;
+		$vars['session_loggedin'] = session_loggedin();
+		
+		$t = $this->twig->loadTemplate($file);
+
+		return $t->render($vars);
 	}
 
 	function tabGenerator($TABS_DIRS, $TABS_TITLES, $TABS_TOOLTIPS, $nested=false,  $selected=false, $sel_tab_bgcolor='WHITE',  $total_width='100%') {
-		global $use_tooltips;
-
-		$template = $this->twig->loadTemplate('Tabs.html');
-
-		$vars = array('use_tooltips' => $use_tooltips,
-					  'nested' => $nested,
+		$vars = array('nested' => $nested,
 					  'total_width' => $total_width);
-
+		
 		$tabs = array();
 		for ($i = 0; $i < count($TABS_DIRS); $i++) {
 			$tab = array('href' => $TABS_DIRS[$i],
@@ -70,14 +75,10 @@ class Theme extends Layout {
 		}
 		$vars['tabs'] = $tabs;
 
-		return $template->render($vars);
+		return $this->renderTemplate('Tabs.html', $vars);
 	}
 
 	function makeLink($path, $text, $extra_params = false, $absolute = false) {
-		global $use_tooltips;
-
-		$template = $this->twig->loadTemplate('Link.html');
-
 		if (!is_array($extra_params)) {
 			$extra_params = array();
 		}
@@ -90,19 +91,12 @@ class Theme extends Layout {
 
 		$vars = array('href' => $href,
 			      'text' => $text,
-			      'extra_params' => $extra_params,
-			      'use_tooltips' => $use_tooltips);
+			      'extra_params' => $extra_params);
 
-		return $template->render($vars);
+		return $this->renderTemplate('Link.html', $vars);
 	}
 
 	function html_list($elements, $attrs = array(), $type = 'ul') {
-		if ($type == 'ol') {
-			$template = $this->twig->loadTemplate('OrderedList.html');
-		} else {
-			$template = $this->twig->loadTemplate('UnorderedList.html');
-		}
-
 		$items = array();
 		for ($i = 0; $i < count($elements); $i++) {
 			$items[$i]['element'] = $elements[$i];
@@ -115,16 +109,18 @@ class Theme extends Layout {
 
 		$vars = array('items' => $items);
 
-		return $template->render($vars);
+		if ($type == 'ol') {
+			return $this->renderTemplate('OrderedList.html', $vars);
+		} else {
+			return $this->renderTemplate('UnorderedList.html', $vars);
+		}
 	}
 
 	function html_chartid($id = 0, $title = '') {
-		$template = $this->twig->loadTemplate('ChartId.html');
-
 		$vars = array('chart_id' => $id,
 					  'title' => $title);
 		
-		return $template->render($vars);
+		return $this->renderTemplate('ChartId.html', $vars);
 	}
 
 	// Methods to reimplement (if relevant)
@@ -137,8 +133,6 @@ class Theme extends Layout {
 		return parent::addStylesheet($css, $media);
 	}
 	function getJavascripts() {
-		$template = $this->twig->loadTemplate('JavaScripts.html');
-
 		$scripts = array();
 		foreach ($this->javascripts as $js) {
 			$scripts[] = util_make_uri($js);
@@ -147,11 +141,9 @@ class Theme extends Layout {
 
 		$vars = array('js' => $scripts);
 		
-		return $template->render($vars);
+		return $this->renderTemplate('JavaScripts.html', $vars);
 	}
 	function getStylesheets() {
-		$template = $this->twig->loadTemplate('StyleSheets.html');
-
 		$sheets = array();
 		foreach ($this->stylesheets as $c) {
 			$sheet = array('css' => util_make_uri($c['css']));
@@ -166,12 +158,10 @@ class Theme extends Layout {
 
 		$vars = array('sheets' => $sheets);
 		
-		return $template->render($vars);
+		return $this->renderTemplate('StyleSheets.html', $vars);
 	}
 	function header($params) {
 		$this->headerHTMLDeclaration();
-
-		$template = $this->twig->loadTemplate('headerStart.html');
 
 		$vars = array();
 
@@ -249,14 +239,12 @@ class Theme extends Layout {
 			$vars['alt_representations'] = $p2['return'];
 		}
 		
-		print $template->render($vars);
+		print $this->renderTemplate('headerStart.html', $vars);
 
 		$this->bodyHeader($params);
 	}
 	function headerHTMLDeclaration() {
 		global $sysDTDs, $sysXMLNSs;
-
-		$template = $this->twig->loadTemplate('HTMLDeclaration.html');
 
 		$vars = array();
 		
@@ -267,16 +255,10 @@ class Theme extends Layout {
 		$vars['lang'] = _('en');
 		$vars['ns'] = $sysXMLNSs;
 
-		print $template->render($vars);
+		print $this->renderTemplate('HTMLDeclaration.html', $vars);
 	}
 	function bodyHeader($params){
-		global $use_tooltips;
-
-		$template = $this->twig->loadTemplate('bodyHeader.html');
-
 		$vars = array();
-		
-		$vars['use_tooltips'] = $use_tooltips;
 
 		if (isset($params['h1'])) {
 			$vars['h1'] = $params['h1'];
@@ -309,8 +291,6 @@ class Theme extends Layout {
 
 		$vars['rowattrs'] = array();
 		$vars['siteheader_celldata'] = $cells;
-
-		$vars['session_loggedin'] = session_loggedin();
 
 		if (session_loggedin()) {
 			$groups = session_get_user()->getGroups();
@@ -382,14 +362,12 @@ class Theme extends Layout {
 		$vars['warning_msg'] = $GLOBALS['warning_msg'];
 		$vars['feedback'] = $GLOBALS['feedback'];
 
-		print $template->render($vars);
+		print $this->renderTemplate('bodyHeader.html', $vars);
 	}
 	function footer($params = array()) {
-		$template = $this->twig->loadTemplate('footer.html');
-
 		$vars = array('imgurl' => util_make_uri('/images/pow-fusionforge.png'));
 
-		print $template->render($vars);
+		print $this->renderTemplate('footer.html', $vars);
 	}
 	function footerEnd() {
 		// TODO
@@ -400,35 +378,25 @@ class Theme extends Layout {
 		return parent::getRootIndex();
 	}
 	function boxTop($title, $id='') {
-		$template = $this->twig->loadTemplate('BoxTop.html');
-
 		$vars = array('id' => $id,
 					  'title' => $title);
 
-		return $template->render($vars);
+		return $this->renderTemplate('BoxTop.html', $vars);
 	}
 	function boxMiddle($title, $id='') {
-		$template = $this->twig->loadTemplate('BoxMiddle.html');
-
 		$vars = array('id' => $id,
 					  'title' => $title);
 
-		return $template->render($vars);
+		return $this->renderTemplate('BoxMiddle.html', $vars);
 	}
 	function boxBottom() {
-		$template = $this->twig->loadTemplate('BoxBottom.html');
-
-		$vars = array();
-
-		return $template->render($vars);
+		return $this->renderTemplate('BoxBottom.html');
 	}
 	function boxGetAltRowStyle($i, $classonly = false) {
 		// TODO
 		return parent::boxGetAltRowStyle($i, $classonly);
 	}
 	function listTableTop($titleArray = array(), $linksArray = array(), $class = '', $id = '', $thClassArray = array(), $thTitleArray = array(), $thOtherAttrsArray = array()) {
-		$template = $this->twig->loadTemplate('ListTableTop.html');
-
 		$vars = array('id' => $id,
 					  'class' => $class);
 
@@ -456,14 +424,10 @@ class Theme extends Layout {
 
 		$vars['data'] = $data;
 
-		return $template->render($vars);
+		return $this->renderTemplate('ListTableTop.html', $vars);
 	}
 	function listTableBottom() {
-		$template = $this->twig->loadTemplate('ListTableBottom.html');
-
-		$vars = array();
-
-		return $template->render($vars);
+		return $this->renderTemplate('ListTableBottom.html');
 	}
 	function outerTabs($params) {
 		// TODO -- not used directly by pages, can be inlined in this file (unless used in several places)
@@ -498,8 +462,6 @@ class Theme extends Layout {
 		return parent::subMenu($title_arr, $links_arr, $attr_arr);
 	}
 	function multiTableRow($row_attrs, $cell_data, $istitle = false) {
-		$template = $this->twig->loadTemplate('multiTableRow.html');
-
 		if (!isset($row_attrs['class'])) {
 			$row_attrs['class'] = '';
 		}
@@ -522,39 +484,29 @@ class Theme extends Layout {
 					  'cells' => $cells,
 					  'istitle' => $istitle);
 		
-		return $template->render($vars);
+		return $this->renderTemplate('multiTableRow.html', $vars);
 	}
 	function feedback($msg) {
-		$template = $this->twig->loadTemplate('feedback.html');
-
 		$vars = array('message' => strip_tags($msg, '<br>'));
 
-		return $template->render($vars);
+		return $this->renderTemplate('feedback.html', $vars);
 	}
 	function warning_msg($msg) {
-		$template = $this->twig->loadTemplate('warningMessage.html');
-
 		$vars = array('message' => strip_tags($msg, '<br>'));
 
-		return $template->render($vars);
+		return $this->renderTemplate('warningMessage.html', $vars);
 	}
 	function error_msg($msg) {
-		$template = $this->twig->loadTemplate('errorMessage.html');
-
 		$vars = array('message' => strip_tags($msg, '<br>'));
 
-		return $template->render($vars);
+		return $this->renderTemplate('errorMessage.html', $vars);
 	}
 	function information($msg) {
-		$template = $this->twig->loadTemplate('information.html');
-
 		$vars = array('message' => strip_tags($msg, '<br>'));
 
-		return $template->render($vars);
+		return $this->renderTemplate('information.html', $vars);
 	}
 	function confirmBox($msg, $params, $buttons, $image='*none*') {
-		$template = $this->twig->loadTemplate('ConfirmBox.html');
-
 		if ($image == '*none*') {
 			$image = html_image('stop.png','48','48',array());
 		}
@@ -565,16 +517,14 @@ class Theme extends Layout {
 					  'msg' => $msg,
 					  'action' => getStringFromServer('PHP_SELF'));
 		
-		return $template->render($vars);
+		return $this->renderTemplate('ConfirmBox.html', $vars);
 	}
 	function jQueryUIconfirmBox($id = 'dialog-confirm', $title = 'Confirm your action', $message = 'Do you confirm your action?') {
-		$template = $this->twig->loadTemplate('jQueryUIConfirmBox.html');
-
 		$vars = array('id' => $id,
 					  'title' => $title,
 					  'message' => $message);
 
-		return $template->render($vars);
+		return $this->renderTemplate('jQueryUIConfirmBox.html', $vars);
 	}
 	function html_input($name, $id = '', $label = '', $type = 'text', $value = '', $extra_params = '') {
 		// TODO
