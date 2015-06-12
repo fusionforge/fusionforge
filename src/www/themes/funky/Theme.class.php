@@ -26,11 +26,9 @@
 
 require_once $gfwww.'include/Layout.class.php';
 
-class Theme extends Layout {
-
-	function Theme() {
-		// Parent constructor
-		$this->Layout();
+class Theme_Funky extends Layout {
+	function __construct() {
+		parent::__construct();
 		$this->themeurl = util_make_uri('themes/funky/');
 		$this->imgbaseurl = $this->themeurl . 'images/';
 		$this->imgroot = $this->imgbaseurl;
