@@ -1,51 +1,65 @@
 {% include 'ListTableTop.html' with { 'class': 'fullwidth', 'id': 'header' } only %}
 
-      {% include 'multiTableRow.html' with { 'rowattrs': {}, 'cells': siteheader_celldata } only %}
+{% include 'multiTableRow.html' with { 'rowattrs': {}, 'cells': siteheader_celldata } only %}
 
-      {% if session_loggedin %}
+<tr>
+  <td id="header-line2" colspan="2">
 
-{% if naventries|length > 0 %}
-{% set indentarray = { 0: '', 1: '   ↳ ', 2: '      ↳ ' } %}
-      <tr>
-	<td id="header-line2" colspan="2">
-<form id="quicknavform" name="quicknavform" action="">
-  <div>
-    <select name="quicknav" id="quicknav" onchange="location.href=document.quicknavform.quicknav.value">
-      <option value="">Quick Jump To...</option>
-      {% for e in naventries %}
-      <option value="{{ e.url }}">{{ indentarray[e.indent]|raw }}{{ e.title }}</option>
-      {% endfor %}
-    </select>
-  </div>
-	  </form>
-	</td>
-      </tr>
+    {% if session_loggedin and naventries|length > 0 %}
+    {% set indentarray = { 0: '', 1: '   ↳ ', 2: '      ↳ ' } %}
+    <form id="quicknavform" name="quicknavform" action="">
+      <div>
+        <select name="quicknav" id="quicknav" onchange="location.href=document.quicknavform.quicknav.value">
+          <option value="">Quick Jump To...</option>
+          {% for e in naventries %}
+          <option value="{{ e.url }}">{{ indentarray[e.indent]|raw }}{{ e.title }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </form>
+    {% endif %}
 
-{% endif %}
+    <form id="searchBox" action="{{ search_url }}" method="get">
+      <div>
+        <select name="type_of_search">
+	  {% for e in search_engines %}
+	  <option value="{{ e.value }}">{{ e.name }}</option>
+	  {% endfor %}
+        </select>
+        {% for h in search_hidden_params %}
+        <input type="hidden" value="{{ h.value }}" name="{{ h.name }}" />
+	{% endfor %}
+        <input type="text" size="12" id="searchBox-words" name="words" value="{{ search_words }}" required="required" />
+        <input type="submit" name="Search" value="Search" />
+	{% if advanced_search_url %}
+	{% include 'Link.html' with { 'href': advanced_search_url, 'text': 'Advanced search' } only %}
+	{% endif %}
+      </div>
+    </form>
 
-{% endif %}      
+  </td>
+</tr>
 
-      {% include 'ListTableBottom.html' only %}
+{% include 'ListTableBottom.html' only %}
 
 {% include 'Tabs.html' with { 'use_tooltips': use_tooltips, 'tabs': outertabsdata, 'total_width': '100%' } only %}
 
-      {% if projecttabsdata|length > 0 %}
-      <div class="innertabs">
-      {% include 'Tabs.html' with { 'use_tooltips': use_tooltips, 'tabs': projecttabsdata, 'total_width': '100%', 'nested': true } only %}
-      </div>
-      {% endif %}
+{% if projecttabsdata|length > 0 %}
+<div class="innertabs">
+{% include 'Tabs.html' with { 'use_tooltips': use_tooltips, 'tabs': projecttabsdata, 'total_width': '100%', 'nested': true } only %}
+</div>
+{% endif %}
 
-      
-    <div id="maindiv">
 
-      {% include 'errorMessage.html' %}
-      {% include 'warningMessage.html' %}
-      {% include 'feedback.html' %}
+<div id="maindiv">
+  {% include 'errorMessage.html' %}
+  {% include 'warningMessage.html' %}
+  {% include 'feedback.html' %}
 
-      {% if h1 %}
-      <h1>{{ h1 }}</h1>
-      {% else %}
-      <h1 class="hide">{{ title }}</h1>
-      {% endif %}
+  {% if h1 %}
+  <h1>{{ h1 }}</h1>
+  {% else %}
+  <h1 class="hide">{{ title }}</h1>
+  {% endif %}
 
-    {{ submenu|raw }}
+  {{ submenu|raw }}

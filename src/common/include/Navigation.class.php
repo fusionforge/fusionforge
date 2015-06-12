@@ -125,58 +125,78 @@ class Navigation extends Error {
 		}
 	}
 
-	/**
-	 * Get the searchBox HTML code.
-	 */
-	function getSearchBox() {
+	function getSearchBoxData() {
 		global $words, $forum_id, $group_id, $group_project_id, $atid, $exact, $type_of_search;
 
-		$res = "";
+		$vars = array();
+		
+		$vars['search_url'] = util_make_uri('/search/');
 		if (get_magic_quotes_gpc()) {
 			$defaultWords = stripslashes($words);
 		} else {
 			$defaultWords = $words;
 		}
-
 		$defaultWords = htmlspecialchars($defaultWords);
-
-		// if there is no search currently, set the default
 		if (!isset($type_of_search) ) {
 			$exact = 1;
 		}
-
-		$res .= html_ao('form', array('id' => 'searchBox', 'action' => util_make_uri('/search/'), 'method' => 'get'));
-		$res .= html_ao('div', array());
 		$parameters = array(
 			SEARCH__PARAMETER_GROUP_ID => $group_id,
 			SEARCH__PARAMETER_ARTIFACT_ID => $atid,
 			SEARCH__PARAMETER_FORUM_ID => $forum_id,
 			SEARCH__PARAMETER_GROUP_PROJECT_ID => $group_project_id
 			);
-
 		$searchManager =& getSearchManager();
 		$searchManager->setParametersValues($parameters);
-		$searchEngines =& $searchManager->getAvailableSearchEngines();
+		$se = array();
+		foreach ($searchManager->getAvailableSearchEngines() as $e) {
+			$item = array('value' => $e->getType(),
+						  'name' => $e->getLabel($parameters));
+			if ($type_of_search == $e->getType()) {
+				$item['selected'] = true;
+			}
+			$se[] = $item;
+		}
+		$vars['search_engines'] = $se;
 
+		$vars['search_hidden_params'] = array();
+		foreach($searchManager->getParameters() as $name => $value) {
+			$vars['search_hidden_params'][] = array('value' => $value, 'name' => $name);
+		}
+		$vars['search_words'] = $defaultWords;
+		if (isset($group_id) && $group_id) {
+			$vars['advanced_search_url'] = util_make_uri('/search/advanced_search.php?group_id='.$group_id);
+		}
+
+		return $vars;
+	}
+
+	/**
+	 * Get the searchBox HTML code.
+	 */
+	function getSearchBox() {
+		$vars = $this->getSearchBoxData();
+		$res = "";
+		$res .= html_ao('form', array('id' => 'searchBox', 'action' => $vars['search_url'], 'method' => 'get'));
+		$res .= html_ao('div', array());
 		$res .= html_ao('select', array('name' => 'type_of_search'));
-		for($i = 0, $max = count($searchEngines); $i < $max; $i++) {
-			$searchEngine =& $searchEngines[$i];
-			$attrs = array('value' => $searchEngine->getType());
-			if ( $type_of_search == $searchEngine->getType())
+		foreach ($vars['search_engines'] as $i) {
+			$attrs = array('value' => $i['value']);
+			if ($i['selected']) {
 				$attrs['selected'] = 'selected';
-			$res .= html_e('option', $attrs, $searchEngine->getLabel($parameters), false);
+			}
+			$res .= html_e('option', $attrs, $i['name'], false);
 		}
 		$res .= html_ac(html_ap() - 1);
 
-		$parameters = $searchManager->getParameters();
-		foreach($parameters AS $name => $value) {
-			$res .= html_e('input', array('type' => 'hidden', 'value' => $value, 'name' => $name));
+		foreach($vars['search_hidden_params'] as $i) {
+			$res .= html_e('input', array('type' => 'hidden', 'value' => $i['value'], 'name' => $i['name']));
 		}
-		$res .= html_e('input', array('type' => 'text', 'size' => 12, 'id' => 'searchBox-words', 'name' => 'words', 'value' => $defaultWords, 'required' => 'required'));
+		$res .= html_e('input', array('type' => 'text', 'size' => 12, 'id' => 'searchBox-words', 'name' => 'words', 'value' => $vars['search_words'], 'required' => 'required'));
 		$res .= html_e('input', array('type' => 'submit', 'name' => 'Search', 'value' => _('Search')));
 
-		if (isset($group_id) && $group_id) {
-			$res .= util_make_link('/search/advanced_search.php?group_id='.$group_id, _('Advanced search'));
+		if (isset($vars['advanced_search_url'])) {
+			$res .= util_make_link($vars['advanced_search_url'], _('Advanced search'));
 		}
 		$res .= html_ac(html_ap() - 2);
 

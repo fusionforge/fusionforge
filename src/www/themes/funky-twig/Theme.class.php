@@ -255,6 +255,7 @@ class Theme_Funky_Twig extends Theme_Funky {
 	function bodyHeader($params){
 		$vars = array();
 
+		// General variables
 		if (isset($params['h1'])) {
 			$vars['h1'] = $params['h1'];
 		} elseif (isset($params['title'])) {
@@ -269,6 +270,7 @@ class Theme_Funky_Twig extends Theme_Funky {
 			$vars['title'] = forge_get_config('forge_name');
 		}
 
+		// User links (login, logout, my account, etc.)
 		$cells = array();
 		$cells[] = array('text' => util_make_link('/', html_image('/header/top-logo.png', null, null, array('alt'=>'FusionForge Home'))),
 						 'attrs' => array('id' => 'header-col1'));
@@ -287,15 +289,19 @@ class Theme_Funky_Twig extends Theme_Funky {
 		$vars['rowattrs'] = array();
 		$vars['siteheader_celldata'] = $cells;
 
+		// Search form
+		foreach ($this->navigation->getSearchBoxData() as $k => $v) {
+			$vars[$k] = $v;
+		}
+
+		// Quick navigation dropdown menu
 		if (session_loggedin()) {
 			$groups = session_get_user()->getGroups();
 		} else {
 			$groups = array();
 		}
 		sortProjectList($groups);
-		
 		$naventries = array();
-
 		foreach ($groups as $g) {
 			$menu = $this->navigation->getProjectMenu($g->getID());
 			$naventries[] = array('url' => $menu['starturl'],
@@ -313,10 +319,9 @@ class Theme_Funky_Twig extends Theme_Funky {
 				}
 			}
 		}
-
 		$vars['naventries'] = $naventries;
 
-
+		// Outer tabs (site tabs)
 		$outertabsdata = array();
 		$menu = $this->navigation->getSiteMenu();
 		for ($i = 0; $i < count($menu['urls']); $i++) {
@@ -333,8 +338,7 @@ class Theme_Funky_Twig extends Theme_Funky {
 		}
 		$vars['outertabsdata'] = $outertabsdata;
 
-
-
+		// Inner tabs (project tabs)
 		$projecttabsdata = array();
 		if (isset($params['group']) && $params['group']) {
 			$menu = $this->navigation->getProjectMenu($params['group'], $params['toptab']);
@@ -353,10 +357,12 @@ class Theme_Funky_Twig extends Theme_Funky {
 		}
 		$vars['projecttabsdata'] = $projecttabsdata;
 
+		// Feedback
 		$vars['error_msg'] = $GLOBALS['error_msg'];
 		$vars['warning_msg'] = $GLOBALS['warning_msg'];
 		$vars['feedback'] = $GLOBALS['feedback'];
 
+		// Project-specific submenu
 		$vars['submenu'] = $params['submenu'];
 
 		print $this->renderTemplate('bodyHeader.html', $vars);
@@ -433,10 +439,6 @@ class Theme_Funky_Twig extends Theme_Funky {
 	function projectTabs($toptab, $group_id) {
 		// TODO -- not used directly by pages, can be inlined in this file (unless used in several places)
 		return parent::projectTabs($toptab, $group_id);
-	}
-	function searchBox() {
-		// TODO
-		return parent::searchBox();
 	}
 	function beginSubMenu() {
 		return $this->renderTemplate('beginSubMenu.html');
