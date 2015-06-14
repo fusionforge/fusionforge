@@ -116,7 +116,6 @@ function forum_header($params) {
 				$menu_links[]='/forum/admin/?group_id='.$group_id;
 			}
 		} else {
-			$gg = group_get_object($group_id);
 			if (forge_check_perm ('forum_admin', $group_id)) {
 				$menu_text[]=_('Administration');
 				$menu_links[]='/forum/admin/?group_id='.$group_id;
@@ -173,7 +172,7 @@ class ForumHTML extends Error {
 	 */
 	var $Forum;
 
-	function ForumHTML(&$Forum) {
+	function __construct(&$Forum) {
 		$this->Error();
 		if (!$Forum || !is_object($Forum)) {
 			$this->setError(_('Invalid Forum Object'));
@@ -337,8 +336,6 @@ class ForumHTML extends Error {
 	 * LinkAttachForm - echoes the link to the attach form
 	 */
 	function LinkAttachForm() {
-		$poststarttime = time();
-		$posthash = md5($poststarttime . user_getid() );
 		echo '
 		<fieldset class="fieldset">
 		<legend>' . _('Attachments') . "</legend>
@@ -359,7 +356,7 @@ class ForumHTML extends Error {
 	 * @param	string	$msg_id
 	 * @return	string
 	 */
-	function showNestedMessages ( &$msg_arr, $msg_id ) {
+	function showNestedMessages(&$msg_arr, $msg_id) {
 		global $total_rows;
 
 		$rows=count($msg_arr["$msg_id"]);
@@ -370,13 +367,9 @@ class ForumHTML extends Error {
 			<ul><li style="list-style: none">';
 
 			/*
-
 			iterate and show the messages in this result
-
 			for each message, recurse to show any submessages
-
 			*/
-			$am = new AttachManager();
 			for ($i=($rows-1); $i >= 0; $i--) {
 				//	  increment the global total count
 				$total_rows++;
@@ -559,17 +552,14 @@ class ForumHTML extends Error {
 
 		$rl = RoleLoggedIn::getInstance() ;
 		if (forge_check_perm ('forum', $this->Forum->getID(), 'post')) {
-			if ($subject) {
-				//if this is a followup, put a RE: before it if needed
-				if (!preg_match('/RE:/i',$subject,$test)) {
-					$subject ='RE: '.$subject;
-				}
+			//if this is a followup, put a RE: before it if needed
+			if ($subject && !preg_match('/RE:/i',$subject,$test)) {
+				$subject ='RE: '.$subject;
 			}
 			echo notepad_func();
 			?>
 			<div class="align-center">
 			<form id="ForumPostForm" enctype="multipart/form-data" action="<?php echo util_make_url ('/forum/forum.php?forum_id='.$this->Forum->getID().'&amp;group_id='.$group_id); ?>" method="post">
-			<?php $objid = $this->Forum->getID();?>
 			<input type="hidden" name="post_message" value="y" />
 			<input type="hidden" name="thread_id" value="<?php echo $thread_id; ?>" />
 			<input type="hidden" name="msg_id" value="<?php echo $is_followup_to; ?>" />

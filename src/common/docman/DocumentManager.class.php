@@ -243,7 +243,6 @@ class DocumentManager extends Error {
 				}
 				$returnString .= '}';
 				return $returnString;
-				break;
 			}
 			default: {
 				return $stateQuery;
@@ -269,8 +268,8 @@ class DocumentManager extends Error {
 		switch ($format) {
 			case 'json': {
 				$returnString = '[';
-				for ($i=0; $i<$rows; $i++) {
-                    $returnString .= '['.$id_array[$i].',\''.util_html_secure(addslashes($text_array[$i])).'\'],';
+				for ($i = 0; $i < $rows; $i++) {
+					$returnString .= '['.$id_array[$i].',\''.util_html_secure(addslashes($text_array[$i])).'\'],';
 				}
 				$returnString .= ']';
 				break;
