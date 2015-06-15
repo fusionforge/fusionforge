@@ -1614,7 +1614,7 @@ class Artifact extends Error {
 
 		if ($type > 1) {
 			// get all the email addresses that are monitoring this request or the ArtifactType
-			$monitor_ids = $this->getMonitorIds();
+			$monitor_ids = array_merge($this->getMonitorIds(), $this->ArtifactType->getMonitorIds());
 		} else {
 			// initial creation, we just get the users monitoring the ArtifactType
 			$monitor_ids = $this->ArtifactType->getMonitorIds();
