@@ -84,16 +84,12 @@ if (is_numeric($docid)) {
 	if ($d->getFileName() != $docname) {
 		session_redirect('/docman/view.php/'.$group_id.'/'.$docid.'/'.urlencode($d->getFileName()));
 	}
-
-	header('Content-disposition: attachment; filename="'.str_replace('"', '', $d->getFileName()) . '"');
-	header("Content-type: ".$d->getFileType());
-	header("Content-Transfer-Encoding: binary");
 	ob_end_clean();
 
 	$file_path = $d->getFilePath();
 	$length = filesize($file_path);
 	$d->downloadUp();
-	header("Content-length: $length");
+	utils_headers_download($d->getFileName(), $d->getFileType(), $length);
 	readfile_chunked($file_path);
 
 } elseif ($docid === 'backup') {
