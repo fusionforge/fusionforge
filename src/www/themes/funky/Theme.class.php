@@ -76,7 +76,14 @@ class Theme_Funky extends Layout {
 		echo html_ac(html_ap() -1);
 		echo html_ao('div', array('id' => 'maindiv'));
 
-		plugin_hook('message');
+		$params = array();
+		plugin_hook_by_reference('message', $params);
+		if (isset ($params['message'])) {
+			echo '<div id="message_box">';
+			echo html_image("ic/close.png", '', '', array('alt'=>_('Close'), 'id'=>'message_close', 'style'=>'float:right;cursor:pointer'));
+			echo $params['message'];
+			echo '</div>';
+		}
 
 		if(isset($GLOBALS['error_msg']) && $GLOBALS['error_msg']) {
 			echo $this->error_msg($GLOBALS['error_msg']);

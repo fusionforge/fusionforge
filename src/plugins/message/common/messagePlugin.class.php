@@ -54,9 +54,11 @@ on all pages, e.g. for maintenance announcements.");
 		return util_make_link ('/plugins/message/index.php', _('Configure Message'));
 	}
 
-	function message() {
+	function message($params) {
 		$res = db_query_params('SELECT message FROM plugin_message', array());
 		if ($res && db_numrows($res)>0 && $message=db_result($res, 0, 'message')) {
+			$params['message'] = $message;
+		}
 			echo '<div id="message_box">';
 			echo html_image("ic/close.png", '', '', array('alt'=>_('Close'), 'id'=>'message_close', 'style'=>'float:right;cursor:pointer'));
 			echo $message;

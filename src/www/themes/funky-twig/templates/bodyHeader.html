@@ -52,6 +52,14 @@
 
 
 <div id="maindiv">
+
+  {% if message %}
+  <div id="message_box">
+    <img src="{{ image_url }}/ic/close.png" alt="Close id="message_close" style="float:right;cursor:pointer">
+    {{ message }}
+  </div>
+  {% endif %}
+
   {% include 'errorMessage.html' %}
   {% include 'warningMessage.html' %}
   {% include 'feedback.html' %}

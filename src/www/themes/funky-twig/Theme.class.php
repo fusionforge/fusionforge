@@ -47,6 +47,8 @@ class Theme_Funky_Twig extends Theme_Funky {
 
 		$vars['use_tooltips'] = $use_tooltips;
 		$vars['session_loggedin'] = session_loggedin();
+		$vars['theme_url'] = $this->themeurl;
+		$vars['image_url'] = $this->imgbaseurl;
 		
 		$t = $this->twig->loadTemplate($file);
 
@@ -273,6 +275,13 @@ class Theme_Funky_Twig extends Theme_Funky {
 			$vars['title'] = $params['title'] . " - ".forge_get_config('forge_name');
 		} else {
 			$vars['title'] = forge_get_config('forge_name');
+		}
+
+		// Message plugin
+		$params = array();
+		plugin_hook_by_reference('message', $params);
+		if (isset ($params['message'])) {
+			$vars['message'] = $params['message'];
 		}
 
 		// User links (login, logout, my account, etc.)
