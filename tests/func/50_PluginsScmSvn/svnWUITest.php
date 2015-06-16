@@ -25,7 +25,8 @@ class ScmSvnWUITest extends FForge_SeleniumTestCase
 {
 	function testScmSvnWUI()
 	{
-        $this->changeConfig("[scmsvn]\nuse_ssh = no\nuse_dav = yes\n");
+		$this->changeConfig(array("scmsvn" => array("use_ssh" => "no",
+		                                            "use_dav" => "yes")));
 
 		$this->activatePlugin('scmsvn');
 		$this->populateStandardTemplate('empty');
