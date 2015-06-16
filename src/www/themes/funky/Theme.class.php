@@ -76,7 +76,6 @@ class Theme_Funky extends Layout {
 		echo html_ac(html_ap() -1);
 		echo html_ao('div', array('id' => 'maindiv'));
 
-		$params = array();
 		plugin_hook_by_reference('message', $params);
 		if (isset ($params['message'])) {
 			echo '<div id="message_box">';
