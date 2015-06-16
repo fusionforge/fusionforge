@@ -1,8 +1,8 @@
-#!/bin/sh
+#!/bin/mksh
 #
 # Copyright © 2013
 #	Thorsten “mirabilos” Glaser <thorsten.glaser@teckids.org>
-# Copyright © 2011, 2012, 2013, 2014
+# Copyright © 2011, 2012, 2013, 2014, 2015
 #	Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
 #
 # Copyright (c) 2007 Andy Parkins
@@ -35,9 +35,12 @@
 #  chmod a+x post-receive-email
 #  cd /path/to/your/repository.git
 #  ln -sf /usr/share/git-core/contrib/hooks/post-receive-email hooks/post-receive
+#  # or
+#  ln -sf /etc/gforge/plugins/scmgit/post-receive-email.sh hooks/post-receive
+#  # but that can only be used for a Forge-controlled repository
 #
 # This hook script needs the “en_US.UTF-8” locale set up on the server.
-# The FusionForge version works with a POSIX shell.
+# The MirBSD Korn Shell (mksh) must be installed as /bin/mksh and usable.
 #
 # This hook script assumes it is enabled on the central repository of a
 # project, with all users pushing only to it and not between each other.  It
@@ -98,6 +101,9 @@
 # hooks.kgbconffile
 #   Full path to a configuration file for kgb-client, or unset/empty.
 #   If set, kgb-client will be invoked.
+# hooks.curltrigger
+#   List (expanded by shell “for”, so be careful) of URIs to trigger on
+#   each push to be accessed with cURL.
 #
 # Notes
 # -----
@@ -111,14 +117,10 @@
 nl='
 '
 unset LANGUAGE LC_ALL
-LANG=C LC_ADDRESS=C LC_COLLATE=C LC_CTYPE=en_US.UTF-8 \
+export LANG=C LC_ADDRESS=C LC_COLLATE=C LC_CTYPE=en_US.UTF-8 \
     LC_IDENTIFICATION=C LC_MEASUREMENT=C LC_MESSAGES=C \
     LC_MONETARY=C LC_NAME=C LC_NUMERIC=C LC_PAPER=C \
     LC_TELEPHONE=C LC_TIME=C
-export LANG LC_ADDRESS LC_COLLATE LC_CTYPE \
-    LC_IDENTIFICATION LC_MEASUREMENT LC_MESSAGES \
-    LC_MONETARY LC_NAME LC_NUMERIC LC_PAPER \
-    LC_TELEPHONE LC_TIME
 
 # ---------------------------- Functions
 
@@ -251,6 +253,11 @@ generate_email()
 	# Email parameters
 	# The email subject will contain the best description of the ref
 	# that we can build from the parameters
+	describe=$(git describe $rev 2>/dev/null)
+	if [ -z "$describe" ]; then
+		describe=$rev
+	fi
+
 	generate_email_header
 
 	# Call the correct body generation function
@@ -275,19 +282,26 @@ generate_email()
 
 generate_email_header()
 {
+	local routing_headers subj
+
 	# --- Email (all stdout will be the email)
 	# Generate header
 
 	routing_headers="To: $recipients"
-	test -n "$envelopesender" && routing_headers="From: $envelopesender${nl}$routing_headers"
-	test -n "$replyto" && routing_headers="$routing_headers${nl}Reply-To: $replyto"
+	[[ -n $envelopesender ]] && routing_headers="From: $envelopesender${nl}$routing_headers"
+	[[ -n $replyto ]] && routing_headers="$routing_headers${nl}Reply-To: $replyto"
 
-	subj="Subject: ${emailprefix}$shortdesc $refname_type $short_refname ${change_type}d. $(git show --no-patch --format='%h %s' $newrev)"
+	subj="Subject: ${emailprefix}$shortdesc $refname_type $short_refname ${change_type}d. $describe"
 	subj=$(print -nr -- "$subj" | php -r '
-mb_internal_encoding("UTF-8");
-echo mb_encode_mimeheader(file_get_contents("php://stdin"),
-"UTF-8", "Q", "\012");')
-	
+	    mb_internal_encoding("UTF-8");
+	    echo mb_encode_mimeheader(file_get_contents("php://stdin"),
+	    "UTF-8", "Q", "\012");')
+
+	if [[ -z $subj ]]; then
+		print -u2 "E: Subject empty, RFC2047 MIME encoding failed"
+		exit 1
+	fi
+
 	cat <<-EOF
 	MIME-Version: 1.0
 	Content-Type: text/plain; charset=UTF-8
@@ -297,7 +311,7 @@ echo mb_encode_mimeheader(file_get_contents("php://stdin"),
 	X-Git-Reftype: $refname_type
 	X-Git-Oldrev: $oldrev
 	X-Git-Newrev: $newrev
-        $subj
+	$subj
 	Auto-Submitted: auto-generated
 
 	This is an automated email from the git hooks/post-receive script. It was
@@ -753,17 +767,16 @@ limit_lines()
 
 send_mail()
 {
-	send_mail_x=$(cat; echo x)
+	local x=$(cat; echo x)
 
-	send_mail_x=${send_mail_x%x}
-	test -n "$send_mail_x" || return 1
+	x=${x%x}
+	[[ -n $x ]] || return 1
 
-	printf '%s' "$send_mail_x" | if [ -n "$envelopesender" ]; then
+	print -nr -- "$x" | if [ -n "$envelopesender" ]; then
 		/usr/sbin/sendmail -t -f "$envelopesender"
 	else
 		/usr/sbin/sendmail -t
 	fi
-	unset send_mail_x
 }
 
 # ---------------------------- main()
@@ -796,11 +809,11 @@ emailprefix=$(git config hooks.emailprefix)
 custom_showrev=$(git config hooks.showrev)
 maxlines=$(git config hooks.emailmaxlines)
 diffopts=$(git config hooks.diffopts)
-: ${diffopts:="-p --stat --summary --find-copies-harder"}
+: "${diffopts:="-p --stat --summary --find-copies-harder"}"
 kgbconffile=$(git config hooks.kgbconffile)
 replyto=$(git config hooks.replyto)
 shortdesc=$(git config hooks.shortdesc)
-: ${shortdesc:=$projectdesc}
+: "${shortdesc:=$projectdesc}"
 
 # --- Main loop
 # Allow dual mode: run from the command line just like the update hook, or
@@ -818,8 +831,13 @@ else
 		prep_for_email $oldrev $newrev $refname || continue
 		generate_email $maxlines | send_mail
 	done
-	if test -n "$kgbconffile" && test -s "$kgbconffile"; then
-		printf '%s' "$ilines" | kgb-client \
+	if [[ -n $kgbconffile && -s $kgbconffile ]]; then
+		print -nr -- "$ilines" | kgb-client \
 		    --conf "$kgbconffile" --repository git --git-reflog -
 	fi
+	set -o noglob
+	for uri in $(git config hooks.curltrigger); do
+		print -r -- "‣‣‣ $uri"
+		curl "$uri"
+	done
 fi

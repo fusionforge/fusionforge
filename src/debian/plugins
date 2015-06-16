@@ -83,7 +83,7 @@ Depends:
 # Note: scmhook might need to be manually packaged to allow installing
 # the commit hooks on a separate SCM server
 Package: fusionforge-plugin-scmhook
-Depends: php5-cli, php5-curl, ${perl:Depends}
+Depends: php5-cli, php5-curl, mksh, ${perl:Depends}
 
 Package: fusionforge-plugin-sysauthldap
 Depends: php5-ldap
