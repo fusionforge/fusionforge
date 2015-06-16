@@ -278,7 +278,6 @@ class Theme_Funky_Twig extends Theme_Funky {
 		}
 
 		// Message plugin
-		$params = array();
 		plugin_hook_by_reference('message', $params);
 		if (isset ($params['message'])) {
 			$vars['message'] = $params['message'];
