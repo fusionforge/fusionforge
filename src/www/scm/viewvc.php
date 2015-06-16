@@ -29,11 +29,6 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-// make sure we're not compressing output if we are making a tarball
-if (isset($_GET['view']) && $_GET['view'] == 'tar') {
-	$no_gz_buffer = true;
-}
-
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'scm/include/scm_utils.php';
