@@ -147,7 +147,8 @@ class ScmSvnUpdateScmRepo {
 
 			if (count($newHooksPreCommit)) {
 				// prepare the pre-commit
-				$file = fopen("/tmp/pre-commit-$unixname.tmp", "w");
+				$tempfile = tempnam($svndir_root.'/hooks', "pre-commit-$unixname");
+				$file = fopen($tempfile, 'w');
 				fwrite($file, file_get_contents(dirname(__FILE__).'/../skel/pre-commit/head'));
 				$string = '';
 				foreach($newHooksPreCommit as $newHookPreCommit) {
@@ -156,16 +157,16 @@ class ScmSvnUpdateScmRepo {
 				$string .= "\n";
 				fwrite($file, $string);
 				fclose($file);
-				copy('/tmp/pre-commit-'.$unixname.'.tmp', $svndir_root.'/hooks/pre-commit');
-				chmod($svndir_root.'/hooks/pre-commit', 0755);
-				unlink('/tmp/pre-commit-'.$unixname.'.tmp');
+				chmod($tempfile, 0755);
+				rename($tempfile, $svndir_root.'/hooks/pre-commit');
 			} else {
 				@unlink($svndir_root.'/hooks/pre-commit');
 			}
 
 			if (count($newHooksPreRevPropChange)) {
 				// prepare the pre-revprop-change
-				$file = fopen("/tmp/pre-revprop-change-$unixname.tmp", "w");
+				$tempfile = tempnam($svndir_root.'/hooks', "pre-revprop-change-$unixname");
+				$file = fopen($tempfile, 'w');
 				fwrite($file, file_get_contents(dirname(__FILE__).'/../skel/pre-revprop-change/head'));
 				$string = '';
 				foreach($newHooksPreRevPropChange as $hook) {
@@ -174,16 +175,16 @@ class ScmSvnUpdateScmRepo {
 				$string .= "\n";
 				fwrite($file, $string);
 				fclose($file);
-				copy('/tmp/pre-revprop-change-'.$unixname.'.tmp', $svndir_root.'/hooks/pre-revprop-change');
-				chmod($svndir_root.'/hooks/pre-revprop-change', 0755);
-				unlink('/tmp/pre-revprop-change-'.$unixname.'.tmp');
+				chmod($tempfile, 0755);
+				rename($tempfile, $svndir_root.'/hooks/pre-revprop-change');
 			} else {
 				@unlink($svndir_root.'/hooks/pre-revprop-change');
 			}
 
 			if (count($newHooksPostCommit)) {
 				// prepare the post-commit
-				$file = fopen("/tmp/post-commit-$unixname.tmp", "w");
+				$tempfile = tempnam($svndir_root.'/hooks', "post-commit-$unixname");
+				$file = fopen($tempfile, 'w');
 				fwrite($file, file_get_contents(dirname(__FILE__).'/../skel/post-commit/head'));
 				$string = '';
 				foreach($newHooksPostCommit as $newHookPostCommit) {
@@ -192,9 +193,8 @@ class ScmSvnUpdateScmRepo {
 				$string .= "\n";
 				fwrite($file, $string);
 				fclose($file);
-				copy('/tmp/post-commit-'.$unixname.'.tmp', $svndir_root.'/hooks/post-commit');
-				chmod($svndir_root.'/hooks/post-commit', 0755);
-				unlink('/tmp/post-commit-'.$unixname.'.tmp');
+				chmod($tempfile, 0755);
+				rename($tempfile, $svndir_root.'/hooks/post-commit');
 			}
 			return true;
 		}

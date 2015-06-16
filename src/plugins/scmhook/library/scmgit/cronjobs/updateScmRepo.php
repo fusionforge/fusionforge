@@ -94,7 +94,8 @@ class ScmGitUpdateScmRepo {
 
 			if (count($newHooksPostReceive)) {
 				// prepare the post-receive
-				$file = fopen("/tmp/post-receive-$unixname.tmp", "w");
+				$tempfile = tempnam($gitdir_root.'/hooks', "post-receive-$unixname");
+				$file = fopen($tempfile, 'w');
 				fwrite($file, file_get_contents(dirname(__FILE__).'/../skel/post-receive/head'));
 				$string = '';
 
@@ -106,9 +107,8 @@ class ScmGitUpdateScmRepo {
 				fwrite($file, $string);
 				fclose($file);
 
-				copy('/tmp/post-receive-'.$unixname.'.tmp', $gitdir_root.'/hooks/post-receive');
-				chmod($gitdir_root.'/hooks/post-receive', 0755);
-				unlink('/tmp/post-receive-'.$unixname.'.tmp');
+				chmod($tempfile, 0755);
+				rename($tempfile, $gitdir_root.'/hooks/post-receive');
 
 				if (! preg_grep("/mailinglist/",file($gitdir_root.'/config'))) {
 					copy($gitdir_root.'/config',$gitdir_root.'/config.backup');
