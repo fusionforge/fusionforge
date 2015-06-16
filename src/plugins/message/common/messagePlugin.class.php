@@ -59,11 +59,6 @@ on all pages, e.g. for maintenance announcements.");
 		if ($res && db_numrows($res)>0 && $message=db_result($res, 0, 'message')) {
 			$params['message'] = $message;
 		}
-			echo '<div id="message_box">';
-			echo html_image("ic/close.png", '', '', array('alt'=>_('Close'), 'id'=>'message_close', 'style'=>'float:right;cursor:pointer'));
-			echo $message;
-			echo '</div>';
-		}
 	}
 }
 
