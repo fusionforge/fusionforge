@@ -939,7 +939,7 @@ class Document extends Error {
 
 		$groupUsers = $this->Group->getUsers();
 		$rbacEngine = RBACEngine::getInstance();
-		foreach ($groupUsers as $key => $groupUser) {
+		foreach ($groupUsers as $groupUser) {
 			if ($rbacEngine->isActionAllowedForUser($groupUser, 'docman', $group_id, 'approve')) {
 				$bcc .= $groupUser->getEmail().',';
 			}

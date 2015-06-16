@@ -24,8 +24,6 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-$no_gz_buffer = true;
-
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'frs/include/frs_utils.php';
@@ -47,10 +45,8 @@ function send_file($filename, $filepath, $file_id = NULL, $mode = NULL) {
 		session_redirect404();
 	}
 
-	header('Content-disposition: attachment; filename="'.str_replace('"', '', $filename).'"');
-	sysdebug_off("Content-type: application/binary");
 	$length = filesize($filepath);
-	header("Content-length: $length");
+	utils_headers_download($filename, 'application/binary', $length);
 
 	readfile_chunked($filepath);
 

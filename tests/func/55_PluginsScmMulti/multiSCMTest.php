@@ -28,7 +28,7 @@ class multiSCMTest extends FForge_SeleniumTestCase
 		$this->skip_on_rpm_installs();
 		$this->skip_on_src_installs();
 
-		$this->changeConfig("[core]\nallow_multiple_scm = yes\n");
+		$this->changeConfig(array("core" => array("allow_multiple_scm" => "yes")));
 
 		$this->activatePlugin('scmsvn');
 		$this->activatePlugin('scmgit');

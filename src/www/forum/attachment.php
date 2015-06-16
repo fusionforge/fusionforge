@@ -189,22 +189,10 @@ $sysdebug_enable = false;
 $last = gmdate('D, d M Y H:i:s', db_result($res,0,'dateline'));
 header('Last-Modified: ' . $last . ' GMT');
 header('ETag: "' . db_result($res,0,'attachmentid').db_result($res,0,'filehash') . '"');
-$extension = substr(strrchr(strtolower(db_result($res,0,'filename')), '.'), 1);
-if ($extension != 'txt') {
-	header("Content-disposition: inline; filename=\"" . db_result($res,0,'filename') . "\"");
-	header('Content-transfer-encoding: binary');
-} else {
-	header("Content-disposition: attachment; filename=\"" . db_result($res,0,'filename') . "\"");
-}
-
-header('Content-Length: ' . db_result($res,0,'filesize') );
-
+$filename = db_result($res,0,'filename');
 $mimetype = db_result($res,0,'mimetype');
-if ($mimetype) {
-	header('Content-type: '.$mimetype);
-} else {
-	header('Content-type: application/octet-stream');
-}
+$filesize = db_result($res,0,'filesize');
+utils_headers_download($filename, $mimetype, $filesize);
 
 if ($pending) {
 	readfile_chunked(ForumPendingStorage::instance()->get($attachid));

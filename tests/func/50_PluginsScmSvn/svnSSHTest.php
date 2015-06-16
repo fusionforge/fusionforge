@@ -25,7 +25,8 @@ class ScmSvnSSHTest extends FForge_SeleniumTestCase
 {
 	function testScmSvnSSH()
 	{
-		$this->changeConfig("[scmsvn]\nuse_ssh = yes\nuse_dav = no\n");
+		$this->changeConfig(array("scmsvn" => array("use_ssh" => "yes",
+		                                            "use_dav" => "no")));
 
 		$this->activatePlugin('scmsvn');
 		$this->populateStandardTemplate('empty');

@@ -77,12 +77,21 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->screenshotBgColor = '#CCFFDD';
 	}
 
-	protected function changeConfig($text) {
+	protected function changeConfig($config) {
 		$forge_get_config = RUN_JOB_PATH."/forge_get_config";
 		$config_path = rtrim(`$forge_get_config config_path`);
 		$classname = get_class($this);
+
+		$contents = "";
+		foreach ($config as $section => $sv) {
+			$contents .= "[$section]\n";
+			foreach ($sv as $variable => $value) {
+				$contents .= "$variable = $value\n";
+			}
+		}
+		
 		file_put_contents("$config_path/config.ini.d/zzz-buildbot-$classname.ini",
-				$text);
+				$contents);
 	}
 
 	protected function openWithOneRetry($url) {

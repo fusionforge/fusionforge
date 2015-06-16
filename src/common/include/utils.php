@@ -1684,6 +1684,39 @@ function getThemeIdFromName($dirname) {
 	return db_result($res,0,'theme_id');
 }
 
+/**
+ * Generate attachment download headers, with security checks around the MIME type
+ */
+function utils_headers_download($filename, $mimetype, $size) {
+	/* SECURITY: do not serve content with JavaScript execution (and e.g. cookie theft) */
+	/* Namely do NOT include: text/html, image/svg+xml, application/pdf... */
+	/* https://grepular.com/Scalable_Vector_Graphics_and_XSS */
+	/* https://lists.wikimedia.org/pipermail/mediawiki-announce/2015-March/000175.html */
+	/* https://www.owasp.org/images/a/ac/PDF_XSS_vulnerability.pdf */
+	/* https://groups.google.com/forum/#!topic/mozilla.dev.pdf-js/Fyl5RnaUWVc */
+	/* (PDF theoretically supports JS, not sure how pdf.js deals with that) */
+	$authorized_inline = ',^(text/plain|image/png|image/jpg|image/gif)$,';
+	/* Disarm XSS-able text/html, and inline common text files (*.c, *.pl...) */
+	$force_text_plain  = ',^(text/html|text/.*|application/x-perl|application/x-ruby)$,';
+
+	if (preg_match($force_text_plain, $mimetype))
+		$mimetype = 'text/plain';
+
+	if (preg_match($authorized_inline, $mimetype)) {
+		header('Content-Disposition: inline; filename="' . str_replace('"', '', $filename) . '"');
+		header('Content-Type: '. $mimetype);
+	} else {
+		header('Content-Disposition: attachment; filename="' . str_replace('"', '', $filename) . '"');
+		header('Content-Type: '. $mimetype);
+	}
+	header('Content-Length: ' . $size);
+
+	/* Also, make sure browsers such as IE8 don't interpret a non text/html attachment as HTML... */
+	/* https://blogs.msdn.com/b/ie/archive/2008/09/02/ie8-security-part-vi-beta-2-update.aspx?Redirected=true */
+	/* IE6 ignores this, but IE6 users have higher security concerns than this.. */
+	header('X-Content-Type-Options: nosniff');
+}
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"

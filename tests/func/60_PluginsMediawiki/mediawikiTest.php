@@ -30,7 +30,7 @@ class PluginMediawiki extends FForge_SeleniumTestCase
 		$this->skip_on_rpm_installs();
 		$this->skip_on_centos();
 
-		$this->changeConfig("[mediawiki]\nunbreak_frames=yes\n");
+		$this->changeConfig(array("mediawiki" => array("unbreak_frames" => "yes")));
 
 		$this->activatePlugin('mediawiki');
 

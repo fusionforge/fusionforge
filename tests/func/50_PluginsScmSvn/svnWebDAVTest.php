@@ -25,7 +25,7 @@ class ScmSvnWebDAVTest extends FForge_SeleniumTestCase
 {
 	function testScmSvnWebDAV()
 	{
-        $this->changeConfig("[scmsvn]\nuse_ssl = no\n");
+		$this->changeConfig(array("scmsvn" => array("use_ssl" => "no")));
 
 		$this->activatePlugin('scmsvn');
 		$this->populateStandardTemplate('empty');

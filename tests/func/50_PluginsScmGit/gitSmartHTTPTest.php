@@ -25,7 +25,7 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 {
 	function testScmGitSmartHTTP()
 	{
-		$this->changeConfig("[core]\nuse_ssl = no\n");
+		$this->changeConfig(array("core" => array("use_ssl" => "no")));
 
 		$this->activatePlugin('scmgit');
 		$this->populateStandardTemplate('empty');

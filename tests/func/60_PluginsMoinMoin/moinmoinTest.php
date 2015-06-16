@@ -30,7 +30,7 @@ class PluginMoinMoin extends FForge_SeleniumTestCase
 		$this->skip_on_rpm_installs();
 		$this->skip_on_centos();
 
-		$this->changeConfig("[moinmoin]\nuse_frame=no\n");
+		$this->changeConfig(array("moinmoin" => array("use_frame" => "no")));
 
 		$this->activatePlugin('moinmoin');
 
