@@ -377,7 +377,9 @@ class Theme_Funky_Twig extends Theme_Funky {
 		$vars['feedback'] = $GLOBALS['feedback'];
 
 		// Project-specific submenu
-		$vars['submenu'] = $params['submenu'];
+		if (isset($params['submenu'])) {
+			$vars['submenu'] = $params['submenu'];
+		}
 
 		print $this->renderTemplate('bodyHeader.html', $vars);
 	}
