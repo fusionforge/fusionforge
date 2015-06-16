@@ -1,6 +1,5 @@
 <?php
 
-$no_gz_buffer = true;
 $no_debug     = true;
 
 // 0. Include GForge files for access to GForge system

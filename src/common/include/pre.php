@@ -46,10 +46,6 @@ if (getStringFromServer('HTTP_X_moz') === 'prefetch'){
 	exit;
 }
 
-if (!isset($no_gz_buffer) || !$no_gz_buffer) {
-	ob_start("ob_gzhandler");
-}
-
 // Database access and other passwords when on the web
 function setconfigfromenv ($sec, $var, $serv, $env) {
 	if (getenv ('SERVER_SOFTWARE')) {

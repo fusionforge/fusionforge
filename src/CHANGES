@@ -16,6 +16,7 @@ FusionForge 6.0.1:
 * SCM SVN: fix permissions in migration script (Inria)
 * Plugin scmhook: git commitemail: fix subject, handle special chars (Roland Mas, for Inria)
 * Plugin scmhook: fix hook deactivation (Inria)
+* Disable forceful gzip compression, mitigates BREACH attacks [#779] (tarent solutions GmbH, Inria)
 * Doc clean-up (Inria)
 
 FusionForge 6.0:

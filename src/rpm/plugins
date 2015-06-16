@@ -59,7 +59,7 @@ Requires: moin, mod_wsgi, python-psycopg2
 Requires:
 
 %package plugin-scmhook
-Requires: php-cli
+Requires: php-cli, perl
 
 # Way too many rpmlint errors in this one
 # Any volunteer?

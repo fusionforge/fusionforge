@@ -32,8 +32,6 @@ if (!getenv('SERVER_SOFTWARE')) {
 
 	/* enable maximum error reporting */
 	error_reporting(-1);
-	/* disable output buffering */
-	$no_gz_buffer = true;
 	/* allow it to eat all memory */
 	ini_set("memory_limit", -1);
 }
