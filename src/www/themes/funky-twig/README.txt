@@ -5,7 +5,7 @@ The Funky theme is Copyright 2010 (c) Capgemini (www.capgemini.com)
 AUTHOR: Antoine Mercadal <antoine.mercadal@capgemini.com>
 
 The Funky-Twig theme is a reimplementation using the Twig template engine,
-copyright 2014 Roland Mas <lolando@debian.org>.
+copyright-2015 2014 Roland Mas <lolando@debian.org>.
 
 The Funky theme is free software; you can redistribute it and/or modify it under 
 the terms of the GNU General Public License as published by the Free Software 
