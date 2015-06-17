@@ -390,13 +390,12 @@ class Theme_Funky_Twig extends Theme_Funky {
 
 		print $this->renderTemplate('footer.html', $vars);
 	}
-	function footerEnd() {
-		// TODO
-		return parent::footerEnd();
-	}
 	function getRootIndex() {
-		// TODO
-		return parent::getRootIndex();
+		if ( file_exists(forge_get_config('custom_path') . '/index_std.php') ) {
+			return forge_get_config('custom_path') . '/index_std.php';
+		} else {
+			return $GLOBALS['gfwww'].'index_std.php';
+		}
 	}
 	function boxTop($title, $id='') {
 		$vars = array('id' => $id,
@@ -414,8 +413,14 @@ class Theme_Funky_Twig extends Theme_Funky {
 		return $this->renderTemplate('BoxBottom.html');
 	}
 	function boxGetAltRowStyle($i, $classonly = false) {
-		// TODO
-		return parent::boxGetAltRowStyle($i, $classonly);
+		if ($i % 2 == 0)
+			$ret = 'altRowStyleEven';
+		else
+			$ret = 'altRowStyleOdd';
+		if ($classonly)
+			return $ret;
+		else
+			return 'class="'.$ret.'"';
 	}
 	function listTableTop($titleArray = array(), $linksArray = array(), $class = '', $id = '', $thClassArray = array(), $thTitleArray = array(), $thOtherAttrsArray = array()) {
 		$vars = array('id' => $id,
@@ -449,14 +454,6 @@ class Theme_Funky_Twig extends Theme_Funky {
 	}
 	function listTableBottom() {
 		return $this->renderTemplate('ListTableBottom.html');
-	}
-	function outerTabs($params) {
-		// TODO -- not used directly by pages, can be inlined in this file (unless used in several places)
-		return parent::outerTabs($params);
-	}
-	function projectTabs($toptab, $group_id) {
-		// TODO -- not used directly by pages, can be inlined in this file (unless used in several places)
-		return parent::projectTabs($toptab, $group_id);
 	}
 	function beginSubMenu() {
 		return $this->renderTemplate('beginSubMenu.html');
