@@ -14,9 +14,10 @@ FusionForge 6.0.1:
 * SCM SVN: fix double-compression in ViewVC (Inria)
 * SCM SVN: support files with spaces in ViewVC (Inria)
 * SCM SVN: fix permissions in migration script (Inria)
-* Plugin scmhook: git commitemail: fix subject, handle special chars (Roland Mas, for Inria)
+* Plugin scmhook: git commitemail: fix subject, handle special chars, sync script with upstream (Roland Mas and Inria)
 * Plugin scmhook: fix hook deactivation (Inria)
-* Disable forceful gzip compression, mitigates BREACH attacks [#779] (tarent solutions GmbH, Inria)
+* Plugin scmhook: fix predictable temporary file name (Roland Mas)
+* Disable forceful gzip compression, mitigates BREACH attacks [#779] (tarent solutions GmbH and Inria)
 * Doc clean-up (Inria)
 
 FusionForge 6.0:

@@ -5,12 +5,13 @@
 This git repository took out the contributed post-receive hook
 from git.git with its full history and aims to continue to fix
 and develop it. There is also FusionForge/Evolvis integration,
-in a separate branch.
+in a separate branch. (For some strange reason FusionForge has
+opted out of the integration and uses the standalone version.)
 
 This repository is hosted on evolvis.org (a public FusionForge
 instance by tarent). We mirror it on github for popularity, as
 shown below. Development of the hook is partially sponsored by
-tarent, FreeWRT (now The MirOS Project), Teckids.
+tarent, FreeWRT (now The MirOS Project), Teckids, FusionForge.
 
 • https://evolvis.org/plugins/scmgit/cgi-bin/gitweb.cgi?p=evolvis-platfrm/recvhook.git
 • https://github.com/mirabilos/recvhook
@@ -58,6 +59,8 @@ There are notable new settings:
   of the content of the description file)
 • hooks.kgbconffile (full path to a configuration file
   for kgb-client, triggers on-push IRC notifications)
+• hooks.curltrigger (whitespace-separated list of URIs
+  to trigger, with cURL, on each push)
 
 There’s also noticeable effort to fix umlauts and
 other nōn-ASCII characters in eMails – as long as
