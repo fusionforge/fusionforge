@@ -158,6 +158,7 @@ class Theme_Funky_Twig extends Theme_Funky {
 		return $this->renderTemplate('StyleSheets.html', $vars);
 	}
 	function header($params) {
+		plugin_hook('htmlhead');
 		$this->headerHTMLDeclaration();
 
 		$vars = array();
@@ -278,8 +279,10 @@ class Theme_Funky_Twig extends Theme_Funky {
 		}
 
 		// Message plugin
-		plugin_hook_by_reference('message', $params);
-		if (isset ($params['message'])) {
+		$message = '';
+		$params['message'] = &$message;
+		plugin_hook('message', $params);
+		if ($params['message'] != '') {
 			$vars['message'] = $params['message'];
 		}
 
