@@ -126,7 +126,8 @@ $log      = trim(`git log -n 1 --format=%s $newrev`);
 $changed  = trim(`git log -n 1 --format=%b --name-only -p $newrev`);
 
 if (isset($git_tracker_debug) && $git_tracker_debug == 1) {
-	$file=fopen("/tmp/debug.post","a+");
+	$tempfile = tempnam('/tmp', 'debug.post');
+	$file=fopen($tempfile, 'a+');
 	fwrite($file,"Vars filled:\n");
 	fwrite($file,"arg :  " . print_r($argv,true) . " \n");
 	fwrite($file,"rev :  " . $newrev . " \n");

@@ -58,7 +58,7 @@ fi
     make install-base install-shell install-scm \
         install-plugin-scmsvn install-plugin-scmgit \
         install-plugin-blocks install-plugin-mediawiki install-plugin-moinmoin \
-        install-plugin-online_help install-plugin-taskboard
+        install-plugin-online_help install-plugin-taskboard install-plugin-message
     make post-install
 )
 
