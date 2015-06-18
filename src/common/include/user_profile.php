@@ -89,7 +89,7 @@ function user_personal_information($user, $compact = false, $title = false) {
 			<tr>
 				<td>'. _('Real Name') . _(': ')  .'</td>';
 	$user_title = $user->getTitle();
-	$user_title_name = $user_title ? $user_title .' ' :'' . $user->getRealName();
+	$user_title_name = ($user_title ? ($user_title . ' ') : '') . $user->getRealName();
 	$html .= '<td>
 				<div rev="foaf:account">
 					<div about="#me" typeof="foaf:Person">
