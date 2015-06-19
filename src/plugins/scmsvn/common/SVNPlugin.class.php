@@ -560,46 +560,76 @@ some control over it to the project's administrator.");
 		}
 
 		if (in_array('scmsvn', $params['show']) || (count($params['show']) < 1)) {
-			$repo = forge_get_config('repos_path', 'scmsvn') . '/' . $project->getUnixName();
-			if (is_dir($repo)) {
-				$start_time = $params['begin'];
-				$end_time = $params['end'];
-				$d1 = date('Y-m-d', $start_time - 80000);
-				$d2 = date('Y-m-d', $end_time + 80000);
-				$pipe = popen("svn log file://$repo --xml -v -r '".'{'.$d2.'}:{'.$d1.'}'."' 2> /dev/null", 'r' );
-				$xml_parser = xml_parser_create();
-				xml_set_element_handler($xml_parser, "SVNPluginStartElement", "SVNPluginEndElement");
-				xml_set_character_data_handler($xml_parser, "SVNPluginCharData");
-				while (!feof($pipe) && $data = fgets($pipe, 4096)) {
-					if (!xml_parse($xml_parser, $data, feof ($pipe))) {
-						debug("Unable to parse XML with error " .
-							xml_error_string(xml_get_error_code($xml_parser)) .
-							" on line " .
-							xml_get_current_line_number($xml_parser));
-						return false;
-						break;
-					}
+			$start_time = $params['begin'];
+			$end_time = $params['end'];
+			
+			// Grab commit log
+			$protocol = forge_get_config('use_ssl', 'scmsvn') ? 'https://' : 'http://';
+			$u = session_get_user();
+			if ($project->enableAnonSCM())
+				$server_script = '/anonscm/svnlog';
+			else
+				$server_script = '/authscm/'.$u->getUnixName().'/svnlog';
+			$script_url = $protocol . forge_get_config('scm_host')
+				. $server_script
+				.'?unix_group_name='.$project->getUnixName()
+				.'&begin='.$params['begin']
+				.'&end='.$params['end'];
+			$filename = tempnam('/tmp', 'svnlog');
+			$f = fopen($filename, 'w');
+			$ch = curl_init();
+			curl_setopt($ch, CURLOPT_URL, $script_url);
+ 			curl_setopt($ch, CURLOPT_FILE, $f);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+			curl_setopt($ch, CURLOPT_COOKIE, $_SERVER['HTTP_COOKIE']);  // for session validation
+			curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);  // for session validation
+			curl_setopt($ch, CURLOPT_HTTPHEADER,
+						array('X-Forwarded-For: '.$_SERVER['REMOTE_ADDR']));  // for session validation
+			$body = curl_exec($ch);
+			if ($body === false) {
+				$this->setError(curl_error($ch));
+			}
+			curl_close($ch);
+			fclose($f); // flush buffer
+			$f = fopen($filename, 'r');
+			unlink($filename);
+						
+			$xml_parser = xml_parser_create();
+			xml_set_element_handler($xml_parser, "SVNPluginStartElement", "SVNPluginEndElement");
+			xml_set_character_data_handler($xml_parser, "SVNPluginCharData");
+			
+			while (!feof($f) && $data = fgets($f, 4096)) {
+				if (!xml_parse($xml_parser, $data, feof ($f))) {
+					debug("Unable to parse XML with error " .
+						  xml_error_string(xml_get_error_code($xml_parser)) .
+						  " on line " .
+						  xml_get_current_line_number($xml_parser));
+					fclose($f);
+					return false;
+					break;
 				}
-				xml_parser_free($xml_parser);
-				if ($adds > 0 || $updates > 0 || $commits > 0 || $deletes > 0) {
-					$i = 0;
-					foreach ($messages as $message) {
-						$result = array();
-						$result['section'] = 'scm';
-						$result['group_id'] = $group_id;
-						$result['ref_id'] = 'browser.php?group_id='.$group_id;
-						$result['description'] = htmlspecialchars($message).' (r'.$revisions[$i].')';
-						$userObject = user_get_object_by_name($users[$i]);
-						if (is_a($userObject, 'GFUser')) {
-							$result['realname'] = util_display_user($userObject->getUnixName(), $userObject->getID(), $userObject->getRealName());
-						} else {
-							$result['realname'] = '';
-						}
-						$result['activity_date'] = $times[$i];
-						$result['subref_id'] = '&commit='.$revisions[$i];
-						$params['results'][] = $result;
-						$i++;
+			}
+			xml_parser_free($xml_parser);
+			fclose($f);
+			if ($adds > 0 || $updates > 0 || $commits > 0 || $deletes > 0) {
+				$i = 0;
+				foreach ($messages as $message) {
+					$result = array();
+					$result['section'] = 'scm';
+					$result['group_id'] = $group_id;
+					$result['ref_id'] = 'browser.php?group_id='.$group_id;
+					$result['description'] = htmlspecialchars($message).' (r'.$revisions[$i].')';
+					$userObject = user_get_object_by_name($users[$i]);
+					if (is_a($userObject, 'GFUser')) {
+						$result['realname'] = util_display_user($userObject->getUnixName(), $userObject->getID(), $userObject->getRealName());
+					} else {
+						$result['realname'] = '';
 					}
+					$result['activity_date'] = $times[$i];
+					$result['subref_id'] = '&commit='.$revisions[$i];
+					$params['results'][] = $result;
+					$i++;
 				}
 			}
 		}

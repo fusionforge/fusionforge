@@ -11,6 +11,12 @@
   </LimitExcept>
 </Location>
 
+
+# SVN tools
+<Directory ${FF__core__plugins_path}/scmsvn/libexec>
+  Require all granted
+</Directory>
+
 # ViewVC
 ScriptAliasMatch ^/authscm/[^/]+/viewvc(.*) ${FF__core__plugins_path}/scmsvn/libexec/viewvc.cgi$1
 # Authentified via cookie in viewvc.php:
@@ -19,9 +25,15 @@ ScriptAliasMatch ^/authscm/[^/]+/viewvc(.*) ${FF__core__plugins_path}/scmsvn/lib
 </LocationMatch>
 ScriptAlias /anonscm/viewvc ${FF__core__plugins_path}/scmsvn/libexec/viewvc.cgi
 #Alias /doc/viewvc /usr/share/viewvc/docroot
-<Directory ${FF__core__plugins_path}/scmsvn/libexec>
-  Require all granted
-</Directory>
+
+# Activity
+ScriptAliasMatch ^/authscm/[^/]+/svnlog(.*) ${FF__core__plugins_path}/scmsvn/libexec/svnlog.php$1
+# Authentified via cookie in svnlog.php:
+<LocationMatch "^/authscm/[^/]+/svnlog">
+  Satisfy Any
+</LocationMatch>
+ScriptAlias /anonscm/svnlog ${FF__core__plugins_path}/scmsvn/libexec/svnlog.php
+
 
 # Redirect URLs from FF < 6.0 (scm_host -> scm_host)
 # Note: ViewVC URLs are backward-compatible through proxying in viewvc.php
