@@ -1,0 +1,12 @@
+{% macro textlink(href, text, extra_params) %}
+<a href="{{ href }}"{% for k,v in extra_params %}{% if k != 'title' or use_tooltips %} {{ k }}="{{ v }}"{% endif %}{% endfor %}>{{ text|raw }}</a>
+{% endmacro %}
+
+{% macro image(base, alt) %}
+<img src="{{ image_url }}/{{ base }}" alt="{{ alt }}" title="{{ alt }}" />
+{% endmacro %}
+
+{% macro imglink(href, title, image) %}
+{% import _self as macros %}
+{{ macros.textlink(href,macros.image(image,title)) }}
+{% endmacro %}

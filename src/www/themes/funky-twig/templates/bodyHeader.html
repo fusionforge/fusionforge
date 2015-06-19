@@ -1,3 +1,5 @@
+{% import 'macros.twig' as macros %}
+
 {% include 'ListTableTop.html' with { 'class': 'fullwidth', 'id': 'header' } only %}
 
 {% include 'multiTableRow.html' with { 'rowattrs': {}, 'cells': siteheader_celldata } only %}
@@ -32,7 +34,7 @@
         <input type="text" size="12" id="searchBox-words" name="words" value="{{ search_words }}" required="required" />
         <input type="submit" name="Search" value="Search" />
 	{% if advanced_search_url %}
-	{% include 'Link.html' with { 'href': advanced_search_url, 'text': 'Advanced search' } only %}
+	{{ macros.textlink(advanced_search_url,'Advanced search') }}
 	{% endif %}
       </div>
     </form>

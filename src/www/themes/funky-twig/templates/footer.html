@@ -1,6 +1,8 @@
+{% import 'macros.twig' as macros %}
+
 </div><!-- maindiv -->
-    <div class="footer">
-      {% include 'Link.html' with { 'href': 'https://fusionforge.org', 'text': "<img src=\"#{imgurl}\" alt=\"Powered by FusionForge\" />" } only %}
+  <div class="footer">
+    {{ macros.imglink('https://fusionforge.org','Powered by FusionForge','images/pow-fusionforge.png') }}
       <div style="clear:both"></div>
     </div>
   </body>
