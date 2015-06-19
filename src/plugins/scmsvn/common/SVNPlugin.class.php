@@ -577,6 +577,7 @@ some control over it to the project's administrator.");
 			$script_url = $protocol . forge_get_config('scm_host')
 				. $server_script
 				.'?unix_group_name='.$project->getUnixName()
+				.'&mode=date_range'
 				.'&begin='.$params['begin']
 				.'&end='.$params['end'];
 			$ch = curl_init();
@@ -629,9 +630,8 @@ some control over it to the project's administrator.");
 	}
 
 	// Get latest commits for inclusion in a widget
-	// TODO: make it work with ITK
 	function getCommits($project, $user = null, $nbCommits) {
-		global $commits, $users, $adds, $updates, $messages, $times, $revisions, $deletes, $time_ok, $user_list, $last_message, $notimecheck;
+		global $commits, $users, $adds, $updates, $messages, $times, $revisions, $deletes, $time_ok, $user_list, $last_message, $notimecheck, $xml_parser;
 		$commits = 0;
 		$users = array();
 		$adds = 0;
@@ -646,33 +646,51 @@ some control over it to the project's administrator.");
 		$notimecheck = true;
 		$revisionsArr = array();
 		if ($project->usesPlugin($this->name) && forge_check_perm('scm', $project->getID(), 'read')) {
-			$repo = forge_get_config('repos_path', $this->name) . '/' . $project->getUnixName();
+			$xml_parser = xml_parser_create();
+			xml_set_element_handler($xml_parser, "SVNPluginStartElement", "SVNPluginEndElement");
+			xml_set_character_data_handler($xml_parser, "SVNPluginCharData");
+
+			// Grab&parse commit log
+			$protocol = forge_get_config('use_ssl', 'scmsvn') ? 'https://' : 'http://';
+			$u = session_get_user();
+			if ($project->enableAnonSCM())
+				$server_script = '/anonscm/svnlog';
+			else
+				$server_script = '/authscm/'.$u->getUnixName().'/svnlog';
 			if ($user) {
 				$userunixname = $user->getUnixName();
-				$pipecmd = "svn log file://$repo --xml -v --limit $nbCommits --search \"$userunixname\" 2> /dev/null";
+				$params = '&mode=latest_user&user_name='.$userunixname;
 			} else {
-				$pipecmd = "svn log file://$repo --xml -v --limit $nbCommits 2> /dev/null";
+				$params = '&mode=latest';
 			}
-			if (is_dir($repo)) {
-				$pipe = popen($pipecmd, 'r' );
-				$xml_parser = xml_parser_create();
-				xml_set_element_handler($xml_parser, "SVNPluginStartElement", "SVNPluginEndElement");
-				xml_set_character_data_handler($xml_parser, "SVNPluginCharData");
-				while (!feof($pipe) && $data = fgets($pipe, 4096)) {
-					if (!xml_parse($xml_parser, $data, feof($pipe))) {
-						$this->setError("Unable to parse XML with error " .
-							xml_error_string(xml_get_error_code($xml_parser)) .
-							" on line " .
-							xml_get_current_line_number($xml_parser));
-						pclose($pipe);
-						return false;
-						break;
-					}
+			$script_url = $protocol . forge_get_config('scm_host')
+				. $server_script
+				.'?unix_group_name='.$project->getUnixName()
+				. $params
+				.'&limit='.$nbCommits;
+			$ch = curl_init();
+			curl_setopt($ch, CURLOPT_URL, $script_url);
+			curl_setopt($ch, CURLOPT_WRITEFUNCTION, 'curl2xml');
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+			curl_setopt($ch, CURLOPT_COOKIE, $_SERVER['HTTP_COOKIE']);  // for session validation
+			curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);  // for session validation
+			curl_setopt($ch, CURLOPT_HTTPHEADER,
+						array('X-Forwarded-For: '.$_SERVER['REMOTE_ADDR']));  // for session validation
+			$body = curl_exec($ch);
+			if ($body === false) {
+				$this->setError(curl_error($ch));
+			}
+			curl_close($ch);
 
-				}
-				xml_parser_free($xml_parser);
-				pclose($pipe);
-			}
+			// final checks
+			if (!xml_parse($xml_parser, '', true))
+				exit_error('Unable to parse XML with error '
+						   . xml_error_string(xml_get_error_code($xml_parser))
+						   . ' on line ' . xml_get_current_line_number($xml_parser),
+					'activity');
+			xml_parser_free($xml_parser);
+
 			if ($adds > 0 || $updates > 0 || $commits > 0 || $deletes > 0) {
 				$i = 0;
 				foreach ($messages as $message) {
