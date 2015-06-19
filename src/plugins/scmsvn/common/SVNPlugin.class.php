@@ -552,7 +552,7 @@ some control over it to the project's administrator.");
 	function activity($params) {
 		global $last_user, $last_time, $last_tag, $time_ok, $start_time, $end_time,
 			$adds, $deletes, $updates, $commits, $date_key,
-			$messages, $last_message, $times, $revisions, $users;
+			$messages, $last_message, $times, $revisions, $users, $xml_parser;
 		$group_id = $params['group'];
 		$project = group_get_object($group_id);
 		if (! $project->usesPlugin($this->name)) {
@@ -563,7 +563,11 @@ some control over it to the project's administrator.");
 			$start_time = $params['begin'];
 			$end_time = $params['end'];
 			
-			// Grab commit log
+			$xml_parser = xml_parser_create();
+			xml_set_element_handler($xml_parser, "SVNPluginStartElement", "SVNPluginEndElement");
+			xml_set_character_data_handler($xml_parser, "SVNPluginCharData");
+
+			// Grab&parse commit log
 			$protocol = forge_get_config('use_ssl', 'scmsvn') ? 'https://' : 'http://';
 			$u = session_get_user();
 			if ($project->enableAnonSCM())
@@ -575,11 +579,9 @@ some control over it to the project's administrator.");
 				.'?unix_group_name='.$project->getUnixName()
 				.'&begin='.$params['begin']
 				.'&end='.$params['end'];
-			$filename = tempnam('/tmp', 'svnlog');
-			$f = fopen($filename, 'w');
 			$ch = curl_init();
 			curl_setopt($ch, CURLOPT_URL, $script_url);
- 			curl_setopt($ch, CURLOPT_FILE, $f);
+			curl_setopt($ch, CURLOPT_WRITEFUNCTION, 'curl2xml');
 			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 			curl_setopt($ch, CURLOPT_COOKIE, $_SERVER['HTTP_COOKIE']);  // for session validation
@@ -591,27 +593,15 @@ some control over it to the project's administrator.");
 				$this->setError(curl_error($ch));
 			}
 			curl_close($ch);
-			fclose($f); // flush buffer
-			$f = fopen($filename, 'r');
-			unlink($filename);
-						
-			$xml_parser = xml_parser_create();
-			xml_set_element_handler($xml_parser, "SVNPluginStartElement", "SVNPluginEndElement");
-			xml_set_character_data_handler($xml_parser, "SVNPluginCharData");
-			
-			while (!feof($f) && $data = fgets($f, 4096)) {
-				if (!xml_parse($xml_parser, $data, feof ($f))) {
-					debug("Unable to parse XML with error " .
-						  xml_error_string(xml_get_error_code($xml_parser)) .
-						  " on line " .
-						  xml_get_current_line_number($xml_parser));
-					fclose($f);
-					return false;
-					break;
-				}
-			}
+
+			// final checks
+			if (!xml_parse($xml_parser, '', true))
+				exit_error('Unable to parse XML with error '
+						   . xml_error_string(xml_get_error_code($xml_parser))
+						   . ' on line ' . xml_get_current_line_number($xml_parser),
+					'activity');
 			xml_parser_free($xml_parser);
-			fclose($f);
+
 			if ($adds > 0 || $updates > 0 || $commits > 0 || $deletes > 0) {
 				$i = 0;
 				foreach ($messages as $message) {
@@ -792,6 +782,16 @@ function SVNPluginStartElement($parser, $name, $attrs) {
 function SVNPluginEndElement($parser, $name) {
 	global $last_tag;
 	$last_tag = "";
+}
+
+function curl2xml($ch, $data) {
+	global $xml_parser;
+	if (!xml_parse($xml_parser, $data, false))
+		exit_error('Unable to parse XML with error '
+				   . xml_error_string(xml_get_error_code($xml_parser))
+				   . ' on line ' . xml_get_current_line_number($xml_parser),
+				   'activity');
+	return strlen($data);
 }
 
 // Local Variables:
