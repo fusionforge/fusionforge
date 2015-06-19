@@ -34,6 +34,8 @@ class Widget_ProjectMembers extends Widget {
 	}
 
 	public function getContent() {
+		$result = '';
+		
 		$request =& HTTPRequest::instance();
 		$group_id = $request->get('group_id');
 		$pm = ProjectManager::instance();
@@ -45,22 +47,22 @@ class Widget_ProjectMembers extends Widget {
 
 		$iam_member = false ;
 		if (count($admins) > 0) {
-			echo '<span class="develtitle">'._('Project Admins').'</span><br />';
+			$result .= '<span class="develtitle">'._('Project Admins').'</span><br />';
 			foreach ($admins as $u) {
-				echo '<div rel="doap:maintainer">'."\n";
+				$result .= '<div rel="doap:maintainer">'."\n";
 				// A foaf:Person that holds an account on the forge
 				$developer_url = util_make_url_u ($u->getUnixName(),$u->getID());
-				echo '<div typeof="foaf:Person" about="'.
+				$result .= '<div typeof="foaf:Person" about="'.
 					$developer_url.'#person' .'" >'."\n";
-				echo '<div rel="foaf:account">'."\n";
-				echo '<div typeof="sioc:UserAccount" about="'.
+				$result .= '<div rel="foaf:account">'."\n";
+				$result .= '<div typeof="sioc:UserAccount" about="'.
 					$developer_url.
 					'">'."\n";
-				echo util_display_user($u->getUnixName(),$u->getID(),$u->getRealName())."\n";
-				echo "</div>\n"; // /sioc:UserAccount
-				echo "</div>\n"; // /foaf:holdsAccount
-				echo "</div>\n"; // /foaf:Person
-				echo "</div>\n"; // /doap:maintainer|developer
+				$result .= util_display_user($u->getUnixName(),$u->getID(),$u->getRealName())."\n";
+				$result .= "</div>\n"; // /sioc:UserAccount
+				$result .= "</div>\n"; // /foaf:holdsAccount
+				$result .= "</div>\n"; // /foaf:Person
+				$result .= "</div>\n"; // /doap:maintainer|developer
 				if ($u->getID() == user_getid()) {
 					$iam_member = true ;
 				}
@@ -74,41 +76,43 @@ class Widget_ProjectMembers extends Widget {
 					continue ;
 				}
 				if (!$seen_member) {
-					echo '<span class="develtitle">'. _('Members')._(':').'</span><br />';
+					$result .= '<span class="develtitle">'. _('Members')._(':').'</span><br />';
 					$seen_member = true ;
 				}
-				echo '<div rel="doap:developer">'."\n";
+				$result .= '<div rel="doap:developer">'."\n";
 				// A foaf:Person that holds an account on the forge
 				$developer_url = util_make_url_u ($u->getUnixName(),$u->getID());
-				echo '<div typeof="foaf:Person" about="'.
+				$result .= '<div typeof="foaf:Person" about="'.
 					$developer_url.'#person' .'" >'."\n";
-				echo '<div rel="foaf:account">'."\n";
-				echo '<div typeof="sioc:UserAccount" about="'.
+				$result .= '<div rel="foaf:account">'."\n";
+				$result .= '<div typeof="sioc:UserAccount" about="'.
 					$developer_url.
 					'">'."\n";
-				echo util_display_user($u->getUnixName(),$u->getID(),$u->getRealName())."\n";
-				echo "</div>\n"; // /sioc:UserAccount
-				echo "</div>\n"; // /foaf:holdsAccount
-				echo "</div>\n"; // /foaf:Person
-				echo "</div>\n"; // /doap:maintainer|developer
+				$result .= util_display_user($u->getUnixName(),$u->getID(),$u->getRealName())."\n";
+				$result .= "</div>\n"; // /sioc:UserAccount
+				$result .= "</div>\n"; // /foaf:holdsAccount
+				$result .= "</div>\n"; // /foaf:Person
+				$result .= "</div>\n"; // /doap:maintainer|developer
 				if ($u->getID() == user_getid()) {
 					$iam_member = true ;
 				}
 			}
 		}
 
-		echo '<p><span rel="sioc:has_usergroup">';
-		echo '<span about="members/" typeof="sioc:UserGroup">';
-		echo '<span rel="http://www.w3.org/2002/07/owl#sameAs">';
-		echo util_make_link ('/project/memberlist.php?group_id='.$group_id,sprintf(_('View the %d Member(s)'),count($members)));
-		echo '</span>';
-		echo '</span>';
-		echo '</span></p>';
+		$result .= '<p><span rel="sioc:has_usergroup">';
+		$result .= '<span about="members/" typeof="sioc:UserGroup">';
+		$result .= '<span rel="http://www.w3.org/2002/07/owl#sameAs">';
+		$result .= util_make_link ('/project/memberlist.php?group_id='.$group_id,sprintf(_('View the %d Member(s)'),count($members)));
+		$result .= '</span>';
+		$result .= '</span>';
+		$result .= '</span></p>';
 		// end of project usergroup description
 
 		if (!$iam_member) {
-			echo '<p>'.util_make_link ('/project/request.php?group_id='.$group_id,_('Request to join')).'</p>';
+			$result .= '<p>'.util_make_link ('/project/request.php?group_id='.$group_id,_('Request to join')).'</p>';
 		}
+
+		return $result;
 	}
 
 	public function canBeUsedByProject(&$project) {

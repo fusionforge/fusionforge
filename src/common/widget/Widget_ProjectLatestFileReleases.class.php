@@ -43,6 +43,8 @@ class Widget_ProjectLatestFileReleases extends Widget {
 	}
 
 	function getContent() {
+		$result = '';
+		
 		$request =& HTTPRequest::instance();
 		$pm = ProjectManager::instance();
 		$group_id = $request->get('group_id');
@@ -52,28 +54,27 @@ class Widget_ProjectLatestFileReleases extends Widget {
 		$frsrf = new FRSReleaseFactory($project);
 		$frsrnrs = $frsrf->getFRSRNewReleases(true);
 		if (count($frsrnrs) < 1) {
-			echo $HTML->warning_msg(_('This project has not released any files.'));
+			$result .= $HTML->warning_msg(_('This project has not released any files.'));
 		} else {
 			use_javascript('/frs/scripts/FRSController.js');
-			echo $HTML->getJavascripts();
-			echo html_ao('script', array('type' => 'text/javascript'));
-			?>
+			$result .= $HTML->getJavascripts();
+			$result .= html_ao('script', array('type' => 'text/javascript'));
+			$result .= '
 			//<![CDATA[
 			var controllerFRS;
 			jQuery(document).ready(function() {
 				controllerFRS = new FRSController();
 			});
-			//]]>
-			<?php
-			echo html_ac(html_ap() - 1);
+			//]]>';
+			$result .= html_ac(html_ap() - 1);
 			$titleArr = array(_('Package'), _('Version'), _('Date'), _('Notes'));
 			if (session_loggedin()) {
 				$titleArr[] = _('Monitor');
 			}
 			$titleArr[] = _('Download');
 			use_javascript('/js/sortable.js');
-			echo $HTML->getJavascripts();
-			echo $HTML->listTableTop($titleArr, false, 'sortable_widget_frs_listpackage full', 'sortable');
+			$result .= $HTML->getJavascripts();
+			$result .= $HTML->listTableTop($titleArr, false, 'sortable_widget_frs_listpackage full', 'sortable');
 			foreach ($frsrnrs as $key => $frsrnr) {
 				$rel_date = $frsrnr->getReleaseDate();
 				$package_name = $frsrnr->FRSPackage->getName();
@@ -109,11 +110,13 @@ class Widget_ProjectLatestFileReleases extends Widget {
 				$t_link_anchor = $HTML->toSlug($package_name)."-".$HTML->toSlug($package_release)."-title-content";
 				$link = '/frs/?group_id=' . $group_id . '&amp;release_id='.$frsrnr->getID()."#".$t_link_anchor;
 				$cells[] = array(util_make_link ($link, $link_content), 'class' => 'align-center');
-				echo $HTML->multiTableRow(array(), $cells);
+				$result .= $HTML->multiTableRow(array(), $cells);
 			}
-			echo $HTML->listTableBottom();
+			$result .= $HTML->listTableBottom();
 		}
-		echo html_e('div', array('class' => 'underline-link'), util_make_link('/frs/?group_id='.$group_id, _('View All Project Files')));
+		$result .= html_e('div', array('class' => 'underline-link'), util_make_link('/frs/?group_id='.$group_id, _('View All Project Files')));
+
+		return $result;
 	}
 
 	function isAvailable() {
