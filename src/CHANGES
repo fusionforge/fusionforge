@@ -7,6 +7,7 @@ FusionForge 6.0.1:
 * Forum: fix conflict between attachments and pending attachments [#662] (Inria)
 * FRS: display new releases first (Roland Mas, for Inria)
 * FRS: revert Notes and ChangeLog as optional fields (Inria)
+* FRS: fix administration link in project Tools page (Inria)
 * Tracker: fix description re-html-ization when editing item (Inria)
 * Tracker: fix HTML entities in mail notifications (Inria)
 * Tracker: provide a "Submit" button below the "add a comment" field [#776] (TrivialDev)
