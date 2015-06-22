@@ -21,7 +21,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-// Don't try to connect to the DB, just redirecting SVN URL
+// Don't try to connect to the DB, just dumping Git log
 putenv('FUSIONFORGE_NO_DB=true');
 
 require_once '../../../www/env.inc.php';
@@ -68,13 +68,18 @@ if ($mode == 'date_range') {
 	$limit = $_GET['limit'];
 	if (!ctype_digit($limit))
 		die('Invalid limit');
-	$options = "--max-count=$nb_commits";
+	$options = "--max-count=$limit";
 	
 	if ($mode == 'latest_user') {
+		$email = $_GET['email'];
+		$realname = $_GET['realname'];
 		$user_name = $_GET['user_name'];
+		if (!validate_email($email))
+			die('Invalid email');
+		$realname = escapeshellarg(preg_quote($realname));
 		if (!preg_match('/^[a-z0-9][-a-z0-9_\.]+\z/', $user_name))
 			die('Invalid user name');
-		$options .= " --author=\"$email\" --author=\"$fullname\"  --author=\"$userunixname\"";
+		$options .= " --author='$email' --author=$realname  --author='$user_name'";
 	}
 }
 
@@ -82,4 +87,3 @@ $repo = forge_get_config('repos_path', 'scmgit') . "/$unix_group_name/$unix_grou
 if (is_dir($repo)) {
 	passthru("GIT_DIR=\"$repo\" git log --date=raw --all --pretty='format:%ad||%ae||%s||%h' --name-status $options");
 }
-

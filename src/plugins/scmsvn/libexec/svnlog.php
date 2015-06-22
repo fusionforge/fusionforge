@@ -21,7 +21,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-// Don't try to connect to the DB, just redirecting SVN URL
+// Don't try to connect to the DB, just dumping SVN log
 putenv('FUSIONFORGE_NO_DB=true');
 
 require_once '../../../www/env.inc.php';

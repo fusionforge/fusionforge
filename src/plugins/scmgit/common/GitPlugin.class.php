@@ -1186,33 +1186,60 @@ control over it to the project's administrator.");
 	function getCommits($project, $user = null, $nb_commits) {
 		$commits = array();
 		if ($project->usesPlugin($this->name) && forge_check_perm('scm', $project->getID(), 'read')) {
-			$repo = forge_get_config('repos_path', $this->name) . '/' . $project->getUnixName() . '/' . $project->getUnixName() . '.git';
+			// Grab&parse commit log
+			$protocol = forge_get_config('use_ssl', 'scmgit') ? 'https://' : 'http://';
+			$u = session_get_user();
+			if ($project->enableAnonSCM())
+				$server_script = '/anonscm/gitlog';
+			else
+				$server_script = '/authscm/'.$u->getUnixName().'/gitlog';
 			if ($user) {
 				$email = $user->getEmail();
-				$fullname = $user->getFirstName().' '.$user->getLastName();
+				$realname = $user->getFirstName().' '.$user->getLastName();
 				$userunixname = $user->getUnixName();
-				$pipecmd = "GIT_DIR=\"$repo\" git log --date=raw --all --pretty='format:%ad||%ae||%s||%h' --name-status --max-count=$nb_commits --author=\"$email\" --author=\"$fullname\"  --author=\"$userunixname\"";
-
+				$params = '&mode=latest_user'
+					.'&email='.urlencode($email)
+					.'&realname='.urlencode($realname)
+					.'&user_name='.$userunixname;
 			} else {
-				$pipecmd = "GIT_DIR=\"$repo\" git log --date=raw --all --pretty='format:%ad||%ae||%s||%h' --name-status --max-count=$nb_commits";
-
+				$params = '&mode=latest';
 			}
-			if (is_dir($repo)) {
-				$pipe = popen($pipecmd, 'r' );
-				$i = 0;
-				while (!feof($pipe) && $data = fgets($pipe)) {
-					$line = trim($data);
-					$splitedLine = explode('||', $line);
-					if (sizeof($splitedLine) == 4) {
-						$commits[$i]['pluginName'] = $this->name;
-						$commits[$i]['description'] = htmlspecialchars($splitedLine[2]);
-						$commits[$i]['commit_id'] = $splitedLine[3];
-						$splitedDate = explode(' ', $splitedLine[0]);
-						$commits[$i]['date'] = $splitedDate[0];
-						$i++;
-					}
+			$script_url = $protocol . forge_get_config('scm_host')
+				. $server_script
+				.'?unix_group_name='.$project->getUnixName()
+				. $params
+				.'&limit='.$nb_commits;
+			$filename = tempnam('/tmp', 'gitlog');
+			$f = fopen($filename, 'w');
+			$ch = curl_init();
+			curl_setopt($ch, CURLOPT_URL, $script_url);
+			curl_setopt($ch, CURLOPT_FILE, $f);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+			curl_setopt($ch, CURLOPT_COOKIE, $_SERVER['HTTP_COOKIE']);  // for session validation
+			curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);  // for session validation
+			curl_setopt($ch, CURLOPT_HTTPHEADER,
+						array('X-Forwarded-For: '.$_SERVER['REMOTE_ADDR']));  // for session validation
+			$body = curl_exec($ch);
+			if ($body === false) {
+				$this->setError(curl_error($ch));
+			}
+			curl_close($ch);
+			fclose($f); // flush buffer
+			$f = fopen($filename, 'r');
+			unlink($filename);
+
+			while (!feof($f) && $data = fgets($f)) {
+				$line = trim($data);
+				$splitedLine = explode('||', $line);
+				if (sizeof($splitedLine) == 4) {
+					$commits[$i]['pluginName'] = $this->name;
+					$commits[$i]['description'] = htmlspecialchars($splitedLine[2]);
+					$commits[$i]['commit_id'] = $splitedLine[3];
+					$splitedDate = explode(' ', $splitedLine[0]);
+					$commits[$i]['date'] = $splitedDate[0];
+					$i++;
 				}
-				pclose($pipe);
 			}
 		}
 		return $commits;
