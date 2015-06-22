@@ -35,6 +35,8 @@ class Widget_ProjectDescription extends Widget {
 	}
 
 	public function getContent() {
+		$result = '';
+		
 		$request =& HTTPRequest::instance();
 		$group_id = $request->get('group_id');
 		$pm = ProjectManager::instance();
@@ -45,14 +47,16 @@ class Widget_ProjectDescription extends Widget {
 			$project_description = $project->getDescription();
 			if ($project_description) {
 				// need to use a litteral version for content attribute since nl2br is for HTML
-				print "<p>"
+				$result .= "<p>"
 					.'<span property="doap:description" content="'. preg_quote($project_description,'"') .'">'
 					. nl2br($project_description)
 					.'</span></p>';
 			} else {
-				print "<p>" . _('This project has not yet submitted a description.') . '</p>';
+				$result .= "<p>" . _('This project has not yet submitted a description.') . '</p>';
 			}
 		}
+
+		return $result;
 	}
 
 	public function canBeUsedByProject(&$project) {

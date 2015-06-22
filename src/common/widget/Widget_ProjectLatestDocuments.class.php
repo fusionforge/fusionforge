@@ -44,6 +44,8 @@ class Widget_ProjectLatestDocuments extends Widget {
 	}
 
 	function getContent() {
+		$result = '';
+		
 		global $HTML;
 		$request =& HTTPRequest::instance();
 		$group_id = $request->get('group_id');
@@ -61,12 +63,12 @@ class Widget_ProjectLatestDocuments extends Widget {
 
 		$rows_files = db_numrows($res_files);
 		if (!$res_files || $rows_files < 1) {
-			echo db_error();
+			$result .= db_error();
 			// No documents
-			echo $HTML->information(_('This project has not published any documents.'));
+			$result .= $HTML->information(_('This project has not published any documents.'));
 		} else {
 			use_javascript('/js/sortable.js');
-			echo $HTML->getJavascripts();
+			$result .= $HTML->getJavascripts();
 			$tabletop = array(_('Date'), _('File Name'), _('Title'), _('Author'), _('Path'));
 			$classth = array('', '', '', '', '');
 			if (session_loggedin()) {
@@ -75,7 +77,7 @@ class Widget_ProjectLatestDocuments extends Widget {
 				$tabletop[] = _('Actions');
 				$classth[] = 'unsortable';
 			}
-			echo $HTML->listTableTop($tabletop, false, 'sortable_widget_docman_listfile full', 'sortable', $classth);
+			$result .= $HTML->listTableTop($tabletop, false, 'sortable_widget_docman_listfile full', 'sortable', $classth);
 			for ($f=0; $f < $rows_files; $f++) {
 				$documentObject = document_get_object(db_result($res_files, $f, 'docid'));
 				$updatedate = $documentObject->getUpdated();
@@ -124,11 +126,13 @@ class Widget_ProjectLatestDocuments extends Widget {
 					$cells[][] = $action;
 				}
 
-				echo $HTML->multiTableRow(array(), $cells);
+				$result .= $HTML->multiTableRow(array(), $cells);
 			}
-			echo $HTML->listTableBottom();
+			$result .= $HTML->listTableBottom();
 		}
-		echo html_e('div', array('class' => 'underline-link'), util_make_link('/docman/?group_id='.$group_id, _('Browse Documents Manager')));
+		$result .= html_e('div', array('class' => 'underline-link'), util_make_link('/docman/?group_id='.$group_id, _('Browse Documents Manager')));
+
+		return $result;
 	}
 
 	function isAvailable() {

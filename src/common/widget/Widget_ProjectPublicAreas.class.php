@@ -36,6 +36,8 @@ class Widget_ProjectPublicAreas extends Widget {
 	}
 
 	function getContent() {
+		$result = '';
+		
 		$request =& HTTPRequest::instance();
 		$group_id = $request->get('group_id');
 		$pm = ProjectManager::instance();
@@ -43,18 +45,18 @@ class Widget_ProjectPublicAreas extends Widget {
 		$HTML = $GLOBALS['HTML'];
 		// ################# Homepage Link
 
-		echo '<div class="public-area-box" rel="doap:homepage">';
-		echo util_make_link($project->getHomePage(),
+		$result .= '<div class="public-area-box" rel="doap:homepage">';
+		$result .= util_make_link($project->getHomePage(),
 		    $HTML->getHomePic(_('Home Page')) . ' ' .
 		    _('Project Home Page'), false, true);
-		echo "</div>\n";
+		$result .= "</div>\n";
 
 		// ################## ArtifactTypes
 
 		if ($project->usesTracker()) {
-			echo '<div class="public-area-box">'."\n";
+			$result .= '<div class="public-area-box">'."\n";
 			$link_content = $HTML->getFollowPic(_('Tracker')) . ' ' . _('Tracker');
-			echo util_make_link('/tracker/?group_id=' . $group_id, $link_content);
+			$result .= util_make_link('/tracker/?group_id=' . $group_id, $link_content);
 
 			$result=db_query_params ('SELECT agl.*,aca.count,aca.open_count
 					FROM artifact_group_list agl
@@ -72,34 +74,34 @@ class Widget_ProjectPublicAreas extends Widget {
 			}
 
 			if (count($rows) < 1) {
-				echo "<br />\n<em>"._('There are no trackers available').'</em>';
+				$result .= "<br />\n<em>"._('There are no trackers available').'</em>';
 			} else {
-				echo "\n".'<ul class="tracker" rel="doap:bug-database">'."\n";
+				$result .= "\n".'<ul class="tracker" rel="doap:bug-database">'."\n";
 				foreach ($rows as $row) {
 					// tracker REST paths are something like : /tracker/cm/project/A_PROJECT/atid/NUMBER to plan compatibility
 					// with OSLC-CM server API
 					$group_artifact_id = $row['group_artifact_id'];
 					$tracker_stdzd_uri = util_make_url('/tracker/cm/project/'. $project->getUnixName() .'/atid/'. $group_artifact_id);
-					echo "\t".'<li about="'. $tracker_stdzd_uri . '" typeof="sioc:Container">'."\n";
-					print '<span rel="http://www.w3.org/2002/07/owl#sameAs">'."\n";
-					echo util_make_link('/tracker/?atid='. $group_artifact_id . '&group_id='.$group_id.'&func=browse', $row['name']) . ' ' ;
-					echo "</span>\n"; // /owl:sameAs
-					printf(ngettext('(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', '(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', $row['open_count']), $row['open_count'], $row['count']);
-					echo '<br />';
-					print '<span rel="sioc:has_space" resource="" ></span>'."\n";
-					echo "</li>\n";
+					$result .= "\t".'<li about="'. $tracker_stdzd_uri . '" typeof="sioc:Container">'."\n";
+					$result .= '<span rel="http://www.w3.org/2002/07/owl#sameAs">'."\n";
+					$result .= util_make_link('/tracker/?atid='. $group_artifact_id . '&group_id='.$group_id.'&func=browse', $row['name']) . ' ' ;
+					$result .= "</span>\n"; // /owl:sameAs
+					$result .= sprintf(ngettext('(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', '(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', $row['open_count']), $row['open_count'], $row['count']);
+					$result .= '<br />';
+					$result .= '<span rel="sioc:has_space" resource="" ></span>'."\n";
+					$result .= "</li>\n";
 				}
-				echo "</ul>\n";
+				$result .= "</ul>\n";
 			}
 
-			echo "</div>\n";
+			$result .= "</div>\n";
 		}
 
 		// ################## forums
 
 		if ($project->usesForum()) {
-			echo '<div class="public-area-box">'."\n";
-			//	print '<hr size="1" /><a rel="sioc:container_of" href="'.util_make_url ('/forum/?group_id='.$group_id).'">';
+			$result .= '<div class="public-area-box">'."\n";
+			//	$result .= '<hr size="1" /><a rel="sioc:container_of" href="'.util_make_url ('/forum/?group_id='.$group_id).'">';
 			$ff = new ForumFactory($project);
 			$f_arr = $ff->getForums();
 			$forums_count = count($f_arr);
@@ -109,94 +111,94 @@ class Widget_ProjectPublicAreas extends Widget {
 			}
 
 			$link_content = $HTML->getForumPic('') . ' ' . _('Public Forums');
-			echo util_make_link('/forum/?group_id=' . $group_id, $link_content);
-			print ' (';
-			printf(ngettext("<strong>%d</strong> message","<strong>%d</strong> messages",$messages_count),$messages_count);
-			print ' ' . _('in') . ' ';
-			printf(ngettext("<strong>%d</strong> forum","<strong>%d</strong> forums",$forums_count),$forums_count);
-			print ')' ;
-			print "\n</div>";
+			$result .= util_make_link('/forum/?group_id=' . $group_id, $link_content);
+			$result .= ' (';
+			$result .= sprintf(ngettext("<strong>%d</strong> message","<strong>%d</strong> messages",$messages_count),$messages_count);
+			$result .= ' ' . _('in') . ' ';
+			$result .= sprintf(ngettext("<strong>%d</strong> forum","<strong>%d</strong> forums",$forums_count),$forums_count);
+			$result .= ')' ;
+			$result .= "\n</div>";
 		}
 
 		// ##################### Doc Manager
 
 		if ($project->usesDocman()) {
-			echo '<div class="public-area-box">';
+			$result .= '<div class="public-area-box">';
 			$link_content = $HTML->getDocmanPic('') . ' ' . _('DocManager: Project Documentation');
 			//	<a rel="sioc:container_of" xmlns:sioc="http://rdfs.org/sioc/ns#" href="'.util_make_url ('/docman/?group_id='.$group_id).'">';
-			echo util_make_link('/docman/?group_id='.$group_id, $link_content);
-			echo '</div>';
+			$result .= util_make_link('/docman/?group_id='.$group_id, $link_content);
+			$result .= '</div>';
 		}
 
 		// ##################### FRS
 
 		if ($project->usesFRS()) {
-			echo '<div class="public-area-box">';
+			$result .= '<div class="public-area-box">';
 			$link_content = $HTML->getDownloadPic('') . ' ' . _('Files');
 			//	<a rel="sioc:container_of" xmlns:sioc="http://rdfs.org/sioc/ns#" href="'.util_make_url ('/frs/?group_id='.$group_id).'">';
-			echo util_make_link('/frs/?group_id='.$group_id, $link_content);
-			echo '</div>';
+			$result .= util_make_link('/frs/?group_id='.$group_id, $link_content);
+			$result .= '</div>';
 		}
 
 		// ##################### Mailing lists
 
 		if ($project->usesMail()) {
-			echo '<div class="public-area-box">';
+			$result .= '<div class="public-area-box">';
 			$link_content = $HTML->getMailPic('') . ' ' . _('Mailing Lists');
-			print util_make_link('/mail/?group_id='.$group_id, $link_content);
+			$result .= util_make_link('/mail/?group_id='.$group_id, $link_content);
 			$n = project_get_mail_list_count($group_id);
-			echo ' ';
-			printf(ngettext('(<strong>%s</strong> public mailing list)', '(<strong>%s</strong> public mailing lists)', $n), $n);
-			echo "\n</div>\n";
+			$result .= ' ';
+			$result .= sprintf(ngettext('(<strong>%s</strong> public mailing list)', '(<strong>%s</strong> public mailing lists)', $n), $n);
+			$result .= "\n</div>\n";
 		}
 
 		// ##################### Task Manager
 
 		if ($project->usesPm()) {
-			echo '<div class="public-area-box">';
+			$result .= '<div class="public-area-box">';
 			$link_content = $HTML->getPmPic('') . ' ' . _('Tasks');
-			echo util_make_link('/pm/?group_id='.$group_id, $link_content);
+			$result .= util_make_link('/pm/?group_id='.$group_id, $link_content);
 
 			$pgf = new ProjectGroupFactory ($project);
 			$pgs = $pgf->getProjectGroups();
 
 			if (count($pgs) < 1) {
-				echo "<br />\n<em>"._('There are no subprojects available').'</em>';
+				$result .= "<br />\n<em>"._('There are no subprojects available').'</em>';
 			} else {
-				echo "\n".'<ul class="task-manager">';
+				$result .= "\n".'<ul class="task-manager">';
 				foreach ($pgs as $pg) {
-					echo "\n\t<li>";
-					echo util_make_link('/pm/task.php?group_project_id='.$pg->getID().'&group_id='.$group_id.'&func=browse',$pg->getName());
-					echo '</li>' ;
+					$result .= "\n\t<li>";
+					$result .= util_make_link('/pm/task.php?group_project_id='.$pg->getID().'&group_id='.$group_id.'&func=browse',$pg->getName());
+					$result .= '</li>' ;
 				}
-				echo "\n</ul>";
+				$result .= "\n</ul>";
 			}
-			echo "\n</div>\n";
+			$result .= "\n</div>\n";
 		}
 
 		// ######################### Surveys
 
 		if ($project->usesSurvey()) {
-			echo '<div class="public-area-box">'."\n";
+			$result .= '<div class="public-area-box">'."\n";
 			$link_content = $HTML->getSurveyPic('') . ' ' . _('Surveys');
-			echo util_make_link('/survey/?group_id='.$group_id, $link_content);
-			echo ' (<strong>'. project_get_survey_count($group_id) .'</strong> ' . _('surveys').')';
-			echo "\n</div>\n";
+			$result .= util_make_link('/survey/?group_id='.$group_id, $link_content);
+			$result .= ' (<strong>'. project_get_survey_count($group_id) .'</strong> ' . _('surveys').')';
+			$result .= "\n</div>\n";
 		}
 
 		// ######################### SCM
 
 		if ($project->usesSCM()) {
-			echo '<div class="public-area-box">'."\n";
+			$result .= '<div class="public-area-box">'."\n";
 
 			$link_content = $HTML->getScmPic('') . ' ' . _('SCM Repository');
-			//	print '<hr size="1" /><a rel="doap:repository" href="'.util_make_url ('/scm/?group_id='.$group_id).'">';
-			echo util_make_link('/scm/?group_id='.$group_id, $link_content);
+			//	$result .= '<hr size="1" /><a rel="doap:repository" href="'.util_make_url ('/scm/?group_id='.$group_id).'">';
+			$result .= util_make_link('/scm/?group_id='.$group_id, $link_content);
 
 			$hook_params = array () ;
 			$hook_params['group_id'] = $group_id ;
 			plugin_hook ("scm_stats", $hook_params) ;
-			echo "\n</div>\n";
+			$result .= "\n</div>\n";
 		}
 
 		// ######################### Plugins
@@ -210,18 +212,20 @@ class Widget_ProjectPublicAreas extends Widget {
 		// CB hide FTP if desired
 		if ($project->usesFTP()) {
 			if ($project->isActive()) {
-				echo '<div class="public-area-box">'."\n";
+				$result .= '<div class="public-area-box">'."\n";
 
 				$link_content = $HTML->getFtpPic('') . ' ' . _('Anonymous FTP Space');
-				//		print '<a rel="doap:anonymous root" href="ftp://' . $project->getUnixName() . '.' . forge_get_config('web_host') . '/pub/'. $project->getUnixName() .'/">';
+				//		$result .= '<a rel="doap:anonymous root" href="ftp://' . $project->getUnixName() . '.' . forge_get_config('web_host') . '/pub/'. $project->getUnixName() .'/">';
 				if (forge_get_config('use_project_vhost')) {
-					echo util_make_link('ftp://' . $project->getUnixName() . '.' . forge_get_config('web_host') . '/pub/'. $project->getUnixName(), $link_content, false, true);
+					$result .= util_make_link('ftp://' . $project->getUnixName() . '.' . forge_get_config('web_host') . '/pub/'. $project->getUnixName(), $link_content, false, true);
 				} else {
-					echo util_make_link('ftp://' . forge_get_config('web_host') . '/pub/'. $project->getUnixName(), $link_content, false, true);
+					$result .= util_make_link('ftp://' . forge_get_config('web_host') . '/pub/'. $project->getUnixName(), $link_content, false, true);
 				}
-				echo "\n</div>\n";
+				$result .= "\n</div>\n";
 			}
 		}
+
+		return $result;
 	}
 
 	function canBeUsedByProject(&$project) {
