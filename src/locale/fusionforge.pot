@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-29 13:52+0200\n"
+"POT-Creation-Date: 2015-06-23 15:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -100,10 +100,10 @@ msgid "Items For Our Next Release"
 msgstr ""
 
 #: bin/populate_template_project.php:203 common/tracker/actions/detail.php:159
-#: common/tracker/actions/detail.php:211
+#: common/tracker/actions/detail.php:214
 #: common/tracker/actions/mod-limited.php:192
-#: common/tracker/actions/mod-limited.php:237
-#: common/tracker/actions/mod.php:227 common/tracker/actions/mod.php:302
+#: common/tracker/actions/mod-limited.php:240
+#: common/tracker/actions/mod.php:227 common/tracker/actions/mod.php:305
 #: plugins/scmcvs/common/CVSPlugin.class.php:181
 #: www/stats/site_stats_utils.php:283
 msgid "Commits"
@@ -168,11 +168,11 @@ msgstr ""
 
 #: common/docman/Document.class.php:99 common/docman/Document.class.php:112
 #: common/docman/Document.class.php:221 common/docman/Document.class.php:228
-#: common/docman/Document.class.php:248 common/docman/Document.class.php:831
-#: common/docman/Document.class.php:884 common/docman/Document.class.php:885
-#: common/docman/Document.class.php:886 common/docman/Document.class.php:887
-#: common/docman/Document.class.php:888 common/docman/Document.class.php:917
-#: common/docman/Document.class.php:964 common/docman/Document.class.php:1068
+#: common/docman/Document.class.php:248 common/docman/Document.class.php:837
+#: common/docman/Document.class.php:890 common/docman/Document.class.php:891
+#: common/docman/Document.class.php:892 common/docman/Document.class.php:893
+#: common/docman/Document.class.php:894 common/docman/Document.class.php:923
+#: common/docman/Document.class.php:970 common/docman/Document.class.php:1074
 #: common/docman/DocumentGroup.class.php:97
 #: common/docman/DocumentGroup.class.php:106
 #: common/docman/DocumentGroup.class.php:177
@@ -199,15 +199,15 @@ msgstr ""
 #: common/docman/views/listfile.php:169 common/docman/views/listfile.php:171
 #: common/docman/views/listfile.php:174
 #: common/docman/views/listtrashfile.php:129 common/docman/views/search.php:58
-#: common/docman/views/tree.php:64 common/forum/AttachManager.class.php:215
-#: common/forum/AttachManager.class.php:321
+#: common/docman/views/tree.php:64 common/forum/AttachManager.class.php:216
+#: common/forum/AttachManager.class.php:322
 #: common/forum/AttachManager.class.php:358
 #: common/forum/AttachManager.class.php:413 common/forum/Forum.class.php:229
 #: common/forum/Forum.class.php:510 common/forum/Forum.class.php:591
 #: common/forum/Forum.class.php:617 common/forum/Forum.class.php:625
 #: common/forum/Forum.class.php:633 common/forum/Forum.class.php:641
-#: common/forum/Forum.class.php:649 common/forum/Forum.class.php:657
-#: common/forum/ForumAdmin.class.php:412
+#: common/forum/Forum.class.php:650 common/forum/Forum.class.php:658
+#: common/forum/ForumAdmin.class.php:414
 #: common/forum/ForumFactory.class.php:56
 #: common/forum/ForumFactory.class.php:158 common/forum/ForumHTML.class.php:58
 #: common/forum/ForumHTML.class.php:68 common/forum/ForumHTML.class.php:69
@@ -215,7 +215,7 @@ msgstr ""
 #: common/forum/ForumHTML.class.php:207 common/forum/ForumHTML.class.php:265
 #: common/forum/ForumHTML.class.php:523 common/forum/ForumHTML.class.php:584
 #: common/forum/ForumHTML.class.php:587
-#: common/forum/ForumMessage.class.php:664 common/frs/FRSFile.class.php:186
+#: common/forum/ForumMessage.class.php:668 common/frs/FRSFile.class.php:186
 #: common/frs/FRSFile.class.php:205 common/frs/FRSFile.class.php:448
 #: common/frs/FRSPackage.class.php:176 common/frs/FRSPackage.class.php:186
 #: common/frs/FRSPackage.class.php:427 common/frs/FRSPackage.class.php:438
@@ -287,11 +287,11 @@ msgstr ""
 #: common/tracker/actions/browse.php:445 common/tracker/actions/browse.php:794
 #: common/tracker/actions/detail.php:68
 #: common/tracker/actions/mod-limited.php:77
-#: common/tracker/actions/mod-limited.php:202
+#: common/tracker/actions/mod-limited.php:205
 #: common/tracker/actions/mod.php:79 common/tracker/actions/mod.php:137
 #: common/tracker/actions/mod.php:164 common/tracker/actions/mod.php:171
 #: common/tracker/actions/mod.php:179 common/tracker/actions/mod.php:197
-#: common/tracker/actions/mod.php:258 common/tracker/actions/mod.php:260
+#: common/tracker/actions/mod.php:261 common/tracker/actions/mod.php:263
 #: common/tracker/actions/query.php:322 common/tracker/actions/query.php:337
 #: common/tracker/actions/query.php:343 common/tracker/actions/query.php:344
 #: common/tracker/actions/query.php:379 common/tracker/actions/query.php:381
@@ -331,9 +331,9 @@ msgstr ""
 #: cronjobs/db/send_pending_items_mail.php:120
 #: cronjobs/db/send_pending_items_mail.php:121
 #: db/20141105-frs-ziplatest.php:51 db/20141105-frs-ziplatest.php:58
-#: db/20141105-frs-ziplatest.php:64 db/20141106-frs-zip-per-release.php:48
-#: db/20141106-frs-zip-per-release.php:55
-#: db/20141106-frs-zip-per-release.php:61
+#: db/20141105-frs-ziplatest.php:64 db/20141106-frs-zip-per-release.php:50
+#: db/20141106-frs-zip-per-release.php:57
+#: db/20141106-frs-zip-per-release.php:63
 #: plugins/forumml/www/forumml_utils.php:679 plugins/forumml/www/index.php:121
 #: plugins/globaldashboard/www/admin/add_account.php:75
 #: plugins/globaldashboard/www/admin/add_account.php:79
@@ -517,6 +517,7 @@ msgid "Document Description Must Be At Least 10 Characters"
 msgstr ""
 
 #: common/docman/Document.class.php:165 common/docman/Document.class.php:172
+#: common/docman/Document.class.php:823
 msgid "Document already published in this folder"
 msgstr ""
 
@@ -525,8 +526,8 @@ msgid "Error Adding Document"
 msgstr ""
 
 #: common/docman/Document.class.php:221
-#: common/forum/AttachManager.class.php:215
-#: common/forum/AttachManager.class.php:321
+#: common/forum/AttachManager.class.php:216
+#: common/forum/AttachManager.class.php:322
 #: common/forum/AttachManager.class.php:358
 #: common/forum/AttachManager.class.php:413
 msgid "Not a file"
@@ -536,8 +537,8 @@ msgstr ""
 msgid "Error fetching Document"
 msgstr ""
 
-#: common/docman/Document.class.php:248 common/docman/Document.class.php:831
-#: common/docman/Document.class.php:1068
+#: common/docman/Document.class.php:248 common/docman/Document.class.php:837
+#: common/docman/Document.class.php:1074
 msgid "Error updating document group"
 msgstr ""
 
@@ -553,20 +554,20 @@ msgstr ""
 msgid "Document reservation failed"
 msgstr ""
 
-#: common/docman/Document.class.php:879 common/docman/views/additem.php:55
+#: common/docman/Document.class.php:885 common/docman/views/additem.php:55
 msgid "New Document"
 msgstr ""
 
-#: common/docman/Document.class.php:881
+#: common/docman/Document.class.php:887
 msgid "Updated document"
 msgstr ""
 
-#: common/docman/Document.class.php:881 common/docman/Document.class.php:919
+#: common/docman/Document.class.php:887 common/docman/Document.class.php:925
 #: common/docman/views/listfile.php:291 common/frs/FRSPackage.class.php:629
 msgid "by"
 msgstr ""
 
-#: common/docman/Document.class.php:884
+#: common/docman/Document.class.php:890
 #: common/docman/DocumentGroup.class.php:759
 #: common/forum/ForumHTML.class.php:73 common/frs/FRSPackage.class.php:632
 #: common/tracker/actions/browse.php:388
@@ -580,7 +581,7 @@ msgstr ""
 msgid "Project"
 msgstr ""
 
-#: common/docman/Document.class.php:885
+#: common/docman/Document.class.php:891
 #: common/docman/DocumentGroup.class.php:760
 #: common/docman/actions/monitordirectory.php:54
 #: common/docman/actions/monitordirectory.php:67
@@ -588,48 +589,48 @@ msgstr ""
 msgid "Folder"
 msgstr ""
 
-#: common/docman/Document.class.php:886 common/docman/views/addfile.php:93
+#: common/docman/Document.class.php:892 common/docman/views/addfile.php:93
 #: common/docman/views/addfile.php:104 common/docman/views/addfile.php:105
 #: common/docman/views/editfile.php:39
 msgid "Document Title"
 msgstr ""
 
-#: common/docman/Document.class.php:887
+#: common/docman/Document.class.php:893
 msgid "Document description"
 msgstr ""
 
-#: common/docman/Document.class.php:888
+#: common/docman/Document.class.php:894
 #: common/docman/DocumentGroup.class.php:762
 #: common/include/Group.class.php:2746 common/tracker/actions/browse.php:204
 #: common/tracker/actions/query.php:199 common/tracker/actions/query.php:343
 msgid "Submitter"
 msgstr ""
 
-#: common/docman/Document.class.php:890
+#: common/docman/Document.class.php:896
 #: common/docman/DocumentGroup.class.php:767
 msgid "For more info, visit:"
 msgstr ""
 
-#: common/docman/Document.class.php:895
+#: common/docman/Document.class.php:901
 #: common/docman/DocumentGroup.class.php:772
 #: common/docman/actions/monitorfile.php:86
 msgid "Docman"
 msgstr ""
 
-#: common/docman/Document.class.php:917
+#: common/docman/Document.class.php:923
 msgid "A new document has been uploaded and waiting to be approved by you"
 msgstr ""
 
-#: common/docman/Document.class.php:964
+#: common/docman/Document.class.php:970
 msgid "Error Deleting Document"
 msgstr ""
 
-#: common/docman/Document.class.php:1023
+#: common/docman/Document.class.php:1029
 #: common/docman/DocumentGroup.class.php:968
 msgid "wrong parameters"
 msgstr ""
 
-#: common/docman/Document.class.php:1052
+#: common/docman/Document.class.php:1058
 #: common/docman/DocumentGroup.class.php:991
 msgid "wrong column name"
 msgstr ""
@@ -713,7 +714,7 @@ msgstr ""
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:89
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:91
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:154
-#: www/snippet/download.php:47 www/survey/admin/question.php:67
+#: www/snippet/download.php:45 www/survey/admin/question.php:67
 #: www/survey/admin/question.php:69 www/survey/admin/show_csv.php:83
 #: www/survey/admin/show_csv.php:85 www/survey/admin/show_results.php:78
 #: www/survey/admin/show_results.php:82 www/survey/admin/show_results.php:93
@@ -892,7 +893,7 @@ msgstr ""
 #: common/docman/actions/monitorfile.php:60
 #: common/docman/actions/monitorfile.php:77
 #: common/docman/actions/trashfile.php:62
-#: common/docman/actions/validatefile.php:53 www/docman/view.php:275
+#: common/docman/actions/validatefile.php:53 www/docman/view.php:269
 msgid "No action to perform"
 msgstr ""
 
@@ -1127,11 +1128,11 @@ msgstr ""
 #: plugins/oauthprovider/www/consumer.php:109
 #: plugins/oauthprovider/www/consumer_manage.php:66
 #: plugins/oauthprovider/www/consumer_update_page.php:64
-#: plugins/scmgit/common/GitPlugin.class.php:1146
+#: plugins/scmgit/common/GitPlugin.class.php:1176
 #: plugins/scmhg/common/HgPlugin.class.php:789
 #: plugins/scmhook/common/scmhookPlugin.class.php:329
-#: plugins/scmhook/common/scmhookPlugin.class.php:400
-#: plugins/scmhook/common/scmhookPlugin.class.php:455
+#: plugins/scmhook/common/scmhookPlugin.class.php:395
+#: plugins/scmhook/common/scmhookPlugin.class.php:444
 #: plugins/taskboard/common/views/admin/trackers.php:102
 #: www/forum/admin/index.php:116 www/forum/admin/index.php:158
 #: www/forum/index.php:73 www/mail/admin/index.php:203
@@ -1230,7 +1231,7 @@ msgstr ""
 #: common/docman/views/listtrashfile.php:142
 #: common/docman/views/pendingfiles.php:63
 #: common/frs/views/editrelease.php:131 common/frs/views/editrelease.php:165
-#: common/frs/views/listpackages.php:139 common/frs/views/qrs.php:60
+#: common/frs/views/listpackages.php:149 common/frs/views/qrs.php:60
 #: common/widget/Widget_ProjectLatestDocuments.class.php:70
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:108
 #: plugins/mantisbt/view/viewAttachment.php:47
@@ -1344,7 +1345,7 @@ msgid "Restore"
 msgstr ""
 
 #: common/docman/views/editdocgroup.php:70
-#: common/forum/AttachManager.class.php:146
+#: common/forum/AttachManager.class.php:147
 #: common/forum/ForumAdmin.class.php:66 common/frs/views/showreleases.php:85
 #: common/tracker/views/form-addextrafield.php:56
 #: common/tracker/views/form-addextrafield.php:79
@@ -1406,8 +1407,8 @@ msgstr ""
 #: common/tracker/actions/browse.php:800 common/tracker/actions/detail.php:91
 #: common/tracker/actions/detail.php:95 common/tracker/actions/detail.php:102
 #: common/tracker/actions/detail.php:109 common/tracker/actions/detail.php:119
-#: common/tracker/actions/detail.php:131 common/tracker/actions/detail.php:172
-#: common/tracker/actions/detail.php:193
+#: common/tracker/actions/detail.php:131 common/tracker/actions/detail.php:175
+#: common/tracker/actions/detail.php:196
 #: common/tracker/actions/format_csv.php:71
 #: common/tracker/actions/format_csv.php:86
 #: common/tracker/actions/format_csv.php:109
@@ -1419,13 +1420,13 @@ msgstr ""
 #: common/tracker/actions/mod-limited.php:141
 #: common/tracker/actions/mod-limited.php:150
 #: common/tracker/actions/mod-limited.php:163
-#: common/tracker/actions/mod-limited.php:216
 #: common/tracker/actions/mod-limited.php:219
-#: common/tracker/actions/mod-limited.php:226
+#: common/tracker/actions/mod-limited.php:222
+#: common/tracker/actions/mod-limited.php:229
 #: common/tracker/actions/mod.php:114 common/tracker/actions/mod.php:123
 #: common/tracker/actions/mod.php:129 common/tracker/actions/mod.php:189
-#: common/tracker/actions/mod.php:234 common/tracker/actions/mod.php:283
-#: common/tracker/actions/mod.php:286 common/tracker/actions/query.php:369
+#: common/tracker/actions/mod.php:237 common/tracker/actions/mod.php:286
+#: common/tracker/actions/mod.php:289 common/tracker/actions/query.php:369
 #: common/tracker/actions/query.php:371 common/tracker/actions/query.php:373
 #: common/tracker/actions/query.php:396 common/tracker/actions/taskmgr.php:107
 #: common/tracker/actions/taskmgr.php:108
@@ -1546,9 +1547,9 @@ msgstr ""
 #: plugins/mantisbt/view/jumpToIssue.php:31
 #: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:810
 #: plugins/scmgit/common/GitPlugin.class.php:381
-#: plugins/scmgit/common/GitPlugin.class.php:1144
-#: plugins/scmgit/common/GitPlugin.class.php:1146
-#: plugins/scmgit/common/GitPlugin.class.php:1148
+#: plugins/scmgit/common/GitPlugin.class.php:1174
+#: plugins/scmgit/common/GitPlugin.class.php:1176
+#: plugins/scmgit/common/GitPlugin.class.php:1178
 #: plugins/scmhg/common/HgPlugin.class.php:69
 #: plugins/scmhg/common/HgPlugin.class.php:163
 #: plugins/scmhg/common/HgPlugin.class.php:787
@@ -1860,7 +1861,7 @@ msgstr ""
 #: common/docman/views/listfile.php:233
 #: common/docman/views/listtrashfile.php:142
 #: common/docman/views/pendingfiles.php:63
-#: common/frs/views/listpackages.php:141
+#: common/frs/views/listpackages.php:151
 #: common/tracker/include/ArtifactTypeHtml.class.php:377
 #: www/project/admin/editimages.php:267
 msgid "Size"
@@ -1922,8 +1923,8 @@ msgstr ""
 #: common/docman/views/listtrashfile.php:170
 #: common/docman/views/pendingfiles.php:88
 #: common/docman/views/pendingfiles.php:90
-#: common/forum/ForumHTML.class.php:217 common/frs/views/listpackages.php:119
-#: common/frs/views/listpackages.php:157 common/pm/ProjectTask.class.php:1213
+#: common/forum/ForumHTML.class.php:217 common/frs/views/listpackages.php:129
+#: common/frs/views/listpackages.php:167 common/pm/ProjectTask.class.php:1213
 #: common/tracker/Artifact.class.php:1679
 #: common/tracker/actions/browse.php:638 common/tracker/actions/browse.php:649
 #: common/tracker/actions/browse.php:669 common/tracker/actions/detail.php:92
@@ -2282,7 +2283,7 @@ msgid "User"
 msgstr ""
 
 #: common/docman/views/reporting.php:164 common/forum/ForumHTML.class.php:69
-#: common/frs/views/listpackages.php:140 common/frs/views/reporting.php:169
+#: common/frs/views/listpackages.php:150 common/frs/views/reporting.php:169
 #: common/frs/views/showreleases.php:73 common/tracker/actions/detail.php:91
 #: common/tracker/include/ArtifactHtml.class.php:109
 #: common/tracker/include/ArtifactHtml.class.php:146
@@ -2383,14 +2384,14 @@ msgstr ""
 msgid "Child project"
 msgstr ""
 
-#: common/forum/AttachManager.class.php:141
-#: common/forum/AttachManager.class.php:154 www/forum/admin/index.php:327
+#: common/forum/AttachManager.class.php:142
+#: common/forum/AttachManager.class.php:155 www/forum/admin/index.php:327
 #: www/forum/admin/index.php:333 www/forum/admin/index.php:397
 #: www/forum/admin/monitor.php:45
 msgid "Could Not Get Forum Object"
 msgstr ""
 
-#: common/forum/AttachManager.class.php:147
+#: common/forum/AttachManager.class.php:148
 #: common/forum/ForumAdmin.class.php:67 common/forum/ForumAdmin.class.php:323
 #: common/tracker/actions/admin-tracker.php:75
 #: common/tracker/actions/deleteartifact.php:57
@@ -2428,8 +2429,8 @@ msgstr ""
 #: plugins/oauthprovider/www/request_tokens.php:100
 #: plugins/oauthprovider/www/request_tokens.php:103
 #: plugins/oauthprovider/www/request_tokens.php:108
-#: plugins/scmgit/common/GitPlugin.class.php:1120
-#: plugins/scmgit/common/GitPlugin.class.php:1132
+#: plugins/scmgit/common/GitPlugin.class.php:1150
+#: plugins/scmgit/common/GitPlugin.class.php:1162
 #: plugins/scmhg/common/HgPlugin.class.php:763
 #: plugins/scmhg/common/HgPlugin.class.php:775
 #: plugins/taskboard/common/views/admin/delete_column.php:49
@@ -2447,7 +2448,7 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: common/forum/AttachManager.class.php:161
+#: common/forum/AttachManager.class.php:162
 #: common/tracker/views/form-customizelist.php:133
 #: common/widget/WidgetLayoutManager.class.php:530
 #: plugins/extsubproj/view/admin/viewProjectConfiguration.php:61
@@ -2463,27 +2464,26 @@ msgstr ""
 msgid "Add"
 msgstr ""
 
-#: common/forum/AttachManager.class.php:186
-#: common/forum/AttachManager.class.php:287
+#: common/forum/AttachManager.class.php:187
+#: common/forum/AttachManager.class.php:288
 #: common/forum/AttachManager.class.php:379
 msgid "Could not get message id"
 msgstr ""
 
-#: common/forum/AttachManager.class.php:205
-#: common/forum/AttachManager.class.php:310
+#: common/forum/AttachManager.class.php:206
+#: common/forum/AttachManager.class.php:311
 #: common/forum/AttachManager.class.php:353
 #: common/forum/AttachManager.class.php:364
 #: common/forum/AttachManager.class.php:402
 msgid "File uploaded"
 msgstr ""
 
-#: common/forum/AttachManager.class.php:211
-#: common/forum/AttachManager.class.php:216
-#: common/forum/AttachManager.class.php:222
-#: common/forum/AttachManager.class.php:317
-#: common/forum/AttachManager.class.php:322
-#: common/forum/AttachManager.class.php:327
-#: common/forum/AttachManager.class.php:329
+#: common/forum/AttachManager.class.php:212
+#: common/forum/AttachManager.class.php:217
+#: common/forum/AttachManager.class.php:223
+#: common/forum/AttachManager.class.php:318
+#: common/forum/AttachManager.class.php:323
+#: common/forum/AttachManager.class.php:330
 #: common/forum/AttachManager.class.php:359
 #: common/forum/AttachManager.class.php:369
 #: common/forum/AttachManager.class.php:409
@@ -2492,18 +2492,18 @@ msgstr ""
 msgid "File not uploaded"
 msgstr ""
 
-#: common/forum/AttachManager.class.php:215
-#: common/forum/AttachManager.class.php:321
+#: common/forum/AttachManager.class.php:216
+#: common/forum/AttachManager.class.php:322
 #: common/forum/AttachManager.class.php:358
 #: common/forum/AttachManager.class.php:413
 msgid "Error Adding Attachment"
 msgstr ""
 
-#: common/forum/AttachManager.class.php:256
+#: common/forum/AttachManager.class.php:257
 msgid "Invalid Extension"
 msgstr ""
 
-#: common/forum/AttachManager.class.php:263
+#: common/forum/AttachManager.class.php:264
 msgid "Error, problem with the attachment file uploaded into the server"
 msgstr ""
 
@@ -2588,7 +2588,7 @@ msgstr ""
 
 #: common/forum/Forum.class.php:617 common/forum/Forum.class.php:625
 #: common/forum/Forum.class.php:633 common/forum/Forum.class.php:641
-#: common/forum/Forum.class.php:649 common/forum/Forum.class.php:657
+#: common/forum/Forum.class.php:650 common/forum/Forum.class.php:658
 msgid "Error Deleting Forum"
 msgstr ""
 
@@ -2614,7 +2614,7 @@ msgstr ""
 #: common/forum/ForumAdmin.class.php:166 common/forum/ForumAdmin.class.php:194
 #: common/forum/ForumAdmin.class.php:212 common/forum/ForumAdmin.class.php:240
 #: www/forum/admin/index.php:247 www/forum/admin/index.php:287
-#: www/forum/attachment.php:67 www/forum/monitor.php:47 www/forum/new.php:48
+#: www/forum/attachment.php:68 www/forum/monitor.php:47 www/forum/new.php:48
 #: www/forum/save.php:47
 msgid "Error getting Forum"
 msgstr ""
@@ -2716,33 +2716,33 @@ msgstr ""
 msgid "Update"
 msgstr ""
 
-#: common/forum/ForumAdmin.class.php:385
+#: common/forum/ForumAdmin.class.php:387
 msgid "Forum deleted"
 msgstr ""
 
-#: common/forum/ForumAdmin.class.php:404 www/forum/forum.php:71
+#: common/forum/ForumAdmin.class.php:406 www/forum/forum.php:71
 #: www/forum/message.php:74
 msgid "Error getting new Forum"
 msgstr ""
 
-#: common/forum/ForumAdmin.class.php:410 common/forum/ForumAdmin.class.php:412
+#: common/forum/ForumAdmin.class.php:412 common/forum/ForumAdmin.class.php:414
 #: www/forum/admin/index.php:253 www/forum/admin/pendingmsgdetail.php:57
 #: www/forum/admin/pendingmsgdetail.php:59 www/forum/forum.php:90
 #: www/forum/forum.php:93 www/forum/message.php:84
 msgid "Error getting new forum message"
 msgstr ""
 
-#: common/forum/ForumAdmin.class.php:424
+#: common/forum/ForumAdmin.class.php:426
 msgid "Pending message released"
 msgstr ""
 
-#: common/forum/ForumAdmin.class.php:446
+#: common/forum/ForumAdmin.class.php:448
 #: common/forum/ForumMessage.class.php:183
 #: common/forum/ForumMessage.class.php:276
 msgid "Could not Update Master Thread parent with current time"
 msgstr ""
 
-#: common/forum/ForumAdmin.class.php:448
+#: common/forum/ForumAdmin.class.php:450
 msgid ""
 "The thread which the message was posted to doesn't exist anymore, please "
 "delete the message."
@@ -2855,7 +2855,7 @@ msgid "This is the content of the pending message"
 msgstr ""
 
 #: common/forum/ForumHTML.class.php:207 common/forum/ForumHTML.class.php:265
-#: common/forum/ForumMessage.class.php:664
+#: common/forum/ForumMessage.class.php:668
 #: common/tracker/include/ArtifactHtml.class.php:147
 #: common/tracker/include/ArtifactTypeHtml.class.php:380
 #: www/activity/index.php:293 www/forum/message.php:128
@@ -2887,13 +2887,12 @@ msgid "Warning: Uploaded file will replace current file"
 msgstr ""
 
 #: common/forum/ForumHTML.class.php:346 common/tracker/actions/detail.php:157
-#: common/tracker/actions/detail.php:189
+#: common/tracker/actions/detail.php:192
 #: common/tracker/actions/mod-limited.php:190
-#: common/tracker/actions/mod-limited.php:215
-#: common/tracker/actions/mod.php:225 common/tracker/actions/mod.php:282
+#: common/tracker/actions/mod-limited.php:218
+#: common/tracker/actions/mod.php:225 common/tracker/actions/mod.php:285
 #: common/tracker/include/ArtifactTypeHtml.class.php:375
-#: www/forum/attachment.php:40 www/forum/attachment.php:121
-#: www/forum/attachment.php:149
+#: www/forum/attachment.php:41 www/forum/attachment.php:149
 msgid "Attachments"
 msgstr ""
 
@@ -2922,7 +2921,7 @@ msgstr ""
 #: plugins/headermenu/view/admin/updateLinkValue.php:108
 #: plugins/oauthconsumer/www/provider_edit.php:30
 #: plugins/oauthprovider/www/consumer_update_page.php:50
-#: plugins/scmgit/common/GitPlugin.class.php:1151
+#: plugins/scmgit/common/GitPlugin.class.php:1181
 #: plugins/scmhg/common/HgPlugin.class.php:794
 #: plugins/taskboard/www/index.php:302
 #: plugins/webanalytics/view/admin/updateLinkValue.php:46
@@ -2946,7 +2945,7 @@ msgid ""
 "You are posting anonymously because you are not <a href=\"%s\">logged in</a>"
 msgstr ""
 
-#: common/forum/ForumHTML.class.php:617 common/tracker/actions/mod.php:258
+#: common/forum/ForumHTML.class.php:617 common/tracker/actions/mod.php:261
 msgid "Post Comment"
 msgstr ""
 
@@ -2997,7 +2996,7 @@ msgid "Could Not Update Parent"
 msgstr ""
 
 #: common/forum/ForumMessage.class.php:356
-#: common/forum/ForumMessage.class.php:798
+#: common/forum/ForumMessage.class.php:802
 msgid "Error: a forum message must include a message body and a subject."
 msgstr ""
 
@@ -3011,7 +3010,7 @@ msgstr ""
 msgid "Invalid Message Id"
 msgstr ""
 
-#: common/forum/ForumMessage.class.php:656
+#: common/forum/ForumMessage.class.php:660
 #, php-format
 msgid ""
 "\n"
@@ -3019,7 +3018,7 @@ msgid ""
 "%s"
 msgstr ""
 
-#: common/forum/ForumMessage.class.php:658
+#: common/forum/ForumMessage.class.php:662
 #, php-format
 msgid ""
 "\n"
@@ -3030,11 +3029,11 @@ msgid ""
 "%1$s"
 msgstr ""
 
-#: common/forum/ForumMessage.class.php:669
+#: common/forum/ForumMessage.class.php:673
 msgid "A file has been uploaded with this message."
 msgstr ""
 
-#: common/forum/ForumMessage.class.php:680
+#: common/forum/ForumMessage.class.php:684
 #, php-format
 msgid ""
 "You are receiving this email because you elected to monitor this forum.\n"
@@ -3042,7 +3041,7 @@ msgid ""
 "%s\n"
 msgstr ""
 
-#: common/forum/ForumMessage.class.php:822
+#: common/forum/ForumMessage.class.php:826
 msgid "Message not found"
 msgstr ""
 
@@ -3161,17 +3160,17 @@ msgid "No valid max release id"
 msgstr ""
 
 #: common/frs/FRSPackage.class.php:588 db/20141105-frs-ziplatest.php:51
-#: db/20141106-frs-zip-per-release.php:48
+#: db/20141106-frs-zip-per-release.php:50
 msgid "Cannot open the file archive"
 msgstr ""
 
 #: common/frs/FRSPackage.class.php:595 db/20141105-frs-ziplatest.php:58
-#: db/20141106-frs-zip-per-release.php:55
+#: db/20141106-frs-zip-per-release.php:57
 msgid "Cannot add file to the file archive"
 msgstr ""
 
 #: common/frs/FRSPackage.class.php:600 db/20141105-frs-ziplatest.php:64
-#: db/20141106-frs-zip-per-release.php:61
+#: db/20141106-frs-zip-per-release.php:63
 msgid "Cannot close the file archive"
 msgstr ""
 
@@ -3311,7 +3310,7 @@ msgstr ""
 msgid "Missing package_id"
 msgstr ""
 
-#: common/frs/actions/addrelease.php:75 common/frs/actions/addrelease.php:96
+#: common/frs/actions/addrelease.php:75 common/frs/actions/addrelease.php:91
 #: common/frs/actions/editrelease.php:75 common/frs/actions/editrelease.php:96
 msgid "Attempted File Upload Attack"
 msgstr ""
@@ -3320,29 +3319,19 @@ msgstr ""
 msgid "Release Notes Are not in Text"
 msgstr ""
 
-#: common/frs/actions/addrelease.php:89 common/frs/actions/editrelease.php:89
-msgid "Release Notes Are Too Small"
-msgstr ""
-
-#: common/frs/actions/addrelease.php:100
-#: common/frs/actions/editrelease.php:100
+#: common/frs/actions/addrelease.php:95 common/frs/actions/editrelease.php:100
 msgid "Change Log Is not in Text"
 msgstr ""
 
-#: common/frs/actions/addrelease.php:110
-#: common/frs/actions/editrelease.php:110
-msgid "Change Log Is Too Small"
-msgstr ""
-
-#: common/frs/actions/addrelease.php:116
+#: common/frs/actions/addrelease.php:107
 msgid "Release successfully created"
 msgstr ""
 
-#: common/frs/actions/addrelease.php:120
+#: common/frs/actions/addrelease.php:111
 msgid " and file successfully added to the release."
 msgstr ""
 
-#: common/frs/actions/addrelease.php:131
+#: common/frs/actions/addrelease.php:122
 msgid "Missing release_name or too short release_name, at least 3 characters."
 msgstr ""
 
@@ -3382,6 +3371,14 @@ msgstr ""
 
 #: common/frs/actions/editfile.php:59
 msgid "File Updated"
+msgstr ""
+
+#: common/frs/actions/editrelease.php:89
+msgid "Release Notes Are Too Small"
+msgstr ""
+
+#: common/frs/actions/editrelease.php:110
+msgid "Change Log Is Too Small"
 msgstr ""
 
 #: common/frs/actions/editrelease.php:120
@@ -3785,36 +3782,36 @@ msgstr ""
 msgid "Unable to set monitoring"
 msgstr ""
 
-#: common/frs/views/listpackages.php:100
+#: common/frs/views/listpackages.php:105
 msgid "Download the newest release as ZIP."
 msgstr ""
 
-#: common/frs/views/listpackages.php:100
+#: common/frs/views/listpackages.php:106
 msgid "This link always points to the newest release as a ZIP file."
 msgstr ""
 
-#: common/frs/views/listpackages.php:105
+#: common/frs/views/listpackages.php:111
 msgid "No releases"
 msgstr ""
 
-#: common/frs/views/listpackages.php:113
+#: common/frs/views/listpackages.php:122
 msgid "Download this release as ZIP."
 msgstr ""
 
-#: common/frs/views/listpackages.php:113
+#: common/frs/views/listpackages.php:123
 msgid "This link always points to this release as a ZIP file."
 msgstr ""
 
-#: common/frs/views/listpackages.php:142
+#: common/frs/views/listpackages.php:152
 msgid "D/L"
 msgstr ""
 
-#: common/frs/views/listpackages.php:143
+#: common/frs/views/listpackages.php:153
 #: plugins/scmarch/common/ArchPlugin.class.php:31
 msgid "Arch"
 msgstr ""
 
-#: common/frs/views/listpackages.php:144
+#: common/frs/views/listpackages.php:154
 #: common/tracker/views/form-addextrafield.php:45
 #: plugins/mantisbt/view/admin/editVersion.php:56
 #: plugins/mantisbt/view/admin/viewVersion.php:48 www/admin/massmail.php:158
@@ -3835,15 +3832,15 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
-#: common/frs/views/listpackages.php:145
+#: common/frs/views/listpackages.php:155
 msgid "Latest"
 msgstr ""
 
-#: common/frs/views/listpackages.php:150
+#: common/frs/views/listpackages.php:160
 msgid "No files"
 msgstr ""
 
-#: common/frs/views/listpackages.php:162
+#: common/frs/views/listpackages.php:172
 msgid "Latest version"
 msgstr ""
 
@@ -4666,9 +4663,9 @@ msgid "Project Homepage. Widgets oriented"
 msgstr ""
 
 #: common/include/Navigation.class.php:400 common/tracker/actions/mod.php:168
-#: common/tracker/actions/mod.php:238
+#: common/tracker/actions/mod.php:241
 #: common/tracker/include/build_submission_form.php:65
-#: common/widget/Widget_MyProjects.class.php:76
+#: common/widget/Widget_MyProjects.class.php:77
 #: www/include/Layout.class.php:712 www/pm/add_task.php:53
 #: www/pm/mod_task.php:63
 msgid "Admin"
@@ -5226,7 +5223,7 @@ msgstr ""
 msgid "File Release System"
 msgstr ""
 
-#: common/include/pre.php:248
+#: common/include/pre.php:244
 #, php-format
 msgid "Posted data is too large. %1$s exceeds the maximum size of %2$s"
 msgstr ""
@@ -6529,7 +6526,7 @@ msgstr ""
 #: plugins/forumml/www/forumml_utils.php:596 plugins/forumml/www/index.php:126
 #: plugins/mantisbt/view/addIssue.php:133
 #: plugins/mantisbt/view/addOrEditNote.php:60
-#: plugins/scmgit/common/GitPlugin.class.php:1152
+#: plugins/scmgit/common/GitPlugin.class.php:1182
 #: plugins/scmhg/common/HgPlugin.class.php:795
 #: plugins/taskboard/common/views/admin/columns.php:90
 #: plugins/taskboard/common/views/admin/edit_column.php:101
@@ -6673,7 +6670,7 @@ msgstr ""
 
 #: common/tracker/actions/admin-updates.php:184
 #: common/tracker/actions/tracker.php:36 www/tracker/admin/index.php:72
-#: www/tracker/download.php:42
+#: www/tracker/download.php:40
 msgid "ArtifactType could not be created"
 msgstr ""
 
@@ -6950,7 +6947,7 @@ msgid "Submitted by"
 msgstr ""
 
 #: common/tracker/actions/browse.php:593 common/tracker/actions/mod.php:223
-#: common/tracker/actions/mod.php:270
+#: common/tracker/actions/mod.php:273
 #: common/tracker/include/ArtifactTypeHtml.class.php:329
 #: common/tracker/views/form-customizelist.php:46
 msgid "Related Tasks"
@@ -7077,49 +7074,57 @@ msgstr ""
 msgid "Cast Vote"
 msgstr ""
 
-#: common/tracker/actions/detail.php:83
+#: common/tracker/actions/detail.php:83 common/tracker/actions/detail.php:236
 #: common/tracker/actions/mod-limited.php:100
-#: common/tracker/actions/mod.php:105 common/tracker/actions/query.php:262
+#: common/tracker/actions/mod-limited.php:261
+#: common/tracker/actions/mod.php:105 common/tracker/actions/mod.php:326
+#: common/tracker/actions/query.php:262
 msgid "Save Changes"
 msgstr ""
 
-#: common/tracker/actions/detail.php:156 common/tracker/actions/detail.php:163
+#: common/tracker/actions/detail.php:156 common/tracker/actions/detail.php:166
 #: common/tracker/actions/mod-limited.php:189
-#: common/tracker/actions/mod-limited.php:196
-#: common/tracker/actions/mod-limited.php:202
-#: common/tracker/actions/mod.php:221 common/tracker/actions/mod.php:231
-#: common/tracker/actions/mod.php:260 common/tracker/actions/query.php:383
+#: common/tracker/actions/mod-limited.php:199
+#: common/tracker/actions/mod-limited.php:205
+#: common/tracker/actions/mod.php:221 common/tracker/actions/mod.php:234
+#: common/tracker/actions/mod.php:263 common/tracker/actions/query.php:383
 #: www/news/news_utils.php:181 www/pm/include/ProjectTaskHTML.class.php:138
 #: www/survey/include/SurveyHTML.class.php:655
 msgid "Comments"
 msgstr ""
 
-#: common/tracker/actions/detail.php:161 common/tracker/actions/detail.php:224
+#: common/tracker/actions/detail.php:161 common/tracker/actions/detail.php:227
 #: common/tracker/actions/mod-limited.php:194
-#: common/tracker/actions/mod-limited.php:248
-#: common/tracker/actions/mod-limited.php:249
-#: common/tracker/actions/mod.php:229 common/tracker/actions/mod.php:313
-#: common/tracker/actions/mod.php:314
-#: common/tracker/include/ArtifactHtml.class.php:214
-#: www/snippet/addversion.php:99 www/snippet/addversion.php:222
+#: common/tracker/actions/mod-limited.php:251
+#: common/tracker/actions/mod-limited.php:252
+#: common/tracker/actions/mod.php:229 common/tracker/actions/mod.php:316
+#: common/tracker/actions/mod.php:317 www/snippet/addversion.php:99
+#: www/snippet/addversion.php:222
 msgid "Changes"
 msgstr ""
 
-#: common/tracker/actions/detail.php:172
-#: common/tracker/actions/mod-limited.php:199 www/pm/mod_task.php:127
+#: common/tracker/actions/detail.php:163
+#: common/tracker/actions/mod-limited.php:196
+#: common/tracker/actions/mod.php:231
+#: common/tracker/include/ArtifactHtml.class.php:214
+msgid "Relations"
+msgstr ""
+
+#: common/tracker/actions/detail.php:175
+#: common/tracker/actions/mod-limited.php:202 www/pm/mod_task.php:127
 msgid "Add A Comment"
 msgstr ""
 
-#: common/tracker/actions/detail.php:193
-#: common/tracker/actions/mod-limited.php:219
-#: common/tracker/actions/mod.php:286
+#: common/tracker/actions/detail.php:196
+#: common/tracker/actions/mod-limited.php:222
+#: common/tracker/actions/mod.php:289
 #: common/tracker/include/build_submission_form.php:105
 msgid "Attach Files"
 msgstr ""
 
-#: common/tracker/actions/detail.php:193
-#: common/tracker/actions/mod-limited.php:219
-#: common/tracker/actions/mod.php:286
+#: common/tracker/actions/detail.php:196
+#: common/tracker/actions/mod-limited.php:222
+#: common/tracker/actions/mod.php:289
 #: common/tracker/include/build_submission_form.php:105
 msgid "max upload size: "
 msgstr ""
@@ -7221,12 +7226,12 @@ msgstr ""
 msgid "Date Closed"
 msgstr ""
 
-#: common/tracker/actions/mod-limited.php:216
-#: common/tracker/actions/mod.php:283
+#: common/tracker/actions/mod-limited.php:219
+#: common/tracker/actions/mod.php:286
 msgid "Existing Files"
 msgstr ""
 
-#: common/tracker/actions/mod-limited.php:226
+#: common/tracker/actions/mod-limited.php:229
 #: plugins/mantisbt/view/viewAttachment.php:45
 msgid "Attached Files"
 msgstr ""
@@ -7247,7 +7252,7 @@ msgstr ""
 msgid "Detailed description"
 msgstr ""
 
-#: common/tracker/actions/mod.php:234
+#: common/tracker/actions/mod.php:237
 msgid "Use Canned Response"
 msgstr ""
 
@@ -7344,7 +7349,7 @@ msgstr ""
 #: common/tracker/actions/tracker.php:487
 #: common/tracker/actions/tracker.php:544
 #: common/tracker/actions/tracker.php:567
-#: common/tracker/actions/tracker.php:585 www/tracker/download.php:50
+#: common/tracker/actions/tracker.php:585 www/tracker/download.php:48
 msgid "Artifact Could Not Be Created"
 msgstr ""
 
@@ -8285,7 +8290,7 @@ msgstr ""
 msgid "Already used"
 msgstr ""
 
-#: common/widget/WidgetLayoutManager.class.php:676
+#: common/widget/WidgetLayoutManager.class.php:669
 msgid "Your dashboard has been updated."
 msgstr ""
 
@@ -8566,31 +8571,31 @@ msgid "List packages that you are currently monitoring, by project."
 msgstr ""
 
 #: common/widget/Widget_MyProjects.class.php:38
-#: common/widget/Widget_MyProjects.class.php:109
 #: common/widget/Widget_MyProjects.class.php:110
+#: common/widget/Widget_MyProjects.class.php:111
 #: plugins/globaldashboard/include/globalDashboard_Widget_MyArtifacts.php:50
 msgid "My Projects"
 msgstr ""
 
 #: common/widget/Widget_MyProjects.class.php:52
-#: common/widget/Widget_MyProjects.class.php:122
+#: common/widget/Widget_MyProjects.class.php:123
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:47
 msgid "You're not a member of any project"
 msgstr ""
 
-#: common/widget/Widget_MyProjects.class.php:86
+#: common/widget/Widget_MyProjects.class.php:87
 msgid "Leave project"
 msgstr ""
 
-#: common/widget/Widget_MyProjects.class.php:87
+#: common/widget/Widget_MyProjects.class.php:88
 msgid "Quit this project?"
 msgstr ""
 
-#: common/widget/Widget_MyProjects.class.php:96
+#: common/widget/Widget_MyProjects.class.php:97
 msgid "Private project"
 msgstr ""
 
-#: common/widget/Widget_MyProjects.class.php:151
+#: common/widget/Widget_MyProjects.class.php:152
 msgid ""
 "List the projects you belong to. Selecting any of these projects brings you "
 "to the corresponding Project Summary page."
@@ -8979,7 +8984,7 @@ msgstr ""
 #: common/widget/Widget_ProjectPublicAreas.class.php:192
 #: plugins/scmgit/www/index.php:61 plugins/scmgit/www/index.php:76
 #: www/register/index.php:258 www/scm/admin/index.php:147
-#: www/scm/admin/index.php:176 www/scm/browser.php:31 www/scm/viewvc.php:194
+#: www/scm/admin/index.php:176 www/scm/browser.php:31 www/scm/viewvc.php:189
 msgid "SCM Repository"
 msgstr ""
 
@@ -9200,7 +9205,7 @@ msgstr ""
 msgid "Soft link wasn't removed in config folder, please do so manually."
 msgstr ""
 
-#: db/20141105-frs-ziplatest.php:69 db/20141106-frs-zip-per-release.php:66
+#: db/20141105-frs-ziplatest.php:69 db/20141106-frs-zip-per-release.php:68
 msgid "Something went wrong during zip creation, check permission?"
 msgstr ""
 
@@ -14636,8 +14641,8 @@ msgid "Create new repository:"
 msgstr ""
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:647
-#: plugins/scmgit/common/GitPlugin.class.php:1120
-#: plugins/scmgit/common/GitPlugin.class.php:1144
+#: plugins/scmgit/common/GitPlugin.class.php:1150
+#: plugins/scmgit/common/GitPlugin.class.php:1174
 #: plugins/scmhg/common/HgPlugin.class.php:763
 #: plugins/scmhg/common/HgPlugin.class.php:787
 msgid "Repository name"
@@ -14765,58 +14770,58 @@ msgstr ""
 msgid "Browse personal git repository"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:994
+#: plugins/scmgit/common/GitPlugin.class.php:1024
 msgid "Git Commits"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1012
+#: plugins/scmgit/common/GitPlugin.class.php:1042
 msgid "Cannot create a secondary repository with the same name as the primary"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1017
+#: plugins/scmgit/common/GitPlugin.class.php:1047
 #: plugins/scmhg/common/HgPlugin.class.php:662
 msgid "This repository name is not valid"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1030
+#: plugins/scmgit/common/GitPlugin.class.php:1060
 #: plugins/scmhg/common/HgPlugin.class.php:657
 #: plugins/scmhg/common/HgPlugin.class.php:675
 #, php-format
 msgid "A repository %s already exists"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1056
+#: plugins/scmgit/common/GitPlugin.class.php:1086
 #: plugins/scmhg/common/HgPlugin.class.php:700
 msgid "Invalid URL from which to clone"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1065
+#: plugins/scmgit/common/GitPlugin.class.php:1095
 #: plugins/scmhg/common/HgPlugin.class.php:709
 #, php-format
 msgid "Clone of %s"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1115
+#: plugins/scmgit/common/GitPlugin.class.php:1145
 msgid "No extra Git repository for project"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1117
+#: plugins/scmgit/common/GitPlugin.class.php:1147
 #, php-format
 msgid "Extra Git repository for project %1$s"
 msgid_plural "Extra Git repositories for project %1$s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1120
+#: plugins/scmgit/common/GitPlugin.class.php:1150
 #: plugins/scmhg/common/HgPlugin.class.php:763
 msgid "Initial clone URL (if any)"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1140
+#: plugins/scmgit/common/GitPlugin.class.php:1170
 msgid "Create new Git repository for project"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1148
+#: plugins/scmgit/common/GitPlugin.class.php:1178
 #: plugins/scmhg/common/HgPlugin.class.php:791
 msgid ""
 "Initial clone URL (or name of an existing repository in this project; leave "
@@ -14983,16 +14988,16 @@ msgstr ""
 msgid "Hook"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:399
+#: plugins/scmhook/common/scmhookPlugin.class.php:394
 msgid "serve-push-pull-bundle Hooks"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:400
-#: plugins/scmhook/common/scmhookPlugin.class.php:455
+#: plugins/scmhook/common/scmhookPlugin.class.php:395
+#: plugins/scmhook/common/scmhookPlugin.class.php:444
 msgid "Hook Name"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:454
+#: plugins/scmhook/common/scmhookPlugin.class.php:443
 msgid "post-receive Hooks"
 msgstr ""
 
@@ -15111,7 +15116,7 @@ msgstr ""
 msgid "Developer Subversion Access via DAV"
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:607
+#: plugins/scmsvn/common/SVNPlugin.class.php:628
 msgid "Subversion Commits"
 msgstr ""
 
@@ -16475,7 +16480,7 @@ msgid "Edit the %ss Table"
 msgstr ""
 
 #: www/admin/approve-pending.php:48 www/project/admin/tools.php:34
-#: www/snapshots.php:43 www/tarballs.php:44
+#: www/snapshots.php:41 www/tarballs.php:42
 msgid "Error creating group"
 msgstr ""
 
@@ -17777,71 +17782,71 @@ msgstr ""
 msgid "Documents for "
 msgstr ""
 
-#: www/docman/view.php:60 www/docman/view.php:260
+#: www/docman/view.php:58 www/docman/view.php:254
 msgid "Document is not available."
 msgstr ""
 
-#: www/docman/view.php:120
+#: www/docman/view.php:114
 msgid "Unable to open ZIP archive for backup"
 msgstr ""
 
-#: www/docman/view.php:125
+#: www/docman/view.php:119
 msgid "Unable to fill ZIP archive for backup"
 msgstr ""
 
-#: www/docman/view.php:130
+#: www/docman/view.php:124
 msgid "Unable to close ZIP archive for backup"
 msgstr ""
 
-#: www/docman/view.php:143
+#: www/docman/view.php:137
 msgid "Unable to download backup file"
 msgstr ""
 
-#: www/docman/view.php:148
+#: www/docman/view.php:142
 msgid "No documents to backup."
 msgstr ""
 
-#: www/docman/view.php:152
+#: www/docman/view.php:146
 msgid "ZIP extension is missing: no backup function"
 msgstr ""
 
-#: www/docman/view.php:164
+#: www/docman/view.php:158
 msgid "Webdav Access Canceled by user"
 msgstr ""
 
-#: www/docman/view.php:170
+#: www/docman/view.php:164
 msgid "No Webdav interface enabled."
 msgstr ""
 
-#: www/docman/view.php:200 www/docman/view.php:252
+#: www/docman/view.php:194 www/docman/view.php:246
 msgid "Unable to open ZIP archive for download as ZIP"
 msgstr ""
 
-#: www/docman/view.php:212 www/docman/view.php:270
+#: www/docman/view.php:206 www/docman/view.php:264
 msgid "Unable to fill ZIP file."
 msgstr ""
 
-#: www/docman/view.php:217
+#: www/docman/view.php:211
 msgid "Unable to fill ZIP archive for download as ZIP"
 msgstr ""
 
-#: www/docman/view.php:222 www/docman/view.php:281
+#: www/docman/view.php:216 www/docman/view.php:275
 msgid "Unable to close ZIP archive for download as ZIP"
 msgstr ""
 
-#: www/docman/view.php:235 www/docman/view.php:294
+#: www/docman/view.php:229 www/docman/view.php:288
 msgid "Unable to download ZIP archive"
 msgstr ""
 
-#: www/docman/view.php:240
+#: www/docman/view.php:234
 msgid "This documents folder is empty."
 msgstr ""
 
-#: www/docman/view.php:299 www/docman/view.php:305
+#: www/docman/view.php:293 www/docman/view.php:299
 msgid "No document to display - invalid or inactive document number."
 msgstr ""
 
-#: www/docman/view.php:302
+#: www/docman/view.php:296
 msgid "PHP ZIP extension is missing."
 msgstr ""
 
@@ -18062,19 +18067,19 @@ msgstr ""
 msgid "Error getting new ForumHTML"
 msgstr ""
 
-#: www/forum/attachment.php:42
+#: www/forum/attachment.php:43
 msgid "Close Window"
 msgstr ""
 
-#: www/forum/attachment.php:86
+#: www/forum/attachment.php:87
 msgid "You cannot delete this attachment"
 msgstr ""
 
-#: www/forum/attachment.php:92
+#: www/forum/attachment.php:93
 msgid "Attachment deleted"
 msgstr ""
 
-#: www/forum/attachment.php:117
+#: www/forum/attachment.php:118
 msgid "You cannot edit this attachment"
 msgstr ""
 
@@ -18214,7 +18219,7 @@ msgstr ""
 msgid "Forum Position Saved. New messages will be highlighted when you return"
 msgstr ""
 
-#: www/frs/download.php:230
+#: www/frs/download.php:226
 msgid "Invalid download mode"
 msgstr ""
 
@@ -22071,7 +22076,7 @@ msgstr ""
 msgid "Completed"
 msgstr ""
 
-#: www/search/index.php:82
+#: www/search/index.php:80
 msgid "Error: Invalid search"
 msgstr ""
 
@@ -22604,7 +22609,7 @@ msgstr ""
 msgid "Script Type"
 msgstr ""
 
-#: www/soap/index.php:160
+#: www/soap/index.php:159
 msgid "en_US"
 msgstr ""
 
@@ -23304,7 +23309,7 @@ msgstr ""
 msgid "Canned Response Deleted"
 msgstr ""
 
-#: www/tracker/download.php:56
+#: www/tracker/download.php:54
 msgid "ArtifactFile Could Not Be Created"
 msgstr ""
 

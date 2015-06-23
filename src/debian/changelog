@@ -1,3 +1,9 @@
+fusionforge (6.0.1-1) UNRELEASED; urgency=medium
+
+  * New upstream release.
+
+ -- Sylvain Beucler <beuc@debian.org>  Tue, 23 Jun 2015 15:36:52 +0200
+
 fusionforge (6.0-1) unstable; urgency=medium
 
   * New upstream release.
