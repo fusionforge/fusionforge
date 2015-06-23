@@ -118,7 +118,7 @@ if (count($FRSPackages) < 1) {
 					if (file_exists($FRSPackage->getReleaseZipPath($package_release_id))) {
 						$ziplink .= util_make_link(
 						  util_make_uri('/frs/download.php/zip/'.$FRSPackageRelease->getID()
-						    .'/'.$package_name.'-'.$FRSPackageRelease->getName().'.zip'),
+						    .'/'.$FRSPackage->getReleaseZipName($FRSPackageRelease->getID())),
 						  $HTML->getZipPic(_('Download this release as ZIP.')
 						    .' '._('This link always points to this release as a ZIP file.')));
 					}
