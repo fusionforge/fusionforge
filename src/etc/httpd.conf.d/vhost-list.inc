@@ -5,7 +5,7 @@ SetEnv FF__core__config_path "${FF__core__config_path}"
 IncludeOptional ${FF__core__config_path}/httpd.conf.d/lists-vhost-plugin-*.inc
 
 RewriteEngine on
-RewriteRule ^/$ /cgi-bin/mailman/listinfo [R=301]
+RewriteRule ^/$ /mailman/listinfo [R=301]
 
 ScriptAlias /mailman/ /usr/lib/cgi-bin/mailman/
 
