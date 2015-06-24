@@ -43,6 +43,14 @@ ScriptAlias /anonscm/gitweb ${FF__core__plugins_path}/scmgit/cgi-bin/gitweb.cgi
 ScriptAliasMatch ^/authscm/[^/]+/gitweb/$ ${FF__core__plugins_path}/scmgit/cgi-bin/gitweb.cgi
 
 
+# Activity
+ScriptAliasMatch ^/authscm/[^/]+/gitlog(.*) ${FF__core__plugins_path}/scmgit/libexec/gitlog.php$1
+# Authentified via cookie in gitlog.php:
+<LocationMatch "^/authscm/[^/]+/gitlog">
+  Satisfy Any
+</LocationMatch>
+ScriptAlias /anonscm/gitlog ${FF__core__plugins_path}/scmgit/libexec/gitlog.php
+
 # Redirect URLs from FF < 6.0 (scm_host -> scm_host)
 # - use_ssh=1 => /anonscm/git  -> /anonscm/git
 #   => OK

@@ -128,7 +128,7 @@ if (!isset($group_id) && !isset($project)) {
 		} else if ($subpage == "files" || $subpage == "download" || $subpage == "dl") {
 			
 			if ($subpage2 == "release") {
-				session_redirect("/frs/admin/qrs.php?group_id=$group_id");
+				session_redirect("/frs/?group_id=$group_id&view=qrs");
 			} else {
 				session_redirect("/frs/?group_id=$group_id");
 			}

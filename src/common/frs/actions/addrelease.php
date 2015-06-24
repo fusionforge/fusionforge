@@ -85,11 +85,6 @@ if (strlen($release_name) >= 3) {
 		$notes = $release_notes;
 	}
 
-	if (strlen($notes) < 20) {
-		$error_msg .= _('Release Notes Are Too Small').'<br />';
-		$exec_changes = false;
-	}
-
 	// Check for uploaded change logs
 	if (isset($uploaded_changes['tmp_name']) && $uploaded_changes['tmp_name']) {
 		if (!is_uploaded_file($uploaded_changes['tmp_name'])) {
@@ -106,10 +101,6 @@ if (strlen($release_name) >= 3) {
 		$changes = $release_changes;
 	}
 
-	if (strlen($changes) < 20) {
-		$error_msg .= _('Change Log Is Too Small');
-		$exec_changes = false;
-	}
 	if ($exec_changes) {
 		$frsr = new FRSRelease($frsp);
 		if ($frsr->create($release_name, $notes, $changes, $preformatted, $release_date)) {

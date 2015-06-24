@@ -278,8 +278,14 @@ This package controls the interaction between FusionForge and Mailman.
 
 
 %changelog
-* Fri May 29 2015 Sylvain Beucler <beuc@beuc.net> - @rpm_version@-1@rpm_snapshot@
+* Tue Jun 23 2015 Sylvain Beucler <beuc@beuc.net> - @rpm_version@-1@rpm_snapshot@
 - New upstream snapshot following the stable branch
+
+* Tue Jun 23 2015 Sylvain Beucler <beuc@beuc.net> - 6.0.1-1
+- New upstream release
+
+* Wed Jun 17 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 6.0-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
 
 * Fri May 29 2015 Sylvain Beucler <beuc@beuc.net> - 6.0-1
 - New upstream release

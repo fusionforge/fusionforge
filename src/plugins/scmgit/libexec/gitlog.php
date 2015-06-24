@@ -21,7 +21,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-// Don't try to connect to the DB, just dumping SVN log
+// Don't try to connect to the DB, just dumping Git log
 putenv('FUSIONFORGE_NO_DB=true');
 
 require_once '../../../www/env.inc.php';
@@ -63,24 +63,27 @@ if ($mode == 'date_range') {
 		die('Invalid start time');
 	if (!ctype_digit($end_time))
 		die('Invalid end time');
-	$d1 = date('Y-m-d', $start_time - 80000);
-	$d2 = date('Y-m-d', $end_time + 80000);
-	$options = "-r '{".$d2."}:{".$d1."}'";
+	$options = "--since=@$start_time --until=@$end_time";
 } else if ($mode == 'latest' or $mode == 'latest_user') {
 	$limit = $_GET['limit'];
 	if (!ctype_digit($limit))
 		die('Invalid limit');
-	$options = "--limit $limit";
+	$options = "--max-count=$limit";
 	
 	if ($mode == 'latest_user') {
+		$email = $_GET['email'];
+		$realname = $_GET['realname'];
 		$user_name = $_GET['user_name'];
+		if (!validate_email($email))
+			die('Invalid email');
+		$realname = escapeshellarg(preg_quote($realname));
 		if (!preg_match('/^[a-z0-9][-a-z0-9_\.]+\z/', $user_name))
 			die('Invalid user name');
-		$options .= " --search '$user_name'";
+		$options .= " --author='$email' --author=$realname  --author='$user_name'";
 	}
 }
 
-$repo = forge_get_config('repos_path', 'scmsvn') . '/' . $unix_group_name;
+$repo = forge_get_config('repos_path', 'scmgit') . "/$unix_group_name/$unix_group_name.git";
 if (is_dir($repo)) {
-	passthru("svn log file://$repo --xml -v $options 2> /dev/null");
+	passthru("GIT_DIR=\"$repo\" git log --date=raw --all --pretty='format:%ad||%ae||%s||%h' --name-status $options");
 }

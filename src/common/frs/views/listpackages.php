@@ -97,7 +97,13 @@ if (count($FRSPackages) < 1) {
 		$package_ziplink = '';
 		if ($FRSPackageReleases && $num_releases >= 1 && class_exists('ZipArchive') && file_exists($FRSPackage->getReleaseZipPath($FRSPackage->getNewestReleaseID()))) {
 			// display link to latest-release-as-zip
-			$package_ziplink = html_e('span', array('class' => 'frs-zip-package'), util_make_link('#', $HTML->getZipPic(_('Download the newest release as ZIP.').' '._('This link always points to the newest release as a ZIP file.')), array('onclick' => 'location:href=\''.util_make_uri('/frs/download.php/latestzip/'.$FRSPackage->getID().'/'.$FRSPackage->getNewestReleaseZipName()).'\''), true));
+			$package_ziplink = html_e('span',
+			  array('class' => 'frs-zip-package'),
+			  util_make_link(
+			    util_make_uri('/frs/download.php/latestzip/'.$FRSPackage->getID()
+			      .'/'.$FRSPackage->getNewestReleaseZipName()),
+			    $HTML->getZipPic(_('Download the newest release as ZIP.')
+			      .' '._('This link always points to the newest release as a ZIP file.'))));
 		}
 		echo html_e('h2', array('id' => 'title_'. $package_name_protected), html_entity_decode($package_name).html_e('span', array('class' => 'frs-monitor-package'), $package_monitor).$package_ziplink);
 
@@ -110,7 +116,11 @@ if (count($FRSPackages) < 1) {
 				$ziplink = '';
 				if (class_exists('ZipArchive')) {
 					if (file_exists($FRSPackage->getReleaseZipPath($package_release_id))) {
-						$ziplink .= util_make_link('#', $HTML->getZipPic(_('Download this release as ZIP.').' '._('This link always points to this release as a ZIP file.')), array('onclick' => 'location:href=\''.util_make_uri('/frs/download.php/zip/'.$FRSPackageRelease->getID().'/'.$package_name.'-'.$FRSPackageRelease->getName().'.zip').'\''), true);
+						$ziplink .= util_make_link(
+						  util_make_uri('/frs/download.php/zip/'.$FRSPackageRelease->getID()
+						    .'/'.$FRSPackage->getReleaseZipName($FRSPackageRelease->getID())),
+						  $HTML->getZipPic(_('Download this release as ZIP.')
+						    .' '._('This link always points to this release as a ZIP file.')));
 					}
 				}
 				// Switch whether release_id exists and/or release_id is current one

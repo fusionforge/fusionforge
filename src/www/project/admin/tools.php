@@ -363,7 +363,7 @@ if($group->usesSCM()) {
 	echo html_e('p', array(), util_make_link('/scm/admin/?group_id='.$group->getID(), _('Source Code Admin')), false);
 }
 if($group->usesFRS()) {
-	echo html_e('p', array(), util_make_link('/frs/admin/?group_id='.$group->getID(), _('File Release System Admin')), false);
+	echo html_e('p', array(), util_make_link('/frs/?group_id='.$group->getID().'&view=admin', _('File Release System Admin')), false);
 }
 
 $hook_params = array();
