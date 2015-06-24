@@ -20,14 +20,6 @@
 
 case "$1" in
     configure)
-	if grep -q ^7 /etc/debian_version 2>/dev/null; then
-	    # Fix http://bugs.debian.org/603904
-	    # was: drwxrws--- 2 list www-data
-	    # now: drwxrws--- 2 www-data list
-	    chown www-data:list /var/lib/mailman/archives/private
-	    chmod 2770 /var/lib/mailman/archives/private
-	fi
-
 	# Managed by mailman, but referencing it to document where it is:
 	# echo "Use 'mmsitepass' to set the Mailman master password"
 	# echo "Cf. /var/lib/mailman/data/adm.pw"
