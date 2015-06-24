@@ -2,7 +2,13 @@ fusionforge (6.0.50-0) UNRELEASED; urgency=medium
 
   * New snapshot from master branch.
 
- -- Roland Mas <lolando@debian.org>  Fri, 29 May 2015 17:05:37 +0200
+ -- Roland Mas <lolando@debian.org>  Wed, 24 Jun 2015 11:32:26 +0200
+
+fusionforge (6.0.1-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Sylvain Beucler <beuc@debian.org>  Tue, 23 Jun 2015 16:16:12 +0200
 
 fusionforge (6.0-1) unstable; urgency=medium
 
