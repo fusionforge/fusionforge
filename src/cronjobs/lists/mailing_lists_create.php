@@ -68,16 +68,17 @@ if (!is_dir(forge_get_config('data_path').'/dumps')) {
 $h1 = fopen(forge_get_config('data_path').'/dumps/mailman-aliases', "w");
 
 # Encoding hell
-if (strpos(file_get_contents($path_to_mailman.'/Mailman/Defaults.py'),
-           "sys.setdefaultencoding('utf-8')")) {
-	# Sniffed utf-8 patch (e.g. in Debian 8)
-	# Consistent encoding:
+if (file_exists($path_to_mailman.'/Mailman/Defaults.py')
+	&& strpos(file_get_contents($path_to_mailman.'/Mailman/Defaults.py'),
+              "sys.setdefaultencoding('utf-8')")) {
+	// Sniffed utf-8 patch (e.g. in Debian 8)
+	// Consistent encoding:
 	$coding = 'utf-8';
 } else {
-	# Standard Mailman 2.1.x, encoding used depends on the list language
-	# Using heuristic:
+	// Standard Mailman 2.1.x, encoding used depends on the list language
+	// Using heuristic:
 	$coding = 'iso-8859-1';
-	# Alternate fix: iconv('utf-8', 'us-ascii//TRANSLIT', $description);
+	// Alternate fix: iconv('utf-8', 'us-ascii//TRANSLIT', $description);
 }
 
 $mailingListIds = array();
