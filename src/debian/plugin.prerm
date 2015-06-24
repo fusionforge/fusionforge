@@ -1,7 +1,7 @@
 #!/bin/sh -e
 
 # Skip if -common was already removed
-if [ ! -x /usr/bin/forge_get_config ]; then exit 0; fi
+if ! which forge_get_config >/dev/null; then exit 0; fi
 pluginctl=$(forge_get_config source_path)/post-install.d/common/plugin.sh
 if [ -x $pluginctl ]; then exit 0; fi
 

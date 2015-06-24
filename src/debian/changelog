@@ -1,3 +1,10 @@
+fusionforge (6.0.1-2) UNRELEASED; urgency=medium
+
+  * New upstream snapshot following the stable branch.
+  * Silent lintian command-with-path-in-maintainer-script
+
+ -- Sylvain Beucler <beuc@debian.org>  Wed, 24 Jun 2015 17:09:24 +0200
+
 fusionforge (6.0.1-1) unstable; urgency=medium
 
   * New upstream release.
