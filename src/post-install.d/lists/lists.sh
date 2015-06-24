@@ -28,6 +28,7 @@ case "$1" in
 	lists_host=$(forge_get_config lists_host)
 	sed -i -e "s/^DEFAULT_EMAIL_HOST.*/DEFAULT_EMAIL_HOST = '$lists_host'/" \
 	       -e "s/^DEFAULT_URL_HOST.*/DEFAULT_URL_HOST = '$lists_host'/" \
+	       -e "s|^DEFAULT_URL_PATTERN.*|DEFAULT_URL_PATTERN = 'http://%s/mailman/'|" \
 	    /etc/mailman/mm_cfg.py
 	;;
     *)
