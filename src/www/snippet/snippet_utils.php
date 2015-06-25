@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems - Tim Perdue
  * Copyright 2012, Jean-Christophe Masson - French National Education Department
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2015, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -109,16 +109,20 @@ function snippet_header($params) {
 	}
 
 	$HTML->header($params);
+	$menu_text = array();
+	$menu_links = array();
+	$menu_attr = array();
 
-	/*
-		Show horizontal links
-	*/
-
-	echo '<p><strong>';
-	echo util_make_link ('/snippet/',_('Browse')).'
-		 | '.util_make_link ('/snippet/submit.php',_('Submit A New Snippet')).'
-		 | '.util_make_link ('/snippet/package.php',_('Create A Package')).'</strong>';
-	echo '</p>';
+	$menu_text[] = _('Browse');
+	$menu_links[] = '/snippet/';
+	$menu_attr[] = array();
+	$menu_text[] = _('Submit A New Snippet');
+	$menu_links[] = '/snippet/submit.php';
+	$menu_attr[] = array();
+	$menu_text[] = _('Create A Package');
+	$menu_links[] = '/snippet/package.php';
+	$menu_attr[] = array();
+	echo $HTML->subMenu($menu_text, $menu_links, $menu_attr);
 }
 
 function snippet_footer($params = array()) {
