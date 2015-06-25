@@ -30,7 +30,15 @@ case "$1" in
 	       -e "s/^DEFAULT_URL_HOST.*/DEFAULT_URL_HOST = '$lists_host'/" \
 	       -e "s|^DEFAULT_URL_PATTERN.*|DEFAULT_URL_PATTERN = 'http://%s/mailman/'|" \
 	    /etc/mailman/mm_cfg.py
+
+	# Detect mailman cgi-bin installation
+	mailman_cgi_dir=$( \
+	    (echo '/autodetection_failed';
+             ls -d /usr/lib/mailman/cgi-bin /usr/lib/cgi-bin/mailman 2>/dev/null) \
+            | tail -1)
+	ln -nfs $mailman_cgi_dir $(forge_get_config source_path)/lists/cgi-bin
 	;;
+
     *)
 	echo "Usage: $0 {configure}"
 	exit 1
