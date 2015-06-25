@@ -1,5 +1,6 @@
 FusionForge 6.0.2:
 * Mailing lists: fix description encoding depending on Mailman version (Inria & Thorsten Glaser)
+* Accounts: fix elliptic curve ssh keys support (Inria)
 
 FusionForge 6.0.1:
 * Accounts: accept elliptic curve ssh keys (Unit 193)
