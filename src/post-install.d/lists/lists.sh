@@ -18,6 +18,7 @@
 # with FusionForge; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
+source_path=$(forge_get_config source_path)
 case "$1" in
     configure)
 	# Managed by mailman, but referencing it to document where it is:
@@ -36,11 +37,14 @@ case "$1" in
 	    (echo '/autodetection_failed';
              ls -d /usr/lib/mailman/cgi-bin /usr/lib/cgi-bin/mailman 2>/dev/null) \
             | tail -1)
-	ln -nfs $mailman_cgi_dir $(forge_get_config source_path)/lists/cgi-bin
+	ln -nfs $mailman_cgi_dir $source_path/lists/cgi-bin
 	;;
 
+    remove)
+	rm -f $source_path/lists/cgi-bin
+
     *)
-	echo "Usage: $0 {configure}"
+	echo "Usage: $0 {configure|remove}"
 	exit 1
 	;;
 esac
