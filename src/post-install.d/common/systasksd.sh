@@ -30,6 +30,7 @@ case "$1" in
 	;;
 
     remove)
+	service fusionforge-systasksd stop
 	if [ -x /sbin/chkconfig ]; then
 	    chkconfig --del fusionforge-systasksd
 	else
