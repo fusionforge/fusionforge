@@ -42,6 +42,7 @@ case "$1" in
 
     remove)
 	rm -f $source_path/lists/cgi-bin
+	;;
 
     *)
 	echo "Usage: $0 {configure|remove}"
