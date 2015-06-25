@@ -314,6 +314,7 @@ function account_group_homedir($group) {
  * @param	string	$keys	A string with a set of keys to check. Each key is delimited by a carriage return.
  */
 function checkKeys($keys) {
+	global $error_msg;
 	$key = strtok($keys, "\n");
 	while ($key !== false) {
 		$key = trim($key);
