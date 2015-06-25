@@ -21,15 +21,8 @@ set -e
 
 case "$1" in
     purge)
-	ucfq fusionforge-common --with-colons \
-	    | while IFS=: read i ignored; do
-	    rm -f $i $i.ucf-*
-	    ucf --purge $i
-	    ucfr --purge fusionforge-common $i
-	done
-	userdel fusionforge
-	rm -f /var/log/fusionforge/systasksd.stdout
-	rm -f /var/log/fusionforge/systasksd.stderr
+	rm -f /var/log/fusionforge/access.log
+	rm -f /var/log/fusionforge/awstats.log
 	;;
 
     remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
