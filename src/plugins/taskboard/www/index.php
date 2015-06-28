@@ -41,11 +41,6 @@ if (!$group_id) {
 	}
 
 	$taskboard = new TaskBoardHtml($group);
-
-	if( $taskboard->isError() ) {
-		exit_error($taskboard->getErrorMessage());
-	}
-
 	$taskboard->header(
 		array(
 			'title' => _('Taskboard for ').$group->getPublicName(),
@@ -55,26 +50,30 @@ if (!$group_id) {
 		)
 	);
 
-	if(count($taskboard->getUsedTrackersIds()) == 0) {
-		echo $HTML->warning_msg(_('Choose at least one tracker for using with taskboard.'));
+	if($taskboard->isError()) {
+		echo $HTML->error_msg($taskboard->getErrorMessage());
 	} else {
 
-		$columns = $taskboard->getColumns();
-
-		if(count($columns) == 0) {
-			echo $HTML->warning_msg(_('Configure columns for the board first.'));
+		if(count($taskboard->getUsedTrackersIds()) == 0) {
+			echo $HTML->warning_msg(_('Choose at least one tracker for using with taskboard.'));
 		} else {
 
-			$messages = '';
-			foreach($columns as $column) {
-				if(count($column->getResolutions()) == 0) {
-					$messages .= sprintf( _('Resolutions list is empty for "%s", column is not dropable'), $column->getTitle() ).'<br>';
-				}
-			}
+			$columns = $taskboard->getColumns();
 
-			$user_stories_tracker = $taskboard->getUserStoriesTrackerID();
-			$columns_number = count($columns) + ($user_stories_tracker ? 1 : 0);
-			$column_width = intval(100 / $columns_number);
+			if(count($columns) == 0) {
+				echo $HTML->warning_msg(_('Configure columns for the board first.'));
+			} else {
+
+				$messages = '';
+				foreach($columns as $column) {
+					if(count($column->getResolutions()) == 0) {
+						$messages .= sprintf( _('Resolutions list is empty for "%s", column is not dropable'), $column->getTitle() ).'<br>';
+					}
+				}
+
+				$user_stories_tracker = $taskboard->getUserStoriesTrackerID();
+				$columns_number = count($columns) + ($user_stories_tracker ? 1 : 0);
+				$column_width = intval(100 / $columns_number);
 ?>
 
 <div id="messages" class="warning" <?php if (!$messages) { ?> style="display: none;" <?php } ?>><?php echo $messages ?></div>
@@ -355,6 +354,7 @@ jQuery( document ).ready(function( $ ) {
 });
 </script>
 <?php
+			}
 		}
 	}
 }

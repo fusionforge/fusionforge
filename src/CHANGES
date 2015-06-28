@@ -4,6 +4,7 @@ FusionForge 6.0.2:
 * Mailing lists: fix default list URL path (Inria)
 * Mailing lists: fix installation on CentOS (Inria)
 * FRS: don't reset permissions when derefencing roles in other projects [#782] (Inria)
+* Plugin Taskboard: fix logic on initialize error (TrivialDev)
 
 FusionForge 6.0.1:
 * Accounts: accept elliptic curve ssh keys (Unit 193)
