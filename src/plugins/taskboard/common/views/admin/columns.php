@@ -75,7 +75,7 @@ if (count($taskboard->getUsedTrackersIds()) == 0) {
 	echo $HTML->multiTableRow(array(), $cells);
 	$cells = array();
 	$cells[][] = html_e('strong', array(), _('Column Background color')._(':'));
-	$cells[][] = $taskboard->colorBgChooser('column_bg_color', 'none');
+	$cells[][] = $taskboard->colorBgChooser('column_bg_color', 'white');
 	echo $HTML->multiTableRow(array(), $cells);
 	$cells = array();
 	$cells[][] = html_e('strong', array(), _('Maximum tasks number')._(':'));
@@ -83,7 +83,7 @@ if (count($taskboard->getUsedTrackersIds()) == 0) {
 	echo $HTML->multiTableRow(array(), $cells);
 	$cells = array();
 	$cells[][] = html_e('strong', array(), _('Drop resolution by default').utils_requiredField()._(':'));
-	$unused_resolutions = array_values( $taskboard->getUnusedResolutions() );	
+	$unused_resolutions = array_values( $taskboard->getUnusedResolutions() );
 	$cells[][] = html_build_select_box_from_arrays( $unused_resolutions, $unused_resolutions, 'resolution_by_default', NULL, false);
 	echo $HTML->multiTableRow(array(), $cells);
 	echo $HTML->listTableBottom();

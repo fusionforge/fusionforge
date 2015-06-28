@@ -80,13 +80,13 @@ class TaskBoardHtml extends TaskBoard {
 		if( method_exists($this->TrackersAdapter, 'trackersColorChooser' ) ) {
 			return $this->TrackersAdapter->trackersColorChooser( $name, $color );
 		} else {
-			$l_aColors = array( 'none', 'Khaki', 'Gold', 'LawnGreen', 'PaleGreen', 'Salmon', 'PeachPuff', 'LightBlue', 'Silver' );
+			$l_aColors = array( 'White', 'Khaki', 'Gold', 'LawnGreen', 'PaleGreen', 'Salmon', 'PeachPuff', 'LightBlue', 'Silver' );
 			return $this->_colorChooser( $name, $l_aColors, 'Silver', $color );
 		}
 	}
 
 	function colorBgChooser($name, $color='Silver') {
-		$l_aColors = array('none', 'Khaki', 'Gold', 'LawnGreen', 'PaleGreen', 'Salmon', 'PeachPuff', 'LightBlue', 'Silver');
+		$l_aColors = array('White', 'Khaki', 'Gold', 'LawnGreen', 'PaleGreen', 'Salmon', 'PeachPuff', 'LightBlue', 'Silver');
 		return $this->_colorChooser($name, $l_aColors, 'Silver', $color);
 	}
 
