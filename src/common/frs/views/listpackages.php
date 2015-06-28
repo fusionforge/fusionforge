@@ -88,7 +88,7 @@ if (count($FRSPackages) < 1) {
 		}
 
 		// get the releases of the package
-		$FRSPackageReleases = $FRSPackage->getReleases();
+		$FRSPackageReleases = $FRSPackage->getReleases(true);
 		$num_releases = count($FRSPackageReleases);
 
 		$proj_stats['releases'] += $num_releases;
