@@ -24,7 +24,7 @@ function loadTaskboard( group_id ) {
 				gReleases[release_val].startDate + ' - ' + gReleases[release_val].endDate
 		);
 		jQuery('#taskboard-release-snapshot').show();
-		jQuery( "input[name='snapshot_date']" ).datepicker( {  
+		jQuery( "input[name='snapshot_date']" ).datepicker( {
 			"dateFormat" : "yy-mm-dd",
 			"minDate" : gReleases[release_val].startDate,
 			"maxDate" : gReleases[release_val].endDate
@@ -39,7 +39,7 @@ function loadTaskboard( group_id ) {
 		type: 'POST',
 		url: gAjaxUrl,
 		dataType: 'json',
-		data : data, 
+		data : data,
 		async: false
 	}).done(function( answer ) {
 		jQuery('#agile-board tbody').html('');
@@ -56,7 +56,7 @@ function loadTaskboard( group_id ) {
 			jQuery( "#agile-board" ).append(
 				drawUserStories()
 			);
-			
+
 			jQuery( window ).resize( function() {
 				jQuery('.agile-sticker').each( function( i, e) {
 					jQuery(e).css('width', 'auto' );
@@ -68,19 +68,19 @@ function loadTaskboard( group_id ) {
 				jQuery('#new-task-dialog input[name="user_story_id"]').val( jQuery(this).attr('user_story_id') );
 				jQuery('#new-task-dialog').dialog('open');
 				jQuery('.ui-widget-overlay').height( jQuery( document ).height() );
-				e.preventDefault();	
+				e.preventDefault();
 			});
 
 			for(var i=0 ; i<aUserStories.length ; i++) {
 				drawUserStory( aUserStories[i] );
 			};
-			
+
 			drawBoardProgress();
-	
+
 			initUserStories();
 			initEditable();
 			fixCardSize();
-			
+
 			jQuery( ".agile-minimize-column" ).click( function() {
 				var phase_id = jQuery(this).attr('phase_id');
 				var phase_locator = '.agile-phase-' + phase_id;
@@ -129,7 +129,7 @@ function drawBoardProgress() {
 	var totalTasks = 0;
 	var totalCostEstimated = 0;
 	var totalCostRemaining = 0;
-	
+
 	var lastPhaseWithTasks = 0;
 	for( var j=start; j<aPhases.length; j++) {
 		aPhases[j].progressTasks = 0;
@@ -139,12 +139,12 @@ function drawBoardProgress() {
 				if( taskInPhase( aUserStories[i].tasks[t], aPhases[j].id ) ) {
 					aPhases[j].progressTasks ++;
 					totalTasks ++;
-					
+
 					if( aUserStories[i].tasks[t].estimated_dev_effort ) {
 						totalCostEstimated += parseInt( aUserStories[i].tasks[t].estimated_dev_effort );
 						totalCostRemaining += parseInt( aUserStories[i].tasks[t].remaining_dev_effort );
 					}
-					
+
 					lastPhaseWithTasks = j;
 				}
 			}
@@ -153,7 +153,7 @@ function drawBoardProgress() {
 
 	var html = '<table>';
 	html += '<tr><td width="' + parseInt( 100 / aPhases.length )  + '%" style="padding: 0;">' + gMessages.progressByTasks + ':</td><td style="padding: 0;">';
-	
+
 	var buf = 0;
 	for( var j=start; j<aPhases.length; j++) {
 		if( aPhases[j].progressTasks ) {
@@ -163,13 +163,13 @@ function drawBoardProgress() {
 				wt = 100 - buf;
 			}
 			buf += wt;
-			
+
 			var back = '';
 			if( aPhases[j].titlebackground ) {
 				back = 'background-color:' + aPhases[j].titlebackground;
 			}
-			html += '<div class="agile-board-progress-bar" style="width: ' + wt + '%; ' + back + '" ' + 'title="' + aPhases[j].title + '">' + 
-				aPhases[j].progressTasks + 
+			html += '<div class="agile-board-progress-bar" style="width: ' + wt + '%; ' + back + '" ' + 'title="' + aPhases[j].title + '">' +
+				aPhases[j].progressTasks +
 				'</div>';
 		}
 	}
@@ -186,7 +186,7 @@ function drawBoardProgress() {
 		html += '<div class="agile-board-progress-bar-remains" style="width: ' + ( 100 - wt ) + '%;">' + totalCostRemaining + '</div>';
 		html += '</td></tr><table>';
 	}
-	
+
 	jQuery('#agile-board-progress').html( html );
 }
 
@@ -216,7 +216,7 @@ function drawUserStories() {
 			}
 			l_sHtml += '<td id="' + ph.id + '-' + us.id + '" class="agile-phase agile-phase-' + ph.id + '"' + style + '>';
 			l_sHtml += "</td>\n";
-			
+
 			// initialize progress counters
 			aPhases[j].progressTasks = 0;
 			aPhases[j].progressCost = 0;
@@ -232,7 +232,7 @@ function helperTaskStart ( event, ui ) {
 	jQuery(this).css('opacity', 0.5);
 }
 
-function helperTaskStop ( event, ui ) {	
+function helperTaskStop ( event, ui ) {
 	jQuery(this).css('opacity', 1);
 }
 
@@ -242,7 +242,7 @@ function helperTaskDrop ( event, ui ) {
 		var l_nUserStoryId = d.data('user_story_id');
 		var l_nTaskId      = d.data('task_id');
 		var l_nTargetPhaseId     = jQuery(this).data('phase_id');
-	
+
 		setPhase( l_nUserStoryId, l_nTaskId, l_nTargetPhaseId );
 	}
 }
@@ -264,9 +264,9 @@ function setPhase( nUserStoryId, nTaskId, nTargetPhaseId ) {
 			for( var j=0; j<aUserStories[i].tasks.length ; j++ ) {
 				if( aUserStories[i].tasks[j].id == nTaskId ) {
 					l_nSourcePhaseId = aUserStories[i].tasks[j].phase_id;
-				
+
 					if( l_oTargetPhase && l_nSourcePhaseId != nTargetPhaseId ) {
-							// try to drop card 
+							// try to drop card
 							jQuery.ajax({
 								type: 'POST',
 								url: gAjaxUrl,
@@ -293,26 +293,26 @@ function setPhase( nUserStoryId, nTaskId, nTargetPhaseId ) {
 								} else {
 									if( answer['task'] ) {
 										// change particular task data
-										aUserStories[i].tasks[j] = answer['task']; 
+										aUserStories[i].tasks[j] = answer['task'];
 									}
-	
+
 									if( l_oUserStory ) {
 										drawUserStory(l_oUserStory);
 									}
-									
+
 									fixCardSize();
-	
+
 									jQuery('#agile-board-progress').html( '' );
 									drawBoardProgress();
-	
+
 									initEditable();
 								}
 							});
 					}
-				}	
-			}			
+				}
+			}
 		}
-	} 
+	}
 }
 
 function initUserStories() {
@@ -342,7 +342,7 @@ function initUserStory( oUserStory ) {
 			}
 		}
 	}
-	
+
 	jQuery('#user-story-' + oUserStory.id).data('task_id', oUserStory.id);
 }
 
@@ -432,7 +432,7 @@ function initEditable() {
 			var l_nTaskId = jQuery(this).parent().data('task_id');
 			jQuery(this).html( '<textarea id="text_title" name="title" rows="11"></textarea>');
 
-			
+
 			jQuery('#text_title')
 				.html( l_sTitle.replace(/<br>/g, "\n") )
 				.css('width', '98%')
@@ -460,7 +460,7 @@ function initEditable() {
 							task_id : l_nTaskId,
 							title : jQuery(this).val()
 						},
-						async: true 
+						async: true
 					}).done(function( answer ) {
 						if(answer['message']) {
 							showMessage(answer['message'], 'error');
@@ -479,7 +479,7 @@ function initEditable() {
 				}
 			});
 		}
-	});	
-	
+	});
+
 }
 
