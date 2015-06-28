@@ -45,11 +45,11 @@
 			<?php
 			$title_arr=array();
 			$title_arr[]=_('Current / New positions');
-			$title_arr[]=_('Up/Down positions');
-			$title_arr[]=_('Elements Defined');
 			if ($ac->getType() == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 				$title_arr[] = _('Mapping');
 			}
+			$title_arr[]=_('Up/Down positions');
+			$title_arr[]=_('Elements Defined');
 			$title_arr[]='';
 
 			echo $GLOBALS['HTML']->listTableTop ($title_arr,false, ' ');
