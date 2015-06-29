@@ -27,7 +27,7 @@ class DbSession
     {
         // Check for existing DbSession handler
         $db_type = $dbh->getParam('dbtype');
-        if (isa($dbh, 'WikiDB')) {
+        if (is_a($dbh, 'WikiDB')) {
             @include_once("lib/DbSession/" . $db_type . ".php");
 
             $class = "DbSession_" . $db_type;

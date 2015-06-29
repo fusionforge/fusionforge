@@ -73,7 +73,7 @@ tables manually.
 Or you can run ?action=upgrade (also from "Upgrade"
 at PhpWikiAdministration), but then your database user needs the
 necessary ALTER and CREATE permissions. 
-You might want to set DBADMIN_USER temporarly in your config.ini.
+You might want to set DBADMIN_USER temporarily in your config.ini.
 ?action=upgrade also brings all changed pgsrc files up-to-date.
 
 /Reini Urban and Arno ahollosi@mail.com

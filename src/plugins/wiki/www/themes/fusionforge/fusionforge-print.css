@@ -97,7 +97,7 @@ a.namedurl img {
 }
 
 /* Do not print "none" sorting icon */
-img[src="/wiki/themes/fusionforge/buttons/no_order.png"] {
+img[src="/wiki/themes/fusionforge/buttons/sort_none.gif"] {
     display: none;
 }
 

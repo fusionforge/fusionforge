@@ -9,7 +9,7 @@
 
 short-term TODO:
 * rename should check existing subpages and rename these also.
-* Sidebar: merge AVL theme (internal MonoBook derivate with customizable 
+* Sidebar: merge AVL theme (internal MonoBook derivate with customizable
   box states) with Sidebar
 * clarify issues with pagenames: "," breaks PageList. Escape with "~" or "\"?
   or htmlencode forbidden chars.
@@ -20,10 +20,6 @@ TODO:
 architecture:
 * flush <head> before <body> to parallelize css/js requests
 * Optimization: try template_lite or try simple regex replacements as before.
-* Evaluate some xml syntax for plugins (as in MediaWiki): 
-  <IncludePages pages=<plugin-list BackLinks/> />
-  <BackLink include_self=false />
-4  And/or fix PLUGIN_MARKUP_MAP aliases which break the InlineParser.
 * Fix postgresql stored procedures.
 * Move serialized data from page_data / version_data to separate SQL columns.
 * WikiDB hooks. (?)
@@ -42,7 +38,6 @@ new:
 * ATOM (experimentally done), TrackBack, PingBack services (take it from DokuWiki)
 * finish Blog theme
 * lang: mapping
-* WikiUser/EMailConfirm (?)
 * ImportMediaWiki, ImportRdf, ImportOwl, ExportMediaWiki, ExportRdf, ExportOwl
 * WikiUser/OpenID (from DokuWiki) - Status::in_work
 * more meta stuff: OpenSearch, format=dc (Dublin Core)

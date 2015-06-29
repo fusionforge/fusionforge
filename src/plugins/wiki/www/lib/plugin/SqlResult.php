@@ -62,6 +62,7 @@ class WikiPlugin_SqlResult
     extends WikiPlugin
 {
     public $_args;
+    public $_sql;
 
     function getDescription()
     {
@@ -91,9 +92,15 @@ class WikiPlugin_SqlResult
     function handle_plugin_args_cruft($argstr, $args)
     {
         $this->_sql = str_replace("\n", " ", $argstr);
-        return;
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         global $DBParams;

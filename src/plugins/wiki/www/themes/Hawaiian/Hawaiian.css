@@ -37,8 +37,6 @@ caption {
     caption-side: top;
     text-align: left;
     margin-bottom: .5ex;
-    /* Allow the caption to extend to the full page width */
-    width: 100%;
 }
 
 /* generic classes ----------------------------------------------- */
@@ -296,6 +294,10 @@ input.gridbutton, a.gridbutton, a:hover.gridbutton, a:visited.gridbutton {
 .toolbar {
     padding: 0;
     margin: 0;
+}
+
+img.toolbar:hover {
+    cursor: pointer;
 }
 
 /* Prevent buttons from overlapping when wrapped */
@@ -590,10 +592,6 @@ div.error {
     background-color: #f0f0f0;
 }
 
-.toolbar, div.toolbar {
-    margin: 0.5ex 0;
-}
-
 /* Link icons */
 img.linkicon {
     vertical-align: middle;
@@ -678,10 +676,26 @@ table.boxed th, table.bordered th {
     background-color: #d8d8d8;
 }
 
-/* For emacs users
- *
- * Local Variables:
- * mode: c
- * c-file-style: cc-mode
- * End:
- */
+table.sortable th.header {
+    background-image: url(../default/buttons/sort_none.gif);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}
+
+table.sortable th.headerSortUp {
+    background-image: url(../default/buttons/sort_up.gif);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}
+
+table.sortable th.headerSortDown {
+    background-image: url(../default/buttons/sort_down.gif);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}

@@ -35,7 +35,7 @@ class _FilePassUser
     // sets the pref methods, before this class is initialized.
     function _FilePassUser($UserName = '', $prefs = false, $file = '')
     {
-        if (!$this->_prefs and isa($this, "_FilePassUser")) {
+        if (!$this->_prefs and is_a($this, "_FilePassUser")) {
             if ($prefs) $this->_prefs = $prefs;
             if (!isset($this->_prefs->_method))
                 _PassUser::_PassUser($UserName);
@@ -48,7 +48,7 @@ class _FilePassUser
         // same style as in main.php
         include_once(dirname(__FILE__) . "/../pear/File_Passwd.php");
         // "__PHP_Incomplete_Class"
-        if (!empty($file) or empty($this->_file) or !isa($this->_file, "File_Passwd"))
+        if (!empty($file) or empty($this->_file) or !is_a($this->_file, "File_Passwd"))
             $this->_file = new File_Passwd($file, false, $file . '.lock');
         else
             return false;

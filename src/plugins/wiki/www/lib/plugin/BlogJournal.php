@@ -49,6 +49,13 @@ class WikiPlugin_BlogJournal
         );
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         if (is_array($argstr)) { // can do with array also.
@@ -72,12 +79,12 @@ class WikiPlugin_BlogJournal
                 $args['user'] = ADMIN_USER; // "Admin/Blogs/day" pages
             }
         }
-        $parent = (empty($args['user']) ? '' : $args['user'] . SUBPAGE_SEPARATOR);
+        $parent = (empty($args['user']) ? '' : $args['user'] . '/');
 
         $prefix = $base = $parent . $this->blogPrefix('wikiblog');
         if ($args['month'])
-            $prefix .= (SUBPAGE_SEPARATOR . $args['month']);
-        $pages = $dbi->titleSearch(new TextSearchQuery("^" . $prefix . SUBPAGE_SEPARATOR, true, 'posix'));
+            $prefix .= ('/' . $args['month']);
+        $pages = $dbi->titleSearch(new TextSearchQuery("^" . $prefix . '/', true, 'posix'));
         $html = HTML();
         $i = 0;
         while (($page = $pages->next()) and $i < $args['count']) {

@@ -35,6 +35,11 @@
 class WikiPlugin_FuzzyPages
     extends WikiPlugin
 {
+    public $_searchterm;
+    public $_searchterm_metaphone;
+    public $debug;
+    public $_list;
+
     function getDescription()
     {
         return sprintf(_("Search for page titles similar to %s."),
@@ -148,12 +153,21 @@ class WikiPlugin_FuzzyPages
         return $table;
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         $args = $this->getArgs($argstr, $request);
         extract($args);
+
         if (empty($s)) {
-            return HTML();
+            return HTML::p(array('class' => 'warning'),
+                           _("You must enter a search term."));
         }
 
         if (defined('DEBUG') && DEBUG) {

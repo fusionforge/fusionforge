@@ -66,6 +66,13 @@ class WikiPlugin_text2png
             'backcolor' => '#ffffff');
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         if (ImageTypes() & IMG_PNG) {
@@ -87,7 +94,7 @@ class WikiPlugin_text2png
      * '#000'    => array(0,0,0)
      * '#000000' => array(0,0,0)
      */
-    function hexcolor($h, $default = false)
+    function hexcolor($h, $default = array())
     {
         if ($h[0] != '#') return $default;
         $rgb = substr($h, 1);

@@ -54,7 +54,8 @@ class WikiDB_backend_PearDB_ffpgsql
         $dbparams['dsn'] = str_replace('ffpgsql:', 'pgsql:', $dbparams['dsn']);
         parent::__construct($dbparams);
 
-        $p = strlen(PAGE_PREFIX) + 1;
+        global $page_prefix;
+        $p = strlen($page_prefix) + 1;
         $page_tbl = $this->_table_names['page_tbl'];
         $this->page_tbl_fields = "$page_tbl.id AS id, substring($page_tbl.pagename from $p) AS pagename, $page_tbl.hits AS hits";
 
@@ -65,29 +66,36 @@ class WikiDB_backend_PearDB_ffpgsql
     {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
-        $pat = PAGE_PREFIX;
-        $p = strlen($pat) + 1;
+        global $page_prefix;
+        $p = strlen($page_prefix) + 1;
         return $dbh->getCol("SELECT substring(pagename from $p)"
             . " FROM $nonempty_tbl, $page_tbl"
             . " WHERE $nonempty_tbl.id=$page_tbl.id"
-            . " AND substring($page_tbl.pagename from 0 for $p) = '$pat'");
+            . " AND substring($page_tbl.pagename from 0 for $p) = '$page_prefix'");
     }
 
+    /*
+     * filter (nonempty pages) currently ignored
+     */
     function numPages($filter = false, $exclude = '')
     {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
-        $pat = PAGE_PREFIX;
-        $p = strlen($pat) + 1;
+        global $page_prefix;
+        $p = strlen($page_prefix) + 1;
         return $dbh->getOne("SELECT count(*)"
             . " FROM $nonempty_tbl, $page_tbl"
             . " WHERE $nonempty_tbl.id=$page_tbl.id"
-            . " AND substring($page_tbl.pagename from 0 for $p) = '$pat'");
+            . " AND substring($page_tbl.pagename from 0 for $p) = '$page_prefix'");
     }
 
+    /*
+     * Read page information from database.
+     */
     function get_pagedata($pagename)
     {
-        return parent::get_pagedata(PAGE_PREFIX . $pagename);
+        global $page_prefix;
+        return parent::get_pagedata($page_prefix . $pagename);
     }
 
     function update_pagedata($pagename, $newdata)
@@ -100,7 +108,8 @@ class WikiDB_backend_PearDB_ffpgsql
             // Note that this will fail silently if the page does not
             // have a record in the page table.  Since it's just the
             // hit count, who cares?
-            $pagename = PAGE_PREFIX . $pagename;
+            global $page_prefix;
+            $pagename = $page_prefix . $pagename;
             $dbh->query(sprintf("UPDATE $page_tbl SET hits=%d WHERE pagename='%s'",
                 $newdata['hits'], $dbh->escapeSimple($pagename)));
             return;
@@ -139,7 +148,8 @@ class WikiDB_backend_PearDB_ffpgsql
                             $dbh->escapeSimple($this->_serialize($data)),
                             $dbh->escapeSimple($pagename)));
         */
-        $pagename = PAGE_PREFIX . $pagename;
+        global $page_prefix;
+        $pagename = $page_prefix . $pagename;
         $dbh->query("UPDATE $page_tbl"
                 . " SET hits=?, pagedata=?"
                 . " WHERE pagename=?",
@@ -149,14 +159,26 @@ class WikiDB_backend_PearDB_ffpgsql
 
     function get_latest_version($pagename)
     {
-        return parent::get_latest_version(PAGE_PREFIX . $pagename);
+        global $page_prefix;
+        return parent::get_latest_version($page_prefix . $pagename);
     }
 
     function get_previous_version($pagename, $version)
     {
-        return parent::get_previous_version(PAGE_PREFIX . $pagename, $version);
+        global $page_prefix;
+        return parent::get_previous_version($page_prefix . $pagename, $version);
     }
 
+    /**
+     * Get version data.
+     *
+     * @param string $pagename Name of the page
+     * @param int $version Which version to get
+     * @param bool $want_content Do we need content?
+     *
+     * @return array hash The version data, or false if specified version does not
+     *              exist.
+     */
     function get_versiondata($pagename, $version, $want_content = false)
     {
         $dbh = &$this->_dbh;
@@ -166,11 +188,10 @@ class WikiDB_backend_PearDB_ffpgsql
         // assert(is_string($pagename) and $pagename != "");
         // assert($version > 0);
 
-        //trigger_error("GET_REVISION $pagename $version $want_content", E_USER_NOTICE);
         // FIXME: optimization: sometimes don't get page data?
         if ($want_content) {
             $fields = $this->page_tbl_fields
-                . ",$page_tbl.pagedata as pagedata,"
+                . ",$page_tbl.pagedata AS pagedata,"
                 . $this->version_tbl_fields;
         } else {
             $fields = $this->page_tbl_fields . ","
@@ -178,7 +199,8 @@ class WikiDB_backend_PearDB_ffpgsql
                 . "$iscontent AS have_content";
         }
 
-        $pagename = PAGE_PREFIX . $pagename;
+        global $page_prefix;
+        $pagename = $page_prefix . $pagename;
         $result = $dbh->getRow(sprintf("SELECT $fields"
                     . " FROM $page_tbl, $version_tbl"
                     . " WHERE $page_tbl.id=$version_tbl.id"
@@ -192,12 +214,14 @@ class WikiDB_backend_PearDB_ffpgsql
 
     function get_cached_html($pagename)
     {
-        return parent::get_cached_html(PAGE_PREFIX . $pagename);
+        global $page_prefix;
+        return parent::get_cached_html($page_prefix . $pagename);
     }
 
     function set_cached_html($pagename, $data)
     {
-        return parent::set_cached_html(PAGE_PREFIX . $pagename, $data);
+        global $page_prefix;
+        parent::set_cached_html($page_prefix . $pagename, $data);
     }
 
     function _get_pageid($pagename, $create_if_missing = false)
@@ -217,7 +241,8 @@ class WikiDB_backend_PearDB_ffpgsql
 
         $dbh = &$this->_dbh;
         $page_tbl = $this->_table_names['page_tbl'];
-        $pagename = PAGE_PREFIX . $pagename;
+        global $page_prefix;
+        $pagename = $page_prefix . $pagename;
 
         $query = sprintf("SELECT id FROM $page_tbl WHERE pagename='%s'",
             $dbh->escapeSimple($pagename));
@@ -241,6 +266,9 @@ class WikiDB_backend_PearDB_ffpgsql
         return $id;
     }
 
+    /*
+     * Delete page completely from the database.
+     */
     function purge_page($pagename)
     {
         $dbh = &$this->_dbh;
@@ -269,6 +297,13 @@ class WikiDB_backend_PearDB_ffpgsql
         return $result;
     }
 
+    /*
+     * Find pages which link to or are linked from a page.
+     *
+     * TESTME relations: get_links is responsible to add the relation to the pagehash
+     * as 'linkrelation' key as pagename. See WikiDB_PageIterator::next
+     *   if (isset($next['linkrelation']))
+     */
     function get_links($pagename, $reversed = true, $include_empty = false,
                        $sortby = '', $limit = '', $exclude = '',
                        $want_relations = false)
@@ -287,8 +322,8 @@ class WikiDB_backend_PearDB_ffpgsql
         else
             $exclude = '';
 
-        $pat = PAGE_PREFIX;
-        $p = strlen($pat) + 1;
+        global $page_prefix;
+        $p = strlen($page_prefix) + 1;
 
         $qpagename = $dbh->escapeSimple($pagename);
         // MeV+APe 2007-11-14
@@ -300,8 +335,8 @@ class WikiDB_backend_PearDB_ffpgsql
             . " $page_tbl linkee, $page_tbl linker, $link_tbl "
             . ($want_relations ? " JOIN $page_tbl related ON ($link_tbl.relation=related.id)" : '')
             . " WHERE linkfrom=linker.id AND linkto=linkee.id"
-            . " AND $have.pagename='$pat$qpagename'"
-            . " AND substring($want.pagename from 0 for $p) = '$pat'"
+            . " AND $have.pagename='$page_prefix$qpagename'"
+            . " AND substring($want.pagename from 0 for $p) = '$page_prefix'"
             . (!$include_empty ? " AND $nonempty_tbl.id=$want.id" : "")
             //. " GROUP BY $want.id"
             . $exclude
@@ -317,13 +352,14 @@ class WikiDB_backend_PearDB_ffpgsql
         return new WikiDB_backend_PearDB_iter($this, $result);
     }
 
-    function get_all_pages($include_empty = false, $sortby = '', $limit = '', $exclude = '')
+    public function get_all_pages($include_empty = false,
+                                  $sortby = '', $limit = '', $exclude = '')
     {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
 
-        $pat = PAGE_PREFIX;
-        $p = strlen($pat) + 1;
+        global $page_prefix;
+        $p = strlen($page_prefix) + 1;
 
         $orderby = $this->sortby($sortby, 'db');
         if ($orderby) $orderby = ' ORDER BY ' . $orderby;
@@ -339,7 +375,7 @@ class WikiDB_backend_PearDB_ffpgsql
                     . " FROM $page_tbl, $recent_tbl, $version_tbl"
                     . " WHERE $page_tbl.id=$recent_tbl.id"
                     . " AND $page_tbl.id=$version_tbl.id AND latestversion=version"
-                    . " AND substring($page_tbl.pagename from 0 for $p) = '$pat'"
+                    . " AND substring($page_tbl.pagename from 0 for $p) = '$page_prefix'"
                     . $exclude
                     . $orderby;
             } else {
@@ -349,7 +385,7 @@ class WikiDB_backend_PearDB_ffpgsql
                     . " WHERE $nonempty_tbl.id=$page_tbl.id"
                     . " AND $page_tbl.id=$recent_tbl.id"
                     . " AND $page_tbl.id=$version_tbl.id AND latestversion=version"
-                    . " AND substring($page_tbl.pagename from 0 for $p) = '$pat'"
+                    . " AND substring($page_tbl.pagename from 0 for $p) = '$page_prefix'"
                     . $exclude
                     . $orderby;
             }
@@ -360,14 +396,14 @@ class WikiDB_backend_PearDB_ffpgsql
                     . " FROM $page_tbl"
                     . ($exclude ? " WHERE $exclude" : '')
                     . ($exclude ? " AND " : " WHERE ")
-                    . " substring($page_tbl.pagename from 0 for $p) = '$pat'"
+                    . " substring($page_tbl.pagename from 0 for $p) = '$page_prefix'"
                     . $orderby;
             } else {
                 $sql = "SELECT "
                     . $this->page_tbl_fields
                     . " FROM $nonempty_tbl, $page_tbl"
                     . " WHERE $nonempty_tbl.id=$page_tbl.id"
-                    . " AND substring($page_tbl.pagename from 0 for $p) = '$pat'"
+                    . " AND substring($page_tbl.pagename from 0 for $p) = '$page_prefix'"
                     . $exclude
                     . $orderby;
             }
@@ -384,12 +420,15 @@ class WikiDB_backend_PearDB_ffpgsql
         return new WikiDB_backend_PearDB_iter($this, $result, $options);
     }
 
-    function most_popular($limit = 20, $sortby = '-hits')
+    /*
+     * Find highest or lowest hit counts.
+     */
+    public function most_popular($limit = 20, $sortby = '-hits')
     {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
-        $pat = PAGE_PREFIX;
-        $p = strlen($pat) + 1;
+        global $page_prefix;
+        $p = strlen($page_prefix) + 1;
         if ($limit < 0) {
             $order = "hits ASC";
             $limit = -$limit;
@@ -410,7 +449,7 @@ class WikiDB_backend_PearDB_ffpgsql
             . $this->page_tbl_fields
             . " FROM $nonempty_tbl, $page_tbl"
             . " WHERE $nonempty_tbl.id=$page_tbl.id"
-            . " AND substring($page_tbl.pagename from 0 for $p) = '$pat'"
+            . " AND substring($page_tbl.pagename from 0 for $p) = '$page_prefix'"
             . $where
             . $orderby;
         if ($limit) {
@@ -419,11 +458,13 @@ class WikiDB_backend_PearDB_ffpgsql
         } else {
             $result = $dbh->query($sql);
         }
-
         return new WikiDB_backend_PearDB_iter($this, $result);
     }
 
-    function most_recent($params)
+    /*
+     * Find recent changes.
+     */
+    public function most_recent($params)
     {
         $limit = 0;
         $since = 0;
@@ -478,15 +519,15 @@ class WikiDB_backend_PearDB_ffpgsql
         if ($pick)
             $where_clause .= " AND " . join(" AND ", $pick);
 
-        $pat = PAGE_PREFIX;
-        $p = strlen($pat) + 1;
+        global $page_prefix;
+        $p = strlen($page_prefix) + 1;
 
         // FIXME: use SQL_BUFFER_RESULT for mysql?
         $sql = "SELECT "
             . $this->page_tbl_fields . ", " . $this->version_tbl_fields
             . " FROM $table"
             . " WHERE $where_clause"
-            . " AND substring($page_tbl.pagename from 0 for $p) = '$pat'"
+            . " AND substring($page_tbl.pagename from 0 for $p) = '$page_prefix'"
             . " ORDER BY mtime $order";
         if ($limit) {
             list($from, $count) = $this->limit($limit);
@@ -497,34 +538,34 @@ class WikiDB_backend_PearDB_ffpgsql
         return new WikiDB_backend_PearDB_iter($this, $result);
     }
 
+    /*
+     * Find referenced empty pages.
+     */
     function wanted_pages($exclude_from = '', $exclude = '', $sortby = '', $limit = '')
     {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
-        $pat = PAGE_PREFIX;
-        $p = strlen($pat) + 1;
+        global $page_prefix;
+        $p = strlen($page_prefix) + 1;
         if ($orderby = $this->sortby($sortby, 'db', array('pagename', 'wantedfrom')))
             $orderby = 'ORDER BY ' . $orderby;
 
         if ($exclude_from) // array of pagenames
-            $exclude_from = " AND pp.pagename NOT IN " . $this->_sql_set($exclude_from);
+            $exclude_from = " AND substring(p.pagename from $p) NOT IN " . $this->_sql_set($exclude_from);
         if ($exclude) // array of pagenames
-            $exclude = " AND p.pagename NOT IN " . $this->_sql_set($exclude);
-
-        $p = strlen(PAGE_PREFIX) + 1;
-        $sql = "SELECT substring(p.pagename from $p) AS wantedfrom, substring(pp.pagename from $p) AS pagename"
-            . " FROM $page_tbl p, $link_tbl linked"
-            . " LEFT JOIN $page_tbl pp ON linked.linkto = pp.id"
-            . " LEFT JOIN $nonempty_tbl ne ON linked.linkto = ne.id"
+            $exclude = " AND substring(p.pagename from $p) NOT IN " . $this->_sql_set($exclude);
+        $sql = "SELECT substring(pp.pagename from $p) AS wantedfrom, substring(p.pagename from $p) AS pagename"
+            . " FROM $page_tbl AS p, $link_tbl AS linked"
+            . " LEFT JOIN $page_tbl AS pp ON linked.linkto = pp.id"
+            . " LEFT JOIN $nonempty_tbl AS ne ON linked.linkto = ne.id"
             . " WHERE ne.id IS NULL"
             . " AND p.id = linked.linkfrom"
-            . " AND substring(p.pagename from 0 for $p) = '$pat'"
-            . " AND substring(pp.pagename from 0 for $p) = '$pat'"
+            . " AND substring(p.pagename from 0 for $p) = '$page_prefix'"
+            . " AND substring(pp.pagename from 0 for $p) = '$page_prefix'"
             . $exclude_from
             . $exclude
             . $orderby;
         if ($limit) {
-            // oci8 error: WHERE NULL = NULL appended
             list($from, $count) = $this->limit($limit);
             $result = $dbh->limitQuery($sql, $from, $count * 3);
         } else {
@@ -533,6 +574,9 @@ class WikiDB_backend_PearDB_ffpgsql
         return new WikiDB_backend_PearDB_generic_iter($this, $result);
     }
 
+    /*
+     * Rename page in the database.
+     */
     function rename_page($pagename, $to)
     {
         $dbh = &$this->_dbh;
@@ -552,8 +596,9 @@ class WikiDB_backend_PearDB_ffpgsql
                 $dbh->query("UPDATE $link_tbl SET linkto=$id WHERE linkto=$new");
                 $dbh->query("DELETE FROM $page_tbl WHERE id=$new");
             }
+            global $page_prefix;
             $dbh->query(sprintf("UPDATE $page_tbl SET pagename='%s' WHERE id=$id",
-                $dbh->escapeSimple(PAGE_PREFIX . $to)));
+                $dbh->escapeSimple($page_prefix . $to)));
         }
         $this->unlock();
         return $id;
@@ -561,14 +606,19 @@ class WikiDB_backend_PearDB_ffpgsql
 
     function is_wiki_page($pagename)
     {
-        return parent::is_wiki_page(PAGE_PREFIX . $pagename);
+        global $page_prefix;
+        return parent::is_wiki_page($page_prefix . $pagename);
     }
 
     function increaseHitCount($pagename)
     {
-        return parent::increaseHitCount(PAGE_PREFIX . $pagename);
+        global $page_prefix;
+        parent::increaseHitCount($page_prefix . $pagename);
     }
 
+    /*
+     * Serialize data
+     */
     function _serialize($data)
     {
         return WikiDB_backend_PearDB::_serialize($data);
@@ -580,19 +630,19 @@ class WikiDB_backend_PearDB_ffpgsql
      */
     function optimize()
     {
-        return 0;
+        return true;
     }
 
-    /**
-     * Title search.
+    /*
+     * Text search (title or full text)
      */
-    function text_search($search, $fulltext = false, $sortby = '', $limit = '',
-                         $exclude = '')
+    public function text_search($search, $fulltext = false,
+                                $sortby = '', $limit = '', $exclude = '')
     {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
-        $pat = PAGE_PREFIX;
-        $len = strlen($pat) + 1;
+        global $page_prefix;
+        $len = strlen($page_prefix) + 1;
         $orderby = $this->sortby($sortby, 'db');
         if ($sortby and $orderby) $orderby = ' ORDER BY ' . $orderby;
 
@@ -618,14 +668,14 @@ class WikiDB_backend_PearDB_ffpgsql
             $callback = new WikiMethodCb($searchobj, "_fulltext_match_clause");
             $search_string = $search->makeTsearch2SqlClauseObj($callback);
             $search_string = str_replace('%', '', $search_string);
-            $search_clause = "substring(plugin_wiki_page.pagename from 0 for $len) = '$pat') AND (";
+            $search_clause = "substring(plugin_wiki_page.pagename from 0 for $len) = '$page_prefix') AND (";
 
-            $search_clause .= "idxFTI @@ to_tsquery('english', '$search_string')";
+            $search_clause .= "idxFTI @@ plainto_tsquery('english', '$search_string')";
             if (!$orderby)
-                $orderby = " ORDER BY ts_rank(idxFTI, to_tsquery('english', '$search_string')) DESC";
+                $orderby = " ORDER BY ts_rank(idxFTI, plainto_tsquery('english', '$search_string')) DESC";
         } else {
             $callback = new WikiMethodCb($searchobj, "_pagename_match_clause");
-            $search_clause = "substring(plugin_wiki_page.pagename from 0 for $len) = '$pat') AND (";
+            $search_clause = "substring(plugin_wiki_page.pagename from 0 for $len) = '$page_prefix') AND (";
             $search_clause .= $search->makeSqlClauseObj($callback);
         }
 
@@ -674,7 +724,8 @@ class WikiDB_backend_PearDB_ffpgsql_search
         $word = $node->sql();
         // @alu: use _quote maybe instead of direct pg_escape_string
         $word = pg_escape_string($word);
-        $len = strlen(PAGE_PREFIX) + 1;
+        global $page_prefix;
+        $len = strlen($page_prefix) + 1;
         if ($node->op == 'REGEX') { // posix regex extensions
             return ($this->_case_exact
                 ? "substring(pagename from $len) ~* '$word'"
@@ -686,21 +737,20 @@ class WikiDB_backend_PearDB_ffpgsql_search
         }
     }
 
-    /**
+    /*
      * use tsearch2. See schemas/psql-tsearch2.sql and /usr/share/postgresql/contrib/tsearch2.sql
      * TODO: don't parse the words into nodes. rather replace "[ +]" with & and "-" with "!" and " or " with "|"
      * tsearch2 query language: @@ "word | word", "word & word", ! word
      * ~* '.*something that does not exist.*'
+     *
+     * phrase search for "history lesson":
+     *
+     * SELECT id FROM tab WHERE ts_idx_col @@ to_tsquery('history&lesson')
+     * AND text_col ~* '.*history\\s+lesson.*';
+     *
+     * The full-text index will still be used, and the regex will be used to
+     * prune the results afterwards.
      */
-    /*
-     phrase search for "history lesson":
-
-     SELECT id FROM tab WHERE ts_idx_col @@ to_tsquery('history&lesson')
-     AND text_col ~* '.*history\\s+lesson.*';
-
-     The full-text index will still be used, and the regex will be used to
-     prune the results afterwards.
-    */
     function _fulltext_match_clause($node)
     {
         $word = strtolower($node->word);

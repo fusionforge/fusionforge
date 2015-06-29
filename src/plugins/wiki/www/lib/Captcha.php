@@ -24,15 +24,29 @@
 
 class Captcha
 {
+    public $meta;
+    public $width;
+    public $height;
+    public $length;
+    public $failed_msg;
+    /**
+     * @var WikiRequest $request
+     */
+    public $request;
 
-    function Captcha($meta = array(), $width = 250, $height = 80)
+    function __construct($meta = array(), $width = 250, $height = 80)
     {
+        /**
+         * @var WikiRequest $request
+         */
+        global $request;
+
         $this->meta =& $meta;
         $this->width = $width;
         $this->height = $height;
         $this->length = 8;
         $this->failed_msg = _("Typed in verification word mismatch ... are you a bot?");
-        $this->request =& $GLOBALS['request'];
+        $this->request =& $request;
     }
 
     function captchaword()
@@ -79,8 +93,8 @@ class Captcha
 
     function get_word()
     {
-        if (USE_CAPTCHA_RANDOM_WORD)
-            return get_dictionary_word();
+        if (defined('USE_CAPTCHA_RANDOM_WORD') and USE_CAPTCHA_RANDOM_WORD)
+            return $this->get_dictionary_word();
         else
             return rand_ascii_readable($this->length); // lib/stdlib.php
     }
@@ -89,20 +103,18 @@ class Captcha
     {
         // Load In the Word List
         $fp = fopen(findfile("lib/captcha/dictionary"), "r");
+        $text = array();
         while (!feof($fp))
             $text[] = trim(fgets($fp, 1024));
         fclose($fp);
 
         // Pick a Word
         $word = "";
-        better_srand();
         while (strlen(trim($word)) == 0) {
-            if (function_exists('mt_rand'))
-                $x = mt_rand(0, count($text));
-            else
-                $x = rand(0, count($text));
+            $x = mt_rand(0, count($text));
             return $text[$x];
         }
+        return '';
     }
 
     // Draw the Spiral

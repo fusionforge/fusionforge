@@ -68,6 +68,8 @@ include_once (dirname(__FILE__) . "/FileFinder.php");
  * Dump the static parts of the parsed config/config.ini settings to a fast-loadable config.php file.
  * The dynamic parts are then evaluated as before.
  * Requires write-permissions to config/config.php
+ *
+ * @param string $file
  */
 function save_dump($file)
 {
@@ -148,7 +150,7 @@ function IniConfig($file)
         'GROUP_METHOD',
         'EDITING_POLICY', 'THEME',
         'WIKI_PGSRC', 'DEFAULT_WIKI_PGSRC',
-        'ALLOWED_PROTOCOLS', 'INLINE_IMAGES', 'SUBPAGE_SEPARATOR', /*'KEYWORDS',*/
+        'ALLOWED_PROTOCOLS', 'INLINE_IMAGES', /*'KEYWORDS',*/
         // extra logic:
         //'DATABASE_PREFIX', 'DATABASE_DSN', 'DATABASE_TYPE', 'DATABASE_DBHANDLER',
         'DATABASE_OPTIMISE_FREQUENCY',
@@ -158,7 +160,7 @@ function IniConfig($file)
         'PLUGIN_CACHED_DATABASE', 'PLUGIN_CACHED_FILENAME_PREFIX',
         'PLUGIN_CACHED_HIGHWATER', 'PLUGIN_CACHED_LOWWATER', 'PLUGIN_CACHED_MAXLIFETIME',
         'PLUGIN_CACHED_MAXARGLEN', 'PLUGIN_CACHED_IMGTYPES',
-        'WYSIWYG_BACKEND', 'PLUGIN_MARKUP_MAP',
+        'WYSIWYG_BACKEND',
         // extra logic:
         'SERVER_NAME', 'SERVER_PORT', 'SCRIPT_NAME', 'DATA_PATH', 'PHPWIKI_DIR', 'VIRTUAL_PATH',
         'EXTERNAL_HTML2PDF_PAGELIST', 'PLUGIN_CACHED_CACHE_DIR'
@@ -184,8 +186,8 @@ function IniConfig($file)
 
     // List of all valid config options to be define()d which take booleans.
     $_IC_VALID_BOOL = array
-    ('ENABLE_USER_NEW', 'ENABLE_PAGEPERM', 'ENABLE_EDIT_TOOLBAR', 'JS_SEARCHREPLACE',
-        'ENABLE_XHTML_XML', 'ENABLE_DOUBLECLICKEDIT', 'ENABLE_LIVESEARCH', 'ENABLE_ACDROPDOWN',
+    ('ENABLE_PAGEPERM', 'ENABLE_EDIT_TOOLBAR', 'JS_SEARCHREPLACE',
+        'ENABLE_XHTML_XML', 'ENABLE_DOUBLECLICKEDIT',
         'USECACHE', 'WIKIDB_NOCACHE_MARKUP',
         'ENABLE_REVERSE_DNS', 'ENCRYPTED_PASSWD', 'ZIPDUMP_AUTH',
         'ENABLE_RAW_HTML', 'ENABLE_RAW_HTML_LOCKEDONLY', 'ENABLE_RAW_HTML_SAFE',
@@ -316,21 +318,13 @@ function IniConfig($file)
             unset($rsdef[$item]);
         }
     }
-    $valid_database_types = array('SQL', 'ADODB', 'PDO', 'dba', 'file', 'flatfile', 'cvs', 'cvsclient');
+    $valid_database_types = array('SQL', 'ADODB', 'PDO', 'dba', 'file', 'flatfile');
     if (!in_array(DATABASE_TYPE, $valid_database_types))
         trigger_error(sprintf("Invalid DATABASE_TYPE=%s. Choose one of %s",
                 DATABASE_TYPE, join(",", $valid_database_types)),
             E_USER_ERROR);
     unset($valid_database_types);
-    if (DATABASE_TYPE == 'PDO') {
-        // try to load it dynamically (unix only)
-        if (!loadPhpExtension("pdo")) {
-            echo $GLOBALS['php_errormsg'], "<br>\n";
-            trigger_error(sprintf("dl() problem: Required extension “%s” could not be loaded!",
-                    "pdo"),
-                E_USER_ERROR);
-        }
-    }
+
     // Detect readonly database, e.g. system mounted read-only for maintenance
     // via dbh->readonly later. Unfortunately not possible as constant.
 
@@ -352,9 +346,11 @@ function IniConfig($file)
     foreach (array('major', 'minor', 'author') as $major) {
         foreach (array('max_age', 'min_age', 'min_keep', 'keep', 'max_keep') as $max) {
             $item = strtoupper($major) . '_' . strtoupper($max);
-            if (defined($item)) $val = constant($item);
+            if (defined($item))
+                $val = constant($item);
             elseif (array_key_exists($item, $rs))
-                $val = $rs[$item]; elseif (array_key_exists($item, $rsdef))
+                $val = $rs[$item];
+            elseif (array_key_exists($item, $rsdef))
                 $val = $rsdef[$item];
             if (!isset($ExpireParams[$major]))
                 $ExpireParams[$major] = array();
@@ -423,21 +419,6 @@ function IniConfig($file)
             define('ACCESS_LOG_SQL',
             in_array(DATABASE_TYPE, array('SQL', 'ADODB', 'PDO')) ? 2 : 0);
         }
-    }
-
-    global $PLUGIN_MARKUP_MAP;
-    $PLUGIN_MARKUP_MAP = array();
-    if (defined('PLUGIN_MARKUP_MAP') and trim(PLUGIN_MARKUP_MAP) != "") {
-        $_map = preg_split('/\s+/', PLUGIN_MARKUP_MAP);
-        foreach ($_map as $v) {
-            list($xml, $plugin) = explode(':', $v);
-            if (!empty($xml) and !empty($plugin))
-                $PLUGIN_MARKUP_MAP[$xml] = $plugin;
-        }
-        unset($_map);
-        unset($xml);
-        unset($plugin);
-        unset($v);
     }
 
     if (empty($rs['TEMP_DIR'])) {
@@ -569,22 +550,11 @@ function IniConfig($file)
     fixup_dynamic_configs(); // [100ms]
 }
 
-function _ignore_unknown_charset_warning(&$error)
-{
-    if (preg_match('/^htmlspecialchars\(\): charset \`.+\' not supported, assuming iso-8859-1/',
-        $error->errstr)
-    ) {
-        $error->errno = 0;
-        return true; // Ignore error
-    }
-    return false;
-}
-
 // moved from lib/config.php [1ms]
 function fixup_static_configs($file)
 {
-    global $FieldSeparator, $WikiNameRegexp, $AllActionPages;
-    global $DBParams, $LANG, $ErrorManager;
+    global $FieldSeparator, $AllActionPages;
+    global $DBParams;
     // init FileFinder to add proper include paths
     FindFile("lib/interwiki.map", true);
 
@@ -594,7 +564,7 @@ function fixup_static_configs($file)
     // All pages containing plugins of the same name as the filename
     $ActionPages = explode(':',
         'AllPages:AllUsers:AppendText:AuthorHistory:'
-            . 'BackLinks:'
+            . 'BackLinks:BlogArchives:BlogJournal:'
             . 'CreatePage:'
             . 'FullTextSearch:FuzzyPages:'
             . 'LikePages:LinkDatabase:LinkSearch:ListRelations:'
@@ -608,15 +578,13 @@ function fixup_static_configs($file)
             . 'TitleSearch:'
             . 'UpLoad:UserPreferences:'
             . 'UserRatings:' // UserRatings works only in wikilens derived themes
-            . 'WantedPages:WatchPage:WhoIsOnline:WikiAdminSelect');
+            . 'WantedPages:WatchPage:WikiBlog:WhoIsOnline:WikiAdminSelect');
 
     // The FUSIONFORGE theme omits them
-    if (!(defined('FUSIONFORGE') and FUSIONFORGE)) {
+    if (!(defined('FUSIONFORGE') && FUSIONFORGE)) {
         // Add some some action pages
         $ActionPages[] = 'DebugInfo';
         $ActionPages[] = 'SpellCheck'; // SpellCheck does not work
-        $ActionPages[] = 'BlogArchives';
-        $ActionPages[] = 'BlogJournal';
         $ActionPages[] = 'EditMetaData';
         $ActionPages[] = 'InterWikiSearch';
         $ActionPages[] = 'LdapSearch';
@@ -624,7 +592,6 @@ function fixup_static_configs($file)
         $ActionPages[] = 'RecentComments';
         $ActionPages[] = 'TranslateText';
         $ActionPages[] = 'UriResolver';
-        $ActionPages[] = 'WikiBlog';
     }
 
     global $AllAllowedPlugins;
@@ -701,14 +668,14 @@ function fixup_static_configs($file)
     $AllAllowedPlugins[] = 'DebugGroupInfo';
     $AllAllowedPlugins[] = 'DebugAuthInfo';
     $AllAllowedPlugins[] = 'DebugBackendInfo';
+    $AllAllowedPlugins[] = 'DebugRetransform';
 
     // The FUSIONFORGE theme omits them
-    if (!(defined('FUSIONFORGE') and FUSIONFORGE)) {
+    if (!(defined('FUSIONFORGE') && FUSIONFORGE)) {
         $AllAllowedPlugins[] = 'AnalyseAccessLogSql';
         $AllAllowedPlugins[] = 'CacheTest';
         $AllAllowedPlugins[] = 'CategoryPage';
         $AllAllowedPlugins[] = 'FoafViewer';
-        $AllAllowedPlugins[] = 'FrameInclude';
         $AllAllowedPlugins[] = 'GraphViz';
         $AllAllowedPlugins[] = 'HtmlConverter';
         $AllAllowedPlugins[] = 'JabberPresence';
@@ -718,13 +685,11 @@ function fixup_static_configs($file)
         $AllAllowedPlugins[] = 'PopularNearby';
         $AllAllowedPlugins[] = 'PreferenceApp';
         $AllAllowedPlugins[] = 'PreferencesInfo';
-        $AllAllowedPlugins[] = '_Retransform';
         $AllAllowedPlugins[] = 'SqlResult';
         $AllAllowedPlugins[] = 'TeX2png';
         $AllAllowedPlugins[] = 'text2png';
         $AllAllowedPlugins[] = 'TexToPng';
         $AllAllowedPlugins[] = 'VisualWiki';
-        $AllAllowedPlugins[] = 'WantedPagesOld';
         $AllAllowedPlugins[] = 'WikiForum';
         $AllAllowedPlugins[] = 'WikiTranslation';
     }
@@ -760,7 +725,7 @@ function fixup_static_configs($file)
     $AllActionPages[] = 'SetGlobalAccessRightsSimple';
     $AllActionPages[] = 'UserContribs';
 
-    if ((defined('FUSIONFORGE') and FUSIONFORGE)) {
+    if ((defined('FUSIONFORGE') && FUSIONFORGE)) {
         if (ENABLE_EXTERNAL_PAGES) {
             $AllAllowedPlugins[] = 'WikiAdminSetExternal';
             $AllActionPages[] = 'PhpWikiAdministration/SetExternal';
@@ -798,21 +763,6 @@ function fixup_static_configs($file)
 
     if (!defined('THEME'))
         define('THEME', 'default');
-
-    /*$configurator_link = HTML(HTML::br(), "=>",
-                              HTML::a(array('href'=>DATA_PATH."/configurator.php"),
-                                      _("Configurator")));*/
-    // check whether the crypt() function is needed and present
-    if (defined('ENCRYPTED_PASSWD') && !function_exists('crypt')) {
-        $error = sprintf("Encrypted passwords cannot be used: %s.",
-            "'function crypt()' not available in this version of php");
-        trigger_error($error, E_USER_WARNING);
-        if (!preg_match("/config\-dist\.ini$/", $file)) { // protect against recursion
-            include_once(dirname(__FILE__) . "/install.php");
-            run_install("_part1");
-            exit();
-        }
-    }
 
     // Basic configurator validation
     if (!defined('ADMIN_USER') or ADMIN_USER == '') {
@@ -857,22 +807,12 @@ function fixup_static_configs($file)
         }
     }
     // legacy:
-    if (!defined('ENABLE_USER_NEW')) define('ENABLE_USER_NEW', true);
     if (!defined('ALLOW_USER_LOGIN'))
         define('ALLOW_USER_LOGIN', defined('ALLOW_USER_PASSWORDS') && ALLOW_USER_PASSWORDS);
     if (!defined('ALLOW_ANON_USER')) define('ALLOW_ANON_USER', true);
     if (!defined('ALLOW_ANON_EDIT')) define('ALLOW_ANON_EDIT', false);
     if (!defined('REQUIRE_SIGNIN_BEFORE_EDIT')) define('REQUIRE_SIGNIN_BEFORE_EDIT', !ALLOW_ANON_EDIT);
     if (!defined('ALLOW_BOGO_LOGIN')) define('ALLOW_BOGO_LOGIN', true);
-    if (!ENABLE_USER_NEW) {
-        if (!defined('ALLOW_HTTP_AUTH_LOGIN'))
-            define('ALLOW_HTTP_AUTH_LOGIN', false);
-        if (!defined('ALLOW_LDAP_LOGIN'))
-            define('ALLOW_LDAP_LOGIN', function_exists('ldap_connect') and defined('LDAP_AUTH_HOST'));
-        if (!defined('ALLOW_IMAP_LOGIN'))
-            define('ALLOW_IMAP_LOGIN', function_exists('imap_open') and defined('IMAP_AUTH_HOST'));
-    }
-
     if (ALLOW_USER_LOGIN and !empty($DBAuthParams) and empty($DBAuthParams['auth_dsn'])) {
         if (isset($DBParams['dsn']))
             $DBAuthParams['auth_dsn'] = $DBParams['dsn'];
@@ -886,8 +826,7 @@ function fixup_static_configs($file)
  */
 function fixup_dynamic_configs()
 {
-    global $WikiNameRegexp;
-    global $DBParams, $LANG;
+    global $LANG;
 
     if (defined('INCLUDE_PATH') and INCLUDE_PATH) {
         @ini_set('include_path', INCLUDE_PATH);
@@ -899,7 +838,7 @@ function fixup_dynamic_configs()
         define('DEFAULT_LANGUAGE', ''); // detect from client
 
     // FusionForge hack
-    if (!(defined('FUSIONFORGE') and FUSIONFORGE)) {
+    if (!(defined('FUSIONFORGE') && FUSIONFORGE)) {
         // Disable update_locale because Zend Debugger crash
         if (!extension_loaded('Zend Debugger')) {
             update_locale(isset($LANG) ? $LANG : DEFAULT_LANGUAGE);

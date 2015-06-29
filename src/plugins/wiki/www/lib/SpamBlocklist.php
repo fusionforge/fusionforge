@@ -20,7 +20,7 @@
  *
  */
 
-/**
+/*
  * See http://www.surbl.org/
  *
  * Perform a name lookup (A) for any link tld against multi.surbl.org and bl.spamcop.net,
@@ -29,9 +29,12 @@
  * This is the same, but a bit lighter than PEAR::Net_DNSBL_SURBL
  */
 
-/*
+/**
  * Strip domain prefixes so that either the last two name parts are returned,
  * or if it's a known tld (like "co.uk") the last three.
+ *
+ * @param string $host
+ * @return string
  */
 function stripDomainPrefixes($host)
 {
@@ -57,6 +60,11 @@ function stripDomainPrefixes($host)
         $host = $host_2_elements;
     return $host;
 }
+
+/**
+ * @param string $uri
+ * @return int
+ */
 
 function IsBlackListed($uri)
 {
@@ -97,28 +105,6 @@ function IsBlackListed($uri)
     }
     return 0;
 }
-
-/*
-if (defined('SPAMBLOCKLIST_TEST') and SPAMBLOCKLIST_TEST) {
-    BlackListDebug("10.20.30.40");
-    BlackListDebug("spammer.org");
-    BlackListDebug("www.ricoruca.com");
-    BlackListDebug("ricoruca.com");
-    BlackListDebug("soft-sky.org");
-    BlackListDebug("lovers.lv");
-    BlackListDebug("wumort.net");
-    BlackListDebug("bibleinayear.org");
-    BlackListDebug("p50927464.dip.t-dialin.net");
-}
-function BlackListDebug($host) {
-    $res = IsBlackListed($host);
-    echo sprintf("%12s", $host), "\tis";
-    if ($res)
-    echo " listed at $res[0] - $res[1]\n";
-    else
-    echo " not blacklisted.\n";
-}
-*/
 
 // Local Variables:
 // mode: php

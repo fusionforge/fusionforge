@@ -40,6 +40,8 @@ if (!defined('TOC_FULL_SYNTAX'))
 class WikiPlugin_CreateToc
     extends WikiPlugin
 {
+    public $_markup;
+
     function getDescription()
     {
         return _("Create a Table of Contents and automatically link to headers.");
@@ -183,7 +185,7 @@ class WikiPlugin_CreateToc
                     $content[$j])
                 )
                     return $j;
-            } elseif (isa($content[$j], 'cached_link')) {
+            } elseif (is_a($content[$j], 'cached_link')) {
                 if (method_exists($content[$j], 'asXML')) {
                     $content[$j]->_basepage = $basepage;
                     $content[$j] = $content[$j]->asXML();
@@ -377,6 +379,13 @@ class WikiPlugin_CreateToc
         return $headers;
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         global $WikiTheme;

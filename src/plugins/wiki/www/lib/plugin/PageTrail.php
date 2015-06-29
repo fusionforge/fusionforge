@@ -54,6 +54,13 @@ class WikiPlugin_PageTrail
         );
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         extract($this->getArgs($argstr, $request));
@@ -65,7 +72,9 @@ class WikiPlugin_PageTrail
         // Get name of the current page we are on
         $thispage = $request->getArg('pagename');
         $Pages = $request->session->get("PageTrail");
-        if (!is_array($Pages)) $Pages = array();
+        if (!is_array($Pages)) {
+            $Pages = array();
+        }
 
         if (!isset($Pages[0]) or ($duplicates || ($thispage != $Pages[0]))) {
             array_unshift($Pages, $thispage);
@@ -82,8 +91,9 @@ class WikiPlugin_PageTrail
                         WikiLink($Pages[$i], 'auto'));
             }
             return $html;
-        } else
+        } else {
             return HTML();
+        }
     }
 }
 

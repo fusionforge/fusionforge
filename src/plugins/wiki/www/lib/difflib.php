@@ -8,23 +8,20 @@
 // You may copy this code freely under the conditions of the GPL.
 //
 
-class _DiffOp
+abstract class _DiffOp
 {
     public $type;
     public $orig;
     public $final;
 
-    function reverse()
-    {
-        trigger_error("pure virtual", E_USER_ERROR);
-    }
+    abstract public function reverse();
 
-    function norig()
+    public function norig()
     {
         return $this->orig ? sizeof($this->orig) : 0;
     }
 
-    function nfinal()
+    public function nfinal()
     {
         return $this->final ? sizeof($this->final) : 0;
     }
@@ -42,7 +39,7 @@ class _DiffOp_Copy extends _DiffOp
         $this->final = $final;
     }
 
-    function reverse()
+    public function reverse()
     {
         return new _DiffOp_Copy($this->final, $this->orig);
     }
@@ -58,7 +55,7 @@ class _DiffOp_Delete extends _DiffOp
         $this->final = false;
     }
 
-    function reverse()
+    public function reverse()
     {
         return new _DiffOp_Add($this->orig);
     }
@@ -74,7 +71,7 @@ class _DiffOp_Add extends _DiffOp
         $this->orig = false;
     }
 
-    function reverse()
+    public function reverse()
     {
         return new _DiffOp_Delete($this->final);
     }
@@ -90,7 +87,7 @@ class _DiffOp_Change extends _DiffOp
         $this->final = $final;
     }
 
-    function reverse()
+    public function reverse()
     {
         return new _DiffOp_Change($this->final, $this->orig);
     }
@@ -118,7 +115,17 @@ class _DiffOp_Change extends _DiffOp
  */
 class _DiffEngine
 {
-    function diff($from_lines, $to_lines)
+    public $xchanged;
+    public $ychanged;
+    public $xv;
+    public $yv;
+    public $xind;
+    public $yind;
+    public $lcs;
+    public $seq;
+    public $in_seq;
+
+    public function diff($from_lines, $to_lines)
     {
         $n_from = sizeof($from_lines);
         $n_to = sizeof($to_lines);
@@ -222,7 +229,7 @@ class _DiffEngine
      * match.  The caller must trim matching lines from the beginning and end
      * of the portions it is going to specify.
      */
-    function _diag($xoff, $xlim, $yoff, $ylim, $nchunks)
+    private function _diag($xoff, $xlim, $yoff, $ylim, $nchunks)
     {
         $flip = false;
 
@@ -296,7 +303,7 @@ class _DiffEngine
         return array($this->lcs, $seps);
     }
 
-    function _lcs_pos($ypos)
+    private function _lcs_pos($ypos)
     {
         $end = $this->lcs;
         if ($end == 0 || $ypos > $this->seq[$end]) {
@@ -333,7 +340,7 @@ class _DiffEngine
      * Note that XLIM, YLIM are exclusive bounds.
      * All line numbers are origin-0 and discarded lines are not counted.
      */
-    function _compareseq($xoff, $xlim, $yoff, $ylim)
+    private function _compareseq($xoff, $xlim, $yoff, $ylim)
     {
         // Slide down the bottom initial diagonal.
         while ($xoff < $xlim && $yoff < $ylim
@@ -390,7 +397,7 @@ class _DiffEngine
      *
      * This is extracted verbatim from analyze.c (GNU diffutils-2.7).
      */
-    function _shift_boundaries($lines, &$changed, $other_changed)
+    private function _shift_boundaries($lines, &$changed, $other_changed)
     {
         $i = 0;
         $j = 0;
@@ -519,27 +526,6 @@ class Diff
     {
         $eng = new _DiffEngine;
         $this->edits = $eng->diff($from_lines, $to_lines);
-        //$this->_check($from_lines, $to_lines);
-    }
-
-    /**
-     * Compute reversed Diff.
-     *
-     * SYNOPSIS:
-     *
-     *  $diff = new Diff($lines1, $lines2);
-     *  $rev = $diff->reverse();
-     * @return object A Diff object representing the inverse of the
-     *                original diff.
-     */
-    function reverse()
-    {
-        $rev = $this;
-        $rev->edits = array();
-        foreach ($this->edits as $edit) {
-            $rev->edits[] = $edit->reverse();
-        }
-        return $rev;
     }
 
     /**
@@ -547,30 +533,13 @@ class Diff
      *
      * @return bool True iff two sequences were identical.
      */
-    function isEmpty()
+    public function isEmpty()
     {
         foreach ($this->edits as $edit) {
             if ($edit->type != 'copy')
                 return false;
         }
         return true;
-    }
-
-    /**
-     * Compute the length of the Longest Common Subsequence (LCS).
-     *
-     * This is mostly for diagnostic purposed.
-     *
-     * @return int The length of the LCS.
-     */
-    function lcs()
-    {
-        $lcs = 0;
-        foreach ($this->edits as $edit) {
-            if ($edit->type == 'copy')
-                $lcs += sizeof($edit->orig);
-        }
-        return $lcs;
     }
 
     /**
@@ -581,7 +550,7 @@ class Diff
      *
      * @return array The original sequence of strings.
      */
-    function orig()
+    public function orig()
     {
         $lines = array();
 
@@ -600,7 +569,7 @@ class Diff
      *
      * @return array The sequence of strings.
      */
-    function _final()
+    public function _final()
     {
         $lines = array();
 
@@ -609,35 +578,6 @@ class Diff
                 array_splice($lines, sizeof($lines), 0, $edit->final);
         }
         return $lines;
-    }
-
-    /**
-     * Check a Diff for validity.
-     *
-     * This is here only for debugging purposes.
-     */
-    function _check($from_lines, $to_lines)
-    {
-        if (serialize($from_lines) != serialize($this->orig()))
-            trigger_error("Reconstructed original doesn't match", E_USER_ERROR);
-        if (serialize($to_lines) != serialize($this->_final()))
-            trigger_error("Reconstructed final doesn't match", E_USER_ERROR);
-
-        $rev = $this->reverse();
-        if (serialize($to_lines) != serialize($rev->orig()))
-            trigger_error("Reversed original doesn't match", E_USER_ERROR);
-        if (serialize($from_lines) != serialize($rev->_final()))
-            trigger_error("Reversed final doesn't match", E_USER_ERROR);
-
-        $prevtype = 'none';
-        foreach ($this->edits as $edit) {
-            if ($prevtype == $edit->type)
-                trigger_error("Edit sequence is non-optimal", E_USER_ERROR);
-            $prevtype = $edit->type;
-        }
-
-        $lcs = $this->lcs();
-        trigger_error("Diff okay: LCS = $lcs", E_USER_NOTICE);
     }
 }
 
@@ -729,7 +669,7 @@ class DiffFormatter
      * @param $diff object A Diff object.
      * @return string The formatted output.
      */
-    function format($diff)
+    public function format($diff)
     {
 
         $xi = $yi = 1;
@@ -784,7 +724,7 @@ class DiffFormatter
         return $this->_end_diff();
     }
 
-    function _block($xbeg, $xlen, $ybeg, $ylen, &$edits)
+    private function _block($xbeg, $xlen, $ybeg, $ylen, &$edits)
     {
         $this->_start_block($this->_block_header($xbeg, $xlen, $ybeg, $ylen));
         foreach ($edits as $edit) {
@@ -799,19 +739,19 @@ class DiffFormatter
         $this->_end_block();
     }
 
-    function _start_diff()
+    protected function _start_diff()
     {
         ob_start();
     }
 
-    function _end_diff()
+    protected function _end_diff()
     {
         $val = ob_get_contents();
         ob_end_clean();
         return $val;
     }
 
-    function _block_header($xbeg, $xlen, $ybeg, $ylen)
+    protected function _block_header($xbeg, $xlen, $ybeg, $ylen)
     {
         if ($xlen > 1)
             $xbeg .= "," . ($xbeg + $xlen - 1);
@@ -821,37 +761,37 @@ class DiffFormatter
         return $xbeg . ($xlen ? ($ylen ? 'c' : 'd') : 'a') . $ybeg;
     }
 
-    function _start_block($header)
+    protected function _start_block($header)
     {
         echo $header;
     }
 
-    function _end_block()
+    protected function _end_block()
     {
     }
 
-    function _lines($lines, $prefix = ' ')
+    protected function _lines($lines, $prefix = ' ')
     {
         foreach ($lines as $line)
             echo "$prefix $line\n";
     }
 
-    function _context($lines)
+    protected function _context($lines)
     {
         $this->_lines($lines);
     }
 
-    function _added($lines)
+    protected function _added($lines)
     {
         $this->_lines($lines, ">");
     }
 
-    function _deleted($lines)
+    protected function _deleted($lines)
     {
         $this->_lines($lines, "<");
     }
 
-    function _changed($orig, $final)
+    protected function _changed($orig, $final)
     {
         $this->_deleted($orig);
         echo "---\n";
@@ -866,13 +806,13 @@ class DiffFormatter
  */
 class UnifiedDiffFormatter extends DiffFormatter
 {
-    function UnifiedDiffFormatter($context_lines = 4)
+    function __construct($context_lines = 4)
     {
         $this->leading_context_lines = $context_lines;
         $this->trailing_context_lines = $context_lines;
     }
 
-    function _block_header($xbeg, $xlen, $ybeg, $ylen)
+    protected function _block_header($xbeg, $xlen, $ybeg, $ylen)
     {
         if ($xlen != 1)
             $xbeg .= "," . $xlen;
@@ -881,17 +821,17 @@ class UnifiedDiffFormatter extends DiffFormatter
         return "@@ -$xbeg +$ybeg @@\n";
     }
 
-    function _added($lines)
+    protected function _added($lines)
     {
         $this->_lines($lines, "+");
     }
 
-    function _deleted($lines)
+    protected function _deleted($lines)
     {
         $this->_lines($lines, "-");
     }
 
-    function _changed($orig, $final)
+    protected function _changed($orig, $final)
     {
         $this->_deleted($orig);
         $this->_added($final);
@@ -917,7 +857,7 @@ class BlockDiffFormatter extends DiffFormatter
         $this->trailing_context_lines = $context_lines;
     }
 
-    function _lines($lines, $prefix = '')
+    protected function _lines($lines, $prefix = '')
     {
         if (!$prefix == '')
             echo "$prefix\n";
@@ -927,22 +867,22 @@ class BlockDiffFormatter extends DiffFormatter
             echo "$prefix\n";
     }
 
-    function _added($lines)
+    protected function _added($lines)
     {
         $this->_lines($lines, ">>>>>>>");
     }
 
-    function _deleted($lines)
+    protected function _deleted($lines)
     {
         $this->_lines($lines, "<<<<<<<");
     }
 
-    function _block_header($xbeg, $xlen, $ybeg, $ylen)
+    protected function _block_header($xbeg, $xlen, $ybeg, $ylen)
     {
         return "";
     }
 
-    function _changed($orig, $final)
+    protected function _changed($orig, $final)
     {
         $this->_deleted($orig);
         $this->_added($final);

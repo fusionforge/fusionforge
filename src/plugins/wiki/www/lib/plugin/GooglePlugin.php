@@ -56,6 +56,13 @@ class WikiPlugin_GooglePlugin
         );
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         $args = $this->getArgs($argstr, $request);
@@ -81,9 +88,9 @@ class WikiPlugin_GooglePlugin
                 default:
                     trigger_error("Invalid mode");
             }
-            if (isa($result, 'HTML'))
+            if (is_a($result, 'HTML'))
                 $html->pushContent($result);
-            if (isa($result, 'GoogleSearchResults')) {
+            if (is_a($result, 'GoogleSearchResults')) {
                 //TODO: result template
                 if (!empty($result->resultElements)) {
                     $list = HTML::ol();

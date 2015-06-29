@@ -17,7 +17,7 @@ else
 </span>
   <script type="text/javascript"><!--
     document.write('<input type="hidden" name="auth[logout]" value="0" />');
-    function SignOut(form) { 
+    function SignOut(form) {
       var form = document.forms["<?php echo $FORMNAME?>"];
       form.elements["auth[logout]"].value = 1;
       form.submit();
@@ -33,7 +33,7 @@ else
                                    'size' => 12,
                                    'maxlength' => 256,
                                    'onchange' => "SignIn(this.form);"));
-  $SignInInput->addTooltip(_("Enter your UserId to sign in")) 
+  $SignInInput->addTooltip(_("Enter your UserId to sign in"))
 ?>
   <script type="text/javascript"> <!--
     function SignIn(form) {
@@ -47,7 +47,7 @@ else
       form.submit();
     }
     //-->
-    document.write('&nbsp;<?php echo 
+    document.write('&nbsp;<?php echo
     _("Sign In")
     ?>');
   </script>

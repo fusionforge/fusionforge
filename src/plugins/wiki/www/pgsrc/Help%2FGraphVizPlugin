@@ -1,12 +1,12 @@
-Date: Tue, 29 Jul 2014 10:42:12 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.0)
+Date: Mon, 29 Jun 2015 12:04:28 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FGraphVizPlugin;
   flags=PAGE_LOCKED;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The **~GraphViz** [[Help:WikiPlugin|plugin]] passes all its arguments to the grapviz ##dot##
+The **~GraphViz** [[Help:WikiPlugin|plugin]] passes all its arguments to the graphviz ##dot##
 binary and displays the result as cached image (PNG, GIF, SVG) or
 imagemap.  See [[http://www.graphviz.org/Documentation.php]],
 esp. [[http://www.graphviz.org/doc/info/lang.html]] for the ##dot## language

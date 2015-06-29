@@ -31,7 +31,7 @@
  * optional master page ("."), and predefined default permissions, if "."
  * is not defined.
  * Pagenames starting with "." have special default permissions.
- * For Authentication see WikiUserNew.php, WikiGroup.php and main.php
+ * For Authentication see WikiUser.php, WikiGroup.php and main.php
  * Page Permissions are in PhpWiki since v1.3.9 and enabled since v1.4.0
  *
  * This file might replace the following functions from main.php:
@@ -108,19 +108,21 @@ function pagePermissionsSimpleFormat($perm_tree, $owner, $group = false)
         $perm = $perm_tree[1];
     elseif (is_array($perm_tree[1])) {
         $perm_tree = pagePermissionsSimpleFormat($perm_tree[1],$owner,$group);
-    if (isa($perm_tree[1],'pagepermission'))
+    if (is_a($perm_tree[1],'pagepermission'))
         $perm = $perm_tree[1];
-    elseif (isa($perm_tree,'htmlelement'))
+    elseif (is_a($perm_tree,'htmlelement'))
             return $perm_tree;
     }
     */
     if ($type == 'page')
         return HTML::samp(HTML::strong($perm->asRwxString($owner, $group)));
     elseif ($type == 'default')
-        return HTML::samp($perm->asRwxString($owner, $group)); elseif ($type == 'inherited') {
+        return HTML::samp($perm->asRwxString($owner, $group));
+    elseif ($type == 'inherited') {
         return HTML::samp(array('class' => 'inherited', 'style' => 'color:#aaa;'),
             $perm->asRwxString($owner, $group));
     }
+    return '';
 }
 
 function pagePermissionsAcl($type, $perm_tree)
@@ -239,7 +241,7 @@ function _requiredAuthorityForPagename($access, $pagename)
     $page = $request->getPage($pagename);
 
     // Exceptions:
-    if (defined('FUSIONFORGE') and FUSIONFORGE) {
+    if (defined('FUSIONFORGE') && FUSIONFORGE) {
         if ($pagename != '.' && isset($request->_user->_is_external) && $request->_user->_is_external && !$page->get('external')) {
             $permcache[$pagename][$access] = 0;
             return 0;
@@ -357,7 +359,12 @@ class PagePermission
 
     function PagePermission($hash = array())
     {
-        $this->_group = &$GLOBALS['request']->getGroup();
+        /**
+         * @var WikiRequest $request
+         */
+        global $request;
+
+        $this->_group = &$request->getGroup();
         if (is_array($hash) and !empty($hash)) {
             $accessTypes = $this->accessTypes();
             foreach ($hash as $access => $requires) {
@@ -381,6 +388,10 @@ class PagePermission
      */
     function isAuthorized($access, $user)
     {
+        // Admin can see all pages, regardless of access rights
+        if ($user->isAdmin()) {
+            return true;
+        }
         $allow = -1;
         if (!empty($this->perm{$access})) {
             foreach ($this->perm[$access] as $group => $bool) {
@@ -412,10 +423,8 @@ class PagePermission
         if ($group === ACL_ANONYMOUS)
             return !$user->isSignedIn();
         if ($group === ACL_BOGOUSER)
-            if (ENABLE_USER_NEW)
-                return isa($user, '_BogoUser') or
+            return is_a($user, '_BogoUser') or
                     (isWikiWord($user->_userid) and $user->_level >= WIKIAUTH_BOGO);
-            else return isWikiWord($user->UserName());
         if ($group === ACL_HASHOMEPAGE)
             return $user->hasHomePage();
         if ($group === ACL_SIGNED)
@@ -464,10 +473,10 @@ class PagePermission
                 ACL_OWNER => true),
             'change' => array(ACL_ADMIN => true,
                 ACL_OWNER => true));
-        if (ZIPDUMP_AUTH)
+        if (defined('ZIPDUMP_AUTH') and ZIPDUMP_AUTH)
             $perm['dump'] = array(ACL_ADMIN => true,
                 ACL_OWNER => true);
-        elseif (INSECURE_ACTIONS_LOCALHOST_ONLY) {
+        elseif (defined('INSECURE_ACTIONS_LOCALHOST_ONLY') and INSECURE_ACTIONS_LOCALHOST_ONLY) {
             if (is_localhost())
                 $perm['dump'] = array(ACL_EVERY => true);
             else
@@ -530,7 +539,7 @@ class PagePermission
      * special permissions for dot-files, beginning with '.'
      * maybe also for '_' files?
      */
-    function dotPerms()
+    static function dotPerms()
     {
         $def = array(ACL_ADMIN => true,
             ACL_OWNER => true);
@@ -593,8 +602,13 @@ class PagePermission
     function asEditableTable($type)
     {
         global $WikiTheme;
+        /**
+         * @var WikiRequest $request
+         */
+        global $request;
+
         if (!isset($this->_group)) {
-            $this->_group =& $GLOBALS['request']->getGroup();
+            $this->_group =& $request->getGroup();
         }
         $table = HTML::table();
         $table->pushContent(HTML::tr(
@@ -708,7 +722,6 @@ class PagePermission
     function asAclLines()
     {
         $s = '';
-        $line = '';
         $this->sanify();
         foreach ($this->perm as $access => $groups) {
             // unify groups for same access+bool

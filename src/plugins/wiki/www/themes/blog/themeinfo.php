@@ -29,15 +29,6 @@ if (!defined('PHPWIKI_VERSION')) {
  * PageTrail: > .. > ..
  * Right sidebar boxes: Archives, Syndication, Links, GoogleAds
  *
- * For the livesearch feature (autodropdown of the results while you tip)
- * you'll have to copy livesearch.js from http://blog.bitflux.ch/wiki/LiveSearch
- * to themes/default/, change the liveSearchReq.open line to:
-liveSearchReq.open("GET", liveSearchURI + "?format=livesearch&paging=none&limit=25&s=" + document.forms.searchform.s.value);
- * and define ENABLE_LIVESEARCH in config.ini to true.
- *
- * Better autodropdown's are in consideration:
- *   http://momche.net/publish/article.php?page=acdropdown)
- *
  * Happy blogging.
  */
 
@@ -45,24 +36,33 @@ require_once 'lib/WikiTheme.php';
 
 class WikiTheme_blog extends WikiTheme
 {
-
     function __construct($theme_name = 'blog')
     {
         $this->WikiTheme($theme_name);
-        $this->calendarInit(true);
+        $this->calendarInit();
     }
 
-    /* overload to load from Sidebar */
-    function _findFile($file, $missing_okay = false)
+    /* Display up/down button with persistent state */
+    /* persistent state per block in cookie for 30 days */
+    function folderArrow($id, $init = 'Open')
     {
-        if (file_exists($this->_path . "themes/" . $this->_name . "/$file"))
-            return "themes/" . $this->_name . "/$file";
-        if (file_exists($this->_path . "themes/Sidebar/$file"))
-            return "themes/Sidebar/$file";
-        return parent::_findFile($file, $missing_okay);
+        global $request;
+        if ($cookie = $request->cookies->get("folder_" . $id)) {
+            $init = $cookie;
+        }
+        if ($init == 'Open' or $init == 'Closed')
+            $png = $this->_findData('images/folderArrow' . $init . '.png');
+        else
+            $png = $this->_findData('images/folderArrowOpen.png');
+        return HTML::img(array('id' => $id . '-img',
+            'src' => $png,
+            //'align' => 'right',
+            'onclick' => "showHideFolder('$id')",
+            'alt' => _("Click to hide/show"),
+            'title' => _("Click to hide/show")));
     }
 
-    function _labelForAction($action)
+    protected function _labelForAction($action)
     {
         switch ($action) {
             case 'edit':
@@ -109,7 +109,7 @@ class WikiTheme_blog extends WikiTheme
 
         $link = HTML::a(array('href' => $url));
 
-        if (isa($wikiword, 'WikiPageName'))
+        if (is_a($wikiword, 'WikiPageName'))
             $default_text = $wikiword->shortName;
         else
             $default_text = $wikiword;

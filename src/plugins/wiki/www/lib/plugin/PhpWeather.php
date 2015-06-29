@@ -73,6 +73,13 @@ class WikiPlugin_PhpWeather
             'units' => 'both_metric');
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         // When 'phpweather/phpweather.php' is not installed then

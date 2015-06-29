@@ -72,7 +72,11 @@ class WikiPlugin_Video
 
         global $WikiTheme;
         $args = $this->getArgs($argstr, $request);
-        extract($args);
+        $url = $args['url'];
+        $file = $args['file'];
+        $width = $args['width'];
+        $height = $args['height'];
+        $autoplay = $args['autoplay'];
 
         if (!$url && !$file) {
             return $this->error(_("Both 'url' or 'file' parameters missing."));
@@ -83,9 +87,18 @@ class WikiPlugin_Video
             $url = getUploadDataPath() . '/' . $file;
         }
 
-        if (string_ends_with($url, ".ogg")) {
-            return HTML::video(array('autoplay' => 'true', 'controls' => 'true', 'src' => $url),
+        if (string_ends_with($url, ".ogg")
+           || string_ends_with($url, ".mp4")
+           || string_ends_with($url, ".webm")) {
+            $video = HTML::video(array('controls' => 'controls',
+                                       'width' => $width,
+                                       'height' => $height,
+                                       'src' => $url),
                 _("Your browser does not understand the HTML 5 video tag."));
+            if ($autoplay == 'true') {
+                $video->setAttr('autoplay', 'autoplay');
+            }
+            return $video;
         }
 
         $html = HTML();

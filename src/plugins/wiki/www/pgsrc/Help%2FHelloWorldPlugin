@@ -1,5 +1,5 @@
-Date: Tue, 29 Jul 2014 10:42:12 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.0)
+Date: Mon, 29 Jun 2015 12:04:28 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FHelloWorldPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -17,7 +17,7 @@ From the source of this page:
 }}}
 
 ----
-~PhpWiki's plugin architecture allows you to add custom page elements to your wiki. All you have to do is extend (subclass) the ~WikiPlugin class and create your output via the run() method, dependend on the Wiki- or Request arguments,
+~PhpWiki's plugin architecture allows you to add custom page elements to your wiki. All you have to do is extend (subclass) the ~WikiPlugin class and create your output via the run() method, dependent on the Wiki- or Request arguments,
 
 * either with the predefined HTML classes to create valid XHTML,
 * or by using templates, which are easier customizable, but generally more a mess to use and easier to create invalid XHTML.

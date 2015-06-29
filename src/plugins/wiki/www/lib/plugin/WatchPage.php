@@ -80,7 +80,7 @@ class WikiPlugin_WatchPage
         if ($isNecessary) {
             $form->pushContent(HTML::p(_("New watchlist: "),
                     $this->showWatchList($this->addpagelist($page, $pagelist))),
-                HTML::p(sprintf(_("Do you %s want to add this page \"%s\" to your WatchList?"),
+                HTML::p(sprintf(_("Do you %s want to add this page “%s” to your WatchList?"),
                     ($verified ? _("really") : ""), $page)),
                 HTML::p(Button('submit:add', _("Yes")),
                     HTML::raw('&nbsp;'),
@@ -95,18 +95,22 @@ class WikiPlugin_WatchPage
         return $fieldset;
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
-
         $args = $this->getArgs($argstr, $request);
-        if (isa($request, 'MockRequest'))
-            return '';
         $user =& $request->_user;
         $userid = $user->UserName();
         $page = $args['page'];
         if (!$user->isAuthenticated() or empty($userid)) {
             // wrong or unauthenticated user
-            if (defined('FUSIONFORGE') and FUSIONFORGE) {
+            if (defined('FUSIONFORGE') && FUSIONFORGE) {
                 // No login banner for FusionForge
                 return HTML::div(array('class' => 'error'),
                     HTML::p(_("You must sign in to watch pages.")));
@@ -115,7 +119,7 @@ class WikiPlugin_WatchPage
         } else {
             $pref = &$request->_prefs;
             $messages = "";
-            if (!defined('FUSIONFORGE') or !FUSIONFORGE) {
+            if (!defined('FUSIONFORGE') || !FUSIONFORGE) {
                 $email = $pref->get("email");
                 if (empty($email)) {
                     return HTML::p(

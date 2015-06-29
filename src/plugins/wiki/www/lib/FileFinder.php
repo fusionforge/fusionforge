@@ -48,6 +48,9 @@ class FileFinder
      * Unify used pathsep character.
      * Accepts array of paths also.
      * This might not work on Windows95 or FAT volumes. (not tested)
+     *
+     * @param string $path
+     * @return mixed|string
      */
     function slashifyPath($path)
     {
@@ -55,7 +58,11 @@ class FileFinder
     }
 
     /**
-     * Force using '/' as path seperator.
+     * Force using '/' as path separator.
+     *
+     * @param string $path
+     * @param string $sep
+     * @return mixed|string
      */
     function forcePathSlashes($path, $sep = '/')
     {
@@ -89,7 +96,7 @@ class FileFinder
      * to PHP's include_path (if it's not already there.) Then the
      * file is include_once()'d.
      *
-     * @param $file string File to include.
+     * @param string $file File to include.
      * @return bool True if file was successfully included.
      */
     function includeOnce($file)
@@ -190,7 +197,7 @@ class FileFinder
      */
     private function _not_found($file)
     {
-        trigger_error(sprintf(_("%s: file not found"), $file), E_USER_ERROR);
+        trigger_error(sprintf(_("File “%s” not found."), $file), E_USER_ERROR);
         return false;
     }
 
@@ -219,15 +226,12 @@ class FileFinder
     /**
      * The system-dependent path-separator character. On UNIX systems,
      * this character is ':'; on Win32 systems it is ';'.
-     * Fixme:
-     * On Mac it cannot be : because this is the seperator there!
      *
      * @return string path_separator.
      */
     public function _get_ini_separator()
     {
         return isWindows() ? ';' : ':';
-        // return preg_match('/^Windows/', php_uname())
     }
 
     /**
@@ -316,7 +320,7 @@ class FileFinder
      *
      * @return string The value of $LANG.
      */
-    public function _get_lang()
+    public static function _get_lang()
     {
         if (!empty($GLOBALS['LANG']))
             return $GLOBALS['LANG'];
@@ -447,7 +451,7 @@ class LocalizedButtonFinder
             }
         }
 
-        $this->FileFinder(array_merge($path, $include_path));
+        parent::__construct(array_merge($path, $include_path));
     }
 }
 

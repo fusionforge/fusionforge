@@ -25,7 +25,6 @@ require_once 'lib/Units.php';
 
 class CacheableMarkup extends XmlContent
 {
-
     function __construct($content, $basepage)
     {
         $this->_basepage = $basepage;
@@ -45,41 +44,28 @@ class CacheableMarkup extends XmlContent
         // - the history is wrong (user and comment missing)
         // - the table of contents plugin no longer works
         global $WikiTheme;
-        if (isa($WikiTheme, 'WikiTheme_fusionforge')) {
+        if (is_a($WikiTheme, 'WikiTheme_fusionforge')) {
             return serialize($this);
         }
 
-        if (function_exists('gzcompress'))
-            return gzcompress(serialize($this), 9);
-        return serialize($this);
-
-        // FIXME: probably should implement some sort of "compression"
-        //   when no gzcompress is available.
+        return gzcompress(serialize($this), 9);
     }
 
-    function unpack($packed)
+    static function unpack($packed)
     {
         if (!$packed)
             return false;
 
-        // ZLIB format has a five bit checksum in it's header.
+        // ZLIB format has a five bit checksum in its header.
         // Lets check for sanity.
         if (((ord($packed[0]) * 256 + ord($packed[1])) % 31 == 0)
             and (substr($packed, 0, 2) == "\037\213")
             or (substr($packed, 0, 2) == "x\332")
         ) // 120, 218
         {
-            if (function_exists('gzuncompress')) {
-                // Looks like ZLIB.
-                $data = gzuncompress($packed);
-                return unserialize($data);
-            } else {
-                // user our php lib. TESTME
-                include_once 'ziplib.php';
-                $zip = new ZipReader($packed);
-                list(, $data, $attrib) = $zip->readFile();
-                return unserialize($data);
-            }
+            // Looks like ZLIB.
+            $data = gzuncompress($packed);
+            return unserialize($data);
         }
         if (substr($packed, 0, 2) == "O:") {
             // Looks like a serialized object
@@ -101,7 +87,7 @@ class CacheableMarkup extends XmlContent
     {
         $links = array();
         foreach ($this->_content as $item) {
-            if (!isa($item, 'Cached_DynamicContent'))
+            if (!is_a($item, 'Cached_DynamicContent'))
                 continue;
             if (!($item_links = $item->getWikiPageLinks($this->_basepage)))
                 continue;
@@ -122,8 +108,9 @@ class CacheableMarkup extends XmlContent
      */
     function getLinkInfo()
     {
+        $links = array();
         foreach ($this->_content as $link) {
-            if (!isa($link, 'Cached_Link'))
+            if (!is_a($link, 'Cached_Link'))
                 continue;
             $info = $link->getLinkInfo($this->_basepage);
             $links[$info->href] = $info;
@@ -138,13 +125,13 @@ class CacheableMarkup extends XmlContent
                 $this->_append($subitem);
         } elseif (!is_object($item)) {
             $this->_buf .= $this->_quote((string)$item);
-        } elseif (isa($item, 'Cached_DynamicContent')) {
+        } elseif (is_a($item, 'Cached_DynamicContent')) {
             if ($this->_buf) {
                 $this->_content[] = $this->_buf;
                 $this->_buf = '';
             }
             $this->_content[] = $item;
-        } elseif (isa($item, 'XmlElement')) {
+        } elseif (is_a($item, 'XmlElement')) {
             if ($item->isEmpty()) {
                 $this->_buf .= $item->emptyTag();
             } else {
@@ -160,7 +147,7 @@ class CacheableMarkup extends XmlContent
             }
             if (!$item->isInlineElement())
                 $this->_buf .= "\n";
-        } elseif (isa($item, 'XmlContent')) {
+        } elseif (is_a($item, 'XmlContent')) {
             foreach ($item->getContent() as $item)
                 $this->_append($item);
         } elseif (method_exists($item, 'asXML')) {
@@ -238,10 +225,6 @@ class CacheableMarkup extends XmlContent
                 $val = $item->expand($basepage, $this);
                 if ($val) {
                     $val->printXML();
-                } else {
-                    if (DEBUG) {
-                        trigger_error('empty item ' . print_r($item, true));
-                    }
                 }
             } else {
                 $item->printXML();
@@ -256,18 +239,14 @@ class CacheableMarkup extends XmlContent
  * Dynamic content is anything that can change even when the original
  * wiki-text from which it was parsed is unchanged.
  */
-class Cached_DynamicContent
+abstract class Cached_DynamicContent
 {
-
     function cache(&$cache)
     {
         $cache[] = $this;
     }
 
-    function expand($basepage, &$obj)
-    {
-        trigger_error("Pure virtual", E_USER_ERROR);
-    }
+    abstract protected function expand($basepage, &$obj);
 
     function getWikiPageLinks($basepage)
     {
@@ -287,8 +266,10 @@ class XmlRpc_LinkInfo
     }
 }
 
-class Cached_Link extends Cached_DynamicContent
+abstract class Cached_Link extends Cached_DynamicContent
 {
+    public $_url;
+    public $_relation;
 
     function isInlineElement()
     {
@@ -312,11 +293,6 @@ class Cached_Link extends Cached_DynamicContent
     {
         return $this->_url;
     }
-
-    function __getRelation($basepage)
-    {
-        return $this->_relation;
-    }
 }
 
 /*
@@ -325,6 +301,9 @@ class Cached_Link extends Cached_DynamicContent
  */
 class Cached_InlinedImage extends Cached_DynamicContent
 {
+    public $_url;
+    public $_basepage;
+
     function isInlineElement()
     {
         return true;
@@ -354,7 +333,12 @@ class Cached_InlinedImage extends Cached_DynamicContent
 class Cached_WikiLink extends Cached_Link
 {
 
-    function __construct($page, $label = false, $anchor = false)
+    /**
+     * @param string $page
+     * @param string $label
+     * @param string $anchor
+     */
+    function __construct($page, $label = '', $anchor = '')
     {
         $this->_page = $page;
         /* ":DontStoreLink" */
@@ -377,14 +361,18 @@ class Cached_WikiLink extends Cached_Link
     function getPagename($basepage)
     {
         $page = new WikiPageName($this->_page, $basepage);
-        if ($page->isValid()) return $page->name;
-        else return false;
+        if ($page->isValid())
+            return $page->name;
+        else
+            return false;
     }
 
     function getWikiPageLinks($basepage)
     {
-        if ($basepage == '') return false;
-        if (isset($this->_nolink)) return false;
+        if ($basepage == '')
+            return false;
+        if (isset($this->_nolink))
+            return false;
         if ($link = $this->getPagename($basepage))
             return array(array('linkto' => $link));
         else
@@ -478,6 +466,8 @@ class Cached_SpellCheck extends Cached_WikiLink
 
 class Cached_PhpwikiURL extends Cached_DynamicContent
 {
+    public $_page;
+
     function __construct($url, $label)
     {
         $this->_url = $url;
@@ -528,6 +518,9 @@ class Cached_PhpwikiURL extends Cached_DynamicContent
  */
 class Cached_SemanticLink extends Cached_WikiLink
 {
+    public $_attribute;
+    public $_attribute_base;
+    public $_unit;
 
     function __construct($url, $label = false)
     {
@@ -555,11 +548,16 @@ class Cached_SemanticLink extends Cached_WikiLink
      */
     function getWikiPageLinks($basepage)
     {
+        /**
+         * @var WikiRequest $request
+         */
+        global $request;
+
         if ($basepage == '') return false;
         if (!isset($this->_page) and isset($this->_attribute)) {
             // An attribute: we store it in the basepage now, to fill the cache for page->save
             // TODO: side-effect free query
-            $page = $GLOBALS['request']->getPage($basepage);
+            $page = $request->getPage($basepage);
             $page->setAttribute($this->_relation, $this->_attribute);
             $this->_page = $basepage;
             return array(array('linkto' => '', 'relation' => $this->_relation));
@@ -597,7 +595,6 @@ class Cached_SemanticLink extends Cached_WikiLink
     {
         global $WikiTheme;
         $m = $this->_expandurl($url);
-        $class = 'wiki';
         // do not link to the attribute value, but to the attribute
         $is_attribute = ($m[2] == ':=');
         if ($WikiTheme->DUMP_MODE and $WikiTheme->VALID_LINKS) {
@@ -739,17 +736,25 @@ class Cached_InterwikiLink extends Cached_ExternalLink
     {
         list ($moniker, $page) = explode(":", $this->_link, 2);
         $page = new WikiPageName($page, $basepage);
-        if ($page->isValid()) return $page->name;
-        else return false;
+        if ($page->isValid()) {
+            return $page->name;
+        } else {
+            return false;
+        }
     }
 
     function getWikiPageLinks($basepage)
     {
+        /**
+         * @var WikiRequest $request
+         */
+        global $request;
+
         if ($basepage == '') return false;
         /* ":DontStoreLink" */
         if (substr($this->_link, 0, 1) == ':') return false;
         /* store only links to valid pagenames */
-        $dbi = $GLOBALS['request']->getDbh();
+        $dbi = $request->getDbh();
         if ($link = $this->getPagename($basepage) and $dbi->isWikiPage($link)) {
             return array(array('linkto' => $link));
         } else {
@@ -797,7 +802,7 @@ class Cached_InterwikiLink extends Cached_ExternalLink
 }
 
 // Needed to put UserPages to backlinks. Special method to markup userpages with icons
-// Thanks to PhpWiki:DanFr for finding this bug.
+// Thanks to Dan Frankowski for finding this bug.
 // Fixed since 1.3.8, prev. versions had no userpages in backlinks
 class Cached_UserLink extends Cached_WikiLink
 {
@@ -833,10 +838,6 @@ class Cached_PluginInvocation extends Cached_DynamicContent
         }
     }
 
-    function setTightness($top, $bottom)
-    {
-    }
-
     function isInlineElement()
     {
         return false;
@@ -844,8 +845,13 @@ class Cached_PluginInvocation extends Cached_DynamicContent
 
     function expand($basepage, &$markup)
     {
+        /**
+         * @var WikiRequest $request
+         */
+        global $request;
+
         $loader = $this->_getLoader();
-        $xml = $loader->expandPI($this->_pi, $GLOBALS['request'], $markup, $basepage);
+        $xml = $loader->expandPI($this->_pi, $request, $markup, $basepage);
         return $xml;
     }
 

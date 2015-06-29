@@ -60,8 +60,6 @@ caption {
     caption-side: top;
     text-align: left;
     margin-bottom: .5ex;
-    /* Allow the caption to extend to the full page width */
-    width: 100%;
 }
 
 a {
@@ -298,6 +296,10 @@ div.toolbar h1 a.wiki:hover, h1 a.wiki:hover, h2 a.wiki:hover {
     color: #5791ff;
 }
 
+img.toolbar:hover {
+    cursor: pointer;
+}
+
 h2, h3, h4, h5, h6 {
     display: inline;
     padding-top: 0.25ex;
@@ -451,8 +453,8 @@ div.toolbar, #signin {
     margin: 0;
 }
 
-div.toolbar {
-    margin-top: 1ex;
+input.toolbar {
+    border-width: 0;
 }
 
 #navbuttons {
@@ -1038,10 +1040,26 @@ table.boxed th, table.bordered th {
     background-color: #d8d8d8;
 }
 
-/* For emacs users
- *
- * Local Variables:
- * mode: c
- * c-file-style: cc-mode
- * End:
- */
+table.sortable th.header {
+    background-image: url(../default/buttons/sort_none.gif);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}
+
+table.sortable th.headerSortUp {
+    background-image: url(../default/buttons/sort_up.gif);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}
+
+table.sortable th.headerSortDown {
+    background-image: url(../default/buttons/sort_down.gif);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}

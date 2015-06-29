@@ -11,7 +11,6 @@ if (!defined('PHPWIKI_VERSION')) {
  * which can be used as parent class for all sidebar themes. See MonoBook and blog.
  * It is now an extension of the MonoBook theme.
  *
- * This uses the dynamic jscalendar, which doesn't need extra requests per month/year change.
  * This is a complete rewrite and not related to the old Sidebar theme.
  * It is derived from MonoBook, includes the calendar and can derive from wikilens.
  *
@@ -37,7 +36,6 @@ class WikiTheme_Sidebar extends WikiTheme_MonoBook
     function __construct($theme_name = 'Sidebar')
     {
         $this->WikiTheme($theme_name);
-        //$this->calendarInit(true);
     }
 
     /* Display up/down button with persistent state */
@@ -99,12 +97,11 @@ class WikiTheme_Sidebar extends WikiTheme_MonoBook
         }
     }
 
-
     function findTemplate($name)
     {
-        // hack for navbar.tmpl to hide the buttonseparator
+        // hack for navbar.tmpl to hide the button separator
         if ($name == "navbar") {
-            $this->setButtonSeparator(HTML::Raw("<br />\n&nbsp;&middot;&nbsp;"));
+            $this->setButtonSeparator(HTML::raw("<br />\n&nbsp;&middot;&nbsp;"));
         }
         if ($name == "actionbar" || $name == "signin") {
             $this->setButtonSeparator(" ");

@@ -42,10 +42,30 @@ img {
     margin: 1.5ex 1em 0 1em;
 }
 
-/* For emacs users
- *
- * Local Variables:
- * mode: c
- * c-file-style: cc-mode
- * End:
- */
+img.toolbar:hover {
+    cursor: pointer;
+}
+
+table.sortable th.header {
+    background-image: url(../default/buttons/sort_none.gif);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}
+
+table.sortable th.headerSortUp {
+    background-image: url(../default/buttons/sort_up.gif);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}
+
+table.sortable th.headerSortDown {
+    background-image: url(../default/buttons/sort_down.gif);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}

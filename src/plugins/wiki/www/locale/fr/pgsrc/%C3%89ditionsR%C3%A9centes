@@ -1,18 +1,17 @@
-Date: Tue, 29 Jul 2014 10:42:12 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.0)
+Date: Mon, 29 Jun 2015 12:04:23 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
 Content-Type: application/x-phpwiki;
   pagename=%C3%89ditionsR%C3%A9centes;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-Voici une liste des pages récemment éditées sur ce wiki. **Toutes** les
-modifications **mineures** sont montrées, et pas uniquement les plus
-récentes (voir DernièresModifs pour les modifications non-mineures les
-plus récentes).
+Voici une liste des pages récemment éditées sur ce wiki. **Toutes** les modifications **mineures** sont montrées, et pas uniquement les plus récentes.
 
---------
-<<RecentChanges days||=3 show_all||=1 show_minor=1 daylist=1,3,7,30,90,0>>
+//Voir [[DernièresModifs]] pour les modifications non-mineures les plus récentes.//
+
+----
+<<RecentChanges days||=7 show_all||=1 show_minor||=1 daylist=1,3,7,30,90,0>>
 
 ----
 [[CatégoriePageDAction]]

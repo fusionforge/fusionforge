@@ -31,7 +31,7 @@ class WikiTheme_fusionforge extends WikiTheme_Wikilens
 
         $submenu = Template('navbar')->asXML();
 
-        if (defined('FUSIONFORGE') and FUSIONFORGE) {
+        if (defined('FUSIONFORGE') && FUSIONFORGE) {
 
             $domain = textdomain(NULL);
             textdomain('fusionforge');
@@ -80,8 +80,7 @@ class WikiTheme_fusionforge extends WikiTheme_Wikilens
 
     function footer()
     {
-
-        if (defined('FUSIONFORGE') and FUSIONFORGE) {
+        if (defined('FUSIONFORGE') && FUSIONFORGE) {
             global $HTML;
 
             $domain = textdomain(NULL);

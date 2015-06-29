@@ -27,7 +27,7 @@ require_once 'lib/wikilens/RatingsDb.php';
  */
 class RatingsUserFactory
 {
-    function & getUser($userid)
+    static function & getUser($userid)
     {
         //print "getUser($userid) ";
         global $_ratingsUserCache;
@@ -340,8 +340,9 @@ class RatingsUser
             $rating_iter = $dbi->get_rating_page(null, $this->_userid);
 
             while ($rating = $rating_iter->next()) {
-                if (defined('FUSIONFORGE') and FUSIONFORGE) {
-                    $rating['pagename'] = preg_replace('/^' . PAGE_PREFIX . '/', '', $rating['pagename']);
+                if (defined('FUSIONFORGE') && FUSIONFORGE) {
+                    global $page_prefix;
+                    $rating['pagename'] = preg_replace('/^' . $page_prefix . '/', '', $rating['pagename']);
                 }
                 $this->_num_ratings++;
                 $this->_ratings[$rating['pagename']][$rating['dimension']]

@@ -29,7 +29,7 @@ Templates currently must use the .tmpl extension (simple PHP parsed files).
 Other file extensions are reserved for future use (i.e. .tpl for Smarty or 
 .html for our old template expansion.)
 
-Only one template is called, ususally the "html.tmpl" template, 
+Only one template is called, usually the "html.tmpl" template,
 which includes all other templates then.
 
 WikiTheme templates are regular xhtml, but the php parts within "<?php" and "?>" 

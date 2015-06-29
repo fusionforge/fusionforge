@@ -1,6 +1,6 @@
 <?php
 
-class WikiPlugin
+abstract class WikiPlugin
 {
     public $_pi;
 
@@ -32,12 +32,14 @@ class WikiPlugin
         return false;
     }
 
-    // FIXME: args?
-    function run($dbi, $argstr, &$request, $basepage)
-    {
-        trigger_error("WikiPlugin::run: pure virtual function", E_USER_ERROR);
-        return false;
-    }
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
+    abstract public function run($dbi, $argstr, &$request, $basepage);
 
     /** Get wiki-pages linked to by plugin invocation.
      *
@@ -96,12 +98,15 @@ class WikiPlugin
      * @return string plugin description
      */
 
-    function getDescription()
-    {
-        return _('This plugin has no description.');
-    }
+    abstract protected function getDescription();
 
-    function getArgs($argstr, $request = false, $defaults = array())
+    /**
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param array $defaults
+     * @return array
+     */
+    function getArgs($argstr, $request = null, $defaults = array())
     {
         if (empty($defaults)) {
             $defaults = $this->getDefaultArguments();
@@ -166,6 +171,11 @@ class WikiPlugin
 
     function parseArgStr($argstr)
     {
+        /**
+         * @var WikiRequest $request
+         */
+        global $request;
+
         $args = array();
         $defaults = array();
         if (empty($argstr))
@@ -190,7 +200,7 @@ class WikiPlugin
             $markup = null;
             $basepage = null;
             $plugin_val = preg_replace(array("/^<!/", "/!>$/"), array("<?", "?>"), $plugin_val);
-            $val = $loader->expandPI($plugin_val, $GLOBALS['request'], $markup, $basepage);
+            $val = $loader->expandPI($plugin_val, $request, $markup, $basepage);
             if ($op == '=') {
                 $args[$arg] = $val; // comma delimited pagenames or array()?
             } else {
@@ -269,10 +279,11 @@ class WikiPlugin
         $dbi = $request->getDbh();
         $pagelist = $this->run($dbi, $plugin_args, $request, $basepage);
         $list = array();
-        if (is_object($pagelist) and isa($pagelist, 'PageList'))
+        if (is_object($pagelist) and is_a($pagelist, 'PageList'))
             return $pagelist->pageNames();
         elseif (is_array($pagelist))
-            return $pagelist; else
+            return $pagelist;
+        else
             return $list;
     }
 
@@ -311,7 +322,6 @@ class WikiPlugin
             'class' => $args['class'],
             'accept-charset' => 'UTF-8'));
         if (!USE_PATH_INFO) {
-            $pagename = $request->get('pagename');
             $form->pushContent(HTML::input(array('type' => 'hidden',
                 'name' => 'pagename',
                 'value' => $args['targetpage'])));
@@ -364,16 +374,26 @@ class WikiPlugin
     }
 
     // box is used to display a fixed-width, narrow version with common header
-    function box($args = false, $request = false, $basepage = false)
+    /**
+     * @param string $args
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return $this|HtmlElement
+     */
+    function box($args = '', $request = null, $basepage = '')
     {
-        if (!$request) $request =& $GLOBALS['request'];
+        if (!$request) {
+            $request =& $GLOBALS['request'];
+        }
         $dbi = $request->getDbh();
         return $this->makeBox('', $this->run($dbi, $args, $request, $basepage));
     }
 
     function makeBox($title, $body)
     {
-        if (!$title) $title = $this->getName();
+        if (!$title) {
+            $title = $this->getName();
+        }
         return HTML::div(array('class' => 'box'),
             HTML::div(array('class' => 'box-title'), $title),
             HTML::div(array('class' => 'box-data'), $body));
@@ -531,7 +551,6 @@ class WikiPluginLoader
         $ErrorManager->pushErrorHandler(new WikiMethodCb($this, '_plugin_error_filter'));
         $plugin_class = "WikiPlugin_$plugin_name";
         if (!class_exists($plugin_class)) {
-            // $include_failed = !@include_once("lib/plugin/$plugin_name.php");
             $include_failed = !include_once($plugin_source);
             $ErrorManager->popErrorHandler();
 

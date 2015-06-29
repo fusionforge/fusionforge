@@ -42,8 +42,6 @@ caption {
     caption-side: top;
     text-align: left;
     margin-bottom: .5ex;
-    /* Allow the caption to extend to the full page width */
-    width: 100%;
 }
 
 /**
@@ -237,6 +235,10 @@ caption {
  */
 .toolbar, td, input.button {
     font-family: Arial, Helvetica, sans-serif;
+}
+
+img.toolbar:hover {
+    cursor: pointer;
 }
 
 #navbuttons, #actionbar {
@@ -520,11 +522,3 @@ img.rssicon {
     left: 0.5em;
     top: 0;
 }
-
-/* For emacs users
- *
- * Local Variables:
- * mode: c
- * c-file-style: cc-mode
- * End:
- */

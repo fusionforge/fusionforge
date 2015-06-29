@@ -35,17 +35,17 @@ class WikiDB_backend_ADODB_oci8po
     {
         // Do nothing here -- Leave that for the DBA
         // Cost Based Optimizer tuning vary from version to version
-        return 1;
+        return true;
     }
 
-    /**
+    /*
      * Lock tables.
      *
      * We don't really need to lock exclusive, but I'll relax it when I fully
      * understand phpWiki locking ;-)
      *
      */
-    function _lock_tables($tables, $write_lock = true)
+    protected function _lock_tables($tables, $write_lock = true)
     {
         if (!$tables) return;
 
@@ -65,10 +65,10 @@ class WikiDB_backend_ADODB_oci8po
         }
     }
 
-    /**
+    /*
      * Release the locks.
      */
-    function _unlock_tables($tables)
+    protected function _unlock_tables($tables)
     {
         $dbh = &$this->_dbh;
         $dbh->Execute("COMMIT WORK");
@@ -84,7 +84,7 @@ class WikiDB_backend_ADODB_oci8po
     }
     */
 
-    // Fulltext -- case sensisitive :-\
+    // Fulltext -- case sensitive :-\
     // If we want case insensitive search, one need to create a Context
     // Index on the CLOB. While it is very efficient, it requires the
     // Intermedia Text option, so let's stick to the 'simple' thing
@@ -97,7 +97,7 @@ class WikiDB_backend_ADODB_oci8po
     }
     */
 
-    /**
+    /*
      * Serialize data
      */
     function _serialize($data)
@@ -108,7 +108,7 @@ class WikiDB_backend_ADODB_oci8po
         return $this->_dbh->BlobEncode(serialize($data));
     }
 
-    /**
+    /*
      * Unserialize data
      */
     function _unserialize($data)
@@ -124,7 +124,6 @@ class WikiDB_backend_ADODB_oci8po
 
     function write_accesslog(&$entry)
     {
-        global $request;
         $dbh = &$this->_dbh;
         $log_tbl = $entry->_accesslog->logtable;
         $dbh->query("INSERT INTO $log_tbl"

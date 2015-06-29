@@ -69,13 +69,16 @@
  * @access protected
  * @see WikiDB
  */
-class WikiDB_backend
+abstract class WikiDB_backend
 {
+    public $_sortby;
+    public $_dbh;
+
     /**
      * Get page meta-data from database.
      *
-     * @param $pagename string Page name.
-     * @return hash
+     * @param string $pagename Page name.
+     * @return array hash
      * Returns a hash containing the page meta-data.
      * Returns an empty array if there is no meta-data for the requested page.
      * Keys which might be present in the hash are:
@@ -86,10 +89,7 @@ class WikiDB_backend
      *                    don't think we need this...)
      * </dl>
      */
-    function get_pagedata($pagename)
-    {
-        trigger_error("virtual", E_USER_ERROR);
-    }
+    abstract function get_pagedata($pagename);
 
     /**
      * Update the page meta-data.
@@ -111,52 +111,43 @@ class WikiDB_backend
      *   $backend->update_pagedata($pagename, array('locked' => false));
      * </pre>
      *
-     * @param $pagename string Page name.
-     * @param $newdata hash New meta-data.
+     * @param string $pagename Page name.
+     * @param array $newdata hash New meta-data.
      */
-    function update_pagedata($pagename, $newdata)
-    {
-        trigger_error("virtual", E_USER_ERROR);
-    }
+    abstract function update_pagedata($pagename, $newdata);
 
     /**
      * Get the current version number for a page.
      *
-     * @param $pagename string Page name.
+     * @param string $pagename Page name.
      * @return int The latest version number for the page.  Returns zero if
      *  no versions of a page exist.
      */
-    function get_latest_version($pagename)
-    {
-        trigger_error("virtual", E_USER_ERROR);
-    }
+    abstract function get_latest_version($pagename);
 
     /**
      * Get preceding version number.
      *
-     * @param $pagename string Page name.
-     * @param $version int Find version before this one.
+     * @param string $pagename Page name.
+     * @param int $version Find version before this one.
      * @return int The version number of the version in the database which
-     *  immediately preceeds $version.
+     *  immediately precedes $version.
      */
-    function get_previous_version($pagename, $version)
-    {
-        trigger_error("virtual", E_USER_ERROR);
-    }
+    abstract function get_previous_version($pagename, $version);
 
     /**
      * Get revision meta-data and content.
      *
-     * @param $pagename string Page name.
-     * @param $version integer Which version to get.
-     * @param $want_content boolean
+     * @param string $pagename Page name.
+     * @param int $version Which version to get.
+     * @param bool $want_content
      *  Indicates the caller really wants the page content.  If this
      *  flag is not set, the backend is free to skip fetching of the
      *  page content (as that may be expensive).  If the backend omits
      *  the content, the backend might still want to set the value of
      *  '%content' to the empty string if it knows there's no content.
      *
-     * @return hash The version data, or false if specified version does not
+     * @return array|bool hash The version data, or false if specified version does not
      *    exist.
      *
      * Some keys which might be present in the $versiondata hash are:
@@ -169,24 +160,26 @@ class WikiDB_backend
      * For description of other version meta-data see WikiDB_PageRevision::get().
      * @see WikiDB_PageRevision::get
      */
-    function get_versiondata($pagename, $version, $want_content = false)
-    {
-        trigger_error("virtual", E_USER_ERROR);
-    }
+    abstract function get_versiondata($pagename, $version, $want_content = false);
 
     /**
      * Delete page from the database with backup possibility.
      * This should remove all links (from the named page) from
      * the link database.
      *
-     * @param $pagename string Page name.
+     * @param string $pagename Page name.
      * i.e save_page('') and DELETE nonempty id
      * Can be undone and is seen in RecentChanges.
      */
     function delete_page($pagename)
     {
+        /**
+         * @var WikiRequest $request
+         */
+        global $request;
+
         $mtime = time();
-        $user =& $GLOBALS['request']->_user;
+        $user =& $request->_user;
         $vdata = array('author' => $user->getId(),
             'author_id' => $user->getAuthenticatedId(),
             'mtime' => $mtime);
@@ -194,7 +187,7 @@ class WikiDB_backend
         $this->lock(); // critical section:
         $version = $this->get_latest_version($pagename);
         $this->set_versiondata($pagename, $version + 1, $vdata);
-        $this->set_links($pagename, false); // links are purged.
+        $this->set_links($pagename, array()); // links are purged.
         // SQL needs to invalidate the non_empty id
         if (!WIKIDB_NOCACHE_MARKUP) {
             // need the hits, perms and LOCKED, otherwise you can reset the perm
@@ -209,11 +202,9 @@ class WikiDB_backend
     /**
      * Delete page (and all its revisions) from the database.
      *
+     * @param string $pagename Page name.
      */
-    function purge_page($pagename)
-    {
-        trigger_error("virtual", E_USER_ERROR);
-    }
+    abstract function purge_page($pagename);
 
     /**
      * Delete an old revision of a page.
@@ -224,13 +215,10 @@ class WikiDB_backend
      * In fact, to be safe, backends should probably allow the deletion of
      * the most recent version.
      *
-     * @param $pagename string Page name.
-     * @param $version integer Version to delete.
+     * @param string $pagename Page name.
+     * @param int $version int Version to delete.
      */
-    function delete_versiondata($pagename, $version)
-    {
-        trigger_error("virtual", E_USER_ERROR);
-    }
+    abstract function delete_versiondata($pagename, $version);
 
     /**
      * Create a new page revision.
@@ -238,27 +226,24 @@ class WikiDB_backend
      * If the given ($pagename,$version) is already in the database,
      * this method completely overwrites any stored data for that version.
      *
-     * @param $pagename string Page name.
-     * @param $version int New revisions content.
-     * @param $data hash New revision metadata.
+     * @param string $pagename string Page name.
+     * @param int $version New revisions content.
+     * @param array $data hash New revision metadata.
      *
      * @see get_versiondata
      */
-    function set_versiondata($pagename, $version, $data)
-    {
-        trigger_error("virtual", E_USER_ERROR);
-    }
+    abstract function set_versiondata($pagename, $version, $data);
 
     /**
      * Update page version meta-data.
      *
      * If the given ($pagename,$version) is already in the database,
      * this method only changes those meta-data values whose keys are
-     * explicity listed in $newdata.
+     * explicitly listed in $newdata.
      *
-     * @param $pagename string Page name.
-     * @param $version int New revisions content.
-     * @param $newdata hash New revision metadata.
+     * @param string $pagename Page name.
+     * @param int $version New revisions content.
+     * @param array $newdata hash New revision metadata.
      * @see set_versiondata, get_versiondata
      */
     function update_versiondata($pagename, $version, $newdata)
@@ -280,14 +265,11 @@ class WikiDB_backend
     /**
      * Set links for page.
      *
-     * @param $pagename string Page name.
+     * @param string $pagename Page name.
      *
-     * @param $links array List of page(names) which page links to.
+     * @param array $links List of page(names) which page links to.
      */
-    function set_links($pagename, $links)
-    {
-        trigger_error("virtual", E_USER_ERROR);
-    }
+    abstract function set_links($pagename, $links);
 
     /**
      * Find pages which link to or are linked from a page.
@@ -303,17 +285,14 @@ class WikiDB_backend
      * @return object A WikiDB_backend_iterator.
      */
 
-    function get_links($pagename, $reversed, $include_empty = false,
-                       $sortby = '', $limit = '', $exclude = '')
-    {
-        //FIXME: implement simple (but slow) link finder.
-        die("FIXME get_links");
-    }
+    // FIXME: implement simple (but slow) link finder.
+    abstract function get_links($pagename, $reversed = true, $include_empty = false,
+                                $sortby = '', $limit = '', $exclude = '');
 
     /**
      * Get all revisions of a page.
      *
-     * @param $pagename string The page name.
+     * @param string $pagename The page name.
      * @return object A WikiDB_backend_iterator.
      */
     function get_all_revisions($pagename)
@@ -326,9 +305,9 @@ class WikiDB_backend
      * Get all pages in the database.
      *
      * Pages should be returned in alphabetical order if that is
-     * feasable.
+     * feasible.
      *
-     * @param bool $include_defaulted
+     * @param bool $include_empty
      * If set, even pages with no content will be returned
      * --- but still only if they have at least one revision (not
      * counting the default revision 0) entered in the database.
@@ -337,15 +316,13 @@ class WikiDB_backend
      * are not returned as these pages are considered to be
      * non-existing.
      *
-     * @param bool $orderby
+     * @param string $sortby
      * @param string $limit
      * @param string $exclude
      * @return object A WikiDB_backend_iterator.
      */
-    protected function get_all_pages($include_defaulted, $orderby = false, $limit = '', $exclude = '')
-    {
-        trigger_error("virtual", E_USER_ERROR);
-    }
+    abstract public function get_all_pages($include_empty,
+                                           $sortby = '', $limit = '', $exclude = '');
 
     /**
      * Title or full text search.
@@ -367,8 +344,8 @@ class WikiDB_backend
      *
      * @see WikiDB::titleSearch
      */
-    protected function text_search($search, $fulltext = false, $sortby = '',
-                         $limit = '', $exclude = '')
+    public function text_search($search, $fulltext = false,
+                                $sortby = '', $limit = '', $exclude = '')
     {
         // This method implements a simple linear search
         // through all the pages in the database.
@@ -411,7 +388,7 @@ class WikiDB_backend
      * @param  string $sortby
      * @return object  A WikiDB_backend_iterator.
      */
-    protected function most_popular($limit, $sortby = '-hits')
+    public function most_popular($limit = 20, $sortby = '-hits')
     {
         // This is method fetches all pages, then
         // sorts them by hit count.
@@ -427,12 +404,12 @@ class WikiDB_backend
     /**
      * Find recent changes.
      *
-     * @param object $params hash See WikiDB::mostRecent for a description
+     * @param array $params hash See WikiDB::mostRecent for a description
      *  of parameters which can be included in this hash.
      * @return object A WikiDB_backend_iterator.
      * @see WikiDB::mostRecent
      */
-    protected function most_recent($params)
+    public function most_recent($params)
     {
         // This method is very inefficient and searches through
         // all pages for the most recent changes.
@@ -456,35 +433,30 @@ class WikiDB_backend
      *
      * Calls may be nested.
      *
-     * @param $write_lock boolean Unless this is set to false, a write lock
+     * @param array $tables
+     * @param bool $write_lock Unless this is set to false, a write lock
      *     is acquired, otherwise a read lock.  If the backend doesn't support
      *     read locking, then it should make a write lock no matter which type
      *     of lock was requested.
      *
      *     All backends <em>should</em> support write locking.
      */
-    function lock($write_lock = true)
-    {
-    }
+    abstract function lock($tables = array(), $write_lock = true);
 
     /**
      * Unlock backend database.
      *
-     * @param $force boolean Normally, the database is not unlocked until
+     * @param array $tables
+     * @param bool $force Normally, the database is not unlocked until
      *  unlock() is called as many times as lock() has been.  If $force is
      *  set to true, the the database is unconditionally unlocked.
      */
-    function unlock($force = false)
-    {
-    }
-
+    abstract function unlock($tables = array(), $force = false);
 
     /**
      * Close database.
      */
-    function close()
-    {
-    }
+    abstract function close();
 
     /**
      * Synchronize with filesystem.
@@ -497,9 +469,12 @@ class WikiDB_backend
 
     /**
      * Optimize the database.
+     *
+     * @return bool
      */
     function optimize()
     {
+        return true;
     }
 
     /**
@@ -512,7 +487,7 @@ class WikiDB_backend
      * </pre>
      *
      * @param bool $args
-     * @return boolean True iff database is in a consistent state.
+     * @return bool True iff database is in a consistent state.
      */
     function check($args = false)
     {
@@ -526,11 +501,15 @@ class WikiDB_backend
      * (I.e. rebuild indexes, etc...)
      *
      * @param bool $args
-     * @return boolean True iff successful.
+     * @return bool True iff successful.
      */
     function rebuild($args = false)
     {
+        /**
+         * @var WikiRequest $request
+         */
         global $request;
+
         $dbh = $request->getDbh();
         $iter = $dbh->getAllPages(false);
         while ($page = $iter->next()) {
@@ -568,42 +547,50 @@ class WikiDB_backend
         return array($words, $exclude);
     }
 
-    /**
+    /*
      * Split the given limit parameter into offset,limit. (offset is optional. default: 0)
      * Duplicate the PageList function here to avoid loading the whole PageList.php
      * Usage:
      *   list($offset,$count) = $this->limit($args['limit']);
      */
-    function limit($limit)
+    static function limit($limit)
     {
         if (strstr($limit, ',')) {
             list($from, $limit) = explode(',', $limit);
             if ((!empty($from) && !is_numeric($from)) or (!empty($limit) && !is_numeric($limit))) {
-                return $this->error(_("Illegal 'limit' argument: must be numeric"));
+                trigger_error(_("Illegal “limit” argument: must be an integer or two integers separated by comma"));
+                return array(0, 0);
             }
             return array($from, $limit);
         } else {
             if (!empty($limit) && !is_numeric($limit)) {
-                return $this->error(_("Illegal 'limit' argument: must be numeric"));
+                trigger_error(_("Illegal “limit” argument: must be an integer or two integers separated by comma"));
+                return array(0, 0);
             }
             return array(0, $limit);
         }
     }
 
-    /**
+    /*
      * Handle sortby requests for the DB iterator and table header links.
      * Prefix the column with + or - like "+pagename","-mtime", ...
      * supported actions: 'flip_order' "mtime" => "+mtime" => "-mtime" ...
      *                    'db'         "-pagename" => "pagename DESC"
-     * In PageList all columns are sortable. (patch by DanFr)
+     * In PageList all columns are sortable. (patch by Dan Frankowski)
      * Here with the backend only some, the rest is delayed to PageList.
      * (some kind of DumbIter)
      * Duplicate the PageList function here to avoid loading the whole
      * PageList.php, and it forces the backend specific sortable_columns()
      */
-    function sortby($column, $action, $sortable_columns = false)
+    function sortby($column, $action, $sortable_columns = array())
     {
-        if (empty($column)) return '';
+        /**
+         * @var WikiRequest $request
+         */
+        global $request;
+
+        if (empty($column))
+            return '';
         //support multiple comma-delimited sortby args: "+hits,+pagename"
         if (strstr($column, ',')) {
             $result = array();
@@ -635,8 +622,8 @@ class WikiDB_backend
             return $order . $column;
         } elseif ($action == 'check') {
             return (!empty($this->_sortby[$column]) or
-                ($GLOBALS['request']->getArg('sortby') and
-                    strstr($GLOBALS['request']->getArg('sortby'), $column)));
+                ($request->getArg('sortby') and
+                    strstr($request->getArg('sortby'), $column)));
         } elseif ($action == 'db') {
             // native sort possible?
             if (!empty($this) and !$sortable_columns)
@@ -713,8 +700,10 @@ class WikiDB_backend
  * FIXME: This might be two separate classes: page_iter and version_iter.
  * For the versions we have WikiDB_backend_dumb_AllRevisionsIter.
  */
-class WikiDB_backend_iterator
+abstract class WikiDB_backend_iterator
 {
+    public $_options;
+
     /**
      * Get the next record in the iterator set.
      *
@@ -734,10 +723,7 @@ class WikiDB_backend_iterator
      *
      * If this is a link iterator, the 'pagename' is mandatory, 'linkrelation' is optional.
      */
-    function next()
-    {
-        trigger_error("virtual", E_USER_ERROR);
-    }
+    abstract function next();
 
     function count()
     {
@@ -843,11 +829,6 @@ class WikiDB_backend_search
             return true;
         }
         return false;
-    }
-
-    function getStoplisted($word)
-    {
-        return $this->stoplisted;
     }
 }
 

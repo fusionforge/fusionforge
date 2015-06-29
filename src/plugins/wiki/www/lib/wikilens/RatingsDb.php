@@ -22,12 +22,17 @@
  );
 */
 
+/**
+  * @var WikiRequest $request
+  */
+global $request;
+
 // For other than SQL backends. dba + adodb SQL ratings are allowed but deprecated.
 // We will probably drop this hack.
 if (!defined('RATING_STORAGE'))
     // for DATABASE_TYPE=dba and forced RATING_STORAGE=SQL we must use ADODB,
     // but this is problematic.
-    define('RATING_STORAGE', $GLOBALS['request']->_dbi->_backend->isSQL() ? 'SQL' : 'WIKIPAGE');
+    define('RATING_STORAGE', $request->_dbi->_backend->isSQL() ? 'SQL' : 'WIKIPAGE');
 //define('RATING_STORAGE','WIKIPAGE');   // not fully supported yet
 
 // leave undefined for internal, slow php engine.
@@ -55,10 +60,10 @@ class RatingsDb extends WikiDB
         $this->_backend = &$this->_dbi->_backend;
         $this->dimension = null;
         if (RATING_STORAGE == 'SQL') {
-            if (isa($this->_backend, 'WikiDB_backend_PearDB')) {
+            if (is_a($this->_backend, 'WikiDB_backend_PearDB')) {
                 $this->_sqlbackend = &$this->_backend;
                 $this->dbtype = "PearDB";
-            } elseif (isa($this->_backend, 'WikiDB_backend_ADODOB')) {
+            } elseif (is_a($this->_backend, 'WikiDB_backend_ADODOB')) {
                 $this->_sqlbackend = &$this->_backend;
                 $this->dbtype = "ADODB";
             } else {
@@ -83,7 +88,7 @@ class RatingsDb extends WikiDB
     }
 
     // this is a singleton.  It ensures there is only 1 ratingsDB.
-    function & getTheRatingsDb()
+    static function & getTheRatingsDb()
     {
         static $_theRatingsDb;
 
@@ -313,7 +318,7 @@ class RatingsDb extends WikiDB
         }
         if (defined('RATING_EXTERNAL') and RATING_EXTERNAL) {
             // how call mysuggest.exe? as CGI or natively
-            //$rating = HTML::Raw("<!--#include virtual=".RATING_ENGINE." -->");
+            //$rating = HTML::raw("<!--#include virtual=".RATING_ENGINE." -->");
             $args = "-u$user -p$page -malpha"; // --top 10
             if (isset($dimension))
                 $args .= " -d$dimension";
@@ -331,6 +336,11 @@ class RatingsDb extends WikiDB
      */
     function php_prediction($userid = null, $pagename = null, $dimension = null)
     {
+        /**
+         * @var WikiRequest $request
+         */
+        global $request;
+
         if (is_null($dimension)) $dimension = $this->dimension;
         if (is_null($userid)) $userid = $this->userid;
         if (is_null($pagename)) $pagename = $this->pagename;
@@ -338,7 +348,7 @@ class RatingsDb extends WikiDB
             require_once 'lib/wikilens/RatingsUser.php';
             require_once 'lib/wikilens/Buddy.php';
             $user = RatingsUserFactory::getUser($userid);
-            $this->buddies = getBuddies($user, $GLOBALS['request']->_dbi);
+            $this->buddies = getBuddies($user, $request->_dbi);
         }
         return $user->knn_uu_predict($pagename, $this->buddies, $dimension);
     }
@@ -372,7 +382,7 @@ class RatingsDb extends WikiDB
                 $where = "WHERE";
             }
             if (isset($pagename)) {
-                if (defined('FUSIONFORGE') and FUSIONFORGE) {
+                if (defined('FUSIONFORGE') && FUSIONFORGE) {
                     $rateeid = $this->_sqlbackend->_get_pageid($pagename, true);
                     $where .= " rateepage=$rateeid";
                 } else {
@@ -385,7 +395,7 @@ class RatingsDb extends WikiDB
                 $where .= " dimension=$dimension";
             }
             extract($dbi->_table_names);
-            if (defined('FUSIONFORGE') and FUSIONFORGE) {
+            if (defined('FUSIONFORGE') && FUSIONFORGE) {
                 $query = "SELECT AVG(ratingvalue) as avg FROM $rating_tbl " . $where;
             } else {
                 $query = "SELECT AVG(ratingvalue) as avg FROM $rating_tbl r, $page_tbl p " . $where . " GROUP BY raterpage";
@@ -417,7 +427,7 @@ class RatingsDb extends WikiDB
      *                   If this is null (or left off), the search for ratings
      *                   is not restricted by dimension.
      *
-     * @param rater  The page id of the rater, i.e. page doing the rating.
+     * @param int $rater  The page id of the rater, i.e. page doing the rating.
      *               This is a Wiki page id, often of a user page.
      *               Example: "DanFr"
      *               [optional]
@@ -425,21 +435,21 @@ class RatingsDb extends WikiDB
      *               is not restricted by rater.
      *               TODO: Support an array
      *
-     * @param ratee  The page id of the ratee, i.e. page being rated.
+     * @param int $ratee  The page id of the ratee, i.e. page being rated.
      *               Example: "DudeWheresMyCar"
      *               [optional]
      *               If this is null (or left off), the search for ratings
      *               is not restricted by ratee.
      *               TODO: Support an array
      *
-     * @param orderby An order-by clause with fields and (optionally) ASC
+     * @param string $orderby An order-by clause with fields and (optionally) ASC
      *                or DESC.
      *               Example: "ratingvalue DESC"
      *               [optional]
      *               If this is null (or left off), the search for ratings
      *               has no guaranteed order
      *
-     * @param pageinfo The type of page that has its info returned (i.e.,
+     * @param string $pageinfo The type of page that has its info returned (i.e.,
      *               'pagename', 'hits', and 'pagedata') in the rows.
      *               Example: "rater"
      *               [optional]

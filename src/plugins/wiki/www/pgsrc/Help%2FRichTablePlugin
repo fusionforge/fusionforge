@@ -1,5 +1,5 @@
-Date: Tue, 29 Jul 2014 10:42:12 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.0)
+Date: Mon, 29 Jun 2015 12:04:28 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FRichTablePlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -8,7 +8,7 @@ Content-Transfer-Encoding: binary
 
 The **~RichTable** [[Help:WikiPlugin|plugin]] is a plugin that takes off from the [[Help:OldStyleTablePlugin|OldStyleTable]] plugin. It allows a user to specify arbitrary properties of ##<table>##, ##<tr>## and ##<td>## with a very simple markup.
 
-This plugin is included for legacy only. We recommand to
+This plugin is included for legacy only. We recommend to
 use [[Help:MediawikiTablePlugin|Mediawiki tables]] instead.
 
 == Syntax ==
@@ -43,7 +43,7 @@ If there is no cell in the current row, content lines are dropped silently.
 
 === Special characters ===
 
-The two special characters ##"~~"## and ##"?>"## should be escaped as ##"\~~"## and ##"?\>"##. I havn't discovered any other characters yet that might need to be escaped. This is required for the block parser to work.
+The two special characters ##"~~"## and ##"?>"## should be escaped as ##"\~~"## and ##"?\>"##. I haven't discovered any other characters yet that might need to be escaped. This is required for the block parser to work.
 
 === Attributes ===
 

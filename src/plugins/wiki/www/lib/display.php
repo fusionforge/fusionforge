@@ -91,7 +91,7 @@ function actionPage(&$request, $action)
        RecentChanges or AllPages might be an exception.
     */
     $args = array();
-    if (GOOGLE_LINKS_NOFOLLOW) {
+    if (defined('GOOGLE_LINKS_NOFOLLOW') and GOOGLE_LINKS_NOFOLLOW) {
         $robots = "noindex,nofollow";
         $args = array('ROBOTS_META' => $robots);
     }
@@ -157,7 +157,7 @@ function actionPage(&$request, $action)
         if ($format == 'pdf') {
             require_once 'lib/pdf.php';
             array_unshift($args['VALID_LINKS'], $pagename);
-            ConvertAndDisplayPdfPageList($request, $pagelist, $args);
+            ConvertAndDisplayPdfPageList($request, $pagelist);
         } elseif ($format == 'ziphtml') { // need to fix links
             require_once 'lib/loadsave.php';
             array_unshift($args['VALID_LINKS'], $pagename);
@@ -217,7 +217,12 @@ function actionPage(&$request, $action)
     return '';
 }
 
-function displayPage(&$request, $template = false)
+/**
+ * @param WikiRequest $request
+ * @param Template $template
+ * @return string
+ */
+function displayPage(&$request, $template = null)
 {
     global $WikiTheme;
     global $robots;
@@ -260,19 +265,19 @@ function displayPage(&$request, $template = false)
     }
 
     if (isSubPage($pagename)) {
-        $pages = explode(SUBPAGE_SEPARATOR, $pagename);
+        $pages = explode('/', $pagename);
         $last_page = array_pop($pages); // deletes last element from array as side-effect
         $pageheader = HTML::span(HTML::a(array('href' => WikiURL($pages[0]),
                 'class' => 'pagetitle'
             ),
-            $WikiTheme->maybeSplitWikiWord($pages[0] . SUBPAGE_SEPARATOR)));
-        $first_pages = $pages[0] . SUBPAGE_SEPARATOR;
+            $WikiTheme->maybeSplitWikiWord($pages[0] . '/')));
+        $first_pages = $pages[0] . '/';
         array_shift($pages);
         foreach ($pages as $p) {
             $pageheader->pushContent(HTML::a(array('href' => WikiURL($first_pages . $p),
                     'class' => 'backlinks'),
-                $WikiTheme->maybeSplitWikiWord($p . SUBPAGE_SEPARATOR)));
-            $first_pages .= $p . SUBPAGE_SEPARATOR;
+                $WikiTheme->maybeSplitWikiWord($p . '/')));
+            $first_pages .= $p . '/';
         }
         $backlink = HTML::a(array('href' => WikiURL($pagename,
                 array('action' => __("BackLinks"))),
@@ -286,8 +291,6 @@ function displayPage(&$request, $template = false)
                 'class' => 'backlinks'),
             $WikiTheme->maybeSplitWikiWord($pagename));
         $pageheader->addTooltip(sprintf(_("BackLinks for %s"), $pagename));
-        if ($request->getArg('frame'))
-            $pageheader->setAttr('target', '_top');
     }
 
     $pagetitle = SplitPagename($pagename);

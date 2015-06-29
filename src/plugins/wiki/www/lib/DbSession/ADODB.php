@@ -64,6 +64,7 @@ class DbSession_ADODB
         return $this->_dbh->Execute($sql);
     }
 
+    // adds surrounding quotes
     function quote($string)
     {
         return $this->_dbh->qstr($string);
@@ -124,11 +125,12 @@ class DbSession_ADODB
         if (!empty($res) and preg_match('|^[a-zA-Z0-9/+=]+$|', $res))
             $res = base64_decode($res);
         if (strlen($res) > 4000) {
-            trigger_error("Overlarge session data! " . strlen($res) .
-                " gt. 4000", E_USER_WARNING);
+            // trigger_error("Overlarge session data! ".strlen($res). " gt. 4000", E_USER_WARNING);
             $res = preg_replace('/s:6:"_cache";O:12:"WikiDB_cache".+}$/', "", $res);
             $res = preg_replace('/s:12:"_cached_html";s:.+",s:4:"hits"/', 's:4:"hits"', $res);
-            if (strlen($res) > 4000) $res = '';
+            if (strlen($res) > 4000) {
+                $res = '';
+            }
         }
         return $res;
     }
@@ -150,16 +152,21 @@ class DbSession_ADODB
      */
     public function write($id, $sess_data)
     {
+        /**
+         * @var WikiRequest $request
+         */
+        global $request;
+
         if (defined("WIKI_XMLRPC") or defined("WIKI_SOAP")) return false;
 
         $dbh = $this->_connect();
         $table = $this->_table;
         $qid = $dbh->qstr($id);
-        $qip = $dbh->qstr($GLOBALS['request']->get('REMOTE_ADDR'));
+        $qip = $dbh->qstr($request->get('REMOTE_ADDR'));
         $time = $dbh->qstr(time());
 
         // postgres can't handle binary data in a TEXT field.
-        if (isa($dbh, 'ADODB_postgres64'))
+        if (is_a($dbh, 'ADODB_postgres64'))
             $sess_data = base64_encode($sess_data);
         $qdata = $dbh->qstr($sess_data);
 
@@ -227,7 +234,7 @@ class DbSession_ADODB
         return true;
     }
 
-    // WhoIsOnline support.
+    // WhoIsOnline support
     // TODO: ip-accesstime dynamic blocking API
     function currentSessions()
     {

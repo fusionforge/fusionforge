@@ -272,8 +272,8 @@ class WikiDB_backend_file
     /**
      * Get page meta-data from database.
      *
-     * @param $pagename string Page name.
-     * @return hash
+     * @param string $pagename Page name.
+     * @return array hash
      * Returns a hash containing the page meta-data.
      * Returns an empty array if there is no meta-data for the requested page.
      * Keys which might be present in the hash are:
@@ -309,10 +309,9 @@ class WikiDB_backend_file
      *   $backend->update_pagedata($pagename, array('locked' => false));
      * </pre>
      *
-     * @param $pagename string Page name.
-     * @param $newdata hash New meta-data.
-     */
-    /**
+     * @param string $pagename Page name.
+     * @param array $newdata hash New meta-data.
+     *
      * This will create a new page if page being requested does not
      * exist.
      */
@@ -376,7 +375,7 @@ class WikiDB_backend_file
      *  the content, the backend might still want to set the value of
      *  '%content' to the empty string if it knows there's no content.
      *
-     * @return hash The version data, or false if specified version does not
+     * @return array hash The version data, or false if specified version does not
      *    exist.
      *
      * Some keys which might be present in the $versiondata hash are:
@@ -397,7 +396,7 @@ class WikiDB_backend_file
         return $vd;
     }
 
-    /**
+    /*
      * Rename all files for this page
      */
     public function rename_page($pagename, $to)
@@ -414,7 +413,7 @@ class WikiDB_backend_file
         return true;
     }
 
-    /**
+    /*
      * See ADODB for a better delete_page(), which can be undone and is seen in RecentChanges.
      */
     function delete_page($pagename)
@@ -478,9 +477,9 @@ class WikiDB_backend_file
      * If the given ($pagename,$version) is already in the database,
      * this method completely overwrites any stored data for that version.
      *
-     * @param $pagename string Page name.
-     * @param $version int New revisions content.
-     * @param $data hash New revision metadata.
+     * @param string $pagename Page name.
+     * @param int $version New revisions content.
+     * @param array $data hash New revision metadata.
      *
      * @see get_versiondata
      */
@@ -494,11 +493,11 @@ class WikiDB_backend_file
      *
      * If the given ($pagename,$version) is already in the database,
      * this method only changes those meta-data values whose keys are
-     * explicity listed in $newdata.
+     * explicitly listed in $newdata.
      *
-     * @param $pagename string Page name.
-     * @param $version int New revisions content.
-     * @param $newdata hash New revision metadata.
+     * @param string $pagename Page name.
+     * @param int $version New revisions content.
+     * @param array $newdata hash New revision metadata.
      * @see set_versiondata, get_versiondata
      */
     function update_versiondata($pagename, $version, $newdata)
@@ -532,8 +531,13 @@ class WikiDB_backend_file
     /**
      * Find pages which link to or are linked from a page.
      *
-     * @param $pagename string Page name.
-     * @param $reversed boolean True to get backlinks.
+     * @param string $pagename Page name.
+     * @param bool $reversed True to get backlinks.
+     * @param bool $include_empty True to get empty pages
+     * @param string $sortby
+     * @param string $limit
+     * @param string $exclude Pages to exclude.
+     * @param bool $want_relations True to get relations.
      *
      * FIXME: array or iterator?
      * @return object A WikiDB_backend_iterator.
@@ -579,7 +583,7 @@ class WikiDB_backend_file
      * Pages should be returned in alphabetical order if that is
      * feasable.
      *
-     * @param $include_defaulted boolean
+     * @param bool $include_empty
      * If set, even pages with no content will be returned
      * --- but still only if they have at least one revision (not
      * counting the default revision 0) entered in the database.
@@ -587,6 +591,10 @@ class WikiDB_backend_file
      * Normally pages whose current revision has empty content
      * are not returned as these pages are considered to be
      * non-existing.
+     *
+     * @param string $sortby
+     * @param string $limit
+     * @param string $exclude
      *
      * @return object A WikiDB_backend_iterator.
      */
@@ -622,59 +630,42 @@ class WikiDB_backend_file
         return count($this->_latest_versions);
     }
 
-    /**
+    /*
      * Lock backend database.
-     *
-     * Calls may be nested.
-     *
-     * @param $write_lock boolean Unless this is set to false, a write lock
-     *     is acquired, otherwise a read lock.  If the backend doesn't support
-     *     read locking, then it should make a write lock no matter which type
-     *     of lock was requested.
-     *
-     *     All backends <em>should</em> support write locking.
      */
-    function lock($write_lock = true)
+    function lock($tables = array(), $write_lock = true)
     {
-        //trigger_error("lock: Not Implemented", E_USER_WARNING);
     }
 
-    /**
+    /*
      * Unlock backend database.
-     *
-     * @param $force boolean Normally, the database is not unlocked until
-     *  unlock() is called as many times as lock() has been.  If $force is
-     *  set to true, the the database is unconditionally unlocked.
      */
-    function unlock($force = false)
+    function unlock($tables = array(), $force = false)
     {
-        //trigger_error("unlock: Not Implemented", E_USER_WARNING);
     }
 
-    /**
+    /*
      * Close database.
      */
     function close()
     {
-        //trigger_error("close: Not Implemented", E_USER_WARNING);
     }
 
-    /**
+    /*
      * Synchronize with filesystem.
      *
      * This should flush all unwritten data to the filesystem.
      */
     function sync()
     {
-        //trigger_error("sync: Not Implemented", E_USER_WARNING);
     }
 
-    /**
+    /*
      * Optimize the database.
      */
     function optimize()
     {
-        return 0; //trigger_error("optimize: Not Implemented", E_USER_WARNING);
+        return true; //trigger_error("optimize: Not Implemented", E_USER_WARNING);
     }
 
     /**

@@ -41,6 +41,13 @@ class WikiPlugin_DebugAuthInfo
         return array('userid' => '');
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         $args = $this->getArgs($argstr, $request);
@@ -60,7 +67,7 @@ class WikiPlugin_DebugAuthInfo
         $table = HTML::table(array('class' => 'bordered'));
         $table->pushContent($this->show_hash("AUTH DEFINES",
             $this->buildConstHash(
-                array("ENABLE_USER_NEW", "ALLOW_ANON_USER",
+                array("ALLOW_ANON_USER",
                     "ALLOW_ANON_EDIT", "ALLOW_BOGO_LOGIN",
                     "REQUIRE_SIGNIN_BEFORE_EDIT", "ALLOW_USER_PASSWORDS",
                     "PASSWORD_LENGTH_MINIMUM", "USE_DB_SESSION"))));
@@ -95,30 +102,41 @@ class WikiPlugin_DebugAuthInfo
         } else {
             $table = HTML::table(array('class' => 'bordered'));
             //$table->pushContent(HTML::tr(HTML::td(array('colspan' => 2))));
-            $userdata = obj2hash($user, array('_dbi', '_request', 'password', 'passwd'));
-            if (isa($user, "_FilePassUser")) {
+            $userdata = $this->obj2hash($user, array('_dbi', '_request', 'password', 'passwd'));
+            if (is_a($user, "_FilePassUser")) {
                 foreach ($userdata['_file']->users as $u => $p) {
                     $userdata['_file']->users[$u] = "<hidden>";
                 }
             }
             $table->pushContent($this->show_hash("User: Object of " . get_class($user), $userdata));
-            if (ENABLE_USER_NEW) {
-                $group = &$request->getGroup();
-                $groups = $group->getAllGroupsIn();
-                $groupdata = obj2hash($group, array('_dbi', '_request', 'password', 'passwd'));
-                unset($groupdata['request']);
-                $table->pushContent($this->show_hash("Group: Object of " . get_class($group), $groupdata));
-                $groups = $group->getAllGroupsIn();
-                $groupdata = array('getAllGroupsIn' => $groups);
-                foreach ($groups as $g) {
-                    $groupdata["getMembersOf($g)"] = $group->getMembersOf($g);
-                    $groupdata["isMember($g)"] = $group->isMember($g);
-                }
-                $table->pushContent($this->show_hash("Group Methods: ", $groupdata));
+            $group = &$request->getGroup();
+            $groupdata = $this->obj2hash($group, array('_dbi', '_request', 'password', 'passwd'));
+            unset($groupdata['request']);
+            $table->pushContent($this->show_hash("Group: Object of " . get_class($group), $groupdata));
+            $groups = $group->getAllGroupsIn();
+            $groupdata = array('getAllGroupsIn' => $groups);
+            foreach ($groups as $g) {
+                $groupdata["getMembersOf($g)"] = $group->getMembersOf($g);
+                $groupdata["isMember($g)"] = $group->isMember($g);
             }
+            $table->pushContent($this->show_hash("Group Methods: ", $groupdata));
             $html->pushContent($table);
         }
         return $html;
+    }
+
+    // needed to store serialized objects-values only (perm, pref)
+    private function obj2hash($obj, $exclude = array())
+    {
+        $a = array();
+        $fields = get_object_vars($obj);
+        foreach ($fields as $key => $val) {
+            if (in_array($key, $exclude)) {
+                continue;
+            }
+            $a[$key] = $val;
+        }
+        return $a;
     }
 
     private function show_hash($heading, $hash, $depth = 0)
@@ -127,7 +145,9 @@ class WikiPlugin_DebugAuthInfo
         static $max_depth = 0;
         $rows = array();
         $max_depth++;
-        if ($max_depth > 35) return $heading;
+        if ($max_depth > 100) {
+            return HTML();
+        }
 
         if ($heading)
             $rows[] = HTML::tr(array(
@@ -136,23 +156,29 @@ class WikiPlugin_DebugAuthInfo
                         'style' => 'color:black'),
                     $heading));
         if (is_object($hash))
-            $hash = obj2hash($hash);
+            $hash = $this->obj2hash($hash);
         if (!empty($hash)) {
             ksort($hash);
             foreach ($hash as $key => $val) {
                 if (is_object($val)) {
                     $heading = "Object of " . get_class($val);
-                    if ($depth > 3) $val = $heading;
-                    elseif ($heading == "Object of wikidb_sql") $val = $heading; elseif (substr($heading, 0, 13) == "Object of db_") $val = $heading; elseif (!isset($seen[$heading])) {
+                    if ($depth > 3)
+                        $val = $heading;
+                    elseif ($heading == "Object of wikidb_sql")
+                        $val = $heading;
+                    elseif (substr($heading, 0, 13) == "Object of db_")
+                        $val = $heading;
+                    elseif (!isset($seen[$heading])) {
                         //if (empty($seen[$heading])) $seen[$heading] = 1;
                         $val = HTML::table(array('class' => 'bordered'),
-                            $this->show_hash($heading, obj2hash($val), $depth + 1));
+                            $this->show_hash($heading, $this->obj2hash($val), $depth + 1));
                     } else {
                         $val = $heading;
                     }
                 } elseif (is_array($val)) {
                     $heading = $key . "[]";
-                    if ($depth > 3) $val = $heading;
+                    if ($depth > 3)
+                        $val = $heading;
                     elseif (!isset($seen[$heading])) {
                         //if (empty($seen[$heading])) $seen[$heading] = 1;
                         $val = HTML::table(array('class' => 'bordered'),
@@ -180,8 +206,10 @@ class WikiPlugin_DebugAuthInfo
         $hash = array();
         foreach ($constants as $c) {
             $hash[$c] = defined($c) ? constant($c) : '<empty>';
-            if ($hash[$c] === false) $hash[$c] = 'false';
-            elseif ($hash[$c] === true) $hash[$c] = 'true';
+            if ($hash[$c] === false)
+                $hash[$c] = 'false';
+            elseif ($hash[$c] === true)
+                $hash[$c] = 'true';
         }
         return $hash;
     }

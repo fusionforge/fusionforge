@@ -1,4 +1,23 @@
 <?php
+/*
+ * Copyright 2005 $ThePhpWikiProgrammingTeam
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
 
 /**
  * DB sessions for pear DB
@@ -15,9 +34,8 @@ class DbSession_SQL
 {
     public $_backend_type = "SQL";
 
-    function __construct(&$dbh, $table)
+    function __construct($dbh, $table)
     {
-
         $this->_dbh = $dbh;
         $this->_table = $table;
 
@@ -106,16 +124,18 @@ class DbSession_SQL
         $res = $dbh->getOne("SELECT sess_data FROM $table WHERE sess_id=$qid");
 
         $this->_disconnect();
-        if (DB::isError($res) || empty($res))
+        if (DB::isError($res) || empty($res)) {
             return '';
-        if (isa($dbh, 'DB_pgsql'))
-            //if (preg_match('|^[a-zA-Z0-9/+=]+$|', $res))
+        }
+        if (is_a($dbh, 'DB_pgsql'))
             $res = base64_decode($res);
         if (strlen($res) > 4000) {
             // trigger_error("Overlarge session data! ".strlen($res). " gt. 4000", E_USER_WARNING);
             $res = preg_replace('/s:6:"_cache";O:12:"WikiDB_cache".+}$/', "", $res);
             $res = preg_replace('/s:12:"_cached_html";s:.+",s:4:"hits"/', 's:4:"hits"', $res);
-            if (strlen($res) > 4000) $res = '';
+            if (strlen($res) > 4000) {
+                $res = '';
+            }
         }
         return $res;
     }
@@ -137,23 +157,27 @@ class DbSession_SQL
      */
     public function write($id, $sess_data)
     {
+        /**
+         * @var WikiRequest $request
+         */
+        global $request;
+
         if (defined("WIKI_XMLRPC") or defined("WIKI_SOAP")) return false;
 
         $dbh = $this->_connect();
-        //$dbh->unlock(false,1);
         $table = $this->_table;
         $qid = $dbh->quote($id);
-        $qip = $dbh->quote($GLOBALS['request']->get('REMOTE_ADDR'));
+        $qip = $dbh->quote($request->get('REMOTE_ADDR'));
         $time = $dbh->quote(time());
         if (DEBUG and $sess_data == 'wiki_user|N;') {
             trigger_error("delete empty session $qid", E_USER_WARNING);
         }
         // postgres can't handle binary data in a TEXT field.
-        if (isa($dbh, 'DB_pgsql'))
+        if (is_a($dbh, 'DB_pgsql'))
             $sess_data = base64_encode($sess_data);
         $qdata = $dbh->quote($sess_data);
 
-        /* AffectedRows with sessions seems to be instable on certain platforms.
+        /* AffectedRows with sessions seems to be unstable on certain platforms.
          * Enable the safe and slow USE_SAFE_DBSESSION then.
          */
         if (USE_SAFE_DBSESSION) {

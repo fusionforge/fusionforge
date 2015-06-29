@@ -1,9 +1,9 @@
 REQUIREMENTS
 
-PhpWiki 1.5.0 requires a web server with at least PHP version 5.3.
+PhpWiki 1.5.4 requires a web server with at least PHP version 5.3.
 
 All users of PHP are strongly encouraged to upgrade to
-PHP 5.3.28 or to PHP 5.4 or 5.5.
+PHP 5.3.29 or to PHP 5.4 or 5.5.
 
 Visit <http://www.php.net> and <http://php.net/downloads.php> 
 for downloads and information.
@@ -61,7 +61,7 @@ under the root of your PhpWiki installation.
 
 Unzip this file into the directory where you want it to live. That's it.
 
-bash$ unzip phpwiki-1.5.0.zip
+bash$ unzip phpwiki-1.5.4.zip
 
 In the config subdirectory copy 'config-dist.ini' to 'config.ini' and
 edit the settings in 'config.ini' to your liking.

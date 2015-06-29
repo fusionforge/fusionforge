@@ -29,7 +29,7 @@
  * libnss-mysql.
  *
  * We support only the SQL and ADODB backends.
- * The other WikiDB backends (flat, cvs, dba, ...) should be used for pages,
+ * The other WikiDB backends (flat, dba, ...) should be used for pages,
  * not for auth stuff. If one would like to use e.g. dba for auth, he should
  * use PearDB (SQL) with the right $DBAuthParam['auth_dsn'].
  * (Not supported yet, since we require SQL. SQLite would make since when
@@ -51,6 +51,11 @@ class _DbPassUser
     // sets the auth_dbi and pref methods, before this class is initialized.
     function _DbPassUser($UserName = '', $prefs = false)
     {
+        /**
+         * @var WikiRequest $request
+         */
+        global $request;
+
         if (!$this->_prefs) {
             if ($prefs) $this->_prefs = $prefs;
         }
@@ -63,7 +68,7 @@ class _DbPassUser
         $this->_authmethod = 'Db';
         //$this->getAuthDbh();
         //$this->_auth_crypt_method = @$GLOBALS['DBAuthParams']['auth_crypt_method'];
-        $dbi =& $GLOBALS['request']->_dbi;
+        $dbi =& $request->_dbi;
         $dbtype = $dbi->getParam('dbtype');
         if ($dbtype == 'ADODB') {
             include_once 'lib/WikiUser/AdoDb.php';

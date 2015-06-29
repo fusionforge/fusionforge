@@ -6,7 +6,7 @@ if ($user->isAdmin() or $user->getId() == $COMMENT_CREATOR) {
     $buttons = HTML::small(array('class' => 'floatleft'),
                            Button('edit', false, $page));
     if ($user->isAdmin())
-	$buttons->pushContent($SEP, Button('remove', _("Remove Comment"), $page));
+        $buttons->pushContent($SEP, Button('remove', _("Remove Comment"), $page));
 }
 
 // This is a hack, but since we only have a fake PageRevision,
@@ -14,8 +14,8 @@ if ($user->isAdmin() or $user->getId() == $COMMENT_CREATOR) {
 if ($rev->get('mtime') != $COMMENT_CTIME) {
     $mtime = $WikiTheme->formatDateTime($rev->get('mtime'));
     $modified = HTML::small(array('class' => 'floatright'),
-			    fmt("Modified on %s by %s",
-				$mtime, $rev->get('author')));
+                fmt("Modified on %s by %s",
+                $mtime, $rev->get('author')));
 }
 ?>
 

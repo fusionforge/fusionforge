@@ -15,8 +15,8 @@ if ($user->isAdmin() or $user->getId() == $BLOG_CREATOR) {
 if ($rev->get('mtime') != $BLOG_CTIME) {
     $mtime = $WikiTheme->formatDateTime($rev->get('mtime'));
     $modified = HTML::small(array('class' => 'floatright'),
-			    fmt("Comment modified on %s by %s",
-				$mtime, $rev->get('author')));
+                fmt("Comment modified on %s by %s",
+                $mtime, $rev->get('author')));
 }
 ?>
 <div title="<?php echo fmt("Comments on %s by %s.", $BLOG_PARENT, $BLOG_CREATOR)?>"
@@ -27,9 +27,9 @@ if ($rev->get('mtime') != $BLOG_CTIME) {
     <br class="clear-floats" />
   </div>
   <div class="wikiblog-body">
-    <?php if ($rev->get('summary')) { ?> 
+    <?php if ($rev->get('summary')) { ?>
       <h3 class="wikiblog-summary"><?php echo $rev->get('summary') ?></h3>
-    <?php } ?>  
+    <?php } ?>
     <?php echo $CONTENT ?>
   </div>
 

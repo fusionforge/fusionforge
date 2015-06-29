@@ -153,6 +153,30 @@ caption {
     white-space: nowrap;
 }
 
+table.sortable th.header {
+    background-image: url(../default/buttons/sort_none.gif);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}
+
+table.sortable th.headerSortUp {
+    background-image: url(../default/buttons/sort_up.gif);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}
+
+table.sortable th.headerSortDown {
+    background-image: url(../default/buttons/sort_down.gif);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}
+
 /**
  * Wiki Forms
  *
@@ -389,6 +413,15 @@ input.gridbutton, a.gridbutton, a:hover.gridbutton, a:visited.gridbutton {
 /**
  * Toolbar
  */
+
+img.toolbar:hover {
+    cursor: pointer;
+}
+
+input.toolbar {
+    margin: 0;
+}
+
 input.button {
     font-family: Verdana, Arial, Helvetica, sans-serif;
 }
@@ -446,13 +479,6 @@ nav ul {
     margin-right: 10px;
 }
 
-/* Smaller for IE6 and IE7: else moves the area down */
-.ie67 #actionbuttons li {
-    padding-left: 0.2em;
-    padding-right: 0.2em;
-    margin-right: 5px;
-}
-
 #actionbuttons li.bold a {
     font-weight: bold;
 }
@@ -482,11 +508,6 @@ textarea.wikiedit {
     margin-bottom: 0.5ex;
     margin-top: 0.5ex;
     padding: 2px;
-}
-
-/* Not for IE6 and IE7: moves the area down */
-.ie67 textarea.wikiedit {
-    width: auto;
 }
 
 #editarea-size {
@@ -775,8 +796,6 @@ div.information {
     text-align: left;
     background-repeat: no-repeat;
     background-position: 10px;
-    -moz-border-radius: 1em;
-    -webkit-border-radius: 1em;
     border-radius: 1em;
     padding: 10px 10px 10px 50px;
 }
@@ -784,7 +803,7 @@ div.information {
 div.success, div.feedback,
 p.success, p.feedback {
     color: #4F8A10;
-    background-image: url('/themes/base-alcatel-lucent/images/success.png');
+    background-image: url('images/success.png');
 }
 
 div.feedback p, div.feedback li,
@@ -795,7 +814,7 @@ div.success p, div.success li {
 div.warning, div.warning_msg,
 p.warning, p.warning_msg {
     color: #9F6000;
-    background-image: url('/themes/base-alcatel-lucent/images/warning.png');
+    background-image: url('images/warning.png');
 }
 
 div.warning p, div.warning_msg p,
@@ -806,7 +825,7 @@ div.warning li, div.warning_msg li {
 div.error,
 p.error {
     color: #D8000C;
-    background-image: url('/themes/base-alcatel-lucent/images/error.png');
+    background-image: url('images/error.png');
 }
 
 div.error p,
@@ -817,7 +836,7 @@ div.error li {
 div.information,
 p.information {
     color: #00529B;
-    background-image: url('/themes/base-alcatel-lucent/images/info.png');
+    background-image: url('images/info.png');
 }
 
 .error, .warning, .debug, .hint {
@@ -997,7 +1016,7 @@ div.wikicomment div.wikicomment-footer {
     padding: 0.2ex 0.5em;
 }
 
-div.wikicomment div.wikicomment-footer named-wiki {
+div.wikicomment div.wikicomment-footer .named-wiki {
     font-size: small;
 }
 
@@ -1038,7 +1057,6 @@ table.interwiki-map {
 
 .dialog div.message {
     background-color: white;
-    color: black;
     color: black;
     margin: 0 1em;
     padding: 0.5em 0.5em;
@@ -1308,11 +1326,3 @@ td.tdunselected {
     font-weight: bold;
     vertical-align: middle;
 }
-
-/* For emacs users
- *
- * Local Variables:
- * mode: c
- * c-file-style: cc-mode
- * End:
- */

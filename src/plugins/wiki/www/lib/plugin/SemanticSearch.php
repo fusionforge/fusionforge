@@ -54,6 +54,12 @@ require_once 'lib/SemanticWeb.php';
 class WikiPlugin_SemanticSearch
     extends WikiPlugin
 {
+    public $_norelations_warning;
+    public $_supported_operators;
+    public $_text_operators;
+    public $_links;
+    public $current_row;
+
     function getDescription()
     {
         return _("Search relations and attributes.");
@@ -91,7 +97,6 @@ class WikiPlugin_SemanticSearch
             'value' => $args['page'],
             'title' => _("Search only in these pages. With autocompletion."),
             'class' => 'dropdown',
-            'acdropdown' => 'true',
             'autocomplete_complete' => 'true',
             'autocomplete_matchsubstring' => 'false',
             'autocomplete_list' => 'xmlrpc:wiki.titleSearch ^[S] 4'
@@ -104,7 +109,6 @@ class WikiPlugin_SemanticSearch
             'title' => _("Filter by this relation. With autocompletion."),
             'class' => 'dropdown',
             'style' => 'width:10em',
-            'acdropdown' => 'true',
             'autocomplete_assoc' => 'false',
             'autocomplete_complete' => 'true',
             'autocomplete_matchsubstring' => 'true',
@@ -114,7 +118,6 @@ class WikiPlugin_SemanticSearch
             'value' => $args['s'],
             'title' => _("Filter by this link. These are pagenames. With autocompletion."),
             'class' => 'dropdown',
-            'acdropdown' => 'true',
             'autocomplete_complete' => 'true',
             'autocomplete_matchsubstring' => 'true',
             'autocomplete_list' => 'xmlrpc:wiki.titleSearch ^[S] 4'
@@ -145,10 +148,10 @@ class WikiPlugin_SemanticSearch
                 HTML::colgroup(array('span' => 6)),
                 HTML::thead
                 (HTML::tr(
-                    HTML::th('Pagefilter'),
-                    HTML::th('Relation'),
+                    HTML::th(_('Pagefilter')),
+                    HTML::th(_('Relation')),
                     HTML::th(),
-                    HTML::th('Links'),
+                    HTML::th(_('Links')),
                     HTML::th()
                 )),
                 HTML::tbody
@@ -174,7 +177,6 @@ class WikiPlugin_SemanticSearch
             'title' => _("Filter by this attribute name. With autocompletion."),
             'class' => 'dropdown',
             'style' => 'width:10em',
-            'acdropdown' => 'true',
             'autocomplete_complete' => 'true',
             'autocomplete_matchsubstring' => 'true',
             'autocomplete_assoc' => 'false',
@@ -186,7 +188,6 @@ class WikiPlugin_SemanticSearch
             'title' => _("Comparison operator. With autocompletion."),
             'class' => 'dropdown',
             'style' => 'width:2em',
-            'acdropdown' => 'true',
             'autocomplete_complete' => 'true',
             'autocomplete_matchsubstring' => 'true',
             'autocomplete_assoc' => 'false',
@@ -196,7 +197,6 @@ class WikiPlugin_SemanticSearch
             'value' => $args['s'],
             'title' => _("Filter by this numeric attribute value. With autocompletion."), //?
             'class' => 'dropdown',
-            'acdropdown' => 'false',
             'autocomplete_complete' => 'true',
             'autocomplete_matchsubstring' => 'false',
             'autocomplete_assoc' => 'false',
@@ -228,10 +228,10 @@ class WikiPlugin_SemanticSearch
                 HTML::colgroup(array('span' => 6)),
                 HTML::thead
                 (HTML::tr(
-                    HTML::th('Pagefilter'),
-                    HTML::th('Attribute'),
-                    HTML::th('Op'),
-                    HTML::th('Value'),
+                    HTML::th(_('Pagefilter')),
+                    HTML::th(_('Attribute')),
+                    HTML::th(_('Op')),
+                    HTML::th(_('Value')),
                     HTML::th()
                 )),
                 HTML::tbody
@@ -266,6 +266,13 @@ class WikiPlugin_SemanticSearch
         return new TextSearchQuery($string, $case_exact, $regex);
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         $this->_supported_operators = array(':=', '<', '<=', '>', '>=', '!=', '==', '=~');
@@ -438,7 +445,7 @@ class _PageList_Column_SemanticSearch_relation
         $this->_pagelist =& $pagelist;
     }
 
-    function _getValue(&$page, $revision_handle)
+    function _getValue($page, $revision_handle)
     {
         $link = $this->_pagelist->_links[$this->current_row];
         return WikiLink($link['linkname'], 'if_known');
@@ -448,7 +455,7 @@ class _PageList_Column_SemanticSearch_relation
 class _PageList_Column_SemanticSearch_link
     extends _PageList_Column_SemanticSearch_relation
 {
-    function _getValue(&$page, $revision_handle)
+    function _getValue($page, $revision_handle)
     {
         $link = $this->_pagelist->_links[$this->current_row];
         if ($this->_field != 'value')

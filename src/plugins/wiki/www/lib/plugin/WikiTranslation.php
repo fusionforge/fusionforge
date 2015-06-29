@@ -95,8 +95,6 @@ $pgsrc_container =
     _("FindPage") . ',' .
     _("FoafViewer") . ',' .
     _("FoafViewerPlugin") . ',' .
-    _("FrameInclude") . ',' .
-    _("FrameIncludePlugin") . ',' .
     _("FullRecentChanges") . ',' .
     _("FullTextSearch") . ',' .
     _("FuzzyPages") . ',' .
@@ -215,7 +213,6 @@ $pgsrc_container =
     _("VisualWiki") . ',' .
     _("WabiSabi") . ',' .
     _("WantedPages") . ',' .
-    _("WantedPagesOld") . ',' .
     _("WatchPage") . ',' .
     _("WhoIsOnline") . ',' .
     _("WikiAdminChown") . ',' .
@@ -246,6 +243,10 @@ require_once 'lib/PageList.php';
 class WikiPlugin_WikiTranslation
     extends WikiPlugin
 {
+    public $lang;
+    public $_locales;
+    public $_reverse_locales;
+    public $args;
 
     function getDescription()
     {
@@ -356,6 +357,13 @@ class WikiPlugin_WikiTranslation
         return $result;
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         $this->args = $this->getArgs($argstr, $request);
@@ -488,6 +496,11 @@ class _PageList_Column_customlang extends _PageList_Column
 {
     function _PageList_Column_customlang($field, $from_lang, $plugin)
     {
+        /**
+         * @var WikiRequest $request
+         */
+        global $request;
+
         $this->_field = $field;
         $this->_from_lang = $from_lang;
         $this->_plugin =& $plugin;
@@ -498,11 +511,11 @@ class _PageList_Column_customlang extends _PageList_Column
         if ($this->_iscustom)
             $this->_field = substr($field, 7);
         //$heading = $field;
-        $this->dbi = &$GLOBALS['request']->getDbh();
+        $this->dbi = &$request->getDbh();
         $this->_PageList_Column_base($this->_field);
     }
 
-    function _getValue($page, &$revision_handle)
+    function _getValue($page, $revision_handle)
     {
         if (is_object($page)) $text = $page->getName();
         else $text = $page;

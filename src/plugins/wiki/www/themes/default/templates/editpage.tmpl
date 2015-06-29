@@ -1,10 +1,7 @@
 <?php if (isset($PREVIEW_CONTENT)) { ?>
-  <p><strong><?php echo _("Preview only!  Changes not saved.")?></strong>
-<!-- FIXME: it would be nice to put a link to the #editarea anchor below,
-     but it does not work currently with the <base> declared in top.tmpl.
-     I think we need to do away with using <base> altogether... -->
-     <?php echo fmt("Please continue editing.  (You'll find your %s at the bottom of the page.)",
-          /* HTML::a(array("href" => "#editarea"), */ _("edit area") /*)  */) ?>
+  <p>
+      <?php echo _("Preview only! Changes not saved.") ?>
+      <?php echo _("Please continue editing. (You'll find your edit area at the bottom of the page.)") ?>
   </p>
   <hr class="printer" />
   <?php echo $PREVIEW_CONTENT ?>
@@ -13,36 +10,23 @@
 <?php echo $PAGE_LOCKED_MESSAGE ?>
 <?php echo $CONCURRENT_UPDATE_MESSAGE ?>
 <?php if (! $IS_CURRENT) { ?>
-  <p class="warning_msg"><strong><?php echo _("Warning: You are editing an old revision.")?>
-        <?php echo _("Saving this page will overwrite the current version.")?></strong></p>
+  <p class="warning_msg">
+      <?php echo _("Warning: You are editing an old revision.")?>
+      <?php echo _("Saving this page will overwrite the current version.")?>
+  </p>
 <?php } ?>
-<?php /*
- * FIXME: Hack!
- * The funky URL used for the form action parameter is bogus.
- * This is needed, otherwise the redirect to the real browser
- * page won't work with some browsers. (NS4 and Mozilla 0.97 won't accept
- * a redirect from a page to itself.)
- */
-?>
 <form method="post" id="editpage" name="editpage"
       action="<?php echo $request->getPostURL() ?>"
       accept-charset="UTF-8">
   <?php if (!empty($_GET['start_debug'])) echo '<input type="hidden" name="start_debug" value="1" >'; ?>
-  <?php /* To clear beyond a larger logo, such as in the Hawaiian theme */ ?>
   <br class="clear-floats" />
-  <table class="fullwidth">
-    <tr><td><?php echo $EDIT_TOOLBAR ?></td>
-        <td class="align-right"><div id="editarea-size">
-    <?php echo _("Size")._(":") ?>
-    <label for="pref-editHeight"><b><?php echo _("H")?></b></label> <?php echo $HEIGHT_PREF?>
-    <label for="pref-editWidth"><b><?php echo _("W")?></b></label> <?php echo $WIDTH_PREF?>
-    <noscript><?php echo Button("submit:", _("Adjust"), 'wikiaction')?></noscript>
-  </div></td></tr></table>
+  <?php if (isset($EDIT_TOOLBAR)) { ?>
+      <?php echo $EDIT_TOOLBAR ?>
+  <?php } ?>
 <?php if (!empty($WYSIWYG_B)) { ?>
   <br /><div class="hint"><strong>Warning:</strong> Switching to the Wysiwyg editor will not keep your changes.</div>
 <?php } ?>
   <a id="editarea"></a><?php echo $EDIT_TEXTAREA?>
-<!-- FIXME: fix layout, move CSS to CSS -->
 <div class="toolbar" style="text-align: center;">
   <label for="edit-summary"><?php echo _("Summary")._(":") ?></label> <?php echo $SUMMARY_INPUT ?>
 </div>
@@ -50,7 +34,7 @@
 <div class="toolbar" style="text-align: center;">
   <?php echo $CAPTCHA_IMAGE ?><br/>
   <?php echo $CAPTCHA_LABEL ?><?php echo $CAPTCHA_INPUT ?>
-</div> 
+</div>
 <?php } ?>
 <table class="toolbar fullwidth">
 <tr class="middle">
@@ -63,7 +47,7 @@
     <?php } ?>
     <?php echo $PREVIEW_B ?>
     <?php if ($SAVE_B) { ?>
-      <?php echo $SEP?> <?php echo $SAVE_B ?>
+      <?php echo $SEP?><?php echo $SAVE_B ?>
     <?php } ?>
     <?php echo $SEP?><?php echo $CHANGES_B ?>
   </td>

@@ -19,8 +19,11 @@ div#navbuttons a.wikiaction, div#navbuttons a.wikiadmin {
     background-color: #dddddd;
     border: 0;
     -moz-appearance: none;
+    -webkit-appearance: none;
     -moz-box-sizing: content-box;
-    -moz-border-radius: 0;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    border-radius: 0;
 }
 
 .wiki, .named-wiki {
@@ -40,11 +43,3 @@ pre {
 td {
     font-size: 80%
 }
-
-/* For emacs users
- *
- * Local Variables:
- * mode: c
- * c-file-style: cc-mode
- * End:
- */

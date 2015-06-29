@@ -11,7 +11,7 @@ class WikiDB_SQL extends WikiDB
             $backend = $dbparams['dsn']['phptype'];
         elseif (preg_match('/^(\w+):/', $dbparams['dsn'], $m))
             $backend = $m[1];
-        if ($backend == 'postgres7') { // ADODB cross-compatiblity hack (for unit testing)
+        if ($backend == 'postgres7') { // ADODB cross-compatibility hack (for unit testing)
             $backend = 'pgsql';
             if (is_string($dbparams['dsn']))
                 $dbparams['dsn'] = $backend . ':' . substr($dbparams['dsn'], 10);
@@ -23,7 +23,7 @@ class WikiDB_SQL extends WikiDB
         parent::__construct($backend, $dbparams);
     }
 
-    function view_dsn($dsn = false)
+    public static function view_dsn($dsn = false)
     {
         if (!$dsn)
             $dsninfo = DB::parseDSN($GLOBALS['DBParams']['dsn']);
@@ -37,15 +37,16 @@ class WikiDB_SQL extends WikiDB
         );
     }
 
-    /**
+    /*
      * Determine whether page exists (in non-default form).
      * @see WikiDB::isWikiPage for the slow generic version
      */
-    function isWikiPage($pagename)
+    public function isWikiPage($pagename)
     {
         $pagename = (string)$pagename;
-        if ($pagename === '') return false;
-        //if (empty($this->_iwpcache)) {  $this->_iwpcache = array();  }
+        if ($pagename === '') {
+            return false;
+        }
         if (empty($this->_cache->id_cache[$pagename])) {
             $this->_cache->_id_cache[$pagename] = $this->_backend->is_wiki_page($pagename);
         }
@@ -53,27 +54,33 @@ class WikiDB_SQL extends WikiDB
     }
 
     // adds surrounding quotes
-    function quote($s)
+    public function quote($s)
     {
         return $this->_backend->_dbh->quoteSmart($s);
     }
 
     // no surrounding quotes because we know it's a string
-    function qstr($s)
+    public function qstr($s)
     {
         return $this->_backend->_dbh->escapeSimple($s);
     }
 
-    function isOpen()
+    public function isOpen()
     {
+        /**
+         * @var WikiRequest $request
+         */
         global $request;
-        if (!$request->_dbi) return false;
+
+        if (!$request->_dbi) {
+            return false;
+        }
         return is_resource($this->_backend->connection());
     }
 
     // SQL result: for simple select or create/update queries
     // returns the database specific resource type
-    function genericSqlQuery($sql, $args = false)
+    public function genericSqlQuery($sql, $args = array())
     {
         if ($args)
             $result = $this->_backend->_dbh->query($sql, $args);
@@ -89,8 +96,8 @@ class WikiDB_SQL extends WikiDB
     }
 
     // SQL iter: for simple select or create/update queries
-    // returns the generic iterator object (count,next)
-    function genericSqlIter($sql, $field_list = NULL)
+    // returns the generic iterator object (count, next)
+    public function genericSqlIter($sql, $field_list = NULL)
     {
         $result = $this->genericSqlQuery($sql);
         return new WikiDB_backend_PearDB_generic_iter($this->_backend, $result);

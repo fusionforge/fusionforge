@@ -73,6 +73,13 @@ class WikiPlugin_Diff
         return $row;
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         extract($this->getArgs($argstr, $request));
@@ -166,7 +173,7 @@ class WikiPlugin_Diff
         if ($old and $old->getVersion() == 0)
             $old = false;
 
-        $html->pushContent(HTML::Table($this->PageInfoRow(_("Newer page:"), $new,
+        $html->pushContent(HTML::table($this->PageInfoRow(_("Newer page:"), $new,
                 $request),
             $this->PageInfoRow(_("Older page:"), $old,
                 $request)));

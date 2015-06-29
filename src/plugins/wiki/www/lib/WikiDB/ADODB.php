@@ -38,14 +38,16 @@ class WikiDB_ADODB extends WikiDB
         parent::__construct($backend, $dbparams);
     }
 
-    /**
+    /*
      * Determine whether page exists (in non-default form).
-     * @see WikiDB::isWikiPage
+     * @see WikiDB::isWikiPage for the slow generic version
      */
-    function isWikiPage($pagename)
+    public function isWikiPage($pagename)
     {
         $pagename = (string)$pagename;
-        if ($pagename === '') return false;
+        if ($pagename === '') {
+            return false;
+        }
         if (!array_key_exists($pagename, $this->_cache->_id_cache)) {
             $this->_cache->_id_cache[$pagename] = $this->_backend->is_wiki_page($pagename);
         }
@@ -53,7 +55,7 @@ class WikiDB_ADODB extends WikiDB
     }
 
     // add surrounding quotes '' if string
-    function quote($in)
+    public function quote($in)
     {
         if (is_int($in) || is_double($in)) {
             return $in;
@@ -68,21 +70,27 @@ class WikiDB_ADODB extends WikiDB
 
     // ADODB handles everything as string
     // Don't add surrounding quotes '', same as in PearDB
-    function qstr($in)
+    public function qstr($in)
     {
         return $this->_backend->_dbh->addq($in);
     }
 
-    function isOpen()
+    public function isOpen()
     {
+        /**
+         * @var WikiRequest $request
+         */
         global $request;
-        if (!$request->_dbi) return false;
+
+        if (!$request->_dbi) {
+            return false;
+        }
         return is_resource($this->_backend->connection());
     }
 
     // SQL result: for simple select or create/update queries
     // returns the database specific resource type
-    function genericSqlQuery($sql, $args = false)
+    public function genericSqlQuery($sql, $args = array())
     {
         if ($args)
             $result = $this->_backend->_dbh->Execute($sql, $args);
@@ -97,8 +105,8 @@ class WikiDB_ADODB extends WikiDB
     }
 
     // SQL iter: for simple select or create/update queries
-    // returns the generic iterator object (count,next)
-    function genericSqlIter($sql, $field_list = NULL)
+    // returns the generic iterator object (count, next)
+    public function genericSqlIter($sql, $field_list = NULL)
     {
         $result = $this->genericSqlQuery($sql);
         return new WikiDB_backend_ADODB_generic_iter($this->_backend, $result, $field_list);

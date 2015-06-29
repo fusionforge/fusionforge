@@ -52,6 +52,13 @@ class WikiPlugin_FileInfo
         );
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         $args = $this->getArgs($argstr, $request);
@@ -175,16 +182,13 @@ class WikiPlugin_FileInfo
 
     function magic($file)
     {
-        if (function_exists('finfo_file') or loadPhpExtension('fileinfo')) {
-            // Valid finfo_open (i.e. libmagic) options:
-            // FILEINFO_NONE | FILEINFO_SYMLINK | FILEINFO_MIME | FILEINFO_COMPRESS | FILEINFO_DEVICES |
-            // FILEINFO_CONTINUE | FILEINFO_PRESERVE_ATIME | FILEINFO_RAW
-            $f = finfo_open( /*FILEINFO_MIME*/);
-            $result = finfo_file(realpath($file));
-            finfo_close($res);
-            return $result;
-        }
-        return '';
+        // Valid finfo_open (i.e. libmagic) options:
+        // FILEINFO_NONE | FILEINFO_SYMLINK | FILEINFO_MIME | FILEINFO_COMPRESS | FILEINFO_DEVICES |
+        // FILEINFO_CONTINUE | FILEINFO_PRESERVE_ATIME | FILEINFO_RAW
+        $f = finfo_open( /*FILEINFO_MIME*/);
+        $result = finfo_file(realpath($file));
+        finfo_close($res);
+        return $result;
     }
 
     function mime_type($file)

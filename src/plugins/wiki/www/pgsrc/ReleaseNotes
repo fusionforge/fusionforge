@@ -1,12 +1,65 @@
-Date: Tue, 29 Jul 2014 10:42:12 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.0)
+Date: Mon, 29 Jun 2015 12:04:28 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
 Content-Type: application/x-phpwiki;
   pagename=ReleaseNotes;
   flags=PAGE_LOCKED;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-<<CreateToc with_toclink||=1 headers||=1,2,3>>
+<<CreateToc with_toclink||=1 headers||=1,2,3 width=300px position=right>>
+
+== 1.5.4 2015-06-29 Marc-Etienne Vargenau ==
+
+* Fix ~WantedPages for Fusionforge
+* Remove ~WantedPagesOld (use ~WantedPages instead)
+* Add WebM format in Video plugin
+* Update jscalendar to 1.0
+* Remove Width and Height preferences modification in Edit Toolbar
+* New icons in Edit Toolbar
+* Make static templates in Edit Toolbar work
+* Fix memory_limit for WIKI_SOAP
+* Remove MockRequest
+* Update jquery to 1.11.3
+
+== 1.5.3 2015-03-04 Marc-Etienne Vargenau ==
+
+* Fix Bug#648 Call to protected method
+* easier file upload: forbidden characters in filename are replaced by dashes (instead of rejecting upload)
+* improve handling of image insertion icon in edit toolbar (icon did not always appear after image uploading)
+* bigger wikipaging font
+* test again for function 'posix_times', it does not exist on Windows (reported by jdebert)
+* remove FPDF, lib/gif.php, lib/font (were not used)
+* rename plugin _Retransform to ~DebugRetransform
+* use PHP ZIP class instead of home-made functions. ziplib renamed to mimelib
+* add SOAP scripts
+* rename FCKeditor to CKeditor
+* load theme pgsrc, if it exists
+* SUBPAGE_SEPARATOR removed, it must be '/'
+* RateIt plugin for Fusionforge
+* remove acdropdown and livesearch
+* remove CVS backend
+
+== 1.5.2 2014-10-10 Marc-Etienne Vargenau ==
+
+This is a security fix release.
+* Fix CVE-2014-5519: vulnerability in Ploticus plugin. [[http://www.cvedetails.com/cve/CVE-2014-5519/]] 
+
+This vulnerability is present in ~PhpWiki 1.5.0 and 1.5.1. All users are advised to upgrade to ~PhpWiki 1.5.2.
+
+== 1.5.1 2014-10-02 Marc-Etienne Vargenau ==
+
+* fix Bug#456 'Optimizing Database' message sometimes printed on page
+* remove ~FrameInclude plugin (frames are not supported in HTML 5)
+* sort tables with [[http://tablesorter.com|tablesorter jQuery plugin]] instead of sortable.js
+* fix Bug#636 Recursive include is not trapped
+* fix Bug#647 undefined method {{{WikiDB_backend_dba::WikiDB_backend_dbaBase}}}
+* correct total number of pages for AllPagesCreatedByMe, AllPagesOwnedByMe, AllPagesLastEditedByMe
+* fix Bug#607 BackLinks do not work inside a [[Help:RichTablePlugin|RichTable]]
+* fix Bug#646 Wrong number of links in BackLinks
+* make <includeonly> work
+* remove old ~WikiUser code (ENABLE_USER_NEW)
+* admin always has rights to see and modify pages, regardless of ACLs, to avoid locking himself out
+* add missing images in Sidebar theme
 
 == 1.5.0 2014-07-29 Marc-Etienne Vargenau ==
 
@@ -19,7 +72,7 @@ Content-Transfer-Encoding: binary
 === Other Changes ===
 * Fix bad display in Toolbox menu (Sidebar and Monobook themes) reported by Harold Hallikainen
 * Fix Captcha problem reported by Harold Hallikainen
-* Merge OldTextFormattingRules into TextFormattingRules
+* Merge ~OldTextFormattingRules into ~TextFormattingRules
 * ~SyntaxHighlighter plugin is now implemented with [[http://highlightjs.org/]] instead of [[http://www.andre-simon.de]].
 * Chmod action is removed.
 * New action: ~DeleteAcl
@@ -60,9 +113,9 @@ the new fusionforge theme is to be used together with [[http://fusionforge.org|F
 * link only to existing pages on multi-page dumps (pagesets)
 * fix Bug#1795420 by Sven Ginka: Use /U in preg_match
 * ensure ending uploads slash even on user provided UPLOAD constants. Fixes plugin/~UpLoad
-* stablize Comment. substring search for basepages, do not tokenize.
+* stabilize Comment. substring search for basepages, do not tokenize.
 * fix Bug#1792170 Handle " ( " or "(test" without closing ")" as plain word. Allow single string token "0"
-* fix Bug#1752172 undefined method ~TextSearchQuery_node_or::_sql_quote()
+* fix Bug#1752172 undefined method {{{TextSearchQuery_node_or::_sql_quote()}}}
 * dba: fix sorting for empty mtime field
 * ~LdapSearch: fix layout and logic
 * ~FileInfo: fix Upload: links
@@ -263,7 +316,7 @@ more plugins and enhancements. UTF-8 should work.
 * updated most template files for harmonisation
 * changed default ~LiveSearch method in search.tmpl from url to xmlrpc. faster and less hackish.
 * fixed all templates with missing revision check. can be false.
-* rewrote and redefined WikiDB::listRelations. list only all relations as array.
+* rewrote and redefined {{{WikiDB::listRelations}}}. list only all relations as array.
 * changed Semantic attribute syntax from ":-" to ":=" (relevant to cvs users only)
 * change ~TextSearchQuery handling of regex=pcre: plain string, no parsing at all,
   detect and apply modifiers.
@@ -285,8 +338,8 @@ more plugins and enhancements. UTF-8 should work.
 * new wysiwyg_editor feature by Jean-Nicolas GEREONE and Sabri LABBENE (experimental)
 * added postgresql tsearch2 support
 * new experimental flatfile backend: readable page source files (experimental)
-* added new xmlrpc and SOAP methods: listPlugins, getPluginSynopsis, mailPasswordToUser,
-  getUploadedFileInfo, listRelations, callPlugin, linkSearch
+* added new xmlrpc and SOAP methods: ~listPlugins, ~getPluginSynopsis, ~mailPasswordToUser,
+  ~getUploadedFileInfo, ~listRelations, ~callPlugin, ~linkSearch
 * new plugins: ~SemanticSearch, ~SemanticRelations, ~LinkSearch, ~ListRelations,
   ~FileInfo, ~BoxRight, ~PasswordReset, ~WatchPage, ~SpellCheck, ~SearchHighlight,
   AsciiSVG
@@ -314,7 +367,7 @@ more plugins and enhancements. UTF-8 should work.
 * added lib/~XmlRpcClient, xmlrpc methods to lib/~HttpClient and acdropdown.js. JSON not yet.
 * created Help/~*Plugin stubs for *ALL* plugins in pgsrc
 * added a new _DEBUG_REMOTE flag to debug into remote sessions (xmlrpc, ajax, ...)
-* added WikiDB::linkSearch and backend/dumb/~LinkSearchIter.php. Mainly for ~SemanticSearch,
+* added {{{WikiDB::linkSearch}}} and backend/dumb/~LinkSearchIter.php. Mainly for ~SemanticSearch,
   and LinkSearch, but can be used for ~SemanticSearchAdvanced (combined queries as <ask>) and
   BackLinks et al also.
 * added Calendar display_weeknum argument
@@ -349,7 +402,7 @@ more plugins and enhancements. UTF-8 should work.
 * simplify messages for translators
 * added ~ImageTile.php
 * added tsearch2 to doc/INSTALL.pgsql
-* added basepage to Cached_WikiLink::asXML for subpages within ~CreateTOC
+* added basepage to {{{Cached_WikiLink::asXML}}} for subpages within ~CreateTOC
 * print filename on dba access error
 * use bind_textdomain_codeset. bug #1480077 (Kai Krakow)
 * make ~TextSearchQuery->_stoplist localizable and overridable within config.ini
@@ -541,7 +594,7 @@ Because of SQL changes you'd need to ?action=upgrade to update for SQL.
    adds PHPWIKI_DIR to the front if started from another dir, lib/pear to the end.
 ** fix slashify for Windows
 * check more config-default and predefined constants
-* ~AutoSplit pagenames at subpage seperators, esp for Sidebar theme
+* ~AutoSplit pagenames at subpage separators, esp for Sidebar theme
 * improve Pagelist layout by equal pagename width for limited lists
 * added CPAN, ~OsFaq2, ~WikiLens to interwiki.map
 * ~ExternalSearchPlugin useimage arg (RFE #952323)
@@ -804,7 +857,7 @@ Bugfix release for the following 1.3.8 problems:
 
 == 1.3.8 Jan-Apr 2004, Reini Urban ==
 
-External plugable authentification, DB prefs and sessions,
+External plugable authentication, DB prefs and sessions,
 some more fixes, docs, themes and plugins.
 
 * new ~WikiUserNew class (started by Carsten Klapp),

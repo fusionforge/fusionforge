@@ -85,12 +85,16 @@ class WikiPlugin_WikiBlog
         );
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         $args = $this->getArgs($argstr, $request);
-        // allow empty pagenames for ADMIN_USER style blogs: "Blog/day"
-        //if (!$args['pagename'])
-        //    return $this->error(_("No pagename specified"));
 
         // Get our form args.
         $blog = $request->getArg("edit");
@@ -125,27 +129,30 @@ class WikiPlugin_WikiBlog
 
     /**
      * posted: required: pagename, content. optional: summary
+     *
+     * @param WikiRequest $request
+     * @param array $posted
+     * @param string $type
      */
     function add(&$request, $posted, $type = 'wikiblog')
     {
         // This is similar to editpage. Shouldn't we use just this for preview?
         $parent = $posted['pagename'];
         if (empty($parent)) {
-            $prefix = ""; // allow empty parent for default "Blog/day"
+            $prefix = ''; // allow empty parent for default "Blog/day"
             $parent = HOME_PAGE;
         } elseif (($parent == 'Blog' or $parent == 'WikiBlog') and $type == 'wikiblog') { // avoid Blog/Blog/2003-01-11/14:03:02+00:00
-            $prefix = "";
+            $prefix = '';
             $parent = ''; // 'Blog';
         } elseif ($parent == 'Comment' and $type == "comment") {
-            $prefix = "";
+            $prefix = '';
             $parent = ''; // 'Comment';
         } elseif ($parent == 'Forum' and $type == "wikiforum") {
-            $prefix = "";
+            $prefix = '';
             $parent = ''; // 'Forum';
         } else {
-            $prefix = $parent . SUBPAGE_SEPARATOR;
+            $prefix = $parent . '/';
         }
-        //$request->finish(fmt("No pagename specified for %s",$type));
 
         $now = time();
         $dbi = $request->getDbh();
@@ -211,16 +218,18 @@ class WikiPlugin_WikiBlog
             // Maybe add the BlogArchives plugin instead for the new interim subpage.
             $redirected = $prefix . $pagename;
             if (!$dbi->isWikiPage($redirected)) {
-                if (!$parent) $parent = HOME_PAGE;
+                if (!$parent) {
+                    $parent = HOME_PAGE;
+                }
                 require_once 'lib/loadsave.php';
                 $pageinfo = array('pagename' => $redirected,
                     'content' => '<<RedirectTo page="' . $parent . '">>',
                     'pagedata' => array(),
                     'versiondata' => array('author' => $blog_meta['creator'], 'is_minor_edit' => 1),
                 );
-                SavePage($request, $pageinfo, '', '');
+                SavePage($request, $pageinfo, '');
             }
-            $redirected = $prefix . $pagename . SUBPAGE_SEPARATOR . preg_replace("/T.*/", "", "$time");
+            $redirected = $prefix . $pagename . '/' . preg_replace("/T.*/", '', "$time");
             if (!$dbi->isWikiPage($redirected)) {
                 if (!$parent) $parent = HOME_PAGE;
                 require_once 'lib/loadsave.php';
@@ -229,11 +238,11 @@ class WikiPlugin_WikiBlog
                     'pagedata' => array(),
                     'versiondata' => array('author' => $blog_meta['creator'], 'is_minor_edit' => 1),
                 );
-                SavePage($request, $pageinfo, '', '');
+                SavePage($request, $pageinfo, '');
             }
 
-            $p = $dbi->getPage($prefix . $pagename . SUBPAGE_SEPARATOR
-                . str_replace("T", SUBPAGE_SEPARATOR, "$time"));
+            $p = $dbi->getPage($prefix . $pagename . '/'
+                . str_replace("T", '/', "$time"));
             $pr = $p->getCurrentRevision();
 
             // Version should be zero.  If not, page already exists
@@ -262,6 +271,12 @@ class WikiPlugin_WikiBlog
         // Any way to jump back to preview mode???
     }
 
+    /**
+     * @param WikiRequest $request
+     * @param array $args
+     * @param string $type
+     * @return XmlContent
+     */
     function showAll(&$request, $args, $type = "wikiblog")
     {
         // FIXME: currently blogSearch uses WikiDB->titleSearch to
@@ -298,8 +313,13 @@ class WikiPlugin_WikiBlog
         return $html;
     }
 
-    // Subpage for the basepage. All Blogs/Forum/Comment entries are
-    // Subpages under this pagename, to find them faster.
+    /**
+     * Subpage for the basepage. All Blogs/Forum/Comment entries are
+     * Subpages under this pagename, to find them faster.
+     *
+     * @param string $type
+     * @return string
+     */
     protected function blogPrefix($type = 'wikiblog')
     {
         if ($type == 'wikiblog')
@@ -328,8 +348,8 @@ class WikiPlugin_WikiBlog
     function findBlogs(&$dbi, $basepage = '', $type = 'wikiblog')
     {
         $prefix = (empty($basepage)
-            ? ""
-            : $basepage . SUBPAGE_SEPARATOR) . $this->blogPrefix($type);
+            ? ''
+            : $basepage . '/') . $this->blogPrefix($type);
         $pages = $dbi->titleSearch(new TextSearchQuery('"' . $prefix . '"', true, 'none'));
 
         $blogs = array();
@@ -352,15 +372,17 @@ class WikiPlugin_WikiBlog
 
     function showForm(&$request, $args, $template = 'blogform')
     {
+        $user = $request->getUser();
+        if (!($user->isSignedIn())) {
+            // Cannot create entry
+            return HTML::p(array('class' => 'warning'),
+                           _('You must be logged in to add blog entries.'));
+        }
+
         // Show blog-entry form.
         $args = array('PAGENAME' => $args['pagename'],
             'HIDDEN_INPUTS' =>
             HiddenInputs($request->getArgs()));
-        if (ENABLE_EDIT_TOOLBAR and !ENABLE_WYSIWYG and ($template != 'addcomment')) {
-            include_once 'lib/EditToolbar.php';
-            $toolbar = new EditToolbar();
-            $args = array_merge($args, $toolbar->getTokens());
-        }
         return new Template($template, $request, $args);
     }
 
@@ -380,7 +402,7 @@ class WikiPlugin_WikiBlog
             list(, $prefix, $month, $day, $time) = $m;
         return array('pagename' => $pagename,
             // page (list pages per month) or revision (list months)?
-            //'title' => isa($rev_or_page,'WikiDB_PageRevision') ? $rev_or_page->get('summary') : '',
+            //'title' => is_a($rev_or_page,'WikiDB_PageRevision') ? $rev_or_page->get('summary') : '',
             //'monthtitle' => $this->monthTitle($month),
             'month' => $month,
             'day' => $day,

@@ -1,7 +1,7 @@
 <html>
 <head><title>Alpha Channel Test</title>
     <script type="text/javascript"><!--
-    var backgroundcolor = new Array();
+    var backgroundcolor = [];
     backgroundcolor[0] = '#ffffff';
     backgroundcolor[1] = '#cccccc';
     backgroundcolor[2] = '#888888';

@@ -31,6 +31,8 @@ require_once 'lib/PageList.php';
 class WikiPlugin_LinkSearch
     extends WikiPlugin
 {
+    public $current_row;
+
     function getDescription()
     {
         return _("Search page and link names.");
@@ -61,7 +63,6 @@ class WikiPlugin_LinkSearch
             'value' => $args['page'],
             'title' => _("Search only in these pages. With autocompletion."),
             'class' => 'dropdown',
-            'acdropdown' => 'true',
             'autocomplete_complete' => 'true',
             'autocomplete_matchsubstring' => 'false',
             'autocomplete_list' => 'xmlrpc:wiki.titleSearch ^[S] 4'
@@ -70,7 +71,6 @@ class WikiPlugin_LinkSearch
             'value' => $args['s'],
             'title' => _("Filter by this link. These are pagenames. With autocompletion."),
             'class' => 'dropdown',
-            'acdropdown' => 'true',
             'autocomplete_complete' => 'true',
             'autocomplete_matchsubstring' => 'true',
             'autocomplete_list' => 'xmlrpc:wiki.titleSearch ^[S] 4'
@@ -123,6 +123,13 @@ function dirsign_switch() {
         return $form;
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         $args = $this->getArgs($argstr, $request);
@@ -153,7 +160,7 @@ function dirsign_switch() {
             $pagelist->setCaption
             ( // on mozilla the form doesn't fit into the caption very well.
                 HTML($noform ? '' : HTML($form, HTML::hr()),
-                    fmt("LinkSearch result for \"%s\" in pages \"%s\", direction %s", $s, $page, $direction)));
+                    fmt("LinkSearch result for “%s” in pages “%s”, direction %s", $s, $page, $direction)));
         }
         return $pagelist;
     }
@@ -172,7 +179,7 @@ class _PageList_Column_LinkSearch_link
         $this->_pagelist =& $pagelist;
     }
 
-    function _getValue(&$page, $revision_handle)
+    function _getValue($page, $revision_handle)
     {
         if (is_object($page)) $text = $page->getName();
         else $text = $page;

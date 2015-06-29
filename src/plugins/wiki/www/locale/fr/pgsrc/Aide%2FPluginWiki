@@ -1,5 +1,5 @@
-Date: Tue, 29 Jul 2014 10:42:12 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.0)
+Date: Mon, 29 Jun 2015 12:04:23 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FPluginWiki;
   flags="";
@@ -25,13 +25,13 @@ PhpWiki supporte les plugins depuis 1.3.x
 
 ~Les plugins Wiki permettent à chacun d'ajouter un nouveau type de contenu
 dynamique (ou autre fonctionnalité) aux pages wiki avec PhpWiki. Par exemple,
-dans ce wiki, les DernièresModifs, RétroLiens, PagesSemblables et la plupart
+dans ce wiki, les [[DernièresModifs]], [[RétroLiens]], [[PagesSemblables]] et la plupart
 des autres pages indexées sont toutes implémentées en utilisant les plugins.
 
 À plus ou moins court terme, l'ancien style phpwiki [[URLMagiquesPhpWiki]] sera
 remplacé par des plugins également.
 
-== Exemple
+== Exemple ==
 
 Habituellement, on appelle un plugin en écrivant quelque chose comme ceci :
 

@@ -2,7 +2,7 @@
 <?php
 global $RUNTIMER;
 echo fmt("Page Execution took %s seconds", $RUNTIMER->getStats());
-$mem = @getMemoryUsage();
+$mem = @memory_get_usage();
 if ($mem) {
     echo fmt(", Memory: %s", $mem);
 }

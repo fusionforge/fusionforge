@@ -63,6 +63,13 @@ class WikiPlugin_WikiForum
         );
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         $args = $this->getArgs($argstr, $request);
@@ -75,7 +82,8 @@ class WikiPlugin_WikiForum
         $request->setArg('forum', false);
 
         if ($request->isPost() and !empty($forum['add'])) {
-            return $this->add($request, $forum, 'wikiforum');
+            $this->add($request, $forum, 'wikiforum');
+            return HTML();
         }
 
         // Now we display previous comments and/or provide entry box

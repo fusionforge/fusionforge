@@ -40,7 +40,7 @@ class WikiPlugin_WikiAdminSetExternal
     {
         return array_merge
         (
-            WikiPlugin_WikiAdminSelect::getDefaultArguments(),
+            parent::getDefaultArguments(),
             array(
                 'external' => 1,
                 /* Columns to include in listing */
@@ -48,7 +48,7 @@ class WikiPlugin_WikiAdminSetExternal
             ));
     }
 
-    function setExternalPages(&$dbi, &$request, $pages)
+    private function setExternalPages(&$dbi, &$request, $pages)
     {
         $result = HTML::div();
         $ul = HTML::ul();
@@ -88,6 +88,13 @@ class WikiPlugin_WikiAdminSetExternal
         }
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         if ($request->getArg('action') != 'browse') {

@@ -25,17 +25,15 @@
 //define("USE_EXTERNAL_HTML2PDF", "htmldoc --quiet --format pdf14 --jpeg --webpage --no-toc --no-title %s");
 /**
  * handler for format=pdf
- * http://phpwiki.sourceforge.net/phpwiki/PhpWikiToDocBookAndPDF
  * htmldoc or ghostscript + html2ps or docbook (dbdoclet, xsltproc, fop)
  * http://www.easysw.com/htmldoc
  */
-function ConvertAndDisplayPdfPageList(&$request, $pagelist, $args = array())
+function ConvertAndDisplayPdfPageList(&$request, $pagelist)
 {
     global $WikiTheme;
     if (empty($request->_is_buffering_output))
         $request->buffer_output(false /*'nocompress'*/);
     $pagename = $request->getArg('pagename');
-    $dest = $request->getArg('dest');
     $request->setArg('dest', false);
     $request->setArg('format', false);
     include_once 'lib/display.php';
@@ -81,8 +79,7 @@ function ConvertAndDisplayPdf(&$request)
     // check hook for external converters
     if (defined('USE_EXTERNAL_HTML2PDF')
         and USE_EXTERNAL_HTML2PDF
-    ) { // See http://phpwiki.sourceforge.net/phpwiki/PhpWikiToDocBookAndPDF
-        // htmldoc or ghostscript + html2ps or docbook (dbdoclet, xsltproc, fop)
+    ) { // htmldoc or ghostscript + html2ps or docbook (dbdoclet, xsltproc, fop)
         Header('Content-Type: application/pdf');
         $request->discardOutput();
         $request->buffer_output(false /*'nocompress'*/);

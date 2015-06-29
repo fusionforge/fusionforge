@@ -40,7 +40,6 @@ if (!defined('ENABLE_RAW_HTML_SAFE'))
  *   ENABLE_RAW_HTML_SAFE:
  *  - Allow some sort of "safe" html tags and attributes.
  *    Unsafe attributes are automatically stripped. (Experimental!)
- *    See http://phpwiki.sourceforge.net/phpwiki/allowing%20safe%20HTML
  */
 
 /**
@@ -67,6 +66,13 @@ class WikiPlugin_RawHtml
         return true;
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         if (!defined('ENABLE_RAW_HTML') || !ENABLE_RAW_HTML) {
@@ -90,10 +96,6 @@ class WikiPlugin_RawHtml
 
             // http://chxo.com/scripts/safe_html-test.php looks better
             $argstr = $this->safe_html($argstr);
-            /*return $this->disabled(HTML(fmt("This %s plugin on %s is disabled because of unsafe HTML code. ",$this->getName(), $basepage),
-                                        fmt("See PhpWiki:allowing%20safe%20HTML")
-                                        ));
-            */
         }
 
         return HTML::raw($argstr);

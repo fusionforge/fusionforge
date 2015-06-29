@@ -29,6 +29,9 @@
 class WikiPlugin_AnalyseAccessLogSql
     extends WikiPlugin
 {
+    public $_theadrow;
+    public $_headerSet;
+
     /**
      * Build the query string
      *
@@ -52,6 +55,8 @@ class WikiPlugin_AnalyseAccessLogSql
      *          ."FROM $accesslog "
      *          ."WHERE referer IS NOT NULL "
      *          .$where_conditions
+     * @param array $args
+     * @return string
      */
     private function getQueryString(&$args)
     {
@@ -263,6 +268,13 @@ class WikiPlugin_AnalyseAccessLogSql
         return _("Show summary information from the access log table.");
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         // flag that the output may not be cached - i.e. it is dynamic

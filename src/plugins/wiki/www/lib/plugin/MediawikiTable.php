@@ -62,8 +62,29 @@ class WikiPlugin_MediawikiTable
         return array();
     }
 
+    function getWikiPageLinks($argstr, $basepage)
+    {
+        global $backlinks;
+        if (empty($backlinks)) {
+            global $request;
+            $this->run($request->_dbi, $argstr, $request, $basepage);
+        }
+        return $backlinks;
+    }
+
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
+        global $backlinks;
+
+        $backlinks = array();
+
         include_once 'lib/BlockParser.php';
 
         // We allow the compact Mediawiki syntax with:
@@ -100,7 +121,7 @@ class WikiPlugin_MediawikiTable
             $attrs = parse_attributes($line);
             foreach ($attrs as $key => $value) {
                 if (in_array($key, array("id", "class", "title", "style",
-                    "bgcolor", "frame", "rules", "border",
+                    "bgcolor", "rules", "border",
                     "cellspacing", "cellpadding",
                     "align", "width"))
                 ) {

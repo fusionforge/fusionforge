@@ -26,24 +26,8 @@ class randomImage
 
     function pickRandom()
     {
-        better_srand(); // Start with a good seed.
         $this->filename = $this->imageList[array_rand($this->imageList)];
-        //trigger_error(sprintf(_("random image chosen: %s"),
-        //                      $this->filename),
-        //              E_USER_NOTICE); //debugging
         return $this->filename;
-    }
-}
-
-class imageSet extends fileSet
-{
-    /**
-     * A file is considered an image when the suffix matches one from
-     * $InlineImages.
-     */
-    function _filenameSelector($filename)
-    {
-        return preg_match("/(" . INLINE_IMAGES . ")$/i", $filename);
     }
 }
 

@@ -34,6 +34,7 @@ class WikiPlugin_UserPreferences
     extends WikiPlugin
 {
     public $bool_args;
+    public $_request;
 
     function getDescription()
     {
@@ -60,14 +61,19 @@ class WikiPlugin_UserPreferences
         return $prefs;
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         $args = $this->getArgs($argstr, $request);
         $user =& $request->_user;
         $user->_request = $request;
-        if (isa($request, 'MockRequest'))
-            return '';
-        if (defined('FUSIONFORGE') and FUSIONFORGE) {
+        if (defined('FUSIONFORGE') && FUSIONFORGE) {
             if (!($user->isAuthenticated())) {
                 return HTML::p(array('class' => 'error'),
                     _("Error: You are not logged in, cannot display UserPreferences."));
@@ -77,7 +83,7 @@ class WikiPlugin_UserPreferences
             and (!isset($user->_prefs->_method)
                 or !in_array($user->_prefs->_method, array('ADODB', 'SQL', 'PDO'))))
             or (in_array($request->getArg('action'), array('zip', 'ziphtml', 'dumphtml')))
-            or (isa($user, '_ForbiddenUser'))
+            or (is_a($user, '_ForbiddenUser'))
         ) {
             $no_args = $this->getDefaultArguments();
             $no_args['errmsg'] = HTML::p(array('class' => 'error'),

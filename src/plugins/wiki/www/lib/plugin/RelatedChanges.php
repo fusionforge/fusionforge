@@ -35,7 +35,7 @@ class _RelatedChanges_HtmlFormatter
     function description()
     {
         return HTML::p(false, $this->pre_description(),
-            fmt(" (to pages linked from \"%s\")", $this->_args['page']));
+            fmt(" (to pages linked from “%s”)", $this->_args['page']));
     }
 }
 
@@ -74,7 +74,13 @@ class WikiPlugin_RelatedChanges
 
     // box is used to display a fixed-width, narrow version with common header.
     // just a numbered list of limit pagenames, without date.
-    function box($args = false, $request = false, $basepage = false)
+    /**
+     * @param string $args
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return $this|HtmlElement
+     */
+    function box($args = '', $request = null, $basepage = '')
     {
         if (!$request) $request =& $GLOBALS['request'];
         if (!isset($args['limit'])) $args['limit'] = 15;

@@ -40,7 +40,12 @@ class _AdoDbPassUser
 
     function _AdoDbPassUser($UserName = '', $prefs = false)
     {
-        if (!$this->_prefs and isa($this, "_AdoDbPassUser")) {
+        /**
+         * @var WikiRequest $request
+         */
+        global $request;
+
+        if (!$this->_prefs and is_a($this, "_AdoDbPassUser")) {
             if ($prefs) $this->_prefs = $prefs;
             if (!isset($this->_prefs->_method))
                 _PassUser::_PassUser($UserName);
@@ -51,7 +56,7 @@ class _AdoDbPassUser
         }
         $this->_userid = $UserName;
         $this->getAuthDbh();
-        $this->_auth_crypt_method = $GLOBALS['request']->_dbi->getAuthParam('auth_crypt_method');
+        $this->_auth_crypt_method = $request->_dbi->getAuthParam('auth_crypt_method');
         // Don't prepare the configured auth statements anymore
         return $this;
     }
@@ -135,6 +140,11 @@ class _AdoDbPassUser
 
     function userExists()
     {
+        /**
+         * @var WikiRequest $request
+         */
+        global $request;
+
         $this->getAuthDbh();
         $dbh = &$this->_auth_dbi;
         if (!$dbh) { // needed?
@@ -143,7 +153,7 @@ class _AdoDbPassUser
         if (!$this->isValidName()) {
             return $this->_tryNextUser();
         }
-        $dbi =& $GLOBALS['request']->_dbi;
+        $dbi =& $request->_dbi;
         // Prepare the configured auth statements
         if ($dbi->getAuthParam('auth_check') and empty($this->_authselect)) {
             $this->_authselect = $this->prepare($dbi->getAuthParam('auth_check'),
@@ -199,7 +209,11 @@ class _AdoDbPassUser
 
     function checkPass($submitted_password)
     {
-        //global $DBAuthParams;
+        /**
+         * @var WikiRequest $request
+         */
+        global $request;
+
         $this->getAuthDbh();
         if (!$this->_auth_dbi) { // needed?
             return $this->_tryNextPass($submitted_password);
@@ -212,7 +226,7 @@ class _AdoDbPassUser
             return WIKIAUTH_FORBIDDEN;
         }
         $dbh =& $this->_auth_dbi;
-        $dbi =& $GLOBALS['request']->_dbi;
+        $dbi =& $request->_dbi;
         if (empty($this->_authselect) and $dbi->getAuthParam('auth_check')) {
             $this->_authselect = $this->prepare($dbi->getAuthParam('auth_check'),
                 array("password", "userid"));
@@ -265,14 +279,24 @@ class _AdoDbPassUser
 
     function mayChangePass()
     {
-        return $GLOBALS['request']->_dbi->getAuthParam('auth_update');
+        /**
+         * @var WikiRequest $request
+         */
+        global $request;
+
+        return $request->_dbi->getAuthParam('auth_update');
     }
 
     function storePass($submitted_password)
     {
+        /**
+         * @var WikiRequest $request
+         */
+        global $request;
+
         $this->getAuthDbh();
         $dbh = &$this->_auth_dbi;
-        $dbi =& $GLOBALS['request']->_dbi;
+        $dbi =& $request->_dbi;
         if ($dbi->getAuthParam('auth_update') and empty($this->_authupdate)) {
             $this->_authupdate = $this->prepare($dbi->getAuthParam('auth_update'),
                 array("password", "userid"));
@@ -285,8 +309,7 @@ class _AdoDbPassUser
         }
 
         if ($this->_auth_crypt_method == 'crypt') {
-            if (function_exists('crypt'))
-                $submitted_password = crypt($submitted_password);
+            $submitted_password = crypt($submitted_password);
         }
         $rs = $dbh->Execute(sprintf($this->_authupdate,
             $dbh->qstr($submitted_password),

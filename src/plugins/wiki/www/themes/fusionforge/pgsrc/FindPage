@@ -1,5 +1,5 @@
-Date: Tue, 29 Jul 2014 10:42:12 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.0)
+Date: Mon, 29 Jun 2015 12:04:28 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
 Content-Type: application/x-phpwiki;
   pagename=FindPage;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -11,43 +11,42 @@ Content-Transfer-Encoding: binary
 
 Here's a title search. Try something like ##wiki or sandwich##.
 
-<<WikiFormRich action=TitleSearch method=GET nobr=1 class=wikiaction
-  editbox[] name=s text=""
-  submit[]
-  checkbox[] name=case_exact
-  pulldown[] name=regex value="auto,none,glob,posix,pcre,sql">>
+<<WikiFormRich action=TitleSearch method=GET nobr=1 class=wikiaction editbox[] name=s text="" submit[] >>
 
 == Full Text Search ==
 
-Use the following for a full text search. This takes a few seconds.
-The results will show all lines on a given page which contain a
-match.
+Use the following for a full text search.
+The results will show all lines on a given page which contain a match.
 
-<<WikiFormRich action=FullTextSearch method=GET nobr=1 class=wikiaction
-  editbox[] name=s text=""
-  submit[]
-  checkbox[] name=case_exact
-  pulldown[] name=regex value="auto,none,glob,posix,pcre,sql">>
+<<WikiFormRich action=FullTextSearch method=GET nobr=1 class=wikiaction editbox[] name=s text="" submit[] >>
 
 == Fuzzy Search ==
 
 In a fuzzy pages search the titles of all pages are examined to find
 those which are similarly spelled or similar sounding (English).
 
-<?plugin-form FuzzyPages ?>
+<<WikiFormRich action=FuzzyPages method=GET nobr=1 class=wikiaction editbox[] name=s text="" submit[] >>
 
 == Tips ==
 
-* Separate words with a space. All words have to match as substrings.
-* '##OR##', grouping with parenthesis, string-quoting and some glob-style wildcard characters are also supported.
-* To exclude words from a title search or full text search, prepend a '##-##'.
-* Use '##^xx##' or '##xx~*##' to match words starting with '##xx##'.
-* Use '##~*xx##' or '##xx$##' to match words ending with '##xx##'.
-* Use '##^word$##' to match exact words.
-* Use //regex=auto// and '##re:##' like '##re:word.*xx##' or //regex=posix// to use Posix regular expressions. (not yet)
-* Use //regex=auto// and '##//##' like '##/^word$/##' or //regex=pcre// to match using Perl-style regular expressions.
-* Use //regex=sql// to match using SQL-style wildcards '##%##' and '##_##'.
-* Use //regex=none// to match any wildcards verbatim.
+* Separate words with a space. All words have to match as exact strings.
 
-=== Example ===
-* '##wiki text -php##' looks for all pages containing the words '##wiki##' and '##text##', but not containing the word '##php##'.
+  <verbatim>
+  Example: search for “databas” will NOT match the text “PGSQL database is a nice product.”
+  </verbatim>
+* Search for consecutive words by using quotes.
+
+  <verbatim>
+  Example: 'white dog' or "white dog" will match “This is a white dog.”
+  </verbatim>
+* Search for some special chars, such as @ ! &, in the keyword is allowed. Yet you can NOT search for such chars only.
+
+  <verbatim>
+  Example: ‘year!’ will match “Happy new year!”.
+  </verbatim>
+
+  <verbatim>
+  Example: search for '!!!' will NOT return any result.
+  </verbatim>
+* Search can be done in any language, including Chinese.
+* You can search titles in “Title Search” section, and search wiki contents in “Full Text Search” section.

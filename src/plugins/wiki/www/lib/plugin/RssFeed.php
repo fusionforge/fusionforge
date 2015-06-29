@@ -44,6 +44,13 @@ class WikiPlugin_RssFeed
         );
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         extract($this->getArgs($argstr, $request));
@@ -104,14 +111,23 @@ class WikiPlugin_RssFeed
         return $html;
     }
 
-    function box($args = false, $request = false, $basepage = false)
+    /**
+     * @param string $args
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
+    function box($args = '', $request = null, $basepage = '')
     {
         if (!$request) $request =& $GLOBALS['request'];
         extract($args);
-        if (empty($title)) $title = _("RssFeed");
-        if (empty($url)) $url = 'http://phpwiki.sourceforge.net/phpwiki/RecentChanges?format=rss';
+        if (empty($title))
+            $title = _("RssFeed");
+        if (empty($url))
+            $url = 'http://phpwiki.fr/RecentChanges?format=rss';
         $argstr = "url=$url";
-        if (isset($maxitem) and is_numeric($maxitem)) $argstr .= " maxitem=$maxitem";
+        if (isset($maxitem) and is_numeric($maxitem))
+            $argstr .= " maxitem=$maxitem";
         return $this->makeBox($title,
             $this->run($request->_dbi, $argstr, $request, $basepage));
     }

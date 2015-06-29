@@ -33,11 +33,6 @@ require_once 'lib/PageList.php';
  *   Only uploaded: textfiles, PDF, HTML, DOC, XLS, ... or
  *   External apps: xapian-omages seems to be the better than lucene,
  *   lucene.net, swish, nakamazu, ...
- *
- * See http://sf.net/tracker/index.php?aid=927395&group_id=6121&atid=106121
- * Wordaround to let the dead locks occur somewhat later:
- *   Increase the memory limit of PHP from 8 MB to 32 MB
- *   php.ini: memory_limit = 32 MB
  */
 class WikiPlugin_FullTextSearch
     extends WikiPlugin
@@ -64,13 +59,20 @@ class WikiPlugin_FullTextSearch
          return $args;
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
-
         $args = $this->getArgs($argstr, $request);
 
         if (empty($args['s'])) {
-            return HTML();
+            return HTML::p(array('class' => 'warning'),
+                           _("You must enter a search term."));
         }
         extract($args);
 
@@ -84,7 +86,7 @@ class WikiPlugin_FullTextSearch
             $args['listtype'] = 'dl';
             $args['types'] = array(new _PageList_Column_content
             ('rev:hi_content', _("Content"), "left", $s, $hilight_re));
-            $list = new PageList(false, $exclude, $args);
+            $list = new PageList(array(), $exclude, $args);
             $list->setCaption(fmt("Full text search results for “%s”", $s));
             while ($page = $pages->next()) {
                 $list->addPage($page);
@@ -99,7 +101,9 @@ class WikiPlugin_FullTextSearch
         if (!$limit or !is_int($limit))
             $limit = 0;
         // expand all page wildcards to a list of pages which should be ignored
-        if ($exclude) $exclude = explodePageList($exclude);
+        if ($exclude) {
+            $exclude = explodePageList($exclude);
+        }
         while ($page = $pages->next() and (!$limit or ($count < $limit))) {
             $name = $page->getName();
             if ($exclude and in_array($name, $exclude)) continue;
@@ -112,7 +116,7 @@ class WikiPlugin_FullTextSearch
         if ($limit and $count >= $limit) //todo: pager link to list of next matches
             $list->pushContent(HTML::dd(fmt("only %d pages displayed", $limit)));
         if (!$list->getContent())
-            $list->pushContent(HTML::dd(_("<no matches>")));
+            $list->pushContent(HTML::dd(_("No matches")));
 
         if (!empty($pages->stoplisted))
             $list = HTML(HTML::p(fmt(_("Ignored stoplist words “%s”"),
@@ -124,6 +128,11 @@ class WikiPlugin_FullTextSearch
             $list);
     }
 
+    /**
+     * @param WikiDB_Page $page
+     * @param string $hilight_re
+     * @return array
+     */
     function showhits($page, $hilight_re)
     {
         $current = $page->getCurrentRevision();
@@ -137,7 +146,7 @@ class WikiPlugin_FullTextSearch
         return $html;
     }
 
-    function highlight_line($line, $hilight_re)
+    static function highlight_line($line, $hilight_re)
     {
         while (preg_match("/^(.*?)($hilight_re)/i", $line, $m)) {
             $line = substr($line, strlen($m[0]));
@@ -154,13 +163,15 @@ class WikiPlugin_FullTextSearch
  */
 class _PageList_Column_hilight extends _PageList_Column
 {
+    private $parentobj;
+
     function _PageList_Column_WantedPages_links(&$params)
     {
         $this->parentobj =& $params[3];
         $this->_PageList_Column($params[0], $params[1], $params[2]);
     }
 
-    function _getValue(&$page, $revision_handle)
+    function _getValue($page, $revision_handle)
     {
         $pagename = $page->getName();
         $count = count($this->parentobj->_wpagelist[$pagename]);

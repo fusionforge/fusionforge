@@ -97,6 +97,8 @@ combobox[] name=s text="Template: " method=titleSearch args="Template/"
 class WikiPlugin_WikiFormRich
     extends WikiPlugin
 {
+    public $inputbox;
+
     function getDescription()
     {
         return _("Provide generic WikiForm input buttons.");
@@ -117,6 +119,11 @@ class WikiPlugin_WikiFormRich
      */
     function handle_plugin_args_cruft($argstr, $args)
     {
+        /**
+         * @var WikiRequest $request
+         */
+        global $request;
+
         $allowed = array("editbox", "hidden", "checkbox", "radiobutton" /*deprecated*/,
             "radio", "pulldown", "submit", "reset", "combobox");
         // no editbox[] = array(...) allowed (space)
@@ -146,8 +153,8 @@ class WikiPlugin_WikiFormRich
                         $basepage = null;
                         $plugin_str = preg_replace(array("/^<!/", "/!>$/"), array("<?", "?>"), $value);
                         // will return a pagelist object! pulldown,checkbox,radiobutton
-                        $value = $loader->expandPI($plugin_str, $GLOBALS['request'], $markup, $basepage);
-                        if (isa($value, 'PageList'))
+                        $value = $loader->expandPI($plugin_str, $request, $markup, $basepage);
+                        if (is_a($value, 'PageList'))
                             $value = $value->pageNames(); // apply limit
                         elseif (!is_array($value))
                             trigger_error(sprintf("Invalid argument %s ignored", htmlentities($arg_array[$i])),
@@ -166,6 +173,13 @@ class WikiPlugin_WikiFormRich
         return;
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         extract($this->getArgs($argstr, $request));
@@ -317,8 +331,6 @@ class WikiPlugin_WikiFormRich
     {
         global $request;
         $input['class'] = "dropdown";
-        $input['acdropdown'] = "true";
-        //$input['autocomplete'] = "OFF";
         $input['autocomplete_complete'] = "true";
         // only match begin: autocomplete_matchbegin, or
         $input['autocomplete_matchsubstring'] = "true";
@@ -334,7 +346,6 @@ class WikiPlugin_WikiFormRich
                 static $tmpArray = 'tmpArray00';
                 // deferred remote xmlrpc call
                 if (string_starts_with($input['method'], "dynxmlrpc:")) {
-                    // how is server + method + args encoding parsed by acdropdown?
                     $input['autocomplete_list'] = substr($input['method'], 3);
                     if ($input['args'])
                         $input['autocomplete_list'] .= (" " . $input['args']);
@@ -359,7 +370,7 @@ class WikiPlugin_WikiFormRich
                         trigger_error("invalid input['method'] " . $input['method'], E_USER_WARNING);
                     $pagelist = $p->run($dbi, @$input['args'], $request, $basepage);
                     $values = array();
-                    if (is_object($pagelist) and isa($pagelist, 'PageList')) {
+                    if (is_object($pagelist) and is_a($pagelist, 'PageList')) {
                         foreach ($pagelist->_pages as $page) {
                             if (is_object($page))
                                 $values[] = $page->getName();

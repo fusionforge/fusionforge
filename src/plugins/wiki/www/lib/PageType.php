@@ -66,17 +66,15 @@ class TransformedText extends CacheableMarkup
  * as of the cached marked-up page, it is important that the PageType classes
  * not have large amounts of class data.  (No class data is even better.)
  */
-class PageType
+abstract class PageType
 {
     /**
      * Get a page type descriptor.
      *
-     * This is a static member function.
-     *
      * @param  string   $name Name of the page type.
      * @return PageType An object which is a subclass of PageType.
      */
-    function GetPageType($name = '')
+    static function GetPageType($name = '')
     {
         if (!$name)
             $name = 'wikitext';
@@ -124,10 +122,6 @@ class PageType_html extends PageType
 {
 }
 
-class PageType_pdf extends PageType
-{
-}
-
 class PageType_wikiblog extends PageType
 {
 }
@@ -155,10 +149,15 @@ function getInterwikiMap($pagetext = false, $force = false)
 
 class PageType_interwikimap extends PageType
 {
-    function PageType_interwikimap($pagetext = false)
+    function __construct($pagetext = false)
     {
+        /**
+         * @var WikiRequest $request
+         */
+        global $request;
+
         if (!$pagetext) {
-            $dbi = $GLOBALS['request']->getDbh();
+            $dbi = $request->getDbh();
             $page = $dbi->getPage(__("InterWikiMap"));
             if ($page->get('locked')) {
                 $current = $page->getCurrentRevision();
@@ -211,7 +210,7 @@ class PageType_interwikimap extends PageType
             global $request;
             include_once 'lib/config.php';
             $url = getUploadFilePath();
-            // calculate to a relative local path to /uploads for pdf images.
+            // calculate to a relative local path to /uploads for PDF images.
             $doc_root = $request->get("DOCUMENT_ROOT");
             $ldir = NormalizeLocalFileName($url);
             $wikiroot = NormalizeLocalFileName('');
@@ -260,8 +259,13 @@ class PageType_interwikimap extends PageType
         return $link;
     }
 
-    function _parseMap($text)
+    private function _parseMap($text)
     {
+        /**
+         * @var WikiRequest $request
+         */
+        global $request;
+
         if (!preg_match_all("/^\s*(\S+)\s+(.+)$/m",
             $text, $matches, PREG_SET_ORDER)
         )
@@ -288,12 +292,12 @@ class PageType_interwikimap extends PageType
         // Talk:UserName => UserName/Discussion
         // Talk:PageName => PageName/Discussion as default, which might be overridden
         if (empty($map["Talk"])) {
-            $pagename = $GLOBALS['request']->getArg('pagename');
+            $pagename = $request->getArg('pagename');
             // against PageName/Discussion/Discussion
-            if (string_ends_with($pagename, SUBPAGE_SEPARATOR . _("Discussion")))
+            if (string_ends_with($pagename, '/' . _("Discussion")))
                 $map["Talk"] = "%s";
             else
-                $map["Talk"] = "%s" . SUBPAGE_SEPARATOR . _("Discussion");
+                $map["Talk"] = "%s" . '/' . _("Discussion");
         }
 
         foreach (array('Upload', 'User', 'Talk') as $special) {
@@ -305,7 +309,7 @@ class PageType_interwikimap extends PageType
             if (strstr($map[$special], '%u'))
                 $map[$special] = str_replace($map[$special],
                     '%u',
-                    $GLOBALS['request']->_user->_userid);
+                    $request->_user->_userid);
             if (strstr($map[$special], '%b'))
                 $map[$special] = str_replace($map[$special],
                     '%b',
@@ -320,7 +324,7 @@ class PageType_interwikimap extends PageType
         return $map;
     }
 
-    function _getMapFromWikiText($pagetext)
+    private function _getMapFromWikiText($pagetext)
     {
         if (preg_match('|^<verbatim>\n(.*)^</verbatim>|ms', $pagetext, $m)) {
             return $m[1];
@@ -328,7 +332,7 @@ class PageType_interwikimap extends PageType
         return false;
     }
 
-    function _getMapFromFile($filename)
+    private function _getMapFromFile($filename)
     {
         if (defined('WARN_NONPUBLIC_INTERWIKIMAP') and WARN_NONPUBLIC_INTERWIKIMAP) {
             $error_html = sprintf(_("Loading InterWikiMap from external file %s."),
@@ -346,11 +350,12 @@ class PageType_interwikimap extends PageType
         return $data;
     }
 
-    function _getRegexp()
+    private function _getRegexp()
     {
         if (!$this->_map)
             return '(?:(?!a)a)'; //  Never matches.
 
+        $qkeys = array();
         foreach (array_keys($this->_map) as $moniker)
             $qkeys[] = preg_quote($moniker, '/');
         return "(?:" . join("|", $qkeys) . ")";
@@ -359,11 +364,11 @@ class PageType_interwikimap extends PageType
 
 /** How to transform text.
  */
-class PageFormatter
+abstract class PageFormatter
 {
     /**
      * @param WikiDB_Page $page
-     * @param hash        $meta Version meta-data.
+     * @param array       $meta Version meta-data hash.
      */
     function __construct(&$page, $meta)
     {
@@ -382,10 +387,7 @@ class PageFormatter
      * @param  string     $text The raw page content (e.g. wiki-text).
      * @return XmlContent Transformed content.
      */
-    function format($text)
-    {
-        trigger_error("pure virtual", E_USER_ERROR);
-    }
+    abstract function format($text);
 }
 
 class PageFormatter_wikitext extends PageFormatter
@@ -407,33 +409,34 @@ class PageFormatter_interwikimap extends PageFormatter
             $this->_transform($this->_getFooter($text)));
     }
 
-    function _getHeader($text)
+    protected function _getHeader($text)
     {
         return preg_replace('/<verbatim>.*/s', '', $text);
     }
 
-    function _getFooter($text)
+    protected function _getFooter($text)
     {
         return preg_replace('@.*?(</verbatim>|\Z)@s', '', $text, 1);
     }
 
-    function _getMap($pagetext)
+    protected function _getMap($pagetext)
     {
         $map = getInterwikiMap($pagetext, 'force');
         return $map->_map;
     }
 
-    function _formatMap($pagetext)
+    protected function _formatMap($pagetext)
     {
         $map = $this->_getMap($pagetext);
         if (!$map)
-            return HTML::p("<No interwiki map found>"); // Shouldn't happen.
+            return HTML::p("No interwiki map found"); // Shouldn't happen.
 
         $mon_attr = array('class' => 'interwiki-moniker');
         $url_attr = array('class' => 'interwiki-url');
 
         $thead = HTML::thead(HTML::tr(HTML::th($mon_attr, _("Moniker")),
             HTML::th($url_attr, _("InterWiki Address"))));
+        $rows = array();
         foreach ($map as $moniker => $interurl) {
             $rows[] = HTML::tr(HTML::td($mon_attr, new Cached_WikiLinkIfKnown($moniker)),
                 HTML::td($url_attr, HTML::samp($interurl)));
@@ -447,7 +450,7 @@ class PageFormatter_interwikimap extends PageFormatter
 
 class FakePageRevision
 {
-    function FakePageRevision($meta)
+    function __construct($meta)
     {
         $this->_meta = $meta;
     }
@@ -521,62 +524,6 @@ class PageFormatter_html extends PageFormatter
     function format($text)
     {
         return $text;
-    }
-}
-
-/**
- *  FIXME. not yet used
- */
-class PageFormatter_pdf extends PageFormatter
-{
-
-    function _transform($text)
-    {
-        include_once 'lib/BlockParser.php';
-        return TransformText($text);
-    }
-
-    // one page or set of pages?
-    // here we try to format only a single page
-    function format($text)
-    {
-        include_once 'lib/Template.php';
-        global $request;
-        $tokens['page'] = $this->_page;
-        $tokens['CONTENT'] = $this->_transform($text);
-        $pagename = $this->_page->getName();
-
-        // This is a XmlElement tree, which must be converted to PDF
-
-        // We can make use of several pdf extensions. This one - fpdf
-        // - is pure php and very easy, but looks quite ugly and has a
-        // terrible interface, as terrible as most of the othes.
-        // The closest to HTML is htmldoc which needs an external cgi
-        // binary.
-        // We use a custom HTML->PDF class converter from PHPWebthings
-        // to be able to use templates for PDF.
-        require_once 'lib/fpdf.php';
-        require_once 'lib/pdf.php';
-
-        $pdf = new PDF();
-        $pdf->SetTitle($pagename);
-        $pdf->SetAuthor($this->_page->get('author'));
-        $pdf->SetCreator(WikiURL($pagename, array(), 1));
-        $pdf->AliasNbPages();
-        $pdf->AddPage();
-        //TODO: define fonts
-        $pdf->SetFont('Times', '', 12);
-        //$pdf->SetFont('Arial','B',16);
-
-        // PDF pagelayout from a special template
-        $template = new Template('pdf', $request, $tokens);
-        $pdf->ConvertFromHTML($template);
-
-        // specify filename, destination
-        $pdf->Output($pagename . ".pdf", 'I'); // I for stdin or D for download
-
-        // Output([string name [, string dest]])
-        return $pdf;
     }
 }
 

@@ -61,7 +61,15 @@ class WikiPlugin_IncludePage
         }
         if (!$page or !$page->name)
             return false;
-        return array(array('linkto' => $page->name, 'relation' => 0));
+
+        global $backlinks;
+        if (empty($backlinks)) {
+            global $request;
+            $this->run($request->_dbi, $argstr, $request, $basepage);
+        }
+
+        $backlinks[] = array('linkto' => $page->name);
+        return $backlinks;
     }
 
     // Avoid warning in:
@@ -71,6 +79,13 @@ class WikiPlugin_IncludePage
         return;
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         $args = $this->getArgs($argstr, $request);
@@ -87,8 +102,12 @@ class WikiPlugin_IncludePage
 
         // A page can include itself once (this is needed, e.g.,  when editing
         // TextFormattingRules).
-        static $included_pages = array();
-        if (in_array($page, $included_pages)) {
+        // Protect from recursive inclusion.
+        global $rootpage;
+        if ($rootpage == '') {
+            $rootpage = $basepage;
+        }
+        if ($page == $rootpage) {
             return $this->error(sprintf(_("Recursive inclusion of page %s ignored"),
                 $page));
         }
@@ -132,7 +151,7 @@ class WikiPlugin_IncludePage
                 $m[1] = substr($m[1], 1, -1);
             }
             // trap recursive redirects
-            if (in_array($m[1], $included_pages)) {
+            if ($m[1] == $rootpage) {
                 return $this->error(sprintf(_("Recursive inclusion of page %s ignored"),
                     $page . ' => ' . $m[1]));
             }
@@ -151,12 +170,8 @@ class WikiPlugin_IncludePage
         // only in expansion
         $ct = preg_replace("/<includeonly>(.+)<\/includeonly>/s", "\\1", $ct);
 
-        array_push($included_pages, $page);
-
         include_once 'lib/BlockParser.php';
         $content = TransformText($ct, $page);
-
-        array_pop($included_pages);
 
         if ($quiet)
             return $content;

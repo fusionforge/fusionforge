@@ -1,16 +1,12 @@
-Date: Tue, 29 Jul 2014 10:42:12 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.0)
+Date: Mon, 29 Jun 2015 12:04:23 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
 Content-Type: application/x-phpwiki;
   pagename=Derni%C3%A8resModifs;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-Voici une liste des pages récemment modifiées dans ce wiki (voir ÉditionsRécentes
-pour obtenir la liste des modifications mineures).
-
---------
-<<RecentChanges days||=7 daylist=1,3,7,30,90,0>>
+<<RecentChanges days||=7 daylist=1,3,7,30,90,0 show_deleted||=1>>
 
 ----
 [[CatégoriePageDAction]]

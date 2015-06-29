@@ -23,10 +23,17 @@
 class Request
 {
     public $args = array();
+    public $_validators;
+    private $_is_compressing_output;
+    public $_is_buffering_output;
+    public $_ob_get_length;
+    private $_do_chunked_output;
+    public $_finishing;
 
-    function Request()
+    function __construct()
     {
-        $this->_fix_magic_quotes_gpc();
+        global $request;
+
         $this->_fix_multipart_form_data();
 
         switch ($this->get('REQUEST_METHOD')) {
@@ -49,7 +56,7 @@ class Request
             $this->_accesslog = new Request_AccessLog(ACCESS_LOG, ACCESS_LOG_SQL);
         }
 
-        $GLOBALS['request'] = $this;
+        $request = $this;
     }
 
     function get($key)
@@ -79,6 +86,10 @@ class Request
         }
     }
 
+    /**
+     * @param $key
+     * @return string|bool
+     */
     function getArg($key)
     {
         if (isset($this->args[$key]))
@@ -100,7 +111,7 @@ class Request
     }
 
     // Well oh well. Do we really want to pass POST params back as GET?
-    function getURLtoSelf($args = false, $exclude = array())
+    function getURLtoSelf($args = array(), $exclude = array())
     {
         $get_args = $this->args;
         if ($args)
@@ -377,7 +388,6 @@ class Request
         // Even if they are sending the accept-encoding gzip header!
         // wget is, Mozilla, and MSIE no.
         // Of the RSS readers only MagpieRSS 0.5.2 is. http://www.rssgov.com/rssparsers.html
-        // See also http://phpwiki.sourceforge.net/phpwiki/KnownBugs
         if ($compress
             and $this->getArg('format')
                 and strstr($this->getArg('format'), 'rss')
@@ -417,7 +427,7 @@ class Request
             if (ob_get_length()) ob_clean();
             $this->_is_buffering_output = false;
         } else {
-            trigger_error("Not buffering output", E_USER_NOTICE);
+            trigger_error(_("Not buffering output"), E_USER_NOTICE);
         }
     }
 
@@ -431,8 +441,7 @@ class Request
     function chunkOutput()
     {
         if (!empty($this->_is_buffering_output)
-            or
-            (function_exists('ob_get_level') and @ob_get_level())
+            or (@ob_get_level())
         ) {
             $this->_do_chunked_output = true;
             if (empty($this->_ob_get_length)) $this->_ob_get_length = 0;
@@ -476,7 +485,7 @@ class Request
             }
             $this->_is_buffering_output = false;
             ob_end_flush();
-        } elseif (function_exists('ob_get_level') and @ob_get_level()) {
+        } elseif (@ob_get_level()) {
             ob_end_flush();
         }
         session_write_close();
@@ -506,22 +515,10 @@ class Request
                 unset($val->_group->_request);
                 unset($val->_group->user);
             }
-            if (ENABLE_USER_NEW) {
-                unset($val->_HomePagehandle);
-                unset($val->_auth_dbi);
-            } else {
-                unset($val->_dbi);
-                unset($val->_authdbi);
-                unset($val->_homepage);
-                unset($val->_request);
-            }
+            unset($val->_HomePagehandle);
+            unset($val->_auth_dbi);
         }
-        return $this->session->set($key, $val);
-    }
-
-    function deleteSessionVar($key)
-    {
-        return $this->session->delete($key);
+        $this->session->set($key, $val);
     }
 
     function getCookieVar($key)
@@ -531,12 +528,12 @@ class Request
 
     function setCookieVar($key, $val, $lifetime_in_days = false, $path = false)
     {
-        return $this->cookies->set($key, $val, $lifetime_in_days, $path);
+        $this->cookies->set($key, $val, $lifetime_in_days, $path);
     }
 
     function deleteCookieVar($key)
     {
-        return $this->cookies->delete($key);
+        $this->cookies->delete($key);
     }
 
     function getUploadedFile($key)
@@ -544,22 +541,7 @@ class Request
         return Request_UploadedFile::getUploadedFile($key);
     }
 
-    function _fix_magic_quotes_gpc()
-    {
-        $needs_fix = array('HTTP_POST_VARS',
-            'HTTP_GET_VARS',
-            'HTTP_COOKIE_VARS',
-            'HTTP_SERVER_VARS',
-            'HTTP_POST_FILES');
-
-        // Fix magic quotes.
-        if (get_magic_quotes_gpc()) {
-            foreach ($needs_fix as $vars)
-                $this->_stripslashes($GLOBALS[$vars]);
-        }
-    }
-
-    function _stripslashes(&$var)
+    private function _stripslashes(&$var)
     {
         if (is_array($var)) {
             foreach ($var as $key => $val)
@@ -568,13 +550,13 @@ class Request
             $var = stripslashes($var);
     }
 
-    function _fix_multipart_form_data()
+    private function _fix_multipart_form_data()
     {
         if (preg_match('|^multipart/form-data|', $this->get('CONTENT_TYPE')))
             $this->_strip_leading_nl($GLOBALS['HTTP_POST_VARS']);
     }
 
-    function _strip_leading_nl(&$var)
+    private function _strip_leading_nl(&$var)
     {
         if (is_array($var)) {
             foreach ($var as $key => $val)
@@ -586,7 +568,7 @@ class Request
 
 class Request_SessionVars
 {
-    function Request_SessionVars()
+    function __construct()
     {
         // Prevent cacheing problems with IE 5
         session_cache_limiter('none');
@@ -617,8 +599,6 @@ class Request_SessionVars
         $vars[$key] = $val;
         if (isset($_SESSION)) // php-5.2
             $_SESSION[$key] = $val;
-        if (!check_php_version(5, 3))
-            session_register($key);
     }
 
     function delete($key)
@@ -626,12 +606,11 @@ class Request_SessionVars
         $vars = &$GLOBALS['HTTP_SESSION_VARS'];
         if (!function_usable('ini_get') or ini_get('register_globals'))
             unset($GLOBALS[$key]);
-        if (DEBUG) trigger_error("delete session $key", E_USER_WARNING);
+        if (DEBUG)
+           trigger_error("delete session $key", E_USER_WARNING);
         unset($vars[$key]);
         if (isset($_SESSION)) // php-5.2
             unset($_SESSION[$key]);
-        if (!check_php_version(5, 3))
-            session_unregister($key);
     }
 }
 
@@ -657,7 +636,7 @@ class Request_CookieVars
 
     function get_old($key)
     {
-        if (defined('FUSIONFORGE') and FUSIONFORGE) {
+        if (defined('FUSIONFORGE') && FUSIONFORGE) {
             return false;
         }
         $vars = &$GLOBALS['HTTP_COOKIE_VARS'];
@@ -708,7 +687,6 @@ class Request_CookieVars
         if (isset($deleted[$key])) return;
         if (defined('WIKI_XMLRPC') and WIKI_XMLRPC) return;
 
-        $vars = &$GLOBALS['HTTP_COOKIE_VARS'];
         if (!defined('COOKIE_DOMAIN'))
             @setcookie($key, '', 0);
         else
@@ -728,7 +706,12 @@ class Request_CookieVars
 */
 class Request_UploadedFile
 {
-    function getUploadedFile($postname)
+    function __construct($fileinfo)
+    {
+        $this->_info = $fileinfo;
+    }
+
+    static function getUploadedFile($postname)
     {
         global $HTTP_POST_FILES;
 
@@ -779,14 +762,6 @@ class Request_UploadedFile
                             "end with a slash. upload_tmp_dir = \"C:/WINDOWS/TEMP/\" is good suggestion.",
                         E_USER_ERROR);
                     return false;
-                } else {
-                    /*
-                    trigger_error(sprintf("Workaround for PHP/Windows is_uploaded_file() problem for %s.",
-                                          $fileinfo['tmp_name'])."\n".
-                                  "Probably illegal TEMP environment or upload_tmp_dir setting.",
-                                  E_USER_NOTICE);
-                    */
-                    ;
                 }
             } else {
                 trigger_error(sprintf("Uploaded tmpfile %s not found.", $fileinfo['tmp_name']) . "\n" .
@@ -795,11 +770,6 @@ class Request_UploadedFile
             }
         }
         return new Request_UploadedFile($fileinfo);
-    }
-
-    function Request_UploadedFile($fileinfo)
-    {
-        $this->_info = $fileinfo;
     }
 
     function getSize()
@@ -864,14 +834,15 @@ class Request_UploadedFile
  */
 class Request_AccessLog
 {
+    public $reader;
+    public $sqliter;
+
     /**
-     * @param $logfile string  Log file name.
+     * @param string $logfile Log file name.
      * @param bool $do_sql
      */
-    function Request_AccessLog($logfile, $do_sql = false)
+    function __construct($logfile, $do_sql = false)
     {
-        //global $request; // request not yet initialized!
-
         $this->logfile = $logfile;
         if ($logfile and !is_writeable($logfile)) {
             trigger_error
@@ -882,16 +853,13 @@ class Request_AccessLog
                         'ACCESS_LOG')
                 , E_USER_NOTICE);
         }
-        //$request->_accesslog =& $this;
-        //if (empty($request->_accesslog->entries))
         register_shutdown_function("Request_AccessLogEntry_shutdown_function");
 
         if ($do_sql) {
             global $DBParams;
-            if (!in_array($DBParams['dbtype'], array('SQL', 'ADODB'))) {
-                trigger_error("Unsupported database backend for ACCESS_LOG_SQL. Need DATABASE_TYPE=SQL or ADODB.");
+            if (!in_array($DBParams['dbtype'], array('SQL', 'ADODB', 'PDO'))) {
+                trigger_error(_("Unsupported database backend for ACCESS_LOG_SQL. Need DATABASE_TYPE=SQL or ADODB or PDO."));
             } else {
-                //$this->_dbi =& $request->_dbi;
                 $this->logtable = (!empty($DBParams['prefix']) ? $DBParams['prefix'] : '') . "accesslog";
             }
         }
@@ -937,14 +905,20 @@ class Request_AccessLog
     }
 
     /**
-     * Return iterator of referer items reverse sorted (latest first).
+     * Return iterator of referrer items reverse sorted (latest first).
+     *
+     * @param int $limit
+     * @param bool $external_only
+     * @return WikiDB_Array_generic_iter
      */
     function get_referer($limit = 15, $external_only = false)
     {
         if ($external_only) { // see stdlin.php:isExternalReferrer()
             $base = SERVER_URL;
-            $blen = strlen($base);
+        } else {
+            $base = '';
         }
+        $blen = strlen($base);
         if (!empty($this->_dbi)) {
             // check same hosts in referer and request and remove them
             $ext_where = " AND LEFT(referer,$blen) <> " . $this->_dbi->quote($base)
@@ -972,11 +946,11 @@ class Request_AccessLog
     }
 
     /**
-     * Read sequentially all previous entries from log file.
+     * Read sequentially backwards all previous entries from log file.
+     * FIXME!
      */
     function read_file()
     {
-        global $request;
         if ($this->logfile) $this->logfile = ACCESS_LOG; // support Request_AccessLog::read
 
         if (empty($this->reader)) // start at the beginning
@@ -997,7 +971,8 @@ class Request_AccessLog
 
     function _read_sql_query($where = '')
     {
-        $dbh =& $GLOBALS['request']->_dbi;
+        global $request;
+        $dbh =& $request->_dbi;
         $log_tbl =& $this->logtable;
         return $dbh->genericSqlIter("SELECT *,request_uri as request,request_time as time,remote_user as user,"
             . "remote_host as host,agent as user_agent"
@@ -1015,7 +990,8 @@ class Request_AccessLog
     /* done in request->finish() before the db is closed */
     function write_sql()
     {
-        $dbh =& $GLOBALS['request']->_dbi;
+        global $request;
+        $dbh =& $request->_dbi;
         if (isset($this->entries) and $dbh and $dbh->isOpen())
             foreach ($this->entries as $entry) {
                 $entry->write_sql();
@@ -1043,6 +1019,17 @@ class Request_AccessLog
 
 class Request_AccessLogEntry
 {
+    public $host;
+    public $ident;
+    public $user;
+    public $request;
+    public $referer;
+    public $user_agent;
+    public $duration;
+    public $request_args;
+    public $request_method;
+    public $request_uri;
+
     /**
      * The log entry will be automatically appended to the log file or
      * SQL table when the current request terminates.
@@ -1119,12 +1106,10 @@ class Request_AccessLogEntry
     /**
      * Get time zone offset.
      *
-     * This is a static member function.
-     *
      * @param int $time Unix timestamp (defaults to current time).
      * @return string Zone offset, e.g. "-0800" for PST.
      */
-    function _zone_offset($time = 0)
+    static function _zone_offset($time = 0)
     {
         if (!$time)
             $time = time();
@@ -1141,8 +1126,6 @@ class Request_AccessLogEntry
 
     /**
      * Format time in NCSA format.
-     *
-     * This is a static member function.
      *
      * @param int $time Unix timestamp (defaults to current time).
      * @return string Formatted date & time.
@@ -1215,7 +1198,7 @@ class Request_AccessLogEntry
 }
 
 /**
- * Shutdown callback.
+ * Shutdown callback. Ensures that the file is written.
  *
  * @access private
  * @see Request_AccessLogEntry
@@ -1233,7 +1216,7 @@ function Request_AccessLogEntry_shutdown_function()
 
 class HTTP_ETag
 {
-    function HTTP_ETag($val, $is_weak = false)
+    function __construct($val, $is_weak = false)
     {
         $this->_val = wikihash($val);
         $this->_weak = $is_weak;
@@ -1261,9 +1244,8 @@ class HTTP_ETag
 
     /** Parse tag from header.
      *
-     * This is a static member function.
      */
-    function parse($strval)
+    static function parse($strval)
     {
         if (!preg_match(':^(W/)?"(.+)"$:i', trim($strval), $m))
             return false; // parse failed
@@ -1304,7 +1286,7 @@ define ('_HTTP_VAL_FAILED', 3); // Precondition failed.
 
 class HTTP_ValidatorSet
 {
-    function HTTP_ValidatorSet($validators)
+    function __construct($validators)
     {
         $this->_mtime = $this->_weak = false;
         $this->_tag = array();
@@ -1352,6 +1334,10 @@ class HTTP_ValidatorSet
         return $this->_mtime;
     }
 
+    /**
+     * @param Request $request
+     * @return int
+     */
     function checkConditionalRequest(&$request)
     {
         $result = max($this->_checkIfUnmodifiedSince($request),
@@ -1370,6 +1356,10 @@ class HTTP_ValidatorSet
         return false;
     }
 
+    /**
+     * @param Request $request
+     * @return int
+     */
     function _checkIfUnmodifiedSince(&$request)
     {
         if ($this->_mtime !== false) {
@@ -1380,6 +1370,10 @@ class HTTP_ValidatorSet
         return _HTTP_VAL_PASS;
     }
 
+    /**
+     * @param Request $request
+     * @return int
+     */
     function _checkIfModifiedSince(&$request)
     {
         if ($this->_mtime !== false and $request->isGetOrHead()) {
@@ -1393,6 +1387,10 @@ class HTTP_ValidatorSet
         return _HTTP_VAL_PASS;
     }
 
+    /**
+     * @param Request $request
+     * @return int
+     */
     function _checkIfMatch(&$request)
     {
         if ($this->_tag && ($taglist = $request->get("HTTP_IF_MATCH"))) {
@@ -1403,6 +1401,10 @@ class HTTP_ValidatorSet
         return _HTTP_VAL_PASS;
     }
 
+    /**
+     * @param Request $request
+     * @return int
+     */
     function _checkIfNoneMatch(&$request)
     {
         if ($this->_tag && ($taglist = $request->get("HTTP_IF_NONE_MATCH"))) {

@@ -61,9 +61,6 @@ caption {
     caption-side: top;
     text-align: left;
     margin-bottom: .5ex;
-    /* Allow the caption to extend to the full page width
-       Mac ie5.1 ignores this*/
-    width: 100%;
 }
 
 /**
@@ -314,11 +311,3 @@ table.cal td.cal-today {
     padding: 0;
     border: 0;
 }
-
-/* For emacs users
- *
- * Local Variables:
- * mode: c
- * c-file-style: cc-mode
- * End:
- */

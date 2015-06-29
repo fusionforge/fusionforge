@@ -37,12 +37,14 @@ class WikiDB_backend_ADODB_postgres7
      */
     function optimize()
     {
-        return 0; // if the wikiuser is not the table owner
+        return false; // if the wikiuser is not the table owner
 
+        /*
         foreach ($this->_table_names as $table) {
             $this->_dbh->Execute("VACUUM ANALYZE $table");
         }
         return 1;
+        */
     }
 
     // just for blobs. the rest is escaped with qstr()
@@ -96,25 +98,25 @@ class WikiDB_backend_ADODB_postgres7
         }
     }
 
-    /**
+    /*
      * Lock all tables we might use.
      * postgresql has proper transactions so we dont need table locks.
      */
-    function _lock_tables($tables, $write_lock = true)
+    protected function _lock_tables($tables, $write_lock = true)
     {
         ;
     }
 
-    /**
+    /*
      * Unlock all tables.
      * postgresql has proper transactions so we dont need table locks.
      */
-    function _unlock_tables($tables, $write_lock = false)
+    protected function _unlock_tables($tables)
     {
         ;
     }
 
-    /**
+    /*
      * Serialize data
      */
     function _serialize($data)
@@ -125,7 +127,7 @@ class WikiDB_backend_ADODB_postgres7
         return $this->_quote(serialize($data));
     }
 
-    /**
+    /*
      * Unserialize data
      */
     function _unserialize($data)

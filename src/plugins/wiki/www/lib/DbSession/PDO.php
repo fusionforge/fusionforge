@@ -1,4 +1,23 @@
 <?php
+/*
+ * Copyright 2005 $ThePhpWikiProgrammingTeam
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
 
 /**
  * Db sessions for PDO, based on pear DB Sessions.
@@ -27,7 +46,7 @@ class DbSession_PDO
 
     function & _connect()
     {
-        $dbh =& $this->_dbh;
+        $dbh = &$this->_dbh;
         if (!$dbh or !is_object($dbh)) {
             global $DBParams;
             $db = new WikiDB_backend_PDO($DBParams);
@@ -42,6 +61,7 @@ class DbSession_PDO
         return $this->_backend->query($sql);
     }
 
+    // adds surrounding quotes
     function quote($string)
     {
         return $this->_backend->quote($string);
@@ -90,7 +110,6 @@ class DbSession_PDO
      */
     public function read($id)
     {
-        //$this->log("_read($id)");
         $dbh = $this->_connect();
         $table = $this->_table;
         $sth = $dbh->prepare("SELECT sess_data FROM $table WHERE sess_id=?");
@@ -101,12 +120,11 @@ class DbSession_PDO
             $res = '';
         }
         $this->_disconnect();
-        if (!empty($res) and isa($dbh, 'ADODB_postgres64')) {
+        if (!empty($res) and is_a($dbh, 'ADODB_postgres64')) {
             $res = base64_decode($res);
         }
         if (strlen($res) > 4000) {
-            trigger_error("Overlarge session data! " . strlen($res) .
-                " gt. 4000", E_USER_WARNING);
+            // trigger_error("Overlarge session data! ".strlen($res). " gt. 4000", E_USER_WARNING);
             $res = preg_replace('/s:6:"_cache";O:12:"WikiDB_cache".+}$/', "", $res);
             $res = preg_replace('/s:12:"_cached_html";s:.+",s:4:"hits"/', 's:4:"hits"', $res);
             if (strlen($res) > 4000) {
@@ -133,6 +151,11 @@ class DbSession_PDO
      */
     public function write($id, $sess_data)
     {
+        /**
+         * @var WikiRequest $request
+         */
+        global $request;
+
         if (defined("WIKI_XMLRPC") or defined("WIKI_SOAP")) return false;
 
         $dbh = $this->_connect();
@@ -140,7 +163,7 @@ class DbSession_PDO
         $time = time();
 
         // postgres can't handle binary data in a TEXT field.
-        if (isa($dbh, 'ADODB_postgres64'))
+        if (is_a($dbh, 'ADODB_postgres64'))
             $sess_data = base64_encode($sess_data);
 
         /* AffectedRows with sessions seems to be unstable on certain platforms.
@@ -156,7 +179,7 @@ class DbSession_PDO
             $sth->bindParam(1, $id, PDO::PARAM_STR, 32);
             $sth->bindParam(2, $sess_data, PDO::PARAM_LOB);
             $sth->bindParam(3, $time, PDO::PARAM_INT);
-            $sth->bindParam(4, $GLOBALS['request']->get('REMOTE_ADDR'), PDO::PARAM_STR, 15);
+            $sth->bindParam(4, $request->get('REMOTE_ADDR'), PDO::PARAM_STR, 15);
             if ($result = $sth->execute()) {
                 $this->_backend->commit();
             } else {
@@ -168,7 +191,7 @@ class DbSession_PDO
                 . " WHERE sess_id=?");
             $sth->bindParam(1, $sess_data, PDO::PARAM_LOB);
             $sth->bindParam(2, $time, PDO::PARAM_INT);
-            $sth->bindParam(3, $GLOBALS['request']->get('REMOTE_ADDR'), PDO::PARAM_STR, 15);
+            $sth->bindParam(3, $request->get('REMOTE_ADDR'), PDO::PARAM_STR, 15);
             $sth->bindParam(4, $id, PDO::PARAM_STR, 32);
             $result = $sth->execute(); // implicit affected rows
             if ($result === false or $result < 1) { // false or int > 0
@@ -178,7 +201,7 @@ class DbSession_PDO
                 $sth->bindParam(1, $id, PDO::PARAM_STR, 32);
                 $sth->bindParam(2, $sess_data, PDO::PARAM_LOB);
                 $sth->bindParam(3, $time, PDO::PARAM_INT);
-                $sth->bindParam(4, $GLOBALS['request']->get('REMOTE_ADDR'), PDO::PARAM_STR, 15);
+                $sth->bindParam(4, $request->get('REMOTE_ADDR'), PDO::PARAM_STR, 15);
                 $result = $sth->execute();
             }
         }
@@ -223,7 +246,7 @@ class DbSession_PDO
         return true;
     }
 
-    // WhoIsOnline support.
+    // WhoIsOnline support
     // TODO: ip-accesstime dynamic blocking API
     function currentSessions()
     {

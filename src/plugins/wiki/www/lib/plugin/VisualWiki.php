@@ -34,12 +34,22 @@ require_once 'lib/plugin/GraphViz.php';
 class WikiPlugin_VisualWiki
     extends WikiPlugin_GraphViz
 {
+    public $pages;
+    public $names;
+    public $ColorTab;
+    public $oldest;
+
     /**
      * Sets plugin type to map production
      */
     function getPluginType()
     {
-        return ($GLOBALS['request']->getArg('debug')) ? PLUGIN_CACHED_IMG_ONDEMAND
+        /**
+         * @var WikiRequest $request
+         */
+        global $request;
+
+        return ($request->getArg('debug')) ? PLUGIN_CACHED_IMG_ONDEMAND
             : PLUGIN_CACHED_MAP;
     }
 
@@ -134,7 +144,7 @@ class WikiPlugin_VisualWiki
      * @param Request $request
      * @return array($map,$html)
      */
-    function getMap($dbi, $argarray, $request)
+    protected function getMap($dbi, $argarray, $request)
     {
         if (!VISUALWIKI_ALLOWOPTIONS)
             $argarray = $this->defaultarguments();
@@ -148,7 +158,7 @@ class WikiPlugin_VisualWiki
         /* ($dbi,  $large, $recent, $refined, $backlink,
             $neighbour, $excludelist, $includelist, $color); */
         $result = $this->invokeDot($argarray);
-        if (isa($result, 'HtmlElement'))
+        if (is_a($result, 'HtmlElement'))
             return array(false, $result);
         else
             return $result;
@@ -296,7 +306,6 @@ class WikiPlugin_VisualWiki
         // collect all pages
         $allpages = $dbi->getAllPages(false, false, false, $exclude_list);
         $pages = &$this->pages;
-        $countpages = 0;
         while ($page = $allpages->next()) {
             $name = $page->getName();
 
@@ -397,7 +406,7 @@ class WikiPlugin_VisualWiki
      * <code>dot</code>.
      *
      * @param string $filename
-     * @param bool $argarray
+     * @param array $argarray
      * @internal param string $filename name of the dot file to be created
      * @internal param float $width width of the output graph in inches
      * @internal param float $height height of the graph in inches
@@ -406,7 +415,7 @@ class WikiPlugin_VisualWiki
      * @internal param string $shape node shape; 'ellipse', 'box', 'circle', 'point'
      * @internal param string $label 'name': label by name,
      *                          'number': label by unique number
-     * @return boolean error status; true=ok; false=error
+     * @return bool error status; true=ok; false=error
      */
     function createDotFile($filename, $argarray)
     {
@@ -444,7 +453,7 @@ class WikiPlugin_VisualWiki
 
             $url = rawurlencode($name);
             // patch to allow Page/SubPage
-            $url = str_replace(urlencode(SUBPAGE_SEPARATOR), SUBPAGE_SEPARATOR, $url);
+            $url = str_replace(urlencode('/'), '/', $url);
             $nodename = ($label != 'name' ? $nametonumber[$name] + 1 : $name);
 
             $dot .= "    \"$nodename\" [URL=\"$url\"";

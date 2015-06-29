@@ -93,12 +93,8 @@ if ($filepath && is_file($filepath)) {
     $filename = str_replace('"', '', $filename);
     header('Content-disposition: filename="' . $filename . '"');
 
-    if (function_exists('finfo_open')) {
-        $finfo = finfo_open(FILEINFO_MIME_TYPE);
-        $mimetype = finfo_file($finfo, $filepath);
-    } else {
-        $mimetype = 'application/octet-stream';
-    }
+    $finfo = finfo_open(FILEINFO_MIME_TYPE);
+    $mimetype = finfo_file($finfo, $filepath);
     header("Content-type: $mimetype");
 
     $length = filesize($filepath);

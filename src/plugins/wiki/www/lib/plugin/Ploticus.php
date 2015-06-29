@@ -31,7 +31,7 @@
  *
  * Note:
  * - For windows you need either a gd library with GIF support or
- *   a ploticus with PNG support. This comes e.g. with the cygwin build.
+ *   a Ploticus with PNG support. This comes e.g. with the Cygwin build.
  * - We support only images supported by GD so far (PNG most likely).
  *   No EPS, PS, SWF, SVG or SVGZ support yet, due to limitations in WikiPluginCached.
  *   This will be fixed soon.
@@ -60,6 +60,11 @@ require_once 'lib/WikiPluginCached.php';
 class WikiPlugin_Ploticus
     extends WikiPluginCached
 {
+    public $_args;
+    public $source;
+    public $_mapfile;
+    public $_errortext;
+
     /**
      * Sets plugin type to MAP if -csmap (-map or -mapdemo or -csmapdemo not supported)
      * or HTML if the imagetype is not supported by GD (EPS, SVG, SVGZ) (not yet)
@@ -112,7 +117,7 @@ class WikiPlugin_Ploticus
         );
     }
 
-    function handle_plugin_args_cruft(&$argstr, &$args)
+    function handle_plugin_args_cruft($argstr, $args)
     {
         $this->source = $argstr;
     }
@@ -145,6 +150,11 @@ class WikiPlugin_Ploticus
     function getImageType($dbi, $argarray, $request)
     {
         return $argarray['device'];
+    }
+
+    protected function getHtml($dbi, $argarray, $request, $basepage)
+    {
+        trigger_error('pure virtual', E_USER_ERROR);
     }
 
     /**
@@ -202,94 +212,100 @@ class WikiPlugin_Ploticus
         return 1;
     }
 
-    function getImage($dbi, $argarray, $request)
+    protected function getImage($dbi, $argarray, $request)
     {
-        //extract($this->getArgs($argstr, $request));
-        //extract($argarray);
-        $source =& $this->source;
-        if (!empty($source)) {
-            if ($this->withShellCommand($source)) {
-                $this->_errortext .= _("shell commands not allowed in Ploticus");
-                return false;
-            }
-            if (is_array($argarray['data'])) { // support <!plugin-list !> pagelists
-                $src = "#proc getdata\ndata:";
-                $i = 0;
-                foreach ($argarray['data'] as $data) {
-                    // hash or array?
-                    if (is_array($data))
-                        $src .= ("\t" . join(" ", $data) . "\n");
-                    else
-                        $src .= ("\t" . '"' . $data . '" ' . $i++ . "\n");
-                }
-                $src .= $source;
-                $source = $src;
-            }
-            $tempfile = $this->tempnam('Ploticus', 'plo');
-            @unlink($tempfile);
-            $gif = $argarray['device'];
-            $args = "-$gif -o $tempfile.$gif";
-            if (!empty($argarray['-csmap'])) {
-                $args .= " -csmap -mapfile $tempfile.map";
-                $this->_mapfile = "$tempfile.map";
-            }
-            if (!empty($argarray['-prefab'])) {
-                //check $_ENV['PLOTICUS_PREFABS'] and default directory
-                global $HTTP_ENV_VARS;
-                if (empty($HTTP_ENV_VARS['PLOTICUS_PREFABS'])) {
-                    if (file_exists("/usr/share/ploticus"))
-                        $HTTP_ENV_VARS['PLOTICUS_PREFABS'] = "/usr/share/ploticus";
-                    elseif (defined('PLOTICUS_PREFABS'))
-                        $HTTP_ENV_VARS['PLOTICUS_PREFABS'] = constant('PLOTICUS_PREFABS');
-                }
-                $args .= (" -prefab " . $argarray['-prefab']);
-            }
-            if (isWindows()) {
-                $fp = fopen("$tempfile.plo", "w");
-                fwrite($fp, $source);
-                fclose($fp);
-                $code = $this->execute(PLOTICUS_EXE . " $tempfile.plo $args", $tempfile . ".$gif");
-            } else {
-                $code = $this->filterThroughCmd($source, PLOTICUS_EXE . " -stdin $args");
-                sleep(1);
-            }
-            //if (empty($code))
-            //    return $this->error(fmt("Couldn't start commandline “%s”", $commandLine));
-            if (!file_exists($tempfile . ".$gif")) {
-                $this->_errortext .= sprintf(_("%s error: outputfile “%s” not created"),
-                    "Ploticus", "$tempfile.$gif");
-                if (isWindows())
-                    $this->_errortext .= ("\ncmd-line: " . PLOTICUS_EXE . " $tempfile.plo $args");
-                else
-                    $this->_errortext .= ("\ncmd-line: cat script | " . PLOTICUS_EXE . " $args");
-                @unlink("$tempfile.pl");
-                @unlink("$tempfile");
-                return false;
-            }
-            $ImageCreateFromFunc = "ImageCreateFrom$gif";
-            if (function_exists($ImageCreateFromFunc)) {
-                $handle = $ImageCreateFromFunc("$tempfile.$gif");
-                if ($handle) {
-                    @unlink("$tempfile.$gif");
-                    @unlink("$tempfile.plo");
-                    @unlink("$tempfile");
-                    return $handle;
-                }
-            }
-            return "$tempfile.$gif";
-        } else {
-            return $this->error(fmt("empty source"));
+        // Check device
+        $device = strtolower($argarray['device']);
+        if (!in_array($device, array('gif', 'png', 'jpeg', 'svg', 'svgz', 'eps', 'swf', 'ps', 'pdf', 'html'))) {
+            $this->_errortext = _("wrong device");
+            return false;
         }
+        $source =& $this->source;
+        if (empty($source)) {
+            $this->_errortext = _("empty source");
+            return false;
+        }
+        if ($this->withShellCommand($source)) {
+            $this->_errortext .= _("shell commands not allowed in Ploticus");
+            return false;
+        }
+        if (is_array($argarray['data'])) { // support <!plugin-list !> pagelists
+            $src = "#proc getdata\ndata:";
+            $i = 0;
+            foreach ($argarray['data'] as $data) {
+                // hash or array?
+                if (is_array($data))
+                    $src .= ("\t" . join(" ", $data) . "\n");
+                else
+                    $src .= ("\t" . '"' . $data . '" ' . $i++ . "\n");
+            }
+            $src .= $source;
+            $source = $src;
+        }
+        $tempfile = $this->tempnam('Ploticus', 'plo');
+        @unlink($tempfile);
+        $args = "-$device -o $tempfile.$device";
+        if (!empty($argarray['-csmap'])) {
+            $args .= " -csmap -mapfile $tempfile.map";
+            $this->_mapfile = "$tempfile.map";
+        }
+        if (!empty($argarray['-prefab'])) {
+            //check $_ENV['PLOTICUS_PREFABS'] and default directory
+            global $HTTP_ENV_VARS;
+            if (empty($HTTP_ENV_VARS['PLOTICUS_PREFABS'])) {
+                if (file_exists("/usr/share/ploticus"))
+                    $HTTP_ENV_VARS['PLOTICUS_PREFABS'] = "/usr/share/ploticus";
+                elseif (defined('PLOTICUS_PREFABS'))
+                    $HTTP_ENV_VARS['PLOTICUS_PREFABS'] = constant('PLOTICUS_PREFABS');
+            }
+            $args .= (" -prefab " . $argarray['-prefab']);
+        }
+        if (isWindows()) {
+            $fp = fopen("$tempfile.plo", "w");
+            fwrite($fp, $source);
+            fclose($fp);
+            $this->execute(PLOTICUS_EXE . " $tempfile.plo $args", $tempfile . ".$device");
+        } else {
+            $this->filterThroughCmd($source, PLOTICUS_EXE . " -stdin $args");
+            sleep(1);
+        }
+        if (!file_exists($tempfile . ".$device")) {
+            $this->_errortext .= sprintf(_("%s error: outputfile “%s” not created"),
+                "Ploticus", "$tempfile.$device");
+            if (isWindows())
+                $this->_errortext .= ("\ncmd-line: " . PLOTICUS_EXE . " $tempfile.plo $args");
+            else
+                $this->_errortext .= ("\ncmd-line: cat script | " . PLOTICUS_EXE . " $args");
+            @unlink("$tempfile.pl");
+            @unlink("$tempfile");
+            return false;
+        }
+        $ImageCreateFromFunc = "ImageCreateFrom$device";
+        if (function_exists($ImageCreateFromFunc)) {
+            $handle = $ImageCreateFromFunc("$tempfile.$device");
+            if ($handle) {
+                @unlink("$tempfile.$device");
+                @unlink("$tempfile.plo");
+                @unlink("$tempfile");
+                return $handle;
+            }
+        }
+        return "$tempfile.$device";
     }
 
-    // which argument must be set to 'png', for the fallback image when svg will fail on the client.
-    // type: SVG_PNG
-    function pngArg()
+    /**
+     * Which argument must be set to 'png', for the fallback image when svg
+     * will fail on the client.
+     * type: SVG_PNG
+     *
+     * @return string
+     */
+    protected function pngArg()
     {
         return 'device';
     }
 
-    function getMap($dbi, $argarray, $request)
+    protected function getMap($dbi, $argarray, $request)
     {
         $img = $this->getImage($dbi, $argarray, $request);
         return array($this->_mapfile, $img);

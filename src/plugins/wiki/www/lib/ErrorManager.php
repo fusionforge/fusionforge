@@ -2,19 +2,8 @@
 
 if (isset($GLOBALS['ErrorManager'])) return;
 
-// php5: ignore E_STRICT (var warnings)
-/*
-if (defined('E_STRICT')
-    and (E_ALL & E_STRICT)
-    and (error_reporting() & E_STRICT)) {
-    echo " errormgr: error_reporting=", error_reporting();
-    echo "\nplease fix that in your php.ini!";
-    error_reporting(E_ALL & ~E_STRICT);
-}
-*/
-define ('EM_FATAL_ERRORS', E_ERROR | E_PARSE | E_CORE_ERROR | E_COMPILE_ERROR | E_USER_ERROR | ~2048 & ((check_php_version(5, 3)) ? ~E_DEPRECATED : ~0));
-define ('EM_WARNING_ERRORS',
-    E_WARNING | E_CORE_WARNING | E_COMPILE_WARNING | E_USER_WARNING | ((check_php_version(5, 3)) ? E_DEPRECATED : 0));
+define ('EM_FATAL_ERRORS', E_ERROR | E_PARSE | E_CORE_ERROR | E_COMPILE_ERROR | E_USER_ERROR | ~2048 & (~E_DEPRECATED));
+define ('EM_WARNING_ERRORS', E_WARNING | E_CORE_WARNING | E_COMPILE_WARNING | E_USER_WARNING | E_DEPRECATED);
 define ('EM_NOTICE_ERRORS', E_NOTICE | E_USER_NOTICE);
 
 /* It is recommended to leave assertions on.
@@ -22,7 +11,6 @@ define ('EM_NOTICE_ERRORS', E_NOTICE | E_USER_NOTICE);
    Only where absolute speed is necessary you might want to turn
    them off.
 */
-//also turn it on if phpwiki_version notes no release
 if (defined('DEBUG') and DEBUG)
     assert_options(ASSERT_ACTIVE, 1);
 else
@@ -83,7 +71,6 @@ class ErrorManager
             PrintXML($this->_flush_errors($newmask));
         else
             echo($this->_flush_errors($newmask));
-
     }
 
     /**
@@ -123,7 +110,7 @@ class ErrorManager
         // format it with the worst class (error, warning, notice)
         $worst_err = $flushed->_content[0];
         foreach ($flushed->_content as $err) {
-            if ($err and isa($err, 'PhpError') and $err->errno > $worst_err->errno) {
+            if ($err and is_a($err, 'PhpError') and $err->errno > $worst_err->errno) {
                 $worst_err = $err;
             }
         }
@@ -262,11 +249,13 @@ class ErrorManager
             echo "<html>\n";
             echo "<head>\n";
             echo "<meta charset=\"UTF-8\" />\n";
-            echo "<title>Fatal Error</title>\n";
-            echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"themes/default/phpwiki.css\" />\n";
+            echo "<title>"._('Fatal PhpWiki Error')."</title>\n";
+            echo '<link rel="stylesheet" type="text/css" href="themes/default/phpwiki.css" />'."\n";
             echo "</head>\n";
             echo "<body>\n";
-            echo "<div style=\"font-weight:bold; color:red\">Fatal Error:</div>\n";
+            echo '<div style="font-weight:bold; color:red;">';
+            echo _('Fatal PhpWiki Error')._(':');
+            echo "</div>\n";
 
             if (defined('DEBUG') and (DEBUG & _DEBUG_TRACE)) {
                 echo "error_reporting=", error_reporting(), "\n<br />";
@@ -275,13 +264,7 @@ class ErrorManager
             $this->_die($error);
         } elseif (($error->errno & error_reporting()) != 0) {
             if (($error->errno & $this->_postpone_mask) != 0) {
-                if ((function_exists('isa') and isa($error, 'PhpErrorOnce'))
-                    or (!function_exists('isa') and
-                        (
-                            // stdlib independent isa()
-                            (strtolower(get_class($error)) == 'phperroronce')
-                                or (is_subclass_of($error, 'PhpErrorOnce'))))
-                ) {
+                if (is_a($error, 'PhpErrorOnce')) {
                     $error->removeDoublettes($this->_postponed_errors);
                     if ($error->_count < 2)
                         $this->_postponed_errors[] = $error;
@@ -309,7 +292,6 @@ class ErrorManager
     private function _die($error)
     {
         global $WikiTheme;
-        //echo "\n\n<html><body>";
         $error->printXML();
         PrintXML($this->_flush_errors());
         if ($this->_fatal_handler)
@@ -636,9 +618,8 @@ class PhpErrorOnce extends PhpError
             $lines = explode("\n", $this->errstr);
         elseif (is_object($this->errstr))
             $lines = array($this->errstr->asXML());
-        $errtype = (DEBUG & _DEBUG_VERBOSE) ? sprintf("%s[%d]", $this->getDescription(), $this->errno)
-            : sprintf("%s", $this->getDescription());
-        if ((DEBUG & _DEBUG_VERBOSE) or $this->isFatal()) {
+        $errtype = sprintf("%s", $this->getDescription());
+        if ($this->isFatal()) {
             $msg = sprintf("%s:%d %s: %s %s",
                 $errfile, $this->errline,
                 $errtype,
@@ -651,8 +632,7 @@ class PhpErrorOnce extends PhpError
                 array_shift($lines),
                 $count > 1 ? sprintf(" (...repeated %d times)", $count) : "");
         }
-        $html = HTML::div(array('class' => $this->getHtmlClass()),
-            HTML::p($msg));
+        $html = HTML::div(array('class' => $this->getHtmlClass()), HTML::p($msg));
         if ($lines) {
             $list = HTML::ul();
             foreach ($lines as $line)

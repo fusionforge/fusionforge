@@ -22,7 +22,7 @@ code of one of the supported languages, like this:
 Phpwiki uses the DEFAULT_LANGUAGE internally, when no $GLOBALS['LANG'] is given.
 With certain starter script which set $LANG you can easily provide a multi-lingual wiki.
 For convenience provide some InterWikiMap entries for easier switching to the other
-languages then. See http://phpwiki.fr/MultiLingualWiki
+languages then.
 
 Phpwiki uses GNU gettext tools to provide and maintain multi-lingual
 messages for different languages. Even if you are already familiar

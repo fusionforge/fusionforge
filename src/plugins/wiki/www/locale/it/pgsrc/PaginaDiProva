@@ -1,5 +1,5 @@
-Date: Tue, 29 Jul 2014 10:42:12 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.0)
+Date: Mon, 29 Jun 2015 12:04:22 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
 Content-Type: application/x-phpwiki;
   pagename=PaginaDiProva;
   flags=PAGE_LOCKED;
@@ -37,39 +37,39 @@ Mixed:
 **    l2
 ----
  old lists
-	* level 1
-	* l1
-		*l2
-		*l2
-			*l3
-			*l3
-				*l4
-			*l3
-					*l5
-			*l3
-	#one
-	#two
-		#one
-		#two
-	*l1
-		#three
-		#four
-	*l1
-		*l2
-		# one
-		# two
+    * level 1
+    * l1
+        *l2
+        *l2
+            *l3
+            *l3
+                *l4
+            *l3
+                    *l5
+            *l3
+    #one
+    #two
+        #one
+        #two
+    *l1
+        #three
+        #four
+    *l1
+        *l2
+        # one
+        # two
 
  preformatted text
  some more text
 
-	*l1
-				*l4
-	# number
-	# number
+    *l1
+                *l4
+    # number
+    # number
 this is a plain paragraph
-	* bullet
+    * bullet
 this is a plain paragraph again
-	# number
+    # number
 ----
 **Link tests**
 # normal: FrontPage

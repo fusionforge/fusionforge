@@ -1,5 +1,5 @@
-Date: Tue, 29 Jul 2014 10:42:12 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.0)
+Date: Mon, 29 Jun 2015 12:04:23 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FIc%C3%B4nesDeLien;
   flags="";
@@ -29,15 +29,15 @@ Les exemples suivants ne s'afficheront avec les icônes de lien ci-dessus que si
 
 === Liens ~InterWiki ===
 
-* Lien ~InterWiki [[PhpWiki:InterWiki]]
+* Lien ~InterWiki [[PhpWiki:InterWikiMap]]
 * Un ~InterWiki nommé [[Wiki:WhyWikiWorks|lire WhyWikiWorks à c2]].
 
 === URL ===
 
 * Adresse électronique [PhpWiki-talk mailing list|mailto:phpwiki-talk@lists.sourceforge.net]
-* Lien http normal [Page d'accueil de PhpWiki|http://phpwiki.sourceforge.net/phpwiki/]
-* Lien http sécurisé [PhpWiki's Home Page|https://phpwiki.sourceforge.net/phpwiki/]
-* Serveur ftp ftp://ftp.sourceforge.net/
+* Lien http normal [[http://phpwiki.fr|Page d'accueil de PhpWiki]]
+* Lien https sécurisé [[https://phpwiki.fr|Page d'accueil de PhpWiki]]
+* Serveur ftp [[ftp://ftp.sourceforge.net/]]
 
 //Une icône générique est affichée pour les autres liens d'un type moins commun.//
 * news://nntp.news.com]

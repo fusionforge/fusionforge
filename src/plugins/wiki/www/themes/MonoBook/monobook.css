@@ -601,7 +601,12 @@ div.tleft {
 
 .hiddenStructure {
     display: none;
-    speak: none;
+}
+
+@media aural {
+    .hiddenStructure {
+        speak: none;
+    }
 }
 
 img.tex {
@@ -749,10 +754,6 @@ span.diffchange {
     border-left: 1px solid #494f5d;
     border-bottom: 1px solid #c6d2de;
     border-right: 1px solid #c6d2de;
-    padding-top: 1px;
-    padding-bottom: 1px;
-    padding-left: .125em;
-    padding-right: .125em;
     padding: 0;
     clear: both;
 }
@@ -1023,7 +1024,7 @@ special external link styling */
 
 .portlet h6 {
     background-color: #ffae2e;
-    border: 1px solid #2f6fab;
+    border: 1px #2f6fab;
     border-style: solid solid none solid;
     padding: 0 1em 0 1em;
     text-transform: lowercase;
@@ -1061,7 +1062,6 @@ special external link styling */
 .portlet li {
     padding: 0;
     margin: 0 0 0 0;
-    margin-bottom: 0;
 }
 
 /*
@@ -1102,7 +1102,6 @@ special external link styling */
     height: 86px;
     width: 86px;
     background: url("images/wiki_stamp.png") left no-repeat;
-    background-repeat: no-repeat;
     overflow: visible;
 }
 
@@ -1166,8 +1165,8 @@ input.searchButton {
 }
 
 /*
-** the personal toolbar
-*/
+ ** the personal toolbar
+ */
 
 #p-personal {
     position: absolute;
@@ -1192,7 +1191,7 @@ input.searchButton {
 #p-personal .pBody {
     z-index: 0;
     padding: 0;
-    margin: 0;
+    margin: 12px 0 0 0;
     border: none;
     overflow: visible;
     background-image: none;
@@ -1252,7 +1251,6 @@ li#pt-anonuserpage,
 li#pt-login {
     /*background:  url('images/wikiuser.png') top left bottom no-repeat;*/
     background: url('images/wikiuser.png') left no-repeat;
-    background-repeat: no-repeat;
     padding-left: 20px;
     text-transform: none;
 }
@@ -1268,7 +1266,7 @@ li#pt-login {
     position: absolute;
     /*z-index: 1;*/
     /* important! */
-    top: 1.3em;
+    top: 1.8em;
     left: 11.5em;
     margin: 0;
     white-space: nowrap;
@@ -1336,7 +1334,6 @@ li#pt-login {
 /* http://universaleditbutton.org */
 #p-cactions li a#btn-edit {
     background: url('images/UEB16.png') top left no-repeat;
-    background-repeat: no-repeat;
     padding-left: 20px !important;
     text-transform: none;
 }
@@ -1689,6 +1686,14 @@ input#wpSave, input#wpDiff {
     margin-right: 0.33em;
 }
 
+img.toolbar:hover {
+    cursor: pointer;
+}
+
+input.toolbar[type=image] {
+    vertical-align: top;
+}
+
 #editform .editOptions {
     display: inline;
 }
@@ -1899,10 +1904,6 @@ input.gridbutton, a.gridbutton, a:hover.gridbutton, a:visited.gridbutton {
     color: black;
 }
 
-.wikipaging {
-    font-size: 80%
-}
-
 .wikipaging-disabled {
     color: #999
 }
@@ -1915,7 +1916,6 @@ div.boxright {
     padding: 0.5em;
     float: right;
     border: thin solid #888888;
-    padding: 0.5em;
 }
 
 div#bottom {
@@ -1935,7 +1935,7 @@ div#bottom {
     clear: both;
 }
 
-.warning {
+.warning, .warning_msg {
     color: black;
     background-color: #eee;
     margin-top: 1em;
@@ -2249,4 +2249,28 @@ td.tdunselected {
     margin-right: 0;
     margin-top: 1ex;
     margin-bottom: 1ex;
+}
+
+table.sortable th.header {
+    background-image: url(../default/buttons/sort_none.gif);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}
+
+table.sortable th.headerSortUp {
+    background-image: url(../default/buttons/sort_up.gif);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}
+
+table.sortable th.headerSortDown {
+    background-image: url(../default/buttons/sort_down.gif);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
 }

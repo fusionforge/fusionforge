@@ -23,11 +23,7 @@
 require_once 'lib/PageList.php';
 require_once 'lib/wikilens/Buddy.php';
 require_once 'lib/wikilens/PageListColumns.php';
-
-if (ENABLE_USER_NEW)
-    require_once 'lib/WikiUserNew.php';
-else
-    require_once 'lib/WikiUser.php';
+require_once 'lib/WikiUser.php';
 
 /**
  * Show a user's ratings in a table, using PageList.
@@ -73,6 +69,13 @@ class WikiPlugin_UserRatings
     // info=mtime,hits,summary,version,author,locked,minor
     // exclude arg allows multiple pagenames exclude=HomePage,RecentChanges
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         extract($this->getArgs($argstr, $request));

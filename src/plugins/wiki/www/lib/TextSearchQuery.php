@@ -94,7 +94,7 @@ class TextSearchQuery
      * @param $regex string one of 'auto', 'none', 'glob', 'posix', 'pcre', 'sql'
      * @see TextSearchQuery
      */
-    function TextSearchQuery($search_query, $case_exact = false, $regex = 'auto')
+    function __construct($search_query, $case_exact = false, $regex = 'auto')
     {
         if ($regex == 'none' or !$regex) {
             $this->_regex = 0;
@@ -244,7 +244,7 @@ class TextSearchQuery
         // TODO: "such a phrase"
         switch ($node->_op) {
             case TSQ_TOK_NOT:
-                return "!" . $node->leaves[0];
+                return "!" . $node->leaves[0]->word;
             case TSQ_TOK_BINOP:
                 $subclauses = array();
                 foreach ($node->leaves as $leaf)
@@ -403,7 +403,6 @@ class NumericSearchQuery
      * Check the symbolic definition query against unwanted functions and characters.
      * "population < 20000 and area > 1000000" vs
      *   "area > 1000000 and mail($me,file("/etc/passwd"),...)"
-     * http://localhost/wikicvs/SemanticSearch?attribute=*&attr_op=<0 and find(1)>&s=-0.01&start_debug=1
      */
     function check_query($query)
     {
@@ -419,48 +418,27 @@ class NumericSearchQuery
         }
 
         // Strictly check for illegal functions and operators, which are no placeholders.
-        if (function_exists('token_get_all')) {
-            $parsed = token_get_all("<?$query?>");
-            foreach ($parsed as $x) { // flat, non-recursive array
-                if (is_string($x) and !isset($this->_parser_check[$x])) {
-                    // single char op or name
-                    trigger_error("Illegal string or operator in query: \"$x\"", E_USER_WARNING);
+        $parsed = token_get_all("<?$query?>");
+        foreach ($parsed as $x) { // flat, non-recursive array
+            if (is_string($x) and !isset($this->_parser_check[$x])) {
+                // single char op or name
+                trigger_error("Illegal string or operator in query: \"$x\"", E_USER_WARNING);
+                $query = '';
+            } elseif (is_array($x)) {
+                $n = token_name($x[0]);
+                if ($n == 'T_OPEN_TAG' or $n == 'T_WHITESPACE'
+                    or $n == 'T_CLOSE_TAG' or $n == 'T_LNUMBER'
+                    or $n == 'T_CONST' or $n == 'T_DNUMBER'
+                ) continue;
+                if ($n == 'T_VARIABLE') { // but we do allow consts
+                    trigger_error("Illegal variable in query: \"$x[1]\"", E_USER_WARNING);
                     $query = '';
-                } elseif (is_array($x)) {
-                    $n = token_name($x[0]);
-                    if ($n == 'T_OPEN_TAG' or $n == 'T_WHITESPACE'
-                        or $n == 'T_CLOSE_TAG' or $n == 'T_LNUMBER'
-                        or $n == 'T_CONST' or $n == 'T_DNUMBER'
-                    ) continue;
-                    if ($n == 'T_VARIABLE') { // but we do allow consts
-                        trigger_error("Illegal variable in query: \"$x[1]\"", E_USER_WARNING);
-                        $query = '';
-                    }
-                    if (is_string($x[1]) and !isset($this->_parser_check[$x[1]])) {
-                        // multi-char char op or name
-                        trigger_error("Illegal $n in query: \"$x[1]\"", E_USER_WARNING);
-                        $query = '';
-                    }
                 }
-            }
-            //echo "$query <br>";
-            //$this->_parse_token($parsed);
-            //echo "<br>\n";
-            //var_dump($parsed);
-            /*
-    "_x > 0" =>
-    { T_OPEN_TAG "<?"} { T_STRING "_x"} { T_WHITESPACE " "} ">" { T_WHITESPACE " "} { T_LNUMBER "0"} { T_CLOSE_TAG "?>"}
-        Interesting: on-char ops, as ">" are not tokenized.
-    "_x <= 0"
-    { T_OPEN_TAG "< ?" } { T_STRING "_x" } { T_WHITESPACE " " } { T_IS_SMALLER_OR_EQUAL "<=" } { T_WHITESPACE " " } { T_LNUMBER "0" } { T_CLOSE_TAG "?>" }
-             */
-        } else {
-            // Detect illegal characters besides nums, words and ops.
-            // So attribute names can not be utf-8
-            $c = "/([^\d\w.,\s" . preg_quote(join("", $this->_allowed_operators), "/") . "])/";
-            if (preg_match($c, $query, $m)) {
-                trigger_error("Illegal character in query: " . $m[1], E_USER_WARNING);
-                return '';
+                if (is_string($x[1]) and !isset($this->_parser_check[$x[1]])) {
+                    // multi-char char op or name
+                    trigger_error("Illegal $n in query: \"$x[1]\"", E_USER_WARNING);
+                    $query = '';
+                }
             }
         }
         return $query;
@@ -488,7 +466,7 @@ class NumericSearchQuery
     }
 
     /**
-     * Strip non-numeric chars from the variable (as the groupseperator) and replace
+     * Strip non-numeric chars from the variable (as the group separator) and replace
      * it in the symbolic query for evaluation.
      *
      * @param $value number   A numerical value: integer, float or string.

@@ -50,7 +50,7 @@ class WikiDB_backend_PearDB_mysql
         }
     }
 
-    /**
+    /*
      * Create a new revision of a page.
      */
     function set_versiondata($pagename, $version, $data)
@@ -105,7 +105,9 @@ class WikiDB_backend_PearDB_mysql
             . " GROUP BY id");
     }
 
-    /* ISNULL is mysql specific */
+    /*
+     * Find referenced empty pages.
+     */
     function wanted_pages($exclude_from = '', $exclude = '', $sortby = '', $limit = '')
     {
         $dbh = &$this->_dbh;
@@ -118,7 +120,8 @@ class WikiDB_backend_PearDB_mysql
         if ($exclude) // array of pagenames
             $exclude = " AND p.pagename NOT IN " . $this->_sql_set($exclude);
 
-        $sql = "SELECT p.pagename, pp.pagename as wantedfrom"
+    /* ISNULL is mysql specific */
+        $sql = "SELECT p.pagename, pp.pagename AS wantedfrom"
             . " FROM $page_tbl p, $link_tbl linked"
             . " LEFT JOIN $page_tbl pp ON (linked.linkto = pp.id)"
             . " LEFT JOIN $nonempty_tbl ne ON (linked.linkto = ne.id)"
@@ -166,25 +169,26 @@ class WikiDB_backend_PearDB_mysql
         foreach ($this->_table_names as $table) {
             $dbh->query("OPTIMIZE TABLE $table");
         }
-        return 1;
+        return true;
     }
 
-    /**
+    /*
      * Lock tables.
      */
-    function _lock_tables($write_lock = true)
+    protected function _lock_tables($write_lock = true)
     {
         $lock_type = $write_lock ? "WRITE" : "READ";
+        $tables = array();
         foreach ($this->_table_names as $table) {
             $tables[] = "$table $lock_type";
         }
         $this->_dbh->query("LOCK TABLES " . join(",", $tables));
     }
 
-    /**
+    /*
      * Release all locks.
      */
-    function _unlock_tables()
+    protected function _unlock_tables()
     {
         $this->_dbh->query("UNLOCK TABLES");
     }
@@ -201,7 +205,6 @@ class WikiDB_backend_PearDB_mysql
             $this->_table_names['page_tbl'],
             $dbh->escapeSimple($pagename),
             ($this->_serverinfo['version'] >= 323.0) ? "LIMIT 1" : ""));
-        return;
     }
 
 }

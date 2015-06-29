@@ -64,6 +64,18 @@ class WikiPlugin_CurrentTime
         return array('format' => '%Y-%m-%d %T');
     }
 
+    function handle_plugin_args_cruft($argstr, $args)
+    {
+        return;
+    }
+
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         extract($this->getArgs($argstr, $request));

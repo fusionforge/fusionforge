@@ -8,33 +8,9 @@ var cssfile = '<link rel="stylesheet" type="text/css" href="'+data_path+'/themes
 if( window.top != window ) window.top.location = window.location;
 var pullwin;
 
-// This function generates the actual toolbar buttons with localized text
-// We use it to avoid creating the toolbar where javascript is not enabled
-// Not all buttons use this helper, some need special javascript treatment.
-function addButton(imageFile, speedTip, func, args) {
-  var i;
-  speedTip=escapeQuotes(speedTip);
-  document.write("<a href=\"javascript:"+func+"(");
-  for (i=0; i<args.length; i++){
-    if (i>0) document.write(",");
-    document.write("'"+escapeQuotes(args[i])+"'");
-  }
-  //width=\"23\" height=\"22\"
-  document.write(");\"><img src=\""+imageFile+"\" width=\"18\" height=\"18\" border=\"0\" alt=\""+speedTip+"\" title=\""+speedTip+"\">");
-  document.write("</a>");
-}
-function addTagButton(imageFile, speedTip, tagOpen, tagClose, sampleText) {
-  addButton(imageFile, speedTip, "insertTags", [tagOpen, tagClose, sampleText]);
-}
-
 // This function generates a popup list to select from.
-// In an external window so far, but we really want that as acdropdown pulldown, hence the name.
 //   plugins, pagenames, categories, templates.
 // Not with document.write because we cannot use self.opener then.
-//function addPulldown(imageFile, speedTip, pages) {
-//  addButton(imageFile, speedTip, "showPulldown", pages);
-//  return;
-//}
 // pages is either an array of strings or an array of array(name,value)
 function showPulldown(title, pages, okbutton, closebutton, fromid) {
   var height = new String(Math.min(315, 80 + (pages.length * 12))); // 270 or smaller
@@ -54,7 +30,7 @@ function showPulldown(title, pages, okbutton, closebutton, fromid) {
   pullwin.window.document.writeln('</head>\n<body>');
   pullwin.window.document.writeln('<p>\nYou can double-click to insert.\n</p>');
   pullwin.window.document.writeln('<form><div id=\"buttons\"><input type=\"button\" value=\"'+okbutton+'\" onclick=\"if(self.opener)self.opener.do_pulldown(document.forms[0].select.value,\''+fromid+'\'); return false;\" /><input type=\"button\" value=\"'+closebutton+'\" onclick=\"self.close(); return false;\" /></div>\n<div>\n<select style=\"margin-top:10px;width:190px;\" name=\"select\" size=\"'+((pages.length>20)?'20':new String(pages.length))+'\" ondblclick=\"if(self.opener)self.opener.do_pulldown(document.forms[0].select.value,\''+fromid+'\'); return false;\">');
-  for (i=0; i<pages.length; i++){
+  for (var i=0; i<pages.length; i++){
     if (typeof pages[i] == 'string')
       pullwin.window.document.write('<option value="'+pages[i]+'">'+escapeQuotes(pages[i])+'</option>\n');
     else  // array=object
@@ -70,21 +46,13 @@ function do_pulldown(text,fromid) {
         var txtarea = document.getElementById('edit-content');
         text = unescapeSpecial(text);
         txtarea.value += '\n'+text;
+    } else if (fromid == 'tb-templates') {
+        text = text.replace(/__nl__/g, '\n');
+        text = text.replace(/__quot__/g, '"');
+        insertTags(text, '', '\n');
     } else {
         insertTags(text, '', '\n');
     }
-}
-function addInfobox(infoText) {
-  // if no support for changing selection, add a small copy & paste field
-  var clientPC = navigator.userAgent.toLowerCase(); // Get client info
-  var is_nav = ((clientPC.indexOf('gecko')!=-1) && (clientPC.indexOf('spoofer')==-1)
-                && (clientPC.indexOf('khtml') == -1));
-  if(!document.selection && !is_nav) {
-    infoText=escapeQuotesHTML(infoText);
-    document.write("<form name='infoform' id='infoform'>"+
-           "<input size=80 id='infobox' name='infobox' value=\""+
-           infoText+"\" readonly=\"readonly\"></form>");
-  }
 }
 function escapeQuotes(text) {
   var re=new RegExp("'","g");
@@ -95,28 +63,23 @@ function escapeQuotes(text) {
   text=text.replace(re,"\\n");
   return text;
 }
-function escapeQuotesHTML(text) {
-  var re=new RegExp('"',"g");
-  text=text.replace(re,"&quot;");
-  return text;
-}
 function unescapeSpecial(text) {
     // IE
     var re=new RegExp('%0A',"g");
     text = text.replace(re,'\n');
-    var re=new RegExp('%22',"g");
+    re=new RegExp('%22',"g");
     text = text.replace(re,'"');
-    var re=new RegExp('%27',"g");
+    re=new RegExp('%27',"g");
     text = text.replace(re,'\'');
-    var re=new RegExp('%09',"g");
+    re=new RegExp('%09',"g");
     text = text.replace(re,'    ');
-    var re=new RegExp('%7C',"g");
+    re=new RegExp('%7C',"g");
     text = text.replace(re,'|');
-    var re=new RegExp('%5B',"g");
+    re=new RegExp('%5B',"g");
     text = text.replace(re,'[');
-    var re=new RegExp('%5D',"g");
+    re=new RegExp('%5D',"g");
     text = text.replace(re,']');
-    var re=new RegExp('%5C',"g");
+    re=new RegExp('%5C',"g");
     text = text.replace(re,'\\');
     return text;
 }
@@ -147,6 +110,7 @@ function insertTags(tagOpen, tagClose, sampleText) {
     var scrollTop=txtarea.scrollTop;
     var myText = (txtarea.value).substring(startPos, endPos);
     if(!myText) { myText=sampleText;}
+    var subst;
     if(myText.charAt(myText.length - 1) == " "){ // exclude ending space char, if any
       subst = tagOpen + myText.substring(0, (myText.length - 1)) + tagClose + " ";
     } else {
@@ -245,8 +209,7 @@ function result(count,question,value_txt,alert_txt) {
    }
 }
 function do_undo() {
-   if(undo_buffer_index==0) return;
-   else if(undo_buffer_index>0) {
+   if(undo_buffer_index>0) {
       f.editarea.value=undo_buffer[undo_buffer_index-1];
       undo_buffer[undo_buffer_index]=null;
       undo_buffer_index--;

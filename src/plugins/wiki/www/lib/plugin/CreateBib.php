@@ -40,22 +40,23 @@ class WikiPlugin_CreateBib
 
     function getDefaultArguments()
     {
-        return array('pagename' => '[pagename]', // The page from which the BibTex file is generated
-        );
+        return array('pagename' => '[pagename]'); // The page from which the BibTex file is generated
     }
 
-    // Have to include the $starttag and $endtag to the regexps...
-    function extractBibTeX(&$content, $starttag, $endtag)
+    /**
+     * @param array $content
+     * @return array
+     */
+    private function extractBibTeX($content)
     {
         $bib = array();
 
         $start = false;
         $stop = false;
         for ($i = 0; $i < count($content); $i++) {
-            // $starttag shows when to start
             if (preg_match('/^@/', $content[$i], $match)) {
                 $start = true;
-            } // $endtag shows when to stop
+            }
             else if (preg_match('/^\}/', $content[$i], $match)) {
                 $stop = true;
             }
@@ -67,44 +68,71 @@ class WikiPlugin_CreateBib
         return $bib;
     }
 
-    // Extract article links. Current markup is by * characters...
-    // Assume straight list
-    function extractArticles(&$content)
+    /**
+     * Extract article links. Current markup is by * characters...
+     * Assume straight list
+     *
+     * @param array $content
+     * @return array
+     */
+    private function extractArticles($content)
     {
         $articles = array();
         for ($i = 0; $i < count($content); $i++) {
+            // Should match "* [[WikiPageName]] whatever"
+            if (preg_match('/^\s*\*\s+\[\[(.+)\]\]/', $content[$i], $match)) {
+                $articles[] = $match[1];
             // Should match "* [WikiPageName] whatever"
-            //if (preg_match('/^\s*\*\s+(\[.+\])/',$content[$i],$match))
-            if (preg_match('/^\s*\*\s+\[(.+)\]/', $content[$i], $match)) {
+            } elseif (preg_match('/^\s*\*\s+\[(.+)\]/', $content[$i], $match)) {
                 $articles[] = $match[1];
             }
         }
         return $articles;
     }
 
-    function dumpFile(&$thispage, $filename)
+    /**
+     * @param WikiDB_Page $thispage
+     * @param string $filename
+     */
+    private function dumpFile($thispage, $filename)
     {
         include_once 'lib/loadsave.php';
         $mailified = MailifyPage($thispage);
 
-        $attrib = array('mtime' => $thispage->get('mtime'), 'is_ascii' => 1);
-
-        $zip = new ZipWriter("Created by PhpWiki " . PHPWIKI_VERSION, $filename);
-        $zip->addRegularFile(FilenameForPage($thispage->getName()),
-            $mailified, $attrib);
-        $zip->finish();
-
+        $zip = new ZipArchive();
+        $tmp_filename = "/tmp/" . $filename;
+        if (file_exists($tmp_filename)) {
+            unlink ($tmp_filename);
+        }
+        if ($zip->open($tmp_filename, ZipArchive::CREATE) !== true) {
+            trigger_error(_("Cannot create ZIP archive"), E_USER_ERROR);
+            return;
+        }
+        $zip->setArchiveComment(sprintf(_("Created by PhpWiki %s"), PHPWIKI_VERSION));
+        $zip->addFromString(FilenameForPage($thispage->getName()), $mailified);
+        $zip->close();
+        header('Content-Transfer-Encoding: binary');
+        header('Content-Disposition: attachment; filename="'.$filename.'"');
+        header('Content-Length: '.filesize($tmp_filename));
+        readfile($tmp_filename);
+        exit;
     }
 
-    function run($dbi, $argstr, $request, $basepage)
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
+    function run($dbi, $argstr, &$request, $basepage)
     {
         extract($this->getArgs($argstr, $request));
-        if ($pagename) {
+        if (!empty($pagename)) {
             // Expand relative page names.
             $page = new WikiPageName($pagename, $basepage);
             $pagename = $page->name;
-        }
-        if (!$pagename) {
+        } else {
             return $this->error(sprintf(_("A required argument “%s” is missing."), 'pagename'));
         }
 
@@ -114,10 +142,9 @@ class WikiPlugin_CreateBib
         $content = $current->getContent();
 
         // Prepare the button to trigger dumping
-        $dump_url = $request->getURLtoSelf(array("file" => "tube.bib"));
+        $dump_url = $request->getURLtoSelf(array("file" => $pagename.".bib"));
         global $WikiTheme;
-        $dump_button = $WikiTheme->makeButton("To File",
-            $dump_url, 'foo');
+        $dump_button = $WikiTheme->makeButton(_("Save to File"), $dump_url);
 
         $html = HTML::div(array('class' => 'bib align-left'));
         $html->pushContent($dump_button, ' ');
@@ -132,7 +159,7 @@ class WikiPlugin_CreateBib
                 $subversion = $subpage->getCurrentRevision();
                 $subcontent = $subversion->getContent();
 
-                $bib = $this->extractBibTeX($subcontent, "@", "}");
+                $bib = $this->extractBibTeX($subcontent);
 
                 // ...and finally just push the bibtex data to page
                 $foo = implode("\n", $bib);
@@ -146,7 +173,8 @@ class WikiPlugin_CreateBib
             // Yes, we want to dump this somewhere
             // Get the contents of this page
             $p = $dbi->getPage($pagename);
-            return $this->dumpFile($p, $request->getArg('file'));
+            $this->dumpFile($p, $request->getArg('file'));
+            // No return
         }
 
         return $html;

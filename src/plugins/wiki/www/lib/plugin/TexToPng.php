@@ -74,18 +74,6 @@ define('TexToPng_magstep', 3);
  |
  *----------------------------------------------------------------------*/
 
-// check boolean constants
-
-if (!defined('TexToPng_debug')) {
-    define('TexToPng_debug', false);
-}
-if (!defined('TexToPng_antialias')) {
-    define('TexToPng_antialias', false);
-}
-if (!defined('TexToPng_transparent')) {
-    define('TexToPng_transparent', false);
-}
-
 /*-----------------------------------------------------------------------
  | WikiPlugin_TexToPng
  *----------------------------------------------------------------------*/
@@ -94,6 +82,8 @@ require_once 'lib/WikiPluginCached.php';
 
 class WikiPlugin_TexToPng extends WikiPluginCached
 {
+    public $_errortext;
+
     function getPluginType()
     {
         return PLUGIN_CACHED_IMG_ONDEMAND;
@@ -115,12 +105,22 @@ class WikiPlugin_TexToPng extends WikiPluginCached
             'center' => 'off');
     }
 
-    function getImage($dbi, $argarray, $request)
+    protected function getImage($dbi, $argarray, $request)
     {
         extract($argarray);
         $this->checkParams($tex, $magstep, $subslash, $antialias, $transparent);
         return $this->TexToImg($tex, $magstep, $antialias, $transparent);
-    } // run
+    }
+
+    protected function getMap($dbi, $argarray, $request)
+    {
+        trigger_error('pure virtual', E_USER_ERROR);
+    }
+
+    protected function getHtml($dbi, $argarray, $request, $basepage)
+    {
+        trigger_error('pure virtual', E_USER_ERROR);
+    }
 
     function getExpire($dbi, $argarray, $request)
     {
@@ -160,7 +160,7 @@ class WikiPlugin_TexToPng extends WikiPluginCached
         } else {
             if (!$this->_errortext) {
                 // yeah, I've been told to be quiet, but obviously
-                // an error occured. So at least complain silently.
+                // an error occurred. So at least complain silently.
                 $this->complain(' ');
             }
         }

@@ -11,7 +11,7 @@ Für diejenigen, die daran mitwirken wollen, sind hier ein paar
 sachdienliche Vorschläge: Bitte laden Sie sich zunächst die neueste
 PhpWiki-Version auf Ihren Rechner von:
 
-Nightly CVS snapshot:
+Nightly snapshot:
 http://phpwiki.sf.net/nightly/phpwiki.nightly.tar.gz
 
 Achten Sie auch darauf, diese Datei mit UTF-8 abzuspeichern (nicht mit ISO-8859-1,
@@ -34,7 +34,7 @@ schicken oder den Bug Tracker eintragen.
 
 Alle Ihre Korrekturen werden dann von einem der Entwickler, sobald ein
 entsprechender Umfang erreicht ist, bei geeigneter Gelegenheit in
-ihrer Gesamtheit ins PhpWiki-CVS (auf Sourceforge) eingesetzt und
+ihrer Gesamtheit ins PhpWiki (auf Sourceforge) eingesetzt und
 damit dann für alle PhpWiki-Benutzer zugänglich und wirksam.
 
 -- CarstenKlapp <carstenklapp@users.sourceforge.net>

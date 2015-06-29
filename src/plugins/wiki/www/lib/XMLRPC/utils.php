@@ -159,6 +159,7 @@ function find_and_decode_xml($buf, $debug)
  * @param pass         password for authentication
  * @param secure     secure. wether to use fsockopen_ssl. (requires special php build).
  * @param output     array. xml output options. can be null.  details below:
+ * @return string
  *
  *     output_type: return data as either php native data types or xml
  *                  encoded. if php is used, then the other values are ignored. default = xml
@@ -206,7 +207,7 @@ function xu_rpc_http_concise($params)
         $output = array('version' => 'xmlrpc');
     }
 
-    $response_buf = "";
+    $retval = '';
     if ($host && $uri && $port) {
         $request_xml = xmlrpc_encode_request($method, $args, $output);
         $response_buf = xu_query_http_post($request_xml, $host, $uri, $port, $debug,

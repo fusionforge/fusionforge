@@ -18,33 +18,8 @@ if (!defined('PHPWIKI_VERSION')) {
 require_once 'lib/WikiTheme.php';
 require_once 'themes/wikilens/themeinfo.php';
 
-function ActionButton($action, $label = false, $page_or_rev = false, $options = false)
-{
-    global $WikiTheme;
-    global $request;
-    if (is_array($action)) {
-        $attr = $action;
-        $act = isset($attr['action']) ? $attr['action'] : 'browse';
-    } else
-        $act = $action;
-    $class = is_safe_action($act) ? 'named-wiki' : 'wikiadmin';
-    /* if selected action is current then prepend selected */
-    $curract = $request->getArg("action");
-    if ($curract == $act and $curract != 'browse')
-        $class = "selected $class";
-    if (!empty($options['class'])) {
-        if ($curract == 'browse')
-            $class = "$class " . $options['class'];
-        else
-            $class = $options['class'];
-    }
-    return HTML::li(array('class' => $class),
-        $WikiTheme->makeActionButton($action, $label, $page_or_rev, $options));
-}
-
 class WikiTheme_MonoBook extends WikiTheme_Wikilens
 {
-
     /* this adds selected to the class */
     function makeActionButton($action, $label = false, $page_or_rev = false, $options = false)
     {
@@ -82,7 +57,7 @@ class WikiTheme_MonoBook extends WikiTheme_Wikilens
     {
         $this->addMoreHeaders(JavaScript("var ta;\nvar skin = '" . $this->_name . "';\n"));
         $this->addMoreHeaders(JavaScript('', array('src' => $this->_findData("wikibits.js"))));
-        $this->addMoreAttr('body', "class-ns-0", HTML::Raw('class="ns-0"'));
+        $this->addMoreAttr('body', "class-ns-0", HTML::raw('class="ns-0"'));
 
         // CSS file defines fonts, colors and background images for this
         // style.  The companion '*-heavy.css' file isn't defined, it's just

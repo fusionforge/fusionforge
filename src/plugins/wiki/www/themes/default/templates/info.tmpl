@@ -1,6 +1,6 @@
 <?php
 if (empty($revision)) $revision = $page->getCurrentRevision(false);
-$modifed = $WikiTheme->formatDateTime($revision->get('mtime'));
+$modified = $WikiTheme->formatDateTime($revision->get('mtime'));
 
 $dbi = $request->getDbh();
 $author = $revision->get('author');
@@ -36,6 +36,7 @@ if ($is_current = $revision->isCurrent()) {
 
     $LOCKED_CB = HTML::input(array('type' => 'checkbox',
                                    'name' => 'edit[locked]',
+                                   'id' => 'locked',
                                    'disabled' => !$user->isadmin(),
                                    'checked'  => $page->get('locked')));
 
@@ -81,7 +82,7 @@ if ($type == 'inherited') {
 
   <tr>
     <td class="align-right nowrap pageinfo"><?php echo $label['date'] ?></td>
-    <td><?php echo $modifed ?><?php echo $minor_flag ?></td>
+    <td><?php echo $modified ?><?php echo $minor_flag ?></td>
   </tr>
   <tr>
     <td class="align-right pageinfo"><?php echo $label['author'] ?></td>
@@ -112,7 +113,7 @@ if ($type == 'inherited') {
 <?php if ($is_current) { ?>
   <tr>
     <td class="align-right"><?php echo $LOCKED_CB ?></td>
-    <td class="pageinfo"><?php echo _("Locked")?></td>
+    <td class="pageinfo"><label for="locked"><?php echo _("Locked")?></label></td>
   </tr>
 <?php if (ENABLE_EXTERNAL_PAGES) { ?>
   <tr>

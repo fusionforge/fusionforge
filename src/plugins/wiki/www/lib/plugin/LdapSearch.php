@@ -24,7 +24,7 @@
  * WikiPlugin which searches an LDAP directory.
  *
  * Uses the config.ini constants as defaults.
- * See http://phpwiki.fr/LdapSearchPlugin
+ * See http://phpwiki.fr/Help/LdapSearchPlugin
  * TODO: Return a pagelist on certain attributes
  *
  * Usage Samples:
@@ -67,14 +67,15 @@ class WikiPlugin_LdapSearch
         );
     }
 
-    // I ought to require the ldap extension, but fail sanely, if I cant get it.
-    // - however at the moment this seems to work as is
-    function run($dbi, $argstr, $request)
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
+    function run($dbi, $argstr, &$request, $basepage)
     {
-        if (!function_exists('ldap_connect')) {
-            if (!loadPhpExtension('ldap'))
-                return $this->error(_("Missing ldap extension"));
-        }
         $args = $this->getArgs($argstr, $request);
         extract($args);
         //include_once("lib/WikiUser/LDAP.php");

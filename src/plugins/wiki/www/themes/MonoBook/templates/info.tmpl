@@ -1,6 +1,6 @@
 <?php
 if (empty($revision)) $revision = $page->getCurrentRevision(false);
-$modifed = $WikiTheme->formatDateTime($revision->get('mtime'));
+$modified = $WikiTheme->formatDateTime($revision->get('mtime'));
 
 $author = $revision->get('author');
 global $WikiNameRegexp;
@@ -31,7 +31,7 @@ else {
 }
 // Count words
 preg_match_all('/\\w+\\W*/', $revision->_data['%content'], $whitespacematches);
-if (1 == $c = count_all($whitespacematches))
+if (1 == ($c = count_all($whitespacematches)))
   $wordcount = fmt("1 word");
 else
   $wordcount = fmt("%s words", $c);
@@ -50,6 +50,7 @@ if ($is_current = $revision->isCurrent()) {
 
     $LOCKED_CB = HTML::input(array('type' => 'checkbox',
                                    'name' => 'edit[locked]',
+                                   'id' => 'locked',
                                    'disabled' => !$user->isadmin(),
                                    'checked'  => $page->get('locked')));
 
@@ -95,7 +96,7 @@ if ($type == 'inherited') {
 
   <tr>
     <td class="align-right nowrap pageinfo"><?php echo $label['date'] ?></td>
-    <td><?php echo $modifed ?><?php echo $minor_flag ?></td>
+    <td><?php echo $modified ?><?php echo $minor_flag ?></td>
   </tr>
   <tr>
     <td class="align-right pageinfo"><?php echo $label['author'] ?></td>
@@ -125,7 +126,7 @@ if ($type == 'inherited') {
 <?php if ($is_current) { ?>
   <tr>
     <td class="align-right"><?php echo $LOCKED_CB ?></td>
-    <td class="pageinfo"><?php echo _("Locked")?></td>
+    <td class="pageinfo"><label for="locked"><?php echo _("Locked")?></label></td>
   </tr>
   <tr>
     <td class="align-right pageinfo"><?php echo _("ACL type") . _(":") ?></td>

@@ -41,7 +41,7 @@ class WikiPlugin_WikiAdminRename
     {
         return array_merge
         (
-            WikiPlugin_WikiAdminSelect::getDefaultArguments(),
+            parent::getDefaultArguments(),
             array(
                 /* Columns to include in listing */
                 'info' => 'pagename,mtime',
@@ -50,7 +50,7 @@ class WikiPlugin_WikiAdminRename
             ));
     }
 
-    public function renameHelper($name, $from, $to, $options = false)
+    public static function renameHelper($name, $from, $to, $options = array())
     {
         if (isset($options['regex'])) {
             return preg_replace('/' . $from . '/' . (isset($options['icase']) ? 'i' : ''), $to, $name);
@@ -61,6 +61,13 @@ class WikiPlugin_WikiAdminRename
         }
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         $action = $request->getArg('action');
@@ -305,7 +312,7 @@ class WikiPlugin_WikiAdminRename
 // moved from lib/PageList.php
 class _PageList_Column_renamed_pagename extends _PageList_Column
 {
-    function _getValue($page_handle, &$revision_handle)
+    function _getValue($page_handle, $revision_handle)
     {
         global $request;
         $post_args = $request->getArg('admin_rename');

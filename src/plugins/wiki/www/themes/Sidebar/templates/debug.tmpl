@@ -12,7 +12,7 @@
 </div>
 </td><td>
 <span class="debug"><?php echo fmt("Page Execution took %s seconds", $RUNTIMER->getStats())?>
-<?php if (substr(PHP_OS,0,3) != 'WIN') { $mem = @getMemoryUsage(); PrintXml(fmt(", Memory: %s", $mem)); } ?>
+<?php if (substr(PHP_OS,0,3) != 'WIN') { $mem = @memory_get_usage(); PrintXml(fmt(", Memory: %s", $mem)); } ?>
 </span>
 </td></tr></table>
 <br class="clear-floats" />

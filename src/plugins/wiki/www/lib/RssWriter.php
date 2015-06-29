@@ -11,6 +11,10 @@
  */
 class RssWriter extends XmlElement
 {
+    public $_channel;
+    public $_image;
+    public $_textinput;
+
     function __construct()
     {
         parent::__construct('rdf:RDF',
@@ -120,13 +124,18 @@ class RssWriter extends XmlElement
      */
     function __spew()
     {
-        header("Content-Type: application/xml; charset=" . RSS_ENCODING);
-        echo('<' . '?xml version="1.0" encoding="' . RSS_ENCODING . '"?' . ">\n");
+        header("Content-Type: application/xml; charset=UTF-8");
+        echo('<' . '?xml version="1.0" encoding="UTF-8" ?' . ">\n");
         $this->printXML();
     }
 
     /**
      * Create a new RDF <em>typedNode</em>.
+     *
+     * @param $type
+     * @param $properties
+     * @param bool $uri
+     * @return XmlElement
      */
     function __node($type, $properties, $uri = false)
     {
@@ -139,6 +148,9 @@ class RssWriter extends XmlElement
 
     /**
      * Check object URI for uniqueness, create a unique URI if needed.
+     *
+     * @param string $uri
+     * @return string
      */
     function __uniquify_uri($uri)
     {
@@ -153,6 +165,9 @@ class RssWriter extends XmlElement
 
     /**
      * Convert hash of RDF properties to <em>propertyElt</em>s.
+     *
+     * @param $elements
+     * @return array
      */
     function __elementize($elements)
     {
@@ -170,6 +185,8 @@ class RssWriter extends XmlElement
 
     /**
      * Check property predicates for XMLNS sanity.
+     *
+     * @param string $name
      */
     function __check_predicate($name)
     {
@@ -185,6 +202,10 @@ class RssWriter extends XmlElement
 
     /**
      * Create a <em>propertyElt</em> which references another node in the RSS.
+     *
+     * @param $predicate
+     * @param $reference
+     * @return XmlElement
      */
     function __ref($predicate, $reference)
     {
@@ -217,13 +238,19 @@ class AtomFeed extends RssWriter
      */
     function __spew()
     {
-        header("Content-Type: application/atom+xml; charset=" . RSS_ENCODING);
-        echo('<' . '?xml version="1.0" encoding="' . RSS_ENCODING . '"?' . ">\n");
+        header("Content-Type: application/atom+xml; charset=UTF-8");
+        echo('<' . '?xml version="1.0" encoding="UTF-8" ?' . ">\n");
         $this->printXML();
     }
 
     /**
      * Create a new entry
+     *
+     * @param $type
+     * @param $attr
+     * @param bool $properties
+     * @param bool $uri
+     * @return XmlElement
      */
     function __node($type, $attr, $properties, $uri = false)
     {

@@ -66,8 +66,29 @@ class WikiPlugin_WikicreoleTable
         return;
     }
 
+    function getWikiPageLinks($argstr, $basepage)
+    {
+        global $backlinks;
+        if (empty($backlinks)) {
+            global $request;
+            $this->run($request->_dbi, $argstr, $request, $basepage);
+        }
+        return $backlinks;
+    }
+
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
+        global $backlinks;
+
+        $backlinks = array();
+
         include_once 'lib/InlineParser.php';
 
         $table = array();
@@ -104,7 +125,13 @@ class WikiPlugin_WikicreoleTable
             for ($j = 0; $j < $nb_cols; $j++) {
                 if (!isset($table[$i][$j])) {
                     $table[$i][$j] = '';
-                } elseif (preg_match('/@@/', $table[$i][$j])) {
+                }
+            }
+        }
+
+        for ($i = 0; $i < $nb_rows; $i++) {
+            for ($j = 0; $j < $nb_cols; $j++) {
+                if (preg_match('/@@/', $table[$i][$j])) {
                     $table[$i][$j] = $this->compute_table_cell($table, $i, $j, $nb_rows, $nb_cols);
                 }
             }
@@ -138,6 +165,8 @@ class WikiPlugin_WikicreoleTable
 
     private function parse_row($line)
     {
+        $line = str_replace('|', ' |', $line);
+
         $bracket_link = "\\[ .*? [^]\s] .*? \\]";
         $cell_content = "(?: [^[] | " . ESCAPE_CHAR . "\\[ | $bracket_link )*?";
 
@@ -155,9 +184,12 @@ class WikiPlugin_WikicreoleTable
 
     /**
      * Compute cell in spreadsheet table
-     * $table: two-dimensional table
-     * $i and $j: indexes of cell to compute
-     * $imax and $jmax: table dimensions
+     * @param array $table: two-dimensional table
+     * @param int $i: first index of cell to compute
+     * @param int $j: second index of cell to compute
+     * @param int $imax: first table dimension
+     * @param int $jmax: second table dimension
+     * @return int
      */
     private function compute_table_cell($table, $i, $j, $imax, $jmax)
     {
@@ -287,7 +319,11 @@ class WikiPlugin_WikicreoleTable
                     $counter++;
                 }
             }
-            $result = $counter - 1; // exclude self
+            if (string_starts_with(trim($table[$i][$j]), "=")) {
+                $result = $counter;
+            } else {
+                $result = $counter - 1; // exclude self
+            }
             return str_replace("@@=COUNT(C)@@", $result, $table[$i][$j]);
 
         } elseif (strpos($table[$i][$j], "@@=COUNT(R)@@") !== false) {
@@ -297,7 +333,11 @@ class WikiPlugin_WikicreoleTable
                     $counter++;
                 }
             }
-            $result = $counter - 1; // exclude self
+            if (string_starts_with(trim($table[$i][$j]), "=")) {
+                $result = $counter;
+            } else {
+                $result = $counter - 1; // exclude self
+            }
             return str_replace("@@=COUNT(R)@@", $result, $table[$i][$j]);
         }
 

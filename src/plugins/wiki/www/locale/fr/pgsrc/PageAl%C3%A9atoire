@@ -1,15 +1,12 @@
-Date: Tue, 29 Jul 2014 10:42:12 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.0)
+Date: Mon, 29 Jun 2015 12:04:23 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
 Content-Type: application/x-phpwiki;
   pagename=PageAl%C3%A9atoire;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-La quantité de pages aléatoires est un nombre entre 1 et 20.
-
-----
-<<RandomPage pages||=10 info||=''>>
+<<RandomPage numpages=1 redirect=1>>
 
 ----
 [[CatégoriePageDAction]]

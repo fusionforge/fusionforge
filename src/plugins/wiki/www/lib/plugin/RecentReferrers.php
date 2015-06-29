@@ -45,10 +45,17 @@ class WikiPlugin_RecentReferrers extends WikiPlugin
             ));
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         if (!ACCESS_LOG) {
-            return HTML::div(array('class' => "error"), "Error: no ACCESS_LOG");
+            return HTML::div(array('class' => "error"), _("Error: no ACCESS_LOG"));
         }
         $args = $this->getArgs($argstr, $request);
         $table = HTML::table(array('class' => 'pagelist'));
@@ -59,8 +66,8 @@ class WikiPlugin_RecentReferrers extends WikiPlugin
         if ($logiter = $accesslog->get_referer($limit, "external_only")
             and $logiter->count()
         ) {
-            $table->pushContent(HTML::tr(HTML::th("Target"), HTML::th("Referrer"),
-                HTML::th("Host"), HTML::th("Date")));
+            $table->pushContent(HTML::tr(HTML::th(_("Target")), HTML::th(_("Referrer")),
+                HTML::th(_("Host")), HTML::th(_("Date"))));
             while ($logentry = $logiter->next()) {
                 $table->pushContent(HTML::tr(HTML::td($logentry['request']),
                     HTML::td($logentry['referer']),

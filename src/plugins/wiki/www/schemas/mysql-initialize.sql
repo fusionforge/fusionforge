@@ -1,10 +1,5 @@
 CREATE TABLE page (
 	id              INT NOT NULL AUTO_INCREMENT,
--- for mysql => 4.1 define the charset here
--- this is esp. needed for mysql 4.1.0 up to 4.1.6. 
--- not yet confirmed, at least since 4.1.8 it's okay with binary.
---      pagename        VARCHAR(100) CHARACTER SET latin1 COLLATE latin1_bin NOT NULL,
--- otherwise use the old syntax to do case-sensitive comparison
         pagename        VARCHAR(100) BINARY NOT NULL,
 	hits            INT NOT NULL DEFAULT 0,
         pagedata        MEDIUMTEXT NOT NULL DEFAULT '',

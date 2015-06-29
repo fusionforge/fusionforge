@@ -69,6 +69,13 @@ class WikiPlugin_IncludeSiteMap
         );
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         return WikiPlugin_SiteMap::run($dbi, $argstr, $request, $basepage);

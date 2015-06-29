@@ -43,13 +43,13 @@ require_once 'lib/plugin/RateIt.php';
  */
 class _PageList_Column_numbacklinks extends _PageList_Column_custom
 {
-    function _getValue($page_handle, &$revision_handle)
+    function _getValue($page_handle, $revision_handle)
     {
         $theIter = $page_handle->getBackLinks();
         return $theIter->count();
     }
 
-    function _getSortableValue($page_handle, &$revision_handle)
+    function _getSortableValue($page_handle, $revision_handle)
     {
         return $this->_getValue($page_handle, $revision_handle);
     }
@@ -57,14 +57,14 @@ class _PageList_Column_numbacklinks extends _PageList_Column_custom
 
 class _PageList_Column_coagreement extends _PageList_Column_custom
 {
-    function _PageList_Column_coagreement($params)
+    function __construct($params)
     {
         $this->_pagelist =& $params[3];
         $this->_PageList_Column($params[0], $params[1], $params[2]);
         $this->_selectedBuddies = $this->_pagelist->getOption('selectedBuddies');
     }
 
-    function _getValue($page_handle, &$revision_handle)
+    function _getValue($page_handle, $revision_handle)
     {
         global $request;
 
@@ -90,14 +90,14 @@ class _PageList_Column_coagreement extends _PageList_Column_custom
 
 class _PageList_Column_minmisery extends _PageList_Column_custom
 {
-    function _PageList_Column_minmisery($params)
+    function __construct($params)
     {
         $this->_pagelist =& $params[3];
         $this->_PageList_Column($params[0], $params[1], $params[2]);
         $this->_selectedBuddies = $this->_pagelist->getOption('selectedBuddies');
     }
 
-    function _getValue($page_handle, &$revision_handle)
+    function _getValue($page_handle, $revision_handle)
     {
         global $request, $WikiTheme;
 
@@ -114,14 +114,14 @@ class _PageList_Column_minmisery extends _PageList_Column_custom
 
 class _PageList_Column_averagerating extends _PageList_Column_custom
 {
-    function _PageList_Column_averagerating($params)
+    function __construct($params)
     {
         $this->_pagelist =& $params[3];
         $this->_PageList_Column($params[0], $params[1], $params[2]);
         $this->_selectedBuddies = $this->_pagelist->getOption('selectedBuddies');
     }
 
-    function _getValue($page_handle, &$revision_handle)
+    function _getValue($page_handle, $revision_handle)
     {
         global $request, $WikiTheme;
 
@@ -150,19 +150,29 @@ class _PageList_Column_ratingvalue extends _PageList_Column
     public $_user;
     public $_dimension;
 
-    function _PageList_Column_ratingvalue($params)
+    function __construct($params)
     {
         $this->_pagelist =& $params[3];
         $this->_user =& $params[4]; //$this->_pagelist->getOption('user');
-        if (empty($this->_user))
-            $this->_user =& RatingsUserFactory::getUser($GLOBALS['request']->_user->_userid);
+        if (defined('FUSIONFORGE') && FUSIONFORGE) {
+            if (empty($this->_user)) {
+                $this->_user =& RatingsUserFactory::getUser($GLOBALS['request']->_user->_userid);
+            }
+        }
         $this->_PageList_Column($params[0], $params[1], $params[2]);
         $this->_dimension = $this->_pagelist->getOption('dimension');
         if (!$this->_dimension) $this->_dimension = 0;
     }
 
-    function format($pagelist, $page_handle, &$revision_handle)
+    function format($pagelist, $page_handle, $revision_handle)
     {
+        /**
+         * @var WikiRequest $request
+         */
+        global $request;
+
+        if (empty($this->_user))
+            $this->_user =& RatingsUserFactory::getUser($request->_user->_userid);
         assert(!empty($this->_user));
         $rating = $this->_getValue($page_handle, $revision_handle);
         $mean = $this->_user->mean_rating($this->_dimension);
@@ -178,7 +188,7 @@ class _PageList_Column_ratingvalue extends _PageList_Column
         return $td;
     }
 
-    function _getValue($page_handle, &$revision_handle)
+    function _getValue($page_handle, $revision_handle)
     {
         $pagename = $page_handle->getName();
 
@@ -205,7 +215,7 @@ class _PageList_Column_ratingvalue extends _PageList_Column
 
     }
 
-    function _getSortableValue($page_handle, &$revision_handle)
+    function _getSortableValue($page_handle, $revision_handle)
     {
         return $this->_getValue($page_handle, $revision_handle);
     }
@@ -225,25 +235,40 @@ class _PageList_Column_ratingwidget extends _PageList_Column_custom
         if (!$this->_dimension) $this->_dimension = 0;
     }
 
-    function format($pagelist, $page_handle, &$revision_handle)
+    function format($pagelist, $page_handle, $revision_handle)
     {
         $plugin = new WikiPlugin_RateIt();
-        $widget = $plugin->RatingWidgetHtml($page_handle->getName(), "",
+        if (defined('FUSIONFORGE') && FUSIONFORGE) {
+            $widget = $plugin->RatingWidgetHtml($page_handle->getName(), "",
             "BStar", $this->_dimension, "small");
+        } else {
+            $widget = $plugin->RatingWidgetHtml($page_handle->getName(), "",
+            "Star", $this->_dimension, "small");
+        }
         $td = HTML::td($widget);
         $td->setAttr('nowrap', 'nowrap');
         return $td;
     }
 
-    function _getValue($page_handle, &$revision_handle)
+    function _getValue($page_handle, $revision_handle)
     {
-        // Returns average rating of a page
-        $pagename = $page_handle->getName();
-        $rdbi = RatingsDb::getTheRatingsDb();
-        return $rdbi->getAvg($pagename, $this->_dimension);
+        global $request;
+
+        if (defined('FUSIONFORGE') && FUSIONFORGE) {
+            // Returns average rating of a page
+            $pagename = $page_handle->getName();
+            $rdbi = RatingsDb::getTheRatingsDb();
+            return $rdbi->getAvg($pagename, $this->_dimension);
+        } else {
+            $pagename = $page_handle->getName();
+            $active_user = $request->getUser();
+            $active_userid = $active_user->_userid;
+            $tu = & RatingsUserFactory::getUser($active_userid);
+            return $tu->get_rating($pagename, $this->_dimension);
+        }
     }
 
-    function _getSortableValue($page_handle, &$revision_handle)
+    function _getSortableValue($page_handle, $revision_handle)
     {
         return $this->_getValue($page_handle, $revision_handle);
     }
@@ -254,7 +279,7 @@ class _PageList_Column_prediction extends _PageList_Column
     public $_active_ratings_user;
     public $_users;
 
-    function _PageList_Column_prediction($params)
+    function __construct($params)
     {
         global $request;
         $active_user = $request->getUser();
@@ -269,7 +294,7 @@ class _PageList_Column_prediction extends _PageList_Column
         $this->_users = $this->_pagelist->getOption('users');
     }
 
-    function format($pagelist, $page_handle, &$revision_handle)
+    function format($pagelist, $page_handle, $revision_handle)
     {
         $pred = $this->_getValue($page_handle, $revision_handle);
         $mean = $this->_active_ratings_user->mean_rating($this->_dimension);
@@ -285,16 +310,15 @@ class _PageList_Column_prediction extends _PageList_Column
         return $td;
     }
 
-    function _getValue($page_handle, &$revision_handle)
+    function _getValue($page_handle, $revision_handle)
     {
         $pagename = $page_handle->getName();
 
-        $html = HTML();
         $pred = $this->_active_ratings_user->knn_uu_predict($pagename, $this->_users, $this->_dimension);
         return sprintf("%.1f", min(5, max(0, $pred)));
     }
 
-    function _getSortableValue($page_handle, &$revision_handle)
+    function _getSortableValue($page_handle, $revision_handle)
     {
         return $this->_getValue($page_handle, $revision_handle);
     }
@@ -306,7 +330,7 @@ class _PageList_Column_top3recs extends _PageList_Column_custom
     public $_active_ratings_user;
     public $_users;
 
-    function _PageList_Column_top3recs($params)
+    function __construct($params)
     {
         global $request;
         $active_user = $request->getUser();
@@ -328,7 +352,7 @@ class _PageList_Column_top3recs extends _PageList_Column_custom
         }
     }
 
-    function _getValue($page_handle, &$revision_handle)
+    function _getValue($page_handle, $revision_handle)
     {
         $ratings = $this->_active_ratings_user->get_ratings();
         $iter = $page_handle->getLinks();

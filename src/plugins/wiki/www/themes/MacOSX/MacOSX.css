@@ -150,10 +150,6 @@ input[type=text] {
     padding: 0.4ex 0.3ex;
 }
 
-div.toolbar {
-    margin: 1ex 0;
-}
-
 /**
  * PageTypes
  */
@@ -833,7 +829,7 @@ div.wikicomment div.wikicomment-footer {
     padding: 0.2ex 0.5em;
 }
 
-div.wikicomment div.wikicomment-footer named-wiki {
+div.wikicomment div.wikicomment-footer .named-wiki {
     font-size: small;
 }
 
@@ -874,7 +870,6 @@ table.interwiki-map {
 
 .dialog div.message {
     background-color: white;
-    color: black;
     color: black;
     margin: 0 1em;
     padding: 0.5em 0.5em;
@@ -969,7 +964,6 @@ div.boxright {
     padding: 0.5em;
     float: right;
     border: thin solid #888888;
-    padding: 0.5em;
 }
 
 /* RssFeed */
@@ -1104,8 +1098,12 @@ textarea.wikiedit, input.wikitext, textarea.summary {
     clear: both;
 }
 
-.toolbar, div.toolbar {
-    margin: 0.5ex 0;
+img.toolbar:hover {
+    cursor: pointer;
+}
+
+input.toolbar[type=image] {
+    vertical-align: top;
 }
 
 /* Link icons */
@@ -1200,10 +1198,26 @@ table.boxed th, table.bordered th {
     background-color: #d8d8d8;
 }
 
-/* For emacs users
- *
- * Local Variables:
- * mode: c
- * c-file-style: cc-mode
- * End:
- */
+table.sortable th.header {
+    background-image: url(../default/buttons/sort_none.gif);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}
+
+table.sortable th.headerSortUp {
+    background-image: url(../default/buttons/sort_up.gif);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}
+
+table.sortable th.headerSortDown {
+    background-image: url(../default/buttons/sort_down.gif);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}

@@ -22,7 +22,6 @@
 
 /**
  * Redirect to an external web site based on form input.
- * See http://phpwiki.sourceforge.net/phpwiki/ExternalSearchPlugin
  *
  * useimage sample:
 ExternalSearch
@@ -36,6 +35,10 @@ if (!defined("EXTERNALSEARCH_DEFAULT_BUTTON_POSITION"))
 class WikiPlugin_ExternalSearch
     extends WikiPlugin
 {
+    public $_url;
+    public $_name;
+    public $_s;
+
     function getDescription()
     {
         return _("Redirect to an external web site based on form input.");
@@ -71,6 +74,13 @@ class WikiPlugin_ExternalSearch
         );
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         $args = $this->getArgs($argstr, $request);

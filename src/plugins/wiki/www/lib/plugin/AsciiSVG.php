@@ -28,6 +28,8 @@
 class WikiPlugin_AsciiSVG
     extends WikiPlugin
 {
+    public $source;
+
     function getDescription()
     {
         return _("Render inline ASCII SVG.");
@@ -42,18 +44,25 @@ class WikiPlugin_AsciiSVG
         );
     }
 
-    function handle_plugin_args_cruft(&$argstr, &$args)
+    function handle_plugin_args_cruft($argstr, $args)
     {
         $this->source = $argstr;
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         global $WikiTheme;
         $args = $this->getArgs($argstr, $request);
         if (empty($this->source)) {
-            return HTML::div(array('class' => "error"), 
-                   "Please provide SVG code to AsciiSVG plugin");
+            return HTML::p(array('class' => "error"),
+                   _("Please provide SVG code to AsciiSVG plugin"));
         }
         $html = HTML();
         if (empty($WikiTheme->_asciiSVG)) {

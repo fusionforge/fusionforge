@@ -7,13 +7,6 @@ Works mostly ok nicely on Safari 1.2.1; fine in Mozilla.
 Safari bugs (1.2.1):
 * Tabs are still appearing in left-to-right order. (Try after localizing)
 
-IE/mac bugs:
-* The thing barfs on Hebrew and Arabic anyway, so no point testing.
-
-IE6 bug:
-* right padding of content area disappears somewhere during load, workaround is a margin on the body for now
-  (weird, isn't it?) IE5.5 is caught by this fix as well currently, it doesn't need it though
-
 Missing features due to lack of support:
 * external link icons, icon next to user name
 

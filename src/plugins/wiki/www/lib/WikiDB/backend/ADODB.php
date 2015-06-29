@@ -141,7 +141,7 @@ class WikiDB_backend_ADODB
                     '(lock_count = $this->_lock_count)' . "\n<br />",
                 E_USER_WARNING);
         }
-        $this->unlock(false, 'force');
+        $this->unlock(array(), 'force');
 
         $this->_dbh->close();
         $this->_dbh = false;
@@ -198,7 +198,7 @@ class WikiDB_backend_ADODB
         return;
     }
 
-    /**
+    /*
      * Read page information from database.
      */
     function get_pagedata($pagename)
@@ -210,7 +210,7 @@ class WikiDB_backend_ADODB
         return $row ? $this->_extract_page_data($row[3], $row[2]) : false;
     }
 
-    function  _extract_page_data($data, $hits)
+    public function  _extract_page_data($data, $hits)
     {
         if (empty($data))
             return array('hits' => $hits);
@@ -230,7 +230,7 @@ class WikiDB_backend_ADODB
             // hit count, who cares?
             $dbh->Execute(sprintf("UPDATE $page_tbl SET hits=%d WHERE pagename=%s",
                 $newdata['hits'], $dbh->qstr($pagename)));
-            return;
+            return true;
         }
         $where = sprintf("pagename=%s", $dbh->qstr($pagename));
         $dbh->BeginTrans();
@@ -280,7 +280,7 @@ class WikiDB_backend_ADODB
         $dbh = &$this->_dbh;
         $page_tbl = $this->_table_names['page_tbl'];
         if (empty($data)) $data = '';
-        $rs = $dbh->Execute("UPDATE $page_tbl"
+        $dbh->Execute("UPDATE $page_tbl"
                 . " SET cached_html=?"
                 . " WHERE pagename=?",
             array($data, $pagename));
@@ -367,9 +367,11 @@ class WikiDB_backend_ADODB
     /**
      * Get version data.
      *
-     * @param $version int Which version to get.
+     * @param string $pagename Name of the page
+     * @param int $version Which version to get
+     * @param bool $want_content Do we need content?
      *
-     * @return hash The version data, or false if specified version does not
+     * @return array hash The version data, or false if specified version does not
      *              exist.
      */
     function get_versiondata($pagename, $version, $want_content = false)
@@ -400,7 +402,7 @@ class WikiDB_backend_ADODB
         return $row ? $this->_extract_version_data_num($row, $want_content) : false;
     }
 
-    function _extract_version_data_num($row, $want_content)
+    private function _extract_version_data_num($row, $want_content)
     {
         if (!$row)
             return false;
@@ -443,7 +445,7 @@ class WikiDB_backend_ADODB
         return $data;
     }
 
-    /**
+    /*
      * Create a new revision of a page.
      */
     function set_versiondata($pagename, $version, $data)
@@ -458,7 +460,7 @@ class WikiDB_backend_ADODB
         unset($data['mtime']);
         assert(!empty($mtime));
 
-        @$content = (string)$data['%content'];
+        $content = isset($data['%content']) ? (string)$data['%content'] : '';
         unset($data['%content']);
         unset($data['%pagedata']);
 
@@ -466,7 +468,6 @@ class WikiDB_backend_ADODB
         $dbh->BeginTrans();
         $dbh->CommitLock($version_tbl);
         $id = $this->_get_pageid($pagename, true);
-        $backend_type = $this->backendType();
         $dbh->Execute(sprintf("DELETE FROM $version_tbl"
                 . " WHERE id=%d AND version=%d",
             $id, $version));
@@ -482,7 +483,7 @@ class WikiDB_backend_ADODB
         $this->unlock(array('page', 'recent', 'version', 'nonempty'));
     }
 
-    /**
+    /*
      * Delete an old revision of a page.
      */
     function delete_versiondata($pagename, $version)
@@ -502,7 +503,7 @@ class WikiDB_backend_ADODB
         $this->unlock(array('version'));
     }
 
-    /**
+    /*
      * Delete page from the database with backup possibility.
      * i.e save_page('') and DELETE nonempty id
      *
@@ -513,6 +514,11 @@ class WikiDB_backend_ADODB
      */
     function delete_page($pagename)
     {
+        /**
+         * @var WikiRequest $request
+         */
+        global $request;
+
         $dbh = &$this->_dbh;
         extract($this->_table_names);
 
@@ -523,7 +529,7 @@ class WikiDB_backend_ADODB
             return false;
         }
         $mtime = time();
-        $user =& $GLOBALS['request']->_user;
+        $user =& $request->_user;
         $meta = array('author' => $user->getId(),
             'author_id' => $user->getAuthenticatedId(),
             'mtime' => $mtime);
@@ -537,7 +543,7 @@ class WikiDB_backend_ADODB
                 array($id, $version + 1, $mtime, 0,
                     '', $this->_serialize($meta)))
                 and $dbh->Execute("DELETE FROM $nonempty_tbl WHERE id=$id")
-                    and $this->set_links($pagename, false)
+                    and $this->set_links($pagename, array())
             // need to keep perms and LOCKED, otherwise you can reset the perm
             // by action=remove and re-create it with default perms
             // keep hits but delete meta-data
@@ -553,9 +559,8 @@ class WikiDB_backend_ADODB
         }
     }
 
-    /**
+    /*
      * Delete page completely from the database.
-     * I'm not sure if this is what we want. Maybe just delete the revisions
      */
     function purge_page($pagename)
     {
@@ -567,7 +572,7 @@ class WikiDB_backend_ADODB
             $dbh->Execute("DELETE FROM $nonempty_tbl WHERE id=$id");
             $dbh->Execute("DELETE FROM $recent_tbl   WHERE id=$id");
             $dbh->Execute("DELETE FROM $version_tbl  WHERE id=$id");
-            $this->set_links($pagename, false);
+            $this->set_links($pagename, array());
             $row = $dbh->GetRow("SELECT COUNT(*) FROM $link_tbl WHERE linkto=$id");
             if ($row and $row[0]) {
                 // We're still in the link table (dangling link) so we can't delete this
@@ -584,12 +589,6 @@ class WikiDB_backend_ADODB
         $this->unlock(array('version', 'recent', 'nonempty', 'page', 'link'));
         return $result;
     }
-
-    // The only thing we might be interested in updating which we can
-    // do fast in the flags (minor_edit).   I think the default
-    // update_versiondata will work fine...
-    //function update_versiondata($pagename, $version, $data) {
-    //}
 
     /*
      * Update link table.
@@ -756,7 +755,7 @@ class WikiDB_backend_ADODB
         return true;
     }
 
-    /**
+    /*
      * Find pages which link to or are linked from a page.
      *
      * Optimization: save request->_dbi->_iwpcache[] to avoid further iswikipage checks
@@ -800,11 +799,6 @@ class WikiDB_backend_ADODB
             //. " GROUP BY $want.id"
             . $exclude
             . $orderby;
-        /*
-          echo "SELECT linkee.id AS id, linkee.pagename AS pagename, related.pagename as linkrelation FROM link, page linkee, page linker JOIN page related ON (link.relation=related.id) WHERE linkfrom=linker.id AND linkto=linkee.id AND linker.pagename='SanDiego'" | mysql phpwiki
-        id      pagename        linkrelation
-        2268    California      located_in
-        */
         if ($limit) {
             // extract from,count from limit
             list($offset, $count) = $this->limit($limit);
@@ -818,7 +812,7 @@ class WikiDB_backend_ADODB
         return new WikiDB_backend_ADODB_iter($this, $result, $fields);
     }
 
-    /**
+    /*
      * Find if a page links to another page
      */
     function exists_link($pagename, $link, $reversed = false)
@@ -840,7 +834,8 @@ class WikiDB_backend_ADODB
         return $row[0];
     }
 
-    function get_all_pages($include_empty = false, $sortby = '', $limit = '', $exclude = '')
+    public function get_all_pages($include_empty = false,
+                                  $sortby = '', $limit = '', $exclude = '')
     {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
@@ -854,8 +849,7 @@ class WikiDB_backend_ADODB
             $exclude = '';
         }
 
-        //$dbh->SetFetchMode(ADODB_FETCH_ASSOC);
-        if (strstr($orderby, 'mtime ')) { // was ' mtime'
+        if (strstr($orderby, 'mtime ')) { // multiple columns possible
             if ($include_empty) {
                 $sql = "SELECT "
                     . $this->page_tbl_fields
@@ -897,15 +891,14 @@ class WikiDB_backend_ADODB
         } else {
             $result = $dbh->Execute($sql);
         }
-        //$dbh->SetFetchMode(ADODB_FETCH_NUM);
         return new WikiDB_backend_ADODB_iter($this, $result, $this->page_tbl_field_list);
     }
 
-    /**
+    /*
      * Title and fulltext search.
      */
-    function text_search($search, $fullsearch = false,
-                         $sortby = '', $limit = '', $exclude = '')
+    public function text_search($search, $fulltext = false,
+                                $sortby = '', $limit = '', $exclude = '')
     {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
@@ -918,7 +911,7 @@ class WikiDB_backend_ADODB
         $field_list = $this->page_tbl_field_list;
         $searchobj = new WikiDB_backend_ADODB_search($search, $dbh);
 
-        if ($fullsearch) {
+        if ($fulltext) {
             $table .= ", $recent_tbl";
             $join_clause .= " AND $page_tbl.id=$recent_tbl.id";
 
@@ -945,7 +938,7 @@ class WikiDB_backend_ADODB
             $result = $dbh->Execute($sql);
         }
         $iter = new WikiDB_backend_ADODB_iter($this, $result, $field_list);
-        if ($fullsearch)
+        if ($fulltext)
             $iter->stoplisted = $searchobj->stoplisted;
         return $iter;
     }
@@ -965,10 +958,10 @@ class WikiDB_backend_ADODB
         return substr($s, 0, -1) . ")";
     }
 
-    /**
+    /*
      * Find highest or lowest hit counts.
      */
-    function most_popular($limit = 20, $sortby = '-hits')
+    public function most_popular($limit = 20, $sortby = '-hits')
     {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
@@ -983,8 +976,9 @@ class WikiDB_backend_ADODB
         if ($sortby != '-hits') {
             if ($order = $this->sortby($sortby, 'db')) $orderby = " ORDER BY " . $order;
             else $orderby = "";
-        } else
+        } else {
             $orderby = " ORDER BY hits $order";
+        }
         $sql = "SELECT "
             . $this->page_tbl_fields
             . " FROM $nonempty_tbl, $page_tbl"
@@ -1001,10 +995,10 @@ class WikiDB_backend_ADODB
         return new WikiDB_backend_ADODB_iter($this, $result, $this->page_tbl_field_list);
     }
 
-    /**
+    /*
      * Find recent changes.
      */
-    function most_recent($params)
+    public function most_recent($params)
     {
         $limit = 0;
         $since = 0;
@@ -1075,7 +1069,7 @@ class WikiDB_backend_ADODB
             array_merge($this->page_tbl_field_list, $this->version_tbl_field_list));
     }
 
-    /**
+    /*
      * Find referenced empty pages.
      */
     function wanted_pages($exclude_from = '', $exclude = '', $sortby = '', $limit = '')
@@ -1117,7 +1111,7 @@ class WikiDB_backend_ADODB
         return new WikiDB_backend_ADODB_iter($this, $result, array('pagename', 'wantedfrom'));
     }
 
-    /**
+    /*
      * Rename page in the database.
      */
     function rename_page($pagename, $to)
@@ -1201,13 +1195,13 @@ class WikiDB_backend_ADODB
         $this->unlock(array('nonempty'));
     }
 
-    /**
+    /*
      * Grab a write lock on the tables in the SQL database.
      *
      * Calls can be nested.  The tables won't be unlocked until
      * _unlock_database() is called as many times as _lock_database().
      */
-    public function lock($tables, $write_lock = true)
+    public function lock($tables = array(), $write_lock = true)
     {
         $this->_dbh->StartTrans();
         if ($this->_lock_count++ == 0) {
@@ -1216,10 +1210,10 @@ class WikiDB_backend_ADODB
         }
     }
 
-    /**
+    /*
      * Overridden by non-transaction safe backends.
      */
-    function _lock_tables($tables, $write_lock)
+    protected function _lock_tables($tables, $write_lock = true)
     {
         return $this->_current_lock;
     }
@@ -1227,34 +1221,35 @@ class WikiDB_backend_ADODB
     /**
      * Release a write lock on the tables in the SQL database.
      *
-     * @param $force boolean Unlock even if not every call to lock() has been matched
+     * @param array $tables
+     * @param bool $force Unlock even if not every call to lock() has been matched
      * by a call to unlock().
      *
      * @see _lock_database
      */
-    public function unlock($tables = false, $force = false)
+    public function unlock($tables = array(), $force = false)
     {
         if ($this->_lock_count == 0) {
             $this->_current_lock = false;
             return;
         }
         if (--$this->_lock_count <= 0 || $force) {
-            $this->_unlock_tables($tables, $force);
+            $this->_unlock_tables($tables);
             $this->_current_lock = false;
             $this->_lock_count = 0;
         }
         $this->_dbh->CompleteTrans(!$force);
     }
 
-    /**
+    /*
      * overridden by non-transaction safe backends
      */
-    function _unlock_tables($tables, $write_lock = false)
+    protected function _unlock_tables($tables)
     {
         return;
     }
 
-    /**
+    /*
      * Serialize data
      */
     function _serialize($data)
@@ -1265,7 +1260,7 @@ class WikiDB_backend_ADODB
         return serialize($data);
     }
 
-    /**
+    /*
      * Unserialize data
      */
     function _unserialize($data)
@@ -1305,7 +1300,7 @@ class WikiDB_backend_ADODB
         $field_list = array();
         $old_db = $this->database();
         if ($database != $old_db) {
-            $conn = $this->_dbh->Connect($this->_parsedDSN['hostspec'],
+            $this->_dbh->Connect($this->_parsedDSN['hostspec'],
                 DBADMIN_USER ? DBADMIN_USER : $this->_parsedDSN['username'],
                 DBADMIN_PASSWD ? DBADMIN_PASSWD : $this->_parsedDSN['password'],
                 $database);
@@ -1315,7 +1310,7 @@ class WikiDB_backend_ADODB
         }
         if ($database != $old_db) {
             $this->_dbh->close();
-            $conn = $this->_dbh->Connect($this->_parsedDSN['hostspec'],
+            $this->_dbh->Connect($this->_parsedDSN['hostspec'],
                 $this->_parsedDSN['username'],
                 $this->_parsedDSN['password'],
                 $old_db);
@@ -1360,7 +1355,6 @@ class WikiDB_backend_ADODB_generic_iter
     function next()
     {
         $result = &$this->_result;
-        $backend = &$this->_backend;
         if (!$result || $result->EOF) {
             $this->free();
             return false;
@@ -1385,21 +1379,20 @@ class WikiDB_backend_ADODB_generic_iter
         }
     }
 
+    function free()
+    {
+        if ($this->_result) {
+            $this->_result->Close();
+            $this->_result = false;
+        }
+    }
+
     function asArray()
     {
         $result = array();
         while ($page = $this->next())
             $result[] = $page;
         return $result;
-    }
-
-    function free()
-    {
-        if ($this->_result) {
-            /* call mysql_free_result($this->_queryID) */
-            $this->_result->Close();
-            $this->_result = false;
-        }
     }
 }
 
@@ -1438,7 +1431,6 @@ class WikiDB_backend_ADODB_iter
 class WikiDB_backend_ADODB_search extends WikiDB_backend_search_sql
 {
     // no surrounding quotes because we know it's a string
-    // function _quote($word) { return $this->_dbh->escapeSimple($word); }
 }
 
 // Following function taken from Pear::DB (prev. from adodb-pear.inc.php).
@@ -1572,7 +1564,7 @@ function parseDSN($dsn)
         $parsed['socket'] = $proto_opts;
     }
 
-    // Get dabase if any
+    // Get database if any
     // $dsn => database
     if ($dsn) {
         // /database

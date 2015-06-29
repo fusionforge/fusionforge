@@ -33,19 +33,19 @@ if ($user->isAuthenticated()) {
   </noscript>
 <?php } else {
     $SignInInput = HTML::input(array('type' => 'text',
-				     'name' => "auth[userid]",
-				     'size' => 12,
-				     'maxlength' => 256,
-				     'onchange' => "SignIn(this.form,false);"));
+                     'name' => "auth[userid]",
+                     'size' => 12,
+                     'maxlength' => 256,
+                     'onchange' => "SignIn(this.form,false);"));
     $SignInInput->addTooltip(_("Enter your UserId to sign in"));
     $userid = $user->getId();
     if ($user->isSignedIn())
       echo sprintf(_("You are signed but not authenticated as %s. "),
-		   asXml(HTML::a(array(
-				       'href'=>'#',
-				       'title' => sprintf(_("Click to authenticate as %s"),$userid),
-				       'onclick'=>'SignIn(document.forms["'.$FORMNAME.'"],"'.$userid.'");'),
-				 $userid)));
+           asXml(HTML::a(array(
+                       'href'=>'#',
+                       'title' => sprintf(_("Click to authenticate as %s"),$userid),
+                       'onclick'=>'SignIn(document.forms["'.$FORMNAME.'"],"'.$userid.'");'),
+                 $userid)));
 ?>
   <script type="text/javascript"> <!--
      function SignIn(form,userid) {

@@ -48,25 +48,43 @@ class WikiPlugin_BackLinks
     // exclude arg allows multiple pagenames exclude=HomePage,RecentChanges
     // NEW: info=count : number of links
     // page=foo,bar : backlinks to both pages
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         $args = $this->getArgs($argstr, $request);
 
+        if (isset($args['limit']) && !is_limit($args['limit'])) {
+            return HTML::p(array('class' => "error"),
+                           _("Illegal “limit” argument: must be an integer or two integers separated by comma"));
+        }
+
         extract($args);
-        if (empty($page) and $page != '0')
+        if (empty($page) and $page != '0') {
             return '';
+        }
         // exclude is now already expanded in WikiPlugin::getArgs()
-        if (empty($exclude)) $exclude = array();
-        if (!$include_self)
+        if (empty($exclude)) {
+            $exclude = array();
+        }
+        if (!$include_self) {
             $exclude[] = $page;
+        }
         if ($info) {
             $info = explode(",", $info);
-            if (in_array('count', $info))
+            if (in_array('count', $info)) {
                 $args['types']['count'] =
                     new _PageList_Column_BackLinks_count('count', _("#"), 'center');
+            }
         }
-        if (!empty($limit))
+        if (!empty($limit)) {
             $args['limit'] = $limit;
+        }
         // $args['dosort'] = !empty($args['sortby']); // override DB sort (??)
         $pagelist = new PageList($info, $exclude, $args);
 
@@ -174,7 +192,7 @@ class WikiPlugin_BackLinks
 // how many links from this backLink to other pages
 class _PageList_Column_BackLinks_count extends _PageList_Column
 {
-    function _getValue($page, &$revision_handle)
+    function _getValue($page, $revision_handle)
     {
         $iter = $page->getPageLinks();
         $count = $iter->count();

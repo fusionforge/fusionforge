@@ -46,6 +46,12 @@ class WikiPlugin_SiteMap
     extends WikiPlugin
 {
     public $_pagename;
+    public $ExcludedPages;
+    public $firstreversed;
+    public $initialpage;
+    public $excludeunknown;
+    public $dbi;
+    public $_default_limit;
 
     function getDescription()
     {
@@ -133,11 +139,18 @@ class WikiPlugin_SiteMap
         return $pagearr;
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         include_once 'lib/BlockParser.php';
 
-        $args = $this->getArgs($argstr, $request, false);
+        $args = $this->getArgs($argstr, $request, array());
         extract($args);
         if (!$page)
             return '';
@@ -181,7 +194,7 @@ class WikiPlugin_SiteMap
         reset($pagearr);
         if (!empty($includepages)) {
             // disallow direct usage, only via child class IncludeSiteMap
-            if (!isa($this, "WikiPlugin_IncludeSiteMap") and !isa($this, "WikiPlugin_IncludeTree"))
+            if (!is_a($this, "WikiPlugin_IncludeSiteMap") and !is_a($this, "WikiPlugin_IncludeTree"))
                 $includepages = '';
             if (!is_string($includepages))
                 $includepages = ' '; // avoid plugin loader problems

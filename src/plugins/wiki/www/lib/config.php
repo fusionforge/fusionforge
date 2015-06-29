@@ -30,11 +30,6 @@ function isCGI()
             @preg_match('/CGI/', $GLOBALS['HTTP_ENV_VARS']['GATEWAY_INTERFACE']));
 }
 
-// essential internal stuff
-if (!check_php_version(5, 3)) {
-    set_magic_quotes_runtime(0);
-}
-
 /**
  * Browser Detection Functions
  *
@@ -65,8 +60,10 @@ function browserVersion()
     if (strstr($agent, "Mozilla/4.0 (compatible; MSIE"))
         return (float)substr($agent, 30);
     elseif (strstr($agent, "Mozilla/5.0 (compatible; Konqueror/"))
-        return (float)substr($agent, 36); elseif (strstr($agent, "AppleWebKit/"))
-        return (float)substr($agent, strpos($agent, "AppleWebKit/") + 12); else
+        return (float)substr($agent, 36);
+    elseif (strstr($agent, "AppleWebKit/"))
+        return (float)substr($agent, strpos($agent, "AppleWebKit/") + 12);
+    else
         return (float)substr($agent, 8);
 }
 
@@ -80,7 +77,8 @@ function isBrowserIE()
 // http://sourceforge.net/tracker/index.php?func=detail&aid=945154&group_id=6121&atid=106121
 function isBrowserKonqueror($version = false)
 {
-    if ($version) return browserDetect('Konqueror/') and browserVersion() >= $version;
+    if ($version)
+        return browserDetect('Konqueror/') and browserVersion() >= $version;
     return browserDetect('Konqueror/');
 }
 
@@ -89,14 +87,16 @@ function isBrowserKonqueror($version = false)
 function isBrowserSafari($version = false)
 {
     $found = browserDetect('Spoofer/');
-    $found = browserDetect('AppleWebKit/') or $found;
-    if ($version) return $found and browserVersion() >= $version;
+    $found = browserDetect('AppleWebKit/') || $found;
+    if ($version)
+        return $found and browserVersion() >= $version;
     return $found;
 }
 
 function isBrowserOpera($version = false)
 {
-    if ($version) return browserDetect('Opera/') and browserVersion() >= $version;
+    if ($version)
+        return browserDetect('Opera/') and browserVersion() >= $version;
     return browserDetect('Opera/');
 }
 
@@ -107,8 +107,11 @@ function isBrowserOpera($version = false)
  *   => "de"
  * We should really check additionally if the i18n HomePage version is defined.
  * So must defer this to the request loop.
+ *
+ * @param array $languages
+ * @return string
  */
-function guessing_lang($languages = false)
+function guessing_lang($languages = array())
 {
     if (!$languages) {
         // make this faster
@@ -193,8 +196,10 @@ function guessing_setlocale($category, $locale)
         // do the reverse: return the detected locale collapsed to our LANG
         $locale = setlocale($category, '');
         if ($locale) {
-            if (strstr($locale, '_')) list ($lang) = explode('_', $locale);
-            else $lang = $locale;
+            if (strstr($locale, '_'))
+                list ($lang) = explode('_', $locale);
+            else
+                $lang = $locale;
             if (strlen($lang) > 2) {
                 foreach ($alt as $try => $locs) {
                     if (in_array($locale, $locs) or in_array($lang, $locs)) {
@@ -279,9 +284,9 @@ function update_locale($loc)
     // FIXME: Not all environments may support en_US?  We should probably
     // have a list of locales to try.
     if (setlocale(LC_CTYPE, 0) == 'C') {
-        $x = setlocale(LC_CTYPE, 'en_US.UTF-8');
+        setlocale(LC_CTYPE, 'en_US.UTF-8');
     } else {
-        $x = setlocale(LC_CTYPE, $setlocale);
+        setlocale(LC_CTYPE, $setlocale);
     }
 
     return $loc;
@@ -315,71 +320,10 @@ function IsProbablyRedirectToIndex()
     return preg_match("%^${requri}[^/]*$%", $GLOBALS['HTTP_SERVER_VARS']['SCRIPT_NAME']);
 }
 
-// needed < php5
-// by bradhuizenga at softhome dot net from the php docs
-if (!function_exists('str_ireplace')) {
-    function str_ireplace($find, $replace, $string)
-    {
-        if (!is_array($find)) $find = array($find);
-        if (!is_array($replace)) {
-            if (!is_array($find))
-                $replace = array($replace);
-            else {
-                // this will duplicate the string into an array the size of $find
-                $c = count($find);
-                $rString = $replace;
-                unset($replace);
-                for ($i = 0; $i < $c; $i++) {
-                    $replace[$i] = $rString;
-                }
-            }
-        }
-        foreach ($find as $fKey => $fItem) {
-            $between = explode(strtolower($fItem), strtolower($string));
-            $pos = 0;
-            foreach ($between as $bKey => $bItem) {
-                $between[$bKey] = substr($string, $pos, strlen($bItem));
-                $pos += strlen($bItem) + strlen($fItem);
-            }
-            $string = implode($replace[$fKey], $between);
-        }
-        return ($string);
-    }
-}
-
-// htmlspecialchars_decode exists for PHP >= 5.1
-if (!function_exists('htmlspecialchars_decode')) {
-
-    function htmlspecialchars_decode($text)
-    {
-        return strtr($text, array_flip(get_html_translation_table(HTML_SPECIALCHARS)));
-    }
-
-}
-
-/**
- * safe php4 definition for clone.
- * php5 copies objects by reference, but we need to clone "deep copy" in some places.
- * (BlockParser)
- * We need to eval it as workaround for the php5 parser.
- * See http://www.acko.net/node/54
- */
-if (!check_php_version(5)) {
-    eval('
-    function clone($object) {
-      return $object;
-    }
-    ');
-}
-
 function getUploadFilePath()
 {
 
     if (defined('UPLOAD_FILE_PATH')) {
-        // Force creation of the returned directory if it does not exist.
-        if (!file_exists(UPLOAD_FILE_PATH)) {
-            mkdir(UPLOAD_FILE_PATH, 0775, true);
-        }
         if (string_ends_with(UPLOAD_FILE_PATH, "/")
             or string_ends_with(UPLOAD_FILE_PATH, "\\")
         ) {

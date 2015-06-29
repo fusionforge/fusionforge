@@ -1,12 +1,3 @@
-<?php
-/*
- * FIXME: Hack!
- * The funky URL used for the form action parameter is bogus.
- * This is needed, otherwise the redirect to the real browser
- * page won't work with some browsers. (NS4 and Mozilla 0.97 won't accept
- * a redirect from a page to itself.)
- */
-?>
 <div class="wikitext" id="editform">
 <form method="post" id="editpage" name="editpage"
       action="<?php echo $request->getPostURL() ?>"
@@ -23,25 +14,22 @@
     <?php } ?>
   </td>
   <td>
-    <?php echo $PREVIEW_B ?>
-    <?php if ($SAVE_B) { ?>
-      <?php echo $SEP?> <?php echo $SAVE_B ?>
-    <?php } ?>
   </td>
 </tr>
 </table>
-<table class="fullwidth">
-    <tr><td><?php echo $EDIT_TOOLBAR ?></td>
-        <td class="align-right"><div id="editarea-size">
-    <?php echo _("Size")._(":") ?>
-    <label for="pref-editHeight"><b><?php echo _("H")?></b></label> <?php echo $HEIGHT_PREF?> 
-    <label for="pref-editWidth"><b><?php echo _("W")?></b></label> <?php echo $WIDTH_PREF?>
-    <noscript><?php echo Button("submit:", _("Adjust"), 'wikiaction')?></noscript>
-  </div></td></tr></table>
+<?php if (isset($EDIT_TOOLBAR)) { ?>
+    <?php echo $EDIT_TOOLBAR ?>
+<?php } ?>
 <a id="editarea"></a><?php echo $EDIT_TEXTAREA?>
-<br /><small>
+<p>
 <?php echo _("Summary")._(":") ?><?php echo $SUMMARY_INPUT ?>
-<br />
+</p>
+<p>
+<?php echo $PREVIEW_B ?>
+<?php if ($SAVE_B) { ?>
+  <?php echo $SEP?><?php echo $SAVE_B ?>
+<?php } ?>
+</p>
 <?php if (ENABLE_CAPTCHA) { ?>
   <?php echo $CAPTCHA_IMAGE ?><br/>
   <?php echo $CAPTCHA_LABEL ?><?php echo $CAPTCHA_INPUT ?><br/>
@@ -53,14 +41,13 @@
   <?php echo fmt("I'm just doing minor edits. Please divert the usual logging to %s instead.",
         WikiLink(_("RecentEdits"))) ?></label>
 <br />
-  <?php if ($user->isAdmin()) { ?> 
+  <?php if ($user->isAdmin()) { ?>
     <?php echo $SEP?><?php echo $LOCKED_CB ?> <label for="edit-locked"><?php echo _("Locked")?></label>
    <?php } ?>
-</small>
 <br />
 <?php if (isset($PREVIEW_CONTENT)) { ?>
   <hr />
-  <p><strong><?php echo _("Preview only!  Changes not saved.")?></strong></p>
+  <p><strong><?php echo _("Preview only! Changes not saved.")?></strong></p>
   <?php echo $PREVIEW_CONTENT ?>
   <hr />
 <?php } ?>

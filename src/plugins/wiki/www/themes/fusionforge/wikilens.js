@@ -2,13 +2,6 @@
 
 // Globals:
 
-/*
-var data_path = '/phpwiki-cvs';
-var pagename  = 'HomePage';
-var script_url= '/wikicvs';
-var stylepath = data_path+'/themes/MonoBook/';
-*/
-
 var rating = new Array; var prediction = new Array;
 var avg = new Array; var numusers = new Array;
 var canRate = new Array;
@@ -21,7 +14,6 @@ var msg_add_rating = "Add your rating: ";
 var msg_thanks = "Thanks!";
 var msg_rating_deleted = "Rating deleted!";
 
-//var rateit_imgsrc = '/phpwiki-cvs/themes/MonoBook/images/RateIt';
 var rateit_imgsrc = '/wiki/themes/fusionforge/images/RateIt';
 var rateit_action = 'RateIt';
 var idTop = '';

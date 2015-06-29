@@ -37,7 +37,7 @@ class WikiPlugin_WikiAdminPurge
 
     /* getDefaultArguments() is inherited from WikiAdminSelect class */
 
-    function collectPages(&$list, &$dbi, $sortby, $limit = 0)
+    protected function collectPages(&$list, &$dbi, $sortby, $limit = 0)
     {
 
         $allPages = $dbi->getAllPages('include_empty', $sortby, $limit);
@@ -54,7 +54,7 @@ class WikiPlugin_WikiAdminPurge
         return $list;
     }
 
-    function purgePages(&$request, $pages)
+    private function purgePages(&$request, $pages)
     {
         $result = HTML::div();
         $ul = HTML::ul();
@@ -78,15 +78,21 @@ class WikiPlugin_WikiAdminPurge
             } else {
                 $result->pushContent(HTML::p(fmt("%d pages have been permanently purged:", $count)));
             }
-            $result->pushContent($ul);
-            return $result;
         } else {
             $result->setAttr('class', 'error');
             $result->pushContent(HTML::p(_("No pages purged.")));
-            return $result;
         }
+        $result->pushContent($ul);
+        return $result;
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         if ($request->getArg('action') != 'browse') {
@@ -96,7 +102,7 @@ class WikiPlugin_WikiAdminPurge
         }
 
         $args = $this->getArgs($argstr, $request);
-        $this->_args =& $args;
+        $this->_args = $args;
         $this->preSelectS($args, $request);
 
         $p = $request->getArg('p');
@@ -108,8 +114,7 @@ class WikiPlugin_WikiAdminPurge
         if ($p && $request->isPost() &&
             !empty($post_args['purge']) && empty($post_args['cancel'])
         ) {
-
-            // check individual PagePermissions
+            // without individual PagePermissions:
             if (!ENABLE_PAGEPERM and !$request->_user->isAdmin()) {
                 $request->_notAuthorized(WIKIAUTH_ADMIN);
                 $this->disabled("! user->isAdmin");
@@ -118,7 +123,6 @@ class WikiPlugin_WikiAdminPurge
                 // Real purge.
                 return $this->purgePages($request, array_keys($p));
             }
-
             if ($post_args['action'] == 'select') {
                 $next_action = 'verify';
                 foreach ($p as $name => $c) {
@@ -138,16 +142,18 @@ class WikiPlugin_WikiAdminPurge
             // List all pages to select from.
             $pages = $this->collectPages($pages, $dbi, $args['sortby'], $args['limit'], $args['exclude']);
         }
-        $pagelist = new PageList_Selectable($args['info'], $args['exclude'], array());
-        $pagelist->addPageList($pages);
 
         $header = HTML::fieldset();
         if ($next_action == 'verify') {
+            $pagelist = new PageList_Selectable($args['info'], $args['exclude'], array());
+            $pagelist->addPageList($pages);
             $button_label = _("Yes");
             $header->pushContent(HTML::legend(_("Confirm purge")));
             $header->pushContent(HTML::p(HTML::strong(
-                _("Are you sure you want to permanently purge the following files?"))));
+                    _("Are you sure you want to permanently purge the following files?"))));
         } else {
+            $pagelist = new PageList_Selectable($args['info'], $args['exclude'], array());
+            $pagelist->addPageList($pages);
             $button_label = _("Permanently purge selected pages");
             $header->pushContent(HTML::legend(_("Select the files to purge")));
         }
@@ -156,7 +162,6 @@ class WikiPlugin_WikiAdminPurge
             Button('submit:admin_purge[cancel]', _("Cancel"), 'button'));
         $header->pushContent($buttons);
 
-        // TODO: quick select by regex javascript?
         return HTML::form(array('action' => $request->getPostURL(),
                 'method' => 'post'),
             $header,

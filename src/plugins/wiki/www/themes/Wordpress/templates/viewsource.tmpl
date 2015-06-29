@@ -1,6 +1,6 @@
 <div class="wikitext" id="viewform">
 
-<?php 
+<?php
 if (empty($revision)) $revision = $page->getCurrentRevision(false);
 if ($page->get('locked') && !$user->isAdmin()) { ?>
   <p class="warning_msg"><strong><?php echo _("Note:")?></strong>

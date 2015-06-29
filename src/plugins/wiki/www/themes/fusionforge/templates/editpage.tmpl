@@ -1,6 +1,7 @@
 <?php if (isset($PREVIEW_CONTENT)) { ?>
   <p class="information">
-      <?php echo _("Preview only! Changes not saved. Please continue editing. (You'll find your edit area at the bottom of the page.)") ?>
+      <?php echo _("Preview only! Changes not saved.") ?>
+      <?php echo _("Please continue editing. (You'll find your edit area at the bottom of the page.)") ?>
   </p>
   <?php echo $PREVIEW_CONTENT ?>
 <?php } ?>
@@ -8,7 +9,8 @@
 <?php echo $CONCURRENT_UPDATE_MESSAGE ?>
 <?php if (! $IS_CURRENT) { ?>
   <p class="warning_msg">
-      <?php echo _("Warning: You are editing an old revision. Saving this page will overwrite the current version.")?>
+      <?php echo _("Warning: You are editing an old revision.")?>
+      <?php echo _("Saving this page will overwrite the current version.")?>
   </p>
 <?php } ?>
 <?php if (forge_get_config('use_jquery_form_navigate')) { ?>
@@ -53,26 +55,20 @@
         }
 <?php } ?>
     });
-// --></script> 
+// --></script>
 <?php } ?>
 
 <form method="post" id="editpage" name="editpage"
       action="<?php echo $request->getPostURL() ?>"
       accept-charset="UTF-8">
   <?php if (!empty($_GET['start_debug'])) echo '<input type="hidden" name="start_debug" value="1" >'; ?>
-  <?php /* To clear beyond a larger logo, such as in the Hawaiian theme */ ?>
   <br class="clear-floats" />
-  <table class="fullwidth">
-    <tr><td><?php echo $EDIT_TOOLBAR ?></td>
-        <td class="align-right"><div id="editarea-size">
-    <?php echo _("Size")._(":") ?>
-    <label for="pref-editHeight"><b><?php echo _("H")?></b></label> <?php echo $HEIGHT_PREF?>
-    <label for="pref-editWidth"><b><?php echo _("W")?></b></label> <?php echo $WIDTH_PREF?>
-    <noscript><?php echo Button("submit:", _("Adjust"), 'wikiaction')?></noscript>
-  </div></td></tr></table>
+  <?php if (isset($EDIT_TOOLBAR)) { ?>
+      <?php echo $EDIT_TOOLBAR ?>
+  <?php } ?>
   <a id="editarea"></a><?php echo $EDIT_TEXTAREA?>
 <div style="text-align: center;">
-  <label for="edit-summary"><?php echo _("Summary")._(":") ?></label> <?php echo $SUMMARY_INPUT?>
+  <label for="edit-summary"><?php echo _("Summary")._(":") ?></label> <?php echo $SUMMARY_INPUT ?>
 </div>
 <table class="fullwidth">
 <tr class="middle">
@@ -81,7 +77,7 @@
   </td>
   <td class="align-center">
     <?php echo $PREVIEW_B ?>
-    <?php if ($SAVE_B)  { ?>
+    <?php if ($SAVE_B) { ?>
       <?php echo $SEP?><?php echo $SAVE_B ?>
     <?php } ?>
     <?php echo $SEP?><?php echo $CHANGES_B ?>
@@ -89,7 +85,7 @@
   <td><?php echo $AUTHOR_MESSAGE?></td>
 </tr>
 <tr>
-  <td>
+  <td colspan="3">
     <?php if ($user->isAdmin()) { ?>
       <?php echo $LOCKED_CB ?> <label for="edit-locked" title="<?php echo _("Make the page read-only?")?>"><?php echo _("Locked")?></label>
       <?php if (ENABLE_PAGE_PUBLIC) { ?>

@@ -1,5 +1,5 @@
-Date: Tue, 29 Jul 2014 10:42:12 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.0)
+Date: Mon, 29 Jun 2015 12:04:28 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FLinkIcons;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -16,11 +16,6 @@ icons will be displayed in front of URLs to indicate the type of link.
 | {{/themes/default/images/mailto.png}}    | mailto link
 | {{/themes/default/images/ftp.png}}       | ftp link
 
-**Note**: Some of the default icons use the alpha channel feature of
-the [[http://www.libpng.org/pub/png/png-sitemap.html|PNG]] image format
-for smooth rendering on any page color or textured background. Older
-browsers may not display all the images properly.
-
 == Examples ==
 
 The following examples will display with the above link icons only if
@@ -28,15 +23,15 @@ the administrator has enabled this feature.
 
 === ~InterWiki links ===
 
-* ~InterWiki link [[PhpWiki:InterWiki]]
+* ~InterWiki link [[PhpWiki:InterWikiMap]]
 * A named ~InterWiki [[Wiki:WhyWikiWorks|read WhyWikiWorks at c2]].
 
 === URLs ===
 
 * Email address [[mailto:phpwiki-talk@lists.sourceforge.net|PhpWiki-talk mailing list]]
-* Normal http link [[http://phpwiki.sourceforge.net/phpwiki/|PhpWiki's Home Page]]
-* Secure http link [[https://phpwiki.sourceforge.net/phpwiki/|PhpWiki's Home Page]]
-* File transfer ftp://ftp.sourceforge.net/
+* Normal http link [[http://phpwiki.fr|PhpWiki's Home Page]]
+* Secure http link [[https://phpwiki.fr|PhpWiki's Home Page]]
+* File transfer [[ftp://ftp.sourceforge.net]]
 
 //A generic icon is shown for other less common link types.//
 

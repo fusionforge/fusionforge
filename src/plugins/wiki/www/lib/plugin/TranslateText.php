@@ -40,6 +40,8 @@ require_once 'lib/plugin/WikiTranslation.php';
 class WikiPlugin_TranslateText
     extends WikiPlugin_WikiTranslation
 {
+    public $lang;
+
     function getDescription()
     {
         return _("Define a translation for a specified text.");
@@ -54,6 +56,13 @@ class WikiPlugin_TranslateText
             );
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         extract($this->getArgs($argstr, $request));
@@ -73,7 +82,7 @@ class WikiPlugin_TranslateText
                 //save translation in a users subpage
                 $user = $request->getUser();
                 $homepage = $user->_HomePagehandle;
-                $transpagename = $homepage->getName() . SUBPAGE_SEPARATOR . _("ContributedTranslations");
+                $transpagename = $homepage->getName() . '/' . _("ContributedTranslations");
 
                 $page = $dbi->getPage($transpagename);
                 $current = $page->getCurrentRevision();

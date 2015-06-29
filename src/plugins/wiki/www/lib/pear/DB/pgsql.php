@@ -6,7 +6,7 @@
  * The PEAR DB driver for PHP's pgsql extension
  * for interacting with PostgreSQL databases
  *
- * PHP versions 4 and 5
+ * PHP version 5
  *
  * LICENSE: This source file is subject to version 3.0 of the PHP license
  * that is available through the world-wide-web at the following URI:
@@ -21,7 +21,7 @@
  * @author     Daniel Convissor <danielc@php.net>
  * @copyright  1997-2007 The PHP Group
  * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
- * @version    CVS: $Id: pgsql.php 306604 2010-12-24 06:09:35Z aharvey $
+ * @version    CVS: $Id$
  * @link       http://pear.php.net/package/DB
  */
 
@@ -43,7 +43,7 @@ require_once 'DB/common.php';
  * @author     Daniel Convissor <danielc@php.net>
  * @copyright  1997-2007 The PHP Group
  * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
- * @version    Release: 1.7.14
+ * @version    Release: 1.8.2
  * @link       http://pear.php.net/package/DB
  */
 class DB_pgsql extends DB_common
@@ -463,18 +463,6 @@ class DB_pgsql extends DB_common
             return @pg_freeresult($result);
         }
         return false;
-    }
-
-    // }}}
-    // {{{ quote()
-
-    /**
-     * @deprecated  Deprecated in release 1.6.0
-     * @internal
-     */
-    function quote($str)
-    {
-        return $this->quoteSmart($str);
     }
 
     // }}}

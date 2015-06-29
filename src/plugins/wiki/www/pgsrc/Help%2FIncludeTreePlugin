@@ -1,5 +1,5 @@
-Date: Tue, 29 Jul 2014 10:42:12 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.0)
+Date: Mon, 29 Jun 2015 12:04:28 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FIncludeTreePlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -56,7 +56,7 @@ Display Dynamic Category Tree.
 |-
 | **firstreversed**
 | If true, get BackLinks for the first page and forward links for the rest.  Only applicable when direction = 'forward'.
-| flase
+| false
 |-
 | **excludeunknown**
 | If true (default) then exclude any mentioned pages which don't exist yet.  Only applicable when direction = 'forward'.

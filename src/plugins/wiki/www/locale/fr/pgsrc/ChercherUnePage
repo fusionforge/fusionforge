@@ -1,34 +1,60 @@
-Date: Tue, 29 Jul 2014 10:42:12 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.0)
+Date: Mon, 29 Jun 2015 12:04:23 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
 Content-Type: application/x-phpwiki;
   pagename=ChercherUnePage;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
 Voici quelques bons points de départ pour la navigation.
 
 * [[Aide:CommentUtiliserUnWiki|CommentUtiliserUnWiki]] vous donne quelques informations rapides sur le marquage Wiki.
-* Les DernièresModifs sont enregistrées automatiquement.
+* Les [[DernièresModifs]] sont enregistrées automatiquement.
 * DétailsTechniques sur la navigation et l'édition sur ce serveur.
 
 Voici une recherche sur les titres. Essayez quelque chose comme ''wiki'' ou ''sandwich''.
 
-<?plugin-form TitleSearch?>
+<<WikiFormRich action=TitleSearch method=GET nobr=1 class=wikiaction
+  editbox[] name=s text=""
+  submit[]
+  checkbox[] name=case_exact
+  pulldown[] name=regex value="auto,none,glob,posix,pcre,sql">>
 
 Utilisez ce qui suit pour une recherche en texte intégral. Ceci prend quelques secondes.
 Les résultats montreront toutes les lignes de chaque page contenant une correspondance.
 
-<?plugin-form FullTextSearch?>
+<<WikiFormRich action=FullTextSearch method=GET nobr=1 class=wikiaction
+  editbox[] name=s text=""
+  submit[]
+  checkbox[] name=case_exact
+  pulldown[] name=regex value="auto,none,glob,posix,pcre,sql">>
 
 Dans une recherche !PagesFloues les titres de toutes les pages sont examinés pour trouver
 ceux qui s'épellent ou sonnent de façon similaire (en anglais).
 
-<?plugin-form FuzzyPages?>
+<?plugin-form FuzzyPages ?>
+
 ------
-==== Trucs
-Séparez les mots par des espaces.
-**Tous** les mots doivent correspondre (c'est le ET logique)%%%
-Pour exclure un mot, faites-le précéder d'un '-'.%%%
+== Trucs ==
+
+* Séparez les mots par des espaces. Tous les mots doivent correspondre (c'est le ET logique)%%%
+* Pour exclure un mot, faites-le précéder d'un '-'.%%%
 Exemple : 'wiki text -php' recherche toutes les pages contenant les mots 'wiki'
 **et** 'text', mais ne contenant **pas** le mot 'php'.
+
+* Separate words with a space. All words have to match as substrings.
+* '##OR##', grouping with parenthesis, string-quoting and some glob-style wildcard characters are also supported.
+* To exclude words from a title search or full text search, prepend a '##-##'.
+* Use '##^xx##' or '##xx~*##' to match words starting with '##xx##'.
+* Use '##~*xx##' or '##xx$##' to match words ending with '##xx##'.
+* Use '##^word$##' to match exact words.
+* Use //regex=auto// and '##re:##' like '##re:word.*xx##' or //regex=posix// to use Posix regular expressions. (not yet)
+* Use //regex=auto// and '##//##' like '##/^word$/##' or //regex=pcre// to match using Perl-style regular expressions.
+* Use //regex=sql// to match using SQL-style wildcards '##%##' and '##_##'.
+* Use //regex=none// to match any wildcards verbatim.
+
+=== Example ===
+* '##wiki text -php##' looks for all pages containing the words '##wiki##' and '##text##', but not containing the word '##php##'.
+
+----
+[[DocumentationDePhpWiki]]

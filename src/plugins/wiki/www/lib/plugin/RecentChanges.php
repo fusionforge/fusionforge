@@ -189,7 +189,7 @@ class _RecentChanges_HtmlFormatter
         return HTML("(", $button, ")");
     }
 
-    function pageLink($rev, $link_text = false)
+    function pageLink($rev, $link_text = '')
     {
 
         return WikiLink($this->include_versions_in_URLs() ? $rev : $rev->getPage(),
@@ -541,7 +541,7 @@ class _RecentChanges_HtmlFormatter
             $linkorname = $this->pageLink($rev);
         }
 
-        if ((isa($WikiTheme, 'WikiTheme_MonoBook')) or (isa($WikiTheme, 'WikiTheme_fusionforge'))) {
+        if ((is_a($WikiTheme, 'WikiTheme_MonoBook')) or (is_a($WikiTheme, 'WikiTheme_fusionforge'))) {
             $line->pushContent(
                 $args['historylinks'] ? '' : $this->historyLink($rev),
                 ' . . ', $linkorname, '; ',
@@ -770,6 +770,7 @@ class _RecentChanges_BoxFormatter
 
     function headline()
     {
+        return array();
     }
 
     function authorLink($rev)
@@ -796,7 +797,8 @@ class _RecentChanges_BoxFormatter
     {
         include_once 'lib/InlineParser.php';
 
-        $html = HTML(HTML::h2(false, $this->headline()));
+        $html = HTML::div();
+        $ul = HTML::ul();
 
         $first = true;
         while ($rev = $changes->next()) {
@@ -804,15 +806,18 @@ class _RecentChanges_BoxFormatter
             if (mayAccessPage('view', $rev->_pagename)) {
                 if ($link = $this->pageLink($rev)) // some entries may be empty
                     // (/Blog/.. interim pages)
-                    $html->pushContent(HTML::li($link));
+                    $ul->pushContent(HTML::li($link));
                 if ($first)
                     $this->setValidators($rev);
                 $first = false;
             }
         }
-        if ($first)
+        if ($first) {
             $html->pushContent(HTML::p(array('class' => 'rc-empty'),
                 $this->empty_message()));
+        } else {
+            $html->pushContent($ul);
+        }
         return $html;
     }
 }
@@ -1146,8 +1151,13 @@ class NewPageRevisionIterator extends WikiDB_PageRevisionIterator
  */
 class LinkRevisionIterator extends WikiDB_PageRevisionIterator
 {
-    function LinkRevisionIterator($revisions, $category)
+    function __construct($revisions, $category)
     {
+        /**
+         * @var WikiRequest $request
+         */
+        global $request;
+
         $this->_revisions = $revisions;
         if (preg_match("/[\?\.\*]/", $category)) {
             $backlinkiter = $this->_revisions->_wikidb->linkSearch
@@ -1155,7 +1165,7 @@ class LinkRevisionIterator extends WikiDB_PageRevisionIterator
                 new TextSearchQuery($category, true),
                 "linkfrom");
         } else {
-            $basepage = $GLOBALS['request']->getPage($category);
+            $basepage = $request->getPage($category);
             $backlinkiter = $basepage->getBackLinks(true);
         }
         $this->links = array();
@@ -1185,7 +1195,7 @@ class LinkRevisionIterator extends WikiDB_PageRevisionIterator
 
 class PageMatchRevisionIterator extends WikiDB_PageRevisionIterator
 {
-    function PageMatchRevisionIterator($revisions, $match)
+    function __construct($revisions, $match)
     {
         $this->_revisions = $revisions;
         $this->search = new TextSearchQuery($match, true);
@@ -1212,7 +1222,7 @@ class PageMatchRevisionIterator extends WikiDB_PageRevisionIterator
  */
 class AuthorPageRevisionIterator extends WikiDB_PageRevisionIterator
 {
-    function AuthorPageRevisionIterator($revisions, $author)
+    function __construct($revisions, $author)
     {
         $this->_revisions = $revisions;
         $this->_author = $author;
@@ -1234,7 +1244,7 @@ class AuthorPageRevisionIterator extends WikiDB_PageRevisionIterator
  */
 class OwnerPageRevisionIterator extends WikiDB_PageRevisionIterator
 {
-    function OwnerPageRevisionIterator($revisions, $owner)
+    function __construct($revisions, $owner)
     {
         $this->_revisions = $revisions;
         $this->_owner = $owner;
@@ -1300,6 +1310,12 @@ class WikiPlugin_RecentChanges
         );
     }
 
+    /**
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param array $defaults
+     * @return array
+     */
     function getArgs($argstr, $request = false, $defaults = array())
     {
         if (empty($defaults)) {
@@ -1397,14 +1413,19 @@ class WikiPlugin_RecentChanges
             if ($format == 'rss')
                 $fmt_class = '_RecentChanges_RssFormatter';
             elseif ($format == 'rss2')
-                $fmt_class = '_RecentChanges_Rss2Formatter'; elseif ($format == 'atom')
-                $fmt_class = '_RecentChanges_AtomFormatter'; elseif ($format == 'rss091') {
+                $fmt_class = '_RecentChanges_Rss2Formatter';
+            elseif ($format == 'atom')
+                $fmt_class = '_RecentChanges_AtomFormatter';
+            elseif ($format == 'rss091') {
                 include_once 'lib/RSSWriter091.php';
                 $fmt_class = '_RecentChanges_RssFormatter091';
             } elseif ($format == 'sidebar')
-                $fmt_class = '_RecentChanges_SideBarFormatter'; elseif ($format == 'box')
-                $fmt_class = '_RecentChanges_BoxFormatter'; elseif ($format == 'contribs')
-                $fmt_class = '_RecentChanges_UserContribsFormatter'; else
+                $fmt_class = '_RecentChanges_SideBarFormatter';
+            elseif ($format == 'box')
+                $fmt_class = '_RecentChanges_BoxFormatter';
+            elseif ($format == 'contribs')
+                $fmt_class = '_RecentChanges_UserContribsFormatter';
+            else
                 $fmt_class = '_RecentChanges_HtmlFormatter';
         }
 
@@ -1412,6 +1433,13 @@ class WikiPlugin_RecentChanges
         return $fmt->format($changes);
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         $args = $this->getArgs($argstr, $request);
@@ -1433,10 +1461,18 @@ class WikiPlugin_RecentChanges
 
     // box is used to display a fixed-width, narrow version with common header.
     // just a numbered list of limit pagenames, without date.
-    function box($args = false, $request = false, $basepage = false)
+    /**
+     * @param string $args
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return $this|HtmlElement
+     */
+    function box($args = '', $request = null, $basepage = '')
     {
-        if (!$request) $request =& $GLOBALS['request'];
-        if (!isset($args['limit'])) $args['limit'] = 15;
+        if (!$request)
+            $request =& $GLOBALS['request'];
+        if (!isset($args['limit']))
+            $args['limit'] = 15;
         $args['format'] = 'box';
         $args['show_minor'] = false;
         $args['show_major'] = true;

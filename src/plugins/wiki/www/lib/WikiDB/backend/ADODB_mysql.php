@@ -3,7 +3,7 @@
 require_once 'lib/WikiDB/backend/ADODB.php';
 
 /*
- * PROBLEM: mysql seems to be the simpliest (or most stupid) db on earth.
+ * PROBLEM: mysql seems to be the simplest (or most stupid) db on earth.
  * (tested with 4.0.18)
  * See http://sql-info.de/mysql/gotchas.html for mysql specific quirks.
  *
@@ -51,8 +51,8 @@ class WikiDB_backend_ADODB_mysql
         }
     }
 
-    /**
-     * Kill timed out processes. ( so far only called on about every 50-th save. )
+    /*
+     * Kill timed out processes (so far only called on about every 50-th save).
      */
     function _timeout()
     {
@@ -70,7 +70,7 @@ class WikiDB_backend_ADODB_mysql
         }
     }
 
-    /**
+    /*
      * Pack tables.
      */
     function optimize()
@@ -80,10 +80,10 @@ class WikiDB_backend_ADODB_mysql
         foreach ($this->_table_names as $table) {
             $dbh->Execute("OPTIMIZE TABLE $table");
         }
-        return 1;
+        return true;
     }
 
-    /**
+    /*
      * Lock tables. As fine-grained application lock, which locks only the
      * same transaction (conflicting updates and edits), and as full table
      * write lock.
@@ -91,7 +91,7 @@ class WikiDB_backend_ADODB_mysql
      * New: which tables as params,
      *      support nested locks via app locks
      */
-    function _lock_tables($tables, $write_lock = true)
+    protected function _lock_tables($tables, $write_lock = true)
     {
         if (!$tables) return;
         if (DO_APP_LOCK) {
@@ -106,6 +106,7 @@ class WikiDB_backend_ADODB_mysql
         if (DO_FULL_LOCK) {
             // if this is not enough:
             $lock_type = $write_lock ? "WRITE" : "READ";
+            $locks = array();
             foreach ($this->_table_names as $key => $table) {
                 $locks[] = "$table $lock_type";
             }
@@ -113,11 +114,11 @@ class WikiDB_backend_ADODB_mysql
         }
     }
 
-    /**
+    /*
      * Release the locks.
      * Support nested locks
      */
-    function _unlock_tables($tables)
+    protected function _unlock_tables($tables)
     {
         if (!$tables) {
             $this->_dbh->Execute("UNLOCK TABLES");
@@ -125,7 +126,7 @@ class WikiDB_backend_ADODB_mysql
         }
         if (DO_APP_LOCK) {
             $lock = join('-', $tables);
-            $result = $this->_dbh->Execute("SELECT RELEASE_LOCK('$lock')");
+            $this->_dbh->Execute("SELECT RELEASE_LOCK('$lock')");
         }
         if (DO_FULL_LOCK) {
             // if this is not enough:
@@ -175,7 +176,7 @@ class WikiDB_backend_ADODB_mysql
         $row = $dbh->GetRow($query);
         if (!$row) {
             // have auto-incrementing, atomic version
-            $rs = $dbh->Execute(sprintf("INSERT INTO $page_tbl"
+            $dbh->Execute(sprintf("INSERT INTO $page_tbl"
                     . " (id,pagename)"
                     . " VALUES(NULL,%s)",
                 $dbh->qstr($pagename)));
@@ -187,7 +188,7 @@ class WikiDB_backend_ADODB_mysql
         return $id;
     }
 
-    /**
+    /*
      * Create a new revision of a page.
      */
     function set_versiondata($pagename, $version, $data)
@@ -210,7 +211,6 @@ class WikiDB_backend_ADODB_mysql
         $dbh->BeginTrans();
         $dbh->CommitLock($version_tbl);
         $id = $this->_get_pageid($pagename, true);
-        $backend_type = $this->backendType();
         // optimize: mysql can do this with one REPLACE INTO.
         $rs = $dbh->Execute(sprintf("REPLACE INTO $version_tbl"
                 . " (id,version,mtime,minor_edit,content,versiondata)"
