@@ -17,7 +17,7 @@ Setting up mSQL is beyond the scope of this document. See
 http://www.hughes.com.au/ for information on downloading and
 instructions.
 
-Create the database. You might need system privledges to do this:
+Create the database. You might need system privileges to do this:
 
 [root@localhost phpwiki]# msqladmin create wiki
 Database "wiki" created.

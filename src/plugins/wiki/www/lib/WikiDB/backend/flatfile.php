@@ -97,7 +97,7 @@ class WikiDB_backend_flatfile
         return array(); // no values found
     }
 
-    /** Store latest version as full page_data flatfile,
+    /* Store latest version as full page_data flatfile,
      *    earlier versions as file backend ver_data.
      * _cached_html will not be stored.
      * If the given ($pagename,$version) is already in the database,

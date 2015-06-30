@@ -70,7 +70,13 @@ class WikiPlugin_WikiPoll
         );
     }
 
-    function getArgs($argstr, $request = false, $defaults = array())
+    /**
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param array $defaults
+     * @return array
+     */
+    function getArgs($argstr, $request = null, $defaults = array())
     {
         if (empty($defaults)) {
             $defaults = $this->getDefaultArguments();
@@ -114,10 +120,14 @@ class WikiPlugin_WikiPoll
 
     function handle_plugin_args_cruft($argstr, $args)
     {
+        /**
+         * @var WikiRequest $request
+         */
+        global $request;
+
         $argstr = str_replace("\n", " ", $argstr);
         $argstr = str_replace(array("[", "]"), array("_", ""), $argstr);
-        $this->_args = $this->getArgs($argstr, $GLOBALS['request']);
-        return;
+        $this->_args = $this->getArgs($argstr, $request);
     }
 
     private function str2array($var, $obarray = false)
@@ -135,6 +145,13 @@ class WikiPlugin_WikiPoll
         return $array;
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         if (!isset($_SERVER))

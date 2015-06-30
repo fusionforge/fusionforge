@@ -88,11 +88,8 @@ PangalacticOrg http://www.pangalactic.org/Wiki/
 PersonalTelco http://www.personaltelco.net/index.cgi/
 php-function http://www.php.net/%s
 php-lookup http://www.php.net/manual-lookup.php?pattern=
-PhpWiki http://phpwiki.sourceforge.net/phpwiki/
-PhpWikiCvs http://phpwiki.svn.sourceforge.net/viewvc/phpwiki/trunk/pgsrc/%s?view=log
-PhpWikiSvn http://phpwiki.svn.sourceforge.net/viewvc/phpwiki/trunk/pgsrc/%s?view=log
-PhpWikiDemo http://phpwiki.sourceforge.net/demo/
-PhpWikiTest http://phpwiki.sourceforge.net/test/
+PhpWiki http://phpwiki.fr/
+PhpWikiSvn https://sourceforge.net/p/phpwiki/code/HEAD/tree/trunk/
 Pikie http://pikie.darktech.org/cgi/pikie?
 PlWikiPedia http://pl.wikipedia.org/wiki/
 PolitizenWiki http://www.politizen.com/wiki.asp?

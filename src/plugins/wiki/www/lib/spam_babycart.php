@@ -9,8 +9,13 @@
 *   copy contrib/babycart to /usr/local/bin/
 */
 
-function check_babycart(&$text, $ip, $user_id = '')
+function check_babycart(&$text, $ip)
 {
+    /**
+      * @var WikiRequest $request
+      */
+    global $request;
+
     // $X_babycart = '/usr/bin/perl /home/apthorpe/pjx/babycart/babycart';
     // cygwin:
     if (!defined('BABYCART_PATH'))
@@ -19,13 +24,14 @@ function check_babycart(&$text, $ip, $user_id = '')
     //$X_babycart = 'n:/bin/perl /usr/local/bin/babycart';
 
     $comment = "IP: $ip\n";
-    $subject = $GLOBALS['request']->getArg('pagename');
+    $subject = $request->getArg('pagename');
     $comment .= "SUBJECT: $subject\n";
     $comment .= "END_COMMENT_METADATA\n";
     $comment .= $text;
 
     $descriptorspec = array(0 => array("pipe", "r"), 1 => array("pipe", "w"), 2 => array("pipe", "w"));
     $process = proc_open(BABYCART_PATH, $descriptorspec, $pipes);
+    $error = '';
     if (is_resource($process)) {
         // $pipes now looks like this:
         // 0 => writeable handle connected to child stdin
@@ -52,7 +58,7 @@ function check_babycart(&$text, $ip, $user_id = '')
 
         // It is important that you close any pipes before calling
         // proc_close in order to avoid a deadlock
-        $return_value = proc_close($process);
+        proc_close($process);
 
         // Interpret results and yield judgment
 

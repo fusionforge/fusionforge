@@ -120,10 +120,13 @@ class HttpClient
             switch ($errno) {
                 case -3:
                     $this->errormsg = 'Socket creation failed (-3)';
+                    break;
                 case -4:
                     $this->errormsg = 'DNS lookup failure (-4)';
+                    break;
                 case -5:
                     $this->errormsg = 'Connection refused or timed out (-5)';
+                    break;
                 default:
                     $this->errormsg = 'Connection failed (' . $errno . ')';
                     $this->errormsg .= ' ' . $errstr;
@@ -166,9 +169,9 @@ class HttpClient
                     $this->debug($this->errormsg);
                     return false;
                 }
-                $http_version = $m[1]; // not used
+                // $http_version = $m[1]; // not used
                 $this->status = $m[2];
-                $status_string = $m[3]; // not used
+                $status_string = $m[3];
                 $this->debug(trim($line));
                 continue;
             }
@@ -390,7 +393,7 @@ class HttpClient
     }
 
     // "Quick" static methods
-    function quickGet($url)
+    static function quickGet($url)
     {
         $bits = parse_url($url);
         $host = $bits['host'];
@@ -407,7 +410,7 @@ class HttpClient
         }
     }
 
-    function quickPost($url, $data)
+    static function quickPost($url, $data)
     {
         $bits = parse_url($url);
         $host = $bits['host'];
@@ -421,7 +424,7 @@ class HttpClient
         }
     }
 
-    function debug($msg, $object = false)
+    function debug($msg, $object = null)
     {
         if ($this->debug) {
             print '<div style="border: 1px solid red; padding: 0.5em; margin: 0.5em;"><strong>HttpClient Debug:</strong> ' . $msg;

@@ -40,7 +40,7 @@ class WikiPlugin_WikiAdminDeleteAcl
         return _("Delete page permissions.");
     }
 
-    function deleteaclPages(&$request, $pages)
+    private function deleteaclPages(&$request, $pages)
     {
         $result = HTML::div();
         $count = 0;
@@ -77,6 +77,13 @@ class WikiPlugin_WikiAdminDeleteAcl
         return $result;
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         if ($request->getArg('action') != 'browse') {
@@ -119,9 +126,7 @@ class WikiPlugin_WikiAdminDeleteAcl
 
         $pagelist->addPageList($pages);
         $button_label_delete_acl = _("Delete ACL");
-        $header = $this->deleteaclForm($header, $pages);
         $header->pushContent(HTML::legend(_("Select the pages where to delete access rights")));
-
         $buttons = HTML::p(Button('submit:admin_deleteacl', $button_label_delete_acl, 'wikiadmin'));
         $header->pushContent($buttons);
 
@@ -135,18 +140,6 @@ class WikiPlugin_WikiAdminDeleteAcl
             ENABLE_PAGEPERM
                 ? ''
                 : HiddenInputs(array('require_authority_for_post' => WIKIAUTH_ADMIN)));
-    }
-
-    function deleteaclForm(&$header, $pagehash)
-    {
-
-        $pages = array();
-        foreach ($pagehash as $name => $checked) {
-            if ($checked) $pages[] = $name;
-        }
-
-        $header->pushContent(HTML::strong(_("Selected Pages: ")), HTML::samp(join(', ', $pages)), HTML::br());
-        return $header;
     }
 }
 

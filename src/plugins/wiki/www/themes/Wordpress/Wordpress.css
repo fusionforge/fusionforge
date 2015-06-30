@@ -323,13 +323,13 @@ input.gridbutton, a.gridbutton, a:hover.gridbutton, a:visited.gridbutton {
     color: black;
 }
 
-.wikipaging {
-    font-size: x-small;
-}
-
 .toolbar {
     padding: 0;
     margin: 0;
+}
+
+img.toolbar:hover {
+    cursor: pointer;
 }
 
 .edit-toolbar {
@@ -513,10 +513,6 @@ table.cal td.cal-today a.cal-hide {
     border-left: 1px solid #494f5d;
     border-bottom: 1px solid #c6d2de;
     border-right: 1px solid #c6d2de;
-    padding-top: 1px;
-    padding-bottom: 1px;
-    padding-left: .125em;
-    padding-right: .125em;
     padding: 0;
     clear: both;
 }
@@ -624,7 +620,7 @@ td.pageinfo {
     clear: both;
 }
 
-.warning {
+.warning, .warning_msg {
     color: black;
     background: #eee;
     margin-top: 1em;
@@ -818,7 +814,7 @@ div.wikicomment div.wikicomment-footer {
     padding: 0.2ex 0.5em;
 }
 
-div.wikicomment div.wikicomment-footer named-wiki {
+div.wikicomment div.wikicomment-footer .named-wiki {
     font-size: small;
 }
 
@@ -859,7 +855,6 @@ table.interwiki-map {
 
 .dialog div.message {
     background-color: white;
-    color: black;
     color: black;
     margin: 0 1em;
     padding: 0.5em 0.5em;
@@ -958,7 +953,6 @@ div.boxright {
     padding: 0.5em;
     float: right;
     border: thin solid #888888;
-    padding: 0.5em;
 }
 
 /* RssFeed */
@@ -1117,10 +1111,26 @@ table.boxed th, table.bordered th {
     background-color: #d8d8d8;
 }
 
-/* For emacs users
- *
- * Local Variables:
- * mode: c
- * c-file-style: cc-mode
- * End:
- */
+table.sortable th.header {
+    background-image: url(../default/buttons/sort_none.gif);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}
+
+table.sortable th.headerSortUp {
+    background-image: url(../default/buttons/sort_up.gif);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}
+
+table.sortable th.headerSortDown {
+    background-image: url(../default/buttons/sort_down.gif);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}

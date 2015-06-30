@@ -65,7 +65,7 @@ class WikiTheme_MacOSX extends WikiTheme
     function linkUnknownWikiWord($wikiword, $linktext = '')
     {
         // Get rid of anchors on unknown wikiwords
-        if (isa($wikiword, 'WikiPageName')) {
+        if (is_a($wikiword, 'WikiPageName')) {
             $default_text = $wikiword->shortName;
             $wikiword = $wikiword->name;
         } else {

@@ -54,9 +54,22 @@ class WikiPlugin_PopularNearby
         );
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         $args = $this->getArgs($argstr, $request);
+
+        if (isset($args['limit']) && !is_limit($args['limit'])) {
+            return HTML::div(array('class' => "error"),
+                             _("Illegal “limit” argument: must be an integer or two integers separated by comma"));
+        }
+
         extract($args);
         $header = '';
         $page = $dbi->getPage($pagename);
@@ -95,8 +108,8 @@ class WikiPlugin_PopularNearby
      *   mode=incoming: $pages iter and $direction=true
      *   mode=outgoing: $pages iter and $direction=false
      *
-     * @param $pages array of WikiDB_Page's or a Page_iterator
-     * @param $direction boolean: true if incoming links
+     * @param array $pages array of WikiDB_Page's or a Page_iterator
+     * @param bool $direction true if incoming links
      *
      * @param int $limit
      * @return Array of sorted links

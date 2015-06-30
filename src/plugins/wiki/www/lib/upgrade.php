@@ -51,8 +51,12 @@ require_once 'lib/loadsave.php';
 
 class Upgrade
 {
+    public $current_db_version;
+    public $error_caught;
+    public $_configUpdates;
+    public $check_args;
 
-    function Upgrade(&$request)
+    function __construct(&$request)
     {
         $this->request =& $request;
         $this->dbi =& $request->_dbi; // no reference for dbadmin ?
@@ -63,7 +67,7 @@ class Upgrade
         $this->isSQL = $this->dbi->_backend->isSQL();
     }
 
-    function doPgsrcUpdate($pagename, $path, $filename)
+    private function doPgsrcUpdate($pagename, $path, $filename)
     {
         // don't ever update the HomePage
         if ((defined(HOME_PAGE) and ($pagename == HOME_PAGE))
@@ -113,9 +117,9 @@ class Upgrade
         }
     }
 
-    function CheckActionPageUpdate()
+    public function CheckActionPageUpdate()
     {
-        echo "<h2>", sprintf(_("Check for necessary %s updates"), _("ActionPage")), "</h2>\n";
+        echo "<h2>", sprintf(_("Check for necessary %s updates"), _("Action Pages")), "</h2>\n";
         // 1.3.13 before we pull in all missing pages, we rename existing ones
         $this->_rename_page_helper("_AuthInfo", "DebugAuthInfo");
         $this->_rename_page_helper("Help/_AuthInfoPlugin", "Help/DebugAuthInfoPlugin");
@@ -139,7 +143,7 @@ class Upgrade
             if (substr($filename, -5, 5) == '.orig') continue;
             $pagename = urldecode($filename);
             if (isActionPage($pagename)) {
-                $translation = gettext($pagename);
+                $translation = __($pagename);
                 if ($translation == $pagename)
                     $this->doPgsrcUpdate($pagename, $path, $filename);
                 elseif (FindLocalizedFile('pgsrc/' . urlencode($translation), 1))
@@ -150,7 +154,7 @@ class Upgrade
     }
 
     // see loadsave.php for saving new pages.
-    function CheckPgsrcUpdate()
+    public function CheckPgsrcUpdate()
     {
         // Check some theme specific pgsrc files (blog, wikilens, fusionforge, custom).
         // We check theme specific pgsrc first in case the page is present in both
@@ -159,6 +163,7 @@ class Upgrade
         $path = $WikiTheme->file("pgsrc");
         // TBD: the call to fileSet prints a warning:
         // Notice: Unable to open directory 'themes/MonoBook/pgsrc' for reading
+        $themepgsrc = array();
         $pgsrc = new fileSet($path);
         if ($pgsrc->getFiles()) {
             echo "<h2>", sprintf(_("Check for necessary theme %s updates"),
@@ -167,6 +172,7 @@ class Upgrade
                 if (substr($filename, -1, 1) == '~') continue;
                 if (substr($filename, -5, 5) == '.orig') continue;
                 $pagename = urldecode($filename);
+                $themepgsrc[] = $pagename;
                 $this->doPgsrcUpdate($pagename, $path, $filename);
             }
         }
@@ -176,7 +182,12 @@ class Upgrade
         if ($this->db_version < 1030.12200612) {
             echo "<h4>", _("rename to Help: pages"), "</h4>\n";
         }
-        $path = FindLocalizedFile(WIKI_PGSRC);
+        $translation = __("HomePage");
+        if ($translation == "HomePage") {
+            $path = FindFile(WIKI_PGSRC);
+        } else {
+            $path = FindLocalizedFile(WIKI_PGSRC);
+        }
         $pgsrc = new fileSet($path);
         // fixme: verification, ...
         foreach ($pgsrc->getFiles() as $filename) {
@@ -189,12 +200,16 @@ class Upgrade
                 if ($this->db_version < 1030.12200612) {
                     $this->_rename_to_help_page($pagename);
                 }
-                $this->doPgsrcUpdate($pagename, $path, $filename);
+                if (in_array($pagename, $themepgsrc)) {
+                    echo sprintf(_('%s already checked in theme pgsrc.'), $pagename).' '._('Skipped.').'<br />';
+                } else {
+                    $this->doPgsrcUpdate($pagename, $path, $filename);
+                }
             }
         }
     }
 
-    function _rename_page_helper($oldname, $pagename)
+    private function _rename_page_helper($oldname, $pagename)
     {
         echo sprintf(_("rename %s to %s"), $oldname, $pagename), " ...";
         if ($this->dbi->isWikiPage($oldname) and !$this->dbi->isWikiPage($pagename)) {
@@ -208,10 +223,11 @@ class Upgrade
         }
     }
 
-    function _rename_to_help_page($pagename)
+    private function _rename_to_help_page($pagename)
     {
         $newprefix = _("Help") . "/";
-        if (substr($pagename, 0, strlen($newprefix)) != $newprefix) return;
+        if (substr($pagename, 0, strlen($newprefix)) != $newprefix)
+            return;
         $oldname = substr($pagename, strlen($newprefix));
         $this->_rename_page_helper($oldname, $pagename);
     }
@@ -221,12 +237,12 @@ class Upgrade
      *       and create it.
      * Supported: mysql and generic SQL, for ADODB and PearDB.
      */
-    function installTable($table, $backend_type)
+    private function installTable($table, $backend_type)
     {
         global $DBParams;
-        if (!$this->isSQL) return;
+        if (!$this->isSQL)
+            return;
         echo _("MISSING"), " ... \n";
-        $backend = &$this->dbi->_backend->_dbh;
         /*
           $schema = findFile("schemas/${backend_type}.sql");
           if (!$schema) {
@@ -387,9 +403,9 @@ CREATE TABLE $log_tbl (
      * jeffs-hacks database api (around 1.3.2) later:
      *   people should export/import their pages if using that old versions.
      */
-    function CheckDatabaseUpdate()
+    public function CheckDatabaseUpdate()
     {
-        global $DBAuthParams, $DBParams;
+        global $DBParams;
 
         echo "<h2>", sprintf(_("Check for necessary %s updates"),
             _("database")),
@@ -402,8 +418,8 @@ CREATE TABLE $log_tbl (
                 return;
             }
         }
-        echo "db version: we want ", $this->current_db_version, "\n<br />";
-        echo "db version: we have ", $this->db_version, "\n<br />";
+        echo _("db version: we want "), $this->current_db_version, "\n<br />";
+        echo _("db version: we have "), $this->db_version, "\n<br />";
         if ($this->db_version >= $this->current_db_version) {
             echo _("OK"), "<br />\n";
             return;
@@ -426,7 +442,7 @@ CREATE TABLE $log_tbl (
 
         if ($this->phpwiki_version >= 1030.12200612 and $this->db_version < 1030.13) {
             if ($this->isSQL and preg_match("/(pgsql|postgres)/", $backend_type)) {
-                trigger_error("You need to upgrade to schema/psql-initialize.sql manually!",
+                trigger_error(_("You need to upgrade to schema/psql-initialize.sql manually!"),
                     E_USER_WARNING);
                 // $this->_upgrade_psql_tsearch2();
             }
@@ -699,8 +715,6 @@ CREATE TABLE $log_tbl (
             echo _("OK"), "<br />\n";
             flush();
         }
-
-        return;
     }
 
     /**
@@ -720,9 +734,9 @@ CREATE TABLE $log_tbl (
         return false;
     }
 
-    function _try_dbadmin_user($user, $passwd)
+    private function _try_dbadmin_user($user, $passwd)
     {
-        global $DBParams, $DBAuthParams;
+        global $DBParams;
         $AdminParams = $DBParams;
         if (DATABASE_TYPE == 'SQL')
             $dsn = DB::parseDSN($AdminParams['dsn']);
@@ -741,7 +755,8 @@ CREATE TABLE $log_tbl (
         $ErrorManager->pushErrorHandler(new WikiMethodCb($this, '_dbpermission_filter'));
         $this->error_caught = 0;
         $this->dbi = WikiDB::open($AdminParams);
-        if (!$this->error_caught) return true;
+        if (!$this->error_caught)
+            return true;
         // FAILED: redo our connection with the wikiuser
         $this->dbi = WikiDB::open($DBParams);
         $ErrorManager->flushPostponedErrors();
@@ -749,9 +764,10 @@ CREATE TABLE $log_tbl (
         return false;
     }
 
-    function _db_init()
+    private function _db_init()
     {
-        if (!$this->isSQL) return;
+        if (!$this->isSQL)
+            return;
 
         /* SQLite never needs admin params */
         $backend_type = $this->dbi->_backend->backendType();
@@ -814,12 +830,12 @@ CREATE TABLE $log_tbl (
      *   not into the huge serialized string.
      *
      * It is only rarelely needed: for current page only, if-not-modified,
-     * but was extracetd for every simple page iteration.
+     * but was extracted for every simple page iteration.
      */
-    function _upgrade_cached_html($verbose = true)
+    private function _upgrade_cached_html($verbose = true)
     {
-        global $DBParams;
-        if (!$this->isSQL) return 0;
+        if (!$this->isSQL)
+            return 0;
         $count = 0;
         if ($this->phpwiki_version >= 1030.10) {
             if ($verbose)
@@ -841,7 +857,7 @@ CREATE TABLE $log_tbl (
                     $this->dbi->genericSqlQuery("ALTER TABLE $page_tbl ADD cached_html BLOB");
                 if ($verbose)
                     echo "<b>", _("CONVERTING"), "</b>", " ... ";
-                $count = _convert_cached_html();
+                $count = $this->_convert_cached_html();
                 if ($verbose)
                     echo $count, " ", _("OK"), "<br />\n";
             } else {
@@ -856,11 +872,10 @@ CREATE TABLE $log_tbl (
      * move _cached_html for all pages from pagedata into a new separate blob.
      * decoupled from action=upgrade, so that it can be used by a WikiAdminUtils button also.
      */
-    function _convert_cached_html()
+    private function _convert_cached_html()
     {
-        global $DBParams;
-        if (!$this->isSQL) return 0;
-        //if (!in_array(DATABASE_TYPE, array('SQL','ADODB'))) return;
+        if (!$this->isSQL)
+            return 0;
 
         $pages = $this->dbi->getAllPages();
         $cache =& $this->dbi->_cache;
@@ -885,7 +900,7 @@ CREATE TABLE $log_tbl (
     /**
      * upgrade to 1.3.13 link structure.
      */
-    function _upgrade_relation_links($verbose = true)
+    private function _upgrade_relation_links()
     {
         if ($this->phpwiki_version >= 1030.12200610 and $this->isSQL) {
             echo _("Check for relation field in link table"), " ...";
@@ -920,49 +935,11 @@ CREATE TABLE $log_tbl (
         }
     }
 
-    function CheckPluginUpdate()
-    {
-        echo "<h2>", sprintf(_("Check for necessary %s updates"),
-            _("plugin argument")), "</h2>\n";
-
-        $this->_configUpdates = array();
-        $this->_configUpdates[] = new UpgradePluginEntry
-        ($this, array('key' => 'plugin_randompage_numpages',
-            'fixed_with' => 1012.0,
-            //'header' => _("change RandomPage pages => numpages"),
-            //'notice'  =>_("found RandomPage plugin"),
-            'check_args' => array("plugin RandomPage pages",
-                "/(<\?\s*plugin\s+ RandomPage\s+)pages/",
-                "\\1numpages")));
-        $this->_configUpdates[] = new UpgradePluginEntry
-        ($this, array('key' => 'plugin_createtoc_position',
-            'fixed_with' => 1013.0,
-            //'header' => _("change CreateToc align => position"),
-            //'notice'  =>_("found CreateToc plugin"),
-            'check_args' => array("plugin CreateToc align",
-                "/(<\?\s*plugin\s+ CreateToc[^\?]+)align/",
-                "\\1position")));
-
-        if (empty($this->_configUpdates)) return;
-        foreach ($this->_configUpdates as $update) {
-            $pages = $this->dbi->fullSearch($this->check_args[0]);
-            while ($page = $allpages->next()) {
-                $current = $page->getCurrentRevision();
-                $pagetext = $current->getPackedContent();
-                $update->check($this->check_args[1], $this->check_args[2], $pagetext, $page, $current);
-            }
-        }
-        free($allpages);
-        unset($pagetext);
-        unset($current);
-        unset($page);
-    }
-
     /**
      * preg_replace over local file.
      * Only line-orientated matches possible.
      */
-    function fixLocalFile($match, $replace, $filename)
+    public function fixLocalFile($match, $replace, $filename)
     {
         $o_filename = $filename;
         if (!file_exists($filename))
@@ -1010,7 +987,7 @@ CREATE TABLE $log_tbl (
         }
     }
 
-    function CheckConfigUpdate()
+    public function CheckConfigUpdate()
     {
         echo "<h2>", sprintf(_("Check for necessary %s updates"),
             "config.ini"), "</h2>\n";
@@ -1045,7 +1022,8 @@ CREATE TABLE $log_tbl (
         $this->_configUpdates[] = $entry;
 
         // TODO: find extra file updates
-        if (empty($this->_configUpdates)) return;
+        if (empty($this->_configUpdates))
+            return;
         foreach ($this->_configUpdates as $update) {
             $update->check();
         }
@@ -1055,13 +1033,20 @@ CREATE TABLE $log_tbl (
 
 class UpgradeEntry
 {
+    public $applicable_cb;
+    public $header;
+    public $fixed_with;
+    public $method_cb;
+    public $check_cb;
+    public $reason;
+
     /**
      * Add an upgrade item to be checked.
      *
      * @param object $parent The parent Upgrade class to inherit the version properties
      * @param array $params
      */
-    function UpgradeEntry(&$parent, $params)
+    function __construct(&$parent, $params)
     {
         $this->parent =& $parent; // get the properties db_version
         foreach (array('key' => 'required',
@@ -1092,24 +1077,27 @@ class UpgradeEntry
     }
 
     /* needed ? */
-    function setApplicableCb($object)
+    public function setApplicableCb($object)
     {
         $this->applicable_cb =& $object;
     }
 
-    function _check_if_already_fixed()
+    private function _check_if_already_fixed()
     {
         // not yet fixed?
-        if (!isset($this->upgrade['name'])) return false;
+        if (!isset($this->upgrade['name']))
+            return false;
         // override with force?
-        if ($this->parent->request->getArg('force')) return false;
+        if ($this->parent->request->getArg('force'))
+            return false;
         // already fixed and with an ok version
-        if ($this->upgrade['name'] >= $this->fixed_with) return $this->upgrade['name'];
+        if ($this->upgrade['name'] >= $this->fixed_with)
+            return $this->upgrade['name'];
         // already fixed but with an older version. do it again.
         return false;
     }
 
-    function pass()
+    public function pass()
     {
         // store in db no to fix again
         $this->upgrade['name'] = $this->parent->phpwiki_version;
@@ -1122,7 +1110,7 @@ class UpgradeEntry
         return true;
     }
 
-    function fail()
+    public function fail()
     {
         echo '<span style="color: red; font-weight: bold; ">' . _("FAILED") . "</span>";
         if (isset($this->reason))
@@ -1132,15 +1120,16 @@ class UpgradeEntry
         return false;
     }
 
-    function skip()
+    private function skip()
     { // not applicable
-        if (isset($this->silent_skip)) return true;
+        if (isset($this->silent_skip))
+            return true;
         echo " " . _("Skipped.") . "<br />\n";
         flush();
         return true;
     }
 
-    function check($args = null)
+    public function check($args = null)
     {
         if ($this->header) echo $this->header, ' ... ';
         if ($when = $this->_check_if_already_fixed()) {
@@ -1174,105 +1163,24 @@ class UpgradeEntry
 
 class UpgradeConfigEntry extends UpgradeEntry
 {
-    function _applicable_defined()
+    public function _applicable_defined()
     {
         return (boolean)defined($this->applicable_args[0]);
     }
 
-    function _applicable_defined_and_empty()
+    public function _applicable_defined_and_empty()
     {
         $const = $this->applicable_args[0];
         return (boolean)(defined($const) and !constant($const));
     }
 
-    function default_method($args)
+    public function default_method($args)
     {
         $match = $args[0];
         $replace = $args[1];
         return $this->parent->fixLocalFile($match, $replace, "config/config.ini");
     }
 } // class UpdateConfigEntry
-
-/* This is different */
-class UpgradePluginEntry extends UpgradeEntry
-{
-
-    /**
-     * check all pages for a plugin match
-     */
-    public $silent_skip = 1;
-
-    function default_method(&$args)
-    {
-        $match = $args[0];
-        $replace = $args[1];
-        $pagetext =& $args[2];
-        $page =& $args[3];
-        $current =& $args[4];
-        if (preg_match($match, $pagetext)) {
-            echo $page->getName(), " ", $this->notice, " ... ";
-            if ($newtext = preg_replace($match, $replace, $pagetext)) {
-                $meta = $current->_data;
-                $meta['summary'] = "upgrade: " . $this->header;
-                $page->save($newtext, $current->getVersion() + 1, $meta);
-                $this->pass();
-            } else {
-                $this->fail();
-            }
-        }
-    }
-} // class UpdatePluginEntry
-
-/**
- * fix custom themes which are not in our distribution
- * this should be optional
- */
-class UpgradeThemeEntry extends UpgradeEntry
-{
-
-    function default_method(&$args)
-    {
-        $match = $args[0];
-        $replace = $args[1];
-        $template = $args[2];
-    }
-
-    function fixThemeTemplate($match, $new, $template)
-    {
-        // for all custom themes
-        $ourthemes = explode(":", "blog:Crao:default:Hawaiian:MacOSX:MonoBook:Portland:shamino_com:SpaceWiki:wikilens:Wordpress");
-        $themedir = NormalizeLocalFileName("themes");
-        $dh = opendir($themedir);
-        while ($r = readdir($dh)) {
-            if (filetype($r) == 'dir' and $r[0] != '.' and !is_array($r, $ourthemes))
-                $customthemes[] = $r;
-        }
-        $success = true;
-        $errors = '';
-        foreach ($customthemes as $customtheme) {
-            $template = FindFile("themes/$customtheme/templates/$template");
-            $do = $this->parent->fixLocalFile($match, $new, template);
-            if (!$do[0]) {
-                $success = false;
-                $errors .= $do[1] . " ";
-                echo $do[1];
-            }
-        }
-        return array($success, $errors);
-    }
-}
-
-/**
- * TODO:
- *
- * Upgrade: Base class for multipage worksteps
- * identify, validate, display options, next step
- */
-/*
-*/
-
-// TODO: At which step are we?
-// validate and do it again or go on with next step.
 
 /** entry function from lib/main.php
  */
@@ -1290,8 +1198,6 @@ function DoUpgrade(&$request)
     @ini_set("implicit_flush", true);
     StartLoadDump($request, _("Upgrading this PhpWiki"));
     $upgrade = new Upgrade($request);
-    //if (!$request->getArg('noindex'))
-    //    CheckOldIndexUpdate($request); // index.php => config.ini to upgrade from < 1.3.10
     if (!$request->getArg('nodb')) {
         $upgrade->CheckDatabaseUpdate($request); // first check cached_html and friends
     }
@@ -1299,15 +1205,9 @@ function DoUpgrade(&$request)
         $upgrade->CheckPgsrcUpdate($request);
         $upgrade->CheckActionPageUpdate($request);
     }
-    // if (!$request->getArg('noplugin')) {
-        // $upgrade->CheckPluginUpdate($request);
-    // }
     if (!$request->getArg('noconfig')) {
         $upgrade->CheckConfigUpdate($request);
     }
-    // This is optional and should be linked. In EndLoadDump or PhpWikiAdministration?
-    //if ($request->getArg('theme'))
-    //      $upgrade->CheckThemeUpdate($request);
     EndLoadDump($request);
 }
 

@@ -25,7 +25,7 @@ class Units
 {
     function __construct()
     {
-        if (DISABLE_UNITS)
+        if (defined('DISABLE_UNITS') and DISABLE_UNITS)
             $this->errcode = 1;
         elseif (defined("UNITS_EXE")) // ignore dynamic check
             $this->errcode = 0;
@@ -35,6 +35,9 @@ class Units
 
     /**
      * $this->_attribute_base = $units->Definition($this->_attribute);
+     *
+     * @param string $query
+     * @return string
      */
     function Definition($query)
     {
@@ -67,10 +70,15 @@ class Units
      * We must ensure that the same baseunits are matched against.
      * We cannot compare m^2 to m or ''
      * $val_base = $this->_units->basevalue($value); // SemanticAttributeSearchQuery
+     *
+     * @param string $query
+     * @param bool $def
+     * @return bool|string
      */
     function basevalue($query, $def = false)
     {
-        if (!$def) $def = $this->Definition($query);
+        if (!$def)
+            $def = $this->Definition($query);
         if ($def) {
             if (is_numeric($def)) // e.g. "1 million"
                 return $def;
@@ -83,10 +91,15 @@ class Units
     /**
      * $this->_unit = $units->baseunit($this->_attribute);  // SemanticAttributeSearchQuery
      * and Cached_SemanticLink::_expandurl()
+     *
+     * @param string $query
+     * @param bool $def
+     * @return string
      */
     function baseunit($query, $def = false)
     {
-        if (!$def) $def = $this->Definition($query);
+        if (!$def)
+            $def = $this->Definition($query);
         if ($def) {
             if (preg_match("/ (.+)$/", $def, $m))
                 return $m[1];
@@ -96,7 +109,8 @@ class Units
 
     function _cmd($args)
     {
-        if ($this->errcode) return $args;
+        if ($this->errcode)
+            return $args;
         if (defined("UNITS_EXE")) {
             $s = UNITS_EXE . " $args";
             $result = `$s`;

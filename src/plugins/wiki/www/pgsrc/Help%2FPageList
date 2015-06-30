@@ -1,5 +1,5 @@
-Date: Tue, 29 Jul 2014 10:42:12 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.0)
+Date: Mon, 29 Jun 2015 12:04:28 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FPageList;
   flags="";
@@ -51,7 +51,7 @@ It also allows dynamic expansion of those plugins to include more columns in the
 | //none//
 |-
 | **limit**
-| number of rows
+| number of rows, or start index and number of rows (see below)
 | 50
 |-
 | **paging**
@@ -90,6 +90,12 @@ It also allows dynamic expansion of those plugins to include more columns in the
 | for info=col omit the pagename column
 | false
 |}
+
+=== Note for limit ===
+
+//limit// can be:
+* a single integer, in that case it is the number of rows;
+* or two integers separated by a comma,  in that case it is the start index (starting at 0) and the number of rows.
 
 === Info arguments ===
 

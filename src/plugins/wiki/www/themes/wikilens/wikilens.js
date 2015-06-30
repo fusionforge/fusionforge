@@ -1,27 +1,5 @@
 // Wikilens Javascript functions.
 
-/* Globals:
-
-var data_path = '/phpwiki-cvs';
-var pagename  = 'HomePage';
-var script_url= '/wikicvs';
-var stylepath = data_path+'/themes/MonoBook/';
-
-var rating = new Array; var prediction = new Array;
-var avg = new Array; var numusers = new Array;
-var msg_rating_votes = "Rating: %.1f (%d votes)";
-var msg_curr_rating = "Your current rating: ";
-var msg_curr_prediction = "Your current prediction: ";
-var msg_chg_rating = "Change your rating from ";
-var msg_to = " to ";
-var msg_add_rating = "Add your rating: ";
-var msg_thanks = "Thanks!";
-var msg_rating_deleted = "Rating deleted!";
-
-var rating_imgsrc = '/phpwiki-cvs/themes/MonoBook/images/RateIt';
-var rateit_action = 'RateIt';
-*/
-
 function displayRating(imgId, imgPrefix, ratingvalue, pred, init) {
   var ratings = new Array('Not Rated','Awful','Very Poor','Poor','Below Average',
 			  'Average','Above Average','Good','Very Good','Excellent','Outstanding');

@@ -18,16 +18,16 @@ if ($MAX_ONLINE_TIME and $MAX_ONLINE_NUM)
   <tr><td class="cat" colspan="2"><?php echo $header ?></td></tr>
   <tr><td class="row1" rowspan="3"><?php echo $ONLINE_ICON ?></td>
       <td class="row1 gensmall"><?php echo fmt("Our users created a total of %d pages.",$NUM_PAGES) ?><br />
-	  <?php echo fmt("We have a total of %d registered users.",$NUM_USERS) ?><br />
+      <?php echo fmt("We have a total of %d registered users.",$NUM_USERS) ?><br />
           <?php echo $NEWEST_USER ? fmt("The newest registered user is %s.",$NEWEST_USER) : ''?>
           </td></tr>
   <?php if ($SESSDATA_BOOL) { ?>
   <tr><td class="row1 gensmall">
           <?php echo fmt("In total there are %d user sessions online. :: Unique %d Registered and %d Guests",
-	          $NUM_ONLINE,$NUM_REGISTERED,$NUM_GUESTS) ?><br />
+              $NUM_ONLINE,$NUM_REGISTERED,$NUM_GUESTS) ?><br />
           <?php echo $MAX_ONLINE_NUM ? fmt("Most users ever online was %d at %s.",$MAX_ONLINE_NUM,$MAX_ONLINE_TIME) : '' ?><br />
           <?php echo fmt("Registered Users Online: ") ?>
-<?php 
+<?php
     $s='';
     foreach ($REGISTERED as $user) {
       $link = WikiLink($user['name']);
@@ -36,7 +36,7 @@ if ($MAX_ONLINE_TIME and $MAX_ONLINE_NUM)
     if (!count($REGISTERED)) echo(htmlentities(_("None")));
     else echo(substr($s,0,-2));
 ?>
-<?php if (!empty($ADMINS) and $dispose_admin) { ?> 
+<?php if (!empty($ADMINS) and $dispose_admin) { ?>
     <br />
     <?php echo fmt("Admin is also online.") ?>
 <?php } ?>
@@ -59,7 +59,7 @@ if ($MAX_ONLINE_TIME and $MAX_ONLINE_NUM)
 <table class="forumline fullwidth">
   <tr><td class="cat" colspan="3"><?php echo $header ?></td></tr>
    <tr><td class="cat" colspan="3"><?php echo _("Registered Users") ?></td></tr>
-  <?php if (!empty($ADMINS) and $dispose_admin) { ?> 
+  <?php if (!empty($ADMINS) and $dispose_admin) { ?>
   <?php   foreach ($ADMINS as $user) { ?>
   <tr><td class="row1 gensmall"><?php echo $user['name'] ?></td>
       <td class="row1 gensmall"><?php echo $WikiTheme->formatDateTime($user['date']) ?></td>

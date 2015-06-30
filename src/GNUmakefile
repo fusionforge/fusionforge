@@ -140,6 +140,7 @@ install-mta-exim4: install-base-dirs
 install-lists: install-base-dirs
 	$(CP_R) cronjobs/lists $(DESTDIR)$(pkgdatadir)/cronjobs/
 	$(CP_R) post-install.d/lists $(DESTDIR)$(pkgdatadir)/post-install.d/
+	$(INSTALL) -d -m 00755 $(DESTDIR)$(pkgdatadir)/lists/
 
 install-base: install-base-dirs install-common install-web install-db install-scm
 

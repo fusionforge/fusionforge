@@ -5,11 +5,14 @@
   <input type="hidden" name="mode" value="add" />
   <div class="wikiblog-form">
      <?php echo _("Headline")._(": ") ?><br />
-     <input id="wikiblog-summary" class="wikitext" type="text" style="width:540px" size="60"
+     <input id="wikiblog-summary" required="required" class="wikitext" type="text" style="width:540px" size="60"
                    maxlength="256" name="edit[summary]" value="" />
-     <?php echo $EDIT_TOOLBAR ?>
+     <br />
+     <?php if (isset($EDIT_TOOLBAR)) { ?>
+         <?php echo $EDIT_TOOLBAR ?>
+     <?php } ?>
      <a id="editarea"></a>
-     <textarea id="edit-content" class="edit-content" rows="8" style="width:540px"
+     <textarea id="edit-content" required="required" class="edit-content" rows="8" style="width:540px"
                name="edit[content]"></textarea>
      <br />
      <input id="wikiblog-submit" type="submit" value="<?php echo _("Add Entry")?>"

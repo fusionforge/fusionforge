@@ -17,7 +17,7 @@ class WikiTheme_Portland extends WikiTheme
 
     function linkUnknownWikiWord($wikiword, $linktext = '')
     {
-        if (isa($wikiword, 'WikiPageName')) {
+        if (is_a($wikiword, 'WikiPageName')) {
             $default_text = $wikiword->shortName;
             $wikiword = $wikiword->name;
         } else {

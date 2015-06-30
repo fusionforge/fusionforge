@@ -38,13 +38,13 @@ class WikiDB_backend_PearDB_oci8
     {
         // Do nothing here -- Leave that for the DBA
         // Cost Based Optimizer tuning vary from version to version
-        return 1;
+        return true;
     }
 
-    /**
+    /*
      * Lock all tables we might use.
      */
-    function _lock_tables($write_lock = true)
+    protected function _lock_tables($write_lock = true)
     {
         $dbh = &$this->_dbh;
 
@@ -75,7 +75,6 @@ class WikiDB_backend_PearDB_oci8
 
     function write_accesslog(&$entry)
     {
-        global $request;
         $dbh = &$this->_dbh;
         $log_tbl = $entry->_accesslog->logtable;
         // duration problem: sprintf "%f" might use comma e.g. "100,201" in european locales

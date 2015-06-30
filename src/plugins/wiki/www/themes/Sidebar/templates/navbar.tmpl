@@ -31,7 +31,7 @@ $p = $WikiTheme->tooltipAccessKeyPrefix();
   <div class="pBody">
 <?php echo Template("search",
              array('SEARCH_BEFORE' => ''/*HTML::h2(WikiLink(_("FindPage")))*/,
-		   'SEARCH_AFTER'  => HTML::Raw('<br /><input type="submit" name="searchtype" value="title" class="searchButton" title="Press to perform a wiki title search" />&nbsp;<input type="submit" name="searchtype" value="fulltext" class="searchButton" title="Wiki fulltext search" />'))) ?>
+             'SEARCH_AFTER'  => HTML::raw('<br /><input type="submit" name="searchtype" value="title" class="searchButton" title="Press to perform a wiki title search" />&nbsp;<input type="submit" name="searchtype" value="fulltext" class="searchButton" title="Wiki fulltext search" />'))) ?>
   </div>
 </div>
 
@@ -40,7 +40,7 @@ $p = $WikiTheme->tooltipAccessKeyPrefix();
   <div class="pBody" id="p-tb-body">
     <ul>
     <li><?php $link = WikiLink(_("RecentChanges"), "",_("RecentChanges")); $link->setAttr("accesskey","r"); $link->addTooltip(_("The list of recent changes in the wiki.")." [$p-r]"); ?><?php echo $link ?> </li>
-    <li><?php echo WikiLink(_("RecentNewPages"), "",_("RecentNewPages")) ?></li>
+    <li><?php echo WikiLink(_("RecentNewPages")) ?></li>
     <?php if (!empty($revision)) { ?>
       <li id="t-whatlinkshere"><?php echo Button(array('action'=>_("BackLinks")), _("What links here"), $page->getName()) ?></li>
     <?php } ?>
@@ -52,11 +52,11 @@ $p = $WikiTheme->tooltipAccessKeyPrefix();
 <script type="text/javascript"><!--
 document.write('<li><?php echo $PrintableLink ?></li>'); // -->
 </script>
-    <?php if (defined('USE_EXTERNAL_HTML2PDF') and USE_EXTERNAL_HTML2PDF) { 
+    <?php if (defined('USE_EXTERNAL_HTML2PDF') and USE_EXTERNAL_HTML2PDF) {
       // Do not display the pdf icon
       $btn = new Button(_("Display as Pdf"), WikiURL($page->getName(), array('action' => 'pdf')), 'wikiaction');
       ?>
-      <li><?php echo $btn ?> &nbsp;&nbsp; <?php echo WikiLink("Help/Display as Pdf","",HTML::img(array('src'=>$WikiTheme->_findData('images/mini_help.png'),'border'=>0,'width'=>12,'height'=>13,'alt'=>'pdf-help','title'=>"How to generate multi-page PDFs"))) ?></li>
+      <li><?php echo $btn ?> &nbsp;&nbsp; <?php echo WikiLink("Help:PDF","",HTML::img(array('src'=>$WikiTheme->_findData('images/mini_help.png'),'width'=>12,'height'=>13,'alt'=>'PDF help','title'=>'PDF help'))) ?></li>
     <?php } ?>
     <li><?php echo WikiLink(_("AllPages")) ?></li>
     <?php if (!empty($user) && $user->isAdmin()) { ?>

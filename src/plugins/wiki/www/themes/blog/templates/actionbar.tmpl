@@ -9,12 +9,12 @@
     <?php echo $SEP?><?php echo WikiLink(_("HowTo")) ?>
     <?php echo $SEP?><?php echo WikiLink(_("RecentChanges")) ?>
     <?php echo $SEP?><?php echo Button("PageInfo", _("Info")) ?>
-<?php 
+<?php
 if ($user->isAuthenticated()) {
     if (mayAccessPage('edit', $page->getName()))
         $EditB = Button("edit",_("Edit"),false,array('id'=>'btn-edit'));
     else
-        $EditB = Button("viewsource", _("View Source")); 
+        $EditB = Button("viewsource", _("View Source"));
 ?>
     <?php echo $SEP?><?php echo $EditB ?>
     <?php } ?>

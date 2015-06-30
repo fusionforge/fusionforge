@@ -105,7 +105,6 @@ if (!function_exists('_http_user')) {
         if (!isset($_SERVER))
             $_SERVER =& $GLOBALS['HTTP_SERVER_VARS'];
         // maybe we should random the realm to really force a logout. but the next login will fail.
-        // better_srand(); $realm = microtime().rand();
         header('WWW-Authenticate: Basic realm="' . WIKI_NAME . '"');
         if (strstr(php_sapi_name(), 'apache'))
             header('HTTP/1.0 401 Unauthorized');
@@ -143,7 +142,7 @@ if (file_exists($fs_config_file)) {
         _http_logout();
     }
     // check password
-    if (ENCRYPTED_PASSWD and function_exists('crypt')) {
+    if (ENCRYPTED_PASSWD) {
         if (crypt($admin_pw, ADMIN_PASSWD) != ADMIN_PASSWD)
             _http_logout();
     } elseif ($admin_pw != ADMIN_PASSWD) {
@@ -178,11 +177,11 @@ if (file_exists($fs_config_file)) {
         }
 
         td {
-            border: thin solid black
+            border: thin solid black;
         }
 
         tr {
-            border: none
+            border: none;
         }
 
         div.hint {
@@ -224,18 +223,19 @@ if (file_exists($fs_config_file)) {
                 function update(accepted, error, value, output) {
                     var msg = document.getElementById(output);
                     if (accepted) {
-                        /* MSIE 5.0 fails here */
                         if (msg && msg.innerHTML) {
-                            msg.innerHTML = "<font color=\"green\">Input accepted.</font>";
+                            msg.innerHTML = "<span color=\"green\">Input accepted.</span>";
                         }
                     } else {
+                        var index;
                         while ((index = error.indexOf("%s")) > -1) {
                             error = error.substring(0, index) + value + error.substring(index + 2);
                         }
                         if (msg) {
-                            msg.innerHTML = "<font color=\"red\">" + error + "</font>";
+                            msg.innerHTML = "<span color=\"red\">" + error + "</span>";
                         }
                     }
+                    var submit;
                     if (submit = document.getElementById('submit')) submit.disabled = accepted ? false : true;
                 }
 
@@ -244,7 +244,7 @@ if (file_exists($fs_config_file)) {
         }
 
         function validate_ereg(error, ereg, output, field) {
-            regex = new RegExp(ereg);
+            var regex = new RegExp(ereg);
             update(regex.test(field.value), error, field.value, output);
         }
 
@@ -265,16 +265,17 @@ if (file_exists($fs_config_file)) {
             }
 
             var rows = document.getElementsByTagName('tr');
-            var i = 0;
+            var i;
+            var tr;
             for (i = 0; i < rows.length; i++) {
-                var tr = rows[i];
+                tr = rows[i];
                 if (tr.className == 'header' && tr.id == id) {
                     i++;
                     break;
                 }
             }
             for (; i < rows.length; i++) {
-                var tr = rows[i];
+                tr = rows[i];
                 if (tr.className == 'header')
                     break;
                 tr.className = do_hide ? 'hidden' : 'nonhidden';
@@ -296,7 +297,7 @@ if (file_exists($fs_config_file)) {
             // Select text in textarea upon focus
             var area = document.getElementById('config-output');
             if (area) {
-                listener = { handleEvent:function (e) {
+                var listener = { handleEvent:function (e) {
                     area.select();
                 } };
                 area.addEventListener('focus', listener, false);
@@ -416,7 +417,7 @@ $properties["WYSIWYG_BACKEND"] =
         'WYSIWYG_BACKEND',
         array('Wikiwyg' => 'Wikiwyg',
             'tinymce' => 'tinymce',
-            'FCKeditor' => 'FCKeditor',
+            'CKeditor' => 'CKeditor',
             'spaw' => 'spaw',
             'htmlarea3' => 'htmlarea3',
             'htmlarea2' => 'htmlarea2',
@@ -451,12 +452,6 @@ $properties["NUM_SPAM_LINKS"] =
 
 $properties["GOOGLE_LINKS_NOFOLLOW"] =
     new boolean_define_commented_optional('GOOGLE_LINKS_NOFOLLOW');
-
-$properties["ENABLE_LIVESEARCH"] =
-    new boolean_define_commented_optional('ENABLE_LIVESEARCH');
-
-$properties["ENABLE_ACDROPDOWN"] =
-    new boolean_define_commented_optional('ENABLE_ACDROPDOWN');
 
 $properties["ENABLE_DISCUSSION_LINK"] =
     new boolean_define_commented_optional('ENABLE_DISCUSSION_LINK');
@@ -584,7 +579,7 @@ Choose one of:
 <dt>LOOSE</dt>
 <dd>Cached pages will be invalidated whenever they are edited,
     or, if the pages include plugins, when the plugin output could
-    concievably have changed.
+    conceivably have changed.
     <p>Behavior should be much like STRICT, except that sometimes
        wikilinks will show up as undefined (with the question mark)
        when in fact they refer to (recently) created pages.
@@ -598,7 +593,7 @@ Choose one of:
        page, etc...</p>
     <p>This setting is generally not advisable, however it may be useful
        in certain cases (e.g. if your wiki gets lots of page views,
-       and few edits by knowledgable people who won't freak over the quirks.)</p>
+       and few edits by knowledgeable people who won't freak over the quirks.)</p>
 </dd>
 </dl>
 The default is currently LOOSE.");
@@ -642,14 +637,12 @@ $properties["Database Type"] =
             'SQL' => "SQL PEAR",
             'ADODB' => "SQL ADODB",
             'PDO' => "PDO (php5 only)",
-            'file' => "flatfile",
-            'cvs' => "CVS File handler")/*, "
+            'file' => "flatfile")/*, "
 Select the database backend type:
 Choose dba (default) to use one of the standard UNIX dba libraries. This is the fastest.
 Choose ADODB or SQL to use an SQL database with ADODB or PEAR.
 Choose PDO on php5 to use an SQL database. (experimental, no paging yet)
 flatfile is simple and slow.
-CVS is highly experimental and slow.
 Recommended is dba or SQL: PEAR or ADODB."*/);
 
 $properties["SQL DSN Setup"] =
@@ -981,9 +974,6 @@ The following policies are available for user authentication:
         <dd>check the given user - password combination for all
         methods and return true on the first success.</dd></dl>");
 
-$properties["ENABLE_USER_NEW"] =
-    new boolean_define_commented_optional('ENABLE_USER_NEW');
-
 $properties["ENABLE_PAGEPERM"] =
     new boolean_define_commented_optional('ENABLE_PAGEPERM');
 
@@ -1025,7 +1015,7 @@ If GROUP_METHOD = WIKIPAGE:
 Page where all groups are listed.");
 
 $properties["AUTH_GROUP_FILE"] =
-    new _define_optional('AUTH_GROUP_FILE', _("/etc/groups"), "
+    new _define_optional('AUTH_GROUP_FILE', "/etc/groups", "
 For GROUP_METHOD = FILE, the file given below is referenced to obtain
 group membership information.  It should be in the same format as the
 standard unix /etc/groups(5) file.");
@@ -1131,110 +1121,59 @@ $properties["DBAUTH_GROUP_MEMBERS"] =
 $properties["DBAUTH_USER_GROUPS"] =
     new _define_optional('DBAUTH_USER_GROUPS', "SELECT group FROM user WHERE user='\$userid'", "");
 
-if (function_exists('ldap_connect')) {
-
-    $properties["LDAP AUTH Host"] =
-        new _define_optional('LDAP_AUTH_HOST', "ldap://localhost:389", "
+$properties["LDAP AUTH Host"] =
+    new _define_optional('LDAP_AUTH_HOST', "ldap://localhost:389", "
 If USER_AUTH_ORDER contains Ldap:
 
 The LDAP server to connect to.  Can either be a hostname, or a complete
 URL to the server (useful if you want to use ldaps or specify a different
 port number).");
 
-    $properties["LDAP BASE DN"] =
-        new _define_optional('LDAP_BASE_DN', "ou=mycompany.com,o=My Company", "
+$properties["LDAP BASE DN"] =
+    new _define_optional('LDAP_BASE_DN', "ou=mycompany.com,o=My Company", "
 The organizational or domain BASE DN: e.g. \"dc=mydomain,dc=com\".
 
 Note: ou=Users and ou=Groups are used for GroupLdap Membership
 Better use LDAP_OU_USERS and LDAP_OU_GROUP with GROUP_METHOD=LDAP.");
 
-    $properties["LDAP SET OPTION"] =
-        new _define_optional('LDAP_SET_OPTION', "LDAP_OPT_PROTOCOL_VERSION=3:LDAP_OPT_REFERRALS=0", "
+$properties["LDAP SET OPTION"] =
+    new _define_optional('LDAP_SET_OPTION', "LDAP_OPT_PROTOCOL_VERSION=3:LDAP_OPT_REFERRALS=0", "
 Some LDAP servers need some more options, such as the Windows Active
 Directory Server.  Specify the options (as allowed by the PHP LDAP module)
 and their values as NAME=value pairs separated by colons.");
 
-    $properties["LDAP AUTH USER"] =
-        new _define_optional('LDAP_AUTH_USER', "CN=ldapuser,ou=Users,o=Development,dc=mycompany.com", "
+$properties["LDAP AUTH USER"] =
+    new _define_optional('LDAP_AUTH_USER', "CN=ldapuser,ou=Users,o=Development,dc=mycompany.com", "
 DN to initially bind to the LDAP server as. This is needed if the server doesn't
 allow anonymous queries. (Windows Active Directory Server)");
 
-    $properties["LDAP AUTH PASSWORD"] =
-        new _define_optional('LDAP_AUTH_PASSWORD', "secret", "
+$properties["LDAP AUTH PASSWORD"] =
+    new _define_optional('LDAP_AUTH_PASSWORD', "secret", "
 Password to use to initially bind to the LDAP server, as the DN
 specified in the LDAP_AUTH_USER option (above).");
 
-    $properties["LDAP SEARCH FIELD"] =
-        new _define_optional('LDAP_SEARCH_FIELD', "uid", "
+$properties["LDAP SEARCH FIELD"] =
+    new _define_optional('LDAP_SEARCH_FIELD', "uid", "
 If you want to match usernames against an attribute other than uid,
 specify it here. Default: uid
 
 e.g.: LDAP_SEARCH_FIELD = sAMAccountName");
 
-    $properties["LDAP OU USERS"] =
-        new _define_optional('LDAP_OU_USERS', "ou=Users", "
+$properties["LDAP OU USERS"] =
+    new _define_optional('LDAP_OU_USERS', "ou=Users", "
 If you have an organizational unit for all users, define it here.
 This narrows the search, and is needed for LDAP group membership (if GROUP_METHOD=LDAP)
 Default: ou=Users");
 
-    $properties["LDAP OU GROUP"] =
-        new _define_optional('LDAP_OU_GROUP', "ou=Groups", "
+$properties["LDAP OU GROUP"] =
+    new _define_optional('LDAP_OU_GROUP', "ou=Groups", "
 If you have an organizational unit for all groups, define it here.
 This narrows the search, and is needed for LDAP group membership (if GROUP_METHOD=LDAP)
 The entries in this ou must have a gidNumber and cn attribute.
 Default: ou=Groups");
 
-} else { // function_exists('ldap_connect')
-
-    $properties["LDAP Authentication"] =
-        new unchangeable_variable('LDAP Authentication', "
-; If USER_AUTH_ORDER contains Ldap:
-;
-; The LDAP server to connect to.  Can either be a hostname, or a complete
-; URL to the server (useful if you want to use ldaps or specify a different
-; port number).
-;LDAP_AUTH_HOST = \"ldap://localhost:389\"
-;
-; The organizational or domain BASE DN: e.g. \"dc=mydomain,dc=com\".
-;
-; Note: ou=Users and ou=Groups are used for GroupLdap Membership
-; Better use LDAP_OU_USERS and LDAP_OU_GROUP with GROUP_METHOD=LDAP.
-;LDAP_BASE_DN = \"ou=Users,o=Development,dc=mycompany.com\"
-
-; Some LDAP servers need some more options, such as the Windows Active
-; Directory Server.  Specify the options (as allowed by the PHP LDAP module)
-; and their values as NAME=value pairs separated by colons.
-; LDAP_SET_OPTION = \"LDAP_OPT_PROTOCOL_VERSION=3:LDAP_OPT_REFERRALS=0\"
-
-; DN to initially bind to the LDAP server as. This is needed if the server doesn't
-; allow anonymous queries. (Windows Active Directory Server)
-; LDAP_AUTH_USER = \"CN=ldapuser,ou=Users,o=Development,dc=mycompany.com\"
-
-; Password to use to initially bind to the LDAP server, as the DN
-; specified in the LDAP_AUTH_USER option (above).
-; LDAP_AUTH_PASSWORD = secret
-
-; If you want to match usernames against an attribute other than uid,
-; specify it here. Default: uid
-; LDAP_SEARCH_FIELD = sAMAccountName
-
-; If you have an organizational unit for all users, define it here.
-; This narrows the search, and is needed for LDAP group membership (if GROUP_METHOD=LDAP)
-; Default: ou=Users
-; LDAP_OU_USERS = ou=Users
-
-; If you have an organizational unit for all groups, define it here.
-; This narrows the search, and is needed for LDAP group membership (if GROUP_METHOD=LDAP)
-; The entries in this ou must have a gidNumber and cn attribute.
-; Default: ou=Groups
-; LDAP_OU_GROUP = ou=Groups", "
-; Ignored. No LDAP support in this php. configure --with-ldap");
-}
-
-if (function_exists('imap_open')) {
-
-    $properties["IMAP Auth Host"] =
-        new _define_optional('IMAP_AUTH_HOST', 'localhost:143/imap/notls', "
+$properties["IMAP Auth Host"] =
+    new _define_optional('IMAP_AUTH_HOST', 'localhost:143/imap/notls', "
 If USER_AUTH_ORDER contains IMAP:
 
 The IMAP server to check usernames from. Defaults to localhost.
@@ -1242,21 +1181,6 @@ The IMAP server to check usernames from. Defaults to localhost.
 Some IMAP_AUTH_HOST samples:
   localhost, localhost:143/imap/notls,
   localhost:993/imap/ssl/novalidate-cert (SuSE refuses non-SSL conections)");
-
-} else { // function_exists('imap_open')
-
-    $properties["IMAP Authentication"] =
-        new unchangeable_variable('IMAP_AUTH_HOST', "
-; If USER_AUTH_ORDER contains IMAP:
-; The IMAP server to check usernames from. Defaults to localhost.
-;
-; Some IMAP_AUTH_HOST samples:
-;   localhost, localhost:143/imap/notls,
-;   localhost:993/imap/ssl/novalidate-cert (SuSE refuses non-SSL conections)
-;IMAP_AUTH_HOST = localhost:143/imap/notls", "
-Ignored. No IMAP support in this php. configure --with-imap");
-
-}
 
 $properties["POP3 Authentication"] =
     new _define_optional('POP3_AUTH_HOST', 'localhost:110', "
@@ -1347,7 +1271,7 @@ Select your language/locale - default language is \"en\" for English.
 Other languages available:<pre>
 English  \"en\" (English    - HomePage)
 German   \"de\" (Deutsch    - StartSeite)
-French   \"fr\" (Français   - Accueil)
+French   \"fr\" (Français   - PageAccueil)
 Dutch    \"nl\" (Nederlands - ThuisPagina)
 Spanish  \"es\" (Español    - PáginaPrincipal)
 Swedish  \"sv\" (Svenska    - Framsida)
@@ -1409,12 +1333,6 @@ $properties["WikiName Regexp"] =
     new _define('WIKI_NAME_REGEXP', "(?<![[:alnum:]])(?:[[:upper:]][[:lower:]]+){2,}(?![[:alnum:]])", "
 Perl regexp for WikiNames (\"bumpy words\")
 (?&lt;!..) &amp; (?!...) used instead of '\b' because \b matches '_' as well");
-
-$properties["Subpage Separator"] =
-    new _define_optional('SUBPAGE_SEPARATOR', '"/"', "
-One character which separates pages from subpages. Defaults to '/', but '.' or ':' were also used.",
-        "onchange=\"validate_ereg('Sorry, \'%s\' must be a single character. Currently only :, / or .', '^[/:.]$', 'SUBPAGE_SEPARATOR', this);\""
-    );
 
 $properties["InterWiki Map File"] =
     new _define('INTERWIKI_MAP_FILE', 'lib/interwiki.map', "
@@ -1770,6 +1688,7 @@ class _variable
     function _config_format($value)
     {
         return '';
+        /*
         $v = $this->get_config_item_name();
         // handle arrays: a|b --> a['b']
         if (strpos($v, '|')) {
@@ -1779,6 +1698,7 @@ class _variable
         if (preg_match("/[\"']/", $value))
             $value = '"' . $value . '"';
         return sprintf("%s = \"%s\"", $v, $value);
+        */
     }
 
     function get_config_item_name()
@@ -1862,7 +1782,7 @@ class unchangeable_variable
         global $tdwidth;
         $i = "<h3>" . $title . "</h3>\n    " . nl2p($this->_get_description()) . "\n";
         // $i .= "<em>Not editable.</em><br />\n<pre>" . $this->default_value."</pre>";
-        return '<tr><td style="width:100%" class="unchangeable-variable-top" colspan="2">' . "\n" . $i . "</td></tr>\n"
+        return '<tr><td style="width:100%;" class="unchangeable-variable-top" colspan="2">' . "\n" . $i . "</td></tr>\n"
             . '<tr style="border-top: none;"><td class="unchangeable-variable-left" width="' . $tdwidth . '">&nbsp;</td>';
     }
 }
@@ -2133,23 +2053,15 @@ class _define_password
             $p .= "\n;ENCRYPTED_PASSWD = true";
             return $p;
         } else {
-            if (function_exists('crypt')) {
-                $salt_length = max(CRYPT_SALT_LENGTH,
-                    2 * CRYPT_STD_DES,
-                    9 * CRYPT_EXT_DES,
-                    12 * CRYPT_MD5,
-                    16 * CRYPT_BLOWFISH);
-                // generate an encrypted password
-                $crypt_pass = crypt($posted_value, rand_ascii($salt_length));
-                $p = "${n}" . $this->_config_format($crypt_pass);
-                return $p . "\nENCRYPTED_PASSWD = true";
-            } else {
-                $p = "${n}" . $this->_config_format($posted_value);
-                $p .= "\n; Encrypted passwords cannot be used:";
-                $p .= "\n; 'function crypt()' not available in this version of php";
-                $p .= "\nENCRYPTED_PASSWD = false";
-                return $p;
-            }
+            $salt_length = max(CRYPT_SALT_LENGTH,
+                2 * CRYPT_STD_DES,
+                9 * CRYPT_EXT_DES,
+                12 * CRYPT_MD5,
+                16 * CRYPT_BLOWFISH);
+            // generate an encrypted password
+            $crypt_pass = crypt($posted_value, rand_ascii($salt_length));
+            $p = "${n}" . $this->_config_format($crypt_pass);
+            return $p . "\nENCRYPTED_PASSWD = true";
         }
     }
 
@@ -2492,7 +2404,7 @@ class part
         $id = preg_replace("/\W/", "", $this->config_item_name);
         $group_name = preg_replace("/\W/", "", $title);
         $i = '<tr class="header" id="'.$id.'">'."\n";
-        $i .= '<td class="part" style="width:100%;background-color:#eee" colspan="2">'."\n";
+        $i .= '<td class="part" style="width:100%;background-color:#eee;" colspan="2">'."\n";
         $i .= "<h2>" . $title . "</h2>\n    " . nl2p($this->_get_description()) . "\n";
         $i .= "<p><a href=\"javascript:toggle_group('$id')\" id=\"{$id}_text\">Hide options.</a></p>";
         return $i . "</td>\n";
@@ -2533,7 +2445,7 @@ function text_from_dist($var)
     }
     if ($var == '_MAGIC_CLOSE_FILE') {
         fclose($f);
-        return;
+        return '';
     }
     // if all vars would be in natural order as in the config-dist this would not be needed.
     fseek($f, 0);
@@ -2587,16 +2499,9 @@ function random_good_password($minlength = 5, $maxlength = 8)
     $valid_chars = "!#%&+-.0123456789=@ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz";
     $start = ord($valid_chars);
     $end = ord(substr($valid_chars, -1));
-    better_srand();
-    if (function_exists('mt_rand')) // mersenne twister
-        $length = mt_rand($minlength, $maxlength);
-    else // the usually bad glibc rand()
-        $length = rand($minlength, $maxlength);
+    $length = mt_rand($minlength, $maxlength);
     while ($length > 0) {
-        if (function_exists('mt_rand'))
-            $newchar = mt_rand($start, $end);
-        else
-            $newchar = rand($start, $end);
+        $newchar = mt_rand($start, $end);
         if (!strrpos($valid_chars, $newchar)) continue; // skip holes
         $newpass .= sprintf("%c", $newchar);
         $length--;
@@ -2615,14 +2520,6 @@ function printArray($a)
 // end of class definitions
 /////////////////////////////
 // begin auto generation code
-
-if (!function_exists('is_a')) {
-    function is_a($object, $class)
-    {
-        $class = strtolower($class);
-        return (get_class($object) == $class) or is_subclass_of($object, $class);
-    }
-}
 
 if (!empty($HTTP_POST_VARS['action'])
     and $HTTP_POST_VARS['action'] == 'make_config'

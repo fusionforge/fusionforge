@@ -68,6 +68,13 @@ class WikiPlugin_UnfoldSubpages
             ));
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         static $included_pages = false;
@@ -75,12 +82,8 @@ class WikiPlugin_UnfoldSubpages
 
         $args = $this->getArgs($argstr, $request);
         extract($args);
-        $query = new TextSearchQuery($pagename . SUBPAGE_SEPARATOR . '*', true, 'glob');
+        $query = new TextSearchQuery($pagename . '/' . '*', true, 'glob');
         $subpages = $dbi->titleSearch($query, $sortby, $limit, $exclude);
-        //if ($sortby)
-        //    $subpages = $subpages->applyFilters(array('sortby' => $sortby, 'limit' => $limit, 'exclude' => $exclude));
-        //$subpages = explodePageList($pagename . SUBPAGE_SEPARATOR . '*', false,
-        //                            $sortby, $limit, $exclude);
         if (is_string($exclude) and !is_array($exclude))
             $exclude = PageList::explodePageList($exclude, false, false, $limit);
         $content = HTML();
@@ -149,7 +152,7 @@ class WikiPlugin_UnfoldSubpages
 
                 array_push($included_pages, $cpagename);
                 if ($smalltitle) {
-                    $pname = array_pop(explode(SUBPAGE_SEPARATOR, $cpagename)); // get last subpage name
+                    $pname = array_pop(explode('/', $cpagename)); // get last subpage name
                     // Use _("%s: %s") instead of .": ". for French punctuation
                     $ct = TransformText(sprintf(_("%s: %s"), "[$pname|$cpagename]", $ct),
                                         $cpagename);
@@ -168,7 +171,8 @@ class WikiPlugin_UnfoldSubpages
             }
         }
         if (!isset($cpagename)) {
-            return $this->error(sprintf(_("%s has no subpages defined."), $pagename));
+            return HTML::p(array('class' => 'warning'),
+                sprintf(_("%s has no subpages defined."), $pagename));
         }
         return $content;
     }

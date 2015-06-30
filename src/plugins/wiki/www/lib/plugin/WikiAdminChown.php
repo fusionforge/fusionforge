@@ -41,7 +41,7 @@ class WikiPlugin_WikiAdminChown
     {
         return array_merge
         (
-            WikiPlugin_WikiAdminSelect::getDefaultArguments(),
+            parent::getDefaultArguments(),
             array(
                 'user' => false,
                 /* Columns to include in listing */
@@ -49,7 +49,7 @@ class WikiPlugin_WikiAdminChown
             ));
     }
 
-    function chownPages(&$dbi, &$request, $pages, $newowner)
+    private function chownPages(&$dbi, &$request, $pages, $newowner)
     {
         $result = HTML::div();
         $ul = HTML::ul();
@@ -92,19 +92,25 @@ class WikiPlugin_WikiAdminChown
             } else {
                 $result->pushContent(HTML::p(fmt("%d pages have been changed:", $count)));
             }
-            $result->pushContent($ul);
-            return $result;
         } else {
             $result->setAttr('class', 'error');
             $result->pushContent(HTML::p(_("No pages changed.")));
-            return $result;
         }
+        $result->pushContent($ul);
+        return $result;
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         if ($request->getArg('action') != 'browse') {
-            if (!$request->getArg('action') == __("PhpWikiAdministration")."/".__("Chown")) {
+            if ($request->getArg('action') != __("PhpWikiAdministration")."/".__("Chown")) {
                 return $this->disabled(_("Plugin not run: not in browse mode"));
             }
         }
@@ -113,10 +119,6 @@ class WikiPlugin_WikiAdminChown
         $this->_args = $args;
         if (empty($args['user']))
             $args['user'] = $request->_user->UserName();
-        /*if (!empty($args['exclude']))
-            $exclude = explodePageList($args['exclude']);
-        else
-        $exclude = false;*/
         $this->preSelectS($args, $request);
 
         $p = $request->getArg('p');
@@ -136,7 +138,6 @@ class WikiPlugin_WikiAdminChown
                 $request->_notAuthorized(WIKIAUTH_ADMIN);
                 $this->disabled("! user->isAdmin");
             }
-            // DONE: error message if not allowed.
             if ($post_args['action'] == 'verify') {
                 // Real action
                 return $this->chownPages($dbi, $request, array_keys($p),
@@ -152,34 +153,28 @@ class WikiPlugin_WikiAdminChown
         }
         if ($next_action == 'select' and empty($pages)) {
             // List all pages to select from.
-            $pages = $this->collectPages($pages, $dbi, $args['sortby'], $args['limit'],
-                $args['exclude']);
+            $pages = $this->collectPages($pages, $dbi, $args['sortby'], $args['limit'], $args['exclude']);
         }
-        /* // let the user decide which info
-         if ($next_action == 'verify') {
-            $args['info'] = "checkbox,pagename,owner,mtime";
-        }
-        */
-        if ($next_action == 'select') {
-            $pagelist = new PageList_Selectable($args['info'], $args['exclude'], $args);
-        } else {
-            $pagelist = new PageList_Unselectable($args['info'], $args['exclude'], $args);
-        }
-        $pagelist->addPageList($pages);
 
         $header = HTML::fieldset();
         if ($next_action == 'verify') {
+            $pagelist = new PageList_Unselectable($args['info'], $args['exclude'], $args);
+            $pagelist->addPageList($pages);
             $button_label = _("Yes");
             $header->pushContent(HTML::legend(_("Confirm ownership change")));
-            $header->pushContent(
-                HTML::p(HTML::strong(
+            $header->pushContent(HTML::p(HTML::strong(
                     _("Are you sure you want to change the owner of the selected pages?"))));
-            $header = $this->chownForm($header, $post_args);
         } else {
+            $pagelist = new PageList_Selectable($args['info'], $args['exclude'], $args);
+            $pagelist->addPageList($pages);
             $button_label = _("Change owner of selected pages.");
             $header->pushContent(HTML::legend(_("Select the pages to change the owner")));
-            $header = $this->chownForm($header, $post_args);
         }
+
+        $header->pushContent(_("Change owner to: "));
+        $header->pushContent(HTML::input(array('name' => 'admin_chown[user]',
+            'value' => $post_args['user'],
+            'size' => 40)));
 
         $buttons = HTML::p(Button('submit:admin_chown[chown]', $button_label, 'wikiadmin'),
             Button('submit:admin_chown[cancel]', _("Cancel"), 'button'));
@@ -196,15 +191,6 @@ class WikiPlugin_WikiAdminChown
             ENABLE_PAGEPERM
                 ? ''
                 : HiddenInputs(array('require_authority_for_post' => WIKIAUTH_ADMIN)));
-    }
-
-    function chownForm(&$header, $post_args)
-    {
-        $header->pushContent(_("Change owner to: "));
-        $header->pushContent(HTML::input(array('name' => 'admin_chown[user]',
-            'value' => $post_args['user'],
-            'size' => 40)));
-        return $header;
     }
 }
 

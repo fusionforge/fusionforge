@@ -254,6 +254,10 @@ a:focus {
     font-size: 8pt;
 }
 
+img.toolbar:hover {
+    cursor: pointer;
+}
+
 .debug {
     padding: 2px;
     margin-left: 10px;
@@ -317,7 +321,6 @@ div.boxright {
     padding: 0.5em;
     float: right;
     border: thin solid #888888;
-    padding: 0.5em;
 }
 
 /**
@@ -394,3 +397,26 @@ table.boxed th, table.bordered th {
     background-color: #d8d8d8;
 }
 
+table.sortable th.header {
+    background-image: url(../default/buttons/sort_none.gif);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}
+
+table.sortable th.headerSortUp {
+    background-image: url(../default/buttons/sort_up.gif);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}
+
+table.sortable th.headerSortDown {
+    background-image: url(../default/buttons/sort_down.gif);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}

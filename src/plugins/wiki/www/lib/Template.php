@@ -8,6 +8,10 @@ class Template
 {
     /**
      * name optionally of form "theme/template" to include parent templates in children
+     *
+     * @param string $name
+     * @param WikiRequest $request
+     * @param array $args
      */
     function Template($name, &$request, $args = array())
     {
@@ -92,7 +96,7 @@ class Template
 
     private function _print($val)
     {
-        if (isa($val, 'Template')) {
+        if (is_a($val, 'Template')) {
             $this->_expandSubtemplate($val);
         } else {
             PrintXML($val);
@@ -247,8 +251,6 @@ function alreadyTemplateProcessed($name)
  * @param string $title page title
  * @param object|bool $page_revision A WikiDB_PageRevision object or false
  * @param array $args hash Extract args for top-level template
- *
- * @return string HTML expansion of template.
  */
 function GeneratePage($content, $title, $page_revision = false, $args = array())
 {
@@ -271,7 +273,7 @@ function GeneratePage($content, $title, $page_revision = false, $args = array())
  * For dumping pages as html to a file.
  * Used for action=dumphtml,action=ziphtml,format=pdf,format=xml
  */
-function GeneratePageasXML($content, $title, $page_revision = false, $args = array())
+function GeneratePageasXML($content, $title, $page_revision = null, $args = array())
 {
     global $request;
 
@@ -286,7 +288,7 @@ function GeneratePageasXML($content, $title, $page_revision = false, $args = arr
     if (!isset($args['HEADER']))
         $args['HEADER'] = SplitPagename($title);
 
-    global $HIDE_TOOLBARS, $NO_BASEHREF, $WikiTheme;
+    global $HIDE_TOOLBARS, $WikiTheme;
     $HIDE_TOOLBARS = true;
     if (!$WikiTheme->DUMP_MODE)
         $WikiTheme->DUMP_MODE = 'HTML';

@@ -1,5 +1,5 @@
-Date: Tue, 29 Jul 2014 10:42:12 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.0)
+Date: Mon, 29 Jun 2015 12:04:28 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FRateItPlugin;
   flags=PAGE_LOCKED;
@@ -119,9 +119,6 @@ TODO:   <<RateIt show=text>> just text, no widget, for dumps
 
 == See Also ==
 * [[Help:UserRatingsPlugin]]
-
-== To do ==
-* finish mysuggest.c (external engine with data from mysql)
 
 <noinclude>
 ----

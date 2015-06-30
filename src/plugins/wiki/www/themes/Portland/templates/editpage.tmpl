@@ -1,11 +1,3 @@
-<?php /*
- * FIXME: Hack!
- * The funky URL used for the form action parameter is bogus.
- * This is needed, otherwise the redirect to the real browser
- * page won't work with some browsers. (NS4 and Mozilla 0.97 won't accept
- * a redirect from a page to itself.)
- */
-?>
 <form method="post" id="editpage" name="editpage"
       action="<?php echo $request->getPostURL() ?>"
       accept-charset="UTF-8">
@@ -22,7 +14,7 @@
   <td class="align-right">
     <?php echo $PREVIEW_B ?>
     <?php if ($SAVE_B) { ?>
-      <?php echo $SEP?> <?php echo $SAVE_B ?>
+      <?php echo $SEP?><?php echo $SAVE_B ?>
     <?php } ?>
   </td>
 </tr>
@@ -37,15 +29,9 @@
 <?php echo fmt("I'm just doing minor edits. Please divert the usual logging to %s instead.",
         WikiLink(_("RecentEdits"))) ?>
 <br />
-<p>
-  <?php echo _("Edit Area Size")?>: <b><?php echo _("H")?></b> <?php echo $HEIGHT_PREF?> 
-  <b><?php echo _("W")?></b> <?php echo $WIDTH_PREF?>
-  <?php echo Button("submit:", _("Adjust"), 'wikiaction')?>
-</p>
-
 <?php if (isset($PREVIEW_CONTENT)) { ?>
   <hr />
-  <p><strong><?php echo _("Preview only!  Changes not saved.")?></strong></p>
+  <p><strong><?php echo _("Preview only! Changes not saved.")?></strong></p>
   <?php echo $PREVIEW_CONTENT ?>
   <hr />
 <?php } ?>

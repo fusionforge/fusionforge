@@ -25,17 +25,17 @@ $p = $WikiTheme->tooltipAccessKeyPrefix();
   <div class="pBody">
 <?php echo Template("search",
              array('SEARCH_BEFORE' => WikiLink(_("FindPage"), "",_("Find page")),
-		   'SEARCH_AFTER' => HTML::input(array('id' => 'searchGoButton',
-						       'type'=>'submit',
-						       'value'=>_("Go"))))) ?>
+           'SEARCH_AFTER' => HTML::input(array('id' => 'searchGoButton',
+                               'type'=>'submit',
+                               'value'=>_("Go"))))) ?>
 <!-- <form action="<?php echo WikiURL(_("TitleSearch"))?>"
       method="get" accept-charset="UTF-8">
       <?php echo WikiLink(_("FindPage"), "searchButton",_("Search:")) ?>
       <input type="hidden" name="auto_redirect" value="1" />
       <input type="text"  name="s" size="12" maxlength="256"
-	      title='<?php echo _("Quick Search")?>'
-	      onmouseover="window.status='<?php echo _("Quick Search")?>'; return true;"
-	      onmouseout="window.status=''; return true;" />
+          title='<?php echo _("Quick Search")?>'
+          onmouseover="window.status='<?php echo _("Quick Search")?>'; return true;"
+          onmouseout="window.status=''; return true;" />
     </form>
 -->
   </div>
@@ -50,7 +50,7 @@ $p = $WikiTheme->tooltipAccessKeyPrefix();
     <?php } ?>
     <?php $links = $page->getPageLinks(); if ($links->count() > 1) { ?>
       <li id="t-recentchangeslinked"><?php echo $WikiTheme->makeLinkButton($revision,_("Related changes"),_("RelatedChanges")) ?></li>
-    <?php } ?> 
+    <?php } ?>
     <?php if ($user->isAdmin()) { ?>
       <li><?php echo WikiLink(_("PhpWikiAdministration"), "", _("Administration")) ?></li>
     <?php } ?>
@@ -61,7 +61,7 @@ $p = $WikiTheme->tooltipAccessKeyPrefix();
 <script type="text/javascript"><!--
 document.write('<li><?php echo $PrintableLink ?></li>'); // -->
 </script>
-    <?php if (defined('USE_EXTERNAL_HTML2PDF') and USE_EXTERNAL_HTML2PDF) { 
+    <?php if (defined('USE_EXTERNAL_HTML2PDF') and USE_EXTERNAL_HTML2PDF) {
       // Do not display the pdf icon
       $btn = new Button(_("Display as Pdf"), WikiURL($page->getName(), array('action' => 'pdf')), 'wikiaction');
       ?>

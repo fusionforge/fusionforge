@@ -32,7 +32,7 @@ class WikiDB_backend_ADODB_mssqlnative
     {
         // Do nothing here -- Leave that for the DB
         // Cost Based Optimizer tuning vary from version to version
-        return 1;
+        return true;
     }
 
     // Search callabcks
@@ -53,7 +53,7 @@ class WikiDB_backend_ADODB_mssqlnative
             . "OR CHARINDEX(content, '$word') > 0";
     }
 
-    /**
+    /*
      * Serialize data
      */
     function _serialize($data)
@@ -64,7 +64,7 @@ class WikiDB_backend_ADODB_mssqlnative
         return addslashes(serialize($data));
     }
 
-    /**
+    /*
      * Unserialize data
      */
     function _unserialize($data)

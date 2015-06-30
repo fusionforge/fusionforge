@@ -17,8 +17,9 @@ $pref =& $request->_prefs;
 if (!$pref) return;
 $offset = $pref->get('timeOffset');
 $serverTime = $time - $offset * 3600;
-if ( $isForm )
+if ($isForm)
     $timeOffsetInput = HTML::input(array('type' => "text",
+                                         'id' => 'timeOffsetInput',
                                          'size' => 6,
                                          'maxlength' => 6,
                                          'name' => "pref[timeOffset]",
@@ -28,29 +29,35 @@ else
     $timeOffsetInput = $pref->get('timeOffset');
 
 $OwnModificationsCB = HTML::input(array('type' => 'checkbox',
+                                     'id' => 'ownModifications',
                                      'name' => 'pref[ownModifications]',
                                      'value' => '1',
                                      'checked' => (bool) $pref->get('ownModifications')));
 $MajorModificationsOnlyCB = HTML::input(array('type' => 'checkbox',
+                                     'id' => 'majorModificationsOnly',
                                      'name' => 'pref[majorModificationsOnly]',
                                      'value' => '1',
                                      'checked' => (bool) $pref->get('majorModificationsOnly')));
 $RelativeDatesCB = HTML::input(array('type' => 'checkbox',
+                                     'id' => 'relativeDates',
                                      'name' => 'pref[relativeDates]',
                                      'value' => '1',
                                      'checked' => (bool) $pref->get('relativeDates')));
 $NoLinkIconsCB = HTML::input(array('type' => 'checkbox',
-                                   'name' => 'pref[noLinkIcons]',
-                                   'value' => '1',
-                                   'checked' => (bool) $pref->get('noLinkIcons')));
+                                     'id' => 'noLinkIcons',
+                                     'name' => 'pref[noLinkIcons]',
+                                     'value' => '1',
+                                     'checked' => (bool) $pref->get('noLinkIcons')));
 $GoogleLinkCB = HTML::input(array('type' => 'checkbox',
-                                  'name' => 'pref[googleLink]',
-                                  'value' => '1',
-                                  'checked' => (bool) $pref->get('googleLink')));
+                                     'id' => 'googleLink',
+                                     'name' => 'pref[googleLink]',
+                                     'value' => '1',
+                                     'checked' => (bool) $pref->get('googleLink')));
 $DoubleClickCB = HTML::input(array('type' => 'checkbox',
-                                  'name' => 'pref[doubleClickEdit]',
-                                  'value' => '1',
-                                  'checked' => (bool) $pref->get('doubleClickEdit')));
+                                     'id' => 'doubleClickEdit',
+                                     'name' => 'pref[doubleClickEdit]',
+                                     'value' => '1',
+                                     'checked' => (bool) $pref->get('doubleClickEdit')));
 if (!function_exists('selectedOption')) {
   function selectedOption ($value, $label = false) {
     return HTML::option(array('value' => $value,'selected'=>"selected"), ($label ? $label : $value) . "\n");
@@ -119,18 +126,18 @@ if ($isForm) {
 <?php echo fmt("User preferences for user %s", WikiLink($user->UserName())) ?>
 
 <?php if ($isForm) { ?>
-<form action="<?php echo $request->getPostURL()?>" method="post">
+<form action="<?php echo $request->getPostURL() ?>" method="post">
 <?php } else {
   $fill = "&nbsp;";
   // See also plugin DebugAuthInfo
-  $authmethod = ENABLE_USER_NEW ? @$user->_authmethod : @$user->auth_how;
+  $authmethod = @$user->_authmethod;
 ?>
 <?php echo HTML::pre(sprintf("%12s: [% 10s]  %s\n",_("UserId"),$pref->get('userid'), " from " . $authmethod),
           sprintf("%12s: [% 10s]  %16s: [% 10s] | %8s: [%2s]\n","getId",$user->getId(),"getAuthenticatedId",$user->getAuthenticatedId(),"isSignedIn", $user->isSignedIn()),
           //sprintf("%12s: [% 10s]\n",_("Password"),empty($pref->get('passwd')) ? _("<empty>") : _("<not empty>")),
           sprintf("%12s: [% 10s]  %15s: [% 8s]\n",
               _("Auth Level"),$user->_level,_("Auth Method"),$authmethod),
-          sprintf("%12s: [% 10s]\n",_("HomePage"),$user->hasHomePage() ? (ENABLE_USER_NEW ? $user->_HomePagehandle->_pagename : $user->_homepage->_pagename ) : ''),
+          sprintf("%12s: [% 10s]\n",_("HomePage"),$user->hasHomePage() ? $user->_HomePagehandle->_pagename : ''),
           sprintf("%12s: [% 10s]\n",_("E-mail"),$pref->get('email')),
           //sprintf("%12s: [% 10s]\n",_("Notify"),$pref->get('notifyPages')),
           sprintf("%12s: [% 10s] %16s: [% 10s] \n",_("Theme"), $pref->get('theme'), _("Current theme"),$WikiTheme->_name),
@@ -150,14 +157,17 @@ if ($isForm) {
         <td></td></tr>
 <?php } ?>
 
-<?php if (ENABLE_USER_NEW) { ?>
   <tr><td colspan="2"><h2><?php echo _("E-mail")?></h2></td></tr>
 
   <tr><td>
   <p>
+  <?php if ($isForm) { ?>
+  <label for="email">
+  <?php } ?>
   <?php echo _("Your e-mail"). _(": ")?>
   <?php if ($isForm) { ?>
-     <input type="text" name="pref[email]" size="30" maxlength="60"
+  </label>
+     <input id="email" type="text" name="pref[email]" size="30" maxlength="60"
         value="<?php echo $pref->get('email')?>" />
   <?php } else { ?>
      '<?php echo $pref->get('email') ?>'
@@ -174,15 +184,19 @@ if ($isForm) {
   </td><td><p class="hint"><?php echo _("Note, that user accounts with bouncing e-mails will be disabled.")?></p></td></tr>
 
   <tr><td colspan="2">
-    <?php echo _("Get an e-mail notification at changes of the following pages:")?>
+    <?php echo _("Get an e-mail notification at changes of the following pages:") ?>
   </td></tr>
 
   <tr>
     <?php if ($isForm) { ?>
-      <td><textarea name="pref[notifyPages]" cols="40" rows="6"><?php echo $pref->get('notifyPages')?></textarea></td>
-    <td><p class="hint"><?php echo _("Enter pages separated by space or comma. Wildcards (fileglobbing) allowed.")?></p></td>
+      <td>
+        <label for="notifyPages">
+        <textarea id="notifyPages" name="pref[notifyPages]" cols="40" rows="6"><?php echo $pref->get('notifyPages') ?></textarea>
+        </label>
+      </td>
+      <td><p class="hint"><?php echo _("Enter pages separated by space or comma. Wildcards (fileglobbing) allowed.") ?></p></td>
     <?php } else { ?>
-     <td><?php echo $pref->get('notifyPages')?></td>
+      <td colspan="2"><?php echo $pref->get('notifyPages') ?></td>
     <?php } ?>
   </tr>
 
@@ -190,11 +204,13 @@ if ($isForm) {
       <td>
          <p class="nowrap">
              <?php echo $OwnModificationsCB ?>
-             <?php echo _("Do not send my own modifications")?>
+             <label for="ownModifications">
+             <?php echo _("Do not send my own modifications") ?>
+             </label>
          </p>
       </td>
       <td>
-         <p class="hint"><?php echo _("Check if you do not want to be notified of your own modifications.")?></p>
+         <p class="hint"><?php echo _("Check if you do not want to be notified of your own modifications.") ?></p>
       </td>
   </tr>
 
@@ -202,88 +218,133 @@ if ($isForm) {
       <td>
          <p class="nowrap">
              <?php echo $MajorModificationsOnlyCB ?>
-             <?php echo _("Do not send minor modifications")?>
+             <label for="majorModificationsOnly">
+             <?php echo _("Do not send minor modifications") ?>
+             </label>
          </p>
       </td>
       <td>
-         <p class="hint"><?php echo _("Check if you do not want to be notified of minor modifications.")?></p>
+         <p class="hint"><?php echo _("Check if you do not want to be notified of minor modifications.") ?></p>
       </td>
   </tr>
 
-<?php } ?>
-
-  <tr><td colspan="2"><h2><?php echo _("Appearance")?></h2></td></tr>
+  <tr><td colspan="2"><h2><?php echo _("Appearance") ?></h2></td></tr>
 
   <tr><td colspan="2"><?php echo _("Here you can override site-specific default values.") ?></td></tr>
-  <?php /* Alternatively this could be done with <fieldset> and <legend>. */ ?>
-      <tr><td>
-          <?php echo $SelectThemesDesc?>
+      <tr>
+          <td>
+          <?php if ($isForm) { ?>
+          <label for="theme">
+          <?php } ?>
+          <?php echo $SelectThemesDesc ?>
+          <?php if ($isForm) { ?>
+          </label>
+          <?php } ?>
           <?php echo $SelectThemes ?>
           </td>
-          <td><p class="hint"><?php echo _("System default:")?> <?php echo THEME ?></p></td></tr>
-      <tr><td>
-          <?php echo $SelectLanguagesDesc?>
+          <td><p class="hint"><?php echo _("System default:") ?> <?php echo THEME ?></p></td></tr>
+      <tr>
+          <td>
+          <?php if ($isForm) { ?>
+          <label for="lang">
+          <?php } ?>
+          <?php echo $SelectLanguagesDesc ?>
+          <?php if ($isForm) { ?>
+          </label>
+          <?php } ?>
           <?php echo $SelectLanguages ?>
           </td>
-      <td><p class="hint"><?php echo _("System default:")?> <?php echo DEFAULT_LANGUAGE ?></p></td></tr>
-      <tr><td>
-          <?php echo $NoLinkIconsCB?>
-          <?php echo fmt("Hide %s", WikiLink("Help:LinkIcons"))?>
+      <td><p class="hint"><?php echo _("System default:") ?> <?php echo DEFAULT_LANGUAGE ?></p></td></tr>
+      <tr>
+          <td>
+             <p class="nowrap">
+               <?php echo $NoLinkIconsCB ?>
+               <label for="noLinkIcons">
+               <?php echo fmt("Hide %s", WikiLink("Help:LinkIcons")) ?>
+               </label>
+             </p>
           </td>
           <td><p class="hint"><?php echo _("Hide or show LinkIcons (if supported by the current theme). Useful for text-only browsers or slow connections.")?></p></td></tr>
-      <tr><td>
-          <?php echo $GoogleLinkCB?>
-          <?php echo fmt("Add %s", WikiLink("Help:GoogleLink"))?>
+      <tr>
+          <td>
+             <p class="nowrap">
+               <?php echo $GoogleLinkCB ?>
+               <label for="googleLink">
+               <?php echo fmt("Add %s", WikiLink("Help:GoogleLink")) ?>
+               </label>
+             </p>
           </td>
-          <td><p class="hint"><?php echo fmt("Add Google links to unknown pages behind the '?', and the create action behind the pagename instead. See %s.", WikiLink("MeatBall:GooglePrompt"))?></p></td></tr>
-      <tr><td>
+          <td><p class="hint"><?php echo fmt("Add Google links to unknown pages behind the '?', and the create action behind the pagename instead. See %s.", WikiLink("MeatBall:GooglePrompt")) ?></p></td>
+      </tr>
+      <tr>
+          <td>
           <?php echo $DoubleClickCB?>
-          <?php echo fmt("Enable DoubleClick Edit")?>
+          <label for="doubleClickEdit">
+          <?php echo fmt("Enable DoubleClick Edit") ?>
+          </label>
           </td>
-  <td><p class="hint"><?php echo fmt("Enabled makes it hard to double-click words and sentences for cut and paste. See %s.", WikiLink("PhpWiki:DoubleClickToEditPage"))?></p></td></tr>
+          <td><p class="hint"><?php echo _("Enabled makes it hard to double-click words and sentences for cut and paste.") ?></p>
+          </td>
+      </tr>
 
-  <tr><td colspan="2"><h2><?php echo _("Edit Area Size")?></h2></td></tr>
+  <tr><td colspan="2"><h2><?php echo _("Edit Area Size") ?></h2></td></tr>
 
   <tr><td>
-    <?php echo _("Height") . _(":")?>
     <?php if ($isForm) { ?>
-     <input type="text" name="pref[editHeight]" size="4" maxlength="4" class="numeric"
-            value="<?php echo $pref->get('editHeight')?>" />
-    <?php } else { ?>
-      <?php echo $pref->get('editHeight')?>
+    <label for="height">
     <?php } ?>
-    <?php echo _("Width") . _(":")?>
+    <?php echo _("Height") . _(":") ?>
     <?php if ($isForm) { ?>
-     <input type="text" name="pref[editWidth]" size="4" maxlength="4" class="numeric"
-            value="<?php echo $pref->get('editWidth')?>" />
+    </label>
+     <input id="height" type="text" name="pref[editHeight]" size="4" maxlength="4" class="numeric"
+            value="<?php echo $pref->get('editHeight') ?>" />
     <?php } else { ?>
-      <?php echo $pref->get('editWidth')?>
+      <?php echo $pref->get('editHeight') ?>
+    <?php } ?>
+    <?php if ($isForm) { ?>
+    <label for="width">
+    <?php } ?>
+    <?php echo _("Width") . _(":") ?>
+    <?php if ($isForm) { ?>
+    </label>
+     <input id="width" type="text" name="pref[editWidth]" size="4" maxlength="4" class="numeric"
+            value="<?php echo $pref->get('editWidth') ?>" />
+    <?php } else { ?>
+      <?php echo $pref->get('editWidth') ?>
     <?php } ?>
     </td>
     <td><p class="hint">
-      <?php echo _("Note that many browsers will automatically adjust the width of the editing area so that it fills the browser window.  In this case, the width preference will be ignored.")?></p>
+      <?php echo _("Note that many browsers will automatically adjust the width of the editing area so that it fills the browser window.  In this case, the width preference will be ignored.") ?></p>
     </td></tr>
 
   <tr><td colspan="2"><h2><?php echo _("Time Zone")?></h2></td></tr>
 
-  <tr><td><p>
-    <?php echo fmt("Add %s hours to the server's local time when reporting times.",
-           $timeOffsetInput)?>
-  </p></td><td>
-  <p class="hint">
-    <?php echo fmt("The current time at the server is %s.",
-            HTML::strong($WikiTheme->formatDateTime($serverTime)))?>
-    <?php echo fmt("With the current offset, this would be reported as %s.",
-           HTML::strong($WikiTheme->formatDateTime($time)))?>
-  </p>
-  </td></tr>
+  <tr>
+    <td>
+      <p>
+        <label for="timeOffsetInput">
+        <?php echo fmt("Add %s hours to the server's local time when reporting times.", $timeOffsetInput) ?>
+        </label>
+      </p>
+    </td>
+    <td>
+      <p class="hint">
+        <?php echo fmt("The current time at the server is %s.",
+                HTML::strong($WikiTheme->formatDateTime($serverTime))) ?>
+        <?php echo fmt("With the current offset, this would be reported as %s.",
+               HTML::strong($WikiTheme->formatDateTime($time))) ?>
+      </p>
+    </td>
+  </tr>
 
-  <tr><td colspan="2"><h2><?php echo _("Date Format")?></h2></td></tr>
+  <tr><td colspan="2"><h2><?php echo _("Date Format") ?></h2></td></tr>
 
   <tr><td colspan="2">
     <p>
       <?php echo $RelativeDatesCB ?>
-      <?php echo _("Show relative dates using 'Today' and 'Yesterday'")?>
+      <label for="relativeDates">
+      <?php echo _("Show relative dates using “Today” and “Yesterday”") ?>
+      </label>
     </p>
   </td></tr>
 </table>
@@ -291,9 +352,9 @@ if ($isForm) {
 <?php if ($isForm) { ?>
 <hr />
 <p>
-  <?php echo Button("submit:", _("Update Preferences"), 'wikiadmin')?>
-  <?php echo Button("submit:delete", _("Reset Preferences"), 'wikiadmin')?>
-  <?php echo Button("submit:cancel", _("Cancel"), 'button')?>
+  <?php echo Button("submit:", _("Update Preferences"), 'wikiadmin') ?>
+  <?php echo Button("submit:delete", _("Reset Preferences"), 'wikiadmin') ?>
+  <?php echo Button("submit:cancel", _("Cancel"), 'button') ?>
   <?php echo HiddenInputs($request->getArgs(), false, array('pref')) ?>
 </p>
 </form>

@@ -27,7 +27,7 @@ class _PdoDbPassUser
     /**
      * PDO DB methods (PHP5)
      *   prepare, bind, execute.
-     * We use numrical FETCH_MODE_ROW, so we don't need aliases in the auth_* SQL statements.
+     * We use numerical FETCH_MODE_ROW, so we don't need aliases in the auth_* SQL statements.
      *
      * @tables: user
      * @tables: pref
@@ -37,8 +37,12 @@ class _PdoDbPassUser
 
     function _PdoDbPassUser($UserName = '', $prefs = false)
     {
+        /**
+         * @var WikiRequest $request
+         */
+        global $request;
 
-        if (!$this->_prefs and isa($this, "_PdoDbPassUser")) {
+        if (!$this->_prefs and is_a($this, "_PdoDbPassUser")) {
             if ($prefs) $this->_prefs = $prefs;
         }
         if (!isset($this->_prefs->_method))
@@ -50,7 +54,7 @@ class _PdoDbPassUser
         $this->_userid = $UserName;
         // make use of session data. generally we only initialize this every time,
         // but do auth checks only once
-        $this->_auth_crypt_method = $GLOBALS['request']->_dbi->getAuthParam('auth_crypt_method');
+        $this->_auth_crypt_method = $request->_dbi->getAuthParam('auth_crypt_method');
         return $this;
     }
 
@@ -114,6 +118,11 @@ class _PdoDbPassUser
 
     function userExists()
     {
+        /**
+         * @var WikiRequest $request
+         */
+        global $request;
+
         $this->getAuthDbh();
         $dbh = &$this->_auth_dbi;
         if (!$dbh) { // needed?
@@ -123,7 +132,7 @@ class _PdoDbPassUser
             trigger_error(_("Invalid username."), E_USER_WARNING);
             return $this->_tryNextUser();
         }
-        $dbi =& $GLOBALS['request']->_dbi;
+        $dbi =& $request->_dbi;
         if ($dbi->getAuthParam('auth_check') and empty($this->_authselect)) {
             try {
                 $this->_authselect = $dbh->prepare($dbi->getAuthParam('auth_check'));
@@ -246,17 +255,27 @@ class _PdoDbPassUser
 
     function mayChangePass()
     {
-        return $GLOBALS['request']->_dbi->getAuthParam('auth_update');
+        /**
+         * @var WikiRequest $request
+         */
+        global $request;
+
+        return $request->_dbi->getAuthParam('auth_update');
     }
 
     function storePass($submitted_password)
     {
+        /**
+         * @var WikiRequest $request
+         */
+        global $request;
+
         if (!$this->isValidName()) {
             return false;
         }
         $this->getAuthDbh();
         $dbh = &$this->_auth_dbi;
-        $dbi =& $GLOBALS['request']->_dbi;
+        $dbi =& $request->_dbi;
         if ($dbi->getAuthParam('auth_update') and empty($this->_authupdate)) {
             try {
                 $this->_authupdate = $dbh->prepare($dbi->getAuthParam('auth_update'));
@@ -273,8 +292,7 @@ class _PdoDbPassUser
         }
 
         if ($this->_auth_crypt_method == 'crypt') {
-            if (function_exists('crypt'))
-                $submitted_password = crypt($submitted_password);
+            $submitted_password = crypt($submitted_password);
         }
         try {
             $this->_authupdate->bindParam("password", $submitted_password, PDO::PARAM_STR, 48);

@@ -41,13 +41,20 @@ class WikiPlugin_WikiAdminSearchReplace
     {
         return array_merge
         (
-            WikiPlugin_WikiAdminSelect::getDefaultArguments(),
+            parent::getDefaultArguments(),
             array(
                 /* Columns to include in listing */
                 'info' => 'some',
             ));
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         // no action=replace support yet
@@ -109,21 +116,24 @@ class WikiPlugin_WikiAdminSearchReplace
         } else {
            $columns = array_merge($args,
                                   // with highlighted search for SearchReplace
-                                  array('types' => array('hi_content' 
+                                  array('types' => array('hi_content'
                     => new _PageList_Column_content('rev:hi_content', _("Content")))));
         }
-        $pagelist = new PageList_Selectable($args['info'], $args['exclude'], $columns);
-        $pagelist->addPageList($pages);
 
         $header = HTML::fieldset();
         $header->pushContent(HTML::legend(_("Select the pages to search and replace")));
         if ($next_action == 'verify') {
+            $args['info'] = "pagename,mtime,author";
+            $pagelist = new PageList_Selectable($args['info'], $args['exclude'], $columns);
+            $pagelist->addPageList($pages);
             $button_label = _("Replace");
             $header->pushContent(
                 HTML::p(HTML::strong(
                     _("Are you sure you want to replace text in the selected files?"))));
             $this->replaceForm($header, $post_args);
         } else {
+            $pagelist = new PageList_Selectable($args['info'], $args['exclude'], $columns);
+            $pagelist->addPageList($pages);
             $button_label = _("Search");
             $this->replaceForm($header, $post_args);
         }
@@ -146,7 +156,7 @@ class WikiPlugin_WikiAdminSearchReplace
         return $result;
     }
 
-    private function replaceHelper(&$dbi, &$request, $pagename, $from, $to, $case_exact = true, $regex = false)
+    public static function replaceHelper(&$dbi, &$request, $pagename, $from, $to, $case_exact = true, $regex = false)
     {
         $page = $dbi->getPage($pagename);
         if ($page->exists()) { // don't replace default contents

@@ -13,7 +13,7 @@
 </div>
 </td><td>
 <span class="debug"><?php echo fmt("Page Execution took %s seconds", $RUNTIMER->getStats())?>
-<?php $mem = @getMemoryUsage(); if ($mem) { ?>
+<?php $mem = @memory_get_usage(); if ($mem) { ?>
   <?php echo fmt(", Memory: %s", $mem) ?>
 <?php } ?>
 </span>

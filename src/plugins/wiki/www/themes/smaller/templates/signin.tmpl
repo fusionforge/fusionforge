@@ -8,13 +8,13 @@ else
   <form style="display:inline" method="post" action="<?php echo $request->getPostURL() ?>" accept-charset="UTF-8" name="<?php echo $FORMNAME?>">
   <?php echo HiddenInputs($request->getArgs(), false, array('auth')) ?>
 <?php } ?>
-<?php 
+<?php
 if ($user->isAuthenticated()) {
     $Sep = $WikiTheme->getButtonSeparator();
     $SignOutB = $WikiTheme->makeButton(_("Sign Out"), "javascript:SignOut();", 'wikiaction');
     // fails on gecko!
     $SignOutJS = JavaScript('    document.write(\'<input type="hidden" name="auth[logout]" value="0" />\');
-    function SignOut() { 
+    function SignOut() {
       var form = document.forms["'.$FORMNAME.'"];
       form.elements["auth[logout]"].value = 1;
       form.submit();
@@ -25,10 +25,10 @@ if ($user->isAuthenticated()) {
   <noscript><?php echo Button("submit:auth[logout]", _("Sign Out"), 'wikiaction') ?></noscript>
 <?php } else {
     $SignInInput = HTML::input(array('type' => 'text',
-				     'name' => "auth[userid]",
-				     'size' => 12,
-				     'maxlength' => 256,
-				     'onchange' => "SignIn(this.form,false);"));
+                     'name' => "auth[userid]",
+                     'size' => 12,
+                     'maxlength' => 256,
+                     'onchange' => "SignIn(this.form,false);"));
     if ($user->isSignedIn()) { // cookie
         $SignInInput->setAttr('value', $user->getId());
     }

@@ -66,7 +66,7 @@ To upgrade not-existing pages add "?action=upgrade" to
 your HomePage url and press "Enter", which will
 add all fresh pages from pgsrc to your pageset.
 If you deleted some pages on purpose, you'll have to removed 
-them again with PhpWikiAdminisstration/Remove then.
+them again with PhpWikiAdministration/Remove then.
 
 There's no smart "Merge Diffs" yet to upgrade existing docs,
 this will come with the next release. Also upgrading the

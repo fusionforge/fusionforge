@@ -211,12 +211,17 @@ class WikiPlugin_TeX2png
         return $html;
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         // from text2png.php
-        if ((function_exists('ImageTypes') and (ImageTypes() & IMG_PNG))
-            or function_exists("ImagePNG")
-        ) {
+        if (ImageTypes() & IMG_PNG) {
             // we have gd & png so go ahead.
             extract($this->getArgs($argstr, $request));
             return $this->tex2png($text);

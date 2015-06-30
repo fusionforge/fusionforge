@@ -1,4 +1,4 @@
-<?php 
+<?php
 if (empty($revision)) $revision = $page->getCurrentRevision(false);
 if ($page->get('locked') && !$user->isAdmin()) { ?>
   <p class="warning_msg"><strong><?php echo _("Note:")?></strong>
@@ -12,7 +12,7 @@ if ($page->get('locked') && !$user->isAdmin()) { ?>
 <?php } ?>
 <br class="clear-floats" />
 <textarea class="wikiedit"
-          name="content" 
+          name="content"
           rows="<?php echo $request->getPref('editHeight')?>"
           cols="<?php echo $request->getPref('editWidth')?>"
           readonly="readonly"

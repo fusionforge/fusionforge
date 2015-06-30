@@ -182,9 +182,7 @@ div#column-one,
 .toctoggle,
 div#f-poweredbyico,
 div#f-copyrightico,
-li#f-viewcount,
-li#f-about,
-li#f-disclaimer,
+ul#f-list,
 div#xhtml-validator,
 li#pt-logout,
 li#pt-login,
@@ -210,7 +208,7 @@ ul {
 }
 
 #footer {
-    border: 1px solid black;
+    border: none;
 }
 
 h1, h2, h3, h4, h5, h6 {

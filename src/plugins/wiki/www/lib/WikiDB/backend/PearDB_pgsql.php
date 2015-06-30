@@ -5,7 +5,6 @@ require_once 'lib/WikiDB/backend/PearDB.php';
 
 if (!defined("USE_BYTEA")) // see schemas/psql-initialize.sql
     define("USE_BYTEA", true);
-//define("USE_BYTEA", false);
 
 /*
 Since 1.3.12 changed to use:
@@ -17,46 +16,20 @@ Since 1.3.12 changed to use:
 class WikiDB_backend_PearDB_pgsql
     extends WikiDB_backend_PearDB
 {
-    function __construct($dbparams)
-    {
-        // The pgsql handler of (at least my version of) the PEAR::DB
-        // library generates three warnings when a database is opened:
-        //
-        //     Undefined index: options
-        //     Undefined index: tty
-        //     Undefined index: port
-        //
-        // This stuff is all just to catch and ignore these warnings,
-        // so that they don't get reported to the user.  (They are
-        // not consequential.)
-
-        global $ErrorManager;
-        $ErrorManager->pushErrorHandler(new WikiMethodCb($this, '_pgsql_open_error'));
-        parent::__construct($dbparams);
-        $ErrorManager->popErrorHandler();
-    }
-
-    function _pgsql_open_error($error)
-    {
-        if (preg_match('/^Undefined\s+index:\s+(options|tty|port)/',
-            $error->errstr)
-        )
-            return true; // Ignore error
-        return false;
-    }
-
     /**
      * Pack tables.
      * NOTE: Only the table owner can do this. Either fix the schema or setup autovacuum.
      */
     function optimize()
     {
-        return 0; // if the wikiuser is not the table owner
+        return true; // if the wikiuser is not the table owner
 
+        /*
         foreach ($this->_table_names as $table) {
             $this->_dbh->query("VACUUM ANALYZE $table");
         }
         return 1;
+        */
     }
 
     function _quote($s)
@@ -95,101 +68,36 @@ class WikiDB_backend_PearDB_pgsql
         $dbh = &$this->_dbh;
         $page_tbl = $this->_table_names['page_tbl'];
         if (USE_BYTEA)
-            $sth = $dbh->query(sprintf("UPDATE $page_tbl"
+            $dbh->query(sprintf("UPDATE $page_tbl"
                     . " SET cached_html='%s'"
                     . " WHERE pagename='%s'",
                 $this->_quote($data),
                 $dbh->escapeSimple($pagename)));
         else
-            $sth = $dbh->query("UPDATE $page_tbl"
+            $dbh->query("UPDATE $page_tbl"
                     . " SET cached_html=?"
                     . " WHERE pagename=?",
                 // PearDB does NOT use pg_escape_string()! Oh dear.
                 array($this->_quote($data), $pagename));
     }
 
-    /**
-     * Create a new revision of a page.
-     */
-    function _todo_set_versiondata($pagename, $version, $data)
-    {
-        $dbh = &$this->_dbh;
-        $version_tbl = $this->_table_names['version_tbl'];
-
-        $minor_edit = (int)!empty($data['is_minor_edit']);
-        unset($data['is_minor_edit']);
-
-        $mtime = (int)$data['mtime'];
-        unset($data['mtime']);
-        assert(!empty($mtime));
-
-        @$content = (string)$data['%content'];
-        unset($data['%content']);
-        unset($data['%pagedata']);
-
-        $this->lock();
-        $id = $this->_get_pageid($pagename, true);
-        $dbh->query(sprintf("DELETE FROM version WHERE id=%d AND version=%d", $id, $version));
-        $dbh->query(sprintf("INSERT INTO version (id,version,mtime,minor_edit,content,versiondata)" .
-                " VALUES (%d, %d, %d, %d, '%s', '%s')",
-            $id, $version, $mtime, $minor_edit,
-            $this->_quote($content),
-            $this->_serialize($data)));
-        // TODO: This function does not work yet
-        $dbh->query(sprintf("SELECT update_recent (%d, %d)", $id, $version));
-        $this->unlock();
-    }
-
-    /**
-     * Delete an old revision of a page.
-     */
-    function _todo_delete_versiondata($pagename, $version)
-    {
-        $dbh = &$this->_dbh;
-        // TODO: This function was removed
-        $dbh->query(sprintf("SELECT delete_versiondata (%d, %d)", $id, $version));
-    }
-
-    /**
-     * Rename page in the database.
-     */
-    function _todo_rename_page($pagename, $to)
-    {
-        $dbh = &$this->_dbh;
-        extract($this->_table_names);
-
-        $this->lock();
-        if (($id = $this->_get_pageid($pagename, false))) {
-            if ($new = $this->_get_pageid($to, false)) {
-                // Cludge Alert!
-                // This page does not exist (already verified before), but exists in the page table.
-                // So we delete this page in one step.
-                $dbh->query("SELECT prepare_rename_page($id, $new)");
-            }
-            $dbh->query(sprintf("UPDATE $page_tbl SET pagename='%s' WHERE id=$id",
-                $dbh->escapeSimple($to)));
-        }
-        $this->unlock();
-        return $id;
-    }
-
-    /**
+    /*
      * Lock all tables we might use.
      */
-    function _lock_tables($write_lock = true)
+    protected function _lock_tables($write_lock = true)
     {
         $this->_dbh->query("BEGIN");
     }
 
-    /**
+    /*
      * Unlock all tables.
      */
-    function _unlock_tables()
+    protected function _unlock_tables()
     {
         $this->_dbh->query("COMMIT");
     }
 
-    /**
+    /*
      * Serialize data
      */
     function _serialize($data)
@@ -200,7 +108,7 @@ class WikiDB_backend_PearDB_pgsql
         return $this->_quote(serialize($data));
     }
 
-    /**
+    /*
      * Unserialize data
      */
     function _unserialize($data)
@@ -214,11 +122,11 @@ class WikiDB_backend_PearDB_pgsql
         return unserialize($this->_unquote($data));
     }
 
-    /**
-     * Title search.
+    /*
+     * Text search (title or full text)
      */
-    function text_search($search, $fulltext = false, $sortby = '', $limit = '',
-                         $exclude = '')
+    public function text_search($search, $fulltext = false,
+                                $sortby = '', $limit = '', $exclude = '')
     {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
@@ -254,7 +162,6 @@ class WikiDB_backend_PearDB_pgsql
             $callback = new WikiMethodCb($searchobj, "_pagename_match_clause");
             $search_clause = $search->makeSqlClauseObj($callback);
         }
-
         $sql = "SELECT $fields FROM $table"
             . " WHERE $join_clause"
             . "  AND ($search_clause)"
@@ -291,37 +198,19 @@ class WikiDB_backend_PearDB_pgsql_search
     }
 
     /*
-     most used words:
-select * from stat('select idxfti from version') order by ndoc desc, nentry desc, word limit 10;
-      word       | ndoc | nentry
------------------+------+--------
- plugin          |  112 |    418
- page            |   85 |    446
- phpwikidocument |   62 |     62
- use             |   48 |    169
- help            |   46 |     96
- wiki            |   44 |    102
- name            |   43 |    131
- phpwiki         |   42 |    173
- see             |   42 |     69
- default         |   39 |    124
-    */
-
-    /**
      * use tsearch2. See schemas/psql-tsearch2.sql and /usr/share/postgresql/contrib/tsearch2.sql
      * TODO: don't parse the words into nodes. rather replace "[ +]" with & and "-" with "!" and " or " with "|"
      * tsearch2 query language: @@ "word | word", "word & word", ! word
      * ~* '.*something that does not exist.*'
+     *
+     * phrase search for "history lesson":
+     *
+     * SELECT id FROM tab WHERE ts_idx_col @@ to_tsquery('history&lesson')
+     * AND text_col ~* '.*history\\s+lesson.*';
+     *
+     * The full-text index will still be used, and the regex will be used to
+     * prune the results afterwards.
      */
-    /*
-     phrase search for "history lesson":
-
-     SELECT id FROM tab WHERE ts_idx_col @@ to_tsquery('history&lesson')
-     AND text_col ~* '.*history\\s+lesson.*';
-
-     The full-text index will still be used, and the regex will be used to
-     prune the results afterwards.
-    */
     function _fulltext_match_clause($node)
     {
         $word = strtolower($node->word);
@@ -329,7 +218,7 @@ select * from stat('select idxfti from version') order by ndoc desc, nentry desc
         return $word;
 
         // clause specified above.
-        return $this->_pagename_match_clause($node) . " OR idxFTI @@ to_tsquery('$word')";
+        // return $this->_pagename_match_clause($node) . " OR idxFTI @@ to_tsquery('$word')";
     }
 }
 

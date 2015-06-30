@@ -38,6 +38,13 @@ class WikiPlugin_PluginManager
         return array('info' => 'args');
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         extract($this->getArgs($argstr, $request));
@@ -119,7 +126,7 @@ class WikiPlugin_PluginManager
             // make a link if an actionpage exists
             $pluginNamelink = $pluginName;
             $pluginDocPageName = "Help" . "/" . $pluginName . "Plugin";
-            if (defined('FUSIONFORGE') and FUSIONFORGE) {
+            if (defined('FUSIONFORGE') && FUSIONFORGE) {
                 $pluginDocPageName = "Help" . ":" . $pluginName . "Plugin";
             }
 
@@ -147,7 +154,7 @@ class WikiPlugin_PluginManager
                     $pluginDocPageNamelink = WikiLink($pluginDocPageName, 'if_known');
             }
 
-            if (defined('FUSIONFORGE') and FUSIONFORGE) {
+            if (defined('FUSIONFORGE') && FUSIONFORGE) {
                 $pluginDocPageNamelink = WikiLink($pluginDocPageName, 'known');
             }
 

@@ -58,14 +58,21 @@ class WikiPlugin_ListPages
     //   numbacklinks  : number of backlinks (links to the given page)
     //   numpagelinks  : number of forward links (links at the given page)
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         $args = $this->getArgs($argstr, $request);
 
         extract($args);
         // If the ratings table does not exist, or on dba it will break otherwise.
-        // Check if WikiTheme isa 'wikilens'
-        if ($info == 'pagename' and isa($GLOBALS['WikiTheme'], 'wikilens'))
+        // Check if WikiTheme is_a 'wikilens'
+        if ($info == 'pagename' and is_a($GLOBALS['WikiTheme'], 'wikilens'))
             $info .= ",top3recs";
         if ($info)
             $info = explode(',', $info);
@@ -136,7 +143,7 @@ class _PageList_Column_ListPages_count extends _PageList_Column
         return $this->_PageList_Column($field, $display, 'center');
     }
 
-    function _getValue($page, &$revision_handle)
+    function _getValue($page, $revision_handle)
     {
         $iter = $page->getLinks($this->_direction);
         $count = $iter->count();

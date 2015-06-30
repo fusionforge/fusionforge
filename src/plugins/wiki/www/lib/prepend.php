@@ -5,32 +5,8 @@
  */
 
 // see lib/stdlib.php: phpwiki_version()
-define('PHPWIKI_VERSION', '1.5.0');
+define('PHPWIKI_VERSION', '1.5.4');
 
-/**
- * Returns true if current php version is at mimimum a.b.c
- * Called: check_php_version(5,2)
- */
-function check_php_version($a = '0', $b = '0', $c = '0')
-{
-    static $PHP_VERSION;
-    if (!isset($PHP_VERSION))
-        $PHP_VERSION = substr(str_pad(preg_replace('/\D/', '', PHP_VERSION), 3, '0'), 0, 3);
-    return ($PHP_VERSION >= ($a . $b . $c));
-}
-
-/** PHP5 deprecated old-style globals if !(bool)ini_get('register_long_arrays').
- *  See Bug #1180115
- * We want to work with those old ones instead of the new superglobals,
- * for easier coding.
- */
-/*
-foreach (array('SERVER','REQUEST','GET','POST','SESSION','ENV','COOKIE') as $k) {
-    if (!isset($GLOBALS['HTTP_'.$k.'_VARS']) and isset($GLOBALS['_'.$k])) {
-        $GLOBALS['HTTP_'.$k.'_VARS'] =& $GLOBALS['_'.$k];
-    }
-}
-*/
 // A new php-5.1.x feature: Turn off php-5.1.x auto_globals_jit = On, or use this mess below.
 if (empty($GLOBALS['HTTP_SERVER_VARS'])) {
     $GLOBALS['HTTP_SERVER_VARS'] =& $_SERVER;
@@ -65,14 +41,6 @@ if (defined('DEBUG') and (DEBUG & 8) and extension_loaded("xdebug")) {
 }
 if (defined('DEBUG') and (DEBUG & 32) and extension_loaded("apd")) {
     apd_set_pprof_trace();
-    /*    FUNCTION_TRACE      1
-        ARGS_TRACE          2
-        ASSIGNMENT_TRACE    4
-        STATEMENT_TRACE     8
-        MEMORY_TRACE        16
-        TIMING_TRACE        32
-        SUMMARY_TRACE       64 */
-    //apd_set_session_trace(99);
 }
 
 // Used for debugging purposes
@@ -81,22 +49,27 @@ class DebugTimer
     function DebugTimer()
     {
         $this->_start = $this->microtime();
-        if (function_exists('posix_times'))
+        // Function 'posix_times' does not exist on Windows
+        if (function_exists('posix_times')) {
             $this->_times = posix_times();
+        }
     }
 
     /**
      * @param  string $which One of 'real', 'utime', 'stime', 'cutime', 'sutime'
-     * @param bool $now
+     * @param array $now
      * @return float  Seconds.
      */
-    function getTime($which = 'real', $now = false)
+    function getTime($which = 'real', $now = array())
     {
-        if ($which == 'real')
+        if ($which == 'real') {
             return $this->microtime() - $this->_start;
+        }
 
         if (isset($this->_times)) {
-            if (!$now) $now = posix_times();
+            if (empty($now)) {
+                $now = posix_times();
+            }
             $ticks = $now[$which] - $this->_times[$which];
             return $ticks / $this->_CLK_TCK();
         }

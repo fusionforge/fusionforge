@@ -44,9 +44,22 @@ class WikiPlugin_IncludePages
         );
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         $args = $this->getArgs($argstr, $request);
+
+        if (isset($args['limit']) && !limit($args['limit'])) {
+            return HTML::p(array('class' => "error"),
+                           _("Illegal “limit” argument: must be an integer or two integers separated by comma"));
+        }
+
         $html = HTML();
         if (empty($args['pages'])) {
             return $html;

@@ -72,7 +72,7 @@
 class ImageTile extends HtmlElement
 {
     // go away, hack!
-    function image_tile( /*...*/)
+    static function image_tile( /*...*/)
     {
         $el = new HTML ('img');
         $tag = func_get_args();
@@ -154,6 +154,13 @@ class WikiPlugin_PhotoAlbum
 
     // descriptions (instead of filenames) for image alt-tags
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
 
@@ -611,7 +618,6 @@ display_slides();"));
                     $photos[] = array("src" => $src,
                         "name" => $src,
                         "name_tile" => $src,
-                        "src" => $src,
                         "desc" => "");
                     return '';
                 }
@@ -620,7 +626,6 @@ display_slides();"));
                 $photos[] = array("src" => $src,
                     "name" => "../" . $src,
                     "name_tile" => $src,
-                    "src" => $src,
                     "desc" => "");
                 return '';
             }

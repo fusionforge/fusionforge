@@ -45,18 +45,9 @@ class HtmlParser
 {
     public $dialect, $_handlers, $root;
 
-    /**
-     *  dialect: "PhpWiki2", "PhpWiki"
-     *  possible more dialects: MediaWiki, kwiki, c2
-     */
-    function __construct($dialect = "PhpWiki2", $encoding = '')
+    function __construct($dialect, $encoding = '')
     {
-        $classname = "HtmlParser_" . $dialect;
-        if (class_exists($classname))
-            $this->dialect = new $classname;
-        else {
-            trigger_error(sprintf("unknown HtmlParser dialect %s", $dialect), E_USER_ERROR);
-        }
+        $this->dialect = new HtmlParser_PhpWiki();
         $this->_handlers =& $this->dialect->_handlers;
         $this->XmlParser($encoding);
         xml_parser_set_option($this->_parser, XML_OPTION_CASE_FOLDING, 0);
@@ -83,10 +74,15 @@ class HtmlParser
         return $output;
     }
 
+    /**
+     * @param HtmlElement $node
+     * @param HtmlElement $parent
+     * @return string
+     */
     function wikify($node, $parent = null)
     {
         $output = '';
-        if (isa($node, 'XmlElement')) {
+        if (is_a($node, 'XmlElement')) {
             $dialect =& $this->dialect;
             $conv = $dialect->_handlers[$node->_tag];
             if (is_string($conv) and method_exists($dialect, $conv)) {
@@ -116,17 +112,20 @@ class HtmlParser
         return $output;
     }
 
-    /** elem_contents()
+    /**
      *  $output = $parser->elem_contents( $elem );
      * Returns a wikified version of the contents of the specified
      * HTML element. This is done by passing each element of this
      * element's content list through the C<wikify()> method, and
      * returning the concatenated result.
+     *
+     * @param HtmlElement $node
+     * @return string
      */
     function elem_contents($node)
     {
         $output = '';
-        if (isa($node, 'XmlElement')) {
+        if (is_a($node, 'XmlElement')) {
             foreach ($node->getContent() as $child) {
                 $output .= $this->wikify($child, isset($node->parent) ? $node->parent : null);
             }
@@ -185,6 +184,10 @@ class HtmlParser
     // contained within a sole A tag (not counting child elements with
     // whitespace text only).
     //
+    /**
+     * @param HtmlElement $node
+     * @return bool
+     */
     function _elem_is_image_div($node)
     {
         // Return false if node is undefined or isn't a DIV at all
@@ -203,14 +206,22 @@ class HtmlParser
         return false;
     }
 
-    /** preserves tags and content
+    /**
+     * preserves tags and content
+     *
+     * @param HtmlElement $node
+     * @return mixed
      */
     function wikify_default($node)
     {
         return $this->wikify_preserve($node);
     }
 
-    /** preserves tags and content
+    /*
+     * preserves tags and content
+     *
+     * @param HtmlElement $node
+     * @return mixed
      */
     function wikify_preserve($node)
     {
@@ -222,9 +233,11 @@ class HtmlParser
     }
 }
 
-class HtmlParser_PhpWiki2
+class HtmlParser_PhpWiki
     extends HtmlParser
 {
+    public $ident;
+
     function __construct()
     {
         $this->_handlers =
@@ -281,17 +294,29 @@ class HtmlParser_PhpWiki2
             );
     }
 
+    /**
+     * @param HtmlElement $node
+     * @return string
+     */
     function wikify_table($node)
     {
         $this->ident = '';
         return "| \n" . $this->elem_contents($node) . "|\n\n";
     }
 
+    /**
+     * @param HtmlElement $node
+     * @return string
+     */
     function wikify_tr($node)
     {
         return "\n| " . $this->elem_contents($node);
     }
 
+    /**
+     * @param HtmlElement $node
+     * @return string
+     */
     function wikify_th($node)
     {
         $ident = empty($this->ident) ? '' : $this->ident;
@@ -303,11 +328,19 @@ class HtmlParser_PhpWiki2
         return "$output |\n";
     }
 
+    /**
+     * @param HtmlElement $node
+     * @return string
+     */
     function wikify_list_item($node)
     {
         return ($this->_elem_has_ancestor($node, 'ol') ? '*' : '#') . " " . trim($this->elem_contents($node)) . "\n";
     }
 
+    /**
+     * @param HtmlElement $node
+     * @return string
+     */
     function wikify_link($node)
     {
         $url = $this->absolute_url($node->getAttr('href'));
@@ -331,6 +364,10 @@ class HtmlParser_PhpWiki2
         return "[ $url | $title ]";
     }
 
+    /**
+     * @param HtmlElement $node
+     * @return string
+     */
     function wikify_h($node)
     {
         $level = substr($node->_tag, 1);
@@ -342,17 +379,29 @@ class HtmlParser_PhpWiki2
         return $markup . ' ' . trim($this->elem_contents($node)) . "\n\n";
     }
 
+    /**
+     * @param HtmlElement $node
+     * @return string
+     */
     function wikify_verbatim($node)
     {
         $contents = $this->elem_contents($node);
-        return "\n<verbatim>\n$contents\n</verbatim>";
+        return "\n<".'verbatim'.">\n$contents\n</"."verbatim>";
     }
 
+    /**
+     * @param HtmlElement $node
+     * @return string
+     */
     function wikify_noinclude($node)
     {
         return $this->elem_contents($node);
     }
 
+    /**
+     * @param HtmlElement $node
+     * @return string
+     */
     function wikify_img($node)
     {
         $image_url = $this->absolute_url($node->getAttr('src'));

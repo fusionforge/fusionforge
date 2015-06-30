@@ -27,17 +27,17 @@
        <?php if (!empty($user)) { ?>
        <?php
        /* Today's calendar page for the user, if the Calender subpage is defined. */
-        $UserCalPageTitle = $user->getId() . SUBPAGE_SEPARATOR . _("Calendar");
+        $UserCalPageTitle = $user->getId() . '/' . _("Calendar");
         $dbi = $request->getDbh();
         if ($dbi->isWikiPage($UserCalPageTitle)) {
-          $UserCalPageTodayTitle = $UserCalPageTitle . SUBPAGE_SEPARATOR . strftime("%Y-%m-%d", time());
+          $UserCalPageTodayTitle = $UserCalPageTitle . '/' . strftime("%Y-%m-%d", time());
          ?>
          <li>
          <?php echo $SEP?><?php echo WikiLink($UserCalPageTodayTitle, "button", _("Today")) ?>
          </li>
        <?php } ?>
       <?php } ?>
-      <?php if (defined('USE_EXTERNAL_HTML2PDF') and USE_EXTERNAL_HTML2PDF) { ?> 
+      <?php if (defined('USE_EXTERNAL_HTML2PDF') and USE_EXTERNAL_HTML2PDF) { ?>
         <li><?php echo $SEP?><?php echo Button("pdf") ?></li>
        <?php } ?>
      </ul>

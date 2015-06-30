@@ -58,6 +58,8 @@ require_once 'lib/plugin/SemanticSearch.php';
 class WikiPlugin_SemanticSearchAdvanced
     extends WikiPlugin_SemanticSearch
 {
+    public $_supported_operators;
+
     function getDescription()
     {
         return _("Parse and execute a full query expression.");
@@ -87,7 +89,6 @@ class WikiPlugin_SemanticSearchAdvanced
             'value' => $args['page'],
             'title' => _("Search only in these pages. With autocompletion."),
             'class' => 'dropdown',
-            'acdropdown' => 'true',
             'autocomplete_complete' => 'true',
             'autocomplete_matchsubstring' => 'false',
             'autocomplete_list' => 'xmlrpc:wiki.titleSearch ^[S] 4'
@@ -98,7 +99,6 @@ class WikiPlugin_SemanticSearchAdvanced
         $querybox = HTML::textarea(array('name' => 's',
             'title' => _("Enter a valid query expression"),
             'rows' => 4,
-            'acdropdown' => 'true',
             'autocomplete_complete' => 'true',
             'autocomplete_assoc' => 'false',
             'autocomplete_matchsubstring' => 'true',
@@ -124,6 +124,13 @@ class WikiPlugin_SemanticSearchAdvanced
         return $form;
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         $this->_supported_operators = array(':=', '<', '<=', '>', '>=', '!=', '==', '=~');

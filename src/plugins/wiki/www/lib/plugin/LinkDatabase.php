@@ -67,15 +67,44 @@ class WikiPlugin_LinkDatabase
             ));
     }
 
-    function getHtml($dbi, $argarray, $request, $basepage)
+    /**
+     * @param WikiDB $dbi
+     * @param array $argarray
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
+    protected function getHtml($dbi, $argarray, $request, $basepage)
     {
         $this->run($dbi, WikiPluginCached::glueArgs($argarray), $request, $basepage);
     }
 
-    function run($dbi, $argstr, $request, $basepage)
+    protected function getImage($dbi, $argarray, $request)
+    {
+        trigger_error('pure virtual', E_USER_ERROR);
+    }
+
+    protected function getMap($dbi, $argarray, $request)
+    {
+        trigger_error('pure virtual', E_USER_ERROR);
+    }
+
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
+    function run($dbi, $argstr, &$request, $basepage)
     {
         global $WikiTheme;
         $args = $this->getArgs($argstr, $request);
+
+        if (isset($args['limit']) && !is_limit($args['limit'])) {
+            return HTML::p(array('class' => "error"),
+                           _("Illegal “limit” argument: must be an integer or two integers separated by comma"));
+        }
 
         $caption = _("All pages with all links in this wiki (%d total):");
 
@@ -83,21 +112,21 @@ class WikiPlugin_LinkDatabase
             $pages = PageList::allPagesByOwner($args['owner'], $args['include_empty'],
                 $args['sortby'], $args['limit']);
             if ($args['owner'])
-                $caption = fmt("List of pages owned by [%s] (%d total):",
+                $caption = fmt("List of pages owned by %s (%d total):",
                     WikiLink($args['owner'], 'if_known'),
                     count($pages));
         } elseif (!empty($args['author'])) {
             $pages = PageList::allPagesByAuthor($args['author'], $args['include_empty'],
                 $args['sortby'], $args['limit']);
             if ($args['author'])
-                $caption = fmt("List of pages last edited by [%s] (%d total):",
+                $caption = fmt("List of pages last edited by %s (%d total):",
                     WikiLink($args['author'], 'if_known'),
                     count($pages));
         } elseif (!empty($args['creator'])) {
             $pages = PageList::allPagesByCreator($args['creator'], $args['include_empty'],
                 $args['sortby'], $args['limit']);
             if ($args['creator'])
-                $caption = fmt("List of pages created by [%s] (%d total):",
+                $caption = fmt("List of pages created by %s (%d total):",
                     WikiLink($args['creator'], 'if_known'),
                     count($pages));
         } else {
@@ -184,7 +213,7 @@ class WikiPlugin_LinkDatabase
 
 class _PageList_Column_LinkDatabase_links extends _PageList_Column
 {
-    function _getValue($page, &$revision_handle)
+    function _getValue($page, $revision_handle)
     {
         $out = HTML();
         $links = $page->getPageLinks();

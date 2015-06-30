@@ -9,7 +9,22 @@ else
 
 class DbaDatabase
 {
-    function DbaDatabase($filename, $mode = false, $handler = 'gdbm')
+    public $_file;
+    public $_handler;
+    public $_timeout;
+    /**
+     * @var resource $_dbh
+     */
+    public $_dbh;
+    public $readonly;
+    public $_dba_open_error;
+
+    /**
+     * @param string $filename
+     * @param bool $mode
+     * @param string $handler
+     */
+    function __construct($filename, $mode = false, $handler = 'gdbm')
     {
         $this->_file = $filename;
         $this->_handler = $handler;
@@ -33,8 +48,13 @@ class DbaDatabase
 
     function open($mode = 'w')
     {
+        /**
+         * @var WikiRequest $request
+         */
+        global $request;
+
         if ($this->_dbh)
-            return; // already open.
+            return true; // already open.
 
         $watchdog = $this->_timeout;
 
@@ -70,7 +90,7 @@ class DbaDatabase
                 // try to continue with read-only
                 if (!defined("READONLY"))
                     define("READONLY", true);
-                $GLOBALS['request']->_dbi->readonly = true;
+                $request->_dbi->readonly = true;
                 $this->readonly = true;
                 $mode = "r";
             }
@@ -93,7 +113,7 @@ class DbaDatabase
                 // try to continue with read-only
                 if (!defined("READONLY"))
                     define("READONLY", true);
-                $GLOBALS['request']->_dbi->readonly = true;
+                $request->_dbi->readonly = true;
                 $this->readonly = true;
                 if (!file_exists($this->_file)) {
                     $ErrorManager->handleError($error);
@@ -122,21 +142,22 @@ class DbaDatabase
     function fetch($key)
     {
         $val = dba_fetch($key, $this->_dbh);
-        if ($val === false)
-            return $this->_error("fetch($key)");
+        if ($val === false) {
+            $this->_error("fetch($key)");
+        }
         return $val;
     }
 
     function insert($key, $val)
     {
         if (!dba_insert($key, $val, $this->_dbh))
-            return $this->_error("insert($key)");
+            $this->_error("insert($key)");
     }
 
     function replace($key, $val)
     {
         if (!dba_replace($key, $val, $this->_dbh))
-            return $this->_error("replace($key)");
+            $this->_error("replace($key)");
     }
 
     function firstkey()
@@ -151,9 +172,10 @@ class DbaDatabase
 
     function delete($key)
     {
-        if ($this->readonly) return;
+        if ($this->readonly)
+            return;
         if (!dba_delete($key, $this->_dbh))
-            return $this->_error("delete($key)");
+            $this->_error("delete($key)");
     }
 
     function get($key)
@@ -164,38 +186,37 @@ class DbaDatabase
     function set($key, $val)
     {
         $dbh = &$this->_dbh;
-        if ($this->readonly) return;
+        if ($this->readonly)
+            return;
         if (dba_exists($key, $dbh)) {
             if ($val !== false) {
                 if (!dba_replace($key, $val, $dbh))
-                    return $this->_error("store[replace]($key)");
+                    $this->_error("store[replace]($key)");
             } else {
                 if (!dba_delete($key, $dbh))
-                    return $this->_error("store[delete]($key)");
+                    $this->_error("store[delete]($key)");
             }
         } else {
             if (!dba_insert($key, $val, $dbh))
-                return $this->_error("store[insert]($key)");
+                $this->_error("store[insert]($key)");
         }
     }
 
     function sync()
     {
         if (!dba_sync($this->_dbh))
-            return $this->_error("sync()");
+            $this->_error("sync()");
     }
 
     function optimize()
     {
         if (!dba_optimize($this->_dbh))
-            return $this->_error("optimize()");
+            $this->_error("optimize()");
         return 1;
     }
 
-    function _error($mes)
+    private function _error($mes)
     {
-        //trigger_error("DbaDatabase: $mes", E_USER_WARNING);
-        //return false;
         trigger_error("$this->_file: dba error: $mes", E_USER_ERROR);
     }
 

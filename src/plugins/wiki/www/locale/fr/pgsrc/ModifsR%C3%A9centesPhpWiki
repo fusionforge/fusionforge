@@ -1,10 +1,10 @@
-Date: Tue, 29 Jul 2014 10:42:12 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.0)
+Date: Mon, 29 Jun 2015 12:04:23 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
 Content-Type: application/x-phpwiki;
   pagename=ModifsR%C3%A9centesPhpWiki;
-  flags="";
+  flags=PAGE_LOCKED;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-<<RssFeed feed=PhpWikiRecentChanges description="PhpWiki:RecentChanges"
-	         url=http://phpwiki.sourceforge.net/phpwiki/RecentChanges?format=rss>>
+<<RssFeed feed=PhpWikiRecentChanges description="PhpWiki RecentChanges"
+          url=http://phpwiki.fr/RecentChanges?format=rss>>

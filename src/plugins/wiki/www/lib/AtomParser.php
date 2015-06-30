@@ -247,6 +247,7 @@ class AtomParser
         } elseif (is_string($element)) {
             return trim($element);
         }
+        return false;
     }
 
     function serialize_tag($tag_name, $attributes)

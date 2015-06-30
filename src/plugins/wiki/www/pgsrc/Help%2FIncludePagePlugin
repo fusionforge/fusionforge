@@ -1,13 +1,13 @@
-Date: Tue, 29 Jul 2014 10:42:12 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.0)
+Date: Mon, 29 Jun 2015 12:04:28 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FIncludePagePlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The **~IncludePage** [[Help:WikiPlugin|plugin]] will "include" other pages in this wiki. In the language of hypertext this is called //transclusion//.
-The pages will render in distinct tables. You can also load external pages in a more limited fashion with the [[Help:FrameIncludePlugin|FrameInclude]] plugin.
+The **~IncludePage** [[Help:WikiPlugin|plugin]] will “include” other pages in this wiki. In the language of hypertext this is called //transclusion//.
+The pages will render in distinct tables.
 
 == Usage ==
 
@@ -60,6 +60,12 @@ The pages will render in distinct tables. You can also load external pages in a 
 | false
 |}
 
+== Inclusion ==
+
+~<noinclude> .. ~</noinclude> is stripped.
+
+~<includeonly> .. ~</includeonly> is only expanded in included pages.
+
 == Examples ==
 
 === ~IncludePage page=Help/~AllPagesPlugin ===
@@ -95,7 +101,6 @@ Does not work in Wikicreole syntax
 
 * [[Help:IncludePagesPlugin]] (to include multiple pages)
 * [[Help:TemplatePlugin]] (to include a page with parameters)
-* [[Help:FrameIncludePlugin]] (to include an external page)
 
 <noinclude>
 ----

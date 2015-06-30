@@ -16,7 +16,7 @@
  */
 class XmlContent
 {
-    function XmlContent( /* ... */)
+    function __construct( /* ... */)
     {
         $this->_content = array();
         $this->_pushContent_array(func_get_args());
@@ -192,7 +192,7 @@ class XmlContent
         return true;
     }
 
-    function _quote($string)
+    static function _quote($string)
     {
         if (!$string) return $string;
         return htmlspecialchars($string, ENT_COMPAT, 'UTF-8');
@@ -206,6 +206,11 @@ class XmlContent
  */
 class XmlElement extends XmlContent
 {
+    public $_children;
+    public $_attr;
+    public $_tag;
+    public $_classes;
+
     function __construct($tagname /* , $attr_or_content , ...*/)
     {
         parent::__construct();
@@ -490,6 +495,9 @@ class RawXml
 
 class FormattedText
 {
+    public $_fs;
+    public $_args;
+
     function FormattedText($fs /* , ... */)
     {
         if ($fs !== false) {
@@ -561,10 +569,10 @@ class FormattedText
 }
 
 /**
- * PHP5 compatibility
- * Error[2048]: Non-static method XmlContent::_quote() should not be called statically
  * Note: There's lot of room for performance increase if the right charset variant can
  * be created on load-time.
+ * @param string $string
+ * @return string
  */
 function XmlContent_quote($string)
 {

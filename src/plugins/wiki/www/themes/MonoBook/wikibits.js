@@ -10,7 +10,6 @@ var is_safari = ((clientPC.indexOf('AppleWebKit')!=-1) && (clientPC.indexOf('spo
 var is_khtml = (navigator.vendor == 'KDE' || ( document.childNodes && !document.all && !navigator.taintEnabled ));
 if (clientPC.indexOf('opera')!=-1) {
     var is_opera = true;
-    var is_opera_seven = (window.opera && document.childNodes);
 }
 
 // add any onload functions in this hook (please don't hard-code any events in the xhtml source)
@@ -226,53 +225,6 @@ function toggleToc() {
 	}
 }
 
-// this function generates the actual toolbar buttons with localized text
-// we use it to avoid creating the toolbar where javascript is not enabled
-function addButton(imageFile, speedTip, tagOpen, tagClose, sampleText) {
-
-	speedTip=escapeQuotes(speedTip);
-	tagOpen=escapeQuotes(tagOpen);
-	tagClose=escapeQuotes(tagClose);
-	sampleText=escapeQuotes(sampleText);
-	var mouseOver="";
-
-	// we can't change the selection, so we show example texts
-	// when moving the mouse instead, until the first button is clicked
-	if(!document.selection && !is_gecko) {
-		// filter backslashes so it can be shown in the infobox
-		var re=new RegExp("\\\\n","g");
-		tagOpen=tagOpen.replace(re,"");
-		tagClose=tagClose.replace(re,"");
-		mouseOver = "onMouseover=\"if(!noOverwrite){document.infoform.infobox.value='"+tagOpen+sampleText+tagClose+"'};\"";
-	}
-
-	document.write("<a href=\"javascript:insertTags");
-	document.write("('"+tagOpen+"','"+tagClose+"','"+sampleText+"');\">");
-
-        document.write("<img width=\"23\" height=\"22\" src=\""+imageFile+"\" border=\"0\" ALT=\""+speedTip+"\" TITLE=\""+speedTip+"\""+mouseOver+">");
-	document.write("</a>");
-	return;
-}
-
-function addInfobox(infoText,text_alert) {
-	alertText=text_alert;
-	var clientPC = navigator.userAgent.toLowerCase(); // Get client info
-
-	var re=new RegExp("\\\\n","g");
-	alertText=alertText.replace(re,"\n");
-
-	// if no support for changing selection, add a small copy & paste field
-	// document.selection is an IE-only property. The full toolbar works in IE and
-	// Gecko-based browsers.
-	if(!document.selection && !is_gecko) {
- 		infoText=escapeQuotesHTML(infoText);
-	 	document.write("<form name='infoform' id='infoform'>"+
-			"<input size=80 id='infobox' name='infobox' value=\""+
-			infoText+"\" READONLY></form>");
- 	}
-
-}
-
 function escapeQuotes(text) {
 	var re=new RegExp("'","g");
 	text=text.replace(re,"\\'");
@@ -280,12 +232,6 @@ function escapeQuotes(text) {
 	text=text.replace(re,'&quot;');
 	re=new RegExp("\\n","g");
 	text=text.replace(re,"\\n");
-	return text;
-}
-
-function escapeQuotesHTML(text) {
-	var re=new RegExp('"',"g");
-	text=text.replace(re,"&quot;");
 	return text;
 }
 

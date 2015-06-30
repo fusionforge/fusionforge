@@ -27,12 +27,10 @@
  */
 
 include_once 'lib/config.php';
-require_once(dirname(__FILE__) . "/stdlib.php");
+require_once 'lib/stdlib.php';
 require_once 'lib/Request.php';
-if (ENABLE_USER_NEW) require_once("lib/WikiUserNew.php");
-else                 require_once("lib/WikiUser.php");
+require_once 'lib/WikiUser.php';
 require_once 'lib/WikiDB.php';
-
 require_once 'lib/WikiPluginCached.php';
 
 // -----------------------------------------------------------------------
@@ -75,11 +73,11 @@ function deduceUsername()
     if ($user = $request->getSessionVar('wiki_user')) {
         $request->_user = $user;
         $request->_user->_authhow = 'session';
-        return ENABLE_USER_NEW ? $user->UserName() : $request->_user;
+        return $user->UserName();
     }
     if ($userid = $request->getCookieVar(getCookieName())) {
         if (!empty($userid) and substr($userid, 0, 2) != 's:') {
-            $request->_user->authhow = 'cookie';
+            $request->_user->_authhow = 'cookie';
             return $userid;
         }
     }
@@ -100,13 +98,8 @@ function mainImageCache()
     $request->setArg('pagename', deducePagename($request));
     $pagename = $request->getArg('pagename');
     $request->_dbi = WikiDB::open($GLOBALS['DBParams']);
-    if (ENABLE_USER_NEW) {
-        $request->_user = new _AnonUser();
-        $request->_prefs =& $request->_user->_prefs;
-    } else {
-        $request->_user = new WikiUser($request);
-        $request->_prefs = new UserPreferences();
-    }
+    $request->_user = new _AnonUser();
+    $request->_prefs =& $request->_user->_prefs;
 
     // Enable the output of most of the warning messages.
     // The warnings will screw up zip files and setpref though.

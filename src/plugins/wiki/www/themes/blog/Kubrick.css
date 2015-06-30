@@ -51,7 +51,6 @@ body {
 /* http://universaleditbutton.org */
 div.actionbuttons a#btn-edit {
     background: url('images/UEB16.png') bottom left no-repeat;
-    background-repeat: no-repeat;
     padding-left: 13px !important;
 }
 
@@ -383,6 +382,12 @@ tr.evenrow {
     padding: 0 10px 10px 0;
     width: 155px;
     background: white;
+}
+
+#moz-sidebar ul li {
+    list-style-type: square;
+    padding-left: 0;
+    text-indent: 0;
 }
 
 #sidebar form {
@@ -749,10 +754,6 @@ hr {
     border-left: 1px solid #494f5d;
     border-bottom: 1px solid #c6d2de;
     border-right: 1px solid #c6d2de;
-    padding-top: 1px;
-    padding-bottom: 1px;
-    padding-left: .125em;
-    padding-right: .125em;
     padding: 0;
     clear: both;
 }
@@ -855,7 +856,6 @@ div.boxright {
     padding: 0.5em;
     float: right;
     border: thin solid #888888;
-    padding: 0.5em;
 }
 
 /* RssFeed */
@@ -928,6 +928,10 @@ img.tex {
 
 .genmed {
     font-size: 11px
+}
+
+img.toolbar:hover {
+    cursor: pointer;
 }
 
 .wikiwyg_toolbar {
@@ -1021,4 +1025,28 @@ table.boxed caption, table.bordered caption {
 table.boxed th, table.bordered th {
     font-weight: bold;
     background-color: #d8d8d8;
+}
+
+table.sortable th.header {
+    background-image: url(../default/buttons/sort_none.gif);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}
+
+table.sortable th.headerSortUp {
+    background-image: url(../default/buttons/sort_up.gif);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}
+
+table.sortable th.headerSortDown {
+    background-image: url(../default/buttons/sort_down.gif);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
 }

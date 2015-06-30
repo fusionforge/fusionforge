@@ -17,7 +17,7 @@
 <h1><?php echo $HEADER ?>
 <?php if (!empty($user) && $user->isSignedIn()) {
   $loader = new WikiPluginLoader();
-  printXML(HTML::Raw("&nbsp;&nbsp;"));
+  printXML(HTML::raw("&nbsp;&nbsp;"));
   printXML($loader->expandPI("<"."?plugin RateIt ?".">", $request, $dbi->_markup));
 } ?> </h1>
 

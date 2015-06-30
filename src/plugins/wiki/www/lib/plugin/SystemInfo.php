@@ -42,9 +42,12 @@
  */
 
 require_once 'lib/WikiPluginCached.php';
+
 class WikiPlugin_SystemInfo
     extends WikiPluginCached
 {
+    public $_dbi;
+
     function getPluginType()
     {
         return PLUGIN_CACHED_HTML;
@@ -71,7 +74,14 @@ class WikiPlugin_SystemInfo
         return '+1800'; // 30 minutes
     }
 
-    function getHtml($dbi, $argarray, $request, $basepage)
+    /**
+     * @param WikiDB $dbi
+     * @param array $argarray
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
+    protected function getHtml($dbi, $argarray, $request, $basepage)
     {
         $loader = new WikiPluginLoader();
         return $loader->expandPI('<<SystemInfo '
@@ -79,9 +89,19 @@ class WikiPlugin_SystemInfo
             . ' ?>', $request, $this, $basepage);
     }
 
+    protected function getImage($dbi, $argarray, $request)
+    {
+        trigger_error('pure virtual', E_USER_ERROR);
+    }
+
+    protected function getMap($dbi, $argarray, $request)
+    {
+        trigger_error('pure virtual', E_USER_ERROR);
+    }
+
     function getDefaultArguments()
     {
-        return array( // 'seperator' => ' ', // on multiple args
+        return array( // 'separator' => ' ', // on multiple args
         );
     }
 
@@ -104,10 +124,6 @@ class WikiPlugin_SystemInfo
             case 'dba':
                 $s .= "DATABASE_DBA_HANDLER: " . DATABASE_DBA_HANDLER . ", ";
                 $s .= "DATABASE_DIRECTORY: \"" . DATABASE_DIRECTORY . "\", ";
-                break;
-            case 'cvs':
-                $s .= "DATABASE_DIRECTORY: \"" . DATABASE_DIRECTORY . "\", ";
-                // $s .= "cvs stuff: , ";
                 break;
             case 'flatfile':
                 $s .= "DATABASE_DIRECTORY: " . DATABASE_DIRECTORY . ", ";
@@ -371,7 +387,7 @@ class WikiPlugin_SystemInfo
         return $content;
     }
 
-    // Size of databases/files/cvs are possible plus the known size of the app.
+    // Size of databases/files are possible plus the known size of the app.
     // Cache this costly operation.
     // Even if the whole plugin call is stored internally, we cache this
     // separately with a separate key.
@@ -400,7 +416,7 @@ class WikiPlugin_SystemInfo
                     $pagesize = filesize($DBParams['directory']
                         . "/wiki_pagedb.db3") / 1024;
                 // if issubdirof($dbdir, $dir) $appsize -= $pagesize;
-            } else { // flatfile, cvs
+            } else { // flatfile
                 $dbdir = $DBParams['directory'];
                 $pagesize = `du -s $dbdir`;
                 // if issubdirof($dbdir, $dir) $appsize -= $pagesize;
@@ -486,12 +502,19 @@ class WikiPlugin_SystemInfo
             return $this->error(sprintf(_("unknown argument “%s” to SystemInfo"), $arg));
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         // don't parse argstr for name=value pairs. instead we use just 'name'
         //$args = $this->getArgs($argstr, $request);
         $this->_dbi =& $dbi;
-        $args['seperator'] = ' ';
+        $args['separator'] = ' ';
         $availableargs = // name => callback + 0 args
             array('appname' => create_function('', "return 'PhpWiki';"),
                 'version' => create_function('', "return sprintf('%s', PHPWIKI_VERSION);"),
@@ -546,11 +569,11 @@ class WikiPlugin_SystemInfo
                 if (is_object($o))
                     return $o;
                 else
-                    $output .= ($o . $args['seperator']);
+                    $output .= ($o . $args['separator']);
             }
-            // if more than one arg, remove the trailing seperator
+            // if more than one arg, remove the trailing separator
             if ($output) $output = substr($output, 0,
-                -strlen($args['seperator']));
+                -strlen($args['separator']));
             return HTML($output);
         }
     }

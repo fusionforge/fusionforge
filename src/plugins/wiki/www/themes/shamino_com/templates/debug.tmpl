@@ -4,7 +4,7 @@
 <span id="xhtml-validator"><a class="wikilink" href="http://validator.w3.org/check/referer">Valid XHTML 1.0</a> &nbsp; <a class="wikilink" href="http://jigsaw.w3.org/css-validator/check/referer">Valid CSS</a>
 </span>
   <span><?php echo fmt("Page Execution took %s seconds", $RUNTIMER->getStats()) ?>
-<?php $mem = @getMemoryUsage(); if ($mem) { ?>
+<?php $mem = @memory_get_usage(); if ($mem) { ?>
   <?php echo fmt(", Memory: %s", $mem) ?>
 <?php } ?></span></div>
 <br class="clear-floats" />

@@ -160,6 +160,9 @@ case "$1" in
 	;;
 
     purge)
+	log_path=$(forge_get_config log_path)
+	rm -f $log_path/access.log
+	rm -f $log_path/awstats.log
 	;;
 
     *)

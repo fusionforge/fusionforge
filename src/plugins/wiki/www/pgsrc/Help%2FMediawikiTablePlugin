@@ -1,5 +1,5 @@
-Date: Tue, 29 Jul 2014 10:42:12 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.0)
+Date: Mon, 29 Jun 2015 12:04:28 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FMediawikiTablePlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -60,6 +60,9 @@ In both cases, the headers (specified by ##!##) will have a ##"#d8d8d8"## backgr
 ==== Sortable tables ====
 
 If you specify ##class="sortable"##, the table columns will be sortable.
+An icon will be put in the headers to show the table is sortable.
+Clicking on a column header will sort that column.
+You can sort multiple columns with shift click.
 
 ==== Do not break table when printing ====
 

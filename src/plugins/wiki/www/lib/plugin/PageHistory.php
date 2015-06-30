@@ -25,9 +25,10 @@ require_once 'lib/plugin/RecentChanges.php';
 class _PageHistory_PageRevisionIter
     extends WikiDB_PageRevisionIterator
 {
-    function _PageHistory_PageRevisionIter($rev_iter, $params)
-    {
+    public $_itemcount;
 
+    function __construct($rev_iter, $params)
+    {
         $this->_iter = $rev_iter;
 
         extract($params);
@@ -196,7 +197,7 @@ class _PageHistory_HtmlFormatter
             $minor_flag = '';
         }
         $line = HTML::li(array('class' => $class));
-        if (isa($WikiTheme, 'WikiTheme_MonoBook')) {
+        if (is_a($WikiTheme, 'WikiTheme_MonoBook')) {
             $line->pushContent(
                 $this->diffLink($rev), ' ',
                 $this->pageLink($rev), ' ',
@@ -283,7 +284,7 @@ class WikiPlugin_PageHistory
         return array('days' => false,
             'show_minor' => true,
             'show_major' => true,
-            'limit' => false,
+            'limit' => 100,
             'page' => '[pagename]',
             'format' => false);
     }
@@ -329,9 +330,22 @@ class WikiPlugin_PageHistory
         return $fmt->format($changes);
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         $args = $this->getArgs($argstr, $request);
+
+        if (isset($args['limit']) && !is_limit($args['limit'])) {
+            return HTML::p(array('class' => "error"),
+                           _("Illegal “limit” argument: must be an integer or two integers separated by comma"));
+        }
+
         $pagename = $args['page'];
         if (empty($pagename))
             return $this->makeForm("", $request);
@@ -339,8 +353,8 @@ class WikiPlugin_PageHistory
         $page = $dbi->getPage($pagename);
         $current = $page->getCurrentRevision();
         if ($current->getVersion() < 1) {
-            return HTML(HTML::p(fmt("Page “%s” does not exist.", WikiLink($pagename, 'unknown'))),
-                $this->makeForm("", $request));
+            return HTML(HTML::p(array('class' => "error"), fmt("Page “%s” does not exist.", $pagename)),
+                        $this->makeForm("", $request));
         }
         // Hack alert: format() is a NORETURN for rss formatters.
         return $this->format($this->getChanges($dbi, $args), $args);

@@ -4,7 +4,7 @@
 <?php } ?>
 <br class="clear-floats" />
 
-<?php 
+<?php
 $dbh = $request->getDbh();
 if (READONLY) {
   echo asXML(HTML::h2("System is locked as read-only for maintenance"));
@@ -13,10 +13,10 @@ if (READONLY) {
 }
 
 if (DEBUG & _DEBUG_LOGIN) {
-  $t = sprintf("  DEBUG: ALLOW_ANON_EDIT = %s, ALLOW_BOGO_LOGIN = %s, ALLOW_USER_PASSWORDS = %s, ENABLE_PAGEPERM = %s, ", 
-	       ALLOW_ANON_EDIT ? "true" : "false",
-	       ALLOW_BOGO_LOGIN ? "true" : "false",
-	       ALLOW_USER_PASSWORDS ? "true" : "false",
+  $t = sprintf("  DEBUG: ALLOW_ANON_EDIT = %s, ALLOW_BOGO_LOGIN = %s, ALLOW_USER_PASSWORDS = %s, ENABLE_PAGEPERM = %s, ",
+           ALLOW_ANON_EDIT ? "true" : "false",
+           ALLOW_BOGO_LOGIN ? "true" : "false",
+           ALLOW_USER_PASSWORDS ? "true" : "false",
                ENABLE_PAGEPERM ? "true" : "false");
   if (ALLOW_USER_PASSWORDS) {
     if ($fail_message) { // add for each method the exact failing reason.
@@ -27,7 +27,7 @@ if (DEBUG & _DEBUG_LOGIN) {
               $t .= " ($fail)";
       }
     } else
-	$t .= sprintf("  USER_AUTH_ORDER: %s", join(" => ", $GLOBALS['USER_AUTH_ORDER']));
+        $t .= sprintf("  USER_AUTH_ORDER: %s", join(" => ", $GLOBALS['USER_AUTH_ORDER']));
         $t .= sprintf(",  USER_AUTH_POLICY: %s", USER_AUTH_POLICY)
             . sprintf(",  PASSWORD_LENGTH_MINIMUM: %s", PASSWORD_LENGTH_MINIMUM);
   }

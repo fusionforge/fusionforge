@@ -70,7 +70,7 @@ while ($grp = db_fetch_array($res)) {
     if ($project->usesPlugin("wiki")) {
         $time_display = "";
         if ($grp['register_time'] != 0) {
-            $time_display = date(_('Y-m-d H:i'), $grp['register_time']);
+            $time_display = date('Y-m-d H:i', $grp['register_time']);
         }
         echo '<tr ' . $HTML->boxGetAltRowStyle($i) . '>';
         echo '<td><a href="/wiki/g/' . $grp['unix_group_name'] . '/">' . $grp['group_name'] . '</a></td>';

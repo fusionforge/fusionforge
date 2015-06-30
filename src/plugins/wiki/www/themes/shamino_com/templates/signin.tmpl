@@ -13,7 +13,7 @@ if ($user->isAuthenticated()) {
     $SignOutB = $WikiTheme->makeButton(_("Sign Out"), "javascript:SignOut();", 'wikiaction');
     $SignOutJS = JavaScript('
     document.write(\'<input type="hidden" name="auth[logout]" value="0" />\');
-    function SignOut() { 
+    function SignOut() {
       var form = document.forms["'.$FORMNAME.'"];
       form.elements["auth[logout]"].value = 1;
       form.submit();

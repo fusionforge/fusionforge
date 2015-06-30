@@ -44,6 +44,8 @@ require_once 'lib/plugin/DebugBackendInfo.php';
 class WikiPlugin_EditMetaData
     extends WikiPlugin_DebugBackendInfo
 {
+    public $_args;
+
     function getDescription()
     {
         return sprintf(_("Edit metadata for %s."), '[pagename]');
@@ -54,6 +56,13 @@ class WikiPlugin_EditMetaData
         return array('page' => '[pagename]');
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         $this->_args = $this->getArgs($argstr, $request);
@@ -105,7 +114,7 @@ class WikiPlugin_EditMetaData
             }
             if ($changed) {
                 $dbi->touch();
-                $url = $request->getURLtoSelf(false,
+                $url = $request->getURLtoSelf(array(),
                     array('meta', 'metaedit', 'metafield', 'metavalue'));
                 $request->redirect($url);
                 // The rest of the output will not be seen due to the
@@ -116,10 +125,6 @@ class WikiPlugin_EditMetaData
 
         // Now we show the meta data and provide entry box for new data.
         $html = HTML();
-        //$html->pushContent(HTML::h3(fmt("Existing page-level metadata for %s:",
-        //                                $page)));
-        //$dl = $this->_display_values('', $pagemeta);
-        //$html->pushContent($dl);
         if (!$pagemeta) {
             // FIXME: invalid HTML
             $html->pushContent(HTML::p(fmt("No metadata for %s", $page)));
@@ -154,35 +159,6 @@ class WikiPlugin_EditMetaData
             $html->pushContent(HTML::em(_("Requires WikiAdmin privileges to edit.")));
         }
         return $html;
-    }
-
-    protected function _showvalue($key, $val, $prefix = '')
-    {
-        if (is_array($val) or is_object($val)) return $val;
-        if (in_array($key, $this->hidden_pagemeta)) return '';
-        if ($prefix) {
-            $fullkey = $prefix . '[' . $key . ']';
-            if (substr($fullkey, 0, 1) == '[') {
-                $meta = "meta" . $fullkey;
-                $fullkey = preg_replace("/\]\[/", "[", substr($fullkey, 1), 1);
-            } else {
-                $meta = preg_replace("/^([^\[]+)\[/", "meta[$1][", $fullkey, 1);
-            }
-        } else {
-            $fullkey = $key;
-            $meta = "meta[" . $key . "]";
-        }
-        //$meta = "meta[".$fullkey."]";
-        $arr = array('name' => $meta, 'value' => $val);
-        if (strlen($val) > 20)
-            $arr['size'] = strlen($val);
-        if (in_array($key, $this->readonly_pagemeta)) {
-            $arr['readonly'] = 'readonly';
-            return HTML::input($arr);
-        } else {
-            return HTML(HTML::em($fullkey), HTML::br(),
-                HTML::input($arr));
-        }
     }
 }
 

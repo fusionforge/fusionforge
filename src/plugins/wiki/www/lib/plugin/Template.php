@@ -25,7 +25,7 @@
  * Template: Parametrized blocks.
  *    Include text from a wiki page and replace certain placeholders by parameters.
  *    Similiar to CreatePage with the template argument, but at run-time.
- *    Similiar to the mediawiki templates but not with the "|" parameter seperator.
+ *    Similiar to the mediawiki templates but not with the "|" parameter separator.
  * Usage:   <<Template page=TemplateFilm vars="title=rurban&year=1999" >>
  * Author:  Reini Urban
  * See also: http://meta.wikimedia.org/wiki/Help:Template
@@ -57,6 +57,8 @@
 class WikiPlugin_Template
     extends WikiPlugin
 {
+    public $vars;
+
     function getDescription()
     {
         return _("Parametrized page inclusion.");
@@ -91,9 +93,24 @@ class WikiPlugin_Template
         }
         if (!$page or !$page->name)
             return false;
-        return array(array('linkto' => $page->name, 'relation' => 0));
+
+        global $backlinks;
+        if (empty($backlinks)) {
+            global $request;
+            $this->run($request->_dbi, $argstr, $request, $basepage);
+        }
+
+        $backlinks[] = array('linkto' => $page->name);
+        return $backlinks;
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         $this->vars = array();
@@ -119,10 +136,13 @@ class WikiPlugin_Template
             $page = "Template/" . $page;
         }
 
-        // Protect from recursive inclusion. A page can include itself once
-        static $included_pages = array();
-        if (in_array($page, $included_pages)) {
-            return $this->error(sprintf(_("Recursive inclusion of page %s"),
+        // Protect from recursive inclusion.
+        global $rootpage;
+        if ($rootpage == '') {
+            $rootpage = $basepage;
+        }
+        if ($page == $rootpage) {
+            return $this->error(sprintf(_("Recursive inclusion of page %s ignored"),
                 $page));
         }
 
@@ -166,7 +186,7 @@ class WikiPlugin_Template
                 $m[1] = substr($m[1], 1, -1);
             }
             // trap recursive redirects
-            if (in_array($m[1], $included_pages)) {
+            if ($m[1] == $rootpage) {
                 return $this->error(sprintf(_("Recursive inclusion of page %s ignored"),
                     $page . ' => ' . $m[1]));
             }
@@ -191,8 +211,6 @@ class WikiPlugin_Template
             $initial_content);
         $this->doVariableExpansion($initial_content, $vars, $basepage, $request);
 
-        array_push($included_pages, $page);
-
         // If content is single-line, call TransformInline, else call TransformText
         $initial_content = trim($initial_content, "\n");
         if (preg_match("/\n/", $initial_content)) {
@@ -202,8 +220,6 @@ class WikiPlugin_Template
             include_once 'lib/InlineParser.php';
             $content = TransformInline($initial_content, $page);
         }
-
-        array_pop($included_pages);
 
         return $content;
     }

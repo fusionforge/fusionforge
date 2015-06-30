@@ -1,5 +1,5 @@
-Date: Tue, 29 Jul 2014 10:42:12 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.0)
+Date: Mon, 29 Jun 2015 12:04:28 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FExternalSearchPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -34,7 +34,7 @@ than appending it.
 |-
 | **name**
 | Text to display in the submit button.
-| For ~InterWiki sites the default is the wiki name, for other urls the default is the text "External Search".
+| For ~InterWiki sites the default is the wiki name, for other urls the default is the text “External Search”.
 |-
 | **formsize**
 | Specify the input area size.

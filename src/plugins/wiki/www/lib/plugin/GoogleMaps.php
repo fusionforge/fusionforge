@@ -78,6 +78,13 @@ class WikiPlugin_GoogleMaps
         );
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
 
@@ -122,9 +129,9 @@ class WikiPlugin_GoogleMaps
             $markerjs = JavaScript("
 function createMarker(point, text) {
   var marker = new GMarker(point);
-  var html = text + \"<br><br><font size='-1'>[" .
+  var html = text + \"<br /><br />[" .
                 _("new&nbsp;window") .
-                "]</font>\";
+                "]\";
   GEvent.addListener(marker, \"click\", function() {marker.openInfoWindowHtml(html);});
   return marker;
 }");

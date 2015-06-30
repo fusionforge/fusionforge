@@ -1,5 +1,5 @@
-Date: Tue, 29 Jul 2014 10:42:12 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.0)
+Date: Mon, 29 Jun 2015 12:04:28 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FCreatePagePlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -8,7 +8,7 @@ Content-Transfer-Encoding: binary
 
 The **~CreatePage** [[Help:WikiPlugin|plugin]] allows to easily create new pages, optionally with default content.
 
-This allows you to create a page geting the new pagename from a
+This allows you to create a page getting the new pagename from a
 forms-based interface, and optionally with the initial content from
 some template.
 

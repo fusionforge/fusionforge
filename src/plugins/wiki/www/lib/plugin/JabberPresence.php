@@ -32,8 +32,13 @@
  * @author: Arnaud Fontaine
  */
 
+/**
+  * @var WikiRequest $request
+  */
+global $request;
+
 if (!defined('MY_JABBER_ID'))
-    define('MY_JABBER_ID', $GLOBALS['request']->_user->UserName() . "@jabber.com"); // or "@netflint.net"
+    define('MY_JABBER_ID', $request->_user->UserName() . "@jabber.com"); // or "@netflint.net"
 
 class WikiPlugin_JabberPresence
     extends WikiPlugin
@@ -52,7 +57,14 @@ class WikiPlugin_JabberPresence
             'iconset' => "gabber");
     }
 
-    function run($dbi, $argstr, $request)
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
+    function run($dbi, $argstr, &$request, $basepage)
     {
         extract($this->getArgs($argstr, $request));
         // Any text that is returned will not be further transformed,

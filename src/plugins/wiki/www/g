@@ -41,13 +41,21 @@
  * ALONE BASIS."
  */
 
-ini_set("memory_limit", "256M");
+if (defined('WIKI_SOAP')) {
+    ini_set('memory_limit', -1);
+} else {
+    ini_set('memory_limit', "256M");
+}
 ini_set('pcre.backtrack_limit', 100000000);
 
 // Disable compression, seems needed to get all the messages.
 $no_gz_buffer=true;
 
-require_once('../../../common/include/env.inc.php');
+if (defined('WIKI_SOAP')) {
+    require_once 'include/env.inc.php';
+} else {
+    require_once '../../../common/include/env.inc.php';
+}
 require_once $gfcommon.'include/pre.php';
 require_once $gfplugins.'wiki/common/wikiconfig.class.php';
 
@@ -58,6 +66,17 @@ if (forge_get_config('use_jquery_form_navigate')) {
 } else {
     // Disable Toolbar for tests
     define('ENABLE_EDIT_TOOLBAR', false);
+}
+define('JS_SEARCHREPLACE', false);
+
+if (defined('WIKI_SOAP')) {
+    $help = group_get_object_by_name('help');
+    if ($help) {
+        $group_id = $help->getID();
+    } else {
+        // Test system don't have help project, use projecta instead.
+        $group_id = 6;
+    }
 }
 
 if (isset($group_id) && $group_id) {
@@ -89,7 +108,8 @@ if (! isset($group_id) || ! isset($project)) {
     $wc = new WikiConfig($group_id);
 
     define('VIRTUAL_PATH', '/wiki/g/'.$group_name);
-    define('PAGE_PREFIX', '_g'.$group_id.'_');
+    global $page_prefix;
+    $page_prefix = '_g'.$group_id.'_';
 
     // We have to use a smaller value than Phpwiki due to page prefix
     define('MAX_PAGENAME_LENGTH', 92);
@@ -161,12 +181,10 @@ if (! isset($group_id) || ! isset($project)) {
     // Allow <div> and <span> in wiki code
     define('ENABLE_MARKUP_DIVSPAN', true);
 
-    // Disable ENABLE_ACDROPDOWN, it creates a <style> in the <body> (illegal)
-    define('ENABLE_ACDROPDOWN', false);
     define('ENABLE_AJAX', false);
 
     define('TOOLBAR_PAGELINK_PULLDOWN', false);
-    define('TOOLBAR_TEMPLATE_PULLDOWN', false);
+    define('TOOLBAR_TEMPLATE_PULLDOWN', 'Template*');
     define('TOOLBAR_IMAGE_PULLDOWN', true);
 
     // Enable external pages

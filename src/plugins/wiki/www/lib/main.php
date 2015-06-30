@@ -25,15 +25,12 @@
 define ('USE_PREFS_IN_PAGE', true);
 
 //include "lib/config.php";
-require_once(dirname(__FILE__) . "/stdlib.php");
+require_once 'lib/stdlib.php';
 require_once 'lib/Request.php';
 require_once 'lib/WikiDB.php';
-if (ENABLE_USER_NEW)
-    require_once 'lib/WikiUserNew.php';
-else
-    require_once 'lib/WikiUser.php';
+require_once 'lib/WikiUser.php';
 require_once 'lib/WikiGroup.php';
-if (ENABLE_PAGEPERM)
+if (defined('ENABLE_PAGEPERM') and ENABLE_PAGEPERM)
     require_once 'lib/PagePerm.php';
 
 /**
@@ -42,7 +39,7 @@ if (ENABLE_PAGEPERM)
  */
 function mayAccessPage($access, $pagename)
 {
-    if (ENABLE_PAGEPERM)
+    if (defined('ENABLE_PAGEPERM') and ENABLE_PAGEPERM)
         return _requiredAuthorityForPagename($access, $pagename); // typically [10-20ms per page]
     else
         return true;
@@ -50,6 +47,9 @@ function mayAccessPage($access, $pagename)
 
 class WikiRequest extends Request
 {
+    /**
+     * @var WikiDB $_dbi
+     */
     public $_dbi;
 
     function __construct()
@@ -61,30 +61,28 @@ class WikiRequest extends Request
             // force our local copy, until the pear version is fixed.
             include_once(dirname(__FILE__) . "/pear/File_Passwd.php");
         }
-        if (ENABLE_USER_NEW) {
-            // Preload all necessary userclasses. Otherwise session => __PHP_Incomplete_Class_Name
-            // There's no way to demand-load it later. This way it's much slower, but needs slightly
-            // less memory than loading all.
-            if (ALLOW_BOGO_LOGIN)
-                include_once 'lib/WikiUser/BogoLogin.php';
-            // UserPreferences POST Update doesn't reach this.
-            foreach ($GLOBALS['USER_AUTH_ORDER'] as $method) {
-                include_once("lib/WikiUser/$method.php");
-                if ($method == 'Db')
-                    switch (DATABASE_TYPE) {
-                        case 'SQL'  :
-                            include_once 'lib/WikiUser/PearDb.php';
-                            break;
-                        case 'ADODB':
-                            include_once 'lib/WikiUser/AdoDb.php';
-                            break;
-                        case 'PDO'  :
-                            include_once 'lib/WikiUser/PdoDb.php';
-                            break;
-                    }
-            }
-            unset($method);
+        // Preload all necessary userclasses. Otherwise session => __PHP_Incomplete_Class_Name
+        // There's no way to demand-load it later. This way it's much slower, but needs slightly
+        // less memory than loading all.
+        if (ALLOW_BOGO_LOGIN)
+            include_once 'lib/WikiUser/BogoLogin.php';
+        // UserPreferences POST Update doesn't reach this.
+        foreach ($GLOBALS['USER_AUTH_ORDER'] as $method) {
+            include_once("lib/WikiUser/$method.php");
+            if ($method == 'Db')
+                switch (DATABASE_TYPE) {
+                    case 'SQL'  :
+                        include_once 'lib/WikiUser/PearDb.php';
+                        break;
+                    case 'ADODB':
+                        include_once 'lib/WikiUser/AdoDb.php';
+                        break;
+                    case 'PDO'  :
+                        include_once 'lib/WikiUser/PdoDb.php';
+                        break;
+                }
         }
+        unset($method);
         if (USE_DB_SESSION) {
             include_once 'lib/DbSession.php';
             $dbi =& $this->_dbi;
@@ -97,7 +95,7 @@ class WikiRequest extends Request
 //$x = error_reporting();
 
         $this->version = phpwiki_version();
-        $this->Request(); // [90ms]
+        parent::__construct(); // [90ms]
 
         // Normalize args...
         $this->setArg('pagename', $this->_deducePagename());
@@ -107,58 +105,56 @@ class WikiRequest extends Request
             or (DATABASE_OPTIMISE_FREQUENCY > 0 and
                 (time() % DATABASE_OPTIMISE_FREQUENCY == 0))
         ) {
-            if ($this->_dbi->_backend->optimize())
-                trigger_error(_("Optimizing database"), E_USER_NOTICE);
+            if ($this->_dbi->_backend->optimize()) {
+                if ((int)DEBUG) {
+                    trigger_error(_("Optimizing database"), E_USER_NOTICE);
+                }
+            }
         }
 
         // Restore auth state. This doesn't check for proper authorization!
         $userid = $this->_deduceUsername();
-        if (ENABLE_USER_NEW) {
-            if (isset($this->_user) and
-                !empty($this->_user->_authhow) and
+        if (isset($this->_user) and
+            !empty($this->_user->_authhow) and
                     $this->_user->_authhow == 'session'
             ) {
-                // users might switch in a session between the two objects.
-                // restore old auth level here or in updateAuthAndPrefs?
-                //$user = $this->getSessionVar('wiki_user');
-                // revive db handle, because these don't survive sessions
-                if (isset($this->_user) and
-                    (!isa($this->_user, WikiUserClassname())
-                        or (strtolower(get_class($this->_user)) == '_passuser')
-                        or (strtolower(get_class($this->_user)) == '_fusionforgepassuser'))
-                ) {
-                    $this->_user = WikiUser($userid, $this->_user->_prefs);
-                }
-                // revive other db handle
-                if (isset($this->_user->_prefs->_method)
-                    and ($this->_user->_prefs->_method == 'SQL'
-                        or $this->_user->_prefs->_method == 'ADODB'
-                        or $this->_user->_prefs->_method == 'PDO'
-                        or $this->_user->_prefs->_method == 'HomePage')
-                ) {
-                    $this->_user->_HomePagehandle = $this->getPage($userid);
-                }
-                // need to update the lockfile filehandle
-                if (isa($this->_user, '_FilePassUser')
-                    and $this->_user->_file->lockfile
-                        and !$this->_user->_file->fplock
-                ) {
-                    //$level = $this->_user->_level;
-                    $this->_user = UpgradeUser($this->_user,
-                        new _FilePassUser($userid,
-                            $this->_user->_prefs,
-                            $this->_user->_file->filename));
-                    //$this->_user->_level = $level;
-                }
-                $this->_prefs = & $this->_user->_prefs;
-            } else {
-                $user = WikiUser($userid);
-                $this->_user = & $user;
-                $this->_prefs = & $this->_user->_prefs;
+            // users might switch in a session between the two objects.
+            // restore old auth level here or in updateAuthAndPrefs?
+            //$user = $this->getSessionVar('wiki_user');
+            // revive db handle, because these don't survive sessions
+            if (isset($this->_user) and
+                (!is_a($this->_user, WikiUserClassname())
+                    or (strtolower(get_class($this->_user)) == '_passuser')
+                    or (strtolower(get_class($this->_user)) == '_fusionforgepassuser'))
+            ) {
+                $this->_user = WikiUser($userid, $this->_user->_prefs);
             }
+            // revive other db handle
+            if (isset($this->_user->_prefs->_method)
+                and ($this->_user->_prefs->_method == 'SQL'
+                    or $this->_user->_prefs->_method == 'ADODB'
+                    or $this->_user->_prefs->_method == 'PDO'
+                    or $this->_user->_prefs->_method == 'HomePage')
+            ) {
+                $this->_user->_HomePagehandle = $this->getPage($userid);
+            }
+            // need to update the lockfile filehandle
+            if (is_a($this->_user, '_FilePassUser')
+                and $this->_user->_file->lockfile
+                    and !$this->_user->_file->fplock
+            ) {
+                //$level = $this->_user->_level;
+                $this->_user = UpgradeUser($this->_user,
+                    new _FilePassUser($userid,
+                        $this->_user->_prefs,
+                        $this->_user->_file->filename));
+                //$this->_user->_level = $level;
+            }
+            $this->_prefs = & $this->_user->_prefs;
         } else {
-            $this->_user = new WikiUser($this, $userid);
-            $this->_prefs = $this->_user->getPreferences();
+            $user = WikiUser($userid);
+            $this->_user = & $user;
+            $this->_prefs = & $this->_user->_prefs;
         }
     }
 
@@ -254,7 +250,7 @@ class WikiRequest extends Request
     function updateAuthAndPrefs()
     {
 
-        if (isset($this->_user) and (!isa($this->_user, WikiUserClassname()))) {
+        if (isset($this->_user) and (!is_a($this->_user, WikiUserClassname()))) {
             $this->_user = false;
         }
         // Handle authentication request, if any.
@@ -262,7 +258,7 @@ class WikiRequest extends Request
             $this->setArg('auth', false);
             $this->_handleAuthRequest($auth_args); // possible NORETURN
         } elseif (!$this->_user
-            or (isa($this->_user, WikiUserClassname())
+            or (is_a($this->_user, WikiUserClassname())
                 and !$this->_user->isSignedIn())
         ) {
             // If not auth request, try to sign in as saved user.
@@ -340,6 +336,7 @@ class WikiRequest extends Request
         if (isset($this->_prefs)) {
             return $this->_prefs->get($key);
         }
+        return false;
     }
 
     function & getDbh()
@@ -387,7 +384,7 @@ class WikiRequest extends Request
         if (!empty($HTTP_GET_VARS['start_debug'])) // zend ide support
             return WikiURL($pagename, array('action' => $action, 'start_debug' => 1));
         elseif ($action == 'edit')
-            return WikiURL($pagename); 
+            return WikiURL($pagename);
         else
             return WikiURL($pagename, array('action' => $action));
     }
@@ -420,7 +417,7 @@ class WikiRequest extends Request
             }
             $olduser->PrintLoginForm($this, $auth_args, $fail_message, 'newpage');
             $this->finish(); //NORETURN
-        } elseif (isa($user, WikiUserClassname())) {
+        } elseif (is_a($user, WikiUserClassname())) {
             // Successful login (or logout.)
             $this->_setUser($user);
         } else {
@@ -437,18 +434,13 @@ class WikiRequest extends Request
      */
     private function _signIn($userid)
     {
-        if (ENABLE_USER_NEW) {
-            if (!$this->_user)
-                $this->_user = new _BogoUser($userid);
-            // FIXME: is this always false? shouldn't we try passuser first?
-            if (!$this->_user)
-                $this->_user = new _PassUser($userid);
-        } else {
-            if (!$this->_user)
-                $this->_user = new WikiUser($this, $userid);
-        }
+        if (!$this->_user)
+            $this->_user = new _BogoUser($userid);
+        // FIXME: is this always false? shouldn't we try passuser first?
+        if (!$this->_user)
+            $this->_user = new _PassUser($userid);
         $user = $this->_user->AuthCheck(array('userid' => $userid));
-        if (isa($user, WikiUserClassname())) {
+        if (is_a($user, WikiUserClassname())) {
             $this->_setUser($user); // success!
         }
     }
@@ -474,12 +466,6 @@ class WikiRequest extends Request
         $this->setSessionVar('wiki_user', $user);
         $this->_prefs->set('userid',
             $isSignedIn ? $user->getId() : '');
-        if (!ENABLE_USER_NEW) {
-            if (empty($this->_user->_request))
-                $this->_user->_request =& $this;
-            if (empty($this->_user->_dbi))
-                $this->_user->_dbi =& $this->_dbi;
-        }
         $this->initializeTheme($isSignedIn ? 'login' : 'logout');
         define('MAIN_setUser', true);
     }
@@ -578,7 +564,7 @@ class WikiRequest extends Request
             $actionDescriptions
                 = array('browse' => _("view this page"),
                 'diff' => _("diff this page"),
-                'dumphtml' => _("dump html pages"),
+                'dumphtml' => _("dump HTML pages"),
                 'dumpserial' => _("dump serial pages"),
                 'edit' => _("edit this page"),
                 'rename' => _("rename this page"),
@@ -589,13 +575,13 @@ class WikiRequest extends Request
                 'purge' => _("purge this page"),
                 'remove' => _("remove this page"),
                 'unlock' => _("unlock this page"),
-                'upload' => _("upload a zip dump"),
+                'upload' => _("upload a ZIP dump"),
                 'verify' => _("verify the current action"),
                 'viewsource' => _("view the source of this page"),
                 'xmlrpc' => _("access this wiki via XML-RPC"),
                 'soap' => _("access this wiki via SOAP"),
-                'zip' => _("download a zip dump from this wiki"),
-                'ziphtml' => _("download a html zip dump from this wiki")
+                'zip' => _("download a ZIP dump from this wiki"),
+                'ziphtml' => _("download a HTML ZIP dump from this wiki")
             );
         }
         if (in_array($action, array_keys($actionDescriptions)))
@@ -622,7 +608,7 @@ class WikiRequest extends Request
             $disallowedActionDescriptions
                 = array('browse' => _("Browsing pages"),
                 'diff' => _("Diffing pages"),
-                'dumphtml' => _("Dumping html pages"),
+                'dumphtml' => _("Dumping HTML pages"),
                 'dumpserial' => _("Dumping serial pages"),
                 'edit' => _("Editing pages"),
                 'revert' => _("Reverting to a previous version of pages"),
@@ -632,13 +618,13 @@ class WikiRequest extends Request
                 'purge' => _("Purging pages"),
                 'remove' => _("Removing pages"),
                 'unlock' => _("Unlocking pages"),
-                'upload' => _("Uploading zip dumps"),
+                'upload' => _("Uploading ZIP dumps"),
                 'verify' => _("Verify the current action"),
                 'viewsource' => _("Viewing the source of pages"),
                 'xmlrpc' => _("XML-RPC access"),
                 'soap' => _("SOAP access"),
-                'zip' => _("Downloading zip dumps"),
-                'ziphtml' => _("Downloading html zip dumps")
+                'zip' => _("Downloading ZIP dumps"),
+                'ziphtml' => _("Downloading HTML ZIP dumps")
             );
         }
         if (in_array($action, array_keys($disallowedActionDescriptions)))
@@ -849,7 +835,7 @@ class WikiRequest extends Request
         }
     }
 
-    function finish($errormsg = false)
+    function finish($errormsg = '')
     {
         static $in_exit = 0;
 
@@ -882,8 +868,6 @@ class WikiRequest extends Request
 
     /**
      * Generally pagename is rawurlencoded for older browsers or mozilla.
-     * Typing a pagename into the IE bar will utf-8 encode it, so we have to
-     * fix that with fixTitleEncoding().
      * If USE_PATH_INFO = true, the pagename is stripped from the "/DATA_PATH/PageName&arg=value" line.
      * If false, we support either "/index.php?pagename=PageName&arg=value",
      * or the first arg (1.2.x style): "/index.php?PageName&arg=value"
@@ -891,7 +875,7 @@ class WikiRequest extends Request
     function _deducePagename()
     {
         if (trim(rawurldecode($this->getArg('pagename'))))
-            return fixTitleEncoding(rawurldecode($this->getArg('pagename')));
+            return rawurldecode($this->getArg('pagename'));
 
         if (USE_PATH_INFO) {
             $pathinfo = $this->get('PATH_INFO');
@@ -904,7 +888,7 @@ class WikiRequest extends Request
             $tail = substr($pathinfo, strlen(PATH_INFO_PREFIX));
 
             if (trim($tail) != '' and $pathinfo == PATH_INFO_PREFIX . $tail) {
-                return fixTitleEncoding($tail);
+                return $tail;
             }
         } elseif ($this->isPost()) {
             /*
@@ -921,7 +905,7 @@ class WikiRequest extends Request
              */
             global $HTTP_GET_VARS;
             if (isset($HTTP_GET_VARS['pagename']) and trim($HTTP_GET_VARS['pagename'])) {
-                return fixTitleEncoding(rawurldecode($HTTP_GET_VARS['pagename']));
+                return rawurldecode($HTTP_GET_VARS['pagename']);
             }
         }
 
@@ -931,10 +915,10 @@ class WikiRequest extends Request
          */
         $query_string = $this->get('QUERY_STRING');
         if (trim(rawurldecode($query_string)) and preg_match('/^([^&=]+)(&.+)?$/', $query_string, $m)) {
-            return fixTitleEncoding(rawurldecode($m[1]));
+            return rawurldecode($m[1]);
         }
 
-        return fixTitleEncoding(HOME_PAGE);
+        return HOME_PAGE;
     }
 
     function _deduceAction()
@@ -992,14 +976,14 @@ class WikiRequest extends Request
             // Switched auth between sessions.
             // Note: There's no way to demandload a missing class-definition
             // afterwards! Stupid php.
-            if (defined('FUSIONFORGE') and FUSIONFORGE) {
+            if (defined('FUSIONFORGE') && FUSIONFORGE) {
                 if (empty($_SERVER['PHP_AUTH_USER'])) {
                     return false;
                 }
-            } elseif (isa($user, WikiUserClassname())) {
+            } elseif (is_a($user, WikiUserClassname())) {
                 $this->_user = $user;
                 $this->_user->_authhow = 'session';
-                return ENABLE_USER_NEW ? $user->UserName() : $this->_user;
+                return $user->UserName();
             }
         }
 
@@ -1014,7 +998,7 @@ class WikiRequest extends Request
 
         if ($userid = $this->getCookieVar(getCookieName())) {
             if (!empty($userid) and substr($userid, 0, 2) != 's:') {
-                $this->_user->authhow = 'cookie';
+                $this->_user->_authhow = 'cookie';
                 return $userid;
             }
         }
@@ -1402,8 +1386,8 @@ function validateSessionPath()
 
 function main()
 {
-    if (version_compare(PHP_VERSION, '5.2', '<')) {
-        exit(_("Your PHP version is too old. You must have at least PHP 5.2."));
+    if (version_compare(PHP_VERSION, '5.3', '<')) {
+        exit(_("Your PHP version is too old. You must have at least PHP 5.3."));
     }
 
     if (!USE_DB_SESSION)
@@ -1418,7 +1402,7 @@ function main()
     // Postpone warnings
     global $ErrorManager;
     if (defined('E_STRICT')) // and (E_ALL & E_STRICT)) // strict php5?
-        $ErrorManager->setPostponedErrorMask(E_NOTICE | E_USER_NOTICE | E_USER_WARNING | E_WARNING | E_STRICT | ((check_php_version(5, 3)) ? E_DEPRECATED : 0));
+        $ErrorManager->setPostponedErrorMask(E_NOTICE | E_USER_NOTICE | E_USER_WARNING | E_WARNING | E_STRICT | E_DEPRECATED);
     else
         $ErrorManager->setPostponedErrorMask(E_NOTICE | E_USER_NOTICE | E_USER_WARNING | E_WARNING);
     $request = new WikiRequest();
@@ -1479,7 +1463,7 @@ function main()
     $request->finish();
 }
 
-if ((!(defined('FUSIONFORGE') and FUSIONFORGE)) || (forge_get_config('installation_environment') != 'production')) {
+if ((!(defined('FUSIONFORGE') && FUSIONFORGE)) || (forge_get_config('installation_environment') != 'production')) {
     if (defined('E_STRICT') and (E_ALL & E_STRICT)) // strict php5?
         error_reporting(E_ALL & ~E_STRICT); // exclude E_STRICT
     else
@@ -1489,8 +1473,14 @@ if ((!(defined('FUSIONFORGE') and FUSIONFORGE)) || (forge_get_config('installati
 }
 
 // don't run the main loop for special requests (test, getimg, xmlrpc, soap, ...)
-if (!defined('PHPWIKI_NOMAIN') or !PHPWIKI_NOMAIN)
+if (!defined('PHPWIKI_NOMAIN') or !PHPWIKI_NOMAIN) {
     main();
+} else {
+    // We need the global $request and $WikiTheme
+    $request = new WikiRequest();
+    require_once 'lib/WikiTheme.php';
+    $WikiTheme = new WikiTheme('default');
+}
 
 // Local Variables:
 // mode: php

@@ -1,5 +1,5 @@
-Date: Tue, 29 Jul 2014 10:42:12 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.0)
+Date: Mon, 29 Jun 2015 12:04:28 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FPagePermissions;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -36,7 +36,7 @@ Consider the following perm:
 
 -----
 
-For Authentication see ~WikiUserNew.php, ~WikiGroup.php and main.php
+For Authentication see ~WikiUser.php, ~WikiGroup.php and main.php
 
 I suspect ACL page permissions to degrade performance by 10%
 

@@ -335,7 +335,6 @@ div.wikitext {
 }
 
 blockquote.mail-style-quote {
-    border-left: #FF9933; /* MODIFY-color */
     margin: 0;
     margin-bottom: 1em;
     border: 1px solid #FF9933; /* MODIFY-color */
@@ -376,6 +375,10 @@ div.toolbar {
 .toolbar {
     padding: 0;
     margin: 0;
+}
+
+img.toolbar:hover {
+    cursor: pointer;
 }
 
 .edit-toolbar {
@@ -1304,13 +1307,26 @@ table.boxed th, table.bordered th {
     background-color: #d8d8d8;
 }
 
-/* For emacs users
- *
- * Local Variables:
- * mode: c
- * c-file-style: cc-mode
- * tab-width: 8
- * c-hanging-comment-ender-p: nil
- * indent-tabs-mode: nil
- * End:
- */
+table.sortable th.header {
+    background-image: url(../default/buttons/sort_none.gif);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}
+
+table.sortable th.headerSortUp {
+    background-image: url(../default/buttons/sort_up.gif);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}
+
+table.sortable th.headerSortDown {
+    background-image: url(../default/buttons/sort_down.gif);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}

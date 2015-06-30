@@ -20,8 +20,8 @@ Here are pages on <?php echo WIKI_NAME ?> that <?php echo $SENDER ?> thinks you 
 ?>
 <br />
 <?php if ($dbi->isWikiPage($SENDERUSERNAME)) { ?>
-<p>Also, <?php echo $SENDER; ?> has his own homepage at <?php echo WIKI_NAME ?>: <a href="<?php echo WikiUrl($SENDERUSERNAME, '', true); ?>"><?php echo $SENDER ?>'s page</a></p> 
+<p>Also, <?php echo $SENDER; ?> has his own homepage at <?php echo WIKI_NAME ?>: <a href="<?php echo WikiUrl($SENDERUSERNAME, '', true); ?>"><?php echo $SENDER ?>'s page</a></p>
 <?php } ?>
 <br>
-<p>To create your own login on <?php echo WIKI_NAME ?>, you can <a href="<?php echo WikiUrl('NewUserRegister', '', true) ?>">Register</a></p> 
+<p>To create your own login on <?php echo WIKI_NAME ?>, you can <a href="<?php echo WikiUrl('NewUserRegister', '', true) ?>">Register</a></p>
 </div>

@@ -43,6 +43,13 @@ class WikiPlugin_WikiForm
             'size' => 50);
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         extract($this->getArgs($argstr, $request));
@@ -60,6 +67,7 @@ class WikiPlugin_WikiForm
         switch ($action) {
             case 'loadfile':
                 $input['name'] = 'source';
+                $input['required'] = 'required';
                 if (!$default)
                     $input['value'] = DEFAULT_DUMP_DIR;
                 if (!$buttontext)
@@ -68,6 +76,7 @@ class WikiPlugin_WikiForm
                 break;
             case 'dumpserial':
                 $input['name'] = 'directory';
+                $input['required'] = 'required';
                 if (!$default)
                     $input['value'] = DEFAULT_DUMP_DIR;
                 if (!$buttontext)
@@ -76,6 +85,7 @@ class WikiPlugin_WikiForm
                 break;
             case 'dumphtml':
                 $input['name'] = 'directory';
+                $input['required'] = 'required';
                 if (!$default)
                     $input['value'] = HTML_DUMP_DIR;
                 if (!$buttontext)
@@ -89,6 +99,7 @@ class WikiPlugin_WikiForm
                     'type' => 'hidden')));
                 $input['name'] = 'file';
                 $input['type'] = 'file';
+                $input['required'] = 'required';
                 if (!$buttontext)
                     $buttontext = _("Upload");
                 $class = false; // local OS function, so use native OS button

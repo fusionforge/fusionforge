@@ -56,18 +56,14 @@
     sort_file_mtime ($a, $b)
     class fileSet {fileSet($directory, $filepattern = false),
                    getFiles($exclude='', $sortby='', $limit='') }
-    class ListRegexExpand { listMatchCallback($item, $key),
-                            expandRegex ($index, &$pages) }
+    class imageSet extends fileSet
+    class imageOrVideoSet extends fileSet
 
     glob_to_pcre ($glob)
     glob_match ($glob, $against, $case_sensitive = true)
-    explodeList ($input, $allnames, $glob_style = true, $case_sensitive = true)
     explodePageList ($input, $perm = false)
-    isa ($object, $class)
-    can ($object, $method)
     function_usable ($function_name)
     wikihash ($x)
-    better_srand ($seed = '')
     count_all ($arg)
     isSubPage ($pagename)
     subPageSlice ($pagename, $pos)
@@ -75,22 +71,17 @@
 
     phpwiki_version ()
     isWikiWord ($word)
-    obj2hash ($obj, $exclude = false, $fields = false)
-    isUtf8String ($s)
-    fixTitleEncoding ($s)
     url_get_contents ($uri)
     GenerateId ($name)
     firstNWordsOfContent ($n, $content)
     extractSection ($section, $content, $page, $quiet = false, $sectionhead = false)
     isExternalReferrer()
 
-    charset_convert($from, $to, $data)
     string_starts_with($string, $prefix)
     string_ends_with($string, $suffix)
     array_remove($arr,$value)
     longer_timeout($secs=30)
     printSimpleTrace($bt)
-    getMemoryUsage()
     binary_search($needle, $haystack)
     is_localhost()
     javascript_quote_string($s)
@@ -172,13 +163,13 @@ function WikiURL($pagename, $args = array(), $get_abs_url = false)
     $anchor = false;
 
     if (is_object($pagename)) {
-        if (isa($pagename, 'WikiDB_Page')) {
+        if (is_a($pagename, 'WikiDB_Page')) {
             $pagename = $pagename->getName();
-        } elseif (isa($pagename, 'WikiDB_PageRevision')) {
+        } elseif (is_a($pagename, 'WikiDB_PageRevision')) {
             $page = $pagename->getPage();
             $args['version'] = $pagename->getVersion();
             $pagename = $page->getName();
-        } elseif (isa($pagename, 'WikiPageName')) {
+        } elseif (is_a($pagename, 'WikiPageName')) {
             $anchor = $pagename->anchor;
             $pagename = $pagename->name;
         } else { // php5
@@ -261,16 +252,6 @@ function AbsoluteURL($url)
     return SERVER_URL . $url;
 }
 
-function DataURL($url)
-{
-    if (preg_match('/^https?:/', $url))
-        return $url;
-    $url = NormalizeWebFileName($url);
-    if (DEBUG and $GLOBALS['request']->getArg('start_debug') and substr($url, -4, 4) == '.php')
-        $url .= "?start_debug=1"; // XMLRPC and SOAP debugging helper.
-    return AbsoluteURL($url);
-}
-
 /**
  * Generates icon in front of links.
  *
@@ -283,6 +264,7 @@ function DataURL($url)
 function IconForLink($protocol_or_url)
 {
     global $WikiTheme;
+/*
     if (0 and $filename_suffix == false) {
         // display apache style icon for file type instead of protocol icon
         // - archive: unix:gz,bz2,tgz,tar,z; mac:dmg,dmgz,bin,img,cpt,sit; pc:zip;
@@ -291,13 +273,14 @@ function IconForLink($protocol_or_url)
         // - audio: mp3,mp2,aiff,aif,au
         // - multimedia: mpeg,mpg,mov,qt
     } else {
+*/
         list ($proto) = explode(':', $protocol_or_url, 2);
         $src = $WikiTheme->getLinkIconURL($proto);
         if ($src)
             return HTML::img(array('src' => $src, 'alt' => "", 'class' => 'linkicon'));
         else
             return false;
-    }
+/*    } */
 }
 
 /**
@@ -338,7 +321,7 @@ function PossiblyGlueIconToText($proto_or_url, $text)
             $prefix = false;
         }
         $text = HTML::span(array('style' => 'white-space: nowrap'),
-            $last_word, HTML::Raw('&nbsp;'), $icon);
+            $last_word, HTML::raw('&nbsp;'), $icon);
         if ($prefix)
             $text = HTML($prefix, $text);
         return $text;
@@ -486,13 +469,13 @@ function LinkImage($url, $alt = "")
         if (file_exists($file)) {
             $link = HTML::img(array('src' => $ori_url));
             trigger_error(
-                sprintf(_("Invalid image link fixed %s => %s. Spaces must be quoted with %%20."),
+                sprintf(_("Invalid image link fixed “%s” => “%s”. Spaces must be quoted with %%20."),
                     $url, $ori_url), E_USER_WARNING);
         } elseif (string_starts_with($ori_url, getUploadDataPath())) {
             $file = substr($file, strlen(getUploadDataPath()));
             $path = getUploadFilePath() . $file;
             if (file_exists($path)) {
-                trigger_error(sprintf(_("Invalid image link fixed \"%s\" => \"%s\".\n Spaces must be quoted with %%20."),
+                trigger_error(sprintf(_("Invalid image link fixed “%s” => “%s”. Spaces must be quoted with %%20."),
                     $url, $ori_url), E_USER_WARNING);
                 $link->setAttr('src', getUploadDataPath() . $file);
                 $url = $ori_url;
@@ -654,7 +637,7 @@ function ImgObject($img, $url)
     }
     $type = $img->getAttr('type');
     if (!$type) {
-        if (function_exists('mime_content_type') && file_exists($url)) {
+        if (file_exists($url)) {
             $type = mime_content_type($url);
         }
     }
@@ -674,20 +657,20 @@ function ImgObject($img, $url)
 
 class Stack
 {
-    function Stack()
+    function __construct()
     {
         $this->items = array();
         $this->size = 0;
     }
 
-    function push($item)
+    public function push($item)
     {
         $this->items[$this->size] = $item;
         $this->size++;
         return true;
     }
 
-    function pop()
+    public function pop()
     {
         if ($this->size == 0) {
             return false; // stack is empty
@@ -696,12 +679,12 @@ class Stack
         return $this->items[$this->size];
     }
 
-    function cnt()
+    public function cnt()
     {
         return $this->size;
     }
 
-    function top()
+    public function top()
     {
         if ($this->size)
             return $this->items[$this->size - 1];
@@ -715,7 +698,7 @@ class Stack
 
 function SplitQueryArgs($query_args = '')
 {
-    // FIXME: use the arg-seperator which might not be &
+    // FIXME: use the arg-separator which might not be &
     $split_args = explode('&', $query_args);
     $args = array();
     while (list($key, $val) = each($split_args))
@@ -726,6 +709,11 @@ function SplitQueryArgs($query_args = '')
 
 function LinkPhpwikiURL($url, $text = '', $basepage = false)
 {
+    /**
+     * @var WikiRequest $request
+     */
+    global $request;
+
     $args = array();
 
     if (!preg_match('/^ phpwiki: ([^?]*) [?]? (.*) $/x', $url, $m)) {
@@ -748,7 +736,7 @@ function LinkPhpwikiURL($url, $text = '', $basepage = false)
     }
 
     if (empty($pagename))
-        $pagename = $GLOBALS['request']->getArg('pagename');
+        $pagename = $request->getArg('pagename');
 
     if (isset($args['action']) && $args['action'] == 'browse')
         unset($args['action']);
@@ -763,7 +751,7 @@ function LinkPhpwikiURL($url, $text = '', $basepage = false)
         $class = 'wikiaction';
     else {
         // Don't allow administrative links on unlocked pages.
-        $dbi = $GLOBALS['request']->getDbh();
+        $dbi = $request->getDbh();
         $page = $dbi->getPage($basepage ? $basepage : $pagename);
         if (!$page->get('locked'))
             return HTML::span(array('class' => 'wikiunsafe'),
@@ -780,9 +768,7 @@ function LinkPhpwikiURL($url, $text = '', $basepage = false)
         return $WikiTheme->linkBadWikiWord($wikipage, $url);
     }
 
-    return HTML::a(array('href' => WikiURL($pagename, $args),
-            'class' => $class),
-        $text);
+    return HTML::a(array('href' => WikiURL($pagename, $args), 'class' => $class), $text);
 }
 
 /**
@@ -812,6 +798,9 @@ class WikiPageName
      */
     public $anchor;
 
+    public $_errors;
+    public $_warnings;
+
     /**
      * @param mixed $name Page name.
      * WikiDB_Page, WikiDB_PageRevision, or string.
@@ -840,9 +829,7 @@ class WikiPageName
                     // expand Talk or User, but not to absolute urls!
                     if (strstr($url, '//')) {
                         if ($moniker == 'Talk')
-                            $name = $name . SUBPAGE_SEPARATOR . _("Discussion");
-                        elseif ($moniker == 'User')
-                            $name = $name;
+                            $name = $name . '/' . _("Discussion");
                     } else {
                         $name = $url;
                     }
@@ -850,7 +837,7 @@ class WikiPageName
                 }
             }
             // FIXME: We should really fix the cause for "/PageName" in the WikiDB
-            if ($name == '' or $name[0] == SUBPAGE_SEPARATOR) {
+            if ($name == '' or $name[0] == '/') {
                 if ($basename)
                     $name = $this->_pagename($basename) . $name;
                 else {
@@ -875,7 +862,7 @@ class WikiPageName
     function getParent()
     {
         $name = $this->name;
-        if (!($tail = strrchr($name, SUBPAGE_SEPARATOR)))
+        if (!($tail = strrchr($name, '/')))
             return false;
         return substr($name, 0, -strlen($tail));
     }
@@ -901,24 +888,18 @@ class WikiPageName
             $this->shortName, join(', ', $warnings));
     }
 
-    function _pagename($page)
+    private function _pagename($page)
     {
-        if (isa($page, 'WikiDB_Page'))
+        if (is_a($page, 'WikiDB_Page'))
             return $page->getName();
-        elseif (isa($page, 'WikiDB_PageRevision'))
-            return $page->getPageName(); elseif (isa($page, 'WikiPageName'))
+        elseif (is_a($page, 'WikiDB_PageRevision'))
+            return $page->getPageName();
+        elseif (is_a($page, 'WikiPageName'))
             return $page->name;
-        // '0' or e.g. '1984' should be allowed though
-        if (!is_string($page) and !is_integer($page)) {
-            trigger_error(sprintf("Non-string pagename “%s” (%s)(%s)",
-                    $page, gettype($page), get_class($page)),
-                E_USER_NOTICE);
-        }
-        //assert(is_string($page));
         return $page;
     }
 
-    function _normalize_bad_pagename($name)
+    private function _normalize_bad_pagename($name)
     {
         trigger_error("Bad pagename: " . $name, E_USER_WARNING);
 
@@ -927,8 +908,8 @@ class WikiPageName
             global $request;
             return $request->getArg('pagename');
         }
-        assert($name[0] == SUBPAGE_SEPARATOR);
-        $this->_errors[] = sprintf(_("Leading %s not allowed"), SUBPAGE_SEPARATOR);
+        assert($name[0] == '/');
+        $this->_errors[] = _("Leading “/” not allowed");
         return substr($name, 1);
     }
 
@@ -939,15 +920,15 @@ class WikiPageName
      * which cannot be deleted anymore, because unknown chars are compressed.
      * So BEFORE importing a file _check must be done !!!
      */
-    function _check($pagename)
+    private function _check($pagename)
     {
         // Compress internal white-space to single space character.
-        $pagename = preg_replace('/[\s\xa0]+/', ' ', $orig = $pagename);
+        $pagename = preg_replace('/[\s]+/', ' ', $orig = $pagename);
         if ($pagename != $orig)
             $this->_warnings[] = _("White space converted to single space");
 
         // Delete any control characters.
-        if (DATABASE_TYPE == 'cvs' or DATABASE_TYPE == 'file' or DATABASE_TYPE == 'flatfile') {
+        if (DATABASE_TYPE == 'file' or DATABASE_TYPE == 'flatfile') {
             $pagename = preg_replace('/[\x00-\x1f\x7f\x80-\x9f]/', '', $orig = $pagename);
             if ($pagename != $orig)
                 $this->_errors[] = _("Control characters not allowed");
@@ -957,16 +938,10 @@ class WikiPageName
         $pagename = trim($pagename);
 
         $orig = $pagename;
-        while ($pagename and $pagename[0] == SUBPAGE_SEPARATOR)
+        while ($pagename and $pagename[0] == '/')
             $pagename = substr($pagename, 1);
         if ($pagename != $orig)
-            $this->_errors[] = sprintf(_("Leading %s not allowed"), SUBPAGE_SEPARATOR);
-
-        // ";" is urlencoded, so safe from php arg-delim problems
-        /*if (strstr($pagename, ';')) {
-            $this->_warnings[] = _("';' is deprecated");
-            $pagename = str_replace(';', '', $pagename);
-        }*/
+            $this->_errors[] = _("Leading “/” not allowed");
 
         // not only for SQL, also to restrict url length
         if (strlen($pagename) > MAX_PAGENAME_LENGTH) {
@@ -974,9 +949,8 @@ class WikiPageName
             $this->_errors[] = _("Page name too long");
         }
 
-        // disallow some chars only on file and cvs
-        if ((DATABASE_TYPE == 'cvs'
-            or DATABASE_TYPE == 'file'
+        // disallow some chars only on file
+        if ((DATABASE_TYPE == 'file'
             or DATABASE_TYPE == 'flatfile')
             and preg_match('/(:|\.\.)/', $pagename, $m)
         ) {
@@ -995,7 +969,7 @@ class WikiPageName
  * Converts all tabs to (the appropriate number of) spaces.
  *
  * @param string $str
- * @param integer $tab_width
+ * @param int $tab_width
  * @return string
  */
 function expand_tabs($str, $tab_width = 8)
@@ -1047,7 +1021,7 @@ function SplitPagename($page)
                 $RE[] = '/([[:lower:]])((?<!Mc|Di)[[:upper:]]|\d)/';
                 break;
         }
-        $sep = preg_quote(SUBPAGE_SEPARATOR, '/');
+        $sep = preg_quote('/', '/');
         // This the single-letter words 'I' and 'A' from any following
         // capitalized words.
         switch ($GLOBALS['LANG']) {
@@ -1063,7 +1037,7 @@ function SplitPagename($page)
         $RE[] = '/([[:alpha:]])(_)/';
         // Split numerals from following letters.
         $RE[] = '/(\d)([[:alpha:]])/';
-        // Split at subpage seperators. TBD in WikiTheme.php
+        // Split at subpage separators. TBD in WikiTheme.php
         $RE[] = "/([^${sep}]+)(${sep})/";
         $RE[] = "/(${sep})([^${sep}]+)/";
 
@@ -1361,6 +1335,35 @@ function sort_file_mtime($a, $b)
 
 class fileSet
 {
+    function __construct($directory, $filepattern = false)
+    {
+        $this->_fileList = array();
+        $this->_pattern = $filepattern;
+        if ($filepattern) {
+            $this->_pcre_pattern = glob_to_pcre($this->_pattern);
+        }
+        $this->_case = !isWindows();
+        $this->_pathsep = '/';
+
+        if (empty($directory) or !file_exists($directory) or !is_dir($directory)) {
+            return; // early return
+        }
+
+        $dir_handle = opendir($dir = $directory);
+        if (empty($dir_handle)) {
+            return; // early return
+        }
+
+        while ($filename = readdir($dir_handle)) {
+            if ($filename[0] == '.' || filetype($dir . $this->_pathsep . $filename) != 'file')
+                continue;
+            if ($this->_filenameSelector($filename)) {
+                array_push($this->_fileList, "$filename");
+            }
+        }
+        closedir($dir_handle);
+    }
+
     /**
      * Build an array in $this->_fileList of files from $dirname.
      * Subdirectories are not traversed.
@@ -1368,7 +1371,7 @@ class fileSet
      * (This was a function LoadDir in lib/loadsave.php)
      * See also http://www.php.net/manual/en/function.readdir.php
      */
-    function getFiles($exclude = '', $sortby = '', $limit = '')
+    public function getFiles($exclude = '', $sortby = '', $limit = '')
     {
         $list = $this->_fileList;
 
@@ -1394,7 +1397,7 @@ class fileSet
         return $list;
     }
 
-    function _filenameSelector($filename)
+    protected function _filenameSelector($filename)
     {
         if (!$this->_pattern)
             return true;
@@ -1405,73 +1408,25 @@ class fileSet
                 $filename);
         }
     }
+}
 
-    function fileSet($directory, $filepattern = false)
+class imageSet extends fileSet
+{
+    /**
+     * A file is considered an image when the suffix matches one from
+     * INLINE_IMAGES.
+     */
+    protected function _filenameSelector($filename)
     {
-        $this->_fileList = array();
-        $this->_pattern = $filepattern;
-        if ($filepattern) {
-            $this->_pcre_pattern = glob_to_pcre($this->_pattern);
-        }
-        $this->_case = !isWindows();
-        $this->_pathsep = '/';
-
-        if (empty($directory)) {
-            trigger_error(sprintf(_("%s is empty."), 'directoryname'),
-                E_USER_NOTICE);
-            return; // early return
-        }
-
-        @ $dir_handle = opendir($dir = $directory);
-        if (empty($dir_handle)) {
-            trigger_error(sprintf(_("Unable to open directory “%s” for reading"),
-                $dir), E_USER_NOTICE);
-            return; // early return
-        }
-
-        while ($filename = readdir($dir_handle)) {
-            if ($filename[0] == '.' || filetype($dir . $this->_pathsep . $filename) != 'file')
-                continue;
-            if ($this->_filenameSelector($filename)) {
-                array_push($this->_fileList, "$filename");
-                //trigger_error(sprintf(_("found file %s"), $filename),
-                //                      E_USER_NOTICE); //debugging
-            }
-        }
-        closedir($dir_handle);
+        return is_image($filename);
     }
 }
 
-// File globbing
-
-// expands a list containing regex's to its matching entries
-class ListRegexExpand
+class imageOrVideoSet extends fileSet
 {
-    public $match, $list, $index, $case_sensitive;
-    function ListRegexExpand(&$list, $match, $case_sensitive = true)
+    protected function _filenameSelector($filename)
     {
-        $this->match = $match;
-        $this->list = &$list;
-        $this->case_sensitive = $case_sensitive;
-        //$this->index = false;
-    }
-
-    function listMatchCallback($item, $key)
-    {
-        $quoted = str_replace('/', '\/', $item);
-        if (preg_match('/' . $this->match . ($this->case_sensitive ? '/' : '/i'),
-            $quoted)
-        ) {
-            unset($this->list[$this->index]);
-            $this->list[] = $item;
-        }
-    }
-
-    function expandRegex($index, &$pages)
-    {
-        $this->index = $index;
-        array_walk($pages, array($this, 'listMatchCallback'));
-        return $this->list;
+        return is_image($filename) or is_video($filename);
     }
 }
 
@@ -1518,27 +1473,6 @@ function glob_match($glob, $against, $case_sensitive = true)
         $against);
 }
 
-function explodeList($input, $allnames, $glob_style = true, $case_sensitive = true)
-{
-    $list = explode(',', $input);
-    // expand wildcards from list of $allnames
-    if (preg_match('/[\?\*]/', $input)) {
-        // Optimizing loop invariants:
-        // http://phplens.com/lens/php-book/optimizing-debugging-php.php
-        for ($i = 0, $max = sizeof($list); $i < $max; $i++) {
-            $f = $list[$i];
-            if (preg_match('/[\?\*]/', $f)) {
-                reset($allnames);
-                $expand = new ListRegexExpand($list,
-                    $glob_style ? glob_to_pcre($f) : $f, $case_sensitive);
-                $expand->expandRegex($i, $allnames);
-            }
-        }
-    }
-    return $list;
-}
-
-// echo implode(":",explodeList("Test*",array("xx","Test1","Test2")));
 function explodePageList($input, $include_empty = false, $sortby = 'pagename',
                          $limit = '', $exclude = '')
 {
@@ -1547,23 +1481,6 @@ function explodePageList($input, $include_empty = false, $sortby = 'pagename',
 }
 
 // Class introspections
-
-/**
- * Determine whether object is of a specified type.
- * In PHP builtin since 4.2.0 as is_a()
- * is_a() deprecated in PHP 5, in favor of instanceof operator
- * @param $object object An object.
- * @param $class string Class name.
- * @return bool True iff $object is a $class
- * or a sub-type of $class.
- */
-function isa($object, $class)
-{
-    $lclass = $class;
-    return is_object($object)
-        && (strtolower(get_class($object)) == strtolower($class)
-            || is_subclass_of($object, $lclass));
-}
 
 /** Determine whether a function is okay to use.
  *
@@ -1610,39 +1527,15 @@ function wikihash($x)
         return $x->hash();
     }
     trigger_error("Can't hash $x", E_USER_ERROR);
-}
-
-/**
- * Seed the random number generator.
- *
- * better_srand() ensures the randomizer is seeded only once.
- *
- * How random do you want it? See:
- * http://www.php.net/manual/en/function.srand.php
- * http://www.php.net/manual/en/function.mt-srand.php
- */
-function better_srand($seed = '')
-{
-    static $wascalled = FALSE;
-    if (!$wascalled) {
-        $seed = $seed === '' ? (double)microtime() * 1000000 : $seed;
-        function_exists('mt_srand') ? mt_srand($seed) : srand($seed);
-        $wascalled = TRUE;
-        //trigger_error("new random seed", E_USER_NOTICE); //debugging
-    }
+    return false;
 }
 
 function rand_ascii($length = 1)
 {
-    better_srand();
     $s = "";
     for ($i = 1; $i <= $length; $i++) {
         // return only typeable 7 bit ascii, avoid quotes
-        if (function_exists('mt_rand'))
-            $s .= chr(mt_rand(40, 126));
-        else
-            // the usually bad glibc srand()
-            $s .= chr(rand(40, 126));
+        $s .= chr(mt_rand(40, 126));
     }
     return $s;
 }
@@ -1653,15 +1546,11 @@ function rand_ascii_readable($length = 6)
 {
     // Pick a few random letters or numbers
     $word = "";
-    better_srand();
     // Don't use 1lI0O, because they're hard to read
     $letters = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789";
     $letter_len = strlen($letters);
     for ($i = 0; $i < $length; $i++) {
-        if (function_exists('mt_rand'))
-            $word .= $letters[mt_rand(0, $letter_len - 1)];
-        else
-            $word .= $letters[rand(0, $letter_len - 1)];
+        $word .= $letters[mt_rand(0, $letter_len - 1)];
     }
     return $word;
 }
@@ -1686,16 +1575,17 @@ function count_all($arg)
             $count += count_all($val);
         return $count;
     }
+    return 0;
 }
 
 function isSubPage($pagename)
 {
-    return (strstr($pagename, SUBPAGE_SEPARATOR));
+    return (strstr($pagename, '/'));
 }
 
 function subPageSlice($pagename, $pos)
 {
-    $pages = explode(SUBPAGE_SEPARATOR, $pagename);
+    $pages = explode('/', $pagename);
     $pages = array_slice($pages, $pos, 1);
     return $pages[0];
 }
@@ -1745,7 +1635,7 @@ class Alert
     /**
      * Show the alert box.
      */
-    function show()
+    public function show()
     {
         global $request;
 
@@ -1758,7 +1648,7 @@ class Alert
         $request->finish();
     }
 
-    function _getButtons()
+    private function _getButtons()
     {
         global $request;
 
@@ -1794,11 +1684,15 @@ function phpwiki_version()
 
 function phpwiki_gzhandler($ob)
 {
-    if (function_exists('gzencode'))
-        $ob = gzencode($ob);
-    $GLOBALS['request']->_ob_get_length = strlen($ob);
+    /**
+     * @var WikiRequest $request
+     */
+    global $request;
+
+    $ob = gzencode($ob);
+    $request->_ob_get_length = strlen($ob);
     if (!headers_sent()) {
-        header(sprintf("Content-Length: %d", $GLOBALS['request']->_ob_get_length));
+        header(sprintf("Content-Length: %d", $request->_ob_get_length));
     }
     return $ob;
 }
@@ -1810,20 +1704,6 @@ function isWikiWord($word)
     return preg_match("/^$WikiNameRegexp\$/", $word);
 }
 
-// needed to store serialized objects-values only (perm, pref)
-function obj2hash($obj, $exclude = false, $fields = false)
-{
-    $a = array();
-    if (!$fields) $fields = get_object_vars($obj);
-    foreach ($fields as $key => $val) {
-        if (is_array($exclude)) {
-            if (in_array($key, $exclude)) continue;
-        }
-        $a[$key] = $val;
-    }
-    return $a;
-}
-
 /**
  * isAsciiString($string)
  */
@@ -1831,37 +1711,6 @@ function isAsciiString($s)
 {
     $ptrASCII = '[\x00-\x7F]';
     return preg_match("/^($ptrASCII)*$/s", $s);
-}
-
-/**
- * isUtf8String($string) - cheap utf-8 detection
- *
- * segfaults for strings longer than 10kb!
- * Use http://www.phpdiscuss.com/article.php?id=565&group=php.i18n or
- * checkTitleEncoding() at http://cvs.sourceforge.net/viewcvs.py/wikipedia/phase3/languages/Language.php
- */
-function isUtf8String($s)
-{
-    $ptrASCII = '[\x00-\x7F]';
-    $ptr2Octet = '[\xC2-\xDF][\x80-\xBF]';
-    $ptr3Octet = '[\xE0-\xEF][\x80-\xBF]{2}';
-    $ptr4Octet = '[\xF0-\xF4][\x80-\xBF]{3}';
-    $ptr5Octet = '[\xF8-\xFB][\x80-\xBF]{4}';
-    $ptr6Octet = '[\xFC-\xFD][\x80-\xBF]{5}';
-    return preg_match("/^($ptrASCII|$ptr2Octet|$ptr3Octet|$ptr4Octet|$ptr5Octet|$ptr6Octet)*$/s", $s);
-}
-
-/**
- * Check for UTF-8 URLs; Internet Explorer produces these if you
- * type non-ASCII chars in the URL bar or follow unescaped links.
- * Requires urldecoded pagename.
- * Fixes sf.net bug #953949
- *
- * src: languages/Language.php:checkTitleEncoding() from mediawiki
- */
-function fixTitleEncoding($s)
-{
-    return $s;
 }
 
 /**
@@ -1918,6 +1767,7 @@ function firstNWordsOfContent($n, $content)
             //$content = join("\n", $content);
             //$return_array = true;
             $wordcount = 0;
+            $new = array();
             foreach ($content as $line) {
                 $words = explode(' ', $line);
                 if ($wordcount + count($words) > $n) {
@@ -1931,7 +1781,7 @@ function firstNWordsOfContent($n, $content)
             }
             return $new;
         } else {
-            // fixme: use better whitespace/word seperators
+            // fixme: use better whitespace/word separators
             $words = explode(' ', $content);
             if (count($words) > $n) {
                 return join(' ', array_slice($words, 0, $n))
@@ -2000,6 +1850,7 @@ function extractSections($sections, $content, $page, $quiet = false, $sectionhea
             }
         }
     }
+    return '';
 }
 
 // use this faster version: only load ExternalReferrer if we came from an external referrer
@@ -2017,7 +1868,7 @@ function isExternalReferrer(&$request)
 }
 
 /**
- * Useful for PECL overrides: cvsclient, ldap, soap, xmlrpc, pdo, pdo_<driver>
+ * Useful for PECL overrides: ldap, soap, xmlrpc, pdo, pdo_<driver>
  */
 function loadPhpExtension($extension)
 {
@@ -2030,25 +1881,6 @@ function loadPhpExtension($extension)
             return false;
     }
     return extension_loaded($extension);
-}
-
-function charset_convert($from, $to, $data)
-{
-    if (strtolower($from) == 'utf-8' and strtolower($to) == 'iso-8859-1')
-        return utf8_decode($data);
-    if (strtolower($to) == 'utf-8' and strtolower($from) == 'iso-8859-1')
-        return utf8_encode($data);
-
-    if (loadPhpExtension("iconv")) {
-        $tmpdata = iconv($from, $to, $data);
-        if (!$tmpdata)
-            trigger_error("charset conversion $from => $to failed. Wrong source charset?", E_USER_WARNING);
-        else
-            $data = $tmpdata;
-    } else {
-        trigger_error("The iconv extension cannot be loaded", E_USER_WARNING);
-    }
-    return $data;
 }
 
 function string_starts_with($string, $prefix)
@@ -2082,65 +1914,12 @@ function longer_timeout($secs = 30)
 
 function printSimpleTrace($bt)
 {
-    //print_r($bt);
     echo "\nTraceback:\n";
-    if (function_exists('debug_print_backtrace')) { // >= 5
-        debug_print_backtrace();
-    } else {
-        foreach ($bt as $i => $elem) {
-            if (!array_key_exists('file', $elem)) {
-                continue;
-            }
-            //echo join(" ",array_values($elem)),"\n";
-            echo "  ", $elem['file'], ':', $elem['line'], " ", $elem['function'], "\n";
-        }
-    }
+    debug_print_backtrace();
 }
 
 /**
- * Return the used process memory, in bytes.
- * Enable the section which will work for you. They are very slow.
- * Special quirks for Windows: Requires cygwin.
- */
-function getMemoryUsage()
-{
-    //if (!(DEBUG & _DEBUG_VERBOSE)) return;
-    if (function_exists('memory_get_usage') and memory_get_usage()) {
-        return memory_get_usage();
-    } elseif (function_exists('getrusage') and ($u = @getrusage()) and !empty($u['ru_maxrss'])) {
-        $mem = $u['ru_maxrss'];
-    } elseif (substr(PHP_OS, 0, 3) == 'WIN') { // may require a newer cygwin
-        // what we want is the process memory only: apache or php (if CGI)
-        $pid = getmypid();
-        $memstr = '';
-        // win32_ps_stat_proc, win32_ps_stat_mem
-        if (function_exists('win32_ps_list_procs')) {
-            $info = win32_ps_stat_proc($pid);
-            $memstr = $info['mem']['working_set_size'];
-        } elseif (0) {
-            // This works only if it's a cygwin process (apache or php).
-            // Requires a newer cygwin
-            $memstr = exec("cat /proc/$pid/statm |cut -f1");
-
-            // if it's native windows use something like this:
-            //   (requires pslist from sysinternals.com, grep, sed and perl)
-            //$memstr = exec("pslist $pid|grep -A1 Mem|sed 1d|perl -ane\"print \$"."F[5]\"");
-        }
-        return (integer)trim($memstr);
-    } elseif (1) {
-        $pid = getmypid();
-        //%MEM: Percentage of total memory in use by this process
-        //VSZ: Total virtual memory size, in 1K blocks.
-        //RSS: Real Set Size, the actual amount of physical memory allocated to this process.
-        //CPU time used by process since it started.
-        //echo "%",`ps -o%mem,vsz,rss,time -p $pid|sed 1d`,"\n";
-        $memstr = exec("ps -orss -p $pid|sed 1d");
-        return (integer)trim($memstr);
-    }
-}
-
-/**
- * @param var $needle
+ * @param mixed $needle
  * @param array $haystack one-dimensional numeric array only, no hash
  * @return integer
  * @desc Feed a sorted array to $haystack and a value to search for to $needle.
@@ -2190,6 +1969,22 @@ function isSerialized($s)
 }
 
 /**
+ * Determine if a variable represents a limit
+ * It can be an integer or two integers separated by ","
+ */
+
+function is_limit($var)
+{
+    if (is_whole_number($var)) {
+        return true;
+    }
+    $limits = explode(',', $var);
+    return (count($limits) == 2)
+       && is_whole_number($limits[0])
+       && is_whole_number($limits[1]);
+}
+
+/**
  * Determine if a variable represents a whole number
  */
 
@@ -2221,8 +2016,6 @@ function parse_attributes($line)
     if (empty($line)) return $options;
 
     // First we have an attribute name.
-    $attribute = "";
-    $value = "";
 
     $i = 0;
     while (($i < strlen($line)) && ($line[$i] != '=')) {
@@ -2296,13 +2089,15 @@ function is_image($filename)
 
 /**
  * Returns true if the filename ends with an video suffix.
- * Currently only FLV and OGG
+ * Currently FLV, OGG, MP4 and WebM.
  */
 function is_video($filename)
 {
 
     return string_ends_with(strtolower($filename), ".flv")
-        or string_ends_with(strtolower($filename), ".ogg");
+        or string_ends_with(strtolower($filename), ".ogg")
+        or string_ends_with(strtolower($filename), ".mp4")
+        or string_ends_with(strtolower($filename), ".webm");
 }
 
 /**
@@ -2315,6 +2110,14 @@ function strip_accents($text)
         utf8_decode('àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ'),
         'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY');
     return utf8_encode($res);
+}
+
+/**
+ * Sanify filename: replace all disallowed characters with dashes
+ */
+function sanify_filename($filename)
+{
+    return mb_ereg_replace('[^\w\. \-]', '-', $filename);
 }
 
 // Local Variables:

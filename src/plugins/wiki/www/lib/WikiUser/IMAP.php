@@ -64,12 +64,14 @@ class _IMAPPassUser
     {
         return true;
 
+        /*
         if ($this->checkPass($this->_prefs->get('passwd'))) {
             if (DEBUG & _DEBUG_LOGIN) trigger_error(get_class($this) . "::userExists => true (pass ok)", E_USER_WARNING);
             return true;
         }
         if (DEBUG & _DEBUG_LOGIN) trigger_error(get_class($this) . "::userExists => false (pass wrong)", E_USER_WARNING);
         return $this->_tryNextUser();
+        */
     }
 
     function mayChangePass()

@@ -26,46 +26,12 @@
 <body>
 <h1>Password Encryption Tool</h1>
 <?php
-/**
- * Seed the random number generator.
- *
- * better_srand() ensures the randomizer is seeded only once.
- *
- * How random do you want it? See:
- * http://www.php.net/manual/en/function.srand.php
- * http://www.php.net/manual/en/function.mt-srand.php
- */
-function better_srand($seed = '')
-{
-    static $wascalled = FALSE;
-    if (!$wascalled) {
-        if ($seed === '') {
-            list($usec, $sec) = explode(" ", microtime());
-            if ($usec > 0.1)
-                $seed = (double)$usec * $sec;
-            else // once in a while use the combined LCG entropy
-                $seed = (double)1000000 * substr(uniqid("", true), 13);
-        }
-        if (function_exists('mt_srand')) {
-            mt_srand($seed); // mersenne twister
-        } else {
-            srand($seed);
-        }
-        $wascalled = TRUE;
-    }
-}
-
 function rand_ascii($length = 1)
 {
-    better_srand();
     $s = "";
     for ($i = 1; $i <= $length; $i++) {
         // return only typeable 7 bit ascii, avoid quotes
-        if (function_exists('mt_rand'))
-            // the usually bad glibc srand()
-            $s .= chr(mt_rand(40, 126));
-        else
-            $s .= chr(rand(40, 126));
+        $s .= chr(mt_rand(40, 126));
     }
     return $s;
 }
@@ -82,16 +48,9 @@ function random_good_password($minlength = 5, $maxlength = 8)
     $valid_chars = "!#%&+-.0123456789=@ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz";
     $start = ord($valid_chars);
     $end = ord(substr($valid_chars, -1));
-    better_srand();
-    if (function_exists('mt_rand')) // mersenne twister
-        $length = mt_rand($minlength, $maxlength);
-    else // the usually bad glibc rand()
-        $length = rand($minlength, $maxlength);
+    $length = mt_rand($minlength, $maxlength);
     while ($length > 0) {
-        if (function_exists('mt_rand'))
-            $newchar = mt_rand($start, $end);
-        else
-            $newchar = rand($start, $end);
+        $newchar = mt_rand($start, $end);
         if (!strrpos($valid_chars, $newchar))
             continue; // skip holes
         $newpass .= sprintf("%c", $newchar);
@@ -114,8 +73,8 @@ unset($k);
 $posted = $GLOBALS['HTTP_POST_VARS'];
 if (!empty($posted['create'])) {
     $new_password = random_good_password();
-    echo "<p>The newly created random password is:<br />\n<br />&nbsp;&nbsp;&nbsp;\n<tt><strong>",
-    htmlentities($new_password), "</strong></tt></p>\n";
+    echo "<p>The newly created random password is:<br />\n<br />&nbsp;&nbsp;&nbsp;\n<samp><strong>",
+    htmlentities($new_password), "</strong></samp></p>\n";
     $posted['password'] = $new_password;
     $posted['password2'] = $new_password;
 }
@@ -138,8 +97,8 @@ if (($posted['password'] != "")
     $debug = $HTTP_GET_VARS['debug'];
     if ($debug)
         echo "The password was encrypted using a salt length of: $salt_length<br />\n";
-    echo "<p>The encrypted password is:<br />\n<br />&nbsp;&nbsp;&nbsp;\n<tt><strong>",
-    htmlentities($encrypted_password), "</strong></tt></p>\n";
+    echo "<p>The encrypted password is:<br />\n<br />&nbsp;&nbsp;&nbsp;\n<samp><strong>",
+    htmlentities($encrypted_password), "</strong></samp></p>\n";
     echo "<hr />\n";
 } elseif ($posted['password'] != "") {
     echo "The passwords did not match. Please try again.<br />\n";

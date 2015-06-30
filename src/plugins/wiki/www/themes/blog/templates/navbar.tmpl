@@ -4,15 +4,17 @@
   <?php echo _("Navigation") ?>
 </div>
 <div class="box-data">
+<ul>
 <?php if (!empty($revision)) { ?>
-&middot; <?php echo WikiLink(_("BackLinks"), "button",_("BackLinks")) ?>
+<li><?php echo WikiLink(_("BackLinks"), "button",_("BackLinks")) ?></li>
 <?php } ?>
 <?php if (!empty($user) && $user->isAdmin()) { ?>
-<br />&middot; <?php echo WikiLink(_("PhpWikiAdministration"), "button", _("Admin")) ?>
+<li><?php echo WikiLink(_("PhpWikiAdministration"), "button", _("Admin")) ?></li>
 <?php } ?>
 <?php if (!empty($user) && $user->isSignedIn()) { ?>
-<br />&middot; <?php echo WikiLink(_("UserPreferences"), "","Preferences") ?>
+<li><?php echo WikiLink(_("UserPreferences"), "","Preferences") ?></li>
 <?php } ?>
-<br />&middot; 
+</ul>
 <?php echo Template("blog/signin") ?>
-</div></div>
+</div>
+</div>

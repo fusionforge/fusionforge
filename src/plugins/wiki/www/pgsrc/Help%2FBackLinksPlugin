@@ -1,5 +1,5 @@
-Date: Tue, 29 Jul 2014 10:42:12 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.0)
+Date: Mon, 29 Jun 2015 12:04:28 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FBackLinksPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -7,6 +7,14 @@ Content-Type: application/x-phpwiki;
 Content-Transfer-Encoding: binary
 
 The **~BackLinks** [[Help:WikiPlugin|plugin]] lists all pages which link to a given page.
+
+The contents of all pages are searched to find links to the current
+page. The ~BackLinks function also answers the question: “Which pages
+contain the title of this page?”.
+
+To display the list of pages which all contain multiple links use a pagelist as page argument.
+For example {{{<<BackLinks page=Milk,Honey>>}}} would display all pages which
+contain links to Milk AND Honey.
 
 == Usage ==
 
@@ -48,6 +56,12 @@ All [[Help:PageList|PageList]] arguments, plus the following ones:
 }}}
 
 <<BackLinks page=HomePage>>
+
+== Known Bugs ==
+
+Back links should be found even if the link is inside a table, or in an
+included template, but not in some complex cases (for example, the link
+is in a template included inside a table).
 
 == Author ==
 * [[Help:Reini Urban|Reini Urban]]

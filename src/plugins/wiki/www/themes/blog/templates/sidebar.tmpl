@@ -4,7 +4,7 @@ $id = isBrowserIE() ? 'sidebar' : 'moz-sidebar';
 <div id="<?php echo $id?>">
 <?php
   /* Today's Blogs page for the current or admin user, if the subpage is defined. */
-  $UserCalPageTitle = $user->getId() . SUBPAGE_SEPARATOR . _("Blog");
+  $UserCalPageTitle = $user->getId() . '/' . _("Blog");
   $dbi = $request->getDbh();
   // display flat calender dhtml under the clock
   if (!$dbi->isWikiPage($UserCalPageTitle) and BLOG_DEFAULT_EMPTY_PREFIX) {
@@ -17,8 +17,8 @@ $id = isBrowserIE() ? 'sidebar' : 'moz-sidebar';
     <?php echo Template('calendar') ?>
 </div></div>
 <?php
-include_once("lib/WikiPlugin.php"); 
-$box = new PluginSidebarBox("BlogArchives"); 
+include_once("lib/WikiPlugin.php");
+$box = new PluginSidebarBox("BlogArchives");
 printXml($box->format());
 
 $box = new RelatedLinksBox();
@@ -26,19 +26,19 @@ $body = $box->body;
 if ($body->asString() != "")
     printXml($box->format());
 
-$box = new PluginSidebarBox("RecentChanges"); 
+$box = new PluginSidebarBox("RecentChanges");
 printXml($box->format());
 
-$box = new PluginSidebarBox("WhoIsOnline"); 
+$box = new PluginSidebarBox("WhoIsOnline");
 printXml($box->format());
 /*
 $box = new PluginSidebarBox("RssFeed",
-                            array('url' => 'http://phpwiki.sourceforge.net/phpwiki/RecentChanges?format=rss',
-                                  'title' => _("PhpWiki News"))); 
+                            array('url' => 'http://phpwiki.fr/RecentChanges?format=rss',
+                                  'title' => _("PhpWiki News")));
 printXml($box->format());
 */
 ?>
-<?php if (0 and defined('USE_EXTERNAL_HTML2PDF') and USE_EXTERNAL_HTML2PDF) { ?> 
+<?php if (0 and defined('USE_EXTERNAL_HTML2PDF') and USE_EXTERNAL_HTML2PDF) { ?>
 &middot; <?php echo Button(array('action'=>'pdf'), "Pdf") ?>
 <?php } ?>
 

@@ -35,6 +35,8 @@ include_once 'lib/PageList.php';
 class WikiPlugin_WantedPages
     extends WikiPlugin
 {
+    public $_wpagelist;
+
     function getDescription()
     {
         return _("List referenced page names which do not exist yet.");
@@ -56,13 +58,27 @@ class WikiPlugin_WantedPages
     // info arg allows multiple columns
     // info=mtime,hits,summary,version,author,locked,minor,markup or all
     // exclude arg allows multiple pagenames exclude=HomePage,RecentChanges
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         $args = $this->getArgs($argstr, $request);
+
+        if (isset($args['limit']) && !is_limit($args['limit'])) {
+            return HTML::p(array('class' => "error"),
+                           _("Illegal “limit” argument: must be an integer or two integers separated by comma"));
+        }
+
         if (!empty($args['exclude_from']))
             $args['exclude_from'] = is_string($args['exclude_from'])
                 ? explodePageList($args['exclude_from'])
                 : $args['exclude_from']; // <! plugin-list !>
+
         extract($args);
         if ($page == _("WantedPages")) $page = "";
 
@@ -148,7 +164,7 @@ class _PageList_Column_WantedPages_wanted extends _PageList_Column
         $this->_PageList_Column($params[0], $params[1], $params[2]);
     }
 
-    function _getValue(&$page, $revision_handle)
+    function _getValue($page, $revision_handle)
     {
         $html = false;
         $pagename = $page->getName();
@@ -173,7 +189,7 @@ class _PageList_Column_WantedPages_links extends _PageList_Column
         $this->_PageList_Column($params[0], $params[1], $params[2]);
     }
 
-    function _getValue(&$page, $revision_handle)
+    function _getValue($page, $revision_handle)
     {
         $pagename = $page->getName();
         $count = count($this->parentobj->_wpagelist[$pagename]);

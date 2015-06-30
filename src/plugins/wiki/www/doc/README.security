@@ -25,9 +25,6 @@ This requires that you have read and write access to the filestore on the
 webserver.
 ----
 <pre>
-; require the new login code - the default
-;ENABLE_USER_NEW = true
-
 ; allow ACL based permissions on pages - the default
 ;ENABLE_PAGEPERM = true
 

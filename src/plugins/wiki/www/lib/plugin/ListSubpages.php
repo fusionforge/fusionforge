@@ -53,9 +53,22 @@ class WikiPlugin_ListSubpages
     // info=mtime,hits,summary,version,author,locked,minor,count
     // exclude arg allows multiple pagenames exclude=HomePage,RecentChanges
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         $args = $this->getArgs($argstr, $request);
+
+        if (isset($args['limit']) && !is_limit($args['limit'])) {
+            return HTML::p(array('class' => "error"),
+                           _("Illegal “limit” argument: must be an integer or two integers separated by comma"));
+        }
+
         if ($args['basepage'])
             $pagename = $args['basepage'];
         else
@@ -64,9 +77,10 @@ class WikiPlugin_ListSubpages
         // FIXME: explodePageList from stdlib doesn't seem to work as
         // expected when there are no subpages. (see also
         // UnfoldSubPages plugin)
-        $subpages = explodePageList($pagename . SUBPAGE_SEPARATOR . '*');
+        $subpages = explodePageList($pagename . '/' . '*');
         if (!$subpages) {
-            return $this->error(_("The current page has no subpages defined."));
+            return HTML::p(array('class' => 'warning'),
+                sprintf(_("%s has no subpages defined."), $pagename));
         }
         extract($args);
 
@@ -111,7 +125,7 @@ class WikiPlugin_ListSubpages
 // how many backlinks for this subpage
 class _PageList_Column_ListSubpages_count extends _PageList_Column
 {
-    function _getValue($page, &$revision_handle)
+    function _getValue($page, $revision_handle)
     {
         $iter = $page->getBackLinks();
         $count = $iter->count();

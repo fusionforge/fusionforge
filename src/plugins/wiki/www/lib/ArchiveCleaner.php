@@ -21,12 +21,16 @@
 
 class ArchiveCleaner
 {
-    function ArchiveCleaner($expire_params)
+    function __construct($expire_params)
     {
         $this->expire_params = $expire_params;
     }
 
-    function isMergeable($revision)
+    /**
+     * @param WikiDB_PageRevision $revision
+     * @return bool
+     */
+    private function isMergeable($revision)
     {
         if (!$revision->get('is_minor_edit'))
             return false;
@@ -40,20 +44,18 @@ class ArchiveCleaner
             && $author_id == $previous->get('author_id');
     }
 
-    function cleanDatabase($dbi)
-    {
-        $iter = $dbi->getAllPages();
-        while ($page = $iter->next())
-            $this->cleanPageRevisions($page);
-    }
-
-    function cleanPageRevisions($page)
+    /**
+     * @param WikiDB_Page $page
+     */
+    public function cleanPageRevisions($page)
     {
         $INFINITY = 0x7fffffff;
 
         $expire = &$this->expire_params;
-        foreach (array('major', 'minor', 'author') as $class)
-            $counter[$class] = new ArchiveCleaner_Counter($expire[$class]);
+        $counter = array();
+        $counter['major'] = new ArchiveCleaner_Counter($expire['major']);
+        $counter['minor'] = new ArchiveCleaner_Counter($expire['minor']);
+        $counter['author'] = new ArchiveCleaner_Counter($expire['author']);
         // shortcut to keep all
         if (($counter['minor']->min_keep == $INFINITY)
             and ($counter['major']->min_keep == $INFINITY)
@@ -97,7 +99,7 @@ class ArchiveCleaner
  */
 class ArchiveCleaner_Counter
 {
-    function ArchiveCleaner_Counter($params)
+    function __construct($params)
     {
 
         if (!empty($params))
@@ -129,7 +131,11 @@ class ArchiveCleaner_Counter
 
     }
 
-    function computeAge($revision)
+    /**
+     * @param WikiDB_PageRevision $revision
+     * @return float|int
+     */
+    private function computeAge($revision)
     {
         $supplanted = $revision->get('_supplanted');
 
@@ -155,6 +161,10 @@ class ArchiveCleaner_Counter
         return ($this->now - $supplanted) / (24 * 3600);
     }
 
+    /**
+     * @param WikiDB_PageRevision $revision
+     * @return bool
+     */
     function keep($revision)
     {
         $INFINITY = 0x7fffffff;

@@ -32,17 +32,17 @@ class WikiDB_backend_ADODB_mssql
     {
         // Do nothing here -- Leave that for the DB
         // Cost Based Optimizer tuning vary from version to version
-        return 1;
+        return true;
     }
 
-    /**
+    /*
      * Lock tables.
      *
      * We don't really need to lock exclusive, but I'll relax it when I fully
      * understand phpWiki locking ;-)
      *
      */
-    function _lock_tables($tables, $write_lock = true)
+    protected function _lock_tables($tables, $write_lock = true)
     {
         if (!$tables) return;
 
@@ -62,16 +62,16 @@ class WikiDB_backend_ADODB_mssql
         }
     }
 
-    /**
+    /*
      * Release the locks.
      */
-    function _unlock_tables($tables)
+    protected function _unlock_tables($tables)
     {
         $dbh = &$this->_dbh;
         $dbh->Execute("COMMIT WORK");
     }
 
-    // Search callabcks
+    // Search callbacks
     // Page name
     function _sql_match_clause($word)
     {
@@ -89,7 +89,7 @@ class WikiDB_backend_ADODB_mssql
             . "OR CHARINDEX(content, '$word') > 0";
     }
 
-    /**
+    /*
      * Serialize data
      */
     function _serialize($data)
@@ -100,7 +100,7 @@ class WikiDB_backend_ADODB_mssql
         return serialize(addslashes($data));
     }
 
-    /**
+    /*
      * Unserialize data
      */
     function _unserialize($data)

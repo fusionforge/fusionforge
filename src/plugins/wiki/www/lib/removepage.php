@@ -2,6 +2,9 @@
 
 require_once 'lib/Template.php';
 
+/**
+ * @param WikiRequest $request
+ */
 function RemovePage(&$request)
 {
     global $WikiTheme;

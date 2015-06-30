@@ -41,6 +41,11 @@ class WikiDB_backend_dumb_LinkSearchIter
     function __construct(&$backend, &$pageiter, $search, $linktype,
                          $relation = false, $options = array())
     {
+        /**
+         * @var WikiRequest $request
+         */
+        global $request;
+
         $this->_backend = &$backend;
         $this->_pages = $pageiter;
         $this->search = $search; // search the linkvalue. it should be the value or pagename
@@ -52,7 +57,7 @@ class WikiDB_backend_dumb_LinkSearchIter
         $this->limit = isset($options['limit']) ? $options['limit'] : '';
         $this->exclude = isset($options['exclude']) ? $options['exclude'] : '';
         $this->_field = 'pagename'; // the name of the linkvalue field to apply the search
-        $this->_dbi =& $GLOBALS['request']->_dbi;
+        $this->_dbi =& $request->_dbi;
         if ($linktype == 'relation') {
             $this->_want_relations = true;
             $this->_field = 'linkrelation';

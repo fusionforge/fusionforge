@@ -4,7 +4,7 @@
  * Baseclass for WysiwygEdit/*
  *
  * ENABLE_WYSIWYG - Support for some WYSIWYG_BACKEND Editors:
- *   tinymce, htmlarea3, FCKeditor, spaw, htmlarea2, Wikiwyg
+ *   tinymce, htmlarea3, CKeditor, spaw, htmlarea2, Wikiwyg
  * Not yet enabled as default, since we cannot convert HTML to Wiki Markup yet.
  * (See HtmlParser.php for the ongoing efforts)
  * We might use a PageType=html, which is contra wiki, but some people
@@ -23,7 +23,7 @@
 
 require_once 'lib/InlineParser.php';
 
-class WysiwygEdit
+abstract class WysiwygEdit
 {
 
     function WysiwygEdit()
@@ -31,35 +31,40 @@ class WysiwygEdit
         $this->_transformer_tags = false;
     }
 
-    function Head($name = 'edit[content]')
-    {
-        trigger_error("virtual", E_USER_ERROR);
-    }
+    abstract function Head($name = 'edit[content]');
 
     // to be called after </textarea>
-    function Textarea($textarea, $wikitext, $name = 'edit[content]')
-    {
-        trigger_error("virtual", E_USER_ERROR);
-    }
+    abstract function Textarea($textarea, $wikitext, $name = 'edit[content]');
 
     /**
      * Handler to convert the Wiki Markup to HTML before editing.
      * This will be converted back by WysiwygEdit_ConvertAfter if required.
      *  *text* => '<b>text<b>'
+     *
+     * @param $text
+     * @return string
      */
     function ConvertBefore($text)
     {
+        /**
+         * @var WikiRequest $request
+         */
+        global $request;
+
         require_once 'lib/BlockParser.php';
-        $xml = TransformText($text, $GLOBALS['request']->getArg('pagename'));
+        $xml = TransformText($text, $request->getArg('pagename'));
         return $xml->AsXML();
     }
 
     /**
      * FIXME: Handler to convert the HTML formatting back to wiki formatting.
      * Derived from InlineParser, but returning wiki text instead of HtmlElement objects.
-     * '<b>text<b>' => '<SPAN style="FONT-WEIGHT: bold">text</SPAN>' => '*text*'
+     * '<b>text<b>' => '<span style="font-weight: bold">text</span>' => '*text*'
      *
      * TODO: Switch over to HtmlParser
+     *
+     * @param $text
+     * @return string
      */
     function ConvertAfter($text)
     {
@@ -97,12 +102,16 @@ class Markup_html_simple_tag extends Markup_html_emphasis
             case 'em':
                 return "_" . $body . "_";
         }
+        return '';
     }
 }
 
 class Markup_html_p extends BalancedMarkup
 {
-    public $_start_regexp = "<(?:p|P)( class=\".*\")?>";
+    function getStartRegexp()
+    {
+        return "<(?:p|P)( class=\".*\")?>";
+    }
 
     function getEndRegexp($match)
     {
@@ -115,10 +124,13 @@ class Markup_html_p extends BalancedMarkup
     }
 }
 
-//'<SPAN style="FONT-WEIGHT: bold">text</SPAN>' => '*text*'
+//'<span style="font-weight: bold">text</span>' => '*text*'
 class Markup_html_spanbold extends BalancedMarkup
 {
-    public $_start_regexp = "<(?:span|SPAN) style=\"FONT-WEIGHT: bold\">";
+    function getStartRegexp()
+    {
+        return "<(?:span|SPAN) style=\"font-weight: bold\">";
+    }
 
     function getEndRegexp($match)
     {
@@ -134,18 +146,17 @@ class Markup_html_spanbold extends BalancedMarkup
 
 class HtmlTransformer extends InlineTransformer
 {
-    function HtmlTransformer($tags = false)
+    function __construct($tags = false)
     {
-        if (!$tags) $tags =
-            array('escape', 'html_br', 'html_spanbold', 'html_simple_tag',
-                'html_p',);
+        if (!$tags)
+            $tags = array('escape', 'html_br', 'html_spanbold', 'html_simple_tag', 'html_p',);
         /*
          'html_a','html_span','html_div',
          'html_table','html_hr','html_pre',
          'html_blockquote',
          'html_indent','html_ol','html_li','html_ul','html_img'
         */
-        return $this->InlineTransformer($tags);
+        parent::__construct($tags);
     }
 }
 

@@ -6,10 +6,11 @@ data_path=$(forge_get_config data_path)
 plugindir=$(forge_get_config plugins_path)/mediawiki
 
 mediawikidir=$( \
-    (ls -d /usr/share/mediawiki* | grep -v '-extensions' 2>/dev/null || echo '/usr/share/mediawiki') \
+    (echo '/autodetection_failed'; ls -d /usr/share/mediawiki* | grep -v '-extensions' 2>/dev/null) \
     | tail -1)
 # Debian: /usr/share/mediawiki/
 # CentOS6: /usr/share/mediawiki119/
+# CentOS7: /usr/share/mediawiki/
 
 upgrade_mediawikis () {
     # Upgrade Mediawiki database schemas

@@ -3,11 +3,6 @@ if (!$WikiTheme->DUMP_MODE) {
 // Only [Info] button when not signed in.
 // The rest behind Info
 ?>
-<?php /* I would like not to have to use these tables, and managed to
-       * get this stuff to work more or less correctly using
-       * CSSs float:left; and float:right;.  However float:right; seems
-       * to cause MSIE4.01/NT to hang. 
-       * So, we use tables...  */ ?>
 <table class="fullwidth">
 <tr class="baseline">
   <td>
@@ -39,7 +34,7 @@ if (!$WikiTheme->DUMP_MODE) {
       <?php echo $SEP?><?php echo Button(_("PageDump")) ?>
     <!-- End debugging buttons -->
     <?php } ?>
-<?php if (defined('USE_EXTERNAL_HTML2PDF') and USE_EXTERNAL_HTML2PDF) { ?> 
+<?php if (defined('USE_EXTERNAL_HTML2PDF') and USE_EXTERNAL_HTML2PDF) { ?>
     <?php echo $SEP?><?php echo Button("pdf") ?>
 <?php } ?>
   </div>

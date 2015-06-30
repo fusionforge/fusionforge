@@ -1,5 +1,5 @@
-Date: Tue, 29 Jul 2014 10:42:12 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.0)
+Date: Mon, 29 Jun 2015 12:04:28 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
 Content-Type: application/x-phpwiki;
   pagename=PhpWikiManual;
   flags=EXTERNAL_PAGE;
@@ -10,6 +10,7 @@ Content-Transfer-Encoding: binary
 <<IncludePage page="Help/WikiWikiWeb">>
 <<IncludePage page="Help/Steve Wainstead">>
 <<IncludePage page="Help/WabiSabi">>
+<<IncludePage page="Help/WikisUsingPhpWiki">>
 <<IncludePage page="Help/AddingPages">>
 <<IncludePage page="Help/EditText">>
 <<IncludePage page="Help/GoodStyle">>

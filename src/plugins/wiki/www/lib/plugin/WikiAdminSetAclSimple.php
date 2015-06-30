@@ -34,11 +34,20 @@ require_once 'lib/plugin/WikiAdminSetAcl.php';
 class WikiPlugin_WikiAdminSetAclSimple
     extends WikiPlugin_WikiAdminSetAcl
 {
+    public $_args;
+
     function getDescription()
     {
         return _("Set simple individual page permissions.");
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         if ($request->getArg('action') != 'browse') {
@@ -115,7 +124,7 @@ class WikiPlugin_WikiAdminSetAclSimple
      * _OWNER: remove purge dump change;
      */
 
-    function liberalPerms()
+    private function liberalPerms()
     {
 
         $perm = array('view' => array(ACL_EVERY => true),
@@ -141,7 +150,7 @@ class WikiPlugin_WikiAdminSetAclSimple
      * _EVERY: -view -edit -list -create;
      */
 
-    function restrictedPerms()
+    private function restrictedPerms()
     {
 
         $perm = array('view' => array(ACL_AUTHENTICATED => true,

@@ -28,9 +28,6 @@ caption {
     caption-side: top;
     text-align: left;
     margin-bottom: .5ex;
-    /* Allow the caption to extend to the full page width
-       Mac ie5.1 ignores this*/
-    width: 100%;
 }
 
 /* generic classes ----------------------------------------------- */
@@ -126,13 +123,11 @@ div.wikitext {
 /* for the login template */
 div#browse {
     margin-top: 1px;
-    margin-bottom: 0.5px;
-    /*background: #dddddd;*/
+    margin-bottom: 1px;
 }
 
 input#inp-openid {
     background: url('images/openid.png') bottom left no-repeat;
-    background-repeat: no-repeat;
     padding-left: 18px !important;
 }
 
@@ -338,14 +333,13 @@ input.gridbutton, a.gridbutton, a:hover.gridbutton, a:visited.gridbutton {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.toolbar {
+.toolbar, .edit-toolbar {
     padding: 0;
     margin: 0;
 }
 
-.edit-toolbar {
-    padding: 0;
-    margin: 0;
+img.toolbar:hover {
+    cursor: pointer;
 }
 
 .edit-toolbar img, .edit-toolbar input {
@@ -564,10 +558,6 @@ table.cal td.cal-today a.cal-hide {
     border-left: 1px solid #494f5d;
     border-bottom: 1px solid #c6d2de;
     border-right: 1px solid #c6d2de;
-    padding-top: 1px;
-    padding-bottom: 1px;
-    padding-left: .125em;
-    padding-right: .125em;
     padding: 0;
     clear: both;
 }
@@ -675,7 +665,7 @@ td.pageinfo {
     clear: both;
 }
 
-.warning {
+.warning, .warning_msg {
     color: black;
     background: #eee;
     margin-top: 1em;
@@ -869,7 +859,7 @@ div.wikicomment div.wikicomment-footer {
     padding: 0.2ex 0.5em;
 }
 
-div.wikicomment div.wikicomment-footer named-wiki {
+div.wikicomment div.wikicomment-footer .named-wiki {
     font-size: small;
 }
 
@@ -910,7 +900,6 @@ table.interwiki-map {
 
 .dialog div.message {
     background-color: white;
-    color: black;
     color: black;
     margin: 0 1em;
     padding: 0.5em 0.5em;
@@ -1009,7 +998,6 @@ div.boxright {
     padding: 0.5em;
     float: right;
     border: thin solid #888888;
-    padding: 0.5em;
 }
 
 /* RssFeed */
@@ -1133,10 +1121,6 @@ span.wikiwyg_control_link a {
     vertical-align: top;
 }
 
-.toolbar, div.toolbar {
-    margin: 0.5ex 0;
-}
-
 /**
  * General
  */
@@ -1222,7 +1206,6 @@ img.linkicon {
 /* http://universaleditbutton.org */
 div#actionbuttons a#btn-edit {
     background: url('images/UEB16.png') bottom left no-repeat;
-    background-repeat: no-repeat;
     padding-left: 20px !important;
     padding-right: 0.5em !important;
 }
@@ -1293,10 +1276,26 @@ table.boxed th, table.bordered th {
     border: 1px solid #ffa500;
 }
 
-/* For emacs users
- *
- * Local Variables:
- * mode: c
- * c-file-style: cc-mode
- * End:
- */
+table.sortable th.header {
+    background-image: url(../default/buttons/sort_none.gif);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}
+
+table.sortable th.headerSortUp {
+    background-image: url(../default/buttons/sort_up.gif);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}
+
+table.sortable th.headerSortDown {
+    background-image: url(../default/buttons/sort_down.gif);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}

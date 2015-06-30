@@ -56,6 +56,13 @@ class WikiPlugin_AppendText
         return $oldtext . "\n" . $addtext;
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
 
@@ -65,7 +72,7 @@ class WikiPlugin_AppendText
         } else {
             $html = HTML();
             if ($args['page'] != $basepage)
-                $html->pushContent("pages argument overrides page argument. ignored.", HTML::br());
+                $html->pushContent(_("pages argument overrides page argument. ignored."), HTML::br());
             foreach ($args['pages'] as $pagename) {
                 $html->pushContent($this->work($pagename, $args, $dbi, $request));
             }

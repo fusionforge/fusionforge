@@ -37,7 +37,7 @@ class WikiDB_backend_PDO_pgsql
         if ($limit) {
             list($offset, $count) = $this->limit($limit);
             if ($offset)
-                $limit = " LIMIT $count OFFSET $from";
+                $limit = " LIMIT $count OFFSET $offset";
             else
                 $limit = " LIMIT $count";
         } else

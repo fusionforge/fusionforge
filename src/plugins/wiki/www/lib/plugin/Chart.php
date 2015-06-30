@@ -46,6 +46,8 @@
 class WikiPlugin_Chart
     extends WikiPlugin
 {
+    public $source;
+
     function getDescription()
     {
         return _("Render SVG charts.");
@@ -64,11 +66,18 @@ class WikiPlugin_Chart
         );
     }
 
-    function handle_plugin_args_cruft(&$argstr, &$args)
+    function handle_plugin_args_cruft($argstr, $args)
     {
         $this->source = $argstr;
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
 

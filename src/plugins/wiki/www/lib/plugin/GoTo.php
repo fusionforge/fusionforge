@@ -43,6 +43,13 @@ class WikiPlugin_GoTo
         return array('size' => 32);
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         $request->setArg('action', false);

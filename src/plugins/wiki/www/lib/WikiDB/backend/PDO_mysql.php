@@ -81,7 +81,7 @@ class WikiDB_backend_PDO_mysql
         foreach ($this->_table_names as $table) {
             $this->query("OPTIMIZE TABLE $table");
         }
-        return 1;
+        return true;
     }
 
     function listOfTables()

@@ -64,7 +64,7 @@ changes:
    adds PHPWIKI_DIR if started from another dir, lib/pear also
 ** fix slashify for Windows
 * check more config-default and predefined constants 
-* AutoSplit pagenames at subpage seperators, esp for Sidebar theme
+* AutoSplit pagenames at subpage separators, esp for Sidebar theme
 * improve Pagelist layout by equal pagename width for limited lists 
 * added CPAN to interwiki.map
 * ExternalSearchPlugin useimage arg (RFE #952323)

@@ -1,5 +1,5 @@
-Date: Tue, 29 Jul 2014 10:42:12 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.0)
+Date: Mon, 29 Jun 2015 12:04:28 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FUpLoadPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -7,9 +7,9 @@ Content-Type: application/x-phpwiki;
 Content-Transfer-Encoding: binary
 
 The **~UpLoad** [[Help:WikiPlugin|plugin]] displays an editbox and two buttons.
-* The first button lets you choose the file to be uploaded at your local filesystem. The textvalue of this button is localised from your browser.
-* The second "Upload" button actually uploads the given filename to the upload directory.
-This directory is not browsable, any file there may be accessed by using the "Upload~:"
+* The first button lets you choose the file to be uploaded at your local filesystem. The text value of this button is localised from your browser.
+* The second “Upload” button actually uploads the given filename to the upload directory.
+This directory is not browsable, any file there may be accessed by using the “Upload~:”
 [[InterWikiMap]] prefix to the given filename. This way you can easily inline uploaded images.
 
 == Usage ==
@@ -38,10 +38,6 @@ This directory is not browsable, any file there may be accessed by using the "Up
 | The page where the uploaded files are publicly listed, if autolink is true.
 | Current page
 |-
-| **size**
-| Size of file input box.
-| 50
-|-
 | **mode**
 | 'actionpage' or 'edit'
 | actionpage
@@ -51,7 +47,7 @@ This directory is not browsable, any file there may be accessed by using the "Up
 
 # The user must be authenticated to be able to upload.
 # The filename may not end with certain disallowed extensions, to prevent from abuse.
-# MAX_FILE_SITE is configured by the config.ini option MAX_UPLOAD_SIZE, which defaults to 16MB. Your webserver and PHP may add another limit.
+# MAX_FILE_SIZE is configured by the ##config.ini## option MAX_UPLOAD_SIZE, which defaults to 16MB. Your webserver and PHP may add another limit.
 # Already existing uploaded files are NOT overwritten.
 
 == Example ==

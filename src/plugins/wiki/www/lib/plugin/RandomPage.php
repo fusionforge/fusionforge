@@ -47,6 +47,13 @@ class WikiPlugin_RandomPage
                 'info' => ''));
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
 
@@ -70,7 +77,6 @@ class WikiPlugin_RandomPage
 
         $allpages = $dbi->getAllPages(false, $sortby, $limit, $exclude);
         $pagearray = $allpages->asArray();
-        better_srand(); // Start with a good seed.
 
         if (($numpages == 1) && $pagearray) {
             $page = $pagearray[array_rand($pagearray)];

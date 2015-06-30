@@ -5,7 +5,7 @@ Sample to override the default wiki (Theme, Language, DB, ...).
 Also For Wiki farms.
 Simplifies USE_PATH_INFO paths:
   "/<home>/wiki/HomePage" instead of "/<home>/wiki/index.php/HomePage"
-The simpliest version is 
+The simplest version is
    <?php include "index.php"; include "lib/main.php"; ?>
 
 Note: This needs a webserver handler to PHP like this on Apache:

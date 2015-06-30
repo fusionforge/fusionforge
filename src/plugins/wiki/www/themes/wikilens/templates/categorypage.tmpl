@@ -14,19 +14,19 @@ $this->_printPlugin("<" . "?plugin UserRatings nobuds=" . ($SHOWBUDS ? 0 : 1) . 
 <br/>
 <?php
 if ($SHOWBUDS){
-	$btn = Button(array('exclude'  => "$EXCLUDE",
-						'category' => "$PAGENAME",
-               			'showbuds' => false),
-                       _("Hide Buddy Ratings in the $SINGULAR category"),
-                 		$PAGENAME);
+    $btn = Button(array('exclude'  => "$EXCLUDE",
+                        'category' => "$PAGENAME",
+                        'showbuds' => false),
+                        _("Hide Buddy Ratings in the $SINGULAR category"),
+                        $PAGENAME);
 
 
 } else {
 $btn = Button(array('exclude'  => "$EXCLUDE",
-						'category' => "$PAGENAME",
+                        'category' => "$PAGENAME",
                        'showbuds' => true),
                        _("Show Buddy Ratings in the $SINGULAR category"),
-                 		$PAGENAME);
+                        $PAGENAME);
 }
                  ?>
 <?php echo $btn ?>
@@ -48,14 +48,14 @@ duplicate pages.  You can use this FuzzyPages search:
 <li>
 
 If it does not exist, you can create the page.  You can use this
-CreatePage button, or see <?php $link = WikiLink("HowToUseWiki"); ?> <?php echo 
+CreatePage button, or see <?php $link = WikiLink("HowToUseWiki"); ?> <?php echo
 $link ?> for more ways to navigate or create pages.
 
 <?php
   $bpage = "~~[" . $PAGENAME . "]";
 
   $initial_content = "\"This page is in the $bpage category.  You must leave in at least one reference to $bpage in order for this page to be in the $bpage category.  Otherwise, edit this text to describe your page.\"";
-	$adder = "";
+  $adder = "";
 
   $this->_printPlugin("<" . "?plugin-form CreatePage " . $adder . " initial_content=" . $initial_content . " ?" . ">");
 ?>

@@ -17,8 +17,9 @@ $pref =& $request->_prefs;
 if (!$pref) return;
 $offset = $pref->get('timeOffset');
 $serverTime = $time - $offset * 3600;
-if ( $isForm )
+if ($isForm)
     $timeOffsetInput = HTML::input(array('type' => "text",
+                                         'id' => 'timeOffsetInput',
                                          'size' => 6,
                                          'maxlength' => 6,
                                          'name' => "pref[timeOffset]",
@@ -28,93 +29,115 @@ else
     $timeOffsetInput = $pref->get('timeOffset');
 
 $OwnModificationsCB = HTML::input(array('type' => 'checkbox',
+                                     'id' => 'ownModifications',
                                      'name' => 'pref[ownModifications]',
                                      'value' => '1',
                                      'checked' => (bool) $pref->get('ownModifications')));
 $MajorModificationsOnlyCB = HTML::input(array('type' => 'checkbox',
+                                     'id' => 'majorModificationsOnly',
                                      'name' => 'pref[majorModificationsOnly]',
                                      'value' => '1',
                                      'checked' => (bool) $pref->get('majorModificationsOnly')));
 $DiffMenuItem = HTML::input(array('type' => 'checkbox',
+                                     'id' => 'diffMenuItem',
                                      'name' => 'pref[diffMenuItem]',
                                      'value' => '1',
                                      'checked' => (bool) $pref->get('diffMenuItem')));
 $PageInfoMenuItem = HTML::input(array('type' => 'checkbox',
+                                     'id' => 'pageInfoMenuItem',
                                      'name' => 'pref[pageInfoMenuItem]',
                                      'value' => '1',
                                      'checked' => (bool) $pref->get('pageInfoMenuItem')));
 $PDFMenuItem = HTML::input(array('type' => 'checkbox',
+                                     'id' => 'pdfMenuItem',
                                      'name' => 'pref[pdfMenuItem]',
                                      'value' => '1',
                                      'checked' => (bool) $pref->get('pdfMenuItem')));
 $ChownMenuItem = HTML::input(array('type' => 'checkbox',
+                                     'id' => 'chownMenuItem',
                                      'name' => 'pref[chownMenuItem]',
                                      'value' => '1',
                                      'checked' => (bool) $pref->get('chownMenuItem')));
 $SetaclMenuItem = HTML::input(array('type' => 'checkbox',
+                                     'id' => 'setaclMenuItem',
                                      'name' => 'pref[setaclMenuItem]',
                                      'value' => '1',
                                      'checked' => (bool) $pref->get('setaclMenuItem')));
 $RemoveMenuItem = HTML::input(array('type' => 'checkbox',
+                                     'id' => 'removeMenuItem',
                                      'name' => 'pref[removeMenuItem]',
                                      'value' => '1',
                                      'checked' => (bool) $pref->get('removeMenuItem')));
 $RenameMenuItem = HTML::input(array('type' => 'checkbox',
+                                     'id' => 'renameMenuItem',
                                      'name' => 'pref[renameMenuItem]',
                                      'value' => '1',
                                      'checked' => (bool) $pref->get('renameMenuItem')));
 $RevertMenuItem = HTML::input(array('type' => 'checkbox',
+                                     'id' => 'revertMenuItem',
                                      'name' => 'pref[revertMenuItem]',
                                      'value' => '1',
                                      'checked' => (bool) $pref->get('revertMenuItem')));
 $LockMenuItem = HTML::input(array('type' => 'checkbox',
+                                     'id' => 'lockMenuItem',
                                      'name' => 'pref[lockMenuItem]',
                                      'value' => '1',
                                      'checked' => (bool) $pref->get('lockMenuItem')));
 $BackLinksMenuItem = HTML::input(array('type' => 'checkbox',
+                                     'id' => 'backLinksMenuItem',
                                      'name' => 'pref[backLinksMenuItem]',
                                      'value' => '1',
                                      'checked' => (bool) $pref->get('backLinksMenuItem')));
 $WatchPageMenuItem = HTML::input(array('type' => 'checkbox',
+                                     'id' => 'watchPageMenuItem',
                                      'name' => 'pref[watchPageMenuItem]',
                                      'value' => '1',
                                      'checked' => (bool) $pref->get('watchPageMenuItem')));
 $RecentChangesMenuItem = HTML::input(array('type' => 'checkbox',
+                                     'id' => 'recentChangesMenuItem',
                                      'name' => 'pref[recentChangesMenuItem]',
                                      'value' => '1',
                                      'checked' => (bool) $pref->get('recentChangesMenuItem')));
 $RandomPageMenuItem = HTML::input(array('type' => 'checkbox',
+                                     'id' => 'randomPageMenuItem',
                                      'name' => 'pref[randomPageMenuItem]',
                                      'value' => '1',
                                      'checked' => (bool) $pref->get('randomPageMenuItem')));
 $LikePagesPageMenuItem = HTML::input(array('type' => 'checkbox',
+                                     'id' => 'likePagesMenuItem',
                                      'name' => 'pref[likePagesMenuItem]',
                                      'value' => '1',
                                      'checked' => (bool) $pref->get('likePagesMenuItem')));
 $SpecialPagesMenuItem = HTML::input(array('type' => 'checkbox',
+                                     'id' => 'specialPagesMenuItem',
                                      'name' => 'pref[specialPagesMenuItem]',
                                      'value' => '1',
                                      'checked' => (bool) $pref->get('specialPagesMenuItem')));
 $RelativeDatesCB = HTML::input(array('type' => 'checkbox',
+                                     'id' => 'relativeDates',
                                      'name' => 'pref[relativeDates]',
                                      'value' => '1',
                                      'checked' => (bool) $pref->get('relativeDates')));
 $PageTrailCB = HTML::input(array('type' => 'checkbox',
-                                 'name' => 'pref[pageTrail]',
-                                 'value' => '1',
-                                 'checked' => (bool) $pref->get('pageTrail')));
+                                     'id' => 'pageTrail',
+                                     'name' => 'pref[pageTrail]',
+                                     'value' => '1',
+                                     'checked' => (bool) $pref->get('pageTrail')));
 $NoLinkIconsCB = HTML::input(array('type' => 'checkbox',
-                                   'name' => 'pref[noLinkIcons]',
-                                   'value' => '1',
-                                   'checked' => (bool) $pref->get('noLinkIcons')));
+                                     'id' => 'noLinkIcons',
+                                     'name' => 'pref[noLinkIcons]',
+                                     'value' => '1',
+                                     'checked' => (bool) $pref->get('noLinkIcons')));
 $GoogleLinkCB = HTML::input(array('type' => 'checkbox',
-                                  'name' => 'pref[googleLink]',
-                                  'value' => '1',
-                                  'checked' => (bool) $pref->get('googleLink')));
+                                     'id' => 'googleLink',
+                                     'name' => 'pref[googleLink]',
+                                     'value' => '1',
+                                     'checked' => (bool) $pref->get('googleLink')));
 $DoubleClickCB = HTML::input(array('type' => 'checkbox',
-                                  'name' => 'pref[doubleClickEdit]',
-                                  'value' => '1',
-                                  'checked' => (bool) $pref->get('doubleClickEdit')));
+                                     'id' => 'doubleClickEdit',
+                                     'name' => 'pref[doubleClickEdit]',
+                                     'value' => '1',
+                                     'checked' => (bool) $pref->get('doubleClickEdit')));
 ?>
 <?php echo $errmsg ?>
 
@@ -123,25 +146,29 @@ $DoubleClickCB = HTML::input(array('type' => 'checkbox',
 </h2>
 
 <?php if ($isForm) { ?>
-<form action="<?php echo $request->getPostURL()?>" method="post">
+<form action="<?php echo $request->getPostURL() ?>" method="post">
 <?php } ?>
 
 <fieldset style="margin-bottom: 1em;">
-<legend><strong><?php echo _("User preferences for this project")?></strong></legend>
+<legend><strong><?php echo _("User preferences for this project") ?></strong></legend>
 <table class="fullwidth">
 
-  <tr><td colspan="2"><h3><?php echo _("E-mail Notification")?></h3></td></tr>
+  <tr><td colspan="2"><h3><?php echo _("E-mail Notification") ?></h3></td></tr>
 
   <tr><td colspan="2">
-    <?php echo _("Get an e-mail notification at changes of the following pages:")?>
+    <?php echo _("Get an e-mail notification at changes of the following pages:") ?>
   </td></tr>
 
   <tr>
     <?php if ($isForm) { ?>
-      <td><textarea name="pref[notifyPages]" cols="40" rows="6"><?php echo $pref->get('notifyPages')?></textarea></td>
-    <td><p class="hint"><?php echo _("Enter pages separated by space or comma. Wildcards (fileglobbing) allowed.")?></p></td>
+      <td>
+        <label for="notifyPages">
+        <textarea id="notifyPages" name="pref[notifyPages]" cols="40" rows="6"><?php echo $pref->get('notifyPages') ?></textarea>
+        </label>
+      </td>
+      <td><p class="hint"><?php echo _("Enter pages separated by space or comma. Wildcards (fileglobbing) allowed.") ?></p></td>
     <?php } else { ?>
-     <td colspan="2"><?php echo $pref->get('notifyPages')?></td>
+      <td colspan="2"><?php echo $pref->get('notifyPages') ?></td>
     <?php } ?>
    </tr>
 
@@ -149,23 +176,25 @@ $DoubleClickCB = HTML::input(array('type' => 'checkbox',
 </fieldset>
 
 <fieldset style="margin-bottom: 1em;">
-<legend><strong><?php echo _("Global user preferences (for all projects)")?></strong></legend>
+<legend><strong><?php echo _("Global user preferences (for all projects)") ?></strong></legend>
 
 <table class="fullwidth">
 
   <tr>
-       <td colspan="2"><h3><?php echo _("E-mail Notification")?></h3></td>
+       <td colspan="2"><h3><?php echo _("E-mail Notification") ?></h3></td>
   </tr>
 
   <tr>
       <td>
          <p class="nowrap">
              <?php echo $OwnModificationsCB ?>
-             <?php echo _("Do not send my own modifications")?>
+             <label for="ownModifications">
+             <?php echo _("Do not send my own modifications") ?>
+             </label>
          </p>
       </td>
       <td>
-         <p class="hint"><?php echo _("Check if you do not want to be notified of your own modifications.")?></p>
+         <p class="hint"><?php echo _("Check if you do not want to be notified of your own modifications.") ?></p>
       </td>
   </tr>
 
@@ -173,73 +202,115 @@ $DoubleClickCB = HTML::input(array('type' => 'checkbox',
       <td>
          <p class="nowrap">
              <?php echo $MajorModificationsOnlyCB ?>
-             <?php echo _("Do not send minor modifications")?>
+             <label for="majorModificationsOnly">
+             <?php echo _("Do not send minor modifications") ?>
+             </label>
          </p>
       </td>
       <td>
-         <p class="hint"><?php echo _("Check if you do not want to be notified of minor modifications.")?></p>
+         <p class="hint"><?php echo _("Check if you do not want to be notified of minor modifications.") ?></p>
       </td>
   </tr>
 
-  <tr><td colspan="2"><h3><?php echo _("Menus")?></h3></td></tr>
+  <tr><td colspan="2"><h3><?php echo _("Menus") ?></h3></td></tr>
   <tr>
      <td>
        <fieldset>
-       <legend><?php echo _("Top Menu")?></legend>
+       <legend><?php echo _("Top Menu") ?></legend>
        <table>
          <tr>
             <td>
-               <p class="nowrap"><?php echo $DiffMenuItem ?> <?php echo _("Last Difference")?></p>
+               <p class="nowrap">
+                  <?php echo $DiffMenuItem ?>
+                  <label for="diffMenuItem">
+                  <?php echo _("Last Difference") ?>
+                  </label>
+               </p>
             </td>
          </tr>
          <tr>
             <td>
-               <p class="nowrap"><?php echo $RevertMenuItem ?> <?php echo _("Revert")?></p>
+               <p class="nowrap">
+                  <?php echo $RevertMenuItem ?>
+                  <label for="revertMenuItem">
+                  <?php echo _("Revert") ?>
+                  </label>
+               </p>
             </td>
          </tr>
          <?php if (defined('USE_EXTERNAL_HTML2PDF') and USE_EXTERNAL_HTML2PDF) { ?>
            <tr>
              <td>
-                <p class="nowrap"><?php echo $PDFMenuItem ?> <?php echo _("PDF")?></p>
+                <p class="nowrap">
+                  <?php echo $PDFMenuItem ?>
+                  <label for="pdfMenuItem">
+                  <?php echo "PDF" ?>
+                  </label>
+               </p>
              </td>
            </tr>
          <?php } ?>
          <tr>
             <td>
-               <p class="nowrap"><?php echo $LockMenuItem ?> <?php echo _("Lock")?></p>
+               <p class="nowrap">
+                  <?php echo $LockMenuItem ?>
+                  <label for="lockMenuItem">
+                  <?php echo _("Lock") ?>
+                  </label>
+               </p>
             </td>
          </tr>
          <tr>
             <td>
-               <p class="nowrap"><?php echo $ChownMenuItem ?> <?php echo _("Change Owner")?></p>
+               <p class="nowrap">
+                  <?php echo $ChownMenuItem ?>
+                  <label for="chownMenuItem">
+                  <?php echo _("Change Owner") ?>
+                  </label>
+               </p>
             </td>
          </tr>
          <tr>
             <td>
-               <p class="nowrap"><?php echo $SetaclMenuItem ?> <?php echo _("Access Rights")?></p>
+               <p class="nowrap">
+                  <?php echo $SetaclMenuItem ?>
+                  <label for="setaclMenuItem">
+                  <?php echo _("Access Rights") ?>
+                  </label>
+               </p>
             </td>
          </tr>
        </table>
        </fieldset>
     </td>
     <td class="top">
-      <p class="hint"><?php echo _("Check menu items to display.")?></p>
+      <p class="hint"><?php echo _("Check menu items to display.") ?></p>
     </td>
     </tr>
 
     <tr>
     <td class="top">
        <fieldset>
-       <legend><?php echo _("Left Menu")?></legend>
+       <legend><?php echo _("Left Menu") ?></legend>
        <table>
          <tr>
             <td>
-               <p class="nowrap"><?php echo $RandomPageMenuItem ?> <?php echo _("Random Page")?></p>
+               <p class="nowrap">
+                  <?php echo $RandomPageMenuItem ?>
+                  <label for="randomPageMenuItem">
+                  <?php echo _("Random Page") ?>
+                  </label>
+               </p>
             </td>
          </tr>
          <tr>
             <td>
-               <p class="nowrap"><?php echo $LikePagesPageMenuItem ?> <?php echo _("Like Pages")?></p>
+               <p class="nowrap">
+                  <?php echo $LikePagesPageMenuItem ?>
+                  <label for="likePagesMenuItem">
+                  <?php echo _("Like Pages") ?>
+                  </label>
+               </p>
             </td>
          </tr>
        </table>
@@ -249,79 +320,101 @@ $DoubleClickCB = HTML::input(array('type' => 'checkbox',
     </td>
   </tr>
 
-  <tr><td colspan="2"><h3><?php echo _("Appearance")?></h3></td></tr>
+  <tr><td colspan="2"><h3><?php echo _("Appearance") ?></h3></td></tr>
 
   <tr><td colspan="2"><?php echo _("Here you can override site-specific default values.") ?></td></tr>
       <tr>
           <td>
              <p class="nowrap">
-               <?php echo $PageTrailCB?>
-               <?php echo _("Show Page Trail")?>
+               <?php echo $PageTrailCB ?>
+               <label for="pageTrail">
+               <?php echo _("Show Page Trail") ?>
+               </label>
              </p>
           </td>
-          <td><p class="hint"><?php echo _("Show Page Trail at top of page.")?></p></td>
+          <td><p class="hint"><?php echo _("Show Page Trail at top of page.") ?></p></td>
       </tr>
       <tr>
           <td>
              <p class="nowrap">
-               <?php echo $NoLinkIconsCB?>
-               <?php echo fmt("Hide %s", WikiLink("Help:LinkIcons"))?>
+               <?php echo $NoLinkIconsCB ?>
+               <label for="noLinkIcons">
+               <?php echo fmt("Hide %s", WikiLink("Help:LinkIcons")) ?>
+               </label>
              </p>
           </td>
-          <td><p class="hint"><?php echo _("Hide or show LinkIcons.")?></p></td>
+          <td><p class="hint"><?php echo _("Hide or show LinkIcons.") ?></p></td>
       </tr>
       <tr>
           <td>
              <p class="nowrap">
-               <?php echo $GoogleLinkCB?>
-               <?php echo fmt("Add %s", WikiLink("Help:GoogleLink"))?>
+               <?php echo $GoogleLinkCB ?>
+               <label for="googleLink">
+               <?php echo fmt("Add %s", WikiLink("Help:GoogleLink")) ?>
+               </label>
              </p>
           </td>
-          <td><p class="hint"><?php echo fmt("Add Google links to unknown pages behind the '?', and the create action behind the pagename instead. See %s.", WikiLink("MeatBall:GooglePrompt"))?></p></td>
+          <td><p class="hint"><?php echo fmt("Add Google links to unknown pages behind the '?', and the create action behind the pagename instead. See %s.", WikiLink("MeatBall:GooglePrompt")) ?></p></td>
       </tr>
 
-  <tr><td colspan="2"><h3><?php echo _("Edit Area Size")?></h3></td></tr>
+  <tr><td colspan="2"><h3><?php echo _("Edit Area Size") ?></h3></td></tr>
 
   <tr><td>
-    <?php echo _("Height") . _(":")?>
     <?php if ($isForm) { ?>
-     <input type="text" name="pref[editHeight]" size="4" maxlength="4" class="numeric"
-            value="<?php echo $pref->get('editHeight')?>" />
-    <?php } else { ?>
-      <?php echo $pref->get('editHeight')?>
+    <label for="height">
     <?php } ?>
-    <?php echo _("Width") . _(":")?>
+    <?php echo _("Height") . _(":") ?>
     <?php if ($isForm) { ?>
-     <input type="text" name="pref[editWidth]" size="4" maxlength="4" class="numeric"
-            value="<?php echo $pref->get('editWidth')?>" />
+    </label>
+     <input id="height" type="text" name="pref[editHeight]" size="4" maxlength="4" class="numeric"
+            value="<?php echo $pref->get('editHeight') ?>" />
     <?php } else { ?>
-      <?php echo $pref->get('editWidth')?>
+      <?php echo $pref->get('editHeight') ?>
+    <?php } ?>
+    <?php if ($isForm) { ?>
+    <label for="width">
+    <?php } ?>
+    <?php echo _("Width") . _(":") ?>
+    <?php if ($isForm) { ?>
+    </label>
+     <input id="width" type="text" name="pref[editWidth]" size="4" maxlength="4" class="numeric"
+            value="<?php echo $pref->get('editWidth') ?>" />
+    <?php } else { ?>
+      <?php echo $pref->get('editWidth') ?>
     <?php } ?>
     </td>
     <td><p class="hint">
-      <?php echo _("Note that many browsers will automatically adjust the width of the editing area so that it fills the browser window.  In this case, the width preference will be ignored.")?></p>
+      <?php echo _("Note that many browsers will automatically adjust the width of the editing area so that it fills the browser window.  In this case, the width preference will be ignored.") ?></p>
     </td></tr>
 
-  <tr><td colspan="2"><h3><?php echo _("Time Zone")?></h3></td></tr>
+  <tr><td colspan="2"><h3><?php echo _("Time Zone") ?></h3></td></tr>
 
-  <tr><td><p>
-    <?php echo fmt("Add %s hours to the server's local time when reporting times.",
-           $timeOffsetInput)?>
-  </p></td><td>
-  <p class="hint">
-    <?php echo fmt("The current time at the server is %s.",
-            HTML::strong($WikiTheme->formatDateTime($serverTime)))?>
-    <?php echo fmt("With the current offset, this would be reported as %s.",
-           HTML::strong($WikiTheme->formatDateTime($time)))?>
-  </p>
-  </td></tr>
+  <tr>
+    <td>
+      <p>
+        <label for="timeOffsetInput">
+        <?php echo fmt("Add %s hours to the server's local time when reporting times.", $timeOffsetInput) ?>
+        </label>
+      </p>
+    </td>
+    <td>
+      <p class="hint">
+        <?php echo fmt("The current time at the server is %s.",
+                HTML::strong($WikiTheme->formatDateTime($serverTime))) ?>
+        <?php echo fmt("With the current offset, this would be reported as %s.",
+               HTML::strong($WikiTheme->formatDateTime($time))) ?>
+      </p>
+    </td>
+  </tr>
 
-  <tr><td colspan="2"><h3><?php echo _("Date Format")?></h3></td></tr>
+  <tr><td colspan="2"><h3><?php echo _("Date Format") ?></h3></td></tr>
 
   <tr><td colspan="2">
     <p>
       <?php echo $RelativeDatesCB ?>
-      <?php echo _("Show relative dates using 'Today' and 'Yesterday'")?>
+      <label for="relativeDates">
+      <?php echo _("Show relative dates using “Today” and “Yesterday”") ?>
+      </label>
     </p>
   </td></tr>
 </table>
@@ -329,9 +422,9 @@ $DoubleClickCB = HTML::input(array('type' => 'checkbox',
 
 <?php if ($isForm) { ?>
 <p>
-  <?php echo Button("submit:", _("Update Preferences"), 'wikiadmin')?>
-  <?php echo Button("submit:delete", _("Reset Preferences"), 'wikiadmin')?>
-  <?php echo Button("submit:cancel", _("Cancel"), 'button')?>
+  <?php echo Button("submit:", _("Update Preferences"), 'wikiadmin') ?>
+  <?php echo Button("submit:delete", _("Reset Preferences"), 'wikiadmin') ?>
+  <?php echo Button("submit:cancel", _("Cancel"), 'button') ?>
   <?php echo HiddenInputs($request->getArgs(), false, array('pref')) ?>
 </p>
 </form>

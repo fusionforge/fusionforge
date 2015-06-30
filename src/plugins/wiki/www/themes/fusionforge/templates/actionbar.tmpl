@@ -9,7 +9,7 @@ $isBrowse = $request->getArg('action') == 'browse';
 
   <nav id="actionbuttons">
   <ul>
-    <?php if (!string_ends_with($pagename, SUBPAGE_SEPARATOR._("Discussion"))) { ?>
+    <?php if (!string_ends_with($pagename, '/'._("Discussion"))) { ?>
     <?php $talk = new WikiPageName('Talk:'.$pagename); ?>
       <li class="bold">
       <?php echo Button(array(), $isActionPage ? _("Action Page") : _("Page"), $talk->getParent()) ?>

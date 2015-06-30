@@ -37,7 +37,7 @@
 
 if (PHP_OS == "Darwin") { // Mac OS X
     if (!defined("GRAPHVIZ_EXE"))
-        define('GRAPHVIZ_EXE', '/sw/bin/dot'); // graphviz via Fink
+        define('GRAPHVIZ_EXE', '/usr/local/bin/dot'); // graphviz via Homebrew
     // Name of the Truetypefont - at least LucidaSansRegular.ttf is always present on OS X
     if (!defined('VISUALWIKIFONT'))
         define('VISUALWIKIFONT', 'LucidaSansRegular');
@@ -72,6 +72,10 @@ require_once 'lib/WikiPluginCached.php';
 class WikiPlugin_GraphViz
     extends WikiPluginCached
 {
+
+    public $_args;
+    public $source;
+    public $_mapfile;
 
     private function mapTypes()
     {
@@ -127,7 +131,7 @@ class WikiPlugin_GraphViz
         );
     }
 
-    function handle_plugin_args_cruft(&$argstr, &$args)
+    function handle_plugin_args_cruft($argstr, $args)
     {
         $this->source = $argstr;
     }
@@ -177,8 +181,6 @@ class WikiPlugin_GraphViz
     function helpImage()
     {
         $def = $this->defaultArguments();
-        //$other_imgtypes = $GLOBALS['PLUGIN_CACHED_IMGTYPES'];
-        //unset ($other_imgtypes[$def['imgtype']]);
         $imgtypes = $GLOBALS['PLUGIN_CACHED_IMGTYPES'];
         $imgtypes = array_merge($imgtypes, array("svg", "svgz", "ps"), $this->mapTypes());
         $helparr = array(
@@ -205,7 +207,7 @@ class WikiPlugin_GraphViz
             array(255, 255, 255));
     }
 
-    function processSource($argarray = false)
+    function processSource($argarray = array())
     {
         if (empty($this->source)) {
             // create digraph from pages
@@ -216,7 +218,7 @@ class WikiPlugin_GraphViz
             $source = "digraph GraphViz {\n"; // }
             foreach ($argarray['pages'] as $name) { // support <!plugin-list !> pagelists
                 // allow Page/SubPage
-                $url = str_replace(urlencode(SUBPAGE_SEPARATOR), SUBPAGE_SEPARATOR,
+                $url = str_replace(urlencode('/'), '/',
                     rawurlencode($name));
                 $source .= "  \"$name\" [URL=\"$url\"];\n";
             }
@@ -240,7 +242,12 @@ class WikiPlugin_GraphViz
         return $source;
     }
 
-    function createDotFile($tempfile = '', $argarray = false)
+    /**
+     * @param string $tempfile
+     * @param array $argarray
+     * @return mixed
+     */
+    function createDotFile($tempfile = '', $argarray = array())
     {
         $this->source = $this->processSource($argarray);
         if (!$this->source)
@@ -256,7 +263,7 @@ class WikiPlugin_GraphViz
         return $ok ? $tempfile : false;
     }
 
-    function getImage($dbi, $argarray, $request)
+    protected function getImage($dbi, $argarray, $request)
     {
         $dotbin = GRAPHVIZ_EXE;
         $tempfiles = $this->tempnam($this->getName());
@@ -314,17 +321,27 @@ class WikiPlugin_GraphViz
         return $outfile;
     }
 
-    // which argument must be set to 'png', for the fallback image when svg will fail on the client.
-    // type: SVG_PNG
-    function pngArg()
+    protected function getHtml($dbi, $argarray, $request, $basepage)
+    {
+        trigger_error('pure virtual', E_USER_ERROR);
+    }
+
+    /**
+     * Which argument must be set to 'png', for the fallback image when svg
+     * will fail on the client.
+     * type: SVG_PNG
+     *
+     * @return string
+     */
+    protected function pngArg()
     {
         return 'imgtype';
     }
 
-    function getMap($dbi, $argarray, $request)
+    protected function getMap($dbi, $argarray, $request)
     {
         $result = $this->invokeDot($argarray);
-        if (isa($result, 'HtmlElement'))
+        if (is_a($result, 'HtmlElement'))
             return array(false, $result);
         else
             return $result;
@@ -347,12 +364,17 @@ class WikiPlugin_GraphViz
      */
     function invokeDot($argarray)
     {
+        /**
+         * @var WikiRequest $request
+         */
+        global $request;
+
         $dotbin = GRAPHVIZ_EXE;
         $tempfiles = $this->tempnam($this->getName());
         $gif = $argarray['imgtype'];
         $ImageCreateFromFunc = "ImageCreateFrom$gif";
         $outfile = $tempfiles . "." . $gif;
-        $debug = $GLOBALS['request']->getArg('debug');
+        $debug = $request->getArg('debug');
         if ($debug) {
             $tempdir = dirname($tempfiles);
             $tempout = $tempdir . "/.debug";
@@ -368,20 +390,20 @@ class WikiPlugin_GraphViz
         $args = "-T$gif $tempfiles.dot -o $outfile";
         $cmdline1 = "$dotbin $args";
         if ($debug) $cmdline1 .= " > $tempout";
-        $ok = $ok and $this->filterThroughCmd($source, $cmdline1);
+        $ok = $ok && $this->filterThroughCmd($source, $cmdline1);
         //$ok = $this->execute("$dotbin -T$gif $tempfiles.dot -o $outfile" .
         //                     ($debug ? " > $tempout 2>&1" : " 2>&1"), $outfile)
 
         $args = "-Timap $tempfiles.dot -o $tempfiles.map";
         $cmdline2 = "$dotbin $args";
         if ($debug) $cmdline2 .= " > $tempout";
-        $ok = $ok and $this->filterThroughCmd($source, $cmdline2);
+        $ok = $ok && $this->filterThroughCmd($source, $cmdline2);
         // $this->execute("$dotbin -Timap $tempfiles.dot -o ".$tempfiles.".map" .
         //                    ($debug ? " > $tempout 2>&1" : " 2>&1"), $tempfiles.".map")
-        $ok = $ok and file_exists($outfile);
-        $ok = $ok and file_exists($tempfiles . '.map');
-        $ok = $ok and ($img = $ImageCreateFromFunc($outfile));
-        $ok = $ok and ($fp = fopen($tempfiles . '.map', 'r'));
+        $ok = $ok && file_exists($outfile);
+        $ok = $ok && file_exists($tempfiles . '.map');
+        $ok = $ok && ($img = $ImageCreateFromFunc($outfile));
+        $ok = $ok && ($fp = fopen($tempfiles . '.map', 'r'));
 
         $map = HTML();
         if ($debug == 'static') {

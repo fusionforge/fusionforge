@@ -7,7 +7,7 @@
   $EditB = fmt("%s of this page", $EditB);
   if (empty($revision)) $revision = $page->getCurrentRevision(false);
 ?>
-<?php echo $EditB ?> 
+<?php echo $EditB ?>
 <a href="<?php echo WikiURL($revision,array('action'=>'diff'))?>"><?php echo $WikiTheme->getLastModifiedMessage($revision) ?></a>
     <?php echo $SEP?><?php echo Button("PageHistory", _("PageHistory")) ?>
     <?php echo $SEP?><?php echo Button("PageInfo", _("PageInfo")) ?>

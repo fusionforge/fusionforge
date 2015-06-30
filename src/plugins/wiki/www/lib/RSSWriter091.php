@@ -64,8 +64,8 @@ class RSSWriter091 extends RSSWriter
      */
     function __spew()
     {
-        header("Content-Type: application/xml; charset=" . RSS_ENCODING);
-        printf("<?xml version=\"1.0\" encoding=\"%s\"?>\n", RSS_ENCODING);
+        header("Content-Type: application/xml; charset=UTF-8");
+        print("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n");
         print("<!DOCTYPE rss PUBLIC \"-//Netscape Communications//DTD RSS 0.91//EN\"\n");
         print("\"http://my.netscape.com/publish/formats/rss-0.91.dtd\">\n\n");
         $this->printXML();

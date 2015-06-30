@@ -67,6 +67,20 @@ if (!is_dir(forge_get_config('data_path').'/dumps')) {
 }
 $h1 = fopen(forge_get_config('data_path').'/dumps/mailman-aliases', "w");
 
+# Encoding hell
+if (file_exists($path_to_mailman.'/Mailman/Defaults.py')
+	&& strpos(file_get_contents($path_to_mailman.'/Mailman/Defaults.py'),
+              "sys.setdefaultencoding('utf-8')")) {
+	// Sniffed utf-8 patch (e.g. in Debian 8)
+	// Consistent encoding:
+	$coding = 'utf-8';
+} else {
+	// Standard Mailman 2.1.x, encoding used depends on the list language
+	// Using heuristic:
+	$coding = 'iso-8859-1';
+	// Alternate fix: iconv('utf-8', 'us-ascii//TRANSLIT', $description);
+}
+
 $mailingListIds = array();
 for ($i=0; $i<$rows; $i++) {
 	$listadmin = db_result($res,$i,'user_name');
@@ -77,7 +91,8 @@ for ($i=0; $i<$rows; $i++) {
 	$public = db_result($res,$i,'is_public');
 	$status = db_result($res,$i,'status');
 	$description = db_result($res, $i, 'description');
-	$description = str_replace('"', '\"', utf8_decode($description));
+	if ($coding == 'iso-8859-1') $description = utf8_decode($description);
+	$description = str_replace('"', '\"', $description);
 
 	$listname = trim($listname);
 	if (!$listname) {
@@ -106,7 +121,7 @@ for ($i=0; $i<$rows; $i++) {
 			echo db_error();
 			$tmp = tempnam(forge_get_config('data_path'), "tmp");
 			$fh = fopen($tmp,'w');
-			$listConfig = "# -*- coding: iso-8859-1 -*-\n";
+			$listConfig = "# -*- coding: $coding -*-\n";
 			$listConfig .= "description = \"$description\"\n" ;
 			$listConfig .= "host_name = '".forge_get_config('lists_host')."'\n" ;
 			if (!$public) {
@@ -149,7 +164,7 @@ for ($i=0; $i<$rows; $i++) {
 	} elseif ($status == MAIL__MAILING_LIST_IS_CREATED) {  // created but not configured
 		$tmp = tempnam(forge_get_config('data_path'), "tmp");
 		$fh = fopen($tmp,'w');
-		$listConfig = "# -*- coding: iso-8859-1 -*-\n";
+		$listConfig = "# -*- coding: $coding -*-\n";
 		$listConfig .= "description = \"$description\"\n" ;
 		$listConfig .= "host_name = '".forge_get_config('lists_host')."'\n";
 		if (!$public) {
@@ -185,7 +200,7 @@ for ($i=0; $i<$rows; $i++) {
 		$tmp = tempnam(forge_get_config('data_path'), "tmp");
 		$tmp = tempnam(forge_get_config('data_path'), "tmp");
 		$fh = fopen($tmp,'w');
-		$listConfig = "# -*- coding: iso-8859-1 -*-\n";
+		$listConfig = "# -*- coding: $coding -*-\n";
 		$listConfig .= "description = \"$description\"\n" ;
 		$listConfig .= "host_name = '".forge_get_config('lists_host')."'\n" ;
 		if (!$public) {
@@ -238,7 +253,7 @@ for ($i=0; $i<$rows; $i++) {
 			$err .= "Privatizing ".$listname."\n";
 			$tmp = tempnam(forge_get_config('data_path'), "tmp");
 			$fh = fopen($tmp,'w');
-			$listConfig = "# -*- coding: iso-8859-1 -*-\n";
+			$listConfig = "# -*- coding: $coding -*-\n";
 			$listConfig .= "description = \"$description\"\n" ;
 			$listConfig .= "host_name = '".forge_get_config('lists_host')."'\n" ;
 			$listConfig .= "archive_private = True\n" ;

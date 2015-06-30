@@ -44,8 +44,7 @@ class WikiPlugin_AllUsers
         (
             PageList::supportedArgs(),
             array('noheader' => false,
-                'include_empty' => true,
-                'debug' => false
+                'include_empty' => true
             ));
     }
 
@@ -58,14 +57,23 @@ class WikiPlugin_AllUsers
     //
     // sortby: [+|-] pagename|mtime|hits
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         $args = $this->getArgs($argstr, $request);
 
-        extract($args);
-        if (defined('DEBUG') && DEBUG && $debug) {
-            $timer = new DebugTimer;
+        if (isset($args['limit']) && !is_limit($args['limit'])) {
+            return HTML::p(array('class' => "error"),
+                           _("Illegal “limit” argument: must be an integer or two integers separated by comma"));
         }
+
+        extract($args);
 
         $group = $request->getGroup();
         if (method_exists($group, '_allUsers')) {
@@ -89,20 +97,7 @@ class WikiPlugin_AllUsers
                 $pagelist->addPage(trim($allusers[$i]));
             }
         }
-        /*
-        $page_iter = $dbi->getAllPages($include_empty, $sortby, $limit);
-        while ($page = $page_iter->next()) {
-            if ($page->isUserPage($include_empty))
-                $pagelist->addPage($page);
-        }
-        */
-
-        if (defined('DEBUG') && DEBUG and $debug) {
-            return HTML($pagelist,
-                HTML::p(fmt("Elapsed time: %s s", $timer->getStats())));
-        } else {
-            return $pagelist;
-        }
+        return $pagelist;
     }
 }
 

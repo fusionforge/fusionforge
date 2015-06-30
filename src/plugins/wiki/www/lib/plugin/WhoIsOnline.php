@@ -50,6 +50,13 @@ class WikiPlugin_WhoIsOnline
         );
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         global $WikiTheme;
@@ -66,16 +73,24 @@ class WikiPlugin_WhoIsOnline
         return new Template('online', $request, array_merge($args, $stats, $other));
     }
 
-    // box is used to display a fixed-width, narrow version with common header
-    // just the number of online users.
-    function box($args = false, $request = false, $basepage = false)
+    /**
+     * box is used to display a fixed-width, narrow version with common header
+     * just the number of online users.
+     *
+     * @param string $args
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return $this|HtmlElement
+     */
+    function box($args = '', $request = null, $basepage = '')
     {
         if (!$request) $request =& $GLOBALS['request'];
         $stats = $this->getStats($request->_dbi, $request, 'summary');
         return $this->makeBox(_("Who is Online"),
-            HTML(HTML::raw('&middot; '),
+            HTML(HTML::ul(HTML::li(
                 WikiLink(_("WhoIsOnline"), 'auto',
-                    fmt("%d online users", $stats['NUM_USERS']))));
+                    sprintf(ngettext("%d online user", "%d online users", $stats['NUM_USERS']),
+                            $stats['NUM_USERS']))))));
     }
 
     function getSessions($dbi, &$request)
@@ -120,7 +135,7 @@ class WikiPlugin_WhoIsOnline
                 if (empty($date)) continue;
                 $num_online++;
                 $user = @unserialize($data);
-                if (!empty($user) and !isa($user, "__PHP_incomplete_Class")) {
+                if (!empty($user) and !is_a($user, "__PHP_incomplete_Class")) {
                     // if "__PHP_incomplete_Class" try to avoid notice
                     $userid = @$user->_userid;
                     $level = @$user->_level;

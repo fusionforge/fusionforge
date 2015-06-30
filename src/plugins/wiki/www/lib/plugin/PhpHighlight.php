@@ -29,6 +29,14 @@
 class WikiPlugin_PhpHighlight
     extends WikiPlugin
 {
+    public $source;
+    public $oldstring;
+    public $oldcomment;
+    public $oldkeyword;
+    public $oldbg;
+    public $oldhtml;
+    public $olddefault;
+
     function getDescription()
     {
         return _("PHP syntax highlighting.");
@@ -49,9 +57,15 @@ class WikiPlugin_PhpHighlight
         );
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
-
         extract($this->getArgs($argstr, $request));
         $source =& $this->source;
         if (empty($source)) {
@@ -88,7 +102,7 @@ class WikiPlugin_PhpHighlight
         return new RawXml($str);
     }
 
-    function handle_plugin_args_cruft(&$argstr, &$args)
+    function handle_plugin_args_cruft($argstr, $args)
     {
         $this->source = $argstr;
     }

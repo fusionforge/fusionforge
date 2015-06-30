@@ -65,6 +65,10 @@ class WikiPlugin_PasswordReset
         $alert->show();
     }
 
+    /**
+     * @param WikiRequest $request
+     * @param string $userid
+     */
     private function doEmail(&$request, $userid)
     {
 
@@ -87,6 +91,13 @@ class WikiPlugin_PasswordReset
         $alert->show();
     }
 
+    /**
+     * @param WikiRequest $request
+     * @param string $userid
+     * @param string $header
+     * @param string $footer
+     * @return HtmlElement
+     */
     private function doForm(&$request, $userid = '', $header = '', $footer = '')
     {
         if (!$header) {
@@ -113,12 +124,16 @@ class WikiPlugin_PasswordReset
             $footer);
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         $args = $this->getArgs($argstr, $request);
-        if (isa($request, 'MockRequest'))
-            return '';
-
         $user =& $request->_user;
         $post_args = $request->getArg('admin_reset');
         $userid = $args['user'];
@@ -150,7 +165,7 @@ class WikiPlugin_PasswordReset
                         $isadmin ? 'wikiadmin' : 'button'),
                     HTML::raw('&nbsp;'),
                     Button('submit:admin_reset[cancel]', _("Cancel"), 'button'));
-                $header = HTML::strong("Verify");
+                $header = HTML::strong(_("Verify"));
                 if (!$user->isAdmin()) {
                     // check for email
                     if ($userid == $user->UserName() and $user->isAuthenticated()) {
@@ -173,7 +188,7 @@ class WikiPlugin_PasswordReset
                     }
                     $verified = $thisuser->_prefs->_prefs['email']->getraw('emailVerified');
                     if (!$verified)
-                        $header->pushContent(HTML::br(), "Warning: This users email address is unverified!");
+                        $header->pushContent(HTML::br(), _("Warning: This users email address is unverified!"));
                 }
                 return $this->doForm($request, $userid,
                     $header,

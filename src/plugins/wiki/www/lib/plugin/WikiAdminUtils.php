@@ -46,6 +46,13 @@ class WikiPlugin_WikiAdminUtils
         );
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         $args = $this->getArgs($argstr, $request);
@@ -156,6 +163,10 @@ class WikiPlugin_WikiAdminUtils
 
     /**
      * Purge all non-referenced empty pages. Mainly those created by bad link extraction.
+     *
+     * @param WikiRequest $request
+     * @param array $args
+     * @return string|XmlContent
      */
     private function _do_purge_empty_pages(&$request, $args)
     {
@@ -229,7 +240,7 @@ class WikiPlugin_WikiAdminUtils
     private function _do_email_verification(&$request, &$args)
     {
         $dbi = $request->getDbh();
-        $pagelist = new PageList('pagename', 0, $args);
+        $pagelist = new PageList('pagename', array(), $args);
         //$args['return_url'] = 'action=email-verification-verified';
         $email = new _PageList_Column_email('email', _("E-mail"), 'left');
         $emailVerified = new _PageList_Column_emailVerified('emailVerified',
@@ -249,10 +260,7 @@ class WikiPlugin_WikiAdminUtils
                 $allusers = array();
         }
         foreach ($allusers as $username) {
-            if (ENABLE_USER_NEW)
-                $user = WikiUser($username);
-            else
-                $user = new WikiUser($request, $username);
+            $user = WikiUser($username);
             $prefs = $user->getPreferences();
             if ($prefs->get('email')) {
                 if (!$prefs->get('userid'))
@@ -278,7 +286,7 @@ class WikiPlugin_WikiAdminUtils
         }
         $request->_user = $current_user;
         if (!empty($args['verify']) or empty($pagelist->_rows)) {
-            return HTML($pagelist->_generateTable(false));
+            return HTML($pagelist->_generateTable());
         } elseif (!empty($pagelist->_rows)) {
             $args['verify'] = 1;
             $args['return_url'] = $request->getURLtoSelf();
@@ -288,7 +296,7 @@ class WikiPlugin_WikiAdminUtils
                 HiddenInputs(array('require_authority_for_post' =>
                 WIKIAUTH_ADMIN)),
                 HiddenInputs($request->getArgs()),
-                $pagelist->_generateTable(false),
+                $pagelist->_generateTable(),
                 HTML::p(Button('submit:', _("Change Verification Status"),
                         'wikiadmin'),
                     HTML::raw('&nbsp;'),
@@ -304,7 +312,7 @@ require_once 'lib/PageList.php';
 class _PageList_Column_email
     extends _PageList_Column
 {
-    function _getValue(&$prefs, $dummy)
+    function _getValue($prefs, $dummy)
     {
         return $prefs->get('email');
     }
@@ -313,7 +321,7 @@ class _PageList_Column_email
 class _PageList_Column_emailVerified
     extends _PageList_Column
 {
-    function _getValue(&$prefs, $status)
+    function _getValue($prefs, $status)
     {
         $name = $prefs->get('userid');
         $input = HTML::input(array('type' => 'checkbox',

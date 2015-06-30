@@ -51,15 +51,28 @@ class WikiPlugin_MostPopular
     // exclude arg allows multiple pagenames exclude=HomePage,RecentChanges
     // sortby: only pagename or hits. mtime not!
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         $args = $this->getArgs($argstr, $request);
+
         extract($args);
-        if (strstr($sortby, 'mtime')) {
-            trigger_error(_("sortby=mtime not supported with MostPopular"),
-                E_USER_WARNING);
-            $sortby = '';
+
+        if (isset($limit) && !is_limit($limit)) {
+            return HTML::p(array('class' => "error"),
+                           _("Illegal “limit” argument: must be an integer or two integers separated by comma"));
         }
+        if (strstr($sortby, 'mtime')) {
+            return HTML::p(array('class' => "error"),
+                           _("sortby=mtime not supported with MostPopular"));
+        }
+
         $columns = $info ? explode(",", $info) : array();
         array_unshift($columns, 'hits');
 
@@ -70,7 +83,6 @@ class WikiPlugin_MostPopular
         } else {
             $args['count'] = $request->getArg('count');
         }
-        //$dbi->touch();
         $pages = $dbi->mostPopular($limit, $sortby);
         $pagelist = new PageList($columns, $exclude, $args);
         while ($page = $pages->next()) {

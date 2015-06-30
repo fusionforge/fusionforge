@@ -72,7 +72,7 @@
 ... (facts and rules described in XML)
  *
  * Links:
- *   http://phpwiki.fr/SemanticWeb,
+ *   http://phpwiki.fr/Help/SemanticRelations,
  *   http://en.wikipedia.org/wiki/Knowledge_representation
  *   http://www.ontoweb.org/
  *   http://www.semwebcentral.org/ (OWL on top of FusionForge)
@@ -210,7 +210,7 @@ class RdfWriter extends RssWriter // in fact it should be rewritten to be other 
     /** This function transforms a valid url-encoded URI into a string
      *  that can be used as an XML-ID. The mapping should be injective.
      */
-    function makeXMLExportId($uri)
+    static function makeXMLExportId($uri)
     {
         $uri = str_replace('-', '-2D', $uri);
         //$uri = str_replace( ':', '-3A', $uri); //already done by PHP
@@ -304,7 +304,7 @@ class SemanticAttributeSearchQuery
     }
 
     /**
-     * Strip non-numeric chars from the variable (as the groupseperator) and replace
+     * Strip non-numeric chars from the variable (as the group separator) and replace
      * it in the symbolic query for evaluation.
      * This version unifies the attribute values from the database to a
      * numeric basevalue before comparison. (area:=963.6km^2 => 9.366e+08 m^2)

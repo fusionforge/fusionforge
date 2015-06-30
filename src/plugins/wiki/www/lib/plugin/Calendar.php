@@ -35,6 +35,10 @@ if (!defined('SECONDS_PER_DAY'))
 class WikiPlugin_Calendar
     extends WikiPlugin
 {
+    public $args;
+    private $_today;
+    public $_links;
+
     function getDescription()
     {
         return _("Calendar");
@@ -42,7 +46,7 @@ class WikiPlugin_Calendar
 
     function getDefaultArguments()
     {
-        return array('prefix' => '[pagename]' . SUBPAGE_SEPARATOR,
+        return array('prefix' => '[pagename]' . '/',
             'date_format' => '%Y-%m-%d',
             'year' => '',
             'month' => '',
@@ -165,6 +169,13 @@ class WikiPlugin_Calendar
         return $td;
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         $this->args = $this->getArgs($argstr, $request);

@@ -624,7 +624,12 @@ div.tleft {
 
 .hiddenStructure {
     display: none;
-    speak: none;
+}
+
+@media aural {
+    .hiddenStructure {
+        speak: none;
+    }
 }
 
 img.tex {
@@ -1020,7 +1025,7 @@ special external link styling */
 
 .portlet h6 {
     background-color: #ffae2e;
-    border: 1px solid #2f6fab;
+    border: 1px #2f6fab;
     border-style: solid solid none solid;
     padding: 0 1em 0 1em;
     /*text-transform: lowercase;*/
@@ -1056,7 +1061,6 @@ special external link styling */
 .portlet li {
     padding: 0;
     margin: 0 0 0 0;
-    margin-bottom: 0;
 }
 
 /*
@@ -1211,11 +1215,13 @@ input.searchButton {
     border-style: solid;
     border-color: #aaa #eee #eee #aaa;
     -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 /*
-** the personal toolbar
-*/
+ ** the personal toolbar
+ */
 
 #p-personal {
     width: 100%;
@@ -1711,6 +1717,10 @@ input#wpSave, input#wpDiff {
     margin-right: 0.33em;
 }
 
+img.toolbar:hover {
+    cursor: pointer;
+}
+
 #editform .editOptions {
     display: inline;
 }
@@ -1802,7 +1812,7 @@ div.multipageimagenavbox {
     border: solid 1px silver;
     padding: 4px;
     margin: 1em;
-    -moz-border-radius: 6px;
+    border-radius: 6px;
     background-color: #f0f0f0;
 }
 
@@ -1919,10 +1929,6 @@ input.gridbutton, a.gridbutton, a:hover.gridbutton, a:visited.gridbutton {
     color: black;
 }
 
-.wikipaging {
-    font-size: 80%
-}
-
 .wikipaging-disabled {
     color: #999
 }
@@ -1956,7 +1962,7 @@ div.boxright > blockquote {
     clear: both;
 }
 
-.warning {
+.warning, .warning_msg {
     color: black;
     background-color: #FFCCCC;
     margin-top: 1em;
@@ -2303,4 +2309,28 @@ td.tdunselected {
     background-color: #DFD;
     border-color: green;
     padding: 0.5em;
+}
+
+table.sortable th.header {
+    background-image: url(../default/buttons/sort_none.gif);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}
+
+table.sortable th.headerSortUp {
+    background-image: url(../default/buttons/sort_up.gif);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}
+
+table.sortable th.headerSortDown {
+    background-image: url(../default/buttons/sort_down.gif);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
 }

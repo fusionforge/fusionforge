@@ -53,6 +53,13 @@ class WikiPlugin_BlogArchives
             );
     }
 
+    /**
+     * @param WikiDB $dbi
+     * @param string $argstr
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return mixed
+     */
     function run($dbi, $argstr, &$request, $basepage)
     {
         if (is_array($argstr)) { // can do with array also.
@@ -75,7 +82,7 @@ class WikiPlugin_BlogArchives
             else
                 $args['user'] = ADMIN_USER; // "Admin/Blogs/day" pages
         }
-        $parent = (empty($args['user']) ? '' : $args['user'] . SUBPAGE_SEPARATOR);
+        $parent = (empty($args['user']) ? '' : $args['user'] . '/');
 
         //$info = explode(',', $args['info']);
         //$pagelist = new PageList($args['info'], $args['exclude'], $args);
@@ -83,7 +90,7 @@ class WikiPlugin_BlogArchives
         //    unset($pagelist->_columns['pagename']);
 
         if (!empty($args['month'])) {
-            $prefix = $parent . $this->blogPrefix('wikiblog') . SUBPAGE_SEPARATOR . $args['month'];
+            $prefix = $parent . $this->blogPrefix('wikiblog') . '/' . $args['month'];
             $pages = $dbi->titleSearch(new TextSearchQuery("^" . $prefix, true, 'posix'));
             $html = HTML::ul();
             while ($page = $pages->next()) {
@@ -135,7 +142,13 @@ class WikiPlugin_BlogArchives
     }
 
     // box is used to display a fixed-width, narrow version with common header
-    function box($args = false, $request = false, $basepage = false)
+    /**
+     * @param string $args
+     * @param WikiRequest $request
+     * @param string $basepage
+     * @return $this|HtmlElement
+     */
+    function box($args = '', $request = null, $basepage = '')
     {
         if (!$request) $request =& $GLOBALS['request'];
         if (!$args or empty($args['limit'])) $args['limit'] = 10;

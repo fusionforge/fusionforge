@@ -32,7 +32,15 @@ class WikiDB_backend_dba
             $request->finish(fmt("%s: Can't open dba database", $dbfile));
         }
 
-        $this->WikiDB_backend_dbaBase($db);
+        parent::__construct($db);
+    }
+
+    function lock($tables = array(), $write_lock = true)
+    {
+    }
+
+    function unlock($tables = array(), $force = false)
+    {
     }
 }
 

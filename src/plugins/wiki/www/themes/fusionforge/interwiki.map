@@ -19,11 +19,8 @@ MetaWikiPedia http://meta.wikipedia.com/wiki/
 MoinMoin http://moinmoin.wikiwikiweb.de/
 php-function http://www.php.net/%s
 php-lookup http://www.php.net/manual-lookup.php?pattern=
-PhpWiki http://phpwiki.sourceforge.net/phpwiki/
-PhpWikiCvs http://phpwiki.svn.sourceforge.net/viewvc/phpwiki/trunk/pgsrc/%s?view=log
-PhpWikiSvn http://phpwiki.svn.sourceforge.net/viewvc/phpwiki/trunk/pgsrc/%s?view=log
-PhpWikiDemo http://phpwiki.sourceforge.net/demo/
-PhpWikiTest http://phpwiki.sourceforge.net/test/
+PhpWiki http://phpwiki.fr/
+PhpWikiSvn https://sourceforge.net/p/phpwiki/code/HEAD/tree/trunk/
 SourceForge http://sourceforge.net/
 TWiki http://twiki.org/cgi-bin/view/
 UseMod http://www.usemod.com/cgi-bin/wiki.pl?
