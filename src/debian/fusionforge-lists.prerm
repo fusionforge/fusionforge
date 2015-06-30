@@ -20,7 +20,7 @@ set -e
 case "$1" in
     remove)
         if ! which forge_get_config >/dev/null; then exit 0; fi
-        $(forge_get_config source_path)/post-install.d/web/web.sh remove
+        $(forge_get_config source_path)/post-install.d/lists/lists.sh remove
     ;;
 
     upgrade|deconfigure)

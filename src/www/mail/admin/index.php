@@ -139,10 +139,6 @@ if ($group_id) {
 		printf(_('Lists are named in this manner:<br /><strong>projectname-listname@%s</strong>'), forge_get_config('lists_host'));
 		print '</p>';
 
-		print '<p>';
-		print _('It will take one hour for your list to be created.');
-		print '</p>';
-
 		$mlFactory = new MailingListFactory($group);
 		if (!$mlFactory || !is_object($mlFactory) || $mlFactory->isError()) {
 			exit_error($mlFactory->getErrorMessage(),'mail');

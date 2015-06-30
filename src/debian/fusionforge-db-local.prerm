@@ -19,6 +19,7 @@ set -e
 
 case "$1" in
     remove)
+        if ! which forge_get_config >/dev/null; then exit 0; fi
         $(forge_get_config source_path)/post-install.d/db/db.sh remove
     ;;
 

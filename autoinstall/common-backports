@@ -145,27 +145,27 @@ function backports_rpm {
 	# Prepare manual backports
 	cat <<'EOF' > /etc/yum.repos.d/fedora-source.repo
 [fedora]
-name=Fedora 20
+name=Fedora 22
 failovermethod=priority
-metalink=https://mirrors.fedoraproject.org/metalink?repo=fedora-20&arch=$basearch
+metalink=https://mirrors.fedoraproject.org/metalink?repo=fedora-22&arch=$basearch
 enabled=0
 gpgcheck=0
 [fedora-updates]
-name=Fedora 20 Updates
+name=Fedora 22 Updates
 failovermethod=priority
-metalink=https://mirrors.fedoraproject.org/metalink?repo=updates-released-f20&arch=$basearch
+metalink=https://mirrors.fedoraproject.org/metalink?repo=updates-released-f22&arch=$basearch
 enabled=0
 gpgcheck=0
 [fedora-source]
-name=Fedora 20 - Source
+name=Fedora 22 - Source
 failovermethod=priority
-metalink=https://mirrors.fedoraproject.org/metalink?repo=fedora-source-20&arch=$basearch
+metalink=https://mirrors.fedoraproject.org/metalink?repo=fedora-source-22&arch=$basearch
 enabled=0
 gpgcheck=0
 [fedora-updates-source]
-name=Fedora 20 Updates - Source
+name=Fedora 22 Updates - Source
 failovermethod=priority
-metalink=https://mirrors.fedoraproject.org/metalink?repo=updates-released-source-f20&arch=$basearch
+metalink=https://mirrors.fedoraproject.org/metalink?repo=updates-released-source-f22&arch=$basearch
 enabled=0
 gpgcheck=0
 EOF
@@ -198,16 +198,21 @@ EOF
 		yum install -y ~/rpmbuild/RPMS/*/viewvc-[0-9]*.rpm
 	    fi
 
-	    # mediawiki available in EPEL6 but not in EPEL7
-	    # Note: we don't support mediawiki > 1.19 as of 2014-01
+	    # mediawiki not available in EPEL
+	    # Note: we don't support mediawiki > 1.19 as of 2015-06
 	    if yum list mediawiki >/dev/null 2>&1; then
 		yum install -y mediawiki
 	    else
+		DEPS="httpd-filesystem"
+		yum install --enablerepo=fedora -y $DEPS
 		yumdownloader --enablerepo=fedora-source --enablerepo=fedora-updates-source \
 			      --source mediawiki
 		rpm -ivh mediawiki-*.src.rpm
 	        # don't backport php-pecl-jsonc which has lots of deps, let's use built-in php-json
 		sed -i -e '/Requires/ s/, php-pecl-jsonc//' ~/rpmbuild/SPECS/mediawiki.spec
+		sed -i -e '/Requires: php-pecl-jsonc/d' ~/rpmbuild/SPECS/mediawiki.spec
+		# drop new-style php requires
+		sed -i -e '/Requires: php(/d' ~/rpmbuild/SPECS/mediawiki.spec
 		rpmbuild -bb ~/rpmbuild/SPECS/mediawiki.spec
 		yum install -y ~/rpmbuild/RPMS/noarch/mediawiki-[0-9]*.rpm
 	    fi

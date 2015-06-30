@@ -18,16 +18,9 @@
 # with FusionForge; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
+source_path=$(forge_get_config source_path)
 case "$1" in
     configure)
-	if grep -q ^7 /etc/debian_version 2>/dev/null; then
-	    # Fix http://bugs.debian.org/603904
-	    # was: drwxrws--- 2 list www-data
-	    # now: drwxrws--- 2 www-data list
-	    chown www-data:list /var/lib/mailman/archives/private
-	    chmod 2770 /var/lib/mailman/archives/private
-	fi
-
 	# Managed by mailman, but referencing it to document where it is:
 	# echo "Use 'mmsitepass' to set the Mailman master password"
 	# echo "Cf. /var/lib/mailman/data/adm.pw"
@@ -36,10 +29,23 @@ case "$1" in
 	lists_host=$(forge_get_config lists_host)
 	sed -i -e "s/^DEFAULT_EMAIL_HOST.*/DEFAULT_EMAIL_HOST = '$lists_host'/" \
 	       -e "s/^DEFAULT_URL_HOST.*/DEFAULT_URL_HOST = '$lists_host'/" \
+	       -e "s|^DEFAULT_URL_PATTERN.*|DEFAULT_URL_PATTERN = 'http://%s/mailman/'|" \
 	    /etc/mailman/mm_cfg.py
+
+	# Detect mailman cgi-bin installation
+	mailman_cgi_dir=$( \
+	    (echo '/autodetection_failed';
+             ls -d /usr/lib/mailman/cgi-bin /usr/lib/cgi-bin/mailman 2>/dev/null) \
+            | tail -1)
+	ln -nfs $mailman_cgi_dir $source_path/lists/cgi-bin
 	;;
+
+    remove)
+	rm -f $source_path/lists/cgi-bin
+	;;
+
     *)
-	echo "Usage: $0 {configure}"
+	echo "Usage: $0 {configure|remove}"
 	exit 1
 	;;
 esac

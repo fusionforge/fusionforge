@@ -30,6 +30,7 @@ case "$1" in
 	;;
 
     remove)
+	service fusionforge-systasksd stop
 	if [ -x /sbin/chkconfig ]; then
 	    chkconfig --del fusionforge-systasksd
 	else
@@ -38,6 +39,8 @@ case "$1" in
 	;;
 
     purge)
+	rm -f $(forge_get_config log_path)/systasksd.stdout
+	rm -f $(forge_get_config log_path)/systasksd.stderr
 	;;
 
     *)
