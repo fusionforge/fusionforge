@@ -85,11 +85,6 @@ if ($uploaded_notes['tmp_name']) {
 	$notes = $release_notes;
 }
 
-if (strlen($notes) < 20) {
-	$error_msg .= _('Release Notes Are Too Small').'<br />';
-	$exec_changes = false;
-}
-
 // Check for uploaded change logs
 if ($uploaded_changes['tmp_name']) {
 	if (!is_uploaded_file($uploaded_changes['tmp_name'])) {
@@ -104,11 +99,6 @@ if ($uploaded_changes['tmp_name']) {
 	}
 } else {
 	$changes = $release_changes;
-}
-
-if (strlen($changes) < 20) {
-	$error_msg .= _('Change Log Is Too Small').'<br />';
-	$exec_changes = false;
 }
 
 // If we haven't encountered any problems so far then save the changes
