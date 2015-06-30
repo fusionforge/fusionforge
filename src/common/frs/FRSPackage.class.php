@@ -483,7 +483,7 @@ class FRSPackage extends Error {
 				if ($include_hidden) {
 					$this->package_releases[] = $this->newFRSRelease($arr['release_id'], $arr);
 				} else {
-					if (forge_check_perm('frs', $this->getID(), 'read')) {
+					if ($arr['status_id'] == 1) {
 						$this->package_releases[] = $this->newFRSRelease($arr['release_id'], $arr);
 					}
 				}
