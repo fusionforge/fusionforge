@@ -572,7 +572,7 @@ class ReportSetup extends Report {
 	 */
 	function backfill_groups_added_weekly($count=10000) {
 
-		$arr = array_slice ($this->getMonthStartArr(), -$count-1);
+		$arr = array_slice ($this->getWeekStartArr(), -$count-1);
 		rsort($arr);
 
 		for ($i=0; $i<count($arr); $i++) {
