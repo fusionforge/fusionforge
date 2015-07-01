@@ -533,7 +533,7 @@ class ReportSetup extends Report {
 	 */
 	function backfill_users_added_weekly($count=10000) {
 
-		$arr = array_slice ($this->getMonthStartArr(), -$count-1);
+		$arr = array_slice ($this->getWeekStartArr(), -$count-1);
 		rsort($arr);
 
 		for ($i=0; $i<count($arr); $i++) {
@@ -791,7 +791,7 @@ class ReportSetup extends Report {
 	 */
 	function backfill_users_cum_weekly($count=10000) {
 
-		$arr = array_slice ($this->getMonthStartArr(), -$count-1);
+		$arr = array_slice ($this->getWeekStartArr(), -$count-1);
 		rsort($arr);
 
 		for ($i=0; $i<count($arr); $i++) {
@@ -830,7 +830,7 @@ class ReportSetup extends Report {
 	 */
 	function backfill_groups_cum_weekly($count=10000) {
 
-		$arr = array_slice ($this->getMonthStartArr(), -$count-1);
+		$arr = array_slice ($this->getWeekStartArr(), -$count-1);
 		rsort($arr);
 
 		for ($i=0; $i<count($arr); $i++) {
@@ -1065,7 +1065,7 @@ class ReportSetup extends Report {
 	 */
 	function backfill_user_act_weekly($count=10000) {
 
-		$arr = array_slice ($this->getMonthStartArr(), -$count-1);
+		$arr = array_slice ($this->getWeekStartArr(), -$count-1);
 		rsort($arr);
 
 		for ($i=0; $i<count($arr); $i++) {
@@ -1285,7 +1285,7 @@ class ReportSetup extends Report {
 	 */
 	function backfill_group_act_weekly($count=10000) {
 
-		$arr = array_slice ($this->getMonthStartArr(), -$count-1);
+		$arr = array_slice ($this->getWeekStartArr(), -$count-1);
 		rsort($arr);
 
 		for ($i=0; $i<count($arr); $i++) {
