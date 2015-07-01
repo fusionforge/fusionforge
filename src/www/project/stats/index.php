@@ -113,10 +113,12 @@ echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method'
 </table>
 <?php
 echo $HTML->closeForm();
-if ($start == $end) {
-	echo $HTML->error_msg(_('Start and end dates must be different'));
-} elseif (!report_actgraph('project', $SPAN, $start, $end, $group_id, $area)) {
-	echo $HTML->error_msg(_('Error during graphic computation.'));
+if ($area) {
+	if ($start == $end) {
+		echo $HTML->error_msg(_('Start and end dates must be different'));
+	} elseif (!report_actgraph('project', $SPAN, $start, $end, $group_id, $area)) {
+		echo $HTML->error_msg(_('Error during graphic computation.'));
+	}
 }
 
 site_project_footer();
