@@ -1,4 +1,4 @@
-fusionforge (6.0.1-2) UNRELEASED; urgency=medium
+fusionforge (6.0.2-1) UNRELEASED; urgency=medium
 
   * New upstream snapshot following the stable branch (closes: #492881, #211085)
   * Silent lintian command-with-path-in-maintainer-script
