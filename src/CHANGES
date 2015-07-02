@@ -1,7 +1,7 @@
 FusionForge 6.0.2:
 * Accounts: fix elliptic curve ssh keys support (Inria)
 * Project stats: fix misleading label on statistics default empty graph (Inria)
-* Project stats: fix weekly aggregation (Inria)
+* Project stats: fix weekly aggregation and display (Inria)
 * Mailing lists: fix description encoding depending on Mailman version (Inria & Thorsten Glaser)
 * Mailing lists: fix default list URL path (Inria)
 * Mailing lists: fix installation on CentOS (Inria)
