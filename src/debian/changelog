@@ -1,6 +1,6 @@
 fusionforge (6.0.1-2) UNRELEASED; urgency=medium
 
-  * New upstream snapshot following the stable branch.
+  * New upstream snapshot following the stable branch (closes: #492881)
   * Silent lintian command-with-path-in-maintainer-script
   * Remove logs on purge (closes: #789801)
   * Fix upgrade conflict on locale files (closes: #789925)

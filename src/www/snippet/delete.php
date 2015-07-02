@@ -45,15 +45,18 @@ if (session_loggedin()) {
 
 		//Check to see if they are the creator of this package_version
 		$result=db_query_params("SELECT * FROM snippet_package_version ".
-					"WHERE submitted_by=$1 AND ".
-					"snippet_package_version_id=$2",
-					array(user_getid(), $snippet_package_version_id));
+					"WHERE snippet_package_version_id=$1",
+					array($snippet_package_version_id));
 		if (!$result || db_numrows($result) < 1) {
+			echo $HTML->error_msg(_('Error: package version not found.'));
+			snippet_footer();
+			exit;
+		} else if (!forge_check_global_perm('forge_admin')
+		           and db_result($result,0,'submitted_by') != user_getid()) {
 			echo $HTML->error_msg(_('Error: Only the creator of a package version can delete snippets from it.'));
 			snippet_footer();
 			exit;
 		} else {
-
 			//Remove the item from the package
 			$result=db_query_params ('DELETE FROM snippet_package_item
 						WHERE snippet_version_id=$1
@@ -78,10 +81,15 @@ if (session_loggedin()) {
 
 		//find this snippet id and make sure the current user created it
 		$result=db_query_params("SELECT * FROM snippet_version ".
-					"WHERE snippet_version_id=$1 AND submitted_by=$2",
-					array($snippet_version_id, user_getid()));
+					"WHERE snippet_version_id=$1",
+					array($snippet_version_id));
 		if (!$result || db_numrows($result) < 1) {
 			echo $HTML->error_msg(_('Error: That snippet does not exist.'));
+			snippet_footer();
+			exit;
+		} else if (!forge_check_global_perm('forge_admin')
+			and db_result($result,0,'submitted_by') != user_getid()) {
+			echo $HTML->error_msg(_('Error: Only the creator of a snippet can delete it.'));
 			snippet_footer();
 			exit;
 		} else {
@@ -113,11 +121,14 @@ if (session_loggedin()) {
 
 		//make sure they own this version of the package
 		$result=db_query_params("SELECT * FROM snippet_package_version ".
-					"WHERE submitted_by=$1 AND ".
-					"snippet_package_version_id=$2",
-					array(user_getid(), $snippet_package_version_id));
+					"WHERE snippet_package_version_id=$1",
+					array($snippet_package_version_id));
 		if (!$result || db_numrows($result) < 1) {
-			//they don't own it or it's not found
+			echo $HTML->error_msg(_('Error: package version not found.'));
+			snippet_footer();
+			exit;
+		} else if (!forge_check_global_perm('forge_admin')
+		           and db_result($result,0,'submitted_by') != user_getid()) {
 			echo $HTML->error_msg(_('Error: Only the creator of a package version can delete it.'));
 			snippet_footer();
 			exit;
@@ -126,9 +137,8 @@ if (session_loggedin()) {
 
 			//do the version delete
 			$result=db_query_params("DELETE FROM snippet_package_version ".
-						"WHERE submitted_by=$1 AND ".
-						"snippet_package_version_id=$2",
-						array(user_getid(), $snippet_package_version_id));
+						"WHERE snippet_package_version_id=$1",
+						array($snippet_package_version_id));
 
 			//delete snippet_package_items
 			$result=db_query_params("DELETE FROM snippet_package_item ".

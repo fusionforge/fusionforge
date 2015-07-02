@@ -9,6 +9,7 @@ FusionForge 6.0.2:
 * FRS: do not display hidden releases publicly (TrivialDev & Inria)
 * FRS: revert Notes and ChangeLog as optional fields - also when editing releases (Inria)
 * Tracker: fix column title in add/update custom field elements (TrivialDev)
+* Snippets: allow forge administrator to delete snippets (Inria)
 * Plugin Taskboard: fix logic on initialize error (TrivialDev)
 * Plugin Taskboard: fix background column color setting (TrivialDev)
 
