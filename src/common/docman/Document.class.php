@@ -818,12 +818,6 @@ class Document extends Error {
 			return false;
 		}
 
-		$dg = new DocumentGroup($this->getGroup(), $doc_group);
-		if ($dg->hasDocument($filename)) {
-			$this->setError(_('Document already published in this folder').' '.$dg->getPath());
-			return false;
-		}
-
 		db_begin();
 		$colArr = array('title', 'description', 'stateid', 'doc_group', 'filetype', 'filename', 'updatedate', 'locked', 'locked_by');
 		$valArr = array(htmlspecialchars($title), htmlspecialchars($description), $stateid, $doc_group, $filetype, $filename, time(), 0, NULL);
