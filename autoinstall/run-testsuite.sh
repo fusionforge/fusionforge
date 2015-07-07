@@ -80,6 +80,16 @@ patch -N /usr/share/*/PHPUnit/Extensions/SeleniumTestCase.php <<'EOF' || true
                     $this->testId . ".png\n";
 EOF
 
+# Move database to tmpfs
+pgdir=/var/lib/postgresql
+if [ -e /etc/redhat-release ]; then pgdir=/var/lib/pgsql; fi
+if [ -d $pgdir ] && [ ! -L $pgdir ]; then
+    mv $pgdir /dev/shm/
+    ln -s /dev/shm/$(basename $pgdir) /var/lib/
+fi
+rm -rf $(readlink -f $pgdir.backup) $pgdir.backup
+ln -nfs /dev/shm/$(basename $pgdir).backup /var/lib/
+
 # Reset the database to post-install state
 $(dirname $0)/../tests/func/db_reload.sh --reset
 $(dirname $0)/../tests/func/db_reload.sh --backup
