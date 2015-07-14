@@ -277,9 +277,9 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		$cells[] = array($d->getDescription(), 'style' => 'word-wrap: break-word; max-width: 250px;');
 		$cells[][] =  make_user_link($d->getCreatorUserName(), $d->getCreatorRealName());
 		if ($d->getUpdated()) {
-			$cells[] = array(date(_('Y-m-d H:i'), $d->getUpdated()), 'sorttable_customkey' => $d->getUpdated());
+			$cells[] = array(date(_('Y-m-d H:i'), $d->getUpdated()), 'content' => $d->getUpdated());
 		} else {
-			$cells[] = array(date(_('Y-m-d H:i'), $d->getCreated()), 'sorttable_customkey' => $d->getCreated());
+			$cells[] = array(date(_('Y-m-d H:i'), $d->getCreated()), 'content' => $d->getCreated());
 		}
 		$nextcell = '';
 		if ($d->getReserved()) {
@@ -300,7 +300,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 				break;
 			}
 			default: {
-				$cells[][] = human_readable_bytes($d->getFileSize());
+				$cells[] = array(human_readable_bytes($d->getFileSize()), 'content' => $d->getFileSize());
 				break;
 			}
 		}
