@@ -296,7 +296,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		}
 		switch ($d->getFileType()) {
 			case 'URL': {
-				$cells[][] = '--';
+				$cells[] = array('--', 'content' => 0);
 				break;
 			}
 			default: {
