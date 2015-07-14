@@ -3,6 +3,7 @@
  * FusionForge reporting system
  *
  * Copyright 2003-2004, Tim Perdue/GForge, LLC
+ * Copyright 2015, nitendra tripathi
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -1368,6 +1369,32 @@ class ReportSetup extends Report {
 		return db_query_params ('UPDATE rep_time_category SET category_name=$1 WHERE time_code=$2',
 				array($category_name,
 				$time_code));
+	}
+
+
+
+	/**
+	 * Add a row to the project_status table.
+	 *
+	 *	@param	string	$status_name The Status name.
+	 *	@return	boolean	Success.
+	 */
+	function addStatusId($status_name) {
+		return db_query_params ('INSERT INTO project_status (status_name) VALUES ($1)',
+			array($status_name));
+	}
+
+	/**
+	 * Update the project_status table.
+	 *
+	 *	@param	integer	$status_id
+	 *	@param	string	$status_name The category name.
+	 *	@return	boolean	Success.
+	 */
+	function updateStatusId($status_id, $status_name) {
+		return db_query_params ('UPDATE project_status SET status_name=$1 WHERE status_id=$2',
+				array($status_name,
+				$status_id));
 	}
 }
 

@@ -8,6 +8,7 @@
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * Copyright 2014, Franck Villaume - TrivialDev
  * Copyright 2014, Stéphane-Eymeric Bredthauer
+ * Copyright 2015, nitendra tripathi
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -240,13 +241,17 @@ if ($rows < 1) {
 		'percent_complete'=>1,
 		'category'=>0,
 		'assigned_to'=>0,
-		'priority'=>0);
+		'priority'=>0,
+		'status' => 1
+		);
 
 	$title_arr=array();
 	$title_arr[] = "";
 	$title_arr[]=_('Task Id');
 	if ($display_col['summary'])
 		$title_arr[]=_('Task Summary');
+	if ($display_col['status'])
+		$title_arr[]=_('Status');
 	if ($display_col['start_date'])
 		$title_arr[]=_('Start Date');
 	if ($display_col['end_date'])
@@ -259,6 +264,7 @@ if ($rows < 1) {
 		$title_arr[]=_('Assigned to');
 	if ($display_col['priority'])
 		$title_arr[]=_('Priority');
+
 
 	echo $HTML->listTableTop($title_arr);
 
@@ -279,6 +285,8 @@ if ($rows < 1) {
 			$pt_arr[$i]->getID() ."</td>\n";
 		if ($display_col['summary'])
 			echo '<td>'.util_make_link($url,$pt_arr[$i]->getSummary())."</td>\n";
+		if ($display_col['status'])
+			echo '<td>'. $pt_arr[$i]->getStatusName() ."</td>\n";
 		if ($display_col['start_date'])
 			echo '<td>'.date(_('Y-m-d H:i'), $pt_arr[$i]->getStartDate() )."</td>\n";
 		if ($display_col['end_date'])
@@ -309,7 +317,6 @@ if ($rows < 1) {
 			<tr class="priority'.$pt_arr[$i]->getPriority() .'">
 				<td>&nbsp;</td><td colspan="'.(count($title_arr)-1).'">'. nl2br( $pt_arr[$i]->getDetails() ) .'</td>
 			</tr>';
-
 		}
 	}
 

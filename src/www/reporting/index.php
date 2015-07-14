@@ -83,6 +83,7 @@ report_header(_('Main Page'));
 <ul>
 <li><a href="rebuild.php"><?php echo _('Initialize / Rebuild Reporting Tables'); ?></a></li>
 <li><a href="timecategory.php"><?php echo _('Manage Time Tracker Categories'); ?></a></li>
+<li><a href="customstatus.php"><?php echo _('Manage Project Task&apos;s Statuses'); ?></a></li>
 </ul>
 </div>
 <?php
