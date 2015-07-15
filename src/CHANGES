@@ -2,6 +2,7 @@ Fusionforge 6.0.3:
 * Layout: fix rss url when url is absolute (TrivialDev)
 * Accounts: accept more elliptic curve ssh keys types (Unit 193 & Inria)
 * Docman: fix filesize sort [#784] (TrivialDev)
+* News: allow moderating news comments even if the Forum tool is disabled (Inria)
 
 FusionForge 6.0.2:
 * Accounts: fix elliptic curve ssh keys support (Inria)

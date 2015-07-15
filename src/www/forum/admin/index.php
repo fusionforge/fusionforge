@@ -54,7 +54,7 @@ $g = group_get_object($group_id);
 if (!$g || !is_object($g) || $g->isError()) {
 	exit_no_group();
 }
-if (!$g->usesForum()) {
+if (!$g->usesForum() and !$g->usesNews()) {
 	exit_error(sprintf(_('%s does not use the Forum tool.'), $g->getPublicName()), 'forums');
 }
 
