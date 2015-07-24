@@ -70,7 +70,7 @@ if (count($taskboard->getUsedTrackersIds()) == 0) {
 	$cells[][] = html_e('input', array('type' => 'text', 'name' => 'column_title', 'required' => 'required'));
 	echo $HTML->multiTableRow(array(), $cells);
 	$cells = array();
-	$cells[][] = html_e('strong', array(), _('Title backgound color')._(':'));
+	$cells[][] = html_e('strong', array(), _('Title background color')._(':'));
 	$cells[][] = $taskboard->colorBgChooser('title_bg_color');
 	echo $HTML->multiTableRow(array(), $cells);
 	$cells = array();

@@ -56,7 +56,7 @@ _('Agile TaskBoard: Supports Scrum and Kanban methodologies.');
 			if($group->usesPlugin($this->name)) {
 				$params['TITLES'][] = $this->text;
 				$params['DIRS'][] = '/plugins/'.$this->name.'/index.php?group_id='.$group_id;
-				$params['TOOLTIPS'][] = _('Agile Scrum and Kanban display of existing artefacts.');
+				$params['TOOLTIPS'][] = _('Agile Scrum and Kanban display of existing artifacts.');
 				if (session_loggedin()) {
 					$user = session_get_user();
 					$userperm = $group->getPermission();

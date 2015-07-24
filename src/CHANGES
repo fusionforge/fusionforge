@@ -1,3 +1,6 @@
+FusionForge 6.X:
+* Spellcheck (Anders Jonsson)
+
 FusionForge 6.0.2:
 * Accounts: fix elliptic curve ssh keys support (Inria)
 * Mailing lists: fix description encoding depending on Mailman version (Inria & Thorsten Glaser)

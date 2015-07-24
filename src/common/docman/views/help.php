@@ -35,7 +35,7 @@ if (!forge_check_perm('docman', $group_id, 'read')) {
 echo html_ao('div', array('class' => 'docmanDivIncluded'));
 plugin_hook('blocks', 'doc help');
 if (forge_get_config('use_webdav') && $g->useWebdav()) {
-	echo html_e('p', array(), _('Documents parsing is also available thru webdav. Only for registred users.'), false);
+	echo html_e('p', array(), _('Documents parsing is also available through webdav. Only for registered users.'), false);
 	echo html_e('p', array(), util_make_link('/docman/view.php/'.$group_id.'/webdav',_('Direct Webdav URL')), false);
 }
 echo html_ac(html_ap() - 1);

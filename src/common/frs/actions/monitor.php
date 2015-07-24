@@ -73,7 +73,7 @@ if ($package_id) {
 		if ($frsp->setMonitor()) {
 			if ($ajax) {
 				$url .= '&status=0';
-				$result['html'] = $HTML->feedback(_('Monitoring started successfuly'));
+				$result['html'] = $HTML->feedback(_('Monitoring started successfully'));
 				$result['action'] = 'javascript:controllerFRS.doAction({action:\''.$url.'\', id:\'pkgid'.$package_id.'\'})';
 				$result['property'] = 'onclick';
 				$result['img'] = $HTML->getStopMonitoringPic($frsp->getName().' - '._('Stop monitoring this package'));
@@ -96,7 +96,7 @@ if ($package_id) {
 		if ($frsp->stopMonitor()) {
 			if ($ajax) {
 				$url .= '&status=1';
-				$result['html'] = $HTML->feedback(_('Monitoring stopped successfuly'));
+				$result['html'] = $HTML->feedback(_('Monitoring stopped successfully'));
 				$result['action'] = 'javascript:controllerFRS.doAction({action:\''.$url.'\', id:\'pkgid'.$package_id.'\'})';
 				$result['property'] = 'onclick';
 				$result['img'] = $HTML->getStartMonitoringPic($frsp->getName().' - '._('Start monitoring this package'));

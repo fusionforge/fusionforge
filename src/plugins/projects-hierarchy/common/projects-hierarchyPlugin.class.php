@@ -30,7 +30,7 @@ class projects_hierarchyPlugin extends Plugin {
 		$this->name = 'projects-hierarchy';
 		$this->text = _('Project Hierarchy'); // To show in the tabs, use...
 		$this->pkg_desc =
-_('Organise projects hierarchicaly, relation type 1-n');
+_('Organise projects hierarchically, relation type 1-n');
 		$this->_addHook('groupisactivecheckbox'); // The "use ..." checkbox in editgroupinfo
 		$this->_addHook('groupisactivecheckboxpost');
 		$this->_addHook('hierarchy_views'); // include specific views
@@ -593,7 +593,7 @@ _('Organise projects hierarchicaly, relation type 1-n');
 	 * @access	public
 	 */
 	function getAdminOptionLink() {
-		return util_make_link('/plugins/'.$this->name.'/?type=globaladmin',_('Global Hierarchy admin'), array('title'=>_('Configure the projets-hierarchy plugin (docman, tree, delegate, globalconf features)')));
+		return util_make_link('/plugins/'.$this->name.'/?type=globaladmin',_('Global Hierarchy admin'), array('title'=>_('Configure the projects-hierarchy plugin (docman, tree, delegate, globalconf features)')));
 	}
 
 	/**

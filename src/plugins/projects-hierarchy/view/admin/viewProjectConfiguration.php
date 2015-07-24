@@ -35,7 +35,7 @@ if (!$projectsHierarchyProjectConf) {
 	echo $HTML->openForm(array('method' => 'post', 'action' => '/plugins/'.$projectsHierarchy->name.'/?type=admin&group_id='.$group_id.'&pluginname='.$projectsHierarchy->name.'&action=updateProjectConf'));
 	echo $HTML->listTableTop();
 	$cells = array();
-	$cells[][] = html_e('label', array('id' => 'projectsHierarchy-tree', 'title' => _('Enable visibily in hierarchy tree.')), _('Enable Tree'));
+	$cells[][] = html_e('label', array('id' => 'projectsHierarchy-tree', 'title' => _('Enable visibility in hierarchy tree.')), _('Enable Tree'));
 	$inputAttrs = array('type' => 'checkbox', 'name' => 'tree', 'value' => 1);
 	if ($projectsHierarchyProjectConf['tree'])
 		$inputAttrs['checked'] = 'checked';

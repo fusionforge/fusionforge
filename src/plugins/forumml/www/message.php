@@ -114,7 +114,7 @@ if ($p && $plugin_manager->isPluginAvailable($p) && $p->isAllowed()) {
 		// process the mail
 		$ret = plugin_forumml_process_mail($p,true);
 		if ($ret) {
-			$feedback .=_('Email succefully sent. It can take some time before being displayed');
+			$feedback .=_('Email successfully sent. It can take some time before being displayed');
 			//session_redirect('/plugins/forumml/message.php?'. http_build_query(array(
 			//    'group_id' => $group_id,
 			//    'list'     => $list_id,
