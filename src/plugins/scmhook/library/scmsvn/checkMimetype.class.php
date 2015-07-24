@@ -27,7 +27,7 @@ require_once $gfplugins.'scmhook/common/scmhook.class.php';
 class SvnCheckMimetype extends scmhook {
 	function __construct() {
 		$this->name = "Check Mimetype";
-		$this->description = _('Verify if commited files have svn:mimetype set up correctly.');
+		$this->description = _('Verify if committed files have svn:mimetype set up correctly.');
 		$this->classname = "checkMimetype";
 		$this->command = 'perl '.dirname(__FILE__).'/hooks/checkmimetype/check-mime-type.pl "$1" "$2"';
 		$this->hooktype = "pre-commit";
