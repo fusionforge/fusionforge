@@ -174,12 +174,14 @@ class TaskBoardBasicAdapter {
 
 					$elements = $at->getExtraFieldElements($extra_field_id);
 					foreach($elements as $e) {
+						if ($field_alias == 'resolution' && $e['status_id'] == 2) {
+							continue;
+						}
 						$this->_elements[$tracker_id][$extra_field_id][$e['element_name']] = $e['element_id'];
 					}
 				}
 
 				$ret = $this->_elements[$tracker_id][$extra_field_id];
-
 			}
 		}
 
