@@ -1,3 +1,6 @@
+Fusionforge-5.3.5:
+* Widgets MyTasks, MyMonitoredForums show no entries. Wrong permission check [#790] (TrivialDev)
+
 Fusionforge-5.3.4:
 * CVE-2015-0850: Prevent arbitrary command execution via clone URL
   parameter of the method to create secondary Git repositories. Found
