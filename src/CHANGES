@@ -91,6 +91,9 @@ FusionForge 6.0:
 * Plugin AuthLDAP: Support LPAP_OPT_REFERRALS option, needed by ActiveDirectory Server [#734] (TrivialDev)
 * Plugin Task Board: New Agile TaskBoard supporting Scrum and Kanban methodologies (Vitaliy Pylypiv and TrivialDev)
 
+Fusionforge-5.3.5:
+* Widgets MyTasks, MyMonitoredForums show no entries. Wrong permission check [#790] (TrivialDev)
+
 Fusionforge-5.3.4:
 * CVE-2015-0850: Prevent arbitrary command execution via clone URL
   parameter of the method to create secondary Git repositories. Found
