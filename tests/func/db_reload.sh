@@ -91,17 +91,9 @@ if [ $# -eq 1 ]
 then
 	database=$1
 else
-	scriptdir=$(dirname $0)
-	if [ -d "$scriptdir/../../src" ]
-	then
-		UTILS_PATH=$(cd $scriptdir/../../src ; pwd)
-	else
-		UTILS_PATH=$(cd $scriptdir/../.. ; pwd)
-	fi
-	export PATH=$PATH:$UTILS_PATH/utils:$UTILS_PATH/bin
 	if type forge_get_config
 	then
-		database=`FUSIONFORGE_NO_PLUGINS=true forge_get_config database_name`
+		database=$(forge_get_config database_name)
 	else
 		echo "$0: FATAL ERROR : COULD NOT FIND forge_get_config"
 		exit 1 
@@ -137,10 +129,10 @@ if [ "$backup" = 1 ]; then
     stop_database
     pgdir=/var/lib/postgresql
     if [ -e /etc/redhat-release ]; then pgdir=/var/lib/pgsql; fi
-    if [ -d $pgdir.backup ]; then
-        rm -fr $pgdir.backup
-    fi
-    cp -a --reflink=auto $pgdir $pgdir.backup
+    rm -fr $pgdir.backup/*
+    # support /var/lib/pgsql as a symlink to tmpfs
+    mkdir -p $(readlink -f $pgdir.backup)
+    cp -a --reflink=auto $pgdir/* $pgdir.backup/
     start_database
     exit 0
 fi
@@ -178,12 +170,12 @@ rm -rf $(forge_get_config groupdir_prefix) #no trailing slash
 # Too risky
 #rm -f ~/.ssh/id_rsa ~/.ssh/id_rsa.pub ~/.ssh/known_hosts
 
-# If the backup is there, restore it (it should now have been created by install.sh)
-if [ -d $dbdir.backup ]; then
+# If the backup is there, restore it (it should now have been created by run-testsuite.sh)
+if [ -d $dbdir.backup/ ]; then
 
     echo "Restore database from files backup ($dbdir.backup/)"
-    rm -rf $dbdir
-    cp -a --reflink=auto $dbdir.backup $dbdir
+    rm -rf $dbdir/*
+    cp -a --reflink=auto $dbdir.backup/* $dbdir/
 
     pg_conf=$(ls /etc/postgresql/*/*/postgresql.conf /var/lib/pgsql/data/postgresql.conf 2>/dev/null | tail -1)
 
@@ -207,10 +199,7 @@ else
  	su - postgres -c "psql -f-" < /root/dump > /var/log/pg_restore.log 2>/var/log/pg_restore.err
 
         # Perform a file backup which will now be faster to restore, next time (align with new install.sh behaviour)
-        stop_database
-        echo "Perform files backup to $dbdir.backup/"
-        cp -a --reflink=auto $dbdir $dbdir.backup
-
+        $0 --backup
     else
  	# TODO: reinit the db from scratch and create the dump
  	echo "Couldn't restore the database: No /root/dump found"

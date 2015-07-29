@@ -1,14 +1,25 @@
 FusionForge 6.X:
 * Spellcheck (Anders Jonsson)
 
+Fusionforge 6.0.3:
+* Layout: fix rss url when url is absolute (TrivialDev)
+* Accounts: accept more elliptic curve ssh keys types (Unit 193 & Inria)
+* Docman: fix filesize sort [#784] (TrivialDev)
+* News: allow moderating news comments even if the Forum tool is disabled (Inria)
+
 FusionForge 6.0.2:
 * Accounts: fix elliptic curve ssh keys support (Inria)
+* Project stats: fix misleading label on statistics default empty graph (Inria)
+* Project stats: fix weekly aggregation and display (Inria)
 * Mailing lists: fix description encoding depending on Mailman version (Inria & Thorsten Glaser)
 * Mailing lists: fix default list URL path (Inria)
 * Mailing lists: fix installation on CentOS (Inria)
 * FRS: don't reset permissions when derefencing roles in other projects [#782] (Inria)
-* FRS: do not display hidden releases publicly (TrivialDev)
+* FRS: do not display hidden releases publicly (TrivialDev & Inria)
+* FRS: revert Notes and ChangeLog as optional fields - also when editing releases (Inria)
 * Tracker: fix column title in add/update custom field elements (TrivialDev)
+* Software Map: use "GNU/Linux" instead of "Linux" when refering to the OS (Inria)
+* Snippets: allow forge administrator to delete snippets (Inria)
 * Plugin Taskboard: fix logic on initialize error (TrivialDev)
 * Plugin Taskboard: fix background column color setting (TrivialDev)
 

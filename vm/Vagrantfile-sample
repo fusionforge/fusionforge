@@ -18,6 +18,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #config.vm.synced_folder "..", "/usr/src/fusionforge"
   #config.vm.synced_folder "../src", "/usr/share/gforge"
 
+  # Key already copied; also vagrant 1.7.2 tries to regen it but is
+  # buggy (forgets to write the public key -> password auth)
+  config.ssh.insert_key = false
+
   # Display graphics window, useful for running the Selenium testsuite
   config.vm.provider :virtualbox do |vb|
     vb.gui = true

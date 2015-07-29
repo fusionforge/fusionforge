@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2015, Franck Villaume - TrivialDev
  * Copyright (C) 2014 Alain Peyrat - Alcatel-Lucent
  *
  * This file is a part of FusionForge.
@@ -49,7 +49,7 @@ class Widget_MyMonitoredForums extends Widget {
 		} else {
 			$validDistinctMonitorGroupIdsArray = array();
 			foreach ($distinctMonitorGroupIdsArray as $distinctMonitorGroupId) {
-				if (forge_check_perm('forum_admin', $distinctMonitorGroupId, 'read')) {
+				if (forge_check_perm('project_read', $distinctMonitorGroupId)) {
 					$validDistinctMonitorGroupIdsArray[] = $distinctMonitorGroupId;
 				} else {
 					// Oh ho! we found some monitored elements where user has no read access. Let's clean the situation

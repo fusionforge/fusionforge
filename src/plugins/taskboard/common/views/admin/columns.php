@@ -61,33 +61,38 @@ if (count($taskboard->getUsedTrackersIds()) == 0) {
 	}
 	echo $HTML->listTableBottom();
 
-	echo $HTML->openForm(array('action' => '/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&action=columns', 'method' => 'post'));
-	echo html_e('input', array('type' => 'hidden', 'name' => 'post_changes', 'value' => 'y'));
+	$unused_resolutions = array_values($taskboard->getUnusedResolutions());
 	echo html_e('h2', array(), _('Add new column').(':'));
-	echo $HTML->listTableTop();
-	$cells = array();
-	$cells[][] = html_e('strong', array(), _('Title').utils_requiredField()._(':'));
-	$cells[][] = html_e('input', array('type' => 'text', 'name' => 'column_title', 'required' => 'required'));
-	echo $HTML->multiTableRow(array(), $cells);
-	$cells = array();
-	$cells[][] = html_e('strong', array(), _('Title background color')._(':'));
-	$cells[][] = $taskboard->colorBgChooser('title_bg_color');
-	echo $HTML->multiTableRow(array(), $cells);
-	$cells = array();
-	$cells[][] = html_e('strong', array(), _('Column Background color')._(':'));
-	$cells[][] = $taskboard->colorBgChooser('column_bg_color', 'white');
-	echo $HTML->multiTableRow(array(), $cells);
-	$cells = array();
-	$cells[][] = html_e('strong', array(), _('Maximum tasks number')._(':'));
-	$cells[][] = html_e('input', array('type' => 'text', 'name' => 'column_max_tasks'));
-	echo $HTML->multiTableRow(array(), $cells);
-	$cells = array();
-	$cells[][] = html_e('strong', array(), _('Drop resolution by default').utils_requiredField()._(':'));
-	$unused_resolutions = array_values( $taskboard->getUnusedResolutions() );
-	$cells[][] = html_build_select_box_from_arrays( $unused_resolutions, $unused_resolutions, 'resolution_by_default', NULL, false);
-	echo $HTML->multiTableRow(array(), $cells);
-	echo $HTML->listTableBottom();
-	echo html_e('p', array(), html_e('input', array('type' => 'submit', 'name' => 'post_changes', 'value' => _('Submit'))));
-	echo $HTML->closeForm();
-	echo $HTML->addRequiredFieldsInfoBox();
+	if (count($unused_resolutions)) {
+		echo $HTML->openForm(array('action' => '/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&action=columns', 'method' => 'post'));
+		echo html_e('input', array('type' => 'hidden', 'name' => 'post_changes', 'value' => 'y'));
+		echo $HTML->listTableTop();
+		$cells = array();
+		$cells[][] = html_e('strong', array(), _('Title').utils_requiredField()._(':'));
+		$cells[][] = html_e('input', array('type' => 'text', 'name' => 'column_title', 'required' => 'required'));
+		echo $HTML->multiTableRow(array(), $cells);
+		$cells = array();
+		$cells[][] = html_e('strong', array(), _('Title backgound color')._(':'));
+		$cells[][] = $taskboard->colorBgChooser('title_bg_color');
+		echo $HTML->multiTableRow(array(), $cells);
+		$cells = array();
+		$cells[][] = html_e('strong', array(), _('Column Background color')._(':'));
+		$cells[][] = $taskboard->colorBgChooser('column_bg_color', 'white');
+		echo $HTML->multiTableRow(array(), $cells);
+		$cells = array();
+		$cells[][] = html_e('strong', array(), _('Maximum tasks number')._(':'));
+		$cells[][] = html_e('input', array('type' => 'text', 'name' => 'column_max_tasks'));
+		echo $HTML->multiTableRow(array(), $cells);
+		$cells = array();
+		$cells[][] = html_e('strong', array(), _('Drop resolution by default').utils_requiredField()._(':'));
+
+		$cells[][] = html_build_select_box_from_arrays( $unused_resolutions, $unused_resolutions, 'resolution_by_default', NULL, false);
+		echo $HTML->multiTableRow(array(), $cells);
+		echo $HTML->listTableBottom();
+		echo html_e('p', array(), html_e('input', array('type' => 'submit', 'name' => 'post_changes', 'value' => _('Submit'))));
+		echo $HTML->closeForm();
+		echo $HTML->addRequiredFieldsInfoBox();
+	} else {
+		echo $HTML->information(_('All resolutions are mapped to columns. To add a new column, you need at least one unmapped resolution.'));
+	}
 }

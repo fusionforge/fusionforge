@@ -731,6 +731,7 @@ function report_actgraph($type, $SPAN, $start, $end, $id, $area) {
 					}
 					case REPORT_TYPE_WEEKLY: {
 						$d = strtotime(substr($dd, 0, 4).'-W'.substr($dd, 5, 2));
+						$d -= 86400;  # weeks are based on Sunday in getWeekStartArr()
 						break;
 					}
 					case REPORT_TYPE_DAILY: {
