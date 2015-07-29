@@ -59,7 +59,7 @@ class Widget_MyMonitoredForums extends Widget {
 		$result=db_query_params($sql,array(user_getid()));
 		$glist = array();
 		while ($r = db_fetch_array($result)) {
-			if (forge_check_perm('project', $r['group_id'], 'read')
+			if (forge_check_perm('project_read', $r['group_id'])
 					&& forge_check_perm('forum', $r['group_forum_id'], 'read')) {
 				$glist[] = serialize(array($r['group_id'], $r['group_name']));
 			}
