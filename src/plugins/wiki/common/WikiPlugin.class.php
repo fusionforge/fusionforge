@@ -136,7 +136,7 @@ class FusionForgeWikiPlugin extends Plugin {
 				echo '</div>';
 			}
 		} elseif ($hookname == 'activity') {
-			$group = group_get_object($params['group_id']);
+			$group = group_get_object($params['group']);
 			if (!$group || !is_object($group)) {
 				return;
 			}
@@ -202,7 +202,7 @@ class FusionForgeWikiPlugin extends Plugin {
 					}
 				}
 			}
-		}		
+		}
 	}
 
 	function site_admin_option_hook($params) {
