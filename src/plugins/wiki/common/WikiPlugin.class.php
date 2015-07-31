@@ -140,7 +140,7 @@ page edits displayed on activity tab, and multi-project wiki preferences.");
 				echo '</div>';
 			}
 		} elseif ($hookname == 'activity') {
-			$group = group_get_object($params['group_id']);
+			$group = group_get_object($params['group']);
 			if (!$group || !is_object($group)) {
 				return;
 			}
@@ -206,7 +206,7 @@ page edits displayed on activity tab, and multi-project wiki preferences.");
 					}
 				}
 			}
-		}		
+		}
 	}
 
 	function site_admin_option_hook($params) {
