@@ -26,6 +26,8 @@ require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'include/vote_function.php';
 
+global $HTML;
+
 if (!forge_get_config('use_diary')) {
 	exit_disabled('home');
 }
@@ -82,8 +84,7 @@ if ($diary_user) {
 			</tr>';
 		for ($i=0; $i<$rows; $i++) {
 			echo '
-			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><a href="'. getStringFromServer('PHP_SELF') .'?diary_id='.
-				db_result($result,$i,'id').'&amp;diary_user='. $diary_user .'">'.db_result($result,$i,'summary').'</a></td>'.
+			<tr '. $HTML->boxGetAltRowStyle($i) .'><td>'.util_make_link('/developer/diary.php?diary_id='.db_result($result,$i,'id').'&diary_user='. $diary_user, db_result($result,$i,'summary')).'</td>'.
 				'<td>'. date(_('Y-m-d H:i'), db_result($result,$i,'date_posted')).'</td></tr>';
 		}
 		echo '

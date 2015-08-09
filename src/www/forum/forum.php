@@ -36,6 +36,8 @@ require_once $gfcommon.'forum/ForumMessage.class.php';
 require_once $gfcommon.'forum/AttachManager.class.php'; //attachment manager
 require_once $gfcommon.'include/TextSanitizer.class.php'; // to make the HTML input by the user safe to store
 
+global $HTML;
+
 $group_id = getIntFromRequest('group_id');
 $forum_id = getIntFromRequest('forum_id');
 $style = getStringFromRequest('style');
@@ -182,8 +184,9 @@ if ($forum_id) {
 	$max_row_popup=html_build_select_box_from_arrays ($vals,$texts,'max_rows',$max_rows,false);
 
 	//now show the popup boxes in a form
+
+	echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'get'));
 	$ret_val = '
-	<form action="'. getStringFromServer('PHP_SELF') .'" method="get">
 	<table>
 		<tr><td>
 			<input type="hidden" name="set" value="custom" />
@@ -193,8 +196,8 @@ if ($forum_id) {
 			'</td><td><input type="submit" name="submit" value="'.
 			_('Change View').'" />
 		</td></tr>
-	</table>
-	</form>';
+	</table>';
+	echo $HTML->closeForm();
 
 	$am = new AttachManager();
 	$ret_val .= $am->PrintHelperFunctions();
@@ -266,16 +269,14 @@ if ($forum_id) {
 				If so, highlite it in bold
 			*/
 			if ($f->getSavedDate() < $msg->getPostDate()) {
-				$bold_begin='<strong>';
-				$bold_end='</strong>';
+				$msgSubject = html_e('strong', array(), $msg->getSubject());
 			} else {
-				$bold_begin='';
-				$bold_end='';
+				$msgSubject = $msg->getSubject();
 			}
 			/*
 				show the subject and poster
 			*/
-			$cells[][] = util_make_link('/forum/message.php?msg_id='.$msg->getID().'&group_id='.$group_id.'&reply=0', html_image('ic/msg.png').' '.$bold_begin.$msg->getSubject().$bold_end);
+			$cells[][] = util_make_link('/forum/message.php?msg_id='.$msg->getID().'&group_id='.$group_id.'&reply=0', html_image('ic/msg.png').' '.$msgSubject);
 			$cells[][] = util_display_user($msg->getPosterName(), $msg->getPosterID(), $msg->getPosterRealName());
 			$cells[][] = relative_date($msg->getPostDate());
 			$ret_val .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($total_rows, true)), $cells);
@@ -333,26 +334,22 @@ if ($forum_id) {
 			$ret_val .= $HTML->listTableTop ($title_arr);
 			$i=0;
 			while (($row=db_fetch_array($result)) && ($i < $max_rows)) {
-				$ret_val .= '
-					<tr '. $HTML->boxGetAltRowStyle($i) .'><td><a href="'.util_make_uri('/forum/forum.php?thread_id='.
-															$row['thread_id'].'&amp;forum_id='.$forum_id.'&amp;group_id='.$group_id).'">'.
-					html_image('ic/cfolder15.png') . ' ';
 				/*
 						See if this message is new or not
 						If so, highlite it in bold
 				*/
-					if ($f->getSavedDate() < $row['recent']) {
-					$bold_begin='<strong>';
-					$bold_end='</strong>';
+				if ($f->getSavedDate() < $row['recent']) {
+					$subject = html_e('strong', array(), $row['subject']);
 				} else {
-					$bold_begin='';
-					$bold_end='';
+					$subject = $row['subject'];
 				}
 				/*
 						show the subject and poster
 				*/
-				$ret_val .= $bold_begin.$row['subject'] .$bold_end.'</a></td>'.
-				'<td>'.util_display_user($row['user_name'], $row['user_id'], $row['realname']).'</td>'.
+				$ret_val .= '<tr '. $HTML->boxGetAltRowStyle($i) .'><td>'
+					.util_make_link('/forum/forum.php?thread_id='.$row['thread_id'].'&forum_id='.$forum_id.'&group_id='.$group_id,
+							html_image('ic/cfolder15.png').' '. $subject).'</td>'
+					.'<td>'.util_display_user($row['user_name'], $row['user_id'], $row['realname']).'</td>'.
 					'<td>'. $row['followups'] .'</td>'.
 					'<td>'. relative_date($row['recent']).'</td></tr>';
 				$i++;
@@ -372,7 +369,7 @@ if ($forum_id) {
 		if ($offset != 0) {
 			$ret_val .= '<span class="prev">
 			<a href="javascript:history.back()"><strong>' .
-				html_image('t2.png',"15","15") ._('Newer Messages').'</strong></a></span>';
+				html_image('t2.png', 15, 15) ._('Newer Messages').'</strong></a></span>';
 		} else {
 			$ret_val .= ' ';
 		}
@@ -380,11 +377,9 @@ if ($forum_id) {
 		$ret_val .= '</td><td></td><td class="halfwidth align-right">';
 
 		if ($avail_rows > $max_rows) {
-			$ret_val .= '<span class="next">
-			<a href="'.util_make_uri('/forum/forum.php?max_rows='.$max_rows.'&amp;style='.$style.'&amp;offset='.($offset+$i).
-						  '&amp;forum_id='.$forum_id.'&amp;group_id='.$group_id).'">
-			<strong> '._('Older Messages') .
-				html_image('t.png',"15","15") . '</strong></a></span>';
+			$ret_val .= '<span class="next">'.
+				util_make_link('/forum/forum.php?max_rows='.$max_rows.'&style='.$style.'&offset='.($offset+$i).'&forum_id='.$forum_id.'&group_id='.$group_id,
+						html_e('strong', array(), _('Older Messages').html_image('t.png', 15, 15))).'</span>';
 		} else {
 			$ret_val .= ' ';
 		}
