@@ -1,7 +1,7 @@
 #!/bin/bash
 # Configure local PostgreSQL server
 #
-# Copyright (C) 2014  Inria (Sylvain Beucler)
+# Copyright (C) 2014, 2015  Inria (Sylvain Beucler)
 #
 # This file is part of FusionForge. FusionForge is free software;
 # you can redistribute it and/or modify it under the terms of the
@@ -17,6 +17,8 @@
 # You should have received a copy of the GNU General Public License along
 # with FusionForge; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+source $(forge_get_config source_path)/post-install.d/common/service.inc
 
 database_name=$(forge_get_config database_name)
 database_user=$(forge_get_config database_user)
