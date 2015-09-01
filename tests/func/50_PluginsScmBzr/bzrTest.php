@@ -50,6 +50,9 @@ class ScmBzrTest extends FForge_SeleniumTestCase
 
 		// Run the cronjob to create repositories
 		$this->waitSystasks();
+		// Give some time to WSGI/loggerhead to start-up
+		// (avoids "Service Unavailable" error page)
+		sleep(5);
 
 		// Check that the repo is present and Loggerhead shows it (even if empty)
 		$this->open(ROOT);
