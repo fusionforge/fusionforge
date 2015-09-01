@@ -4,6 +4,16 @@ fusionforge (6.0.50-0) UNRELEASED; urgency=medium
 
  -- Roland Mas <lolando@debian.org>  Wed, 24 Jun 2015 11:32:26 +0200
 
+fusionforge (6.0.2+20150901-1) unstable; urgency=medium
+
+  * New upstream snapshot following the 6.0 stable branch
+  * Introduce Debian-specific behavior to stop and start services
+    (closes: #789778)
+  * Disable Mediawiki and Bzr plugins pending reintroduction of
+    'mediawiki' and 'loggerhead' in testing
+
+ -- Sylvain Beucler <beuc@debian.org>  Tue, 01 Sep 2015 14:24:22 +0200
+
 fusionforge (6.0.2+20150708-1) unstable; urgency=medium
 
   * New upstream snapshot following the 6.0 stable branch
