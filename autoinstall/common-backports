@@ -213,6 +213,9 @@ EOF
 		sed -i -e '/Requires: php-pecl-jsonc/d' ~/rpmbuild/SPECS/mediawiki.spec
 		# drop new-style php requires
 		sed -i -e '/Requires: php(/d' ~/rpmbuild/SPECS/mediawiki.spec
+		# drop test-suite
+		sed -i -e '/BuildRequires: /d' ~/rpmbuild/SPECS/mediawiki.spec
+		sed -i -e '/^%check/,/^php phpunit.php/d' ~/rpmbuild/SPECS/mediawiki.spec
 		rpmbuild -bb ~/rpmbuild/SPECS/mediawiki.spec
 		yum install -y ~/rpmbuild/RPMS/noarch/mediawiki-[0-9]*.rpm
 	    fi
