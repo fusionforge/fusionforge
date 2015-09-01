@@ -95,6 +95,7 @@ case "$1" in
 	chown $apache_user: $data_path/docman/
 	chown $apache_user: $data_path/download/
 	chown $apache_user: $data_path/forum/
+	chown $apache_user: $data_path/forum/pending/
 	chown $apache_user: $data_path/tracker/
 	chown $apache_user: $data_path/rss/
 

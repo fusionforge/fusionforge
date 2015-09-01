@@ -100,6 +100,7 @@ install-web: install-base-dirs
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/docman/
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/download/
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/forum/
+	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/forum/pending/
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/tracker/
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/rss/
 	$(CP_R) post-install.d/web $(DESTDIR)$(pkgdatadir)/post-install.d/
