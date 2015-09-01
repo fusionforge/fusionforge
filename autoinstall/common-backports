@@ -223,32 +223,6 @@ EOF
 	    REMOVEDEPS=$DEPS
 	    backport_rpm_from_fedora php-channel-htmlpurifier
 	    ;;
-
-	# Note: FusionForge *6.0* currently doesn't officially support Centos 6
-	6)
-	    yum install mediawiki119
-
-	    # Notes for recompiling httpd modules for 2.4.10
-	    # mod_wsgi:
-	    # DEPS=""
-	    # REMOVEDEPS=$DEPS
-	    # rebuild_rpm_from_centos mod_wsgi
-	    #
-	    # PHP:
-	    # # Skip lengthy testsuite: rpmbuild -D'runselftest 0' --rebuild ...
-	    # if ! rpm -qR php | grep -q 'httpd-mmn = 20120211x8664' ; then
-	    #     if rpm -qi mariadb-libs | grep -q 5\.5\. && ! rpm -qi mariadb-libs | grep -q 5\.5\.37 ; then
-	    #         yum downgrade -y mariadb-libs
-	    #     fi
-	    # 
-	    #     DEPS="bzip2-devel curl-devel pam-devel libstdc++-devel libedit-devel libtool-ltdl-devel libzip-devel systemtap-sdt-devel firebird-devel net-snmp-devel libxslt-devel t1lib-devel libvpx-devel gmp-devel tokyocabinet-devel libmcrypt-devel libtidy-devel freetds-devel aspell-devel recode-devel libicu-devel enchant-devel libc-client-devel openldap-devel unixODBC-devel mariadb-devel-5.5.37 exim"
-	    #     REMOVEDEPS=$DEPS
-	    #     rebuild_rpm_from_centos --source-package php php-common php-cli php php-pdo php-pgsql php-process php-ldap php-gd
-	    # 
-	    #     if rpm -qi mariadb-libs | grep -q 5\.5\.37 ; then
-	    #         yum upgrade -y mariadb-libs
-	    #     fi
-	    # fi
     esac
 
     # libnss-pgsql: no available package for RHEL; though it's available in Fedora
