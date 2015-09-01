@@ -1,4 +1,4 @@
-#!/bin/bash
+# -*- shell-script -*-
 # 
 # Copyright (C) 2015  Inria (Sylvain Beucler)
 #
