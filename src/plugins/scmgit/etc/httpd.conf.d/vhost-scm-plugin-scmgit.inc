@@ -37,7 +37,7 @@ AliasMatch ^/authscm/[^/]+/git/(.*) ${FF__scmgit__repos_path}/$1
   SetEnv GITWEB_CONFIG ${FF__core__config_path}/plugins/scmgit/gitweb.conf
   Require all granted
   # Work-around for FF40 https://bugzilla.mozilla.org/show_bug.cgi?id=647010
-  ErrorDocument 401 "Please <a href='' target='_top'>login to gitweb</a> to browse the source code.
+  ErrorDocument 401 "Please <a href='' target='_top'>login to gitweb</a> to browse private source code.
   # FF40 discards this, hopefully they'll make it work in the near future:
   #Header always set Access-Control-Allow-Origin "${FF__core__web_host}"
   #Header always set Access-Control-Allow-Credentials "true"
