@@ -132,7 +132,7 @@ AND news_bytes.group_id=groups.group_id ", array($id));
 	$group = group_get_object(db_result($result,0,'group_id'));
 	$user = user_get_object(db_result($result,0,'submitted_by'));
 
-	echo $HTML->openForm(array('action' => '/admin/pending-news.php&approve=1&id='.$id, 'method' => 'post'));
+	echo $HTML->openForm(array('action' => '/admin/pending-news.php?approve=1&id='.$id, 'method' => 'post'));
 	echo '
 		<input type="hidden" name="for_group" value="'.db_result($result,0,'group_id').'" />
 		<input type="hidden" name="id" value="'.db_result($result,0,'id').'" />
