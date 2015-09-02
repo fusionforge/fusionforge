@@ -161,7 +161,7 @@ if (forge_get_config('use_ratings')) {
 
 <?php
 		print "<p>";
-		print _('The Peer rating box shows all rating averages (and response levels) for each individual criteria. Due to the math and processing required to do otherwise, these numbers incoporate responses from both “trusted” and “non-trusted” users.');
+		print _('The Peer rating box shows all rating averages (and response levels) for each individual criteria. Due to the math and processing required to do otherwise, these numbers incorporate responses from both “trusted” and “non-trusted” users.');
 		print "</p>";
 
 		print "<ul>";

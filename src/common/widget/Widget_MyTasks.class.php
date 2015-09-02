@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014-2015, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -49,7 +49,7 @@ class Widget_MyTasks extends Widget {
 
 		$plist = array();
 		while ($r = db_fetch_array($result)) {
-			if (forge_check_perm('project', $r['group_id'], 'read')
+			if (forge_check_perm('project_read', $r['group_id'])
 					&& forge_check_perm('pm', $r['group_project_id'], 'read')) {
 				$plist[] = $r;
 			}

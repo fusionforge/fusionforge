@@ -50,7 +50,7 @@ if (!$group_id) {
 			include($gfplugins.$pluginTaskboard->name.'/common/actions/'.$action.'.php');
 		}
 
-		$allowedViews = array('add_release', 'delete_release', 'edit_release');
+		$allowedViews = array('add_release', 'delete_release', 'edit_release', 'burndown');
 		$view = getStringFromRequest('view');
 
 		if( in_array($view, $allowedViews) ) {

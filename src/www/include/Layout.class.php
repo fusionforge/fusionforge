@@ -1365,7 +1365,12 @@ if (isset($params['group']) && $params['group']) {
 		}
 		if ($widget->hasRss()) {
 			echo html_ao('div', array('class' => 'widget_titlebar_rss'));
-			echo util_make_link($widget->getRssUrl($owner_id, $owner_type), 'rss');
+			$url = $widget->getRssUrl($owner_id, $owner_type);
+			if (util_check_url($url)) {
+				echo util_make_link($widget->getRssUrl($owner_id, $owner_type), 'rss', array(), true);
+			} else {
+				echo util_make_link($widget->getRssUrl($owner_id, $owner_type), 'rss');
+			}
 			echo html_ac(html_ap() -1);
 		}
 		echo html_ac(html_ap() -1);

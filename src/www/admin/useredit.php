@@ -123,7 +123,7 @@ site_admin_header(array('title'=>$title));
 <h2><?php echo _('Account Information'); ?></h2>
 
 <?php
-echo $HTML->openForm(array('method' => 'post', 'action' => getStringFromServer('PHP_SELF'))); ?>
+echo $HTML->openForm(array('method' => 'post', 'action' => '/admin/useredit.php')); ?>
 <input type="hidden" name="action" value="update_user" />
 <input type="hidden" name="user_id" value="<?php print $user_id; ?>" />
 

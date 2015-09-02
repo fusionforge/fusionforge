@@ -29,6 +29,8 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'admin/admin_utils.php';
 require_once $gfwww.'project/admin/project_admin_utils.php';
 
+global $HTML;
+
 session_require_global_perm ('forge_admin');
 
 $group_id = getIntFromRequest('group_id');
@@ -92,14 +94,15 @@ if (getStringFromRequest('submit')) {
 
 }
 
-$title = _('Site Admin: Project Info for ') . $group->getPublicName();
+$title = _('Site Admin')._(': ')._('Project Info for ') . $group->getPublicName();
 site_admin_header(array('title'=>$title));
 ?>
 
 <h2><?php echo util_make_link("/project/admin/?group_id=$group_id", _('Project Admin')); ?></h2>
 <h2><?php echo util_make_link("/admin/groupdelete.php?group_id=$group_id", _('Permanently Delete Project')); ?></h2>
-
-<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
+<?php
+echo $HTML->openForm(array('action' => '/admin/groupedit.php?group_id='.$group_id, 'method' => 'post'));
+?>
 
 <table class="infotable">
 <tr>
@@ -222,10 +225,9 @@ if ($group->usesSCM()) {
 
 <br /><input type="submit" name="submit" value="<?php echo _('Update'); ?>" />
 &nbsp;&nbsp;&nbsp; <input type="submit" name="resend" value="<?php echo _('Resend New Project Instruction Email'); ?>" />
-</form>
 
 <?php
-
+echo $HTML->closeForm();
 show_grouphistory($group->getID());
 
 site_admin_footer();

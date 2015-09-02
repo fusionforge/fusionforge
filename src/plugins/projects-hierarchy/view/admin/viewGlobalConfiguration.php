@@ -35,7 +35,7 @@ if (!$projectsHierarchyGlobalConf) {
 	echo $HTML->listTableTop();
 
 	$cells = array();
-	$cells[][] = html_e('label', array('id' => 'projectsHierarchy-tree', 'title' => _('Enable visibily in hierarchy tree.')), _('Enable Tree'));
+	$cells[][] = html_e('label', array('id' => 'projectsHierarchy-tree', 'title' => _('Enable visibility in hierarchy tree.')), _('Enable Tree'));
 	$inputAttrs = array('type' => 'checkbox', 'name' => 'tree', 'value' => 1);
 	if ($projectsHierarchyGlobalConf['tree'])
 		$inputAttrs['checked'] = 'checked';

@@ -474,18 +474,18 @@ class FRSPackage extends Error {
 	 *
 	 * @return	array	Array of FRSRelease Objects.
 	 */
-	function &getReleases($status = false) {
+	function &getReleases($include_hidden = true) {
 		if (!is_array($this->package_releases) || count($this->package_releases) < 1) {
 			$this->package_releases=array();
 			$res = db_query_params('SELECT * FROM frs_release WHERE package_id=$1 ORDER BY release_date DESC',
 						array($this->getID()));
 			while ($arr = db_fetch_array($res)) {
-				if ($status) {
-					if (forge_check_perm('frs', $arr['release_id'], 'read')) {
+				if ($include_hidden) {
+					$this->package_releases[] = $this->newFRSRelease($arr['release_id'], $arr);
+				} else {
+					if ($arr['status_id'] == 1) {
 						$this->package_releases[] = $this->newFRSRelease($arr['release_id'], $arr);
 					}
-				} else {
-					$this->package_releases[] = $this->newFRSRelease($arr['release_id'], $arr);
 				}
 			}
 		}

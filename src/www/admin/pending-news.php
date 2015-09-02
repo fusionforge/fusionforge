@@ -34,6 +34,8 @@ require_once $gfwww.'news/news_utils.php';
 require_once $gfcommon.'forum/Forum.class.php';
 require_once $gfcommon.'include/TextSanitizer.class.php'; // to make the HTML input by the user safe to store
 
+global $HTML;
+
 $post_changes = getStringFromRequest('post_changes');
 $approve = getStringFromRequest('approve');
 $status = getIntFromRequest('status');
@@ -130,8 +132,8 @@ AND news_bytes.group_id=groups.group_id ", array($id));
 	$group = group_get_object(db_result($result,0,'group_id'));
 	$user = user_get_object(db_result($result,0,'submitted_by'));
 
+	echo $HTML->openForm(array('action' => '/admin/pending-news.php?approve=1&id='.$id, 'method' => 'post'));
 	echo '
-		<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 		<input type="hidden" name="for_group" value="'.db_result($result,0,'group_id').'" />
 		<input type="hidden" name="id" value="'.db_result($result,0,'id').'" />
 		<strong>'._('Submitted for project')._(':').'</strong> '.
@@ -157,8 +159,8 @@ AND news_bytes.group_id=groups.group_id ", array($id));
 
 	echo $params['content'].'<br/>';
 	echo '<br />
-		<input type="submit" name="submit" value="'._('Submit').'" />
-		</form>';
+		<input type="submit" name="submit" value="'._('Submit').'" />';
+	echo $HTML->closeForm();
 
 } else {
 

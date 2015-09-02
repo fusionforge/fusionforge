@@ -5,7 +5,7 @@
  * Copyright 1999 dtype
  * Copyright 2006 (c) GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2015, Franck Villaume - TrivialDev
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2014, Benoit Debaenst - TrivialDev
  * http://fusionforge.org/
@@ -190,8 +190,10 @@ if (count($ids) < 1) {
 <div id="activity">
 <div id="activity_left">
 
-<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-<input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
+<?php
+echo $HTML->openForm(array('action' => '/activity/?group_id='.$group_id, 'method' => 'post'));
+echo html_e('input', array('type' => 'hidden', 'name' => 'group_id', 'value' => $group_id));
+?>
 
 <div id="activity_select" >
 <div id="activity_label"><?php echo _('Activity')._(':'); ?></div>
@@ -212,7 +214,9 @@ if (count($ids) < 1) {
 <input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" />
 </div>
 
-</form>
+<?php
+echo $HTML->closeForm();
+?>
 </div>
 
 <div id="activity_right">

@@ -29,17 +29,18 @@ require_once $gfwww.'include/canned_responses.php';
 require_once $gfwww.'admin/admin_utils.php';
 require_once $gfwww.'project/admin/project_admin_utils.php';
 
-site_admin_header(array('title'=>_('Site Admin: Edit Rejection Responses')));
+global $HTML;
+
+site_admin_header(array('title'=>_('Site Admin').(': ')._('Edit Rejection Responses')));
 
 function check_select_value($value) {
 	if( $value == "100" ) {
-		print('<span class="important">'.sprintf(_('You cannot %s “None”!'), $GLOBALS['type'])."</span><br />\n");
+		print('<span class="important">'.sprintf(_('You cannot %s “None”!'), $GLOBALS['action'])."</span><br />\n");
 	}
 }
-?>
 
-<form method="post" action="<?php echo getStringFromServer('PHP_SELF'); ?>">
-<?php echo _('Existing Responses')._(': '); ?><?php echo get_canned_responses(); ?>
+echo $HTML->openForm(array('method' => 'post', 'action' => '/admin/responses_admin.php'));
+echo _('Existing Responses')._(': '); ?><?php echo get_canned_responses(); ?>
 <!-- Reinhard Spisser: commenting localization, since otherwise it will not work -->
 <!--
 <input name="action" type="submit" value="<?php echo _('Edit'); ?>" />
@@ -48,12 +49,10 @@ function check_select_value($value) {
 <input name="action" type="submit" value="Edit" />
 <input name="action" type="submit" value="Delete" />
 <input type="checkbox" name="sure" value="<?php echo _('Yes'); ?>" />
-<?php  echo _('I am Sure'); ?>
-</form>
+<?php echo _('I am Sure');
+echo $HTML->closeForm();
 
-<br />
-
-<?php
+echo html_e('br');
 
 $action = getStringFromRequest('action');
 
@@ -79,20 +78,17 @@ if( $action == "Edit" ) {
 		$row = db_fetch_array($res);
 		$response_title=$row[1];
 		$response_text=$row[2];
-?>
-
-<?php echo _('Edit Response:'); ?><br />
-<form method="post" action="<?php echo getStringFromServer('PHP_SELF'); ?>">
-<?php echo _('Response Title:'); ?><input type="text" name="response_title" size="30" maxlength="25" value="<?php echo $response_title; ?>" /><br />
-<?php echo _('Response Text:'); ?><br />
+	echo _('Edit Response')._(':').html_e('br');
+	echo $HTML->openForm(array('method' => 'post', 'action' => '/admin/responses_admin.php'));
+	echo _('Response Title').(':'); ?><input type="text" name="response_title" size="30" maxlength="25" value="<?php echo $response_title; ?>" /><br />
+<?php echo _('Response Text')._(':'); ?><br />
 <textarea name="response_text" cols="50" rows="10"><?php echo $response_text; ?></textarea>
 <input type="hidden" name="response_id" value="<?php echo $response_id; ?>" />
 <input type="hidden" name="action2" value="<?php echo _('Go'); ?>" />
 <input type="hidden" name="action" value="Edit">
 <input type="submit" name="actionsubmit" value="<?php echo _('Edit'); ?>" />
-</form>
-
 <?php
+	echo $HTML->closeForm();
 	}
 
 } elseif ( $action == "Delete" ) {
@@ -120,19 +116,18 @@ if( $action == "Edit" ) {
 	print(" <strong>" ._('Added Response')."</strong> ");
 
 } else {
-?>
 
-<?php echo _('Create New Response:'); ?><br />
-<form method="post" action="<?php echo getStringFromServer('PHP_SELF'); ?>">
-<?php echo _('Response Title:'); ?><input type="text" name="response_title" size="30" maxlength="25" /><br />
-<?php echo _('Response Text:'); ?><br />
+	echo _('Create New Response')._(':').html_e('br');
+	echo $HTML->openForm(array('method' => 'post', 'action' => '/admin/responses_admin.php'));
+	echo _('Response Title')._(':'); ?><input type="text" name="response_title" size="30" maxlength="25" /><br />
+<?php echo _('Response Text')._(':'); ?><br />
 <textarea name="response_text" cols="50" rows="10"></textarea>
 <br />
 <input type="hidden" name="action" value="Create" />
 <input type="submit" name="actions" value="<?php echo _('Create'); ?>" />
-</form>
 
 <?php
+echo $HTML->closeForm();
 }
 
 site_admin_footer();

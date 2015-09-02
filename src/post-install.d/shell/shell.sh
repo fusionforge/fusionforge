@@ -1,7 +1,7 @@
 #! /bin/bash
 # Configure NSS+PostgreSQL shell access
 #
-# Copyright (C) 2014  Inria (Sylvain Beucler)
+# Copyright (C) 2014, 2015  Inria (Sylvain Beucler)
 #
 # This file is part of FusionForge. FusionForge is free software;
 # you can redistribute it and/or modify it under the terms of the
@@ -19,6 +19,8 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 set -e
+
+source $(forge_get_config source_path)/post-install.d/common/service.inc
 
 db_name=$(forge_get_config database_name)
 db_user=$(forge_get_config database_user)

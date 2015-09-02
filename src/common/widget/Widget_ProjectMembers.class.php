@@ -35,7 +35,7 @@ class Widget_ProjectMembers extends Widget {
 
 	public function getContent() {
 		$result = '';
-		
+
 		$request =& HTTPRequest::instance();
 		$group_id = $request->get('group_id');
 		$pm = ProjectManager::instance();
@@ -69,16 +69,14 @@ class Widget_ProjectMembers extends Widget {
 				$seen[] = $u->getID() ;
 			}
 		}
-		$seen_member = false ;
+
 		if (count($members) > 0) {
+			$result .= '<span class="develtitle">'. _('Members')._(':').'</span><br />';
 			foreach ($members as $u) {
 				if (in_array ($u->getID(), $seen)) {
 					continue ;
 				}
-				if (!$seen_member) {
-					$result .= '<span class="develtitle">'. _('Members')._(':').'</span><br />';
-					$seen_member = true ;
-				}
+
 				$result .= '<div rel="doap:developer">'."\n";
 				// A foaf:Person that holds an account on the forge
 				$developer_url = util_make_url_u ($u->getUnixName(),$u->getID());

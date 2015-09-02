@@ -30,6 +30,7 @@
  * @param	string	$primary_key	the primary key of the table
  */
 function admin_table_add($table, $unit, $primary_key) {
+	global $HTML;
 	// This query may return no rows, but the field names are needed.
 	$result = db_query_params("SELECT * FROM $table WHERE $primary_key=0", array());
 	$fields = array();
@@ -39,8 +40,8 @@ function admin_table_add($table, $unit, $primary_key) {
 
 		printf(_('Create a new %s below:'), getUnitLabel($unit));
 
+		echo $HTML->openForm(array('name' => 'add', 'action' => getStringFromServer('PHP_SELF').'?function=postad', 'method' => 'post'));
 		echo '
-			<form name="add" action="'.getStringFromServer('PHP_SELF').'?function=postadd" method="post">
 			<input type="hidden" name="form_key" value="'.form_generate_key().'" />
 			<table>';
 
@@ -53,11 +54,9 @@ function admin_table_add($table, $unit, $primary_key) {
 			}
 		}
 		echo '</table><input type="submit" value="'._('Add').'" />
-			<input type="hidden" name="__fields__" value="'.implode(',',$fields).'" />
-			</form>
-			<form name="cancel" action="'.getStringFromServer('PHP_SELF').'" method="post">
-			<input type="submit" value="'._('Cancel').'" />
-			</form>';
+			<input type="hidden" name="__fields__" value="'.implode(',',$fields).'" />';
+		echo html_e('input', array('type' => 'button', 'name' => _('Cancel'), 'value' => _('Cancel'), 'onclick' => 'window.location=\''.util_make_uri(getStringFromServer('PHP_SELF')).'\''));
+		echo $HTML->closeForm();
 	} else {
 		echo db_error();
 	}
@@ -154,13 +153,11 @@ function admin_table_confirmdelete($table, $unit, $primary_key, $id) {
 		for ($i = 0; $i < $cols; $i++) {
 			echo '<li><strong>'.db_fieldname($result,$i).'</strong> '.db_result($result,0,$i).'</li>';
 		}
-		echo '</ul>
-			<form name="delete" action="'.getStringFromServer('PHP_SELF').'?function=delete&amp;id='.$id.'" method="post">
-			<input type="submit" value="'._('Delete').'" />
-			</form>
-			<form name="cancel" action="'.getStringFromServer('PHP_SELF').'" method="post">
-			<input type="submit" value="'._('Cancel').'" />
-			</form>';
+		echo '</ul>';
+		echo $HTML->openForm(array('name' => 'delete', 'action' => getStringFromServer('PHP_SELF').'?function=delete&id='.$id, 'method' => 'post'));
+		echo '<input type="submit" value="'._('Delete').'" />';
+		echo html_e('input', array('type' => 'button', 'name' => _('Cancel'), 'value' => _('Cancel'), 'onclick' => 'window.location=\''.util_make_uri(getStringFromServer('PHP_SELF')).'\''));
+		echo $HTML->closeForm();
 	} else {
 		echo $HTML->error_msg(db_error());
 	}
@@ -200,9 +197,8 @@ function admin_table_edit($table, $unit, $primary_key, $id) {
 
 		printf(_('Modify the %s below:'), getUnitLabel($unit));
 
-		echo '
-			<form name="edit" action="'.getStringFromServer('PHP_SELF').'?function=postedit&amp;id='.$id.'" method="post">
-			<table>';
+		echo $HTML->openForm(array('name' => 'edit' ,'action' => getStringFromServer('PHP_SELF').'?function=postedit&id='.$id, 'method' => 'post'));
+		echo '<table>';
 
 		for ($i = 0; $i < $cols; $i++) {
 			$fieldname = db_fieldname($result, $i);
@@ -216,10 +212,9 @@ function admin_table_edit($table, $unit, $primary_key, $id) {
 				echo '<td><input type="text" name="'.$fieldname.'" value="'.$value.'" /></td></tr>';
 			}
 		}
-		echo '</table><input type="submit" value="'._('Submit').'" /></form>
-			<form name="cancel" action="'.getStringFromServer('PHP_SELF').'" method="post">
-			<input type="submit" value="'._('Cancel').'" />
-			</form>';
+		echo '</table><input type="submit" value="'._('Submit').'" />';
+		echo html_e('input', array('type' => 'button', 'name' => _('Cancel'), 'value' => _('Cancel'), 'onclick' => 'window.location=\''.util_make_uri(getStringFromServer('PHP_SELF')).'\''));
+		echo $HTML->closeForm();
 	} else {
 		echo $HTML->error_msg(db_error());
 	}

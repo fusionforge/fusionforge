@@ -4,6 +4,7 @@
  *
  * Copyright 2002 GForge, LLC
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2015, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -27,86 +28,90 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'admin/admin_utils.php';
 require_once $gfcommon.'include/cron_utils.php';
 
+global $HTML;
+
 site_admin_header(array('title'=>_('Cron Manager')));
 
 $which = getIntFromRequest('which', 100);
 
-?>
-<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
-<?php echo html_build_select_box_from_arrays(array_keys($cron_arr), array_values($cron_arr), 'which', $which,true,'Any'); ?>
-<input type="submit" name="submit" value="<?php echo _('Submit');?>" />
-</form>
-<?php
+echo $HTML->openForm(array('action' => '/admin/cronman.php', 'method' => 'get'));
+echo html_build_select_box_from_arrays(array_keys($cron_arr), array_values($cron_arr), 'which', $which, true, _('Any'));
+echo html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Submit')));
+echo $HTML->closeForm();
 
-$title_arr = array(
-	_('Date'),
-	_('Job'),
-	_('Message')
-);
-
-echo $HTML->listTableTop ($title_arr);
-
-if ($which==100) {
+if ($which == 100) {
 	$res = db_query_params ('SELECT COUNT(*) AS count FROM cron_history',
 				array ());
 } else {
 	$res = db_query_params ('SELECT COUNT(*) AS count FROM cron_history WHERE job=$1',
 				array ($which));
 }
-$totalCount = db_result($res, 0, 'count');
+$totalCount = (int)db_result($res, 0, 'count');
 
 $offset = getIntFromRequest('offset');
 if($offset > $totalCount) {
 	$offset = 0;
 }
 
-if ($which==100) {
-	$res = db_query_params ('SELECT * FROM cron_history ORDER BY rundate DESC',
-				array (),
-				ADMIN_CRONMAN_ROWS,
-				$offset);
+if ($totalCount) {
+	if ($which == 100) {
+		$res = db_query_params ('SELECT * FROM cron_history ORDER BY rundate DESC',
+					array (),
+					ADMIN_CRONMAN_ROWS,
+					$offset);
+	} else {
+		$res = db_query_params ('SELECT * FROM cron_history WHERE job=$1 ORDER BY rundate DESC',
+					array ($which),
+					ADMIN_CRONMAN_ROWS,
+					$offset);
+	}
+
+	$title_arr = array(
+		_('Date'),
+		_('Job'),
+		_('Message')
+	);
+
+	echo $HTML->listTableTop ($title_arr);
+
+	for ($i=0; $i<db_numrows($res); $i++) {
+		$cells = array();
+		$cells[][] = date(_('Y-m-d H:i'), db_result($res,$i,'rundate'));
+		$cells[][] = $cron_arr[db_result($res,$i,'job')];
+		$cells[][] = nl2br(htmlentities(db_result($res,$i,'output')));
+		echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i+1, true)), $cells);
+	}
+
+	echo $HTML->listTableBottom();
+
+	if($totalCount > ADMIN_CRONMAN_ROWS) {
+	?>
+	<br />
+	<table class="tablegetmore fullwidth" cellpadding="5">
+		<tr>
+			<td><?php
+			if ($offset != 0) {
+				echo util_make_link('/admin/cronman.php?which='.$which.'&offset='.($offset - ADMIN_CRONMAN_ROWS),
+							html_image('t2.png', '15', '15').' '._('Previous'),
+							array('class' => 'prev'));
+			} else {
+				echo '&nbsp;';
+			}
+			echo '</td><td class="align-right">';
+			if ($totalCount > $offset + ADMIN_CRONMAN_ROWS) {
+				echo util_make_link('/admin/cronman.php?which='.$which.'&offset='.($offset + ADMIN_CRONMAN_ROWS),
+							_('Next').' '.html_image('t.png', '15', '15'),
+							array('class' => 'next'));
+			} else {
+				echo '&nbsp;';
+			}
+			?></td>
+		</tr>
+	</table>
+	<?php
+	}
 } else {
-	$res = db_query_params ('SELECT * FROM cron_history WHERE job=$1 ORDER BY rundate DESC',
-				array ($which),
-				ADMIN_CRONMAN_ROWS,
-				$offset);
-}
-
-for ($i=0; $i<db_numrows($res); $i++) {
-	$cells = array();
-	$cells[][] = date(_('Y-m-d H:i'), db_result($res,$i,'rundate'));
-	$cells[][] = $cron_arr[db_result($res,$i,'job')];
-	$cells[][] = nl2br(htmlentities(db_result($res,$i,'output')));
-	echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i+1, true)), $cells);
-}
-
-echo $HTML->listTableBottom();
-
-if($totalCount > ADMIN_CRONMAN_ROWS) {
-?>
-<br />
-<table class="tablegetmore fullwidth" cellpadding="5">
-	<tr>
-		<td><?php
-		if ($offset != 0) {
-			echo util_make_link('/admin/cronman.php?which='.$which.'&offset='.($offset - ADMIN_CRONMAN_ROWS),
-						html_image('t2.png', '15', '15').' '._('Previous'),
-						array('class' => 'prev'));
-		} else {
-			echo '&nbsp;';
-		}
-		echo '</td><td class="align-right">';
-		if ($totalCount > $offset + ADMIN_CRONMAN_ROWS) {
-			echo util_make_link('/admin/cronman.php?which='.$which.'&offset='.($offset + ADMIN_CRONMAN_ROWS),
-						_('Next').' '.html_image('t.png', '15', '15'),
-						array('class' => 'next'));
-		} else {
-			echo '&nbsp;';
-		}
-		?></td>
-	</tr>
-</table>
-<?php
+	echo $HTML->information(_('No message entries found'));
 }
 
 site_admin_footer();

@@ -62,7 +62,7 @@ class hudson_Widget_JobTestTrend extends HudsonJobWidget {
 	}
 
 	function getDescription() {
-		return _("Show the test result trend for the selected job. To display something, your job needs to have tests. The graph will show the number of tests (failed and successfull) along  time. The number of tests is increasing while the number of build and commits are increasing too.");
+		return _("Show the test result trend for the selected job. To display something, your job needs to have tests. The graph will show the number of tests (failed and successful) along  time. The number of tests is increasing while the number of build and commits are increasing too.");
 	}
 
 	function loadContent($id) {

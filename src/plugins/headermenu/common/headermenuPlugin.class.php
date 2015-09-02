@@ -68,7 +68,7 @@ in the main menu (outermenu) or in the project menu (groupmenu).");
 				$project = group_get_object($group_id);
 				if ($project->usesPlugin($this->name)) {
 					echo html_e('p', array(), util_make_link('/plugins/'.$this->name.'/?type=projectadmin&group_id='.$group_id,
-					     _('Menu Tabs Manager Admin'), array('title' => _('Add/Remove/Activate/Desactivate tabs'))));
+					     _('Menu Tabs Manager Admin'), array('title' => _('Add/Remove/Activate/Deactivate tabs'))));
 				}
 				break;
 			}

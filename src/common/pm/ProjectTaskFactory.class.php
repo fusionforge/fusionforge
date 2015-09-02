@@ -200,7 +200,7 @@ class ProjectTaskFactory extends Error {
 							array ($this->ProjectGroup->getID()));
 		}
 
-		if ($this->status == 1 || $this->status == 2 || $this->status == 3) {
+		if ($this->status && ($this->status != 100)) {
 			$qpa = db_construct_qpa($qpa, ' AND project_task_vw.status_id = $1 ', array($this->status));
 		}
 

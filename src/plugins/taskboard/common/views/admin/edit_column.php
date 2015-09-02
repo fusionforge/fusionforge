@@ -54,7 +54,7 @@ if ($column_id) {
 		$cells[][] = html_e('input', array('type' => 'text', 'name' => 'column_title', 'value' => htmlspecialchars($column->getTitle())));
 		echo $HTML->multiTableRow(array(), $cells);
 		$cells = array();
-		$cells[][] = html_e('strong', array(), _('Title backgound color'));
+		$cells[][] = html_e('strong', array(), _('Title background color'));
 		$cells[][] = $taskboard->colorBgChooser('title_bg_color', $column->getTitleBackgroundColor());
 		echo $HTML->multiTableRow(array(), $cells);
 		$cells = array();

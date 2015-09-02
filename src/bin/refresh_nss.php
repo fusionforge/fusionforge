@@ -1,9 +1,7 @@
+#! /usr/bin/php
 <?php
 /**
- * scmhook checkMimetype Plugin Class
- * Copyright 2011, Franck Villaume - Capgemini
- * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * COpyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2010 Roland Mas
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -21,18 +19,26 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-global $gfplugins;
-require_once $gfplugins.'scmhook/common/scmhook.class.php';
+require (dirname(__FILE__).'/../common/include/env.inc.php');
+require_once $gfcommon.'include/pre.php';
 
-class SvnCheckMimetype extends scmhook {
-	function __construct() {
-		$this->name = "Check Mimetype";
-		$this->description = _('Verify if committed files have svn:mimetype set up correctly.');
-		$this->classname = "checkMimetype";
-		$this->command = 'perl '.dirname(__FILE__).'/hooks/checkmimetype/check-mime-type.pl "$1" "$2"';
-		$this->hooktype = "pre-commit";
-		$this->label = "scmsvn";
-		$this->unixname = "checkmimetype";
-		$this->needcopy = 0;
-	}
+$err='';
+
+// Plugins subsystem
+require_once 'common/include/Plugin.class.php';
+require_once 'common/include/PluginManager.class.php';
+
+setup_plugin_manager () ;
+session_set_admin () ;
+
+$res = db_query_params ('SELECT user_id FROM users WHERE status=$1 ORDER BY user_id',
+			array ('A'));
+
+while ($arr = db_fetch_array($res)) {
+    $u = user_get_object($arr['user_id']);
+	echo "Refreshing NSS for user ".$u->getUnixName()."\n" ;
+
+    $SYS->sysCheckCreateUser($u->getID());
 }
+
+?>

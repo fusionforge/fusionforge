@@ -29,8 +29,11 @@ Description: collaborative development tool - standard metapackage
 Package: fusionforge-common
 Architecture: all
 Depends: php5-cli, php5-pgsql, php-htmlpurifier, cron, ucf, ${misc:Depends}
-Replaces: gforge-common (<< 6.0-1~)
-Breaks: gforge-common (<< 6.0-1~)
+# Handle conflicts with files in old packages:
+# gforge-common -> /usr/share/locale/XX/LC_MESSAGES/fusionforge.mo
+# gforge-db-postgresql -> /usr/bin/forge_make_admin & forge_set_password
+Replaces: gforge-common (<< 6.0-1~), gforge-db-postgresql (<< 6.0-1~)
+Breaks: gforge-common (<< 6.0-1~), gforge-db-postgresql (<< 6.0-1~)
 Description: collaborative development tool - shared files
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,

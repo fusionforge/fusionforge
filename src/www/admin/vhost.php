@@ -111,7 +111,9 @@ site_admin_header(array('title'=>_('Site Admin')));
 
 <h3><?php echo _('Virtual Host Administration'); ?></h3>
 
-<form name="madd" method="post" action="<?php echo getStringFromServer('PHP_SELF'); ?>">
+<?php
+echo $HTML->openForm(array('name' => 'madd', 'method' => 'post', 'action' => '/admin/vhost.php'));
+?>
 
 <strong><?php echo _('Add Virtual Host'); ?></strong>
 
@@ -129,15 +131,17 @@ site_admin_header(array('title'=>_('Site Admin')));
 </table>
 
 <input type="submit" name="add" value="<?php echo _('Add Virtual Host'); ?>" />
-</form>
-
-<p>&nbsp;</p>
+<?php
+echo $HTML->closeForm();
+?>
 
 <hr />
 <strong><?php echo _('Tweak Directories'); ?></strong>
 <br />
 
-<form name="tweak" method="post" action="<?php echo getStringFromServer('PHP_SELF'); ?>">
+<?php
+echo $HTML->openForm(array('name' => 'tweak', 'method' => 'post', 'action' => '/admin/vhost.php'));
+?>
 <table>
 <tr>
    <td><?php echo _('Virtual Host')._(':'); ?></td><td><input type="text" name="vhost_name" /></td>
@@ -147,9 +151,9 @@ site_admin_header(array('title'=>_('Site Admin')));
 
 <input type="hidden" name="tweak" value="1" />
 
-</form>
-
 <?php
+echo $HTML->closeForm();
+
 if (getStringFromRequest('tweak')) {
 	$vhost_name = getStringFromRequest('vhost_name');
 
@@ -165,7 +169,7 @@ if (getStringFromRequest('tweak')) {
 
 		$row_vh = db_fetch_array($res_vh);
 
-		echo $HTML->information(_('Update Record:'));
+		echo $HTML->information(_('Update Record')._(':'));
 
 		$title=array();
 		$title[]=_('VHOST ID');
@@ -175,10 +179,9 @@ if (getStringFromRequest('tweak')) {
 		$title[]=_('CGI Dir');
 		$title[]=_('Operations');
 
+		echo $HTML->openForm(array('name' => 'update', 'method' => 'post', 'action' => '/admin/vhost.php'));
+		echo $HTML->listTableTop($title);
 		print '
-			<form name="update" method="post" action="'.getStringFromServer('PHP_SELF').'">
-
-			'.$HTML->listTableTop($title).'
 			<tr><td>'.$row_vh['vhostid'].'</td>
 			<td>'.$row_vh['vhost_name'].'</td>
 			<td>'.util_make_link_g ($row_vh['unix_group_name'],$row_vh['group_id'],$row_vh['unix_group_name']).'</td>
@@ -187,11 +190,10 @@ if (getStringFromRequest('tweak')) {
 			'.$HTML->listTableBottom().'
 
 			<input type="hidden" name="tweakcommit" value="1" />
-			<input type="hidden" name="vhostid" value="'.$row_vh['vhostid'].'" />
-			</form>
-		';
+			<input type="hidden" name="vhostid" value="'.$row_vh['vhostid'].'" />';
+		echo $HTML->closeForm();
 	} else {
-		echo $HTML->warning_msg(_('No such VHOST: ').$vhost_name);
+		echo $HTML->warning_msg(_('No such VHOST')._(': ').$vhost_name);
 	}
 
 }
