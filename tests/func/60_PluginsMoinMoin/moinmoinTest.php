@@ -44,7 +44,10 @@ class PluginMoinMoin extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("Project information updated"));
 
 		$this->cron_for_plugin("create-wikis.php", "moinmoin");
-		sleep (5);
+		// Attempt to debug "Unable to connect to WSGI daemon process" issues
+		sleep(5);
+		system("ls -lh --full-time /var/run/*/wsgi.*");
+		ob_flush();
 
 		$this->gotoProject('ProjectA');
 		$this->clickAndWait("link=MoinMoinWiki");
