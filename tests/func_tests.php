@@ -8,7 +8,8 @@ if (!@include_once 'PHPUnit/Autoload.php') {
 	require_once 'PHPUnit/TextUI/TestRunner.php';
 }
 
-require_once 'func/Testing/SeleniumRemoteSuite.php';
+$config = getenv('CONFIG_PHP') ? getenv('CONFIG_PHP'): 'func/config.php';
+require_once $config;
 
 class AllTests
 {
@@ -19,7 +20,7 @@ class AllTests
 
 	public static function suite()
 	{
-		$suite = new SeleniumRemoteSuite('PHPUnit');
+		$suite = new PHPUnit_Framework_TestSuite('PHPUnit');
 
 		// Selenium tests
 		if (!defined('DB_INIT_CMD')) { define('PROJECTA','true'); }
