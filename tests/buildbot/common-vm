@@ -76,7 +76,7 @@ then
 	echo "$BASEHOST=`eval echo \\\$$BASEHOST`"
 fi
 
-export HOST BASEHOST $BASEHOST SSHPUBKEY 
+export HOST BASEHOST $BASEHOST
 
 if [ -z "$VMENGINE" ]
 then

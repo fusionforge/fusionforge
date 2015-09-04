@@ -44,7 +44,11 @@
  * ALONE BASIS."
  */
 
-$config = getenv('CONFIG_PHP') ? getenv('CONFIG_PHP'): dirname(dirname(__FILE__)).'/config.php';
+define('FORGE_ADMIN_USERNAME', 'admin');
+define('FORGE_ADMIN_PASSWORD', 'myadmin');
+define('FORGE_OTHER_PASSWORD', 'tototata');
+
+$config = dirname(__FILE__).'/config.php';
 require_once $config;
 
 require_once 'PHPUnit/Extensions/SeleniumTestCase.php';
@@ -156,7 +160,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 
 	public function runCommand($cmd)
 	{
-		system(RUN_COMMAND_PREFIX.$cmd, $ret);
+		system($cmd, $ret);
 		$this->assertEquals(0, $ret);
 		ob_flush();
 	}
@@ -172,11 +176,6 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		}
 		$this->assertEquals(0, $ret);  # Give up
 		ob_flush();
-	}
-
-	public function db($sql)
-	{
-		system("echo \"$sql\" | psql -q -Upostgres ".DB_NAME);
 	}
 
 	public function cron($cmd)
