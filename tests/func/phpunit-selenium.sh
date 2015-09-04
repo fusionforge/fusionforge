@@ -51,9 +51,11 @@ FORGE_HOME=$(cd $(dirname $0)/../..; pwd)
 cd $FORGE_HOME
 
 SELENIUM_RC_DIR=/var/log
-SELENIUM_RC_URL=${HUDSON_URL}job/${JOB_NAME}/ws/reports
 SELENIUM_RC_HOST=$HOST
-# the PHP file provided through CONFIG_PHP will be loaded inside the functionnal test suite with require_once, in SeleniumForge.php
+# URL for screenshots - cf. http://buildbot.fusionforge.org/env-vars.html
+SELENIUM_RC_URL=${JOB_URL}/ws/method/${INSTALL_METHOD}/os/${INSTALL_OS}/reports/
+# the PHP file provided through CONFIG_PHP will be loaded inside the
+# functionnal test suite with require_once, in SeleniumForge.php
 CONFIG_PHP=func/config.php
 export SELENIUM_RC_DIR SELENIUM_RC_URL SELENIUM_RC_HOST HOST DB_NAME DB_USER CONFIG_PHP
 
