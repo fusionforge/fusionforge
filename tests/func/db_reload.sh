@@ -20,7 +20,6 @@ is_db_down () {
 }
 
 stop_apache () {
-
     echo "Stopping apache"
     service $(forge_get_config apache_service) stop
 }
@@ -54,7 +53,6 @@ stop_database () {
 }
 
 start_database () {
-
     echo "Starting the database"
     service postgresql start
 
@@ -74,7 +72,6 @@ start_database () {
 }
 
 start_apache () {
-
     echo "Starting apache"
     service $(forge_get_config apache_service) start
 }
@@ -100,17 +97,12 @@ else
     fixture='base'
 fi
 
-
-if [ "$exists" = 1 ]; then
-    pgdir=/var/lib/postgresql
-    if [ -e /etc/redhat-release ]; then pgdir=/var/lib/pgsql; fi
-    if [ -d $pgdir.backup-$fixture ]; then
-	exit 0
-    else
-	exit 1
-    fi
+pgdir=/var/lib/postgresql
+if [ -e /etc/redhat-release ]; then pgdir=/var/lib/pgsql; fi
+if [ ! -d $pgdir ]; then
+    echo "Database dir not found"
+    exit 1
 fi
-
 
 database=$(forge_get_config database_name)
 if [ "x$database" = "x" ]
@@ -119,16 +111,28 @@ then
     exit 1
 fi
 
+# Check if requested DB fixture exists
+if [ "$exists" = 1 ]; then
+    if [ -d $pgdir.backup-$fixture ]; then
+	exit 0
+    else
+	exit 1
+    fi
+fi
+
 # Reset the DB to a clean post-install state
 if [ "$reset" = 1 ]; then
     set -e
     # Reset connections
+    stop_apache
     service fusionforge-systasksd stop
     service postgresql restart
     su - postgres -c "dropdb $database" || true
     $(forge_get_config source_path)/post-install.d/db/db.sh configure
     forge_set_password admin myadmin
     service fusionforge-systasksd start
+    start_apache
+    rm -rf $pgdir.backup-*/
     exit 0
 fi
 
@@ -136,29 +140,22 @@ fi
 if [ "$backup" = 1 ]; then
     set -e
     su - postgres -c 'psql -c CHECKPOINT'  # flush to disk
+    stop_apache
     stop_database
-    pgdir=/var/lib/postgresql
-    if [ -e /etc/redhat-release ]; then pgdir=/var/lib/pgsql; fi
     rm -fr $pgdir.backup-$fixture/*
     # support /var/lib/pgsql as a symlink to tmpfs
     mkdir -p $(readlink -f $pgdir.backup-$fixture)
     cp -a --reflink=auto $pgdir/* $pgdir.backup-$fixture/
     start_database
+    start_apache
     exit 0
 fi
 
 
+# Else, restore clean state
+
 stop_apache
 stop_database --force
-
-if [ -d /var/lib/postgresql ] ; then
-    dbdir=/var/lib/postgresql
-elif [ -d /var/lib/pgsql ] ; then
-    dbdir=/var/lib/pgsql
-else
-    echo "Database dir not found"
-    exit 1
-fi
 
 # SCM
 for i in arch bzr cvs darcs git hg svn ; do
@@ -179,12 +176,11 @@ rm -rf $(forge_get_config groupdir_prefix) #no trailing slash
 # Too risky
 #rm -f ~/.ssh/id_rsa ~/.ssh/id_rsa.pub ~/.ssh/known_hosts
 
-# If the backup is there, restore it (it should now have been created by run-testsuite.sh)
-if [ -d $dbdir.backup-$fixture/ ]; then
-
-    echo "Restore database from files backup ($dbdir.backup-$fixture/)"
-    rm -rf $dbdir/*
-    cp -a --reflink=auto $dbdir.backup-$fixture/* $dbdir/
+# If the backup is there, restore it
+if [ -d $pgdir.backup-$fixture/ ]; then
+    echo "Restore database from files backup ($pgdir.backup-$fixture/)"
+    rm -rf $pgdir/*
+    cp -a --reflink=auto $pgdir.backup-$fixture/* $pgdir/
 
     pg_conf=$(ls /etc/postgresql/*/*/postgresql.conf /var/lib/pgsql/data/postgresql.conf 2>/dev/null | tail -1)
 
@@ -194,15 +190,12 @@ if [ -d $dbdir.backup-$fixture/ ]; then
 	fi
     done
 else
-    echo "Couldn't restore the database: $dbdir.backup-$fixture/ not found"
+    echo "Couldn't restore the database: $pgdir.backup-$fixture/ not found"
     exit 2
 fi
 
 start_database
-
 start_apache
-
-set -x
 
 if [ -x /usr/sbin/nscd ]; then
     echo "Flushing/restarting nscd"
