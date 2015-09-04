@@ -8,9 +8,6 @@ if (!@include_once 'PHPUnit/Autoload.php') {
 	require_once 'PHPUnit/TextUI/TestRunner.php';
 }
 
-$config = getenv('CONFIG_PHP') ? getenv('CONFIG_PHP'): 'func/config.php';
-require_once $config;
-
 class AllTests
 {
 	public static function main()
