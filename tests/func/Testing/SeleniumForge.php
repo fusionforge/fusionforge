@@ -111,7 +111,6 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 			passthru("$base_cmd base", $ret); ob_flush();
 
 			require(dirname(dirname(__FILE__))."/fixtures/{$this->fixture}.php");
-			call_user_func("fixture_{$this->fixture}", $this);
 			$this->fixture_loaded = true;
 
 			passthru("$base_cmd --backup {$this->fixture}", $ret); ob_flush();

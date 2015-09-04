@@ -19,7 +19,5 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-function fixture_projecta($test) {
-	$test->populateStandardTemplate('all');
-	$test->createProject('ProjectA');
-}
+$this->populateStandardTemplate('all');
+$this->createProject('ProjectA');
