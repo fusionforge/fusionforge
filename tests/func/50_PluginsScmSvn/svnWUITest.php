@@ -23,13 +23,15 @@ require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
 
 class ScmSvnWUITest extends FForge_SeleniumTestCase
 {
+	public $fixture = 'projecta';
+
 	function testScmSvnWUI()
 	{
+		$this->loadAndCacheFixture();
+
         $this->changeConfig("[scmsvn]\nuse_ssh = no\nuse_dav = yes\n");
 
 		$this->activatePlugin('scmsvn');
-		$this->populateStandardTemplate('empty');
-		$this->init();
 
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");

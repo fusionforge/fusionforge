@@ -23,13 +23,15 @@ require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
 
 class ScmSvnWebDAVTest extends FForge_SeleniumTestCase
 {
+	public $fixture = 'projecta';
+	
 	function testScmSvnWebDAV()
 	{
+		$this->loadAndCacheFixture();
+
         $this->changeConfig("[scmsvn]\nuse_ssl = no\n");
 
 		$this->activatePlugin('scmsvn');
-		$this->populateStandardTemplate('empty');
-		$this->init();
 
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");

@@ -24,19 +24,20 @@ require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
 class PluginMediawiki extends FForge_SeleniumTestCase
 {
 	protected $alreadyActive = 0;
+	public $fixture = 'projecta';
 
 	function testMediawiki()
 	{
 		$this->skip_on_rpm_installs();
 		$this->skip_on_centos();
 
+		$this->loadAndCacheFixture();
+
 		$this->changeConfig("[mediawiki]\nunbreak_frames=yes\n");
 
 		$this->activatePlugin('mediawiki');
 
-		$this->populateStandardTemplate('empty');
-		$this->init();
-
+		$this->gotoProject('ProjectA');
 		$this->clickAndWait("link=Admin");
 		$this->clickAndWait("link=Tools");
 		$this->click("use_mediawiki");

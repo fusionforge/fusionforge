@@ -23,18 +23,20 @@ require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
 
 class multiSCMTest extends FForge_SeleniumTestCase
 {
+	public $fixture = 'projecta';
+
 	function testMultiSCM()
 	{
 		$this->skip_on_rpm_installs();
 		$this->skip_on_src_installs();
+
+		$this->loadAndCacheFixture();
 
 		$this->changeConfig("[core]\nallow_multiple_scm = yes\n");
 
 		$this->activatePlugin('scmsvn');
 		$this->activatePlugin('scmgit');
 		$this->activatePlugin('scmbzr');
-		$this->populateStandardTemplate('empty');
-		$this->init();
 
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");

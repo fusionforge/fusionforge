@@ -29,14 +29,15 @@ function mysystem($cmd, &$ret=null) {
 
 class ScmBzrTest extends FForge_SeleniumTestCase
 {
+	public $fixture = 'projecta';
 	function testScmBzr()
 	{
 		$this->skip_on_rpm_installs();
 		$this->skip_on_src_installs();
 
+		$this->loadAndCacheFixture();
+
 		$this->activatePlugin('scmbzr');
-		$this->populateStandardTemplate('empty');
-		$this->init();
 
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");

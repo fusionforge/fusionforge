@@ -38,7 +38,6 @@ class PluginMoinMoin extends FForge_SeleniumTestCase
 		$this->activatePlugin('moinmoin');
 
 		$this->gotoProject('ProjectA');
-
 		$this->clickAndWait("link=Admin");
 		$this->clickAndWait("link=Tools");
 		$this->click("use_moinmoin");

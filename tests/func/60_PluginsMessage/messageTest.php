@@ -51,8 +51,6 @@ class MessageTest extends FForge_SeleniumTestCase
 	{
 		$this->_activateMessagePlugin();
 
-		$this->init();
-
 		$this->clickAndWait("link=Site Admin");
 		$this->clickAndWait("link=Configure Global Message");
 		$this->type("//textarea[@name='body']", "Forge under maintenance, please bear with us.");

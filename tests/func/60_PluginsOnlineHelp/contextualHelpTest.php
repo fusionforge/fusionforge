@@ -45,11 +45,14 @@ require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
 
 class ContextualHelp extends FForge_SeleniumTestCase
 {
+	public $fixture = 'projecta';
+
 	function testContextualHelp()
 	{
 		$this->skip_on_deb_installs();
 
-		$this->init();
+		$this->loadAndCacheFixture();
+
 		$this->activatePlugin('online_help');
 		$this->login ('admin');
 
