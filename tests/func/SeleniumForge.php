@@ -82,7 +82,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	 */
 	public function loadCachedFixture() {
 		$this->fixture_loaded = false;
-		$base_cmd = dirname(dirname(__FILE__))."/db_reload.sh";
+		$base_cmd = dirname(__FILE__)."/db_reload.sh";
 		$ret = 0;
 		passthru("$base_cmd --exists {$this->fixture}", $ret); ob_flush();
 		if ($ret != 0) {
@@ -107,11 +107,11 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	 */
 	public function loadAndCacheFixture() {
 		if (!$this->fixture_loaded) {
-			$base_cmd = dirname(dirname(__FILE__))."/db_reload.sh";
+			$base_cmd = dirname(__FILE__)."/db_reload.sh";
 			$ret = 0;
 			passthru("$base_cmd base", $ret); ob_flush();
 
-			require(dirname(dirname(__FILE__))."/fixtures/{$this->fixture}.php");
+			require(dirname(__FILE__)."/fixtures/{$this->fixture}.php");
 			$this->logout();
 			$this->fixture_loaded = true;
 
