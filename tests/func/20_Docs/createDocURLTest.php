@@ -3,6 +3,7 @@
  * Copyright (C) 2010-2013 Alain Peyrat - Alcatel-Lucent
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright (C) 2015  Inria (Sylvain Beucler)
  *
  * This file is part of FusionForge.
  *
@@ -43,13 +44,17 @@
  * ALONE BASIS."
  */
 
-require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
+require_once dirname(dirname(__FILE__)).'/SeleniumForge.php';
 
 class CreateDocURL extends FForge_SeleniumTestCase
 {
+	public $fixture = 'projecta';
+
 	function testCreateDocURL()
 	{
-		$this->init();
+		$this->loadAndCacheFixture();
+		$this->switchUser(FORGE_ADMIN_USERNAME);
+
 		$this->gotoProject('ProjectA');
 		$this->clickAndWait("link=Docs");
 		$this->clickAndWait("addItemDocmanMenu");
@@ -81,7 +86,9 @@ class CreateDocURL extends FForge_SeleniumTestCase
 
 	function testCreateMultipleDocs()
 	{
-		$this->init();
+		$this->loadAndCacheFixture();
+		$this->switchUser(FORGE_ADMIN_USERNAME);
+
 		$this->gotoProject('ProjectA');
 		$this->clickAndWait("link=Docs");
 		$this->clickAndWait("addItemDocmanMenu");

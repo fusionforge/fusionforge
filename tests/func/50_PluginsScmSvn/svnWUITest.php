@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (C) 2012 Roland Mas
+ * Copyright (C) 2015  Inria (Sylvain Beucler)
  *
  * This file is part of FusionForge.
  *
@@ -19,18 +20,20 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
+require_once dirname(dirname(__FILE__)).'/SeleniumForge.php';
 
 class ScmSvnWUITest extends FForge_SeleniumTestCase
 {
+	public $fixture = 'projecta';
+
 	function testScmSvnWUI()
 	{
+		$this->loadAndCacheFixture();
+
 		$this->changeConfig(array("scmsvn" => array("use_ssh" => "no",
 		                                            "use_dav" => "yes")));
 
 		$this->activatePlugin('scmsvn');
-		$this->populateStandardTemplate('empty');
-		$this->init();
 
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
@@ -52,19 +55,4 @@ class ScmSvnWUITest extends FForge_SeleniumTestCase
 		$this->assertTextPresent("Init");
 		$this->selectFrame("relative=top");
 	}
-
-	/**
-	 * Method that is called after Selenium actions.
-	 *
-	 * @param  string $action
-	 */
-	protected function defaultAssertions($action)
-	{
-		if ($action == 'waitForPageToLoad') {
-			$this->assertTrue($this->isElementPresent("//h1")
-					  || $this->isElementPresent("//.[@class='page_footer']"));
-		}
-	}
-
 }
-?>

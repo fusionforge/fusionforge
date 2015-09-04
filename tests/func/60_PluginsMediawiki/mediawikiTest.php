@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright 2012, Roland Mas
+ * Copyright (C) 2015  Inria (Sylvain Beucler)
  *
  * This file is part of FusionForge.
  *
@@ -19,24 +20,25 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
+require_once dirname(dirname(__FILE__)).'/SeleniumForge.php';
 
 class PluginMediawiki extends FForge_SeleniumTestCase
 {
 	protected $alreadyActive = 0;
+	public $fixture = 'projecta';
 
 	function testMediawiki()
 	{
 		$this->skip_on_rpm_installs();
 		$this->skip_on_centos();
 
+		$this->loadAndCacheFixture();
+
 		$this->changeConfig(array("mediawiki" => array("unbreak_frames" => "yes")));
 
 		$this->activatePlugin('mediawiki');
 
-		$this->populateStandardTemplate('empty');
-		$this->init();
-
+		$this->gotoProject('ProjectA');
 		$this->clickAndWait("link=Admin");
 		$this->clickAndWait("link=Tools");
 		$this->click("use_mediawiki");

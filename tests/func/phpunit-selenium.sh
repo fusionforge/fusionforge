@@ -51,11 +51,12 @@ FORGE_HOME=$(cd $(dirname $0)/../..; pwd)
 cd $FORGE_HOME
 
 SELENIUM_RC_DIR=/var/log
-SELENIUM_RC_URL=${HUDSON_URL}job/${JOB_NAME}/ws/reports
 SELENIUM_RC_HOST=$HOST
-# the PHP file provided through CONFIG_PHP will be loaded inside the functionnal test suite with require_once, in SeleniumRemoteSuite.php
-CONFIG_PHP=func/config.php
-export SELENIUM_RC_DIR SELENIUM_RC_URL SELENIUM_RC_HOST HOST DB_NAME DB_USER CONFIG_PHP
+# URL for screenshots - cf. http://buildbot.fusionforge.org/env-vars.html
+SELENIUM_RC_URL=${JOB_URL}/ws/method/${INSTALL_METHOD}/os/${INSTALL_OS}/reports/
+# config.php will be loaded inside the functionnal test suite with
+# require_once, in SeleniumForge.php
+export SELENIUM_RC_DIR SELENIUM_RC_URL SELENIUM_RC_HOST HOST
 
 # Add definitions for the PHP functionnal test suite
 cat <<-EOF >tests/func/config.php
@@ -69,16 +70,6 @@ define ('HOST', getenv('HOST'));
 
 // Base URL where FusionForge is installed
 define ('ROOT', '');
-
-// Database connection parameters.
-define('DB_NAME', getenv('DB_NAME'));
-define('DB_USER', getenv('DB_USER'));
-define('DB_PASSWORD', '@@FFDB_PASS@@');
-// Command which will reload a clean database at each SeleniumTestCase start
-define('DB_INIT_CMD', "$FORGE_HOME/tests/func/db_reload.sh 2>&1");
-
-// Prefix for commands to run
-define('RUN_COMMAND_PREFIX', '');
 
 // Cronjob wrapper script location
 print "Looking for forge_run_job script...\n";
@@ -98,21 +89,6 @@ if (is_executable ("$FORGE_HOME/bin/forge_run_job")) {
 
 define('INSTALL_METHOD', getenv('INSTALL_METHOD'));
 define('INSTALL_OS', getenv('INSTALL_OS'));
-
-// this should be an existing user of the forge together with its password
-// (the password should be different from 'myadmin')
-define ('FORGE_ADMIN_USERNAME', '$FORGE_ADMIN_USERNAME');
-define ('FORGE_ADMIN_PASSWORD', '$FORGE_ADMIN_PASSWORD');
-define ('FORGE_OTHER_PASSWORD', '$FORGE_OTHER_PASSWORD');
-
-// Where CLI is installed
-define ('CLI_CMD', '$FORGE_HOME/acde/tools/gforge-cli/gforge.php');
-
-// Where Java CLI is installed
-define ('JAGOSI_CMD', '$FORGE_HOME/acde/tools/gforge-java-cli/');
-
-// Enter true when file is configured.
-define('CONFIGURED', getenv('CONFIGURED'));
 
 //
 // DON'T MODIFY BELOW THIS LINE UNLESS YOU KNOW WHAT YOU DO
