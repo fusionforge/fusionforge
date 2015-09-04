@@ -200,24 +200,28 @@ EOF
 
 	    # mediawiki not available in EPEL
 	    # Note: we don't support mediawiki > 1.19 as of 2015-06
-	    if yum list mediawiki >/dev/null 2>&1; then
-		yum install -y mediawiki
-	    else
-		DEPS="httpd-filesystem"
-		yum install --enablerepo=fedora -y $DEPS
-		yumdownloader --enablerepo=fedora-source --enablerepo=fedora-updates-source \
-			      --source mediawiki
-		rpm -ivh mediawiki-*.src.rpm
-	        # don't backport php-pecl-jsonc which has lots of deps, let's use built-in php-json
-		sed -i -e '/Requires/ s/, php-pecl-jsonc//' ~/rpmbuild/SPECS/mediawiki.spec
-		sed -i -e '/Requires: php-pecl-jsonc/d' ~/rpmbuild/SPECS/mediawiki.spec
-		# drop new-style php requires
-		sed -i -e '/Requires: php(/d' ~/rpmbuild/SPECS/mediawiki.spec
-		# drop test-suite
-		sed -i -e '/BuildRequires: /d' ~/rpmbuild/SPECS/mediawiki.spec
-		sed -i -e '/^%check/,/^php phpunit.php/d' ~/rpmbuild/SPECS/mediawiki.spec
-		rpmbuild -bb ~/rpmbuild/SPECS/mediawiki.spec
-		yum install -y ~/rpmbuild/RPMS/noarch/mediawiki-[0-9]*.rpm
+	    # Note: no stable/backportable mediawiki rpm as of 2015-09 -> manual install + mock rpm?
+	    if false; then
+                if yum list mediawiki >/dev/null 2>&1; then
+                    yum install -y mediawiki
+                else
+                    DEPS="httpd-filesystem"
+                    yum install --enablerepo=fedora -y $DEPS
+                    yumdownloader --enablerepo=fedora-source --enablerepo=fedora-updates-source \
+                                  --source mediawiki
+                    rpm -ivh mediawiki-*.src.rpm
+		    # Work-arounds for mediawiki-1.25.1-3.fc22
+                    # don't backport php-pecl-jsonc which has lots of deps, use built-in php-json
+                    sed -i -e '/Requires/ s/, php-pecl-jsonc//' ~/rpmbuild/SPECS/mediawiki.spec
+                    sed -i -e '/Requires: php-pecl-jsonc/d' ~/rpmbuild/SPECS/mediawiki.spec
+                    # drop new-style php requires
+                    sed -i -e '/Requires: php(/d' ~/rpmbuild/SPECS/mediawiki.spec
+                    # drop test-suite
+                    sed -i -e '/BuildRequires: /d' ~/rpmbuild/SPECS/mediawiki.spec
+                    sed -i -e '/^%check/,/^php phpunit.php/d' ~/rpmbuild/SPECS/mediawiki.spec
+                    rpmbuild -bb ~/rpmbuild/SPECS/mediawiki.spec
+                    yum install -y ~/rpmbuild/RPMS/noarch/mediawiki-[0-9]*.rpm
+                fi
 	    fi
 
 	    yum --enablerepo=epel -y install php-tidy
