@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (C) 2012 Roland Mas
+ * Copyright (C) 2015  Inria (Sylvain Beucler)
  *
  * This file is part of FusionForge.
  *
@@ -30,6 +31,7 @@ function mysystem($cmd, &$ret=null) {
 class ScmBzrTest extends FForge_SeleniumTestCase
 {
 	public $fixture = 'projecta';
+
 	function testScmBzr()
 	{
 		$this->skip_on_rpm_installs();

@@ -2,6 +2,7 @@
 /**
  * Copyright (C) 2008 Alain Peyrat <aljeux@free.fr>
  * Copyright (C) 2009 Alain Peyrat, Alcatel-Lucent
+ * Copyright (C) 2015  Inria (Sylvain Beucler)
  *
  * This file is part of FusionForge.
  *
@@ -46,10 +47,13 @@ require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
 
 class CreateNews extends FForge_SeleniumTestCase
 {
+	public $fixture = 'projecta';
+
 	function testMonitorProjectNews()
 	{
-		$this->populateStandardTemplate(array());
-		$this->init();
+		$this->loadAndCacheFixture();
+		$this->switchUser(FORGE_ADMIN_USERNAME);
+		$this->gotoProject('ProjectA');
 
 		// Create a simple news.
 		$this->click("link=News");
@@ -124,8 +128,11 @@ class CreateNews extends FForge_SeleniumTestCase
 	 */
 	function testAcBug4100()
 	{
+		$this->loadAndCacheFixture();
+		$this->switchUser(FORGE_ADMIN_USERNAME);
+		$this->gotoProject('ProjectA');
+
 		// Create a simple news.
-		$this->init();
 		$this->clickAndWait("link=News");
 		$this->clickAndWait("link=Submit");
 		$this->type("summary", "Multi line news");
@@ -153,7 +160,9 @@ class CreateNews extends FForge_SeleniumTestCase
 	function testPreventMultiplePost()
 	{
 		// Create a simple news.
-		$this->init();
+		$this->loadAndCacheFixture();
+		$this->switchUser(FORGE_ADMIN_USERNAME);
+		$this->gotoProject('ProjectA');
 
 		$this->clickAndWait("link=News");
 		$this->clickAndWait("link=Submit");

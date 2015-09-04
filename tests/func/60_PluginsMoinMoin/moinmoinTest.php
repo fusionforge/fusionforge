@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright 2012, Roland Mas
+ * Copyright (C) 2015  Inria (Sylvain Beucler)
  *
  * This file is part of FusionForge.
  *

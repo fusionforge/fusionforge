@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (C) 2010 Alcatel-Lucent
+ * Copyright (C) 2015  Inria (Sylvain Beucler)
  *
  * This file is part of FusionForge.
  *

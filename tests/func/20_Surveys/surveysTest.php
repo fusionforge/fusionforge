@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (C) 2010 Alcatel-Lucent
+ * Copyright (C) 2015  Inria (Sylvain Beucler)
  *
  * This file is part of FusionForge.
  *
@@ -45,10 +46,14 @@ require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
 
 class Surveys extends FForge_SeleniumTestCase
 {
+	public $fixture = 'projecta';
+
 	function testSimpleSurvey()
 	{
 		// Test: Create a simple survey.
-		$this->init();
+		$this->loadAndCacheFixture();
+		$this->switchUser(FORGE_ADMIN_USERNAME);
+		$this->gotoProject('ProjectA');
 
 		$this->clickAndWait("link=Surveys");
 		$this->clickAndWait("link=Administration");

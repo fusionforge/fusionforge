@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (C) 2010-2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright (C) 2015  Inria (Sylvain Beucler)
  *
  * This file is part of FusionForge.
  *
@@ -45,6 +46,8 @@ require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
 
 class CreateTask extends FForge_SeleniumTestCase
 {
+	public $fixture = 'projecta';
+
 	function testcreateTask()
 	{
 		$this->setUpTasks();
@@ -65,10 +68,12 @@ class CreateTask extends FForge_SeleniumTestCase
 		$this->exportCSV();
 	}
 
+
 	function setUpTasks()
 	{
-		$this->populateStandardTemplate(array('tasks'));
-		$this->init();
+		$this->loadAndCacheFixture();
+		$this->switchUser(FORGE_ADMIN_USERNAME);
+		$this->gotoProject('ProjectA');
 
 		// Initialize "rep_time_tracking" table
 		$this->click("link=Reporting");

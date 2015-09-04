@@ -3,6 +3,7 @@
  * Copyright (C) 2007-2008 Alain Peyrat <aljeux at free dot fr>
  * Copyright (C) 2009 Alain Peyrat, Alcatel-Lucent
  * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright (C) 2015  Inria (Sylvain Beucler)
  *
  * This file is part of FusionForge.
  *
@@ -111,6 +112,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 			passthru("$base_cmd base", $ret); ob_flush();
 
 			require(dirname(dirname(__FILE__))."/fixtures/{$this->fixture}.php");
+			$this->logout();
 			$this->fixture_loaded = true;
 
 			passthru("$base_cmd --backup {$this->fixture}", $ret); ob_flush();
@@ -219,7 +221,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->clickAndWait("submit");
 
 		$this->open( ROOT . '/projects/tmpl') ;
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 
 		$this->clickAndWait("link=Admin");
 		$this->clickAndWait("link=Tools");
@@ -337,7 +339,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	{
 //		$this->click("link=Log Out");
 		$this->open( ROOT ."/account/logout.php" );
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 
 		$this->logged_in = false ;
 	}
@@ -391,7 +393,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->switchUser ($user) ;
 
 		$this->open( ROOT . '/admin/approve-pending.php') ;
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("document.forms['approve.$unix_name'].submit");
 
 		$this->assertTrue($this->isTextPresent("Approving Project: $unix_name"));
@@ -415,6 +417,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 
 	public function createUser ($login)
 	{
+		$this->switchUser(FORGE_ADMIN_USERNAME);
 		$this->open( ROOT );
 		$this->clickAndWait("link=Site Admin");
 		$this->clickAndWait("link=Register a New User");
@@ -433,9 +436,9 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	public function activatePlugin($pluginName) {
 		$this->switchUser(FORGE_ADMIN_USERNAME);
 		$this->open( ROOT . '/admin/pluginman.php?update='.$pluginName.'&action=deactivate');
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->open( ROOT . '/admin/pluginman.php?update='.$pluginName.'&action=activate');
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		//$this->logout();
 	}
 
@@ -443,7 +446,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$unix_name = strtolower($project);
 
 		$this->open( ROOT . '/projects/' . $unix_name) ;
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTrue($this->isTextPresent("This is the public description for $project."));
 	}
 

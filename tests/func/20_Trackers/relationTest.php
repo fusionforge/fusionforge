@@ -2,6 +2,7 @@
 /**
  * Copyright (C) 2008 Alain Peyrat <aljeux@free.fr>
  * Copyright (C) 2009-2010 Alain Peyrat, Alcatel-Lucent
+ * Copyright (C) 2015  Inria (Sylvain Beucler)
  *
  * This file is part of FusionForge.
  *
@@ -46,10 +47,13 @@ require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
 
 class CreateTrackerRelation extends FForge_SeleniumTestCase
 {
+	public $fixture = 'projecta';
+
 	function testCreateRelation()
 	{
-		$this->populateStandardTemplate('trackers');
-		$this->init();
+		$this->loadAndCacheFixture();
+		$this->switchUser(FORGE_ADMIN_USERNAME);
+		$this->gotoProject('ProjectA');
 
 		// Testing extra-fields
 		$this->click("link=Tracker");

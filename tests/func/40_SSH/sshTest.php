@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (C) 2014 Roland Mas
+ * Copyright (C) 2015  Inria (Sylvain Beucler)
  *
  * This file is part of FusionForge.
  *
@@ -23,9 +24,13 @@ require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
 
 class SSHTest extends FForge_SeleniumTestCase
 {
+	// Needs to be member of a project
+	public $fixture = 'projecta';
+
 	function testSSH()
 	{
-		$this->init();
+		$this->loadAndCacheFixture();
+		$this->switchUser(FORGE_ADMIN_USERNAME);
 
 		$this->uploadSshKey();
 
@@ -44,19 +49,4 @@ class SSHTest extends FForge_SeleniumTestCase
 			system("echo 'End of SSH run' 1>&2", $ret);
 		}
 	}
-
-	/**
-	 * Method that is called after Selenium actions.
-	 *
-	 * @param  string $action
-	 */
-	protected function defaultAssertions($action)
-	{
-		if ($action == 'waitForPageToLoad') {
-			$this->assertTrue($this->isElementPresent("//h1")
-					  || $this->isElementPresent("//.[@class='page_footer']"));
-		}
-	}
-
 }
-?>

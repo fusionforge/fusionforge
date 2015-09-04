@@ -3,6 +3,7 @@
  * Copyright 2010-2011, Roland Mas
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * Copyright 2013-2014, Franck Villaume - TrivialDev
+ * Copyright (C) 2015  Inria (Sylvain Beucler)
  *
  * This file is part of FusionForge.
  *
@@ -25,9 +26,13 @@ require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
 
 class RBAC extends FForge_SeleniumTestCase
 {
+	public $fixture = 'projecta';
+
 	function testAnonymousProjectReadAccess()
 	{
-		$this->init();
+		$this->loadAndCacheFixture();
+		$this->switchUser(FORGE_ADMIN_USERNAME);
+		$this->gotoProject('ProjectA');
 
 		$this->click("link=Admin");
 		$this->waitForPageToLoad("30000");
@@ -52,7 +57,8 @@ class RBAC extends FForge_SeleniumTestCase
 
 	function testGlobalRolesAndPermissions()
 	{
-		$this->login(FORGE_ADMIN_USERNAME);
+		$this->loadAndCacheFixture();
+		$this->switchUser(FORGE_ADMIN_USERNAME);
 
 		$this->click("link=Site Admin");
 		$this->waitForPageToLoad("30000");
@@ -257,7 +263,7 @@ class RBAC extends FForge_SeleniumTestCase
 
 	function testProjectRolesAndPermissions()
 	{
-		$this->populateStandardTemplate('all');
+		$this->loadAndCacheFixture();
 
 		$this->createUser ("bigboss") ;
 		$this->createUser ("guru") ;

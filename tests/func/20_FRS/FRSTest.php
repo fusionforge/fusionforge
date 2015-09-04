@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright, 2014, Franck Villaume - TrivialDev
+ * Copyright (C) 2015  Inria (Sylvain Beucler)
  *
  * This file is part of FusionForge.
  *
@@ -23,9 +24,13 @@ require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
 
 class CreateFRS extends FForge_SeleniumTestCase
 {
+	public $fixture = 'projecta';
+
 	function testCreateFRSPackage()
 	{
-		$this->init();
+		$this->loadAndCacheFixture();
+		$this->switchUser(FORGE_ADMIN_USERNAME);
+		$this->gotoProject('ProjectA');
 		$this->clickAndWait("link=Files");
 		$this->assertFalse($this->isTextPresent("Permission denied."));
 		$this->assertTrue($this->isTextPresent("Administration"));

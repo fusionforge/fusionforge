@@ -2,6 +2,7 @@
 /**
  * Copyright (C) 2008 Alain Peyrat <aljeux@free.fr>
  * Copyright (C) 2009 Alain Peyrat, Alcatel-Lucent
+ * Copyright (C) 2015  Inria (Sylvain Beucler)
  *
  * This file is part of FusionForge.
  *
@@ -46,11 +47,15 @@ require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
 
 class CreateForum extends FForge_SeleniumTestCase
 {
+	public $fixture = 'projecta';
+
 	function testSimplePost()
 	{
+		$this->loadAndCacheFixture();
+		$this->switchUser(FORGE_ADMIN_USERNAME);
+
 		// Create the first message (Message1/Text1).
-		$this->populateStandardTemplate('forums');
-		$this->init();
+		$this->gotoProject('ProjectA');
 		$this->clickAndWait("link=Forums");
 		$this->assertFalse($this->isTextPresent("Permission denied."));
 		$this->assertTrue($this->isTextPresent("open-discussion"));
@@ -80,8 +85,8 @@ class CreateForum extends FForge_SeleniumTestCase
 	 */
 	function testSimpleAccessWhenPrivate()
 	{
-		$this->populateStandardTemplate('forums');
-		$this->init();
+		$this->loadAndCacheFixture();
+		$this->switchUser(FORGE_ADMIN_USERNAME);
 
 		$this->open( ROOT.'/forum/message.php?msg_id=6' );
 		$this->waitForPageToLoad("30000");
@@ -103,8 +108,7 @@ class CreateForum extends FForge_SeleniumTestCase
 	 */
 	function testReplyToMessage()
 	{
-		$this->populateStandardTemplate('forums');
-		$this->init();
+		$this->loadAndCacheFixture();
 		$this->logout();
 
 		$this->gotoProject('ProjectA');
@@ -128,8 +132,10 @@ class CreateForum extends FForge_SeleniumTestCase
 	 * Verify that it is impossible to use name already used by a mailing list
 	 */
 	function testEmailAddressNotAlreadyUsed() {
-		$this->populateStandardTemplate('forums');
-		$this->init();
+		$this->loadAndCacheFixture();
+		$this->switchUser(FORGE_ADMIN_USERNAME);
+
+		$this->gotoProject('ProjectA');
 		$this->click("link=Mailing Lists");
 		$this->waitForPageToLoad("30000");
 		$this->click("//body//div[@id='maindiv']//a[.='Administration']");
@@ -157,8 +163,10 @@ class CreateForum extends FForge_SeleniumTestCase
 	function testHtmlFiltering()
 	{
 		// Create the first message (Message1/Text1).
-		$this->populateStandardTemplate('forums');
-		$this->init();
+		$this->loadAndCacheFixture();
+		$this->switchUser(FORGE_ADMIN_USERNAME);
+
+		$this->gotoProject('ProjectA');
 		$this->clickAndWait("link=Forums");
 		$this->assertFalse($this->isTextPresent("Permission denied."));
 		$this->assertTextPresent("open-discussion");
