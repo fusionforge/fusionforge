@@ -147,20 +147,5 @@ class multiSCMTest extends FForge_SeleniumTestCase
 		$this->assertTextPresent("Modifying file in Git");
 		$this->assertTextPresent("Adding file in Git");
 		$this->selectFrame("relative=top");
-}
-
-	/**
-	 * Method that is called after Selenium actions.
-	 *
-	 * @param  string $action
-	 */
-	protected function defaultAssertions($action)
-	{
-		if ($action == 'waitForPageToLoad') {
-			$this->assertTrue($this->isElementPresent("//h1")
-					  || $this->isElementPresent("//.[@class='page_footer']"));
-		}
 	}
-
 }
-?>

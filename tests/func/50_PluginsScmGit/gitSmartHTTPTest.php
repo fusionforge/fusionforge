@@ -162,19 +162,4 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 
 		system("rm -fr $t");
 	}
-
-	/**
-	 * Method that is called after Selenium actions.
-	 *
-	 * @param  string $action
-	 */
-	protected function defaultAssertions($action)
-	{
-		if ($action == 'waitForPageToLoad') {
-			$this->assertTrue($this->isElementPresent("//h1")
-					  || $this->isElementPresent("//.[@class='page_footer']"));
-		}
-	}
-
 }
-?>

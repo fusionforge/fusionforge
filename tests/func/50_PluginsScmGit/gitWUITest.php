@@ -94,19 +94,4 @@ class ScmGitWUITest extends FForge_SeleniumTestCase
 		$this->assertTextPresent("users/".FORGE_ADMIN_USERNAME.".git");
 		$this->selectFrame("relative=top");
 	}
-
-	/**
-	 * Method that is called after Selenium actions.
-	 *
-	 * @param  string $action
-	 */
-	protected function defaultAssertions($action)
-	{
-		if ($action == 'waitForPageToLoad') {
-			$this->assertTrue($this->isElementPresent("//h1")
-					  || $this->isElementPresent("//.[@class='page_footer']"));
-		}
-	}
-
 }
-?>
