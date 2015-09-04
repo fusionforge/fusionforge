@@ -24,18 +24,20 @@ require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
 class PluginMoinMoin extends FForge_SeleniumTestCase
 {
 	protected $alreadyActive = 0;
+	public $fixture = 'projecta';
 
 	function testMoinMoin()
 	{
 		$this->skip_on_rpm_installs();
 		$this->skip_on_centos();
 
+		$this->loadAndCacheFixture();
+
 		$this->changeConfig("[moinmoin]\nuse_frame=no\n");
 
 		$this->activatePlugin('moinmoin');
 
-		$this->populateStandardTemplate('empty');
-		$this->init();
+		$this->gotoProject('ProjectA');
 
 		$this->clickAndWait("link=Admin");
 		$this->clickAndWait("link=Tools");
@@ -62,19 +64,6 @@ Is that the Chattanooga choo choo?");
 		$this->gotoProject('ProjectA');
 		$this->clickAndWait("link=MoinMoinWiki");
 		$this->assertTrue($this->isTextPresent("Chattanooga"));
-	}
-
-	/**
-	 * Method that is called after Selenium actions.
-	 *
-	 * @param  string $action
-	 */
-	protected function defaultAssertions($action)
-	{
-		if ($action == 'waitForPageToLoad') {
-			$this->assertTrue($this->isElementPresent("//h1")
-					  || $this->isElementPresent("//div[@id='footer']"));
-		}
 	}
 }
 

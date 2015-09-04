@@ -23,13 +23,15 @@ require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
 
 class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 {
+	public $fixture = 'projecta';
+
 	function testScmGitSmartHTTP()
 	{
+		$this->loadAndCacheFixture();
+
 		$this->changeConfig("[core]\nuse_ssl = no\n");
 
 		$this->activatePlugin('scmgit');
-		$this->populateStandardTemplate('empty');
-		$this->init();
 
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");

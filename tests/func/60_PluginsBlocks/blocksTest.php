@@ -46,13 +46,15 @@ require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
 class UserBlocks extends FForge_SeleniumTestCase
 {
 	protected $alreadyActive = 0;
+	public $fixture = 'projecta';
 
 	function testUserBlocks()
 	{
+		$this->loadAndCacheFixture();
+
 		$this->_activateBlocksPlugin();
 
-		$this->populateStandardTemplate('empty');
-		$this->init();
+		$this->gotoProject('ProjectA');
 
 		$this->click("link=Admin");
 		$this->waitForPageToLoad("30000");

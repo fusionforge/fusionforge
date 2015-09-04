@@ -23,11 +23,13 @@ require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
 
 class ScmGitSSHTest extends FForge_SeleniumTestCase
 {
+	public $fixture = 'projecta';
+
 	function testScmGitSSH()
 	{
+		$this->loadAndCacheFixture();
+
 		$this->activatePlugin('scmgit');
-		$this->populateStandardTemplate('empty');
-		$this->init();
 
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");

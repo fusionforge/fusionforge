@@ -23,11 +23,13 @@ require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
 
 class ScmGitWUITest extends FForge_SeleniumTestCase
 {
+	public $fixture = 'projecta';
+
 	function testScmGitWUI()
 	{
+		$this->loadAndCacheFixture();
+
 		$this->activatePlugin('scmgit');
-		$this->populateStandardTemplate('empty');
-		$this->init();
 
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");

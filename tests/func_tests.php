@@ -23,7 +23,6 @@ class AllTests
 		$suite = new PHPUnit_Framework_TestSuite('PHPUnit');
 
 		// Selenium tests
-		if (!defined('DB_INIT_CMD')) { define('PROJECTA','true'); }
 		if (getenv('TESTGLOB') != FALSE)
 		  $files = glob(getenv('TESTGLOB'));
 		else
