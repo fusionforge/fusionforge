@@ -172,7 +172,7 @@ fi
 # Run tests
 retcode=0
 echo "Run phpunit test on $HOST"
-echo "export JOB_NAME=$JOB_URL" | ssh root@$HOST tee -a .bashrc
+echo "export JOB_URL=$JOB_URL" | ssh root@$HOST tee -a .bashrc
 #ssh root@$HOST "TESTGLOB='func/50_PluginsScmBzr/*' /usr/src/fusionforge/tests/func_tests-xvnc.sh $INSTALL_METHOD/$INSTALL_OS" || retcode=$?
 ssh root@$HOST "/usr/src/fusionforge/tests/func_tests-xvnc.sh $INSTALL_METHOD/$INSTALL_OS $*" || retcode=$?
 
