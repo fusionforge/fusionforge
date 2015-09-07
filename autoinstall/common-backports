@@ -133,11 +133,8 @@ function backports_rpm {
 	#      - http://download.fedoraproject.org/pub/epel/7/x86_64/repoview/epel-release.html
 	if ! rpm -q epel-release >/dev/null; then
 	    case $os_version in
-		6)
-		    rpm -ivh http://rpmfind.net/linux/epel/6/i386/epel-release-6-8.noarch.rpm
-		    ;;
 		7)
-		    rpm -ivh http://rpmfind.net/linux/epel/7/x86_64/e/epel-release-7-5.noarch.rpm
+		    rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 		    ;;
 	    esac
 	fi

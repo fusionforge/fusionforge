@@ -1,5 +1,5 @@
 #!/bin/sh
-# syntax and unit tests (i.e. not func/)
+# Run the syntax and unit tests (i.e. not func/)
 . $(dirname $0)/common-functions
 
 set -ex

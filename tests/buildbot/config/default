@@ -4,14 +4,11 @@
 # be sourced in a shell
 # So it should only be stuffs like VAR=value
 
-# Do we keep vm at end of tests
+# Do we reuse VMs or destroy&recreate them?
 KEEPVM=false
-
-# VM Engine currently supported lxc, openvz TODO kvm, virtualbox,...
-VMENGINE=lxc
 
 # LXC post-install
 # Debian security mirror
 DEBMIRRORSEC=http://security.debian.org/
 # Redhat mirrors
-EPEL_REPO=http://download.fedoraproject.org/pub/epel
+#EPEL_REPO=http://download.fedoraproject.org/pub/epel

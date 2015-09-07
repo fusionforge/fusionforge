@@ -1,85 +1,32 @@
 #! /bin/sh
-get_config()
-{
-	echo "Read config from tests/config/default"
-	. $(dirname $0)/config/default
-	if [ -f $(dirname $0)/config/`hostname` ]
-	then
-		echo "Read config from tests/config/`hostname`"
-		 . $(dirname $0)/config/`hostname` 
-	fi
-	if [ ! -z "$1" ]
-	then
-		echo "Set HOST to $1"
-        	export HOST="$1"
-	fi
+get_config() {
+    echo "Read config from tests/config/default"
+    . $(dirname $0)/config/default
+    if [ -f $(dirname $0)/config/$(hostname) ]; then
+	echo "Read config from tests/config/$(hostname)"
+	. $(dirname $0)/config/$(hostname)
+    fi
+    if [ ! -z "$1" ]
+    then
+	echo "Set HOST to $1"
+        export HOST="$1"
+    fi
 }
 
-prepare_workspace()
-{
-	export CURDIR=`pwd`
-	WORKDIR=$(cd $CURDIR/..; pwd)
-	export WORKSPACE=${WORKSPACE:-$WORKDIR}
-	export RPM_TMP=$WORKDIR/tmp
-	export BUILDRESULT=$WORKSPACE/build/packages
-	mkdir -p $BUILDRESULT
-	export BUILDERDIR=${BUILDERDIR:-$HOME/builder}
-	# Create place to store built packages
-	[ ! -d $WORKSPACE/packages ] || mkdir -p $WORKSPACE/packages
-	# Erase reports
-	[ ! -d $WORKSPACE/reports ] || rm -fr $WORKSPACE/reports
-	mkdir -p $WORKSPACE/reports/coverage
-	# Erase apidocs
-	[ ! -d $WORKSPACE/apidocs ] || rm -fr $WORKSPACE/apidocs
-	mkdir -p $WORKSPACE/apidocs
-}
-
-setup_epel_repo()
-{
-if [ -z "$HOST" ] ; then  echo "HOST undefined" ;exit 1; fi
-# EPEL REPO
-if [ ! -z "$EPEL_REPO" ] ; then
-        echo "Installing specific EPEL REPO $EPEL_REPO"
-	ssh root@$HOST "cat > /etc/yum.repos.d/epel.repo" <<-EOF
-# Name: EPEL RPM Repository for Red Hat Enterprise \$releasever - epel
-# URL: http://fedoraproject.org/wiki/EPEL
-[epel]
-name=Extra Packages for Enterprise Linux \$releasever - \$basearch 
-baseurl=$EPEL_REPO/\$releasever/\$basearch
-#mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=epel\$releasever&arch=\$basearch
-failovermethod=priority
-enabled=0
-gpgcheck=0
-EOF
-else
-        echo "Installing standard EPEL REPO"
-	ssh root@$HOST "cat > /etc/yum.repos.d/epel.repo" <<-EOF
-# Name: EPEL RPM Repository for Red Hat Enterprise \$releasever - epel
-# URL: http://fedoraproject.org/wiki/EPEL
-[epel]
-name=Extra Packages for Enterprise Linux \$releasever - \$basearch 
-#baseurl=http://download.fedoraproject.org/pub/epel/\$releasever/\$basearch
-mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=epel\$releasever&arch=\$basearch
-failovermethod=priority
-enabled=0
-gpgcheck=0
-EOF
-fi
-}
-
-setup_epel_testing_repo()
-{
-if [ -z "$HOST" ] ; then  echo "HOST undefined" ;exit 1; fi
-# EPEL Testing REPO
-echo "Installing EPEL Testing REPO"
-ssh root@$HOST "cat > /etc/yum.repos.d/epel-testing.repo" <<-EOF
-# Name: EPEL RPM Repository for Red Hat Enterprise Testing \$releasever - epel
-# URL: http://fedoraproject.org/wiki/EPEL
-[epel-testing]
-name=Extra Packages for Enterprise Linux Testing \$releasever - \$basearch 
-mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=testing-epel\$releasever&arch=\$basearch
-failovermethod=priority
-enabled=0
-gpgcheck=0
-EOF
+prepare_workspace() {
+    export CURDIR=`pwd`
+    WORKDIR=$(cd $CURDIR/..; pwd)
+    export WORKSPACE=${WORKSPACE:-$WORKDIR}
+    export RPM_TMP=$WORKDIR/tmp
+    export BUILDRESULT=$WORKSPACE/build/packages
+    mkdir -p $BUILDRESULT
+    export BUILDERDIR=${BUILDERDIR:-$HOME/builder}
+    # Create place to store built packages
+    [ ! -d $WORKSPACE/packages ] || mkdir -p $WORKSPACE/packages
+    # Erase reports
+    [ ! -d $WORKSPACE/reports ] || rm -fr $WORKSPACE/reports
+    mkdir -p $WORKSPACE/reports/coverage
+    # Erase apidocs
+    [ ! -d $WORKSPACE/apidocs ] || rm -fr $WORKSPACE/apidocs
+    mkdir -p $WORKSPACE/apidocs
 }

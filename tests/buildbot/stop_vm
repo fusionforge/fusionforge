@@ -1,5 +1,0 @@
-#! /bin/sh
-
-HOST=$1
-
-sudo /usr/local/sbin/lxc-wrapper stop $(basename $HOST .local)

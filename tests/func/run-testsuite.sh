@@ -81,8 +81,8 @@ patch -N /usr/share/*/PHPUnit/Extensions/SeleniumTestCase.php <<'EOF' || true
 EOF
 
 # Reset the database to post-install state
-$(dirname $0)/../tests/func/db_reload.sh --reset
-$(dirname $0)/../tests/func/db_reload.sh --backup
+$(dirname $0)/db_reload.sh --reset
+$(dirname $0)/db_reload.sh --backup
 
 # Now, start the functionnal test suite using phpunit and selenium
-$(dirname $0)/../tests/func/phpunit-selenium.sh $@
+$(dirname $0)/phpunit-selenium.sh $@

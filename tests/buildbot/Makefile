@@ -1,6 +1,3 @@
--include ../config/default
--include ../config/$(shell hostname)
-
 default: checkdepends installtemplate
 
 help: 
