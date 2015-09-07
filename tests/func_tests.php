@@ -21,9 +21,9 @@ class AllTests
 
 		// Selenium tests
 		if (getenv('TESTGLOB') != FALSE)
-		  $files = glob(getenv('TESTGLOB'));
+			$files = glob(dirname(__FILE__).'/'.getenv('TESTGLOB'));
 		else
-		  $files = glob('func/*/*Test.php');
+			$files = glob(dirname(__FILE__).'/func/*/*Test.php');
 		natsort($files);
 		$suite->addTestFiles($files);
 

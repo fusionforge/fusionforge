@@ -62,6 +62,3 @@ fi
     fi
     make post-install
 )
-
-# Dump clean DB
-if [ ! -e /root/dump ]; then $(dirname $0)/../tests/func/db_reload.sh --backup; fi

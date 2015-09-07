@@ -86,7 +86,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	 */
 	public function loadCachedFixture() {
 		$this->fixture_loaded = false;
-		$base_cmd = dirname(__FILE__)."/db_reload.sh";
+		$base_cmd = dirname(__FILE__)."/fixtures.sh";
 		$ret = 0;
 		passthru("$base_cmd --exists {$this->fixture}", $ret); ob_flush();
 		if ($ret != 0) {
@@ -111,7 +111,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	 */
 	public function loadAndCacheFixture() {
 		if (!$this->fixture_loaded) {
-			$base_cmd = dirname(__FILE__)."/db_reload.sh";
+			$base_cmd = dirname(__FILE__)."/fixtures.sh";
 			$ret = 0;
 			passthru("$base_cmd base", $ret); ob_flush();
 
@@ -125,8 +125,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 
 	
 	public function changeConfig($config) {
-		$forge_get_config = RUN_JOB_PATH."/forge_get_config";
-		$config_path = rtrim(`$forge_get_config config_path`);
+		$config_path = rtrim(`forge_get_config config_path`);
 		$classname = get_class($this);
 
 		$contents = "";
@@ -189,12 +188,12 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 
 	public function cron($cmd)
 	{
-		$this->runCommand(RUN_JOB_PATH."/forge_run_job $cmd");
+		$this->runCommand("forge_run_job $cmd");
 	}
 
 	public function cron_for_plugin($cmd, $plugin)
 	{
-		$this->runCommand(RUN_JOB_PATH."/forge_run_plugin_job $plugin $cmd");
+		$this->runCommand("forge_run_plugin_job $plugin $cmd");
 	}
 
     /**
@@ -202,7 +201,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
      */
 	public function waitSystasks()
 	{
-		$this->runCommand(RUN_JOB_PATH.'/systasks_wait_until_empty.php');
+		$this->runCommand(dirname(__FILE__).'/../../src/bin/systasks_wait_until_empty.php');
 	}
 
 	public function init() {

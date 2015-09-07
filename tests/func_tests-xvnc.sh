@@ -2,9 +2,9 @@
 # Wrapper to run the testsuite in a headless X server
 
 if [ -z "$1" ]; then
-    echo "$(basename $0): run a program in a headless X server"
-    echo "Usage: $0 program [params]"
-    echo "Ex: $0 $(dirname $0)/run-testsuite.sh deb/debian"
+    echo "$(basename $0): run the testsuite in a headless X server"
+    echo "Usage: $0 [params]"
+    echo "Ex: $0 deb/debian"
     exit 1
 fi
 
@@ -34,7 +34,7 @@ password
 EOF
 
 vncserver :1
-DISPLAY=:1 $@
+DISPLAY=:1 $(dirname $0)/func_tests.sh $@
 retcode=$?
 vncserver -kill :1 || retcode=$?
 

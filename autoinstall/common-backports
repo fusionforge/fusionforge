@@ -129,18 +129,8 @@ function backports_rpm {
     os_version=$(rpm -q --qf "%{VERSION}" $(rpm -q --whatprovides redhat-release))
 
     if ! rpm -q fedora-release >/dev/null; then
-	# EPEL - http://download.fedoraproject.org/pub/epel/6/i386/repoview/epel-release.html
-	#      - http://download.fedoraproject.org/pub/epel/7/x86_64/repoview/epel-release.html
-	if ! rpm -q epel-release >/dev/null; then
-	    case $os_version in
-		6)
-		    rpm -ivh http://rpmfind.net/linux/epel/6/i386/epel-release-6-8.noarch.rpm
-		    ;;
-		7)
-		    rpm -ivh http://rpmfind.net/linux/epel/7/x86_64/e/epel-release-7-5.noarch.rpm
-		    ;;
-	    esac
-	fi
+	# Enable EPEL
+	yum install -y epel-release
 
 	# Prepare manual backports
 	cat <<'EOF' > /etc/yum.repos.d/fedora-source.repo

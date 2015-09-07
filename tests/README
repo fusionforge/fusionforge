@@ -1,3 +1,5 @@
 - code: static code checks
 - unit: unit tests
 - func: functional tests using Selenium
+
+- buildbot: run the testsuite with Jenkins and LXC containers
