@@ -124,7 +124,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	}
 
 	
-	public function changeConfig($text) {
+	public function changeConfig($config) {
 		$forge_get_config = RUN_JOB_PATH."/forge_get_config";
 		$config_path = rtrim(`$forge_get_config config_path`);
 		$classname = get_class($this);
