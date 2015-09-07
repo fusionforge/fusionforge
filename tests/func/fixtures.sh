@@ -1,9 +1,6 @@
 #!/bin/bash
-
 # Reinitialize the system to base or fixture'd state (database, SCM
 # repos, plugins data...) to pass new tests
-# TODO: rename me
-
 
 is_db_up () {
     # 'service postgresql status' is not reliable enough

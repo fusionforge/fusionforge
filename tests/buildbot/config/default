@@ -1,8 +1,4 @@
 # -*- shell-script -*-
-# In this file you can find vars that are useable 
-# both as an include in a Makefile or
-# be sourced in a shell
-# So it should only be stuffs like VAR=value
 
 # Do we reuse VMs or destroy&recreate them?
 KEEPVM=false
@@ -10,5 +6,5 @@ KEEPVM=false
 # LXC post-install
 # Debian security mirror
 DEBMIRRORSEC=http://security.debian.org/
-# Redhat mirrors
+# Fedora EPEL mirror
 #EPEL_REPO=http://download.fedoraproject.org/pub/epel
