@@ -179,11 +179,15 @@ echo "Running PHPunit tests"
 retcode=0
 set -x
 cd $(dirname $0)/
-if [ "$*" = "" ] ; then
-    phpunit --verbose --debug --stop-on-failure --log-junit $SELENIUM_RC_DIR/phpunit-selenium.xml func_tests.php || retcode=$?
-else
-    phpunit --verbose --debug --stop-on-failure --log-junit $SELENIUM_RC_DIR/phpunit-selenium.xml "$@" || retcode=$?
+# Override test through parameter, useful when launching tests through buildbot/*.sh (e.g. SSH)
+# Use the TESTGLOB environment variable otherwise
+testname="func_tests.php"
+if [ -n "$1" ] ; then
+    testname="$1"
 fi
+
+phpunit --verbose --debug --stop-on-failure --log-junit $SELENIUM_RC_DIR/phpunit-selenium.xml $testname || retcode=$?
+
 set +x
 echo "phpunit returned with code $retcode"
 
