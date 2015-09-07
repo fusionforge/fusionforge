@@ -17,16 +17,9 @@ prepare_workspace() {
     export CURDIR=`pwd`
     WORKDIR=$(cd $CURDIR/..; pwd)
     export WORKSPACE=${WORKSPACE:-$WORKDIR}
-    export RPM_TMP=$WORKDIR/tmp
-    export BUILDRESULT=$WORKSPACE/build/packages
-    mkdir -p $BUILDRESULT
-    export BUILDERDIR=${BUILDERDIR:-$HOME/builder}
     # Create place to store built packages
     [ ! -d $WORKSPACE/packages ] || mkdir -p $WORKSPACE/packages
     # Erase reports
     [ ! -d $WORKSPACE/reports ] || rm -fr $WORKSPACE/reports
     mkdir -p $WORKSPACE/reports/coverage
-    # Erase apidocs
-    [ ! -d $WORKSPACE/apidocs ] || rm -fr $WORKSPACE/apidocs
-    mkdir -p $WORKSPACE/apidocs
 }
