@@ -1,5 +1,6 @@
 #!/bin/bash
-# Run FusionForge's PHPUnit+Selenium testsuite
+# Install and start Selenium in background, pass configuration, and
+# run PHPUnit functional testsuite
 #
 # Copyright (C) 2011  Olivier Berger - Institut Telecom
 # Copyright (C) 2014, 2015  Inria (Sylvain Beucler)
