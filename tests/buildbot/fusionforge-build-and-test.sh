@@ -69,8 +69,7 @@ gpgcheck=0
 EOF
     else
         echo "Installing standard EPEL REPO"
-	ssh root@$HOST rpm -ivh \
-	    https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm || true
+	ssh root@$HOST yum install -y epel-release
     fi
 }
 
