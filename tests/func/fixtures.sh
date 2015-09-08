@@ -151,6 +151,7 @@ fi
 
 # Else, restore clean state
 
+service fusionforge-systasksd stop
 stop_apache
 stop_database --force
 
@@ -191,13 +192,11 @@ else
     exit 2
 fi
 
-start_database
-start_apache
-
 if [ -x /usr/sbin/nscd ]; then
     echo "Flushing/restarting nscd"
     nscd -i passwd && nscd -i group
 fi
 
-# We may have changed plugins.plugin_id, need to reload the systasksd
-service fusionforge-systasksd restart
+start_database
+start_apache
+service fusionforge-systasksd start
