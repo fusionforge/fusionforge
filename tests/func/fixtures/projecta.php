@@ -21,3 +21,7 @@
 
 $this->populateStandardTemplate('all');
 $this->createProject('ProjectA');
+
+// wait for Apache to properly reload, as it might interferer with
+// stop/start during fixture backup
+$this->waitSystasks();
