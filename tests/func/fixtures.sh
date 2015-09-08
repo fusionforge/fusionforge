@@ -17,6 +17,10 @@ is_db_down () {
 }
 
 stop_apache () {
+    if [ "$1" = "--force" ]; then
+	# We don't care about data integrity, we're resetting it
+	killall -9 $(forge_get_config apache_service)
+    fi
     echo "Stopping apache"
     service $(forge_get_config apache_service) stop
 }
@@ -152,7 +156,7 @@ fi
 # Else, restore clean state
 
 service fusionforge-systasksd stop
-stop_apache
+stop_apache --force
 stop_database --force
 
 # SCM
