@@ -2,6 +2,11 @@
   "provisioners": [
     {
       "type": "file",
+      "source": "file/Desktop",
+      "destination": "/root/"
+    },
+    {
+      "type": "file",
       "source": "file/bashrc-rpm",
       "destination": "/root/.bashrc"
     },
