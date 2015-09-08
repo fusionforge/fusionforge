@@ -2,6 +2,11 @@
   "provisioners": [
     {
       "type": "file",
+      "source": "file/Desktop",
+      "destination": "/root/"
+    },
+    {
+      "type": "file",
       "source": "file/bashrc-rpm",
       "destination": "/root/.bashrc"
     },
@@ -27,9 +32,9 @@
       "disk_size": 10140,
       "guest_os_type": "RedHat_64",
       "http_directory": "http",
-      "iso_checksum": "0d9dc37b5dd4befa1c440d2174e88a87",
-      "iso_checksum_type": "md5",
-      "iso_url": "http://yum.singlehop.com/CentOS/6.5/isos/x86_64/CentOS-6.5-x86_64-minimal.iso",
+      "iso_url": "http://ftp.ciril.fr/pub/linux/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1503-01.iso",
+      "iso_checksum": "7cf1ac8da13f54d6be41e3ccf228dc5bb35792f515642755ff4780d5714d4278",
+      "iso_checksum_type": "sha256",
       "ssh_username": "root",
       "ssh_password": "vagrant",
       "ssh_port": 22,
@@ -51,13 +56,13 @@
           "1"
         ]
       ],
-      "vm_name": "fusionforge-dev-centos"
+      "vm_name": "fusionforge-dev-centos7"
     }
   ],
   "post-processors": [
     {
       "type": "vagrant",
-      "output": "fusionforge-dev-centos.box"
+      "output": "fusionforge-dev-centos7.box"
     }
   ]
 }

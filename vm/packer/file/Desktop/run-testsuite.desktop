@@ -1,6 +1,6 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Run functional tests
-Exec=sh -c "/usr/src/fusionforge/tests/func_tests.sh ; echo Press Enter... ; read i"
+Exec=sh -c "/usr/src/fusionforge/tests/func_tests.sh deb/debian; echo Press Enter... ; read i"
 Terminal=true
 Type=Application

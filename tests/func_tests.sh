@@ -1,5 +1,6 @@
 #!/bin/bash
-# Run FusionForge's PHPUnit+Selenium testsuite
+# Install and start Selenium in background, pass configuration, and
+# run PHPUnit functional testsuite
 #
 # Copyright (C) 2011  Olivier Berger - Institut Telecom
 # Copyright (C) 2014, 2015  Inria (Sylvain Beucler)
@@ -113,7 +114,7 @@ FORGE_HOME=$(cd $(dirname $0)/..; pwd)
 SELENIUM_RC_DIR=/var/log
 SELENIUM_RC_HOST=$HOST
 # URL for screenshots - cf. http://buildbot.fusionforge.org/env-vars.html
-SELENIUM_RC_URL=${JOB_URL}/ws/method/${INSTALL_METHOD}/os/${INSTALL_OS}/reports/
+SELENIUM_RC_URL=${JOB_URL}ws/reports
 # config.php will be loaded inside the functionnal test suite with
 # require_once, in SeleniumForge.php
 export SELENIUM_RC_DIR SELENIUM_RC_URL SELENIUM_RC_HOST HOST

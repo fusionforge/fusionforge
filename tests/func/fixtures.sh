@@ -17,6 +17,10 @@ is_db_down () {
 }
 
 stop_apache () {
+    if [ "$1" = "--force" ]; then
+	# We don't care about data integrity, we're resetting it
+	killall -9 $(forge_get_config apache_service)
+    fi
     echo "Stopping apache"
     service $(forge_get_config apache_service) stop
 }
@@ -151,7 +155,8 @@ fi
 
 # Else, restore clean state
 
-stop_apache
+service fusionforge-systasksd stop
+stop_apache --force
 stop_database --force
 
 # SCM
@@ -191,13 +196,11 @@ else
     exit 2
 fi
 
-start_database
-start_apache
-
 if [ -x /usr/sbin/nscd ]; then
     echo "Flushing/restarting nscd"
     nscd -i passwd && nscd -i group
 fi
 
-# We may have changed plugins.plugin_id, need to reload the systasksd
-service fusionforge-systasksd restart
+start_database
+start_apache
+service fusionforge-systasksd start
