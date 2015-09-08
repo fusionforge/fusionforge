@@ -1,3 +1,12 @@
+fusionforge (6.0.2+20150908-1) unstable; urgency=medium
+
+  * New upstream snapshot following the 6.0 stable branch
+  * fusionforge-web: add dependency to 'openssl' for the hypothetical case
+    somebody installs fusionforge without postgresql, postfix nor unoconv
+    (closes: #798363)
+
+ -- Sylvain Beucler <beuc@debian.org>  Tue, 08 Sep 2015 16:50:55 +0200
+
 fusionforge (6.0.2+20150901-1) unstable; urgency=medium
 
   * New upstream snapshot following the 6.0 stable branch
