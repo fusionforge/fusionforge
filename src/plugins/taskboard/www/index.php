@@ -101,9 +101,18 @@ $tech_box = html_build_select_box_from_arrays($tech_id_arr, $tech_name_arr, '_as
 // end of the stolen code
 
 $release_box = '';
+$release_id = getIntFromRequest('_release', '0');
 if ($taskboard->getReleaseField()) {
 	$release_field_alias = $taskboard->getReleaseField();
-	$current_release = $taskboard->getCurrentRelease();
+
+	if( $release_id ) {
+		// use release, specified with URL
+		$current_release = new TaskBoardRelease( $taskboard, $release_id );
+	} else {
+		// use current release, according to the dates
+		$current_release = $taskboard->getCurrentRelease();
+	}
+
 	$current_release_title = '';
 	if ($current_release ) {
 		$current_release_title = $current_release->getTitle();
@@ -122,20 +131,37 @@ if ($taskboard->getReleaseField()) {
 		$release_box=html_build_select_box_from_arrays ($release_id_arr,$release_name_arr,'_release',$current_release_title, false, 'none', true);
 	}
 }
+
+$colspan=0;
+if ($release_box) {
+	$colspan = 2;
+	if ( forge_check_perm('tracker_admin', $group_id ) ) {
+		$colspan = 3;
+	}
+}
 ?>
 
 
 <div>
 	<form>
-		<table cellspacing="0">
+		<table cellspacing="0" width="100%">
 			<tr valign="middle">
-				<td>
-					<?php echo _('Assignee')._(': '). $tech_box ; ?>
+				<td width="10%">
+					<?php echo _('Assignee')._(': '); ?>
 				</td>
+				<td width="10%">
+					<?php echo $tech_box ; ?>
+				</td>
+				<td colspan="<?php echo $colspan ?>">
+				</td>
+			</tr>
 			<tr>
 		<?php if ($release_box) { ?>
 				<td>
-					<?php echo _('Release')._(': ').$release_box; ?>
+					<?php echo _('Release'); ?>
+				</td>
+				<td>
+					<?php echo $release_box; ?>
 				</td>
 				<?php if ( forge_check_perm('tracker_admin', $group_id ) ) { ?>
 				<td style="vertical-align: middle;">
@@ -147,6 +173,11 @@ if ($taskboard->getReleaseField()) {
 					</div>
 				</td>
 				<?php } ?>
+				<td>
+					<div id="taskboard-burndown-div">
+						<button id="taskboard-burndown-btn"><?php echo _('Burndown chart'); ?></button>
+					</div>
+				</td>
 		<?php } ?>
 
 			</tr>
@@ -253,6 +284,11 @@ jQuery( document ).ready(function( $ ) {
 
 	jQuery('select[name="_assigned_to"], select[name="_release"]').change(function () {
 		loadTaskboard( <?php echo $group_id ?> );
+	});
+
+	jQuery('#taskboard-burndown-btn').click( function ( e ) {
+		window.location = '<?php echo util_make_url ('/plugins/'.$pluginTaskboard->name.'/releases/?view=burndown&group_id='. $group_id . '&release_id=' ); ?>' + jQuery('#taskboard-release-id').val();
+		e.preventDefault();
 	});
 
 	<?php if( user_getid()) { ?>

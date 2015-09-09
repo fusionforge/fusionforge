@@ -64,8 +64,10 @@ _('Agile TaskBoard: Supports Scrum and Kanban methodologies.');
 						$params['ADMIN'][] = '/plugins/'.$this->name.'/admin/?&group_id='.$group_id;
 					}
 				}
-				if($params['toptab'] == $this->name) {
-					$params['selected'] = array_search($this->text, $params['TITLES']);
+				if(isset($params['toptab'])){
+					if($params['toptab'] == $this->name) {
+						$params['selected'] = array_search($this->text, $params['TITLES']);
+					}
 				}
 			}
 		}
