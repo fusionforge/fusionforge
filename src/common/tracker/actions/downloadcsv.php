@@ -23,7 +23,7 @@ require_once $gfcommon.'tracker/ArtifactFactory.class.php';
 global $ath;
 
 $headers = getIntFromRequest('headers');
-$sep = getStringFromRequest('sep', ',');
+$sep = getFilteredStringFromRequest('sep', '/^[,;]$/', ',');
 
 $date = date('Y-m-d');
 

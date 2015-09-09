@@ -62,7 +62,7 @@ if (session_loggedin()) {
 
 $headers = getIntFromRequest('headers', $default['headers']);
 $full = getIntFromRequest('full', $default['full']);
-$sep = getStringFromRequest('sep', $default['sep']);
+$sep = getFilteredStringFromRequest('sep', '/^[,;]$/', $default['sep']);
 
 if (session_loggedin()) {
 	if ( ($sep !== $default['sep']) || ($headers !== $default['headers']) ) {
@@ -73,7 +73,7 @@ if (session_loggedin()) {
 
 $format = $full ? "Full CSV" : "Normal CSV";
 $format .= $headers ? ' with headers' : ' without headers';
-$format .= " using '$sep' as separator.";
+$format .= " using '".htmlentities($sep)."' as separator.";
 
 echo html_e('p', array(), _('This page allows you to export or import all the tasks using a CSV (<a href="http://en.wikipedia.org/wiki/Comma-separated_values">Comma Separated Values</a>) File. This format can be used to view tasks using Microsoft Excel.'));
 echo html_e('h2', array(), _('Export tasks as a CSV file'));

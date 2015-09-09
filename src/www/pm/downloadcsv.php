@@ -84,7 +84,7 @@ require_once $gfcommon.'pm/ProjectTaskFactory.class.php';
 
 $headers = getIntFromRequest('headers');
 $full = getIntFromRequest('full');
-$sep = getStringFromRequest('sep', ',');
+$sep = getFilteredStringFromRequest('sep', '/^[,;]$/', ',');
 
 $date = date('Y-m-d');
 
