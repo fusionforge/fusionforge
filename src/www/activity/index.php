@@ -202,12 +202,12 @@ echo html_e('input', array('type' => 'hidden', 'name' => 'group_id', 'value' => 
 
 <div id="activity_startdate" >
 <div id="activity_label_startdate"><?php echo _('Start Date')._(':'); ?></div>
-<input name="start_date" value="<?php echo $rendered_begin; ?>" size="10" maxlength="10" />
+<input name="start_date" value="<?php echo util_html_encode($rendered_begin) ?>" size="10" maxlength="10" />
 </div>
 
 <div id="activity_enddate" >
 <div id="activity_label_enddate"><?php echo _('End Date')._(':'); ?></div>
-<input name="end_date" value="<?php echo $rendered_end; ?>" size="10" maxlength="10" />
+<input name="end_date" value="<?php echo util_html_encode($rendered_end) ?>" size="10" maxlength="10" />
 </div>
 
 <div id="activity_submit" >
@@ -389,6 +389,5 @@ echo $HTML->closeForm();
 	echo '</div>';
 	echo '</div>';
 }
-
 
 site_project_footer();
