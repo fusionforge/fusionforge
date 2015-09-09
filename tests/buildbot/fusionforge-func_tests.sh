@@ -15,27 +15,22 @@ start_vm() {
 	# Destroy the VM if found
 	destroy_vm $1 || true
     fi
-
     sudo /usr/local/sbin/lxc-wrapper start $(basename $HOST .local)
-    
+
     echo "Waiting for $HOST to come up..."
     i=0
-    while [ $i -lt 10 ] && ! test_host ; do
+    # Done in this script rather than lxc-wrapper, because we have the SSH key
+    while [ $i -lt 10 ] && ! ssh -o 'StrictHostKeyChecking=no' root@$HOST uname -a >/dev/null; do
 	sleep 10
 	i=$(($i+1))
 	echo -n .
     done
-    
-    if test_host ; then
+    if [ $i -lt 10 ] ; then
 	echo " OK"
     else
 	echo " FAIL"
 	exit 1
     fi
-}
-
-test_host () {
-    ssh -o 'StrictHostKeyChecking=no' "root@$HOST" uname -a >/dev/null 2>&1
 }
 
 stop_vm() {

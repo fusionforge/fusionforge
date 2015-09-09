@@ -3,7 +3,7 @@ default: checkdepends installtemplate
 help: 
 	@echo "read the Makefile to see available targets"
 
-checkdepends: /usr/bin/lxc-start /lib/bridge-utils /usr/bin/netmask /usr/sbin/debootstrap /usr/sbin/rinse /usr/bin/yum /usr/sbin/tunctl
+checkdepends: /usr/bin/lxc-start /lib/bridge-utils /usr/bin/netmask /usr/sbin/debootstrap /usr/sbin/rinse /usr/bin/yum
 
 /usr/bin/lxc-start:
 	@[ -f $@ ] || apt-get install lxc
@@ -22,9 +22,6 @@ checkdepends: /usr/bin/lxc-start /lib/bridge-utils /usr/bin/netmask /usr/sbin/de
 
 /usr/bin/yum:
 	@[ -f $@ ] || apt-get install yum
-
-/usr/sbin/tunctl:
-	@[ -f $@ ] || apt-get install uml-utilities
 
 installtemplate: /usr/local/sbin/lxc-wrapper
 
