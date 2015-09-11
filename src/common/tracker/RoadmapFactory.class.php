@@ -66,7 +66,7 @@ class RoadmapFactory extends Error {
 			return;
 		}
 		$this->group =& $group;
-      $this->group_id = $group->getID();
+		$this->group_id = $group->getID();
 	}
 
 	public function getRoadmaps($enable_only=false) {
