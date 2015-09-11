@@ -240,16 +240,19 @@ function html_get_timezone_popup($title = 'timezone', $selected = 'xzxz') {
 /**
  * html_build_select_box_from_assoc() - Takes one assoc array and returns a pop-up box.
  *
- * @param	array	$arr		An array of items to use.
- * @param	string	$select_name	The name you want assigned to this form element.
- * @param	string	$checked_val	The value of the item that should be checked.
- * @param	bool	$swap		Whether we should swap the keys / names.
- * @param	bool	$show_100	Whether or not to show the '100 row'.
- * @param	string	$text_100	What to call the '100 row' defaults to none.
- * @param	array	$html_params	Array of other html param for an element
+ * @param	array		$arr		An array of items to use.
+ * @param	string		$select_name	The name you want assigned to this form element.
+ * @param	string		$checked_val	The value of the item that should be checked.
+ * @param	bool		$swap		Whether we should swap the keys / names.
+ * @param	bool		$show_100	Whether or not to show the '100 row'.
+ * @param	string		$text_100	What to call the '100 row' defaults to none.
+ * @param	bool		$show_any	Whether or not to show the 'Any row'.
+ * @param	string		$text_any	What to call the 'Any row' defaults to any.
+ * @param	bool|array	$allowed	Array of all allowed values from the full list.
+ * @param	array		$html_params	Array of other html param for an element.
  * @return	string
  */
-function html_build_select_box_from_assoc($arr, $select_name, $checked_val = 'xzxz', $swap = false, $show_100 = false, $text_100 = 'None', $html_params = array()) {
+function html_build_select_box_from_assoc($arr, $select_name, $checked_val = 'xzxz', $swap = false, $show_100 = false, $text_100 = 'None', $show_any = false, $text_any = 'any', $allowed = false, $html_params = array()) {
 	if ($swap) {
 		$keys = array_values($arr);
 		$vals = array_keys($arr);
@@ -257,7 +260,7 @@ function html_build_select_box_from_assoc($arr, $select_name, $checked_val = 'xz
 		$vals = array_values($arr);
 		$keys = array_keys($arr);
 	}
-	return html_build_select_box_from_arrays($keys, $vals, $select_name, $checked_val, $show_100, $text_100, $html_params);
+	return html_build_select_box_from_arrays($keys, $vals, $select_name, $checked_val, $show_100, $text_100, $show_any, $text_any, $allowed, $html_params);
 }
 
 /**
