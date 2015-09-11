@@ -29,7 +29,8 @@ require_once $gfcommon.'pm/ProjectTaskFactory.class.php';
 require_once $gfwww.'include/unicode.php';
 require_once $gfwww.'include/html.php';
 
-$HTML->Theme();
+global $HTML;
+
 html_use_jqueryteamworkgantt();
 html_generic_fileheader(_('Gantt Chart'));
 echo $HTML->getJavascripts();
