@@ -5,6 +5,7 @@
  * Copyright 1999/2000, Sourceforge.net Tim Perdue
  * Copyright 2002 GForge, LLC, Tim Perdue
  * Copyright 2010, FusionForge Team
+ * Copyright 2015, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -23,11 +24,13 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+global $HTML;
+
 pm_header(array('title'=>sprintf(_("Delete Task [T%s]"), $project_task_id),
                 'group_project_id'=>$group_project_id));
-?>
 
-<form action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id&amp;group_project_id=$group_project_id"; ?>" method="post">
+echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&group_project_id='.$group_project_id, 'method' => 'post'));
+?>
 <input type="hidden" name="func" value="postdeletetask" />
 <input type="hidden" name="project_task_id" value="<?php echo $project_task_id; ?>" />
 
@@ -56,6 +59,7 @@ pm_header(array('title'=>sprintf(_("Delete Task [T%s]"), $project_task_id),
 </form>
 
 <?php
+echo $HTML->closeForm();
 
 pm_footer();
 

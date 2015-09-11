@@ -3,7 +3,7 @@
  * FusionForge trackers
  *
  * Copyright 2011, Alcatel-Lucent
- * Copyright 2012,2014, Franck Villaume - TrivialDev
+ * Copyright 2012,2015, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -384,8 +384,7 @@ if (!$at_arr || count($at_arr) < 1) {
 
 					// Artifact id
 					$rmap[$release_value_id][$artifact_type_name] .= sprintf($templates[$template]['ticket_id'],
-							dirname(getStringFromServer('PHP_SELF')).'/?func=detail&amp;aid='.$artifact_id .
-								'&amp;group_id='. $group_id .'&amp;atid='.$ath->getID(),
+							util_make_uri('/tracker/?func=detail&aid='.$artifact_id.'&group_id='.$group_id.'&atid='.$ath->getID()),
 							$artifact_id);
 
 					// Summary
@@ -413,15 +412,18 @@ if (!$at_arr || count($at_arr) < 1) {
 		// Start selection tools box
 		echo '<div id="div_options">';
 		echo '<fieldset><legend>'._('Display options').'</legend>';
-		echo '<form action="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'" method="post">'."\n";
-		echo '<table class="fullwidth"><tr>'."\n";
+		echo $HTML->openForm(array('action' => '/tracker/roadmap.php?group_id='.$group_id, 'method' => 'post'));
+		echo $HTML->listTableTop();
+		echo '<tr>'."\n";
 
 		if (! empty($roadmaps) && ! $selected_release) {
-			echo '<td class="align-center">' . _("Roadmap") . _(": ") . '<select name="roadmap" id="roadmap">'."\n";
+			echo '<td class="align-center">' . _('Roadmap')._(': ');
 			foreach ($roadmaps as $roadmap) {
-				echo '<option value="'.$roadmap->getID().'"'.($roadmap->getID() == $roadmap_id ? ' selected="selected"' : '').' >'.$roadmap->getName().'</option>'."\n";
+				$roadmap_select[$roadmap->getID()] = $roadmap->getName();
 			}
-			echo '</select></td>'."\n";
+			$roadmap_html_params['id'] = 'roadmap';
+			echo html_build_select_box_from_assoc($roadmap_select, 'roadmap', $roadmap_id, false, '', false, '', false, $roadmap_html_params);
+			echo '</td>'."\n";
 		}
 
 		if (! $selected_release) {
@@ -434,21 +436,29 @@ if (!$at_arr || count($at_arr) < 1) {
 			echo '</select></td>';
 		}
 		else {
-			echo sprintf('<td><a href="%s" >'._('Return to last release(s)').'</a></td>'."\n",
-					getStringFromServer('PHP_SELF').'?group_id='.$group_id.($roadmap_id ? '&amp;roadmap_id='.$roadmap_id : ''));
+			echo html_e('td', array(),
+				util_make_link('/tracker/roadmap.php?group_id='.$group_id.($roadmap_id ? '&roadmap_id='.$roadmap_id : ''), _('Return to last release(s)')));
 		}
 
-		echo '<td class="align-center">' . _("Display graphs") . _(": ") . '<select name="display_graph" id="display_graph">'."\n";
+		echo '<td class="align-center">' . _('Display graphs')._(': ');
 		if (! $selected_release) {
-			echo '<option value="2"'.($display_graph == 2 ? ' selected="selected"' : '').' >'._('Only last').'</option>'."\n";
+			$display_graph_values[] = _('Only last');
+			$display_graph_ids[] = 2;
 		}
-		echo '<option value="1"'.($display_graph == 1 ? ' selected="selected"' : '').' >'._('All').'</option>'."\n";
-		echo '<option value="0"'.($display_graph == 0 ? ' selected="selected"' : '').' >'._('None').'</option>'."\n";
-		echo '</select></td>'."\n";
+		$display_graph_values[] = _('All');
+		$display_graph_ids[] = 1;
+		$display_graph_values[] = _('None');
+		$display_graph_ids[] = 0;
+		$display_graph_html_params['id'] = 'display_graph';
+		echo html_build_select_box_from_arrays($display_graph_ids, $display_graph_values, 'display_graph', $display_graph, false, '', false, '', false, $display_graph_html_params);
+		echo '</td>'."\n";
 
 		// End selection tools box
 		echo '<td id="noscript" class="align-center"><input type="submit" name="submit" value="'._('Submit').'" /></td>';
-		echo '</tr></table></form></fieldset></div>'."\n";
+		echo '</tr>';
+		echo $HTML->listTableBottom();
+		echo $HTML->closeForm();
+		echo '</fieldset></div>'."\n";
 		echo '<br/>';
 	}
 
@@ -472,7 +482,7 @@ if (!$at_arr || count($at_arr) < 1) {
 		echo '<div id="release_'.$i.'" >'."\n";
 		echo sprintf($templates[$template]['begin_release'],
 				$roadmap_name._(': '),
-				getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;roadmap_id='.$roadmap_id.'&amp;release='.urlencode($release_value),
+				util_make_uri('/tracker/roadmap.php?group_id='.$group_id.'&amp;roadmap_id='.$roadmap_id.'&amp;release='.urlencode($release_value)),
 				$release_value,
 				' '.html_image("ic/file-txt.png",'','',array("title"=>_('Display as text'), "onclick"=>"getReleaseTxt('".addslashes($release_value)."')")));
 
@@ -490,32 +500,30 @@ if (!$at_arr || count($at_arr) < 1) {
 					}
 				}
 			}
-			if ($graph){
-				?>
-				<div class="graph<?php echo $graph_class ?>" <?php echo ($graph_class && $display_graph == 2 ? 'style="display: none"' : '') ?>>
-				<table class="fullwidth">
-				<tr>
+			if ($graph) {
+				echo '<div class="graph'.$graph_class.'"'. ($graph_class && $display_graph == 2 ? 'style="display: none" >' : '>');
+				echo $HTML->listTableTop();
+				echo '<tr>
 					<td class="align-center">
 					<table class="progress halfwidth">
 					<tbody>
-						<tr><?php echo $graph; ?></tr>
+						<tr>'. $graph .'</tr>
 					</tbody>
 					</table>
 					<table class="halfwidth">
-						<tr class="align-center"><?php echo $legend ?></tr>
+						<tr class="align-center">' .$legend. '</tr>
 					</table>
 					</td>
-				</tr>
-				</table>
-				</div>
-				<?php
+				</tr>';
+				echo $HTML->listTableBottom();
+				echo '</div>';
 			}
 		}
 
 		echo ''."\n";
 
 		if (! array_key_exists($release_value, $rmap)) {
-			echo '<p>'._('No data for this release').'</p>'."\n";
+			echo html_e('p', array(), _('No data for this release'));
 		}
 		else {
 			foreach ($rmap[$release_value] as $artifact_type_name => $ticket_list) {
@@ -594,6 +602,7 @@ if (!$at_arr || count($at_arr) < 1) {
 				jQuery('#nb_release').change(function() {
 					updatePage();
 				});
+
 			<?php
 			}
 
@@ -603,20 +612,20 @@ if (!$at_arr || count($at_arr) < 1) {
 				var divs = document.getElementsByTagName('div');
 				for (var i = 0; i < divs.length; i++) {
 					if (divs[i].className == 'graph0') {
-					  if (select_val == 1 || select_val == 2) {
-						  divs[i].style.display = 'inline';
-					  }
-					  else {
-						  divs[i].style.display = 'none';
-					  }
+						if (select_val == 1 || select_val == 2) {
+							divs[i].style.display = 'inline';
+						}
+						else {
+							divs[i].style.display = 'none';
+						}
 					}
 					if (divs[i].className == 'graph1') {
-					  if (select_val == 1) {
-						  divs[i].style.display = 'inline';
-					  }
-					  else {
-						  divs[i].style.display = 'none';
-					  }
+						if (select_val == 1) {
+							divs[i].style.display = 'inline';
+						}
+						else {
+							divs[i].style.display = 'none';
+						}
 					}
 				}
 			});
@@ -640,15 +649,15 @@ if (!$at_arr || count($at_arr) < 1) {
 			}
 
 			function getReleaseTxt(release) {
-				var selected_roadmap = $('#roadmap').val();
-				var selected_nb_release = $('#nb_release').val();
-				var selected_display_graph = $('#display_graph').val();
+				var selected_roadmap = jQuery('#roadmap').val();
+				var selected_nb_release = jQuery('#nb_release').val();
+				var selected_display_graph = jQuery('#display_graph').val();
 				jQuery.ajax({
 					type: 'POST',
 					url: 'roadmap.php',
 					data: '<?php echo 'group_id='.$group_id.'&roadmap_id='.$roadmap_id ?>&ajax=1&template=1&release='+release,
 					success: function(rep) {
-						jQuery('#div_options').empty().append('<a href="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id ?>&roadmap_id='+selected_roadmap+'&nb_release='+selected_nb_release+'&display_graph='+selected_display_graph+'" ><?php echo _('Return to last release(s)') ?></a>');
+						jQuery('#div_options').empty().append('<a href="<?php echo '/tracker/roadmap.php?group_id='.$group_id ?>&roadmap_id='+selected_roadmap+'&nb_release='+selected_nb_release+'&display_graph='+selected_display_graph+'" ><?php echo _('Return to last release(s)') ?></a>');
 						jQuery('#div_roadmap').empty().append(rep);
 					}
 				});

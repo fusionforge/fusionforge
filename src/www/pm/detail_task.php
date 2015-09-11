@@ -5,7 +5,7 @@
  * Copyright 1999/2000, Sourceforge.net Tim Perdue
  * Copyright 2002 GForge, LLC, Tim Perdue
  * Copyright 2010, FusionForge Team
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013, 2015 Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -115,7 +115,7 @@ $cells = array();
 $cells[] = array($pt->showRelatedArtifacts(), 'colspan' => 3);
 echo $HTML->multiTableRow(array(), $cells);
 $cells = array();
-$cells[] = array($pt->showMessages($sort_comments_chronologically, "/pm/task.php?func=detailtask&amp;project_task_id=$project_task_id&amp;group_id=$group_id&amp;group_project_id=$group_project_id"), 'colspan' => 3);
+$cells[] = array($pt->showMessages($sort_comments_chronologically, '/pm/task.php?func=detailtask&project_task_id='.$project_task_id.'&group_id='.$group_id.'&group_project_id='.$group_project_id), 'colspan' => 3);
 echo $HTML->multiTableRow(array(), $cells);
 $hookParams['task_id'] = $project_task_id;
 $hookParams['group_id'] = $group_id;
