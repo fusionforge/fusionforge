@@ -29,7 +29,7 @@ global $HTML;
 pm_header(array('title'=>sprintf(_("Delete Task [T%s]"), $project_task_id),
                 'group_project_id'=>$group_project_id));
 
-echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&group_project_id='.$group_project_id, 'method' => 'post'));
+echo $HTML->openForm(array('action' => '/pm/task.php?group_id='.$group_id.'&group_project_id='.$group_project_id, 'method' => 'post'));
 ?>
 <input type="hidden" name="func" value="postdeletetask" />
 <input type="hidden" name="project_task_id" value="<?php echo $project_task_id; ?>" />
@@ -56,8 +56,6 @@ echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF').'?group_i
 	</tr>
 
 </table>
-</form>
-
 <?php
 echo $HTML->closeForm();
 

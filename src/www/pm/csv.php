@@ -71,7 +71,7 @@ if (session_loggedin()) {
 	}
 }
 
-$format = $full ? "Full CSV" : "Normal CSV";
+$format = $full ? 'Full CSV' : 'Normal CSV';
 $format .= $headers ? ' with headers' : ' without headers';
 $format .= " using '".htmlentities($sep)."' as separator.";
 
@@ -82,7 +82,7 @@ echo html_e('strong', array(), _('Selected CSV Format')._(':')).' '.$format.' '.
 echo html_e('p', array(), util_make_link('/pm/task.php?group_id='.$group_id.'&group_project_id='.$group_project_id.'&func=downloadcsv&sep='.$sep.'&full='.$full.'&headers='.$headers, _('Export CSV file')));
 
 echo html_e('h2', array(), _('Import tasks using a CSV file'));
-echo $HTML->openForm(array('enctype' => 'multipart/form-data', 'method' => 'post', 'action' => getStringFromServer('PHP_SELF').'?group_project_id='.$group_project_id.'&group_id='.$group_id.'&func=postuploadcsv'));
+echo $HTML->openForm(array('enctype' => 'multipart/form-data', 'method' => 'post', 'action' => '/pm/task.php?group_project_id='.$group_project_id.'&group_id='.$group_id.'&func=postuploadcsv'));
 echo html_e('p', array(), _('Choose a file in the proper .csv format for uploading.'));
 echo html_e('input', array('type' => 'file', 'name' => 'userfile', 'required' => 'required')).html_e('br');
 echo html_e('p', array(),

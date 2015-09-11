@@ -6,7 +6,7 @@
  * Copyright 2002 GForge, LLC, Tim Perdue
  * Copyright 2010, FusionForge Team
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013-2014, Franck Villaume - TrivialDev
+ * Copyright 2013-2015, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -178,15 +178,16 @@ $order_col_arr[] = 'end_date';
 $order_col_arr[] = 'percent_complete';
 $order_box = html_build_select_box_from_arrays($order_col_arr, $title_arr, '_order', $_order, false);
 
-echo '	<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=ganttpage" method="post">
-	<table width="10%" class="tableheading">
+echo $HTML->openForm(array('action' => '/pm/task.php?group_id='.$group_id.'&group_project_id='.$group_project_id.'&func=ganttpage', 'method' => 'post'));
+echo '	<table width="10%" class="tableheading">
 	<tr>
 		<td>'._('Assignee').'<br />'. $tech_box .'</td>
 		<td>'._('Status').'<br />'. $status_box .'</td>
 		<td>'._('Category').'<br />'. $cat_box .'</td>
 		<td>'._('Sort On').'<br />'. $order_box .'</td>
 		<td><input type="submit" name="submit" value="'._('Browse').'" /></td>
-	</tr></table></form>';
+	</tr></table>';
+echo $HTML->closeForm();
 echo '<div id="workSpace" style="padding:0; overflow-y:auto; overflow-x:hidden; border:1px solid #e5e5e5; position:relative; margin:0 5px;"></div>';
 ?>
 <script type="text/javascript">

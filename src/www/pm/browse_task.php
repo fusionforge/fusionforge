@@ -6,7 +6,7 @@
  * Copyright 2002 GForge, LLC, Tim Perdue
  * Copyright 2010, FusionForge Team
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2015, Franck Villaume - TrivialDev
  * Copyright 2014, Stéphane-Eymeric Bredthauer
  * Copyright 2015, nitendra tripathi
  * http://fusionforge.org
@@ -45,9 +45,9 @@ $max_rows = getIntFromRequest('max_rows');
 
 $ptf = new ProjectTaskFactory($pg);
 if (!$ptf || !is_object($ptf)) {
-	exit_error(_('Could Not Get ProjectTaskFactory'),'pm');
+	exit_error(_('Could Not Get ProjectTaskFactory'), 'pm');
 } elseif ($ptf->isError()) {
-	exit_error($ptf->getErrorMessage(),'pm');
+	exit_error($ptf->getErrorMessage(), 'pm');
 }
 
 $_order = getStringFromRequest('_order');
@@ -67,82 +67,71 @@ if (session_loggedin()) {
 		if (!$paging) {
 			$paging = 25;
 		}
-		$u->setPreference("paging", $paging);
+		$u->setPreference('paging', $paging);
 	} else
-		$paging = $u->getPreference("paging");
+		$paging = $u->getPreference('paging');
 }
 if (!$paging) {
 	$paging = 25;
 }
 
-$ptf->setup($offset,$_order,$paging,$set,$_assigned_to,$_status,$_category_id,$_view,$_sort_order);
+$ptf->setup($offset, $_order, $paging, $set, $_assigned_to, $_status, $_category_id, $_view, $_sort_order);
 if ($ptf->isError()) {
-	exit_error($ptf->getErrorMessage(),'pm');
+	exit_error($ptf->getErrorMessage(), 'pm');
 }
 $pt_arr =& $ptf->getTasks(true);
 if ($ptf->isError()) {
-	exit_error($ptf->getErrorMessage(),'pm');
+	exit_error($ptf->getErrorMessage(), 'pm');
 }
 
-$_assigned_to=$ptf->assigned_to;
-$_status=$ptf->status;
-$_order=$ptf->order;
-$_sort_order=$ptf->sort_order;
-$_category_id=$ptf->category;
-$_view=$ptf->view_type;
+$_assigned_to = $ptf->assigned_to;
+$_status = $ptf->status;
+$_order = $ptf->order;
+$_sort_order = $ptf->sort_order;
+$_category_id = $ptf->category;
+$_view = $ptf->view_type;
 
 html_use_coolfieldset();
 
-pm_header(array('title'=>_('Browse tasks'),'group_project_id'=>$group_project_id));
+pm_header(array('title' => _('Browse tasks'), 'group_project_id' => $group_project_id));
 
 /*
 		creating a custom technician box which includes "any" and "unassigned"
 */
-$engine = RBACEngine::getInstance () ;
-$techs = $engine->getUsersByAllowedAction ('pm', $pg->getID(), 'tech') ;
+$engine = RBACEngine::getInstance();
+$techs = $engine->getUsersByAllowedAction('pm', $pg->getID(), 'tech');
 
-$tech_id_arr = array () ;
-$tech_name_arr = array () ;
+$tech_select_arr = array();
 
 foreach ($techs as $tech) {
-	$tech_id_arr[] = $tech->getID() ;
-	$tech_name_arr[] = $tech->getRealName() ;
+	$tech_select_arr[$tech->getID()] = $tech->getRealName() ;
 }
-$tech_id_arr[]='0';
-$tech_name_arr[]=_('Any');
+$tech_select_arr[0] = _('Any');
 
-$tech_box=html_build_select_box_from_arrays ($tech_id_arr,$tech_name_arr,'_assigned_to',$_assigned_to,true,_('Unassigned'));
+$tech_box = html_build_select_box_from_assoc($tech_select_arr ,'_assigned_to', $_assigned_to, false, true, _('Unassigned'));
 
 /*
 		creating a custom category box which includes "any" and "none"
 */
-$res_cat=$pg->getCategories();
-$cat_id_arr=util_result_column_to_array($res_cat,0);
-$cat_id_arr[]='0';  //this will be the 'any' row
-$cat_name_arr=util_result_column_to_array($res_cat,1);
-$cat_name_arr[]=_('Any');
-$cat_box=html_build_select_box_from_arrays ($cat_id_arr,$cat_name_arr,'_category_id',$_category_id,true,'none');
+$res_cat = $pg->getCategories();
+$cat_id_arr = util_result_column_to_array($res_cat, 0);
+$cat_id_arr[] = '0';  //this will be the 'any' row
+$cat_name_arr = util_result_column_to_array($res_cat, 1);
+$cat_name_arr[] = _('Any');
+$cat_box = html_build_select_box_from_arrays($cat_id_arr, $cat_name_arr, '_category_id', $_category_id, true, 'none');
 
 /*
 	Creating a custom order box
 */
-$order_title_arr=array();
-$order_title_arr[]=_('Task Id');
-$order_title_arr[]=_('Task Summary');
-$order_title_arr[]=_('Start Date');
-$order_title_arr[]=_('End Date');
-$order_title_arr[]=_('Percent Complete');
-$order_title_arr[]=_('Priority');
+$order_select_arr = array();
+$order_select_arr['project_task_id'] = _('Task Id');
+$order_select_arr['summary'] = _('Task Summary');
+$order_select_arr['start_date'] = _('Start Date');
+$order_select_arr['end_date'] = _('End Date');
+$order_select_arr['percent_complete'] = _('Percent Complete');
+$order_select_arr['priority'] = _('Priority');
 
-$order_col_arr=array();
-$order_col_arr[]='project_task_id';
-$order_col_arr[]='summary';
-$order_col_arr[]='start_date';
-$order_col_arr[]='end_date';
-$order_col_arr[]='percent_complete';
-$order_col_arr[]='priority';
-
-$order_box=html_build_select_box_from_arrays ($order_col_arr,$order_title_arr,'_order',$_order,false);
+$order_box = html_build_select_box_from_assoc($order_select_arr, '_order', $_order, false, false);
 
 /*
 	Creating a custom sort box
