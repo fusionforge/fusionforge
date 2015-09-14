@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
+ * Copyright 2015, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -54,8 +55,8 @@ function store_file($id, $input_file) {
 	global $feedback;
 	global $error_msg;
 
-	if (!util_check_fileupload($input_file)) {
-		exit_error(_('Invalid file name.'),'admin');
+	if (!util_check_fileupload($input_file['tmp_name'])) {
+		exit_error(_('Invalid file name.'), 'admin');
 	}
 
 	$filename = $input_file['tmp_name'];
@@ -109,38 +110,35 @@ if (getStringFromRequest('submit')) {
 	$description = getStringFromRequest('description');
 	$filetype = getStringFromRequest('filetype');
 
-	if (!util_check_fileupload($input_file)) {
-		exit_error("Error","Invalid filename");
-	}
+
 
 	if (getStringFromRequest('add')) {
+		if (!util_check_fileupload($input_file['tmp_name'])) {
+			exit_error(_('Invalid filename'));
+		}
 		if (!$input_file['tmp_name'] || $description == "") {
 			$error_msg .= _('Both file name and description are required');
 		} else {
 			//see if they have too many data in the system
-			$res=db_query_params ('SELECT sum(filesize) WHERE group_id=$1',
-			array($group_id));
-			if (db_result($res,0,'sum') < $QUOTA) {
+			$res = db_query_params('SELECT sum(filesize) from db_images WHERE group_id=$1', array($group_id));
+			if (db_result($res, 0, 'sum') < $QUOTA) {
 				store_file(0, $input_file);
 			} else {
 				$error_msg .= ' Sorry - you are over your '.$QUOTA.' quota ';
 			}
 		}
-
 	} elseif (getStringFromRequest('remove')) {
-
-		$res=db_query_params ('DELETE FROM db_images WHERE id=$1 AND group_id=$2',
-			array($id,
-				$group_id));
+		$res = db_query_params('DELETE FROM db_images WHERE id=$1 AND group_id=$2',
+					array($id, $group_id));
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$error_msg .= _('Error: Cannot delete multimedia file: ').db_error();
+			$error_msg .= _('Error')._(': ')._('Cannot delete multimedia file')._(': ').db_error();
 		} else {
 			$feedback .= _('Multimedia File Deleted');
 		}
 
-	} elseif (getStringFromRequest("edit")) {
-		if ($description == "") {
+	} elseif (getStringFromRequest('edit')) {
+		if ($description == '') {
 			$error_msg .= _('File description is required');
 		} else {
 			if (!$input_file['tmp_name']) {
@@ -148,14 +146,14 @@ if (getStringFromRequest('submit')) {
 				// Just replace description/mime type
 
 				$res = db_query_params ('UPDATE db_images
-						SET description=$1,
-						 filetype=$2
-						WHERE group_id=$3
-						AND id=$4 ',
-			array($description,
-				$filetype,
-				$group_id,
-				$id));
+							SET description=$1,
+							filetype=$2
+							WHERE group_id=$3
+							AND id=$4 ',
+							array($description,
+								$filetype,
+								$group_id,
+								$id));
 
 				if (!$res || db_affected_rows($res) < 1) {
 					$error_msg .= _('Error: Cannot update multimedia file').db_error();
@@ -164,17 +162,20 @@ if (getStringFromRequest('submit')) {
 				}
 
 			} else {
+				if (!util_check_fileupload($input_file['tmp_name'])) {
+					exit_error(_('Invalid filename'));
+				}
 
 				// new version of the file is uploaded
 				// use new description, but not user-input
 				// mime type
 
 				//see if they have too many data in the system
-				$res=db_query_params ('	SELECT sum(filesize)
-						WHERE group_id=$1
-						AND id<>$2',
-			array($group_id,
-				$id));
+				$res = db_query_params('SELECT sum(filesize) from db_images
+							WHERE group_id=$1
+							AND id<>$2',
+							array($group_id,
+								$id));
 
 				$size = $input_file['size'];
 				if (db_result($res,0,'sum')+$size < $QUOTA) {
@@ -183,7 +184,7 @@ if (getStringFromRequest('submit')) {
 
 				} else {
 
-					$feedback .= ' Sorry - you are over your 1MB quota ';
+					$feedback .= _('.Sorry - you are over your 1MB quota.');
 
 				}
 			}
