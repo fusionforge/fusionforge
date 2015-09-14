@@ -196,7 +196,6 @@ project_admin_header(array('title'=>_('Edit Multimedia Data')));
 
 echo '
 	<p>'.sprintf(_('You can store up to %s MB of multimedia data (bitmap and vector graphics, sound clips, 3D models) in the database. Use this page to add/delete your project multimedia data.'), sprintf("%.2f", $QUOTA/(1024*1024))).'</p>
-	<p>
 ';
 
 $mode = getStringFromGet("mode");
@@ -214,8 +213,7 @@ if ($mode == "edit") {
 		exit();
 	}
 
-	echo '</p><h4>'._('Edit Multimedia Data').'</h4>
-	<p>
+	echo '<h4>'._('Edit Multimedia Data').'</h4>
 	<form action="'. getStringFromServer('PHP_SELF') .'" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="group_id" value="'.$group_id.'" />
 	<input type="hidden" name="id" value="'.$id.'" />
@@ -230,12 +228,12 @@ if ($mode == "edit") {
 	<p>
 	<strong>'._('MIME Type')._(':').'</strong><br />
 	<input type="text" name="filetype" size="40" maxlength="255" value="'.db_result($result,$i,'filetype').'" />
-
+	</p>
 	<input type="hidden" name="edit" value="1" />
 
 	<input type="submit" value="'._('Submit').'" name="submit" />
 	<input type="reset" value="'._('Reset').'" /><br />
-	</form></p>
+	</form>
 	';
 } else {
 	$result=db_query_params ('	SELECT *
@@ -245,7 +243,6 @@ if ($mode == "edit") {
 			array($group_id));
 
 	echo '<h4>'._('Add Multimedia Data').'</h4>
-	<p>
 	<form action="'. getStringFromServer('PHP_SELF') .'" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="group_id" value="'.$group_id.'" />
 	<strong>'._('Local filename').utils_requiredField()._(':').'</strong><br />
@@ -255,7 +252,7 @@ if ($mode == "edit") {
 	<input type="text" required="required" name="description" size="40" maxlength="255" /></p><p>
 	<input type="hidden" name="add" value="1" />
 	<input type="submit" value="'._('Add File').'" name="submit" /></p>
-	</form></p>
+	</form>
 	';
 }
 
