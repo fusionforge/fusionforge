@@ -3,6 +3,7 @@
  * Fetch a multimedia data from database
  *
  * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2015, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -25,7 +26,12 @@ require_once $gfcommon.'include/pre.php';
 
 $id = getStringFromRequest('id');
 
-$res=db_query_params ('SELECT * FROM db_images WHERE id=$1',
+if (!$id) {
+	echo _('failed');
+	exit();
+}
+
+$res=db_query_params('SELECT * FROM db_images WHERE id=$1',
 			array($id)) ;
 
 $filename=db_result($res,0,'filename');
