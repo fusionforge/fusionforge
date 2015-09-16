@@ -26,4 +26,6 @@ Alias {core/url_prefix}anonscm/ {core/data_path}/chroot/scmrepos/
   <IfModule mod_php5.c>
     php_admin_flag engine off
   </IfModule>
+
+  Include {core/config_path}/httpd.conf.d/auth-projects.inc
 </DirectoryMatch>
