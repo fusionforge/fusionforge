@@ -11,7 +11,6 @@ Depends: bzr, libapache2-mod-wsgi, loggerhead (>= 1.19~bzr477~), python-pastedep
 Recommends: fusionforge-scm
 
 Package: fusionforge-plugin-scmarch
-Depends: tla
 Recommends: fusionforge-scm
 
 Package: fusionforge-plugin-scmcvs
