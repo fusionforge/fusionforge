@@ -98,6 +98,7 @@ FusionForge 6.0:
 Fusionforge-5.3.5:
 * Widgets MyTasks, MyMonitoredForums show no entries. Wrong permission check [#790] (TrivialDev)
 * Plugin Wiki: fix display in activity project tab, wrong hook check variable (TrivialDev)
+* SCM: fix direct HTTP access with Apache 2.4 (Inria)
 
 Fusionforge-5.3.4:
 * CVE-2015-0850: Prevent arbitrary command execution via clone URL
