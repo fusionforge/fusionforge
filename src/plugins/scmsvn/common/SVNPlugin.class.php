@@ -307,9 +307,9 @@ some control over it to the project's administrator.");
 		}
 
 		if ($project->enableAnonSCM()) {
-			system("chmod g+rX,o+rX-w $repo") ;
+			system("chmod g+rX-w,o+rX-w $repo") ;
 		} else {
-			system("chmod g+rX,o-rwx $repo") ;
+			system("chmod g+rX-w,o-rwx $repo") ;
 		}
 	}
 

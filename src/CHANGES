@@ -4,6 +4,7 @@ Fusionforge 6.0.3:
 * Docman: fix filesize sort [#784] (TrivialDev)
 * News: allow moderating news comments even if the Forum tool is disabled (Inria)
 * Plugin SCM: fix race condition when creating project with SCM selected (Inria)
+* Plugin SCM SVN: fix repo access to RO group (Inria)
 * Plugin SCM Git: work-around for iframe access to private projects' gitweb from Firefox 40 (Inria)
 * Plugin Taskboard: remove in-progress French translation (Inria)
 * Plugin Taskboard: block dropping item on columns with resolution "closed" [#781] (TrivialDev)
