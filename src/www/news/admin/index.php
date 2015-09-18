@@ -5,6 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2015, Franck Villaume
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -117,15 +118,14 @@ if ($group_id && $group_id != forge_get_config('news_group')) {
 		$group = group_get_object($group_id);
 
 		echo notepad_func();
-		echo '
-		<form id="newsadminform" action="'.getStringFromServer('PHP_SELF').'" method="post">
-		<input type="hidden" name="group_id" value="'.db_result($result,0,'group_id').'" />
+		echo $HTML->openForm(array('id' => 'newsadminform', 'action' => '/news/admin/', 'method' => 'post'));
+		echo '<input type="hidden" name="group_id" value="'.db_result($result,0,'group_id').'" />
 		<input type="hidden" name="id" value="'.db_result($result,0,'id').'" />';
 
 		$user = user_get_object(db_result($result,0,'submitted_by'));
 
 		echo '
-		<strong>'._('Submitted by')._(':').'</strong> '.$user->getRealName().'<br />
+		<strong>'._('Submitted by')._(': ').'</strong> '.$user->getRealName().'<br />
 		<input type="hidden" name="approve" value="y" />
 		<input type="hidden" name="post_changes" value="y" />
 
@@ -149,8 +149,8 @@ if ($group_id && $group_id != forge_get_config('news_group')) {
 		echo $params['content'].'<br/>';
 		echo '<p>
 		<strong>'.sprintf(_('If this item is on the %s home page and you edit it, it will be removed from the home page.'), forge_get_config('forge_name')).'</strong></p>
-		<input type="submit" name="submit" value="'._('Submit').'" />
-		</form>';
+		<input type="submit" name="submit" value="'._('Submit').'" />';
+		echo $HTML->closeForm();
 
 	} else {
 		/*

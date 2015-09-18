@@ -137,42 +137,36 @@ $order_box = html_build_select_box_from_assoc($order_select_arr, '_order', $_ord
 	Creating a custom sort box
 */
 
-$sort_title_arr=array();
-$sort_title_arr[]=_('Ascending');
-$sort_title_arr[]=_('Descending');
+$sort_select_arr=array();
+$sort_select_arr['ASC'] = _('Ascending');
+$sort_select_arr['DESC'] = _('Descending');
 
-$sort_col=array();
-$sort_col[]='ASC';
-$sort_col[]='DESC';
-
-$sort_box=html_build_select_box_from_arrays($sort_col,$sort_title_arr,'_sort_order',$_sort_order,false);
+$sort_box = html_build_select_box_from_assoc($sort_select_arr, '_sort_order', $_sort_order, false, false);
 /*
 	Creating View array
 */
-$view_arr=array();
-$view_arr[]=_('Summary');
-$view_arr[]=_('Detailed');
-$order_col_arr=array();
-$view_col_arr[]='summary';
-$view_col_arr[]='detail';
-$view_box=html_build_select_box_from_arrays ($view_col_arr,$view_arr,'_view',$_view,false);
+$view_select_arr = array();
+$view_select_arr['summary'] = _('Summary');
+$view_select_arr['detail'] = _('Detailed');
+$view_box = html_build_select_box_from_assoc($view_select_arr, '_view', $_view, false, false);
 
-$rows=count($pt_arr);
+$rows = count($pt_arr);
 $totalTasks = $pg->getCount($_status, $_category_id);
 
 if (session_loggedin()) {
 	/* logged in users get configurable paging */
-	echo '<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&group_project_id='.$pg->getID().'&offset='.$offset.'" method="post">'."\n";
-
+	echo $HTML->openForm(array('action' => '/pm/task.php?group_id='.$group_id.'&group_project_id='.$pg->getID().'&offset='.$offset, 'method' => 'post'));
 }
+
 printf('<p>' . _('Displaying results %1$s out of %2$d total.'),$rows ? ($offset + 1).'-'.($offset + $rows) : '0', $totalTasks);
 
 if (session_loggedin()) {
 	printf(' ' . _('Displaying %2$s results.') . "\n\t<input " .
 			'type="submit" name="setpaging" value="%1$s" />' .
-			"\n</p>\n</form>\n", _('Change'),
+			"\n</p>\n", _('Change'),
 			html_build_select_box_from_array(array(
 			'10', '25', '50', '100', '1000'), 'nres', $paging, 1));
+	echo $HTML->closeForm();
 } else {
 	echo "</p>\n";
 }
@@ -180,8 +174,8 @@ if (session_loggedin()) {
 /*
 	Show the new pop-up boxes to select assigned to and/or status
 */
-echo '	<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&group_project_id='.$group_project_id.'" method="post">
-	<input type="hidden" name="set" value="custom" />
+echo $HTML->openForm(array('action' => '/pm/task.php?group_id='.$group_id.'&group_project_id='.$group_project_id, 'method' => 'post'));
+echo '	<input type="hidden" name="set" value="custom" />
 	<table>
 	<tr>
 		<td>'._('Assignee')._(': ').'<br />'. $tech_box .'</td>
@@ -190,10 +184,9 @@ echo '	<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.
 		<td>'._('Sort On')._(': ').'<br />'. $order_box . $sort_box .'</td>
 		<td>'._('Detail View')._(': ').'<br />'. $view_box .'</td>
 		<td><input type="submit" name="submit" value="'._('Browse').'" /></td>
-	</tr></table></form>';
-
+	</tr></table>';
+echo $HTML->closeForm();
 if ($rows < 1) {
-
 	echo $HTML->information(_('No Matching Tasks found'));
 	echo '<p class="important">'._('Add tasks using the link above')."</p>\n";
 
@@ -210,9 +203,8 @@ if ($rows < 1) {
 	$IS_ADMIN = forge_check_perm ('pm', $pg->getID(), 'manager') ;
 
 	if ($IS_ADMIN) {
-		echo '
-		<form name="taskList" action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&amp;group_project_id='.$pg->getID().'" method="post">
-		<input type="hidden" name="func" value="massupdate" />';
+		echo $HTML->openForm(array('name' => 'taskList', 'action' => '/pm/task.php?group_id='.$group_id.'&group_project_id='.$pg->getID(), 'method' => 'post'));
+		echo '<input type="hidden" name="func" value="massupdate" />';
 
 		$check_all = '
 		<a href="javascript:checkAllTasks(1)">'._('Check all').'</a>
@@ -257,14 +249,14 @@ if ($rows < 1) {
 
 	echo $HTML->listTableTop($title_arr);
 
-	$now=time();
+	$now = time();
 
 	for ($i=0; $i < $rows; $i++) {
-		$url = getStringFromServer('PHP_SELF')."?func=detailtask&project_task_id=".$pt_arr[$i]->getID()."&group_id=".$group_id."&group_project_id=".$group_project_id;
+		$url = '/pm/task.php?func=detailtask&project_task_id='.$pt_arr[$i]->getID().'&group_id='.$group_id.'&group_project_id='.$group_project_id;
 
 		echo '
 			<tr class="priority'.$pt_arr[$i]->getPriority().'"><td style="width:16px; background-color:#FFFFFF">' .
-			util_make_link("/export/rssAboTask.php?tid=" .
+			util_make_link('/export/rssAboTask.php?tid=' .
 			    $pt_arr[$i]->getID(), html_image('ic/rss.png',
 			    16, 16, array('border' => '0'))
 			) . "</td>\n" .
@@ -315,7 +307,7 @@ if ($rows < 1) {
 	 Show extra rows for <-- Prev / Next -->
 	*/
 	if ($offset > 0) {
-		echo util_make_link (getStringFromServer('PHP_SELF').'?func=browse&group_project_id='.$group_project_id.'&group_id='.$group_id.'&offset='.($offset-$paging),'<strong>← '._('previous').'</strong>');
+		echo util_make_link('/pm/task.php?func=browse&group_project_id='.$group_project_id.'&group_id='.$group_id.'&offset='.($offset-$paging),'<strong>← '._('previous').'</strong>');
 		echo '&nbsp;&nbsp;';
 	}
 	$pages = $totalTasks / $paging;
@@ -337,7 +329,7 @@ if ($rows < 1) {
 			if ($j * $paging == $offset) {
 				echo '<strong>'.($j+1).'</strong>&nbsp;&nbsp;';
 			} else {
-				echo util_make_link (getStringFromServer('PHP_SELF').'?func=browse&group_project_id='.$group_project_id.'&group_id='.$group_id.'&offset='.($j*$paging),'<strong>'.($j+1).'</strong>').'&nbsp;&nbsp;';
+				echo util_make_link('/pm/task.php?func=browse&group_project_id='.$group_project_id.'&group_id='.$group_id.'&offset='.($j*$paging),'<strong>'.($j+1).'</strong>').'&nbsp;&nbsp;';
 			}
 		}
 	}
@@ -428,8 +420,8 @@ if ($rows < 1) {
 
 			</table>
 			</div>
-			</fieldset>
-		</form>';
+			</fieldset>';
+		echo $HTML->closeForm();
 	}
 }
 
