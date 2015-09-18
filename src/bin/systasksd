@@ -71,6 +71,10 @@ function systask_get_script($plugin_id, $systask_type) {
 	return null;
 }
 
+function is_group_active_nocache($group_id) {
+	$res = db_query_params("SELECT group_id FROM nss_groups WHERE group_id=$1", array($group_id));
+	return (db_numrows($res) > 0);
+}
 
 
 $shortopts = 'v';       // enable verbose mode
@@ -132,6 +136,9 @@ while (true) {
 								  . " '$script' not executable.\n",
 								  $arr['systask_id']));
 			continue;
+		}
+		if (!empty($arr['group_id']) && !is_group_active_nocache($arr['group_id'])) {
+			continue;  // wait until project is approved
 		}
 		db_query_params("UPDATE systasks SET status=$1, started=now() WHERE systask_id=$2",
 						array('WIP', $arr['systask_id']));

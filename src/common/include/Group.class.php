@@ -2564,8 +2564,8 @@ class Group extends Error {
 			$params['id_mappings'] = $id_mappings;
 			plugin_hook_by_reference ('clone_project_from_template', $params);
 		} else {
-			// Disable everything
-			db_query_params ('UPDATE groups SET use_mail=0, use_survey=0, use_forum=0, use_pm=0, use_pm_depend_box=0, use_scm=0, use_news=0, use_docman=0, use_ftp=0, use_tracker=0, use_frs=0, use_stats=0 WHERE group_id=$1',
+			// Disable everything - except use_scm (manually set in the registration page)
+			db_query_params ('UPDATE groups SET use_mail=0, use_survey=0, use_forum=0, use_pm=0, use_pm_depend_box=0, use_news=0, use_docman=0, use_ftp=0, use_tracker=0, use_frs=0, use_stats=0 WHERE group_id=$1',
 				array($this->getID()));
 		}
 

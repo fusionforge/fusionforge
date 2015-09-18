@@ -130,14 +130,6 @@ class pgsql extends System {
 				$this->setError('Error: Cannot Delete Group Member(s): '.db_error());
 				return false;
 			}
-			// This is group used for user, not a real project
-			$res2 = db_query_params ('DELETE FROM nss_groups WHERE name IN
-					(SELECT user_name FROM users WHERE user_id=$1)',
-						 array ($user_id));
-			if (!$res2) {
-				$this->setError('Error: Cannot Delete Group GID: '.db_error());
-				return false;
-			}
 
 			$pids = array () ;
 			foreach ($user->getGroups() as $p) {
@@ -198,14 +190,6 @@ class pgsql extends System {
 						 array ($user_id));
 			if (!$res1) {
 				$this->setError('Error: Cannot Delete Group Member(s): '.db_error());
-				return false;
-			}
-			// This is group used for user, not a real project
-			$res2 = db_query_params ('DELETE FROM nss_groups WHERE name IN
-				(SELECT user_name FROM users WHERE user_id=$1)',
-						 array ($user_id)) ;
-			if (!$res2) {
-				$this->setError('Error: Cannot Delete Group GID: '.db_error());
 				return false;
 			}
 		}

@@ -156,6 +156,7 @@ case "$1" in
     remove)
 	if [ -x /usr/sbin/a2ensite ]; then
 	    a2dissite fusionforge.conf
+	    rm -f /etc/apache2/sites-available/fusionforge.conf
 	elif [ -e /etc/redhat-release ]; then
 	    rm /etc/httpd/conf.d/fusionforge.conf
 	fi

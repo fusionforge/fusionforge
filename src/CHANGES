@@ -6,6 +6,7 @@ Fusionforge 6.0.3:
 * Accounts: accept more elliptic curve ssh keys types (Unit 193 & Inria)
 * Docman: fix filesize sort [#784] (TrivialDev)
 * News: allow moderating news comments even if the Forum tool is disabled (Inria)
+* Plugin SCM: fix race condition when creating project with SCM selected (Inria)
 * Plugin SCM Git: work-around for iframe access to private projects' gitweb from Firefox 40 (Inria)
 * Plugin Taskboard: remove in-progress French translation (Inria)
 * Plugin Taskboard: block dropping item on columns with resolution "closed" [#781] (TrivialDev)
@@ -100,6 +101,7 @@ FusionForge 6.0:
 Fusionforge-5.3.5:
 * Widgets MyTasks, MyMonitoredForums show no entries. Wrong permission check [#790] (TrivialDev)
 * Plugin Wiki: fix display in activity project tab, wrong hook check variable (TrivialDev)
+* SCM: fix direct HTTP access with Apache 2.4 (Inria)
 
 Fusionforge-5.3.4:
 * CVE-2015-0850: Prevent arbitrary command execution via clone URL
