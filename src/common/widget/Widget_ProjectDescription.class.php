@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
+ * Copyright 2015, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -35,8 +36,9 @@ class Widget_ProjectDescription extends Widget {
 	}
 
 	public function getContent() {
+		global $HTML;
 		$result = '';
-		
+
 		$request =& HTTPRequest::instance();
 		$group_id = $request->get('group_id');
 		$pm = ProjectManager::instance();
@@ -47,12 +49,16 @@ class Widget_ProjectDescription extends Widget {
 			$project_description = $project->getDescription();
 			if ($project_description) {
 				// need to use a litteral version for content attribute since nl2br is for HTML
-				$result .= "<p>"
-					.'<span property="doap:description" content="'. preg_quote($project_description,'"') .'">'
+				$result .= "<p>";
+				if (forge_get_config('use_project_multimedia')) {
+
+					$result .= '<span><img src="/dbimage.php?id='.$project->getLogoImageID().'" width="40" height="40" /></span>';
+				}
+				$result .= '<span property="doap:description" content="'. preg_quote($project_description,'"') .'">'
 					. nl2br($project_description)
 					.'</span></p>';
 			} else {
-				$result .= "<p>" . _('This project has not yet submitted a description.') . '</p>';
+				$result .= $HTML->information(_('This project has not yet submitted a description.'));
 			}
 		}
 

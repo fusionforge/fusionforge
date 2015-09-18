@@ -490,7 +490,7 @@ class Group extends Error {
 	 * @param bool	$use_docman
 	 * @param string	$new_doc_address
 	 * @param bool	$send_all_docs
-	 * @param int	$logo_image_id
+	 * @param int	$logo_image_id XXXX UNUSED XXXX -> see getLogoImageID function
 	 * @param bool	$use_ftp
 	 * @param bool	$use_tracker
 	 * @param bool	$use_frs
@@ -585,7 +585,6 @@ class Group extends Error {
 
 		db_begin();
 
-		//XXX not yet actived logo_image_id='$logo_image_id',
 		$res = db_query_params('UPDATE groups
 			SET group_name=$1,
 				homepage=$2,
@@ -920,6 +919,15 @@ class Group extends Error {
 	 * @return	int	The ID of logo image in db_images table (or 100 if none).
 	 */
 	function getLogoImageID() {
+		if (!isset($this->data_array['logo_image_id'])) {
+			$res = db_query_params('select id from db_images where group_id = $1 and is_logo = $2',
+						array($this->getID(), 1));
+			if ($res && db_numrows($res)) {
+				$this->data_array['logo_image_id'] = db_result($res, 0, 'id');
+			} else {
+				$this->data_array['logo_image_id'] = null;
+			}
+		}
 		return $this->data_array['logo_image_id'];
 	}
 
@@ -1769,7 +1777,7 @@ class Group extends Error {
 			db_rollback();
 			return false;
 		}
- 
+
 		for ($i=0; $i<db_numrows($res); $i++) {
 			$Forum = new Forum($news_group,db_result($res,$i,'forum_id'));
 			if (!$Forum->delete(1,1)) {
@@ -1777,7 +1785,7 @@ class Group extends Error {
 				return false;
 			}
 		}
-      
+
      // Delete news forums in group itself
       for ($i = 0; $i < db_numrows($res); $i++) {
          $Forum = new Forum($this, db_result($res, $i, 'forum_id'));
