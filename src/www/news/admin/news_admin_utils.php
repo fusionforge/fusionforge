@@ -24,7 +24,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-function show_news_approve_form($qpa_pending, $qpa_rejected, $qpa_approved) {
+function show_news_approve_form($qpa_pending, $qpa_rejected, $qpa_approved, $form_url) {
 	/*
 		Show list of waiting news items
 	*/
@@ -33,7 +33,7 @@ function show_news_approve_form($qpa_pending, $qpa_rejected, $qpa_approved) {
 
 	// function to show single news item
 	// factored out because called 3 time below
-	function show_news_item($row, $i, $approved, $selectable) {
+	function show_news_item($row, $i, $approved, $selectable, $form_url) {
 		global $HTML;
 
 		echo '<tr '. $HTML->boxGetAltRowStyle($i) . '><td>';
@@ -44,7 +44,7 @@ function show_news_approve_form($qpa_pending, $qpa_rejected, $qpa_approved) {
 		}
 		echo date(_('Y-m-d'), $row['post_date']).'</td>
 		<td width="45%">';
-		echo util_make_link('/news/admin/?approve=1&id='.$row['id'].'&group_id='.$row['group_id'], $row['summary']);
+		echo util_make_link($form_url.'?approve=1&id='.$row['id'], $row['summary']);
 		echo '</td>
 
 		<td class="onethirdwidth">'
@@ -80,7 +80,7 @@ function show_news_approve_form($qpa_pending, $qpa_rejected, $qpa_approved) {
 		echo '<h2>'.sprintf(_('These items need to be approved (total: %d)'), $rows).'</h2>';
 		echo $HTML->listTableTop($title_arr);
 		for ($i=0; $i < $rows; $i++) {
-			show_news_item($items[$i], $i, false,true);
+			show_news_item($items[$i], $i, false,true, $form_url);
 		}
 		echo $HTML->listTableBottom();
 		echo '<br /><input type="submit" name="submit" value="'._('Reject Selected').'" />';
