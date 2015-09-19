@@ -165,8 +165,8 @@ if (session_loggedin()) {
 
 	echo $params['content'].'<br />';
 	echo '<div><input type="submit" name="submit" value="'._('Submit').'" />
-		</div>'
-	echo $HTML->closeForm>();
+		</div>';
+	echo $HTML->closeForm();
 
 	news_footer();
 
