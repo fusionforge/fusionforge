@@ -44,7 +44,7 @@ function show_news_approve_form($qpa_pending, $qpa_rejected, $qpa_approved) {
 		}
 		echo date(_('Y-m-d'), $row['post_date']).'</td>
 		<td width="45%">';
-		echo util_make_link('/news/admin/?approve=1&id='.$row['id'], $row['summary']);
+		echo util_make_link('/news/admin/?approve=1&id='.$row['id'].'&group_id='.$row['group_id'], $row['summary']);
 		echo '</td>
 
 		<td class="onethirdwidth">'
