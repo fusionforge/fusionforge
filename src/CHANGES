@@ -1,5 +1,6 @@
 FusionForge 6.X:
 * Spellcheck (Anders Jonsson)
+* Docman: limit number of found documents on search query [#794] (TrivialDev)
 
 Fusionforge 6.0.3:
 * Layout: fix rss url when url is absolute (TrivialDev)

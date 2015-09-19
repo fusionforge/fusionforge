@@ -7,7 +7,7 @@
  * Copyright 2005, Fabio Bertagnin
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2015, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -37,16 +37,17 @@ if (!forge_check_perm('docman', $group_id, 'read')) {
 }
 
 $is_editor = forge_check_perm('docman', $g->getID(), 'approve');
-$searchString = trim(getStringFromPost("textsearch"));
+$searchString = trim(getStringFromPost('textsearch'));
 $insideDocuments = getStringFromPost('insideDocuments');
 $subprojectsIncluded = getStringFromPost('includesubprojects');
-$allchecked = "";
-$onechecked = "";
-$insideDocumentsCheckbox = "";
+$limitNbSearchDocs = getStringFromPost('limitNbSearchDocs');
+$allchecked = '';
+$onechecked = '';
+$insideDocumentsCheckbox = '';
 $attrsInputSearchAll = array('type' => 'radio', 'name' => 'search_type', 'required' => 'required', 'value' => 'all', 'title' => _('All searched words are mandatory'));
 $attrsInputSearchOne = array('type' => 'radio', 'name' => 'search_type', 'required' => 'required', 'value' => 'one', 'title' => _('At least one word must be found'));
 
-if (getStringFromPost('search_type') == "one") {
+if (getStringFromPost('search_type') == 'one') {
 	$attrsInputSearchOne['checked'] = 'checked';
 } else {
 	$attrsInputSearchAll['checked'] = 'checked';
@@ -78,6 +79,7 @@ if (isset($projectIDsArray) && is_array($projectIDsArray)) {
 		$attrsInputIncludeSubprojects['checked'] = 'checked';
 	echo html_e('input', $attrsInputIncludeSubprojects)._('Include child projects');
 }
+echo html_e('p', array(), _('limit search results to').html_build_select_box_from_array(array(_('All'), '10', '25', '50', '100'), 'limitNbSearchDocs', _('All'), 1)._('documents'));
 echo $HTML->addRequiredFieldsInfoBox();
 echo $HTML->closeForm();
 echo html_ac(html_ap() - 1);
@@ -85,7 +87,7 @@ echo html_ao('div', array('id' => 'docman_search_query_result'));
 if ($searchString) {
 	$mots = preg_split("/[\s,]+/",$searchString);
 	$qpa = db_construct_qpa(false, 'SELECT filename, filetype, docid, doc_data.stateid as stateid, doc_states.name as statename, title, description, createdate, updatedate, doc_group, group_id FROM doc_data, doc_states WHERE doc_data.stateid = doc_states.stateid');
-	if (getStringFromPost('search_type') == "one") {
+	if (getStringFromPost('search_type') == 'one') {
 		if (count($mots) > 0) {
 			$qpa = db_construct_qpa($qpa, ' AND (FALSE');
 			foreach ($mots as $mot) {
@@ -126,6 +128,9 @@ if ($searchString) {
 	plugin_hook('docmansearch_has_hierarchy', $params);
 	$qpa = db_construct_qpa($qpa, ' ) ', array());
 	$qpa = db_construct_qpa($qpa, ' ORDER BY updatedate, createdate');
+	if (is_integer($limitNbSearchDocs)) {
+		$qpa = db_construct_qpa($qpa, ' LIMIT $1', array($limitNbSearchDocs));
+	}
 	$result = db_query_qpa($qpa);
 	if (!$result) {
 		echo $HTML->error_msg(_('Database query error'));
