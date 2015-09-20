@@ -50,8 +50,7 @@ class Widget_ProjectDescription extends Widget {
 			if ($project_description) {
 				// need to use a litteral version for content attribute since nl2br is for HTML
 				$result .= "<p>";
-				if (forge_get_config('use_project_multimedia')) {
-
+				if (forge_get_config('use_project_multimedia') && $project->getLogoImageID()) {
 					$result .= '<span><img src="/dbimage.php?id='.$project->getLogoImageID().'" width="40" height="40" /></span>';
 				}
 				$result .= '<span property="doap:description" content="'. preg_quote($project_description,'"') .'">'
@@ -61,7 +60,6 @@ class Widget_ProjectDescription extends Widget {
 				$result .= $HTML->information(_('This project has not yet submitted a description.'));
 			}
 		}
-
 		return $result;
 	}
 
