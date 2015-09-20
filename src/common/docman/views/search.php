@@ -55,11 +55,10 @@ if (getStringFromPost('search_type') == 'one') {
 
 echo html_ao('div', array('id' => 'docman_search', 'class' => 'docmanDivIncluded'));
 echo $HTML->openForm(array('method' => 'post', 'action' => util_make_uri('/docman/?group_id='.$group_id.'&view=search')));
-echo html_ao('div', array('id' => 'docman_search_query_words'));
-echo html_e('span', array('id' => 'docman_search_query_label'), _('Query').utils_requiredField()._(': '));
-echo html_e('input', array('type' => 'text', 'name' => 'textsearch', 'id' => 'textsearch', 'size' => 48, 'value' => $searchString, 'required' => 'required', 'placeholder' => _('Searched words')));
-echo html_e('input', array('type' => 'submit', 'value' => _('Search')));
-echo html_ac(html_ap() - 1);
+echo html_e('div', array('id' => 'docman_search_query_words'),
+		html_e('span', array('id' => 'docman_search_query_label'), _('Query').utils_requiredField()._(': ')).
+		html_e('input', array('type' => 'text', 'name' => 'textsearch', 'id' => 'textsearch', 'size' => 48, 'value' => $searchString, 'required' => 'required', 'placeholder' => _('Searched words'))).
+		html_e('input', array('type' => 'submit', 'value' => _('Search'))));
 echo html_ao('div', array('id' => 'docman_search_query_ckeckbox'));
 echo html_e('input', $attrsInputSearchAll)._('With all the words');
 echo html_e('input', $attrsInputSearchOne)._('With at least one of words');
@@ -72,12 +71,12 @@ if ($g->useDocmanSearch()) {
 if ($g->usesPlugin('projects-hierarchy')) {
 	$projectsHierarchy = plugin_get_object('projects-hierarchy');
 	$projectIDsArray = $projectsHierarchy->getFamily($group_id, 'child', true, 'validated');
-}
-if (isset($projectIDsArray) && is_array($projectIDsArray)) {
-	$attrsInputIncludeSubprojects = array('type' => 'checkbox', 'name'  => 'includesubprojects', 'value' => 1, 'title' => _('search into childs following project hierarchy'));
-	if ($subprojectsIncluded)
-		$attrsInputIncludeSubprojects['checked'] = 'checked';
-	echo html_e('input', $attrsInputIncludeSubprojects)._('Include child projects');
+	if (is_array($projectIDsArray)) {
+		$attrsInputIncludeSubprojects = array('type' => 'checkbox', 'name'  => 'includesubprojects', 'value' => 1, 'title' => _('search into childs following project hierarchy'));
+		if ($subprojectsIncluded)
+			$attrsInputIncludeSubprojects['checked'] = 'checked';
+		echo html_e('input', $attrsInputIncludeSubprojects)._('Include child projects');
+	}
 }
 echo html_e('p', array(), _('limit search results to').html_build_select_box_from_array(array(_('All'), '10', '25', '50', '100'), 'limitNbSearchDocs', _('All'), 1)._('documents'));
 echo $HTML->addRequiredFieldsInfoBox();
