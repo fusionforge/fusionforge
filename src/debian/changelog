@@ -11,7 +11,7 @@ fusionforge (6.0.2+20150918-1) unstable; urgency=medium
   * fusionforge-web: remove dead symlink in Apache conf on uninstall
     (closes: #798706)
 
- -- Sylvain Beucler <beuc@debian.org>  Fri, 18 Sep 2015 15:00:00 +0200
+ -- Sylvain Beucler <beuc@debian.org>  Fri, 18 Sep 2015 18:30:00 +0200
 
 fusionforge (6.0.2+20150908-1) unstable; urgency=medium
 
