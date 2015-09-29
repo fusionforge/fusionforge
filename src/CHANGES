@@ -6,6 +6,7 @@ Fusionforge 6.0.3:
 * Plugin SCM: fix race condition when creating project with SCM selected (Inria)
 * Plugin SCM SVN: fix repo access to RO group (Inria)
 * Plugin SCM Git: work-around for iframe access to private projects' gitweb from Firefox 40 (Inria)
+* Plugin scmhook: git committracker: fix groupname detection on multi-server setup (Inria)
 * Plugin Taskboard: remove in-progress French translation (Inria)
 * Plugin Taskboard: block dropping item on columns with resolution "closed" [#781] (TrivialDev)
 

@@ -85,8 +85,10 @@ function parseConfig(&$Config)
 		$repos_path.='/';
 	}
 	$repo_root = substr($Repository,0,strrpos($Repository,"/") + 1); //we get the directory of the repository root (with trailing slash)
-	if(fileinode($repos_path) == fileinode($repo_root)) { // since the $repos_path is usually $sys_gitroot, and that one is a symlink, we check that the inode is the same for both
+	if (fileinode($repos_path) !== false
+		&& fileinode($repos_path) == fileinode($repo_root)) { // since the $repos_path is usually $sys_gitroot, and that one is a symlink, we check that the inode is the same for both
 		$GroupName = substr($Repository, strrpos($Repository,"/") + 1);
+		$GroupName = preg_replace('/.git$/', '', $GroupName);
 		$Config['FileName'] = substr($Config['FileName'],strlen($Repository)); //get only the filename relative to the repo
 	} else {
 		$GroupName = trim(str_replace($repos_path,'',$repo_root),"/");
