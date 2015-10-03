@@ -143,7 +143,7 @@ function drawBoardProgress() {
 					if( aUserStories[i].tasks[t].estimated_dev_effort ) {
 						totalCostEstimated += parseFloat( aUserStories[i].tasks[t].estimated_dev_effort );
 					}
-					
+
 					if( aUserStories[i].tasks[t].remaining_dev_effort ) {
 						totalCostRemaining += parseFloat( aUserStories[i].tasks[t].remaining_dev_effort );
 					}

@@ -995,11 +995,11 @@ class TaskBoard extends Error {
 	 */
 	function getUnusedResolutions() {
 		static $resolutions = NULL;
-		
+
 		if( !$resolutions ) {
 			$all_resolutions = $this->getAvailableResolutions();
 			$used_resolutions = $this->getUsedResolutions();
-	
+
 			$resolutions = array();
 			if( $all_resolutions && count( $used_resolutions ) > 0 ) {
 				$resolutions = array_diff( $all_resolutions, $used_resolutions );
@@ -1007,7 +1007,6 @@ class TaskBoard extends Error {
 				$resolutions = $all_resolutions;
 			}
 		}
-
 
 		return $resolutions;
 	}

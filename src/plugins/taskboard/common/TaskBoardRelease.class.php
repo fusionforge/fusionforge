@@ -275,17 +275,17 @@ class TaskBoardRelease extends Error {
 					if( $tsk['phase_id'] == $columns[$i]->getID() ) {
 						if( $i + 1 == $_columns_num ) {
 							// last column, so - completed task
-							$ret['completed_tasks']++;							
+							$ret['completed_tasks']++;
 						} else {
 							// incomplete task, so incomplete US
 							$completed_us = false;
 						}
 						$ret['tasks']++;
-						
+
 						if( $tsk['estimated_dev_effort'] ) {
 							$ret['completed_man_days'] += ( (float) $tsk['estimated_dev_effort'] - (float) $tsk['remaining_dev_effort'] );
 						}
-						
+
 						if( $tsk['estimated_dev_effort'] ) {
 							$ret['man_days'] += (float)  $tsk['estimated_dev_effort'];
 						}
