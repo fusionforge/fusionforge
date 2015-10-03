@@ -204,7 +204,7 @@ function drawUserStories() {
 			start=1;
 			l_sHtml += '<td class="agile-phase"><div class="agile-sticker-container">';
 			l_sHtml += '<div class="agile-sticker agile-sticker-user-story" id="user-story-' + us.id + '">';
-			l_sHtml += '<div class="agile-sticker-header"><a href="' + us.url + '" target="_blank">' + us.id + '</a>';
+			l_sHtml += '<div class="agile-sticker-header"><a href="' + us.url + '" target="_blank">[#' + us.id + ']</a>';
 			l_sHtml += '<div style="float: right";>[<a href="" class="agile-toolbar-add-task" user_story_id="' +us.id+ '">+</a>]</div></div>\n';
 			l_sHtml += '<div class="agile-sticker-body">' + us.title + "</div>\n";
 			l_sHtml += "</div>\n";
