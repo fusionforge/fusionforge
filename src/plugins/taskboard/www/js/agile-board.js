@@ -389,10 +389,20 @@ function drawTasks( oUserStory, sPhaseId ) {
 			l_sHtml += '<div class="agile-sticker-container">';
 			l_sHtml += '<div class="agile-sticker agile-sticker-task agile-sticker-task-' + tsk.user_story + '" id="task-' + tsk.id + '" >';
 			l_sHtml += '<div class="agile-sticker-header" style="background-color: ' + tsk.background + ';">';
-			l_sHtml += '<a href="' + tsk.url  +  '" target="_blank">' + tsk.id + '</a>';
+			l_sHtml += '<a href="' + tsk.url  +  '" target="_blank">[#' + tsk.id + ']</a>';
 			l_sHtml += "</div>\n";
-			l_sHtml += '<div class="agile-sticker-body">' + tsk.title + '</div>';
- 			l_sHtml += "</div></div>\n";
+			l_sHtml += '<div class="agile-sticker-body">' + tsk.title;
+			if( tsk.assigned_to_face ) {
+				l_sHtml += '<div class="agile-sticker-assignee-face">' + tsk.assigned_to_face + '</div>';
+			}
+			if( tsk.assigned_to != "Nobody" ) {
+				l_sHtml += '<div class="agile-sticker-assignee">Assigned: ' + tsk.assigned_to + '</div>';
+			}
+			if( tsk.estimated_dev_effort ) {
+				l_sHtml += '<div class="agile-sticker-effort">' + tsk.remaining_dev_effort + '/' + tsk.estimated_dev_effort + '</div>';
+			}
+			l_sHtml += '</div>';
+			l_sHtml += "</div></div>\n";
 		}
 	}
 

@@ -11,9 +11,9 @@
 }
 
 .agile-board-progress-bar, .agile-board-progress-bar-done, .agile-board-progress-bar-remains {
-	float : left; 
-	text-align: center; 
-	padding: 2px 0; 
+	float : left;
+	text-align: center;
+	padding: 2px 0;
 }
 
 .agile-board-progress-bar-done {
@@ -65,7 +65,7 @@
 	font-size: 10px;
 	width: 100%;
 	/* border: solid #CCCCCC 1px; */
-	height: 130px;
+	height: 80px;
 	-moz-box-shadow: 0 4px 8px rgba(0,0,0,0.5);
 	-webkit-box-shadow: 0 4px 8px rgba(0,0,0,0.5);
 	box-shadow: 0 4px 8px rgba(0,0,0,0.5);
@@ -85,10 +85,31 @@
 }
 
 .agile-sticker-body {
+	position: relative;
 	padding: 2px;
-	height: 108px;
+	height: 58px;
 	width: 98%;
 	overflow: hidden;
+}
+
+.agile-sticker-assignee-face {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.agile-sticker-assignee {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	text-align: left;
+}
+
+.agile-sticker-effort {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	text-align: right;
 }
 
 .agile-sticker-user-story {

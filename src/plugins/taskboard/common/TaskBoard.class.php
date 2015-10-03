@@ -724,6 +724,14 @@ class TaskBoard extends Error {
 
 		$ret['url'] = $this->TrackersAdapter->getTaskUrl($task);
 
+		$params = array('user_id' => $task->getAssignedTo(), 'size' => 's', 'content' => '');
+		plugin_hook_by_reference("user_logo", $params);
+		if ($params['content']) {
+			$ret['assigned_to_face'] = $params['content'];
+		} else {
+			$ret['assigned_to_face'] = '';
+		}
+
 		return $ret;
 	}
 
