@@ -1,6 +1,7 @@
 Fusionforge 6.0.3:
 * Layout: fix rss url when url is absolute (TrivialDev)
 * Accounts: accept more elliptic curve ssh keys types (Unit 193 & Inria)
+* Accounts: fix missing system privileges when using "Add Users From List" (Inria)
 * Docman: fix filesize sort [#784] (TrivialDev)
 * News: allow moderating news comments even if the Forum tool is disabled (Inria)
 * Plugin SCM: fix race condition when creating project with SCM selected (Inria)
