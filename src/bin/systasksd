@@ -38,13 +38,13 @@ function usergroups_sync() {
 	global $usergroups_lastsync;
 	$res = db_query_params("SELECT MAX(last_modified_date) AS lastmodified FROM nss_usergroups");
 	$row = db_fetch_array($res);
-	if ($row['lastmodified'] > $usergroups_lastsync) {
+	if ($row['lastmodified'] >= $usergroups_lastsync) {
+		$usergroups_lastsync = time();
 		cron_reload_nscd();
 		cron_regen_apache_auth();
 		cron_reload_apache();
 		$hook_params = array();
 		plugin_hook("usergroups_sync", $hook_params);
-		$usergroups_lastsync = time();
 	}
 }
 
