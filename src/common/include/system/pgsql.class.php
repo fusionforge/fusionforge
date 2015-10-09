@@ -163,12 +163,12 @@ class pgsql extends System {
 	/**
  	* sysCheckCreateGroup() - Check that a group has been created
  	*
- 	* @param	int	$user_id	The ID of the user to check
+ 	* @param	int	$group_id	The ID of the group to check
  	* @return	bool			true on success/false on error
  	*
  	*/
-	function sysCheckCreateGroup($user_id) {
-		return $this->sysCreateGroup($user_id);
+	function sysCheckCreateGroup($group_id) {
+		return $this->sysCreateGroup($group_id);
 	}
 
 	/**

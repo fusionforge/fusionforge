@@ -5,11 +5,14 @@ FusionForge 6.X:
 Fusionforge 6.0.3:
 * Layout: fix rss url when url is absolute (TrivialDev)
 * Accounts: accept more elliptic curve ssh keys types (Unit 193 & Inria)
+* Accounts: fix missing system privileges when using "Add Users From List" (Inria)
 * Docman: fix filesize sort [#784] (TrivialDev)
 * News: allow moderating news comments even if the Forum tool is disabled (Inria)
 * Plugin SCM: fix race condition when creating project with SCM selected (Inria)
 * Plugin SCM SVN: fix repo access to RO group (Inria)
 * Plugin SCM Git: work-around for iframe access to private projects' gitweb from Firefox 40 (Inria)
+* Plugin scmhook: git committracker: fix groupname detection on multi-server setup (Inria)
+* Plugin scmhook: git postreceiveemail: don't prepend [projectname] in subject by default (Inria)
 * Plugin Taskboard: remove in-progress French translation (Inria)
 * Plugin Taskboard: block dropping item on columns with resolution "closed" [#781] (TrivialDev)
 

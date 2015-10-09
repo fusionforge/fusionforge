@@ -2095,6 +2095,21 @@ class Group extends Error {
 		//
 		$this->addHistory(_('Added User'),$user_identifier);
 		db_commit();
+
+		//
+		// Update cache
+		//
+		$add_u = user_get_object($user_id);
+		$found = false;
+		foreach ($this->membersArr as $u) {
+			if ($u->getID() == $add_u->getID()) {
+				$found = true;
+				break;
+			}
+		}
+		if (!$found)
+			$this->membersArr[] = $add_u;
+
 		return true;
 	}
 
@@ -2208,6 +2223,18 @@ class Group extends Error {
 		$this->addHistory(_('Removed User'),$user_id);
 
 		db_commit();
+
+		//
+		// Update cache
+		//
+		$del_u = user_get_object($user_id);
+		foreach ($this->membersArr as $k => $u) {
+			if ($u->getID() == $del_u->getID()) {
+				unset($this->membersArr[$k]);
+				break;
+			}
+		}
+
 		return true;
 	}
 
