@@ -1,4 +1,7 @@
-Fusionforge 6.0.3:
+FusionForge 6.0.4:
+* Plugin scmhook: fix non-editable mailing list name in some configurations (Inria)
+
+FusionForge 6.0.3:
 * Layout: fix rss url when url is absolute (TrivialDev)
 * Accounts: accept more elliptic curve ssh keys types (Unit 193 & Inria)
 * Accounts: fix missing system privileges when using "Add Users From List" (Inria)
