@@ -725,11 +725,10 @@ control over it to the project's administrator.");
 			$last_user    = "";
 			while (!feof($pipe) && $data = fgets($pipe)) {
 				$line = trim($data);
-				// Drop bad UTF-8 - it's quite hard to make git output non-UTF-8
-				// (e.g. by enforcing an unknown encoding) - but some users do!
-				// and this makes PostgreSQL choke
-				// this fix removes tabs in line. the regex used in short-commit stats line has been changed accordingly.
-				$line = preg_replace('/[^(\x20-\x7F)]/','', $line);
+				// Replace bad UTF-8 with '?' - it's quite hard to make git output non-UTF-8
+				// (e.g. with i18n.commitEncoding = unknown) - but some users do!
+				// and this makes PostgreSQL choke (SQL> ERROR:  invalid byte sequence for encoding "UTF8": 0xf9)
+				$line = mb_convert_encoding($line, 'UTF-8', 'UTF-8');
 				if (strlen($line) > 0) {
 					$result = preg_match("/^(?P<name>.+) <(?P<mail>.+)>/", $line, $matches);
 					if ($result) {
@@ -746,7 +745,7 @@ control over it to the project's administrator.");
 						$usr_commits[$last_user]++;
 					} else {
 						// Short-commit stats line
-						$result = preg_match("/^(?P<mode>[AMD])(?P<file>.+)$/", $line, $matches);
+						$result = preg_match("/^(?P<mode>[AMD])\s+(?P<file>.+)$/", $line, $matches);
 						if (!$result) continue;
 						if ($last_user == "") continue;
 						if (!isset($usr_adds[$last_user])) $usr_adds[$last_user] = 0;
