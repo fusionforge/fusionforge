@@ -734,7 +734,7 @@ control over it to the project's administrator.");
 					if ($result) {
 						// Author line
 						$last_user = $matches['name'];
-						$user2email[$last_user] = strtolower($matches['mail']);
+						$user2email[$last_user] = $matches['mail'];
 						if (!isset($usr_adds[$last_user])) {
 							$usr_adds[$last_user] = 0;
 							$usr_updates[$last_user] = 0;
@@ -791,8 +791,8 @@ control over it to the project's administrator.");
 				if ($u) {
 					$user_id = $u->getID();
 				} else {
-					$res=db_query_params('SELECT user_id FROM users WHERE lower(realname)=$1 OR email=$2',
-						array(strtolower($user), $user2email[$user]));
+					$res=db_query_params('SELECT user_id FROM users WHERE lower(realname)=$1 OR lower(email)=$2',
+						array(strtolower($user), strtolower($user2email[$user])));
 					if ($res && db_numrows($res) > 0) {
 						$user_id = db_result($res,0,'user_id');
 					} else {
