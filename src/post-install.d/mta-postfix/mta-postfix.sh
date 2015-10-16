@@ -60,13 +60,12 @@ case "$1" in
 	postfix_append_config 'relay_domains' $lists_host
 
 	# Mailman
-	postfix_append_config 'transport_maps' 'hash:/etc/postfix/fusionforge-lists-transport'
 	echo "$lists_host mailman:" > /etc/postfix/fusionforge-lists-transport
 	postmap /etc/postfix/fusionforge-lists-transport
+	postfix_append_config 'transport_maps' 'hash:/etc/postfix/fusionforge-lists-transport'
 	postconf -e mailman_destination_recipient_limit=1
 
 	# Users aliases - database link
-	postfix_append_config 'virtual_alias_maps' 'proxy:pgsql:/etc/postfix/fusionforge-users.cf'
 	touch /etc/postfix/fusionforge-users.cf
 	chown root:postfix /etc/postfix/fusionforge-users.cf
 	chmod 640 /etc/postfix/fusionforge-users.cf  # database password
@@ -78,6 +77,9 @@ case "$1" in
 		domain = $users_host
 		query = SELECT email FROM mta_users WHERE login = '%u'
 		EOF
+	postfix_append_config 'virtual_alias_maps' 'proxy:pgsql:/etc/postfix/fusionforge-users.cf'
+
+	# Configuration automatically reloaded through 'postconf'
 	;;
     
     remove)
@@ -91,6 +93,8 @@ case "$1" in
             | sed "s|\(, *\)\?proxy:pgsql:/etc/postfix/fusionforge-users.cf||")"
 	postconf -e relay_domains="$(postconf -h relay_domains | sed "s/\(, *\)\?$lists_host//")"
 	postconf -e mydestination="$(postconf -h mydestination | sed "s/\(, *\)\?$users_host//")"
+
+	# Configuration automatically reloaded through 'postconf'
 	;;
 
     *)
