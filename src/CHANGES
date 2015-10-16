@@ -3,6 +3,7 @@ FusionForge 6.0.4:
 * MTA-Exim4: restart exim4 on install
 * Plugin SCM: improve user matching when computing stats (Inria)
 * Plugin scmhook: fix non-editable mailing list name in some configurations (Inria)
+* Plugin MediaWiki: fix permission error when upgrading suspended projects database (Inria & TrivialDev)
 
 FusionForge 6.0.3:
 * Layout: fix rss url when url is absolute (TrivialDev)
