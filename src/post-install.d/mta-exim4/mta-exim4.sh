@@ -22,6 +22,8 @@
 
 set -e
 
+source $(forge_get_config source_path)/post-install.d/common/service.inc
+
 ####
 # Handle the three configuration types (unsplit, split, manual)
 # Note: all are available in Debian; CentOS is manual only
@@ -198,6 +200,8 @@ EOF
 		-e 'ecat' -e 'd }' $i < $block
 	done
 	rm -f $block
+
+	service exim4 restart
 	;;
     
     remove)
@@ -218,6 +222,8 @@ EOF
 	    sed -i -e '/^### BEGIN FUSIONFORGE BLOCK/,/^### END FUSIONFORGE BLOCK/d' $i
 	done
 	rm -f /etc/exim4/conf.d/router/01_fusionforge_forwards
+
+	service exim4 restart
 	;;
     
     *)
