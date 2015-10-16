@@ -1,6 +1,8 @@
 #!/bin/bash -e
 # gitweb post-install
 
+source $(forge_get_config source_path)/post-install.d/common/service.inc
+
 plugindir=$(forge_get_config plugins_path)/scmgit
 
 gitwebcgi=$(ls /var/www/git/gitweb.cgi /var/www/gitweb-caching/gitweb.cgi \

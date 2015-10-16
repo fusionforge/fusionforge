@@ -1,3 +1,10 @@
+fusionforge (6.0.2+20151016-1) UNRELEASED; urgency=medium
+
+  * New upstream snapshot following the 6.0 stable branch
+    (closes: #801843)
+
+ -- Sylvain Beucler <beuc@debian.org>  Fri, 16 Oct 2015 11:15:00 +0200
+
 fusionforge (6.0.3-1) unstable; urgency=medium
 
   * New upstream release
