@@ -1,5 +1,6 @@
 FusionForge 6.0.4:
 * Accounts: do not accept digits-only user and group names, to avoid confusion with UID/GID in system commands (Inria)
+* MTA-Exim4: restart exim4 on install
 * Plugin SCM: improve user matching when computing stats (Inria)
 * Plugin scmhook: fix non-editable mailing list name in some configurations (Inria)
 
