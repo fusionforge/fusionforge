@@ -9,6 +9,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2011, Roland Mas
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright 2015, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -44,6 +45,8 @@ $login = getStringFromRequest('login');
 $form_loginname = getStringFromRequest('form_loginname');
 $form_pw = getStringFromRequest('form_pw');
 $triggered = getIntFromRequest('triggered');
+$attempts = getIntFromRequest('attempts');
+$previous_login = getStringFromRequest('previous_login');
 
 if (session_loggedin())
 	session_redirect('/my');
@@ -77,7 +80,11 @@ if ($login) {
 	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 		exit_form_double_submit();
 	}
-	if (session_check_credentials_in_database(strtolower($form_loginname), $form_pw, false)) {
+
+	$valide = 1;
+	$params['valide'] =& $valide;
+	plugin_hook('captcha_check', $params);
+	if (session_check_credentials_in_database(strtolower($form_loginname), $form_pw, false) && $valide) {
 		if ($plugin->isSufficient()) {
 			$plugin->startSession($form_loginname);
 		}
@@ -124,7 +131,12 @@ if ($login) {
 $HTML->header(array('title'=>'Login'));
 
 // Otherwise, display the login form again
-display_login_form($return_to, $triggered);
+if ($previous_login == $form_loginname) {
+	$attempts++;
+} else {
+	$attempts = 1;
+}
+display_login_form($return_to, $triggered, false, $attempts, $form_loginname);
 
 $HTML->footer();
 

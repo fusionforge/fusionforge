@@ -4,7 +4,7 @@
  * phpcaptchaPlugin Class
  *
  * Copyright 2010, Luis Daniel Ibáñez
- * Copyright 2013-2014, Franck Villaume - TrivialDev
+ * Copyright 2013-2015, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -46,20 +46,21 @@ class phpcaptchaPlugin extends Plugin {
 		}
 	}
 
-	function captcha_form() {
+	function captcha_form(&$html) {
 		global $HTML;
 		if ($this->checkConfig()) {
-			echo '<p>
+			$html .= '<p>
 				<img id="captcha" src="/plugins/'.$this->name.'/securimage_show.php" alt="CAPTCHA Image" />
 				<a href="#" onclick="document.getElementById(\'captcha\').src = \'/plugins/'.$this->name.'/securimage_show.php?\' + Math.random(); return false">';
-			echo _('Reload image.').'</a>';
-			echo '</p><p>';
-			echo _('Write captcha here:').'<br />';
-			echo '<input type="text" name="captcha_code" size="10" maxlength="6" />';
-			echo '</p>';
+			$html .= _('Reload image.').'</a>';
+			$html .= '</p><p>';
+			$html .= _('Write captcha here:').'<br />';
+			$html .= '<input type="text" name="captcha_code" size="10" maxlength="6" required="required" />';
+			$html .= '</p>';
 		} else {
-			echo $HTML->information(_('phpcaptcha seems not installed. Contact your administrator for more informations.'));
+			$html .= $HTML->information(_('phpcaptcha seems not installed. Contact your administrator for more information.'));
 		}
+		return $html;
 	}
 
 	function checkConfig() {

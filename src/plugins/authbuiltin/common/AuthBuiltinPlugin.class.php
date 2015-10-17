@@ -3,7 +3,7 @@
  * FusionForge authentication management
  *
  * Copyright 2011, Roland Mas
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014-2015, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -61,6 +61,9 @@ class AuthBuiltinPlugin extends ForgeAuthPlugin {
 		}
 		$return_to = $params['return_to'];
 		$loginname = '';
+		if (isset($params['attempts']) && $params['attempts'] >= 1) {
+			$loginname = $params['previousLogin'];
+		}
 
 		$result = '';
 
@@ -79,6 +82,15 @@ class AuthBuiltinPlugin extends ForgeAuthPlugin {
 		$result .= html_ao('p')._('Password')._(':');
 		$result .= html_e('br').html_e('input', array('type' => 'password', 'name' => 'form_pw', 'required' => 'required'));
 		$result .= html_ac(html_ap() -1);
+		if (isset($params['attempts'])) {
+			$result .= html_e('input', array('type' => 'hidden', 'name' => 'attempts', 'value' => $params['attempts']));
+			if (isset($params['previousLogin'])) {
+				$result .= html_e('input', array('type' => 'hidden', 'name' => 'previous_login', 'value' => $params['previousLogin']));
+			}
+			if ($params['attempts'] > 3) {
+				 plugin_hook_by_reference('captcha_form', $result);
+			}
+		}
 		$result .= html_e('p', array(), html_e('input', array('type' => 'submit', 'name' => 'login', 'value' => _('Login'))), false);
 		$result .= $HTML->closeForm();
 		$result .= html_e('p', array(), util_make_link('/account/lostpw.php', _('[Lost your password?]')));
