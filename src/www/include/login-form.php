@@ -52,7 +52,7 @@ function display_login_form($return_to = '/', $triggered = false, $full_page = f
 	$params['return_to'] = $return_to;
 	$params['html_snippets'] = array();
 	$params['transparent_redirect_urls'] = array();
-	$params['attemps'] = $attemps;
+	$params['attempts'] = $attemps;
 	$params['previousLogin'] = $previousLogin;
 	plugin_hook_by_reference('display_auth_form', $params);
 

@@ -82,8 +82,10 @@ if ($login) {
 	}
 
 	$valide = 1;
-	$params['valide'] =& $valide;
-	plugin_hook('captcha_check', $params);
+	if ($attempts >= 3) {
+		$params['valide'] =& $valide;
+		plugin_hook('captcha_check', $params);
+	}
 	if (session_check_credentials_in_database(strtolower($form_loginname), $form_pw, false) && $valide) {
 		if ($plugin->isSufficient()) {
 			$plugin->startSession($form_loginname);
