@@ -39,11 +39,11 @@ function validate_return_to(&$return_to = '/') {
 	$return_to = $newrt;
 }
 
-function display_login_page($return_to = '/', $triggered = false, $attemps = 1, $previousLogin = null) {
-	display_login_form($return_to, $triggered, true, $attemps, $previousLogin);
+function display_login_page($return_to = '/', $triggered = false, $attempts = 1, $previousLogin = null) {
+	display_login_form($return_to, $triggered, true, $attempts, $previousLogin);
 }
 
-function display_login_form($return_to = '/', $triggered = false, $full_page = false, $attemps = 1, $previousLogin = null) {
+function display_login_form($return_to = '/', $triggered = false, $full_page = false, $attempts = 1, $previousLogin = null) {
 	global $HTML;
 
 	validate_return_to($return_to);
@@ -52,7 +52,7 @@ function display_login_form($return_to = '/', $triggered = false, $full_page = f
 	$params['return_to'] = $return_to;
 	$params['html_snippets'] = array();
 	$params['transparent_redirect_urls'] = array();
-	$params['attempts'] = $attemps;
+	$params['attempts'] = $attempts;
 	$params['previousLogin'] = $previousLogin;
 	plugin_hook_by_reference('display_auth_form', $params);
 
