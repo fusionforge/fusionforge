@@ -806,6 +806,8 @@ _('Organise projects hierarchicaly, relation type 1-n');
 						db_int_array_to_any_clause($family),
 						$this->name));
 		if ($son & db_numrows($son)) {
+			if (!forge_check_perm('project_read', $son->getID()))
+				continue;
 			$content = $HTML->openForm(array('method' => 'post', 'action' => '/plugins/'.$this->name.'/?type=group&action=addChild&id='.$group_id));
 			$content .= _('Select a project')._(':');
 			$content .= html_build_select_box($son, $name, $selected, false);
