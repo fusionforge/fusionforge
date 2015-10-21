@@ -1,7 +1,8 @@
-fusionforge (6.0.3+20151016-1) UNRELEASED; urgency=medium
+fusionforge (6.0.3+20151021-1) unstable; urgency=medium
 
   * New upstream snapshot following the 6.0 stable branch
-    (closes: #801843)
+  * Drop support for CVS (closes: #801142)
+  * Drop post-install scripts (closes: #789772, #789773, #793683, #801843)
 
  -- Sylvain Beucler <beuc@debian.org>  Fri, 16 Oct 2015 11:15:00 +0200
 
