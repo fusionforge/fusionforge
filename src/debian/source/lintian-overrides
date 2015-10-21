@@ -1,0 +1,9 @@
+# See https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=744972
+source-is-missing plugins/wiki/www/themes/default/moacdropdown.js
+source-is-missing plugins/wiki/www/themes/default/toolbar.js
+source-is-missing vendor/jquery-jqplot/plugins/jqplot.dateAxisRenderer.js
+source-is-missing vendor/jquery-jqplot/plugins/jqplot.pyramidAxisRenderer.js
+source-is-missing vendor/jquery-storage/jquery.Storage.js
+source-is-missing vendor/jquery-teamwork-gantt/libs/dateField/jquery.dateField.js
+source-is-missing vendor/jquery-teamwork-gantt/libs/platform.js
+source-is-missing www/docman/scripts/DocManController.js
