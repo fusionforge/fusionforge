@@ -106,6 +106,12 @@ function build_deb {
     cp -a debian/changelog $f
 
     version=$(dpkg-parsechangelog | sed -n 's/^Version: \([0-9.]\+\(\~rc[0-9]\)\?\).*/\1/p')+$(date +%Y%m%d%H%M)
+    make dist VERSION=$version
+    mv fusionforge-$version.tar.bz2 ../fusionforge_$version.orig.tar.bz2
+    cd ..
+
+    tar xf fusionforge_$version.orig.tar.bz2
+    cd fusionforge-$version/
     debian/rules debian/control  # re-gen debian/control
     if gitid=$(git show --format="%h" -s 2> /dev/null) ; then
 	msg="Autobuilt from Git revid $gitid."
@@ -113,12 +119,6 @@ function build_deb {
 	msg="Autobuilt."
     fi
     dch --newversion $version-1 --distribution local --force-distribution "$msg"
-    make dist VERSION=$version
-    mv fusionforge-$version.tar.bz2 ../fusionforge_$version.orig.tar.bz2
-    cd ..
-
-    tar xf fusionforge_$version.orig.tar.bz2
-    cd fusionforge-$version/
     debuild -us -uc -tc  # using -tc so 'git status' is readable
     # Install built packages into the local repo
     debrelease -f local
