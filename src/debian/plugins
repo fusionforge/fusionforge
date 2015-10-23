@@ -80,6 +80,9 @@ Depends:
 Package: fusionforge-plugin-projectlabels
 Depends:
 
+Package: fusionforge-plugin-projects-hierarchy
+Depends:
+
 # Note: scmhook might need to be manually packaged to allow installing
 # the commit hooks on a separate SCM server
 Package: fusionforge-plugin-scmhook
