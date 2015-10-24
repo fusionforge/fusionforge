@@ -41,11 +41,17 @@ $searchString = trim(getStringFromPost('textsearch'));
 $insideDocuments = getStringFromPost('insideDocuments');
 $subprojectsIncluded = getStringFromPost('includesubprojects');
 $limitNbSearchDocs = getStringFromPost('limitNbSearchDocs');
+$limitByStartDate = getIntFromPost('limitByStartDate', 0);
+$limitByEndDate = getIntFromPost('limitByEndDate', 0);
+$received_begin = getStringFromRequest('start_date', 0);
+$received_end = getStringFromRequest('end_date', 0);
 $allchecked = '';
 $onechecked = '';
 $insideDocumentsCheckbox = '';
 $attrsInputSearchAll = array('type' => 'radio', 'name' => 'search_type', 'required' => 'required', 'value' => 'all', 'title' => _('All searched words are mandatory'));
 $attrsInputSearchOne = array('type' => 'radio', 'name' => 'search_type', 'required' => 'required', 'value' => 'one', 'title' => _('At least one word must be found'));
+$date_format_js = _('yy-mm-dd');
+$date_format = _('Y-m-d');
 
 if (getStringFromPost('search_type') == 'one') {
 	$attrsInputSearchOne['checked'] = 'checked';
@@ -54,6 +60,30 @@ if (getStringFromPost('search_type') == 'one') {
 }
 
 echo html_ao('div', array('id' => 'docman_search', 'class' => 'docmanDivIncluded'));
+echo html_ao('script', array('type' => 'text/javascript'));
+?>
+//<![CDATA[
+var controllerSearch;
+
+jQuery(document).ready(function() {
+	controllerSearch = new DocManSearchController({
+		buttonStartDate:	jQuery('#limitByStartDate'),
+		buttonEndDate:		jQuery('#limitByEndDate'),
+		datePickerStartDate:	jQuery('#datepicker_start'),
+		datePickerEndDate:	jQuery('#datepicker_end'),
+	});
+
+	jQuery('#datepicker_start').datepicker({
+		dateFormat: "<?php echo $date_format_js ?>"
+	});
+	jQuery('#datepicker_end').datepicker({
+		dateFormat: "<?php echo $date_format_js ?>"
+	});
+});
+
+//]]>
+<?php
+echo html_ac(html_ap() - 1);
 echo $HTML->openForm(array('method' => 'post', 'action' => util_make_uri('/docman/?group_id='.$group_id.'&view=search')));
 echo html_e('div', array('id' => 'docman_search_query_words'),
 		html_e('span', array('id' => 'docman_search_query_label'), _('Query').utils_requiredField()._(': ')).
@@ -68,6 +98,13 @@ if ($g->useDocmanSearch()) {
 		$attrsInputInsideDocs['checked'] = 'checked';
 	echo html_e('input', $attrsInputInsideDocs)._('Inside documents');
 }
+$attrsFieldSet = array('id' => 'fieldset1_closed', 'class' => 'coolfieldset');
+if ($limitByStartDate || $limitByEndDate || is_integer($limitNbSearchDocs)) {
+	$attrsFieldSet['id'] = 'fieldset1';
+}
+echo html_ao('fieldset', $attrsFieldSet);
+echo html_e('legend', array(), _('Advanced Options'));
+echo html_ao('div');
 if ($g->usesPlugin('projects-hierarchy')) {
 	$projectsHierarchy = plugin_get_object('projects-hierarchy');
 	$projectIDsArray = $projectsHierarchy->getFamily($group_id, 'child', true, 'validated');
@@ -75,10 +112,34 @@ if ($g->usesPlugin('projects-hierarchy')) {
 		$attrsInputIncludeSubprojects = array('type' => 'checkbox', 'name'  => 'includesubprojects', 'value' => 1, 'title' => _('search into childs following project hierarchy'));
 		if ($subprojectsIncluded)
 			$attrsInputIncludeSubprojects['checked'] = 'checked';
-		echo html_e('input', $attrsInputIncludeSubprojects)._('Include child projects');
+		echo html_e('p', array(), html_e('input', $attrsInputIncludeSubprojects)._('Include child projects'));
 	}
 }
 echo html_e('p', array(), _('limit search results to').html_build_select_box_from_array(array(_('All'), '10', '25', '50', '100'), 'limitNbSearchDocs', _('All'), 1)._('documents'));
+$attrsInputLimitByStartDate = array('type' => 'checkbox', 'id' => 'limitByStartDate', 'name' => 'limitByStartDate', 'value' => 1, 'title' => _('Set created start date limitation for this search. If not enable, not limitation.'));
+$attrsDatePickerLimitByStartDate = array('id' => 'datepicker_start', 'name' => 'start_date', 'size' => 10, 'maxlength' => 10, 'disabled' => 'disabled');
+if ($limitByStartDate) {
+	$attrsInputLimitByStartDate['checked'] = 'checked';
+	unset($attrsDatePickerLimitByStartDate['disabled']);
+	$attrsDatePickerLimitByStartDate['required'] = 'required';
+	if ($received_begin) {
+		$attrsDatePickerLimitByStartDate['value'] = util_html_encode($received_begin);
+	}
+}
+$attrsInputLimitByEndDate = array('type' => 'checkbox', 'id' => 'limitByEndDate', 'name' => 'limitByEndDate', 'value' => 1, 'title' => _('Set created end date limitation for this search. If not enable, not limitation.'));
+$attrsDatePickerLimitByEndDate = array('id' => 'datepicker_end', 'name' => 'end_date', 'size' => 10, 'maxlength' => 10, 'disabled' => 'disabled');
+if ($limitByEndDate) {
+	$attrsInputLimitByEndDate['checked'] = 'checked';
+	unset($attrsDatePickerLimitByEndDate['disabled']);
+	$attrsDatePickerLimitByEndDate['required'] = 'required';
+	if ($received_end) {
+		$attrsDatePickerLimitByStartDate['value'] = util_html_encode($received_end);
+	}
+}
+echo html_e('p', array(), _('Set dates')._(': ').html_e('br').
+			_('From')._(': ').html_e('input', $attrsInputLimitByStartDate).html_e('input', $attrsDatePickerLimitByStartDate).
+			_('To')._(': ').html_e('input', $attrsInputLimitByEndDate).html_e('input', $attrsDatePickerLimitByEndDate));
+echo html_ac(html_ap() - 2);
 echo $HTML->addRequiredFieldsInfoBox();
 echo $HTML->closeForm();
 echo html_ac(html_ap() - 1);
@@ -126,10 +187,26 @@ if ($searchString) {
 	$params['includesubprojects'] = $subprojectsIncluded;
 	plugin_hook('docmansearch_has_hierarchy', $params);
 	$qpa = db_construct_qpa($qpa, ' ) ', array());
+	if ($received_begin) {
+		$arrDateBegin = DateTime::createFromFormat($date_format, $received_begin);
+	}
+	if ($received_end) {
+		$arrDateEnd = DateTime::createFromFormat($date_format, $received_end);
+	}
+
+	if (isset($arrDateBegin) && !isset($arrDateEnd)) {
+		$qpa = db_construct_qpa($qpa, ' AND doc_data.createdate >= $1', array($arrDateBegin->getTimestamp()));
+	} elseif (!isset($arrDateBegin) && isset($arrDateEnd)) {
+		$qpa = db_construct_qpa($qpa, ' AND doc_data.createdate <= $1', array($arrDateEnd->getTimestamp()));
+	} elseif (isset($arrDateBegin) && isset($arrDateEnd)) {
+		$qpa = db_construct_qpa($qpa, ' AND doc_data.createdate between $1 and $2', array($arrDateBegin->getTimestamp(), $arrDateEnd->getTimestamp()));
+	}
+
 	$qpa = db_construct_qpa($qpa, ' ORDER BY updatedate, createdate');
 	if (is_integer($limitNbSearchDocs)) {
 		$qpa = db_construct_qpa($qpa, ' LIMIT $1', array($limitNbSearchDocs));
 	}
+
 	$result = db_query_qpa($qpa);
 	if (!$result) {
 		echo $HTML->error_msg(_('Database query error'));
