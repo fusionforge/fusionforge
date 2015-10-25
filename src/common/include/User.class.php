@@ -5,7 +5,7 @@
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2009-2010, Roland Mas
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2015, Franck Villaume - TrivialDev
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
@@ -1731,6 +1731,64 @@ Email: %3$s
 	}
 }
 
+
+class UserComparator {
+	var $criterion = 'name';
+
+	function Compare($a, $b) {
+		switch ($this->criterion) {
+			case 'name':
+			case 'realname':
+			default:
+				$name_compare = strcoll($a->getRealName(), $b->getRealName());
+				if ($name_compare != 0) {
+					return $name_compare;
+				}
+				/* If several users share a same real name */
+				return strcoll($a->getUnixName(), $b->getUnixName());
+				break;
+			case 'unixname':
+			case 'user_name':
+				return strcmp($a->getUnixName(), $b->getUnixName());
+				break;
+			case 'user_id':
+			case 'id':
+				$aid = $a->getID();
+				$bid = $b->getID();
+				if ($aid == $bid) {
+					return 0;
+				}
+				return ($aid < $bid)? -1 : 1;
+				break;
+			case 'lastname':
+				return strcmp($a->getLastName(), $b->getLastName());
+				break;
+			case 'firstname':
+				return strcmp($a->getFirstName(), $b->getFirstName());
+				break;
+			case 'status':
+				return strcmp($a->getStatus(), $b->getStatus());
+				break;
+			case 'add_date':
+				$a_add_date = $a->getAddDate();
+				$b_add_date = $b->getAddDate();
+				if ($a_add_date == $b_add_date) {
+					return 0;
+				}
+				return ($a_add_date < $b_add_date)? -1 : 1;
+				break;
+		}
+	}
+}
+
+function sortUserList(&$list, $criterion = 'name') {
+	$cmp = new UserComparator ();
+	$cmp->criterion = $criterion;
+
+	return usort($list, array($cmp, 'Compare'));
+}
+
+
 /*
 
 		EVERYTHING BELOW HERE IS DEPRECATED
@@ -1787,42 +1845,6 @@ function user_getname($user_id = false) {
 			return 'Invalid User';
 		}
 	}
-}
-
-class UserComparator {
-	var $criterion = 'name';
-
-	function Compare($a, $b) {
-		switch ($this->criterion) {
-			case 'name':
-			default:
-				$name_compare = strcoll($a->getRealName(), $b->getRealName());
-				if ($name_compare != 0) {
-					return $name_compare;
-				}
-				/* If several projects share a same real name */
-				return strcoll($a->getUnixName(), $b->getUnixName());
-				break;
-			case 'unixname':
-				return strcmp($a->getUnixName(), $b->getUnixName());
-				break;
-			case 'id':
-				$aid = $a->getID();
-				$bid = $b->getID();
-				if ($a == $b) {
-					return 0;
-				}
-				return ($a < $b)? -1 : 1;
-				break;
-		}
-	}
-}
-
-function sortUserList(&$list, $criterion = 'name') {
-	$cmp = new UserComparator ();
-	$cmp->criterion = $criterion;
-
-	return usort($list, array($cmp, 'Compare'));
 }
 
 // Local Variables:
