@@ -159,7 +159,7 @@ echo show_features_boxes();
 
 <div id="ft">
 <?php
-		$forge = new FusionForge();
+		$forge = FusionForge::getInstance();
 		printf (_('This site is running %1$s version %2$s'),
 			$forge->software_name,
 			$forge->software_version) ;

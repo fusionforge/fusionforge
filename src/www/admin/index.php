@@ -43,7 +43,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 echo html_ao('div', array('class' => 'info-box'));
 echo html_e('h2', array(), _('User Maintenance'));
 $lielements = array();
-$forge = new FusionForge();
+$forge = FusionForge::getInstance();
 $lielements[] = array('content' => sprintf(_('Active site users: <strong>%d</strong>'), $forge->getNumberOfActiveUsers()));
 $lielements[] = array('content' => util_make_link('/admin/userlist.php', _('Display Full User List/Edit Users')));
 $localcontent = _('Display Users Beginning with')._(': ');

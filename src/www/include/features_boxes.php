@@ -57,7 +57,7 @@ function show_features_boxes() {
 	$return .= $HTML->boxMiddle(_('Recently Registered Projects'), 'Recently_Registered_Projects');
 	$return .= show_newest_projects();
 	$return .= $HTML->boxMiddle(_('System Information'), 'System_Information');
-	$ff = new FusionForge();
+	$ff = FusionForge::getInstance();
 	$return .= sprintf(_('%s is running %s version %s'),
 			   forge_get_config ('forge_name'),
 			   $ff->software_name,
@@ -136,7 +136,7 @@ function stats_downloads_total() {
 }
 
 function show_sitestats() {
-	$fforge = new FusionForge();
+	$fforge = FusionForge::getInstance();
 	$return = '<p>';
 
 	$count_type = forge_get_config('sitestats_projects_count');

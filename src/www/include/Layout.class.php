@@ -397,7 +397,7 @@ class Layout extends Error {
 		 * Forge-Identification Meta Header, Version 1.0
 		 * cf. http://home.gna.org/forgeplucker/forge-identification.html
 		 */
-		$ff = new FusionForge();
+		$ff = FusionForge::getInstance();
 		echo html_e('meta', array('name' => 'Forge-Identification', 'content' => $ff->software_name.':'.$ff->software_version));
 	}
 
