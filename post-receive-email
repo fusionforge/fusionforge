@@ -96,7 +96,7 @@
 # hooks.diffopts
 #   Alternate options for the git diff-tree invocation that shows changes.
 #   Default is "-p --stat --summary --find-copies-harder". Remove -p from
-#   those options to skil including a unified diff of changes in addition
+#   those options to skip including a unified diff of changes in addition
 #   to the summary output. See hooks.showrev for more discussion on this.
 # hooks.kgbconffile
 #   Full path to a configuration file for kgb-client, or unset/empty.
