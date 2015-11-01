@@ -108,10 +108,9 @@ if (!isset($_sort_col)) {
 	$_sort_col = 'priority';
 	$_sort_ord = 'DESC';
 }
-$offset = getStringFromRequest('offset');
+
 $_sort_col = getStringFromRequest('_sort_col',$_sort_col);
 $_sort_ord = getStringFromRequest('_sort_ord',$_sort_ord);
-$max_rows = getIntFromRequest('max_rows', 25);
 $set = getStringFromRequest('set');
 $_assigned_to = getIntFromRequest('_assigned_to');
 $_status = getIntFromRequest('_status');
@@ -142,7 +141,7 @@ if (is_array($_extra_fields)){
 	}
 }
 
-$af->setup($offset,$_sort_col,$_sort_ord,$paging,$set,$_assigned_to,$_status,$aux_extra_fields);
+$af->setup($start,$_sort_col,$_sort_ord,$paging,$set,$_assigned_to,$_status,$aux_extra_fields);
 //
 //	These vals are sanitized and/or retrieved from ArtifactFactory stored settings
 //
