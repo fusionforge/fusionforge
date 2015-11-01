@@ -63,6 +63,8 @@ if (session_loggedin()) {
 		}
 		$u->setPreference("paging", $paging);
 	}
+	/* logged in users get configurable paging */
+	$paging = $u->getPreference("paging");
 
 	if($query_id) {
 		if ($query_id == '-1') {
@@ -255,11 +257,7 @@ if ($art_arr && ($art_cnt = count($art_arr)) > 0) {
 	$start = 0;
 	$focus = 0;
 }
-$paging = 0;
-if (session_loggedin()) {
-	/* logged in users get configurable paging */
-	$paging = $u->getPreference("paging");
-}
+
 if (!$paging) {
 	$paging = 25;
 }
