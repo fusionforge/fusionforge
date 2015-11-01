@@ -274,16 +274,7 @@ if ($art_cnt) {
 	$max = 0;
 }
 
-if (session_loggedin()) {
-	echo $HTML->openForm(array('action' => '/tracker/?group_id='.$group_id.'&atid='.$ath->getID().'&start='.$start, 'method' => 'post'));
-	printf('<p>' . _('Displaying results %1$d‒%2$d out of %3$d total.'), $start + 1, $max, $art_cnt);
-	printf(' ' . _('Displaying %2$s results.') . "\n\t<input " .'type="submit" name="setpaging" value="%1$s" />', _('Change'), html_build_select_box_from_array(array(10, 25, 50, 100, 1000), 'nres', $paging, 1));
-	echo "</p>\n";
-	echo $HTML->closeForm();
-} else {
-	printf('<p>' . _('Displaying results %1$d‒%2$d out of %3$d total.'), $start + 1, $max, $art_cnt);
-	echo "</p>\n";
-}
+echo $HTML->paging_top($start, $paging, $art_cnt, $max, '/tracker/?group_id='.$group_id.'&atid='.$ath->getID());
 
 /**
  *
@@ -693,37 +684,8 @@ if ($art_arr && $art_cnt > 0) {
 	if ($start < $max) {
 		echo $HTML->listTableBottom();
 	}
-	$pages = $art_cnt / $paging;
-	$currentpage = intval($start / $paging);
+	echo $HTML->paging_bottom($start, $paging, $art_cnt, '/tracker/?func=browse&group_id='.$group_id.'&atid='.$ath->getID().'&set='. $set);
 
-	if ($start > 0) {
-		echo util_make_link('/tracker/?func=browse&group_id='.$group_id.'&atid='.$ath->getID().'&set='. $set.'&start='.($start-$paging),'<strong>← '._('previous').'</strong>');
-		echo '&nbsp;&nbsp;';
-	}
-	if ($pages > 1) {
-		$skipped_pages=false;
-		for ($j=0; $j<$pages; $j++) {
-			if ($pages > 20) {
-				if ((($j > 4) && ($j < ($currentpage-5))) || (($j > ($currentpage+5)) && ($j < ($pages-5)))) {
-					if (!$skipped_pages) {
-						$skipped_pages=true;
-						echo "....&nbsp;";
-					}
-					continue;
-				} else {
-					$skipped_pages=false;
-				}
-			}
-			if ($j * $paging == $start) {
-				echo '<strong>'.($j+1).'</strong>&nbsp;&nbsp;';
-			} else {
-				echo util_make_link('/tracker/?func=browse&group_id='.$group_id.'&atid='.$ath->getID().'&set='. $set.'&start='.($j*$paging), '<strong>'.($j+1).'</strong>').'&nbsp;&nbsp;';
-			}
-		}
-	}
-	if ( $art_cnt > $start + $paging) {
-		echo util_make_link('/tracker/?func=browse&group_id='.$group_id.'&atid='.$ath->getID().'&set='. $set.'&start='.($start+$paging),'<strong>'._('next').' →</strong>');
-	}
 	echo '<div style="display:table;width:100%">';
 	echo '<div style="display:table-row">';
 

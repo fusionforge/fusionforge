@@ -64,7 +64,7 @@ function performAction($newStatus, $statusString, $user_id) {
 	$feedback = sprintf(_('User updated to %s status'), $statusString);
 }
 
-function show_users_list($users, $filter = '', $sortorder = 'realname', $offset, $rows, $paging, $totalUsers) {
+function show_users_list($users, $filter = '', $sortorder = 'realname', $start, $rows, $paging, $totalUsers) {
 	global $HTML;
 	echo '<p>' ._('Status')._(': ').
 		util_make_link('/admin/userlist.php', _('All')). '
@@ -81,16 +81,6 @@ function show_users_list($users, $filter = '', $sortorder = 'realname', $offset,
 	$headers = array(
 		_('Login'),
 		_('Add date'),
-		'&nbsp;',
-		'&nbsp;',
-		'&nbsp;',
-		'&nbsp;',
-		'&nbsp;'
-	);
-
-	$headerLinks = array(
-		'/admin/userlist.php?sortorder=user_name'.$filter,
-		'/admin/userlist.php?sortorder=add_date'.$filter,
 		'',
 		'',
 		'',
@@ -98,17 +88,18 @@ function show_users_list($users, $filter = '', $sortorder = 'realname', $offset,
 		''
 	);
 
+	$headerLinks = array(
+		'/admin/userlist.php?sortorder=user_name'.$filter,
+		'/admin/userlist.php?sortorder=add_date'.$filter,
+		null,
+		null,
+		null,
+		null,
+		null
+	);
+
+	echo $HTML->paging_top($start, $paging, $totalUsers, $rows, '/admin/userlist.php?sortorder='.$sortorder.$filter);
 	echo $HTML->listTableTop($headers, $headerLinks);
-
-	printf('<p>' . _('Displaying results %1$s out of %2$d total.'),$rows ? ($offset + 1).'-'.($offset + $rows) : '0', $totalUsers);
-
-	echo $HTML->openForm(array('action' => '/admin/userlist.php?offset='.$offset, 'method' => 'post'));
-	printf(' ' . _('Displaying %2$s results.') . "\n\t<input " .
-			'type="submit" name="setpaging" value="%1$s" />' .
-			"\n</p>\n", _('Change'),
-			html_build_select_box_from_array(array(
-			'10', '25', '50', '100', '1000'), 'nres', $paging, 1));
-	echo $HTML->closeForm();
 
 	foreach ($users as $key => $uid) {
 		$cells = array();
@@ -159,43 +150,7 @@ function show_users_list($users, $filter = '', $sortorder = 'realname', $offset,
 		echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($key, true)), $cells);
 	}
 	echo $HTML->listTableBottom();
-
-	/*
-	 Show extra rows for <-- Prev / Next -->
-	*/
-	if ($offset > 0) {
-		echo util_make_link('/admin/userlist.php?offset='.($offset-$paging),'<strong>← '._('previous').'</strong>');
-		echo '&nbsp;&nbsp;';
-	}
-	$pages = $totalUsers / $paging;
-	$currentpage = intval($offset / $paging);
-	if ($pages > 1) {
-		$skipped_pages=false;
-		for ($j=0; $j<$pages; $j++) {
-			if ($pages > 20) {
-				if ((($j > 4) && ($j < ($currentpage-5))) || (($j > ($currentpage+5)) && ($j < ($pages-5)))) {
-					if (!$skipped_pages) {
-						$skipped_pages=true;
-						echo "....&nbsp;";
-					}
-					continue;
-				} else {
-					$skipped_pages=false;
-				}
-			}
-			if ($j * $paging == $offset) {
-				echo '<strong>'.($j+1).'</strong>&nbsp;&nbsp;';
-			} else {
-				echo util_make_link('/admin/userlist.php?offset='.($j*$paging),'<strong>'.($j+1).'</strong>').'&nbsp;&nbsp;';
-			}
-		}
-	}
-	if ( $totalUsers > $offset + $paging) {
-		echo util_make_link('/admin/userlist.php?offset='.($offset+$paging),'<strong>'._('next').' →</strong>');
-	} else {
-		echo '&nbsp;';
-	}
-
+	echo $HTML->paging_bottom($start, $paging, $totalUsers, '/admin/userlist.php?sortorder='.$sortorder.$filter);
 }
 
 
@@ -224,12 +179,11 @@ $action = getStringFromRequest('action');
 $user_id = getIntFromRequest('user_id');
 $status = getStringFromRequest('status');
 $usingplugin = getStringFromRequest('usingplugin');
-$offset = getIntFromRequest('offset');
+$start = getIntFromRequest('start');
 
-if ($offset < 0) {
-	$offset = 0 ;
+if ($start < 0) {
+	$start = 0 ;
 }
-$max_rows = getIntFromRequest('max_rows');
 
 if ($action=='delete') {
 	performAction('D', "DELETED", $user_id);
@@ -245,10 +199,10 @@ $HTML->header(array('title'=>_('User List')));
 if ($usingplugin) {
 	echo html_e('h2', array(), _('Users that use plugin').' '.$usingplugin);
 	$res = db_query_params('SELECT u.user_id FROM plugins p, user_plugin up, users u WHERE p.plugin_name = $1 and up.user_id = u.user_id and p.plugin_id = up.plugin_id and users.user_id != 100 ORDER BY users.realname LIMIT $2 OFFSET $3',
-				array($usingplugin, $paging, $offset));
-	$rows = db_numrows($res);
+				array($usingplugin, $paging, $start));
 	$totalUsers = FusionForge::getInstance()->getNumberOfUsersUsingAPlugin($usingplugin);
-	show_users_list(util_result_column_to_array($res, 0), '', 'realname', $offset, $rows, $paging, $totalUsers);
+	$max = ($totalUsers > ($start + $paging)) ? ($start + $paging) : $totalUsers;
+	show_users_list(util_result_column_to_array($res, 0), '', 'realname', $start, $max, $paging, $totalUsers);
 
 } elseif (!$group_id) {
 	$user_name_search = getStringFromRequest('user_name_search');
@@ -258,8 +212,7 @@ if ($usingplugin) {
 
 	if ($user_name_search) {
 		$res = db_query_params('SELECT user_id FROM users WHERE lower(user_name) LIKE $1 OR lower(lastname) LIKE $1 and users.user_id != 100 ORDER BY '.$sort_order.' LIMIT $2 OFFSET $3',
-					array(strtolower("$user_name_search%"), $paging, $offset));
-		$rows = db_numrows($res);
+					array(strtolower("$user_name_search%"), $paging, $start));
 		$list_id = util_result_column_to_array($res, 0);
 		$msg = sprintf(_('User list beginning with “%s” for all projects'), $user_name_search);
 	} else {
@@ -269,8 +222,7 @@ if ($usingplugin) {
 
 	if ($status) {
 		$res = db_query_params('SELECT user_id FROM users WHERE status = $1 and users.user_id != 100 ORDER BY '.$sort_order.' LIMIT $2 OFFSET $3',
-					   array($status, $paging, $offset));
-		$rows = db_numrows($res);
+					   array($status, $paging, $start));
 		if (isset($list_id)) {
 			$list_id = array_merge($list_id, util_result_column_to_array($res, 0));
 		}
@@ -280,17 +232,16 @@ if ($usingplugin) {
 	}
 	if (! isset($list_id)) {
 		$res = db_query_params('SELECT user_id FROM users where users.user_id != 100 ORDER BY '.$sort_order.' LIMIT $1 OFFSET $2',
-				array($paging, $offset));
+				array($paging, $start));
 		$list_id = util_result_column_to_array($res, 0);
-		$rows = db_numrows($res);
 	}
 	$filter='';
 	if (in_array($status,array('D','A','S','P'))) {
 		$filter = '&status='.$status;
 	}
-	$totalUsers = FusionForge::getInstance()->getNumberOfUsers($filter);
-
-	show_users_list($list_id, $filter, $sort_order, $offset, $rows, $paging, $totalUsers);
+	$totalUsers = FusionForge::getInstance()->getNumberOfUsers($status);
+	$max = ($totalUsers > ($start + $paging)) ? ($start + $paging) : $totalUsers;
+	show_users_list($list_id, $filter, $sort_order, $start, $max, $paging, $totalUsers);
 } else {
 	/*
 		Show list for one project
@@ -304,14 +255,14 @@ if ($usingplugin) {
 		util_ensure_value_in_set($sort_order,
 					array('realname','user_name','lastname','firstname','user_id','status','add_date'));
 		sortUserList($users, $sort_order);
-		$users_paged = array_slice($users, $offset, $paging);
+		$users_paged = array_slice($users, $start, $paging);
 		unset($users);
 		foreach ($users_paged as $key => $user) {
 			$users_id[] = $user->getID();
 		}
 		$filter = '&group_id='.$group_id;
-
-		show_users_list($users_id, $filter, $sort_order, $offset, $rows, $paging, $totalUsers);
+		$max = ($totalUsers > ($start + $paging)) ? ($start + $paging) : $totalUsers;
+		show_users_list($users_id, $filter, $sort_order, $start, $max, $paging, $totalUsers);
 	}
 	else {
 		echo $HTML->information(_('No user in this project'));

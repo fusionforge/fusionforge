@@ -37,11 +37,10 @@ global $HTML;
 
 $pagename = "pm_browse_custom";
 
-$offset = getIntFromRequest('offset');
-if ($offset < 0) {
-	$offset = 0 ;
+$start = getIntFromRequest('start');
+if ($start < 0) {
+	$start = 0 ;
 }
-$max_rows = getIntFromRequest('max_rows');
 
 $ptf = new ProjectTaskFactory($pg);
 if (!$ptf || !is_object($ptf)) {
@@ -75,7 +74,7 @@ if (!$paging) {
 	$paging = 25;
 }
 
-$ptf->setup($offset, $_order, $paging, $set, $_assigned_to, $_status, $_category_id, $_view, $_sort_order);
+$ptf->setup($start, $_order, $paging, $set, $_assigned_to, $_status, $_category_id, $_view, $_sort_order);
 if ($ptf->isError()) {
 	exit_error($ptf->getErrorMessage(), 'pm');
 }
@@ -152,24 +151,9 @@ $view_box = html_build_select_box_from_assoc($view_select_arr, '_view', $_view, 
 
 $rows = count($pt_arr);
 $totalTasks = $pg->getCount($_status, $_category_id);
+$max = ($rows > ($start + $paging)) ? ($start + $paging) : $rows;
 
-if (session_loggedin()) {
-	/* logged in users get configurable paging */
-	echo $HTML->openForm(array('action' => '/pm/task.php?group_id='.$group_id.'&group_project_id='.$pg->getID().'&offset='.$offset, 'method' => 'post'));
-}
-
-printf('<p>' . _('Displaying results %1$s out of %2$d total.'),$rows ? ($offset + 1).'-'.($offset + $rows) : '0', $totalTasks);
-
-if (session_loggedin()) {
-	printf(' ' . _('Displaying %2$s results.') . "\n\t<input " .
-			'type="submit" name="setpaging" value="%1$s" />' .
-			"\n</p>\n", _('Change'),
-			html_build_select_box_from_array(array(
-			'10', '25', '50', '100', '1000'), 'nres', $paging, 1));
-	echo $HTML->closeForm();
-} else {
-	echo "</p>\n";
-}
+echo $HTML->paging_top($start, $paging, $totalTasks, $max, '/pm/task.php?group_id='.$group_id.'&group_project_id='.$pg->getID());
 
 /*
 	Show the new pop-up boxes to select assigned to and/or status
@@ -302,42 +286,10 @@ if ($rows < 1) {
 	}
 
 	echo $HTML->listTableBottom();
-
 	/*
 	 Show extra rows for <-- Prev / Next -->
 	*/
-	if ($offset > 0) {
-		echo util_make_link('/pm/task.php?func=browse&group_project_id='.$group_project_id.'&group_id='.$group_id.'&offset='.($offset-$paging),'<strong>← '._('previous').'</strong>');
-		echo '&nbsp;&nbsp;';
-	}
-	$pages = $totalTasks / $paging;
-	$currentpage = intval($offset / $paging);
-	if ($pages > 1) {
-		$skipped_pages=false;
-		for ($j=0; $j<$pages; $j++) {
-			if ($pages > 20) {
-				if ((($j > 4) && ($j < ($currentpage-5))) || (($j > ($currentpage+5)) && ($j < ($pages-5)))) {
-					if (!$skipped_pages) {
-						$skipped_pages=true;
-						echo "....&nbsp;";
-					}
-					continue;
-				} else {
-					$skipped_pages=false;
-				}
-			}
-			if ($j * $paging == $offset) {
-				echo '<strong>'.($j+1).'</strong>&nbsp;&nbsp;';
-			} else {
-				echo util_make_link('/pm/task.php?func=browse&group_project_id='.$group_project_id.'&group_id='.$group_id.'&offset='.($j*$paging),'<strong>'.($j+1).'</strong>').'&nbsp;&nbsp;';
-			}
-		}
-	}
-	if ( $totalTasks > $offset + $paging) {
-		echo util_make_link('/pm/task.php?func=browse&group_project_id='.$group_project_id.'&group_id='.$group_id.'&offset='.($offset+$paging),'<strong>'._('next').' →</strong>');
-	} else {
-		echo '&nbsp;';
-	}
+	echo $HTML->paging_bottom($start, $paging, $totalTasks, '/pm/task.php?func=browse&group_project_id='.$group_project_id.'&group_id='.$group_id);
 
 	echo '<div style="display:table;width:100%">';
 	echo '<div style="display:table-row">';
