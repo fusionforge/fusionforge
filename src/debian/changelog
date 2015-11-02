@@ -1,11 +1,11 @@
 fusionforge (6.0.3+20151023-1) unstable; urgency=medium
 
   * New upstream snapshot following the 6.0 stable branch
-  * Drop support for CVS (closes: #801142)
   * Drop post-install scripts (closes: #789772, #789773, #793683, #801843)
   * New fusionforge-plugin-projects-hierarchy package
+  * Drop support for CVS (closes: #801142)
 
- -- Sylvain Beucler <beuc@debian.org>  Fri, 23 Oct 2015 12:05:00 +0200
+ -- Sylvain Beucler <beuc@debian.org>  Fri, 23 Oct 2015 17:04:00 +0200
 
 fusionforge (6.0.3-1) unstable; urgency=medium
 
