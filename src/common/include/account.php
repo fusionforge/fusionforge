@@ -76,6 +76,12 @@ function account_namevalid($name, $unix=false, $check_exists=true) {
 		return false;
 	}
 
+	// avoid ambiguity with UID/GID, especially in system commands (chown, chgrp, etc.)
+	if (!preg_match('/[a-z]/', $name)) {
+		$GLOBALS['register_error'] = _('Name contains only digits. It must contains at least 1 letter.');
+		return false;
+	}
+
 	// illegal names
 	$system_user = forge_get_config('system_user');
 	$system_user_ssh_akc = forge_get_config('system_user_ssh_akc');

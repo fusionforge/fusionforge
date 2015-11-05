@@ -64,6 +64,8 @@ require_once $gfcommon.'include/cron_utils.php';
 require_once($gfcommon.'include/Plugin.class.php');
 require_once($gfcommon.'include/PluginManager.class.php');
 
+session_set_admin () ;
+
 setup_plugin_manager () ;
 
 $group = group_get_object_by_name($fusionforgeproject) ;

@@ -1,0 +1,10 @@
+Due to unreasonable demands from the Debian QA Team (namely to stop
+auto-configuring other packages), post-install scripts are disabled.
+
+You can run them manually on each upgrade with:
+
+  /usr/share/fusionforge/bin/post-install.sh
+ 
+Alternatively see the Debian packages from the official project:
+
+  https://fusionforge.org/plugins/mediawiki/wiki/fusionforge/index.php/DEB_Installation

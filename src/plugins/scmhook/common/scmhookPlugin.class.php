@@ -146,8 +146,8 @@ project independently.");
 			$hook_params = $hook->getParams();
 			if (count($hook_params) == 0)
 				continue;
-                        if (!array_search($hook->getClassname(), $enabled_hooknames))
-                                continue;
+			if (array_search($hook->getClassname(), $enabled_hooknames) === false)
+				continue;
 			// Build 3 arrays for inconvenient db_query_params()
 			$i = 1;
 			$sql_cols = array_keys($hook_params);

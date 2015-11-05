@@ -98,6 +98,20 @@ install_selenium() {
 EOF
 }
 
+# Mitigate testsuite timeouts, cf.
+# http://lists.fusionforge.org/pipermail/fusionforge-general/2015-November/002955.html
+fixup_nss() {
+    conf=''
+    case $INSTALL_OS in
+	debian*) conf='/etc/apache2/envvars' ;;
+	centos*) conf='/etc/sysconfig/httpd' ;;
+    esac
+    if ! grep -q PGPASSFILE $conf; then
+	echo 'PGPASSFILE=' >> $conf
+    fi
+}
+
+fixup_nss
 
 install_selenium
 

@@ -5,6 +5,17 @@ FusionForge 6.X:
 * Docman: limit search using from & to dates [#798] (TrivialDev)
 * Plugin AuthBuiltin: add captcha after 3 attempts with the same login [#795] (TrivialDev)
 
+FusionForge 6.0.4:
+* Accounts: do not accept digits-only user and group names, to avoid confusion with UID/GID in system commands (Inria)
+* MTA-Exim4: restart exim4 on install
+* Plugin SCM: fix another race condition when creating project with SCM selected (Inria)
+* Plugin SCM Git: improve user matching when computing stats, support git .mailmap (Inria)
+* Plugin scmhook: fix non-editable mailing list name in some configurations (Inria)
+* Plugin MediaWiki: fix permission error when upgrading suspended projects database (Inria & TrivialDev)
+* Plugin Projects Hierarchy: don't display a project as possible child if there's no read access to it (Inria)
+* Plugin Projects Hierarchy: mask delegation checkbox until implementation is complete [#797] (Inria)
+* Plugin Projects Hierarchy: prevent auto-validation of parent-child requests [#796] (Inria)
+
 Fusionforge 6.0.3:
 * Layout: fix rss url when url is absolute (TrivialDev)
 * Accounts: accept more elliptic curve ssh keys types (Unit 193 & Inria)
