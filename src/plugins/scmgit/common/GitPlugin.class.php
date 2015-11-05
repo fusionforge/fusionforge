@@ -697,7 +697,9 @@ control over it to the project's administrator.");
 				return false;
 			}
 
-			$pipe = popen("GIT_DIR=\"$repo\" git log --since=@$start_time --until=@$end_time --all --pretty='format:%n%an <%ae>' --name-status 2>/dev/null", 'r' );
+			# For each commit, get committer full name and e-mail (respecting git .mailmap file),
+			# and a list of files prefixed by their status (A/M/D)
+			$pipe = popen("GIT_DIR=\"$repo\" git log --since=@$start_time --until=@$end_time --all --pretty='format:%n%aN <%aE>' --name-status 2>/dev/null", 'r' );
 
 			db_begin();
 
