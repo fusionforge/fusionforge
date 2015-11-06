@@ -126,7 +126,7 @@ fi
 if [ "$reset" = 1 ]; then
     set -e
     # Reset connections
-    stop_apache
+    stop_apache --force
     service fusionforge-systasksd stop
     service postgresql restart
     su - postgres -c "dropdb $database" || true
@@ -142,7 +142,7 @@ fi
 if [ "$backup" = 1 ]; then
     set -e
     su - postgres -c 'psql -c CHECKPOINT'  # flush to disk
-    stop_apache
+    stop_apache --force
     stop_database
     rm -fr $pgdir.backup-$fixture/*
     # support /var/lib/pgsql as a symlink to tmpfs
