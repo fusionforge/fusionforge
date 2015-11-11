@@ -169,6 +169,9 @@ if (getStringFromRequest('setpaging')) {
 	$paging = $u->getPreference('paging');
 }
 
+if (!$paging)
+	$paging = 25;
+
 // Administrative functions
 
 $group_id = getIntFromRequest('group_id');

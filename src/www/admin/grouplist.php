@@ -41,6 +41,9 @@ if (getStringFromRequest('setpaging')) {
 	$paging = $u->getPreference('paging');
 }
 
+if (!$paging)
+	$paging = 25;
+
 $start = getIntFromRequest('start');
 if ($start < 0) {
 	$start = 0;
