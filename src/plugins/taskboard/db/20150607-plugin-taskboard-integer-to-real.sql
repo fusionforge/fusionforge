@@ -1,1 +1,1 @@
-alter table plugin_taskboard_releases_snapshots alter column completed_man_days real;
+alter table plugin_taskboard_releases_snapshots alter column completed_man_days type real;
