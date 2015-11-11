@@ -66,12 +66,11 @@ if (getStringFromRequest('finished')) {
 
 project_admin_header(array('title'=>_('Add Users From List'),'group'=>$group_id));
 
-echo '
-<p>
-'._('Check the box next to the name of the user(s) you want to add. Your choices will be preserved if you click any of the letters below. When done, click “Finish” to choose the roles for the users you are adding.').'
-</p>
-<form action="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'" method="post">
-<input type="hidden" name="accumulated_ids" value="'. implode(',',$accumulated_ids) .'" />';
+echo html_e('p', array(),
+	_('Check the box next to the name of the user(s) you want to add. Your choices will be preserved if you click any of the letters below. When done, click “Finish” to choose the roles for the users you are adding.'));
+
+echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF').'?group_id='.$group_id, 'method' => 'post'));
+echo '<input type="hidden" name="accumulated_ids" value="'. implode(',',$accumulated_ids) .'" />';
 
 $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
 echo '<p>' . _('Choose the <strong>First Letter</strong> of the name of the person you wish to add.') . '</p>';
@@ -84,7 +83,7 @@ for ($i=0; $i<count($abc_array); $i++) {
 }
 
 if (!$res || db_numrows($res) < 1) {
-	echo '<p>' . _('No Matching Users Found') . '</p>';
+	echo $HTML->information(_('No Matching Users Found'));
 } else {
 
 	$titles[]=_('Real Name');
@@ -113,8 +112,8 @@ if (!$res || db_numrows($res) < 1) {
 
 }
 
-echo '<p><input type="submit" name="finished" value="'._('Finish').'" /></p>
-</form>';
+echo '<p><input type="submit" name="finished" value="'._('Finish').'" /></p>';
+echo $HTML->closeForm();
 
 project_admin_footer();
 
