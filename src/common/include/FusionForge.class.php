@@ -4,6 +4,7 @@
  *
  * Copyright 2002, GForge, LLC
  * Copyright 2009-2011, Roland Mas
+ * Copyright 2015, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -61,14 +62,28 @@ class FusionForge extends Error {
 	/**
 	 * List full number of hosted projects, public and private
 	 */
-	function getNumberOfActiveProjects() {
-		$res = db_query_params ('SELECT count(*) as count FROM groups WHERE status=$1',
-					array ('A'));
-		if (!$res) {
+	function getNumberOfProjects($status) {
+		$qpa = db_construct_qpa(false, 'SELECT count(*) as count FROM groups');
+		if ($status) {
+			$qpa = db_construct_qpa($qpa, ' WHERE status = $1', array($status));
+		}
+		$res = db_query_qpa($qpa);
+		if (!$res || db_numrows($res) < 1) {
 			$this->setError('Unable to get hosted project count: '.db_error());
 			return false;
 		}
 		return $this->parseCount($res);
+	}
+	function getNumberOfActiveProjects() {
+		return $this->getNumberOfProjects('A');
+	}
+
+	function getNumberOfDeletedProjects() {
+		return $this->getNumberOfProjects('D');
+	}
+
+	function getNumberOfSuspendedProjects() {
+		return $this->getNumberOfProjects('S');
 	}
 
 	function getNumberOfActiveUsers() {
@@ -83,6 +98,15 @@ class FusionForge extends Error {
 		return $this->getNumberOfUsers('S');
 	}
 
+	function getNumberOfProjectsFilteredByGroupName($filter) {
+		$res = db_query_params('SELECT count(*) as count FROM groups WHERE lower(group_name) LIKE $1', array(strtolower("$filter%")));
+		if (!$res || db_numrows($res) < 1) {
+			$this->setError('Unable to get project count: '.db_error());
+			return false;
+		}
+		return $this->parseCount($res);
+	}
+
 	function getNumberOfUsersUsingAPlugin($plugin_name) {
 		$res = db_query_params ('SELECT count(u.user_id) AS count FROM plugins p, user_plugin up, users u WHERE p.plugin_name = $1 and up.user_id = u.user_id and p.plugin_id = up.plugin_id and users.user_id != 100',
 					array($plugin_name));
@@ -94,8 +118,7 @@ class FusionForge extends Error {
 	}
 
 	function getNumberOfUsers($status) {
-		$qpa = db_construct_qpa();
-		$qpa = db_construct_qpa($qpa, 'SELECT count(*) AS count FROM users WHERE user_id != 100');
+		$qpa = db_construct_qpa(false, 'SELECT count(*) AS count FROM users WHERE user_id != 100');
 		if ($status) {
 			$qpa = db_construct_qpa($qpa, ' and status = $1', array($status));
 		}
