@@ -1526,7 +1526,7 @@ if (isset($params['group']) && $params['group']) {
 	 * @param	integer	$maxElements	max number of Elements to display
 	 * @param	string	$actionUrl	next / prev Url to click
 	 */
-	function paging_top($start, $paging, $totalElements, $maxElements, $actionUrl) {
+	function paging_top($start = 0, $paging = 25, $totalElements = 0, $maxElements = 0, $actionUrl = '/') {
 		$html_content = '';
 		$sep = '?';
 		if (strpos($actionUrl, '?')) {
@@ -1552,7 +1552,7 @@ if (isset($params['group']) && $params['group']) {
 	 * @param	integer	$totalElements	total number of Elements to display
 	 * @param	string	$actionUrl	next / prev Url to click
 	 */
-	function paging_bottom($start, $paging, $totalElements, $actionUrl) {
+	function paging_bottom($start = 0, $paging = 25, $totalElements = 0, $actionUrl = '/') {
 		$html_content = '';
 		$sep = '?';
 		if (strpos($actionUrl, '?')) {
