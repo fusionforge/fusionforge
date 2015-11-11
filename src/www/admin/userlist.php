@@ -156,7 +156,7 @@ function show_users_list($users, $filter = '', $sortorder = 'realname', $start, 
 
 global $HTML;
 
-$paging = 0;
+$paging = 25;
 $u = UserManager::instance()->getCurrentUser();
 if (getStringFromRequest('setpaging')) {
 	/* store paging preferences */
@@ -167,9 +167,6 @@ if (getStringFromRequest('setpaging')) {
 	$u->setPreference('paging', $paging);
 } else {
 	$paging = $u->getPreference('paging');
-}
-if (!$paging) {
-	$paging = 25;
 }
 
 // Administrative functions
