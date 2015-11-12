@@ -111,8 +111,8 @@ class LoginProcess extends FForge_SeleniumTestCase
 		$this->type("passwd", FORGE_OTHER_PASSWORD);
 		$this->type("passwd2", FORGE_OTHER_PASSWORD);
 		$this->clickAndWait("submit");
-		$this->logout();
 
+		$this->logout();
 		$this->open( ROOT );
 		$this->click("link=Log In");
 		$this->waitForPageToLoad("30000");
@@ -122,6 +122,32 @@ class LoginProcess extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Forge Admin"));
 		$this->assertTrue($this->isTextPresent("Log Out"));
+
+		// Test changing password through user account
+		$this->clickAndWait("link=My Account");
+		$this->clickAndWait("link=Change Password");
+		$this->type("old_passwd", "awrongpassword");
+		$this->type("passwd", FORGE_ADMIN_PASSWORD);
+		$this->type("passwd2", FORGE_ADMIN_PASSWORD);
+		$this->clickAndWait("submit");
+		$this->assertTrue($this->isTextPresent("Old password is incorrect"));
+
+		$this->clickAndWait("link=My Account");
+		$this->clickAndWait("link=Change Password");
+		$this->type("old_passwd", FORGE_OTHER_PASSWORD);
+		$this->type("passwd", FORGE_ADMIN_PASSWORD);
+		$this->type("passwd2", FORGE_ADMIN_PASSWORD);
+		$this->clickAndWait("submit");
+
+		$this->logout();
+		$this->open( ROOT );
+		$this->click("link=Log In");
+		$this->waitForPageToLoad();
+		$this->type("form_loginname", FORGE_ADMIN_USERNAME);
+		$this->type("form_pw", FORGE_ADMIN_PASSWORD);
+		$this->click("login");
+		$this->waitForPageToLoad();
+		$this->assertTrue($this->isTextPresent("Forge Admin"));
 		$this->assertTrue($this->isTextPresent("Log Out"));
 	}
 }

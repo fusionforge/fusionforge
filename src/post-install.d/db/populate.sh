@@ -94,9 +94,9 @@ req="SELECT COUNT(*) FROM users WHERE user_name='admin'"
 if [ "$(echo $req | su - postgres -c "psql -At $database_name")" != "1" ]; then
     psql -h $database_host -p $database_port -U $database_user $database_name <<EOF >/dev/null
 INSERT INTO users (user_name, realname, firstname, lastname, email,
-    user_pw, unix_pw, status, theme_id)
+    unix_pw, status, theme_id)
   VALUES ('admin', 'Forge Admin', 'Forge', 'Admin', 'root@localhost.localdomain',
-    'INVALID', 'INVALID', 'A', (SELECT theme_id FROM themes WHERE dirname='funky'));
+    'INVALID', 'A', (SELECT theme_id FROM themes WHERE dirname='funky'));
 EOF
     forge_make_admin admin  # set permissions
     # Note: no password defined yet

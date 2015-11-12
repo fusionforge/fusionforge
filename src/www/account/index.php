@@ -83,16 +83,6 @@ if (getStringFromRequest('submit')) {
 	}
 
 	if ($check) {
-/*
-//needs security audit
-	if ($remember_user) {
-		// set cookie, expire in 3 months
-		setcookie("sf_user_hash",$u->getID().'_'.substr($u->getMD5Passwd(),0,16),time()+90*24*60*60,'/');
-	} else {
-		// remove cookie
-		setcookie("sf_user_hash",'',0,'/');
-	}
-*/
 		// Refresh page if language or theme changed
 		$refresh = ($language != $u->getLanguage() || $theme_id != $u->getThemeID());
 

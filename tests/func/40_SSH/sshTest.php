@@ -43,7 +43,9 @@ class SSHTest extends FForge_SeleniumTestCase
 			system("echo 'Trying SSH' 1>&2", $ret);
 			$v = "-v";
 		}
-		system("ssh $v ".FORGE_ADMIN_USERNAME."@".HOST." id", $ret);
+		// Using 'PGPASSFILE= <command>' work-around to avoid random stalling
+		// Cf. https://fusionforge.org/plugins/mediawiki/wiki/fusionforge/index.php/User_accounts#nscd
+		system("ssh $v ".FORGE_ADMIN_USERNAME."@".HOST." PGPASSFILE= id", $ret);
 		$this->assertEquals(0, $ret);
 		if ($verbose) {
 			system("echo 'End of SSH run' 1>&2", $ret);

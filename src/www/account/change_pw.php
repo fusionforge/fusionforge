@@ -46,7 +46,7 @@ if (getStringFromRequest('submit')) {
 	$passwd = getStringFromRequest('passwd');
 	$passwd2 = getStringFromRequest('passwd2');
 
-	if ($u->getMD5Passwd() != md5($old_passwd)) {
+	if ($u->getUnixPasswd() !== crypt($old_passwd, $u->getUnixPasswd())) {
 		form_release_key(getStringFromRequest('form_key'));
 		exit_error(_('Old password is incorrect'),'my');
 	}
