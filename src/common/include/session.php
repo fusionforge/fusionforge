@@ -217,109 +217,66 @@ function session_check_credentials_in_database($loginname, $passwd, $allowpendin
 function session_login_valid_dbonly($loginname, $passwd, $allowpending) {
 	global $feedback, $userstatus;
 
-	// Try to get the users from the database using user_id and (MD5) user_pw
+	// Selecting by user_name/email only
 	if (forge_get_config('require_unique_email')) {
-		$res = db_query_params ('SELECT user_id,status,unix_pw FROM users WHERE (user_name=$1 OR email=$1) AND user_pw=$2',
-					array ($loginname,
-					       md5($passwd))) ;
+		$res = db_query_params ('SELECT user_id,status,unix_pw FROM users WHERE user_name=$1 OR email=$1',
+								array ($loginname)) ;
 	} else {
-		$res = db_query_params ('SELECT user_id,status,unix_pw FROM users WHERE user_name=$1 AND user_pw=$2',
-					array ($loginname,
-					       md5($passwd))) ;
+		$res = db_query_params ('SELECT user_id,status,unix_pw FROM users WHERE user_name=$1',
+								array ($loginname)) ;
 	}
 	if (!$res || db_numrows($res) < 1) {
-		// No user whose MD5 passwd matches the MD5 of the provided passwd
-		// Selecting by user_name/email only
-		if (forge_get_config('require_unique_email')) {
-			$res = db_query_params ('SELECT user_id,status,unix_pw FROM users WHERE user_name=$1 OR email=$1',
-						array ($loginname)) ;
-		} else {
-			$res = db_query_params ('SELECT user_id,status,unix_pw FROM users WHERE user_name=$1',
-						array ($loginname)) ;
-		}
-		if (!$res || db_numrows($res) < 1) {
-			// No user by that name
+		// No user by that name
+		$error_msg = _('Invalid Password Or User Name');
+		return false;
+	} else {
+		// There is a user with the provided user_name/email
+		// Check the (crypt) unix_pw
+		$usr = db_fetch_array($res);
+		$userstatus = $usr['status'] ;
+
+		if ($usr['unix_pw'] !== crypt($passwd, $usr['unix_pw'])) {
+			// (crypt) unix_pw does not patch
 			$error_msg = _('Invalid Password Or User Name');
 			return false;
-		} else {
-			// There is a user with the provided user_name/email, but the MD5 passwds do not match
-			// We'll have to try checking the (crypt) unix_pw
-			$usr = db_fetch_array($res);
-			$userstatus = $usr['status'] ;
-
-			if (crypt($passwd, $usr['unix_pw']) != $usr['unix_pw']) {
-				// Even the (crypt) unix_pw does not patch
-				// This one has clearly typed a bad passwd
-				$error_msg = _('Invalid Password Or User Name');
-				return false;
-			}
-			// User exists, (crypt) unix_pw matches
-			// Update the (MD5) user_pw and retry authentication
-			// It should work, except for status errors
-			$res = db_query_params ('UPDATE users SET user_pw=$1 WHERE user_id=$2',
-						array (md5($passwd),
-						       $usr['user_id'])) ;
-			return session_check_credentials_in_database($loginname, $passwd, $allowpending) ;
 		}
-	} else {
-		// If we're here, then the user has typed a password matching the (MD5) user_pw
-		// Let's check whether it also matches the (crypt) unix_pw
-		$usr = db_fetch_array($res);
-
-		if (crypt ($passwd, $usr['unix_pw']) != $usr['unix_pw']) {
-			// The (crypt) unix_pw does not match
-			if ($usr['unix_pw'] == '') {
-				// Empty unix_pw, we'll take the MD5 as authoritative
-				// Update the (crypt) unix_pw and retry authentication
-				// It should work, except for status errors
-				$res = db_query_params ('UPDATE users SET unix_pw=$1 WHERE user_id=$2',
-							array (account_genunixpw($passwd),
-									$usr['user_id'])) ;
-				return session_check_credentials_in_database($loginname, $passwd, $allowpending) ;
-			} else {
-				// Invalidate (MD5) user_pw, refuse authentication
-				$res = db_query_params ('UPDATE users SET user_pw=$1 WHERE user_id=$2',
-							array ('OUT OF DATE',
-									 $usr['user_id'])) ;
-				$warning_msg =_('Invalid Password Or User Name');
-				return false;
-			}
-		}
-
-		// Yay.  The provided password matches both fields in the database.
-		// Let's check the status of this user
-
-		// if allowpending (for verify.php) then allow
-		$userstatus = $usr['status'];
-		if ($allowpending && ($usr['status'] == 'P')) {
-			//1;
-		} else {
-			if ($usr['status'] == 'S') {
-				//acount suspended
-				$feedback = _('Account Suspended');
-				return false;
-			}
-			if ($usr['status'] == 'P') {
-				//account pending
-				$feedback = _('Account Pending');
-				return false;
-			}
-			if ($usr['status'] == 'D') {
-				//account deleted
-				$feedback = _('Account Deleted');
-				return false;
-			}
-			if ($usr['status'] != 'A') {
-				//unacceptable account flag
-				$feedback = _('Account Not Active');
-				return false;
-			}
-		}
-		// create a new session
-		session_set_new(db_result($res, 0, 'user_id'));
-
-		return true;
+		// User exists, (crypt) unix_pw matches
 	}
+
+
+	// Yay.  The provided password matches both fields in the database.
+	// Let's check the status of this user
+
+	// if allowpending (for verify.php) then allow
+	$userstatus = $usr['status'];
+	if ($allowpending && ($usr['status'] == 'P')) {
+		//1;
+	} else {
+		if ($usr['status'] == 'S') {
+			//acount suspended
+			$feedback = _('Account Suspended');
+			return false;
+		}
+		if ($usr['status'] == 'P') {
+			//account pending
+			$feedback = _('Account Pending');
+			return false;
+		}
+		if ($usr['status'] == 'D') {
+			//account deleted
+			$feedback = _('Account Deleted');
+			return false;
+		}
+		if ($usr['status'] != 'A') {
+			//unacceptable account flag
+			$feedback = _('Account Not Active');
+			return false;
+		}
+	}
+	// create a new session
+	session_set_new(db_result($res, 0, 'user_id'));
+
+	return true;
 }
 
 /**

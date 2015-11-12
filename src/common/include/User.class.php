@@ -407,10 +407,9 @@ class GFUser extends Error {
 		// if we got this far, it must be good
 		$confirm_hash = substr(md5($password1.util_randbytes().microtime()), 0, 16);
 		db_begin();
-		$result = db_query_params('INSERT INTO users (user_name,user_pw,unix_pw,realname,firstname,lastname,email,add_date,status,confirm_hash,mail_siteupdates,mail_va,language,timezone,unix_box,address,address2,phone,fax,title,ccode,theme_id,tooltips,shell)
-							VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23,$24)',
+		$result = db_query_params('INSERT INTO users (user_name,unix_pw,realname,firstname,lastname,email,add_date,status,confirm_hash,mail_siteupdates,mail_va,language,timezone,unix_box,address,address2,phone,fax,title,ccode,theme_id,tooltips,shell)
+							VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23)',
 			array($unix_name,
-				md5($password1),
 				account_genunixpw($password1),
 				htmlspecialchars($firstname.' '.$lastname),
 				htmlspecialchars($firstname),
@@ -850,12 +849,12 @@ Use one below, but make sure it is entered as the single line.)
 	 * @return	string	This user's MD5-crypted passwd.
 	 */
 	function getMD5Passwd() {
-		return $this->data_array['user_pw'];
+		exit(_('MD5 obsoleted'));
 	}
 
 	//Added to be compatible with codendi getUserPw function
 	function getUserPw() {
-		return $this->data_array['user_pw'];
+		exit(_('MD5 obsoleted'));
 	}
 
 	/**
@@ -1394,12 +1393,10 @@ Use one below, but make sure it is entered as the single line.)
 		}
 
 		db_begin();
-		$md5_pw = md5($passwd);
 		$unix_pw = account_genunixpw($passwd);
 
-		$res = db_query_params('UPDATE users SET user_pw=$1, unix_pw=$2 WHERE user_id=$3',
-					array($md5_pw,
-					       $unix_pw,
+		$res = db_query_params('UPDATE users SET unix_pw=$1 WHERE user_id=$2',
+					array($unix_pw,
 					       $this->getID()));
 
 		if (!$res || db_affected_rows($res) < 1) {
@@ -1433,19 +1430,8 @@ Use one below, but make sure it is entered as the single line.)
 	 * @return	boolean	success.
 	 */
 	function setMD5Passwd($md5) {
-		db_begin();
-		if ($md5) {
-			$res = db_query_params('UPDATE users SET user_pw=$1 WHERE user_id=$2',
-				array($md5, $this->getID()));
-
-			if (!$res || db_affected_rows($res) < 1) {
-				$this->setError(_('Error: Cannot Change User Password:').' '.db_error());
-				db_rollback();
-				return false;
-			}
-		}
-		db_commit();
-		return true;
+		exit(_('Error: Cannot Change User Password:').' '._('MD5 obsoleted'));
+		return false;
 	}
 
 	/**
