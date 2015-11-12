@@ -141,8 +141,8 @@ fi
 # Backup the DB, so that it can be restored for the test suite
 if [ "$backup" = 1 ]; then
     set -e
+    stop_apache --force || true  # work-around systemd's "Job for apache2.service canceled."
     su - postgres -c 'psql -c CHECKPOINT'  # flush to disk
-    stop_apache --force
     stop_database
     rm -fr $pgdir.backup-$fixture/*
     # support /var/lib/pgsql as a symlink to tmpfs
