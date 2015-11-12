@@ -126,7 +126,7 @@ fi
 if [ "$reset" = 1 ]; then
     set -e
     # Reset connections
-    stop_apache --force
+    stop_apache --force || true
     service fusionforge-systasksd stop
     service postgresql restart
     su - postgres -c "dropdb $database" || true
