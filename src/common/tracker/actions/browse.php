@@ -34,6 +34,7 @@ global $ath;
 global $group_id;
 global $group;
 global $HTML;
+global $LUSER;
 
 //
 //  make sure this person has permission to view artifacts
@@ -42,7 +43,6 @@ session_require_perm('tracker', $ath->getID(), 'read');
 
 $query_id = getIntFromRequest('query_id');
 $start = getIntFromRequest('start');
-$paging = 0;
 
 //
 //	The browse page can be powered by a pre-saved query
@@ -54,21 +54,20 @@ $paging = 0;
 //	If the query_id = -1, unset the pref and use regular browse boxes
 //
 if (session_loggedin()) {
-	$u =& session_get_user();
 	if (getStringFromRequest('setpaging')) {
 		/* store paging preferences */
 		$paging = getIntFromRequest('nres');
 		if (!$paging) {
 			$paging = 25;
 		}
-		$u->setPreference("paging", $paging);
+		$LUSER->setPreference("paging", $paging);
 	}
 	/* logged in users get configurable paging */
-	$paging = $u->getPreference("paging");
+	$paging = $LUSER->getPreference("paging");
 
 	if($query_id) {
 		if ($query_id == '-1') {
-			$u->setPreference('art_query'.$ath->getID(),'');
+			$LUSER->setPreference('art_query'.$ath->getID(),'');
 		} else {
 			$aq = new ArtifactQuery($ath,$query_id);
 			if (!$aq || !is_object($aq)) {
@@ -77,7 +76,7 @@ if (session_loggedin()) {
 			$aq->makeDefault();
 		}
 	} else {
-		$query_id=$u->getPreference('art_query'.$ath->getID(),'');
+		$query_id= $LUSER->getPreference('art_query'.$ath->getID(),'');
 	}
 } elseif ($query_id) {
 	// If user is not logged, then use a cookie to store the current query.
@@ -94,6 +93,9 @@ if (session_loggedin()) {
 	$gf_tracker = unserialize($_COOKIE["GFTrackerQuery"]);
 	$query_id = (int)$gf_tracker[$ath->getID()];
 }
+
+if(!isset($paging) || !$paging)
+	$paging = 25;
 
 $af = new ArtifactFactory($ath);
 

@@ -34,12 +34,13 @@ require_once $gfcommon.'pm/ProjectTaskFactory.class.php';
 //same for status
 
 global $HTML;
+global $LUSER;
 
 $pagename = "pm_browse_custom";
 
 $start = getIntFromRequest('start');
 if ($start < 0) {
-	$start = 0 ;
+	$start = 0;
 }
 
 $ptf = new ProjectTaskFactory($pg);
@@ -57,22 +58,20 @@ $_status = getStringFromRequest('_status');
 $_category_id = getIntFromRequest('_category_id');
 $_view = getStringFromRequest('_view');
 
-$paging = 0;
 if (session_loggedin()) {
-    $u = UserManager::instance()->getCurrentUser();
 	if (getStringFromRequest('setpaging')) {
 		/* store paging preferences */
 		$paging = getIntFromRequest('nres');
 		if (!$paging) {
 			$paging = 25;
 		}
-		$u->setPreference('paging', $paging);
+		$LUSER->setPreference('paging', $paging);
 	} else
-		$paging = $u->getPreference('paging');
+		$paging = $LUSER->getPreference('paging');
 }
-if (!$paging) {
+
+if(!isset($paging) || !$paging)
 	$paging = 25;
-}
 
 $ptf->setup($start, $_order, $paging, $set, $_assigned_to, $_status, $_category_id, $_view, $_sort_order);
 if ($ptf->isError()) {

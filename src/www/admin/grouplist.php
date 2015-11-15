@@ -26,19 +26,19 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/UserManager.class.php';
 require_once $gfwww.'admin/admin_utils.php';
 
+global $LUSER;
+
 site_admin_header(array('title'=>_('Project List')));
 
-$paging = 25;
-$u = UserManager::instance()->getCurrentUser();
 if (getStringFromRequest('setpaging')) {
 	/* store paging preferences */
 	$paging = getIntFromRequest('nres');
 	if (!$paging) {
 		$paging = 25;
 	}
-	$u->setPreference('paging', $paging);
+	$LUSER->setPreference('paging', $paging);
 } else {
-	$paging = $u->getPreference('paging');
+	$paging = $LUSER->getPreference('paging');
 }
 
 if (!$paging)

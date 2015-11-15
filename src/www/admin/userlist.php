@@ -27,6 +27,9 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/UserManager.class.php';
 require_once $gfwww.'admin/admin_utils.php';
 
+global $HTML;
+global $LUSER;
+
 // user must be forge admin to proceed
 session_require_global_perm('forge_admin');
 
@@ -153,20 +156,15 @@ function show_users_list($users, $filter = '', $sortorder = 'realname', $start, 
 	echo $HTML->paging_bottom($start, $paging, $totalUsers, '/admin/userlist.php?sortorder='.$sortorder.$filter);
 }
 
-
-global $HTML;
-
-$paging = 25;
-$u = UserManager::instance()->getCurrentUser();
 if (getStringFromRequest('setpaging')) {
 	/* store paging preferences */
 	$paging = getIntFromRequest('nres');
 	if (!$paging) {
 		$paging = 25;
 	}
-	$u->setPreference('paging', $paging);
+	$LUSER->setPreference('paging', $paging);
 } else {
-	$paging = $u->getPreference('paging');
+	$paging = $LUSER->getPreference('paging');
 }
 
 if (!$paging)
