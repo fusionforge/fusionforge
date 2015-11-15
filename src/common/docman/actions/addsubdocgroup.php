@@ -5,7 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2011,2014, Franck Villaume - TrivialDev
+ * Copyright 2011,2015, Franck Villaume - TrivialDev
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
@@ -30,6 +30,10 @@
 global $g; // group object
 global $dirid; // id of doc_group
 global $group_id; // id of group
+global $feedback;
+global $error_msg;
+global $warning_msg;
+global $childgroup_id;
 
 if ($dirid) {
 	$urlredirect = '/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid;
@@ -37,8 +41,7 @@ if ($dirid) {
 	$urlredirect = '/docman/?group_id='.$group_id;
 }
 
-// plugin projects-hierarchy handler
-$childgroup_id = getIntFromRequest('childgroup_id');
+// plugin projects-hierarchy support
 if ($childgroup_id) {
 	$g = group_get_object($childgroup_id);
 	$urlredirect .= '&childgroup_id='.$childgroup_id;

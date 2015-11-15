@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (C) 2009-2012 Alain Peyrat, Alcatel-Lucent
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2015, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -44,10 +44,11 @@
 
 /* please do not add require here : use www/docman/index.php to add require */
 /* global variables used */
-global $HTML; // html object
+global $HTML;  // Layout object
 global $d_arr; // document array
 global $group_id; // id of group
 global $g; // the group object
+global $warning_msg;
 
 if ( !forge_check_perm('docman', $group_id, 'admin')) {
 	$warning_msg = _('Document Manager Access Denied');
@@ -82,7 +83,6 @@ $report = new ReportPerGroupDocmanDownloads($group_id, $start, $end);
 if ($report->isError()) {
 	echo $HTML->error_msg($report->getErrorMessage());
 } else {
-
 	echo html_ao('div', array('id' => 'div_form_reporting'));
 	echo $HTML->openForm(array('action' => util_make_uri('/docman/?group_id='.$group_id.'&view=reporting'), 'method' => 'post', 'class' => 'align-center'));
 	echo html_e('strong', array(), _('Start Date')._(':'), false);
@@ -93,92 +93,91 @@ if ($report->isError()) {
 	echo $HTML->closeForm();
 	echo html_ac(html_ap() -1);
 
-$data = $report->getData();
+	$data = $report->getData();
 
-if (count($data) == 0) {
-	echo $HTML->information(_('There have been no viewed documents for this project yet.'));
-} else {
-	echo html_ao('script', array('type' => 'text/javascript'));
-	echo '//<![CDATA['."\n";
-	echo 'var ticks = new Array();';
-	echo 'var values = new Array();';
-	$arr =& $report->getMonthStartArr();
-	$arr2 = array();
-	$valuesArr = array();
-	for ($i=0; $i < count($arr); $i++) {
-		if ($arr[$i] >= $start && $arr[$i] <= $end) {
-			$arr2[$i] = date(_('Y-m'), $arr[$i]);
-			$valuesArr[$i] = 0;
+	if (count($data) == 0) {
+		echo $HTML->information(_('There have been no viewed documents for this project yet.'));
+	} else {
+		echo html_ao('script', array('type' => 'text/javascript'));
+		echo '//<![CDATA['."\n";
+		echo 'var ticks = new Array();';
+		echo 'var values = new Array();';
+		$arr =& $report->getMonthStartArr();
+		$arr2 = array();
+		$valuesArr = array();
+		for ($i=0; $i < count($arr); $i++) {
+			if ($arr[$i] >= $start && $arr[$i] <= $end) {
+				$arr2[$i] = date(_('Y-m'), $arr[$i]);
+				$valuesArr[$i] = 0;
+			}
 		}
-	}
-	foreach ($arr2 as $key) {
-		echo 'ticks.push("'.$key.'");';
-	}
-	for ($i=0; $i < count($data); $i++) {
-		$this_date = date(_('Y-m'), mktime(0, 0, 0, substr($data[$i][2], 4, 2), 0, substr($data[$i][2], 0, 4)));
-		$index_key = array_search($this_date, $arr2);
-		$valuesArr[$index_key+1]++;
-	}
-	foreach ($valuesArr as $key) {
-		echo 'values.push('.$key.');';
-	}
-	echo 'var plot1;';
-	echo 'jQuery(document).ready(function(){
-			plot1 = jQuery.jqplot (\'chart1\', [values], {
-					axesDefaults: {
-						tickOptions: {
-							angle: -90,
-							fontSize: \'8px\',
-							showGridline: false,
-							showMark: false,
-						},
-					},
-					axes: {
-						xaxis: {
-							label: "'._('Month').'",
-							renderer: jQuery.jqplot.CategoryAxisRenderer,
-							ticks: ticks,
-							pad: 0,
-						},
-						yaxis: {
-							label: "'._('Downloads').'",
-							padMin: 0,
+		foreach ($arr2 as $key) {
+			echo 'ticks.push("'.$key.'");';
+		}
+		for ($i=0; $i < count($data); $i++) {
+			$this_date = date(_('Y-m'), mktime(0, 0, 0, substr($data[$i][2], 4, 2), 0, substr($data[$i][2], 0, 4)));
+			$index_key = array_search($this_date, $arr2);
+			$valuesArr[$index_key+1]++;
+		}
+		foreach ($valuesArr as $key) {
+			echo 'values.push('.$key.');';
+		}
+		echo 'var plot1;';
+		echo 'jQuery(document).ready(function(){
+				plot1 = jQuery.jqplot (\'chart1\', [values], {
+						axesDefaults: {
 							tickOptions: {
-								angle: 0,
-								showMark: true,
+								angle: -90,
+								fontSize: \'8px\',
+								showGridline: false,
+								showMark: false,
+							},
+						},
+						axes: {
+							xaxis: {
+								label: "'._('Month').'",
+								renderer: jQuery.jqplot.CategoryAxisRenderer,
+								ticks: ticks,
+								pad: 0,
+							},
+							yaxis: {
+								label: "'._('Downloads').'",
+								padMin: 0,
+								tickOptions: {
+									angle: 0,
+									showMark: true,
+								}
 							}
-						}
-					},
-					highlighter: {
-						show: true,
-						sizeAdjust: 2.5,
-					},
-				});
-		});';
-	echo 'jQuery(window).resize(function() {
-			plot1.replot( { resetAxes: true } );
-		});'."\n";
-	echo '//]]>';
-	echo html_ac(html_ap() -1);
-	echo $HTML->html_chartid('chart1');
-	$tabletop = array(_('Folder'), _('Document'), _('User'), _('Date'));
-	$classth = array('', '', '', '');
-	echo $HTML->listTableTop($tabletop, false, 'sortable_docman_listfile', 'sortable', $classth);
-	for ($i = 0; $i < count($data); $i++) {
-		$ndg = documentgroup_get_object($data[$i][3]);
-		$cells = array();
-		$cells[][] = $ndg->getPath(true);
-		$cells[][] = $data[$i][0];
-		if ( $data[$i][1] != 100) {
-			$userObject = user_get_object($data[$i][1]);
-			$cells[][] = util_display_user($userObject->getUnixName(), $data[$i][1], $userObject->getRealName());
-		} else {
-			$cells[][] = _('Anonymous user');
+						},
+						highlighter: {
+							show: true,
+							sizeAdjust: 2.5,
+						},
+					});
+			});';
+		echo 'jQuery(window).resize(function() {
+				plot1.replot( { resetAxes: true } );
+			});'."\n";
+		echo '//]]>';
+		echo html_ac(html_ap() -1);
+		echo $HTML->html_chartid('chart1');
+		$tabletop = array(_('Folder'), _('Document'), _('User'), _('Date'));
+		$classth = array('', '', '', '');
+		echo $HTML->listTableTop($tabletop, false, 'sortable_docman_listfile', 'sortable', $classth);
+		for ($i = 0; $i < count($data); $i++) {
+			$ndg = documentgroup_get_object($data[$i][3]);
+			$cells = array();
+			$cells[][] = $ndg->getPath(true);
+			$cells[][] = $data[$i][0];
+			if ( $data[$i][1] != 100) {
+				$userObject = user_get_object($data[$i][1]);
+				$cells[][] = util_display_user($userObject->getUnixName(), $data[$i][1], $userObject->getRealName());
+			} else {
+				$cells[][] = _('Anonymous user');
+			}
+			$cells[] = array(preg_replace('/^(....)(..)(..)$/', '\1-\2-\3', $data[$i][2]), 'class' => 'align-center');
+			echo $HTML->multiTableRow(array(), $cells);
 		}
-		$cells[] = array(preg_replace('/^(....)(..)(..)$/', '\1-\2-\3', $data[$i][2]), 'class' => 'align-center');
-		echo $HTML->multiTableRow(array(), $cells);
+		echo $HTML->listTableBottom();
 	}
-	echo $HTML->listTableBottom();
-}
-
 }

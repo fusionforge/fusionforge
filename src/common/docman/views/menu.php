@@ -7,6 +7,7 @@
  * Copyright 2002-2004, GForge Team
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2015, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -27,9 +28,11 @@
 
 /* please do not add require here : use www/docman/index.php to add require */
 /* global variables used */
-global $HTML; // html object
+global $HTML; // Layout object
 global $d_arr; // document array
 global $group_id; // id of group
+global $g; // Group object
+global $warning_msg;
 
 if (!forge_check_perm('docman', $group_id, 'read')) {
 	$warning_msg = _('Document Manager Access Denied');
