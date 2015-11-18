@@ -173,7 +173,6 @@ function account_gensalt(){
 		case 'DES':
 			$salt_size = 2;
 			break;
-		default:
 		case 'MD5':
 			$salt_prefix = '$1$';
 			$salt_size = 8;
@@ -182,6 +181,7 @@ function account_gensalt(){
 			$salt_prefix = '$5$rounds=5000$';
 			$salt_size = 16;
 			break;
+		default:
 		case 'SHA512':
 			$salt_prefix = '$6$rounds=5000$';
 			$salt_size = 16;
