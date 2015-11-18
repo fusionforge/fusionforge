@@ -166,25 +166,37 @@ function account_gensalt(){
 	// crypt() selects the cipher based on
 	// the salt, so ...
 
-	$a = genchr();
-	$b = genchr();
+	$salt_size = 0;
+	$salt_prefix = '';
 	switch(forge_get_config('unix_cipher')) {
 		case 'DES':
-			$salt = "$a$b";
+			$salt_size = 2;
 			break;
 		default:
 		case 'MD5':
-			$salt = "$1$" . "$a$b";
+			$salt_prefix = '$1$';
+			$salt_size = 8;
+			break;
+		case 'SHA256':
+			$salt_prefix = '$5$rounds=5000$';
+			$salt_size = 16;
+			break;
+		case 'SHA512':
+			$salt_prefix = '$6$rounds=5000$';
+			$salt_size = 16;
 			break;
 		case 'Blowfish':
-			$i = 0;
-			while (!$i = 16) {
-			 	$salt .= rand(64,126);
-			 	$i++;
-			 }
-			return "$2a$".$salt;
+			$salt_prefix = '$2y$10$';
+			$salt_size = 22;
 			break;
 	}
+
+	$salt = '';
+	for ($i = 0; $i < $salt_size; $i++)
+		$salt .= genchr();
+
+	$salt = $salt_prefix.$salt;
+
 	return $salt;
 }
 
