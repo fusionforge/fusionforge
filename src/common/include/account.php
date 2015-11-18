@@ -5,6 +5,7 @@
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2010, Franck Villaume - Capgemini
  * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright (C) 2015  Inria (Sylvain Beucler)
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
