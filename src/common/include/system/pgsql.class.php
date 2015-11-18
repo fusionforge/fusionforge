@@ -206,6 +206,15 @@ class pgsql extends System {
  	*
  	*/
 	function sysUserSetAttribute($user_id,$attr,$value) {
+		// trigger nscd cache invalidation and scm-passwd regen through systasksd
+		$res = db_query_params('UPDATE nss_usergroups'
+		                       . ' SET last_modified_date=EXTRACT(EPOCH FROM now())::integer'
+		                       . ' WHERE user_id=$1',
+		                       array($user_id));
+		if (!$res) {
+			$this->setError('Error: Cannot update user attribute: '.db_error());
+			return false;
+		}
 		return true;
 	}
 

@@ -8,6 +8,9 @@ FusionForge 6.X:
 FusionForge 6.0.4:
 * Accounts: do not accept digits-only user and group names, to avoid confusion with UID/GID in system commands (Inria)
 * Accounts: drop redundant (and insecure) unsalted MD5 password hashes from the database (Inria)
+* Accounts: trigger system replication when user changes password or shell (Inria)
+* Accounts: passwords hashes: increase md5crypt salt length to 8; fix invalid Blowfish salt (Inria)
+* Accounts: passwords hashes: add support for SHA256/SHA512 (Inria)
 * MTA-Exim4: restart exim4 on install
 * Plugin SCM: fix another race condition when creating project with SCM selected (Inria)
 * Plugin SCM Git: improve user matching when computing stats, support git .mailmap (Inria)
