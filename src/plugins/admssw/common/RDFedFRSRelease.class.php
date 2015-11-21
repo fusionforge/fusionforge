@@ -131,7 +131,7 @@ class RDFedFRSRelease extends FRSRelease {
 
 		rdfutils_setPropToUri($res, 'dcterms:publisher', $projecturi);
 
-		rdfutils_setPropToUri($res, 'adms:relatedWebPage', util_make_url ('/frs/shownotes.php?release_id='.$this->getID()) );
+		rdfutils_setPropToUri($res, 'adms:relatedWebPage', util_make_url ('/frs/?view=shownotes&group_id='.$group->getID().'&release_id='.$this->getID()) );
 
 		rdfutils_setPropToUri($res, 'dcterms:isPartOf', util_make_url ('/projects#repo'));
 
