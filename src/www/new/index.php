@@ -120,7 +120,7 @@ if (!$res_new || db_numrows($res_new) < 1) {
 				util_make_link ('/frs/?group_id='.$row_new['group_id'].'&release_id='.$row_new['release_id'],_('Download')).
 				' ('._('Project Total:') .$row_new['downloads'].') | ';
 				// notes for this release
-				print util_make_link ('/frs/shownotes.php?release_id='.$row_new['release_id'],_('Notes and Changes')).'
+				print util_make_link ('/frs/?view=shownotes&group_id='.$row_new['group_id'].'&release_id='.$row_new['release_id'],_('Notes and Changes')).'
 				<hr />
 				</td>
 			</tr>';

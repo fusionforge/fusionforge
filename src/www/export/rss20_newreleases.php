@@ -109,7 +109,7 @@ while ($row = db_fetch_array($res)) {
 		print "   <link>http://".forge_get_config('web_host')."/project/showfiles.php?group_id=".$row['group_id']."&amp;release_id=".$row['filerelease_id']."</link>\n";
 		print "   <description>".rss_description($row['module_notes'])."</description>\n";
 		print "   <author>".$row['user_name']."@".forge_get_config('users_host')." (".$row['realname'].")</author>\n";
-		print "   <comments>http://".forge_get_config('web_host')."/project/shownotes.php?group_id=".$row['group_id']."&amp;release_id=".$row['filerelease_id']."</comments>\n";
+		print "   <comments>http://".forge_get_config('web_host')."/frs/?view=shownotes&amp;group_id=".$row['group_id']."&amp;release_id=".$row['filerelease_id']."</comments>\n";
 		print "   <pubDate>".rss_date($row['release_date'])."</pubDate>\n";
 		print "   <guid>http://".forge_get_config('web_host')."/project/showfiles.php?group_id=".$row['group_id']."&amp;release_id=".$row['filerelease_id']."</guid>\n";
 		print "  </item>\n";
