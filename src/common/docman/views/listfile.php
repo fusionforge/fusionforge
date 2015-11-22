@@ -72,9 +72,7 @@ $df->setDocGroupID($dirid);
 
 //active, hidden & private state ids
 $df->setStateID(array(1, 4, 5));
-$d_arr_active =& $df->getDocuments();
-if ($d_arr_active != NULL)
-	$d_arr = $d_arr_active;
+$d_arr =& $df->getDocuments();
 
 $nested_groups = $dgf->getNested();
 
