@@ -62,9 +62,7 @@ if (!$g->usesDocman())
 if ($g->isError())
 	exit_error($g->getErrorMessage(), 'docman');
 
-$dirid = getIntFromRequest('dirid');
-if (empty($dirid))
-	$dirid = 0;
+$dirid = getIntFromRequest('dirid', 0);
 
 $childgroup_id = getIntFromRequest('childgroup_id');
 
