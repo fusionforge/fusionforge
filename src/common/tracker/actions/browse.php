@@ -259,9 +259,6 @@ if ($art_arr && ($art_cnt = count($art_arr)) > 0) {
 	$focus = 0;
 }
 
-if (!$paging) {
-	$paging = 25;
-}
 if ($art_cnt) {
 	if ($focus) {
 		for ($i = 0; $i < $art_cnt; ++$i)
