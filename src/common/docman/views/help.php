@@ -27,10 +27,17 @@
 global $group_id; // id of the group
 global $g; // the project object
 global $warning_msg;
+global $childgroup_id;
 
 if (!forge_check_perm('docman', $group_id, 'read')) {
 	$warning_msg = _('Document Manager Access Denied');
 	session_redirect('/docman/?group_id='.$group_id);
+}
+
+// plugin hierarchy support
+if ($childgroup_id) {
+	$group_id = $childgroup_id;
+	$g = group_get_object($childgroup_id);
 }
 
 echo html_ao('div', array('class' => 'docmanDivIncluded'));
