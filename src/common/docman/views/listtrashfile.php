@@ -5,7 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2011-2014, Franck Villaume - TrivialDev
+ * Copyright 2011-2015, Franck Villaume - TrivialDev
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
@@ -63,7 +63,8 @@ $dgf = new DocumentGroupFactory($g);
 if ($dgf->isError())
 	exit_error($dgf->getErrorMessage(), 'docman');
 
-$df->setStateID('2');
+// deleted state id
+$df->setStateID(array(2));
 
 $d_arr =& $df->getDocuments();
 

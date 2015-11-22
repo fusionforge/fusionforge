@@ -99,15 +99,6 @@ switch ($action) {
 	}
 }
 
-if (session_loggedin()) {
-	$u = user_get_object(user_getid());
-	if (!$u || !is_object($u)) {
-		exit_error(_('Could Not Get User'));
-	} elseif ($u->isError()) {
-		exit_error($u->getErrorMessage(), 'my');
-	}
-}
-
 html_use_storage();
 html_use_simplemenu();
 html_use_jqueryui();

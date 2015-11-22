@@ -7,7 +7,7 @@
  * Copyright 2009, Roland Mas
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2015, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -46,10 +46,10 @@ class DocumentFactory extends Error {
 	var $Documents;
 
 	/**
-	 * The stateid limit
-	 * @var	integer	Contains the stateid to limit return documents in getDocuments.
+	 * The stateid Array limit
+	 * @var	array	Contains the different stateid to limit return documents in getDocuments.
 	 */
-	var $stateid;
+	var $stateidArr;
 
 	/**
 	 * The doc_group_id limit
@@ -111,13 +111,13 @@ class DocumentFactory extends Error {
 	}
 
 	/**
-	 * setStateID - call this before getDocuments() if you want to limit to a specific state.
+	 * setStateID - call this before getDocuments() if you want to limit to some specific states.
 	 *
-	 * @param	int	$stateid	The stateid from the doc_states table.
+	 * @param	array	$stateidArr	Array of stateid from the doc_states table.
 	 * @access	public
 	 */
-	function setStateID($stateid) {
-		$this->stateid = $stateid;
+	function setStateID($stateidArr) {
+		$this->stateidArr = $stateidArr;
 	}
 
 	/**
@@ -290,7 +290,7 @@ class DocumentFactory extends Error {
 				$valid = true;							// do we need to return this document?
 				$doc =& $this->Documents[$key][$i];
 
-				if (!$this->stateid) {
+				if (!count($this->stateidArr)) {
 					$perm =& $this->Group->getPermission();
 					if (!$perm || !is_object($perm)) {
 						if ($doc->getStateID() != 1) {
@@ -301,7 +301,7 @@ class DocumentFactory extends Error {
 						}
 					}
 				} else {
-					if ($this->stateid != "ALL" && $doc->getStateID() != $this->stateid) {
+					if (!in_array($doc->getStateID(), $this->stateidArr)) {
 						$valid = false;
 					}
 				}
@@ -330,8 +330,7 @@ class DocumentFactory extends Error {
 	 */
 	private function getFromStorage() {
 		$this->Documents = array();
-		$qpa = db_construct_qpa();
-		$qpa = db_construct_qpa($qpa, 'SELECT * FROM docdata_vw WHERE group_id = $1 ',
+		$qpa = db_construct_qpa(false, 'SELECT * FROM docdata_vw WHERE group_id = $1 ',
 						array($this->Group->getID()));
 
 		if ($this->docgroupid) {
@@ -350,7 +349,7 @@ class DocumentFactory extends Error {
 
 		$qpa = db_construct_qpa($qpa, $this->sort);
 
-		if ($this->limit !== 0 ) {
+		if ($this->limit !== 0) {
 			$qpa = db_construct_qpa($qpa, ' LIMIT $1', array($this->limit));
 		}
 
