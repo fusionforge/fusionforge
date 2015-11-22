@@ -5,6 +5,7 @@ FusionForge 6.0.4:
 * Accounts: passwords hashes: increase md5crypt salt length to 8; fix invalid Blowfish salt (Inria)
 * Accounts: passwords hashes: add support for SHA256/SHA512 (Inria)
 * FRS: fix shownotes.php link. Use new url form. view=shownotes (TrivialDev)
+* FRS: frs latest zip migration script hardening (TrivialDev)
 * MTA-Exim4: restart exim4 on install
 * Plugin SCM: fix another race condition when creating project with SCM selected (Inria)
 * Plugin SCM Git: improve user matching when computing stats, support git .mailmap (Inria)
