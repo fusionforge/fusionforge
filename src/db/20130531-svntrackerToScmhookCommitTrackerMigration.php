@@ -52,6 +52,7 @@ if ($used) {
 	$pm->LoadPlugin('scmhook');
 	$pluginScmHook = $pm->GetPluginObject('scmhook');
 	$scmsvncronjob = new ScmSvnUpdateScmRepo();
+	$pluginScmHook->install();
 
 	while ($arrGroupNames = db_fetch_array($groupnames)) {
 		// -> register scmhook for these groups
@@ -75,7 +76,6 @@ if ($used) {
 		}
 		$pluginScmHook->update($params);
 		$hooksArray = $pluginScmHook->getEnabledHooks($projectId);
-		unset($pluginScmHook);
 		$params['hooksString'] = implode('|',$hooksArray);
 		$params['scm_root'] = forge_get_config('repos_path', 'scmsvn') . '/' . $projectObject->getUnixName();
 		if ($scmsvncronjob->updateScmRepo($params)) {
