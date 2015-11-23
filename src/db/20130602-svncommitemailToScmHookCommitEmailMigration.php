@@ -4,6 +4,7 @@
  * svncommitemail -> scmhook commitEmail migration script
  *
  * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2015, Benoit Debaenst - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -76,7 +77,6 @@ if ($used) {
 		}
 		$pluginScmHook->update($params);
 		$hooksArray = $pluginScmHook->getEnabledHooks($projectId);
-		unset($pluginScmHook);
 		$params['hooksString'] = implode('|',$hooksArray);
 		$params['scm_root'] = forge_get_config('repos_path', 'scmsvn') . '/' . $projectObject->getUnixName();
 		if ($scmsvncronjob->updateScmRepo($params)) {
