@@ -31,8 +31,8 @@
  *
  */
 function account_pwvalid($pw) {
-	if (strlen($pw) < 6) {
-		$GLOBALS['register_error'] = _('Password must be at least 6 characters.');
+	if (strlen($pw) < 8) {
+		$GLOBALS['register_error'] = _('Password must be at least 8 characters.');
 		return 0;
 	}
 	return 1;

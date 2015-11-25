@@ -1,4 +1,5 @@
 FusionForge 6.X:
+* Accounts: minimum password length is now 8
 * Spellcheck (Anders Jonsson)
 * Site Admin: add paging system in userlist page [#799] (TrivialDev)
 * Docman: limit number of returned documents on search query [#794] (TrivialDev)

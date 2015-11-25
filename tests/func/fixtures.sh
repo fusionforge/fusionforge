@@ -131,7 +131,7 @@ if [ "$reset" = 1 ]; then
     service postgresql restart
     su - postgres -c "dropdb $database" || true
     $(forge_get_config source_path)/post-install.d/db/db.sh configure
-    forge_set_password admin myadmin
+    forge_set_password admin 'my%admin'
     service fusionforge-systasksd start
     start_apache
     rm -rf $pgdir.backup-*/
