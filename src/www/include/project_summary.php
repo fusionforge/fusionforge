@@ -5,6 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010, FusionForge Team
  * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2015  Inria (Sylvain Beucler)
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -127,7 +128,6 @@ function project_summary($group_id, $mode, $no_table) {
 			FROM artifact_group_list agl
 			LEFT JOIN artifact_counts_agg aca USING (group_artifact_id)
 			WHERE agl.group_id=$1
-			AND agl.is_public=1
 			ORDER BY group_artifact_id ASC',
 				array($group_id));
 
@@ -137,8 +137,11 @@ function project_summary($group_id, $mode, $no_table) {
 				$return .= '<br /><em>'._('There are no public trackers available').'</em>';
 			} else {
 				for ($j = 0; $j < $rows; $j++) {
+					$artifact_id = db_result($result, $j, 'group_artifact_id');
+					if (!forge_check_perm('tracker', $artifact_id, 'read'))
+						continue;
 					$return .= '<p>
-					&nbsp;-&nbsp;'.util_make_link('/tracker/?atid='. db_result($result, $j, 'group_artifact_id') . '&group_id='.$group_id.'&func=browse',db_result($result, $j, 'name'));
+					&nbsp;-&nbsp;'.util_make_link('/tracker/?atid='. $artifact_id . '&group_id='.$group_id.'&func=browse',db_result($result, $j, 'name'));
 					$return .= sprintf(ngettext('(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', '(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', (int) db_result($result, $j, 'open_count')), (int) db_result($result, $j, 'open_count'), (int) db_result($result, $j, 'count')) ;
 					$return .= '</p>';
 				}
@@ -209,16 +212,18 @@ function project_summary($group_id, $mode, $no_table) {
 		$return .= '&nbsp;Task&nbsp;Manager</a>';
 
 		if ($mode != 'compact') {
-			//get a list of publicly available projects
-			$result = db_query_params ('SELECT * FROM project_group_list WHERE group_id=$1 AND is_public=1',
-						   array ($group_id));
+			//get a list of publicly available subprojects
+			$result = db_query_params('SELECT * FROM project_group_list WHERE group_id=$1',
+			                          array($group_id));
 			$rows = db_numrows($result);
 			if (!$result || $rows < 1) {
 				$return .= '<br /><em>There are no public subprojects available</em>';
 			} else {
 				for ($j = 0; $j < $rows; $j++) {
-					$return .= '
-					<br /> &nbsp; - '.util_make_link ('/pm/task.php?group_project_id='.db_result($result, $j, 'group_project_id').'&group_id='.$group_id.'&func=browse',db_result($result, $j, 'project_name'));
+					$subproject_id = db_result($result, $j, 'group_project_id');
+					if (!forge_check_perm('pm', $subproject_id, 'read'))
+						continue;
+					$return .= '<br /> &nbsp; - '.util_make_link('/pm/task.php?group_project_id='.$subproject_id.'&group_id='.$group_id.'&func=browse',db_result($result, $j, 'project_name'));
 				}
 				db_free_result($result);
 			}
