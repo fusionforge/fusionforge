@@ -585,7 +585,7 @@ some control over it to the project's administrator.");
 			curl_setopt($ch, CURLOPT_WRITEFUNCTION, 'curl2xml');
 			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-			curl_setopt($ch, CURLOPT_COOKIE, $_SERVER['HTTP_COOKIE']);  // for session validation
+			curl_setopt($ch, CURLOPT_COOKIE, @$_SERVER['HTTP_COOKIE']);  // for session validation
 			curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);  // for session validation
 			curl_setopt($ch, CURLOPT_HTTPHEADER,
 						array('X-Forwarded-For: '.$_SERVER['REMOTE_ADDR']));  // for session validation
