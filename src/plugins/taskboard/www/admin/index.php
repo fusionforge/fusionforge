@@ -61,7 +61,7 @@ if (!$group_id) {
 			include($gfplugins.$pluginTaskboard->name.'/common/views/admin/ind.php');
 		}
 	} else {
-		$taskboard->header(
+		$HTML->header(
 			array(
 				'title' => _('Taskboard for ').$group->getPublicName()._(': ')._('Administration'),
 				'pagename' => _('Administration'),
