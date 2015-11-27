@@ -103,12 +103,17 @@ EOF
 fixup_nss() {
     conf=''
     case $INSTALL_OS in
-	debian*) conf='/etc/apache2/envvars' ;;
-	centos*) conf='/etc/sysconfig/httpd' ;;
+        debian*)
+            if ! grep -q '^export PGPASSFILE' /etc/apache2/envvars; then
+                echo 'export PGPASSFILE=' >> /etc/apache2/envvars
+            fi
+            ;;
+        centos*)
+            if ! grep -q '^PGPASSFILE' /etc/sysconfig/httpd; then
+                echo 'PGPASSFILE=' >> /etc/sysconfig/httpd
+            fi
+            ;;
     esac
-    if ! grep -q PGPASSFILE $conf; then
-	echo 'PGPASSFILE=' >> $conf
-    fi
 }
 
 fixup_nss
