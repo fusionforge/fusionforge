@@ -23,6 +23,7 @@ FusionForge 6.0.4:
 * Plugin Projects Hierarchy: don't display a project as possible child if there's no read access to it (Inria)
 * Plugin Projects Hierarchy: mask delegation checkbox until implementation is complete [#797] (Inria)
 * Plugin Projects Hierarchy: prevent auto-validation of parent-child requests [#796] (Inria)
+* Plugin Taskboard: fix blank admin page when project tracker is disabled (Inria)
 * Updated simplified Chinese translation (Mingye Wang)
 
 FusionForge 6.0.3:

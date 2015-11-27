@@ -174,7 +174,9 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	}
 
 	function runCommandTimeout($dir, $command, $env='') {
-		$cmd = "cd $dir && $env timeout 15s $command";
+		# Disable timeout so we have a chance to gdb the stalled process:
+		#$cmd = "cd $dir && $env timeout 15s $command";
+		$cmd = "cd $dir && $env $command";
 		system($cmd, $ret);
 		if ($ret == 124) {	# retry once if we get a timeout
 			system($cmd, $ret);
