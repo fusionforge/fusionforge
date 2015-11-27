@@ -45,7 +45,7 @@
  */
 
 define('FORGE_ADMIN_USERNAME', 'admin');
-define('FORGE_ADMIN_PASSWORD', 'my%admin');
+define('FORGE_ADMIN_PASSWORD', 'my^admin');
 define('FORGE_OTHER_PASSWORD', 'tototata');
 
 $config = dirname(__FILE__).'/config.php';
