@@ -25,6 +25,7 @@ FusionForge 6.0.4:
 * Plugin Projects Hierarchy: prevent auto-validation of parent-child requests [#796] (Inria)
 * Plugin Taskboard: fix blank admin page when project tracker is disabled (Inria)
 * Updated simplified Chinese translation (Mingye Wang)
+* Site Admin: fix grouplist.php listing projects using specific plugin [#800] (TrivialDev)
 
 FusionForge 6.0.3:
 * Layout: fix rss url when url is absolute (TrivialDev)
