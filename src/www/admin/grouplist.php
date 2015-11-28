@@ -3,7 +3,7 @@
  * List of all groups in the system.
  *
  * Copyright 1999-2000 (c) The SourceForge Crew
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013,2015 Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -27,9 +27,11 @@ require_once $gfwww.'admin/admin_utils.php';
 
 site_admin_header(array('title'=>_('Project List')));
 
-$sortorder = getStringFromRequest('sortorder');
+$sortorder = getStringFromRequest('sortorder', 'group_name');
 $group_name_search = getStringFromRequest('group_name_search');
 $status = getStringFromRequest('status');
+$usingplugin = getStringFromRequest('usingplugin');
+$filter = '';
 
 $sortorder = util_ensure_value_in_set($sortorder,
 				       array ('group_name',
@@ -49,8 +51,15 @@ if ($sortorder == 'is_public') {
 
 
 $sqlsortorder = $sortorder;
-
-if ($group_name_search != '') {
+if ($usingplugin) {
+	$filter='&usingplugin='.$usingplugin;
+	echo "<p>"._('Projects that use plugin'). " <strong>".$usingplugin."</strong></p>\n";
+	$qpa = db_construct_qpa(false, 'SELECT group_name,register_time,unix_group_name,groups.group_id,groups.is_template,status,license_name,COUNT(DISTINCT(pfo_user_role.user_id)) AS members FROM groups LEFT OUTER JOIN pfo_role ON pfo_role.home_group_id=groups.group_id LEFT OUTER JOIN pfo_user_role ON pfo_user_role.role_id=pfo_role.role_id, licenses WHERE license_id=license and groups.group_id in (SELECT group_plugin.group_id from group_plugin where group_plugin.plugin_id = (SELECT plugins.plugin_id FROM plugins where plugins.plugin_name = $1)) GROUP BY group_name,register_time,unix_group_name,groups.group_id,groups.is_template,status,license_name',
+				array(strtolower($usingplugin)));
+	$qpa = db_construct_qpa($qpa, ' ORDER BY '.$sqlsortorder);
+	$res = db_query_qpa($qpa);
+} else if  ($group_name_search != '') {
+	$filter='&group_name_search='.$group_name_search;
 	echo "<p>"._('Projects that begin with'). " <strong>".$group_name_search."</strong></p>\n";
 	$res = db_query_params('SELECT group_name,register_time,unix_group_name,groups.group_id,groups.is_template,status,license_name,COUNT(DISTINCT(pfo_user_role.user_id)) AS members FROM groups LEFT OUTER JOIN pfo_role ON pfo_role.home_group_id=groups.group_id LEFT OUTER JOIN pfo_user_role ON pfo_user_role.role_id=pfo_role.role_id, licenses WHERE license_id=license AND lower(group_name) LIKE $1 GROUP BY group_name,register_time,unix_group_name,groups.group_id,groups.is_template,status,license_name ORDER BY '.$sqlsortorder,
 				array(strtolower ("$group_name_search%")));
@@ -75,14 +84,14 @@ $headers = array(
 );
 
 $headerLinks = array(
-	'/admin/grouplist.php?sortorder=group_name',
-	'/admin/grouplist.php?sortorder=register_time',
-	'/admin/grouplist.php?sortorder=unix_group_name',
-	'/admin/grouplist.php?sortorder=status',
-	'/admin/grouplist.php?sortorder=is_public',
-	'/admin/grouplist.php?sortorder=license_name',
-	'/admin/grouplist.php?sortorder=members',
-	'/admin/grouplist.php?sortorder=is_template'
+	'/admin/grouplist.php?sortorder=group_name'.$filter,
+	'/admin/grouplist.php?sortorder=register_time'.$filter,
+	'/admin/grouplist.php?sortorder=unix_group_name'.$filter,
+	'/admin/grouplist.php?sortorder=status'.$filter,
+	'/admin/grouplist.php?sortorder=is_public'.$filter,
+	'/admin/grouplist.php?sortorder=license_name'.$filter,
+	'/admin/grouplist.php?sortorder=members'.$filter,
+	'/admin/grouplist.php?sortorder=is_template'.$filter
 );
 
 $headerClass = array(
