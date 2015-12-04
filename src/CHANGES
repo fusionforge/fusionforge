@@ -7,6 +7,7 @@ FusionForge 6.0.4:
 * FRS: fix shownotes.php link. Use new url form. view=shownotes (TrivialDev)
 * FRS: frs latest zip migration script hardening (TrivialDev)
 * MTA-Exim4: restart exim4 on install
+* News: pending site news e-mail reminder: properly filter out private projects (Inria)
 * Plugin SCM: fix another race condition when creating project with SCM selected (Inria)
 * Plugin SCM Git: improve user matching when computing stats, support git .mailmap (Inria)
 * Plugin scmhook: fix non-editable mailing list name in some configurations (Inria)
