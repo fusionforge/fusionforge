@@ -112,6 +112,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
   	 * @return string result of all selected searches
 	 */
 	function getResult() {
+		global $HTML;
 		$html = '';
 
 		if (in_array('short_forum', $this->selectedParentSections)) {
@@ -169,7 +170,10 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			}
 		}
 
-		return $html.'<br />';
+		if (strlen($html)) {
+			return $html;
+		}
+		return $HTML->information(_('No result found'));
 	}
 
 	/**
