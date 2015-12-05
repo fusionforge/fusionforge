@@ -36,6 +36,7 @@ global $LUSER; // User object
 global $g; // the Group object
 global $dm; // the docman manager
 global $warning_msg;
+global $start; // use to set the offset
 
 $linkmenu = 'listfile';
 $baseredirecturl = '/docman/?group_id='.$group_id;
@@ -60,6 +61,22 @@ if ($childgroup_id) {
 	$g = group_get_object($childgroup_id);
 }
 
+if (session_loggedin()) {
+	if (getStringFromRequest('setpaging')) {
+		/* store paging preferences */
+		$paging = getIntFromRequest('nres');
+		if (!$paging) {
+			$paging = 25;
+		}
+		$LUSER->setPreference('paging', $paging);
+	}
+	/* logged in users get configurable paging */
+	$paging = $LUSER->getPreference('paging');
+}
+
+if(!isset($paging) || !$paging)
+	$paging = 25;
+
 $df = new DocumentFactory($g);
 if ($df->isError())
 	exit_error($df->getErrorMessage(), 'docman');
@@ -68,6 +85,8 @@ $dgf = new DocumentGroupFactory($g);
 if ($dgf->isError())
 	exit_error($dgf->getErrorMessage(), 'docman');
 
+$df->setLimit($paging);
+$df->setOffset($start);
 $df->setDocGroupID($dirid);
 
 //active, hidden & private state ids
@@ -90,6 +109,12 @@ if ($dirid) {
 	if ($ndg->getState() != 1) {
 		$error_msg = _('Invalid folder');
 		session_redirect($baseredirecturl.'&view=listfile');
+	}
+	$nbDocs = $ndg->getNumberOfDocuments(1);
+	if (forge_check_perm('docman', $g->getID(), 'approve')) {
+		$nbDocs += $ndg->getNumberOfDocuments(3);
+		$nbDocs += $ndg->getNumberOfDocuments(4);
+		$nbDocs += $ndg->getNumberOfDocuments(5);
 	}
 }
 
@@ -154,6 +179,8 @@ if ($DocGroupName) {
 	}
 	$headerPath .= _('Path')._(': ').html_e('i', array(), $dgpath, false);
 	echo html_e('h2', array(), $headerPath, false);
+	$max = ($nbDocs > ($start + $paging)) ? ($start + $paging) : $nbDocs;
+	echo $HTML->paging_top($start, $paging, $nbDocs, $max, $redirecturl);
 	echo html_ao('h3', array('class' => 'docman_h3'));
 	echo html_e('span', array(), _('Document Folder')._(': ').html_e('i', array(), $DocGroupName, false).'&nbsp;', false);
 	/* should we steal the lock on folder ? */
@@ -396,6 +423,8 @@ if ($DocGroupName) {
 			echo html_ac(html_ap() - 1);
 		}
 	}
+
+	echo $HTML->paging_bottom($start, $paging, $nbDocs, $redirecturl);
 }
 
 include ($gfcommon.'docman/views/help.php');

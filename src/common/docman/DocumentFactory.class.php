@@ -79,6 +79,13 @@ class DocumentFactory extends Error {
 	var $limit = 0;
 
 	/**
+	 * The offset
+	 * @var	integer	Contains the offset of the query used to retrive documents using getDocuments.
+	 *		Default value is 0 which means NO OFFSET
+	 */
+	var $offset = 0;
+
+	/**
 	 * Constructor.
 	 *
 	 * @param	$Group
@@ -260,6 +267,17 @@ class DocumentFactory extends Error {
 	}
 
 	/**
+	 * setOffset - call this before getDocuments() if you want to move to the offset in the query used to retrieve documents.
+	 * default value is 0 which means : no offset.
+	 *
+	 * @param	int	$offset	The offset to use
+	 * @access	public
+	 */
+	function setOffset($offset) {
+		$this->offset = $offset;
+	}
+
+	/**
 	 * getDocuments - returns an array of Document objects.
 	 *
 	 * @param	int	$nocache	Force to reset the cached data if any available.
@@ -352,6 +370,8 @@ class DocumentFactory extends Error {
 		if ($this->limit !== 0) {
 			$qpa = db_construct_qpa($qpa, ' LIMIT $1', array($this->limit));
 		}
+
+		$qpa = db_construct_qpa($qpa, ' OFFSET $1', array($this->offset));
 
 		$result = db_query_qpa($qpa);
 		if (!$result) {

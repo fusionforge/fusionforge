@@ -97,6 +97,10 @@ switch ($action) {
 	}
 }
 
+$start = getIntFromRequest('start', 0);
+if ($start < 0)
+	$start = 0;
+
 html_use_storage();
 html_use_simplemenu();
 html_use_jqueryui();
