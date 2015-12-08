@@ -1576,6 +1576,35 @@ class Group extends Error {
 		}
 		return $this->data_array['homepage'];
 	}
+	/**
+	 * setHomepage - the hostname of the scm box where this project is located.
+	 *
+	 * @param	string	$homepage	The name of the new HOMEPAGE
+	 * @return	bool
+	 */
+	function setHomepage($homepage) {
+
+		if ($homepage == $this->data_array['homepage']) {
+			return true;
+		}
+		if ($homepage) {
+			db_begin();
+			$res = db_query_params('UPDATE groups SET homepage=$1 WHERE group_id=$2', array($homepage, $this->getID()));
+			if ($res) {
+				$this->addHistory('homepage', $this->data_array['homepage']);
+				$this->data_array['homepage'] = $homepage;
+				db_commit();
+				return true;
+			} else {
+				db_rollback();
+				$this->setError(_("Could not insert homepage to database"));
+				return false;
+			}
+		} else {
+			$this->setError(_("SCM Box cannot be empty"));
+			return false;
+		}
+	}
 
 	/**
 	 * getTags - Tags of this project.
