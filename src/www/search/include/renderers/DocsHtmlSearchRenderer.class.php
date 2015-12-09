@@ -4,7 +4,7 @@
  *
  * Copyright 2004 (c) Dominik Haas, GForge Team
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013,2015 Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of National Education
  * http://fusionforge.org
  *
@@ -40,11 +40,11 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 * @param array|string $sections array of all sections to search in (array of strings)
 	 *
 	 */
-	function DocsHtmlSearchRenderer($words, $offset, $isExact, $groupId, $sections=SEARCH__ALL_SECTIONS) {
+	function DocsHtmlSearchRenderer($words, $offset, $isExact, $groupId, $sections = SEARCH__ALL_SECTIONS, $rowsPerPage = SEARCH__DEFAULT_ROWS_PER_PAGE, $options = array()) {
 
 		$userIsGroupMember = $this->isGroupMember($groupId);
 
-		$searchQuery = new DocsSearchQuery($words, $offset, $isExact, $groupId, $sections, $userIsGroupMember);
+		$searchQuery = new DocsSearchQuery($words, $offset, $isExact, $groupId, $sections, $userIsGroupMember, $rowsPerPage, $options);
 
 		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_DOCS, $words, $isExact, $searchQuery, $groupId, 'docman');
 
@@ -62,12 +62,12 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 * @return string html output
 	 */
 	function getRows() {
-		$rowsCount = $this->searchQuery->getRowsCount();
-		$result =& $this->searchQuery->getResult();
-
 		if (!forge_check_perm('docman', $this->groupId, 'read')) {
 			return '';
 		}
+
+		$rowsCount = $this->searchQuery->getRowsCount();
+		$result =& $this->searchQuery->getResult();
 
 		$return = '';
 
