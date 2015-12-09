@@ -44,7 +44,7 @@ if ($debug) {
 }
 
 $old_date = time()-60*60*24*30;
-$res = db_query_params("SELECT group_name,summary,details
+$res = db_query_params("SELECT group_name,summary,details,g.group_id
 	FROM news_bytes n, groups g
 	WHERE is_approved = 0
 	AND n.group_id=g.group_id
@@ -59,13 +59,11 @@ while ($arr = db_fetch_array($res)) {
 
 $thereisnews = false;
 $emailformatted = '';
+$ra = RoleAnonymous::getInstance();
 foreach ($results_array as $newsnotapprob) {
-	list($group_name, $summary, $details) = $newsnotapprob;
+	list($group_name, $summary, $details,$group_id) = $newsnotapprob;
 
-	$res = db_query_params("SELECT COUNT(*) FROM pfo_role_setting prs, groups g
-		  WHERE prs.role_id=1 AND prs.section_name = 'project_read' AND prs.perm_val = 1
-			AND prs.ref_id = g.group_id AND g.unix_group_name = $1", array($group_name));
-	if (db_numrows($res) >= 1) {  # $is_public == true
+	if ($ra->hasPermission('project_read', $group_id)) {
 		$thereisnews = true;
 		$title = "$group_name: $summary\n";
 		$emailformatted .= wordwrap($title, 78);
