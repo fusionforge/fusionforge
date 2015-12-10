@@ -2315,6 +2315,10 @@ class Group extends Error {
 	 * @access public
 	 */
 	function addHistory($field_name, $old_value) {
+            if ($old_value == NULL) {
+                    $old_value = '';
+            }
+
 		return db_query_params ('INSERT INTO group_history(group_id,field_name,old_value,mod_by,adddate)
 			VALUES ($1,$2,$3,$4,$5)',
 					array($this->getID(),
