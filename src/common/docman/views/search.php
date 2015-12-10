@@ -174,11 +174,13 @@ if (session_loggedin()) {
 if(!isset($paging) || !$paging)
 	$paging = 25;
 
-$docsHtmlSearchRenderer = new DocsHtmlSearchRenderer($searchString, $start, getStringFromPost('search_type'), $group_id, SEARCH__ALL_SECTIONS, $paging, $search_options);
-$docsHtmlSearchRenderer->searchQuery->executeQuery();
-$nbDocs = $docsHtmlSearchRenderer->searchQuery->getRowsCount();
-$max = $docsHtmlSearchRenderer->searchQuery->getRowsTotalCount();
-echo $HTML->paging_top($start, $paging, $nbDocs, $max, $redirect_url.'&view=search');
-$docsHtmlSearchRenderer->writeBody();
-echo $HTML->paging_bottom($start, $paging, $nbDocs, $redirect_url.'&view=search');
+if ($searchString) {
+	$docsHtmlSearchRenderer = new DocsHtmlSearchRenderer($searchString, $start, getStringFromPost('search_type'), $group_id, SEARCH__ALL_SECTIONS, $paging, $search_options);
+	$docsHtmlSearchRenderer->searchQuery->executeQuery();
+	$nbDocs = $docsHtmlSearchRenderer->searchQuery->getRowsCount();
+	$max = $docsHtmlSearchRenderer->searchQuery->getRowsTotalCount();
+	echo $HTML->paging_top($start, $paging, $nbDocs, $max, $redirect_url.'&view=search');
+	$docsHtmlSearchRenderer->writeBody();
+	echo $HTML->paging_bottom($start, $paging, $nbDocs, $redirect_url.'&view=search');
+}
 echo html_ac(html_ap() -2);

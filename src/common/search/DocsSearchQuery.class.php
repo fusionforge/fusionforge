@@ -95,7 +95,7 @@ class DocsSearchQuery extends SearchQuery {
 
 			$qpa = db_construct_qpa($qpa,
 						 ') AS x WHERE ') ;
-			$qpa = $this->addIlikeCondition ($qpa, 'full_string_agg') ;
+			$qpa = $this->addIlikeCondition($qpa, 'full_string_agg');
 			$qpa = db_construct_qpa($qpa,
 						 ' ORDER BY x.groupname, x.title') ;
 		}
@@ -108,20 +108,12 @@ class DocsSearchQuery extends SearchQuery {
 		$group_id = $this->groupId;
 		if (!isset($options['insideDocuments']) || !$options['insideDocuments']) {
 			$qpa = db_construct_qpa(false,
-						'SELECT x.* FROM (SELECT doc_data.docid, doc_data.filename, ts_headline(doc_data.title, q) AS title, ts_headline(doc_data.description, q) AS description, doc_groups.groupname, doc_data.title||$1||description AS full_string_agg, doc_data_idx.vectors FROM doc_data, doc_groups, doc_data_idx, to_tsquery($2) AS q',
-						array ($this->field_separator,
-							$words));
-			$qpa = db_construct_qpa($qpa,
-					 ' WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.docid = doc_data_idx.docid AND (vectors @@ to_tsquery($1)',
-					 array ($words)) ;
+					'SELECT x.* FROM (SELECT doc_data.docid, doc_data.filename, ts_headline(doc_data.title, q) AS title, ts_headline(doc_data.description, q) AS description, doc_groups.groupname, doc_data.title||$1||description AS full_string_agg, doc_data_idx.vectors FROM doc_data, doc_groups, doc_data_idx, to_tsquery($2) AS q WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.docid = doc_data_idx.docid AND (vectors @@ to_tsquery($2)',
+					array ($this->field_separator, $words));
 		} else {
 			$qpa = db_construct_qpa(false,
-					'SELECT x.* FROM (SELECT doc_data.docid, ts_headline(doc_data.filename, q) AS filename, ts_headline(doc_data.title, q) AS title, ts_headline(doc_data.description, q) AS description, doc_groups.groupname, doc_data.title||$1||description||$1||filename AS full_string_agg, doc_data_words_idx.vectors FROM doc_data, doc_groups, doc_data_words_idx, to_tsquery($2) AS q',
-					array ($this->field_separator,
-					$words));
-			$qpa = db_construct_qpa($qpa,
-					 ' WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.docid = doc_data_words_idx.docid AND (vectors @@ to_tsquery($1)',
-					 array ($words)) ;
+					'SELECT x.* FROM (SELECT doc_data.docid, ts_headline(doc_data.filename, q) AS filename, ts_headline(doc_data.title, q) AS title, ts_headline(doc_data.description, q) AS description, doc_groups.groupname, doc_data.title||$1||description||$1||filename AS full_string_agg, doc_data_words_idx.vectors FROM doc_data, doc_groups, doc_data_words_idx, to_tsquery($2) AS q WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.docid = doc_data_words_idx.docid AND (vectors @@ to_tsquery($2)',
+					array ($this->field_separator, $words));
 		}
 		$qpa = db_construct_qpa($qpa,
 					 ') AND doc_data.group_id = $1',
