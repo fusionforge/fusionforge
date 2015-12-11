@@ -293,6 +293,13 @@ some control over it to the project's administrator.");
 				return false;
 			}
 			system ("sed -i '/enable-rep-sharing = false/s/^. //' $repo/db/fsfs.conf") ;
+			// pre-create the dav directory because apache running as
+			// commiting user (with mod-itk) will not have the right
+			// to create this dir. This is needed only for some
+			// specific svn clients (eg. svn 1.6.17 on ubuntu 12.04)
+			if (!is_dir ("$repo/dav")) {
+				mkdir("$repo/dav");
+			}
 			system ("svn mkdir -m'Init' file:///$repo/trunk file:///$repo/tags file:///$repo/branches >/dev/null") ;
 			system ("find $repo -type d -print0 | xargs -r -0 chmod g+s") ;
 			// Allow read/write users to modify the SVN repository
