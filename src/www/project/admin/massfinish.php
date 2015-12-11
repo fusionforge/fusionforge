@@ -5,6 +5,7 @@
  * Copyright 2004 (c) Tim Perdue - GForge LLC
  * Copyright 2010 (c) Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2015, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -27,6 +28,8 @@ require_once '../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'project/admin/project_admin_utils.php';
 require_once $gfwww.'include/role_utils.php';
+
+global $HTML;
 
 $group_id = getIntFromRequest('group_id');
 session_require_perm ('project_admin', $group_id) ;
@@ -61,14 +64,11 @@ if (!$accumulated_ids) {
 
 project_admin_header(array('title'=>_('Add Users From List'),'group'=>$group_id));
 
-echo '
-<p>
-'._('Choose the role for each user and then press “Add All”.').'
-</p>
-<form action="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'" method="post">';
+echo html_e('p', array(), _('Choose the role for each user and then press “Add All”.'));
+echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF').'?group_id='.$group_id, 'method' => 'post'));
 
 if (!$res || db_numrows($res) < 1) {
-	echo _('No Matching Users Found');
+	echo $HTML->information(_('No Matching Users Found'));
 } else {
 
 	$titles[]=_('Real Name');
@@ -93,8 +93,8 @@ if (!$res || db_numrows($res) < 1) {
 
 }
 
-echo '<p><input type="submit" name="finished" value="'._('Add All').'" /></p>
-</form>';
+echo '<p><input type="submit" name="finished" value="'._('Add All').'" /></p>';
+echo $HTML->closeForm();
 
 project_admin_footer();
 

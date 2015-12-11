@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (C) 2012 Roland Mas
+ * Copyright (C) 2015  Inria (Sylvain Beucler)
  *
  * This file is part of FusionForge.
  *
@@ -19,7 +20,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
+require_once dirname(dirname(__FILE__)).'/SeleniumForge.php';
 
 function mysystem($cmd, &$ret=null) {
 	print "Running: $cmd\n";
@@ -29,14 +30,16 @@ function mysystem($cmd, &$ret=null) {
 
 class ScmBzrTest extends FForge_SeleniumTestCase
 {
+	public $fixture = 'projecta';
+
 	function testScmBzr()
 	{
 		$this->skip_on_rpm_installs();
 		$this->skip_on_src_installs();
 
+		$this->loadAndCacheFixture();
+
 		$this->activatePlugin('scmbzr');
-		$this->populateStandardTemplate('empty');
-		$this->init();
 
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");

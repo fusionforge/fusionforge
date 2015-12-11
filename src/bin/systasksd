@@ -38,13 +38,13 @@ function usergroups_sync() {
 	global $usergroups_lastsync;
 	$res = db_query_params("SELECT MAX(last_modified_date) AS lastmodified FROM nss_usergroups");
 	$row = db_fetch_array($res);
-	if ($row['lastmodified'] > $usergroups_lastsync) {
+	if ($row['lastmodified'] >= $usergroups_lastsync) {
+		$usergroups_lastsync = time();
 		cron_reload_nscd();
 		cron_regen_apache_auth();
 		cron_reload_apache();
 		$hook_params = array();
 		plugin_hook("usergroups_sync", $hook_params);
-		$usergroups_lastsync = time();
 	}
 }
 
@@ -71,6 +71,10 @@ function systask_get_script($plugin_id, $systask_type) {
 	return null;
 }
 
+function is_group_active_nocache($group_id) {
+	$res = db_query_params("SELECT group_id FROM nss_groups WHERE group_id=$1", array($group_id));
+	return (db_numrows($res) > 0);
+}
 
 
 $shortopts = 'v';       // enable verbose mode
@@ -119,7 +123,6 @@ while (true) {
 	if (!$res && !db_connection_status())
 		db_reconnect();
 	while ($arr = db_fetch_array($res)) {
-		usergroups_sync();
 		$script = systask_get_script($arr['plugin_id'], $arr['systask_type']);
 		if (!file_exists($script))
 			// Not installed on this node, skipping
@@ -133,6 +136,13 @@ while (true) {
 								  $arr['systask_id']));
 			continue;
 		}
+
+		// Concurrency: ensure groups are activated in the system before starting task
+		if (!empty($arr['group_id']) && !is_group_active_nocache($arr['group_id'])) {
+			continue;  // wait until project is approved
+		}
+		usergroups_sync();
+
 		db_query_params("UPDATE systasks SET status=$1, started=now() WHERE systask_id=$2",
 						array('WIP', $arr['systask_id']));
 		cron_acquire_lock($script);

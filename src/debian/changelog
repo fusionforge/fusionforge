@@ -4,6 +4,39 @@ fusionforge (6.0.50-0) UNRELEASED; urgency=medium
 
  -- Roland Mas <lolando@debian.org>  Wed, 24 Jun 2015 11:32:26 +0200
 
+fusionforge (6.0.3+20151023-1) unstable; urgency=medium
+
+  * New upstream snapshot following the 6.0 stable branch
+  * Drop post-install scripts (closes: #789772, #789773, #793683, #801843)
+  * New fusionforge-plugin-projects-hierarchy package
+  * Drop support for CVS (closes: #801142)
+
+ -- Sylvain Beucler <beuc@debian.org>  Fri, 23 Oct 2015 17:04:00 +0200
+
+fusionforge (6.0.3-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Sylvain Beucler <beuc@debian.org>  Tue, 06 Oct 2015 17:05:00 +0200
+
+fusionforge (6.0.2+20150918-1) unstable; urgency=medium
+
+  * New upstream snapshot following the 6.0 stable branch
+  * fusionforge-plugin-scmarch: don't depend on tla, not used server-side
+  * fusionforge-web: remove dead symlink in Apache conf on uninstall
+    (closes: #798706)
+
+ -- Sylvain Beucler <beuc@debian.org>  Fri, 18 Sep 2015 18:30:00 +0200
+
+fusionforge (6.0.2+20150908-1) unstable; urgency=medium
+
+  * New upstream snapshot following the 6.0 stable branch
+  * fusionforge-web: add dependency to 'openssl' for the hypothetical case
+    somebody installs fusionforge without postgresql, postfix nor unoconv
+    (closes: #798363)
+
+ -- Sylvain Beucler <beuc@debian.org>  Tue, 08 Sep 2015 16:50:55 +0200
+
 fusionforge (6.0.2+20150901-1) unstable; urgency=medium
 
   * New upstream snapshot following the 6.0 stable branch

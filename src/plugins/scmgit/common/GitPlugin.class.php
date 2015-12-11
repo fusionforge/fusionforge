@@ -697,7 +697,9 @@ control over it to the project's administrator.");
 				return false;
 			}
 
-			$pipe = popen("GIT_DIR=\"$repo\" git log --since=@$start_time --until=@$end_time --all --pretty='format:%n%an <%ae>' --name-status 2>/dev/null", 'r' );
+			# For each commit, get committer full name and e-mail (respecting git .mailmap file),
+			# and a list of files prefixed by their status (A/M/D)
+			$pipe = popen("GIT_DIR=\"$repo\" git log --since=@$start_time --until=@$end_time --all --pretty='format:%n%aN <%aE>' --name-status 2>/dev/null", 'r' );
 
 			db_begin();
 
@@ -725,17 +727,16 @@ control over it to the project's administrator.");
 			$last_user    = "";
 			while (!feof($pipe) && $data = fgets($pipe)) {
 				$line = trim($data);
-				// Drop bad UTF-8 - it's quite hard to make git output non-UTF-8
-				// (e.g. by enforcing an unknown encoding) - but some users do!
-				// and this makes PostgreSQL choke
-				// this fix removes tabs in line. the regex used in short-commit stats line has been changed accordingly.
-				$line = preg_replace('/[^(\x20-\x7F)]/','', $line);
+				// Replace bad UTF-8 with '?' - it's quite hard to make git output non-UTF-8
+				// (e.g. with i18n.commitEncoding = unknown) - but some users do!
+				// and this makes PostgreSQL choke (SQL> ERROR:  invalid byte sequence for encoding "UTF8": 0xf9)
+				$line = mb_convert_encoding($line, 'UTF-8', 'UTF-8');
 				if (strlen($line) > 0) {
 					$result = preg_match("/^(?P<name>.+) <(?P<mail>.+)>/", $line, $matches);
 					if ($result) {
 						// Author line
 						$last_user = $matches['name'];
-						$user2email[$last_user] = strtolower($matches['mail']);
+						$user2email[$last_user] = $matches['mail'];
 						if (!isset($usr_adds[$last_user])) {
 							$usr_adds[$last_user] = 0;
 							$usr_updates[$last_user] = 0;
@@ -746,7 +747,7 @@ control over it to the project's administrator.");
 						$usr_commits[$last_user]++;
 					} else {
 						// Short-commit stats line
-						$result = preg_match("/^(?P<mode>[AMD])(?P<file>.+)$/", $line, $matches);
+						$result = preg_match("/^(?P<mode>[AMD])\s+(?P<file>.+)$/", $line, $matches);
 						if (!$result) continue;
 						if ($last_user == "") continue;
 						if (!isset($usr_adds[$last_user])) $usr_adds[$last_user] = 0;
@@ -792,8 +793,8 @@ control over it to the project's administrator.");
 				if ($u) {
 					$user_id = $u->getID();
 				} else {
-					$res=db_query_params('SELECT user_id FROM users WHERE lower(realname)=$1 OR email=$2',
-						array(strtolower($user), $user2email[$user]));
+					$res=db_query_params('SELECT user_id FROM users WHERE lower(realname)=$1 OR lower(email)=$2',
+						array(strtolower($user), strtolower($user2email[$user])));
 					if ($res && db_numrows($res) > 0) {
 						$user_id = db_result($res,0,'user_id');
 					} else {
@@ -985,7 +986,7 @@ control over it to the project's administrator.");
 			curl_setopt($ch, CURLOPT_FILE, $f);
 			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-			curl_setopt($ch, CURLOPT_COOKIE, $_SERVER['HTTP_COOKIE']);  // for session validation
+			curl_setopt($ch, CURLOPT_COOKIE, @$_SERVER['HTTP_COOKIE']);  // for session validation
 			curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);  // for session validation
 			curl_setopt($ch, CURLOPT_HTTPHEADER,
 						array('X-Forwarded-For: '.$_SERVER['REMOTE_ADDR']));  // for session validation

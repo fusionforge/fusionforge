@@ -37,7 +37,7 @@ class Widget_ProjectPublicAreas extends Widget {
 
 	function getContent() {
 		$result = '';
-		
+
 		$request =& HTTPRequest::instance();
 		$group_id = $request->get('group_id');
 		$pm = ProjectManager::instance();
@@ -58,7 +58,7 @@ class Widget_ProjectPublicAreas extends Widget {
 			$link_content = $HTML->getFollowPic(_('Tracker')) . ' ' . _('Tracker');
 			$result .= util_make_link('/tracker/?group_id=' . $group_id, $link_content);
 
-			$result=db_query_params ('SELECT agl.*,aca.count,aca.open_count
+			$res = db_query_params ('SELECT agl.*,aca.count,aca.open_count
 					FROM artifact_group_list agl
 					LEFT JOIN artifact_counts_agg aca USING (group_artifact_id)
 					WHERE agl.group_id=$1
@@ -66,7 +66,7 @@ class Widget_ProjectPublicAreas extends Widget {
 					array($group_id));
 
 			$rows = array();
-			while ($row = db_fetch_array($result)) {
+			while ($row = db_fetch_array($res)) {
 				if (!forge_check_perm('tracker',$row['group_artifact_id'],'read')) {
 					continue;
 				}

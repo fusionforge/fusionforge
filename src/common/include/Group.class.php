@@ -490,7 +490,7 @@ class Group extends Error {
 	 * @param bool	$use_docman
 	 * @param string	$new_doc_address
 	 * @param bool	$send_all_docs
-	 * @param int	$logo_image_id
+	 * @param int	$logo_image_id XXXX UNUSED XXXX -> see getLogoImageID function
 	 * @param bool	$use_ftp
 	 * @param bool	$use_tracker
 	 * @param bool	$use_frs
@@ -585,7 +585,6 @@ class Group extends Error {
 
 		db_begin();
 
-		//XXX not yet actived logo_image_id='$logo_image_id',
 		$res = db_query_params('UPDATE groups
 			SET group_name=$1,
 				homepage=$2,
@@ -920,6 +919,15 @@ class Group extends Error {
 	 * @return	int	The ID of logo image in db_images table (or 100 if none).
 	 */
 	function getLogoImageID() {
+		if (!isset($this->data_array['logo_image_id'])) {
+			$res = db_query_params('select id from db_images where group_id = $1 and is_logo = $2',
+						array($this->getID(), 1));
+			if ($res && db_numrows($res)) {
+				$this->data_array['logo_image_id'] = db_result($res, 0, 'id');
+			} else {
+				$this->data_array['logo_image_id'] = null;
+			}
+		}
 		return $this->data_array['logo_image_id'];
 	}
 
@@ -1576,6 +1584,35 @@ class Group extends Error {
 		}
 		return $this->data_array['homepage'];
 	}
+	/**
+	 * setHomepage - the hostname of the scm box where this project is located.
+	 *
+	 * @param	string	$homepage	The name of the new HOMEPAGE
+	 * @return	bool
+	 */
+	function setHomepage($homepage) {
+
+		if ($homepage == $this->data_array['homepage']) {
+			return true;
+		}
+		if ($homepage) {
+			db_begin();
+			$res = db_query_params('UPDATE groups SET homepage=$1 WHERE group_id=$2', array($homepage, $this->getID()));
+			if ($res) {
+				$this->addHistory('homepage', $this->data_array['homepage']);
+				$this->data_array['homepage'] = $homepage;
+				db_commit();
+				return true;
+			} else {
+				db_rollback();
+				$this->setError(_("Could not insert homepage to database"));
+				return false;
+			}
+		} else {
+			$this->setError(_("Homepage cannot be empty"));
+			return false;
+		}
+	}
 
 	/**
 	 * getTags - Tags of this project.
@@ -1769,7 +1806,7 @@ class Group extends Error {
 			db_rollback();
 			return false;
 		}
- 
+
 		for ($i=0; $i<db_numrows($res); $i++) {
 			$Forum = new Forum($news_group,db_result($res,$i,'forum_id'));
 			if (!$Forum->delete(1,1)) {
@@ -1777,7 +1814,7 @@ class Group extends Error {
 				return false;
 			}
 		}
-      
+
      // Delete news forums in group itself
       for ($i = 0; $i < db_numrows($res); $i++) {
          $Forum = new Forum($this, db_result($res, $i, 'forum_id'));
@@ -2087,6 +2124,21 @@ class Group extends Error {
 		//
 		$this->addHistory(_('Added User'),$user_identifier);
 		db_commit();
+
+		//
+		// Update cache
+		//
+		$add_u = user_get_object($user_id);
+		$found = false;
+		foreach ($this->membersArr as $u) {
+			if ($u->getID() == $add_u->getID()) {
+				$found = true;
+				break;
+			}
+		}
+		if (!$found)
+			$this->membersArr[] = $add_u;
+
 		return true;
 	}
 
@@ -2200,6 +2252,18 @@ class Group extends Error {
 		$this->addHistory(_('Removed User'),$user_id);
 
 		db_commit();
+
+		//
+		// Update cache
+		//
+		$del_u = user_get_object($user_id);
+		foreach ($this->membersArr as $k => $u) {
+			if ($u->getID() == $del_u->getID()) {
+				unset($this->membersArr[$k]);
+				break;
+			}
+		}
+
 		return true;
 	}
 
@@ -2259,6 +2323,10 @@ class Group extends Error {
 	 * @access public
 	 */
 	function addHistory($field_name, $old_value) {
+            if ($old_value == NULL) {
+                    $old_value = '';
+            }
+
 		return db_query_params ('INSERT INTO group_history(group_id,field_name,old_value,mod_by,adddate)
 			VALUES ($1,$2,$3,$4,$5)',
 					array($this->getID(),
@@ -2564,8 +2632,8 @@ class Group extends Error {
 			$params['id_mappings'] = $id_mappings;
 			plugin_hook_by_reference ('clone_project_from_template', $params);
 		} else {
-			// Disable everything
-			db_query_params ('UPDATE groups SET use_mail=0, use_survey=0, use_forum=0, use_pm=0, use_pm_depend_box=0, use_scm=0, use_news=0, use_docman=0, use_ftp=0, use_tracker=0, use_frs=0, use_stats=0 WHERE group_id=$1',
+			// Disable everything - except use_scm (manually set in the registration page)
+			db_query_params ('UPDATE groups SET use_mail=0, use_survey=0, use_forum=0, use_pm=0, use_pm_depend_box=0, use_news=0, use_docman=0, use_ftp=0, use_tracker=0, use_frs=0, use_stats=0 WHERE group_id=$1',
 				array($this->getID()));
 		}
 

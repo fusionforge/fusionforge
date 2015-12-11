@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014, 2015, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -84,6 +84,7 @@ class hudson_Widget_JobBuildHistory extends HudsonJobWidget {
 	}
 
 	function getContent() {
+		global $HTML;
 		$html = '';
 		if ($this->job != null) {
 			$job = $this->job;
@@ -91,7 +92,7 @@ class hudson_Widget_JobBuildHistory extends HudsonJobWidget {
 			$buildHistoryRSSWidget->rss_url = $job->getUrl().'/rssAll';
 			$html .= $buildHistoryRSSWidget->getContent();
 		} else {
-			$html .= _("Job not found.");
+			$html .= $HTML->information(_('Job not found.'));
 		}
 		return $html;
 	}

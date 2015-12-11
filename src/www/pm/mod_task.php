@@ -6,6 +6,7 @@
  * Copyright 2002 GForge, LLC, Tim Perdue
  * Copyright 2010, FusionForge Team
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2015, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -28,19 +29,21 @@ require_once $gfwww.'include/note.php';
 require_once $gfcommon.'reporting/report_utils.php';
 require_once $gfcommon.'reporting/Report.class.php';
 
+global $HTML;
+
 if (getStringFromRequest('commentsort') == 'anti') {
 	$sort_comments_chronologically = false;
 } else {
 	$sort_comments_chronologically = true;
 }
 
-pm_header(array('title'=>_('Modify Task'),'pagename'=>'pm_modtask','group_project_id'=>$group_project_id));
+pm_header(array('title' => _('Modify Task'), 'pagename' => 'pm_modtask', 'group_project_id' => $group_project_id));
 
 echo notepad_func();
 
+echo $HTML->openForm(array('action' => '/pm/task.php?group_id='.$group_id.'&group_project_id='.$group_project_id, 'id' => 'modtaskform', 'method' => 'post'));
 ?>
 
-<form id="modtaskform" action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id&amp;group_project_id=$group_project_id"; ?>" method="post">
 <input type="hidden" name="func" value="postmodtask" />
 <input type="hidden" name="project_task_id" value="<?php echo $project_task_id; ?>" />
 <input type="hidden" name="duration" value="<?php echo $pt->getDuration(); ?>" />
@@ -69,7 +72,7 @@ echo notepad_func();
 		</td>
 
 		<td>
-			<strong><a href="<?php echo util_make_url("/pm/t_follow.php/" . $project_task_id); ?>">Permalink</a>:</strong><br />
+			<strong><?php echo util_make_link('/pm/t_follow.php/'.$project_task_id, _('Permalink'))._(':'); ?></strong><br />
 			<?php echo util_make_url("/pm/t_follow.php/" . $project_task_id); ?>
 		</td>
 	</tr>
@@ -86,10 +89,10 @@ echo notepad_func();
 		</td>
 
 		<td>
-		<strong>Task Detail Information (JSON):</strong><br />
-		<a href="<?php echo util_make_url("/pm/t_lookup.php?tid=" . $project_task_id); ?>">application/json</a>
-		or
-		<a href="<?php echo util_make_url("/pm/t_lookup.php?text=1&amp;tid=" . $project_task_id); ?>">text/plain</a>
+		<strong><? echo _('Task Detail Information (JSON)')._(': '); ?></strong><br />
+		<?php echo util_make_link('/pm/t_lookup.php?tid='.$project_task_id, 'application/json').
+		_(' or ').
+		util_make_link('/pm/t_lookup.php?text=1&tid='.$project_task_id, 'text/plain') ?>
 		</td>
 	</tr>
 
@@ -99,13 +102,11 @@ echo notepad_func();
 		<input type="text" name="summary" size="65" maxlength="65" value="<?php echo $pt->getSummary(); ?>" />
 		</td>
 		<td colspan="2">
-		<a href="<?php echo getStringFromServer('PHP_SELF')."?func=deletetask&amp;project_task_id=$project_task_id&amp;group_id=$group_id&amp;group_project_id=$group_project_id"; ?>"><?php echo _('Delete this task') ?></a>
+		<?php echo util_make_link('/pm/task.php?func=deletetask&project_task_id='.$project_task_id.'&group_id='.$group_id.'&group_project_id='.$group_project_id, $HTML->getDeletePic(_('Delete this task'), _('Delete this task')).' '._('Delete this task')); ?>
 		</td>
 		<td>
-		<?php echo util_make_link("/export/rssAboTask.php?tid=" .
-		    $project_task_id, html_image('ic/rss.png',
-		    16, 16, array('border' => '0')) . " " .
-		    _('Subscribe to task'));
+		<?php echo util_make_link('/export/rssAboTask.php?tid='.$project_task_id,
+						html_image('ic/rss.png', 16, 16, array('border' => '0')).' '._('Subscribe to task'));
 		?>
 		</td>
 	</tr>
@@ -152,7 +153,7 @@ unset($GLOBALS['editor_was_set_up']);
 		$pg->showHourBox ('start_hour',date('G', $pt->getStartDate()));
 		$pg->showMinuteBox ('start_minute',date('i',$pt->getStartDate()));
 		?><br /><?php echo _('The system will modify your start/end dates if you attempt to create a start date earlier than the end date of any tasks you depend on.') ?>
-		<br /><a href="calendar.php?group_id=<?php echo $group_id; ?>&amp;group_project_id=<?php echo $group_project_id; ?>" target="_blank"><?php echo _('View Calendar') ?></a>
+		<br /><?php util_make_link('/pm/calendar.php?group_id='.$group_id.'&group_project_id='.$group_project_id, _('View Calendar'), array('target' => '_blank')) ?>
 		</td>
 	</tr>
 
@@ -206,22 +207,7 @@ unset($GLOBALS['editor_was_set_up']);
 		?>
 		</td>
 	</tr>
-<!--
-//will add duration and parent selection boxes
-	<tr>
-		<td>
-		<strong><?php echo _('Estimated Hours') . _(': '); ?></strong><br />
-		<input type="number" name="hours" size="5" value="<?php echo $pt->getHours(); ?>" />
-		</td>
 
-		<td colspan="2">
-		<strong><?php echo _('Status') ?></strong><br />
-		<?php
-//		echo $pg->statusBox('status_id', $pt->getStatusID(), false );
-		?>
-		</td>
-	</tr>
--->
 	<tr>
 		<td colspan="3">
 			<?php $pt->showDependentTasks(); ?>
@@ -236,7 +222,7 @@ unset($GLOBALS['editor_was_set_up']);
 
 	<tr>
 		<td colspan="3">
-			<?php $pt->showMessages($sort_comments_chronologically, "/pm/task.php?func=detailtask&amp;project_task_id=$project_task_id&amp;group_id=$group_id&amp;group_project_id=$group_project_id"); ?>
+			<?php $pt->showMessages($sort_comments_chronologically, '/pm/task.php?func=detailtask&project_task_id='.$project_task_id.'&group_id='.$group_id.'&group_project_id='.$group_project_id); ?>
 		</td>
 	</tr>
 	<?php
@@ -257,11 +243,10 @@ unset($GLOBALS['editor_was_set_up']);
 	</tr>
 
 </table>
-</form>
-
-<h2><?php echo _('Time tracking'); ?></h2>
-
 <?php
+echo $HTML->closeForm();
+echo html_e('h2', array(), _('Time tracking'));
+
 $title_arr = array();
 $title_arr[]=_('Week');
 $title_arr[]=_('Day');
@@ -274,12 +259,12 @@ $xi = 0;
 
 $report=new Report();
 if ($report->isError()) {
-	exit_error($report->getErrorMessage(),'pm');
+	exit_error($report->getErrorMessage(), 'pm');
 }
 $report->setStartDate($pt->ProjectGroup->Group->getStartDate());
 
-echo '<form id="time-tracking" action="/reporting/timeadd.php" method="post">
-	<input type="hidden" name="project_task_id" value="'.$project_task_id.'" />
+echo $HTML->openForm(array('array' => '/reporting/timeadd.php', 'id' => 'time-tracking', 'method' => 'post'));
+echo '<input type="hidden" name="project_task_id" value="'.$project_task_id.'" />
 	<input type="hidden" name="submit" value="1" />';
 echo $HTML->listTableTop ($title_arr);
 echo '<tr '.$HTML->boxGetAltRowStyle($xi++).'>
@@ -331,7 +316,7 @@ echo '
 </tr>';
 
 echo $HTML->listTableBottom();
-echo "</form>\n";
+echo $HTML->closeForm();
 
 pm_footer();
 

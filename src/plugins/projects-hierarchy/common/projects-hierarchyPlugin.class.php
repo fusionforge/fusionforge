@@ -522,11 +522,6 @@ _('Organise projects hierarchically, relation type 1-n');
 										array($sub_project_id, $project_id));
 							break;
 						}
-						case 'child': {
-							$qpa = db_construct_qpa($qpa, ' WHERE project_id = $1 AND sub_project_id = $2',
-										array($project_id, $sub_project_id));
-							break;
-						}
 						default: {
 							return false;
 							break;
@@ -805,10 +800,20 @@ _('Organise projects hierarchically, relation type 1-n');
 						$group_id,
 						db_int_array_to_any_clause($family),
 						$this->name));
-		if ($son & db_numrows($son)) {
+		$group_ids = array();
+		$group_names = array();
+		if ($son && db_numrows($son)) {
+			while ($arr = db_fetch_array($son)) {
+				if (forge_check_perm('project_read', $arr['group_id'])) {
+					$group_ids[] = $arr['group_id'];
+					$group_names[] = $arr['group_name'];
+				}
+			}
+		}
+		if (count($group_ids)) {
 			$content = $HTML->openForm(array('method' => 'post', 'action' => '/plugins/'.$this->name.'/?type=group&action=addChild&id='.$group_id));
 			$content .= _('Select a project')._(':');
-			$content .= html_build_select_box($son, $name, $selected, false);
+			$content .= html_build_select_box_from_arrays($group_ids, $group_names, $name, $selected, false);
 			$content .= html_e('input', array('type' => 'submit', 'value' => _('Add Child project')));
 			$content .= $HTML->closeForm();
 		} else {

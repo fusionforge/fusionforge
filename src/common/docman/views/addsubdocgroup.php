@@ -6,7 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013-2014, Franck Villaume - TrivialDev
+ * Copyright 2013-2015, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -29,16 +29,18 @@
 /* global variables used */
 global $group_id; // id of the group
 global $dirid; // id of the doc_group
+global $warning_msg;
+global $childgroup_id;
 
 if (!forge_check_perm('docman', $group_id, 'approve')) {
 	$warning_msg = _('Document Manager Access Denied');
 	session_redirect('/docman/?group_id='.$group_id);
 }
 
-// plugin projects-hierarchy
 $actionurl = '/docman/?group_id='.$group_id.'&action=addsubdocgroup&dirid='.$dirid;
-if (isset($childgroup_id) && $childgroup_id) {
-	$g = group_get_object($childgroup_id);
+
+// plugin projects-hierarchy support
+if ($childgroup_id) {
 	$actionurl .= '&childgroup_id='.$childgroup_id;
 }
 
@@ -59,7 +61,7 @@ if ($dirid) {
 } else {
 	$folderMessage = _('Name of the document folder to create');
 }
-echo html_e('span', array(), $folderMessage._(': '), false);
+echo html_e('span', array(), $folderMessage.utils_requiredField(), false);
 echo html_e('input', array('required' => 'required', 'type' => 'text',  'name' => 'groupname', 'size' => 40, 'maxlength' => 255, 'placeholder' => $folderMessage));
 echo html_e('input', array('id' => 'submitaddsubgroup', 'type' => 'button', 'value' => _('Create'), 'onclick' => 'javascript:doItAddSubGroup()'));
 echo $HTML->closeForm();

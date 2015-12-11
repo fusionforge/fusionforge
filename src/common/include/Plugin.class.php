@@ -233,8 +233,9 @@ class Plugin extends Error {
 		$di = new DatabaseInstaller($name, $path);
 
 		// Search for database tables, if present then upgrade.
+		$tablename = str_replace('-', '_', $name);
 		$res=db_query_params ('SELECT COUNT(*) FROM pg_class WHERE (relname=$1 OR relname like $2) AND relkind=$3',
-			array ('plugin_'.$name, 'plugin_'.$name.'_%', 'r'));
+			array ('plugin_'.$tablename, 'plugin_'.$tablename.'_%', 'r'));
 		$count = db_result($res,0,0);
 		if ($count == 0) {
 			$di->install();

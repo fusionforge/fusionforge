@@ -5,7 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2013, Franck Villaume - TrivialDev
+ * Copyright 2012-2013,2015 Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -24,14 +24,16 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-function show_news_approve_form($qpa_pending, $qpa_rejected, $qpa_approved) {
+function show_news_approve_form($qpa_pending, $qpa_rejected, $qpa_approved, $form_url) {
 	/*
 		Show list of waiting news items
 	*/
 
+	global $HTML;
+
 	// function to show single news item
 	// factored out because called 3 time below
-	function show_news_item($row, $i, $approved, $selectable) {
+	function show_news_item($row, $i, $approved, $selectable, $form_url) {
 		global $HTML;
 
 		echo '<tr '. $HTML->boxGetAltRowStyle($i) . '><td>';
@@ -42,9 +44,8 @@ function show_news_approve_form($qpa_pending, $qpa_rejected, $qpa_approved) {
 		}
 		echo date(_('Y-m-d'), $row['post_date']).'</td>
 		<td width="45%">';
-		echo '
-		<a href="'.getStringFromServer('PHP_SELF').'?approve=1&amp;id='.$row['id'].'">'.$row['summary'].'</a>
-		</td>
+		echo util_make_link($form_url.'?approve=1&id='.$row['id'], $row['summary']);
+		echo '</td>
 
 		<td class="onethirdwidth">'
 		.util_make_link_g ($row['unix_group_name'], $row['group_id'], $row['group_name'].' ('.$row['unix_group_name'].')')
@@ -71,22 +72,20 @@ function show_news_approve_form($qpa_pending, $qpa_rejected, $qpa_approved) {
 	$rows = count($items);
 
 	if ($rows < 1) {
-		echo '
-			<h2>'._('No pending items found.').'</h2>';
+		echo html_e('h2', array(), _('No pending items found.'));
 	} else {
-		echo '<form action="'. getStringFromServer('PHP_SELF') .'" method="post">';
+		echo $HTML->openForm(array('action' => '/news/admin/', 'method' => 'post'));
 		echo '<input type="hidden" name="mass_reject" value="1" />';
 		echo '<input type="hidden" name="post_changes" value="y" />';
 		echo '<h2>'.sprintf(_('These items need to be approved (total: %d)'), $rows).'</h2>';
-		echo $GLOBALS['HTML']->listTableTop($title_arr);
+		echo $HTML->listTableTop($title_arr);
 		for ($i=0; $i < $rows; $i++) {
-			show_news_item($items[$i], $i, false,true);
+			show_news_item($items[$i], $i, false,true, $form_url);
 		}
-		echo $GLOBALS['HTML']->listTableBottom();
+		echo $HTML->listTableBottom();
 		echo '<br /><input type="submit" name="submit" value="'._('Reject Selected').'" />';
-		echo '</form>';
+		echo $HTML->closeForm();
 	}
-
 
 	/*
 		Show list of rejected news items for this week
@@ -102,15 +101,14 @@ function show_news_approve_form($qpa_pending, $qpa_rejected, $qpa_approved) {
 	$rows = count($items);
 
 	if ($rows < 1) {
-		echo '
-			<h2>'._('No rejected items found for this week.').'</h2>';
+		echo html_e('h2', array(), _('No rejected items found for this week.'));
 	} else {
 		echo '<h2>'.sprintf(_('These items were rejected this past week or were not intended for front page (total: %d).'), $rows).'</h2>';
-		echo $GLOBALS['HTML']->listTableTop($title_arr);
+		echo $HTML->listTableTop($title_arr);
 		for ($i=0; $i<$rows; $i++) {
 			show_news_item($items[$i], $i, false, false);
 		}
-		echo $GLOBALS['HTML']->listTableBottom();
+		echo $HTML->listTableBottom();
 	}
 
 	/*
@@ -126,15 +124,14 @@ function show_news_approve_form($qpa_pending, $qpa_rejected, $qpa_approved) {
 	}
 	$rows = count($items);
 	if ($rows < 1) {
-		echo '
-			<h2>'._('No approved items found for this week.').'</h2>';
+		echo html_e('h2', array(), _('No approved items found for this week.'));
 	} else {
 		echo '<h2>'.sprintf(_('These items were approved this past week (total: %d).'), $rows).'</h2>';
-		echo $GLOBALS['HTML']->listTableTop($title_arr);
+		echo $HTML->listTableTop($title_arr);
 		for ($i=0; $i < $rows; $i++) {
 			show_news_item($items[$i], $i, false, false);
 		}
-		echo $GLOBALS['HTML']->listTableBottom();
+		echo $HTML->listTableBottom();
 	}
 }
 

@@ -47,7 +47,6 @@ else
     yum install -y gettext php-cli php-pgsql php-process php-mbstring php-pear-HTTP \
 	httpd mod_dav_svn mod_ssl postgresql-server nscd \
 	subversion viewvc python-pycurl git gitweb xinetd \
-	mediawiki119 \
 	moin mod_wsgi python-psycopg2 \
 	unoconv poppler-utils
 fi
@@ -57,10 +56,10 @@ fi
     make
     make install-base install-shell install-scm \
         install-plugin-scmsvn install-plugin-scmgit \
-        install-plugin-blocks install-plugin-mediawiki install-plugin-moinmoin \
+        install-plugin-blocks install-plugin-moinmoin \
         install-plugin-online_help install-plugin-taskboard install-plugin-message
+    if [ -e /etc/debian_version ]; then
+	make install-plugin-mediawiki
+    fi
     make post-install
 )
-
-# Dump clean DB
-if [ ! -e /root/dump ]; then $(dirname $0)/../tests/func/db_reload.sh --backup; fi

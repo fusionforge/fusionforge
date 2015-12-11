@@ -266,7 +266,9 @@ if($toDisplay != "") {
 <?php print _('Activate this user immediately') ; ?>
 	</p>
 <?php } else {
-	plugin_hook('captcha_form');
+	$html = '';
+	plugin_hook_by_reference('captcha_form', $html);
+	echo $html;
 }
 echo $HTML->addRequiredFieldsInfoBox();
 echo html_e('p', array(), html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Register'))));

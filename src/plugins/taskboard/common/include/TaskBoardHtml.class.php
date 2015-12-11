@@ -47,9 +47,15 @@ class TaskBoardHtml extends TaskBoard {
 		if (session_loggedin()) {
 			if (forge_check_perm('tracker_admin', $this->Group->getID())) {
 				$release_id = getIntFromRequest('release_id','');
+				$view = getStringFromRequest('view','');
 				if($release_id) {
-					$labels[] = _('Delete Release');
-					$links[]  = '/plugins/taskboard/releases/?group_id='.$group_id.'&view=delete_release&release_id='.$release_id;
+					if( $view == 'edit_release' ) {
+						$labels[] = _('Delete Release');
+						$links[]  = '/plugins/taskboard/releases/?group_id='.$group_id.'&view=delete_release&release_id='.$release_id;
+					} else {
+						$labels[] = _('Edit Release');
+						$links[]  = '/plugins/taskboard/releases/?group_id='.$group_id.'&view=edit_release&release_id='.$release_id;
+					}
 				}
 			}
 		}

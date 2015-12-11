@@ -1,5 +1,7 @@
 <?php
 /**
+ * Copyright (C) 2015  Inria (Sylvain Beucler)
+ *
  * This file is part of FusionForge.
  *
  * FusionForge is free software; you can redistribute it and/or modify
@@ -17,18 +19,9 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-// The next require_once is just to get HOST
-$config = getenv('CONFIG_PHP') ? getenv('CONFIG_PHP'): 'func/config.php';
-require_once $config;
+$this->populateStandardTemplate('all');
+$this->createProject('ProjectA');
 
-class SeleniumRemoteSuite extends PHPUnit_Framework_TestSuite
-{
-	protected function setUp()
-	{
-		if (getenv('SELENIUM_RC_DIR') && getenv('SELENIUM_RC_URL')) {
-			$this->captureScreenshotOnFailure = true;
-			$this->screenshotPath = getenv('SELENIUM_RC_DIR');
-			$this->screenshotUrl = getenv('SELENIUM_RC_URL');
-		}
-	}
-}
+// wait for Apache to properly reload, as it might interferer with
+// stop/start during fixture backup
+$this->waitSystasks();

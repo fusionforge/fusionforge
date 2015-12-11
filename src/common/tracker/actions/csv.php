@@ -62,7 +62,7 @@ if (session_loggedin()) {
 }
 
 $headers = getIntFromRequest('headers', $default['headers']);
-$sep = getStringFromRequest('sep', $default['sep']);
+$sep = getFilteredStringFromRequest('sep', '/^[,;]$/', $default['sep']);
 
 if (session_loggedin()) {
 	if ( ($sep !== $default['sep']) || ($headers !== $default['headers']) ) {
@@ -76,7 +76,7 @@ $url_set_format = '/tracker/?group_id='.$group_id.'&amp;atid='.$ath->getID().'&a
 $url_export = '/tracker/?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;func=downloadcsv&amp;sep='.urlencode($sep).'&amp;headers='.$headers;
 
 $format = $headers ? ' with headers' : ' without headers';
-$format .= " using '$sep' as separator.";
+$format .= " using '".htmlentities($sep)."' as separator.";
 ?>
 <p><?php echo _('This page allows you to export the items using a CSV (<a href="http://en.wikipedia.org/wiki/Comma-separated_values">Comma Separated Values</a>) File. This format can be used to view your entries using your favorite spreadsheet software.'); ?></p>
 <h2><?php echo _('Export as a CSV file'); ?></h2>

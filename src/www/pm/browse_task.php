@@ -6,7 +6,7 @@
  * Copyright 2002 GForge, LLC, Tim Perdue
  * Copyright 2010, FusionForge Team
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2015, Franck Villaume - TrivialDev
  * Copyright 2014, Stéphane-Eymeric Bredthauer
  * Copyright 2015, nitendra tripathi
  * http://fusionforge.org
@@ -34,20 +34,20 @@ require_once $gfcommon.'pm/ProjectTaskFactory.class.php';
 //same for status
 
 global $HTML;
+global $LUSER;
 
 $pagename = "pm_browse_custom";
 
-$offset = getIntFromRequest('offset');
-if ($offset < 0) {
-	$offset = 0 ;
+$start = getIntFromRequest('start');
+if ($start < 0) {
+	$start = 0;
 }
-$max_rows = getIntFromRequest('max_rows');
 
 $ptf = new ProjectTaskFactory($pg);
 if (!$ptf || !is_object($ptf)) {
-	exit_error(_('Could Not Get ProjectTaskFactory'),'pm');
+	exit_error(_('Could Not Get ProjectTaskFactory'), 'pm');
 } elseif ($ptf->isError()) {
-	exit_error($ptf->getErrorMessage(),'pm');
+	exit_error($ptf->getErrorMessage(), 'pm');
 }
 
 $_order = getStringFromRequest('_order');
@@ -58,141 +58,107 @@ $_status = getStringFromRequest('_status');
 $_category_id = getIntFromRequest('_category_id');
 $_view = getStringFromRequest('_view');
 
-$paging = 0;
 if (session_loggedin()) {
-    $u = UserManager::instance()->getCurrentUser();
 	if (getStringFromRequest('setpaging')) {
 		/* store paging preferences */
 		$paging = getIntFromRequest('nres');
 		if (!$paging) {
 			$paging = 25;
 		}
-		$u->setPreference("paging", $paging);
+		$LUSER->setPreference('paging', $paging);
 	} else
-		$paging = $u->getPreference("paging");
-}
-if (!$paging) {
-	$paging = 25;
+		$paging = $LUSER->getPreference('paging');
 }
 
-$ptf->setup($offset,$_order,$paging,$set,$_assigned_to,$_status,$_category_id,$_view,$_sort_order);
+if(!isset($paging) || !$paging)
+	$paging = 25;
+
+$ptf->setup($start, $_order, $paging, $set, $_assigned_to, $_status, $_category_id, $_view, $_sort_order);
 if ($ptf->isError()) {
-	exit_error($ptf->getErrorMessage(),'pm');
+	exit_error($ptf->getErrorMessage(), 'pm');
 }
 $pt_arr =& $ptf->getTasks(true);
 if ($ptf->isError()) {
-	exit_error($ptf->getErrorMessage(),'pm');
+	exit_error($ptf->getErrorMessage(), 'pm');
 }
 
-$_assigned_to=$ptf->assigned_to;
-$_status=$ptf->status;
-$_order=$ptf->order;
-$_sort_order=$ptf->sort_order;
-$_category_id=$ptf->category;
-$_view=$ptf->view_type;
+$_assigned_to = $ptf->assigned_to;
+$_status = $ptf->status;
+$_order = $ptf->order;
+$_sort_order = $ptf->sort_order;
+$_category_id = $ptf->category;
+$_view = $ptf->view_type;
 
 html_use_coolfieldset();
 
-pm_header(array('title'=>_('Browse tasks'),'group_project_id'=>$group_project_id));
+pm_header(array('title' => _('Browse tasks'), 'group_project_id' => $group_project_id));
 
 /*
 		creating a custom technician box which includes "any" and "unassigned"
 */
-$engine = RBACEngine::getInstance () ;
-$techs = $engine->getUsersByAllowedAction ('pm', $pg->getID(), 'tech') ;
+$engine = RBACEngine::getInstance();
+$techs = $engine->getUsersByAllowedAction('pm', $pg->getID(), 'tech');
 
-$tech_id_arr = array () ;
-$tech_name_arr = array () ;
+$tech_select_arr = array();
 
 foreach ($techs as $tech) {
-	$tech_id_arr[] = $tech->getID() ;
-	$tech_name_arr[] = $tech->getRealName() ;
+	$tech_select_arr[$tech->getID()] = $tech->getRealName() ;
 }
-$tech_id_arr[]='0';
-$tech_name_arr[]=_('Any');
+$tech_select_arr[0] = _('Any');
 
-$tech_box=html_build_select_box_from_arrays ($tech_id_arr,$tech_name_arr,'_assigned_to',$_assigned_to,true,_('Unassigned'));
+$tech_box = html_build_select_box_from_assoc($tech_select_arr ,'_assigned_to', $_assigned_to, false, true, _('Unassigned'));
 
 /*
 		creating a custom category box which includes "any" and "none"
 */
-$res_cat=$pg->getCategories();
-$cat_id_arr=util_result_column_to_array($res_cat,0);
-$cat_id_arr[]='0';  //this will be the 'any' row
-$cat_name_arr=util_result_column_to_array($res_cat,1);
-$cat_name_arr[]=_('Any');
-$cat_box=html_build_select_box_from_arrays ($cat_id_arr,$cat_name_arr,'_category_id',$_category_id,true,'none');
+$res_cat = $pg->getCategories();
+$cat_id_arr = util_result_column_to_array($res_cat, 0);
+$cat_id_arr[] = '0';  //this will be the 'any' row
+$cat_name_arr = util_result_column_to_array($res_cat, 1);
+$cat_name_arr[] = _('Any');
+$cat_box = html_build_select_box_from_arrays($cat_id_arr, $cat_name_arr, '_category_id', $_category_id, true, 'none');
 
 /*
 	Creating a custom order box
 */
-$order_title_arr=array();
-$order_title_arr[]=_('Task Id');
-$order_title_arr[]=_('Task Summary');
-$order_title_arr[]=_('Start Date');
-$order_title_arr[]=_('End Date');
-$order_title_arr[]=_('Percent Complete');
-$order_title_arr[]=_('Priority');
+$order_select_arr = array();
+$order_select_arr['project_task_id'] = _('Task Id');
+$order_select_arr['summary'] = _('Task Summary');
+$order_select_arr['start_date'] = _('Start Date');
+$order_select_arr['end_date'] = _('End Date');
+$order_select_arr['percent_complete'] = _('Percent Complete');
+$order_select_arr['priority'] = _('Priority');
 
-$order_col_arr=array();
-$order_col_arr[]='project_task_id';
-$order_col_arr[]='summary';
-$order_col_arr[]='start_date';
-$order_col_arr[]='end_date';
-$order_col_arr[]='percent_complete';
-$order_col_arr[]='priority';
-
-$order_box=html_build_select_box_from_arrays ($order_col_arr,$order_title_arr,'_order',$_order,false);
+$order_box = html_build_select_box_from_assoc($order_select_arr, '_order', $_order, false, false);
 
 /*
 	Creating a custom sort box
 */
 
-$sort_title_arr=array();
-$sort_title_arr[]=_('Ascending');
-$sort_title_arr[]=_('Descending');
+$sort_select_arr=array();
+$sort_select_arr['ASC'] = _('Ascending');
+$sort_select_arr['DESC'] = _('Descending');
 
-$sort_col=array();
-$sort_col[]='ASC';
-$sort_col[]='DESC';
-
-$sort_box=html_build_select_box_from_arrays($sort_col,$sort_title_arr,'_sort_order',$_sort_order,false);
+$sort_box = html_build_select_box_from_assoc($sort_select_arr, '_sort_order', $_sort_order, false, false);
 /*
 	Creating View array
 */
-$view_arr=array();
-$view_arr[]=_('Summary');
-$view_arr[]=_('Detailed');
-$order_col_arr=array();
-$view_col_arr[]='summary';
-$view_col_arr[]='detail';
-$view_box=html_build_select_box_from_arrays ($view_col_arr,$view_arr,'_view',$_view,false);
+$view_select_arr = array();
+$view_select_arr['summary'] = _('Summary');
+$view_select_arr['detail'] = _('Detailed');
+$view_box = html_build_select_box_from_assoc($view_select_arr, '_view', $_view, false, false);
 
-$rows=count($pt_arr);
+$rows = count($pt_arr);
 $totalTasks = $pg->getCount($_status, $_category_id);
+$max = ($rows > ($start + $paging)) ? ($start + $paging) : $rows;
 
-if (session_loggedin()) {
-	/* logged in users get configurable paging */
-	echo '<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&group_project_id='.$pg->getID().'&offset='.$offset.'" method="post">'."\n";
-
-}
-printf('<p>' . _('Displaying results %1$s out of %2$d total.'),$rows ? ($offset + 1).'-'.($offset + $rows) : '0', $totalTasks);
-
-if (session_loggedin()) {
-	printf(' ' . _('Displaying %2$s results.') . "\n\t<input " .
-			'type="submit" name="setpaging" value="%1$s" />' .
-			"\n</p>\n</form>\n", _('Change'),
-			html_build_select_box_from_array(array(
-			'10', '25', '50', '100', '1000'), 'nres', $paging, 1));
-} else {
-	echo "</p>\n";
-}
+echo $HTML->paging_top($start, $paging, $totalTasks, $max, '/pm/task.php?group_id='.$group_id.'&group_project_id='.$pg->getID());
 
 /*
 	Show the new pop-up boxes to select assigned to and/or status
 */
-echo '	<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&group_project_id='.$group_project_id.'" method="post">
-	<input type="hidden" name="set" value="custom" />
+echo $HTML->openForm(array('action' => '/pm/task.php?group_id='.$group_id.'&group_project_id='.$group_project_id, 'method' => 'post'));
+echo '	<input type="hidden" name="set" value="custom" />
 	<table>
 	<tr>
 		<td>'._('Assignee')._(': ').'<br />'. $tech_box .'</td>
@@ -201,10 +167,9 @@ echo '	<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.
 		<td>'._('Sort On')._(': ').'<br />'. $order_box . $sort_box .'</td>
 		<td>'._('Detail View')._(': ').'<br />'. $view_box .'</td>
 		<td><input type="submit" name="submit" value="'._('Browse').'" /></td>
-	</tr></table></form>';
-
+	</tr></table>';
+echo $HTML->closeForm();
 if ($rows < 1) {
-
 	echo $HTML->information(_('No Matching Tasks found'));
 	echo '<p class="important">'._('Add tasks using the link above')."</p>\n";
 
@@ -221,9 +186,8 @@ if ($rows < 1) {
 	$IS_ADMIN = forge_check_perm ('pm', $pg->getID(), 'manager') ;
 
 	if ($IS_ADMIN) {
-		echo '
-		<form name="taskList" action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&amp;group_project_id='.$pg->getID().'" method="post">
-		<input type="hidden" name="func" value="massupdate" />';
+		echo $HTML->openForm(array('name' => 'taskList', 'action' => '/pm/task.php?group_id='.$group_id.'&group_project_id='.$pg->getID(), 'method' => 'post'));
+		echo '<input type="hidden" name="func" value="massupdate" />';
 
 		$check_all = '
 		<a href="javascript:checkAllTasks(1)">'._('Check all').'</a>
@@ -268,14 +232,14 @@ if ($rows < 1) {
 
 	echo $HTML->listTableTop($title_arr);
 
-	$now=time();
+	$now = time();
 
 	for ($i=0; $i < $rows; $i++) {
-		$url = getStringFromServer('PHP_SELF')."?func=detailtask&project_task_id=".$pt_arr[$i]->getID()."&group_id=".$group_id."&group_project_id=".$group_project_id;
+		$url = '/pm/task.php?func=detailtask&project_task_id='.$pt_arr[$i]->getID().'&group_id='.$group_id.'&group_project_id='.$group_project_id;
 
 		echo '
 			<tr class="priority'.$pt_arr[$i]->getPriority().'"><td style="width:16px; background-color:#FFFFFF">' .
-			util_make_link("/export/rssAboTask.php?tid=" .
+			util_make_link('/export/rssAboTask.php?tid=' .
 			    $pt_arr[$i]->getID(), html_image('ic/rss.png',
 			    16, 16, array('border' => '0'))
 			) . "</td>\n" .
@@ -321,42 +285,10 @@ if ($rows < 1) {
 	}
 
 	echo $HTML->listTableBottom();
-
 	/*
 	 Show extra rows for <-- Prev / Next -->
 	*/
-	if ($offset > 0) {
-		echo util_make_link (getStringFromServer('PHP_SELF').'?func=browse&group_project_id='.$group_project_id.'&group_id='.$group_id.'&offset='.($offset-$paging),'<strong>← '._('previous').'</strong>');
-		echo '&nbsp;&nbsp;';
-	}
-	$pages = $totalTasks / $paging;
-	$currentpage = intval($offset / $paging);
-	if ($pages > 1) {
-		$skipped_pages=false;
-		for ($j=0; $j<$pages; $j++) {
-			if ($pages > 20) {
-				if ((($j > 4) && ($j < ($currentpage-5))) || (($j > ($currentpage+5)) && ($j < ($pages-5)))) {
-					if (!$skipped_pages) {
-						$skipped_pages=true;
-						echo "....&nbsp;";
-					}
-					continue;
-				} else {
-					$skipped_pages=false;
-				}
-			}
-			if ($j * $paging == $offset) {
-				echo '<strong>'.($j+1).'</strong>&nbsp;&nbsp;';
-			} else {
-				echo util_make_link (getStringFromServer('PHP_SELF').'?func=browse&group_project_id='.$group_project_id.'&group_id='.$group_id.'&offset='.($j*$paging),'<strong>'.($j+1).'</strong>').'&nbsp;&nbsp;';
-			}
-		}
-	}
-	if ( $totalTasks > $offset + $paging) {
-		echo util_make_link('/pm/task.php?func=browse&group_project_id='.$group_project_id.'&group_id='.$group_id.'&offset='.($offset+$paging),'<strong>'._('next').' →</strong>');
-	} else {
-		echo '&nbsp;';
-	}
+	echo $HTML->paging_bottom($start, $paging, $totalTasks, '/pm/task.php?func=browse&group_project_id='.$group_project_id.'&group_id='.$group_id);
 
 	echo '<div style="display:table;width:100%">';
 	echo '<div style="display:table-row">';
@@ -439,8 +371,8 @@ if ($rows < 1) {
 
 			</table>
 			</div>
-			</fieldset>
-		</form>';
+			</fieldset>';
+		echo $HTML->closeForm();
 	}
 }
 

@@ -183,7 +183,7 @@ It should be installed on only one server in your infrastructure.
 
 %package web
 Summary: Collaborative development tool - web part (using Apache)
-Requires: %{name}-common = %{version}-%{release}, %{name}-db = %{version}-%{release}, httpd, mod_ssl, php, php-pgsql, php-simplepie, php-pear-HTTP, php-nusoap, php-mbstring, httpd-itk, mod_dav_svn, unoconv, poppler-utils, php-twig
+Requires: %{name}-common = %{version}-%{release}, %{name}-db = %{version}-%{release}, httpd, mod_ssl, php, php-pgsql, php-simplepie, php-pear-HTTP, php-nusoap, php-mbstring, httpd-itk, mod_dav_svn, unoconv, poppler-utils, openssl, php-twig
 %description web
 FusionForge provides many tools to aid collaboration in a
 development project, such as bug-tracking, task management,
@@ -278,8 +278,11 @@ This package controls the interaction between FusionForge and Mailman.
 
 
 %changelog
-* Thu Jul  2 2015 Sylvain Beucler <beuc@beuc.net> - @rpm_version@-1@rpm_snapshot@
+* Tue Oct  6 2015 Sylvain Beucler <beuc@beuc.net> - @rpm_version@-1@rpm_snapshot@
 - New upstream snapshot following the stable branch
+
+* Tue Oct  6 2015 Sylvain Beucler <beuc@beuc.net> - 6.0.3-1
+- New upstream release
 
 * Thu Jul  2 2015 Sylvain Beucler <beuc@beuc.net> - 6.0.2-1
 - New upstream release

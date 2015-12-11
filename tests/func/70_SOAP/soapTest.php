@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (C) 2014 Roland Mas
+ * Copyright (C) 2015  Inria (Sylvain Beucler)
  *
  * This file is part of FusionForge.
  *
@@ -19,10 +20,12 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
+require_once dirname(dirname(__FILE__)).'/SeleniumForge.php';
 
 class SoapTest extends FForge_SeleniumTestCase
 {
+	public $fixture = 'projecta';
+
 	function setUp() {
 		parent::setUp();
 
@@ -38,8 +41,7 @@ class SoapTest extends FForge_SeleniumTestCase
 
 	function testSoap()
 	{
-		$this->populateStandardTemplate('trackers');
-		$this->init();
+		$this->loadAndCacheFixture();
 
 		$userid = FORGE_ADMIN_USERNAME;
 		$passwd = FORGE_ADMIN_PASSWORD;
@@ -108,6 +110,8 @@ class SoapTest extends FForge_SeleniumTestCase
 
 		$response = $this->soapclient->addArtifact($this->session, $projecta->group_id, $tracker->group_artifact_id, 1, 3, 100, "Bug submitted by SOAP", "Bug details are not really relevant here", array());
 
+		$this->switchUser(FORGE_ADMIN_USERNAME);
+		$this->gotoProject('ProjectA');
 		$this->clickAndWait("link=Tracker");
 		$this->clickAndWait("link=Bugs");
 		$this->assertTrue($this->isTextPresent("Bug submitted by SOAP"));

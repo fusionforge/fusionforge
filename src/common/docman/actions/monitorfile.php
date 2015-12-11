@@ -26,6 +26,7 @@
 /* global variables used */
 global $dirid; //id of doc_group
 global $group_id; // id of group
+global $LUSER; //user object
 
 $redirecturl = '/docman/?group_id='.$group_id.'&dirid='.$dirid;
 

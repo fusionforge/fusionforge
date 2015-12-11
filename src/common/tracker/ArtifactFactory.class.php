@@ -84,7 +84,7 @@ class ArtifactFactory extends Error {
 	}
 
 	/**
-	 * setup - sets up limits and sorts before you call getTasks().
+	 * setup - sets up limits and sorts before you call getArtifacts().
 	 *
 	 * @param	int	$offset		The offset - number of rows to skip.
 	 * @param	string	$order_col	The column to sort on.
@@ -266,7 +266,7 @@ class ArtifactFactory extends Error {
 	}
 
 	/**
-	 * setChangedFrom - sets up changed-from and last-changed before you call getTasks().
+	 * setChangedFrom - sets up changed-from and last-changed before you call getArtifacts().
 	 *
 	 * @param	int	$changed_from	The changed_from - offset time(sec) from now
 	 */

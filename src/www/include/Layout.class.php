@@ -400,7 +400,7 @@ class Layout extends Error {
 		 * Forge-Identification Meta Header, Version 1.0
 		 * cf. http://home.gna.org/forgeplucker/forge-identification.html
 		 */
-		$ff = new FusionForge();
+		$ff = FusionForge::getInstance();
 		echo html_e('meta', array('name' => 'Forge-Identification', 'content' => $ff->software_name.':'.$ff->software_version));
 	}
 
@@ -1539,6 +1539,80 @@ if (isset($params['group']) && $params['group']) {
 		$htmlcode .= html_ao('div', array('id' => $chart_id));
 		$htmlcode .= html_ac(html_ap() -2);
 		return $htmlcode;
+	}
+
+	/**
+	 * paging_top - Display Introduction to paging & form to set the paging preference
+	 *
+	 * @param	integer	$start		start of the list
+	 * @param	integer	$paging		number of element per page
+	 * @param	integer	$totalElements	total number of this type of Elements in the forge
+	 * @param	integer	$maxElements	max number of Elements to display
+	 * @param	string	$actionUrl	next / prev Url to click
+	 */
+	function paging_top($start = 0, $paging = 25, $totalElements = 0, $maxElements = 0, $actionUrl = '/') {
+		$html_content = '';
+		$sep = '?';
+		if (strpos($actionUrl, '?')) {
+			$sep = '&';
+		}
+		if (session_loggedin()) {
+			$html_content .= $this->openForm(array('action' => $actionUrl.$sep.'start='.$start, 'method' => 'post'));
+		}
+		$html_content .= sprintf(_('Displaying results %1$s out of %2$d total.'), ($start + 1).'-'.$maxElements, $totalElements);
+		if (session_loggedin()) {
+			$html_content .= sprintf(' ' . _('Displaying %1$s results.'), html_build_select_box_from_array(array('10', '25', '50', '100', '1000'), 'nres', $paging, 1));
+			$html_content .= html_e('input', array('type' => 'submit', 'name' => 'setpaging', 'value' => _('Change')));
+			$html_content .= $this->closeForm();
+		}
+		return $html_content;
+	}
+
+	/**
+	 * paging_bottom - Show extra rows for <-- Prev / Next --> at the bottom of the element list
+	 *
+	 * @param	integer	$start		start of the list
+	 * @param	integer	$paging		number of element per page
+	 * @param	integer	$totalElements	total number of Elements to display
+	 * @param	string	$actionUrl	next / prev Url to click
+	 */
+	function paging_bottom($start = 0, $paging = 25, $totalElements = 0, $actionUrl = '/') {
+		$html_content = '';
+		$sep = '?';
+		if (strpos($actionUrl, '?')) {
+			$sep = '&';
+		}
+		if ($start > 0) {
+			$html_content .= util_make_link($actionUrl.$sep.'start='.($start-$paging),'<strong>← '._('previous').'</strong>');
+			$html_content .= '&nbsp;&nbsp;';
+		}
+		$pages = $totalElements / $paging;
+		$currentpage = intval($start / $paging);
+		if ($pages > 1) {
+			$skipped_pages=false;
+			for ($j=0; $j<$pages; $j++) {
+				if ($pages > 20) {
+					if ((($j > 4) && ($j < ($currentpage-5))) || (($j > ($currentpage+5)) && ($j < ($pages-5)))) {
+						if (!$skipped_pages) {
+							$skipped_pages=true;
+							$html_content .= '....&nbsp;';
+						}
+						continue;
+					} else {
+						$skipped_pages=false;
+					}
+				}
+				if ($j * $paging == $start) {
+					$html_content .= '<strong>'.($j+1).'</strong>&nbsp;&nbsp;';
+				} else {
+					$html_content .= util_make_link($actionUrl.$sep.'start='.($j*$paging),'<strong>'.($j+1).'</strong>').'&nbsp;&nbsp;';
+				}
+			}
+		}
+		if ( $totalElements > $start + $paging) {
+			$html_content .= util_make_link($actionUrl.$sep.'start='.($start+$paging),'<strong>'._('next').' →</strong>');
+		}
+		return $html_content;
 	}
 }
 

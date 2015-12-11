@@ -39,6 +39,7 @@ $show = getArrayFromRequest("show");
 session_require_perm('project_read', $group_id);
 
 $date_format = _('%Y-%m-%d');
+$date_format_js = _('yy-mm-dd');
 
 if (!$received_begin || $received_begin==0) {
 	$begin = (time()-(30*86400));
@@ -94,6 +95,8 @@ if (!$group || !is_object($group)) {
 } elseif (!$group->usesActivity()) {
 	exit_project_disabled();
 }
+
+html_use_jqueryui();
 
 site_project_header(array('title'=>_('Activity'), 'group'=>$group_id, 'toptab'=>'activity'));
 
@@ -202,12 +205,12 @@ echo html_e('input', array('type' => 'hidden', 'name' => 'group_id', 'value' => 
 
 <div id="activity_startdate" >
 <div id="activity_label_startdate"><?php echo _('Start Date')._(':'); ?></div>
-<input name="start_date" value="<?php echo $rendered_begin; ?>" size="10" maxlength="10" />
+<input id="datepicker_start" name="start_date" value="<?php echo util_html_encode($rendered_begin) ?>" size="10" maxlength="10" />
 </div>
 
 <div id="activity_enddate" >
 <div id="activity_label_enddate"><?php echo _('End Date')._(':'); ?></div>
-<input name="end_date" value="<?php echo $rendered_end; ?>" size="10" maxlength="10" />
+<input id="datepicker_end" name="end_date" value="<?php echo util_html_encode($rendered_end) ?>" size="10" maxlength="10" />
 </div>
 
 <div id="activity_submit" >
@@ -390,5 +393,19 @@ echo $HTML->closeForm();
 	echo '</div>';
 }
 
+echo html_ao('script', array('type' => 'text/javascript'));
+?>
+//<![CDATA[
+
+jQuery('#datepicker_start').datepicker({
+  dateFormat: "<?php echo $date_format_js ?>"
+});
+jQuery('#datepicker_end').datepicker({
+  dateFormat: "<?php echo $date_format_js ?>"
+});
+
+//]]>
+<?php
+echo html_ac(html_ap() - 1);
 
 site_project_footer();

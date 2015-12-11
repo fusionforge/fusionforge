@@ -5,7 +5,7 @@
  * Copyright 1999/2000, Tim Perdue - Sourceforge
  * Copyright 2002 GForge, LLC
  * Copyright 2010, FusionForge Team
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014, 2015 Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -66,7 +66,7 @@ class ProjectTaskHTML extends ProjectTask {
 			array($this->getID() ));
 		$rows=db_numrows($result);
 		if ($rows > 0) {
-			echo '<h3>'._('Tasks That Depend on This Task').'</h3>';
+			echo html_e('h3', array(), _('Tasks That Depend on This Task'));
 
 			$title_arr=array();
 			$title_arr[]=_('Task Id');
@@ -82,7 +82,7 @@ class ProjectTaskHTML extends ProjectTask {
 			}
 			echo $HTML->listTableBottom();
 		} else {
-			echo '<p>'._('No Tasks are Dependent on This Task').'</p>';
+			echo html_e('p', array(), _('No Tasks are Dependent on This Task'));
 		}
 	}
 
@@ -98,7 +98,7 @@ class ProjectTaskHTML extends ProjectTask {
 				$is_admin=true;
 			}
 
-			echo '<h3>'._('Related Tracker Items').'</h3>';
+			echo html_e('h3', array(), _('Related Tracker Items'));
 
 			$title_arr=array();
 			$title_arr[]=_('Artifact Summary');
@@ -122,7 +122,7 @@ class ProjectTaskHTML extends ProjectTask {
 			}
 			echo $HTML->listTableBottom();
 		} else {
-			echo '<p>'._('No Related Tracker Items Have Been Added').'</p>';
+			echo html_e('p', array(), _('No Related Tracker Items Have Been Added'));
 		}
 	}
 
@@ -135,14 +135,14 @@ class ProjectTaskHTML extends ProjectTask {
 		$rows=db_numrows($result);
 
 		if ($rows > 0) {
-			echo '<h3>'._('Comments')._(': ');
+			$title = _('Comments')._(': ');
 
 			if ($asc) {
-				echo util_make_link($whereto.'&commentsort=anti', _('Sort comments antichronologically'));
+				$title .= util_make_link($whereto.'&commentsort=anti', _('Sort comments antichronologically'));
 			} else {
-				echo util_make_link($whereto.'&commentsort=chrono', _('Sort comments chronologically'));
+				$title .= util_make_link($whereto.'&commentsort=chrono', _('Sort comments chronologically'));
 			}
-			echo "</h3>\n";
+			echo html_e('h3', array(), $title);
 
 			$title_arr = array();
 			$title_arr[] = _('Comment');
@@ -166,7 +166,7 @@ class ProjectTaskHTML extends ProjectTask {
 			}
 			echo $HTML->listTableBottom();
 		} else {
-			echo '<p>'._('No Comments Have Been Posted').'</p>';
+			echo html_e('p', array(), _('No Comments Have Been Posted'));
 		}
 	}
 
@@ -181,7 +181,7 @@ class ProjectTaskHTML extends ProjectTask {
 
 		if ($rows > 0) {
 
-			echo '<h3>'._('Task Change History').'</h3>';
+			echo html_e('h3', array(), _('Task Change History'));
 
 			$title_arr=array();
 			$title_arr[]=_('Field');
@@ -216,7 +216,7 @@ class ProjectTaskHTML extends ProjectTask {
 			}
 			echo $HTML->listTableBottom();
 		} else {
-			echo '<p>'._('No Changes Have Been Made').'</p>';
+			echo html_e('p', array(), _('No Changes Have Been Made'));
 		}
 	}
 }

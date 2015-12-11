@@ -8,7 +8,7 @@
  * Copyright (C) 2010 Alcatel-Lucent
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2015, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -32,9 +32,11 @@
 global $group_id; // id of the group
 global $dirid; // id of doc_group
 global $HTML; // Layout object
-global $u; // User object
+global $LUSER; // User object
 global $g; // the Group object
 global $dm; // the docman manager
+global $warning_msg;
+global $start; // use to set the offset
 
 $linkmenu = 'listfile';
 $baseredirecturl = '/docman/?group_id='.$group_id;
@@ -48,7 +50,7 @@ echo html_ao('div', array('id' => 'leftdiv'));
 include ($gfcommon.'docman/views/tree.php');
 echo html_ac(html_ap() - 1);
 
-// plugin projects-hierarchy
+// plugin projects-hierarchy support
 $childgroup_id = getIntFromRequest('childgroup_id');
 if ($childgroup_id) {
 	if (!forge_check_perm('docman', $childgroup_id, 'read')) {
@@ -59,6 +61,22 @@ if ($childgroup_id) {
 	$g = group_get_object($childgroup_id);
 }
 
+if (session_loggedin()) {
+	if (getStringFromRequest('setpaging')) {
+		/* store paging preferences */
+		$paging = getIntFromRequest('nres');
+		if (!$paging) {
+			$paging = 25;
+		}
+		$LUSER->setPreference('paging', $paging);
+	}
+	/* logged in users get configurable paging */
+	$paging = $LUSER->getPreference('paging');
+}
+
+if(!isset($paging) || !$paging)
+	$paging = 25;
+
 $df = new DocumentFactory($g);
 if ($df->isError())
 	exit_error($df->getErrorMessage(), 'docman');
@@ -67,28 +85,13 @@ $dgf = new DocumentGroupFactory($g);
 if ($dgf->isError())
 	exit_error($dgf->getErrorMessage(), 'docman');
 
+$df->setLimit($paging);
+$df->setOffset($start);
 $df->setDocGroupID($dirid);
 
-$df->setStateID('1');
-$d_arr_active =& $df->getDocuments();
-if ($d_arr_active != NULL)
-	$d_arr = $d_arr_active;
-
-$df->setStateID('4');
-$d_arr_hidden =& $df->getDocuments();
-if ($d_arr != NULL && $d_arr_hidden != NULL) {
-	$d_arr = array_merge($d_arr, $d_arr_hidden);
-} elseif ($d_arr_hidden != NULL) {
-	$d_arr = $d_arr_hidden;
-}
-
-$df->setStateID('5');
-$d_arr_private =& $df->getDocuments();
-if ($d_arr != NULL && $d_arr_private != NULL) {
-	$d_arr = array_merge($d_arr, $d_arr_private);
-} elseif ($d_arr_private != NULL) {
-	$d_arr = $d_arr_private;
-}
+//active, hidden & private state ids
+$df->setStateID(array(1, 4, 5));
+$d_arr =& $df->getDocuments();
 
 $nested_groups = $dgf->getNested();
 
@@ -107,9 +110,15 @@ if ($dirid) {
 		$error_msg = _('Invalid folder');
 		session_redirect($baseredirecturl.'&view=listfile');
 	}
+	$nbDocs = $ndg->getNumberOfDocuments(1);
+	if (forge_check_perm('docman', $g->getID(), 'approve')) {
+		$nbDocs += $ndg->getNumberOfDocuments(3);
+		$nbDocs += $ndg->getNumberOfDocuments(4);
+		$nbDocs += $ndg->getNumberOfDocuments(5);
+	}
 }
 
-if ($d_arr != NULL ) {
+if ($d_arr != NULL) {
 	if (!$d_arr || count($d_arr) > 0) {
 		// Get the document groups info
 		//put the doc objects into an array keyed off the docgroup
@@ -119,10 +128,10 @@ if ($d_arr != NULL ) {
 	}
 }
 
-$df->setStateID('3');
+$df->setStateID(array(3));
 $d_pending_arr =& $df->getDocuments();
 
-if ($d_pending_arr != NULL ) {
+if ($d_pending_arr != NULL) {
 	if (!$d_pending_arr || count($d_pending_arr) > 0) {
 		// Get the document groups info
 		//put the doc objects into an array keyed off the docgroup
@@ -170,11 +179,13 @@ if ($DocGroupName) {
 	}
 	$headerPath .= _('Path')._(': ').html_e('i', array(), $dgpath, false);
 	echo html_e('h2', array(), $headerPath, false);
+	$max = ($nbDocs > ($start + $paging)) ? ($start + $paging) : $nbDocs;
+	echo $HTML->paging_top($start, $paging, $nbDocs, $max, $redirecturl);
 	echo html_ao('h3', array('class' => 'docman_h3'));
 	echo html_e('span', array(), _('Document Folder')._(': ').html_e('i', array(), $DocGroupName, false).'&nbsp;', false);
 	/* should we steal the lock on folder ? */
 	if ($ndg->getLocked()) {
-		if ($ndg->getLockedBy() == $u->getID()) {
+		if (session_loggedin() && ($ndg->getLockedBy() == $LUSER->getID())) {
 			$ndg->setLock(0);
 		/* if you change the 60000 lockIntervalDelay value, please update here too */
 		} elseif ((time() - $ndg->getLockdate()) > 600) {
@@ -203,7 +214,7 @@ if ($DocGroupName) {
 		echo util_make_link('/docman/view.php/'.$ndg->Group->getID().'/zip/full/'.$dirid, html_image('docman/download-directory-zip.png',22,22,array('alt'=>'downloadaszip')), array('title' => _('Download this folder as a ZIP')));
 
 	if (session_loggedin()) {
-		if ($ndg->isMonitoredBy($u->getID())) {
+		if ($ndg->isMonitoredBy($LUSER->getID())) {
 			$option = 'stop';
 			$titleMonitor = _('Stop monitoring this folder');
 			$image = $HTML->getStopMonitoringPic($titleMonitor, '');
@@ -243,7 +254,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		$cells = array();
 		/* should we steal the lock on file ? */
 		if ($d->getLocked()) {
-			if ($d->getLockedBy() == $u->getID()) {
+			if ($d->getLockedBy() == $LUSER->getID()) {
 				$d->setLock(0);
 			/* if you change the 60000 value below, please update here too */
 			} elseif ((time() - $d->getLockdate()) > 600) {
@@ -253,7 +264,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		if (!$d->getLocked() && !$d->getReserved()) {
 			$cells[][] = html_e('input', array('type' => 'checkbox', 'value' => $d->getID(), 'class' => 'checkeddocidactive', 'title' => _('Select / Deselect this document for massaction'), 'onClick' => 'controllerListFile.checkgeneral("active")'));
 		} else {
-			if (session_loggedin() && ($d->getReservedBy() != $u->getID())) {
+			if (session_loggedin() && ($d->getReservedBy() != $LUSER->getID())) {
 				$cells[][] = html_e('input', array('type' => 'checkbox', 'name' => 'disabled', 'disabled' => 'disabled'));
 			} else {
 				$cells[][] = html_e('input', array('type' => 'checkbox', 'value' => $d->getID(), 'class' => 'checkeddocidactive', 'title' => _('Select / Deselect this document for massaction'), 'onClick' => 'controllerListFile.checkgeneral("active")'));
@@ -320,7 +331,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 					$nextcell .= util_make_link($redirecturl.'&action=reservefile&fileid='.$d->getID(), html_image('docman/reserve-document.png', 22, 22, array('alt' => _('Reserve this document'))), array('title' => _('Reserve this document for later edition')));
 				}
 			} else {
-				if (session_loggedin() && $d->getReservedBy() != $u->getID()) {
+				if (session_loggedin() && $d->getReservedBy() != $LUSER->getID()) {
 					if (forge_check_perm('docman', $ndg->Group->getID(), 'admin')) {
 						$nextcell .= util_make_link($redirecturl.'&action=enforcereserve&fileid='.$d->getID(), html_image('docman/enforce-document.png',22,22,array('alt'=>_('Enforce reservation'))), array('title' => _('Enforce reservation')));
 					}
@@ -331,7 +342,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 				}
 			}
 			if (session_loggedin()) {
-				if ($d->isMonitoredBy($u->getID())) {
+				if ($d->isMonitoredBy($LUSER->getID())) {
 					$option = 'stop';
 					$titleMonitor = _('Stop monitoring this document');
 					$image = $HTML->getStopMonitoringPic($titleMonitor, '');
@@ -412,6 +423,8 @@ if ($DocGroupName) {
 			echo html_ac(html_ap() - 1);
 		}
 	}
+
+	echo $HTML->paging_bottom($start, $paging, $nbDocs, $redirecturl);
 }
 
 include ($gfcommon.'docman/views/help.php');

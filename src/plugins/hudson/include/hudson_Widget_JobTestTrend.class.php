@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
+ * Copyright 2015, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -91,19 +92,18 @@ class hudson_Widget_JobTestTrend extends HudsonJobWidget {
 	}
 
 	function getContent() {
+		global $HTML;
 		$html = '';
 		if ($this->job != null && $this->test_result != null) {
-			$job = $this->job;
 			$html .= '<div style="padding: 20px;">';
-			$html .= '<a href="/plugins/hudson/?action=view_test_trend&group_id='.$this->group_id.'&job_id='.$this->job_id.'">';
-			$html .= '<img src="'.$job->getUrl().'/test/trend?width=320&height=240" alt="'.vsprintf(_("%s Test Result Trend"),  array($this->job->getName())).'" title="'.vsprintf(_("%s Test Result Trend"),  array($this->job->getName())).'" />';
-			$html .= '</a>';
+			$html .= util_make_link('/plugins/hudson/?action=view_test_trend&group_id='.$this->group_id.'&job_id='.$this->job_id,
+					'<img src="'.$this->job->getUrl().'/test/trend?width=320&height=240" alt="'.vsprintf(_("%s Test Result Trend"), array($this->job->getName())).'" title="'.vsprintf(_("%s Test Result Trend"), array($this->job->getName())).'" />');
 			$html .= '</div>';
 		} else {
 			if ($this->job != null) {
-				$html .= _("No test found for this job.");
+				$html .= $HTML->information(_('No test found for this job.'));
 			} else {
-				$html .= _("Job not found.");
+				$html .= $HTML->information(_('Job not found.'));
 			}
 		}
 		return $html;

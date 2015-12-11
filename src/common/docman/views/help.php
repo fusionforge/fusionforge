@@ -3,7 +3,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2013-2014, Franck Villaume - TrivialDev
+ * Copyright 2013-2015, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -26,10 +26,18 @@
 /* global variables used */
 global $group_id; // id of the group
 global $g; // the project object
+global $warning_msg;
+global $childgroup_id;
 
 if (!forge_check_perm('docman', $group_id, 'read')) {
 	$warning_msg = _('Document Manager Access Denied');
 	session_redirect('/docman/?group_id='.$group_id);
+}
+
+// plugin hierarchy support
+if ($childgroup_id) {
+	$group_id = $childgroup_id;
+	$g = group_get_object($childgroup_id);
 }
 
 echo html_ao('div', array('class' => 'docmanDivIncluded'));

@@ -59,6 +59,7 @@ class FrsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	function getRows() {
 		$rowsCount = $this->searchQuery->getRowsCount();
 		$result =& $this->searchQuery->getResult();
+		$group_id = $this->searchQuery->groupId;
 
 		$return = '';
 		$rowColor = 0;
@@ -74,7 +75,7 @@ class FrsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			}
 			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($rowColor) .'>'
 				. '<td width="5%">&nbsp;</td>'
-				. '<td>'.util_make_link ('/frs/shownotes.php?release_id='.db_result($result, $i, 'release_id'),db_result($result, $i, 'release_name')).'</td>'
+				. '<td>'.util_make_link ('/frs/?view=shownotes&group_id='.$group_id.'&release_id='.db_result($result, $i, 'release_id'),db_result($result, $i, 'release_name')).'</td>'
 				. '<td width="15%">'.db_result($result, $i, 'realname').'</td>'
 				. '<td width="15%">'.relative_date(db_result($result,$i, 'release_date')).'</td></tr>';
 			$rowColor ++;

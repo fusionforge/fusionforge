@@ -1022,8 +1022,8 @@ class Document extends Error {
 			$this->setOnUpdateError(_('wrong parameters'));
 			return false;
 		}
-		$qpa = db_construct_qpa();
-		$qpa = db_construct_qpa($qpa, 'UPDATE doc_data SET ');
+
+		$qpa = db_construct_qpa(false, 'UPDATE doc_data SET ');
 		for ($i = 0; $i < count($colArr); $i++) {
 			switch ($colArr[$i]) {
 				case 'filesize':

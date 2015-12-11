@@ -3,7 +3,7 @@
  * FusionForge login form functions
  *
  * Copyright 2011, Roland Mas
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014-2015, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -39,11 +39,11 @@ function validate_return_to(&$return_to = '/') {
 	$return_to = $newrt;
 }
 
-function display_login_page($return_to = '/', $triggered = false) {
-	display_login_form($return_to, $triggered, true);
+function display_login_page($return_to = '/', $triggered = false, $attempts = 1, $previousLogin = null) {
+	display_login_form($return_to, $triggered, true, $attempts, $previousLogin);
 }
 
-function display_login_form($return_to = '/', $triggered = false, $full_page = false) {
+function display_login_form($return_to = '/', $triggered = false, $full_page = false, $attempts = 1, $previousLogin = null) {
 	global $HTML;
 
 	validate_return_to($return_to);
@@ -52,6 +52,8 @@ function display_login_form($return_to = '/', $triggered = false, $full_page = f
 	$params['return_to'] = $return_to;
 	$params['html_snippets'] = array();
 	$params['transparent_redirect_urls'] = array();
+	$params['attempts'] = $attempts;
+	$params['previousLogin'] = $previousLogin;
 	plugin_hook_by_reference('display_auth_form', $params);
 
 	if ($full_page) {

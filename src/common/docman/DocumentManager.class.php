@@ -359,13 +359,12 @@ class DocumentManager extends Error {
 	 * @return	array	number per section of activities found between begin and end values
 	 */
 	function getActivity($sections, $begin, $end) {
-		$qpa = db_construct_qpa();
 		for ($i = 0; $i < count($sections); $i++) {
 			$union = 0;
 			if (count($sections) >= 1 && $i != count($sections) -1) {
 				$union = 1;
 			}
-			$qpa = db_construct_qpa($qpa, 'SELECT count(*) FROM activity_vw WHERE activity_date BETWEEN $1 AND $2
+			$qpa = db_construct_qpa(false, 'SELECT count(*) FROM activity_vw WHERE activity_date BETWEEN $1 AND $2
 							AND group_id = $3 AND section = $4 ',
 							array($begin,
 								$end,

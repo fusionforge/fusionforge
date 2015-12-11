@@ -90,6 +90,7 @@ class FusionForgeTemplate extends BaseTemplate {
 		$this->html( 'headelement' );
 
 		echo "\n<!-- FUSIONFORGE BodyHeader BEGIN -->\n";
+		html_ao('body'); // don't print, makes "html helpers" stack consistent
 		$GLOBALS['HTML']->bodyHeader($this->params);
 		echo "<div id=\"ff-mw-wrapper\"><div style=\"font-size:x-small;\">\n";
 		echo "<!-- FUSIONFORGE BodyHeader END -->\n";

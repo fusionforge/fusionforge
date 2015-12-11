@@ -3,7 +3,7 @@
  *
  * Copyright 2010, Antoine Mercadal - Capgemini
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2011-2014, Franck Villaume - TrivialDev
+ * Copyright 2011-2015, Franck Villaume - TrivialDev
  * Copyright 2011, Alain Peyrat
  * http://fusionforge.org
  *
@@ -44,6 +44,12 @@ DocManAddItemController = function(params)
 };
 
 DocManAddFileController = function(params)
+{
+	this.params	= params;
+	this.bindControls();
+};
+
+DocManSearchController = function(params)
 {
 	this.params	= params;
 	this.bindControls();
@@ -494,4 +500,34 @@ DocManAddFileController.prototype =
 		this.params.editRow.show();
 		this.params.editNameRow.show();
 	}
+};
+
+DocManSearchController.prototype =
+{
+	/*! Binds the controls to the actions
+	 */
+	bindControls: function() {
+		this.params.buttonStartDate.click(jQuery.proxy(this, 'setStartDate'));
+		this.params.buttonEndDate.click(jQuery.proxy(this, 'setEndDate'));
+	},
+
+	setStartDate: function() {
+		if (this.params.buttonStartDate.is(':checked')) {
+			this.params.datePickerStartDate.removeAttr('disabled');
+			this.params.datePickerStartDate.attr('required', 'required');
+		} else {
+			this.params.datePickerStartDate.attr('disabled', 'disabled');
+			this.params.datePickerStartDate.removeAttr('required');
+		}
+	},
+
+	setEndDate: function() {
+		if (this.params.buttonEndDate.is(':checked')) {
+			this.params.datePickerEndDate.removeAttr('disabled');
+			this.params.datePickerEndDate.attr('required', 'required');
+		} else {
+			this.params.datePickerEndDate.attr('disabled', 'disabled');
+			this.params.datePickerEndDate.removeAttr('required');
+		}
+	},
 };

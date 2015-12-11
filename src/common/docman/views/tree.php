@@ -6,7 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013-2014, Franck Villaume - TrivialDev
+ * Copyright 2013-2015, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -32,6 +32,8 @@ global $linkmenu;
 global $g; // the group object
 global $dirid; // the selected directory
 global $dm; // the document manager
+global $warning_msg;
+global $childgroup_id;
 
 if (!forge_check_perm('docman', $group_id, 'read')) {
 	$warning_msg= _('Document Manager Access Denied');
@@ -69,7 +71,7 @@ if (isset($projectIDsArray) && is_array($projectIDsArray)) {
 			echo html_ao('script', array('type' => 'text/javascript'));
 			echo '//<![CDATA[
 				jQuery(document).ready(function() {
-					if (typeof(jQuery(\'#'.$g->getUnixname().'-tree\').simpleTreeMenu) != "undefined") {
+					if (typeof(jQuery(\'#'.$groupObject->getUnixname().'-tree\').simpleTreeMenu) != "undefined") {
 						jQuery(\'#'.$groupObject->getUnixname().'-tree\').simpleTreeMenu();
 					}
 				});
@@ -78,12 +80,12 @@ if (isset($projectIDsArray) && is_array($projectIDsArray)) {
 		}
 	}
 }
-if (isset($childgroup_id) && $childgroup_id) {
+if ($childgroup_id) {
 	$groupObject = group_get_object($childgroup_id);
 	echo html_ao('script', array('type' => 'text/javascript'));
 	echo '//<![CDATA[
 			jQuery(document).ready(function() {
-				if (typeof(jQuery(\'#'.$g->getUnixname().'-tree\').simpleTreeMenu) != "undefined") {
+				if (typeof(jQuery(\'#'.$groupObject->getUnixname().'-tree\').simpleTreeMenu) != "undefined") {
 					jQuery(\'#'.$groupObject->getUnixname().'-tree\').simpleTreeMenu(\'expandToNode\', jQuery(\'#leaf-'.$dirid.'\'));
 				}
 			});

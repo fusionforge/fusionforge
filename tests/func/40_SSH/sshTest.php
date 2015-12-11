@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (C) 2014 Roland Mas
+ * Copyright (C) 2015  Inria (Sylvain Beucler)
  *
  * This file is part of FusionForge.
  *
@@ -19,13 +20,17 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
+require_once dirname(dirname(__FILE__)).'/SeleniumForge.php';
 
 class SSHTest extends FForge_SeleniumTestCase
 {
+	// Needs to be member of a project
+	public $fixture = 'projecta';
+
 	function testSSH()
 	{
-		$this->init();
+		$this->loadAndCacheFixture();
+		$this->switchUser(FORGE_ADMIN_USERNAME);
 
 		$this->uploadSshKey();
 
@@ -38,25 +43,12 @@ class SSHTest extends FForge_SeleniumTestCase
 			system("echo 'Trying SSH' 1>&2", $ret);
 			$v = "-v";
 		}
-		system("ssh $v ".FORGE_ADMIN_USERNAME."@".HOST." id", $ret);
+		// Using 'PGPASSFILE= <command>' work-around to avoid random stalling
+		// Cf. https://fusionforge.org/plugins/mediawiki/wiki/fusionforge/index.php/User_accounts#nscd
+		system("ssh $v ".FORGE_ADMIN_USERNAME."@".HOST." PGPASSFILE= id", $ret);
 		$this->assertEquals(0, $ret);
 		if ($verbose) {
 			system("echo 'End of SSH run' 1>&2", $ret);
 		}
 	}
-
-	/**
-	 * Method that is called after Selenium actions.
-	 *
-	 * @param  string $action
-	 */
-	protected function defaultAssertions($action)
-	{
-		if ($action == 'waitForPageToLoad') {
-			$this->assertTrue($this->isElementPresent("//h1")
-					  || $this->isElementPresent("//.[@class='page_footer']"));
-		}
-	}
-
 }
-?>

@@ -197,7 +197,8 @@ AND news_bytes.group_id=groups.group_id ", array($id));
 	show_news_approve_form(
 		$qpa_pending,
 		$qpa_rejected,
-		$qpa_approved
+		$qpa_approved,
+		'/admin/pending-news.php'
 		);
 
 }

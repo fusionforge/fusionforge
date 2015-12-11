@@ -5,6 +5,7 @@
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2010, Franck Villaume - Capgemini
  * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright (C) 2015  Inria (Sylvain Beucler)
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -30,8 +31,8 @@
  *
  */
 function account_pwvalid($pw) {
-	if (strlen($pw) < 6) {
-		$GLOBALS['register_error'] = _('Password must be at least 6 characters.');
+	if (strlen($pw) < 8) {
+		$GLOBALS['register_error'] = _('Password must be at least 8 characters.');
 		return 0;
 	}
 	return 1;
@@ -73,6 +74,12 @@ function account_namevalid($name, $unix=false, $check_exists=true) {
 
 	if (!preg_match('/^[a-z0-9][-a-z0-9_\.]+\z/', $name)) {
 		$GLOBALS['register_error'] = _('Illegal character in name.');
+		return false;
+	}
+
+	// avoid ambiguity with UID/GID, especially in system commands (chown, chgrp, etc.)
+	if (!preg_match('/[a-z]/', $name)) {
+		$GLOBALS['register_error'] = _('Name contains only digits. It must contains at least 1 letter.');
 		return false;
 	}
 
@@ -160,25 +167,37 @@ function account_gensalt(){
 	// crypt() selects the cipher based on
 	// the salt, so ...
 
-	$a = genchr();
-	$b = genchr();
+	$salt_size = 0;
+	$salt_prefix = '';
 	switch(forge_get_config('unix_cipher')) {
 		case 'DES':
-			$salt = "$a$b";
+			$salt_size = 2;
+			break;
+		case 'MD5':
+			$salt_prefix = '$1$';
+			$salt_size = 8;
+			break;
+		case 'SHA256':
+			$salt_prefix = '$5$rounds=5000$';
+			$salt_size = 16;
 			break;
 		default:
-		case 'MD5':
-			$salt = "$1$" . "$a$b";
+		case 'SHA512':
+			$salt_prefix = '$6$rounds=5000$';
+			$salt_size = 16;
 			break;
 		case 'Blowfish':
-			$i = 0;
-			while (!$i = 16) {
-			 	$salt .= rand(64,126);
-			 	$i++;
-			 }
-			return "$2a$".$salt;
+			$salt_prefix = '$2y$10$';
+			$salt_size = 22;
 			break;
 	}
+
+	$salt = '';
+	for ($i = 0; $i < $salt_size; $i++)
+		$salt .= genchr();
+
+	$salt = $salt_prefix.$salt;
+
 	return $salt;
 }
 
@@ -322,7 +341,7 @@ function checkKeys($keys) {
 			/* The encoded key is made of 0-9, A-Z ,a-z, +, / (base 64) characters,
 			 ends with zero or up to three '=' and the length must be >= 512 bits (157 base64 characters).
 			 The whole key ends with an optional comment. */
-			if ( preg_match("@^(((no-port-forwarding|no-X11-forwarding|no-agent-forwarding|no-pty|command=\"[^\"]+\"|from=\"?[A-Za-z0-9\.-]+\"?),?)*\s+)?ssh-(ed25519|ecdsa-sha2-nistp256|ecdsa-sha2-nistp384|ecdsa-sha2-nistp521|rsa|dss)\s+[A-Za-z0-9+/]{68,}={0,2}(\s+.*)?$@", $key) === 0 ) { // Warning: we must use === for the test
+			if ( preg_match("@^(((no-port-forwarding|no-X11-forwarding|no-agent-forwarding|no-pty|command=\"[^\"]+\"|from=\"?[A-Za-z0-9\.-]+\"?),?)*\s+)?(ecdsa-sha2-nistp256|ecdsa-sha2-nistp384|ecdsa-sha2-nistp521|ssh-ed25519|ssh-dss|ssh-rsa)\s+[A-Za-z0-9+/]{68,}={0,2}(\s+.*)?$@", $key) === 0 ) { // Warning: we must use === for the test
 				$error_msg = sprintf(_('The following key has a wrong format: |%s|.  Please, correct it by going back to the previous page.'),
 						htmlspecialchars($key));
 				session_redirect('/account/');

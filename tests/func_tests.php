@@ -8,8 +8,6 @@ if (!@include_once 'PHPUnit/Autoload.php') {
 	require_once 'PHPUnit/TextUI/TestRunner.php';
 }
 
-require_once 'func/Testing/SeleniumRemoteSuite.php';
-
 class AllTests
 {
 	public static function main()
@@ -19,14 +17,13 @@ class AllTests
 
 	public static function suite()
 	{
-		$suite = new SeleniumRemoteSuite('PHPUnit');
+		$suite = new PHPUnit_Framework_TestSuite('PHPUnit');
 
 		// Selenium tests
-		if (!defined('DB_INIT_CMD')) { define('PROJECTA','true'); }
 		if (getenv('TESTGLOB') != FALSE)
-		  $files = glob(getenv('TESTGLOB'));
+			$files = glob(dirname(__FILE__).'/'.getenv('TESTGLOB'));
 		else
-		  $files = glob('func/*/*Test.php');
+			$files = glob(dirname(__FILE__).'/func/*/*Test.php');
 		natsort($files);
 		$suite->addTestFiles($files);
 

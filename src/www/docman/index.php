@@ -6,7 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2010-2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2015, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -36,6 +36,7 @@ require_once $gfcommon.'docman/include/utils.php';
 require_once $gfcommon.'include/TextSanitizer.class.php'; // to make the HTML input by the user safe to store
 require_once $gfcommon.'reporting/report_utils.php';
 require_once $gfcommon.'reporting/ReportPerGroupDocmanDownloads.class.php';
+require_once $gfwww.'search/include/renderers/DocsHtmlSearchRenderer.class.php';
 require_once $gfwww.'include/html.php';
 
 /* are we using docman ? */
@@ -62,9 +63,7 @@ if (!$g->usesDocman())
 if ($g->isError())
 	exit_error($g->getErrorMessage(), 'docman');
 
-$dirid = getIntFromRequest('dirid');
-if (empty($dirid))
-	$dirid = 0;
+$dirid = getIntFromRequest('dirid', 0);
 
 $childgroup_id = getIntFromRequest('childgroup_id');
 
@@ -99,14 +98,9 @@ switch ($action) {
 	}
 }
 
-if (session_loggedin()) {
-	$u = user_get_object(user_getid());
-	if (!$u || !is_object($u)) {
-		exit_error(_('Could Not Get User'));
-	} elseif ($u->isError()) {
-		exit_error($u->getErrorMessage(), 'my');
-	}
-}
+$start = getIntFromRequest('start', 0);
+if ($start < 0)
+	$start = 0;
 
 html_use_storage();
 html_use_simplemenu();

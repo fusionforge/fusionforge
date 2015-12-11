@@ -115,7 +115,6 @@ class ScmGitUpdateScmRepo {
 					$file = fopen("$gitdir_root/config", "a");
 					$string = "[hooks]\n";
 					$string .= "\tmailinglist = ".$unixname.'-commits@'.forge_get_config('lists_host')."\n";
-					$string .= "\temailprefix = \"[".$unixname.'-commits] "'."\n";
 					fwrite($file, $string);
 					fclose($file);
 				}

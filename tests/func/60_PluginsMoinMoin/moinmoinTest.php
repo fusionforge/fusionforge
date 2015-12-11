@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright 2012, Roland Mas
+ * Copyright (C) 2015  Inria (Sylvain Beucler)
  *
  * This file is part of FusionForge.
  *
@@ -19,24 +20,25 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
+require_once dirname(dirname(__FILE__)).'/SeleniumForge.php';
 
 class PluginMoinMoin extends FForge_SeleniumTestCase
 {
 	protected $alreadyActive = 0;
+	public $fixture = 'projecta';
 
 	function testMoinMoin()
 	{
 		$this->skip_on_rpm_installs();
 		$this->skip_on_centos();
 
+		$this->loadAndCacheFixture();
+
 		$this->changeConfig(array("moinmoin" => array("use_frame" => "no")));
 
 		$this->activatePlugin('moinmoin');
 
-		$this->populateStandardTemplate('empty');
-		$this->init();
-
+		$this->gotoProject('ProjectA');
 		$this->clickAndWait("link=Admin");
 		$this->clickAndWait("link=Tools");
 		$this->click("use_moinmoin");
@@ -44,7 +46,6 @@ class PluginMoinMoin extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("Project information updated"));
 
 		$this->cron_for_plugin("create-wikis.php", "moinmoin");
-		sleep (5);
 
 		$this->gotoProject('ProjectA');
 		$this->clickAndWait("link=MoinMoinWiki");
@@ -59,19 +60,6 @@ Is that the Chattanooga choo choo?");
 		$this->gotoProject('ProjectA');
 		$this->clickAndWait("link=MoinMoinWiki");
 		$this->assertTrue($this->isTextPresent("Chattanooga"));
-	}
-
-	/**
-	 * Method that is called after Selenium actions.
-	 *
-	 * @param  string $action
-	 */
-	protected function defaultAssertions($action)
-	{
-		if ($action == 'waitForPageToLoad') {
-			$this->assertTrue($this->isElementPresent("//h1")
-					  || $this->isElementPresent("//div[@id='footer']"));
-		}
 	}
 }
 

@@ -130,14 +130,6 @@ class pgsql extends System {
 				$this->setError('Error: Cannot Delete Group Member(s): '.db_error());
 				return false;
 			}
-			// This is group used for user, not a real project
-			$res2 = db_query_params ('DELETE FROM nss_groups WHERE name IN
-					(SELECT user_name FROM users WHERE user_id=$1)',
-						 array ($user_id));
-			if (!$res2) {
-				$this->setError('Error: Cannot Delete Group GID: '.db_error());
-				return false;
-			}
 
 			$pids = array () ;
 			foreach ($user->getGroups() as $p) {
@@ -171,12 +163,12 @@ class pgsql extends System {
 	/**
  	* sysCheckCreateGroup() - Check that a group has been created
  	*
- 	* @param	int	$user_id	The ID of the user to check
+ 	* @param	int	$group_id	The ID of the group to check
  	* @return	bool			true on success/false on error
  	*
  	*/
-	function sysCheckCreateGroup($user_id) {
-		return $this->sysCreateGroup($user_id);
+	function sysCheckCreateGroup($group_id) {
+		return $this->sysCreateGroup($group_id);
 	}
 
 	/**
@@ -200,14 +192,6 @@ class pgsql extends System {
 				$this->setError('Error: Cannot Delete Group Member(s): '.db_error());
 				return false;
 			}
-			// This is group used for user, not a real project
-			$res2 = db_query_params ('DELETE FROM nss_groups WHERE name IN
-				(SELECT user_name FROM users WHERE user_id=$1)',
-						 array ($user_id)) ;
-			if (!$res2) {
-				$this->setError('Error: Cannot Delete Group GID: '.db_error());
-				return false;
-			}
 		}
 		return true;
 	}
@@ -222,6 +206,15 @@ class pgsql extends System {
  	*
  	*/
 	function sysUserSetAttribute($user_id,$attr,$value) {
+		// trigger nscd cache invalidation and scm-passwd regen through systasksd
+		$res = db_query_params('UPDATE nss_usergroups'
+		                       . ' SET last_modified_date=EXTRACT(EPOCH FROM now())::integer'
+		                       . ' WHERE user_id=$1',
+		                       array($user_id));
+		if (!$res) {
+			$this->setError('Error: Cannot update user attribute: '.db_error());
+			return false;
+		}
 		return true;
 	}
 

@@ -1,6 +1,7 @@
 <?php
 /*
  * Copyright (C) 2012 Roland Mas
+ * Copyright (C) 2015  Inria (Sylvain Beucler)
  *
  * This file is part of FusionForge.
  *
@@ -19,15 +20,17 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
+require_once dirname(dirname(__FILE__)).'/SeleniumForge.php';
 
 class ScmGitSSHTest extends FForge_SeleniumTestCase
 {
+	public $fixture = 'projecta';
+
 	function testScmGitSSH()
 	{
+		$this->loadAndCacheFixture();
+
 		$this->activatePlugin('scmgit');
-		$this->populateStandardTemplate('empty');
-		$this->init();
 
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
@@ -80,19 +83,4 @@ class ScmGitSSHTest extends FForge_SeleniumTestCase
 
 		system("rm -fr $t");
 	}
-
-	/**
-	 * Method that is called after Selenium actions.
-	 *
-	 * @param  string $action
-	 */
-	protected function defaultAssertions($action)
-	{
-		if ($action == 'waitForPageToLoad') {
-			$this->assertTrue($this->isElementPresent("//h1")
-					  || $this->isElementPresent("//.[@class='page_footer']"));
-		}
-	}
-
 }
-?>

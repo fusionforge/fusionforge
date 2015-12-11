@@ -1,7 +1,9 @@
-#! /bin/sh
+#!/bin/bash
 # Configure Subversion
 
 set -e
+
+source $(forge_get_config source_path)/post-install.d/common/service.inc
 
 if [ $(id -u) != 0 ] ; then
     echo "You must be root to run this"

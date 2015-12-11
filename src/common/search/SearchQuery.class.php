@@ -7,6 +7,7 @@
  * Copyright 2009, Roland Mas
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2015, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -73,6 +74,12 @@ class SearchQuery extends Error {
 	 * @var array $sections
 	 */
 	var $sections = SEARCH__ALL_SECTIONS;
+	/**
+	 * options to filter search
+	 *
+	 * @var array $options
+	 */
+	var $options = array();
 
 	var $words = array();
 
@@ -89,7 +96,7 @@ class SearchQuery extends Error {
 	 * @param	boolean	$isExact if we want to search for all the words or if only one is sufficient
 	 * @param	int	$rowsPerPage number of rows per page
 	 */
-	function __construct($words, $offset, $isExact, $rowsPerPage = SEARCH__DEFAULT_ROWS_PER_PAGE) {
+	function __construct($words, $offset, $isExact, $rowsPerPage = SEARCH__DEFAULT_ROWS_PER_PAGE, $options = array()) {
 		$this->cleanSearchWords($words);
 		//We manual escap because every Query in Search escap parameters
 		$words = addslashes($words);
@@ -107,6 +114,7 @@ class SearchQuery extends Error {
 		$this->offset = $offset;
 		$this->isExact = $isExact;
 		$this->operator = $this->getOperator();
+		$this->options = $options;
 	}
 
 	/**
@@ -123,7 +131,7 @@ class SearchQuery extends Error {
 
 		$words = preg_replace("/[ \t]+/", ' ', $words);
 		if(strlen($words) < 3) {
-			$this->setError(_('Error: search query too short'));
+			$this->setError(_('Error') . _(': ') . _('search query too short'));
 			return;
 		}
 		$words = htmlspecialchars($words);

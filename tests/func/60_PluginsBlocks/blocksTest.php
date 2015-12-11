@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (C) 2010 Alcatel-Lucent
+ * Copyright (C) 2015  Inria (Sylvain Beucler)
  *
  * This file is part of FusionForge.
  *
@@ -41,18 +42,20 @@
  * ALONE BASIS."
  */
 
-require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
+require_once dirname(dirname(__FILE__)).'/SeleniumForge.php';
 
 class UserBlocks extends FForge_SeleniumTestCase
 {
 	protected $alreadyActive = 0;
+	public $fixture = 'projecta';
 
 	function testUserBlocks()
 	{
+		$this->loadAndCacheFixture();
+
 		$this->_activateBlocksPlugin();
 
-		$this->populateStandardTemplate('empty');
-		$this->init();
+		$this->gotoProject('ProjectA');
 
 		$this->click("link=Admin");
 		$this->waitForPageToLoad("30000");

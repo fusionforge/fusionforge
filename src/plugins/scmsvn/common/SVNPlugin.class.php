@@ -293,6 +293,10 @@ some control over it to the project's administrator.");
 				return false;
 			}
 			system ("sed -i '/enable-rep-sharing = false/s/^. //' $repo/db/fsfs.conf") ;
+			// dav/ directory is required by old svn clients (eg. svn 1.6.17 on ubuntu 12.04)
+			if (!is_dir ("$repo/dav")) {
+				mkdir("$repo/dav");
+			}
 			system ("svn mkdir -m'Init' file:///$repo/trunk file:///$repo/tags file:///$repo/branches >/dev/null") ;
 			system ("find $repo -type d -print0 | xargs -r -0 chmod g+s") ;
 			// Allow read/write users to modify the SVN repository
@@ -307,9 +311,9 @@ some control over it to the project's administrator.");
 		}
 
 		if ($project->enableAnonSCM()) {
-			system("chmod g+rX,o+rX-w $repo") ;
+			system("chmod g+rX-w,o+rX-w $repo") ;
 		} else {
-			system("chmod g+rX,o-rwx $repo") ;
+			system("chmod g+rX-w,o-rwx $repo") ;
 		}
 	}
 
@@ -585,7 +589,7 @@ some control over it to the project's administrator.");
 			curl_setopt($ch, CURLOPT_WRITEFUNCTION, 'curl2xml');
 			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-			curl_setopt($ch, CURLOPT_COOKIE, $_SERVER['HTTP_COOKIE']);  // for session validation
+			curl_setopt($ch, CURLOPT_COOKIE, @$_SERVER['HTTP_COOKIE']);  // for session validation
 			curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);  // for session validation
 			curl_setopt($ch, CURLOPT_HTTPHEADER,
 						array('X-Forwarded-For: '.$_SERVER['REMOTE_ADDR']));  // for session validation

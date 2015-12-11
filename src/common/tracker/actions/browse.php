@@ -34,6 +34,7 @@ global $ath;
 global $group_id;
 global $group;
 global $HTML;
+global $LUSER;
 
 //
 //  make sure this person has permission to view artifacts
@@ -42,7 +43,6 @@ session_require_perm('tracker', $ath->getID(), 'read');
 
 $query_id = getIntFromRequest('query_id');
 $start = getIntFromRequest('start');
-$paging = 0;
 
 //
 //	The browse page can be powered by a pre-saved query
@@ -54,19 +54,20 @@ $paging = 0;
 //	If the query_id = -1, unset the pref and use regular browse boxes
 //
 if (session_loggedin()) {
-	$u =& session_get_user();
 	if (getStringFromRequest('setpaging')) {
 		/* store paging preferences */
 		$paging = getIntFromRequest('nres');
 		if (!$paging) {
 			$paging = 25;
 		}
-		$u->setPreference("paging", $paging);
+		$LUSER->setPreference("paging", $paging);
 	}
+	/* logged in users get configurable paging */
+	$paging = $LUSER->getPreference("paging");
 
 	if($query_id) {
 		if ($query_id == '-1') {
-			$u->setPreference('art_query'.$ath->getID(),'');
+			$LUSER->setPreference('art_query'.$ath->getID(),'');
 		} else {
 			$aq = new ArtifactQuery($ath,$query_id);
 			if (!$aq || !is_object($aq)) {
@@ -75,7 +76,7 @@ if (session_loggedin()) {
 			$aq->makeDefault();
 		}
 	} else {
-		$query_id=$u->getPreference('art_query'.$ath->getID(),'');
+		$query_id= $LUSER->getPreference('art_query'.$ath->getID(),'');
 	}
 } elseif ($query_id) {
 	// If user is not logged, then use a cookie to store the current query.
@@ -93,6 +94,9 @@ if (session_loggedin()) {
 	$query_id = (int)$gf_tracker[$ath->getID()];
 }
 
+if(!isset($paging) || !$paging)
+	$paging = 25;
+
 $af = new ArtifactFactory($ath);
 
 if (!$af || !is_object($af)) {
@@ -106,10 +110,9 @@ if (!isset($_sort_col)) {
 	$_sort_col = 'priority';
 	$_sort_ord = 'DESC';
 }
-$offset = getStringFromRequest('offset');
+
 $_sort_col = getStringFromRequest('_sort_col',$_sort_col);
 $_sort_ord = getStringFromRequest('_sort_ord',$_sort_ord);
-$max_rows = getIntFromRequest('max_rows', 25);
 $set = getStringFromRequest('set');
 $_assigned_to = getIntFromRequest('_assigned_to');
 $_status = getIntFromRequest('_status');
@@ -140,7 +143,7 @@ if (is_array($_extra_fields)){
 	}
 }
 
-$af->setup($offset,$_sort_col,$_sort_ord,$paging,$set,$_assigned_to,$_status,$aux_extra_fields);
+$af->setup($start,$_sort_col,$_sort_ord,$paging,$set,$_assigned_to,$_status,$aux_extra_fields);
 //
 //	These vals are sanitized and/or retrieved from ArtifactFactory stored settings
 //
@@ -255,14 +258,7 @@ if ($art_arr && ($art_cnt = count($art_arr)) > 0) {
 	$start = 0;
 	$focus = 0;
 }
-$paging = 0;
-if (session_loggedin()) {
-	/* logged in users get configurable paging */
-	$paging = $u->getPreference("paging");
-}
-if (!$paging) {
-	$paging = 25;
-}
+
 if ($art_cnt) {
 	if ($focus) {
 		for ($i = 0; $i < $art_cnt; ++$i)
@@ -276,16 +272,7 @@ if ($art_cnt) {
 	$max = 0;
 }
 
-if (session_loggedin()) {
-	echo $HTML->openForm(array('action' => '/tracker/?group_id='.$group_id.'&atid='.$ath->getID().'&start='.$start, 'method' => 'post'));
-	printf('<p>' . _('Displaying results %1$d‒%2$d out of %3$d total.'), $start + 1, $max, $art_cnt);
-	printf(' ' . _('Displaying %2$s results.') . "\n\t<input " .'type="submit" name="setpaging" value="%1$s" />', _('Change'), html_build_select_box_from_array(array(10, 25, 50, 100, 1000), 'nres', $paging, 1));
-	echo "</p>\n";
-	echo $HTML->closeForm();
-} else {
-	printf('<p>' . _('Displaying results %1$d‒%2$d out of %3$d total.'), $start + 1, $max, $art_cnt);
-	echo "</p>\n";
-}
+echo $HTML->paging_top($start, $paging, $art_cnt, $max, '/tracker/?group_id='.$group_id.'&atid='.$ath->getID());
 
 /**
  *
@@ -695,37 +682,8 @@ if ($art_arr && $art_cnt > 0) {
 	if ($start < $max) {
 		echo $HTML->listTableBottom();
 	}
-	$pages = $art_cnt / $paging;
-	$currentpage = intval($start / $paging);
+	echo $HTML->paging_bottom($start, $paging, $art_cnt, '/tracker/?func=browse&group_id='.$group_id.'&atid='.$ath->getID().'&set='. $set);
 
-	if ($start > 0) {
-		echo util_make_link('/tracker/?func=browse&group_id='.$group_id.'&atid='.$ath->getID().'&set='. $set.'&start='.($start-$paging),'<strong>← '._('previous').'</strong>');
-		echo '&nbsp;&nbsp;';
-	}
-	if ($pages > 1) {
-		$skipped_pages=false;
-		for ($j=0; $j<$pages; $j++) {
-			if ($pages > 20) {
-				if ((($j > 4) && ($j < ($currentpage-5))) || (($j > ($currentpage+5)) && ($j < ($pages-5)))) {
-					if (!$skipped_pages) {
-						$skipped_pages=true;
-						echo "....&nbsp;";
-					}
-					continue;
-				} else {
-					$skipped_pages=false;
-				}
-			}
-			if ($j * $paging == $start) {
-				echo '<strong>'.($j+1).'</strong>&nbsp;&nbsp;';
-			} else {
-				echo util_make_link('/tracker/?func=browse&group_id='.$group_id.'&atid='.$ath->getID().'&set='. $set.'&start='.($j*$paging), '<strong>'.($j+1).'</strong>').'&nbsp;&nbsp;';
-			}
-		}
-	}
-	if ( $art_cnt > $start + $paging) {
-		echo util_make_link('/tracker/?func=browse&group_id='.$group_id.'&atid='.$ath->getID().'&set='. $set.'&start='.($start+$paging),'<strong>'._('next').' →</strong>');
-	}
 	echo '<div style="display:table;width:100%">';
 	echo '<div style="display:table-row">';
 

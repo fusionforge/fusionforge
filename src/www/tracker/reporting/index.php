@@ -5,7 +5,7 @@
  * Copyright 2003, Tim Perdue, tim@gforge.org
  * Copyright 2004 (c) GForge LLC
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013-2014, Franck Villaume - TrivialDev
+ * Copyright 2013-2015, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -118,9 +118,8 @@ html_use_jqueryjqplotplugindateAxisRenderer();
 html_use_jqueryjqplotpluginBar();
 
 $h->header(array('title' => _('Tracker Activity Reporting')));
-
+echo $HTML->openForm(array('action' => '/tracker/reporting/?group_id='.$group_id, 'method' => 'get'));
 ?>
-<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 <table class="centered">
 <tr>
 <td>
@@ -138,8 +137,8 @@ $h->header(array('title' => _('Tracker Activity Reporting')));
 <td><input type="submit" name="submit" value="<?php echo _("Refresh") ?>" /></td>
 </tr>
 </table>
-</form>
 <?php
+echo $HTML->closeForm();
 if ($start == $end) {
 	echo $HTML->error_msg(_('Start and end dates must be different'));
 } else {

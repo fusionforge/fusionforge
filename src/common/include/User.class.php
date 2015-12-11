@@ -5,7 +5,7 @@
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2009-2010, Roland Mas
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2015, Franck Villaume - TrivialDev
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
@@ -407,10 +407,9 @@ class GFUser extends Error {
 		// if we got this far, it must be good
 		$confirm_hash = substr(md5($password1.util_randbytes().microtime()), 0, 16);
 		db_begin();
-		$result = db_query_params('INSERT INTO users (user_name,user_pw,unix_pw,realname,firstname,lastname,email,add_date,status,confirm_hash,mail_siteupdates,mail_va,language,timezone,unix_box,address,address2,phone,fax,title,ccode,theme_id,tooltips,shell)
-							VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23,$24)',
+		$result = db_query_params('INSERT INTO users (user_name,unix_pw,realname,firstname,lastname,email,add_date,status,confirm_hash,mail_siteupdates,mail_va,language,timezone,unix_box,address,address2,phone,fax,title,ccode,theme_id,tooltips,shell)
+							VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23)',
 			array($unix_name,
-				md5($password1),
 				account_genunixpw($password1),
 				htmlspecialchars($firstname.' '.$lastname),
 				htmlspecialchars($firstname),
@@ -850,12 +849,12 @@ Use one below, but make sure it is entered as the single line.)
 	 * @return	string	This user's MD5-crypted passwd.
 	 */
 	function getMD5Passwd() {
-		return $this->data_array['user_pw'];
+		exit(_('MD5 obsoleted'));
 	}
 
 	//Added to be compatible with codendi getUserPw function
 	function getUserPw() {
-		return $this->data_array['user_pw'];
+		exit(_('MD5 obsoleted'));
 	}
 
 	/**
@@ -1394,12 +1393,10 @@ Use one below, but make sure it is entered as the single line.)
 		}
 
 		db_begin();
-		$md5_pw = md5($passwd);
 		$unix_pw = account_genunixpw($passwd);
 
-		$res = db_query_params('UPDATE users SET user_pw=$1, unix_pw=$2 WHERE user_id=$3',
-					array($md5_pw,
-					       $unix_pw,
+		$res = db_query_params('UPDATE users SET unix_pw=$1 WHERE user_id=$2',
+					array($unix_pw,
 					       $this->getID()));
 
 		if (!$res || db_affected_rows($res) < 1) {
@@ -1433,19 +1430,8 @@ Use one below, but make sure it is entered as the single line.)
 	 * @return	boolean	success.
 	 */
 	function setMD5Passwd($md5) {
-		db_begin();
-		if ($md5) {
-			$res = db_query_params('UPDATE users SET user_pw=$1 WHERE user_id=$2',
-				array($md5, $this->getID()));
-
-			if (!$res || db_affected_rows($res) < 1) {
-				$this->setError(_('Error: Cannot Change User Password:').' '.db_error());
-				db_rollback();
-				return false;
-			}
-		}
-		db_commit();
-		return true;
+		exit(_('Error: Cannot Change User Password:').' '._('MD5 obsoleted'));
+		return false;
 	}
 
 	/**
@@ -1731,6 +1717,64 @@ Email: %3$s
 	}
 }
 
+
+class UserComparator {
+	var $criterion = 'name';
+
+	function Compare($a, $b) {
+		switch ($this->criterion) {
+			case 'name':
+			case 'realname':
+			default:
+				$name_compare = strcoll($a->getRealName(), $b->getRealName());
+				if ($name_compare != 0) {
+					return $name_compare;
+				}
+				/* If several users share a same real name */
+				return strcoll($a->getUnixName(), $b->getUnixName());
+				break;
+			case 'unixname':
+			case 'user_name':
+				return strcmp($a->getUnixName(), $b->getUnixName());
+				break;
+			case 'user_id':
+			case 'id':
+				$aid = $a->getID();
+				$bid = $b->getID();
+				if ($aid == $bid) {
+					return 0;
+				}
+				return ($aid < $bid)? -1 : 1;
+				break;
+			case 'lastname':
+				return strcmp($a->getLastName(), $b->getLastName());
+				break;
+			case 'firstname':
+				return strcmp($a->getFirstName(), $b->getFirstName());
+				break;
+			case 'status':
+				return strcmp($a->getStatus(), $b->getStatus());
+				break;
+			case 'add_date':
+				$a_add_date = $a->getAddDate();
+				$b_add_date = $b->getAddDate();
+				if ($a_add_date == $b_add_date) {
+					return 0;
+				}
+				return ($a_add_date < $b_add_date)? -1 : 1;
+				break;
+		}
+	}
+}
+
+function sortUserList(&$list, $criterion = 'name') {
+	$cmp = new UserComparator ();
+	$cmp->criterion = $criterion;
+
+	return usort($list, array($cmp, 'Compare'));
+}
+
+
 /*
 
 		EVERYTHING BELOW HERE IS DEPRECATED
@@ -1787,42 +1831,6 @@ function user_getname($user_id = false) {
 			return 'Invalid User';
 		}
 	}
-}
-
-class UserComparator {
-	var $criterion = 'name';
-
-	function Compare($a, $b) {
-		switch ($this->criterion) {
-			case 'name':
-			default:
-				$name_compare = strcoll($a->getRealName(), $b->getRealName());
-				if ($name_compare != 0) {
-					return $name_compare;
-				}
-				/* If several projects share a same real name */
-				return strcoll($a->getUnixName(), $b->getUnixName());
-				break;
-			case 'unixname':
-				return strcmp($a->getUnixName(), $b->getUnixName());
-				break;
-			case 'id':
-				$aid = $a->getID();
-				$bid = $b->getID();
-				if ($a == $b) {
-					return 0;
-				}
-				return ($a < $b)? -1 : 1;
-				break;
-		}
-	}
-}
-
-function sortUserList(&$list, $criterion = 'name') {
-	$cmp = new UserComparator ();
-	$cmp->criterion = $criterion;
-
-	return usort($list, array($cmp, 'Compare'));
 }
 
 // Local Variables:

@@ -67,7 +67,8 @@ while ( $row = db_fetch_array($project_res) ) {
 }
 
 if ($need_reload) {
-	system("invoke-rc.d apache2 reload");
+	// Using restart rather than reload, to avoid late WSGI socket changes during test suite
+	system("invoke-rc.d apache2 restart");
 }
 
 // Local Variables:

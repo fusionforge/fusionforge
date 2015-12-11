@@ -1,6 +1,7 @@
 <?php
 /**
  * Exports: Export project summary page as HTML
+ * Referenced by older versions of default /home/groups/xxxxx/htdocs/index.php
  *
  * Copyright 2004 (c) Tim Perdue - GForge LLC
  * http://fusionforge.org

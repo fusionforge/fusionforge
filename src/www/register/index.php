@@ -125,6 +125,7 @@ if (getStringFromRequest('submit')) {
 		$send_mail,
 		$built_from_template
 	);
+	# TODO: enable SCM after the project is approved (if ever), to create systasks when needed
 	if ($res && forge_get_config('use_scm') && $plugin) {
 		$group->setUseSCM (true) ;
 		$res = $group->setPluginUse ($scm, true);

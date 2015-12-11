@@ -5,7 +5,7 @@
  * Copyright (C) 1999-2001 VA Linux Systems
  * Copyright (C) 2002-2004 GForge Team
  * Copyright (C) 2008-2010 Alcatel-Lucent
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013, 2015, Franck Villaume - TrivialDev
  *
  * http://fusionforge.org/
  *
@@ -53,6 +53,8 @@ require_once $gfwww.'include/note.php';
 require_once $gfwww.'news/news_utils.php';
 require_once $gfcommon.'forum/Forum.class.php';
 require_once $gfcommon.'include/TextSanitizer.class.php'; // to make the HTML input by the user safe to store
+
+global $HTML;
 
 $group_id = getIntFromRequest('group_id');
 if (!$group_id) {
@@ -104,7 +106,7 @@ if (session_loggedin()) {
 				if (!$result) {
 					db_rollback();
 					form_release_key(getStringFromRequest('form_key'));
-					$error_msg = _('Error: insert failed.');
+					$error_msg = _('Error')._(': ')._('insert failed.');
 				} else {
 					db_commit();
 					$feedback = _('News Added.');
@@ -112,7 +114,7 @@ if (session_loggedin()) {
 			}
 		} else {
 			form_release_key(getStringFromRequest('form_key'));
-			$error_msg = _('Error: both subject and body are required.');
+			$error_msg = _('Error')._(': ')._('both subject and body are required.');
 		}
 	}
 
@@ -126,9 +128,7 @@ if (session_loggedin()) {
 		Show the submit form
 	*/
 	$group = group_get_object($group_id);
-	news_header(array('title'=>_('Submit News for Project: ').' '.$group->getPublicName()));
-
-	$jsfunc = notepad_func();
+	news_header(array('title'=>_('Submit News for Project')._(': ').$group->getPublicName()));
 
 	echo '<p>';
 	echo _('You can post news about your project if you are an admin on your project. You may also post “help wanted” notes if your project needs help.');
@@ -142,10 +142,9 @@ if (session_loggedin()) {
 	echo '<p>';
 	echo _('URLs that start with http:// are made clickable.');
 	echo '</p>';
-	echo $jsfunc .
-		'
-		<form id="newssubmitform" action="'.getStringFromServer('PHP_SELF').'" method="post">
-		<input type="hidden" name="group_id" value="'.$group_id.'" />
+	echo notepad_func();
+	echo $HTML->openForm(array('id' => 'newssubmitform', 'action' => '/news/submit.php', 'method' => 'post'));
+	echo '	<input type="hidden" name="group_id" value="'.$group_id.'" />
 		<input type="hidden" name="post_changes" value="y" />
 		<input type="hidden" name="form_key" value="'. form_generate_key() .'" />
 		<p><strong>'._('For project')._(': ').$group->getPublicName().'</strong></p>
@@ -166,7 +165,8 @@ if (session_loggedin()) {
 
 	echo $params['content'].'<br />';
 	echo '<div><input type="submit" name="submit" value="'._('Submit').'" />
-		</div></form>';
+		</div>';
+	echo $HTML->closeForm();
 
 	news_footer();
 

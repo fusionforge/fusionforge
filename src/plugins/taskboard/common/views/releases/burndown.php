@@ -70,7 +70,7 @@ foreach( $release_snapshots as $snapshot ) {
 		$dataRemainingTasks[] = array( $release->getStartDate() * 1000, $release_volume['tasks'] );
 		$dataRemainingEfforts[] = array( $release->getStartDate() * 1000, $release_volume['man_days'] );
 	}
-	
+
 	$dataRemainingTasks[] = array( $snapshot['snapshot_date'] * 1000, ( $release_volume['tasks'] - $snapshot['completed_tasks'] ) );
 	$dataRemainingEfforts[] = array( $snapshot['snapshot_date'] * 1000, ( $release_volume['man_days'] -  $snapshot['completed_man_days'] ) );
 }
@@ -98,10 +98,10 @@ foreach( $release_snapshots as $snapshot ) {
 
 	jQuery( document ).ready(function( $ ) {
 		jQuery('#taskboard-view-btn').click( function ( e ) {
-			window.location = '<?php echo util_make_url ('/plugins/'.$pluginTaskboard->name.'?group_id='. $group_id . '&_release=' . $release_id ); ?>';
+			window.location = '<?php echo util_make_url ('/plugins/'.$pluginTaskboard->name.'/?group_id='. $group_id . '&_release=' . $release_id ); ?>';
 			e.preventDefault();
 		});
-		
+
 		burndownChart = jQuery.jqplot(
 			'taskboard-burndown-chart',
 			[ xaxisData, dataRemainingIdeal, dataRemainingTasks, dataRemainingEfforts ],
@@ -112,15 +112,15 @@ foreach( $release_snapshots as $snapshot ) {
 				seriesColors: [ '#000', '#DDDDDD', '#00FA9A', '#B22222' ],
 				legend: {
 					show: true,
-					location: 'ne', 
+					location: 'ne',
 					xoffset: 12,
 					yoffset: 12
 				},
-				axes : { 
+				axes : {
 					xaxis : {
-						renderer : jQuery.jqplot.DateAxisRenderer, 
+						renderer : jQuery.jqplot.DateAxisRenderer,
 						tickRenderer: jQuery.jqplot.CanvasAxisTickRenderer,
-						tickOptions:{ 
+						tickOptions:{
 							angle: -90,
 							fontSize : '1.3em',
 							formatString : '%Y-%m-%d'
@@ -141,7 +141,7 @@ foreach( $release_snapshots as $snapshot ) {
 					y2axis: {
 						autoscale:true,
 						min : 0,
-						tickOptions:{ 
+						tickOptions:{
 						isMinorTick: true,
 						formatString: "%.1f <?php echo _('m/d') ?>"
 						}

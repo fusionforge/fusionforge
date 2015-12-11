@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014, 2015 Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -98,18 +98,18 @@ class hudson_Widget_JobTestResults extends HudsonJobWidget {
 	}
 
 	function getContent() {
+		global $HTML;
 		$html = '';
 		if ($this->job != null && $this->test_result != null) {
-			$job = $this->job;
 			$test_result = $this->test_result;
 			$html .= '<div style="padding: 20px;">';
 			$html .= util_make_link('/plugins/hudson/?action=view_last_test_result&group_id='.$this->group_id.'&job_id='.$this->job_id, $test_result->getTestResultPieChart());
 			$html .= '</div>';
 		} else {
 			if ($this->job != null) {
-				$html .= _("No test found for this job.");
+				$html .= $HTML->information(_('No test found for this job.'));
 			} else {
-				$html .= _("Job not found.");
+				$html .= $HTML->information(_('Job not found.'));
 			}
 		}
 		return $html;

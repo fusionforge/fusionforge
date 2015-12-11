@@ -11,7 +11,7 @@ Depends: bzr, libapache2-mod-wsgi, loggerhead (>= 1.19~bzr477~), python-pastedep
 Recommends: fusionforge-scm
 
 Package: fusionforge-plugin-scmarch
-Depends: tla
+Depends:
 Recommends: fusionforge-scm
 
 Package: fusionforge-plugin-scmcvs
@@ -78,6 +78,9 @@ Package: fusionforge-plugin-message
 Depends:
 
 Package: fusionforge-plugin-projectlabels
+Depends:
+
+Package: fusionforge-plugin-projects-hierarchy
 Depends:
 
 # Note: scmhook might need to be manually packaged to allow installing

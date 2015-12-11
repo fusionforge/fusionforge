@@ -58,7 +58,7 @@ if ($element_id && $start_date_unixtime && $end_date_unixtime) {
 	db_begin();
 	if ($release->update($element_id, $start_date_unixtime, $end_date_unixtime, $goals, $page_url)) {
 		db_commit();
-		$feedback .= _('Succefully Updated');
+		$feedback .= _('Successfully Updated');
 	} else {
 		db_rollback();
 		$error_msg = $release->getErrorMessage();

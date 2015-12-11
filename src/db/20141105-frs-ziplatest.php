@@ -1,7 +1,7 @@
 <?php
 /**
  *
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2015, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -46,42 +46,52 @@ if (class_exists('ZipArchive')) {
 		if (db_numrows($filesRes)) {
 			$zip = new ZipArchive();
 			$zipPath = forge_get_config('upload_dir').'/'.$packageArr['guxname'].'/'.$packageArr['pname'].'/'.$packageArr['pname'].'-latest.zip';
-			if (!is_file($zipPath)) {
-				if ($zip->open($zipPath, ZIPARCHIVE::CREATE) !== true) {
-					echo _('Cannot open the file archive')._(': ').$zipPath."\n";
-					$globalStatus = 1;
-				} else {
-					$filesPath = forge_get_config('upload_dir').'/'.$packageArr['guxname'].'/'.$packageArr['pname'].'/'.$releaseArr['rname'];
-					while ($fileArr = db_fetch_array($filesRes)) {
-						$filePath = $filesPath.'/'.$fileArr['filename'];
-						if ($zip->addFile($filePath, $fileArr['filename']) !== true) {
-							echo _('Cannot add file to the file archive')._(': ').$filePath.' -> '.$zipPath."\n";
+			if (is_dir(forge_get_config('upload_dir').'/'.$packageArr['guxname'].'/'.$packageArr['pname'])) {
+				if (!is_file($zipPath)) {
+					if ($zip->open($zipPath, ZIPARCHIVE::CREATE) !== true) {
+						echo _('ERROR')._(': ')._('Cannot open the file archive')._(': ').$zipPath."\n";
+						$globalStatus = 1;
+					} else {
+						$filesPath = forge_get_config('upload_dir').'/'.$packageArr['guxname'].'/'.$packageArr['pname'].'/'.$releaseArr['rname'];
+						while ($fileArr = db_fetch_array($filesRes)) {
+							$filePath = $filesPath.'/'.$fileArr['filename'];
+							if (is_file($filePath)) {
+								if ($zip->addFile($filePath, $fileArr['filename']) !== true) {
+									echo _('ERROR')._(': ')._('Cannot add file to the file archive')._(': ').$filePath.' -> '.$zipPath."\n";
+									$globalStatus = 1;
+								}
+							} else {
+								echo _('WARNING')._(': ')._('File exists in database but folder does not')._(': ').$fileArr['filename']."\n";
+								$globalStatus = 1;
+							}
+						}
+						db_free_result($filesRes);
+						if ($zip->close() !== true) {
+							echo _('ERROR')._(': ')._('Cannot close the file archive')._(': ').$zipPath."\n";
 							$globalStatus = 1;
 						}
 					}
-					db_free_result($filesRes);
-					if ($zip->close() !== true) {
-						echo _('Cannot close the file archive')._(': ').$zipPath."\n";
+					if (!is_file($zipPath)) {
+						echo _('ERROR')._(': ')._('Something went wrong during zip creation, check permission?').' '.$zipPath."\n";
 						$globalStatus = 1;
+					} else {
+						chown($zipPath, forge_get_config('apache_user'));
+						chgrp($zipPath, forge_get_config('apache_group'));
 					}
 				}
-				if (!is_file($zipPath)) {
-					echo _('Something went wrong during zip creation, check permission?').' '.$zipPath."\n";
-					$globalStatus = 1;
-				} else {
-					chown($zipPath, forge_get_config('apache_user'));
-					chgrp($zipPath, forge_get_config('apache_group'));
-				}
+			} else {
+				echo _('WARNING')._(': ')._('Package exists in database but folder does not')._(': ').$packageArr['pname']."\n";
+				$globalStatus = 1;
 			}
 		}
 		db_free_result($releaseRes);
 	}
 	db_free_result($packagesRes);
 }
+
 if ($globalStatus) {
-	echo "ERROR\n";
+	echo "ERROR or WARNING during zip latest generation\n";
 	exit(1);
 }
-
 echo "SUCCESS\n";
 exit(0);

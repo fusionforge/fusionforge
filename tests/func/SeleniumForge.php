@@ -3,6 +3,7 @@
  * Copyright (C) 2007-2008 Alain Peyrat <aljeux at free dot fr>
  * Copyright (C) 2009 Alain Peyrat, Alcatel-Lucent
  * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright (C) 2015  Inria (Sylvain Beucler)
  *
  * This file is part of FusionForge.
  *
@@ -43,31 +44,33 @@
  * ALONE BASIS."
  */
 
-$config = getenv('CONFIG_PHP') ? getenv('CONFIG_PHP'): dirname(dirname(__FILE__)).'/config.php';
+define('FORGE_ADMIN_USERNAME', 'admin');
+define('FORGE_ADMIN_PASSWORD', 'my^admin');
+define('FORGE_OTHER_PASSWORD', 'tototata');
+
+$config = dirname(__FILE__).'/config.php';
 require_once $config;
 
 require_once 'PHPUnit/Extensions/SeleniumTestCase.php';
 
 class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 {
-	protected $logged_in = false ;
+	public $logged_in = false ;
+	public $fixture = 'base';
+	public $fixture_loaded = false;
+	
+	public function setUp() {
+		$this->configureSelenium();
+		$this->loadCachedFixture();
+	}
 
-	protected function setUp()
-	{
+	public function configureSelenium() {
 		if (getenv('SELENIUM_RC_DIR') && getenv('SELENIUM_RC_URL')) {
 			$this->captureScreenshotOnFailure = true;
 			$this->screenshotPath = getenv('SELENIUM_RC_DIR');
 			$this->screenshotUrl = getenv('SELENIUM_RC_URL');
 		}
-		if (defined('DB_INIT_CMD')) {
-			// Reload a fresh database before running this test suite.
-			$ret = 0;
-			passthru(DB_INIT_CMD, $ret);
-			ob_flush();
-			if ($ret != 0)
-				die('DB_INIT_CMD ('.DB_INIT_CMD.') failed');
-		}
-
+		
 		$this->setBrowser('*firefox');
 		$this->setBrowserUrl(URL);
 		$this->setHost(SELENIUM_RC_HOST);
@@ -77,9 +80,52 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->screenshotBgColor = '#CCFFDD';
 	}
 
-	protected function changeConfig($config) {
-		$forge_get_config = RUN_JOB_PATH."/forge_get_config";
-		$config_path = rtrim(`$forge_get_config config_path`);
+	/**
+	 * Load existing fixture.
+	 * Mainly used to load the 'base' fixture in tests that don't call loadAndCacheFixture() yet
+	 */
+	public function loadCachedFixture() {
+		$this->fixture_loaded = false;
+		$base_cmd = dirname(__FILE__)."/fixtures.sh";
+		$ret = 0;
+		passthru("$base_cmd --exists {$this->fixture}", $ret); ob_flush();
+		if ($ret != 0) {
+			# wait until the test starts (with a valid Selenium session) to generate the fixture
+		} else {
+			passthru("$base_cmd {$this->fixture}", $ret); ob_flush();
+			if ($ret != 0)
+				die("Error running: $base_cmd {$this->fixture}");
+			$this->fixture_loaded = true;
+		}
+	}
+
+	/**
+	 * We can't run the fixture in setUp nor even in assertPreConditions
+	 * because the Selenium session isn't started yet >(
+	 *
+	 * Postponing fixture caching after the test is run.
+	 * Call this first in your test.
+	 *
+	 * Alternatively we could use SQL-based fixtures (rather than
+	 * Selenium-based fixtures)
+	 */
+	public function loadAndCacheFixture() {
+		if (!$this->fixture_loaded) {
+			$base_cmd = dirname(__FILE__)."/fixtures.sh";
+			$ret = 0;
+			passthru("$base_cmd base", $ret); ob_flush();
+
+			require(dirname(__FILE__)."/fixtures/{$this->fixture}.php");
+			$this->logout();
+			$this->fixture_loaded = true;
+
+			passthru("$base_cmd --backup {$this->fixture}", $ret); ob_flush();
+		}
+	}
+
+	
+	public function changeConfig($config) {
+		$config_path = rtrim(`forge_get_config config_path`);
 		$classname = get_class($this);
 
 		$contents = "";
@@ -94,7 +140,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 				$contents);
 	}
 
-	protected function openWithOneRetry($url) {
+	public function openWithOneRetry($url) {
 		try {
 			$this->open($url);
 		}
@@ -103,27 +149,13 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		}
 	}
 
-	/**
-	 * Method that is called after Selenium actions.
-	 *
-	 * @param  string $action
-	 */
-	protected function defaultAssertions($action)
-	{
-		if ($action == 'waitForPageToLoad') {
-			$this->assertElementPresent("//h1");
-//			$this->assertFalse($this->isElementPresent("//div[@id='ffErrors']"));
-//			$this->assertFalse($this->isTextPresent("PhpWiki Warning:"));
-		}
-	}
-
-	protected function clickAndWait($link)
+	public function clickAndWait($link)
 	{
 		$this->click($link);
 		$this->waitForPageToLoad();
 	}
 
-	protected function waitForTextPresent($text)
+	public function waitForTextPresent($text)
 	{
 		for ($second = 0; ; $second++) {
 			if ($second >= 30) $this->fail("timeout");
@@ -134,15 +166,17 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		}
 	}
 
-	protected function runCommand($cmd)
+	public function runCommand($cmd)
 	{
-		system(RUN_COMMAND_PREFIX.$cmd, $ret);
+		system($cmd, $ret);
 		$this->assertEquals(0, $ret);
 		ob_flush();
 	}
 
 	function runCommandTimeout($dir, $command, $env='') {
-		$cmd = "cd $dir && $env timeout 15s $command";
+		# Disable timeout so we have a chance to gdb the stalled process:
+		#$cmd = "cd $dir && $env timeout 15s $command";
+		$cmd = "cd $dir && $env $command";
 		system($cmd, $ret);
 		if ($ret == 124) {	# retry once if we get a timeout
 			system($cmd, $ret);
@@ -154,36 +188,30 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		ob_flush();
 	}
 
-	protected function db($sql)
+	public function cron($cmd)
 	{
-		system("echo \"$sql\" | psql -q -Upostgres ".DB_NAME);
+		$this->runCommand("forge_run_job $cmd");
 	}
 
-	protected function cron($cmd)
+	public function cron_for_plugin($cmd, $plugin)
 	{
-		$this->runCommand(RUN_JOB_PATH."/forge_run_job $cmd");
-	}
-
-	protected function cron_for_plugin($cmd, $plugin)
-	{
-		$this->runCommand(RUN_JOB_PATH."/forge_run_plugin_job $plugin $cmd");
+		$this->runCommand("forge_run_plugin_job $plugin $cmd");
 	}
 
     /**
      * Execute pending system tasks
      */
-	protected function waitSystasks()
+	public function waitSystasks()
 	{
-		$this->runCommand(RUN_JOB_PATH.'/systasks_wait_until_empty.php');
+		$this->runCommand(dirname(__FILE__).'/../../src/bin/systasks_wait_until_empty.php');
 	}
 
-	protected function init() {
-		$this->switchUser (FORGE_ADMIN_USERNAME) ;
+	public function init() {
 		$this->changeTheme("Funky Twig");
 		$this->createAndGoto('ProjectA');
 	}
 
-	protected function populateStandardTemplate($what='all')
+	public function populateStandardTemplate($what='all')
 	{
 		if ($what == 'all') {
 			$what = array('trackers','tasks','forums');
@@ -203,7 +231,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->clickAndWait("submit");
 
 		$this->open( ROOT . '/projects/tmpl') ;
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 
 		$this->clickAndWait("link=Admin");
 		$this->clickAndWait("link=Tools");
@@ -292,7 +320,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		}
 	}
 
-	protected function login($username)
+	public function login($username)
 	{
 		$this->open( ROOT );
 		if ($this->isTextPresent('Log Out')) {
@@ -309,7 +337,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->clickAndWait("submit");
 	}
 
-	protected function triggeredLogin($username)
+	public function triggeredLogin($username)
 	{
 		if ($username == FORGE_ADMIN_USERNAME) {
 			$password = FORGE_ADMIN_PASSWORD;
@@ -324,16 +352,16 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->logged_in = $username ;
 	}
 
-	protected function logout()
+	public function logout()
 	{
 //		$this->click("link=Log Out");
 		$this->open( ROOT ."/account/logout.php" );
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 
 		$this->logged_in = false ;
 	}
 
-	protected function switchUser($username)
+	public function switchUser($username)
 	{
 		if ($this->logged_in != $username) {
 			$this->logout();
@@ -341,17 +369,17 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		}
 	}
 
-	protected function isLoginRequired()
+	public function isLoginRequired()
 	{
 		return $this->isTextPresent("You've been redirected to this login page") ;
 	}
 
-	protected function isPermissionDenied()
+	public function isPermissionDenied()
 	{
 		return $this->isTextPresent("Permission denied") ;
 	}
 
-	protected function registerProject ($name, $user, $scm='scmsvn') {
+	public function registerProject ($name, $user, $scm='scmsvn') {
 		$unix_name = strtolower($name);
 
 		$saved_user = $this->logged_in ;
@@ -375,14 +403,14 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->switchUser ($saved_user) ;
 	}
 
-	protected function approveProject ($name, $user) {
+	public function approveProject ($name, $user) {
 		$unix_name = strtolower($name);
 
 		$saved_user = $this->logged_in ;
 		$this->switchUser ($user) ;
 
 		$this->open( ROOT . '/admin/approve-pending.php') ;
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("document.forms['approve.$unix_name'].submit");
 
 		$this->assertTrue($this->isTextPresent("Approving Project: $unix_name"));
@@ -390,24 +418,23 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->switchUser ($saved_user) ;
 	}
 
-	protected function createProject ($name, $scm='scmsvn') {
+	public function createProject ($name, $scm='scmsvn') {
 		$unix_name = strtolower($name);
 
 		$this->switchUser (FORGE_ADMIN_USERNAME) ;
 
 		// Create a simple project.
-		if ((!defined('PROJECTA')) || ($unix_name != "projecta")) {
-			$this->registerProject ($name, FORGE_ADMIN_USERNAME, $scm) ;
-		}
+		$this->registerProject($name, FORGE_ADMIN_USERNAME, $scm);
 	}
 
-	protected function createAndGoto($project) {
+	public function createAndGoto($project) {
 		$this->createProject($project);
 		$this->gotoProject($project);
 	}
 
-	protected function createUser ($login)
+	public function createUser ($login)
 	{
+		$this->switchUser(FORGE_ADMIN_USERNAME);
 		$this->open( ROOT );
 		$this->clickAndWait("link=Site Admin");
 		$this->clickAndWait("link=Register a New User");
@@ -423,24 +450,24 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->clickAndWait("//table/tbody/tr/td/a[contains(@href,'useredit.php') and contains(.,'($login)')]/../..//a[contains(@href, 'userlist.php?action=activate&user_id=')]");
 	}
 
-	protected function activatePlugin($pluginName) {
+	public function activatePlugin($pluginName) {
 		$this->switchUser(FORGE_ADMIN_USERNAME);
 		$this->open( ROOT . '/admin/pluginman.php?update='.$pluginName.'&action=deactivate');
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->open( ROOT . '/admin/pluginman.php?update='.$pluginName.'&action=activate');
-		$this->waitForPageToLoad("30000");
-		$this->logout();
+		$this->waitForPageToLoad();
+		//$this->logout();
 	}
 
-	protected function gotoProject($project) {
+	public function gotoProject($project) {
 		$unix_name = strtolower($project);
 
 		$this->open( ROOT . '/projects/' . $unix_name) ;
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTrue($this->isTextPresent("This is the public description for $project."));
 	}
 
-	protected function uploadSshKey () {
+	public function uploadSshKey () {
 		// Prepare client config
 		$sshdir = getenv('HOME') . '/.ssh';
 		if (!file_exists($sshdir)) {
@@ -474,36 +501,36 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->clickAndWait("submit");
 	}
 
-	protected function skip_test($msg) {
+	public function skip_test($msg) {
 		$this->captureScreenshotOnFailure = false;
 		$this->markTestSkipped($msg);
 	}
 
-	protected function skip_on_rpm_installs($msg='Skipping on installations from RPM') {
+	public function skip_on_rpm_installs($msg='Skipping on installations from RPM') {
 		if (INSTALL_METHOD == 'rpm') {
 			$this->skip_test($msg);
 		}
 	}
 
-	protected function skip_on_deb_installs($msg='Skipping on installations from *.deb') {
+	public function skip_on_deb_installs($msg='Skipping on installations from *.deb') {
 		if (INSTALL_METHOD == 'deb') {
 			$this->skip_test($msg);
 		}
 	}
 
-	protected function skip_on_src_installs($msg='Skipping on installations from source') {
+	public function skip_on_src_installs($msg='Skipping on installations from source') {
 		if (INSTALL_METHOD == 'src') {
 			$this->skip_test($msg);
 		}
 	}
 
-	protected function skip_on_centos($msg='Skipping on CentOS platforms') {
+	public function skip_on_centos($msg='Skipping on CentOS platforms') {
 		if (INSTALL_OS == 'centos') {
 			$this->skip_test($msg);
 		}
 	}
 
-	protected function skip_on_debian($msg='Skipping on Debian platforms') {
+	public function skip_on_debian($msg='Skipping on Debian platforms') {
 		if (INSTALL_OS == 'debian') {
 			$this->skip_test($msg);
 		}

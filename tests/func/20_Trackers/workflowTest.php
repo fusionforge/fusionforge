@@ -2,6 +2,7 @@
 /**
  * Copyright (C) 2008 Alain Peyrat <aljeux@free.fr>
  * Copyright (C) 2009 - 2010 Alain Peyrat, Alcatel-Lucent
+ * Copyright (C) 2015  Inria (Sylvain Beucler)
  *
  * This file is part of FusionForge.
  *
@@ -42,15 +43,18 @@
  * ALONE BASIS."
  */
 
-require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
+require_once dirname(dirname(__FILE__)).'/SeleniumForge.php';
 
 class CreateTrackerWorkflow extends FForge_SeleniumTestCase
 {
+	public $fixture = 'projecta';
+
 	function testWorkflow()
 	{
 		// Testing extra-fields
-		$this->populateStandardTemplate('trackers');
-		$this->init();
+		$this->loadAndCacheFixture();
+		$this->switchUser(FORGE_ADMIN_USERNAME);
+		$this->gotoProject('ProjectA');
 
 		$this->clickAndWait("link=Tracker");
 		$this->clickAndWait("link=Bugs");

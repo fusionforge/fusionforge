@@ -1,6 +1,7 @@
 <?php
 /*
  * Copyright (C) 2012 Roland Mas
+ * Copyright (C) 2015  Inria (Sylvain Beucler)
  *
  * This file is part of FusionForge.
  *
@@ -19,22 +20,24 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once dirname(dirname(__FILE__)).'/Testing/SeleniumForge.php';
+require_once dirname(dirname(__FILE__)).'/SeleniumForge.php';
 
 class multiSCMTest extends FForge_SeleniumTestCase
 {
+	public $fixture = 'projecta';
+
 	function testMultiSCM()
 	{
 		$this->skip_on_rpm_installs();
 		$this->skip_on_src_installs();
+
+		$this->loadAndCacheFixture();
 
 		$this->changeConfig(array("core" => array("allow_multiple_scm" => "yes")));
 
 		$this->activatePlugin('scmsvn');
 		$this->activatePlugin('scmgit');
 		$this->activatePlugin('scmbzr');
-		$this->populateStandardTemplate('empty');
-		$this->init();
 
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
@@ -145,20 +148,5 @@ class multiSCMTest extends FForge_SeleniumTestCase
 		$this->assertTextPresent("Modifying file in Git");
 		$this->assertTextPresent("Adding file in Git");
 		$this->selectFrame("relative=top");
-}
-
-	/**
-	 * Method that is called after Selenium actions.
-	 *
-	 * @param  string $action
-	 */
-	protected function defaultAssertions($action)
-	{
-		if ($action == 'waitForPageToLoad') {
-			$this->assertTrue($this->isElementPresent("//h1")
-					  || $this->isElementPresent("//.[@class='page_footer']"));
-		}
 	}
-
 }
-?>
