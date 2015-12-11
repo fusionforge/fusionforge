@@ -20,6 +20,7 @@ FusionForge 6.0.4:
 * News: pending site news e-mail reminder: properly filter out private projects (Inria)
 * Plugin SCM: fix another race condition when creating project with SCM selected (Inria)
 * Plugin SCM Git: improve user matching when computing stats, support git .mailmap (Inria)
+* Plugin SCM SVN: fix HTTP commit access for old SVN 1.7 clients (Inria)
 * Plugin scmhook: fix non-editable mailing list name in some configurations (Inria)
 * Plugin scmhook: fix migration scripts svntracker To ScmhookCommitTracker & svncommitemail To ScmHookCommitEmail (TrivialDev)
 * Plugin MediaWiki: fix permission error when upgrading suspended projects database (Inria & TrivialDev)

@@ -41,4 +41,14 @@ while ($arr = db_fetch_array($res)) {
     $SYS->sysCheckCreateUser($u->getID());
 }
 
+$res = db_query_params ('SELECT group_id FROM groups WHERE status=$1 ORDER BY group_id',
+			array ('A'));
+
+while ($arr = db_fetch_array($res)) {
+    $g = group_get_object($arr['group_id']);
+	echo "Refreshing NSS for group ".$g->getUnixName()."\n" ;
+
+    $SYS->sysCheckCreateGroup($g->getID());
+}
+
 ?>
