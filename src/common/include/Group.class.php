@@ -1601,7 +1601,7 @@ class Group extends Error {
 				return false;
 			}
 		} else {
-			$this->setError(_("SCM Box cannot be empty"));
+			$this->setError(_("Homepage cannot be empty"));
 			return false;
 		}
 	}
