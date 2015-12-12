@@ -44,7 +44,7 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 
 		$userIsGroupMember = $this->isGroupMember($groupId);
 
-		$searchQuery = new DocsSearchQuery($words, $offset, $isExact, $groupId, $sections, $userIsGroupMember, $rowsPerPage, $options);
+		$searchQuery = new DocsSearchQuery($words, $offset, $isExact, array($groupId), $sections, $userIsGroupMember, $rowsPerPage, $options);
 
 		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_DOCS, $words, $isExact, $searchQuery, $groupId, 'docman');
 

@@ -5,8 +5,8 @@
  * Copyright 2004, Dominik Haas
  * Copyright 2009, Roland Mas
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013,2015 Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of National Education
+ * Copyright 2013,2015 Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -32,9 +32,9 @@ class DocsSearchQuery extends SearchQuery {
 	/**
 	* group id
 	*
-	* @var int $groupId
+	* @var array $groupIdArr
 	*/
-	var $groupId;
+	var $groupIdArr;
 
 	/**
 	* flag if non public items are returned
@@ -49,79 +49,30 @@ class DocsSearchQuery extends SearchQuery {
 	 * @param	string	$words words we are searching for
 	 * @param	int	$offset offset
 	 * @param	bool	$isExact if we want to search for all the words or if only one matching the query is sufficient
-	 * @param	int	$groupId group id
+	 * @param	array	$groupIdArr array containing group ids
 	 * @param	string	$sections sections to search in
 	 * @param	bool	$showNonPublic flag if private sections are searched too
 	 */
-	function __construct($words, $offset, $isExact, $groupId, $sections = SEARCH__ALL_SECTIONS, $showNonPublic = false, $rowsPerPage = SEARCH__DEFAULT_ROWS_PER_PAGE, $options = array()) {
-		$this->groupId = $groupId;
+	function __construct($words, $offset, $isExact, $groupIdArr, $sections = SEARCH__ALL_SECTIONS, $showNonPublic = false, $rowsPerPage = SEARCH__DEFAULT_ROWS_PER_PAGE, $options = array()) {
+
+		$this->groupIdArr = $groupIdArr;
 		$this->showNonPublic = $showNonPublic;
 		parent::__construct($words, $offset, $isExact, $rowsPerPage, $options);
 		$this->setSections($sections);
 	}
 
 	/**
-	 * getQuery - get the query built to get the search results
+	 * addCommonQPA - add common sql commands to existing QPA
 	 *
 	 * @return	array	query+params array
 	 */
-	function getQuery() {
-		if (forge_get_config('use_fti')) {
-			return $this->getFTIQuery();
-		} else {
-			$options = $this->options;
-			$qpa = db_construct_qpa(false,
-						 'SELECT x.* FROM (SELECT doc_data.docid, doc_data.title, doc_data.filename, doc_data.description, doc_groups.groupname, title||$1||description AS full_string_agg FROM doc_data, doc_groups WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.group_id = $2',
-						 array ($this->field_separator,
-							$this->groupId)) ;
-			if ($this->sections != SEARCH__ALL_SECTIONS) {
-				$qpa = db_construct_qpa($qpa,
-							 'AND doc_groups.doc_group = ANY ($1) ',
-							 array( db_int_array_to_any_clause ($this->sections))) ;
-			}
-			if ($this->showNonPublic) {
-				$qpa = db_construct_qpa($qpa, ' AND doc_data.stateid IN (1, 4, 5)');
-			} else {
-				$qpa = db_construct_qpa($qpa, ' AND doc_data.stateid = 1');
-			}
-
-			if (isset($options['date_begin']) && !isset($options['date_end'])) {
-				$qpa = db_construct_qpa($qpa, ' AND doc_data.createdate >= $1', array($options['date_begin']));
-			} elseif (!isset($options['date_begin']) && isset($options['date_end'])) {
-				$qpa = db_construct_qpa($qpa, ' AND doc_data.createdate <= $1', array($options['date_end']));
-			} elseif (isset($options['date_begin']) && isset($options['date_end'])) {
-				$qpa = db_construct_qpa($qpa, ' AND doc_data.createdate between $1 and $2', array($options['date_begin'], $$options['date_end']));
-			}
-
-			$qpa = db_construct_qpa($qpa,
-						 ') AS x WHERE ') ;
-			$qpa = $this->addIlikeCondition($qpa, 'full_string_agg');
-			$qpa = db_construct_qpa($qpa,
-						 ' ORDER BY x.groupname, x.title') ;
-		}
-		return $qpa;
-	}
-
-	function getFTIQuery() {
-		$words = $this->getFTIwords();
+	function addCommonQPA($qpa) {
 		$options = $this->options;
-		$group_id = $this->groupId;
-		if (!isset($options['insideDocuments']) || !$options['insideDocuments']) {
-			$qpa = db_construct_qpa(false,
-					'SELECT x.* FROM (SELECT doc_data.docid, doc_data.filename, ts_headline(doc_data.title, q) AS title, ts_headline(doc_data.description, q) AS description, doc_groups.groupname, doc_data.title||$1||description AS full_string_agg, doc_data_idx.vectors FROM doc_data, doc_groups, doc_data_idx, to_tsquery($2) AS q WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.docid = doc_data_idx.docid AND (vectors @@ to_tsquery($2)',
-					array ($this->field_separator, $words));
-		} else {
-			$qpa = db_construct_qpa(false,
-					'SELECT x.* FROM (SELECT doc_data.docid, ts_headline(doc_data.filename, q) AS filename, ts_headline(doc_data.title, q) AS title, ts_headline(doc_data.description, q) AS description, doc_groups.groupname, doc_data.title||$1||description||$1||filename AS full_string_agg, doc_data_words_idx.vectors FROM doc_data, doc_groups, doc_data_words_idx, to_tsquery($2) AS q WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.docid = doc_data_words_idx.docid AND (vectors @@ to_tsquery($2)',
-					array ($this->field_separator, $words));
+		if (count($this->groupIdArr)) {
+			$qpa = db_construct_qpa($qpa, ' AND doc_data.group_id = ANY ($1) ', array(db_int_array_to_any_clause($this->groupIdArr)));
 		}
-		$qpa = db_construct_qpa($qpa,
-					 ') AND doc_data.group_id = $1',
-					 array ($group_id)) ;
 		if ($this->sections != SEARCH__ALL_SECTIONS) {
-			$qpa = db_construct_qpa($qpa,
-						 ' AND doc_groups.doc_group = ANY ($1)',
-						 array( db_int_array_to_any_clause ($this->sections))) ;
+			$qpa = db_construct_qpa($qpa, ' AND doc_groups.doc_group = ANY ($1)', array(db_int_array_to_any_clause($this->sections)));
 		}
 		if ($this->showNonPublic) {
 			$qpa = db_construct_qpa($qpa,
@@ -138,9 +89,47 @@ class DocsSearchQuery extends SearchQuery {
 		} elseif (isset($options['date_begin']) && isset($options['date_end'])) {
 			$qpa = db_construct_qpa($qpa, ' AND doc_data.createdate between $1 and $2', array($options['date_begin'], $$options['date_end']));
 		}
+		return $qpa;
+	}
 
-		$qpa = db_construct_qpa($qpa,
-					 ') AS x ') ;
+	/**
+	 * getQuery - get the query built to get the search results
+	 *
+	 * @return	array	query+params array
+	 */
+	function getQuery() {
+		if (forge_get_config('use_fti')) {
+			return $this->getFTIQuery();
+		} else {
+			$options = $this->options;
+			$qpa = db_construct_qpa(false,
+						 'SELECT x.* FROM (SELECT doc_data.docid, doc_data.title, doc_data.filename, doc_data.description, doc_groups.groupname, title||$1||description AS full_string_agg, groups.group_name as project_name FROM doc_data, doc_groups, groups WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.group_id = groups.group_id ',
+						 array ($this->field_separator));
+
+			$qpa = $this->addCommonQPA($qpa);
+
+			$qpa = db_construct_qpa($qpa, ') AS x WHERE ') ;
+			$qpa = $this->addIlikeCondition($qpa, 'full_string_agg');
+			$qpa = db_construct_qpa($qpa, ' ORDER BY x.groupname, x.title');
+		}
+		return $qpa;
+	}
+
+	function getFTIQuery() {
+		$words = $this->getFTIwords();
+		$options = $this->options;
+		if (!isset($options['insideDocuments']) || !$options['insideDocuments']) {
+			$qpa = db_construct_qpa(false,
+					'SELECT x.* FROM (SELECT doc_data.docid, doc_data.filename, ts_headline(doc_data.title, q) AS title, ts_headline(doc_data.description, q) AS description, doc_groups.groupname, doc_data.title||$1||description AS full_string_agg, doc_data_idx.vectors, groups.group_name as project_name FROM groups, doc_data, doc_groups, doc_data_idx, to_tsquery($2) AS q WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.group_id = groups.group_id AND doc_data.docid = doc_data_idx.docid AND (vectors @@ to_tsquery($2))',
+					array ($this->field_separator, $words));
+		} else {
+			$qpa = db_construct_qpa(false,
+					'SELECT x.* FROM (SELECT doc_data.docid, ts_headline(doc_data.filename, q) AS filename, ts_headline(doc_data.title, q) AS title, ts_headline(doc_data.description, q) AS description, doc_groups.groupname, doc_data.title||$1||description||$1||filename AS full_string_agg, doc_data_words_idx.vectors, groups.group_name as project_name FROM groups, doc_data, doc_groups, doc_data_words_idx, to_tsquery($2) AS q WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.group_id = groups.group_id AND doc_data.docid = doc_data_words_idx.docid AND (vectors @@ to_tsquery($2))',
+					array ($this->field_separator, $words));
+		}
+		$qpa = $this->addCommonQPA($qpa);
+
+		$qpa = db_construct_qpa($qpa, ') AS x ') ;
 		if (count($this->phrases)) {
 			$qpa = db_construct_qpa($qpa, 'WHERE ') ;
 			$qpa = $this->addMatchCondition($qpa, 'full_string_agg');

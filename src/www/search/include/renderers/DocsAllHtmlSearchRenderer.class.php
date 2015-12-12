@@ -4,8 +4,8 @@
  *
  * Copyright 2004 (c) Dominik Haas, GForge Team
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2013,2014 Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of National Education
+ * Copyright 2013,2015 Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -25,7 +25,7 @@
  */
 
 require_once $gfwww.'search/include/renderers/HtmlSearchRenderer.class.php';
-require_once $gfcommon.'search/DocsAllSearchQuery.class.php';
+require_once $gfcommon.'search/DocsSearchQuery.class.php';
 require_once $gfcommon.'docman/Document.class.php';
 
 class DocsAllHtmlSearchRenderer extends HtmlSearchRenderer {
@@ -40,20 +40,20 @@ class DocsAllHtmlSearchRenderer extends HtmlSearchRenderer {
 	 *
 	 */
 	function DocsAllHtmlSearchRenderer($words, $offset, $isExact, $sections = SEARCH__ALL_SECTIONS) {
-		$parametersValues 	= array();
+		$groupIdValidArr = array();
 
 		if (session_loggedin()) {
 			$u =& session_get_user();
 			$listGroups = $u->getGroups();
 			if (count($listGroups) > 0) {
 				foreach ($listGroups as $group) {
-					$userIsGroupMember = forge_check_perm('docman', $group->getID(), 'read');
-					$parametersValues[$group->getID()]=$userIsGroupMember;
+					if (forge_check_perm('docman', $group->getID(), 'read')) {
+						$groupIdValidArr[] = $group->getID();
+					}
 				}
 			}
 		}
-
-		$searchQuery = new DocsAllSearchQuery($words, $offset, $isExact , $sections, $parametersValues);
+		$searchQuery = new DocsSearchQuery($words, $offset, $isExact, $groupIdValidArr, $sections);
 		$this->HtmlSearchRenderer(SEARCH__TYPE_IS_ALLDOCS, $words, $isExact, $searchQuery);
 		$this->tableHeaders = array(
 			_('Project'),
@@ -86,10 +86,6 @@ class DocsAllHtmlSearchRenderer extends HtmlSearchRenderer {
 
 		$rowColor = 0;
 		for($i = 0; $i < $rowsCount; $i++) {
-			//section changed
-			if(!forge_check_perm('docman', db_result($result, $i, 'project_name'), 'read')) {
-				continue;
-			}
 			$currentDocGroup = db_result($result, $i, 'project_name');
 			$currentDocGroupObject = group_get_object_by_publicname($currentDocGroup);
 			if ($lastDocGroup != $currentDocGroup) {
