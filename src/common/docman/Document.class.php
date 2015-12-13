@@ -826,6 +826,7 @@ class Document extends Error {
 			return false;
 		}
 
+		$localDg = new DocumentGroup($this->Group, $doc_group);
 		if (!$localDg->update($localDg->getName(), $localDg->getParentID(), 1)) {
 			$this->setOnUpdateError(_('Error updating document group')._(': ').$localDg->getErrorMessage());
 			db_rollback();
