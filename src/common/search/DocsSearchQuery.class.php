@@ -102,13 +102,19 @@ class DocsSearchQuery extends SearchQuery {
 			return $this->getFTIQuery();
 		} else {
 			$options = $this->options;
-			$qpa = db_construct_qpa(false,
+			if (!isset($options['insideDocuments']) || !$options['insideDocuments']) {
+				$qpa = db_construct_qpa(false,
 						 'SELECT x.* FROM (SELECT doc_data.docid, doc_data.title, doc_data.filename, doc_data.description, doc_groups.groupname, title||$1||description AS full_string_agg, groups.group_name as project_name FROM doc_data, doc_groups, groups WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.group_id = groups.group_id ',
 						 array ($this->field_separator));
+			} else {
+				$qpa = db_construct_qpa(false,
+						 'SELECT x.* FROM (SELECT doc_data.docid, doc_data.title, doc_data.filename, doc_data.description, doc_groups.groupname, title||$1||description||$1||data_words AS full_string_agg, groups.group_name as project_name FROM doc_data, doc_groups, groups WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.group_id = groups.group_id ',
+						 array ($this->field_separator));
+			}
 
 			$qpa = $this->addCommonQPA($qpa);
 
-			$qpa = db_construct_qpa($qpa, ') AS x WHERE ') ;
+			$qpa = db_construct_qpa($qpa, ') AS x WHERE ');
 			$qpa = $this->addIlikeCondition($qpa, 'full_string_agg');
 			$qpa = db_construct_qpa($qpa, ' ORDER BY x.groupname, x.title');
 		}
