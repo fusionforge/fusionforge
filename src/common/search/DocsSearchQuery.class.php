@@ -75,11 +75,9 @@ class DocsSearchQuery extends SearchQuery {
 			$qpa = db_construct_qpa($qpa, ' AND doc_groups.doc_group = ANY ($1)', array(db_int_array_to_any_clause($this->sections)));
 		}
 		if ($this->showNonPublic) {
-			$qpa = db_construct_qpa($qpa,
-						 ' AND doc_data.stateid IN (1, 4, 5)') ;
+			$qpa = db_construct_qpa($qpa, ' AND doc_data.stateid IN (1, 4, 5)') ;
 		} else {
-			$qpa = db_construct_qpa($qpa,
-						 ' AND doc_data.stateid = 1') ;
+			$qpa = db_construct_qpa($qpa, ' AND doc_data.stateid = 1') ;
 		}
 
 		if (isset($options['date_begin']) && !isset($options['date_end'])) {
@@ -111,9 +109,7 @@ class DocsSearchQuery extends SearchQuery {
 						 'SELECT x.* FROM (SELECT doc_data.docid, doc_data.title, doc_data.filename, doc_data.description, doc_groups.groupname, title||$1||description||$1||data_words AS full_string_agg, groups.group_name as project_name FROM doc_data, doc_groups, groups WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.group_id = groups.group_id ',
 						 array ($this->field_separator));
 			}
-
 			$qpa = $this->addCommonQPA($qpa);
-
 			$qpa = db_construct_qpa($qpa, ') AS x WHERE ');
 			$qpa = $this->addIlikeCondition($qpa, 'full_string_agg');
 			$qpa = db_construct_qpa($qpa, ' ORDER BY x.groupname, x.title');
@@ -134,7 +130,6 @@ class DocsSearchQuery extends SearchQuery {
 					array ($this->field_separator, $words));
 		}
 		$qpa = $this->addCommonQPA($qpa);
-
 		$qpa = db_construct_qpa($qpa, ') AS x ') ;
 		if (count($this->phrases)) {
 			$qpa = db_construct_qpa($qpa, 'WHERE ') ;
@@ -167,11 +162,9 @@ class DocsSearchQuery extends SearchQuery {
 			$sql .= ' AND doc_data.stateid = 1  AND doc_groups.stateid = 1';
 		}
 		$sql .= ' ORDER BY groupname';
-
 		$sections = array();
-		$res = db_query_params($sql,
-					array($groupId));
-		while($data = db_fetch_array($res)) {
+		$res = db_query_params($sql, array($groupId));
+		while ($data = db_fetch_array($res)) {
 			$sections[$data['doc_group']] = $data['groupname'];
 		}
 		return $sections;
