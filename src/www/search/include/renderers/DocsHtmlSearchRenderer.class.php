@@ -73,27 +73,26 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 
 		$return = '';
 
-		$lastDocGroup = null;
+		$lastDocGroupID = null;
 
 		$rowColor = 0;
 		for($i = 0; $i < $rowsCount; $i++) {
+			$document = document_get_object(db_result($result, $i, 'docid'));
+			$currentDocGroup = documentgroup_get_object($document->getDocGroupID());
 			//section changed
-			$currentDocGroup = db_result($result, $i, 'groupname');
-			$groupObject = group_get_object($this->groupId);
-			$document = new Document($groupObject, db_result($result, $i, 'docid'));
-			if ($lastDocGroup != $currentDocGroup) {
-				$return .= '<tr><td colspan="4">'.html_image('ic/folder.png', 22, 22, array('border' => '0')).util_make_link('/docman/?group_id='.$document->Group->getID().'&view=listfile&dirid='.$document->getDocGroupID(),$currentDocGroup).'</td></tr>';
-				$lastDocGroup = $currentDocGroup;
+			if ($lastDocGroupID != $currentDocGroup->getID()) {
+				$return .= '<tr><td colspan="4">'.html_image('ic/folder.png', 22, 22, array('border' => '0')).util_make_link('/docman/?group_id='.$document->Group->getID().'&view=listfile&dirid='.$document->getDocGroupID(),$currentDocGroup->getName()).'</td></tr>';
+				$lastDocGroupID = $currentDocGroup->getID();
 				$rowColor = 0;
 			}
 			$cells = array();
 			$cells[][] = '&nbsp;';
 			$cells[][] = util_make_link('/docman/view.php/'.$document->Group->getID().'/'.$document->getID().'/'.urlencode($document->getFileName()), html_image($document->getFileTypeImage(), 22, 22));
-			$cells[][] = db_result($result, $i, 'title');
-			$cells[][] = db_result($result, $i, 'description');
+			$cells[][] = $document->getName();
+			$cells[][] = $document->getDescription();
 			if (forge_check_perm('docman', $document->Group->getID(), 'approve')) {
 				if (!$document->getLocked() && !$document->getReserved()) {
-					$cells[][] = util_make_link('/docman/?group_id='.$document->Group->getID().'&view=listfile&dirid='.$document->getDocGroupID().'&filedetailid='.db_result($result, $i, 'docid'), html_image('docman/edit-file.png', 22, 22, array('alt' => _('Edit this document'))));
+					$cells[][] = util_make_link('/docman/?group_id='.$document->Group->getID().'&view=listfile&dirid='.$document->getDocGroupID().'&filedetailid='.$document->getID(), html_image('docman/edit-file.png', 22, 22, array('alt' => _('Edit this document'))));
 				} else {
 					$cells[][] = '&nbsp;';
 				}
