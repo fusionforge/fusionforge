@@ -88,8 +88,8 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			$cells = array();
 			$cells[][] = '&nbsp;';
 			$cells[][] = util_make_link('/docman/view.php/'.$document->Group->getID().'/'.$document->getID().'/'.urlencode($document->getFileName()), html_image($document->getFileTypeImage(), 22, 22));
-			$cells[][] = $document->getName();
-			$cells[][] = $document->getDescription();
+			$cells[][] = db_result($result, $i, 'title');
+			$cells[][] = db_result($result, $i, 'description');
 			if (forge_check_perm('docman', $document->Group->getID(), 'approve')) {
 				if (!$document->getLocked() && !$document->getReserved()) {
 					$cells[][] = util_make_link('/docman/?group_id='.$document->Group->getID().'&view=listfile&dirid='.$document->getDocGroupID().'&filedetailid='.$document->getID(), html_image('docman/edit-file.png', 22, 22, array('alt' => _('Edit this document'))));
