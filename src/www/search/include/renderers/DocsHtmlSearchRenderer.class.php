@@ -81,7 +81,7 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			$currentDocGroup = documentgroup_get_object($document->getDocGroupID());
 			//section changed
 			if ($lastDocGroupID != $currentDocGroup->getID()) {
-				$return .= '<tr><td colspan="4">'.html_image('ic/folder.png', 22, 22, array('border' => '0')).util_make_link('/docman/?group_id='.$document->Group->getID().'&view=listfile&dirid='.$document->getDocGroupID(),$currentDocGroup->getName()).'</td></tr>';
+				$return .= '<tr><td colspan="4">'.html_image('ic/folder.png', 22, 22, array('border' => '0')).$currentDocGroup->getPath(true).'</td></tr>';
 				$lastDocGroupID = $currentDocGroup->getID();
 				$rowColor = 0;
 			}
