@@ -50,9 +50,10 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 
 		$this->tableHeaders = array(
 			_('Directory'),
-			_('#'),
+			_('&nbsp;'),
 			_('Title'),
-			_('Description')
+			_('Description'),
+			_('Actions')
 		);
 	}
 
@@ -66,6 +67,7 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			return '';
 		}
 
+		global $HTML;
 		$rowsCount = $this->searchQuery->getRowsCount();
 		$result =& $this->searchQuery->getResult();
 
@@ -80,17 +82,25 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			$groupObject = group_get_object($this->groupId);
 			$document = new Document($groupObject, db_result($result, $i, 'docid'));
 			if ($lastDocGroup != $currentDocGroup) {
-				$return .= '<tr><td>'.html_image('ic/cfolder15.png', '10', '12', array('border' => '0')).util_make_link('/docman/?group_id='.$this->groupId.'&view=listfile&dirid='.$document->getDocGroupID(),$currentDocGroup).'</td><td colspan="3">&nbsp;</td></tr>';
+				$return .= '<tr><td colspan="4">'.html_image('ic/folder.png', 22, 22, array('border' => '0')).util_make_link('/docman/?group_id='.$document->Group->getID().'&view=listfile&dirid='.$document->getDocGroupID(),$currentDocGroup).'</td></tr>';
 				$lastDocGroup = $currentDocGroup;
 				$rowColor = 0;
 			}
-			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($rowColor) .'>'
-				. '<td>&nbsp;</td>'
-				. '<td>'.db_result($result, $i, 'docid').'</td>'
-				. '<td><a href="'.util_make_url ('/docman/view.php/'.$this->groupId . '/'.db_result($result, $i, 'docid').'/'.db_result($result, $i, 'filename')).'">'
-				. html_image('ic/msg.png', '10', '12')
-				. ' '.db_result($result, $i, 'title').'</a></td>'
-				. '<td>'.db_result($result, $i, 'description').'</td></tr>';
+			$cells = array();
+			$cells[][] = '&nbsp;';
+			$cells[][] = util_make_link('/docman/view.php/'.$document->Group->getID().'/'.$document->getID().'/'.urlencode($document->getFileName()), html_image($document->getFileTypeImage(), 22, 22));
+			$cells[][] = db_result($result, $i, 'title');
+			$cells[][] = db_result($result, $i, 'description');
+			if (forge_check_perm('docman', $document->Group->getID(), 'approve')) {
+				if (!$document->getLocked() && !$document->getReserved()) {
+					$cells[][] = util_make_link('/docman/?group_id='.$document->Group->getID().'&view=listfile&dirid='.$document->getDocGroupID().'&filedetailid='.db_result($result, $i, 'docid'), html_image('docman/edit-file.png', 22, 22, array('alt' => _('Edit this document'))));
+				} else {
+					$cells[][] = '&nbsp;';
+				}
+			} else {
+				$cells[][] = '&nbsp;';
+			}
+			$return .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($rowColor, true)), $cells);
 			$rowColor++;
 		}
 		return $return;
