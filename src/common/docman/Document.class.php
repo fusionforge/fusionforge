@@ -186,7 +186,7 @@ class Document extends Error {
 		// key words for in-document search
 		if ($this->Group->useDocmanSearch() && $filesize) {
 			$kw = new Parsedata();
-			$kwords = $kw->get_parse_data($data, htmlspecialchars($title), htmlspecialchars($description), $filetype, $filename);
+			$kwords = $kw->get_parse_data($data, $filetype);
 		} else {
 			$kwords ='';
 		}
@@ -836,7 +836,7 @@ class Document extends Error {
 			// key words for in-document search
 			if ($this->Group->useDocmanSearch()) {
 				$kw = new Parsedata();
-				$kwords = $kw->get_parse_data($data, htmlspecialchars($title), htmlspecialchars($description), $filetype, $filename);
+				$kwords = $kw->get_parse_data($data, $filetype);
 			} else {
 				$kwords = '';
 			}
@@ -999,8 +999,8 @@ class Document extends Error {
 	 */
 	function downloadUp() {
 		if (session_loggedin()) {
-			$s =& session_get_user();
-			$us = $s->getID();
+			global $LUSER;
+			$us = $LUSER->getID();
 		} else {
 			$us=100;
 		}
