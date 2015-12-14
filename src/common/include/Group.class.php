@@ -1585,7 +1585,7 @@ class Group extends Error {
 		return $this->data_array['homepage'];
 	}
 	/**
-	 * setHomepage - the hostname of the scm box where this project is located.
+	 * setHomepage - the hostname of the website url where this project is located.
 	 *
 	 * @param	string	$homepage	The name of the new HOMEPAGE
 	 * @return	bool
