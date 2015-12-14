@@ -81,8 +81,15 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			$currentDocGroup = documentgroup_get_object($document->getDocGroupID());
 			//section changed
 			if ($lastDocGroupID != $currentDocGroup->getID()) {
-				$return .= '<tr><td colspan="4">'.html_image('ic/folder.png', 22, 22, array('border' => '0')).$currentDocGroup->getPath(true).'</td></tr>';
+				//project changed
+				$content = '';
+				if ($this->groupId != $currentDocGroup->Group->getID()) {
+					$content = _('Project')._(': ').util_make_link('/docman/?group_id='.$currentDocGroup->Group->getID(),$currentDocGroup->Group->getPublicName()).' ';
+				}
+				$cells = array();
+				$cells[] = array($content.html_image('ic/folder.png', 22, 22, array('border' => '0')).$currentDocGroup->getPath(true), 'colspan' => 4);
 				$lastDocGroupID = $currentDocGroup->getID();
+				$return .= $HTML->multiTableRow(array(), $cells);
 				$rowColor = 0;
 			}
 			$cells = array();
